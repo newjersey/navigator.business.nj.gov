@@ -1,3 +1,4 @@
+import { randomInt } from "@shared/intHelpers";
 import { v60UserData } from "./v60_add_llp_suffix";
 
 export interface v61UserData {
@@ -61,7 +62,7 @@ interface v61ProfileDocuments {
   standingDoc: string;
   certifiedDoc: string;
 }
-interface v61ProfileData {
+export interface v61ProfileData {
   hasExistingBusiness: boolean | undefined;
   initialOnboardingFlow: "STARTING" | "OWNING" | undefined;
   businessName: string;
@@ -305,3 +306,93 @@ type v61GetFilingResponse = {
 };
 
 // ---------------- v61 factories ----------------
+export const generatev61User = (overrides: Partial<v61BusinessUser>): v61BusinessUser => {
+  return {
+    name: `some-name-${randomInt()}`,
+    email: `some-email-${randomInt()}@example.com`,
+    id: `some-id-${randomInt()}`,
+    receiveNewsletter: false,
+    userTesting: false,
+    externalStatus: {},
+    abExperience: "ExperienceA",
+    ...overrides,
+  };
+};
+
+export const generatev61ProfileData = (overrides: Partial<v61ProfileData>): v61ProfileData => {
+  return {
+    hasExistingBusiness: false,
+    initialOnboardingFlow: "STARTING",
+    cannabisLicenseType: undefined,
+    cannabisMicrobusiness: undefined,
+    documents: { formationDoc: "", standingDoc: "", certifiedDoc: "" },
+    businessName: `some-business-name-${randomInt()}`,
+    industryId: "restaurant",
+    legalStructureId: "sole-proprietorship",
+    municipality: {
+      name: `some-name-${randomInt()}`,
+      displayName: `some-display-name-${randomInt()}`,
+      county: `some-county-${randomInt()}`,
+      id: `some-id-${randomInt()}`,
+    },
+    liquorLicense: true,
+    requiresCpa: false,
+    homeBasedBusiness: true,
+    constructionRenovationPlan: undefined,
+    dateOfFormation: undefined,
+    entityId: undefined,
+    employerId: undefined,
+    taxId: undefined,
+    notes: "",
+    ownershipTypeIds: [],
+    existingEmployees: undefined,
+    taxPin: undefined,
+    sectorId: undefined,
+    naicsCode: "",
+    ...overrides,
+  };
+};
+
+export const generatev61FormationFormData = (
+  overrides: Partial<v61FormationFormData>
+): v61FormationFormData => {
+  return {
+    businessSuffix: undefined,
+    businessName: "",
+    businessStartDate: "",
+    businessAddressLine1: "",
+    businessAddressLine2: "",
+    businessAddressCity: {
+      name: `some-name-${randomInt()}`,
+      displayName: `some-display-name-${randomInt()}`,
+      county: `some-county-${randomInt()}`,
+      id: `some-id-${randomInt()}`,
+    },
+    businessAddressState: "",
+    businessAddressZipCode: "",
+    agentNumberOrManual: "NUMBER",
+    agentNumber: "",
+    agentName: "",
+    agentEmail: "",
+    agentOfficeAddressLine1: "",
+    agentOfficeAddressLine2: "",
+    agentOfficeAddressCity: "",
+    agentOfficeAddressState: "",
+    agentOfficeAddressZipCode: "",
+    members: [],
+    signers: [],
+    paymentType: undefined,
+    annualReportNotification: false,
+    corpWatchNotification: false,
+    officialFormationDocument: false,
+    certificateOfStanding: false,
+    certifiedCopyOfFormationDocument: false,
+    contactFirstName: "",
+    contactLastName: "",
+    contactPhoneNumber: "",
+    businessPurpose: "",
+    businessTotalStock: "",
+    provisions: [],
+    ...overrides,
+  };
+};

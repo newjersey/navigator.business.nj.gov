@@ -21,6 +21,7 @@
     "sync:deps": "yarnw-sync-deps --fix",
     "test": "jest --projects api shared web",
     "test:ci": "jest --reporters=jest-junit --outputFile=../coverage/test_results/all-jest.xml --runInBand --logHeapUsage --collectCoverage=true --coverageDirectory=../coverage/ --projects api shared web",
+    "test:coverage": "jest --reporters=jest-junit --outputFile=../coverage/test_results/all-jest.xml --collectCoverage=true --coverageDirectory=../coverage/ --projects api shared web",
     "typecheck": "yarn workspaces foreach -v run typecheck",
     "verify:node": "check-node-version --node $(cat .nvmrc) --npm 8"
   },

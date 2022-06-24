@@ -1,7 +1,7 @@
 import { LicenseStatusResult } from "@shared/license";
 import { generateLicenseEntity, generateNameAndAddress } from "../../../test/factories";
 import { LicenseStatusClient, SearchLicenseStatus } from "../types";
-import { searchLicenseStatusFactory } from "./searchLicenseStatusFactory";
+import { determineLicenseStatus, searchLicenseStatusFactory } from "./searchLicenseStatusFactory";
 
 const entityWithAddress = (address: string) =>
   generateLicenseEntity({
@@ -313,5 +313,43 @@ describe("searchLicenseStatus", () => {
 
     const nameAndAddress = generateNameAndAddress({});
     await expect(searchLicenseStatus(nameAndAddress, "")).rejects.toEqual("some api error");
+  });
+});
+
+describe("determineLicenseStatus", () => {
+  it("returns BARRED when status is barred", () => {
+    expect(determineLicenseStatus("Barred")).toBe("BARRED");
+  });
+
+  it("returns OUT_OF_BUSINESS when status is out of business", () => {
+    expect(determineLicenseStatus("Out of Business")).toBe("OUT_OF_BUSINESS");
+  });
+
+  it("returns REINSTATEMENT_PENDING when status is Reinstatement Pending", () => {
+    expect(determineLicenseStatus("Reinstatement Pending")).toBe("REINSTATEMENT_PENDING");
+  });
+
+  it("returns CLOSED when status is closed", () => {
+    expect(determineLicenseStatus("Closed")).toBe("CLOSED");
+  });
+
+  it("returns DELETED when status is deleted", () => {
+    expect(determineLicenseStatus("Deleted")).toBe("DELETED");
+  });
+
+  it("returns DENIED when status is denied", () => {
+    expect(determineLicenseStatus("Denied")).toBe("DENIED");
+  });
+
+  it("returns VOLUNTARY_SURRENDER when status is Voluntary Surrender", () => {
+    expect(determineLicenseStatus("Voluntary Surrender")).toBe("VOLUNTARY_SURRENDER");
+  });
+
+  it("returns WITHDRAWN when status is Withdrawn", () => {
+    expect(determineLicenseStatus("Withdrawn")).toBe("WITHDRAWN");
+  });
+
+  it("returns UNKNOWN when status is not valid", () => {
+    expect(determineLicenseStatus("fake status")).toBe("UNKNOWN");
   });
 });
