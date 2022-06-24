@@ -13,4 +13,14 @@ describe("sortCertifications", () => {
     expect(result.length).toEqual(4);
     expect(result).toEqual([cert2, cert4, cert1, cert3]);
   });
+
+  it("does not change the sorting if the names are the same", () => {
+    const cert1 = generateCertification({ name: "bca", isSbe: true });
+    const cert2 = generateCertification({ name: "bca", isSbe: false });
+    const certs = [cert1, cert2];
+
+    const result = sortCertifications(certs);
+    expect(result.length).toEqual(2);
+    expect(result).toEqual([cert1, cert2]);
+  });
 });

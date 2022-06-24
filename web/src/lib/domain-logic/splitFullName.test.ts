@@ -18,6 +18,13 @@ describe("splitFullName", () => {
     });
   });
 
+  it("returns no first name if the first character is a space", () => {
+    expect(splitFullName(" Anne LoVerso")).toEqual({
+      firstName: "",
+      lastName: "Anne LoVerso",
+    });
+  });
+
   it("uses first name only if no space", () => {
     expect(splitFullName("Mike")).toEqual({
       firstName: "Mike",
