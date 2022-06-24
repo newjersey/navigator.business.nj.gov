@@ -22,5 +22,5 @@ You need a Real Estate Broker license before you can start a real estate busines
 - Applicant ID (found in the licensure exam results form)
 - Pass a criminal background check (this is the form for it)
  
->**Once approved, you will have:**
+>**Once approved, you will have:**  
 >- A Real Estate Broker license
