@@ -71,7 +71,11 @@
     "NCCAOM",
     "CLARB",
     "NCARB",
-    "NCEES"
+    "NCEES",
+    "Multistate",
+    "NCBE",
+    "Juris",
+    "MPRE"
   ],
   "ignorePaths": ["node_modules/**", "out/**", "web/out/**", "package.json"]
 }

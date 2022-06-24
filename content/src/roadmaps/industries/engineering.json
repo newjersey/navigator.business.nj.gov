@@ -48,7 +48,7 @@
   ],
   "name": "Engineering Firm",
   "isLiquorLicenseApplicable": false,
-  "isEnabled": false,
+  "isEnabled": true,
   "additionalSearchTerms": "consultant, firm",
   "id": "engineering",
   "description": "Designs and plans the building of systems and structures"

@@ -37,11 +37,6 @@
     },
     {
       "step": 3,
-      "weight": 20,
-      "task": "certificate-vending-machine"
-    },
-    {
-      "step": 3,
       "weight": 25,
       "task": "agreement-vending-machine-1"
     }

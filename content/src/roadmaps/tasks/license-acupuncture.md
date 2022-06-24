@@ -21,6 +21,7 @@ You will need an Acupuncturist license **if you** plan to offer services as an a
 - College transcripts sent directly to the board
 - Passing scores on the English version of the `NCCAOM examination|nccaom`
 - Passing scores on the Board-administered Acupuncture Safety and Jurisprudence examination in English
+- Pay any associated fees
 
 > **Once completed, you will have:**
 >
