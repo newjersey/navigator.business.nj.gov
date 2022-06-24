@@ -1,5 +1,5 @@
 {
-  "canBeHomeBased": false,
+  "canBeHomeBased": true,
   "defaultSectorId": "other-services",
   "canBeReseller": false,
   "isCpaRequiredApplicable": false,
@@ -43,7 +43,7 @@
   ],
   "name": "Law Firm",
   "isLiquorLicenseApplicable": false,
-  "isEnabled": false,
+  "isEnabled": true,
   "additionalSearchTerms": "attorney, law office, ",
   "id": "law-firm",
   "description": "Offers professional legal services"
