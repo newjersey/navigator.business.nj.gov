@@ -1,0 +1,50 @@
+{
+  "canBeHomeBased": false,
+  "defaultSectorId": "real-estate",
+  "canBeReseller": false,
+  "isCpaRequiredApplicable": false,
+  "canHavePermanentLocation": true,
+  "roadmapSteps": [
+    {
+      "step": 1,
+      "weight": 1,
+      "task": "business-plan"
+    },
+    {
+      "step": 1,
+      "weight": 5,
+      "task": "license-broker"
+    },
+    {
+      "step": 1,
+      "weight": 10,
+      "task": "determine-naics-code"
+    },
+    {
+      "step": 2,
+      "weight": 20,
+      "task": "register-for-ein"
+    },
+    {
+      "step": 2,
+      "weight": 25,
+      "task": "register-for-taxes"
+    },
+    {
+      "step": 3,
+      "weight": 10,
+      "task": "bank-account"
+    },
+    {
+      "step": 3,
+      "weight": 15,
+      "task": "get-insurance"
+    }
+  ],
+  "name": "Real Estate Agency",
+  "isLiquorLicenseApplicable": false,
+  "isEnabled": false,
+  "additionalSearchTerms": "real estate broker",
+  "id": "real-estate-broker",
+  "description": "Facilitates real estate transactions between buyers and sellers"
+}
