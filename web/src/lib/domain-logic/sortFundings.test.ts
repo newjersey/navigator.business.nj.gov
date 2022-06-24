@@ -16,8 +16,8 @@ describe("sortFundings", () => {
   });
 
   it("does not change the sorting if the names are the same", () => {
-    const funding1 = generateFunding({ name: "bca", status: "deadline" });
-    const funding2 = generateFunding({ name: "bca", status: "first come, first serve" });
+    const funding1 = generateFunding({ name: "bca", status: "deadline", mwvb: "1" });
+    const funding2 = generateFunding({ name: "bca", status: "deadline", mwvb: "2" });
     const fundings = [funding1, funding2];
 
     const result = sortFundings(fundings);
