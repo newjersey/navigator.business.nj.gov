@@ -4,7 +4,7 @@ filename: state-bar-attorney
 name: Apply for Admission to the State Bar Association
 id: state-bar-attorney
 callToActionLink: https://www.njbarexams.org/information-and-applications
-callToActionText: Apply for the Bar Exam
+callToActionText: Apply to the State Bar Association
 required: true
 ---
 Only a member of the New Jersey Bar may legally practice law in New Jersey.  
