@@ -14,12 +14,14 @@ export interface OnboardingProps extends Omit<GenericTextFieldProps, "value" | "
   fieldName: Exclude<ProfileFields, keyof BusinessUser | "businessPersona">;
   onValidation?: (field: ProfileFields, invalid: boolean) => void;
   headerAriaLevel?: number;
+  showHeader?: boolean;
   fieldOptions?: TextFieldProps;
 }
 
 export const OnboardingField = ({
   fieldName,
   headerAriaLevel = 2,
+  showHeader = true,
   ...props
 }: OnboardingProps): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
@@ -50,9 +52,11 @@ export const OnboardingField = ({
 
   return (
     <div>
-      <Content overrides={{ h2: headerLevelTwo }}>
-        {Config.profileDefaults[state.flow][fieldName].header}
-      </Content>
+      {showHeader && (
+        <Content overrides={{ h2: headerLevelTwo }}>
+          {Config.profileDefaults[state.flow][fieldName].header}
+        </Content>
+      )}
       {Object.keys(Config.profileDefaults[state.flow][fieldName]).includes("description") && (
         <div className="margin-bottom-2" data-testid={`onboardingFieldContent-${fieldName}`}>
           <Content>{(Config.profileDefaults[state.flow][fieldName] as any).description}</Content>
