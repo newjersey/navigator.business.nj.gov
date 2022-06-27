@@ -23,7 +23,7 @@ export const MiniRoadmapTask = (props: Props): ReactElement => {
         }`}
         data-task={props.task.id}
         onClick={() => {
-          analytics.event.task_mini_roadmap_task.click.go_to_task;
+          analytics.event.task_mini_roadmap_task.click.go_to_task();
           props.onTaskClick && props.onTaskClick();
         }}
       >
