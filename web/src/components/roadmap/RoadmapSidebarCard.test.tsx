@@ -214,4 +214,41 @@ describe("<RoadmapSidebarCard />", () => {
     render(<RoadmapSidebarCard card={card} />);
     expect(screen.queryByRole("progressbar")).not.toBeInTheDocument();
   });
+
+  it("filters tasks based on current roadmap", () => {
+    const card = generateSidebarCardContent({
+      header: "Hey kid, you're ${percentDone} done",
+      id: "task-progress",
+    });
+    useMockUserData(
+      generateUserData({
+        taskProgress: {
+          Task1: "COMPLETED",
+          Task2: "COMPLETED",
+          Task3: "COMPLETED",
+          Task4: "COMPLETED",
+        },
+      })
+    );
+    useMockRoadmap(
+      generateRoadmap({
+        steps: [
+          generateStep({
+            tasks: [
+              generateTask({
+                required: true,
+                id: "Task1",
+              }),
+              generateTask({
+                required: false,
+                id: "Task2",
+              }),
+            ],
+          }),
+        ],
+      })
+    );
+    render(<RoadmapSidebarCard card={card} />);
+    expect(screen.getByText("Hey kid, you're 100% done")).toBeInTheDocument();
+  });
 });
