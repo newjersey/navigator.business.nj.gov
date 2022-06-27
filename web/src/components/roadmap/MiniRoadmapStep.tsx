@@ -12,7 +12,7 @@ interface Props {
   isOpen?: boolean;
   completed: boolean;
   onTaskClick?: () => void;
-  toggleStep: (number: number, setOpen: boolean) => void;
+  toggleStep: (number: number, setOpen: boolean, click: boolean) => void;
 }
 
 export const MiniRoadmapStep = (props: Props): ReactElement => {
@@ -27,14 +27,14 @@ export const MiniRoadmapStep = (props: Props): ReactElement => {
   useEffect(() => {
     if (isActive) {
       setIsOpen(true);
-      props.toggleStep(stepNumber, true);
+      props.toggleStep(stepNumber, true, false);
     }
     // This kept re-rendering because of the props.function being passed as deps
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isActive, stepNumber]);
 
   const toggleOpen = () => {
-    props.toggleStep(stepNumber, !isOpen);
+    props.toggleStep(stepNumber, !isOpen, true);
     setIsOpen(!isOpen);
   };
 

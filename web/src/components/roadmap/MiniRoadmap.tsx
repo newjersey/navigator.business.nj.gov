@@ -16,7 +16,7 @@ export const MiniRoadmap = (props: Props): ReactElement => {
   const { userData, update } = useUserData();
 
   const onToggleStep = useCallback(
-    async (stepNumber: number, setOpen: boolean): Promise<void> => {
+    async (stepNumber: number, setOpen: boolean, click: boolean): Promise<void> => {
       const updateSteps = (openSteps: number[]) => {
         return userData
           ? {
@@ -30,7 +30,7 @@ export const MiniRoadmap = (props: Props): ReactElement => {
       };
       if (!userData) return;
       const openSteps = userData?.preferences.roadmapOpenSteps;
-      analytics.event.task_mini_roadmap_step.click.expand_contract();
+      click && analytics.event.task_mini_roadmap_step.click.expand_contract();
       if (openSteps.includes(stepNumber)) {
         if (setOpen) {
           return;
