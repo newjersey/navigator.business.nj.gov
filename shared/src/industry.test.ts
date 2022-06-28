@@ -5,19 +5,19 @@ describe("Industry Tests", () => {
     expect(Industries.length).toBeGreaterThan(0);
   });
 
-  Industries.forEach((i) => {
-    it(`${i.id} has an id`, () => {
-      expect(i.id.length).toBeGreaterThan(0);
+  for (const index of Industries) {
+    it(`${index.id} has an id`, () => {
+      expect(index.id.length).toBeGreaterThan(0);
     });
 
-    it(`${i.id} has a name`, () => {
-      expect(i.name.length).toBeGreaterThan(0);
+    it(`${index.id} has a name`, () => {
+      expect(index.name.length).toBeGreaterThan(0);
     });
 
-    it(`${i.id} has a description`, () => {
-      expect(i.description.length).toBeGreaterThan(0);
+    it(`${index.id} has a description`, () => {
+      expect(index.description.length).toBeGreaterThan(0);
     });
-  });
+  }
 
   describe("Lookup By Id", () => {
     it("returns empty object when invalid id is supplied", () => {

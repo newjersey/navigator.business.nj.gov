@@ -5,15 +5,15 @@ describe("Ownership Tests", () => {
     expect(arrayOfOwnershipTypes.length).toBeGreaterThan(0);
   });
 
-  arrayOfOwnershipTypes.forEach((i) => {
-    it(`${i.id} has an id`, () => {
-      expect(i.id.length).toBeGreaterThan(0);
+  for (const index of arrayOfOwnershipTypes) {
+    it(`${index.id} has an id`, () => {
+      expect(index.id.length).toBeGreaterThan(0);
     });
 
-    it(`${i.id} has a name`, () => {
-      expect(i.name.length).toBeGreaterThan(0);
+    it(`${index.id} has a name`, () => {
+      expect(index.name.length).toBeGreaterThan(0);
     });
-  });
+  }
 
   describe("Lookup By Id", () => {
     it("returns empty object when invalid id is supplied", () => {
