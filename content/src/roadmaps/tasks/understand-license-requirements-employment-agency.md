@@ -16,5 +16,5 @@ You will need to register your employment agency and obtain a license from the N
 * **Placement Terms:** Determine if your business will offer a one-time placement or temporary placement services
 * **Fees:** Determine the party responsible for the cost of the placement fee
 
->**Once completed, you will have**
+>**Once completed, you will have:**
 >* Determined the requirements for your employment agency
