@@ -79,20 +79,6 @@ export const SearchBusinessName = (props: Props): ReactElement => {
             </Button>
           </>
         )}
-        <div className="margin-bottom-2">
-          <Alert variant="info">
-            <Content>{Config.searchBusinessNameTask.officialCheckText}</Content>
-            <a
-              href={Config.searchBusinessNameTask.officialCheckButtonLink}
-              target="_blank"
-              rel="noreferrer noopener"
-            >
-              <button data-testid="official-check" className="usa-button usa-button--secondary margin-top-2">
-                {Config.searchBusinessNameTask.officialCheckButtonText}
-              </button>
-            </a>
-          </Alert>
-        </div>
       </div>
     );
   };

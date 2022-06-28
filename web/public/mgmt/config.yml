@@ -1947,9 +1947,6 @@ collections:
               - { label: Designator Name Message, name: designatorText, widget: text }
               - { label: Update Button Text, name: updateButtonText, widget: string }
               - { label: Name has been Updated Message, name: nameHasBeenUpdatedText, widget: string }
-              - { label: Official Check Button, name: officialCheckButtonText, widget: string }
-              - { label: Official Check Link, name: officialCheckButtonLink, widget: string }
-              - { label: Official Check Text, name: officialCheckText, widget: text }
               - { label: Error - Bad Input, name: errorTextBadInput, widget: string }
               - { label: Error - Search Failed, name: errorTextSearchFailed, widget: string }
           - label: Task - License Search
