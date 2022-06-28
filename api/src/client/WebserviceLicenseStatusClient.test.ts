@@ -13,7 +13,7 @@ describe("WebserviceLicenseStatusClient", () => {
   let logger: LogWriterType;
 
   beforeEach(() => {
-    logger = LogWriter("NavigatorWebService", "SearchApis", "us-test-1");
+    logger = LogWriter("NavigatorWebService", "ApiLogs", "us-test-1");
     client = WebserviceLicenseStatusClient("www.example.com", logger);
     jest.resetAllMocks();
   });

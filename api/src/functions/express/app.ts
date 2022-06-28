@@ -56,7 +56,7 @@ if (IS_OFFLINE) {
 }
 
 const STAGE = process.env.STAGE || "local";
-const logger = LogWriter(`NavigatorWebService/${STAGE}`, "SearchApis");
+const logger = LogWriter(`NavigatorWebService/${STAGE}`, "ApiLogs");
 
 const LICENSE_STATUS_BASE_URL =
   process.env.LICENSE_STATUS_BASE_URL || `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`;

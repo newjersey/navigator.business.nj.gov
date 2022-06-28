@@ -23,7 +23,7 @@ describe("AirtableUserTestingClient", () => {
 
   beforeEach(() => {
     jest.resetAllMocks();
-    logger = LogWriter("NavigatorWebService", "SearchApis", "us-test-1");
+    logger = LogWriter("NavigatorWebService", "ApiLogs", "us-test-1");
     client = AirtableUserTestingClient(
       {
         apiKey: "some-api-key",

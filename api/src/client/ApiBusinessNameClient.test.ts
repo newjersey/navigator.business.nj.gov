@@ -12,7 +12,7 @@ describe("ApiBusinessNameClient", () => {
   let logger: LogWriterType;
 
   beforeEach(() => {
-    logger = LogWriter("NavigatorWebService", "SearchApis", "us-test-1");
+    logger = LogWriter("NavigatorWebService", "ApiLogs", "us-test-1");
     client = ApiBusinessNameClient("www.example.com", logger);
     jest.resetAllMocks();
   });

@@ -64,7 +64,7 @@ describe("ApiFormationClient", () => {
 
   beforeEach(() => {
     jest.resetAllMocks();
-    logger = LogWriter("NavigatorWebService", "SearchApis", "us-test-1");
+    logger = LogWriter("NavigatorWebService", "ApiLogs", "us-test-1");
     client = ApiFormationClient(
       { account: "12345", key: "abcdef", baseUrl: "example.com/formation" },
       logger
