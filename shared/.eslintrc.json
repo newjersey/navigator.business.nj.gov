@@ -3,7 +3,12 @@
     "es2021": true,
     "jest": true
   },
-  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended", "prettier"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:unicorn/recommended",
+    "prettier"
+  ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {},
@@ -13,14 +18,24 @@
   "plugins": ["@typescript-eslint", "@typescript-eslint/eslint-plugin", "jest"],
   "rules": {
     "@typescript-eslint/no-empty-function": "off",
-    "prefer-template": "error"
+    "prefer-template": "error",
+    "unicorn/filename-case": [
+      "error",
+      {
+        "cases": {
+          "camelCase": true
+        }
+      }
+    ]
   },
   "overrides": [
     {
       "files": ["**/*.test.*"],
       "plugins": ["jest", "jest-formatting"],
       "extends": ["plugin:jest/recommended", "plugin:jest-formatting/recommended"],
-      "rules": { "jest/expect-expect": "error" }
+      "rules": {
+        "jest/expect-expect": "error"
+      }
     }
   ]
 }
