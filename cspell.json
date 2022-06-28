@@ -75,7 +75,8 @@
     "Multistate",
     "NCBE",
     "Juris",
-    "MPRE"
+    "MPRE",
+    "prelicensure"
   ],
   "ignorePaths": ["node_modules/**", "out/**", "web/out/**", "package.json"]
 }
