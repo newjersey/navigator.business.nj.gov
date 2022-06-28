@@ -22,7 +22,6 @@ export const LogWriter = (groupName: string, logStream: string, region?: string)
       logGroupName: `/${groupName}/${logStream}`,
       logStreamName: `${logStream}-${getCurrentDateFormatted("YYYYMMDD")}`,
       awsRegion: region || process.env.AWS_REGION,
-      retentionInDays: 180,
     })
   );
 
