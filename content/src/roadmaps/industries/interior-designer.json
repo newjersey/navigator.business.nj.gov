@@ -1,9 +1,10 @@
 {
-  "canHavePermanentLocation": true,
+  "naicsCodes": "541410",
   "canBeHomeBased": true,
   "defaultSectorId": "construction",
   "canBeReseller": false,
   "isCpaRequiredApplicable": false,
+  "canHavePermanentLocation": true,
   "roadmapSteps": [
     {
       "step": 1,
@@ -43,8 +44,8 @@
   ],
   "name": "Interior Designer",
   "isLiquorLicenseApplicable": false,
+  "isEnabled": true,
   "additionalSearchTerms": "architect, landscape,",
   "id": "interior-designer",
-  "description": "Plans and execute designs for architectural interiors",
-  "isEnabled": true
+  "description": "Plans and execute designs for architectural interiors"
 }
