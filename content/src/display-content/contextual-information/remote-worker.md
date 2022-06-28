@@ -6,6 +6,6 @@ Out-of-State businesses with one or more employees that have been paid wages of 
 
 Any business with employees is required to withhold and remit for the Federal Insurance Contribution Act (FICA), the Federal Unemployment and Temporary Disability Act (FUTA) at New Jersey’s rate, Unemployment Insurance (UI), Temporary Disability Insurance (TDI), Family Leave Inusrance (FLI), NJ Income Tax, and the Workforce Development Partnership Fund (WDPF).
 
-Rates are set at the time of registration which is communicated via a formal notification. Thereafter, rates are set on a fiscal basis, July 1st through June 30th. Notices are mailed in the middle of July. Employers can sign up to access the information through [Employer Accounts](https://www.nj.gov/labor/ea/employer-services/who-qualifies/).
+Rates are set at the time of registration which is communicated via a formal notification. After that, rates are set yearly between July 1st and June 30th. Notices are mailed in the middle of July. Employers can sign up to access information about rates through [Employer Accounts](https://www.nj.gov/labor/ea/employer-services/who-qualifies/).
 
 Find out about ["New Employer” rates](https://www.nj.gov/labor/ea/employer-services/rate-info/).
