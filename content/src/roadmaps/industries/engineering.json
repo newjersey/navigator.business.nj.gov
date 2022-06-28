@@ -1,9 +1,10 @@
 {
-  "canHavePermanentLocation": true,
+  "naicsCodes": "541330",
   "canBeHomeBased": false,
   "defaultSectorId": "construction",
   "canBeReseller": false,
   "isCpaRequiredApplicable": false,
+  "canHavePermanentLocation": true,
   "roadmapSteps": [
     {
       "step": 1,
