@@ -1,9 +1,10 @@
 {
-  "canHavePermanentLocation": false,
+  "naicsCodes": "445132, 454210",
   "canBeHomeBased": false,
   "defaultSectorId": "accommodation-and-food-services",
   "canBeReseller": true,
   "isCpaRequiredApplicable": false,
+  "canHavePermanentLocation": false,
   "roadmapSteps": [
     {
       "step": 1,
