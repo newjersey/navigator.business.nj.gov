@@ -24,7 +24,7 @@
           "revenueInNJ": "My taxable transactions in New Jersey exceeded $100,000 in the last calendar year",
           "none": "None of the above"
         },
-        "REMOTE_WORKER": "It sounds like you have **Remote Workers**.",
+        "REMOTE_WORKER": "It sounds like you have `Remote Workers|remote-workers`.",
         "REMOTE_SELLER": "It sounds like you're a `Remote Seller|remote-seller` .",
         "NEXUS": "It sounds like you’re a `Nexus Business|nexus-business` ."
       }
