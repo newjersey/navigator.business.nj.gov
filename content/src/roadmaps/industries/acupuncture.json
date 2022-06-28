@@ -1,9 +1,10 @@
 {
-  "canHavePermanentLocation": true,
+  "naicsCodes": "621399",
   "canBeHomeBased": true,
   "defaultSectorId": "other-services",
   "canBeReseller": true,
   "isCpaRequiredApplicable": false,
+  "canHavePermanentLocation": true,
   "roadmapSteps": [
     {
       "step": 1,
