@@ -7,7 +7,7 @@ const outPath = `${process.cwd()}/lib/static/records/naics2022.json`;
 const inPath = `${process.cwd()}/lib/static/records/6digit.csv`;
 
 const saveRecords = async () => {
-  const records = await airtableSelectAll();
+  const records = airtableSelectAll();
   const json = JSON.stringify(records);
   fs.writeFile(outPath, json, (err) => {
     if (err) throw err;

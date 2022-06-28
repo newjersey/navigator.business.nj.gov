@@ -21,7 +21,7 @@ export const MiniRoadmapStep = (props: Props): ReactElement => {
   const { isOpen: sectionIsOpen } = useContext(SectionAccordionContext);
   const isActive = useMemo(() => {
     if (!props.activeTaskId) return undefined;
-    return !!props.step.tasks.find((task) => task.id === props.activeTaskId);
+    return !!props.step.tasks.some((task) => task.id === props.activeTaskId);
   }, [props.activeTaskId, props.step]);
 
   useEffect(() => {
