@@ -17,7 +17,8 @@ Airtable.configure({
 const base = Airtable.base(airtableBaseId);
 
 const deleteCypressRecords = async () => {
-  const cypressRecords = (await airtableSelectAll()).filter(isTestRecord);
+  const results = await airtableSelectAll();
+  const cypressRecords = results.filter(isTestRecord);
 
   deleteRecords(cypressRecords);
 };
