@@ -3,7 +3,7 @@ urlSlug: register-for-taxes-foreign
 filename: register-for-taxes-foreign
 name: Register for Tax and/or Employer Purposes
 id: register-for-taxes-foreign
-callToActionLink: https://www.state.nj.us/treasury/revenue/gettingregistered.shtml
+callToActionLink: https://www.njportal.com/DOR/BusinessRegistration/
 callToActionText: Register My Business for State Taxes
 required: true
 issuingAgency: New Jersey Division of Revenue and Enterprise Services
