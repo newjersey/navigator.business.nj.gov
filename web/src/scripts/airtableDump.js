@@ -19,9 +19,8 @@ const base = Airtable.base(airtableBaseId);
 const outPath = `${process.cwd()}/src/lib/static/records/municipalities.json`;
 
 const saveRecords = async () => {
-  const records = (await airtableSelectAll())
-    .filter((it) => !!it["Town Name"])
-    .map(airtableToMunicipalityDetail);
+  const results = await airtableSelectAll();
+  const records = results.filter((it) => !!it["Town Name"]).map(airtableToMunicipalityDetail);
   const recordsKeyedById = {};
 
   for (const record of records) {

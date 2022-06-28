@@ -10,8 +10,10 @@ export const buildRoadmap = async ({
 }): Promise<Roadmap> => {
   const stepImporter: () => Promise<GenericStep[]> = industryId ? importGenericSteps : importForeignSteps;
 
+  const results = await stepImporter();
+
   let roadmapBuilder: RoadmapBuilder = {
-    steps: (await stepImporter()).map((step: GenericStep) => ({
+    steps: results.map((step: GenericStep) => ({
       ...step,
       tasks: [],
     })),
@@ -54,26 +56,31 @@ const applyAddOns = async (builder: RoadmapBuilder, addOnFilenames: string[]): P
 
 const importRoadmap = async (industryId: string): Promise<IndustryRoadmap> => {
   if (process.env.NODE_ENV === "test") {
-    return (await import(`@/lib/roadmap/fixtures/industries/${industryId}.json`)).default as IndustryRoadmap;
+    const industries = await import(`@/lib/roadmap/fixtures/industries/${industryId}.json`);
+    return industries.default as IndustryRoadmap;
   }
-  return (await import(`@businessnjgovnavigator/content/roadmaps/industries/${industryId}.json`))
-    .default as IndustryRoadmap;
+  const industries = await import(`@businessnjgovnavigator/content/roadmaps/industries/${industryId}.json`);
+  return industries.default as IndustryRoadmap;
 };
 
 const importGenericSteps = async (): Promise<GenericStep[]> => {
   if (process.env.NODE_ENV === "test") {
-    return (await import(`@/lib/roadmap/fixtures/steps.json`)).steps as GenericStep[];
+    const steps = await import(`@/lib/roadmap/fixtures/steps.json`);
+    return steps.steps as GenericStep[];
   }
 
-  return (await import(`@businessnjgovnavigator/content/roadmaps/steps.json`)).steps as GenericStep[];
+  const steps = await import(`@businessnjgovnavigator/content/roadmaps/steps.json`);
+  return steps.steps as GenericStep[];
 };
 
 const importForeignSteps = async (): Promise<GenericStep[]> => {
   if (process.env.NODE_ENV === "test") {
-    return (await import(`@/lib/roadmap/fixtures/steps-foreign.json`)).steps as GenericStep[];
+    const steps = await import(`@/lib/roadmap/fixtures/steps-foreign.json`);
+    return steps.steps as GenericStep[];
   }
 
-  return (await import(`@businessnjgovnavigator/content/roadmaps/steps-foreign.json`)).steps as GenericStep[];
+  const steps = await import(`@businessnjgovnavigator/content/roadmaps/steps-foreign.json`);
+  return steps.steps as GenericStep[];
 };
 
 const importAddOn = async (relativePath: string): Promise<IndustryRoadmap> => {

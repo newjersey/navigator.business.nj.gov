@@ -19,11 +19,10 @@ const base = Airtable.base(airtableBaseId);
 const outDir = `${process.cwd()}/../content/src/opportunities`;
 
 const saveRecords = async () => {
-  const records = await Promise.all(
-    (await airtableSelectAll())
-      .filter((it) => it["Website Copy (public)"] && it["Website Copy (public)"] !== "Program Name")
-      .map(airtableToOpportunity)
-  );
+  const results = await airtableSelectAll();
+  const records = results
+    .filter((it) => it["Website Copy (public)"] && it["Website Copy (public)"] !== "Program Name")
+    .map(airtableToOpportunity);
 
   for (const opp of records) {
     const file = writeMarkdownString(opp);
