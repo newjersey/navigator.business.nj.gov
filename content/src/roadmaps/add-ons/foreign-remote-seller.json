@@ -9,6 +9,11 @@
       "step": 1,
       "weight": 2,
       "task": "research-insurance-needs-foreign"
+    },
+    {
+      "task": "labor-laws",
+      "weight": 3,
+      "step": 1
     }
   ]
 }
