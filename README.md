@@ -24,9 +24,9 @@ You will need `yarn`, `npm` and Node installed, and also Java (for `serverless-d
 
 ### Software Requirement
 
-- [Node 16](https://nodejs.org/en/download/)
+- [Node 16](https://nodejs.org/en/download/) (Recommend using nvm for managing node versions)
 - [AWS CLI](https://aws.amazon.com/cli/)
-- [Java 17 JDK](https://www.oracle.com/java/technologies/downloads/#java17)
+- [Java 17 JDK](https://www.oracle.com/java/technologies/downloads/#java17) - Install the x64 version, even on a MAC, not the ARM version
 - [Python 3.10](https://www.python.org/downloads/)
 - [Visual Studio Build Tools](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=BuildTools) using "Visual C++ build tools" workload - **Windows Only**
 
