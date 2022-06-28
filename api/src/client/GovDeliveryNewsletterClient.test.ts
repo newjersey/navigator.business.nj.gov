@@ -25,7 +25,7 @@ describe("GovDeliveryNewsletterClient", () => {
   let logger: LogWriterType;
 
   beforeEach(() => {
-    logger = LogWriter("NavigatorWebService", "SearchApis", "us-test-1");
+    logger = LogWriter("NavigatorWebService", "ApiLogs", "us-test-1");
     client = GovDeliveryNewsletterClient({
       baseUrl: "www.example.com",
       topic: "123",

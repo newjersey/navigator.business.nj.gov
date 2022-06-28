@@ -37,7 +37,7 @@ export default async function handler() {
     dynamoDb = new DynamoDBClient({ region: "us-east-1" });
     dynamoDbDocument = DynamoDBDocumentClient.from(dynamoDb, dynamoDbTranslateConfig);
   }
-  const logger = LogWriter(`NavigatorWebService/${STAGE}`, "SearchApis");
+  const logger = LogWriter(`NavigatorWebService/${STAGE}`, "ApiLogs");
   const dbClient = DynamoUserDataClient(dynamoDbDocument, USERS_TABLE);
   const qlClient = DynamoQlUserDataClient(dynamoDb, USERS_TABLE);
 

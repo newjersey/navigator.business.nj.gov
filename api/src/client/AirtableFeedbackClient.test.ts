@@ -22,7 +22,7 @@ describe("AirtableFeedbackClient", () => {
 
   beforeEach(() => {
     jest.resetAllMocks();
-    logger = LogWriter("NavigatorWebService", "SearchApis", "us-test-1");
+    logger = LogWriter("NavigatorWebService", "ApiLogs", "us-test-1");
     client = AirtableFeedbackClient(
       {
         apiKey: "some-api-key",
