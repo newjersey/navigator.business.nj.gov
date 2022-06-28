@@ -5,7 +5,7 @@ id: understand-license-requirements-employment-agency
 callToActionLink: ""
 callToActionText: ""
 ---
-Your employment agency will need to register and obtain a license from the New Jersey Division of Consumer Affairs' Employment and Personnel Services. To identify the right license, you will speak with a representative who will want to know some information about your business.
+You will need to register your employment agency and obtain a license from the New Jersey Division of Consumer Affairs' Employment and Personnel Services. To identify the right license, the representative assisting you will want to know some information about your business.
 
 - - -
 
