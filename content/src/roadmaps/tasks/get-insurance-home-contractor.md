@@ -18,7 +18,8 @@ To find an insurance broker, speak to your network, local Chamber of Commerce, o
 * **Workers' compensation insurance:** Find a `workers' compensation insurance|workers-comp` plan if you have employees. The State of New Jersey requires that you obtain this insurance if you have employees or stockholders in a corporation.
 * **Motor vehicle insurance:** If your company will own or use any vehicles, consider purchasing motor vehicle insurance.
 
----
->**Once completed, you will have:**
+- - -
+
+> **Once completed, you will have:**
 >
->- Certificate of Insurance
+> * Certificate of Insurance
