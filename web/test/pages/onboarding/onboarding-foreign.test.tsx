@@ -2,8 +2,12 @@ import { getMergedConfig } from "@/contexts/configContext";
 import { templateEval } from "@/lib/utils/helpers";
 import { generateProfileData, generateUserData } from "@/test/factories";
 import { expectContent } from "@/test/helpers";
-import { useMockRouter } from "@/test/mock/mockRouter";
-import { currentUserData, setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
+import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
+import {
+  currentUserData,
+  setupStatefulUserDataContext,
+  userDataWasNotUpdated,
+} from "@/test/mock/withStatefulUserData";
 import {
   mockEmptyApiSignups,
   renderPage,
@@ -23,6 +27,8 @@ jest.mock("@/lib/api-client/apiClient", () => ({
 }));
 
 const Config = getMergedConfig();
+const { employeesInNJ, transactionsInNJ, revenueInNJ, none } =
+  Config.profileDefaults.FOREIGN.foreignBusinessType.optionContent;
 
 const generateTestUserData = (overrides: Partial<ProfileData>) =>
   generateUserData({
@@ -95,7 +101,7 @@ describe("onboarding - foreign business", () => {
         { exists: false },
         screen
       );
-      page.checkByLabelText(Config.profileDefaults.FOREIGN.foreignBusinessType.optionContent.employeesInNJ);
+      page.checkByLabelText(employeesInNJ);
       expectContent(
         Config.profileDefaults.FOREIGN.foreignBusinessType.REMOTE_WORKER,
         { exists: true },
@@ -114,7 +120,7 @@ describe("onboarding - foreign business", () => {
         { exists: false },
         screen
       );
-      page.checkByLabelText(Config.profileDefaults.FOREIGN.foreignBusinessType.optionContent.revenueInNJ);
+      page.checkByLabelText(revenueInNJ);
       expectContent(
         Config.profileDefaults.FOREIGN.foreignBusinessType.REMOTE_SELLER,
         { exists: true },
@@ -133,9 +139,7 @@ describe("onboarding - foreign business", () => {
         { exists: false },
         screen
       );
-      page.checkByLabelText(
-        Config.profileDefaults.FOREIGN.foreignBusinessType.optionContent.transactionsInNJ
-      );
+      page.checkByLabelText(transactionsInNJ);
       expectContent(
         Config.profileDefaults.FOREIGN.foreignBusinessType.REMOTE_SELLER,
         { exists: true },
@@ -164,9 +168,7 @@ describe("onboarding - foreign business", () => {
     it("allows user to move past Step 2 if you have made a selection", async () => {
       useMockRouter({ isReady: true, query: { page: "2" } });
       const { page } = renderPage({ userData });
-      page.checkByLabelText(
-        Config.profileDefaults.FOREIGN.foreignBusinessType.optionContent.transactionsInNJ
-      );
+      page.checkByLabelText(transactionsInNJ);
       await page.visitStep(3);
 
       await waitFor(() => {
@@ -176,6 +178,45 @@ describe("onboarding - foreign business", () => {
       expect(
         screen.queryByText(Config.profileDefaults.FOREIGN.foreignBusinessType.errorTextRequired)
       ).not.toBeInTheDocument();
+    });
+
+    it("deselects every other option if none is selected", async () => {
+      const { page } = renderPage({ userData });
+      page.checkByLabelText(employeesInNJ);
+      page.checkByLabelText(transactionsInNJ);
+      page.checkByLabelText(revenueInNJ);
+      page.checkByLabelText(none);
+
+      expect(screen.getByLabelText(none) as HTMLInputElement).toBeChecked();
+      expect(screen.getByLabelText(employeesInNJ) as HTMLInputElement).not.toBeChecked();
+      expect(screen.getByLabelText(transactionsInNJ) as HTMLInputElement).not.toBeChecked();
+      expect(screen.getByLabelText(revenueInNJ) as HTMLInputElement).not.toBeChecked();
+    });
+
+    it("doesn't update user data when none is selected and submitted", async () => {
+      const { page } = renderPage({ userData });
+      page.checkByLabelText(none);
+      act(() => page.clickNext());
+      await waitFor(() => {
+        expect(userDataWasNotUpdated).toBeTruthy();
+      });
+    });
+
+    it("deselects none of the above when user selects a different option after selecting none of the above", async () => {
+      const { page } = renderPage({ userData });
+      page.checkByLabelText(none);
+      page.checkByLabelText(transactionsInNJ);
+
+      expect(screen.getByLabelText(transactionsInNJ) as HTMLInputElement).toBeChecked();
+      expect(screen.getByLabelText(none) as HTMLInputElement).not.toBeChecked();
+    });
+
+    it("navigates to the unsupported page when the foreign business type is none", async () => {
+      const { page } = renderPage({ userData });
+      page.checkByLabelText(none);
+
+      act(() => page.clickNext());
+      await waitFor(() => expect(mockPush).toHaveBeenCalledWith("/unsupported"));
     });
   });
 
