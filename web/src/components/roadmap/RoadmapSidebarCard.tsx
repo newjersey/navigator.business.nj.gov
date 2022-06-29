@@ -44,8 +44,7 @@ export const RoadmapSidebarCard = (props: Props) => {
   };
 
   const tasksCompleted = (): number => {
-    if (!userData) return 0;
-    if (!roadmap) return 1;
+    if (!userData || !roadmap) return 0;
     let totalTasksCompleted = 0;
     for (const step of roadmap.steps) {
       for (const task of step.tasks) {
