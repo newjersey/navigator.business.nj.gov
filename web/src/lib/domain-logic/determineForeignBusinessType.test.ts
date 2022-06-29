@@ -24,4 +24,8 @@ describe("determineForeignBusinessType", () => {
   it("returns REMOTE_SELLER when both revenueInNJ and transactionsInNJ selected", () => {
     expect(determineForeignBusinessType(["revenueInNJ", "transactionsInNJ"])).toEqual("REMOTE_SELLER");
   });
+
+  it("returns none when none is selected", () => {
+    expect(determineForeignBusinessType(["none"])).toEqual("NONE");
+  });
 });

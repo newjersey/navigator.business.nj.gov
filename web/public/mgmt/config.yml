@@ -2018,6 +2018,14 @@ collections:
               - { label: Optional Tasks Remaining (plural), name: optionalTasksPlural, widget: string }
               - { label: Required Tasks Remaining (singular), name: requiredTasksSingular, widget: string }
               - { label: Required Tasks Remaining (plural), name: requiredTasksPlural, widget: string }
+          - label: Navigator Unsupported User Page
+            name: unsupportedNavigatorUserPage
+            collapsed: true
+            widget: object
+            summary: "{{unsupportedNavigatorUserPage}}"
+            fields:
+              - { label: Title, name: title, widget: string }
+              - { label: Subtitle, name: subtitle, widget: markdown }
   - name: "roadmaps"
     label: "Industry Roadmaps"
     folder: "content/src/roadmaps/industries"

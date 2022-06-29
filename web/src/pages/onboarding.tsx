@@ -259,7 +259,9 @@ const OnboardingPage = (props: Props): ReactElement => {
     setRoadmap(newRoadmap);
     setSectionCompletion(getSectionCompletion(newRoadmap, currentUserData));
 
-    if (page.current + 1 <= onboardingFlows[currentFlow].pages.length) {
+    if (profileData.foreignBusinessType === "NONE") {
+      await router.push("/unsupported");
+    } else if (page.current + 1 <= onboardingFlows[currentFlow].pages.length) {
       update({ ...currentUserData, user, profileData: newProfileData }, { local: true }).then(() => {
         const nextCurrentPage = page.current + 1;
         setPage({
