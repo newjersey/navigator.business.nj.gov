@@ -409,6 +409,8 @@ export const generateSidebarCardContent = (overrides: Partial<SidebarCardContent
     contentMd: `some-content-${randomInt()}`,
     id: `some-id-${randomInt()}`,
     header: `some-header-${randomInt()}`,
+    notStartedHeader: `some-header-${randomInt()}`,
+    completedHeader: `some-header-${randomInt()}`,
     imgPath: `some-img-path-${randomInt()}`,
     color: `some--color-${randomInt()}`,
     shadowColor: `some--shadow-color-${randomInt()}`,

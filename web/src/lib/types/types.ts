@@ -388,6 +388,8 @@ export type SidebarCardContent = {
   contentMd: string;
   id: string;
   header: string;
+  notStartedHeader: string;
+  completedHeader: string;
   imgPath: string;
   color: string;
   shadowColor: string;
