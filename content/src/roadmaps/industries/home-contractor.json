@@ -1,11 +1,10 @@
 {
   "naicsCodes": "238990,238390,238910,238350,238340,238330,238320,238310,238290,238220,238210,238190,238170,238160,238150,238140,238130,238120,238110,236118",
-  "canHavePermanentLocation": true,
   "canBeHomeBased": true,
   "defaultSectorId": "construction",
   "canBeReseller": true,
   "isCpaRequiredApplicable": false,
-  "isEnabled": true,
+  "canHavePermanentLocation": true,
   "roadmapSteps": [
     {
       "step": 1,
@@ -16,11 +15,6 @@
       "step": 1,
       "weight": 30,
       "task": "determine-naics-code"
-    },
-    {
-      "step": 1,
-      "weight": 100,
-      "task": "research-insurance-needs-home-contractor"
     },
     {
       "step": 2,
@@ -55,6 +49,7 @@
   ],
   "name": "Home Improvement Contractor",
   "isLiquorLicenseApplicable": false,
+  "isEnabled": true,
   "additionalSearchTerms": "renovation, home renovation, home contractor",
   "id": "home-contractor",
   "licenseType": "Home Improvement Contractors",
