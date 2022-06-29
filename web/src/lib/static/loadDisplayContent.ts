@@ -143,6 +143,8 @@ export const loadTasksDisplayContent = (): TasksDisplayContent => {
 type RoadmapCardGrayMatter = {
   id: string;
   header: string;
+  notStartedHeader: string;
+  completedHeader: string;
   imgPath: string;
   color: string;
   shadowColor: string;

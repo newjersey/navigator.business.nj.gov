@@ -218,6 +218,7 @@ describe("<RoadmapSidebarCard />", () => {
   it("filters tasks based on current roadmap", () => {
     const card = generateSidebarCardContent({
       header: "Hey kid, you're ${percentDone} done",
+      completedHeader: "",
       id: "task-progress",
     });
     useMockUserData(
@@ -250,5 +251,70 @@ describe("<RoadmapSidebarCard />", () => {
     );
     render(<RoadmapSidebarCard card={card} />);
     expect(screen.getByText("Hey kid, you're 100% done")).toBeInTheDocument();
+  });
+
+  it("shows completed header if all tasks are completed", () => {
+    const card = generateSidebarCardContent({
+      header: "Hey kid, you're ${percentDone} done",
+      completedHeader: "All done!",
+      id: "task-progress",
+    });
+    useMockUserData(
+      generateUserData({
+        taskProgress: {
+          Task1: "COMPLETED",
+          Task2: "COMPLETED",
+        },
+      })
+    );
+    useMockRoadmap(
+      generateRoadmap({
+        steps: [
+          generateStep({
+            tasks: [
+              generateTask({
+                required: true,
+                id: "Task1",
+              }),
+              generateTask({
+                required: false,
+                id: "Task2",
+              }),
+            ],
+          }),
+        ],
+      })
+    );
+    render(<RoadmapSidebarCard card={card} />);
+    expect(screen.getByText("All done!")).toBeInTheDocument();
+  });
+
+  it("shows not started header if no tasks are completed", () => {
+    const card = generateSidebarCardContent({
+      header: "Hey kid, you're ${percentDone} done",
+      notStartedHeader: "Get to work",
+      id: "task-progress",
+    });
+    useMockUserData(generateUserData({}));
+    useMockRoadmap(
+      generateRoadmap({
+        steps: [
+          generateStep({
+            tasks: [
+              generateTask({
+                required: true,
+                id: "Task1",
+              }),
+              generateTask({
+                required: false,
+                id: "Task2",
+              }),
+            ],
+          }),
+        ],
+      })
+    );
+    render(<RoadmapSidebarCard card={card} />);
+    expect(screen.getByText("Get to work")).toBeInTheDocument();
   });
 });
