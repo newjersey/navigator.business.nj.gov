@@ -1,6 +1,6 @@
 {
   "naicsCodes": "541310",
-  "canBeHomeBased": false,
+  "canBeHomeBased": true,
   "defaultSectorId": "construction",
   "canBeReseller": false,
   "isCpaRequiredApplicable": false,
