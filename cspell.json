@@ -76,7 +76,9 @@
     "NCBE",
     "Juris",
     "MPRE",
-    "prelicensure"
+    "prelicensure",
+    "FUTA",
+    "WDPF"
   ],
   "ignorePaths": ["node_modules/**", "out/**", "web/out/**", "package.json"]
 }
