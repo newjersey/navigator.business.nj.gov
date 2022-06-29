@@ -1,9 +1,10 @@
 {
-  "canHavePermanentLocation": true,
+  "naicsCodes": "621399",
   "canBeHomeBased": true,
   "defaultSectorId": "other-services",
   "canBeReseller": true,
   "isCpaRequiredApplicable": false,
+  "canHavePermanentLocation": true,
   "roadmapSteps": [
     {
       "step": 1,
@@ -41,10 +42,10 @@
       "task": "license-acupuncture"
     }
   ],
-  "name": "Acupuncturist",
+  "name": "Acupuncture",
   "isLiquorLicenseApplicable": false,
   "isEnabled": true,
   "additionalSearchTerms": "acupuncturist, spa, alternative medicine",
   "id": "acupuncture",
-  "description": "A traditional Chinese medicine involving the insertion of needles into the body"
+  "description": "Traditional Chinese medicine involving the insertion of needles into the body"
 }

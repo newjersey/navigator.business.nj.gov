@@ -1,9 +1,10 @@
 {
-  "canHavePermanentLocation": true,
+  "naicsCodes": "541410",
   "canBeHomeBased": true,
   "defaultSectorId": "construction",
   "canBeReseller": false,
   "isCpaRequiredApplicable": false,
+  "canHavePermanentLocation": true,
   "roadmapSteps": [
     {
       "step": 1,
@@ -41,10 +42,10 @@
       "task": "certified-interior-designer"
     }
   ],
-  "name": "Interior Designer",
+  "name": "Interior Design Firm",
   "isLiquorLicenseApplicable": false,
+  "isEnabled": true,
   "additionalSearchTerms": "architect, landscape,",
   "id": "interior-designer",
-  "description": "Plans and execute designs for architectural interiors",
-  "isEnabled": true
+  "description": "Plans and executes designs for architectural interiors"
 }

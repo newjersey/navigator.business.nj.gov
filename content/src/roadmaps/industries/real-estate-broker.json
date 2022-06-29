@@ -1,10 +1,10 @@
 {
-  "naicsCodes": "445132, 454210",
+  "naicsCodes": "531210",
   "canBeHomeBased": false,
-  "defaultSectorId": "accommodation-and-food-services",
-  "canBeReseller": true,
+  "defaultSectorId": "real-estate",
+  "canBeReseller": false,
   "isCpaRequiredApplicable": false,
-  "canHavePermanentLocation": false,
+  "canHavePermanentLocation": true,
   "roadmapSteps": [
     {
       "step": 1,
@@ -13,7 +13,12 @@
     },
     {
       "step": 1,
-      "weight": 30,
+      "weight": 5,
+      "task": "license-broker"
+    },
+    {
+      "step": 1,
+      "weight": 10,
       "task": "determine-naics-code"
     },
     {
@@ -35,17 +40,12 @@
       "step": 3,
       "weight": 15,
       "task": "get-insurance"
-    },
-    {
-      "step": 3,
-      "weight": 25,
-      "task": "agreement-vending-machine-1"
     }
   ],
-  "name": "Vending Machine",
+  "name": "Real Estate Agency",
   "isLiquorLicenseApplicable": false,
   "isEnabled": false,
-  "additionalSearchTerms": "vending machine service, vending machine business, snack machine",
-  "id": "vending-machine",
-  "description": "Offers small items for purchase through an automated machine"
+  "additionalSearchTerms": "real estate broker",
+  "id": "real-estate-broker",
+  "description": "Facilitates real estate transactions between buyers and sellers"
 }

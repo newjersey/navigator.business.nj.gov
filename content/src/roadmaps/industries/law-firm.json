@@ -1,10 +1,10 @@
 {
-  "naicsCodes": "445132, 454210",
-  "canBeHomeBased": false,
-  "defaultSectorId": "accommodation-and-food-services",
-  "canBeReseller": true,
+  "naicsCodes": "541110, 541199",
+  "canBeHomeBased": true,
+  "defaultSectorId": "other-services",
+  "canBeReseller": false,
   "isCpaRequiredApplicable": false,
-  "canHavePermanentLocation": false,
+  "canHavePermanentLocation": true,
   "roadmapSteps": [
     {
       "step": 1,
@@ -13,7 +13,7 @@
     },
     {
       "step": 1,
-      "weight": 30,
+      "weight": 10,
       "task": "determine-naics-code"
     },
     {
@@ -37,15 +37,15 @@
       "task": "get-insurance"
     },
     {
-      "step": 3,
-      "weight": 25,
-      "task": "agreement-vending-machine-1"
+      "step": 1,
+      "weight": 5,
+      "task": "state-bar-attorney"
     }
   ],
-  "name": "Vending Machine",
+  "name": "Law Firm",
   "isLiquorLicenseApplicable": false,
-  "isEnabled": false,
-  "additionalSearchTerms": "vending machine service, vending machine business, snack machine",
-  "id": "vending-machine",
-  "description": "Offers small items for purchase through an automated machine"
+  "isEnabled": true,
+  "additionalSearchTerms": "attorney, law office, ",
+  "id": "law-firm",
+  "description": "Offers professional legal services"
 }
