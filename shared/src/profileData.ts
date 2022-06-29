@@ -69,4 +69,4 @@ export const createEmptyProfileData = (): ProfileData => {
 export type CannabisLicenseType = "CONDITIONAL" | "ANNUAL" | undefined;
 
 export type BusinessPersona = "STARTING" | "OWNING" | "FOREIGN" | undefined;
-export type ForeignBusinessType = "REMOTE_WORKER" | "REMOTE_SELLER" | undefined;
+export type ForeignBusinessType = "REMOTE_WORKER" | "REMOTE_SELLER" | "NONE" | undefined;

@@ -510,5 +510,9 @@
     "optionalTasksPlural": "${numTasks} optional tasks",
     "requiredTasksSingular": "${numTasks} required task",
     "requiredTasksPlural": "${numTasks} required tasks"
+  },
+  "unsupportedNavigatorUserPage":{
+    "title": "You are all set!",
+    "subtitle": "Because you selected “None of the Above,” you don't need to `form or register your business|form-and-register-business` with the State of New Jersey right now. Should something change, you can come back and use this tool again later."
   }
 }

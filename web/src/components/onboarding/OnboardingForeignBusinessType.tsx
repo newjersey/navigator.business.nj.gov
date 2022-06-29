@@ -11,7 +11,7 @@ interface Props {
   headerAriaLevel?: number;
 }
 
-const allForeignBusinessTypeIds = ["employeesInNJ", "transactionsInNJ", "revenueInNJ"];
+const allForeignBusinessTypeIds = ["employeesInNJ", "transactionsInNJ", "revenueInNJ", "none"];
 
 export const OnboardingForeignBusinessType = ({ headerAriaLevel = 2 }: Props): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
@@ -19,7 +19,16 @@ export const OnboardingForeignBusinessType = ({ headerAriaLevel = 2 }: Props): R
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     let ids = state.profileData.foreignBusinessTypeIds;
-    ids = event.target.checked ? [...ids, event.target.value] : ids.filter((it) => it !== event.target.value);
+
+    if (ids.includes("none") && event.target.value !== "none") {
+      ids = [event.target.value];
+    } else if (event.target.value === "none" && !ids.includes("none")) {
+      ids = ["none"];
+    } else {
+      ids = event.target.checked
+        ? [...ids, event.target.value]
+        : ids.filter((it) => it !== event.target.value);
+    }
 
     const foreignBusinessType = determineForeignBusinessType(ids);
 
@@ -74,13 +83,14 @@ export const OnboardingForeignBusinessType = ({ headerAriaLevel = 2 }: Props): R
         </FormControl>
       </div>
 
-      {state.profileData.foreignBusinessType !== undefined && (
-        <Alert variant="info">
-          <Content>
-            {Config.profileDefaults.FOREIGN.foreignBusinessType[state.profileData.foreignBusinessType]}
-          </Content>
-        </Alert>
-      )}
+      {state.profileData.foreignBusinessType !== undefined &&
+        state.profileData.foreignBusinessType !== "NONE" && (
+          <Alert variant="info">
+            <Content>
+              {Config.profileDefaults.FOREIGN.foreignBusinessType[state.profileData.foreignBusinessType]}
+            </Content>
+          </Alert>
+        )}
     </>
   );
 };
