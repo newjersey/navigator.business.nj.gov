@@ -5,7 +5,7 @@ slug: nexus-business
 
 A nexus business is an out-of-state business (also known as a foreign business) that has operations in New Jersey. If any of the following scenarios apply to you, you are a nexus business:
 
-- You have an office in New Jersey, an employee or independent contractor representing your company in New Jersey
+- You have an office in New Jersey, an employee or independent contractor acting as a sales or manufacturing representative for your company in New Jersey
 - You have property including inventory housed in a 3rd party warehouse in New Jersey
 - You have company-operated vehicles making business-related stops (deliveries or pickups) in New Jersey
 - Some licensing agreements with an entity operating in NJ
