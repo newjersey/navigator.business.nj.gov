@@ -33,13 +33,13 @@ describe("<Content />", () => {
     it("opens in new tab for an external link with http", () => {
       const httpLink = "i am an [external link](http://example.com)";
       render(<Content>{httpLink}</Content>);
-      expect(screen.getByText("external link").getAttribute("target")).toEqual("_blank");
+      expect(screen.getByText("external link")).toHaveAttribute("target", "_blank");
     });
 
     it("opens in new tab for an external link with https", () => {
       const httpsLink = "i am an [external link](https://example.com)";
       render(<Content>{httpsLink}</Content>);
-      expect(screen.getByText("external link").getAttribute("target")).toEqual("_blank");
+      expect(screen.getByText("external link")).toHaveAttribute("target", "_blank");
     });
 
     it("does not open in new tab for internal links", () => {

@@ -458,9 +458,7 @@ describe("task page", () => {
       ).not.toBeInTheDocument();
       expect(screen.getByText(Config.taskDefaults.unlockedBySingular, { exact: false })).toBeInTheDocument();
       expect(screen.getByText("Do this first", { exact: false })).toBeInTheDocument();
-      expect(screen.getByText("Do this first", { exact: false }).getAttribute("href")).toEqual(
-        "do-this-first"
-      );
+      expect(screen.getByText("Do this first", { exact: false })).toHaveAttribute("href", "do-this-first");
     });
 
     it("shows an alert with links when this task is unlocked by several other tasks", () => {
@@ -480,12 +478,8 @@ describe("task page", () => {
       ).not.toBeInTheDocument();
       expect(screen.getByText("Do this first", { exact: false })).toBeInTheDocument();
       expect(screen.getByText("Also this one", { exact: false })).toBeInTheDocument();
-      expect(screen.getByText("Do this first", { exact: false }).getAttribute("href")).toEqual(
-        "do-this-first"
-      );
-      expect(screen.getByText("Also this one", { exact: false }).getAttribute("href")).toEqual(
-        "also-this-one"
-      );
+      expect(screen.getByText("Do this first", { exact: false })).toHaveAttribute("href", "do-this-first");
+      expect(screen.getByText("Also this one", { exact: false })).toHaveAttribute("href", "also-this-one");
     });
 
     it("ignores unlocked-by tasks on the page's default task", () => {

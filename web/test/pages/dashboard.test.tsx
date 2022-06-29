@@ -233,14 +233,14 @@ describe("dashboard", () => {
       generateFunding({ urlSlug: "opp", name: "Funding Opp", status: "rolling application" }),
     ];
     renderPage({ fundings });
-    expect(screen.getByText("Funding Opp").getAttribute("href")).toEqual("/funding/opp");
+    expect(screen.getByText("Funding Opp")).toHaveAttribute("href", "/funding/opp");
   });
 
   it("links to task page for certifications", () => {
     useMockProfileData(profileDataForUnfilteredOpportunities);
     const certifications = [generateCertification({ urlSlug: "cert1", name: "Cert 1" })];
     renderPage({ certifications });
-    expect(screen.getByText("Cert 1").getAttribute("href")).toEqual("/certification/cert1");
+    expect(screen.getByText("Cert 1")).toHaveAttribute("href", "/certification/cert1");
   });
 
   it("displays first 150 characters of funding description", () => {

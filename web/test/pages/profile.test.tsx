@@ -308,13 +308,13 @@ describe("profile", () => {
 
         it("disables businessName", () => {
           renderPage(userData);
-          expect(screen.getByLabelText("Business name")).toHaveAttribute("disabled");
+          expect(screen.getByLabelText("Business name")).toBeDisabled();
         });
 
         it("disables entityID", () => {
           renderPage(userData);
           chooseTab("numbers");
-          expect(screen.getByLabelText("Entity id")).toHaveAttribute("disabled");
+          expect(screen.getByLabelText("Entity id")).toBeDisabled();
         });
       });
 
@@ -337,19 +337,19 @@ describe("profile", () => {
 
         it("disables businessName", () => {
           renderPage(userData);
-          expect(screen.getByLabelText("Business name")).toHaveAttribute("disabled");
+          expect(screen.getByLabelText("Business name")).toBeDisabled();
         });
 
         it("disables entityID", () => {
           renderPage(userData);
           chooseTab("numbers");
-          expect(screen.getByLabelText("Entity id")).toHaveAttribute("disabled");
+          expect(screen.getByLabelText("Entity id")).toBeDisabled();
         });
 
         it("disables dateOfFormation", () => {
           renderPage(userData);
           chooseTab("numbers");
-          expect(screen.getByLabelText("Date of formation")).toHaveAttribute("disabled");
+          expect(screen.getByLabelText("Date of formation")).toBeDisabled();
         });
       });
     });
@@ -759,7 +759,7 @@ describe("profile", () => {
     });
 
     renderPage({ userData });
-    expect(screen.getByLabelText("Business name")).toHaveAttribute("disabled");
+    expect(screen.getByLabelText("Business name")).toBeDisabled();
   });
 
   it("disables legal structure field if formation getFiling success", () => {
@@ -893,13 +893,16 @@ describe("profile", () => {
       });
       chooseTab("documents");
 
-      expect(screen.getByText(Config.profileDefaults.formationDocFileTitle).getAttribute("href")).toEqual(
+      expect(screen.getByText(Config.profileDefaults.formationDocFileTitle)).toHaveAttribute(
+        "href",
         "testForm.pdf"
       );
-      expect(screen.getByText(Config.profileDefaults.standingDocFileTitle).getAttribute("href")).toEqual(
+      expect(screen.getByText(Config.profileDefaults.standingDocFileTitle)).toHaveAttribute(
+        "href",
         "testStand.pdf"
       );
-      expect(screen.getByText(Config.profileDefaults.certificationDocFileTitle).getAttribute("href")).toEqual(
+      expect(screen.getByText(Config.profileDefaults.certificationDocFileTitle)).toHaveAttribute(
+        "href",
         "testCert.pdf"
       );
     });

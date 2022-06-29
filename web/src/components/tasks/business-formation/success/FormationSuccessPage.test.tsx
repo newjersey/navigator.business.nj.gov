@@ -44,15 +44,18 @@ describe("Formation - <FormationSuccessPage />", () => {
     expect(screen.getByText(Config.businessFormationDefaults.successPageSubheader)).toBeInTheDocument();
     expect(screen.getByText(getFilingResponse.entityId)).toBeInTheDocument();
     expect(screen.getByText(getFilingResponse.confirmationNumber)).toBeInTheDocument();
-    expect(
-      screen.getByTestId(Config.businessFormationDefaults.formationDocLabel).getAttribute("href")
-    ).toEqual("testForm.pdf");
-    expect(
-      screen.getByTestId(Config.businessFormationDefaults.standingDocLabel).getAttribute("href")
-    ).toEqual("testStand.pdf");
-    expect(
-      screen.getByTestId(Config.businessFormationDefaults.certifiedDocLabel).getAttribute("href")
-    ).toEqual("testCert.pdf");
+    expect(screen.getByTestId(Config.businessFormationDefaults.formationDocLabel)).toHaveAttribute(
+      "href",
+      "testForm.pdf"
+    );
+    expect(screen.getByTestId(Config.businessFormationDefaults.standingDocLabel)).toHaveAttribute(
+      "href",
+      "testStand.pdf"
+    );
+    expect(screen.getByTestId(Config.businessFormationDefaults.certifiedDocLabel)).toHaveAttribute(
+      "href",
+      "testCert.pdf"
+    );
   });
 
   it("does not display documents when they are not present", () => {

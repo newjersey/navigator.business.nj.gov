@@ -7,7 +7,7 @@ describe("<ContextualInfoPanel />", () => {
     render(
       withContextualInfo(<ContextualInfoPanel />, { isVisible: false, header: "", markdown: "" }, jest.fn())
     );
-    expect(screen.getByTestId("overlay").className).not.toContain("is-visible");
+    expect(screen.getByTestId("overlay")).not.toHaveClass("is-visible");
     expect(screen.queryByTestId("info-panel")).not.toBeInTheDocument();
   });
 
@@ -19,8 +19,8 @@ describe("<ContextualInfoPanel />", () => {
         jest.fn()
       )
     );
-    expect(screen.getByTestId("overlay").className).toContain("is-visible");
-    expect(screen.getByTestId("info-panel").className).toContain("is-visible");
+    expect(screen.getByTestId("overlay")).toHaveClass("is-visible");
+    expect(screen.getByTestId("info-panel")).toHaveClass("is-visible");
   });
 
   it("displays the content as markdown", () => {

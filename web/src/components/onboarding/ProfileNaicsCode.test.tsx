@@ -43,7 +43,8 @@ describe("<ProfileNaicsCode />", () => {
   it("routes to naics code URL", () => {
     useMockRoadmapTask({ id: "determine-naics-code", urlSlug: "some-naics-url" });
     renderComponent({});
-    expect(screen.getByText(Config.profileDefaults.STARTING.naicsCode.editText).getAttribute("href")).toEqual(
+    expect(screen.getByText(Config.profileDefaults.STARTING.naicsCode.editText)).toHaveAttribute(
+      "href",
       "/tasks/some-naics-url"
     );
   });
