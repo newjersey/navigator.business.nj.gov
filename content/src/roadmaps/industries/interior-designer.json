@@ -42,10 +42,10 @@
       "task": "certified-interior-designer"
     }
   ],
-  "name": "Interior Designer",
+  "name": "Interior Design Firm",
   "isLiquorLicenseApplicable": false,
   "isEnabled": true,
   "additionalSearchTerms": "architect, landscape,",
   "id": "interior-designer",
-  "description": "Plans and execute designs for architectural interiors"
+  "description": "Plans and executes designs for architectural interiors"
 }
