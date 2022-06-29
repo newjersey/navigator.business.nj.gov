@@ -244,7 +244,7 @@ describe("Formation - BusinessSection", () => {
       await getPageHelper({}, { provisions: [] });
       expect(screen.getByText(Config.businessFormationDefaults.provisionsTitle)).toBeInTheDocument();
       expect(screen.getByText(Config.businessFormationDefaults.provisionsAddButtonText)).toBeInTheDocument();
-      expect(screen.queryAllByLabelText("remove provision")).toHaveLength(0);
+      expect(screen.queryByLabelText("remove provision")).not.toBeInTheDocument();
       expect(screen.queryByLabelText("provision 0")).not.toBeInTheDocument();
     });
 
@@ -265,7 +265,7 @@ describe("Formation - BusinessSection", () => {
       expect(
         screen.queryByText(Config.businessFormationDefaults.provisionsAddButtonText)
       ).not.toBeInTheDocument();
-      expect(screen.queryAllByLabelText("remove provision")).toHaveLength(1);
+      expect(screen.getByLabelText("remove provision")).toBeInTheDocument();
       expect(screen.getByLabelText("Provisions 0")).toBeInTheDocument();
     });
 

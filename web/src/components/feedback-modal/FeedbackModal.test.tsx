@@ -66,7 +66,8 @@ describe("<feedbackModal />", () => {
       renderFeedbackModal({});
 
       expect(screen.getByText(Config.feedbackModal.feedbackModalShareFeedbackButtonText)).toBeInTheDocument();
-      expect(screen.getByTestId("feedback-link").getAttribute("href")).toEqual(
+      expect(screen.getByTestId("feedback-link")).toHaveAttribute(
+        "href",
         Config.feedbackModal.feedbackModalLinkOwning
       );
     });
@@ -79,7 +80,8 @@ describe("<feedbackModal />", () => {
       renderFeedbackModal({});
 
       expect(screen.getByText(Config.feedbackModal.feedbackModalShareFeedbackButtonText)).toBeInTheDocument();
-      expect(screen.getByTestId("feedback-link").getAttribute("href")).toEqual(
+      expect(screen.getByTestId("feedback-link")).toHaveAttribute(
+        "href",
         Config.feedbackModal.feedbackModalLinkStarting
       );
     });

@@ -51,7 +51,7 @@ describe("<TaskCheckbox />", () => {
         },
       }),
     });
-    expect((screen.getByRole("checkbox") as HTMLInputElement).checked).toBe(true);
+    expect(screen.getByRole("checkbox") as HTMLInputElement).toBeChecked();
   });
 
   it("updates userData when item is checked off", () => {
@@ -64,7 +64,7 @@ describe("<TaskCheckbox />", () => {
       }),
     });
     fireEvent.click(screen.getByRole("checkbox"));
-    expect((screen.getByRole("checkbox") as HTMLInputElement).checked).toBe(true);
+    expect(screen.getByRole("checkbox") as HTMLInputElement).toBeChecked();
     expect(currentUserData().taskItemChecklist["some-id"]).toBe(true);
   });
 

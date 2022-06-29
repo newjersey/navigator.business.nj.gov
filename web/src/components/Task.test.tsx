@@ -11,7 +11,7 @@ describe("<Task />", () => {
         <Task task={task} />
       </ThemeProvider>
     );
-    expect(screen.getByText("task 1").getAttribute("href")).toEqual("/tasks/url-slug-1");
+    expect(screen.getByText("task 1")).toHaveAttribute("href", "/tasks/url-slug-1");
   });
 
   it("renders required content when task is required", () => {

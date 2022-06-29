@@ -29,13 +29,13 @@ describe("<SidebarPageLayout />", () => {
     useMockProfileData({ businessPersona: "STARTING" });
     render(<SidebarPageLayout>stuff</SidebarPageLayout>);
     expect(screen.getByText("stuff")).toBeInTheDocument();
-    expect(screen.getByTestId("back-to-roadmap").getAttribute("href")).toEqual("/roadmap");
+    expect(screen.getByTestId("back-to-roadmap")).toHaveAttribute("href", "/roadmap");
   });
 
   it("links back to /dashboard when user owns a business", () => {
     useMockProfileData({ businessPersona: "OWNING" });
     render(<SidebarPageLayout>stuff</SidebarPageLayout>);
-    expect(screen.getByTestId("back-to-roadmap").getAttribute("href")).toEqual("/dashboard");
+    expect(screen.getByTestId("back-to-roadmap")).toHaveAttribute("href", "/dashboard");
   });
 
   it("shows content in sidebar", () => {
