@@ -3,7 +3,7 @@ id: task-progress
 header: You're ${percentDone} Done!
 imgPath: ""
 color: accent-cool-darker
-shadowColor: ""
+shadowColor: white
 borderColor: accent-cool
 weight: 3
 ---
