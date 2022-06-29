@@ -1,3 +1,10 @@
+## [3.13.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v3.13.0...v3.13.1) (2022-06-29)
+
+
+### Bug Fixes
+
+* adjust the progressbar calculation to start at 0 ([35b7673](https://github.com/newjersey/navigator.business.nj.gov/commit/35b7673a33769a8753f07b6116d3839a9edfa479))
+
 # [3.13.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v3.12.3...v3.13.0) (2022-06-29)
 
 
