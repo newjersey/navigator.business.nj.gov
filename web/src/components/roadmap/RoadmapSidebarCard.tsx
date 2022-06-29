@@ -111,6 +111,11 @@ export const RoadmapSidebarCard = (props: Props) => {
   };
 
   const getHeader = (): string => {
+    if (props.card.notStartedHeader && progressBarValue() === 0) {
+      return props.card.notStartedHeader;
+    } else if (props.card.completedHeader && progressBarValue() === 100) {
+      return props.card.completedHeader;
+    }
     return templateEval(props.card.header, { percentDone: `${progressBarValue()}%` });
   };
 

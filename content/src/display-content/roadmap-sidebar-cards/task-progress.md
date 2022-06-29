@@ -1,6 +1,8 @@
 ---
 id: task-progress
 header: You're ${percentDone} Done!
+notStartedHeader: Let's get started forming your business!
+completedHeader: You've completed all of the tasks!
 imgPath: ""
 color: accent-cool-darker
 shadowColor: white

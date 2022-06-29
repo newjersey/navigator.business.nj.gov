@@ -2878,6 +2878,8 @@ collections:
     fields:
       - { label: "Id", name: "id", widget: "string" }
       - { label: "Header", name: "header", widget: "string", required: false }
+      - { label: "Not Started Header", name: "notStartedHeader", widget: "string", required: false }
+      - { label: "Completed Header", name: "completedHeader", widget: "string", required: false }
       - { label: "Has Close Button", name: "hasCloseButton", widget: "boolean", required: true }
       - { label: "Weight (lower weights sort first)", name: "weight", widget: "number", required: true }
       - {
