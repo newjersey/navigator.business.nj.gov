@@ -90,27 +90,6 @@ export const NavBarDesktop = (): ReactElement => {
           {Config.navigationDefaults.profileLinkText}
         </Button>
       </MenuItem>
-      <MenuItem
-        onClick={() => {
-          analytics.event.guest_menu.click.go_to_myNJ_registration();
-          onSelfRegister(router.replace, userData, update, setRegistrationAlertStatus);
-        }}
-      >
-        <Button style="tertiary" textBold smallText>
-          {Config.navigationDefaults.navBarGuestRegistrationText}
-        </Button>
-      </MenuItem>
-      <MenuItem
-        onClick={() => {
-          analytics.event.guest_menu.click.go_to_myNJ_registration();
-          triggerSignIn();
-        }}
-        data-testid="login-button"
-      >
-        <Button style="tertiary" textBold smallText>
-          {Config.navigationDefaults.logInButton}
-        </Button>
-      </MenuItem>
     </MenuList>
   );
 
@@ -147,7 +126,34 @@ export const NavBarDesktop = (): ReactElement => {
               <img className="height-4" src="/img/Navigator-logo.svg" alt="Business.NJ.Gov Navigator" />
             </a>
           </Link>
-          <div className="z-100">
+          <div className="flex z-100">
+            {!isAuthenticated && (
+              <div className="flex">
+                <div data-testid="registration-button" className="margin-left-4">
+                  <Button
+                    style="tertiary"
+                    onClick={() => {
+                      analytics.event.guest_menu.click.go_to_myNJ_registration();
+                      onSelfRegister(router.replace, userData, update, setRegistrationAlertStatus);
+                    }}
+                  >
+                    {Config.navigationDefaults.navBarGuestRegistrationText}
+                  </Button>
+                </div>
+                <div data-testid="login-button" className="margin-right-4 margin-left-4">
+                  <Button
+                    style="tertiary"
+                    onClick={() => {
+                      analytics.event.guest_menu.click.go_to_myNJ_registration();
+                      triggerSignIn();
+                    }}
+                  >
+                    {Config.navigationDefaults.logInButton}
+                  </Button>
+                </div>
+                <div className="margin-right-4 text-base">|</div>
+              </div>
+            )}
             <button
               data-testid="profile-dropdown"
               className="clear-button"
@@ -166,6 +172,7 @@ export const NavBarDesktop = (): ReactElement => {
                 <Icon className="usa-icon--size-3">arrow_drop_down</Icon>
               </div>
             </button>
+
             <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal={true}>
               {({ TransitionProps, placement }) => (
                 <Grow
