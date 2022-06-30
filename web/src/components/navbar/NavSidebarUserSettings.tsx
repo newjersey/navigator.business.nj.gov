@@ -8,10 +8,9 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 import { getUserNameOrEmail } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { ReactElement, useContext, useMemo, useState } from "react";
+import { ReactElement, useContext, useMemo } from "react";
 
 export const NavSidebarUserSettings = (): ReactElement => {
   const { userData, update } = useUserData();
@@ -19,7 +18,6 @@ export const NavSidebarUserSettings = (): ReactElement => {
   const { state } = useContext(AuthContext);
   const { setRegistrationAlertStatus } = useContext(AuthAlertContext);
 
-  const [accordionIsOpen, setAccordionIsOpen] = useState<boolean>(false);
   const router = useRouter();
 
   const isAuthenticated = useMemo(() => state.isAuthenticated == "TRUE", [state.isAuthenticated]);
@@ -86,33 +84,17 @@ export const NavSidebarUserSettings = (): ReactElement => {
 
   return (
     <div>
-      <Accordion
-        elevation={0}
-        expanded={accordionIsOpen}
-        onChange={() => {
-          !accordionIsOpen && analytics.event.account_name.click.expand_account_menu();
-          setAccordionIsOpen(!accordionIsOpen);
-        }}
-      >
-        <AccordionSummary
-          expandIcon={<Icon className="usa-icon--size-3 text-ink">expand_more</Icon>}
-          id="user-profile-header"
-        >
-          <div className="margin-y-2">
-            <h4 className={`flex flex-align-center text-${textColor}`}>
-              <Icon className="margin-right-1 usa-icon--size-3">{accountIcon}</Icon>
-              <span>{accountString}</span>
-            </h4>
-          </div>
-        </AccordionSummary>
-        <AccordionDetails>
-          <div className="margin-left-2 margin-bottom-2">
-            {isAuthenticated ? AuthenticatedMenu() : UnAuthenticatedMenu()}
-            <AuthButton position="NAVBAR" />
-          </div>
-        </AccordionDetails>
-      </Accordion>
+      <div className="margin-y-2">
+        <h4 className={`flex flex-align-center text-${textColor}`}>
+          <Icon className="margin-right-1 usa-icon--size-3">{accountIcon}</Icon>
+          <span>{accountString}</span>
+        </h4>
+      </div>
       <hr />
+      <div className="margin-left-2 margin-bottom-2">
+        {isAuthenticated ? AuthenticatedMenu() : UnAuthenticatedMenu()}
+        <AuthButton position="NAVBAR" />
+      </div>
     </div>
   );
 };

@@ -287,37 +287,21 @@ describe("<NavBar />", () => {
     describe("authenticated mobile navbar - renders roadmap within drawer", () => {
       displaysUserNameOrEmail(renderMobileTaskNav(IsAuthenticated.TRUE));
 
-      it("opens and closes user profile links", async () => {
+      it("displays user profile links", async () => {
         useMockUserData({ user: generateUser({ name: "Grace Hopper" }) });
         renderMobileTaskNav(IsAuthenticated.TRUE)();
-        expect(screen.queryByText(Config.navigationDefaults.myNJAccountText)).not.toBeVisible();
-        expect(screen.queryByText(Config.navigationDefaults.profileLinkText)).not.toBeVisible();
 
-        fireEvent.click(screen.getByText("Grace Hopper"));
         expect(screen.queryByText(Config.navigationDefaults.myNJAccountText)).toBeVisible();
         expect(screen.queryByText(Config.navigationDefaults.profileLinkText)).toBeVisible();
-
-        fireEvent.click(screen.getByText("Grace Hopper"));
-        await waitFor(() => {
-          expect(screen.queryByText(Config.navigationDefaults.myNJAccountText)).not.toBeVisible();
-        });
-        expect(screen.queryByText(Config.navigationDefaults.profileLinkText)).not.toBeVisible();
       });
     });
 
     describe("guest mode mobile navbar - renders roadmap within drawer", () => {
-      it("opens and closes user registration links", async () => {
+      it("displays user registration links", async () => {
         useMockUserData({});
         renderMobileTaskNav(IsAuthenticated.FALSE)();
-        expect(screen.queryByText(Config.navigationDefaults.navBarGuestRegistrationText)).not.toBeVisible();
 
-        fireEvent.click(screen.getByText(Config.navigationDefaults.navBarGuestText));
         expect(screen.queryByText(Config.navigationDefaults.navBarGuestRegistrationText)).toBeVisible();
-
-        fireEvent.click(screen.getByText(Config.navigationDefaults.navBarGuestText));
-        await waitFor(() => {
-          expect(screen.queryByText(Config.navigationDefaults.navBarGuestRegistrationText)).not.toBeVisible();
-        });
       });
 
       it("sends user to selfRegistration when registration button is clicked", async () => {
