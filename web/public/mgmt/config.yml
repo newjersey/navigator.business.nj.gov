@@ -2887,7 +2887,7 @@ collections:
       - { label: "Header", name: "header", widget: "string", required: false }
       - { label: "Not Started Header", name: "notStartedHeader", widget: "string", required: false }
       - { label: "Completed Header", name: "completedHeader", widget: "string", required: false }
-      - { label: "Has Close Button", name: "hasCloseButton", widget: "boolean", required: true }
+      - { label: "Has Close Button", name: "hasCloseButton", widget: "boolean", required: false }
       - { label: "Weight (lower weights sort first)", name: "weight", widget: "number", required: true }
       - {
           label: "Image (header required)",
