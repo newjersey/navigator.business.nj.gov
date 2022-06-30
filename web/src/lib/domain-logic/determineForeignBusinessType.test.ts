@@ -35,4 +35,8 @@ describe("determineForeignBusinessType", () => {
   it("returns none when none is selected", () => {
     expect(determineForeignBusinessType(["none"])).toEqual("NONE");
   });
+
+  it("returns none when none and other values are selected", () => {
+    expect(determineForeignBusinessType(["none", "revenueInNJ"])).toEqual("NONE");
+  });
 });
