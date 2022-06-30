@@ -20,7 +20,11 @@ export type TaskProgress = "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
 
 export type UserDataError = "NO_DATA" | "CACHED_ONLY" | "UPDATE_FAILED";
 
-export type ProfileError = "REQUIRED_LEGAL" | "REQUIRED_EXISTING_BUSINESS" | "REQUIRE_FOREIGN_BUSINESS_TYPE";
+export type ProfileError =
+  | "REQUIRED_LEGAL"
+  | "REQUIRED_EXISTING_BUSINESS"
+  | "REQUIRED_FOREIGN_BUSINESS_TYPE"
+  | "REQUIRED_NEXUS_LOCATION_IN_NJ";
 
 export type FlowType = "OWNING" | "STARTING" | "FOREIGN";
 

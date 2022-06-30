@@ -31,6 +31,15 @@ const generateStartingProfile = (overrides: Partial<ProfileData>): ProfileData =
   });
 };
 
+const createEmptyNexusProfile = (overrides: Partial<ProfileData>): ProfileData => {
+  return {
+    ...createEmptyProfileData(),
+    businessPersona: "FOREIGN",
+    foreignBusinessType: "NEXUS",
+    ...overrides,
+  };
+};
+
 describe("buildUserRoadmap", () => {
   beforeEach(() => {
     jest.resetAllMocks();
@@ -59,6 +68,65 @@ describe("buildUserRoadmap", () => {
       await buildUserRoadmap(profileData);
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toEqual(["foreign-remote-seller"]);
     });
+
+    it("adds roadmap for NEXUS type alongside industry tasks", async () => {
+      const profileData = createEmptyNexusProfile({ industryId: "cannabis" });
+
+      await buildUserRoadmap(profileData);
+      const lastCalledWith = getLastCalledWith(mockRoadmapBuilder)[0];
+      expect(lastCalledWith.addOns).toContain("foreign-nexus");
+      expect(lastCalledWith.industryId).toEqual("cannabis");
+    });
+
+    it("does not add legal structure add-ons for nexus", async () => {
+      const baseProfileData = createEmptyNexusProfile({ industryId: "cannabis" });
+
+      await buildUserRoadmap({ ...baseProfileData, legalStructureId: "limited-liability-company" });
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("formation");
+
+      await buildUserRoadmap({ ...baseProfileData, legalStructureId: "general-partnership" });
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("trade-name");
+
+      await buildUserRoadmap({ ...baseProfileData, legalStructureId: "limited-partnership" });
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("public-record-filing");
+    });
+
+    it("removes register-for-ein task from roadmap for nexus", async () => {
+      mockRoadmapBuilder.mockResolvedValue(
+        generateRoadmap({
+          steps: [
+            generateStep({
+              tasks: [generateTask({ id: "register-for-ein" })],
+            }),
+          ],
+        })
+      );
+
+      const profileData = createEmptyNexusProfile({ industryId: "cannabis" });
+      const roadmap = await buildUserRoadmap(profileData);
+      expect(roadmap.steps[0].tasks).toHaveLength(0);
+    });
+
+    it("adds trade-name-foreign for Trade Name legal structures", async () => {
+      const profileData = createEmptyNexusProfile({ legalStructureId: "general-partnership" });
+      await buildUserRoadmap(profileData);
+      const lastCalledWith = getLastCalledWith(mockRoadmapBuilder)[0];
+      expect(lastCalledWith.addOns).toContain("trade-name-foreign");
+    });
+
+    it("adds DBA add-on if user profile DBA name is not undefined", async () => {
+      const profileData = createEmptyNexusProfile({ nexusDbaName: "" });
+      await buildUserRoadmap(profileData);
+      const lastCalledWith = getLastCalledWith(mockRoadmapBuilder)[0];
+      expect(lastCalledWith.addOns).toContain("foreign-nexus-dba-name");
+    });
+
+    it("does not add DBA add-on if user profile DBA name is undefined", async () => {
+      const profileData = createEmptyNexusProfile({ nexusDbaName: undefined });
+      await buildUserRoadmap(profileData);
+      const lastCalledWith = getLastCalledWith(mockRoadmapBuilder)[0];
+      expect(lastCalledWith.addOns).not.toContain("foreign-nexus-dba-name");
+    });
   });
 
   describe("home-based business", () => {
@@ -75,6 +143,46 @@ describe("buildUserRoadmap", () => {
     it("does not add permanent-location-business add-on if industry does not allow permanent location", async () => {
       await buildUserRoadmap(generateStartingProfile({ industryId: "food-truck" }));
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("permanent-location-business");
+    });
+
+    it("does NOT add permanent-location-business add-on if nexusLocationInNewJersey is false", async () => {
+      const profileData = createEmptyNexusProfile({
+        industryId: "generic",
+        homeBasedBusiness: false,
+        nexusLocationInNewJersey: false,
+      });
+      await buildUserRoadmap(profileData);
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("permanent-location-business");
+    });
+
+    it("does NOT add permanent-location-business add-on if homeBasedBusiness: false and nexusLocationInNewJersey: false", async () => {
+      const profileData = createEmptyNexusProfile({
+        industryId: "generic",
+        homeBasedBusiness: false,
+        nexusLocationInNewJersey: false,
+      });
+      await buildUserRoadmap(profileData);
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("permanent-location-business");
+    });
+
+    it("adds permanent-location-business add-on if homeBasedBusiness: false and nexusLocationInNewJersey: undefined", async () => {
+      const profileData = createEmptyNexusProfile({
+        industryId: "generic",
+        homeBasedBusiness: false,
+        nexusLocationInNewJersey: undefined,
+      });
+      await buildUserRoadmap(profileData);
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("permanent-location-business");
+    });
+
+    it("adds permanent-location-business add-on if homeBasedBusiness: false and nexusLocationInNewJersey: true", async () => {
+      const profileData = createEmptyNexusProfile({
+        industryId: "generic",
+        homeBasedBusiness: false,
+        nexusLocationInNewJersey: true,
+      });
+      await buildUserRoadmap(profileData);
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("permanent-location-business");
     });
   });
 

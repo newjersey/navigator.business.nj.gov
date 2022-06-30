@@ -38,7 +38,7 @@ const getPersonaDimension = (persona: BusinessPersona): string => {
 };
 
 export const sendOnboardingOnSubmitEvents = (newProfileData: ProfileData, pageName?: string): void => {
-  if (pageName === "industry-page-starting") {
+  if (pageName === "industry-page") {
     if (isCannabisLicenseApplicable(newProfileData.industryId)) {
       if (newProfileData.cannabisLicenseType === "CONDITIONAL") {
         analytics.event.onboarding_cannabis_question.submit.conditional_cannabis_license();

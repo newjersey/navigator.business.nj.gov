@@ -1,6 +1,23 @@
 {
   "profileDefaults": {
     "FOREIGN": {
+      "industryId": {
+        "placeholder": "Select an industry",
+        "header": "## Industry",
+        "description": "Which industry best describes your business?",
+        "errorTextRequired": "Industry is a required field."
+      },
+      "legalStructureId": {
+        "placeholder": "Select a legal structure",
+        "header": "## Legal Structure of Your Existing Business",
+        "description": "Please select the legal structure used when you registered your business in your home state. You can find your legal structure on your original `Certificate of Formation|certificate-formation`."
+      },
+      "municipality": {
+        "header": "## Location",
+        "description": "Where in New Jersey will your primary business activities be?",
+        "placeholder": "Type in the town name (i.e Newark, Jersey City, etc)",
+        "errorTextRequired": "Please select a location."
+      },
       "sectorId": {
         "placeholder": "",
         "header": "",
@@ -24,24 +41,6 @@
         "header": "",
         "errorTextRequired": "",
         "description": ""
-      },
-      "municipality": {
-        "placeholder": "",
-        "header": "",
-        "description": "",
-        "errorTextRequired": ""
-      },
-      "homeBased": {
-        "radioButtonYesText": "",
-        "radioButtonNoText": "",
-        "header": "",
-        "description": ""
-      },
-      "industryId": {
-        "placeholder": "",
-        "header": "",
-        "description": "",
-        "errorTextRequired": ""
       }
     }
   }

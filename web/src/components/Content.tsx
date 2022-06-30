@@ -18,6 +18,7 @@ interface ContentProps {
   style?: CSSProperties;
   overrides?: { [key: string]: { ({ children }: { children: string[] }): ReactElement } };
   onClick?: () => void;
+  customComponents?: Record<string, ReactElement>;
 }
 
 export const Content = (props: ContentProps): ReactElement => {
@@ -34,6 +35,9 @@ export const Content = (props: ContentProps): ReactElement => {
     th: Unformatted,
     td: Unformatted,
     tbody: Unformatted,
+    del: (delProps: any) => {
+      return props.customComponents ? props.customComponents[delProps.children] : delProps.children;
+    },
     ...props.overrides,
   };
 
