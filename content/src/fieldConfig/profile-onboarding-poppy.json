@@ -35,6 +35,13 @@
         "REMOTE_WORKER": "",
         "REMOTE_SELLER": "",
         "NEXUS": ""
+      },
+      "locationInNewJersey": {
+        "header": "",
+        "description": "",
+        "errorTextRequired": "",
+        "radioButtonYesText": "",
+        "radioButtonNoText": ""
       }
     }
   }

@@ -4,7 +4,7 @@ import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { noneOfTheAbovePriorityId, priorityTypesObj } from "@/lib/domain-logic/cannabisPriorityTypes";
 import { Task } from "@/lib/types/types";
 import { generateTask, generateTaskLink, generateUserData } from "@/test/factories";
-import { markdownToText, randomElementFromArray, withAuthAlert } from "@/test/helpers";
+import { randomElementFromArray, withAuthAlert } from "@/test/helpers";
 import { useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
 import {
   currentUserData,
@@ -56,7 +56,7 @@ describe("<CannabisPriorityStatusTask />", () => {
     await waitFor(() => {
       expect(screen.getByText("Do this first")).toBeInTheDocument();
     });
-    expect(screen.getByText(markdownToText(Config.cannabisPriorityStatus.tab1Content))).toBeInTheDocument();
+    expect(screen.getByTestId("tab1")).toBeInTheDocument();
   });
 
   it("renders requirements button when checkbox is selected", async () => {

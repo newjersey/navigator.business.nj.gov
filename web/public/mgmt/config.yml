@@ -2033,6 +2033,50 @@ collections:
             fields:
               - { label: Title, name: title, widget: string }
               - { label: Subtitle, name: subtitle, widget: markdown }
+
+  - name: nexus
+    label: Nexus
+    delete: false
+    create: false
+    files:
+      - label: Name Search & Formation
+        name: nexus-name-search
+        file: content/src/fieldConfig/nexus-name-search.json
+        editor:
+          preview: false
+        fields:
+          - label: Name Search
+            name: nexusNameSearch
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Available Text, name: availableText, widget: markdown }
+              - { label: Unavailable Text, name: unavailableText, widget: markdown }
+              - { label: Search Again Button text, name: searchAgainButtonText, widget: string }
+              - {
+                  label: DBA Name Section Header,
+                  name: dbaNameHeader,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - { label: DBA Name Description, name: dbaNameDescription, widget: markdown }
+              - { label: DBA Name Search Placeholder, name: dbaNameSearchPlaceholder, widget: string }
+              - { label: DBA Name Search Label, name: dbaNameSearchLabel, widget: string }
+              - { label: DBA Name Search Submit Button, name: dbaNameSearchSubmitButton, widget: string }
+              - { label: DBA Available Text, name: dbaAvailableText, widget: markdown }
+              - { label: DBA Unavailable Text, name: dbaUnavailableText, widget: markdown }
+
+          - label: Formation Task
+            name: nexusFormationTask
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Warning Text, name: warningText, widget: markdown }
+              - { label: CTA Modal Header, name: dbaCtaModalHeader, widget: string }
+              - { label: CTA Modal Body, name: dbaCtaModalBody, widget: markdown }
+              - { label: CTA Modal Continue Button, name: dbaCtaModalContinueButtonText, widget: string }
+              - { label: CTA Modal Cancel Button, name: dbaCtaModalCancelButtonText, widget: string }
+
   - name: "roadmaps"
     label: "Industry Roadmaps"
     folder: "content/src/roadmaps/industries"
@@ -2806,7 +2850,20 @@ collections:
                       - { label: "Remote Seller Alert", name: "REMOTE_SELLER", widget: "markdown" }
                       - { label: "Remote Worker Alert", name: "REMOTE_WORKER", widget: "markdown" }
                       - { label: "Nexus Alert", name: "NEXUS", widget: "markdown" }
-
+                  - label: Location in New Jersey Question
+                    name: locationInNewJersey
+                    collapsed: true
+                    widget: object
+                    summary: "{{locationInNewJersey}}"
+                    fields:
+                      - { label: "Header", name: "header", widget: "string" }
+                      - {
+                          label: "Error Text (when not selected)",
+                          name: "errorTextRequired",
+                          widget: "string",
+                        }
+                      - { label: "Radio Button - Yes", name: "radioButtonYesText", widget: "string" }
+                      - { label: "Radio Button - No", name: "radioButtonNoText", widget: "string" }
   - name: addons
     label: Roadmap Add-ons
     folder: "content/src/roadmaps/add-ons"

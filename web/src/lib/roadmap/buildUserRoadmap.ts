@@ -28,10 +28,11 @@ const enableFormation = (legalStructureId: string): boolean => {
 };
 
 export const buildUserRoadmap = async (profileData: ProfileData): Promise<Roadmap> => {
-  const addOns: string[] =
-    profileData.businessPersona === "FOREIGN"
-      ? getForeignAddOns(profileData)
-      : getIndustryBasedAddOns(profileData);
+  const addOns: string[] = [
+    ...getForeignAddOns(profileData),
+    ...getIndustryBasedAddOns(profileData),
+    ...getLegalStructureAddOns(profileData),
+  ];
 
   let roadmap = await buildRoadmap({ industryId: profileData.industryId, addOns });
 
@@ -40,6 +41,10 @@ export const buildUserRoadmap = async (profileData: ProfileData): Promise<Roadma
     : cleanupMunicipalitySpecificData(roadmap);
 
   roadmap = addNaicsCodeData(roadmap, profileData.naicsCode);
+
+  if (profileData.businessPersona === "FOREIGN" && profileData.foreignBusinessType === "NEXUS") {
+    roadmap = removeTask(roadmap, "register-for-ein");
+  }
 
   return roadmap;
 };
@@ -55,14 +60,26 @@ const getForeignAddOns = (profileData: ProfileData): string[] => {
     addOns.push("foreign-remote-seller");
   }
 
+  if (profileData.foreignBusinessType === "NEXUS") {
+    addOns.push("foreign-nexus");
+    if (profileData.nexusDbaName !== undefined) {
+      addOns.push("foreign-nexus-dba-name");
+    }
+  }
+
   return addOns;
 };
 
 const getIndustryBasedAddOns = (profileData: ProfileData): string[] => {
-  const addOns = [];
   const industry = LookupIndustryById(profileData.industryId);
+  if (industry.id === "") return [];
+  const addOns = [];
 
-  if (industry.canHavePermanentLocation && !profileData.homeBasedBusiness) {
+  if (
+    industry.canHavePermanentLocation &&
+    !profileData.homeBasedBusiness &&
+    profileData.nexusLocationInNewJersey !== false
+  ) {
     addOns.push("permanent-location-business");
   }
 
@@ -90,7 +107,14 @@ const getIndustryBasedAddOns = (profileData: ProfileData): string[] => {
     addOns.push("reseller");
   }
 
-  if (profileData.legalStructureId) {
+  return addOns;
+};
+
+const getLegalStructureAddOns = (profileData: ProfileData): string[] => {
+  if (!profileData.legalStructureId) return [];
+
+  const addOns = [];
+  if (profileData.businessPersona !== "FOREIGN") {
     if (
       FormationLegalTypes.includes(profileData.legalStructureId as FormationLegalType) &&
       enableFormation(profileData.legalStructureId)
@@ -100,6 +124,10 @@ const getIndustryBasedAddOns = (profileData: ProfileData): string[] => {
       addOns.push("public-record-filing");
     } else if (LookupLegalStructureById(profileData.legalStructureId).hasTradeName) {
       addOns.push("trade-name");
+    }
+  } else {
+    if (LookupLegalStructureById(profileData.legalStructureId).hasTradeName) {
+      addOns.push("trade-name-foreign");
     }
   }
 
@@ -138,6 +166,16 @@ const cleanupMunicipalitySpecificData = (roadmap: Roadmap): Roadmap => {
     countyClerkPhone: "",
     countyClerkWebsite: "",
   });
+};
+
+const removeTask = (roadmap: Roadmap, taskId: string): Roadmap => {
+  return {
+    ...roadmap,
+    steps: roadmap.steps.map((step) => ({
+      ...step,
+      tasks: step.tasks.filter((task) => task.id !== taskId),
+    })),
+  };
 };
 
 const applyTemplateEvalForAllTasks = (roadmap: Roadmap, evalValues: Record<string, string>): Roadmap => {

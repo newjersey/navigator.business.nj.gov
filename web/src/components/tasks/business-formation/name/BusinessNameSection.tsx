@@ -12,7 +12,7 @@ import analytics from "@/lib/utils/analytics";
 import { templateEval } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { FormControl, TextField, useMediaQuery } from "@mui/material";
-import { ReactElement, useContext } from "react";
+import { FormEvent, ReactElement, useContext } from "react";
 
 const SearchBusinessNameErrorLookup: Record<SearchBusinessNameError, string> = {
   BAD_INPUT: Config.searchBusinessNameTask.errorTextBadInput,
@@ -34,7 +34,7 @@ export const BusinessNameSection = (): ReactElement => {
     updateCurrentName,
     onBlurNameField,
     searchBusinessName,
-  } = useBusinessNameSearch(true);
+  } = useBusinessNameSearch({ isBusinessFormation: true, isDba: false });
 
   const submitNameAndContinue = async () => {
     if (!userData) return;
@@ -69,9 +69,13 @@ export const BusinessNameSection = (): ReactElement => {
     initialNextButtonText = `Register & ${initialNextButtonText}`;
   }
 
+  const doSearch = (event: FormEvent<HTMLFormElement>): void => {
+    searchBusinessName(event).catch(() => {});
+  };
+
   return (
     <div data-testid="business-name-section">
-      <form onSubmit={searchBusinessName} className="usa-prose grid-container padding-0">
+      <form onSubmit={doSearch} className="usa-prose grid-container padding-0">
         <Content>{state.displayContent.businessNameCheck.contentMd}</Content>
         <div className="text-bold margin-top-1">{Config.businessFormationDefaults.nameCheckFieldLabel}</div>
         <div className="grid-row grid-gap-2">

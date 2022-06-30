@@ -148,6 +148,8 @@ export const generateProfileData = (
     naicsCode: randomInt(6).toString(),
     foreignBusinessType: undefined,
     foreignBusinessTypeIds: [],
+    nexusLocationInNewJersey: undefined,
+    nexusDbaName: undefined,
     ...overrides,
   };
 };

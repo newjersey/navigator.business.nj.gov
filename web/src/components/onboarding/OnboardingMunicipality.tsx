@@ -39,8 +39,9 @@ export const OnboardingMunicipality = ({ headerAriaLevel = 2, ...props }: Props)
   const headerLevelTwo = setHeaderRole(headerAriaLevel, "h3-styling");
 
   const renderHomeBasedBusinessQuestion =
-    isHomeBasedBusinessApplicable(state.profileData.industryId) ||
-    state.profileData.businessPersona === "OWNING";
+    state.profileData.businessPersona !== "FOREIGN" &&
+    (isHomeBasedBusinessApplicable(state.profileData.industryId) ||
+      state.profileData.businessPersona === "OWNING");
 
   return (
     <>

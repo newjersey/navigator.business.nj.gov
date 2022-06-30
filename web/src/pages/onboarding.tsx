@@ -96,11 +96,29 @@ const OnboardingPage = (props: Props): ReactElement => {
   );
 
   const onboardingFlows = useMemo(() => {
-    const onboardingFlows = getOnboardingFlows(profileData, user, onValidation, fieldStates);
+    let onboardingFlows = getOnboardingFlows(profileData, user, onValidation, fieldStates);
+
+    const removePageFromFlow = (pageName: string, flow: FlowType): void => {
+      onboardingFlows = {
+        ...onboardingFlows,
+        [flow]: {
+          ...onboardingFlows[flow],
+          pages: onboardingFlows[flow].pages.filter((it) => it.name !== pageName),
+        },
+      };
+    };
+
     const requiresPublicFiling = LookupLegalStructureById(profileData.legalStructureId).requiresPublicFiling;
     if (!requiresPublicFiling) {
-      onboardingFlows["OWNING"].pages.splice(1, 1);
+      removePageFromFlow("date-and-entity-id-for-public-filing", "OWNING");
     }
+
+    if (profileData.businessPersona === "FOREIGN" && profileData.foreignBusinessType !== "NEXUS") {
+      removePageFromFlow("industry-page", "FOREIGN");
+      removePageFromFlow("legal-structure-page", "FOREIGN");
+      removePageFromFlow("municipality-page", "FOREIGN");
+    }
+
     return onboardingFlows;
   }, [profileData, user, onValidation, fieldStates]);
 
@@ -191,19 +209,21 @@ const OnboardingPage = (props: Props): ReactElement => {
 
     const currentPageFlow = onboardingFlows[currentFlow].pages[page.current - 1];
     const errorMap = currentPageFlow.getErrorMap();
-    if (errorMap) {
-      if (errorMap.banner && errorMap.banner.some((error) => !error.valid)) {
+    const hasErrors = {
+      banner: errorMap?.banner && errorMap?.banner.some((error) => !error.valid),
+      inline: errorMap?.inline && errorMap?.inline.some((error) => !error.valid),
+    };
+    if (hasErrors.banner || hasErrors.inline) {
+      if (hasErrors.banner && errorMap?.banner) {
         setError(errorMap.banner.find((error) => !error.valid)?.name);
-        scrollToTop();
-        headerRef.current?.focus();
-        return;
-      } else if (errorMap.inline && errorMap.inline.some((error) => !error.valid)) {
+      }
+      if (hasErrors.inline && errorMap?.inline) {
         setAlert("ERROR");
         onValidation(errorMap.inline.find((error) => !error.valid)?.name as ProfileFields, true);
-        scrollToTop();
-        headerRef.current?.focus();
-        return;
       }
+      headerRef.current?.focus();
+      scrollToTop();
+      return;
     }
 
     let newProfileData = profileData;
@@ -243,6 +263,8 @@ const OnboardingPage = (props: Props): ReactElement => {
         naicsCode: "",
         foreignBusinessType: undefined,
         foreignBusinessTypeIds: [],
+        nexusLocationInNewJersey: undefined,
+        nexusDbaName: undefined,
       };
 
       setProfileData(newProfileData);

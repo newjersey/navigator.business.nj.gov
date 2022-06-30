@@ -80,7 +80,7 @@ export const CannabisPriorityTypes = (props: Props): ReactElement => {
   };
 
   return (
-    <>
+    <div data-testid="tab1">
       <Content>{Config.cannabisPriorityStatus.tab1Content}</Content>
       <div className="usa-prose margin-bottom-3">
         <ul style={{ marginTop: 0 }}>
@@ -109,6 +109,6 @@ export const CannabisPriorityTypes = (props: Props): ReactElement => {
           </Button>
         )}
       </div>
-    </>
+    </div>
   );
 };

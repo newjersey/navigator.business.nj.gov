@@ -7,6 +7,7 @@ import { OnboardingForeignBusinessType } from "@/components/onboarding/Onboardin
 import { OnboardingIndustry } from "@/components/onboarding/OnboardingIndustry";
 import { OnboardingLegalStructure } from "@/components/onboarding/OnboardingLegalStructure";
 import { OnboardingLegalStructureDropdown } from "@/components/onboarding/OnboardingLegalStructureDropDown";
+import { OnboardingLocationInNewJersey } from "@/components/onboarding/OnboardingLocationInNewJersey";
 import { OnboardingMunicipality } from "@/components/onboarding/OnboardingMunicipality";
 import { OnboardingNameAndEmail } from "@/components/onboarding/OnboardingNameAndEmail";
 import { OnboardingOwnership } from "@/components/onboarding/OnboardingOwnership";
@@ -56,6 +57,7 @@ export const getOnboardingFlows = (
         }),
       },
       {
+        name: "date-and-entity-id-for-public-filing",
         component: (
           <>
             <OnboardingDateOfFormation onValidation={onValidation} fieldStates={fieldStates} />
@@ -141,7 +143,7 @@ export const getOnboardingFlows = (
         }),
       },
       {
-        name: "industry-page-starting",
+        name: "industry-page",
         component: <OnboardingIndustry onValidation={onValidation} fieldStates={fieldStates} />,
         getErrorMap: () => ({
           inline: [{ name: "industryId", valid: profileData.industryId !== undefined }],
@@ -201,7 +203,41 @@ export const getOnboardingFlows = (
         ),
         getErrorMap: () => ({
           banner: [
-            { name: "REQUIRE_FOREIGN_BUSINESS_TYPE", valid: profileData.foreignBusinessType !== undefined },
+            { name: "REQUIRED_FOREIGN_BUSINESS_TYPE", valid: profileData.foreignBusinessType !== undefined },
+          ],
+        }),
+      },
+      {
+        name: "industry-page",
+        component: <OnboardingIndustry onValidation={onValidation} fieldStates={fieldStates} />,
+        getErrorMap: () => ({
+          inline: [{ name: "industryId", valid: profileData.industryId !== undefined }],
+        }),
+      },
+      {
+        name: "legal-structure-page",
+        component: <OnboardingLegalStructure />,
+        getErrorMap: () => ({
+          banner: [{ name: "REQUIRED_LEGAL", valid: profileData.legalStructureId !== undefined }],
+        }),
+      },
+      {
+        name: "municipality-page",
+        component: (
+          <>
+            <OnboardingMunicipality onValidation={onValidation} fieldStates={fieldStates} />
+            <div className="margin-top-3">
+              <OnboardingLocationInNewJersey />
+            </div>
+          </>
+        ),
+        getErrorMap: () => ({
+          inline: [{ name: "municipality", valid: profileData.municipality !== undefined }],
+          banner: [
+            {
+              name: "REQUIRED_NEXUS_LOCATION_IN_NJ",
+              valid: profileData.nexusLocationInNewJersey !== undefined,
+            },
           ],
         }),
       },
