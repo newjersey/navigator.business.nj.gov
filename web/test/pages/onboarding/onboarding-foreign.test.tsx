@@ -1,7 +1,7 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import { templateEval } from "@/lib/utils/helpers";
-import { generateProfileData, generateUserData } from "@/test/factories";
-import { expectContent } from "@/test/helpers";
+import { generateMunicipality, generateProfileData, generateUserData } from "@/test/factories";
+import { expectContent, markdownToText } from "@/test/helpers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import {
   currentUserData,
@@ -27,7 +27,7 @@ jest.mock("@/lib/api-client/apiClient", () => ({
 }));
 
 const Config = getMergedConfig();
-const { employeesInNJ, transactionsInNJ, revenueInNJ, none } =
+const { employeesInNJ, transactionsInNJ, revenueInNJ, operationsInNJ, none } =
   Config.profileDefaults.FOREIGN.foreignBusinessType.optionContent;
 
 const generateTestUserData = (overrides: Partial<ProfileData>) =>
@@ -63,20 +63,6 @@ describe("onboarding - foreign business", () => {
         screen.getByText(templateEval(Config.onboardingDefaults.stepXTemplate, { currentPage: "2" }))
       ).toBeInTheDocument();
     });
-
-    it("uses standard template eval for step 3 label", () => {
-      const userData = generateTestUserData({
-        businessPersona: "FOREIGN",
-        foreignBusinessType: "REMOTE_SELLER",
-      });
-      useMockRouter({ isReady: true, query: { page: "3" } });
-      renderPage({ userData });
-      expect(
-        screen.getByText(
-          templateEval(Config.onboardingDefaults.stepXofYTemplate, { currentPage: "3", totalPages: "3" })
-        )
-      ).toBeInTheDocument();
-    });
   });
 
   describe("page 2", () => {
@@ -92,6 +78,17 @@ describe("onboarding - foreign business", () => {
     it("displays out-of-state business question", () => {
       renderPage({ userData });
       expect(screen.getByLabelText("Out of state business")).toBeInTheDocument();
+    });
+
+    it("sets user as Nexus (and displays alert) when operationsInNJ checkbox checked", async () => {
+      const { page } = renderPage({ userData });
+      expectContent(Config.profileDefaults.FOREIGN.foreignBusinessType.NEXUS, { exists: false }, screen);
+      page.checkByLabelText(operationsInNJ);
+      expectContent(Config.profileDefaults.FOREIGN.foreignBusinessType.NEXUS, { exists: true }, screen);
+
+      await page.visitStep(3);
+      expect(currentUserData().profileData.foreignBusinessType).toEqual("NEXUS");
+      expect(currentUserData().profileData.foreignBusinessTypeIds).toEqual(["operationsInNJ"]);
     });
 
     it("sets user as Remote Workers (and displays alert) when employeesInNJ checkbox checked", async () => {
@@ -220,7 +217,213 @@ describe("onboarding - foreign business", () => {
     });
   });
 
-  describe("validates self-reg step", () => {
+  describe("Remote Seller onboarding", () => {
+    it("skips the industry, legal structure, and location questions", () => {
+      const userData = generateTestUserData({
+        businessPersona: "FOREIGN",
+        foreignBusinessType: "REMOTE_SELLER",
+      });
+
+      useMockRouter({ isReady: true, query: { page: "3" } });
+      renderPage({ userData });
+      expect(
+        screen.getByText(
+          templateEval(Config.onboardingDefaults.stepXofYTemplate, { currentPage: "3", totalPages: "3" })
+        )
+      ).toBeInTheDocument();
+      expect(screen.getByText(Config.selfRegistration.nameFieldLabel)).toBeInTheDocument();
+    });
+  });
+
+  describe("REMOTE_WORKER onboarding", () => {
+    it("skips the industry, legal structure, and location questions", () => {
+      const userData = generateTestUserData({
+        businessPersona: "FOREIGN",
+        foreignBusinessType: "REMOTE_WORKER",
+      });
+
+      useMockRouter({ isReady: true, query: { page: "3" } });
+      renderPage({ userData });
+      expect(
+        screen.getByText(
+          templateEval(Config.onboardingDefaults.stepXofYTemplate, { currentPage: "3", totalPages: "3" })
+        )
+      ).toBeInTheDocument();
+      expect(screen.getByText(Config.selfRegistration.nameFieldLabel)).toBeInTheDocument();
+    });
+  });
+
+  describe("Nexus - step 3", () => {
+    let userData: UserData;
+
+    beforeEach(() => {
+      userData = generateTestUserData({
+        industryId: undefined,
+        businessPersona: "FOREIGN",
+        foreignBusinessType: "NEXUS",
+      });
+      useMockRouter({ isReady: true, query: { page: "3" } });
+    });
+
+    it("displays step 3 of 6 total pages", () => {
+      renderPage({ userData });
+      expect(
+        screen.getByText(
+          templateEval(Config.onboardingDefaults.stepXofYTemplate, { currentPage: "3", totalPages: "6" })
+        )
+      ).toBeInTheDocument();
+    });
+
+    it("displays industry question", async () => {
+      const { page } = renderPage({ userData });
+      page.selectByText("Industry", "All Other Businesses");
+      await page.visitStep(4);
+      expect(screen.queryByTestId("toast-alert-ERROR")).not.toBeInTheDocument();
+    });
+
+    it("prevents user from moving past Step 3 if you have not selected an industry", async () => {
+      useMockRouter({ isReady: true, query: { page: "3" } });
+      const { page } = renderPage({ userData });
+      act(() => page.clickNext());
+      expect(screen.getByTestId("step-3")).toBeInTheDocument();
+      expect(screen.queryByTestId("step-4")).not.toBeInTheDocument();
+      expect(screen.getByTestId("toast-alert-ERROR")).toBeInTheDocument();
+    });
+  });
+
+  describe("Nexus - step 4", () => {
+    let userData: UserData;
+
+    beforeEach(() => {
+      userData = generateTestUserData({
+        industryId: "generic",
+        legalStructureId: undefined,
+        businessPersona: "FOREIGN",
+        foreignBusinessType: "NEXUS",
+      });
+      useMockRouter({ isReady: true, query: { page: "4" } });
+    });
+
+    it("displays legal structure question", async () => {
+      const { page } = renderPage({ userData });
+      page.chooseRadio("general-partnership");
+      await page.visitStep(5);
+      expect(screen.queryByTestId("error-alert-REQUIRED_LEGAL")).not.toBeInTheDocument();
+    });
+
+    it("prevents user from moving past Step 4 if you have not selected a legal structure", async () => {
+      const { page } = renderPage({ userData });
+      act(() => page.clickNext());
+      expect(screen.getByTestId("step-4")).toBeInTheDocument();
+      expect(screen.queryByTestId("step-5")).not.toBeInTheDocument();
+      expect(screen.getByTestId("error-alert-REQUIRED_LEGAL")).toBeInTheDocument();
+    });
+  });
+
+  describe("Nexus - step 5", () => {
+    let userData: UserData;
+    const newark = generateMunicipality({ displayName: "Newark" });
+
+    beforeEach(() => {
+      userData = generateTestUserData({
+        industryId: "generic",
+        legalStructureId: "limited-liability-company",
+        businessPersona: "FOREIGN",
+        foreignBusinessType: "NEXUS",
+        municipality: undefined,
+        homeBasedBusiness: true,
+      });
+      useMockRouter({ isReady: true, query: { page: "5" } });
+    });
+
+    it("displays location question and saves in profileData", async () => {
+      const { page } = renderPage({ userData, municipalities: [newark] });
+      page.selectByText("Location", "Newark");
+      page.chooseRadio("location-in-new-jersey-true");
+      await page.visitStep(6);
+      expect(currentUserData().profileData.municipality?.displayName).toEqual("Newark");
+    });
+
+    it("does not display home-based business question even for applicable industry (generic)", () => {
+      renderPage({ userData });
+      expect(
+        screen.queryByText(markdownToText(Config.profileDefaults.FOREIGN.homeBased.header))
+      ).not.toBeInTheDocument();
+    });
+
+    it("displays Location In New Jersey question", () => {
+      renderPage({ userData });
+      expect(
+        screen.getByText(markdownToText(Config.profileDefaults.FOREIGN.locationInNewJersey.header))
+      ).toBeInTheDocument();
+    });
+
+    it("sets homeBasedBusiness to false when YES is selected for Location In New Jersey", async () => {
+      const { page } = renderPage({ userData, municipalities: [newark] });
+      page.selectByText("Location", "Newark");
+      page.chooseRadio("location-in-new-jersey-true");
+      await page.visitStep(6);
+      expect(currentUserData().profileData.homeBasedBusiness).toEqual(false);
+      expect(currentUserData().profileData.nexusLocationInNewJersey).toEqual(true);
+    });
+
+    it("displays homeBasedBusiness question when NO is selected for Location In New Jersey", async () => {
+      const { page } = renderPage({ userData, municipalities: [newark] });
+      page.selectByText("Location", "Newark");
+      expect(
+        screen.queryByText(markdownToText(Config.profileDefaults.FOREIGN.homeBased.header))
+      ).not.toBeInTheDocument();
+      page.chooseRadio("location-in-new-jersey-false");
+      expect(
+        screen.getByText(markdownToText(Config.profileDefaults.FOREIGN.homeBased.header))
+      ).toBeInTheDocument();
+    });
+
+    it("prevents user from moving past Step 5 if you have not selected a location", async () => {
+      const { page } = renderPage({ userData, municipalities: [newark] });
+      act(() => page.clickNext());
+      page.chooseRadio("location-in-new-jersey-true");
+      expect(screen.getByTestId("step-5")).toBeInTheDocument();
+      expect(screen.queryByTestId("step-6")).not.toBeInTheDocument();
+      expect(
+        screen.getByText(Config.profileDefaults.FOREIGN.municipality.errorTextRequired)
+      ).toBeInTheDocument();
+      expect(screen.getByTestId("toast-alert-ERROR")).toBeInTheDocument();
+
+      page.selectByText("Location", "Newark");
+      await page.visitStep(6);
+    });
+
+    it("prevents user from moving past Step 5 if you have not selected whether Location is in New Jersey", async () => {
+      const { page } = renderPage({ userData, municipalities: [newark] });
+      page.selectByText("Location", "Newark");
+      act(() => page.clickNext());
+      expect(screen.getByTestId("step-5")).toBeInTheDocument();
+      expect(screen.queryByTestId("step-6")).not.toBeInTheDocument();
+      expect(
+        screen.getByText(Config.profileDefaults.FOREIGN.locationInNewJersey.errorTextRequired)
+      ).toBeInTheDocument();
+
+      page.chooseRadio("location-in-new-jersey-true");
+      await page.visitStep(6);
+    });
+
+    it("shows both error messages if both are missing", async () => {
+      const { page } = renderPage({ userData, municipalities: [newark] });
+      act(() => page.clickNext());
+      expect(screen.getByTestId("step-5")).toBeInTheDocument();
+      expect(screen.queryByTestId("step-6")).not.toBeInTheDocument();
+      expect(
+        screen.getByText(Config.profileDefaults.FOREIGN.locationInNewJersey.errorTextRequired)
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.profileDefaults.FOREIGN.municipality.errorTextRequired)
+      ).toBeInTheDocument();
+      expect(screen.getByTestId("toast-alert-ERROR")).toBeInTheDocument();
+    });
+  });
+
+  describe("validates self-reg step for non-nexus", () => {
     runSelfRegPageTests({ businessPersona: "FOREIGN", selfRegPage: "3" });
   });
 });

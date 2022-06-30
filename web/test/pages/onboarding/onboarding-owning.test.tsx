@@ -89,7 +89,7 @@ describe("onboarding - owning a business", () => {
   });
 
   describe("page 2", () => {
-    it("hides date of formation and entity id if legal structure  does not require Public Filing", () => {
+    it("skips date-of-formation & entity-id page if legal structure  does not require Public Filing", () => {
       const userData = generateTestUserData({
         businessPersona: "OWNING",
         legalStructureId: "sole-proprietorship",
@@ -99,6 +99,12 @@ describe("onboarding - owning a business", () => {
       expect(screen.queryByLabelText("Date of formation")).not.toBeInTheDocument();
       expect(screen.queryByLabelText("Entity id")).not.toBeInTheDocument();
       expect(screen.getByLabelText("Business name")).toBeInTheDocument();
+
+      expect(
+        screen.getByText(
+          templateEval(Config.onboardingDefaults.stepXofYTemplate, { currentPage: "2", totalPages: "4" })
+        )
+      ).toBeInTheDocument();
     });
 
     it("prevents user from moving past Step 2 if your entity id is invalid", async () => {

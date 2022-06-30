@@ -147,6 +147,8 @@ export const generateProfileData = (overrides: Partial<ProfileData>): ProfileDat
     naicsCode: randomInt(6).toString(),
     foreignBusinessType: undefined,
     foreignBusinessTypeIds: [],
+    nexusDbaName: undefined,
+    nexusLocationInNewJersey: undefined,
     ...overrides,
   };
 };

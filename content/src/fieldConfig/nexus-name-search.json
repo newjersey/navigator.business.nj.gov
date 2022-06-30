@@ -1,0 +1,21 @@
+{
+  "nexusNameSearch": {
+    "availableText": "**\"${name}\" is available!** This name will be registered with the State ONLY after you submit your [business authorization](/tasks/authorize-business-entity-foreign).",
+    "unavailableText": "Sorry, the name \"${name}\" is already taken in New Jersey. You’ll have to create a Doing Business As (DBA) name, below. \n(If you entered the wrong name, ${searchAgainButton}).",
+    "searchAgainButtonText": "search again here",
+    "dbaNameHeader": "### Find a Doing Business As (DBA) Name",
+    "dbaNameDescription": "Since the business name in your state of origin is unavailable, you will need a DBA name to register your business in New Jersey. Your DBA is the name your business will be referred to in New Jersey.",
+    "dbaNameSearchLabel": "DBA Name Search",
+    "dbaNameSearchPlaceholder": "Enter an Alternate Name",
+    "dbaNameSearchSubmitButton": "Check Availability",
+    "dbaAvailableText": "\"${name}\" is available!\n\nYou can register this name when you [Authorize Your Business](/tasks/authorize-business-entity-foreign).",
+    "dbaUnavailableText": "Sorry, the name \"${name}\" is already taken in New Jersey. Please search for another DBA name. Here are similar business names that are already taken:"
+  },
+  "nexusFormationTask": {
+    "warningText": "To view this task, you must first complete [Check if Your Business Name is Available in New Jersey](/tasks/search-business-name-nexus)",
+    "dbaCtaModalHeader": "Before You Start",
+    "dbaCtaModalBody": "This link will take you to a PDF.\n\nOnly pages 23 and 24 are relevant to your formation. Complete those pages and send them to Treasury, the address is on the top left of page 23.",
+    "dbaCtaModalContinueButtonText": "Form My Business",
+    "dbaCtaModalCancelButtonText": "Cancel"
+  }
+}

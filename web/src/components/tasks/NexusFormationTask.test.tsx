@@ -1,0 +1,89 @@
+import { NexusFormationTask } from "@/components/tasks/NexusFormationTask";
+import { getMergedConfig } from "@/contexts/configContext";
+import * as taskFetcher from "@/lib/async-content-fetchers/fetchTaskByFilename";
+import { Task } from "@/lib/types/types";
+import { generateTask } from "@/test/factories";
+import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
+import { useMockProfileData } from "@/test/mock/mockUseUserData";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+
+jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
+jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
+jest.mock("@/lib/async-content-fetchers/fetchTaskByFilename", () => ({ fetchTaskByFilename: jest.fn() }));
+const mockFetchTaskByFilename = (taskFetcher as jest.Mocked<typeof taskFetcher>).fetchTaskByFilename;
+
+const Config = getMergedConfig();
+
+describe("<NexusFormationTask />", () => {
+  let nexusTask: Task;
+
+  beforeEach(() => {
+    jest.resetAllMocks();
+    useMockRoadmap({});
+    nexusTask = generateTask({
+      id: "form-business-entity-foreign",
+      contentMd: "stuff ${beginIndentationSection} things ${endIndentationSection} more",
+    });
+  });
+
+  const renderTask = () => {
+    render(<NexusFormationTask task={nexusTask} />);
+  };
+
+  it("shows warning when no business name", () => {
+    useMockProfileData({ businessName: "", nexusDbaName: undefined });
+    renderTask();
+    expect(screen.getByTestId("name-search-warning")).toBeInTheDocument();
+    expect(screen.queryByText(nexusTask.callToActionText)).not.toBeInTheDocument();
+  });
+
+  it("shows warning when business name exists but DBA name is empty", () => {
+    useMockProfileData({ businessName: "some name", nexusDbaName: "" });
+    renderTask();
+    expect(screen.getByTestId("name-search-warning")).toBeInTheDocument();
+    expect(screen.queryByText(nexusTask.callToActionText)).not.toBeInTheDocument();
+  });
+
+  describe("when not DBA", () => {
+    beforeEach(() => {
+      useMockProfileData({ businessName: "some name", nexusDbaName: undefined });
+    });
+
+    it("displays form-business-entity legacy task content", async () => {
+      mockFetchTaskByFilename.mockResolvedValue(
+        generateTask({
+          contentMd: "legacy task content",
+          name: "legacy task name",
+          callToActionText: "legacy task cta",
+        })
+      );
+
+      renderTask();
+      await waitFor(() => {
+        expect(screen.getByText("legacy task name")).toBeInTheDocument();
+      });
+      expect(screen.getByText("legacy task content")).toBeInTheDocument();
+      expect(screen.getByText("legacy task cta")).toBeInTheDocument();
+    });
+  });
+
+  describe("when DBA", () => {
+    beforeEach(() => {
+      useMockProfileData({ businessName: "some name", nexusDbaName: "my DBA name" });
+    });
+
+    it("displays form-business-entity-foreign task content", async () => {
+      renderTask();
+      expect(screen.getByText(nexusTask.name)).toBeInTheDocument();
+      expect(screen.getByText(nexusTask.callToActionText)).toBeInTheDocument();
+    });
+
+    it("shows modal when clicking CTA", () => {
+      renderTask();
+      fireEvent.click(screen.getByText(nexusTask.callToActionText));
+      expect(screen.getByText(Config.nexusFormationTask.dbaCtaModalHeader)).toBeInTheDocument();
+      expect(screen.getByText(Config.nexusFormationTask.dbaCtaModalContinueButtonText)).toBeInTheDocument();
+      expect(screen.getByText(Config.nexusFormationTask.dbaCtaModalCancelButtonText)).toBeInTheDocument();
+    });
+  });
+});

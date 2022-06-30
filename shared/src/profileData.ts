@@ -32,6 +32,8 @@ export interface ProfileData {
   readonly naicsCode: string;
   readonly foreignBusinessType: ForeignBusinessType | undefined;
   readonly foreignBusinessTypeIds: string[];
+  readonly nexusLocationInNewJersey: boolean | undefined;
+  readonly nexusDbaName: string | undefined;
 }
 
 export const emptyProfileData: ProfileData = {
@@ -60,6 +62,8 @@ export const emptyProfileData: ProfileData = {
   naicsCode: "",
   foreignBusinessType: undefined,
   foreignBusinessTypeIds: [],
+  nexusLocationInNewJersey: undefined,
+  nexusDbaName: undefined,
 };
 
 export const createEmptyProfileData = (): ProfileData => {
@@ -69,4 +73,4 @@ export const createEmptyProfileData = (): ProfileData => {
 export type CannabisLicenseType = "CONDITIONAL" | "ANNUAL" | undefined;
 
 export type BusinessPersona = "STARTING" | "OWNING" | "FOREIGN" | undefined;
-export type ForeignBusinessType = "REMOTE_WORKER" | "REMOTE_SELLER" | "NONE" | undefined;
+export type ForeignBusinessType = "REMOTE_WORKER" | "REMOTE_SELLER" | "NEXUS" | "NONE" | undefined;

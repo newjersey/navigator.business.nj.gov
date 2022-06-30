@@ -10,7 +10,9 @@ import { CannabisApplyForLicenseTask } from "@/components/tasks/cannabis/Cannabi
 import { CannabisPriorityStatusTask } from "@/components/tasks/cannabis/CannabisPriorityStatusTask";
 import { LicenseTask } from "@/components/tasks/LicenseTask";
 import { NaicsCodeTask } from "@/components/tasks/NaicsCodeTask";
-import { SearchBusinessName } from "@/components/tasks/SearchBusinessName";
+import { NexusFormationTask } from "@/components/tasks/NexusFormationTask";
+import { NexusSearchBusinessNameTask } from "@/components/tasks/search-business-name/NexusSearchBusinessNameTask";
+import { SearchBusinessNameTask } from "@/components/tasks/search-business-name/SearchBusinessNameTask";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
@@ -116,7 +118,8 @@ const TaskPage = (props: Props): ReactElement => {
         <NavBar task={props.task} sidebarPageLayout={true} />
         <TaskSidebarPageLayout task={props.task} belowBoxComponent={renderNextAndPreviousButtons()}>
           {rswitch(props.task.id, {
-            "search-business-name": <SearchBusinessName task={props.task} />,
+            "search-business-name": <SearchBusinessNameTask task={props.task} />,
+            "search-business-name-nexus": <NexusSearchBusinessNameTask task={props.task} />,
             "apply-for-shop-license": <LicenseTask task={props.task} />,
             "register-consumer-affairs": <LicenseTask task={props.task} />,
             "pharmacy-license": <LicenseTask task={props.task} />,
@@ -127,6 +130,7 @@ const TaskPage = (props: Props): ReactElement => {
             "priority-status-cannabis": <CannabisPriorityStatusTask task={props.task} />,
             "conditional-permit-cannabis": <CannabisApplyForLicenseTask task={props.task} />,
             "annual-license-cannabis": <CannabisApplyForLicenseTask task={props.task} />,
+            "form-business-entity-foreign": <NexusFormationTask task={props.task} />,
             default: getTaskBody(),
           })}
         </TaskSidebarPageLayout>

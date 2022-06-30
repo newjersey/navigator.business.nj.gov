@@ -4,12 +4,11 @@ import * as CannabisLicenseTab1 from "@businessnjgovnavigator/content/fieldConfi
 import * as CannabisPriorityStatusTab1 from "@businessnjgovnavigator/content/fieldConfig/cannabis-priority-status-tab1.json";
 import * as CannabisPriorityStatusTab2 from "@businessnjgovnavigator/content/fieldConfig/cannabis-priority-status-tab2.json";
 import * as ConfigOriginal from "@businessnjgovnavigator/content/fieldConfig/config.json";
+import * as NexusNameSearch from "@businessnjgovnavigator/content/fieldConfig/nexus-name-search.json";
 import * as ProfileTabDocumentsDakota from "@businessnjgovnavigator/content/fieldConfig/profile-documents-dakota.json";
 import * as ProfileTabDocumentsOscar from "@businessnjgovnavigator/content/fieldConfig/profile-documents-oscar.json";
 import * as ProfileTabDocumentsPoppy from "@businessnjgovnavigator/content/fieldConfig/profile-documents-poppy.json";
-import * as ProfileTabIndustrySpecificDakota from "@businessnjgovnavigator/content/fieldConfig/profile-industries-dakota.json";
-import * as ProfileTabIndustrySpecificOscar from "@businessnjgovnavigator/content/fieldConfig/profile-industries-oscar.json";
-import * as ProfileTabIndustrySpecificPoppy from "@businessnjgovnavigator/content/fieldConfig/profile-industries-poppy.json";
+import * as ProfileTabIndustrySpecific from "@businessnjgovnavigator/content/fieldConfig/profile-industries.json";
 import * as ProfileTabInfoDakota from "@businessnjgovnavigator/content/fieldConfig/profile-info-dakota.json";
 import * as ProfileTabInfoOscar from "@businessnjgovnavigator/content/fieldConfig/profile-info-oscar.json";
 import * as ProfileTabInfoPoppy from "@businessnjgovnavigator/content/fieldConfig/profile-info-poppy.json";
@@ -22,6 +21,7 @@ import * as ProfileTabNumbersPoppy from "@businessnjgovnavigator/content/fieldCo
 import * as ProfileOnboardingDakota from "@businessnjgovnavigator/content/fieldConfig/profile-onboarding-dakota.json";
 import * as ProfileOnboardingOscar from "@businessnjgovnavigator/content/fieldConfig/profile-onboarding-oscar.json";
 import * as ProfileOnboardingPoppy from "@businessnjgovnavigator/content/fieldConfig/profile-onboarding-poppy.json";
+
 import merge from "lodash.merge";
 import { createContext } from "react";
 
@@ -41,9 +41,7 @@ const merged = JSON.parse(
       ProfileTabNotesOscar,
       ProfileTabNotesPoppy,
       ProfileTabNotesDakota,
-      ProfileTabIndustrySpecificPoppy,
-      ProfileTabIndustrySpecificOscar,
-      ProfileTabIndustrySpecificDakota,
+      ProfileTabIndustrySpecific,
       ProfileOnboardingOscar,
       ProfileOnboardingPoppy,
       ProfileOnboardingDakota,
@@ -51,7 +49,8 @@ const merged = JSON.parse(
       CannabisPriorityStatusTab2,
       CannabisLicenseTab1,
       CannabisLicenseAnnualTab2,
-      CannabisLicenseConditionalTab2
+      CannabisLicenseConditionalTab2,
+      NexusNameSearch
     )
   )
 );
@@ -69,9 +68,7 @@ export type ConfigType = typeof ConfigOriginal &
   typeof ProfileTabNotesOscar &
   typeof ProfileTabNotesPoppy &
   typeof ProfileTabNotesDakota &
-  typeof ProfileTabIndustrySpecificPoppy &
-  typeof ProfileTabIndustrySpecificOscar &
-  typeof ProfileTabIndustrySpecificDakota &
+  typeof ProfileTabIndustrySpecific &
   typeof ProfileOnboardingOscar &
   typeof ProfileOnboardingPoppy &
   typeof ProfileOnboardingDakota &
@@ -79,7 +76,8 @@ export type ConfigType = typeof ConfigOriginal &
   typeof CannabisPriorityStatusTab2 &
   typeof CannabisLicenseTab1 &
   typeof CannabisLicenseAnnualTab2 &
-  typeof CannabisLicenseConditionalTab2;
+  typeof CannabisLicenseConditionalTab2 &
+  typeof NexusNameSearch;
 
 export const getMergedConfig = (): ConfigType => {
   return merge(
@@ -96,9 +94,7 @@ export const getMergedConfig = (): ConfigType => {
     ProfileTabNotesOscar,
     ProfileTabNotesPoppy,
     ProfileTabNotesDakota,
-    ProfileTabIndustrySpecificPoppy,
-    ProfileTabIndustrySpecificOscar,
-    ProfileTabIndustrySpecificDakota,
+    ProfileTabIndustrySpecific,
     ProfileOnboardingOscar,
     ProfileOnboardingPoppy,
     ProfileOnboardingDakota,
@@ -106,7 +102,8 @@ export const getMergedConfig = (): ConfigType => {
     CannabisPriorityStatusTab2,
     CannabisLicenseTab1,
     CannabisLicenseAnnualTab2,
-    CannabisLicenseConditionalTab2
+    CannabisLicenseConditionalTab2,
+    NexusNameSearch
   );
 };
 

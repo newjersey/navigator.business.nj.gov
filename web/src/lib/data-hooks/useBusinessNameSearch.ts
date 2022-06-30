@@ -5,9 +5,13 @@ import analytics from "@/lib/utils/analytics";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { ChangeEvent, FocusEvent, FormEvent, useState } from "react";
 
-export const useBusinessNameSearch = (
-  isBusinessFormation: boolean
-): {
+export const useBusinessNameSearch = ({
+  isBusinessFormation,
+  isDba,
+}: {
+  isBusinessFormation: boolean;
+  isDba: boolean;
+}): {
   currentName: string;
   submittedName: string;
   isNameFieldEmpty: boolean;
@@ -17,9 +21,12 @@ export const useBusinessNameSearch = (
   updateButtonClicked: boolean;
   updateCurrentName: (event: ChangeEvent<HTMLInputElement>) => void;
   onBlurNameField: (event: FocusEvent<HTMLInputElement>) => void;
-  searchBusinessName: (event: FormEvent<HTMLFormElement>) => Promise<void>;
+  searchBusinessName: (
+    event?: FormEvent<HTMLFormElement>
+  ) => Promise<{ nameAvailability: NameAvailability; submittedName: string }>;
   updateNameOnProfile: () => void;
   setCurrentName: (name: string) => void;
+  resetSearch: () => void;
 } => {
   const { userData, update } = useUserData();
 
@@ -33,7 +40,7 @@ export const useBusinessNameSearch = (
 
   useMountEffectWhenDefined(() => {
     if (!userData) return;
-    setCurrentName(userData.profileData.businessName);
+    setCurrentName(isDba ? userData.profileData.nexusDbaName || "" : userData.profileData.businessName);
   }, userData);
 
   const updateCurrentName = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -44,8 +51,18 @@ export const useBusinessNameSearch = (
     setIsNameFieldEmpty(event.target.value.length === 0);
   };
 
-  const searchBusinessName = async (event: FormEvent<HTMLFormElement>): Promise<void> => {
-    event.preventDefault();
+  const resetSearch = () => {
+    setNameAvailability(undefined);
+    setUpdateButtonClicked(false);
+    setError(undefined);
+    setCurrentName("");
+    setIsNameFieldEmpty(true);
+  };
+
+  const searchBusinessName = async (
+    event?: FormEvent<HTMLFormElement>
+  ): Promise<{ nameAvailability: NameAvailability; submittedName: string }> => {
+    if (event) event.preventDefault();
     setNameAvailability(undefined);
     setUpdateButtonClicked(false);
     setError(undefined);
@@ -56,17 +73,18 @@ export const useBusinessNameSearch = (
       } else {
         setError("BAD_INPUT");
       }
-      return;
+      throw new Error("ERROR");
     }
 
     setIsLoading(true);
     analytics.event.task_business_name_check_availability.submit.view_business_name_availability();
-    api
+    return api
       .searchBusinessName(currentName)
       .then((result: NameAvailability) => {
         setSubmittedName(currentName);
         setIsLoading(false);
         setNameAvailability(result);
+        return { nameAvailability: result, submittedName: currentName };
       })
       .catch((error) => {
         setIsLoading(false);
@@ -75,17 +93,19 @@ export const useBusinessNameSearch = (
         } else {
           setError("SEARCH_FAILED");
         }
+        throw new Error("ERROR");
       });
   };
 
   const updateNameOnProfile = (): void => {
     if (!userData) return;
     setUpdateButtonClicked(true);
+    const newData = isDba ? { nexusDbaName: submittedName } : { businessName: submittedName };
     update({
       ...userData,
       profileData: {
         ...userData.profileData,
-        businessName: submittedName,
+        ...newData,
       },
     });
   };
@@ -103,5 +123,6 @@ export const useBusinessNameSearch = (
     onBlurNameField,
     searchBusinessName,
     updateNameOnProfile,
+    resetSearch,
   };
 };

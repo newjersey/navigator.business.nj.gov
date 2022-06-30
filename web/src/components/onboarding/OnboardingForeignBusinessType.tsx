@@ -11,7 +11,13 @@ interface Props {
   headerAriaLevel?: number;
 }
 
-const allForeignBusinessTypeIds = ["employeesInNJ", "transactionsInNJ", "revenueInNJ", "none"];
+const allForeignBusinessTypeIdsOrdered = [
+  "operationsInNJ",
+  "employeesInNJ",
+  "transactionsInNJ",
+  "revenueInNJ",
+  "none",
+];
 
 export const OnboardingForeignBusinessType = ({ headerAriaLevel = 2 }: Props): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
@@ -50,7 +56,7 @@ export const OnboardingForeignBusinessType = ({ headerAriaLevel = 2 }: Props): R
       </Content>
       <div className="margin-top-3">
         <FormControl variant="outlined" fullWidth aria-label="Out of state business">
-          {allForeignBusinessTypeIds.map((id: string) => (
+          {allForeignBusinessTypeIdsOrdered.map((id: string) => (
             <FormControlLabel
               key={id}
               style={{ alignItems: "flex-start" }}

@@ -27,14 +27,18 @@ export const OnboardingLegalStructure = (): ReactElement => {
     });
   };
 
-  const makeLabel = (legalStructureId: string): ReactElement => (
-    <div className="margin-bottom-2 margin-top-1" data-value={legalStructureId}>
-      <b>{LookupLegalStructureById(legalStructureId).name}</b>
-      <Content>
-        {(Config.profileDefaults[state.flow].legalStructureId.optionContent as any)[legalStructureId] ?? ""}
-      </Content>
-    </div>
-  );
+  const makeLabel = (legalStructureId: string): ReactElement => {
+    const supportingText =
+      (Config.profileDefaults[state.flow].legalStructureId.optionContent as any)[legalStructureId] ?? "";
+    return (
+      <div className="margin-bottom-2 margin-top-1" data-value={legalStructureId}>
+        <div className={supportingText === "" ? "" : "text-bold"}>
+          {LookupLegalStructureById(legalStructureId).name}
+        </div>
+        <Content>{supportingText}</Content>
+      </div>
+    );
+  };
 
   const headerLevelTwo = setHeaderRole(2, "h3-styling");
 

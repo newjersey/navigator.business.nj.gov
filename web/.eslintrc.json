@@ -44,6 +44,7 @@
     "@next/next/no-html-link-for-pages": "off",
     "prefer-template": "error",
     "react/jsx-uses-react": "off",
+    "react/prop-types": "off",
     "react/forbid-elements": [1, { "forbid": ["h5", "h6"] }],
     "@next/next/no-document-import-in-page": 0,
     "unicorn/filename-case": [
