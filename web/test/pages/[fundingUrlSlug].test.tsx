@@ -20,4 +20,35 @@ describe("funding page", () => {
     expect(screen.getByText("Click here")).toBeInTheDocument();
     expect(screen.getByText("Some content description")).toBeInTheDocument();
   });
+
+  it("shows the agency name if one exists", () => {
+    const funding = generateFunding({
+      name: "Some Funding Name",
+      callToActionText: "Click here",
+      contentMd: "Some content description",
+      dueDate: "07/01/2025",
+      status: "deadline",
+      agency: ["NJEDA"],
+    });
+
+    render(<FundingPage funding={funding} operateReferences={{}} />);
+
+    expect(screen.getByTestId("funding-agency-header")).toBeInTheDocument();
+    expect(screen.getByText("NJEDA")).toBeInTheDocument();
+  });
+
+  it("does not show the agency name header if one doesn't exist", () => {
+    const funding = generateFunding({
+      name: "Some Funding Name",
+      callToActionText: "Click here",
+      contentMd: "Some content description",
+      dueDate: "07/01/2025",
+      status: "deadline",
+      agency: [],
+    });
+
+    render(<FundingPage funding={funding} operateReferences={{}} />);
+
+    expect(screen.queryByTestId("funding-agency-header")).not.toBeInTheDocument();
+  });
 });
