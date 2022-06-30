@@ -88,13 +88,18 @@ export const NavBarMobile = ({
           >
             <Icon className="font-sans-xl">close</Icon>
           </button>
+          <NavSidebarUserSettings />
+          {sidebarPageLayout && (
+            <div>
+              <hr />
+            </div>
+          )}
           {sidebarPageLayout &&
             (operateReferences != null && Object.keys(operateReferences).length > 0 ? (
               <MiniOperateSection operateReferences={operateReferences} onClose={close} />
             ) : (
               <MiniRoadmap activeTaskId={task?.id} onTaskClick={close} />
             ))}
-          <NavSidebarUserSettings />
         </nav>
       </FocusTrappedSidebar>
     </>
