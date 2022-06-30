@@ -426,6 +426,9 @@
     "section5FirstHeaderText": "Starter Kit",
     "heroCallOutFirstLineText": "Your Business,"
   },
+  "fundingDefaults": {
+    "issuingAgencyText": "Issuing Agency"
+  },
   "taskDefaults": {
     "backToRoadmapText": "Go Back",
     "issuingAgencyText": "Issuing Agency",

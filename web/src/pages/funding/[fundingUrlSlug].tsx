@@ -7,6 +7,7 @@ import { MediaQueries } from "@/lib/PageSizes";
 import { FundingUrlSlugParam, loadAllFundingUrlSlugs, loadFundingByUrlSlug } from "@/lib/static/loadFundings";
 import { loadOperateReferences } from "@/lib/static/loadOperateReferences";
 import { Funding, OperateReference } from "@/lib/types/types";
+import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { useMediaQuery } from "@mui/material";
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
@@ -41,6 +42,18 @@ export const FundingElement = (props: { funding: Funding }): ReactElement => {
           </div>
         </div>
         <Content>{props.funding.contentMd}</Content>
+        {props.funding.agency.length > 0 ? (
+          <>
+            <hr className="margin-y-3" />
+            <div>
+              <span
+                className="h5-styling"
+                data-testid="funding-agency-header"
+              >{`${Config.fundingDefaults.issuingAgencyText}: `}</span>
+              <span className="h6-styling">{props.funding.agency.toString()}</span>
+            </div>
+          </>
+        ) : null}
       </div>
       <TaskCTA link={props.funding.callToActionLink} text={props.funding.callToActionText} />
     </>
