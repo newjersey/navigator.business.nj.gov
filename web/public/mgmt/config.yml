@@ -1681,6 +1681,13 @@ collections:
             summary: "{{filingDefaults}}"
             fields:
               - { label: Tag Content before Due Date, name: tagContentBeforeDueDate, widget: string }
+          - label: Funding Defaults
+            name: fundingDefaults
+            collapsed: true
+            widget: object
+            summary: "{{fundingDefaults}}"
+            fields:
+              - { label: Issuing Agency Label, name: issuingAgencyText, widget: string }
           - label: Landing Page
             name: landingPage
             collapsed: true
