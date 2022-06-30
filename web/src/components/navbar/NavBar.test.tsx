@@ -103,6 +103,18 @@ describe("<NavBar />", () => {
 
     displaysUserNameOrEmail(renderDesktopNav);
 
+    it("doesn't display registration button when user is authenticated", async () => {
+      useMockUserData({});
+      renderDesktopNav();
+      expect(screen.queryByText(Config.navigationDefaults.profileLinkText)).not.toBeInTheDocument();
+    });
+
+    it("doesn't display log in button when user is authenticated", async () => {
+      useMockUserData({});
+      renderDesktopNav();
+      expect(screen.queryByText(Config.navigationDefaults.logInButton)).not.toBeInTheDocument();
+    });
+
     it("displays a closed dropdown menu on the NavBar", () => {
       const user = { name: "John Smith", email: "test@example.com" };
 
@@ -157,14 +169,38 @@ describe("<NavBar />", () => {
       );
     };
 
+    it("displays registration button only when isAuthenticated is false", async () => {
+      useMockUserData({});
+      renderDesktopNav();
+      expect(screen.getByTestId("registration-button")).toBeInTheDocument();
+    });
+
+    it("displays log in button only when isAuthenticated is false", async () => {
+      useMockUserData({});
+      renderDesktopNav();
+      expect(screen.getByTestId("login-button")).toBeInTheDocument();
+    });
+
+    it("displays business profile button only when the menu is open", async () => {
+      useMockUserData({});
+      renderDesktopNav();
+      const menuEl = screen.getByText(Config.navigationDefaults.navBarGuestText);
+      userEvent.click(menuEl);
+      await waitFor(() => {
+        expect(screen.getByText(Config.navigationDefaults.profileLinkText)).toBeInTheDocument();
+      });
+      userEvent.click(menuEl);
+      await waitFor(() => {
+        expect(screen.queryByText(Config.navigationDefaults.profileLinkText)).not.toBeInTheDocument();
+      });
+    });
+
     it("displays a closed dropdown menu on the NavBar", () => {
       useMockUserData({});
       renderDesktopNav();
       const menuEl = screen.getByText(Config.navigationDefaults.navBarGuestText);
       expect(menuEl).toBeInTheDocument();
-      expect(
-        screen.queryByText(Config.navigationDefaults.navBarGuestRegistrationText)
-      ).not.toBeInTheDocument();
+      expect(screen.queryByText(Config.navigationDefaults.profileLinkText)).not.toBeInTheDocument();
     });
 
     it("displays an open dropdown menu when clicked and closes when clicked again", async () => {
@@ -174,14 +210,12 @@ describe("<NavBar />", () => {
 
       userEvent.click(menuEl);
       await waitFor(() => {
-        expect(screen.getByText(Config.navigationDefaults.navBarGuestRegistrationText)).toBeInTheDocument();
+        expect(screen.getByText(Config.navigationDefaults.profileLinkText)).toBeInTheDocument();
       });
 
       userEvent.click(menuEl);
       await waitFor(() => {
-        expect(
-          screen.queryByText(Config.navigationDefaults.navBarGuestRegistrationText)
-        ).not.toBeInTheDocument();
+        expect(screen.queryByText(Config.navigationDefaults.profileLinkText)).not.toBeInTheDocument();
       });
     });
 
