@@ -14,6 +14,7 @@ import ProfilePreviewMisc from "@/lib/cms/previews/profile-misc";
 import ProfilePreviewOnboarding from "@/lib/cms/previews/profile-onboarding";
 import RoadmapSidebarCardPreview from "@/lib/cms/previews/roadmap-sidebar-card";
 import TaskPreview from "@/lib/cms/previews/task";
+import { useMountEffect } from "@/lib/utils/helpers";
 import dynamic from "next/dynamic";
 
 const CMS_CONFIG = {};
@@ -134,11 +135,19 @@ const registerAsCannabisLicensePreview = (CMS: typeof import("netlify-cms-app"),
   }
 };
 
-const Admin = () => (
-  <>
-    <CMS />
-  </>
-);
+const Admin = () => {
+  useMountEffect(() =>
+    setInterval(() => {
+      window.location.reload();
+    }, 3600000)
+  );
+
+  return (
+    <>
+      <CMS />
+    </>
+  );
+};
 
 export async function getStaticProps() {
   return {
