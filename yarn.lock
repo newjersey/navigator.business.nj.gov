@@ -3443,16 +3443,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.1.2, @babel/runtime@npm:^7.10.2, @babel/runtime@npm:^7.12.0, @babel/runtime@npm:^7.12.1, @babel/runtime@npm:^7.12.13, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.13.10, @babel/runtime@npm:^7.15.4, @babel/runtime@npm:^7.17.2, @babel/runtime@npm:^7.17.8, @babel/runtime@npm:^7.18.3, @babel/runtime@npm:^7.2.0, @babel/runtime@npm:^7.3.1, @babel/runtime@npm:^7.5.0, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.7.2, @babel/runtime@npm:^7.7.6, @babel/runtime@npm:^7.8.3, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.8.7, @babel/runtime@npm:^7.9.2":
-  version: 7.18.3
-  resolution: "@babel/runtime@npm:7.18.3"
-  dependencies:
-    regenerator-runtime: ^0.13.4
-  checksum: db8526226aa02cfa35a5a7ac1a34b5f303c62a1f000c7db48cb06c6290e616483e5036ab3c4e7a84d0f3be6d4e2148d5fe5cec9564bf955f505c3e764b83d7f1
-  languageName: node
-  linkType: hard
-
-"@babel/runtime@npm:^7.16.3":
+"@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.1.2, @babel/runtime@npm:^7.10.2, @babel/runtime@npm:^7.12.0, @babel/runtime@npm:^7.12.1, @babel/runtime@npm:^7.12.13, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.13.10, @babel/runtime@npm:^7.15.4, @babel/runtime@npm:^7.16.3, @babel/runtime@npm:^7.17.2, @babel/runtime@npm:^7.17.8, @babel/runtime@npm:^7.18.3, @babel/runtime@npm:^7.2.0, @babel/runtime@npm:^7.3.1, @babel/runtime@npm:^7.5.0, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.7.2, @babel/runtime@npm:^7.7.6, @babel/runtime@npm:^7.8.3, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.8.7, @babel/runtime@npm:^7.9.2":
   version: 7.18.6
   resolution: "@babel/runtime@npm:7.18.6"
   dependencies:
@@ -3548,7 +3539,7 @@ __metadata:
     cross-env: 7.0.3
     dayjs: 1.11.3
     dedent: 0.7.0
-    dependency-cruiser: 11.10.0
+    dependency-cruiser: 11.11.0
     eslint: 8.18.0
     eslint-config-prettier: 8.5.0
     eslint-plugin-jest: 26.5.3
@@ -3701,7 +3692,7 @@ __metadata:
     cypress-wait-until: 1.7.2
     dayjs: 1.11.3
     dedent: 0.7.0
-    dependency-cruiser: 11.10.0
+    dependency-cruiser: 11.11.0
     dotenv: 16.0.1
     eslint: 8.18.0
     eslint-config-next: 12.1.6
@@ -3887,7 +3878,7 @@ __metadata:
     cypress-audit: 1.1.0
     cypress-dotenv: 2.0.0
     cypress-wait-until: 1.7.2
-    dependency-cruiser: 11.10.0
+    dependency-cruiser: 11.11.0
     dotenv: 16.0.1
     eslint: 8.18.0
     eslint-config-next: 12.1.6
@@ -14570,9 +14561,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dependency-cruiser@npm:11.10.0":
-  version: 11.10.0
-  resolution: "dependency-cruiser@npm:11.10.0"
+"dependency-cruiser@npm:11.11.0":
+  version: 11.11.0
+  resolution: "dependency-cruiser@npm:11.11.0"
   dependencies:
     acorn: 8.7.1
     acorn-jsx: 5.3.2
@@ -14588,7 +14579,7 @@ __metadata:
     glob: 7.2.0
     handlebars: 4.7.7
     indent-string: ^4.0.0
-    inquirer: 8.2.4
+    inquirer: ^8.2.4
     json5: 2.2.1
     lodash: 4.17.21
     safe-regex: 2.1.1
@@ -14604,7 +14595,7 @@ __metadata:
     depcruise-wrap-stream-in-html: bin/wrap-stream-in-html.js
     dependency-cruise: bin/dependency-cruise.js
     dependency-cruiser: bin/dependency-cruise.js
-  checksum: 6dbabc6b19c799f7cfd8d0144edb2f0012c551d67d4cc75d91951b95f706d5ee8b2974cafcefc362606a93492e00965d9c96a1a222e190f6d42d3a5433685e49
+  checksum: 9802c353de4a10a5f8b0c8183ac7d0c5d0e90323ea223627bb471f92396b190bf2aeca63cbf83887282ade99df02e752be6dc38132387ea6bee0bb12cbbecdd6
   languageName: node
   linkType: hard
 
@@ -19053,7 +19044,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"inquirer@npm:8.2.4, inquirer@npm:^8.2.4":
+"inquirer@npm:^8.2.4":
   version: 8.2.4
   resolution: "inquirer@npm:8.2.4"
   dependencies:
