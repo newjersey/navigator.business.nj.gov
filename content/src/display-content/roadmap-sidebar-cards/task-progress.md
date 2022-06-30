@@ -1,7 +1,7 @@
 ---
 id: task-progress
 header: You're ${percentDone} Done!
-notStartedHeader: Let's get started forming your business!
+notStartedHeader: Time to Start Your Business
 completedHeader: Way to Go! You've Set Up Your Business!
 weight: 3
 imgPath: ""
