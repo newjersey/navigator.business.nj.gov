@@ -3,6 +3,9 @@ urlSlug: trucking-cdl
 filename: trucking-cdl
 name: Apply for a Commercial Driver's License, if Applicable
 id: trucking-cdl
+callToActionLink: https://telegov.njportal.com/njmvc/AppointmentWizard
+callToActionText: Apply for Your CDL
+issuingAgency: New Jersey Motor Vehicle Commission
 ---
 You need a Commercial Driver’s License (CDL) before you can drive a commercial truck. 
  
@@ -23,3 +26,5 @@ You need a Commercial Driver’s License (CDL) before you can drive a commercial
 - Passing grade on your driving skills test
 - Pay any associated fees
 
+>**Once completed, you will have:**
+>- You will receive a Commercial Learner’s Permit (CLP) after passing the knowledge portion of the test and a CDL after passing the driving exam.
