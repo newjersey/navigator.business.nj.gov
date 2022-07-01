@@ -2,6 +2,7 @@
 id: not-registered
 header: ""
 imgPath: ""
+ctaText: ""
 color: primary
 shadowColor: primary-light
 borderColor: primary

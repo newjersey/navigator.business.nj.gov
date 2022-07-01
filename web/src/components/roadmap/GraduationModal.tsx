@@ -132,40 +132,42 @@ export const GraduationModal = (props: Props): ReactElement => {
       >
         <div data-testid="graduation-modal">
           <FormControl fullWidth={true}>
-            {!userData?.formationData.getFilingResponse?.success ? (
-              <OnboardingBusinessName
-                onValidation={onValidation}
-                fieldStates={fieldStates}
-                headerAriaLevel={3}
-              />
-            ) : undefined}
-            {needsDateOfFormation ? (
-              <OnboardingDateOfFormation
-                onValidation={onValidation}
-                fieldStates={fieldStates}
-                required={true}
-                disabled={userData?.formationData.getFilingResponse?.success}
-                headerAriaLevel={3}
-              />
-            ) : undefined}
-            <div className="margin-top-1">
-              {shouldShowSectorDropdown() && (
-                <OnboardingSectors
+            <div className="margin-top-2">
+              {!userData?.formationData.getFilingResponse?.success ? (
+                <OnboardingBusinessName
                   onValidation={onValidation}
                   fieldStates={fieldStates}
                   headerAriaLevel={3}
                 />
-              )}
-            </div>
-            <div className="margin-top-1">
-              <OnboardingOwnership headerAriaLevel={3} />
-            </div>
-            <div className="margin-top-4">
-              <OnboardingExistingEmployees
-                onValidation={onValidation}
-                fieldStates={fieldStates}
-                headerAriaLevel={3}
-              />
+              ) : undefined}
+              {needsDateOfFormation ? (
+                <OnboardingDateOfFormation
+                  onValidation={onValidation}
+                  fieldStates={fieldStates}
+                  required={true}
+                  disabled={userData?.formationData.getFilingResponse?.success}
+                  headerAriaLevel={3}
+                />
+              ) : undefined}
+              <div className="margin-top-1">
+                {shouldShowSectorDropdown() && (
+                  <OnboardingSectors
+                    onValidation={onValidation}
+                    fieldStates={fieldStates}
+                    headerAriaLevel={3}
+                  />
+                )}
+              </div>
+              <div className="margin-top-1">
+                <OnboardingOwnership headerAriaLevel={3} />
+              </div>
+              <div className="margin-top-4">
+                <OnboardingExistingEmployees
+                  onValidation={onValidation}
+                  fieldStates={fieldStates}
+                  headerAriaLevel={3}
+                />
+              </div>
             </div>
           </FormControl>
         </div>

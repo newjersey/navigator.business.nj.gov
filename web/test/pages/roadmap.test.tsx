@@ -5,6 +5,7 @@ import { SidebarCardContent } from "@/lib/types/types";
 import RoadmapPage from "@/pages/roadmap";
 import {
   generatePreferences,
+  generateProfileData,
   generateSidebarCardContent,
   generateStep,
   generateTask,
@@ -41,7 +42,10 @@ const setMobileScreen = (value: boolean): void => {
 
 const createDisplayContent = (sidebar?: Record<string, SidebarCardContent>) => ({
   contentMd: "",
-  sidebarDisplayContent: sidebar ?? { welcome: generateSidebarCardContent({}) },
+  sidebarDisplayContent: sidebar ?? {
+    welcome: generateSidebarCardContent({}),
+    graduation: generateSidebarCardContent({}),
+  },
 });
 
 describe("roadmap page", () => {
@@ -63,6 +67,24 @@ describe("roadmap page", () => {
       <ThemeProvider theme={createTheme()}>
         <RoadmapPage operateReferences={{}} displayContent={createDisplayContent(sidebarDisplayContent)} />
       </ThemeProvider>
+    );
+  };
+
+  const renderStatefulRoadmapPage = ({
+    userData,
+    sidebarDisplayContent,
+  }: {
+    userData?: UserData;
+    sidebarDisplayContent?: Record<string, SidebarCardContent>;
+  }) => {
+    setupStatefulUserDataContext();
+
+    render(
+      <WithStatefulUserData initialUserData={userData || generateUserData({})}>
+        <ThemeProvider theme={createTheme()}>
+          <RoadmapPage operateReferences={{}} displayContent={createDisplayContent(sidebarDisplayContent)} />
+        </ThemeProvider>
+      </WithStatefulUserData>
     );
   };
 
@@ -267,6 +289,7 @@ describe("roadmap page", () => {
       const sidebarDisplayContent = {
         "not-registered": generateSidebarCardContent({ contentMd: "NotRegisteredContent" }),
         welcome: generateSidebarCardContent({ contentMd: "WelcomeCardContent" }),
+        graduation: generateSidebarCardContent({ contentMd: "graduation" }),
       };
       renderPageWithAuthAlert({
         alertIsVisible: true,
@@ -292,6 +315,7 @@ describe("roadmap page", () => {
       const sidebarDisplayContent = {
         "not-registered": generateSidebarCardContent({ contentMd: "NotRegisteredContent" }),
         welcome: generateSidebarCardContent({ contentMd: "WelcomeCardContent" }),
+        graduation: generateSidebarCardContent({ contentMd: "graduation" }),
       };
       renderPageWithAuthAlert({
         alertIsVisible: true,
@@ -340,13 +364,41 @@ describe("roadmap page", () => {
         expect(screen.queryByText("SuccessContent")).not.toBeInTheDocument();
       });
     });
-  });
 
-  describe("foreign business", () => {
-    it("does not display graduation box for foreign business", () => {
-      useMockProfileData({ businessPersona: "FOREIGN" });
-      renderRoadmapPage({});
-      expect(screen.queryByText(Config.roadmapDefaults.graduationButtonText)).not.toBeInTheDocument();
+    it("renders graduation card", () => {
+      useMockUserData({
+        preferences: generatePreferences({
+          visibleRoadmapSidebarCards: ["graduation"],
+        }),
+      });
+
+      const sidebarDisplayContent = {
+        graduation: generateSidebarCardContent({ contentMd: "graduationCard" }),
+      };
+      renderRoadmapPage({ sidebarDisplayContent });
+
+      expect(screen.getByText("graduationCard")).toBeInTheDocument();
+    });
+
+    it("hides graduation card when business persona is FOREIGN", async () => {
+      const userData = generateUserData({
+        preferences: generatePreferences({
+          visibleRoadmapSidebarCards: ["graduation"],
+        }),
+        profileData: generateProfileData({ businessPersona: "FOREIGN" }),
+      });
+      const sidebarDisplayContent = {
+        graduation: generateSidebarCardContent({ contentMd: "graduationCard" }),
+      };
+
+      renderStatefulRoadmapPage({
+        userData,
+        sidebarDisplayContent,
+      });
+
+      await waitFor(() => {
+        expect(screen.queryByText("graduationCard")).not.toBeInTheDocument();
+      });
     });
   });
 });

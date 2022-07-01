@@ -4,7 +4,6 @@ import { NavBar } from "@/components/navbar/NavBar";
 import { ToastAlert } from "@/components/njwds-extended/ToastAlert";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { RightSidebarPageLayout } from "@/components/RightSidebarPageLayout";
-import { GraduationBox } from "@/components/roadmap/GraduationBox";
 import { RoadmapSidebarList } from "@/components/roadmap/RoadmapSidebarList";
 import { SectionAccordion } from "@/components/roadmap/SectionAccordion";
 import { Step } from "@/components/Step";
@@ -60,10 +59,6 @@ const RoadmapPage = (props: Props): ReactElement => {
     setSuccessAlert(success === "true");
   }, [router.isReady, router.query.success]);
 
-  const isForeign = (): boolean => {
-    return userData?.profileData.businessPersona === "FOREIGN";
-  };
-
   const renderRoadmap = (
     <div className="margin-top-0 desktop:margin-top-0">
       <UserDataErrorAlert />
@@ -82,11 +77,6 @@ const RoadmapPage = (props: Props): ReactElement => {
                   ))}
               </SectionAccordion>
             ))}
-            {!isForeign() && (
-              <div className="margin-top-6">
-                <GraduationBox />
-              </div>
-            )}
           </>
         )}
       </div>

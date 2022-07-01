@@ -258,7 +258,7 @@ describe("Graduation Modal", () => {
     });
 
     const { page } = renderGraduationModal(userData);
-    expect(screen.getByLabelText("Date of formation")).toHaveAttribute("disabled");
+    expect(screen.getByLabelText("Date of formation")).toBeDisabled();
     expect(page.getDateOfFormationValue()).toEqual(
       parseDateWithFormat(userData.formationData.formationFormData.businessStartDate, "YYYY-MM-DD").format(
         "MM/YYYY"
@@ -282,7 +282,7 @@ describe("Graduation Modal", () => {
     });
 
     renderGraduationModal(userData);
-    expect(screen.queryByTestId("businessName")).toBeNull();
+    expect(screen.queryByTestId("businessName")).not.toBeInTheDocument();
   });
 
   it("display businessName if formation is not set", () => {
@@ -296,7 +296,7 @@ describe("Graduation Modal", () => {
     });
 
     renderGraduationModal(userData);
-    expect(screen.getByTestId("businessName")).not.toBeNull();
-    expect(screen.getByLabelText("Business name")).not.toBeNull();
+    expect(screen.getByTestId("businessName")).toBeInTheDocument();
+    expect(screen.getByLabelText("Business name")).toBeInTheDocument();
   });
 });
