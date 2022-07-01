@@ -15,14 +15,15 @@ To find a process agent speak to your network, or check the Federal Motor Carrie
 **Note:** you will need a process agent in each state you do business
  
 ---
->**Where to File:**
->You must keep a copy of the completed form for your records and mail the signed original to:
->FMCSA
->Office of Registration and Safety Information MC-RS
->1200 New Jersey Avenue SE 
->Room W65-206 
+>**Where to File:**  
+>You must keep a copy of the completed form for your records and mail the signed original to:  
+>
+>FMCSA  
+>Office of Registration and Safety Information MC-RS  
+>1200 New Jersey Avenue SE   
+>Room W65-206  
 >Washington, DC 20590
  
 >**Once completed, you will have:**
 >- A designated process agent for your company
->- A filed BOC-3 with the Federal Motor Carrier Safety Administration
+>- A filed BOC-3 with the FMCSA
