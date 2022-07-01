@@ -3,13 +3,15 @@ import { NavSidebarUserSettings } from "@/components/navbar/NavSidebarUserSettin
 import { Icon } from "@/components/njwds/Icon";
 import { MiniOperateSection } from "@/components/roadmap/MiniOperateSection";
 import { MiniRoadmap } from "@/components/roadmap/MiniRoadmap";
+import { AuthContext } from "@/contexts/authContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { routeForPersona } from "@/lib/domain-logic/routeForPersona";
 import { OperateReference, Task } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
+import { getUserNameOrEmail } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import Link from "next/link";
-import { ReactElement, useMemo, useState } from "react";
+import { ReactElement, useContext, useMemo, useState } from "react";
 interface Props {
   scrolled: boolean;
   task?: Task;
@@ -25,8 +27,15 @@ export const NavBarMobile = ({
 }: Props): ReactElement => {
   const { userData } = useUserData();
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
+  const { state } = useContext(AuthContext);
+
   const open = () => setSidebarIsOpen(true);
   const close = () => setSidebarIsOpen(false);
+  const isAuthenticated = useMemo(() => state.isAuthenticated == "TRUE", [state.isAuthenticated]);
+  const userName = getUserNameOrEmail(userData);
+  const textColor = isAuthenticated ? "primary" : "base";
+  const accountIcon = isAuthenticated ? "account_circle" : "help";
+  const accountString = isAuthenticated ? userName : Config.navigationDefaults.navBarGuestText;
 
   const redirectUrl = useMemo(
     () => routeForPersona(userData?.profileData.businessPersona),
@@ -78,16 +87,22 @@ export const NavBarMobile = ({
           className={`left-nav ${sidebarIsOpen ? "is-visible" : "is-hidden"} `}
           data-testid="nav-sidebar-menu"
         >
-          <button
-            className="left-nav-close fdr fac fjc"
-            aria-label="close menu"
-            onClick={() => {
-              analytics.event.mobile_menu_close_button.click.close_mobile_menu();
-              close();
-            }}
-          >
-            <Icon className="font-sans-xl">close</Icon>
-          </button>
+          <h4 className={`margin-0 flex flex-align-center fdr fjc space-between text-${textColor}`}>
+            <div className="fac">
+              <Icon className="vam margin-right-1 usa-icon--size-3">{accountIcon}</Icon>
+              <span className="fac">{accountString}</span>
+            </div>
+            <button
+              className="left-nav-close fac fdr fjc"
+              aria-label="close menu"
+              onClick={() => {
+                analytics.event.mobile_menu_close_button.click.close_mobile_menu();
+                close();
+              }}
+            >
+              <Icon className="font-sans-xl">close</Icon>
+            </button>
+          </h4>
           <NavSidebarUserSettings />
           {sidebarPageLayout && (
             <div>
