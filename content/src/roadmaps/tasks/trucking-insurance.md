@@ -4,7 +4,9 @@ filename: trucking-insurance
 name: Get Commercial Auto Insurance
 id: trucking-insurance
 ---
-Insurance will protect your business assets should you be held liable for an incident. To find an insurance broker, speak to your network, local Chamber of Commerce, or supplier. Oftentimes, the best way to find a broker is through word of mouth.
+Insurance will protect your business assets should you be held liable for an incident. 
+
+To find an insurance broker, speak to your network, local Chamber of Commerce, or supplier. Oftentimes, the best way to find a broker is through word of mouth.
 
 ---
 ### Common Types of Commercial Auto Insurance
@@ -14,4 +16,4 @@ Insurance will protect your business assets should you be held liable for an inc
 - **Physical Damage Coverage:** Covers your truck when involved in a collision, fire, theft, or vandalism
 
 >**Once completed, you will have:**
->- A commercial auto insurance policy for your business
+>- A Certificate of Insurance
