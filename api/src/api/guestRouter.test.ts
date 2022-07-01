@@ -60,6 +60,18 @@ describe("guestRouter", () => {
       expect(stubBusinessNameClient.search).toHaveBeenCalledWith("apple bee's");
     });
 
+    it("limits similar names returned to 10", async () => {
+      const result: NameAvailability = {
+        status: "UNAVAILABLE",
+        similarNames: Array.from({ length: 20 }).fill("abc") as string[],
+      };
+      stubBusinessNameClient.search.mockResolvedValue(result);
+
+      const response = await request(app).get(`/business-name-availability?query=abcd`);
+      expect(response.status).toEqual(200);
+      expect(response.body.similarNames).toHaveLength(10);
+    });
+
     it("returns 400 if name search returns BAD_INPUT", async () => {
       stubBusinessNameClient.search.mockRejectedValue("BAD_INPUT");
       const response = await request(app).get(`/business-name-availability?query=apple%20bee%27s`);
