@@ -33,6 +33,7 @@ export const AirtableFeedbackClient = (config: AirtableConfig, logWriter: LogWri
         Browser: feedbackRequest.browser,
         "Screen Width": feedbackRequest.screenWidth,
         "Guest/Logged In": userData.user.myNJUserKey ? "Logged In" : "Guest",
+        UserId: userData.user.id,
       };
       logWriter.LogInfo(
         `Feedback - Airtable - Id:${logId} - Request Sent to base ${config.baseId} table ${
@@ -67,6 +68,7 @@ export const AirtableFeedbackClient = (config: AirtableConfig, logWriter: LogWri
         Browser: issueRequest.browser,
         "Screen Width": issueRequest.screenWidth,
         "Guest/Logged In": userData.user.myNJUserKey ? "Logged In" : "Guest",
+        UserId: userData.user.id,
       };
       logWriter.LogInfo(
         `Feedback - Airtable - Id:${logId} - Request Sent to base ${config.baseId} table ${
