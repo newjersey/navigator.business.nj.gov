@@ -1,4 +1,5 @@
 {
+  "naicsCodes": "484110, 484121, 484122, 484220, 484230",
   "canBeHomeBased": true,
   "defaultSectorId": "other-services",
   "canBeReseller": false,
