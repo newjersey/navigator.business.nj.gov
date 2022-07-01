@@ -6,9 +6,12 @@ import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useRoadmapSidebarCards } from "@/lib/data-hooks/useRoadmapSidebarCards";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { SidebarCardContent } from "@/lib/types/types";
+import analytics from "@/lib/utils/analytics";
 import { templateEval } from "@/lib/utils/helpers";
 import { styled } from "@mui/material";
 import LinearProgress, { linearProgressClasses } from "@mui/material/LinearProgress";
+import { useState } from "react";
+import { GraduationModal } from "./GraduationModal";
 
 type Props = {
   card: SidebarCardContent;
@@ -25,6 +28,7 @@ const BorderLinearProgress = styled(LinearProgress)(() => ({
 }));
 
 export const RoadmapSidebarCard = (props: Props) => {
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
   const { hideCard } = useRoadmapSidebarCards();
   const { userData } = useUserData();
   const { roadmap } = useRoadmap();
@@ -127,15 +131,45 @@ export const RoadmapSidebarCard = (props: Props) => {
     });
   };
 
+  const ctaOnClickMap = {
+    graduation: (): void => {
+      analytics.event.roadmap_graduate_button.click.view_graduation_modal();
+      setModalOpen(true);
+    },
+  } as Record<string, () => void>;
+
   return (
-    <div
-      className={`border radius-md border-${props.card.borderColor} box-shadow-${props.card.shadowColor} margin-left-05 margin-bottom-3`}
-      {...{ "data-testid": props.card.id }}
-    >
-      {props.card.header && (
-        <div className={`bg-${props.card.shadowColor} padding-y-105 padding-x-205 radius-top-md`}>
-          {props.card.hasCloseButton ? (
-            <div className="flex flex-justify">
+    <>
+      <GraduationModal open={modalOpen} handleClose={() => setModalOpen(false)} />
+
+      <div
+        className={`border radius-md border-${props.card.borderColor} box-shadow-${props.card.shadowColor} margin-left-05 margin-bottom-3`}
+        {...{ "data-testid": props.card.id }}
+      >
+        {props.card.header && (
+          <div className={`bg-${props.card.shadowColor} padding-y-105 padding-x-205 radius-top-md`}>
+            {props.card.hasCloseButton ? (
+              <div className="flex flex-justify">
+                <h3
+                  className={`margin-bottom-0 text-${props.card.color} ${
+                    props.card.imgPath ? "flex flex-align-end" : ""
+                  }`}
+                >
+                  {props.card.imgPath && (
+                    <img
+                      role="presentation"
+                      className="margin-right-2 height-4 width-4"
+                      src={props.card.imgPath}
+                      alt=""
+                    />
+                  )}
+                  <span>{getHeader()}</span>
+                </h3>
+                <Button style="tertiary" onClick={closeSelf} ariaLabel="Close">
+                  <Icon className={`font-sans-xl text-${props.card.color}`}>close</Icon>
+                </Button>
+              </div>
+            ) : (
               <h3
                 className={`margin-bottom-0 text-${props.card.color} ${
                   props.card.imgPath ? "flex flex-align-end" : ""
@@ -151,44 +185,39 @@ export const RoadmapSidebarCard = (props: Props) => {
                 )}
                 <span>{getHeader()}</span>
               </h3>
-              <Button style="tertiary" onClick={closeSelf} ariaLabel="Close">
-                <Icon className={`font-sans-xl text-${props.card.color}`}>close</Icon>
-              </Button>
-            </div>
-          ) : (
-            <h3
-              className={`margin-bottom-0 text-${props.card.color} ${
-                props.card.imgPath ? "flex flex-align-end" : ""
-              }`}
-            >
-              {props.card.imgPath && (
-                <img
-                  role="presentation"
-                  className="margin-right-2 height-4 width-4"
-                  src={props.card.imgPath}
-                  alt=""
-                />
-              )}
-              <span>{getHeader()}</span>
-            </h3>
-          )}
-        </div>
-      )}
-      <div
-        className={`bg-white padding-205 text-base radius-bottom-md ${!props.card.header && "radius-top-md"}`}
-      >
-        {props.card.id === "task-progress" && (
-          <div className={`padding-bottom-205`}>
-            <BorderLinearProgress
-              variant="determinate"
-              color="secondary"
-              value={progressBarValue()}
-              aria-label="Task progress bar"
-            />
+            )}
           </div>
         )}
-        <Content>{getContent()}</Content>
+        <div
+          className={`bg-white padding-205 text-base radius-bottom-md ${
+            !props.card.header && "radius-top-md"
+          }`}
+        >
+          {props.card.id === "task-progress" && (
+            <div className={`padding-bottom-205`}>
+              <BorderLinearProgress
+                variant="determinate"
+                color="secondary"
+                value={progressBarValue()}
+                aria-label="Task progress bar"
+              />
+            </div>
+          )}
+          <Content>{getContent()}</Content>
+          {ctaOnClickMap[props.card.id] && (
+            <div className="margin-top-205 flex flex-justify-end">
+              <Button
+                style="primary"
+                onClick={ctaOnClickMap[props.card.id]}
+                noRightMargin
+                dataTestid={`cta-${props.card.id}`}
+              >
+                {props.card.ctaText}
+              </Button>
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 };

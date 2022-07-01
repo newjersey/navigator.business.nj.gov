@@ -395,6 +395,7 @@ export type SidebarCardContent = {
   notStartedHeader: string;
   completedHeader: string;
   imgPath: string;
+  ctaText: string;
   color: string;
   shadowColor: string;
   borderColor: string;

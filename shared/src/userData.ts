@@ -29,7 +29,7 @@ export const createEmptyUserData = (user: BusinessUser): UserData => {
       roadmapOpenSteps: [],
       hiddenCertificationIds: [],
       hiddenFundingIds: [],
-      visibleRoadmapSidebarCards: ["welcome", "task-progress"],
+      visibleRoadmapSidebarCards: ["welcome", "task-progress", "graduation"],
     },
     taxFilingData: {
       filings: [],

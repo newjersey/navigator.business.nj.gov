@@ -373,13 +373,10 @@
     "congratulatorModalLinkText": "tasks.",
     "loadingText": "Loading...",
     "calendarFilingDueDateLabel": "Due",
-    "graduationButtonText": "Show Me Funding Opportunities",
     "congratulatorModalHeader": "You reached a crucial milestone as a business.",
     "congratulatorModalTitle": "You did it!",
     "graduationModalCancelButtonText": "Cancel",
-    "graduationModalTitle": "Tell us more about your business",
-    "graduationHeader": "Finished setting up your business?",
-    "graduationBodyText": "If your business is up and running, you can now also use the Navigator to learn about filings, certifications, funding opportunities, and more."
+    "graduationModalTitle": "Tell us more about your business"
   },
   "licenseSearchTask": {
     "voluntarySurrenderPermitStatusText": "Voluntary Surrender",

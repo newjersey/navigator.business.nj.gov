@@ -147,6 +147,7 @@ type RoadmapCardGrayMatter = {
   completedHeader: string;
   imgPath: string;
   color: string;
+  ctaText: string;
   shadowColor: string;
   borderColor: string;
   hasCloseButton: boolean;
