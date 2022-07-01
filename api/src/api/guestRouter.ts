@@ -14,7 +14,10 @@ export const guestRouterFactory = (businessNameClient: BusinessNameClient): Rout
     businessNameClient
       .search((req.query as BusinessQueryParams).query)
       .then((result: NameAvailability) => {
-        res.json(result);
+        res.json({
+          ...result,
+          similarNames: result.similarNames.slice(0, 10),
+        });
       })
       .catch((error) => {
         if (error === "BAD_INPUT") {

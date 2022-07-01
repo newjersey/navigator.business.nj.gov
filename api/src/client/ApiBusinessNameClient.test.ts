@@ -31,7 +31,7 @@ describe("ApiBusinessNameClient", () => {
     expect(mockAxios.get).toHaveBeenCalledWith("www.example.com/Available?q=name");
   });
 
-  it("returns a designator resason in the response", async () => {
+  it("returns a designator reason in the response", async () => {
     const mockResponse: ApiNameAvailabilityResponse = {
       Available: false,
       Reason: "contains business designators",
