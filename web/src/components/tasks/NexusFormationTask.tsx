@@ -76,7 +76,7 @@ export const NexusFormationTask = (props: Props): ReactElement => {
         <Content>{Config.nexusFormationTask.dbaCtaModalBody}</Content>
       </DialogTwoButton>
       <div>
-        <TaskHeader task={taskToDisplay} />
+        <TaskHeader task={props.task} />
         {showWarning && (
           <Alert variant="warning" dataTestid="name-search-warning">
             <Content>{Config.nexusFormationTask.warningText}</Content>
