@@ -14,7 +14,7 @@ You can only file a Blanket of Coverage for yourself if you’re a broker or a f
  
 To find a process agent speak to your network, or check the Federal Motor Carrier Safety Administration (FMCSA) list of process agent companies. 
  
-**Note:** you will need a process agent in each state you do business
+**Note:** You will need a process agent in each state you do business.
  
 ---
 >**Where to File:**  
