@@ -19,7 +19,8 @@ You must register with the US Department of Transportation (USDoT) and obtain a 
 - `EIN|ein` or SSN
 - `Dun and Bradstreet (DUNS) number|duns`, if available
 - Names and Titles of the company officers
-- A `process agent|process-agent`, already filed with Federal Motor Carrier Safety Administration (FMCSA)
+- A `process agent|process-agent`, already filed with Federal Motor Carrier Safety Administration (FMCSA)  
+
 **Note:** The form can only be signed by an authorized official, like the owner, a partner, or an authorized representative.
  
 >**Once approved, you will have:**
