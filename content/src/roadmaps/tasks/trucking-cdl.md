@@ -15,3 +15,5 @@ You need a Commercial Driver’s License (CDL) before you can drive a commercial
 
 ### Application Requirements
 - Proof of identity, NJ residency, and SSN according to [New Jersey’s ID requirements](https://www.state.nj.us/mvc/pdf/license/Standard_License_Sheet_Engl.pdf)
+- Completed [Holder Self-Certification](https://www.state.nj.us/mvc/pdf/drivertopics/CDSC-1.pdf)
+- [Medical Examiner's Certificate](https://www.state.nj.us/mvc/pdf/drivertopics/RA_4_1_a.pdf) completed by your healthcare provider, if applicable
