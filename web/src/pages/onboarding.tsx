@@ -1,3 +1,4 @@
+import { NavBar } from "@/components/navbar/NavBar";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { ToastAlert } from "@/components/njwds-extended/ToastAlert";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
@@ -397,6 +398,7 @@ const OnboardingPage = (props: Props): ReactElement => {
         } ${evalHeaderStepsTemplate()} `}
       />
       <PageSkeleton>
+        <NavBar />
         <main className="usa-section padding-top-0 desktop:padding-top-8" id="main">
           <SingleColumnContainer>
             {header()}

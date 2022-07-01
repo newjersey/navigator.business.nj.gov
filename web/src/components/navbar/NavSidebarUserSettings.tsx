@@ -76,11 +76,21 @@ export const NavSidebarUserSettings = (): ReactElement => {
     </>
   );
 
+  const renderMenu = () => {
+    if (router.pathname === "/onboarding") {
+      return <></>;
+    } else if (isAuthenticated) {
+      return AuthenticatedMenu();
+    } else {
+      return UnAuthenticatedMenu();
+    }
+  };
+
   return (
     <div>
       <hr />
       <div className="margin-left-2 margin-bottom-2">
-        {isAuthenticated ? AuthenticatedMenu() : UnAuthenticatedMenu()}
+        {renderMenu()}
         <AuthButton position="NAVBAR" />
       </div>
     </div>

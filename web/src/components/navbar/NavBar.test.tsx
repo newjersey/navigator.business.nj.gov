@@ -69,6 +69,68 @@ describe("<NavBar />", () => {
     });
   });
 
+  describe("navbar - used when user is onboarding", () => {
+    beforeEach(() => {
+      useMockUserData({});
+      useMockRouter({ pathname: "/onboarding" });
+    });
+
+    describe("desktop version", () => {
+      const renderDesktopNav = () => {
+        setLargeScreen(true);
+        render(
+          withAuth(
+            <NavBar landingPage={false} task={undefined} sidebarPageLayout={false} operateReferences={{}} />,
+            { isAuthenticated: IsAuthenticated.FALSE }
+          )
+        );
+      };
+
+      it("renders the log in button", async () => {
+        renderDesktopNav();
+        expect(screen.getByText(Config.navigationDefaults.logInButton)).toBeInTheDocument();
+      });
+
+      it("doesn't render register button", () => {
+        renderDesktopNav();
+        expect(screen.queryByTestId("registration-button")).not.toBeInTheDocument();
+      });
+
+      it("doesn't render a menu to be opened", async () => {
+        renderDesktopNav();
+        const menuEl = screen.getByText(Config.navigationDefaults.navBarGuestText);
+        fireEvent.click(menuEl);
+        await waitFor(() => {
+          expect(screen.queryByText(Config.navigationDefaults.profileLinkText)).not.toBeInTheDocument();
+        });
+      });
+    });
+
+    describe("mobile version", () => {
+      const renderMobileRoadmapNav = () => {
+        setLargeScreen(false);
+        render(
+          withAuth(
+            <NavBar landingPage={false} task={undefined} sidebarPageLayout={false} operateReferences={{}} />,
+            { isAuthenticated: IsAuthenticated.FALSE }
+          )
+        );
+        fireEvent.click(screen.getByTestId("nav-menu-open"));
+      };
+
+      it("renders the log in button", async () => {
+        renderMobileRoadmapNav();
+        expect(screen.getByText(Config.navigationDefaults.logInButton)).toBeInTheDocument();
+      });
+
+      it("doesn't render register and profile text", async () => {
+        renderMobileRoadmapNav();
+        expect(screen.queryByText(Config.navigationDefaults.profileLinkText)).not.toBeInTheDocument();
+        expect(screen.queryByText(Config.navigationDefaults.registerButton)).not.toBeInTheDocument();
+      });
+    });
+  });
+
   const displaysUserNameOrEmail = (renderFunc: () => void) => {
     it("displays name of user if available", () => {
       useMockUserData({ user: generateUser({ name: "John Smith", email: "test@example.com" }) });
