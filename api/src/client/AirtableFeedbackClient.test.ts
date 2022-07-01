@@ -56,6 +56,7 @@ describe("AirtableFeedbackClient", () => {
           Browser: feedbackRequest.browser,
           "Screen Width": feedbackRequest.screenWidth,
           "Guest/Logged In": "Guest",
+          UserId: userData.user.id,
         },
       },
     ]);
@@ -83,6 +84,7 @@ describe("AirtableFeedbackClient", () => {
           Browser: issue.browser,
           "Screen Width": issue.screenWidth,
           "Guest/Logged In": "Guest",
+          UserId: userData.user.id,
         },
       },
     ]);
