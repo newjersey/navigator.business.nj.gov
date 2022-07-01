@@ -4,7 +4,7 @@ filename: trucking-cdl
 name: Apply for a Commercial Driver's License, if Applicable
 id: trucking-cdl
 callToActionLink: https://telegov.njportal.com/njmvc/AppointmentWizard
-callToActionText: Apply for Your CDL
+callToActionText: Apply for My CDL
 issuingAgency: New Jersey Motor Vehicle Commission
 ---
 You need a Commercial Driver’s License (CDL) if you plan to do any load-hauling for your business.
