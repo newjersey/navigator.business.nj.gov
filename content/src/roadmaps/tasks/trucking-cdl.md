@@ -7,7 +7,7 @@ callToActionLink: https://telegov.njportal.com/njmvc/AppointmentWizard
 callToActionText: Apply for Your CDL
 issuingAgency: New Jersey Motor Vehicle Commission
 ---
-You need a Commercial Driver’s License (CDL) before you can drive a commercial truck. 
+You need a Commercial Driver’s License (CDL) if you plan to do any load-hauling for your business.
  
 ---
 ### Eligibility Criteria
