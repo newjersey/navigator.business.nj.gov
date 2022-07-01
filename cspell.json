@@ -78,7 +78,17 @@
     "MPRE",
     "prelicensure",
     "FUTA",
-    "WDPF"
+    "WDPF",
+    "DUNS",
+    "CDL",
+    "ELDT",
+    "CPL",
+    "BOC-3",
+    "FMCSA",
+    "MC-RS",
+    "USDoT",
+    "MC",
+    "IRP"
   ],
   "ignorePaths": ["node_modules/**", "out/**", "web/out/**", "package.json"]
 }
