@@ -188,7 +188,7 @@
     "require-from-string": "2.0.2",
     "rimraf": "3.0.2",
     "sass": "1.53.0",
-    "sass-loader": "13.0.1",
+    "sass-loader": "13.0.2",
     "semantic-release": "19.0.3",
     "serverless": "3.19.0",
     "serverless-dynamodb-local": "0.2.40",
