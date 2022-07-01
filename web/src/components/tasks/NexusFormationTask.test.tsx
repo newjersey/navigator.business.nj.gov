@@ -49,7 +49,7 @@ describe("<NexusFormationTask />", () => {
       useMockProfileData({ businessName: "some name", nexusDbaName: undefined });
     });
 
-    it("displays form-business-entity legacy task content", async () => {
+    it("displays form-business-entity legacy task content and CTA but not header", async () => {
       mockFetchTaskByFilename.mockResolvedValue(
         generateTask({
           contentMd: "legacy task content",
@@ -60,10 +60,11 @@ describe("<NexusFormationTask />", () => {
 
       renderTask();
       await waitFor(() => {
-        expect(screen.getByText("legacy task name")).toBeInTheDocument();
+        expect(screen.getByText("legacy task content")).toBeInTheDocument();
       });
-      expect(screen.getByText("legacy task content")).toBeInTheDocument();
       expect(screen.getByText("legacy task cta")).toBeInTheDocument();
+      expect(screen.queryByText("legacy task name")).not.toBeInTheDocument();
+      expect(screen.getByText(nexusTask.name)).toBeInTheDocument();
     });
   });
 
