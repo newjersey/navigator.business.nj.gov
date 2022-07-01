@@ -5,6 +5,7 @@ name: Register with the US Department of Transportation
 id: trucking-usdot
 callToActionLink: https://portal.fmcsa.dot.gov/UrsRegistrationWizard/
 callToActionText: Register with USDoT
+required: true
 issuingAgency: US Department of Transportation
 ---
 You must register with the US Department of Transportation (USDoT) and obtain a registration number prior to offering load-hauling services.
