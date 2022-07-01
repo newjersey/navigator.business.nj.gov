@@ -32,6 +32,10 @@ export const NavBarDesktop = (): ReactElement => {
     setOpen((prevOpen) => !prevOpen);
   };
 
+  const currentlyOnboarding = (): boolean => {
+    return router.pathname === "/onboarding";
+  };
+
   const handleProfileClick = (event: React.MouseEvent<HTMLLIElement> | React.MouseEvent<Document>): void => {
     analytics.event.account_menu_myNJ_account.click.go_to_myNJ_home();
     window.open(process.env.MYNJ_PROFILE_LINK || "", "_ blank");
@@ -49,7 +53,6 @@ export const NavBarDesktop = (): ReactElement => {
     if (anchorRef.current && anchorRef.current.contains(event.target as Node)) {
       return;
     }
-
     setOpen(false);
   };
 
@@ -129,17 +132,19 @@ export const NavBarDesktop = (): ReactElement => {
           <div className="flex z-100">
             {!isAuthenticated && (
               <div className="flex">
-                <div data-testid="registration-button" className="margin-left-4">
-                  <Button
-                    style="tertiary"
-                    onClick={() => {
-                      analytics.event.guest_menu.click.go_to_myNJ_registration();
-                      onSelfRegister(router.replace, userData, update, setRegistrationAlertStatus);
-                    }}
-                  >
-                    {Config.navigationDefaults.navBarGuestRegistrationText}
-                  </Button>
-                </div>
+                {!currentlyOnboarding() && (
+                  <div data-testid="registration-button" className="margin-left-4">
+                    <Button
+                      style="tertiary"
+                      onClick={() => {
+                        analytics.event.guest_menu.click.go_to_myNJ_registration();
+                        onSelfRegister(router.replace, userData, update, setRegistrationAlertStatus);
+                      }}
+                    >
+                      {Config.navigationDefaults.navBarGuestRegistrationText}
+                    </Button>
+                  </div>
+                )}
                 <div data-testid="login-button" className="margin-right-4 margin-left-4">
                   <Button
                     style="tertiary"
@@ -154,14 +159,7 @@ export const NavBarDesktop = (): ReactElement => {
                 <div className="margin-right-4 text-base">|</div>
               </div>
             )}
-            <button
-              data-testid="profile-dropdown"
-              className="clear-button"
-              ref={anchorRef}
-              aria-controls={open ? "menu-list-grow" : undefined}
-              aria-haspopup="true"
-              onClick={toggleDropdown}
-            >
+            {currentlyOnboarding() ? (
               <div className={`text-bold text-${textColor} flex flex-align-center`}>
                 <Icon
                   className={`${isAuthenticated ? "usa-icon--size-4" : "usa-icon--size-3"} margin-right-1`}
@@ -169,9 +167,27 @@ export const NavBarDesktop = (): ReactElement => {
                   {accountIcon}
                 </Icon>
                 <div>{accountString}</div>
-                <Icon className="usa-icon--size-3">arrow_drop_down</Icon>
               </div>
-            </button>
+            ) : (
+              <button
+                data-testid="profile-dropdown"
+                className="clear-button"
+                ref={anchorRef}
+                aria-controls={open ? "menu-list-grow" : undefined}
+                aria-haspopup="true"
+                onClick={toggleDropdown}
+              >
+                <div className={`text-bold text-${textColor} flex flex-align-center`}>
+                  <Icon
+                    className={`${isAuthenticated ? "usa-icon--size-4" : "usa-icon--size-3"} margin-right-1`}
+                  >
+                    {accountIcon}
+                  </Icon>
+                  <div>{accountString}</div>
+                  <Icon className="usa-icon--size-3">arrow_drop_down</Icon>
+                </div>
+              </button>
+            )}
 
             <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal={true}>
               {({ TransitionProps, placement }) => (
