@@ -1,0 +1,65 @@
+{
+  "canBeHomeBased": true,
+  "defaultSectorId": "other-services",
+  "canBeReseller": false,
+  "isCpaRequiredApplicable": false,
+  "canHavePermanentLocation": false,
+  "roadmapSteps": [
+    {
+      "step": 1,
+      "weight": 1,
+      "task": "business-plan"
+    },
+    {
+      "step": 1,
+      "weight": 30,
+      "task": "determine-naics-code"
+    },
+    {
+      "step": 2,
+      "weight": 20,
+      "task": "register-for-ein"
+    },
+    {
+      "step": 2,
+      "weight": 25,
+      "task": "register-for-taxes"
+    },
+    {
+      "step": 3,
+      "weight": 10,
+      "task": "bank-account"
+    },
+    {
+      "step": 3,
+      "weight": 15,
+      "task": "trucking-cdl"
+    },
+    {
+      "step": 3,
+      "weight": 20,
+      "task": "trucking-boc3"
+    },
+    {
+      "step": 3,
+      "weight": 25,
+      "task": "trucking-usdot"
+    },
+    {
+      "step": 3,
+      "weight": 30,
+      "task": "trucking-irp"
+    },
+    {
+      "step": 3,
+      "weight": 35,
+      "task": "trucking-insurance"
+    }
+  ],
+  "name": "Long-Haul Trucking",
+  "isLiquorLicenseApplicable": false,
+  "isEnabled": false,
+  "additionalSearchTerms": "trucking, movers, ",
+  "id": "trucking",
+  "description": "Offers load-hauling services "
+}
