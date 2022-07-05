@@ -57,6 +57,7 @@ describe("AirtableFeedbackClient", () => {
           "Screen Width": feedbackRequest.screenWidth,
           "Guest/Logged In": "Guest",
           UserId: userData.user.id,
+          "Legal Structure": userData.profileData.legalStructureId,
         },
       },
     ]);
@@ -85,6 +86,7 @@ describe("AirtableFeedbackClient", () => {
           "Screen Width": issue.screenWidth,
           "Guest/Logged In": "Guest",
           UserId: userData.user.id,
+          "Legal Structure": userData.profileData.legalStructureId,
         },
       },
     ]);
