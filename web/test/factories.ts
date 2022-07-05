@@ -553,7 +553,7 @@ export const randomFormationLegalType = (): FormationLegalType => {
 
 export const randomBusinessSuffix = (legalStructureId?: FormationLegalType): BusinessSuffix => {
   const legalSuffix = legalStructureId ? BusinessSuffixMap[legalStructureId] : undefined;
-  const suffixes = legalSuffix ? legalSuffix : AllBusinessSuffixes;
+  const suffixes = legalSuffix ?? AllBusinessSuffixes;
   const randomIndex = Math.floor(Math.random() * suffixes.length);
   return suffixes[randomIndex] as BusinessSuffix;
 };

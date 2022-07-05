@@ -114,7 +114,7 @@ export const GenericTextField = (props: GenericTextFieldProps): ReactElement => 
         error={props.error}
         helperText={helperText}
         variant="outlined"
-        autoComplete={props.autoComplete ? props.autoComplete : "off"}
+        autoComplete={props.autoComplete ?? "off"}
         placeholder={props.placeholder ?? ""}
         disabled={props.disabled}
         {...fieldOptions}

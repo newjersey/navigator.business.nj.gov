@@ -60,9 +60,8 @@ export const preparePage = (
   municipalities?: Municipality[],
   task?: Task
 ): FormationPageHelpers => {
-  const genericTown = userData.profileData?.municipality
-    ? userData.profileData.municipality
-    : generateMunicipality({ displayName: "GenericTown" });
+  const genericTown =
+    userData.profileData?.municipality ?? generateMunicipality({ displayName: "GenericTown" });
   const profileData = generateFormationProfileData({ ...userData.profileData, municipality: genericTown });
   const initialUserData = generateUserData({
     ...userData,
