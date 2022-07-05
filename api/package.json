@@ -90,7 +90,7 @@
     "serverless-offline": "8.8.0",
     "serverless-offline-ssm": "6.2.0",
     "serverless-webpack": "5.7.1",
-    "supertest": "6.2.3",
+    "supertest": "6.2.4",
     "ts-jest": "28.0.5",
     "ts-loader": "9.3.1",
     "ts-node": "10.8.1",
