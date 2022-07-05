@@ -9,7 +9,7 @@ interface Props {
 export const Icon = (props: Props): ReactElement => {
   return (
     <svg
-      className={`usa-icon ${props.className ? props.className : ""}`}
+      className={`usa-icon ${props.className ?? ""}`}
       aria-label={props.label}
       aria-hidden="true"
       focusable="false"

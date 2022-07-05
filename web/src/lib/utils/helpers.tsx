@@ -118,7 +118,7 @@ export const getModifiedTaskBooleanUndefined = (
 };
 
 export const rswitch = <T,>(param: string, cases: { default: T; [k: string]: T }): T => {
-  return cases[param] ? cases[param] : cases.default;
+  return cases[param] ?? cases.default;
 };
 
 export const scrollToTop = (): void => {
@@ -193,7 +193,7 @@ export const setHeaderRole = (
 ): (({ children }: { children: string[] }) => ReactElement) => {
   const createElement = ({ children }: { children: string[] }): ReactElement => {
     return (
-      <div role="heading" aria-level={ariaLevel} className={classProperties ? classProperties : ""}>
+      <div role="heading" aria-level={ariaLevel} className={classProperties ?? ""}>
         {children}
       </div>
     );
