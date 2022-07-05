@@ -1,3 +1,4 @@
+/* eslint-disable testing-library/no-unnecessary-act */
 import { NexusFormationTask } from "@/components/tasks/NexusFormationTask";
 import { getMergedConfig } from "@/contexts/configContext";
 import * as taskFetcher from "@/lib/async-content-fetchers/fetchTaskByFilename";
@@ -5,7 +6,7 @@ import { Task } from "@/lib/types/types";
 import { generateTask } from "@/test/factories";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { useMockProfileData } from "@/test/mock/mockUseUserData";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
@@ -20,6 +21,7 @@ describe("<NexusFormationTask />", () => {
   beforeEach(() => {
     jest.resetAllMocks();
     useMockRoadmap({});
+    mockFetchTaskByFilename.mockResolvedValue(generateTask({}));
     nexusTask = generateTask({
       id: "form-business-entity-foreign",
       contentMd: "stuff ${beginIndentationSection} things ${endIndentationSection} more",
@@ -37,11 +39,22 @@ describe("<NexusFormationTask />", () => {
     expect(screen.queryByText(nexusTask.callToActionText)).not.toBeInTheDocument();
   });
 
-  it("shows warning when business name exists but DBA name is empty", () => {
+  it("does not show warning when business name exists but DBA name is empty", () => {
     useMockProfileData({ businessName: "some name", nexusDbaName: "" });
     renderTask();
-    expect(screen.getByTestId("name-search-warning")).toBeInTheDocument();
-    expect(screen.queryByText(nexusTask.callToActionText)).not.toBeInTheDocument();
+    expect(screen.queryByTestId("name-search-warning")).not.toBeInTheDocument();
+  });
+
+  it("does not show warning when business name exists and DBA exists", () => {
+    useMockProfileData({ businessName: "some name", nexusDbaName: "some dba name" });
+    renderTask();
+    expect(screen.queryByTestId("name-search-warning")).not.toBeInTheDocument();
+  });
+
+  it("does not show warning when business name exists and DBA undefined", async () => {
+    useMockProfileData({ businessName: "some name", nexusDbaName: undefined });
+    await act(() => renderTask());
+    expect(screen.queryByTestId("name-search-warning")).not.toBeInTheDocument();
   });
 
   describe("when not DBA", () => {
@@ -58,7 +71,7 @@ describe("<NexusFormationTask />", () => {
         })
       );
 
-      renderTask();
+      await act(() => renderTask());
       await waitFor(() => {
         expect(screen.getByText("legacy task content")).toBeInTheDocument();
       });

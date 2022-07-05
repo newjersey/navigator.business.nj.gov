@@ -25,7 +25,7 @@ export const NexusFormationTask = (props: Props): ReactElement => {
 
   useMountEffectWhenDefined(async () => {
     if (!userData) return;
-    if (!userData.profileData.businessName || userData.profileData.nexusDbaName === "") {
+    if (!userData.profileData.businessName) {
       setShowWarning(true);
     } else if (userData.profileData.nexusDbaName === undefined) {
       const legacyTask = await fetchTaskByFilename("form-business-entity");
