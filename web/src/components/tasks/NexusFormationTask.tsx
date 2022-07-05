@@ -78,9 +78,12 @@ export const NexusFormationTask = (props: Props): ReactElement => {
       <div>
         <TaskHeader task={props.task} />
         {showWarning && (
-          <Alert variant="warning" dataTestid="name-search-warning">
-            <Content>{Config.nexusFormationTask.warningText}</Content>
-          </Alert>
+          <>
+            <Alert variant="warning" dataTestid="name-search-warning">
+              <Content>{Config.nexusFormationTask.warningText}</Content>
+            </Alert>
+            <Content>{Config.nexusFormationTask.descriptionShownWithWarning}</Content>
+          </>
         )}
         {!showWarning && (
           <>

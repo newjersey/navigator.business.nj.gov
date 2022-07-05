@@ -2072,6 +2072,11 @@ collections:
             widget: object
             fields:
               - { label: Warning Text, name: warningText, widget: markdown }
+              - {
+                  label: Description (Shown Below Warning),
+                  name: descriptionShownWithWarning,
+                  widget: markdown,
+                }
               - { label: CTA Modal Header, name: dbaCtaModalHeader, widget: string }
               - { label: CTA Modal Body, name: dbaCtaModalBody, widget: markdown }
               - { label: CTA Modal Continue Button, name: dbaCtaModalContinueButtonText, widget: string }
