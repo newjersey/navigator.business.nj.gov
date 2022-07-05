@@ -9,7 +9,7 @@ required: true
 issuingAgency: New Jersey Department of Treasury's Division of Revenue and Enterprise Services
 ---
 
-You must register your business name and authorize your `legal structure|legal-structure-learn-more` with the State.
+You must register your business name and `authorize|certificate-formation` your `legal structure|legal-structure-learn-more` with the State.
 
 ---
 
