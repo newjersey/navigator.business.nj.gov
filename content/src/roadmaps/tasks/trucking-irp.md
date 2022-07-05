@@ -11,19 +11,11 @@ You need to register your fleet with the International Registration Plan (IRP) t
  
 ---
 ### Application Requirements
-- Proof of business address
+- Proof of business address, such as bank statements or a certificate of formation
 - USDoT Number
 - Tax ID or SSN
 - Truck information such as VIN#, fuel type, number of axles, and more
 - Mileage traveled in each state for the past year
- 
->**Where to file:**  
->
->New Jersey Motor Vehicle Commission  
->Motor Carrier Services, IRP Section  
->225 East State Street  
->P.O. Box 178  
->Trenton, NJ 08666-0178
  
 >**Once completed, you will have:**
 >- Registration credentials for each vehicle registered with the IRP
