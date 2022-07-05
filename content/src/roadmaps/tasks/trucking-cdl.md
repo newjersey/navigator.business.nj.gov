@@ -22,8 +22,6 @@ You need a Commercial Driver’s License (CDL) if **you** plan to do any load-ha
 - [Medical Examiner's Certificate](https://www.state.nj.us/mvc/pdf/drivertopics/RA_4_1_a.pdf) completed by your healthcare provider, if applicable
 - Completed [Application for a Commercial Driver's License](https://www.state.nj.us/mvc/pdf/license/BA-208C.pdf)
 - Complete Entry-level Driver Training (ELDT), also known as Hazardous Materials Training, from an approved provider
-- Passing grade on the knowledge test
-- Passing grade on your driving skills test
 - Pay any associated fees
 
 >**Once completed, you will have:**
