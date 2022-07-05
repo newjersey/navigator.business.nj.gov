@@ -17,7 +17,7 @@ You need to register your fleet with the International Registration Plan (IRP) t
 - Truck information such as VIN#, fuel type, number of axles, and more
 - Mileage traveled in each state for the past year
  
->**Mail Form to:**  
+>**Where to file:**  
 >
 >New Jersey Motor Vehicle Commission  
 >Motor Carrier Services, IRP Section  
