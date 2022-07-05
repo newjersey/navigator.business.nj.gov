@@ -1,10 +1,10 @@
 {
-  "naicsCodes": "541310",
+  "naicsCodes": "484110, 484121, 484122, 484220, 484230",
   "canBeHomeBased": true,
-  "defaultSectorId": "construction",
+  "defaultSectorId": "other-services",
   "canBeReseller": false,
   "isCpaRequiredApplicable": false,
-  "canHavePermanentLocation": true,
+  "canHavePermanentLocation": false,
   "roadmapSteps": [
     {
       "step": 1,
@@ -34,28 +34,33 @@
     {
       "step": 3,
       "weight": 15,
-      "task": "get-insurance"
+      "task": "trucking-cdl"
     },
     {
       "step": 3,
       "weight": 20,
-      "task": "architect-license"
+      "task": "trucking-boc3"
     },
     {
       "step": 3,
       "weight": 25,
-      "task": "architect-are-exam"
+      "task": "trucking-usdot"
     },
     {
       "step": 3,
       "weight": 30,
-      "task": "authorization-architect-firm"
+      "task": "trucking-irp"
+    },
+    {
+      "step": 3,
+      "weight": 35,
+      "task": "trucking-insurance"
     }
   ],
-  "name": "Architecture Firm",
+  "name": "Long-Haul Trucking",
   "isLiquorLicenseApplicable": false,
-  "isEnabled": true,
-  "additionalSearchTerms": "architect, engineer, consulting, architectural services",
-  "id": "architecture",
-  "description": "Plans, designs, and oversees the construction of buildings"
+  "isEnabled": false,
+  "additionalSearchTerms": "trucking, movers, box truck company, transportation, truck driving, hauling, truck haul, logistics, trucking company, ",
+  "id": "trucking",
+  "description": "Offers load-hauling services "
 }

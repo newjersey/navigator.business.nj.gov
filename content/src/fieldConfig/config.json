@@ -26,13 +26,18 @@
     "START": "Start",
     "OPERATE": "Operate"
   },
+  "taskProgressCard": {
+    "optionalTasksSingular": "${numTasks} optional task",
+    "optionalTasksPlural": "${numTasks} optional tasks",
+    "requiredTasksSingular": "${numTasks} required task",
+    "requiredTasksPlural": "${numTasks} required tasks"
+  },
   "betaBar": {
     "betaModalButtonText": "Share your feedback!",
     "betaMainText": "This site is in beta."
   },
   "businessFormationDefaults": {
     "membersExpandText": "Expand",
-    "nameCheckDesignatorText": "It appears you have included a designator in your name, such as LLC, LP or CORP. Please remove it at try searching again. Once you have found an available name you then can officially form your business.",
     "nameCheckUnavailableText": "Sorry, \"${name}\" isn’t available. Try another name. Once you have found an available name you then can officially form your business.",
     "businessTotalStockPlaceholder": "Enter number of shares ",
     "addressErrorText": "Enter an address",
@@ -210,6 +215,7 @@
     "llpText": "LLP",
     "contactPhoneNumberLabel": "**Phone**",
     "agentEmailErrorText": "Enter the agent's email address",
+    "nameCheckDesignatorText": "It appears you have included a designator in your name, such as LLC, LP or CORP. Please remove it at try searching again. Once you have found an available name you then can officially form your business.",
     "addressModalZipCodePlaceholder": "Zip Code",
     "contactPhoneNumberErrorText": "Enter a phone number",
     "addressModalZipCodeLabel": "**Zip Code**",
@@ -342,6 +348,12 @@
     "feedbackCancelButtonText": "Cancel",
     "feedbackModalLinkOwning": "https://forms.business.nj.gov/feedback/owning"
   },
+  "cannabisEligibilityModal": {
+    "eligibleModalCancelButton": "I'm not sure",
+    "eligibleModalTitle": "Ensure Your Eligibility",
+    "eligibleModalContinueButton": "I am eligible",
+    "eligibleModalBody": "We recommend you first [Determine if You are Eligible for Priority Status](/tasks/priority-status-cannabis) before proceeding."
+  },
   "filingDefaults": {
     "tagContentBeforeDueDate": "Next Due:"
   },
@@ -407,6 +419,9 @@
     "outOfBusinessPermitStatusText": "Out of Business",
     "expiredPermitStatusText": "Expired"
   },
+  "fundingDefaults": {
+    "issuingAgencyText": "Issuing Agency"
+  },
   "taskProgress": {
     "NOT_STARTED": "Not started",
     "IN_PROGRESS": "In progress",
@@ -426,13 +441,10 @@
     "section5FirstHeaderText": "Starter Kit",
     "heroCallOutFirstLineText": "Your Business,"
   },
-  "fundingDefaults": {
-    "issuingAgencyText": "Issuing Agency"
-  },
   "taskDefaults": {
+    "requiredLabelText": "Required",
     "backToRoadmapText": "Go Back",
     "issuingAgencyText": "Issuing Agency",
-    "requiredLabelText": "Required",
     "requiredTagText": "Required",
     "pageTitle": "Business Roadmap",
     "loadingTaskDependencies": "Loading task dependencies…",
@@ -446,6 +458,7 @@
   },
   "searchBusinessNameTask": {
     "placeholderText": "Type potential business name",
+    "designatorText": "It appears you have included a designator in your name, such as LLC, LP or CORP. Please remove it at try searching again. Once you have found an available name you then can officially form your business.",
     "searchButtonText": "Check Availability",
     "updateButtonText": "Update the name on your Roadmap with this one",
     "nameHasBeenUpdatedText": "Your business name has been updated.",
@@ -453,8 +466,7 @@
     "availableText": "It looks like \"${name}\" might be available, but you should do an official name check using the button below.",
     "errorTextBadInput": "Sorry, that isn't a valid company name. Try being more specific.",
     "errorTextSearchFailed": "Sorry, something went wrong. Please try again later.",
-    "unavailableText": "Sorry, \"${name}\" isn’t available. Try another name.",
-    "designatorText": "It appears you have included a designator in your name, such as LLC, LP or CORP. Please remove it at try searching again. Once you have found an available name you then can officially form your business."
+    "unavailableText": "Sorry, \"${name}\" isn’t available. Try another name."
   },
   "siteWideErrorMessages": {
     "errorTextNoData": "Something went wrong and we can't access your data. Please try again later.",
@@ -495,11 +507,9 @@
     "escapeModalReturn": "Continue without saving.",
     "successTextHeader": "Profile Updated"
   },
-  "cannabisEligibilityModal": {
-    "eligibleModalCancelButton": "I'm not sure",
-    "eligibleModalTitle": "Ensure Your Eligibility",
-    "eligibleModalContinueButton": "I am eligible",
-    "eligibleModalBody": "We recommend you first [Determine if You are Eligible for Priority Status](/tasks/priority-status-cannabis) before proceeding."
+  "unsupportedNavigatorUserPage": {
+    "title": "Chat with a New Jersey Business Representative",
+    "subtitle": "It seems like you might have some unique needs, please use our chat feature to get guidance from a New Jersey-based business advocate. Should something change, you can come back and use this tool again later."
   },
   "headerDefaults": {
     "noUserNameHeaderText": "Hello!",
@@ -507,15 +517,5 @@
     "newJerseyDateBodyText": "ET",
     "guestModeToProfileButtonText": "Guest Account",
     "genericToProfileButtonText": "Business Profile"
-  },
-  "taskProgressCard": {
-    "optionalTasksSingular": "${numTasks} optional task",
-    "optionalTasksPlural": "${numTasks} optional tasks",
-    "requiredTasksSingular": "${numTasks} required task",
-    "requiredTasksPlural": "${numTasks} required tasks"
-  },
-  "unsupportedNavigatorUserPage":{
-    "title": "You are all set!",
-    "subtitle": "Because you selected “None of the Above,” you don't need to `form or register your business|form-and-register-business` with the State of New Jersey right now. Should something change, you can come back and use this tool again later."
   }
 }

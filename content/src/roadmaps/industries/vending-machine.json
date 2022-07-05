@@ -45,7 +45,7 @@
   "name": "Vending Machine",
   "isLiquorLicenseApplicable": false,
   "isEnabled": false,
-  "additionalSearchTerms": "vending machine service, vending machine business, snack machine",
+  "additionalSearchTerms": "vending machine service, vending machine business, snack machine, vending machine operator",
   "id": "vending-machine",
   "description": "Offers small items for purchase through an automated machine"
 }
