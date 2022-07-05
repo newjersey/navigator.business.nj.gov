@@ -2265,7 +2265,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/helper-validator-identifier@npm:^7.15.7, @babel/helper-validator-identifier@npm:^7.18.6":
+"@babel/helper-validator-identifier@npm:^7.18.6":
   version: 7.18.6
   resolution: "@babel/helper-validator-identifier@npm:7.18.6"
   checksum: e295254d616bbe26e48c196a198476ab4d42a73b90478c9842536cf910ead887f5af6b5c4df544d3052a25ccb3614866fa808dc1e3a5a4291acd444e243c0648
@@ -3550,7 +3550,7 @@ __metadata:
     eslint-config-prettier: 8.5.0
     eslint-plugin-jest: 26.5.3
     eslint-plugin-jest-formatting: 3.1.0
-    eslint-plugin-unicorn: 42.0.0
+    eslint-plugin-unicorn: 43.0.0
     express: 4.18.1
     jest: 28.1.2
     jest-dynalite: 3.6.0
@@ -3711,7 +3711,7 @@ __metadata:
     eslint-plugin-react: 7.30.1
     eslint-plugin-react-hooks: 4.6.0
     eslint-plugin-testing-library: 5.5.1
-    eslint-plugin-unicorn: 42.0.0
+    eslint-plugin-unicorn: 43.0.0
     express: 4.18.1
     fast-deep-equal: 3.1.3
     focus-trap-react: 9.0.2
@@ -3798,7 +3798,7 @@ __metadata:
     eslint-config-prettier: 8.5.0
     eslint-plugin-jest: 26.5.3
     eslint-plugin-jest-formatting: 3.1.0
-    eslint-plugin-unicorn: 42.0.0
+    eslint-plugin-unicorn: 43.0.0
     jest: 28.1.2
     jest-junit: 14.0.0
     prettier: 2.7.1
@@ -3896,7 +3896,7 @@ __metadata:
     eslint-plugin-react: 7.30.1
     eslint-plugin-react-hooks: 4.6.0
     eslint-plugin-testing-library: 5.5.1
-    eslint-plugin-unicorn: 42.0.0
+    eslint-plugin-unicorn: 43.0.0
     fast-deep-equal: 3.1.3
     focus-trap-react: 9.0.2
     gray-matter: 4.0.3
@@ -12646,7 +12646,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ci-info@npm:^3.2.0, ci-info@npm:^3.3.0, ci-info@npm:^3.3.1":
+"ci-info@npm:^3.2.0, ci-info@npm:^3.3.1, ci-info@npm:^3.3.2":
   version: 3.3.2
   resolution: "ci-info@npm:3.3.2"
   checksum: fd81f1edd2d3b0f6cb077b2e84365136d87b9db8c055928c1ad69da8a76c2c2f19cba8ea51b90238302157ca927f91f92b653e933f2398dde4867500f08d6e62
@@ -15919,12 +15919,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-unicorn@npm:42.0.0":
-  version: 42.0.0
-  resolution: "eslint-plugin-unicorn@npm:42.0.0"
+"eslint-plugin-unicorn@npm:43.0.0":
+  version: 43.0.0
+  resolution: "eslint-plugin-unicorn@npm:43.0.0"
   dependencies:
-    "@babel/helper-validator-identifier": ^7.15.7
-    ci-info: ^3.3.0
+    "@babel/helper-validator-identifier": ^7.18.6
+    ci-info: ^3.3.2
     clean-regexp: ^1.0.0
     eslint-utils: ^3.0.0
     esquery: ^1.4.0
@@ -15935,11 +15935,11 @@ __metadata:
     read-pkg-up: ^7.0.1
     regexp-tree: ^0.1.24
     safe-regex: ^2.1.1
-    semver: ^7.3.5
+    semver: ^7.3.7
     strip-indent: ^3.0.0
   peerDependencies:
-    eslint: ">=8.8.0"
-  checksum: 03757cbf417d39691fe04048ac9352585162a4dd68c2f26f5bc0956409625c7c4841487f0fa623e0d6dd5ff9cc3e758b74e4d170e3b0a877bbd0114995310058
+    eslint: ">=8.18.0"
+  checksum: 5e9da1a37922483f8e945878d870bcc617b2c6a5fd3d1a453ccc327c33a0f56206968bc702dc08b3e3098b9ae0b13a55842c8516f79509bc212eba7256f57438
   languageName: node
   linkType: hard
 
