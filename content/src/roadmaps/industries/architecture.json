@@ -55,7 +55,7 @@
   "name": "Architecture Firm",
   "isLiquorLicenseApplicable": false,
   "isEnabled": true,
-  "additionalSearchTerms": "architect, engineer",
+  "additionalSearchTerms": "architect, engineer, consulting, architectural services",
   "id": "architecture",
   "description": "Plans, designs, and oversees the construction of buildings"
 }
