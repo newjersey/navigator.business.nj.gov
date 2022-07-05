@@ -14,11 +14,11 @@ You must register with the US Department of Transportation (USDoT) and obtain a 
 ### Eligibility Criteria
 - Your truck will haul hazardous materials, or
 - Your truck weighs 10,000 pounds or more, and
-- Your truck will transport loads inside the State, inter-state, or internationally
+- Your truck will transport loads inside the State, interstate, or internationally
 
 ### Application Requirements
 - `EIN|ein` or SSN
-- `Dun and Bradstreet (DUNS) number|duns`, if available
+- `Dun and Bradstreet (DUNS) number|duns`, if your company has one
 - Names and Titles of the company officers
 - A `process agent|process-agent`, already filed with Federal Motor Carrier Safety Administration (FMCSA)  
 
