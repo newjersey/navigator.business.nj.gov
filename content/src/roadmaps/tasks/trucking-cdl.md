@@ -27,4 +27,5 @@ You need a Commercial Driver’s License (CDL) if **you** plan to do any load-ha
 - Pay any associated fees
 
 >**Once completed, you will have:**
->- You will receive a Commercial Learner’s Permit (CLP) after passing the knowledge portion of the test and a CDL after passing the driving exam.
+>- Commercial Learner’s Permit (CLP) after passing the knowledge portion of the test
+>- CDL after passing the driving exam
