@@ -45,7 +45,7 @@
   "name": "Real Estate Agency",
   "isLiquorLicenseApplicable": false,
   "isEnabled": false,
-  "additionalSearchTerms": "real estate broker",
+  "additionalSearchTerms": "real estate broker, brokerage, ",
   "id": "real-estate-broker",
   "description": "Facilitates real estate transactions between buyers and sellers"
 }
