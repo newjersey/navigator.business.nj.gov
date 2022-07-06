@@ -95,16 +95,6 @@ const TaskPage = (props: Props): ReactElement => {
     return <TaskElement task={task}>{<UnlockedBy task={props.task} />}</TaskElement>;
   };
 
-  const businessFormationFeatureFlag = (): ReactElement => {
-    return (
-      <BusinessFormation
-        task={props.task}
-        displayContent={props.displayContent.formationDisplayContent}
-        municipalities={props.municipalities}
-      />
-    );
-  };
-
   const renderNextAndPreviousButtons = () => {
     const isValidLegalStructure = allowFormation(userData?.profileData.legalStructureId);
     if (props.task.id === "form-business-entity" && isValidLegalStructure) return;
@@ -125,12 +115,18 @@ const TaskPage = (props: Props): ReactElement => {
             "pharmacy-license": <LicenseTask task={props.task} />,
             "license-accounting": <LicenseTask task={props.task} />,
             "license-massage-therapy": <LicenseTask task={props.task} />,
-            "form-business-entity": businessFormationFeatureFlag(),
             "determine-naics-code": <NaicsCodeTask task={props.task} />,
             "priority-status-cannabis": <CannabisPriorityStatusTask task={props.task} />,
             "conditional-permit-cannabis": <CannabisApplyForLicenseTask task={props.task} />,
             "annual-license-cannabis": <CannabisApplyForLicenseTask task={props.task} />,
             "form-business-entity-foreign": <NexusFormationTask task={props.task} />,
+            "form-business-entity": (
+              <BusinessFormation
+                task={props.task}
+                displayContent={props.displayContent.formationDisplayContent}
+                municipalities={props.municipalities}
+              />
+            ),
             default: getTaskBody(),
           })}
         </TaskSidebarPageLayout>
