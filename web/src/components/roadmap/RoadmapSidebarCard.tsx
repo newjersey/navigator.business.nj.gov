@@ -211,6 +211,7 @@ export const RoadmapSidebarCard = (props: Props) => {
                 onClick={ctaOnClickMap[props.card.id]}
                 noRightMargin
                 dataTestid={`cta-${props.card.id}`}
+                widthAutoOnMobile
               >
                 {props.card.ctaText}
               </Button>
