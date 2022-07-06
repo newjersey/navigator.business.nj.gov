@@ -8,7 +8,7 @@ callToActionText: Apply for My CDL
 issuingAgency: New Jersey Motor Vehicle Commission
 ---
 Every employee driving a truck needs a Commercial Driver's License (CDL). It's the business owner's responsibility to ensure the staff is properly licensed.   
-You only need a CDL if **you** plan to do any load-hauling for your business.
+As the business owner, you only need a CDL if **you** plan to do any load-hauling for your business.
  
 ---
 ### Eligibility Criteria
