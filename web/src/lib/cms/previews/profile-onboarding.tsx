@@ -4,6 +4,7 @@ import { Alert } from "@/components/njwds-extended/Alert";
 import { OnboardingBusinessPersona } from "@/components/onboarding/OnboardingBusinessPersona";
 import { OnboardingForeignBusinessType } from "@/components/onboarding/OnboardingForeignBusinessType";
 import { OnboardingLegalStructure } from "@/components/onboarding/OnboardingLegalStructure";
+import { OnboardingLocationInNewJersey } from "@/components/onboarding/OnboardingLocationInNewJersey";
 import { ConfigContext, ConfigType, getMergedConfig } from "@/contexts/configContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { getMetadataFromSlug } from "@/lib/cms/previews/preview-helpers";
@@ -74,6 +75,9 @@ const ProfilePreviewOnboarding = (props: Props) => {
               <Alert variant="info">
                 <Content>{config.profileDefaults.FOREIGN.foreignBusinessType.NEXUS}</Content>
               </Alert>
+
+              <hr className="margin-y-4" />
+              <OnboardingLocationInNewJersey />
             </>
           )}
         </div>
