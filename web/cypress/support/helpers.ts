@@ -1,5 +1,6 @@
 import { isEntityIdApplicable } from "@/lib/domain-logic/isEntityIdApplicable";
 import {
+  arrayOfSectors,
   Industries,
   Industry,
   LegalStructure,
@@ -99,12 +100,12 @@ interface StartingOnboardingData {
 interface ExistingOnboardingData {
   businessFormationDate?: string;
   entityId?: string;
-  businessName: string;
-  sectorId: string;
+  businessName?: string;
+  sectorId?: string;
   legalStructureId?: string;
-  numberOfEmployees: string;
-  townDisplayName: string;
-  homeBasedQuestion: boolean;
+  numberOfEmployees?: string;
+  townDisplayName?: string;
+  homeBasedQuestion?: boolean;
   ownershipDataValues?: string[];
 }
 
@@ -232,14 +233,14 @@ export const completeNewBusinessOnboarding = ({
 };
 
 export const completeExistingBusinessOnboarding = ({
-  businessFormationDate,
-  entityId,
-  businessName,
-  sectorId,
-  numberOfEmployees,
-  townDisplayName,
-  homeBasedQuestion,
-  ownershipDataValues,
+  businessFormationDate = "04/2021",
+  entityId = randomInt(10).toString(),
+  businessName = `Generic Business Name ${randomInt()}`,
+  sectorId = randomElementFromArray(arrayOfSectors).id,
+  numberOfEmployees = randomInt(1).toString(),
+  townDisplayName = "Atlantic",
+  homeBasedQuestion = Boolean(randomInt() % 2),
+  ownershipDataValues = ["woman-owned", "veteran-owned"],
   legalStructureId = businessFormationDate || entityId || randomInt() % 2
     ? "limited-partnership"
     : "sole-proprietorship",
@@ -247,7 +248,7 @@ export const completeExistingBusinessOnboarding = ({
   email = `MichaelSmith${randomInt()}@gmail.com`,
   isNewsletterChecked = false,
   isContactMeChecked = false,
-}: ExistingOnboardingData & Partial<Registration>): void => {
+}: Partial<ExistingOnboardingData> & Partial<Registration>): void => {
   let pageIndex = 1;
   cy.url().should("include", `onboarding?page=${pageIndex}`);
 
