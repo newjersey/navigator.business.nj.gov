@@ -1,4 +1,3 @@
-/* eslint-disable testing-library/no-unnecessary-act */
 import { NexusFormationTask } from "@/components/tasks/NexusFormationTask";
 import { getMergedConfig } from "@/contexts/configContext";
 import * as taskFetcher from "@/lib/async-content-fetchers/fetchTaskByFilename";
@@ -6,7 +5,7 @@ import { Task } from "@/lib/types/types";
 import { generateTask } from "@/test/factories";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { useMockProfileData } from "@/test/mock/mockUseUserData";
-import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
@@ -17,11 +16,17 @@ const Config = getMergedConfig();
 
 describe("<NexusFormationTask />", () => {
   let nexusTask: Task;
+  let legacyTask: Task;
 
   beforeEach(() => {
     jest.resetAllMocks();
     useMockRoadmap({});
-    mockFetchTaskByFilename.mockResolvedValue(generateTask({}));
+    legacyTask = generateTask({
+      contentMd: "legacy task content",
+      name: "legacy task name",
+      callToActionText: "legacy task cta",
+    });
+    mockFetchTaskByFilename.mockResolvedValue(legacyTask);
     nexusTask = generateTask({
       id: "form-business-entity-foreign",
       contentMd: "stuff ${beginIndentationSection} things ${endIndentationSection} more",
@@ -39,21 +44,24 @@ describe("<NexusFormationTask />", () => {
     expect(screen.queryByText(nexusTask.callToActionText)).not.toBeInTheDocument();
   });
 
-  it("does not show warning when business name exists but DBA name is empty", () => {
+  it("does not show warning when business name exists but DBA name is empty", async () => {
     useMockProfileData({ businessName: "some name", nexusDbaName: "" });
     renderTask();
+    expect(screen.getByText(nexusTask.callToActionText)).toBeInTheDocument();
     expect(screen.queryByTestId("name-search-warning")).not.toBeInTheDocument();
   });
 
   it("does not show warning when business name exists and DBA exists", () => {
     useMockProfileData({ businessName: "some name", nexusDbaName: "some dba name" });
     renderTask();
+    expect(screen.getByText(nexusTask.callToActionText)).toBeInTheDocument();
     expect(screen.queryByTestId("name-search-warning")).not.toBeInTheDocument();
   });
 
   it("does not show warning when business name exists and DBA undefined", async () => {
     useMockProfileData({ businessName: "some name", nexusDbaName: undefined });
-    await act(() => renderTask());
+    renderTask();
+    await screen.findByText(legacyTask.callToActionText);
     expect(screen.queryByTestId("name-search-warning")).not.toBeInTheDocument();
   });
 
@@ -63,20 +71,10 @@ describe("<NexusFormationTask />", () => {
     });
 
     it("displays form-business-entity legacy task content and CTA but not header", async () => {
-      mockFetchTaskByFilename.mockResolvedValue(
-        generateTask({
-          contentMd: "legacy task content",
-          name: "legacy task name",
-          callToActionText: "legacy task cta",
-        })
-      );
-
-      await act(() => renderTask());
-      await waitFor(() => {
-        expect(screen.getByText("legacy task content")).toBeInTheDocument();
-      });
-      expect(screen.getByText("legacy task cta")).toBeInTheDocument();
-      expect(screen.queryByText("legacy task name")).not.toBeInTheDocument();
+      renderTask();
+      await screen.findByText(legacyTask.contentMd);
+      expect(screen.getByText(legacyTask.callToActionText)).toBeInTheDocument();
+      expect(screen.queryByText(legacyTask.name)).not.toBeInTheDocument();
       expect(screen.getByText(nexusTask.name)).toBeInTheDocument();
     });
   });
