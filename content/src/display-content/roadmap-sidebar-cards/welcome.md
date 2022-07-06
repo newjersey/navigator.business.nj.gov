@@ -2,6 +2,7 @@
 id: welcome
 header: Welcome!
 imgPath: /img/congratulations-purple.svg
+ctaText: ""
 color: roadmap-purple
 shadowColor: roadmap-purple-light
 borderColor: roadmap-purple

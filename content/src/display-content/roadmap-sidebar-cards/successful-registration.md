@@ -2,6 +2,7 @@
 id: successful-registration
 header: You’re Registered!
 imgPath: /img/check-mark-circular-blue.svg
+ctaText: ""
 color: accent-cool-darker
 shadowColor: roadmap-blue-light
 borderColor: accent-cool-darker

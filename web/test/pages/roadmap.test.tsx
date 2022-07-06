@@ -1,12 +1,9 @@
 import { SignUpToast } from "@/components/auth/SignUpToast";
 import { getMergedConfig } from "@/contexts/configContext";
-import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { SidebarCardContent } from "@/lib/types/types";
 import RoadmapPage from "@/pages/roadmap";
 import {
-  generateFormationData,
-  generateGetFilingResponse,
   generatePreferences,
   generateProfileData,
   generateSidebarCardContent,
@@ -19,21 +16,8 @@ import { withAuthAlert } from "@/test/helpers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { setMockUserDataResponse, useMockProfileData, useMockUserData } from "@/test/mock/mockUseUserData";
-import {
-  currentUserData,
-  setupStatefulUserDataContext,
-  userDataWasNotUpdated,
-  WithStatefulUserData,
-} from "@/test/mock/withStatefulUserData";
-import { createPageHelpers, PageHelpers } from "@/test/pages/onboarding/helpers-onboarding";
-import {
-  getCurrentDate,
-  LookupOwnershipTypeById,
-  LookupSectorTypeById,
-  RegistrationStatus,
-  UserData,
-} from "@businessnjgovnavigator/shared/";
-import { parseDateWithFormat } from "@businessnjgovnavigator/shared/dateHelpers";
+import { setupStatefulUserDataContext, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
+import { RegistrationStatus, UserData } from "@businessnjgovnavigator/shared/";
 import * as materialUi from "@mui/material";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
@@ -49,11 +33,7 @@ jest.mock("@mui/material", () => mockMaterialUI());
 jest.mock("next/router");
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("@/lib/api-client/apiClient", () => ({
-  postGetAnnualFilings: jest.fn(),
-}));
 
-const mockApi = api as jest.Mocked<typeof api>;
 const Config = getMergedConfig();
 
 const setMobileScreen = (value: boolean): void => {
@@ -62,7 +42,10 @@ const setMobileScreen = (value: boolean): void => {
 
 const createDisplayContent = (sidebar?: Record<string, SidebarCardContent>) => ({
   contentMd: "",
-  sidebarDisplayContent: sidebar ?? { welcome: generateSidebarCardContent({}) },
+  sidebarDisplayContent: sidebar ?? {
+    welcome: generateSidebarCardContent({}),
+    graduation: generateSidebarCardContent({}),
+  },
 });
 
 describe("roadmap page", () => {
@@ -87,16 +70,22 @@ describe("roadmap page", () => {
     );
   };
 
-  const renderPageWithUserData = (userData: UserData): { page: PageHelpers } => {
+  const renderStatefulRoadmapPage = ({
+    userData,
+    sidebarDisplayContent,
+  }: {
+    userData?: UserData;
+    sidebarDisplayContent?: Record<string, SidebarCardContent>;
+  }) => {
+    setupStatefulUserDataContext();
+
     render(
-      <WithStatefulUserData initialUserData={userData}>
+      <WithStatefulUserData initialUserData={userData || generateUserData({})}>
         <ThemeProvider theme={createTheme()}>
-          <RoadmapPage operateReferences={{}} displayContent={createDisplayContent()} />
+          <RoadmapPage operateReferences={{}} displayContent={createDisplayContent(sidebarDisplayContent)} />
         </ThemeProvider>
       </WithStatefulUserData>
     );
-    const page = createPageHelpers();
-    return { page };
   };
 
   const renderPageWithAuthAlert = ({
@@ -276,274 +265,6 @@ describe("roadmap page", () => {
     expect(within(sectionPlan).getByText("step1")).toBeVisible();
   });
 
-  describe("oscar graduation modal", () => {
-    const openGraduationModal = (): void => {
-      fireEvent.click(screen.getByText(Config.roadmapDefaults.graduationButtonText));
-    };
-
-    const submitGraduationModal = (): void => {
-      fireEvent.click(screen.getByText(Config.roadmapDefaults.graduationModalContinueButtonText));
-    };
-
-    beforeEach(() => {
-      setupStatefulUserDataContext();
-      mockApi.postGetAnnualFilings.mockImplementation((request) => Promise.resolve(request));
-    });
-
-    it("switches user to oscar and sends to dashboard", async () => {
-      const userData = generateUserData({
-        profileData: generateProfileData({
-          businessPersona: "STARTING",
-          legalStructureId: "limited-liability-partnership",
-          dateOfFormation: undefined,
-          sectorId: undefined,
-          industryId: "generic",
-          ownershipTypeIds: [],
-          existingEmployees: undefined,
-        }),
-      });
-
-      const { page } = renderPageWithUserData(userData);
-
-      const date = getCurrentDate().subtract(1, "month").date(1);
-      const dateOfFormation = date.format("YYYY-MM-DD");
-
-      openGraduationModal();
-      expect(screen.getByTestId("graduation-modal")).toBeInTheDocument();
-      page.fillText("Business name", "A Clean Business");
-      page.selectDate("Date of formation", date);
-      page.selectByValue("Sector", "clean-energy");
-      page.selectByValue("Ownership", "veteran-owned");
-      page.fillText("Existing employees", "1234567");
-      submitGraduationModal();
-
-      await waitFor(() => {
-        expect(currentUserData()).toEqual({
-          ...userData,
-          profileData: {
-            ...userData.profileData,
-            businessName: "A Clean Business",
-            dateOfFormation,
-            sectorId: "clean-energy",
-            ownershipTypeIds: ["veteran-owned"],
-            existingEmployees: "1234567",
-            businessPersona: "OWNING",
-          },
-        });
-      });
-      expect(mockPush).toHaveBeenCalledWith("/dashboard");
-    });
-
-    it("pre-populates fields with data from profile", async () => {
-      const date = getCurrentDate().subtract(1, "month").date(1);
-      const dateOfFormation = date.format("YYYY-MM-DD");
-      const userData = generateUserData({
-        profileData: generateProfileData({
-          businessPersona: "STARTING",
-          legalStructureId: "limited-liability-partnership",
-          businessName: "A Test Business",
-          dateOfFormation,
-          sectorId: "clean-energy",
-          industryId: "generic",
-          ownershipTypeIds: ["veteran-owned"],
-          existingEmployees: "1234567",
-        }),
-      });
-
-      const { page } = renderPageWithUserData(userData);
-
-      openGraduationModal();
-      expect((screen.getByLabelText("Business name") as HTMLInputElement).value).toEqual("A Test Business");
-      expect(page.getDateOfFormationValue()).toEqual(date.format("MM/YYYY"));
-      expect(page.getSectorIDValue()).toEqual(LookupSectorTypeById("clean-energy").name);
-      expect(screen.queryByLabelText("Ownership")).toHaveTextContent(
-        `${LookupOwnershipTypeById("veteran-owned").name}`
-      );
-      expect((screen.getByLabelText("Existing employees") as HTMLInputElement).value).toEqual("1234567");
-
-      submitGraduationModal();
-
-      await waitFor(() => {
-        expect(currentUserData()).toEqual({
-          ...userData,
-          profileData: {
-            ...userData.profileData,
-            dateOfFormation,
-            businessName: "A Test Business",
-            sectorId: "clean-energy",
-            ownershipTypeIds: ["veteran-owned"],
-            existingEmployees: "1234567",
-            businessPersona: "OWNING",
-          },
-        });
-      });
-      expect(mockPush).toHaveBeenCalledWith("/dashboard");
-    });
-
-    it("updates filing data", async () => {
-      const taxData = generateTaxFilingData({});
-      mockApi.postGetAnnualFilings.mockImplementation((userData) =>
-        Promise.resolve({ ...userData, taxFilingData: { ...taxData, filings: [] } })
-      );
-      const date = getCurrentDate().subtract(1, "month").date(1);
-      const dateOfFormation = date.format("YYYY-MM-DD");
-      const userData = generateUserData({
-        taxFilingData: taxData,
-        profileData: generateProfileData({
-          businessPersona: "OWNING",
-          legalStructureId: "limited-liability-partnership",
-          dateOfFormation,
-          sectorId: "clean-energy",
-          industryId: "generic",
-          ownershipTypeIds: ["veteran-owned"],
-          existingEmployees: "1234567",
-        }),
-      });
-
-      renderPageWithUserData(userData);
-      openGraduationModal();
-      submitGraduationModal();
-
-      await waitFor(() => {
-        expect(currentUserData()).toEqual({
-          ...userData,
-          taxFilingData: { ...taxData, filings: [] },
-        });
-      });
-      expect(mockPush).toHaveBeenCalledWith("/dashboard");
-    });
-
-    it("shows sector for generic industry", () => {
-      const userData = generateUserData({
-        profileData: generateProfileData({
-          industryId: "generic",
-          businessPersona: "STARTING",
-          sectorId: undefined,
-        }),
-      });
-
-      renderPageWithUserData(userData);
-
-      openGraduationModal();
-      expect((screen.queryByLabelText("Sector") as HTMLInputElement)?.value).toEqual("Other Services");
-    });
-
-    it("does not show sector for non-generic industry", () => {
-      const userData = generateUserData({
-        profileData: generateProfileData({
-          industryId: "restaurant",
-          businessPersona: "STARTING",
-          sectorId: undefined,
-        }),
-      });
-
-      renderPageWithUserData(userData);
-
-      openGraduationModal();
-      expect(screen.queryByLabelText("Sector")).not.toBeInTheDocument();
-    });
-
-    it("fires validations when clicking submit", () => {
-      const userData = generateUserData({
-        profileData: generateProfileData({
-          businessPersona: "STARTING",
-          legalStructureId: "limited-liability-partnership",
-          dateOfFormation: undefined,
-          sectorId: undefined,
-          industryId: undefined,
-          ownershipTypeIds: [],
-          existingEmployees: undefined,
-        }),
-      });
-
-      renderPageWithUserData(userData);
-      openGraduationModal();
-      submitGraduationModal();
-      expect(userDataWasNotUpdated()).toEqual(true);
-      expect(mockPush).not.toHaveBeenCalledWith("/dashboard");
-      expect(screen.getByText(Config.profileDefaults.OWNING.dateOfFormation.errorText)).toBeInTheDocument();
-      expect(screen.getByText(Config.profileDefaults.OWNING.sectorId.errorTextRequired)).toBeInTheDocument();
-      expect(
-        screen.getByText(Config.profileDefaults.OWNING.existingEmployees.errorTextRequired)
-      ).toBeInTheDocument();
-    });
-
-    it("hides date of formation if legal structure does not require public filing", () => {
-      const userData = generateUserData({
-        profileData: generateProfileData({
-          businessPersona: "STARTING",
-          legalStructureId: "general-partnership",
-        }),
-      });
-
-      renderPageWithUserData(userData);
-
-      openGraduationModal();
-      expect(screen.getByTestId("graduation-modal")).toBeInTheDocument();
-      expect(screen.queryByLabelText("Date of formation")).not.toBeInTheDocument();
-    });
-
-    it("disables date of formation if formation getFiling success", () => {
-      const userData = generateUserData({
-        profileData: generateProfileData({
-          businessPersona: "STARTING",
-          legalStructureId: "limited-liability-partnership",
-          dateOfFormation: getCurrentDate().add(1, "day").format("YYYY-MM-DD"),
-        }),
-        formationData: generateFormationData({
-          getFilingResponse: generateGetFilingResponse({
-            success: true,
-          }),
-        }),
-      });
-
-      const { page } = renderPageWithUserData(userData);
-      openGraduationModal();
-      expect(screen.getByLabelText("Date of formation")).toBeDisabled();
-      expect(page.getDateOfFormationValue()).toEqual(
-        parseDateWithFormat(userData.formationData.formationFormData.businessStartDate, "YYYY-MM-DD").format(
-          "MM/YYYY"
-        )
-      );
-    });
-
-    it("does not display businessName if formation getFiling success", () => {
-      const userData = generateUserData({
-        profileData: generateProfileData({
-          businessPersona: "STARTING",
-          businessName: "A Test Business 2",
-          legalStructureId: "limited-liability-partnership",
-          dateOfFormation: getCurrentDate().add(1, "day").format("YYYY-MM-DD"),
-        }),
-        formationData: generateFormationData({
-          getFilingResponse: generateGetFilingResponse({
-            success: true,
-          }),
-        }),
-      });
-
-      renderPageWithUserData(userData);
-      openGraduationModal();
-      expect(screen.queryByTestId("businessName")).not.toBeInTheDocument();
-    });
-
-    it("display businessName if formation is not set", () => {
-      const userData = generateUserData({
-        profileData: generateProfileData({
-          businessPersona: "STARTING",
-          businessName: "A Test Business 2",
-          legalStructureId: "limited-liability-partnership",
-          dateOfFormation: getCurrentDate().add(1, "day").format("YYYY-MM-DD"),
-        }),
-      });
-
-      renderPageWithUserData(userData);
-      openGraduationModal();
-      expect(screen.getByTestId("businessName")).toBeInTheDocument();
-      expect(screen.getByLabelText("Business name")).toBeInTheDocument();
-    });
-  });
-
   describe("sidebar", () => {
     it("renders welcome card", async () => {
       const userData = generateUserData({
@@ -568,6 +289,7 @@ describe("roadmap page", () => {
       const sidebarDisplayContent = {
         "not-registered": generateSidebarCardContent({ contentMd: "NotRegisteredContent" }),
         welcome: generateSidebarCardContent({ contentMd: "WelcomeCardContent" }),
+        graduation: generateSidebarCardContent({ contentMd: "graduation" }),
       };
       renderPageWithAuthAlert({
         alertIsVisible: true,
@@ -593,6 +315,7 @@ describe("roadmap page", () => {
       const sidebarDisplayContent = {
         "not-registered": generateSidebarCardContent({ contentMd: "NotRegisteredContent" }),
         welcome: generateSidebarCardContent({ contentMd: "WelcomeCardContent" }),
+        graduation: generateSidebarCardContent({ contentMd: "graduation" }),
       };
       renderPageWithAuthAlert({
         alertIsVisible: true,
@@ -641,13 +364,41 @@ describe("roadmap page", () => {
         expect(screen.queryByText("SuccessContent")).not.toBeInTheDocument();
       });
     });
-  });
 
-  describe("foreign business", () => {
-    it("does not display graduation box for foreign business", () => {
-      useMockProfileData({ businessPersona: "FOREIGN" });
-      renderRoadmapPage({});
-      expect(screen.queryByText(Config.roadmapDefaults.graduationButtonText)).not.toBeInTheDocument();
+    it("renders graduation card", () => {
+      useMockUserData({
+        preferences: generatePreferences({
+          visibleRoadmapSidebarCards: ["graduation"],
+        }),
+      });
+
+      const sidebarDisplayContent = {
+        graduation: generateSidebarCardContent({ contentMd: "graduationCard" }),
+      };
+      renderRoadmapPage({ sidebarDisplayContent });
+
+      expect(screen.getByText("graduationCard")).toBeInTheDocument();
+    });
+
+    it("hides graduation card when business persona is FOREIGN", async () => {
+      const userData = generateUserData({
+        preferences: generatePreferences({
+          visibleRoadmapSidebarCards: ["graduation"],
+        }),
+        profileData: generateProfileData({ businessPersona: "FOREIGN" }),
+      });
+      const sidebarDisplayContent = {
+        graduation: generateSidebarCardContent({ contentMd: "graduationCard" }),
+      };
+
+      renderStatefulRoadmapPage({
+        userData,
+        sidebarDisplayContent,
+      });
+
+      await waitFor(() => {
+        expect(screen.queryByText("graduationCard")).not.toBeInTheDocument();
+      });
     });
   });
 });
