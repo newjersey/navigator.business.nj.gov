@@ -17,9 +17,7 @@ describe("Guest Roadmap [feature] [all] [group2]", () => {
     completeNewBusinessOnboarding({
       industry,
       homeBasedQuestion: false,
-      liquorLicenseQuestion: undefined,
       townDisplayName,
-      requiresCpa: undefined,
       legalStructureId,
     });
   });

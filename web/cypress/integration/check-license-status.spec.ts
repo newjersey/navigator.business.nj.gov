@@ -10,19 +10,11 @@ describe("check license status [feature] [all] [group1]", () => {
 
   it("searches and checks license status", () => {
     const industry = LookupIndustryById("home-contractor");
-    const homeBasedQuestion = industry.canBeHomeBased === false ? undefined : true;
-    const liquorLicenseQuestion = industry.isLiquorLicenseApplicable === false ? undefined : false;
-    const requiresCpa = industry.isCpaRequiredApplicable === false ? undefined : false;
     const legalStructureId = "general-partnership";
-    const townDisplayName = "Absecon";
 
     completeNewBusinessOnboarding({
       industry,
-      homeBasedQuestion,
-      liquorLicenseQuestion,
-      requiresCpa,
       legalStructureId,
-      townDisplayName,
     });
 
     // roadmap business name

@@ -1,5 +1,5 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
-import { LookupIndustryById, randomInt } from "@businessnjgovnavigator/shared/";
+import { LookupIndustryById } from "@businessnjgovnavigator/shared/";
 import { completeNewBusinessOnboarding, updateNewBusinessProfilePage } from "cypress/support/helpers";
 import { onRoadmapPage } from "cypress/support/page_objects/roadmapPage";
 
@@ -11,20 +11,11 @@ describe("search business name [feature] [all] [group2]", () => {
   it("searches available names", () => {
     const businessName = "Aculyst";
     const industry = LookupIndustryById("e-commerce");
-    const homeBasedQuestion = industry.canBeHomeBased === false ? undefined : Boolean(randomInt() % 2);
-    const liquorLicenseQuestion =
-      industry.isLiquorLicenseApplicable === false ? undefined : Boolean(randomInt() % 2);
     const legalStructureId = "limited-partnership";
-    const townDisplayName = undefined;
-    const requiresCpa = industry.isCpaRequiredApplicable === false ? undefined : Boolean(randomInt() % 2);
 
     completeNewBusinessOnboarding({
       industry,
-      homeBasedQuestion,
-      liquorLicenseQuestion,
       legalStructureId,
-      townDisplayName,
-      requiresCpa,
     });
 
     // roadmap business name

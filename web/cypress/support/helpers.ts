@@ -2,6 +2,7 @@ import { isEntityIdApplicable } from "@/lib/domain-logic/isEntityIdApplicable";
 import {
   Industries,
   Industry,
+  LegalStructure,
   LegalStructures,
   LookupLegalStructureById,
   LookupSectorTypeById,
@@ -87,8 +88,8 @@ type Registration = {
 };
 
 interface StartingOnboardingData {
-  industry: Industry;
-  legalStructureId: string;
+  industry: Industry | undefined;
+  legalStructureId: string | undefined;
   townDisplayName: string | undefined;
   homeBasedQuestion: boolean | undefined;
   liquorLicenseQuestion: boolean | undefined;
@@ -112,17 +113,38 @@ interface ForeignOnboardingData {
 }
 
 export const completeNewBusinessOnboarding = ({
-  industry,
-  legalStructureId,
-  townDisplayName,
-  homeBasedQuestion,
-  liquorLicenseQuestion,
-  requiresCpa,
+  industry = undefined,
+  legalStructureId = undefined,
+  townDisplayName = "Absecon",
+  homeBasedQuestion = undefined,
+  liquorLicenseQuestion = undefined,
+  requiresCpa = undefined,
   fullName = `Michael Smith ${randomInt()}`,
   email = `MichaelSmith${randomInt()}@gmail.com`,
   isNewsletterChecked = false,
   isContactMeChecked = false,
-}: StartingOnboardingData & Partial<Registration>): void => {
+}: Partial<StartingOnboardingData> & Partial<Registration>): void => {
+  if (industry === undefined) {
+    industry = randomElementFromArray(Industries.filter((x) => x.isEnabled) as Industry[]) as Industry;
+  }
+
+  if (homeBasedQuestion === undefined) {
+    homeBasedQuestion = industry.canBeHomeBased === false ? undefined : Boolean(randomInt() % 2);
+  }
+
+  if (liquorLicenseQuestion === undefined) {
+    liquorLicenseQuestion =
+      industry.isLiquorLicenseApplicable === false ? undefined : Boolean(randomInt() % 2);
+  }
+
+  if (requiresCpa === undefined) {
+    requiresCpa = industry.isCpaRequiredApplicable === false ? undefined : Boolean(randomInt() % 2);
+  }
+
+  if (legalStructureId === undefined) {
+    legalStructureId = randomElementFromArray(LegalStructures as LegalStructure[]).id;
+  }
+
   cy.url().should("include", "onboarding?page=1");
   onOnboardingPage.selectBusinessPersona("STARTING");
   onOnboardingPage.getBusinessPersona("STARTING").should("be.checked");
@@ -157,9 +179,9 @@ export const completeNewBusinessOnboarding = ({
   onOnboardingPage.clickNext();
 
   cy.url().should("include", "onboarding?page=3");
-  onOnboardingPage.selectLegalStructure(legalStructureId);
+  onOnboardingPage.selectLegalStructure(legalStructureId!);
   onOnboardingPage
-    .getLegalStructure(legalStructureId)
+    .getLegalStructure(legalStructureId!)
     .parents(`[data-testid=${legalStructureId}]`)
     .find("span")
     .first()
