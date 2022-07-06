@@ -10,18 +10,21 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { Task } from "@/lib/types/types";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { ReactElement, useState } from "react";
 
 interface Props {
   task: Task;
+  CMS_ONLY_fakeUserData?: UserData; // for CMS only
 }
 
 export const NexusFormationTask = (props: Props): ReactElement => {
   const [taskToDisplay, setTaskToDisplay] = useState<Task>(props.task);
   const [showWarning, setShowWarning] = useState<boolean>(false);
   const [showCtaModal, setShowCtaModal] = useState<boolean>(false);
-  const { userData } = useUserData();
   const { Config } = useConfig();
+  const userDataFromHook = useUserData();
+  const userData = props.CMS_ONLY_fakeUserData ?? userDataFromHook.userData;
 
   useMountEffectWhenDefined(async () => {
     if (!userData) return;
