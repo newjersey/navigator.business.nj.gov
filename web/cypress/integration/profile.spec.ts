@@ -146,10 +146,7 @@ describe("Profile [feature] [all] [group1]", () => {
 
     it("onboards random industry with company type that enables entity id field, then updates the field in profile", () => {
       const industry = randomElementFromArray(Industries.filter((x) => x.isEnabled) as Industry[]);
-      const companyTypeWithTradeName = randomElementFromArray(
-        legalStructureWithTradeName as LegalStructure[]
-      );
-      const legalStructureId = companyTypeWithTradeName.id;
+      const legalStructureId = randomElementFromArray(legalStructureWithTradeName as LegalStructure[]).id;
       const homeBasedQuestion = industry.canBeHomeBased === false ? undefined : Boolean(randomInt() % 2);
       const liquorLicenseQuestion =
         industry.isLiquorLicenseApplicable === false ? undefined : Boolean(randomInt() % 2);
