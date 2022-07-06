@@ -474,6 +474,38 @@ describe("profile", () => {
       await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith("/roadmap"));
       await waitFor(() => expect(() => currentUserData()).toThrowError());
     });
+
+    describe("formation date", () => {
+      it("does not display when empty", () => {
+        const initialUserData = generateUserData({
+          profileData: generateProfileData({ businessPersona: "STARTING", dateOfFormation: "" }),
+        });
+        const newark = generateMunicipality({ displayName: "Newark" });
+        renderPage({ userData: initialUserData, municipalities: [newark] });
+        chooseTab("numbers");
+        expect(getDateOfFormation()).toBeUndefined();
+      });
+
+      it("displays when populated", () => {
+        const initialUserData = generateUserData({
+          profileData: generateProfileData({ businessPersona: "STARTING", dateOfFormation: "2020-01-01" }),
+        });
+        const newark = generateMunicipality({ displayName: "Newark" });
+        renderPage({ userData: initialUserData, municipalities: [newark] });
+        chooseTab("numbers");
+        expect(getDateOfFormation()).toBe("01/2020");
+      });
+
+      it("is read only", () => {
+        const initialUserData = generateUserData({
+          profileData: generateProfileData({ businessPersona: "STARTING", dateOfFormation: "2020-02-01" }),
+        });
+        const newark = generateMunicipality({ displayName: "Newark" });
+        renderPage({ userData: initialUserData, municipalities: [newark] });
+        chooseTab("numbers");
+        expect(screen.getByLabelText("Date of formation")).toBeDisabled();
+      });
+    });
   });
 
   describe("owning existing business", () => {
