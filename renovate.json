@@ -8,6 +8,7 @@
   "postUpdateOptions": ["yarnDedupeHighest"],
   "lockFileMaintenance": { "enabled": true },
   "ignoreDeps": ["node", "cimg/node"],
+  "rebaseWhen": "conflicted",
   "packageRules": [
     {
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
