@@ -1,17 +1,10 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
 
-import {
-  Industries,
-  Industry,
-  LegalStructure,
-  LegalStructures,
-  LookupIndustryById,
-  randomInt,
-} from "@businessnjgovnavigator/shared/";
+import { LookupIndustryById } from "@businessnjgovnavigator/shared/";
 import { onOnboardingPage } from "cypress/support/page_objects/onboardingPage";
 import { onProfilePage } from "cypress/support/page_objects/profilePage";
 import { onRoadmapPage } from "cypress/support/page_objects/roadmapPage";
-import { completeNewBusinessOnboarding, randomElementFromArray } from "../support/helpers";
+import { completeNewBusinessOnboarding } from "../support/helpers";
 
 describe("Roadmap [feature] [all] [group2]", () => {
   beforeEach(() => {
@@ -21,19 +14,12 @@ describe("Roadmap [feature] [all] [group2]", () => {
   it("enters user info and shows the roadmap", () => {
     const industry = LookupIndustryById("e-commerce");
     const homeBasedQuestion = false;
-    const liquorLicenseQuestion =
-      industry.isLiquorLicenseApplicable === false ? undefined : Boolean(randomInt() % 2);
     const legalStructureId = "general-partnership";
-    const townDisplayName = "Absecon";
-    const requiresCpa = industry.isCpaRequiredApplicable === false ? undefined : Boolean(randomInt() % 2);
 
     completeNewBusinessOnboarding({
       industry,
       homeBasedQuestion,
-      liquorLicenseQuestion,
       legalStructureId,
-      townDisplayName,
-      requiresCpa,
     });
 
     // check roadmap
@@ -128,20 +114,11 @@ describe("Roadmap [feature] [all] [group2]", () => {
 
   it("open and closes contextual info panel on get EIN from the IRS Task screen", () => {
     const industry = LookupIndustryById("e-commerce");
-    const homeBasedQuestion = industry.canBeHomeBased === false ? undefined : Boolean(randomInt() % 2);
-    const liquorLicenseQuestion =
-      industry.isLiquorLicenseApplicable === false ? undefined : Boolean(randomInt() % 2);
     const legalStructureId = "general-partnership";
-    const townDisplayName = "Absecon";
-    const requiresCpa = industry.isCpaRequiredApplicable === false ? undefined : Boolean(randomInt() % 2);
 
     completeNewBusinessOnboarding({
       industry,
-      homeBasedQuestion,
-      liquorLicenseQuestion,
       legalStructureId,
-      townDisplayName,
-      requiresCpa,
     });
 
     // roadmap
@@ -155,23 +132,9 @@ describe("Roadmap [feature] [all] [group2]", () => {
   });
 
   it("user data is updated if opted into newsletter", () => {
-    const industry = randomElementFromArray(Industries.filter((x) => x.isEnabled) as Industry[]) as Industry;
-    const homeBasedQuestion = industry.canBeHomeBased === false ? undefined : Boolean(randomInt() % 2);
-    const liquorLicenseQuestion =
-      industry.isLiquorLicenseApplicable === false ? undefined : Boolean(randomInt() % 2);
-    const legalStructureId = randomElementFromArray(LegalStructures as LegalStructure[]).id;
-    const townDisplayName = "Absecon";
-    const requiresCpa = industry.isCpaRequiredApplicable === false ? undefined : Boolean(randomInt() % 2);
-
     cy.intercept("POST", "/local/api/users", (req) => req.continue()).as("new-user");
 
     completeNewBusinessOnboarding({
-      industry,
-      homeBasedQuestion,
-      liquorLicenseQuestion,
-      legalStructureId,
-      townDisplayName,
-      requiresCpa,
       isNewsletterChecked: true,
       isContactMeChecked: true,
     });

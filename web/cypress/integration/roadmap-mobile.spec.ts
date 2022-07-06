@@ -1,6 +1,6 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
 
-import { LookupIndustryById, randomInt } from "@businessnjgovnavigator/shared/";
+import { LookupIndustryById } from "@businessnjgovnavigator/shared/";
 import { onOnboardingPage } from "cypress/support/page_objects/onboardingPage";
 import { onProfilePage } from "cypress/support/page_objects/profilePage";
 import { onRoadmapPage } from "cypress/support/page_objects/roadmapPage";
@@ -15,18 +15,12 @@ describe("Roadmap [feature] [all] [group2]", () => {
   it("enters user info and shows the roadmap", () => {
     const industry = LookupIndustryById("e-commerce");
     const homeBasedQuestion = false;
-    const liquorLicenseQuestion = industry.isLiquorLicenseApplicable === false ? undefined : false;
     const legalStructureId = "general-partnership";
-    const townDisplayName = "Absecon";
-    const requiresCpa = industry.isCpaRequiredApplicable === false ? undefined : Boolean(randomInt() % 2);
 
     completeNewBusinessOnboarding({
       industry,
       homeBasedQuestion,
-      liquorLicenseQuestion,
       legalStructureId,
-      townDisplayName,
-      requiresCpa,
     });
 
     // check roadmap
@@ -125,18 +119,12 @@ describe("Roadmap [feature] [all] [group2]", () => {
   it("open and closes contextual info panel on get EIN from the IRS Task screen", () => {
     const industry = LookupIndustryById("e-commerce");
     const homeBasedQuestion = false;
-    const liquorLicenseQuestion = industry.isLiquorLicenseApplicable === false ? undefined : false;
     const legalStructureId = "general-partnership";
-    const townDisplayName = "Absecon";
-    const requiresCpa = industry.isCpaRequiredApplicable === false ? undefined : Boolean(randomInt() % 2);
 
     completeNewBusinessOnboarding({
       industry,
       homeBasedQuestion,
-      liquorLicenseQuestion,
       legalStructureId,
-      townDisplayName,
-      requiresCpa,
     });
 
     // roadmap
