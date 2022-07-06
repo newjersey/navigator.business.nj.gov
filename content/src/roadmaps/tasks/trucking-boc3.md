@@ -14,9 +14,15 @@ If you do any type of load-hauling for your company, you need to select a proces
  
 To find a process agent speak to your network, or check the [Federal Motor Carrier Safety Administration (FMCSA) list of process agent companies.](https://www.fmcsa.dot.gov/registration/process-agents) 
  
-**Note:** You will need a process agent in each state you do business.
+**Note:** You will need a process agent in each state where you do business.
  
 --- 
+### Application Requirements
+- Full name of the carrier, broker, or freight forwarder
+- Business address
+- Name, title, phone number, and signature of the person authorized to sign the form
+- Name and address for your processing agent in each state where you do business
+
 >**Once completed, you will have:**
 >- A designated process agent for your company
 >- A filed BOC-3 with the FMCSA
