@@ -145,6 +145,14 @@ export const completeNewBusinessOnboarding = ({
     legalStructureId = randomElementFromArray(LegalStructures as LegalStructure[]).id;
   }
 
+  if (!industry.canBeHomeBased && homeBasedQuestion) {
+    throw "Cypress configuration error - home based set for non-homebased industry";
+  }
+
+  if (!industry.isCpaRequiredApplicable && requiresCpa) {
+    throw "Cypress configuration error - CPA set for non-cpa industry";
+  }
+
   cy.url().should("include", "onboarding?page=1");
   onOnboardingPage.selectBusinessPersona("STARTING");
   onOnboardingPage.getBusinessPersona("STARTING").should("be.checked");
