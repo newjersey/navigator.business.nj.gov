@@ -1,7 +1,6 @@
-import { createEmptyTaskDisplayContent, Task, TaskProgress } from "@/lib/types/types";
+import { createEmptyTaskDisplayContent, Task } from "@/lib/types/types";
 import TaskPage from "@/pages/tasks/[taskUrlSlug]";
 import {
-  generatePreferences,
   generateProfileData,
   generateStep,
   generateTask,
@@ -128,99 +127,6 @@ describe("task page", () => {
     expect(screen.queryAllByText("a whole brand new name")).toHaveLength(2);
   });
 
-  it("displays Not Started status when user data does not contain status", () => {
-    renderPage(generateTask({}), generateUserData({ taskProgress: {} }));
-
-    expect(screen.getAllByText("Not started")[0]).toBeVisible();
-  });
-
-  it("displays task status from user data", () => {
-    const taskId = "123";
-    const taskProgress: Record<string, TaskProgress> = {
-      "some-id": "COMPLETED",
-      [taskId]: "IN_PROGRESS",
-    };
-    renderPage(generateTask({ id: taskId }), generateUserData({ taskProgress }));
-    expect(screen.getAllByText("In progress")[0]).toBeVisible();
-  });
-
-  it("updates task status when progress is selected", () => {
-    const taskId = "123";
-    const taskProgress: Record<string, TaskProgress> = {
-      "some-id": "COMPLETED",
-    };
-
-    renderPage(generateTask({ id: taskId }), generateUserData({ taskProgress }));
-
-    fireEvent.click(screen.getAllByText("Not started")[0]);
-    fireEvent.click(screen.getByText("In progress"));
-    expect(screen.getAllByText("In progress")[0]).toBeVisible();
-    expect(currentUserData().taskProgress).toEqual({
-      "some-id": "COMPLETED",
-      [taskId]: "IN_PROGRESS",
-    });
-  });
-
-  it("shows congratulatory modal with link when PLAN section completed", () => {
-    const planTaskId = "123";
-    const startTaskId = "124";
-
-    const planTask = generateTask({ id: planTaskId });
-    const startTask = generateTask({ id: startTaskId });
-
-    const userData = generateUserData({
-      taskProgress: {
-        [planTaskId]: "NOT_STARTED",
-        [startTaskId]: "NOT_STARTED",
-      },
-      preferences: generatePreferences({ roadmapOpenSections: ["PLAN", "START"] }),
-    });
-
-    useMockRoadmap({
-      steps: [
-        generateStep({ tasks: [planTask], section: "PLAN" }),
-        generateStep({ tasks: [startTask], section: "START" }),
-      ],
-    });
-
-    renderPage(planTask, userData);
-    changeTaskNotStartedToCompleted();
-
-    expect(currentUserData().taskProgress).toEqual({
-      [planTaskId]: "COMPLETED",
-      [startTaskId]: "NOT_STARTED",
-    });
-
-    expect(currentUserData().preferences.roadmapOpenSections).toEqual(["START"]);
-    const link = screen.queryByText(
-      `${Config.sectionHeaders["START"]} ${Config.roadmapDefaults.congratulatorModalLinkText}`
-    );
-    expect(link).toBeInTheDocument();
-    fireEvent.click(link as HTMLElement);
-    expect(mockPush).toHaveBeenCalledWith("/roadmap");
-  });
-
-  it("displays required tag in header if task is required", () => {
-    renderPage(generateTask({ required: true }));
-    expect(screen.getByText(Config.taskDefaults.requiredTagText)).toBeInTheDocument();
-  });
-
-  it("does not display required tag in header if task is not required", () => {
-    renderPage(generateTask({ required: false }));
-    expect(screen.queryByText(Config.taskDefaults.requiredTagText)).not.toBeInTheDocument();
-  });
-
-  it("overrides required tag in header from task in roadmap", () => {
-    const id = "123";
-    const taskInRoadmap = generateTask({ id, required: false });
-    const taskStaticGeneration = generateTask({ id, required: true });
-    useMockRoadmap({
-      steps: [generateStep({ tasks: [taskInRoadmap], section: "PLAN" })],
-    });
-    renderPage(taskStaticGeneration);
-    expect(screen.queryByText(Config.taskDefaults.requiredTagText)).not.toBeInTheDocument();
-  });
-
   it("displays issuing form and agency in task footer when they are defined values", () => {
     const issuingAgency = "NJ Dept of Treasury";
     const formName = "xY39";
@@ -252,42 +158,6 @@ describe("task page", () => {
 
     expect(screen.queryByText(`${Config.taskDefaults.issuingAgencyText}:`)).not.toBeInTheDocument();
     expect(screen.queryByText(`${Config.taskDefaults.formNameText}:`)).not.toBeInTheDocument();
-  });
-
-  it("shows congratulatory modal without link when START section completed", () => {
-    const planTaskId = "123";
-    const startTaskId = "124";
-
-    const planTask = generateTask({ id: planTaskId });
-    const startTask = generateTask({ id: startTaskId });
-
-    const userData = generateUserData({
-      taskProgress: {
-        [planTaskId]: "COMPLETED",
-        [startTaskId]: "NOT_STARTED",
-      },
-      preferences: generatePreferences({ roadmapOpenSections: ["START"] }),
-    });
-
-    useMockRoadmap({
-      steps: [
-        generateStep({ tasks: [planTask], section: "PLAN" }),
-        generateStep({ tasks: [startTask], section: "START" }),
-      ],
-    });
-
-    renderPage(startTask, userData);
-    changeTaskNotStartedToCompleted();
-
-    expect(currentUserData().taskProgress).toEqual({
-      [planTaskId]: "COMPLETED",
-      [startTaskId]: "COMPLETED",
-    });
-
-    expect(currentUserData().preferences.roadmapOpenSections).toEqual([]);
-    expect(
-      screen.queryByText(Config.roadmapDefaults.congratulatorModalLinkText, { exact: false })
-    ).not.toBeInTheDocument();
   });
 
   it("loads Search Business Names task screen for search-available-names", () => {
@@ -525,10 +395,4 @@ describe("task page", () => {
 
     expect(screen.queryByTestId("nextAndPreviousButtons")).not.toBeInTheDocument();
   });
-
-  const changeTaskNotStartedToCompleted = (): void => {
-    fireEvent.click(screen.getAllByText("Not started")[0]);
-    fireEvent.click(screen.getByText("Completed"));
-    expect(screen.getAllByText("Completed")[0]).toBeVisible();
-  };
 });
