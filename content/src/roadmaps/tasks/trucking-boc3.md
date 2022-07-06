@@ -21,7 +21,7 @@ To find a process agent speak to your network, or check the [Federal Motor Carri
 - Full name of the carrier, broker, or freight forwarder
 - Business address
 - Name, title, phone number, and signature of the person authorized to sign the form
-- Name and address for your processing agent in each state where you do business
+- Name and address of the processing agent for each state where you do business
 
 >**Once completed, you will have:**
 >- A designated process agent for your company
