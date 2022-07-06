@@ -25,7 +25,7 @@
         "notEnteredText": "*Not entered*"
       },
       "dateOfFormation": {
-        "header": "",
+        "header": "## Date of Formation",
         "description": "",
         "errorText": ""
       },

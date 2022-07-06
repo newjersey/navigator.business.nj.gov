@@ -262,6 +262,16 @@ const ProfilePage = (props: Props): ReactElement => {
         />
         <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
         <ProfileNaicsCode />
+        {userData?.profileData.dateOfFormation && (
+          <>
+            <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
+            <OnboardingDateOfFormation
+              onValidation={onValidation}
+              fieldStates={fieldStates}
+              disabled={true}
+            />
+          </>
+        )}
       </>
     ),
   };

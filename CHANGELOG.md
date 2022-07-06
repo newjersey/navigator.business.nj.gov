@@ -1,3 +1,59 @@
+# [4.0.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v3.13.1...v4.0.0) (2022-07-06)
+
+
+### Bug Fixes
+
+* [[#182374963](https://github.com/newjersey/navigator.business.nj.gov/issues/182374963)] display nexus formation task header always even when content changes ([3d335e4](https://github.com/newjersey/navigator.business.nj.gov/commit/3d335e46c1302942c19619fa4e4ff64dd8215e2f))
+* [[#182644770](https://github.com/newjersey/navigator.business.nj.gov/issues/182644770)] update checkmark display for nexus ([3d54675](https://github.com/newjersey/navigator.business.nj.gov/commit/3d54675cfe81686c55e9d1bb4b38e6afb74aa986))
+* [182478405] remove sidebar accordian for mobile view ([99cc547](https://github.com/newjersey/navigator.business.nj.gov/commit/99cc547663990cac346646214da0899b0b168bcc))
+* [182479519] add agency text to the funding task screens ([64a6a45](https://github.com/newjersey/navigator.business.nj.gov/commit/64a6a45c75fc97f259e969d0e6af4272908c931b))
+* [182600111] add custom not started and completed headers for the task completion sidebar ([a1aba68](https://github.com/newjersey/navigator.business.nj.gov/commit/a1aba689e18e8a9db0c42e483abf081f211c1a90))
+* [182645749] correct rendering of the autocomplete bold text ([101742b](https://github.com/newjersey/navigator.business.nj.gov/commit/101742b20716ef59b04fa044fee0240ab35801f6))
+* add an additional field to the feedback tables ([a5cafb6](https://github.com/newjersey/navigator.business.nj.gov/commit/a5cafb64f4302d2caac16250e91698ae6c1e2a6c))
+* **deps:** update aws-sdk to v3.121.0 ([802a7d3](https://github.com/newjersey/navigator.business.nj.gov/commit/802a7d34c12c62d6c5b9407d56bdb521b5ca7e8b))
+* **deps:** update dependency winston to v3.8.1 ([3062596](https://github.com/newjersey/navigator.business.nj.gov/commit/30625963a885a5108c9dc9b8705759695f552c17))
+* updating Contextual Information certificate-formation ([#3393](https://github.com/newjersey/navigator.business.nj.gov/issues/3393)) ([5e37e6a](https://github.com/newjersey/navigator.business.nj.gov/commit/5e37e6a0c5e1cb79729a793713daafad39fad370))
+* updating General Config config ([#3364](https://github.com/newjersey/navigator.business.nj.gov/issues/3364)) ([dcefa19](https://github.com/newjersey/navigator.business.nj.gov/commit/dcefa19145e47af2813dd0a9f02ed38ca8a4bbd5))
+* updating General Config config ([#3367](https://github.com/newjersey/navigator.business.nj.gov/issues/3367)) ([26107e6](https://github.com/newjersey/navigator.business.nj.gov/commit/26107e6b6434fa9b6a3202f834e227d9f70ae8ae))
+* updating Industry Roadmaps architecture ([#3397](https://github.com/newjersey/navigator.business.nj.gov/issues/3397)) ([8e9ec3e](https://github.com/newjersey/navigator.business.nj.gov/commit/8e9ec3e3b4b660aeb2758414bdf1a2238161974a))
+* updating Industry Roadmaps engineering ([#3398](https://github.com/newjersey/navigator.business.nj.gov/issues/3398)) ([2505c97](https://github.com/newjersey/navigator.business.nj.gov/commit/2505c977aa876bed2a0ba1cca40ec48ae57396be))
+* updating Industry Roadmaps home-contractor ([#3349](https://github.com/newjersey/navigator.business.nj.gov/issues/3349)) ([6b285cf](https://github.com/newjersey/navigator.business.nj.gov/commit/6b285cf9756ee4764e32fb258fa8b68f374e9937))
+* updating Industry Roadmaps interior-designer ([#3399](https://github.com/newjersey/navigator.business.nj.gov/issues/3399)) ([ddb663e](https://github.com/newjersey/navigator.business.nj.gov/commit/ddb663e35cdedee9ccb0ab25c8c933457e9d38c5))
+* updating Industry Roadmaps law-firm ([#3400](https://github.com/newjersey/navigator.business.nj.gov/issues/3400)) ([93975a9](https://github.com/newjersey/navigator.business.nj.gov/commit/93975a93845587cc14258376b26e1b64d83c1d3d))
+* updating Industry Roadmaps real-estate-broker ([#3401](https://github.com/newjersey/navigator.business.nj.gov/issues/3401)) ([a17e555](https://github.com/newjersey/navigator.business.nj.gov/commit/a17e55553b043dbf56f53c9eb3ae12a001747126))
+* updating Industry Roadmaps trucking ([#3379](https://github.com/newjersey/navigator.business.nj.gov/issues/3379)) ([e9fc9cd](https://github.com/newjersey/navigator.business.nj.gov/commit/e9fc9cd525f4f709f0cea7084608a28c6f8c10aa))
+* updating Industry Roadmaps trucking ([#3402](https://github.com/newjersey/navigator.business.nj.gov/issues/3402)) ([f2d835a](https://github.com/newjersey/navigator.business.nj.gov/commit/f2d835a89730a0cc374d45c21884dd72d67a809a))
+* updating Industry Roadmaps vending-machine ([#3403](https://github.com/newjersey/navigator.business.nj.gov/issues/3403)) ([7410673](https://github.com/newjersey/navigator.business.nj.gov/commit/7410673b2bf95ae6b585823192d7a9cdc15c4218))
+* updating Nexus nexus-name-search ([#3360](https://github.com/newjersey/navigator.business.nj.gov/issues/3360)) ([f7184f2](https://github.com/newjersey/navigator.business.nj.gov/commit/f7184f2e081464ada70b5108201fb521d44c1886))
+* updating Roadmap Sidebar Cards Content task-progress ([#3356](https://github.com/newjersey/navigator.business.nj.gov/issues/3356)) ([4e536aa](https://github.com/newjersey/navigator.business.nj.gov/commit/4e536aa7403964cf9b3204efbc7c05ddb79c873f))
+* updating Tasks form-business-entity-foreign ([#3396](https://github.com/newjersey/navigator.business.nj.gov/issues/3396)) ([0eb1524](https://github.com/newjersey/navigator.business.nj.gov/commit/0eb1524e836de3c80db1ad1b1c47a64d5b4d6973))
+* updating Tasks get-insurance-home-contractor ([#3348](https://github.com/newjersey/navigator.business.nj.gov/issues/3348)) ([be31036](https://github.com/newjersey/navigator.business.nj.gov/commit/be31036906653de10c5280669f628998f8eae73d))
+* updating Tasks trucking-boc3 ([#3372](https://github.com/newjersey/navigator.business.nj.gov/issues/3372)) ([bf8198a](https://github.com/newjersey/navigator.business.nj.gov/commit/bf8198a49dc02d4d3a8d2ff665cd555380b02d24))
+* updating Tasks trucking-boc3 ([#3394](https://github.com/newjersey/navigator.business.nj.gov/issues/3394)) ([9b401ce](https://github.com/newjersey/navigator.business.nj.gov/commit/9b401ce9b44f2a4dfce6252908aa744db8ba30eb))
+* updating Tasks trucking-cdl ([#3369](https://github.com/newjersey/navigator.business.nj.gov/issues/3369)) ([686afd1](https://github.com/newjersey/navigator.business.nj.gov/commit/686afd1da5ace69319d4a256e14f518f26d6dd3b))
+* updating Tasks trucking-cdl ([#3371](https://github.com/newjersey/navigator.business.nj.gov/issues/3371)) ([8ee8525](https://github.com/newjersey/navigator.business.nj.gov/commit/8ee85257b84536289a5b0bf21cbd9ebf5b85dde9))
+* updating Tasks trucking-cdl ([#3395](https://github.com/newjersey/navigator.business.nj.gov/issues/3395)) ([ce72c34](https://github.com/newjersey/navigator.business.nj.gov/commit/ce72c344250570750f02e568f488c65e7fee1900))
+* updating Tasks trucking-irp ([#3392](https://github.com/newjersey/navigator.business.nj.gov/issues/3392)) ([ed9f824](https://github.com/newjersey/navigator.business.nj.gov/commit/ed9f8245ad01ba57e3e588d106a08c631174e1ab))
+* updating Tasks trucking-usdot ([#3374](https://github.com/newjersey/navigator.business.nj.gov/issues/3374)) ([2edaf55](https://github.com/newjersey/navigator.business.nj.gov/commit/2edaf554b62d6910de28d8fead891b971d432d5e))
+* updating Tasks trucking-usdot ([#3376](https://github.com/newjersey/navigator.business.nj.gov/issues/3376)) ([9aa7502](https://github.com/newjersey/navigator.business.nj.gov/commit/9aa7502c49aaf0956b97c6091c1bca63563c5bff))
+
+
+### Features
+
+* [[#182374963](https://github.com/newjersey/navigator.business.nj.gov/issues/182374963)] add Dakota Nexus onboarding/roadmap ([84f322a](https://github.com/newjersey/navigator.business.nj.gov/commit/84f322a0e1905debdfd66487078a74279af289cc))
+* [[#182374966](https://github.com/newjersey/navigator.business.nj.gov/issues/182374966)] the dakota navigator unsupported page ([5572ea1](https://github.com/newjersey/navigator.business.nj.gov/commit/5572ea113158c64a1487681452e5c021c5607133))
+* [[#182476305](https://github.com/newjersey/navigator.business.nj.gov/issues/182476305)] navbar displays register and log in for guest ([ec798b5](https://github.com/newjersey/navigator.business.nj.gov/commit/ec798b5abf08753b84eaf2e3ab836ea259f34d93))
+* [[#182621954](https://github.com/newjersey/navigator.business.nj.gov/issues/182621954)] limit similar names from name-search to 10 (bugfix) ([51fb7e0](https://github.com/newjersey/navigator.business.nj.gov/commit/51fb7e0a553258b6fdcfb237bce66d6fd8f13078))
+* [[#182644749](https://github.com/newjersey/navigator.business.nj.gov/issues/182644749)] add description to nexus formation warning page ([51f44b5](https://github.com/newjersey/navigator.business.nj.gov/commit/51f44b5ea2a2ddc9d976d8d6cc3005555b21b997))
+* [[#182644770](https://github.com/newjersey/navigator.business.nj.gov/issues/182644770)] show nexus formation task when we know they are DBA ([52cde9b](https://github.com/newjersey/navigator.business.nj.gov/commit/52cde9ba75c069b9d2a9f4bdfcdcc52396c79a1c))
+* [#182476312](https://github.com/newjersey/navigator.business.nj.gov/issues/182476312) updated navbar for onboarding ([69d8fcc](https://github.com/newjersey/navigator.business.nj.gov/commit/69d8fcc3fa113b99ab9ad78b2e1aa9ee4d2bd6cb))
+* implement functionality for out of state business owners to create NJ business ([e33ebcb](https://github.com/newjersey/navigator.business.nj.gov/commit/e33ebcbb576f6a4c662022736550ec45ab327891))
+
+
+### BREAKING CHANGES
+
+* new persona
+
 ## [3.13.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v3.13.0...v3.13.1) (2022-06-29)
 
 
