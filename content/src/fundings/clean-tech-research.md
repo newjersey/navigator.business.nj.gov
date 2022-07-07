@@ -6,8 +6,10 @@ id: clean-tech-research-development-rd-voucher-program
 callToActionLink: https://www.njeda.com/cleantechvoucher/
 callToActionText: Learn more
 fundingType: grant
+programPurpose: Retention
 agency:
   - NJEDA
+agencyContact: ""
 publishStageArchive: ""
 status: first come, first serve
 programFrequency: ongoing
@@ -26,8 +28,6 @@ sector:
   - Other Services (except Public Administration)
 openDate: ""
 dueDate: ""
-programPurpose: ""
-agencyContact: ""
 ---
 
 The Clean Tech Research & Development (R&D) Voucher Program helps New Jersey early-stage clean tech and clean energy companies offset the cost of accessing equipment at participating New Jersey universities or federal labs for R&D.
