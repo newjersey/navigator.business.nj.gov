@@ -6,8 +6,10 @@ id: nj-ignite
 callToActionLink: https://www.njeda.com/njignite
 callToActionText: Learn more
 fundingType: grant
+programPurpose: Retention
 agency:
   - NJEDA
+agencyContact: ""
 publishStageArchive: ""
 status: rolling application
 programFrequency: ongoing
@@ -28,8 +30,6 @@ sector:
   - Other Services (except Public Administration)
 openDate: ""
 dueDate: ""
-programPurpose: ""
-agencyContact: ""
 ---
 
 NJ Ignite provides rent support for technology startups that are moving to an approved collaborative workspace.
