@@ -6,8 +6,10 @@ id: small-business-improvement-grant
 callToActionLink: https://www.njeda.com/small-business-improvement-grant/
 callToActionText: Learn more
 fundingType: grant
+programPurpose: Retention
 agency:
   - NJEDA
+agencyContact: ""
 publishStageArchive: null
 status: opening soon
 programFrequency: ongoing
@@ -22,8 +24,6 @@ county:
 sector: []
 openDate: ""
 dueDate: ""
-programPurpose: ""
-agencyContact: ""
 ---
 
 The Small Business Improvement Grant offers reimbursement for costs associated with completed building improvements or purchased new furniture, fixtures and equipment made since March 9th, 2020.
