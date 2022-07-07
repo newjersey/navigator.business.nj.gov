@@ -6,8 +6,10 @@ id: nj-zero-emission-incentive-program-njzip
 callToActionLink: https://www.njeda.com/njzip.
 callToActionText: Learn more
 fundingType: grant
+programPurpose: Retention
 agency:
   - NJEDA
+agencyContact: ""
 publishStageArchive: ""
 status: first come, first serve
 programFrequency: pilot
@@ -17,15 +19,10 @@ homeBased: yes
 mwvb: Bonuses available for MWBEs, VOB, small businesses (does not need to be SBE)
 preferenceForOpportunityZone: ""
 county:
-  - Camden
-  - Middlesex
-  - Essex
-  - Shore
+  - All
 sector: []
 openDate: ""
 dueDate: ""
-programPurpose: ""
-agencyContact: ""
 ---
 
 NJ ZIP is a pilot program that provides vouchers to businesses and institutions in the greater Newark, Camden, New Brunswick, and Shore areas to support purchases of new, medium-duty zero-emission vehicles.
