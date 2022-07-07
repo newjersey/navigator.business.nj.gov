@@ -6,7 +6,7 @@ id: dep-clean-construction
 callToActionLink: https://www.nj.gov/dep/grantandloanprograms/aqes-njccp.htm
 callToActionText: Learn More
 fundingType: grant
-programPurpose: ""
+programPurpose: Retention
 agency:
   - NJDEP
 agencyContact: ""
