@@ -6,8 +6,10 @@ id: bond-financing
 callToActionLink: https://www.njeda.com/bondfinancing/
 callToActionText: Learn more
 fundingType: loan
+programPurpose: Action Related Reward
 agency:
   - NJEDA
+agencyContact: ""
 publishStageArchive: ""
 status: rolling application
 programFrequency: ongoing
@@ -21,8 +23,6 @@ county:
 sector: []
 openDate: ""
 dueDate: ""
-programPurpose: ""
-agencyContact: ""
 ---
 
 The Bond Financing program provides bond financing to qualified manufacturing companies, 501(c)(3) nonprofit organizations, and other facilities in New Jersey.
