@@ -243,17 +243,12 @@ describe("Graduation Modal", () => {
     expect(screen.queryByLabelText("Date of formation")).not.toBeInTheDocument();
   });
 
-  it("disables date of formation if formation getFiling success", () => {
+  it("disables date of formation if it already exists", () => {
     const userData = generateUserData({
       profileData: generateProfileData({
         businessPersona: "STARTING",
         legalStructureId: "limited-liability-partnership",
         dateOfFormation: getCurrentDate().add(1, "day").format("YYYY-MM-DD"),
-      }),
-      formationData: generateFormationData({
-        getFilingResponse: generateGetFilingResponse({
-          success: true,
-        }),
       }),
     });
 

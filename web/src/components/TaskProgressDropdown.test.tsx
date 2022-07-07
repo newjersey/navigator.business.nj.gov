@@ -15,16 +15,13 @@ describe("<TaskProgressDropdown />", () => {
 
   const renderWithAuth = (context: {
     onSelect?: typeof onSelectCallBack;
-    initialValue?: TaskProgress;
+    value: TaskProgress;
     isAuthenticated?: IsAuthenticated;
     modalIsVisible?: boolean;
   }) => {
     render(
       withAuthAlert(
-        <TaskProgressDropdown
-          onSelect={context.onSelect ?? onSelectCallBack}
-          initialValue={context.initialValue}
-        />,
+        <TaskProgressDropdown onSelect={context.onSelect ?? onSelectCallBack} value={context.value} />,
         context.isAuthenticated ?? IsAuthenticated.TRUE,
         { modalIsVisible: context.modalIsVisible ?? false, setModalIsVisible }
       )
@@ -35,47 +32,20 @@ describe("<TaskProgressDropdown />", () => {
     jest.restoreAllMocks();
   });
 
-  it("displays Not Started as the default", () => {
-    renderWithAuth({});
-    expect(screen.getAllByText(notStartedText)[0]).toBeVisible();
-  });
-
-  it("displays the selected tag when closed", () => {
-    renderWithAuth({});
-    fireEvent.click(screen.getAllByText(notStartedText)[0]);
-
-    expect(screen.getByText(inProgressText)).toBeVisible();
-    expect(screen.getByText(completedText)).toBeVisible();
-    fireEvent.click(screen.getByText(inProgressText));
-
-    expect(screen.getAllByText(inProgressText)[0]).toBeVisible();
-    expect(screen.getByText(completedText)).not.toBeVisible();
-    expect(screen.getByText(notStartedText)).not.toBeVisible();
-  });
-
   it("calls the prop callback when an option is selected", () => {
-    renderWithAuth({});
+    renderWithAuth({ value: "NOT_STARTED" });
     fireEvent.click(screen.getAllByText(notStartedText)[0]);
     fireEvent.click(screen.getByText(inProgressText));
     expect(onSelectCallBack).toHaveBeenCalledWith("IN_PROGRESS");
   });
 
-  it("uses initialValue prop as initial value", () => {
-    renderWithAuth({ initialValue: "COMPLETED" });
+  it("uses value prop as initial value", () => {
+    renderWithAuth({ value: "COMPLETED" });
     expect(screen.getAllByText(completedText)[0]).toBeVisible();
   });
 
-  it("shows a success toast when an option is selected", () => {
-    renderWithAuth({});
-    fireEvent.click(screen.getAllByText(notStartedText)[0]);
-
-    expect(screen.queryByText(Config.taskDefaults.taskProgressSuccessToastBody)).not.toBeInTheDocument();
-    fireEvent.click(screen.getByText(inProgressText));
-    expect(screen.getByText(Config.taskDefaults.taskProgressSuccessToastBody)).toBeInTheDocument();
-  });
-
   it("opens registration modal when guest mode user tries to change state", () => {
-    renderWithAuth({ isAuthenticated: IsAuthenticated.FALSE });
+    renderWithAuth({ value: "NOT_STARTED", isAuthenticated: IsAuthenticated.FALSE });
     fireEvent.click(screen.getAllByText(notStartedText)[0]);
     fireEvent.click(screen.getByText(inProgressText));
     expect(setModalIsVisible).toHaveBeenCalledWith(true);

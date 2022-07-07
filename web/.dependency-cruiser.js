@@ -287,7 +287,7 @@ module.exports = {
       to: { path: "../content" },
     },
     {
-      from: { path: "../shared" },
+      from: {},
       to: { path: "dayjs" },
     },
     {

@@ -1,10 +1,13 @@
 import { ArrowTooltip } from "@/components/ArrowTooltip";
 import { CongratulatoryDialog } from "@/components/CongratulatoryDialog";
+import { FormationDateModal } from "@/components/FormationDateModal";
 import { Tag } from "@/components/njwds-extended/Tag";
+import { ToastAlert } from "@/components/njwds-extended/ToastAlert";
 import { Icon } from "@/components/njwds/Icon";
 import { TaskProgressDropdown } from "@/components/TaskProgressDropdown";
 import { TaskProgressTagLookup } from "@/components/TaskProgressTagLookup";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { SectionType, Task, TaskProgress } from "@/lib/types/types";
@@ -15,7 +18,7 @@ import {
   getSectionPositions,
   setPreferencesCloseSection,
 } from "@/lib/utils/helpers";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
+import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { ReactElement, useState } from "react";
 
 interface Props {
@@ -27,14 +30,45 @@ export const TaskHeader = (props: Props): ReactElement => {
   const { userData, update } = useUserData();
   const { roadmap, sectionCompletion, updateStatus } = useRoadmap();
   const [nextSection, setNextSection] = useState<SectionType | undefined>(undefined);
-  const [dialogIsOpen, setDialogIsOpen] = useState<boolean>(false);
+  const [congratulatoryDialogIsOpen, setCongratulatoryDialogIsOpen] = useState<boolean>(false);
+  const [formationDialogIsOpen, setFormationDialogIsOpen] = useState<boolean>(false);
+  const [successToastIsOpen, setSuccessToastIsOpen] = useState<boolean>(false);
+
+  const { Config } = useConfig();
 
   const handleDialogClose = (): void => {
-    setDialogIsOpen(false);
+    setCongratulatoryDialogIsOpen(false);
   };
 
-  const updateTaskProgress = (newValue: TaskProgress): void => {
-    if (!userData || !roadmap || !sectionCompletion) return;
+  const isFormationTask = (): boolean => {
+    return props.task.id === "form-business-entity-foreign" || props.task.id === "form-business-entity";
+  };
+
+  const onDropdownChanged = (newValue: TaskProgress): void => {
+    if (!userData) return;
+    let updatedUserData = { ...userData };
+
+    if (isFormationTask()) {
+      if (newValue === "COMPLETED") {
+        setFormationDialogIsOpen(true);
+        return;
+      } else {
+        updatedUserData = {
+          ...userData,
+          profileData: {
+            ...userData.profileData,
+            dateOfFormation: undefined,
+          },
+        };
+      }
+    }
+
+    setFormationDialogIsOpen(false);
+    updateTaskProgress(newValue, updatedUserData);
+  };
+
+  const updateTaskProgress = (newValue: TaskProgress, userData: UserData): void => {
+    if (!sectionCompletion || !roadmap) return;
     const updatedUserData = {
       ...userData,
       taskProgress: { ...userData?.taskProgress, [props.task.id]: newValue },
@@ -50,14 +84,18 @@ export const TaskHeader = (props: Props): ReactElement => {
 
     if (sectionStatusHasChanged && updatedSectionCompletion[currentSectionPositions.current]) {
       setNextSection(currentSectionPositions.next);
-      setDialogIsOpen(true);
+      setCongratulatoryDialogIsOpen(true);
       preferences = setPreferencesCloseSection(updatedUserData.preferences, currentSectionPositions.current);
     }
     updateStatus(updatedSectionCompletion);
     update({
       ...updatedUserData,
       preferences,
-    });
+    })
+      .then(() => {
+        setSuccessToastIsOpen(true);
+      })
+      .catch(() => {});
   };
 
   const renderProgress = (): ReactElement => {
@@ -76,7 +114,7 @@ export const TaskHeader = (props: Props): ReactElement => {
         </ArrowTooltip>
       </div>
     ) : (
-      <TaskProgressDropdown onSelect={updateTaskProgress} initialValue={currentTaskProgress} />
+      <TaskProgressDropdown onSelect={onDropdownChanged} value={currentTaskProgress} />
     );
   };
 
@@ -107,8 +145,17 @@ export const TaskHeader = (props: Props): ReactElement => {
       <CongratulatoryDialog
         nextSectionType={nextSection}
         handleClose={handleDialogClose}
-        open={dialogIsOpen}
+        open={congratulatoryDialogIsOpen}
       />
+
+      <FormationDateModal
+        isOpen={formationDialogIsOpen}
+        close={() => setFormationDialogIsOpen(false)}
+        onSave={updateTaskProgress}
+      />
+      <ToastAlert variant="success" isOpen={successToastIsOpen} close={() => setSuccessToastIsOpen(false)}>
+        {Config.taskDefaults.taskProgressSuccessToastBody}
+      </ToastAlert>
     </>
   );
 };
