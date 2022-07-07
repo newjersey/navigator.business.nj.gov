@@ -1,5 +1,4 @@
 import { Tag } from "@/components/njwds-extended/Tag";
-import { ToastAlert } from "@/components/njwds-extended/ToastAlert";
 import { Icon } from "@/components/njwds/Icon";
 import { TaskProgressTagLookup } from "@/components/TaskProgressTagLookup";
 import { AuthAlertContext } from "@/contexts/authAlertContext";
@@ -8,22 +7,16 @@ import { TaskProgress } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { Button as MuiButton, Menu, MenuItem } from "@mui/material";
-import React, { ReactElement, useContext, useEffect, useState } from "react";
+import React, { ReactElement, useContext, useState } from "react";
 
 interface Props {
   onSelect: (selectedTaskProgress: TaskProgress) => void;
-  initialValue?: TaskProgress;
+  value: TaskProgress;
 }
 
 export const TaskProgressDropdown = (props: Props): ReactElement => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [value, setValue] = useState<TaskProgress>(props.initialValue || "NOT_STARTED");
-  const [successToastIsOpen, setSuccessToastIsOpen] = useState<boolean>(false);
   const { isAuthenticated, setModalIsVisible } = useContext(AuthAlertContext);
-
-  useEffect(() => {
-    setValue(props.initialValue || "NOT_STARTED");
-  }, [props.initialValue]);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     if (isAuthenticated !== IsAuthenticated.TRUE) {
@@ -51,25 +44,20 @@ export const TaskProgressDropdown = (props: Props): ReactElement => {
         break;
     }
 
-    setValue(newValue);
-    setSuccessToastIsOpen(true);
     props.onSelect(newValue);
     close();
   };
 
   return (
     <div className="margin-left-neg-1">
-      <ToastAlert variant="success" isOpen={successToastIsOpen} close={() => setSuccessToastIsOpen(false)}>
-        {Config.taskDefaults.taskProgressSuccessToastBody}
-      </ToastAlert>
       <MuiButton
         style={{ whiteSpace: "nowrap" }}
         aria-controls="task-progress-status-menu"
         aria-haspopup="true"
         onClick={handleClick}
-        aria-label={`Status of the current task is ${Config.taskProgress[value].toLowerCase()}`}
+        aria-label={`Status of the current task is ${Config.taskProgress[props.value].toLowerCase()}`}
       >
-        {TaskProgressTagLookup[value]}
+        {TaskProgressTagLookup[props.value]}
         <Icon>unfold_more</Icon>
       </MuiButton>
       <Menu
@@ -90,7 +78,7 @@ export const TaskProgressDropdown = (props: Props): ReactElement => {
         <MenuItem
           className="margin-left-neg-1"
           onClick={() => handleSelect("NOT_STARTED")}
-          selected={value === "NOT_STARTED"}
+          selected={props.value === "NOT_STARTED"}
         >
           <Tag tagVariant="base" dataTestid="NOT_STARTED" fixedWidth>
             {Config.taskProgress.NOT_STARTED}
@@ -99,7 +87,7 @@ export const TaskProgressDropdown = (props: Props): ReactElement => {
         <MenuItem
           className="margin-left-neg-1"
           onClick={() => handleSelect("IN_PROGRESS")}
-          selected={value === "IN_PROGRESS"}
+          selected={props.value === "IN_PROGRESS"}
         >
           <Tag tagVariant="info" dataTestid="IN_PROGRESS" fixedWidth>
             {Config.taskProgress.IN_PROGRESS}
@@ -108,7 +96,7 @@ export const TaskProgressDropdown = (props: Props): ReactElement => {
         <MenuItem
           className="margin-left-neg-1"
           onClick={() => handleSelect("COMPLETED")}
-          selected={value === "COMPLETED"}
+          selected={props.value === "COMPLETED"}
         >
           <Tag tagVariant="primary" dataTestid="COMPLETED" fixedWidth>
             {Config.taskProgress.COMPLETED}

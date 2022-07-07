@@ -1,16 +1,25 @@
 import { TaskHeader } from "@/components/TaskHeader";
+import { getMergedConfig } from "@/contexts/configContext";
 import { Task, TaskProgress } from "@/lib/types/types";
-import { generatePreferences, generateStep, generateTask, generateUserData } from "@/test/factories";
+import {
+  generatePreferences,
+  generateProfileData,
+  generateStep,
+  generateTask,
+  generateUserData,
+} from "@/test/factories";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import {
   currentUserData,
   setupStatefulUserDataContext,
+  userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
+import { getCurrentDate } from "@businessnjgovnavigator/shared/dateHelpers";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { Dayjs } from "dayjs";
 
 jest.mock("next/router");
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -22,6 +31,8 @@ const renderTaskHeader = (task: Task, initialUserData?: UserData) =>
       <TaskHeader task={task} />
     </WithStatefulUserData>
   );
+
+const Config = getMergedConfig();
 
 describe("<TaskHeader />", () => {
   beforeEach(() => {
@@ -47,7 +58,7 @@ describe("<TaskHeader />", () => {
     expect(screen.getAllByText("In progress")[0]).toBeVisible();
   });
 
-  it("updates task status when progress is selected", () => {
+  it("updates task status when progress is selected", async () => {
     const taskId = "123";
     const taskProgress: Record<string, TaskProgress> = {
       "some-id": "COMPLETED",
@@ -58,10 +69,21 @@ describe("<TaskHeader />", () => {
     fireEvent.click(screen.getAllByText("Not started")[0]);
     fireEvent.click(screen.getByText("In progress"));
     expect(screen.getAllByText("In progress")[0]).toBeVisible();
-    expect(currentUserData().taskProgress).toEqual({
-      "some-id": "COMPLETED",
-      [taskId]: "IN_PROGRESS",
-    });
+    await waitFor(() =>
+      expect(currentUserData().taskProgress).toEqual({
+        "some-id": "COMPLETED",
+        [taskId]: "IN_PROGRESS",
+      })
+    );
+  });
+
+  it("shows a success toast when an option is selected", async () => {
+    renderTaskHeader(generateTask({}), generateUserData({}));
+    fireEvent.click(screen.getAllByText("Not started")[0]);
+
+    expect(screen.queryByText(Config.taskDefaults.taskProgressSuccessToastBody)).not.toBeInTheDocument();
+    fireEvent.click(screen.getByText("In progress"));
+    await screen.findByText(Config.taskDefaults.taskProgressSuccessToastBody);
   });
 
   it("displays required tag in header if task is required", () => {
@@ -162,9 +184,108 @@ describe("<TaskHeader />", () => {
     });
   });
 
-  const changeTaskNotStartedToCompleted = (): void => {
+  describe("formation completion", () => {
+    const randomFormationId = () => {
+      const ids = ["form-business-entity-foreign", "form-business-entity"];
+      return ids[Math.floor(Math.random() * ids.length)];
+    };
+
+    it("opens formation date modal when task changed to complete", () => {
+      renderTaskHeader(generateTask({ id: randomFormationId() }), generateUserData({}));
+      expect(screen.queryByText(Config.formationDateModal.header)).not.toBeInTheDocument();
+      selectCompleted();
+      expect(screen.getByText(Config.formationDateModal.header)).toBeInTheDocument();
+      expect(screen.getByText(Config.formationDateModal.description)).toBeInTheDocument();
+      expect(screen.getByText(Config.formationDateModal.warningText)).toBeInTheDocument();
+    });
+
+    it("does not open modal when task changed to unstarted or in-progress", () => {
+      renderTaskHeader(generateTask({ id: randomFormationId() }), generateUserData({}));
+      expect(screen.queryByText(Config.formationDateModal.header)).not.toBeInTheDocument();
+
+      fireEvent.click(screen.getAllByText("Not started")[0]);
+      fireEvent.click(screen.getByText("In progress"));
+
+      expect(screen.queryByText(Config.formationDateModal.header)).not.toBeInTheDocument();
+      fireEvent.click(screen.getAllByText("In progress")[0]);
+      fireEvent.click(screen.getByText("Not started"));
+      expect(screen.queryByText(Config.formationDateModal.header)).not.toBeInTheDocument();
+    });
+
+    it("does not update status when modal opens", async () => {
+      renderTaskHeader(generateTask({ id: randomFormationId() }), generateUserData({}));
+      selectCompleted();
+      await waitFor(() => expect(userDataWasNotUpdated()).toBe(true));
+    });
+
+    it("does not update status when modal is closed without date", async () => {
+      renderTaskHeader(generateTask({ id: randomFormationId() }), generateUserData({}));
+      selectCompleted();
+      fireEvent.click(screen.getByText(Config.formationDateModal.cancelButtonText));
+      await waitFor(() => expect(userDataWasNotUpdated()).toBe(true));
+    });
+
+    it("updates status and date of formation, and redirects user on save", async () => {
+      const id = randomFormationId();
+      renderTaskHeader(
+        generateTask({ id }),
+        generateUserData({ profileData: generateProfileData({ businessPersona: "STARTING" }) })
+      );
+      selectCompleted();
+      const date = getCurrentDate().subtract(1, "month").date(1);
+      selectDate(date);
+      fireEvent.click(screen.getByText(Config.formationDateModal.saveButtonText));
+      await waitFor(() =>
+        expect(currentUserData().profileData.dateOfFormation).toEqual(date.format("YYYY-MM-DD"))
+      );
+      expect(currentUserData().taskProgress[id]).toEqual("COMPLETED");
+      expect(mockPush).toHaveBeenCalledWith("/roadmap");
+    });
+
+    it("shows error when user saves without entering date", () => {
+      const id = randomFormationId();
+      renderTaskHeader(
+        generateTask({ id }),
+        generateUserData({ profileData: generateProfileData({ dateOfFormation: undefined }) })
+      );
+      selectCompleted();
+      expect(screen.queryByText(Config.formationDateModal.errorText)).not.toBeInTheDocument();
+      fireEvent.click(screen.getByText(Config.formationDateModal.saveButtonText));
+      expect(screen.getByText(Config.formationDateModal.errorText)).toBeInTheDocument();
+    });
+
+    it("sets dateOfFormation back to undefined if user sets back to not completed", async () => {
+      renderTaskHeader(
+        generateTask({ id: randomFormationId() }),
+        generateUserData({ profileData: generateProfileData({ businessPersona: "STARTING" }) })
+      );
+      selectCompleted();
+      const date = getCurrentDate().subtract(1, "month").date(1);
+      selectDate(date);
+      fireEvent.click(screen.getByText(Config.formationDateModal.saveButtonText));
+      await waitFor(() =>
+        expect(currentUserData().profileData.dateOfFormation).toEqual(date.format("YYYY-MM-DD"))
+      );
+
+      fireEvent.click(screen.getAllByText("Completed")[0]);
+      fireEvent.click(screen.getByText("Not started"));
+      await waitFor(() => expect(currentUserData().profileData.dateOfFormation).toBeUndefined());
+    });
+  });
+
+  const selectCompleted = (): void => {
     fireEvent.click(screen.getAllByText("Not started")[0]);
     fireEvent.click(screen.getByText("Completed"));
+  };
+
+  const changeTaskNotStartedToCompleted = (): void => {
+    selectCompleted();
     expect(screen.getAllByText("Completed")[0]).toBeVisible();
+  };
+
+  const selectDate = (date: Dayjs) => {
+    const item = screen.getByLabelText("Date of formation");
+    fireEvent.change(item, { target: { value: date.format("MM/YYYY") } });
+    fireEvent.blur(item);
   };
 });

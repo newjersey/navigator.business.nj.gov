@@ -1681,6 +1681,21 @@ collections:
             summary: "{{filingDefaults}}"
             fields:
               - { label: Tag Content before Due Date, name: tagContentBeforeDueDate, widget: string }
+          - label: Formation Task - Date of Formation Modal
+            name: formationDateModal
+            collapsed: true
+            widget: object
+            summary: "{{formationDateModal}}"
+            fields:
+              - { label: Header, name: header, widget: string }
+              - { label: Description, name: description, widget: markdown }
+              - { label: Warning Alert Text, name: warningText, widget: markdown }
+              - { label: Date field - label, name: fieldLabel, widget: text }
+              - { label: Date field - description, name: fieldDescription, widget: markdown }
+              - { label: Error text (when not entered), name: errorText, widget: string }
+              - { label: Save button text, name: saveButtonText, widget: string }
+              - { label: Cancel button text, name: cancelButtonText, widget: string }
+
           - label: Funding Defaults
             name: fundingDefaults
             collapsed: true

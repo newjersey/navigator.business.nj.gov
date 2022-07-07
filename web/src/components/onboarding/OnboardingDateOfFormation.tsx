@@ -12,12 +12,19 @@ import React, { ReactElement, useContext } from "react";
 
 advancedDateLibrary();
 
+interface DateOfFormationConfig {
+  header?: string;
+  description?: string;
+  errorText?: string;
+}
+
 interface Props {
   onValidation: (field: ProfileFields, invalid: boolean) => void;
   fieldStates: ProfileFieldErrorMap;
   required?: boolean;
   disabled?: boolean;
   headerAriaLevel?: number;
+  configOverrides?: DateOfFormationConfig;
 }
 
 export const OnboardingDateOfFormation = ({ headerAriaLevel = 2, ...props }: Props): ReactElement => {
@@ -25,6 +32,14 @@ export const OnboardingDateOfFormation = ({ headerAriaLevel = 2, ...props }: Pro
   const { Config } = useConfig();
   const { state, setProfileData } = useContext(ProfileDataContext);
   const [dateValue, setDateValue] = React.useState<DateObject | null>(null);
+
+  const contentConfig = {
+    header: props.configOverrides?.header || Config.profileDefaults[state.flow].dateOfFormation.header,
+    description:
+      props.configOverrides?.description || Config.profileDefaults[state.flow].dateOfFormation.description,
+    errorText:
+      props.configOverrides?.errorText || Config.profileDefaults[state.flow].dateOfFormation.errorText,
+  };
 
   useMountEffectWhenDefined(() => {
     setDateValue(parseDate(state.profileData.dateOfFormation));
@@ -65,15 +80,13 @@ export const OnboardingDateOfFormation = ({ headerAriaLevel = 2, ...props }: Pro
         renderInput={(params: TextFieldProps) => (
           <div>
             <div className="margin-bottom-2" data-testid={`onboardingFieldContent-${fieldName}`}>
-              <Content overrides={{ h2: headerLevelTwo }}>
-                {Config.profileDefaults[state.flow].dateOfFormation.header}
-              </Content>
-              <Content>{Config.profileDefaults[state.flow].dateOfFormation.description}</Content>
+              <Content overrides={{ h2: headerLevelTwo }}>{contentConfig.header}</Content>
+              <Content>{contentConfig.description}</Content>
             </div>
             <GenericTextField
               fieldName={fieldName}
               onValidation={onValidation}
-              validationText={Config.profileDefaults[state.flow].dateOfFormation.errorText}
+              validationText={contentConfig.errorText}
               error={props.fieldStates[fieldName].invalid}
               fieldOptions={{
                 ...params,
