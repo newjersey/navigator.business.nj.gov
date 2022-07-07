@@ -11,8 +11,9 @@
 
 // This function is called when a project is opened or re-opened (e.g. due to
 // the project's config changing)
-const dotenvPlugin = require('cypress-dotenv');
-const { lighthouse, pa11y, prepareAudit } = require("cypress-audit");
+const dotenvPlugin = require("cypress-dotenv");
+const { lighthouse, prepareAudit } = require("@cypress-audit/lighthouse");
+const { pa11y } = require("@cypress-audit/pa11y");
 
 /**
  * @type {Cypress.PluginConfig}
@@ -24,15 +25,15 @@ module.exports = (on, config) => {
 
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
-  on('task', {
+  on("task", {
     lighthouse: lighthouse(),
     pa11y: pa11y(),
-    log (message) {
-      console.log(message)
-      return null
-    }
-  })
+    log(message) {
+      console.log(message);
+      return null;
+    },
+  });
 
-  config = dotenvPlugin(config)
-  return config
+  config = dotenvPlugin(config);
+  return config;
 };
