@@ -6,8 +6,10 @@ id: urban-enterprise-zone-manufacturers-energy-sales-tax-exemption
 callToActionLink: https://www.njeda.com/uez/
 callToActionText: Learn more
 fundingType: tax exemption
+programPurpose: Retention
 agency:
   - NJEDA
+agencyContact: ""
 publishStageArchive: ""
 status: first come, first serve
 programFrequency: reoccuring
@@ -22,8 +24,6 @@ sector:
   - Manufacturing
 openDate: ""
 dueDate: ""
-programPurpose: ""
-agencyContact: ""
 ---
 
 The Urban Enterprise Zone (UEZ) Manufacturers Energy Sales Tax Exemption provides manufacturers in UEZs a sales and use tax exemption for electricity and natural gas.
