@@ -6,8 +6,10 @@ id: digital-media-tax-credit
 callToActionLink: https://www.njeda.com/film
 callToActionText: Learn more
 fundingType: tax credit
+programPurpose: Action Related Reward
 agency:
   - NJEDA
+agencyContact: ""
 publishStageArchive: ""
 status: first come, first serve
 programFrequency: reoccuring
@@ -28,8 +30,6 @@ sector:
   - Arts, Entertainment, and Recreation
 openDate: ""
 dueDate: ""
-programPurpose: ""
-agencyContact: ""
 ---
 
 The Digital Media Tax Credit Program provides a transferable credit against the corporate business tax and the gross income tax to incentivize companies to produce content in New Jersey.
