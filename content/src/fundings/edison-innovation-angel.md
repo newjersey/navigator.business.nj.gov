@@ -6,8 +6,10 @@ id: edison-innovation-angel-growth-fund
 callToActionLink: https://www.njeda.com/edisoninnovation/
 callToActionText: Learn more
 fundingType: loan
+programPurpose: Retention
 agency:
   - NJEDA
+agencyContact: ""
 publishStageArchive: ""
 status: rolling application
 programFrequency: ongoing
@@ -23,8 +25,6 @@ sector:
   - Life Sciences
 openDate: ""
 dueDate: ""
-programPurpose: ""
-agencyContact: ""
 ---
 
 Edison Innovation Angel Growth Fund provides funding to early-stage, emerging technology businesses matched with an outside equity investor within the last 90 days.
