@@ -6,8 +6,10 @@ id: brownfield-assessment-grant
 callToActionLink: https://www.njeda.com/community%20revitalization/
 callToActionText: Learn more
 fundingType: grant
+programPurpose: Retention
 agency:
   - NJEDA
+agencyContact: ""
 publishStageArchive: Do Not Publish
 status: first come, first serve
 programFrequency: one-time
@@ -21,8 +23,6 @@ county:
 sector: []
 openDate: ""
 dueDate: ""
-programPurpose: ""
-agencyContact: ""
 ---
 
 The Brownfield Assessment Grant Program provides grant money to support site assessment at any eligible brownfield site in NJ.
