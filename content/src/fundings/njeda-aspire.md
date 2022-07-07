@@ -6,8 +6,10 @@ id: njeda-aspire
 callToActionLink: https://www.njeda.com/aspire/
 callToActionText: Learn More
 fundingType: tax credit
+programPurpose: Action Related Reward
 agency:
   - NJEDA
+agencyContact: ""
 publishStageArchive: ""
 status: deadline
 programFrequency: one-time
@@ -24,8 +26,6 @@ sector:
   - real-estate
 openDate: ""
 dueDate: ""
-programPurpose: ""
-agencyContact: ""
 ---
 
 Aspire is a gap financing tool to support commercial, mixed-use, and residential real estate development projects. This tool replaces the Economic Redevelopment and Growth Grant (ERG).
