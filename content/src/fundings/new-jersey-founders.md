@@ -6,8 +6,10 @@ id: new-jersey-founders-funders
 callToActionLink: ""
 callToActionText: ""
 fundingType: technical assistance
+programPurpose: Retention
 agency:
   - NJEDA
+agencyContact: ""
 publishStageArchive: Do Not Publish
 status: rolling application
 programFrequency: reoccuring
@@ -24,8 +26,6 @@ sector:
   - Other Services (except Public Administration)
 openDate: ""
 dueDate: ""
-programPurpose: ""
-agencyContact: ""
 ---
 
 Founders & Funders enables early-stage New Jersey technology and life sciences companies to meet potential investors in 10-minute, one-on-one “speed dating” sessions to discuss strategy, business models, and funding opportunities.
