@@ -6,8 +6,10 @@ id: investments-in-women-led-startups
 callToActionLink: http://www.njeda.com/goldenseeds
 callToActionText: Learn more
 fundingType: technical assistance
+programPurpose: Retention
 agency:
   - NJEDA
+agencyContact: ""
 publishStageArchive: ""
 status: rolling application
 programFrequency: ongoing
@@ -23,8 +25,6 @@ sector:
   - Life Sciences
 openDate: ""
 dueDate: ""
-programPurpose: ""
-agencyContact: ""
 ---
 
 Golden Seeds is a nationwide angel investor network dedicated to investing in women-led startups. The New Jersey chapter of Golden Seeds launched in 2021 to increase available capital for female-led businesses.
