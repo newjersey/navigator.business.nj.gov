@@ -7,8 +7,10 @@ id: technology-business-tax-certificate-transfer-nol-program-[formerly-net-opera
 callToActionLink: https://www.njeda.com/nol/
 callToActionText: Learn more
 fundingType: tax credit
+programPurpose: Retention
 agency:
   - NJEDA
+agencyContact: ""
 publishStageArchive: ""
 status: deadline
 programFrequency: reoccuring
@@ -30,8 +32,6 @@ sector:
   - Other Services (except Public Administration)
 openDate: 05/01/2022
 dueDate: 07/01/2022
-programPurpose: ""
-agencyContact: ""
 ---
 
 The Net Operating Loss Program enables qualified, unprofitable New Jersey-based technology or biotechnology businesses to sell a percentage of their net operating losses (NOL) and unused research and development (R&D) tax credits to unrelated profitable businesses.
