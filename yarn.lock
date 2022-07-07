@@ -3884,6 +3884,7 @@ __metadata:
     cypress-audit: 1.1.0
     cypress-dotenv: 2.0.0
     cypress-wait-until: 1.7.2
+    dayjs: 1.11.3
     dependency-cruiser: 11.11.0
     dotenv: 16.0.1
     eslint: 8.19.0
