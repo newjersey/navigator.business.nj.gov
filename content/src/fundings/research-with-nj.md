@@ -6,8 +6,10 @@ id: research-with-nj
 callToActionLink: www.researchwithnj.com
 callToActionText: Learn More
 fundingType: technical assistance
+programPurpose: Action Related Reward
 agency:
   - NJEDA
+agencyContact: ""
 publishStageArchive: ""
 status: rolling application
 programFrequency: ongoing
@@ -28,8 +30,6 @@ sector:
   - "Transportation and Warehousing "
 openDate: ""
 dueDate: ""
-programPurpose: ""
-agencyContact: ""
 ---
 
 Research with NJ is a free online portal that showcases New Jersey’s experts in science, technology, engineering, and mathematics (STEM). It provides local, national, and international commercial enterprises, ranging from entrepreneurs and start-ups to global businesses, with insight into groundbreaking research taking place within the state’s network of research universities.
