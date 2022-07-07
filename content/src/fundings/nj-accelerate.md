@@ -6,8 +6,10 @@ id: nj-accelerate
 callToActionLink: https://www.njeda.com/njaccelerate/
 callToActionText: Learn more
 fundingType: loan
+programPurpose: Action Related Reward
 agency:
   - NJEDA
+agencyContact: ""
 publishStageArchive: ""
 status: rolling application
 programFrequency: ongoing
@@ -24,8 +26,6 @@ sector:
   - Life Sciences
 openDate: ""
 dueDate: ""
-programPurpose: ""
-agencyContact: ""
 ---
 
 NJ Accelerate supports accelerator programs and their graduate companies. Incentivizes graduate companies to locate and grow in New Jersey.
