@@ -6,8 +6,10 @@ id: opportunity-partnership-find-skilled-employees
 callToActionLink: https://www.nj.gov/labor/employer-services/business/businessprograms.shtml?open=specialty
 callToActionText: Learn more
 fundingType: grant
+programPurpose: Retention
 agency:
   - NJDOL
+agencyContact: ""
 publishStageArchive: Do Not Publish
 status: opening soon
 programFrequency: reoccuring
@@ -31,8 +33,6 @@ sector:
   - Other Services (except Public Administration)
 openDate: ""
 dueDate: ""
-programPurpose: ""
-agencyContact: ""
 ---
 
 Opportunity Partnership helps employers identify an appropriate educational institution or training provider to train employees. The business and the school develop training programs to teach necessary skills. Upon completing the program, trainees must qualify for entry-level positions in your company.
