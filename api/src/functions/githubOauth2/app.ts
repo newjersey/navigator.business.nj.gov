@@ -51,14 +51,14 @@ app.get("/api/cms/callback", async (req, res) => {
 
     const accessToken = await authorizationCode.getToken({
       code,
-      redirect_uri: `https://${escape(host)}/dev/api/cms/callback`,
+      redirect_uri: `https://${host}/dev/api/cms/callback`,
     });
 
     res.setHeader("Content-Type", "text/html");
 
     res.status(200).send(
       renderResponse("success", {
-        token: accessToken.token["access_token"],
+        token: escape(accessToken.token["access_token"]),
         provider: "github",
       })
     );
