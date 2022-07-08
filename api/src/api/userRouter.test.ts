@@ -1,7 +1,6 @@
 import { getCurrentDate } from "@shared/dateHelpers";
 import { createEmptyFormationAddress, createEmptyFormationFormData } from "@shared/formationData";
-import bodyParser from "body-parser";
-import express, { Express } from "express";
+import { Express } from "express";
 import jwt from "jsonwebtoken";
 import request from "supertest";
 import {
@@ -15,6 +14,7 @@ import {
 } from "../../test/factories";
 import { determineAnnualFilingDate } from "../../test/helpers";
 import { UserDataClient } from "../domain/types";
+import { setupExpress } from "../libs/express";
 import { userRouterFactory } from "./userRouter";
 
 jest.mock("jsonwebtoken", () => ({
@@ -51,8 +51,7 @@ describe("userRouter", () => {
       findByEmail: jest.fn(),
     };
     stubUpdateLicenseStatus = jest.fn();
-    app = express();
-    app.use(bodyParser.json());
+    app = setupExpress(false);
     app.use(userRouterFactory(stubUserDataClient, stubUpdateLicenseStatus));
   });
 

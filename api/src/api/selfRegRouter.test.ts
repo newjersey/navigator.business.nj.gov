@@ -1,10 +1,10 @@
 import { UserData } from "@shared/userData";
-import bodyParser from "body-parser";
-import express, { Express } from "express";
+import { Express } from "express";
 import request from "supertest";
 import { generateSelfRegResponse, generateUser, generateUserData } from "../../test/factories";
 import { generateHashedKey } from "../../test/helpers";
 import { SelfRegClient, UserDataClient } from "../domain/types";
+import { setupExpress } from "../libs/express";
 import { selfRegRouterFactory } from "./selfRegRouter";
 
 describe("selfRegRouter", () => {
@@ -25,8 +25,7 @@ describe("selfRegRouter", () => {
       resume: jest.fn(),
     };
 
-    app = express();
-    app.use(bodyParser.json());
+    app = setupExpress(false);
     app.use(selfRegRouterFactory(stubUserDataClient, stubSelfRegClient));
   });
 

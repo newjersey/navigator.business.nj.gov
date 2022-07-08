@@ -1,9 +1,9 @@
-import bodyParser from "body-parser";
-import express, { Express } from "express";
+import { Express } from "express";
 import request from "supertest";
 import { generateProfileData, generateUser, generateUserData } from "../../test/factories";
 import { determineAnnualFilingDate } from "../../test/helpers";
 import { BusinessNameClient, NameAvailability } from "../domain/types";
+import { setupExpress } from "../libs/express";
 import { guestRouterFactory } from "./guestRouter";
 
 describe("guestRouter", () => {
@@ -13,8 +13,7 @@ describe("guestRouter", () => {
 
   beforeEach(async () => {
     stubBusinessNameClient = { search: jest.fn() };
-    app = express();
-    app.use(bodyParser.json());
+    app = setupExpress(false);
     app.use(guestRouterFactory(stubBusinessNameClient));
   });
 

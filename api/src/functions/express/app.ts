@@ -1,9 +1,8 @@
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
+import { setupExpress } from "@libs/express";
 import { LogWriter } from "@libs/logWriter";
 import bodyParser from "body-parser";
-import cors from "cors";
-import express from "express";
 import serverless from "serverless-http";
 import { externalEndpointRouterFactory } from "src/api/externalEndpointRouter";
 import { guestRouterFactory } from "src/api/guestRouter";
@@ -25,9 +24,7 @@ import { searchLicenseStatusFactory } from "../../domain/license-status/searchLi
 import { addToUserTestingFactory } from "../../domain/user-testing/addToUserTestingFactory";
 import { updateLicenseStatusFactory } from "../../domain/user/updateLicenseStatusFactory";
 
-const app = express();
-app.use(bodyParser.json());
-app.use(cors());
+const app = setupExpress();
 
 const IS_OFFLINE = process.env.IS_OFFLINE === "true" || false; // set by serverless-offline
 const IS_DOCKER = process.env.IS_DOCKER === "true" || false; // set in docker-compose

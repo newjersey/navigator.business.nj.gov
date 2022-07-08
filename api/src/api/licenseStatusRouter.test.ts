@@ -1,7 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-
-import bodyParser from "body-parser";
-import express, { Express } from "express";
+import { Express } from "express";
 import request from "supertest";
 import {
   generateLicenseData,
@@ -9,6 +7,7 @@ import {
   generateNameAndAddress,
   generateUserData,
 } from "../../test/factories";
+import { setupExpress } from "../libs/express";
 import { licenseStatusRouterFactory } from "./licenseStatusRouter";
 import { getSignedInUserId } from "./userRouter";
 
@@ -26,8 +25,7 @@ describe("licenseStatusRouter", () => {
     jest.resetAllMocks();
     fakeSignedInUserId.mockReturnValue("some-id");
     stubUpdateLicenseStatus = jest.fn();
-    app = express();
-    app.use(bodyParser.json());
+    app = setupExpress(false);
     app.use(licenseStatusRouterFactory(stubUpdateLicenseStatus));
   });
 
