@@ -526,9 +526,9 @@
     "cancelButtonText": "Cancel"
   },
   "cannabisPriorityStatus": {
-    "phraseWithOnePriority": "It sounds like you're eligible as ${priorityStatusOne}",
-    "phraseWithTwoPriorities": "It sounds like you're eligible as ${priorityStatusOne} and ${priorityStatusTwo}",
-    "phraseWithThreePriorities": "It sounds like you're eligible as ${priorityStatusOne}, ${priorityStatusTwo}, and ${priorityStatusThree}"
+    "phrase1": "It sounds like you're eligible as ${type1}",
+    "phrase2": "It sounds like you're eligible as ${type1} and ${type2}",
+    "phrase3": "It sounds like you're eligible as ${type1}, ${type2}, and ${type3}"
   },
   "cannabisPriorityTypes": {
     "minorityWomenOrVeteran": "a Diversely-Owned Business",

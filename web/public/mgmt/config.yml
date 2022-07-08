@@ -868,9 +868,9 @@ collections:
             widget: object
             summary: "{{cannabisPriorityStatus}}"
             fields:
-              - { label: Phrase With One Priority, name: phraseWithOnePriority, widget: string }
-              - { label: Phrase With Two Priorities, name: phraseWithTwoPriorities, widget: string }
-              - { label: Phrase With Three Priorities, name: phraseWithThreePriorities, widget: string }
+              - { label: Phrase With One Priority, name: phrase1, widget: string }
+              - { label: Phrase With Two Priorities, name: phrase2, widget: string }
+              - { label: Phrase With Three Priorities, name: phrase3, widget: string }
           - label: Cannabis Priority Types
             name: cannabisPriorityTypes
             collapsed: true

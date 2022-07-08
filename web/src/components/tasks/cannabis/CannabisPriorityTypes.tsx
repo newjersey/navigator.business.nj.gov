@@ -3,7 +3,11 @@ import { Alert } from "@/components/njwds-extended/Alert";
 import { Button } from "@/components/njwds-extended/Button";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { noneOfTheAbovePriorityId, priorityTypesObj } from "@/lib/domain-logic/cannabisPriorityTypes";
+import {
+  noneOfTheAbovePriorityId,
+  PriorityType,
+  priorityTypesObj,
+} from "@/lib/domain-logic/cannabisPriorityTypes";
 import { Task } from "@/lib/types/types";
 import { templateEval, useMountEffect } from "@/lib/utils/helpers";
 import { Checkbox, FormControlLabel } from "@mui/material";
@@ -57,68 +61,39 @@ export const CannabisPriorityTypes = (props: Props): ReactElement => {
 
   useEffect(() => {
     if (!userData) return;
-    const anyMinorityOrWomenCheckboxesSelected: boolean = priorityTypesObj.minorityOrWomen.some(
-      (minorityOrWomen) => userData.taskItemChecklist[minorityOrWomen] === true
-    );
 
-    const anyImpactZoneCheckboxesSelected: boolean = priorityTypesObj.impactZone.some(
-      (impactZone) => userData.taskItemChecklist[impactZone] === true
-    );
-
-    const veteranCheckboxSelected: boolean = priorityTypesObj.veteran.some(
-      (veteran) => userData.taskItemChecklist[veteran] === true
-    );
-
-    const anySocialEquityCheckboxesSelected: boolean = priorityTypesObj.socialEquity.some(
-      (socialEquity) => userData.taskItemChecklist[socialEquity] === true
-    );
+    const isCheckboxesSelected = (priorityType: PriorityType): boolean => {
+      return priorityTypesObj[priorityType].some(
+        (checkboxId) => userData.taskItemChecklist[checkboxId] === true
+      );
+    };
 
     const priorityStatusArray: Array<string> = [];
 
-    if (anyMinorityOrWomenCheckboxesSelected || veteranCheckboxSelected) {
+    if (isCheckboxesSelected("minorityOrWomen") || isCheckboxesSelected("veteran")) {
       priorityStatusArray.push(Config.cannabisPriorityTypes.minorityWomenOrVeteran);
     }
-    if (anyImpactZoneCheckboxesSelected) {
+    if (isCheckboxesSelected("impactZone")) {
       priorityStatusArray.push(Config.cannabisPriorityTypes.impactZone);
     }
-    if (anySocialEquityCheckboxesSelected) {
+    if (isCheckboxesSelected("socialEquity")) {
       priorityStatusArray.push(Config.cannabisPriorityTypes.socialEquity);
     }
 
-    if (priorityStatusArray.length == 3) {
+    const priorityStatusesAsIndexMap: Record<string, string> = {};
+    for (const [i, val] of priorityStatusArray.entries()) {
+      priorityStatusesAsIndexMap[`type${i + 1}`] = val;
+    }
+
+    const configLocation = `phrase${priorityStatusArray.length}` as "phrase1" | "phrase2" | "phrase3";
+    if (priorityStatusArray.length > 0 && priorityStatusArray.length < 4) {
       setEligibiltyPhrase(
-        templateEval(Config.cannabisPriorityStatus.phraseWithThreePriorities, {
-          priorityStatusOne: priorityStatusArray[0],
-          priorityStatusTwo: priorityStatusArray[1],
-          priorityStatusThree: priorityStatusArray[2],
-        })
-      );
-    } else if (priorityStatusArray.length == 2) {
-      setEligibiltyPhrase(
-        templateEval(Config.cannabisPriorityStatus.phraseWithTwoPriorities, {
-          priorityStatusOne: priorityStatusArray[0],
-          priorityStatusTwo: priorityStatusArray[1],
-        })
-      );
-    } else if (priorityStatusArray.length == 1) {
-      setEligibiltyPhrase(
-        templateEval(Config.cannabisPriorityStatus.phraseWithOnePriority, {
-          priorityStatusOne: priorityStatusArray[0],
-        })
+        templateEval(Config.cannabisPriorityStatus[configLocation], priorityStatusesAsIndexMap)
       );
     } else {
       setEligibiltyPhrase("");
     }
-  }, [
-    // userData?.taskItemChecklist,
-    userData,
-    Config.cannabisPriorityStatus.phraseWithOnePriority,
-    Config.cannabisPriorityStatus.phraseWithThreePriorities,
-    Config.cannabisPriorityStatus.phraseWithTwoPriorities,
-    Config.cannabisPriorityTypes.impactZone,
-    Config.cannabisPriorityTypes.minorityWomenOrVeteran,
-    Config.cannabisPriorityTypes.socialEquity,
-  ]);
+  }, [userData, Config.cannabisPriorityStatus, Config.cannabisPriorityTypes]);
 
   const handleNoneOfTheAboveCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (!userData) return;

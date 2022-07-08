@@ -374,8 +374,8 @@ describe("<CannabisPriorityStatusTask />", () => {
 
       renderPage(task);
 
-      const eligibilityPhrase = templateEval(Config.cannabisPriorityStatus.phraseWithOnePriority, {
-        priorityStatusOne: Config.cannabisPriorityTypes.minorityWomenOrVeteran,
+      const eligibilityPhrase = templateEval(Config.cannabisPriorityStatus.phrase1, {
+        type1: Config.cannabisPriorityTypes.minorityWomenOrVeteran,
       });
 
       expect(screen.queryByText(eligibilityPhrase)).not.toBeInTheDocument();
@@ -396,8 +396,8 @@ describe("<CannabisPriorityStatusTask />", () => {
       useMockRoadmapTask(task);
       renderPage(task);
 
-      const eligibilityPhrase = templateEval(Config.cannabisPriorityStatus.phraseWithOnePriority, {
-        priorityStatusOne: Config.cannabisPriorityTypes.impactZone,
+      const eligibilityPhrase = templateEval(Config.cannabisPriorityStatus.phrase1, {
+        type1: Config.cannabisPriorityTypes.impactZone,
       });
 
       expect(screen.queryByText(eligibilityPhrase)).not.toBeInTheDocument();
@@ -417,8 +417,8 @@ describe("<CannabisPriorityStatusTask />", () => {
 
       renderPage(task);
 
-      const eligibilityPhrase = templateEval(Config.cannabisPriorityStatus.phraseWithOnePriority, {
-        priorityStatusOne: Config.cannabisPriorityTypes.socialEquity,
+      const eligibilityPhrase = templateEval(Config.cannabisPriorityStatus.phrase1, {
+        type1: Config.cannabisPriorityTypes.socialEquity,
       });
 
       expect(screen.queryByText(eligibilityPhrase)).not.toBeInTheDocument();
@@ -439,9 +439,9 @@ describe("<CannabisPriorityStatusTask />", () => {
 
       renderPage(task);
 
-      const eligibilityPhrase = templateEval(Config.cannabisPriorityStatus.phraseWithTwoPriorities, {
-        priorityStatusOne: Config.cannabisPriorityTypes.minorityWomenOrVeteran,
-        priorityStatusTwo: Config.cannabisPriorityTypes.impactZone,
+      const eligibilityPhrase = templateEval(Config.cannabisPriorityStatus.phrase2, {
+        type1: Config.cannabisPriorityTypes.minorityWomenOrVeteran,
+        type2: Config.cannabisPriorityTypes.impactZone,
       });
 
       expect(screen.queryByText(eligibilityPhrase)).not.toBeInTheDocument();
@@ -464,9 +464,9 @@ describe("<CannabisPriorityStatusTask />", () => {
 
       renderPage(task);
 
-      const eligibilityPhrase = templateEval(Config.cannabisPriorityStatus.phraseWithTwoPriorities, {
-        priorityStatusOne: Config.cannabisPriorityTypes.minorityWomenOrVeteran,
-        priorityStatusTwo: Config.cannabisPriorityTypes.socialEquity,
+      const eligibilityPhrase = templateEval(Config.cannabisPriorityStatus.phrase2, {
+        type1: Config.cannabisPriorityTypes.minorityWomenOrVeteran,
+        type2: Config.cannabisPriorityTypes.socialEquity,
       });
 
       expect(screen.queryByText(eligibilityPhrase)).not.toBeInTheDocument();
@@ -490,10 +490,10 @@ describe("<CannabisPriorityStatusTask />", () => {
 
       renderPage(task);
 
-      const eligibilityPhrase = templateEval(Config.cannabisPriorityStatus.phraseWithThreePriorities, {
-        priorityStatusOne: Config.cannabisPriorityTypes.minorityWomenOrVeteran,
-        priorityStatusTwo: Config.cannabisPriorityTypes.impactZone,
-        priorityStatusThree: Config.cannabisPriorityTypes.socialEquity,
+      const eligibilityPhrase = templateEval(Config.cannabisPriorityStatus.phrase3, {
+        type1: Config.cannabisPriorityTypes.minorityWomenOrVeteran,
+        type2: Config.cannabisPriorityTypes.impactZone,
+        type3: Config.cannabisPriorityTypes.socialEquity,
       });
 
       expect(screen.queryByText(eligibilityPhrase)).not.toBeInTheDocument();
