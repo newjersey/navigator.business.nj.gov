@@ -1713,6 +1713,18 @@ collections:
               - { label: Error text (when not entered), name: errorText, widget: string }
               - { label: Save button text, name: saveButtonText, widget: string }
               - { label: Cancel button text, name: cancelButtonText, widget: string }
+              - { label: Are-You-Sure Modal Header, name: areYouSureModalHeader, widget: string }
+              - { label: Are-You-Sure Modal Body, name: areYouSureModalBody, widget: markdown }
+              - {
+                  label: Are-You-Sure Modal Continue Button,
+                  name: areYouSureModalContinueButtonText,
+                  widget: string,
+                }
+              - {
+                  label: Are-You-Sure Modal Cancel Button,
+                  name: areYouSureModalCancelButtonText,
+                  widget: string,
+                }
 
           - label: Funding Defaults
             name: fundingDefaults

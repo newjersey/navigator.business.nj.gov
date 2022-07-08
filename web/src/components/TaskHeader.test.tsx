@@ -254,7 +254,7 @@ describe("<TaskHeader />", () => {
       expect(screen.getByText(Config.formationDateModal.errorText)).toBeInTheDocument();
     });
 
-    it("sets dateOfFormation back to undefined if user sets back to not completed", async () => {
+    it("shows warning modal and sets dateOfFormation to undefined if user sets back to not completed", async () => {
       renderTaskHeader(
         generateTask({ id: randomFormationId() }),
         generateUserData({ profileData: generateProfileData({ businessPersona: "STARTING" }) })
@@ -269,7 +269,31 @@ describe("<TaskHeader />", () => {
 
       fireEvent.click(screen.getAllByText("Completed")[0]);
       fireEvent.click(screen.getByText("Not started"));
+      expect(screen.getByText(Config.formationDateModal.areYouSureModalHeader)).toBeInTheDocument();
+      fireEvent.click(screen.getByText(Config.formationDateModal.areYouSureModalContinueButtonText));
       await waitFor(() => expect(currentUserData().profileData.dateOfFormation).toBeUndefined());
+    });
+
+    it("does not update dateOfFormation or status if user changes their mind", async () => {
+      const id = randomFormationId();
+      renderTaskHeader(
+        generateTask({ id }),
+        generateUserData({ profileData: generateProfileData({ businessPersona: "STARTING" }) })
+      );
+      selectCompleted();
+      const date = getCurrentDate().subtract(1, "month").date(1);
+      selectDate(date);
+      fireEvent.click(screen.getByText(Config.formationDateModal.saveButtonText));
+      await waitFor(() =>
+        expect(currentUserData().profileData.dateOfFormation).toEqual(date.format("YYYY-MM-DD"))
+      );
+
+      fireEvent.click(screen.getAllByText("Completed")[0]);
+      fireEvent.click(screen.getByText("Not started"));
+      expect(screen.getByText(Config.formationDateModal.areYouSureModalHeader)).toBeInTheDocument();
+      fireEvent.click(screen.getAllByText(Config.formationDateModal.areYouSureModalCancelButtonText)[0]);
+      expect(currentUserData().taskProgress[id]).toEqual("COMPLETED");
+      expect(currentUserData().profileData.dateOfFormation).toEqual(date.format("YYYY-MM-DD"));
     });
   });
 
