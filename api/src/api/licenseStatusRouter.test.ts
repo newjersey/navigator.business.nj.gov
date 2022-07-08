@@ -27,6 +27,7 @@ describe("licenseStatusRouter", () => {
     fakeSignedInUserId.mockReturnValue("some-id");
     stubUpdateLicenseStatus = jest.fn();
     app = express();
+    app.disable("x-powered-by");
     app.use(bodyParser.json());
     app.use(licenseStatusRouterFactory(stubUpdateLicenseStatus));
   });

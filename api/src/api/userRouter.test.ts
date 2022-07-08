@@ -52,6 +52,7 @@ describe("userRouter", () => {
     };
     stubUpdateLicenseStatus = jest.fn();
     app = express();
+    app.disable("x-powered-by");
     app.use(bodyParser.json());
     app.use(userRouterFactory(stubUserDataClient, stubUpdateLicenseStatus));
   });

@@ -53,6 +53,7 @@ describe("externalEndpointRouter", () => {
     stubAddNewsletter = jest.fn();
     stubAddToUserTesting = jest.fn();
     app = express();
+    app.disable("x-powered-by");
     app.use(bodyParser.json());
     app.use(
       externalEndpointRouterFactory(

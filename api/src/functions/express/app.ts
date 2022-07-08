@@ -26,6 +26,7 @@ import { addToUserTestingFactory } from "../../domain/user-testing/addToUserTest
 import { updateLicenseStatusFactory } from "../../domain/user/updateLicenseStatusFactory";
 
 const app = express();
+app.disable("x-powered-by");
 app.use(bodyParser.json());
 app.use(cors());
 
