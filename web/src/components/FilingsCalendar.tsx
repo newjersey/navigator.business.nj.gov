@@ -1,21 +1,36 @@
 import { ArrowTooltip } from "@/components/ArrowTooltip";
 import { Tag } from "@/components/njwds-extended/Tag";
 import { Icon } from "@/components/njwds/Icon";
+import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
 import { OperateReference } from "@/lib/types/types";
+import analytics from "@/lib/utils/analytics";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { getCurrentDate, parseDateWithFormat, TaxFiling } from "@businessnjgovnavigator/shared/";
+import { getCurrentDate, parseDateWithFormat } from "@businessnjgovnavigator/shared/";
 import { useMediaQuery } from "@mui/material";
 import Link from "next/link";
-import { ReactElement } from "react";
+import router from "next/router";
+import { ReactElement, useMemo } from "react";
+import { Content } from "./Content";
 
 interface Props {
-  taxFilings: TaxFiling[];
   operateReferences: Record<string, OperateReference>;
 }
 
 export const FilingsCalendar = (props: Props): ReactElement => {
+  const { userData } = useUserData();
   const isLargeScreen = useMediaQuery(MediaQueries.tabletAndUp);
+
+  const taxFilings = useMemo(
+    () =>
+      userData != null && userData.profileData.dateOfFormation != null ? userData.taxFilingData.filings : [],
+    [userData]
+  );
+
+  const editOnClick = () => {
+    analytics.event.roadmap_profile_edit_button.click.go_to_profile_screen();
+    router.push("/profile");
+  };
 
   const getMonth = (num: number): ReactElement => {
     const date = getCurrentDate().add(num, "months");
@@ -24,7 +39,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
       textColor = "text-green";
     }
 
-    const thisMonthFilings = props.taxFilings
+    const thisMonthFilings = taxFilings
       .filter((it) => parseDateWithFormat(it.dueDate, "YYYY-MM-DD").month() === date.month())
       .sort((a, b) =>
         parseDateWithFormat(a.dueDate, "YYYY-MM-DD").isBefore(parseDateWithFormat(b.dueDate, "YYYY-MM-DD"))
@@ -100,7 +115,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
 
   const renderList = () => (
     <div data-testid="filings-calendar-as-list">
-      {props.taxFilings
+      {taxFilings
         .filter((filing) => props.operateReferences[filing.identifier])
         .map((filing) => (
           <div key={`${filing.identifier}-${filing.dueDate}`} className="flex margin-bottom-2 minh-6">
@@ -123,7 +138,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
     </div>
   );
 
-  return (
+  return taxFilings.length > 0 ? (
     <>
       <div className="flex flex-align-end padding-top-2">
         <h2 className="margin-bottom-0">{Config.dashboardDefaults.calendarHeader}</h2>
@@ -140,6 +155,18 @@ export const FilingsCalendar = (props: Props): ReactElement => {
       </div>
       <hr className="margin-bottom-4 margin-top-105 bg-base-light" aria-hidden={true} />
       {isLargeScreen ? renderCalendar() : renderList()}
+      <p className="text-base-dark">{Config.dashboardDefaults.calendarLegalText}</p>
     </>
+  ) : (
+    <div className=" padding-y-2">
+      <h2 className="margin-bottom-0">{Config.dashboardDefaults.calendarHeader}</h2>
+      <hr className="bg-base-light margin-y-3 margin-right-105" aria-hidden={true} />
+      <div className="flex flex-column space-between fac text-align-center flex-desktop:grid-col bg-base-lightest usa-prose padding-y-205 padding-x-3">
+        <Content>{Config.dashboardDefaults.emptyCalendarTitleText}</Content>
+        <img className="padding-y-2" src={`/img/empty-trophy-illustration.png`} alt="empty calendar" />
+
+        <Content onClick={editOnClick}>{Config.dashboardDefaults.emptyCalendarBodyText}</Content>
+      </div>
+    </div>
   );
 };
