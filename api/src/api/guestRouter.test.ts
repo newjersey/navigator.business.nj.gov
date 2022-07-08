@@ -14,6 +14,7 @@ describe("guestRouter", () => {
   beforeEach(async () => {
     stubBusinessNameClient = { search: jest.fn() };
     app = express();
+    app.disable("x-powered-by");
     app.use(bodyParser.json());
     app.use(guestRouterFactory(stubBusinessNameClient));
   });

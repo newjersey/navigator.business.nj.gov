@@ -26,6 +26,7 @@ describe("selfRegRouter", () => {
     };
 
     app = express();
+    app.disable("x-powered-by");
     app.use(bodyParser.json());
     app.use(selfRegRouterFactory(stubUserDataClient, stubSelfRegClient));
   });

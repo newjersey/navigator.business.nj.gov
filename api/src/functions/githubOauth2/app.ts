@@ -27,6 +27,7 @@ export const oauthConfig: ModuleOptions = Object.freeze({
 });
 
 const app = express();
+app.disable("x-powered-by");
 app.use(bodyParser.json());
 app.use(cors());
 
