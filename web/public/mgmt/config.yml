@@ -862,6 +862,24 @@ collections:
             fields:
               - { label: Beta Main Text, name: betaMainText, widget: string }
               - { label: Beta Modal Button Text, name: betaModalButtonText, widget: string }
+          - label: Cannabis Priority Status
+            name: cannabisPriorityStatus
+            collapsed: true
+            widget: object
+            summary: "{{cannabisPriorityStatus}}"
+            fields:
+              - { label: Phrase With One Priority, name: phraseWithOnePriority, widget: string }
+              - { label: Phrase With Two Priorities, name: phraseWithTwoPriorities, widget: string }
+              - { label: Phrase With Three Priorities, name: phraseWithThreePriorities, widget: string }
+          - label: Cannabis Priority Types
+            name: cannabisPriorityTypes
+            collapsed: true
+            widget: object
+            summary: "{{cannabisPriorityTypes}}"
+            fields:
+              - { label: Minority Women Or Veteran, name: minorityWomenOrVeteran, widget: string }
+              - { label: Impact Zone, name: impactZone, widget: string }
+              - { label: Social Equity, name: socialEquity, widget: string }
           - label: Business Formation Defaults
             name: businessFormationDefaults
             collapsed: true
