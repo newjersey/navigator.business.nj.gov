@@ -91,6 +91,10 @@ module.exports = {
       to: { path: "serverless-http" },
     },
     {
+      from: { path: "src/libs" },
+      to: { path: "helmet" },
+    },
+    {
       from: {},
       to: { path: "../shared" },
     },
