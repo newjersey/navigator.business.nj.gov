@@ -1,7 +1,5 @@
-import bodyParser from "body-parser";
-import cors from "cors";
+import { setupExpress } from "@libs/express";
 import dedent from "dedent";
-import express from "express";
 import { randomBytes } from "node:crypto";
 import serverless from "serverless-http";
 import { AuthorizationCode, ModuleOptions } from "simple-oauth2";
@@ -26,10 +24,7 @@ export const oauthConfig: ModuleOptions = Object.freeze({
   }),
 });
 
-const app = express();
-app.disable("x-powered-by");
-app.use(bodyParser.json());
-app.use(cors());
+const app = setupExpress();
 
 app.get("/api/cms/auth", (req, res) => {
   const { host } = req.headers;

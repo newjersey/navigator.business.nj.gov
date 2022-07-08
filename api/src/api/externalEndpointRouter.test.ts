@@ -1,5 +1,4 @@
-import bodyParser from "body-parser";
-import express, { Express } from "express";
+import { Express } from "express";
 import jwt from "jsonwebtoken";
 import request from "supertest";
 import {
@@ -9,6 +8,7 @@ import {
   generateUserData,
 } from "../../test/factories";
 import { AddNewsletter, AddToUserTesting, FeedbackClient, UserDataClient } from "../domain/types";
+import { setupExpress } from "../libs/express";
 import { externalEndpointRouterFactory } from "./externalEndpointRouter";
 
 jest.mock("jsonwebtoken", () => ({
@@ -52,9 +52,7 @@ describe("externalEndpointRouter", () => {
     };
     stubAddNewsletter = jest.fn();
     stubAddToUserTesting = jest.fn();
-    app = express();
-    app.disable("x-powered-by");
-    app.use(bodyParser.json());
+    app = setupExpress(false);
     app.use(
       externalEndpointRouterFactory(
         stubUserDataClient,
