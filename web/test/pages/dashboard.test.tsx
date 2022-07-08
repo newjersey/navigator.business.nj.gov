@@ -6,11 +6,8 @@ import {
   generateFunding,
   generatePreferences,
   generateProfileData,
-  generateTaxFiling,
-  generateTaxFilingData,
   generateUserData,
 } from "@/test/factories";
-import { markdownToText } from "@/test/helpers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockProfileData, useMockUserData } from "@/test/mock/mockUseUserData";
 import {
@@ -19,7 +16,7 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { getCurrentDate, parseDateWithFormat, UserData } from "@businessnjgovnavigator/shared/";
+import { UserData } from "@businessnjgovnavigator/shared/";
 import * as materialUi from "@mui/material";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
@@ -90,63 +87,6 @@ describe("dashboard", () => {
       </WithStatefulUserData>
     );
   };
-
-  it("displays filings calendar with annual report date", () => {
-    const dueDate = getCurrentDate().add(2, "months");
-    const annualReport = generateTaxFiling({
-      identifier: "annual-report",
-      dueDate: dueDate.format("YYYY-MM-DD"),
-    });
-    useMockUserData({ taxFilingData: generateTaxFilingData({ filings: [annualReport] }) });
-    const operateRefs: Record<string, OperateReference> = {
-      "annual-report": {
-        name: "Annual Report",
-        urlSlug: "annual-report-url",
-        urlPath: "annual_report-url-path",
-      },
-    };
-
-    renderPage({ operateRefs });
-    expect(screen.getByTestId("filings-calendar-as-table")).toBeInTheDocument();
-    expect(screen.getByText(dueDate.format("M/D"), { exact: false })).toBeInTheDocument();
-    expect(screen.getByText("Annual Report")).toBeInTheDocument();
-  });
-
-  it("displays empty calendar content when there are no filings", () => {
-    useMockUserData({ taxFilingData: generateTaxFilingData({ filings: [] }) });
-    renderPage({});
-    expect(screen.queryByTestId("filings-calendar-as-table")).not.toBeInTheDocument();
-    expect(
-      screen.getByText(markdownToText(Config.dashboardDefaults.emptyCalendarTitleText))
-    ).toBeInTheDocument();
-  });
-
-  it("displays filings calendar as list with annual report date", () => {
-    setMobileScreen(false);
-
-    const dueDate = getCurrentDate().add(2, "months");
-    const annualReport = generateTaxFiling({
-      identifier: "annual-report",
-      dueDate: dueDate.format("YYYY-MM-DD"),
-    });
-    useMockUserData({ taxFilingData: generateTaxFilingData({ filings: [annualReport] }) });
-    const operateRefs: Record<string, OperateReference> = {
-      "annual-report": {
-        name: "Annual Report",
-        urlSlug: "annual-report-url",
-        urlPath: "annual_report-url-path",
-      },
-    };
-
-    renderPage({ operateRefs });
-    expect(screen.getByTestId("filings-calendar-as-list")).toBeInTheDocument();
-    expect(screen.getByText(dueDate.format("MMMM D, YYYY"), { exact: false })).toBeInTheDocument();
-    expect(
-      screen.getByText(
-        `Annual Report ${parseDateWithFormat(annualReport.dueDate, "YYYY-MM-DD").format("YYYY")}`
-      )
-    ).toBeInTheDocument();
-  });
 
   it("displays total count of filtered certifications of fundings in list header", () => {
     const initialUserData = generateUserData({

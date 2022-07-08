@@ -1,12 +1,11 @@
-import { Content } from "@/components/Content";
 import { OpportunitiesList } from "@/components/dashboard/OpportunitiesList";
 import { UnGraduationBox } from "@/components/dashboard/UnGraduationBox";
+import { FilingsCalendar } from "@/components/FilingsCalendar";
 import { Header } from "@/components/Header";
 import { NavBar } from "@/components/navbar/NavBar";
 import { ToastAlert } from "@/components/njwds-extended/ToastAlert";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { RightSidebarPageLayout } from "@/components/RightSidebarPageLayout";
-import { FilingsCalendar } from "@/components/roadmap/FilingsCalendar";
 import { useAuthAlertPage } from "@/lib/auth/useAuthProtectedPage";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { loadAllCertifications } from "@/lib/static/loadCertifications";
@@ -14,11 +13,10 @@ import { loadDashboardDisplayContent } from "@/lib/static/loadDisplayContent";
 import { loadAllFundings } from "@/lib/static/loadFundings";
 import { loadOperateReferences } from "@/lib/static/loadOperateReferences";
 import { Certification, DashboardDisplayContent, Funding, OperateReference } from "@/lib/types/types";
-import analytics from "@/lib/utils/analytics";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { GetStaticPropsResult } from "next";
 import { useRouter } from "next/router";
-import { ReactElement, useEffect, useMemo, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 
 interface Props {
   displayContent: DashboardDisplayContent;
@@ -33,44 +31,16 @@ const DashboardPage = (props: Props): ReactElement => {
   const router = useRouter();
   const [successAlert, setSuccessAlert] = useState<boolean>(false);
 
-  const editOnClick = () => {
-    analytics.event.roadmap_profile_edit_button.click.go_to_profile_screen();
-    router.push("/profile");
-  };
-
   useEffect(() => {
     if (!router.isReady) return;
     const success = router.query.success;
     setSuccessAlert(success === "true");
   }, [router.isReady, router.query.success]);
 
-  const taxFilings = useMemo(
-    () =>
-      userData != null && userData.profileData.dateOfFormation != null ? userData.taxFilingData.filings : [],
-    [userData]
-  );
-
   const mainContent = (
     <>
       <Header />
-      {taxFilings.length > 0 ? (
-        <>
-          <FilingsCalendar taxFilings={taxFilings} operateReferences={props.operateReferences} />
-
-          <p className="text-base-dark">{Config.dashboardDefaults.calendarLegalText}</p>
-        </>
-      ) : (
-        <div className=" padding-y-2">
-          <h2 className="margin-bottom-0">{Config.dashboardDefaults.calendarHeader}</h2>
-          <hr className="bg-base-light margin-y-3 margin-right-105" aria-hidden={true} />
-          <div className="flex flex-column space-between fac text-align-center flex-desktop:grid-col bg-base-lightest usa-prose padding-y-205 padding-x-3">
-            <Content>{Config.dashboardDefaults.emptyCalendarTitleText}</Content>
-            <img className="padding-y-2" src={`/img/empty-trophy-illustration.png`} alt="empty calendar" />
-
-            <Content onClick={editOnClick}>{Config.dashboardDefaults.emptyCalendarBodyText}</Content>
-          </div>
-        </div>
-      )}
+      <FilingsCalendar operateReferences={props.operateReferences} />
       {userData?.profileData.initialOnboardingFlow === "STARTING" && <UnGraduationBox />}
     </>
   );

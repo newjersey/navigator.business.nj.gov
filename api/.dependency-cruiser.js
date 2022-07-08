@@ -92,6 +92,10 @@ module.exports = {
     },
     {
       from: { path: "src/libs" },
+      to: { path: "lodash.escape" },
+    },
+    {
+      from: { path: "src/libs" },
       to: { path: "helmet" },
     },
     {
