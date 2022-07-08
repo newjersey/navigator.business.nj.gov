@@ -3530,6 +3530,7 @@ __metadata:
     "@types/express": 4.17.13
     "@types/jest": 28.1.4
     "@types/jsonwebtoken": 8.5.8
+    "@types/lodash.escape": 4.0.7
     "@types/node": 16.11.43
     "@types/simple-oauth2": 4.1.1
     "@types/supertest": 2.0.12
@@ -3557,6 +3558,7 @@ __metadata:
     jest-dynalite: 3.6.0
     jest-junit: 14.0.0
     jsonwebtoken: 8.5.1
+    lodash.escape: 4.0.1
     prettier: 2.7.1
     prettier-plugin-organize-imports: 3.0.0
     rimraf: 3.0.2
@@ -3665,6 +3667,7 @@ __metadata:
     "@types/jest": 28.1.4
     "@types/js-yaml": 4.0.5
     "@types/jsonwebtoken": 8.5.8
+    "@types/lodash.escape": 4.0.7
     "@types/lodash.merge": 4.6.7
     "@types/lodash.orderby": 4.6.7
     "@types/node": 16.11.43
@@ -3730,6 +3733,7 @@ __metadata:
     jsonwebtoken: 8.5.1
     kill-port: 2.0.1
     lint-staged: 13.0.3
+    lodash.escape: 4.0.1
     lodash.merge: 4.6.2
     lodash.orderby: 4.6.0
     markdown-truncate: 1.0.4
@@ -9027,6 +9031,15 @@ __metadata:
   dependencies:
     "@types/node": "*"
   checksum: e009a2bfb50e90ca9b7c6e8f648f8464067271fd99116f881073fa6fa76dc8d0133181dd65e6614d5fb1220d671d67b0124aef7d97dc02d7e342ab143a47779d
+  languageName: node
+  linkType: hard
+
+"@types/lodash.escape@npm:4.0.7":
+  version: 4.0.7
+  resolution: "@types/lodash.escape@npm:4.0.7"
+  dependencies:
+    "@types/lodash": "*"
+  checksum: 777c54bf2331f1433f302f58364ba68d5214896085d8b4bbeb4a1d330c0df22ed7352ea77b9a96149ef2fbc77f6146579e7f4e0f64485bac2c768e04e652bbf9
   languageName: node
   linkType: hard
 
@@ -22156,6 +22169,13 @@ __metadata:
   version: 4.5.0
   resolution: "lodash.difference@npm:4.5.0"
   checksum: ecee276aa578f300e79350805a14a51be8d1f12b3c1389a19996d8ab516f814211a5f65c68331571ecdad96522b863ccc484b55504ce8c9947212a29f8857d5a
+  languageName: node
+  linkType: hard
+
+"lodash.escape@npm:4.0.1":
+  version: 4.0.1
+  resolution: "lodash.escape@npm:4.0.1"
+  checksum: fcb54f457497256964d619d5cccbd80a961916fca60df3fe0fa3e7f052715c2944c0ed5aefb4f9e047d127d44aa2d55555f3350cb42c6549e9e293fb30b41e7f
   languageName: node
   linkType: hard
 

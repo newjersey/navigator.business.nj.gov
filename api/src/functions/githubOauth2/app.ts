@@ -1,5 +1,6 @@
 import { setupExpress } from "@libs/express";
 import dedent from "dedent";
+import escape from "lodash.escape";
 import { randomBytes } from "node:crypto";
 import serverless from "serverless-http";
 import { AuthorizationCode, ModuleOptions } from "simple-oauth2";
@@ -50,7 +51,7 @@ app.get("/api/cms/callback", async (req, res) => {
 
     const accessToken = await authorizationCode.getToken({
       code,
-      redirect_uri: `https://${host}/dev/api/cms/callback`,
+      redirect_uri: `https://${escape(host)}/dev/api/cms/callback`,
     });
 
     res.setHeader("Content-Type", "text/html");
