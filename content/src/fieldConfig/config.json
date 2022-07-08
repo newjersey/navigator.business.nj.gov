@@ -523,7 +523,11 @@
     "fieldDescription": "Find your formation date on your `Certificate of Formation|certificate-formation`.",
     "errorText": "Your formation date must be in the past, and should be formatted as MM/YYYY.",
     "saveButtonText": "Save",
-    "cancelButtonText": "Cancel"
+    "cancelButtonText": "Cancel",
+    "areYouSureModalHeader": "Didn't Form Yet?",
+    "areYouSureModalBody": "If you change your task status, you will need to resubmit your Business `Effective Date|effective-date` and will lose access to your calendar.",
+    "areYouSureModalContinueButtonText": "Continue",
+    "areYouSureModalCancelButtonText": "Cancel"
   },
   "cannabisPriorityStatus": {
     "phrase1": "It sounds like you're eligible as ${type1}",
