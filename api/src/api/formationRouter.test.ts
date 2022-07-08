@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-import bodyParser from "body-parser";
-import express, { Express } from "express";
+import { Express } from "express";
 import request from "supertest";
 import {
   generateFormationData,
@@ -12,6 +11,7 @@ import {
 } from "../../test/factories";
 import { saveFileFromUrl } from "../domain/s3Writer";
 import { FormationClient, UserDataClient } from "../domain/types";
+import { setupExpress } from "../libs/express";
 import { formationRouterFactory } from "./formationRouter";
 import { getSignedInUser, getSignedInUserId } from "./userRouter";
 
@@ -52,9 +52,7 @@ describe("formationRouter", () => {
       findByEmail: jest.fn(),
       put: jest.fn(),
     };
-    app = express();
-    app.disable("x-powered-by");
-    app.use(bodyParser.json());
+    app = setupExpress(false);
     app.use(formationRouterFactory(stubFormationClient, stubUserDataClient));
   });
 
