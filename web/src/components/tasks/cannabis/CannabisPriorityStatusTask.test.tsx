@@ -1,3 +1,5 @@
+/* eslint-disable testing-library/no-render-in-setup */
+
 import { CannabisPriorityStatusTask } from "@/components/tasks/cannabis/CannabisPriorityStatusTask";
 import { getMergedConfig } from "@/contexts/configContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
@@ -365,17 +367,19 @@ describe("<CannabisPriorityStatusTask />", () => {
   });
 
   describe("displays eligibility phrases for priority types", () => {
-    it("displays diversely-owned eligibility when minority/women or veteran priority types are selected", () => {
-      const randomMinorityOrWomenPriorityType = randomElementFromArray([...priorityTypesObj.minorityOrWomen]);
-      const randomVeteranType = randomElementFromArray([...priorityTypesObj.veteran]);
-
+    beforeEach(() => {
       const task = generateTask({});
       useMockRoadmapTask(task);
 
       renderPage(task);
+    });
 
-      const eligibilityPhrase = templateEval(Config.cannabisPriorityStatus.phraseWithOnePriority, {
-        priorityStatusOne: Config.cannabisPriorityTypes.minorityWomenOrVeteran,
+    it("displays diversely-owned eligibility when minority/women or veteran priority types are selected", () => {
+      const randomMinorityOrWomenPriorityType = randomElementFromArray([...priorityTypesObj.minorityOrWomen]);
+      const randomVeteranType = randomElementFromArray([...priorityTypesObj.veteran]);
+
+      const eligibilityPhrase = templateEval(Config.cannabisPriorityStatus.phrase1, {
+        type1: Config.cannabisPriorityTypes.minorityWomenOrVeteran,
       });
 
       expect(screen.queryByText(eligibilityPhrase)).not.toBeInTheDocument();
@@ -392,12 +396,8 @@ describe("<CannabisPriorityStatusTask />", () => {
     it("displays impact zone eligibility when impact zone types are selected", () => {
       const randomImpactZonePriorityType = randomElementFromArray([...priorityTypesObj.impactZone]);
 
-      const task = generateTask({});
-      useMockRoadmapTask(task);
-      renderPage(task);
-
-      const eligibilityPhrase = templateEval(Config.cannabisPriorityStatus.phraseWithOnePriority, {
-        priorityStatusOne: Config.cannabisPriorityTypes.impactZone,
+      const eligibilityPhrase = templateEval(Config.cannabisPriorityStatus.phrase1, {
+        type1: Config.cannabisPriorityTypes.impactZone,
       });
 
       expect(screen.queryByText(eligibilityPhrase)).not.toBeInTheDocument();
@@ -412,13 +412,8 @@ describe("<CannabisPriorityStatusTask />", () => {
     it("displays social equity eligibility when social equity types are selected", () => {
       const randomSocialEquityPriorityType = randomElementFromArray([...priorityTypesObj.socialEquity]);
 
-      const task = generateTask({});
-      useMockRoadmapTask(task);
-
-      renderPage(task);
-
-      const eligibilityPhrase = templateEval(Config.cannabisPriorityStatus.phraseWithOnePriority, {
-        priorityStatusOne: Config.cannabisPriorityTypes.socialEquity,
+      const eligibilityPhrase = templateEval(Config.cannabisPriorityStatus.phrase1, {
+        type1: Config.cannabisPriorityTypes.socialEquity,
       });
 
       expect(screen.queryByText(eligibilityPhrase)).not.toBeInTheDocument();
@@ -434,14 +429,9 @@ describe("<CannabisPriorityStatusTask />", () => {
       const randomMinorityOrWomenPriorityType = randomElementFromArray([...priorityTypesObj.minorityOrWomen]);
       const randomImpactZonePriorityType = randomElementFromArray([...priorityTypesObj.impactZone]);
 
-      const task = generateTask({});
-      useMockRoadmapTask(task);
-
-      renderPage(task);
-
-      const eligibilityPhrase = templateEval(Config.cannabisPriorityStatus.phraseWithTwoPriorities, {
-        priorityStatusOne: Config.cannabisPriorityTypes.minorityWomenOrVeteran,
-        priorityStatusTwo: Config.cannabisPriorityTypes.impactZone,
+      const eligibilityPhrase = templateEval(Config.cannabisPriorityStatus.phrase2, {
+        type1: Config.cannabisPriorityTypes.minorityWomenOrVeteran,
+        type2: Config.cannabisPriorityTypes.impactZone,
       });
 
       expect(screen.queryByText(eligibilityPhrase)).not.toBeInTheDocument();
@@ -459,14 +449,9 @@ describe("<CannabisPriorityStatusTask />", () => {
       const randomMinorityOrWomenPriorityType = randomElementFromArray([...priorityTypesObj.minorityOrWomen]);
       const randomSocialEquityPriorityType = randomElementFromArray([...priorityTypesObj.socialEquity]);
 
-      const task = generateTask({});
-      useMockRoadmapTask(task);
-
-      renderPage(task);
-
-      const eligibilityPhrase = templateEval(Config.cannabisPriorityStatus.phraseWithTwoPriorities, {
-        priorityStatusOne: Config.cannabisPriorityTypes.minorityWomenOrVeteran,
-        priorityStatusTwo: Config.cannabisPriorityTypes.socialEquity,
+      const eligibilityPhrase = templateEval(Config.cannabisPriorityStatus.phrase2, {
+        type1: Config.cannabisPriorityTypes.minorityWomenOrVeteran,
+        type2: Config.cannabisPriorityTypes.socialEquity,
       });
 
       expect(screen.queryByText(eligibilityPhrase)).not.toBeInTheDocument();
@@ -485,15 +470,10 @@ describe("<CannabisPriorityStatusTask />", () => {
       const randomSocialEquityPriorityType = randomElementFromArray([...priorityTypesObj.socialEquity]);
       const randomImpactZonePriorityType = randomElementFromArray([...priorityTypesObj.impactZone]);
 
-      const task = generateTask({});
-      useMockRoadmapTask(task);
-
-      renderPage(task);
-
-      const eligibilityPhrase = templateEval(Config.cannabisPriorityStatus.phraseWithThreePriorities, {
-        priorityStatusOne: Config.cannabisPriorityTypes.minorityWomenOrVeteran,
-        priorityStatusTwo: Config.cannabisPriorityTypes.impactZone,
-        priorityStatusThree: Config.cannabisPriorityTypes.socialEquity,
+      const eligibilityPhrase = templateEval(Config.cannabisPriorityStatus.phrase3, {
+        type1: Config.cannabisPriorityTypes.minorityWomenOrVeteran,
+        type2: Config.cannabisPriorityTypes.impactZone,
+        type3: Config.cannabisPriorityTypes.socialEquity,
       });
 
       expect(screen.queryByText(eligibilityPhrase)).not.toBeInTheDocument();
