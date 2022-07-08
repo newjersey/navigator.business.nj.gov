@@ -1,3 +1,5 @@
+/* eslint-disable testing-library/no-render-in-setup */
+
 import { CannabisPriorityStatusTask } from "@/components/tasks/cannabis/CannabisPriorityStatusTask";
 import { getMergedConfig } from "@/contexts/configContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
@@ -365,14 +367,16 @@ describe("<CannabisPriorityStatusTask />", () => {
   });
 
   describe("displays eligibility phrases for priority types", () => {
-    it("displays diversely-owned eligibility when minority/women or veteran priority types are selected", () => {
-      const randomMinorityOrWomenPriorityType = randomElementFromArray([...priorityTypesObj.minorityOrWomen]);
-      const randomVeteranType = randomElementFromArray([...priorityTypesObj.veteran]);
-
+    beforeEach(() => {
       const task = generateTask({});
       useMockRoadmapTask(task);
 
       renderPage(task);
+    });
+
+    it("displays diversely-owned eligibility when minority/women or veteran priority types are selected", () => {
+      const randomMinorityOrWomenPriorityType = randomElementFromArray([...priorityTypesObj.minorityOrWomen]);
+      const randomVeteranType = randomElementFromArray([...priorityTypesObj.veteran]);
 
       const eligibilityPhrase = templateEval(Config.cannabisPriorityStatus.phrase1, {
         type1: Config.cannabisPriorityTypes.minorityWomenOrVeteran,
@@ -392,10 +396,6 @@ describe("<CannabisPriorityStatusTask />", () => {
     it("displays impact zone eligibility when impact zone types are selected", () => {
       const randomImpactZonePriorityType = randomElementFromArray([...priorityTypesObj.impactZone]);
 
-      const task = generateTask({});
-      useMockRoadmapTask(task);
-      renderPage(task);
-
       const eligibilityPhrase = templateEval(Config.cannabisPriorityStatus.phrase1, {
         type1: Config.cannabisPriorityTypes.impactZone,
       });
@@ -411,11 +411,6 @@ describe("<CannabisPriorityStatusTask />", () => {
 
     it("displays social equity eligibility when social equity types are selected", () => {
       const randomSocialEquityPriorityType = randomElementFromArray([...priorityTypesObj.socialEquity]);
-
-      const task = generateTask({});
-      useMockRoadmapTask(task);
-
-      renderPage(task);
 
       const eligibilityPhrase = templateEval(Config.cannabisPriorityStatus.phrase1, {
         type1: Config.cannabisPriorityTypes.socialEquity,
@@ -433,11 +428,6 @@ describe("<CannabisPriorityStatusTask />", () => {
     it("displays 2-part eligibility when minority/women AND impact zone are selected", () => {
       const randomMinorityOrWomenPriorityType = randomElementFromArray([...priorityTypesObj.minorityOrWomen]);
       const randomImpactZonePriorityType = randomElementFromArray([...priorityTypesObj.impactZone]);
-
-      const task = generateTask({});
-      useMockRoadmapTask(task);
-
-      renderPage(task);
 
       const eligibilityPhrase = templateEval(Config.cannabisPriorityStatus.phrase2, {
         type1: Config.cannabisPriorityTypes.minorityWomenOrVeteran,
@@ -459,11 +449,6 @@ describe("<CannabisPriorityStatusTask />", () => {
       const randomMinorityOrWomenPriorityType = randomElementFromArray([...priorityTypesObj.minorityOrWomen]);
       const randomSocialEquityPriorityType = randomElementFromArray([...priorityTypesObj.socialEquity]);
 
-      const task = generateTask({});
-      useMockRoadmapTask(task);
-
-      renderPage(task);
-
       const eligibilityPhrase = templateEval(Config.cannabisPriorityStatus.phrase2, {
         type1: Config.cannabisPriorityTypes.minorityWomenOrVeteran,
         type2: Config.cannabisPriorityTypes.socialEquity,
@@ -484,11 +469,6 @@ describe("<CannabisPriorityStatusTask />", () => {
       const randomMinorityOrWomenPriorityType = randomElementFromArray([...priorityTypesObj.minorityOrWomen]);
       const randomSocialEquityPriorityType = randomElementFromArray([...priorityTypesObj.socialEquity]);
       const randomImpactZonePriorityType = randomElementFromArray([...priorityTypesObj.impactZone]);
-
-      const task = generateTask({});
-      useMockRoadmapTask(task);
-
-      renderPage(task);
 
       const eligibilityPhrase = templateEval(Config.cannabisPriorityStatus.phrase3, {
         type1: Config.cannabisPriorityTypes.minorityWomenOrVeteran,
