@@ -5,7 +5,6 @@ import { SidebarCardContent } from "@/lib/types/types";
 import RoadmapPage from "@/pages/roadmap";
 import {
   generatePreferences,
-  generateProfileData,
   generateSidebarCardContent,
   generateStep,
   generateTask,
@@ -20,7 +19,7 @@ import { setupStatefulUserDataContext, WithStatefulUserData } from "@/test/mock/
 import { RegistrationStatus, UserData } from "@businessnjgovnavigator/shared/";
 import * as materialUi from "@mui/material";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
-import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
+import { render, screen, waitFor, within } from "@testing-library/react";
 
 function mockMaterialUI(): typeof materialUi {
   return {
@@ -67,24 +66,6 @@ describe("roadmap page", () => {
       <ThemeProvider theme={createTheme()}>
         <RoadmapPage operateReferences={{}} displayContent={createDisplayContent(sidebarDisplayContent)} />
       </ThemeProvider>
-    );
-  };
-
-  const renderStatefulRoadmapPage = ({
-    userData,
-    sidebarDisplayContent,
-  }: {
-    userData?: UserData;
-    sidebarDisplayContent?: Record<string, SidebarCardContent>;
-  }) => {
-    setupStatefulUserDataContext();
-
-    render(
-      <WithStatefulUserData initialUserData={userData || generateUserData({})}>
-        <ThemeProvider theme={createTheme()}>
-          <RoadmapPage operateReferences={{}} displayContent={createDisplayContent(sidebarDisplayContent)} />
-        </ThemeProvider>
-      </WithStatefulUserData>
     );
   };
 
@@ -265,140 +246,27 @@ describe("roadmap page", () => {
     expect(within(sectionPlan).getByText("step1")).toBeVisible();
   });
 
-  describe("sidebar", () => {
-    it("renders welcome card", async () => {
-      const userData = generateUserData({
-        preferences: generatePreferences({
-          visibleRoadmapSidebarCards: ["welcome"],
-        }),
-      });
+  it("renders registration card when routing is not from onboarding and authenication is false,", async () => {
+    const setAlertIsVisible = jest.fn();
+    useMockRouter({ query: { fromOnboarding: "false" } });
 
-      const sidebarDisplayContent = {
-        welcome: generateSidebarCardContent({ contentMd: "WelcomeCardContent" }),
-      };
-
-      renderPageWithAuthAlert({ userData, sidebarDisplayContent });
-      await waitFor(() => {
-        expect(screen.getByText("WelcomeCardContent")).toBeInTheDocument();
-      });
+    const sidebarDisplayContent = {
+      "not-registered": generateSidebarCardContent({ contentMd: "NotRegisteredContent" }),
+      welcome: generateSidebarCardContent({ contentMd: "WelcomeCardContent" }),
+      graduation: generateSidebarCardContent({ contentMd: "graduation" }),
+    };
+    renderPageWithAuthAlert({
+      alertIsVisible: true,
+      sidebarDisplayContent,
+      isAuthenticated: IsAuthenticated.FALSE,
+      setAlertIsVisible,
     });
 
-    it("renders registration card when SignUpToast is closed", async () => {
-      useMockRouter({ query: { fromOnboarding: "true" } });
+    expect(screen.getByText("NotRegisteredContent")).toBeInTheDocument();
 
-      const sidebarDisplayContent = {
-        "not-registered": generateSidebarCardContent({ contentMd: "NotRegisteredContent" }),
-        welcome: generateSidebarCardContent({ contentMd: "WelcomeCardContent" }),
-        graduation: generateSidebarCardContent({ contentMd: "graduation" }),
-      };
-      renderPageWithAuthAlert({
-        alertIsVisible: true,
-        sidebarDisplayContent,
-        isAuthenticated: IsAuthenticated.FALSE,
-      });
-
-      expect(screen.queryByText("NotRegisteredContent")).not.toBeInTheDocument();
-      expect(screen.getByText("WelcomeCardContent")).toBeInTheDocument();
-
-      fireEvent.click(within(screen.queryByTestId("self-reg-toast") as HTMLElement).getByLabelText("close"));
-
-      await waitFor(() => {
-        expect(screen.getByText("NotRegisteredContent")).toBeInTheDocument();
-      });
+    await waitFor(() => {
       expect(screen.getByText("WelcomeCardContent")).toBeInTheDocument();
     });
-
-    it("renders registration card when SignUpToast is removed", async () => {
-      const setAlertIsVisible = jest.fn();
-      useMockRouter({});
-
-      const sidebarDisplayContent = {
-        "not-registered": generateSidebarCardContent({ contentMd: "NotRegisteredContent" }),
-        welcome: generateSidebarCardContent({ contentMd: "WelcomeCardContent" }),
-        graduation: generateSidebarCardContent({ contentMd: "graduation" }),
-      };
-      renderPageWithAuthAlert({
-        alertIsVisible: true,
-        sidebarDisplayContent,
-        isAuthenticated: IsAuthenticated.FALSE,
-        setAlertIsVisible,
-      });
-
-      expect(screen.getByText("NotRegisteredContent")).toBeInTheDocument();
-
-      await waitFor(() => {
-        expect(screen.getByText("WelcomeCardContent")).toBeInTheDocument();
-      });
-      expect(setAlertIsVisible).toHaveBeenCalledWith(false);
-    });
-
-    it("removes successful registration card when it's closed", async () => {
-      const userData = generateUserData({
-        preferences: generatePreferences({
-          visibleRoadmapSidebarCards: ["successful-registration"],
-        }),
-      });
-
-      const sidebarDisplayContent = {
-        "successful-registration": generateSidebarCardContent({
-          id: "successful-registration",
-          contentMd: "SuccessContent",
-          hasCloseButton: true,
-        }),
-      };
-
-      renderPageWithAuthAlert({
-        userData,
-        sidebarDisplayContent,
-      });
-
-      await waitFor(() => {
-        expect(screen.getByText("SuccessContent")).toBeInTheDocument();
-      });
-
-      fireEvent.click(
-        within(screen.getByTestId("successful-registration") as HTMLElement).getByLabelText("Close")
-      );
-
-      await waitFor(() => {
-        expect(screen.queryByText("SuccessContent")).not.toBeInTheDocument();
-      });
-    });
-
-    it("renders graduation card", () => {
-      useMockUserData({
-        preferences: generatePreferences({
-          visibleRoadmapSidebarCards: ["graduation"],
-        }),
-      });
-
-      const sidebarDisplayContent = {
-        graduation: generateSidebarCardContent({ contentMd: "graduationCard" }),
-      };
-      renderRoadmapPage({ sidebarDisplayContent });
-
-      expect(screen.getByText("graduationCard")).toBeInTheDocument();
-    });
-
-    it("hides graduation card when business persona is FOREIGN", async () => {
-      const userData = generateUserData({
-        preferences: generatePreferences({
-          visibleRoadmapSidebarCards: ["graduation"],
-        }),
-        profileData: generateProfileData({ businessPersona: "FOREIGN" }),
-      });
-      const sidebarDisplayContent = {
-        graduation: generateSidebarCardContent({ contentMd: "graduationCard" }),
-      };
-
-      renderStatefulRoadmapPage({
-        userData,
-        sidebarDisplayContent,
-      });
-
-      await waitFor(() => {
-        expect(screen.queryByText("graduationCard")).not.toBeInTheDocument();
-      });
-    });
+    expect(setAlertIsVisible).toHaveBeenCalledWith(false);
   });
 });
