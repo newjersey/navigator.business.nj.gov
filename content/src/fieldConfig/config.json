@@ -524,5 +524,15 @@
     "errorText": "Your formation date must be in the past, and should be formatted as MM/YYYY.",
     "saveButtonText": "Save",
     "cancelButtonText": "Cancel"
+  },
+  "cannabisPriorityStatus": {
+    "phraseWithOnePriority": "It sounds like you're eligible as ${priorityStatusOne}",
+    "phraseWithTwoPriorities": "It sounds like you're eligible as ${priorityStatusOne} and ${priorityStatusTwo}",
+    "phraseWithThreePriorities": "It sounds like you're eligible as ${priorityStatusOne}, ${priorityStatusTwo}, and ${priorityStatusThree}"
+  },
+  "cannabisPriorityTypes": {
+    "minorityWomenOrVeteran": "a Diversely-Owned Business",
+    "impactZone": "an Impact Zone Business",
+    "socialEquity": "a Social Equity Business"
   }
 }

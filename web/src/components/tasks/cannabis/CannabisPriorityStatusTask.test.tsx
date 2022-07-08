@@ -3,6 +3,7 @@ import { getMergedConfig } from "@/contexts/configContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { noneOfTheAbovePriorityId, priorityTypesObj } from "@/lib/domain-logic/cannabisPriorityTypes";
 import { Task } from "@/lib/types/types";
+import { templateEval } from "@/lib/utils/helpers";
 import { generateTask, generateTaskLink, generateUserData } from "@/test/factories";
 import { randomElementFromArray, withAuthAlert } from "@/test/helpers";
 import { useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
@@ -361,5 +362,151 @@ describe("<CannabisPriorityStatusTask />", () => {
     expect(screen.getByText(Config.cannabisPriorityStatus.greenBoxMinorityOrWomenText)).toBeInTheDocument();
     expect(screen.getByText(Config.cannabisPriorityStatus.greenBoxVeteranText)).toBeInTheDocument();
     expect(screen.getByText(Config.cannabisPriorityStatus.greenBoxSocialEquityText)).toBeInTheDocument();
+  });
+
+  describe("displays eligibility phrases for priority types", () => {
+    it("displays diversely-owned eligibility when minority/women or veteran priority types are selected", () => {
+      const randomMinorityOrWomenPriorityType = randomElementFromArray([...priorityTypesObj.minorityOrWomen]);
+      const randomVeteranType = randomElementFromArray([...priorityTypesObj.veteran]);
+
+      const task = generateTask({});
+      useMockRoadmapTask(task);
+
+      renderPage(task);
+
+      const eligibilityPhrase = templateEval(Config.cannabisPriorityStatus.phraseWithOnePriority, {
+        priorityStatusOne: Config.cannabisPriorityTypes.minorityWomenOrVeteran,
+      });
+
+      expect(screen.queryByText(eligibilityPhrase)).not.toBeInTheDocument();
+
+      fireEvent.click(screen.getByTestId(randomMinorityOrWomenPriorityType));
+      fireEvent.click(screen.getByTestId(randomVeteranType));
+      expect(screen.getByText(eligibilityPhrase)).toBeInTheDocument();
+
+      fireEvent.click(screen.getByTestId(randomMinorityOrWomenPriorityType));
+      fireEvent.click(screen.getByTestId(randomVeteranType));
+      expect(screen.queryByText(eligibilityPhrase)).not.toBeInTheDocument();
+    });
+
+    it("displays impact zone eligibility when impact zone types are selected", () => {
+      const randomImpactZonePriorityType = randomElementFromArray([...priorityTypesObj.impactZone]);
+
+      const task = generateTask({});
+      useMockRoadmapTask(task);
+      renderPage(task);
+
+      const eligibilityPhrase = templateEval(Config.cannabisPriorityStatus.phraseWithOnePriority, {
+        priorityStatusOne: Config.cannabisPriorityTypes.impactZone,
+      });
+
+      expect(screen.queryByText(eligibilityPhrase)).not.toBeInTheDocument();
+
+      fireEvent.click(screen.getByTestId(randomImpactZonePriorityType));
+      expect(screen.getByText(eligibilityPhrase)).toBeInTheDocument();
+
+      fireEvent.click(screen.getByTestId(randomImpactZonePriorityType));
+      expect(screen.queryByText(eligibilityPhrase)).not.toBeInTheDocument();
+    });
+
+    it("displays social equity eligibility when social equity types are selected", () => {
+      const randomSocialEquityPriorityType = randomElementFromArray([...priorityTypesObj.socialEquity]);
+
+      const task = generateTask({});
+      useMockRoadmapTask(task);
+
+      renderPage(task);
+
+      const eligibilityPhrase = templateEval(Config.cannabisPriorityStatus.phraseWithOnePriority, {
+        priorityStatusOne: Config.cannabisPriorityTypes.socialEquity,
+      });
+
+      expect(screen.queryByText(eligibilityPhrase)).not.toBeInTheDocument();
+
+      fireEvent.click(screen.getByTestId(randomSocialEquityPriorityType));
+      expect(screen.getByText(eligibilityPhrase)).toBeInTheDocument();
+
+      fireEvent.click(screen.getByTestId(randomSocialEquityPriorityType));
+      expect(screen.queryByText(eligibilityPhrase)).not.toBeInTheDocument();
+    });
+
+    it("displays 2-part eligibility when minority/women AND impact zone are selected", () => {
+      const randomMinorityOrWomenPriorityType = randomElementFromArray([...priorityTypesObj.minorityOrWomen]);
+      const randomImpactZonePriorityType = randomElementFromArray([...priorityTypesObj.impactZone]);
+
+      const task = generateTask({});
+      useMockRoadmapTask(task);
+
+      renderPage(task);
+
+      const eligibilityPhrase = templateEval(Config.cannabisPriorityStatus.phraseWithTwoPriorities, {
+        priorityStatusOne: Config.cannabisPriorityTypes.minorityWomenOrVeteran,
+        priorityStatusTwo: Config.cannabisPriorityTypes.impactZone,
+      });
+
+      expect(screen.queryByText(eligibilityPhrase)).not.toBeInTheDocument();
+
+      fireEvent.click(screen.getByTestId(randomMinorityOrWomenPriorityType));
+      fireEvent.click(screen.getByTestId(randomImpactZonePriorityType));
+      expect(screen.getByText(eligibilityPhrase)).toBeInTheDocument();
+
+      fireEvent.click(screen.getByTestId(randomMinorityOrWomenPriorityType));
+      fireEvent.click(screen.getByTestId(randomImpactZonePriorityType));
+      expect(screen.queryByText(eligibilityPhrase)).not.toBeInTheDocument();
+    });
+
+    it("displays 2-part eligibility when minority/women AND social equity are selected", () => {
+      const randomMinorityOrWomenPriorityType = randomElementFromArray([...priorityTypesObj.minorityOrWomen]);
+      const randomSocialEquityPriorityType = randomElementFromArray([...priorityTypesObj.socialEquity]);
+
+      const task = generateTask({});
+      useMockRoadmapTask(task);
+
+      renderPage(task);
+
+      const eligibilityPhrase = templateEval(Config.cannabisPriorityStatus.phraseWithTwoPriorities, {
+        priorityStatusOne: Config.cannabisPriorityTypes.minorityWomenOrVeteran,
+        priorityStatusTwo: Config.cannabisPriorityTypes.socialEquity,
+      });
+
+      expect(screen.queryByText(eligibilityPhrase)).not.toBeInTheDocument();
+
+      fireEvent.click(screen.getByTestId(randomMinorityOrWomenPriorityType));
+      fireEvent.click(screen.getByTestId(randomSocialEquityPriorityType));
+      expect(screen.getByText(eligibilityPhrase)).toBeInTheDocument();
+
+      fireEvent.click(screen.getByTestId(randomMinorityOrWomenPriorityType));
+      fireEvent.click(screen.getByTestId(randomSocialEquityPriorityType));
+      expect(screen.queryByText(eligibilityPhrase)).not.toBeInTheDocument();
+    });
+
+    it("displays 3-part eligibility when minority/women, impact zone, AND social equity are selected", () => {
+      const randomMinorityOrWomenPriorityType = randomElementFromArray([...priorityTypesObj.minorityOrWomen]);
+      const randomSocialEquityPriorityType = randomElementFromArray([...priorityTypesObj.socialEquity]);
+      const randomImpactZonePriorityType = randomElementFromArray([...priorityTypesObj.impactZone]);
+
+      const task = generateTask({});
+      useMockRoadmapTask(task);
+
+      renderPage(task);
+
+      const eligibilityPhrase = templateEval(Config.cannabisPriorityStatus.phraseWithThreePriorities, {
+        priorityStatusOne: Config.cannabisPriorityTypes.minorityWomenOrVeteran,
+        priorityStatusTwo: Config.cannabisPriorityTypes.impactZone,
+        priorityStatusThree: Config.cannabisPriorityTypes.socialEquity,
+      });
+
+      expect(screen.queryByText(eligibilityPhrase)).not.toBeInTheDocument();
+
+      fireEvent.click(screen.getByTestId(randomMinorityOrWomenPriorityType));
+      fireEvent.click(screen.getByTestId(randomImpactZonePriorityType));
+      fireEvent.click(screen.getByTestId(randomSocialEquityPriorityType));
+      expect(screen.getByText(eligibilityPhrase)).toBeInTheDocument();
+
+      fireEvent.click(screen.getByTestId(randomMinorityOrWomenPriorityType));
+      fireEvent.click(screen.getByTestId(randomImpactZonePriorityType));
+      fireEvent.click(screen.getByTestId(randomSocialEquityPriorityType));
+      expect(screen.queryByText(eligibilityPhrase)).not.toBeInTheDocument();
+    });
   });
 });
