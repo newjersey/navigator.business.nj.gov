@@ -3671,8 +3671,8 @@ __metadata:
     "@types/lodash.merge": 4.6.7
     "@types/lodash.orderby": 4.6.7
     "@types/node": 16.11.43
-    "@types/react": 18.0.14
-    "@types/react-dom": 18.0.5
+    "@types/react": 18.0.15
+    "@types/react-dom": 18.0.6
     "@types/react-swipeable-views": 0.13.1
     "@types/react-transition-group": 4.4.5
     "@types/remove-markdown": 0.3.1
@@ -3872,8 +3872,8 @@ __metadata:
     "@types/lodash.merge": 4.6.7
     "@types/lodash.orderby": 4.6.7
     "@types/node": 16.11.43
-    "@types/react": 18.0.14
-    "@types/react-dom": 18.0.5
+    "@types/react": 18.0.15
+    "@types/react-dom": 18.0.6
     "@types/react-swipeable-views": 0.13.1
     "@types/react-transition-group": 4.4.5
     "@types/remove-markdown": 0.3.1
@@ -9220,16 +9220,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:18.0.5":
-  version: 18.0.5
-  resolution: "@types/react-dom@npm:18.0.5"
-  dependencies:
-    "@types/react": "*"
-  checksum: cd48b81950f499b52a3f0c08261f00046f9b7c96699fa249c9664e257e820daf6ecac815cd1028cebc9d105094adc39d047d1efd79214394b8b2d515574c0787
-  languageName: node
-  linkType: hard
-
-"@types/react-dom@npm:^18.0.0":
+"@types/react-dom@npm:18.0.6, @types/react-dom@npm:^18.0.0":
   version: 18.0.6
   resolution: "@types/react-dom@npm:18.0.6"
   dependencies:
@@ -9286,7 +9277,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:>=16":
+"@types/react@npm:*, @types/react@npm:18.0.15, @types/react@npm:>=16":
   version: 18.0.15
   resolution: "@types/react@npm:18.0.15"
   dependencies:
@@ -9294,17 +9285,6 @@ __metadata:
     "@types/scheduler": "*"
     csstype: ^3.0.2
   checksum: e22cc388d1c145aa184787e44dc28db4789976c704cd5db475c170bb76a560eb81def5f346cfe750949bb3d43ad88822b8cbb9f19b1286e3795892a8263e7715
-  languageName: node
-  linkType: hard
-
-"@types/react@npm:18.0.14":
-  version: 18.0.14
-  resolution: "@types/react@npm:18.0.14"
-  dependencies:
-    "@types/prop-types": "*"
-    "@types/scheduler": "*"
-    csstype: ^3.0.2
-  checksum: 608eb57a383eedc54c79949673e5e8314f6b0c61542bff58721c8c47a18c23e2832e77c656050c2c2c004b62cf25582136c7c56fe1b6263a285c065fae31dbcf
   languageName: node
   linkType: hard
 
