@@ -6,8 +6,10 @@ id: direct-loans
 callToActionLink: https://www.njeda.com/directloans/
 callToActionText: Learn more
 fundingType: loan
+programPurpose: Action Related Reward
 agency:
   - NJEDA
+agencyContact: ""
 publishStageArchive: ""
 status: rolling application
 programFrequency: ongoing
@@ -21,8 +23,6 @@ county:
 sector: []
 openDate: ""
 dueDate: ""
-programPurpose: ""
-agencyContact: ""
 ---
 
 New Jersey businesses committed to job creation or retention may be eligible for direct loans through the New Jersey Economic Development Authority (NJEDA) when conventional financing is not available.

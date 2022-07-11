@@ -6,8 +6,10 @@ id: small-business-lease-grant
 callToActionLink: https://www.njeda.com/small-business-lease-grant-program/
 callToActionText: Learn more
 fundingType: grant
+programPurpose: Action Related Reward
 agency:
   - NJEDA
+agencyContact: ""
 publishStageArchive: null
 status: first come, first serve
 programFrequency: one-time
@@ -22,8 +24,6 @@ county:
 sector: []
 openDate: ""
 dueDate: ""
-programPurpose: ""
-agencyContact: ""
 ---
 
 The Small Business Lease Grant supports the growth and success of small businesses and nonprofits by providing grant funding to cover a portion of lease payments for businesses and nonprofits leasing new or additional space.

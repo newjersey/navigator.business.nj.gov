@@ -1,15 +1,15 @@
 ---
 id: graduation
 header: ""
+hasCloseButton: false
+ctaText: Show Me Funding Opportunities
+weight: 4
 imgPath: ""
-ctaText: Show Me More
 color: primary
 shadowColor: ""
 borderColor: primary-light
-hasCloseButton: false
-weight: 4
 ---
 
 ### Finished setting up your business?
 
-If your business is up and running, you can now also use the Navigator to learn about filings, certifications, funding opportunities, and more.
+If your business is up and running, the Navigator can show you the certifications and funding opportunities your business may be eligible for.

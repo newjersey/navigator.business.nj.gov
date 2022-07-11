@@ -6,8 +6,10 @@ id: return-and-earn-employer-grants-for-hiring-unemployed
 callToActionLink: https://www.nj.gov/labor/employer-services/business/returnandearn.shtml
 callToActionText: Learn more
 fundingType: grant
+programPurpose: Retention
 agency:
   - NJDOL
+agencyContact: ""
 publishStageArchive: ""
 status: rolling application
 programFrequency: one-time
@@ -21,8 +23,6 @@ county:
 sector: []
 openDate: ""
 dueDate: ""
-programPurpose: ""
-agencyContact: ""
 ---
 
 The Return and Earn program is a grant for employers who hire unemployed workers, train them, and provide those workers with a new skill required for the job.

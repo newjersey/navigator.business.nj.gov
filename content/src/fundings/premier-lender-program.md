@@ -6,8 +6,10 @@ id: premier-lender-program
 callToActionLink: https://www.njeda.com/premierlender/
 callToActionText: Learn more
 fundingType: loan
+programPurpose: Action Related Reward
 agency:
   - NJEDA
+agencyContact: ""
 publishStageArchive: null
 status: rolling application
 programFrequency: ongoing
@@ -21,8 +23,6 @@ county:
 sector: []
 openDate: ""
 dueDate: ""
-programPurpose: ""
-agencyContact: ""
 ---
 
 The Premier Lender Program provides New Jersey-based businesses and not-for-profit organizations loan participation and guarantees that can help them overcome the financial obstacles to grow and expand their business.

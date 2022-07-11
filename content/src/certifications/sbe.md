@@ -24,7 +24,7 @@ A SBE is a business:
 
 * An `EIN|ein` 
 * Social Security Number
-* An identified [NAICS](www.census.gov/epcd/www/naics.html) code
+* An identified `NAICS|naics` code
 * Information on your business's gross revenue for the last 3 completed tax years
 * Business formation date (for LLC, C corps, LPs and LLPs) You can find this date on your `Certificate of Formation|certificate-formation` 
 

@@ -7,23 +7,15 @@ callToActionLink: https://www.state.nj.us/mvc/pdf/business/irpqui1.pdf
 callToActionText: File My IRP
 required: true
 ---
-You need to register your fleet with the International Registration Plan (IRP) to haul loads across state lines. Registration is done in the state where your business is based.
+The International Registration Plan (IRP) is a reciprocity agreement between all states in the US and Canada. You need to register your fleet with the (IRP) in the state where you formed your business before you can haul loads across state lines.
  
 ---
 ### Application Requirements
-- Proof of business address
+- Proof of business address, such as bank statements or a certificate of formation
 - USDoT Number
-- Tax ID or SSN
-- Truck information such as VIN#, fuel type, number of axles, and more
+- `Tax ID|tax-id` or SSN
+- Truck information such as the Vehicle Identification Number (VIN#), fuel type, number of axles, and more
 - Mileage traveled in each state for the past year
- 
->**Where to file:**  
->
->New Jersey Motor Vehicle Commission  
->Motor Carrier Services, IRP Section  
->225 East State Street  
->P.O. Box 178  
->Trenton, NJ 08666-0178
  
 >**Once completed, you will have:**
 >- Registration credentials for each vehicle registered with the IRP

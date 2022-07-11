@@ -6,8 +6,10 @@ id: njeda-rd-voucher
 callToActionLink: https://www.njeda.com/catalyst-voucher/
 callToActionText: Learn More
 fundingType: grant
+programPurpose: Retention
 agency:
   - NJEDA
+agencyContact: ""
 publishStageArchive: ""
 status: rolling application
 programFrequency: pilot
@@ -34,8 +36,6 @@ sector:
   - technology
 openDate: ""
 dueDate: ""
-programPurpose: ""
-agencyContact: ""
 ---
 
 The Catalyst Research and Development (R&D) Voucher Pilot Program supports New Jersey-based early-stage company efforts to accelerate the development and innovation of technologies from the research stage into commercially viable technologies, leading to industry and investor interest.

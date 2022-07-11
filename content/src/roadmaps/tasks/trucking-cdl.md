@@ -1,13 +1,14 @@
 ---
 urlSlug: trucking-cdl
 filename: trucking-cdl
-name: Apply for a Commercial Driver's License, if Applicable
+name: Apply for a Commercial Driver's License and Ensure Your Drivers are Licensed
 id: trucking-cdl
 callToActionLink: https://telegov.njportal.com/njmvc/AppointmentWizard
 callToActionText: Apply for My CDL
 issuingAgency: New Jersey Motor Vehicle Commission
 ---
-You need a Commercial Driver’s License (CDL) if you plan to do any load-hauling for your business.
+Any employee driving a truck needs a Commercial Driver's License (CDL).    
+As the business owner, you only need a CDL if **you** plan to do any load-hauling for your business.
  
 ---
 ### Eligibility Criteria
@@ -22,9 +23,8 @@ You need a Commercial Driver’s License (CDL) if you plan to do any load-haulin
 - [Medical Examiner's Certificate](https://www.state.nj.us/mvc/pdf/drivertopics/RA_4_1_a.pdf) completed by your healthcare provider, if applicable
 - Completed [Application for a Commercial Driver's License](https://www.state.nj.us/mvc/pdf/license/BA-208C.pdf)
 - Complete Entry-level Driver Training (ELDT), also known as Hazardous Materials Training, from an approved provider
-- Passing grade on the knowledge test
-- Passing grade on your driving skills test
 - Pay any associated fees
 
 >**Once completed, you will have:**
->- You will receive a Commercial Learner’s Permit (CLP) after passing the knowledge portion of the test and a CDL after passing the driving exam.
+>- Commercial Learner’s Permit (CLP) after passing the knowledge portion of the test
+>- CDL after passing the driving exam

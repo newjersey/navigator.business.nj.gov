@@ -6,8 +6,10 @@ id: brownfield-impact-fund-usepa-rlf
 callToActionLink: https://www.njeda.com/brownfieldsimpactfund/
 callToActionText: Learn more
 fundingType: loan
+programPurpose: Retention
 agency:
   - NJEDA
+agencyContact: ""
 publishStageArchive: Do Not Publish
 status: first come, first serve
 programFrequency: one-time
@@ -23,8 +25,6 @@ sector:
   - Waste Management
 openDate: ""
 dueDate: ""
-programPurpose: ""
-agencyContact: ""
 ---
 
 This is a pilot program, funded by the federal Environmental Protection Agency's Revolving Loan Fund (USEPA RLF) grant that will provide $800,000 in funding for loans to private developers and loans and/or sub-grants to public sector and non-profits to carry out cleanups at brownfield sites.

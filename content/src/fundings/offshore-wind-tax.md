@@ -6,8 +6,10 @@ id: offshore-wind-tax-credit-program
 callToActionLink: https://www.njeda.com/offshorewindtaxcredit/
 callToActionText: Learn more
 fundingType: tax credit
+programPurpose: Action Related Reward
 agency:
   - NJEDA
+agencyContact: ""
 publishStageArchive: ""
 status: first come, first serve
 programFrequency: ongoing
@@ -26,8 +28,6 @@ sector:
   - Other Services (except Public Administration)
 openDate: ""
 dueDate: 07/01/2025
-programPurpose: ""
-agencyContact: ""
 ---
 
 The Offshore Wind Tax Credit Program is a financial tool that spurs private capital investment and employment growth in major, land-based offshore wind industry projects.

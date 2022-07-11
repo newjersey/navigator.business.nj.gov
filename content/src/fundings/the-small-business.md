@@ -6,8 +6,10 @@ id: the-small-business-bonding-readiness-assistance-program
 callToActionLink: https://www.aaccnj.com/bonding-program---sbbrap.html
 callToActionText: Learn more
 fundingType: technical assistance
+programPurpose: Retention
 agency:
   - NJEDA
+agencyContact: ""
 publishStageArchive: null
 status: first come, first serve
 programFrequency: reoccuring
@@ -21,8 +23,6 @@ county:
 sector: []
 openDate: ""
 dueDate: ""
-programPurpose: ""
-agencyContact: ""
 ---
 
 The Small Business Bonding Readiness Assistance Program prepares small, minority-, and women-owned businesses to obtain surety bonds, which will make them more competitive when applying for state and federal government contracts.

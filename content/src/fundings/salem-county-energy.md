@@ -6,8 +6,10 @@ id: salem-county-energy-sales-tax-exemption
 callToActionLink: https://www.njeda.com/salem-county-energy-sales-tax-exemption/
 callToActionText: Learn more
 fundingType: tax exemption
+programPurpose: Retention
 agency:
   - NJEDA
+agencyContact: ""
 publishStageArchive: ""
 status: first come, first serve
 programFrequency: reoccuring
@@ -23,8 +25,6 @@ sector:
   - Clean Energy
 openDate: ""
 dueDate: ""
-programPurpose: ""
-agencyContact: ""
 ---
 
 The Salem County Energy Sales Tax Exemption program provides an energy sales tax exemption for the retail sales of electricity and natural gas and their transport to manufacturing businesses in Salem County.

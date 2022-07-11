@@ -6,8 +6,10 @@ id: small-business-fund
 callToActionLink: "https://www.njeda.com/smallbusinessfund/ "
 callToActionText: Learn more
 fundingType: loan
+programPurpose: Action Related Reward
 agency:
   - NJEDA
+agencyContact: ""
 publishStageArchive: null
 status: rolling application
 programFrequency: ongoing
@@ -21,8 +23,6 @@ county:
 sector: []
 openDate: ""
 dueDate: ""
-programPurpose: ""
-agencyContact: ""
 ---
 
 The Small Business Fund provides access to financing to credit-worthy small, minority-owned, and women-owned businesses and nonprofits in New Jersey.
