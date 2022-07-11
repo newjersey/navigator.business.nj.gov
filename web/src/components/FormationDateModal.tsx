@@ -70,7 +70,9 @@ export const FormationDateModal = (props: Props): ReactElement => {
         primaryButtonOnClick={saveDateOfFormation}
         secondaryButtonText={Config.formationDateModal.cancelButtonText}
       >
-        <Content>{Config.formationDateModal.description}</Content>
+        <div className="margin-bottom-3">
+          <Content>{Config.formationDateModal.description}</Content>
+        </div>
         <OnboardingDateOfFormation
           onValidation={onValidation}
           fieldStates={fieldStates}
