@@ -82,9 +82,9 @@ describe("<CannabisApplyForLicenseTask />", () => {
       taskItemChecklist: { [minorityWomanPriorityStatus]: true },
     });
     renderPage(generateTask({}), initialUserData);
-    expect(getInputByName("Diversely-Owned Business")).toBeChecked();
-    expect(getInputByName("Impact Zone Business")).not.toBeChecked();
-    expect(getInputByName("Social Equity Business (SEB)")).not.toBeChecked();
+    expect(diverselyOwnedCheckbox()).toBeChecked();
+    expect(impactZoneCheckbox()).not.toBeChecked();
+    expect(sbeCheckbox()).not.toBeChecked();
   });
 
   it("checks diversely-owned if user is veteran", () => {
@@ -92,9 +92,9 @@ describe("<CannabisApplyForLicenseTask />", () => {
       taskItemChecklist: { [vetPriorityStatus]: true },
     });
     renderPage(generateTask({}), initialUserData);
-    expect(getInputByName("Diversely-Owned Business").checked).toEqual(true);
-    expect(getInputByName("Impact Zone Business").checked).toEqual(false);
-    expect(getInputByName("Social Equity Business (SEB)").checked).toEqual(false);
+    expect(diverselyOwnedCheckbox().checked).toEqual(true);
+    expect(impactZoneCheckbox().checked).toEqual(false);
+    expect(sbeCheckbox().checked).toEqual(false);
   });
 
   it("checks impact-zone if user has impact-zone priority", () => {
@@ -102,9 +102,9 @@ describe("<CannabisApplyForLicenseTask />", () => {
       taskItemChecklist: { [impactPriorityStatus]: true },
     });
     renderPage(generateTask({}), initialUserData);
-    expect(getInputByName("Diversely-Owned Business").checked).toEqual(false);
-    expect(getInputByName("Impact Zone Business").checked).toEqual(true);
-    expect(getInputByName("Social Equity Business (SEB)").checked).toEqual(false);
+    expect(diverselyOwnedCheckbox().checked).toEqual(false);
+    expect(impactZoneCheckbox().checked).toEqual(true);
+    expect(sbeCheckbox().checked).toEqual(false);
   });
 
   it("checks sbe if user has sbe priority", () => {
@@ -112,9 +112,9 @@ describe("<CannabisApplyForLicenseTask />", () => {
       taskItemChecklist: { [sbePriorityStatus]: true },
     });
     renderPage(generateTask({}), initialUserData);
-    expect(getInputByName("Diversely-Owned Business").checked).toEqual(false);
-    expect(getInputByName("Impact Zone Business").checked).toEqual(false);
-    expect(getInputByName("Social Equity Business (SEB)").checked).toEqual(true);
+    expect(diverselyOwnedCheckbox().checked).toEqual(false);
+    expect(impactZoneCheckbox().checked).toEqual(false);
+    expect(sbeCheckbox().checked).toEqual(true);
   });
 
   it("checks all priority status that apply", () => {
@@ -125,9 +125,9 @@ describe("<CannabisApplyForLicenseTask />", () => {
       },
     });
     renderPage(generateTask({}), initialUserData);
-    expect(getInputByName("Diversely-Owned Business").checked).toEqual(true);
-    expect(getInputByName("Impact Zone Business").checked).toEqual(false);
-    expect(getInputByName("Social Equity Business (SEB)").checked).toEqual(true);
+    expect(diverselyOwnedCheckbox().checked).toEqual(true);
+    expect(impactZoneCheckbox().checked).toEqual(false);
+    expect(sbeCheckbox().checked).toEqual(true);
   });
 
   it("lets user uncheck an checked priority status", () => {
@@ -137,9 +137,9 @@ describe("<CannabisApplyForLicenseTask />", () => {
       },
     });
     renderPage(generateTask({}), initialUserData);
-    expect(getInputByName("Social Equity Business (SEB)").checked).toEqual(true);
-    fireEvent.click(getInputByName("Social Equity Business (SEB)"));
-    expect(getInputByName("Social Equity Business (SEB)").checked).toEqual(false);
+    expect(sbeCheckbox().checked).toEqual(true);
+    fireEvent.click(sbeCheckbox());
+    expect(sbeCheckbox().checked).toEqual(false);
   });
 
   it("shows modal when user checks an unchecked priority status", async () => {
@@ -150,14 +150,14 @@ describe("<CannabisApplyForLicenseTask />", () => {
       },
     });
     renderPage(generateTask({}), initialUserData);
-    expect(getInputByName("Social Equity Business (SEB)").checked).toEqual(false);
-    fireEvent.click(getInputByName("Social Equity Business (SEB)"));
+    expect(sbeCheckbox().checked).toEqual(false);
+    fireEvent.click(sbeCheckbox());
     expect(screen.getByText(Config.cannabisEligibilityModal.eligibleModalTitle)).toBeInTheDocument();
     fireEvent.click(screen.getByText(Config.cannabisEligibilityModal.eligibleModalContinueButton));
     await waitFor(() => {
       expect(screen.queryByText(Config.cannabisEligibilityModal.eligibleModalTitle)).not.toBeInTheDocument();
     });
-    expect(getInputByName("Social Equity Business (SEB)").checked).toEqual(true);
+    expect(sbeCheckbox().checked).toEqual(true);
   });
 
   it("keeps item unchecked when user cancels from modal", async () => {
@@ -168,14 +168,14 @@ describe("<CannabisApplyForLicenseTask />", () => {
       },
     });
     renderPage(generateTask({}), initialUserData);
-    expect(getInputByName("Social Equity Business (SEB)").checked).toEqual(false);
-    fireEvent.click(getInputByName("Social Equity Business (SEB)"));
+    expect(sbeCheckbox().checked).toEqual(false);
+    fireEvent.click(sbeCheckbox());
     expect(screen.getByText(Config.cannabisEligibilityModal.eligibleModalTitle)).toBeInTheDocument();
     fireEvent.click(screen.getByText(Config.cannabisEligibilityModal.eligibleModalCancelButton));
     await waitFor(() => {
       expect(screen.queryByText(Config.cannabisEligibilityModal.eligibleModalTitle)).not.toBeInTheDocument();
     });
-    expect(getInputByName("Social Equity Business (SEB)").checked).toEqual(false);
+    expect(sbeCheckbox().checked).toEqual(false);
   });
 
   describe("requirements tab", () => {
@@ -313,4 +313,8 @@ describe("<CannabisApplyForLicenseTask />", () => {
   const getInputByName = (name: string): HTMLInputElement => {
     return screen.getByRole("checkbox", { name: name });
   };
+
+  const sbeCheckbox = () => getInputByName(Config.cannabisApplyForLicense.sbeLabel);
+  const diverselyOwnedCheckbox = () => getInputByName(Config.cannabisApplyForLicense.diverselyOwnedLabel);
+  const impactZoneCheckbox = () => getInputByName(Config.cannabisApplyForLicense.impactZoneLabel);
 });

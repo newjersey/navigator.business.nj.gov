@@ -1,7 +1,7 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import { templateEval } from "@/lib/utils/helpers";
 import { generateMunicipality, generateProfileData, generateUserData } from "@/test/factories";
-import { expectContent, markdownToText } from "@/test/helpers";
+import { markdownToText } from "@/test/helpers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import {
   currentUserData,
@@ -82,9 +82,11 @@ describe("onboarding - foreign business", () => {
 
     it("sets user as Nexus (and displays alert) when operationsInNJ checkbox checked", async () => {
       const { page } = renderPage({ userData });
-      expectContent(Config.profileDefaults.FOREIGN.foreignBusinessType.NEXUS, { exists: false }, screen);
+      expect(
+        screen.queryByText(Config.profileDefaults.FOREIGN.foreignBusinessType.NEXUS)
+      ).not.toBeInTheDocument();
       page.checkByLabelText(operationsInNJ);
-      expectContent(Config.profileDefaults.FOREIGN.foreignBusinessType.NEXUS, { exists: true }, screen);
+      expect(screen.getByText(Config.profileDefaults.FOREIGN.foreignBusinessType.NEXUS)).toBeInTheDocument();
 
       await page.visitStep(3);
       expect(currentUserData().profileData.foreignBusinessType).toEqual("NEXUS");
@@ -93,17 +95,13 @@ describe("onboarding - foreign business", () => {
 
     it("sets user as Remote Workers (and displays alert) when employeesInNJ checkbox checked", async () => {
       const { page } = renderPage({ userData });
-      expectContent(
-        Config.profileDefaults.FOREIGN.foreignBusinessType.REMOTE_WORKER,
-        { exists: false },
-        screen
-      );
+      expect(
+        screen.queryByText(Config.profileDefaults.FOREIGN.foreignBusinessType.REMOTE_WORKER)
+      ).not.toBeInTheDocument();
       page.checkByLabelText(employeesInNJ);
-      expectContent(
-        Config.profileDefaults.FOREIGN.foreignBusinessType.REMOTE_WORKER,
-        { exists: true },
-        screen
-      );
+      expect(
+        screen.getByText(Config.profileDefaults.FOREIGN.foreignBusinessType.REMOTE_WORKER)
+      ).toBeInTheDocument();
 
       await page.visitStep(3);
       expect(currentUserData().profileData.foreignBusinessType).toEqual("REMOTE_WORKER");
@@ -112,18 +110,13 @@ describe("onboarding - foreign business", () => {
 
     it("sets user as Remote Seller (and displays alert) when revenueInNJ checkbox checked", async () => {
       const { page } = renderPage({ userData });
-      expectContent(
-        Config.profileDefaults.FOREIGN.foreignBusinessType.REMOTE_SELLER,
-        { exists: false },
-        screen
-      );
+      expect(
+        screen.queryByText(Config.profileDefaults.FOREIGN.foreignBusinessType.REMOTE_SELLER)
+      ).not.toBeInTheDocument();
       page.checkByLabelText(revenueInNJ);
-      expectContent(
-        Config.profileDefaults.FOREIGN.foreignBusinessType.REMOTE_SELLER,
-        { exists: true },
-        screen
-      );
-
+      expect(
+        screen.getByText(Config.profileDefaults.FOREIGN.foreignBusinessType.REMOTE_SELLER)
+      ).toBeInTheDocument();
       await page.visitStep(3);
       expect(currentUserData().profileData.foreignBusinessType).toEqual("REMOTE_SELLER");
       expect(currentUserData().profileData.foreignBusinessTypeIds).toEqual(["revenueInNJ"]);
@@ -131,17 +124,13 @@ describe("onboarding - foreign business", () => {
 
     it("sets user as Remote Seller (and displays alert) when transactionsInNJ checkbox checked", async () => {
       const { page } = renderPage({ userData });
-      expectContent(
-        Config.profileDefaults.FOREIGN.foreignBusinessType.REMOTE_SELLER,
-        { exists: false },
-        screen
-      );
+      expect(
+        screen.queryByText(Config.profileDefaults.FOREIGN.foreignBusinessType.REMOTE_SELLER)
+      ).not.toBeInTheDocument();
       page.checkByLabelText(transactionsInNJ);
-      expectContent(
-        Config.profileDefaults.FOREIGN.foreignBusinessType.REMOTE_SELLER,
-        { exists: true },
-        screen
-      );
+      expect(
+        screen.getByText(Config.profileDefaults.FOREIGN.foreignBusinessType.REMOTE_SELLER)
+      ).toBeInTheDocument();
 
       await page.visitStep(3);
       expect(currentUserData().profileData.foreignBusinessType).toEqual("REMOTE_SELLER");

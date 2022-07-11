@@ -25,8 +25,8 @@
           "none": "None of the above"
         },
         "REMOTE_WORKER": "It sounds like you have `Remote Workers|remote-worker`.",
-        "REMOTE_SELLER": "It sounds like you're a `Remote Seller|remote-seller` .",
-        "NEXUS": "It sounds like you’re a `Nexus Business|nexus-business` ."
+        "REMOTE_SELLER": "It sounds like you're a `Remote Seller|remote-seller`.",
+        "NEXUS": "It sounds like you’re a `Nexus Business|nexus-business`."
       },
       "locationInNewJersey": {
         "header": "## Will you own or lease space in New Jersey?",

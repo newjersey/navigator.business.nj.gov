@@ -534,8 +534,8 @@
     "phrase3": "It sounds like you're eligible as ${type1}, ${type2}, and ${type3}"
   },
   "cannabisPriorityTypes": {
-    "minorityWomenOrVeteran": "a Diversely-Owned Business",
-    "impactZone": "an Impact Zone Business",
-    "socialEquity": "a Social Equity Business"
+    "minorityWomenOrVeteran": "a `Diversely-Owned Business|diversely-owned-business-cannabis`",
+    "impactZone": "an `Impact Zone Business|impact-zone-business-cannabis`",
+    "socialEquity": "a `Social Equity Business|social-equity-business-cannabis`"
   }
 }
