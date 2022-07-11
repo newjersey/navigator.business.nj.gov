@@ -47,6 +47,12 @@
         "header": "",
         "description": "",
         "errorTextRequired": ""
+      },
+      "nexusDbaName": {
+        "placeholder": "",
+        "header": "",
+        "errorTextRequired": "",
+        "description": ""
       }
     }
   }

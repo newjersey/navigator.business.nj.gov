@@ -3,7 +3,7 @@ import { ProfileTab } from "@/components/profile/ProfileTab";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ProfileTabs } from "@/lib/types/types";
 import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
-import { BusinessPersona } from "@businessnjgovnavigator/shared/profileData";
+import { BusinessPersona, ForeignBusinessType } from "@businessnjgovnavigator/shared/profileData";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { Box } from "@mui/material";
 import { ReactElement } from "react";
@@ -11,6 +11,7 @@ import { ReactElement } from "react";
 interface Props {
   userData: UserData | undefined;
   businessPersona: BusinessPersona;
+  foreignBusinessType: ForeignBusinessType;
   activeTab: ProfileTabs;
   setProfileTab: (profileTab: ProfileTabs) => void;
 }
@@ -20,7 +21,7 @@ export const ProfileTabNav = (props: Props): ReactElement => {
   const border = "2px #e6e6e6";
 
   const shouldShowInfo = () => {
-    return props.businessPersona !== "FOREIGN";
+    return props.businessPersona !== "FOREIGN" || props.foreignBusinessType === "NEXUS";
   };
 
   const shouldShowNumbers = () => {

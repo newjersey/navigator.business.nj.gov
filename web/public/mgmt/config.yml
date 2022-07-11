@@ -2451,6 +2451,26 @@ collections:
                       - { label: "Radio Button Yes Text", name: "radioButtonYesText", widget: "string" }
                       - { label: "Radio Button No Text", name: "radioButtonNoText", widget: "string" }
                       - { label: "Description", name: "description", widget: "markdown" }
+      - label: "Info Tab (Dakota)"
+        name: "profile-info-dakota"
+        file: "content/src/fieldConfig/profile-info-dakota.json"
+        editor:
+          preview: true
+        fields:
+          - label: Nexus Profile Text
+            name: nexusBusinessName
+            collapsed: false
+            widget: object
+            fields:
+              - { label: "Edit Button Text", name: "editButton", widget: "string" }
+              - { label: "Add Button Text", name: "addButton", widget: "string" }
+              - { label: "DBA Name Header", name: "dbaNameHeader", widget: "string" }
+              - { label: "Out of State Name Header", name: "outOfStateNameHeader", widget: "string" }
+              - {
+                  label: "Empty Business Name Placeholder",
+                  name: "emptyBusinessPlaceHolder",
+                  widget: "string",
+                }
       - label: "Numbers Tab (Poppy)"
         name: "profile-numbers-poppy"
         file: "content/src/fieldConfig/profile-numbers-poppy.json"
@@ -2595,7 +2615,6 @@ collections:
                       - { label: "Header", name: "header", widget: "string" }
                       - { label: "Placeholder", name: "placeholder", widget: "string" }
                       - { label: "Description", name: "description", widget: "markdown" }
-
       - label: "Documents Tab (Poppy)"
         name: "profile-documents-poppy"
         file: "content/src/fieldConfig/profile-documents-poppy.json"
