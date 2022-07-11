@@ -1,6 +1,5 @@
 import { setupExpress } from "@libs/express";
 import dedent from "dedent";
-import escape from "lodash.escape";
 import { randomBytes } from "node:crypto";
 import serverless from "serverless-http";
 import { AuthorizationCode, ModuleOptions } from "simple-oauth2";
@@ -58,7 +57,7 @@ app.get("/api/cms/callback", async (req, res) => {
 
     res.status(200).send(
       renderResponse("success", {
-        token: escape(accessToken.token["access_token"]),
+        token: accessToken.token["access_token"],
         provider: "github",
       })
     );
