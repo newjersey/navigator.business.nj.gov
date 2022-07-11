@@ -27,7 +27,7 @@ export const DialogZeroButton = (props: Props) => {
       onClose={props.close}
       aria-labelledby="modal"
     >
-      <DialogTitle id="modal" className="display-flex flex-row flex-align-center margin-top-1">
+      <DialogTitle id="modal" className="display-flex flex-row flex-align-center margin-top-1 break-word">
         <div className="h2-styling padding-x-1 margin-bottom-0">{props.title}</div>
         <IconButton
           aria-label="close"
