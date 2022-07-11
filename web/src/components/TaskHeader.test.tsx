@@ -210,6 +210,18 @@ describe("<TaskHeader />", () => {
       expect(screen.queryByText(Config.formationDateModal.header)).not.toBeInTheDocument();
     });
 
+    it("does not open modal when task is already completed", () => {
+      const id = randomFormationId();
+      const taskProgress: Record<string, TaskProgress> = { [id]: "COMPLETED" };
+      renderTaskHeader(generateTask({ id }), generateUserData({ taskProgress }));
+      expect(screen.queryByText(Config.formationDateModal.header)).not.toBeInTheDocument();
+
+      fireEvent.click(screen.getAllByText("Completed")[0]);
+      fireEvent.click(screen.getAllByText("Completed")[1]);
+
+      expect(screen.queryByText(Config.formationDateModal.header)).not.toBeInTheDocument();
+    });
+
     it("does not update status when modal opens", async () => {
       renderTaskHeader(generateTask({ id: randomFormationId() }), generateUserData({}));
       selectCompleted();

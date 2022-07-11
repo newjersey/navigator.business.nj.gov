@@ -55,7 +55,7 @@ export const TaskHeader = (props: Props): ReactElement => {
     const currentTaskProgress = userData.taskProgress[props.task.id];
 
     if (isFormationTask()) {
-      if (newValue === "COMPLETED") {
+      if (newValue === "COMPLETED" && currentTaskProgress !== "COMPLETED") {
         setFormationDialogIsOpen(true);
         return;
       } else if (currentTaskProgress === "COMPLETED" && areYouSureDialogDesiredNewStatus === undefined) {
