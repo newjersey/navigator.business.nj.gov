@@ -52,12 +52,13 @@ export const TaskHeader = (props: Props): ReactElement => {
   const onDropdownChanged = (newValue: TaskProgress): void => {
     if (!userData) return;
     let updatedUserData = { ...userData };
+    const currentTaskProgress = userData.taskProgress[props.task.id];
 
     if (isFormationTask()) {
       if (newValue === "COMPLETED") {
         setFormationDialogIsOpen(true);
         return;
-      } else if (areYouSureDialogDesiredNewStatus === undefined) {
+      } else if (currentTaskProgress === "COMPLETED" && areYouSureDialogDesiredNewStatus === undefined) {
         setAreYouSureDialogDesiredNewStatus(newValue);
         return;
       } else {

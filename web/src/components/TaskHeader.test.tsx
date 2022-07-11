@@ -272,6 +272,16 @@ describe("<TaskHeader />", () => {
       await waitFor(() => expect(currentUserData().profileData.dateOfFormation).toBeUndefined());
     });
 
+    it("does not show warning modal if status is not already completed", async () => {
+      renderTaskHeader(
+        generateTask({ id: randomFormationId() }),
+        generateUserData({ profileData: generateProfileData({ businessPersona: "STARTING" }) })
+      );
+      fireEvent.click(screen.getAllByText("Not started")[0]);
+      fireEvent.click(screen.getByText("In progress"));
+      expect(screen.queryByText(Config.formationDateModal.areYouSureModalHeader)).not.toBeInTheDocument();
+    });
+
     it("does not update dateOfFormation or status if user changes their mind", async () => {
       const id = randomFormationId();
       renderTaskHeader(
