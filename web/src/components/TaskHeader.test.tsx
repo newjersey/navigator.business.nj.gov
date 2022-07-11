@@ -195,8 +195,6 @@ describe("<TaskHeader />", () => {
       expect(screen.queryByText(Config.formationDateModal.header)).not.toBeInTheDocument();
       selectCompleted();
       expect(screen.getByText(Config.formationDateModal.header)).toBeInTheDocument();
-      expect(screen.getByText(Config.formationDateModal.description)).toBeInTheDocument();
-      expect(screen.getByText(Config.formationDateModal.warningText)).toBeInTheDocument();
     });
 
     it("does not open modal when task changed to unstarted or in-progress", () => {

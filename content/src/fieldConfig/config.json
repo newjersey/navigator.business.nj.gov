@@ -517,10 +517,9 @@
   },
   "formationDateModal": {
     "header": "Congratulations!",
-    "description": "In order to see your next reporting due date, please provide your Business Formation Date, below.",
-    "warningText": "Once you submit your Business Formation Date, you will not be able to change it.",
-    "fieldLabel": "**Business Formation Date**",
-    "fieldDescription": "Find your formation date on your `Certificate of Formation|certificate-formation`.",
+    "description": "In order to see your next reporting due date, please provide your Business' `Effective Date|effective-date` (the date you formed your business) below.",
+    "fieldLabel": "**Business Effective Date**",
+    "fieldDescription": "Find your Effective Date on your `Certificate of Formation|certificate-formation`. Once you submit your Effective Date, you will not be able to change it.",
     "errorText": "Your formation date must be in the past, and should be formatted as MM/YYYY.",
     "saveButtonText": "Save",
     "cancelButtonText": "Cancel",

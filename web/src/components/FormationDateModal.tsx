@@ -1,6 +1,5 @@
 import { Content } from "@/components/Content";
 import { DialogTwoButton } from "@/components/DialogTwoButton";
-import { Alert } from "@/components/njwds-extended/Alert";
 import { OnboardingDateOfFormation } from "@/components/onboarding/OnboardingDateOfFormation";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -72,7 +71,6 @@ export const FormationDateModal = (props: Props): ReactElement => {
         secondaryButtonText={Config.formationDateModal.cancelButtonText}
       >
         <Content>{Config.formationDateModal.description}</Content>
-        <Alert variant="warning">{Config.formationDateModal.warningText}</Alert>
         <OnboardingDateOfFormation
           onValidation={onValidation}
           fieldStates={fieldStates}

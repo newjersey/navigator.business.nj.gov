@@ -1707,7 +1707,6 @@ collections:
             fields:
               - { label: Header, name: header, widget: string }
               - { label: Description, name: description, widget: markdown }
-              - { label: Warning Alert Text, name: warningText, widget: markdown }
               - { label: Date field - label, name: fieldLabel, widget: text }
               - { label: Date field - description, name: fieldDescription, widget: markdown }
               - { label: Error text (when not entered), name: errorText, widget: string }
