@@ -1,11 +1,10 @@
 {
   "naicsCodes": "541690",
-  "canHavePermanentLocation": true,
   "canBeHomeBased": true,
   "defaultSectorId": "technology",
   "canBeReseller": true,
   "isCpaRequiredApplicable": false,
-  "isEnabled": true,
+  "canHavePermanentLocation": true,
   "roadmapSteps": [
     {
       "step": 1,
@@ -38,8 +37,9 @@
       "task": "get-insurance"
     }
   ],
-  "name": "IT Consultant",
+  "name": "IT Consulting",
   "isLiquorLicenseApplicable": false,
+  "isEnabled": true,
   "additionalSearchTerms": "tech support, information technology, tech services, technical services, consulting, software developer, IT professional services, IT support, computer repair",
   "id": "it-consultant",
   "description": "Offers system maintenance, configuration, and troubleshooting services"
