@@ -292,7 +292,7 @@
     "card3SupportingText": "Local experts are available 9 a.m– 5 p.m Eastern Time, Monday through Friday, to help you with any business challenge.",
     "section5SecondSupportingText": "Don’t leave money on the table. Find out if you are eligible for State funding opportunities. Learn about potential grants, tax credits, technical assistance programs, and more. If you are a minority-owned, woman-owned, veteran-owned, or small business, you can find out which certifications apply to you and increase your chances of getting government contracts. ",
     "section4FirstIconText": "Your Business Information",
-    "section2HeaderText": "Starting a Business in New Jersey Has Never Been Faster or Easier!",
+    "section2HeaderText": "Starting a Business Has Never Been Faster or Easier!",
     "section3HeaderText": "Grow Your Business, Get Guidance on State Funding or Certifications!",
     "section4HeaderText": "How it Works",
     "section4SecondIconText": "Your Business Guide",
@@ -315,7 +315,7 @@
     "card3Button": "Start Chatting",
     "heroCallToActionText": "Get Started",
     "section5ThirdSupportingText": "The Navigator is a one-stop-shop for all your New Jersey business needs. You can track your progress, check the status of applications, speak to NJ-based business advocates, and more!",
-    "heroSupportingText": "Create your free, personalized guide to register and find funding for your New Jersey business.",
+    "heroSupportingText": "Create your free, personalized guide to register and find funding for your New Jersey or out-of-state business.",
     "section5FirstHeaderText": "Step-by-Step Guide",
     "heroCallOutFirstLineText": "Your Business,",
     "section4ThirdIconText": "NJ Government Services",
@@ -357,6 +357,11 @@
   "filingDefaults": {
     "tagContentBeforeDueDate": "Next Due:"
   },
+  "cannabisPriorityTypes": {
+    "minorityWomenOrVeteran": "a `Diversely-Owned Business|diversely-owned-business-cannabis`",
+    "impactZone": "an `Impact Zone Business|impact-zone-business-cannabis`",
+    "socialEquity": "a `Social Equity Business|social-equity-business-cannabis`"
+  },
   "onboardingDefaults": {
     "errorTextMinimumNumericField": "Must be ${length} digits long.",
     "backButtonText": "Back",
@@ -377,6 +382,19 @@
     "congratulatorModalTitle": "You did it!",
     "graduationModalCancelButtonText": "Cancel",
     "graduationModalTitle": "Tell us more about your business"
+  },
+  "formationDateModal": {
+    "fieldDescription": "Find your Effective Date on your `Certificate of Formation|certificate-formation`. Once you submit your Effective Date, you will not be able to change it.",
+    "areYouSureModalCancelButtonText": "Cancel",
+    "header": "Congratulations!",
+    "areYouSureModalBody": "If you change your task status, you will need to resubmit your Business `Effective Date|effective-date` and will lose access to your calendar.",
+    "areYouSureModalContinueButtonText": "Continue",
+    "errorText": "Your formation date must be in the past, and should be formatted as MM/YYYY.",
+    "cancelButtonText": "Cancel",
+    "fieldLabel": "**Business Effective Date**",
+    "areYouSureModalHeader": "Didn't Form Yet?",
+    "saveButtonText": "Save",
+    "description": "In order to see your next reporting due date, please provide your Business' `Effective Date|effective-date` (the date you formed your business) below."
   },
   "licenseSearchTask": {
     "voluntarySurrenderPermitStatusText": "Voluntary Surrender",
@@ -426,15 +444,15 @@
   },
   "landingPageExperienceB": {
     "section5FirstSupportingText": "Knowing exactly what your business needs to do to start can be difficult. Our starter kit is unique to your industry and even includes Cannabis retailers. Find what licenses, forms, and permits you need to start your business in New Jersey. Learn the requirements of each application, find out what you get after submitting your application, and store critical business identification numbers all in one place. ",
-    "section2HeaderText": "Starting a Business in New Jersey Has Never Been Faster or Easier!",
+    "section2HeaderText": "Starting a Business Has Never Been Faster or Easier!",
     "section4SecondIconText": "Your Starter Kit",
-    "section2CallToActionText": "Get Started",
+    "section2CallToActionText": "Start",
     "section3CallToActionText": "Find Funding",
     "heroCallOutSecondLineText": "Your Way",
     "section2SupportingText": "See the forms and licenses specific to starting your business and avoiding fines. Be prepared to tell us your legal structure, industry, and business location.",
-    "heroCallToActionText": "Get Started",
+    "heroCallToActionText": "Start",
     "section5ThirdSupportingText": "The Navigator is a one-stop-shop for all your New Jersey business needs. You can track your progress, check the status of applications, speak to NJ-based business advocates, and more!",
-    "heroSupportingText": "Get your free, personalized guide to register and find funding for your New Jersey business.",
+    "heroSupportingText": "Create your free, personalized guide to register and find funding for your New Jersey or out-of-state business.",
     "section5FirstHeaderText": "Starter Kit",
     "heroCallOutFirstLineText": "Your Business,"
   },
@@ -508,34 +526,16 @@
     "title": "Chat with a New Jersey Business Representative",
     "subtitle": "It seems like you might have some unique needs, please use our chat feature to get guidance from a New Jersey-based business advocate. Should something change, you can come back and use this tool again later."
   },
+  "cannabisPriorityStatus": {
+    "phrase1": "It sounds like you're eligible as ${type1}",
+    "phrase2": "It sounds like you're eligible as ${type1} and ${type2}",
+    "phrase3": "It sounds like you're eligible as ${type1}, ${type2}, and ${type3}"
+  },
   "headerDefaults": {
     "noUserNameHeaderText": "Hello!",
     "defaultHeaderText": "Hello, ${name}",
     "newJerseyDateBodyText": "ET",
     "guestModeToProfileButtonText": "Guest Account",
     "genericToProfileButtonText": "Business Profile"
-  },
-  "formationDateModal": {
-    "header": "Congratulations!",
-    "description": "In order to see your next reporting due date, please provide your Business' `Effective Date|effective-date` (the date you formed your business) below.",
-    "fieldLabel": "**Business Effective Date**",
-    "fieldDescription": "Find your Effective Date on your `Certificate of Formation|certificate-formation`. Once you submit your Effective Date, you will not be able to change it.",
-    "errorText": "Your formation date must be in the past, and should be formatted as MM/YYYY.",
-    "saveButtonText": "Save",
-    "cancelButtonText": "Cancel",
-    "areYouSureModalHeader": "Didn't Form Yet?",
-    "areYouSureModalBody": "If you change your task status, you will need to resubmit your Business `Effective Date|effective-date` and will lose access to your calendar.",
-    "areYouSureModalContinueButtonText": "Continue",
-    "areYouSureModalCancelButtonText": "Cancel"
-  },
-  "cannabisPriorityStatus": {
-    "phrase1": "It sounds like you're eligible as ${type1}",
-    "phrase2": "It sounds like you're eligible as ${type1} and ${type2}",
-    "phrase3": "It sounds like you're eligible as ${type1}, ${type2}, and ${type3}"
-  },
-  "cannabisPriorityTypes": {
-    "minorityWomenOrVeteran": "a `Diversely-Owned Business|diversely-owned-business-cannabis`",
-    "impactZone": "an `Impact Zone Business|impact-zone-business-cannabis`",
-    "socialEquity": "a `Social Equity Business|social-equity-business-cannabis`"
   }
 }
