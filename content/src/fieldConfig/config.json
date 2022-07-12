@@ -384,17 +384,17 @@
     "graduationModalTitle": "Tell us more about your business"
   },
   "formationDateModal": {
-    "fieldDescription": "Find your Effective Date on your `Certificate of Formation|certificate-formation`. Once you submit your Effective Date, you will not be able to change it.",
+    "fieldDescription": "Find your effective date on your `Certificate of Formation|certificate-formation`. Once you submit your effective date, you will not be able to change it.",
     "areYouSureModalCancelButtonText": "Cancel",
     "header": "Congratulations!",
     "areYouSureModalBody": "If you change your task status, you will need to resubmit your Business `Effective Date|effective-date` and will lose access to your calendar.",
     "areYouSureModalContinueButtonText": "Continue",
-    "errorText": "Your formation date must be in the past, and should be formatted as MM/YYYY.",
+    "errorText": "Your effective date must be formatted as MM/YYYY.",
     "cancelButtonText": "Cancel",
     "fieldLabel": "**Business Effective Date**",
     "areYouSureModalHeader": "Didn't Form Yet?",
     "saveButtonText": "Save",
-    "description": "In order to see your next reporting due date, please provide your Business' `Effective Date|effective-date` (the date you formed your business) below."
+    "description": "To see your annual report due date, please provide your Business' `effective date|effective-date` (the date you formed your business) below."
   },
   "licenseSearchTask": {
     "voluntarySurrenderPermitStatusText": "Voluntary Surrender",
@@ -473,7 +473,7 @@
   },
   "searchBusinessNameTask": {
     "placeholderText": "Type potential business name",
-    "designatorText": "It appears you have included a designator in your name, such as LLC, LP or CORP. Please remove it at try searching again. Once you have found an available name you then can officially form your business.",
+    "designatorText": "It appears you have included a `designator|business-designator` in your name, such as LLC, LP or CORP. Please remove it at try searching again. Once you have found an available name you then can officially form your business.",
     "searchButtonText": "Check Availability",
     "updateButtonText": "Update the name on your Roadmap with this one",
     "nameHasBeenUpdatedText": "Your business name has been updated.",
