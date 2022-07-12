@@ -242,10 +242,8 @@ describe("<TaskHeader />", () => {
 
     it("updates status and date of formation, and redirects user on save", async () => {
       const id = randomFormationId();
-      renderTaskHeader(
-        generateTask({ id }),
-        generateUserData({ profileData: generateProfileData({ businessPersona: "STARTING" }) })
-      );
+      const startingPersonaForRoadmapUrl = generateProfileData({ businessPersona: "STARTING" });
+      renderTaskHeader(generateTask({ id }), generateUserData({ profileData: startingPersonaForRoadmapUrl }));
       selectCompleted();
       const date = getCurrentDate().subtract(1, "month").date(1);
       selectDate(date);
@@ -255,6 +253,18 @@ describe("<TaskHeader />", () => {
       );
       expect(currentUserData().taskProgress[id]).toEqual("COMPLETED");
       expect(mockPush).toHaveBeenCalledWith("/roadmap");
+    });
+
+    it("allows a date in the future", async () => {
+      const id = randomFormationId();
+      renderTaskHeader(generateTask({ id }), generateUserData({}));
+      selectCompleted();
+      const date = getCurrentDate().add(1, "month").date(1);
+      selectDate(date);
+      fireEvent.click(screen.getByText(Config.formationDateModal.saveButtonText));
+      await waitFor(() =>
+        expect(currentUserData().profileData.dateOfFormation).toEqual(date.format("YYYY-MM-DD"))
+      );
     });
 
     it("shows error when user saves without entering date", () => {

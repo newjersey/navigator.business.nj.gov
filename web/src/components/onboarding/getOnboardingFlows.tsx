@@ -60,7 +60,11 @@ export const getOnboardingFlows = (
         name: "date-and-entity-id-for-public-filing",
         component: (
           <>
-            <OnboardingDateOfFormation onValidation={onValidation} fieldStates={fieldStates} />
+            <OnboardingDateOfFormation
+              onValidation={onValidation}
+              fieldStates={fieldStates}
+              futureAllowed={false}
+            />
             <OnboardingEntityId onValidation={onValidation} fieldStates={fieldStates} />
           </>
         ),

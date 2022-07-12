@@ -146,6 +146,7 @@ export const GraduationModal = (props: Props): ReactElement => {
                   fieldStates={fieldStates}
                   required={true}
                   disabled={userData?.profileData.dateOfFormation !== undefined}
+                  futureAllowed={userData?.profileData.dateOfFormation !== undefined}
                   headerAriaLevel={3}
                 />
               ) : undefined}

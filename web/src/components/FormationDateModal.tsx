@@ -77,7 +77,8 @@ export const FormationDateModal = (props: Props): ReactElement => {
           onValidation={onValidation}
           fieldStates={fieldStates}
           required={true}
-          disabled={userData?.formationData.getFilingResponse?.success}
+          disabled={false}
+          futureAllowed={true}
           headerAriaLevel={3}
           configOverrides={{
             header: Config.formationDateModal.fieldLabel,
