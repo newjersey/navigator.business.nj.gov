@@ -230,7 +230,7 @@ const OnboardingPage = (props: Props): ReactElement => {
     let newProfileData = profileData;
 
     const hasBusinessPersonaChanged =
-      profileData.businessPersona !== currentUserData.profileData.businessPersona;
+      profileData.businessPersona !== currentUserData?.profileData.businessPersona;
 
     if (page.current === 1 && hasBusinessPersonaChanged) {
       let initialOnboardingFlow = profileData.initialOnboardingFlow;
