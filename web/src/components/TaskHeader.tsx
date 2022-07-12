@@ -49,6 +49,10 @@ export const TaskHeader = (props: Props): ReactElement => {
     return props.task.id === "form-business-entity-foreign" || props.task.id === "form-business-entity";
   };
 
+  const hasCompletedAPIFormation = (): boolean => {
+    return userData?.formationData.getFilingResponse?.success === true;
+  };
+
   const onDropdownChanged = (newValue: TaskProgress): void => {
     if (!userData) return;
     let updatedUserData = { ...userData };
@@ -114,11 +118,16 @@ export const TaskHeader = (props: Props): ReactElement => {
       currentTaskProgress = userData.taskProgress[props.task.id];
     }
 
-    return props.tooltipText ? (
+    let tooltipText: string | undefined = props.tooltipText;
+    if (isFormationTask() && hasCompletedAPIFormation()) {
+      tooltipText = Config.formationDateModal.lockedStatusTooltipText;
+    }
+
+    return tooltipText ? (
       <div className="fdr">
         {TaskProgressTagLookup[currentTaskProgress]}
-        <ArrowTooltip title={props.tooltipText}>
-          <div className="fdr fac margin-left-05" data-testid="automatic-status-info-tooltip">
+        <ArrowTooltip title={tooltipText}>
+          <div className="fdr fac margin-left-05" data-testid="status-info-tooltip">
             <Icon>help_outline</Icon>
           </div>
         </ArrowTooltip>

@@ -1724,6 +1724,11 @@ collections:
                   name: areYouSureModalCancelButtonText,
                   widget: string,
                 }
+              - {
+                  label: Tooltip Text (when locking task status after API success),
+                  name: lockedStatusTooltipText,
+                  widget: text,
+                }
 
           - label: Funding Defaults
             name: fundingDefaults

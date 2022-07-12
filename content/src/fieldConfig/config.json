@@ -526,7 +526,8 @@
     "areYouSureModalHeader": "Didn't Form Yet?",
     "areYouSureModalBody": "If you change your task status, you will need to resubmit your Business `Effective Date|effective-date` and will lose access to your calendar.",
     "areYouSureModalContinueButtonText": "Continue",
-    "areYouSureModalCancelButtonText": "Cancel"
+    "areYouSureModalCancelButtonText": "Cancel",
+    "lockedStatusTooltipText": "You have successfully completed forming your business in this task."
   },
   "cannabisPriorityStatus": {
     "phrase1": "It sounds like you're eligible as ${type1}",
