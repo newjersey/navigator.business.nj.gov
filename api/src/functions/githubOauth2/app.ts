@@ -24,7 +24,7 @@ export const oauthConfig: ModuleOptions = Object.freeze({
   }),
 });
 
-const app = setupExpress();
+const app = setupExpress(true, false);
 
 app.get("/api/cms/auth", (req, res) => {
   const { host } = req.headers;
