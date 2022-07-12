@@ -136,7 +136,8 @@ export type FieldStatus = {
 
 const profileFieldsFromConfig = merge(
   getMergedConfig().profileDefaults["STARTING"],
-  getMergedConfig().profileDefaults["OWNING"]
+  getMergedConfig().profileDefaults["OWNING"],
+  getMergedConfig().profileDefaults["FOREIGN"]
 );
 
 export type ProfileFields = (keyof ProfileData & keyof typeof profileFieldsFromConfig) | keyof BusinessUser;

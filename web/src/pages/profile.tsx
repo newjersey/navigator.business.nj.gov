@@ -10,6 +10,7 @@ import { OnboardingEntityId } from "@/components/onboarding/OnboardingEntityId";
 import { OnboardingExistingEmployees } from "@/components/onboarding/OnboardingExistingEmployees";
 import { OnboardingIndustry } from "@/components/onboarding/OnboardingIndustry";
 import { OnboardingLegalStructureDropdown } from "@/components/onboarding/OnboardingLegalStructureDropDown";
+import { OnboardingLocationInNewJersey } from "@/components/onboarding/OnboardingLocationInNewJersey";
 import { OnboardingMunicipality } from "@/components/onboarding/OnboardingMunicipality";
 import { OnboardingNotes } from "@/components/onboarding/OnboardingNotes";
 import { OnboardingOwnership } from "@/components/onboarding/OnboardingOwnership";
@@ -17,6 +18,8 @@ import { OnboardingSectors } from "@/components/onboarding/OnboardingSectors";
 import { OnboardingTaxId } from "@/components/onboarding/OnboardingTaxId";
 import { OnboardingTaxPin } from "@/components/onboarding/OnboardingTaxPin";
 import { ProfileNaicsCode } from "@/components/onboarding/ProfileNaicsCode";
+import { ProfileNexusBusinessNameField } from "@/components/onboarding/ProfileNexusBusinessNameField";
+import { ProfileNexusDBANameField } from "@/components/onboarding/ProfileNexusDBANameField";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { Documents } from "@/components/profile/Documents";
 import { EscapeModal } from "@/components/profile/EscapeModal";
@@ -49,7 +52,7 @@ import {
   getTaskFromRoadmap,
   useMountEffectWhenDefined,
 } from "@/lib/utils/helpers";
-import { BusinessPersona } from "@businessnjgovnavigator/shared";
+import { BusinessPersona, ForeignBusinessType } from "@businessnjgovnavigator/shared";
 import {
   createEmptyProfileData,
   LookupLegalStructureById,
@@ -95,8 +98,10 @@ const ProfilePage = (props: Props): ReactElement => {
   const userData = props.CMS_ONLY_fakeUserData ?? userDataFromHook.userData;
   const businessPersona: BusinessPersona =
     props.CMS_ONLY_businessPersona ?? userData?.profileData.businessPersona;
+  const foreignBusinessType: ForeignBusinessType = userData?.profileData.foreignBusinessType;
 
-  const defaultTab = businessPersona ? defaultTabForPersona[businessPersona] : "info";
+  const defaultTab =
+    businessPersona && foreignBusinessType !== "NEXUS" ? defaultTabForPersona[businessPersona] : "info";
   const [profileTab, setProfileTab] = useState<ProfileTabs>(props.CMS_ONLY_tab ?? defaultTab);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -165,13 +170,64 @@ const ProfilePage = (props: Props): ReactElement => {
 
   const getElements = (): ReactNode => {
     switch (businessPersona) {
-      case "STARTING":
+      case "STARTING": {
         return startingNewBusinessElements[profileTab];
-      case "OWNING":
+      }
+      case "OWNING": {
         return owningBusinessElements[profileTab];
-      case "FOREIGN":
-        return foreignBusinessElements[profileTab];
+      }
+      case "FOREIGN": {
+        return foreignBusinessType === "NEXUS"
+          ? nexusBusinessElements[profileTab]
+          : foreignBusinessElements[profileTab];
+      }
     }
+  };
+
+  const nexusBusinessElements: Record<ProfileTabs, ReactNode> = {
+    info: (
+      <>
+        <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
+        <h2 className="padding-bottom-3" style={{ fontWeight: 300 }}>
+          {" "}
+          {Config.profileDefaults.profileTabInfoTitle}
+        </h2>
+        <ProfileNexusBusinessNameField />
+        <div className="margin-top-3"></div>
+        <ProfileNexusDBANameField />
+        <div className="margin-top-3"></div>
+        <OnboardingIndustry onValidation={onValidation} fieldStates={fieldStates} />
+        <div className="margin-top-3"></div>
+        <OnboardingLegalStructureDropdown disabled={userData?.formationData.getFilingResponse?.success} />
+        <div className="margin-top-3"></div>
+        <OnboardingMunicipality onValidation={onValidation} fieldStates={fieldStates} h3Heading={true} />
+        <OnboardingLocationInNewJersey />
+      </>
+    ),
+    documents: <></>,
+    notes: (
+      <>
+        <hr className="margin-top-4 margin-bottom-4" aria-hidden={true} />
+        <OnboardingNotes headerAriaLevel={3} handleChangeOverride={showRegistrationModalForGuest()} />
+      </>
+    ),
+    numbers: (
+      <>
+        <hr className="margin-top-4 margin-bottom-2" />{" "}
+        <h2 className="padding-bottom-3" style={{ fontWeight: 300 }}>
+          {" "}
+          {Config.profileDefaults.profileTabRefTitle}
+        </h2>
+        <div className="margin-top-4">
+          <OnboardingTaxId
+            onValidation={onValidation}
+            fieldStates={fieldStates}
+            headerAriaLevel={3}
+            handleChangeOverride={showRegistrationModalForGuest()}
+          />
+        </div>
+      </>
+    ),
   };
 
   const foreignBusinessElements: Record<ProfileTabs, ReactNode> = {
@@ -415,6 +471,7 @@ const ProfilePage = (props: Props): ReactElement => {
                   <ProfileTabNav
                     userData={userData}
                     businessPersona={businessPersona}
+                    foreignBusinessType={foreignBusinessType}
                     activeTab={profileTab}
                     setProfileTab={setProfileTab}
                   />

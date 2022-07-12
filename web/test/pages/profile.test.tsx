@@ -181,6 +181,11 @@ describe("profile", () => {
       });
     });
 
+    it("displays business info tab", () => {
+      renderPage({ userData });
+      expect(screen.getByTestId("info")).toBeInTheDocument();
+    });
+
     it("redirects user to roadmap with success query string on save", async () => {
       renderPage({ userData });
       fillText("Business name", "Cool Computers");
@@ -747,6 +752,15 @@ describe("profile", () => {
       });
       expect(() => currentUserData()).toThrowError();
     });
+
+    it("displays business info tab", () => {
+      renderPage({
+        userData: generateUserData({
+          profileData: generateProfileData({ businessPersona: "OWNING" }),
+        }),
+      });
+      expect(screen.getByTestId("info")).toBeInTheDocument();
+    });
   });
 
   describe("foreign business", () => {
@@ -777,6 +791,91 @@ describe("profile", () => {
       expect(
         screen.getByText(markdownToText(Config.profileDefaults.FOREIGN.taxId.header))
       ).toBeInTheDocument();
+    });
+
+    describe("Nexus Foreign Business", () => {
+      let userData: UserData;
+
+      beforeEach(() => {
+        userData = generateUserData({
+          profileData: generateProfileData({
+            businessPersona: "FOREIGN",
+            foreignBusinessType: "NEXUS",
+            businessName: "",
+          }),
+        });
+      });
+
+      it("opens the default business information tab when clicked on profile", () => {
+        renderPage({ userData: userData });
+        expect(screen.getByTestId("info")).toBeInTheDocument();
+        expect(
+          screen.getByText(markdownToText(Config.profileDefaults.FOREIGN.industryId.header))
+        ).toBeInTheDocument();
+        expect(
+          screen.getByText(markdownToText(Config.profileDefaults.FOREIGN.legalStructureId.header))
+        ).toBeInTheDocument();
+        expect(
+          screen.getByText(markdownToText(Config.profileDefaults.FOREIGN.municipality.header))
+        ).toBeInTheDocument();
+      });
+
+      it("displays the out of state business name field", () => {
+        renderPage({ userData: userData });
+        expect(screen.getByText("Out-of-State Business Name")).toBeInTheDocument();
+      });
+
+      it("displays Not-Entered when the user hasn't entered a business name yet", () => {
+        renderPage({ userData: userData });
+        expect(screen.getByText("Not-Entered")).toBeInTheDocument();
+      });
+
+      it("displays the user's business name if they have one", () => {
+        renderPage({
+          userData: generateUserData({
+            profileData: generateProfileData({
+              businessPersona: "FOREIGN",
+              foreignBusinessType: "NEXUS",
+              businessName: "Test Business",
+            }),
+          }),
+        });
+        expect(screen.getByText("Test Business")).toBeInTheDocument();
+      });
+
+      it("displays the user's dba name if they have one", () => {
+        renderPage({
+          userData: generateUserData({
+            profileData: generateProfileData({
+              businessPersona: "FOREIGN",
+              foreignBusinessType: "NEXUS",
+              businessName: "Test Business",
+              nexusDbaName: "DBA Name",
+            }),
+          }),
+        });
+        expect(screen.getByText("Test Business")).toBeInTheDocument();
+        expect(screen.getByText(Config.profileDefaults.nexusBusinessName.dbaNameHeader)).toBeInTheDocument();
+        expect(screen.getByTestId("onboardingFieldContent-nexusDbaName")).toBeInTheDocument();
+      });
+
+      it("doesn't display the user's dba name if they don't have one", () => {
+        renderPage({
+          userData: generateUserData({
+            profileData: generateProfileData({
+              businessPersona: "FOREIGN",
+              foreignBusinessType: "NEXUS",
+              businessName: "Test Business",
+              nexusDbaName: "",
+            }),
+          }),
+        });
+        expect(screen.getByText("Test Business")).toBeInTheDocument();
+        expect(
+          screen.queryByText(Config.profileDefaults.nexusBusinessName.dbaNameHeader)
+        ).not.toBeInTheDocument();
+        expect(screen.queryByTestId("onboardingFieldContent-nexusDbaName")).not.toBeInTheDocument();
+      });
     });
   });
 
