@@ -1,11 +1,10 @@
 {
   "naicsCodes": "531390, 523999",
-  "canHavePermanentLocation": true,
   "canBeHomeBased": true,
   "defaultSectorId": "real-estate",
   "canBeReseller": true,
   "isCpaRequiredApplicable": false,
-  "isEnabled": true,
+  "canHavePermanentLocation": true,
   "roadmapSteps": [
     {
       "step": 1,
@@ -38,8 +37,9 @@
       "task": "get-insurance"
     }
   ],
-  "name": "Real Estate Investor",
+  "name": "Real Estate Investing",
   "isLiquorLicenseApplicable": false,
+  "isEnabled": true,
   "additionalSearchTerms": "investor, property investor",
   "id": "real-estate-investor",
   "description": "Buys properties to rent or re-sell"
