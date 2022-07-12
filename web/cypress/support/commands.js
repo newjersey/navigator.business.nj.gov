@@ -119,10 +119,12 @@ Cypress.Commands.add("chooseDatePicker", (selector, value) => {
     if (isMobile) {
       // The MobileDatePicker component has readonly inputs and needs to
       // be opened and clicked on edit so its inputs can be edited
-      cy.get(mobilePickerSelector).click();
-      cy.get('[role="dialog"] [aria-label="calendar view is open, go to text input view"]').click();
+      cy.get(mobilePickerSelector).click({ force: true });
+      cy.get('[role="dialog"] [aria-label="calendar view is open, go to text input view"]').click({
+        force: true,
+      });
       cy.get(`[role="dialog"] input${selector}`).clear().type(value);
-      cy.contains('[role="dialog"] button', "OK").click();
+      cy.contains('[role="dialog"] button', "OK").click({ force: true });
     } else {
       cy.get(`input${selector} `).clear().type(value);
     }
