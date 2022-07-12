@@ -394,7 +394,8 @@
     "fieldLabel": "**Business Effective Date**",
     "areYouSureModalHeader": "Didn't Form Yet?",
     "saveButtonText": "Save",
-    "description": "To see your annual report due date, please provide your Business' `effective date|effective-date` (the date you formed your business) below."
+    "description": "To see your annual report due date, please provide your Business' `effective date|effective-date` (the date you formed your business) below.",
+    "lockedStatusTooltipText": "You have successfully completed forming your business in this task."
   },
   "licenseSearchTask": {
     "voluntarySurrenderPermitStatusText": "Voluntary Surrender",

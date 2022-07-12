@@ -269,6 +269,7 @@ const ProfilePage = (props: Props): ReactElement => {
               onValidation={onValidation}
               fieldStates={fieldStates}
               disabled={true}
+              futureAllowed={true}
             />
           </>
         )}
@@ -356,6 +357,7 @@ const ProfilePage = (props: Props): ReactElement => {
             fieldStates={fieldStates}
             headerAriaLevel={3}
             disabled={userData?.formationData.getFilingResponse?.success}
+            futureAllowed={false}
           />
         </div>
         <div className="margin-top-4">

@@ -21,6 +21,7 @@ interface DateOfFormationConfig {
 interface Props {
   onValidation: (field: ProfileFields, invalid: boolean) => void;
   fieldStates: ProfileFieldErrorMap;
+  futureAllowed: boolean;
   required?: boolean;
   disabled?: boolean;
   headerAriaLevel?: number;
@@ -32,6 +33,7 @@ export const OnboardingDateOfFormation = ({ headerAriaLevel = 2, ...props }: Pro
   const { Config } = useConfig();
   const { state, setProfileData } = useContext(ProfileDataContext);
   const [dateValue, setDateValue] = React.useState<DateObject | null>(null);
+  const [dateError, setDateError] = React.useState<boolean>(false);
 
   const contentConfig = {
     header: props.configOverrides?.header || Config.profileDefaults[state.flow].dateOfFormation.header,
@@ -44,7 +46,7 @@ export const OnboardingDateOfFormation = ({ headerAriaLevel = 2, ...props }: Pro
   useMountEffectWhenDefined(() => {
     setDateValue(parseDate(state.profileData.dateOfFormation));
   }, state.profileData.dateOfFormation);
-  const [dateError, setDateError] = React.useState<boolean>(false);
+
   const onValidation = (): void =>
     props.onValidation(
       fieldName,
@@ -69,10 +71,10 @@ export const OnboardingDateOfFormation = ({ headerAriaLevel = 2, ...props }: Pro
         inputFormat={"MM/YYYY"}
         disableMaskedInput={false}
         mask={"__/____"}
-        disableFuture={!props.disabled}
+        disableFuture={!props.futureAllowed}
         openTo="year"
         disabled={props.disabled}
-        maxDate={getCurrentDate()}
+        maxDate={props.futureAllowed ? getCurrentDate().add(100, "years") : getCurrentDate()}
         value={dateValue}
         onClose={onValidation}
         onChange={handleChange}

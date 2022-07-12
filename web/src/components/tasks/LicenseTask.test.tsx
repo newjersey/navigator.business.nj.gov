@@ -47,7 +47,7 @@ describe("<LicenseTask />", () => {
 
     fireEvent.click(screen.getByTestId("IN_PROGRESS"));
     expect(screen.queryByTestId("NOT_STARTED")).not.toBeInTheDocument();
-    expect(screen.getByTestId("automatic-status-info-tooltip")).toBeInTheDocument();
+    expect(screen.getByTestId("status-info-tooltip")).toBeInTheDocument();
   });
 
   describe("starting tab", () => {

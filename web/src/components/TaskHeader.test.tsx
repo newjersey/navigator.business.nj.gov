@@ -2,6 +2,8 @@ import { TaskHeader } from "@/components/TaskHeader";
 import { getMergedConfig } from "@/contexts/configContext";
 import { Task, TaskProgress } from "@/lib/types/types";
 import {
+  generateFormationData,
+  generateGetFilingResponse,
   generatePreferences,
   generateProfileData,
   generateStep,
@@ -18,6 +20,7 @@ import {
 } from "@/test/mock/withStatefulUserData";
 import { getCurrentDate } from "@businessnjgovnavigator/shared/dateHelpers";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
+import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { Dayjs } from "dayjs";
 
@@ -27,9 +30,11 @@ jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 
 const renderTaskHeader = (task: Task, initialUserData?: UserData) =>
   render(
-    <WithStatefulUserData initialUserData={initialUserData}>
-      <TaskHeader task={task} />
-    </WithStatefulUserData>
+    <ThemeProvider theme={createTheme()}>
+      <WithStatefulUserData initialUserData={initialUserData}>
+        <TaskHeader task={task} />
+      </WithStatefulUserData>
+    </ThemeProvider>
   );
 
 const Config = getMergedConfig();
@@ -237,10 +242,8 @@ describe("<TaskHeader />", () => {
 
     it("updates status and date of formation, and redirects user on save", async () => {
       const id = randomFormationId();
-      renderTaskHeader(
-        generateTask({ id }),
-        generateUserData({ profileData: generateProfileData({ businessPersona: "STARTING" }) })
-      );
+      const startingPersonaForRoadmapUrl = generateProfileData({ businessPersona: "STARTING" });
+      renderTaskHeader(generateTask({ id }), generateUserData({ profileData: startingPersonaForRoadmapUrl }));
       selectCompleted();
       const date = getCurrentDate().subtract(1, "month").date(1);
       selectDate(date);
@@ -250,6 +253,18 @@ describe("<TaskHeader />", () => {
       );
       expect(currentUserData().taskProgress[id]).toEqual("COMPLETED");
       expect(mockPush).toHaveBeenCalledWith("/roadmap");
+    });
+
+    it("allows a date in the future", async () => {
+      const id = randomFormationId();
+      renderTaskHeader(generateTask({ id }), generateUserData({}));
+      selectCompleted();
+      const date = getCurrentDate().add(1, "month").date(1);
+      selectDate(date);
+      fireEvent.click(screen.getByText(Config.formationDateModal.saveButtonText));
+      await waitFor(() =>
+        expect(currentUserData().profileData.dateOfFormation).toEqual(date.format("YYYY-MM-DD"))
+      );
     });
 
     it("shows error when user saves without entering date", () => {
@@ -314,6 +329,19 @@ describe("<TaskHeader />", () => {
       fireEvent.click(screen.getAllByText(Config.formationDateModal.areYouSureModalCancelButtonText)[0]);
       expect(currentUserData().taskProgress[id]).toEqual("COMPLETED");
       expect(currentUserData().profileData.dateOfFormation).toEqual(date.format("YYYY-MM-DD"));
+    });
+
+    it("locks task status if formation was completed through API", () => {
+      const id = randomFormationId();
+      const taskProgress: Record<string, TaskProgress> = { [id]: "COMPLETED" };
+      const formationData = generateFormationData({
+        getFilingResponse: generateGetFilingResponse({ success: true }),
+      });
+      renderTaskHeader(generateTask({ id }), generateUserData({ taskProgress, formationData }));
+
+      fireEvent.click(screen.getByTestId("COMPLETED"));
+      expect(screen.queryByTestId("NOT_STARTED")).not.toBeInTheDocument();
+      expect(screen.getByTestId("status-info-tooltip")).toBeInTheDocument();
     });
   });
 
