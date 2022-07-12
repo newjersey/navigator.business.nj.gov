@@ -389,12 +389,12 @@
     "header": "Congratulations!",
     "areYouSureModalBody": "If you change your task status, you will need to resubmit your Business `Effective Date|effective-date` and will lose access to your calendar.",
     "areYouSureModalContinueButtonText": "Continue",
-    "errorText": "Your formation date must be in the past, and should be formatted as MM/YYYY.",
+    "errorText": "Your effective date must be in the past, and should be formatted as MM/YYYY.",
     "cancelButtonText": "Cancel",
     "fieldLabel": "**Business Effective Date**",
     "areYouSureModalHeader": "Didn't Form Yet?",
     "saveButtonText": "Save",
-    "description": "In order to see your next reporting due date, please provide your Business' `Effective Date|effective-date` (the date you formed your business) below."
+    "description": "To see your annual report due date, please provide your Business' `Effective Date|effective-date` (the date you formed your business) below."
   },
   "licenseSearchTask": {
     "voluntarySurrenderPermitStatusText": "Voluntary Surrender",
