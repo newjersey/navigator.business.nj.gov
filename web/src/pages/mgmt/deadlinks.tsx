@@ -48,9 +48,10 @@ const DeadLinksPage = (props: Props): ReactElement => {
         onKeyPress={handleKeyPress}
         inputProps={{
           id: "password",
+          "data-testid": "mgmt-password-field",
         }}
       />
-      <button onClick={onSubmit} className="usa-button margin-top-2">
+      <button onClick={onSubmit} className="usa-button margin-top-2" data-testid="mgmt-submit-bttn">
         Submit
       </button>
     </>
@@ -59,7 +60,7 @@ const DeadLinksPage = (props: Props): ReactElement => {
   const authedView = (
     <>
       <h1>Dead Content</h1>
-      <h2>Tasks not referenced in any roadmap:</h2>
+      <h2 data-testid="dl-task-header">Tasks not referenced in any roadmap:</h2>
       <ul>
         {props.deadTasks.map((task, i) => (
           <li key={i}>{task}</li>
