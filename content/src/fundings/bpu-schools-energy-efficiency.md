@@ -13,7 +13,7 @@ status: first come, first serve
 programFrequency: one-time
 businessStage: both
 employeesRequired: n/a
-homeBased: unknown
+homeBased: no
 mwvb: m/wbe
 preferenceForOpportunityZone: no
 county:
