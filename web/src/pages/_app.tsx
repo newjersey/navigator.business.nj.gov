@@ -160,6 +160,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
         console.error("token refresh failed");
         break;
       case "configured":
+        break;
     }
   };
 
