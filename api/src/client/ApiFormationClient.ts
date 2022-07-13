@@ -68,7 +68,9 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
         }
       })
       .catch((error) => {
-        logger.LogInfo(`Formation - NICUSA - Id:${logId} - Unknown error received: ${JSON.stringify(error)}`);
+        logger.LogError(
+          `Formation - NICUSA - Id:${logId} - Unknown error received: ${JSON.stringify(error)}`
+        );
         return {
           success: false,
           token: undefined,
@@ -120,7 +122,9 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
         }
       })
       .catch((error) => {
-        logger.LogInfo(`GetFiling - NICUSA - Id:${logId} - Unknown error received: ${JSON.stringify(error)}`);
+        logger.LogError(
+          `GetFiling - NICUSA - Id:${logId} - Unknown error received: ${JSON.stringify(error)}`
+        );
         return {
           success: false,
           entityId: "",
