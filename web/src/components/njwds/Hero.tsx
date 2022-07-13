@@ -60,7 +60,7 @@ export const Hero = (): ReactElement => {
                 <Button
                   style="primary-big"
                   onClick={primaryCTAOnClick}
-                  dataTestid="hero"
+                  dataTestid="hero-login-button"
                   widthAutoOnMobile
                   noRightMargin
                 >
