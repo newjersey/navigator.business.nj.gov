@@ -29,7 +29,7 @@ const DeadLinksPage = (props: Props): ReactElement => {
 
   const onSubmit = (): void => {
     apiClient
-      .post("/mgmt/auth", { password })
+      .post("/mgmt/auth", { password }, false)
       .then(() => setIsAuthed(true))
       .catch(() => {});
   };
