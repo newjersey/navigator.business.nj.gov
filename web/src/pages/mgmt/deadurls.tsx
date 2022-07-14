@@ -1,11 +1,10 @@
+import { MgmtAuth } from "@/components/auth/MgmtAuth";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { PageSkeleton } from "@/components/PageSkeleton";
-import * as apiClient from "@/lib/api-client/apiClient";
 import { findDeadLinks } from "@/lib/static/admin/findDeadLinks";
-import { TextField } from "@mui/material";
 import { GetServerSidePropsResult } from "next";
 import { NextSeo } from "next-seo";
-import { ChangeEvent, KeyboardEvent, ReactElement, useState } from "react";
+import { ReactElement, useState } from "react";
 
 interface Props {
   deadLinks: Record<string, string[]>;
@@ -15,45 +14,6 @@ interface Props {
 const DeadUrlsPage = (props: Props): ReactElement => {
   const [isAuthed, setIsAuthed] = useState<boolean>(false);
   const [password, setPassword] = useState<string>("");
-
-  const handleKeyPress = (event: KeyboardEvent<HTMLDivElement>): void => {
-    if (event.code === "Enter") {
-      onSubmit();
-    }
-  };
-
-  const handlePasswordInput = (event: ChangeEvent<HTMLInputElement>): void => {
-    setPassword(event.target.value);
-  };
-
-  const onSubmit = (): void => {
-    apiClient
-      .post("/mgmt/auth", { password }, false)
-      .then(() => setIsAuthed(true))
-      .catch(() => {});
-  };
-
-  const unauthedView = (
-    <>
-      <h1>Enter admin password:</h1>
-      <label htmlFor="password">Password</label>
-      <TextField
-        fullWidth
-        name="password"
-        variant="outlined"
-        type="password"
-        value={password}
-        onChange={handlePasswordInput}
-        onKeyPress={handleKeyPress}
-        inputProps={{
-          id: "password",
-        }}
-      />
-      <button onClick={onSubmit} className="usa-button margin-top-2">
-        Submit
-      </button>
-    </>
-  );
 
   const authedView = (
     <>
@@ -80,7 +40,13 @@ const DeadUrlsPage = (props: Props): ReactElement => {
     <PageSkeleton>
       <NextSeo noindex={true} />
       <main>
-        <SingleColumnContainer>{isAuthed ? authedView : unauthedView}</SingleColumnContainer>
+        <SingleColumnContainer>
+          {isAuthed ? (
+            authedView
+          ) : (
+            <MgmtAuth password={password} setIsAuthed={setIsAuthed} setPassword={setPassword} />
+          )}
+        </SingleColumnContainer>
       </main>
     </PageSkeleton>
   );

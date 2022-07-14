@@ -1,10 +1,9 @@
+import { MgmtAuth } from "@/components/auth/MgmtAuth";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { PageSkeleton } from "@/components/PageSkeleton";
-import * as apiClient from "@/lib/api-client/apiClient";
-import { TextField } from "@mui/material";
 import { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
-import { ChangeEvent, KeyboardEvent, ReactElement, useState } from "react";
+import { ReactElement, useState } from "react";
 
 interface Props {
   envVars: string;
@@ -15,48 +14,9 @@ const FeatureFlagsPage = (props: Props): ReactElement => {
   const [isAuthed, setIsAuthed] = useState<boolean>(false);
   const [password, setPassword] = useState<string>("");
 
-  const handleKeyPress = (event: KeyboardEvent<HTMLDivElement>): void => {
-    if (event.code === "Enter") {
-      onSubmit();
-    }
-  };
-
-  const handlePasswordInput = (event: ChangeEvent<HTMLInputElement>): void => {
-    setPassword(event.target.value);
-  };
-
-  const onSubmit = (): void => {
-    apiClient
-      .post("/mgmt/auth", { password }, false)
-      .then(() => setIsAuthed(true))
-      .catch(() => {});
-  };
-
   const envVars = JSON.parse(props.envVars);
   const featuresWithSuffixes = Object.keys(envVars).filter((it) => it.startsWith("FEATURE_"));
   const features = [...new Set(featuresWithSuffixes.map((it) => it.split("_").slice(1, -1).join("_")))];
-
-  const unauthedView = (
-    <>
-      <h1>Enter admin password:</h1>
-      <label htmlFor="password">Password</label>
-      <TextField
-        fullWidth
-        name="password"
-        variant="outlined"
-        type="password"
-        value={password}
-        onChange={handlePasswordInput}
-        onKeyPress={handleKeyPress}
-        inputProps={{
-          id: "password",
-        }}
-      />
-      <button onClick={onSubmit} className="usa-button margin-top-2">
-        Submit
-      </button>
-    </>
-  );
 
   const authedView = (
     <>
@@ -90,7 +50,13 @@ const FeatureFlagsPage = (props: Props): ReactElement => {
     <PageSkeleton>
       <NextSeo noindex={true} />
       <main>
-        <SingleColumnContainer>{isAuthed ? authedView : unauthedView}</SingleColumnContainer>
+        <SingleColumnContainer>
+          {isAuthed ? (
+            authedView
+          ) : (
+            <MgmtAuth password={password} setIsAuthed={setIsAuthed} setPassword={setPassword} />
+          )}
+        </SingleColumnContainer>
       </main>
     </PageSkeleton>
   );
