@@ -2276,7 +2276,7 @@ collections:
             widget: relation
             collection: "settings"
             search_fields: ["steps.*.name"]
-            value_field: "steps.*.step_number"
+            value_field: "steps.*.stepNumber"
             display_fields: ["steps.*.name"]
           - label: Weight
             name: weight
@@ -3031,7 +3031,7 @@ collections:
             widget: relation
             collection: "settings"
             search_fields: ["steps.*.name"]
-            value_field: "steps.*.step_number"
+            value_field: "steps.*.stepNumber"
             display_fields: ["steps.*.name"]
           - label: Weight
             name: weight
@@ -3153,7 +3153,7 @@ collections:
                 name: description
                 widget: string
               - label: Number
-                name: step_number
+                name: stepNumber
                 widget: number
                 min: 0
                 value_type: int

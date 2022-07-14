@@ -14,7 +14,6 @@ interface Props {
 export const MiniRoadmap = (props: Props): ReactElement => {
   const { roadmap } = useRoadmap();
   const { userData, update } = useUserData();
-
   const onToggleStep = useCallback(
     async (stepNumber: number, setOpen: boolean, click: boolean): Promise<void> => {
       const updateSteps = (openSteps: number[]) => {
@@ -54,11 +53,11 @@ export const MiniRoadmap = (props: Props): ReactElement => {
                 step={step}
                 isLast={index === array.length - 1}
                 activeTaskId={props.activeTaskId}
-                completed={isStepCompleted(step, userData)}
-                isOpen={userData?.preferences.roadmapOpenSteps.includes(step.step_number)}
+                completed={isStepCompleted(roadmap, step, userData)}
+                isOpen={userData?.preferences.roadmapOpenSteps.includes(step.stepNumber)}
                 toggleStep={onToggleStep}
                 onTaskClick={props.onTaskClick}
-                key={step.step_number}
+                key={step.stepNumber}
               />
             ))}
         </SectionAccordion>

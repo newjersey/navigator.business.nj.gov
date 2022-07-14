@@ -291,6 +291,7 @@ export type TasksDisplayContent = {
 
 export interface Roadmap {
   steps: Step[];
+  tasks: Task[];
 }
 
 export interface RoadmapStatus {
@@ -303,17 +304,17 @@ export const sectionNames = ["PLAN", "START", "OPERATE"] as const;
 export type SectionType = typeof sectionNames[number];
 
 export interface Step {
-  step_number: number;
+  stepNumber: number;
   name: string;
   timeEstimate: string;
   description: string;
-  tasks: Task[];
   section: SectionType;
 }
 
 export interface Task {
   id: string;
   filename: string;
+  stepNumber?: number;
   name: string;
   urlSlug: string;
   callToActionLink: string;

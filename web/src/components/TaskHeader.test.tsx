@@ -102,10 +102,11 @@ describe("<TaskHeader />", () => {
 
   it("overrides required tag in header from task in roadmap", () => {
     const id = "123";
-    const taskInRoadmap = generateTask({ id, required: false });
+    const taskInRoadmap = generateTask({ id, required: false, stepNumber: 1 });
     const taskStaticGeneration = generateTask({ id, required: true });
     useMockRoadmap({
-      steps: [generateStep({ tasks: [taskInRoadmap], section: "PLAN" })],
+      steps: [generateStep({ stepNumber: 1, section: "PLAN" })],
+      tasks: [taskInRoadmap],
     });
     renderTaskHeader(taskStaticGeneration);
     expect(screen.queryByText(Config.taskDefaults.requiredTagText)).not.toBeInTheDocument();
@@ -116,8 +117,8 @@ describe("<TaskHeader />", () => {
       const planTaskId = "123";
       const startTaskId = "124";
 
-      const planTask = generateTask({ id: planTaskId });
-      const startTask = generateTask({ id: startTaskId });
+      const planTask = generateTask({ id: planTaskId, stepNumber: 1 });
+      const startTask = generateTask({ id: startTaskId, stepNumber: 2 });
 
       const userData = generateUserData({
         taskProgress: {
@@ -129,9 +130,10 @@ describe("<TaskHeader />", () => {
 
       useMockRoadmap({
         steps: [
-          generateStep({ tasks: [planTask], section: "PLAN" }),
-          generateStep({ tasks: [startTask], section: "START" }),
+          generateStep({ stepNumber: 1, section: "PLAN" }),
+          generateStep({ stepNumber: 2, section: "START" }),
         ],
+        tasks: [planTask, startTask],
       });
 
       renderTaskHeader(startTask, userData);
@@ -148,12 +150,12 @@ describe("<TaskHeader />", () => {
       ).not.toBeInTheDocument();
     });
 
-    it("shows congratulatory modal with link when PLAN section completed", () => {
+    it("shows congratulatory modal with link when PLAN section completed", async () => {
       const planTaskId = "123";
       const startTaskId = "124";
 
-      const planTask = generateTask({ id: planTaskId });
-      const startTask = generateTask({ id: startTaskId });
+      const planTask = generateTask({ id: planTaskId, stepNumber: 1 });
+      const startTask = generateTask({ id: startTaskId, stepNumber: 2 });
 
       const userData = generateUserData({
         taskProgress: {
@@ -165,9 +167,10 @@ describe("<TaskHeader />", () => {
 
       useMockRoadmap({
         steps: [
-          generateStep({ tasks: [planTask], section: "PLAN" }),
-          generateStep({ tasks: [startTask], section: "START" }),
+          generateStep({ stepNumber: 1, section: "PLAN" }),
+          generateStep({ stepNumber: 2, section: "START" }),
         ],
+        tasks: [planTask, startTask],
       });
 
       renderTaskHeader(planTask, userData);

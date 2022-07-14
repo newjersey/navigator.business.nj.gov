@@ -23,12 +23,16 @@ describe("<MiniRoadmap />", () => {
       steps: [
         generateStep({
           name: "step1",
-          tasks: [generateTask({ name: "task1", id: "task1" })],
+          stepNumber: 1,
         }),
         generateStep({
           name: "step2",
-          tasks: [generateTask({ name: "task2", id: "task2" })],
+          stepNumber: 2,
         }),
+      ],
+      tasks: [
+        generateTask({ name: "task1", id: "task1", stepNumber: 1 }),
+        generateTask({ name: "task2", id: "task2", stepNumber: 2 }),
       ],
     });
   });
@@ -61,15 +65,12 @@ describe("<MiniRoadmap />", () => {
 
     useMockRoadmap({
       steps: [
-        generateStep({
-          name: "step1",
-          section: "PLAN",
-          tasks: [generateTask({ id: "task1" })],
-        }),
-        generateStep({ name: "step2", section: "START" }),
-        generateStep({ name: "step3", section: "PLAN" }),
-        generateStep({ name: "step4", section: "START" }),
+        generateStep({ name: "step1", section: "PLAN", stepNumber: 1 }),
+        generateStep({ name: "step2", section: "START", stepNumber: 2 }),
+        generateStep({ name: "step3", section: "PLAN", stepNumber: 3 }),
+        generateStep({ name: "step4", section: "START", stepNumber: 4 }),
       ],
+      tasks: [generateTask({ id: "task1", stepNumber: 1 })],
     });
 
     renderMiniRoadMap("task1");
@@ -134,16 +135,18 @@ describe("<MiniRoadmap />", () => {
         steps: [
           generateStep({
             name: "step1",
-            step_number: 1,
+            stepNumber: 1,
             section: "PLAN",
-            tasks: [generateTask({ name: "task1", id: "task1" })],
           }),
           generateStep({
             name: "step2",
-            step_number: 2,
+            stepNumber: 2,
             section: "START",
-            tasks: [generateTask({ name: "task2", id: "task2" })],
           }),
+        ],
+        tasks: [
+          generateTask({ name: "task1", id: "task1", stepNumber: 1 }),
+          generateTask({ name: "task2", id: "task2", stepNumber: 2 }),
         ],
       });
     });

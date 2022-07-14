@@ -2,7 +2,7 @@
   "steps": [
     {
       "section": "START",
-      "step_number": 1,
+      "stepNumber": 1,
       "name": "Ensure Your Out-of-State Business Complies with New Jersey Laws",
       "timeEstimate": "1 month",
       "description": "Get legally recognized by the State and federal government so you can start acting on behalf of your business."

@@ -2,6 +2,7 @@ import { VerticalStepIndicator } from "@/components/njwds-extended/VerticalStepI
 import { Icon } from "@/components/njwds/Icon";
 import { MiniRoadmapTask } from "@/components/roadmap/MiniRoadmapTask";
 import { SectionAccordionContext } from "@/contexts/sectionAccordionContext";
+import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { Step } from "@/lib/types/types";
 import { ReactElement, useContext, useEffect, useMemo, useState } from "react";
 
@@ -16,14 +17,14 @@ interface Props {
 }
 
 export const MiniRoadmapStep = (props: Props): ReactElement => {
+  const { roadmap } = useRoadmap();
   const [isOpen, setIsOpen] = useState<boolean>(props.isOpen ?? false);
-  const stepNumber = props.step.step_number;
+  const stepNumber = props.step.stepNumber;
   const { isOpen: sectionIsOpen } = useContext(SectionAccordionContext);
   const isActive = useMemo(() => {
-    if (!props.activeTaskId) return undefined;
-    return !!props.step.tasks.some((task) => task.id === props.activeTaskId);
-  }, [props.activeTaskId, props.step]);
-
+    if (!props.activeTaskId || !roadmap?.tasks) return undefined;
+    return roadmap?.tasks.some((task) => task.id === props.activeTaskId && task.stepNumber == stepNumber);
+  }, [props.activeTaskId, roadmap?.tasks, stepNumber]);
   useEffect(() => {
     if (isActive) {
       setIsOpen(true);
@@ -68,14 +69,16 @@ export const MiniRoadmapStep = (props: Props): ReactElement => {
       </div>
       <div className="margin-left-5 font-sans-xs">
         {isOpen &&
-          props.step.tasks.map((task) => (
-            <MiniRoadmapTask
-              key={task.id}
-              task={task}
-              active={task.id === props.activeTaskId}
-              onTaskClick={props.onTaskClick}
-            />
-          ))}
+          roadmap?.tasks
+            .filter((task) => task.stepNumber == props.step.stepNumber)
+            .map((task) => (
+              <MiniRoadmapTask
+                key={task.id}
+                task={task}
+                active={task.id === props.activeTaskId}
+                onTaskClick={props.onTaskClick}
+              />
+            ))}
       </div>
     </div>
   );

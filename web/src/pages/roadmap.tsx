@@ -78,7 +78,7 @@ const RoadmapPage = (props: Props): ReactElement => {
                 {roadmap.steps
                   .filter((step) => step.section === section)
                   .map((step, index, array) => (
-                    <Step key={step.step_number} step={step} last={index === array.length - 1} />
+                    <Step key={step.stepNumber} step={step} last={index === array.length - 1} />
                   ))}
               </SectionAccordion>
             ))}

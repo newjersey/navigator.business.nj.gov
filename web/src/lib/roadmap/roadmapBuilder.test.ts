@@ -26,8 +26,7 @@ describe("roadmapBuilder", () => {
       industryId: undefined,
       addOns: ["tea"],
     });
-
-    expect(roadmap.steps[0].tasks.map((it) => it.id)).toEqual(expect.arrayContaining(["tea-task-1-id"]));
+    expect(roadmap.tasks.map((it) => it.id)).toEqual(expect.arrayContaining(["tea-task-1-id"]));
   });
 
   it("removes any steps that have no tasks", async () => {
@@ -44,7 +43,6 @@ describe("roadmapBuilder", () => {
       industryId: "standard",
       addOns: [],
     });
-
     expect(roadmap).toEqual(expectedGenericRoadmap);
   });
 
@@ -54,18 +52,16 @@ describe("roadmapBuilder", () => {
       addOns: ["tea"],
     });
 
-    expect(roadmap.steps[0].tasks.map((it) => it.id)).toEqual(
+    expect(roadmap.tasks.map((it) => ({ id: it.id, stepNumber: it.stepNumber }))).toEqual(
       expect.arrayContaining([
-        "generic-task-1-id",
-        "coffee-task-1-id",
-        "generic-task-2-id",
-        "coffee-task-2-id",
-        "tea-task-1-id",
+        { id: "generic-task-1-id", stepNumber: 1 },
+        { id: "coffee-task-1-id", stepNumber: 1 },
+        { id: "generic-task-2-id", stepNumber: 1 },
+        { id: "coffee-task-2-id", stepNumber: 1 },
+        { id: "tea-task-1-id", stepNumber: 1 },
+        { id: "coffee-task-3-id", stepNumber: 2 },
+        { id: "tea-task-2-id", stepNumber: 2 },
       ])
-    );
-
-    expect(roadmap.steps[1].tasks.map((it) => it.id)).toEqual(
-      expect.arrayContaining(["coffee-task-3-id", "tea-task-2-id"])
     );
   });
 
@@ -75,18 +71,14 @@ describe("roadmapBuilder", () => {
       addOns: [],
     });
 
-    expect(roadmap.steps[0].tasks.map((it) => it.id)).toEqual(
-      expect.arrayContaining([
-        "generic-task-1-id",
-        "coffee-task-1-id",
-        "generic-task-2-id",
-        "coffee-task-2-id",
-      ])
-    );
-
-    expect(roadmap.steps[1].tasks.map((it) => it.id)).toEqual(expect.arrayContaining(["coffee-task-3-id"]));
-
-    expect(roadmap.steps[2].tasks.map((it) => it.id)).toEqual(expect.arrayContaining(["coffee-task-4-id"]));
+    expect(roadmap.tasks.map((it) => ({ id: it.id, stepNumber: it.stepNumber }))).toEqual([
+      { id: "generic-task-1-id", stepNumber: 1 },
+      { id: "coffee-task-2-id", stepNumber: 1 },
+      { id: "coffee-task-1-id", stepNumber: 1 },
+      { id: "generic-task-2-id", stepNumber: 1 },
+      { id: "coffee-task-3-id", stepNumber: 2 },
+      { id: "coffee-task-4-id", stepNumber: 3 },
+    ]);
   });
 
   it("orders tasks in a step by weight", async () => {
@@ -95,11 +87,14 @@ describe("roadmapBuilder", () => {
       addOns: ["weighted"],
     });
 
-    expect(roadmap.steps[0].tasks.map((it) => it.id)).toEqual([
-      "weighted-task-0-id",
-      "generic-task-1-id",
-      "generic-task-2-id",
-      "weighted-task-10-id",
+    expect(roadmap.tasks.map((it) => ({ id: it.id, stepNumber: it.stepNumber }))).toEqual([
+      { id: "weighted-task-0-id", stepNumber: 1 },
+      { id: "generic-task-1-id", stepNumber: 1 },
+      { id: "generic-task-2-id", stepNumber: 1 },
+      { id: "weighted-task-10-id", stepNumber: 1 },
+      { id: "generic-task-3-id", stepNumber: 2 },
+      { id: "weighted-task-9-id", stepNumber: 2 },
+      { id: "generic-task-4-id", stepNumber: 3 },
     ]);
   });
 
@@ -109,7 +104,7 @@ describe("roadmapBuilder", () => {
       addOns: ["mocha"],
     });
 
-    expect(roadmap.steps[3].tasks.map((it) => it.id)).toEqual(["mocha-task-5-id"]);
+    expect(roadmap.tasks.map((it) => it.id).includes("mocha-task-5-id")).toBeTruthy();
   });
 
   it("adds unlockedBy to tasks from dependencies file without duplicate url-slugs", async () => {
@@ -118,7 +113,7 @@ describe("roadmapBuilder", () => {
       addOns: ["blocking"],
     });
 
-    const blockedTask = roadmap.steps[0].tasks.find((it) => it.id === "blocked-id");
+    const blockedTask = roadmap.tasks.find((it) => it.id === "blocked-id");
     expect(blockedTask?.unlockedBy).toEqual([
       {
         name: "Blocking Task 2",
@@ -139,71 +134,71 @@ describe("roadmapBuilder", () => {
 const expectedGenericRoadmap: Roadmap = {
   steps: [
     {
-      step_number: 1,
+      stepNumber: 1,
       name: "Step 1 Name",
       section: "PLAN",
       timeEstimate: "1 month",
       description: "Step 1 description",
-      tasks: [
-        {
-          id: "generic-task-1-id",
-          filename: "generic-task-1",
-          name: "Generic Task 1",
-          urlSlug: "generic-task-1-url-slug",
-          callToActionLink: "www.generic-task-1.com",
-          callToActionText: "Generic Task 1 CTA",
-          contentMd: `${EOL}Generic Task 1 Contents${EOL}`,
-          unlockedBy: [],
-        },
-        {
-          id: "generic-task-2-id",
-          filename: "generic-task-2",
-          name: "Generic Task 2",
-          urlSlug: "generic-task-2-url-slug",
-          callToActionLink: "www.generic-task-2.com",
-          callToActionText: "Generic Task 2 CTA",
-          contentMd: `${EOL}Generic Task 2 Contents${EOL}`,
-          unlockedBy: [],
-        },
-      ],
     },
     {
-      step_number: 2,
+      stepNumber: 2,
       name: "Step 2 Name",
       section: "START",
       timeEstimate: "3 months",
       description: "Step 2 description",
-      tasks: [
-        {
-          id: "generic-task-3-id",
-          name: "Generic Task 3",
-          filename: "generic-task-3",
-          urlSlug: "generic-task-3-url-slug",
-          callToActionLink: "www.generic-task-3.com",
-          callToActionText: "Generic Task 3 CTA",
-          contentMd: `${EOL}Generic Task 3 Contents${EOL}`,
-          unlockedBy: [],
-        },
-      ],
     },
     {
-      step_number: 3,
+      stepNumber: 3,
       name: "Step 3 Name",
       timeEstimate: "4 months",
       section: "START",
       description: "Step 3 description",
-      tasks: [
-        {
-          id: "generic-task-4-id",
-          name: "Generic Task 4",
-          filename: "generic-task-4",
-          urlSlug: "generic-task-4-url-slug",
-          callToActionLink: "www.generic-task-4.com",
-          callToActionText: "Generic Task 4 CTA",
-          contentMd: `${EOL}Generic Task 4 Contents${EOL}`,
-          unlockedBy: [],
-        },
-      ],
+    },
+  ],
+  tasks: [
+    {
+      id: "generic-task-1-id",
+      filename: "generic-task-1",
+      stepNumber: 1,
+      name: "Generic Task 1",
+      urlSlug: "generic-task-1-url-slug",
+      callToActionLink: "www.generic-task-1.com",
+      callToActionText: "Generic Task 1 CTA",
+      contentMd: `${EOL}Generic Task 1 Contents${EOL}`,
+      unlockedBy: [],
+    },
+    {
+      id: "generic-task-2-id",
+      filename: "generic-task-2",
+      stepNumber: 1,
+      name: "Generic Task 2",
+      urlSlug: "generic-task-2-url-slug",
+      callToActionLink: "www.generic-task-2.com",
+      callToActionText: "Generic Task 2 CTA",
+      contentMd: `${EOL}Generic Task 2 Contents${EOL}`,
+      unlockedBy: [],
+    },
+    {
+      id: "generic-task-3-id",
+      name: "Generic Task 3",
+      stepNumber: 2,
+      filename: "generic-task-3",
+      urlSlug: "generic-task-3-url-slug",
+      callToActionLink: "www.generic-task-3.com",
+      callToActionText: "Generic Task 3 CTA",
+      contentMd: `${EOL}Generic Task 3 Contents${EOL}`,
+      unlockedBy: [],
+    },
+    {
+      id: "generic-task-4-id",
+      name: "Generic Task 4",
+      stepNumber: 3,
+      filename: "generic-task-4",
+      urlSlug: "generic-task-4-url-slug",
+      callToActionLink: "www.generic-task-4.com",
+      callToActionText: "Generic Task 4 CTA",
+      contentMd: `${EOL}Generic Task 4 Contents${EOL}`,
+      unlockedBy: [],
     },
   ],
 };

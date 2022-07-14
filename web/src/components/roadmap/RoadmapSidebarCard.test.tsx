@@ -33,11 +33,16 @@ describe("<RoadmapSidebarCard />", () => {
       generateRoadmap({
         steps: [
           generateStep({
-            tasks: [generateTask({ id: "task1" }), generateTask({ id: "task2" })],
+            stepNumber: 1,
           }),
           generateStep({
-            tasks: [generateTask({ id: "task3" })],
+            stepNumber: 2,
           }),
+        ],
+        tasks: [
+          generateTask({ id: "task1", stepNumber: 1 }),
+          generateTask({ id: "task2", stepNumber: 1 }),
+          generateTask({ id: "task3", stepNumber: 2 }),
         ],
       })
     );
@@ -60,30 +65,27 @@ describe("<RoadmapSidebarCard />", () => {
     beforeEach(() => {
       useMockRoadmap(
         generateRoadmap({
-          steps: [
-            generateStep({
-              tasks: [
-                generateTask({
-                  required: true,
-                  id: "requiredTask1",
-                }),
-                generateTask({
-                  required: false,
-                  id: "optionalTask1",
-                }),
-              ],
+          steps: [generateStep({ stepNumber: 1 }), generateStep({ stepNumber: 2 })],
+          tasks: [
+            generateTask({
+              required: true,
+              id: "requiredTask1",
+              stepNumber: 1,
             }),
-            generateStep({
-              tasks: [
-                generateTask({
-                  required: true,
-                  id: "requiredTask2",
-                }),
-                generateTask({
-                  required: false,
-                  id: "optionalTask2",
-                }),
-              ],
+            generateTask({
+              required: false,
+              id: "optionalTask1",
+              stepNumber: 1,
+            }),
+            generateTask({
+              required: true,
+              id: "requiredTask2",
+              stepNumber: 2,
+            }),
+            generateTask({
+              required: false,
+              id: "optionalTask2",
+              stepNumber: 2,
             }),
           ],
         })
@@ -235,16 +237,19 @@ describe("<RoadmapSidebarCard />", () => {
       generateRoadmap({
         steps: [
           generateStep({
-            tasks: [
-              generateTask({
-                required: true,
-                id: "Task1",
-              }),
-              generateTask({
-                required: false,
-                id: "Task2",
-              }),
-            ],
+            stepNumber: 1,
+          }),
+        ],
+        tasks: [
+          generateTask({
+            stepNumber: 1,
+            required: true,
+            id: "Task1",
+          }),
+          generateTask({
+            stepNumber: 1,
+            required: false,
+            id: "Task2",
           }),
         ],
       })
@@ -271,16 +276,19 @@ describe("<RoadmapSidebarCard />", () => {
       generateRoadmap({
         steps: [
           generateStep({
-            tasks: [
-              generateTask({
-                required: true,
-                id: "Task1",
-              }),
-              generateTask({
-                required: false,
-                id: "Task2",
-              }),
-            ],
+            stepNumber: 1,
+          }),
+        ],
+        tasks: [
+          generateTask({
+            stepNumber: 1,
+            required: true,
+            id: "Task1",
+          }),
+          generateTask({
+            stepNumber: 1,
+            required: false,
+            id: "Task2",
           }),
         ],
       })
@@ -298,18 +306,17 @@ describe("<RoadmapSidebarCard />", () => {
     useMockUserData(generateUserData({}));
     useMockRoadmap(
       generateRoadmap({
-        steps: [
-          generateStep({
-            tasks: [
-              generateTask({
-                required: true,
-                id: "Task1",
-              }),
-              generateTask({
-                required: false,
-                id: "Task2",
-              }),
-            ],
+        steps: [generateStep({ stepNumber: 1 })],
+        tasks: [
+          generateTask({
+            stepNumber: 1,
+            required: true,
+            id: "Task1",
+          }),
+          generateTask({
+            stepNumber: 1,
+            required: false,
+            id: "Task2",
           }),
         ],
       })
