@@ -16,10 +16,7 @@ programFrequency: ongoing
 businessStage: early-stage
 employeesRequired: yes
 homeBased: yes
-mwvb: Bonus months available for workspaces located in an Opportunity Zone,
-  affiliated with a hospital system or New Jersey university, or is recently
-  established. Also, for  registered MWBE companies or a foreign company’s first
-  location in the US.
+mwvb: n/a
 preferenceForOpportunityZone: yes
 county:
   - All

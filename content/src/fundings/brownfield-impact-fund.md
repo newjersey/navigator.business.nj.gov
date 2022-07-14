@@ -16,8 +16,7 @@ programFrequency: one-time
 businessStage: both
 employeesRequired: n/a
 homeBased: no
-mwvb: Limited to NJDEP designated Community Collaborative Initiative cities for
-  the first 90 days after launch, then open to all communities state-wide
+mwvb: n/a
 preferenceForOpportunityZone: ""
 county:
   - All

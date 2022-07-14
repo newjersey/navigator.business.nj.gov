@@ -16,7 +16,7 @@ programFrequency: reoccuring
 businessStage: operating
 employeesRequired: n/a
 homeBased: no
-mwvb: Diversity Bonus available
+mwvb: n/a
 preferenceForOpportunityZone: ""
 county:
   - All

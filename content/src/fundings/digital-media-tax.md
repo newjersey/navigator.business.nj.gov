@@ -16,7 +16,7 @@ programFrequency: reoccuring
 businessStage: operating
 employeesRequired: n/a
 homeBased: yes
-mwvb: Bonuses for projects that submit an approved diversity plan.
+mwvb: n/a
 preferenceForOpportunityZone: ""
 county:
   - Atlantic

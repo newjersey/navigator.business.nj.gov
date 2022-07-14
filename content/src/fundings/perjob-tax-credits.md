@@ -14,7 +14,7 @@ programFrequency: other
 businessStage: operating
 employeesRequired: yes
 homeBased: no
-mwvb: Bonuses available based on business size, industry, and other project details
+mwvb: n/a
 preferenceForOpportunityZone: ""
 county:
   - All

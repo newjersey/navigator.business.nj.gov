@@ -649,7 +649,10 @@ collections:
         widget: "select"
         options: ["yes", "no", "unknown"]
         default: "unknown"
-      - { label: "MWVB", name: "mwvb", widget: "string", required: false }
+      - label: "MWVB"
+        name: "mwvb"
+        widget: "select"
+        options: ["n/a", "m/wbe", "dvob", "vob", "sbe"]
       - label: "Preference for Opportunity Zone"
         name: "preferenceForOpportunityZone"
         widget: "select"
@@ -783,7 +786,10 @@ collections:
         widget: "select"
         options: ["yes", "no", "unknown"]
         default: "unknown"
-      - { label: "MWVB", name: "mwvb", widget: "string", required: false }
+      - label: "MWVB"
+        name: "mwvb"
+        widget: "select"
+        options: ["n/a", "m/wbe", "dvob", "vob", "sbe"]
       - label: "Preference for Opportunity Zone"
         name: "preferenceForOpportunityZone"
         widget: "select"

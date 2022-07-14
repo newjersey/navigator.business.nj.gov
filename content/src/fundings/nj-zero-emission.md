@@ -16,7 +16,7 @@ programFrequency: pilot
 businessStage: operating
 employeesRequired: n/a
 homeBased: yes
-mwvb: Bonuses available for MWBEs, VOB, small businesses (does not need to be SBE)
+mwvb: n/a
 preferenceForOpportunityZone: ""
 county:
   - All

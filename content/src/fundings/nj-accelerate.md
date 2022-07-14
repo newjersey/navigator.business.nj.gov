@@ -16,8 +16,7 @@ programFrequency: ongoing
 businessStage: early-stage
 employeesRequired: n/a
 homeBased: yes
-mwvb: Bonuses available for accelerator programs with a diversity focus as well
-  as mwbe
+mwvb: n/a
 preferenceForOpportunityZone: ""
 county:
   - All
