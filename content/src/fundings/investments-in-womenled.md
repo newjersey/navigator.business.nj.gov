@@ -6,7 +6,7 @@ id: investments-in-women-led-startups
 callToActionLink: http://www.njeda.com/goldenseeds
 callToActionText: Learn more
 fundingType: technical assistance
-programPurpose: Retention
+programPurpose: In State
 agency:
   - NJEDA
 agencyContact: ""

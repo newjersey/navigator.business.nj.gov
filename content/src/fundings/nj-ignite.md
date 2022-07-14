@@ -6,7 +6,7 @@ id: nj-ignite
 callToActionLink: https://www.njeda.com/njignite
 callToActionText: Learn more
 fundingType: grant
-programPurpose: Retention
+programPurpose: In State
 agency:
   - NJEDA
 agencyContact: ""

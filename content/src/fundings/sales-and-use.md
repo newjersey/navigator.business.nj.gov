@@ -6,7 +6,7 @@ id: sales-and-use-tax-exemption-program
 callToActionLink: https://www.njeda.com/stx/
 callToActionText: Learn more
 fundingType: tax exemption
-programPurpose: Retention
+programPurpose: In State
 agency:
   - NJEDA
 agencyContact: ""

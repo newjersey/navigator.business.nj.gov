@@ -6,7 +6,7 @@ id: nj-zero-emission-incentive-program-njzip
 callToActionLink: https://www.njeda.com/njzip.
 callToActionText: Learn more
 fundingType: grant
-programPurpose: Retention
+programPurpose: In State
 agency:
   - NJEDA
 agencyContact: ""

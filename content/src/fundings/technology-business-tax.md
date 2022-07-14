@@ -7,7 +7,7 @@ id: technology-business-tax-certificate-transfer-nol-program-[formerly-net-opera
 callToActionLink: https://www.njeda.com/nol/
 callToActionText: Learn more
 fundingType: tax credit
-programPurpose: Retention
+programPurpose: In State
 agency:
   - NJEDA
 agencyContact: ""

@@ -6,7 +6,7 @@ id: return-and-earn-employer-grants-for-hiring-unemployed
 callToActionLink: https://www.nj.gov/labor/employer-services/business/returnandearn.shtml
 callToActionText: Learn more
 fundingType: grant
-programPurpose: Retention
+programPurpose: In State
 agency:
   - NJDOL
 agencyContact: ""

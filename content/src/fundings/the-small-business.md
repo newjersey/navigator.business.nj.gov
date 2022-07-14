@@ -6,7 +6,7 @@ id: the-small-business-bonding-readiness-assistance-program
 callToActionLink: https://www.aaccnj.com/bonding-program---sbbrap.html
 callToActionText: Learn more
 fundingType: technical assistance
-programPurpose: Retention
+programPurpose: In State
 agency:
   - NJEDA
 agencyContact: ""

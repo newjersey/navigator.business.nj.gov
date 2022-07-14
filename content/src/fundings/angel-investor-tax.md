@@ -6,7 +6,7 @@ id: angel-investor-tax-credit-program
 callToActionLink: https://www.njeda.com/angeltaxcredit/
 callToActionText: Learn more
 fundingType: tax credit
-programPurpose: Retention
+programPurpose: In State
 agency:
   - NJEDA
 agencyContact: ""

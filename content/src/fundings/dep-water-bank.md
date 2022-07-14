@@ -6,7 +6,7 @@ id: dep-water-bank
 callToActionLink: https://nj.gov/dep/wiip/water-bank.html
 callToActionText: Learn More
 fundingType: loan
-programPurpose: Action Related Reward
+programPurpose: Both
 agency:
   - NJDEP
 agencyContact: ""

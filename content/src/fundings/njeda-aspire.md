@@ -6,7 +6,7 @@ id: njeda-aspire
 callToActionLink: https://www.njeda.com/aspire/
 callToActionText: Learn More
 fundingType: tax credit
-programPurpose: Action Related Reward
+programPurpose: Both
 agency:
   - NJEDA
 agencyContact: ""

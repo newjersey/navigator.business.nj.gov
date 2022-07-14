@@ -6,7 +6,7 @@ id: dep-vehicle-charging
 callToActionLink: https://www.nj.gov/dep/grantandloanprograms/aqes-evcharge.htm
 callToActionText: Learn More
 fundingType: grant
-programPurpose: Retention
+programPurpose: In State
 agency:
   - NJDEP
 agencyContact: ""

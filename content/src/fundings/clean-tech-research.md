@@ -6,7 +6,7 @@ id: clean-tech-research-development-rd-voucher-program
 callToActionLink: https://www.njeda.com/cleantechvoucher/
 callToActionText: Learn more
 fundingType: grant
-programPurpose: Retention
+programPurpose: In State
 agency:
   - NJEDA
 agencyContact: ""

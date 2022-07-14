@@ -6,7 +6,7 @@ id: research-with-nj
 callToActionLink: www.researchwithnj.com
 callToActionText: Learn More
 fundingType: technical assistance
-programPurpose: Action Related Reward
+programPurpose: Both
 agency:
   - NJEDA
 agencyContact: ""

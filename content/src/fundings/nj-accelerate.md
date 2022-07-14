@@ -6,7 +6,7 @@ id: nj-accelerate
 callToActionLink: https://www.njeda.com/njaccelerate/
 callToActionText: Learn more
 fundingType: loan
-programPurpose: Action Related Reward
+programPurpose: Both
 agency:
   - NJEDA
 agencyContact: ""

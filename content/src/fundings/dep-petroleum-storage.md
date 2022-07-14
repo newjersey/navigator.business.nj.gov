@@ -6,7 +6,7 @@ id: dep-petroleum-storage
 callToActionLink: https://www.nj.gov/dep/grantandloanprograms/sr_ustru.htm
 callToActionText: Learn More
 fundingType: grant
-programPurpose: Retention
+programPurpose: In State
 agency:
   - NJDEP
 agencyContact: ""

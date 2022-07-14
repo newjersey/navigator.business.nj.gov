@@ -6,7 +6,7 @@ id: njeda-rd-voucher
 callToActionLink: https://www.njeda.com/catalyst-voucher/
 callToActionText: Learn More
 fundingType: grant
-programPurpose: Retention
+programPurpose: In State
 agency:
   - NJEDA
 agencyContact: ""

@@ -6,7 +6,7 @@ id: direct-loans
 callToActionLink: https://www.njeda.com/directloans/
 callToActionText: Learn more
 fundingType: loan
-programPurpose: Action Related Reward
+programPurpose: Both
 agency:
   - NJEDA
 agencyContact: ""

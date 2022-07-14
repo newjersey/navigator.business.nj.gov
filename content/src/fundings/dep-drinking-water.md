@@ -6,7 +6,7 @@ id: dep-drinking-water
 callToActionLink: https://www.nj.gov/dep/grantandloanprograms/lu_dwsrf.htm
 callToActionText: Learn More
 fundingType: loan
-programPurpose: Retention
+programPurpose: In State
 agency:
   - NJDEP
 agencyContact: ""
