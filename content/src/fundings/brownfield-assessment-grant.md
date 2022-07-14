@@ -6,7 +6,7 @@ id: brownfield-assessment-grant
 callToActionLink: https://www.njeda.com/community%20revitalization/
 callToActionText: Learn more
 fundingType: grant
-programPurpose: Retention
+programPurpose: In State
 agency:
   - NJEDA
 agencyContact: ""

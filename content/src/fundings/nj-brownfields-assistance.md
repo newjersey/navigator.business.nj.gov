@@ -6,7 +6,7 @@ id: nj-brownfields-assistance-center-njit
 callToActionLink: www.njit.edu/njbrownfields
 callToActionText: Learn More
 fundingType: technical assistance
-programPurpose: Retention
+programPurpose: In State
 agency:
   - NJEDA
 agencyContact: ""

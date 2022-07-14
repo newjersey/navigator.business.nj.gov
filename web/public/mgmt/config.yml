@@ -609,7 +609,7 @@ collections:
       - label: "Program Purpose"
         name: "programPurpose"
         widget: "select"
-        options: ["Retention", "Attraction", "Action Related Reward"]
+        options: ["In State", "Out of State", "Both"]
         required: false
       - label: "Agency"
         name: "agency"
@@ -747,7 +747,7 @@ collections:
       - label: "Program Purpose"
         name: "programPurpose"
         widget: "select"
-        options: ["Retention", "Attraction", "Action Related Reward"]
+        options: ["In State", "Out of State", "Both"]
         required: false
       - label: "Agency"
         name: "agency"

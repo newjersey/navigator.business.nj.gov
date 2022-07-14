@@ -6,7 +6,7 @@ id: new-jersey-founders-funders
 callToActionLink: ""
 callToActionText: ""
 fundingType: technical assistance
-programPurpose: Retention
+programPurpose: In State
 agency:
   - NJEDA
 agencyContact: ""

@@ -6,7 +6,7 @@ id: premier-lender-program
 callToActionLink: https://www.njeda.com/premierlender/
 callToActionText: Learn more
 fundingType: loan
-programPurpose: Action Related Reward
+programPurpose: Both
 agency:
   - NJEDA
 agencyContact: ""

@@ -6,7 +6,7 @@ id: brownfield-impact-fund-usepa-rlf
 callToActionLink: https://www.njeda.com/brownfieldsimpactfund/
 callToActionText: Learn more
 fundingType: loan
-programPurpose: Retention
+programPurpose: In State
 agency:
   - NJEDA
 agencyContact: ""

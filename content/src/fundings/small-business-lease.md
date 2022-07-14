@@ -6,7 +6,7 @@ id: small-business-lease-grant
 callToActionLink: https://www.njeda.com/small-business-lease-grant-program/
 callToActionText: Learn more
 fundingType: grant
-programPurpose: Action Related Reward
+programPurpose: Both
 agency:
   - NJEDA
 agencyContact: ""

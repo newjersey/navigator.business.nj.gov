@@ -6,7 +6,7 @@ id: njeda-historic-property
 callToActionLink: https://www.njeda.com/historic-property-reinvestment-program/
 callToActionText: Learn More
 fundingType: tax credit
-programPurpose: Retention
+programPurpose: In State
 agency:
   - NJEDA
 agencyContact: ""

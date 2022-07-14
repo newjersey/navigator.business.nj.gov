@@ -6,7 +6,7 @@ id: hazardous-discharge-site-remediation-fund
 callToActionLink: https://www.nj.gov/dep/srp/finance/hdsrf/
 callToActionText: Learn more
 fundingType: loan
-programPurpose: Retention
+programPurpose: In State
 agency:
   - NJEDA
 agencyContact: ""

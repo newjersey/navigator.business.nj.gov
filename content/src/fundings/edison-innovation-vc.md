@@ -6,7 +6,7 @@ id: edison-innovation-vc-growth
 callToActionLink: https://www.njeda.com/edisoninnovation/
 callToActionText: Learn more
 fundingType: loan
-programPurpose: Retention
+programPurpose: In State
 agency:
   - NJEDA
 agencyContact: ""

@@ -6,7 +6,7 @@ id: bond-financing
 callToActionLink: https://www.njeda.com/bondfinancing/
 callToActionText: Learn more
 fundingType: loan
-programPurpose: Action Related Reward
+programPurpose: Both
 agency:
   - NJEDA
 agencyContact: ""

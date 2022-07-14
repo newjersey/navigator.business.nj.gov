@@ -6,7 +6,7 @@ id: venture-fund-investments
 callToActionLink: https://www.njeda.com/venturefunds/
 callToActionText: Learn more
 fundingType: loan
-programPurpose: Action Related Reward
+programPurpose: Both
 agency:
   - NJEDA
 agencyContact: ""

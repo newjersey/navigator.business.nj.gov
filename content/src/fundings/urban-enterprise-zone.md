@@ -6,7 +6,7 @@ id: urban-enterprise-zone-manufacturers-energy-sales-tax-exemption
 callToActionLink: https://www.njeda.com/uez/
 callToActionText: Learn more
 fundingType: tax exemption
-programPurpose: Retention
+programPurpose: In State
 agency:
   - NJEDA
 agencyContact: ""

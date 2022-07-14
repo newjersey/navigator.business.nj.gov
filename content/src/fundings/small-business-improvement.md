@@ -6,7 +6,7 @@ id: small-business-improvement-grant
 callToActionLink: https://www.njeda.com/small-business-improvement-grant/
 callToActionText: Learn more
 fundingType: grant
-programPurpose: Retention
+programPurpose: In State
 agency:
   - NJEDA
 agencyContact: ""

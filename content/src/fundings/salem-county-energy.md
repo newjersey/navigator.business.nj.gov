@@ -6,7 +6,7 @@ id: salem-county-energy-sales-tax-exemption
 callToActionLink: https://www.njeda.com/salem-county-energy-sales-tax-exemption/
 callToActionText: Learn more
 fundingType: tax exemption
-programPurpose: Retention
+programPurpose: In State
 agency:
   - NJEDA
 agencyContact: ""

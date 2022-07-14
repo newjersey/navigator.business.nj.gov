@@ -6,7 +6,7 @@ id: opportunity-partnership-find-skilled-employees
 callToActionLink: https://www.nj.gov/labor/employer-services/business/businessprograms.shtml?open=specialty
 callToActionText: Learn more
 fundingType: grant
-programPurpose: Retention
+programPurpose: In State
 agency:
   - NJDOL
 agencyContact: ""

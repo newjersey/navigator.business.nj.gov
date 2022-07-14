@@ -6,7 +6,7 @@ id: film-tax-credit-program
 callToActionLink: https://www.njeda.com/film
 callToActionText: Learn more
 fundingType: tax credit
-programPurpose: Action Related Reward
+programPurpose: Both
 agency:
   - NJEDA
 agencyContact: ""

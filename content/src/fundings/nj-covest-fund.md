@@ -6,7 +6,7 @@ id: nj-covest-fund
 callToActionLink: https://www.njeda.com/njcovestfund/
 callToActionText: Learn more
 fundingType: loan
-programPurpose: Retention
+programPurpose: In State
 agency:
   - NJEDA
 agencyContact: ""
