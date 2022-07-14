@@ -26,7 +26,7 @@ describe("<MgmtAuth />", () => {
 
   it("matches the snapshot", () => {
     expect(
-      <MgmtAuth password={password} setPassword={setPassword} setIsAuthed={setIsAuthed} />
+      render(<MgmtAuth password={password} setPassword={setPassword} setIsAuthed={setIsAuthed} />).baseElement
     ).toMatchSnapshot();
   });
 
@@ -46,6 +46,17 @@ describe("<MgmtAuth />", () => {
     const pwField = screen.getByTestId("mgmt-password-field");
     fireEvent.change(pwField, { target: { value: "1234" } });
     fireEvent.click(screen.getByTestId("mgmt-submit-bttn"));
+    await waitFor(() => expect(mockApi.post).toHaveBeenCalled());
+    expect(isAuthed).toEqual(true);
+  });
+
+  it("submits the form when clicking enter", async () => {
+    mockApi.post.mockReturnValue(Promise.resolve());
+
+    render(<MgmtAuth password={password} setPassword={setPassword} setIsAuthed={setIsAuthed} />);
+    const pwField = screen.getByTestId("mgmt-password-field");
+    fireEvent.change(pwField, { target: { value: "1234" } });
+    fireEvent.keyPress(pwField, { key: "Enter", keyCode: 13 });
     await waitFor(() => expect(mockApi.post).toHaveBeenCalled());
     expect(isAuthed).toEqual(true);
   });
