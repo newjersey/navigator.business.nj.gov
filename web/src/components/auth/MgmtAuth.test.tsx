@@ -26,7 +26,7 @@ describe("<MgmtAuth />", () => {
 
   it("matches the snapshot", () => {
     expect(
-      <MgmtAuth password={password} setPassword={setPassword} setIsAuthed={setIsAuthed} />
+      render(<MgmtAuth password={password} setPassword={setPassword} setIsAuthed={setIsAuthed} />).baseElement
     ).toMatchSnapshot();
   });
 
