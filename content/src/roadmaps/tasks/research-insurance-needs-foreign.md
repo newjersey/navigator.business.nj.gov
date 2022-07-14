@@ -19,5 +19,4 @@ It may be time to update your insurance policy to ensure it protects your busine
 
 > **Once completed, you will have:**
 >
->  * A Commerical General Liability insurance policy
->  * A Worker's Compensation insurance policy (if applicable)
+>  * A Certificate of Insurance with coverage in New Jersey
