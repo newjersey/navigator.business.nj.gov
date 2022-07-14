@@ -1,3 +1,10 @@
+# [4.2.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v4.1.0...v4.2.0) (2022-07-13)
+
+
+### Features
+
+* [[#182374961](https://github.com/newjersey/navigator.business.nj.gov/issues/182374961)] nexus business profile ([933450a](https://github.com/newjersey/navigator.business.nj.gov/commit/933450addc922aa1a269270d58038122711073dd))
+
 # [4.1.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v4.0.0...v4.1.0) (2022-07-12)
 
 
