@@ -53,7 +53,7 @@ export const templateEval = (template: string, args: Record<string, string>): st
 };
 
 export const getTaskFromRoadmap = (roadmap: Roadmap | undefined, taskId: string): Task | undefined =>
-  stepInRoadmap(roadmap, taskId)?.tasks.find((task) => task.id === taskId);
+  roadmap?.tasks.find((task) => task.id === taskId);
 
 export const getSectionCompletion = (
   roadmap: Roadmap | undefined,
@@ -125,11 +125,18 @@ export const scrollToTop = (): void => {
   window.scrollTo(0, 0);
 };
 
-export const isStepCompleted = (step: Step, userData: UserData | undefined): boolean => {
-  return step.tasks.every((it) => {
-    const taskProgress = (userData?.taskProgress && userData.taskProgress[it.id]) || "NOT_STARTED";
-    return taskProgress === "COMPLETED";
-  });
+export const isStepCompleted = (
+  roadmap: Roadmap | undefined,
+  step: Step,
+  userData: UserData | undefined
+): boolean => {
+  if (!roadmap) {
+    return false;
+  }
+  return roadmap.tasks.every(
+    (currentTask) =>
+      currentTask.stepNumber == step.stepNumber && userData?.taskProgress[currentTask.id] !== "COMPLETED"
+  );
 };
 
 interface AlertProps {
@@ -180,11 +187,7 @@ export const validateEmail = (email: string): boolean => {
 
 export const getUrlSlugs = (roadmap: Roadmap | undefined): string[] => {
   if (!roadmap) return [];
-  const { steps } = roadmap;
-  return steps.reduce((acc: string[], currStep: Step) => {
-    const { tasks } = currStep;
-    return [...acc, ...tasks.map((task) => task.urlSlug)];
-  }, []);
+  return roadmap.tasks.map((task) => task.urlSlug);
 };
 
 export const setHeaderRole = (
@@ -247,14 +250,17 @@ export const camelCaseToSnakeCase = (text: string): string => {
 };
 
 const sectionsToTasksMap = (roadmap: Roadmap | undefined): Record<SectionType, Task[]> | undefined =>
-  roadmap?.steps.reduce((accumulator, currentValue: Step) => {
-    accumulator[currentValue.section] = [...(accumulator[currentValue.section] || []), ...currentValue.tasks];
+  roadmap?.steps.reduce((accumulator, currentStep: Step) => {
+    const currentStepTasks = roadmap.tasks.filter((task) => task.stepNumber === currentStep.stepNumber);
+    accumulator[currentStep.section] = [...(accumulator[currentStep.section] || []), ...currentStepTasks];
     return accumulator;
   }, {} as Record<SectionType, Task[]>);
 
-const stepInRoadmap = (roadmap: Roadmap | undefined, taskId: string): Step | undefined =>
-  roadmap?.steps.find((step) => step.tasks.find((task) => task.id === taskId));
-
+const stepInRoadmap = (roadmap: Roadmap | undefined, taskId: string): Step | undefined => {
+  const taskAtHand = roadmap?.tasks.find((task) => task.id === taskId);
+  if (!taskAtHand) return;
+  return roadmap?.steps.find((step) => step.stepNumber === taskAtHand.stepNumber);
+};
 export const splitAndBoldSearchText = (displayText: string, searchText: string): ReactElement => {
   const index = displayText.toLowerCase().indexOf(searchText.toLowerCase());
   if (index >= 0) {

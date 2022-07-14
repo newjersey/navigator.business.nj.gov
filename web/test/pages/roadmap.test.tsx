@@ -146,12 +146,17 @@ describe("roadmap page", () => {
         generateStep({
           name: "step1",
           timeEstimate: "1-2 weeks",
-          tasks: [generateTask({ name: "task1" }), generateTask({ name: "task2" })],
+          stepNumber: 1,
         }),
         generateStep({
           name: "step2",
-          tasks: [generateTask({ name: "task3" })],
+          stepNumber: 2,
         }),
+      ],
+      tasks: [
+        generateTask({ name: "task1", stepNumber: 1 }),
+        generateTask({ name: "task2", stepNumber: 1 }),
+        generateTask({ name: "task3", stepNumber: 2 }),
       ],
     });
 
@@ -172,12 +177,17 @@ describe("roadmap page", () => {
         generateStep({
           name: "step1",
           timeEstimate: "1-2 weeks",
-          tasks: [generateTask({ id: "task1", name: "task1" }), generateTask({ id: "task2", name: "task2" })],
+          stepNumber: 1,
         }),
         generateStep({
           name: "step2",
-          tasks: [generateTask({ id: "task3", name: "task3" })],
+          stepNumber: 2,
         }),
+      ],
+      tasks: [
+        generateTask({ id: "task1", name: "task1", stepNumber: 1 }),
+        generateTask({ id: "task2", name: "task2", stepNumber: 1 }),
+        generateTask({ id: "task3", name: "task3", stepNumber: 2 }),
       ],
     });
 

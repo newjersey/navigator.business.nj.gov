@@ -7,7 +7,6 @@ import {
   generateMunicipalityDetail,
   generateProfileData,
   generateRoadmap,
-  generateStep,
   generateTask,
 } from "@/test/factories";
 import { getLastCalledWith } from "@/test/helpers";
@@ -94,17 +93,13 @@ describe("buildUserRoadmap", () => {
     it("removes register-for-ein task from roadmap for nexus", async () => {
       mockRoadmapBuilder.mockResolvedValue(
         generateRoadmap({
-          steps: [
-            generateStep({
-              tasks: [generateTask({ id: "register-for-ein" })],
-            }),
-          ],
+          tasks: [generateTask({ id: "register-for-ein" })],
         })
       );
 
       const profileData = createEmptyNexusProfile({ industryId: "cannabis" });
       const roadmap = await buildUserRoadmap(profileData);
-      expect(roadmap.steps[0].tasks).toHaveLength(0);
+      expect(roadmap.tasks).toHaveLength(0);
     });
 
     it("adds scorp-ccorp-foreign for S-Corp/C-Corp legal structures", async () => {
@@ -434,18 +429,15 @@ describe("buildUserRoadmap", () => {
 
       mockRoadmapBuilder.mockResolvedValue(
         generateRoadmap({
-          steps: [
-            generateStep({
-              tasks: [
-                generateTask({
-                  callToActionLink: "${municipalityWebsite}",
-                  callToActionText: "Visit the ${municipality} Website",
-                  contentMd:
-                    "You can find your city or town clerk through either " +
-                    "the [${municipality} website](${municipalityWebsite}) or by contacting " +
-                    "your [county clerk](${countyClerkWebsite}) at ${countyClerkPhone}.",
-                }),
-              ],
+          tasks: [
+            generateTask({
+              callToActionLink: "${municipalityWebsite}",
+              callToActionText: "Visit the ${municipality} Website",
+              stepNumber: 1,
+              contentMd:
+                "You can find your city or town clerk through either " +
+                "the [${municipality} website](${municipalityWebsite}) or by contacting " +
+                "your [county clerk](${countyClerkWebsite}) at ${countyClerkPhone}.",
             }),
           ],
         })
@@ -454,7 +446,7 @@ describe("buildUserRoadmap", () => {
       const onboardingData = generateStartingProfile({ municipality: generateMunicipality({ id: "1234" }) });
       const roadmap = await buildUserRoadmap(onboardingData);
 
-      const municipalityTask = roadmap.steps[0].tasks[0];
+      const municipalityTask = roadmap.tasks[0];
       expect(municipalityTask.callToActionLink).toEqual("www.cooltown.com");
       expect(municipalityTask.callToActionText).toEqual("Visit the Cool Town Website");
       expect(municipalityTask.contentMd).toEqual(
@@ -467,18 +459,14 @@ describe("buildUserRoadmap", () => {
     it("replaces placeholders with empty text if user has no municipality", async () => {
       mockRoadmapBuilder.mockResolvedValue(
         generateRoadmap({
-          steps: [
-            generateStep({
-              tasks: [
-                generateTask({
-                  callToActionLink: "${municipalityWebsite}",
-                  callToActionText: "Visit the ${municipality} Website",
-                  contentMd:
-                    "You can find your city or town clerk through either " +
-                    "the [${municipality} website](${municipalityWebsite}) or by contacting " +
-                    "your [county clerk](${countyClerkWebsite}) at ${countyClerkPhone}.",
-                }),
-              ],
+          tasks: [
+            generateTask({
+              callToActionLink: "${municipalityWebsite}",
+              callToActionText: "Visit the ${municipality} Website",
+              contentMd:
+                "You can find your city or town clerk through either " +
+                "the [${municipality} website](${municipalityWebsite}) or by contacting " +
+                "your [county clerk](${countyClerkWebsite}) at ${countyClerkPhone}.",
             }),
           ],
         })
@@ -487,7 +475,7 @@ describe("buildUserRoadmap", () => {
       const onboardingData = generateStartingProfile({ municipality: undefined });
       const roadmap = await buildUserRoadmap(onboardingData);
 
-      const municipalityTask = roadmap.steps[0].tasks[0];
+      const municipalityTask = roadmap.tasks[0];
       expect(municipalityTask.callToActionLink).toEqual("");
       expect(municipalityTask.callToActionText).toEqual("Visit the  Website");
       expect(municipalityTask.contentMd).toEqual(
@@ -502,18 +490,14 @@ describe("buildUserRoadmap", () => {
     it("replaces placeholder with user NAICS code", async () => {
       mockRoadmapBuilder.mockResolvedValue(
         generateRoadmap({
-          steps: [
-            generateStep({
-              tasks: [generateTask({ contentMd: "NAICS code ${naicsCode}" })],
-            }),
-          ],
+          tasks: [generateTask({ contentMd: "NAICS code ${naicsCode}" })],
         })
       );
 
       const profileData = generateStartingProfile({ naicsCode: "123456" });
       const roadmap = await buildUserRoadmap(profileData);
 
-      const task = roadmap.steps[0].tasks[0];
+      const task = roadmap.tasks[0];
       const expectedTemplate = templateEval(Config.determineNaicsCode.registerForTaxesNAICSCodePlaceholder, {
         naicsCode: "123456",
       });
@@ -527,13 +511,9 @@ describe("buildUserRoadmap", () => {
 
       mockRoadmapBuilder.mockResolvedValue(
         generateRoadmap({
-          steps: [
-            generateStep({
-              tasks: [
-                generateTask({ contentMd: "NAICS code ${naicsCode}" }),
-                generateTask({ contentMd: "Visit the ${municipality} Website" }),
-              ],
-            }),
+          tasks: [
+            generateTask({ contentMd: "NAICS code ${naicsCode}" }),
+            generateTask({ contentMd: "Visit the ${municipality} Website" }),
           ],
         })
       );
@@ -544,8 +524,8 @@ describe("buildUserRoadmap", () => {
       });
       const roadmap = await buildUserRoadmap(profileData);
 
-      const naicsTask = roadmap.steps[0].tasks[0];
-      const municipalityTask = roadmap.steps[0].tasks[1];
+      const naicsTask = roadmap.tasks[0];
+      const municipalityTask = roadmap.tasks[1];
       const expectedTemplate = templateEval(Config.determineNaicsCode.registerForTaxesNAICSCodePlaceholder, {
         naicsCode: "123456",
       });
@@ -556,18 +536,14 @@ describe("buildUserRoadmap", () => {
     it("replaces placeholder with empty text if user has no NAICS code", async () => {
       mockRoadmapBuilder.mockResolvedValue(
         generateRoadmap({
-          steps: [
-            generateStep({
-              tasks: [generateTask({ contentMd: "NAICS code ${naicsCode}" })],
-            }),
-          ],
+          tasks: [generateTask({ contentMd: "NAICS code ${naicsCode}" })],
         })
       );
 
       const profileData = generateStartingProfile({ naicsCode: "" });
       const roadmap = await buildUserRoadmap(profileData);
 
-      const task = roadmap.steps[0].tasks[0];
+      const task = roadmap.tasks[0];
       expect(task.contentMd).toEqual(
         `NAICS code ${Config.determineNaicsCode.registerForTaxesMissingNAICSCodePlaceholder}`
       );

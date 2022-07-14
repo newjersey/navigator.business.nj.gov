@@ -40,21 +40,15 @@ export const RoadmapSidebarCard = (props: Props) => {
 
   const totalTasks = (): number => {
     if (!roadmap) return 1;
-    let totalSumOfTasks = 0;
-    for (const step of roadmap.steps) {
-      totalSumOfTasks += step.tasks.length;
-    }
-    return totalSumOfTasks;
+    return roadmap.tasks.length;
   };
 
   const tasksCompleted = (): number => {
     if (!userData || !roadmap) return 0;
     let totalTasksCompleted = 0;
-    for (const step of roadmap.steps) {
-      for (const task of step.tasks) {
-        if (userData.taskProgress[task.id] === "COMPLETED") {
-          totalTasksCompleted += 1;
-        }
+    for (const task of roadmap.tasks) {
+      if (userData.taskProgress[task.id] === "COMPLETED") {
+        totalTasksCompleted += 1;
       }
     }
     return totalTasksCompleted;
@@ -67,10 +61,8 @@ export const RoadmapSidebarCard = (props: Props) => {
     let incompleteRequiredTotalTaskCount = 0;
     const optionalTasksIds: string[] = [];
     const requiredTasksIds: string[] = [];
-    for (const step of roadmap.steps) {
-      for (const task of step.tasks) {
-        task.required ? requiredTasksIds.push(task.id) : optionalTasksIds.push(task.id);
-      }
+    for (const task of roadmap.tasks) {
+      task.required ? requiredTasksIds.push(task.id) : optionalTasksIds.push(task.id);
     }
 
     for (const id of optionalTasksIds) {

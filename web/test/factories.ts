@@ -212,6 +212,7 @@ export const generatePreferences = (overrides: Partial<Preferences>): Preference
 export const generateRoadmap = (overrides: Partial<Roadmap>): Roadmap => {
   return {
     steps: [generateStep({})],
+    tasks: [generateTask({})],
     ...overrides,
   };
 };
@@ -232,11 +233,10 @@ export const generateSectionCompletion = (
 
 export const generateStep = (overrides: Partial<Step>): Step => {
   return {
-    step_number: randomInt(),
+    stepNumber: randomInt(),
     name: `some-name-${randomInt()}`,
     timeEstimate: `some-time-estimate-${randomInt()}`,
     description: `some-description-${randomInt()}`,
-    tasks: [generateTask({})],
     section: generateSectionType(),
     ...overrides,
   };
@@ -248,6 +248,7 @@ export const generateTask = (overrides: Partial<Task>): Task => {
     name: `some-name-${randomInt()}`,
     filename: `some-filename-${randomInt()}`,
     urlSlug: `some-urlSlug-${randomInt()}`,
+    stepNumber: randomInt(),
     callToActionLink: `some-link-${randomInt()}`,
     callToActionText: `some-call-to-action-${randomInt()}`,
     contentMd: `some-content-md-${randomInt()}`,

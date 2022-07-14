@@ -476,7 +476,8 @@ describe("<NavBar />", () => {
         useMockUserData({});
         useMockRoadmap(
           generateRoadmap({
-            steps: [generateStep({ name: "step1", tasks: [generateTask({ name: "task1" })] })],
+            steps: [generateStep({ name: "step1", stepNumber: 1 })],
+            tasks: [generateTask({ name: "task1", stepNumber: 1 })],
           })
         );
         renderMobileTaskNav()();

@@ -110,6 +110,7 @@ describe("task page", () => {
       name: "original name",
       contentMd: "original description",
       callToActionText: "original call to action",
+      stepNumber: 1,
     });
 
     useMockRoadmapTask({
@@ -117,9 +118,11 @@ describe("task page", () => {
       name: "a whole brand new name",
       contentMd: "a whole brand new description",
       callToActionText: "a whole brand new call to action",
+      stepNumber: 1,
     });
 
     renderPage(task);
+
     expect(screen.queryByText("original description")).not.toBeInTheDocument();
     expect(screen.getByText("a whole brand new description")).toBeInTheDocument();
 
@@ -252,17 +255,18 @@ describe("task page", () => {
   });
 
   describe("next and previous task buttons", () => {
-    const taskOne = generateTask({ urlSlug: "task-1" });
-    const taskTwo = generateTask({ urlSlug: "task-2" });
-    const taskThree = generateTask({ urlSlug: "task-3" });
+    const taskOne = generateTask({ urlSlug: "task-1", stepNumber: 1 });
+    const taskTwo = generateTask({ urlSlug: "task-2", stepNumber: 2 });
+    const taskThree = generateTask({ urlSlug: "task-3", stepNumber: 3 });
 
     beforeEach(() => {
       useMockRoadmap({
         steps: [
-          generateStep({ tasks: [taskOne] }),
-          generateStep({ tasks: [taskTwo] }),
-          generateStep({ tasks: [taskThree] }),
+          generateStep({ stepNumber: 1 }),
+          generateStep({ stepNumber: 2 }),
+          generateStep({ stepNumber: 3 }),
         ],
+        tasks: [taskOne, taskTwo, taskThree],
       });
     });
 
@@ -295,16 +299,17 @@ describe("task page", () => {
   });
 
   describe("unlocked-by tasks", () => {
-    const doThisFirstTask = generateTask({ urlSlug: "do-this-first" });
-    const alsoThisOneTask = generateTask({ urlSlug: "also-this-one" });
+    const doThisFirstTask = generateTask({ urlSlug: "do-this-first", stepNumber: 1 });
+    const alsoThisOneTask = generateTask({ urlSlug: "also-this-one", stepNumber: 1 });
 
     const useMockRoadmapWithTask = (task: Task): void => {
       useMockRoadmap({
         steps: [
           generateStep({
-            tasks: [task, doThisFirstTask, alsoThisOneTask],
+            stepNumber: 1,
           }),
         ],
+        tasks: [task, doThisFirstTask, alsoThisOneTask],
       });
     };
 

@@ -1,5 +1,5 @@
 import { fetchTaskByFilename } from "@/lib/async-content-fetchers/fetchTaskByFilename";
-import { Roadmap, SectionType, Step } from "@/lib/types/types";
+import { Roadmap, SectionType } from "@/lib/types/types";
 
 export const buildRoadmap = async ({
   industryId,
@@ -15,8 +15,8 @@ export const buildRoadmap = async ({
   let roadmapBuilder: RoadmapBuilder = {
     steps: results.map((step: GenericStep) => ({
       ...step,
-      tasks: [],
     })),
+    tasks: [],
   };
 
   roadmapBuilder = await (industryId
@@ -26,7 +26,6 @@ export const buildRoadmap = async ({
   while (hasSteps(roadmapBuilder) && lastStepHasNoTasks(roadmapBuilder)) {
     roadmapBuilder = removeLastStep(roadmapBuilder);
   }
-
   return convertToRoadmap(roadmapBuilder);
 };
 
@@ -94,17 +93,21 @@ const importAddOn = async (relativePath: string): Promise<IndustryRoadmap> => {
 };
 
 const orderByWeight = (taskA: TaskBuilder, taskB: TaskBuilder): number => {
-  return taskA.weight > taskB.weight ? 1 : -1;
+  if (taskA.stepNumber == taskB.stepNumber) {
+    return taskA.weight > taskB.weight ? 1 : -1;
+  } else if (taskA.stepNumber > taskB.stepNumber) {
+    return 1;
+  } else {
+    return -1;
+  }
 };
 
 const addTasksFromAddOn = (builder: RoadmapBuilder, addOns: AddOn[]): RoadmapBuilder => {
   for (const addOn of addOns) {
-    const step = builder.steps.find((step) => step.step_number === addOn.step);
-    if (!step) {
-      continue;
-    }
-
-    step.tasks = [...step.tasks, { filename: addOn.task, weight: addOn.weight }];
+    builder.tasks = [
+      ...builder.tasks,
+      { filename: addOn.task, weight: addOn.weight, stepNumber: addOn.step },
+    ];
   }
 
   return builder;
@@ -128,37 +131,27 @@ const findTaskInRoadmapByFilename = (
   roadmapBuilder: RoadmapBuilder,
   taskFilename: string
 ): TaskBuilder | undefined => {
-  for (const step of roadmapBuilder.steps) {
-    const found = step.tasks.find((task) => task.filename === taskFilename);
-    if (found) return found;
-  }
+  return roadmapBuilder.tasks.find((task) => task.filename === taskFilename);
 };
 
 const convertToRoadmap = async (roadmapBuilder: RoadmapBuilder): Promise<Roadmap> => {
   const roadmap = {
-    steps: await Promise.all(
-      roadmapBuilder.steps.map(async (step) => ({
-        ...step,
-        tasks: await Promise.all(
-          step.tasks.sort(orderByWeight).map((task) => fetchTaskByFilename(task.filename))
-        ),
+    steps: roadmapBuilder.steps,
+    tasks: await Promise.all(
+      roadmapBuilder.tasks.sort(orderByWeight).map(async (task: TaskBuilder) => ({
+        ...(await fetchTaskByFilename(task.filename)),
+        stepNumber: task.stepNumber,
       }))
     ),
   };
 
-  const allFilenames = roadmap.steps.reduce(
-    (acc: string[], currStep: Step) => [...acc, ...currStep.tasks.map((task) => task.filename)],
-    []
-  );
+  const allFilenames = new Set(roadmap.tasks.map((task) => task.filename));
 
   return {
     ...roadmap,
-    steps: roadmap.steps.map((step) => ({
-      ...step,
-      tasks: step.tasks.map((task) => ({
-        ...task,
-        unlockedBy: task.unlockedBy.filter((it) => allFilenames.includes(it.filename)),
-      })),
+    tasks: roadmap.tasks.map((task) => ({
+      ...task,
+      unlockedBy: task.unlockedBy.filter((it) => allFilenames.has(it.filename)),
     })),
   };
 };
@@ -168,8 +161,8 @@ const hasSteps = (roadmap: RoadmapBuilder): boolean => {
 };
 
 const lastStepHasNoTasks = (roadmap: RoadmapBuilder): boolean => {
-  const lastStep = roadmap.steps[roadmap.steps.length - 1];
-  return lastStep.tasks.length === 0;
+  const lastStepNumber = roadmap.steps[roadmap.steps.length - 1].stepNumber;
+  return roadmap.tasks.every((task) => task.stepNumber !== lastStepNumber);
 };
 
 const removeLastStep = (roadmapBuilder: RoadmapBuilder): RoadmapBuilder => {
@@ -179,25 +172,26 @@ const removeLastStep = (roadmapBuilder: RoadmapBuilder): RoadmapBuilder => {
 
 interface RoadmapBuilder {
   steps: StepBuilder[];
+  tasks: TaskBuilder[];
 }
 
 interface StepBuilder {
-  step_number: number;
+  stepNumber: number;
   id: string;
   name: string;
   timeEstimate: string;
   section: SectionType;
   description: string;
-  tasks: TaskBuilder[];
 }
 
 interface TaskBuilder {
   filename: string;
   weight: number;
+  stepNumber: number;
 }
 
 interface GenericStep {
-  step_number: number;
+  stepNumber: number;
   id: string;
   name: string;
   section: SectionType;

@@ -98,7 +98,6 @@ export const TaskHeader = (props: Props): ReactElement => {
     const sectionStatusHasChanged =
       updatedSectionCompletion[currentSectionPositions.current] !==
       sectionCompletion[currentSectionPositions.current];
-
     if (sectionStatusHasChanged && updatedSectionCompletion[currentSectionPositions.current]) {
       setNextSection(currentSectionPositions.next);
       setCongratulatoryDialogIsOpen(true);
