@@ -16,8 +16,7 @@ programFrequency: one-time
 businessStage: operating
 employeesRequired: n/a
 homeBased: no
-mwvb: 40% of program funds targeted to census tracts that were eligible to be
-  designated as Opportunity Zones
+mwvb: n/a
 preferenceForOpportunityZone: yes
 county:
   - All

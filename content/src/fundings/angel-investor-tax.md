@@ -16,7 +16,7 @@ programFrequency: reoccuring
 businessStage: early-stage
 employeesRequired: yes
 homeBased: yes
-mwvb: mwbe
+mwvb: m/wbe
 preferenceForOpportunityZone: yes
 county:
   - All

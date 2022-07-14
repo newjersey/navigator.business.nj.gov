@@ -17,9 +17,7 @@ programFrequency: reoccuring
 businessStage: early-stage
 employeesRequired: yes
 homeBased: yes
-mwvb: $10 million set aside for businesses located in Innovation Zones (any
-  unused balance of the $10 million set-aside is reverted to the general program
-  pool)
+mwvb: n/a
 preferenceForOpportunityZone: ""
 county:
   - All
