@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import { MgmtAuth } from "@/components/auth/MgmtAuth";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { PageSkeleton } from "@/components/PageSkeleton";
-import * as apiClient from "@/lib/api-client/apiClient";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getNetlifyConfig } from "@/lib/static/admin/getNetlifyConfig";
 import { flattenObject } from "@/lib/utils/helpers";
@@ -43,19 +43,8 @@ const SearchContentPage = (props: Props): ReactElement => {
     }
   };
 
-  const handlePasswordInput = (event: ChangeEvent<HTMLInputElement>): void => {
-    setPassword(event.target.value);
-  };
-
   const handleSearchInput = (event: ChangeEvent<HTMLInputElement>): void => {
     setSearchTerm(event.target.value);
-  };
-
-  const onPasswordSubmit = (): void => {
-    apiClient
-      .post("/mgmt/auth", { password }, false)
-      .then(() => setIsAuthed(true))
-      .catch(() => {});
   };
 
   const onSearchSubmit = (): void => {
@@ -107,28 +96,6 @@ const SearchContentPage = (props: Props): ReactElement => {
       return acc;
     }, Object.create(null));
   };
-
-  const unauthedView = (
-    <>
-      <h1>Enter admin password:</h1>
-      <label htmlFor="password">Password</label>
-      <TextField
-        fullWidth
-        name="password"
-        variant="outlined"
-        type="password"
-        value={password}
-        onChange={handlePasswordInput}
-        onKeyPress={(event) => handleKeyPress(event, onPasswordSubmit)}
-        inputProps={{
-          id: "password",
-        }}
-      />
-      <button onClick={onPasswordSubmit} className="usa-button margin-top-2">
-        Submit
-      </button>
-    </>
-  );
 
   const groupedMatches = groupMatchesByTopLevel();
 
@@ -182,7 +149,13 @@ const SearchContentPage = (props: Props): ReactElement => {
     <PageSkeleton>
       <NextSeo noindex={true} />
       <main>
-        <SingleColumnContainer>{isAuthed ? authedView : unauthedView}</SingleColumnContainer>
+        <SingleColumnContainer>
+          {isAuthed ? (
+            authedView
+          ) : (
+            <MgmtAuth password={password} setIsAuthed={setIsAuthed} setPassword={setPassword} />
+          )}
+        </SingleColumnContainer>
       </main>
     </PageSkeleton>
   );
