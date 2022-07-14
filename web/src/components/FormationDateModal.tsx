@@ -46,7 +46,11 @@ export const FormationDateModal = (props: Props): ReactElement => {
     }
     const updatedUserData = { ...userData, profileData };
     props.onSave("COMPLETED", updatedUserData);
-    router.push(routeForPersona(userData.profileData.businessPersona));
+
+    router.push({
+      pathname: routeForPersona(userData.profileData.businessPersona),
+      query: { fromFormBusinessEntity: "true" },
+    });
   };
 
   return (

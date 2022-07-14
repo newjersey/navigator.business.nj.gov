@@ -1,3 +1,4 @@
+import { FilingsCalendarAsList } from "@/components/FilingsCalendarAsList";
 import { Header } from "@/components/Header";
 import { LoadingIndicator } from "@/components/LoadingIndicator";
 import { NavBar } from "@/components/navbar/NavBar";
@@ -9,14 +10,14 @@ import { SectionAccordion } from "@/components/roadmap/SectionAccordion";
 import { Step } from "@/components/Step";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { useAuthAlertPage } from "@/lib/auth/useAuthProtectedPage";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { routeForPersona } from "@/lib/domain-logic/routeForPersona";
 import { loadRoadmapDisplayContent } from "@/lib/static/loadDisplayContent";
 import { loadOperateReferences } from "@/lib/static/loadOperateReferences";
 import { OperateReference, RoadmapDisplayContent } from "@/lib/types/types";
-import { getSectionNames, useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
+import { getSectionNames, getTaxFilings, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { GetStaticPropsResult } from "next";
 import { useRouter } from "next/router";
 import { ReactElement, useEffect, useState } from "react";
@@ -31,7 +32,9 @@ const RoadmapPage = (props: Props): ReactElement => {
   const { userData } = useUserData();
   const router = useRouter();
   const { roadmap } = useRoadmap();
-  const [successAlert, setSuccessAlert] = useState<boolean>(false);
+  const { Config } = useConfig();
+  const [profileUpdatedAlert, setProfileUpdatedAlert] = useState<boolean>(false);
+  const [calendarAlert, setCalendarUpdatedAlert] = useState<boolean>(false);
 
   useMountEffectWhenDefined(() => {
     (async () => {
@@ -49,15 +52,17 @@ const RoadmapPage = (props: Props): ReactElement => {
     ) {
       router.replace(routeForPersona(userData?.profileData.businessPersona));
     }
+    if (router.query.success === "true") {
+      setProfileUpdatedAlert(true);
+    }
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [router.isReady, router.query.error, userData?.profileData.businessPersona]);
+    if (router.query.fromFormBusinessEntity === "true") {
+      setCalendarUpdatedAlert(true);
+      router.replace({ pathname: "/roadmap" }, undefined, { shallow: true });
+    }
+  }, [router, userData?.profileData.businessPersona]);
 
-  useEffect(() => {
-    if (!router.isReady) return;
-    const success = router.query.success;
-    setSuccessAlert(success === "true");
-  }, [router.isReady, router.query.success]);
+  const taxFilings = getTaxFilings(userData);
 
   const renderRoadmap = (
     <div className="margin-top-0 desktop:margin-top-0">
@@ -77,6 +82,15 @@ const RoadmapPage = (props: Props): ReactElement => {
                   ))}
               </SectionAccordion>
             ))}
+            {taxFilings.length > 0 && (
+              <div className="margin-top-6 bg-roadmap-blue border-base-lightest border-2px padding-top-3 padding-bottom-1 padding-x-4 radius-lg">
+                <div>
+                  <div className="h3-styling text-normal">{Config.roadmapDefaults.calendarHeader}</div>
+                  <hr className="bg-base-lighter margin-top-0 margin-bottom-4" aria-hidden={true} />
+                  <FilingsCalendarAsList operateReferences={props.operateReferences} />
+                </div>
+              </div>
+            )}
           </>
         )}
       </div>
@@ -100,18 +114,31 @@ const RoadmapPage = (props: Props): ReactElement => {
             }
           />
         )}
-        {successAlert && (
+        {profileUpdatedAlert && (
           <ToastAlert
             variant="success"
-            isOpen={successAlert}
+            isOpen={profileUpdatedAlert}
             close={() => {
-              setSuccessAlert(false);
+              setProfileUpdatedAlert(false);
               router.replace({ pathname: "/roadmap" }, undefined, { shallow: true });
             }}
             heading={Config.profileDefaults.successTextHeader}
-            dataTestid="toast-alert-SUCCESS"
           >
             {Config.profileDefaults.successTextBody}
+          </ToastAlert>
+        )}
+        {calendarAlert && (
+          <ToastAlert
+            variant="success"
+            isOpen={calendarAlert}
+            close={() => {
+              setCalendarUpdatedAlert(false);
+              router.replace({ pathname: "/roadmap" }, undefined, { shallow: true });
+            }}
+            heading={Config.roadmapDefaults.calendarSnackbarHeading}
+            dataTestid="toast-alert-calendar"
+          >
+            {Config.roadmapDefaults.calendarSnackbarBody}
           </ToastAlert>
         )}
       </main>

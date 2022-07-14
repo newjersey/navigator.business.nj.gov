@@ -252,7 +252,10 @@ describe("<TaskHeader />", () => {
         expect(currentUserData().profileData.dateOfFormation).toEqual(date.format("YYYY-MM-DD"))
       );
       expect(currentUserData().taskProgress[id]).toEqual("COMPLETED");
-      expect(mockPush).toHaveBeenCalledWith("/roadmap");
+      expect(mockPush).toHaveBeenCalledWith({
+        pathname: "/roadmap",
+        query: { fromFormBusinessEntity: "true" },
+      });
     });
 
     it("allows a date in the future", async () => {

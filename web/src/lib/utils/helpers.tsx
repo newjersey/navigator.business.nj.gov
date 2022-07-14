@@ -328,3 +328,9 @@ export const flattenObject = (obj: any) => {
     return obj;
   }
 };
+
+export const getTaxFilings = (userData: UserData | undefined) => {
+  return userData != null && userData.profileData.dateOfFormation != null
+    ? userData.taxFilingData.filings
+    : [];
+};
