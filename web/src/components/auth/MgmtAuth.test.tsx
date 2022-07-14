@@ -50,6 +50,17 @@ describe("<MgmtAuth />", () => {
     expect(isAuthed).toEqual(true);
   });
 
+  it("submits the form when clicking enter", async () => {
+    mockApi.post.mockReturnValue(Promise.resolve());
+
+    render(<MgmtAuth password={password} setPassword={setPassword} setIsAuthed={setIsAuthed} />);
+    const pwField = screen.getByTestId("mgmt-password-field");
+    fireEvent.change(pwField, { target: { value: "1234" } });
+    fireEvent.keyPress(pwField, { key: "Enter", keyCode: 13 });
+    await waitFor(() => expect(mockApi.post).toHaveBeenCalled());
+    expect(isAuthed).toEqual(true);
+  });
+
   it("calls the api on submission and doesn't change isAuthed to true on failure", async () => {
     mockApi.post.mockRejectedValue(Promise.resolve());
 

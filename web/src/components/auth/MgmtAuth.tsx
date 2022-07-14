@@ -12,7 +12,7 @@ export const MgmtAuth = (props: Props) => {
   const { password } = props;
 
   const handleKeyPress = (event: KeyboardEvent<HTMLDivElement>): void => {
-    if (event.code === "Enter") {
+    if (event.code === "Enter" || event.key === "Enter") {
       onSubmit();
     }
   };
