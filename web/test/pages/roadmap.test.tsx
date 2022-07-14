@@ -1,13 +1,15 @@
 import { SignUpToast } from "@/components/auth/SignUpToast";
 import { getMergedConfig } from "@/contexts/configContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import { SidebarCardContent } from "@/lib/types/types";
+import { OperateReference, SidebarCardContent } from "@/lib/types/types";
 import RoadmapPage from "@/pages/roadmap";
 import {
   generatePreferences,
+  generateProfileData,
   generateSidebarCardContent,
   generateStep,
   generateTask,
+  generateTaxFiling,
   generateTaxFilingData,
   generateUserData,
 } from "@/test/factories";
@@ -16,7 +18,12 @@ import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { setMockUserDataResponse, useMockProfileData, useMockUserData } from "@/test/mock/mockUseUserData";
 import { setupStatefulUserDataContext, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
-import { RegistrationStatus, UserData } from "@businessnjgovnavigator/shared/";
+import {
+  getCurrentDate,
+  parseDateWithFormat,
+  RegistrationStatus,
+  UserData,
+} from "@businessnjgovnavigator/shared/";
 import * as materialUi from "@mui/material";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import { render, screen, waitFor, within } from "@testing-library/react";
@@ -59,12 +66,17 @@ describe("roadmap page", () => {
 
   const renderRoadmapPage = ({
     sidebarDisplayContent,
+    operateReferences,
   }: {
     sidebarDisplayContent?: Record<string, SidebarCardContent>;
+    operateReferences?: Record<string, OperateReference>;
   }) => {
     render(
       <ThemeProvider theme={createTheme()}>
-        <RoadmapPage operateReferences={{}} displayContent={createDisplayContent(sidebarDisplayContent)} />
+        <RoadmapPage
+          operateReferences={operateReferences ?? {}}
+          displayContent={createDisplayContent(sidebarDisplayContent)}
+        />
       </ThemeProvider>
     );
   };
@@ -268,5 +280,86 @@ describe("roadmap page", () => {
       expect(screen.getByText("WelcomeCardContent")).toBeInTheDocument();
     });
     expect(setAlertIsVisible).toHaveBeenCalledWith(false);
+  });
+
+  it("renders calendar snackbar when fromFormBusinessEntity query parameter is provided", () => {
+    useMockRouter({ isReady: true, query: { fromFormBusinessEntity: "true" } });
+
+    renderRoadmapPage({});
+
+    expect(screen.getByTestId("toast-alert-calendar")).toBeInTheDocument();
+  });
+
+  it("displays filings calendar as list when taxfiling and formation date is populated", () => {
+    const currentDate = getCurrentDate();
+    const dateOfFormation = currentDate.format("YYYY-MM-DD");
+
+    const dueDate = getCurrentDate().add(12, "months");
+    const annualReport = generateTaxFiling({
+      identifier: "annual-report",
+      dueDate: dueDate.format("YYYY-MM-DD"),
+    });
+    useMockUserData({
+      profileData: generateProfileData({ dateOfFormation: dateOfFormation }),
+      taxFilingData: generateTaxFilingData({ filings: [annualReport] }),
+    });
+    const operateReferences: Record<string, OperateReference> = {
+      "annual-report": {
+        name: "Annual Report",
+        urlSlug: "annual-report-url",
+        urlPath: "annual_report-url-path",
+      },
+    };
+    renderRoadmapPage({ operateReferences });
+
+    expect(screen.getByTestId("filings-calendar-as-list")).toBeInTheDocument();
+    expect(screen.getByText(dueDate.format("MMMM D, YYYY"), { exact: false })).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        `Annual Report ${parseDateWithFormat(annualReport.dueDate, "YYYY-MM-DD").format("YYYY")}`
+      )
+    ).toBeInTheDocument();
+  });
+
+  it("does not display filings calendar as list when taxfiling is not populated", () => {
+    const currentDate = getCurrentDate();
+    const dateOfFormation = currentDate.format("YYYY-MM-DD");
+
+    useMockUserData({
+      profileData: generateProfileData({ dateOfFormation: dateOfFormation }),
+      taxFilingData: generateTaxFilingData({ filings: [] }),
+    });
+    const operateReferences: Record<string, OperateReference> = {
+      "annual-report": {
+        name: "Annual Report",
+        urlSlug: "annual-report-url",
+        urlPath: "annual_report-url-path",
+      },
+    };
+    renderRoadmapPage({ operateReferences });
+
+    expect(screen.queryByTestId("filings-calendar-as-list")).not.toBeInTheDocument();
+  });
+
+  it("does not display filings calendar as list when formation data is not populated", () => {
+    const dueDate = getCurrentDate().add(12, "months");
+    const annualReport = generateTaxFiling({
+      identifier: "annual-report",
+      dueDate: dueDate.format("YYYY-MM-DD"),
+    });
+    useMockUserData({
+      profileData: generateProfileData({ dateOfFormation: undefined }),
+      taxFilingData: generateTaxFilingData({ filings: [annualReport] }),
+    });
+    const operateReferences: Record<string, OperateReference> = {
+      "annual-report": {
+        name: "Annual Report",
+        urlSlug: "annual-report-url",
+        urlPath: "annual_report-url-path",
+      },
+    };
+    renderRoadmapPage({ operateReferences });
+
+    expect(screen.queryByTestId("filings-calendar-as-list")).not.toBeInTheDocument();
   });
 });

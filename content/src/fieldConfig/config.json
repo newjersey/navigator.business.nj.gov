@@ -376,7 +376,10 @@
     "congratulatorModalHeader": "You reached a crucial milestone as a business.",
     "congratulatorModalTitle": "You did it!",
     "graduationModalCancelButtonText": "Cancel",
-    "graduationModalTitle": "Tell us more about your business"
+    "graduationModalTitle": "Tell us more about your business",
+    "calendarHeader": "Upcoming",
+    "calendarSnackbarHeading": "Calendar Added!",
+    "calendarSnackbarBody": "You can see your next reporting due date at the bottom of this page."
   },
   "licenseSearchTask": {
     "voluntarySurrenderPermitStatusText": "Voluntary Surrender",

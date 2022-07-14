@@ -1592,6 +1592,8 @@ collections:
               - { label: Calendar Legal Text, name: calendarLegalText, widget: string }
               - { label: Calendar Header, name: calendarHeader, widget: string }
               - { label: Calendar Tooltip, name: calendarTooltip, widget: text }
+              - { label: Calendar Snackbar Heading, name: calendarSnackbarHeading, widget: text }
+              - { label: Calendar Snackbar Body, name: calendarSnackbarBody, widget: text }
               - { label: Back To Roadmap Header, name: backToRoadmapHeader, widget: string }
               - { label: Back To Roadmap Text, name: backToRoadmapText, widget: string }
               - { label: Back To Roadmap Link Text, name: backToRoadmapLinkText, widget: string }
@@ -1911,6 +1913,7 @@ collections:
                 }
               - { label: Graduation Modal Title, name: graduationModalTitle, widget: string }
               - { label: Sidebar Heading, name: sidebarHeading, widget: string }
+              - { label: Calendar Header, name: calendarHeader, widget: string }
           - label: Section Headers
             name: sectionHeaders
             collapsed: true
