@@ -16,12 +16,12 @@ Your Appraisal Management Company must be registered with the State prior to off
 - A panel of 25 or more state-certified or state-licensed appraisers in two or more states
 
 ### Application Requirements
-- Application fully completed by the management company’s Compliance Officer
+- Application fully completed by the management company’s `Compliance Officer|compliance-officer`
 - Name, contact information, and license number for the Compliance Officer
-- Name and contact information for each Controlling Person
-- A surety bond in the amount of $25,000
-- Application must be signed and notarized
+- Name and contact information for each `Controlling Person|controlling-person`
+- A `surety bond|surety-bond` in the amount of $25,000
 - Pay any associated fees
+**Note:** The application must be signed and notarized
 
 >**Once completed you will have:**
 >- Registration number for your Appraisal Management Company
