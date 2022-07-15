@@ -8,7 +8,7 @@ callToActionText: Apply for Your Certification
 required: true
 issuingAgency: New Jersey Division of Consumer Affairs Real Estate Appraiser Board
 ---
-You need to be a Certified Appraiser prior to opening an `Appraiser Management Company|appraiser-management-company`.
+You need to be a Certified Appraiser prior to opening an `Appraisal Management Company|appraisal-management-company`.
 
 ---
 ### Eligibility Criteria
