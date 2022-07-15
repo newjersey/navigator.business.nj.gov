@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
+import { formationTaskId } from "@shared/gradualGraduationStages";
 import { Express } from "express";
 import request from "supertest";
 import {
@@ -158,7 +159,7 @@ describe("formationRouter", () => {
         },
         taskProgress: {
           ...userData.taskProgress,
-          "form-business-entity": "COMPLETED",
+          [formationTaskId]: "COMPLETED",
         },
         profileData: {
           ...userData.profileData,
@@ -238,7 +239,7 @@ describe("formationRouter", () => {
         },
         taskProgress: {
           ...userData.taskProgress,
-          "form-business-entity": "COMPLETED",
+          [formationTaskId]: "COMPLETED",
         },
         profileData: {
           ...userData.profileData,

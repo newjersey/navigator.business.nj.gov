@@ -1,4 +1,5 @@
 import { FormationSubmitResponse, GetFilingResponse } from "@shared/formationData";
+import { formationTaskId } from "@shared/gradualGraduationStages";
 import { ProfileDocuments } from "@shared/profileData";
 import { Router } from "express";
 import { saveFileFromUrl } from "../domain/s3Writer";
@@ -57,7 +58,7 @@ export const formationRouterFactory = (
         };
 
         if (getFilingResponse.success) {
-          taskProgress["form-business-entity"] = "COMPLETED";
+          taskProgress[formationTaskId] = "COMPLETED";
           entityId = getFilingResponse.entityId;
           dateOfFormation = userData.formationData.formationFormData.businessStartDate;
           businessName = userData.formationData.formationFormData.businessName;

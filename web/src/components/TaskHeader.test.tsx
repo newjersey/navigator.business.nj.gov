@@ -18,8 +18,7 @@ import {
   userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { getCurrentDate } from "@businessnjgovnavigator/shared/dateHelpers";
-import { UserData } from "@businessnjgovnavigator/shared/userData";
+import { formationTaskId, getCurrentDate, UserData } from "@businessnjgovnavigator/shared";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { Dayjs } from "dayjs";
@@ -190,20 +189,15 @@ describe("<TaskHeader />", () => {
   });
 
   describe("formation completion", () => {
-    const randomFormationId = () => {
-      const ids = ["form-business-entity-foreign", "form-business-entity"];
-      return ids[Math.floor(Math.random() * ids.length)];
-    };
-
     it("opens formation date modal when task changed to complete", () => {
-      renderTaskHeader(generateTask({ id: randomFormationId() }), generateUserData({}));
+      renderTaskHeader(generateTask({ id: formationTaskId }), generateUserData({}));
       expect(screen.queryByText(Config.formationDateModal.header)).not.toBeInTheDocument();
       selectCompleted();
       expect(screen.getByText(Config.formationDateModal.header)).toBeInTheDocument();
     });
 
     it("does not open modal when task changed to unstarted or in-progress", () => {
-      renderTaskHeader(generateTask({ id: randomFormationId() }), generateUserData({}));
+      renderTaskHeader(generateTask({ id: formationTaskId }), generateUserData({}));
       expect(screen.queryByText(Config.formationDateModal.header)).not.toBeInTheDocument();
 
       fireEvent.click(screen.getAllByText("Not started")[0]);
@@ -216,7 +210,7 @@ describe("<TaskHeader />", () => {
     });
 
     it("does not open modal when task is already completed", () => {
-      const id = randomFormationId();
+      const id = formationTaskId;
       const taskProgress: Record<string, TaskProgress> = { [id]: "COMPLETED" };
       renderTaskHeader(generateTask({ id }), generateUserData({ taskProgress }));
       expect(screen.queryByText(Config.formationDateModal.header)).not.toBeInTheDocument();
@@ -228,20 +222,20 @@ describe("<TaskHeader />", () => {
     });
 
     it("does not update status when modal opens", async () => {
-      renderTaskHeader(generateTask({ id: randomFormationId() }), generateUserData({}));
+      renderTaskHeader(generateTask({ id: formationTaskId }), generateUserData({}));
       selectCompleted();
       await waitFor(() => expect(userDataWasNotUpdated()).toBe(true));
     });
 
     it("does not update status when modal is closed without date", async () => {
-      renderTaskHeader(generateTask({ id: randomFormationId() }), generateUserData({}));
+      renderTaskHeader(generateTask({ id: formationTaskId }), generateUserData({}));
       selectCompleted();
       fireEvent.click(screen.getByText(Config.formationDateModal.cancelButtonText));
       await waitFor(() => expect(userDataWasNotUpdated()).toBe(true));
     });
 
     it("updates status and date of formation, and redirects user on save", async () => {
-      const id = randomFormationId();
+      const id = formationTaskId;
       const startingPersonaForRoadmapUrl = generateProfileData({ businessPersona: "STARTING" });
       renderTaskHeader(generateTask({ id }), generateUserData({ profileData: startingPersonaForRoadmapUrl }));
       selectCompleted();
@@ -259,7 +253,7 @@ describe("<TaskHeader />", () => {
     });
 
     it("allows a date in the future", async () => {
-      const id = randomFormationId();
+      const id = formationTaskId;
       renderTaskHeader(generateTask({ id }), generateUserData({}));
       selectCompleted();
       const date = getCurrentDate().add(1, "month").date(1);
@@ -271,7 +265,7 @@ describe("<TaskHeader />", () => {
     });
 
     it("shows error when user saves without entering date", () => {
-      const id = randomFormationId();
+      const id = formationTaskId;
       renderTaskHeader(
         generateTask({ id }),
         generateUserData({ profileData: generateProfileData({ dateOfFormation: undefined }) })
@@ -284,7 +278,7 @@ describe("<TaskHeader />", () => {
 
     it("shows warning modal and sets dateOfFormation to undefined if user sets back to not completed", async () => {
       renderTaskHeader(
-        generateTask({ id: randomFormationId() }),
+        generateTask({ id: formationTaskId }),
         generateUserData({ profileData: generateProfileData({ businessPersona: "STARTING" }) })
       );
       selectCompleted();
@@ -304,7 +298,7 @@ describe("<TaskHeader />", () => {
 
     it("does not show warning modal if status is not already completed", async () => {
       renderTaskHeader(
-        generateTask({ id: randomFormationId() }),
+        generateTask({ id: formationTaskId }),
         generateUserData({ profileData: generateProfileData({ businessPersona: "STARTING" }) })
       );
       fireEvent.click(screen.getAllByText("Not started")[0]);
@@ -313,7 +307,7 @@ describe("<TaskHeader />", () => {
     });
 
     it("does not update dateOfFormation or status if user changes their mind", async () => {
-      const id = randomFormationId();
+      const id = formationTaskId;
       renderTaskHeader(
         generateTask({ id }),
         generateUserData({ profileData: generateProfileData({ businessPersona: "STARTING" }) })
@@ -335,7 +329,7 @@ describe("<TaskHeader />", () => {
     });
 
     it("locks task status if formation was completed through API", () => {
-      const id = randomFormationId();
+      const id = formationTaskId;
       const taskProgress: Record<string, TaskProgress> = { [id]: "COMPLETED" };
       const formationData = generateFormationData({
         getFilingResponse: generateGetFilingResponse({ success: true }),

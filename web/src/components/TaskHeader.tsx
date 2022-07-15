@@ -20,7 +20,7 @@ import {
   getSectionPositions,
   setPreferencesCloseSection,
 } from "@/lib/utils/helpers";
-import { UserData } from "@businessnjgovnavigator/shared/userData";
+import { isFormationTask, UserData } from "@businessnjgovnavigator/shared";
 import { ReactElement, useState } from "react";
 
 interface Props {
@@ -45,10 +45,6 @@ export const TaskHeader = (props: Props): ReactElement => {
     setCongratulatoryDialogIsOpen(false);
   };
 
-  const isFormationTask = (): boolean => {
-    return props.task.id === "form-business-entity-foreign" || props.task.id === "form-business-entity";
-  };
-
   const hasCompletedAPIFormation = (): boolean => {
     return userData?.formationData.getFilingResponse?.success === true;
   };
@@ -58,7 +54,7 @@ export const TaskHeader = (props: Props): ReactElement => {
     let updatedUserData = { ...userData };
     const currentTaskProgress = userData.taskProgress[props.task.id];
 
-    if (isFormationTask()) {
+    if (isFormationTask(props.task.id)) {
       if (newValue === "COMPLETED" && currentTaskProgress !== "COMPLETED") {
         setFormationDialogIsOpen(true);
         return;
@@ -119,7 +115,7 @@ export const TaskHeader = (props: Props): ReactElement => {
     }
 
     let tooltipText: string | undefined = props.tooltipText;
-    if (isFormationTask() && hasCompletedAPIFormation()) {
+    if (isFormationTask(props.task.id) && hasCompletedAPIFormation()) {
       tooltipText = Config.formationDateModal.lockedStatusTooltipText;
     }
 

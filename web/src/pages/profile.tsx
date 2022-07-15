@@ -52,7 +52,7 @@ import {
   getTaskFromRoadmap,
   useMountEffectWhenDefined,
 } from "@/lib/utils/helpers";
-import { BusinessPersona, ForeignBusinessType } from "@businessnjgovnavigator/shared";
+import { BusinessPersona, ForeignBusinessType, formationTaskId } from "@businessnjgovnavigator/shared";
 import {
   createEmptyProfileData,
   LookupLegalStructureById,
@@ -107,7 +107,7 @@ const ProfilePage = (props: Props): ReactElement => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const redirect = (params?: { [key: string]: any }, routerType = router.push): Promise<boolean> => {
     if (router.query.path === "businessFormation") {
-      const formationUrlSlug = getTaskFromRoadmap(roadmap, "form-business-entity")?.urlSlug ?? "";
+      const formationUrlSlug = getTaskFromRoadmap(roadmap, formationTaskId)?.urlSlug ?? "";
       return routerType(`/tasks/${formationUrlSlug}`);
     }
 

@@ -22,9 +22,10 @@ import { loadTasksDisplayContent } from "@/lib/static/loadDisplayContent";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import { loadAllTaskUrlSlugs, loadTaskByUrlSlug, TaskUrlSlugParam } from "@/lib/static/loadTasks";
 import { Task, TasksDisplayContent } from "@/lib/types/types";
-import { getModifiedTaskContent, getUrlSlugs, rswitch } from "@/lib/utils/helpers";
+import { getModifiedTaskContent, getTaskFromRoadmap, getUrlSlugs, rswitch } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { Municipality } from "@businessnjgovnavigator/shared/";
+import { formationTaskId } from "@businessnjgovnavigator/shared/gradualGraduationStages";
 import { useMediaQuery } from "@mui/material";
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
@@ -97,8 +98,26 @@ const TaskPage = (props: Props): ReactElement => {
 
   const renderNextAndPreviousButtons = () => {
     const isValidLegalStructure = allowFormation(userData?.profileData.legalStructureId);
-    if (props.task.id === "form-business-entity" && isValidLegalStructure) return;
+    const isStarting = userData?.profileData.businessPersona === "STARTING";
+    if (props.task.id === formationTaskId && isValidLegalStructure && isStarting) return;
     return nextAndPreviousButtons();
+  };
+
+  const renderFormationTask = (): ReactElement => {
+    const taskInRoadmap = getTaskFromRoadmap(roadmap, props.task.id);
+    if (!taskInRoadmap) return <></>;
+
+    if (userData?.profileData.businessPersona === "FOREIGN") {
+      return <NexusFormationTask task={taskInRoadmap} />;
+    } else {
+      return (
+        <BusinessFormation
+          task={taskInRoadmap}
+          displayContent={props.displayContent.formationDisplayContent}
+          municipalities={props.municipalities}
+        />
+      );
+    }
   };
 
   return (
@@ -119,14 +138,7 @@ const TaskPage = (props: Props): ReactElement => {
             "priority-status-cannabis": <CannabisPriorityStatusTask task={props.task} />,
             "conditional-permit-cannabis": <CannabisApplyForLicenseTask task={props.task} />,
             "annual-license-cannabis": <CannabisApplyForLicenseTask task={props.task} />,
-            "form-business-entity-foreign": <NexusFormationTask task={props.task} />,
-            "form-business-entity": (
-              <BusinessFormation
-                task={props.task}
-                displayContent={props.displayContent.formationDisplayContent}
-                municipalities={props.municipalities}
-              />
-            ),
+            [formationTaskId]: renderFormationTask(),
             default: getTaskBody(),
           })}
         </TaskSidebarPageLayout>
