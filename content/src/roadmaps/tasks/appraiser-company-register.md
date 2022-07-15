@@ -21,6 +21,7 @@ Your Appraisal Management Company must be registered with the State prior to off
 - Name and contact information for each `Controlling Person|controlling-person`
 - A `surety bond|surety-bond` in the amount of $25,000
 - Pay any associated fees
+
 **Note:** The application must be signed and notarized
 
 >**Once completed you will have:**
