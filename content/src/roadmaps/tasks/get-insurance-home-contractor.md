@@ -22,4 +22,4 @@ To find an insurance broker, speak to your network, Chamber of Commerce, or supp
 
 > **Once completed, you will have:**
 >
-> * Certificate of Insurance
+> * A Certificate of Insurance
