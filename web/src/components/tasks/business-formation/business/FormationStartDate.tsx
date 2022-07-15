@@ -8,9 +8,9 @@ import {
   getCurrentDate,
   parseDateWithFormat,
 } from "@businessnjgovnavigator/shared/";
-import AdapterDayjs from "@mui/lab/AdapterDayjs";
 import { TextField } from "@mui/material";
 import { DatePicker, DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { ReactElement, useContext, useState } from "react";
 advancedDateLibrary();
 
