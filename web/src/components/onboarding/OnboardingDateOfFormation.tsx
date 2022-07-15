@@ -5,9 +5,9 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import { setHeaderRole, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { advancedDateLibrary, DateObject, getCurrentDate, parseDate } from "@businessnjgovnavigator/shared/";
-import AdapterDayjs from "@mui/lab/AdapterDayjs";
 import { TextFieldProps } from "@mui/material";
 import { DatePicker, DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import React, { ReactElement, useContext } from "react";
 
 advancedDateLibrary();
