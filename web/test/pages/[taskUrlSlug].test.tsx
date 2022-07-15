@@ -1,3 +1,4 @@
+import { getMergedConfig } from "@/contexts/configContext";
 import { createEmptyTaskDisplayContent, Task } from "@/lib/types/types";
 import TaskPage from "@/pages/tasks/[taskUrlSlug]";
 import {
@@ -16,8 +17,8 @@ import {
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { UserData } from "@businessnjgovnavigator/shared/";
+import { formationTaskId } from "@businessnjgovnavigator/shared/gradualGraduationStages";
 import * as materialUi from "@mui/material";
 import { useMediaQuery } from "@mui/material";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
@@ -28,6 +29,8 @@ function mockMaterialUI(): typeof materialUi {
     useMediaQuery: jest.fn(),
   };
 }
+
+const Config = getMergedConfig();
 
 jest.mock("@mui/material", () => mockMaterialUI());
 jest.mock("next/router");
@@ -384,15 +387,92 @@ describe("task page", () => {
     });
   });
 
-  it("does not render next and previous buttons when legal structure allows for business formation and form-business-entity task is rendered", () => {
+  it("does not render next and previous buttons for STARTING when legal structure allows for business formation and form-business-entity task is rendered", () => {
     renderPage(
-      generateTask({ id: "form-business-entity" }),
+      generateTask({ id: formationTaskId }),
       generateUserData({
         taskProgress: {},
-        profileData: generateProfileData({ legalStructureId: generateFormationLegalType() }),
+        profileData: generateProfileData({
+          legalStructureId: generateFormationLegalType(),
+          businessPersona: "STARTING",
+        }),
       })
     );
 
     expect(screen.queryByTestId("nextAndPreviousButtons")).not.toBeInTheDocument();
+  });
+
+  it("renders next and previous buttons for FOREIGN when form-business-entity task is rendered", () => {
+    renderPage(
+      generateTask({ id: formationTaskId }),
+      generateUserData({
+        taskProgress: {},
+        profileData: generateProfileData({
+          legalStructureId: generateFormationLegalType(),
+          businessPersona: "FOREIGN",
+        }),
+      })
+    );
+
+    expect(screen.getByTestId("nextAndPreviousButtons")).toBeInTheDocument();
+  });
+
+  it("renders form-business-entity from roadmap if user is STARTING", () => {
+    const formTask = generateTask({
+      filename: "form-business-entity",
+      urlSlug: "form-business-entity",
+      id: "form-business-entity",
+      name: "this is the form task",
+    });
+
+    const nexusTask = generateTask({
+      filename: "form-business-entity-foreign",
+      urlSlug: "form-business-entity",
+      id: "form-business-entity",
+      name: "this is the nexus task",
+    });
+
+    useMockUserData({
+      profileData: generateProfileData({
+        businessPersona: "STARTING",
+        legalStructureId: "limited-liability-company",
+      }),
+    });
+    useMockRoadmapTask(formTask);
+    renderPage(nexusTask);
+
+    expect(screen.getAllByText("this is the form task").length).toBeGreaterThan(0);
+    expect(screen.queryByText("this is the nexus task")).not.toBeInTheDocument();
+    expect(screen.getByText(Config.businessFormationDefaults.nameCheckFieldLabel)).toBeInTheDocument();
+  });
+
+  it("renders form-business-entity task as nexus from roadmap if user is FOREIGN", () => {
+    const formTask = generateTask({
+      filename: "form-business-entity",
+      urlSlug: "form-business-entity",
+      id: "form-business-entity",
+      name: "this is the form task",
+    });
+
+    const nexusTask = generateTask({
+      filename: "form-business-entity-foreign",
+      urlSlug: "form-business-entity",
+      id: "form-business-entity",
+      name: "this is the nexus task",
+    });
+
+    useMockUserData({
+      profileData: generateProfileData({
+        businessPersona: "FOREIGN",
+        businessName: undefined,
+        nexusDbaName: undefined,
+      }),
+    });
+    useMockRoadmapTask(nexusTask);
+    renderPage(formTask);
+
+    expect(screen.getAllByText("this is the nexus task").length).toBeGreaterThan(0);
+    expect(screen.queryByText("this is the form task")).not.toBeInTheDocument();
+    expect(screen.getByText(Config.nexusFormationTask.descriptionShownWithWarning)).toBeInTheDocument();
   });
 });

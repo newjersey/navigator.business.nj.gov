@@ -11,7 +11,7 @@ import { Request, Response, Router } from "express";
 import jwt from "jsonwebtoken";
 import { getAnnualFilings } from "../domain/annual-filings/getAnnualFilings";
 import { industryHasALicenseType } from "../domain/license-status/convertIndustryToLicenseType";
-import { UpdateLicenseStatus, UserDataClient } from "../domain/types";
+import { UpdateLicenseStatus, UpdateRoadmapSidebarCards, UserDataClient } from "../domain/types";
 
 const getTokenFromHeader = (req: Request): string => {
   if (req.headers.authorization && req.headers.authorization.split(" ")[0] === "Bearer") {
@@ -63,7 +63,8 @@ export const getSignedInUserId = (req: Request): string => {
 
 export const userRouterFactory = (
   userDataClient: UserDataClient,
-  updateLicenseStatus: UpdateLicenseStatus
+  updateLicenseStatus: UpdateLicenseStatus,
+  updateRoadmapSidebarCards: UpdateRoadmapSidebarCards
 ): Router => {
   const router = Router();
 
@@ -76,17 +77,13 @@ export const userRouterFactory = (
 
     userDataClient
       .get(req.params.userId)
-      .then((userData: UserData) => {
+      .then(async (userData: UserData) => {
         if (userData.licenseData && shouldCheckLicense(userData)) {
-          updateLicenseStatus(userData.user.id, userData.licenseData.nameAndAddress);
+          await updateLicenseStatus(userData.user.id, userData.licenseData.nameAndAddress);
         }
-        if (
-          !userData.preferences.visibleRoadmapSidebarCards.includes("successful-registration") &&
-          userData.preferences.visibleRoadmapSidebarCards.includes("not-registered")
-        ) {
-          userData = updateRoadmapSidecards(userData);
-        }
-        res.json(userData);
+        const updatedUserData = await updateRoadmapSidebarCards(userData);
+        await userDataClient.put(updatedUserData);
+        res.json(updatedUserData);
       })
       .catch((error) => {
         if (error === "Not found") {
@@ -182,26 +179,6 @@ export const userRouterFactory = (
     }
 
     return userData;
-  };
-
-  const updateRoadmapSidecards = (userData: UserData): UserData => {
-    const initialVisibleRoadmapSidebarCards = userData.preferences.visibleRoadmapSidebarCards;
-    initialVisibleRoadmapSidebarCards.push("successful-registration");
-    const visibleRoadmapSidebarCards = initialVisibleRoadmapSidebarCards.filter((element) => {
-      return element != "not-registered";
-    });
-
-    const updatedUserData = {
-      ...userData,
-      preferences: {
-        ...userData.preferences,
-        visibleRoadmapSidebarCards,
-      },
-    };
-
-    userDataClient.put(updatedUserData);
-
-    return updatedUserData;
   };
 
   const saveEmptyUserData = (req: Request, res: Response, signedInUserId: string): void => {

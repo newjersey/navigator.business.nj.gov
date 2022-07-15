@@ -21,6 +21,7 @@ import { MyNJSelfRegClientFactory } from "../../client/MyNjSelfRegClient";
 import { WebserviceLicenseStatusClient } from "../../client/WebserviceLicenseStatusClient";
 import { dynamoDbTranslateConfig, DynamoUserDataClient } from "../../db/DynamoUserDataClient";
 import { searchLicenseStatusFactory } from "../../domain/license-status/searchLicenseStatusFactory";
+import { updateRoadmapSidebarCards } from "../../domain/updateRoadmapSidebarCards";
 import { addToUserTestingFactory } from "../../domain/user-testing/addToUserTestingFactory";
 import { updateLicenseStatusFactory } from "../../domain/user/updateLicenseStatusFactory";
 
@@ -142,7 +143,7 @@ const apiFormationClient = ApiFormationClient(
 );
 
 app.use(bodyParser.json({ strict: false }));
-app.use("/api", userRouterFactory(userDataClient, updateLicenseStatus));
+app.use("/api", userRouterFactory(userDataClient, updateLicenseStatus, updateRoadmapSidebarCards));
 app.use(
   "/api/external",
   externalEndpointRouterFactory(

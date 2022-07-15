@@ -7,7 +7,6 @@ import {
   generateFormationData,
   generateGetFilingResponse,
   generateLicenseData,
-  generatePreferences,
   generateProfileData,
   generateUser,
   generateUserData,
@@ -43,6 +42,7 @@ describe("userRouter", () => {
 
   let stubUserDataClient: jest.Mocked<UserDataClient>;
   let stubUpdateLicenseStatus: jest.Mock;
+  let stubUpdateRoadmapSidebarCards: jest.Mock;
 
   beforeEach(async () => {
     stubUserDataClient = {
@@ -51,8 +51,11 @@ describe("userRouter", () => {
       findByEmail: jest.fn(),
     };
     stubUpdateLicenseStatus = jest.fn();
+    stubUpdateRoadmapSidebarCards = jest.fn();
+    stubUpdateRoadmapSidebarCards.mockImplementation((userData) => userData);
+
     app = setupExpress(false);
-    app.use(userRouterFactory(stubUserDataClient, stubUpdateLicenseStatus));
+    app.use(userRouterFactory(stubUserDataClient, stubUpdateLicenseStatus, stubUpdateRoadmapSidebarCards));
   });
 
   afterAll(async () => {
@@ -98,75 +101,23 @@ describe("userRouter", () => {
       expect(response.body).toEqual({ error: "error" });
     });
 
-    describe("update registration card", () => {
-      it("does not add successful registration card if not registered card does not exist", async () => {
+    describe("updating roadmap cards", () => {
+      it("saves user data with updated cards", async () => {
         const userData = generateUserData({
           user: generateUser({ id: "123" }),
-          profileData: generateProfileData({}),
-          taxFilingData: { filings: [] },
-          preferences: generatePreferences({
-            visibleRoadmapSidebarCards: ["welcome"],
-          }),
         });
+        const updatedUserData = generateUserData({});
         stubUserDataClient.get.mockResolvedValue(userData);
+        stubUserDataClient.put.mockResolvedValue(updatedUserData);
+        stubUpdateRoadmapSidebarCards.mockReturnValue(updatedUserData);
         mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
         const response = await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
 
         expect(mockJwt.decode).toHaveBeenCalledWith("user-123-token");
         expect(response.status).toEqual(200);
-        expect(response.body).toEqual(userData);
-      });
-
-      it("removes not registered card and adds successful registration card", async () => {
-        const userData = generateUserData({
-          user: generateUser({ id: "123" }),
-          profileData: generateProfileData({}),
-          taxFilingData: { filings: [] },
-          preferences: generatePreferences({
-            visibleRoadmapSidebarCards: ["not-registered"],
-          }),
-        });
-
-        stubUserDataClient.get.mockResolvedValue(userData);
-        mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
-        const response = await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
-
-        expect(mockJwt.decode).toHaveBeenCalledWith("user-123-token");
-        expect(response.status).toEqual(200);
-
-        expect(response.body).toEqual({
-          ...userData,
-          preferences: {
-            ...userData.preferences,
-            visibleRoadmapSidebarCards: ["successful-registration"],
-          },
-        });
-      });
-
-      it("leaves existing cards besides not registered when adding successful registration card", async () => {
-        const userData = generateUserData({
-          user: generateUser({ id: "123" }),
-          profileData: generateProfileData({}),
-          taxFilingData: { filings: [] },
-          preferences: generatePreferences({
-            visibleRoadmapSidebarCards: ["welcome", "not-registered"],
-          }),
-        });
-
-        stubUserDataClient.get.mockResolvedValue(userData);
-        mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
-        const response = await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
-
-        expect(mockJwt.decode).toHaveBeenCalledWith("user-123-token");
-        expect(response.status).toEqual(200);
-
-        expect(response.body).toEqual({
-          ...userData,
-          preferences: {
-            ...userData.preferences,
-            visibleRoadmapSidebarCards: ["welcome", "successful-registration"],
-          },
-        });
+        expect(response.body).toEqual(updatedUserData);
+        expect(stubUpdateRoadmapSidebarCards).toHaveBeenCalledWith(userData);
+        expect(stubUserDataClient.put).toHaveBeenCalledWith(updatedUserData);
       });
     });
 

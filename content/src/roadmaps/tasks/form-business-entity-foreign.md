@@ -1,8 +1,8 @@
 ---
-urlSlug: authorize-business-entity-foreign
+urlSlug: form-business-entity
 filename: form-business-entity-foreign
 name: Authorize Your Business Entity
-id: form-business-entity-foreign
+id: form-business-entity
 callToActionLink: https://www.nj.gov/treasury/revenue/pdf/2000.pdf
 callToActionText: Authorize My Business
 required: true

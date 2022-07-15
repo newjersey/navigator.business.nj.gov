@@ -23,6 +23,7 @@ import {
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
+import { formationTaskId } from "@businessnjgovnavigator/shared";
 import {
   createEmptyUserData,
   getCurrentDate,
@@ -195,7 +196,7 @@ describe("profile", () => {
 
     it("returns user to Business Formation after save using query string", async () => {
       useMockRouter({ query: { path: "businessFormation" } });
-      useMockRoadmapTask({ id: "form-business-entity", urlSlug: "some-formation-url" });
+      useMockRoadmapTask({ id: formationTaskId, urlSlug: "some-formation-url" });
 
       renderPage({ userData });
       fillText("Business name", "Cool Computers");
@@ -205,7 +206,7 @@ describe("profile", () => {
 
     it("returns user to Business Formation on back using query string", async () => {
       useMockRouter({ query: { path: "businessFormation" } });
-      useMockRoadmapTask({ id: "form-business-entity", urlSlug: "some-formation-url" });
+      useMockRoadmapTask({ id: formationTaskId, urlSlug: "some-formation-url" });
 
       renderPage({ userData });
       clickBack();

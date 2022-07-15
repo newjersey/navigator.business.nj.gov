@@ -2,6 +2,7 @@ export * from "./businessUser";
 export * from "./dateHelpers";
 export * from "./feedbackRequest";
 export * from "./formationData";
+export * from "./gradualGraduationStages";
 export * from "./industry";
 export * from "./intHelpers";
 export * from "./legalStructure";

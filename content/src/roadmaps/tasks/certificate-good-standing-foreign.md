@@ -6,7 +6,8 @@ id: certificate-good-standing-foreign
 required: true
 formName: ""
 ---
-You will need to obtain a `Certificate of Good Standing|good-standing` from your State of incorporation to [Authorize Your Business](form-business-entity-foreign) in New Jersey.
+
+You will need to obtain a `Certificate of Good Standing|good-standing` from your State of incorporation to [Authorize Your Business](/tasks/form-business-entity) in New Jersey.
 
 The Certificate from the business's home state cannot be dated more than 30 days before the date you plan to submit your formation application.
 

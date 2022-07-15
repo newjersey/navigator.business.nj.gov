@@ -5,6 +5,7 @@ import { Task } from "@/lib/types/types";
 import { generateTask } from "@/test/factories";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { useMockProfileData } from "@/test/mock/mockUseUserData";
+import { formationTaskId } from "@businessnjgovnavigator/shared";
 import { fireEvent, render, screen } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -28,7 +29,7 @@ describe("<NexusFormationTask />", () => {
     });
     mockFetchTaskByFilename.mockResolvedValue(legacyTask);
     nexusTask = generateTask({
-      id: "form-business-entity-foreign",
+      id: formationTaskId,
       contentMd: "stuff ${beginIndentationSection} things ${endIndentationSection} more",
     });
   });
