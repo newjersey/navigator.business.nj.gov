@@ -1,0 +1,61 @@
+{
+  "canBeHomeBased": true,
+  "defaultSectorId": "real-estate",
+  "canBeReseller": false,
+  "isCpaRequiredApplicable": false,
+  "canHavePermanentLocation": true,
+  "roadmapSteps": [
+    {
+      "step": 1,
+      "weight": 1,
+      "task": "business-plan"
+    },
+    {
+      "step": 1,
+      "weight": 30,
+      "task": "determine-naics-code"
+    },
+    {
+      "step": 1,
+      "weight": 35,
+      "task": "appraiser-license"
+    },
+    {
+      "step": 1,
+      "weight": 36,
+      "task": "appraiser-certification"
+    },
+    {
+      "step": 2,
+      "weight": 20,
+      "task": "register-for-ein"
+    },
+    {
+      "step": 2,
+      "weight": 25,
+      "task": "register-for-taxes"
+    },
+    {
+      "step": 3,
+      "weight": 10,
+      "task": "bank-account"
+    },
+    {
+      "step": 3,
+      "weight": 15,
+      "task": "get-insurance"
+    },
+    {
+      "step": 3,
+      "weight": 20,
+      "task": "appraiser-company-register"
+    }
+  ],
+  "name": "Real Estate Appraisals",
+  "isLiquorLicenseApplicable": false,
+  "modifications": [],
+  "isEnabled": false,
+  "additionalSearchTerms": "appraiser",
+  "id": "real-estate-appraisals",
+  "description": "Offers property valuation services"
+}
