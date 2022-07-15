@@ -17,7 +17,7 @@ Your Appraisal Management Company must be registered with the State prior to off
 
 ### Application Requirements
 - Application fully completed by the management company’s Compliance Officer
-- Name, contact information and license number for the Compliance Officer
+- Name, contact information, and license number for the Compliance Officer
 - Name and contact information for each Controlling Person
 - A surety bond in the amount of $25,000
 - Application must be signed and notarized
