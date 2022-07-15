@@ -34,10 +34,16 @@
       "step": 3,
       "weight": 15,
       "task": "get-insurance"
+    },
+    {
+      "step": 1,
+      "weight": 35,
+      "task": "appraiser-license"
     }
   ],
   "name": "Real Estate Appraisals",
   "isLiquorLicenseApplicable": false,
+  "modifications": [],
   "isEnabled": false,
   "additionalSearchTerms": "appraiser",
   "id": "real-estate-appraisals",
