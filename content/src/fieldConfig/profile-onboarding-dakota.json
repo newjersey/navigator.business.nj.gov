@@ -14,7 +14,7 @@
         }
       },
       "foreignBusinessType": {
-        "header": "## Out-of-state Businesses",
+        "header": "## Out-of-State Businesses",
         "description": "Which of the following are **true** about your business? **Select all that apply.**",
         "errorTextRequired": "Please make a selection",
         "optionContent": {
