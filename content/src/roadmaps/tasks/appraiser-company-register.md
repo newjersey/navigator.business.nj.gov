@@ -7,7 +7,7 @@ callToActionLink: https://www.njconsumeraffairs.gov/rea/Applications/Application
 callToActionText: Register Your Company
 required: true
 ---
-Your appraisal management company must be registered with the State prior to offering professional services.
+Your Appraisal Management Company must be registered with the State prior to offering professional services.
 
 ---
 ### Eligibility Criteria
