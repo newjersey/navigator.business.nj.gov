@@ -33,7 +33,7 @@ export const NavBarDesktop = (): ReactElement => {
   };
 
   const currentlyOnboarding = (): boolean => {
-    return router.pathname === "/onboarding";
+    return router && router.pathname === "/onboarding";
   };
 
   const handleProfileClick = (event: React.MouseEvent<HTMLLIElement> | React.MouseEvent<Document>): void => {
