@@ -16,6 +16,16 @@
       "task": "determine-naics-code"
     },
     {
+      "step": 1,
+      "weight": 35,
+      "task": "appraiser-license"
+    },
+    {
+      "step": 1,
+      "weight": 36,
+      "task": "appraiser-certification"
+    },
+    {
       "step": 2,
       "weight": 20,
       "task": "register-for-ein"
@@ -36,9 +46,9 @@
       "task": "get-insurance"
     },
     {
-      "step": 1,
-      "weight": 35,
-      "task": "appraiser-license"
+      "step": 3,
+      "weight": 20,
+      "task": "appraiser-company-register"
     }
   ],
   "name": "Real Estate Appraisals",
