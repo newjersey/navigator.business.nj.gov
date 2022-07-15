@@ -21,7 +21,7 @@ jest.mock("@mui/material", () => mockMaterialUI());
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("next/router");
 
-const setMobileScreen = (value: boolean): void => {
+const setTabletScreen = (value: boolean): void => {
   (useMediaQuery as jest.Mock).mockImplementation(() => value);
 };
 
@@ -30,7 +30,7 @@ describe("<FilingsCalendar />", () => {
     jest.resetAllMocks();
     useMockUserData({});
     useMockRouter({});
-    setMobileScreen(true);
+    setTabletScreen(true);
   });
 
   it("displays filings calendar with annual report date", () => {
@@ -82,7 +82,7 @@ describe("<FilingsCalendar />", () => {
   });
 
   it("displays filings calendar as list with annual report date", () => {
-    setMobileScreen(false);
+    setTabletScreen(false);
 
     const dueDate = getCurrentDate().add(2, "months");
     const annualReport = generateTaxFiling({
@@ -97,7 +97,7 @@ describe("<FilingsCalendar />", () => {
         urlPath: "annual_report-url-path",
       },
     };
-
+    console.log(`Annual Report ${parseDateWithFormat(annualReport.dueDate, "YYYY-MM-DD").format("YYYY")}`);
     render(
       <ThemeProvider theme={createTheme()}>
         <FilingsCalendar operateReferences={operateReferences} />

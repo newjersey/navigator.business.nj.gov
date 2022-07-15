@@ -35,7 +35,7 @@ const DashboardPage = (props: Props): ReactElement => {
     if (!router.isReady) return;
     const success = router.query.success;
     setSuccessAlert(success === "true");
-  }, [router.isReady, router.query.success]);
+  }, [router]);
 
   const mainContent = (
     <>

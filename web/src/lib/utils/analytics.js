@@ -564,5 +564,12 @@ export default {
         },
       },
     },
+    calendar_date: {
+      click: {
+        go_to_date_detail_screen: () => {
+          sendEvent("calendar_date", "click", "go_to_date_detail_screen");
+        },
+      },
+    },
   },
 };
