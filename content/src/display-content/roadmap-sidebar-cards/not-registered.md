@@ -1,13 +1,13 @@
 ---
 id: not-registered
 header: ""
-imgPath: ""
-ctaText: ""
-color: primary
-shadowColor: primary-light
-borderColor: primary
 hasCloseButton: false
+ctaText: ""
 weight: 2
+imgPath: ""
+color: primary
+shadowColor: null
+borderColor: primary
 ---
 
 ### Register to Save Your Progress

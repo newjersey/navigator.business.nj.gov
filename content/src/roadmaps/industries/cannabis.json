@@ -1,11 +1,10 @@
 {
   "naicsCodes": "459991",
-  "canHavePermanentLocation": true,
   "canBeHomeBased": false,
   "defaultSectorId": "cannabis",
   "canBeReseller": false,
   "isCpaRequiredApplicable": false,
-  "isEnabled": true,
+  "canHavePermanentLocation": true,
   "roadmapSteps": [
     {
       "step": 1,
@@ -51,7 +50,8 @@
       "replaceWithFilename": "zoning-cannabis"
     }
   ],
-  "additionalSearchTerms": "marijuana, ACT, cannabis business, micro license, cultivation, dispensary, grow, retail, pot",
+  "isEnabled": true,
+  "additionalSearchTerms": "marijuana, ACT, cannabis business, micro license, cultivation, dispensary, grow, retail, pot, weed",
   "id": "cannabis",
   "description": "A business that manufacturers, delivers, or sells cannabis"
 }

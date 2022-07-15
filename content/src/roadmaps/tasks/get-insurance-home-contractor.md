@@ -8,7 +8,7 @@ required: true
 ---
 You need to obtain commercial general liability insurance to complete your business registration. Insurance will protect your business assets if you are held liable for an incident. 
 
-To find an insurance broker, speak to your network, local Chamber of Commerce, or supplier. Oftentimes, the best way to find a broker is through word of mouth.
+To find an insurance broker, speak to your network, Chamber of Commerce, or supplier. Oftentimes, the best way to find a broker is through word of mouth.
 
 - - -
 
@@ -22,4 +22,4 @@ To find an insurance broker, speak to your network, local Chamber of Commerce, o
 
 > **Once completed, you will have:**
 >
-> * Certificate of Insurance
+> * A Certificate of Insurance
