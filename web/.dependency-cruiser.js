@@ -64,10 +64,6 @@ module.exports = {
     },
     {
       from: {},
-      to: { path: "@mui/lab/AdapterDayjs" },
-    },
-    {
-      from: {},
       to: { path: "@mui/material" },
     },
     {
