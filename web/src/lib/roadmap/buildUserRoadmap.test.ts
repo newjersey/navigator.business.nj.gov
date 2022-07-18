@@ -107,11 +107,12 @@ describe("buildUserRoadmap", () => {
       expect(roadmap.steps[0].tasks).toHaveLength(0);
     });
 
-    it("adds trade-name-foreign for Trade Name legal structures", async () => {
-      const profileData = createEmptyNexusProfile({ legalStructureId: "general-partnership" });
-      await buildUserRoadmap(profileData);
-      const lastCalledWith = getLastCalledWith(mockRoadmapBuilder)[0];
-      expect(lastCalledWith.addOns).toContain("trade-name-foreign");
+    it("adds scorp-ccorp-foreign for S-Corp/C-Corp legal structures", async () => {
+      await buildUserRoadmap(createEmptyNexusProfile({ legalStructureId: "s-corporation" }));
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("scorp-ccorp-foreign");
+
+      await buildUserRoadmap(createEmptyNexusProfile({ legalStructureId: "c-corporation" }));
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("scorp-ccorp-foreign");
     });
 
     it("adds public-record-filing-foreign for Public Record Filing legal structures", async () => {
