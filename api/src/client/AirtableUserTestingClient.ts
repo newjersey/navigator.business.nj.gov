@@ -32,14 +32,20 @@ export const AirtableUserTestingClient = (
         Source: "Opted In Navigator",
       };
       logWriter.LogInfo(
-        `UserResearch - Airtable - Id:${logId} - Request Sent to base ${config.baseId} table ${config.usersTableName}. data: ${fields}`
+        `UserResearch - Airtable - Id:${logId} - Request Sent to base ${config.baseId} table ${
+          config.usersTableName
+        }. data: ${JSON.stringify(fields)}`
       );
       base(config.usersTableName).create([{ fields }], (err: unknown, res: unknown) => {
         if (err) {
-          logWriter.LogInfo(`UserResearchClient - Airtable - Id:${logId} - Error Received: ${err}`);
+          logWriter.LogInfo(
+            `UserResearchClient - Airtable - Id:${logId} - Error Received: ${JSON.stringify(err)}`
+          );
           return resolve({ success: false, status: "RESPONSE_ERROR" });
         }
-        logWriter.LogInfo(`UserResearchClient - Airtable - Id:${logId} - Response Received: ${res}`);
+        logWriter.LogInfo(
+          `UserResearchClient - Airtable - Id:${logId} - Response Received: ${JSON.stringify(res)}`
+        );
         return resolve({ success: true, status: "SUCCESS" });
       });
     });

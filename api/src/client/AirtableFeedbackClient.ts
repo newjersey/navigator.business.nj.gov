@@ -44,12 +44,16 @@ export const AirtableFeedbackClient = (config: AirtableConfig, logWriter: LogWri
       base(config.feedbackTableName).create([{ fields }], (err: unknown, res: unknown) => {
         if (err) {
           logWriter.LogInfo(
-            `FeedbackClient - Airtable - Id:${logId} - Table ${config.feedbackTableName} - Error Received: ${err}`
+            `FeedbackClient - Airtable - Id:${logId} - Table ${
+              config.feedbackTableName
+            } - Error Received: ${JSON.stringify(err)}`
           );
           return reject();
         }
         logWriter.LogInfo(
-          `FeedbackClient - Airtable - Id:${logId} - Table ${config.feedbackTableName} - Response Received: ${res}`
+          `FeedbackClient - Airtable - Id:${logId} - Table ${
+            config.feedbackTableName
+          } - Response Received: ${JSON.stringify(res)}`
         );
         return resolve(true);
       });
