@@ -3531,7 +3531,7 @@ __metadata:
     "@aws-sdk/util-dynamodb": 3.121.0
     "@businessnjgovnavigator/shared": "*"
     "@jest/types": 28.1.1
-    "@serverless/typescript": 3.19.0
+    "@serverless/typescript": 3.21.0
     "@types/cors": 2.8.12
     "@types/dedent": 0.7.0
     "@types/express": 4.17.13
@@ -3569,7 +3569,7 @@ __metadata:
     prettier: 2.7.1
     prettier-plugin-organize-imports: 3.0.0
     rimraf: 3.0.2
-    serverless: 3.20.0
+    serverless: 3.21.0
     serverless-dynamodb-local: 0.2.40
     serverless-http: 3.0.1
     serverless-offline: 8.8.1
@@ -3643,7 +3643,7 @@ __metadata:
     "@next/eslint-plugin-next": 12.1.6
     "@semantic-release/changelog": 6.0.1
     "@semantic-release/git": 10.0.1
-    "@serverless/typescript": 3.19.0
+    "@serverless/typescript": 3.21.0
     "@storybook/addon-a11y": 6.5.9
     "@storybook/addon-actions": 6.5.9
     "@storybook/addon-docs": 6.5.9
@@ -3765,7 +3765,7 @@ __metadata:
     sass: 1.53.0
     sass-loader: 13.0.2
     semantic-release: 19.0.3
-    serverless: 3.20.0
+    serverless: 3.21.0
     serverless-dynamodb-local: 0.2.40
     serverless-http: 3.0.1
     serverless-offline: 8.8.1
@@ -6974,10 +6974,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@serverless/typescript@npm:3.19.0":
-  version: 3.19.0
-  resolution: "@serverless/typescript@npm:3.19.0"
-  checksum: 6cb3b29720d9766dddc1ca975c8945f2ef4ba7d3b1bc6a5f7a448e96833d5a06a79b649e4df3b09a60ef46b5f22fcc1572a74ff326f47b47fbc922e185ac18a1
+"@serverless/typescript@npm:3.21.0":
+  version: 3.21.0
+  resolution: "@serverless/typescript@npm:3.21.0"
+  checksum: 505acc1d6fe1cb3e76969cf495750565226e3538caabb7ee09e129ee6a4e3284d36dfa25f2a16b7105835b3361e09327816a6b810a861665b02995d53d413599
   languageName: node
   linkType: hard
 
@@ -11195,7 +11195,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"aws-sdk@npm:^2.1136.0, aws-sdk@npm:^2.1170.0, aws-sdk@npm:^2.7.0":
+"aws-sdk@npm:^2.1136.0, aws-sdk@npm:^2.1174.0, aws-sdk@npm:^2.7.0":
   version: 2.1176.0
   resolution: "aws-sdk@npm:2.1176.0"
   dependencies:
@@ -30016,9 +30016,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"serverless@npm:3.20.0":
-  version: 3.20.0
-  resolution: "serverless@npm:3.20.0"
+"serverless@npm:3.21.0":
+  version: 3.21.0
+  resolution: "serverless@npm:3.21.0"
   dependencies:
     "@serverless/dashboard-plugin": ^6.2.2
     "@serverless/platform-client": ^4.3.2
@@ -30026,7 +30026,7 @@ __metadata:
     ajv: ^8.11.0
     ajv-formats: ^2.1.1
     archiver: ^5.3.1
-    aws-sdk: ^2.1170.0
+    aws-sdk: ^2.1174.0
     bluebird: ^3.7.2
     cachedir: ^2.3.0
     chalk: ^4.1.2
@@ -30076,7 +30076,7 @@ __metadata:
   bin:
     serverless: bin/serverless.js
     sls: bin/serverless.js
-  checksum: 85c7f5c51c080b8396b489e0aae71b8e632ba14b3031ccf3f5f64c1c0cb52ea4ae9fcb41bd5d027ecf1bdb973820900afc572d5a6a5fecb4ae9fdc57cd115ff9
+  checksum: 78c8500c083baafe082bb965bf129b50d11fabc9e8ef6931d3e97c001448293367dead0e72545365b726f93020be1c2a8e771e57574bb97909916ecb8588cc73
   languageName: node
   linkType: hard
 
