@@ -126,8 +126,14 @@ const getLegalStructureAddOns = (profileData: ProfileData): string[] => {
       addOns.push("trade-name");
     }
   } else {
-    if (LookupLegalStructureById(profileData.legalStructureId).hasTradeName) {
-      addOns.push("trade-name-foreign");
+    if (LookupLegalStructureById(profileData.legalStructureId).requiresPublicFiling) {
+      addOns.push("public-record-filing-foreign");
+    }
+    if (
+      profileData.legalStructureId === "s-corporation" ||
+      profileData.legalStructureId === "c-corporation"
+    ) {
+      addOns.push("scorp-ccorp-foreign");
     }
   }
 
