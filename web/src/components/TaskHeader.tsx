@@ -12,6 +12,7 @@ import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { routeForPersona } from "@/lib/domain-logic/routeForPersona";
 import { SectionType, Task, TaskProgress } from "@/lib/types/types";
 import {
   getModifiedTaskBooleanUndefined,
@@ -21,6 +22,7 @@ import {
   setPreferencesCloseSection,
 } from "@/lib/utils/helpers";
 import { isFormationTask, UserData } from "@businessnjgovnavigator/shared";
+import { useRouter } from "next/router";
 import { ReactElement, useState } from "react";
 
 interface Props {
@@ -38,6 +40,7 @@ export const TaskHeader = (props: Props): ReactElement => {
     TaskProgress | undefined
   >(undefined);
   const [successToastIsOpen, setSuccessToastIsOpen] = useState<boolean>(false);
+  const router = useRouter();
 
   const { Config } = useConfig();
 
@@ -74,10 +77,14 @@ export const TaskHeader = (props: Props): ReactElement => {
     }
 
     setFormationDialogIsOpen(false);
-    updateTaskProgress(newValue, updatedUserData);
+    updateTaskProgress(newValue, updatedUserData, { redirectOnSuccess: false });
   };
 
-  const updateTaskProgress = (newValue: TaskProgress, userData: UserData): void => {
+  const updateTaskProgress = (
+    newValue: TaskProgress,
+    userData: UserData,
+    { redirectOnSuccess }: { redirectOnSuccess: boolean }
+  ): void => {
     if (!sectionCompletion || !roadmap) return;
     const updatedUserData = {
       ...userData,
@@ -104,6 +111,12 @@ export const TaskHeader = (props: Props): ReactElement => {
     })
       .then(() => {
         setSuccessToastIsOpen(true);
+        if (redirectOnSuccess) {
+          router.push({
+            pathname: routeForPersona(userData.profileData.businessPersona),
+            query: { fromFormBusinessEntity: isFormationTask(props.task.id) ? "true" : "false" },
+          });
+        }
       })
       .catch(() => {});
   };
