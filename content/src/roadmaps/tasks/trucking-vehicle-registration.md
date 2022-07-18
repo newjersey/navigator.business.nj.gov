@@ -20,4 +20,4 @@ ___
 - Pay any associated fees
 
 >**Once completed, you will have:**
->- Commercial vehicle registration for your truck
+>- Commercial vehicle registration
