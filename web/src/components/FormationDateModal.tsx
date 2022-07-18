@@ -4,7 +4,6 @@ import { OnboardingDateOfFormation } from "@/components/onboarding/OnboardingDat
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { routeForPersona } from "@/lib/domain-logic/routeForPersona";
 import {
   createProfileFieldErrorMap,
   ProfileFieldErrorMap,
@@ -13,18 +12,20 @@ import {
 } from "@/lib/types/types";
 import { UserData } from "@businessnjgovnavigator/shared";
 import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
-import { useRouter } from "next/router";
 import { ReactElement, useEffect, useState } from "react";
 
 interface Props {
   isOpen: boolean;
   close: () => void;
-  onSave: (newValue: TaskProgress, userData: UserData) => void;
+  onSave: (
+    newValue: TaskProgress,
+    userData: UserData,
+    { redirectOnSuccess }: { redirectOnSuccess: boolean }
+  ) => void;
 }
 
 export const FormationDateModal = (props: Props): ReactElement => {
   const { Config } = useConfig();
-  const router = useRouter();
   const { userData } = useUserData();
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
   const [fieldStates, setFieldStates] = useState<ProfileFieldErrorMap>(createProfileFieldErrorMap());
@@ -45,12 +46,7 @@ export const FormationDateModal = (props: Props): ReactElement => {
       return;
     }
     const updatedUserData = { ...userData, profileData };
-    props.onSave("COMPLETED", updatedUserData);
-
-    router.push({
-      pathname: routeForPersona(userData.profileData.businessPersona),
-      query: { fromFormBusinessEntity: "true" },
-    });
+    props.onSave("COMPLETED", updatedUserData, { redirectOnSuccess: true });
   };
 
   return (
