@@ -8,7 +8,7 @@ callToActionText: Register Your Truck
 required: true
 issuingAgency: "New Jersey Motor Vehicle Commission "
 ---
-You need to register your vehicle before you can legally operate your business. 
+You need to get a commercial vehicle registration before you can legally operate your business. 
 
 ___
 ### Application Requirements
