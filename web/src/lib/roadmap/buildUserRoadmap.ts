@@ -128,6 +128,8 @@ const getLegalStructureAddOns = (profileData: ProfileData): string[] => {
   } else {
     if (LookupLegalStructureById(profileData.legalStructureId).hasTradeName) {
       addOns.push("trade-name-foreign");
+    } else if (LookupLegalStructureById(profileData.legalStructureId).requiresPublicFiling) {
+      addOns.push("public-record-filing-foreign");
     }
   }
 

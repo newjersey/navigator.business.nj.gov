@@ -114,6 +114,13 @@ describe("buildUserRoadmap", () => {
       expect(lastCalledWith.addOns).toContain("trade-name-foreign");
     });
 
+    it("adds public-record-filing-foreign for Public Record Filing legal structures", async () => {
+      const profileData = createEmptyNexusProfile({ legalStructureId: "limited-liability-company" });
+      await buildUserRoadmap(profileData);
+      const lastCalledWith = getLastCalledWith(mockRoadmapBuilder)[0];
+      expect(lastCalledWith.addOns).toContain("public-record-filing-foreign");
+    });
+
     it("adds DBA add-on if user profile DBA name is not undefined", async () => {
       const profileData = createEmptyNexusProfile({ nexusDbaName: "" });
       await buildUserRoadmap(profileData);
