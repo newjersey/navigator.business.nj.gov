@@ -8,6 +8,7 @@ import { UseUserDataResponse } from "@/lib/data-hooks/useUserData";
 import { Roadmap, SectionCompletion, UserDataError } from "@/lib/types/types";
 import { generateUserData } from "@/test/factories";
 import { BusinessUser, RegistrationStatus } from "@businessnjgovnavigator/shared/";
+import { MatcherFunction } from "@testing-library/react";
 import { Dispatch, ReactElement, SetStateAction } from "react";
 
 export const withAuth = (
@@ -123,12 +124,29 @@ export const randomElementFromArray = <T,>(array: T[]): T => {
   return array[Math.floor(Math.random() * array.length)];
 };
 
+type Query = (f: MatcherFunction) => HTMLElement;
+
+export const withMarkup =
+  (query: Query) =>
+  (text: string): HTMLElement =>
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    query((_content: string, node: any) => {
+      const hasText = (node: HTMLElement) => node.textContent === text;
+      // eslint-disable-next-line testing-library/no-node-access
+      const childrenDontHaveText = [...node.children].every((child) => !hasText(child as HTMLElement));
+      return hasText(node) && childrenDontHaveText;
+    });
+
 export const markdownToText = (text: string): string => {
+  let returnText = text;
   if (text.includes("[")) {
-    return text.split("[")[1].split("]")[0].trim();
+    returnText = returnText.split("[")[1].split("]")[0].trim();
   }
-  if (text.includes("#")) {
-    return text.split("#").join("").trim();
+  if (returnText.includes("#")) {
+    returnText = returnText.split("#").join("").trim();
   }
-  return text;
+  if (returnText.includes("*")) {
+    returnText = returnText.split("*").join("").trim();
+  }
+  return returnText;
 };

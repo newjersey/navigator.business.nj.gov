@@ -1,12 +1,13 @@
 import { Button } from "@/components/njwds-extended/Button";
 import { BusinessNameAndLegalStructure } from "@/components/tasks/business-formation/business/BusinessNameAndLegalStructure";
-import { ReviewBusinessPurpose } from "@/components/tasks/business-formation/review/ReviewBusinessPurpose";
 import { ReviewBusinessSuffixAndStartDate } from "@/components/tasks/business-formation/review/ReviewBusinessSuffixAndStartDate";
 import { ReviewMainBusinessLocation } from "@/components/tasks/business-formation/review/ReviewMainBusinessLocation";
 import { ReviewMembers } from "@/components/tasks/business-formation/review/ReviewMembers";
+import { ReviewPartnership } from "@/components/tasks/business-formation/review/ReviewPartnership";
 import { ReviewProvisions } from "@/components/tasks/business-formation/review/ReviewProvisions";
 import { ReviewRegisteredAgent } from "@/components/tasks/business-formation/review/ReviewRegisteredAgent";
 import { ReviewSignatures } from "@/components/tasks/business-formation/review/ReviewSignatures";
+import { ReviewText } from "@/components/tasks/business-formation/review/ReviewText";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import analytics from "@/lib/utils/analytics";
 import { scrollToTop } from "@/lib/utils/helpers";
@@ -22,10 +23,40 @@ export const ReviewSection = (): ReactElement => {
         <BusinessNameAndLegalStructure reviewPage />
         <ReviewBusinessSuffixAndStartDate />
         <ReviewMainBusinessLocation />
-        {state.formationFormData.businessPurpose ? <ReviewBusinessPurpose /> : null}
+        {state.legalStructureId == "limited-partnership" ? (
+          <ReviewText
+            header={Config.businessFormationDefaults.reviewPageCombinedInvestmentHeader}
+            fieldName={"combinedInvestment"}
+            tab={"Business"}
+          />
+        ) : null}
+        {state.legalStructureId == "limited-partnership" ? (
+          <ReviewText
+            header={Config.businessFormationDefaults.reviewPageWithdrawalsHeader}
+            fieldName={"withdrawals"}
+            tab={"Business"}
+          />
+        ) : null}
+        {state.legalStructureId == "limited-partnership" ? <ReviewPartnership /> : <></>}
+        {state.legalStructureId == "limited-partnership" ? (
+          <ReviewText
+            header={Config.businessFormationDefaults.reviewPageDissolutionHeader}
+            fieldName={"dissolution"}
+            tab={"Business"}
+          />
+        ) : null}
         {state.formationFormData.provisions.length > 0 ? <ReviewProvisions /> : null}
+        {state.formationFormData.businessPurpose ? (
+          <ReviewText
+            header={Config.businessFormationDefaults.reviewPageBusinessPurposeHeader}
+            fieldName={"businessPurpose"}
+            tab={"Business"}
+          />
+        ) : null}
         <ReviewRegisteredAgent />
-        {state.formationFormData.members.length > 0 ? <ReviewMembers /> : null}
+        {state.formationFormData.members.length > 0 && state.legalStructureId != "limited-partnership" ? (
+          <ReviewMembers />
+        ) : null}
         <ReviewSignatures />
       </div>
 

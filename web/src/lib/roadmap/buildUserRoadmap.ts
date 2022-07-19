@@ -16,6 +16,9 @@ const enableFormation = (legalStructureId: string): boolean => {
     case "limited-liability-partnership": {
       return process.env.FEATURE_BUSINESS_LLP === "true";
     }
+    case "limited-partnership": {
+      return process.env.FEATURE_BUSINESS_LP === "true";
+    }
     case "c-corporation": {
       return process.env.FEATURE_BUSINESS_CCORP === "true";
     }

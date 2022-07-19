@@ -145,10 +145,24 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
       ? corpLegalStructures.includes(userData.profileData.legalStructureId as FormationLegalType)
       : false;
     const additionalProvisions =
-      formationFormData.provisions.length > 0
+      formationFormData.provisions.length > 0 ||
+      BusinessTypeMap[userData.profileData.legalStructureId as FormationLegalType].additionalDataRequired
         ? {
             [BusinessTypeMap[userData.profileData.legalStructureId as FormationLegalType]
               .provisionsFieldName]: formationFormData.provisions.map((it: string) => ({ Provision: it })),
+            ...(userData.profileData.legalStructureId == "limited-partnership"
+              ? {
+                  AggregateAmount: formationFormData.combinedInvestment,
+                  LimitedCanCreateLimited: formationFormData.canCreateLimitedPartner ? "Yes" : "No",
+                  LimitedCanCreateLimitedTerms: formationFormData.createLimitedPartnerTerms,
+                  LimitedCanGetDistribution: formationFormData.canGetDistribution ? "Yes" : "No",
+                  LimitedCanGetDistributionTerms: formationFormData.getDistributionTerms,
+                  LimitedCanMakeDistribution: formationFormData.canMakeDistribution ? "Yes" : "No",
+                  LimitedCanMakeDistributionTerms: formationFormData.makeDistributionTerms,
+                  GeneralPartnerWithdrawal: formationFormData.withdrawals,
+                  DissolutionPlan: formationFormData.dissolution,
+                }
+              : {}),
           }
         : undefined;
 
@@ -311,6 +325,18 @@ export type ApiSubmission = {
     AdditionalCCorpOrProfessionalCorp?: {
       OtherProvisions: AdditionalProvision[];
     };
+    AdditionalLimitedPartnership?: {
+      AggregateAmount: string; // Max 400 chars
+      LimitedCanCreateLimited: "Yes" | "No";
+      LimitedCanCreateLimitedTerms: string; // Max 400 chars
+      LimitedCanGetDistribution: "Yes" | "No";
+      LimitedCanGetDistributionTerms: string; // Max 400 chars
+      LimitedCanMakeDistribution: "Yes" | "No";
+      LimitedCanMakeDistributionTerms: string; // Max 400 chars
+      GeneralPartnerWithdrawal: string; // Max 400 chars
+      DissolutionPlan: string; // Max 400 chars
+      AdditionalProvision: AdditionalProvision[];
+    };
     CompanyProfit: "Profit"; //Valid Values: Profit, NonProfit
     RegisteredAgent: {
       Id: string | null; // 7 max, must be valid NJ registered agent number
@@ -364,19 +390,23 @@ type MemberLocation = {
 type BusinessType =
   | "DomesticLimitedLiabilityCompany"
   | "DomesticLimitedLiabilityPartnership"
-  | "DomesticForProfitCorporation";
+  | "DomesticForProfitCorporation"
+  | "DomesticLimitedPartnership";
 
-type SignerTitle = "Authorized Representative" | "Authorized Partner" | "Incorporator";
+type SignerTitle = "Authorized Representative" | "Authorized Partner" | "Incorporator" | "General Partner";
 
 type AdditionalDataKey =
   | "AdditionalCCorpOrProfessionalCorp"
   | "AdditionalLimitedLiabilityCompany"
-  | "AdditionalLimitedLiabilityPartnership";
+  | "AdditionalLimitedLiabilityPartnership"
+  | "AdditionalLimitedPartnership";
+
 type FormationFields = {
   businessType: BusinessType;
   shortDescription: string;
   signerTitle: SignerTitle;
   additionalDataKey: AdditionalDataKey;
+  additionalDataRequired?: boolean;
   provisionsFieldName: string;
 };
 
@@ -394,6 +424,14 @@ const BusinessTypeMap: Record<FormationLegalType, FormationFields> = {
     signerTitle: "Authorized Partner",
     additionalDataKey: "AdditionalLimitedLiabilityPartnership",
     provisionsFieldName: "OtherProvisions",
+  },
+  "limited-partnership": {
+    businessType: "DomesticLimitedPartnership",
+    shortDescription: "LP",
+    signerTitle: "General Partner",
+    additionalDataRequired: true,
+    additionalDataKey: "AdditionalLimitedPartnership",
+    provisionsFieldName: "AdditionalProvisions",
   },
   "c-corporation": {
     businessType: "DomesticForProfitCorporation",

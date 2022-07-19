@@ -994,7 +994,6 @@ collections:
                   widget: text,
                   hint: This field supports Markdown,
                 }
-              - { label: Business Purpose Optional Label, name: businessPurposeOptionalLabel, widget: string }
               - {
                   label: Business Purpose Add Button Text,
                   name: businessPurposeAddButtonText,
@@ -1099,6 +1098,7 @@ collections:
               - { label: Initial Next Button Text, name: initialNextButtonText, widget: string }
               - { label: LLC Label, name: llcText, widget: string }
               - { label: LLP Label, name: llpText, widget: string }
+              - { label: LP Label, name: lpText, widget: string }
               - { label: S-Corp Label, name: sCorpText, widget: string }
               - { label: C-Corp Label, name: cCorpText, widget: string }
               - {
@@ -1282,6 +1282,52 @@ collections:
                   name: registeredAgentNamePlaceholder,
                   widget: string,
                 }
+              - { label: Generic Text Box Optional label, name: optionalLabel, widget: string }
+              - { label: Dissolution Placeholder, name: dissolutionPlaceholder, widget: string }
+              - { label: Dissolution Body, name: dissolutionBody, widget: string }
+              - { label: Dissolution Title, name: dissolutionTitle, widget: string }
+              - {
+                  label: Combined Investment Placeholder,
+                  name: combinedInvestmentPlaceholder,
+                  widget: string,
+                }
+              - { label: Combined Investment Body, name: combinedInvestmentBody, widget: string }
+              - { label: Combined Investment Title, name: combinedInvestmentTitle, widget: string }
+              - { label: Withdrawals Placeholder, name: withdrawalsPlaceholder, widget: string }
+              - { label: Withdrawals Body, name: withdrawalsBody, widget: string }
+              - { label: Withdrawals Title, name: withdrawalsTitle, widget: string }
+              - { label: Partnership Rights - Title, name: partnershipRightsTitle, widget: string }
+              - {
+                  label: Partnership Rights - Yes Radio Text,
+                  name: partnershipRightsRadioYesText,
+                  widget: string,
+                }
+              - {
+                  label: Partnership Rights - No Radio Text,
+                  name: partnershipRightsRadioNoText,
+                  widget: string,
+                }
+              - { label: Partnership Rights - Terms Label, name: partnershipRightsTermsLabel, widget: string }
+              - {
+                  label: Partnership Rights - Terms Placeholder,
+                  name: partnershipRightsTermsPlaceholder,
+                  widget: string,
+                }
+              - {
+                  label: Partnership Rights - Can Assign Rights Body,
+                  name: partnershipRightsCanAssignRights,
+                  widget: string,
+                }
+              - {
+                  label: Partnership Rights - Can Receive Distributions Body,
+                  name: partnershipRightsCanReceiveDistributions,
+                  widget: string,
+                }
+              - {
+                  label: Partnership Rights - Can Make Distributions Body,
+                  name: partnershipRightsCanMakeDistributions,
+                  widget: string,
+                }
               - {
                   label: Registered Agent - Email Label,
                   name: registeredAgentEmailLabel,
@@ -1391,6 +1437,66 @@ collections:
                   hint: This field supports Markdown,
                 }
               - {
+                  label: Review Page - Dissolution Label,
+                  name: reviewPageDissolutionHeader,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Review Page - Withdrawals Label,
+                  name: reviewPageWithdrawalsHeader,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Review Page - Combined Investment Label,
+                  name: reviewPageCombinedInvestmentHeader,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Review Page - Partnership - LimitedPartner - Yes Text,
+                  name: reviewPagePartnershipYesLimitedPartnerBody,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Review Page - Partnership - LimitedPartner - No Text,
+                  name: reviewPagePartnershipNoLimitedPartnerBody,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Review Page - Partnership - Receive Distributions - Yes Text,
+                  name: reviewPagePartnershipYesCanReceiveDistributions,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Review Page - Partnership - Receive Distributions - No Text,
+                  name: reviewPagePartnershipNoCanReceiveDistributions,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Review Page - Partnership - Make Distributions - Yes Text,
+                  name: reviewPagePartnershipYesCanMakeDistributions,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Review Page - Partnership - Make Distributions - No Text,
+                  name: reviewPagePartnershipNoCanMakeDistributions,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Review Page - Partnership - Term Label,
+                  name: reviewPagePartnershipTermTitle,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
                   label: Review Page - Legal Structure Label,
                   name: reviewPageLegalStructureLabel,
                   widget: string,
@@ -1429,6 +1535,12 @@ collections:
               - {
                   label: Review Page - Director Address Label,
                   name: reviewPageDirectorAddressLabel,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Review Page - Partnership Header,
+                  name: reviewPagePartnershipHeader,
                   widget: string,
                   hint: This field supports Markdown,
                 }

@@ -238,6 +238,14 @@ export const camelCaseToSentence = (text: string): string => {
     .toLowerCase();
   return spacedCase.charAt(0).toUpperCase() + spacedCase.slice(1);
 };
+
+export const camelCaseToSnakeCase = (text: string): string => {
+  return text
+    .split(/(?=[A-Z])/)
+    .join("-")
+    .toLowerCase();
+};
+
 const sectionsToTasksMap = (roadmap: Roadmap | undefined): Record<SectionType, Task[]> | undefined =>
   roadmap?.steps.reduce((accumulator, currentValue: Step) => {
     accumulator[currentValue.section] = [...(accumulator[currentValue.section] || []), ...currentValue.tasks];

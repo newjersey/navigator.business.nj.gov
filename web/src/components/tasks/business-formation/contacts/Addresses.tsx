@@ -30,7 +30,7 @@ interface DisplayContent {
 }
 
 interface Props {
-  defaultAddress?: FormationAddress;
+  defaultAddress?: Partial<FormationAddress>;
   fieldName: FormationFields;
   addressData: FormationAddress[];
   setData: (addressData: FormationAddress[]) => void;

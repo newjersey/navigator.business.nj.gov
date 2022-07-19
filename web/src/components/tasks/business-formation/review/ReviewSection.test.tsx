@@ -3,7 +3,7 @@ import {
   generateFormationFormData,
   generateUserData,
 } from "@/test/factories";
-import { markdownToText } from "@/test/helpers";
+import { markdownToText, withMarkup } from "@/test/helpers";
 import { generateFormationProfileData, preparePage, useSetupInitialMocks } from "@/test/helpers-formation";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { FormationFormData, FormationLegalType, ProfileData } from "@businessnjgovnavigator/shared";
@@ -96,12 +96,6 @@ describe("Formation - ReviewSection", () => {
     expect(screen.getByTestId("contacts-section")).toBeInTheDocument();
   });
 
-  it("displays the second tab when the edit button in the members section is clicked", async () => {
-    await renderSection({}, {});
-    fireEvent.click(screen.getByTestId("edit-members-section"));
-    expect(screen.getByTestId("contacts-section")).toBeInTheDocument();
-  });
-
   it("displays agent number on review tab", async () => {
     await renderSection({}, { agentNumberOrManual: "NUMBER" });
     expect(screen.getByTestId("agent-number")).toBeInTheDocument();
@@ -163,5 +157,124 @@ describe("Formation - ReviewSection", () => {
     expect(
       screen.getByText(markdownToText(Config.businessFormationDefaults.reviewPageSignaturesHeader))
     ).toBeInTheDocument();
+  });
+
+  describe("when lp", () => {
+    const legalStructureId = "limited-partnership";
+
+    it("does not display the members section", async () => {
+      await renderSection({ legalStructureId }, {});
+      expect(screen.queryByTestId("edit-members-section")).not.toBeInTheDocument();
+    });
+
+    it("displays withdrawals on review tab", async () => {
+      await renderSection({ legalStructureId }, { withdrawals: "withdrawl stuff" });
+      expect(
+        screen.getByText(markdownToText(Config.businessFormationDefaults.reviewPageWithdrawalsHeader))
+      ).toBeInTheDocument();
+      expect(screen.getByText("withdrawl stuff")).toBeInTheDocument();
+    });
+
+    it("displays dissolution on review tab", async () => {
+      await renderSection({ legalStructureId }, { dissolution: "dissolution stuff" });
+      expect(
+        screen.getByText(markdownToText(Config.businessFormationDefaults.reviewPageDissolutionHeader))
+      ).toBeInTheDocument();
+      expect(screen.getByText("dissolution stuff")).toBeInTheDocument();
+    });
+
+    it("displays combined-investment on review tab", async () => {
+      await renderSection({ legalStructureId }, { combinedInvestment: "combinedInvestment stuff" });
+      expect(
+        screen.getByText(markdownToText(Config.businessFormationDefaults.reviewPageCombinedInvestmentHeader))
+      ).toBeInTheDocument();
+      expect(screen.getByText("combinedInvestment stuff")).toBeInTheDocument();
+    });
+
+    it("displays partnership rights on review tab", async () => {
+      await renderSection(
+        { legalStructureId },
+        {
+          canCreateLimitedPartner: true,
+          createLimitedPartnerTerms: "partnerTerms whatever",
+          canGetDistribution: false,
+          getDistributionTerms: "get distro terms",
+          canMakeDistribution: true,
+          makeDistributionTerms: "make distro terms",
+        }
+      );
+      const getByMarkup = withMarkup(screen.getByText);
+      expect(
+        screen.getByText(markdownToText(Config.businessFormationDefaults.reviewPagePartnershipHeader))
+      ).toBeInTheDocument();
+      expect(
+        getByMarkup(
+          markdownToText(Config.businessFormationDefaults.reviewPagePartnershipYesLimitedPartnerBody)
+        )
+      ).toBeInTheDocument();
+      expect(screen.getByText("partnerTerms whatever")).toBeInTheDocument();
+      expect(
+        getByMarkup(
+          markdownToText(Config.businessFormationDefaults.reviewPagePartnershipNoCanReceiveDistributions)
+        )
+      ).toBeInTheDocument();
+      expect(screen.queryByText("get distro terms")).not.toBeInTheDocument();
+      expect(
+        getByMarkup(
+          markdownToText(Config.businessFormationDefaults.reviewPagePartnershipYesCanMakeDistributions)
+        )
+      ).toBeInTheDocument();
+      expect(screen.getByText("make distro terms")).toBeInTheDocument();
+    });
+  });
+
+  describe("when llc", () => {
+    const legalStructureId = "limited-liability-company";
+
+    it("displays the second tab when the edit button in the members section is clicked", async () => {
+      await renderSection({ legalStructureId }, {});
+      fireEvent.click(screen.getByTestId("edit-members-section"));
+      expect(screen.getByTestId("contacts-section")).toBeInTheDocument();
+    });
+
+    it("does not display partnership rights on review tab", async () => {
+      await renderSection(
+        { legalStructureId },
+        {
+          canCreateLimitedPartner: true,
+          createLimitedPartnerTerms: "partnerTerms whatever",
+          canGetDistribution: false,
+          getDistributionTerms: "get distro terms",
+          canMakeDistribution: true,
+          makeDistributionTerms: "make distro terms",
+        }
+      );
+      expect(
+        screen.queryByText(markdownToText(Config.businessFormationDefaults.reviewPagePartnershipHeader))
+      ).not.toBeInTheDocument();
+    });
+
+    it("does not display withdrawals on review tab", async () => {
+      await renderSection({ legalStructureId }, { withdrawals: "withdrawl stuff" });
+      expect(
+        screen.queryByText(markdownToText(Config.businessFormationDefaults.reviewPageWithdrawalsHeader))
+      ).not.toBeInTheDocument();
+    });
+
+    it("does not display dissolution on review tab", async () => {
+      await renderSection({ legalStructureId }, { dissolution: "dissolution stuff" });
+      expect(
+        screen.queryByText(markdownToText(Config.businessFormationDefaults.reviewPageDissolutionHeader))
+      ).not.toBeInTheDocument();
+    });
+
+    it("does not display combined-investment on review tab", async () => {
+      await renderSection({ legalStructureId }, { combinedInvestment: "combinedInvestment stuff" });
+      expect(
+        screen.queryByText(
+          markdownToText(Config.businessFormationDefaults.reviewPageCombinedInvestmentHeader)
+        )
+      ).not.toBeInTheDocument();
+    });
   });
 });

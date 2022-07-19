@@ -17,7 +17,7 @@ interface Props {
   open: boolean;
   addressData: FormationAddress[];
   displayContent: DisplayContent;
-  defaultAddress?: FormationAddress;
+  defaultAddress?: Partial<FormationAddress>;
   fieldName: string;
   setData: (addressData: FormationAddress[]) => void;
   index?: number;
@@ -92,11 +92,13 @@ export const AddressModal = (props: Props): ReactElement => {
       );
       return;
     }
+
     const failedValidation = Object.values(addressErrorMap).some((i) => i.invalid);
 
     if (failedValidation) {
       return;
     }
+
     if (props.index === undefined) {
       props.setData([...props.addressData, addressData]);
     } else {
@@ -122,6 +124,7 @@ export const AddressModal = (props: Props): ReactElement => {
         {props.defaultAddress ? (
           <FormGroup className="padding-y-1">
             <FormControlLabel
+              data-testid={"default-checkbox"}
               label={props.displayContent.defaultCheckbox ?? "Use Default Address"}
               control={
                 <Checkbox
@@ -146,7 +149,6 @@ export const AddressModal = (props: Props): ReactElement => {
             fieldName="addressName"
             required={true}
             autoComplete="name"
-            disabled={useDefaultAddress}
           />
           <Content>{Config.businessFormationDefaults.addressModalAddressLine1Label}</Content>
           <GenericTextField

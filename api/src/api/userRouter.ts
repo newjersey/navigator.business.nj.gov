@@ -170,7 +170,9 @@ export const userRouterFactory = (
         };
 
         if (
-          !corpLegalStructures.includes(userData.profileData.legalStructureId as FormationLegalType) &&
+          ![...corpLegalStructures, "limited-partnership"].includes(
+            userData.profileData.legalStructureId as FormationLegalType
+          ) &&
           userData.formationData.formationFormData.signers.length === 0
         ) {
           userData.formationData.formationFormData.signers.push(createEmptyFormationAddress());
