@@ -5,6 +5,7 @@
   "defaultSectorId": "digital-and-print-media",
   "canBeReseller": false,
   "isProvidesStaffingServicesApplicable": false,
+  "isCertifiedInteriorDesignerApplicable": false,
   "isCpaRequiredApplicable": false,
   "isEnabled": true,
   "roadmapSteps": [

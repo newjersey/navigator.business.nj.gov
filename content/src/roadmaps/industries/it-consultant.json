@@ -4,6 +4,7 @@
   "defaultSectorId": "technology",
   "canBeReseller": true,
   "isProvidesStaffingServicesApplicable": true,
+  "isCertifiedInteriorDesignerApplicable": false,
   "isCpaRequiredApplicable": false,
   "canHavePermanentLocation": true,
   "roadmapSteps": [
