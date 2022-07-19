@@ -32,6 +32,12 @@
         "radioButtonNoText": "No",
         "header": "### Home-based business",
         "description": "Do you plan to be a `home-based business|home-based-business`?"
+      },
+      "staffingService": {
+        "radioButtonYesText": "Yes",
+        "radioButtonNoText": "No",
+        "header": "### Staffing Services",
+        "description": "Will you provide staffing services?"
       }
     },
     "FOREIGN": {
@@ -66,6 +72,12 @@
         "radioButtonNoText": "No",
         "header": "### Home-based business",
         "description": "Do you plan to be a `home-based business|home-based-business`?"
+      },
+      "staffingService": {
+        "radioButtonYesText": "Yes",
+        "radioButtonNoText": "No",
+        "header": "### Staffing Services",
+        "description": "Will you provide staffing services?"
       }
     },
     "OWNING": {
@@ -94,6 +106,12 @@
         "description": "",
         "radioButtonYesText": "",
         "radioButtonNoText": ""
+      },
+      "staffingService": {
+        "radioButtonYesText": "",
+        "radioButtonNoText": "",
+        "header": "",
+        "description": ""
       }
     }
   }

@@ -34,6 +34,7 @@ export interface ProfileData {
   readonly foreignBusinessTypeIds: string[];
   readonly nexusLocationInNewJersey: boolean | undefined;
   readonly nexusDbaName: string | undefined;
+  readonly providesStaffingService: boolean;
 }
 
 export const emptyProfileData: ProfileData = {
@@ -64,6 +65,7 @@ export const emptyProfileData: ProfileData = {
   foreignBusinessTypeIds: [],
   nexusLocationInNewJersey: undefined,
   nexusDbaName: undefined,
+  providesStaffingService: false,
 };
 
 export const createEmptyProfileData = (): ProfileData => {

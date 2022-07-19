@@ -3,6 +3,7 @@
   "canBeHomeBased": false,
   "defaultSectorId": "cannabis",
   "canBeReseller": false,
+  "isProvidesStaffingServicesApplicable": false,
   "isCpaRequiredApplicable": false,
   "canHavePermanentLocation": true,
   "roadmapSteps": [

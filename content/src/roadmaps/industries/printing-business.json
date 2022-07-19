@@ -4,6 +4,7 @@
   "canBeHomeBased": true,
   "defaultSectorId": "digital-and-print-media",
   "canBeReseller": true,
+  "isProvidesStaffingServicesApplicable": false,
   "isCpaRequiredApplicable": false,
   "isEnabled": true,
   "roadmapSteps": [

@@ -4,6 +4,7 @@
   "canBeHomeBased": false,
   "defaultSectorId": "accommodation-and-food-services",
   "canBeReseller": true,
+  "isProvidesStaffingServicesApplicable": false,
   "isCpaRequiredApplicable": false,
   "isEnabled": true,
   "roadmapSteps": [

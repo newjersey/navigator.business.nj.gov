@@ -3,6 +3,7 @@
   "canBeHomeBased": true,
   "defaultSectorId": "technology",
   "canBeReseller": true,
+  "isProvidesStaffingServicesApplicable": true,
   "isCpaRequiredApplicable": false,
   "canHavePermanentLocation": true,
   "roadmapSteps": [

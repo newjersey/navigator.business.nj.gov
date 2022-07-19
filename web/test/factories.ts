@@ -150,6 +150,7 @@ export const generateProfileData = (
     foreignBusinessTypeIds: [],
     nexusLocationInNewJersey: undefined,
     nexusDbaName: undefined,
+    providesStaffingService: false,
     ...overrides,
   };
 };

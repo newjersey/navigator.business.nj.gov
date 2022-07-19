@@ -4,6 +4,7 @@
   "canBeHomeBased": true,
   "defaultSectorId": "organizational-or-financial-management",
   "canBeReseller": false,
+  "isProvidesStaffingServicesApplicable": false,
   "isCpaRequiredApplicable": false,
   "isEnabled": true,
   "roadmapSteps": [
