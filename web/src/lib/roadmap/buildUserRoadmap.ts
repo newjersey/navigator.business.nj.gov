@@ -28,13 +28,18 @@ const enableFormation = (legalStructureId: string): boolean => {
 };
 
 export const buildUserRoadmap = async (profileData: ProfileData): Promise<Roadmap> => {
+  let industryId = profileData.industryId;
+  if (profileData.industryId === "it-consultant" && profileData.providesStaffingService) {
+    industryId = "administrative-and-employment-services";
+  }
+
   const addOns: string[] = [
     ...getForeignAddOns(profileData),
-    ...getIndustryBasedAddOns(profileData),
+    ...getIndustryBasedAddOns(profileData, industryId),
     ...getLegalStructureAddOns(profileData),
   ];
 
-  let roadmap = await buildRoadmap({ industryId: profileData.industryId, addOns });
+  let roadmap = await buildRoadmap({ industryId: industryId, addOns });
 
   roadmap = profileData.municipality
     ? await addMunicipalitySpecificData(roadmap, profileData.municipality.id)
@@ -70,8 +75,8 @@ const getForeignAddOns = (profileData: ProfileData): string[] => {
   return addOns;
 };
 
-const getIndustryBasedAddOns = (profileData: ProfileData): string[] => {
-  const industry = LookupIndustryById(profileData.industryId);
+const getIndustryBasedAddOns = (profileData: ProfileData, industryId: string | undefined): string[] => {
+  const industry = LookupIndustryById(industryId);
   if (industry.id === "") return [];
   const addOns = [];
 

@@ -312,6 +312,32 @@ describe("buildUserRoadmap", () => {
         }
       });
     }
+
+    describe("on-boarding modifications", () => {
+      it("set industry to employment-agency if it-consultant with staffing service", async () => {
+        const profileData: ProfileData = {
+          ...createEmptyProfileData(),
+          industryId: "it-consultant",
+          providesStaffingService: true,
+        };
+
+        await buildUserRoadmap(profileData);
+        const lastCalledWith = getLastCalledWith(mockRoadmapBuilder)[0];
+        expect(lastCalledWith.industryId).toEqual("administrative-and-employment-services");
+      });
+
+      it("keeps industry as it-consultant if no staffing service provided", async () => {
+        const profileData: ProfileData = {
+          ...createEmptyProfileData(),
+          industryId: "it-consultant",
+          providesStaffingService: false,
+        };
+
+        await buildUserRoadmap(profileData);
+        const lastCalledWith = getLastCalledWith(mockRoadmapBuilder)[0];
+        expect(lastCalledWith.industryId).toEqual("it-consultant");
+      });
+    });
   });
 
   describe("cpa", () => {

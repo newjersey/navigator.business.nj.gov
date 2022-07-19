@@ -3,6 +3,7 @@
   "canBeHomeBased": true,
   "defaultSectorId": "other-services",
   "canBeReseller": false,
+  "isProvidesStaffingServicesApplicable": false,
   "isCpaRequiredApplicable": false,
   "canHavePermanentLocation": true,
   "roadmapSteps": [

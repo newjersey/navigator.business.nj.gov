@@ -4,6 +4,7 @@
   "canBeHomeBased": true,
   "defaultSectorId": "retail-trade-and-ecommerce",
   "canBeReseller": true,
+  "isProvidesStaffingServicesApplicable": false,
   "isCpaRequiredApplicable": false,
   "isEnabled": true,
   "roadmapSteps": [
