@@ -23,7 +23,7 @@ import {
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { formationTaskId } from "@businessnjgovnavigator/shared";
+import { formationTaskId, ProfileData } from "@businessnjgovnavigator/shared";
 import {
   createEmptyUserData,
   getCurrentDate,
@@ -795,20 +795,19 @@ describe("profile", () => {
     });
 
     describe("Nexus Foreign Business", () => {
-      let userData: UserData;
-
-      beforeEach(() => {
-        userData = generateUserData({
+      const nexusForeignBusinessProfile = (overrides: Partial<ProfileData>): UserData => {
+        return generateUserData({
           profileData: generateProfileData({
             businessPersona: "FOREIGN",
             foreignBusinessType: "NEXUS",
-            businessName: "",
+            legalStructureId: "limited-liability-company",
+            ...overrides,
           }),
         });
-      });
+      };
 
       it("opens the default business information tab when clicked on profile", () => {
-        renderPage({ userData: userData });
+        renderPage({ userData: nexusForeignBusinessProfile({}) });
         expect(screen.getByTestId("info")).toBeInTheDocument();
         expect(
           screen.getByText(markdownToText(Config.profileDefaults.FOREIGN.industryId.header))
@@ -822,37 +821,38 @@ describe("profile", () => {
       });
 
       it("displays the out of state business name field", () => {
-        renderPage({ userData: userData });
-        expect(screen.getByText("Out-of-State Business Name")).toBeInTheDocument();
+        renderPage({ userData: nexusForeignBusinessProfile({}) });
+        expect(
+          screen.getByText(Config.profileDefaults.nexusBusinessName.outOfStateNameHeader)
+        ).toBeInTheDocument();
       });
 
       it("displays Not-Entered when the user hasn't entered a business name yet", () => {
-        renderPage({ userData: userData });
+        renderPage({ userData: nexusForeignBusinessProfile({ businessName: "" }) });
         expect(screen.getByText("Not-Entered")).toBeInTheDocument();
       });
 
+      it("does not display out-of-state business name when SP/GP", () => {
+        renderPage({ userData: nexusForeignBusinessProfile({ legalStructureId: "sole-proprietorship" }) });
+
+        expect(
+          screen.queryByText(Config.profileDefaults.nexusBusinessName.outOfStateNameHeader)
+        ).not.toBeInTheDocument();
+        expect(
+          screen.queryByText(Config.profileDefaults.nexusBusinessName.dbaNameHeader)
+        ).not.toBeInTheDocument();
+      });
+
       it("displays the user's business name if they have one", () => {
-        renderPage({
-          userData: generateUserData({
-            profileData: generateProfileData({
-              businessPersona: "FOREIGN",
-              foreignBusinessType: "NEXUS",
-              businessName: "Test Business",
-            }),
-          }),
-        });
+        renderPage({ userData: nexusForeignBusinessProfile({ businessName: "Test Business" }) });
         expect(screen.getByText("Test Business")).toBeInTheDocument();
       });
 
       it("displays the user's dba name if they have one", () => {
         renderPage({
-          userData: generateUserData({
-            profileData: generateProfileData({
-              businessPersona: "FOREIGN",
-              foreignBusinessType: "NEXUS",
-              businessName: "Test Business",
-              nexusDbaName: "DBA Name",
-            }),
+          userData: nexusForeignBusinessProfile({
+            businessName: "Test Business",
+            nexusDbaName: "DBA Name",
           }),
         });
         expect(screen.getByText("Test Business")).toBeInTheDocument();
@@ -862,13 +862,9 @@ describe("profile", () => {
 
       it("doesn't display the user's dba name if they don't have one", () => {
         renderPage({
-          userData: generateUserData({
-            profileData: generateProfileData({
-              businessPersona: "FOREIGN",
-              foreignBusinessType: "NEXUS",
-              businessName: "Test Business",
-              nexusDbaName: "",
-            }),
+          userData: nexusForeignBusinessProfile({
+            businessName: "Test Business",
+            nexusDbaName: "",
           }),
         });
         expect(screen.getByText("Test Business")).toBeInTheDocument();
