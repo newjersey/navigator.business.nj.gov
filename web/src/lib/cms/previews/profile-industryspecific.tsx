@@ -6,6 +6,7 @@ import { OnboardingEmploymentAgency } from "@/components/onboarding/OnboardingEm
 import { OnboardingHomeBasedBusiness } from "@/components/onboarding/OnboardingHomeBasedBusiness";
 import { OnboardingHomeContractor } from "@/components/onboarding/OnboardingHomeContractor";
 import { OnboardingLiquorLicense } from "@/components/onboarding/OnboardingLiquorLicense";
+import { OnboardingStaffingService } from "@/components/onboarding/OnboardingStaffingService";
 import { ConfigContext, ConfigType, getMergedConfig } from "@/contexts/configContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { getMetadataFromSlug } from "@/lib/cms/previews/preview-helpers";
@@ -66,6 +67,8 @@ const ProfilePreviewIndustrySpecific = (props: Props) => {
               <OnboardingCpa />
               <hr className="margin-y-4" />
               <OnboardingCertifiedInteriorDesigner />
+              <hr className="margin-y-4" />
+              <OnboardingStaffingService />
               <hr className="margin-y-4" />
               <OnboardingEmploymentAgency />
               <hr className="margin-y-4" />
