@@ -3122,7 +3122,7 @@ collections:
           name: "borderColor",
           widget: "select",
           required: true,
-          options: ["accent-cool", "roadmap-purple", "primary", "primary-light", "accent-cool-darker"],
+          options: ["accent-cool", "roadmap-purple", "primary-light", "accent-cool-darker"],
         }
 
   - name: "settings"
