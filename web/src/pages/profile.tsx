@@ -184,6 +184,11 @@ const ProfilePage = (props: Props): ReactElement => {
     }
   };
 
+  const shouldShowNexusBusinessNameElements = (): boolean => {
+    if (!userData) return false;
+    return LookupLegalStructureById(userData.profileData.legalStructureId).requiresPublicFiling;
+  };
+
   const nexusBusinessElements: Record<ProfileTabs, ReactNode> = {
     info: (
       <>
@@ -192,14 +197,18 @@ const ProfilePage = (props: Props): ReactElement => {
           {" "}
           {Config.profileDefaults.profileTabInfoTitle}
         </h2>
-        <ProfileNexusBusinessNameField />
-        <div className="margin-top-3"></div>
-        <ProfileNexusDBANameField />
-        <div className="margin-top-3"></div>
+        {shouldShowNexusBusinessNameElements() && (
+          <>
+            <div className="margin-top-3" />
+            <ProfileNexusBusinessNameField />
+            <ProfileNexusDBANameField />
+            <div className="margin-top-3" />
+          </>
+        )}
         <OnboardingIndustry onValidation={onValidation} fieldStates={fieldStates} />
-        <div className="margin-top-3"></div>
+        <div className="margin-top-3" />
         <OnboardingLegalStructureDropdown disabled={userData?.formationData.getFilingResponse?.success} />
-        <div className="margin-top-3"></div>
+        <div className="margin-top-3" />
         <OnboardingMunicipality onValidation={onValidation} fieldStates={fieldStates} h3Heading={true} />
         <OnboardingLocationInNewJersey />
       </>
