@@ -4,6 +4,7 @@
   "canBeHomeBased": true,
   "defaultSectorId": "administrative-and-employment-services",
   "canBeReseller": true,
+  "isProvidesStaffingServicesApplicable": false,
   "isCpaRequiredApplicable": false,
   "isEnabled": true,
   "roadmapSteps": [

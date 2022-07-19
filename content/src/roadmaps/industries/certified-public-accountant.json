@@ -4,6 +4,7 @@
   "canBeHomeBased": true,
   "defaultSectorId": "finance-and-insurance",
   "canBeReseller": false,
+  "isProvidesStaffingServicesApplicable": false,
   "isCpaRequiredApplicable": true,
   "isEnabled": true,
   "roadmapSteps": [

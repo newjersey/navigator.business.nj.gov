@@ -2,6 +2,7 @@
   "canHavePermanentLocation": true,
   "canBeHomeBased": true,
   "defaultSectorId": "other-services",
+  "isProvidesStaffingServicesApplicable": false,
   "canBeReseller": true,
   "isEnabled": true,
   "roadmapSteps": [

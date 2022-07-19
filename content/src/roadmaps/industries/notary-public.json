@@ -4,6 +4,7 @@
   "defaultSectorId": "other-services",
   "canBeReseller": false,
   "isCpaRequiredApplicable": false,
+  "isProvidesStaffingServicesApplicable": false,
   "canHavePermanentLocation": true,
   "roadmapSteps": [
     {

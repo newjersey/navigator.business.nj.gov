@@ -3,6 +3,7 @@
   "canBeHomeBased": true,
   "defaultSectorId": "construction",
   "canBeReseller": true,
+  "isProvidesStaffingServicesApplicable": false,
   "isCpaRequiredApplicable": false,
   "canHavePermanentLocation": true,
   "roadmapSteps": [

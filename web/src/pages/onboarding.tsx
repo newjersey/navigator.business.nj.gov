@@ -266,6 +266,7 @@ const OnboardingPage = (props: Props): ReactElement => {
         foreignBusinessTypeIds: [],
         nexusLocationInNewJersey: undefined,
         nexusDbaName: undefined,
+        providesStaffingService: profileData.providesStaffingService,
       };
 
       setProfileData(newProfileData);

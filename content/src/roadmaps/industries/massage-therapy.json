@@ -4,6 +4,7 @@
   "canBeHomeBased": true,
   "defaultSectorId": "health-care-and-social-assistance",
   "canBeReseller": true,
+  "isProvidesStaffingServicesApplicable": false,
   "isCpaRequiredApplicable": false,
   "isEnabled": true,
   "roadmapSteps": [

@@ -5,6 +5,7 @@
   "defaultSectorId": "digital-and-print-media",
   "canBeReseller": true,
   "isCpaRequiredApplicable": false,
+  "isProvidesStaffingServicesApplicable": false,
   "isEnabled": true,
   "roadmapSteps": [
     {

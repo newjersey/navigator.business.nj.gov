@@ -3,6 +3,7 @@
   "canBeHomeBased": true,
   "defaultSectorId": "real-estate",
   "canBeReseller": true,
+  "isProvidesStaffingServicesApplicable": false,
   "isCpaRequiredApplicable": false,
   "canHavePermanentLocation": true,
   "roadmapSteps": [
