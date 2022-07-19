@@ -5,6 +5,7 @@
   "defaultSectorId": "organizational-or-financial-management",
   "canBeReseller": false,
   "isProvidesStaffingServicesApplicable": false,
+  "isCertifiedInteriorDesignerApplicable": false,
   "isCpaRequiredApplicable": false,
   "isEnabled": true,
   "roadmapSteps": [

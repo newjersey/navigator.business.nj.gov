@@ -5,6 +5,7 @@
   "defaultSectorId": "retail-trade-and-ecommerce",
   "canBeReseller": true,
   "isProvidesStaffingServicesApplicable": false,
+  "isCertifiedInteriorDesignerApplicable": false,
   "isCpaRequiredApplicable": false,
   "isEnabled": true,
   "roadmapSteps": [

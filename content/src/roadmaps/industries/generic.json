@@ -3,6 +3,7 @@
   "canBeHomeBased": true,
   "defaultSectorId": "other-services",
   "isProvidesStaffingServicesApplicable": false,
+  "isCertifiedInteriorDesignerApplicable": false,
   "canBeReseller": true,
   "isEnabled": true,
   "roadmapSteps": [

@@ -303,7 +303,9 @@ describe("buildUserRoadmap", () => {
   describe("industry", () => {
     for (const industry of Industries.filter((x) => x.id !== "generic")) {
       it(`adds ${industry.name} industry and modifications`, async () => {
-        await buildUserRoadmap(generateStartingProfile({ industryId: industry.id }));
+        await buildUserRoadmap(
+          generateStartingProfile({ industryId: industry.id, certifiedInteriorDesigner: true })
+        );
         const lastCalledWith = getLastCalledWith(mockRoadmapBuilder)[0];
         const shouldNotContainIndustries = Industries.filter((it) => it.id !== industry.id);
         expect(lastCalledWith.industryId).toBe(industry.id);
@@ -336,6 +338,30 @@ describe("buildUserRoadmap", () => {
         await buildUserRoadmap(profileData);
         const lastCalledWith = getLastCalledWith(mockRoadmapBuilder)[0];
         expect(lastCalledWith.industryId).toEqual("it-consultant");
+      });
+
+      it("set industry to generic if a non certified interor designer", async () => {
+        const profileData: ProfileData = {
+          ...createEmptyProfileData(),
+          industryId: "interior-designer",
+          certifiedInteriorDesigner: false,
+        };
+
+        await buildUserRoadmap(profileData);
+        const lastCalledWith = getLastCalledWith(mockRoadmapBuilder)[0];
+        expect(lastCalledWith.industryId).toEqual("generic");
+      });
+
+      it("keeps industry as interior-designer if a certified interor designer", async () => {
+        const profileData: ProfileData = {
+          ...createEmptyProfileData(),
+          industryId: "interior-designer",
+          certifiedInteriorDesigner: true,
+        };
+
+        await buildUserRoadmap(profileData);
+        const lastCalledWith = getLastCalledWith(mockRoadmapBuilder)[0];
+        expect(lastCalledWith.industryId).toEqual("interior-designer");
       });
     });
   });

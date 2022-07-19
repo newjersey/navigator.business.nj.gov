@@ -5,6 +5,7 @@
   "defaultSectorId": "finance-and-insurance",
   "canBeReseller": false,
   "isProvidesStaffingServicesApplicable": false,
+  "isCertifiedInteriorDesignerApplicable": false,
   "isCpaRequiredApplicable": true,
   "isEnabled": true,
   "roadmapSteps": [

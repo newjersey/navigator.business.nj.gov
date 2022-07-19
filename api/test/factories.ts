@@ -150,6 +150,7 @@ export const generateProfileData = (overrides: Partial<ProfileData>): ProfileDat
     nexusDbaName: undefined,
     nexusLocationInNewJersey: undefined,
     providesStaffingService: false,
+    certifiedInteriorDesigner: false,
     ...overrides,
   };
 };

@@ -17,6 +17,7 @@ export interface Industry {
   readonly naicsCodes?: string;
   readonly isEnabled: boolean;
   readonly isProvidesStaffingServicesApplicable: boolean;
+  readonly isCertifiedInteriorDesignerApplicable: boolean;
 }
 
 export interface AddOn {
@@ -45,6 +46,7 @@ export const LookupIndustryById = (id: string | undefined): Industry => {
       naicsCodes: "",
       isEnabled: false,
       isProvidesStaffingServicesApplicable: false,
+      isCertifiedInteriorDesignerApplicable: false,
     }
   );
 };

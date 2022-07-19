@@ -67,6 +67,7 @@ import { migrate_v67_to_v68 } from "./v68_complete_formation_task_if_success";
 import { migrate_v68_to_v69 } from "./v69_change_form_business_entity_foreign_id";
 import { migrate_v5_to_v6 } from "./v6_add_home_based_business";
 import { migrate_v69_to_v70 } from "./v70_add_staffing_service";
+import { migrate_v70_to_v71 } from "./v71_add_certified_interior_designer";
 import { migrate_v6_to_v7 } from "./v7_add_license_data";
 import { migrate_v7_to_v8 } from "./v8_remove_bcorp";
 import { migrate_v8_to_v9 } from "./v9_add_license_status_to_data";
@@ -144,6 +145,7 @@ export const Migrations: MigrationFunction[] = [
   migrate_v67_to_v68,
   migrate_v68_to_v69,
   migrate_v69_to_v70,
+  migrate_v70_to_v71,
 ];
 
 export const CURRENT_VERSION = Migrations.length;

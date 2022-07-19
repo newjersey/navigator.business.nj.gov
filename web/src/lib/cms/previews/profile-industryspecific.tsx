@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { OnboardingCannabisLicense } from "@/components/onboarding/OnboardingCannabisLicense";
+import { OnboardingCertifiedInteriorDesigner } from "@/components/onboarding/OnboardingCertifiedInteriorDesigner";
 import { OnboardingCpa } from "@/components/onboarding/OnboardingCpa";
 import { OnboardingEmploymentAgency } from "@/components/onboarding/OnboardingEmploymentAgency";
 import { OnboardingHomeBasedBusiness } from "@/components/onboarding/OnboardingHomeBasedBusiness";
@@ -63,6 +64,8 @@ const ProfilePreviewIndustrySpecific = (props: Props) => {
               <OnboardingCannabisLicense />
               <hr className="margin-y-4" />
               <OnboardingCpa />
+              <hr className="margin-y-4" />
+              <OnboardingCertifiedInteriorDesigner />
               <hr className="margin-y-4" />
               <OnboardingEmploymentAgency />
               <hr className="margin-y-4" />

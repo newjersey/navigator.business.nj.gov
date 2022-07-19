@@ -4,6 +4,7 @@
   "defaultSectorId": "accommodation-and-food-services",
   "canBeReseller": true,
   "isProvidesStaffingServicesApplicable": false,
+  "isCertifiedInteriorDesignerApplicable": false,
   "isCpaRequiredApplicable": false,
   "canHavePermanentLocation": false,
   "roadmapSteps": [

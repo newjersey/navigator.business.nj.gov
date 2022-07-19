@@ -4,6 +4,7 @@
   "defaultSectorId": "real-estate",
   "canBeReseller": false,
   "isProvidesStaffingServicesApplicable": false,
+  "isCertifiedInteriorDesignerApplicable": false,
   "canHavePermanentLocation": true,
   "isCpaRequiredApplicable": false,
   "roadmapSteps": [
