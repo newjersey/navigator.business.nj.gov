@@ -42,7 +42,10 @@ const ProfilePreview = (props: Props) => {
     ...emptyUserData,
     profileData: {
       ...emptyUserData.profileData,
-      legalStructureId: tab === "numbers" ? "limited-liability-company" : undefined,
+      businessName: "cmsPreview",
+      nexusDbaName: "cmsPreview",
+      legalStructureId:
+        tab === "numbers" || businessPersona === "FOREIGN" ? "limited-liability-company" : undefined,
       businessPersona,
     },
   };
@@ -54,6 +57,7 @@ const ProfilePreview = (props: Props) => {
           municipalities={[]}
           CMS_ONLY_tab={tab as ProfileTabs}
           CMS_ONLY_businessPersona={businessPersona}
+          CMS_ONLY_foreignBusinessType={businessPersona === "FOREIGN" ? "NEXUS" : "NONE"}
           CMS_ONLY_fakeUserData={userData}
         />
       </div>

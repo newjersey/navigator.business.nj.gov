@@ -68,6 +68,7 @@ import { FormEvent, ReactElement, ReactNode, useContext, useState } from "react"
 interface Props {
   municipalities: Municipality[];
   CMS_ONLY_businessPersona?: BusinessPersona; // for CMS only
+  CMS_ONLY_foreignBusinessType?: ForeignBusinessType; // for CMS only
   CMS_ONLY_tab?: ProfileTabs; // for CMS only
   CMS_ONLY_fakeUserData?: UserData; // for CMS only
   CMS_ONLY_showEscapeModal?: boolean; // for CMS only
@@ -98,7 +99,8 @@ const ProfilePage = (props: Props): ReactElement => {
   const userData = props.CMS_ONLY_fakeUserData ?? userDataFromHook.userData;
   const businessPersona: BusinessPersona =
     props.CMS_ONLY_businessPersona ?? userData?.profileData.businessPersona;
-  const foreignBusinessType: ForeignBusinessType = userData?.profileData.foreignBusinessType;
+  const foreignBusinessType: ForeignBusinessType =
+    props.CMS_ONLY_foreignBusinessType ?? userData?.profileData.foreignBusinessType;
 
   const defaultTab =
     businessPersona && foreignBusinessType !== "NEXUS" ? defaultTabForPersona[businessPersona] : "info";
@@ -199,16 +201,17 @@ const ProfilePage = (props: Props): ReactElement => {
         </h2>
         {shouldShowNexusBusinessNameElements() && (
           <>
-            <div className="margin-top-3" />
+            <div className="margin-top-3" aria-hidden={true} />
             <ProfileNexusBusinessNameField />
+            <div className="margin-top-3" aria-hidden={true} />
             <ProfileNexusDBANameField />
-            <div className="margin-top-3" />
+            <div className="margin-top-3" aria-hidden={true} />
           </>
         )}
         <OnboardingIndustry onValidation={onValidation} fieldStates={fieldStates} />
-        <div className="margin-top-3" />
+        <div className="margin-top-3" aria-hidden={true} />
         <OnboardingLegalStructureDropdown disabled={userData?.formationData.getFilingResponse?.success} />
-        <div className="margin-top-3" />
+        <div className="margin-top-3" aria-hidden={true} />
         <OnboardingMunicipality onValidation={onValidation} fieldStates={fieldStates} h3Heading={true} />
         <OnboardingLocationInNewJersey />
       </>
