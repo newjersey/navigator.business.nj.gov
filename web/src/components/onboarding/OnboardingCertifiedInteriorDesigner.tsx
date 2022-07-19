@@ -25,8 +25,8 @@ export const OnboardingCertifiedInteriorDesigner = (): ReactElement => {
       <Content>{Config.profileDefaults[state.flow].certifiedInteriorDesigner.description}</Content>
       <FormControl variant="outlined" fullWidth>
         <RadioGroup
-          aria-label="Liquor License"
-          name="liquor-license"
+          aria-label="Interior Designer"
+          name="interior-designer"
           value={state.profileData.certifiedInteriorDesigner}
           onChange={handleCertifiedInteriorDesignerSelection}
           row
@@ -34,7 +34,7 @@ export const OnboardingCertifiedInteriorDesigner = (): ReactElement => {
           <FormControlLabel
             style={{ marginTop: ".75rem", alignItems: "flex-start", marginRight: "3rem" }}
             labelPlacement="end"
-            data-testid="liquor-license-true"
+            data-testid="interior-designer-true"
             value={true}
             control={<Radio color="primary" sx={{ paddingTop: "0px" }} />}
             label={Config.profileDefaults[state.flow].certifiedInteriorDesigner.radioButtonYesText}
@@ -42,7 +42,7 @@ export const OnboardingCertifiedInteriorDesigner = (): ReactElement => {
           <FormControlLabel
             style={{ marginTop: ".75rem", alignItems: "flex-start" }}
             labelPlacement="end"
-            data-testid="liquor-license-false"
+            data-testid="interior-designer-false"
             value={false}
             control={<Radio color="primary" sx={{ paddingTop: "0px" }} />}
             label={Config.profileDefaults[state.flow].certifiedInteriorDesigner.radioButtonNoText}
