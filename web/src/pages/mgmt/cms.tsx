@@ -65,6 +65,8 @@ const CMS = dynamic(
       // @ts-expect-error: No type definition available
       CMS.registerPreviewTemplate("profile-info-oscar", ProfilePreview);
       // @ts-expect-error: No type definition available
+      CMS.registerPreviewTemplate("profile-info-dakota", ProfilePreview);
+      // @ts-expect-error: No type definition available
       CMS.registerPreviewTemplate("profile-numbers-poppy", ProfilePreview);
       // @ts-expect-error: No type definition available
       CMS.registerPreviewTemplate("profile-numbers-oscar", ProfilePreview);

@@ -45,7 +45,7 @@
       },
       "nexusDbaName": {
         "placeholder": "",
-        "header": "",
+        "header": "### Doing Business As (DBA) New Jersey Business Name",
         "errorTextRequired": "",
         "description": ""
       }
@@ -53,9 +53,8 @@
     "nexusBusinessName": {
       "editButton": "Edit",
       "addButton": "Add",
-      "dbaNameHeader": "Doing Business As (DBA) New Jersey Business Name",
       "outOfStateNameHeader": "Out-of-State Business Name",
-      "emptyBusinessPlaceHolder": "Not-Entered"
+      "emptyBusinessPlaceHolder": "Not Entered"
     }
   }
 }

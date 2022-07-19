@@ -827,9 +827,21 @@ describe("profile", () => {
         ).toBeInTheDocument();
       });
 
-      it("displays Not-Entered when the user hasn't entered a business name yet", () => {
-        renderPage({ userData: nexusForeignBusinessProfile({ businessName: "" }) });
-        expect(screen.getByText("Not-Entered")).toBeInTheDocument();
+      it("displays Not Entered when the user hasn't entered a business name yet", () => {
+        renderPage({
+          userData: generateUserData({
+            profileData: generateProfileData({
+              businessPersona: "FOREIGN",
+              foreignBusinessType: "NEXUS",
+              legalStructureId: "limited-liability-company",
+              businessName: "",
+            }),
+          }),
+        });
+
+        expect(
+          screen.getByText(Config.profileDefaults.nexusBusinessName.emptyBusinessPlaceHolder)
+        ).toBeInTheDocument();
       });
 
       it("does not display out-of-state business name when SP/GP", () => {
@@ -839,7 +851,7 @@ describe("profile", () => {
           screen.queryByText(Config.profileDefaults.nexusBusinessName.outOfStateNameHeader)
         ).not.toBeInTheDocument();
         expect(
-          screen.queryByText(Config.profileDefaults.nexusBusinessName.dbaNameHeader)
+          screen.queryByText(Config.profileDefaults.FOREIGN.nexusDbaName.header)
         ).not.toBeInTheDocument();
       });
 
@@ -856,7 +868,9 @@ describe("profile", () => {
           }),
         });
         expect(screen.getByText("Test Business")).toBeInTheDocument();
-        expect(screen.getByText(Config.profileDefaults.nexusBusinessName.dbaNameHeader)).toBeInTheDocument();
+        expect(
+          screen.getByText(markdownToText(Config.profileDefaults.FOREIGN.nexusDbaName.header))
+        ).toBeInTheDocument();
         expect(screen.getByTestId("onboardingFieldContent-nexusDbaName")).toBeInTheDocument();
       });
 
@@ -869,7 +883,7 @@ describe("profile", () => {
         });
         expect(screen.getByText("Test Business")).toBeInTheDocument();
         expect(
-          screen.queryByText(Config.profileDefaults.nexusBusinessName.dbaNameHeader)
+          screen.queryByText(Config.profileDefaults.FOREIGN.nexusDbaName.header)
         ).not.toBeInTheDocument();
         expect(screen.queryByTestId("onboardingFieldContent-nexusDbaName")).not.toBeInTheDocument();
       });
