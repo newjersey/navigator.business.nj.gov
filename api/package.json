@@ -67,7 +67,7 @@
     "@types/jest": "28.1.4",
     "@types/jsonwebtoken": "8.5.8",
     "@types/lodash.escape": "4.0.7",
-    "@types/node": "16.11.43",
+    "@types/node": "16.11.45",
     "@types/simple-oauth2": "4.1.1",
     "@types/supertest": "2.0.12",
     "@types/webpack-node-externals": "2.5.3",
