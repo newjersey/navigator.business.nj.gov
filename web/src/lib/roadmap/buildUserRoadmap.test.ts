@@ -325,7 +325,7 @@ describe("buildUserRoadmap", () => {
 
         await buildUserRoadmap(profileData);
         const lastCalledWith = getLastCalledWith(mockRoadmapBuilder)[0];
-        expect(lastCalledWith.industryId).toEqual("administrative-and-employment-services");
+        expect(lastCalledWith.industryId).toEqual("employment-agency");
       });
 
       it("keeps industry as it-consultant if no staffing service provided", async () => {
