@@ -8,11 +8,15 @@ import { OnboardingLiquorLicense } from "@/components/onboarding/OnboardingLiquo
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { isCannabisLicenseApplicable } from "@/lib/domain-logic/isCannabisLicenseApplicable";
+import { isCertifiedInteriorDesignerApplicable } from "@/lib/domain-logic/isCertifiedInteriorDesignerApplicable";
 import { isCpaRequiredApplicable } from "@/lib/domain-logic/isCpaRequiredApplicable";
 import { isLiquorLicenseApplicable } from "@/lib/domain-logic/isLiquorLicenseApplicable";
+import { isProvidesStaffingServicesApplicable } from "@/lib/domain-logic/isProvidesStaffingServicesApplicable";
 import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import { setHeaderRole } from "@/lib/utils/helpers";
 import { FocusEvent, ReactElement, useContext } from "react";
+import { OnboardingCertifiedInteriorDesigner } from "./OnboardingCertifiedInteriorDesigner";
+import { OnboardingStaffingService } from "./OnboardingStaffingService";
 
 interface Props {
   onValidation: (field: ProfileFields, invalid: boolean) => void;
@@ -79,6 +83,18 @@ export const OnboardingIndustry = ({ headerAriaLevel = 2, ...props }: Props): Re
         {isCannabisLicenseApplicable(state.profileData.industryId) && (
           <div className="margin-top-4" data-testid={`industry-specific-${state.profileData.industryId}`}>
             <OnboardingCannabisLicense />
+          </div>
+        )}
+
+        {isCertifiedInteriorDesignerApplicable(state.profileData.industryId) && (
+          <div className="margin-top-4" data-testid={`industry-specific-${state.profileData.industryId}`}>
+            <OnboardingCertifiedInteriorDesigner />
+          </div>
+        )}
+
+        {isProvidesStaffingServicesApplicable(state.profileData.industryId) && (
+          <div className="margin-top-4" data-testid={`industry-specific-${state.profileData.industryId}`}>
+            <OnboardingStaffingService />
           </div>
         )}
       </div>

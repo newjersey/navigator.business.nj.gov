@@ -5,6 +5,7 @@
   "defaultSectorId": "professional-scientific-and-technical-services",
   "canBeReseller": true,
   "isProvidesStaffingServicesApplicable": false,
+  "isCertifiedInteriorDesignerApplicable": false,
   "isCpaRequiredApplicable": false,
   "isEnabled": true,
   "roadmapSteps": [

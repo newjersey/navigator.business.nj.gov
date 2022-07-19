@@ -5,6 +5,7 @@
   "defaultSectorId": "health-care-and-social-assistance",
   "canBeReseller": true,
   "isProvidesStaffingServicesApplicable": false,
+  "isCertifiedInteriorDesignerApplicable": false,
   "isCpaRequiredApplicable": false,
   "isEnabled": true,
   "roadmapSteps": [

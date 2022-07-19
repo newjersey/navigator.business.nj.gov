@@ -33,6 +33,10 @@ export const buildUserRoadmap = async (profileData: ProfileData): Promise<Roadma
     industryId = "administrative-and-employment-services";
   }
 
+  if (profileData.industryId === "interior-designer" && !profileData.certifiedInteriorDesigner) {
+    industryId = "generic";
+  }
+
   const addOns: string[] = [
     ...getForeignAddOns(profileData),
     ...getIndustryBasedAddOns(profileData, industryId),

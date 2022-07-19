@@ -2227,6 +2227,18 @@ collections:
         name: isLiquorLicenseApplicable
         widget: boolean
         default: false
+      - label: CPA Required
+        name: isCpaRequiredApplicable
+        widget: boolean
+        default: false
+      - label: Staffing Service
+        name: isProvidesStaffingServicesApplicable
+        widget: boolean
+        default: false
+      - label: Certified Interior Designer
+        name: isCertifiedInteriorDesignerApplicable
+        widget: boolean
+        default: false
       - label: Mobile Location
         name: canHavePermanentLocation
         widget: boolean

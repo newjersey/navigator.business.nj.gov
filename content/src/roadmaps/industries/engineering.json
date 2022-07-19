@@ -4,6 +4,7 @@
   "defaultSectorId": "construction",
   "canBeReseller": false,
   "isProvidesStaffingServicesApplicable": false,
+  "isCertifiedInteriorDesignerApplicable": false,
   "isCpaRequiredApplicable": false,
   "canHavePermanentLocation": true,
   "roadmapSteps": [
