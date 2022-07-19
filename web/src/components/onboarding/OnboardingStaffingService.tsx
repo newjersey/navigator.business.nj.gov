@@ -25,8 +25,8 @@ export const OnboardingStaffingService = (): ReactElement => {
       <Content>{Config.profileDefaults[state.flow].staffingService.description}</Content>
       <FormControl variant="outlined" fullWidth>
         <RadioGroup
-          aria-label="Liquor License"
-          name="liquor-license"
+          aria-label="Staffing Service"
+          name="staffing-service"
           value={state.profileData.providesStaffingService}
           onChange={handleProvidesStaffingServiceSelection}
           row
@@ -34,7 +34,7 @@ export const OnboardingStaffingService = (): ReactElement => {
           <FormControlLabel
             style={{ marginTop: ".75rem", alignItems: "flex-start", marginRight: "3rem" }}
             labelPlacement="end"
-            data-testid="liquor-license-true"
+            data-testid="staffing-service-true"
             value={true}
             control={<Radio color="primary" sx={{ paddingTop: "0px" }} />}
             label={Config.profileDefaults[state.flow].staffingService.radioButtonYesText}
@@ -42,7 +42,7 @@ export const OnboardingStaffingService = (): ReactElement => {
           <FormControlLabel
             style={{ marginTop: ".75rem", alignItems: "flex-start" }}
             labelPlacement="end"
-            data-testid="liquor-license-false"
+            data-testid="staffing-service-false"
             value={false}
             control={<Radio color="primary" sx={{ paddingTop: "0px" }} />}
             label={Config.profileDefaults[state.flow].staffingService.radioButtonNoText}

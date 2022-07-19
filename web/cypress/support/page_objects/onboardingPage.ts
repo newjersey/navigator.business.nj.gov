@@ -18,6 +18,14 @@ export class OnboardingPage {
     return cy.get(`input[name="cpa"]${radio === undefined ? "" : `[value="${radio}"]`}`);
   }
 
+  getStaffingService(radio?: boolean) {
+    return cy.get(`input[name="staffing-service"]${radio === undefined ? "" : `[value="${radio}"]`}`);
+  }
+
+  getInteriorDesigner(radio?: boolean) {
+    return cy.get(`input[name="interior-designer"]${radio === undefined ? "" : `[value="${radio}"]`}`);
+  }
+
   getIndustryDropdown() {
     return cy.get('[data-testid="industryid"]');
   }
@@ -86,6 +94,13 @@ export class OnboardingPage {
     this.getCpa(radio).check();
   }
 
+  selectStaffingService(radio: boolean) {
+    this.getStaffingService(radio).check();
+  }
+
+  selectInteriorDesigner(radio: boolean) {
+    this.getInteriorDesigner(radio).check();
+  }
   selectIndustry(industry: string) {
     const industryValue = LookupIndustryById(industry).name;
     this.getIndustryDropdown().click();

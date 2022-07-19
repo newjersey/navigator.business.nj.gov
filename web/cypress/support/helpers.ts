@@ -95,6 +95,8 @@ interface StartingOnboardingData {
   homeBasedQuestion: boolean | undefined;
   liquorLicenseQuestion: boolean | undefined;
   requiresCpa: boolean | undefined;
+  providesStaffingService: boolean | undefined;
+  certifiedInteriorDesigner: boolean | undefined;
 }
 
 interface ExistingOnboardingData {
@@ -120,6 +122,8 @@ export const completeNewBusinessOnboarding = ({
   homeBasedQuestion = undefined,
   liquorLicenseQuestion = undefined,
   requiresCpa = undefined,
+  providesStaffingService = undefined,
+  certifiedInteriorDesigner = undefined,
   fullName = `Michael Smith ${randomInt()}`,
   email = `MichaelSmith${randomInt()}@gmail.com`,
   isNewsletterChecked = false,
@@ -140,6 +144,16 @@ export const completeNewBusinessOnboarding = ({
 
   if (requiresCpa === undefined) {
     requiresCpa = industry.isCpaRequiredApplicable === false ? undefined : Boolean(randomInt() % 2);
+  }
+
+  if (providesStaffingService === undefined) {
+    providesStaffingService =
+      industry.isProvidesStaffingServicesApplicable === false ? undefined : Boolean(randomInt() % 2);
+  }
+
+  if (certifiedInteriorDesigner === undefined) {
+    certifiedInteriorDesigner =
+      industry.isCertifiedInteriorDesignerApplicable === false ? undefined : Boolean(randomInt() % 2);
   }
 
   if (legalStructureId === undefined) {
@@ -183,6 +197,22 @@ export const completeNewBusinessOnboarding = ({
     onOnboardingPage.selectCpa(requiresCpa);
     onOnboardingPage.getCpa(requiresCpa).should("be.checked");
     onOnboardingPage.getCpa(!requiresCpa).should("not.be.checked");
+  }
+
+  if (providesStaffingService === undefined) {
+    onOnboardingPage.getStaffingService().should("not.exist");
+  } else {
+    onOnboardingPage.selectStaffingService(providesStaffingService);
+    onOnboardingPage.getStaffingService(providesStaffingService).should("be.checked");
+    onOnboardingPage.getStaffingService(!providesStaffingService).should("not.be.checked");
+  }
+
+  if (certifiedInteriorDesigner === undefined) {
+    onOnboardingPage.getInteriorDesigner().should("not.exist");
+  } else {
+    onOnboardingPage.selectInteriorDesigner(certifiedInteriorDesigner);
+    onOnboardingPage.getInteriorDesigner(certifiedInteriorDesigner).should("be.checked");
+    onOnboardingPage.getInteriorDesigner(!certifiedInteriorDesigner).should("not.be.checked");
   }
 
   onOnboardingPage.clickNext();
