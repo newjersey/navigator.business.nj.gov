@@ -1,6 +1,8 @@
 {
   "canBeHomeBased": true,
   "defaultSectorId": "real-estate",
+  "isProvidesStaffingServicesApplicable": false,
+  "isCertifiedInteriorDesignerApplicable": false,
   "canBeReseller": false,
   "isCpaRequiredApplicable": false,
   "canHavePermanentLocation": true,
