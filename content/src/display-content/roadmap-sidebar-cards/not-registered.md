@@ -7,7 +7,7 @@ weight: 2
 imgPath: ""
 color: primary
 shadowColor: null
-borderColor: primary
+borderColor: primary-light
 ---
 
 ### Register to Save Your Progress
