@@ -3,9 +3,6 @@
   "canBeHomeBased": false,
   "defaultSectorId": "real-estate",
   "canBeReseller": false,
-  "isProvidesStaffingServicesApplicable": false,
-  "isCertifiedInteriorDesignerApplicable": false,
-  "isRealEstateAppraisalManagementApplicable": false,
   "isCpaRequiredApplicable": false,
   "canHavePermanentLocation": true,
   "roadmapSteps": [
@@ -47,8 +44,11 @@
   ],
   "name": "Real Estate Brokerage",
   "isLiquorLicenseApplicable": false,
-  "isEnabled": false,
+  "isRealEstateAppraisalManagementApplicable": false,
+  "isEnabled": true,
+  "isCertifiedInteriorDesignerApplicable": false,
   "additionalSearchTerms": "real estate broker, brokerage, ",
   "id": "real-estate-broker",
+  "isProvidesStaffingServicesApplicable": false,
   "description": "Facilitates real estate transactions between buyers and sellers"
 }
