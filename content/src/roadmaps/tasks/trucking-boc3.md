@@ -1,7 +1,7 @@
 ---
 urlSlug: trucking-boc3
 filename: trucking-boc3
-name: File Your Blanket of Coverage
+name: File Your Blanket of Coverage (BOC-3)
 id: trucking-boc3
 callToActionLink: https://www.fmcsa.dot.gov/registration/form-boc-3-designation-agents-service-process
 callToActionText: File My BOC-3
