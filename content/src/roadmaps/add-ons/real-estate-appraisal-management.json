@@ -1,0 +1,15 @@
+{
+    "roadmapSteps": [
+      {
+        "step": 1,
+        "weight": 19,
+        "task": "appraiser-certification"
+      },
+      {
+        "step": 3,
+        "weight": 21,
+        "task": "appraiser-company-register"
+      }
+    ]
+  }
+  

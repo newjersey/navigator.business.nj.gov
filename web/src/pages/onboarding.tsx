@@ -268,6 +268,7 @@ const OnboardingPage = (props: Props): ReactElement => {
         nexusDbaName: undefined,
         providesStaffingService: profileData.providesStaffingService,
         certifiedInteriorDesigner: profileData.certifiedInteriorDesigner,
+        realEstateAppraisalManagement: profileData.realEstateAppraisalManagement,
       };
 
       setProfileData(newProfileData);

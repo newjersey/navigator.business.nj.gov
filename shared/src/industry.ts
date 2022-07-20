@@ -18,6 +18,7 @@ export interface Industry {
   readonly isEnabled: boolean;
   readonly isProvidesStaffingServicesApplicable: boolean;
   readonly isCertifiedInteriorDesignerApplicable: boolean;
+  readonly isRealEstateAppraisalManagementApplicable: boolean;
 }
 
 export interface AddOn {
@@ -47,6 +48,7 @@ export const LookupIndustryById = (id: string | undefined): Industry => {
       isEnabled: false,
       isProvidesStaffingServicesApplicable: false,
       isCertifiedInteriorDesignerApplicable: false,
+      isRealEstateAppraisalManagementApplicable: false,
     }
   );
 };

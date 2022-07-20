@@ -36,6 +36,7 @@ export interface ProfileData {
   readonly nexusDbaName: string | undefined;
   readonly providesStaffingService: boolean;
   readonly certifiedInteriorDesigner: boolean;
+  readonly realEstateAppraisalManagement: boolean;
 }
 
 export const emptyProfileData: ProfileData = {
@@ -68,6 +69,7 @@ export const emptyProfileData: ProfileData = {
   nexusDbaName: undefined,
   providesStaffingService: false,
   certifiedInteriorDesigner: false,
+  realEstateAppraisalManagement: false,
 };
 
 export const createEmptyProfileData = (): ProfileData => {

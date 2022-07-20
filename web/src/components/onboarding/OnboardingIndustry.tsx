@@ -12,10 +12,12 @@ import { isCertifiedInteriorDesignerApplicable } from "@/lib/domain-logic/isCert
 import { isCpaRequiredApplicable } from "@/lib/domain-logic/isCpaRequiredApplicable";
 import { isLiquorLicenseApplicable } from "@/lib/domain-logic/isLiquorLicenseApplicable";
 import { isProvidesStaffingServicesApplicable } from "@/lib/domain-logic/isProvidesStaffingServicesApplicable";
+import { isRealEstateAppraisalManagementApplicable } from "@/lib/domain-logic/isRealEstateAppraisalManagementApplicable";
 import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import { setHeaderRole } from "@/lib/utils/helpers";
 import { FocusEvent, ReactElement, useContext } from "react";
 import { OnboardingCertifiedInteriorDesigner } from "./OnboardingCertifiedInteriorDesigner";
+import { OnboardingRealEstateAppraisalManagement } from "./OnboardingRealEstateAppraisalManagement";
 import { OnboardingStaffingService } from "./OnboardingStaffingService";
 
 interface Props {
@@ -95,6 +97,12 @@ export const OnboardingIndustry = ({ headerAriaLevel = 2, ...props }: Props): Re
         {isProvidesStaffingServicesApplicable(state.profileData.industryId) && (
           <div className="margin-top-4" data-testid={`industry-specific-${state.profileData.industryId}`}>
             <OnboardingStaffingService />
+          </div>
+        )}
+
+        {isRealEstateAppraisalManagementApplicable(state.profileData.industryId) && (
+          <div className="margin-top-4" data-testid={`industry-specific-${state.profileData.industryId}`}>
+            <OnboardingRealEstateAppraisalManagement />
           </div>
         )}
       </div>
