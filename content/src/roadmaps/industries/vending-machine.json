@@ -3,9 +3,6 @@
   "canBeHomeBased": false,
   "defaultSectorId": "accommodation-and-food-services",
   "canBeReseller": true,
-  "isProvidesStaffingServicesApplicable": false,
-  "isCertifiedInteriorDesignerApplicable": false,
-  "isRealEstateAppraisalManagementApplicable": false,
   "isCpaRequiredApplicable": false,
   "canHavePermanentLocation": false,
   "roadmapSteps": [
@@ -47,8 +44,11 @@
   ],
   "name": "Vending Machine",
   "isLiquorLicenseApplicable": false,
-  "isEnabled": false,
+  "isRealEstateAppraisalManagementApplicable": false,
+  "isEnabled": true,
+  "isCertifiedInteriorDesignerApplicable": false,
   "additionalSearchTerms": "vending machine service, vending machine business, snack machine, vending machine operator",
   "id": "vending-machine",
+  "isProvidesStaffingServicesApplicable": false,
   "description": "Offers small items for purchase through an automated machine"
 }
