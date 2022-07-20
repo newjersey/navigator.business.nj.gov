@@ -163,7 +163,7 @@ describe("roadmap page", () => {
     renderRoadmapPage({});
 
     expect(screen.getByText("step1", { exact: false })).toBeInTheDocument();
-    expect(screen.getByText("1-2 weeks")).toBeInTheDocument();
+    expect(screen.getByText("(1-2 weeks)")).toBeInTheDocument();
     expect(screen.getByText("task1")).toBeInTheDocument();
     expect(screen.getByText("task2")).toBeInTheDocument();
 

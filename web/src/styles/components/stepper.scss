@@ -1,102 +1,54 @@
 .vertical-step-indicator {
-  .usa-step-indicator--counters .usa-step-indicator__segment:before,
-  .usa-step-indicator--counters-sm .usa-step-indicator__segment:before {
-    height: 2.5rem;
+  .usa-step-indicator--counters .usa-step-indicator__segment,
+  .usa-step-indicator--counters-smaller .usa-step-indicator__segment {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  .usa-step-indicator--counters .usa-step-indicator__segment:before {
+    height: 2rem;
     border-radius: 99rem;
-    width: 2.5rem;
+    width: 2rem;
     font-feature-settings: "tnum" 1, "kern" 1;
     content: attr(data-num) !important;
-    display: block;
     font-weight: 700;
-    left: 0;
     line-height: 1;
-    padding: calc((2.5rem - (2ex * 1)) * 0.5);
+    padding: 7px;
     position: absolute;
     text-align: center;
     top: calc((2.5rem - 0.5rem) / -2);
     z-index: 100;
-    font-size: 22px;
-
-    @media all and (min-width: $sm) {
-      margin-top: 0;
-    }
+    font-size: 18px;
+    margin-top: 16px;
+    color: $primary-darker !important;
+    box-shadow: inset 0 0 0 0.2rem $primary-darker, 0 0 0 0 #fff !important;
   }
 
-  .usa-step-indicator--counters-sm .usa-step-indicator__segment:before {
+  .usa-step-indicator--counters .usa-step-indicator__segment-smaller:before {
     height: 1.5rem;
     width: 1.5rem;
-    font-size: 0.93rem;
-    padding: calc(0.25rem + 1px);
-    top: 4px;
-  }
-
-  .usa-step-indicator {
-    margin-bottom: 0 !important;
-  }
-
-  @media all and (min-width: $sm) {
-    .usa-step-indicator--counters .usa-step-indicator__segment-label,
-    .usa-step-indicator--counters-sm .usa-step-indicator__segment-label {
-      margin-top: 0 !important;
-    }
-  }
-
-  .usa-step-indicator__segments {
-    display: block !important;
-  }
-
-  .usa-step-indicator__segment--complete:before,
-  .usa-step-indicator__segment--current:before {
-    content: attr(data-num) !important;
-  }
-
-  .vertical-bar,
-  .vertical-bar-sm {
-    position: absolute;
-    height: 0rem;
-    z-index: 90;
-
-    @media all and (min-width: $sm) {
-      margin-top: 0;
-    }
-  }
-
-  .vertical-bar-sm {
-    width: 0.25rem;
-    left: calc((1.5rem + (0.5rem / 2)) / 2);
+    padding: 4px;
+    font-size: 16px;
+    box-shadow: inset 0 0 0 0.15rem $primary-darker, 0 0 0 0 #fff !important;
   }
 
   .vertical-bar {
-    width: 0.5rem;
-    left: calc(((2.5rem - 0.5rem) / 2));
-
-    @media all and (min-width: $sm) {
-      margin-top: 0;
-    }
+    width: 0.25rem;
+    position: absolute;
+    height: 0rem;
+    z-index: 90;
+    left: calc(((2rem - 0.25rem) / 2));
+    background-color: $base-lighter;
+    left: 39px;
   }
 
-  .vertical-bar.complete,
-  .vertical-bar-sm.complete {
-    background-color: $primary-darker;
-  }
-
-  .vertical-bar.current,
-  .vertical-bar-sm.current {
-    background-color: $primary;
-  }
-
-  // override and remove default vertical
-  .usa-step-indicator__segment--complete:after,
-  .usa-step-indicator__segment--current:after {
-    display: none !important;
-  }
-
-  @media (min-width: $sm) {
-    .usa-step-indicator--counters .usa-step-indicator__segment,
-    .usa-step-indicator--counters-sm .usa-step-indicator__segment {
-      margin-top: 0 !important;
-      margin-bottom: 0 !important;
-    }
+  .vertical-bar-smaller {
+    width: 0.25rem;
+    position: absolute;
+    height: 0rem;
+    z-index: 90;
+    background-color: $base-lighter;
+    left: 11px;
   }
 }
 
