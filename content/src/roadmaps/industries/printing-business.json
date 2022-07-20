@@ -6,6 +6,7 @@
   "canBeReseller": true,
   "isProvidesStaffingServicesApplicable": false,
   "isCertifiedInteriorDesignerApplicable": false,
+  "isRealEstateAppraisalManagementApplicable": false,
   "isCpaRequiredApplicable": false,
   "isEnabled": true,
   "roadmapSteps": [

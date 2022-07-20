@@ -97,6 +97,7 @@ interface StartingOnboardingData {
   requiresCpa: boolean | undefined;
   providesStaffingService: boolean | undefined;
   certifiedInteriorDesigner: boolean | undefined;
+  realEstateAppraisalManagement: boolean | undefined;
 }
 
 interface ExistingOnboardingData {
@@ -124,6 +125,7 @@ export const completeNewBusinessOnboarding = ({
   requiresCpa = undefined,
   providesStaffingService = undefined,
   certifiedInteriorDesigner = undefined,
+  realEstateAppraisalManagement = undefined,
   fullName = `Michael Smith ${randomInt()}`,
   email = `MichaelSmith${randomInt()}@gmail.com`,
   isNewsletterChecked = false,
@@ -154,6 +156,11 @@ export const completeNewBusinessOnboarding = ({
   if (certifiedInteriorDesigner === undefined) {
     certifiedInteriorDesigner =
       industry.isCertifiedInteriorDesignerApplicable === false ? undefined : Boolean(randomInt() % 2);
+  }
+
+  if (realEstateAppraisalManagement === undefined) {
+    realEstateAppraisalManagement =
+      industry.isRealEstateAppraisalManagementApplicable === false ? undefined : Boolean(randomInt() % 2);
   }
 
   if (legalStructureId === undefined) {
@@ -213,6 +220,14 @@ export const completeNewBusinessOnboarding = ({
     onOnboardingPage.selectInteriorDesigner(certifiedInteriorDesigner);
     onOnboardingPage.getInteriorDesigner(certifiedInteriorDesigner).should("be.checked");
     onOnboardingPage.getInteriorDesigner(!certifiedInteriorDesigner).should("not.be.checked");
+  }
+
+  if (realEstateAppraisalManagement === undefined) {
+    onOnboardingPage.getRealEstateAppraisal().should("not.exist");
+  } else {
+    onOnboardingPage.selectRealEstateAppraisal(realEstateAppraisalManagement);
+    onOnboardingPage.getRealEstateAppraisal(certifiedInteriorDesigner).should("be.checked");
+    onOnboardingPage.getRealEstateAppraisal(!certifiedInteriorDesigner).should("not.be.checked");
   }
 
   onOnboardingPage.clickNext();

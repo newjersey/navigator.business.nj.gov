@@ -2351,6 +2351,10 @@ collections:
         name: isCertifiedInteriorDesignerApplicable
         widget: boolean
         default: false
+      - label: Real Estate Appraisal Management
+        name: isRealEstateAppraisalManagementApplicable
+        widget: boolean
+        default: false
       - label: Mobile Location
         name: canHavePermanentLocation
         widget: boolean

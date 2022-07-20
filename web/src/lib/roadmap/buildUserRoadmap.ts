@@ -115,6 +115,14 @@ const getIndustryBasedAddOns = (profileData: ProfileData, industryId: string | u
     addOns.push("cannabis-conditional");
   }
 
+  if (industry.id === "real-estate-appraisals") {
+    if (profileData.realEstateAppraisalManagement) {
+      addOns.push("real-estate-appraisal-management");
+    } else {
+      addOns.push("real-estate-appraiser");
+    }
+  }
+
   if (industry.canBeReseller) {
     addOns.push("reseller");
   }

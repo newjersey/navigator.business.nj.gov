@@ -3,6 +3,7 @@
   "defaultSectorId": "real-estate",
   "canBeReseller": false,
   "isCpaRequiredApplicable": false,
+  "isRealEstateAppraisalManagementApplicable": true,
   "canHavePermanentLocation": true,
   "roadmapSteps": [
     {

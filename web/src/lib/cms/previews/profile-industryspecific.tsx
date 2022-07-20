@@ -6,6 +6,7 @@ import { OnboardingEmploymentAgency } from "@/components/onboarding/OnboardingEm
 import { OnboardingHomeBasedBusiness } from "@/components/onboarding/OnboardingHomeBasedBusiness";
 import { OnboardingHomeContractor } from "@/components/onboarding/OnboardingHomeContractor";
 import { OnboardingLiquorLicense } from "@/components/onboarding/OnboardingLiquorLicense";
+import { OnboardingRealEstateAppraisalManagement } from "@/components/onboarding/OnboardingRealEstateAppraisalManagement";
 import { OnboardingStaffingService } from "@/components/onboarding/OnboardingStaffingService";
 import { ConfigContext, ConfigType, getMergedConfig } from "@/contexts/configContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
@@ -75,6 +76,8 @@ const ProfilePreviewIndustrySpecific = (props: Props) => {
               <OnboardingHomeContractor />
               <hr className="margin-y-4" />
               <OnboardingLiquorLicense />
+              <hr className="margin-y-4" />
+              <OnboardingRealEstateAppraisalManagement />
             </>
           )}
         </ProfileDataContext.Provider>
