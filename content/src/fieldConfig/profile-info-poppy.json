@@ -23,7 +23,8 @@
         "placeholder": "Select an industry",
         "header": "## Industry",
         "description": "Which industry best describes your business?",
-        "errorTextRequired": "Industry is a required field."
+        "errorTextRequired": "Industry is a required field.",
+        "searchAffirmation": "_\"**${searchText}**\" falls under the industries below:_"
       },
       "sectorId": {
         "placeholder": "",
