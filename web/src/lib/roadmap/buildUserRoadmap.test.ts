@@ -320,30 +320,32 @@ describe("buildUserRoadmap", () => {
     }
 
     describe("on-boarding modifications", () => {
-      describe("it consultant - staffing service", () => {
-        it("set industry to employment-agency if it-consultant with staffing service", async () => {
-          const profileData: ProfileData = {
-            ...createEmptyProfileData(),
-            industryId: "it-consultant",
-            providesStaffingService: true,
-          };
+      describe("staffing service", () => {
+        for (const industry of Industries.filter((x) => x.isProvidesStaffingServicesApplicable)) {
+          it(`set industry to employment-agency if ${industry.name} with staffing service`, async () => {
+            const profileData: ProfileData = {
+              ...createEmptyProfileData(),
+              industryId: industry.id,
+              providesStaffingService: true,
+            };
 
-          await buildUserRoadmap(profileData);
-          const lastCalledWith = getLastCalledWith(mockRoadmapBuilder)[0];
-          expect(lastCalledWith.industryId).toEqual("employment-agency");
-        });
+            await buildUserRoadmap(profileData);
+            const lastCalledWith = getLastCalledWith(mockRoadmapBuilder)[0];
+            expect(lastCalledWith.industryId).toEqual("employment-agency");
+          });
 
-        it("keeps industry as it-consultant if no staffing service provided", async () => {
-          const profileData: ProfileData = {
-            ...createEmptyProfileData(),
-            industryId: "it-consultant",
-            providesStaffingService: false,
-          };
+          it(`keeps industry as ${industry.name} if no staffing service provided`, async () => {
+            const profileData: ProfileData = {
+              ...createEmptyProfileData(),
+              industryId: industry.id,
+              providesStaffingService: false,
+            };
 
-          await buildUserRoadmap(profileData);
-          const lastCalledWith = getLastCalledWith(mockRoadmapBuilder)[0];
-          expect(lastCalledWith.industryId).toEqual("it-consultant");
-        });
+            await buildUserRoadmap(profileData);
+            const lastCalledWith = getLastCalledWith(mockRoadmapBuilder)[0];
+            expect(lastCalledWith.industryId).toEqual(industry.id);
+          });
+        }
       });
 
       describe("interior designer - certified", () => {
