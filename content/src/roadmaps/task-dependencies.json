@@ -228,13 +228,19 @@
     {
       "name": "register-for-taxes-foreign",
       "dependencies": [
-        "form-business-entity"
+        "form-business-entity-foreign"
       ]
     },
     {
       "name": "apply-scorp-federal",
       "dependencies": [
         "register-for-taxes-foreign"
+      ]
+    },
+    {
+      "name": "form-business-entity-foreign",
+      "dependencies": [
+        "dba-resolution-foreign"
       ]
     }
   ]
