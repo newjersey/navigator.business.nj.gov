@@ -1,7 +1,7 @@
 ---
 urlSlug: trucking-irp
 filename: trucking-irp
-name: File Your International Registration Plan
+name: File Your International Registration Plan (IRP)
 id: trucking-irp
 callToActionLink: https://www.state.nj.us/mvc/pdf/business/irpqui1.pdf
 callToActionText: File My IRP
