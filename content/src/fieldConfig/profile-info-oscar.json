@@ -46,7 +46,8 @@
         "placeholder": "",
         "header": "",
         "description": "",
-        "errorTextRequired": ""
+        "errorTextRequired": "",
+        "searchAffirmation": ""
       },
       "nexusDbaName": {
         "placeholder": "",

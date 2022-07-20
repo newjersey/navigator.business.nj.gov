@@ -6,7 +6,7 @@ import { isCannabisLicenseApplicable } from "@/lib/domain-logic/isCannabisLicens
 import { isCpaRequiredApplicable } from "@/lib/domain-logic/isCpaRequiredApplicable";
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
 import { isLiquorLicenseApplicable } from "@/lib/domain-logic/isLiquorLicenseApplicable";
-import { splitAndBoldSearchText } from "@/lib/utils/helpers";
+import { splitAndBoldSearchText, templateEval } from "@/lib/utils/helpers";
 import {
   CannabisLicenseType,
   Industries,
@@ -14,9 +14,10 @@ import {
   isIndustryIdGeneric,
   LookupIndustryById,
 } from "@businessnjgovnavigator/shared/";
-import { Autocomplete, createFilterOptions, TextField } from "@mui/material";
+import { Autocomplete, createFilterOptions, FilterOptionsState, TextField } from "@mui/material";
 import orderBy from "lodash.orderby";
 import { ChangeEvent, FocusEvent, ReactElement, useContext, useState } from "react";
+import { Content } from "../Content";
 
 interface Props {
   handleChange?: () => void;
@@ -83,15 +84,38 @@ export const IndustryDropdown = (props: Props): ReactElement => {
     setSearchText(value ? value.name : "");
   };
 
-  const filterOptions = createFilterOptions({
-    matchFrom: "any",
-    stringify: (option: Industry) => `${option.name} ${option.description} ${option.additionalSearchTerms}`,
-  });
+  const getFilterOptions = (options: Industry[], state: FilterOptionsState<Industry>) => {
+    const filterOptions = createFilterOptions({
+      matchFrom: "any",
+      stringify: (option: Industry) => `${option.name} ${option.description} ${option.additionalSearchTerms}`,
+    });
+    const industriesList = filterOptions(options, state);
+
+    if (industriesList.length === 0) {
+      return [LookupIndustryById("generic")];
+    }
+    return industriesList;
+  };
 
   return (
     <Autocomplete
       options={IndustriesOrdered}
-      filterOptions={filterOptions}
+      filterOptions={getFilterOptions}
+      groupBy={() => "DEFAULT-GROUP"}
+      renderGroup={(params) => (
+        <div key={params.key}>
+          {searchText.length > 0 && (
+            <div className="padding-2" data-testid="search-affirmation">
+              <Content>
+                {templateEval(Config.profileDefaults[state.flow].industryId.searchAffirmation, {
+                  searchText: searchText,
+                })}
+              </Content>
+            </div>
+          )}
+          {params.children}
+        </div>
+      )}
       getOptionLabel={(industry: Industry) => industry.name}
       isOptionEqualToValue={(option: Industry, value: Industry) => option.id === value.id}
       value={state.profileData.industryId ? LookupIndustryById(state.profileData.industryId) : null}
@@ -135,6 +159,14 @@ export const IndustryDropdown = (props: Props): ReactElement => {
       openOnFocus
       clearOnEscape
       autoHighlight
+      ListboxProps={{
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        sx: {
+          "& li:nth-of-type(even)": { backgroundColor: "#F9FBFB" },
+          "& li:nth-of-type(odd)": { backgroundColor: "#FFFFFF" },
+        },
+      }}
     />
   );
 };
