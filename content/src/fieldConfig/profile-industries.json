@@ -44,6 +44,12 @@
         "radioButtonNoText": "No",
         "header": "### Certified Interior Designer",
         "description": "WIll you market as a certified interior designer?"
+      },
+      "realEstateAppraisalManagement": {
+        "radioButtonYesText": "Yes",
+        "radioButtonNoText": "No",
+        "header": "### Appraisal Management",
+        "description": "Are you looking to start an appraisal management company?"
       }
     },
     "FOREIGN": {
@@ -90,6 +96,12 @@
         "radioButtonNoText": "No",
         "header": "### Certified Interior Designer",
         "description": "WIll you market as a certified interior designer?"
+      },
+      "realEstateAppraisalManagement": {
+        "radioButtonYesText": "Yes",
+        "radioButtonNoText": "No",
+        "header": "### Appraisal Management",
+        "description": "Are you looking to start an appraisal management company?"
       }
     },
     "OWNING": {
@@ -126,6 +138,12 @@
         "description": ""
       },
       "certifiedInteriorDesigner": {
+        "radioButtonYesText": "",
+        "radioButtonNoText": "",
+        "header": "",
+        "description": ""
+      },
+      "realEstateAppraisalManagement": {
         "radioButtonYesText": "",
         "radioButtonNoText": "",
         "header": "",

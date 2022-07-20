@@ -26,6 +26,10 @@ export class OnboardingPage {
     return cy.get(`input[name="interior-designer"]${radio === undefined ? "" : `[value="${radio}"]`}`);
   }
 
+  getRealEstateAppraisal(radio?: boolean) {
+    return cy.get(`input[name="real-estate-appraisal"]${radio === undefined ? "" : `[value="${radio}"]`}`);
+  }
+
   getIndustryDropdown() {
     return cy.get('[data-testid="industryid"]');
   }
@@ -101,6 +105,11 @@ export class OnboardingPage {
   selectInteriorDesigner(radio: boolean) {
     this.getInteriorDesigner(radio).check();
   }
+
+  selectRealEstateAppraisal(radio: boolean) {
+    this.getRealEstateAppraisal(radio).check();
+  }
+
   selectIndustry(industry: string) {
     const industryValue = LookupIndustryById(industry).name;
     this.getIndustryDropdown().click();

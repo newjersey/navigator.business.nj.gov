@@ -4,6 +4,7 @@
   "defaultSectorId": "other-services",
   "isProvidesStaffingServicesApplicable": false,
   "isCertifiedInteriorDesignerApplicable": false,
+  "isRealEstateAppraisalManagementApplicable": false,
   "canBeReseller": true,
   "isEnabled": true,
   "roadmapSteps": [

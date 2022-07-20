@@ -151,7 +151,8 @@ export const generateProfileData = (
     nexusLocationInNewJersey: undefined,
     nexusDbaName: undefined,
     providesStaffingService: false,
-    certifiedInteriorDesigner: false,
+    certifiedInteriorDesigner: true,
+    realEstateAppraisalManagement: false,
     ...overrides,
   };
 };
