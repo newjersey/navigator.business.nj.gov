@@ -3,7 +3,6 @@
   "canBeHomeBased": true,
   "defaultSectorId": "other-services",
   "canBeReseller": false,
-  "isRealEstateAppraisalManagementApplicable": false,
   "isCpaRequiredApplicable": false,
   "canHavePermanentLocation": true,
   "roadmapSteps": [
@@ -44,11 +43,6 @@
     },
     {
       "step": 3,
-      "weight": 18,
-      "task": "trucking-vehicle-registration"
-    },
-    {
-      "step": 3,
       "weight": 20,
       "task": "trucking-boc3"
     },
@@ -70,6 +64,7 @@
   ],
   "name": "Trucking",
   "isLiquorLicenseApplicable": false,
+  "isRealEstateAppraisalManagementApplicable": false,
   "isEnabled": false,
   "isCertifiedInteriorDesignerApplicable": false,
   "additionalSearchTerms": "trucking, movers, box truck company, transportation, truck driving, hauling, truck haul, logistics, trucking company, ",
