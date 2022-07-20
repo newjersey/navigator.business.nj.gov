@@ -3,8 +3,6 @@
   "canBeHomeBased": true,
   "defaultSectorId": "other-services",
   "canBeReseller": false,
-  "isProvidesStaffingServicesApplicable": false,
-  "isCertifiedInteriorDesignerApplicable": false,
   "isCpaRequiredApplicable": false,
   "canHavePermanentLocation": true,
   "roadmapSteps": [
@@ -69,10 +67,12 @@
       "task": "trucking-parking"
     }
   ],
-  "name": "Long-Haul Trucking",
+  "name": "Trucking",
   "isLiquorLicenseApplicable": false,
   "isEnabled": false,
+  "isCertifiedInteriorDesignerApplicable": false,
   "additionalSearchTerms": "trucking, movers, box truck company, transportation, truck driving, hauling, truck haul, logistics, trucking company, ",
   "id": "trucking",
+  "isProvidesStaffingServicesApplicable": false,
   "description": "Offers load-hauling services "
 }
