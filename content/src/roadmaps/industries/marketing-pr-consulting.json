@@ -4,7 +4,7 @@
   "canBeHomeBased": true,
   "defaultSectorId": "digital-and-print-media",
   "canBeReseller": false,
-  "isProvidesStaffingServicesApplicable": false,
+  "isProvidesStaffingServicesApplicable": true,
   "isCertifiedInteriorDesignerApplicable": false,
   "isRealEstateAppraisalManagementApplicable": false,
   "isCpaRequiredApplicable": false,

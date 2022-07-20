@@ -32,7 +32,7 @@ const enableFormation = (legalStructureId: string): boolean => {
 
 export const buildUserRoadmap = async (profileData: ProfileData): Promise<Roadmap> => {
   let industryId = profileData.industryId;
-  if (profileData.industryId === "it-consultant" && profileData.providesStaffingService) {
+  if (profileData.providesStaffingService) {
     industryId = "employment-agency";
   }
 
