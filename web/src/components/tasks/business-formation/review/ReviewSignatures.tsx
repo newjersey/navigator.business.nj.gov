@@ -14,15 +14,19 @@ export const ReviewSignatures = (): ReactElement => {
 
   const isCorp = corpLegalStructures.includes(state.legalStructureId);
 
+  const getHeader = () => {
+    if (isCorp) {
+      return Config.businessFormationDefaults.reviewPageIncorporatorsHeader;
+    } else if (state.legalStructureId == "limited-partnership") {
+      return Config.businessFormationDefaults.reviewPageSignaturesHeader;
+    } else return Config.businessFormationDefaults.reviewPageSignaturesHeader;
+  };
+
   return (
     <>
       <div className="flex space-between">
         <div className="maxw-mobile-lg margin-bottom-2">
-          <Content overrides={{ h3: headerLevelTwo }}>
-            {isCorp
-              ? Config.businessFormationDefaults.reviewPageIncorporatorsHeader
-              : Config.businessFormationDefaults.reviewPageSignaturesHeader}
-          </Content>
+          <Content overrides={{ h3: headerLevelTwo }}>{getHeader()}</Content>
         </div>
         <div className="margin-left-2">
           <Button
@@ -50,7 +54,7 @@ export const ReviewSignatures = (): ReactElement => {
             </div>
             <div>{signer.name}</div>
           </div>
-          {isCorp && (
+          {(isCorp || state.legalStructureId == "limited-partnership") && (
             <>
               <div className="display-block tablet:display-flex">
                 <div className="text-bold width-11rem">

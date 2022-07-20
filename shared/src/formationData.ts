@@ -5,6 +5,7 @@ export const defaultFormationLegalType: FormationLegalType = "limited-liability-
 export const FormationLegalTypes = [
   "limited-liability-partnership",
   "limited-liability-company",
+  "limited-partnership",
   "c-corporation",
   "s-corporation",
 ] as const;
@@ -38,6 +39,15 @@ export interface FormationFormData {
   readonly businessAddressState: string;
   readonly businessAddressZipCode: string;
   readonly businessPurpose: string;
+  readonly withdrawals: string;
+  readonly combinedInvestment: string;
+  readonly dissolution: string;
+  readonly canCreateLimitedPartner: boolean | undefined;
+  readonly createLimitedPartnerTerms: string;
+  readonly canGetDistribution: boolean | undefined;
+  readonly getDistributionTerms: string;
+  readonly canMakeDistribution: boolean | undefined;
+  readonly makeDistributionTerms: string;
   readonly provisions: string[];
   readonly agentNumberOrManual: "NUMBER" | "MANUAL_ENTRY";
   readonly agentNumber: string;
@@ -81,6 +91,9 @@ export type FormationTextField = Exclude<
   | "agentUseBusinessAddress"
   | "provisions"
   | "businessName"
+  | "canCreateLimitedPartner"
+  | "canGetDistribution"
+  | "canMakeDistribution"
 >;
 
 export const createEmptyFormationAddress = (): FormationAddress => ({
@@ -105,6 +118,15 @@ export const createEmptyFormationFormData = (): FormationFormData => {
     businessAddressState: "NJ",
     businessAddressZipCode: "",
     businessPurpose: "",
+    withdrawals: "",
+    dissolution: "",
+    combinedInvestment: "",
+    canCreateLimitedPartner: undefined,
+    createLimitedPartnerTerms: "",
+    canGetDistribution: undefined,
+    getDistributionTerms: "",
+    canMakeDistribution: undefined,
+    makeDistributionTerms: "",
     provisions: [],
     agentNumberOrManual: "NUMBER",
     agentNumber: "",
@@ -155,6 +177,8 @@ export const llpBusinessSuffix = [
   "R.L.L.P.",
 ] as const;
 
+export const lpBusinessSuffix = ["LIMITED PARTNERSHIP", "LP", "L.P."] as const;
+
 export const corpBusinessSuffix = [
   "CORPORATION",
   "INCORPORATED",
@@ -172,9 +196,12 @@ export type CorpBusinessSuffix = typeof corpBusinessSuffix[number];
 
 export type LlpBusinessSuffix = typeof llpBusinessSuffix[number];
 
+export type LpBusinessSuffix = typeof lpBusinessSuffix[number];
+
 export const AllBusinessSuffixes = [
   ...llcBusinessSuffix,
   ...llpBusinessSuffix,
+  ...lpBusinessSuffix,
   ...corpBusinessSuffix,
 ] as const;
 
@@ -182,10 +209,11 @@ export type BusinessSuffix = typeof AllBusinessSuffixes[number];
 
 export const BusinessSuffixMap: Record<
   FormationLegalType,
-  LlpBusinessSuffix[] | LlcBusinessSuffix[] | CorpBusinessSuffix[]
+  LlpBusinessSuffix[] | LlcBusinessSuffix[] | CorpBusinessSuffix[] | LpBusinessSuffix[]
 > = {
   "limited-liability-company": llcBusinessSuffix as unknown as LlcBusinessSuffix[],
   "limited-liability-partnership": llpBusinessSuffix as unknown as LlpBusinessSuffix[],
+  "limited-partnership": lpBusinessSuffix as unknown as LpBusinessSuffix[],
   "c-corporation": corpBusinessSuffix as unknown as CorpBusinessSuffix[],
   "s-corporation": corpBusinessSuffix as unknown as CorpBusinessSuffix[],
 };

@@ -114,6 +114,107 @@ describe("Formation - ContactsSection", () => {
     });
   });
 
+  describe("when lp", () => {
+    const legalStructureId = "limited-partnership";
+
+    it("auto-fills fields from userData if it exists", async () => {
+      const formationFormData = generateFormationFormData(
+        {
+          signers: [
+            {
+              name: "Donald Whatever",
+              addressCity: "Miami",
+              addressLine1: "160 Something Ave NW",
+              addressLine2: "Office of Whatever",
+              addressState: "Florida",
+              addressZipCode: "20501",
+              signature: true,
+            },
+            generateFormationAddress({ signature: false }),
+          ],
+        },
+        legalStructureId
+      );
+
+      const page = await getPageHelper({ legalStructureId }, formationFormData);
+
+      expect(screen.queryByTestId("addresses-members")).not.toBeInTheDocument();
+
+      expect(screen.getByTestId("addresses-signers")).toBeInTheDocument();
+
+      expect(
+        screen.queryByText(displayContent[legalStructureId].members.placeholder as string)
+      ).not.toBeInTheDocument();
+      expect(screen.getByText(formationFormData.signers[0].name)).toBeInTheDocument();
+      expect(
+        screen.getByText(formationFormData.signers[0].addressLine1, { exact: false })
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText(formationFormData.signers[0].addressLine2, { exact: false })
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText(formationFormData.signers[0].addressCity, { exact: false })
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText(formationFormData.signers[0].addressState, { exact: false })
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText(formationFormData.signers[0].addressZipCode, { exact: false })
+      ).toBeInTheDocument();
+      expect(page.getSignerBox(0)).toEqual(true);
+    });
+
+    it("adds and syncs signer to members", async () => {
+      const page = await getPageHelper({ legalStructureId }, { signers: [] });
+      expect(
+        screen.getByText(displayContent[legalStructureId].signatureHeader.placeholder as string)
+      ).toBeInTheDocument();
+      page.clickAddNewSigner();
+      const signer = generateFormationAddress({ name: "Red Skull" });
+      page.fillText("Address name", signer.name);
+      page.fillText("Address line1", signer.addressLine1);
+      page.fillText("Address line2", signer.addressLine2);
+      page.fillText("Address city", signer.addressCity);
+      page.fillText("Address state", signer.addressState);
+      page.fillText("Address zip code", signer.addressZipCode);
+      page.clickAddressSubmit();
+      page.checkSignerBox(0);
+      await page.submitContactsTab();
+      expect(currentUserData().formationData.formationFormData.signers).toEqual([
+        { ...signer, signature: true },
+      ]);
+      expect(currentUserData().formationData.formationFormData.members).toEqual([
+        { ...signer, signature: true },
+      ]);
+    });
+
+    it("adds signers address using business data via checkbox", async () => {
+      const page = await getPageHelper(
+        {
+          legalStructureId,
+          municipality: generateMunicipality({ displayName: "Hampton Borough", name: "Hampton" }),
+        },
+        {
+          contactFirstName: "John",
+          contactLastName: "Smith",
+          businessAddressLine1: "123 business address",
+          businessAddressLine2: "business suite 201",
+          businessAddressState: "NJ",
+          businessAddressZipCode: "07601",
+        }
+      );
+      page.clickAddNewSigner();
+      fireEvent.click(screen.getByTestId("default-checkbox"));
+      expect(page.getInputElementByLabel("Address name").value).toBe("");
+      expect(page.getInputElementByLabel("Address line1").value).toBe("123 business address");
+      expect(page.getInputElementByLabel("Address line2").value).toBe("business suite 201");
+      expect(page.getInputElementByLabel("Address city").value).toBe("Hampton");
+      expect(page.getInputElementByLabel("Address state").value).toBe("NJ");
+      expect(page.getInputElementByLabel("Address zip code").value).toBe("07601");
+      page.fillText("Address name", "The Dude");
+    });
+  });
+
   describe("when corp", () => {
     const legalStructureId = "s-corporation";
 
@@ -133,9 +234,9 @@ describe("Formation - ContactsSection", () => {
           ],
           signers: [
             {
-              name: "Donald Trump",
+              name: "Donald Whatever",
               addressCity: "Miami",
-              addressLine1: "160 Redneck Ave NW",
+              addressLine1: "160 Something Ave NW",
               addressLine2: "Office of Whatever",
               addressState: "Florida",
               addressZipCode: "20501",

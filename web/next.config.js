@@ -12,6 +12,7 @@ module.exports = withBundleAnalyzer({
     REDIRECT_URL: process.env.REDIRECT_URL,
     GOOGLE_ANALYTICS_ID: process.env.GOOGLE_ANALYTICS_ID,
     FEATURE_BUSINESS_LLP: process.env.FEATURE_BUSINESS_LLP ?? "true",
+    FEATURE_BUSINESS_LP: process.env.FEATURE_BUSINESS_LP ?? "true",
     FEATURE_BUSINESS_CCORP: process.env.FEATURE_BUSINESS_CCORP ?? "true",
     FEATURE_BUSINESS_SCORP: process.env.FEATURE_BUSINESS_SCORP ?? "true",
     COGNITO_WEB_CLIENT_ID: process.env.COGNITO_WEB_CLIENT_ID,

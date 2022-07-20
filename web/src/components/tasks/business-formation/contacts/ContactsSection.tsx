@@ -24,7 +24,6 @@ export const ContactsSection = (): ReactElement => {
   const { state, setErrorMap, setTab, setFormationFormData } = useContext(BusinessFormationContext);
   const [showRequiredFieldsError, setShowRequiredFieldsError] = useState<boolean>(false);
   const [showSignatureError, setShowSignatureError] = useState<boolean>(false);
-
   const { userData, update } = useUserData();
 
   const isCorp = corpLegalStructures.includes(state.legalStructureId);
@@ -181,16 +180,34 @@ export const ContactsSection = (): ReactElement => {
           <></>
         )}
         <hr className="margin-top-0 margin-bottom-3" />
-        {corpLegalStructures.includes(state.legalStructureId) ? (
+        <BusinessFormationFieldAlert
+          showFieldsError={showSignatureError}
+          fieldsWithError={formationFieldErrors}
+          errorType="signature"
+        />
+        {[...corpLegalStructures, "limited-partnership"].includes(state.legalStructureId) ? (
           <Addresses
             fieldName={"signers"}
             addressData={state.formationFormData.signers}
             setData={(signers) => {
-              setFormationFormData({ ...state.formationFormData, signers });
+              const members =
+                "limited-partnership" === state.legalStructureId ? signers : state.formationFormData.members;
+              setFormationFormData({ ...state.formationFormData, signers, members });
               if (state.formationFormData.signers.every((it) => it.signature && it.name)) {
                 setErrorMap({ ...state.errorMap, signers: { invalid: false } });
               }
             }}
+            defaultAddress={
+              "limited-partnership" === state.legalStructureId
+                ? {
+                    addressCity: state.formationFormData.businessAddressCity?.name as string,
+                    addressLine1: state.formationFormData.businessAddressLine1,
+                    addressLine2: state.formationFormData.businessAddressLine2,
+                    addressState: state.formationFormData.businessAddressState,
+                    addressZipCode: state.formationFormData.businessAddressZipCode,
+                  }
+                : undefined
+            }
             needSignature={true}
             displayContent={{
               contentMd: state.displayContent.signatureHeader.contentMd,
@@ -213,11 +230,6 @@ export const ContactsSection = (): ReactElement => {
           showFieldsError={showSignatureError}
           fieldsWithError={formationFieldErrors}
           errorType="director"
-        />
-        <BusinessFormationFieldAlert
-          showFieldsError={showSignatureError}
-          fieldsWithError={formationFieldErrors}
-          errorType="signature"
         />
       </div>
       <div className="margin-top-2">

@@ -432,6 +432,12 @@ describe("Formation - BusinessSection", () => {
       expect(displayLegalStructure).toHaveTextContent(Config.businessFormationDefaults.llpText);
     });
 
+    it("displays lp legal structure from profile data", async () => {
+      await getPageHelper({ legalStructureId: "limited-partnership" }, {});
+      const displayLegalStructure = screen.getByTestId("legal-structure");
+      expect(displayLegalStructure).toHaveTextContent(Config.businessFormationDefaults.lpText);
+    });
+
     it("displays sCorp legal structure from profile data", async () => {
       await getPageHelper({ legalStructureId: "s-corporation" }, {});
       const displayLegalStructure = screen.getByTestId("legal-structure");
@@ -475,6 +481,84 @@ describe("Formation - BusinessSection", () => {
       const page = await getPageHelper({}, { businessSuffix: undefined });
       await page.submitBusinessTab(false);
       expect(screen.getByRole("alert")).toHaveTextContent(/Business suffix/);
+    });
+
+    it("Withdrawals", async () => {
+      const page = await getPageHelper({ legalStructureId: "limited-partnership" }, { withdrawals: "" });
+      await page.submitBusinessTab(false);
+      expect(screen.getByRole("alert")).toHaveTextContent(/Withdrawals/);
+    });
+
+    it("Dissolution", async () => {
+      const page = await getPageHelper({ legalStructureId: "limited-partnership" }, { dissolution: "" });
+      await page.submitBusinessTab(false);
+      expect(screen.getByRole("alert")).toHaveTextContent(/Dissolution/);
+    });
+
+    it("Combined Investment", async () => {
+      const page = await getPageHelper(
+        { legalStructureId: "limited-partnership" },
+        { combinedInvestment: "" }
+      );
+      await page.submitBusinessTab(false);
+      expect(screen.getByRole("alert")).toHaveTextContent(/Combined investment/);
+    });
+
+    it("Partnership Rights can create Limited Partner", async () => {
+      const page = await getPageHelper(
+        { legalStructureId: "limited-partnership" },
+        { canCreateLimitedPartner: undefined }
+      );
+      await page.submitBusinessTab(false);
+      expect(screen.getByRole("alert")).toHaveTextContent(/Can create limited partner/);
+    });
+
+    it("Partnership Rights Limited Partner Terms", async () => {
+      const page = await getPageHelper(
+        { legalStructureId: "limited-partnership" },
+        { canCreateLimitedPartner: undefined, createLimitedPartnerTerms: "" }
+      );
+      fireEvent.click(screen.getByTestId("canCreateLimitedPartner-true"));
+      await page.submitBusinessTab(false);
+      expect(screen.getByRole("alert")).toHaveTextContent(/Create limited partner terms/);
+    });
+
+    it("Partnership Rights can make distribution", async () => {
+      const page = await getPageHelper(
+        { legalStructureId: "limited-partnership" },
+        { canMakeDistribution: undefined }
+      );
+      await page.submitBusinessTab(false);
+      expect(screen.getByRole("alert")).toHaveTextContent(/Can make distribution/);
+    });
+
+    it("Partnership Rights make distribution terms", async () => {
+      const page = await getPageHelper(
+        { legalStructureId: "limited-partnership" },
+        { canMakeDistribution: undefined, makeDistributionTerms: "" }
+      );
+      fireEvent.click(screen.getByTestId("canMakeDistribution-true"));
+      await page.submitBusinessTab(false);
+      expect(screen.getByRole("alert")).toHaveTextContent(/Make distribution terms/);
+    });
+
+    it("Partnership Rights can get distribution", async () => {
+      const page = await getPageHelper(
+        { legalStructureId: "limited-partnership" },
+        { canGetDistribution: undefined }
+      );
+      await page.submitBusinessTab(false);
+      expect(screen.getByRole("alert")).toHaveTextContent(/Can get distribution/);
+    });
+
+    it("Partnership Rights get distribution terms", async () => {
+      const page = await getPageHelper(
+        { legalStructureId: "limited-partnership" },
+        { canGetDistribution: undefined, getDistributionTerms: "" }
+      );
+      fireEvent.click(screen.getByTestId("canGetDistribution-true"));
+      await page.submitBusinessTab(false);
+      expect(screen.getByRole("alert")).toHaveTextContent(/Get distribution terms/);
     });
 
     it("Total Shares", async () => {

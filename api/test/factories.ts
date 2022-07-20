@@ -344,8 +344,17 @@ export const generateFormationFormData = (
     contactFirstName: `some-contact-first-name-${randomInt()}`,
     contactLastName: `some-contact-last-name-${randomInt()}`,
     contactPhoneNumber: `some-contact-phone-number-${randomInt()}`,
+    withdrawals: `some-withdrawals-text-${randomInt()}`,
+    dissolution: `some-dissolution-text-${randomInt()}`,
+    combinedInvestment: `some-combinedInvestment-text-${randomInt()}`,
+    canCreateLimitedPartner: !!(randomInt() % 2),
+    createLimitedPartnerTerms: `some-createLimitedPartnerTerms-text-${randomInt()}`,
+    canGetDistribution: !!(randomInt() % 2),
+    getDistributionTerms: `some-getDistributionTerms-text-${randomInt()}`,
+    canMakeDistribution: !!(randomInt() % 2),
+    makeDistributionTerms: `some-makeDistributionTerms-text-${randomInt()}`,
     ...overrides,
-  };
+  } as FormationFormData;
 };
 
 export const generateGetFilingResponse = (overrides: Partial<GetFilingResponse>): GetFilingResponse => {

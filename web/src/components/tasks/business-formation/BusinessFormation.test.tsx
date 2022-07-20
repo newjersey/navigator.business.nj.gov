@@ -312,6 +312,137 @@ describe("<BusinessFormation />", () => {
     expect(formationFormData.corpWatchNotification).toEqual(false);
   });
 
+  it("fills multi-tab form, submits, and updates userData when LP", async () => {
+    const legalStructureId = "limited-partnership";
+    const profileData = generateFormationProfileData({ legalStructureId });
+    const formationData = {
+      formationFormData: createEmptyFormationFormData(),
+      formationResponse: undefined,
+      getFilingResponse: undefined,
+    };
+    const page = preparePage({ profileData, formationData }, displayContent);
+
+    await page.submitBusinessNameTab("Pizza Joint");
+
+    page.selectByText("Business suffix", "LP");
+    const threeDaysFromNow = getCurrentDate().add(3, "days");
+    page.selectDate(threeDaysFromNow);
+    page.fillText("Business address line1", "1234 main street");
+    page.fillText("Business address line2", "Suite 304");
+    page.fillText("Business address zip code", "08001");
+
+    fireEvent.click(screen.getByText(Config.businessFormationDefaults.businessPurposeAddButtonText));
+    page.fillText("Business purpose", "to take over the world");
+    page.fillText("Withdrawals", "to withdrawals over the world");
+    page.fillText("Combined investment", "to invest over the world");
+    page.fillText("Dissolution", "to dissolution over the world");
+    page.chooseRadio("canCreateLimitedPartner-true");
+    page.fillText("Create limited partner terms", "to create partners invest over the world");
+    page.chooseRadio("canGetDistribution-true");
+    page.fillText("Get distribution terms", "to get distribution over the world");
+    page.chooseRadio("canMakeDistribution-false");
+
+    await page.submitBusinessTab();
+
+    page.chooseRadio("registered-agent-manual");
+    page.fillText("Agent name", "Hugo Weaving");
+    page.fillText("Agent email", "name@example.com");
+    page.fillText("Agent office address line1", "400 Pennsylvania Ave");
+    page.fillText("Agent office address line2", "Suite 101");
+    page.fillText("Agent office address city", "Newark");
+    page.fillText("Agent office address zip code", "08002");
+
+    expect(
+      screen.queryByText(displayContent[legalStructureId].members.placeholder as string)
+    ).not.toBeInTheDocument();
+
+    const member: FormationAddress = {
+      name: "Joe Biden",
+      addressLine1: "1600 Pennsylvania Ave NW",
+      addressLine2: "Office of the President",
+      addressCity: "Washington",
+      addressState: "DC",
+      addressZipCode: "20500",
+      signature: false,
+    };
+
+    expect(
+      screen.getByText(displayContent[legalStructureId].signatureHeader.placeholder as string)
+    ).toBeInTheDocument();
+    await page.fillAndSubmitAddressModal(member, "signers");
+    page.checkSignerBox(0);
+    await page.submitContactsTab();
+    await page.submitReviewTab();
+
+    page.fillText("Contact first name", "John");
+    page.fillText("Contact last name", "Smith");
+    page.fillText("Contact phone number", "123A45a678 90");
+    fireEvent.click(screen.getByLabelText("Credit card"));
+    page.selectCheckbox(Config.businessFormationDefaults.optInCorpWatchText);
+    page.selectCheckbox(
+      `${displayContent[legalStructureId].certificateOfStanding.contentMd} ${displayContent[legalStructureId].certificateOfStanding.optionalLabel}`
+    );
+    page.selectCheckbox(
+      `${displayContent[legalStructureId].certifiedCopyOfFormationDocument.contentMd} ${displayContent[legalStructureId].certifiedCopyOfFormationDocument.optionalLabel}`
+    );
+
+    const expectedTotalCost =
+      displayContent[legalStructureId].certificateOfStanding.cost +
+      displayContent[legalStructureId].certifiedCopyOfFormationDocument.cost +
+      displayContent[legalStructureId].officialFormationDocument.cost;
+
+    expect(screen.getByText(getDollarValue(expectedTotalCost))).toBeInTheDocument();
+    await page.clickSubmit();
+
+    const formationFormData = currentUserData().formationData.formationFormData;
+    await waitFor(() => {
+      expect(formationFormData.businessName).toEqual("Pizza Joint");
+    });
+    expect(formationFormData.businessSuffix).toEqual("LP");
+    expect(formationFormData.businessStartDate).toEqual(threeDaysFromNow.format("YYYY-MM-DD"));
+    expect(formationFormData.businessAddressLine1).toEqual("1234 main street");
+    expect(formationFormData.businessAddressLine2).toEqual("Suite 304");
+    expect(formationFormData.businessAddressState).toEqual("NJ");
+    expect(formationFormData.businessAddressZipCode).toEqual("08001");
+    expect(formationFormData.agentNumberOrManual).toEqual("MANUAL_ENTRY");
+    expect(formationFormData.agentNumber).toEqual("");
+    expect(formationFormData.agentName).toEqual("Hugo Weaving");
+    expect(formationFormData.agentEmail).toEqual("name@example.com");
+    expect(formationFormData.agentOfficeAddressLine1).toEqual("400 Pennsylvania Ave");
+    expect(formationFormData.agentOfficeAddressLine2).toEqual("Suite 101");
+    expect(formationFormData.agentOfficeAddressCity).toEqual("Newark");
+    expect(formationFormData.agentOfficeAddressState).toEqual("NJ");
+    expect(formationFormData.agentOfficeAddressZipCode).toEqual("08002");
+    expect(formationFormData.businessPurpose).toEqual("to take over the world");
+    expect(formationFormData.signers[0]).toEqual({
+      ...member,
+      signature: true,
+    });
+    expect(formationFormData.members[0]).toEqual({
+      ...member,
+      signature: true,
+    });
+
+    expect(formationFormData.contactFirstName).toEqual("John");
+    expect(formationFormData.contactLastName).toEqual("Smith");
+    expect(formationFormData.contactPhoneNumber).toEqual("1234567890");
+    expect(formationFormData.withdrawals).toEqual("to withdrawals over the world");
+    expect(formationFormData.combinedInvestment).toEqual("to invest over the world");
+    expect(formationFormData.dissolution).toEqual("to dissolution over the world");
+    expect(formationFormData.canCreateLimitedPartner).toEqual(true);
+    expect(formationFormData.canMakeDistribution).toEqual(false);
+    expect(formationFormData.canGetDistribution).toEqual(true);
+    expect(formationFormData.createLimitedPartnerTerms).toEqual("to create partners invest over the world");
+    expect(formationFormData.getDistributionTerms).toEqual("to get distribution over the world");
+    expect(formationFormData.makeDistributionTerms).toEqual("");
+    expect(formationFormData.paymentType).toEqual("CC");
+    expect(formationFormData.officialFormationDocument).toEqual(true);
+    expect(formationFormData.certificateOfStanding).toEqual(true);
+    expect(formationFormData.certifiedCopyOfFormationDocument).toEqual(true);
+    expect(formationFormData.annualReportNotification).toEqual(true);
+    expect(formationFormData.corpWatchNotification).toEqual(false);
+  });
+
   it("fills multi-tab form, submits, and updates userData when corp", async () => {
     const legalStructureId = "c-corporation";
     const profileData = generateFormationProfileData({ legalStructureId });

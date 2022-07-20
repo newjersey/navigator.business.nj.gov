@@ -1,6 +1,7 @@
 import { Button } from "@/components/njwds-extended/Button";
-import { BusinessPurpose } from "@/components/tasks/business-formation/business/BusinessPurpose";
+import { GenericTextbox } from "@/components/tasks/business-formation/business/GenericTextBox";
 import { MainBusiness } from "@/components/tasks/business-formation/business/MainBusiness";
+import { PartnershipRights } from "@/components/tasks/business-formation/business/PartnershipRights";
 import { Provisions } from "@/components/tasks/business-formation/business/Provisions";
 import { BusinessFormationEmptyFieldAlert } from "@/components/tasks/business-formation/BusinessFormationEmptyFieldAlert";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
@@ -40,6 +41,30 @@ export const BusinessSection = (): ReactElement => {
     const isCorp = corpLegalStructures.includes(state.legalStructureId);
 
     if (isCorp) requiredFields.push("businessTotalStock");
+
+    if (state.legalStructureId == "limited-partnership") {
+      state.formationFormData.withdrawals.length === 0 && requiredFields.push("withdrawals");
+      state.formationFormData.combinedInvestment.length === 0 && requiredFields.push("combinedInvestment");
+      state.formationFormData.dissolution.length === 0 && requiredFields.push("dissolution");
+      if (state.formationFormData.canCreateLimitedPartner === undefined) {
+        requiredFields.push("canCreateLimitedPartner");
+      } else if (state.formationFormData.canCreateLimitedPartner) {
+        state.formationFormData.createLimitedPartnerTerms.length === 0 &&
+          requiredFields.push("createLimitedPartnerTerms");
+      }
+      if (state.formationFormData.canGetDistribution === undefined) {
+        requiredFields.push("canGetDistribution");
+      } else if (state.formationFormData.canGetDistribution) {
+        state.formationFormData.getDistributionTerms.length === 0 &&
+          requiredFields.push("getDistributionTerms");
+      }
+      if (state.formationFormData.canMakeDistribution === undefined) {
+        requiredFields.push("canMakeDistribution");
+      } else if (state.formationFormData.canMakeDistribution) {
+        state.formationFormData.makeDistributionTerms.length === 0 &&
+          requiredFields.push("makeDistributionTerms");
+      }
+    }
 
     const invalidFields = requiredFields.filter(
       (it) => state.errorMap[it].invalid || !state.formationFormData[it]
@@ -107,8 +132,52 @@ export const BusinessSection = (): ReactElement => {
   return (
     <div data-testid="business-section">
       <MainBusiness />
+      {state.legalStructureId == "limited-partnership" ? (
+        <>
+          <hr className="margin-bottom-2 margin-top-0" aria-hidden={true} />
+          <GenericTextbox
+            maxChars={400}
+            fieldName={"combinedInvestment"}
+            required={true}
+            placeholderText={Config.businessFormationDefaults.combinedInvestmentPlaceholder}
+            title={Config.businessFormationDefaults.combinedInvestmentTitle}
+            contentMd={Config.businessFormationDefaults.combinedInvestmentBody}
+          />
+          <hr className="margin-bottom-2 margin-top-0" aria-hidden={true} />
+          <GenericTextbox
+            maxChars={400}
+            fieldName={"withdrawals"}
+            required={true}
+            placeholderText={Config.businessFormationDefaults.withdrawalsPlaceholder}
+            title={Config.businessFormationDefaults.withdrawalsTitle}
+            contentMd={Config.businessFormationDefaults.withdrawalsBody}
+          />
+          <hr className="margin-bottom-2 margin-top-0" aria-hidden={true} />
+          <PartnershipRights />
+          <hr className="margin-bottom-2 margin-top-2" aria-hidden={true} />
+          <GenericTextbox
+            maxChars={400}
+            fieldName={"dissolution"}
+            required={true}
+            placeholderText={Config.businessFormationDefaults.dissolutionPlaceholder}
+            title={Config.businessFormationDefaults.dissolutionTitle}
+            contentMd={Config.businessFormationDefaults.dissolutionBody}
+          />
+        </>
+      ) : (
+        <></>
+      )}
       <hr className="margin-bottom-2 margin-top-0" aria-hidden={true} />
-      <BusinessPurpose />
+      <GenericTextbox
+        maxChars={300}
+        fieldName={"businessPurpose"}
+        required={false}
+        placeholderText={Config.businessFormationDefaults.businessPurposePlaceholderText}
+        inputLabel={Config.businessFormationDefaults.businessPurposeLabel}
+        addButtonText={Config.businessFormationDefaults.businessPurposeAddButtonText}
+        title={Config.businessFormationDefaults.businessPurposeTitle}
+        contentMd={Config.businessFormationDefaults.businessPurposeBodyText}
+      />
       <hr className="margin-bottom-2 margin-top-0" aria-hidden={true} />
       <Provisions />
       <BusinessFormationEmptyFieldAlert

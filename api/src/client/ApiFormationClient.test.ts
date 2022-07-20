@@ -464,6 +464,154 @@ describe("ApiFormationClient", () => {
       });
     });
 
+    describe("when LP", () => {
+      it("posts to the endpoint with the api formation object", async () => {
+        const stubResponse = generateApiResponse({});
+        mockAxios.post.mockResolvedValue({ data: stubResponse });
+
+        const formationFormData = generateFormationFormData(
+          {
+            agentNumberOrManual: "MANUAL_ENTRY",
+            provisions: [],
+            members: [generateFormationAddress({})],
+            withdrawals: "withdrawl",
+            dissolution: "dissolution",
+            combinedInvestment: "combined investment",
+            canCreateLimitedPartner: true,
+            createLimitedPartnerTerms: "partner terms",
+            canGetDistribution: true,
+            getDistributionTerms: "get distro terms",
+            canMakeDistribution: false,
+            makeDistributionTerms: "make distro terms",
+            signers: [
+              generateFormationAddress({
+                name: "faraz",
+                signature: true,
+              }),
+              generateFormationAddress({
+                name: "anne",
+                signature: true,
+              }),
+              generateFormationAddress({
+                name: "mike",
+                signature: false,
+              }),
+            ],
+          },
+          "limited-partnership"
+        );
+
+        const userData = generateUserData({
+          profileData: generateProfileData({ legalStructureId: "limited-partnership" }),
+          formationData: generateFormationData({ formationFormData }),
+        });
+
+        await client.form(userData, "hostname.com/form-business");
+
+        expect(mockAxios.post).toHaveBeenCalledWith("example.com/formation/PrepareFiling", {
+          Account: "12345",
+          Key: "abcdef",
+          ReturnUrl: "hostname.com/form-business?completeFiling=true",
+          Payer: {
+            CompanyName: formationFormData.businessName,
+            Address1: formationFormData.businessAddressLine1,
+            Address2: formationFormData.businessAddressLine2,
+            City: formationFormData.businessAddressCity?.name,
+            StateAbbreviation: "NJ",
+            ZipCode: formationFormData.businessAddressZipCode,
+            Email: userData.user.email,
+          },
+          Formation: {
+            Gov2GoAnnualReports: formationFormData.annualReportNotification,
+            Gov2GoCorpWatch: formationFormData.corpWatchNotification,
+            ShortGoodStanding: formationFormData.certificateOfStanding,
+            Certified: formationFormData.certifiedCopyOfFormationDocument,
+            PayerEmail: "",
+            SelectPaymentType: formationFormData.paymentType,
+            BusinessInformation: {
+              CompanyOrigin: "Domestic",
+              Business: "DomesticLimitedPartnership",
+              BusinessName: formationFormData.businessName,
+              BusinessDesignator: formationFormData.businessSuffix,
+              Naic: userData.profileData.naicsCode,
+              BusinessPurpose: formationFormData.businessPurpose,
+              EffectiveFilingDate: parseDateWithFormat(
+                formationFormData.businessStartDate,
+                "YYYY-MM-DD"
+              ).toISOString(),
+              MainAddress: {
+                Address1: formationFormData.businessAddressLine1,
+                Address2: formationFormData.businessAddressLine2,
+                City: userData.profileData.municipality?.name,
+                State: "New Jersey",
+                Zipcode: formationFormData.businessAddressZipCode,
+                Country: "US",
+              },
+            },
+            AdditionalLimitedPartnership: {
+              AdditionalProvisions: [],
+              AggregateAmount: "combined investment",
+              DissolutionPlan: "dissolution",
+              GeneralPartnerWithdrawal: "withdrawl",
+              LimitedCanCreateLimited: "Yes",
+              LimitedCanCreateLimitedTerms: "partner terms",
+              LimitedCanGetDistribution: "Yes",
+              LimitedCanGetDistributionTerms: "get distro terms",
+              LimitedCanMakeDistribution: "No",
+              LimitedCanMakeDistributionTerms: "make distro terms",
+            },
+            CompanyProfit: "Profit",
+            RegisteredAgent: {
+              Id: undefined,
+              Email: formationFormData.agentEmail,
+              Name: formationFormData.agentName,
+              Location: {
+                Address1: formationFormData.agentOfficeAddressLine1,
+                Address2: formationFormData.agentOfficeAddressLine2,
+                City: formationFormData.agentOfficeAddressCity,
+                State: "New Jersey",
+                Zipcode: formationFormData.agentOfficeAddressZipCode,
+                Country: "US",
+              },
+            },
+            Members: [
+              {
+                Name: formationFormData.members[0].name,
+                Location: {
+                  Address1: formationFormData.members[0].addressLine1,
+                  Address2: formationFormData.members[0].addressLine2,
+                  City: formationFormData.members[0].addressCity,
+                  State: formationFormData.members[0].addressState,
+                  Zipcode: formationFormData.members[0].addressZipCode,
+                  Country: "US",
+                },
+              },
+            ],
+            Signers: [
+              {
+                Name: "faraz",
+                Title: "General Partner",
+                Signed: true,
+              },
+              {
+                Name: "anne",
+                Title: "General Partner",
+                Signed: true,
+              },
+              {
+                Name: "mike",
+                Title: "General Partner",
+                Signed: false,
+              },
+            ],
+            ContactFirstName: formationFormData.contactFirstName,
+            ContactLastName: formationFormData.contactLastName,
+            ContactPhoneNumber: formationFormData.contactPhoneNumber,
+          },
+        });
+      });
+    });
+
     it("fills only registered agent number when NUMBER is selected", async () => {
       const stubResponse = generateApiResponse({});
       mockAxios.post.mockResolvedValue({ data: stubResponse });
