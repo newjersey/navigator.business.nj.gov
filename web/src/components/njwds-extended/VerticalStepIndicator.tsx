@@ -1,77 +1,66 @@
+import { SectionAccordionContext } from "@/contexts/sectionAccordionContext";
+import { MediaQueries } from "@/lib/PageSizes";
 import { useOnWindowResize } from "@/lib/utils/helpers";
-import { ReactElement, useEffect } from "react";
+import { useMediaQuery } from "@mui/material";
+import { ReactElement, useContext, useEffect } from "react";
 
 interface Props {
   stepNumber: number;
   last: boolean;
-  active?: boolean;
-  hideBar?: boolean;
-  small?: boolean;
   completed?: boolean;
-  isOpen?: boolean;
+  miniRoadmap?: boolean;
+  miniRoadmapSubtaskisOpen?: boolean;
 }
 
 export const VerticalStepIndicator = (props: Props): ReactElement => {
-  const sm = props.small ? "-sm" : "";
-  const isOpen = props.isOpen || false;
-
+  const { isOpen: sectionIsOpen } = useContext(SectionAccordionContext);
+  const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
   const verticalHeight = document.getElementById(`vertical-content-${props.stepNumber}`)?.offsetHeight;
+  const renderVerticalBar =
+    (isTabletAndUp && sectionIsOpen && !props.miniRoadmap) ||
+    (props.miniRoadmap && sectionIsOpen && (!props.last || props.miniRoadmapSubtaskisOpen));
+
+  // (props.miniRoadmap && sectionIsOpen && props.miniRoadmapSubtaskisOpen);
 
   const resizeVerticalBarToContent = () => {
     const content = document.getElementById(`vertical-content-${props.stepNumber}`);
-    if (!content) return;
-    const height = content.offsetHeight;
-
     const verticalBar = document.getElementById(`vertical-bar-${props.stepNumber}`);
-    if (!verticalBar) return;
+
+    if (!content || !verticalBar) return;
 
     if (props.last) {
-      const marginStyle = getComputedStyle(content);
-      const newHeight = height - Number.parseInt(marginStyle.marginTop);
-      verticalBar.style.height = `${newHeight}px`;
-    } else {
-      verticalBar.style.height = props.small ? `${height + 16}px` : `${height}px`;
+      verticalBar.style.height = `${content.offsetHeight}px`;
+      return;
+    }
+    if (!props.last) {
+      verticalBar.style.height = `${content.offsetHeight + 24}px`;
+      return;
     }
   };
 
-  useEffect(resizeVerticalBarToContent, [
-    props.isOpen,
-    props.last,
-    props.stepNumber,
-    verticalHeight,
-    props.hideBar,
-    props.small,
-  ]);
+  useEffect(resizeVerticalBarToContent, [props.last, props.stepNumber, verticalHeight, sectionIsOpen]);
   useOnWindowResize(resizeVerticalBarToContent);
 
-  const getTrailingBar = () => {
-    if (props.hideBar || (props.small && props.last && !isOpen)) {
-      return <></>;
-    }
-    return (
-      <div
-        aria-hidden="true"
-        className={`vertical-bar${sm} ${props.active ? "current" : "complete"}`}
-        id={`vertical-bar-${props.stepNumber}`}
-      />
-    );
-  };
-
   return (
-    <div className={`vertical-step-indicator ${sm ? "padding-left-05 margin-bottom-1" : ""}`}>
-      <div className={`usa-step-indicator usa-step-indicator--counters${sm} usa-step-indicator__segments`}>
+    <div className={`vertical-step-indicator`}>
+      <div className={`usa-step-indicator usa-step-indicator--counters usa-step-indicator__segments`}>
         <div className="visually-hidden-centered">
           {props.completed ? `Completed step ${props.stepNumber}` : `Step ${props.stepNumber}`}
         </div>
         <div
-          className={`usa-step-indicator__segment usa-step-indicator__segment--${
-            props.active ? "current" : "complete"
+          className={`usa-step-indicator__segment ${
+            props.miniRoadmap ? "usa-step-indicator__segment-smaller" : ""
           }`}
           aria-hidden="true"
-          data-num={props.completed ? "✓" : props.stepNumber}
+          data-num={props.stepNumber}
         />
-        <span className="usa-step-indicator__segment-label" />
-        {getTrailingBar()}
+        {renderVerticalBar && (
+          <div
+            aria-hidden="true"
+            className={`vertical-bar${props.miniRoadmap ? "-smaller" : ""}`}
+            id={`vertical-bar-${props.stepNumber}`}
+          />
+        )}
       </div>
     </div>
   );

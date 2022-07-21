@@ -1,10 +1,9 @@
-import { VerticalStepIndicator } from "@/components/njwds-extended/VerticalStepIndicator";
 import { Icon } from "@/components/njwds/Icon";
-import { MiniRoadmapTask } from "@/components/roadmap/MiniRoadmapTask";
-import { SectionAccordionContext } from "@/contexts/sectionAccordionContext";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { Step } from "@/lib/types/types";
-import { ReactElement, useContext, useEffect, useMemo, useState } from "react";
+import { ReactElement, useEffect, useMemo, useState } from "react";
+import { VerticalStepIndicator } from "../njwds-extended/VerticalStepIndicator";
+import { MiniRoadmapTask } from "./MiniRoadmapTask";
 
 interface Props {
   step: Step;
@@ -20,7 +19,6 @@ export const MiniRoadmapStep = (props: Props): ReactElement => {
   const { roadmap } = useRoadmap();
   const [isOpen, setIsOpen] = useState<boolean>(props.isOpen ?? false);
   const stepNumber = props.step.stepNumber;
-  const { isOpen: sectionIsOpen } = useContext(SectionAccordionContext);
   const isActive = useMemo(() => {
     if (!props.activeTaskId || !roadmap?.tasks) return undefined;
     return roadmap?.tasks.some((task) => task.id === props.activeTaskId && task.stepNumber == stepNumber);
@@ -40,27 +38,28 @@ export const MiniRoadmapStep = (props: Props): ReactElement => {
   };
 
   return (
-    <div key={`${stepNumber}-${isOpen}`} id={`vertical-content-${stepNumber}`} className="margin-y-2">
-      <div className="flex flex-align-start">
+    <div key={`${stepNumber}-${isOpen}`} id={`vertical-content-${stepNumber}`}>
+      <div className="flex flex-row margin-y-2">
         <VerticalStepIndicator
           stepNumber={stepNumber}
           last={props.isLast}
-          isOpen={isOpen}
-          hideBar={!sectionIsOpen}
-          active={isActive}
-          small={true}
           completed={props.completed}
+          miniRoadmap={true}
+          miniRoadmapSubtaskisOpen={isOpen}
         />
+
         <button className="usa-button--unstyled width-100" onClick={toggleOpen} aria-expanded={isOpen}>
-          <div className=" step-label sm fdr fjc fac">
-            <h3
-              className={`margin-bottom-0 text-ink  ${
+          <div className="fdr fjc fac">
+            <div
+              role="heading"
+              aria-level={3}
+              className={`margin-left-5 padding-left-2px margin-bottom-0 text-ink ${
                 isActive ? "text-primary-dark" : "weight-unset"
-              } h4-styling`}
+              }`}
               data-step={stepNumber}
             >
               {props.step.name}
-            </h3>
+            </div>
             <div className="mla fdc fac">
               <Icon className="usa-icon--size-3 text-ink">{isOpen ? "expand_less" : "expand_more"}</Icon>
             </div>

@@ -19,8 +19,8 @@ export const SectionAccordion = (props: Props): ReactElement => {
   const { userData, update } = useUserData();
   const { sectionCompletion } = useRoadmap();
   const dropdownIconClasses = props.mini ? "usa-icon--size-3 text-ink" : "usa-icon--size-5 margin-x-1";
-  const headerClasses = props.mini ? "" : "margin-top-3 tablet:margin-left-3";
-  const sectionIconClasses = props.mini ? "height-4 padding-right-105" : "height-5 padding-right-205";
+  const headerClasses = props.mini ? "h3-styling" : "margin-top-3 tablet:margin-left-3 h3-styling";
+  const sectionIconClasses = props.mini ? "height-4 padding-right-105" : "height-5 padding-right-105";
   const dividerClasses = props.mini ? "margin-y-2" : "margin-y-3";
   const sectionName = props.sectionType.toLowerCase();
   const isOpen = userData?.preferences.roadmapOpenSections.includes(props.sectionType) ?? false;
@@ -74,7 +74,7 @@ export const SectionAccordion = (props: Props): ReactElement => {
                   src={isCompleted ? `/img/section-complete.svg` : `/img/section-header-${sectionName}.svg`}
                   alt=""
                   data-testid={`${isCompleted ? "completed" : "regular"}-${sectionName}-section-img`}
-                />{" "}
+                />
                 <div className="inline">{Config.sectionHeaders[props.sectionType]}</div>
               </h2>
             </div>

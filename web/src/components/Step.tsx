@@ -14,43 +14,43 @@ interface Props {
 export const Step = (props: Props): ReactElement => {
   const { userData } = useUserData();
   const { roadmap } = useRoadmap();
+
   return (
     <div
-      className={`grid-row margin-top-3 tablet:margin-left-3 padding-left-2px ${
-        props.last ? "margin-bottom-1" : ""
-      }`}
+      className={`margin-top-3 margin-left-2px tablet:margin-left-3 ${props.last ? "margin-bottom-1" : ""}`}
       id={`vertical-content-${props.step.stepNumber}`}
     >
-      <div className="tablet:grid-col-3 margin-right-4">
+      <div className="tablet:margin-right-4 minh-4">
         <div className="flex flex-row">
-          <div className="margin-top-2">
-            <VerticalStepIndicator
-              stepNumber={props.step.stepNumber}
-              last={props.last}
-              completed={isStepCompleted(roadmap, props.step, userData)}
-            />
-          </div>
-          <div className="step-label">
-            <h3
-              className="margin-0 font-sans-sm line-height-body-5 weight-unset h4-styling"
+          <VerticalStepIndicator
+            stepNumber={props.step.stepNumber}
+            last={props.last}
+            completed={isStepCompleted(roadmap, props.step, userData)}
+          />
+
+          <div className="margin-left-6 margin-top-neg-2px tablet:margin-left-205 font-body-md margin-bottom-105">
+            <span
+              role="heading"
+              aria-level={3}
+              className="text-bold margin-right-1 tablet:margin-left-4"
               data-step={props.step.stepNumber}
             >
               {props.step.name}
-            </h3>
-            <div className="font-sans-3xs text-base-dark">{props.step.timeEstimate}</div>
+            </span>
+            <span className="text-base">({props.step.timeEstimate})</span>
           </div>
         </div>
-      </div>
 
-      <div className="tablet:grid-col-8 roadmap-content">
-        <p className="margin-bottom-205">{props.step.description}</p>
-        <ul className="usa-list usa-list--unstyled">
-          {roadmap?.tasks
-            .filter((task) => task.stepNumber == props.step.stepNumber)
-            .map((task) => (
-              <Task key={task.id} task={task} />
-            ))}
-        </ul>
+        <div className="tablet:margin-left-6 padding-left-05">
+          <p className="margin-bottom-205">{props.step.description}</p>
+          <ul className="usa-list usa-list--unstyled">
+            {roadmap?.tasks
+              .filter((task) => task.stepNumber == props.step.stepNumber)
+              .map((task) => (
+                <Task key={task.id} task={task} />
+              ))}
+          </ul>
+        </div>
       </div>
     </div>
   );
