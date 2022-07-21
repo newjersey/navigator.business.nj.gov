@@ -88,7 +88,7 @@ export const generateUserData = (overrides: Partial<UserData>): UserData => {
   return {
     user: generateUser({}),
     formProgress: "UNSTARTED",
-    taskProgress: {},
+    taskProgress: profileData.employerId ? { "register-for-ein": "COMPLETED" } : {},
     taskItemChecklist: {},
     licenseData: generateLicenseData({}),
     preferences: generatePreferences({}),
