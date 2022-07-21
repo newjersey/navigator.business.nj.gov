@@ -1,16 +1,16 @@
 import { Content } from "@/components/Content";
-import { GenericTextField } from "@/components/GenericTextField";
 import { Button } from "@/components/njwds-extended/Button";
 import { Icon } from "@/components/njwds/Icon";
+import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
-import { FormationFields } from "@/lib/types/types";
 import { camelCaseToSentence } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
+import { FormationTextField } from "@businessnjgovnavigator/shared/formationData";
 import { ReactElement, useContext, useState } from "react";
 
 interface Props {
   maxChars: number;
-  fieldName: FormationFields;
+  fieldName: FormationTextField;
   required: boolean;
   inputLabel?: string;
   optionalLabel?: string;
@@ -20,19 +20,12 @@ interface Props {
   contentMd: string;
 }
 
-export const GenericTextbox = (props: Props): ReactElement => {
-  const { state, setFormationFormData, setErrorMap } = useContext(BusinessFormationContext);
+export const BusinessFormationTextBox = (props: Props): ReactElement => {
+  const { state, setFormationFormData } = useContext(BusinessFormationContext);
   const [isExpanded, setIsExpanded] = useState(props.required || !!state.formationFormData[props.fieldName]);
 
   const handleAddButtonClick = (): void => {
     setIsExpanded(true);
-  };
-
-  const handleChange = (value: string) => {
-    setFormationFormData({
-      ...state.formationFormData,
-      [props.fieldName]: value,
-    });
   };
 
   const removeEntry = (): void => {
@@ -68,19 +61,13 @@ export const GenericTextbox = (props: Props): ReactElement => {
         <>
           <Content className="margin-bottom-2">{props.contentMd}</Content>
           <div style={{ maxWidth: "41em" }}>
-            {props.inputLabel && <Content>{props.inputLabel}</Content>}
             <div className="grid-row">
               <div className="grid-col">
-                <GenericTextField
-                  value={state.formationFormData[props.fieldName] as string}
+                <BusinessFormationTextField
                   placeholder={props.placeholderText}
-                  handleChange={(value) => handleChange(value)}
                   fieldName={props.fieldName}
-                  error={state.errorMap[props.fieldName].invalid}
+                  label={props.inputLabel ?? ""}
                   validationText={Config.businessFormationDefaults.genericErrorText}
-                  onValidation={(fieldName, invalid) =>
-                    setErrorMap({ ...state.errorMap, [fieldName]: invalid })
-                  }
                   required={true}
                   fieldOptions={{
                     multiline: true,

@@ -1,9 +1,9 @@
 import { Button } from "@/components/njwds-extended/Button";
-import { GenericTextbox } from "@/components/tasks/business-formation/business/GenericTextBox";
 import { MainBusiness } from "@/components/tasks/business-formation/business/MainBusiness";
 import { PartnershipRights } from "@/components/tasks/business-formation/business/PartnershipRights";
 import { Provisions } from "@/components/tasks/business-formation/business/Provisions";
 import { BusinessFormationEmptyFieldAlert } from "@/components/tasks/business-formation/BusinessFormationEmptyFieldAlert";
+import { BusinessFormationTextBox } from "@/components/tasks/business-formation/BusinessFormationTextBox";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { FormationFieldErrorMap, FormationFields } from "@/lib/types/types";
@@ -135,7 +135,7 @@ export const BusinessSection = (): ReactElement => {
       {state.legalStructureId == "limited-partnership" ? (
         <>
           <hr className="margin-bottom-2 margin-top-0" aria-hidden={true} />
-          <GenericTextbox
+          <BusinessFormationTextBox
             maxChars={400}
             fieldName={"combinedInvestment"}
             required={true}
@@ -144,7 +144,7 @@ export const BusinessSection = (): ReactElement => {
             contentMd={Config.businessFormationDefaults.combinedInvestmentBody}
           />
           <hr className="margin-bottom-2 margin-top-0" aria-hidden={true} />
-          <GenericTextbox
+          <BusinessFormationTextBox
             maxChars={400}
             fieldName={"withdrawals"}
             required={true}
@@ -155,7 +155,7 @@ export const BusinessSection = (): ReactElement => {
           <hr className="margin-bottom-2 margin-top-0" aria-hidden={true} />
           <PartnershipRights />
           <hr className="margin-bottom-2 margin-top-2" aria-hidden={true} />
-          <GenericTextbox
+          <BusinessFormationTextBox
             maxChars={400}
             fieldName={"dissolution"}
             required={true}
@@ -168,7 +168,7 @@ export const BusinessSection = (): ReactElement => {
         <></>
       )}
       <hr className="margin-bottom-2 margin-top-0" aria-hidden={true} />
-      <GenericTextbox
+      <BusinessFormationTextBox
         maxChars={300}
         fieldName={"businessPurpose"}
         required={false}

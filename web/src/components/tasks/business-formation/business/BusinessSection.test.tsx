@@ -511,6 +511,7 @@ describe("Formation - BusinessSection", () => {
         { canCreateLimitedPartner: undefined }
       );
       await page.submitBusinessTab(false);
+      expect(screen.getByText(Config.businessFormationDefaults.genericErrorText)).toBeInTheDocument();
       expect(screen.getByRole("alert")).toHaveTextContent(/Can create limited partner/);
     });
 
@@ -521,6 +522,7 @@ describe("Formation - BusinessSection", () => {
       );
       fireEvent.click(screen.getByTestId("canCreateLimitedPartner-true"));
       await page.submitBusinessTab(false);
+      expect(screen.getByText(Config.businessFormationDefaults.genericErrorText)).toBeInTheDocument();
       expect(screen.getByRole("alert")).toHaveTextContent(/Create limited partner terms/);
     });
 

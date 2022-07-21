@@ -1,30 +1,27 @@
 import { Content } from "@/components/Content";
-import { GenericTextField } from "@/components/GenericTextField";
+import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { FormationFields } from "@/lib/types/types";
 import { camelCaseToSentence } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
+import { FormationTextField } from "@businessnjgovnavigator/shared";
+import { FormControl, FormControlLabel, FormHelperText, Radio, RadioGroup } from "@mui/material";
+import { red } from "@mui/material/colors";
 import { ReactElement, useContext } from "react";
 
 export const PartnershipRights = (): ReactElement => {
-  const { state, setFormationFormData } = useContext(BusinessFormationContext);
+  const { state, setFormationFormData, setErrorMap } = useContext(BusinessFormationContext);
 
-  const getTextField = (fieldName: FormationFields) => (
+  const getTextField = (fieldName: FormationTextField) => (
     <div className="margin-top-1" style={{ maxWidth: "41em" }}>
-      <Content>{Config.businessFormationDefaults.partnershipRightsTermsLabel}</Content>
       <div className="grid-row">
         <div className="grid-col">
-          <GenericTextField
-            value={state.formationFormData[fieldName] as string}
+          <BusinessFormationTextField
             placeholder={Config.businessFormationDefaults.partnershipRightsTermsPlaceholder}
-            handleChange={(value) =>
-              setFormationFormData({
-                ...state.formationFormData,
-                [fieldName]: value,
-              })
-            }
             fieldName={fieldName}
+            required={true}
+            validationText={Config.businessFormationDefaults.genericErrorText}
+            label={Config.businessFormationDefaults.partnershipRightsTermsLabel}
             fieldOptions={{
               multiline: true,
               rows: 3,
@@ -45,33 +42,64 @@ export const PartnershipRights = (): ReactElement => {
       </div>
     </div>
   );
+
+  const color = {
+    color: red[800],
+    "&.Mui-checked": {
+      color: red[600],
+    },
+  };
   const getRadio = (fieldName: FormationFields) => (
-    <FormControl>
+    <FormControl error={state.errorMap[fieldName].invalid}>
       <RadioGroup
         aria-label={camelCaseToSentence(fieldName)}
         name={camelCaseToSentence(fieldName)}
         value={state.formationFormData[fieldName]?.toString() ?? ""}
-        onChange={(e) =>
+        onChange={(e) => {
           setFormationFormData({
             ...state.formationFormData,
             [fieldName]: JSON.parse(e.target.value),
-          })
-        }
+          });
+          setErrorMap({ ...state.errorMap, [fieldName]: { invalid: !e.target.value } });
+        }}
         row
       >
         <FormControlLabel
           style={{ marginTop: ".75rem", alignItems: "flex-start" }}
           value={"true"}
-          control={<Radio color="primary" sx={{ paddingTop: "0px" }} data-testid={`${fieldName}-true`} />}
+          control={
+            <Radio
+              required={true}
+              color="primary"
+              data-testid={`${fieldName}-true`}
+              sx={{
+                paddingTop: "0px",
+                ...(state.errorMap[fieldName].invalid ? color : {}),
+              }}
+            />
+          }
           label={Config.businessFormationDefaults.partnershipRightsRadioYesText}
         />
         <FormControlLabel
           style={{ marginTop: ".75rem", alignItems: "flex-start" }}
           value={"false"}
-          control={<Radio color="primary" sx={{ paddingTop: "0px" }} data-testid={`${fieldName}-false`} />}
+          control={
+            <Radio
+              required={true}
+              color="primary"
+              sx={{
+                paddingTop: "0px",
+                ...(state.errorMap[fieldName].invalid ? color : {}),
+              }}
+              data-testid={`${fieldName}-false`}
+            />
+          }
           label={Config.businessFormationDefaults.partnershipRightsRadioNoText}
         />
       </RadioGroup>
+      <FormHelperText>
+        {state.errorMap[fieldName].invalid ? Config.businessFormationDefaults.genericErrorText : ""}
+      </FormHelperText>
     </FormControl>
   );
   return (
