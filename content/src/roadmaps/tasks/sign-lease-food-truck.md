@@ -10,7 +10,7 @@ You can sign a `location contract|location-contract` under your official busines
 ---
 ### Contract Considerations
 * **Start Date:** Identify a start date on your location that considers industry licenses, or other activities that are out of your control
-* **Contract Length:** Determine your ideal lease length by analyzing a few `lease considerations|lease-considerations` .
+* **Contract Length:** Determine your ideal lease length by analyzing a few `contract considerations|lease-considerations`
 
 ---
 >**Once completed, you will have:**
