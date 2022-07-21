@@ -226,8 +226,8 @@ export const completeNewBusinessOnboarding = ({
     onOnboardingPage.getRealEstateAppraisal().should("not.exist");
   } else {
     onOnboardingPage.selectRealEstateAppraisal(realEstateAppraisalManagement);
-    onOnboardingPage.getRealEstateAppraisal(certifiedInteriorDesigner).should("be.checked");
-    onOnboardingPage.getRealEstateAppraisal(!certifiedInteriorDesigner).should("not.be.checked");
+    onOnboardingPage.getRealEstateAppraisal(realEstateAppraisalManagement).should("be.checked");
+    onOnboardingPage.getRealEstateAppraisal(!realEstateAppraisalManagement).should("not.be.checked");
   }
 
   onOnboardingPage.clickNext();
