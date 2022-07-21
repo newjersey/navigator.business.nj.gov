@@ -3,7 +3,6 @@
   "defaultSectorId": "real-estate",
   "canBeReseller": false,
   "isCpaRequiredApplicable": false,
-  "isRealEstateAppraisalManagementApplicable": true,
   "canHavePermanentLocation": true,
   "roadmapSteps": [
     {
@@ -39,8 +38,9 @@
   ],
   "name": "Real Estate Appraisals",
   "isLiquorLicenseApplicable": false,
+  "isRealEstateAppraisalManagementApplicable": true,
   "modifications": [],
-  "isEnabled": false,
+  "isEnabled": true,
   "isCertifiedInteriorDesignerApplicable": false,
   "additionalSearchTerms": "appraiser",
   "id": "real-estate-appraisals",

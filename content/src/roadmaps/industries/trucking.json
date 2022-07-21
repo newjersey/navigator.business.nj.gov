@@ -3,9 +3,6 @@
   "canBeHomeBased": true,
   "defaultSectorId": "other-services",
   "canBeReseller": false,
-  "isProvidesStaffingServicesApplicable": false,
-  "isCertifiedInteriorDesignerApplicable": false,
-  "isRealEstateAppraisalManagementApplicable": false,
   "isCpaRequiredApplicable": false,
   "canHavePermanentLocation": true,
   "roadmapSteps": [
@@ -45,35 +42,33 @@
       "task": "trucking-insurance"
     },
     {
-      "step": 3,
-      "weight": 18,
-      "task": "trucking-vehicle-registration"
-    },
-    {
-      "step": 3,
-      "weight": 20,
+      "step": 4,
+      "weight": 10,
       "task": "trucking-boc3"
     },
     {
-      "step": 3,
-      "weight": 25,
+      "step": 4,
+      "weight": 15,
       "task": "trucking-usdot"
     },
     {
-      "step": 3,
-      "weight": 30,
+      "step": 4,
+      "weight": 20,
       "task": "trucking-irp"
     },
     {
       "step": 4,
-      "weight": 10,
+      "weight": 25,
       "task": "trucking-parking"
     }
   ],
-  "name": "Long-Haul Trucking",
+  "name": "Trucking",
   "isLiquorLicenseApplicable": false,
+  "isRealEstateAppraisalManagementApplicable": false,
   "isEnabled": false,
+  "isCertifiedInteriorDesignerApplicable": false,
   "additionalSearchTerms": "trucking, movers, box truck company, transportation, truck driving, hauling, truck haul, logistics, trucking company, ",
   "id": "trucking",
+  "isProvidesStaffingServicesApplicable": false,
   "description": "Offers load-hauling services "
 }

@@ -211,19 +211,43 @@
       "name": "trucking-usdot",
       "dependencies": [
         "register-for-taxes"
-        ]
+      ]
     },
     {
       "name": "trucking-irp",
       "dependencies": [
         "trucking-usdot"
-        ]
+      ]
     },
     {
       "name": "trucking-vehicle-registration",
       "dependencies": [
         "trucking-insurance"
-        ]
+      ]
+    },
+    {
+      "name": "register-for-taxes-foreign",
+      "dependencies": [
+        "form-business-entity-foreign"
+      ]
+    },
+    {
+      "name": "apply-scorp-federal",
+      "dependencies": [
+        "register-for-taxes-foreign"
+      ]
+    },
+    {
+      "name": "form-business-entity-foreign",
+      "dependencies": [
+        "dba-resolution-foreign"
+      ]
+    },
+    {
+      "name": "form-business-entity-foreign",
+      "dependencies": [
+        "certificate-good-standing-foreign"
+      ]
     }
   ]
 }
