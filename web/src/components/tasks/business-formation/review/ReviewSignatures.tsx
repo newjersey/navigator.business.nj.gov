@@ -56,7 +56,7 @@ export const ReviewSignatures = (): ReactElement => {
           </div>
           {(isCorp || state.legalStructureId == "limited-partnership") && (
             <>
-              <div className="display-block tablet:display-flex">
+              <div className="display-block tablet:display-flex margin-top-1">
                 <div className="text-bold width-11rem">
                   <Content>{Config.businessFormationDefaults.reviewPageIncorporatorAddressLabel}</Content>
                 </div>

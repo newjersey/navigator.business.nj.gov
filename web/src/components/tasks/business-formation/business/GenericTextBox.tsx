@@ -21,7 +21,7 @@ interface Props {
 }
 
 export const GenericTextbox = (props: Props): ReactElement => {
-  const { state, setFormationFormData } = useContext(BusinessFormationContext);
+  const { state, setFormationFormData, setErrorMap } = useContext(BusinessFormationContext);
   const [isExpanded, setIsExpanded] = useState(props.required || !!state.formationFormData[props.fieldName]);
 
   const handleAddButtonClick = (): void => {
@@ -76,6 +76,12 @@ export const GenericTextbox = (props: Props): ReactElement => {
                   placeholder={props.placeholderText}
                   handleChange={(value) => handleChange(value)}
                   fieldName={props.fieldName}
+                  error={state.errorMap[props.fieldName].invalid}
+                  validationText={Config.businessFormationDefaults.genericErrorText}
+                  onValidation={(fieldName, invalid) =>
+                    setErrorMap({ ...state.errorMap, [fieldName]: invalid })
+                  }
+                  required={true}
                   fieldOptions={{
                     multiline: true,
                     rows: 3,
