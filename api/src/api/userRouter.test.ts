@@ -287,6 +287,40 @@ describe("userRouter", () => {
       expect(response.body).toEqual({ error: "error" });
     });
 
+    describe("task status updates", () => {
+      it("updates a tasks's status if value updated in profile", async () => {
+        mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
+        const userData = generateUserData({
+          profileData: generateProfileData({ employerId: "123456789" }),
+          taskProgress: {},
+          user: generateUser({ id: "123" }),
+        });
+        stubUserDataClient.put.mockImplementation((userData) => Promise.resolve(userData));
+        const response = await request(app)
+          .post(`/users`)
+          .send(userData)
+          .set("Authorization", "Bearer user-123-token");
+        expect(response.body.taskProgress).toEqual({ "register-for-ein": "COMPLETED" });
+      });
+
+      it("does not update task status if non-reversible", async () => {
+        mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
+
+        const userData = generateUserData({
+          profileData: generateProfileData({ employerId: "" }),
+          taskProgress: { "register-for-ein": "COMPLETED" },
+          user: generateUser({ id: "123" }),
+        });
+
+        stubUserDataClient.put.mockImplementation((userData) => Promise.resolve(userData));
+        const response = await request(app)
+          .post(`/users`)
+          .send(userData)
+          .set("Authorization", "Bearer user-123-token");
+        expect(response.body.taskProgress).toEqual({ "register-for-ein": "COMPLETED" });
+      });
+    });
+
     describe("legal structure changes", () => {
       it("does not change the legal structure if formation is completed", async () => {
         mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
