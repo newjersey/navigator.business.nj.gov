@@ -10,7 +10,7 @@ export const SupportExploreSignUpChatCards = (): ReactElement => {
   const cardConfig = Config.landingPage;
 
   return (
-    <div className={`${isDesktopAndUp ? "flex flex-row fja" : ""}`}>
+    <div className={`${isDesktopAndUp ? "flex flex-justify" : ""}`}>
       <UserSupportActionCard
         color={"primary"}
         headerLine1={cardConfig.card1HeaderLine1}
@@ -20,17 +20,15 @@ export const SupportExploreSignUpChatCards = (): ReactElement => {
         buttonText={cardConfig.card1Button}
         buttonStyleProp="primary"
       />
-      <div className={`${isDesktopAndUp ? "desktop:margin-x-3" : "margin-y-2"}`}>
-        <UserSupportActionCard
-          color={"accent-cooler"}
-          headerLine1={cardConfig.card2HeaderLine1}
-          headerLine2={cardConfig.card2HeaderLine2}
-          supportingText={cardConfig.card2SupportingText}
-          buttonLink={cardConfig.card2ButtonLink}
-          buttonText={cardConfig.card2Button}
-          buttonStyleProp="accent-cooler"
-        />
-      </div>
+      <UserSupportActionCard
+        color={"accent-cooler"}
+        headerLine1={cardConfig.card2HeaderLine1}
+        headerLine2={cardConfig.card2HeaderLine2}
+        supportingText={cardConfig.card2SupportingText}
+        buttonLink={cardConfig.card2ButtonLink}
+        buttonText={cardConfig.card2Button}
+        buttonStyleProp="accent-cooler"
+      />
       <UserSupportActionCard
         color={"info-dark"}
         headerLine1={cardConfig.card3HeaderLine1}
@@ -40,6 +38,7 @@ export const SupportExploreSignUpChatCards = (): ReactElement => {
         buttonText={cardConfig.card3Button}
         buttonStyleProp="info"
         intercom={true}
+        isLast
       />
     </div>
   );
