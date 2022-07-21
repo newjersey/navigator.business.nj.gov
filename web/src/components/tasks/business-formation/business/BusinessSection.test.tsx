@@ -486,6 +486,7 @@ describe("Formation - BusinessSection", () => {
     it("Withdrawals", async () => {
       const page = await getPageHelper({ legalStructureId: "limited-partnership" }, { withdrawals: "" });
       await page.submitBusinessTab(false);
+      expect(screen.getByText(Config.businessFormationDefaults.genericErrorText)).toBeInTheDocument();
       expect(screen.getByRole("alert")).toHaveTextContent(/Withdrawals/);
     });
 
