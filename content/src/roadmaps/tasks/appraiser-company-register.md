@@ -6,6 +6,7 @@ id: appraiser-company-register
 callToActionLink: https://www.njconsumeraffairs.gov/rea/Applications/Application-for-Registration-as-an-Appraisal-Management-Company.pdf
 callToActionText: Register Your Company
 required: true
+issuingAgency: New Jersey Division of Consumer Affairs Real Estate Appraiser Board
 ---
 Your Appraisal Management Company must be registered with the State prior to offering professional services.
 
