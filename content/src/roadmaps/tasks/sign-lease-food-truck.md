@@ -5,7 +5,7 @@ id: sign-lease
 callToActionLink: ""
 callToActionText: ""
 ---
-If you've found a location where you'd like to regularly park your foodtruck for work, you need to sign a location agreement with the location owner giving you permission to park in their property. 
+If you've found a location where you'd like to regularly park your food truck to work, you need to get signed permission from the location owner in a location agreement.  
   
 You can sign a `location contract|location-contract` under your official business name and legal structure. Signing your lease under your registered business name may protect you from liabilities and costs associated with your food truck location. Have an attorney review your contract before you sign.
 
