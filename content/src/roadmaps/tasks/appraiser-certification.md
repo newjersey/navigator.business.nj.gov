@@ -15,10 +15,10 @@ You need to be a Certified Appraiser prior to opening an `Appraisal Management C
 - 21 years old at a minimum
 - Bachelor’s degree from an accredited university
 - Appraiser’s License
-
-### Application Requirements
 - 200 hours in an Appraiser Qualification Board-approved program
 - 1,500 hours of relevant work experience in no less than 12 months
+
+### Application Requirements
 - Criminal background check
 - Pay any associated fees
 
