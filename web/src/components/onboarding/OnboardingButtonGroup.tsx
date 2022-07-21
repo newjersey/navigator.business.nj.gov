@@ -1,5 +1,6 @@
 import { Button } from "@/components/njwds-extended/Button";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
+import { scrollToTop } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import React, { ReactElement, useContext } from "react";
 
@@ -12,6 +13,7 @@ export const OnboardingButtonGroup = (props: Props): ReactElement => {
 
   const back = (event: React.MouseEvent) => {
     event.preventDefault();
+    scrollToTop();
     onBack();
   };
 

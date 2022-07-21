@@ -206,6 +206,7 @@ const OnboardingPage = (props: Props): ReactElement => {
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
+    scrollToTop();
     const currentUserData = userData as UserData;
 
     const currentPageFlow = onboardingFlows[currentFlow].pages[page.current - 1];

@@ -20,8 +20,6 @@ export const VerticalStepIndicator = (props: Props): ReactElement => {
     (isTabletAndUp && sectionIsOpen && !props.miniRoadmap) ||
     (props.miniRoadmap && sectionIsOpen && (!props.last || props.miniRoadmapSubtaskisOpen));
 
-  // (props.miniRoadmap && sectionIsOpen && props.miniRoadmapSubtaskisOpen);
-
   const resizeVerticalBarToContent = () => {
     const content = document.getElementById(`vertical-content-${props.stepNumber}`);
     const verticalBar = document.getElementById(`vertical-bar-${props.stepNumber}`);

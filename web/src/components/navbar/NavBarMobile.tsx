@@ -88,9 +88,9 @@ export const NavBarMobile = ({
           data-testid="nav-sidebar-menu"
         >
           <h4 className={`margin-0 flex flex-align-center fdr fjc space-between text-${textColor}`}>
-            <div className="fac">
-              <Icon className="vam margin-right-1 usa-icon--size-3">{accountIcon}</Icon>
-              <span className="fac">{accountString}</span>
+            <div className="flex">
+              <Icon className="margin-top-2px margin-right-1 usa-icon--size-3 minw-3">{accountIcon}</Icon>
+              <div>{accountString}</div>
             </div>
             <button
               className="left-nav-close fac fdr fjc"
