@@ -61,7 +61,8 @@ export const OnboardingDateOfFormation = ({ headerAriaLevel = 2, ...props }: Pro
     });
   };
 
-  const Picker = process.env.NODE_ENV === "test" ? DesktopDatePicker : DatePicker;
+  const Picker =
+    process.env.NODE_ENV === "test" || process.env.CI === "true" ? DesktopDatePicker : DatePicker;
   const headerLevelTwo = setHeaderRole(headerAriaLevel, "h3-styling");
 
   return (
