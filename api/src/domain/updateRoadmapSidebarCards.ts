@@ -32,6 +32,14 @@ export const updateRoadmapSidebarCards: UpdateRoadmapSidebarCards = (userData: U
     }
   }
 
+  const hasCompletedTaxes = userData.taskProgress["register-for-taxes"] === "COMPLETED";
+
+  if (hasCompletedFormation && !hasCompletedTaxes) {
+    showCard("tax-registration-nudge");
+  } else {
+    hideCard("tax-registration-nudge");
+  }
+
   return {
     ...userData,
     preferences: {
