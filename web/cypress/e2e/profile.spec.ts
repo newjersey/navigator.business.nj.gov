@@ -36,10 +36,16 @@ describe("Profile [feature] [all] [group1]", () => {
       );
       const legalStructureId = randomElementFromArray(LegalStructures as LegalStructure[]).id;
       const townDisplayName = "Atlantic";
-      const homeBasedQuestion = industry.canBeHomeBased === false ? undefined : Boolean(randomInt() % 2);
+      const homeBasedQuestion =
+        industry.industryOnboardingQuestions.canBeHomeBased === false ? undefined : Boolean(randomInt() % 2);
       const liquorLicenseQuestion =
-        industry.isLiquorLicenseApplicable === false ? undefined : Boolean(randomInt() % 2);
-      const requiresCpa = industry.isCpaRequiredApplicable === false ? undefined : Boolean(randomInt() % 2);
+        industry.industryOnboardingQuestions.isLiquorLicenseApplicable === false
+          ? undefined
+          : Boolean(randomInt() % 2);
+      const requiresCpa =
+        industry.industryOnboardingQuestions.isCpaRequiredApplicable === false
+          ? undefined
+          : Boolean(randomInt() % 2);
 
       completeNewBusinessOnboarding({
         industry,
@@ -85,7 +91,9 @@ describe("Profile [feature] [all] [group1]", () => {
       const industry = randomElementFromArray(homeBasedIndustries.filter((x) => x.isEnabled) as Industry[]);
       const homeBasedQuestion = Boolean(randomInt() % 2);
       const liquorLicenseQuestion =
-        industry.isLiquorLicenseApplicable === false ? undefined : Boolean(randomInt() % 2);
+        industry.industryOnboardingQuestions.isLiquorLicenseApplicable === false
+          ? undefined
+          : Boolean(randomInt() % 2);
       const legalStructureId = randomElementFromArray(LegalStructures as LegalStructure[]).id;
       const townDisplayName = "Atlantic";
       const requiresCpa = industry.isCpaRequiredApplicable === false ? undefined : Boolean(randomInt() % 2);
@@ -120,7 +128,10 @@ describe("Profile [feature] [all] [group1]", () => {
       const liquorLicenseQuestion = Boolean(randomInt() % 2);
       const legalStructureId = randomElementFromArray(LegalStructures as LegalStructure[]).id;
       const townDisplayName = "Atlantic";
-      const requiresCpa = industry.isCpaRequiredApplicable === false ? undefined : Boolean(randomInt() % 2);
+      const requiresCpa =
+        industry.industryOnboardingQuestions.isCpaRequiredApplicable === false
+          ? undefined
+          : Boolean(randomInt() % 2);
 
       completeNewBusinessOnboarding({
         industry,
@@ -149,10 +160,15 @@ describe("Profile [feature] [all] [group1]", () => {
       const legalStructureId = randomElementFromArray(legalStructureWithTradeName as LegalStructure[]).id;
       const homeBasedQuestion = industry.canBeHomeBased === false ? undefined : Boolean(randomInt() % 2);
       const liquorLicenseQuestion =
-        industry.isLiquorLicenseApplicable === false ? undefined : Boolean(randomInt() % 2);
+        industry.industryOnboardingQuestions.isLiquorLicenseApplicable === false
+          ? undefined
+          : Boolean(randomInt() % 2);
       const townDisplayName = "Atlantic";
       const updatedEntityId = randomInt(10).toString();
-      const requiresCpa = industry.isCpaRequiredApplicable === false ? undefined : Boolean(randomInt() % 2);
+      const requiresCpa =
+        industry.industryOnboardingQuestions.isCpaRequiredApplicable === false
+          ? undefined
+          : Boolean(randomInt() % 2);
 
       completeNewBusinessOnboarding({
         industry,
