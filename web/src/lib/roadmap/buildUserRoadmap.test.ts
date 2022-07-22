@@ -321,7 +321,9 @@ describe("buildUserRoadmap", () => {
 
     describe("on-boarding modifications", () => {
       describe("staffing service", () => {
-        for (const industry of Industries.filter((x) => x.isProvidesStaffingServicesApplicable)) {
+        for (const industry of Industries.filter(
+          (x) => x.industryOnboardingQuestions.isProvidesStaffingServicesApplicable
+        )) {
           it(`set industry to employment-agency if ${industry.name} with staffing service`, async () => {
             const profileData: ProfileData = {
               ...createEmptyProfileData(),
