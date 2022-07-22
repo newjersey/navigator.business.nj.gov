@@ -1,12 +1,15 @@
 {
   "naicsCodes": "541410",
-  "canBeHomeBased": true,
   "defaultSectorId": "construction",
-  "canBeReseller": false,
-  "isProvidesStaffingServicesApplicable": false,
-  "isCertifiedInteriorDesignerApplicable": true,
-  "isRealEstateAppraisalManagementApplicable": false,
-  "isCpaRequiredApplicable": false,
+  "industryOnboardingQuestions": {
+    "canBeHomeBased": true,
+    "canBeReseller": false,
+    "isProvidesStaffingServicesApplicable": false,
+    "isCertifiedInteriorDesignerApplicable": true,
+    "isRealEstateAppraisalManagementApplicable": false,
+    "isCpaRequiredApplicable": false,
+    "isLiquorLicenseApplicable": false
+  },
   "canHavePermanentLocation": true,
   "roadmapSteps": [
     {
@@ -46,7 +49,6 @@
     }
   ],
   "name": "Interior Design",
-  "isLiquorLicenseApplicable": false,
   "isEnabled": true,
   "additionalSearchTerms": "interior decorating, design studio, interior designer, home interior designer",
   "id": "interior-designer",

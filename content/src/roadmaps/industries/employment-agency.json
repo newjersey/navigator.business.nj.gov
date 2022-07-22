@@ -1,13 +1,16 @@
 {
   "naicsCodes": "561311",
   "canHavePermanentLocation": true,
-  "canBeHomeBased": true,
   "defaultSectorId": "administrative-and-employment-services",
-  "canBeReseller": true,
-  "isProvidesStaffingServicesApplicable": false,
-  "isCertifiedInteriorDesignerApplicable": false,
-  "isRealEstateAppraisalManagementApplicable": false,
-  "isCpaRequiredApplicable": false,
+  "industryOnboardingQuestions" : {
+    "canBeHomeBased": true,
+    "canBeReseller": true,
+    "isProvidesStaffingServicesApplicable": false,
+    "isCertifiedInteriorDesignerApplicable": false,
+    "isRealEstateAppraisalManagementApplicable": false,
+    "isCpaRequiredApplicable": false,
+    "isLiquorLicenseApplicable": false
+  },
   "isEnabled": true,
   "roadmapSteps": [
     {
@@ -52,7 +55,6 @@
     }
   ],
   "name": "Employment Agency",
-  "isLiquorLicenseApplicable": false,
   "additionalSearchTerms": "employment office,employment services,temporary agency,employment recruiter,employment center",
   "id": "employment-agency",
   "description": "A business that finds employment for a job seeker and employees for employers"

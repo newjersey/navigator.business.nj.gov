@@ -1,11 +1,15 @@
 {
   "canHavePermanentLocation": true,
-  "canBeHomeBased": true,
   "defaultSectorId": "other-services",
-  "isProvidesStaffingServicesApplicable": false,
-  "isCertifiedInteriorDesignerApplicable": false,
-  "isRealEstateAppraisalManagementApplicable": false,
-  "canBeReseller": true,
+  "industryOnboardingQuestions": {
+    "canBeHomeBased": true,
+    "isProvidesStaffingServicesApplicable": false,
+    "isCertifiedInteriorDesignerApplicable": false,
+    "isRealEstateAppraisalManagementApplicable": false,
+    "canBeReseller": true,
+    "isLiquorLicenseApplicable": false,
+    "isCpaRequiredApplicable": false
+  },
   "isEnabled": true,
   "roadmapSteps": [
     {
@@ -40,8 +44,6 @@
     }
   ],
   "name": "All Other Businesses",
-  "isLiquorLicenseApplicable": false,
-  "isCpaRequiredApplicable": false,
   "id": "generic",
   "description": "Select this if you don’t see your specific industry"
 }

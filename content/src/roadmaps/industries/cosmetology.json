@@ -1,13 +1,16 @@
 {
   "naicsCodes": "812112, 812199, 812113, 611511, 812111",
   "canHavePermanentLocation": true,
-  "canBeHomeBased": false,
   "defaultSectorId": "other-services",
-  "canBeReseller": true,
-  "isProvidesStaffingServicesApplicable": false,
-  "isCertifiedInteriorDesignerApplicable": false,
-  "isRealEstateAppraisalManagementApplicable": false,
-  "isCpaRequiredApplicable": false,
+  "industryOnboardingQuestions": {
+    "canBeHomeBased": false,
+    "canBeReseller": true,
+    "isProvidesStaffingServicesApplicable": false,
+    "isCertifiedInteriorDesignerApplicable": false,
+    "isRealEstateAppraisalManagementApplicable": false,
+    "isCpaRequiredApplicable": false,
+    "isLiquorLicenseApplicable": false
+  },
   "isEnabled": true,
   "roadmapSteps": [
     {
@@ -52,7 +55,6 @@
     }
   ],
   "name": "Cosmetology",
-  "isLiquorLicenseApplicable": false,
   "modifications": [
     {
       "taskToReplaceFilename": "check-site-requirements",

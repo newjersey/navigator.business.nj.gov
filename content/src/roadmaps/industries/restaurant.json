@@ -1,13 +1,16 @@
 {
   "naicsCodes": "722511, 722310, 722320, 722410, 722513, 722514, 722515",
   "canHavePermanentLocation": true,
-  "canBeHomeBased": false,
   "defaultSectorId": "accommodation-and-food-services",
-  "canBeReseller": true,
-  "isProvidesStaffingServicesApplicable": false,
-  "isCertifiedInteriorDesignerApplicable": false,
-  "isRealEstateAppraisalManagementApplicable": false,
-  "isCpaRequiredApplicable": false,
+  "industryOnboardingQuestions": {
+    "canBeHomeBased": false,
+    "canBeReseller": true,
+    "isProvidesStaffingServicesApplicable": false,
+    "isCertifiedInteriorDesignerApplicable": false,
+    "isRealEstateAppraisalManagementApplicable": false,
+    "isCpaRequiredApplicable": false,
+    "isLiquorLicenseApplicable": true
+  },
   "isEnabled": true,
   "roadmapSteps": [
     {
@@ -52,7 +55,6 @@
     }
   ],
   "name": "Restaurant",
-  "isLiquorLicenseApplicable": true,
   "additionalSearchTerms": "cafe, grill",
   "id": "restaurant",
   "description": "Provides food to patrons"

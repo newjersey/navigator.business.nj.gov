@@ -1,13 +1,16 @@
 {
   "naicsCodes": "459991",
-  "canBeHomeBased": false,
   "defaultSectorId": "cannabis",
-  "canBeReseller": false,
-  "isProvidesStaffingServicesApplicable": false,
-  "isCertifiedInteriorDesignerApplicable": false,
-  "isRealEstateAppraisalManagementApplicable": false,
-  "isCpaRequiredApplicable": false,
   "canHavePermanentLocation": true,
+  "industryOnboardingQuestions": {
+    "canBeHomeBased": false,
+    "canBeReseller": false,
+    "isProvidesStaffingServicesApplicable": false,
+    "isCertifiedInteriorDesignerApplicable": false,
+    "isRealEstateAppraisalManagementApplicable": false,
+    "isCpaRequiredApplicable": false,
+    "isLiquorLicenseApplicable": false
+  },
   "roadmapSteps": [
     {
       "step": 1,
@@ -46,7 +49,6 @@
     }
   ],
   "name": "Cannabis",
-  "isLiquorLicenseApplicable": false,
   "modifications": [
     {
       "taskToReplaceFilename": "zoning",

@@ -1,13 +1,16 @@
 {
   "naicsCodes": "541330",
-  "canBeHomeBased": true,
-  "defaultSectorId": "construction",
-  "canBeReseller": false,
-  "isProvidesStaffingServicesApplicable": false,
-  "isCertifiedInteriorDesignerApplicable": false,
-  "isRealEstateAppraisalManagementApplicable": false,
-  "isCpaRequiredApplicable": false,
   "canHavePermanentLocation": true,
+  "defaultSectorId": "construction",
+  "industryOnboardingQuestions" : {
+    "canBeHomeBased": true,
+    "canBeReseller": false,
+    "isProvidesStaffingServicesApplicable": false,
+    "isCertifiedInteriorDesignerApplicable": false,
+    "isRealEstateAppraisalManagementApplicable": false,
+    "isCpaRequiredApplicable": false,
+    "isLiquorLicenseApplicable": false
+  },
   "roadmapSteps": [
     {
       "step": 1,
@@ -51,7 +54,6 @@
     }
   ],
   "name": "Engineering",
-  "isLiquorLicenseApplicable": false,
   "isEnabled": true,
   "additionalSearchTerms": "engineering consulting, firm, professional services, ",
   "id": "engineering",

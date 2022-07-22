@@ -1,12 +1,15 @@
 {
   "naicsCodes": "531390, 523999",
-  "canBeHomeBased": true,
   "defaultSectorId": "real-estate",
-  "canBeReseller": true,
-  "isProvidesStaffingServicesApplicable": false,
-  "isCertifiedInteriorDesignerApplicable": false,
-  "isRealEstateAppraisalManagementApplicable": false,
-  "isCpaRequiredApplicable": false,
+  "industryOnboardingQuestions" : {
+    "canBeHomeBased": true,
+    "canBeReseller": true,
+    "isProvidesStaffingServicesApplicable": false,
+    "isCertifiedInteriorDesignerApplicable": false,
+    "isRealEstateAppraisalManagementApplicable": false,
+    "isCpaRequiredApplicable": false,
+    "isLiquorLicenseApplicable": false
+  },
   "canHavePermanentLocation": true,
   "roadmapSteps": [
     {
@@ -41,7 +44,6 @@
     }
   ],
   "name": "Real Estate Investing",
-  "isLiquorLicenseApplicable": false,
   "isEnabled": true,
   "additionalSearchTerms": "investor, property investor",
   "id": "real-estate-investor",

@@ -1,13 +1,16 @@
 {
   "naicsCodes": "621399",
   "canHavePermanentLocation": true,
-  "canBeHomeBased": true,
   "defaultSectorId": "health-care-and-social-assistance",
-  "canBeReseller": true,
-  "isProvidesStaffingServicesApplicable": false,
-  "isCertifiedInteriorDesignerApplicable": false,
-  "isRealEstateAppraisalManagementApplicable": false,
-  "isCpaRequiredApplicable": false,
+  "industryOnboardingQuestions" : {
+    "canBeHomeBased": true,
+    "canBeReseller": true,
+    "isProvidesStaffingServicesApplicable": false,
+    "isCertifiedInteriorDesignerApplicable": false,
+    "isRealEstateAppraisalManagementApplicable": false,
+    "isCpaRequiredApplicable": false,
+    "isLiquorLicenseApplicable": false
+  },
   "isEnabled": true,
   "roadmapSteps": [
     {
@@ -52,7 +55,6 @@
     }
   ],
   "name": "Massage Therapy",
-  "isLiquorLicenseApplicable": false,
   "additionalSearchTerms": "Masseuse, Spa, Spa services, bodywork, wellness",
   "id": "massage-therapy",
   "licenseType": "Massage and Bodywork Therapy",

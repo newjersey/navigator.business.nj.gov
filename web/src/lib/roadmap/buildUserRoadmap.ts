@@ -123,7 +123,7 @@ const getIndustryBasedAddOns = (profileData: ProfileData, industryId: string | u
     }
   }
 
-  if (industry.canBeReseller) {
+  if (industry.industryOnboardingQuestions.canBeReseller) {
     addOns.push("reseller");
   }
 

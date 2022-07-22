@@ -1,5 +1,5 @@
 import { LookupIndustryById } from "@businessnjgovnavigator/shared/";
 
 export const isLiquorLicenseApplicable = (industryId: string | undefined): boolean => {
-  return LookupIndustryById(industryId)?.isLiquorLicenseApplicable;
+  return LookupIndustryById(industryId)?.industryOnboardingQuestions.isLiquorLicenseApplicable;
 };

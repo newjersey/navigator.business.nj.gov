@@ -1,13 +1,16 @@
 {
   "naicsCodes": "541613,541820",
   "canHavePermanentLocation": true,
-  "canBeHomeBased": true,
   "defaultSectorId": "digital-and-print-media",
-  "canBeReseller": false,
-  "isProvidesStaffingServicesApplicable": true,
-  "isCertifiedInteriorDesignerApplicable": false,
-  "isRealEstateAppraisalManagementApplicable": false,
-  "isCpaRequiredApplicable": false,
+  "industryOnboardingQuestions" : {
+    "canBeHomeBased": true,
+    "canBeReseller": false,
+    "isProvidesStaffingServicesApplicable": true,
+    "isCertifiedInteriorDesignerApplicable": false,
+    "isRealEstateAppraisalManagementApplicable": false,
+    "isCpaRequiredApplicable": false,
+    "isLiquorLicenseApplicable": false
+  },
   "isEnabled": true,
   "roadmapSteps": [
     {
@@ -42,7 +45,6 @@
     }
   ],
   "name": "Marketing and PR Consulting",
-  "isLiquorLicenseApplicable": false,
   "additionalSearchTerms": "marketing, advertising, consultant, press, communications, Image management, consultant, advertising, communications, media, promotions",
   "id": "marketing-pr-consulting",
   "description": "Expert advice to improve the client’s business exposure"

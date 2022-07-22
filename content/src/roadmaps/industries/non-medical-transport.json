@@ -1,13 +1,16 @@
 {
   "naicsCodes": "485999",
   "canHavePermanentLocation": true,
-  "canBeHomeBased": true,
   "defaultSectorId": "health-care-and-social-assistance",
-  "canBeReseller": false,
-  "isProvidesStaffingServicesApplicable": false,
-  "isCertifiedInteriorDesignerApplicable": false,
-  "isRealEstateAppraisalManagementApplicable": false,
-  "isCpaRequiredApplicable": false,
+  "industryOnboardingQuestions" : {
+    "canBeHomeBased": true,
+    "canBeReseller": false,
+    "isProvidesStaffingServicesApplicable": false,
+    "isCertifiedInteriorDesignerApplicable": false,
+    "isRealEstateAppraisalManagementApplicable": false,
+    "isCpaRequiredApplicable": false,
+    "isLiquorLicenseApplicable": false
+  },
   "isEnabled": true,
   "roadmapSteps": [
     {
@@ -57,7 +60,6 @@
     }
   ],
   "name": "Non-Medical Transport",
-  "isLiquorLicenseApplicable": false,
   "additionalSearchTerms": "transportation service,non-emergency transportation",
   "id": "non-medical-transport",
   "description": "The transportation of an individual with medical needs"

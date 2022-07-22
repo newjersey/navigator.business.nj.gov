@@ -4,21 +4,25 @@ export interface Industry {
   readonly id: string;
   readonly name: string;
   readonly description: string;
-  readonly canBeHomeBased: boolean;
-  readonly isLiquorLicenseApplicable: boolean;
-  readonly isCpaRequiredApplicable: boolean;
   readonly licenseType?: string;
   readonly canHavePermanentLocation: boolean;
-  readonly canBeReseller: boolean;
   readonly additionalSearchTerms?: string;
   readonly defaultSectorId?: string;
   readonly roadmapSteps: AddOn[];
   readonly modifications?: TaskModification[];
   readonly naicsCodes?: string;
   readonly isEnabled: boolean;
+  readonly industryOnboardingQuestions: IndustryOnboardingQuestions;
+}
+
+interface IndustryOnboardingQuestions {
   readonly isProvidesStaffingServicesApplicable: boolean;
   readonly isCertifiedInteriorDesignerApplicable: boolean;
   readonly isRealEstateAppraisalManagementApplicable: boolean;
+  readonly canBeReseller: boolean;
+  readonly isLiquorLicenseApplicable: boolean;
+  readonly isCpaRequiredApplicable: boolean;
+  readonly canBeHomeBased: boolean;
 }
 
 export interface AddOn {
@@ -38,17 +42,19 @@ export const LookupIndustryById = (id: string | undefined): Industry => {
       id: "",
       name: "",
       description: "",
-      canBeHomeBased: false,
-      isLiquorLicenseApplicable: false,
-      isCpaRequiredApplicable: false,
       canHavePermanentLocation: true,
-      canBeReseller: true,
       roadmapSteps: [],
       naicsCodes: "",
       isEnabled: false,
-      isProvidesStaffingServicesApplicable: false,
-      isCertifiedInteriorDesignerApplicable: false,
-      isRealEstateAppraisalManagementApplicable: false,
+      industryOnboardingQuestions: {
+        isProvidesStaffingServicesApplicable: false,
+        isCertifiedInteriorDesignerApplicable: false,
+        isRealEstateAppraisalManagementApplicable: false,
+        canBeReseller: true,
+        canBeHomeBased: false,
+        isLiquorLicenseApplicable: false,
+        isCpaRequiredApplicable: false,
+      },
     }
   );
 };

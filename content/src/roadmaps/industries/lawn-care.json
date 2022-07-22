@@ -1,13 +1,16 @@
 {
   "naicsCodes": "561730",
   "canHavePermanentLocation": true,
-  "canBeHomeBased": true,
   "defaultSectorId": "other-services",
-  "canBeReseller": true,
-  "isProvidesStaffingServicesApplicable": false,
-  "isCertifiedInteriorDesignerApplicable": false,
-  "isRealEstateAppraisalManagementApplicable": false,
-  "isCpaRequiredApplicable": false,
+  "industryOnboardingQuestions": {
+    "canBeHomeBased": true,
+    "canBeReseller": true,
+    "isProvidesStaffingServicesApplicable": false,
+    "isCertifiedInteriorDesignerApplicable": false,
+    "isRealEstateAppraisalManagementApplicable": false,
+    "isCpaRequiredApplicable": false,
+    "isLiquorLicenseApplicable": false
+  },
   "isEnabled": true,
   "roadmapSteps": [
     {
@@ -42,7 +45,6 @@
     }
   ],
   "name": "Lawn Care",
-  "isLiquorLicenseApplicable": false,
   "additionalSearchTerms": "yard, lawn, mowing, maintenance, service, landscape",
   "id": "lawn-care",
   "description": "Offers lawn maintenance services"
