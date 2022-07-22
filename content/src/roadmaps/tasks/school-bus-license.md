@@ -5,6 +5,7 @@ name: Ensure You or Your Drivers Have the Right Credentials
 id: school-bus-license
 callToActionLink: https://telegov.njportal.com/njmvc/AppointmentWizard/20
 callToActionText: Apply for Your License
+required: true
 issuingAgency: New Jersey Motor Vehicle Commission
 ---
 School bus drivers need a Commercial Driver’s License (CDL) with a Passenger (P) and School Bus (S) endorsement before they can legally drive a school bus. The licensing process has two parts: knowledge and skills tests.
