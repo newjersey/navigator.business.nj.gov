@@ -2357,10 +2357,11 @@ collections:
         name: isRealEstateAppraisalManagementApplicable
         widget: boolean
         default: false
-      - label: Mobile Location
+      - label: Can Have Permanent Location
         name: canHavePermanentLocation
         widget: boolean
         default: true
+        hint: Enable this field if the business can have a permanent location
       - label: Reseller
         name: canBeReseller
         widget: boolean
