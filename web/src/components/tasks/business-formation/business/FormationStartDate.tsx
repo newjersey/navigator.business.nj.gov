@@ -32,7 +32,8 @@ export const FormationStartDate = (): ReactElement => {
     });
   };
 
-  const Picker = process.env.NODE_ENV === "test" ? DesktopDatePicker : DatePicker;
+  const Picker =
+    process.env.NODE_ENV === "test" || process.env.CI === "true" ? DesktopDatePicker : DatePicker;
 
   return (
     <>
