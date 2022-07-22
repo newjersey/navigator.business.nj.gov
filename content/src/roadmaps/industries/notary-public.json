@@ -1,12 +1,15 @@
 {
   "naicsCodes": "541120",
-  "canBeHomeBased": true,
   "defaultSectorId": "other-services",
-  "canBeReseller": false,
-  "isCpaRequiredApplicable": false,
-  "isProvidesStaffingServicesApplicable": false,
-  "isCertifiedInteriorDesignerApplicable": false,
-  "isRealEstateAppraisalManagementApplicable": false,
+  "industryOnboardingQuestions": {
+    "canBeHomeBased": true,
+    "canBeReseller": false,
+    "isCpaRequiredApplicable": false,
+    "isProvidesStaffingServicesApplicable": false,
+    "isCertifiedInteriorDesignerApplicable": false,
+    "isRealEstateAppraisalManagementApplicable": false,
+    "isLiquorLicenseApplicable": false
+  },
   "canHavePermanentLocation": true,
   "roadmapSteps": [
     {
@@ -46,7 +49,6 @@
     }
   ],
   "name": "Notary Public",
-  "isLiquorLicenseApplicable": false,
   "isEnabled": true,
   "additionalSearchTerms": "signing agent, mobile notary, notary service, loan signing, remote online notary",
   "id": "notary-public",

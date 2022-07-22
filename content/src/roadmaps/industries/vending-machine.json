@@ -1,9 +1,15 @@
 {
   "naicsCodes": "445132, 454210",
-  "canBeHomeBased": false,
   "defaultSectorId": "accommodation-and-food-services",
-  "canBeReseller": true,
-  "isCpaRequiredApplicable": false,
+  "industryOnboardingQuestions": {
+    "canBeHomeBased": false,
+    "canBeReseller": true,
+    "isCpaRequiredApplicable": false,
+    "isProvidesStaffingServicesApplicable": false,
+    "isCertifiedInteriorDesignerApplicable": false,
+    "isLiquorLicenseApplicable": false,
+    "isRealEstateAppraisalManagementApplicable": false
+  },
   "canHavePermanentLocation": false,
   "roadmapSteps": [
     {
@@ -43,12 +49,8 @@
     }
   ],
   "name": "Vending Machine",
-  "isLiquorLicenseApplicable": false,
-  "isRealEstateAppraisalManagementApplicable": false,
   "isEnabled": true,
-  "isCertifiedInteriorDesignerApplicable": false,
   "additionalSearchTerms": "vending machine service, vending machine business, snack machine, vending machine operator",
   "id": "vending-machine",
-  "isProvidesStaffingServicesApplicable": false,
   "description": "Offers small items for purchase through an automated machine"
 }

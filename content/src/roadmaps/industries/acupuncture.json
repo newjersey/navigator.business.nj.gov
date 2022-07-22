@@ -1,12 +1,15 @@
 {
   "naicsCodes": "621399",
-  "canBeHomeBased": true,
   "defaultSectorId": "other-services",
-  "canBeReseller": true,
-  "isProvidesStaffingServicesApplicable": false,
-  "isCertifiedInteriorDesignerApplicable": false,
-  "isRealEstateAppraisalManagementApplicable": false,
-  "isCpaRequiredApplicable": false,
+  "industryOnboardingQuestions": {
+    "canBeHomeBased": true,
+    "canBeReseller": true,
+    "isProvidesStaffingServicesApplicable": false,
+    "isCertifiedInteriorDesignerApplicable": false,
+    "isRealEstateAppraisalManagementApplicable": false,
+    "isCpaRequiredApplicable": false,
+    "isLiquorLicenseApplicable": false
+  },
   "canHavePermanentLocation": true,
   "roadmapSteps": [
     {
@@ -46,7 +49,6 @@
     }
   ],
   "name": "Acupuncture",
-  "isLiquorLicenseApplicable": false,
   "isEnabled": true,
   "additionalSearchTerms": "acupuncturist, spa, alternative medicine",
   "id": "acupuncture",

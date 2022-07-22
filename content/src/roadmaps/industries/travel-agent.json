@@ -1,13 +1,16 @@
 {
   "naicsCodes": "561510",
   "canHavePermanentLocation": true,
-  "canBeHomeBased": true,
   "defaultSectorId": "other-services",
-  "canBeReseller": true,
-  "isProvidesStaffingServicesApplicable": false,
-  "isCertifiedInteriorDesignerApplicable": false,
-  "isRealEstateAppraisalManagementApplicable": false,
-  "isCpaRequiredApplicable": false,
+  "industryOnboardingQuestions": {
+    "canBeHomeBased": true,
+    "isLiquorLicenseApplicable": false,
+    "canBeReseller": true,
+    "isProvidesStaffingServicesApplicable": false,
+    "isCertifiedInteriorDesignerApplicable": false,
+    "isRealEstateAppraisalManagementApplicable": false,
+    "isCpaRequiredApplicable": false
+  },
   "isEnabled": true,
   "roadmapSteps": [
     {
@@ -42,7 +45,6 @@
     }
   ],
   "name": "Travel Agency",
-  "isLiquorLicenseApplicable": false,
   "additionalSearchTerms": "home-based travel agent",
   "id": "travel-agent",
   "description": "Coordinates the details of transportation, itinerary and accommodations for travelers"

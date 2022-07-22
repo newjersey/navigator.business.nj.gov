@@ -1705,8 +1705,6 @@ collections:
               - { label: Calendar Legal Text, name: calendarLegalText, widget: string }
               - { label: Calendar Header, name: calendarHeader, widget: string }
               - { label: Calendar Tooltip, name: calendarTooltip, widget: text }
-              - { label: Calendar Snackbar Heading, name: calendarSnackbarHeading, widget: text }
-              - { label: Calendar Snackbar Body, name: calendarSnackbarBody, widget: text }
               - { label: Back To Roadmap Header, name: backToRoadmapHeader, widget: string }
               - { label: Back To Roadmap Text, name: backToRoadmapText, widget: string }
               - { label: Back To Roadmap Link Text, name: backToRoadmapLinkText, widget: string }
@@ -2028,6 +2026,8 @@ collections:
               - { label: Graduation Modal Title, name: graduationModalTitle, widget: string }
               - { label: Sidebar Heading, name: sidebarHeading, widget: string }
               - { label: Calendar Header, name: calendarHeader, widget: string }
+              - { label: Calendar Snackbar Heading, name: calendarSnackbarHeading, widget: text }
+              - { label: Calendar Snackbar Body, name: calendarSnackbarBody, widget: text }
           - label: Section Headers
             name: sectionHeaders
             collapsed: true
@@ -2333,39 +2333,11 @@ collections:
         widget: boolean
         default: false
         hint: This field should not be changed if already set to true
-      - label: Home Based
-        name: canBeHomeBased
-        widget: boolean
-        default: false
-      - label: Liquor License
-        name: isLiquorLicenseApplicable
-        widget: boolean
-        default: false
-      - label: CPA Required
-        name: isCpaRequiredApplicable
-        widget: boolean
-        default: false
-      - label: Staffing Service
-        name: isProvidesStaffingServicesApplicable
-        widget: boolean
-        default: false
-      - label: Certified Interior Designer
-        name: isCertifiedInteriorDesignerApplicable
-        widget: boolean
-        default: false
-      - label: Real Estate Appraisal Management
-        name: isRealEstateAppraisalManagementApplicable
-        widget: boolean
-        default: false
       - label: Can Have Permanent Location
         name: canHavePermanentLocation
         widget: boolean
         default: true
         hint: Enable this field if the business can have a permanent location
-      - label: Reseller
-        name: canBeReseller
-        widget: boolean
-        default: false
       - label: Additional Search Teams
         name: additionalSearchTerms
         widget: string
@@ -2385,6 +2357,38 @@ collections:
       - label: Id / Filename
         name: id
         widget: string
+      - label: Onboarding Questions
+        name: industryOnboardingQuestions
+        widget: object
+        fields:
+          - label: Home Based
+            name: canBeHomeBased
+            widget: boolean
+            default: false
+          - label: Liquor License
+            name: isLiquorLicenseApplicable
+            widget: boolean
+            default: false
+          - label: CPA Required
+            name: isCpaRequiredApplicable
+            widget: boolean
+            default: false
+          - label: Staffing Service
+            name: isProvidesStaffingServicesApplicable
+            widget: boolean
+            default: false
+          - label: Certified Interior Designer
+            name: isCertifiedInteriorDesignerApplicable
+            widget: boolean
+            default: false
+          - label: Real Estate Appraisal Management
+            name: isRealEstateAppraisalManagementApplicable
+            widget: boolean
+            default: false
+          - label: Reseller
+            name: canBeReseller
+            widget: boolean
+            default: false
       - label: Roadmap Steps
         name: roadmapSteps
         widget: list
@@ -3003,6 +3007,16 @@ collections:
                     collapsed: true
                     widget: object
                     summary: "{{liquorLicense}}"
+                    fields:
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "Radio Button Yes Text", name: "radioButtonYesText", widget: "string" }
+                      - { label: "Radio Button No Text", name: "radioButtonNoText", widget: "string" }
+                      - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Staffing Service
+                    name: staffingService
+                    collapsed: true
+                    widget: object
+                    summary: "{{staffingService}}"
                     fields:
                       - { label: "Header", name: "header", widget: "string" }
                       - { label: "Radio Button Yes Text", name: "radioButtonYesText", widget: "string" }

@@ -1,13 +1,16 @@
 {
   "naicsCodes": "811121, 811111, 811198, 811114",
   "canHavePermanentLocation": true,
-  "canBeHomeBased": false,
   "defaultSectorId": "other-services",
-  "canBeReseller": true,
-  "isProvidesStaffingServicesApplicable": false,
-  "isCertifiedInteriorDesignerApplicable": false,
-  "isRealEstateAppraisalManagementApplicable": false,
-  "isCpaRequiredApplicable": false,
+  "industryOnboardingQuestions": {
+    "canBeHomeBased": false,
+    "canBeReseller": true,
+    "isProvidesStaffingServicesApplicable": false,
+    "isCertifiedInteriorDesignerApplicable": false,
+    "isRealEstateAppraisalManagementApplicable": false,
+    "isCpaRequiredApplicable": false,
+    "isLiquorLicenseApplicable": false
+  },
   "isEnabled": true,
   "roadmapSteps": [
     {
@@ -52,7 +55,6 @@
     }
   ],
   "name": "Auto-Body Repair",
-  "isLiquorLicenseApplicable": false,
   "additionalSearchTerms": "car,auto body shop,auto shop,car center,auto center",
   "id": "auto-body-repair",
   "description": "A facility for the repair and restoration of vehicles"

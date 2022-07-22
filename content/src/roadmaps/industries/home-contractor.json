@@ -1,12 +1,15 @@
 {
   "naicsCodes": "238990,238390,238910,238350,238340,238330,238320,238310,238290,238220,238210,238190,238170,238160,238150,238140,238130,238120,238110,236118",
-  "canBeHomeBased": true,
   "defaultSectorId": "construction",
-  "canBeReseller": true,
-  "isProvidesStaffingServicesApplicable": false,
-  "isCertifiedInteriorDesignerApplicable": false,
-  "isRealEstateAppraisalManagementApplicable": false,
-  "isCpaRequiredApplicable": false,
+  "industryOnboardingQuestions": {
+    "canBeHomeBased": true,
+    "canBeReseller": true,
+    "isLiquorLicenseApplicable": false,
+    "isProvidesStaffingServicesApplicable": false,
+    "isCertifiedInteriorDesignerApplicable": false,
+    "isRealEstateAppraisalManagementApplicable": false,
+    "isCpaRequiredApplicable": false
+  },
   "canHavePermanentLocation": true,
   "roadmapSteps": [
     {
@@ -51,7 +54,6 @@
     }
   ],
   "name": "Home Improvement Contractor",
-  "isLiquorLicenseApplicable": false,
   "isEnabled": true,
   "additionalSearchTerms": "renovation, home renovation, home contractor",
   "id": "home-contractor",

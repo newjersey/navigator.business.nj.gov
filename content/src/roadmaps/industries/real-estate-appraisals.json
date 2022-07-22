@@ -1,9 +1,15 @@
 {
-  "canBeHomeBased": true,
   "defaultSectorId": "real-estate",
-  "canBeReseller": false,
-  "isCpaRequiredApplicable": false,
   "canHavePermanentLocation": true,
+  "industryOnboardingQuestions" : {
+    "canBeHomeBased": true,
+    "canBeReseller": false,
+    "isCpaRequiredApplicable": false,
+    "isLiquorLicenseApplicable": false,
+    "isRealEstateAppraisalManagementApplicable": true,
+    "isCertifiedInteriorDesignerApplicable": false,
+    "isProvidesStaffingServicesApplicable": false
+  },
   "roadmapSteps": [
     {
       "step": 1,
@@ -37,13 +43,9 @@
     }
   ],
   "name": "Real Estate Appraisals",
-  "isLiquorLicenseApplicable": false,
-  "isRealEstateAppraisalManagementApplicable": true,
   "modifications": [],
   "isEnabled": true,
-  "isCertifiedInteriorDesignerApplicable": false,
   "additionalSearchTerms": "appraiser",
   "id": "real-estate-appraisals",
-  "isProvidesStaffingServicesApplicable": false,
   "description": "Offers property valuation services"
 }

@@ -1,13 +1,16 @@
 {
   "naicsCodes": "561720",
   "canHavePermanentLocation": true,
-  "canBeHomeBased": true,
   "defaultSectorId": "other-services",
-  "canBeReseller": true,
-  "isProvidesStaffingServicesApplicable": false,
-  "isCertifiedInteriorDesignerApplicable": false,
-  "isRealEstateAppraisalManagementApplicable": false,
-  "isCpaRequiredApplicable": false,
+  "industryOnboardingQuestions": {
+    "canBeHomeBased": true,
+    "canBeReseller": true,
+    "isProvidesStaffingServicesApplicable": false,
+    "isCertifiedInteriorDesignerApplicable": false,
+    "isRealEstateAppraisalManagementApplicable": false,
+    "isCpaRequiredApplicable": false,
+    "isLiquorLicenseApplicable": false
+  },
   "isEnabled": true,
   "roadmapSteps": [
     {
@@ -42,7 +45,6 @@
     }
   ],
   "name": "Cleaning and Janitorial Services",
-  "isLiquorLicenseApplicable": false,
   "additionalSearchTerms": "cleaning lady, housekeeping, house cleaner, maid service, maid, cleaning company, cleaning crew, commercial cleaning service, cleaning and maintenance, turnover service,  ",
   "id": "cleaning-janitorial-services",
   "description": "Providing commercial or residential cleaning services"

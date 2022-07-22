@@ -1,12 +1,15 @@
 {
   "naicsCodes": "541690",
-  "canBeHomeBased": true,
   "defaultSectorId": "technology",
-  "canBeReseller": true,
-  "isProvidesStaffingServicesApplicable": true,
-  "isCertifiedInteriorDesignerApplicable": false,
-  "isRealEstateAppraisalManagementApplicable": false,
-  "isCpaRequiredApplicable": false,
+  "industryOnboardingQuestions": {
+    "canBeHomeBased": true,
+    "canBeReseller": true,
+    "isProvidesStaffingServicesApplicable": true,
+    "isCertifiedInteriorDesignerApplicable": false,
+    "isRealEstateAppraisalManagementApplicable": false,
+    "isCpaRequiredApplicable": false,
+    "isLiquorLicenseApplicable": false
+  },
   "canHavePermanentLocation": true,
   "roadmapSteps": [
     {
@@ -41,7 +44,6 @@
     }
   ],
   "name": "IT Consulting",
-  "isLiquorLicenseApplicable": false,
   "isEnabled": true,
   "additionalSearchTerms": "tech support, information technology, tech services, technical services, consulting, software developer, IT professional services, IT support, computer repair",
   "id": "it-consultant",

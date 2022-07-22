@@ -1,13 +1,16 @@
 {
   "naicsCodes": "323111, 323117, 323113",
   "canHavePermanentLocation": true,
-  "canBeHomeBased": true,
   "defaultSectorId": "digital-and-print-media",
-  "canBeReseller": true,
-  "isProvidesStaffingServicesApplicable": false,
-  "isCertifiedInteriorDesignerApplicable": false,
-  "isRealEstateAppraisalManagementApplicable": false,
-  "isCpaRequiredApplicable": false,
+  "industryOnboardingQuestions" : {
+    "canBeHomeBased": true,
+    "canBeReseller": true,
+    "isProvidesStaffingServicesApplicable": false,
+    "isCertifiedInteriorDesignerApplicable": false,
+    "isRealEstateAppraisalManagementApplicable": false,
+    "isCpaRequiredApplicable": false,
+    "isLiquorLicenseApplicable": false
+  },
   "isEnabled": true,
   "roadmapSteps": [
     {
@@ -42,7 +45,6 @@
     }
   ],
   "name": "Printing Business",
-  "isLiquorLicenseApplicable": false,
   "additionalSearchTerms": "office printing, commercial printing, printing services",
   "id": "printing-business",
   "description": "Offers printing services for individuals and other companies"

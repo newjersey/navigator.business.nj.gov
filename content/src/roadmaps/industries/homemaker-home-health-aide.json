@@ -1,13 +1,16 @@
 {
   "naicsCodes": "621610",
   "canHavePermanentLocation": true,
-  "canBeHomeBased": true,
   "defaultSectorId": "health-care-and-social-assistance",
-  "canBeReseller": true,
-  "isProvidesStaffingServicesApplicable": false,
-  "isCertifiedInteriorDesignerApplicable": false,
-  "isRealEstateAppraisalManagementApplicable": false,
-  "isCpaRequiredApplicable": false,
+  "industryOnboardingQuestions": {
+    "canBeHomeBased": true,
+    "canBeReseller": true,
+    "isProvidesStaffingServicesApplicable": false,
+    "isCertifiedInteriorDesignerApplicable": false,
+    "isRealEstateAppraisalManagementApplicable": false,
+    "isCpaRequiredApplicable": false,
+    "isLiquorLicenseApplicable": false
+  },
   "isEnabled": true,
   "roadmapSteps": [
     {
@@ -52,7 +55,6 @@
     }
   ],
   "name": "Home Health Aide",
-  "isLiquorLicenseApplicable": false,
   "additionalSearchTerms": "caregiver, care services",
   "id": "homemaker-home-health-aide",
   "description": "A business staffing licensed personnel to provide home health care services"

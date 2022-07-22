@@ -1,12 +1,15 @@
 {
   "naicsCodes": "541110, 541199",
-  "canBeHomeBased": true,
   "defaultSectorId": "other-services",
-  "canBeReseller": false,
-  "isProvidesStaffingServicesApplicable": false,
-  "isCertifiedInteriorDesignerApplicable": false,
-  "isRealEstateAppraisalManagementApplicable": false,
-  "isCpaRequiredApplicable": false,
+  "industryOnboardingQuestions": {
+    "canBeHomeBased": true,
+    "canBeReseller": false,
+    "isProvidesStaffingServicesApplicable": false,
+    "isCertifiedInteriorDesignerApplicable": false,
+    "isRealEstateAppraisalManagementApplicable": false,
+    "isCpaRequiredApplicable": false,
+    "isLiquorLicenseApplicable": false
+  },
   "canHavePermanentLocation": true,
   "roadmapSteps": [
     {
@@ -46,7 +49,6 @@
     }
   ],
   "name": "Legal Services",
-  "isLiquorLicenseApplicable": false,
   "isEnabled": true,
   "additionalSearchTerms": "attorney, law office, legal consulting, legal services, legal advice, legal consulting",
   "id": "law-firm",

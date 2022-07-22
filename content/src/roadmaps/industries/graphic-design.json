@@ -1,13 +1,16 @@
 {
   "naicsCodes": "541430",
   "canHavePermanentLocation": true,
-  "canBeHomeBased": true,
   "defaultSectorId": "digital-and-print-media",
-  "canBeReseller": true,
-  "isProvidesStaffingServicesApplicable": false,
-  "isCertifiedInteriorDesignerApplicable": false,
-  "isRealEstateAppraisalManagementApplicable": false,
-  "isCpaRequiredApplicable": false,
+  "industryOnboardingQuestions": {
+    "canBeHomeBased": true,
+    "canBeReseller": true,
+    "isProvidesStaffingServicesApplicable": false,
+    "isCertifiedInteriorDesignerApplicable": false,
+    "isRealEstateAppraisalManagementApplicable": false,
+    "isCpaRequiredApplicable": false,
+    "isLiquorLicenseApplicable": false
+  },
   "isEnabled": true,
   "roadmapSteps": [
     {
@@ -42,7 +45,6 @@
     }
   ],
   "name": "Graphic Design",
-  "isLiquorLicenseApplicable": false,
   "additionalSearchTerms": "media services, freelancer, freelance art, visual design, illustrator",
   "id": "graphic-design",
   "description": "Creates visual content for print and media"

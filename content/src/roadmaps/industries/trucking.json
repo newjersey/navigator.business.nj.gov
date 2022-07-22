@@ -1,10 +1,16 @@
 {
   "naicsCodes": "484110, 484121, 484122, 484220, 484230",
-  "canBeHomeBased": true,
-  "defaultSectorId": "other-services",
-  "canBeReseller": false,
-  "isCpaRequiredApplicable": false,
   "canHavePermanentLocation": true,
+  "defaultSectorId": "other-services",
+  "industryOnboardingQuestions": {
+    "canBeHomeBased": true,
+    "canBeReseller": false,
+    "isCpaRequiredApplicable": false,
+    "isLiquorLicenseApplicable": false,
+    "isRealEstateAppraisalManagementApplicable": false,
+    "isCertifiedInteriorDesignerApplicable": false,
+    "isProvidesStaffingServicesApplicable": false
+  },
   "roadmapSteps": [
     {
       "step": 1,
@@ -63,12 +69,8 @@
     }
   ],
   "name": "Trucking",
-  "isLiquorLicenseApplicable": false,
-  "isRealEstateAppraisalManagementApplicable": false,
   "isEnabled": false,
-  "isCertifiedInteriorDesignerApplicable": false,
   "additionalSearchTerms": "trucking, movers, box truck company, transportation, truck driving, hauling, truck haul, logistics, trucking company, ",
   "id": "trucking",
-  "isProvidesStaffingServicesApplicable": false,
   "description": "Offers load-hauling services "
 }
