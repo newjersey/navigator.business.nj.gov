@@ -66,15 +66,18 @@ export const randomElementFromArray = (array: any[]) => {
 };
 
 export const homeBasedIndustries = Industries.filter((industry) => {
-  return industry.canBeHomeBased;
+  return industry.industryOnboardingQuestions.canBeHomeBased;
 });
 
 export const liquorLicenseIndustries = Industries.filter((industry) => {
-  return industry.isLiquorLicenseApplicable;
+  return industry.industryOnboardingQuestions.isLiquorLicenseApplicable;
 });
 
 export const industriesNotHomeBasedOrLiquorLicense = Industries.filter((industry) => {
-  return !industry.canBeHomeBased && !industry.isLiquorLicenseApplicable;
+  return (
+    !industry.industryOnboardingQuestions.canBeHomeBased &&
+    !industry.industryOnboardingQuestions.isLiquorLicenseApplicable
+  );
 });
 
 export const legalStructureWithTradeName = LegalStructures.filter((legalStructure) => {
@@ -136,42 +139,54 @@ export const completeNewBusinessOnboarding = ({
   }
 
   if (homeBasedQuestion === undefined) {
-    homeBasedQuestion = industry.canBeHomeBased === false ? undefined : Boolean(randomInt() % 2);
+    homeBasedQuestion =
+      industry.industryOnboardingQuestions.canBeHomeBased === false ? undefined : Boolean(randomInt() % 2);
   }
 
   if (liquorLicenseQuestion === undefined) {
     liquorLicenseQuestion =
-      industry.isLiquorLicenseApplicable === false ? undefined : Boolean(randomInt() % 2);
+      industry.industryOnboardingQuestions.isLiquorLicenseApplicable === false
+        ? undefined
+        : Boolean(randomInt() % 2);
   }
 
   if (requiresCpa === undefined) {
-    requiresCpa = industry.isCpaRequiredApplicable === false ? undefined : Boolean(randomInt() % 2);
+    requiresCpa =
+      industry.industryOnboardingQuestions.isCpaRequiredApplicable === false
+        ? undefined
+        : Boolean(randomInt() % 2);
   }
 
   if (providesStaffingService === undefined) {
     providesStaffingService =
-      industry.isProvidesStaffingServicesApplicable === false ? undefined : Boolean(randomInt() % 2);
+      industry.industryOnboardingQuestions.isProvidesStaffingServicesApplicable === false
+        ? undefined
+        : Boolean(randomInt() % 2);
   }
 
   if (certifiedInteriorDesigner === undefined) {
     certifiedInteriorDesigner =
-      industry.isCertifiedInteriorDesignerApplicable === false ? undefined : Boolean(randomInt() % 2);
+      industry.industryOnboardingQuestions.isCertifiedInteriorDesignerApplicable === false
+        ? undefined
+        : Boolean(randomInt() % 2);
   }
 
   if (realEstateAppraisalManagement === undefined) {
     realEstateAppraisalManagement =
-      industry.isRealEstateAppraisalManagementApplicable === false ? undefined : Boolean(randomInt() % 2);
+      industry.industryOnboardingQuestions.isRealEstateAppraisalManagementApplicable === false
+        ? undefined
+        : Boolean(randomInt() % 2);
   }
 
   if (legalStructureId === undefined) {
     legalStructureId = randomElementFromArray(LegalStructures as LegalStructure[]).id;
   }
 
-  if (!industry.canBeHomeBased && homeBasedQuestion) {
+  if (!industry.industryOnboardingQuestions.canBeHomeBased && homeBasedQuestion) {
     throw "Cypress configuration error - home based set for non-homebased industry";
   }
 
-  if (!industry.isCpaRequiredApplicable && requiresCpa) {
+  if (!industry.industryOnboardingQuestions.isCpaRequiredApplicable && requiresCpa) {
     throw "Cypress configuration error - CPA set for non-cpa industry";
   }
 
