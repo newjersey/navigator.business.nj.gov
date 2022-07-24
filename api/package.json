@@ -34,7 +34,7 @@
   "dependencies": {
     "@aws-sdk/client-cloudwatch-logs": "3.131.0",
     "@aws-sdk/client-dynamodb": "3.131.0",
-    "@aws-sdk/client-s3": "3.131.0",
+    "@aws-sdk/client-s3": "3.135.0",
     "@aws-sdk/lib-dynamodb": "3.131.0",
     "@aws-sdk/smithy-client": "3.127.0",
     "@aws-sdk/types": "3.127.0",
