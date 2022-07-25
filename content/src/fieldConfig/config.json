@@ -549,7 +549,7 @@
     "pageTitle": "### Business Profile",
     "escapeModalEscape": "Go back",
     "escapeModalBody": "You have unsaved changes that will be lost.",
-    "successTextBody": "Your new information was saved. ",
+    "successTextBody": "Your information was saved successfully.",
     "errorTextBody": "Review the information in the fields marked below.",
     "escapeModalHeader": "Are you sure you want to continue?",
     "saveButtonText": "Save",
