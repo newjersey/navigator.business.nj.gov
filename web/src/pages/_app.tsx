@@ -109,7 +109,7 @@ const theme = createTheme({
           input: {
             "&.Mui-disabled": {
               color: "#1b1b1b",
-              "-webkit-text-fill-color": "#1b1b1b",
+              webkitTextFillColor: "#1b1b1b",
             },
           },
         },
