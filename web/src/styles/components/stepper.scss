@@ -7,6 +7,7 @@
 
   .usa-step-indicator--counters .usa-step-indicator__segment:before {
     height: 2rem;
+    background-color: $white;
     border-radius: 99rem;
     width: 2rem;
     font-feature-settings: "tnum" 1, "kern" 1;
