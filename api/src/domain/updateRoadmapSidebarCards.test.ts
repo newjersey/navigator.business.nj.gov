@@ -93,4 +93,30 @@ describe("updateRoadmapSidebarCards", () => {
       );
     });
   });
+
+  describe("tax registration nudge", () => {
+    it("adds tax-registration-nudge if formation task is complete", () => {
+      const taskId = formationTaskId;
+      const userData = generateUserData({
+        taskProgress: { [taskId]: "COMPLETED" },
+        preferences: generatePreferences({ visibleRoadmapSidebarCards: [] }),
+      });
+      expect(updateRoadmapSidebarCards(userData).preferences.visibleRoadmapSidebarCards).toContain(
+        "tax-registration-nudge"
+      );
+    });
+
+    it("removes tax-registration-nudge when register for taxes is complete", () => {
+      const taskId = formationTaskId;
+      const taxesTaskId = "register-for-taxes";
+
+      const userData = generateUserData({
+        taskProgress: { [taskId]: "COMPLETED", [taxesTaskId]: "COMPLETED" },
+        preferences: generatePreferences({ visibleRoadmapSidebarCards: [] }),
+      });
+      expect(updateRoadmapSidebarCards(userData).preferences.visibleRoadmapSidebarCards).not.toContain(
+        "tax-registration-nudge"
+      );
+    });
+  });
 });
