@@ -550,7 +550,7 @@
     "escapeModalEscape": "Go back",
     "escapeModalBody": "You have unsaved changes that will be lost.",
     "successTextBody": "Your information was saved successfully.",
-    "errorTextBody": "Review the information in the fields marked below.",
+    "errorTextBody": "Review the information on the fields marked below.",
     "escapeModalHeader": "Are you sure you want to continue?",
     "saveButtonText": "Save",
     "escapeModalReturn": "Continue without saving.",
