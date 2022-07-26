@@ -140,31 +140,10 @@ export const RoadmapSidebarCard = (props: Props) => {
       >
         {props.card.header && (
           <div className={`bg-${props.card.shadowColor} padding-y-105 padding-x-205 radius-top-md`}>
-            {props.card.hasCloseButton ? (
-              <div className="flex flex-justify">
-                <h3
-                  className={`margin-bottom-0 text-${props.card.color} ${
-                    props.card.imgPath ? "flex flex-align-end" : ""
-                  }`}
-                >
-                  {props.card.imgPath && (
-                    <img
-                      role="presentation"
-                      className="margin-right-2 height-4 width-4"
-                      src={props.card.imgPath}
-                      alt=""
-                    />
-                  )}
-                  <span>{getHeader()}</span>
-                </h3>
-                <Button style="tertiary" onClick={closeSelf} ariaLabel="Close">
-                  <Icon className={`font-sans-xl text-${props.card.color}`}>close</Icon>
-                </Button>
-              </div>
-            ) : (
+            <div className="flex flex-justify">
               <h3
                 className={`margin-bottom-0 text-${props.card.color} ${
-                  props.card.imgPath ? "flex flex-align-end" : ""
+                  props.card.imgPath ? "flex flex-align-start" : ""
                 }`}
               >
                 {props.card.imgPath && (
@@ -177,7 +156,12 @@ export const RoadmapSidebarCard = (props: Props) => {
                 )}
                 <span>{getHeader()}</span>
               </h3>
-            )}
+              {props.card.hasCloseButton && (
+                <Button style="tertiary" onClick={closeSelf} ariaLabel="Close">
+                  <Icon className={`font-sans-xl text-${props.card.color}`}>close</Icon>
+                </Button>
+              )}
+            </div>
           </div>
         )}
         <div
