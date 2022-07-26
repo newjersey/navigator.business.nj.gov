@@ -102,6 +102,18 @@ describe("buildUserRoadmap", () => {
       expect(roadmap.tasks).toHaveLength(0);
     });
 
+    it("removes business-plan task from roadmap for nexus", async () => {
+      mockRoadmapBuilder.mockResolvedValue(
+        generateRoadmap({
+          tasks: [generateTask({ id: "business-plan" })],
+        })
+      );
+
+      const profileData = createEmptyNexusProfile({ industryId: "cannabis" });
+      const roadmap = await buildUserRoadmap(profileData);
+      expect(roadmap.tasks).toHaveLength(0);
+    });
+
     it("adds scorp-ccorp-foreign for S-Corp/C-Corp legal structures", async () => {
       await buildUserRoadmap(createEmptyNexusProfile({ legalStructureId: "s-corporation" }));
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("scorp-ccorp-foreign");

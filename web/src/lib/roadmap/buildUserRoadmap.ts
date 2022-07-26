@@ -55,6 +55,7 @@ export const buildUserRoadmap = async (profileData: ProfileData): Promise<Roadma
   roadmap = addNaicsCodeData(roadmap, profileData.naicsCode);
 
   if (profileData.businessPersona === "FOREIGN" && profileData.foreignBusinessType === "NEXUS") {
+    roadmap = removeTask(roadmap, "business-plan");
     roadmap = removeTask(roadmap, "register-for-ein");
   }
 
