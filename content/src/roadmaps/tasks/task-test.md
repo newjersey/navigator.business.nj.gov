@@ -6,6 +6,8 @@ id: task-test
 callToActionLink: https://dev.navigator.business.nj.gov/mgmt/cms#/collections/business-formation-c-corp
 callToActionText: My CTA Button Goes Here
 required: true
+issuingAgency: This is where the issuing agency goes
+formName: this is where you put the form name/number
 ---
 The task definition goes here.  
 A few sentences with the most important information is enough.
