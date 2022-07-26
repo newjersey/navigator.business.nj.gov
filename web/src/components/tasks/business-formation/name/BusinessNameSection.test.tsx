@@ -159,12 +159,14 @@ describe("Formation - BusinessNameSection", () => {
 
     fireEvent.change(screen.getByLabelText("Search business name"), { target: { value: "" } });
     await page.searchBusinessName({ status: "AVAILABLE" });
-    expect(screen.getByText("You need to enter a business name to check availability.")).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.businessFormationDefaults.nameCheckValidationErrorText)
+    ).toBeInTheDocument();
 
     page.fillText("Search business name", "Anything");
     await page.searchBusinessName({ status: "AVAILABLE" });
     expect(
-      screen.queryByText("You need to enter a business name to check availability.")
+      screen.queryByText(Config.businessFormationDefaults.nameCheckValidationErrorText)
     ).not.toBeInTheDocument();
   });
 
@@ -172,11 +174,13 @@ describe("Formation - BusinessNameSection", () => {
     const page = getPageHelper();
 
     page.fillText("Search business name", "");
-    expect(screen.getByText("You need to enter a business name to check availability.")).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.businessFormationDefaults.nameCheckValidationErrorText)
+    ).toBeInTheDocument();
 
     page.fillText("Search business name", "Anything");
     expect(
-      screen.queryByText("You need to enter a business name to check availability.")
+      screen.queryByText(Config.businessFormationDefaults.nameCheckValidationErrorText)
     ).not.toBeInTheDocument();
   });
 
