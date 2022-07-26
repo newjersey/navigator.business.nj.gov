@@ -18,7 +18,7 @@ You are seeing this task because your business either has a `nexus|nexus-busines
 ### Application Requirements
 
 *  `Entity ID|entity-id` (NOT REQUIRED for remote sellers, remote workers, sole proprietors or general partners)
-*  `NAICS code|naics` 
+*  [NAICS code](/tasks/determine-naics-code) ${naicsCode}
 *  `EIN|ein` 
 * Estimated start date
 * Description of your business activity
