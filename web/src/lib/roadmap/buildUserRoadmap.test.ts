@@ -558,12 +558,12 @@ describe("buildUserRoadmap", () => {
         })
       );
 
-      const profileData = generateStartingProfile({ naicsCode: "123456" });
+      const profileData = generateStartingProfile({ naicsCode: "621399" });
       const roadmap = await buildUserRoadmap(profileData);
 
       const task = roadmap.tasks[0];
       const expectedTemplate = templateEval(Config.determineNaicsCode.registerForTaxesNAICSCodePlaceholder, {
-        naicsCode: "123456",
+        naicsCode: "621399 - Offices of All Other Miscellaneous Health Practitioners",
       });
       expect(task.contentMd).toEqual(`NAICS code ${expectedTemplate}`);
     });
@@ -591,7 +591,7 @@ describe("buildUserRoadmap", () => {
       const naicsTask = roadmap.tasks[0];
       const municipalityTask = roadmap.tasks[1];
       const expectedTemplate = templateEval(Config.determineNaicsCode.registerForTaxesNAICSCodePlaceholder, {
-        naicsCode: "123456",
+        naicsCode: "123456 - Unknown Code",
       });
       expect(naicsTask.contentMd).toEqual(`NAICS code ${expectedTemplate}`);
       expect(municipalityTask.contentMd).toEqual("Visit the Cool Town Website");
