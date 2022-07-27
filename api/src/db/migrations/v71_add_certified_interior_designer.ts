@@ -23,7 +23,7 @@ export const migrate_v70_to_v71 = (v70Data: v70UserData): v71UserData => {
       certifiedInteriorDesigner: false,
     },
     taskProgress,
-    version: 70,
+    version: 71,
   };
 };
 
