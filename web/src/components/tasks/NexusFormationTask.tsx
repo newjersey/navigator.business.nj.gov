@@ -1,5 +1,5 @@
 import { Content } from "@/components/Content";
-import { DialogTwoButton } from "@/components/DialogTwoButton";
+import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { Icon } from "@/components/njwds/Icon";
 import { TaskCTA } from "@/components/TaskCTA";
@@ -68,7 +68,7 @@ export const NexusFormationTask = (props: Props): ReactElement => {
 
   return (
     <div id="taskElement" className="flex flex-column space-between minh-38">
-      <DialogTwoButton
+      <ModalTwoButton
         isOpen={showCtaModal}
         close={() => setShowCtaModal(false)}
         title={Config.nexusFormationTask.dbaCtaModalHeader}
@@ -77,7 +77,7 @@ export const NexusFormationTask = (props: Props): ReactElement => {
         secondaryButtonText={Config.nexusFormationTask.dbaCtaModalCancelButtonText}
       >
         <Content>{Config.nexusFormationTask.dbaCtaModalBody}</Content>
-      </DialogTwoButton>
+      </ModalTwoButton>
       <div>
         <TaskHeader task={props.task} />
         {showWarning && (

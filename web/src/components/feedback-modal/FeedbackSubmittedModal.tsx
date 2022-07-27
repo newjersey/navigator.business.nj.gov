@@ -1,19 +1,19 @@
-import { DialogOneButton } from "@/components/DialogOneButton";
+import { ModalOneButton } from "@/components/ModalOneButton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { FeedbackRequestDialogNames } from "@/lib/types/types";
+import { FeedbackRequestModalNames } from "@/lib/types/types";
 import { ReactElement } from "react";
 
 type Props = {
   onClose: () => void;
   isOpen: boolean;
-  setCurrentFeedback: (str: FeedbackRequestDialogNames) => void;
+  setCurrentFeedback: (str: FeedbackRequestModalNames) => void;
 };
 
-export const FeedbackSubmittedDialog = ({ onClose, isOpen, setCurrentFeedback }: Props): ReactElement => {
+export const FeedbackSubmittedModal = ({ onClose, isOpen, setCurrentFeedback }: Props): ReactElement => {
   const { Config } = useConfig();
 
   return (
-    <DialogOneButton
+    <ModalOneButton
       maxWidth="md"
       isOpen={isOpen}
       close={onClose}
@@ -25,6 +25,6 @@ export const FeedbackSubmittedDialog = ({ onClose, isOpen, setCurrentFeedback }:
       }}
     >
       <div className="width-mobile-lg margin-bottom-10" />
-    </DialogOneButton>
+    </ModalOneButton>
   );
 };

@@ -1,6 +1,6 @@
 import { Content } from "@/components/Content";
-import { DialogTwoButton } from "@/components/DialogTwoButton";
 import { GenericTextField } from "@/components/GenericTextField";
+import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { StateDropdown } from "@/components/StateDropdown";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { createEmptyFormationAddress, FormationAddress } from "@businessnjgovnavigator/shared/";
@@ -111,7 +111,7 @@ export const AddressModal = (props: Props): ReactElement => {
   };
 
   return (
-    <DialogTwoButton
+    <ModalTwoButton
       isOpen={props.open}
       close={props.handleClose}
       title={props.displayContent.title}
@@ -238,6 +238,6 @@ export const AddressModal = (props: Props): ReactElement => {
           </div>
         </div>
       </>
-    </DialogTwoButton>
+    </ModalTwoButton>
   );
 };

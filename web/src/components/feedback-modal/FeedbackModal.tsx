@@ -1,8 +1,8 @@
-import { FeedbackSubmittedDialog } from "@/components/feedback-modal/FeedbackSubmittedDialog";
-import { ReportIssueDialog } from "@/components/feedback-modal/ReportIssueDialog";
-import { RequestFeatureDialog } from "@/components/feedback-modal/RequestFeatureDialog";
-import { SelectFeedbackDialog } from "@/components/feedback-modal/SelectFeedbackDialog";
-import { FeedbackRequestDialogNames } from "@/lib/types/types";
+import { FeedbackSubmittedModal } from "@/components/feedback-modal/FeedbackSubmittedModal";
+import { ReportIssueModal } from "@/components/feedback-modal/ReportIssueModal";
+import { RequestFeatureModal } from "@/components/feedback-modal/RequestFeatureModal";
+import { SelectFeedbackModal } from "@/components/feedback-modal/SelectFeedbackModal";
+import { FeedbackRequestModalNames } from "@/lib/types/types";
 import { ReactElement, useEffect, useState } from "react";
 
 type Props = {
@@ -12,7 +12,7 @@ type Props = {
 };
 
 export const FeedbackModal = ({ handleClose, isOpen, isReportAnIssueBar }: Props): ReactElement => {
-  const [currentFeedback, setCurrentFeedback] = useState<FeedbackRequestDialogNames>("Select Feedback");
+  const [currentFeedback, setCurrentFeedback] = useState<FeedbackRequestModalNames>("Select Feedback");
 
   useEffect(() => {
     if (!isOpen) {
@@ -29,20 +29,20 @@ export const FeedbackModal = ({ handleClose, isOpen, isReportAnIssueBar }: Props
   return (
     <>
       {currentFeedback === "Select Feedback" && (
-        <SelectFeedbackDialog isOpen={isOpen} onClose={handleClose} setCurrentFeedback={setCurrentFeedback} />
+        <SelectFeedbackModal isOpen={isOpen} onClose={handleClose} setCurrentFeedback={setCurrentFeedback} />
       )}
       {currentFeedback === "Feature Request" && (
-        <RequestFeatureDialog isOpen={isOpen} onClose={handleClose} setCurrentFeedback={setCurrentFeedback} />
+        <RequestFeatureModal isOpen={isOpen} onClose={handleClose} setCurrentFeedback={setCurrentFeedback} />
       )}
       {currentFeedback === "Request Submitted" && (
-        <FeedbackSubmittedDialog
+        <FeedbackSubmittedModal
           isOpen={isOpen}
           onClose={handleClose}
           setCurrentFeedback={setCurrentFeedback}
         />
       )}
       {currentFeedback === "Report Issue" && (
-        <ReportIssueDialog isOpen={isOpen} onClose={handleClose} setCurrentFeedback={setCurrentFeedback} />
+        <ReportIssueModal isOpen={isOpen} onClose={handleClose} setCurrentFeedback={setCurrentFeedback} />
       )}
     </>
   );

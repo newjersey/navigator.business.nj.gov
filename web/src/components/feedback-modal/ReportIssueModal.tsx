@@ -1,47 +1,55 @@
 import { Content } from "@/components/Content";
-import { DialogTwoButton } from "@/components/DialogTwoButton";
 import { GenericTextField } from "@/components/GenericTextField";
+import { ModalTwoButton } from "@/components/ModalTwoButton";
 import * as api from "@/lib/api-client/apiClient";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
-import { FeedbackRequestDialogNames } from "@/lib/types/types";
+import { FeedbackRequestModalNames } from "@/lib/types/types";
 import { useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router";
 import { ReactElement, useEffect, useState } from "react";
 import UAParser from "ua-parser-js";
 
-const createFeedbackModalErrorMap = () => ({
-  featureRequest: { invalid: false },
+const createReportIssueErrorMap = () => ({
+  issueSummary: { invalid: false },
+  issueDetails: { invalid: false },
 });
 
 type Props = {
   onClose: () => void;
   isOpen: boolean;
-  setCurrentFeedback: (str: FeedbackRequestDialogNames) => void;
+  setCurrentFeedback: (str: FeedbackRequestModalNames) => void;
 };
 
-export const RequestFeatureDialog = ({ onClose, isOpen, setCurrentFeedback }: Props): ReactElement => {
+export const ReportIssueModal = ({ onClose, isOpen, setCurrentFeedback }: Props): ReactElement => {
   const MAX_CHARS = 1000;
   const { userData } = useUserData();
   const { Config } = useConfig();
-  const [displayAlert, setDisplayAlert] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [featureRequest, setFeatureRequest] = useState<string>("");
-  const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
-  const [errorMap, setErrorMap] = useState(createFeedbackModalErrorMap());
   const router = useRouter();
+
+  const [issueSummary, setIssueSummary] = useState<string>("");
+  const [issueDetails, setIssueDetails] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [displayAlert, setDisplayAlert] = useState<boolean>(false);
+
+  const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
+  const [errorMap, setErrorMap] = useState(createReportIssueErrorMap());
 
   useEffect(() => {
     if (!isOpen) {
-      setFeatureRequest("");
+      setIssueSummary("");
+      setIssueDetails("");
     }
   }, [isOpen]);
 
   const onValidation = (fieldName: string, invalid: boolean) => {
-    setErrorMap({ ...errorMap, [fieldName]: { invalid } });
+    setErrorMap((errorMap) => {
+      return { ...errorMap, [fieldName]: { invalid } };
+    });
   };
-  const handleFeedbackRequestSubmission = () => {
+
+  const handleReportIssueSubmission = () => {
     if (!userData) return;
 
     const parsedUserAgent = new UAParser().getResult();
@@ -53,19 +61,27 @@ export const RequestFeatureDialog = ({ onClose, isOpen, setCurrentFeedback }: Pr
       ? `${parsedUserAgent.device.vendor} ${parsedUserAgent.device.model} ${parsedUserAgent.device.type}`
       : "";
 
-    const feedback = {
-      detail: featureRequest,
+    const issue = {
+      context: issueSummary,
+      detail: issueDetails,
       pageOfRequest: router.asPath,
       device: `${operatingSystem}${device}`,
       browser: `${parsedUserAgent.browser.name} v.${parsedUserAgent.browser.version}`,
       screenWidth: `${window.innerWidth} px`,
     };
 
-    if (featureRequest.trim().length === 0) onValidation("featureRequest", true);
-    if (featureRequest.trim().length > 0) {
+    if (issueSummary.trim().length === 0) {
+      onValidation("issueSummary", true);
+    }
+
+    if (issueDetails.trim().length === 0) {
+      onValidation("issueDetails", true);
+    }
+
+    if (issueSummary.trim().length > 0 && issueDetails.trim().length > 0) {
       setIsLoading(true);
       api
-        .postFeedback(feedback, userData)
+        .postIssue(issue, userData)
         .then(() => {
           setCurrentFeedback("Request Submitted");
         })
@@ -78,13 +94,13 @@ export const RequestFeatureDialog = ({ onClose, isOpen, setCurrentFeedback }: Pr
 
   return (
     <>
-      <DialogTwoButton
+      <ModalTwoButton
         maxWidth="md"
         isOpen={isOpen}
         close={onClose}
-        title={Config.feedbackModal.featureRequestModalHeadingText}
+        title={Config.feedbackModal.reportIssueModalHeadingText}
         primaryButtonText={Config.feedbackModal.feedbackSubmitButtonText}
-        primaryButtonOnClick={handleFeedbackRequestSubmission}
+        primaryButtonOnClick={handleReportIssueSubmission}
         secondaryButtonText={Config.feedbackModal.feedbackCancelButtonText}
         showAlert={displayAlert}
         alertText={Config.feedbackModal.unsuccessfulSubmissionAlertText}
@@ -93,23 +109,23 @@ export const RequestFeatureDialog = ({ onClose, isOpen, setCurrentFeedback }: Pr
       >
         <div className={`text-base ${isTabletAndUp && "width-tablet"}`}>
           <div className="text-base-darkest">
-            <Content>{Config.feedbackModal.featureRequestModalBodyText}</Content>
+            <Content>{Config.feedbackModal.reportIssueModalSummaryBodyText}</Content>
           </div>
           <div className="margin-top-1">
-            <Content>{Config.feedbackModal.featureRequestModalSecondBodyText}</Content>
+            <Content>{Config.feedbackModal.reportIssueModalSummaryAdditionalBodyText}</Content>
           </div>
           <div className="margin-bottom-2">
             <GenericTextField
               required
               onValidation={onValidation}
               validationText={Config.feedbackModal.feedbackInlineErrorText}
-              error={errorMap.featureRequest.invalid}
+              error={errorMap.issueSummary.invalid}
               formInputFull
-              fieldName="featureRequest"
+              fieldName="issueSummary"
               placeholder={Config.feedbackModal.feedbackPlaceholderText}
-              value={featureRequest}
+              value={issueSummary}
               handleChange={(value: string) => {
-                setFeatureRequest(value);
+                setIssueSummary(value);
               }}
               fieldOptions={{
                 multiline: true,
@@ -126,7 +142,43 @@ export const RequestFeatureDialog = ({ onClose, isOpen, setCurrentFeedback }: Pr
             />
           </div>
         </div>
-      </DialogTwoButton>
+
+        <div className={`text-base ${isTabletAndUp && "width-tablet"}`}>
+          <div className="text-base-darkest">
+            <Content>{Config.feedbackModal.reportIssueModalDetailBodyText}</Content>
+          </div>
+          <div className="margin-top-1">
+            <Content>{Config.feedbackModal.reportIssueModalDetailAdditionalBodyText}</Content>
+          </div>
+          <div className="margin-bottom-2">
+            <GenericTextField
+              required
+              onValidation={onValidation}
+              validationText={Config.feedbackModal.feedbackInlineErrorText}
+              error={errorMap.issueDetails.invalid}
+              formInputFull
+              fieldName="issueDetails"
+              placeholder={Config.feedbackModal.feedbackPlaceholderText}
+              value={issueDetails}
+              handleChange={(value: string) => {
+                setIssueDetails(value);
+              }}
+              fieldOptions={{
+                multiline: true,
+                maxRows: isTabletAndUp ? 10 : 5,
+                minRows: 3,
+                className: "override-padding",
+                inputProps: {
+                  maxLength: MAX_CHARS,
+                  sx: {
+                    padding: "1rem",
+                  },
+                },
+              }}
+            />
+          </div>
+        </div>
+      </ModalTwoButton>
     </>
   );
 };

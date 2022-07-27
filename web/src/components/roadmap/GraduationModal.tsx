@@ -1,4 +1,4 @@
-import { DialogTwoButton } from "@/components/DialogTwoButton";
+import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { OnboardingBusinessName } from "@/components/onboarding/OnboardingBusinessName";
 import { OnboardingDateOfFormation } from "@/components/onboarding/OnboardingDateOfFormation";
 import { OnboardingExistingEmployees } from "@/components/onboarding/OnboardingExistingEmployees";
@@ -120,7 +120,7 @@ export const GraduationModal = (props: Props): ReactElement => {
         onBack: () => {},
       }}
     >
-      <DialogTwoButton
+      <ModalTwoButton
         isOpen={props.open}
         close={handleClose}
         title={Config.roadmapDefaults.graduationModalTitle}
@@ -172,7 +172,7 @@ export const GraduationModal = (props: Props): ReactElement => {
             </div>
           </FormControl>
         </div>
-      </DialogTwoButton>
+      </ModalTwoButton>
     </ProfileDataContext.Provider>
   );
 };
