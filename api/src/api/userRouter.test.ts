@@ -43,6 +43,7 @@ describe("userRouter", () => {
   let stubUserDataClient: jest.Mocked<UserDataClient>;
   let stubUpdateLicenseStatus: jest.Mock;
   let stubUpdateRoadmapSidebarCards: jest.Mock;
+  let stubUpdateOperatingPhase: jest.Mock;
 
   beforeEach(async () => {
     stubUserDataClient = {
@@ -53,9 +54,18 @@ describe("userRouter", () => {
     stubUpdateLicenseStatus = jest.fn();
     stubUpdateRoadmapSidebarCards = jest.fn();
     stubUpdateRoadmapSidebarCards.mockImplementation((userData) => userData);
+    stubUpdateOperatingPhase = jest.fn();
+    stubUpdateOperatingPhase.mockImplementation((userData) => userData);
 
     app = setupExpress(false);
-    app.use(userRouterFactory(stubUserDataClient, stubUpdateLicenseStatus, stubUpdateRoadmapSidebarCards));
+    app.use(
+      userRouterFactory(
+        stubUserDataClient,
+        stubUpdateLicenseStatus,
+        stubUpdateRoadmapSidebarCards,
+        stubUpdateOperatingPhase
+      )
+    );
   });
 
   afterAll(async () => {
@@ -109,6 +119,7 @@ describe("userRouter", () => {
         const updatedUserData = generateUserData({});
         stubUserDataClient.get.mockResolvedValue(userData);
         stubUserDataClient.put.mockResolvedValue(updatedUserData);
+        stubUpdateOperatingPhase.mockReturnValue(updatedUserData);
         stubUpdateRoadmapSidebarCards.mockReturnValue(updatedUserData);
         mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
         const response = await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
@@ -116,7 +127,8 @@ describe("userRouter", () => {
         expect(mockJwt.decode).toHaveBeenCalledWith("user-123-token");
         expect(response.status).toEqual(200);
         expect(response.body).toEqual(updatedUserData);
-        expect(stubUpdateRoadmapSidebarCards).toHaveBeenCalledWith(userData);
+        expect(stubUpdateOperatingPhase).toHaveBeenCalledWith(userData);
+        expect(stubUpdateRoadmapSidebarCards).toHaveBeenCalledWith(updatedUserData);
         expect(stubUserDataClient.put).toHaveBeenCalledWith(updatedUserData);
       });
     });

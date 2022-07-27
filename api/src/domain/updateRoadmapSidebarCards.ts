@@ -1,10 +1,9 @@
-import { formationTaskId } from "@shared/gradualGraduationStages";
-import { LookupLegalStructureById } from "@shared/legalStructure";
 import { UserData } from "@shared/userData";
 import { UpdateRoadmapSidebarCards } from "./types";
 
 export const updateRoadmapSidebarCards: UpdateRoadmapSidebarCards = (userData: UserData): UserData => {
   let cards = userData.preferences.visibleRoadmapSidebarCards;
+  const operatingPhase = userData.profileData.operatingPhase;
 
   const showCard = (id: string): void => {
     const allCardsExceptDesired = cards.filter((cardId: string) => cardId !== id);
@@ -16,25 +15,18 @@ export const updateRoadmapSidebarCards: UpdateRoadmapSidebarCards = (userData: U
     cards = [...allCardsExceptIdToHide];
   };
 
-  if (cards.includes("not-registered")) {
+  if (operatingPhase !== "GUEST_MODE" && cards.includes("not-registered")) {
     showCard("successful-registration");
     hideCard("not-registered");
   }
 
-  const isPublicFiling = LookupLegalStructureById(userData.profileData.legalStructureId).requiresPublicFiling;
-  const hasCompletedFormation = userData.taskProgress[formationTaskId] === "COMPLETED";
-
-  if (isPublicFiling) {
-    if (!hasCompletedFormation) {
-      showCard("formation-nudge");
-    } else {
-      hideCard("formation-nudge");
-    }
+  if (operatingPhase === "NEEDS_TO_FORM") {
+    showCard("formation-nudge");
+  } else {
+    hideCard("formation-nudge");
   }
 
-  const hasCompletedTaxes = userData.taskProgress["register-for-taxes"] === "COMPLETED";
-
-  if (hasCompletedFormation && !hasCompletedTaxes) {
+  if (operatingPhase === "NEEDS_TO_REGISTER_FOR_TAXES") {
     showCard("tax-registration-nudge");
   } else {
     hideCard("tax-registration-nudge");

@@ -12,7 +12,12 @@ import jwt from "jsonwebtoken";
 import get from "lodash.get";
 import { getAnnualFilings } from "../domain/annual-filings/getAnnualFilings";
 import { industryHasALicenseType } from "../domain/license-status/convertIndustryToLicenseType";
-import { UpdateLicenseStatus, UpdateRoadmapSidebarCards, UserDataClient } from "../domain/types";
+import {
+  UpdateLicenseStatus,
+  UpdateOperatingPhase,
+  UpdateRoadmapSidebarCards,
+  UserDataClient,
+} from "../domain/types";
 
 const getTokenFromHeader = (req: Request): string => {
   if (req.headers.authorization && req.headers.authorization.split(" ")[0] === "Bearer") {
@@ -65,7 +70,8 @@ export const getSignedInUserId = (req: Request): string => {
 export const userRouterFactory = (
   userDataClient: UserDataClient,
   updateLicenseStatus: UpdateLicenseStatus,
-  updateRoadmapSidebarCards: UpdateRoadmapSidebarCards
+  updateRoadmapSidebarCards: UpdateRoadmapSidebarCards,
+  updateOperatingPhase: UpdateOperatingPhase
 ): Router => {
   const router = Router();
 
@@ -82,7 +88,8 @@ export const userRouterFactory = (
         if (userData.licenseData && shouldCheckLicense(userData)) {
           await updateLicenseStatus(userData.user.id, userData.licenseData.nameAndAddress);
         }
-        const updatedUserData = await updateRoadmapSidebarCards(userData);
+        const updatedOperatingPhaseData = updateOperatingPhase(userData);
+        const updatedUserData = updateRoadmapSidebarCards(updatedOperatingPhaseData);
         await userDataClient.put(updatedUserData);
         res.json(updatedUserData);
       })
