@@ -23,7 +23,7 @@ export const migrate_v71_to_v72 = (v71Data: v71UserData): v72UserData => {
       realEstateAppraisalManagement: false,
     },
     taskProgress,
-    version: 70,
+    version: 72,
   };
 };
 
