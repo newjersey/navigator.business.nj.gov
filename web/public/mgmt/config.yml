@@ -2513,6 +2513,29 @@ collections:
                       - { label: "Placeholder", name: "placeholder", widget: "string" }
                       - { label: "Error Text (when not set)", name: "errorTextRequired", widget: "string" }
                       - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Business Ownership
+                    name: "ownership"
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Header", name: "header", widget: "string" }
+                      - {
+                          label: "Header Not Bolded",
+                          name: "headerNotBolded",
+                          widget: "string",
+                          required: false,
+                        }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Existing Employees
+                    name: "existingEmployees"
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - { label: "Error Text (when not set)", name: "errorTextRequired", widget: "string" }
+                      - { label: "Description", name: "description", widget: "markdown" }
       - label: "Info Tab (Oscar)"
         name: "profile-info-oscar"
         file: "content/src/fieldConfig/profile-info-oscar.json"

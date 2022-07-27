@@ -4,7 +4,7 @@ import { getMetadataFromSlug } from "@/lib/cms/previews/preview-helpers";
 import { ProfileTabs } from "@/lib/types/types";
 import Profile from "@/pages/profile";
 import { generateUser } from "@/test/factories";
-import { createEmptyUserData } from "@businessnjgovnavigator/shared/userData";
+import { createEmptyUserData, TaskProgress } from "@businessnjgovnavigator/shared/userData";
 import merge from "lodash.merge";
 import { useEffect, useRef, useState } from "react";
 
@@ -48,6 +48,7 @@ const ProfilePreview = (props: Props) => {
         tab === "numbers" || businessPersona === "FOREIGN" ? "limited-liability-company" : undefined,
       businessPersona,
     },
+    taskProgress: { "register-for-taxes": "COMPLETED" as TaskProgress },
   };
 
   return (
