@@ -1,18 +1,18 @@
-import { DialogZeroButton } from "@/components/DialogZeroButton";
+import { ModalZeroButton } from "@/components/ModalZeroButton";
 import { Button } from "@/components/njwds-extended/Button";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { FeedbackRequestDialogNames } from "@/lib/types/types";
+import { FeedbackRequestModalNames } from "@/lib/types/types";
 import { makeButtonIcon } from "@/lib/utils/helpers";
 import { ReactElement } from "react";
 
 type Props = {
   onClose: () => void;
   isOpen: boolean;
-  setCurrentFeedback: (str: FeedbackRequestDialogNames) => void;
+  setCurrentFeedback: (str: FeedbackRequestModalNames) => void;
 };
 
-export const SelectFeedbackDialog = ({ onClose, isOpen, setCurrentFeedback }: Props): ReactElement => {
+export const SelectFeedbackModal = ({ onClose, isOpen, setCurrentFeedback }: Props): ReactElement => {
   const { userData } = useUserData();
   const { Config } = useConfig();
 
@@ -28,7 +28,7 @@ export const SelectFeedbackDialog = ({ onClose, isOpen, setCurrentFeedback }: Pr
   };
 
   return (
-    <DialogZeroButton
+    <ModalZeroButton
       isOpen={isOpen}
       close={onClose}
       title={Config.feedbackModal.feedbackModalTitle}
@@ -84,6 +84,6 @@ export const SelectFeedbackDialog = ({ onClose, isOpen, setCurrentFeedback }: Pr
           </>
         )}
       </div>
-    </DialogZeroButton>
+    </ModalZeroButton>
   );
 };

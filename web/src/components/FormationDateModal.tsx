@@ -1,5 +1,5 @@
 import { Content } from "@/components/Content";
-import { DialogTwoButton } from "@/components/DialogTwoButton";
+import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { OnboardingDateOfFormation } from "@/components/onboarding/OnboardingDateOfFormation";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -62,7 +62,7 @@ export const FormationDateModal = (props: Props): ReactElement => {
         onBack: () => {},
       }}
     >
-      <DialogTwoButton
+      <ModalTwoButton
         isOpen={props.isOpen}
         close={props.close}
         title={Config.formationDateModal.header}
@@ -86,7 +86,7 @@ export const FormationDateModal = (props: Props): ReactElement => {
             errorText: Config.formationDateModal.errorText,
           }}
         />
-      </DialogTwoButton>
+      </ModalTwoButton>
     </ProfileDataContext.Provider>
   );
 };

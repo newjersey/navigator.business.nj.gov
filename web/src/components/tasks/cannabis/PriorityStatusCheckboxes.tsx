@@ -1,5 +1,5 @@
 import { Content } from "@/components/Content";
-import { DialogTwoButton } from "@/components/DialogTwoButton";
+import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { PriorityApplicationType } from "@/lib/domain-logic/cannabisPriorityTypes";
@@ -78,7 +78,7 @@ export const PriorityStatusCheckboxes = (props: Props): ReactElement => {
         </FormGroup>
       </ul>
 
-      <DialogTwoButton
+      <ModalTwoButton
         isOpen={eligibleModalIsOpenWith !== ""}
         close={() => setEligibleModalIsOpenWith("")}
         title={Config.cannabisEligibilityModal.eligibleModalTitle}
@@ -87,7 +87,7 @@ export const PriorityStatusCheckboxes = (props: Props): ReactElement => {
         secondaryButtonText={Config.cannabisEligibilityModal.eligibleModalCancelButton}
       >
         <Content>{Config.cannabisEligibilityModal.eligibleModalBody}</Content>
-      </DialogTwoButton>
+      </ModalTwoButton>
     </>
   );
 };

@@ -1,4 +1,4 @@
-import { DialogZeroButton } from "@/components/DialogZeroButton";
+import { ModalZeroButton } from "@/components/ModalZeroButton";
 import { AlertVariant } from "@/components/njwds-extended/Alert";
 import { Button } from "@/components/njwds-extended/Button";
 import { Breakpoint } from "@mui/material";
@@ -12,7 +12,6 @@ interface Props {
   children?: ReactNode;
   primaryButtonText: string;
   primaryButtonOnClick: () => void;
-  secondaryButtonText: string;
   maxWidth?: Breakpoint;
   dividers?: boolean;
   alertText?: string;
@@ -21,28 +20,14 @@ interface Props {
   isLoading?: boolean;
 }
 
-export const DialogTwoButton = (props: Props) => {
+export const ModalOneButton = (props: Props) => {
   const buttonNode = (
     <div
       className="padding-x-4 padding-y-3 bg-base-lightest display-flex flex-column flex-justify-center mobile-lg:flex-row"
       data-testid="modal-content"
     >
       <div className="mobile-lg:margin-left-auto display-flex flex-column-reverse mobile-lg:flex-row">
-        <Button
-          style="secondary"
-          dataTestid="modal-button-secondary"
-          onClick={props.close}
-          className="margin-top-1 mobile-lg:margin-top-0 mobile-lg:margin-right-1"
-        >
-          {props.secondaryButtonText}
-        </Button>
-        <Button
-          style="primary"
-          noRightMargin
-          loading={props.isLoading}
-          onClick={props.primaryButtonOnClick}
-          dataTestid="modal-button-primary"
-        >
+        <Button style="primary" noRightMargin loading={props.isLoading} onClick={props.primaryButtonOnClick}>
           {props.primaryButtonText}
         </Button>
       </div>
@@ -50,7 +35,7 @@ export const DialogTwoButton = (props: Props) => {
   );
 
   return (
-    <DialogZeroButton
+    <ModalZeroButton
       isOpen={props.isOpen}
       close={props.close}
       title={props.title}
@@ -63,6 +48,6 @@ export const DialogTwoButton = (props: Props) => {
       alertVariant={props.alertVariant}
     >
       {props.children}
-    </DialogZeroButton>
+    </ModalZeroButton>
   );
 };

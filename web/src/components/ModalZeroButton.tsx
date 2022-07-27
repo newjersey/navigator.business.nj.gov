@@ -18,7 +18,7 @@ interface Props {
   alertVariant?: AlertVariant;
 }
 
-export const DialogZeroButton = (props: Props) => {
+export const ModalZeroButton = (props: Props) => {
   return (
     <Dialog
       fullWidth={false}

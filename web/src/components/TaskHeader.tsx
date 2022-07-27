@@ -1,8 +1,8 @@
 import { ArrowTooltip } from "@/components/ArrowTooltip";
-import { CongratulatoryDialog } from "@/components/CongratulatoryDialog";
+import { CongratulatoryModal } from "@/components/CongratulatoryModal";
 import { Content } from "@/components/Content";
-import { DialogTwoButton } from "@/components/DialogTwoButton";
 import { FormationDateModal } from "@/components/FormationDateModal";
+import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { Tag } from "@/components/njwds-extended/Tag";
 import { ToastAlert } from "@/components/njwds-extended/ToastAlert";
 import { Icon } from "@/components/njwds/Icon";
@@ -34,9 +34,9 @@ export const TaskHeader = (props: Props): ReactElement => {
   const { userData, update } = useUserData();
   const { roadmap, sectionCompletion, updateStatus } = useRoadmap();
   const [nextSection, setNextSection] = useState<SectionType | undefined>(undefined);
-  const [congratulatoryDialogIsOpen, setCongratulatoryDialogIsOpen] = useState<boolean>(false);
-  const [formationDialogIsOpen, setFormationDialogIsOpen] = useState<boolean>(false);
-  const [areYouSureDialogDesiredNewStatus, setAreYouSureDialogDesiredNewStatus] = useState<
+  const [congratulatoryModalIsOpen, setCongratulatoryModalIsOpen] = useState<boolean>(false);
+  const [formationModalIsOpen, setFormationModalIsOpen] = useState<boolean>(false);
+  const [areYouSureModalDesiredNewStatus, setAreYouSureModalDesiredNewStatus] = useState<
     TaskProgress | undefined
   >(undefined);
   const [successToastIsOpen, setSuccessToastIsOpen] = useState<boolean>(false);
@@ -44,8 +44,8 @@ export const TaskHeader = (props: Props): ReactElement => {
 
   const { Config } = useConfig();
 
-  const handleDialogClose = (): void => {
-    setCongratulatoryDialogIsOpen(false);
+  const handleModalClose = (): void => {
+    setCongratulatoryModalIsOpen(false);
   };
 
   const hasCompletedAPIFormation = (): boolean => {
@@ -59,10 +59,10 @@ export const TaskHeader = (props: Props): ReactElement => {
 
     if (isFormationTask(props.task.id)) {
       if (newValue === "COMPLETED" && currentTaskProgress !== "COMPLETED") {
-        setFormationDialogIsOpen(true);
+        setFormationModalIsOpen(true);
         return;
-      } else if (currentTaskProgress === "COMPLETED" && areYouSureDialogDesiredNewStatus === undefined) {
-        setAreYouSureDialogDesiredNewStatus(newValue);
+      } else if (currentTaskProgress === "COMPLETED" && areYouSureModalDesiredNewStatus === undefined) {
+        setAreYouSureModalDesiredNewStatus(newValue);
         return;
       } else {
         updatedUserData = {
@@ -73,10 +73,10 @@ export const TaskHeader = (props: Props): ReactElement => {
           },
         };
       }
-      setAreYouSureDialogDesiredNewStatus(undefined);
+      setAreYouSureModalDesiredNewStatus(undefined);
     }
 
-    setFormationDialogIsOpen(false);
+    setFormationModalIsOpen(false);
     updateTaskProgress(newValue, updatedUserData, { redirectOnSuccess: false });
   };
 
@@ -100,7 +100,7 @@ export const TaskHeader = (props: Props): ReactElement => {
       sectionCompletion[currentSectionPositions.current];
     if (sectionStatusHasChanged && updatedSectionCompletion[currentSectionPositions.current]) {
       setNextSection(currentSectionPositions.next);
-      setCongratulatoryDialogIsOpen(true);
+      setCongratulatoryModalIsOpen(true);
       preferences = setPreferencesCloseSection(updatedUserData.preferences, currentSectionPositions.current);
     }
     updateStatus(updatedSectionCompletion);
@@ -169,30 +169,30 @@ export const TaskHeader = (props: Props): ReactElement => {
         )}
       </div>
       <UserDataErrorAlert />
-      <CongratulatoryDialog
+      <CongratulatoryModal
         nextSectionType={nextSection}
-        handleClose={handleDialogClose}
-        open={congratulatoryDialogIsOpen}
+        handleClose={handleModalClose}
+        open={congratulatoryModalIsOpen}
       />
       <FormationDateModal
-        isOpen={formationDialogIsOpen}
-        close={() => setFormationDialogIsOpen(false)}
+        isOpen={formationModalIsOpen}
+        close={() => setFormationModalIsOpen(false)}
         onSave={updateTaskProgress}
       />
-      <DialogTwoButton
-        isOpen={areYouSureDialogDesiredNewStatus !== undefined}
-        close={() => setAreYouSureDialogDesiredNewStatus(undefined)}
+      <ModalTwoButton
+        isOpen={areYouSureModalDesiredNewStatus !== undefined}
+        close={() => setAreYouSureModalDesiredNewStatus(undefined)}
         title={Config.formationDateModal.areYouSureModalHeader}
         primaryButtonText={Config.formationDateModal.areYouSureModalContinueButtonText}
         primaryButtonOnClick={() => {
-          if (areYouSureDialogDesiredNewStatus) {
-            onDropdownChanged(areYouSureDialogDesiredNewStatus);
+          if (areYouSureModalDesiredNewStatus) {
+            onDropdownChanged(areYouSureModalDesiredNewStatus);
           }
         }}
         secondaryButtonText={Config.formationDateModal.areYouSureModalCancelButtonText}
       >
         <Content>{Config.formationDateModal.areYouSureModalBody}</Content>
-      </DialogTwoButton>
+      </ModalTwoButton>
       <ToastAlert variant="success" isOpen={successToastIsOpen} close={() => setSuccessToastIsOpen(false)}>
         {Config.taskDefaults.taskProgressSuccessToastBody}
       </ToastAlert>

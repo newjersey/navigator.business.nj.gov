@@ -1,5 +1,5 @@
 import { Content } from "@/components/Content";
-import { DialogTwoButton } from "@/components/DialogTwoButton";
+import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { Button } from "@/components/njwds-extended/Button";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -121,7 +121,7 @@ export const BusinessNameAndLegalStructure = ({ reviewPage = false }: Props): Re
         {state.errorMap["businessName"].invalid &&
           Config.businessFormationDefaults.notSetBusinessNameErrorText}
       </FormHelperText>
-      <DialogTwoButton
+      <ModalTwoButton
         isOpen={legalStructureWarningIsOpen}
         close={() => setLegalStructureWarningIsOpen(false)}
         title={Config.businessFormationDefaults.legalStructureWarningModalHeader}

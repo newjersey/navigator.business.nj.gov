@@ -417,7 +417,7 @@ export type NaicsCodeObject = {
 
 export type LicenseSearchError = "NOT_FOUND" | "FIELDS_REQUIRED" | "SEARCH_FAILED";
 
-export type FeedbackRequestDialogNames =
+export type FeedbackRequestModalNames =
   | "Select Feedback"
   | "Feature Request"
   | "Request Submitted"

@@ -1,4 +1,4 @@
-import { DialogTwoButton } from "@/components/DialogTwoButton";
+import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ReactElement } from "react";
 
@@ -11,7 +11,7 @@ interface Props {
 export const EscapeModal = (props: Props): ReactElement => {
   const { Config } = useConfig();
   return (
-    <DialogTwoButton
+    <ModalTwoButton
       isOpen={props.isOpen}
       close={props.close}
       title={Config.profileDefaults.escapeModalHeader}

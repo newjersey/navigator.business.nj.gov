@@ -11,7 +11,7 @@ interface Props {
   handleClose: () => void;
 }
 
-export const CongratulatoryDialog = (props: Props): ReactElement => {
+export const CongratulatoryModal = (props: Props): ReactElement => {
   const router = useRouter();
   const onClickComplete = () => router.push("/roadmap");
 

@@ -237,7 +237,7 @@ describe("<feedbackModal />", () => {
       expect(screen.getAllByText(Config.feedbackModal.feedbackInlineErrorText)[1]).toBeInTheDocument();
     });
 
-    it("opens issues dialog when isBug prop is used and then returns to feedback selection dialog after issue submission", async () => {
+    it("opens issues modal when isBug prop is used and then returns to feedback selection modal after issue submission", async () => {
       renderFeedbackModal({ isReportAnIssueBar: true });
 
       fireEvent.change(screen.getByLabelText("Issue summary"), { target: { value: "random summary text" } });
