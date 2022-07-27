@@ -23,7 +23,7 @@ import {
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { formationTaskId, ProfileData } from "@businessnjgovnavigator/shared";
+import { formationTaskId, ProfileData, randomInt } from "@businessnjgovnavigator/shared";
 import {
   createEmptyUserData,
   getCurrentDate,
@@ -510,6 +510,49 @@ describe("profile", () => {
         renderPage({ userData: initialUserData, municipalities: [newark] });
         chooseTab("numbers");
         expect(screen.getByLabelText("Date of formation")).toBeDisabled();
+      });
+    });
+
+    describe("register-for-taxes task", () => {
+      it("does not render the existing employees field and ownership field when register for taxes task is not complete", () => {
+        const taskProgress = randomInt() % 2 === 0 ? "NOT_STARTED" : "IN_PROGRESS";
+        const initialUserData = generateUserData({
+          profileData: generateProfileData({ businessPersona: "STARTING" }),
+          taskProgress: { "register-for-taxes": taskProgress },
+        });
+        renderPage({ userData: initialUserData });
+
+        expect(screen.queryByLabelText("Existing employees")).not.toBeInTheDocument();
+        expect(screen.queryByLabelText("Ownership")).not.toBeInTheDocument();
+      });
+
+      it("renders the existing employees field and ownership field when register for taxes task is complete", () => {
+        const initialUserData = generateUserData({
+          profileData: generateProfileData({ businessPersona: "STARTING" }),
+          taskProgress: { "register-for-taxes": "COMPLETED" },
+        });
+        renderPage({ userData: initialUserData });
+
+        expect(screen.getByLabelText("Existing employees")).toBeInTheDocument();
+        expect(screen.getByLabelText("Ownership")).toBeInTheDocument();
+      });
+
+      it("prevents user from saving if existing employees field is empty", async () => {
+        const initialUserData = generateUserData({
+          profileData: generateProfileData({ businessPersona: "STARTING" }),
+          taskProgress: { "register-for-taxes": "COMPLETED" },
+        });
+        renderPage({ userData: initialUserData });
+
+        fillText("Existing employees", "");
+        fireEvent.blur(screen.queryByLabelText("Existing employees") as HTMLElement);
+        clickSave();
+
+        await waitFor(() => {
+          expect(
+            screen.getByText(Config.profileDefaults.STARTING.existingEmployees.errorTextRequired)
+          ).toBeInTheDocument();
+        });
       });
     });
   });

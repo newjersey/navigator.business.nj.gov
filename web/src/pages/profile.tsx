@@ -299,8 +299,20 @@ const ProfilePage = (props: Props): ReactElement => {
         <OnboardingIndustry onValidation={onValidation} fieldStates={fieldStates} />
         <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
         <OnboardingLegalStructureDropdown disabled={userData?.formationData.getFilingResponse?.success} />
-        <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
+        <hr className="margin-top-6 margin-bottom-2" aria-hidden={true} />
         <OnboardingMunicipality onValidation={onValidation} fieldStates={fieldStates} h3Heading={true} />
+        {userData?.taskProgress["register-for-taxes"] === "COMPLETED" && (
+          <>
+            <hr className="margin-top-6 margin-bottom-2" aria-hidden={true} />
+            <OnboardingOwnership headerAriaLevel={3} />
+            <hr className="margin-top-6 margin-bottom-2" aria-hidden={true} />
+            <OnboardingExistingEmployees
+              onValidation={onValidation}
+              fieldStates={fieldStates}
+              headerAriaLevel={3}
+            />
+          </>
+        )}
       </>
     ),
     numbers: (
