@@ -17,6 +17,9 @@ describe("updateRoadmapSidebarCards", () => {
 
     it("removes not-registered card and adds successful-registration card", async () => {
       const userData = generateUserData({
+        profileData: generateProfileData({
+          operatingPhase: "NEEDS_TO_FORM",
+        }),
         preferences: generatePreferences({
           visibleRoadmapSidebarCards: ["not-registered"],
         }),
@@ -32,6 +35,9 @@ describe("updateRoadmapSidebarCards", () => {
 
     it("leaves existing cards besides not registered when adding successful registration card", async () => {
       const userData = generateUserData({
+        profileData: generateProfileData({
+          operatingPhase: "NEEDS_TO_FORM",
+        }),
         preferences: generatePreferences({
           visibleRoadmapSidebarCards: ["welcome", "not-registered"],
         }),
@@ -48,12 +54,13 @@ describe("updateRoadmapSidebarCards", () => {
   });
 
   describe("formation nudge", () => {
-    it("adds formation-nudge for non-SP/GP if formation task is not completed", () => {
+    it("adds formation-nudge if operatingPhase is NEEDS_TO_FORM", () => {
       const taskId = formationTaskId;
       const userData = generateUserData({
         taskProgress: { [taskId]: "NOT_STARTED" },
+
         profileData: generateProfileData({
-          legalStructureId: "limited-liability-company",
+          operatingPhase: "NEEDS_TO_FORM",
         }),
         preferences: generatePreferences({ visibleRoadmapSidebarCards: [] }),
       });
@@ -63,29 +70,12 @@ describe("updateRoadmapSidebarCards", () => {
       );
     });
 
-    it("removes formation-nudge for non-SP/GP if formation task is completed", () => {
-      const taskId = formationTaskId;
+    it("removes formation-nudge if  operatingPhase is NEEDS_TO_REGISTER_FOR_TAXES", () => {
       const userData = generateUserData({
-        taskProgress: { [taskId]: "COMPLETED" },
         profileData: generateProfileData({
-          legalStructureId: "limited-liability-company",
+          operatingPhase: "NEEDS_TO_REGISTER_FOR_TAXES",
         }),
         preferences: generatePreferences({ visibleRoadmapSidebarCards: ["formation-nudge"] }),
-      });
-
-      expect(updateRoadmapSidebarCards(userData).preferences.visibleRoadmapSidebarCards).not.toContain(
-        "formation-nudge"
-      );
-    });
-
-    it("does not add formation-nudge for SP/GP", () => {
-      const taskId = formationTaskId;
-      const userData = generateUserData({
-        taskProgress: { [taskId]: "COMPLETED" },
-        profileData: generateProfileData({
-          legalStructureId: "sole-proprietorship",
-        }),
-        preferences: generatePreferences({ visibleRoadmapSidebarCards: [] }),
       });
 
       expect(updateRoadmapSidebarCards(userData).preferences.visibleRoadmapSidebarCards).not.toContain(
@@ -95,10 +85,11 @@ describe("updateRoadmapSidebarCards", () => {
   });
 
   describe("tax registration nudge", () => {
-    it("adds tax-registration-nudge if formation task is complete", () => {
-      const taskId = formationTaskId;
+    it("adds tax-registration-nudge when operatingPhase is NEEDS_TO_REGISTER_FOR_TAXES", () => {
       const userData = generateUserData({
-        taskProgress: { [taskId]: "COMPLETED" },
+        profileData: generateProfileData({
+          operatingPhase: "NEEDS_TO_REGISTER_FOR_TAXES",
+        }),
         preferences: generatePreferences({ visibleRoadmapSidebarCards: [] }),
       });
       expect(updateRoadmapSidebarCards(userData).preferences.visibleRoadmapSidebarCards).toContain(
@@ -106,13 +97,12 @@ describe("updateRoadmapSidebarCards", () => {
       );
     });
 
-    it("removes tax-registration-nudge when register for taxes is complete", () => {
-      const taskId = formationTaskId;
-      const taxesTaskId = "register-for-taxes";
-
+    it("removes tax-registration-nudge when operatingPhase is FORMED_AND_REGISTERED", () => {
       const userData = generateUserData({
-        taskProgress: { [taskId]: "COMPLETED", [taxesTaskId]: "COMPLETED" },
-        preferences: generatePreferences({ visibleRoadmapSidebarCards: [] }),
+        profileData: generateProfileData({
+          operatingPhase: "FORMED_AND_REGISTERED",
+        }),
+        preferences: generatePreferences({ visibleRoadmapSidebarCards: ["tax-registration-nudge"] }),
       });
       expect(updateRoadmapSidebarCards(userData).preferences.visibleRoadmapSidebarCards).not.toContain(
         "tax-registration-nudge"

@@ -8,6 +8,7 @@ import { externalEndpointRouterFactory } from "src/api/externalEndpointRouter";
 import { guestRouterFactory } from "src/api/guestRouter";
 import { AirtableFeedbackClient } from "src/client/AirtableFeedbackClient";
 import { addNewsletterFactory } from "src/domain/newsletter/addNewsletterFactory";
+import { updateOperatingPhase } from "../..//domain/user/updateOperatingPhase";
 import { formationRouterFactory } from "../../api/formationRouter";
 import { licenseStatusRouterFactory } from "../../api/licenseStatusRouter";
 import { selfRegRouterFactory } from "../../api/selfRegRouter";
@@ -143,7 +144,10 @@ const apiFormationClient = ApiFormationClient(
 );
 
 app.use(bodyParser.json({ strict: false }));
-app.use("/api", userRouterFactory(userDataClient, updateLicenseStatus, updateRoadmapSidebarCards));
+app.use(
+  "/api",
+  userRouterFactory(userDataClient, updateLicenseStatus, updateRoadmapSidebarCards, updateOperatingPhase)
+);
 app.use(
   "/api/external",
   externalEndpointRouterFactory(

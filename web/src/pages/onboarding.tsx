@@ -270,6 +270,7 @@ const OnboardingPage = (props: Props): ReactElement => {
         providesStaffingService: profileData.providesStaffingService,
         certifiedInteriorDesigner: profileData.certifiedInteriorDesigner,
         realEstateAppraisalManagement: profileData.realEstateAppraisalManagement,
+        operatingPhase: "NEEDS_TO_FORM",
       };
 
       setProfileData(newProfileData);

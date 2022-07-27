@@ -153,6 +153,7 @@ export const generateProfileData = (
     providesStaffingService: false,
     certifiedInteriorDesigner: true,
     realEstateAppraisalManagement: false,
+    operatingPhase: "NEEDS_TO_FORM",
     ...overrides,
   };
 };
