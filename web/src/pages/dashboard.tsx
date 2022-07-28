@@ -65,7 +65,7 @@ const DashboardPage = (props: Props): ReactElement => {
             isOpen={successAlert}
             close={() => {
               setSuccessAlert(false);
-              router.replace({ pathname: "/dashboard" }, undefined, { shallow: true });
+              router.replace({ pathname: " /dashboard" }, undefined, { shallow: true });
             }}
             dataTestid="toast-alert-SUCCESS"
             heading={Config.profileDefaults.successTextHeader}

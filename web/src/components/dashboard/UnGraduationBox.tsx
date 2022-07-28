@@ -1,5 +1,6 @@
 import { Button } from "@/components/njwds-extended/Button";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { ROUTES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
 import { setAnalyticsDimensions } from "@/lib/utils/analytics-helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
@@ -24,7 +25,7 @@ export const UnGraduationBox = (): ReactElement => {
       profileData: newProfileData,
     });
 
-    await router.push("/roadmap");
+    await router.push(ROUTES.roadmap);
   };
 
   return (

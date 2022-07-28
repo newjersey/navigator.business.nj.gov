@@ -26,8 +26,13 @@ import {
 import { Industries, Industry } from "@shared/industry";
 import { randomInt } from "@shared/intHelpers";
 import { LegalStructure, LegalStructures } from "@shared/legalStructure";
-import { LicenseData, LicenseEntity, LicenseStatusItem, LicenseStatusResult } from "@shared/license";
-import { NameAndAddress } from "@shared/misc";
+import {
+  LicenseData,
+  LicenseEntity,
+  LicenseStatusItem,
+  LicenseStatusResult,
+  NameAndAddress,
+} from "@shared/license";
 import { Municipality } from "@shared/municipality";
 import { ProfileData } from "@shared/profileData";
 import { arrayOfSectors as sectors, SectorType } from "@shared/sector";

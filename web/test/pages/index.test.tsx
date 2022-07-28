@@ -1,4 +1,5 @@
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
+import { ROUTES } from "@/lib/domain-logic/routes";
 import Home from "@/pages/index";
 import { generateProfileData, generateUser } from "@/test/factories";
 import { withAuth } from "@/test/helpers";
@@ -20,7 +21,7 @@ describe("HomePage", () => {
     useMockUserData({});
     render(withAuth(<Home />, { user: generateUser({}) }));
     fireEvent.click(screen.getByTestId("hero-login-button"));
-    expect(mockPush).toHaveBeenCalledWith("/onboarding");
+    expect(mockPush).toHaveBeenCalledWith(ROUTES.onboarding);
   });
 
   it("redirects to roadmap page when user has completed onboarding flow", () => {
@@ -29,26 +30,26 @@ describe("HomePage", () => {
       profileData: generateProfileData({ businessPersona: "STARTING" }),
     });
     render(withAuth(<Home />, { user: generateUser({}) }));
-    expect(mockPush).toHaveBeenCalledWith("/roadmap");
+    expect(mockPush).toHaveBeenCalledWith(ROUTES.roadmap);
   });
 
   it("redirects to onboarding page when user has not completed onboarding flow", () => {
     useMockUserData({ formProgress: "UNSTARTED" });
     render(withAuth(<Home />, { user: generateUser({}) }));
-    expect(mockPush).toHaveBeenCalledWith("/onboarding");
+    expect(mockPush).toHaveBeenCalledWith(ROUTES.onboarding);
   });
 
   it("redirects to roadmap page when it is unknown if user has completed onboarding flow or not", () => {
     setMockUserDataResponse({ error: "NO_DATA", userData: undefined });
     render(withAuth(<Home />, { user: generateUser({}) }));
-    expect(mockPush).toHaveBeenCalledWith("/roadmap?error=true");
+    expect(mockPush).toHaveBeenCalledWith(`${ROUTES.roadmap}?error=true`);
   });
 
   it("redirects to onboarding with signUp = true in the querystring", () => {
     useMockRouter({ isReady: true, query: { signUp: "true" } });
     setMockUserDataResponse({ error: undefined, userData: undefined });
     render(withAuth(<Home />, { isAuthenticated: IsAuthenticated.FALSE }));
-    expect(mockPush).toHaveBeenCalledWith("/onboarding");
+    expect(mockPush).toHaveBeenCalledWith(ROUTES.onboarding);
   });
 
   it("stays on homepage with signUp = false in the querystrings", () => {

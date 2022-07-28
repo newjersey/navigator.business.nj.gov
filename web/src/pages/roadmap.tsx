@@ -14,6 +14,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { routeForPersona } from "@/lib/domain-logic/routeForPersona";
+import { ROUTES } from "@/lib/domain-logic/routes";
 import { loadRoadmapDisplayContent } from "@/lib/static/loadDisplayContent";
 import { loadOperateReferences } from "@/lib/static/loadOperateReferences";
 import { OperateReference, RoadmapDisplayContent } from "@/lib/types/types";
@@ -39,7 +40,7 @@ const RoadmapPage = (props: Props): ReactElement => {
   useMountEffectWhenDefined(() => {
     (async () => {
       if (userData?.formProgress !== "COMPLETED") {
-        await router.replace("/onboarding");
+        await router.replace(ROUTES.onboarding);
       }
     })();
   }, userData);
@@ -58,7 +59,7 @@ const RoadmapPage = (props: Props): ReactElement => {
 
     if (router.query.fromFormBusinessEntity === "true") {
       setCalendarUpdatedAlert(true);
-      router.replace({ pathname: "/roadmap" }, undefined, { shallow: true });
+      router.replace({ pathname: ROUTES.roadmap }, undefined, { shallow: true });
     }
   }, [router, userData?.profileData.businessPersona]);
 
@@ -120,7 +121,7 @@ const RoadmapPage = (props: Props): ReactElement => {
             isOpen={profileUpdatedAlert}
             close={() => {
               setProfileUpdatedAlert(false);
-              router.replace({ pathname: "/roadmap" }, undefined, { shallow: true });
+              router.replace({ pathname: ROUTES.roadmap }, undefined, { shallow: true });
             }}
             heading={Config.profileDefaults.successTextHeader}
           >
@@ -133,7 +134,7 @@ const RoadmapPage = (props: Props): ReactElement => {
             isOpen={calendarAlert}
             close={() => {
               setCalendarUpdatedAlert(false);
-              router.replace({ pathname: "/roadmap" }, undefined, { shallow: true });
+              router.replace({ pathname: ROUTES.roadmap }, undefined, { shallow: true });
             }}
             heading={Config.roadmapDefaults.calendarSnackbarHeading}
             dataTestid="toast-alert-calendar"

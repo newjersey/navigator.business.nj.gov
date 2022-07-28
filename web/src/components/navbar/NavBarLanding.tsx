@@ -1,5 +1,6 @@
 import { AuthButton } from "@/components/AuthButton";
 import { Button } from "@/components/njwds-extended/Button";
+import { ROUTES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { useRouter } from "next/router";
@@ -22,7 +23,7 @@ export const NavBarLanding = (): ReactElement => {
           style="tertiary"
           onClick={() => {
             analytics.event.landing_page_navbar_register.click.go_to_onboarding();
-            router.push("/onboarding");
+            router.push(ROUTES.onboarding);
           }}
         >
           {Config.navigationDefaults.registerButton}

@@ -1,8 +1,7 @@
 import { BusinessUser, NewsletterResponse, UserTestingResponse } from "@shared/businessUser";
 import { UserFeedbackRequest, UserIssueRequest } from "@shared/feedbackRequest";
 import { FormationSubmitResponse, GetFilingResponse } from "@shared/formationData";
-import { LicenseEntity, LicenseStatusResult } from "@shared/license";
-import { NameAndAddress } from "@shared/misc";
+import { LicenseEntity, LicenseStatusResult, NameAndAddress } from "@shared/license";
 import { UserData } from "@shared/userData";
 import * as https from "node:https";
 export interface UserDataClient {

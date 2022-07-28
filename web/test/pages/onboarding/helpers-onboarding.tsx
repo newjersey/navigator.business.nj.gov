@@ -1,6 +1,7 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
+import { ROUTES } from "@/lib/domain-logic/routes";
 import Onboarding from "@/pages/onboarding";
 import { generateProfileData, generateUser, generateUserData, randomLegalStructure } from "@/test/factories";
 import { withAuth } from "@/test/helpers";
@@ -331,7 +332,7 @@ export const runSelfRegPageTests = ({
     await waitFor(() => {
       expect(currentUserData().user).toEqual(businessUser);
       expect(mockPush).toHaveBeenCalledWith({
-        pathname: businessPersona === "OWNING" ? "/dashboard" : "/roadmap",
+        pathname: businessPersona === "OWNING" ? ROUTES.dashboard : ROUTES.roadmap,
         query: { fromOnboarding: "true" },
       });
     });

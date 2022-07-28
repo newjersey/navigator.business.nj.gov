@@ -1,6 +1,7 @@
 import { Button } from "@/components/njwds-extended/Button";
 import { AuthContext } from "@/contexts/authContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { ROUTES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
 import { templateEval } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
@@ -16,7 +17,7 @@ export const Header = () => {
 
   const editOnClick = () => {
     analytics.event.roadmap_profile_edit_button.click.go_to_profile_screen();
-    router.push("/profile");
+    router.push(ROUTES.profile);
   };
 
   const getHeader = (): string => {

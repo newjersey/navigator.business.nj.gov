@@ -1,5 +1,6 @@
 import { TaskHeader } from "@/components/TaskHeader";
 import { getMergedConfig } from "@/contexts/configContext";
+import { ROUTES } from "@/lib/domain-logic/routes";
 import { Task, TaskProgress } from "@/lib/types/types";
 import {
   generateFormationData,
@@ -187,7 +188,7 @@ describe("<TaskHeader />", () => {
       );
       expect(link).toBeInTheDocument();
       fireEvent.click(link as HTMLElement);
-      expect(mockPush).toHaveBeenCalledWith("/roadmap");
+      expect(mockPush).toHaveBeenCalledWith(ROUTES.roadmap);
     });
   });
 
@@ -250,7 +251,7 @@ describe("<TaskHeader />", () => {
       );
       expect(currentUserData().taskProgress[id]).toEqual("COMPLETED");
       expect(mockPush).toHaveBeenCalledWith({
-        pathname: "/roadmap",
+        pathname: ROUTES.roadmap,
         query: { fromFormBusinessEntity: "true" },
       });
     });

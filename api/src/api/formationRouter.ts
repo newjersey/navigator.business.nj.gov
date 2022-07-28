@@ -1,5 +1,5 @@
+import { formationTaskId } from "@shared/domain-logic/gradualGraduationStages";
 import { FormationSubmitResponse, GetFilingResponse } from "@shared/formationData";
-import { formationTaskId } from "@shared/gradualGraduationStages";
 import { ProfileDocuments } from "@shared/profileData";
 import { Router } from "express";
 import { saveFileFromUrl } from "../domain/s3Writer";

@@ -1,6 +1,5 @@
 import { getLicenseDate } from "@shared/dateHelpers";
-import { LicenseStatus, LicenseStatusItem, LicenseStatusResult } from "@shared/license";
-import { NameAndAddress } from "@shared/misc";
+import { LicenseStatus, LicenseStatusItem, LicenseStatusResult, NameAndAddress } from "@shared/license";
 import { inputManipulator } from "../inputManipulator";
 import { LicenseStatusClient, SearchLicenseStatus } from "../types";
 

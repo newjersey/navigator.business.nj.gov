@@ -1,3 +1,4 @@
+import { NavigatorLogo } from "@/components/navbar/NavigatorLogo";
 import { Button } from "@/components/njwds-extended/Button";
 import { Icon } from "@/components/njwds/Icon";
 import { AuthAlertContext } from "@/contexts/authAlertContext";
@@ -5,12 +6,11 @@ import { AuthContext } from "@/contexts/authContext";
 import { triggerSignIn } from "@/lib/auth/sessionHelper";
 import { onSelfRegister, onSignOut } from "@/lib/auth/signinHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { routeForPersona } from "@/lib/domain-logic/routeForPersona";
+import { ROUTES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
 import { getUserNameOrEmail } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { ClickAwayListener, Grow, MenuItem, MenuList, Paper, Popper } from "@mui/material";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { ReactElement, useContext, useEffect, useMemo, useRef, useState } from "react";
 
@@ -34,7 +34,7 @@ export const NavBarDesktop = (): ReactElement => {
 
   const currentlyOnboarding = (): boolean => {
     if (!router) return false;
-    return router.pathname === "/onboarding";
+    return router.pathname === ROUTES.onboarding;
   };
 
   const handleProfileClick = (event: React.MouseEvent<HTMLLIElement> | React.MouseEvent<Document>): void => {
@@ -72,11 +72,6 @@ export const NavBarDesktop = (): ReactElement => {
     prevOpen.current = open;
   }, [open]);
 
-  const redirectUrl = useMemo(
-    () => routeForPersona(userData?.profileData.businessPersona),
-    [userData?.profileData.businessPersona]
-  );
-
   const isAuthenticated = useMemo(() => state.isAuthenticated == "TRUE", [state.isAuthenticated]);
   const textColor = isAuthenticated ? "primary" : "base";
   const accountIcon = isAuthenticated ? "account_circle" : "help";
@@ -87,7 +82,7 @@ export const NavBarDesktop = (): ReactElement => {
       <MenuItem
         onClick={() => {
           analytics.event.account_menu_my_profile.click.go_to_profile_screen();
-          router.push("/profile");
+          router.push(ROUTES.profile);
         }}
       >
         <Button style="tertiary" textBold smallText>
@@ -107,7 +102,7 @@ export const NavBarDesktop = (): ReactElement => {
       <MenuItem
         onClick={() => {
           analytics.event.account_menu_my_profile.click.go_to_profile_screen();
-          router.push("/profile");
+          router.push(ROUTES.profile);
         }}
       >
         <Button style="tertiary" textBold smallText dataTestid="profile-link">
@@ -125,11 +120,7 @@ export const NavBarDesktop = (): ReactElement => {
     <>
       <nav aria-label="Primary" className="grid-container-widescreen desktop:padding-x-7">
         <div className="display-flex flex-row flex-justify flex-align-center height-8">
-          <Link href={redirectUrl} passHref>
-            <a href={redirectUrl}>
-              <img className="height-4" src="/img/Navigator-logo.svg" alt="Business.NJ.Gov Navigator" />
-            </a>
-          </Link>
+          <NavigatorLogo />
           <div className="flex z-100">
             {!isAuthenticated && (
               <div className="flex">

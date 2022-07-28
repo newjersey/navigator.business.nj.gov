@@ -7,6 +7,7 @@ import { OnboardingSectors } from "@/components/onboarding/OnboardingSectors";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { postGetAnnualFilings } from "@/lib/api-client/apiClient";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { ROUTES } from "@/lib/domain-logic/routes";
 import { createProfileFieldErrorMap, ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { setAnalyticsDimensions } from "@/lib/utils/analytics-helpers";
@@ -89,7 +90,7 @@ export const GraduationModal = (props: Props): ReactElement => {
     analytics.event.graduation_modal.submit.prospective_roadmap_to_existing_dashboard();
     await update(newUserData);
 
-    await router.push("/dashboard");
+    await router.push(ROUTES.dashboard);
   };
 
   const onSubmit = async () => {

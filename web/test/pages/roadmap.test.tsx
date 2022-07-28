@@ -1,6 +1,7 @@
 import { SignUpToast } from "@/components/auth/SignUpToast";
 import { getMergedConfig } from "@/contexts/configContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
+import { ROUTES } from "@/lib/domain-logic/routes";
 import { OperateReference, SidebarCardContent } from "@/lib/types/types";
 import RoadmapPage from "@/pages/roadmap";
 import {
@@ -130,7 +131,7 @@ describe("roadmap page", () => {
   it("redirects to onboarding if user not finished onboarding", () => {
     useMockUserData({ formProgress: "UNSTARTED" });
     renderRoadmapPage({});
-    expect(mockPush).toHaveBeenCalledWith("/onboarding");
+    expect(mockPush).toHaveBeenCalledWith(ROUTES.onboarding);
   });
 
   it("shows toast alert when success query is true", () => {

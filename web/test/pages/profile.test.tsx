@@ -1,6 +1,7 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
+import { ROUTES } from "@/lib/domain-logic/routes";
 import { ProfileTabs } from "@/lib/types/types";
 import { getFlow, templateEval } from "@/lib/utils/helpers";
 import Profile from "@/pages/profile";
@@ -191,7 +192,7 @@ describe("profile", () => {
       renderPage({ userData });
       fillText("Business name", "Cool Computers");
       clickSave();
-      await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith("/roadmap?success=true"));
+      await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith(`${ROUTES.roadmap}?success=true`));
     });
 
     it("returns user to Business Formation after save using query string", async () => {
@@ -413,7 +414,7 @@ describe("profile", () => {
       });
       renderPage({ userData });
       clickBack();
-      await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith("/roadmap"));
+      await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith(ROUTES.roadmap));
     });
 
     it("prefills form from existing user data", () => {
@@ -477,7 +478,7 @@ describe("profile", () => {
       selectByText("Location", newark.displayName);
       clickBack();
       fireEvent.click(screen.getByText(Config.profileDefaults.escapeModalReturn));
-      await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith("/roadmap"));
+      await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith(ROUTES.roadmap));
       await waitFor(() => expect(() => currentUserData()).toThrowError());
     });
 
@@ -757,7 +758,7 @@ describe("profile", () => {
       renderPage({ userData: userData });
 
       clickBack();
-      await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith("/dashboard"));
+      await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith(ROUTES.dashboard));
     });
 
     it("builds and sets roadmap on save", async () => {
@@ -792,7 +793,7 @@ describe("profile", () => {
       clickBack();
       fireEvent.click(screen.getByText(Config.profileDefaults.escapeModalReturn));
       await waitFor(() => {
-        expect(mockRouter.mockPush).toHaveBeenCalledWith("/dashboard");
+        expect(mockRouter.mockPush).toHaveBeenCalledWith(ROUTES.dashboard);
       });
       expect(() => currentUserData()).toThrowError();
     });
@@ -819,7 +820,7 @@ describe("profile", () => {
     it("sends user back to roadmap", async () => {
       renderPage({ userData: userData });
       clickBack();
-      await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith("/roadmap"));
+      await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith(ROUTES.roadmap));
     });
 
     it("displays only the numbers and notes tabs", () => {
