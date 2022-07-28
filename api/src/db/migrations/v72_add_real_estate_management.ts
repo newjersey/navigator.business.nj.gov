@@ -1,3 +1,4 @@
+import { randomInt } from "@shared/intHelpers";
 import { v71UserData } from "./v71_add_certified_interior_designer";
 
 export interface v72UserData {
@@ -29,7 +30,7 @@ export const migrate_v71_to_v72 = (v71Data: v71UserData): v72UserData => {
 
 // ---------------- v72 types ----------------
 
-type v72TaskProgress = "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
+export type v72TaskProgress = "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
 type v72FormProgress = "UNSTARTED" | "COMPLETED";
 export type v72ABExperience = "ExperienceA" | "ExperienceB";
 
@@ -54,7 +55,7 @@ interface v72ProfileDocuments {
 type v72BusinessPersona = "STARTING" | "OWNING" | "FOREIGN" | undefined;
 type v72ForeignBusinessType = "REMOTE_WORKER" | "REMOTE_SELLER" | "NEXUS" | "NONE" | undefined;
 
-interface v72ProfileData {
+export interface v72ProfileData {
   businessPersona: v72BusinessPersona;
   initialOnboardingFlow: v72BusinessPersona;
   businessName: string;
@@ -297,3 +298,118 @@ type v72GetFilingResponse = {
 };
 
 // ---------------- v72 factories ----------------
+export const generatev72User = (overrides: Partial<v72BusinessUser>): v72BusinessUser => {
+  return {
+    name: `some-name-${randomInt()}`,
+    email: `some-email-${randomInt()}@example.com`,
+    id: `some-id-${randomInt()}`,
+    receiveNewsletter: false,
+    userTesting: false,
+    externalStatus: {},
+    abExperience: "ExperienceA",
+    myNJUserKey: undefined,
+    intercomHash: undefined,
+    ...overrides,
+  };
+};
+
+export const generatev72ProfileData = (overrides: Partial<v72ProfileData>): v72ProfileData => {
+  return {
+    businessPersona: "STARTING",
+    initialOnboardingFlow: "STARTING",
+    businessName: `some-business-name-${randomInt()}`,
+    industryId: "restaurant",
+    legalStructureId: "sole-proprietorship",
+    municipality: {
+      name: `some-name-${randomInt()}`,
+      displayName: `some-display-name-${randomInt()}`,
+      county: `some-county-${randomInt()}`,
+      id: `some-id-${randomInt()}`,
+    },
+    liquorLicense: true,
+    requiresCpa: false,
+    homeBasedBusiness: true,
+    cannabisLicenseType: undefined,
+    cannabisMicrobusiness: undefined,
+    constructionRenovationPlan: undefined,
+    dateOfFormation: undefined,
+    entityId: undefined,
+    employerId: undefined,
+    taxId: undefined,
+    notes: "",
+    documents: {
+      formationDoc: `some-formation-doc-${randomInt()}`,
+      standingDoc: `some-standing-doc-${randomInt()}`,
+      certifiedDoc: `some-certified-doc-${randomInt()}`,
+    },
+    ownershipTypeIds: [],
+    existingEmployees: undefined,
+    taxPin: undefined,
+    sectorId: undefined,
+    naicsCode: "",
+    foreignBusinessType: undefined,
+    foreignBusinessTypeIds: [],
+    nexusLocationInNewJersey: undefined,
+    nexusDbaName: undefined,
+    realEstateAppraisalManagement: false,
+    certifiedInteriorDesigner: false,
+    providesStaffingService: false,
+    ...overrides,
+  };
+};
+
+export const generatev72FormationFormData = (
+  overrides: Partial<v72FormationFormData>
+): v72FormationFormData => {
+  return {
+    businessName: "",
+    businessSuffix: undefined,
+    businessTotalStock: "",
+    businessStartDate: "",
+    businessAddressCity: undefined,
+    businessAddressLine1: "",
+    businessAddressLine2: "",
+    businessAddressState: "",
+    businessAddressZipCode: "",
+    businessPurpose: "",
+    provisions: [],
+    agentNumberOrManual: "NUMBER",
+    agentNumber: "",
+    agentName: "",
+    agentEmail: "",
+    agentOfficeAddressLine1: "",
+    agentOfficeAddressLine2: "",
+    agentOfficeAddressCity: "",
+    agentOfficeAddressState: "",
+    agentOfficeAddressZipCode: "",
+    agentUseAccountInfo: false,
+    agentUseBusinessAddress: false,
+    members: [],
+    signers: [],
+    paymentType: undefined,
+    annualReportNotification: false,
+    corpWatchNotification: false,
+    officialFormationDocument: false,
+    certificateOfStanding: false,
+    certifiedCopyOfFormationDocument: false,
+    contactFirstName: "",
+    contactLastName: "",
+    contactPhoneNumber: "",
+    ...overrides,
+  };
+};
+
+export const generatev72GetFilingResponse = (
+  overrides: Partial<v72GetFilingResponse>
+): v72GetFilingResponse => {
+  return {
+    success: true,
+    entityId: "",
+    transactionDate: "",
+    confirmationNumber: "",
+    formationDoc: "",
+    standingDoc: "",
+    certifiedDoc: "",
+    ...overrides,
+  };
+};
