@@ -4,6 +4,7 @@ import { AuthAlertContext } from "@/contexts/authAlertContext";
 import { AuthContext } from "@/contexts/authContext";
 import { onSelfRegister } from "@/lib/auth/signinHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { ROUTES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import Link from "next/link";
@@ -22,7 +23,7 @@ export const NavSidebarUserSettings = (): ReactElement => {
   const UnAuthenticatedMenu = () => (
     <>
       <div className="margin-bottom-2">
-        <Link href="/profile" passHref>
+        <Link href={ROUTES.profile} passHref>
           <Button
             style="tertiary"
             onClick={() => {
@@ -62,7 +63,7 @@ export const NavSidebarUserSettings = (): ReactElement => {
         </Button>
       </div>
       <div className="margin-bottom-2">
-        <Link href="/profile" passHref>
+        <Link href={ROUTES.profile} passHref>
           <Button
             style="tertiary"
             onClick={() => {
@@ -77,7 +78,7 @@ export const NavSidebarUserSettings = (): ReactElement => {
   );
 
   const renderMenu = () => {
-    if (router.pathname === "/onboarding") {
+    if (router.pathname === ROUTES.onboarding) {
       return <></>;
     } else if (isAuthenticated) {
       return AuthenticatedMenu();

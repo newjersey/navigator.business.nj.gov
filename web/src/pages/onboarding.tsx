@@ -13,6 +13,7 @@ import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { routeForPersona } from "@/lib/domain-logic/routeForPersona";
+import { ROUTES } from "@/lib/domain-logic/routes";
 import { MediaQueries } from "@/lib/PageSizes";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
@@ -162,7 +163,7 @@ const OnboardingPage = (props: Props): ReactElement => {
 
       if (currentUserData) {
         if (currentUserData?.formProgress === "COMPLETED") {
-          await router.replace("/profile");
+          await router.replace(ROUTES.profile);
           return;
         } else {
           const queryPage = Number(router.query.page);
@@ -288,7 +289,7 @@ const OnboardingPage = (props: Props): ReactElement => {
     setSectionCompletion(getSectionCompletion(newRoadmap, currentUserData));
 
     if (profileData.foreignBusinessType === "NONE") {
-      await router.push("/unsupported");
+      await router.push(ROUTES.unsupported);
     } else if (page.current + 1 <= onboardingFlows[currentFlow].pages.length) {
       update({ ...currentUserData, user, profileData: newProfileData }, { local: true }).then(() => {
         const nextCurrentPage = page.current + 1;

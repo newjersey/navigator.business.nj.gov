@@ -5,6 +5,7 @@ import {
   useAuthProtectedPage,
   useUnauthedOnlyPage,
 } from "@/lib/auth/useAuthProtectedPage";
+import { ROUTES } from "@/lib/domain-logic/routes";
 import { withAuth, withAuthAlert } from "@/test/helpers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { render } from "@testing-library/react";
@@ -49,7 +50,7 @@ describe("useAuthProtectedPage", () => {
     it("redirects to homepage when user is not authed", () => {
       setupHookWithAuth({ hook: useAuthProtectedPage, isAuth: IsAuthenticated.FALSE });
       expect(mockPush).toHaveBeenCalledWith({
-        pathname: "/",
+        pathname: ROUTES.landing,
         query: {},
       });
     });
@@ -58,7 +59,7 @@ describe("useAuthProtectedPage", () => {
       useMockRouter({ isReady: true, asPath: signInSamlError });
       setupHookWithAuth({ hook: useAuthProtectedPage, isAuth: IsAuthenticated.FALSE });
       expect(mockPush).toHaveBeenCalledWith({
-        pathname: "/",
+        pathname: ROUTES.landing,
         query: { signUp: "true" },
       });
     });
@@ -111,7 +112,7 @@ describe("useAuthProtectedPage", () => {
   describe("useUnauthedOnlyPage", () => {
     it("redirects to homepage when user IS authed", () => {
       setupHookWithAuth({ hook: useUnauthedOnlyPage, isAuth: IsAuthenticated.TRUE });
-      expect(mockPush).toHaveBeenCalledWith("/");
+      expect(mockPush).toHaveBeenCalledWith(ROUTES.landing);
     });
 
     it("does nothing when user is NOT authed", () => {

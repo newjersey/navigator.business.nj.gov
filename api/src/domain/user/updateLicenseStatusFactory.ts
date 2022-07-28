@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { getCurrentDateISOString } from "@shared/dateHelpers";
-import { LicenseStatus, LicenseStatusItem, LicenseStatusResult } from "@shared/license";
-import { NameAndAddress } from "@shared/misc";
+import { LicenseStatus, LicenseStatusItem, LicenseStatusResult, NameAndAddress } from "@shared/license";
 import { TaskProgress, UserData } from "@shared/userData";
 import { convertIndustryToLicenseType } from "../license-status/convertIndustryToLicenseType";
 import { SearchLicenseStatus, UpdateLicenseStatus, UserDataClient } from "../types";

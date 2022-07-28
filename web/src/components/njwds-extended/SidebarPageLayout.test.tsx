@@ -1,4 +1,5 @@
 import { SidebarPageLayout } from "@/components/njwds-extended/SidebarPageLayout";
+import { ROUTES } from "@/lib/domain-logic/routes";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockProfileData, useMockUserData } from "@/test/mock/mockUseUserData";
 import * as materialUi from "@mui/material";
@@ -29,13 +30,13 @@ describe("<SidebarPageLayout />", () => {
     useMockProfileData({ businessPersona: "STARTING" });
     render(<SidebarPageLayout>stuff</SidebarPageLayout>);
     expect(screen.getByText("stuff")).toBeInTheDocument();
-    expect(screen.getByTestId("back-to-roadmap")).toHaveAttribute("href", "/roadmap");
+    expect(screen.getByTestId("back-to-roadmap")).toHaveAttribute("href", ROUTES.roadmap);
   });
 
   it("links back to /dashboard when user owns a business", () => {
     useMockProfileData({ businessPersona: "OWNING" });
     render(<SidebarPageLayout>stuff</SidebarPageLayout>);
-    expect(screen.getByTestId("back-to-roadmap")).toHaveAttribute("href", "/dashboard");
+    expect(screen.getByTestId("back-to-roadmap")).toHaveAttribute("href", ROUTES.dashboard);
   });
 
   it("shows content in sidebar", () => {

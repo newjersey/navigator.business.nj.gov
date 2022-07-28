@@ -1,4 +1,4 @@
-import { NameAndAddress } from "@shared/misc";
+import { NameAndAddress } from "@shared/license";
 import { UserData } from "@shared/userData";
 import { Router } from "express";
 import { UpdateLicenseStatus } from "../domain/types";

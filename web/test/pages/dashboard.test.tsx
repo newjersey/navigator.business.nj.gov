@@ -1,3 +1,4 @@
+import { ROUTES } from "@/lib/domain-logic/routes";
 import { Certification, DashboardDisplayContent, Funding, OperateReference } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
 import DashboardPage from "@/pages/dashboard";
@@ -240,7 +241,7 @@ describe("dashboard", () => {
         businessPersona: "STARTING",
       },
     });
-    await waitFor(() => expect(mockPush).toHaveBeenCalledWith("/roadmap"));
+    await waitFor(() => expect(mockPush).toHaveBeenCalledWith(ROUTES.roadmap));
   });
 
   it("does not show un-graduation box for users who have only used the owning-a-business flow", () => {

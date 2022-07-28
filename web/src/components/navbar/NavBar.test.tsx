@@ -1,6 +1,7 @@
 import { NavBar } from "@/components/navbar/NavBar";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
+import { ROUTES } from "@/lib/domain-logic/routes";
 import { OperateReference } from "@/lib/types/types";
 import {
   generateRoadmap,
@@ -65,14 +66,14 @@ describe("<NavBar />", () => {
       render(<NavBar landingPage={true} task={undefined} sidebarPageLayout={false} operateReferences={{}} />);
 
       fireEvent.click(screen.getByText(Config.navigationDefaults.registerButton));
-      expect(mockPush).toHaveBeenCalledWith("/onboarding");
+      expect(mockPush).toHaveBeenCalledWith(ROUTES.onboarding);
     });
   });
 
   describe("navbar - used when user is onboarding", () => {
     beforeEach(() => {
       useMockUserData({});
-      useMockRouter({ pathname: "/onboarding" });
+      useMockRouter({ pathname: ROUTES.onboarding });
     });
 
     describe("desktop version", () => {

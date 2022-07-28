@@ -1,4 +1,5 @@
 import { getMergedConfig } from "@/contexts/configContext";
+import { ROUTES } from "@/lib/domain-logic/routes";
 import { templateEval } from "@/lib/utils/helpers";
 import { generateMunicipality, generateProfileData, generateUserData } from "@/test/factories";
 import { markdownToText } from "@/test/helpers";
@@ -202,7 +203,7 @@ describe("onboarding - foreign business", () => {
       page.checkByLabelText(none);
 
       act(() => page.clickNext());
-      await waitFor(() => expect(mockPush).toHaveBeenCalledWith("/unsupported"));
+      await waitFor(() => expect(mockPush).toHaveBeenCalledWith(ROUTES.unsupported));
     });
   });
 

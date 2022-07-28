@@ -1,16 +1,15 @@
 import { FocusTrappedSidebar } from "@/components/FocusTrappedSidebar";
+import { NavigatorLogo } from "@/components/navbar/NavigatorLogo";
 import { NavSidebarUserSettings } from "@/components/navbar/NavSidebarUserSettings";
 import { Icon } from "@/components/njwds/Icon";
 import { MiniOperateSection } from "@/components/roadmap/MiniOperateSection";
 import { MiniRoadmap } from "@/components/roadmap/MiniRoadmap";
 import { AuthContext } from "@/contexts/authContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { routeForPersona } from "@/lib/domain-logic/routeForPersona";
 import { OperateReference, Task } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { getUserNameOrEmail } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import Link from "next/link";
 import { ReactElement, useContext, useMemo, useState } from "react";
 interface Props {
   scrolled: boolean;
@@ -36,11 +35,6 @@ export const NavBarMobile = ({
   const textColor = isAuthenticated ? "primary" : "base";
   const accountIcon = isAuthenticated ? "account_circle" : "help";
   const accountString = isAuthenticated ? userName : Config.navigationDefaults.navBarGuestText;
-
-  const redirectUrl = useMemo(
-    () => routeForPersona(userData?.profileData.businessPersona),
-    [userData?.profileData.businessPersona]
-  );
 
   return (
     <>
@@ -73,11 +67,7 @@ export const NavBarMobile = ({
           {sidebarPageLayout ? (
             <div className="text-bold">{Config.navigationDefaults.taskPageNavBarHeading}</div>
           ) : (
-            <Link href={redirectUrl} passHref>
-              <a href={redirectUrl}>
-                <img className="height-3" src="/img/Navigator-logo.svg" alt="Business.NJ.Gov Navigator" />
-              </a>
-            </Link>
+            <NavigatorLogo />
           )}
         </div>
       </nav>

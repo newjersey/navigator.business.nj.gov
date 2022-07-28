@@ -1,5 +1,3 @@
-import { NameAndAddress } from "./misc";
-
 export type LicenseStatusItem = {
   title: string;
   status: CheckoffStatus;
@@ -52,3 +50,17 @@ export type LicenseEntity = {
   checkoffStatus: "Completed" | "Unchecked" | "Not Applicable";
   dateThisStatus: string;
 };
+
+export type NameAndAddress = {
+  name: string;
+  addressLine1: string;
+  addressLine2: string;
+  zipCode: string;
+};
+
+export const createEmptyNameAndAddress = (): NameAndAddress => ({
+  name: "",
+  addressLine1: "",
+  addressLine2: "",
+  zipCode: "",
+});

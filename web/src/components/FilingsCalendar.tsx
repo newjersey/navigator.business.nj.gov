@@ -3,6 +3,7 @@ import { Tag } from "@/components/njwds-extended/Tag";
 import { Icon } from "@/components/njwds/Icon";
 import { getMergedConfig } from "@/contexts/configContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { ROUTES } from "@/lib/domain-logic/routes";
 import { MediaQueries } from "@/lib/PageSizes";
 import { OperateReference } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
@@ -27,7 +28,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
 
   const editOnClick = () => {
     analytics.event.roadmap_profile_edit_button.click.go_to_profile_screen();
-    router.push("/profile");
+    router.push(ROUTES.profile);
   };
 
   const getMonth = (num: number): ReactElement => {

@@ -1,6 +1,7 @@
 import { GraduationModal } from "@/components/roadmap/GraduationModal";
 import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
+import { ROUTES } from "@/lib/domain-logic/routes";
 import {
   generateFormationData,
   generateGetFilingResponse,
@@ -97,7 +98,7 @@ describe("Graduation Modal", () => {
       });
     });
 
-    expect(mockPush).toHaveBeenCalledWith("/dashboard");
+    expect(mockPush).toHaveBeenCalledWith(ROUTES.dashboard);
   });
 
   it("pre-populates fields with data from profile", async () => {
@@ -142,7 +143,7 @@ describe("Graduation Modal", () => {
         },
       });
     });
-    expect(mockPush).toHaveBeenCalledWith("/dashboard");
+    expect(mockPush).toHaveBeenCalledWith(ROUTES.dashboard);
   });
 
   it("updates filing data", async () => {
@@ -174,7 +175,7 @@ describe("Graduation Modal", () => {
         taxFilingData: { ...taxData, filings: [] },
       });
     });
-    expect(mockPush).toHaveBeenCalledWith("/dashboard");
+    expect(mockPush).toHaveBeenCalledWith(ROUTES.dashboard);
   });
 
   it("shows sector for generic industry", () => {
@@ -221,7 +222,7 @@ describe("Graduation Modal", () => {
     renderGraduationModal(userData);
     submitGraduationModal();
     expect(userDataWasNotUpdated()).toEqual(true);
-    expect(mockPush).not.toHaveBeenCalledWith("/dashboard");
+    expect(mockPush).not.toHaveBeenCalledWith(ROUTES.dashboard);
     expect(screen.getByText(Config.profileDefaults.OWNING.dateOfFormation.errorText)).toBeInTheDocument();
     expect(screen.getByText(Config.profileDefaults.OWNING.sectorId.errorTextRequired)).toBeInTheDocument();
     expect(
