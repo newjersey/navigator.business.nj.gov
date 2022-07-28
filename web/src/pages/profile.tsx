@@ -60,6 +60,7 @@ import {
   ProfileData,
   UserData,
 } from "@businessnjgovnavigator/shared/";
+import { LookupOperatingPhaseById } from "@businessnjgovnavigator/shared/operatingPhase";
 import deepEqual from "fast-deep-equal/es6/react";
 import { GetStaticPropsResult } from "next";
 import { useRouter } from "next/router";
@@ -301,7 +302,7 @@ const ProfilePage = (props: Props): ReactElement => {
         <OnboardingLegalStructureDropdown disabled={userData?.formationData.getFilingResponse?.success} />
         <hr className="margin-top-6 margin-bottom-2" aria-hidden={true} />
         <OnboardingMunicipality onValidation={onValidation} fieldStates={fieldStates} h3Heading={true} />
-        {userData?.taskProgress["register-for-taxes"] === "COMPLETED" && (
+        {LookupOperatingPhaseById(userData?.profileData.operatingPhase).hasCompletedTaxRegistration && (
           <>
             <hr className="margin-top-6 margin-bottom-2" aria-hidden={true} />
             <OnboardingOwnership headerAriaLevel={3} />

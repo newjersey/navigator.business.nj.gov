@@ -1,4 +1,5 @@
 import { Municipality } from "./municipality";
+import { OperatingPhaseId } from "./operatingPhase";
 
 export interface ProfileDocuments {
   readonly formationDoc: string;
@@ -37,7 +38,7 @@ export interface ProfileData {
   readonly providesStaffingService: boolean;
   readonly certifiedInteriorDesigner: boolean;
   readonly realEstateAppraisalManagement: boolean;
-  readonly operatingPhase: OperatingPhase;
+  readonly operatingPhase: OperatingPhaseId;
 }
 
 export const emptyProfileData: ProfileData = {
@@ -82,10 +83,3 @@ export type CannabisLicenseType = "CONDITIONAL" | "ANNUAL" | undefined;
 
 export type BusinessPersona = "STARTING" | "OWNING" | "FOREIGN" | undefined;
 export type ForeignBusinessType = "REMOTE_WORKER" | "REMOTE_SELLER" | "NEXUS" | "NONE" | undefined;
-export type OperatingPhase =
-  | "GUEST_MODE"
-  | "NEEDS_TO_FORM"
-  | "NEEDS_TO_REGISTER_FOR_TAXES"
-  | "FORMED_AND_REGISTERED"
-  | "UP_AND_RUNNING"
-  | undefined;
