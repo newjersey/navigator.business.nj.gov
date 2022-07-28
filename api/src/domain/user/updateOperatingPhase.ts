@@ -1,12 +1,12 @@
 import { formationTaskId } from "@shared/domain-logic/gradualGraduationStages";
 import { LookupLegalStructureById } from "@shared/legalStructure";
-import { OperatingPhase } from "@shared/profileData";
+import { OperatingPhaseId } from "@shared/operatingPhase";
 import { UserData } from "@shared/userData";
 import { UpdateOperatingPhase } from "../types";
 
 export const updateOperatingPhase: UpdateOperatingPhase = (userData: UserData): UserData => {
   const currentPhase = userData.profileData.operatingPhase;
-  let updatedPhase: OperatingPhase = userData.profileData.operatingPhase;
+  let updatedPhase: OperatingPhaseId = userData.profileData.operatingPhase;
 
   const isPublicFiling = LookupLegalStructureById(userData.profileData.legalStructureId).requiresPublicFiling;
   const hasCompletedFormation = userData.taskProgress[formationTaskId] === "COMPLETED";
