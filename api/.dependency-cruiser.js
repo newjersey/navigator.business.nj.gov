@@ -47,6 +47,10 @@ module.exports = {
       to: { path: "fs" },
     },
     {
+      from: { path: "src/db" },
+      to: { path: "path" },
+    },
+    {
       from: {},
       to: { path: "https" },
     },
