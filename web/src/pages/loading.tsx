@@ -6,18 +6,21 @@ import { triggerSignIn } from "@/lib/auth/sessionHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { routeForPersona } from "@/lib/domain-logic/routeForPersona";
 import { ROUTES } from "@/lib/domain-logic/routes";
-import { useMountEffect, useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { onboardingCompleted } from "@businessnjgovnavigator/shared/domain-logic/onboarding";
 import { useRouter } from "next/router";
-import { ReactElement } from "react";
+import { ReactElement, useEffect } from "react";
 
 const LoadingPage = (): ReactElement => {
   const { userData } = useUserData();
   const router = useRouter();
 
-  useMountEffect(() => {
-    triggerSignIn();
-  });
+  useEffect(() => {
+    if (!router.isReady) return;
+    if (!router.query.code) {
+      triggerSignIn();
+    }
+  }, [router]);
 
   useMountEffectWhenDefined(() => {
     if (!userData) return;
