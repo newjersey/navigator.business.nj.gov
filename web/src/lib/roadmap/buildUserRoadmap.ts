@@ -1,8 +1,8 @@
 import { fetchMunicipalityById } from "@/lib/async-content-fetchers/fetchMunicipalityById";
+import { getNaicsTemplateValue } from "@/lib/domain-logic/getNaicsTemplateValue";
 import { buildRoadmap } from "@/lib/roadmap/roadmapBuilder";
 import { Roadmap } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import {
   FormationLegalType,
   FormationLegalTypes,
@@ -10,7 +10,6 @@ import {
   LookupLegalStructureById,
   ProfileData,
 } from "@businessnjgovnavigator/shared/";
-import { lookupNaicsCode } from "../domain-logic/lookupNaicsCode";
 
 const enableFormation = (legalStructureId: string): boolean => {
   switch (legalStructureId) {
@@ -176,18 +175,7 @@ const addMunicipalitySpecificData = async (roadmap: Roadmap, municipalityId: str
 };
 
 const addNaicsCodeData = (roadmap: Roadmap, naicsCode: string): Roadmap => {
-  let naicsTemplateValue = Config.determineNaicsCode.registerForTaxesMissingNAICSCodePlaceholder;
-  if (naicsCode) {
-    const naicsCodeObj = lookupNaicsCode(naicsCode);
-    const naicsCodeDisplayValue = naicsCodeObj
-      ? `${naicsCodeObj.SixDigitCode} - ${naicsCodeObj.SixDigitDescription}`
-      : `${naicsCode} - Unknown Code`;
-    console.log(naicsCodeDisplayValue);
-    naicsTemplateValue = templateEval(Config.determineNaicsCode.registerForTaxesNAICSCodePlaceholder, {
-      naicsCode: naicsCodeDisplayValue,
-    });
-  }
-
+  const naicsTemplateValue = getNaicsTemplateValue(naicsCode);
   return applyTemplateEvalForAllTasks(roadmap, { naicsCode: naicsTemplateValue });
 };
 
