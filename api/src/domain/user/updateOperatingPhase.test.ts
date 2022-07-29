@@ -37,6 +37,19 @@ describe("updateOperatingPhase", () => {
       });
       expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("NEEDS_TO_REGISTER_FOR_TAXES");
     });
+
+    it("updates status to FORMED_AND_REGISTERED when formation task is completed and legal structure requires public filing and tax task is complete", () => {
+      const taskId = formationTaskId;
+      const taxesTaskId = "register-for-taxes";
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          operatingPhase: "NEEDS_TO_FORM",
+          legalStructureId: "limited-liability-company",
+        }),
+        taskProgress: { [taskId]: "COMPLETED", [taxesTaskId]: "COMPLETED" },
+      });
+      expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("FORMED_AND_REGISTERED");
+    });
   });
 
   describe("NEEDS_TO_REGISTER_FOR_TAXES", () => {
