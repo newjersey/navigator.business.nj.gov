@@ -1,4 +1,5 @@
 import fs from "node:fs";
+import path from "node:path";
 import { Migrations } from "./migrations";
 
 describe("migrations", () => {
@@ -14,6 +15,27 @@ describe("migrations", () => {
 
     for (const fileVersion of allMigrationVersionsFromFiles) {
       expect(allMigrationsAsFinalVersion).toContain(fileVersion);
+    }
+  });
+
+  it("has the correct file version in each migration file", () => {
+    const fileNames = fs.readdirSync(__dirname);
+    const allMigrationVersionsFromFiles = fileNames
+      .filter((fileName) => !fileName.endsWith(".test.ts"))
+      .filter((fileName) => !!/v\d*/.test(fileName))
+      .map((filename) => filename.match(/v\d*/)?.[0])
+      .filter((version) => !(version === "v0")); // there is no migration to v0
+
+    const allMigrationFiles = fileNames
+      .filter((fileName) => !fileName.endsWith(".test.ts"))
+      .filter((fileName) => !!/v\d*/.test(fileName))
+      .filter((version) => !(version === "v0")); // there is no migration to v0
+
+    for (const fileVersion of allMigrationVersionsFromFiles) {
+      const version = fileVersion as string;
+      const fileName = allMigrationFiles.find((x) => x?.startsWith(`${version}_`)) ?? "";
+      const fileContents = fs.readFileSync(path.join(__dirname, fileName)).toString();
+      expect(fileContents).toContain(`version: ${version.slice(1)}`);
     }
   });
 });
