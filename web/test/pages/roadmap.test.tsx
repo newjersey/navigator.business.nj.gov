@@ -269,7 +269,7 @@ describe("roadmap page", () => {
     expect(within(sectionPlan).getByText("step1")).toBeVisible();
   });
 
-  it("renders registration card when routing is not from onboarding and authenication is false,", async () => {
+  it("renders registration card when routing is not from onboarding and authentication is false,", async () => {
     const setAlertIsVisible = jest.fn();
     useMockRouter({ query: { fromOnboarding: "false" } });
 
