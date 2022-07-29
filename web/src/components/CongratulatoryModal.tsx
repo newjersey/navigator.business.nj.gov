@@ -1,4 +1,5 @@
 import { Icon } from "@/components/njwds/Icon";
+import { ROUTES } from "@/lib/domain-logic/routes";
 import { SectionType } from "@/lib/types/types";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { Dialog, DialogContent, IconButton } from "@mui/material";
@@ -13,7 +14,7 @@ interface Props {
 
 export const CongratulatoryModal = (props: Props): ReactElement => {
   const router = useRouter();
-  const onClickComplete = () => router.push("/roadmap");
+  const onClickComplete = () => router.push(ROUTES.roadmap);
 
   const publicName = props.nextSectionType ? Config.sectionHeaders[props.nextSectionType] : "";
   const hideLink = !props.nextSectionType || props.nextSectionType === "OPERATE";

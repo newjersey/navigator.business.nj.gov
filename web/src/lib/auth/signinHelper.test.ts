@@ -1,5 +1,6 @@
 import * as api from "@/lib/api-client/apiClient";
 import { onGuestSignIn, onSignIn, onSignOut } from "@/lib/auth/signinHelper";
+import { ROUTES } from "@/lib/domain-logic/routes";
 import { generateUser, generateUserData } from "@/test/factories";
 import * as session from "./sessionHelper";
 
@@ -54,7 +55,7 @@ describe("SigninHelper", () => {
       const user = generateUser({});
       const userData = generateUserData({ user });
       const userStorageMock = userDataStorage.getCurrentUserData.mockImplementation(() => userData);
-      await onGuestSignIn(mockPush, "/", mockDispatch);
+      await onGuestSignIn(mockPush, ROUTES.landing, mockDispatch);
       expect(userStorageMock).toHaveBeenCalled();
       expect(mockDispatch).toHaveBeenCalledWith({
         type: "LOGIN_GUEST",
@@ -69,8 +70,8 @@ describe("SigninHelper", () => {
       mockSession.getCurrentUser.mockImplementation(() => {
         throw new Error("New");
       });
-      await onGuestSignIn(mockPush, "/", mockDispatch);
-      expect(mockPush).toHaveBeenCalledWith("/onboarding");
+      await onGuestSignIn(mockPush, ROUTES.landing, mockDispatch);
+      expect(mockPush).toHaveBeenCalledWith(ROUTES.onboarding);
     });
 
     it("redirect user to home if no user data is found", async () => {
@@ -78,8 +79,8 @@ describe("SigninHelper", () => {
       mockSession.getCurrentUser.mockImplementation(() => {
         throw new Error("New");
       });
-      await onGuestSignIn(mockPush, "/roadmap", mockDispatch);
-      expect(mockPush).toHaveBeenCalledWith("/");
+      await onGuestSignIn(mockPush, ROUTES.roadmap, mockDispatch);
+      expect(mockPush).toHaveBeenCalledWith(ROUTES.landing);
     });
 
     it("does not redirect user when at /onboarding", async () => {
@@ -87,8 +88,8 @@ describe("SigninHelper", () => {
       mockSession.getCurrentUser.mockImplementation(() => {
         throw new Error("New");
       });
-      await onGuestSignIn(mockPush, "/onboarding", mockDispatch);
-      expect(mockPush).not.toHaveBeenCalledWith("/");
+      await onGuestSignIn(mockPush, ROUTES.onboarding, mockDispatch);
+      expect(mockPush).not.toHaveBeenCalledWith(ROUTES.landing);
     });
   });
 
@@ -104,7 +105,7 @@ describe("SigninHelper", () => {
         type: "LOGOUT",
         user: undefined,
       });
-      expect(mockPush).toHaveBeenCalledWith("/");
+      expect(mockPush).toHaveBeenCalledWith(ROUTES.landing);
     });
   });
 });

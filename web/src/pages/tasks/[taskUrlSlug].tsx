@@ -24,8 +24,7 @@ import { loadAllTaskUrlSlugs, loadTaskByUrlSlug, TaskUrlSlugParam } from "@/lib/
 import { Task, TasksDisplayContent } from "@/lib/types/types";
 import { getModifiedTaskContent, getTaskFromRoadmap, getUrlSlugs, rswitch } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { Municipality } from "@businessnjgovnavigator/shared/";
-import { formationTaskId } from "@businessnjgovnavigator/shared/gradualGraduationStages";
+import { formationTaskId, Municipality } from "@businessnjgovnavigator/shared/";
 import { useMediaQuery } from "@mui/material";
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";

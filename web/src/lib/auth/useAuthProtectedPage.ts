@@ -2,6 +2,7 @@ import { AuthAlertContext } from "@/contexts/authAlertContext";
 import { AuthContext } from "@/contexts/authContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useRoadmapSidebarCards } from "@/lib/data-hooks/useRoadmapSidebarCards";
+import { ROUTES } from "@/lib/domain-logic/routes";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { useRouter } from "next/router";
 import { useContext, useEffect } from "react";
@@ -16,7 +17,7 @@ export const useAuthProtectedPage = (): void => {
         const shouldSignUp = router.asPath.includes(signInSamlError);
         const query = shouldSignUp ? { signUp: shouldSignUp.toString() } : {};
         await router.replace({
-          pathname: "/",
+          pathname: ROUTES.landing,
           query,
         });
       }
@@ -54,7 +55,7 @@ export const useUnauthedOnlyPage = (): void => {
   useEffect(() => {
     (async () => {
       if (state.isAuthenticated === IsAuthenticated.TRUE) {
-        await router.replace("/");
+        await router.replace(ROUTES.landing);
       }
     })();
   }, [router, state.isAuthenticated]);

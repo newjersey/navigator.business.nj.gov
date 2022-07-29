@@ -1,4 +1,4 @@
-import { formationTaskId } from "@shared/gradualGraduationStages";
+import { formationTaskId } from "@shared/domain-logic/gradualGraduationStages";
 import { generatePreferences, generateProfileData, generateUserData } from "../../test/factories";
 import { updateRoadmapSidebarCards } from "./updateRoadmapSidebarCards";
 

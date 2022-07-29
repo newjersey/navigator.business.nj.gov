@@ -1,6 +1,7 @@
 import { AuthAlertContextType } from "@/contexts/authAlertContext";
 import * as api from "@/lib/api-client/apiClient";
 import { UseUserDataResponse } from "@/lib/data-hooks/useUserData";
+import { ROUTES } from "@/lib/domain-logic/routes";
 import { ABStorageFactory } from "@/lib/storage/ABStorage";
 import { UserDataStorageFactory } from "@/lib/storage/UserDataStorage";
 import analytics from "@/lib/utils/analytics";
@@ -76,16 +77,16 @@ export const onGuestSignIn = async (
     setAnalyticsDimensions(userData.profileData);
     if (userData.formProgress == "UNSTARTED") {
       setRegistrationDimension("Began Onboarding");
-      push("/onboarding");
+      push(ROUTES.onboarding);
     } else {
       setRegistrationDimension("Onboarded Guest");
     }
   } else {
-    if (pathname == "/onboarding") {
+    if (pathname == ROUTES.onboarding) {
       setRegistrationDimension("Began Onboarding");
     } else {
       setRegistrationDimension("Not Started");
-      push("/");
+      push(ROUTES.landing);
     }
   }
 };
@@ -105,5 +106,5 @@ export const onSignOut = async (
     type: "LOGOUT",
     user: undefined,
   });
-  push("/");
+  push(ROUTES.landing);
 };

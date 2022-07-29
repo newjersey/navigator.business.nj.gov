@@ -1,5 +1,6 @@
 import { Header } from "@/components/Header";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
+import { ROUTES } from "@/lib/domain-logic/routes";
 import { templateEval } from "@/lib/utils/helpers";
 import { generateProfileData, generateUser } from "@/test/factories";
 import { withAuth } from "@/test/helpers";
@@ -49,41 +50,41 @@ describe("<Header />", () => {
     expect(screen.getByText(date)).toBeInTheDocument();
   });
 
-  it("displays guest mode content when user is not authenicated and routes to profile page on button click", () => {
+  it("displays guest mode content when user is not authenticated and routes to profile page on button click", () => {
     useMockProfileData({ businessName: "Business Name" });
     renderHeaderWithAuth({ isAuthenticated: IsAuthenticated.FALSE });
 
     fireEvent.click(screen.getByText(Config.headerDefaults.guestModeToProfileButtonText));
 
-    expect(mockPush).toHaveBeenCalledWith("/profile");
+    expect(mockPush).toHaveBeenCalledWith(ROUTES.profile);
   });
 
-  it("displays generic content when business name is not an empty string and user is authenicated then routes to profile page on button click", () => {
+  it("displays generic content when business name is not an empty string and user is authenticated then routes to profile page on button click", () => {
     useMockProfileData({ businessName: "" });
     renderHeaderWithAuth({ isAuthenticated: IsAuthenticated.TRUE });
 
     fireEvent.click(screen.getByText(Config.headerDefaults.genericToProfileButtonText));
 
-    expect(mockPush).toHaveBeenCalledWith("/profile");
+    expect(mockPush).toHaveBeenCalledWith(ROUTES.profile);
   });
 
-  it("displays generic content when business name is undefined and user is authenicated then routes to profile page on button click", () => {
+  it("displays generic content when business name is undefined and user is authenticated then routes to profile page on button click", () => {
     useMockProfileData({ businessName: undefined });
     renderHeaderWithAuth({ isAuthenticated: IsAuthenticated.TRUE });
 
     fireEvent.click(screen.getByText(Config.headerDefaults.genericToProfileButtonText));
 
-    expect(mockPush).toHaveBeenCalledWith("/profile");
+    expect(mockPush).toHaveBeenCalledWith(ROUTES.profile);
   });
 
-  it("displays business name when user is authenicated and routes to profile page on button click", () => {
+  it("displays business name when user is authenticated and routes to profile page on button click", () => {
     const businessName = `Test Company ${randomInt(6)}`;
     useMockProfileData({ businessName: businessName });
     renderHeaderWithAuth({ isAuthenticated: IsAuthenticated.TRUE });
 
     fireEvent.click(screen.getByText(businessName));
 
-    expect(mockPush).toHaveBeenCalledWith("/profile");
+    expect(mockPush).toHaveBeenCalledWith(ROUTES.profile);
   });
 
   it("shows template with user name as header", () => {

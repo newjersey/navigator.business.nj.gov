@@ -1,5 +1,6 @@
 import { AuthButton } from "@/components/AuthButton";
 import { Button } from "@/components/njwds-extended/Button";
+import { ROUTES } from "@/lib/domain-logic/routes";
 import { MediaQueries } from "@/lib/PageSizes";
 import { ABStorageFactory } from "@/lib/storage/ABStorage";
 import analytics from "@/lib/utils/analytics";
@@ -22,17 +23,17 @@ export const Hero = (): ReactElement => {
   }
 
   const primaryCTAOnClick = () => {
-    router.push("/onboarding");
+    router.push(ROUTES.onboarding);
     analytics.event.landing_page_hero_get_started.click.go_to_onboarding();
   };
 
   const section2CTAOnClick = () => {
-    router.push("/onboarding");
+    router.push(ROUTES.onboarding);
     analytics.event.landing_page_second_get_started.click.go_to_onboarding();
   };
 
   const section3CTAOnClick = () => {
-    router.push("/onboarding");
+    router.push(ROUTES.onboarding);
     analytics.event.landing_page_find_funding.click.go_to_onboarding();
   };
 

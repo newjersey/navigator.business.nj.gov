@@ -5,6 +5,7 @@ import { PageSkeleton } from "@/components/PageSkeleton";
 import { SupportExploreSignUpChatCards } from "@/components/SupportExploreSignUpChatCards";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { routeForPersona } from "@/lib/domain-logic/routeForPersona";
+import { ROUTES } from "@/lib/domain-logic/routes";
 import { MediaQueries } from "@/lib/PageSizes";
 import { ABStorageFactory } from "@/lib/storage/ABStorage";
 import { setABExperienceDimension } from "@/lib/utils/analytics-helpers";
@@ -47,16 +48,16 @@ const Home = (): ReactElement => {
       const route = routeForPersona(userData?.profileData.businessPersona);
       router.replace(route);
     } else if (userData?.formProgress === "UNSTARTED") {
-      router.replace("/onboarding");
+      router.replace(ROUTES.onboarding);
     } else if (userData === undefined && error != undefined) {
-      router.replace("/roadmap?error=true");
+      router.replace(`${ROUTES.roadmap}?error=true`);
     }
   }, [userData, error, router]);
 
   useEffect(() => {
     if (!router.isReady || !router.query.signUp) return;
     if (router.query.signUp === "true") {
-      router.replace("/onboarding");
+      router.replace(ROUTES.onboarding);
     }
   }, [router.isReady, router, router.query]);
 
