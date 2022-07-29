@@ -24,7 +24,7 @@ import {
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { formationTaskId, ProfileData, randomInt } from "@businessnjgovnavigator/shared";
+import { formationTaskId, ProfileData } from "@businessnjgovnavigator/shared";
 import {
   createEmptyUserData,
   getCurrentDate,
@@ -514,12 +514,13 @@ describe("profile", () => {
       });
     });
 
-    describe("register-for-taxes task", () => {
+    describe("tax related profile fields", () => {
       it("does not render the existing employees field and ownership field when register for taxes task is not complete", () => {
-        const taskProgress = randomInt() % 2 === 0 ? "NOT_STARTED" : "IN_PROGRESS";
         const initialUserData = generateUserData({
-          profileData: generateProfileData({ businessPersona: "STARTING" }),
-          taskProgress: { "register-for-taxes": taskProgress },
+          profileData: generateProfileData({
+            businessPersona: "STARTING",
+            operatingPhase: "NEEDS_TO_REGISTER_FOR_TAXES",
+          }),
         });
         renderPage({ userData: initialUserData });
 
@@ -529,8 +530,10 @@ describe("profile", () => {
 
       it("renders the existing employees field and ownership field when register for taxes task is complete", () => {
         const initialUserData = generateUserData({
-          profileData: generateProfileData({ businessPersona: "STARTING" }),
-          taskProgress: { "register-for-taxes": "COMPLETED" },
+          profileData: generateProfileData({
+            businessPersona: "STARTING",
+            operatingPhase: "FORMED_AND_REGISTERED",
+          }),
         });
         renderPage({ userData: initialUserData });
 
@@ -540,8 +543,10 @@ describe("profile", () => {
 
       it("prevents user from saving if existing employees field is empty", async () => {
         const initialUserData = generateUserData({
-          profileData: generateProfileData({ businessPersona: "STARTING" }),
-          taskProgress: { "register-for-taxes": "COMPLETED" },
+          profileData: generateProfileData({
+            businessPersona: "STARTING",
+            operatingPhase: "FORMED_AND_REGISTERED",
+          }),
         });
         renderPage({ userData: initialUserData });
 
