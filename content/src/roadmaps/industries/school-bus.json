@@ -35,7 +35,7 @@
     {
       "step": 3,
       "weight": 20,
-      "task": "trucking-insurance"
+      "task": "school-bus-insurance"
     },
     {
       "step": 3,
@@ -56,5 +56,5 @@
   "isEnabled": false,
   "additionalSearchTerms": "bus, school bus, ",
   "id": "school-bus",
-  "description": "Select this if you don’t see your specific industry"
+  "description": "Transports children to and from school, day camps, or other activities"
 }
