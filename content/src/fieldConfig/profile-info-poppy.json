@@ -11,7 +11,7 @@
       "municipality": {
         "placeholder": "Type in the name of your town (i.e Newark, Jersey City, etc)",
         "header": "## Location",
-        "description": "Where in New Jersey will your first location be? ",
+        "description": "Where in New Jersey will your first location be? If you are in an unincorporated town, look up the official town’s name.",
         "errorTextRequired": "Please select a location."
       },
       "legalStructureId": {
