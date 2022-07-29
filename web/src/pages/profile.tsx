@@ -56,11 +56,11 @@ import { BusinessPersona, ForeignBusinessType, formationTaskId } from "@business
 import {
   createEmptyProfileData,
   LookupLegalStructureById,
+  LookupOperatingPhaseById,
   Municipality,
   ProfileData,
   UserData,
 } from "@businessnjgovnavigator/shared/";
-import { LookupOperatingPhaseById } from "@businessnjgovnavigator/shared/operatingPhase";
 import deepEqual from "fast-deep-equal/es6/react";
 import { GetStaticPropsResult } from "next";
 import { useRouter } from "next/router";
