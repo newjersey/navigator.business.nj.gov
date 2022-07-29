@@ -1,13 +1,19 @@
 {
-    "roadmapSteps": [],
-    "modifications": [
-      {
-        "taskToReplaceFilename": "register-for-taxes",
-        "replaceWithFilename": "register-for-taxes-foreign"
-      },
-      {
-        "taskToReplaceFilename": "get-insurance",
-        "replaceWithFilename": "research-insurance-needs-foreign"
-      }
-    ]
+  "roadmapSteps": [
+    {
+      "step": 1,
+      "weight": 1,
+      "task": "determine-naics-code"
+    }
+  ],
+  "modifications": [
+    {
+      "taskToReplaceFilename": "register-for-taxes",
+      "replaceWithFilename": "register-for-taxes-foreign"
+    },
+    {
+      "taskToReplaceFilename": "get-insurance",
+      "replaceWithFilename": "research-insurance-needs-foreign"
+    }
+  ]
 }
