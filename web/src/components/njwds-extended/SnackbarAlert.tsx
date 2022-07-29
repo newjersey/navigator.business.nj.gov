@@ -15,7 +15,7 @@ interface Props {
   dataTestid?: string;
 }
 
-export const ToastAlert = (props: Props): ReactElement => (
+export const SnackbarAlert = (props: Props): ReactElement => (
   <Snackbar
     anchorOrigin={{ vertical: "top", horizontal: "center" }}
     open={props.isOpen}

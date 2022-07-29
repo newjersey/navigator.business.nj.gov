@@ -1,4 +1,4 @@
-import { ToastAlert } from "@/components/njwds-extended/ToastAlert";
+import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { OnboardingStatus } from "@/lib/types/types";
 import { OnboardingStatusLookup } from "@/lib/utils/helpers";
@@ -9,18 +9,18 @@ interface Props {
   close: () => void;
 }
 
-export const ProfileToastAlert = (props: Props): ReactElement => {
+export const ProfileSnackbarAlert = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const content = OnboardingStatusLookup(Config)[props.alert];
   return (
-    <ToastAlert
+    <SnackbarAlert
       variant={content.variant}
       isOpen={true}
       close={props.close}
-      dataTestid={`toast-alert-${props.alert}`}
+      dataTestid={`snackbar-alert-${props.alert}`}
       heading={content.header}
     >
       {content.body}
-    </ToastAlert>
+    </SnackbarAlert>
   );
 };

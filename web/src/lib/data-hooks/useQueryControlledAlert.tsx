@@ -1,6 +1,6 @@
 import { Content } from "@/components/Content";
 import { AlertVariant } from "@/components/njwds-extended/Alert";
-import { ToastAlert } from "@/components/njwds-extended/ToastAlert";
+import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
 import { useRouter } from "next/router";
 import { ReactElement, useCallback, useEffect, useRef, useState } from "react";
 
@@ -32,7 +32,7 @@ export const useQueryControlledAlert = (config: QueryControlledAlertConfig): Rea
   }, [router, setAlertIsVisible, config.queryKey, redirect]);
 
   return (
-    <ToastAlert
+    <SnackbarAlert
       variant={config.variant}
       isOpen={alertIsVisible}
       close={() => {
@@ -43,6 +43,6 @@ export const useQueryControlledAlert = (config: QueryControlledAlertConfig): Rea
       dataTestid={config.dataTestId}
     >
       <Content>{config.bodyText}</Content>
-    </ToastAlert>
+    </SnackbarAlert>
   );
 };

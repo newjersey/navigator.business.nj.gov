@@ -140,7 +140,7 @@ describe("<CannabisPriorityStatusTask />", () => {
     await waitFor(() => {
       expect(within(screen.getByTestId("taskProgress")).getByTestId("IN_PROGRESS")).toBeInTheDocument();
     });
-    expect(screen.getByText(Config.taskDefaults.taskProgressSuccessToastBody)).toBeInTheDocument();
+    expect(screen.getByText(Config.taskDefaults.taskProgressSuccessSnackbarBody)).toBeInTheDocument();
   });
 
   it("navigates to and from second tab", async () => {
@@ -190,7 +190,7 @@ describe("<CannabisPriorityStatusTask />", () => {
     await waitFor(() => {
       expect(within(screen.getByTestId("taskProgress")).getByTestId("COMPLETED")).toBeInTheDocument();
     });
-    expect(screen.getByText(Config.taskDefaults.taskProgressSuccessToastBody)).toBeInTheDocument();
+    expect(screen.getByText(Config.taskDefaults.taskProgressSuccessSnackbarBody)).toBeInTheDocument();
   });
 
   it("displays complete button when impact zone priority type is the only type selected", async () => {

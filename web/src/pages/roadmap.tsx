@@ -49,7 +49,7 @@ const RoadmapPage = (props: Props): ReactElement => {
     headerText: Config.roadmapDefaults.calendarSnackbarHeading,
     bodyText: Config.roadmapDefaults.calendarSnackbarBody,
     variant: "success",
-    dataTestId: "toast-alert-calendar",
+    dataTestId: "snackbar-alert-calendar",
   });
 
   useMountEffectWhenDefined(() => {

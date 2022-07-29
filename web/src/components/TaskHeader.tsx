@@ -3,8 +3,8 @@ import { CongratulatoryModal } from "@/components/CongratulatoryModal";
 import { Content } from "@/components/Content";
 import { FormationDateModal } from "@/components/FormationDateModal";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
+import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
 import { Tag } from "@/components/njwds-extended/Tag";
-import { ToastAlert } from "@/components/njwds-extended/ToastAlert";
 import { Icon } from "@/components/njwds/Icon";
 import { TaskProgressDropdown } from "@/components/TaskProgressDropdown";
 import { TaskProgressTagLookup } from "@/components/TaskProgressTagLookup";
@@ -39,7 +39,7 @@ export const TaskHeader = (props: Props): ReactElement => {
   const [areYouSureModalDesiredNewStatus, setAreYouSureModalDesiredNewStatus] = useState<
     TaskProgress | undefined
   >(undefined);
-  const [successToastIsOpen, setSuccessToastIsOpen] = useState<boolean>(false);
+  const [successSnackbarIsOpen, setSuccessSnackbarIsOpen] = useState<boolean>(false);
   const router = useRouter();
 
   const { Config } = useConfig();
@@ -109,7 +109,7 @@ export const TaskHeader = (props: Props): ReactElement => {
       preferences,
     })
       .then(() => {
-        setSuccessToastIsOpen(true);
+        setSuccessSnackbarIsOpen(true);
         if (redirectOnSuccess) {
           router.push({
             pathname: routeForPersona(userData.profileData.businessPersona),
@@ -193,9 +193,13 @@ export const TaskHeader = (props: Props): ReactElement => {
       >
         <Content>{Config.formationDateModal.areYouSureModalBody}</Content>
       </ModalTwoButton>
-      <ToastAlert variant="success" isOpen={successToastIsOpen} close={() => setSuccessToastIsOpen(false)}>
-        {Config.taskDefaults.taskProgressSuccessToastBody}
-      </ToastAlert>
+      <SnackbarAlert
+        variant="success"
+        isOpen={successSnackbarIsOpen}
+        close={() => setSuccessSnackbarIsOpen(false)}
+      >
+        {Config.taskDefaults.taskProgressSuccessSnackbarBody}
+      </SnackbarAlert>
     </>
   );
 };

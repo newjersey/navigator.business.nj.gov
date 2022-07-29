@@ -216,7 +216,7 @@ describe("dashboard", () => {
     expect(screen.getByText("a li")).toBeInTheDocument();
   });
 
-  it("shows toast alert when success query is true", () => {
+  it("shows snackbar alert when success query is true", () => {
     useMockRouter({ isReady: true, query: { success: "true" } });
     renderPage({});
     expect(screen.getByText(Config.profileDefaults.successTextHeader)).toBeInTheDocument();

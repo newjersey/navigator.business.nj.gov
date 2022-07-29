@@ -268,7 +268,7 @@ describe("onboarding - foreign business", () => {
       const { page } = renderPage({ userData });
       page.selectByText("Industry", "All Other Businesses");
       await page.visitStep(4);
-      expect(screen.queryByTestId("toast-alert-ERROR")).not.toBeInTheDocument();
+      expect(screen.queryByTestId("snackbar-alert-ERROR")).not.toBeInTheDocument();
     });
 
     it("prevents user from moving past Step 3 if you have not selected an industry", async () => {
@@ -277,7 +277,7 @@ describe("onboarding - foreign business", () => {
       act(() => page.clickNext());
       expect(screen.getByTestId("step-3")).toBeInTheDocument();
       expect(screen.queryByTestId("step-4")).not.toBeInTheDocument();
-      expect(screen.getByTestId("toast-alert-ERROR")).toBeInTheDocument();
+      expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
     });
   });
 
@@ -378,7 +378,7 @@ describe("onboarding - foreign business", () => {
       expect(
         screen.getByText(Config.profileDefaults.FOREIGN.municipality.errorTextRequired)
       ).toBeInTheDocument();
-      expect(screen.getByTestId("toast-alert-ERROR")).toBeInTheDocument();
+      expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
 
       page.selectByText("Location", "Newark");
       await page.visitStep(6);
@@ -409,7 +409,7 @@ describe("onboarding - foreign business", () => {
       expect(
         screen.getByText(Config.profileDefaults.FOREIGN.municipality.errorTextRequired)
       ).toBeInTheDocument();
-      expect(screen.getByTestId("toast-alert-ERROR")).toBeInTheDocument();
+      expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
     });
   });
 

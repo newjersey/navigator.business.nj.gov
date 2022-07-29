@@ -1,4 +1,4 @@
-import { ToastAlert } from "@/components/njwds-extended/ToastAlert";
+import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
 import { TaskHeader } from "@/components/TaskHeader";
 import { CannabisPriorityRequirements } from "@/components/tasks/cannabis/CannabisPriorityRequirements";
 import { CannabisPriorityTypes } from "@/components/tasks/cannabis/CannabisPriorityTypes";
@@ -16,7 +16,7 @@ interface Props {
 
 export const CannabisPriorityStatusTask = (props: Props) => {
   const { userData, update } = useUserData();
-  const [successToastIsOpen, setSuccessToastIsOpen] = useState(false);
+  const [successSnackbarIsOpen, setSuccessSnackbarIsOpen] = useState(false);
   const [displayFirstTab, setDisplayFirstTab] = useState(true);
   const { Config } = useConfig();
 
@@ -37,7 +37,7 @@ export const CannabisPriorityStatusTask = (props: Props) => {
       userData.taskProgress[props.task.id] === undefined ||
       userData.taskProgress[props.task.id] === "NOT_STARTED"
     ) {
-      setSuccessToastIsOpen(true);
+      setSuccessSnackbarIsOpen(true);
       update({
         ...userData,
         taskProgress: {
@@ -56,7 +56,7 @@ export const CannabisPriorityStatusTask = (props: Props) => {
   const handleCompleteTaskButtonClick = () => {
     if (!userData) return;
 
-    setSuccessToastIsOpen(true);
+    setSuccessSnackbarIsOpen(true);
     update({
       ...userData,
       taskProgress: {
@@ -68,9 +68,13 @@ export const CannabisPriorityStatusTask = (props: Props) => {
 
   return (
     <div className="flex flex-column minh-38">
-      <ToastAlert variant="success" isOpen={successToastIsOpen} close={() => setSuccessToastIsOpen(false)}>
-        {Config.taskDefaults.taskProgressSuccessToastBody}
-      </ToastAlert>
+      <SnackbarAlert
+        variant="success"
+        isOpen={successSnackbarIsOpen}
+        close={() => setSuccessSnackbarIsOpen(false)}
+      >
+        {Config.taskDefaults.taskProgressSuccessSnackbarBody}
+      </SnackbarAlert>
       <TaskHeader task={props.task} />
       <UnlockedBy task={props.task} />
       {displayFirstTab ? (

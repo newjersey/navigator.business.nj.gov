@@ -14,7 +14,7 @@ import { setupStatefulUserDataContext, WithStatefulUserData } from "@/test/mock/
 import { RegistrationStatus } from "@businessnjgovnavigator/shared/businessUser";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
-import { SignUpToast } from "../auth/SignUpToast";
+import { SignUpSnackbar } from "../auth/SignUpSnackbar";
 import { RoadmapSidebarList } from "./RoadmapSidebarList";
 
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
@@ -63,7 +63,7 @@ describe("<RoadmapSidebarCard />", () => {
     render(
       withAuthAlert(
         <WithStatefulUserData initialUserData={userData}>
-          <SignUpToast />
+          <SignUpSnackbar />
           <RoadmapSidebarList sidebarDisplayContent={sidebarDisplayContent} />
         </WithStatefulUserData>,
         isAuthenticated ?? IsAuthenticated.TRUE,
@@ -150,7 +150,7 @@ describe("<RoadmapSidebarCard />", () => {
     expect(screen.getByText("WelcomeCardContent")).toBeInTheDocument();
   });
 
-  it("renders registration card when SignUpToast is closed", async () => {
+  it("renders registration card when SignUpSnackbar is closed", async () => {
     useMockRouter({ query: { fromOnboarding: "true" } });
 
     const sidebarDisplayContent = {
@@ -169,7 +169,7 @@ describe("<RoadmapSidebarCard />", () => {
     });
 
     expect(screen.queryByText("NotRegisteredContent")).not.toBeInTheDocument();
-    fireEvent.click(within(screen.queryByTestId("self-reg-toast") as HTMLElement).getByLabelText("close"));
+    fireEvent.click(within(screen.queryByTestId("self-reg-snackbar") as HTMLElement).getByLabelText("close"));
     await waitFor(() => {
       expect(screen.getByText("NotRegisteredContent")).toBeInTheDocument();
     });

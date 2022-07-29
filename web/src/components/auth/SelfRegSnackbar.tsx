@@ -1,6 +1,6 @@
 import { Content } from "@/components/Content";
 import { AlertVariant } from "@/components/njwds-extended/Alert";
-import { ToastAlert } from "@/components/njwds-extended/ToastAlert";
+import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
 import { Icon } from "@/components/njwds/Icon";
 import { AuthAlertContext } from "@/contexts/authAlertContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
@@ -10,7 +10,7 @@ import { RegistrationStatus } from "@businessnjgovnavigator/shared/";
 import { IconButton } from "@mui/material";
 import { ReactElement, useContext, useEffect } from "react";
 
-export const SelfRegToast = (): ReactElement => {
+export const SelfRegSnackbar = (): ReactElement => {
   const { isAuthenticated, registrationAlertStatus, setRegistrationAlertStatus } =
     useContext(AuthAlertContext);
 
@@ -37,14 +37,14 @@ export const SelfRegToast = (): ReactElement => {
   if (!registrationAlertStatus || registrationAlertStatus === "IN_PROGRESS") return <></>;
 
   return (
-    <ToastAlert
+    <SnackbarAlert
       isOpen={!!registrationAlertStatus}
       close={() => setRegistrationAlertStatus(undefined)}
       variant={alertMap[registrationAlertStatus]}
       noIcon={true}
       autoHideDuration={null}
       snackBarProps={{ sx: { paddingX: 0 } }}
-      dataTestid="reg-toast"
+      dataTestid="reg-snackbar"
     >
       <div className="fin fac padding-y-2 padding-right-3">
         {alertMap[registrationAlertStatus] == "success" ? (
@@ -78,6 +78,6 @@ export const SelfRegToast = (): ReactElement => {
           <Content>{contentMap[registrationAlertStatus]}</Content>
         </div>
       </div>
-    </ToastAlert>
+    </SnackbarAlert>
   );
 };

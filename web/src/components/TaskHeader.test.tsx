@@ -82,13 +82,13 @@ describe("<TaskHeader />", () => {
     );
   });
 
-  it("shows a success toast when an option is selected", async () => {
+  it("shows a success snackbar when an option is selected", async () => {
     renderTaskHeader(generateTask({}), generateUserData({}));
     fireEvent.click(screen.getAllByText("Not started")[0]);
 
-    expect(screen.queryByText(Config.taskDefaults.taskProgressSuccessToastBody)).not.toBeInTheDocument();
+    expect(screen.queryByText(Config.taskDefaults.taskProgressSuccessSnackbarBody)).not.toBeInTheDocument();
     fireEvent.click(screen.getByText("In progress"));
-    await screen.findByText(Config.taskDefaults.taskProgressSuccessToastBody);
+    await screen.findByText(Config.taskDefaults.taskProgressSuccessSnackbarBody);
   });
 
   it("displays required tag in header if task is required", () => {

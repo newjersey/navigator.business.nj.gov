@@ -1,6 +1,6 @@
 import { NavBar } from "@/components/navbar/NavBar";
 import { Alert } from "@/components/njwds-extended/Alert";
-import { ToastAlert } from "@/components/njwds-extended/ToastAlert";
+import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { getOnboardingFlows } from "@/components/onboarding/getOnboardingFlows";
 import { OnboardingButtonGroup } from "@/components/onboarding/OnboardingButtonGroup";
@@ -415,24 +415,24 @@ const OnboardingPage = (props: Props): ReactElement => {
               </Alert>
             )}
             {alert && (
-              <ToastAlert
+              <SnackbarAlert
                 variant={OnboardingStatusLookup()[alert].variant}
                 isOpen={alert !== undefined}
                 close={() => setAlert(undefined)}
-                dataTestid={`toast-alert-${alert}`}
+                dataTestid={`snackbar-alert-${alert}`}
                 heading={OnboardingStatusLookup()[alert].header}
               >
                 <>
                   {OnboardingStatusLookup()[alert].body}
                   {OnboardingStatusLookup()[alert] && (
                     <Link href={redirectUrl}>
-                      <a href={redirectUrl} data-testid={`toast-link`}>
+                      <a href={redirectUrl} data-testid={`snackbar-link`}>
                         {OnboardingStatusLookup()[alert].link}
                       </a>
                     </Link>
                   )}
                 </>
-              </ToastAlert>
+              </SnackbarAlert>
             )}
 
             <UserDataErrorAlert />
