@@ -9,33 +9,31 @@ required: true
 issuingAgency: New Jersey Division of Revenue and Enterprise Services
 formName: NJ-Reg
 ---
-
 Out-of-state businesses doing business in New Jersey must register for State taxes.
 
 You are seeing this task because your business either has a `nexus|nexus-business` in New Jersey, `remote workers|remote-worker` in New Jersey, or is a `remote seller|remote-seller` in New Jersey.
 
----
+- - -
 
 ### Application Requirements
 
-- [NAICS code](/tasks/determine-naics-code) ${naicsCode}
-- `EIN|ein` 
-- Estimated start date in New Jersey 
-- Description of your business activity
-- Estimated number of employees (if applicable)
-- Anticipated first payroll withholding date for employees (if applicable)
-- Information on if and when you expect to report and collect sales tax
-- Owner information
-- Mailing Address
-- Business Addresses
-- Other taxes you may collect (i.e. motor fuels and cigarette/tobacco taxes), a list will be provided
+* [NAICS code](/tasks/determine-naics-code) ${naicsCode}
+*  `EIN|ein` 
+* Estimated start date in New Jersey 
+* Description of your business activity
+* Estimated number of employees (if applicable)
+* Anticipated first payroll withholding date for employees (if applicable)
+* Information on if and when you expect to report and collect sales tax
+* Owner information
+* Mailing Address
+* Business Addresses
+* Other taxes you may collect (i.e. motor fuels and cigarette/tobacco taxes), a list will be provided
 
 > **Once completed, you will have:**
 >
-> An email confirmation within 48 to 72 hours that includes your 
-> - `Business Registration Certificate (BRC)|business-reg-certificate`
-> - `NJ Tax ID|tax-id`
-> 
-> A mailed Welcome note that includes your: 
-> - `Business Tax PIN|tax-pin`
-> - Authorization to Collect Sales Tax Certificate (if applicable)
+> *  `Business Registration Certificate (BRC)|business-reg-certificate` 
+> *  `NJ Tax ID|tax-id` 
+> *  `Business Tax PIN|tax-pin` 
+> * Authorization to Collect Sales Tax Certificate (if applicable)
+>
+> *It may take up to 72 hours before you receive this information in your email, your PIN may take longer as it will be sent through the mail.*
