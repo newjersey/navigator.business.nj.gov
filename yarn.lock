@@ -3573,7 +3573,7 @@ __metadata:
     serverless-http: 3.0.1
     serverless-offline: 8.8.1
     serverless-offline-ssm: 6.2.0
-    serverless-webpack: 5.7.1
+    serverless-webpack: 5.8.0
     simple-oauth2: 4.3.0
     supertest: 6.2.4
     ts-jest: 28.0.7
@@ -3583,7 +3583,7 @@ __metadata:
     tsconfig-paths-webpack-plugin: 3.5.2
     typescript: 4.7.4
     uuid: 8.3.2
-    webpack: 5.73.0
+    webpack: 5.74.0
     webpack-node-externals: 3.0.0
     winston: 3.8.1
     winston-cloudwatch: 6.0.1
@@ -3771,7 +3771,7 @@ __metadata:
     serverless-http: 3.0.1
     serverless-offline: 8.8.1
     serverless-offline-ssm: 6.2.0
-    serverless-webpack: 5.7.1
+    serverless-webpack: 5.8.0
     simple-oauth2: 4.3.0
     storybook-addon-designs: 6.3.1
     storybook-addon-pseudo-states: 1.15.1
@@ -3787,7 +3787,7 @@ __metadata:
     ua-parser-js: 1.0.2
     unified: 10.1.2
     uuid: 8.3.2
-    webpack: 5.73.0
+    webpack: 5.74.0
     webpack-node-externals: 3.0.0
     winston: 3.8.1
     winston-cloudwatch: 6.0.1
@@ -3955,7 +3955,7 @@ __metadata:
     typescript: 4.7.4
     ua-parser-js: 1.0.2
     unified: 10.1.2
-    webpack: 5.73.0
+    webpack: 5.74.0
   languageName: unknown
   linkType: soft
 
@@ -11088,7 +11088,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"aws-sdk@npm:^2.1136.0":
+"aws-sdk@npm:^2.1136.0, aws-sdk@npm:^2.1174.0, aws-sdk@npm:^2.7.0":
   version: 2.1185.0
   resolution: "aws-sdk@npm:2.1185.0"
   dependencies:
@@ -11103,24 +11103,6 @@ __metadata:
     uuid: 8.0.0
     xml2js: 0.4.19
   checksum: 80b039af2debd9d436cc020e7bb4d7ed57a515a51ffbcf2b59b01922f4d9d890e1c37d0b531985037cb0523388fcc90d2f469b38f0d34f2424bec13dc27a58dc
-  languageName: node
-  linkType: hard
-
-"aws-sdk@npm:^2.1174.0, aws-sdk@npm:^2.7.0":
-  version: 2.1181.0
-  resolution: "aws-sdk@npm:2.1181.0"
-  dependencies:
-    buffer: 4.9.2
-    events: 1.1.1
-    ieee754: 1.1.13
-    jmespath: 0.16.0
-    querystring: 0.2.0
-    sax: 1.2.1
-    url: 0.10.3
-    util: ^0.12.4
-    uuid: 8.0.0
-    xml2js: 0.4.19
-  checksum: 70970e8569abccd88c51b731335ddcbe4547bd8e1f7ceab7a7aab0c8be23f88b91e932217f5c9eab179c886bb0359ab5e8a728068eea6a399d9924d2c4185ecb
   languageName: node
   linkType: hard
 
@@ -15320,7 +15302,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"enhanced-resolve@npm:5.10.0, enhanced-resolve@npm:^5.0.0, enhanced-resolve@npm:^5.7.0, enhanced-resolve@npm:^5.9.3":
+"enhanced-resolve@npm:5.10.0, enhanced-resolve@npm:^5.0.0, enhanced-resolve@npm:^5.10.0, enhanced-resolve@npm:^5.7.0":
   version: 5.10.0
   resolution: "enhanced-resolve@npm:5.10.0"
   dependencies:
@@ -17749,7 +17731,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"glob@npm:^7.0.0, glob@npm:^7.0.3, glob@npm:^7.0.5, glob@npm:^7.1.3, glob@npm:^7.1.4, glob@npm:^7.1.6, glob@npm:^7.2.0":
+"glob@npm:^7.0.0, glob@npm:^7.0.3, glob@npm:^7.0.5, glob@npm:^7.1.3, glob@npm:^7.1.4, glob@npm:^7.1.6, glob@npm:^7.2.0, glob@npm:^7.2.3":
   version: 7.2.3
   resolution: "glob@npm:7.2.3"
   dependencies:
@@ -29870,14 +29852,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"serverless-webpack@npm:5.7.1":
-  version: 5.7.1
-  resolution: "serverless-webpack@npm:5.7.1"
+"serverless-webpack@npm:5.8.0":
+  version: 5.8.0
+  resolution: "serverless-webpack@npm:5.8.0"
   dependencies:
     archiver: ^5.3.1
     bluebird: ^3.7.2
     fs-extra: ^9.1.0
-    glob: ^7.2.0
+    glob: ^7.2.3
     is-builtin-module: ^3.1.0
     lodash: ^4.17.21
     semver: ^7.3.7
@@ -29888,7 +29870,7 @@ __metadata:
   dependenciesMeta:
     ts-node:
       optional: true
-  checksum: b6287cb36dcd943ccd80eae61ff50c4ddd263cb3a73c29260a182006c5d33b6212be26abb347c95ee76d63afaa0abc8c2396822edaff66032c0cf73c25d262ae
+  checksum: 6265be2441a6c8005b5304bd82be609391b19ece36fc44f16d3bbe9dd5ea45f7ee67e28fcfc628573ee49299bf1f898e23a3116c88f40d57ec2ec2bcdaa10b29
   languageName: node
   linkType: hard
 
@@ -33563,7 +33545,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"watchpack@npm:^2.2.0, watchpack@npm:^2.3.1":
+"watchpack@npm:^2.2.0, watchpack@npm:^2.4.0":
   version: 2.4.0
   resolution: "watchpack@npm:2.4.0"
   dependencies:
@@ -33776,20 +33758,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"webpack@npm:5.73.0, webpack@npm:>=4.43.0 <6.0.0, webpack@npm:^5, webpack@npm:^5.9.0":
-  version: 5.73.0
-  resolution: "webpack@npm:5.73.0"
+"webpack@npm:5.74.0, webpack@npm:>=4.43.0 <6.0.0, webpack@npm:^5, webpack@npm:^5.9.0":
+  version: 5.74.0
+  resolution: "webpack@npm:5.74.0"
   dependencies:
     "@types/eslint-scope": ^3.7.3
     "@types/estree": ^0.0.51
     "@webassemblyjs/ast": 1.11.1
     "@webassemblyjs/wasm-edit": 1.11.1
     "@webassemblyjs/wasm-parser": 1.11.1
-    acorn: ^8.4.1
+    acorn: ^8.7.1
     acorn-import-assertions: ^1.7.6
     browserslist: ^4.14.5
     chrome-trace-event: ^1.0.2
-    enhanced-resolve: ^5.9.3
+    enhanced-resolve: ^5.10.0
     es-module-lexer: ^0.9.0
     eslint-scope: 5.1.1
     events: ^3.2.0
@@ -33802,14 +33784,14 @@ __metadata:
     schema-utils: ^3.1.0
     tapable: ^2.1.1
     terser-webpack-plugin: ^5.1.3
-    watchpack: ^2.3.1
+    watchpack: ^2.4.0
     webpack-sources: ^3.2.3
   peerDependenciesMeta:
     webpack-cli:
       optional: true
   bin:
     webpack: bin/webpack.js
-  checksum: aa434a241bad6176b68e1bf0feb1972da4dcbf27cb3d94ae24f6eb31acc37dceb9c4aae55e068edca75817bfe91f13cd20b023ac55d9b1b2f8b66a4037c9468f
+  checksum: 320c41369a75051b19e18c63f408b3dcc481852e992f83d311771c5ec0f05f2946385e8ebef62030cf3587f0a3d2f12779ffdb191569a966847289ba7313f946
   languageName: node
   linkType: hard
 
