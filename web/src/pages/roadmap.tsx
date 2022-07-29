@@ -2,7 +2,6 @@ import { FilingsCalendarAsList } from "@/components/FilingsCalendarAsList";
 import { Header } from "@/components/Header";
 import { LoadingIndicator } from "@/components/LoadingIndicator";
 import { NavBar } from "@/components/navbar/NavBar";
-import { ToastAlert } from "@/components/njwds-extended/ToastAlert";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { RightSidebarPageLayout } from "@/components/RightSidebarPageLayout";
 import { RoadmapSidebarList } from "@/components/roadmap/RoadmapSidebarList";
@@ -11,6 +10,7 @@ import { Step } from "@/components/Step";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { useAuthAlertPage } from "@/lib/auth/useAuthProtectedPage";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useQueryControlledAlert } from "@/lib/data-hooks/useQueryControlledAlert";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { routeForPersona } from "@/lib/domain-logic/routeForPersona";
@@ -21,7 +21,7 @@ import { OperateReference, RoadmapDisplayContent } from "@/lib/types/types";
 import { getSectionNames, getTaxFilings, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { GetStaticPropsResult } from "next";
 import { useRouter } from "next/router";
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useEffect } from "react";
 
 interface Props {
   displayContent: RoadmapDisplayContent;
@@ -34,8 +34,23 @@ const RoadmapPage = (props: Props): ReactElement => {
   const router = useRouter();
   const { roadmap } = useRoadmap();
   const { Config } = useConfig();
-  const [profileUpdatedAlert, setProfileUpdatedAlert] = useState<boolean>(false);
-  const [calendarAlert, setCalendarUpdatedAlert] = useState<boolean>(false);
+
+  const ProfileUpdatedAlert = useQueryControlledAlert({
+    queryKey: "success",
+    pagePath: ROUTES.roadmap,
+    headerText: Config.profileDefaults.successTextHeader,
+    bodyText: Config.profileDefaults.successTextBody,
+    variant: "success",
+  });
+
+  const CalendarAlert = useQueryControlledAlert({
+    queryKey: "fromFormBusinessEntity",
+    pagePath: ROUTES.roadmap,
+    headerText: Config.roadmapDefaults.calendarSnackbarHeading,
+    bodyText: Config.roadmapDefaults.calendarSnackbarBody,
+    variant: "success",
+    dataTestId: "toast-alert-calendar",
+  });
 
   useMountEffectWhenDefined(() => {
     (async () => {
@@ -52,14 +67,6 @@ const RoadmapPage = (props: Props): ReactElement => {
       userData?.profileData.businessPersona === "OWNING"
     ) {
       router.replace(routeForPersona(userData?.profileData.businessPersona));
-    }
-    if (router.query.success === "true") {
-      setProfileUpdatedAlert(true);
-    }
-
-    if (router.query.fromFormBusinessEntity === "true") {
-      setCalendarUpdatedAlert(true);
-      router.replace({ pathname: ROUTES.roadmap }, undefined, { shallow: true });
     }
   }, [router, userData?.profileData.businessPersona]);
 
@@ -115,33 +122,8 @@ const RoadmapPage = (props: Props): ReactElement => {
             }
           />
         )}
-        {profileUpdatedAlert && (
-          <ToastAlert
-            variant="success"
-            isOpen={profileUpdatedAlert}
-            close={() => {
-              setProfileUpdatedAlert(false);
-              router.replace({ pathname: ROUTES.roadmap }, undefined, { shallow: true });
-            }}
-            heading={Config.profileDefaults.successTextHeader}
-          >
-            {Config.profileDefaults.successTextBody}
-          </ToastAlert>
-        )}
-        {calendarAlert && (
-          <ToastAlert
-            variant="success"
-            isOpen={calendarAlert}
-            close={() => {
-              setCalendarUpdatedAlert(false);
-              router.replace({ pathname: ROUTES.roadmap }, undefined, { shallow: true });
-            }}
-            heading={Config.roadmapDefaults.calendarSnackbarHeading}
-            dataTestid="toast-alert-calendar"
-          >
-            {Config.roadmapDefaults.calendarSnackbarBody}
-          </ToastAlert>
-        )}
+        <>{ProfileUpdatedAlert}</>
+        <>{CalendarAlert}</>
       </main>
     </PageSkeleton>
   );
