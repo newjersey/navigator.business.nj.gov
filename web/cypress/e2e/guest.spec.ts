@@ -28,9 +28,9 @@ describe("Guest Roadmap [feature] [all] [group2]", () => {
     // check roadmap
     onRoadmapPage.getEditProfileLink().should("exist");
 
-    cy.get('[data-testid="self-reg-toast"]').should("be.visible");
+    cy.get('[data-testid="self-reg-snackbar"]').should("be.visible");
     cy.get('[aria-label="close"]').click({ force: true });
-    cy.get('[data-testid="self-reg-toast"]').should("not.exist");
+    cy.get('[data-testid="self-reg-snackbar"]').should("not.exist");
 
     // step 1
     cy.get(`[id="plan-content"]`).should("be.visible");
@@ -54,12 +54,12 @@ describe("Guest Roadmap [feature] [all] [group2]", () => {
     cy.get(`[data-industry='${industry.id}']`).should("not.exist");
     cy.get('[data-task-id="check-local-requirements"]').should("exist");
     cy.get('[data-testid="self-reg-modal"]').should("not.exist");
-    cy.get('[data-testid="self-reg-toast"]').should("not.exist");
+    cy.get('[data-testid="self-reg-snackbar"]').should("not.exist");
 
     // go back to roadmap
     cy.log("go back to roadmap");
     cy.get(`[data-testid="back-to-roadmap"]`).click({ force: true });
-    cy.get('[data-testid="self-reg-toast"]').should("not.exist");
+    cy.get('[data-testid="self-reg-snackbar"]').should("not.exist");
 
     // go to auth blocked task
     cy.get('[data-task="register-consumer-affairs"]').click({ force: true });
@@ -71,7 +71,7 @@ describe("Guest Roadmap [feature] [all] [group2]", () => {
     // go back to roadmap
     cy.get(`[data-testid="back-to-roadmap"]`).click({ force: true });
     cy.get('[data-testid="self-reg-modal"]').should("not.exist");
-    cy.get('[data-testid="self-reg-toast"]').should("not.exist");
+    cy.get('[data-testid="self-reg-snackbar"]').should("not.exist");
 
     // try editing data in the Profile page
     onRoadmapPage.clickEditProfileLink();

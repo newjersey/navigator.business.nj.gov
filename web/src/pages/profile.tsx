@@ -23,8 +23,8 @@ import { ProfileNexusDBANameField } from "@/components/onboarding/ProfileNexusDB
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { Documents } from "@/components/profile/Documents";
 import { EscapeModal } from "@/components/profile/EscapeModal";
+import { ProfileSnackbarAlert } from "@/components/profile/ProfileSnackbarAlert";
 import { ProfileTabNav } from "@/components/profile/ProfileTabNav";
-import { ProfileToastAlert } from "@/components/profile/ProfileToastAlert";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { AuthAlertContext } from "@/contexts/authAlertContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
@@ -484,7 +484,7 @@ const ProfilePage = (props: Props): ReactElement => {
               primaryButtonOnClick={() => redirect()}
             />
             <SingleColumnContainer>
-              {alert && <ProfileToastAlert alert={alert} close={() => setAlert(undefined)} />}
+              {alert && <ProfileSnackbarAlert alert={alert} close={() => setAlert(undefined)} />}
               <UserDataErrorAlert />
             </SingleColumnContainer>
             <div className="margin-top-6 desktop:margin-top-0">

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ProfileToastAlert } from "@/components/profile/ProfileToastAlert";
+import { ProfileSnackbarAlert } from "@/components/profile/ProfileSnackbarAlert";
 import { ConfigContext, ConfigType, getMergedConfig } from "@/contexts/configContext";
 import Profile from "@/pages/profile";
 import { generateUser } from "@/test/factories";
@@ -40,11 +40,11 @@ const ProfilePreviewMisc = (props: Props) => {
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
       <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
         <h2>Success Alert:</h2>
-        <ProfileToastAlert alert="SUCCESS" close={() => {}} />
+        <ProfileSnackbarAlert alert="SUCCESS" close={() => {}} />
         <hr className="margin-y-4" />
 
         <h2>Error Alert</h2>
-        <ProfileToastAlert alert="ERROR" close={() => {}} />
+        <ProfileSnackbarAlert alert="ERROR" close={() => {}} />
         <hr className="margin-y-4" />
 
         <h2 className="margin-bottom-4">Misc Buttons & Labels:</h2>

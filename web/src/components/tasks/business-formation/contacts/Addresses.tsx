@@ -1,6 +1,6 @@
 import { Content } from "@/components/Content";
 import { Button } from "@/components/njwds-extended/Button";
-import { ToastAlert } from "@/components/njwds-extended/ToastAlert";
+import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
 import { Icon } from "@/components/njwds/Icon";
 import { AddressModal } from "@/components/tasks/business-formation/contacts/AddressModal";
 import { ValidatedCheckbox } from "@/components/ValidatedCheckbox";
@@ -245,15 +245,15 @@ export const Addresses = (props: Props): ReactElement => {
   return (
     <>
       {alert && (
-        <ToastAlert
+        <SnackbarAlert
           variant="success"
           isOpen={alert !== undefined}
           close={() => setAlert(undefined)}
-          dataTestid="toast-alert-success"
+          dataTestid="snackbar-alert-success"
           heading={props.displayContent.alertHeader}
         >
           {props.displayContent.alertBody}
-        </ToastAlert>
+        </SnackbarAlert>
       )}
       <div className={`margin-bottom-3 ${styles.membersTable}`} data-testid={`addresses-${props.fieldName}`}>
         <Content

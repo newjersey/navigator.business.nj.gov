@@ -18,9 +18,9 @@ import { ReactElement, useEffect, useReducer, useState } from "react";
 import SEO from "../../next-seo.config";
 import { SWRConfig } from "swr";
 import { RegistrationStatus } from "@businessnjgovnavigator/shared/";
-import { SignUpToast } from "@/components/auth/SignUpToast";
+import { SignUpSnackbar } from "@/components/auth/SignUpSnackbar";
 import { SignUpModal } from "@/components/auth/SignUpModal";
-import { SelfRegToast } from "@/components/auth/SelfRegToast";
+import { SelfRegSnackbar } from "@/components/auth/SelfRegSnackbar";
 import { UserDataStorageFactory } from "@/lib/storage/UserDataStorage";
 import { RoadmapContext } from "@/contexts/roadmapContext";
 import { AuthAlertContext } from "@/contexts/authAlertContext";
@@ -35,7 +35,7 @@ declare module "@mui/styles/defaultTheme" {
 
 AuthContext.displayName = "Authentication";
 RoadmapContext.displayName = "Roadmap";
-AuthAlertContext.displayName = "Authentication Toast";
+AuthAlertContext.displayName = "Authentication Snackbar";
 ContextualInfoContext.displayName = "Contextual Info";
 UserDataErrorContext.displayName = "User Data Error";
 
@@ -130,7 +130,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
     UserDataStorageFactory().setRegistrationStatus(value);
   };
 
-  const [authToast, setAuthToast] = useState<boolean>(false);
+  const [authSnackbar, setAuthSnackbar] = useState<boolean>(false);
   const [authModal, setAuthModal] = useState<boolean>(false);
   const [sectionCompletion, setSectionCompletion] = useState<SectionCompletion | undefined>(undefined);
   const [contextualInfo, setContextualInfo] = useState<ContextualInfo>({
@@ -236,19 +236,19 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
                     <AuthAlertContext.Provider
                       value={{
                         isAuthenticated: state.isAuthenticated,
-                        alertIsVisible: authToast,
+                        alertIsVisible: authSnackbar,
                         modalIsVisible: authModal,
                         registrationAlertStatus,
                         setRegistrationAlertStatus,
-                        setAlertIsVisible: setAuthToast,
+                        setAlertIsVisible: setAuthSnackbar,
                         setModalIsVisible: setAuthModal,
                       }}
                     >
                       <ContextualInfoPanel />
                       <Component {...pageProps} />
-                      <SignUpToast />
+                      <SignUpSnackbar />
                       <SignUpModal />
-                      <SelfRegToast />
+                      <SelfRegSnackbar />
                     </AuthAlertContext.Provider>
                   </RoadmapContext.Provider>
                 </ContextualInfoContext.Provider>

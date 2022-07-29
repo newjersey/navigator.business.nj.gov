@@ -1949,8 +1949,8 @@ collections:
                 }
               - { label: Guest Alert Title, name: guestAlertTitle, widget: string }
               - { label: Guest Alert Body, name: guestAlertBody, widget: text }
-              - { label: Guest Success Toast Title, name: guestSuccessTitle, widget: string }
-              - { label: Guest Success Toast Body, name: guestSuccessBody, widget: string }
+              - { label: Guest Success Snackbar Title, name: guestSuccessTitle, widget: string }
+              - { label: Guest Success Snackbar Body, name: guestSuccessBody, widget: string }
               - { label: Guest Alert Modal Title, name: guestModalTitle, widget: string }
               - { label: Guest Alert Modal Body, name: guestModalBody, widget: text }
               - { label: Guest Alert Button, name: guestModalButtonText, widget: string }
@@ -2095,7 +2095,11 @@ collections:
               - { label: Page Title, name: pageTitle, widget: string }
               - { label: Back Button Text, name: backToRoadmapText, widget: string }
               - { label: Default Call to Action Test, name: defaultCallToActionText, widget: string }
-              - { label: Task Progress - Success Toast, name: taskProgressSuccessToastBody, widget: string }
+              - {
+                  label: Task Progress - Success Snackbar,
+                  name: taskProgressSuccessSnackbarBody,
+                  widget: string,
+                }
               - { label: Next Task Button Text, name: nextTaskButtonText, widget: string }
               - { label: Previous Task Button Text, name: previousTaskButtonText, widget: string }
               - { label: Unlocked By - Singular, name: unlockedBySingular, widget: string }

@@ -1,4 +1,4 @@
-import { ToastAlert } from "@/components/njwds-extended/ToastAlert";
+import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
 import { TaskHeader } from "@/components/TaskHeader";
 import { CannabisApplicationQuestionsTab } from "@/components/tasks/cannabis/CannabisApplicationQuestionsTab";
 import { CannabisApplicationRequirementsTab } from "@/components/tasks/cannabis/CannabisApplicationRequirementsTab";
@@ -26,7 +26,7 @@ export const CannabisApplyForLicenseTask = (props: Props): ReactElement => {
   const userData = props.CMS_ONLY_fakeUserData ?? userDataFromHook.userData;
 
   const [displayFirstTab, setDisplayFirstTab] = useState<boolean>(true);
-  const [successToastIsOpen, setSuccessToastIsOpen] = useState(false);
+  const [successSnackbarIsOpen, setSuccessSnackbarIsOpen] = useState(false);
   const [priorityStatusState, setPriorityStatusState] = useState<Record<PriorityApplicationType, boolean>>({
     diverselyOwned: false,
     socialEquity: false,
@@ -107,7 +107,7 @@ export const CannabisApplyForLicenseTask = (props: Props): ReactElement => {
       userData.taskProgress[props.task.id] === undefined ||
       userData.taskProgress[props.task.id] === "NOT_STARTED"
     ) {
-      setSuccessToastIsOpen(true);
+      setSuccessSnackbarIsOpen(true);
       update({
         ...userData,
         taskProgress: {
@@ -120,9 +120,13 @@ export const CannabisApplyForLicenseTask = (props: Props): ReactElement => {
 
   return (
     <>
-      <ToastAlert variant="success" isOpen={successToastIsOpen} close={() => setSuccessToastIsOpen(false)}>
-        {Config.taskDefaults.taskProgressSuccessToastBody}
-      </ToastAlert>
+      <SnackbarAlert
+        variant="success"
+        isOpen={successSnackbarIsOpen}
+        close={() => setSuccessSnackbarIsOpen(false)}
+      >
+        {Config.taskDefaults.taskProgressSuccessSnackbarBody}
+      </SnackbarAlert>
       <TaskHeader task={props.task} />
       {displayFirstTab ? (
         <>

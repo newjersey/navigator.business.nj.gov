@@ -57,7 +57,7 @@ describe("onboarding - starting a business", () => {
       act(() => page.clickNext());
       expect(screen.getByTestId("step-2")).toBeInTheDocument();
       expect(screen.queryByTestId("step-3")).not.toBeInTheDocument();
-      expect(screen.getByTestId("toast-alert-ERROR")).toBeInTheDocument();
+      expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
     });
 
     it("allows user to move past Step 2 if you have selected an industry", async () => {
@@ -66,7 +66,7 @@ describe("onboarding - starting a business", () => {
       const { page } = renderPage({ userData });
       page.selectByText("Industry", "All Other Businesses");
       await page.visitStep(3);
-      expect(screen.queryByTestId("toast-alert-ERROR")).not.toBeInTheDocument();
+      expect(screen.queryByTestId("snackbar-alert-ERROR")).not.toBeInTheDocument();
       expect(screen.queryByTestId("step-2")).not.toBeInTheDocument();
     });
   });
@@ -105,7 +105,7 @@ describe("onboarding - starting a business", () => {
       expect(
         screen.getByText(Config.profileDefaults[getFlow(userData)].municipality.errorTextRequired)
       ).toBeInTheDocument();
-      expect(screen.getByTestId("toast-alert-ERROR")).toBeInTheDocument();
+      expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
     });
 
     it("allows user to move past Step 4 if you have selected a location", async () => {
@@ -118,7 +118,7 @@ describe("onboarding - starting a business", () => {
       expect(
         screen.queryByText(Config.profileDefaults[getFlow(userData)].municipality.errorTextRequired)
       ).not.toBeInTheDocument();
-      expect(screen.queryByTestId("toast-alert-ERROR")).not.toBeInTheDocument();
+      expect(screen.queryByTestId("snackbar-alert-ERROR")).not.toBeInTheDocument();
     });
   });
 
