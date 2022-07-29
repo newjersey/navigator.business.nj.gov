@@ -33,7 +33,10 @@ You are seeing this task because your business either has a `nexus|nexus-busines
 
 > **Once completed, you will have:**
 >
+> An email confirmation within 48 to 72 hours that includes your 
 > - `Business Registration Certificate (BRC)|business-reg-certificate`
 > - `NJ Tax ID|tax-id`
+> 
+> A mailed Welcome note that includes your: 
 > - `Business Tax PIN|tax-pin`
 > - Authorization to Collect Sales Tax Certificate (if applicable)
