@@ -163,7 +163,7 @@ export const IndustryDropdown = (props: Props): ReactElement => {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         sx: {
-          "& li:nth-of-type(even)": { backgroundColor: "#F0F0F0" },
+          "& li:nth-of-type(even)": { backgroundColor: "#F9FBFB" },
           "& li:nth-of-type(odd)": { backgroundColor: "#FFFFFF" },
         },
       }}
