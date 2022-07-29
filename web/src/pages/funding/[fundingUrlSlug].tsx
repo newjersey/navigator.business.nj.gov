@@ -3,10 +3,13 @@ import { NavBar } from "@/components/navbar/NavBar";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { TaskCTA } from "@/components/TaskCTA";
 import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
+import { useUserData } from "@/lib/data-hooks/useUserData";
+import { getNaicsTemplateValue } from "@/lib/domain-logic/getNaicsTemplateValue";
 import { MediaQueries } from "@/lib/PageSizes";
 import { FundingUrlSlugParam, loadAllFundingUrlSlugs, loadFundingByUrlSlug } from "@/lib/static/loadFundings";
 import { loadOperateReferences } from "@/lib/static/loadOperateReferences";
 import { Funding, OperateReference } from "@/lib/types/types";
+import { templateEval } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { useMediaQuery } from "@mui/material";
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";
@@ -20,6 +23,14 @@ interface Props {
 
 export const FundingElement = (props: { funding: Funding }): ReactElement => {
   const isLargeScreen = useMediaQuery(MediaQueries.desktopAndUp);
+
+  const { userData } = useUserData();
+
+  const addNaicsCodeData = (contentMd: string): string => {
+    const naicsCode = userData?.profileData.naicsCode || "";
+    const naicsTemplateValue = getNaicsTemplateValue(naicsCode);
+    return templateEval(contentMd, { naicsCode: naicsTemplateValue });
+  };
 
   return (
     <>
@@ -41,7 +52,7 @@ export const FundingElement = (props: { funding: Funding }): ReactElement => {
             )}
           </div>
         </div>
-        <Content>{props.funding.contentMd}</Content>
+        <Content>{addNaicsCodeData(props.funding.contentMd)}</Content>
         {props.funding.agency.length > 0 ? (
           <>
             <hr className="margin-y-3" />

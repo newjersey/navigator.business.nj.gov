@@ -7,9 +7,10 @@ callToActionText: Apply for My SBE Certification
 applicableOwnershipTypes: []
 isSbe: true
 ---
-*Having an Small Business Enterprise (SBE) certificate may give you an advantage with [government contracts](https://business.nj.gov/pages/government-contracting)*.
 
-- - -
+_Having an Small Business Enterprise (SBE) certificate may give you an advantage with [government contracts](https://business.nj.gov/pages/government-contracting)_.
+
+---
 
 ### Eligibility Criteria
 
@@ -22,14 +23,14 @@ A SBE is a business:
 
 ### Application Needs
 
-* An `EIN|ein` 
-* Social Security Number
-* An identified `NAICS|naics` code
-* Information on your business's gross revenue for the last 3 completed tax years
-* Business formation date (for LLC, C corps, LPs and LLPs) You can find this date on your `Certificate of Formation|certificate-formation` 
+- An `EIN|ein`
+- Social Security Number
+- An identified `NAICS|naics` code ${naicsCode}
+- Information on your business's gross revenue for the last 3 completed tax years
+- Business formation date (for LLC, C corps, LPs and LLPs) You can find this date on your `Certificate of Formation|certificate-formation`
 
-*Note: This application needs to be notarized.*
+_Note: This application needs to be notarized._
 
 > **After you complete this, you will have:**
 >
-> * A Small Business Enterprise certificate
+> - A Small Business Enterprise certificate

@@ -1,4 +1,5 @@
 import { formationTaskId } from "@shared/domain-logic/gradualGraduationStages";
+import { randomInt } from "@shared/intHelpers";
 import { LookupLegalStructureById } from "@shared/legalStructure";
 import { v72UserData } from "./v72_add_real_estate_management";
 
@@ -48,11 +49,11 @@ export const migrate_v72_to_v73 = (v72Data: v72UserData): v73UserData => {
 
 // ---------------- v73 types ----------------
 
-type v73TaskProgress = "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
+export type v73TaskProgress = "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
 type v73FormProgress = "UNSTARTED" | "COMPLETED";
 export type v73ABExperience = "ExperienceA" | "ExperienceB";
 
-type v73BusinessUser = {
+export type v73BusinessUser = {
   name?: string;
   email: string;
   id: string;
@@ -80,7 +81,7 @@ type v73OperatingPhase =
   | "UP_AND_RUNNING"
   | undefined;
 
-interface v73ProfileData {
+export interface v73ProfileData {
   businessPersona: v73BusinessPersona;
   initialOnboardingFlow: v73BusinessPersona;
   businessName: string;
@@ -324,3 +325,105 @@ type v73GetFilingResponse = {
 };
 
 // ---------------- v73 factories ----------------
+
+export const generatev73User = (overrides: Partial<v73BusinessUser>): v73BusinessUser => {
+  return {
+    name: `some-name-${randomInt()}`,
+    email: `some-email-${randomInt()}@example.com`,
+    id: `some-id-${randomInt()}`,
+    receiveNewsletter: false,
+    userTesting: false,
+    externalStatus: {},
+    abExperience: "ExperienceA",
+    myNJUserKey: undefined,
+    intercomHash: undefined,
+    ...overrides,
+  };
+};
+
+export const generatev73ProfileData = (overrides: Partial<v73ProfileData>): v73ProfileData => {
+  return {
+    businessPersona: "STARTING",
+    initialOnboardingFlow: "STARTING",
+    businessName: `some-business-name-${randomInt()}`,
+    industryId: "restaurant",
+    legalStructureId: "sole-proprietorship",
+    municipality: {
+      name: `some-name-${randomInt()}`,
+      displayName: `some-display-name-${randomInt()}`,
+      county: `some-county-${randomInt()}`,
+      id: `some-id-${randomInt()}`,
+    },
+    liquorLicense: true,
+    requiresCpa: false,
+    homeBasedBusiness: true,
+    cannabisLicenseType: undefined,
+    cannabisMicrobusiness: undefined,
+    constructionRenovationPlan: undefined,
+    dateOfFormation: undefined,
+    entityId: undefined,
+    employerId: undefined,
+    taxId: undefined,
+    notes: "",
+    documents: {
+      formationDoc: `some-formation-doc-${randomInt()}`,
+      standingDoc: `some-standing-doc-${randomInt()}`,
+      certifiedDoc: `some-certified-doc-${randomInt()}`,
+    },
+    ownershipTypeIds: [],
+    existingEmployees: undefined,
+    taxPin: undefined,
+    sectorId: undefined,
+    naicsCode: "",
+    foreignBusinessType: undefined,
+    foreignBusinessTypeIds: [],
+    nexusLocationInNewJersey: undefined,
+    nexusDbaName: undefined,
+    realEstateAppraisalManagement: false,
+    certifiedInteriorDesigner: false,
+    providesStaffingService: false,
+    operatingPhase: undefined,
+    ...overrides,
+  };
+};
+
+export const generatev73FormationFormData = (
+  overrides: Partial<v73FormationFormData>
+): v73FormationFormData => {
+  return {
+    businessName: "",
+    businessSuffix: undefined,
+    businessTotalStock: "",
+    businessStartDate: "",
+    businessAddressCity: undefined,
+    businessAddressLine1: "",
+    businessAddressLine2: "",
+    businessAddressState: "",
+    businessAddressZipCode: "",
+    businessPurpose: "",
+    provisions: [],
+    agentNumberOrManual: "NUMBER",
+    agentNumber: "",
+    agentName: "",
+    agentEmail: "",
+    agentOfficeAddressLine1: "",
+    agentOfficeAddressLine2: "",
+    agentOfficeAddressCity: "",
+    agentOfficeAddressState: "",
+    agentOfficeAddressZipCode: "",
+    agentUseAccountInfo: false,
+    agentUseBusinessAddress: false,
+    members: [],
+    signers: [],
+    paymentType: undefined,
+    annualReportNotification: false,
+    corpWatchNotification: false,
+    officialFormationDocument: false,
+    certificateOfStanding: false,
+    certifiedCopyOfFormationDocument: false,
+    contactFirstName: "",
+    contactLastName: "",
+    contactPhoneNumber: "",
+    ...overrides,
+  };
+};
