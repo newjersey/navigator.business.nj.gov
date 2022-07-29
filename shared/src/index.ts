@@ -9,6 +9,7 @@ export * from "./intHelpers";
 export * from "./legalStructure";
 export * from "./license";
 export * from "./municipality";
+export * from "./operatingPhase";
 export * from "./ownership";
 export * from "./profileData";
 export * from "./sector";
