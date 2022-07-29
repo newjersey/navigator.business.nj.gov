@@ -1,4 +1,4 @@
-import { SignUpToast } from "@/components/auth/SignUpToast";
+import { SignUpSnackbar } from "@/components/auth/SignUpSnackbar";
 import { getMergedConfig } from "@/contexts/configContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { ROUTES } from "@/lib/domain-logic/routes";
@@ -103,7 +103,7 @@ describe("roadmap page", () => {
       withAuthAlert(
         <WithStatefulUserData initialUserData={userData || generateUserData({})}>
           <ThemeProvider theme={createTheme()}>
-            <SignUpToast />
+            <SignUpSnackbar />
             <RoadmapPage
               operateReferences={{}}
               displayContent={createDisplayContent(sidebarDisplayContent)}
@@ -134,7 +134,7 @@ describe("roadmap page", () => {
     expect(mockPush).toHaveBeenCalledWith(ROUTES.onboarding);
   });
 
-  it("shows toast alert when success query is true", () => {
+  it("shows snackbar alert when success query is true", () => {
     useMockProfileData({});
     useMockRouter({ isReady: true, query: { success: "true" } });
     renderRoadmapPage({});
@@ -298,7 +298,7 @@ describe("roadmap page", () => {
 
     renderRoadmapPage({});
 
-    expect(screen.getByTestId("toast-alert-calendar")).toBeInTheDocument();
+    expect(screen.getByTestId("snackbar-alert-calendar")).toBeInTheDocument();
   });
 
   it("displays filings calendar as list when taxfiling and formation date is populated", () => {

@@ -1,4 +1,4 @@
-import { SelfRegToast } from "@/components/auth/SelfRegToast";
+import { SelfRegSnackbar } from "@/components/auth/SelfRegSnackbar";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { markdownToText, withAuthAlert } from "@/test/helpers";
 import { useMockRouter } from "@/test/mock/mockRouter";
@@ -13,7 +13,7 @@ jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("next/router");
 jest.mock("@/lib/auth/sessionHelper", () => ({ triggerSignIn: jest.fn() }));
 
-describe("SelfRegToast", () => {
+describe("SelfRegSnackbar", () => {
   beforeEach(() => {
     jest.resetAllMocks();
     useMockRouter({});
@@ -26,7 +26,7 @@ describe("SelfRegToast", () => {
     registrationAlertStatus: RegistrationStatus
   ) => {
     render(
-      withAuthAlert(<SelfRegToast />, isAuthenticated, {
+      withAuthAlert(<SelfRegSnackbar />, isAuthenticated, {
         registrationAlertStatus,
         setRegistrationAlertStatus,
       })
@@ -38,20 +38,20 @@ describe("SelfRegToast", () => {
     expect(setRegistrationAlertStatus).toBeCalledWith("SUCCESS");
   });
 
-  it("shows registration success toast when user is authenticated and had completed the registration process", () => {
+  it("shows registration success snackbar when user is authenticated and had completed the registration process", () => {
     setupHookWithAuth(IsAuthenticated.TRUE, "SUCCESS");
     expect(screen.getByText(markdownToText(Config.navigationDefaults.guestSuccessBody))).toBeInTheDocument();
     expect(screen.getByText(markdownToText(Config.navigationDefaults.guestSuccessTitle))).toBeInTheDocument();
     expect(screen.getByTestId("congratulations-logo")).toBeInTheDocument();
-    expect(screen.getByTestId("reg-toast")).toBeInTheDocument();
+    expect(screen.getByTestId("reg-snackbar")).toBeInTheDocument();
   });
 
-  it("does not show registration success toast when user is not authenticated and had not completed the registration process", () => {
+  it("does not show registration success snackbar when user is not authenticated and had not completed the registration process", () => {
     setupHookWithAuth(IsAuthenticated.FALSE, "IN_PROGRESS");
-    expect(screen.queryByTestId("reg-toast")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("reg-snackbar")).not.toBeInTheDocument();
   });
 
-  it("shows duplicate registration error toast alert when user had failed the registration process", () => {
+  it("shows duplicate registration error snackbar alert when user had failed the registration process", () => {
     setupHookWithAuth(IsAuthenticated.FALSE, "DUPLICATE_ERROR");
     expect(
       screen.getByText(markdownToText(Config.selfRegistration.errorTextDuplicateSignUp))
@@ -62,7 +62,7 @@ describe("SelfRegToast", () => {
     expect(screen.queryByTestId("congratulations-logo")).not.toBeInTheDocument();
   });
 
-  it("shows general registration error toast alert when user had failed the registration process", () => {
+  it("shows general registration error snackbar alert when user had failed the registration process", () => {
     setupHookWithAuth(IsAuthenticated.FALSE, "RESPONSE_ERROR");
     expect(screen.getByText(markdownToText(Config.selfRegistration.errorTextGeneric))).toBeInTheDocument();
     expect(

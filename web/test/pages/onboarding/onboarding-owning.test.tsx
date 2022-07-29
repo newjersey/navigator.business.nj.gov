@@ -126,7 +126,7 @@ describe("onboarding - owning a business", () => {
           templateEval(Config.onboardingDefaults.errorTextMinimumNumericField, { length: "10" })
         )
       ).toBeInTheDocument();
-      expect(screen.getByTestId("toast-alert-ERROR")).toBeInTheDocument();
+      expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
     });
 
     it("allows user to move past Step 2 if your entity id is valid", async () => {
@@ -145,7 +145,7 @@ describe("onboarding - owning a business", () => {
       });
       expect(screen.getByTestId("step-3")).toBeInTheDocument();
       expect(screen.queryByTestId("step-2")).not.toBeInTheDocument();
-      expect(screen.queryByTestId("toast-alert-ERROR")).not.toBeInTheDocument();
+      expect(screen.queryByTestId("snackbar-alert-ERROR")).not.toBeInTheDocument();
     });
   });
 
@@ -162,7 +162,7 @@ describe("onboarding - owning a business", () => {
       expect(
         screen.getByText(Config.profileDefaults[getFlow(userData)].businessName.errorTextRequired)
       ).toBeInTheDocument();
-      expect(screen.getByTestId("toast-alert-ERROR")).toBeInTheDocument();
+      expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
     });
 
     it("allows user to move past Step 3 if you have entered a business name", async () => {
@@ -177,7 +177,7 @@ describe("onboarding - owning a business", () => {
           screen.queryByText(Config.profileDefaults[getFlow(userData)].businessName.errorTextRequired)
         ).not.toBeInTheDocument();
       });
-      expect(screen.queryByTestId("toast-alert-ERROR")).not.toBeInTheDocument();
+      expect(screen.queryByTestId("snackbar-alert-ERROR")).not.toBeInTheDocument();
       expect(screen.queryByTestId("step-3")).not.toBeInTheDocument();
     });
 
@@ -193,7 +193,7 @@ describe("onboarding - owning a business", () => {
       expect(
         screen.getByText(Config.profileDefaults[getFlow(userData)].sectorId.errorTextRequired)
       ).toBeInTheDocument();
-      expect(screen.getByTestId("toast-alert-ERROR")).toBeInTheDocument();
+      expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
     });
 
     it("allows user to move past Step 3 if you have entered a sector", async () => {
@@ -208,7 +208,7 @@ describe("onboarding - owning a business", () => {
           screen.queryByText(Config.profileDefaults[getFlow(userData)].sectorId.errorTextRequired)
         ).not.toBeInTheDocument();
       });
-      expect(screen.queryByTestId("toast-alert-ERROR")).not.toBeInTheDocument();
+      expect(screen.queryByTestId("snackbar-alert-ERROR")).not.toBeInTheDocument();
       expect(screen.queryByTestId("step-3")).not.toBeInTheDocument();
     });
   });
@@ -226,7 +226,7 @@ describe("onboarding - owning a business", () => {
       expect(
         screen.getByText(Config.profileDefaults[getFlow(userData)].municipality.errorTextRequired)
       ).toBeInTheDocument();
-      expect(screen.getByTestId("toast-alert-ERROR")).toBeInTheDocument();
+      expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
     });
 
     it("allows user to move past Step 4 if you have selected a location", async () => {
@@ -241,7 +241,7 @@ describe("onboarding - owning a business", () => {
           screen.queryByText(Config.profileDefaults[getFlow(userData)].municipality.errorTextRequired)
         ).not.toBeInTheDocument();
       });
-      expect(screen.queryByTestId("toast-alert-ERROR")).not.toBeInTheDocument();
+      expect(screen.queryByTestId("snackbar-alert-ERROR")).not.toBeInTheDocument();
     });
 
     it("prevents user from moving after Step 4 if you have not entered number of employees", async () => {
@@ -259,7 +259,7 @@ describe("onboarding - owning a business", () => {
       await waitFor(() => {
         screen.getByText(Config.profileDefaults[getFlow(userData)].existingEmployees.errorTextRequired);
       });
-      expect(screen.getByTestId("toast-alert-ERROR")).toBeInTheDocument();
+      expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
     });
 
     it("allows user to move past Step 4 if you have entered number of employees", async () => {
@@ -280,7 +280,7 @@ describe("onboarding - owning a business", () => {
           screen.queryByText(Config.profileDefaults[getFlow(userData)].existingEmployees.errorTextRequired)
         ).not.toBeInTheDocument();
       });
-      expect(screen.queryByTestId("toast-alert-ERROR")).not.toBeInTheDocument();
+      expect(screen.queryByTestId("snackbar-alert-ERROR")).not.toBeInTheDocument();
       expect(screen.queryByTestId("step-4")).not.toBeInTheDocument();
     });
   });

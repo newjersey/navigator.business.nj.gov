@@ -1,5 +1,5 @@
 import { Content } from "@/components/Content";
-import { ToastAlert } from "@/components/njwds-extended/ToastAlert";
+import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
 import { Icon } from "@/components/njwds/Icon";
 import { AuthAlertContext } from "@/contexts/authAlertContext";
 import { useRoadmapSidebarCards } from "@/lib/data-hooks/useRoadmapSidebarCards";
@@ -8,7 +8,7 @@ import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { IconButton, useMediaQuery } from "@mui/material";
 import { ReactElement, useContext } from "react";
 
-export const SignUpToast = (): ReactElement => {
+export const SignUpSnackbar = (): ReactElement => {
   const { showCard } = useRoadmapSidebarCards();
   const { alertIsVisible, setAlertIsVisible } = useContext(AuthAlertContext);
   const isDesktopAndUp = useMediaQuery(MediaQueries.desktopAndUp);
@@ -23,7 +23,7 @@ export const SignUpToast = (): ReactElement => {
   };
 
   return (
-    <ToastAlert
+    <SnackbarAlert
       isOpen={alertIsVisible}
       close={() => setAlertIsVisible(false)}
       variant="info"
@@ -31,7 +31,7 @@ export const SignUpToast = (): ReactElement => {
       autoHideDuration={null}
       className={"bg-base-lightest"}
       snackBarProps={{ sx: { paddingX: 0 } }}
-      dataTestid="self-reg-toast"
+      dataTestid="self-reg-snackbar"
     >
       <div className="fin fac padding-y-2">
         {isDesktopAndUp ? (
@@ -60,6 +60,6 @@ export const SignUpToast = (): ReactElement => {
           <Content className="padding-top-105">{Config.navigationDefaults.guestAlertBody}</Content>
         </div>
       </div>
-    </ToastAlert>
+    </SnackbarAlert>
   );
 };

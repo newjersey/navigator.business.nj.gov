@@ -499,7 +499,7 @@
     "loadingTaskDependencies": "Loading task dependencies…",
     "unlockedBySingular": "Before starting this task, we recommend that you take a look at:",
     "nextTaskButtonText": "Next",
-    "taskProgressSuccessToastBody": "Your task status has been updated.",
+    "taskProgressSuccessSnackbarBody": "Your task status has been updated.",
     "previousTaskButtonText": "Previous",
     "formNameText": "Form",
     "defaultCallToActionText": "Start Application",

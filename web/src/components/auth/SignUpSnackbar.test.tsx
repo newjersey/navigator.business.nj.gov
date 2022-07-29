@@ -1,4 +1,4 @@
-import { SignUpToast } from "@/components/auth/SignUpToast";
+import { SignUpSnackbar } from "@/components/auth/SignUpSnackbar";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { markdownToText, withAuthAlert } from "@/test/helpers";
 import { useMockRouter } from "@/test/mock/mockRouter";
@@ -25,7 +25,7 @@ const setLargeScreen = (value: boolean): void => {
   (useMediaQuery as jest.Mock).mockImplementation(() => value);
 };
 
-describe("SignUpToast", () => {
+describe("SignUpSnackbar", () => {
   beforeEach(() => {
     jest.resetAllMocks();
     useMockRouter({});
@@ -34,7 +34,7 @@ describe("SignUpToast", () => {
 
   const setAlertIsVisible = jest.fn();
   const setupHookWithAuth = (isAuthenticated: IsAuthenticated, alertIsVisible = true) => {
-    render(withAuthAlert(<SignUpToast />, isAuthenticated, { alertIsVisible, setAlertIsVisible }));
+    render(withAuthAlert(<SignUpSnackbar />, isAuthenticated, { alertIsVisible, setAlertIsVisible }));
   };
 
   it("shows registration alert when user is in guest mode", () => {

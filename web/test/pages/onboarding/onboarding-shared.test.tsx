@@ -569,7 +569,7 @@ describe("onboarding - shared", () => {
     });
     page.clickNext();
     await waitFor(() => {
-      expect(screen.getByTestId("toast-alert-ERROR")).toBeInTheDocument();
+      expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
     });
   });
 
@@ -587,7 +587,7 @@ describe("onboarding - shared", () => {
     });
     page.clickNext();
     await waitFor(() => {
-      expect(screen.getByTestId("toast-alert-ERROR")).toBeInTheDocument();
+      expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
     });
   });
 

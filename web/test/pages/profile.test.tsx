@@ -256,7 +256,7 @@ describe("profile", () => {
       clickSave();
 
       await waitFor(() => {
-        expect(screen.getByTestId("toast-alert-SUCCESS")).toBeInTheDocument();
+        expect(screen.getByTestId("snackbar-alert-SUCCESS")).toBeInTheDocument();
       });
       expect(currentUserData()).toEqual({
         ...initialUserData,
@@ -287,7 +287,7 @@ describe("profile", () => {
       clickSave();
 
       await waitFor(() => {
-        expect(screen.getByTestId("toast-alert-SUCCESS")).toBeInTheDocument();
+        expect(screen.getByTestId("snackbar-alert-SUCCESS")).toBeInTheDocument();
       });
       expect(currentUserData()).toEqual({
         ...initialUserData,
@@ -371,7 +371,7 @@ describe("profile", () => {
       expect(
         screen.getByText(Config.profileDefaults[getFlow(userData)].municipality.errorTextRequired)
       ).toBeInTheDocument();
-      expect(screen.getByTestId("toast-alert-ERROR")).toBeInTheDocument();
+      expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
       selectByText("Location", newark.displayName);
       await waitFor(() =>
         expect(
@@ -405,7 +405,7 @@ describe("profile", () => {
           )
         ).toBeInTheDocument();
       });
-      expect(screen.getByTestId("toast-alert-ERROR")).toBeInTheDocument();
+      expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
     });
 
     it("user is able to go back to roadmap", async () => {
@@ -625,7 +625,7 @@ describe("profile", () => {
       clickSave();
 
       await waitFor(() => {
-        expect(screen.getByTestId("toast-alert-SUCCESS")).toBeInTheDocument();
+        expect(screen.getByTestId("snackbar-alert-SUCCESS")).toBeInTheDocument();
       });
       expect(currentUserData()).toEqual({
         ...userData,
@@ -737,7 +737,7 @@ describe("profile", () => {
           )
         ).toBeInTheDocument();
       });
-      expect(screen.getByTestId("toast-alert-ERROR")).toBeInTheDocument();
+      expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
     });
 
     it("prevents user from saving if sector is not selected", async () => {
@@ -753,7 +753,7 @@ describe("profile", () => {
           screen.getByText(Config.profileDefaults[getFlow(userData)].sectorId.errorTextRequired)
         ).toBeInTheDocument();
       });
-      expect(screen.getByTestId("toast-alert-ERROR")).toBeInTheDocument();
+      expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
     });
 
     it("returns user back to dashboard", async () => {
