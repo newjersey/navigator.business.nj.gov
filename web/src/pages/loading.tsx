@@ -43,7 +43,9 @@ const LoadingPage = (): ReactElement => {
       <NavBar logoOnly={true} />
       <main className="usa-section padding-top-0 desktop:padding-top-8" id="main">
         <SingleColumnContainer>
-          <LoadingIndicator />
+          <div className="margin-top-6">
+            <LoadingIndicator />
+          </div>
         </SingleColumnContainer>
       </main>
     </PageSkeleton>
