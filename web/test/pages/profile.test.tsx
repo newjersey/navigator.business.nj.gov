@@ -601,7 +601,11 @@ describe("profile", () => {
 
     it("updates the user data on save", async () => {
       const userData = generateUserData({
-        profileData: generateProfileData({ businessPersona: "OWNING", industryId: undefined }),
+        profileData: generateProfileData({
+          businessPersona: "OWNING",
+          initialOnboardingFlow: "OWNING",
+          industryId: undefined,
+        }),
       });
       const newark = generateMunicipality({ displayName: "Newark" });
 
@@ -652,6 +656,7 @@ describe("profile", () => {
       const userData = generateUserData({
         profileData: generateProfileData({
           businessPersona: "OWNING",
+          initialOnboardingFlow: "OWNING",
           businessName: "Applebees",
           entityId: "1234567890",
           employerId: "123456789",
@@ -722,7 +727,7 @@ describe("profile", () => {
 
     it("prevents user from saving if they partially entered Employer Id", async () => {
       const userData = generateUserData({
-        profileData: generateProfileData({ businessPersona: "OWNING" }),
+        profileData: generateProfileData({ businessPersona: "OWNING", initialOnboardingFlow: "OWNING" }),
       });
       renderPage({ userData: userData });
       chooseTab("numbers");
@@ -742,7 +747,11 @@ describe("profile", () => {
 
     it("prevents user from saving if sector is not selected", async () => {
       const userData = generateUserData({
-        profileData: generateProfileData({ businessPersona: "OWNING", sectorId: "" }),
+        profileData: generateProfileData({
+          businessPersona: "OWNING",
+          initialOnboardingFlow: "OWNING",
+          sectorId: "",
+        }),
       });
       renderPage({ userData: userData });
       fireEvent.blur(screen.queryByLabelText("Sector") as HTMLElement);
@@ -810,6 +819,46 @@ describe("profile", () => {
         }),
       });
       expect(screen.getByTestId("info")).toBeInTheDocument();
+    });
+
+    it("displays the industry dropdown when initialOnboaringFlow is STARTING", () => {
+      renderPage({
+        userData: generateUserData({
+          profileData: generateProfileData({ businessPersona: "OWNING", initialOnboardingFlow: "STARTING" }),
+        }),
+      });
+      expect(screen.getByLabelText("Industry")).toBeInTheDocument();
+      expect(screen.queryByLabelText("Sector")).not.toBeInTheDocument();
+    });
+
+    it("displays the sector dropdown when initialOnboaringFlow is OWNING", () => {
+      renderPage({
+        userData: generateUserData({
+          profileData: generateProfileData({ businessPersona: "OWNING", initialOnboardingFlow: "OWNING" }),
+        }),
+      });
+      expect(screen.getByLabelText("Sector")).toBeInTheDocument();
+      expect(screen.queryByLabelText("Industry")).not.toBeInTheDocument();
+    });
+
+    it("prevents user from saving if industry is not selected", async () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          businessPersona: "OWNING",
+          initialOnboardingFlow: "STARTING",
+          industryId: "",
+        }),
+      });
+      renderPage({ userData: userData });
+      fireEvent.blur(screen.queryByLabelText("Industry") as HTMLElement);
+
+      clickSave();
+      await waitFor(() => {
+        expect(
+          screen.getByText(Config.profileDefaults[getFlow(userData)].industryId.errorTextRequired)
+        ).toBeInTheDocument();
+      });
+      expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
     });
   });
 
