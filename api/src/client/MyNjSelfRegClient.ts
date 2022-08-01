@@ -52,12 +52,15 @@ export const MyNJSelfRegClientFactory = (config: MyNJConfig, logWriter: LogWrite
         const authURL = xmlResponseObj["AuthURL"];
         const errors = xmlResponseObj["Errors"];
 
-        logWriter.LogInfo(
-          `myNJ Self-Reg - Response Received. Data: Success: ${success} AuthId: ${authId}. Errors: ${errors}`
-        );
-
         if (!success || success[0] !== "true") {
+          logWriter.LogError(
+            `myNJ Self-Reg - Error Response Received. Data: Success: ${success} AuthId: ${authId}. Errors: ${errors}`
+          );
           throw errors;
+        } else {
+          logWriter.LogInfo(
+            `myNJ Self-Reg - Response Received. Data: Success: ${success} AuthId: ${authId}. Errors: ${errors}`
+          );
         }
 
         return {
