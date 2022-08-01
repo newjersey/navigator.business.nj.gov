@@ -179,7 +179,7 @@ describe("<feedbackModal />", () => {
       fireEvent.click(screen.getByText(Config.feedbackModal.feedbackSubmitButtonText));
 
       await waitFor(() => {
-        expect(screen.getByTestId("dialog-alert")).toBeInTheDocument();
+        expect(screen.getByTestId("modal-alert")).toBeInTheDocument();
       });
     });
   });
@@ -301,7 +301,7 @@ describe("<feedbackModal />", () => {
       fireEvent.click(screen.getByText(Config.feedbackModal.feedbackSubmitButtonText));
 
       await waitFor(() => {
-        expect(screen.getByTestId("dialog-alert")).toBeInTheDocument();
+        expect(screen.getByTestId("modal-alert")).toBeInTheDocument();
       });
     });
   });
