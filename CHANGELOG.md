@@ -1,3 +1,27 @@
+# [4.4.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v4.3.0...v4.4.0) (2022-08-01)
+
+
+### Bug Fixes
+
+* [[#182374942](https://github.com/newjersey/navigator.business.nj.gov/issues/182374942)] only trigger sign-in from loading if no code provided ([82371ee](https://github.com/newjersey/navigator.business.nj.gov/commit/82371ee35660b82c1d55b0067fc0788b1f480e64))
+* [[#182795535](https://github.com/newjersey/navigator.business.nj.gov/issues/182795535)] remove business plan step from nexus roadmap ([0f762a4](https://github.com/newjersey/navigator.business.nj.gov/commit/0f762a4ebc74f6cde86a9b275d8ae7ea75eea154))
+* [[#182809081](https://github.com/newjersey/navigator.business.nj.gov/issues/182809081)] update how the naics code is dynamically rendered to add the title ([da9a6d3](https://github.com/newjersey/navigator.business.nj.gov/commit/da9a6d34200052eed3d6d6f2ad1dedebb975bc54))
+* [[#182849918](https://github.com/newjersey/navigator.business.nj.gov/issues/182849918)] change URL for register-for-taxes-foreign ([017e37f](https://github.com/newjersey/navigator.business.nj.gov/commit/017e37f10e644c156b62f74675584163293653db))
+* **deps:** update aws-amplify to v4.6.0 ([5e3e3df](https://github.com/newjersey/navigator.business.nj.gov/commit/5e3e3df7b57f51ea9b3ffe77a51ee48f7a0d4269))
+* **deps:** update aws-sdk to v3.137.0 ([1bd6d64](https://github.com/newjersey/navigator.business.nj.gov/commit/1bd6d64d236577c4280d6750fad23513dd9ccb0b))
+* **deps:** update dependency helmet to v5.1.1 ([0f14008](https://github.com/newjersey/navigator.business.nj.gov/commit/0f14008ca7fdd11726cf9971d92597e07d1badf7))
+* **deps:** update material-ui ([0eeb8df](https://github.com/newjersey/navigator.business.nj.gov/commit/0eeb8df4513abf9e3954432066494e86be0846b5))
+* export OperatingPhase from shared ([5d1dde1](https://github.com/newjersey/navigator.business.nj.gov/commit/5d1dde1a2782042d06c520a439257b68666346c7))
+* spelling mistake ([c6a19a9](https://github.com/newjersey/navigator.business.nj.gov/commit/c6a19a9366f4f915cbec42f6b7e41b9882f588f4))
+
+
+### Features
+
+* [[#182374942](https://github.com/newjersey/navigator.business.nj.gov/issues/182374942)] myNJ splash loading page ([9416143](https://github.com/newjersey/navigator.business.nj.gov/commit/9416143fc0912f6f5a0065c7bac532a1bb2ce227))
+* [[#182682790](https://github.com/newjersey/navigator.business.nj.gov/issues/182682790)] certifications-nudge-tax-registration ([64dac06](https://github.com/newjersey/navigator.business.nj.gov/commit/64dac06dc132fb0650252883cbc1bddd7d95eb8f))
+* [[#182725994](https://github.com/newjersey/navigator.business.nj.gov/issues/182725994)] add naics code to nexus tasks ([3d775b4](https://github.com/newjersey/navigator.business.nj.gov/commit/3d775b47d10af4585cd2800632d1f48583cee752))
+* [182663272] add ownership and existing employee fields to poppy profile ([3d4ab70](https://github.com/newjersey/navigator.business.nj.gov/commit/3d4ab70624f6ccada9af486d1bba6c7bf6e727a6))
+
 # [4.3.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v4.2.0...v4.3.0) (2022-07-25)
 
 
