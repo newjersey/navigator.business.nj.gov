@@ -19,6 +19,6 @@ Every business in New Jersey must file an annual report. The annual report ensur
 >- Confirmation of submission of your annual report
 
 > **What if I do not complete my report?**  
-> After two missed annual reports, your business' authority to conduct business in New Jersey may be revoked, your `Business Registration Certificate|business-reg-certificate` invalidated, and you could lose access to many state services including funding opportunities and licenses.  
+> After two missed annual reports, you may lose your authority to do business in New Jersey, your `Business Registration Certificate|business-reg-certificate` may be invalidated, and you could lose access to state services including funding opportunities and licenses.  
 >
->To be reinstated, businesses will need to file a past report, pay a reinstatement fee and pay for each missed report.  
+>To be reinstated, businesses will need to file and pay for past reports as well as pay a reinstatement fee.   
