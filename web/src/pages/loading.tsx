@@ -43,4 +43,10 @@ const LoadingPage = (): ReactElement => {
   );
 };
 
+export async function getStaticProps() {
+  return {
+    props: { noAuth: true },
+  };
+}
+
 export default LoadingPage;
