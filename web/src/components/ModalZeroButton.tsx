@@ -43,7 +43,7 @@ export const ModalZeroButton = (props: Props) => {
       <DialogContent sx={{ padding: 0 }} dividers={props.dividers}>
         <div className="padding-x-4 margin-bottom-4">
           {props.showAlert && props.alertVariant && props.alertText && (
-            <Alert dataTestid="dialog-alert" variant={props.alertVariant} className="margin-top-0">
+            <Alert dataTestid="modal-alert" variant={props.alertVariant} className="margin-top-0">
               <Content>{props.alertText}</Content>
             </Alert>
           )}
