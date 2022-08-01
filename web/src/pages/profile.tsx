@@ -386,7 +386,12 @@ const ProfilePage = (props: Props): ReactElement => {
           />
         </div>
         <div className="margin-top-4">
-          <OnboardingSectors onValidation={onValidation} fieldStates={fieldStates} headerAriaLevel={3} />
+          {(profileData.initialOnboardingFlow === "STARTING" || props.CMS_ONLY_fakeUserData) && (
+            <OnboardingIndustry onValidation={onValidation} fieldStates={fieldStates} />
+          )}
+          {(profileData.initialOnboardingFlow === "OWNING" || props.CMS_ONLY_fakeUserData) && (
+            <OnboardingSectors onValidation={onValidation} fieldStates={fieldStates} headerAriaLevel={3} />
+          )}
         </div>
         <div className="margin-top-4">
           <OnboardingExistingEmployees

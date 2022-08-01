@@ -2569,7 +2569,17 @@ collections:
                           widget: "string",
                         }
                       - { label: "Description", name: "description", widget: "markdown" }
-                  - label: Sector ID
+                  - label: Industry ID (shown when starting a new business)
+                    name: industryId
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - { label: "Error Text (when not set)", name: "errorTextRequired", widget: "string" }
+                      - { label: "Description", name: "description", widget: "markdown" }
+                      - { label: "Search Affirmation", name: "searchAffirmation", widget: "markdown" }
+                  - label: Sector ID  (shown when existing business)
                     name: sectorId
                     collapsed: true
                     widget: object

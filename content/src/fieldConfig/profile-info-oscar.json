@@ -37,11 +37,11 @@
         "description": "What is your legal structure? `Learn about legal structures|legal-structure-learn-more`"
       },
       "industryId": {
-        "placeholder": "",
-        "header": "",
-        "description": "",
-        "errorTextRequired": "",
-        "searchAffirmation": ""
+        "placeholder": "Select an industry",
+        "header": "## Industry",
+        "description": "Which industry best describes your business?",
+        "errorTextRequired": "Industry is a required field.",
+        "searchAffirmation": "_\"**${searchText}**\" falls under the industries below:_"
       },
       "existingEmployees": {
         "placeholder": "Enter Number of Employees",
