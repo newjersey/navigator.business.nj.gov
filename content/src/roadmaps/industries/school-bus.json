@@ -56,7 +56,8 @@
     "isRealEstateAppraisalManagementApplicable": false,
     "canBeReseller": false,
     "isLiquorLicenseApplicable": false,
-    "isCpaRequiredApplicable": false
+    "isCpaRequiredApplicable": false,
+    "isTransportation": true
   },
   "isEnabled": false,
   "additionalSearchTerms": "bus, school bus, ",
