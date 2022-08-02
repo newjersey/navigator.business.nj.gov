@@ -11,7 +11,7 @@
       "municipality": {
         "placeholder": "Type in the name of your town (i.e Newark, Jersey City, etc)",
         "header": "## Location",
-        "description": "Where in New Jersey will your first location be? \n\n**\\*Note:** Unincorporated communities are not listed here, instead, select the town, city, or borough under whose jurisdiction you fall. You can find your jurisdiction by [doing a search](https://www.nj.gov/nj/gov/county/localities.html) typing in your community into the local name.*",
+        "description": "Where in New Jersey will your first location be? \n\n**\\*Note:** Unincorporated communities are not listed here. You can find your official jurisdiction by [doing a search](https://www.nj.gov/nj/gov/county/localities.html) (you will type in your community into the local name field).*",
         "errorTextRequired": "Please select a location."
       },
       "legalStructureId": {
