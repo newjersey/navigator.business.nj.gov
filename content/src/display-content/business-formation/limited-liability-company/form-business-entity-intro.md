@@ -5,4 +5,4 @@ This online application will register your `legal structure|legal-structure-lear
 
 This form will take about 5–10 minutes to complete. You will have completed formation and obtained an `Entity ID|entity-id` immediately after payment is received.
 
-Interested in `reserving your business name before registering|name-reservation`?
+*Interested in* `reserving your business name temporarily|Medicaid` before registering*?*
