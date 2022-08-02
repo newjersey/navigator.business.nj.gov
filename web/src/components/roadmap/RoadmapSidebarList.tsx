@@ -34,7 +34,6 @@ export const RoadmapSidebarList = (props: Props): ReactElement => {
     <>
       <h2>{Config.roadmapDefaults.sidebarHeading}</h2>
       <hr className="bg-roadmap-blue-dark hr-2px margin-bottom-4" />
-
       {visibleCardsOrderedByWeight.map((card: SidebarCardContent) => (
         <RoadmapSidebarCard card={card} key={card.id} />
       ))}

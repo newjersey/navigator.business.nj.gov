@@ -1848,6 +1848,20 @@ collections:
                   name: lockedStatusTooltipText,
                   widget: text,
                 }
+          - label: Tax Task - Tax Registration Modal
+            name: taxRegistrationModal
+            collapsed: true
+            widget: object
+            summary: "{{taxRegistrationModal}}"
+            fields:
+              - { label: Title, name: title, widget: string }
+              - { label: Subtitle, name: subtitle, widget: markdown }
+              - { label: Save button text, name: saveButtonText, widget: string }
+              - { label: Cancel button text, name: cancelButtonText, widget: string }
+              - { label: Are-You-Sure Tax Title, name: areYouSureTaxTitle, widget: string }
+              - { label: Are-You-Sure Tax Body, name: areYouSureTaxBody, widget: markdown }
+              - { label: Are-You-Sure Tax Continue Button, name: areYouSureTaxContinueButton, widget: string }
+              - { label: Are-You-Sure Tax Cancel Button, name: areYouSureTaxCancelButton, widget: string }
 
           - label: Funding Defaults
             name: fundingDefaults
@@ -2028,6 +2042,8 @@ collections:
               - { label: Calendar Header, name: calendarHeader, widget: string }
               - { label: Calendar Snackbar Heading, name: calendarSnackbarHeading, widget: text }
               - { label: Calendar Snackbar Body, name: calendarSnackbarBody, widget: text }
+              - { label: Certifications Snackbar Heading, name: certificationsSnackbarHeading, widget: text }
+              - { label: Certifications Snackbar Body, name: certificationsSnackbarBody, widget: text }
           - label: Section Headers
             name: sectionHeaders
             collapsed: true

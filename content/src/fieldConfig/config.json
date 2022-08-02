@@ -404,17 +404,19 @@
   "roadmapDefaults": {
     "congratulatorModalBody": "You can now start your",
     "graduationModalContinueButtonText": "Continue",
-    "calendarSnackbarBody": "You can see your next reporting due date at the bottom of this page.",
     "sidebarHeading": "For You",
     "congratulatorModalLinkText": "tasks.",
     "loadingText": "Loading...",
     "calendarFilingDueDateLabel": "Due",
-    "calendarHeader": "Upcoming",
     "congratulatorModalHeader": "You reached a crucial milestone as a business.",
     "congratulatorModalTitle": "You did it!",
     "graduationModalCancelButtonText": "Cancel",
     "graduationModalTitle": "Tell us more about your business",
-    "calendarSnackbarHeading": "Calendar Added!"
+    "calendarHeader": "Upcoming",
+    "calendarSnackbarHeading": "Calendar Added!",
+    "calendarSnackbarBody": "You can see your next reporting due date at the bottom of this page.",
+    "certificationsSnackbarHeading": "Certifications Added!",
+    "certificationsSnackbarBody": "The certification programs you may be eligible for are now listed in the “For You” section on the right side of the screen."
   },
   "formationDateModal": {
     "fieldDescription": "Find your effective date on your `Certificate of Formation|certificate-formation` . Once you submit your effective date, you will not be able to change it.",
@@ -571,5 +573,15 @@
     "newJerseyDateBodyText": "ET",
     "guestModeToProfileButtonText": "Guest Account",
     "genericToProfileButtonText": "Business Profile"
+  },
+  "taxRegistrationModal": {
+    "title": "You're All Done with Tax Registration!",
+    "subtitle": "Now we can see what certifications you're eligible for, tell us your...",
+    "saveButtonText": "Save",
+    "cancelButtonText": "Cancel",
+    "areYouSureTaxTitle": "Didn’t Register Yet?",
+    "areYouSureTaxBody": "If you change your task status, you will need to resubmit your Tax ID and will lose access to your Certifications.",
+    "areYouSureTaxContinueButton": "Continue",
+    "areYouSureTaxCancelButton": "Cancel"
   }
 }
