@@ -8,4 +8,4 @@ Names are reserved for six months, **BUT YOU WILL NOT be able to register that b
 
 Alternatively, you can form your business now, and set the `effective date|effective-date` for some point in the future.
 
-[Reserve My Business Name](https://www.njportal.com/dor/businessamendments)
+I'd like to continue on and [reserve my business name](https://www.njportal.com/dor/businessamendments).
