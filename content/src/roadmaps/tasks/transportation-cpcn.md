@@ -8,7 +8,7 @@ callToActionText: File My Certificate
 required: true
 issuingAgency: New Jersey Motor Vehicle Commission
 ---
-You need to file a Certificate of Public Convenience and Necessity to register your commercial vehicle
+You need to file a Certificate of Public Convenience and Necessity to register your commercial vehicle.
  
 ---
 ### Application Requirements
