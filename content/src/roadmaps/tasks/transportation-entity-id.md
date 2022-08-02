@@ -18,7 +18,7 @@ You will need an `Entity ID Number|mvc-entity-id` from the New Jersey Motor Vehi
 - Entity ID application form
 - `EIN|ein`
 - Certified document from the IRS displaying the business name and address
-- Copy of NJ `Certificate of Formation|certificate-formation`
+- Copy of your `Certificate of Formation|certificate-formation`
  
 >**Once completed, you will have:**
 >- A letter mailed to you with your MVC-issued Entity ID 
