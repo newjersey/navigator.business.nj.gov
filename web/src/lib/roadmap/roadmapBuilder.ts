@@ -13,9 +13,7 @@ export const buildRoadmap = async ({
   const results = await stepImporter();
 
   let roadmapBuilder: RoadmapBuilder = {
-    steps: results.map((step: GenericStep) => ({
-      ...step,
-    })),
+    steps: results.map((step: GenericStep) => ({ ...step })),
     tasks: [],
   };
 
