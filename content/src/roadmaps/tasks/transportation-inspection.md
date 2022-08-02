@@ -12,7 +12,7 @@ You must have your commercial vehicle inspected by the New Jersey Motor Vehicle 
 ---
 ### Application Requirements
 - Business name
-- Business physical address
+- Business address
 - Insurance company name and policy number
 - Copy of the vehicle title
 - Vehicle information (year, make, model, etc.)
