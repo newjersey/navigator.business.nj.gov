@@ -520,7 +520,7 @@ export const generateFunding = (overrides: Partial<Funding>): Funding => {
     agency: [randomInt() % 2 ? "NJEDA" : "NJDOL"],
     publishStageArchive: null,
     openDate: getCurrentDateISOString(),
-    dueDate: getCurrentDateISOString(),
+    dueDate: "",
     status: "rolling application",
     programFrequency: randomFundingProgramFrequency(),
     businessStage: randomFundingBusinessStage(),
