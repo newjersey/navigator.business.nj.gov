@@ -1,4 +1,5 @@
 import { Content } from "@/components/Content";
+import { LoadingIndicator } from "@/components/LoadingIndicator";
 import { HorizontalStepper } from "@/components/njwds-extended/HorizontalStepper";
 import { TaskCTA } from "@/components/TaskCTA";
 import { TaskHeader } from "@/components/TaskHeader";
@@ -65,6 +66,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
   const [tab, setTab] = useState(0);
   const [errorMap, setErrorMap] = useState<FormationFieldErrorMap>(createFormationFieldErrorMap());
   const [showResponseAlert, setShowResponseAlert] = useState<boolean>(false);
+  const [isLoadingGetFiling, setIsLoadingGetFiling] = useState<boolean>(false);
 
   const isValidLegalStructure = allowFormation(userData?.profileData.legalStructureId);
 
@@ -92,8 +94,13 @@ export const BusinessFormation = (props: Props): ReactElement => {
     if (!router.isReady) return;
     const completeFiling = router.query.completeFiling;
     if (completeFiling === "true") {
-      router.replace({ pathname: `/tasks/${props.task.urlSlug}` }, undefined, { shallow: true });
-      api.getCompletedFiling().then((newUserData) => update(newUserData));
+      setIsLoadingGetFiling(true);
+      api.getCompletedFiling().then((newUserData) => {
+        update(newUserData).then(() => {
+          setIsLoadingGetFiling(false);
+          router.replace({ pathname: `/tasks/${props.task.urlSlug}` }, undefined, { shallow: true });
+        });
+      });
     }
   }, [router.isReady, router.query.completeFiling, update, router, props.task.urlSlug]);
 
@@ -114,6 +121,17 @@ export const BusinessFormation = (props: Props): ReactElement => {
           link={getModifiedTaskContent(roadmap, props.task, "callToActionLink")}
           text={getModifiedTaskContent(roadmap, props.task, "callToActionText")}
         />
+      </div>
+    );
+  }
+
+  if (isLoadingGetFiling) {
+    return (
+      <div className="flex flex-column minh-38">
+        <TaskHeader task={props.task} />
+        <div className="margin-top-6">
+          <LoadingIndicator />
+        </div>
       </div>
     );
   }
