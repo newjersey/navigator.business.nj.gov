@@ -36,4 +36,4 @@ You are seeing this task because your business either has a `nexus|nexus-busines
 > *  `Business Tax PIN|tax-pin` 
 > * Authorization to Collect Sales Tax Certificate (if applicable)
 >
-> *It may take up to 72 hours before you receive this information in your email, your PIN may take longer as it will be sent through the mail.*
+> *If you registered online, you will recieve an email confirmation where you can download your BRC. It may take up to 72 hours before you can download your BRC on a public site. Your PIN may take longer as it will be sent through the mail.*
