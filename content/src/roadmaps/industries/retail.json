@@ -9,7 +9,8 @@
     "isProvidesStaffingServicesApplicable": false,
     "isCertifiedInteriorDesignerApplicable": false,
     "isRealEstateAppraisalManagementApplicable": false,
-    "isLiquorLicenseApplicable": false
+    "isLiquorLicenseApplicable": false,
+    "isTransportation": false
   },
   "isEnabled": true,
   "roadmapSteps": [
