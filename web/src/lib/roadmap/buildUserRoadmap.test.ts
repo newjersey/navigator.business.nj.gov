@@ -445,6 +445,23 @@ describe("buildUserRoadmap", () => {
       });
     });
 
+    describe("transportation", () => {
+      it("adds home-based-transporation add-on if transportation and home-based", async () => {
+        await buildUserRoadmap(generateStartingProfile({ homeBasedBusiness: true, industryId: "trucking" }));
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("home-based-transporation");
+      });
+
+      it("does not add home-based-transporation add-on if transportation and not home-based", async () => {
+        await buildUserRoadmap(generateStartingProfile({ homeBasedBusiness: false, industryId: "trucking" }));
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("home-based-transporation");
+      });
+
+      it("does not add home-based-transporation add-on if not transportation", async () => {
+        await buildUserRoadmap(generateStartingProfile({ homeBasedBusiness: true, industryId: "generic" }));
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("home-based-transporation");
+      });
+    });
+
     describe("liquor license", () => {
       it("adds liquor-license add-on and modification if is true", async () => {
         await buildUserRoadmap(generateStartingProfile({ liquorLicense: true }));

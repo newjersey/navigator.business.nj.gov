@@ -9,7 +9,8 @@
     "isLiquorLicenseApplicable": false,
     "isRealEstateAppraisalManagementApplicable": false,
     "isCertifiedInteriorDesignerApplicable": false,
-    "isProvidesStaffingServicesApplicable": false
+    "isProvidesStaffingServicesApplicable": false,
+    "isTransportation": true
   },
   "roadmapSteps": [
     {
@@ -61,11 +62,6 @@
       "step": 4,
       "weight": 20,
       "task": "trucking-irp"
-    },
-    {
-      "step": 4,
-      "weight": 25,
-      "task": "trucking-parking"
     }
   ],
   "name": "Trucking",

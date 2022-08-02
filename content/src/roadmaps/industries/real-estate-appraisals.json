@@ -8,7 +8,8 @@
     "isLiquorLicenseApplicable": false,
     "isRealEstateAppraisalManagementApplicable": true,
     "isCertifiedInteriorDesignerApplicable": false,
-    "isProvidesStaffingServicesApplicable": false
+    "isProvidesStaffingServicesApplicable": false,
+    "isTransportation": false
   },
   "roadmapSteps": [
     {

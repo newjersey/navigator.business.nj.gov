@@ -2393,6 +2393,10 @@ collections:
             name: canBeReseller
             widget: boolean
             default: false
+          - label: Transportation
+            name: isTransportation
+            widget: boolean
+            default: false
       - label: Roadmap Steps
         name: roadmapSteps
         widget: list

@@ -8,7 +8,8 @@
     "isRealEstateAppraisalManagementApplicable": false,
     "canBeReseller": true,
     "isLiquorLicenseApplicable": false,
-    "isCpaRequiredApplicable": false
+    "isCpaRequiredApplicable": false,
+    "isTransportation": false
   },
   "isEnabled": true,
   "roadmapSteps": [
