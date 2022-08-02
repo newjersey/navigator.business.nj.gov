@@ -10,8 +10,7 @@ import {
   ProfileFields,
   TaskProgress,
 } from "@/lib/types/types";
-import { UserData } from "@businessnjgovnavigator/shared";
-import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
+import { createEmptyProfileData, ProfileData, UserData } from "@businessnjgovnavigator/shared";
 import { ReactElement, useEffect, useState } from "react";
 
 interface Props {

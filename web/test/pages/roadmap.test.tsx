@@ -2,7 +2,7 @@ import { SignUpSnackbar } from "@/components/auth/SignUpSnackbar";
 import { getMergedConfig } from "@/contexts/configContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { ROUTES } from "@/lib/domain-logic/routes";
-import { OperateReference, SidebarCardContent } from "@/lib/types/types";
+import { Certification, Funding, OperateReference, SidebarCardContent } from "@/lib/types/types";
 import RoadmapPage from "@/pages/roadmap";
 import {
   generatePreferences,
@@ -77,6 +77,8 @@ describe("roadmap page", () => {
         <RoadmapPage
           operateReferences={operateReferences ?? {}}
           displayContent={createDisplayContent(sidebarDisplayContent)}
+          fundings={[]}
+          certifications={[]}
         />
       </ThemeProvider>
     );
@@ -86,6 +88,8 @@ describe("roadmap page", () => {
     userData,
     isAuthenticated,
     sidebarDisplayContent,
+    fundings,
+    certifications,
     alertIsVisible,
     registrationAlertStatus,
     setAlertIsVisible,
@@ -93,6 +97,8 @@ describe("roadmap page", () => {
     userData?: UserData;
     isAuthenticated?: IsAuthenticated;
     sidebarDisplayContent?: Record<string, SidebarCardContent>;
+    fundings?: Funding[];
+    certifications?: Certification[];
     alertIsVisible?: boolean;
     registrationAlertStatus?: RegistrationStatus;
     setAlertIsVisible?: jest.Mock<() => void>;
@@ -107,6 +113,8 @@ describe("roadmap page", () => {
             <RoadmapPage
               operateReferences={{}}
               displayContent={createDisplayContent(sidebarDisplayContent)}
+              fundings={fundings ?? []}
+              certifications={certifications ?? []}
             />
           </ThemeProvider>
         </WithStatefulUserData>,
@@ -299,6 +307,14 @@ describe("roadmap page", () => {
     renderRoadmapPage({});
 
     expect(screen.getByTestId("snackbar-alert-calendar")).toBeInTheDocument();
+  });
+
+  it("renders certification snackbar when fromTaxRegistration query parameter is provided", () => {
+    useMockRouter({ isReady: true, query: { fromTaxRegistration: "true" } });
+
+    renderRoadmapPage({});
+
+    expect(screen.getByTestId("toast-alert-certification")).toBeInTheDocument();
   });
 
   it("displays filings calendar as list when taxfiling and formation date is populated", () => {

@@ -4,8 +4,8 @@ import { LoadingIndicator } from "@/components/LoadingIndicator";
 import { NavBar } from "@/components/navbar/NavBar";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { RightSidebarPageLayout } from "@/components/RightSidebarPageLayout";
-import { RoadmapSidebarList } from "@/components/roadmap/RoadmapSidebarList";
 import { SectionAccordion } from "@/components/roadmap/SectionAccordion";
+import { SidebarCardsList } from "@/components/roadmap/SidebarCardsList";
 import { Step } from "@/components/Step";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { useAuthAlertPage } from "@/lib/auth/useAuthProtectedPage";
@@ -15,9 +15,11 @@ import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { routeForPersona } from "@/lib/domain-logic/routeForPersona";
 import { ROUTES } from "@/lib/domain-logic/routes";
+import { loadAllCertifications } from "@/lib/static/loadCertifications";
 import { loadRoadmapDisplayContent } from "@/lib/static/loadDisplayContent";
+import { loadAllFundings } from "@/lib/static/loadFundings";
 import { loadOperateReferences } from "@/lib/static/loadOperateReferences";
-import { OperateReference, RoadmapDisplayContent } from "@/lib/types/types";
+import { Certification, Funding, OperateReference, RoadmapDisplayContent } from "@/lib/types/types";
 import { getSectionNames, getTaxFilings, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { GetStaticPropsResult } from "next";
 import { useRouter } from "next/router";
@@ -26,6 +28,8 @@ import { ReactElement, useEffect } from "react";
 interface Props {
   displayContent: RoadmapDisplayContent;
   operateReferences: Record<string, OperateReference>;
+  fundings: Funding[];
+  certifications: Certification[];
 }
 
 const RoadmapPage = (props: Props): ReactElement => {
@@ -50,6 +54,15 @@ const RoadmapPage = (props: Props): ReactElement => {
     bodyText: Config.roadmapDefaults.calendarSnackbarBody,
     variant: "success",
     dataTestId: "snackbar-alert-calendar",
+  });
+
+  const CertificationsAlert = useQueryControlledAlert({
+    queryKey: "fromTaxRegistration",
+    pagePath: ROUTES.roadmap,
+    headerText: Config.roadmapDefaults.certificationsSnackbarHeading,
+    bodyText: Config.roadmapDefaults.certificationsSnackbarBody,
+    variant: "success",
+    dataTestId: "toast-alert-certification",
   });
 
   useMountEffectWhenDefined(() => {
@@ -118,12 +131,17 @@ const RoadmapPage = (props: Props): ReactElement => {
             color="blue"
             mainContent={renderRoadmap}
             sidebarContent={
-              <RoadmapSidebarList sidebarDisplayContent={props.displayContent.sidebarDisplayContent} />
+              <SidebarCardsList
+                sidebarDisplayContent={props.displayContent.sidebarDisplayContent}
+                certifications={props.certifications}
+                fundings={props.fundings}
+              />
             }
           />
         )}
         <>{ProfileUpdatedAlert}</>
         <>{CalendarAlert}</>
+        <>{CertificationsAlert}</>
       </main>
     </PageSkeleton>
   );
@@ -134,6 +152,8 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
     props: {
       displayContent: loadRoadmapDisplayContent(),
       operateReferences: loadOperateReferences(),
+      fundings: loadAllFundings(),
+      certifications: loadAllCertifications(),
     },
   };
 };

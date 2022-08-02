@@ -1,5 +1,6 @@
 import { TaskHeader } from "@/components/TaskHeader";
 import { getMergedConfig } from "@/contexts/configContext";
+import { routeForPersona } from "@/lib/domain-logic/routeForPersona";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { Task, TaskProgress } from "@/lib/types/types";
 import {
@@ -11,6 +12,7 @@ import {
   generateTask,
   generateUserData,
 } from "@/test/factories";
+import { markdownToText } from "@/test/helpers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import {
@@ -19,9 +21,16 @@ import {
   userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { formationTaskId, getCurrentDate, UserData } from "@businessnjgovnavigator/shared";
+import {
+  formationTaskId,
+  getCurrentDate,
+  randomInt,
+  taxTaskId,
+  UserData,
+} from "@businessnjgovnavigator/shared";
+import { LegalStructures } from "@businessnjgovnavigator/shared/";
 import { createTheme, ThemeProvider } from "@mui/material";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { Dayjs } from "dayjs";
 
 jest.mock("next/router");
@@ -36,6 +45,15 @@ const renderTaskHeader = (task: Task, initialUserData?: UserData) =>
       </WithStatefulUserData>
     </ThemeProvider>
   );
+
+const randomTradeNameLegalStructure = () => {
+  return randomInt() % 2 ? "sole-proprietorship" : "general-partnership";
+};
+
+const randomPublicFilingLegalStructure = () => {
+  const nonTradeNameLegalStructures = LegalStructures.filter((x) => x.requiresPublicFiling);
+  return nonTradeNameLegalStructures[randomInt() % nonTradeNameLegalStructures.length].id;
+};
 
 const Config = getMergedConfig();
 
@@ -192,6 +210,212 @@ describe("<TaskHeader />", () => {
     });
   });
 
+  describe("tax registration modal", () => {
+    it("opens when tax task is marked complete", () => {
+      const taxTask = generateTask({ id: taxTaskId });
+      const userData = generateUserData({
+        taskProgress: {
+          [taxTaskId]: "NOT_STARTED",
+        },
+      });
+      renderTaskHeader(taxTask, userData);
+      selectCompleted();
+      expect(screen.getByText(Config.taxRegistrationModal.title)).toBeInTheDocument();
+    });
+
+    it("doesn't update the task status when closed", async () => {
+      const taxTask = generateTask({ id: taxTaskId });
+      const userData = generateUserData({
+        taskProgress: {
+          [taxTaskId]: "NOT_STARTED",
+        },
+      });
+      renderTaskHeader(taxTask, userData);
+      selectCompleted();
+
+      fireEvent.click(screen.getByText(Config.taxRegistrationModal.cancelButtonText));
+      await waitFor(() => {
+        const dropdown = screen.getByTestId("taskProgress");
+        expect(within(dropdown).getByText(Config.taskProgress.NOT_STARTED)).toBeInTheDocument();
+      });
+      expect(userDataWasNotUpdated).toBeTruthy();
+    });
+
+    it("updates the task progress when the modal is saved", async () => {
+      const taxTask = generateTask({ id: taxTaskId });
+      const userData = generateUserData({
+        taskProgress: {
+          [taxTaskId]: "NOT_STARTED",
+        },
+      });
+      renderTaskHeader(taxTask, userData);
+      selectCompleted();
+
+      fireEvent.click(screen.getByText(Config.taxRegistrationModal.saveButtonText));
+      await waitFor(() => {
+        const dropdown = screen.getByTestId("taskProgress");
+        expect(within(dropdown).getByText(Config.taskProgress.COMPLETED)).toBeInTheDocument();
+      });
+    });
+
+    it("gets redirected to roadmap with the proper query parameter when completed", async () => {
+      const taxTask = generateTask({ id: taxTaskId });
+      const userData = generateUserData({
+        taskProgress: {
+          [taxTaskId]: "NOT_STARTED",
+        },
+        profileData: generateProfileData({ businessPersona: "STARTING" }),
+      });
+
+      renderTaskHeader(taxTask, userData);
+      selectCompleted();
+
+      fireEvent.click(screen.getByText(Config.taxRegistrationModal.saveButtonText));
+      await waitFor(() => {
+        expect(mockPush).toHaveBeenCalledWith({
+          pathname: routeForPersona(userData.profileData.businessPersona),
+          query: { fromFormBusinessEntity: "false", fromTaxRegistration: "true" },
+        });
+      });
+    });
+
+    it("shows the warning modal if the user tries to change status from completed", () => {
+      const taxTask = generateTask({ id: taxTaskId });
+      const userData = generateUserData({
+        taskProgress: {
+          [taxTaskId]: "COMPLETED",
+        },
+      });
+
+      renderTaskHeader(taxTask, userData);
+      fireEvent.click(screen.getByTestId("taskProgress"));
+      fireEvent.click(screen.getByTestId("IN_PROGRESS"));
+
+      expect(screen.getByText(Config.taxRegistrationModal.areYouSureTaxBody)).toBeInTheDocument();
+    });
+
+    it("updates the task progress if the user continues in the warning modal", async () => {
+      const taxTask = generateTask({ id: taxTaskId });
+      const userData = generateUserData({
+        taskProgress: {
+          [taxTaskId]: "COMPLETED",
+        },
+      });
+
+      renderTaskHeader(taxTask, userData);
+      fireEvent.click(screen.getByTestId("taskProgress"));
+      fireEvent.click(screen.getByTestId("IN_PROGRESS"));
+
+      expect(screen.getByText(Config.taxRegistrationModal.areYouSureTaxBody)).toBeInTheDocument();
+
+      fireEvent.click(screen.getByText(Config.taxRegistrationModal.areYouSureTaxContinueButton));
+      const dropdown = screen.getByTestId("taskProgress");
+      expect(within(dropdown).getByText(Config.taskProgress.IN_PROGRESS)).toBeInTheDocument();
+    });
+
+    it("doesn't update the task progress if the user cancels in the warning modal", async () => {
+      const taxTask = generateTask({ id: taxTaskId });
+      const userData = generateUserData({
+        taskProgress: {
+          [taxTaskId]: "COMPLETED",
+        },
+      });
+
+      renderTaskHeader(taxTask, userData);
+      fireEvent.click(screen.getByTestId("taskProgress"));
+      fireEvent.click(screen.getByTestId("IN_PROGRESS"));
+
+      expect(screen.getByText(Config.taxRegistrationModal.areYouSureTaxBody)).toBeInTheDocument();
+      fireEvent.click(screen.getByText(Config.taxRegistrationModal.areYouSureTaxCancelButton));
+      await waitFor(() => {
+        const dropdown = screen.getByTestId("taskProgress");
+        expect(within(dropdown).getByText(Config.taskProgress.COMPLETED)).toBeInTheDocument();
+      });
+      expect(userDataWasNotUpdated).toBeTruthy();
+    });
+
+    describe("when trade name legal structure", () => {
+      it("shows all fields except business name and tax field", () => {
+        const taxTask = generateTask({ id: taxTaskId });
+        const userData = generateUserData({
+          profileData: generateProfileData({
+            legalStructureId: randomTradeNameLegalStructure(),
+          }),
+          taskProgress: {
+            [taxTaskId]: "NOT_STARTED",
+          },
+        });
+
+        renderTaskHeader(taxTask, userData);
+        selectCompleted();
+
+        expect(
+          screen.queryByText(markdownToText(Config.profileDefaults.STARTING.businessName.header))
+        ).not.toBeInTheDocument();
+        expect(
+          screen.queryByText(markdownToText(Config.profileDefaults.STARTING.taxId.header))
+        ).not.toBeInTheDocument();
+        expect(
+          screen.getByText(markdownToText(Config.profileDefaults.STARTING.existingEmployees.header))
+        ).toBeInTheDocument();
+        expect(
+          screen.getByText(markdownToText(Config.profileDefaults.STARTING.ownership.header))
+        ).toBeInTheDocument();
+      });
+    });
+
+    describe("when public filing legal structure", () => {
+      it("shows all fields when business name not populated", () => {
+        const taxTask = generateTask({ id: taxTaskId });
+        const userData = generateUserData({
+          profileData: generateProfileData({
+            businessName: "",
+            legalStructureId: randomPublicFilingLegalStructure(),
+          }),
+          taskProgress: {
+            [taxTaskId]: "NOT_STARTED",
+          },
+        });
+
+        renderTaskHeader(taxTask, userData);
+        selectCompleted();
+
+        expect(
+          screen.getByText(markdownToText(Config.profileDefaults.STARTING.businessName.header))
+        ).toBeInTheDocument();
+        expect(
+          screen.getByText(markdownToText(Config.profileDefaults.STARTING.taxId.header))
+        ).toBeInTheDocument();
+        expect(
+          screen.getByText(markdownToText(Config.profileDefaults.STARTING.existingEmployees.header))
+        ).toBeInTheDocument();
+        expect(
+          screen.getByText(markdownToText(Config.profileDefaults.STARTING.ownership.header))
+        ).toBeInTheDocument();
+      });
+
+      it("does not show business name field when already populated", () => {
+        const taxTask = generateTask({ id: taxTaskId });
+        const userData = generateUserData({
+          profileData: generateProfileData({
+            businessName: "test-business",
+            legalStructureId: randomPublicFilingLegalStructure(),
+          }),
+          taskProgress: {
+            [taxTaskId]: "NOT_STARTED",
+          },
+        });
+
+        renderTaskHeader(taxTask, userData);
+        selectCompleted();
+
+        expect(
+          screen.queryByText(markdownToText(Config.profileDefaults.STARTING.businessName.header))
+        ).not.toBeInTheDocument();
+      });
+    });
+  });
+
   describe("formation completion", () => {
     it("opens formation date modal when task changed to complete", () => {
       renderTaskHeader(generateTask({ id: formationTaskId }), generateUserData({}));
@@ -263,7 +487,7 @@ describe("<TaskHeader />", () => {
       expect(currentUserData().taskProgress[id]).toEqual("COMPLETED");
       expect(mockPush).toHaveBeenCalledWith({
         pathname: ROUTES.roadmap,
-        query: { fromFormBusinessEntity: "true" },
+        query: { fromFormBusinessEntity: "true", fromTaxRegistration: "false" },
       });
     });
 
