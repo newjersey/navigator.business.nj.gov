@@ -9,7 +9,7 @@ To find an insurance broker, speak to your network, local Chamber of Commerce, o
 
 ---
 ### Common Types of Commercial Insurance
-- **Liability Insurance:**  
+- **Commercial Liability Insurance:**  
 **Vehicles with capacity of fewer than 12 passengers:** an insurance policy with a minimum liability of $25,000 and a maximum liability of $100,000   
 **Vehicles with capacity of fewer than 20 passengers:** an insurance policy with a minimum liability of $25,000 and a maximum liability of $200,000   
 **Vehicles with capacity of fewer than 30 passengers:** an insurance policy with a minimum liability of $25,000 and a maximum liability of $400,000  
