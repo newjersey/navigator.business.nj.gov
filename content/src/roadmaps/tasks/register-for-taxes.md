@@ -33,3 +33,5 @@ It's time to register your business for State taxes. Doing so will tell the Stat
 > - `NJ Tax ID|tax-id`
 > - `Business Tax PIN|tax-pin`
 > - Authorization to Collect Sales Tax Certificate (if applicable)
+>
+> *If you registered online, you will receive an email confirmation where you can download your BRC. It may take up to 72 hours before you can download your BRC on a public site. Your PIN may take longer as it will be sent through the mail.*
