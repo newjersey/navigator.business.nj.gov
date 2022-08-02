@@ -11,7 +11,7 @@
       "municipality": {
         "placeholder": "Type in the name of your town (i.e Newark, Jersey City, etc)",
         "header": "## Location",
-        "description": "Where in New Jersey will your first location be? \n\n***Note:** Unincorporated towns are not listed here, instead, select the town under whose jurisdiction you fall. If you aren't sure, the advocates on the Chat can assist you.*",
+        "description": "Where in New Jersey will your first location be? \n\n***Note:** Unincorporated communities are not listed here, instead, select the town, city, or borough under whose jurisdiction you fall. If you aren't sure which one to choose, the advocates on the Chat can assist you.*",
         "errorTextRequired": "Please select a location."
       },
       "legalStructureId": {
