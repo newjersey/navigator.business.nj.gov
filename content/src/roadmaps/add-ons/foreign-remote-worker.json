@@ -3,15 +3,20 @@
     {
       "step": 1,
       "weight": 1,
-      "task": "register-for-taxes-foreign"
+      "task": "determine-naics-code"
     },
     {
       "step": 1,
       "weight": 2,
+      "task": "register-for-taxes-foreign"
+    },
+    {
+      "step": 1,
+      "weight": 3,
       "task": "research-insurance-needs-foreign"
     },
     {
-      "weight": 3,
+      "weight": 4,
       "task": "labor-laws",
       "step": 1
     }

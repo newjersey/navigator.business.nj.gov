@@ -1,5 +1,4 @@
 {
-  "naicsCodes": "484110, 484121, 484122, 484220, 484230",
   "defaultSectorId": "other-services",
   "canHavePermanentLocation": true,
   "roadmapSteps": [
@@ -29,44 +28,39 @@
       "task": "bank-account"
     },
     {
-      "step": 3,
       "weight": 15,
-      "task": "trucking-cdl"
+      "step": 3,
+      "task": "school-bus-license"
     },
     {
       "step": 3,
-      "weight": 16,
-      "task": "trucking-insurance"
-    },
-    {
-      "step": 4,
       "weight": 20,
-      "task": "trucking-boc3"
+      "task": "school-bus-insurance"
     },
     {
-      "step": 4,
+      "step": 3,
       "weight": 25,
-      "task": "trucking-usdot"
+      "task": "bus-inspection"
     },
     {
       "step": 4,
-      "weight": 30,
-      "task": "trucking-irp"
+      "weight": 10,
+      "task": "trucking-parking"
     }
   ],
-  "name": "Trucking",
+  "name": "School Transportation",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
-    "canBeReseller": false,
-    "isCpaRequiredApplicable": false,
-    "isLiquorLicenseApplicable": false,
-    "isRealEstateAppraisalManagementApplicable": false,
-    "isCertifiedInteriorDesignerApplicable": false,
     "isProvidesStaffingServicesApplicable": false,
+    "isCertifiedInteriorDesignerApplicable": false,
+    "isRealEstateAppraisalManagementApplicable": false,
+    "canBeReseller": false,
+    "isLiquorLicenseApplicable": false,
+    "isCpaRequiredApplicable": false,
     "isTransportation": true
   },
-  "isEnabled": true,
-  "additionalSearchTerms": "trucking, movers, box truck company, transportation, truck driving, hauling, truck haul, logistics, trucking company, ",
-  "id": "trucking",
-  "description": "Offers load-hauling services "
+  "isEnabled": false,
+  "additionalSearchTerms": "bus, school bus, ",
+  "id": "school-bus",
+  "description": "Transports children to and from school, day camps, or other activities"
 }
