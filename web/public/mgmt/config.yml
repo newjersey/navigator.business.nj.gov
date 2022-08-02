@@ -3431,3 +3431,36 @@ collections:
       - { label: "Required", name: "required", widget: "boolean", required: false }
       - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
       - { label: "Form Name", name: "formName", widget: "string", required: false }
+
+  - name: "taxes"
+    label: "Tax Types"
+    folder: "content/src/taxes"
+    summary: "/{{urlSlug}} - {{name}}"
+    identifier_field: "{{urlSlug}}"
+    slug: "{{urlSlug}}"
+    delete: true
+    create: true
+    editor:
+      preview: false
+    fields:
+      - { label: "Filename", name: "filename", widget: "string", required: false }
+      - { label: "Url Slug", name: "urlSlug", widget: "slug" }
+      - { label: "Tax Name", name: "taxName", widget: "string" }
+      - { label: "Description", name: "description", widget: "markdown" }
+      - { label: "Treasury Link", name: "treasuryLink", widget: "string" }
+      - label: "Frequency"
+        name: "frequency"
+        widget: "select"
+        options: ["Monthly", "Quarterly", "Annually"]
+        required: true
+      - { label: "Tax Rates", name: "taxRates", widget: "string" }
+      - { label: "Additional Info", name: "additionalInfo", widget: "markdown" }
+      - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
+      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
+      - label: "Can be filed online?"
+        name: "onlineFiling"
+        widget: "select"
+        options: ["Yes", "No"]
+        required: true
+      - { label: "Managing Agency", name: "managingAgency", widget: "string" }
+      - { label: "Form Number(s)", name: "formNumber", widget: "string" }
