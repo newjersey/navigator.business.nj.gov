@@ -9,7 +9,8 @@
     "isProvidesStaffingServicesApplicable": false,
     "isCertifiedInteriorDesignerApplicable": false,
     "isRealEstateAppraisalManagementApplicable": false,
-    "isCpaRequiredApplicable": false
+    "isCpaRequiredApplicable": false,
+    "isTransportation": false
   },
   "isEnabled": true,
   "roadmapSteps": [

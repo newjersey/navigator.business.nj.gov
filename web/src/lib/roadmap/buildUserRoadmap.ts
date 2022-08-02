@@ -108,6 +108,10 @@ const getIndustryBasedAddOns = (profileData: ProfileData, industryId: string | u
     addOns.push("cpa");
   }
 
+  if (profileData.homeBasedBusiness && industry.industryOnboardingQuestions.isTransportation) {
+    addOns.push("home-based-transporation");
+  }
+
   if (profileData.cannabisLicenseType === "ANNUAL") {
     addOns.push("cannabis-annual");
   }
