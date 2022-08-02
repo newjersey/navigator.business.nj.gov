@@ -39,17 +39,17 @@
       "task": "trucking-insurance"
     },
     {
-      "step": 3,
+      "step": 4,
       "weight": 20,
       "task": "trucking-boc3"
     },
     {
-      "step": 3,
+      "step": 4,
       "weight": 25,
       "task": "trucking-usdot"
     },
     {
-      "step": 3,
+      "step": 4,
       "weight": 30,
       "task": "trucking-irp"
     }
