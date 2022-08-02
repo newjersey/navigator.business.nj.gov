@@ -8,7 +8,7 @@ callToActionText: Register with USDoT
 required: true
 issuingAgency: US Department of Transportation
 ---
-You must register with the US Department of Transportation (USDoT) and obtain a registration number prior to offering commercial services.
+Any commercial vehicle crossing state lines must register with the US Department of Transportation (USDoT) and obtain a registration number.
  
 ---
 ### Eligibility Criteria
