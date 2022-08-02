@@ -116,6 +116,59 @@ describe("filterFundings", () => {
     expect(result).toEqual(expect.arrayContaining([funding1, funding2, funding3, funding5, funding6]));
   });
 
+  it("does not display any fundings with a past due due date", () => {
+    const userData = generateUserData({
+      profileData: generateProfileData({
+        homeBasedBusiness: false,
+        municipality: undefined,
+        existingEmployees: "1",
+        sectorId: undefined,
+      }),
+    });
+    const funding1 = generateFunding({
+      employeesRequired: "n/a",
+      status: "deadline",
+      dueDate: "07/01/2022",
+    });
+    const funding2 = generateFunding({
+      employeesRequired: "n/a",
+      status: "rolling application",
+    });
+
+    const fundings = [funding1, funding2];
+
+    const result = filterFundings(fundings, userData);
+    expect(result.length).toEqual(1);
+    expect(result).toEqual(expect.arrayContaining([funding2]));
+  });
+
+  it("displays any fundings with a due date in the future", () => {
+    const userData = generateUserData({
+      profileData: generateProfileData({
+        homeBasedBusiness: false,
+        municipality: undefined,
+        existingEmployees: "1",
+        sectorId: undefined,
+      }),
+    });
+    const funding1 = generateFunding({
+      employeesRequired: "n/a",
+      status: "deadline",
+      dueDate: "07/01/2050",
+    });
+
+    const funding2 = generateFunding({
+      employeesRequired: "n/a",
+      status: "rolling application",
+    });
+
+    const fundings = [funding1, funding2];
+
+    const result = filterFundings(fundings, userData);
+    expect(result.length).toEqual(2);
+    expect(result).toEqual(expect.arrayContaining([funding1, funding2]));
+  });
+
   it("does not display any fundings marked as Do Not Publish", () => {
     const userData = generateUserData({
       profileData: generateProfileData({
