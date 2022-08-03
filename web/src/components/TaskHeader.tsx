@@ -21,9 +21,10 @@ import {
   getSectionPositions,
   setPreferencesCloseSection,
 } from "@/lib/utils/helpers";
-import { isFormationTask, UserData } from "@businessnjgovnavigator/shared";
+import { isFormationTask, isTaxTask, UserData } from "@businessnjgovnavigator/shared";
 import { useRouter } from "next/router";
 import { ReactElement, useState } from "react";
+import { TaxRegistrationModal } from "./TaxRegistrationModal";
 
 interface Props {
   task: Task;
@@ -36,10 +37,14 @@ export const TaskHeader = (props: Props): ReactElement => {
   const [nextSection, setNextSection] = useState<SectionType | undefined>(undefined);
   const [congratulatoryModalIsOpen, setCongratulatoryModalIsOpen] = useState<boolean>(false);
   const [formationModalIsOpen, setFormationModalIsOpen] = useState<boolean>(false);
+  const [taxRegistrationModalIsOpen, setTaxRegistrationModalIsOpen] = useState<boolean>(false);
   const [areYouSureModalDesiredNewStatus, setAreYouSureModalDesiredNewStatus] = useState<
     TaskProgress | undefined
   >(undefined);
   const [successSnackbarIsOpen, setSuccessSnackbarIsOpen] = useState<boolean>(false);
+  const [areYouSureTaxModalDesiredNewStatus, setAreYouSureTaxModalDesiredNewStatus] = useState<
+    TaskProgress | undefined
+  >(undefined);
   const router = useRouter();
 
   const { Config } = useConfig();
@@ -77,7 +82,19 @@ export const TaskHeader = (props: Props): ReactElement => {
       setAreYouSureModalDesiredNewStatus(undefined);
     }
 
+    if (isTaxTask(props.task.id)) {
+      if (newValue === "COMPLETED" && currentTaskProgress !== "COMPLETED") {
+        setTaxRegistrationModalIsOpen(true);
+        return;
+      } else if (currentTaskProgress === "COMPLETED" && areYouSureTaxModalDesiredNewStatus === undefined) {
+        setAreYouSureTaxModalDesiredNewStatus(newValue);
+        return;
+      }
+      setAreYouSureTaxModalDesiredNewStatus(undefined);
+    }
+
     setFormationModalIsOpen(false);
+    setTaxRegistrationModalIsOpen(false);
     updateTaskProgress(newValue, updatedUserData, { redirectOnSuccess: false });
   };
 
@@ -114,7 +131,10 @@ export const TaskHeader = (props: Props): ReactElement => {
         if (redirectOnSuccess) {
           router.push({
             pathname: routeForPersona(userData.profileData.businessPersona),
-            query: { fromFormBusinessEntity: isFormationTask(props.task.id) ? "true" : "false" },
+            query: {
+              fromFormBusinessEntity: isFormationTask(props.task.id) ? "true" : "false",
+              fromTaxRegistration: isTaxTask(props.task.id) ? "true" : "false",
+            },
           });
         }
       })
@@ -180,6 +200,25 @@ export const TaskHeader = (props: Props): ReactElement => {
         close={() => setFormationModalIsOpen(false)}
         onSave={updateTaskProgress}
       />
+      <TaxRegistrationModal
+        isOpen={taxRegistrationModalIsOpen}
+        close={() => setTaxRegistrationModalIsOpen(false)}
+        onSave={updateTaskProgress}
+      />
+      <ModalTwoButton
+        isOpen={areYouSureTaxModalDesiredNewStatus !== undefined}
+        close={() => setAreYouSureTaxModalDesiredNewStatus(undefined)}
+        title={Config.taxRegistrationModal.areYouSureTaxTitle}
+        primaryButtonText={Config.taxRegistrationModal.areYouSureTaxContinueButton}
+        primaryButtonOnClick={() => {
+          if (areYouSureTaxModalDesiredNewStatus) {
+            onDropdownChanged(areYouSureTaxModalDesiredNewStatus);
+          }
+        }}
+        secondaryButtonText={Config.taxRegistrationModal.areYouSureTaxCancelButton}
+      >
+        <Content>{Config.taxRegistrationModal.areYouSureTaxBody}</Content>
+      </ModalTwoButton>
       <ModalTwoButton
         isOpen={areYouSureModalDesiredNewStatus !== undefined}
         close={() => setAreYouSureModalDesiredNewStatus(undefined)}

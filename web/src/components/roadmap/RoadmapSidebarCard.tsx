@@ -135,7 +135,7 @@ export const RoadmapSidebarCard = (props: Props) => {
       <GraduationModal open={modalOpen} handleClose={() => setModalOpen(false)} />
 
       <div
-        className={`border radius-md border-${props.card.borderColor} box-shadow-${props.card.shadowColor} margin-left-05 margin-bottom-3`}
+        className={`border radius-md border-${props.card.borderColor} box-shadow-${props.card.shadowColor} margin-right-105 margin-bottom-3`}
         {...{ "data-testid": props.card.id }}
       >
         {props.card.header && (
