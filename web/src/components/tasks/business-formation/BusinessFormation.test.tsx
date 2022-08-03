@@ -22,7 +22,7 @@ import {
   getCurrentDate,
 } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
-import { fireEvent, screen, waitFor } from "@testing-library/react";
+import { act, fireEvent, screen, waitFor } from "@testing-library/react";
 
 function mockMaterialUI(): typeof materialUi {
   return {
@@ -84,12 +84,16 @@ describe("<BusinessFormation />", () => {
 
     const task = generateTask({ urlSlug: "some-formation-url" });
 
-    preparePage({ formationData }, displayContent, undefined, task);
-    expect(mockApi.getCompletedFiling).toHaveBeenCalled();
-    await waitFor(() => expect(currentUserData()).toEqual(newUserData));
-    expect(mockPush).toHaveBeenCalledWith({ pathname: "/tasks/some-formation-url" }, undefined, {
-      shallow: true,
+    await act(async () => {
+      preparePage({ formationData }, displayContent, undefined, task);
     });
+    expect(mockApi.getCompletedFiling).toHaveBeenCalled();
+    await waitFor(() =>
+      expect(mockPush).toHaveBeenCalledWith({ pathname: "/tasks/some-formation-url" }, undefined, {
+        shallow: true,
+      })
+    );
+    expect(currentUserData()).toEqual(newUserData);
   });
 
   it("renders success page when userData has formationResponse", () => {
