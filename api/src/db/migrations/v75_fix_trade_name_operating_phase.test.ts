@@ -62,6 +62,6 @@ const makeUserData = (
       formationResponse: undefined,
       getFilingResponse: undefined,
     },
-    version: 73,
+    version: 74,
   };
 };
