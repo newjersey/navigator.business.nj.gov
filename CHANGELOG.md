@@ -1,3 +1,10 @@
+## [4.4.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v4.4.0...v4.4.1) (2022-08-03)
+
+
+### Bug Fixes
+
+* correct issue with gp/sp and needs_to_form state ([6a49cbb](https://github.com/newjersey/navigator.business.nj.gov/commit/6a49cbb57f6c7f1c8f9b8674a27a10b91067faba))
+
 # [4.4.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v4.3.0...v4.4.0) (2022-08-01)
 
 
