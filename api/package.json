@@ -69,7 +69,7 @@
     "@types/jsonwebtoken": "8.5.8",
     "@types/lodash.escape": "4.0.7",
     "@types/lodash.get": "^4.4.7",
-    "@types/node": "16.11.45",
+    "@types/node": "16.11.47",
     "@types/simple-oauth2": "4.1.1",
     "@types/supertest": "2.0.12",
     "@types/webpack-node-externals": "2.5.3",
