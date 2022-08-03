@@ -1,3 +1,4 @@
+import { randomInt } from "@shared/intHelpers";
 import { v73UserData } from "./v73_add_operating_status_field";
 
 export interface v74UserData {
@@ -33,7 +34,7 @@ export const migrate_v73_to_v74 = (v73Data: v73UserData): v74UserData => {
 
 // ---------------- v74 types ----------------
 
-type v74TaskProgress = "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
+export type v74TaskProgress = "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
 type v74FormProgress = "UNSTARTED" | "COMPLETED";
 export type v74ABExperience = "ExperienceA" | "ExperienceB";
 
@@ -65,7 +66,7 @@ type v74OperatingPhase =
   | "UP_AND_RUNNING"
   | undefined;
 
-interface v74ProfileData {
+export interface v74ProfileData {
   businessPersona: v74BusinessPersona;
   initialOnboardingFlow: v74BusinessPersona;
   businessName: string;
@@ -309,3 +310,104 @@ type v74GetFilingResponse = {
 };
 
 // ---------------- v74 factories ----------------
+export const generatev74User = (overrides: Partial<v74BusinessUser>): v74BusinessUser => {
+  return {
+    name: `some-name-${randomInt()}`,
+    email: `some-email-${randomInt()}@example.com`,
+    id: `some-id-${randomInt()}`,
+    receiveNewsletter: false,
+    userTesting: false,
+    externalStatus: {},
+    abExperience: "ExperienceA",
+    myNJUserKey: undefined,
+    intercomHash: undefined,
+    ...overrides,
+  };
+};
+
+export const generatev74ProfileData = (overrides: Partial<v74ProfileData>): v74ProfileData => {
+  return {
+    businessPersona: "STARTING",
+    initialOnboardingFlow: "STARTING",
+    businessName: `some-business-name-${randomInt()}`,
+    industryId: "restaurant",
+    legalStructureId: "sole-proprietorship",
+    municipality: {
+      name: `some-name-${randomInt()}`,
+      displayName: `some-display-name-${randomInt()}`,
+      county: `some-county-${randomInt()}`,
+      id: `some-id-${randomInt()}`,
+    },
+    liquorLicense: true,
+    requiresCpa: false,
+    homeBasedBusiness: true,
+    cannabisLicenseType: undefined,
+    cannabisMicrobusiness: undefined,
+    constructionRenovationPlan: undefined,
+    dateOfFormation: undefined,
+    entityId: undefined,
+    employerId: undefined,
+    taxId: undefined,
+    notes: "",
+    documents: {
+      formationDoc: `some-formation-doc-${randomInt()}`,
+      standingDoc: `some-standing-doc-${randomInt()}`,
+      certifiedDoc: `some-certified-doc-${randomInt()}`,
+    },
+    ownershipTypeIds: [],
+    existingEmployees: undefined,
+    taxPin: undefined,
+    sectorId: undefined,
+    naicsCode: "",
+    foreignBusinessType: undefined,
+    foreignBusinessTypeIds: [],
+    nexusLocationInNewJersey: undefined,
+    nexusDbaName: undefined,
+    realEstateAppraisalManagement: false,
+    certifiedInteriorDesigner: false,
+    providesStaffingService: false,
+    operatingPhase: undefined,
+    ...overrides,
+  };
+};
+
+export const generatev74FormationFormData = (
+  overrides: Partial<v74FormationFormData>
+): v74FormationFormData => {
+  return {
+    businessName: "",
+    businessSuffix: undefined,
+    businessTotalStock: "",
+    businessStartDate: "",
+    businessAddressCity: undefined,
+    businessAddressLine1: "",
+    businessAddressLine2: "",
+    businessAddressState: "",
+    businessAddressZipCode: "",
+    businessPurpose: "",
+    provisions: [],
+    agentNumberOrManual: "NUMBER",
+    agentNumber: "",
+    agentName: "",
+    agentEmail: "",
+    agentOfficeAddressLine1: "",
+    agentOfficeAddressLine2: "",
+    agentOfficeAddressCity: "",
+    agentOfficeAddressState: "",
+    agentOfficeAddressZipCode: "",
+    agentUseAccountInfo: false,
+    agentUseBusinessAddress: false,
+    members: [],
+    signers: [],
+    paymentType: undefined,
+    annualReportNotification: false,
+    corpWatchNotification: false,
+    officialFormationDocument: false,
+    certificateOfStanding: false,
+    certifiedCopyOfFormationDocument: false,
+    contactFirstName: "",
+    contactLastName: "",
+    contactPhoneNumber: "",
+    ...overrides,
+  };
+};

@@ -72,7 +72,7 @@ export const emptyProfileData: ProfileData = {
   providesStaffingService: false,
   certifiedInteriorDesigner: false,
   realEstateAppraisalManagement: false,
-  operatingPhase: "NEEDS_TO_FORM",
+  operatingPhase: "GUEST_MODE",
 };
 
 export const createEmptyProfileData = (): ProfileData => {
