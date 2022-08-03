@@ -1,5 +1,6 @@
 import { fetchMunicipalityById } from "@/lib/async-content-fetchers/fetchMunicipalityById";
 import { getNaicsTemplateValue } from "@/lib/domain-logic/getNaicsTemplateValue";
+import { isRealEstateAppraisalManagementApplicable } from "@/lib/domain-logic/isRealEstateAppraisalManagementApplicable";
 import { buildRoadmap } from "@/lib/roadmap/roadmapBuilder";
 import { Roadmap } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
@@ -120,7 +121,7 @@ const getIndustryBasedAddOns = (profileData: ProfileData, industryId: string | u
     addOns.push("cannabis-conditional");
   }
 
-  if (industry.id === "real-estate-appraisals") {
+  if (isRealEstateAppraisalManagementApplicable(industryId)) {
     if (profileData.realEstateAppraisalManagement) {
       addOns.push("real-estate-appraisal-management");
     } else {

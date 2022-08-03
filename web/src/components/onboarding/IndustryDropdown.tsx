@@ -3,9 +3,12 @@ import { MenuOptionUnselected } from "@/components/MenuOptionUnselected";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { isCannabisLicenseApplicable } from "@/lib/domain-logic/isCannabisLicenseApplicable";
+import { isCertifiedInteriorDesignerApplicable } from "@/lib/domain-logic/isCertifiedInteriorDesignerApplicable";
 import { isCpaRequiredApplicable } from "@/lib/domain-logic/isCpaRequiredApplicable";
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
 import { isLiquorLicenseApplicable } from "@/lib/domain-logic/isLiquorLicenseApplicable";
+import { isProvidesStaffingServicesApplicable } from "@/lib/domain-logic/isProvidesStaffingServicesApplicable";
+import { isRealEstateAppraisalManagementApplicable } from "@/lib/domain-logic/isRealEstateAppraisalManagementApplicable";
 import { splitAndBoldSearchText, templateEval } from "@/lib/utils/helpers";
 import {
   CannabisLicenseType,
@@ -66,6 +69,15 @@ export const IndustryDropdown = (props: Props): ReactElement => {
       ...state.profileData,
       liquorLicense: isLiquorLicenseApplicable(industryId) ? state.profileData.liquorLicense : false,
       requiresCpa: isCpaRequiredApplicable(industryId) ? state.profileData.requiresCpa : false,
+      realEstateAppraisalManagement: isRealEstateAppraisalManagementApplicable(industryId)
+        ? state.profileData.realEstateAppraisalManagement
+        : false,
+      certifiedInteriorDesigner: isCertifiedInteriorDesignerApplicable(industryId)
+        ? state.profileData.certifiedInteriorDesigner
+        : false,
+      providesStaffingService: isProvidesStaffingServicesApplicable(industryId)
+        ? state.profileData.providesStaffingService
+        : false,
       homeBasedBusiness,
       cannabisLicenseType,
       industryId: industryId,
