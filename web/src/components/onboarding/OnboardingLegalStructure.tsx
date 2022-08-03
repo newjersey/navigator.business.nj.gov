@@ -6,7 +6,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { setHeaderRole } from "@/lib/utils/helpers";
 import { LegalStructure, LegalStructures, LookupLegalStructureById } from "@businessnjgovnavigator/shared/";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
-import orderBy from "lodash.orderby";
+import { orderBy } from "lodash";
 import React, { ReactElement, useContext } from "react";
 
 export const OnboardingLegalStructure = (): ReactElement => {

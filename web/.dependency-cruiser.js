@@ -124,11 +124,7 @@ module.exports = {
     },
     {
       from: {},
-      to: { path: "lodash.orderby" },
-    },
-    {
-      from: {},
-      to: { path: "lodash.merge" },
+      to: { path: "lodash" },
     },
     {
       from: {},

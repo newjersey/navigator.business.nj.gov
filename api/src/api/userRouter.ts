@@ -9,7 +9,7 @@ import {
 import { createEmptyUserData, UserData } from "@shared/userData";
 import { Request, Response, Router } from "express";
 import jwt from "jsonwebtoken";
-import get from "lodash.get";
+import { get } from "lodash";
 import { getAnnualFilings } from "../domain/annual-filings/getAnnualFilings";
 import { industryHasALicenseType } from "../domain/license-status/convertIndustryToLicenseType";
 import {
