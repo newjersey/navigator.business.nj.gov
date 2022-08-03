@@ -3453,7 +3453,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.1.2, @babel/runtime@npm:^7.10.2, @babel/runtime@npm:^7.12.0, @babel/runtime@npm:^7.12.1, @babel/runtime@npm:^7.12.13, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.13.10, @babel/runtime@npm:^7.15.4, @babel/runtime@npm:^7.16.3, @babel/runtime@npm:^7.17.2, @babel/runtime@npm:^7.17.8, @babel/runtime@npm:^7.18.3, @babel/runtime@npm:^7.18.6, @babel/runtime@npm:^7.18.9, @babel/runtime@npm:^7.2.0, @babel/runtime@npm:^7.3.1, @babel/runtime@npm:^7.5.0, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.7.2, @babel/runtime@npm:^7.7.6, @babel/runtime@npm:^7.8.3, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.8.7, @babel/runtime@npm:^7.9.2":
+"@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.1.2, @babel/runtime@npm:^7.10.2, @babel/runtime@npm:^7.12.0, @babel/runtime@npm:^7.12.1, @babel/runtime@npm:^7.12.13, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.15.4, @babel/runtime@npm:^7.16.3, @babel/runtime@npm:^7.17.2, @babel/runtime@npm:^7.17.8, @babel/runtime@npm:^7.18.3, @babel/runtime@npm:^7.18.6, @babel/runtime@npm:^7.18.9, @babel/runtime@npm:^7.2.0, @babel/runtime@npm:^7.3.1, @babel/runtime@npm:^7.5.0, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.7.2, @babel/runtime@npm:^7.7.6, @babel/runtime@npm:^7.8.3, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.8.7, @babel/runtime@npm:^7.9.2":
   version: 7.18.9
   resolution: "@babel/runtime@npm:7.18.9"
   dependencies:
@@ -3536,7 +3536,7 @@ __metadata:
     "@types/jsonwebtoken": 8.5.8
     "@types/lodash.escape": 4.0.7
     "@types/lodash.get": ^4.4.7
-    "@types/node": 16.11.45
+    "@types/node": 16.11.47
     "@types/simple-oauth2": 4.1.1
     "@types/supertest": 2.0.12
     "@types/webpack-node-externals": 2.5.3
@@ -3596,7 +3596,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@businessnjgovnavigator/content@workspace:content"
   dependencies:
-    "@types/node": 16.11.45
+    "@types/node": 16.11.47
     cross-env: 7.0.3
     cspell: 6.5.0
     prettier: 2.7.1
@@ -3629,8 +3629,8 @@ __metadata:
     "@commitlint/config-conventional": 17.0.3
     "@cypress-audit/lighthouse": 1.3.1
     "@cypress-audit/pa11y": 1.3.1
-    "@emotion/react": 11.9.3
-    "@emotion/styled": 11.9.3
+    "@emotion/react": 11.10.0
+    "@emotion/styled": 11.10.0
     "@jest/types": 28.1.3
     "@mdx-js/react": 2.1.2
     "@mui/lab": 5.0.0-alpha.92
@@ -3677,7 +3677,7 @@ __metadata:
     "@types/lodash.get": ^4.4.7
     "@types/lodash.merge": 4.6.7
     "@types/lodash.orderby": 4.6.7
-    "@types/node": 16.11.45
+    "@types/node": 16.11.47
     "@types/react": 18.0.15
     "@types/react-dom": 18.0.6
     "@types/react-swipeable-views": 0.13.1
@@ -3804,7 +3804,7 @@ __metadata:
     "@businessnjgovnavigator/content": "*"
     "@jest/types": 28.1.3
     "@types/jest": 28.1.6
-    "@types/node": 16.11.45
+    "@types/node": 16.11.47
     "@types/uuid": 8.3.4
     "@typescript-eslint/eslint-plugin": 5.31.0
     "@typescript-eslint/parser": 5.31.0
@@ -3842,8 +3842,8 @@ __metadata:
     "@businessnjgovnavigator/shared": "*"
     "@cypress-audit/lighthouse": 1.3.1
     "@cypress-audit/pa11y": 1.3.1
-    "@emotion/react": 11.9.3
-    "@emotion/styled": 11.9.3
+    "@emotion/react": 11.10.0
+    "@emotion/styled": 11.10.0
     "@jest/types": 28.1.3
     "@mdx-js/react": 2.1.2
     "@mui/lab": 5.0.0-alpha.92
@@ -3879,7 +3879,7 @@ __metadata:
     "@types/js-yaml": 4.0.5
     "@types/lodash.merge": 4.6.7
     "@types/lodash.orderby": 4.6.7
-    "@types/node": 16.11.45
+    "@types/node": 16.11.47
     "@types/react": 18.0.15
     "@types/react-dom": 18.0.6
     "@types/react-swipeable-views": 0.13.1
@@ -4685,7 +4685,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/babel-plugin@npm:^11.10.0, @emotion/babel-plugin@npm:^11.7.1":
+"@emotion/babel-plugin@npm:^11.10.0":
   version: 11.10.0
   resolution: "@emotion/babel-plugin@npm:11.10.0"
   dependencies:
@@ -4782,7 +4782,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/is-prop-valid@npm:^1.1.3":
+"@emotion/is-prop-valid@npm:^1.1.3, @emotion/is-prop-valid@npm:^1.2.0":
   version: 1.2.0
   resolution: "@emotion/is-prop-valid@npm:1.2.0"
   dependencies:
@@ -4805,30 +4805,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/react@npm:11.9.3":
-  version: 11.9.3
-  resolution: "@emotion/react@npm:11.9.3"
-  dependencies:
-    "@babel/runtime": ^7.13.10
-    "@emotion/babel-plugin": ^11.7.1
-    "@emotion/cache": ^11.9.3
-    "@emotion/serialize": ^1.0.4
-    "@emotion/utils": ^1.1.0
-    "@emotion/weak-memoize": ^0.2.5
-    hoist-non-react-statics: ^3.3.1
-  peerDependencies:
-    "@babel/core": ^7.0.0
-    react: ">=16.8.0"
-  peerDependenciesMeta:
-    "@babel/core":
-      optional: true
-    "@types/react":
-      optional: true
-  checksum: 19bc7205e85e87cadebbe5a926d45103b836af70ab6972ea4c333c8dd01b463fc9646d4e4097a36f145a05dd4bc388739667437b990f8cf7f7f925f9610d1aa8
-  languageName: node
-  linkType: hard
-
-"@emotion/react@npm:^11.1.1":
+"@emotion/react@npm:11.10.0, @emotion/react@npm:^11.1.1":
   version: 11.10.0
   resolution: "@emotion/react@npm:11.10.0"
   dependencies:
@@ -4864,7 +4841,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/serialize@npm:^1.0.4, @emotion/serialize@npm:^1.1.0":
+"@emotion/serialize@npm:^1.1.0":
   version: 1.1.0
   resolution: "@emotion/serialize@npm:1.1.0"
   dependencies:
@@ -4906,15 +4883,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/styled@npm:11.9.3":
-  version: 11.9.3
-  resolution: "@emotion/styled@npm:11.9.3"
+"@emotion/styled@npm:11.10.0":
+  version: 11.10.0
+  resolution: "@emotion/styled@npm:11.10.0"
   dependencies:
-    "@babel/runtime": ^7.13.10
-    "@emotion/babel-plugin": ^11.7.1
-    "@emotion/is-prop-valid": ^1.1.3
-    "@emotion/serialize": ^1.0.4
-    "@emotion/utils": ^1.1.0
+    "@babel/runtime": ^7.18.3
+    "@emotion/babel-plugin": ^11.10.0
+    "@emotion/is-prop-valid": ^1.2.0
+    "@emotion/serialize": ^1.1.0
+    "@emotion/utils": ^1.2.0
   peerDependencies:
     "@babel/core": ^7.0.0
     "@emotion/react": ^11.0.0-rc.0
@@ -4924,7 +4901,7 @@ __metadata:
       optional: true
     "@types/react":
       optional: true
-  checksum: 16d9ef8c5840b13ec47f91f9963b64ec8a94197fe99bb3bd4e9f7404a09bb65a333e9ab6590af97c0090360816db70e8c920731198c3a30fbb2c2cfd5e8d8a65
+  checksum: f2a3e9798f807713d12771320cde9c2fa17ea6f008da605055496bd3522d81c120321240c8a1dae49c7272fea11361e1f47938ee069f678038b6836820c01243
   languageName: node
   linkType: hard
 
@@ -4969,14 +4946,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/utils@npm:^1.1.0, @emotion/utils@npm:^1.2.0":
+"@emotion/utils@npm:^1.2.0":
   version: 1.2.0
   resolution: "@emotion/utils@npm:1.2.0"
   checksum: 55457a49ddd4db6a014ea0454dc09eaa23eedfb837095c8ff90470cb26a303f7ceb5fcc1e2190ef64683e64cfd33d3ba3ca3109cd87d12bc9e379e4195c9a4dd
   languageName: node
   linkType: hard
 
-"@emotion/weak-memoize@npm:0.2.5, @emotion/weak-memoize@npm:^0.2.5":
+"@emotion/weak-memoize@npm:0.2.5":
   version: 0.2.5
   resolution: "@emotion/weak-memoize@npm:0.2.5"
   checksum: 27d402b0c683b94658220b6d47840346ee582329ca2a15ec9c233492e0f1a27687ccb233b76eedc922f2e185e444cc89f7b97a81a1d3e5ae9f075bab08e965ea
@@ -9120,10 +9097,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:16.11.45":
-  version: 16.11.45
-  resolution: "@types/node@npm:16.11.45"
-  checksum: 57d61c951024f66d796e71e4a972faef266007398cd4e93a195822fea2d5deb41d0615f394a99ece89772b145ff057321d138c7e3442455dc7d785ff67cebde3
+"@types/node@npm:16.11.47, @types/node@npm:^14.0.10 || ^16.0.0, @types/node@npm:^14.14.20 || ^16.0.0":
+  version: 16.11.47
+  resolution: "@types/node@npm:16.11.47"
+  checksum: 26811000753fd1bb9a90a563fc72942ac3ad5d5b6c97609a090c1e24210e040597ba060e55a7a46cb22cc84dafee112d741f45652139c6166e8ce0c970b4f05a
   languageName: node
   linkType: hard
 
@@ -9131,13 +9108,6 @@ __metadata:
   version: 14.18.23
   resolution: "@types/node@npm:14.18.23"
   checksum: 119d5ab18426694ade0d3feefbdb42afc5a47b9144e523293f1554f9d34b41c7f21eafc9d0f1295db5700d134aa74e7fd37556e9438f6d64dbeddf791527e1e4
-  languageName: node
-  linkType: hard
-
-"@types/node@npm:^14.0.10 || ^16.0.0, @types/node@npm:^14.14.20 || ^16.0.0":
-  version: 16.11.47
-  resolution: "@types/node@npm:16.11.47"
-  checksum: 26811000753fd1bb9a90a563fc72942ac3ad5d5b6c97609a090c1e24210e040597ba060e55a7a46cb22cc84dafee112d741f45652139c6166e8ce0c970b4f05a
   languageName: node
   linkType: hard
 
