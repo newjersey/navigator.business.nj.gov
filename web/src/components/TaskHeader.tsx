@@ -56,9 +56,10 @@ export const TaskHeader = (props: Props): ReactElement => {
     if (!userData) return;
     let updatedUserData = { ...userData };
     const currentTaskProgress = userData.taskProgress[props.task.id];
+    if (currentTaskProgress === newValue) return;
 
     if (isFormationTask(props.task.id)) {
-      if (newValue === "COMPLETED" && currentTaskProgress !== "COMPLETED") {
+      if (currentTaskProgress !== "COMPLETED" && newValue === "COMPLETED") {
         setFormationModalIsOpen(true);
         return;
       } else if (currentTaskProgress === "COMPLETED" && areYouSureModalDesiredNewStatus === undefined) {

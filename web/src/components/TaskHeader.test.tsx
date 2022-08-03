@@ -200,6 +200,17 @@ describe("<TaskHeader />", () => {
       expect(screen.getByText(Config.formationDateModal.header)).toBeInTheDocument();
     });
 
+    it("does nothing when task changed to complete and it's already complete", () => {
+      const taskProgress: Record<string, TaskProgress> = { [formationTaskId]: "COMPLETED" };
+      renderTaskHeader(generateTask({ id: formationTaskId }), generateUserData({ taskProgress }));
+      expect(screen.queryByText(Config.formationDateModal.header)).not.toBeInTheDocument();
+      fireEvent.click(screen.getAllByText("Completed")[0]);
+      fireEvent.click(screen.getAllByText("Completed")[1]);
+      expect(screen.queryByText(Config.formationDateModal.header)).not.toBeInTheDocument();
+      expect(screen.queryByText(Config.formationDateModal.areYouSureModalHeader)).not.toBeInTheDocument();
+      expect(userDataWasNotUpdated()).toBe(true);
+    });
+
     it("does not open modal when task changed to unstarted or in-progress", () => {
       renderTaskHeader(generateTask({ id: formationTaskId }), generateUserData({}));
       expect(screen.queryByText(Config.formationDateModal.header)).not.toBeInTheDocument();
