@@ -1,3 +1,10 @@
+## [4.4.2](https://github.com/newjersey/navigator.business.nj.gov/compare/v4.4.1...v4.4.2) (2022-08-03)
+
+
+### Bug Fixes
+
+* correct logic for switching legal structures when in the needs_to_form operating phase ([f3a0be2](https://github.com/newjersey/navigator.business.nj.gov/commit/f3a0be256b42c16f5615565d0d0b4416af88fcd3))
+
 ## [4.4.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v4.4.0...v4.4.1) (2022-08-03)
 
 

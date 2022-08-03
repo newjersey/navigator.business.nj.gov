@@ -20,6 +20,8 @@ export const updateOperatingPhase: UpdateOperatingPhase = (userData: UserData): 
     updatedPhase = !hasCompletedTaxes ? "NEEDS_TO_REGISTER_FOR_TAXES" : "FORMED_AND_REGISTERED";
   } else if (currentPhase === "NEEDS_TO_REGISTER_FOR_TAXES" && isPublicFiling && !hasCompletedFormation) {
     updatedPhase = "NEEDS_TO_FORM";
+  } else if (currentPhase === "NEEDS_TO_FORM" && !isPublicFiling) {
+    updatedPhase = !hasCompletedTaxes ? "NEEDS_TO_REGISTER_FOR_TAXES" : "FORMED_AND_REGISTERED";
   }
 
   if (currentPhase === "NEEDS_TO_REGISTER_FOR_TAXES" && hasCompletedTaxes) {

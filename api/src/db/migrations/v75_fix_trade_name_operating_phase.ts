@@ -1,3 +1,4 @@
+import { randomInt } from "@shared/intHelpers";
 import { LookupLegalStructureById } from "@shared/legalStructure";
 import { v74UserData } from "./v74_change_register_for_taxes_foreign_id";
 
@@ -33,7 +34,7 @@ export const migrate_v74_to_v75 = (v74Data: v74UserData): v75UserData => {
 
 // ---------------- v75 types ----------------
 
-type v75TaskProgress = "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
+export type v75TaskProgress = "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
 type v75FormProgress = "UNSTARTED" | "COMPLETED";
 export type v75ABExperience = "ExperienceA" | "ExperienceB";
 
@@ -65,7 +66,7 @@ type v75OperatingPhase =
   | "UP_AND_RUNNING"
   | undefined;
 
-interface v75ProfileData {
+export interface v75ProfileData {
   businessPersona: v75BusinessPersona;
   initialOnboardingFlow: v75BusinessPersona;
   businessName: string;
@@ -309,3 +310,104 @@ type v75GetFilingResponse = {
 };
 
 // ---------------- v75 factories ----------------
+export const generatev75User = (overrides: Partial<v75BusinessUser>): v75BusinessUser => {
+  return {
+    name: `some-name-${randomInt()}`,
+    email: `some-email-${randomInt()}@example.com`,
+    id: `some-id-${randomInt()}`,
+    receiveNewsletter: false,
+    userTesting: false,
+    externalStatus: {},
+    abExperience: "ExperienceA",
+    myNJUserKey: undefined,
+    intercomHash: undefined,
+    ...overrides,
+  };
+};
+
+export const generatev75ProfileData = (overrides: Partial<v75ProfileData>): v75ProfileData => {
+  return {
+    businessPersona: "STARTING",
+    initialOnboardingFlow: "STARTING",
+    businessName: `some-business-name-${randomInt()}`,
+    industryId: "restaurant",
+    legalStructureId: "sole-proprietorship",
+    municipality: {
+      name: `some-name-${randomInt()}`,
+      displayName: `some-display-name-${randomInt()}`,
+      county: `some-county-${randomInt()}`,
+      id: `some-id-${randomInt()}`,
+    },
+    liquorLicense: true,
+    requiresCpa: false,
+    homeBasedBusiness: true,
+    cannabisLicenseType: undefined,
+    cannabisMicrobusiness: undefined,
+    constructionRenovationPlan: undefined,
+    dateOfFormation: undefined,
+    entityId: undefined,
+    employerId: undefined,
+    taxId: undefined,
+    notes: "",
+    documents: {
+      formationDoc: `some-formation-doc-${randomInt()}`,
+      standingDoc: `some-standing-doc-${randomInt()}`,
+      certifiedDoc: `some-certified-doc-${randomInt()}`,
+    },
+    ownershipTypeIds: [],
+    existingEmployees: undefined,
+    taxPin: undefined,
+    sectorId: undefined,
+    naicsCode: "",
+    foreignBusinessType: undefined,
+    foreignBusinessTypeIds: [],
+    nexusLocationInNewJersey: undefined,
+    nexusDbaName: undefined,
+    realEstateAppraisalManagement: false,
+    certifiedInteriorDesigner: false,
+    providesStaffingService: false,
+    operatingPhase: undefined,
+    ...overrides,
+  };
+};
+
+export const generatev75FormationFormData = (
+  overrides: Partial<v75FormationFormData>
+): v75FormationFormData => {
+  return {
+    businessName: "",
+    businessSuffix: undefined,
+    businessTotalStock: "",
+    businessStartDate: "",
+    businessAddressCity: undefined,
+    businessAddressLine1: "",
+    businessAddressLine2: "",
+    businessAddressState: "",
+    businessAddressZipCode: "",
+    businessPurpose: "",
+    provisions: [],
+    agentNumberOrManual: "NUMBER",
+    agentNumber: "",
+    agentName: "",
+    agentEmail: "",
+    agentOfficeAddressLine1: "",
+    agentOfficeAddressLine2: "",
+    agentOfficeAddressCity: "",
+    agentOfficeAddressState: "",
+    agentOfficeAddressZipCode: "",
+    agentUseAccountInfo: false,
+    agentUseBusinessAddress: false,
+    members: [],
+    signers: [],
+    paymentType: undefined,
+    annualReportNotification: false,
+    corpWatchNotification: false,
+    officialFormationDocument: false,
+    certificateOfStanding: false,
+    certifiedCopyOfFormationDocument: false,
+    contactFirstName: "",
+    contactLastName: "",
+    contactPhoneNumber: "",
+    ...overrides,
+  };
+};
