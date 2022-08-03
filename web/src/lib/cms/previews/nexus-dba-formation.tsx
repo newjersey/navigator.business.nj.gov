@@ -2,7 +2,7 @@
 import { NexusFormationTask } from "@/components/tasks/NexusFormationTask";
 import { ConfigContext, ConfigType, getMergedConfig } from "@/contexts/configContext";
 import { generateProfileData, generateTask, generateUserData } from "@/test/factories";
-import merge from "lodash.merge";
+import { merge } from "lodash";
 import { useEffect, useRef, useState } from "react";
 
 type Props = {
