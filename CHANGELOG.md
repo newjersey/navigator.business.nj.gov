@@ -1,3 +1,12 @@
+## [4.4.3](https://github.com/newjersey/navigator.business.nj.gov/compare/v4.4.2...v4.4.3) (2022-08-03)
+
+
+### Bug Fixes
+
+* [[#182893884](https://github.com/newjersey/navigator.business.nj.gov/issues/182893884)] failing tests for formation nudge bug ([fd664d8](https://github.com/newjersey/navigator.business.nj.gov/commit/fd664d879caf3e1838e5da4e4520cce31ede700d))
+* add missing migration script ([0b93dfd](https://github.com/newjersey/navigator.business.nj.gov/commit/0b93dfdb1eed23e11d378b72e0d68f844b760cfb))
+* correct roadmap bug ([aca3627](https://github.com/newjersey/navigator.business.nj.gov/commit/aca3627ff4f2a33254ed01bd9a6ff0c3814db2d4))
+
 ## [4.4.2](https://github.com/newjersey/navigator.business.nj.gov/compare/v4.4.1...v4.4.2) (2022-08-03)
 
 
