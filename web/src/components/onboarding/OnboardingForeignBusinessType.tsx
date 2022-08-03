@@ -92,7 +92,7 @@ export const OnboardingForeignBusinessType = ({ headerAriaLevel = 2 }: Props): R
       {state.profileData.foreignBusinessType !== undefined &&
         state.profileData.foreignBusinessType !== "NONE" && (
           <Alert variant="info">
-            <Content>
+            <Content key={state.profileData.foreignBusinessType}>
               {Config.profileDefaults.FOREIGN.foreignBusinessType[state.profileData.foreignBusinessType]}
             </Content>
           </Alert>
