@@ -25,12 +25,6 @@
         "errorTextRequired": "",
         "description": ""
       },
-      "homeBased": {
-        "radioButtonYesText": "Yes",
-        "radioButtonNoText": "No",
-        "header": "### Home-based business",
-        "description": "Is your business `home-based|home-based-business` ?"
-      },
       "legalStructureId": {
         "placeholder": "Select a legal structure for your Navigator profile.",
         "header": "",

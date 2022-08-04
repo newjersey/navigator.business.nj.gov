@@ -2062,6 +2062,19 @@ collections:
                       - { label: "Error Text (when not set)", name: "errorTextRequired", widget: "string" }
                       - { label: "Description", name: "description", widget: "markdown" }
                       - { label: "Search Affirmation", name: "searchAffirmation", widget: "markdown" }
+                  - label: Sector ID (shown when generic industry)
+                    name: sectorId
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - {
+                          label: "Error Text (when not provided)",
+                          name: "errorTextRequired",
+                          widget: "string",
+                        }
+                      - { label: "Description", name: "description", widget: "markdown" }
                   - label: Legal Structure
                     name: legalStructureId
                     collapsed: true
@@ -2184,16 +2197,6 @@ collections:
                       - { label: "Header", name: "header", widget: "string" }
                       - { label: "Placeholder", name: "placeholder", widget: "string" }
                       - { label: "Error Text (when not set)", name: "errorTextRequired", widget: "string" }
-                      - { label: "Description", name: "description", widget: "markdown" }
-                  - label: Home-Based Business
-                    name: "homeBased"
-                    collapsed: true
-                    widget: object
-                    summary: "{{homeBased}}"
-                    fields:
-                      - { label: "Header", name: "header", widget: "string" }
-                      - { label: "Radio Button Yes Text", name: "radioButtonYesText", widget: "string" }
-                      - { label: "Radio Button No Text", name: "radioButtonNoText", widget: "string" }
                       - { label: "Description", name: "description", widget: "markdown" }
       - label: "Info Tab (Dakota)"
         name: "profile-info-dakota"
@@ -2460,82 +2463,106 @@ collections:
                     fields:
                       - { label: "Header", name: "header", widget: "string" }
                       - { label: "Placeholder", name: "placeholder", widget: "markdown" }
-      - label: "Notes Tab (Poppy)"
-        name: "profile-notes-poppy"
-        file: "content/src/fieldConfig/profile-notes-poppy.json"
-        editor:
-          preview: true
-        fields:
-          - label: Profile Defaults
-            name: "profileDefaults"
-            collapsed: false
-            widget: object
+          - label: "Notes Tab (Poppy)"
+            name: "profile-notes-poppy"
+            file: "content/src/fieldConfig/profile-notes-poppy.json"
+            editor:
+              preview: true
             fields:
-              - { label: "Notes Tab", name: "profileTabNoteTitle", widget: "string" }
-              - label: Fields
-                name: STARTING
+              - label: Profile Defaults
+                name: "profileDefaults"
                 collapsed: false
                 widget: object
                 fields:
-                  - label: Notes
-                    name: notes
-                    collapsed: true
+                  - { label: "Notes Tab", name: "profileTabNoteTitle", widget: "string" }
+                  - label: Fields
+                    name: STARTING
+                    collapsed: false
                     widget: object
-                    summary: "{{notes}}"
                     fields:
-                      - { label: "Header", name: "header", widget: "string" }
-                      - { label: "Placeholder", name: "placeholder", widget: "string" }
-                      - { label: "Description", name: "description", widget: "markdown" }
-      - label: "Notes Tab (Oscar)"
-        name: "profile-notes-oscar"
-        file: "content/src/fieldConfig/profile-notes-oscar.json"
-        editor:
-          preview: true
-        fields:
-          - label: Profile Defaults
-            name: "profileDefaults"
-            collapsed: false
-            widget: object
+                      - label: Notes
+                        name: notes
+                        collapsed: true
+                        widget: object
+                        summary: "{{notes}}"
+                        fields:
+                          - { label: "Header", name: "header", widget: "string" }
+                          - { label: "Placeholder", name: "placeholder", widget: "string" }
+                          - { label: "Description", name: "description", widget: "markdown" }
+          - label: "Notes Tab (Oscar)"
+            name: "profile-notes-oscar"
+            file: "content/src/fieldConfig/profile-notes-oscar.json"
+            editor:
+              preview: true
             fields:
-              - label: Fields
-                name: OWNING
+              - label: Profile Defaults
+                name: "profileDefaults"
                 collapsed: false
                 widget: object
                 fields:
-                  - label: Notes
-                    name: notes
-                    collapsed: true
+                  - label: Fields
+                    name: OWNING
+                    collapsed: false
                     widget: object
-                    summary: "{{notes}}"
                     fields:
-                      - { label: "Header", name: "header", widget: "string" }
-                      - { label: "Placeholder", name: "placeholder", widget: "string" }
-                      - { label: "Description", name: "description", widget: "markdown" }
-      - label: "Notes Tab (Dakota)"
-        name: "profile-notes-dakota"
-        file: "content/src/fieldConfig/profile-notes-dakota.json"
-        editor:
-          preview: true
-        fields:
-          - label: Profile Defaults
-            name: "profileDefaults"
-            collapsed: false
-            widget: object
-            fields:
-              - label: Fields
-                name: FOREIGN
-                collapsed: false
-                widget: object
+                      - label: Notes
+                        name: notes
+                        collapsed: true
+                        widget: object
+                        summary: "{{notes}}"
+                        fields:
+                          - { label: "Header", name: "header", widget: "string" }
+                          - { label: "Placeholder", name: "placeholder", widget: "string" }
+                          - { label: "Description", name: "description", widget: "markdown" }
+              - label: "Notes Tab (Dakota)"
+                name: "profile-notes-dakota"
+                file: "content/src/fieldConfig/profile-notes-dakota.json"
+                editor:
+                  preview: true
                 fields:
-                  - label: Notes
-                    name: notes
-                    collapsed: true
+                  - label: Profile Defaults
+                    name: "profileDefaults"
+                    collapsed: false
                     widget: object
-                    summary: "{{notes}}"
                     fields:
-                      - { label: "Header", name: "header", widget: "string" }
-                      - { label: "Placeholder", name: "placeholder", widget: "string" }
-                      - { label: "Description", name: "description", widget: "markdown" }
+                      - label: Fields
+                        name: FOREIGN
+                        collapsed: false
+                        widget: object
+                        fields:
+                          - label: Notes
+                            name: notes
+                            collapsed: true
+                            widget: object
+                            summary: "{{notes}}"
+                            fields:
+                              - { label: "Header", name: "header", widget: "string" }
+                              - { label: "Placeholder", name: "placeholder", widget: "string" }
+                              - { label: "Description", name: "description", widget: "markdown" }
+
+              - label: "Profile Page Misc"
+                name: "profile-misc"
+                file: "content/src/fieldConfig/config.json"
+                editor:
+                  preview: true
+                fields:
+                  - label: Profile Defaults
+                    name: profileDefaults
+                    collapsed: false
+                    widget: object
+                    summary: "{{profileDefaults}}"
+                    fields:
+                      - { label: Escape Modal - Header, name: escapeModalHeader, widget: string }
+                      - { label: Escape Model - Body, name: escapeModalBody, widget: string }
+                      - { label: Escape Modal - Return, name: escapeModalReturn, widget: string }
+                      - { label: Escape Modal - Escape, name: escapeModalEscape, widget: string }
+                      - { label: Success Alert - Header, name: successTextHeader, widget: string }
+                      - { label: Success Alert - Body, name: successTextBody, widget: string }
+                      - { label: Error Alert - Header, name: errorTextHeader, widget: string }
+                      - { label: Error Alert - Body, name: errorTextBody, widget: string }
+                      - { label: Page Title, name: pageTitle, widget: string }
+                      - { label: Save Button Text, name: saveButtonText, widget: string }
+                      - { label: Back Button Text, name: backButtonText, widget: string }
       - label: "Industry-Specific Questions (Poppy)"
         name: "profile-industries-poppy"
         file: "content/src/fieldConfig/profile-industries-poppy.json"
@@ -2546,23 +2573,12 @@ collections:
             name: profileDefaults
             collapsed: false
             widget: object
-            summary: "{{profileDefaults}}"
             fields:
-              - label: Fields
+              - label: Starting A New Business Fields
                 name: STARTING
                 collapsed: false
                 widget: object
                 fields:
-                  - label: Home-Based Business
-                    name: "homeBased"
-                    collapsed: true
-                    widget: object
-                    summary: "{{homeBased}}"
-                    fields:
-                      - { label: "Header", name: "header", widget: "string" }
-                      - { label: "Radio Button Yes Text", name: "radioButtonYesText", widget: "string" }
-                      - { label: "Radio Button No Text", name: "radioButtonNoText", widget: "string" }
-                      - { label: "Description", name: "description", widget: "markdown" }
                   - label: Cannabis License
                     name: cannabisLicense
                     collapsed: true
@@ -2576,6 +2592,16 @@ collections:
                           name: "radioButtonConditionalText",
                           widget: "string",
                         }
+                      - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Certified Interior Designer
+                    name: certifiedInteriorDesigner
+                    collapsed: true
+                    widget: object
+                    summary: "{{certifiedInteriorDesigner}}"
+                    fields:
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "Radio Button Yes Text", name: "radioButtonYesText", widget: "string" }
+                      - { label: "Radio Button No Text", name: "radioButtonNoText", widget: "string" }
                       - { label: "Description", name: "description", widget: "markdown" }
                   - label: CPA
                     name: cpa
@@ -2594,6 +2620,16 @@ collections:
                     summary: "{{employmentAgency}}"
                     fields:
                       - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Home-Based Business
+                    name: "homeBased"
+                    collapsed: true
+                    widget: object
+                    summary: "{{homeBased}}"
+                    fields:
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "Radio Button Yes Text", name: "radioButtonYesText", widget: "string" }
+                      - { label: "Radio Button No Text", name: "radioButtonNoText", widget: "string" }
+                      - { label: "Description", name: "description", widget: "markdown" }
                   - label: Home Contractor
                     name: homeContractor
                     collapsed: true
@@ -2611,6 +2647,16 @@ collections:
                       - { label: "Radio Button Yes Text", name: "radioButtonYesText", widget: "string" }
                       - { label: "Radio Button No Text", name: "radioButtonNoText", widget: "string" }
                       - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Real Estate Appraisal Management
+                    name: realEstateAppraisalManagement
+                    collapsed: true
+                    widget: object
+                    summary: "{{realEstateAppraisalManagement}}"
+                    fields:
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "Radio Button Yes Text", name: "radioButtonYesText", widget: "string" }
+                      - { label: "Radio Button No Text", name: "radioButtonNoText", widget: "string" }
+                      - { label: "Description", name: "description", widget: "markdown" }
                   - label: Staffing Service
                     name: staffingService
                     collapsed: true
@@ -2621,6 +2667,7 @@ collections:
                       - { label: "Radio Button Yes Text", name: "radioButtonYesText", widget: "string" }
                       - { label: "Radio Button No Text", name: "radioButtonNoText", widget: "string" }
                       - { label: "Description", name: "description", widget: "markdown" }
+
       - label: "Industry-Specific Questions (Oscar)"
         name: "profile-industries-oscar"
         file: "content/src/fieldConfig/profile-industries-oscar.json"
@@ -2631,24 +2678,26 @@ collections:
             name: profileDefaults
             collapsed: false
             widget: object
-            summary: "{{profileDefaults}}"
             fields:
-              - label: Fields
+              - label: Owning Business Fields
                 name: OWNING
                 collapsed: false
                 widget: object
                 fields:
-                  - label: Legal Structure
-                    name: legalStructureId
+                  - label: Home-Based Business
+                    name: "homeBased"
                     collapsed: true
                     widget: object
+                    summary: "{{homeBased}}"
                     fields:
                       - { label: "Header", name: "header", widget: "string" }
-                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - { label: "Radio Button Yes Text", name: "radioButtonYesText", widget: "string" }
+                      - { label: "Radio Button No Text", name: "radioButtonNoText", widget: "string" }
                       - { label: "Description", name: "description", widget: "markdown" }
-      - label: "Profile Page Misc"
-        name: "profile-misc"
-        file: "content/src/fieldConfig/config.json"
+
+      - label: "Industry-Specific Questions (Dakota)"
+        name: "profile-industries-dakota"
+        file: "content/src/fieldConfig/profile-industries-dakota.json"
         editor:
           preview: true
         fields:
@@ -2656,19 +2705,101 @@ collections:
             name: profileDefaults
             collapsed: false
             widget: object
-            summary: "{{profileDefaults}}"
             fields:
-              - { label: Escape Modal - Header, name: escapeModalHeader, widget: string }
-              - { label: Escape Model - Body, name: escapeModalBody, widget: string }
-              - { label: Escape Modal - Return, name: escapeModalReturn, widget: string }
-              - { label: Escape Modal - Escape, name: escapeModalEscape, widget: string }
-              - { label: Success Alert - Header, name: successTextHeader, widget: string }
-              - { label: Success Alert - Body, name: successTextBody, widget: string }
-              - { label: Error Alert - Header, name: errorTextHeader, widget: string }
-              - { label: Error Alert - Body, name: errorTextBody, widget: string }
-              - { label: Page Title, name: pageTitle, widget: string }
-              - { label: Save Button Text, name: saveButtonText, widget: string }
-              - { label: Back Button Text, name: backButtonText, widget: string }
+              - label: Foreign Business Fields
+                name: FOREIGN
+                collapsed: false
+                widget: object
+                fields:
+                  - label: Cannabis License
+                    name: cannabisLicense
+                    collapsed: true
+                    widget: object
+                    summary: "{{cannabisLicense}}"
+                    fields:
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "Radio Button Annual Text", name: "radioButtonAnnualText", widget: "string" }
+                      - {
+                          label: "Radio Button Conditional Text",
+                          name: "radioButtonConditionalText",
+                          widget: "string",
+                        }
+                      - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Certified Interior Designer
+                    name: certifiedInteriorDesigner
+                    collapsed: true
+                    widget: object
+                    summary: "{{certifiedInteriorDesigner}}"
+                    fields:
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "Radio Button Yes Text", name: "radioButtonYesText", widget: "string" }
+                      - { label: "Radio Button No Text", name: "radioButtonNoText", widget: "string" }
+                      - { label: "Description", name: "description", widget: "markdown" }
+                  - label: CPA
+                    name: cpa
+                    collapsed: true
+                    widget: object
+                    summary: "{{cpa}}"
+                    fields:
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "Radio Button Yes Text", name: "radioButtonYesText", widget: "string" }
+                      - { label: "Radio Button No Text", name: "radioButtonNoText", widget: "string" }
+                      - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Employment Agency
+                    name: employmentAgency
+                    collapsed: true
+                    widget: object
+                    summary: "{{employmentAgency}}"
+                    fields:
+                      - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Home-Based Business
+                    name: "homeBased"
+                    collapsed: true
+                    widget: object
+                    summary: "{{homeBased}}"
+                    fields:
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "Radio Button Yes Text", name: "radioButtonYesText", widget: "string" }
+                      - { label: "Radio Button No Text", name: "radioButtonNoText", widget: "string" }
+                      - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Home Contractor
+                    name: homeContractor
+                    collapsed: true
+                    widget: object
+                    summary: "{{homeContractor}}"
+                    fields:
+                      - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Liquor License
+                    name: liquorLicense
+                    collapsed: true
+                    widget: object
+                    summary: "{{liquorLicense}}"
+                    fields:
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "Radio Button Yes Text", name: "radioButtonYesText", widget: "string" }
+                      - { label: "Radio Button No Text", name: "radioButtonNoText", widget: "string" }
+                      - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Real Estate Appraisal Management
+                    name: realEstateAppraisalManagement
+                    collapsed: true
+                    widget: object
+                    summary: "{{realEstateAppraisalManagement}}"
+                    fields:
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "Radio Button Yes Text", name: "radioButtonYesText", widget: "string" }
+                      - { label: "Radio Button No Text", name: "radioButtonNoText", widget: "string" }
+                      - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Staffing Service
+                    name: staffingService
+                    collapsed: true
+                    widget: object
+                    summary: "{{staffingService}}"
+                    fields:
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "Radio Button Yes Text", name: "radioButtonYesText", widget: "string" }
+                      - { label: "Radio Button No Text", name: "radioButtonNoText", widget: "string" }
+                      - { label: "Description", name: "description", widget: "markdown" }
+
       - label: "Onboarding-Only Questions (Poppy & Shared)"
         name: "profile-onboarding-poppy"
         file: "content/src/fieldConfig/profile-onboarding-poppy.json"

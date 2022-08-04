@@ -118,11 +118,13 @@ export const generateProfileData = (
 ): ProfileData => {
   const id = `some-id-${randomInt()}`;
   const persona = randomInt() % 2 ? "STARTING" : "OWNING";
+  const industry = randomIndustry(canHavePermanentLocation);
+
   return {
     businessPersona: persona,
     initialOnboardingFlow: persona,
     businessName: `some-business-name-${randomInt()}`,
-    industryId: randomIndustry(canHavePermanentLocation).id,
+    industryId: industry.id,
     legalStructureId: randomLegalStructure().id,
     municipality: generateMunicipality({}),
     liquorLicense: false,
@@ -151,7 +153,7 @@ export const generateProfileData = (
     nexusLocationInNewJersey: undefined,
     nexusDbaName: undefined,
     providesStaffingService: false,
-    certifiedInteriorDesigner: true,
+    certifiedInteriorDesigner: industry.industryOnboardingQuestions.isCertifiedInteriorDesignerApplicable,
     realEstateAppraisalManagement: false,
     operatingPhase: "NEEDS_TO_FORM",
     ...overrides,
