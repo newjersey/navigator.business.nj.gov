@@ -129,7 +129,7 @@ const GreenBox = (props: any): ReactElement => {
 };
 
 const ListOrCheckbox = (props: any): ReactElement => {
-  if (typeof props.children[0] === "string" && props.children[0].startsWith("[]")) {
+  if (props.children && typeof props.children[0] === "string" && props.children[0].startsWith("[]")) {
     const checklistItemId = props.children[0].slice("[]".length).split("{")[1].split("}")[0];
     const checklistItemBody = [props.children[0].split("}")[1], ...props.children.slice(1)];
 
@@ -154,7 +154,7 @@ const ListOrCheckbox = (props: any): ReactElement => {
       </div>
     );
   }
-  return <li>{props.children}</li>;
+  return <li>{props.children ?? ""}</li>;
 };
 
 /* eslint-disable @typescript-eslint/ban-ts-comment */
