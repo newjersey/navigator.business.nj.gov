@@ -3,12 +3,12 @@ import { GenericTextField } from "@/components/GenericTextField";
 import { Button } from "@/components/njwds-extended/Button";
 import { RoadmapContext } from "@/contexts/roadmapContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import NaicsCodes from "@/lib/static/records/naics2022.json";
 import { NaicsCodeObject, Task } from "@/lib/types/types";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { LookupIndustryById, UserData } from "@businessnjgovnavigator/shared";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import React, { ReactElement, useContext, useMemo, useState } from "react";
@@ -17,9 +17,12 @@ interface Props {
   onSave: () => void;
   task: Task;
   isAuthenticated: IsAuthenticated;
+  CMS_ONLY_fakeUserData?: UserData; // for CMS only
+  CMS_ONLY_displayInput?: boolean; // for CMS only
 }
 
 export const NaicsCodeInput = (props: Props): ReactElement => {
+  const { Config } = useConfig();
   const { setRoadmap } = useContext(RoadmapContext);
   type NaicsErrorTypes = "length" | "invalid";
   const errorMessages: Record<NaicsErrorTypes, string> = {
@@ -31,9 +34,11 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
   const [industryCodes, setIndustryCodes] = useState<string[]>([]);
   const [isInvalid, setIsInvalid] = useState<NaicsErrorTypes | undefined>(undefined);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [displayInput, setDisplayInput] = useState<boolean>(false);
-
-  const { userData, update } = useUserData();
+  const [displayInputState, setDisplayInput] = useState<boolean>(false);
+  const userDataFromHook = useUserData();
+  const userData = props.CMS_ONLY_fakeUserData ?? userDataFromHook.userData;
+  const displayInput = props.CMS_ONLY_displayInput ?? displayInputState;
+  const update = userDataFromHook.update;
 
   const getCode = (code: string) =>
     (NaicsCodes as NaicsCodeObject[]).find((element) => element?.SixDigitCode?.toString() == code);
