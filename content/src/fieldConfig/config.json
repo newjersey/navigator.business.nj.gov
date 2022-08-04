@@ -1,21 +1,4 @@
 {
-  "determineNaicsCode": {
-    "naicsLink": "[Naics.com](https://www.naics.com/)",
-    "successMessage": "NAICS code ${code} has been saved.",
-    "invalidValidationErrorText": "Your NAICS code is invalid",
-    "hasSavedCodeHeader": "Your NAICS Code",
-    "inputPlaceholder": "6-digit NAICS Code",
-    "inputLabel": "**Save your NAICS code here so you can reference it later:**",
-    "registerForTaxesMissingNAICSCodePlaceholder": "(You have not saved a NAICS Code yet)",
-    "findCodeHeader": "Find Your NAICS Code",
-    "registerForTaxesNAICSCodePlaceholder": "(Your NAICS Code is ${naicsCode})",
-    "sicCodeLink": "[Siccode.com](https://siccode.com/)",
-    "findCodeBodyText": "Use the resources listed below to search and find your NAICS code. **This information is used for data and analysis purposes by State and Federal governments, and does not directly impact your business.**",
-    "lengthValidationErrorText": "Your NAICS code must be 6 digits",
-    "editText": "Edit",
-    "saveButtonText": "Save NAICS Code",
-    "suggestedCodeBodyText": "Based on the information you have provided, we recommend the NAICS codes listed below.\n **This information is used for data and analysis purposes by State and Federal governments, and does not directly impact your business.**\n\nPlease select one that best represents your primary business activity."
-  },
   "legalMessageDefaults": {
     "legalMessageTextOne": "This information is supplied as a guide and is not a substitute for legal or professional advice. It is the responsibility of the business owner to comply with all local, county, and state regulations even if they are not listed here. For no-cost assistance with your business, use the ",
     "legalMessageLegalChat": "live chat",

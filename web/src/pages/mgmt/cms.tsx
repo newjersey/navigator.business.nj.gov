@@ -7,6 +7,7 @@ import ContentPreview from "@/lib/cms/previews/content";
 import ContextInfoPreview from "@/lib/cms/previews/context-info";
 import FilingsPreview from "@/lib/cms/previews/filings";
 import FundingsPreview from "@/lib/cms/previews/fundings";
+import NaicsLookupPreview from "@/lib/cms/previews/naics-lookup";
 import NexusDbaFormationPreview from "@/lib/cms/previews/nexus-dba-formation";
 import NexusNameSearchPreview from "@/lib/cms/previews/nexus-name-search";
 import ProfilePreview from "@/lib/cms/previews/profile";
@@ -108,6 +109,11 @@ const CMS = dynamic(
       CMS.registerPreviewTemplate("nexus-name-search-task", TaskPreview);
       // @ts-expect-error: No type definition available
       CMS.registerPreviewTemplate("nexus-dba-formation-task", TaskPreview);
+
+      // @ts-expect-error: No type definition available
+      CMS.registerPreviewTemplate("naics-code-task", TaskPreview);
+      // @ts-expect-error: No type definition available
+      CMS.registerPreviewTemplate("naics-code-lookup", NaicsLookupPreview);
 
       // ----- Cannabis License -----
       registerAsTask(CMS, ["applyForAnnualLicense-task", "applyForConditionalLicense-task"]);
