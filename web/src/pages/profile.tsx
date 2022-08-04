@@ -302,7 +302,8 @@ const ProfilePage = (props: Props): ReactElement => {
         <OnboardingLegalStructureDropdown disabled={userData?.formationData.getFilingResponse?.success} />
         <hr className="margin-top-6 margin-bottom-2" aria-hidden={true} />
         <OnboardingMunicipality onValidation={onValidation} fieldStates={fieldStates} h3Heading={true} />
-        {LookupOperatingPhaseById(userData?.profileData.operatingPhase).hasCompletedTaxRegistration && (
+        {LookupOperatingPhaseById(userData?.profileData.operatingPhase)
+          .displayCompanyDemographicProfileFields && (
           <>
             <hr className="margin-top-6 margin-bottom-2" aria-hidden={true} />
             <OnboardingOwnership headerAriaLevel={3} />

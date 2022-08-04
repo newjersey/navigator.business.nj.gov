@@ -1,6 +1,6 @@
 interface OperatingPhase {
   readonly id: OperatingPhaseId;
-  readonly hasCompletedTaxRegistration: boolean;
+  readonly displayCompanyDemographicProfileFields: boolean;
   readonly displayCertifications: boolean;
 }
 
@@ -16,7 +16,7 @@ export const LookupOperatingPhaseById = (id: OperatingPhaseId | undefined): Oper
   return (
     OperatingPhases.find((x) => x.id === id) ?? {
       id: "",
-      hasCompletedTaxRegistration: false,
+      displayCompanyDemographicProfileFields: false,
       displayCertifications: false,
     }
   );
@@ -25,27 +25,27 @@ export const LookupOperatingPhaseById = (id: OperatingPhaseId | undefined): Oper
 export const OperatingPhases: OperatingPhase[] = [
   {
     id: "GUEST_MODE",
-    hasCompletedTaxRegistration: false,
+    displayCompanyDemographicProfileFields: false,
     displayCertifications: false,
   },
   {
     id: "FORMED_AND_REGISTERED",
-    hasCompletedTaxRegistration: true,
+    displayCompanyDemographicProfileFields: true,
     displayCertifications: true,
   },
   {
     id: "NEEDS_TO_FORM",
-    hasCompletedTaxRegistration: false,
+    displayCompanyDemographicProfileFields: false,
     displayCertifications: false,
   },
   {
     id: "NEEDS_TO_REGISTER_FOR_TAXES",
-    hasCompletedTaxRegistration: false,
+    displayCompanyDemographicProfileFields: false,
     displayCertifications: false,
   },
   {
     id: "UP_AND_RUNNING",
-    hasCompletedTaxRegistration: true,
+    displayCompanyDemographicProfileFields: true,
     displayCertifications: true,
   },
 ];
