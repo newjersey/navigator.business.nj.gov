@@ -1,9 +1,9 @@
 import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { Button } from "@/components/njwds-extended/Button";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { lookupNaicsCode } from "@/lib/domain-logic/lookupNaicsCode";
 import { templateEval } from "@/lib/utils/helpers";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { ReactElement } from "react";
 
 interface Props {
@@ -12,6 +12,8 @@ interface Props {
 }
 
 export const NaicsCodeDisplay = (props: Props): ReactElement => {
+  const { Config } = useConfig();
+
   return (
     <>
       <h2 className="text-normal">{Config.determineNaicsCode.hasSavedCodeHeader}</h2>

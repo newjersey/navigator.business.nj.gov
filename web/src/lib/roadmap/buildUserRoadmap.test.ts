@@ -1,3 +1,4 @@
+import { getMergedConfig } from "@/contexts/configContext";
 import * as fetchMunicipality from "@/lib/async-content-fetchers/fetchMunicipalityById";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import * as roadmapBuilderModule from "@/lib/roadmap/roadmapBuilder";
@@ -10,7 +11,6 @@ import {
   generateTask,
 } from "@/test/factories";
 import { getLastCalledWith } from "@/test/helpers";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { Industries } from "@businessnjgovnavigator/shared/";
 import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
 
@@ -22,6 +22,8 @@ jest.mock("@/lib/async-content-fetchers/fetchMunicipalityById", () => ({
 }));
 const mockFetchMunicipality = (fetchMunicipality as jest.Mocked<typeof fetchMunicipality>)
   .fetchMunicipalityById;
+
+const Config = getMergedConfig();
 
 const generateStartingProfile = (overrides: Partial<ProfileData>): ProfileData => {
   return generateProfileData({

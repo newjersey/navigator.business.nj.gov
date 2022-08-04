@@ -1,4 +1,5 @@
 import { NaicsCodeTask } from "@/components/tasks/NaicsCodeTask";
+import { getMergedConfig } from "@/contexts/configContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { Task } from "@/lib/types/types";
 import { generateProfileData, generateTask, generateUserData } from "@/test/factories";
@@ -10,7 +11,6 @@ import {
   userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { LookupIndustryById, UserData } from "@businessnjgovnavigator/shared";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
@@ -30,6 +30,7 @@ jest.mock("@/lib/static/records/naics2022.json", () => {
 
 const validIndustryId = "auto-body-repair";
 const validNaicsCode = LookupIndustryById(validIndustryId).naicsCodes?.split(",")[0];
+const Config = getMergedConfig();
 
 describe("<NaicsCodeTask />", () => {
   let task: Task;
