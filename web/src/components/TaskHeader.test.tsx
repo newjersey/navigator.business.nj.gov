@@ -362,6 +362,29 @@ describe("<TaskHeader />", () => {
           screen.getByText(markdownToText(Config.profileDefaults.STARTING.ownership.header))
         ).toBeInTheDocument();
       });
+
+      it("saves and redirects with just the ownership and current employees field", async () => {
+        const taxTask = generateTask({ id: taxTaskId });
+        const userData = generateUserData({
+          profileData: generateProfileData({
+            legalStructureId: randomTradeNameLegalStructure(),
+          }),
+          taskProgress: {
+            [taxTaskId]: "NOT_STARTED",
+          },
+        });
+
+        renderTaskHeader(taxTask, userData);
+        selectCompleted();
+
+        fireEvent.click(screen.getByText(Config.taxRegistrationModal.saveButtonText));
+        await waitFor(() => {
+          expect(mockPush).toHaveBeenCalledWith({
+            pathname: routeForPersona(userData.profileData.businessPersona),
+            query: { fromFormBusinessEntity: "false", fromTaxRegistration: "true" },
+          });
+        });
+      });
     });
 
     describe("when public filing legal structure", () => {
