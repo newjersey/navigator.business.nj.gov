@@ -46,9 +46,17 @@ export const TaxRegistrationModal = (props: Props): ReactElement => {
     if (!userData) return;
     const errorMap = {
       ...fieldStates,
-      businessName: { invalid: !profileData.businessName },
+      businessName: {
+        invalid:
+          !profileData.businessName &&
+          LookupLegalStructureById(userData?.profileData.legalStructureId).requiresPublicFiling,
+      },
       existingEmployees: { invalid: !profileData.existingEmployees },
-      OnboardingTaxId: { invalid: !profileData.taxId },
+      onboardingTaxId: {
+        invalid:
+          !profileData.taxId &&
+          LookupLegalStructureById(userData?.profileData.legalStructureId).requiresPublicFiling,
+      },
     };
     setFieldStates(errorMap);
     if (Object.keys(errorMap).some((k) => errorMap[k as ProfileFields].invalid)) return;
@@ -95,7 +103,9 @@ export const TaxRegistrationModal = (props: Props): ReactElement => {
         {showBusinessField() && (
           <OnboardingBusinessName onValidation={onValidation} fieldStates={fieldStates} />
         )}
-        {showTaxIdField() && <OnboardingTaxId onValidation={onValidation} fieldStates={fieldStates} />}
+        {showTaxIdField() && (
+          <OnboardingTaxId required={true} onValidation={onValidation} fieldStates={fieldStates} />
+        )}
         <OnboardingOwnership headerAriaLevel={3} />
         <div className="margin-top-3" aria-hidden={true} />
         <OnboardingExistingEmployees
