@@ -13,6 +13,7 @@ import {
   generateTaxFilingData,
   generateUser,
   generateUserData,
+  randomIndustry,
 } from "@/test/factories";
 import { markdownToText, withAuthAlert, withRoadmap } from "@/test/helpers";
 import * as mockRouter from "@/test/mock/mockRouter";
@@ -561,6 +562,78 @@ describe("profile", () => {
         });
       });
     });
+
+    it("displays the sector dropdown when industry is generic", () => {
+      renderPage({
+        userData: generateUserData({
+          profileData: generateProfileData({
+            businessPersona: "STARTING",
+            initialOnboardingFlow: "STARTING",
+            industryId: "generic",
+          }),
+        }),
+      });
+      expect(screen.getByLabelText("Sector")).toBeInTheDocument();
+    });
+
+    it("saves userData when sector dropdown is removed from DOM", async () => {
+      const newIndustry = randomIndustry(false).id;
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          businessPersona: "STARTING",
+          initialOnboardingFlow: "STARTING",
+          industryId: "generic",
+          sectorId: undefined,
+        }),
+      });
+      renderPage({
+        userData,
+      });
+      fireEvent.blur(screen.queryByLabelText("Sector") as HTMLElement);
+      await waitFor(() => {
+        expect(
+          screen.getByText(Config.profileDefaults[getFlow(userData)].sectorId.errorTextRequired)
+        ).toBeInTheDocument();
+      });
+      selectByValue("Industry", newIndustry);
+      await waitFor(() => {
+        expect(screen.queryByLabelText("Sector")).not.toBeInTheDocument();
+      });
+      clickSave();
+      await waitFor(() => {
+        expect(screen.getByTestId("snackbar-alert-SUCCESS")).toBeInTheDocument();
+      });
+      expect(currentUserData()).toEqual({
+        ...userData,
+        formProgress: "COMPLETED",
+        profileData: {
+          ...userData.profileData,
+          industryId: newIndustry,
+          sectorId: LookupIndustryById(newIndustry).defaultSectorId,
+        },
+      });
+    });
+
+    it("prevents user from saving if sector is not selected", async () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          businessPersona: "STARTING",
+          initialOnboardingFlow: "STARTING",
+          industryId: "generic",
+          sectorId: undefined,
+        }),
+      });
+      renderPage({ userData: userData });
+      fireEvent.blur(screen.getByLabelText("Sector") as HTMLElement);
+
+      clickSave();
+      await waitFor(() => {
+        expect(
+          screen.getByText(Config.profileDefaults[getFlow(userData)].sectorId.errorTextRequired)
+        ).toBeInTheDocument();
+      });
+      expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
+    });
   });
 
   describe("owning existing business", () => {
@@ -819,46 +892,6 @@ describe("profile", () => {
         }),
       });
       expect(screen.getByTestId("info")).toBeInTheDocument();
-    });
-
-    it("displays the industry dropdown when initialOnboaringFlow is STARTING", () => {
-      renderPage({
-        userData: generateUserData({
-          profileData: generateProfileData({ businessPersona: "OWNING", initialOnboardingFlow: "STARTING" }),
-        }),
-      });
-      expect(screen.getByLabelText("Industry")).toBeInTheDocument();
-      expect(screen.queryByLabelText("Sector")).not.toBeInTheDocument();
-    });
-
-    it("displays the sector dropdown when initialOnboaringFlow is OWNING", () => {
-      renderPage({
-        userData: generateUserData({
-          profileData: generateProfileData({ businessPersona: "OWNING", initialOnboardingFlow: "OWNING" }),
-        }),
-      });
-      expect(screen.getByLabelText("Sector")).toBeInTheDocument();
-      expect(screen.queryByLabelText("Industry")).not.toBeInTheDocument();
-    });
-
-    it("prevents user from saving if industry is not selected", async () => {
-      const userData = generateUserData({
-        profileData: generateProfileData({
-          businessPersona: "OWNING",
-          initialOnboardingFlow: "STARTING",
-          industryId: "",
-        }),
-      });
-      renderPage({ userData: userData });
-      fireEvent.blur(screen.queryByLabelText("Industry") as HTMLElement);
-
-      clickSave();
-      await waitFor(() => {
-        expect(
-          screen.getByText(Config.profileDefaults[getFlow(userData)].industryId.errorTextRequired)
-        ).toBeInTheDocument();
-      });
-      expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
     });
   });
 

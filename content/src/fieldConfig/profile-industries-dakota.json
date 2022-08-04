@@ -1,0 +1,56 @@
+{
+  "profileDefaults": {
+    "FOREIGN": {
+      "cannabisLicense": {
+        "description": "Which type of license do you plan to get?\n\nLearn more about the `Conditional & Conversion License|cannabis-conditional-license` or the `Annual License|cannabis-annual-license`.",
+        "header": "### Cannabis License",
+        "radioButtonAnnualText": "Annual",
+        "radioButtonConditionalText": "Conditional"
+      },
+      "certifiedInteriorDesigner": {
+        "radioButtonYesText": "Yes",
+        "radioButtonNoText": "No",
+        "header": "### Certified Interior Designer",
+        "description": "Will you market as a certified interior designer?"
+      },
+      "cpa": {
+        "radioButtonYesText": "Yes",
+        "radioButtonNoText": "No",
+        "header": "### Public Accounting Services",
+        "description": "Will you provide Certified Public Accounting Services?"
+      },
+      "employmentAgency": {
+        "header": "",
+        "description": "Learn about other `employment and personnel industries|employment-agency-types`."
+      },
+      "homeBased": {
+        "radioButtonYesText": "Yes",
+        "radioButtonNoText": "No",
+        "header": "### Home-based business",
+        "description": "Do you plan to be a `home-based business|home-based-business`?"
+      },
+      "homeContractor": {
+        "header": "",
+        "description": "`Learn what activities qualify as a Home Improvement Contractor|home-contractors-activities`"
+      },
+      "liquorLicense": {
+        "radioButtonYesText": "Yes",
+        "radioButtonNoText": "No",
+        "header": "### Liquor",
+        "description": "Do you plan to serve liquor, including beer or wine?"
+      },
+      "realEstateAppraisalManagement": {
+        "radioButtonYesText": "Yes",
+        "radioButtonNoText": "No",
+        "header": "### Appraisal Management",
+        "description": "Are you looking to start an appraisal management company?"
+      },
+      "staffingService": {
+        "radioButtonYesText": "Yes",
+        "radioButtonNoText": "No",
+        "header": "### Staffing Services",
+        "description": "Will you provide staffing services?"
+      }
+    }
+  }
+}

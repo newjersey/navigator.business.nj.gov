@@ -27,10 +27,10 @@
         "searchAffirmation": "_\"**${searchText}**\" falls under the industries below:_"
       },
       "sectorId": {
-        "placeholder": "",
-        "header": "",
-        "description": "",
-        "errorTextRequired": ""
+        "placeholder": "Select a sector",
+        "header": "## Industry Sector",
+        "description": "Which sector best describes your business?",
+        "errorTextRequired": "Please select a sector."
       },
       "existingEmployees": {
         "placeholder": "Enter Number of Employees",

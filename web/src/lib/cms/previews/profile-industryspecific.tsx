@@ -10,10 +10,10 @@ import { OnboardingRealEstateAppraisalManagement } from "@/components/onboarding
 import { OnboardingStaffingService } from "@/components/onboarding/OnboardingStaffingService";
 import { ConfigContext, ConfigType, getMergedConfig } from "@/contexts/configContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { getMetadataFromSlug } from "@/lib/cms/previews/preview-helpers";
 import { createEmptyProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { merge } from "lodash";
 import { useEffect, useRef, useState } from "react";
+import { getMetadataFromSlug } from "./preview-helpers";
 
 type Props = {
   entry?: any;
@@ -41,7 +41,6 @@ const ProfilePreviewIndustrySpecific = (props: Props) => {
     setConfig(JSON.parse(JSON.stringify(merge(config, data))));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataString]);
-
   const { businessPersona } = getMetadataFromSlug(props.entry.toJS().slug);
 
   return (
@@ -59,27 +58,25 @@ const ProfilePreviewIndustrySpecific = (props: Props) => {
             onBack: () => {},
           }}
         >
+          <h1>Displays Preview For Starting A New Business</h1>
+          <OnboardingCannabisLicense />
+          <hr className="margin-y-4" />
+          <OnboardingCertifiedInteriorDesigner />
+          <hr className="margin-y-4" />
+          <OnboardingCpa />
+          <hr className="margin-y-4" />
+          <OnboardingEmploymentAgency />
+          <hr className="margin-y-4" />
           <OnboardingHomeBasedBusiness headerAriaLevel={2} h3Heading={true} />
-          {businessPersona === "STARTING" && (
-            <>
-              <hr className="margin-y-4" />
-              <OnboardingCannabisLicense />
-              <hr className="margin-y-4" />
-              <OnboardingCpa />
-              <hr className="margin-y-4" />
-              <OnboardingCertifiedInteriorDesigner />
-              <hr className="margin-y-4" />
-              <OnboardingStaffingService />
-              <hr className="margin-y-4" />
-              <OnboardingEmploymentAgency />
-              <hr className="margin-y-4" />
-              <OnboardingHomeContractor />
-              <hr className="margin-y-4" />
-              <OnboardingLiquorLicense />
-              <hr className="margin-y-4" />
-              <OnboardingRealEstateAppraisalManagement />
-            </>
-          )}
+          <hr className="margin-y-4" />
+          <OnboardingHomeContractor />
+          <hr className="margin-y-4" />
+          <OnboardingLiquorLicense />
+          <hr className="margin-y-4" />
+          <OnboardingRealEstateAppraisalManagement />
+          <hr className="margin-y-4" />
+          <OnboardingStaffingService />
+          <hr className="margin-y-4" />
         </ProfileDataContext.Provider>
       </div>
     </ConfigContext.Provider>

@@ -88,6 +88,8 @@ const CMS = dynamic(
       // @ts-expect-error: No type definition available
       CMS.registerPreviewTemplate("profile-industries-oscar", ProfilePreviewIndustrySpecific);
       // @ts-expect-error: No type definition available
+      CMS.registerPreviewTemplate("profile-industries-dakota", ProfilePreviewIndustrySpecific);
+      // @ts-expect-error: No type definition available
       CMS.registerPreviewTemplate("profile-onboarding-poppy", ProfilePreviewOnboarding);
       // @ts-expect-error: No type definition available
       CMS.registerPreviewTemplate("profile-onboarding-dakota", ProfilePreviewOnboarding);
