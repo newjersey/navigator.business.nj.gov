@@ -23,7 +23,7 @@ import * as ProfileOnboardingDakota from "@businessnjgovnavigator/content/fieldC
 import * as ProfileOnboardingOscar from "@businessnjgovnavigator/content/fieldConfig/profile-onboarding-oscar.json";
 import * as ProfileOnboardingPoppy from "@businessnjgovnavigator/content/fieldConfig/profile-onboarding-poppy.json";
 
-import merge from "lodash.merge";
+import { merge } from "lodash";
 import { createContext } from "react";
 
 const merged = JSON.parse(

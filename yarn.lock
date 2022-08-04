@@ -3534,8 +3534,7 @@ __metadata:
     "@types/express": 4.17.13
     "@types/jest": 28.1.6
     "@types/jsonwebtoken": 8.5.8
-    "@types/lodash.escape": 4.0.7
-    "@types/lodash.get": ^4.4.7
+    "@types/lodash": 4.14.182
     "@types/node": 16.11.47
     "@types/simple-oauth2": 4.1.1
     "@types/supertest": 2.0.12
@@ -3563,8 +3562,7 @@ __metadata:
     jest-dynalite: 3.6.1
     jest-junit: 14.0.0
     jsonwebtoken: 8.5.1
-    lodash.escape: 4.0.1
-    lodash.get: ^4.4.2
+    lodash: 4.17.21
     prettier: 2.7.1
     prettier-plugin-organize-imports: 3.0.0
     rimraf: 3.0.2
@@ -3673,10 +3671,7 @@ __metadata:
     "@types/jest": 28.1.6
     "@types/js-yaml": 4.0.5
     "@types/jsonwebtoken": 8.5.8
-    "@types/lodash.escape": 4.0.7
-    "@types/lodash.get": ^4.4.7
-    "@types/lodash.merge": 4.6.7
-    "@types/lodash.orderby": 4.6.7
+    "@types/lodash": 4.14.182
     "@types/node": 16.11.47
     "@types/react": 18.0.15
     "@types/react-dom": 18.0.6
@@ -3740,10 +3735,7 @@ __metadata:
     jsonwebtoken: 8.5.1
     kill-port: 2.0.1
     lint-staged: 13.0.3
-    lodash.escape: 4.0.1
-    lodash.get: ^4.4.2
-    lodash.merge: 4.6.2
-    lodash.orderby: 4.6.0
+    lodash: 4.17.21
     markdown-truncate: 1.0.4
     napa: 3.0.0
     nc: "git+https://github.com/dsueltenfuss/nc.git"
@@ -3877,8 +3869,7 @@ __metadata:
     "@types/cypress-dotenv": 2.0.0
     "@types/jest": 28.1.6
     "@types/js-yaml": 4.0.5
-    "@types/lodash.merge": 4.6.7
-    "@types/lodash.orderby": 4.6.7
+    "@types/lodash": 4.14.182
     "@types/node": 16.11.47
     "@types/react": 18.0.15
     "@types/react-dom": 18.0.6
@@ -3924,8 +3915,7 @@ __metadata:
     jest-environment-jsdom: 28.1.3
     jest-junit: 14.0.0
     js-yaml: 4.1.0
-    lodash.merge: 4.6.2
-    lodash.orderby: 4.6.0
+    lodash: 4.17.21
     markdown-truncate: 1.0.4
     napa: 3.0.0
     netlify-cms-app: 2.15.72
@@ -8986,43 +8976,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/lodash.escape@npm:4.0.7":
-  version: 4.0.7
-  resolution: "@types/lodash.escape@npm:4.0.7"
-  dependencies:
-    "@types/lodash": "*"
-  checksum: 777c54bf2331f1433f302f58364ba68d5214896085d8b4bbeb4a1d330c0df22ed7352ea77b9a96149ef2fbc77f6146579e7f4e0f64485bac2c768e04e652bbf9
-  languageName: node
-  linkType: hard
-
-"@types/lodash.get@npm:^4.4.7":
-  version: 4.4.7
-  resolution: "@types/lodash.get@npm:4.4.7"
-  dependencies:
-    "@types/lodash": "*"
-  checksum: 0dbf1960606e4707c34e8ffbe97ffaad0e47fc5df7a6e24ea6e4fe5838d2468aa13360f38815c77b06e3c9932631ae15662b4139036a69ee16aeb54827a21405
-  languageName: node
-  linkType: hard
-
-"@types/lodash.merge@npm:4.6.7":
-  version: 4.6.7
-  resolution: "@types/lodash.merge@npm:4.6.7"
-  dependencies:
-    "@types/lodash": "*"
-  checksum: 94cd6fb8e606756a28f45d63c658aacfbce11a151f7fa322c4a3e87aa50d8bf26e0ae8cba0250070a7c5a6792fc51f79abf4c648bbb1850692be386cd76cd0ca
-  languageName: node
-  linkType: hard
-
-"@types/lodash.orderby@npm:4.6.7":
-  version: 4.6.7
-  resolution: "@types/lodash.orderby@npm:4.6.7"
-  dependencies:
-    "@types/lodash": "*"
-  checksum: 116c5ae8973114508e75112a181b5c00c223cbc797981f353fe193ce7e061a0c52bfb3f3e72339dceeadda96edcaae31245e65377bf50b5e38f04d2d0be82917
-  languageName: node
-  linkType: hard
-
-"@types/lodash@npm:*, @types/lodash@npm:^4.14.123, @types/lodash@npm:^4.14.167":
+"@types/lodash@npm:4.14.182, @types/lodash@npm:^4.14.123, @types/lodash@npm:^4.14.167":
   version: 4.14.182
   resolution: "@types/lodash@npm:4.14.182"
   checksum: 7dd137aa9dbabd632408bd37009d984655164fa1ecc3f2b6eb94afe35bf0a5852cbab6183148d883e9c73a958b7fec9a9bcf7c8e45d41195add6a18c34958209
@@ -22042,13 +21996,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash.escape@npm:4.0.1":
-  version: 4.0.1
-  resolution: "lodash.escape@npm:4.0.1"
-  checksum: fcb54f457497256964d619d5cccbd80a961916fca60df3fe0fa3e7f052715c2944c0ed5aefb4f9e047d127d44aa2d55555f3350cb42c6549e9e293fb30b41e7f
-  languageName: node
-  linkType: hard
-
 "lodash.escaperegexp@npm:^4.1.2":
   version: 4.1.2
   resolution: "lodash.escaperegexp@npm:4.1.2"
@@ -22067,13 +22014,6 @@ __metadata:
   version: 4.4.0
   resolution: "lodash.flatten@npm:4.4.0"
   checksum: 0ac34a393d4b795d4b7421153d27c13ae67e08786c9cbb60ff5b732210d46f833598eee3fb3844bb10070e8488efe390ea53bb567377e0cb47e9e630bf0811cb
-  languageName: node
-  linkType: hard
-
-"lodash.get@npm:^4.4.2":
-  version: 4.4.2
-  resolution: "lodash.get@npm:4.4.2"
-  checksum: e403047ddb03181c9d0e92df9556570e2b67e0f0a930fcbbbd779370972368f5568e914f913e93f3b08f6d492abc71e14d4e9b7a18916c31fa04bd2306efe545
   languageName: node
   linkType: hard
 
@@ -22147,7 +22087,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash.merge@npm:4.6.2, lodash.merge@npm:^4.6.2":
+"lodash.merge@npm:^4.6.2":
   version: 4.6.2
   resolution: "lodash.merge@npm:4.6.2"
   checksum: ad580b4bdbb7ca1f7abf7e1bce63a9a0b98e370cf40194b03380a46b4ed799c9573029599caebc1b14e3f24b111aef72b96674a56cfa105e0f5ac70546cdc005
@@ -22158,13 +22098,6 @@ __metadata:
   version: 4.1.1
   resolution: "lodash.once@npm:4.1.1"
   checksum: d768fa9f9b4e1dc6453be99b753906f58990e0c45e7b2ca5a3b40a33111e5d17f6edf2f768786e2716af90a8e78f8f91431ab8435f761fef00f9b0c256f6d245
-  languageName: node
-  linkType: hard
-
-"lodash.orderby@npm:4.6.0":
-  version: 4.6.0
-  resolution: "lodash.orderby@npm:4.6.0"
-  checksum: 2e0430b07eb575e9cef9c0a8937db82857bb741d0680baf58f99d4731092c11b103f95cbeeb9cdd207514701bd925b5c71eb81044df97b7e36a3735a3484fb8f
   languageName: node
   linkType: hard
 

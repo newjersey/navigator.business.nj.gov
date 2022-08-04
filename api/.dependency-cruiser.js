@@ -96,11 +96,11 @@ module.exports = {
     },
     {
       from: { path: "src/functions" },
-      to: { path: "lodash.escape" },
+      to: { path: "lodash" },
     },
     {
       from: { path: "src/api" },
-      to: { path: "lodash.get" },
+      to: { path: "lodash" },
     },
     {
       from: { path: "src/libs" },
