@@ -10,7 +10,9 @@ import * as NexusNameSearch from "@businessnjgovnavigator/content/fieldConfig/ne
 import * as ProfileTabDocumentsDakota from "@businessnjgovnavigator/content/fieldConfig/profile-documents-dakota.json";
 import * as ProfileTabDocumentsOscar from "@businessnjgovnavigator/content/fieldConfig/profile-documents-oscar.json";
 import * as ProfileTabDocumentsPoppy from "@businessnjgovnavigator/content/fieldConfig/profile-documents-poppy.json";
-import * as ProfileTabIndustrySpecific from "@businessnjgovnavigator/content/fieldConfig/profile-industries.json";
+import * as ProfileTabIndustrySpecificDakota from "@businessnjgovnavigator/content/fieldConfig/profile-industries-dakota.json";
+import * as ProfileTabIndustrySpecificOscar from "@businessnjgovnavigator/content/fieldConfig/profile-industries-oscar.json";
+import * as ProfileTabIndustrySpecificPoppy from "@businessnjgovnavigator/content/fieldConfig/profile-industries-poppy.json";
 import * as ProfileTabInfoDakota from "@businessnjgovnavigator/content/fieldConfig/profile-info-dakota.json";
 import * as ProfileTabInfoOscar from "@businessnjgovnavigator/content/fieldConfig/profile-info-oscar.json";
 import * as ProfileTabInfoPoppy from "@businessnjgovnavigator/content/fieldConfig/profile-info-poppy.json";
@@ -43,7 +45,9 @@ const merged = JSON.parse(
       ProfileTabNotesOscar,
       ProfileTabNotesPoppy,
       ProfileTabNotesDakota,
-      ProfileTabIndustrySpecific,
+      ProfileTabIndustrySpecificPoppy,
+      ProfileTabIndustrySpecificOscar,
+      ProfileTabIndustrySpecificDakota,
       ProfileOnboardingOscar,
       ProfileOnboardingPoppy,
       ProfileOnboardingDakota,
@@ -72,7 +76,9 @@ export type ConfigType = typeof ConfigOriginal &
   typeof ProfileTabNotesOscar &
   typeof ProfileTabNotesPoppy &
   typeof ProfileTabNotesDakota &
-  typeof ProfileTabIndustrySpecific &
+  typeof ProfileTabIndustrySpecificPoppy &
+  typeof ProfileTabIndustrySpecificOscar &
+  typeof ProfileTabIndustrySpecificDakota &
   typeof ProfileOnboardingOscar &
   typeof ProfileOnboardingPoppy &
   typeof ProfileOnboardingDakota &
@@ -100,7 +106,9 @@ export const getMergedConfig = (): ConfigType => {
     ProfileTabNotesOscar,
     ProfileTabNotesPoppy,
     ProfileTabNotesDakota,
-    ProfileTabIndustrySpecific,
+    ProfileTabIndustrySpecificPoppy,
+    ProfileTabIndustrySpecificOscar,
+    ProfileTabIndustrySpecificDakota,
     ProfileOnboardingOscar,
     ProfileOnboardingPoppy,
     ProfileOnboardingDakota,

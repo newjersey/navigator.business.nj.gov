@@ -1,0 +1,56 @@
+{
+  "profileDefaults": {
+    "OWNING": {
+      "cannabisLicense": {
+        "description": "",
+        "header": "",
+        "radioButtonAnnualText": "",
+        "radioButtonConditionalText": ""
+      },
+      "certifiedInteriorDesigner": {
+        "radioButtonYesText": "",
+        "radioButtonNoText": "",
+        "header": "",
+        "description": ""
+      },
+      "cpa": {
+        "header": "",
+        "description": "",
+        "radioButtonYesText": "",
+        "radioButtonNoText": ""
+      },
+      "employmentAgency": {
+        "header": "",
+        "description": ""
+      },
+      "homeBased": {
+        "radioButtonYesText": "Yes",
+        "radioButtonNoText": "No",
+        "header": "### Home-based business",
+        "description": "Do you plan to be a `home-based business|home-based-business`?"
+      },
+      "homeContractor": {
+        "header": "",
+        "description": ""
+      },
+      "liquorLicense": {
+        "header": "",
+        "description": "",
+        "radioButtonYesText": "",
+        "radioButtonNoText": ""
+      },
+      "realEstateAppraisalManagement": {
+        "radioButtonYesText": "",
+        "radioButtonNoText": "",
+        "header": "",
+        "description": ""
+      },
+      "staffingService": {
+        "radioButtonYesText": "",
+        "radioButtonNoText": "",
+        "header": "",
+        "description": ""
+      }
+    }
+  }
+}

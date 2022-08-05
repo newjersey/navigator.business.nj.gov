@@ -62,6 +62,7 @@ import {
   UserData,
 } from "@businessnjgovnavigator/shared/";
 import deepEqual from "fast-deep-equal/es6/react";
+import { cloneDeep } from "lodash";
 import { GetStaticPropsResult } from "next";
 import { useRouter } from "next/router";
 import { FormEvent, ReactElement, ReactNode, useContext, useState } from "react";
@@ -152,7 +153,12 @@ const ProfilePage = (props: Props): ReactElement => {
     event.preventDefault();
     if (!userData) return;
     analytics.event.profile_save.click.save_profile_changes();
-    if (Object.keys(fieldStates).some((k) => fieldStates[k as ProfileFields].invalid)) {
+    const fieldStatesCopy = cloneDeep(fieldStates);
+    if (profileData.sectorId) {
+      onValidation("sectorId", false);
+      fieldStatesCopy["sectorId"] = { invalid: false };
+    }
+    if (Object.keys(fieldStatesCopy).some((k) => fieldStatesCopy[k as ProfileFields].invalid)) {
       setAlert("ERROR");
       return;
     }
@@ -298,6 +304,11 @@ const ProfilePage = (props: Props): ReactElement => {
         <OnboardingBusinessName disabled={userData?.formationData.getFilingResponse?.success} />
         <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
         <OnboardingIndustry onValidation={onValidation} fieldStates={fieldStates} />
+        {(profileData.industryId === "generic" || props.CMS_ONLY_fakeUserData) && (
+          <div className="margin-top-4 margin-bottom-2">
+            <OnboardingSectors onValidation={onValidation} fieldStates={fieldStates} headerAriaLevel={3} />
+          </div>
+        )}
         <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
         <OnboardingLegalStructureDropdown disabled={userData?.formationData.getFilingResponse?.success} />
         <hr className="margin-top-6 margin-bottom-2" aria-hidden={true} />
@@ -386,14 +397,11 @@ const ProfilePage = (props: Props): ReactElement => {
             disabled={userData?.formationData.getFilingResponse?.success}
           />
         </div>
-        <div className="margin-top-4">
-          {(profileData.initialOnboardingFlow === "STARTING" || props.CMS_ONLY_fakeUserData) && (
-            <OnboardingIndustry onValidation={onValidation} fieldStates={fieldStates} />
-          )}
-          {(profileData.initialOnboardingFlow === "OWNING" || props.CMS_ONLY_fakeUserData) && (
+        {(profileData.initialOnboardingFlow === "OWNING" || props.CMS_ONLY_fakeUserData) && (
+          <div className="margin-top-4">
             <OnboardingSectors onValidation={onValidation} fieldStates={fieldStates} headerAriaLevel={3} />
-          )}
-        </div>
+          </div>
+        )}
         <div className="margin-top-4">
           <OnboardingExistingEmployees
             onValidation={onValidation}
@@ -416,9 +424,8 @@ const ProfilePage = (props: Props): ReactElement => {
     ),
     numbers: (
       <>
-        <hr className="margin-top-4 margin-bottom-2" />{" "}
+        <hr className="margin-top-4 margin-bottom-2" />
         <h2 className="padding-bottom-3" style={{ fontWeight: 300 }}>
-          {" "}
           {Config.profileDefaults.profileTabRefTitle}
         </h2>
         <div className="margin-top-4">

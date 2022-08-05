@@ -122,11 +122,12 @@ export const generateTaxFiling = (overrides: Partial<TaxFiling>): TaxFiling => {
 export const generateProfileData = (overrides: Partial<ProfileData>): ProfileData => {
   const id = `some-id-${randomInt()}`;
   const persona = randomInt() % 2 ? "STARTING" : "OWNING";
+  const industry = randomIndustry();
   return {
     businessPersona: persona,
     initialOnboardingFlow: persona,
     businessName: `some-business-name-${randomInt()}`,
-    industryId: randomIndustry().id,
+    industryId: industry.id,
     legalStructureId: randomLegalStructure().id,
     municipality: generateMunicipality({}),
     liquorLicense: false,
@@ -155,7 +156,7 @@ export const generateProfileData = (overrides: Partial<ProfileData>): ProfileDat
     nexusDbaName: undefined,
     nexusLocationInNewJersey: undefined,
     providesStaffingService: false,
-    certifiedInteriorDesigner: true,
+    certifiedInteriorDesigner: industry.industryOnboardingQuestions.isCertifiedInteriorDesignerApplicable,
     realEstateAppraisalManagement: false,
     operatingPhase: "NEEDS_TO_FORM",
     ...overrides,
