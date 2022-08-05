@@ -8,13 +8,14 @@ callToActionText: Get My USDoT Number
 required: true
 issuingAgency: "Federal Motor Carrier Safety Administration "
 ---
-You may be required to get a USDoT number for your commercial vehicle depending on its capacity and route. 
+You may be required to get a USDoT number for your commercial vehicle depending on its passenger capacity and route. 
  
 ---
 
 ### Eligibility Criteria
 - You may be required to get a USDoT number if your transportation business will cross state lines
 - Complete the [self-assessment tool](https://www.fmcsa.dot.gov/registration/do-i-need-usdot-number) to determine the requirements for your business
+- The assessment tool will take you to the USDoT number application portal, if you need to apply for a number
 
 ### USDoT Application Requirements
 - `EIN|ein` or SSN
