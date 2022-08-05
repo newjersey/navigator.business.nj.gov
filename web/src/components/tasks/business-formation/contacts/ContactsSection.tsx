@@ -152,6 +152,12 @@ export const ContactsSection = (): ReactElement => {
   };
 
   const sendSubmitAnalytics = (formationFormData: FormationFormData): void => {
+    analytics.event.business_formation_members.submit.members_submitted_with_formation(
+      formationFormData.members.length
+    );
+    analytics.event.business_formation_signers.submit.signers_submitted_with_formation(
+      formationFormData.signers.length
+    );
     if (formationFormData.agentNumberOrManual === "NUMBER") {
       analytics.event.business_formation_registered_agent_identification.submit.entered_agent_ID();
     } else if (formationFormData.agentNumberOrManual === "MANUAL_ENTRY") {

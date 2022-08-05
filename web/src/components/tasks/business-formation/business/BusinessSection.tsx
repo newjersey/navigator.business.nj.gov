@@ -114,6 +114,13 @@ export const BusinessSection = (): ReactElement => {
       return;
     }
 
+    analytics.event.business_formation_provisions.submit.provisions_submitted_with_formation(
+      finalUserData.formationData.formationFormData.provisions.length
+    );
+
+    if (finalUserData.formationData.formationFormData.businessPurpose.trim().length > 0)
+      analytics.event.business_formation_purpose.submit.purpose_submitted_with_formation();
+
     update({
       ...finalUserData,
       profileData: {
