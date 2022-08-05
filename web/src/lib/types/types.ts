@@ -10,7 +10,7 @@ import {
 } from "@businessnjgovnavigator/shared/";
 import { emptyBusinessUser } from "@businessnjgovnavigator/shared/businessUser";
 import { emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
-import { merge } from "lodash";
+import merge from "lodash-es/merge";
 
 // returns all keys in an object of a type
 // e.g. KeysOfType<Task, boolean> will give all keys in the Task that have boolean types

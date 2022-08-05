@@ -95,12 +95,8 @@ module.exports = {
       to: { path: "serverless-http" },
     },
     {
-      from: { path: "src/functions" },
-      to: { path: "lodash" },
-    },
-    {
       from: { path: "src/api" },
-      to: { path: "lodash" },
+      to: { path: "lodash-es/get" },
     },
     {
       from: { path: "src/libs" },

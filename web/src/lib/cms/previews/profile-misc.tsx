@@ -4,7 +4,7 @@ import { ConfigContext, ConfigType, getMergedConfig } from "@/contexts/configCon
 import Profile from "@/pages/profile";
 import { generateUser } from "@/test/factories";
 import { createEmptyUserData } from "@businessnjgovnavigator/shared/userData";
-import { merge } from "lodash";
+import merge from "lodash-es/merge";
 import { useEffect, useRef, useState } from "react";
 
 type Props = {
