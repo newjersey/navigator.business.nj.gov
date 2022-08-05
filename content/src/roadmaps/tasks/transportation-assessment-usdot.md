@@ -1,15 +1,30 @@
 ---
 urlSlug: transportation-assessment-usdot
 filename: transportation-assessment-usdot
-name: Determine if You Need a USDoT Number
+name: Get a USDoT Number, if Applicable
 id: transportation-assessment-usdot
-callToActionLink: https://www.fmcsa.dot.gov/registration/do-i-need-usdot-number
-callToActionText: Complete My Self-Assessment
+callToActionLink: https://portal.fmcsa.dot.gov/UrsRegistrationWizard/
+callToActionText: Get My USDoT Number
 required: true
+issuingAgency: "Federal Motor Carrier Safety Administration "
 ---
-The Federal Motor Carrier Safety Administration (FMCSA) may require you to get a USDoT number for your commercial vehicle depending on its capacity and route. 
+You may be required to get a USDoT number for your commercial vehicle depending on its capacity and route. 
  
-You can complete FMCSA's self-assessment tool to learn if your business will need a USDoT number. The self-assessment is made up of a few simple questions about your business operation.
+---
+
+### Eligibility Criteria
+- You may be required to get a USDoT number if your transportation business will cross state lines
+- Complete the [self-assessment tool](https://www.fmcsa.dot.gov/registration/do-i-need-usdot-number) to determine the requirements for your business
+
+### USDoT Application Requirements
+- `EIN|ein` or SSN
+- `Dun and Bradstreet (DUNS) number|duns`, if your company has one
+- Names and Titles of the company officers
+- A `process agent|process-agent`, already filed with Federal Motor Carrier Safety Administration (FMCSA)  
+
+**Note:** The form can only be signed by an authorized official, like the owner, a partner, or an authorized representative.
+
  
->**Once completed, you will know:**
->* If you're required to obtain a USDoT number
+>**Once completed, you will have:**
+>* A USDoT number, if applicable
+
