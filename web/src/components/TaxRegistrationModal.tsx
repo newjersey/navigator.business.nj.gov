@@ -103,9 +103,7 @@ export const TaxRegistrationModal = (props: Props): ReactElement => {
         {showBusinessField() && (
           <OnboardingBusinessName onValidation={onValidation} fieldStates={fieldStates} />
         )}
-        {showTaxIdField() && (
-          <OnboardingTaxId required={true} onValidation={onValidation} fieldStates={fieldStates} />
-        )}
+        {showTaxIdField() && <OnboardingTaxId onValidation={onValidation} fieldStates={fieldStates} />}
         <OnboardingOwnership headerAriaLevel={3} />
         <div className="margin-top-3" aria-hidden={true} />
         <OnboardingExistingEmployees
