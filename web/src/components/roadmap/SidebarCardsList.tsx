@@ -132,13 +132,10 @@ export const SidebarCardsList = (props: Props): ReactElement => {
       />
       <div className="dashboard-opportunities-list desktop:margin-right-1">
         <div className="desktop:padding-right-105" data-testid="visible-opportunities">
-          {certificationsUnlocked() ? (
+          {certificationsUnlocked() &&
             visibleSortedCertifications.map((cert) => (
               <OpportunityCard key={cert.id} opportunity={cert} urlPath="certification" />
-            ))
-          ) : (
-            <></>
-          )}
+            ))}
           {/* {visibleSortedFundings.map((funding) => (
             <OpportunityCard key={funding.id} opportunity={funding} urlPath="funding" />
           ))} */}
