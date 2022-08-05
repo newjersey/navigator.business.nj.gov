@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-import { formationTaskId } from "@shared/domain-logic/gradualGraduationStages";
+import { formationTaskId } from "@shared/domain-logic/taskIds";
 import { Express } from "express";
 import request from "supertest";
 import {

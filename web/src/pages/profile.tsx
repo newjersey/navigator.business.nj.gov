@@ -55,6 +55,7 @@ import {
 import { BusinessPersona, ForeignBusinessType, formationTaskId } from "@businessnjgovnavigator/shared";
 import {
   createEmptyProfileData,
+  einTaskId,
   LookupLegalStructureById,
   LookupOperatingPhaseById,
   Municipality,
@@ -167,7 +168,17 @@ const ProfilePage = (props: Props): ReactElement => {
     const newRoadmap = await buildUserRoadmap(profileData);
     setRoadmap(newRoadmap);
 
-    let newUserData: UserData = { ...userData, profileData: profileData, formProgress: "COMPLETED" };
+    const { taskProgress } = userData;
+    if (profileData.employerId && profileData.employerId.length > 0) {
+      taskProgress[einTaskId] = "COMPLETED";
+    }
+
+    let newUserData: UserData = {
+      ...userData,
+      profileData: profileData,
+      formProgress: "COMPLETED",
+      taskProgress,
+    };
     setSectionCompletion(getSectionCompletion(newRoadmap, newUserData));
     newUserData = await postGetAnnualFilings(newUserData);
     update(newUserData).then(async () => {

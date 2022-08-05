@@ -29,6 +29,7 @@ export const Content = (props: ContentProps): ReactElement => {
     a: Link(props.onClick),
     h5: (props: any) => <div className="h5-styling">{props.children}</div>,
     h6: (props: any) => <div className="h6-styling">{props.children}</div>,
+    hr: () => <hr className="margin-y-3" />,
     blockquote: GreenBox,
     table: OutlineBox,
     li: ListOrCheckbox,

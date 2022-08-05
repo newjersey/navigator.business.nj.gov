@@ -1,4 +1,4 @@
-import { formationTaskId } from "@shared/domain-logic/gradualGraduationStages";
+import { formationTaskId } from "@shared/domain-logic/taskIds";
 import { randomInt } from "@shared/intHelpers";
 import { LookupLegalStructureById } from "@shared/legalStructure";
 import { v72UserData } from "./v72_add_real_estate_management";

@@ -8,6 +8,7 @@ import { TaskHeader } from "@/components/TaskHeader";
 import { allowFormation, BusinessFormation } from "@/components/tasks/business-formation/BusinessFormation";
 import { CannabisApplyForLicenseTask } from "@/components/tasks/cannabis/CannabisApplyForLicenseTask";
 import { CannabisPriorityStatusTask } from "@/components/tasks/cannabis/CannabisPriorityStatusTask";
+import { EinTask } from "@/components/tasks/EinTask";
 import { LicenseTask } from "@/components/tasks/LicenseTask";
 import { NaicsCodeTask } from "@/components/tasks/NaicsCodeTask";
 import { NexusFormationTask } from "@/components/tasks/NexusFormationTask";
@@ -137,6 +138,7 @@ const TaskPage = (props: Props): ReactElement => {
             "priority-status-cannabis": <CannabisPriorityStatusTask task={props.task} />,
             "conditional-permit-cannabis": <CannabisApplyForLicenseTask task={props.task} />,
             "annual-license-cannabis": <CannabisApplyForLicenseTask task={props.task} />,
+            "register-for-ein": <EinTask task={props.task} />,
             [formationTaskId]: renderFormationTask(),
             default: getTaskBody(),
           })}
