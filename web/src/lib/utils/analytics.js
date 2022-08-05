@@ -1,11 +1,13 @@
 // eslint-disable-next-line no-undef
 const GOOGLE_ANALYTICS_ID = process.env.GOOGLE_ANALYTICS_ID || "";
 
-const sendEvent = (category, action, label) => {
-  window.gtag("event", action, {
+const sendEvent = (category, action, label, value = undefined) => {
+  const response = {
     event_category: category,
     event_label: label,
-  });
+  };
+  if (value && Number.parseInt(value) >= 0) response["value"] = Number.parseInt(value);
+  window.gtag("event", action, response);
 };
 
 export default {
@@ -511,6 +513,34 @@ export default {
       click: {
         go_to_next_formation_step: () => {
           sendEvent("business_formation_name_step_continue_button", "click", "go_to_next_formation_step");
+        },
+      },
+    },
+    business_formation_members: {
+      submit: {
+        members_submitted_with_formation: (number) => {
+          sendEvent("business_formation_members", "submit", "members_submitted_with_formation", number);
+        },
+      },
+    },
+    business_formation_signers: {
+      submit: {
+        signers_submitted_with_formation: (number) => {
+          sendEvent("business_formation_signers", "submit", "signers_submitted_with_formation", number);
+        },
+      },
+    },
+    business_formation_provisions: {
+      submit: {
+        provisions_submitted_with_formation: (number) => {
+          sendEvent("business_formation_provisions", "submit", "provisions_submitted_with_formation", number);
+        },
+      },
+    },
+    business_formation_purpose: {
+      submit: {
+        purpose_submitted_with_formation: () => {
+          sendEvent("business_formation_purpose", "submit", "purpose_submitted_with_formation");
         },
       },
     },
