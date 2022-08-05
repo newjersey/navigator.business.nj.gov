@@ -12,6 +12,7 @@ export class OnboardingPage {
 
   getBusinessName() {
     return cy.get("#businessName");
+    S;
   }
 
   getCpa(radio?: boolean) {
