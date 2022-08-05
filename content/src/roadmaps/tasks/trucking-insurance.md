@@ -3,6 +3,7 @@ urlSlug: trucking-insurance
 filename: trucking-insurance
 name: Get a Commercial Insurance Policy
 id: trucking-insurance
+required: true
 ---
 Insurance will protect your business assets should you be held liable for an incident. 
 
