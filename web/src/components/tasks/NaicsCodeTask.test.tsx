@@ -296,7 +296,7 @@ describe("<NaicsCodeTask />", () => {
 
   describe("guest mode", () => {
     let initialUserData: UserData;
-    const setModalIsVisible = jest.fn();
+    let setModalIsVisible: jest.Mock;
 
     const renderPage = () => {
       render(
@@ -311,6 +311,7 @@ describe("<NaicsCodeTask />", () => {
     };
 
     beforeEach(() => {
+      setModalIsVisible = jest.fn();
       initialUserData = generateUserData({
         profileData: generateProfileData({ naicsCode: "", industryId: "" }),
         taskProgress: { [taskId]: "NOT_STARTED" },
@@ -319,11 +320,16 @@ describe("<NaicsCodeTask />", () => {
 
     it("prepends register to the next button", async () => {
       renderPage();
-      fireEvent.change(screen.getByPlaceholderText(Config.determineNaicsCode.inputPlaceholder), {
-        target: { value: "12345" },
-      });
-
       expect(screen.getByText(`Register & ${Config.determineNaicsCode.saveButtonText}`)).toBeInTheDocument();
+    });
+
+    it("opens registration modal on save button click", async () => {
+      renderPage();
+      fireEvent.change(screen.getByPlaceholderText(Config.determineNaicsCode.inputPlaceholder), {
+        target: { value: validNaicsCode },
+      });
+      fireEvent.click(screen.getByText(`Register & ${Config.determineNaicsCode.saveButtonText}`));
+      await waitFor(() => expect(setModalIsVisible).toHaveBeenCalledWith(true));
     });
   });
 });

@@ -9,7 +9,6 @@ import {
 import { createEmptyUserData, UserData } from "@shared/userData";
 import { Request, Response, Router } from "express";
 import jwt from "jsonwebtoken";
-import { get } from "lodash";
 import { getAnnualFilings } from "../domain/annual-filings/getAnnualFilings";
 import { industryHasALicenseType } from "../domain/license-status/convertIndustryToLicenseType";
 import {
@@ -119,7 +118,6 @@ export const userRouterFactory = (
       userData = clearTaskItemChecklists(userData);
     }
 
-    userData = updateTaskStatusIfNeeded(userData);
     userData = await updateLegalStructureIfNeeded(userData);
     userData = getAnnualFilings(userData);
 
@@ -158,22 +156,6 @@ export const userRouterFactory = (
     } catch {
       return false;
     }
-  };
-
-  const rules: {
-    path: string;
-    taskId: string;
-    reversible?: boolean;
-    type: "bool";
-  }[] = [{ path: "profileData.employerId", taskId: "register-for-ein", type: "bool" }];
-
-  const updateTaskStatusIfNeeded = (userData: UserData): UserData => {
-    rules.map((rule) => {
-      if (userData.taskProgress[rule.taskId] == "COMPLETED" && !rule.reversible) return;
-      const value = get(userData, rule.path);
-      if (rule.type == "bool") userData.taskProgress[rule.taskId] = value ? "COMPLETED" : "NOT_STARTED";
-    });
-    return userData;
   };
 
   const updateLegalStructureIfNeeded = async (userData: UserData): Promise<UserData> => {

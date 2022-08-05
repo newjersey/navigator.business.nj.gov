@@ -1,4 +1,4 @@
-import { formationTaskId } from "@shared/domain-logic/gradualGraduationStages";
+import { formationTaskId } from "@shared/domain-logic/taskIds";
 import { LookupLegalStructureById } from "@shared/legalStructure";
 import { OperatingPhaseId } from "@shared/operatingPhase";
 import { UserData } from "@shared/userData";

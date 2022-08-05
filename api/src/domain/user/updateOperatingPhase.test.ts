@@ -1,4 +1,4 @@
-import { formationTaskId } from "@shared/domain-logic/gradualGraduationStages";
+import { formationTaskId } from "@shared/domain-logic/taskIds";
 import { generateProfileData, generateUserData } from "../../../test/factories";
 import { updateOperatingPhase } from "./updateOperatingPhase";
 
