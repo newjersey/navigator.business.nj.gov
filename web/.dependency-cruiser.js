@@ -123,8 +123,20 @@ module.exports = {
       to: { path: "gray-matter" },
     },
     {
-      from: {},
-      to: { path: "lodash" },
+      from: { path: "src/components/onboarding" },
+      to: { path: "lodash-es/orderBy" },
+    },
+    {
+      from: { path: "src/lib/cms/previews" },
+      to: { path: "lodash-es/merge" },
+    },
+    {
+      from: { path: "src/lib/types" },
+      to: { path: "lodash-es/merge" },
+    },
+    {
+      from: { path: "src/context" },
+      to: { path: "lodash-es/merge" },
     },
     {
       from: {},

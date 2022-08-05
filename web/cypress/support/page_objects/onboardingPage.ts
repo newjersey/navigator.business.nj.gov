@@ -1,5 +1,5 @@
 import { LookupIndustryById, LookupSectorTypeById } from "@businessnjgovnavigator/shared/";
-import { random } from "lodash";
+import random from "lodash-es/random";
 
 export class OnboardingPage {
   getBusinessPersona(radio: string) {
@@ -12,6 +12,7 @@ export class OnboardingPage {
 
   getBusinessName() {
     return cy.get("#businessName");
+    S;
   }
 
   getCpa(radio?: boolean) {

@@ -18,7 +18,7 @@ import {
   LookupIndustryById,
 } from "@businessnjgovnavigator/shared/";
 import { Autocomplete, createFilterOptions, FilterOptionsState, TextField } from "@mui/material";
-import { orderBy } from "lodash";
+import orderBy from "lodash-es/orderBy";
 import { ChangeEvent, FocusEvent, ReactElement, useContext, useState } from "react";
 import { Content } from "../Content";
 

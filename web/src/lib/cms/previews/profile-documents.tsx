@@ -5,7 +5,7 @@ import { getMetadataFromSlug } from "@/lib/cms/previews/preview-helpers";
 import { ProfileTabs } from "@/lib/types/types";
 import Profile from "@/pages/profile";
 import { generateProfileData, generateUserData } from "@/test/factories";
-import { merge } from "lodash";
+import merge from "lodash-es/merge";
 import { useEffect, useRef, useState } from "react";
 
 type Props = {
