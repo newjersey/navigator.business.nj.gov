@@ -4,7 +4,7 @@ import { NaicsCodeInput } from "@/components/tasks/NaicsCodeInput";
 import { ConfigContext, ConfigType, getMergedConfig } from "@/contexts/configContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { generateProfileData, generateTask, generateUserData } from "@/test/factories";
-import { merge } from "lodash";
+import merge from "lodash-es/merge";
 import { useEffect, useRef, useState } from "react";
 
 type Props = {

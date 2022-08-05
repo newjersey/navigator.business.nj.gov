@@ -12,7 +12,7 @@ import { ConfigContext, ConfigType, getMergedConfig } from "@/contexts/configCon
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { getMetadataFromSlug } from "@/lib/cms/previews/preview-helpers";
 import { createEmptyProfileData } from "@businessnjgovnavigator/shared/profileData";
-import { merge } from "lodash";
+import merge from "lodash-es/merge";
 import { useEffect, useRef, useState } from "react";
 
 type Props = {
