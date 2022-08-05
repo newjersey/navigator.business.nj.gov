@@ -3,7 +3,7 @@ import { CannabisPriorityStatusTask } from "@/components/tasks/cannabis/Cannabis
 import { ConfigContext, ConfigType, getMergedConfig } from "@/contexts/configContext";
 import { getMetadataFromSlug } from "@/lib/cms/previews/preview-helpers";
 import { generateTask } from "@/test/factories";
-import merge from "lodash-es/merge";
+import { merge } from "lodash";
 import { useEffect, useRef, useState } from "react";
 
 type Props = {
