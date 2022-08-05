@@ -25,30 +25,30 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-amplify/auth@npm:4.6.0":
-  version: 4.6.0
-  resolution: "@aws-amplify/auth@npm:4.6.0"
+"@aws-amplify/auth@npm:4.6.1":
+  version: 4.6.1
+  resolution: "@aws-amplify/auth@npm:4.6.1"
   dependencies:
-    "@aws-amplify/cache": 4.0.49
-    "@aws-amplify/core": 4.6.0
+    "@aws-amplify/cache": 4.0.50
+    "@aws-amplify/core": 4.6.1
     amazon-cognito-identity-js: 5.2.10
     crypto-js: ^4.1.1
-  checksum: ce0550bfbdf5db3c90c491fa3aea7da86ee519f224dd445b38ef5454612cef94495b213e5690a0b17beafdde21ffe7c9cc907d4d4f1d1223877cf89ca880a886
+  checksum: 0ef1fbe4844d1be05255148f033dce94f8df417c758f5395e8be450898b87aca09b5fd189129cbc4253dc206d7cf3b88db39c219f099cfee5503e66acbc71c4f
   languageName: node
   linkType: hard
 
-"@aws-amplify/cache@npm:4.0.49":
-  version: 4.0.49
-  resolution: "@aws-amplify/cache@npm:4.0.49"
+"@aws-amplify/cache@npm:4.0.50":
+  version: 4.0.50
+  resolution: "@aws-amplify/cache@npm:4.0.50"
   dependencies:
-    "@aws-amplify/core": 4.6.0
-  checksum: a03e72be10433033650429bf64d056d836b6e1ae2acc846268ed1f9b6004f1e79fc53be58eb0519c5af1ca4660904775f20d6dfa6e2c69247795260b33084cf0
+    "@aws-amplify/core": 4.6.1
+  checksum: cd20b308fa4cfec480856ccd218901a0b7b732f7611711dbf5bce5b7798e59119504f4adbb87ede591388b6e7a4ac9476e9d9fbfcf96c5997d28ce5497f8a0d8
   languageName: node
   linkType: hard
 
-"@aws-amplify/core@npm:4.6.0":
-  version: 4.6.0
-  resolution: "@aws-amplify/core@npm:4.6.0"
+"@aws-amplify/core@npm:4.6.1":
+  version: 4.6.1
+  resolution: "@aws-amplify/core@npm:4.6.1"
   dependencies:
     "@aws-crypto/sha256-js": 1.0.0-alpha.0
     "@aws-sdk/client-cloudwatch-logs": 3.6.1
@@ -58,7 +58,7 @@ __metadata:
     "@aws-sdk/util-hex-encoding": 3.6.1
     universal-cookie: ^4.0.4
     zen-observable-ts: 0.8.19
-  checksum: 8a3230cfb7a4070d574280c15e515f7e6f1f7e2b8ad4edb150078cb7412630472d281675428ec616c93889b7a5f18c13c54c31de01bfe5e0ad7c5cc203c9bb00
+  checksum: 68bf42fba18dde49a40e0aa5c124f39e5f51900ce1f8479dc0f20d950788e6271e9175603977f08c589f34185fa23219a2526a97fcf23938be30704b83ecbf0b
   languageName: node
   linkType: hard
 
@@ -3614,8 +3614,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@businessnjgovnavigator/root@workspace:."
   dependencies:
-    "@aws-amplify/auth": 4.6.0
-    "@aws-amplify/core": 4.6.0
+    "@aws-amplify/auth": 4.6.1
+    "@aws-amplify/core": 4.6.1
     "@aws-crypto/sha256-browser": 2.0.1
     "@aws-sdk/client-cloudwatch-logs": 3.137.0
     "@aws-sdk/client-dynamodb": 3.137.0
@@ -3831,8 +3831,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@businessnjgovnavigator/web@workspace:web"
   dependencies:
-    "@aws-amplify/auth": 4.6.0
-    "@aws-amplify/core": 4.6.0
+    "@aws-amplify/auth": 4.6.1
+    "@aws-amplify/core": 4.6.1
     "@aws-crypto/sha256-browser": 2.0.1
     "@aws-sdk/protocol-http": 3.127.0
     "@aws-sdk/s3-request-presigner": 3.137.0
