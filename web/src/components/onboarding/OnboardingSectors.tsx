@@ -7,7 +7,7 @@ import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import { setHeaderRole } from "@/lib/utils/helpers";
 import { arrayOfSectors as sectors, LookupSectorTypeById, SectorType } from "@businessnjgovnavigator/shared/";
 import { Autocomplete, TextField } from "@mui/material";
-import orderBy from "lodash-es/orderBy";
+import { orderBy } from "lodash";
 import React, { ChangeEvent, ReactElement, useContext, useState } from "react";
 
 interface Props {

@@ -1,5 +1,5 @@
 import { LookupIndustryById, LookupSectorTypeById } from "@businessnjgovnavigator/shared/";
-import random from "lodash-es/random";
+import { random } from "lodash";
 
 export class OnboardingPage {
   getBusinessPersona(radio: string) {

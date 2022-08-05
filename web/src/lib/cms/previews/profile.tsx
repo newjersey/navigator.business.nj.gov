@@ -6,7 +6,7 @@ import Profile from "@/pages/profile";
 import { generateUser } from "@/test/factories";
 import { OperatingPhaseId } from "@businessnjgovnavigator/shared/operatingPhase";
 import { createEmptyUserData } from "@businessnjgovnavigator/shared/userData";
-import merge from "lodash-es/merge";
+import { merge } from "lodash";
 import { useEffect, useRef, useState } from "react";
 
 type Props = {

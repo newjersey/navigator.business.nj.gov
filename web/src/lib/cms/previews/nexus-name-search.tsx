@@ -6,7 +6,7 @@ import { NexusSearchBusinessNameTask } from "@/components/tasks/search-business-
 import { NexusUnavailable } from "@/components/tasks/search-business-name/NexusUnavailable";
 import { ConfigContext, ConfigType, getMergedConfig } from "@/contexts/configContext";
 import { generateTask } from "@/test/factories";
-import merge from "lodash-es/merge";
+import { merge } from "lodash";
 import { useEffect, useRef, useState } from "react";
 
 type Props = {
