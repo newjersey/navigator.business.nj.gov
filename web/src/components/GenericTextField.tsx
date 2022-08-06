@@ -26,6 +26,7 @@ export interface GenericTextFieldProps {
   formInputWide?: boolean;
   ariaLabel?: string;
   formInputFull?: boolean;
+  className?: string;
 }
 
 export const GenericTextField = (props: GenericTextFieldProps): ReactElement => {
@@ -103,7 +104,7 @@ export const GenericTextField = (props: GenericTextFieldProps): ReactElement => 
     <div
       className={`${props.formInputWide ? "form-input-wide" : ""} ${
         !props.formInputFull && !props.formInputWide ? "form-input" : ""
-      } margin-top-2`}
+      } margin-top-2 ${props.className ?? ""}`}
     >
       <TextField
         value={value ?? ""}

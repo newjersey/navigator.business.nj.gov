@@ -28,6 +28,7 @@ import {
 import { formationTaskId, ProfileData } from "@businessnjgovnavigator/shared";
 import {
   createEmptyUserData,
+  einTaskId,
   getCurrentDate,
   LookupIndustryById,
   LookupOwnershipTypeById,
@@ -293,6 +294,24 @@ describe("profile", () => {
       expect(currentUserData()).toEqual({
         ...initialUserData,
         taxFilingData: { ...taxData, filings: [] },
+      });
+    });
+
+    it("sets registerForEin task to complete if employerId exists", async () => {
+      const emptyData = createEmptyUserData(generateUser({}));
+      const initialUserData: UserData = {
+        ...emptyData,
+        profileData: {
+          ...emptyData.profileData,
+          businessPersona: "STARTING",
+        },
+      };
+      renderPage({ userData: initialUserData, municipalities: [] });
+      chooseTab("numbers");
+      fillText("Employer id", "02-3456780");
+      clickSave();
+      await waitFor(() => {
+        expect(currentUserData().taskProgress).toEqual({ [einTaskId]: "COMPLETED" });
       });
     });
 

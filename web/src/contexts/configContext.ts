@@ -4,6 +4,7 @@ import * as CannabisLicenseTab1 from "@businessnjgovnavigator/content/fieldConfi
 import * as CannabisPriorityStatusTab1 from "@businessnjgovnavigator/content/fieldConfig/cannabis-priority-status-tab1.json";
 import * as CannabisPriorityStatusTab2 from "@businessnjgovnavigator/content/fieldConfig/cannabis-priority-status-tab2.json";
 import * as ConfigOriginal from "@businessnjgovnavigator/content/fieldConfig/config.json";
+import * as Ein from "@businessnjgovnavigator/content/fieldConfig/ein.json";
 import * as NaicsCode from "@businessnjgovnavigator/content/fieldConfig/naics-code.json";
 import * as NexusDbaFormation from "@businessnjgovnavigator/content/fieldConfig/nexus-dba-formation.json";
 import * as NexusNameSearch from "@businessnjgovnavigator/content/fieldConfig/nexus-name-search.json";
@@ -58,7 +59,8 @@ const merged = JSON.parse(
       CannabisLicenseConditionalTab2,
       NexusNameSearch,
       NexusDbaFormation,
-      NaicsCode
+      NaicsCode,
+      Ein
     )
   )
 );
@@ -89,7 +91,8 @@ export type ConfigType = typeof ConfigOriginal &
   typeof CannabisLicenseConditionalTab2 &
   typeof NexusNameSearch &
   typeof NexusDbaFormation &
-  typeof NaicsCode;
+  typeof NaicsCode &
+  typeof Ein;
 
 export const getMergedConfig = (): ConfigType => {
   return merge(
@@ -119,7 +122,8 @@ export const getMergedConfig = (): ConfigType => {
     CannabisLicenseConditionalTab2,
     NexusNameSearch,
     NexusDbaFormation,
-    NaicsCode
+    NaicsCode,
+    Ein
   );
 };
 

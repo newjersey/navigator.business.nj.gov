@@ -1,4 +1,4 @@
-import { formationTaskId } from "@shared/domain-logic/gradualGraduationStages";
+import { formationTaskId } from "@shared/domain-logic/taskIds";
 import { FormationSubmitResponse, GetFilingResponse } from "@shared/formationData";
 import { ProfileDocuments } from "@shared/profileData";
 import { Router } from "express";
