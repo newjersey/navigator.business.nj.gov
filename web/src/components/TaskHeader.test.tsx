@@ -67,8 +67,8 @@ describe("<TaskHeader />", () => {
 
   it("displays Not Started status when user data does not contain status", () => {
     renderTaskHeader(generateTask({}), generateUserData({ taskProgress: {} }));
-
-    expect(screen.getAllByText("Not started")[0]).toBeVisible();
+    const dropDown = screen.getByTestId("taskProgress");
+    expect(within(dropDown).getByText(Config.taskProgress.NOT_STARTED)).toBeInTheDocument();
   });
 
   it("displays task status from user data", () => {
@@ -78,7 +78,8 @@ describe("<TaskHeader />", () => {
       [taskId]: "IN_PROGRESS",
     };
     renderTaskHeader(generateTask({ id: taskId }), generateUserData({ taskProgress }));
-    expect(screen.getAllByText("In progress")[0]).toBeVisible();
+    const dropDown = screen.getByTestId("taskProgress");
+    expect(within(dropDown).getByText(Config.taskProgress.IN_PROGRESS)).toBeInTheDocument();
   });
 
   it("updates task status when progress is selected", async () => {
@@ -89,9 +90,11 @@ describe("<TaskHeader />", () => {
 
     renderTaskHeader(generateTask({ id: taskId }), generateUserData({ taskProgress }));
 
-    fireEvent.click(screen.getAllByText("Not started")[0]);
-    fireEvent.click(screen.getByText("In progress"));
-    expect(screen.getAllByText("In progress")[0]).toBeVisible();
+    const dropDown = screen.getByTestId("taskProgress");
+
+    fireEvent.click(dropDown);
+    fireEvent.click(screen.getByText(Config.taskProgress.IN_PROGRESS));
+    expect(within(dropDown).getByText(Config.taskProgress.IN_PROGRESS)).toBeInTheDocument();
     await waitFor(() =>
       expect(currentUserData().taskProgress).toEqual({
         "some-id": "COMPLETED",
@@ -102,10 +105,12 @@ describe("<TaskHeader />", () => {
 
   it("shows a success snackbar when an option is selected", async () => {
     renderTaskHeader(generateTask({}), generateUserData({}));
-    fireEvent.click(screen.getAllByText("Not started")[0]);
+
+    const dropDown = screen.getByTestId("taskProgress");
+    fireEvent.click(dropDown);
 
     expect(screen.queryByText(Config.taskDefaults.taskProgressSuccessSnackbarBody)).not.toBeInTheDocument();
-    fireEvent.click(screen.getByText("In progress"));
+    fireEvent.click(screen.getByText(Config.taskProgress.IN_PROGRESS));
     await screen.findByText(Config.taskDefaults.taskProgressSuccessSnackbarBody);
   });
 
@@ -451,8 +456,9 @@ describe("<TaskHeader />", () => {
       const taskProgress: Record<string, TaskProgress> = { [formationTaskId]: "COMPLETED" };
       renderTaskHeader(generateTask({ id: formationTaskId }), generateUserData({ taskProgress }));
       expect(screen.queryByText(Config.formationDateModal.header)).not.toBeInTheDocument();
-      fireEvent.click(screen.getAllByText("Completed")[0]);
-      fireEvent.click(screen.getAllByText("Completed")[1]);
+      const dropDown = screen.getByTestId("taskProgress");
+      fireEvent.click(dropDown);
+      fireEvent.click(screen.getAllByText(Config.taskProgress.COMPLETED)[1]);
       expect(screen.queryByText(Config.formationDateModal.header)).not.toBeInTheDocument();
       expect(screen.queryByText(Config.formationDateModal.areYouSureModalHeader)).not.toBeInTheDocument();
       expect(userDataWasNotUpdated()).toBe(true);
@@ -462,12 +468,13 @@ describe("<TaskHeader />", () => {
       renderTaskHeader(generateTask({ id: formationTaskId }), generateUserData({}));
       expect(screen.queryByText(Config.formationDateModal.header)).not.toBeInTheDocument();
 
-      fireEvent.click(screen.getAllByText("Not started")[0]);
-      fireEvent.click(screen.getByText("In progress"));
+      const dropDown = screen.getByTestId("taskProgress");
+      fireEvent.click(dropDown);
+      fireEvent.click(screen.getByText(Config.taskProgress.IN_PROGRESS));
 
       expect(screen.queryByText(Config.formationDateModal.header)).not.toBeInTheDocument();
-      fireEvent.click(screen.getAllByText("In progress")[0]);
-      fireEvent.click(screen.getByText("Not started"));
+      fireEvent.click(dropDown);
+      fireEvent.click(screen.getByText(Config.taskProgress.NOT_STARTED));
       expect(screen.queryByText(Config.formationDateModal.header)).not.toBeInTheDocument();
     });
 
@@ -477,8 +484,9 @@ describe("<TaskHeader />", () => {
       renderTaskHeader(generateTask({ id }), generateUserData({ taskProgress }));
       expect(screen.queryByText(Config.formationDateModal.header)).not.toBeInTheDocument();
 
-      fireEvent.click(screen.getAllByText("Completed")[0]);
-      fireEvent.click(screen.getAllByText("Completed")[1]);
+      const dropDown = screen.getByTestId("taskProgress");
+      fireEvent.click(dropDown);
+      fireEvent.click(screen.getAllByText(Config.taskProgress.COMPLETED)[1]);
 
       expect(screen.queryByText(Config.formationDateModal.header)).not.toBeInTheDocument();
     });
@@ -551,8 +559,9 @@ describe("<TaskHeader />", () => {
         expect(currentUserData().profileData.dateOfFormation).toEqual(date.format("YYYY-MM-DD"))
       );
 
-      fireEvent.click(screen.getAllByText("Completed")[0]);
-      fireEvent.click(screen.getByText("Not started"));
+      const dropDown = screen.getByTestId("taskProgress");
+      fireEvent.click(dropDown);
+      fireEvent.click(screen.getByText(Config.taskProgress.NOT_STARTED));
       expect(screen.getByText(Config.formationDateModal.areYouSureModalHeader)).toBeInTheDocument();
       fireEvent.click(screen.getByText(Config.formationDateModal.areYouSureModalContinueButtonText));
       await waitFor(() => expect(currentUserData().profileData.dateOfFormation).toBeUndefined());
@@ -563,8 +572,9 @@ describe("<TaskHeader />", () => {
         generateTask({ id: formationTaskId }),
         generateUserData({ profileData: generateProfileData({ businessPersona: "STARTING" }) })
       );
-      fireEvent.click(screen.getAllByText("Not started")[0]);
-      fireEvent.click(screen.getByText("In progress"));
+      const dropDown = screen.getByTestId("taskProgress");
+      fireEvent.click(dropDown);
+      fireEvent.click(screen.getByText(Config.taskProgress.IN_PROGRESS));
       expect(screen.queryByText(Config.formationDateModal.areYouSureModalHeader)).not.toBeInTheDocument();
     });
 
@@ -582,8 +592,9 @@ describe("<TaskHeader />", () => {
         expect(currentUserData().profileData.dateOfFormation).toEqual(date.format("YYYY-MM-DD"))
       );
 
-      fireEvent.click(screen.getAllByText("Completed")[0]);
-      fireEvent.click(screen.getByText("Not started"));
+      const dropDown = screen.getByTestId("taskProgress");
+      fireEvent.click(dropDown);
+      fireEvent.click(screen.getByText(Config.taskProgress.NOT_STARTED));
       expect(screen.getByText(Config.formationDateModal.areYouSureModalHeader)).toBeInTheDocument();
       fireEvent.click(screen.getAllByText(Config.formationDateModal.areYouSureModalCancelButtonText)[0]);
       expect(currentUserData().taskProgress[id]).toEqual("COMPLETED");
@@ -605,13 +616,15 @@ describe("<TaskHeader />", () => {
   });
 
   const selectCompleted = (): void => {
-    fireEvent.click(screen.getAllByText("Not started")[0]);
-    fireEvent.click(screen.getByText("Completed"));
+    const dropDown = screen.getByTestId("taskProgress");
+    fireEvent.click(dropDown);
+    fireEvent.click(screen.getByText(Config.taskProgress.COMPLETED));
   };
 
   const changeTaskNotStartedToCompleted = (): void => {
     selectCompleted();
-    expect(screen.getAllByText("Completed")[0]).toBeVisible();
+    const dropDown = screen.getByTestId("taskProgress");
+    expect(within(dropDown).getByText(Config.taskProgress.COMPLETED)).toBeInTheDocument();
   };
 
   const selectDate = (date: Dayjs) => {
