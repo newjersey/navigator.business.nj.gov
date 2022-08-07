@@ -25,17 +25,19 @@ export const NaicsCodeTask = (props: Props): ReactElement => {
     setShowInput(!userData.profileData.naicsCode);
   }, userData);
 
-  const onEdit = () => {
+  const setBackToEditing = ({ remove }: { remove: boolean }) => {
     if (!userData) return;
     setShowInput(true);
+    const newNaicsValue = remove ? "" : userData.profileData.naicsCode;
     update({
       ...userData,
-      taskProgress: {
-        ...userData.taskProgress,
-        [props.task.id]: "IN_PROGRESS",
-      },
+      profileData: { ...userData.profileData, naicsCode: newNaicsValue },
+      taskProgress: { ...userData.taskProgress, [props.task.id]: "IN_PROGRESS" },
     });
   };
+
+  const onEdit = () => setBackToEditing({ remove: false });
+  const onRemove = () => setBackToEditing({ remove: true });
 
   const onSave = () => {
     if (isAuthenticated === IsAuthenticated.FALSE) {
@@ -60,7 +62,11 @@ export const NaicsCodeTask = (props: Props): ReactElement => {
       )}
       {!showInput && (
         <div className="margin-y-4 bg-base-extra-light padding-2 radius-lg">
-          <NaicsCodeDisplay onEdit={onEdit} code={userData?.profileData.naicsCode || ""} />
+          <NaicsCodeDisplay
+            onEdit={onEdit}
+            onRemove={onRemove}
+            code={userData?.profileData.naicsCode || ""}
+          />
         </div>
       )}
       <Content>{postLookupContent}</Content>

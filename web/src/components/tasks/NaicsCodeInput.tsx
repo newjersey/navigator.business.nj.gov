@@ -51,13 +51,17 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
   useMountEffectWhenDefined(() => {
     if (!userData) return;
     setNaicsCode(userData.profileData.naicsCode);
-    const naicsCodes =
+    const industryNaicsCodes =
       LookupIndustryById(userData.profileData.industryId)
         .naicsCodes?.replace(/\s/g, "")
         .split(",")
         .filter((value) => value.length > 0) ?? [];
-    setIndustryCodes(naicsCodes);
-    if (naicsCodes.length === 0) setDisplayInput(true);
+    setIndustryCodes(industryNaicsCodes);
+    const hasExistingCode = userData.profileData.naicsCode.length > 0;
+    const existingCodeIsIndustryCode = industryNaicsCodes.includes(userData.profileData.naicsCode);
+    if (industryNaicsCodes.length === 0 || (hasExistingCode && !existingCodeIsIndustryCode)) {
+      setDisplayInput(true);
+    }
   }, userData);
 
   const saveNaicsCode = async (): Promise<void> => {
@@ -77,14 +81,8 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
     setIsLoading(true);
     const updatedUserData: UserData = {
       ...userData,
-      profileData: {
-        ...userData.profileData,
-        naicsCode: naicsCode,
-      },
-      taskProgress: {
-        ...userData.taskProgress,
-        [props.task.id]: "COMPLETED",
-      },
+      profileData: { ...userData.profileData, naicsCode: naicsCode },
+      taskProgress: { ...userData.taskProgress, [props.task.id]: "COMPLETED" },
     };
     try {
       await update(updatedUserData);
@@ -115,10 +113,7 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
     if (!userData) return;
     update({
       ...userData,
-      taskProgress: {
-        ...userData.taskProgress,
-        [props.task.id]: "IN_PROGRESS",
-      },
+      taskProgress: { ...userData.taskProgress, [props.task.id]: "IN_PROGRESS" },
     });
   };
 

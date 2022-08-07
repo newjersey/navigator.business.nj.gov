@@ -3553,6 +3553,7 @@ collections:
                   hint: This field supports Markdown,
                 }
               - { label: Edit Text, name: editText, widget: string }
+              - { label: Remove Text, name: removeText, widget: string }
               - {
                   label: Register for Taxes - NAICS Display Text,
                   name: registerForTaxesNAICSCodePlaceholder,
