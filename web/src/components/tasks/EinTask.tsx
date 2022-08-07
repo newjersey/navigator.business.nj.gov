@@ -9,6 +9,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { Task } from "@/lib/types/types";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import { emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { ReactElement, useContext, useState } from "react";
 
 interface Props {
@@ -30,7 +31,7 @@ export const EinTask = (props: Props): ReactElement => {
   const setBackToEditing = ({ remove }: { remove: boolean }) => {
     if (!userData) return;
     setShowInput(true);
-    const newEinValue = remove ? undefined : userData.profileData.employerId;
+    const newEinValue = remove ? emptyProfileData.employerId : userData.profileData.employerId;
     update({
       ...userData,
       profileData: { ...userData.profileData, employerId: newEinValue },

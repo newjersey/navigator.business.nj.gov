@@ -21,7 +21,7 @@ import {
   getSectionPositions,
   setPreferencesCloseSection,
 } from "@/lib/utils/helpers";
-import { isFormationTask, isTaxTask, UserData } from "@businessnjgovnavigator/shared";
+import { emptyProfileData, isFormationTask, isTaxTask, UserData } from "@businessnjgovnavigator/shared";
 import { useRouter } from "next/router";
 import { ReactElement, useState } from "react";
 import { TaxRegistrationModal } from "./TaxRegistrationModal";
@@ -75,7 +75,7 @@ export const TaskHeader = (props: Props): ReactElement => {
           ...userData,
           profileData: {
             ...userData.profileData,
-            dateOfFormation: undefined,
+            dateOfFormation: emptyProfileData.dateOfFormation,
           },
         };
       }
