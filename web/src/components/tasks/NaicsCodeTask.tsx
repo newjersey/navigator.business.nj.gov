@@ -8,6 +8,7 @@ import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { Task } from "@/lib/types/types";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import { emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { ReactElement, useContext, useState } from "react";
 
 interface Props {
@@ -28,7 +29,7 @@ export const NaicsCodeTask = (props: Props): ReactElement => {
   const setBackToEditing = ({ remove }: { remove: boolean }) => {
     if (!userData) return;
     setShowInput(true);
-    const newNaicsValue = remove ? "" : userData.profileData.naicsCode;
+    const newNaicsValue = remove ? emptyProfileData.naicsCode : userData.profileData.naicsCode;
     update({
       ...userData,
       profileData: { ...userData.profileData, naicsCode: newNaicsValue },

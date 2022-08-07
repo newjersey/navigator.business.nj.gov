@@ -52,6 +52,7 @@ import {
   ProfileData,
   UserData,
 } from "@businessnjgovnavigator/shared/";
+import { emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { useMediaQuery } from "@mui/material";
 import { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
@@ -241,37 +242,19 @@ const OnboardingPage = (props: Props): ReactElement => {
       }
 
       newProfileData = {
+        ...emptyProfileData,
         initialOnboardingFlow: initialOnboardingFlow,
         businessName: profileData.businessName,
         industryId: profileData.businessPersona === "OWNING" ? "generic" : undefined,
         homeBasedBusiness: profileData.homeBasedBusiness,
         liquorLicense: profileData.liquorLicense,
-        requiresCpa: profileData.requiresCpa,
         municipality: profileData.municipality,
         businessPersona: profileData.businessPersona,
         legalStructureId: profileData.legalStructureId,
-        cannabisLicenseType: undefined,
-        cannabisMicrobusiness: undefined,
-        dateOfFormation: undefined,
-        entityId: undefined,
-        constructionRenovationPlan: undefined,
-        employerId: undefined,
-        taxId: undefined,
-        notes: "",
-        ownershipTypeIds: [],
-        documents: { formationDoc: "", standingDoc: "", certifiedDoc: "" },
-        existingEmployees: undefined,
-        taxPin: undefined,
-        sectorId: undefined,
-        naicsCode: "",
-        foreignBusinessType: undefined,
-        foreignBusinessTypeIds: [],
-        nexusLocationInNewJersey: undefined,
-        nexusDbaName: undefined,
+        requiresCpa: profileData.requiresCpa,
         providesStaffingService: profileData.providesStaffingService,
         certifiedInteriorDesigner: profileData.certifiedInteriorDesigner,
         realEstateAppraisalManagement: profileData.realEstateAppraisalManagement,
-        operatingPhase: "GUEST_MODE",
       };
 
       setProfileData(newProfileData);

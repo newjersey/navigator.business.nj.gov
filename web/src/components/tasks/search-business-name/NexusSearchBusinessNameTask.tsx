@@ -11,6 +11,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import { NameAvailability, Task } from "@/lib/types/types";
 import { getModifiedTaskContent } from "@/lib/utils/helpers";
+import { emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { ReactElement, useContext } from "react";
 
 interface Props {
@@ -36,7 +37,7 @@ export const NexusSearchBusinessNameTask = (props: Props): ReactElement => {
         profileData: {
           ...userData.profileData,
           businessName: submittedName,
-          nexusDbaName: undefined,
+          nexusDbaName: emptyProfileData.nexusDbaName,
         },
       };
     } else if (nameAvailability.status === "UNAVAILABLE") {

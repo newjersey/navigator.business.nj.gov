@@ -17,6 +17,7 @@ import {
   isIndustryIdGeneric,
   LookupIndustryById,
 } from "@businessnjgovnavigator/shared/";
+import { emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { Autocomplete, createFilterOptions, FilterOptionsState, TextField } from "@mui/material";
 import { orderBy } from "lodash";
 import { ChangeEvent, FocusEvent, ReactElement, useContext, useState } from "react";
@@ -67,17 +68,21 @@ export const IndustryDropdown = (props: Props): ReactElement => {
 
     setProfileData({
       ...state.profileData,
-      liquorLicense: isLiquorLicenseApplicable(industryId) ? state.profileData.liquorLicense : false,
-      requiresCpa: isCpaRequiredApplicable(industryId) ? state.profileData.requiresCpa : false,
+      liquorLicense: isLiquorLicenseApplicable(industryId)
+        ? state.profileData.liquorLicense
+        : emptyProfileData.liquorLicense,
+      requiresCpa: isCpaRequiredApplicable(industryId)
+        ? state.profileData.requiresCpa
+        : emptyProfileData.requiresCpa,
       realEstateAppraisalManagement: isRealEstateAppraisalManagementApplicable(industryId)
         ? state.profileData.realEstateAppraisalManagement
-        : false,
+        : emptyProfileData.realEstateAppraisalManagement,
       certifiedInteriorDesigner: isCertifiedInteriorDesignerApplicable(industryId)
         ? state.profileData.certifiedInteriorDesigner
-        : false,
+        : emptyProfileData.certifiedInteriorDesigner,
       providesStaffingService: isProvidesStaffingServicesApplicable(industryId)
         ? state.profileData.providesStaffingService
-        : false,
+        : emptyProfileData.providesStaffingService,
       homeBasedBusiness,
       cannabisLicenseType,
       industryId: industryId,
