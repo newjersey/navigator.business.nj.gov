@@ -8,6 +8,7 @@ import { ReactElement } from "react";
 
 interface Props {
   onEdit: () => void;
+  onRemove: () => void;
   code: string;
 }
 
@@ -28,6 +29,10 @@ export const NaicsCodeDisplay = (props: Props): ReactElement => {
         </span>
         <Button style="tertiary" onClick={props.onEdit}>
           {Config.determineNaicsCode.editText}
+        </Button>
+        <span className="margin-x-105">|</span>
+        <Button style="tertiary" onClick={props.onRemove}>
+          {Config.determineNaicsCode.removeText}
         </Button>
       </div>
     </>

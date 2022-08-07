@@ -165,6 +165,12 @@ describe("<EinTask />", () => {
       fireEvent.click(screen.getByText(Config.ein.editText));
       expect(currentUserData().taskProgress[taskId]).toEqual("IN_PROGRESS");
     });
+
+    it("sets task status to in-progress on remove button", () => {
+      renderPage();
+      fireEvent.click(screen.getByText(Config.ein.removeText));
+      expect(currentUserData().taskProgress[taskId]).toEqual("IN_PROGRESS");
+    });
   });
 
   describe("guest mode", () => {

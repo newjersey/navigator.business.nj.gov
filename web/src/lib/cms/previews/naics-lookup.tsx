@@ -59,7 +59,7 @@ const NaicsLookupPreview = (props: Props) => {
 
         <hr className="margin-y-6" />
 
-        <NaicsCodeDisplay onEdit={() => {}} code={"441221"} />
+        <NaicsCodeDisplay onEdit={() => {}} onRemove={() => {}} code={"441221"} />
       </div>
     </ConfigContext.Provider>
   );
