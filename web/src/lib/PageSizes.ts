@@ -9,4 +9,5 @@ export const MediaQueries = {
   desktopAndUp: `(min-width:${PageSizes.lg}px)`,
   tabletAndUp: `(min-width:${PageSizes.sm}px)`,
   isMobile: `(max-width:${PageSizes.sm}px)`,
+  isXSMobile: `(max-width:${PageSizes.xs}px)`,
 };

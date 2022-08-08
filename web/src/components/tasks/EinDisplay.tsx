@@ -17,13 +17,15 @@ export const EinDisplay = (props: Props): ReactElement => {
 
   return (
     <Alert variant="success">
-      <div className="flex flex-row">
-        <Content>{templateEval(Config.ein.successText, { ein: displayAsEin(props.employerId) })}</Content>
-        <Button style="tertiary" onClick={props.onEdit} className="margin-left-1">
+      <div className="desktop:display-flex flex-row">
+        <div className="margin-right-1">
+          <Content>{templateEval(Config.ein.successText, { ein: displayAsEin(props.employerId) })}</Content>
+        </div>
+        <Button style="tertiary" underline onClick={props.onEdit}>
           {Config.ein.editText}
         </Button>
-        <div className="margin-x-105">|</div>
-        <Button style="tertiary" onClick={props.onRemove}>
+        <span className="margin-x-105">|</span>
+        <Button style="tertiary" underline onClick={props.onRemove}>
           {Config.ein.removeText}
         </Button>
       </div>
