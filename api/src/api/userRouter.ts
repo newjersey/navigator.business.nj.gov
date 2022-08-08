@@ -120,6 +120,8 @@ export const userRouterFactory = (
 
     userData = await updateLegalStructureIfNeeded(userData);
     userData = getAnnualFilings(userData);
+    userData = updateOperatingPhase(userData);
+    userData = updateRoadmapSidebarCards(userData);
 
     userDataClient
       .put(userData)

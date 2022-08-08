@@ -1,17 +1,17 @@
 import { Content } from "@/components/Content";
 import { Button } from "@/components/njwds-extended/Button";
+import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
 import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useRoadmapSidebarCards } from "@/lib/data-hooks/useRoadmapSidebarCards";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { SidebarCardContent } from "@/lib/types/types";
-import analytics from "@/lib/utils/analytics";
 import { templateEval } from "@/lib/utils/helpers";
 import { styled } from "@mui/material";
 import LinearProgress, { linearProgressClasses } from "@mui/material/LinearProgress";
 import { useState } from "react";
-import { GraduationModal } from "./GraduationModal";
+import { SectorModal } from "./SectorModal";
 
 type Props = {
   card: SidebarCardContent;
@@ -29,8 +29,11 @@ const BorderLinearProgress = styled(LinearProgress)(() => ({
 
 export const RoadmapSidebarCard = (props: Props) => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [fundingAlert, setFundingUpdatedAlert] = useState<boolean>(false);
+  const [hiddenTasksAlert, setHiddenTasksUpdatedAlert] = useState<boolean>(false);
+
   const { hideCard } = useRoadmapSidebarCards();
-  const { userData } = useUserData();
+  const { userData, update } = useUserData();
   const { roadmap } = useRoadmap();
   const { Config } = useConfig();
 
@@ -123,17 +126,45 @@ export const RoadmapSidebarCard = (props: Props) => {
     });
   };
 
+  const displayFundingSnackBars = async () => {
+    setFundingUpdatedAlert(true);
+    await setTimeout(() => setHiddenTasksUpdatedAlert(true), 6000);
+    setModalOpen(false);
+  };
+
+  const updateUserToUpAndRunning = async () => {
+    if (!userData) return;
+    await update({
+      ...userData,
+      profileData: {
+        ...userData.profileData,
+        operatingPhase: "UP_AND_RUNNING",
+      },
+    });
+
+    await displayFundingSnackBars();
+  };
+
   const ctaOnClickMap = {
-    graduation: (): void => {
-      analytics.event.roadmap_graduate_button.click.view_graduation_modal();
-      setModalOpen(true);
+    "funding-nudge": async () => {
+      if (!userData) return;
+      if (userData.profileData.industryId === "generic" || !userData.profileData.industryId) {
+        setModalOpen(true);
+      } else {
+        await updateUserToUpAndRunning();
+      }
     },
   } as Record<string, () => void>;
 
   return (
     <>
-      <GraduationModal open={modalOpen} handleClose={() => setModalOpen(false)} />
-
+      {props.card.id === "funding-nudge" && (
+        <SectorModal
+          open={modalOpen}
+          handleClose={() => setModalOpen(false)}
+          onContinue={updateUserToUpAndRunning}
+        />
+      )}
       <div
         className={`border radius-md border-${props.card.borderColor} box-shadow-${props.card.shadowColor} margin-right-105 margin-bottom-3`}
         {...{ "data-testid": props.card.id }}
@@ -192,6 +223,32 @@ export const RoadmapSidebarCard = (props: Props) => {
                 {props.card.ctaText}
               </Button>
             </div>
+          )}
+          {fundingAlert && (
+            <SnackbarAlert
+              variant="success"
+              isOpen={fundingAlert}
+              close={() => {
+                setFundingUpdatedAlert(false);
+              }}
+              heading={Config.roadmapDefaults.fundingSnackbarHeading}
+              dataTestid="funding-alert"
+            >
+              {Config.roadmapDefaults.fundingSnackbarBody}
+            </SnackbarAlert>
+          )}
+          {hiddenTasksAlert && (
+            <SnackbarAlert
+              variant="success"
+              isOpen={hiddenTasksAlert}
+              close={() => {
+                setHiddenTasksUpdatedAlert(false);
+              }}
+              heading={Config.roadmapDefaults.hiddenTasksSnackbarHeading}
+              dataTestid="hiddenTasks-alert"
+            >
+              {Config.roadmapDefaults.hiddenTasksSnackbarBody}
+            </SnackbarAlert>
           )}
         </div>
       </div>

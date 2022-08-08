@@ -208,7 +208,7 @@ export const generatePreferences = (overrides: Partial<Preferences>): Preference
     roadmapOpenSteps: [randomInt()],
     hiddenFundingIds: [],
     hiddenCertificationIds: [],
-    visibleRoadmapSidebarCards: ["welcome", "graduation"],
+    visibleRoadmapSidebarCards: ["welcome"],
     ...overrides,
   };
 };

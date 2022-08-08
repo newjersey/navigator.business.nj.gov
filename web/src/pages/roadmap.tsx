@@ -1,3 +1,4 @@
+import { FilingsCalendar } from "@/components/FilingsCalendar";
 import { FilingsCalendarAsList } from "@/components/FilingsCalendarAsList";
 import { Header } from "@/components/Header";
 import { LoadingIndicator } from "@/components/LoadingIndicator";
@@ -21,6 +22,7 @@ import { loadAllFundings } from "@/lib/static/loadFundings";
 import { loadOperateReferences } from "@/lib/static/loadOperateReferences";
 import { Certification, Funding, OperateReference, RoadmapDisplayContent } from "@/lib/types/types";
 import { getSectionNames, getTaxFilings, useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import { LookupOperatingPhaseById } from "@businessnjgovnavigator/shared/";
 import { GetStaticPropsResult } from "next";
 import { useRouter } from "next/router";
 import { ReactElement, useEffect } from "react";
@@ -94,23 +96,28 @@ const RoadmapPage = (props: Props): ReactElement => {
           <LoadingIndicator />
         ) : (
           <>
-            {getSectionNames(roadmap).map((section) => (
-              <SectionAccordion key={section} sectionType={section}>
-                {roadmap.steps
-                  .filter((step) => step.section === section)
-                  .map((step, index, array) => (
-                    <Step key={step.stepNumber} step={step} last={index === array.length - 1} />
-                  ))}
-              </SectionAccordion>
-            ))}
-            {taxFilings.length > 0 && (
-              <div className="margin-top-6 bg-roadmap-blue border-base-lightest border-2px padding-top-3 padding-bottom-1 padding-x-4 radius-lg">
-                <div>
-                  <div className="h3-styling text-normal">{Config.roadmapDefaults.calendarHeader}</div>
-                  <hr className="bg-base-lighter margin-top-0 margin-bottom-4" aria-hidden={true} />
-                  <FilingsCalendarAsList operateReferences={props.operateReferences} />
+            {LookupOperatingPhaseById(userData?.profileData.operatingPhase).displayRoadmapTasks &&
+              getSectionNames(roadmap).map((section) => (
+                <SectionAccordion key={section} sectionType={section}>
+                  {roadmap.steps
+                    .filter((step) => step.section === section)
+                    .map((step, index, array) => (
+                      <Step key={step.stepNumber} step={step} last={index === array.length - 1} />
+                    ))}
+                </SectionAccordion>
+              ))}
+            {LookupOperatingPhaseById(userData?.profileData.operatingPhase).displayListCalendar &&
+              taxFilings.length > 0 && (
+                <div className="margin-top-6 bg-roadmap-blue border-base-lightest border-2px padding-top-3 padding-bottom-1 padding-x-4 radius-lg">
+                  <div>
+                    <div className="h3-styling text-normal">{Config.roadmapDefaults.calendarHeader}</div>
+                    <hr className="bg-base-lighter margin-top-0 margin-bottom-4" aria-hidden={true} />
+                    <FilingsCalendarAsList operateReferences={props.operateReferences} />
+                  </div>
                 </div>
-              </div>
+              )}
+            {LookupOperatingPhaseById(userData?.profileData.operatingPhase).displayFullCalendar && (
+              <FilingsCalendar operateReferences={props.operateReferences} />
             )}
           </>
         )}

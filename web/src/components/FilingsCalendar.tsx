@@ -93,50 +93,52 @@ export const FilingsCalendar = (props: Props): ReactElement => {
     const rowIndices = monthIndices.filter((num) => num % monthsPerRow === 0);
 
     return (
-      <table data-testid="filings-calendar-as-table">
-        <tbody>
-          {rowIndices.map((rowIndex) => {
-            const monthIndicesForRow = monthIndices.slice(rowIndex, rowIndex + monthsPerRow);
-            return (
-              <tr key={rowIndex}>
-                {monthIndicesForRow.map((month) => (
-                  <td key={month} className="td-gray-border">
-                    {getMonth(month)}
-                  </td>
-                ))}
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      <div data-testid="filings-calendar">
+        <div className="flex flex-align-end padding-top-2">
+          <h2 className="margin-bottom-0">{Config.dashboardDefaults.calendarHeader}</h2>
+          <div className="margin-top-05">
+            <ArrowTooltip title={Config.dashboardDefaults.calendarTooltip}>
+              <div
+                className="fdr fac margin-left-1 margin-bottom-05 font-body-lg text-green"
+                data-testid="calendar-tooltip"
+              >
+                <Icon>help_outline</Icon>
+              </div>
+            </ArrowTooltip>
+          </div>
+        </div>
+        <hr className="margin-bottom-4 margin-top-105 bg-base-light" aria-hidden={true} />
+        <table data-testid="filings-calendar-as-table">
+          <tbody>
+            {rowIndices.map((rowIndex) => {
+              const monthIndicesForRow = monthIndices.slice(rowIndex, rowIndex + monthsPerRow);
+              return (
+                <tr key={rowIndex}>
+                  {monthIndicesForRow.map((month) => (
+                    <td key={month} className="td-gray-border">
+                      {getMonth(month)}
+                    </td>
+                  ))}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+        <p className="text-base-dark">{Config.dashboardDefaults.calendarLegalText}</p>
+      </div>
     );
   };
 
   return taxFilings.length > 0 ? (
     <>
-      <div className="flex flex-align-end padding-top-2">
-        <h2 className="margin-bottom-0">{Config.dashboardDefaults.calendarHeader}</h2>
-        <div className="margin-top-05">
-          <ArrowTooltip title={Config.dashboardDefaults.calendarTooltip}>
-            <div
-              className="fdr fac margin-left-1 margin-bottom-05 font-body-lg text-green"
-              data-testid="calendar-tooltip"
-            >
-              <Icon>help_outline</Icon>
-            </div>
-          </ArrowTooltip>
-        </div>
-      </div>
-      <hr className="margin-bottom-4 margin-top-105 bg-base-light" aria-hidden={true} />
       {isLargeScreen ? (
         renderCalendar()
       ) : (
         <FilingsCalendarAsList operateReferences={props.operateReferences} />
       )}
-      <p className="text-base-dark">{Config.dashboardDefaults.calendarLegalText}</p>
     </>
   ) : (
-    <div className=" padding-y-2">
+    <div data-testid="empty-calendar" className=" padding-y-2">
       <h2 className="margin-bottom-0">{Config.dashboardDefaults.calendarHeader}</h2>
       <hr className="bg-base-light margin-y-3 margin-right-105" aria-hidden={true} />
       <div className="flex flex-column space-between fac text-align-center flex-desktop:grid-col bg-base-lightest usa-prose padding-y-205 padding-x-3">

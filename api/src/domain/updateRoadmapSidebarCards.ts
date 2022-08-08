@@ -32,6 +32,16 @@ export const updateRoadmapSidebarCards: UpdateRoadmapSidebarCards = (userData: U
     hideCard("tax-registration-nudge");
   }
 
+  if (operatingPhase === "FORMED_AND_REGISTERED") {
+    showCard("funding-nudge");
+  } else {
+    hideCard("funding-nudge");
+  }
+
+  if (operatingPhase === "UP_AND_RUNNING") {
+    hideCard("task-progress");
+  }
+
   return {
     ...userData,
     preferences: {

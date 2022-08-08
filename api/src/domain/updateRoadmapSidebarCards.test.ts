@@ -109,4 +109,48 @@ describe("updateRoadmapSidebarCards", () => {
       );
     });
   });
+
+  describe("funding nudge", () => {
+    it("adds funding-nudge when operatingPhase is FORMED_AND_REGISTERED", () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          operatingPhase: "FORMED_AND_REGISTERED",
+        }),
+        preferences: generatePreferences({ visibleRoadmapSidebarCards: [] }),
+      });
+      expect(updateRoadmapSidebarCards(userData).preferences.visibleRoadmapSidebarCards).not.toContain(
+        "formation-nudge"
+      );
+      expect(updateRoadmapSidebarCards(userData).preferences.visibleRoadmapSidebarCards).toContain(
+        "funding-nudge"
+      );
+    });
+
+    it("removes funding-nudge when operatingPhase is NEEDS_TO_REGISTER_FOR_TAXES", () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          operatingPhase: "NEEDS_TO_REGISTER_FOR_TAXES",
+        }),
+        preferences: generatePreferences({ visibleRoadmapSidebarCards: ["funding-nudge"] }),
+      });
+      expect(updateRoadmapSidebarCards(userData).preferences.visibleRoadmapSidebarCards).not.toContain(
+        "funding-nudge"
+      );
+    });
+  });
+
+  describe("when operatingPhase is UP_AND_RUNNING", () => {
+    it("removes task-progress card", () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          operatingPhase: "UP_AND_RUNNING",
+          industryId: "generic",
+        }),
+        preferences: generatePreferences({ visibleRoadmapSidebarCards: ["task-progress"] }),
+      });
+
+      const updatedUserData = updateRoadmapSidebarCards(userData);
+      expect(updatedUserData.preferences.visibleRoadmapSidebarCards).not.toContain("task-progress");
+    });
+  });
 });
