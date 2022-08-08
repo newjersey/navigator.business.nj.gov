@@ -12,27 +12,27 @@
     },
     {
       "step": 3,
-      "weight": 20,
+      "weight": 60,
       "task": "sign-lease"
     },
     {
       "step": 3,
-      "weight": 25,
+      "weight": 61,
       "task": "zoning"
     },
     {
       "step": 3,
-      "weight": 30,
+      "weight": 62,
       "task": "building-permit"
     },
     {
       "step": 4,
-      "weight": 4,
+      "weight": 60,
       "task": "site-safety-permits"
     },
     {
       "step": 4,
-      "weight": 2,
+      "weight": 61,
       "task": "town-mercantile-license"
     }
   ]

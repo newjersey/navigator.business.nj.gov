@@ -8,13 +8,13 @@ callToActionText: Register with USDoT
 required: true
 issuingAgency: US Department of Transportation
 ---
-You must register with the US Department of Transportation (USDoT) and obtain a registration number prior to offering load-hauling services.
+Any commercial vehicle crossing state lines must register with the US Department of Transportation (USDoT) and obtain a registration number.
  
 ---
 ### Eligibility Criteria
-- Your truck will haul hazardous materials, or
-- Your truck weighs 10,000 pounds or more, and
-- Your truck will transport loads inside the State, interstate, or internationally
+- Your vehicle will haul hazardous materials, or
+- Your vehicle weighs 10,000 pounds or more, and
+- Your vehicle will transport loads inside the State, interstate, or internationally
 
 ### Application Requirements
 - `EIN|ein` or SSN

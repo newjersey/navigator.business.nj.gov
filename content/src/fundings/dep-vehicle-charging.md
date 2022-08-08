@@ -1,7 +1,7 @@
 ---
 filename: dep-vehicle-charging
 urlSlug: vehicle-charging-grant
-name: "It Pays to Plug: Electric Vehicle Workplace Charging Grant Program"
+name: "It Pays to Plug In: Electric Vehicle Workplace Charging Grant Program"
 id: dep-vehicle-charging
 callToActionLink: https://www.nj.gov/dep/grantandloanprograms/aqes-evcharge.htm
 callToActionText: Learn More
