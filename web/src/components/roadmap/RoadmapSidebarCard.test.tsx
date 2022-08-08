@@ -1,6 +1,8 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import { templateEval } from "@/lib/utils/helpers";
 import {
+  generatePreferences,
+  generateProfileData,
   generateRoadmap,
   generateSidebarCardContent,
   generateStep,
@@ -9,7 +11,14 @@ import {
 } from "@/test/factories";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
-import { render, screen } from "@testing-library/react";
+import {
+  currentUserData,
+  setupStatefulUserDataContext,
+  userDataWasNotUpdated,
+  WithStatefulUserData,
+} from "@/test/mock/withStatefulUserData";
+import { UserData } from "@businessnjgovnavigator/shared/userData";
+import { fireEvent, render, screen, within } from "@testing-library/react";
 import { RoadmapSidebarCard } from "./RoadmapSidebarCard";
 
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
@@ -323,5 +332,81 @@ describe("<RoadmapSidebarCard />", () => {
     );
     render(<RoadmapSidebarCard card={card} />);
     expect(screen.getByText("Get to work")).toBeInTheDocument();
+  });
+
+  describe("funding nudge", () => {
+    const card = generateSidebarCardContent({ id: "funding-nudge" });
+
+    beforeEach(() => {
+      setupStatefulUserDataContext();
+    });
+
+    const renderWithUserData = (userData: Partial<UserData>) => {
+      render(
+        <WithStatefulUserData initialUserData={generateUserData(userData)}>
+          <RoadmapSidebarCard card={card} />
+        </WithStatefulUserData>
+      );
+    };
+
+    describe("when clicking funding button for non-generic industry", () => {
+      it("renders funding snackbar and updates operating phase to UP_AND_RUNNING", async () => {
+        renderWithUserData({
+          profileData: generateProfileData({
+            businessPersona: "STARTING",
+            industryId: "cannabis",
+          }),
+          preferences: generatePreferences({ visibleRoadmapSidebarCards: ["funding-nudge"] }),
+        });
+
+        fireEvent.click(screen.getByTestId("cta-funding-nudge"));
+        await screen.findByTestId("funding-alert");
+        expect(currentUserData().profileData.operatingPhase).toEqual("UP_AND_RUNNING");
+      });
+    });
+
+    describe("when clicking funding button for generic industry", () => {
+      it("renders funding snackbar and updates operating phase to UP_AND_RUNNING after modal success", async () => {
+        renderWithUserData({
+          profileData: generateProfileData({
+            businessPersona: "STARTING",
+            industryId: "generic",
+          }),
+          preferences: generatePreferences({ visibleRoadmapSidebarCards: ["funding-nudge"] }),
+        });
+
+        fireEvent.click(screen.getByTestId("cta-funding-nudge"));
+
+        expect(screen.getByText(Config.roadmapDefaults.sectorModalTitle)).toBeInTheDocument();
+        selectByValue("Sector", "clean-energy");
+        fireEvent.click(screen.getByText(Config.roadmapDefaults.sectorModalSaveButton));
+
+        await screen.findByTestId("funding-alert");
+        expect(currentUserData().profileData.operatingPhase).toEqual("UP_AND_RUNNING");
+      });
+
+      it("does not update operating phase when user cancels from within modal", async () => {
+        renderWithUserData({
+          profileData: generateProfileData({
+            businessPersona: "STARTING",
+            industryId: "generic",
+          }),
+          preferences: generatePreferences({ visibleRoadmapSidebarCards: ["funding-nudge"] }),
+        });
+
+        fireEvent.click(screen.getByTestId("cta-funding-nudge"));
+
+        expect(screen.getByText(Config.roadmapDefaults.sectorModalTitle)).toBeInTheDocument();
+        selectByValue("Sector", "clean-energy");
+        fireEvent.click(screen.getByText(Config.roadmapDefaults.sectorModalCancelButton));
+        expect(userDataWasNotUpdated()).toEqual(true);
+      });
+    });
+
+    const selectByValue = (label: string, value: string) => {
+      fireEvent.mouseDown(screen.getByLabelText(label));
+      const listbox = within(screen.getByRole("listbox"));
+      fireEvent.click(listbox.getByTestId(value));
+    };
   });
 });

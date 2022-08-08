@@ -1684,23 +1684,20 @@ collections:
               - { label: Congratulatory Modal - Header, name: congratulatorModalHeader, widget: string }
               - { label: Congratulatory Modal - Body, name: congratulatorModalBody, widget: string }
               - { label: Congratulatory Modal - Link Text, name: congratulatorModalLinkText, widget: string }
-              - {
-                  label: Graduation Modal Continue Button Text,
-                  name: graduationModalContinueButtonText,
-                  widget: string,
-                }
-              - {
-                  label: Graduation Modal Cancel Button Text,
-                  name: graduationModalCancelButtonText,
-                  widget: string,
-                }
-              - { label: Graduation Modal Title, name: graduationModalTitle, widget: string }
               - { label: Sidebar Heading, name: sidebarHeading, widget: string }
               - { label: Calendar Header, name: calendarHeader, widget: string }
               - { label: Calendar Snackbar Heading, name: calendarSnackbarHeading, widget: text }
               - { label: Calendar Snackbar Body, name: calendarSnackbarBody, widget: text }
               - { label: Certifications Snackbar Heading, name: certificationsSnackbarHeading, widget: text }
               - { label: Certifications Snackbar Body, name: certificationsSnackbarBody, widget: text }
+              - { label: Funding Snackbar Heading, name: fundingSnackbarHeading, widget: text }
+              - { label: Funding Snackbar Body, name: fundingSnackbarBody, widget: text }
+              - { label: Hidden Tasks Snackbar Heading, name: hiddenTasksSnackbarHeading, widget: text }
+              - { label: Hidden Tasks Snackbar Body, name: hiddenTasksSnackbarBody, widget: text }
+              - { label: Sector Modal Title, name: sectorModalTitle, widget: text }
+              - { label: Sector Modal Body, name: sectorModalBody, widget: text }
+              - { label: Sector Modal Cancel Button, name: sectorModalCancelButton, widget: text }
+              - { label: Sector Modal Save Button, name: sectorModalSaveButton, widget: text }
           - label: Section Headers
             name: sectionHeaders
             collapsed: true

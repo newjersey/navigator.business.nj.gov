@@ -51,7 +51,6 @@ const createDisplayContent = (sidebar?: Record<string, SidebarCardContent>) => (
   contentMd: "",
   sidebarDisplayContent: sidebar ?? {
     welcome: generateSidebarCardContent({}),
-    graduation: generateSidebarCardContent({}),
   },
 });
 
@@ -284,7 +283,6 @@ describe("roadmap page", () => {
     const sidebarDisplayContent = {
       "not-registered": generateSidebarCardContent({ contentMd: "NotRegisteredContent" }),
       welcome: generateSidebarCardContent({ contentMd: "WelcomeCardContent" }),
-      graduation: generateSidebarCardContent({ contentMd: "graduation" }),
     };
     renderPageWithAuthAlert({
       alertIsVisible: true,
@@ -317,17 +315,14 @@ describe("roadmap page", () => {
     expect(screen.getByTestId("toast-alert-certification")).toBeInTheDocument();
   });
 
-  it("displays filings calendar as list when taxfiling and formation date is populated", () => {
-    const currentDate = getCurrentDate();
-    const dateOfFormation = currentDate.format("YYYY-MM-DD");
-
+  it("displays filings calendar as list when taxfiling is populated and operatingPhase has displayListCalendar", () => {
     const dueDate = getCurrentDate().add(12, "months");
     const annualReport = generateTaxFiling({
       identifier: "annual-report",
       dueDate: dueDate.format("YYYY-MM-DD"),
     });
     useMockUserData({
-      profileData: generateProfileData({ dateOfFormation: dateOfFormation }),
+      profileData: generateProfileData({ operatingPhase: "NEEDS_TO_REGISTER_FOR_TAXES" }),
       taxFilingData: generateTaxFilingData({ filings: [annualReport] }),
     });
     const operateReferences: Record<string, OperateReference> = {
@@ -388,5 +383,30 @@ describe("roadmap page", () => {
     renderRoadmapPage({ operateReferences });
 
     expect(screen.queryByTestId("filings-calendar-as-list")).not.toBeInTheDocument();
+  });
+
+  it("hides the task list when operatingPhase is UP_AND_RUNNING", () => {
+    const userData = generateUserData({
+      profileData: generateProfileData({
+        operatingPhase: "UP_AND_RUNNING",
+      }),
+    });
+
+    useMockUserData(userData);
+
+    useMockRoadmap({
+      steps: [
+        generateStep({
+          name: "step1",
+          timeEstimate: "1-2 weeks",
+          stepNumber: 1,
+        }),
+      ],
+      tasks: [generateTask({ name: "task1", stepNumber: 1 })],
+    });
+
+    renderRoadmapPage({});
+
+    expect(screen.queryByText("task1")).not.toBeInTheDocument();
   });
 });

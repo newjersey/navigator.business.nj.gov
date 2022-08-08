@@ -166,20 +166,6 @@ export default {
         },
       },
     },
-    roadmap_graduate_button: {
-      click: {
-        view_graduation_modal: () => {
-          sendEvent("roadmap_graduate_button", "click", "view_graduation_modal");
-        },
-      },
-    },
-    graduation_modal: {
-      submit: {
-        prospective_roadmap_to_existing_dashboard: () => {
-          sendEvent("graduation_modal", "submit", "prospective_roadmap_to_existing_dashboard");
-        },
-      },
-    },
     dashboard_ungraduate_button: {
       click: {
         existing_dashboard_to_prospective_roadmap: () => {
