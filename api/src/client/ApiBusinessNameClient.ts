@@ -20,11 +20,15 @@ export const ApiBusinessNameClient = (baseUrl: string, logWriter: LogWriterType)
           responseStatus = "AVAILABLE";
         } else if (response.data.Reason.indexOf("business designators") > 0) {
           responseStatus = "DESIGNATOR";
+        } else if (response.data.Reason.indexOf("invalid special character") > 0) {
+          {
+            responseStatus = "SPECIAL_CHARACTER";
+          }
         } else {
           responseStatus = "UNAVAILABLE";
         }
         return {
-          status: responseStatus as "AVAILABLE" | "DESIGNATOR" | "UNAVAILABLE",
+          status: responseStatus as "AVAILABLE" | "DESIGNATOR" | "SPECIAL_CHARACTER" | "UNAVAILABLE",
           similarNames: response.data.Similars,
         };
       })

@@ -45,6 +45,20 @@ describe("ApiBusinessNameClient", () => {
     expect(mockAxios.get).toHaveBeenCalledWith("www.example.com/Available?q=name");
   });
 
+  it("returns a special character reason in the response", async () => {
+    const mockResponse: ApiNameAvailabilityResponse = {
+      Available: false,
+      Reason: "contains invalid special character",
+      Similars: [],
+    };
+    mockAxios.get.mockResolvedValue({ data: mockResponse });
+    expect(await client.search("name")).toEqual({
+      status: "SPECIAL_CHARACTER",
+      similarNames: [],
+    });
+    expect(mockAxios.get).toHaveBeenCalledWith("www.example.com/Available?q=name");
+  });
+
   it("returns a non-available response", async () => {
     const mockResponse: ApiNameAvailabilityResponse = {
       Available: false,
