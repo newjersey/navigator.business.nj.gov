@@ -66,6 +66,6 @@ export type UpdateRoadmapSidebarCards = (userData: UserData) => UserData;
 export type GetCertHttpsAgent = () => Promise<https.Agent>;
 
 export type NameAvailability = {
-  status: "AVAILABLE" | "DESIGNATOR" | "UNAVAILABLE";
+  status: "AVAILABLE" | "DESIGNATOR" | "SPECIAL_CHARACTER" | "UNAVAILABLE";
   similarNames: string[];
 };

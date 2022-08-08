@@ -911,7 +911,17 @@ collections:
               - { label: Name Check Placeholder Text, name: nameCheckPlaceholderText, widget: string }
               - { label: Name Check Validation Text, name: nameCheckValidationErrorText, widget: string }
               - { label: Name Check Unavailable Text, name: nameCheckUnavailableText, widget: text }
-              - { label: Name Check Designator Text, name: nameCheckDesignatorText, widget: text }
+              - { label: Name Check Designator Error Text, name: nameCheckDesignatorText, widget: text }
+              - {
+                  label: Name Check Special Character Error Text,
+                  name: nameCheckSpecialCharacterText,
+                  widget: text,
+                }
+              - {
+                  label: Name Check Special Character Error Link,
+                  name: nameCheckSpecialCharacterLink,
+                  widget: text,
+                }
               - { label: Name Check Available Text, name: nameCheckAvailableText, widget: text }
               - { label: Name Check Field Label, name: nameCheckFieldLabel, widget: string }
               - { label: Next Button Text, name: nextButtonText, widget: string }

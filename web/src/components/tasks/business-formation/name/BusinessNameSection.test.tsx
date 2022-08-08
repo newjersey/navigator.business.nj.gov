@@ -89,6 +89,15 @@ describe("Formation - BusinessNameSection", () => {
     expect(screen.queryByText(Config.businessFormationDefaults.initialNextButtonText)).not.toBeVisible();
   });
 
+  it("does not display continue button on business name tab if a special character is included in the name", async () => {
+    const page = getPageHelper();
+    expect(screen.queryByText(Config.businessFormationDefaults.initialNextButtonText)).not.toBeVisible();
+
+    page.fillText("Search business name", "My taken test business!");
+    await page.searchBusinessName({ status: "UNAVAILABLE" });
+    expect(screen.queryByText(Config.businessFormationDefaults.initialNextButtonText)).not.toBeVisible();
+  });
+
   it("displays continue button on business name tab only once name is available", async () => {
     const page = getPageHelper();
     expect(screen.queryByText(Config.businessFormationDefaults.initialNextButtonText)).not.toBeVisible();

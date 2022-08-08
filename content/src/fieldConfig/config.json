@@ -228,6 +228,8 @@
     "reviewPagePartnershipNoCanReceiveDistributions": "**No**, the limited partners do not have the right to receive distributions from a partner. (This can  include a return of all or any part of their partner’s contributions).",
     "agentEmailErrorText": "Enter the agent’s email address in format name@example.com.",
     "nameCheckDesignatorText": "It looks like there's a designator in your name such as LLC, LP or CORP. Please remove it and try searching again. You can officially form your business once you've found an available name.",
+    "nameCheckSpecialCharacterText": "\"${name}\" contains invalid special characters which may not be used in the Business Name for online filing. If you would like to use special characters you will need to file a paper application using the form located at ",
+    "nameCheckSpecialCharacterLink": "https://www.state.nj.us/treasury/revenue/pdf/2000.pdf",
     "addressModalZipCodePlaceholder": "Zip Code",
     "contactPhoneNumberErrorText": "Enter a 10 digit phone number.",
     "genericErrorText": "This is a required field.",

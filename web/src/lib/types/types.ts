@@ -369,7 +369,7 @@ export interface SessionHelper {
 }
 
 export type NameAvailability = {
-  status: "AVAILABLE" | "DESIGNATOR" | "UNAVAILABLE";
+  status: "AVAILABLE" | "DESIGNATOR" | "SPECIAL_CHARACTER" | "UNAVAILABLE";
   similarNames: string[];
 };
 

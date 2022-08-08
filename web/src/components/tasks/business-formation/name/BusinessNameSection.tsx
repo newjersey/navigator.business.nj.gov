@@ -123,6 +123,18 @@ export const BusinessNameSection = (): ReactElement => {
           <p className="font-sans-xs">{Config.businessFormationDefaults.nameCheckDesignatorText}</p>
         </Alert>
       )}
+      {nameAvailability != null && nameAvailability.status === "SPECIAL_CHARACTER" && (
+        <Alert variant="error" dataTestid="special-character-text">
+          <p className="font-sans-xs">
+            {templateEval(Config.businessFormationDefaults.nameCheckSpecialCharacterText, {
+              name: submittedName,
+            })}
+            <a href={Config.businessFormationDefaults.nameCheckSpecialCharacterLink} target="blank">
+              {Config.businessFormationDefaults.nameCheckSpecialCharacterLink}
+            </a>
+          </p>
+        </Alert>
+      )}
       {nameAvailability != null && nameAvailability.status === "UNAVAILABLE" && (
         <Alert variant="error" dataTestid="unavailable-text">
           <p className="font-sans-xs">
