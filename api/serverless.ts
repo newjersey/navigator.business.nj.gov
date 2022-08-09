@@ -1,4 +1,5 @@
 import type { AWS } from "@serverless/typescript";
+import "dotenv/config";
 import { env } from "node:process";
 import dynamoDbSchema from "./dynamodb-schema.json";
 import express from "./src/functions/express";
