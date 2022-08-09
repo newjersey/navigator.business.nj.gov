@@ -3593,7 +3593,7 @@ __metadata:
     ts-loader: 9.3.1
     ts-node: 10.9.1
     tsconfig-paths: 4.0.0
-    tsconfig-paths-webpack-plugin: 3.5.2
+    tsconfig-paths-webpack-plugin: 4.0.0
     typescript: 4.7.4
     uuid: 8.3.2
     webpack: 5.74.0
@@ -3789,7 +3789,7 @@ __metadata:
     ts-loader: 9.3.1
     ts-node: 10.9.1
     tsconfig-paths: 4.0.0
-    tsconfig-paths-webpack-plugin: 3.5.2
+    tsconfig-paths-webpack-plugin: 4.0.0
     typescript: 4.7.4
     ua-parser-js: 1.0.2
     unified: 10.1.2
@@ -11097,25 +11097,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"aws-sdk@npm:^2.1174.0, aws-sdk@npm:^2.7.0":
-  version: 2.1185.0
-  resolution: "aws-sdk@npm:2.1185.0"
-  dependencies:
-    buffer: 4.9.2
-    events: 1.1.1
-    ieee754: 1.1.13
-    jmespath: 0.16.0
-    querystring: 0.2.0
-    sax: 1.2.1
-    url: 0.10.3
-    util: ^0.12.4
-    uuid: 8.0.0
-    xml2js: 0.4.19
-  checksum: 80b039af2debd9d436cc020e7bb4d7ed57a515a51ffbcf2b59b01922f4d9d890e1c37d0b531985037cb0523388fcc90d2f469b38f0d34f2424bec13dc27a58dc
-  languageName: node
-  linkType: hard
-
-"aws-sdk@npm:^2.1187.0":
+"aws-sdk@npm:^2.1174.0, aws-sdk@npm:^2.1187.0, aws-sdk@npm:^2.7.0":
   version: 2.1190.0
   resolution: "aws-sdk@npm:2.1190.0"
   dependencies:
@@ -21226,7 +21208,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jszip@npm:^3.10.1":
+"jszip@npm:^3.10.1, jszip@npm:^3.9.1":
   version: 3.10.1
   resolution: "jszip@npm:3.10.1"
   dependencies:
@@ -21235,18 +21217,6 @@ __metadata:
     readable-stream: ~2.3.6
     setimmediate: ^1.0.5
   checksum: abc77bfbe33e691d4d1ac9c74c8851b5761fba6a6986630864f98d876f3fcc2d36817dfc183779f32c00157b5d53a016796677298272a714ae096dfe6b1c8b60
-  languageName: node
-  linkType: hard
-
-"jszip@npm:^3.9.1":
-  version: 3.10.0
-  resolution: "jszip@npm:3.10.0"
-  dependencies:
-    lie: ~3.3.0
-    pako: ~1.0.2
-    readable-stream: ~2.3.6
-    setimmediate: ^1.0.5
-  checksum: 80cc8e0e466467e9e21447f604f9262509b29a9c65170a3fee415ac0a403beb370840973cdc17f75d2b92ab3e60685f94d267706510d46bed2dd14858a38e459
   languageName: node
   linkType: hard
 
@@ -32242,17 +32212,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tsconfig-paths-webpack-plugin@npm:3.5.2":
-  version: 3.5.2
-  resolution: "tsconfig-paths-webpack-plugin@npm:3.5.2"
-  dependencies:
-    chalk: ^4.1.0
-    enhanced-resolve: ^5.7.0
-    tsconfig-paths: ^3.9.0
-  checksum: e7872f45b10684204d4a6cbc7989073d885c99e0c9eb5222de6b2b83d2e1594bccb647f52d2f8e00c53da5b9a3084e47a2de44f41c6f7a607ec2b17330a8d9e9
-  languageName: node
-  linkType: hard
-
 "tsconfig-paths-webpack-plugin@npm:4.0.0":
   version: 4.0.0
   resolution: "tsconfig-paths-webpack-plugin@npm:4.0.0"
@@ -32275,7 +32234,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tsconfig-paths@npm:^3.14.1, tsconfig-paths@npm:^3.9.0":
+"tsconfig-paths@npm:^3.14.1":
   version: 3.14.1
   resolution: "tsconfig-paths@npm:3.14.1"
   dependencies:
