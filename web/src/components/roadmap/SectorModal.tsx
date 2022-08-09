@@ -71,7 +71,7 @@ export const SectorModal = (props: Props): ReactElement => {
         maxWidth="md"
         dividers={true}
       >
-        <div data-testid="sector-modal">
+        <div data-testid="sector-modal" className="padding-top-4">
           <Content>{Config.roadmapDefaults.sectorModalBody}</Content>
           <FormControl fullWidth={true}>
             <div className="margin-top-2">
