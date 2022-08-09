@@ -67,6 +67,25 @@ const RoadmapPage = (props: Props): ReactElement => {
     dataTestId: "toast-alert-certification",
   });
 
+  const FundingAlert = useQueryControlledAlert({
+    queryKey: "fromFunding",
+    pagePath: ROUTES.roadmap,
+    headerText: Config.roadmapDefaults.fundingSnackbarHeading,
+    bodyText: Config.roadmapDefaults.fundingSnackbarBody,
+    variant: "success",
+    dataTestId: "funding-alert",
+  });
+
+  const HiddenTasksAlert = useQueryControlledAlert({
+    queryKey: "fromFunding",
+    pagePath: ROUTES.roadmap,
+    headerText: Config.roadmapDefaults.hiddenTasksSnackbarHeading,
+    bodyText: Config.roadmapDefaults.hiddenTasksSnackbarBody,
+    variant: "success",
+    dataTestId: "hiddenTasks-alert",
+    delayInMilliseconds: 6000,
+  });
+
   useMountEffectWhenDefined(() => {
     (async () => {
       if (userData?.formProgress !== "COMPLETED") {
@@ -149,6 +168,8 @@ const RoadmapPage = (props: Props): ReactElement => {
         <>{ProfileUpdatedAlert}</>
         <>{CalendarAlert}</>
         <>{CertificationsAlert}</>
+        <>{FundingAlert}</>
+        <>{HiddenTasksAlert}</>
       </main>
     </PageSkeleton>
   );

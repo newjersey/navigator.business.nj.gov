@@ -1,6 +1,5 @@
 import { Content } from "@/components/Content";
 import { Button } from "@/components/njwds-extended/Button";
-import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
 import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
@@ -10,6 +9,7 @@ import { SidebarCardContent } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
 import { styled } from "@mui/material";
 import LinearProgress, { linearProgressClasses } from "@mui/material/LinearProgress";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { SectorModal } from "./SectorModal";
 
@@ -29,13 +29,12 @@ const BorderLinearProgress = styled(LinearProgress)(() => ({
 
 export const RoadmapSidebarCard = (props: Props) => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
-  const [fundingAlert, setFundingUpdatedAlert] = useState<boolean>(false);
-  const [hiddenTasksAlert, setHiddenTasksUpdatedAlert] = useState<boolean>(false);
 
   const { hideCard } = useRoadmapSidebarCards();
   const { userData, update } = useUserData();
   const { roadmap } = useRoadmap();
   const { Config } = useConfig();
+  const router = useRouter();
 
   const closeSelf = async () => {
     await hideCard(props.card.id);
@@ -126,12 +125,6 @@ export const RoadmapSidebarCard = (props: Props) => {
     });
   };
 
-  const displayFundingSnackBars = async () => {
-    setFundingUpdatedAlert(true);
-    await setTimeout(() => setHiddenTasksUpdatedAlert(true), 6000);
-    setModalOpen(false);
-  };
-
   const updateUserToUpAndRunning = async () => {
     if (!userData) return;
     await update({
@@ -141,8 +134,7 @@ export const RoadmapSidebarCard = (props: Props) => {
         operatingPhase: "UP_AND_RUNNING",
       },
     });
-
-    await displayFundingSnackBars();
+    router.push({ query: { fromFunding: "true" } }, undefined, { shallow: true });
   };
 
   const ctaOnClickMap = {
@@ -223,32 +215,6 @@ export const RoadmapSidebarCard = (props: Props) => {
                 {props.card.ctaText}
               </Button>
             </div>
-          )}
-          {fundingAlert && (
-            <SnackbarAlert
-              variant="success"
-              isOpen={fundingAlert}
-              close={() => {
-                setFundingUpdatedAlert(false);
-              }}
-              heading={Config.roadmapDefaults.fundingSnackbarHeading}
-              dataTestid="funding-alert"
-            >
-              {Config.roadmapDefaults.fundingSnackbarBody}
-            </SnackbarAlert>
-          )}
-          {hiddenTasksAlert && (
-            <SnackbarAlert
-              variant="success"
-              isOpen={hiddenTasksAlert}
-              close={() => {
-                setHiddenTasksUpdatedAlert(false);
-              }}
-              heading={Config.roadmapDefaults.hiddenTasksSnackbarHeading}
-              dataTestid="hiddenTasks-alert"
-            >
-              {Config.roadmapDefaults.hiddenTasksSnackbarBody}
-            </SnackbarAlert>
           )}
         </div>
       </div>

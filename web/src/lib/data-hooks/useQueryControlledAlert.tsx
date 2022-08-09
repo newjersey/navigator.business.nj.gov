@@ -11,6 +11,7 @@ interface QueryControlledAlertConfig {
   bodyText: string;
   variant: AlertVariant;
   dataTestId?: string;
+  delayInMilliseconds?: number;
 }
 
 export const useQueryControlledAlert = (config: QueryControlledAlertConfig): ReactElement => {
@@ -25,11 +26,15 @@ export const useQueryControlledAlert = (config: QueryControlledAlertConfig): Rea
   useEffect(() => {
     if (!router.isReady || effectOccurred.current) return;
     if (router.query[config.queryKey] === "true") {
-      setAlertIsVisible(true);
+      if (config.delayInMilliseconds) {
+        setTimeout(() => setAlertIsVisible(true), config.delayInMilliseconds);
+      } else {
+        setAlertIsVisible(true);
+      }
       redirect();
       effectOccurred.current = true;
     }
-  }, [router, setAlertIsVisible, config.queryKey, redirect]);
+  }, [router, setAlertIsVisible, config.queryKey, config.delayInMilliseconds, redirect]);
 
   return (
     <SnackbarAlert

@@ -27,7 +27,7 @@ import {
 } from "@businessnjgovnavigator/shared/";
 import * as materialUi from "@mui/material";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
-import { render, screen, waitFor, within } from "@testing-library/react";
+import { act, render, screen, waitFor, within } from "@testing-library/react";
 
 function mockMaterialUI(): typeof materialUi {
   return {
@@ -313,6 +313,24 @@ describe("roadmap page", () => {
     renderRoadmapPage({});
 
     expect(screen.getByTestId("toast-alert-certification")).toBeInTheDocument();
+  });
+
+  it("renders funding snackbar when fromFunding query parameter is provided", async () => {
+    useMockRouter({ isReady: true, query: { fromFunding: "true" } });
+
+    renderRoadmapPage({});
+    expect(screen.getByTestId("funding-alert")).toBeInTheDocument();
+  });
+
+  it("renders hiddenTasks snackbar after delay when fromFunding query parameter is provided", async () => {
+    jest.useFakeTimers();
+    useMockRouter({ isReady: true, query: { fromFunding: "true" } });
+
+    renderRoadmapPage({});
+    await act(() => {
+      jest.advanceTimersByTime(6000);
+    });
+    expect(screen.getByTestId("hiddenTasks-alert")).toBeInTheDocument();
   });
 
   it("displays filings calendar as list when taxfiling is populated and operatingPhase has displayListCalendar", () => {

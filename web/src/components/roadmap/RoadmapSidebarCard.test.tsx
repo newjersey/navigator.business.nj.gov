@@ -9,6 +9,7 @@ import {
   generateTask,
   generateUserData,
 } from "@/test/factories";
+import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
 import {
@@ -23,6 +24,7 @@ import { RoadmapSidebarCard } from "./RoadmapSidebarCard";
 
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
+jest.mock("next/router");
 
 const Config = getMergedConfig();
 
@@ -31,6 +33,7 @@ describe("<RoadmapSidebarCard />", () => {
     jest.resetAllMocks();
     useMockUserData({});
     useMockRoadmap({});
+    useMockRouter({});
   });
 
   it("inserts users percentDone into header text", () => {
@@ -350,7 +353,7 @@ describe("<RoadmapSidebarCard />", () => {
     };
 
     describe("when clicking funding button for non-generic industry", () => {
-      it("renders funding snackbar and updates operating phase to UP_AND_RUNNING", async () => {
+      it("updates operating phase to UP_AND_RUNNING", () => {
         renderWithUserData({
           profileData: generateProfileData({
             businessPersona: "STARTING",
@@ -360,13 +363,12 @@ describe("<RoadmapSidebarCard />", () => {
         });
 
         fireEvent.click(screen.getByTestId("cta-funding-nudge"));
-        await screen.findByTestId("funding-alert");
         expect(currentUserData().profileData.operatingPhase).toEqual("UP_AND_RUNNING");
       });
     });
 
     describe("when clicking funding button for generic industry", () => {
-      it("renders funding snackbar and updates operating phase to UP_AND_RUNNING after modal success", async () => {
+      it("updates operating phase to UP_AND_RUNNING after modal success", () => {
         renderWithUserData({
           profileData: generateProfileData({
             businessPersona: "STARTING",
@@ -380,12 +382,10 @@ describe("<RoadmapSidebarCard />", () => {
         expect(screen.getByText(Config.roadmapDefaults.sectorModalTitle)).toBeInTheDocument();
         selectByValue("Sector", "clean-energy");
         fireEvent.click(screen.getByText(Config.roadmapDefaults.sectorModalSaveButton));
-
-        await screen.findByTestId("funding-alert");
         expect(currentUserData().profileData.operatingPhase).toEqual("UP_AND_RUNNING");
       });
 
-      it("does not update operating phase when user cancels from within modal", async () => {
+      it("does not update operating phase when user cancels from within modal", () => {
         renderWithUserData({
           profileData: generateProfileData({
             businessPersona: "STARTING",
