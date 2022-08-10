@@ -13,7 +13,7 @@ export const PartnershipRights = (): ReactElement => {
   const { state, setFormationFormData, setErrorMap } = useContext(BusinessFormationContext);
 
   const getTextField = (fieldName: FormationTextField) => (
-    <div className="margin-top-1" style={{ maxWidth: "41em" }}>
+    <div className="margin-top-1">
       <div className="grid-row">
         <div className="grid-col">
           <BusinessFormationTextField
@@ -22,6 +22,7 @@ export const PartnershipRights = (): ReactElement => {
             required={true}
             validationText={Config.businessFormationDefaults.genericErrorText}
             label={Config.businessFormationDefaults.partnershipRightsTermsLabel}
+            formInputFull
             fieldOptions={{
               multiline: true,
               rows: 3,
