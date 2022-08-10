@@ -85,11 +85,15 @@ describe("buildUserRoadmap", () => {
       await buildUserRoadmap({ ...baseProfileData, legalStructureId: "limited-liability-company" });
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("formation");
 
-      await buildUserRoadmap({ ...baseProfileData, legalStructureId: "general-partnership" });
-      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("trade-name");
-
       await buildUserRoadmap({ ...baseProfileData, legalStructureId: "limited-partnership" });
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("public-record-filing");
+    });
+
+    it("adds trade-name add-ons for nexus legal structures", async () => {
+      const baseProfileData = createEmptyNexusProfile({ industryId: "cannabis" });
+
+      await buildUserRoadmap({ ...baseProfileData, legalStructureId: "general-partnership" });
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("trade-name");
     });
 
     it("removes register-for-ein task from roadmap for nexus", async () => {
