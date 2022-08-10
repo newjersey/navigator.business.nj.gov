@@ -17,7 +17,7 @@ An `Employer Identification Number (EIN)|ein` is essentially a Social Security N
 
 ---
 
-### Actions to take
+### Next Steps
 
 1. [Get your EIN](https://www.irs.gov/businesses/small-businesses-self-employed/apply-for-an-employer-identification-number-ein-online)
 2. **Save your EIN**
