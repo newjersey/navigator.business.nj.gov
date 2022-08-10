@@ -38,7 +38,7 @@ export const ReviewText = (props: Props) => {
         </div>
       </div>
       <div className="display-block tablet:display-flex" data-testid={snakeCaseFieldName}>
-        <div>{state.formationFormData[props.fieldName]}</div>
+        <Content>{state.formationFormData[props.fieldName]}</Content>
       </div>
       <hr className="margin-y-205" />
     </>
