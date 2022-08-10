@@ -38,7 +38,7 @@ export const ReviewProvisions = () => {
             <div className="text-bold margin-bottom-05">
               {index + 1}. {Config.businessFormationDefaults.reviewPageProvisionsSubheader}
             </div>
-            <div>{provision}</div>
+            <Content>{provision}</Content>
           </div>
         ))}
       </div>
