@@ -1,3 +1,27 @@
+# [5.0.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v4.5.0...v5.0.0) (2022-08-10)
+
+
+### Bug Fixes
+
+* [[#182621057](https://github.com/newjersey/navigator.business.nj.gov/issues/182621057)] add styling to sectorModalBody ([e9746be](https://github.com/newjersey/navigator.business.nj.gov/commit/e9746be871b7172745545a628085b862d8a150bb))
+* [[#182621057](https://github.com/newjersey/navigator.business.nj.gov/issues/182621057)] move funding snackbars to roadmap file ([9310355](https://github.com/newjersey/navigator.business.nj.gov/commit/9310355400cbbba524e6d5d3af037a569646fb51))
+* [[#182771680](https://github.com/newjersey/navigator.business.nj.gov/issues/182771680)] add paragraph breaks to review page ([98ae27c](https://github.com/newjersey/navigator.business.nj.gov/commit/98ae27cf15ad47000e51b22c7fa79d69d31e2809))
+* [[#182868051](https://github.com/newjersey/navigator.business.nj.gov/issues/182868051)] add trade name task for nexus gp/sp companies ([ec97fbe](https://github.com/newjersey/navigator.business.nj.gov/commit/ec97fbe412dd0e3a13a00a653b9a387671af264e))
+* [[#182906682](https://github.com/newjersey/navigator.business.nj.gov/issues/182906682)] add error message for special character business name api error ([f1249f3](https://github.com/newjersey/navigator.business.nj.gov/commit/f1249f30db6002f0474e4fe86643f403877a7f7e))
+* [[#182945192](https://github.com/newjersey/navigator.business.nj.gov/issues/182945192)] correct formatting for list calendar, removing extra header ([6c7a7d8](https://github.com/newjersey/navigator.business.nj.gov/commit/6c7a7d80537d7d2e0ddfd05d08d6c77f3476ef6a))
+* ein content typo ([3686668](https://github.com/newjersey/navigator.business.nj.gov/commit/36866687f405024df4885971674645c125b9def5))
+
+
+### Features
+
+* [[#182621057](https://github.com/newjersey/navigator.business.nj.gov/issues/182621057)] add funding nudge ([5d5b56e](https://github.com/newjersey/navigator.business.nj.gov/commit/5d5b56edd3ad9ce1c5c46f4169303cf566485762))
+* [[#182785178](https://github.com/newjersey/navigator.business.nj.gov/issues/182785178)] migrate the existing roadmap to dashboard, and remove the existing dashboard page ([1ecf0d0](https://github.com/newjersey/navigator.business.nj.gov/commit/1ecf0d019a2908f65a90069c23daf79a0e09a57a))
+
+
+### BREAKING CHANGES
+
+* gradual graduation and combined user experience
+
 # [4.5.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v4.4.3...v4.5.0) (2022-08-08)
 
 
