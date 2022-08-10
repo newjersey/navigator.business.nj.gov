@@ -1,7 +1,7 @@
 const path = require("path");
 
 module.exports = {
-  stories: ["../stories/**/*.stories.mdx", "../stories/**/*.stories.@(js|jsx|ts|tsx)"],
+  stories: ["../stories/**/*.stories.mdx", "../stories/**/*.stories.@(js|jsx|ts|tsx|mdx)"],
   addons: [
     "@storybook/addon-links",
     "@storybook/addon-essentials",
@@ -9,7 +9,9 @@ module.exports = {
     "storybook-addon-designs",
     "@storybook/addon-a11y",
     "storybook-addon-pseudo-states",
+    "@storybook/addon-interactions",
   ],
+  framework: "@storybook/react",
   core: {
     builder: "webpack5",
   },
@@ -18,7 +20,18 @@ module.exports = {
       ...config.resolve.alias,
       "/img": path.resolve(__dirname, "../public/img"),
       "/vendor/img": path.resolve(__dirname, "../node_modules/njwds/dist/img"),
+      "@/components": path.resolve(__dirname, "../src/components"),
+      "@/lib": path.resolve(__dirname, "../src/lib"),
+      "@/contexts": path.resolve(__dirname, "../src/contexts"),
+      "@/styles": path.resolve(__dirname, "../src/styles"),
+      "@/pages": path.resolve(__dirname, "../src/pages"),
+      "@businessnjgovnavigator/content": path.resolve(__dirname, "../../content/src"),
     };
     return config;
   },
+  features: {
+    emotionAlias: false,
+    interactionsDebugger: true,
+  },
+  staticDirs: ["../public"],
 };
