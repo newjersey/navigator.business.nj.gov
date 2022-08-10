@@ -6,7 +6,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import { SectorModal } from "./SectorModal";
 
 const submitSectorModal = (): void => {
-  fireEvent.click(screen.getByText(Config.roadmapDefaults.sectorModalSaveButton));
+  fireEvent.click(screen.getByText(Config.dashboardDefaults.sectorModalSaveButton));
 };
 
 const Config = getMergedConfig();

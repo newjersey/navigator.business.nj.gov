@@ -1,9 +1,5 @@
 import fs from "fs";
-import {
-  loadDashboardDisplayContent,
-  loadRoadmapDisplayContent,
-  loadTasksDisplayContent,
-} from "./loadDisplayContent";
+import { loadRoadmapDisplayContent, loadTasksDisplayContent } from "./loadDisplayContent";
 
 jest.mock("fs");
 
@@ -54,17 +50,6 @@ describe("loadDisplayContent", () => {
         weight: 1,
         contentMd: "**Welcome!**",
       });
-    });
-  });
-
-  describe("loadDashboardDisplayContent", () => {
-    it("returns dashboard content from markdown", () => {
-      const opportunityTextContent = "### I am a header\n\nI am a description";
-
-      mockedFs.readFileSync.mockReturnValue(opportunityTextContent);
-      expect(loadDashboardDisplayContent().opportunityTextMd).toEqual(
-        "### I am a header\n\nI am a description"
-      );
     });
   });
 

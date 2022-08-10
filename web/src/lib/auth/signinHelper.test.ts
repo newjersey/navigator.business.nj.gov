@@ -79,7 +79,7 @@ describe("SigninHelper", () => {
       mockSession.getCurrentUser.mockImplementation(() => {
         throw new Error("New");
       });
-      await onGuestSignIn(mockPush, ROUTES.roadmap, mockDispatch);
+      await onGuestSignIn(mockPush, ROUTES.dashboard, mockDispatch);
       expect(mockPush).toHaveBeenCalledWith(ROUTES.landing);
     });
 

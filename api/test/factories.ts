@@ -125,7 +125,6 @@ export const generateProfileData = (overrides: Partial<ProfileData>): ProfileDat
   const industry = randomIndustry();
   return {
     businessPersona: persona,
-    initialOnboardingFlow: persona,
     businessName: `some-business-name-${randomInt()}`,
     industryId: industry.id,
     legalStructureId: randomLegalStructure().id,
@@ -238,7 +237,7 @@ export const generatePreferences = (overrides: Partial<Preferences>): Preference
     roadmapOpenSteps: [],
     hiddenFundingIds: [],
     hiddenCertificationIds: [],
-    visibleRoadmapSidebarCards: ["welcome"],
+    visibleSidebarCards: ["welcome"],
     ...overrides,
   };
 };

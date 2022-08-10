@@ -190,11 +190,13 @@ describe("profile", () => {
       expect(screen.getByTestId("info")).toBeInTheDocument();
     });
 
-    it("redirects user to roadmap with success query string on save", async () => {
+    it("redirects user to dashboard with success query string on save", async () => {
       renderPage({ userData });
       fillText("Business name", "Cool Computers");
       clickSave();
-      await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith(`${ROUTES.roadmap}?success=true`));
+      await waitFor(() =>
+        expect(mockRouter.mockPush).toHaveBeenCalledWith(`${ROUTES.dashboard}?success=true`)
+      );
     });
 
     it("returns user to Business Formation after save using query string", async () => {
@@ -216,7 +218,7 @@ describe("profile", () => {
       await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith("/tasks/some-formation-url"));
     });
 
-    it("prevents user from going back to roadmap if there are unsaved changes", () => {
+    it("prevents user from going back to dashboard if there are unsaved changes", () => {
       renderPage({ userData });
       fillText("Business name", "Cool Computers");
       clickBack();
@@ -428,13 +430,13 @@ describe("profile", () => {
       expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
     });
 
-    it("user is able to go back to roadmap", async () => {
+    it("user is able to go back to dashboard", async () => {
       const userData = generateUserData({
         profileData: generateProfileData({ businessPersona: "STARTING" }),
       });
       renderPage({ userData });
       clickBack();
-      await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith(ROUTES.roadmap));
+      await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith(ROUTES.dashboard));
     });
 
     it("prefills form from existing user data", () => {
@@ -489,7 +491,7 @@ describe("profile", () => {
       await waitFor(() => expect(mockSetRoadmap).toHaveBeenCalledTimes(1));
     });
 
-    it("returns user to roadmap from un-saved changes modal", async () => {
+    it("returns user to dashboard from un-saved changes modal", async () => {
       const initialUserData = generateUserData({
         profileData: generateProfileData({ businessPersona: "STARTING" }),
       });
@@ -498,7 +500,7 @@ describe("profile", () => {
       selectByText("Location", newark.displayName);
       clickBack();
       fireEvent.click(screen.getByText(Config.profileDefaults.escapeModalReturn));
-      await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith(ROUTES.roadmap));
+      await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith(ROUTES.dashboard));
       await waitFor(() => expect(() => currentUserData()).toThrowError());
     });
 
@@ -587,7 +589,6 @@ describe("profile", () => {
         userData: generateUserData({
           profileData: generateProfileData({
             businessPersona: "STARTING",
-            initialOnboardingFlow: "STARTING",
             industryId: "generic",
           }),
         }),
@@ -600,7 +601,6 @@ describe("profile", () => {
       const userData = generateUserData({
         profileData: generateProfileData({
           businessPersona: "STARTING",
-          initialOnboardingFlow: "STARTING",
           industryId: "generic",
           sectorId: undefined,
         }),
@@ -637,7 +637,6 @@ describe("profile", () => {
       const userData = generateUserData({
         profileData: generateProfileData({
           businessPersona: "STARTING",
-          initialOnboardingFlow: "STARTING",
           industryId: "generic",
           sectorId: undefined,
         }),
@@ -695,7 +694,6 @@ describe("profile", () => {
       const userData = generateUserData({
         profileData: generateProfileData({
           businessPersona: "OWNING",
-          initialOnboardingFlow: "OWNING",
           industryId: undefined,
         }),
       });
@@ -748,7 +746,6 @@ describe("profile", () => {
       const userData = generateUserData({
         profileData: generateProfileData({
           businessPersona: "OWNING",
-          initialOnboardingFlow: "OWNING",
           businessName: "Applebees",
           entityId: "1234567890",
           employerId: "123456789",
@@ -819,7 +816,7 @@ describe("profile", () => {
 
     it("prevents user from saving if they partially entered Employer Id", async () => {
       const userData = generateUserData({
-        profileData: generateProfileData({ businessPersona: "OWNING", initialOnboardingFlow: "OWNING" }),
+        profileData: generateProfileData({ businessPersona: "OWNING" }),
       });
       renderPage({ userData: userData });
       chooseTab("numbers");
@@ -841,7 +838,6 @@ describe("profile", () => {
       const userData = generateUserData({
         profileData: generateProfileData({
           businessPersona: "OWNING",
-          initialOnboardingFlow: "OWNING",
           sectorId: "",
         }),
       });
@@ -923,10 +919,10 @@ describe("profile", () => {
       });
     });
 
-    it("sends user back to roadmap", async () => {
+    it("sends user back to dashboard", async () => {
       renderPage({ userData: userData });
       clickBack();
-      await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith(ROUTES.roadmap));
+      await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith(ROUTES.dashboard));
     });
 
     it("displays only the numbers and notes tabs", () => {

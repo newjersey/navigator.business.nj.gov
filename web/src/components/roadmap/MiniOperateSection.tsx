@@ -1,4 +1,4 @@
-import { SectionAccordion } from "@/components/roadmap/SectionAccordion";
+import { SectionAccordion } from "@/components/dashboard/SectionAccordion";
 import { OperateReference, SectionType } from "@/lib/types/types";
 import Link from "next/link";
 import { useRouter } from "next/router";

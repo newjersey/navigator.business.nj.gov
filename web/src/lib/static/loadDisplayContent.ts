@@ -1,5 +1,4 @@
 import {
-  DashboardDisplayContent,
   FormationDisplayContent,
   FormationDisplayContentMap,
   RoadmapDisplayContent,
@@ -41,17 +40,6 @@ const loadSidebarDisplayContent = (): Record<string, SidebarCardContent> => {
     };
     return { ...acc, [displayContent.id]: displayContent };
   }, {} as Record<string, SidebarCardContent>);
-};
-
-export const loadDashboardDisplayContent = (): DashboardDisplayContent => {
-  const opportunityTextContent = fs.readFileSync(
-    path.join(displayContentDir, "dashboard", "opportunity-text.md"),
-    "utf8"
-  );
-
-  return {
-    opportunityTextMd: getMarkdown(opportunityTextContent).content,
-  };
 };
 
 const getFormationFields = (

@@ -1,10 +1,10 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
 
 import { LookupIndustryById } from "@businessnjgovnavigator/shared/";
-import { onRoadmapPage } from "cypress/support/page_objects/roadmapPage";
+import { onDashboardPage } from "cypress/support/page_objects/dashboardPage";
 import { completeNewBusinessOnboarding } from "../support/helpers";
 
-describe("Guest Roadmap [feature] [all] [group2]", () => {
+describe("Guest Dashboard [feature] [all] [group2]", () => {
   const industry = LookupIndustryById("home-contractor");
   const legalStructureId = "limited-liability-company";
   const townDisplayName = "Atlantic City";
@@ -22,11 +22,11 @@ describe("Guest Roadmap [feature] [all] [group2]", () => {
     });
   });
 
-  it("enters user info and shows the roadmap", () => {
-    cy.url().should("contain", "/roadmap");
+  it("enters user info and shows the dashboard", () => {
+    cy.url().should("contain", "/dashboard");
 
-    // check roadmap
-    onRoadmapPage.getEditProfileLink().should("exist");
+    // check dashboard
+    onDashboardPage.getEditProfileLink().should("exist");
 
     cy.get('[data-testid="self-reg-snackbar"]').should("be.visible");
     cy.get('[aria-label="close"]').click({ force: true });
@@ -56,9 +56,9 @@ describe("Guest Roadmap [feature] [all] [group2]", () => {
     cy.get('[data-testid="self-reg-modal"]').should("not.exist");
     cy.get('[data-testid="self-reg-snackbar"]').should("not.exist");
 
-    // go back to roadmap
-    cy.log("go back to roadmap");
-    cy.get(`[data-testid="back-to-roadmap"]`).click({ force: true });
+    // go back to dashboard
+    cy.log("go back to dashboard");
+    cy.get(`[data-testid="back-to-dashboard"]`).click({ force: true });
     cy.get('[data-testid="self-reg-snackbar"]').should("not.exist");
 
     // go to auth blocked task
@@ -68,13 +68,13 @@ describe("Guest Roadmap [feature] [all] [group2]", () => {
     cy.get('[aria-label="close"]').click({ force: true });
     cy.get('[data-testid="self-reg-modal"]').should("not.exist");
 
-    // go back to roadmap
-    cy.get(`[data-testid="back-to-roadmap"]`).click({ force: true });
+    // go back to dashboard
+    cy.get(`[data-testid="back-to-dashboard"]`).click({ force: true });
     cy.get('[data-testid="self-reg-modal"]').should("not.exist");
     cy.get('[data-testid="self-reg-snackbar"]').should("not.exist");
 
     // try editing data in the Profile page
-    onRoadmapPage.clickEditProfileLink();
+    onDashboardPage.clickEditProfileLink();
 
     cy.get('input[aria-label="Business name"]').clear().type("Applebee's");
     cy.get('[data-testid="self-reg-modal"]').should("not.exist");

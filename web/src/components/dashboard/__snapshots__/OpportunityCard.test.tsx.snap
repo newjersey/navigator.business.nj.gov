@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`OpportunityCard matches the layout 1`] = `
+exports[`OpportunityCard snapshots matches the layout 1`] = `
 <body>
   <div>
     <div
@@ -82,7 +82,7 @@ exports[`OpportunityCard matches the layout 1`] = `
 </body>
 `;
 
-exports[`OpportunityCard matches the layout when status is first come first serve 1`] = `
+exports[`OpportunityCard snapshots matches the layout when status is first come first serve 1`] = `
 <body>
   <div>
     <div
@@ -169,7 +169,7 @@ exports[`OpportunityCard matches the layout when status is first come first serv
 </body>
 `;
 
-exports[`OpportunityCard matches the layout when status is rolling application 1`] = `
+exports[`OpportunityCard snapshots matches the layout when status is rolling application 1`] = `
 <body>
   <div>
     <div
@@ -256,7 +256,7 @@ exports[`OpportunityCard matches the layout when status is rolling application 1
 </body>
 `;
 
-exports[`OpportunityCard matches the layout with a due date 1`] = `
+exports[`OpportunityCard snapshots matches the layout with a due date 1`] = `
 <body>
   <div>
     <div

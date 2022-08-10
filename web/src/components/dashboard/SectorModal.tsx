@@ -64,14 +64,14 @@ export const SectorModal = (props: Props): ReactElement => {
       <ModalTwoButton
         isOpen={props.open}
         close={handleClose}
-        title={Config.roadmapDefaults.sectorModalTitle}
-        primaryButtonText={Config.roadmapDefaults.sectorModalSaveButton}
+        title={Config.dashboardDefaults.sectorModalTitle}
+        primaryButtonText={Config.dashboardDefaults.sectorModalSaveButton}
         primaryButtonOnClick={onSubmit}
-        secondaryButtonText={Config.roadmapDefaults.sectorModalCancelButton}
+        secondaryButtonText={Config.dashboardDefaults.sectorModalCancelButton}
         maxWidth="md"
       >
         <div data-testid="sector-modal" className="padding-top-4">
-          <Content>{Config.roadmapDefaults.sectorModalBody}</Content>
+          <Content>{Config.dashboardDefaults.sectorModalBody}</Content>
           <FormControl fullWidth={true}>
             <div className="margin-top-2">
               <OnboardingSectors onValidation={onValidation} fieldStates={fieldStates} headerAriaLevel={3} />

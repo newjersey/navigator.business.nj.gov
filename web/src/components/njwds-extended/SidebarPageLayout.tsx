@@ -34,7 +34,7 @@ export const SidebarPageLayout = ({
     <Link href={mainPageLink} passHref>
       <a
         href={mainPageLink}
-        data-testid="back-to-roadmap"
+        data-testid="back-to-dashboard"
         className="usa-link fdr fac margin-top-3 margin-bottom-3 usa-link-hover-override desktop:margin-top-0 desktop:margin-bottom-4"
         onClick={analytics.event.task_back_to_roadmap.click.view_roadmap}
       >

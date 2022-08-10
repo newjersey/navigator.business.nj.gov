@@ -1,6 +1,6 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
 import { LookupIndustryById } from "@businessnjgovnavigator/shared/";
-import { onRoadmapPage } from "cypress/support/page_objects/roadmapPage";
+import { onDashboardPage } from "cypress/support/page_objects/dashboardPage";
 import { completeNewBusinessOnboarding, updateNewBusinessProfilePage } from "../support/helpers";
 
 describe("check license status [feature] [all] [group1]", () => {
@@ -17,9 +17,9 @@ describe("check license status [feature] [all] [group1]", () => {
       legalStructureId,
     });
 
-    // roadmap business name
+    // dashboard business name
     updateNewBusinessProfilePage({ businessName: "Aculyst" });
-    onRoadmapPage.getEditProfileLink().should("exist");
+    onDashboardPage.getEditProfileLink().should("exist");
 
     // application tab
     cy.get('[data-task="register-consumer-affairs"]').click();

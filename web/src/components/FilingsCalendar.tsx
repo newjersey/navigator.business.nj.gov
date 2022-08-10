@@ -7,7 +7,6 @@ import { ROUTES } from "@/lib/domain-logic/routes";
 import { MediaQueries } from "@/lib/PageSizes";
 import { OperateReference } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
-import { getTaxFilings } from "@/lib/utils/helpers";
 import { getCurrentDate, parseDateWithFormat } from "@businessnjgovnavigator/shared/";
 import { useMediaQuery } from "@mui/material";
 import Link from "next/link";
@@ -24,7 +23,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
   const Config = getMergedConfig();
   const { userData } = useUserData();
   const isLargeScreen = useMediaQuery(MediaQueries.tabletAndUp);
-  const taxFilings = getTaxFilings(userData);
+  const taxFilings = userData?.taxFilingData.filings || [];
 
   const editOnClick = () => {
     analytics.event.roadmap_profile_edit_button.click.go_to_profile_screen();
@@ -68,7 +67,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
                       hover={true}
                     >
                       <span className="text-bold text-uppercase ">
-                        {Config.roadmapDefaults.calendarFilingDueDateLabel}{" "}
+                        {Config.dashboardDefaults.calendarFilingDueDateLabel}{" "}
                         {parseDateWithFormat(filing.dueDate, "YYYY-MM-DD").format("M/D")}
                       </span>
                       {" - "}

@@ -2,8 +2,8 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
 
 import { LookupIndustryById } from "@businessnjgovnavigator/shared/";
+import { onDashboardPage } from "cypress/support/page_objects/dashboardPage";
 import { onOnboardingPage } from "cypress/support/page_objects/onboardingPage";
-import { onRoadmapPage } from "cypress/support/page_objects/roadmapPage";
 import {
   completeNewBusinessOnboarding,
   defaultPa11yThresholds,
@@ -282,12 +282,12 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
   });
 });
 
-describe.only("Performance and Accessibility - Roadmap [all] [group3]", () => {
+describe.only("Performance and Accessibility - Dashboard [all] [group3]", () => {
   beforeEach(() => {
     cy.loginByCognitoApi();
   });
 
-  describe("Roadmap", () => {
+  describe("Dashboard", () => {
     it("should pass the audits", () => {
       const industry = LookupIndustryById("e-commerce");
       const legalStructureId = "general-partnership";
@@ -297,8 +297,8 @@ describe.only("Performance and Accessibility - Roadmap [all] [group3]", () => {
         legalStructureId,
       });
 
-      // check roadmap
-      onRoadmapPage.getEditProfileLink().should("exist");
+      // check dashboard
+      onDashboardPage.getEditProfileLink().should("exist");
 
       cy.lighthouse(undefined, lighthouseDesktopConfig);
       cy.pa11y(defaultPa11yThresholds);
@@ -317,7 +317,7 @@ describe.only("Performance and Accessibility - Roadmap [all] [group3]", () => {
             legalStructureId,
             townDisplayName,
           });
-          onRoadmapPage.clickRoadmapTask(slug);
+          onDashboardPage.clickRoadmapTask(slug);
 
           cy.lighthouse(undefined, lighthouseDesktopConfig);
           cy.pa11y(defaultPa11yThresholds);

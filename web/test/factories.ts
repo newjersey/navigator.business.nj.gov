@@ -13,6 +13,7 @@ import {
   NaicsCodeObject,
   NameAvailability,
   OperateReference,
+  Opportunity,
   Roadmap,
   SectionCompletion,
   SectionType,
@@ -122,7 +123,6 @@ export const generateProfileData = (
 
   return {
     businessPersona: persona,
-    initialOnboardingFlow: persona,
     businessName: `some-business-name-${randomInt()}`,
     industryId: industry.id,
     legalStructureId: randomLegalStructure().id,
@@ -208,7 +208,7 @@ export const generatePreferences = (overrides: Partial<Preferences>): Preference
     roadmapOpenSteps: [randomInt()],
     hiddenFundingIds: [],
     hiddenCertificationIds: [],
-    visibleRoadmapSidebarCards: ["welcome"],
+    visibleSidebarCards: ["welcome"],
     ...overrides,
   };
 };
@@ -550,6 +550,16 @@ export const generateCertification = (overrides: Partial<Certification>): Certif
     agency: [randomInt() % 2 ? "NJEDA" : "NJDOL"],
     applicableOwnershipTypes: [randomOwnershipType().id],
     isSbe: false,
+    ...overrides,
+  };
+};
+
+export const generateOpportunity = (overrides: Partial<Opportunity>): Opportunity => {
+  return {
+    id: `some-id-${randomInt()}`,
+    name: `some-name-${randomInt()}`,
+    urlSlug: `some-url-slug-${randomInt()}`,
+    contentMd: `some-content-${randomInt()}`,
     ...overrides,
   };
 };

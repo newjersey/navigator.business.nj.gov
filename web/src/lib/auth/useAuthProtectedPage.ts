@@ -1,13 +1,14 @@
 import { AuthAlertContext } from "@/contexts/authAlertContext";
 import { AuthContext } from "@/contexts/authContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import { useRoadmapSidebarCards } from "@/lib/data-hooks/useRoadmapSidebarCards";
+import { useSidebarCards } from "@/lib/data-hooks/useSidebarCards";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { useRouter } from "next/router";
 import { useContext, useEffect } from "react";
 
 export const signInSamlError = "Name+ID+value+was+not+found+in+SAML";
+
 export const useAuthProtectedPage = (): void => {
   const { state } = useContext(AuthContext);
   const router = useRouter();
@@ -26,7 +27,7 @@ export const useAuthProtectedPage = (): void => {
 };
 
 export const useAuthAlertPage = (): void => {
-  const { showCard } = useRoadmapSidebarCards();
+  const { showCard } = useSidebarCards();
   const { isAuthenticated, setAlertIsVisible, modalIsVisible } = useContext(AuthAlertContext);
   const router = useRouter();
   useMountEffectWhenDefined(() => {

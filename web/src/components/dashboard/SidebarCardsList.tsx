@@ -1,6 +1,7 @@
+import { Content } from "@/components/Content";
 import { OpportunityCard } from "@/components/dashboard/OpportunityCard";
+import { SidebarCard } from "@/components/dashboard/SidebarCard";
 import { Icon } from "@/components/njwds/Icon";
-import { RoadmapSidebarCard } from "@/components/roadmap/RoadmapSidebarCard";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { filterCertifications } from "@/lib/domain-logic/filterCertifications";
 import { filterFundings } from "@/lib/domain-logic/filterFundings";
@@ -55,7 +56,7 @@ export const SidebarCardsList = (props: Props): ReactElement => {
   };
 
   const visibleCardsOrderedByWeight = userData
-    ? userData.preferences.visibleRoadmapSidebarCards
+    ? userData.preferences.visibleSidebarCards
         .map((id: string) => props.sidebarDisplayContent[id])
         .sort((cardA: SidebarCardContent, cardB: SidebarCardContent): number => {
           return cardA.weight < cardB.weight ? -1 : 1;
@@ -73,7 +74,7 @@ export const SidebarCardsList = (props: Props): ReactElement => {
       return (
         <>
           <hr className="desktop:margin-right-1 margin-top-3 bg-roadmap-blue-light" aria-hidden={true} />
-          <div className="desktop:margin-right-3 desktop:margin-bottom-2">
+          <div className="desktop:margin-right-3 desktop:margin-bottom-1">
             <Accordion
               elevation={0}
               expanded={hiddenAccordionIsOpen}
@@ -117,23 +118,33 @@ export const SidebarCardsList = (props: Props): ReactElement => {
     }
   };
 
+  const learnMoreAboutFundingsLink = () => (
+    <>
+      <hr className="desktop:margin-right-1 margin-top-3 bg-roadmap-blue-light" aria-hidden={true} />
+      <div className="margin-y-205 weight-unset-override">
+        <Content>{Config.dashboardDefaults.learnMoreFundingOpportunities}</Content>
+      </div>
+    </>
+  );
+
   const topCardIds = new Set(["funding-nudge"]);
   const getTopCards = () =>
     visibleCardsOrderedByWeight
       .filter((card) => {
         return topCardIds.has(card.id);
       })
-      .map((card: SidebarCardContent) => <RoadmapSidebarCard card={card} key={card.id} />);
+      .map((card: SidebarCardContent) => <SidebarCard card={card} key={card.id} />);
 
   const getBottomCards = () =>
     visibleCardsOrderedByWeight
       .filter((card) => {
         return !topCardIds.has(card.id);
       })
-      .map((card: SidebarCardContent) => <RoadmapSidebarCard card={card} key={card.id} />);
+      .map((card: SidebarCardContent) => <SidebarCard card={card} key={card.id} />);
 
   return (
     <>
+      <h2>{Config.dashboardDefaults.sidebarHeading}</h2>
       <hr
         className="desktop:margin-right-1 margin-top-2 margin-bottom-3 bg-roadmap-blue-light"
         aria-hidden={true}
@@ -161,6 +172,7 @@ export const SidebarCardsList = (props: Props): ReactElement => {
         </div>
         <>{getBottomCards()}</>
       </div>
+      {displayFundingCards() && learnMoreAboutFundingsLink()}
       {hiddenCardsAccordion()}
     </>
   );

@@ -1,6 +1,6 @@
 export const ROUTES = {
   landing: "/",
-  roadmap: "/roadmap",
+  loading: "/loading",
   profile: "/profile",
   dashboard: "/dashboard",
   onboarding: "/onboarding",

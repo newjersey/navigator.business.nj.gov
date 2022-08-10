@@ -175,7 +175,7 @@ export const findDeadLinks = async (): Promise<Record<string, string[]>> => {
     "/onboarding?page=3",
     "/onboarding?page=4",
     "/profile",
-    "/roadmap",
+    "/dashboard",
     ...filenames.tasks.map((it) => `/tasks/${it.split(".md")[0]}`),
     ...filenames.filings.map((it) => `/filings/${it.split(".md")[0]}`),
   ];

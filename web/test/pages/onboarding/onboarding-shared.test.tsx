@@ -95,7 +95,6 @@ describe("onboarding - shared", () => {
     await waitFor(() => {
       expect(currentUserData().profileData.businessPersona).toEqual("STARTING");
     });
-    expect(currentUserData().profileData.initialOnboardingFlow).toEqual("STARTING");
     expect(currentUserData().profileData.industryId).toEqual("cannabis");
   });
 
@@ -171,36 +170,6 @@ describe("onboarding - shared", () => {
     expect(screen.getByTestId("step-2")).toBeInTheDocument();
   });
 
-  it("sets initialOnboardingFlow if formProgress is not COMPLETED", async () => {
-    const initialUserData = generateUserData({
-      formProgress: "UNSTARTED",
-      profileData: generateProfileData({
-        businessPersona: "STARTING",
-        initialOnboardingFlow: "STARTING",
-      }),
-    });
-
-    const { page } = renderPage({ userData: initialUserData });
-    page.chooseRadio("business-persona-owning");
-    await page.visitStep(2);
-    expect(currentUserData().profileData.initialOnboardingFlow).toEqual("OWNING");
-  });
-
-  it("preserves initialOnboardingFlow value if formProgress is COMPLETED", async () => {
-    const initialUserData = generateUserData({
-      formProgress: "COMPLETED",
-      profileData: generateProfileData({
-        businessPersona: "STARTING",
-        initialOnboardingFlow: "STARTING",
-      }),
-    });
-
-    const { page } = renderPage({ userData: initialUserData });
-    page.chooseRadio("business-persona-owning");
-    await page.visitStep(2);
-    expect(currentUserData().profileData.initialOnboardingFlow).toEqual("STARTING");
-  });
-
   it("is able to go back", async () => {
     const { page } = renderPage({});
     page.chooseRadio("business-persona-starting");
@@ -243,7 +212,6 @@ describe("onboarding - shared", () => {
       businessPersona: "OWNING",
       entityId: undefined,
       businessName: "",
-      initialOnboardingFlow: "OWNING",
       industryId: "generic",
       homeBasedBusiness: true,
       legalStructureId: "c-corporation",
@@ -254,6 +222,7 @@ describe("onboarding - shared", () => {
       taxId: undefined,
       notes: "",
       ownershipTypeIds: [],
+      operatingPhase: "GUEST_MODE_OWNING",
     });
   });
 
@@ -285,7 +254,6 @@ describe("onboarding - shared", () => {
       businessPersona: "STARTING",
       entityId: undefined,
       businessName: "Cool Computers",
-      initialOnboardingFlow: "STARTING",
       industryId: undefined,
       homeBasedBusiness: true,
       dateOfFormation: undefined,
@@ -332,7 +300,6 @@ describe("onboarding - shared", () => {
       businessPersona: "STARTING",
       entityId: undefined,
       businessName: "Cool Computers",
-      initialOnboardingFlow: "STARTING",
       industryId: undefined,
       homeBasedBusiness: true,
       dateOfFormation: undefined,
@@ -382,7 +349,6 @@ describe("onboarding - shared", () => {
       industryId: "generic",
       dateOfFormation: date.format("YYYY-MM-DD"),
       homeBasedBusiness: true,
-      initialOnboardingFlow: "OWNING",
       municipality: newark,
       liquorLicense: false,
       constructionRenovationPlan: undefined,
@@ -391,6 +357,7 @@ describe("onboarding - shared", () => {
       notes: "",
       ownershipTypeIds: ["veteran-owned"],
       sectorId: "clean-energy",
+      operatingPhase: "GUEST_MODE_OWNING",
     });
   });
 

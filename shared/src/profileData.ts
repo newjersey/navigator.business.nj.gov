@@ -9,7 +9,6 @@ export interface ProfileDocuments {
 
 export interface ProfileData {
   readonly businessPersona: BusinessPersona;
-  readonly initialOnboardingFlow: BusinessPersona;
   readonly businessName: string;
   readonly industryId: string | undefined;
   readonly legalStructureId: string | undefined;
@@ -43,7 +42,6 @@ export interface ProfileData {
 
 export const emptyProfileData: ProfileData = {
   businessPersona: undefined,
-  initialOnboardingFlow: undefined,
   businessName: "",
   industryId: undefined,
   legalStructureId: undefined,

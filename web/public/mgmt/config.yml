@@ -1342,9 +1342,6 @@ collections:
             widget: object
             summary: "{{dashboardDefaults}}"
             fields:
-              - { label: Edit Profile Text, name: editProfileText, widget: string }
-              - { label: Opportunities Header, name: opportunitiesHeader, widget: string }
-              - { label: Opportunities Count, name: opportunitiesCount, widget: string }
               - { label: Hidden Opportunities Header, name: hiddenOpportunitiesHeader, widget: string }
               - { label: Hide Opportunity Text, name: hideOpportunityText, widget: string }
               - { label: Unhide Opportunity Text, name: unHideOpportunityText, widget: string }
@@ -1362,9 +1359,30 @@ collections:
               - { label: Calendar Legal Text, name: calendarLegalText, widget: string }
               - { label: Calendar Header, name: calendarHeader, widget: string }
               - { label: Calendar Tooltip, name: calendarTooltip, widget: text }
-              - { label: Back To Roadmap Header, name: backToRoadmapHeader, widget: string }
-              - { label: Back To Roadmap Text, name: backToRoadmapText, widget: string }
-              - { label: Back To Roadmap Link Text, name: backToRoadmapLinkText, widget: string }
+              - {
+                  label: Learn More Funding Opportunities Text,
+                  name: learnMoreFundingOpportunities,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - { label: Calendar Filing Due Date Label, name: calendarFilingDueDateLabel, widget: string }
+              - { label: Congratulatory Modal - Title, name: congratulatoryModalTitle, widget: string }
+              - { label: Congratulatory Modal - Header, name: congratulatoryModalHeader, widget: string }
+              - { label: Congratulatory Modal - Body, name: congratulatoryModalBody, widget: string }
+              - { label: Congratulatory Modal - Link Text, name: congratulatoryModalLinkText, widget: string }
+              - { label: Sidebar Heading, name: sidebarHeading, widget: string }
+              - { label: Calendar Snackbar Heading, name: calendarSnackbarHeading, widget: text }
+              - { label: Calendar Snackbar Body, name: calendarSnackbarBody, widget: text }
+              - { label: Certifications Snackbar Heading, name: certificationsSnackbarHeading, widget: text }
+              - { label: Certifications Snackbar Body, name: certificationsSnackbarBody, widget: text }
+              - { label: Funding Snackbar Heading, name: fundingSnackbarHeading, widget: text }
+              - { label: Funding Snackbar Body, name: fundingSnackbarBody, widget: text }
+              - { label: Hidden Tasks Snackbar Heading, name: hiddenTasksSnackbarHeading, widget: text }
+              - { label: Hidden Tasks Snackbar Body, name: hiddenTasksSnackbarBody, widget: text }
+              - { label: Sector Modal Title, name: sectorModalTitle, widget: text }
+              - { label: Sector Modal Body, name: sectorModalBody, widget: text }
+              - { label: Sector Modal Cancel Button, name: sectorModalCancelButton, widget: text }
+              - { label: Sector Modal Save Button, name: sectorModalSaveButton, widget: text }
           - label: Feedback Modal
             name: feedbackModal
             collapsed: true
@@ -1672,32 +1690,6 @@ collections:
             summary: "{{reportAnIssueBar}}"
             fields:
               - { label: Report An Issue Bar Text, name: reportAnIssueBarText, widget: string }
-          - label: Roadmap Defaults
-            name: roadmapDefaults
-            collapsed: true
-            widget: object
-            summary: "{{roadmapDefaults}}"
-            fields:
-              - { label: Loading Text, name: loadingText, widget: string }
-              - { label: Calendar Filing Due Date Label, name: calendarFilingDueDateLabel, widget: string }
-              - { label: Congratulatory Modal - Title, name: congratulatorModalTitle, widget: string }
-              - { label: Congratulatory Modal - Header, name: congratulatorModalHeader, widget: string }
-              - { label: Congratulatory Modal - Body, name: congratulatorModalBody, widget: string }
-              - { label: Congratulatory Modal - Link Text, name: congratulatorModalLinkText, widget: string }
-              - { label: Sidebar Heading, name: sidebarHeading, widget: string }
-              - { label: Calendar Header, name: calendarHeader, widget: string }
-              - { label: Calendar Snackbar Heading, name: calendarSnackbarHeading, widget: text }
-              - { label: Calendar Snackbar Body, name: calendarSnackbarBody, widget: text }
-              - { label: Certifications Snackbar Heading, name: certificationsSnackbarHeading, widget: text }
-              - { label: Certifications Snackbar Body, name: certificationsSnackbarBody, widget: text }
-              - { label: Funding Snackbar Heading, name: fundingSnackbarHeading, widget: text }
-              - { label: Funding Snackbar Body, name: fundingSnackbarBody, widget: text }
-              - { label: Hidden Tasks Snackbar Heading, name: hiddenTasksSnackbarHeading, widget: text }
-              - { label: Hidden Tasks Snackbar Body, name: hiddenTasksSnackbarBody, widget: text }
-              - { label: Sector Modal Title, name: sectorModalTitle, widget: text }
-              - { label: Sector Modal Body, name: sectorModalBody, widget: text }
-              - { label: Sector Modal Cancel Button, name: sectorModalCancelButton, widget: text }
-              - { label: Sector Modal Save Button, name: sectorModalSaveButton, widget: text }
           - label: Section Headers
             name: sectionHeaders
             collapsed: true

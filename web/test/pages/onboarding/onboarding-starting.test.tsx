@@ -247,7 +247,6 @@ describe("onboarding - starting a business", () => {
       formProgress: "COMPLETED",
       profileData: {
         ...initialUserData.profileData,
-        initialOnboardingFlow: "STARTING",
         businessPersona: "STARTING",
         businessName: "",
         industryId: "e-commerce",
@@ -255,6 +254,10 @@ describe("onboarding - starting a business", () => {
         homeBasedBusiness: true,
         legalStructureId: "general-partnership",
         municipality: newark,
+      },
+      preferences: {
+        ...initialUserData.preferences,
+        visibleSidebarCards: ["welcome"],
       },
       user: {
         ...initialUserData.user,
@@ -278,6 +281,10 @@ describe("onboarding - starting a business", () => {
 
     expect(currentUserData()).toEqual({
       ...expectedUserData,
+      preferences: {
+        ...expectedUserData.preferences,
+        visibleSidebarCards: ["welcome", "task-progress"],
+      },
       user: {
         ...expectedUserData.user,
         externalStatus: {

@@ -24,13 +24,13 @@ describe("HomePage", () => {
     expect(mockPush).toHaveBeenCalledWith(ROUTES.onboarding);
   });
 
-  it("redirects to roadmap page when user has completed onboarding flow", () => {
+  it("redirects to dashboard page when user has completed onboarding flow", () => {
     useMockUserData({
       formProgress: "COMPLETED",
       profileData: generateProfileData({ businessPersona: "STARTING" }),
     });
     render(withAuth(<Home />, { user: generateUser({}) }));
-    expect(mockPush).toHaveBeenCalledWith(ROUTES.roadmap);
+    expect(mockPush).toHaveBeenCalledWith(ROUTES.dashboard);
   });
 
   it("redirects to onboarding page when user has not completed onboarding flow", () => {
@@ -39,10 +39,10 @@ describe("HomePage", () => {
     expect(mockPush).toHaveBeenCalledWith(ROUTES.onboarding);
   });
 
-  it("redirects to roadmap page when it is unknown if user has completed onboarding flow or not", () => {
+  it("redirects to dashboard page when it is unknown if user has completed onboarding flow or not", () => {
     setMockUserDataResponse({ error: "NO_DATA", userData: undefined });
     render(withAuth(<Home />, { user: generateUser({}) }));
-    expect(mockPush).toHaveBeenCalledWith(`${ROUTES.roadmap}?error=true`);
+    expect(mockPush).toHaveBeenCalledWith(`${ROUTES.dashboard}?error=true`);
   });
 
   it("redirects to onboarding with signUp = true in the querystring", () => {

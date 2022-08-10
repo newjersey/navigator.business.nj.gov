@@ -50,7 +50,7 @@ const Home = (): ReactElement => {
     } else if (userData?.formProgress === "UNSTARTED") {
       router.replace(ROUTES.onboarding);
     } else if (userData === undefined && error != undefined) {
-      router.replace(`${ROUTES.roadmap}?error=true`);
+      router.replace(`${ROUTES.dashboard}?error=true`);
     }
   }, [userData, error, router]);
 

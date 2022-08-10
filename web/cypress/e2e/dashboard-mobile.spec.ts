@@ -1,17 +1,18 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
 
 import { LookupIndustryById } from "@businessnjgovnavigator/shared/";
+import { onDashboardPage } from "cypress/support/page_objects/dashboardPage";
 import { onOnboardingPage } from "cypress/support/page_objects/onboardingPage";
 import { onProfilePage } from "cypress/support/page_objects/profilePage";
-import { onRoadmapPage } from "cypress/support/page_objects/roadmapPage";
 import { completeNewBusinessOnboarding } from "../support/helpers";
 
-describe("Roadmap [feature] [all] [group2]", () => {
+describe("Dashboard - Mobile [feature] [all] [group2]", () => {
   beforeEach(() => {
     cy.loginByCognitoApi();
+    cy.viewport("iphone-5");
   });
 
-  it("enters user info and shows the roadmap", () => {
+  it("enters user info and shows the dashboard", () => {
     const industry = LookupIndustryById("e-commerce");
     const homeBasedQuestion = false;
     const legalStructureId = "general-partnership";
@@ -22,8 +23,8 @@ describe("Roadmap [feature] [all] [group2]", () => {
       legalStructureId,
     });
 
-    // check roadmap
-    onRoadmapPage.getEditProfileLink().should("exist");
+    // check dashboard
+    onDashboardPage.getEditProfileLink().should("exist");
 
     // step 1
     cy.get('[id="plan-content"]').should("be.visible");
@@ -34,48 +35,50 @@ describe("Roadmap [feature] [all] [group2]", () => {
     cy.get('[data-task="business-plan"]').should("exist");
     cy.get('[data-task="research-insurance-needs"]').should("exist");
 
-    // step 3
+    // step 2
     cy.get('[id="start-content"]').should("be.visible");
     cy.get('[id="start-header"]').click({ force: true });
     cy.get('[id="start-content"]').should("not.be.visible");
     cy.get('[id="start-header"]').click({ force: true });
+    cy.get('[id="start-content"]').should("be.visible");
     cy.get('[data-step="2"]').should("exist");
     cy.get('[data-task="register-trade-name"]').should("exist");
 
-    // step 4
+    // step 3
     cy.get('[data-step="3"]').should("exist");
+
+    // step 4
+    cy.get('[data-step="4"]').should("exist");
 
     // tasks screen
     cy.get('[data-task="register-trade-name"]').click({ force: true });
-    cy.get('[data-legal-structure="general-partnership"]').should("not.exist");
+    cy.get('[data-business-name="Beesapple\'s"]').should("not.exist");
     cy.get('[data-task-id="register-trade-name"]').should("exist");
 
     // tasks mini-nav
+    cy.get('[data-testid="nav-menu-open"]').click({ force: true });
     cy.get('[data-step="4"]').click({ force: true });
     cy.get('[data-task="check-local-requirements"]').click({ force: true });
     cy.get('[data-task-id="register-trade-name"]').should("not.exist");
     cy.get('[data-task-id="check-local-requirements"]').should("exist");
     cy.contains("Absecon").should("exist");
 
-    cy.get('[data-testid="back-to-roadmap"]').click({ force: true });
-
-    // editing data in the Profile page
-    onRoadmapPage.clickEditProfileLink();
+    // editing data
+    cy.get('[data-testid="back-to-dashboard"]').click({ force: true });
+    onDashboardPage.clickEditProfileLink();
     cy.url().should("contain", "/profile");
 
-    cy.get('input[aria-label="Business name"]').clear().type("Applebee's");
+    cy.get('input[aria-label="Business name"]').clear();
+    cy.get('input[aria-label="Business name"]').type("Applebee's");
+
     cy.get('[aria-label="Industry"]').click({ force: true });
     cy.contains("Restaurant").click({ force: true });
-    cy.get('[aria-label="Legal structure"]').click({ force: true });
-    cy.get('[data-value="limited-liability-company"]').click({ force: true });
-    cy.get('[aria-label="Location"]').click({ force: true });
-    cy.contains("Allendale").click({ force: true });
 
     onProfilePage.clickSaveButton();
-    cy.url().should("contain", "/roadmap");
+    cy.url().should("contain", "/dashboard");
 
-    // check roadmap
-    onRoadmapPage.getEditProfileLink().should("exist");
+    // check dashboard
+    onDashboardPage.getEditProfileLink().should("exist");
 
     cy.get('[data-task="check-site-requirements"]').should("exist");
     cy.get('[data-task="food-safety-course"]').should("exist");
@@ -88,6 +91,7 @@ describe("Roadmap [feature] [all] [group2]", () => {
 
     cy.url().should("include", "onboarding?page=2");
     onOnboardingPage.selectIndustry("home-contractor");
+    onOnboardingPage.clickNext();
 
     cy.get('[data-testid="home-contractors-activities"]').click({ force: true });
     cy.get('[data-testid="info-panel"]').should("exist");
@@ -114,14 +118,16 @@ describe("Roadmap [feature] [all] [group2]", () => {
 
   it("open and closes contextual info panel on get EIN from the IRS Task screen", () => {
     const industry = LookupIndustryById("e-commerce");
+    const homeBasedQuestion = false;
     const legalStructureId = "general-partnership";
 
     completeNewBusinessOnboarding({
       industry,
+      homeBasedQuestion,
       legalStructureId,
     });
 
-    // roadmap
+    // dashboard
     cy.get('[data-task="register-for-ein"]').click({ force: true });
     cy.get('[data-testid="ein"]').should("exist");
     cy.get('[data-testid="ein"]').click({ force: true });
@@ -129,24 +135,5 @@ describe("Roadmap [feature] [all] [group2]", () => {
     cy.get('[data-testid="info-panel"]').should("exist");
     cy.get('[aria-label="close panel"]').click({ force: true });
     cy.get('[data-testid="info-panel"]').should("not.exist");
-  });
-
-  it("user data is updated if opted into newsletter", () => {
-    cy.intercept("POST", "/local/api/users", (req) => req.continue()).as("new-user");
-
-    completeNewBusinessOnboarding({
-      isNewsletterChecked: true,
-      isContactMeChecked: true,
-    });
-
-    cy.wait("@new-user").then((event) => {
-      cy.log(`Received: ${JSON.stringify(event.request.body.user.externalStatus)}`);
-      const expected = {
-        success: true,
-        status: "SUCCESS",
-      };
-      cy.log(`Expected: ${JSON.stringify(expected)}`);
-      expect(event.request.body.user.externalStatus.newsletter).to.deep.equal(expected);
-    });
   });
 });
