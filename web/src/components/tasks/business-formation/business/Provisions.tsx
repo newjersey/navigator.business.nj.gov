@@ -65,7 +65,7 @@ export const Provisions = (): ReactElement => {
         <Content className="margin-bottom-2">{Config.businessFormationDefaults.provisionsBodyText}</Content>
       )}
       {state.formationFormData.provisions.map((provision: string, index: number) => (
-        <div key={index} style={{ maxWidth: "41em" }}>
+        <div key={index}>
           <Content>{Config.businessFormationDefaults.provisionsLabel}</Content>
           <div className="grid-row">
             <div className="grid-col">
@@ -74,6 +74,7 @@ export const Provisions = (): ReactElement => {
                 placeholder={Config.businessFormationDefaults.provisionsPlaceholderText}
                 handleChange={(value) => handleProvisionChange(value, index)}
                 fieldName={`provisions ${index}`}
+                formInputFull
                 fieldOptions={{
                   multiline: true,
                   rows: 3,

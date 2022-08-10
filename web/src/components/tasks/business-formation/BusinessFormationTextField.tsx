@@ -33,6 +33,7 @@ export const BusinessFormationTextField = (props: Props): ReactElement => {
         {...props}
         handleChange={handleChange}
         error={props.error ?? state.errorMap[props.fieldName].invalid}
+        formInputFull
       />
     </div>
   );
