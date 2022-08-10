@@ -14,7 +14,6 @@ interface Props {
   primaryButtonOnClick: () => void;
   secondaryButtonText: string;
   maxWidth?: Breakpoint;
-  dividers?: boolean;
   alertText?: string;
   showAlert?: boolean;
   alertVariant?: AlertVariant;
@@ -55,7 +54,6 @@ export const ModalTwoButton = (props: Props) => {
       close={props.close}
       title={props.title}
       maxWidth={props.maxWidth}
-      dividers={props.dividers}
       bodyText={props.bodyText}
       unpaddedChildren={buttonNode}
       showAlert={props.showAlert}

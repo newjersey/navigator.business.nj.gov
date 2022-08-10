@@ -11,7 +11,6 @@ interface Props {
   bodyText?: string;
   children?: ReactNode;
   maxWidth?: Breakpoint;
-  dividers?: boolean;
   unpaddedChildren?: ReactNode;
   alertText?: string;
   showAlert?: boolean;
@@ -40,8 +39,8 @@ export const ModalZeroButton = (props: Props) => {
           <Icon className="usa-icon--size-4">close</Icon>
         </IconButton>
       </DialogTitle>
-      <DialogContent sx={{ padding: 0 }} dividers={props.dividers}>
-        <div className="padding-x-4 margin-bottom-4">
+      <DialogContent sx={{ padding: 0 }} dividers>
+        <div className="padding-x-4 margin-bottom-4 margin-top-2">
           {props.showAlert && props.alertVariant && props.alertText && (
             <Alert dataTestid="modal-alert" variant={props.alertVariant} className="margin-top-0">
               <Content>{props.alertText}</Content>

@@ -118,7 +118,6 @@ export const AddressModal = (props: Props): ReactElement => {
       primaryButtonText={props.displayContent.saveButton}
       primaryButtonOnClick={onSubmit}
       secondaryButtonText={Config.businessFormationDefaults.addressModalBackButtonText}
-      dividers={true}
     >
       <>
         {props.defaultAddress ? (

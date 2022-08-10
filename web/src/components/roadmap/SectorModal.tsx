@@ -69,7 +69,6 @@ export const SectorModal = (props: Props): ReactElement => {
         primaryButtonOnClick={onSubmit}
         secondaryButtonText={Config.roadmapDefaults.sectorModalCancelButton}
         maxWidth="md"
-        dividers={true}
       >
         <div data-testid="sector-modal" className="padding-top-4">
           <Content>{Config.roadmapDefaults.sectorModalBody}</Content>
