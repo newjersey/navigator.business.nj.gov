@@ -114,12 +114,8 @@ const DashboardPage = (props: Props): ReactElement => {
               ))}
             {LookupOperatingPhaseById(userData?.profileData.operatingPhase).displayListCalendar &&
               (userData?.taxFilingData.filings || []).length > 0 && (
-                <div className="margin-top-6 bg-roadmap-blue border-base-lightest border-2px padding-top-3 padding-bottom-1 padding-x-4 radius-lg">
-                  <div>
-                    <div className="h3-styling text-normal">{Config.dashboardDefaults.calendarHeader}</div>
-                    <hr className="bg-base-lighter margin-top-0 margin-bottom-4" aria-hidden={true} />
-                    <FilingsCalendarAsList operateReferences={props.operateReferences} />
-                  </div>
+                <div>
+                  <FilingsCalendarAsList operateReferences={props.operateReferences} />
                 </div>
               )}
             {LookupOperatingPhaseById(userData?.profileData.operatingPhase).displayFullCalendar && (
