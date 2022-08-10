@@ -77,7 +77,8 @@ export const Provisions = (): ReactElement => {
                 formInputFull
                 fieldOptions={{
                   multiline: true,
-                  rows: 3,
+                  minRows: 3,
+                  maxRows: 20,
                   className: "override-padding",
                   inputProps: {
                     maxLength: MAX_CHARS,
