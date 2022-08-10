@@ -99,7 +99,6 @@ export const TaxRegistrationModal = (props: Props): ReactElement => {
         <div className="margin-bottom-3">
           <Content>{Config.taxRegistrationModal.subtitle}</Content>
         </div>
-        <hr />
         {showBusinessField() && (
           <OnboardingBusinessName onValidation={onValidation} fieldStates={fieldStates} />
         )}
