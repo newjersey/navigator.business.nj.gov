@@ -8,9 +8,14 @@ import {
   generateSidebarCardContent,
   generateUserData,
 } from "@/test/factories";
+import { markdownToText } from "@/test/helpers";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { useMockProfileData, useMockUserData } from "@/test/mock/mockUseUserData";
-import { setupStatefulUserDataContext, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
+import {
+  currentUserData,
+  setupStatefulUserDataContext,
+  WithStatefulUserData,
+} from "@/test/mock/withStatefulUserData";
 import { UserData } from "@businessnjgovnavigator/shared";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
@@ -75,7 +80,7 @@ describe("SidebarCards List", () => {
         welcome: generateSidebarCardContent({ contentMd: "WelcomeCardContent" }),
       };
 
-      useMockUserData({ preferences: generatePreferences({ visibleRoadmapSidebarCards: ["welcome"] }) });
+      useMockUserData({ preferences: generatePreferences({ visibleSidebarCards: ["welcome"] }) });
 
       renderPage({ sidebarCards });
       expect(screen.getByText("WelcomeCardContent")).toBeInTheDocument();
@@ -84,7 +89,7 @@ describe("SidebarCards List", () => {
     it("removes successful registration card when it's closed", async () => {
       const userData = generateUserData({
         preferences: generatePreferences({
-          visibleRoadmapSidebarCards: ["successful-registration"],
+          visibleSidebarCards: ["successful-registration"],
         }),
       });
 
@@ -245,6 +250,43 @@ describe("SidebarCards List", () => {
 
       expect(screen.queryByText("Funding 1")).not.toBeInTheDocument();
     });
+
+    it("links to task page for fundings", () => {
+      useMockProfileData(profileDataForUnfilteredOpportunities);
+      const fundings = [
+        generateFunding({ urlSlug: "opp", name: "Funding Opp", status: "rolling application" }),
+      ];
+      renderPage({ fundings });
+      expect(screen.getByText("Funding Opp")).toHaveAttribute("href", "/funding/opp");
+    });
+
+    it("displays link to learn more about fundings when user is UP_AND_RUNNING", () => {
+      const initialUserData = generateUserData({
+        profileData: generateProfileData({
+          operatingPhase: "UP_AND_RUNNING",
+        }),
+      });
+      renderWithUserData(initialUserData, { fundings: [] });
+      expect(
+        screen.getByText(markdownToText(Config.dashboardDefaults.learnMoreFundingOpportunities), {
+          exact: false,
+        })
+      ).toBeInTheDocument();
+    });
+
+    it("does not display link to learn more about fundings when user is not UP_AND_RUNNING", () => {
+      const initialUserData = generateUserData({
+        profileData: generateProfileData({
+          operatingPhase: "FORMED_AND_REGISTERED",
+        }),
+      });
+      renderWithUserData(initialUserData, { fundings: [] });
+      expect(
+        screen.queryByText(markdownToText(Config.dashboardDefaults.learnMoreFundingOpportunities), {
+          exact: false,
+        })
+      ).not.toBeInTheDocument();
+    });
   });
 
   describe("hiding opportunities", () => {
@@ -265,19 +307,47 @@ describe("SidebarCards List", () => {
       const visibleOpportunities = within(screen.getByTestId("visible-opportunities"));
       const hiddenOpportunities = within(screen.getByTestId("hidden-opportunities"));
 
+      expect(visibleOpportunities.getByText("Fund 1")).toBeInTheDocument();
       expect(visibleOpportunities.getByText("Cert 1")).toBeInTheDocument();
+      expect(hiddenOpportunities.queryByText("Fund 1")).not.toBeInTheDocument();
       expect(hiddenOpportunities.queryByText("Cert 1")).not.toBeInTheDocument();
 
       fireEvent.click(cert1.getByText(Config.dashboardDefaults.hideOpportunityText));
       cert1 = within(screen.getByTestId("cert1-id"));
 
       expect(visibleOpportunities.queryByText("Cert 1")).not.toBeInTheDocument();
+      expect(visibleOpportunities.getByText("Fund 1")).toBeInTheDocument();
       expect(hiddenOpportunities.getByText("Cert 1")).toBeInTheDocument();
+      expect(hiddenOpportunities.queryByText("Fund 1")).not.toBeInTheDocument();
 
       fireEvent.click(cert1.getByText(Config.dashboardDefaults.unHideOpportunityText));
 
       expect(visibleOpportunities.getByText("Cert 1")).toBeInTheDocument();
+      expect(visibleOpportunities.getByText("Fund 1")).toBeInTheDocument();
       expect(hiddenOpportunities.queryByText("Cert 1")).not.toBeInTheDocument();
+      expect(hiddenOpportunities.queryByText("Fund 1")).not.toBeInTheDocument();
+    });
+
+    it("saves hidden opportunities to user data", () => {
+      const initialUserData = generateUserData({
+        profileData: profileDataForUnfilteredOpportunities,
+        preferences: generatePreferences({
+          hiddenCertificationIds: [],
+          hiddenFundingIds: [],
+        }),
+      });
+
+      renderWithUserData(initialUserData, { certifications, fundings });
+      const funding1 = within(screen.getByTestId("fund1-id"));
+
+      fireEvent.click(funding1.getByText(Config.dashboardDefaults.hideOpportunityText));
+      expect(currentUserData()).toEqual({
+        ...initialUserData,
+        preferences: {
+          ...initialUserData.preferences,
+          hiddenFundingIds: ["fund1-id"],
+        },
+      });
     });
 
     it("hides opportunities from user data", () => {
@@ -285,18 +355,33 @@ describe("SidebarCards List", () => {
         profileData: profileDataForUnfilteredOpportunities,
         preferences: generatePreferences({
           hiddenCertificationIds: [],
+          hiddenFundingIds: ["fund1-id"],
         }),
       });
 
       renderWithUserData(initialUserData, { certifications, fundings });
       const visibleOpportunities = within(screen.getByTestId("visible-opportunities"));
 
+      expect(visibleOpportunities.queryByText("Fund 1")).not.toBeInTheDocument();
       expect(visibleOpportunities.getByText("Cert 1")).toBeInTheDocument();
+    });
+
+    it("displays empty state when all opportunities are hidden", () => {
+      const initialUserData = generateUserData({
+        profileData: profileDataForUnfilteredOpportunities,
+        preferences: generatePreferences({
+          hiddenCertificationIds: ["cert1-id"],
+          hiddenFundingIds: ["fund1-id"],
+        }),
+      });
+
+      renderWithUserData(initialUserData, { certifications, fundings });
+      expect(screen.getByText(Config.dashboardDefaults.emptyOpportunitiesHeader)).toBeInTheDocument();
     });
   });
 
   const profileDataForUnfilteredOpportunities = generateProfileData({
-    operatingPhase: "FORMED_AND_REGISTERED",
+    operatingPhase: "UP_AND_RUNNING",
     homeBasedBusiness: false,
     municipality: undefined,
     existingEmployees: "1",

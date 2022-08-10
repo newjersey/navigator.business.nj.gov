@@ -411,7 +411,6 @@ describe("onboarding - owning a business", () => {
       profileData: {
         ...initialUserData.profileData,
         businessPersona: "OWNING",
-        initialOnboardingFlow: "OWNING",
         businessName: "Cool Computers",
         homeBasedBusiness: true,
         legalStructureId: "c-corporation",
@@ -422,6 +421,11 @@ describe("onboarding - owning a business", () => {
         existingEmployees: "1234567",
         sectorId: "clean-energy",
         industryId: "generic",
+        operatingPhase: "GUEST_MODE_OWNING",
+      },
+      preferences: {
+        ...initialUserData.preferences,
+        visibleSidebarCards: ["welcome"],
       },
     });
   });

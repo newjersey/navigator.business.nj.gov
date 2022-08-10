@@ -3,7 +3,7 @@ import { Button } from "@/components/njwds-extended/Button";
 import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
-import { useRoadmapSidebarCards } from "@/lib/data-hooks/useRoadmapSidebarCards";
+import { useSidebarCards } from "@/lib/data-hooks/useSidebarCards";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { SidebarCardContent } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
@@ -27,10 +27,10 @@ const BorderLinearProgress = styled(LinearProgress)(() => ({
   },
 }));
 
-export const RoadmapSidebarCard = (props: Props) => {
+export const SidebarCard = (props: Props) => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
 
-  const { hideCard } = useRoadmapSidebarCards();
+  const { hideCard } = useSidebarCards();
   const { userData, update } = useUserData();
   const { roadmap } = useRoadmap();
   const { Config } = useConfig();

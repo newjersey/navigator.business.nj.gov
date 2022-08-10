@@ -1,6 +1,6 @@
 import { useUserData } from "@/lib/data-hooks/useUserData";
 
-export const useRoadmapSidebarCards = (): {
+export const useSidebarCards = (): {
   showCard: (id: string) => Promise<void>;
   hideCard: (id: string) => Promise<void>;
 } => {
@@ -8,28 +8,28 @@ export const useRoadmapSidebarCards = (): {
 
   const showCard = async (id: string): Promise<void> => {
     if (!userData) return;
-    const allCardsExceptDesired = userData.preferences.visibleRoadmapSidebarCards.filter(
+    const allCardsExceptDesired = userData.preferences.visibleSidebarCards.filter(
       (cardId: string) => cardId !== id
     );
     await update({
       ...userData,
       preferences: {
         ...userData.preferences,
-        visibleRoadmapSidebarCards: [...allCardsExceptDesired, id],
+        visibleSidebarCards: [...allCardsExceptDesired, id],
       },
     });
   };
 
   const hideCard = async (id: string): Promise<void> => {
     if (!userData) return;
-    const allCardsExceptIdToHide = userData.preferences.visibleRoadmapSidebarCards.filter(
+    const allCardsExceptIdToHide = userData.preferences.visibleSidebarCards.filter(
       (cardId: string) => cardId !== id
     );
     await update({
       ...userData,
       preferences: {
         ...userData.preferences,
-        visibleRoadmapSidebarCards: [...allCardsExceptIdToHide],
+        visibleSidebarCards: [...allCardsExceptIdToHide],
       },
     });
   };

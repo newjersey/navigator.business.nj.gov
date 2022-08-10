@@ -164,10 +164,6 @@ export type RoadmapDisplayContent = {
   sidebarDisplayContent: Record<string, SidebarCardContent>;
 };
 
-export type DashboardDisplayContent = {
-  opportunityTextMd: string;
-};
-
 export type Funding = {
   id: string;
   filename: string;
@@ -206,6 +202,15 @@ export type Certification = {
   applicableOwnershipTypes: string[];
   isSbe: boolean;
 };
+
+export interface Opportunity {
+  id: string;
+  name: string;
+  urlSlug: string;
+  contentMd: string;
+  dueDate?: string;
+  status?: string;
+}
 
 export type OpportunityAgency = "NJEDA" | "NJDOL";
 

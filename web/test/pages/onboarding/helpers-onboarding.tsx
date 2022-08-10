@@ -332,7 +332,7 @@ export const runSelfRegPageTests = ({
     await waitFor(() => {
       expect(currentUserData().user).toEqual(businessUser);
       expect(mockPush).toHaveBeenCalledWith({
-        pathname: businessPersona === "OWNING" ? ROUTES.dashboard : ROUTES.roadmap,
+        pathname: businessPersona === "OWNING" ? ROUTES.dashboard : ROUTES.dashboard,
         query: { fromOnboarding: "true" },
       });
     });

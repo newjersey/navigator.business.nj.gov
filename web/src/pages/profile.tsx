@@ -408,7 +408,7 @@ const ProfilePage = (props: Props): ReactElement => {
             disabled={userData?.formationData.getFilingResponse?.success}
           />
         </div>
-        {(profileData.initialOnboardingFlow === "OWNING" || props.CMS_ONLY_fakeUserData) && (
+        {(profileData.businessPersona === "OWNING" || props.CMS_ONLY_fakeUserData) && (
           <div className="margin-top-4">
             <OnboardingSectors onValidation={onValidation} fieldStates={fieldStates} headerAriaLevel={3} />
           </div>

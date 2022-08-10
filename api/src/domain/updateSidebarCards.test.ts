@@ -1,16 +1,16 @@
 import { formationTaskId } from "@shared/domain-logic/taskIds";
 import { generatePreferences, generateProfileData, generateUserData } from "../../test/factories";
-import { updateRoadmapSidebarCards } from "./updateRoadmapSidebarCards";
+import { updateSidebarCards } from "./updateSidebarCards";
 
 describe("updateRoadmapSidebarCards", () => {
   describe("successful registration", () => {
     it("does not add successful-registration card if not-registered card does not exist", async () => {
       const userData = generateUserData({
         preferences: generatePreferences({
-          visibleRoadmapSidebarCards: ["welcome"],
+          visibleSidebarCards: ["welcome"],
         }),
       });
-      expect(updateRoadmapSidebarCards(userData).preferences.visibleRoadmapSidebarCards).not.toContain(
+      expect(updateSidebarCards(userData).preferences.visibleSidebarCards).not.toContain(
         "successful-registration"
       );
     });
@@ -21,14 +21,12 @@ describe("updateRoadmapSidebarCards", () => {
           operatingPhase: "NEEDS_TO_FORM",
         }),
         preferences: generatePreferences({
-          visibleRoadmapSidebarCards: ["not-registered"],
+          visibleSidebarCards: ["not-registered"],
         }),
       });
 
-      expect(updateRoadmapSidebarCards(userData).preferences.visibleRoadmapSidebarCards).not.toContain(
-        "not-registered"
-      );
-      expect(updateRoadmapSidebarCards(userData).preferences.visibleRoadmapSidebarCards).toContain(
+      expect(updateSidebarCards(userData).preferences.visibleSidebarCards).not.toContain("not-registered");
+      expect(updateSidebarCards(userData).preferences.visibleSidebarCards).toContain(
         "successful-registration"
       );
     });
@@ -39,17 +37,15 @@ describe("updateRoadmapSidebarCards", () => {
           operatingPhase: "NEEDS_TO_FORM",
         }),
         preferences: generatePreferences({
-          visibleRoadmapSidebarCards: ["welcome", "not-registered"],
+          visibleSidebarCards: ["welcome", "not-registered"],
         }),
       });
 
-      expect(updateRoadmapSidebarCards(userData).preferences.visibleRoadmapSidebarCards).not.toContain(
-        "not-registered"
-      );
-      expect(updateRoadmapSidebarCards(userData).preferences.visibleRoadmapSidebarCards).toContain(
+      expect(updateSidebarCards(userData).preferences.visibleSidebarCards).not.toContain("not-registered");
+      expect(updateSidebarCards(userData).preferences.visibleSidebarCards).toContain(
         "successful-registration"
       );
-      expect(updateRoadmapSidebarCards(userData).preferences.visibleRoadmapSidebarCards).toContain("welcome");
+      expect(updateSidebarCards(userData).preferences.visibleSidebarCards).toContain("welcome");
     });
   });
 
@@ -62,12 +58,10 @@ describe("updateRoadmapSidebarCards", () => {
         profileData: generateProfileData({
           operatingPhase: "NEEDS_TO_FORM",
         }),
-        preferences: generatePreferences({ visibleRoadmapSidebarCards: [] }),
+        preferences: generatePreferences({ visibleSidebarCards: [] }),
       });
 
-      expect(updateRoadmapSidebarCards(userData).preferences.visibleRoadmapSidebarCards).toContain(
-        "formation-nudge"
-      );
+      expect(updateSidebarCards(userData).preferences.visibleSidebarCards).toContain("formation-nudge");
     });
 
     it("removes formation-nudge if  operatingPhase is NEEDS_TO_REGISTER_FOR_TAXES", () => {
@@ -75,12 +69,10 @@ describe("updateRoadmapSidebarCards", () => {
         profileData: generateProfileData({
           operatingPhase: "NEEDS_TO_REGISTER_FOR_TAXES",
         }),
-        preferences: generatePreferences({ visibleRoadmapSidebarCards: ["formation-nudge"] }),
+        preferences: generatePreferences({ visibleSidebarCards: ["formation-nudge"] }),
       });
 
-      expect(updateRoadmapSidebarCards(userData).preferences.visibleRoadmapSidebarCards).not.toContain(
-        "formation-nudge"
-      );
+      expect(updateSidebarCards(userData).preferences.visibleSidebarCards).not.toContain("formation-nudge");
     });
   });
 
@@ -90,9 +82,9 @@ describe("updateRoadmapSidebarCards", () => {
         profileData: generateProfileData({
           operatingPhase: "NEEDS_TO_REGISTER_FOR_TAXES",
         }),
-        preferences: generatePreferences({ visibleRoadmapSidebarCards: [] }),
+        preferences: generatePreferences({ visibleSidebarCards: [] }),
       });
-      expect(updateRoadmapSidebarCards(userData).preferences.visibleRoadmapSidebarCards).toContain(
+      expect(updateSidebarCards(userData).preferences.visibleSidebarCards).toContain(
         "tax-registration-nudge"
       );
     });
@@ -102,9 +94,9 @@ describe("updateRoadmapSidebarCards", () => {
         profileData: generateProfileData({
           operatingPhase: "FORMED_AND_REGISTERED",
         }),
-        preferences: generatePreferences({ visibleRoadmapSidebarCards: ["tax-registration-nudge"] }),
+        preferences: generatePreferences({ visibleSidebarCards: ["tax-registration-nudge"] }),
       });
-      expect(updateRoadmapSidebarCards(userData).preferences.visibleRoadmapSidebarCards).not.toContain(
+      expect(updateSidebarCards(userData).preferences.visibleSidebarCards).not.toContain(
         "tax-registration-nudge"
       );
     });
@@ -116,14 +108,10 @@ describe("updateRoadmapSidebarCards", () => {
         profileData: generateProfileData({
           operatingPhase: "FORMED_AND_REGISTERED",
         }),
-        preferences: generatePreferences({ visibleRoadmapSidebarCards: [] }),
+        preferences: generatePreferences({ visibleSidebarCards: [] }),
       });
-      expect(updateRoadmapSidebarCards(userData).preferences.visibleRoadmapSidebarCards).not.toContain(
-        "formation-nudge"
-      );
-      expect(updateRoadmapSidebarCards(userData).preferences.visibleRoadmapSidebarCards).toContain(
-        "funding-nudge"
-      );
+      expect(updateSidebarCards(userData).preferences.visibleSidebarCards).not.toContain("formation-nudge");
+      expect(updateSidebarCards(userData).preferences.visibleSidebarCards).toContain("funding-nudge");
     });
 
     it("removes funding-nudge when operatingPhase is NEEDS_TO_REGISTER_FOR_TAXES", () => {
@@ -131,11 +119,9 @@ describe("updateRoadmapSidebarCards", () => {
         profileData: generateProfileData({
           operatingPhase: "NEEDS_TO_REGISTER_FOR_TAXES",
         }),
-        preferences: generatePreferences({ visibleRoadmapSidebarCards: ["funding-nudge"] }),
+        preferences: generatePreferences({ visibleSidebarCards: ["funding-nudge"] }),
       });
-      expect(updateRoadmapSidebarCards(userData).preferences.visibleRoadmapSidebarCards).not.toContain(
-        "funding-nudge"
-      );
+      expect(updateSidebarCards(userData).preferences.visibleSidebarCards).not.toContain("funding-nudge");
     });
   });
 
@@ -146,11 +132,11 @@ describe("updateRoadmapSidebarCards", () => {
           operatingPhase: "UP_AND_RUNNING",
           industryId: "generic",
         }),
-        preferences: generatePreferences({ visibleRoadmapSidebarCards: ["task-progress"] }),
+        preferences: generatePreferences({ visibleSidebarCards: ["task-progress"] }),
       });
 
-      const updatedUserData = updateRoadmapSidebarCards(userData);
-      expect(updatedUserData.preferences.visibleRoadmapSidebarCards).not.toContain("task-progress");
+      const updatedUserData = updateSidebarCards(userData);
+      expect(updatedUserData.preferences.visibleSidebarCards).not.toContain("task-progress");
     });
   });
 });

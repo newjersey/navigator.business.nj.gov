@@ -2,7 +2,6 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { OperateReference } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
-import { getTaxFilings } from "@/lib/utils/helpers";
 import { parseDateWithFormat } from "@businessnjgovnavigator/shared/";
 import Link from "next/link";
 import { ReactElement } from "react";
@@ -15,7 +14,7 @@ interface Props {
 
 export const FilingsCalendarAsList = (props: Props): ReactElement => {
   const { userData } = useUserData();
-  const taxFilings = getTaxFilings(userData);
+  const taxFilings = userData?.taxFilingData.filings || [];
   const { Config } = useConfig();
 
   if (taxFilings.length === 0) return <></>;
@@ -30,7 +29,7 @@ export const FilingsCalendarAsList = (props: Props): ReactElement => {
             className="margin-top-6 bg-roadmap-blue border-base-lightest border-2px padding-top-3 padding-bottom-1 padding-x-4 radius-lg"
           >
             <div className="flex">
-              <div className="h3-styling text-normal">{Config.roadmapDefaults.calendarHeader}</div>
+              <div className="h3-styling text-normal">{Config.dashboardDefaults.calendarHeader}</div>
               <div>
                 <ArrowTooltip title={Config.dashboardDefaults.calendarTooltip}>
                   <div
@@ -44,7 +43,7 @@ export const FilingsCalendarAsList = (props: Props): ReactElement => {
             </div>
             <hr className="bg-base-lighter margin-top-0 margin-bottom-4" aria-hidden={true} />
             <div className="flex margin-bottom-2 minh-6">
-              <div className="width-05 bg-primary"></div>
+              <div className="width-05 bg-primary" />
               <div className="margin-left-205">
                 <div className="text-bold">
                   {parseDateWithFormat(filing.dueDate, "YYYY-MM-DD").format("MMMM D, YYYY")}

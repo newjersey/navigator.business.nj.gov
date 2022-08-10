@@ -1,7 +1,7 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
 import { LookupIndustryById } from "@businessnjgovnavigator/shared/";
 import { completeNewBusinessOnboarding, updateNewBusinessProfilePage } from "cypress/support/helpers";
-import { onRoadmapPage } from "cypress/support/page_objects/roadmapPage";
+import { onDashboardPage } from "cypress/support/page_objects/dashboardPage";
 
 describe("search business name [feature] [all] [group2]", () => {
   beforeEach(() => {
@@ -18,9 +18,9 @@ describe("search business name [feature] [all] [group2]", () => {
       legalStructureId,
     });
 
-    // roadmap business name
+    // dashboard business name
     updateNewBusinessProfilePage({ businessName });
-    onRoadmapPage.getEditProfileLink().should("exist");
+    onDashboardPage.getEditProfileLink().should("exist");
 
     // search name
     cy.get('[data-task="search-business-name"]').click();
@@ -42,7 +42,7 @@ describe("search business name [feature] [all] [group2]", () => {
 
     // update name
     cy.get('[data-testid="update-name"]').click();
-    cy.get('[data-testid="back-to-roadmap"]').click();
-    onRoadmapPage.getEditProfileLink().should("exist");
+    cy.get('[data-testid="back-to-dashboard"]').click();
+    onDashboardPage.getEditProfileLink().should("exist");
   });
 });

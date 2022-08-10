@@ -200,7 +200,6 @@ const OnboardingPage = (props: Props): ReactElement => {
     setProfileData({
       ...profileData,
       businessPersona: "STARTING",
-      initialOnboardingFlow: "STARTING",
       industryId: industryId,
     });
     setPage({ current: 2, previous: 1 });
@@ -236,14 +235,8 @@ const OnboardingPage = (props: Props): ReactElement => {
       profileData.businessPersona !== currentUserData?.profileData.businessPersona;
 
     if (page.current === 1 && hasBusinessPersonaChanged) {
-      let initialOnboardingFlow = profileData.initialOnboardingFlow;
-      if (currentUserData.formProgress !== "COMPLETED") {
-        initialOnboardingFlow = getFlow(profileData);
-      }
-
       newProfileData = {
         ...emptyProfileData,
-        initialOnboardingFlow: initialOnboardingFlow,
         businessName: profileData.businessName,
         industryId: profileData.businessPersona === "OWNING" ? "generic" : undefined,
         homeBasedBusiness: profileData.homeBasedBusiness,
@@ -255,6 +248,7 @@ const OnboardingPage = (props: Props): ReactElement => {
         providesStaffingService: profileData.providesStaffingService,
         certifiedInteriorDesigner: profileData.certifiedInteriorDesigner,
         realEstateAppraisalManagement: profileData.realEstateAppraisalManagement,
+        operatingPhase: profileData.businessPersona === "OWNING" ? "GUEST_MODE_OWNING" : "GUEST_MODE",
       };
 
       setProfileData(newProfileData);
@@ -303,9 +297,24 @@ const OnboardingPage = (props: Props): ReactElement => {
 
       newUserData = await api.postGetAnnualFilings(newUserData);
 
-      await update(newUserData);
+      const newPreferencesData = {
+        ...newUserData.preferences,
+        visibleSidebarCards:
+          newProfileData.businessPersona === "OWNING"
+            ? newUserData.preferences.visibleSidebarCards.filter(
+                (cardId: string) => cardId !== "task-progress"
+              )
+            : [...newUserData.preferences.visibleSidebarCards, "task-progress"],
+      };
+
+      const updatedUserData = {
+        ...newUserData,
+        preferences: newPreferencesData,
+      };
+
+      await update(updatedUserData);
       await router.push({
-        pathname: routeForPersona(newUserData.profileData.businessPersona),
+        pathname: routeForPersona(updatedUserData.profileData.businessPersona),
         query: { fromOnboarding: "true" },
       });
     }

@@ -92,7 +92,7 @@ describe("findDeadLinks", () => {
         "/onboarding?page=3": [],
         "/onboarding?page=4": [],
         "/profile": [],
-        "/roadmap": [],
+        "/dashboard": [],
       });
     });
   });

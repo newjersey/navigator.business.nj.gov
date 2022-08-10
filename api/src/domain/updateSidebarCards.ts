@@ -1,8 +1,8 @@
 import { UserData } from "@shared/userData";
-import { UpdateRoadmapSidebarCards } from "./types";
+import { UpdateSidebarCards } from "./types";
 
-export const updateRoadmapSidebarCards: UpdateRoadmapSidebarCards = (userData: UserData): UserData => {
-  let cards = userData.preferences.visibleRoadmapSidebarCards;
+export const updateSidebarCards: UpdateSidebarCards = (userData: UserData): UserData => {
+  let cards = userData.preferences.visibleSidebarCards;
   const operatingPhase = userData.profileData.operatingPhase;
 
   const showCard = (id: string): void => {
@@ -46,7 +46,7 @@ export const updateRoadmapSidebarCards: UpdateRoadmapSidebarCards = (userData: U
     ...userData,
     preferences: {
       ...userData.preferences,
-      visibleRoadmapSidebarCards: cards,
+      visibleSidebarCards: cards,
     },
   };
 };

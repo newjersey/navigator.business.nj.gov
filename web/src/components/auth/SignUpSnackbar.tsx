@@ -2,14 +2,14 @@ import { Content } from "@/components/Content";
 import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
 import { Icon } from "@/components/njwds/Icon";
 import { AuthAlertContext } from "@/contexts/authAlertContext";
-import { useRoadmapSidebarCards } from "@/lib/data-hooks/useRoadmapSidebarCards";
+import { useSidebarCards } from "@/lib/data-hooks/useSidebarCards";
 import { MediaQueries } from "@/lib/PageSizes";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { IconButton, useMediaQuery } from "@mui/material";
 import { ReactElement, useContext } from "react";
 
 export const SignUpSnackbar = (): ReactElement => {
-  const { showCard } = useRoadmapSidebarCards();
+  const { showCard } = useSidebarCards();
   const { alertIsVisible, setAlertIsVisible } = useContext(AuthAlertContext);
   const isDesktopAndUp = useMediaQuery(MediaQueries.desktopAndUp);
 

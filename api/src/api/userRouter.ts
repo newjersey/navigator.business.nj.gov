@@ -14,7 +14,7 @@ import { industryHasALicenseType } from "../domain/license-status/convertIndustr
 import {
   UpdateLicenseStatus,
   UpdateOperatingPhase,
-  UpdateRoadmapSidebarCards,
+  UpdateSidebarCards,
   UserDataClient,
 } from "../domain/types";
 
@@ -69,7 +69,7 @@ export const getSignedInUserId = (req: Request): string => {
 export const userRouterFactory = (
   userDataClient: UserDataClient,
   updateLicenseStatus: UpdateLicenseStatus,
-  updateRoadmapSidebarCards: UpdateRoadmapSidebarCards,
+  updateRoadmapSidebarCards: UpdateSidebarCards,
   updateOperatingPhase: UpdateOperatingPhase
 ): Router => {
   const router = Router();

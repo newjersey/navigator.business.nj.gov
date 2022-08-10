@@ -22,7 +22,7 @@ import { MyNJSelfRegClientFactory } from "../../client/MyNjSelfRegClient";
 import { WebserviceLicenseStatusClient } from "../../client/WebserviceLicenseStatusClient";
 import { dynamoDbTranslateConfig, DynamoUserDataClient } from "../../db/DynamoUserDataClient";
 import { searchLicenseStatusFactory } from "../../domain/license-status/searchLicenseStatusFactory";
-import { updateRoadmapSidebarCards } from "../../domain/updateRoadmapSidebarCards";
+import { updateSidebarCards } from "../../domain/updateSidebarCards";
 import { addToUserTestingFactory } from "../../domain/user-testing/addToUserTestingFactory";
 import { updateLicenseStatusFactory } from "../../domain/user/updateLicenseStatusFactory";
 
@@ -146,7 +146,7 @@ const apiFormationClient = ApiFormationClient(
 app.use(bodyParser.json({ strict: false }));
 app.use(
   "/api",
-  userRouterFactory(userDataClient, updateLicenseStatus, updateRoadmapSidebarCards, updateOperatingPhase)
+  userRouterFactory(userDataClient, updateLicenseStatus, updateSidebarCards, updateOperatingPhase)
 );
 app.use(
   "/api/external",

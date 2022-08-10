@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { RoadmapSidebarCard } from "@/components/roadmap/RoadmapSidebarCard";
+import { SidebarCard } from "@/components/dashboard/SidebarCard";
 import { SidebarCardContent } from "@/lib/types/types";
 import { useEffect, useRef } from "react";
 
@@ -24,7 +24,7 @@ const RoadmapSidebarCardPreview = (props: Props) => {
 
   return (
     <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
-      <RoadmapSidebarCard card={card} />
+      <SidebarCard card={card} />
     </div>
   );
 };
