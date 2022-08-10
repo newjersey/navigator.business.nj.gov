@@ -1,22 +1,22 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
 
 import { Industries } from "@businessnjgovnavigator/shared/";
-import { onRoadmapPage } from "cypress/support/page_objects/roadmapPage";
+import { onDashboardPage } from "cypress/support/page_objects/dashboardPage";
 import { completeNewBusinessOnboarding } from "../support/helpers";
 
-describe("Roadmap [all] [group4]", () => {
+describe("Dashboard [all] [group4]", () => {
   beforeEach(() => {
     cy.loginByCognitoApi();
   });
 
   for (const industry of Industries.filter((x) => x.isEnabled)) {
-    it(` ${industry.name} completes onboarding and shows the roadmap`, () => {
+    it(` ${industry.name} completes onboarding and shows the dashboard`, () => {
       completeNewBusinessOnboarding({
         industry,
       });
 
-      // check roadmap
-      onRoadmapPage.getEditProfileLink().should("exist");
+      // check dashboard
+      onDashboardPage.getEditProfileLink().should("exist");
     });
   }
 });

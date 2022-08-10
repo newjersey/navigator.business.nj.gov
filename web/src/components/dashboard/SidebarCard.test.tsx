@@ -20,7 +20,7 @@ import {
 } from "@/test/mock/withStatefulUserData";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, within } from "@testing-library/react";
-import { RoadmapSidebarCard } from "./RoadmapSidebarCard";
+import { SidebarCard } from "./SidebarCard";
 
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -68,7 +68,7 @@ describe("<RoadmapSidebarCard />", () => {
     });
     useMockUserData(fakeUserData);
 
-    render(<RoadmapSidebarCard card={card} />);
+    render(<SidebarCard card={card} />);
 
     expect(screen.getByText("Hey kid, you're 33% done")).toBeInTheDocument();
   });
@@ -118,7 +118,7 @@ describe("<RoadmapSidebarCard />", () => {
         })
       );
 
-      render(<RoadmapSidebarCard card={card} />);
+      render(<SidebarCard card={card} />);
       const expectedPhrase = templateEval(Config.taskProgressCard.optionalTasksPlural, { numTasks: "2" });
       expect(screen.getByText(`You have ${expectedPhrase} left`)).toBeInTheDocument();
     });
@@ -137,7 +137,7 @@ describe("<RoadmapSidebarCard />", () => {
         })
       );
 
-      render(<RoadmapSidebarCard card={card} />);
+      render(<SidebarCard card={card} />);
 
       const expectedPhrase = templateEval(Config.taskProgressCard.optionalTasksSingular, { numTasks: "1" });
       expect(screen.getByText(`You have ${expectedPhrase} left`)).toBeInTheDocument();
@@ -157,7 +157,7 @@ describe("<RoadmapSidebarCard />", () => {
         })
       );
 
-      render(<RoadmapSidebarCard card={card} />);
+      render(<SidebarCard card={card} />);
 
       const expectedPhrase = templateEval(Config.taskProgressCard.requiredTasksPlural, { numTasks: "2" });
       expect(screen.getByText(`You have ${expectedPhrase} left`)).toBeInTheDocument();
@@ -177,7 +177,7 @@ describe("<RoadmapSidebarCard />", () => {
         })
       );
 
-      render(<RoadmapSidebarCard card={card} />);
+      render(<SidebarCard card={card} />);
 
       const expectedPhrase = templateEval(Config.taskProgressCard.requiredTasksSingular, { numTasks: "1" });
       expect(screen.getByText(`You have ${expectedPhrase} left`)).toBeInTheDocument();
@@ -199,7 +199,7 @@ describe("<RoadmapSidebarCard />", () => {
         })
       );
 
-      render(<RoadmapSidebarCard card={card} />);
+      render(<SidebarCard card={card} />);
       const requiredExpectedPhrase = templateEval(Config.taskProgressCard.requiredTasksPlural, {
         numTasks: "0",
       });
@@ -217,7 +217,7 @@ describe("<RoadmapSidebarCard />", () => {
     const card = generateSidebarCardContent({
       id: "task-progress",
     });
-    render(<RoadmapSidebarCard card={card} />);
+    render(<SidebarCard card={card} />);
     expect(screen.getByRole("progressbar")).toBeInTheDocument();
   });
 
@@ -225,7 +225,7 @@ describe("<RoadmapSidebarCard />", () => {
     const card = generateSidebarCardContent({
       id: "welcome",
     });
-    render(<RoadmapSidebarCard card={card} />);
+    render(<SidebarCard card={card} />);
     expect(screen.queryByRole("progressbar")).not.toBeInTheDocument();
   });
 
@@ -266,7 +266,7 @@ describe("<RoadmapSidebarCard />", () => {
         ],
       })
     );
-    render(<RoadmapSidebarCard card={card} />);
+    render(<SidebarCard card={card} />);
     expect(screen.getByText("Hey kid, you're 100% done")).toBeInTheDocument();
   });
 
@@ -305,7 +305,7 @@ describe("<RoadmapSidebarCard />", () => {
         ],
       })
     );
-    render(<RoadmapSidebarCard card={card} />);
+    render(<SidebarCard card={card} />);
     expect(screen.getByText("All done!")).toBeInTheDocument();
   });
 
@@ -333,7 +333,7 @@ describe("<RoadmapSidebarCard />", () => {
         ],
       })
     );
-    render(<RoadmapSidebarCard card={card} />);
+    render(<SidebarCard card={card} />);
     expect(screen.getByText("Get to work")).toBeInTheDocument();
   });
 
@@ -347,7 +347,7 @@ describe("<RoadmapSidebarCard />", () => {
     const renderWithUserData = (userData: Partial<UserData>) => {
       render(
         <WithStatefulUserData initialUserData={generateUserData(userData)}>
-          <RoadmapSidebarCard card={card} />
+          <SidebarCard card={card} />
         </WithStatefulUserData>
       );
     };
@@ -359,7 +359,7 @@ describe("<RoadmapSidebarCard />", () => {
             businessPersona: "STARTING",
             industryId: "cannabis",
           }),
-          preferences: generatePreferences({ visibleRoadmapSidebarCards: ["funding-nudge"] }),
+          preferences: generatePreferences({ visibleSidebarCards: ["funding-nudge"] }),
         });
 
         fireEvent.click(screen.getByTestId("cta-funding-nudge"));
@@ -374,14 +374,14 @@ describe("<RoadmapSidebarCard />", () => {
             businessPersona: "STARTING",
             industryId: "generic",
           }),
-          preferences: generatePreferences({ visibleRoadmapSidebarCards: ["funding-nudge"] }),
+          preferences: generatePreferences({ visibleSidebarCards: ["funding-nudge"] }),
         });
 
         fireEvent.click(screen.getByTestId("cta-funding-nudge"));
 
-        expect(screen.getByText(Config.roadmapDefaults.sectorModalTitle)).toBeInTheDocument();
+        expect(screen.getByText(Config.dashboardDefaults.sectorModalTitle)).toBeInTheDocument();
         selectByValue("Sector", "clean-energy");
-        fireEvent.click(screen.getByText(Config.roadmapDefaults.sectorModalSaveButton));
+        fireEvent.click(screen.getByText(Config.dashboardDefaults.sectorModalSaveButton));
         expect(currentUserData().profileData.operatingPhase).toEqual("UP_AND_RUNNING");
       });
 
@@ -391,14 +391,14 @@ describe("<RoadmapSidebarCard />", () => {
             businessPersona: "STARTING",
             industryId: "generic",
           }),
-          preferences: generatePreferences({ visibleRoadmapSidebarCards: ["funding-nudge"] }),
+          preferences: generatePreferences({ visibleSidebarCards: ["funding-nudge"] }),
         });
 
         fireEvent.click(screen.getByTestId("cta-funding-nudge"));
 
-        expect(screen.getByText(Config.roadmapDefaults.sectorModalTitle)).toBeInTheDocument();
+        expect(screen.getByText(Config.dashboardDefaults.sectorModalTitle)).toBeInTheDocument();
         selectByValue("Sector", "clean-energy");
-        fireEvent.click(screen.getByText(Config.roadmapDefaults.sectorModalCancelButton));
+        fireEvent.click(screen.getByText(Config.dashboardDefaults.sectorModalCancelButton));
         expect(userDataWasNotUpdated()).toEqual(true);
       });
     });

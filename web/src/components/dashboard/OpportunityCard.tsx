@@ -3,21 +3,13 @@ import { Button } from "@/components/njwds-extended/Button";
 import { Tag } from "@/components/njwds-extended/Tag";
 import { Icon } from "@/components/njwds/Icon";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { Opportunity } from "@/lib/types/types";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import truncateMarkdown from "markdown-truncate";
 import { ReactElement } from "react";
 import { OpportunityCardStatus } from "./OpportunityCardStatus";
-
-interface Opportunity {
-  id: string;
-  name: string;
-  urlSlug: string;
-  contentMd: string;
-  dueDate?: string;
-  status?: string;
-}
 
 interface Props {
   opportunity: Opportunity;

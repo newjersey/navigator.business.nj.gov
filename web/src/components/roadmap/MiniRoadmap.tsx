@@ -1,5 +1,5 @@
+import { SectionAccordion } from "@/components/dashboard/SectionAccordion";
 import { MiniRoadmapStep } from "@/components/roadmap/MiniRoadmapStep";
-import { SectionAccordion } from "@/components/roadmap/SectionAccordion";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";

@@ -6,8 +6,8 @@ export const routeForPersona = (persona: BusinessPersona): string => {
     case "OWNING":
       return ROUTES.dashboard;
     case "STARTING":
-      return ROUTES.roadmap;
+      return ROUTES.dashboard;
     default:
-      return ROUTES.roadmap;
+      return ROUTES.dashboard;
   }
 };

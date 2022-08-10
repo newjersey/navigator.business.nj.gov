@@ -3,10 +3,24 @@ import { generateProfileData, generateUserData } from "../../../test/factories";
 import { updateOperatingPhase } from "./updateOperatingPhase";
 
 describe("updateOperatingPhase", () => {
+  describe("OWNING", () => {
+    it("updates the operatingPhase to UP_AND_RUNNING if it is not", () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          businessPersona: "OWNING",
+          operatingPhase: "GUEST_MODE",
+          legalStructureId: "limited-partnership",
+        }),
+      });
+      expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("UP_AND_RUNNING");
+    });
+  });
+
   describe("GUEST_MODE", () => {
     it("updates the phase to NEEDS_TO_FORM from GUEST_MODE for public filing companies", () => {
       const userData = generateUserData({
         profileData: generateProfileData({
+          businessPersona: "STARTING",
           operatingPhase: "GUEST_MODE",
           legalStructureId: "limited-partnership",
         }),
@@ -17,6 +31,7 @@ describe("updateOperatingPhase", () => {
     it("updates the phase to NEEDS_TO_REGISTER_FOR_TAXES from GUEST_MODE for nonpublic filing companies", () => {
       const userData = generateUserData({
         profileData: generateProfileData({
+          businessPersona: "STARTING",
           operatingPhase: "GUEST_MODE",
           legalStructureId: "general-partnership",
         }),
@@ -30,6 +45,7 @@ describe("updateOperatingPhase", () => {
       const taskId = formationTaskId;
       const userData = generateUserData({
         profileData: generateProfileData({
+          businessPersona: "STARTING",
           operatingPhase: "NEEDS_TO_FORM",
           legalStructureId: "limited-liability-company",
         }),
@@ -43,6 +59,7 @@ describe("updateOperatingPhase", () => {
       const taxesTaskId = "register-for-taxes";
       const userData = generateUserData({
         profileData: generateProfileData({
+          businessPersona: "STARTING",
           operatingPhase: "NEEDS_TO_FORM",
           legalStructureId: "limited-liability-company",
         }),
@@ -55,6 +72,7 @@ describe("updateOperatingPhase", () => {
       const taskId = formationTaskId;
       const userData = generateUserData({
         profileData: generateProfileData({
+          businessPersona: "STARTING",
           operatingPhase: "NEEDS_TO_FORM",
           legalStructureId: "general-partnership",
         }),
@@ -69,6 +87,7 @@ describe("updateOperatingPhase", () => {
       const taxesTaskId = "register-for-taxes";
       const userData = generateUserData({
         profileData: generateProfileData({
+          businessPersona: "STARTING",
           operatingPhase: "NEEDS_TO_REGISTER_FOR_TAXES",
         }),
         taskProgress: { [taxesTaskId]: "COMPLETED" },
@@ -80,6 +99,7 @@ describe("updateOperatingPhase", () => {
       const taskId = formationTaskId;
       const userData = generateUserData({
         profileData: generateProfileData({
+          businessPersona: "STARTING",
           operatingPhase: "NEEDS_TO_REGISTER_FOR_TAXES",
           legalStructureId: "limited-liability-company",
         }),
@@ -92,6 +112,7 @@ describe("updateOperatingPhase", () => {
       const taskId = formationTaskId;
       const userData = generateUserData({
         profileData: generateProfileData({
+          businessPersona: "STARTING",
           operatingPhase: "NEEDS_TO_REGISTER_FOR_TAXES",
           legalStructureId: "general-partnership",
         }),
@@ -108,6 +129,7 @@ describe("updateOperatingPhase", () => {
 
       const userData = generateUserData({
         profileData: generateProfileData({
+          businessPersona: "STARTING",
           operatingPhase: "FORMED_AND_REGISTERED",
         }),
         taskProgress: { [taskId]: "COMPLETED", [taxesTaskId]: "IN_PROGRESS" },
@@ -121,6 +143,7 @@ describe("updateOperatingPhase", () => {
 
       const userData = generateUserData({
         profileData: generateProfileData({
+          businessPersona: "STARTING",
           operatingPhase: "FORMED_AND_REGISTERED",
           legalStructureId: "limited-liability-company",
         }),
@@ -135,6 +158,7 @@ describe("updateOperatingPhase", () => {
 
       const userData = generateUserData({
         profileData: generateProfileData({
+          businessPersona: "STARTING",
           operatingPhase: "FORMED_AND_REGISTERED",
           legalStructureId: "limited-liability-company",
         }),

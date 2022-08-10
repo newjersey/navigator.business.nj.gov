@@ -18,16 +18,16 @@ describe("loading page", () => {
     mockSessionHelper.triggerSignIn.mockResolvedValue();
   });
 
-  it("redirects STARTING users to roadmap", () => {
+  it("redirects STARTING users to dashboard", () => {
     useMockProfileData({ businessPersona: "STARTING" });
     render(<LoadingPage />);
-    expect(mockPush).toHaveBeenCalledWith(ROUTES.roadmap);
+    expect(mockPush).toHaveBeenCalledWith(ROUTES.dashboard);
   });
 
-  it("redirects FOREIGN users to roadmap", () => {
+  it("redirects FOREIGN users to dashboard", () => {
     useMockProfileData({ businessPersona: "FOREIGN" });
     render(<LoadingPage />);
-    expect(mockPush).toHaveBeenCalledWith(ROUTES.roadmap);
+    expect(mockPush).toHaveBeenCalledWith(ROUTES.dashboard);
   });
 
   it("redirects OWNING users to dashbaord", () => {

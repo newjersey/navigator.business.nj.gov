@@ -10,6 +10,7 @@ interface OperatingPhase {
 
 export type OperatingPhaseId =
   | "GUEST_MODE"
+  | "GUEST_MODE_OWNING"
   | "NEEDS_TO_FORM"
   | "NEEDS_TO_REGISTER_FOR_TAXES"
   | "FORMED_AND_REGISTERED"
@@ -39,6 +40,15 @@ export const OperatingPhases: OperatingPhase[] = [
     displayListCalendar: false,
     displayFullCalendar: false,
     displayRoadmapTasks: true,
+  },
+  {
+    id: "GUEST_MODE_OWNING",
+    displayCompanyDemographicProfileFields: true,
+    displayCertifications: true,
+    displayFundings: true,
+    displayListCalendar: false,
+    displayFullCalendar: true,
+    displayRoadmapTasks: false,
   },
   {
     id: "FORMED_AND_REGISTERED",

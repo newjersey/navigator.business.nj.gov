@@ -170,7 +170,7 @@ describe("<TaskHeader />", () => {
 
       expect(currentUserData().preferences.roadmapOpenSections).toEqual([]);
       expect(
-        screen.queryByText(Config.roadmapDefaults.congratulatorModalLinkText, { exact: false })
+        screen.queryByText(Config.dashboardDefaults.congratulatoryModalLinkText, { exact: false })
       ).not.toBeInTheDocument();
     });
 
@@ -207,11 +207,11 @@ describe("<TaskHeader />", () => {
 
       expect(currentUserData().preferences.roadmapOpenSections).toEqual(["START"]);
       const link = screen.queryByText(
-        `${Config.sectionHeaders["START"]} ${Config.roadmapDefaults.congratulatorModalLinkText}`
+        `${Config.sectionHeaders["START"]} ${Config.dashboardDefaults.congratulatoryModalLinkText}`
       );
       expect(link).toBeInTheDocument();
       fireEvent.click(link as HTMLElement);
-      expect(mockPush).toHaveBeenCalledWith(ROUTES.roadmap);
+      expect(mockPush).toHaveBeenCalledWith(ROUTES.dashboard);
     });
   });
 
@@ -263,7 +263,7 @@ describe("<TaskHeader />", () => {
       });
     });
 
-    it("gets redirected to roadmap with the proper query parameter when completed", async () => {
+    it("gets redirected to dashboard with the proper query parameter when completed", async () => {
       const taxTask = generateTask({ id: taxTaskId });
       const userData = generateUserData({
         taskProgress: {
@@ -517,7 +517,7 @@ describe("<TaskHeader />", () => {
       );
       expect(currentUserData().taskProgress[id]).toEqual("COMPLETED");
       expect(mockPush).toHaveBeenCalledWith({
-        pathname: ROUTES.roadmap,
+        pathname: ROUTES.dashboard,
         query: { fromFormBusinessEntity: "true", fromTaxRegistration: "false" },
       });
     });

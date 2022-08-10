@@ -12,7 +12,6 @@ import {
 import { onDashboardPage } from "./page_objects/dashboardPage";
 import { onOnboardingPage } from "./page_objects/onboardingPage";
 import { onProfilePage } from "./page_objects/profilePage";
-import { onRoadmapPage } from "./page_objects/roadmapPage";
 
 /* eslint-disable cypress/no-unnecessary-waiting */
 
@@ -289,7 +288,7 @@ export const completeNewBusinessOnboarding = ({
   onOnboardingPage.getContactMeCheckbox().should(`${isContactMeChecked ? "be" : "not.be"}.checked`);
 
   onOnboardingPage.clickNext();
-  cy.url().should("include", `roadmap`);
+  cy.url().should("include", `dashboard`);
 };
 
 export const completeExistingBusinessOnboarding = ({
@@ -434,7 +433,7 @@ export const completeForeignBusinessOnboarding = ({
   onOnboardingPage.getContactMeCheckbox().should(`${isContactMeChecked ? "be" : "not.be"}.checked`);
 
   onOnboardingPage.clickNext();
-  cy.url().should("include", `roadmap`);
+  cy.url().should("include", `dashboard`);
 };
 
 interface StartingProfileData extends StartingOnboardingData {
@@ -469,8 +468,8 @@ export const checkNewBusinessProfilePage = ({
   notes = "",
   entityId = "",
 }: Partial<StartingProfileData & { businessName: string }>): void => {
-  cy.url().should("contain", "/roadmap");
-  onRoadmapPage.clickEditProfileLink();
+  cy.url().should("contain", "/dashboard");
+  onDashboardPage.clickEditProfileLink();
   cy.url().should("contain", "/profile");
 
   if (businessName) {
@@ -522,7 +521,7 @@ export const checkNewBusinessProfilePage = ({
   }
 
   onProfilePage.clickSaveButton();
-  cy.url().should("contain", "/roadmap");
+  cy.url().should("contain", "/dashboard");
 };
 
 export const checkExistingBusinessProfilePage = ({
@@ -594,8 +593,8 @@ export const updateNewBusinessProfilePage = ({
   notes,
   entityId,
 }: Partial<StartingProfileData & { businessName: string }>): void => {
-  cy.url().should("contain", "/roadmap");
-  onRoadmapPage.clickEditProfileLink();
+  cy.url().should("contain", "/dashboard");
+  onDashboardPage.clickEditProfileLink();
   cy.url().should("contain", "/profile");
 
   if (businessName) {
@@ -674,7 +673,7 @@ export const updateNewBusinessProfilePage = ({
   }
 
   onProfilePage.clickSaveButton();
-  cy.url().should("contain", "/roadmap");
+  cy.url().should("contain", "/dashboard");
 };
 
 export const updateExistingBusinessProfilePage = ({
@@ -773,8 +772,8 @@ export const updateExistingBusinessProfilePage = ({
 };
 
 export const updateForeignBusinessProfilePage = ({ taxId, notes }: Partial<ForeignProfileData>): void => {
-  cy.url().should("contain", "/roadmap");
-  onRoadmapPage.clickEditProfileInDropdown();
+  cy.url().should("contain", "/dashboard");
+  onDashboardPage.clickEditProfileInDropdown();
   cy.url().should("contain", "/profile");
   cy.wait(1000);
 
@@ -789,5 +788,5 @@ export const updateForeignBusinessProfilePage = ({ taxId, notes }: Partial<Forei
   }
 
   onProfilePage.clickSaveButton();
-  cy.url().should("contain", "/roadmap");
+  cy.url().should("contain", "/dashboard");
 };

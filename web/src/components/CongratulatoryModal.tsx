@@ -14,7 +14,7 @@ interface Props {
 
 export const CongratulatoryModal = (props: Props): ReactElement => {
   const router = useRouter();
-  const onClickComplete = () => router.push(ROUTES.roadmap);
+  const onClickComplete = () => router.push(ROUTES.dashboard);
 
   const publicName = props.nextSectionType ? Config.sectionHeaders[props.nextSectionType] : "";
   const hideLink = !props.nextSectionType || props.nextSectionType === "OPERATE";
@@ -53,7 +53,7 @@ export const CongratulatoryModal = (props: Props): ReactElement => {
             style={{ marginTop: "33px", marginBottom: "33px", width: "98px", height: "99px" }}
           />
           <div style={{ fontWeight: 700, fontSize: "26px", lineHeight: "30.55px" }}>
-            {Config.roadmapDefaults.congratulatorModalTitle}
+            {Config.dashboardDefaults.congratulatoryModalTitle}
           </div>
           <div
             style={{
@@ -64,11 +64,11 @@ export const CongratulatoryModal = (props: Props): ReactElement => {
               letterSpacing: "2.5%",
             }}
           >
-            {Config.roadmapDefaults.congratulatorModalHeader}
+            {Config.dashboardDefaults.congratulatoryModalHeader}
             <br />
             {!hideLink && (
               <>
-                {Config.roadmapDefaults.congratulatorModalBody}{" "}
+                {Config.dashboardDefaults.congratulatoryModalBody}{" "}
                 <span
                   role={"button"}
                   tabIndex={0}
@@ -83,7 +83,7 @@ export const CongratulatoryModal = (props: Props): ReactElement => {
                     cursor: "pointer",
                   }}
                 >
-                  {publicName} {Config.roadmapDefaults.congratulatorModalLinkText}
+                  {publicName} {Config.dashboardDefaults.congratulatoryModalLinkText}
                 </span>
               </>
             )}
