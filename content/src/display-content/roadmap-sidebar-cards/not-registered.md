@@ -3,7 +3,7 @@ id: not-registered
 header: ""
 hasCloseButton: false
 ctaText: ""
-weight: 2
+weight: 1
 imgPath: ""
 color: primary
 shadowColor: null
