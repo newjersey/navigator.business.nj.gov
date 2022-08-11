@@ -26,7 +26,7 @@ import * as ProfileTabNumbersPoppy from "@businessnjgovnavigator/content/fieldCo
 import * as ProfileOnboardingDakota from "@businessnjgovnavigator/content/fieldConfig/profile-onboarding-dakota.json";
 import * as ProfileOnboardingOscar from "@businessnjgovnavigator/content/fieldConfig/profile-onboarding-oscar.json";
 import * as ProfileOnboardingPoppy from "@businessnjgovnavigator/content/fieldConfig/profile-onboarding-poppy.json";
-
+import * as Tax from "@businessnjgovnavigator/content/fieldConfig/tax.json";
 import { merge } from "lodash";
 import { createContext } from "react";
 
@@ -60,7 +60,8 @@ const merged = JSON.parse(
       NexusNameSearch,
       NexusDbaFormation,
       NaicsCode,
-      Ein
+      Ein,
+      Tax
     )
   )
 );
@@ -92,7 +93,8 @@ export type ConfigType = typeof ConfigOriginal &
   typeof NexusNameSearch &
   typeof NexusDbaFormation &
   typeof NaicsCode &
-  typeof Ein;
+  typeof Ein &
+  typeof Tax;
 
 export const getMergedConfig = (): ConfigType => {
   return merge(
@@ -123,7 +125,8 @@ export const getMergedConfig = (): ConfigType => {
     NexusNameSearch,
     NexusDbaFormation,
     NaicsCode,
-    Ein
+    Ein,
+    Tax
   );
 };
 

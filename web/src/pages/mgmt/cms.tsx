@@ -18,6 +18,7 @@ import ProfilePreviewMisc from "@/lib/cms/previews/profile-misc";
 import ProfilePreviewOnboarding from "@/lib/cms/previews/profile-onboarding";
 import RoadmapSidebarCardPreview from "@/lib/cms/previews/roadmap-sidebar-card";
 import TaskPreview from "@/lib/cms/previews/task";
+import TaxInputPreview from "@/lib/cms/previews/tax-input";
 import { useMountEffect } from "@/lib/utils/helpers";
 import dynamic from "next/dynamic";
 
@@ -122,6 +123,11 @@ const CMS = dynamic(
       CMS.registerPreviewTemplate("ein-task-metadata", TaskPreview);
       // @ts-expect-error: No type definition available
       CMS.registerPreviewTemplate("ein-input-section", EinInputPreview);
+
+      // @ts-expect-error: No type definition available
+      CMS.registerPreviewTemplate("tax-task-metadata", TaskPreview);
+      // @ts-expect-error: No type definition available
+      CMS.registerPreviewTemplate("tax-input-section", TaxInputPreview);
 
       // ----- Cannabis License -----
       registerAsTask(CMS, ["applyForAnnualLicense-task", "applyForConditionalLicense-task"]);
