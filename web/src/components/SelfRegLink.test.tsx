@@ -3,7 +3,6 @@ import * as signinHelper from "@/lib/auth/signinHelper";
 import analytics from "@/lib/utils/analytics";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
-import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 function setupMockAnalytics(): typeof analytics {
@@ -33,7 +32,7 @@ describe("<SelfRegLink />", () => {
     useMockUserData({});
   });
 
-  const renderSelfRegLink = (href: string, initialUserData?: Partial<UserData>): void => {
+  const renderSelfRegLink = (href: string): void => {
     render(
       <SelfRegLink href={href}>
         {"link"}
