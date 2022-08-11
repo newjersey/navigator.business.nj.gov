@@ -51,7 +51,7 @@
     "isTransportation": false
   },
   "isEnabled": true,
-  "additionalSearchTerms": "store, reseller, outlet, shop, thrift store, consignment, boutique, sales, grocery store, food retail, flower shop, florist, custom frames, deli, convenience store, candy store, jewlery store, apparel retail, thrift store, gift shop, bike shop, bookstore, yarn shop, goods retail, accessories retail, ",
+  "additionalSearchTerms": "store, reseller, outlet, shop, thrift store, candle store, crafts/hobby store, clothing store, consignment, boutique, sales, grocery store, food retail, flower shop, florist, custom frames, deli, convenience store, candy store, jewlery store, apparel retail, thrift store, gift shop, bike shop, bookstore, yarn shop, goods retail, accessories retail, ",
   "id": "retail",
   "description": "Selling or reselling goods in a brick and mortar location outside of your home"
 }
