@@ -3,7 +3,7 @@ id: welcome
 header: Welcome!
 hasCloseButton: false
 ctaText: ""
-weight: 1
+weight: 3
 imgPath: /img/congratulations-purple.svg
 color: roadmap-purple
 shadowColor: roadmap-purple-light
