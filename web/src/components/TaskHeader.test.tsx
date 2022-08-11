@@ -609,7 +609,7 @@ describe("<TaskHeader />", () => {
       });
       renderTaskHeader(generateTask({ id }), generateUserData({ taskProgress, formationData }));
 
-      fireEvent.click(screen.getByTestId("COMPLETED"));
+      fireEvent.click(screen.getByTestId("COMPLETED_TAG"));
       expect(screen.queryByTestId("NOT_STARTED")).not.toBeInTheDocument();
       expect(screen.getByTestId("status-info-tooltip")).toBeInTheDocument();
     });

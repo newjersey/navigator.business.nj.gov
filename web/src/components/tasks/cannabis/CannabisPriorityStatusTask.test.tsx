@@ -138,7 +138,7 @@ describe("<CannabisPriorityStatusTask />", () => {
     fireEvent.click(screen.getByTestId("nextTabButton"));
 
     await waitFor(() => {
-      expect(within(screen.getByTestId("taskProgress")).getByTestId("IN_PROGRESS")).toBeInTheDocument();
+      expect(within(screen.getByTestId("taskProgress")).getByTestId("IN_PROGRESS_TAG")).toBeInTheDocument();
     });
     expect(screen.getByText(Config.taskDefaults.taskProgressSuccessSnackbarBody)).toBeInTheDocument();
   });
@@ -188,7 +188,7 @@ describe("<CannabisPriorityStatusTask />", () => {
 
     fireEvent.click(screen.getByTestId("completeTaskProgressButton"));
     await waitFor(() => {
-      expect(within(screen.getByTestId("taskProgress")).getByTestId("COMPLETED")).toBeInTheDocument();
+      expect(within(screen.getByTestId("taskProgress")).getByTestId("COMPLETED_TAG")).toBeInTheDocument();
     });
     expect(screen.getByText(Config.taskDefaults.taskProgressSuccessSnackbarBody)).toBeInTheDocument();
   });

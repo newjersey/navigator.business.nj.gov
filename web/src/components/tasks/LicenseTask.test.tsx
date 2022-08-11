@@ -45,7 +45,7 @@ describe("<LicenseTask />", () => {
     });
     renderTask();
 
-    fireEvent.click(screen.getByTestId("IN_PROGRESS"));
+    fireEvent.click(screen.getByTestId("IN_PROGRESS_TAG"));
     expect(screen.queryByTestId("NOT_STARTED")).not.toBeInTheDocument();
     expect(screen.getByTestId("status-info-tooltip")).toBeInTheDocument();
   });
