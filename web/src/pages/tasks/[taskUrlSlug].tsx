@@ -14,6 +14,7 @@ import { NaicsCodeTask } from "@/components/tasks/NaicsCodeTask";
 import { NexusFormationTask } from "@/components/tasks/NexusFormationTask";
 import { NexusSearchBusinessNameTask } from "@/components/tasks/search-business-name/NexusSearchBusinessNameTask";
 import { SearchBusinessNameTask } from "@/components/tasks/search-business-name/SearchBusinessNameTask";
+import { TaxTask } from "@/components/tasks/TaxTask";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
@@ -139,6 +140,7 @@ const TaskPage = (props: Props): ReactElement => {
             "conditional-permit-cannabis": <CannabisApplyForLicenseTask task={props.task} />,
             "annual-license-cannabis": <CannabisApplyForLicenseTask task={props.task} />,
             "register-for-ein": <EinTask task={props.task} />,
+            "register-for-taxes": <TaxTask task={getTaskFromRoadmap(roadmap, props.task.id) ?? props.task} />,
             [formationTaskId]: renderFormationTask(),
             default: getTaskBody(),
           })}
