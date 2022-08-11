@@ -62,7 +62,7 @@ export const SignUpModal = (): ReactElement => {
             className="width-100"
             onClick={() => {
               analytics.event.guest_modal.click.go_to_myNJ_registration();
-              onSelfRegister(router.replace, userData, update, setRegistrationAlertStatus);
+              onSelfRegister(router, userData, update, setRegistrationAlertStatus);
             }}
           >
             {Config.navigationDefaults.guestModalButtonText}

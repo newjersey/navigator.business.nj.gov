@@ -130,7 +130,7 @@ export const NavBarDesktop = (): ReactElement => {
                       style="tertiary"
                       onClick={() => {
                         analytics.event.guest_menu.click.go_to_myNJ_registration();
-                        onSelfRegister(router.replace, userData, update, setRegistrationAlertStatus);
+                        onSelfRegister(router, userData, update, setRegistrationAlertStatus);
                       }}
                     >
                       {Config.navigationDefaults.navBarGuestRegistrationText}

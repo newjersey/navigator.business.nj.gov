@@ -32,8 +32,13 @@ export const onSignIn = async (
   setABExperienceDimension(userData.user.abExperience);
 };
 
+export type SelfRegRouter = {
+  replace: (url: string) => Promise<boolean>;
+  asPath: string | undefined;
+};
+
 export const onSelfRegister = (
-  replace: (url: string) => Promise<boolean>,
+  router: SelfRegRouter,
   userData: UserData | undefined,
   update: UseUserDataResponse["update"],
   setRegistrationAlertStatus: AuthAlertContextType["setRegistrationAlertStatus"]
@@ -41,10 +46,13 @@ export const onSelfRegister = (
   if (!userData) return;
   setRegistrationAlertStatus("IN_PROGRESS");
   api
-    .postSelfReg(userData)
+    .postSelfReg({
+      ...userData,
+      preferences: { ...userData.preferences, returnToLink: router.asPath || "" },
+    })
     .then(async (response) => {
       await update(response.userData);
-      await replace(response.authRedirectURL);
+      await router.replace(response.authRedirectURL);
     })
     .catch((error) => {
       if (error === 409) {
