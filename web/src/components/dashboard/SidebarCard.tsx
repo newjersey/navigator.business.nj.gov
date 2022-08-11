@@ -177,7 +177,9 @@ export const SidebarCard = (props: Props) => {
                     alt=""
                   />
                 )}
-                <span>{getHeader()}</span>
+                <span className={props.card.imgPath ? "margin-top-2px padding-top-1px" : ""}>
+                  {getHeader()}
+                </span>
               </h3>
               {props.card.hasCloseButton && (
                 <Button style="tertiary" onClick={closeSelf} ariaLabel="Close">
