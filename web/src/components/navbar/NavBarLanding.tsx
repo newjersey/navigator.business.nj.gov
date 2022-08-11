@@ -12,9 +12,11 @@ export const NavBarLanding = (): ReactElement => {
   return (
     <nav
       aria-label="Primary"
-      className={"grid-container-widescreen desktop:padding-x-7 height-8 flex flex-justify flex-align-center"}
+      className={
+        "grid-container-widescreen desktop:padding-x-7 height-8 flex flex-justify flex-align-center flex-wrap"
+      }
     >
-      <img className="height-4" src="/img/Navigator-logo@2x.png" alt="Business.NJ.Gov Navigator" />
+      <img className="height-4 margin-y-2" src="/img/Navigator-logo@2x.png" alt="Business.NJ.Gov Navigator" />
       <div>
         <span className="margin-right-2">
           <AuthButton position="NAVBAR" landing />
