@@ -14,7 +14,7 @@ import { useRouter } from "next/router";
 import { ReactElement, useEffect, useReducer } from "react";
 
 const LoadingPage = (): ReactElement => {
-  const { userData } = useUserData();
+  const { userData, update } = useUserData();
   const router = useRouter();
   const [, dispatch] = useReducer<AuthReducer>(authReducer, initialState);
 
@@ -33,6 +33,11 @@ const LoadingPage = (): ReactElement => {
     if (!userData) return;
     if (!onboardingCompleted(userData)) {
       router.push(ROUTES.onboarding);
+    } else if (userData.preferences.returnToLink) {
+      const pageLink = userData.preferences.returnToLink;
+      update({ ...userData, preferences: { ...userData.preferences, returnToLink: "" } }).then(() => {
+        router.push(pageLink);
+      });
     } else {
       router.push(routeForPersona(userData.profileData.businessPersona));
     }

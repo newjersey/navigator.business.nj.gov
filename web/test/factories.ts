@@ -209,6 +209,7 @@ export const generatePreferences = (overrides: Partial<Preferences>): Preference
     hiddenFundingIds: [],
     hiddenCertificationIds: [],
     visibleSidebarCards: ["welcome"],
+    returnToLink: "",
     ...overrides,
   };
 };

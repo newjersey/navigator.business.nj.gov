@@ -75,6 +75,7 @@ import { migrate_v74_to_v75 } from "./v75_fix_trade_name_operating_phase";
 import { migrate_v75_to_v76 } from "./v76_fix_trade_name_operating_phase_round_2";
 import { migrate_v76_to_v77 } from "./v77_remove_graduation_card";
 import { migrate_v77_to_v78 } from "./v78_remove_initial_business_persona";
+import { migrate_v78_to_v79 } from "./v79_add_return_to_link";
 import { migrate_v6_to_v7 } from "./v7_add_license_data";
 import { migrate_v7_to_v8 } from "./v8_remove_bcorp";
 import { migrate_v8_to_v9 } from "./v9_add_license_status_to_data";
@@ -160,6 +161,7 @@ export const Migrations: MigrationFunction[] = [
   migrate_v75_to_v76,
   migrate_v76_to_v77,
   migrate_v77_to_v78,
+  migrate_v78_to_v79,
 ];
 
 export const CURRENT_VERSION = Migrations.length;

@@ -1,7 +1,9 @@
 import * as api from "@/lib/api-client/apiClient";
-import { onGuestSignIn, onSignIn, onSignOut } from "@/lib/auth/signinHelper";
+import { onGuestSignIn, onSelfRegister, onSignIn, onSignOut, SelfRegRouter } from "@/lib/auth/signinHelper";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { generateUser, generateUserData } from "@/test/factories";
+import { UserData } from "@businessnjgovnavigator/shared/userData";
+import { waitFor } from "@testing-library/react";
 import * as session from "./sessionHelper";
 
 const userDataStorage = {
@@ -23,6 +25,7 @@ const mockSession = session as jest.Mocked<typeof session>;
 jest.mock("@/lib/api-client/apiClient", () => ({
   getUserData: jest.fn(),
   postUserData: jest.fn(),
+  postSelfReg: jest.fn(),
 }));
 const mockApi = api as jest.Mocked<typeof api>;
 
@@ -31,6 +34,7 @@ describe("SigninHelper", () => {
   let mockDispatch: jest.Mock;
 
   beforeEach(() => {
+    jest.resetAllMocks();
     mockPush = jest.fn();
     mockDispatch = jest.fn();
   });
@@ -47,6 +51,62 @@ describe("SigninHelper", () => {
         type: "LOGIN",
         user: user,
       });
+    });
+  });
+
+  describe("onSelfRegister", () => {
+    let userData: UserData;
+    let update: jest.Mock;
+    let mockSetAlertStatus: jest.Mock;
+    let fakeRouter: SelfRegRouter;
+
+    beforeEach(() => {
+      userData = generateUserData({});
+      update = jest.fn();
+      mockSetAlertStatus = jest.fn();
+      fakeRouter = { replace: mockPush, asPath: "/tasks/some-url" };
+    });
+
+    it("sets registration alert to IN_PROGRESS", async () => {
+      mockApi.postSelfReg.mockResolvedValue({ userData: userData, authRedirectURL: "" });
+      await onSelfRegister(fakeRouter, userData, update, mockSetAlertStatus);
+      expect(mockSetAlertStatus).toHaveBeenCalledWith("IN_PROGRESS");
+    });
+
+    it("posts userData to api self-reg with current pathname included", async () => {
+      mockApi.postSelfReg.mockResolvedValue({ userData: userData, authRedirectURL: "" });
+      await onSelfRegister(fakeRouter, userData, update, mockSetAlertStatus);
+      expect(mockApi.postSelfReg).toHaveBeenCalledWith({
+        ...userData,
+        preferences: { ...userData.preferences, returnToLink: "/tasks/some-url" },
+      });
+    });
+
+    it("updates userData and redirects to authRedirect on success", async () => {
+      const returnedUserData = generateUserData({});
+      mockApi.postSelfReg.mockResolvedValue({
+        userData: returnedUserData,
+        authRedirectURL: "/some-url",
+      });
+      await onSelfRegister(fakeRouter, userData, update, mockSetAlertStatus);
+      await waitFor(() => expect(mockPush).toHaveBeenCalledWith("/some-url"));
+      expect(update).toHaveBeenCalledWith(returnedUserData);
+    });
+
+    it("sets alert to DUPLICATE_ERROR on 409 response code", async () => {
+      mockApi.postSelfReg.mockRejectedValue(409);
+      await onSelfRegister(fakeRouter, userData, update, mockSetAlertStatus);
+      await waitFor(() => expect(mockSetAlertStatus).toHaveBeenCalledWith("DUPLICATE_ERROR"));
+      expect(update).not.toHaveBeenCalled();
+      expect(mockPush).not.toHaveBeenCalled();
+    });
+
+    it("sets alert to RESPONSE_ERROR on generic error", async () => {
+      mockApi.postSelfReg.mockRejectedValue(500);
+      await onSelfRegister(fakeRouter, userData, update, mockSetAlertStatus);
+      await waitFor(() => expect(mockSetAlertStatus).toHaveBeenCalledWith("RESPONSE_ERROR"));
+      expect(update).not.toHaveBeenCalled();
+      expect(mockPush).not.toHaveBeenCalled();
     });
   });
 

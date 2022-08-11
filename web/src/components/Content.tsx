@@ -3,14 +3,11 @@
 import { ContextualInfoLink } from "@/components/ContextualInfoLink";
 import { Icon } from "@/components/njwds/Icon";
 import { PureMarkdownContent } from "@/components/PureMarkdownContent";
+import { SelfRegLink } from "@/components/SelfRegLink";
 import { TaskCheckbox } from "@/components/tasks/TaskCheckbox";
-import { AuthAlertContext } from "@/contexts/authAlertContext";
-import { onSelfRegister } from "@/lib/auth/signinHelper";
-import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 import { FormControlLabel } from "@mui/material";
-import { useRouter } from "next/router";
-import { CSSProperties, ReactElement, useContext } from "react";
+import { CSSProperties, ReactElement } from "react";
 
 interface ContentProps {
   children: string;
@@ -52,10 +49,6 @@ export const Content = (props: ContentProps): ReactElement => {
 };
 
 const Link = (onClick?: () => void) => {
-  const router = useRouter();
-  const { userData, update } = useUserData();
-  const { setRegistrationAlertStatus } = useContext(AuthAlertContext);
-
   return Object.assign(
     (props: any): ReactElement => {
       if (/^https?:\/\/(.*)/.test(props.href)) {
@@ -65,18 +58,7 @@ const Link = (onClick?: () => void) => {
           </ExternalLink>
         );
       } else if (props.href.startsWith("/self-register")) {
-        return (
-          // eslint-disable-next-line jsx-a11y/anchor-is-valid
-          <a
-            href="#"
-            onClick={() => {
-              parseAndSendAnalyticsEvent(props.href);
-              onSelfRegister(router.replace, userData, update, setRegistrationAlertStatus);
-            }}
-          >
-            {props.children[0]}
-          </a>
-        );
+        return <SelfRegLink href={props.href}>{props.children}</SelfRegLink>;
       }
       return (
         <a href={props.href} onClick={onClick}>
@@ -156,23 +138,4 @@ const ListOrCheckbox = (props: any): ReactElement => {
     );
   }
   return <li>{props.children ?? ""}</li>;
-};
-
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-const parseAndSendAnalyticsEvent = (href: string): void => {
-  const urlParts = href.split("/self-register");
-  if (urlParts.length === 2) {
-    const secondHalfOfUrl = urlParts[1].slice(1);
-    const possibleAnalyticsEvents = Object.keys(analytics.event);
-
-    // @ts-ignore
-    if (
-      possibleAnalyticsEvents.includes(secondHalfOfUrl) && // @ts-ignore
-      Object.keys(analytics.event[secondHalfOfUrl]).includes("click") && // @ts-ignore
-      Object.keys(analytics.event[secondHalfOfUrl].click).includes("go_to_myNJ_registration")
-    ) {
-      // @ts-ignore
-      analytics.event[secondHalfOfUrl].click.go_to_myNJ_registration();
-    }
-  }
 };
