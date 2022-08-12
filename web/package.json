@@ -41,7 +41,7 @@
     "@aws-amplify/core": "4.6.1",
     "@aws-crypto/sha256-browser": "2.0.1",
     "@aws-sdk/protocol-http": "3.127.0",
-    "@aws-sdk/s3-request-presigner": "3.142.0",
+    "@aws-sdk/s3-request-presigner": "3.145.0",
     "@aws-sdk/url-parser": "3.127.0",
     "@aws-sdk/util-format-url": "3.127.0",
     "@businessnjgovnavigator/shared": "*",
