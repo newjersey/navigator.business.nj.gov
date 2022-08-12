@@ -1383,6 +1383,8 @@ collections:
               - { label: Sector Modal Body, name: sectorModalBody, widget: text }
               - { label: Sector Modal Cancel Button, name: sectorModalCancelButton, widget: text }
               - { label: Sector Modal Save Button, name: sectorModalSaveButton, widget: text }
+              - { label: Calendar List View Button, name: calendarListViewButton, widget: text }
+              - { label: Calendar Grid View Button, name: calendarGridViewButton, widget: text }
           - label: Feedback Modal
             name: feedbackModal
             collapsed: true
