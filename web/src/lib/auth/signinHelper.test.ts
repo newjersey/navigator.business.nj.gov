@@ -34,7 +34,7 @@ describe("SigninHelper", () => {
   let mockDispatch: jest.Mock;
 
   beforeEach(() => {
-    jest.resetAllMocks();
+    jest.restoreAllMocks();
     mockPush = jest.fn();
     mockDispatch = jest.fn();
   });
