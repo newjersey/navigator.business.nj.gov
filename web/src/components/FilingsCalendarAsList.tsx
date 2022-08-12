@@ -53,7 +53,7 @@ export const FilingsCalendarAsList = (props: Props): ReactElement => {
                   className="font-body-2xs padding-y-05 padding-x-1"
                   onClick={props.onToggle}
                 >
-                  <Icon className="usa-icon--size-3 margin-right-05">menu</Icon>
+                  <Icon className="usa-icon--size-3 margin-right-05">grid_view</Icon>
                   {Config.dashboardDefaults.calendarGridViewButton}
                 </Button>
               )}
