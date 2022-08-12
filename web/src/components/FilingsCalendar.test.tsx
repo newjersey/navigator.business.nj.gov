@@ -97,7 +97,7 @@ describe("<FilingsCalendar />", () => {
         urlPath: "annual_report-url-path",
       },
     };
-    console.log(`Annual Report ${parseDateWithFormat(annualReport.dueDate, "YYYY-MM-DD").format("YYYY")}`);
+
     render(
       <ThemeProvider theme={createTheme()}>
         <FilingsCalendar operateReferences={operateReferences} />
