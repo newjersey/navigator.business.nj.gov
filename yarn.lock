@@ -3693,10 +3693,10 @@ __metadata:
     "@storybook/theming": 6.5.10
     "@swc/core": 1.2.224
     "@swc/jest": 0.2.22
-    "@testing-library/dom": 8.16.1
+    "@testing-library/dom": 8.17.1
     "@testing-library/jest-dom": 5.16.5
     "@testing-library/react": 13.3.0
-    "@testing-library/user-event": 14.4.2
+    "@testing-library/user-event": 14.4.3
     "@types/broken-link-checker": 0.7.1
     "@types/cors": 2.8.12
     "@types/cypress-dotenv": 2.0.0
@@ -3896,10 +3896,10 @@ __metadata:
     "@storybook/theming": 6.5.10
     "@swc/core": 1.2.224
     "@swc/jest": 0.2.22
-    "@testing-library/dom": 8.16.1
+    "@testing-library/dom": 8.17.1
     "@testing-library/jest-dom": 5.16.5
     "@testing-library/react": 13.3.0
-    "@testing-library/user-event": 14.4.2
+    "@testing-library/user-event": 14.4.3
     "@types/broken-link-checker": 0.7.1
     "@types/cypress-dotenv": 2.0.0
     "@types/jest": 28.1.6
@@ -8709,9 +8709,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/dom@npm:8.16.1, @testing-library/dom@npm:^8.11.1, @testing-library/dom@npm:^8.5.0":
-  version: 8.16.1
-  resolution: "@testing-library/dom@npm:8.16.1"
+"@testing-library/dom@npm:8.17.1, @testing-library/dom@npm:^8.11.1, @testing-library/dom@npm:^8.5.0":
+  version: 8.17.1
+  resolution: "@testing-library/dom@npm:8.17.1"
   dependencies:
     "@babel/code-frame": ^7.10.4
     "@babel/runtime": ^7.12.5
@@ -8721,7 +8721,7 @@ __metadata:
     dom-accessibility-api: ^0.5.9
     lz-string: ^1.4.4
     pretty-format: ^27.0.2
-  checksum: eca86b69f28cdab7226209075b3ca54f87fc0fc92a41440bbfa41e14ed0815aac4a63b1d9a08230e0dbd0de3a54c61cd90a3a423695e6840124e2473c8149e99
+  checksum: e4df091fcf84c9eac4a6ee4c76674c1d562bf98732f0ac8820972d7718ab10397b672b9f082aace3cacd1f610fc77de6e1b6094e67afe1df0443bf22eb9deab2
   languageName: node
   linkType: hard
 
@@ -8756,12 +8756,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/user-event@npm:14.4.2":
-  version: 14.4.2
-  resolution: "@testing-library/user-event@npm:14.4.2"
+"@testing-library/user-event@npm:14.4.3":
+  version: 14.4.3
+  resolution: "@testing-library/user-event@npm:14.4.3"
   peerDependencies:
     "@testing-library/dom": ">=7.21.4"
-  checksum: 66364f2c503ddc01f5fdf98507aecf40b4edf0b9c140332aaf0161b1d7d52dea8a5d93baee927ae955bd7d6d58be0c12367a2cff924bdb4232746f0e614f9e03
+  checksum: 852c48ea6db1c9471b18276617c84fec4320771e466cd58339a732ca3fd73ad35e5a43ae14f51af51a8d0a150dcf60fcaab049ef367871207bea8f92c4b8195e
   languageName: node
   linkType: hard
 
