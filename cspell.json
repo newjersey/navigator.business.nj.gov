@@ -89,7 +89,8 @@
     "USDoT",
     "MC",
     "IRP",
-    "cpcn"
+    "cpcn",
+    "Gov2Go"
   ],
   "ignorePaths": ["node_modules/**", "out/**", "web/out/**", "package.json"]
 }
