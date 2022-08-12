@@ -11,6 +11,7 @@ interface Props {
     | "secondary-input-field-height"
     | "primary-input-field-height"
     | "narrow-light"
+    | "light"
     | "narrow-accent-cool-lightest"
     | "accent-cool-darker-big"
     | "accent-cooler"
@@ -78,6 +79,10 @@ export const Button = (props: Props): ReactElement => {
     case "narrow-light":
       style =
         "usa-button usa-tag bg-transparent text-normal text-base border-1px border-base-light hide-unhide-button";
+      break;
+    case "light":
+      style =
+        "usa-button bg-transparent text-normal text-base border-1px border-base-light hide-unhide-button";
       break;
     case "narrow-accent-cool-lightest":
       style = "usa-button btn-accent-cool-lightest padding-y-1 text-normal ";

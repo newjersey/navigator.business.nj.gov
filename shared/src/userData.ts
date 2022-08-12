@@ -31,6 +31,7 @@ export const createEmptyUserData = (user: BusinessUser): UserData => {
       hiddenFundingIds: [],
       visibleSidebarCards: ["welcome"],
       returnToLink: "",
+      isCalendarFullView: true,
     },
     taxFilingData: {
       filings: [],
@@ -52,6 +53,7 @@ export interface Preferences {
   hiddenCertificationIds: string[];
   visibleSidebarCards: string[];
   returnToLink: string;
+  isCalendarFullView: boolean;
 }
 
 export type FormProgress = "UNSTARTED" | "COMPLETED";
