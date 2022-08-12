@@ -32,7 +32,6 @@ export const loadFundingByFileName = (fileName) => {
 
 const exportFundings = () => {
   const fundings = loadAllFundings();
-  ///  console.log(fundings);
   const writeStream = fs.createWriteStream("fundings.csv");
   writeStream.write(
     `id,name,filename,urlSlug,callToActionLink,callToActionText,fundingType,programPurpose,agency,agencyContact,publishStageArchive,openDate,dueDate,status,programFrequency,businessStage,employeesRequired,homeBased,mwvb,preferenceForOpportunityZone,county,sector,contentMd\n`
