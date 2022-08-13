@@ -3789,7 +3789,7 @@ __metadata:
     remove-markdown: 0.5.0
     require-from-string: 2.0.2
     rimraf: 3.0.2
-    sass: 1.54.3
+    sass: 1.54.4
     sass-loader: 13.0.2
     semantic-release: 19.0.3
     serverless: 3.21.0
@@ -3969,7 +3969,7 @@ __metadata:
     remove-markdown: 0.5.0
     require-from-string: 2.0.2
     rimraf: 3.0.2
-    sass: 1.54.3
+    sass: 1.54.4
     sass-loader: 13.0.2
     storybook-addon-pseudo-states: 1.15.1
     style-loader: 3.3.1
@@ -29602,16 +29602,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass@npm:1.54.3":
-  version: 1.54.3
-  resolution: "sass@npm:1.54.3"
+"sass@npm:1.54.4":
+  version: 1.54.4
+  resolution: "sass@npm:1.54.4"
   dependencies:
     chokidar: ">=3.0.0 <4.0.0"
     immutable: ^4.0.0
     source-map-js: ">=0.6.2 <2.0.0"
   bin:
     sass: sass.js
-  checksum: 9b405f602c0dcdad85e7f216cfa5ca9dfe3f7ded7b3928817cfe8dbfde0cd27b70f4cff724e229b233b3f51a06e71d3fcbbd7d3a0ff92b3e40ac57bc05b90b48
+  checksum: bb6aead09764de450a02b9a66e4ee538f0ba6bc8f2fc3905c71b2c302b5f47e089b510b86cfa7ef2d4139c210c8abf99fe157e7a5bd356c057f10d29e6c4b44c
   languageName: node
   linkType: hard
 
