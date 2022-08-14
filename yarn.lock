@@ -3601,8 +3601,8 @@ __metadata:
     rimraf: 3.0.2
     serverless: 3.21.0
     serverless-dynamodb-local: 0.2.40
-    serverless-http: 3.0.1
-    serverless-offline: 9.1.7
+    serverless-http: 3.0.2
+    serverless-offline: 9.2.0
     serverless-offline-ssm: 6.2.0
     serverless-webpack: 5.8.0
     simple-oauth2: 4.3.0
@@ -3794,8 +3794,8 @@ __metadata:
     semantic-release: 19.0.3
     serverless: 3.21.0
     serverless-dynamodb-local: 0.2.40
-    serverless-http: 3.0.1
-    serverless-offline: 9.1.7
+    serverless-http: 3.0.2
+    serverless-offline: 9.2.0
     serverless-offline-ssm: 6.2.0
     serverless-webpack: 5.8.0
     simple-oauth2: 4.3.0
@@ -29944,10 +29944,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"serverless-http@npm:3.0.1":
-  version: 3.0.1
-  resolution: "serverless-http@npm:3.0.1"
-  checksum: 2f35619e9effa430c9e90c5b636cfe662d2f47bf70628ad1b12845d784a9e4c706c139224175bca3b4fd0a13297ee81da5ce3e7d35f0654136497453e18c0c35
+"serverless-http@npm:3.0.2":
+  version: 3.0.2
+  resolution: "serverless-http@npm:3.0.2"
+  checksum: f6f281582d1febfdce28b780f9a95f1333efa67e0d253efafd5ec909338ee9d8db877502b2e2847031b577e0ff11cf94b1b0e836820926f7bf7ab5514eba2c70
   languageName: node
   linkType: hard
 
@@ -29958,9 +29958,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"serverless-offline@npm:9.1.7":
-  version: 9.1.7
-  resolution: "serverless-offline@npm:9.1.7"
+"serverless-offline@npm:9.2.0":
+  version: 9.2.0
+  resolution: "serverless-offline@npm:9.2.0"
   dependencies:
     "@hapi/boom": ^10.0.0
     "@hapi/h2o2": ^9.1.0
@@ -29987,7 +29987,7 @@ __metadata:
     ws: ^8.8.1
   peerDependencies:
     serverless: ^3.2.0
-  checksum: 59197def180be2ff409cd2747c304e4a026e317272ecb0edef2fdf0734492616f7174fd372c777cce5a8d264e03fca21cf71d8cdddebdd87e25558dc929b88df
+  checksum: 32280c41f7f37e1b24527320758ed97fd6e452124027b07e6a1f8c22a992326e274a6258900b157dbe31a53056ea99ca8c767a157edfabdfd043c049fcfcf824
   languageName: node
   linkType: hard
 
