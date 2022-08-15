@@ -1,0 +1,61 @@
+{
+  "defaultSectorId": "other-services",
+  "canHavePermanentLocation": true,
+  "roadmapSteps": [
+    {
+      "step": 1,
+      "weight": 1,
+      "task": "business-plan"
+    },
+    {
+      "step": 1,
+      "weight": 30,
+      "task": "determine-naics-code"
+    },
+    {
+      "step": 2,
+      "weight": 20,
+      "task": "register-for-ein"
+    },
+    {
+      "step": 2,
+      "weight": 25,
+      "task": "register-for-taxes"
+    },
+    {
+      "step": 3,
+      "weight": 10,
+      "task": "bank-account"
+    },
+    {
+      "step": 3,
+      "weight": 15,
+      "task": "taxi-insurance"
+    },
+    {
+      "step": 3,
+      "weight": 20,
+      "task": "taxi-authorization-local"
+    },
+    {
+      "step": 3,
+      "weight": 25,
+      "task": "taxi-driver-certification"
+    }
+  ],
+  "name": "Car Service",
+  "industryOnboardingQuestions": {
+    "canBeHomeBased": true,
+    "isProvidesStaffingServicesApplicable": false,
+    "isCertifiedInteriorDesignerApplicable": false,
+    "isRealEstateAppraisalManagementApplicable": false,
+    "canBeReseller": false,
+    "isLiquorLicenseApplicable": false,
+    "isCpaRequiredApplicable": false,
+    "isTransportation": true
+  },
+  "isEnabled": false,
+  "additionalSearchTerms": "taxi, limo, bus, shuttle, transport van, car service",
+  "id": "car service",
+  "description": "Offers transportation services for people"
+}
