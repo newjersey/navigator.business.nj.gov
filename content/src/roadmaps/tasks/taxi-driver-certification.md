@@ -1,7 +1,7 @@
 ---
 urlSlug: taxi-driver-certification
 filename: taxi-driver-certification
-name: Submit a Certification Application for Your Drivers
+name: Apply to Certify Your Drivers
 id: taxi-driver-certification
 callToActionLink: https://www.state.nj.us/mvc/pdf/business/CDL-5.pdf
 callToActionText: Apply to Certify My Drivers
