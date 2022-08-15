@@ -130,7 +130,7 @@
     "cypress": "10.4.0",
     "cypress-dotenv": "2.0.0",
     "cypress-wait-until": "1.7.2",
-    "dayjs": "1.11.4",
+    "dayjs": "1.11.5",
     "dependency-cruiser": "11.14.1",
     "dotenv": "16.0.1",
     "eslint": "8.20.0",
