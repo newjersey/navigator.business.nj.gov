@@ -49,8 +49,8 @@
     },
     {
       "step": 4,
-      "weight": 30,
-      "task": "trucking-usdot"
+      "weight": 10,
+      "task": "transportation-assessment-usdot"
     }
   ],
   "name": "Transportation",
@@ -65,7 +65,7 @@
     "isTransportation": true
   },
   "isEnabled": false,
-  "additionalSearchTerms": "bus, shuttle, transport van",
+  "additionalSearchTerms": "bus, shuttle, transport van, car service",
   "id": "transportation",
   "description": "Offers transportation services for people"
 }
