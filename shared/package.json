@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "@businessnjgovnavigator/content": "*",
-    "dayjs": "1.11.4",
+    "dayjs": "1.11.5",
     "uuid": "8.3.2"
   },
   "devDependencies": {
