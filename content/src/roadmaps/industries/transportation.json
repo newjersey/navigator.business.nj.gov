@@ -65,7 +65,7 @@
     "isTransportation": true
   },
   "isEnabled": false,
-  "additionalSearchTerms": "bus, shuttle, transport van, car service",
+  "additionalSearchTerms": "taxi, limo, bus, shuttle, transport van, car service",
   "id": "transportation",
-  "description": "Offers transportation services for people"
+  "description": "Offers transportation services for people in vehicles larger than a car"
 }
