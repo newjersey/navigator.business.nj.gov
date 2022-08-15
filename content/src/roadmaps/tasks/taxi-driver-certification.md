@@ -8,9 +8,9 @@ callToActionText: Apply to Certify My Drivers
 required: true
 issuingAgency: New Jersey Motor Vehicle Commission
 ---
-All drivers need to have a letter of certification from New Jersey Motor Vehicle Commission. It’s the employer’s responsibility to file an application for a driver's certification. The driver cannot legally drive company vehicles until the approval letter has been received.
+All drivers need to have a letter of certification before they can legally operate company vehicles. It’s the employer’s responsibility to file an application for a driver's certification if the driver doesn't already have one. 
  
-**Note:** The only drivers exempt from this requirement are those holding a Commercial Driver’s License with a Passenger endorsement.
+**Note:** Only drivers holding a Commercial Driver’s License with a Passenger endorsement are exempt form this requirement.
  
 ---
 ### Eligibility Requirements
@@ -30,5 +30,5 @@ All drivers need to have a letter of certification from New Jersey Motor Vehicle
 >- A letter of qualification or disqualification for the driver.  
 > **Note:** The letter will only be mailed to the employer. The process takes about 2 weeks after the application is processed.
  
->**What happens if don’t apply for my driver’s certification?**  
+>**What if don’t complete this task?**  
 >- You, as the employer, can be fined up to $500 for each uncertified driver operating your vehicles
