@@ -3,6 +3,7 @@ urlSlug: taxi-authorization-local
 filename: taxi-authorization-local
 name: Get Authorization from Your Local Government
 id: taxi-authorization-local
+required: true
 ---
 Before you can legally operate your car service, you need authorization from the local government where your business is located and any other local government where you plan to pick up passengers (you are allowed to drop off passengers anywhere, but need authorization to pick them up).
 
