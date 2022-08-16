@@ -10,7 +10,7 @@ function setupMockAnalytics(): typeof analytics {
     ...jest.requireActual("@/lib/utils/analytics").default,
     event: {
       ...jest.requireActual("@/lib/utils/analytics").default.event,
-      guest_toast: { click: { go_to_myNJ_registration: jest.fn() } },
+      guest_snackbar: { click: { go_to_myNJ_registration: jest.fn() } },
       no_click_key: {},
       no_mynj_key: { click: {} },
     },
@@ -42,10 +42,10 @@ describe("<SelfRegLink />", () => {
   };
 
   it("calls custom analytics event when provided as second half of /self-register", async () => {
-    renderSelfRegLink("/self-register/guest_toast");
+    renderSelfRegLink("/self-register/guest_snackbar");
     fireEvent.click(screen.getByText("link"));
     await waitFor(() => expect(mockSigninHelper.onSelfRegister).toHaveBeenCalled());
-    expect(mockAnalytics.event.guest_toast.click.go_to_myNJ_registration).toHaveBeenCalled();
+    expect(mockAnalytics.event.guest_snackbar.click.go_to_myNJ_registration).toHaveBeenCalled();
   });
 
   it("does not blow up if second half of url is not an analytics key", async () => {
