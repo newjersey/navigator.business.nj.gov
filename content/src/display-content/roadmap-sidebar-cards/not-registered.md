@@ -6,7 +6,7 @@ ctaText: ""
 weight: 1
 imgPath: ""
 color: primary
-shadowColor: null
+headerBackgroundColor: null
 borderColor: primary-light
 ---
 

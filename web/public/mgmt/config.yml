@@ -3027,8 +3027,8 @@ collections:
           options: ["primary", "accent-cool-darker", "roadmap-purple"],
         }
       - {
-          label: "Shadow Color",
-          name: "shadowColor",
+          label: "Header Background Color",
+          name: "headerBackgroundColor",
           widget: "select",
           required: false,
           options: ["roadmap-purple-light", "primary-light", "roadmap-blue-light"],

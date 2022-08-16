@@ -6,7 +6,7 @@ ctaText: ""
 weight: 3
 imgPath: /img/congratulations-purple.svg
 color: roadmap-purple
-shadowColor: roadmap-purple-light
+headerBackgroundColor: roadmap-purple-light
 borderColor: roadmap-purple
 ---
 
