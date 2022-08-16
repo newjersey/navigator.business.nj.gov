@@ -7,7 +7,7 @@ weight: 2
 imgPath: ""
 ctaText: ""
 color: accent-cool-darker
-shadowColor: white
+headerBackgroundColor: white
 borderColor: accent-cool
 ---
 

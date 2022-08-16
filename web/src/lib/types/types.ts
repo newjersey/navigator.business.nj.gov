@@ -404,7 +404,7 @@ export type SidebarCardContent = {
   imgPath: string;
   ctaText: string;
   color: string;
-  shadowColor: string;
+  headerBackgroundColor: string;
   borderColor: string;
   hasCloseButton: boolean;
   weight: number;

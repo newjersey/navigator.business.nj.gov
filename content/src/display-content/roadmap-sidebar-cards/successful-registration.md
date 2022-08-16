@@ -4,7 +4,7 @@ header: You’re Registered!
 imgPath: /img/check-mark-circular-blue.svg
 ctaText: ""
 color: accent-cool-darker
-shadowColor: roadmap-blue-light
+headerBackgroundColor: roadmap-blue-light
 borderColor: accent-cool-darker
 hasCloseButton: true
 weight: 1
