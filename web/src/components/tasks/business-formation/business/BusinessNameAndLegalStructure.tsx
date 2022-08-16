@@ -125,11 +125,12 @@ export const BusinessNameAndLegalStructure = ({ reviewPage = false }: Props): Re
         isOpen={legalStructureWarningIsOpen}
         close={() => setLegalStructureWarningIsOpen(false)}
         title={Config.businessFormationDefaults.legalStructureWarningModalHeader}
-        bodyText={Config.businessFormationDefaults.legalStructureWarningModalBody}
         primaryButtonText={Config.businessFormationDefaults.legalStructureWarningModalContinueButtonText}
         primaryButtonOnClick={editLegalStructure}
         secondaryButtonText={Config.businessFormationDefaults.legalStructureWarningModalCancelButtonText}
-      />
+      >
+        <Content>{Config.businessFormationDefaults.legalStructureWarningModalBody}</Content>
+      </ModalTwoButton>
     </>
   );
 };
