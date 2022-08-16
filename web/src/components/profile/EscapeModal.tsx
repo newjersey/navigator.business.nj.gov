@@ -1,3 +1,4 @@
+import { Content } from "@/components/Content";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ReactElement } from "react";
@@ -15,10 +16,11 @@ export const EscapeModal = (props: Props): ReactElement => {
       isOpen={props.isOpen}
       close={props.close}
       title={Config.profileDefaults.escapeModalHeader}
-      bodyText={Config.profileDefaults.escapeModalBody}
       primaryButtonText={Config.profileDefaults.escapeModalReturn}
       primaryButtonOnClick={props.primaryButtonOnClick}
       secondaryButtonText={Config.profileDefaults.escapeModalEscape}
-    />
+    >
+      <Content>{Config.profileDefaults.escapeModalBody}</Content>
+    </ModalTwoButton>
   );
 };

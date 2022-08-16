@@ -1,6 +1,7 @@
 import { Content } from "@/components/Content";
 import { GenericTextField } from "@/components/GenericTextField";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
+import { Alert } from "@/components/njwds-extended/Alert";
 import * as api from "@/lib/api-client/apiClient";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -102,81 +103,69 @@ export const ReportIssueModal = ({ onClose, isOpen, setCurrentFeedback }: Props)
         primaryButtonText={Config.feedbackModal.feedbackSubmitButtonText}
         primaryButtonOnClick={handleReportIssueSubmission}
         secondaryButtonText={Config.feedbackModal.feedbackCancelButtonText}
-        showAlert={displayAlert}
-        alertText={Config.feedbackModal.unsuccessfulSubmissionAlertText}
-        alertVariant={"error"}
         isLoading={isLoading}
       >
-        <div className={`text-base ${isTabletAndUp && "width-tablet"}`}>
-          <div className="text-base-darkest">
-            <Content>{Config.feedbackModal.reportIssueModalSummaryBodyText}</Content>
-          </div>
-          <div className="margin-top-1">
-            <Content>{Config.feedbackModal.reportIssueModalSummaryAdditionalBodyText}</Content>
-          </div>
-          <div className="margin-bottom-2">
-            <GenericTextField
-              required
-              onValidation={onValidation}
-              validationText={Config.feedbackModal.feedbackInlineErrorText}
-              error={errorMap.issueSummary.invalid}
-              formInputFull
-              fieldName="issueSummary"
-              placeholder={Config.feedbackModal.feedbackPlaceholderText}
-              value={issueSummary}
-              handleChange={(value: string) => {
-                setIssueSummary(value);
-              }}
-              fieldOptions={{
-                multiline: true,
-                maxRows: isTabletAndUp ? 10 : 5,
-                minRows: 3,
-                className: "override-padding",
-                inputProps: {
-                  maxLength: MAX_CHARS,
-                  sx: {
-                    padding: "1rem",
-                  },
-                },
-              }}
-            />
-          </div>
-        </div>
+        <div className={`${isTabletAndUp && "width-tablet"}`}>
+          {displayAlert && (
+            <Alert dataTestid="modal-alert" variant="error">
+              <Content>{Config.feedbackModal.unsuccessfulSubmissionAlertText}</Content>
+            </Alert>
+          )}
+          <Content>{Config.feedbackModal.reportIssueModalSummaryBodyText}</Content>
+          <Content className="margin-top-1 text-base">
+            {Config.feedbackModal.reportIssueModalSummaryAdditionalBodyText}
+          </Content>
+          <GenericTextField
+            required
+            onValidation={onValidation}
+            validationText={Config.feedbackModal.feedbackInlineErrorText}
+            error={errorMap.issueSummary.invalid}
+            formInputFull
+            fieldName="issueSummary"
+            placeholder={Config.feedbackModal.feedbackPlaceholderText}
+            value={issueSummary}
+            handleChange={(value: string) => {
+              setIssueSummary(value);
+            }}
+            fieldOptions={{
+              multiline: true,
+              maxRows: isTabletAndUp ? 10 : 5,
+              minRows: 3,
+              className: "override-padding",
+              inputProps: {
+                maxLength: MAX_CHARS,
+                sx: { padding: "1rem" },
+              },
+            }}
+          />
 
-        <div className={`text-base ${isTabletAndUp && "width-tablet"}`}>
-          <div className="text-base-darkest">
-            <Content>{Config.feedbackModal.reportIssueModalDetailBodyText}</Content>
-          </div>
-          <div className="margin-top-1">
-            <Content>{Config.feedbackModal.reportIssueModalDetailAdditionalBodyText}</Content>
-          </div>
-          <div className="margin-bottom-2">
-            <GenericTextField
-              required
-              onValidation={onValidation}
-              validationText={Config.feedbackModal.feedbackInlineErrorText}
-              error={errorMap.issueDetails.invalid}
-              formInputFull
-              fieldName="issueDetails"
-              placeholder={Config.feedbackModal.feedbackPlaceholderText}
-              value={issueDetails}
-              handleChange={(value: string) => {
-                setIssueDetails(value);
-              }}
-              fieldOptions={{
-                multiline: true,
-                maxRows: isTabletAndUp ? 10 : 5,
-                minRows: 3,
-                className: "override-padding",
-                inputProps: {
-                  maxLength: MAX_CHARS,
-                  sx: {
-                    padding: "1rem",
-                  },
-                },
-              }}
-            />
-          </div>
+          <Content>{Config.feedbackModal.reportIssueModalDetailBodyText}</Content>
+          <Content className="margin-top-1 text-base">
+            {Config.feedbackModal.reportIssueModalDetailAdditionalBodyText}
+          </Content>
+          <GenericTextField
+            required
+            onValidation={onValidation}
+            validationText={Config.feedbackModal.feedbackInlineErrorText}
+            error={errorMap.issueDetails.invalid}
+            formInputFull
+            fieldName="issueDetails"
+            placeholder={Config.feedbackModal.feedbackPlaceholderText}
+            value={issueDetails}
+            handleChange={(value: string) => {
+              setIssueDetails(value);
+            }}
+            fieldOptions={{
+              multiline: true,
+              maxRows: isTabletAndUp ? 10 : 5,
+              minRows: 3,
+              className: "override-padding",
+              inputProps: {
+                maxLength: MAX_CHARS,
+                sx: { padding: "1rem" },
+              },
+            }}
+          />
         </div>
       </ModalTwoButton>
     </>

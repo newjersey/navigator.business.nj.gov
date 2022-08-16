@@ -1,3 +1,4 @@
+import { Content } from "@/components/Content";
 import { ModalZeroButton } from "@/components/ModalZeroButton";
 import { Button } from "@/components/njwds-extended/Button";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -32,9 +33,9 @@ export const SelectFeedbackModal = ({ onClose, isOpen, setCurrentFeedback }: Pro
       isOpen={isOpen}
       close={onClose}
       title={Config.feedbackModal.feedbackModalTitle}
-      bodyText={Config.feedbackModal.feedbackModalBodyText}
       maxWidth="md"
     >
+      <Content className="margin-bottom-2">{Config.feedbackModal.feedbackModalBodyText}</Content>
       <div className="display-flex flex-column">
         <Button
           className="width-100"

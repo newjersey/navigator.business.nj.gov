@@ -1,5 +1,4 @@
 import { ModalZeroButton } from "@/components/ModalZeroButton";
-import { AlertVariant } from "@/components/njwds-extended/Alert";
 import { Button } from "@/components/njwds-extended/Button";
 import { Breakpoint } from "@mui/material";
 import { ReactNode } from "react";
@@ -8,14 +7,10 @@ interface Props {
   isOpen: boolean;
   close: () => void;
   title: string;
-  bodyText?: string;
-  children?: ReactNode;
+  children: ReactNode;
   primaryButtonText: string;
   primaryButtonOnClick: () => void;
   maxWidth?: Breakpoint;
-  alertText?: string;
-  showAlert?: boolean;
-  alertVariant?: AlertVariant;
   isLoading?: boolean;
   uncloseable?: boolean;
 }
@@ -40,11 +35,7 @@ export const ModalOneButton = (props: Props) => {
       close={props.close}
       title={props.title}
       maxWidth={props.maxWidth}
-      bodyText={props.bodyText}
       unpaddedChildren={buttonNode}
-      showAlert={props.showAlert}
-      alertText={props.alertText}
-      alertVariant={props.alertVariant}
       uncloseable={props.uncloseable}
     >
       {props.children}

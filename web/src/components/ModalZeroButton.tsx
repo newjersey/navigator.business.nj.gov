@@ -1,5 +1,3 @@
-import { Content } from "@/components/Content";
-import { Alert, AlertVariant } from "@/components/njwds-extended/Alert";
 import { Icon } from "@/components/njwds/Icon";
 import { Breakpoint, Dialog, DialogContent, DialogTitle, IconButton } from "@mui/material";
 import { ReactNode } from "react";
@@ -8,13 +6,9 @@ interface Props {
   isOpen: boolean;
   close: () => void;
   title: string;
-  bodyText?: string;
-  children?: ReactNode;
+  children: ReactNode;
   maxWidth?: Breakpoint;
   unpaddedChildren?: ReactNode;
-  alertText?: string;
-  showAlert?: boolean;
-  alertVariant?: AlertVariant;
   uncloseable?: boolean;
 }
 
@@ -43,19 +37,7 @@ export const ModalZeroButton = (props: Props) => {
         )}
       </DialogTitle>
       <DialogContent sx={{ padding: 0 }} dividers>
-        <div className="padding-x-4 margin-bottom-4 margin-top-2">
-          {props.showAlert && props.alertVariant && props.alertText && (
-            <Alert dataTestid="modal-alert" variant={props.alertVariant} className="margin-top-0">
-              <Content>{props.alertText}</Content>
-            </Alert>
-          )}
-          {props.bodyText && (
-            <div className="font-body-xs margin-bottom-2 text-base">
-              <Content>{props.bodyText}</Content>
-            </div>
-          )}
-          {props.children && <>{props.children}</>}
-        </div>
+        <div className="padding-x-4 margin-bottom-4 margin-top-2">{props.children}</div>
         {props.unpaddedChildren && <>{props.unpaddedChildren}</>}
       </DialogContent>
     </Dialog>
