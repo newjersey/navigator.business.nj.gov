@@ -4,7 +4,7 @@ header: Find Funding
 imgPath: /img/nudge-icon.svg
 ctaText: Hide Tasks & Show Funding
 color: accent-cool-darker
-shadowColor: accent-cool-lighter
+headerBackgroundColor: accent-cool-lighter
 borderColor: accent-cool
 hasCloseButton: false
 weight: 1

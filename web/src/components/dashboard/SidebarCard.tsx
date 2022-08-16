@@ -158,11 +158,11 @@ export const SidebarCard = (props: Props) => {
         />
       )}
       <div
-        className={`border radius-md border-${props.card.borderColor} box-shadow-${props.card.shadowColor} margin-right-105 margin-bottom-3`}
+        className={`border radius-md border-${props.card.borderColor} margin-right-105 margin-bottom-3`}
         {...{ "data-testid": props.card.id }}
       >
         {props.card.header && (
-          <div className={`bg-${props.card.shadowColor} padding-y-105 padding-x-205 radius-top-md`}>
+          <div className={`bg-${props.card.headerBackgroundColor} padding-y-105 padding-x-205 radius-top-md`}>
             <div className="flex flex-justify">
               <h3
                 className={`margin-bottom-0 text-${props.card.color} ${
