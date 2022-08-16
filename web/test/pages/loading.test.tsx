@@ -1,6 +1,7 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import * as sessionHelper from "@/lib/auth/sessionHelper";
+import * as signinHelper from "@/lib/auth/signinHelper";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import LoadingPage, { signInSamlError } from "@/pages/loading";
 import { generatePreferences, generateProfileData, generateUserData } from "@/test/factories";
@@ -17,7 +18,9 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 jest.mock("next/router");
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/auth/sessionHelper", () => ({ triggerSignIn: jest.fn() }));
+jest.mock("@/lib/auth/signinHelper", () => ({ onGuestSignIn: jest.fn() }));
 const mockSessionHelper = sessionHelper as jest.Mocked<typeof sessionHelper>;
+const mockSigninHelper = signinHelper as jest.Mocked<typeof signinHelper>;
 
 const Config = getMergedConfig();
 
@@ -75,11 +78,11 @@ describe("loading page", () => {
   it("shows modal when user has signin error and redirects user to onboarding", async () => {
     setMockUserDataResponse(generateUseUserDataResponse({ userData: undefined }));
     useMockRouter({ isReady: true, asPath: signInSamlError });
-    mockPush.mockResolvedValue({});
+    mockSigninHelper.onGuestSignIn.mockResolvedValue();
     render(withAuth(<LoadingPage />, { isAuthenticated: IsAuthenticated.FALSE }));
     expect(mockSessionHelper.triggerSignIn).not.toHaveBeenCalled();
     expect(screen.getByText(Config.selfRegistration.loginErrorModalTitle)).toBeInTheDocument();
     fireEvent.click(screen.getByText(Config.selfRegistration.loginErrorModalContinueButton));
-    await waitFor(() => expect(mockPush).toHaveBeenCalledWith(ROUTES.onboarding));
+    await waitFor(() => expect(mockSigninHelper.onGuestSignIn).toHaveBeenCalled());
   });
 });
