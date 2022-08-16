@@ -264,7 +264,7 @@
   },
   "navigationDefaults": {
     "guestModalTitle": "## Create an Account to Access this Feature",
-    "guestAlertBody": "Now that you've filled out your business information, you can save your progress and come back later by [creating an account](/self-register/guest_toast). ",
+    "guestAlertBody": "Now that you've filled out your business information, you can save your progress and come back later by [creating an account](/self-register/guest_snackbar). ",
     "guestSuccessTitle": "### You are Now Registered!",
     "guestSuccessBody": "You can now save your progress, access more features, and edit your profile.",
     "navBarGuestRegistrationText": "Register",
