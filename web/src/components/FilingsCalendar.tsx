@@ -14,6 +14,7 @@ import router from "next/router";
 import { ReactElement } from "react";
 import { Content } from "./Content";
 import { FilingsCalendarAsList } from "./FilingsCalendarAsList";
+import { Button } from "./njwds-extended/Button";
 
 interface Props {
   operateReferences: Record<string, OperateReference>;
@@ -21,7 +22,7 @@ interface Props {
 
 export const FilingsCalendar = (props: Props): ReactElement => {
   const Config = getMergedConfig();
-  const { userData } = useUserData();
+  const { userData, update } = useUserData();
   const isLargeScreen = useMediaQuery(MediaQueries.tabletAndUp);
   const taxFilings = userData?.taxFilingData.filings || [];
 
@@ -84,6 +85,17 @@ export const FilingsCalendar = (props: Props): ReactElement => {
     );
   };
 
+  const handleCalendarOnClick = () => {
+    if (!userData) return;
+    update({
+      ...userData,
+      preferences: {
+        ...userData.preferences,
+        isCalendarFullView: !userData.preferences.isCalendarFullView,
+      },
+    });
+  };
+
   const renderCalendar = (): ReactElement => {
     const monthIndices = [...Array(12).keys()];
 
@@ -93,18 +105,28 @@ export const FilingsCalendar = (props: Props): ReactElement => {
 
     return (
       <div data-testid="filings-calendar">
-        <div className="flex flex-align-end padding-top-2">
-          <h2 className="margin-bottom-0">{Config.dashboardDefaults.calendarHeader}</h2>
-          <div className="margin-top-05">
-            <ArrowTooltip title={Config.dashboardDefaults.calendarTooltip}>
-              <div
-                className="fdr fac margin-left-1 margin-bottom-05 font-body-lg text-green"
-                data-testid="calendar-tooltip"
-              >
-                <Icon>help_outline</Icon>
-              </div>
-            </ArrowTooltip>
+        <div className="flex flex-align-end padding-top-2 flex-justify">
+          <div className="flex flex-align-end">
+            <h2 className="margin-bottom-0">{Config.dashboardDefaults.calendarHeader}</h2>
+            <div className="margin-top-05">
+              <ArrowTooltip title={Config.dashboardDefaults.calendarTooltip}>
+                <div
+                  className="fdr fac margin-left-1 margin-bottom-05 font-body-lg text-green"
+                  data-testid="calendar-tooltip"
+                >
+                  <Icon>help_outline</Icon>
+                </div>
+              </ArrowTooltip>
+            </div>
           </div>
+          <Button
+            style="light"
+            className="font-body-2xs padding-y-05 padding-x-1"
+            onClick={handleCalendarOnClick}
+          >
+            <Icon className="usa-icon--size-3 margin-right-05">list</Icon>
+            {Config.dashboardDefaults.calendarListViewButton}
+          </Button>
         </div>
         <hr className="margin-bottom-4 margin-top-105 bg-base-light" aria-hidden={true} />
         <table data-testid="filings-calendar-as-table">
@@ -130,10 +152,10 @@ export const FilingsCalendar = (props: Props): ReactElement => {
 
   return taxFilings.length > 0 ? (
     <>
-      {isLargeScreen ? (
+      {isLargeScreen && userData?.preferences.isCalendarFullView ? (
         renderCalendar()
       ) : (
-        <FilingsCalendarAsList operateReferences={props.operateReferences} />
+        <FilingsCalendarAsList onToggle={handleCalendarOnClick} operateReferences={props.operateReferences} />
       )}
     </>
   ) : (
@@ -148,4 +170,5 @@ export const FilingsCalendar = (props: Props): ReactElement => {
       </div>
     </div>
   );
+  <></>;
 };

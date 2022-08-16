@@ -239,6 +239,7 @@ export const generatePreferences = (overrides: Partial<Preferences>): Preference
     hiddenCertificationIds: [],
     visibleSidebarCards: ["welcome"],
     returnToLink: "",
+    isCalendarFullView: !(randomInt() % 2),
     ...overrides,
   };
 };
