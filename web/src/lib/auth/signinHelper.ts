@@ -83,15 +83,18 @@ export const onGuestSignIn = async (
   setABExperienceDimension(user.abExperience);
   if (userData) {
     setAnalyticsDimensions(userData.profileData);
-    if (userData.formProgress == "UNSTARTED") {
+    if (userData.formProgress === "UNSTARTED") {
       setRegistrationDimension("Began Onboarding");
       push(ROUTES.onboarding);
     } else {
       setRegistrationDimension("Onboarded Guest");
     }
   } else {
-    if (pathname == ROUTES.onboarding) {
+    if (pathname === ROUTES.onboarding) {
       setRegistrationDimension("Began Onboarding");
+    } else if (pathname === ROUTES.loading) {
+      setRegistrationDimension("Began Onboarding");
+      push(ROUTES.onboarding);
     } else {
       setRegistrationDimension("Not Started");
       push(ROUTES.landing);

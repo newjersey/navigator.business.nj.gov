@@ -4,9 +4,9 @@ import { ModalOneButton } from "@/components/ModalOneButton";
 import { NavBar } from "@/components/navbar/NavBar";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { PageSkeleton } from "@/components/PageSkeleton";
-import { initialState } from "@/contexts/authContext";
-import { authReducer, AuthReducer } from "@/lib/auth/AuthContext";
+import { AuthContext } from "@/contexts/authContext";
 import { getCurrentUser, triggerSignIn } from "@/lib/auth/sessionHelper";
+import { onGuestSignIn } from "@/lib/auth/signinHelper";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { routeForPersona } from "@/lib/domain-logic/routeForPersona";
@@ -14,14 +14,14 @@ import { ROUTES } from "@/lib/domain-logic/routes";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { onboardingCompleted } from "@businessnjgovnavigator/shared/domain-logic/onboarding";
 import { useRouter } from "next/router";
-import { ReactElement, useEffect, useReducer, useState } from "react";
+import { ReactElement, useContext, useEffect, useState } from "react";
 
 export const signInSamlError = "Name+ID+value+was+not+found+in+SAML";
 
 const LoadingPage = (): ReactElement => {
   const { userData, update } = useUserData();
   const router = useRouter();
-  const [, dispatch] = useReducer<AuthReducer>(authReducer, initialState);
+  const { dispatch } = useContext(AuthContext);
   const [showLoginErrorModal, setShowLoginErrorModal] = useState<boolean>(false);
   const [redirectIsLoading, setRedirectIsLoading] = useState<boolean>(false);
   const { Config } = useConfig();
@@ -53,9 +53,9 @@ const LoadingPage = (): ReactElement => {
     }
   }, userData);
 
-  const sendToOnboarding = () => {
+  const sendToOnboarding = async () => {
     setRedirectIsLoading(true);
-    router.push(ROUTES.onboarding).then(() => setRedirectIsLoading(false));
+    onGuestSignIn(router.push, router.pathname, dispatch).then(() => setRedirectIsLoading(false));
   };
 
   return (
