@@ -246,12 +246,10 @@
     "errorTextEmailsNotMatching": "Email addresses must match and be valid.",
     "nameFieldPlaceholder": "Type your full name",
     "nameFieldLabel": "Full name",
-    "completeSignInTitleText": "Completing signing you in...",
     "userTestingCheckboxLabel": "I am willing to be contacted to provide feedback on Business.NJ.gov.",
     "signUpTitleText": "Create account",
     "errorTextRequiredFields": "Please fill in all fields.",
     "errorTextDuplicateSignUp": "This email is already registered, please login instead.",
-    "completeSignInDescriptionText": "Please wait, finishing your request...",
     "errorTextFullName": "Full name is required",
     "signUpDescriptionText": "To get started, please enter your name and email address below.",
     "confirmEmailFieldPlaceholder": "Type your email again",
@@ -260,7 +258,10 @@
     "confirmEmailFieldLabel": "Confirm email",
     "submitButtonText": "Create",
     "closeButtonText": "Cancel",
-    "newsletterCheckboxLabel": "I want to receive the Business.NJ.gov newsletter and receive information likely to affect my business."
+    "newsletterCheckboxLabel": "I want to receive the Business.NJ.gov newsletter and receive information likely to affect my business.",
+    "loginErrorModalTitle": "To Access the Navigator, Link Your Account",
+    "loginErrorModalBody": "Looks like you already have an account with myNewJersey, our state authentication provider! You need to follow a few steps to link your login information to the Navigator.\n\n1. When you move on from this page, you'll step through a set of initial questions to learn more about you and your business.\n2. When you reach your Business Guide, you'll be prompted to **Complete Registration** with a link to myNewJersey.\n3. On the myNewJersey page, you'll be asked if you have existing login information. Click **yes** and enter your myNewJersey credentials.\n\nAfter following these steps, you'll be able to use your myNewJersey account to log in to the Business Navigator!",
+    "loginErrorModalContinueButton": "Okay, I'm Ready"
   },
   "navigationDefaults": {
     "guestModalTitle": "## Create an Account to Access this Feature",

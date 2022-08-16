@@ -46,7 +46,6 @@ const mockApi = api as jest.Mocked<typeof api>;
 
 jest.mock("next/router");
 jest.mock("@/lib/data-hooks/useDocuments");
-jest.mock("@/lib/auth/useAuthProtectedPage");
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({ postGetAnnualFilings: jest.fn() }));

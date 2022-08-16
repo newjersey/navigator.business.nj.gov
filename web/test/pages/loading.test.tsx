@@ -1,20 +1,25 @@
+import { getMergedConfig } from "@/contexts/configContext";
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import * as sessionHelper from "@/lib/auth/sessionHelper";
 import { ROUTES } from "@/lib/domain-logic/routes";
-import LoadingPage from "@/pages/loading";
+import LoadingPage, { signInSamlError } from "@/pages/loading";
 import { generatePreferences, generateProfileData, generateUserData } from "@/test/factories";
+import { generateUseUserDataResponse, withAuth } from "@/test/helpers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
-import { useMockProfileData, useMockUserData } from "@/test/mock/mockUseUserData";
+import { setMockUserDataResponse, useMockProfileData, useMockUserData } from "@/test/mock/mockUseUserData";
 import {
   currentUserData,
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { render, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 jest.mock("next/router");
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/auth/sessionHelper", () => ({ triggerSignIn: jest.fn() }));
 const mockSessionHelper = sessionHelper as jest.Mocked<typeof sessionHelper>;
+
+const Config = getMergedConfig();
 
 describe("loading page", () => {
   beforeEach(() => {
@@ -65,5 +70,16 @@ describe("loading page", () => {
       expect(currentUserData().preferences.returnToLink).toEqual("");
     });
     expect(mockPush).toHaveBeenCalledWith("/tasks/some-task");
+  });
+
+  it("shows modal when user has signin error and redirects user to onboarding", async () => {
+    setMockUserDataResponse(generateUseUserDataResponse({ userData: undefined }));
+    useMockRouter({ isReady: true, asPath: signInSamlError });
+    mockPush.mockResolvedValue({});
+    render(withAuth(<LoadingPage />, { isAuthenticated: IsAuthenticated.FALSE }));
+    expect(mockSessionHelper.triggerSignIn).not.toHaveBeenCalled();
+    expect(screen.getByText(Config.selfRegistration.loginErrorModalTitle)).toBeInTheDocument();
+    fireEvent.click(screen.getByText(Config.selfRegistration.loginErrorModalContinueButton));
+    await waitFor(() => expect(mockPush).toHaveBeenCalledWith(ROUTES.onboarding));
   });
 });

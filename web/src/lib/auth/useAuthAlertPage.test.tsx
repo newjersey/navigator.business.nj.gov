@@ -1,18 +1,12 @@
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import {
-  signInSamlError,
-  useAuthAlertPage,
-  useAuthProtectedPage,
-  useUnauthedOnlyPage,
-} from "@/lib/auth/useAuthProtectedPage";
-import { ROUTES } from "@/lib/domain-logic/routes";
+import { useAuthAlertPage } from "@/lib/auth/useAuthAlertPage";
 import { withAuth, withAuthAlert } from "@/test/helpers";
-import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
+import { useMockRouter } from "@/test/mock/mockRouter";
 import { render } from "@testing-library/react";
 
 jest.mock("next/router");
 
-describe("useAuthProtectedPage", () => {
+describe("useAuthAlertPage", () => {
   let setAlertIsVisible: jest.Mock;
 
   beforeEach(() => {
@@ -46,35 +40,6 @@ describe("useAuthProtectedPage", () => {
     );
   };
 
-  describe("useAuthProtectedPage", () => {
-    it("redirects to homepage when user is not authed", () => {
-      setupHookWithAuth({ hook: useAuthProtectedPage, isAuth: IsAuthenticated.FALSE });
-      expect(mockPush).toHaveBeenCalledWith({
-        pathname: ROUTES.landing,
-        query: {},
-      });
-    });
-
-    it("redirects to homepage when user has signin error", () => {
-      useMockRouter({ isReady: true, asPath: signInSamlError });
-      setupHookWithAuth({ hook: useAuthProtectedPage, isAuth: IsAuthenticated.FALSE });
-      expect(mockPush).toHaveBeenCalledWith({
-        pathname: ROUTES.landing,
-        query: { signUp: "true" },
-      });
-    });
-
-    it("does nothing when user is authed", () => {
-      setupHookWithAuth({ hook: useAuthProtectedPage, isAuth: IsAuthenticated.TRUE });
-      expect(mockPush).not.toHaveBeenCalled();
-    });
-
-    it("does nothing when we havent loaded auth state yet", () => {
-      setupHookWithAuth({ hook: useAuthProtectedPage, isAuth: IsAuthenticated.UNKNOWN });
-      expect(mockPush).not.toHaveBeenCalled();
-    });
-  });
-
   describe("useAuthAlertPage", () => {
     it("hides alert when modal is visible", () => {
       setupHookWithAuth({ hook: useAuthAlertPage, isAuth: IsAuthenticated.FALSE, modalIsVisible: true });
@@ -106,23 +71,6 @@ describe("useAuthProtectedPage", () => {
     it("does not show alert when user is authed", () => {
       setupHookWithAuth({ hook: useAuthAlertPage, isAuth: IsAuthenticated.TRUE, modalIsVisible: false });
       expect(setAlertIsVisible).toHaveBeenCalledWith(false);
-    });
-  });
-
-  describe("useUnauthedOnlyPage", () => {
-    it("redirects to homepage when user IS authed", () => {
-      setupHookWithAuth({ hook: useUnauthedOnlyPage, isAuth: IsAuthenticated.TRUE });
-      expect(mockPush).toHaveBeenCalledWith(ROUTES.landing);
-    });
-
-    it("does nothing when user is NOT authed", () => {
-      setupHookWithAuth({ hook: useUnauthedOnlyPage, isAuth: IsAuthenticated.FALSE });
-      expect(mockPush).not.toHaveBeenCalled();
-    });
-
-    it("does nothing when we haven't loaded auth state yet", () => {
-      setupHookWithAuth({ hook: useUnauthedOnlyPage, isAuth: IsAuthenticated.UNKNOWN });
-      expect(mockPush).not.toHaveBeenCalled();
     });
   });
 });
