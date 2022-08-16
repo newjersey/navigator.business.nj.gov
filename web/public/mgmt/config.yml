@@ -1723,9 +1723,15 @@ collections:
               - { label: Error - Duplicate Sign-up, name: errorTextDuplicateSignUp, widget: string }
               - { label: Error - Generic, name: errorTextGeneric, widget: string }
               - { label: Complete Sign-in Title, name: completeSignInTitleText, widget: string }
-              - { label: Complete Sign-in Description, name: completeSignInDescriptionText, widget: string }
               - { label: Newsletter Label, name: newsletterCheckboxLabel, widget: string }
               - { label: User Testing Label, name: userTestingCheckboxLabel, widget: string }
+              - { label: Login Error Modal - Title, name: loginErrorModalTitle, widget: string }
+              - {
+                  label: Login Error Modal - Continue Button,
+                  name: loginErrorModalContinueButton,
+                  widget: string,
+                }
+              - { label: Login Error Modal - Body, name: loginErrorModalBody, widget: markdown }
           - label: Shared Header Defaults
             name: headerDefaults
             collapsed: true

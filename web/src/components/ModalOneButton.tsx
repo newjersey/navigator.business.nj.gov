@@ -17,6 +17,7 @@ interface Props {
   showAlert?: boolean;
   alertVariant?: AlertVariant;
   isLoading?: boolean;
+  uncloseable?: boolean;
 }
 
 export const ModalOneButton = (props: Props) => {
@@ -44,6 +45,7 @@ export const ModalOneButton = (props: Props) => {
       showAlert={props.showAlert}
       alertText={props.alertText}
       alertVariant={props.alertVariant}
+      uncloseable={props.uncloseable}
     >
       {props.children}
     </ModalZeroButton>

@@ -15,6 +15,7 @@ interface Props {
   alertText?: string;
   showAlert?: boolean;
   alertVariant?: AlertVariant;
+  uncloseable?: boolean;
 }
 
 export const ModalZeroButton = (props: Props) => {
@@ -28,16 +29,18 @@ export const ModalZeroButton = (props: Props) => {
     >
       <DialogTitle id="modal" className="display-flex flex-row flex-align-center margin-top-1 break-word">
         <div className="h2-styling padding-x-1 margin-bottom-0">{props.title}</div>
-        <IconButton
-          aria-label="close"
-          className="margin-left-auto"
-          onClick={props.close}
-          sx={{
-            color: (theme) => theme.palette.grey[500],
-          }}
-        >
-          <Icon className="usa-icon--size-4">close</Icon>
-        </IconButton>
+        {!props.uncloseable && (
+          <IconButton
+            aria-label="close"
+            className="margin-left-auto"
+            onClick={props.close}
+            sx={{
+              color: (theme) => theme.palette.grey[500],
+            }}
+          >
+            <Icon className="usa-icon--size-4">close</Icon>
+          </IconButton>
+        )}
       </DialogTitle>
       <DialogContent sx={{ padding: 0 }} dividers>
         <div className="padding-x-4 margin-bottom-4 margin-top-2">
