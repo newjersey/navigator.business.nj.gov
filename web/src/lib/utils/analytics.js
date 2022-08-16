@@ -90,7 +90,7 @@ export default {
         },
       },
     },
-    guest_toast: {
+    guest_snackbar: {
       click: {
         go_to_myNJ_registration: () => {
           sendEvent("guest_toast", "click", "go_to_myNJ_registration");
