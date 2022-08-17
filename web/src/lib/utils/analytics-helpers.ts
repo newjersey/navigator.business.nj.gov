@@ -2,7 +2,9 @@ import { isCannabisLicenseApplicable } from "@/lib/domain-logic/isCannabisLicens
 import { isCpaRequiredApplicable } from "@/lib/domain-logic/isCpaRequiredApplicable";
 import analytics from "@/lib/utils/analytics";
 import { ABExperience, ProfileData } from "@businessnjgovnavigator/shared/";
+import { OperatingPhaseId } from "@businessnjgovnavigator/shared/operatingPhase";
 import { BusinessPersona } from "@businessnjgovnavigator/shared/profileData";
+import { UserData } from "@businessnjgovnavigator/shared/userData";
 
 type RegistrationProgress = "Not Started" | "Began Onboarding" | "Onboarded Guest" | "Fully Registered";
 
@@ -14,6 +16,37 @@ export const setABExperienceDimension = (value: ABExperience) => {
   analytics.dimensions.abExperience(value);
 };
 
+export const setPhaseDimension = (value: OperatingPhaseId) => {
+  analytics.dimensions.phase(getPhaseDimension(value));
+};
+
+export const phaseChangeAnalytics = ({
+  oldUserData,
+  newUserData,
+}: {
+  oldUserData: UserData;
+  newUserData: UserData;
+}) => {
+  if (oldUserData.profileData.operatingPhase === newUserData.profileData.operatingPhase) {
+    return;
+  } else if (
+    oldUserData.profileData.operatingPhase === "NEEDS_TO_FORM" &&
+    newUserData.profileData.operatingPhase === "NEEDS_TO_REGISTER_FOR_TAXES"
+  ) {
+    analytics.event.roadmap_dashboard.arrive.progress_to_needs_to_register_phase();
+  } else if (
+    oldUserData.profileData.operatingPhase === "NEEDS_TO_REGISTER_FOR_TAXES" &&
+    newUserData.profileData.operatingPhase === "FORMED_AND_REGISTERED"
+  ) {
+    analytics.event.roadmap_dashboard.arrive.progress_to_formed_and_registered_phase();
+  } else if (
+    oldUserData.profileData.operatingPhase === "FORMED_AND_REGISTERED" &&
+    newUserData.profileData.operatingPhase === "UP_AND_RUNNING"
+  ) {
+    analytics.event.roadmap_dashboard.arrive.progress_to_up_and_running_phase();
+  }
+};
+
 export const setAnalyticsDimensions = (profileData: ProfileData): void => {
   analytics.dimensions.industry(profileData.industryId);
   analytics.dimensions.municipality(profileData.municipality?.displayName);
@@ -22,6 +55,26 @@ export const setAnalyticsDimensions = (profileData: ProfileData): void => {
   analytics.dimensions.homeBasedBusiness(profileData.homeBasedBusiness ? "true" : "false");
   analytics.dimensions.persona(getPersonaDimension(profileData.businessPersona));
   analytics.dimensions.naicsCode(profileData.naicsCode);
+  analytics.dimensions.phase(getPhaseDimension(profileData.operatingPhase));
+};
+
+const getPhaseDimension = (phase: OperatingPhaseId) => {
+  switch (phase) {
+    case "GUEST_MODE":
+      return "Guest Mode Needs to Form";
+    case "GUEST_MODE_OWNING":
+      return "Guest Mode Up and Running";
+    case "NEEDS_TO_FORM":
+      return "Needs to Form";
+    case "NEEDS_TO_REGISTER_FOR_TAXES":
+      return "Needs to Register";
+    case "FORMED_AND_REGISTERED":
+      return "Formed and Registered";
+    case "UP_AND_RUNNING":
+      return "Up and Running";
+    default:
+      return phase;
+  }
 };
 
 const getPersonaDimension = (persona: BusinessPersona): string => {

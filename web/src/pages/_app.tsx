@@ -128,7 +128,8 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
           'dimension6': 'Persona',
           'dimension7': 'Registration Process',
           'dimension8': 'AB Experience',
-          'dimension9': 'Six Digit NAICS Code'
+          'dimension9': 'Six Digit NAICS Code',
+          'dimension11': 'Phase'
         }
       });`,
         }}

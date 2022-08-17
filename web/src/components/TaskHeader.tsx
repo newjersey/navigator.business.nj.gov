@@ -14,6 +14,7 @@ import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { routeForPersona } from "@/lib/domain-logic/routeForPersona";
 import { SectionType, Task, TaskProgress } from "@/lib/types/types";
+import analytics from "@/lib/utils/analytics";
 import {
   getModifiedTaskBooleanUndefined,
   getModifiedTaskContent,
@@ -66,6 +67,7 @@ export const TaskHeader = (props: Props): ReactElement => {
     if (isFormationTask(props.task.id)) {
       if (currentTaskProgress !== "COMPLETED" && newValue === "COMPLETED") {
         setFormationModalIsOpen(true);
+        analytics.event.task_status_dropdown.click_completed.show_formation_date_modal();
         return;
       } else if (currentTaskProgress === "COMPLETED" && areYouSureModalDesiredNewStatus === undefined) {
         setAreYouSureModalDesiredNewStatus(newValue);
