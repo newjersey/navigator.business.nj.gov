@@ -1,5 +1,6 @@
 import { getCurrentToken } from "@/lib/auth/sessionHelper";
 import { NameAvailability, SelfRegResponse } from "@/lib/types/types";
+import { phaseChangeAnalytics, setPhaseDimension } from "@/lib/utils/analytics-helpers";
 import {
   NameAndAddress,
   UserData,
@@ -9,12 +10,19 @@ import {
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 
 const apiBaseUrl = process.env.API_BASE_URL || "";
+
 export const getUserData = (id: string): Promise<UserData> => {
-  return get(`/users/${id}`);
+  return get<UserData>(`/users/${id}`).then((userData) => {
+    setPhaseDimension(userData.profileData.operatingPhase);
+    return userData;
+  });
 };
 
 export const postUserData = async (userData: UserData): Promise<UserData> => {
-  return post(`/users`, userData);
+  return post<UserData, UserData>(`/users`, userData).then((updatedUserData: UserData) => {
+    phaseChangeAnalytics({ oldUserData: userData, newUserData: updatedUserData });
+    return updatedUserData;
+  });
 };
 
 export const checkLicenseStatus = (nameAndAddress: NameAndAddress): Promise<UserData> => {

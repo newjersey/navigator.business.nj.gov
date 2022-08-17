@@ -45,6 +45,9 @@ export default {
     naicsCode: (value) => {
       window.gtag("set", "dimension9", value);
     },
+    phase: (value) => {
+      window.gtag("set", "dimension11", value);
+    },
   },
 
   event: {
@@ -121,6 +124,15 @@ export default {
       arrive: {
         arrive_from_myNJ_registration: () => {
           sendEvent("roadmap_dashboard", "arrive", "arrive_from_myNJ_registration");
+        },
+        progress_to_needs_to_register_phase: () => {
+          sendEvent("roadmap_dashboard", "arrive", "progress_to_needs_to_register_phase");
+        },
+        progress_to_formed_and_registered_phase: () => {
+          sendEvent("roadmap_dashboard", "arrive", "progress_to_formed_and_registered_phase");
+        },
+        progress_to_up_and_running_phase: () => {
+          sendEvent("roadmap_dashboard", "arrive", "progress_to_up_and_running_phase");
         },
       },
     },
@@ -251,6 +263,13 @@ export default {
         },
       },
     },
+    task_formation_date_modal: {
+      submit: {
+        formation_status_set_to_complete: () => {
+          sendEvent("task_formation_date_modal", "submit", "formation_status_set_to_complete");
+        },
+      },
+    },
     task_status_checklist_edit_button: {
       click: {
         edit_address_form: () => {
@@ -279,6 +298,9 @@ export default {
       click_completed: {
         selected_completed_status: () => {
           sendEvent("task_status_dropdown", "click_completed", "selected_completed_status");
+        },
+        show_formation_date_modal: () => {
+          sendEvent("task_status_dropdown", "click_completed", "show_formation_date_modal");
         },
       },
     },
