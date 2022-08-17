@@ -11,9 +11,9 @@ const defaultColor = {
 
 const blueColor = {
   gutter: "blueRightGutter",
-  border: "border-roadmap-blue-dark",
+  border: "border-cool-lighter",
   mobileBoarder: "border-base-light",
-  bgColor: "bg-roadmap-blue",
+  bgColor: "bg-cool-extra-light",
 };
 
 export interface RightSidebarPageLayoutProps {

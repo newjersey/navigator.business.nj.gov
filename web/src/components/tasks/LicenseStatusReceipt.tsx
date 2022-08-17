@@ -22,7 +22,7 @@ type PermitTheme = {
 
 const pendingPermitTheme: PermitTheme = {
   gradient: "gradient-blue",
-  bgColor: "bg-info-lighter",
+  bgColor: "bg-info-extra-light",
   textColor: "text-cyan",
   borderColor: "border-cyan",
   iconColor: "text-base-lighter",

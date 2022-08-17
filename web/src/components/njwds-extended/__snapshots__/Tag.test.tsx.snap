@@ -114,7 +114,7 @@ exports[`Tag Variants error displays correctly 1`] = `
     <span
       class="flex flex-align-center flex-justify usa-tag font-sans-2xs width-full width-auto line-height-sans-2 padding-y-2px
         text-no-wrap
-        bg-error-lighter text-error-dark
+        bg-error-extra-light text-error-dark
         
         
         
@@ -132,7 +132,7 @@ exports[`Tag Variants info displays correctly 1`] = `
     <span
       class="flex flex-align-center flex-justify usa-tag font-sans-2xs width-full width-auto line-height-sans-2 padding-y-2px
         text-no-wrap
-        bg-info-lighter text-info-darker
+        bg-info-extra-light text-info-darker
         
         
         
@@ -150,7 +150,7 @@ exports[`Tag Variants info with hover displays correctly 1`] = `
     <span
       class="flex flex-align-center flex-justify usa-tag font-sans-2xs width-full width-auto line-height-sans-2 padding-y-2px
         text-no-wrap
-        bg-info-lighter text-info-darker
+        bg-info-extra-light text-info-darker
         accent-cool-hover-override
         
         

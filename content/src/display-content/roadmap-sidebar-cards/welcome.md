@@ -5,9 +5,9 @@ hasCloseButton: false
 ctaText: ""
 weight: 3
 imgPath: /img/congratulations-purple.svg
-color: roadmap-purple
-headerBackgroundColor: roadmap-purple-light
-borderColor: roadmap-purple
+color: accent-cooler
+headerBackgroundColor: accent-cooler-lightest
+borderColor: accent-cooler
 ---
 
 Welcome to the Navigator, your personalized guide to launch, operate, and grow your business in New Jersey.

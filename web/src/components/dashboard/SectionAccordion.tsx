@@ -18,7 +18,9 @@ interface Props {
 export const SectionAccordion = (props: Props): ReactElement => {
   const { userData, update } = useUserData();
   const { sectionCompletion } = useRoadmap();
-  const dropdownIconClasses = props.mini ? "usa-icon--size-3 text-ink" : "usa-icon--size-5 margin-x-1";
+  const dropdownIconClasses = props.mini
+    ? "usa-icon--size-3 text-base-darkest"
+    : "usa-icon--size-5 margin-x-1";
   const headerClasses = props.mini ? "h3-styling" : "margin-top-3 tablet:margin-left-3 h3-styling";
   const sectionIconClasses = props.mini ? "height-4 padding-right-105" : "height-5 padding-right-105";
   const dividerClasses = props.mini ? "margin-y-2" : "margin-y-3";
