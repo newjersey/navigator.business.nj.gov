@@ -53,7 +53,7 @@ export const MiniRoadmapStep = (props: Props): ReactElement => {
             <div
               role="heading"
               aria-level={3}
-              className={`margin-left-5 padding-left-2px margin-bottom-0 text-ink ${
+              className={`margin-left-5 padding-left-2px margin-bottom-0 text-base-darkest ${
                 isActive ? "text-primary-dark" : "weight-unset"
               }`}
               data-step={stepNumber}
@@ -61,7 +61,9 @@ export const MiniRoadmapStep = (props: Props): ReactElement => {
               {props.step.name}
             </div>
             <div className="mla fdc fac">
-              <Icon className="usa-icon--size-3 text-ink">{isOpen ? "expand_less" : "expand_more"}</Icon>
+              <Icon className="usa-icon--size-3 text-base-darkest">
+                {isOpen ? "expand_less" : "expand_more"}
+              </Icon>
             </div>
           </div>
         </button>

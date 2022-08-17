@@ -31,7 +31,7 @@ export const FilingsCalendarAsList = (props: Props): ReactElement => {
         .map((filing) => (
           <div
             key={`${filing.identifier}-${filing.dueDate}`}
-            className="margin-top-6 bg-roadmap-blue border-base-lightest border-2px padding-top-3 padding-bottom-1 padding-x-4 radius-lg"
+            className="margin-top-6 bg-cool-extra-light border-base-lightest border-2px padding-top-3 padding-bottom-1 padding-x-4 radius-lg"
           >
             <div className="flex flex-align-end padding-top-2 margin-bottom-1 flex-justify">
               <div className="flex flex-align-end">

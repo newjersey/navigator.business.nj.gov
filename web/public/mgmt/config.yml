@@ -3024,21 +3024,21 @@ collections:
           name: "color",
           widget: "select",
           required: true,
-          options: ["primary", "accent-cool-darker", "roadmap-purple"],
+          options: ["primary", "accent-cool-darker", "accent-cooler"],
         }
       - {
           label: "Header Background Color",
           name: "headerBackgroundColor",
           widget: "select",
           required: false,
-          options: ["roadmap-purple-light", "primary-light", "roadmap-blue-light"],
+          options: ["accent-cooler-lightest", "primary-light", "cool-lighter"],
         }
       - {
           label: "Border Color",
           name: "borderColor",
           widget: "select",
           required: true,
-          options: ["accent-cool", "roadmap-purple", "primary-light", "accent-cool-darker"],
+          options: ["accent-cool", "accent-cooler", "primary-light", "accent-cool-darker"],
         }
 
   - name: "settings"
