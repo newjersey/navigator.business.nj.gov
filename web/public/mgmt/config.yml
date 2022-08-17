@@ -9,7 +9,6 @@ backend:
   commit_messages:
     create: "chore: creating {{collection}} {{slug}}"
     update: "fix: updating {{collection}} {{slug}}"
-#local_backend: true
 publish_mode: editorial_workflow
 media_folder: web/public/img
 logo_url: https://dev.navigator.business.nj.gov/img/Navigator-logo.svg
@@ -217,7 +216,102 @@ collections:
       - { label: "Header", name: "header", widget: "string" }
       - { label: "Content", name: "body", widget: "markdown" }
       - { label: "Filename", name: "slug", widget: "slug", required: false }
-
+  - name: "formation-settings"
+    label: "Business Formation Settings"
+    editor:
+      preview: false
+    files:
+      - label: "Formation Errors"
+        name: "formationErrors"
+        file: "content/src/fieldConfig/formation-error.json"
+        fields:
+          - label: Errors
+            name: formationErrors
+            widget: list
+            summary: "{{fields}} {{type}}"
+            fields:
+              - label: Fields
+                name: fields
+                widget: select
+                multiple: true
+                options:
+                  [
+                    businessName,
+                    businessSuffix,
+                    businessTotalStock,
+                    businessStartDate,
+                    businessAddressCity,
+                    businessAddressLine1,
+                    businessAddressZipCode,
+                    withdrawals,
+                    dissolution,
+                    combinedInvestment,
+                    canCreateLimitedPartner,
+                    createLimitedPartnerTerms,
+                    canGetDistribution,
+                    getDistributionTerms,
+                    canMakeDistribution,
+                    makeDistributionTerms,
+                    agentNumberOrManual,
+                    agentNumber,
+                    agentName,
+                    agentEmail,
+                    agentOfficeAddressLine1,
+                    agentOfficeAddressCity,
+                    agentOfficeAddressState,
+                    agentOfficeAddressZipCode,
+                    members,
+                    signers,
+                    paymentType,
+                    contactFirstName,
+                    contactLastName,
+                    contactPhoneNumber,
+                  ]
+                required: true
+              - label: Type
+                name: type
+                widget: select
+                options: ["director"]
+                required: false
+              - label: Label
+                name: label
+                widget: string
+                required: true
+          - label: Inline Errors
+            name: inlineErrors
+            widget: list
+            summary: "{{fields}} {{type}} {{priority}}"
+            fields:
+              - label: Fields
+                name: fields
+                widget: select
+                multiple: true
+                options:
+                  [
+                    signers,
+                    members,
+                    paymentType,
+                    canCreateLimitedPartner,
+                    canGetDistribution,
+                    canMakeDistribution,
+                  ]
+                required: true
+              - label: Type
+                name: type
+                widget: select
+                options: [checkbox, name, minimum]
+                required: false
+              - label: Label
+                name: label
+                widget: string
+                required: true
+              - label: "Priority"
+                name: "priority"
+                widget: "number"
+                default: 0
+                value_type: "int"
+                min: 0
+                required: false
   - name: "dashboard-settings"
     label: "Dashboard Settings"
     editor:

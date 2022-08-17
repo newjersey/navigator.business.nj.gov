@@ -1,23 +1,50 @@
 import { Alert } from "@/components/njwds-extended/Alert";
+import { FormationErrorType, FormationFieldErrorMap } from "@/lib/types/types";
 import { camelCaseToSentence } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { FormationFormData } from "@businessnjgovnavigator/shared/";
-import { ReactElement } from "react";
+import FormationErrors from "@businessnjgovnavigator/content/fieldConfig/formation-error.json";
+
+import { FormationFields } from "@businessnjgovnavigator/shared";
+import { ReactElement, useEffect } from "react";
 
 interface Props {
   showRequiredFieldsError: boolean;
-  requiredFieldsWithError: (keyof FormationFormData)[];
+  errorData: FormationFieldErrorMap;
 }
 
 export const BusinessFormationEmptyFieldAlert = (props: Props): ReactElement => {
+  useEffect(() => {
+    if (props.showRequiredFieldsError) setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 100);
+  }, [props.showRequiredFieldsError]);
+
+  const errors = Object.keys(props.errorData)
+    .filter((i) => props.errorData[i as FormationFields].invalid)
+    .map((i) => ({ ...props.errorData[i as FormationFields], name: i }));
+
+  const errorTypes = [
+    ...new Set(
+      errors.flatMap((er) => {
+        const errors = FormationErrors.formationErrors.filter(
+          (inEr) =>
+            inEr.fields.includes(er.name as string) &&
+            (er?.types ? er.types.includes(inEr.type as FormationErrorType) : true)
+        );
+        if (errors.length === 0) return { label: camelCaseToSentence(er.name), fields: [er.name] };
+        return errors;
+      })
+    ),
+  ];
+
   return (
     <>
-      {props.showRequiredFieldsError && props.requiredFieldsWithError.length > 0 && (
+      {props.showRequiredFieldsError && errorTypes.length > 0 && (
         <Alert variant="error">
           <div>{Config.businessFormationDefaults.missingFieldsOnSubmitModalText}</div>
           <ul>
-            {props.requiredFieldsWithError.map((it) => (
-              <li key={it}>{camelCaseToSentence(it)}</li>
+            {errorTypes.map((it) => (
+              <li key={it.label} data-testid={it.fields.join("_")}>
+                {it.label}
+              </li>
             ))}
           </ul>
         </Alert>

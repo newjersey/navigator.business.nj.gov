@@ -1,3 +1,4 @@
+import { camelCaseToSentence } from "@/lib/utils/helpers";
 import {
   generateFormationAddress,
   generateFormationDisplayContent,
@@ -15,6 +16,7 @@ import {
 } from "@/test/helpers-formation";
 import { currentUserData, userDataUpdatedNTimes } from "@/test/mock/withStatefulUserData";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
+import FormationErrors from "@businessnjgovnavigator/content/fieldConfig/formation-error.json";
 import {
   BusinessUser,
   createEmptyFormationAddress,
@@ -338,7 +340,11 @@ describe("Formation - ContactsSection", () => {
       const page = await getPageHelper({ legalStructureId }, { members: [] });
       await page.submitContactsTab(false);
       expect(
-        screen.getByText(Config.businessFormationDefaults.directorsMinimumErrorText, { exact: false })
+        screen.getByText(
+          FormationErrors.inlineErrors.find((i) => i.fields.includes("members") && i.type === "minimum")
+            ?.label as string,
+          { exact: false }
+        )
       ).toBeInTheDocument();
     });
 
@@ -421,8 +427,11 @@ describe("Formation - ContactsSection", () => {
         const page = await getPageHelper({ legalStructureId }, { signers });
         await page.submitContactsTab(false);
         const signerErrorText = () =>
-          screen.queryByText(Config.businessFormationDefaults.signersEmptyErrorText, { exact: false });
-
+          screen.queryByText(
+            FormationErrors.inlineErrors.find((i) => i.fields.includes("signers") && i.type === "name")
+              ?.label as string,
+            { exact: false }
+          );
         expect(signerErrorText()).toBeInTheDocument();
         const nameTd = screen.getByText(signers[0].addressLine1, { exact: false });
         // eslint-disable-next-line testing-library/no-node-access
@@ -437,7 +446,11 @@ describe("Formation - ContactsSection", () => {
         const page = await getPageHelper({ legalStructureId }, { signers });
         await page.submitContactsTab(false);
         const signerCheckboxErrorText = () =>
-          screen.queryByText(Config.businessFormationDefaults.signatureCheckboxErrorText, { exact: false });
+          screen.queryByText(
+            FormationErrors.inlineErrors.find((i) => i.fields.includes("signers") && i.type === "checkbox")
+              ?.label as string,
+            { exact: false }
+          );
         expect(signerCheckboxErrorText()).toBeInTheDocument();
         page.checkSignerBox(0);
         expect(signerCheckboxErrorText()).not.toBeInTheDocument();
@@ -561,13 +574,14 @@ describe("Formation - ContactsSection", () => {
         expect(newMembers.find((member) => member == members[1])).toBeFalsy();
       });
 
-      it("adds members using business data using checkbox", async () => {
+      it("adds members using business data using checkbox with name", async () => {
         const page = await getPageHelper(
           {
             legalStructureId,
             municipality: generateMunicipality({ displayName: "Hampton Borough", name: "Hampton" }),
           },
           {
+            members: [],
             contactFirstName: "John",
             contactLastName: "Smith",
             businessAddressLine1: "123 business address",
@@ -580,6 +594,33 @@ describe("Formation - ContactsSection", () => {
 
         page.selectCheckbox(Config.businessFormationDefaults.membersCheckboxText);
         expect(page.getInputElementByLabel("Address name").value).toBe("John Smith");
+        expect(page.getInputElementByLabel("Address line1").value).toBe("123 business address");
+        expect(page.getInputElementByLabel("Address line2").value).toBe("business suite 201");
+        expect(page.getInputElementByLabel("Address city").value).toBe("Hampton");
+        expect(page.getInputElementByLabel("Address state").value).toBe("NJ");
+        expect(page.getInputElementByLabel("Address zip code").value).toBe("07601");
+      });
+
+      it("adds members using business data using checkbox without name", async () => {
+        const page = await getPageHelper(
+          {
+            legalStructureId,
+            municipality: generateMunicipality({ displayName: "Hampton Borough", name: "Hampton" }),
+          },
+          {
+            members: [generateFormationAddress({})],
+            contactFirstName: "John",
+            contactLastName: "Smith",
+            businessAddressLine1: "123 business address",
+            businessAddressLine2: "business suite 201",
+            businessAddressState: "NJ",
+            businessAddressZipCode: "07601",
+          }
+        );
+        await page.openAddressModal("members");
+
+        page.selectCheckbox(Config.businessFormationDefaults.membersCheckboxText);
+        expect(page.getInputElementByLabel("Address name").value).toBe("");
         expect(page.getInputElementByLabel("Address line1").value).toBe("123 business address");
         expect(page.getInputElementByLabel("Address line2").value).toBe("business suite 201");
         expect(page.getInputElementByLabel("Address city").value).toBe("Hampton");
@@ -632,17 +673,11 @@ describe("Formation - ContactsSection", () => {
       });
 
       it("resets form on cancel", async () => {
-        const page = await getPageHelper(
-          { legalStructureId },
-          {
-            contactFirstName: "John",
-            contactLastName: "Smith",
-          }
-        );
+        const page = await getPageHelper({ legalStructureId }, {});
         await page.openAddressModal("members");
 
         page.selectCheckbox(Config.businessFormationDefaults.membersCheckboxText);
-        expect(page.getInputElementByLabel("Address name").value).toBe("John Smith");
+        page.fillText("Address name", "Lincoln");
         fireEvent.click(screen.getByText(Config.businessFormationDefaults.addressModalBackButtonText));
         await waitFor(() =>
           expect(
@@ -668,6 +703,7 @@ describe("Formation - ContactsSection", () => {
 
         await page.openAddressModal("members");
         page.selectCheckbox(Config.businessFormationDefaults.membersCheckboxText);
+        page.fillText("Address name", "Lincoln");
         page.clickAddressSubmit();
 
         await waitFor(() =>
@@ -749,18 +785,28 @@ describe("Formation - ContactsSection", () => {
         );
         await page.submitContactsTab(false);
         const signerErrorText = () =>
-          screen.queryByText(Config.businessFormationDefaults.signersEmptyErrorText, { exact: false });
-
+          screen.queryByText(
+            FormationErrors.inlineErrors.find((i) => i.fields.includes("signers") && i.type === "name")
+              ?.label as string,
+            { exact: false }
+          );
         expect(signerErrorText()).toBeInTheDocument();
         page.fillText("Signer 0", "Elrond");
         expect(signerErrorText()).not.toBeInTheDocument();
       });
 
       it("fires validations when signers do not check the sign checkbox", async () => {
-        const page = await getPageHelper({ legalStructureId }, { signers: [generateFormationAddress({})] });
+        const page = await getPageHelper(
+          { legalStructureId },
+          { signers: [generateFormationAddress({ signature: false })] }
+        );
         await page.submitContactsTab(false);
         const signerCheckboxErrorText = () =>
-          screen.queryByText(Config.businessFormationDefaults.signatureCheckboxErrorText, { exact: false });
+          screen.queryByText(
+            FormationErrors.inlineErrors.find((i) => i.fields.includes("signers") && i.type === "checkbox")
+              ?.label as string,
+            { exact: false }
+          );
         expect(signerCheckboxErrorText()).toBeInTheDocument();
         page.selectCheckbox(`${Config.businessFormationDefaults.signatureColumnLabel}*`);
         expect(signerCheckboxErrorText()).not.toBeInTheDocument();
@@ -1085,7 +1131,10 @@ describe("Formation - ContactsSection", () => {
           }
         );
         await page.submitContactsTab(false);
-        expect(screen.getByRole("alert")).toHaveTextContent(/Agent number/);
+        expect(screen.getByRole("alert")).toHaveTextContent(
+          FormationErrors.formationErrors.find((i) => i.fields.includes("agentNumber"))?.label ??
+            camelCaseToSentence("agentNumber")
+        );
       });
     });
 
@@ -1099,7 +1148,10 @@ describe("Formation - ContactsSection", () => {
           }
         );
         await page.submitContactsTab(false);
-        expect(screen.getByRole("alert")).toHaveTextContent(/Agent name/);
+        expect(screen.getByRole("alert")).toHaveTextContent(
+          FormationErrors.formationErrors.find((i) => i.fields.includes("agentName"))?.label ??
+            camelCaseToSentence("agentName")
+        );
       });
 
       it("agent email", async () => {
@@ -1111,7 +1163,10 @@ describe("Formation - ContactsSection", () => {
           }
         );
         await page.submitContactsTab(false);
-        expect(screen.getByRole("alert")).toHaveTextContent(/Agent email/);
+        expect(screen.getByRole("alert")).toHaveTextContent(
+          FormationErrors.formationErrors.find((i) => i.fields.includes("agentEmail"))?.label ??
+            camelCaseToSentence("agentEmail")
+        );
       });
 
       it("agent address line 1", async () => {
@@ -1123,7 +1178,10 @@ describe("Formation - ContactsSection", () => {
           }
         );
         await page.submitContactsTab(false);
-        expect(screen.getByRole("alert")).toHaveTextContent(/Agent office address line1/);
+        expect(screen.getByRole("alert")).toHaveTextContent(
+          FormationErrors.formationErrors.find((i) => i.fields.includes("agentOfficeAddressLine1"))?.label ??
+            camelCaseToSentence("agentOfficeAddressLine1")
+        );
       });
 
       it("Agent office address city", async () => {
@@ -1135,7 +1193,10 @@ describe("Formation - ContactsSection", () => {
           }
         );
         await page.submitContactsTab(false);
-        expect(screen.getByRole("alert")).toHaveTextContent(/Agent office address city/);
+        expect(screen.getByRole("alert")).toHaveTextContent(
+          FormationErrors.formationErrors.find((i) => i.fields.includes("agentOfficeAddressCity"))?.label ??
+            camelCaseToSentence("agentOfficeAddressCity")
+        );
       });
 
       it("Agent office address zip code", async () => {
@@ -1147,7 +1208,10 @@ describe("Formation - ContactsSection", () => {
           }
         );
         await page.submitContactsTab(false);
-        expect(screen.getByRole("alert")).toHaveTextContent(/Agent office address zip code/);
+        expect(screen.getByRole("alert")).toHaveTextContent(
+          FormationErrors.formationErrors.find((i) => i.fields.includes("agentOfficeAddressZipCode"))
+            ?.label ?? camelCaseToSentence("agentOfficeAddressZipCode")
+        );
       });
     });
 

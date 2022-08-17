@@ -21,7 +21,7 @@ interface Props {
 }
 
 export const BusinessFormationTextBox = (props: Props): ReactElement => {
-  const { state, setFormationFormData } = useContext(BusinessFormationContext);
+  const { state, setFormationFormData, fieldsAreInvalid } = useContext(BusinessFormationContext);
   const [isExpanded, setIsExpanded] = useState(props.required || !!state.formationFormData[props.fieldName]);
 
   const handleAddButtonClick = (): void => {
@@ -58,53 +58,56 @@ export const BusinessFormationTextBox = (props: Props): ReactElement => {
         </div>
       </div>
       {isExpanded ? (
-        <>
+        <div className={fieldsAreInvalid([props.fieldName]) ? `input-error-bar` : ""}>
           <Content className="margin-bottom-2">{props.contentMd}</Content>
-          <div className="grid-row">
-            <div className="grid-col">
-              <BusinessFormationTextField
-                placeholder={props.placeholderText}
-                fieldName={props.fieldName}
-                label={props.inputLabel ?? ""}
-                validationText={Config.businessFormationDefaults.genericErrorText}
-                required={true}
-                fieldOptions={{
-                  multiline: true,
-                  rows: 3,
-                  className: "override-padding",
-                  inputProps: {
-                    maxLength: props.maxChars,
-                    sx: {
-                      padding: "1rem",
+          <div style={{ maxWidth: "41em" }}>
+            <div className="grid-row">
+              <div className="grid-col">
+                <BusinessFormationTextField
+                  placeholder={props.placeholderText}
+                  fieldName={props.fieldName}
+                  label={props.inputLabel ?? ""}
+                  validationText={Config.businessFormationDefaults.genericErrorText}
+                  required={props.required}
+                  inlineErrorStyling={true}
+                  fieldOptions={{
+                    multiline: true,
+                    rows: 3,
+                    className: "override-padding",
+                    inputProps: {
+                      maxLength: props.maxChars,
+                      sx: {
+                        padding: "1rem",
+                      },
                     },
-                  },
-                }}
-              />
-            </div>
-            {!props.required ? (
-              <div className="grid-col-auto margin-x-2 margin-top-3 display-flex flex-column flex-justify-center">
-                <Button
-                  style="tertiary"
-                  onClick={() => removeEntry()}
-                  className="display-flex flex-column flex-justify-center"
-                >
-                  <Icon
-                    className="font-body-lg"
-                    label={`remove ${camelCaseToSentence(props.fieldName).toLowerCase()}`}
-                  >
-                    delete
-                  </Icon>
-                </Button>
+                  }}
+                />
               </div>
-            ) : (
-              <></>
-            )}
+              {!props.required ? (
+                <div className="grid-col-auto margin-x-2 margin-top-3 display-flex flex-column flex-justify-center">
+                  <Button
+                    style="tertiary"
+                    onClick={() => removeEntry()}
+                    className="display-flex flex-column flex-justify-center"
+                  >
+                    <Icon
+                      className="font-body-lg"
+                      label={`remove ${camelCaseToSentence(props.fieldName).toLowerCase()}`}
+                    >
+                      delete
+                    </Icon>
+                  </Button>
+                </div>
+              ) : (
+                <></>
+              )}
+            </div>
+            <div className="text-base-dark margin-top-1 margin-bottom-2">
+              {(state.formationFormData[props.fieldName] as string)?.length ?? 0} / {props.maxChars}{" "}
+              {Config.businessFormationDefaults.charactersLabel}
+            </div>
           </div>
-          <div className="text-base-dark margin-top-1 margin-bottom-2">
-            {(state.formationFormData[props.fieldName] as string)?.length ?? 0} / {props.maxChars}{" "}
-            {Config.businessFormationDefaults.charactersLabel}
-          </div>
-        </>
+        </div>
       ) : (
         <></>
       )}

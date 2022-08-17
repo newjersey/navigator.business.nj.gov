@@ -9,11 +9,7 @@ export const FormationMunicipality = (): ReactElement => {
   const { Config } = useConfig();
 
   const onValidation = (event: FocusEvent<HTMLInputElement>) => {
-    if (!event.target.value.trim()) {
-      setErrorMap({ ...state.errorMap, businessAddressCity: { invalid: true } });
-    } else if (event.target.value.trim()) {
-      setErrorMap({ ...state.errorMap, businessAddressCity: { invalid: false } });
-    }
+    setErrorMap({ ...state.errorMap, businessAddressCity: { invalid: !event.target.value.trim() } });
   };
 
   const onSelect = (value: Municipality | undefined): void => {

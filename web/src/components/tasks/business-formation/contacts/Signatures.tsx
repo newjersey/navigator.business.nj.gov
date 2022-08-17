@@ -5,11 +5,11 @@ import { Icon } from "@/components/njwds/Icon";
 import { ValidatedCheckbox } from "@/components/ValidatedCheckbox";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { MediaQueries } from "@/lib/PageSizes";
-import { FormationFields } from "@/lib/types/types";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { createEmptyFormationAddress } from "@businessnjgovnavigator/shared/formationData";
+import { createEmptyFormationAddress, FormationFields } from "@businessnjgovnavigator/shared";
 import { useMediaQuery } from "@mui/material";
 import React, { ChangeEvent, ReactElement, useContext } from "react";
+import { FormationAddress } from "../../../../../../shared/lib/shared/src/formationData";
 
 export const Signatures = (): ReactElement => {
   const { state, setFormationFormData, setErrorMap } = useContext(BusinessFormationContext);
@@ -43,7 +43,7 @@ export const Signatures = (): ReactElement => {
       signers,
     });
 
-    if (value && state.formationFormData.signers.every((it) => it.signature && it.name)) {
+    if (value.trim() && signers.every((it: FormationAddress) => it.signature && it.name)) {
       setErrorMap({ ...state.errorMap, signers: { invalid: false } });
     }
   };
@@ -59,7 +59,7 @@ export const Signatures = (): ReactElement => {
       signers,
     });
 
-    if (event.target.checked && state.formationFormData.signers.every((it) => it.signature && it.name)) {
+    if (event.target.checked && signers.every((it: FormationAddress) => it.signature && it.name)) {
       setErrorMap({ ...state.errorMap, signers: { invalid: false } });
     }
   };
@@ -124,7 +124,7 @@ export const Signatures = (): ReactElement => {
         <Content>{state.displayContent.signatureHeader.contentMd}</Content>
         <br />
         <div className="grid-row flex-align-center">
-          <div className="grid-col">
+          <div className={`grid-col ${state.errorMap["signers"].invalid ? "input-error-bar" : ""}`}>
             <div className="fdr space-between">
               <Content>{Config.businessFormationDefaults.signerLabel}</Content>
               <Content>{`${Config.businessFormationDefaults.signatureColumnLabel}*`}</Content>
@@ -167,7 +167,7 @@ export const Signatures = (): ReactElement => {
           {isTabletAndUp && renderDeleteColumn({ visible: false })}
         </div>
 
-        {state.formationFormData.signers.slice(1).map((it, _index) => {
+        {state.formationFormData.signers.slice(1).map((it: FormationAddress, _index: number) => {
           const index = _index + 1;
           return (
             <div className="margin-bottom-3" key={index}>

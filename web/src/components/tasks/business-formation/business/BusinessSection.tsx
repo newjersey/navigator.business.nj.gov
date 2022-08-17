@@ -2,45 +2,35 @@ import { Button } from "@/components/njwds-extended/Button";
 import { MainBusiness } from "@/components/tasks/business-formation/business/MainBusiness";
 import { PartnershipRights } from "@/components/tasks/business-formation/business/PartnershipRights";
 import { Provisions } from "@/components/tasks/business-formation/business/Provisions";
-import { BusinessFormationEmptyFieldAlert } from "@/components/tasks/business-formation/BusinessFormationEmptyFieldAlert";
 import { BusinessFormationTextBox } from "@/components/tasks/business-formation/BusinessFormationTextBox";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { FormationFieldErrorMap, FormationFields } from "@/lib/types/types";
+import { FormationFieldErrorMap } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { scrollToTop, zipCodeRange } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { corpLegalStructures, getCurrentDate, parseDate } from "@businessnjgovnavigator/shared/";
-import { ReactElement, useContext, useMemo, useState } from "react";
+import {
+  corpLegalStructures,
+  FormationFields,
+  getCurrentDate,
+  parseDate,
+} from "@businessnjgovnavigator/shared/";
+import { ReactElement, useContext, useMemo } from "react";
 
 export const BusinessSection = (): ReactElement => {
-  const { state, setFormationFormData, setErrorMap, setTab } = useContext(BusinessFormationContext);
-  const [showRequiredFieldsError, setShowRequiredFieldsError] = useState<boolean>(false);
+  const { state, setFormationFormData, setErrorMap, setTab, setShowRequiredFieldsError } =
+    useContext(BusinessFormationContext);
   const { userData, update } = useUserData();
 
-  const requiredFieldsWithError = useMemo(() => {
+  const requiredFieldsWithError: FormationFields[] = useMemo(() => {
     const requiredFields: FormationFields[] = [
       "businessName",
       "businessSuffix",
       "businessAddressCity",
       "businessAddressLine1",
-      "businessAddressZipCode",
     ];
 
-    const isStartDateValid = (): boolean => {
-      if (!state.formationFormData.businessStartDate) return false;
-      return (
-        parseDate(state.formationFormData.businessStartDate).isValid() &&
-        parseDate(state.formationFormData.businessStartDate).isAfter(
-          getCurrentDate().subtract(1, "day"),
-          "day"
-        )
-      );
-    };
-
-    const isCorp = corpLegalStructures.includes(state.legalStructureId);
-
-    if (isCorp) requiredFields.push("businessTotalStock");
+    if (corpLegalStructures.includes(state.legalStructureId)) requiredFields.push("businessTotalStock");
 
     if (state.legalStructureId == "limited-partnership") {
       state.formationFormData.withdrawals.length === 0 && requiredFields.push("withdrawals");
@@ -66,25 +56,31 @@ export const BusinessSection = (): ReactElement => {
       }
     }
 
+    const isStartDateValid = (value: string): boolean => {
+      if (!value) return false;
+      return (
+        parseDate(value).isValid() && parseDate(value).isAfter(getCurrentDate().subtract(1, "day"), "day")
+      );
+    };
+
     const invalidFields = requiredFields.filter(
       (it) => state.errorMap[it].invalid || !state.formationFormData[it]
     );
 
-    if (!isStartDateValid()) {
+    if (!isStartDateValid(state.formationFormData.businessStartDate)) {
       invalidFields.push("businessStartDate");
     }
 
-    const isValidBusinessAddressZipCode = (): boolean => {
-      if (!state.formationFormData.businessAddressZipCode) return false;
-      return zipCodeRange(state.formationFormData.businessAddressZipCode);
-    };
-
-    if (!isValidBusinessAddressZipCode() && !invalidFields.includes("businessAddressZipCode")) {
+    if (
+      !(state.formationFormData.businessAddressZipCode
+        ? zipCodeRange(state.formationFormData.businessAddressZipCode)
+        : false)
+    ) {
       invalidFields.push("businessAddressZipCode");
     }
 
     return invalidFields;
-  }, [state.formationFormData, state.errorMap, state.legalStructureId]);
+  }, [state.errorMap, state.formationFormData, state.legalStructureId]);
 
   const submitBusinessData = async () => {
     if (!userData) return;
@@ -187,12 +183,8 @@ export const BusinessSection = (): ReactElement => {
       />
       <hr className="margin-bottom-2 margin-top-0" aria-hidden={true} />
       <Provisions />
-      <BusinessFormationEmptyFieldAlert
-        showRequiredFieldsError={showRequiredFieldsError}
-        requiredFieldsWithError={requiredFieldsWithError}
-      />
       <div className="margin-top-2">
-        <div className="flex flex-justify-end bg-base-lightest margin-x-neg-205 padding-3 margin-top-3 margin-bottom-neg-205">
+        <div className="flex flex-justify-end bg-base-lightest margin-x-neg-4 padding-3 margin-top-3 margin-bottom-neg-4">
           <Button
             style="secondary"
             widthAutoOnMobile

@@ -5,12 +5,15 @@ import { corpLegalStructures } from "@businessnjgovnavigator/shared";
 import { ReactElement, useContext } from "react";
 
 export const Members = (): ReactElement => {
-  const { state, setFormationFormData } = useContext(BusinessFormationContext);
+  const { state, setFormationFormData, setErrorMap } = useContext(BusinessFormationContext);
   const isCorp = corpLegalStructures.includes(state.legalStructureId);
 
   const defaultAddress = !isCorp
     ? {
-        name: `${state.formationFormData.contactFirstName.trim()} ${state.formationFormData.contactLastName.trim()}`,
+        name:
+          state.formationFormData.members.length === 0
+            ? `${state.formationFormData.contactFirstName.trim()} ${state.formationFormData.contactLastName.trim()}`
+            : "",
         addressCity: state.formationFormData.businessAddressCity?.name as string,
         addressLine1: state.formationFormData.businessAddressLine1,
         addressLine2: state.formationFormData.businessAddressLine2,
@@ -41,7 +44,16 @@ export const Members = (): ReactElement => {
     <Addresses
       fieldName={"members"}
       addressData={state.formationFormData.members}
-      setData={(members) => setFormationFormData({ ...state.formationFormData, members })}
+      setData={(members) => {
+        setFormationFormData({ ...state.formationFormData, members });
+        if (
+          members.every(
+            (it) => it.name && it.addressCity && it.addressLine1 && it.addressState && it.addressZipCode
+          )
+        ) {
+          setErrorMap({ ...state.errorMap, members: { invalid: false } });
+        }
+      }}
       needSignature={false}
       displayContent={{
         contentMd: state.displayContent.members.contentMd,
