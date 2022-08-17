@@ -30,8 +30,8 @@ describe("loadDisplayContent", () => {
         "id: welcome-id\n" +
         "header: Welcome!\n" +
         "imgPath: /img/congratulations-purple.svg\n" +
-        "color: roadmap-purple\n" +
-        "headerBackgroundColor: roadmap-purple-light\n" +
+        "color: accent-cooler\n" +
+        "headerBackgroundColor: accent-cooler-lightest\n" +
         "hasCloseButton: false\n" +
         "weight: 1\n" +
         "---\n" +
@@ -44,8 +44,8 @@ describe("loadDisplayContent", () => {
         id: "welcome-id",
         header: "Welcome!",
         imgPath: "/img/congratulations-purple.svg",
-        color: "roadmap-purple",
-        headerBackgroundColor: "roadmap-purple-light",
+        color: "accent-cooler",
+        headerBackgroundColor: "accent-cooler-lightest",
         hasCloseButton: false,
         weight: 1,
         contentMd: "**Welcome!**",
