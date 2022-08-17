@@ -1,3 +1,4 @@
+import { camelCaseToSentence } from "@/lib/utils/helpers";
 import {
   generateFormationDisplayContent,
   generateFormationFormData,
@@ -14,6 +15,7 @@ import {
 import { mockPush } from "@/test/mock/mockRouter";
 import { currentUserData, userDataUpdatedNTimes } from "@/test/mock/withStatefulUserData";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
+import FormationErrors from "@businessnjgovnavigator/content/fieldConfig/formation-error.json";
 import {
   BusinessUser,
   FormationFormData,
@@ -480,20 +482,29 @@ describe("Formation - BusinessSection", () => {
     it("Business suffix", async () => {
       const page = await getPageHelper({}, { businessSuffix: undefined });
       await page.submitBusinessTab(false);
-      expect(screen.getByRole("alert")).toHaveTextContent(/Business suffix/);
+      expect(screen.getByRole("alert")).toHaveTextContent(
+        FormationErrors.formationErrors.find((i) => i.fields.includes("businessSuffix"))?.label ??
+          camelCaseToSentence("businessSuffix")
+      );
     });
 
     it("Withdrawals", async () => {
       const page = await getPageHelper({ legalStructureId: "limited-partnership" }, { withdrawals: "" });
       await page.submitBusinessTab(false);
       expect(screen.getByText(Config.businessFormationDefaults.genericErrorText)).toBeInTheDocument();
-      expect(screen.getByRole("alert")).toHaveTextContent(/Withdrawals/);
+      expect(screen.getByRole("alert")).toHaveTextContent(
+        FormationErrors.formationErrors.find((i) => i.fields.includes("withdrawals"))?.label ??
+          camelCaseToSentence("withdrawals")
+      );
     });
 
     it("Dissolution", async () => {
       const page = await getPageHelper({ legalStructureId: "limited-partnership" }, { dissolution: "" });
       await page.submitBusinessTab(false);
-      expect(screen.getByRole("alert")).toHaveTextContent(/Dissolution/);
+      expect(screen.getByRole("alert")).toHaveTextContent(
+        FormationErrors.formationErrors.find((i) => i.fields.includes("dissolution"))?.label ??
+          camelCaseToSentence("dissolution")
+      );
     });
 
     it("Combined Investment", async () => {
@@ -502,7 +513,10 @@ describe("Formation - BusinessSection", () => {
         { combinedInvestment: "" }
       );
       await page.submitBusinessTab(false);
-      expect(screen.getByRole("alert")).toHaveTextContent(/Combined investment/);
+      expect(screen.getByRole("alert")).toHaveTextContent(
+        FormationErrors.formationErrors.find((i) => i.fields.includes("combinedInvestment"))?.label ??
+          camelCaseToSentence("combinedInvestment")
+      );
     });
 
     it("Partnership Rights can create Limited Partner", async () => {
@@ -512,7 +526,13 @@ describe("Formation - BusinessSection", () => {
       );
       await page.submitBusinessTab(false);
       expect(screen.getByText(Config.businessFormationDefaults.genericErrorText)).toBeInTheDocument();
-      expect(screen.getByRole("alert")).toHaveTextContent(/Can create limited partner/);
+      expect(
+        screen.getByText(
+          FormationErrors.inlineErrors.find((i) => i.fields.includes("canCreateLimitedPartner"))
+            ?.label as string,
+          { exact: false }
+        )
+      ).toBeInTheDocument();
     });
 
     it("Partnership Rights Limited Partner Terms", async () => {
@@ -523,7 +543,10 @@ describe("Formation - BusinessSection", () => {
       fireEvent.click(screen.getByTestId("canCreateLimitedPartner-true"));
       await page.submitBusinessTab(false);
       expect(screen.getByText(Config.businessFormationDefaults.genericErrorText)).toBeInTheDocument();
-      expect(screen.getByRole("alert")).toHaveTextContent(/Create limited partner terms/);
+      expect(screen.getByRole("alert")).toHaveTextContent(
+        FormationErrors.formationErrors.find((i) => i.fields.includes("createLimitedPartnerTerms"))?.label ??
+          camelCaseToSentence("createLimitedPartnerTerms")
+      );
     });
 
     it("Partnership Rights can make distribution", async () => {
@@ -532,7 +555,12 @@ describe("Formation - BusinessSection", () => {
         { canMakeDistribution: undefined }
       );
       await page.submitBusinessTab(false);
-      expect(screen.getByRole("alert")).toHaveTextContent(/Can make distribution/);
+      expect(
+        screen.getByText(
+          FormationErrors.inlineErrors.find((i) => i.fields.includes("canMakeDistribution"))?.label as string,
+          { exact: false }
+        )
+      ).toBeInTheDocument();
     });
 
     it("Partnership Rights make distribution terms", async () => {
@@ -542,7 +570,10 @@ describe("Formation - BusinessSection", () => {
       );
       fireEvent.click(screen.getByTestId("canMakeDistribution-true"));
       await page.submitBusinessTab(false);
-      expect(screen.getByRole("alert")).toHaveTextContent(/Make distribution terms/);
+      expect(screen.getByRole("alert")).toHaveTextContent(
+        FormationErrors.formationErrors.find((i) => i.fields.includes("makeDistributionTerms"))?.label ??
+          camelCaseToSentence("makeDistributionTerms")
+      );
     });
 
     it("Partnership Rights can get distribution", async () => {
@@ -551,7 +582,13 @@ describe("Formation - BusinessSection", () => {
         { canGetDistribution: undefined }
       );
       await page.submitBusinessTab(false);
-      expect(screen.getByRole("alert")).toHaveTextContent(/Can get distribution/);
+
+      expect(
+        screen.getByText(
+          FormationErrors.inlineErrors.find((i) => i.fields.includes("canGetDistribution"))?.label as string,
+          { exact: false }
+        )
+      ).toBeInTheDocument();
     });
 
     it("Partnership Rights get distribution terms", async () => {
@@ -561,7 +598,10 @@ describe("Formation - BusinessSection", () => {
       );
       fireEvent.click(screen.getByTestId("canGetDistribution-true"));
       await page.submitBusinessTab(false);
-      expect(screen.getByRole("alert")).toHaveTextContent(/Get distribution terms/);
+      expect(screen.getByRole("alert")).toHaveTextContent(
+        FormationErrors.formationErrors.find((i) => i.fields.includes("getDistributionTerms"))?.label ??
+          camelCaseToSentence("getDistributionTerms")
+      );
     });
 
     it("Total Shares", async () => {
@@ -570,7 +610,10 @@ describe("Formation - BusinessSection", () => {
         { businessTotalStock: undefined }
       );
       await page.submitBusinessTab(false);
-      expect(screen.getByRole("alert")).toHaveTextContent(/Business total stock/);
+      expect(screen.getByRole("alert")).toHaveTextContent(
+        FormationErrors.formationErrors.find((i) => i.fields.includes("businessTotalStock"))?.label ??
+          camelCaseToSentence("businessTotalStock")
+      );
       expect(
         screen.getByText(Config.businessFormationDefaults.businessTotalStockErrorText)
       ).toBeInTheDocument();
@@ -579,13 +622,19 @@ describe("Formation - BusinessSection", () => {
     it("Business address line1", async () => {
       const page = await getPageHelper({}, { businessAddressLine1: "" });
       await page.submitBusinessTab(false);
-      expect(screen.getByRole("alert")).toHaveTextContent(/Business address line1/);
+      expect(screen.getByRole("alert")).toHaveTextContent(
+        FormationErrors.formationErrors.find((i) => i.fields.includes("businessAddressLine1"))?.label ??
+          camelCaseToSentence("businessAddressLine1")
+      );
     });
 
     it("Business address zip code", async () => {
       const page = await getPageHelper({}, { businessAddressZipCode: "" });
       await page.submitBusinessTab(false);
-      expect(screen.getByRole("alert")).toHaveTextContent(/Business address zip code/);
+      expect(screen.getByRole("alert")).toHaveTextContent(
+        FormationErrors.formationErrors.find((i) => i.fields.includes("businessAddressZipCode"))?.label ??
+          camelCaseToSentence("businessAddressZipCode")
+      );
     });
 
     it("does not require business address line 2", async () => {

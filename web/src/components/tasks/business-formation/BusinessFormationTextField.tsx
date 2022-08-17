@@ -7,6 +7,7 @@ import { ReactElement, useContext } from "react";
 export interface Props extends Omit<GenericTextFieldProps, "value" | "fieldName"> {
   fieldName: FormationTextField;
   label: string;
+  inlineErrorStyling?: boolean;
 }
 
 export const BusinessFormationTextField = (props: Props): ReactElement => {
@@ -20,21 +21,24 @@ export const BusinessFormationTextField = (props: Props): ReactElement => {
   };
 
   const onValidation = (fieldName: string, invalid: boolean) => {
-    setErrorMap({ ...state.errorMap, [fieldName]: { invalid } });
+    setErrorMap({ ...state.errorMap, [fieldName]: { invalid, name: fieldName } });
   };
 
+  const error = props.error ?? state.errorMap[props.fieldName].invalid;
   return (
     <div>
-      <Content>{props.label}</Content>
-      <GenericTextField
-        value={state.formationFormData[props.fieldName]}
-        placeholder={props.placeholder}
-        onValidation={onValidation}
-        {...props}
-        handleChange={handleChange}
-        error={props.error ?? state.errorMap[props.fieldName].invalid}
-        formInputFull
-      />
+      <div className={error && !props.inlineErrorStyling ? `input-error-bar` : ""}>
+        <Content>{props.label}</Content>
+        <GenericTextField
+          value={state.formationFormData[props.fieldName]}
+          placeholder={props.placeholder}
+          onValidation={onValidation}
+          {...props}
+          handleChange={handleChange}
+          error={error}
+          formInputFull
+        />
+      </div>
     </div>
   );
 };

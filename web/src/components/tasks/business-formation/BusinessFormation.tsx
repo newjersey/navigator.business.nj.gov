@@ -3,6 +3,7 @@ import { LoadingIndicator } from "@/components/LoadingIndicator";
 import { HorizontalStepper } from "@/components/njwds-extended/HorizontalStepper";
 import { TaskCTA } from "@/components/TaskCTA";
 import { TaskHeader } from "@/components/TaskHeader";
+import { BusinessFormationEmptyFieldAlert } from "@/components/tasks/business-formation/BusinessFormationEmptyFieldAlert";
 import { BusinessFormationTabs } from "@/components/tasks/business-formation/BusinessFormationTabs";
 import { FormationSuccessPage } from "@/components/tasks/business-formation/success/FormationSuccessPage";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
@@ -11,11 +12,12 @@ import * as api from "@/lib/api-client/apiClient";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { splitFullName } from "@/lib/domain-logic/splitFullName";
-import { FormationDisplayContentMap, FormationFieldErrorMap, FormationFields, Task } from "@/lib/types/types";
+import { FormationDisplayContentMap, FormationFieldErrorMap, Task } from "@/lib/types/types";
 import { getModifiedTaskContent, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import {
   createEmptyFormationFormData,
   defaultFormationLegalType,
+  FormationFields,
   FormationFormData,
   FormationLegalType,
   FormationLegalTypes,
@@ -51,7 +53,7 @@ const allFormationFormFields = Object.keys(createEmptyFormationFormData()) as (k
 
 const createFormationFieldErrorMap = (): FormationFieldErrorMap =>
   allFormationFormFields.reduce((acc, field: FormationFields) => {
-    acc[field] = { invalid: false };
+    acc[field] = { invalid: false, name: field };
     return acc;
   }, {} as FormationFieldErrorMap);
 
@@ -63,11 +65,18 @@ export const BusinessFormation = (props: Props): ReactElement => {
   const [formationFormData, setFormationFormData] = useState<FormationFormData>(
     createEmptyFormationFormData()
   );
-  const [tab, setTab] = useState(0);
+  const [tab, updateTab] = useState(0);
   const [errorMap, setErrorMap] = useState<FormationFieldErrorMap>(createFormationFieldErrorMap());
   const [showResponseAlert, setShowResponseAlert] = useState<boolean>(false);
   const [isLoadingGetFiling, setIsLoadingGetFiling] = useState<boolean>(false);
+  const [showRequiredFieldsError, setShowRequiredFieldsError] = useState<boolean>(false);
 
+  const setTab = (tabNumber: number) => {
+    updateTab(tabNumber);
+    setShowRequiredFieldsError(false);
+  };
+  const fieldsAreInvalid = (fields: FormationFields[]) =>
+    fields.map((i) => errorMap[i]).some((i) => i.invalid);
   const isValidLegalStructure = allowFormation(userData?.profileData.legalStructureId);
 
   const getDate = (date?: string): string =>
@@ -155,11 +164,14 @@ export const BusinessFormation = (props: Props): ReactElement => {
           displayContent: props.displayContent[legalStructureId],
           municipalities: props.municipalities,
           errorMap: errorMap,
+          showRequiredFieldsError,
           showResponseAlert: showResponseAlert,
         },
         setFormationFormData,
         setErrorMap,
         setTab,
+        fieldsAreInvalid,
+        setShowRequiredFieldsError,
         setShowResponseAlert,
       }}
     >
@@ -175,6 +187,10 @@ export const BusinessFormation = (props: Props): ReactElement => {
             </>
           )}
         </div>
+        <BusinessFormationEmptyFieldAlert
+          showRequiredFieldsError={showRequiredFieldsError}
+          errorData={errorMap}
+        />
         <div className="margin-top-3">
           <HorizontalStepper arrayOfSteps={stepNames} currentStep={tab} />
         </div>

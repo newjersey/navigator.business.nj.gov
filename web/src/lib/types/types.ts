@@ -1,7 +1,7 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import {
   BusinessUser,
-  FormationFormData,
+  FormationFields,
   FormationLegalType,
   FormationLegalTypes,
   PaymentType,
@@ -120,19 +120,11 @@ export const createEmptyFormationDisplayContent = (): FormationDisplayContentMap
 
 export type OnboardingStatus = "SUCCESS" | "ERROR";
 
-export type FormationFields = keyof FormationFormData;
-export type FormationFieldErrorMap = Record<FormationFields, FieldStatus>;
-export type FormationErrorTypes =
-  | "generic"
-  | "signer-checkbox"
-  | "signer-name"
-  | "signer-minimum"
-  | "director-minimum";
-export type FormationFieldErrors = { name: FormationFields; types: FormationErrorTypes[] };
-export type FieldStatus = {
-  invalid: boolean;
-  types?: FormationErrorTypes[];
-};
+export type FormationFieldErrorMap = Record<FormationFields, FormationFieldStatus>;
+
+export type FormationErrorType = "checkbox" | "name" | "minimum" | "director";
+
+export type FormationFieldStatus = { invalid: boolean; name?: FormationFields; types?: FormationErrorType[] };
 
 const profileFieldsFromConfig = merge(
   getMergedConfig().profileDefaults["STARTING"],
@@ -142,7 +134,7 @@ const profileFieldsFromConfig = merge(
 
 export type ProfileFields = (keyof ProfileData & keyof typeof profileFieldsFromConfig) | keyof BusinessUser;
 
-export type ProfileFieldErrorMap = Record<ProfileFields, FieldStatus>;
+export type ProfileFieldErrorMap = Record<ProfileFields, FormationFieldStatus>;
 
 const allProfileFields = Object.keys(profileFieldsFromConfig) as ProfileFields[];
 

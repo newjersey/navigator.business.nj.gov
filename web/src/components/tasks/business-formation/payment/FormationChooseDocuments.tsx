@@ -39,7 +39,7 @@ export const FormationChooseDocuments = (): ReactElement => {
   };
 
   return (
-    <div className="margin-top-3">
+    <div className={`margin-top-3`}>
       <table className="business-formation-table business-formation-document">
         <thead>
           <tr>

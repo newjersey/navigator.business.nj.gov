@@ -1,5 +1,4 @@
 import { Button } from "@/components/njwds-extended/Button";
-import { BusinessFormationEmptyFieldAlert } from "@/components/tasks/business-formation/BusinessFormationEmptyFieldAlert";
 import { BusinessFormationFieldAlert } from "@/components/tasks/business-formation/BusinessFormationFieldAlert";
 import { Addresses } from "@/components/tasks/business-formation/contacts/Addresses";
 import { Members } from "@/components/tasks/business-formation/contacts/Members";
@@ -7,133 +6,111 @@ import { RegisteredAgent } from "@/components/tasks/business-formation/contacts/
 import { Signatures } from "@/components/tasks/business-formation/contacts/Signatures";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import {
-  FormationErrorTypes,
-  FormationFieldErrorMap,
-  FormationFieldErrors,
-  FormationFields,
-} from "@/lib/types/types";
+import { FormationErrorType, FormationFieldErrorMap, FormationFieldStatus } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { scrollToTop, validateEmail, zipCodeRange } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { corpLegalStructures } from "@businessnjgovnavigator/shared/";
-import { FormationFormData } from "@businessnjgovnavigator/shared/formationData";
+import {
+  corpLegalStructures,
+  FormationAddress,
+  FormationFields,
+  FormationFormData,
+} from "@businessnjgovnavigator/shared/";
 import { ReactElement, useContext, useEffect, useMemo, useState } from "react";
 
 export const ContactsSection = (): ReactElement => {
-  const { state, setErrorMap, setTab, setFormationFormData } = useContext(BusinessFormationContext);
-  const [showRequiredFieldsError, setShowRequiredFieldsError] = useState<boolean>(false);
-  const [showSignatureError, setShowSignatureError] = useState<boolean>(false);
+  const { state, setErrorMap, setTab, setFormationFormData, setShowRequiredFieldsError } =
+    useContext(BusinessFormationContext);
+  const [showInlineErrors, setShowInlineErrors] = useState<boolean>(false);
+
   const { userData, update } = useUserData();
 
-  const isCorp = corpLegalStructures.includes(state.legalStructureId);
+  const createFormationFieldErrorMap = (values: FormationFieldStatus[]): FormationFieldErrorMap =>
+    values.reduce(
+      (acc: FormationFieldErrorMap, cur: FormationFieldStatus) => ({ ...acc, [cur.name as string]: cur }),
+      {} as FormationFieldErrorMap
+    );
 
-  const requiredFieldsWithError = useMemo(() => {
+  const inlineErrors: FormationFieldStatus[] = useMemo(() => {
+    const inlineErrors: FormationFieldStatus[] = [];
+    if (state.formationFormData.members.length === 0 && corpLegalStructures.includes(state.legalStructureId))
+      inlineErrors.push({ name: "members", types: ["minimum", "director"], invalid: true });
+    const signerErrorTypes: FormationErrorType[] = [];
+    if (
+      !state.formationFormData.signers
+        .filter((it: FormationAddress) => !!it)
+        .every((it: FormationAddress) => it.name)
+    )
+      signerErrorTypes.push("name");
+    if (
+      !state.formationFormData.signers
+        .filter((it: FormationAddress) => !!it)
+        .every((it: FormationAddress) => it.signature)
+    )
+      signerErrorTypes.push("checkbox");
+    if (state.formationFormData.signers.filter((it: FormationAddress) => !!it).length === 0)
+      signerErrorTypes.push("minimum");
+    if (signerErrorTypes.length > 0)
+      inlineErrors.push({ name: "signers", types: signerErrorTypes, invalid: true });
+    return inlineErrors;
+  }, [state.legalStructureId, state.formationFormData]);
+
+  const fieldErrors: FormationFieldStatus[] = useMemo(() => {
     let requiredFields: FormationFields[] = [];
 
     if (state.formationFormData.agentNumberOrManual === "NUMBER") {
-      requiredFields = [...requiredFields, "agentNumber"];
+      requiredFields.push("agentNumber");
     }
 
     if (state.formationFormData.agentNumberOrManual === "MANUAL_ENTRY") {
-      requiredFields = [
-        ...requiredFields,
-        "agentName",
-        "agentEmail",
-        "agentOfficeAddressLine1",
-        "agentOfficeAddressCity",
-        "agentOfficeAddressZipCode",
-      ];
+      requiredFields = [...requiredFields, "agentName", "agentOfficeAddressLine1", "agentOfficeAddressCity"];
     }
 
-    const invalidFields = requiredFields.filter(
+    const invalidRequiredFields = requiredFields.filter(
       (it) => state.errorMap[it].invalid || !state.formationFormData[it]
     );
 
-    const isValidAgentOfficeAddressZipCode = (): boolean => {
-      if (!state.formationFormData.agentOfficeAddressZipCode) return false;
-      return zipCodeRange(state.formationFormData.agentOfficeAddressZipCode);
-    };
+    const invalidFields: FormationFieldStatus[] = invalidRequiredFields.map((field) => ({
+      name: field,
+      invalid: true,
+    }));
 
-    if (
-      !isValidAgentOfficeAddressZipCode() &&
-      !invalidFields.includes("agentOfficeAddressZipCode") &&
-      state.formationFormData.agentNumberOrManual === "MANUAL_ENTRY"
-    ) {
-      invalidFields.push("agentOfficeAddressZipCode");
-    }
-
-    const isValidAgentEmail = (): boolean => {
-      if (!state.formationFormData.agentEmail) return false;
-      return validateEmail(state.formationFormData.agentEmail);
-    };
-
-    if (
-      !isValidAgentEmail() &&
-      !invalidFields.includes("agentEmail") &&
-      state.formationFormData.agentNumberOrManual === "MANUAL_ENTRY"
-    ) {
-      invalidFields.push("agentEmail");
+    if (state.formationFormData.agentNumberOrManual === "MANUAL_ENTRY") {
+      if (
+        state.formationFormData.agentOfficeAddressZipCode
+          ? !zipCodeRange(state.formationFormData.agentOfficeAddressZipCode)
+          : true
+      )
+        invalidFields.push({ name: "agentOfficeAddressZipCode", invalid: true });
+      if (state.formationFormData.agentEmail ? !validateEmail(state.formationFormData.agentEmail) : true)
+        invalidFields.push({ name: "agentEmail", invalid: true });
     }
 
     return invalidFields;
   }, [state.formationFormData, state.errorMap]);
 
-  const formationFieldErrors = useMemo((): FormationFieldErrors[] => {
-    const invalidFields: FormationFieldErrors[] = [];
-    const signErrorType: FormationErrorTypes[] = [];
-
-    if (state.formationFormData.members.length === 0 && isCorp)
-      invalidFields.push({ name: "members", types: ["director-minimum"] });
-
-    if (!state.formationFormData.signers.every((it) => it.name)) signErrorType.push("signer-name");
-
-    if (!state.formationFormData.signers.every((it) => it.signature)) signErrorType.push("signer-checkbox");
-
-    if (state.formationFormData.signers.length === 0) signErrorType.push("signer-minimum");
-
-    if (signErrorType.length > 0) invalidFields.push({ name: "signers", types: signErrorType });
-
-    return invalidFields;
-  }, [state.formationFormData, isCorp]);
-
   useEffect(() => {
-    if (formationFieldErrors.length === 0) setShowSignatureError(false);
-    if (requiredFieldsWithError.length === 0) setShowRequiredFieldsError(false);
-  }, [state.formationFormData, formationFieldErrors, requiredFieldsWithError]);
+    inlineErrors.length === 0 && setShowInlineErrors(false);
+    fieldErrors.length === 0 && inlineErrors.length === 0 && setShowRequiredFieldsError(false);
+  }, [fieldErrors, inlineErrors, setShowRequiredFieldsError]);
 
   const submitContactData = async () => {
     if (!userData) return;
 
-    if (formationFieldErrors.length > 0) {
-      setShowSignatureError(true);
-      const newErrorMappedFields = formationFieldErrors.reduce(
-        (acc: FormationFieldErrorMap, cur: FormationFieldErrors) => ({
-          ...acc,
-          [cur.name]: { invalid: true, types: cur.types },
-        }),
-        {} as FormationFieldErrorMap
-      );
-      setErrorMap({ ...state.errorMap, ...newErrorMappedFields });
-    }
+    setErrorMap({
+      ...state.errorMap,
+      ...createFormationFieldErrorMap([...fieldErrors, ...inlineErrors]),
+    });
 
-    if (requiredFieldsWithError.length > 0) {
+    inlineErrors.length > 0 && setShowInlineErrors(true);
+    if (fieldErrors.length > 0 || inlineErrors.length > 0) {
       setShowRequiredFieldsError(true);
-      const newErrorMappedFields = requiredFieldsWithError.reduce(
-        (acc: FormationFieldErrorMap, cur: FormationFields) => ({ ...acc, [cur]: { invalid: true } }),
-        {} as FormationFieldErrorMap
-      );
-      setErrorMap({ ...state.errorMap, ...newErrorMappedFields });
+      return;
     }
-
-    if (formationFieldErrors.length > 0 || requiredFieldsWithError.length > 0) return;
-
-    setShowRequiredFieldsError(false);
-    setShowSignatureError(false);
 
     const formationFormDataWithEmptySignersRemoved = {
       ...state.formationFormData,
-      signers: state.formationFormData.signers.filter((it) => !!it),
+      signers: state.formationFormData.signers.filter((it: FormationAddress) => !!it),
     };
 
     sendSubmitAnalytics(formationFormDataWithEmptySignersRemoved);
@@ -180,6 +157,11 @@ export const ContactsSection = (): ReactElement => {
         ) ? (
           <>
             <hr className="margin-top-0 margin-bottom-3" />
+            <BusinessFormationFieldAlert
+              showError={showInlineErrors}
+              errorData={createFormationFieldErrorMap(inlineErrors)}
+              fields={["members"]}
+            />
             <Members />
           </>
         ) : (
@@ -187,9 +169,9 @@ export const ContactsSection = (): ReactElement => {
         )}
         <hr className="margin-top-0 margin-bottom-3" />
         <BusinessFormationFieldAlert
-          showFieldsError={showSignatureError}
-          fieldsWithError={formationFieldErrors}
-          errorType="signature"
+          showError={showInlineErrors}
+          errorData={createFormationFieldErrorMap(inlineErrors)}
+          fields={["signers"]}
         />
         {[...corpLegalStructures, "limited-partnership"].includes(state.legalStructureId) ? (
           <Addresses
@@ -199,7 +181,7 @@ export const ContactsSection = (): ReactElement => {
               const members =
                 "limited-partnership" === state.legalStructureId ? signers : state.formationFormData.members;
               setFormationFormData({ ...state.formationFormData, signers, members });
-              if (state.formationFormData.signers.every((it) => it.signature && it.name)) {
+              if (signers.every((it: FormationAddress) => it.signature && it.name)) {
                 setErrorMap({ ...state.errorMap, signers: { invalid: false } });
               }
             }}
@@ -228,18 +210,9 @@ export const ContactsSection = (): ReactElement => {
         ) : (
           <Signatures />
         )}
-        <BusinessFormationEmptyFieldAlert
-          showRequiredFieldsError={showRequiredFieldsError}
-          requiredFieldsWithError={requiredFieldsWithError}
-        />
-        <BusinessFormationFieldAlert
-          showFieldsError={showSignatureError}
-          fieldsWithError={formationFieldErrors}
-          errorType="director"
-        />
       </div>
       <div className="margin-top-2">
-        <div className="flex flex-justify-end bg-base-lightest margin-x-neg-205 padding-3 margin-top-3 margin-bottom-neg-205">
+        <div className="flex flex-justify-end bg-base-lightest margin-x-neg-4 padding-3 margin-top-3 margin-bottom-neg-4">
           <Button
             style="secondary"
             widthAutoOnMobile

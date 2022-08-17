@@ -11,21 +11,20 @@ import {
 import { TextField } from "@mui/material";
 import { DatePicker, DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { ReactElement, useContext, useState } from "react";
+import { ReactElement, useContext } from "react";
 advancedDateLibrary();
 
 export const FormationStartDate = (): ReactElement => {
-  const [showError, setShowError] = useState<boolean>(false);
-
-  const { state, setFormationFormData } = useContext(BusinessFormationContext);
+  const { state, setFormationFormData, setErrorMap } = useContext(BusinessFormationContext);
 
   useMountEffect(() => {
     if (!state.formationFormData.businessStartDate) {
-      setShowError(false);
+      setErrorMap({ ...state.errorMap, businessStartDate: { invalid: true } });
     }
   });
 
   const handleChange = (value: string) => {
+    setErrorMap({ ...state.errorMap, businessStartDate: { invalid: !value } });
     setFormationFormData({
       ...state.formationFormData,
       businessStartDate: value,
@@ -52,14 +51,18 @@ export const FormationStartDate = (): ReactElement => {
               if (newValue === null) handleChange("");
             }}
             onError={(hasError: string | null) => {
-              setShowError(!!hasError);
+              setErrorMap({ ...state.errorMap, businessStartDate: { invalid: !!hasError } });
             }}
             renderInput={(params) => (
               <TextField
                 {...params}
                 variant="outlined"
                 fullWidth
-                helperText={showError ? Config.businessFormationDefaults.startDateErrorText : " "}
+                helperText={
+                  state.errorMap["businessStartDate"].invalid
+                    ? Config.businessFormationDefaults.startDateErrorText
+                    : " "
+                }
                 inputProps={{
                   ...params.inputProps,
                   "aria-label": "Business start date",

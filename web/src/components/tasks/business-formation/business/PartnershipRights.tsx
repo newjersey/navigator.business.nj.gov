@@ -1,12 +1,11 @@
 import { Content } from "@/components/Content";
+import { BusinessFormationFieldAlert } from "@/components/tasks/business-formation/BusinessFormationFieldAlert";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
-import { FormationFields } from "@/lib/types/types";
 import { camelCaseToSentence } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { FormationTextField } from "@businessnjgovnavigator/shared";
+import { FormationFields, FormationTextField } from "@businessnjgovnavigator/shared";
 import { FormControl, FormControlLabel, FormHelperText, Radio, RadioGroup } from "@mui/material";
-import { red } from "@mui/material/colors";
 import { ReactElement, useContext } from "react";
 
 export const PartnershipRights = (): ReactElement => {
@@ -44,14 +43,11 @@ export const PartnershipRights = (): ReactElement => {
     </div>
   );
 
-  const color = {
-    color: red[800],
-    "&.Mui-checked": {
-      color: red[600],
-    },
-  };
   const getRadio = (fieldName: FormationFields) => (
-    <FormControl error={state.errorMap[fieldName].invalid}>
+    <FormControl
+      error={state.errorMap[fieldName].invalid}
+      className={state.errorMap[fieldName].invalid ? `input-error-bar` : ""}
+    >
       <RadioGroup
         aria-label={camelCaseToSentence(fieldName)}
         name={camelCaseToSentence(fieldName)}
@@ -71,11 +67,10 @@ export const PartnershipRights = (): ReactElement => {
           control={
             <Radio
               required={true}
-              color="primary"
               data-testid={`${fieldName}-true`}
+              color={state.errorMap[fieldName].invalid ? "error" : "primary"}
               sx={{
                 paddingTop: "0px",
-                ...(state.errorMap[fieldName].invalid ? color : {}),
               }}
             />
           }
@@ -87,10 +82,9 @@ export const PartnershipRights = (): ReactElement => {
           control={
             <Radio
               required={true}
-              color="primary"
+              color={state.errorMap[fieldName].invalid ? "error" : "primary"}
               sx={{
                 paddingTop: "0px",
-                ...(state.errorMap[fieldName].invalid ? color : {}),
               }}
               data-testid={`${fieldName}-false`}
             />
@@ -110,17 +104,26 @@ export const PartnershipRights = (): ReactElement => {
           {Config.businessFormationDefaults.partnershipRightsTitle}
         </div>
       </div>
-      <Content className="margin-top-2">
+      <BusinessFormationFieldAlert
+        showError={true}
+        errorData={state.errorMap}
+        fields={["canCreateLimitedPartner", "canMakeDistribution", "canGetDistribution"]}
+      />
+      <Content
+        className={state.errorMap["canCreateLimitedPartner"].invalid ? `input-error-bar margin-top-2` : ""}
+      >
         {Config.businessFormationDefaults.partnershipRightsCanAssignRights}
       </Content>
       {getRadio("canCreateLimitedPartner")}
       {state.formationFormData.canCreateLimitedPartner && getTextField("createLimitedPartnerTerms")}
-      <Content className="margin-top-3">
+      <Content className={state.errorMap["canGetDistribution"].invalid ? `input-error-bar margin-top-3` : ""}>
         {Config.businessFormationDefaults.partnershipRightsCanReceiveDistributions}
       </Content>
       {getRadio("canGetDistribution")}
       {state.formationFormData.canGetDistribution && getTextField("getDistributionTerms")}
-      <Content className="margin-top-3">
+      <Content
+        className={state.errorMap["canMakeDistribution"].invalid ? `input-error-bar margin-top-3` : ""}
+      >
         {Config.businessFormationDefaults.partnershipRightsCanMakeDistributions}
       </Content>
       {getRadio("canMakeDistribution")}

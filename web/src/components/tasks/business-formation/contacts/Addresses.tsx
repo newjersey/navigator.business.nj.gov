@@ -6,10 +6,9 @@ import { AddressModal } from "@/components/tasks/business-formation/contacts/Add
 import { ValidatedCheckbox } from "@/components/ValidatedCheckbox";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { MediaQueries } from "@/lib/PageSizes";
-import { FormationFields } from "@/lib/types/types";
 import styles from "@/styles/sections/members.module.scss";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { FormationAddress } from "@businessnjgovnavigator/shared/";
+import { FormationAddress, FormationFields } from "@businessnjgovnavigator/shared/";
 import { IconButton, useMediaQuery } from "@mui/material";
 import React, { ChangeEvent, ReactElement, useContext, useState } from "react";
 
@@ -52,7 +51,7 @@ export const Addresses = (props: Props): ReactElement => {
       signature: event.target.checked,
     };
     props.setData(addresses);
-    if (event.target.checked && props.addressData.every((it) => it.signature && it.name)) {
+    if (event.target.checked && addresses.every((it) => it.signature && it.name)) {
       setErrorMap({ ...state.errorMap, [props.fieldName]: { invalid: false } });
     }
   };
@@ -256,34 +255,38 @@ export const Addresses = (props: Props): ReactElement => {
         </SnackbarAlert>
       )}
       <div className={`margin-bottom-3 ${styles.membersTable}`} data-testid={`addresses-${props.fieldName}`}>
-        <Content
-          overrides={{
-            h3: ({ children }: { children: string[] }): ReactElement => (
-              <h3 style={{ display: "inline" }}>{children}</h3>
-            ),
-          }}
-        >
-          {props.displayContent.contentMd}
-        </Content>
-        {isTabletAndUp ? renderDesktopTable : renderMobileTable}
-        {props.addressData.length <= 9 && (
-          <Button
-            style="tertiary"
-            onClick={() => {
-              setEditIndex(undefined);
-              setModalOpen(true);
+        <div className={state.errorMap[props.fieldName].invalid && !isTabletAndUp ? `input-error-bar` : ""}>
+          <Content
+            overrides={{
+              h3: ({ children }: { children: string[] }): ReactElement => (
+                <h3 style={{ display: "inline" }}>{children}</h3>
+              ),
             }}
           >
-            <Icon>add</Icon>{" "}
-            <span
-              className="text-underline"
-              style={{ textUnderlinePosition: "under" }}
-              data-testid={`addresses-${props.fieldName}-newButtonText`}
+            {props.displayContent.contentMd}
+          </Content>
+          <div className={state.errorMap[props.fieldName].invalid && isTabletAndUp ? `input-error-bar` : ""}>
+            {isTabletAndUp ? renderDesktopTable : renderMobileTable}
+          </div>
+          {props.addressData.length <= 9 && (
+            <Button
+              style="tertiary"
+              onClick={() => {
+                setEditIndex(undefined);
+                setModalOpen(true);
+              }}
             >
-              {props.displayContent.newButtonText}
-            </span>
-          </Button>
-        )}
+              <Icon>add</Icon>{" "}
+              <span
+                className="text-underline"
+                style={{ textUnderlinePosition: "under" }}
+                data-testid={`addresses-${props.fieldName}-newButtonText`}
+              >
+                {props.displayContent.newButtonText}
+              </span>
+            </Button>
+          )}
+        </div>
       </div>
       {props.needSignature ? (
         <p className="margin-bottom-2">

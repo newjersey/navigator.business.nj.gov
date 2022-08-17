@@ -54,7 +54,7 @@ export const PaymentTypeTable = (): ReactElement => {
   };
 
   return (
-    <>
+    <div className={state.errorMap["paymentType"].invalid ? `input-error-bar` : ""}>
       <table className="business-formation-table business-formation-payment">
         <thead>
           <tr>
@@ -80,7 +80,7 @@ export const PaymentTypeTable = (): ReactElement => {
               <div className="business-formation-table-checkboxes">
                 <Radio
                   id="paymentTypeCreditCardRadio"
-                  className={state.errorMap.paymentType.invalid ? "text-error" : ""}
+                  color={state.errorMap.paymentType.invalid ? "error" : "primary"}
                   checked={state.formationFormData.paymentType === "CC"}
                   onChange={handleChange}
                   inputProps={{
@@ -114,7 +114,7 @@ export const PaymentTypeTable = (): ReactElement => {
               <div className="business-formation-table-checkboxes">
                 <Radio
                   id="paymentTypeACHRadio"
-                  className={state.errorMap.paymentType.invalid ? "text-error" : ""}
+                  color={state.errorMap.paymentType.invalid ? "error" : "primary"}
                   checked={state.formationFormData.paymentType === "ACH"}
                   onChange={handleChange}
                   value="ACH"
@@ -164,6 +164,6 @@ export const PaymentTypeTable = (): ReactElement => {
           </tr>
         </tfoot>
       </table>
-    </>
+    </div>
   );
 };

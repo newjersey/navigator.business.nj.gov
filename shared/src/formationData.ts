@@ -73,6 +73,8 @@ export interface FormationFormData {
   readonly contactPhoneNumber: string;
 }
 
+export type FormationFields = Exclude<keyof FormationFormData, undefined>;
+
 export type FormationTextField = Exclude<
   keyof FormationFormData,
   | "businessSuffix"
