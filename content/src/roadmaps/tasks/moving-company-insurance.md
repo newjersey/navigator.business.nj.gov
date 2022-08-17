@@ -5,7 +5,8 @@ name: Get a Commercial Insurance policy
 id: moving-company-insurance
 required: true
 ---
-Insurance will protect your business assets should you be held liable for an incident.
+Insurance will protect your business assets should you be held liable for an incident. It's also a requirement for licensing by the Division of Consumer Affairs.
+
 To find an insurance broker, speak to your network, local Chamber of Commerce, or supplier. Oftentimes, the best way to find a broker is through word of mouth.
  
 ---
