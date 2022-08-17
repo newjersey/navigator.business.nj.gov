@@ -1722,7 +1722,6 @@ collections:
               - { label: Error - Required Fields, name: errorTextRequiredFields, widget: string }
               - { label: Error - Duplicate Sign-up, name: errorTextDuplicateSignUp, widget: string }
               - { label: Error - Generic, name: errorTextGeneric, widget: string }
-              - { label: Complete Sign-in Title, name: completeSignInTitleText, widget: string }
               - { label: Newsletter Label, name: newsletterCheckboxLabel, widget: string }
               - { label: User Testing Label, name: userTestingCheckboxLabel, widget: string }
               - { label: Login Error Modal - Title, name: loginErrorModalTitle, widget: string }
