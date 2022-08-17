@@ -53,7 +53,7 @@
       "task": "transportation-assessment-usdot"
     }
   ],
-  "name": "Transportation",
+  "name": "Car Service (Large Capacity Vehicles)",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
     "isProvidesStaffingServicesApplicable": false,
@@ -67,5 +67,5 @@
   "isEnabled": false,
   "additionalSearchTerms": "taxi, limo, bus, shuttle, transport van, car service",
   "id": "transportation",
-  "description": "Offers transportation services for people in vehicles larger than a car"
+  "description": "Offers transportation services in vehicles with a passenger capacity of more than 10 people"
 }
