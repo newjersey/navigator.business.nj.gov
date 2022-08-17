@@ -73,7 +73,7 @@ export const SidebarCardsList = (props: Props): ReactElement => {
     if (certificationsUnlocked()) {
       return (
         <>
-          <hr className="desktop:margin-right-1 margin-top-3 bg-roadmap-blue-light" aria-hidden={true} />
+          <hr className="desktop:margin-right-1 margin-top-3 bg-cool-lighter" aria-hidden={true} />
           <div className="desktop:margin-right-3 desktop:margin-bottom-1">
             <Accordion
               elevation={0}
@@ -110,7 +110,7 @@ export const SidebarCardsList = (props: Props): ReactElement => {
               </AccordionDetails>
             </Accordion>
           </div>
-          <hr className="desktop:margin-right-1 margin-bottom-3 bg-roadmap-blue-light" aria-hidden={true} />
+          <hr className="desktop:margin-right-1 margin-bottom-3 bg-cool-lighter" aria-hidden={true} />
         </>
       );
     } else {
@@ -120,7 +120,7 @@ export const SidebarCardsList = (props: Props): ReactElement => {
 
   const learnMoreAboutFundingsLink = () => (
     <>
-      <hr className="desktop:margin-right-1 margin-top-3 bg-roadmap-blue-light" aria-hidden={true} />
+      <hr className="desktop:margin-right-1 margin-top-3 bg-cool-lighter" aria-hidden={true} />
       <div className="margin-y-205 weight-unset-override">
         <Content>{Config.dashboardDefaults.learnMoreFundingOpportunities}</Content>
       </div>
@@ -146,7 +146,7 @@ export const SidebarCardsList = (props: Props): ReactElement => {
     <>
       <h2>{Config.dashboardDefaults.sidebarHeading}</h2>
       <hr
-        className="desktop:margin-right-1 margin-top-2 margin-bottom-3 bg-roadmap-blue-light"
+        className="desktop:margin-right-1 margin-top-2 margin-bottom-3 bg-cool-lighter"
         aria-hidden={true}
       />
 

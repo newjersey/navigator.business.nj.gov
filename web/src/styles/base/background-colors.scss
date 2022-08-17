@@ -6,12 +6,8 @@
   background-color: $white;
 }
 
-.bg-beta {
-  background-color: $beta !important;
-}
-
-.bg-info-lighter {
-  background-color: $info-lighter !important;
+.bg-info-extra-light {
+  background-color: $info-extra-light !important;
 }
 
 .bg-info-light {
@@ -30,8 +26,8 @@
   background-color: $info-darker !important;
 }
 
-.bg-error-lighter {
-  background-color: $error-lighter !important;
+.bg-error-extra-light {
+  background-color: $error-extra-light !important;
 }
 
 .bg-error-light {
@@ -70,8 +66,8 @@
   background-color: $success-darker !important;
 }
 
-.bg-warning-lighter {
-  background-color: $warning-lighter !important;
+.bg-warning-extra-light {
+  background-color: $warning-extra-light !important;
 }
 
 .bg-warning-light {
@@ -110,18 +106,50 @@
   background-color: #80def1 !important;
 }
 
-.bg-roadmap-blue {
-  background-color: $roadmap-blue !important;
+.bg-cool-extra-light {
+  background-color: $cool-extra-light !important;
 }
 
-.bg-roadmap-blue-dark {
-  background-color: $roadmap-blue-dark !important;
+.bg-cool-lighter {
+  background-color: $cool-lighter !important;
 }
 
-.bg-roadmap-purple-light {
-  background-color: $roadmap-purple-light !important;
+.bg-primary-extra-light {
+  background-color: $primary-extra-light !important;
 }
 
-.bg-roadmap-blue-light {
-  background-color: $roadmap-blue-light !important;
+.bg-accent-cool-lightest {
+  background-color: $accent-cool-lightest !important;
+}
+
+.bg-accent-cool-darkest {
+  background-color: $accent-cool-darkest !important;
+}
+
+.bg-accent-cool-more-dark {
+  background-color: $accent-cool-more-dark !important;
+}
+
+.bg-info-darkest {
+  background-color: $info-darkest !important;
+}
+
+.bg-accent-cooler-lightest {
+  background-color: $accent-cooler-lightest !important;
+}
+
+.bg-accent-cooler-light {
+  background-color: $accent-cooler-light !important;
+}
+
+.bg-accent-cooler {
+  background-color: $accent-cooler !important;
+}
+
+.bg-accent-cooler-dark {
+  background-color: $accent-cooler-dark !important;
+}
+
+.bg-accent-cooler-darker {
+  background-color: $accent-cooler-darker !important;
 }

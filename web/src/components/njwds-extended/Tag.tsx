@@ -35,10 +35,10 @@ export const Tag = (props: Props): ReactElement => {
       styling = "bg-base-lighter text-base-dark";
       break;
     case "info":
-      styling = "bg-info-lighter text-info-darker";
+      styling = "bg-info-extra-light text-info-darker";
       break;
     case "error":
-      styling = "bg-error-lighter text-error-dark";
+      styling = "bg-error-extra-light text-error-dark";
       break;
     case "accent":
       styling = "bg-accent-warm-lighter text-accent-warm-darker";
