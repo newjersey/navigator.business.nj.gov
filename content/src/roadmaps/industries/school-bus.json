@@ -48,7 +48,7 @@
       "task": "trucking-parking"
     }
   ],
-  "name": "School Transportation",
+  "name": "School Bus",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
     "isProvidesStaffingServicesApplicable": false,
