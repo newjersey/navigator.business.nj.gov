@@ -124,7 +124,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
             className="font-body-2xs padding-y-05 padding-x-1"
             onClick={handleCalendarOnClick}
           >
-            <Icon className="usa-icon--size-3 margin-right-05">calendar_today</Icon>
+            <Icon className="usa-icon--size-3 margin-right-05">list</Icon>
             {Config.dashboardDefaults.calendarListViewButton}
           </Button>
         </div>
