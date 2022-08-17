@@ -4,7 +4,7 @@ import { LogWriterType } from "../libs/logWriter";
 
 export const ApiBusinessNameClient = (baseUrl: string, logWriter: LogWriterType): BusinessNameClient => {
   const search = (name: string): Promise<NameAvailability> => {
-    const url = `${baseUrl}/Available?q=${name}`;
+    const url = `${baseUrl}/Available?q=${encodeURIComponent(name)}`;
     const logId = logWriter.GetId();
     logWriter.LogInfo(`Business Name Search - NICUSA - Id:${logId} - Request Sent to ${url}. Name: ${name}`);
     return axios

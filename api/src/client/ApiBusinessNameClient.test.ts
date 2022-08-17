@@ -72,4 +72,10 @@ describe("ApiBusinessNameClient", () => {
     });
     expect(mockAxios.get).toHaveBeenCalledWith("www.example.com/Available?q=name");
   });
+
+  it("url-encodes the query", async () => {
+    mockAxios.get.mockResolvedValue({ data: { Available: false, Reason: "", Similars: [] } });
+    await client.search("some#name");
+    expect(mockAxios.get).toHaveBeenCalledWith("www.example.com/Available?q=some%23name");
+  });
 });
