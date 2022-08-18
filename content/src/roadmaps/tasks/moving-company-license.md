@@ -22,7 +22,7 @@ You must apply for a Public Mover License before you can legally offer services 
 - `Designated agent|process-agent`
 - `EIN|ein` or SSN if you're not required to have an EIN
 - Name and contact information for every officer, director, and anyone with an ownership interest in the company
-- Copy of a fully executed tariff
+- Copy of a fully executed `tariff|mover-tariff`
 - Profit and Loss statement for the past 12 months
 - `Certificate of Formation or Authority|certificate-formation`
 - Copy of your warehouse lease, if applicable
