@@ -1,5 +1,5 @@
 {
-  "naicsCodes": "484110, 484121, 484122, 484220, 484230",
+  "naicsCodes": "484210",
   "defaultSectorId": "other-services",
   "canHavePermanentLocation": true,
   "roadmapSteps": [
