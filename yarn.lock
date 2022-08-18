@@ -3583,7 +3583,7 @@ __metadata:
     cross-env: 7.0.3
     dayjs: 1.11.5
     dedent: 0.7.0
-    dependency-cruiser: 11.14.1
+    dependency-cruiser: 11.14.2
     eslint: 8.20.0
     eslint-config-prettier: 8.5.0
     eslint-plugin-jest: 26.6.0
@@ -3740,7 +3740,7 @@ __metadata:
     cypress-wait-until: 1.7.2
     dayjs: 1.11.5
     dedent: 0.7.0
-    dependency-cruiser: 11.14.1
+    dependency-cruiser: 11.14.2
     dotenv: 16.0.1
     eslint: 8.20.0
     eslint-config-next: 12.2.3
@@ -3929,7 +3929,7 @@ __metadata:
     cypress-dotenv: 2.0.0
     cypress-wait-until: 1.7.2
     dayjs: 1.11.5
-    dependency-cruiser: 11.14.1
+    dependency-cruiser: 11.14.2
     dotenv: 16.0.1
     eslint: 8.20.0
     eslint-config-next: 12.2.3
@@ -14821,9 +14821,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dependency-cruiser@npm:11.14.1":
-  version: 11.14.1
-  resolution: "dependency-cruiser@npm:11.14.1"
+"dependency-cruiser@npm:11.14.2":
+  version: 11.14.2
+  resolution: "dependency-cruiser@npm:11.14.2"
   dependencies:
     acorn: 8.8.0
     acorn-jsx: 5.3.2
@@ -14839,15 +14839,15 @@ __metadata:
     glob: 7.2.0
     handlebars: 4.7.7
     indent-string: ^4.0.0
-    inquirer: ^8.2.4
     json5: 2.2.1
     lodash: 4.17.21
+    prompts: 2.4.2
     safe-regex: 2.1.1
     semver: ^7.3.7
     semver-try-require: ^5.0.2
     teamcity-service-messages: 0.1.14
     tsconfig-paths-webpack-plugin: 4.0.0
-    watskeburt: 0.6.0
+    watskeburt: 0.7.0
     wrap-ansi: ^7.0.0
   bin:
     depcruise: bin/dependency-cruise.js
@@ -14856,7 +14856,7 @@ __metadata:
     depcruise-wrap-stream-in-html: bin/wrap-stream-in-html.js
     dependency-cruise: bin/dependency-cruise.js
     dependency-cruiser: bin/dependency-cruise.js
-  checksum: 9160caad976f3336e96660d100cf48372c2060a36815048c29ba07bd47c46a697f9edc80eb810e914ad82b62e9e9dcf623514511ea27b641681fe1910f34669b
+  checksum: 84c58b1680ae7e3366c1acb0b62063dd2eddb4319a5b5f769a6fe36531f001bcd23351cf075eb7a9b82b9441ad5ee6de553cab9b66bb06b4f2d54fff9b34ef0c
   languageName: node
   linkType: hard
 
@@ -27348,7 +27348,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prompts@npm:^2.0.1, prompts@npm:^2.4.0":
+"prompts@npm:2.4.2, prompts@npm:^2.0.1, prompts@npm:^2.4.0":
   version: 2.4.2
   resolution: "prompts@npm:2.4.2"
   dependencies:
@@ -33691,14 +33691,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"watskeburt@npm:0.6.0":
-  version: 0.6.0
-  resolution: "watskeburt@npm:0.6.0"
+"watskeburt@npm:0.7.0":
+  version: 0.7.0
+  resolution: "watskeburt@npm:0.7.0"
   dependencies:
     commander: ^9.3.0
   bin:
     watskeburt: src/cli.mjs
-  checksum: 2f85bca5513c3327ac6d9a94ef753398b20ddebf34ecf7da4ca70d5588cf094910d6fb95c3492ea2798309742c2a65021d503d3cacf96dc635f3fe39eb92920d
+  checksum: 43d5db12d5cf07eb2efeaaf74096f92da999a00b9619e125cb9fbb28afe63c6062fa1b5cfc911322ac47237bcecb9f5a171b9926a80470ac9db7ef5cfd489d6d
   languageName: node
   linkType: hard
 
