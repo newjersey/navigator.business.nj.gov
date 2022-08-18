@@ -6,7 +6,6 @@ import { generateProfileData } from "@/test/factories";
 import { useMockRoadmap, useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
 import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { render, screen } from "@testing-library/react";
-import removeMd from "remove-markdown";
 
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 const Config = getMergedConfig();
@@ -51,15 +50,13 @@ describe("<ProfileNaicsCode />", () => {
 
   it("displays Not Entered text when user has no NAICS code", () => {
     renderComponent({ naicsCode: "" });
-    expect(
-      screen.getByText(removeMd(Config.profileDefaults.STARTING.naicsCode.notEnteredText))
-    ).toBeInTheDocument();
+    expect(screen.getByText(Config.profileDefaults.STARTING.naicsCode.notEnteredText)).toBeInTheDocument();
   });
 
   it("displays NAICS code when exists", () => {
     renderComponent({ naicsCode: "123456" });
     expect(
-      screen.queryByText(removeMd(Config.profileDefaults.STARTING.naicsCode.notEnteredText))
+      screen.queryByText(Config.profileDefaults.STARTING.naicsCode.notEnteredText)
     ).not.toBeInTheDocument();
     expect(screen.getByText("123456")).toBeInTheDocument();
   });

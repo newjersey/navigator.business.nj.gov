@@ -1,4 +1,5 @@
 {
+  "naicsCodes": "484110, 484121, 484122, 484220, 484230",
   "defaultSectorId": "other-services",
   "canHavePermanentLocation": true,
   "roadmapSteps": [
@@ -28,39 +29,29 @@
       "task": "bank-account"
     },
     {
-      "weight": 15,
       "step": 3,
-      "task": "school-bus-license"
+      "weight": 15,
+      "task": "moving-company-insurance"
     },
     {
       "step": 3,
       "weight": 20,
-      "task": "school-bus-insurance"
-    },
-    {
-      "step": 3,
-      "weight": 25,
-      "task": "bus-inspection"
-    },
-    {
-      "step": 4,
-      "weight": 10,
-      "task": "trucking-parking"
+      "task": "moving-company-license"
     }
   ],
-  "name": "School Bus",
+  "name": "Moving Company",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
-    "isProvidesStaffingServicesApplicable": false,
-    "isCertifiedInteriorDesignerApplicable": false,
-    "isRealEstateAppraisalManagementApplicable": false,
     "canBeReseller": false,
-    "isLiquorLicenseApplicable": false,
     "isCpaRequiredApplicable": false,
+    "isLiquorLicenseApplicable": false,
+    "isRealEstateAppraisalManagementApplicable": false,
+    "isCertifiedInteriorDesignerApplicable": false,
+    "isProvidesStaffingServicesApplicable": false,
     "isTransportation": true
   },
   "isEnabled": false,
-  "additionalSearchTerms": "bus, school bus, ",
-  "id": "school-bus",
-  "description": "Transports children to and from school, day camps, or other activities"
+  "additionalSearchTerms": "freight, trucking, movers, box truck company, transportation, truck driving, hauling, truck haul, logistics, trucking company, ",
+  "id": "moving-company",
+  "description": "Transports personal belongings from on location to another"
 }

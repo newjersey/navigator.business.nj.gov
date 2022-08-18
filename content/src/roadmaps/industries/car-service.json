@@ -30,30 +30,20 @@
     {
       "step": 3,
       "weight": 15,
-      "task": "transport-insurance"
+      "task": "taxi-insurance"
     },
     {
       "step": 3,
       "weight": 20,
-      "task": "transportation-entity-id"
+      "task": "taxi-authorization-local"
     },
     {
       "step": 3,
       "weight": 25,
-      "task": "transportation-inspection"
-    },
-    {
-      "step": 3,
-      "weight": 30,
-      "task": "transportation-cpcn"
-    },
-    {
-      "step": 4,
-      "weight": 10,
-      "task": "transportation-assessment-usdot"
+      "task": "taxi-driver-certification"
     }
   ],
-  "name": "Car Service (Large Capacity Vehicles)",
+  "name": "Car Service",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
     "isProvidesStaffingServicesApplicable": false,
@@ -66,6 +56,6 @@
   },
   "isEnabled": false,
   "additionalSearchTerms": "taxi, limo, bus, shuttle, transport van, car service",
-  "id": "transportation",
-  "description": "Offers transportation services in vehicles with a passenger capacity of more than 10 people"
+  "id": "car-service",
+  "description": "Offers transportation services for people"
 }
