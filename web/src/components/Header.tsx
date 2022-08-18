@@ -59,7 +59,7 @@ export const Header = () => {
         {getButtonText()}
       </Button>
       <span className="vl margin-x-105 border-right-base" />
-      <span className="text-base">{getCurrentDateInNewJersey().format("MMMM DD YYYY")}</span>{" "}
+      <span className="text-base">{getCurrentDateInNewJersey().format("MMMM DD, YYYY")}</span>{" "}
       <span className="text-base">{Config.headerDefaults.newJerseyDateBodyText}</span>
     </div>
   );

@@ -43,7 +43,7 @@ describe("<Header />", () => {
   };
 
   it("shows date based on New Jersey Local time", () => {
-    const date = getCurrentDateInNewJersey().format("MMMM DD YYYY");
+    const date = getCurrentDateInNewJersey().format("MMMM DD, YYYY");
     useMockProfileData({});
     renderHeader();
 
