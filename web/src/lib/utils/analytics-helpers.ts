@@ -3,7 +3,7 @@ import { isCpaRequiredApplicable } from "@/lib/domain-logic/isCpaRequiredApplica
 import analytics from "@/lib/utils/analytics";
 import { ABExperience, ProfileData } from "@businessnjgovnavigator/shared/";
 import { OperatingPhaseId } from "@businessnjgovnavigator/shared/operatingPhase";
-import { BusinessPersona } from "@businessnjgovnavigator/shared/profileData";
+import { BusinessPersona, ForeignBusinessType } from "@businessnjgovnavigator/shared/profileData";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 
 type RegistrationProgress = "Not Started" | "Began Onboarding" | "Onboarded Guest" | "Fully Registered";
@@ -56,6 +56,7 @@ export const setAnalyticsDimensions = (profileData: ProfileData): void => {
   analytics.dimensions.persona(getPersonaDimension(profileData.businessPersona));
   analytics.dimensions.naicsCode(profileData.naicsCode);
   analytics.dimensions.phase(getPhaseDimension(profileData.operatingPhase));
+  analytics.dimensions.subPersona(getSubPersonaDimension(profileData.foreignBusinessType));
 };
 
 const getPhaseDimension = (phase: OperatingPhaseId) => {
@@ -85,6 +86,21 @@ const getPersonaDimension = (persona: BusinessPersona): string => {
       return "Existing";
     case "FOREIGN":
       return "Foreign Prospective";
+    default:
+      return "";
+  }
+};
+
+const getSubPersonaDimension = (type: ForeignBusinessType): string => {
+  switch (type) {
+    case "REMOTE_WORKER":
+      return "Remote Worker";
+    case "REMOTE_SELLER":
+      return "Remote Seller";
+    case "NEXUS":
+      return "Nexus Business";
+    case "NONE":
+      return "None of the Above";
     default:
       return "";
   }

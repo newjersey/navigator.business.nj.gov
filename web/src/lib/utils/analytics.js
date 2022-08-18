@@ -48,6 +48,9 @@ export default {
     phase: (value) => {
       window.gtag("set", "dimension11", value);
     },
+    subPersona: (value) => {
+      window.gtag("set", "dimension12", value);
+    },
   },
 
   event: {
