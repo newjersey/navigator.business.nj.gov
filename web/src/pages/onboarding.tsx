@@ -2,6 +2,7 @@ import { NavBar } from "@/components/navbar/NavBar";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
+import { DevOnlySkipOnboardingButton } from "@/components/onboarding/DevOnlySkipOnboardingButton";
 import { getOnboardingFlows } from "@/components/onboarding/getOnboardingFlows";
 import { OnboardingButtonGroup } from "@/components/onboarding/OnboardingButtonGroup";
 import { PageSkeleton } from "@/components/PageSkeleton";
@@ -446,6 +447,7 @@ const OnboardingPage = (props: Props): ReactElement => {
                   >
                     {onboardingPage.component}
                     <hr className="margin-top-6 margin-bottom-4" aria-hidden={true} />
+                    <DevOnlySkipOnboardingButton setPage={setPage} queryShallowPush={queryShallowPush} />
                     <OnboardingButtonGroup
                       isFinal={page.current === onboardingFlows[currentFlow].pages.length}
                     />
