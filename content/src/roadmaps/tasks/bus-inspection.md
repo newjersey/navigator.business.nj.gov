@@ -18,7 +18,8 @@ Your commercial vehicles need to be inspected by the Motor Vehicle Commission’
 **Note:** Your vehicle will need to be inspected twice a year. 
 
 ### Registration Requirements
-- Form SS-14 "Authorization to Issue School Bus License Plates" (received upon successful vehicle inspection)
+- Form SS-14 "Authorization to Issue School Bus License Plates"  
+(received upon successful vehicle inspection)
 - Copy of the commercial vehicle insurance policy for your vehicle
  
 >**Once completed, you will have:**
