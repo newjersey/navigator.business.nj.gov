@@ -27,7 +27,7 @@ All drivers need to have a letter of certification before they can legally opera
 - Driver’s SSN
  
 >**Once completed, you will have:**  
->- A letter of qualification or disqualification for the driver.  
+>- A letter of qualification or disqualification for the driver  
 > **Note:** The letter will only be mailed to the employer. The process takes about 2 weeks after the application is processed.
  
 >**What if don’t complete this task?**  
