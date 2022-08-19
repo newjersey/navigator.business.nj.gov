@@ -77,39 +77,41 @@ export const BusinessNameSection = (): ReactElement => {
     <div data-testid="business-name-section">
       <form onSubmit={doSearch} className="usa-prose grid-container padding-0">
         <Content>{state.displayContent.businessNameCheck.contentMd}</Content>
-        <div className="text-bold margin-top-1">{Config.businessFormationDefaults.nameCheckFieldLabel}</div>
-        <div className="grid-row grid-gap-2">
-          <div className="tablet:grid-col-8">
-            <TextField
-              autoComplete="off"
-              className="fg1 width-100"
-              margin="dense"
-              value={currentName}
-              onChange={updateCurrentName}
-              variant="outlined"
-              placeholder={Config.businessFormationDefaults.nameCheckPlaceholderText}
-              inputProps={{
-                "aria-label": "Search business name",
-              }}
-              error={isNameFieldEmpty}
-              helperText={
-                isNameFieldEmpty ? Config.businessFormationDefaults.nameCheckValidationErrorText : undefined
-              }
-              onBlur={onBlurNameField}
-            />
-          </div>
-          <div className="flex flex-justify-end tablet:flex-auto tablet:flex-justify tablet:grid-col-4">
-            <FormControl margin="dense">
-              <Button
-                style="secondary-input-field-height"
-                onClick={() => {}}
-                loading={isLoading}
-                typeSubmit
-                noRightMargin
-              >
-                {Config.searchBusinessNameTask.searchButtonText}
-              </Button>
-            </FormControl>
+        <div className={isNameFieldEmpty ? `input-error-bar` : ""}>
+          <div className="text-bold margin-top-1">{Config.businessFormationDefaults.nameCheckFieldLabel}</div>
+          <div className="grid-row grid-gap-2">
+            <div className="tablet:grid-col-8">
+              <TextField
+                autoComplete="off"
+                className="fg1 width-100"
+                margin="dense"
+                value={currentName}
+                onChange={updateCurrentName}
+                variant="outlined"
+                placeholder={Config.businessFormationDefaults.nameCheckPlaceholderText}
+                inputProps={{
+                  "aria-label": "Search business name",
+                }}
+                error={isNameFieldEmpty}
+                helperText={
+                  isNameFieldEmpty ? Config.businessFormationDefaults.nameCheckValidationErrorText : undefined
+                }
+                onBlur={onBlurNameField}
+              />
+            </div>
+            <div className="flex flex-justify-end tablet:flex-auto tablet:flex-justify tablet:grid-col-4">
+              <FormControl margin="dense">
+                <Button
+                  style="secondary-input-field-height"
+                  onClick={() => {}}
+                  loading={isLoading}
+                  typeSubmit
+                  noRightMargin
+                >
+                  {Config.searchBusinessNameTask.searchButtonText}
+                </Button>
+              </FormControl>
+            </div>
           </div>
         </div>
       </form>
@@ -168,7 +170,7 @@ export const BusinessNameSection = (): ReactElement => {
         </Alert>
       )}
       <div
-        className="flex flex-justify-end bg-base-lightest margin-x-neg-205 padding-3 margin-top-3 margin-bottom-neg-205"
+        className="flex flex-justify-end bg-base-lightest margin-x-neg-4 padding-3 margin-top-3 margin-bottom-neg-4"
         style={{
           visibility:
             nameAvailability?.status === "AVAILABLE" && submittedName === currentName ? "visible" : "hidden",

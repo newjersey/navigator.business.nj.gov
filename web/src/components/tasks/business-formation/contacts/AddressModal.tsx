@@ -32,7 +32,7 @@ export const AddressModal = (props: Props): ReactElement => {
     invalid: boolean | undefined;
   };
 
-  const errorFields = [
+  const requiredFields = [
     "addressName",
     "addressLine1",
     "addressCity",
@@ -40,11 +40,11 @@ export const AddressModal = (props: Props): ReactElement => {
     "addressZipCode",
   ] as const;
 
-  type ErrorFields = typeof errorFields[number];
+  type ErrorFields = typeof requiredFields[number];
   type MemberErrorMap = Record<ErrorFields, FieldStatus>;
 
   const createMemberErrorMap = (invalid?: boolean): MemberErrorMap =>
-    errorFields.reduce(
+    requiredFields.reduce(
       (prev: MemberErrorMap, curr: ErrorFields) => ({ ...prev, [curr]: { invalid } }),
       {} as MemberErrorMap
     );
@@ -66,11 +66,15 @@ export const AddressModal = (props: Props): ReactElement => {
   const checkBoxCheck = (checked: boolean) => {
     setUseDefaultAddress(checked);
     if (checked) {
-      setAddressData({
+      const data = {
         ...addressData,
         ...props.defaultAddress,
+      };
+      setAddressData(data);
+      setMemberErrorMap({
+        ...createMemberErrorMap(false),
+        addressName: { invalid: data.name.trim() ? false : undefined },
       });
-      setMemberErrorMap(createMemberErrorMap(false));
     }
   };
 
@@ -82,7 +86,7 @@ export const AddressModal = (props: Props): ReactElement => {
     const unValidated = Object.values(addressErrorMap).some((i) => i.invalid === undefined);
     if (unValidated) {
       setMemberErrorMap(
-        errorFields.reduce(
+        requiredFields.reduce(
           (prev: MemberErrorMap, curr: ErrorFields) => ({
             ...prev,
             [curr]: { invalid: prev[curr].invalid ?? true },

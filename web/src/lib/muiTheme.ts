@@ -1,3 +1,5 @@
+import { red } from "@mui/material/colors";
+
 export default {
   typography: {
     fontFamily: [
@@ -54,6 +56,45 @@ export default {
         },
       },
     },
+    MuiFormHelperText: {
+      styleOverrides: {
+        root: {
+          fontWeight: 800,
+          fontSize: 16,
+          "&.Mui-error": {
+            color: "#b50909",
+          },
+        },
+      },
+    },
+    MuiRadio: {
+      variants: [
+        {
+          props: {
+            color: "error" as
+              | "error"
+              | "default"
+              | "info"
+              | "primary"
+              | "success"
+              | "warning"
+              | "secondary"
+              | undefined,
+          },
+          style: {
+            color: red[800],
+            "&.Mui-checked": {
+              color: red[600],
+            },
+            ".MuiSvgIcon-root": {
+              boxShadow: "inset 0 0 0 3px #B51D0926, 0 0 0 2px #B51D0926",
+              borderRadius: "50%",
+            },
+          },
+        },
+      ],
+    },
+
     MuiInputBase: {
       styleOverrides: {
         root: { marginTop: "0px" },
@@ -64,6 +105,9 @@ export default {
         root: {
           "&.Mui-disabled": {
             backgroundColor: "#f0f0f0",
+          },
+          "&.Mui-error .MuiOutlinedInput-notchedOutline": {
+            borderColor: "#b50909",
           },
           input: {
             "&.Mui-disabled": {

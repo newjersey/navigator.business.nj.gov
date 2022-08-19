@@ -1,7 +1,7 @@
 import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { Button } from "@/components/njwds-extended/Button";
-import { BusinessFormationEmptyFieldAlert } from "@/components/tasks/business-formation/BusinessFormationEmptyFieldAlert";
+import { BusinessFormationFieldAlert } from "@/components/tasks/business-formation/BusinessFormationFieldAlert";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
 import { FormationChooseDocuments } from "@/components/tasks/business-formation/payment/FormationChooseDocuments";
 import { FormationChooseNotifications } from "@/components/tasks/business-formation/payment/FormationChooseNotifications";
@@ -9,18 +9,22 @@ import { PaymentTypeTable } from "@/components/tasks/business-formation/payment/
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import * as api from "@/lib/api-client/apiClient";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { FormationFieldErrorMap, FormationFields } from "@/lib/types/types";
+import { MediaQueries } from "@/lib/PageSizes";
+import { FormationFieldErrorMap } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { getPhoneNumberFormat, scrollToTop } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
+import { FormationFields } from "@businessnjgovnavigator/shared";
+import { useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router";
 import { ReactElement, useContext, useMemo, useState } from "react";
 
 export const PaymentSection = (): ReactElement => {
-  const { state, setErrorMap, setTab, setShowResponseAlert } = useContext(BusinessFormationContext);
-  const [showRequiredFieldsError, setShowRequiredFieldsError] = useState<boolean>(false);
+  const { state, setErrorMap, setTab, setShowResponseAlert, setShowRequiredFieldsError, fieldsAreInvalid } =
+    useContext(BusinessFormationContext);
   const { userData, update } = useUserData();
   const router = useRouter();
+  const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -92,6 +96,7 @@ export const PaymentSection = (): ReactElement => {
             placeholder={Config.businessFormationDefaults.contactFirstNamePlaceholder}
             fieldName="contactFirstName"
             required={true}
+            error={fieldsAreInvalid(["contactFirstName", "contactLastName"])}
             validationText={Config.businessFormationDefaults.contactFirstNameErrorText}
           />
         </div>
@@ -100,6 +105,7 @@ export const PaymentSection = (): ReactElement => {
             label={Config.businessFormationDefaults.contactLastNameLabel}
             placeholder={Config.businessFormationDefaults.contactLastNamePlaceholder}
             fieldName="contactLastName"
+            inlineErrorStyling={isTabletAndUp}
             required={true}
             validationText={Config.businessFormationDefaults.contactLastNameErrorText}
           />
@@ -123,21 +129,19 @@ export const PaymentSection = (): ReactElement => {
       </div>
       <hr className="margin-bottom-2" />
       <Content>{state.displayContent.services.contentMd}</Content>
+      <BusinessFormationFieldAlert showError={true} errorData={state.errorMap} fields={["paymentType"]} />
       <FormationChooseDocuments />
+
       <PaymentTypeTable />
       <hr className="margin-top-4" />
       <FormationChooseNotifications />
       <div className="margin-top-3">
         <Content>{Config.businessFormationDefaults.paymentDisclaimerText}</Content>
       </div>
-      <BusinessFormationEmptyFieldAlert
-        showRequiredFieldsError={showRequiredFieldsError}
-        requiredFieldsWithError={requiredFieldsWithError}
-      />
       {userData?.formationData.formationResponse &&
         state.showResponseAlert &&
         !isLoading &&
-        !showRequiredFieldsError &&
+        !state.showRequiredFieldsError &&
         userData.formationData.formationResponse.errors.length > 0 && (
           <Alert variant="error" heading={Config.businessFormationDefaults.submitErrorHeading}>
             <ul style={{ wordBreak: "break-word" }}>
@@ -155,7 +159,7 @@ export const PaymentSection = (): ReactElement => {
           </Alert>
         )}
       <div className="margin-top-2 ">
-        <div className="flex flex-justify-end bg-base-lightest margin-x-neg-205 padding-3 margin-top-3 margin-bottom-neg-205">
+        <div className="flex flex-justify-end bg-base-lightest margin-x-neg-4 padding-3 margin-top-3 margin-bottom-neg-4">
           <Button
             style="secondary"
             widthAutoOnMobile

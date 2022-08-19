@@ -2,10 +2,10 @@ import {
   createEmptyFormationDisplayContent,
   FormationDisplayContent,
   FormationFieldErrorMap,
-  FormationFields,
 } from "@/lib/types/types";
 import {
   createEmptyFormationFormData,
+  FormationFields,
   FormationFormData,
   FormationLegalType,
   Municipality,
@@ -16,7 +16,7 @@ const allFormationFormFields = Object.keys(createEmptyFormationFormData()) as (k
 
 const createFormationFieldErrorMap = (): FormationFieldErrorMap =>
   allFormationFormFields.reduce((acc, field: FormationFields) => {
-    acc[field] = { invalid: false };
+    acc[field] = { name: field, invalid: false };
     return acc;
   }, {} as FormationFieldErrorMap);
 
@@ -26,6 +26,7 @@ interface BusinessFormationState {
   legalStructureId: FormationLegalType;
   displayContent: FormationDisplayContent;
   municipalities: Municipality[];
+  showRequiredFieldsError: boolean;
   errorMap: FormationFieldErrorMap;
   showResponseAlert: boolean;
 }
@@ -33,9 +34,11 @@ interface BusinessFormationState {
 interface BusinessFormationContextType {
   state: BusinessFormationState;
   setFormationFormData: (formationFormData: FormationFormData) => void;
+  fieldsAreInvalid: (fields: FormationFields[]) => boolean;
   setErrorMap: (errorMap: FormationFieldErrorMap) => void;
-  setTab: React.Dispatch<React.SetStateAction<number>>;
+  setTab: (value: number) => void;
   setShowResponseAlert: React.Dispatch<React.SetStateAction<boolean>>;
+  setShowRequiredFieldsError: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const BusinessFormationContext = createContext<BusinessFormationContextType>({
@@ -45,11 +48,16 @@ export const BusinessFormationContext = createContext<BusinessFormationContextTy
     formationFormData: createEmptyFormationFormData(),
     displayContent: createEmptyFormationDisplayContent()["limited-liability-company"],
     municipalities: [],
+    showRequiredFieldsError: false,
     errorMap: createFormationFieldErrorMap(),
     showResponseAlert: false,
   },
   setFormationFormData: () => {},
+  fieldsAreInvalid: () => {
+    return false;
+  },
   setErrorMap: () => {},
+  setShowRequiredFieldsError: () => {},
   setTab: () => {},
   setShowResponseAlert: () => {},
 });

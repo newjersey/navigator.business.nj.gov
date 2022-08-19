@@ -16,6 +16,7 @@ import {
 import { mockPush } from "@/test/mock/mockRouter";
 import { userDataUpdatedNTimes } from "@/test/mock/withStatefulUserData";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
+import FormationErrors from "@businessnjgovnavigator/content/fieldConfig/formation-error.json";
 import {
   BusinessUser,
   FormationFormData,
@@ -277,6 +278,14 @@ describe("Formation - PaymentSection", () => {
       const page = await getPageHelper({}, { paymentType: undefined });
       await page.clickSubmit();
       expect(screen.getByText(Config.businessFormationDefaults.paymentTypeErrorText)).toBeInTheDocument();
+      expect(
+        screen.getByText(
+          FormationErrors.inlineErrors.find((i) => i.fields.includes("paymentType"))?.label as string,
+          {
+            exact: false,
+          }
+        )
+      ).toBeInTheDocument();
       expect(userDataUpdatedNTimes()).toEqual(3);
     });
   });

@@ -61,7 +61,7 @@ export const ReviewSection = (): ReactElement => {
       </div>
 
       <div className="margin-top-2">
-        <div className="flex flex-justify-end bg-base-lightest margin-x-neg-205 padding-3 margin-top-3 margin-bottom-neg-205">
+        <div className="flex flex-justify-end bg-base-lightest margin-x-neg-4 padding-3 margin-top-3 margin-bottom-neg-4">
           <Button
             style="secondary"
             widthAutoOnMobile

@@ -157,6 +157,7 @@ export const RegisteredAgent = (): ReactElement => {
                   maxLength: 7,
                 }}
                 fieldName="agentNumber"
+                required={true}
                 validationText={Config.businessFormationDefaults.agentNumberErrorText}
                 formInputFull
               />
@@ -193,6 +194,7 @@ export const RegisteredAgent = (): ReactElement => {
                     label={Config.businessFormationDefaults.registeredAgentEmailLabel}
                     placeholder={Config.businessFormationDefaults.registeredAgentEmailPlaceholder}
                     fieldName="agentEmail"
+                    inlineErrorStyling={true}
                     additionalValidation={validateEmail}
                     required={true}
                     validationText={Config.businessFormationDefaults.agentEmailErrorText}
@@ -258,6 +260,7 @@ export const RegisteredAgent = (): ReactElement => {
                     placeholder={Config.businessFormationDefaults.registeredAgentZipCodePlaceholder}
                     validationText={Config.businessFormationDefaults.agentOfficeAddressZipCodeErrorText}
                     additionalValidation={zipCodeRange}
+                    inlineErrorStyling={true}
                     required={true}
                     disabled={state.formationFormData.agentUseBusinessAddress}
                   />

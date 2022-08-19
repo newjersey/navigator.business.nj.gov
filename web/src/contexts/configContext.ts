@@ -5,6 +5,7 @@ import * as CannabisPriorityStatusTab1 from "@businessnjgovnavigator/content/fie
 import * as CannabisPriorityStatusTab2 from "@businessnjgovnavigator/content/fieldConfig/cannabis-priority-status-tab2.json";
 import * as ConfigOriginal from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import * as Ein from "@businessnjgovnavigator/content/fieldConfig/ein.json";
+import * as FormationErrors from "@businessnjgovnavigator/content/fieldConfig/formation-error.json";
 import * as NaicsCode from "@businessnjgovnavigator/content/fieldConfig/naics-code.json";
 import * as NexusDbaFormation from "@businessnjgovnavigator/content/fieldConfig/nexus-dba-formation.json";
 import * as NexusNameSearch from "@businessnjgovnavigator/content/fieldConfig/nexus-name-search.json";
@@ -61,7 +62,8 @@ const merged = JSON.parse(
       NexusDbaFormation,
       NaicsCode,
       Ein,
-      Tax
+      Tax,
+      FormationErrors
     )
   )
 );
@@ -94,6 +96,7 @@ export type ConfigType = typeof ConfigOriginal &
   typeof NexusDbaFormation &
   typeof NaicsCode &
   typeof Ein &
+  typeof FormationErrors &
   typeof Tax;
 
 export const getMergedConfig = (): ConfigType => {
@@ -126,6 +129,7 @@ export const getMergedConfig = (): ConfigType => {
     NexusDbaFormation,
     NaicsCode,
     Ein,
+    FormationErrors,
     Tax
   );
 };
