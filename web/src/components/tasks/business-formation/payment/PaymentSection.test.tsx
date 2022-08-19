@@ -83,6 +83,7 @@ describe("Formation - PaymentSection", () => {
       ),
       formationResponse: undefined,
       getFilingResponse: undefined,
+      completedFilingPayment: false,
     };
     const user = initialUser ? generateUser(initialUser) : generateUser({});
     // eslint-disable-next-line testing-library/render-result-naming-convention

@@ -16,6 +16,7 @@ export interface FormationData {
   readonly formationFormData: FormationFormData;
   readonly formationResponse: FormationSubmitResponse | undefined;
   readonly getFilingResponse: GetFilingResponse | undefined;
+  readonly completedFilingPayment: boolean;
 }
 
 export interface FormationAddress {

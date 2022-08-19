@@ -64,6 +64,7 @@ import {
   TaxFilingData,
   UserData,
 } from "@businessnjgovnavigator/shared/";
+import { createEmptyFormationFormData } from "@businessnjgovnavigator/shared/formationData";
 
 export const generateSectionType = (): SectionType => {
   const num = randomInt();
@@ -470,9 +471,17 @@ export const generateFormationData = (
     formationFormData: generateFormationFormData({}, legalStructureId),
     formationResponse: undefined,
     getFilingResponse: undefined,
+    completedFilingPayment: false,
     ...overrides,
   };
 };
+
+export const generateEmptyFormationData = () => ({
+  formationFormData: createEmptyFormationFormData(),
+  formationResponse: undefined,
+  getFilingResponse: undefined,
+  completedFilingPayment: false,
+});
 
 export const generateFormationSubmitResponse = (
   overrides: Partial<FormationSubmitResponse>

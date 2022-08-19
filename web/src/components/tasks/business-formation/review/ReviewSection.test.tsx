@@ -46,6 +46,7 @@ describe("Formation - ReviewSection", () => {
       ),
       formationResponse: undefined,
       getFilingResponse: undefined,
+      completedFilingPayment: false,
     };
     const page = preparePage(
       generateUserData({

@@ -66,6 +66,7 @@ describe("Formation - BusinessSection", () => {
       ),
       formationResponse: undefined,
       getFilingResponse: undefined,
+      completedFilingPayment: false,
     };
     const user = initialUser ? generateUser(initialUser) : generateUser({});
     const page = preparePage(
