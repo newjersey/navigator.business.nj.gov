@@ -10,6 +10,7 @@ backend:
     create: "chore: creating {{collection}} {{slug}}"
     update: "fix: updating {{collection}} {{slug}}"
 publish_mode: editorial_workflow
+# local_backend: true
 media_folder: web/public/img
 logo_url: https://dev.navigator.business.nj.gov/img/Navigator-logo.svg
 public_folder: web/public
@@ -1008,13 +1009,9 @@ collections:
               - { label: Name Check Designator Error Text, name: nameCheckDesignatorText, widget: text }
               - {
                   label: Name Check Special Character Error Text,
-                  name: nameCheckSpecialCharacterText,
-                  widget: text,
-                }
-              - {
-                  label: Name Check Special Character Error Link,
-                  name: nameCheckSpecialCharacterLink,
-                  widget: text,
+                  name: nameCheckSpecialCharacterMarkDown,
+                  widget: markdown,
+                  hint: This field supports Markdown,
                 }
               - { label: Name Check Available Text, name: nameCheckAvailableText, widget: text }
               - { label: Name Check Field Label, name: nameCheckFieldLabel, widget: string }
