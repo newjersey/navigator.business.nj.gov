@@ -5,7 +5,7 @@ name: Get a Commercial Insurance Policy
 id: trucking-insurance
 required: true
 ---
-Insurance will protect your business assets should you be held liable for an incident. 
+Insurance will protect your business assets should you be held liable for an incident. You will also need proof of insurance to register your commercial vehicle with the New Jersey Motor Vehicle Commission. 
 
 To find an insurance broker, speak to your network, local Chamber of Commerce, or supplier. Oftentimes, the best way to find a broker is through word of mouth.
 
