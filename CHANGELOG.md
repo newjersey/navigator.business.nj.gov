@@ -1,3 +1,10 @@
+## [5.1.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.1.0...v5.1.1) (2022-08-19)
+
+
+### Bug Fixes
+
+* add additional logging for MyNJ requests ([dad6121](https://github.com/newjersey/navigator.business.nj.gov/commit/dad61211670a0c9fa38b4408c60f7116d6435fd1))
+
 # [5.1.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.0.0...v5.1.0) (2022-08-18)
 
 
