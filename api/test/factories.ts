@@ -75,12 +75,15 @@ export const generateFormationUserData = (
 
 export const generateUserData = (overrides: Partial<UserData>): UserData => {
   const profileData = overrides.profileData ?? generateProfileData({});
-  const formationData = FormationLegalTypes.includes(profileData.legalStructureId as FormationLegalType)
+  const formationData: FormationData = FormationLegalTypes.includes(
+    profileData.legalStructureId as FormationLegalType
+  )
     ? generateFormationData({}, profileData.legalStructureId as FormationLegalType)
     : {
         formationFormData: createEmptyFormationFormData(),
         formationResponse: undefined,
         getFilingResponse: undefined,
+        completedFilingPayment: false,
       };
 
   if (
@@ -291,6 +294,7 @@ export const generateFormationData = (
     formationFormData: generateFormationFormData({}, legalStructureId),
     formationResponse: undefined,
     getFilingResponse: undefined,
+    completedFilingPayment: false,
     ...overrides,
   };
 };

@@ -1,5 +1,6 @@
 import { Content } from "@/components/Content";
 import { LoadingIndicator } from "@/components/LoadingIndicator";
+import { Alert } from "@/components/njwds-extended/Alert";
 import { HorizontalStepper } from "@/components/njwds-extended/HorizontalStepper";
 import { TaskCTA } from "@/components/TaskCTA";
 import { TaskHeader } from "@/components/TaskHeader";
@@ -9,6 +10,7 @@ import { FormationSuccessPage } from "@/components/tasks/business-formation/succ
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import * as api from "@/lib/api-client/apiClient";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { splitFullName } from "@/lib/domain-logic/splitFullName";
@@ -26,8 +28,9 @@ import {
   Municipality,
 } from "@businessnjgovnavigator/shared/";
 import { parseDateWithFormat } from "@businessnjgovnavigator/shared/dateHelpers";
+import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { useRouter } from "next/router";
-import { ReactElement, useEffect, useMemo, useState } from "react";
+import { ReactElement, useEffect, useMemo, useRef, useState } from "react";
 import { BusinessFormationTabsConfiguration } from "./BusinessFormationTabsConfiguration";
 
 export const allowFormation = (legalStructureId: string | undefined) => {
@@ -61,6 +64,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
   const { roadmap } = useRoadmap();
   const { userData, update } = useUserData();
   const router = useRouter();
+  const { Config } = useConfig();
 
   const [formationFormData, setFormationFormData] = useState<FormationFormData>(
     createEmptyFormationFormData()
@@ -70,6 +74,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
   const [showResponseAlert, setShowResponseAlert] = useState<boolean>(false);
   const [isLoadingGetFiling, setIsLoadingGetFiling] = useState<boolean>(false);
   const [showRequiredFieldsError, setShowRequiredFieldsError] = useState<boolean>(false);
+  const getCompletedFilingApiCallOccurred = useRef<boolean>(false);
 
   const setTab = (tabNumber: number) => {
     updateTab(tabNumber);
@@ -100,18 +105,42 @@ export const BusinessFormation = (props: Props): ReactElement => {
   }, userData);
 
   useEffect(() => {
-    if (!router.isReady) return;
-    const completeFiling = router.query.completeFiling;
-    if (completeFiling === "true") {
-      setIsLoadingGetFiling(true);
-      api.getCompletedFiling().then((newUserData) => {
-        update(newUserData).then(() => {
+    const shouldFetchCompletedFiling = (): boolean => {
+      if (!userData || getCompletedFilingApiCallOccurred.current) return false;
+      const completeFilingQueryParamExists = router.query.completeFiling === "true";
+      const completedPayment = userData.formationData.completedFilingPayment;
+      const noCompletedFilingExists = !userData.formationData.getFilingResponse?.success;
+      return completeFilingQueryParamExists || (completedPayment && noCompletedFilingExists);
+    };
+
+    const setCompletedFilingPayment = (userData: UserData): UserData => {
+      return {
+        ...userData,
+        formationData: { ...userData.formationData, completedFilingPayment: true },
+      };
+    };
+
+    (async function fetchCompletedFiling() {
+      if (!router.isReady || !userData) return;
+      if (shouldFetchCompletedFiling()) {
+        setIsLoadingGetFiling(true);
+        getCompletedFilingApiCallOccurred.current = true;
+        const userDataToSet = await api
+          .getCompletedFiling()
+          .then((newUserData) => {
+            return newUserData;
+          })
+          .catch(() => {
+            return userData;
+          });
+
+        update(setCompletedFilingPayment(userDataToSet)).then(() => {
           setIsLoadingGetFiling(false);
           router.replace({ pathname: `/tasks/${props.task.urlSlug}` }, undefined, { shallow: true });
         });
-      });
-    }
-  }, [router.isReady, router.query.completeFiling, update, router, props.task.urlSlug]);
+      }
+    })();
+  }, [router.isReady, router.query.completeFiling, update, router, props.task.urlSlug, userData]);
 
   const legalStructureId = useMemo(
     () => (userData?.profileData.legalStructureId ?? defaultFormationLegalType) as FormationLegalType,
@@ -130,6 +159,24 @@ export const BusinessFormation = (props: Props): ReactElement => {
           link={getModifiedTaskContent(roadmap, props.task, "callToActionLink")}
           text={getModifiedTaskContent(roadmap, props.task, "callToActionText")}
         />
+      </div>
+    );
+  }
+
+  const errorFetchingFilings =
+    userData?.formationData.completedFilingPayment &&
+    !isLoadingGetFiling &&
+    getCompletedFilingApiCallOccurred.current &&
+    !userData.formationData.getFilingResponse?.success;
+
+  if (errorFetchingFilings) {
+    return (
+      <div className="flex flex-column minh-38">
+        <TaskHeader task={props.task} />
+        <Alert variant="warning" dataTestid="api-error-text">
+          <Content>{Config.businessFormationDefaults.getFilingApiErrorText}</Content>
+        </Alert>
+        <img className="maxh-card-lg margin-top-6" src={`/img/signpost.svg`} alt="" />
       </div>
     );
   }

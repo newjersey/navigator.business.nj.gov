@@ -236,7 +236,8 @@
     "nameCheckValidationErrorText": "Enter a business name to check availability.",
     "successPageHeader": "Hooray!",
     "addressModalBackButtonText": "Cancel",
-    "provisionsAddAnotherButtonText": "Add a Provision"
+    "provisionsAddAnotherButtonText": "Add a Provision",
+    "getFilingApiErrorText": "**You have  successfully paid  and formed your business.** We are unable to show your registration documents at this time; refresh your browser or check back in a few hours."
   },
   "selfRegistration": {
     "errorTextGeneric": "Something went wrong, please try again later.",
