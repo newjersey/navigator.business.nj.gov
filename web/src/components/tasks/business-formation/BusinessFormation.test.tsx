@@ -1,6 +1,8 @@
 import * as api from "@/lib/api-client/apiClient";
+import { Task } from "@/lib/types/types";
 import { getDollarValue } from "@/lib/utils/helpers";
 import {
+  generateEmptyFormationData,
   generateFormationData,
   generateFormationDisplayContent,
   generateFormationSubmitResponse,
@@ -15,11 +17,12 @@ import { currentUserData } from "@/test/mock/withStatefulUserData";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import {
   createEmptyFormationAddress,
-  createEmptyFormationFormData,
   FormationAddress,
+  FormationData,
   FormationLegalType,
   FormationLegalTypes,
   getCurrentDate,
+  UserData,
 } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { act, fireEvent, screen, waitFor } from "@testing-library/react";
@@ -74,26 +77,113 @@ describe("<BusinessFormation />", () => {
     expect(screen.getByTestId("business-name-section")).toBeInTheDocument();
   });
 
-  it("requests for getFiling and updates userData when at ?completeFiling=true query param and replaces URL", async () => {
-    const formationData = generateFormationData({
-      formationResponse: generateFormationSubmitResponse({ success: true }),
-    });
-    useMockRouter({ isReady: true, query: { completeFiling: "true" } });
-    const newUserData = generateUserData({});
-    mockApi.getCompletedFiling.mockResolvedValue(newUserData);
+  describe("when completedFilingPayment is true and no getFilingResponse exists", () => {
+    let formationData: FormationData;
+    let task: Task;
 
-    const task = generateTask({ urlSlug: "some-formation-url" });
-
-    await act(async () => {
-      preparePage({ formationData }, displayContent, undefined, task);
+    beforeEach(() => {
+      useMockRouter({ isReady: true });
+      task = generateTask({ urlSlug: "some-formation-url" });
+      formationData = generateFormationData({
+        formationResponse: generateFormationSubmitResponse({ success: true }),
+        getFilingResponse: undefined,
+        completedFilingPayment: true,
+      });
     });
-    expect(mockApi.getCompletedFiling).toHaveBeenCalled();
-    await waitFor(() =>
-      expect(mockPush).toHaveBeenCalledWith({ pathname: "/tasks/some-formation-url" }, undefined, {
-        shallow: true,
-      })
-    );
-    expect(currentUserData()).toEqual(newUserData);
+
+    it("updates userData with getFilingResponse and completedFilingPayment", async () => {
+      const userDataReturnFromApi = generateUserData({});
+      mockApi.getCompletedFiling.mockResolvedValue(userDataReturnFromApi);
+      await act(async () => {
+        preparePage({ formationData }, displayContent, undefined, task);
+      });
+      expect(mockApi.getCompletedFiling).toHaveBeenCalled();
+      const expectedUserData = {
+        ...userDataReturnFromApi,
+        formationData: {
+          ...userDataReturnFromApi.formationData,
+          completedFilingPayment: true,
+        },
+      };
+      await waitFor(() => {
+        expect(currentUserData()).toEqual(expectedUserData);
+      });
+    });
+  });
+
+  describe("when completeFiling=true query param", () => {
+    let formationData: FormationData;
+    let task: Task;
+
+    beforeEach(() => {
+      useMockRouter({ isReady: true, query: { completeFiling: "true" } });
+      task = generateTask({ urlSlug: "some-formation-url" });
+      formationData = generateFormationData({
+        formationResponse: generateFormationSubmitResponse({ success: true }),
+      });
+    });
+
+    describe("on API success", () => {
+      let userDataReturnFromApi: UserData;
+
+      beforeEach(() => {
+        userDataReturnFromApi = generateUserData({});
+        mockApi.getCompletedFiling.mockResolvedValue(userDataReturnFromApi);
+      });
+
+      it("updates userData with getFilingResponse and completedFilingPayment", async () => {
+        await act(async () => {
+          preparePage({ formationData }, displayContent, undefined, task);
+        });
+        expect(mockApi.getCompletedFiling).toHaveBeenCalled();
+        const expectedUserData = {
+          ...userDataReturnFromApi,
+          formationData: {
+            ...userDataReturnFromApi.formationData,
+            completedFilingPayment: true,
+          },
+        };
+        await waitFor(() => {
+          expect(currentUserData()).toEqual(expectedUserData);
+        });
+      });
+
+      it("replaces URL", async () => {
+        await act(async () => {
+          preparePage({ formationData }, displayContent, undefined, task);
+        });
+        await waitFor(() =>
+          expect(mockPush).toHaveBeenCalledWith({ pathname: "/tasks/some-formation-url" }, undefined, {
+            shallow: true,
+          })
+        );
+      });
+    });
+
+    describe("on API error", () => {
+      beforeEach(() => {
+        mockApi.getCompletedFiling.mockRejectedValue({});
+      });
+
+      it("updates userData with completedFilingPayment", async () => {
+        await act(async () => {
+          preparePage({ formationData }, displayContent, undefined, task);
+        });
+        expect(mockApi.getCompletedFiling).toHaveBeenCalled();
+        await waitFor(() => {
+          expect(currentUserData().formationData.completedFilingPayment).toEqual(true);
+        });
+      });
+
+      it("displays error message", async () => {
+        await act(async () => {
+          preparePage({ formationData }, displayContent, undefined, task);
+        });
+        await waitFor(() => {
+          expect(screen.getByTestId("api-error-text")).toBeInTheDocument();
+        });
+      });
+    });
   });
 
   it("renders success page when userData has formationResponse", () => {
@@ -107,11 +197,7 @@ describe("<BusinessFormation />", () => {
   it("fills multi-tab form, submits, and updates userData when LLC", async () => {
     const legalStructureId = "limited-liability-company";
     const profileData = generateFormationProfileData({ legalStructureId });
-    const formationData = {
-      formationFormData: createEmptyFormationFormData(),
-      formationResponse: undefined,
-      getFilingResponse: undefined,
-    };
+    const formationData = generateEmptyFormationData();
     const page = preparePage({ profileData, formationData }, displayContent);
 
     await page.submitBusinessNameTab("Pizza Joint");
@@ -221,11 +307,7 @@ describe("<BusinessFormation />", () => {
   it("fills multi-tab form, submits, and updates userData when LLP", async () => {
     const legalStructureId = "limited-liability-partnership";
     const profileData = generateFormationProfileData({ legalStructureId });
-    const formationData = {
-      formationFormData: createEmptyFormationFormData(),
-      formationResponse: undefined,
-      getFilingResponse: undefined,
-    };
+    const formationData = generateEmptyFormationData();
     const page = preparePage({ profileData, formationData }, displayContent);
 
     await page.submitBusinessNameTab("Pizza Joint");
@@ -319,11 +401,7 @@ describe("<BusinessFormation />", () => {
   it("fills multi-tab form, submits, and updates userData when LP", async () => {
     const legalStructureId = "limited-partnership";
     const profileData = generateFormationProfileData({ legalStructureId });
-    const formationData = {
-      formationFormData: createEmptyFormationFormData(),
-      formationResponse: undefined,
-      getFilingResponse: undefined,
-    };
+    const formationData = generateEmptyFormationData();
     const page = preparePage({ profileData, formationData }, displayContent);
 
     await page.submitBusinessNameTab("Pizza Joint");
@@ -450,11 +528,7 @@ describe("<BusinessFormation />", () => {
   it("fills multi-tab form, submits, and updates userData when corp", async () => {
     const legalStructureId = "c-corporation";
     const profileData = generateFormationProfileData({ legalStructureId });
-    const formationData = {
-      formationFormData: createEmptyFormationFormData(),
-      formationResponse: undefined,
-      getFilingResponse: undefined,
-    };
+    const formationData = generateEmptyFormationData();
     const page = preparePage({ profileData, formationData }, displayContent);
 
     const member: FormationAddress = {

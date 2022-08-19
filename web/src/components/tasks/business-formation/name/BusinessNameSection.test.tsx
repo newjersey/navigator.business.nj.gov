@@ -1,6 +1,11 @@
 import { BusinessFormation } from "@/components/tasks/business-formation/BusinessFormation";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import { generateFormationDisplayContent, generateTask, generateUserData } from "@/test/factories";
+import {
+  generateEmptyFormationData,
+  generateFormationDisplayContent,
+  generateTask,
+  generateUserData,
+} from "@/test/factories";
 import { withAuthAlert } from "@/test/helpers";
 import {
   createFormationPageHelpers,
@@ -48,6 +53,7 @@ describe("Formation - BusinessNameSection", () => {
       formationFormData: createEmptyFormationFormData(),
       formationResponse: undefined,
       getFilingResponse: undefined,
+      completedFilingPayment: false,
     };
     return preparePage(generateUserData({ profileData, formationData }), generateFormationDisplayContent({}));
   };
@@ -222,6 +228,7 @@ describe("Formation - BusinessNameSection", () => {
         formationFormData: createEmptyFormationFormData(),
         formationResponse: undefined,
         getFilingResponse: undefined,
+        completedFilingPayment: false,
       },
       profileData: generateFormationProfileData({}),
     });
@@ -254,11 +261,7 @@ describe("Formation - BusinessNameSection", () => {
 
   it("opens registration modal when guest mode user tries to continue", async () => {
     const initialUserData = generateUserData({
-      formationData: {
-        formationFormData: createEmptyFormationFormData(),
-        formationResponse: undefined,
-        getFilingResponse: undefined,
-      },
+      formationData: generateEmptyFormationData(),
       profileData: generateFormationProfileData({}),
     });
 

@@ -1429,6 +1429,11 @@ collections:
               - { label: Success Page - Body, name: successPageBody, widget: string }
               - { label: Success Page - Header, name: successPageHeader, widget: string }
               - { label: Success Page - Subheader, name: successPageSubheader, widget: string }
+              - {
+                  label: Success Page - API Call Failed Alert Message,
+                  name: getFilingApiErrorText,
+                  widget: markdown,
+                }
               - { label: Update your Profile text, name: updateYourProfileLinkText, widget: string }
           - label: Dashboard Defaults
             name: dashboardDefaults

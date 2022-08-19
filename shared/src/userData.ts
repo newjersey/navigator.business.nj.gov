@@ -40,6 +40,7 @@ export const createEmptyUserData = (user: BusinessUser): UserData => {
       formationFormData: createEmptyFormationFormData(),
       formationResponse: undefined,
       getFilingResponse: undefined,
+      completedFilingPayment: false,
     },
   };
 };
