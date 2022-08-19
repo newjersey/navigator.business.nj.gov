@@ -10,7 +10,8 @@ type MyNJConfig = {
   serviceUrl: string;
 };
 
-export const MyNJSelfRegClientFactory = (config: MyNJConfig, logWriter: LogWriterType): SelfRegClient => {
+export const MyNJSelfRegClientFactory = (config: MyNJConfig, logger: LogWriterType): SelfRegClient => {
+  const logId = logger.GetId();
   const resume = (myNJUserKey: string): Promise<SelfRegResponse> => {
     return makeRequest(createResumeBody(myNJUserKey), "RESUME");
   };
@@ -24,14 +25,11 @@ export const MyNJSelfRegClientFactory = (config: MyNJConfig, logWriter: LogWrite
       "Content-Type": "text/xml;encoding=UTF-8",
     };
 
-    if (process.env.NODE_ENV !== "test") {
-      console.log({
-        method: "post",
-        url: config.serviceUrl,
-        data: body,
-        headers: headers,
-      });
-    }
+    logger.LogInfo(
+      `myNJ Self-Reg - Id:${logId} - Request Sent to ${config.serviceUrl} data: ${JSON.stringify(
+        body
+      )} headers: ${JSON.stringify(headers)}`
+    );
 
     return axios({
       method: "post",
@@ -53,13 +51,13 @@ export const MyNJSelfRegClientFactory = (config: MyNJConfig, logWriter: LogWrite
         const errors = xmlResponseObj["Errors"];
 
         if (!success || success[0] !== "true") {
-          logWriter.LogError(
-            `myNJ Self-Reg - Error Response Received. Data: Success: ${success} AuthId: ${authId}. Errors: ${errors}`
+          logger.LogError(
+            `myNJ Self-Reg - Id:${logId} - Error Response Received. Data: Success: ${success} AuthId: ${authId}. Errors: ${errors}`
           );
           throw errors;
         } else {
-          logWriter.LogInfo(
-            `myNJ Self-Reg - Response Received. Data: Success: ${success} AuthId: ${authId}. Errors: ${errors}`
+          logger.LogInfo(
+            `myNJ Self-Reg - Id:${logId} - Response Received. Data: Success: ${success} AuthId: ${authId}. Errors: ${errors}`
           );
         }
 
@@ -72,7 +70,7 @@ export const MyNJSelfRegClientFactory = (config: MyNJConfig, logWriter: LogWrite
         if (process.env.NODE_ENV !== "test") {
           console.log("error", error);
         }
-        logWriter.LogError("Registration - Error", error);
+        logger.LogError(`myNJ Self-Reg - Id:${logId} - Error: `, error);
 
         const myNJDuplicateErrors = ["E1048", "E1017", "E1059", "E2109"];
         if (error.length > 0 && myNJDuplicateErrors.includes(error[0].split(" ")[0])) {
