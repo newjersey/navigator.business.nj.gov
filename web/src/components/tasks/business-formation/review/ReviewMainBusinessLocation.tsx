@@ -1,6 +1,6 @@
 import { Content } from "@/components/Content";
 import { Button } from "@/components/njwds-extended/Button";
-import { LookupBusinessFormationTabByName } from "@/components/tasks/business-formation/BusinessFormationTabsConfiguration";
+import { LookupTabIndexByName } from "@/components/tasks/business-formation/BusinessFormationTabs";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getStringifiedAddress, scrollToTop, setHeaderRole } from "@/lib/utils/helpers";
@@ -25,7 +25,7 @@ export const ReviewMainBusinessLocation = (): ReactElement => {
           <Button
             style="tertiary"
             onClick={() => {
-              setTab(LookupBusinessFormationTabByName("Business"));
+              setTab(LookupTabIndexByName("Business"));
               scrollToTop();
             }}
             underline

@@ -1,11 +1,11 @@
 import { Content } from "@/components/Content";
 import { Button } from "@/components/njwds-extended/Button";
+import { LookupTabIndexByName } from "@/components/tasks/business-formation/BusinessFormationTabs";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { getStringifiedAddress, scrollToTop, setHeaderRole } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { corpLegalStructures } from "@businessnjgovnavigator/shared";
 import { ReactElement, useContext } from "react";
-import { LookupBusinessFormationTabByName } from "../BusinessFormationTabsConfiguration";
 
 export const ReviewSignatures = (): ReactElement => {
   const { state, setTab } = useContext(BusinessFormationContext);
@@ -32,7 +32,7 @@ export const ReviewSignatures = (): ReactElement => {
           <Button
             style="tertiary"
             onClick={() => {
-              setTab(LookupBusinessFormationTabByName("Contacts"));
+              setTab(LookupTabIndexByName("Contacts"));
               scrollToTop();
             }}
             underline

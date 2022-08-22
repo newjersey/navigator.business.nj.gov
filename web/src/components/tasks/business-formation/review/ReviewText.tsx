@@ -1,11 +1,11 @@
 import { Content } from "@/components/Content";
 import { Button } from "@/components/njwds-extended/Button";
+import { LookupTabIndexByName } from "@/components/tasks/business-formation/BusinessFormationTabs";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { camelCaseToSnakeCase, scrollToTop, setHeaderRole } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { FormationTextField } from "@businessnjgovnavigator/shared/formationData";
 import { useContext } from "react";
-import { LookupBusinessFormationTabByName } from "../BusinessFormationTabsConfiguration";
 
 interface Props {
   header: string;
@@ -26,8 +26,7 @@ export const ReviewText = (props: Props) => {
           <Button
             style="tertiary"
             onClick={() => {
-              // setTab(LookupBusinessFormationTabByName("Business"));
-              setTab(LookupBusinessFormationTabByName(props.tab));
+              setTab(LookupTabIndexByName(props.tab));
               scrollToTop();
             }}
             underline

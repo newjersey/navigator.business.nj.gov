@@ -31,7 +31,6 @@ import { parseDateWithFormat } from "@businessnjgovnavigator/shared/dateHelpers"
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { useRouter } from "next/router";
 import { ReactElement, useEffect, useMemo, useRef, useState } from "react";
-import { BusinessFormationTabsConfiguration } from "./BusinessFormationTabsConfiguration";
 
 export const allowFormation = (legalStructureId: string | undefined) => {
   const featureFlagMap: Partial<Record<FormationLegalType, boolean>> = {
@@ -88,7 +87,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
     !date || parseDateWithFormat(date, "YYYY-MM-DD").isBefore(getCurrentDate())
       ? getCurrentDateFormatted("YYYY-MM-DD")
       : date;
-  const stepNames = BusinessFormationTabsConfiguration.map((value) => value.name);
+  const stepNames = BusinessFormationTabs.map((value) => value.section);
 
   useMountEffectWhenDefined(() => {
     if (!userData) return;
