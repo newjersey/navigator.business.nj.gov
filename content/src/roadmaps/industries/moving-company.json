@@ -37,6 +37,11 @@
       "step": 3,
       "weight": 20,
       "task": "moving-company-license"
+    },
+    {
+      "step": 3,
+      "weight": 22,
+      "task": "trucking-cdl"
     }
   ],
   "name": "Moving Company",
