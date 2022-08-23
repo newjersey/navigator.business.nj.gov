@@ -4,21 +4,35 @@ import { BusinessNameSection } from "@/components/tasks/business-formation/name/
 import { PaymentSection } from "@/components/tasks/business-formation/payment/PaymentSection";
 import { ReviewSection } from "@/components/tasks/business-formation/review/ReviewSection";
 import { ReactElement } from "react";
-import { BusinessFormationTabsConfiguration } from "./BusinessFormationTabsConfiguration";
 
-export const BusinessFormationTabs: { component: ReactElement; section: string }[] = [
+export const BusinessFormationTabs: { component: ReactElement; section: string; tabIndex: number }[] = [
   {
     component: <BusinessNameSection />,
-    section: BusinessFormationTabsConfiguration[0].name,
+    section: "Name",
+    tabIndex: 0,
   },
   {
     component: <BusinessSection />,
-    section: BusinessFormationTabsConfiguration[1].name,
+    section: "Business",
+    tabIndex: 1,
   },
   {
     component: <ContactsSection />,
-    section: BusinessFormationTabsConfiguration[2].name,
+    section: "Contacts",
+    tabIndex: 2,
   },
-  { component: <ReviewSection />, section: BusinessFormationTabsConfiguration[3].name },
-  { component: <PaymentSection />, section: BusinessFormationTabsConfiguration[4].name },
+  {
+    component: <ReviewSection />,
+    section: "Review",
+    tabIndex: 3,
+  },
+  {
+    component: <PaymentSection />,
+    section: "Billing",
+    tabIndex: 4,
+  },
 ];
+
+export const LookupTabIndexByName = (name: string): number => {
+  return BusinessFormationTabs.find((x) => x.section === name)?.tabIndex ?? -1;
+};

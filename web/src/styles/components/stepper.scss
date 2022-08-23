@@ -75,8 +75,16 @@
     color: $info-darker;
   }
 
+  .usa-step-indicator__segment--error .usa-step-indicator__segment-label {
+    color: $error-dark;
+  }
+
   .usa-step-indicator__segment:after {
     background-color: $base-light;
+  }
+
+  .usa-step-indicator__segment--error:after {
+    background-color: $error-dark !important;
   }
 
   .usa-step-indicator__segment--current:after {
@@ -91,6 +99,10 @@
     color: $white !important;
     background-color: $base-light !important;
     box-shadow: none !important;
+  }
+
+  .usa-step-indicator__segment--error::before {
+    background-color: $error-dark !important;
   }
 
   .usa-step-indicator__segment--current::before {
@@ -124,6 +136,7 @@
     }
 
     .usa-step-indicator__segment--complete:before,
+    .usa-step-indicator__segment--error:before,
     .usa-step-indicator__segment--current:before {
       content: attr(data-num) !important;
     }

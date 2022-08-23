@@ -1,6 +1,7 @@
 import { Content } from "@/components/Content";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { Button } from "@/components/njwds-extended/Button";
+import { LookupTabIndexByName } from "@/components/tasks/business-formation/BusinessFormationTabs";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
@@ -10,7 +11,6 @@ import { FormationLegalType, LookupLegalStructureById } from "@businessnjgovnavi
 import { FormHelperText } from "@mui/material";
 import { useRouter } from "next/router";
 import { ReactElement, useContext, useState } from "react";
-import { LookupBusinessFormationTabByName } from "../BusinessFormationTabsConfiguration";
 
 interface Props {
   reviewPage?: boolean;
@@ -61,7 +61,7 @@ export const BusinessNameAndLegalStructure = ({ reviewPage = false }: Props): Re
               style="tertiary"
               onClick={() => {
                 analytics.event.business_formation_business_name_edit.click.go_to_name_search_step();
-                setTab(LookupBusinessFormationTabByName("Business"));
+                setTab(LookupTabIndexByName("Business"));
                 scrollToTop();
               }}
               underline
@@ -89,7 +89,7 @@ export const BusinessNameAndLegalStructure = ({ reviewPage = false }: Props): Re
               style="tertiary"
               widthAutoOnMobile
               onClick={() => {
-                setTab(LookupBusinessFormationTabByName("Name"));
+                setTab(LookupTabIndexByName("Name"));
               }}
               underline
               dataTestid="edit-business-name"
