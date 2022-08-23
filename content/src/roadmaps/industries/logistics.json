@@ -27,6 +27,16 @@
       "step": 3,
       "weight": 10,
       "task": "bank-account"
+    },
+    {
+      "step": 3,
+      "weight": 12,
+      "task": "get-insurance"
+    },
+    {
+      "step": 3,
+      "weight": 15,
+      "task": "logistics-warehouse"
     }
   ],
   "name": "Logistics",
