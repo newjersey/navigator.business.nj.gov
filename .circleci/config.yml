@@ -27,7 +27,6 @@ commands:
           command: |
             sudo apt update
             sudo apt install -y openjdk-11-jdk-headless
-      - install-awscli
       - bootstrap-code
       - run:
           name: Configure Serverless
@@ -94,9 +93,6 @@ commands:
       browser:
         type: string
     steps:
-      - run:
-          name: Install Additional Tools
-          command: sudo apt-get install -y libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
       - run:
           name: Start services
           command: yarn workspace @businessnjgovnavigator/api start & yarn workspace @businessnjgovnavigator/api start:wiremock & yarn workspace @businessnjgovnavigator/web start
@@ -380,7 +376,6 @@ commands:
 
   generate-release-notes:
     steps:
-      - install-github-cli
       - run:
           name: Generate Release Notes
           command: yarn semantic-release --branches $CIRCLE_BRANCH
@@ -390,13 +385,40 @@ commands:
             git status
             gh pr create --fill --base main --head $CIRCLE_BRANCH
 
+  build-and-push-docker-image:
+    parameters:
+      image-name:
+        type: string
+    steps:
+      - run:
+          name: Build  Docker Image
+          command: docker build -f BuilderImage.Dockerfile . -t ${AWS_ACCOUNT_ID_DEV}.dkr.ecr.${AWS_REGION}.amazonaws.com/navigator_builder:<< parameters.image-name >>-${CIRCLE_SHA1} -t ${AWS_ACCOUNT_ID_DEV}.dkr.ecr.${AWS_REGION}.amazonaws.com/navigator_builder:<< parameters.image-name >> -t ${AWS_ACCOUNT_ID_DEV}.dkr.ecr.${AWS_REGION}.amazonaws.com/navigator_builder:<< parameters.image-name >>-latest
+      - run:
+          name: Push Builder Docker Image
+          command: |
+            aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID_DEV}.dkr.ecr.${AWS_REGION}.amazonaws.com
+            docker push ${AWS_ACCOUNT_ID_DEV}.dkr.ecr.${AWS_REGION}.amazonaws.com/navigator_builder:<< parameters.image-name >>-${CIRCLE_SHA1}
+            docker push ${AWS_ACCOUNT_ID_DEV}.dkr.ecr.${AWS_REGION}.amazonaws.com/navigator_builder:<< parameters.image-name >>
+            docker push ${AWS_ACCOUNT_ID_DEV}.dkr.ecr.${AWS_REGION}.amazonaws.com/navigator_builder:<< parameters.image-name >>-latest
+
+  docker-deploy-image:
+    steps:
+      - configure
+      - setup_remote_docker:
+          version: 20.10.14
+          docker_layer_caching: true
+      - build-and-push-docker-image:
+          image-name: test
+
 jobs:
   merge-content:
     docker:
-      - image: cimg/node:16.16.0
+      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:test
+        aws_auth:
+          aws_access_key_id: $AWS_ACCESS_KEY_ID_DEV
+          aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_DEV
     steps:
       - checkout
-      - install-github-cli
       - run:
           name: Update content-repo branch
           command: |
@@ -410,7 +432,10 @@ jobs:
 
   build:
     docker:
-      - image: cimg/node:16.16.0
+      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:test
+        aws_auth:
+          aws_access_key_id: $AWS_ACCESS_KEY_ID_DEV
+          aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_DEV
     steps:
       - set-dev-env-vars
       - configure-and-build
@@ -422,7 +447,10 @@ jobs:
 
   lint-and-test:
     docker:
-      - image: cimg/node:16.16.0
+      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:test
+        aws_auth:
+          aws_access_key_id: $AWS_ACCESS_KEY_ID_DEV
+          aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_DEV
     steps:
       - set-dev-env-vars
       - attach_workspace:
@@ -437,7 +465,10 @@ jobs:
 
   prepare-release:
     docker:
-      - image: cimg/node:16.16.0
+      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:test
+        aws_auth:
+          aws_access_key_id: $AWS_ACCESS_KEY_ID_DEV
+          aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_DEV
     resource_class: small
     steps:
       - set-prod-env-vars
@@ -446,7 +477,10 @@ jobs:
 
   deploy-content:
     docker:
-      - image: cimg/node:16.16.0
+      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:test
+        aws_auth:
+          aws_access_key_id: $AWS_ACCESS_KEY_ID_DEV
+          aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_DEV
     steps:
       - set-dev-env-vars
       - set-content-env-vars
@@ -459,7 +493,10 @@ jobs:
 
   deploy-dev:
     docker:
-      - image: cimg/node:16.16.0
+      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:test
+        aws_auth:
+          aws_access_key_id: $AWS_ACCESS_KEY_ID_DEV
+          aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_DEV
     steps:
       - set-dev-env-vars
       - attach_workspace:
@@ -473,7 +510,10 @@ jobs:
 
   deploy-staging:
     docker:
-      - image: cimg/node:16.16.0
+      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:test
+        aws_auth:
+          aws_access_key_id: $AWS_ACCESS_KEY_ID_DEV
+          aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_DEV
     steps:
       - set-staging-env-vars
       - deploy
@@ -483,7 +523,10 @@ jobs:
 
   deploy-production:
     docker:
-      - image: cimg/node:16.16.0
+      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:test
+        aws_auth:
+          aws_access_key_id: $AWS_ACCESS_KEY_ID_DEV
+          aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_DEV
     steps:
       - set-prod-env-vars
       - deploy
@@ -502,18 +545,18 @@ jobs:
         type: string
         default: "chrome"
     docker:
-      - image: cimg/node:16.16.0-browsers
+      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:test
+        aws_auth:
+          aws_access_key_id: $AWS_ACCESS_KEY_ID_DEV
+          aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_DEV
     steps:
       - set-cypress-env-vars
-      - attach_workspace:
-          at: .
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
       - configure-and-build
       - install-dynamodb
-      - install-chrome
-      - install-edge:
-          browser: << parameters.browser >>
-      - install-firefox:
-          browser: << parameters.browser >>
       - perform-integration-tests:
           enable-dashboard: << parameters.enable-dashboard >>
           suite: << parameters.suite >>
@@ -539,6 +582,23 @@ jobs:
       - perform-smoke-tests:
           enable-dashboard: << parameters.enable-dashboard >>
           suite: << parameters.suite >>
+
+  #Maybe have a move this to a image folder
+  docker-deploy:
+    docker:
+      - image: cimg/node:16.16.0
+    steps:
+      - set-dev-env-vars
+      - docker-deploy-image
+
+  ecr-deploy:
+    docker:
+      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:test
+        aws_auth:
+          aws_access_key_id: $AWS_ACCESS_KEY_ID_DEV
+          aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_DEV
+    steps:
+      - set-dev-env-vars
 
 workflows:
   release-pipeline:
@@ -775,3 +835,15 @@ workflows:
           browser: firefox
           requires:
             - build
+
+  build-image-pipeline:
+    triggers:
+      - schedule:
+          # Every Sunday, at Noon.
+          cron: "0 12 * * 0"
+          filters:
+            branches:
+              only:
+                - main
+    jobs:
+      - docker-deploy
