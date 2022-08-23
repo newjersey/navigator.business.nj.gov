@@ -1,6 +1,6 @@
 import { Content } from "@/components/Content";
 import { Button } from "@/components/njwds-extended/Button";
-import { LookupTabIndexByName } from "@/components/tasks/business-formation/BusinessFormationTabs";
+import { LookupTabIndexByName } from "@/components/tasks/business-formation/BusinessFormationTabsConfiguration";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getStringifiedAddress, scrollToTop, setHeaderRole } from "@/lib/utils/helpers";
