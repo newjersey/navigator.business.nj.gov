@@ -3,29 +3,55 @@ import { useMediaQuery } from "@mui/material";
 import { ReactElement } from "react";
 
 interface Props {
-  arrayOfSteps: string[];
+  steps: StepperStep[];
   currentStep: number;
 }
 
+type StepperStep = { name: string; hasError: boolean };
+
 export const HorizontalStepper = (props: Props): ReactElement => {
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
+
+  const getCSSClassColor = (index: number): string => {
+    if (props.steps[index].hasError) {
+      return "--error";
+    }
+    if (index < props.currentStep) {
+      return "--complete";
+    } else if (index === props.currentStep) {
+      return "--current";
+    } else {
+      return "";
+    }
+  };
+
+  const getIcon = (index: number): string => {
+    if (props.steps[index].hasError) {
+      return "!";
+    }
+    if (index < props.currentStep) {
+      return "✓";
+    } else {
+      return `${index + 1}`;
+    }
+  };
 
   return (
     <>
       <div className="horizontal-step-indicator display-block">
         <div className="usa-step-indicator usa-step-indicator--counters-sm">
           <ol className="usa-step-indicator__segments">
-            {props.arrayOfSteps.map((content: string, index: number) => (
+            {props.steps.map((step: StepperStep, index: number) => (
               <li
-                key={`${content}-${index}`}
-                className={`usa-step-indicator__segment usa-step-indicator__segment${
-                  index < props.currentStep ? "--complete" : index === props.currentStep ? "--current" : ""
-                }`}
+                key={`${step.name}-${index}`}
+                className={`usa-step-indicator__segment usa-step-indicator__segment${getCSSClassColor(
+                  index
+                )}`}
                 aria-hidden
-                data-num={index < props.currentStep ? "✓" : index + 1}
+                data-num={getIcon(index)}
               >
                 <span className="usa-step-indicator__segment-label" aria-hidden>
-                  {content}
+                  {step.name}
                 </span>
               </li>
             ))}
@@ -33,9 +59,7 @@ export const HorizontalStepper = (props: Props): ReactElement => {
         </div>
       </div>
       <div className={isTabletAndUp ? "visually-hidden-centered" : "margin-top-05 margin-bottom-2"}>
-        {`Step ${props.currentStep + 1} of ${props.arrayOfSteps.length} - ${
-          props.arrayOfSteps[props.currentStep]
-        }`}
+        {`Step ${props.currentStep + 1} of ${props.steps.length} - ${props.steps[props.currentStep].name}`}
       </div>
     </>
   );

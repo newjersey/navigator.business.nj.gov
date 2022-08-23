@@ -87,7 +87,11 @@ export const BusinessFormation = (props: Props): ReactElement => {
     !date || parseDateWithFormat(date, "YYYY-MM-DD").isBefore(getCurrentDate())
       ? getCurrentDateFormatted("YYYY-MM-DD")
       : date;
-  const stepNames = BusinessFormationTabs.map((value) => value.section);
+
+  const stepNames = BusinessFormationTabs.map((value) => ({
+    name: value.section,
+    hasError: false,
+  }));
 
   useMountEffectWhenDefined(() => {
     if (!userData) return;
@@ -238,7 +242,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
           errorData={errorMap}
         />
         <div className="margin-top-3">
-          <HorizontalStepper arrayOfSteps={stepNames} currentStep={tab} />
+          <HorizontalStepper steps={stepNames} currentStep={tab} />
         </div>
         <div className="display-block">
           <hr className="margin-bottom-4" />
