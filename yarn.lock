@@ -3583,7 +3583,7 @@ __metadata:
     cross-env: 7.0.3
     dayjs: 1.11.5
     dedent: 0.7.0
-    dependency-cruiser: 11.14.2
+    dependency-cruiser: 11.15.0
     eslint: 8.20.0
     eslint-config-prettier: 8.5.0
     eslint-plugin-jest: 26.6.0
@@ -3740,7 +3740,7 @@ __metadata:
     cypress-wait-until: 1.7.2
     dayjs: 1.11.5
     dedent: 0.7.0
-    dependency-cruiser: 11.14.2
+    dependency-cruiser: 11.15.0
     dotenv: 16.0.1
     eslint: 8.20.0
     eslint-config-next: 12.2.3
@@ -3929,7 +3929,7 @@ __metadata:
     cypress-dotenv: 2.0.0
     cypress-wait-until: 1.7.2
     dayjs: 1.11.5
-    dependency-cruiser: 11.14.2
+    dependency-cruiser: 11.15.0
     dotenv: 16.0.1
     eslint: 8.20.0
     eslint-config-next: 12.2.3
@@ -14821,9 +14821,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dependency-cruiser@npm:11.14.2":
-  version: 11.14.2
-  resolution: "dependency-cruiser@npm:11.14.2"
+"dependency-cruiser@npm:11.15.0":
+  version: 11.15.0
+  resolution: "dependency-cruiser@npm:11.15.0"
   dependencies:
     acorn: 8.8.0
     acorn-jsx: 5.3.2
@@ -14839,9 +14839,11 @@ __metadata:
     glob: 7.2.0
     handlebars: 4.7.7
     indent-string: ^4.0.0
+    interpret: ^2.2.0
     json5: 2.2.1
     lodash: 4.17.21
     prompts: 2.4.2
+    rechoir: ^0.8.0
     safe-regex: 2.1.1
     semver: ^7.3.7
     semver-try-require: ^5.0.2
@@ -14856,7 +14858,7 @@ __metadata:
     depcruise-wrap-stream-in-html: bin/wrap-stream-in-html.js
     dependency-cruise: bin/dependency-cruise.js
     dependency-cruiser: bin/dependency-cruise.js
-  checksum: 84c58b1680ae7e3366c1acb0b62063dd2eddb4319a5b5f769a6fe36531f001bcd23351cf075eb7a9b82b9441ad5ee6de553cab9b66bb06b4f2d54fff9b34ef0c
+  checksum: 71b74a3ccd6e183420187352175140fef3facdf2f548fb02f5802f4793df8ff2138305f5b751b46e01fe06718e532a77a82cc448c10b73e5b8397254d5cfde28
   languageName: node
   linkType: hard
 
@@ -28595,6 +28597,15 @@ __metadata:
   dependencies:
     resolve: ^1.1.6
   checksum: fe76bf9c21875ac16e235defedd7cbd34f333c02a92546142b7911a0f7c7059d2e16f441fe6fb9ae203f459c05a31b2bcf26202896d89e390eda7514d5d2702b
+  languageName: node
+  linkType: hard
+
+"rechoir@npm:^0.8.0":
+  version: 0.8.0
+  resolution: "rechoir@npm:0.8.0"
+  dependencies:
+    resolve: ^1.20.0
+  checksum: ad3caed8afdefbc33fbc30e6d22b86c35b3d51c2005546f4e79bcc03c074df804b3640ad18945e6bef9ed12caedc035655ec1082f64a5e94c849ff939dc0a788
   languageName: node
   linkType: hard
 
