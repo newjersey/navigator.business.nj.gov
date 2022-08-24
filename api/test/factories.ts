@@ -243,6 +243,7 @@ export const generatePreferences = (overrides: Partial<Preferences>): Preference
     visibleSidebarCards: ["welcome"],
     returnToLink: "",
     isCalendarFullView: !(randomInt() % 2),
+    isHideableRoadmapOpen: !(randomInt() % 2),
     ...overrides,
   };
 };

@@ -16,3 +16,7 @@ export const generateHashedKey = (key: string) =>
   createHmac("sha256", process.env.INTERCOM_HASH_SECRET || "")
     .update(key)
     .digest("hex");
+
+export const randomElementFromArray = <T>(array: T[]): T => {
+  return array[Math.floor(Math.random() * array.length)];
+};
