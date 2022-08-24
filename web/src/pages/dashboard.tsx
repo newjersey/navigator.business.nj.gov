@@ -1,4 +1,5 @@
-import { SectionAccordion } from "@/components/dashboard/SectionAccordion";
+import { HideableTasks } from "@/components/dashboard/HideableTasks";
+import { Roadmap } from "@/components/dashboard/Roadmap";
 import { SidebarCardsList } from "@/components/dashboard/SidebarCardsList";
 import { FilingsCalendar } from "@/components/FilingsCalendar";
 import { FilingsCalendarAsList } from "@/components/FilingsCalendarAsList";
@@ -7,7 +8,6 @@ import { LoadingIndicator } from "@/components/LoadingIndicator";
 import { NavBar } from "@/components/navbar/NavBar";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { RightSidebarPageLayout } from "@/components/RightSidebarPageLayout";
-import { Step } from "@/components/Step";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { useAuthAlertPage } from "@/lib/auth/useAuthAlertPage";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -20,7 +20,7 @@ import { loadRoadmapDisplayContent } from "@/lib/static/loadDisplayContent";
 import { loadAllFundings } from "@/lib/static/loadFundings";
 import { loadOperateReferences } from "@/lib/static/loadOperateReferences";
 import { Certification, Funding, OperateReference, RoadmapDisplayContent } from "@/lib/types/types";
-import { getSectionNames, useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { LookupOperatingPhaseById } from "@businessnjgovnavigator/shared/";
 import { GetStaticPropsResult } from "next";
 import { useRouter } from "next/router";
@@ -102,16 +102,11 @@ const DashboardPage = (props: Props): ReactElement => {
           <LoadingIndicator />
         ) : (
           <>
-            {LookupOperatingPhaseById(userData?.profileData.operatingPhase).displayRoadmapTasks &&
-              getSectionNames(roadmap).map((section) => (
-                <SectionAccordion key={section} sectionType={section}>
-                  {roadmap.steps
-                    .filter((step) => step.section === section)
-                    .map((step, index, array) => (
-                      <Step key={step.stepNumber} step={step} last={index === array.length - 1} />
-                    ))}
-                </SectionAccordion>
-              ))}
+            {LookupOperatingPhaseById(userData?.profileData.operatingPhase).displayRoadmapTasks && (
+              <>
+                <Roadmap />
+              </>
+            )}
             {LookupOperatingPhaseById(userData?.profileData.operatingPhase).displayListCalendar &&
               (userData?.taxFilingData.filings || []).length > 0 && (
                 <div>
@@ -121,6 +116,7 @@ const DashboardPage = (props: Props): ReactElement => {
             {LookupOperatingPhaseById(userData?.profileData.operatingPhase).displayFullCalendar && (
               <FilingsCalendar operateReferences={props.operateReferences} />
             )}
+            <HideableTasks />
           </>
         )}
       </div>

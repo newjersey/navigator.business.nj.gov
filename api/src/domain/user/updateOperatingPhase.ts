@@ -13,8 +13,8 @@ export const updateOperatingPhase: UpdateOperatingPhase = (userData: UserData): 
   const hasCompletedTaxes = userData.taskProgress["register-for-taxes"] === "COMPLETED";
 
   if (userData.profileData.businessPersona === "OWNING") {
-    if (currentPhase !== "UP_AND_RUNNING") {
-      updatedPhase = "UP_AND_RUNNING";
+    if (currentPhase !== "UP_AND_RUNNING_OWNING") {
+      updatedPhase = "UP_AND_RUNNING_OWNING";
     }
   } else {
     if (currentPhase === "GUEST_MODE") {

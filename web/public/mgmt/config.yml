@@ -1481,6 +1481,11 @@ collections:
               - { label: Sector Modal Save Button, name: sectorModalSaveButton, widget: text }
               - { label: Calendar List View Button, name: calendarListViewButton, widget: text }
               - { label: Calendar Grid View Button, name: calendarGridViewButton, widget: text }
+              - { label: Below Calendar Task Header Text, name: upAndRunningTaskHeader, widget: text }
+              - { label: Show Task Button Text, name: showTaskText, widget: text }
+              - { label: Hide Task Button Text, name: hideTaskText, widget: text }
+              - { label: Number of Hidden Tasks Text, name: hiddenTasksText, widget: text }
+
           - label: Feedback Modal
             name: feedbackModal
             collapsed: true

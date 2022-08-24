@@ -12,7 +12,7 @@ describe("updateOperatingPhase", () => {
           legalStructureId: "limited-partnership",
         }),
       });
-      expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("UP_AND_RUNNING");
+      expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("UP_AND_RUNNING_OWNING");
     });
   });
 
