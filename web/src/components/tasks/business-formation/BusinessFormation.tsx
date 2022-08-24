@@ -6,6 +6,7 @@ import { TaskCTA } from "@/components/TaskCTA";
 import { TaskHeader } from "@/components/TaskHeader";
 import { BusinessFormationEmptyFieldAlert } from "@/components/tasks/business-formation/BusinessFormationEmptyFieldAlert";
 import { BusinessFormationTabs } from "@/components/tasks/business-formation/BusinessFormationTabs";
+import { BusinessFormationTabsConfiguration } from "@/components/tasks/business-formation/BusinessFormationTabsConfiguration";
 import { FormationSuccessPage } from "@/components/tasks/business-formation/success/FormationSuccessPage";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
@@ -88,8 +89,8 @@ export const BusinessFormation = (props: Props): ReactElement => {
       ? getCurrentDateFormatted("YYYY-MM-DD")
       : date;
 
-  const stepNames = BusinessFormationTabs.map((value) => ({
-    name: value.section,
+  const stepNames = BusinessFormationTabsConfiguration.map((value) => ({
+    name: value.name,
     hasError: false,
   }));
 
