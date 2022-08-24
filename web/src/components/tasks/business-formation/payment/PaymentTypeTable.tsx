@@ -54,7 +54,7 @@ export const PaymentTypeTable = (): ReactElement => {
   };
 
   return (
-    <div className={state.errorMap["paymentType"].invalid ? `input-error-bar` : ""}>
+    <div className={`${state.errorMap["paymentType"].invalid ? "error" : ""} input-error-bar`}>
       <table className="business-formation-table business-formation-payment">
         <thead>
           <tr>

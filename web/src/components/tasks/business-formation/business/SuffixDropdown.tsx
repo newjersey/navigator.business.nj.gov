@@ -32,43 +32,39 @@ export const SuffixDropdown = (): ReactElement => {
       <div className="flex margin-bottom-2">
         <Content>{Config.businessFormationDefaults.businessSuffixLabel}</Content>
       </div>
-      <div className="margin-bottom-2">
-        <FormControl fullWidth error={state.errorMap.businessSuffix.invalid}>
-          <InputLabel id="business-suffix-label" className="visibility-hidden">
-            {camelCaseToSentence("businessSuffix")}
-          </InputLabel>
-          <Select
-            autoComplete="off"
-            labelId="business-suffix-label"
-            id="business-suffix"
-            displayEmpty
-            value={state.formationFormData.businessSuffix || ""}
-            onChange={handleChange}
-            onBlur={onValidation}
-            inputProps={{ "data-testid": "business-suffix" }}
-            renderValue={(selected) => {
-              if (selected.length === 0) {
-                return (
-                  <div className="text-base">
-                    {Config.businessFormationDefaults.businessSuffixPlaceholder}
-                  </div>
-                );
-              }
+      <FormControl fullWidth error={state.errorMap.businessSuffix.invalid}>
+        <InputLabel id="business-suffix-label" className="visibility-hidden">
+          {camelCaseToSentence("businessSuffix")}
+        </InputLabel>
+        <Select
+          autoComplete="off"
+          labelId="business-suffix-label"
+          id="business-suffix"
+          displayEmpty
+          value={state.formationFormData.businessSuffix || ""}
+          onChange={handleChange}
+          onBlur={onValidation}
+          inputProps={{ "data-testid": "business-suffix" }}
+          renderValue={(selected) => {
+            if (selected.length === 0) {
+              return (
+                <div className="text-base">{Config.businessFormationDefaults.businessSuffixPlaceholder}</div>
+              );
+            }
 
-              return selected;
-            }}
-          >
-            {BusinessSuffixMap[userData?.profileData.legalStructureId as FormationLegalType].map((suffix) => (
-              <MenuItem key={suffix} value={suffix} data-testid={suffix}>
-                {suffix}
-              </MenuItem>
-            ))}
-          </Select>
-          <FormHelperText>
-            {state.errorMap.businessSuffix.invalid ? Config.businessFormationDefaults.suffixErrorText : " "}
-          </FormHelperText>
-        </FormControl>
-      </div>
+            return selected;
+          }}
+        >
+          {BusinessSuffixMap[userData?.profileData.legalStructureId as FormationLegalType].map((suffix) => (
+            <MenuItem key={suffix} value={suffix} data-testid={suffix}>
+              {suffix}
+            </MenuItem>
+          ))}
+        </Select>
+        <FormHelperText>
+          {state.errorMap.businessSuffix.invalid ? Config.businessFormationDefaults.suffixErrorText : " "}
+        </FormHelperText>
+      </FormControl>
     </>
   );
 };

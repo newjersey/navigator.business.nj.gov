@@ -1,19 +1,19 @@
 import { Alert } from "@/components/njwds-extended/Alert";
-import { FormationErrorType, FormationFieldErrorMap } from "@/lib/types/types";
+import { BusinessFormationContext } from "@/contexts/businessFormationContext";
+import { FormationErrorType } from "@/lib/types/types";
 import { camelCaseToSentence } from "@/lib/utils/helpers";
 import FormationErrors from "@businessnjgovnavigator/content/fieldConfig/formation-error.json";
 
 import { FormationFields } from "@businessnjgovnavigator/shared";
-import { ReactElement } from "react";
+import { ReactElement, useContext } from "react";
 
 interface Props {
-  showError: boolean;
-  errorData: Partial<FormationFieldErrorMap>;
   fields: FormationFields[];
 }
 
 export const BusinessFormationFieldAlert = (props: Props): ReactElement => {
-  const errors = props.fields.map((i) => ({ ...props.errorData[i], name: i })).filter((i) => i.invalid);
+  const { state } = useContext(BusinessFormationContext);
+  const errors = props.fields.map((i) => ({ ...state.errorMap[i], name: i })).filter((i) => i.invalid);
   const errorTypes = errors.flatMap((er) =>
     FormationErrors.inlineErrors.filter(
       (inEr) =>
@@ -29,7 +29,7 @@ export const BusinessFormationFieldAlert = (props: Props): ReactElement => {
   ];
   return (
     <>
-      {props.showError && errors.length > 0 && sortedErrors.length > 0 && (
+      {state.showErrors && errors.length > 0 && sortedErrors.length > 0 && (
         <Alert variant="error">{camelCaseToSentence(sortedErrors[0]?.label ?? "")}</Alert>
       )}
     </>

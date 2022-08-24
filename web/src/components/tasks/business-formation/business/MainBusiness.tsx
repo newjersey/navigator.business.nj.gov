@@ -20,42 +20,41 @@ export const MainBusiness = (): ReactElement => {
     <>
       <BusinessNameAndLegalStructure />
       <div
-        className={`${
-          isTabletAndUp && fieldsAreInvalid(["businessSuffix", "businessStartDate"]) ? `input-error-bar ` : ""
+        className={`${isTabletAndUp ? "input-error-bar" : ""} ${
+          fieldsAreInvalid(["businessSuffix", "businessStartDate"]) ? `error` : ""
         } grid-row tablet:grid-gap-1`}
       >
         <div
-          className={`${
-            !isTabletAndUp && fieldsAreInvalid(["businessSuffix"]) ? `input-error-bar ` : ""
+          className={`${!isTabletAndUp ? "input-error-bar" : ""} ${
+            fieldsAreInvalid(["businessSuffix"]) ? `error` : ""
           } tablet:grid-col-6`}
         >
           <SuffixDropdown />
         </div>
         <div
-          className={`${
-            !isTabletAndUp && fieldsAreInvalid(["businessStartDate"]) ? `input-error-bar ` : ""
-          } tablet:grid-col-6 margin-bottom-2`}
+          className={`${!isTabletAndUp ? "input-error-bar" : ""} ${
+            fieldsAreInvalid(["businessStartDate"]) ? `error` : ""
+          } tablet:grid-col-6`}
         >
           <FormationStartDate />
         </div>
       </div>
       {corpLegalStructures.includes(state.legalStructureId) ? (
-        <div className="grid-row tablet:grid-gap-2">
-          <div className="tablet:grid-col-6">
-            <BusinessFormationTextField
-              label={Config.businessFormationDefaults.businessTotalStockLabel}
-              placeholder={Config.businessFormationDefaults.businessTotalStockPlaceholder}
-              numericProps={{
-                minLength: 1,
-                trimLeadingZeroes: true,
-                maxLength: 11,
-              }}
-              required={true}
-              fieldName={"businessTotalStock"}
-              validationText={Config.businessFormationDefaults.businessTotalStockErrorText}
-            />{" "}
-          </div>
-          <div className="tablet:grid-col-6 margin-bottom-2"></div>
+        <div className="grid-row">
+          <BusinessFormationTextField
+            label={Config.businessFormationDefaults.businessTotalStockLabel}
+            placeholder={Config.businessFormationDefaults.businessTotalStockPlaceholder}
+            numericProps={{
+              minLength: 1,
+              trimLeadingZeroes: true,
+              maxLength: 11,
+            }}
+            required={true}
+            fieldName={"businessTotalStock"}
+            validationText={Config.businessFormationDefaults.businessTotalStockErrorText}
+            className="grid-col-6"
+          />
+          <div className="grid-col-6"></div>
         </div>
       ) : (
         <></>
@@ -64,69 +63,64 @@ export const MainBusiness = (): ReactElement => {
       <div className="margin-bottom-2">
         <Content>{Config.businessFormationDefaults.businessAddressHeader}</Content>
       </div>
-      <div>
-        <BusinessFormationTextField
-          label={Config.businessFormationDefaults.businessAddressAddressLine1Label}
-          placeholder={Config.businessFormationDefaults.businessAddressAddressLine1Placeholder}
-          fieldName="businessAddressLine1"
-          required={true}
-          validationText={Config.businessFormationDefaults.businessAddressLine1ErrorText}
-          formInputFull
-        />
-      </div>
+      <BusinessFormationTextField
+        label={Config.businessFormationDefaults.businessAddressAddressLine1Label}
+        placeholder={Config.businessFormationDefaults.businessAddressAddressLine1Placeholder}
+        fieldName="businessAddressLine1"
+        required={true}
+        className={"margin-bottom-2"}
+        noValidationMargin={true}
+        validationText={Config.businessFormationDefaults.businessAddressLine1ErrorText}
+        formInputFull
+      />
       <BusinessFormationTextField
         label={Config.businessFormationDefaults.businessAddressAddressLine2Label}
         placeholder={Config.businessFormationDefaults.businessAddressAddressLine2Placeholder}
         fieldName="businessAddressLine2"
         formInputFull
+        className={"margin-bottom-2"}
       />
 
       <div
         className={`${
           isTabletAndUp &&
           fieldsAreInvalid(["businessAddressState", "businessAddressZipCode", "businessAddressCity"])
-            ? `input-error-bar`
+            ? `error`
             : ""
-        } tablet:grid-gap-1 grid-row margin-top-2`}
+        } input-error-bar grid-gap-1 grid-row margin-top-2`}
       >
         <div
-          className={`${
-            !isTabletAndUp && fieldsAreInvalid(["businessAddressCity"]) ? `input-error-bar` : ""
-          } margin-bottom-2 grid-col-12 tablet:grid-col-6 padding-left-0`}
+          className={`${!isTabletAndUp ? "input-error-bar" : ""} ${
+            fieldsAreInvalid(["businessAddressCity"]) ? "error" : ""
+          } grid-col-12 tablet:grid-col-6 padding-left-0`}
         >
-          <span className="text-bold margin-bottom-2">
-            {Config.businessFormationDefaults.businessAddressCityLabel}
-          </span>
+          <span className="text-bold">{Config.businessFormationDefaults.businessAddressCityLabel}</span>
           <FormationMunicipality />
         </div>
-        <div
-          className={`${
-            !isTabletAndUp && fieldsAreInvalid(["businessAddressState", "businessAddressZipCode"])
-              ? `input-error-bar`
-              : ""
-          } margin-bottom-2 form-input grid-col-5 tablet:grid-col-2`}
-        >
-          <BusinessFormationTextField
-            label={Config.businessFormationDefaults.businessAddressStateLabel}
-            placeholder={Config.businessFormationDefaults.businessAddressStatePlaceholder}
-            fieldName="businessAddressState"
-            disabled={true}
-          />
-        </div>
-        <div className="margin-bottom-2 form-input grid-col-7 tablet:grid-col-4">
-          <BusinessFormationTextField
-            label={Config.businessFormationDefaults.businessAddressZipCodeLabel}
-            placeholder={Config.businessFormationDefaults.businessAddressZipCodePlaceholder}
-            numericProps={{
-              maxLength: 5,
-            }}
-            required={true}
-            inlineErrorStyling={true}
-            fieldName={"businessAddressZipCode"}
-            validationText={Config.businessFormationDefaults.businessAddressZipCodeErrorText}
-            additionalValidation={zipCodeRange}
-          />
-        </div>
+
+        <BusinessFormationTextField
+          label={Config.businessFormationDefaults.businessAddressStateLabel}
+          placeholder={Config.businessFormationDefaults.businessAddressStatePlaceholder}
+          fieldName="businessAddressState"
+          inlineErrorStyling={true}
+          disabled={true}
+          className={`${!isTabletAndUp ? "input-error-bar" : ""} ${
+            fieldsAreInvalid(["businessAddressState", "businessAddressZipCode"]) ? `error` : ""
+          } form-input grid-col-5 tablet:grid-col-2`}
+        />
+        <BusinessFormationTextField
+          label={Config.businessFormationDefaults.businessAddressZipCodeLabel}
+          placeholder={Config.businessFormationDefaults.businessAddressZipCodePlaceholder}
+          numericProps={{
+            maxLength: 5,
+          }}
+          required={true}
+          inlineErrorStyling={true}
+          fieldName={"businessAddressZipCode"}
+          validationText={Config.businessFormationDefaults.businessAddressZipCodeErrorText}
+          additionalValidation={zipCodeRange}
+          className="form-input grid-col-7 tablet:grid-col-4"
+        />
       </div>
     </>
   );

@@ -11,6 +11,7 @@ import { ReactElement, useContext, useState } from "react";
 interface Props {
   maxChars: number;
   fieldName: FormationTextField;
+  className?: string;
   required: boolean;
   inputLabel?: string;
   optionalLabel?: string;
@@ -58,7 +59,11 @@ export const BusinessFormationTextBox = (props: Props): ReactElement => {
         </div>
       </div>
       {isExpanded ? (
-        <div className={fieldsAreInvalid([props.fieldName]) ? `input-error-bar` : ""}>
+        <div
+          className={`${props.className ?? ""} ${
+            fieldsAreInvalid([props.fieldName]) ? "error" : ""
+          } input-error-bar`}
+        >
           <Content className="margin-bottom-2">{props.contentMd}</Content>
           <div style={{ maxWidth: "41em" }}>
             <div className="grid-row">

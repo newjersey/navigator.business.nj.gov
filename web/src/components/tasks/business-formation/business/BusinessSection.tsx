@@ -18,7 +18,7 @@ import {
 import { ReactElement, useContext, useMemo } from "react";
 
 export const BusinessSection = (): ReactElement => {
-  const { state, setFormationFormData, setErrorMap, setTab, setShowRequiredFieldsError } =
+  const { state, setFormationFormData, setErrorMap, setTab, setShowErrors } =
     useContext(BusinessFormationContext);
   const { userData, update } = useUserData();
 
@@ -100,13 +100,14 @@ export const BusinessSection = (): ReactElement => {
     };
 
     if (requiredFieldsWithError.length > 0) {
-      setShowRequiredFieldsError(true);
+      setShowErrors(true);
       const newErrorMappedFields = requiredFieldsWithError.reduce(
         (acc: FormationFieldErrorMap, cur: FormationFields) => ({ ...acc, [cur]: { invalid: true } }),
         {} as FormationFieldErrorMap
       );
       setErrorMap({ ...state.errorMap, ...newErrorMappedFields });
       update(finalUserData);
+      scrollToTop(true);
       return;
     }
 
@@ -127,7 +128,7 @@ export const BusinessSection = (): ReactElement => {
 
     analytics.event.business_formation_business_step_continue_button.click.go_to_next_formation_step();
 
-    setShowRequiredFieldsError(false);
+    setShowErrors(false);
     setTab(state.tab + 1);
     scrollToTop();
   };

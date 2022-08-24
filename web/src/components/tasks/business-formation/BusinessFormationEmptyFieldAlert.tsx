@@ -5,18 +5,14 @@ import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import FormationErrors from "@businessnjgovnavigator/content/fieldConfig/formation-error.json";
 
 import { FormationFields } from "@businessnjgovnavigator/shared";
-import { ReactElement, useEffect } from "react";
+import { ReactElement } from "react";
 
 interface Props {
-  showRequiredFieldsError: boolean;
+  showErrors: boolean;
   errorData: FormationFieldErrorMap;
 }
 
 export const BusinessFormationEmptyFieldAlert = (props: Props): ReactElement => {
-  useEffect(() => {
-    if (props.showRequiredFieldsError) setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 100);
-  }, [props.showRequiredFieldsError]);
-
   const errors = Object.keys(props.errorData)
     .filter((i) => props.errorData[i as FormationFields].invalid)
     .map((i) => ({ ...props.errorData[i as FormationFields], name: i }));
@@ -37,7 +33,7 @@ export const BusinessFormationEmptyFieldAlert = (props: Props): ReactElement => 
 
   return (
     <>
-      {props.showRequiredFieldsError && errorTypes.length > 0 && (
+      {props.showErrors && errorTypes.length > 0 && (
         <Alert variant="error">
           <div>{Config.businessFormationDefaults.missingFieldsOnSubmitModalText}</div>
           <ul>

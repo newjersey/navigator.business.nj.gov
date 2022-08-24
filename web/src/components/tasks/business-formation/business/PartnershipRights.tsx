@@ -43,59 +43,61 @@ export const PartnershipRights = (): ReactElement => {
     </div>
   );
 
-  const getRadio = (fieldName: FormationFields) => (
-    <FormControl
-      error={state.errorMap[fieldName].invalid}
-      className={state.errorMap[fieldName].invalid ? `input-error-bar` : ""}
+  const getRadio = (fieldName: FormationFields, title: string) => (
+    <div
+      className={state.errorMap[fieldName].invalid ? `input-error-bar error margin-top-2` : "input-error-bar"}
     >
-      <RadioGroup
-        aria-label={camelCaseToSentence(fieldName)}
-        name={camelCaseToSentence(fieldName)}
-        value={state.formationFormData[fieldName]?.toString() ?? ""}
-        onChange={(e) => {
-          setFormationFormData({
-            ...state.formationFormData,
-            [fieldName]: JSON.parse(e.target.value),
-          });
-          setErrorMap({ ...state.errorMap, [fieldName]: { invalid: !e.target.value } });
-        }}
-        row
-      >
-        <FormControlLabel
-          style={{ marginTop: ".75rem", alignItems: "flex-start" }}
-          value={"true"}
-          control={
-            <Radio
-              required={true}
-              data-testid={`${fieldName}-true`}
-              color={state.errorMap[fieldName].invalid ? "error" : "primary"}
-              sx={{
-                paddingTop: "0px",
-              }}
-            />
-          }
-          label={Config.businessFormationDefaults.partnershipRightsRadioYesText}
-        />
-        <FormControlLabel
-          style={{ marginTop: ".75rem", alignItems: "flex-start" }}
-          value={"false"}
-          control={
-            <Radio
-              required={true}
-              color={state.errorMap[fieldName].invalid ? "error" : "primary"}
-              sx={{
-                paddingTop: "0px",
-              }}
-              data-testid={`${fieldName}-false`}
-            />
-          }
-          label={Config.businessFormationDefaults.partnershipRightsRadioNoText}
-        />
-      </RadioGroup>
-      <FormHelperText>
-        {state.errorMap[fieldName].invalid ? Config.businessFormationDefaults.genericErrorText : ""}
-      </FormHelperText>
-    </FormControl>
+      <Content>{title}</Content>
+      <FormControl error={state.errorMap[fieldName].invalid}>
+        <RadioGroup
+          aria-label={camelCaseToSentence(fieldName)}
+          name={camelCaseToSentence(fieldName)}
+          value={state.formationFormData[fieldName]?.toString() ?? ""}
+          onChange={(e) => {
+            setFormationFormData({
+              ...state.formationFormData,
+              [fieldName]: JSON.parse(e.target.value),
+            });
+            setErrorMap({ ...state.errorMap, [fieldName]: { invalid: !e.target.value } });
+          }}
+          row
+        >
+          <FormControlLabel
+            style={{ marginTop: ".75rem", alignItems: "flex-start" }}
+            value={"true"}
+            control={
+              <Radio
+                required={true}
+                data-testid={`${fieldName}-true`}
+                color={state.errorMap[fieldName].invalid ? "error" : "primary"}
+                sx={{
+                  paddingTop: "0px",
+                }}
+              />
+            }
+            label={Config.businessFormationDefaults.partnershipRightsRadioYesText}
+          />
+          <FormControlLabel
+            style={{ marginTop: ".75rem", alignItems: "flex-start" }}
+            value={"false"}
+            control={
+              <Radio
+                required={true}
+                color={state.errorMap[fieldName].invalid ? "error" : "primary"}
+                sx={{
+                  paddingTop: "0px",
+                }}
+                data-testid={`${fieldName}-false`}
+              />
+            }
+            label={Config.businessFormationDefaults.partnershipRightsRadioNoText}
+          />
+        </RadioGroup>
+        <FormHelperText>
+          {state.errorMap[fieldName].invalid ? Config.businessFormationDefaults.genericErrorText : ""}
+        </FormHelperText>
+      </FormControl>
+    </div>
   );
   return (
     <>
@@ -105,28 +107,19 @@ export const PartnershipRights = (): ReactElement => {
         </div>
       </div>
       <BusinessFormationFieldAlert
-        showError={true}
-        errorData={state.errorMap}
         fields={["canCreateLimitedPartner", "canMakeDistribution", "canGetDistribution"]}
       />
-      <Content
-        className={state.errorMap["canCreateLimitedPartner"].invalid ? `input-error-bar margin-top-2` : ""}
-      >
-        {Config.businessFormationDefaults.partnershipRightsCanAssignRights}
-      </Content>
-      {getRadio("canCreateLimitedPartner")}
+      {getRadio("canCreateLimitedPartner", Config.businessFormationDefaults.partnershipRightsCanAssignRights)}
       {state.formationFormData.canCreateLimitedPartner && getTextField("createLimitedPartnerTerms")}
-      <Content className={state.errorMap["canGetDistribution"].invalid ? `input-error-bar margin-top-3` : ""}>
-        {Config.businessFormationDefaults.partnershipRightsCanReceiveDistributions}
-      </Content>
-      {getRadio("canGetDistribution")}
+      {getRadio(
+        "canGetDistribution",
+        Config.businessFormationDefaults.partnershipRightsCanReceiveDistributions
+      )}
       {state.formationFormData.canGetDistribution && getTextField("getDistributionTerms")}
-      <Content
-        className={state.errorMap["canMakeDistribution"].invalid ? `input-error-bar margin-top-3` : ""}
-      >
-        {Config.businessFormationDefaults.partnershipRightsCanMakeDistributions}
-      </Content>
-      {getRadio("canMakeDistribution")}
+      {getRadio(
+        "canMakeDistribution",
+        Config.businessFormationDefaults.partnershipRightsCanMakeDistributions
+      )}
       {state.formationFormData.canMakeDistribution && getTextField("makeDistributionTerms")}
     </>
   );
