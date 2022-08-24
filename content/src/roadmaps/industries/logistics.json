@@ -36,12 +36,12 @@
     {
       "step": 3,
       "weight": 15,
-      "task": "logistics-warehouse"
+      "task": "trucking-cdl"
     },
     {
       "step": 3,
       "weight": 17,
-      "task": "trucking-cdl"
+      "task": "logistics-warehouse"
     }
   ],
   "name": "Logistics",
