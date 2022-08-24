@@ -7,7 +7,7 @@ callToActionLink: https://telegov.njportal.com/njmvc/AppointmentWizard
 callToActionText: Apply for My CDL
 issuingAgency: New Jersey Motor Vehicle Commission
 ---
-Any employee driving a truck with a Groww Weight Rating Scale (GWRS) of 26,000lbs needs a Commercial Driver's License (CDL).\
+Any employee driving a truck with a Gross Weight Rating Scale (GWRS) of 26,000lbs needs a Commercial Driver's License (CDL).\
 As the business owner, you only need a CDL if **you** plan to do any load-hauling for your business.
 
 - - -
