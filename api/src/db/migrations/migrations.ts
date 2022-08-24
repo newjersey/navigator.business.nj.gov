@@ -79,6 +79,8 @@ import { migrate_v78_to_v79 } from "./v79_add_return_to_link";
 import { migrate_v6_to_v7 } from "./v7_add_license_data";
 import { migrate_v79_to_v80 } from "./v80_add_calendar_preference";
 import { migrate_v80_to_v81 } from "./v81_add_completed_filing_payment";
+import { migrate_v81_to_v82 } from "./v82_add_up_and_running_owning_operating_phase";
+import { migrate_v82_to_v83 } from "./v83_add_hideable_roadmap_to_preferences";
 import { migrate_v7_to_v8 } from "./v8_remove_bcorp";
 import { migrate_v8_to_v9 } from "./v9_add_license_status_to_data";
 
@@ -166,6 +168,8 @@ export const Migrations: MigrationFunction[] = [
   migrate_v78_to_v79,
   migrate_v79_to_v80,
   migrate_v80_to_v81,
+  migrate_v81_to_v82,
+  migrate_v82_to_v83,
 ];
 
 export const CURRENT_VERSION = Migrations.length;

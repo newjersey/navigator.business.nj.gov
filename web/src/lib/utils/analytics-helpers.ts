@@ -73,6 +73,8 @@ const getPhaseDimension = (phase: OperatingPhaseId) => {
       return "Formed and Registered";
     case "UP_AND_RUNNING":
       return "Up and Running";
+    case "UP_AND_RUNNING_OWNING":
+      return "Up and Running";
     default:
       return phase;
   }

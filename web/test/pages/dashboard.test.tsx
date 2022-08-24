@@ -373,29 +373,4 @@ describe("roadmap page", () => {
 
     expect(screen.queryByTestId("filings-calendar-as-list")).not.toBeInTheDocument();
   });
-
-  it("hides the task list when operatingPhase is UP_AND_RUNNING", () => {
-    const userData = generateUserData({
-      profileData: generateProfileData({
-        operatingPhase: "UP_AND_RUNNING",
-      }),
-    });
-
-    useMockUserData(userData);
-
-    useMockRoadmap({
-      steps: [
-        generateStep({
-          name: "step1",
-          timeEstimate: "1-2 weeks",
-          stepNumber: 1,
-        }),
-      ],
-      tasks: [generateTask({ name: "task1", stepNumber: 1 })],
-    });
-
-    renderRoadmapPage({});
-
-    expect(screen.queryByText("task1")).not.toBeInTheDocument();
-  });
 });
