@@ -486,7 +486,7 @@ describe("profile", () => {
         )
       );
       clickSave();
-      await waitFor(() => expect(currentUserData()));
+      await waitFor(() => expect(currentUserData()).not.toBeFalsy());
       await waitFor(() => expect(mockSetRoadmap).toHaveBeenCalledTimes(1));
     });
 

@@ -138,7 +138,7 @@ describe("onboarding - shared", () => {
 
   it("generates a new empty userData object during guest checkout", async () => {
     renderPage({ userData: null, user: generateUser({}), isAuthenticated: IsAuthenticated.FALSE });
-    await waitFor(() => expect(currentUserData().user));
+    await waitFor(() => expect(currentUserData().user).not.toBeFalsy());
   });
 
   it("updates locally for each step", async () => {

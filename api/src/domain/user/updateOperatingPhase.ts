@@ -1,4 +1,4 @@
-import { formationTaskId } from "@shared/domain-logic/taskIds";
+import { formationTaskId, taxTaskId } from "@shared/domain-logic/taskIds";
 import { LookupLegalStructureById } from "@shared/legalStructure";
 import { OperatingPhaseId } from "@shared/operatingPhase";
 import { UserData } from "@shared/userData";
@@ -7,10 +7,11 @@ import { UpdateOperatingPhase } from "../types";
 export const updateOperatingPhase: UpdateOperatingPhase = (userData: UserData): UserData => {
   const currentPhase = userData.profileData.operatingPhase;
   let updatedPhase: OperatingPhaseId = userData.profileData.operatingPhase;
+  let updatedIsHideableRoadmapOpen: boolean = userData.preferences.isHideableRoadmapOpen;
 
   const isPublicFiling = LookupLegalStructureById(userData.profileData.legalStructureId).requiresPublicFiling;
   const hasCompletedFormation = userData.taskProgress[formationTaskId] === "COMPLETED";
-  const hasCompletedTaxes = userData.taskProgress["register-for-taxes"] === "COMPLETED";
+  const hasCompletedTaxes = userData.taskProgress[taxTaskId] === "COMPLETED";
 
   if (userData.profileData.businessPersona === "OWNING") {
     if (currentPhase !== "UP_AND_RUNNING_OWNING") {
@@ -40,11 +41,23 @@ export const updateOperatingPhase: UpdateOperatingPhase = (userData: UserData): 
     }
   }
 
+  if (currentPhase === "UP_AND_RUNNING" && isPublicFiling && !hasCompletedFormation) {
+    updatedPhase = "NEEDS_TO_FORM";
+    updatedIsHideableRoadmapOpen = false;
+  } else if (currentPhase === "UP_AND_RUNNING" && !hasCompletedTaxes) {
+    updatedPhase = "NEEDS_TO_REGISTER_FOR_TAXES";
+    updatedIsHideableRoadmapOpen = false;
+  }
+
   return {
     ...userData,
     profileData: {
       ...userData.profileData,
       operatingPhase: updatedPhase,
+    },
+    preferences: {
+      ...userData.preferences,
+      isHideableRoadmapOpen: updatedIsHideableRoadmapOpen,
     },
   };
 };
