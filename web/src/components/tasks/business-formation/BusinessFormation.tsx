@@ -4,7 +4,7 @@ import { Alert } from "@/components/njwds-extended/Alert";
 import { HorizontalStepper } from "@/components/njwds-extended/HorizontalStepper";
 import { TaskCTA } from "@/components/TaskCTA";
 import { TaskHeader } from "@/components/TaskHeader";
-import { BusinessFormationEmptyFieldAlert } from "@/components/tasks/business-formation/BusinessFormationEmptyFieldAlert";
+import { BusinessFormationAlert } from "@/components/tasks/business-formation/BusinessFormationAlert";
 import { BusinessFormationTabs } from "@/components/tasks/business-formation/BusinessFormationTabs";
 import { BusinessFormationTabsConfiguration } from "@/components/tasks/business-formation/BusinessFormationTabsConfiguration";
 import { FormationSuccessPage } from "@/components/tasks/business-formation/success/FormationSuccessPage";
@@ -238,7 +238,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
             </>
           )}
         </div>
-        <BusinessFormationEmptyFieldAlert showErrors={showErrors} errorData={errorMap} />
+        <BusinessFormationAlert showErrors={showErrors} errorData={errorMap} />
         <div className="margin-top-3">
           <HorizontalStepper steps={stepNames} currentStep={tab} />
         </div>

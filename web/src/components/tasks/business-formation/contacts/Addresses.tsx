@@ -2,7 +2,7 @@ import { Content } from "@/components/Content";
 import { Button } from "@/components/njwds-extended/Button";
 import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
 import { Icon } from "@/components/njwds/Icon";
-import { BusinessFormationFieldAlert } from "@/components/tasks/business-formation/BusinessFormationFieldAlert";
+import { BusinessFormationInlineFieldAlert } from "@/components/tasks/business-formation/BusinessFormationInlineFieldAlert";
 import { AddressModal } from "@/components/tasks/business-formation/contacts/AddressModal";
 import { ValidatedCheckbox } from "@/components/ValidatedCheckbox";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
@@ -270,7 +270,7 @@ export const Addresses = (props: Props): ReactElement => {
           >
             {props.displayContent.contentMd}
           </Content>
-          <BusinessFormationFieldAlert fields={[props.fieldName]} />
+          <BusinessFormationInlineFieldAlert fields={[props.fieldName]} />
           <div
             className={`${state.errorMap[props.fieldName].invalid ? "error" : ""} ${
               isTabletAndUp ? `input-error-bar` : ""

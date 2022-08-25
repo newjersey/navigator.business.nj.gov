@@ -1,7 +1,6 @@
 import { Content } from "@/components/Content";
-import { Alert } from "@/components/njwds-extended/Alert";
 import { Button } from "@/components/njwds-extended/Button";
-import { BusinessFormationFieldAlert } from "@/components/tasks/business-formation/BusinessFormationFieldAlert";
+import { BusinessFormationInlineFieldAlert } from "@/components/tasks/business-formation/BusinessFormationInlineFieldAlert";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
 import { FormationChooseDocuments } from "@/components/tasks/business-formation/payment/FormationChooseDocuments";
 import { FormationChooseNotifications } from "@/components/tasks/business-formation/payment/FormationChooseNotifications";
@@ -129,7 +128,7 @@ export const PaymentSection = (): ReactElement => {
       </div>
       <hr className="margin-bottom-2" />
       <Content>{state.displayContent.services.contentMd}</Content>
-      <BusinessFormationFieldAlert fields={["paymentType"]} />
+      <BusinessFormationInlineFieldAlert fields={["paymentType"]} />
       <FormationChooseDocuments />
 
       <PaymentTypeTable />
@@ -138,26 +137,6 @@ export const PaymentSection = (): ReactElement => {
       <div className="margin-top-3">
         <Content>{Config.businessFormationDefaults.paymentDisclaimerText}</Content>
       </div>
-      {userData?.formationData.formationResponse &&
-        state.showResponseAlert &&
-        !isLoading &&
-        !state.showErrors &&
-        userData.formationData.formationResponse.errors.length > 0 && (
-          <Alert variant="error" heading={Config.businessFormationDefaults.submitErrorHeading}>
-            <ul style={{ wordBreak: "break-word" }}>
-              {userData.formationData.formationResponse.errors.map((it) => (
-                <li key={it.field}>
-                  {it.field}
-                  <ul>
-                    <li>
-                      <Content>{it.message}</Content>
-                    </li>
-                  </ul>
-                </li>
-              ))}
-            </ul>
-          </Alert>
-        )}
       <div className="margin-top-2 ">
         <div className="flex flex-justify-end bg-base-lightest margin-x-neg-4 padding-3 margin-top-3 margin-bottom-neg-4">
           <Button

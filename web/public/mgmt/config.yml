@@ -278,6 +278,25 @@ collections:
                 name: label
                 widget: string
                 required: true
+          - label: API Errors
+            name: apiErrors
+            widget: list
+            summary: "{{field}}"
+            fields:
+              - label: Field
+                name: field
+                widget: select
+                multiple: false
+                options: [Registered Agent - Id]
+                required: true
+              - label: Label
+                name: label
+                widget: string
+                required: true
+              - label: Message
+                name: message
+                widget: markdown
+                required: true
           - label: Inline Errors
             name: inlineErrors
             widget: list

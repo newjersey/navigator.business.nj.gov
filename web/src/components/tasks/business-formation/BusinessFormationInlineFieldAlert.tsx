@@ -11,7 +11,7 @@ interface Props {
   fields: FormationFields[];
 }
 
-export const BusinessFormationFieldAlert = (props: Props): ReactElement => {
+export const BusinessFormationInlineFieldAlert = (props: Props): ReactElement => {
   const { state } = useContext(BusinessFormationContext);
   const errors = props.fields.map((i) => ({ ...state.errorMap[i], name: i })).filter((i) => i.invalid);
   const errorTypes = errors.flatMap((er) =>
