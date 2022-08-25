@@ -3863,17 +3863,15 @@ collections:
       - { label: "Treasury Link", name: "treasuryLink", widget: "string" }
       - label: "Frequency"
         name: "frequency"
-        widget: "select"
-        options: ["Monthly", "Quarterly", "Annually"]
+        widget: "string"
         required: true
-      - { label: "Tax Rates", name: "taxRates", widget: "string" }
+      - { label: "Tax Rates", name: "taxRates", widget: "markdown" }
       - { label: "Additional Info", name: "additionalInfo", widget: "markdown" }
       - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
       - label: "Can be filed online?"
         name: "onlineFiling"
-        widget: "select"
-        options: ["Yes", "No"]
+        widget: "string"
         required: true
       - { label: "Managing Agency", name: "managingAgency", widget: "string" }
       - { label: "Form Number(s)", name: "formNumber", widget: "string" }
