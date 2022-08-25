@@ -107,7 +107,7 @@ export const BusinessSection = (): ReactElement => {
       );
       setErrorMap({ ...state.errorMap, ...newErrorMappedFields });
       update(finalUserData);
-      scrollToTop(true);
+      scrollToTop({ smooth: true });
       return;
     }
 

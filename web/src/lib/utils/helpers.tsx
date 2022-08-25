@@ -121,8 +121,10 @@ export const rswitch = <T,>(param: string, cases: { default: T; [k: string]: T }
   return cases[param] ?? cases.default;
 };
 
-export const scrollToTop = (smooth?: boolean): void => {
-  smooth ? setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 100) : window.scrollTo(0, 0);
+export const scrollToTop = (props?: { smooth?: boolean }): void => {
+  props?.smooth
+    ? setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 100)
+    : window.scrollTo(0, 0);
 };
 
 export const isStepCompleted = (

@@ -278,6 +278,10 @@ collections:
                 name: label
                 widget: string
                 required: true
+              - label: Message
+                name: message
+                widget: markdown
+                required: false
           - label: API Errors
             name: apiErrors
             widget: list
@@ -287,7 +291,7 @@ collections:
                 name: field
                 widget: select
                 multiple: false
-                options: [Registered Agent - Id]
+                options: [Registered Agent - Id, UNKNOWN]
                 required: true
               - label: Label
                 name: label
@@ -296,7 +300,7 @@ collections:
               - label: Message
                 name: message
                 widget: markdown
-                required: true
+                required: false
           - label: Inline Errors
             name: inlineErrors
             widget: list

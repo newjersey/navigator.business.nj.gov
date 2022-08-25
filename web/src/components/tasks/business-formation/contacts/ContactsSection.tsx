@@ -95,7 +95,7 @@ export const ContactsSection = (): ReactElement => {
 
     if (fieldErrors.length > 0 || inlineErrors.length > 0) {
       setShowErrors(true);
-      scrollToTop(true);
+      scrollToTop({ smooth: true });
       return;
     }
 

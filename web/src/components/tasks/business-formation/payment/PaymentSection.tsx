@@ -51,7 +51,7 @@ export const PaymentSection = (): ReactElement => {
         {} as FormationFieldErrorMap
       );
       setErrorMap({ ...state.errorMap, ...newErrorMappedFields });
-      scrollToTop(true);
+      scrollToTop({ smooth: true });
       return;
     }
 
@@ -81,6 +81,7 @@ export const PaymentSection = (): ReactElement => {
     } else {
       analytics.event.business_formation.submit.error_remain_at_formation();
       setIsLoading(false);
+      scrollToTop({ smooth: true });
       setShowResponseAlert(true);
     }
   };
