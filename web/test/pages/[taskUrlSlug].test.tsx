@@ -272,12 +272,12 @@ describe("task page", () => {
     it("renders only Next Task button for first task", () => {
       renderPage(taskOne);
       expect(screen.getByText(Config.taskDefaults.nextTaskButtonText)).toBeInTheDocument();
-      expect(screen.queryByText(Config.taskDefaults.previousTaskButtonText)).not.toBeVisible();
+      expect(screen.queryByText(Config.taskDefaults.previousTaskButtonText)).not.toBeInTheDocument();
     });
 
     it("renders only Previous Task button at last task", () => {
       renderPage(taskThree);
-      expect(screen.queryByText(Config.taskDefaults.nextTaskButtonText)).not.toBeVisible();
+      expect(screen.queryByText(Config.taskDefaults.nextTaskButtonText)).not.toBeInTheDocument();
       expect(screen.getByText(Config.taskDefaults.previousTaskButtonText)).toBeInTheDocument();
     });
 

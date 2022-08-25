@@ -496,9 +496,9 @@
     "pageTitle": "Business Roadmap",
     "loadingTaskDependencies": "Loading task dependencies…",
     "unlockedBySingular": "Before starting this task, we recommend that you take a look at:",
-    "nextTaskButtonText": "Next",
+    "nextTaskButtonText": "Next Task",
     "taskProgressSuccessSnackbarBody": "Your task status has been updated.",
-    "previousTaskButtonText": "Previous",
+    "previousTaskButtonText": "Previous Task",
     "formNameText": "Form",
     "defaultCallToActionText": "Start Application",
     "unlockedByPlural": "Before starting this task, we recommend you take a look at:"
