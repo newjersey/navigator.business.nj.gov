@@ -90,7 +90,8 @@
     "MC",
     "IRP",
     "cpcn",
-    "Gov2Go"
+    "Gov2Go",
+    "GWRS"
   ],
   "ignorePaths": ["node_modules/**", "out/**", "web/out/**", "package.json"]
 }
