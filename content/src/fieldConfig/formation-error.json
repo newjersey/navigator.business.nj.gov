@@ -2,7 +2,8 @@
   "formationErrors": [
     {
       "fields": ["signers"],
-      "label": "Signatures"
+      "label": "Signatures",
+      "message": "Review the signatures section"
     },
     {
       "fields": ["members"],
@@ -34,6 +35,11 @@
       "field": "Registered Agent - Id",
       "label": "Registered Agent ID",
       "message": "Invalid ID"
+    },
+    {
+      "field": "UNKNOWN",
+      "label": "Unknown API Error",
+      "message": "Please try again shortly or report this as a bug below"
     }
   ],
   "inlineErrors": [
