@@ -1,5 +1,4 @@
 import { Button } from "@/components/njwds-extended/Button";
-import { BusinessFormationFieldAlert } from "@/components/tasks/business-formation/BusinessFormationFieldAlert";
 import { Addresses } from "@/components/tasks/business-formation/contacts/Addresses";
 import { Members } from "@/components/tasks/business-formation/contacts/Members";
 import { RegisteredAgent } from "@/components/tasks/business-formation/contacts/RegisteredAgent";
@@ -16,12 +15,11 @@ import {
   FormationFields,
   FormationFormData,
 } from "@businessnjgovnavigator/shared/";
-import { ReactElement, useContext, useEffect, useMemo, useState } from "react";
+import { ReactElement, useContext, useEffect, useMemo } from "react";
 
 export const ContactsSection = (): ReactElement => {
-  const { state, setErrorMap, setTab, setFormationFormData, setShowRequiredFieldsError } =
+  const { state, setErrorMap, setTab, setFormationFormData, setShowErrors } =
     useContext(BusinessFormationContext);
-  const [showInlineErrors, setShowInlineErrors] = useState<boolean>(false);
 
   const { userData, update } = useUserData();
 
@@ -31,27 +29,21 @@ export const ContactsSection = (): ReactElement => {
       {} as FormationFieldErrorMap
     );
 
+  const signersValidation = (signers: FormationAddress[]): FormationFieldStatus => {
+    const signerErrorTypes: FormationErrorType[] = [];
+    if (!signers.filter((it: FormationAddress) => !!it).every((it: FormationAddress) => it.name))
+      signerErrorTypes.push("name");
+    if (!signers.filter((it: FormationAddress) => !!it).every((it: FormationAddress) => it.signature))
+      signerErrorTypes.push("checkbox");
+    if (signers.filter((it: FormationAddress) => !!it).length === 0) signerErrorTypes.push("minimum");
+    return { name: "signers", types: signerErrorTypes, invalid: signerErrorTypes.length > 0 };
+  };
   const inlineErrors: FormationFieldStatus[] = useMemo(() => {
     const inlineErrors: FormationFieldStatus[] = [];
     if (state.formationFormData.members.length === 0 && corpLegalStructures.includes(state.legalStructureId))
       inlineErrors.push({ name: "members", types: ["minimum", "director"], invalid: true });
-    const signerErrorTypes: FormationErrorType[] = [];
-    if (
-      !state.formationFormData.signers
-        .filter((it: FormationAddress) => !!it)
-        .every((it: FormationAddress) => it.name)
-    )
-      signerErrorTypes.push("name");
-    if (
-      !state.formationFormData.signers
-        .filter((it: FormationAddress) => !!it)
-        .every((it: FormationAddress) => it.signature)
-    )
-      signerErrorTypes.push("checkbox");
-    if (state.formationFormData.signers.filter((it: FormationAddress) => !!it).length === 0)
-      signerErrorTypes.push("minimum");
-    if (signerErrorTypes.length > 0)
-      inlineErrors.push({ name: "signers", types: signerErrorTypes, invalid: true });
+    const signersErrors = signersValidation(state.formationFormData.signers);
+    if (signersErrors.invalid) inlineErrors.push(signersErrors);
     return inlineErrors;
   }, [state.legalStructureId, state.formationFormData]);
 
@@ -90,9 +82,8 @@ export const ContactsSection = (): ReactElement => {
   }, [state.formationFormData, state.errorMap]);
 
   useEffect(() => {
-    inlineErrors.length === 0 && setShowInlineErrors(false);
-    fieldErrors.length === 0 && inlineErrors.length === 0 && setShowRequiredFieldsError(false);
-  }, [fieldErrors, inlineErrors, setShowRequiredFieldsError]);
+    fieldErrors.length === 0 && inlineErrors.length === 0 && setShowErrors(false);
+  }, [fieldErrors, inlineErrors, setShowErrors]);
 
   const submitContactData = async () => {
     if (!userData) return;
@@ -102,9 +93,9 @@ export const ContactsSection = (): ReactElement => {
       ...createFormationFieldErrorMap([...fieldErrors, ...inlineErrors]),
     });
 
-    inlineErrors.length > 0 && setShowInlineErrors(true);
     if (fieldErrors.length > 0 || inlineErrors.length > 0) {
-      setShowRequiredFieldsError(true);
+      setShowErrors(true);
+      scrollToTop(true);
       return;
     }
 
@@ -157,22 +148,12 @@ export const ContactsSection = (): ReactElement => {
         ) ? (
           <>
             <hr className="margin-top-0 margin-bottom-3" />
-            <BusinessFormationFieldAlert
-              showError={showInlineErrors}
-              errorData={createFormationFieldErrorMap(inlineErrors)}
-              fields={["members"]}
-            />
             <Members />
           </>
         ) : (
           <></>
         )}
         <hr className="margin-top-0 margin-bottom-3" />
-        <BusinessFormationFieldAlert
-          showError={showInlineErrors}
-          errorData={createFormationFieldErrorMap(inlineErrors)}
-          fields={["signers"]}
-        />
         {[...corpLegalStructures, "limited-partnership"].includes(state.legalStructureId) ? (
           <Addresses
             fieldName={"signers"}
@@ -181,9 +162,7 @@ export const ContactsSection = (): ReactElement => {
               const members =
                 "limited-partnership" === state.legalStructureId ? signers : state.formationFormData.members;
               setFormationFormData({ ...state.formationFormData, signers, members });
-              if (signers.every((it: FormationAddress) => it.signature && it.name)) {
-                setErrorMap({ ...state.errorMap, signers: { invalid: false } });
-              }
+              setErrorMap({ ...state.errorMap, signers: signersValidation(signers) });
             }}
             defaultAddress={
               "limited-partnership" === state.legalStructureId

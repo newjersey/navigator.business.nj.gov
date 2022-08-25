@@ -2,6 +2,7 @@ import { Content } from "@/components/Content";
 import { GenericTextField } from "@/components/GenericTextField";
 import { Button } from "@/components/njwds-extended/Button";
 import { Icon } from "@/components/njwds/Icon";
+import { BusinessFormationFieldAlert } from "@/components/tasks/business-formation/BusinessFormationFieldAlert";
 import { ValidatedCheckbox } from "@/components/ValidatedCheckbox";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { MediaQueries } from "@/lib/PageSizes";
@@ -122,9 +123,10 @@ export const Signatures = (): ReactElement => {
     <>
       <div className="margin-bottom-2">
         <Content>{state.displayContent.signatureHeader.contentMd}</Content>
-        <br />
+        {state.errorMap["signers"].invalid && state.showErrors ? <></> : <br />}
+        <BusinessFormationFieldAlert fields={["signers"]} />
         <div className="grid-row flex-align-center">
-          <div className={`grid-col ${state.errorMap["signers"].invalid ? "input-error-bar" : ""}`}>
+          <div className={`grid-col input-error-bar ${state.errorMap["signers"].invalid ? "error" : ""}`}>
             <div className="fdr space-between">
               <Content>{Config.businessFormationDefaults.signerLabel}</Content>
               <Content>{`${Config.businessFormationDefaults.signatureColumnLabel}*`}</Content>

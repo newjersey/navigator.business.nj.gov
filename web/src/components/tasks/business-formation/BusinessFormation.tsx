@@ -73,12 +73,12 @@ export const BusinessFormation = (props: Props): ReactElement => {
   const [errorMap, setErrorMap] = useState<FormationFieldErrorMap>(createFormationFieldErrorMap());
   const [showResponseAlert, setShowResponseAlert] = useState<boolean>(false);
   const [isLoadingGetFiling, setIsLoadingGetFiling] = useState<boolean>(false);
-  const [showRequiredFieldsError, setShowRequiredFieldsError] = useState<boolean>(false);
+  const [showErrors, setShowErrors] = useState<boolean>(false);
   const getCompletedFilingApiCallOccurred = useRef<boolean>(false);
 
   const setTab = (tabNumber: number) => {
     updateTab(tabNumber);
-    setShowRequiredFieldsError(false);
+    setShowErrors(false);
   };
   const fieldsAreInvalid = (fields: FormationFields[]) =>
     fields.map((i) => errorMap[i]).some((i) => i.invalid);
@@ -215,14 +215,14 @@ export const BusinessFormation = (props: Props): ReactElement => {
           displayContent: props.displayContent[legalStructureId],
           municipalities: props.municipalities,
           errorMap: errorMap,
-          showRequiredFieldsError,
+          showErrors,
           showResponseAlert: showResponseAlert,
         },
         setFormationFormData,
         setErrorMap,
         setTab,
         fieldsAreInvalid,
-        setShowRequiredFieldsError,
+        setShowErrors,
         setShowResponseAlert,
       }}
     >
@@ -238,10 +238,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
             </>
           )}
         </div>
-        <BusinessFormationEmptyFieldAlert
-          showRequiredFieldsError={showRequiredFieldsError}
-          errorData={errorMap}
-        />
+        <BusinessFormationEmptyFieldAlert showErrors={showErrors} errorData={errorMap} />
         <div className="margin-top-3">
           <HorizontalStepper steps={stepNames} currentStep={tab} />
         </div>

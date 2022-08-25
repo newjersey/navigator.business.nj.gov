@@ -2,6 +2,7 @@ import { Content } from "@/components/Content";
 import { Button } from "@/components/njwds-extended/Button";
 import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
 import { Icon } from "@/components/njwds/Icon";
+import { BusinessFormationFieldAlert } from "@/components/tasks/business-formation/BusinessFormationFieldAlert";
 import { AddressModal } from "@/components/tasks/business-formation/contacts/AddressModal";
 import { ValidatedCheckbox } from "@/components/ValidatedCheckbox";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
@@ -255,7 +256,11 @@ export const Addresses = (props: Props): ReactElement => {
         </SnackbarAlert>
       )}
       <div className={`margin-bottom-3 ${styles.membersTable}`} data-testid={`addresses-${props.fieldName}`}>
-        <div className={state.errorMap[props.fieldName].invalid && !isTabletAndUp ? `input-error-bar` : ""}>
+        <div
+          className={`${state.errorMap[props.fieldName].invalid ? "error" : ""} ${
+            !isTabletAndUp ? `input-error-bar` : ""
+          }`}
+        >
           <Content
             overrides={{
               h3: ({ children }: { children: string[] }): ReactElement => (
@@ -265,7 +270,12 @@ export const Addresses = (props: Props): ReactElement => {
           >
             {props.displayContent.contentMd}
           </Content>
-          <div className={state.errorMap[props.fieldName].invalid && isTabletAndUp ? `input-error-bar` : ""}>
+          <BusinessFormationFieldAlert fields={[props.fieldName]} />
+          <div
+            className={`${state.errorMap[props.fieldName].invalid ? "error" : ""} ${
+              isTabletAndUp ? `input-error-bar` : ""
+            }`}
+          >
             {isTabletAndUp ? renderDesktopTable : renderMobileTable}
           </div>
           {props.addressData.length <= 9 && (

@@ -20,7 +20,7 @@ import { useRouter } from "next/router";
 import { ReactElement, useContext, useMemo, useState } from "react";
 
 export const PaymentSection = (): ReactElement => {
-  const { state, setErrorMap, setTab, setShowResponseAlert, setShowRequiredFieldsError, fieldsAreInvalid } =
+  const { state, setErrorMap, setTab, setShowResponseAlert, setShowErrors, fieldsAreInvalid } =
     useContext(BusinessFormationContext);
   const { userData, update } = useUserData();
   const router = useRouter();
@@ -46,17 +46,17 @@ export const PaymentSection = (): ReactElement => {
   const submitFormationFormData = async () => {
     if (!userData) return;
     if (requiredFieldsWithError.length > 0) {
-      setShowRequiredFieldsError(true);
+      setShowErrors(true);
       const newErrorMappedFields = requiredFieldsWithError.reduce(
         (acc: FormationFieldErrorMap, cur: FormationFields) => ({ ...acc, [cur]: { invalid: true } }),
         {} as FormationFieldErrorMap
       );
       setErrorMap({ ...state.errorMap, ...newErrorMappedFields });
-
+      scrollToTop(true);
       return;
     }
 
-    setShowRequiredFieldsError(false);
+    setShowErrors(false);
 
     setIsLoading(true);
     analytics.event.business_formation_billing_step_continue_button.click.go_to_next_formation_step();
@@ -129,7 +129,7 @@ export const PaymentSection = (): ReactElement => {
       </div>
       <hr className="margin-bottom-2" />
       <Content>{state.displayContent.services.contentMd}</Content>
-      <BusinessFormationFieldAlert showError={true} errorData={state.errorMap} fields={["paymentType"]} />
+      <BusinessFormationFieldAlert fields={["paymentType"]} />
       <FormationChooseDocuments />
 
       <PaymentTypeTable />
@@ -141,7 +141,7 @@ export const PaymentSection = (): ReactElement => {
       {userData?.formationData.formationResponse &&
         state.showResponseAlert &&
         !isLoading &&
-        !state.showRequiredFieldsError &&
+        !state.showErrors &&
         userData.formationData.formationResponse.errors.length > 0 && (
           <Alert variant="error" heading={Config.businessFormationDefaults.submitErrorHeading}>
             <ul style={{ wordBreak: "break-word" }}>

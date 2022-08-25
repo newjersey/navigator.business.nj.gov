@@ -10,7 +10,7 @@ export interface Props extends Omit<GenericTextFieldProps, "value" | "fieldName"
   inlineErrorStyling?: boolean;
 }
 
-export const BusinessFormationTextField = (props: Props): ReactElement => {
+export const BusinessFormationTextField = ({ className, ...props }: Props): ReactElement => {
   const { state, setFormationFormData, setErrorMap } = useContext(BusinessFormationContext);
 
   const handleChange = (value: string): void => {
@@ -26,19 +26,21 @@ export const BusinessFormationTextField = (props: Props): ReactElement => {
 
   const error = props.error ?? state.errorMap[props.fieldName].invalid;
   return (
-    <div>
-      <div className={error && !props.inlineErrorStyling ? `input-error-bar` : ""}>
-        <Content>{props.label}</Content>
-        <GenericTextField
-          value={state.formationFormData[props.fieldName]}
-          placeholder={props.placeholder}
-          onValidation={onValidation}
-          {...props}
-          handleChange={handleChange}
-          error={error}
-          formInputFull
-        />
-      </div>
+    <div
+      className={`${className ?? ""} ${error ? "error" : ""} ${
+        props.inlineErrorStyling ? "" : "input-error-bar"
+      }`}
+    >
+      <Content>{props.label}</Content>
+      <GenericTextField
+        value={state.formationFormData[props.fieldName]}
+        placeholder={props.placeholder}
+        onValidation={onValidation}
+        {...props}
+        handleChange={handleChange}
+        error={error}
+        formInputFull
+      />
     </div>
   );
 };

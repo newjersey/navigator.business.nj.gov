@@ -26,7 +26,7 @@ interface BusinessFormationState {
   legalStructureId: FormationLegalType;
   displayContent: FormationDisplayContent;
   municipalities: Municipality[];
-  showRequiredFieldsError: boolean;
+  showErrors: boolean;
   errorMap: FormationFieldErrorMap;
   showResponseAlert: boolean;
 }
@@ -38,7 +38,7 @@ interface BusinessFormationContextType {
   setErrorMap: (errorMap: FormationFieldErrorMap) => void;
   setTab: (value: number) => void;
   setShowResponseAlert: React.Dispatch<React.SetStateAction<boolean>>;
-  setShowRequiredFieldsError: React.Dispatch<React.SetStateAction<boolean>>;
+  setShowErrors: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const BusinessFormationContext = createContext<BusinessFormationContextType>({
@@ -48,7 +48,7 @@ export const BusinessFormationContext = createContext<BusinessFormationContextTy
     formationFormData: createEmptyFormationFormData(),
     displayContent: createEmptyFormationDisplayContent()["limited-liability-company"],
     municipalities: [],
-    showRequiredFieldsError: false,
+    showErrors: false,
     errorMap: createFormationFieldErrorMap(),
     showResponseAlert: false,
   },
@@ -57,7 +57,7 @@ export const BusinessFormationContext = createContext<BusinessFormationContextTy
     return false;
   },
   setErrorMap: () => {},
-  setShowRequiredFieldsError: () => {},
+  setShowErrors: () => {},
   setTab: () => {},
   setShowResponseAlert: () => {},
 });

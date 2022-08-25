@@ -16,15 +16,25 @@
 
 .input-error-bar {
   border-left-width: 4px;
-  border-left-color: #b50909;
+  border-left-color: #ffffff;
   border-left-style: solid;
-  margin-left: -17px !important;
-  padding-left: 13px !important;
+  left: -15px !important;
+  margin-left: 0 !important;
+  padding-left: 11px !important;
+  margin-right: -15px !important;
   position: relative;
 }
 
+.input-error-bar.error {
+  border-left-color: #b50909;
+  margin-bottom: 1em;
+  ~ * {
+    margin-bottom: 1em;
+  }
+}
+
 .input-error-bar.grid-row {
-  > div:first-child {
+  > div:first-child:not(.input-error-bar) {
     padding-left: 0 !important;
   }
 }
