@@ -29,6 +29,13 @@
       "label": "Partnership Rights"
     }
   ],
+  "apiErrors": [
+    {
+      "field": "Registered Agent - Id",
+      "label": "Registered Agent ID",
+      "message": "Invalid ID"
+    }
+  ],
   "inlineErrors": [
     {
       "fields": ["signers"],

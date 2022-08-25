@@ -1,5 +1,5 @@
 import { Content } from "@/components/Content";
-import { BusinessFormationFieldAlert } from "@/components/tasks/business-formation/BusinessFormationFieldAlert";
+import { BusinessFormationInlineFieldAlert } from "@/components/tasks/business-formation/BusinessFormationInlineFieldAlert";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { camelCaseToSentence } from "@/lib/utils/helpers";
@@ -106,7 +106,7 @@ export const PartnershipRights = (): ReactElement => {
           {Config.businessFormationDefaults.partnershipRightsTitle}
         </div>
       </div>
-      <BusinessFormationFieldAlert
+      <BusinessFormationInlineFieldAlert
         fields={["canCreateLimitedPartner", "canMakeDistribution", "canGetDistribution"]}
       />
       {getRadio("canCreateLimitedPartner", Config.businessFormationDefaults.partnershipRightsCanAssignRights)}
