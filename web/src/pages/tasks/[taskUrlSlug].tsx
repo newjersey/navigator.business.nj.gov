@@ -1,5 +1,6 @@
 import { Content } from "@/components/Content";
 import { NavBar } from "@/components/navbar/NavBar";
+import { Button } from "@/components/njwds-extended/Button";
 import { Icon } from "@/components/njwds/Icon";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { RadioQuestion } from "@/components/post-onboarding/RadioQuestion";
@@ -19,7 +20,6 @@ import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { MediaQueries } from "@/lib/PageSizes";
 import { loadTasksDisplayContent } from "@/lib/static/loadDisplayContent";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import { loadAllTaskUrlSlugs, loadTaskByUrlSlug, TaskUrlSlugParam } from "@/lib/static/loadTasks";
@@ -27,7 +27,6 @@ import { Task, TasksDisplayContent } from "@/lib/types/types";
 import { getModifiedTaskContent, getTaskFromRoadmap, getUrlSlugs, rswitch } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { formationTaskId, Municipality } from "@businessnjgovnavigator/shared/";
-import { useMediaQuery } from "@mui/material";
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
@@ -51,41 +50,6 @@ const TaskPage = (props: Props): ReactElement => {
       nextUrlSlug: arrayOfTasks[currentUrlSlugIndex + 1],
     };
   }, [props.task.urlSlug, roadmap]);
-  const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
-
-  const nextAndPreviousButtons = (): ReactElement => (
-    <div
-      className={`flex ${isTabletAndUp ? "flex-row padding-right-1" : "flex-column"} margin-top-2 `}
-      data-testid="nextAndPreviousButtons"
-    >
-      <button
-        className={`${
-          isTabletAndUp ? "" : "margin-bottom-2 margin-right-0"
-        } flex-half flex-row usa-button usa-button--outline flex-align-center padding-y-105`}
-        style={{ visibility: previousUrlSlug ? "visible" : "hidden" }}
-        onClick={() => router.push(`/tasks/${previousUrlSlug}`)}
-      >
-        <div className="flex flex-justify">
-          <Icon className="usa-icon--size-4">navigate_before</Icon>
-          <span className="flex-align-self-center"> {Config.taskDefaults.previousTaskButtonText}</span>
-          <Icon className="usa-icon--size-4 visibility-hidden"> </Icon>
-        </div>
-      </button>
-      <button
-        className={`flex-half usa-button usa-button--outline padding-y-105 ${
-          isTabletAndUp ? "" : "margin-right-0"
-        }`}
-        style={{ visibility: nextUrlSlug ? "visible" : "hidden" }}
-        onClick={() => router.push(`/tasks/${nextUrlSlug}`)}
-      >
-        <div className="flex flex-justify">
-          <Icon className="usa-icon--size-4 visibility-hidden"> </Icon>
-          <span className="flex-align-self-center">{Config.taskDefaults.nextTaskButtonText}</span>
-          <Icon className="usa-icon--size-4">navigate_next</Icon>
-        </div>
-      </button>
-    </div>
-  );
 
   const getTaskBody = (): ReactElement => {
     const task = {
@@ -101,7 +65,25 @@ const TaskPage = (props: Props): ReactElement => {
     const isValidLegalStructure = allowFormation(userData?.profileData.legalStructureId);
     const isStarting = userData?.profileData.businessPersona === "STARTING";
     if (props.task.id === formationTaskId && isValidLegalStructure && isStarting) return;
-    return nextAndPreviousButtons();
+    return (
+      <div
+        className={`flex flex-row ${previousUrlSlug ? "flex-justify" : "flex-justify-end"} margin-top-2 `}
+        data-testid="nextAndPreviousButtons"
+      >
+        {previousUrlSlug && (
+          <Button style="tertiary" onClick={() => router.push(`/tasks/${previousUrlSlug}`)}>
+            <Icon className="usa-icon--size-4">navigate_before</Icon>
+            <span className="margin-left-2"> {Config.taskDefaults.previousTaskButtonText}</span>
+          </Button>
+        )}
+        {nextUrlSlug && (
+          <Button style="tertiary" onClick={() => router.push(`/tasks/${nextUrlSlug}`)}>
+            <span className="margin-right-2">{Config.taskDefaults.nextTaskButtonText}</span>
+            <Icon className="usa-icon--size-4">navigate_next</Icon>
+          </Button>
+        )}
+      </div>
+    );
   };
 
   const renderFormationTask = (): ReactElement => {
