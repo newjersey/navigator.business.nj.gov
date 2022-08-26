@@ -7,4 +7,4 @@ If you completed the NJ-Reg form online, you will find your NJ Tax ID number on 
 
 
 
-![](web/public/tax-id.jpg)
+![](/img/tax-id.jpg)
