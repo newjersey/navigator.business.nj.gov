@@ -65,7 +65,7 @@ export const PaymentTypeTable = (): ReactElement => {
           <tr>
             <th colSpan={3}>
               {state.errorMap.paymentType.invalid ? (
-                <FormHelperText className={"text-error"}>
+                <FormHelperText className={"text-error-dark"}>
                   {Config.businessFormationDefaults.paymentTypeErrorText}
                 </FormHelperText>
               ) : (

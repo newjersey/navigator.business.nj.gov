@@ -89,18 +89,22 @@ export const PaymentSection = (): ReactElement => {
   return (
     <div data-testid="payment-section">
       <Content>{Config.businessFormationDefaults.contactInformationHeader}</Content>
-      <div className="grid-row grid-gap-2 margin-top-2">
-        <div className="form-input margin-bottom-2 tablet:grid-col-6">
+      <div
+        className={`grid-row grid-gap-2 margin-top-2 ${isTabletAndUp ? "input-error-bar" : ""} ${
+          fieldsAreInvalid(["contactFirstName", "contactLastName"]) ? "error" : ""
+        }`}
+      >
+        <div className="form-input tablet:grid-col-6">
           <BusinessFormationTextField
             label={Config.businessFormationDefaults.contactFirstNameLabel}
             placeholder={Config.businessFormationDefaults.contactFirstNamePlaceholder}
             fieldName="contactFirstName"
             required={true}
-            error={fieldsAreInvalid(["contactFirstName", "contactLastName"])}
+            inlineErrorStyling={isTabletAndUp}
             validationText={Config.businessFormationDefaults.contactFirstNameErrorText}
           />
         </div>
-        <div className="form-input margin-bottom-2 tablet:grid-col-6">
+        <div className="form-input tablet:grid-col-6">
           <BusinessFormationTextField
             label={Config.businessFormationDefaults.contactLastNameLabel}
             placeholder={Config.businessFormationDefaults.contactLastNamePlaceholder}

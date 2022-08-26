@@ -256,28 +256,18 @@ export const Addresses = (props: Props): ReactElement => {
         </SnackbarAlert>
       )}
       <div className={`margin-bottom-3 ${styles.membersTable}`} data-testid={`addresses-${props.fieldName}`}>
-        <div
-          className={`${state.errorMap[props.fieldName].invalid ? "error" : ""} ${
-            !isTabletAndUp ? `input-error-bar` : ""
-          }`}
+        <Content
+          overrides={{
+            h3: ({ children }: { children: string[] }): ReactElement => (
+              <h3 style={{ display: "inline" }}>{children}</h3>
+            ),
+          }}
         >
-          <Content
-            overrides={{
-              h3: ({ children }: { children: string[] }): ReactElement => (
-                <h3 style={{ display: "inline" }}>{children}</h3>
-              ),
-            }}
-          >
-            {props.displayContent.contentMd}
-          </Content>
-          <BusinessFormationInlineFieldAlert fields={[props.fieldName]} />
-          <div
-            className={`${state.errorMap[props.fieldName].invalid ? "error" : ""} ${
-              isTabletAndUp ? `input-error-bar` : ""
-            }`}
-          >
-            {isTabletAndUp ? renderDesktopTable : renderMobileTable}
-          </div>
+          {props.displayContent.contentMd}
+        </Content>
+        <BusinessFormationInlineFieldAlert fields={[props.fieldName]} />
+        <div className={`${state.errorMap[props.fieldName].invalid ? "error" : ""} input-error-bar`}>
+          {isTabletAndUp ? renderDesktopTable : renderMobileTable}
           {props.addressData.length <= 9 && (
             <Button
               style="tertiary"
