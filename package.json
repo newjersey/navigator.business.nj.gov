@@ -191,7 +191,7 @@
     "rimraf": "3.0.2",
     "sass": "1.54.5",
     "sass-loader": "13.0.2",
-    "semantic-release": "19.0.3",
+    "semantic-release": "19.0.5",
     "serverless": "3.22.0",
     "serverless-dynamodb-local": "0.2.40",
     "serverless-offline-ssm": "6.2.0",
