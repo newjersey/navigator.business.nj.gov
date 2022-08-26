@@ -5,4 +5,4 @@ The New Jersey Department of Treasury gives businesses a 4-digit tax PIN when th
 
 If you can't find your tax PIN, you can get help obtaining your [tax PIN](https://www.nj.gov/treasury/assets/contact/taxation/contact-pin.shtml). To submit this request you will be asked for your NJ Corporate ID Number, this is the same number as your `Entity ID.|entity-id` 
 
-![](web/public/tax-pin.jpg)
+![](/img/tax-pin.jpg)
