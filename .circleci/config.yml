@@ -566,7 +566,7 @@ jobs:
       suite:
         type: string
     docker:
-      - image: cimg/node:16.16.0-browsers
+      - image: cimg/node:16.17.0-browsers
     steps:
       - attach_workspace:
           at: .
@@ -580,7 +580,7 @@ jobs:
   #Maybe have a move this to a image folder
   docker-build-builder-image:
     docker:
-      - image: cimg/node:16.16.0
+      - image: cimg/node:16.17.0
     steps:
       - set-dev-env-vars
       - docker-setup-navigator-builder-image
@@ -621,8 +621,29 @@ workflows:
 
   build-and-test:
     jobs:
-      - build:
+      - docker-build-builder-image:
           filters:
+            tags:
+              only: /^new-docker-image.*/
+            branches:
+              ignore: /.*/
+      - build:
+          name: build-with-image
+          filters:
+            tags:
+              only: /^new-docker-image.*/
+            branches:
+              ignore:
+                - /^release-.*/
+                - /^staging-.*/
+                - /^cms/.*/
+          requires:
+            - docker-build-builder-image
+      - build:
+          name: build
+          filters:
+            tags:
+              ignore: /^new-docker-image.*/
             branches:
               ignore:
                 - /^release-.*/
@@ -821,7 +842,7 @@ workflows:
           requires:
             - build
 
-  build-image-pipeline:
+  build-image-pipeline-weekly:
     triggers:
       - schedule:
           # Every Sunday, at Noon.
