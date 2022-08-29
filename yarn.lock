@@ -3590,7 +3590,7 @@ __metadata:
     eslint-plugin-jest-formatting: 3.1.0
     eslint-plugin-unicorn: 43.0.2
     express: 4.18.1
-    helmet: 5.1.1
+    helmet: 6.0.0
     jest: 28.1.3
     jest-dynalite: 3.6.1
     jest-junit: 14.0.1
@@ -3758,7 +3758,7 @@ __metadata:
     fast-deep-equal: 3.1.3
     focus-trap-react: 9.0.2
     gray-matter: 4.0.3
-    helmet: 5.1.1
+    helmet: 6.0.0
     husky: 8.0.1
     identity-obj-proxy: 3.0.0
     jest: 28.1.3
@@ -18635,10 +18635,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"helmet@npm:5.1.1":
-  version: 5.1.1
-  resolution: "helmet@npm:5.1.1"
-  checksum: b72ba26cc431804ad3b8ecdc18db95409a492cbb7a7e825efc27fc502b9433fec39fc083f2aad4fe7ed1a89a4287560b59f4435f9689eebbae6a2b61a1ec1b7d
+"helmet@npm:6.0.0":
+  version: 6.0.0
+  resolution: "helmet@npm:6.0.0"
+  checksum: 0dd89d5b77c5334e815f5d29376ca7af0ad1007136890f497be3455d9ed9734e7203e13d9931e29e4d2ced1c632c52440f16d2a02e8835fd8b8706a12052faad
   languageName: node
   linkType: hard
 
