@@ -5,7 +5,7 @@ name: Find a Commercial Warehouse
 id: logistics-warehouse
 required: true
 ---
-You will need a space to store goods while you coordinate their transportation. 
+You will need a space with a loading dock to store goods while you coordinate their transportation. 
 
 ---
 ### Common Types of Warehouse Spaces
