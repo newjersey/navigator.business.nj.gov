@@ -2,8 +2,8 @@
   "profileDefaults": {
     "OWNING": {
       "dateOfFormation": {
-        "header": "## Business Formation",
-        "description": "When did you form your business? Find your formation date on your `Certificate of Formation|certificate-formation`.\n\n**This field is required for LLCs, C Corps, LPs, and LLPs.**",
+        "header": "## Effective Date",
+        "description": "When did you form your business? Find your `effective date|effective-date` on your `Certificate of Formation|certificate-formation`.\n\n**This field is required for LLCs, C Corps, LPs, and LLPs.**",
         "errorText": "Your formation date must be in the past, and should be formatted as MM/YYYY. (This information will help us inform your annual reporting due date.)"
       },
       "taxPin": {
