@@ -14,9 +14,11 @@ Note: See the [Family Daycare provider manual](https://www.nj.gov/dcf/providers/
 ---
 ### Eligibility
 - 5 or fewer children under your care 
-- The administrator must have a bachelor's degree; or 3 years of management experience in human services, child care services, child development, education, nursing, social work, or business
+- Daycare Administrator education:  
+ Bachelor's degree, or 3 years of management experience in human services, child care services, child development, education, nursing, social work, or business
 - The staff must be 18 years old at minimum
-- The staff must have an associate's degree in human services, child care services, child development, education, nursing or social work and one year of experience working with children, or a high school diploma and three years of work experience with children under 13 years old, or three years of full-time experience in the fields of child development, education, nursing, or social work
+- Staff education:  
+Associate's degree in human services, child care services, child development, education, nursing or social work and one year of experience working with children, or a high school diploma and three years of work experience with children under 13 years old, or three years of full-time experience in the fields of child development, education, nursing, or social work
 
 ### Application Requirements
 - Medical examination and Tuberculin Mantoux test results
