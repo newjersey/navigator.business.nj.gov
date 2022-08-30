@@ -260,6 +260,12 @@
       "dependencies": [
         "form-business-entity"
       ]
+    },
+    {
+      "name": "bus-inspection",
+      "dependencies": [
+        "school-bus-insurance"
+      ]
     }
   ]
 }
