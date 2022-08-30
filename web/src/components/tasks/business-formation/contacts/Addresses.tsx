@@ -266,8 +266,11 @@ export const Addresses = (props: Props): ReactElement => {
           {props.displayContent.contentMd}
         </Content>
         <BusinessFormationInlineFieldAlert fields={[props.fieldName]} />
-        <div className={`${state.errorMap[props.fieldName].invalid ? "error" : ""} input-error-bar`}>
-          {isTabletAndUp ? renderDesktopTable : renderMobileTable}
+        <div>
+          <div className={`${state.errorMap[props.fieldName].invalid ? "error" : ""} input-error-bar`}>
+            {isTabletAndUp ? renderDesktopTable : renderMobileTable}
+          </div>
+
           {props.addressData.length <= 9 && (
             <Button
               style="tertiary"
