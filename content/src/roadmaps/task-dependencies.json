@@ -266,6 +266,24 @@
       "dependencies": [
         "school-bus-insurance"
       ]
+    },
+    {
+      "name": "transportation-entity-id",
+      "dependencies": [
+        "form-business-entity"
+      ]
+    },
+    {
+      "name": "transportation-inspection",
+      "dependencies": [
+        "transport-insurance"
+      ]
+    },
+    {
+      "name": "transportation-cpcn",
+      "dependencies": [
+        "transportation-entity-id"
+      ]
     }
   ]
 }
