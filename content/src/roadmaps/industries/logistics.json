@@ -10,6 +10,11 @@
     },
     {
       "step": 1,
+      "weight": 2,
+      "task": "logistics-site-evaluation"
+    },
+    {
+      "step": 1,
       "weight": 30,
       "task": "determine-naics-code"
     },
@@ -32,16 +37,6 @@
       "step": 3,
       "weight": 12,
       "task": "get-insurance"
-    },
-    {
-      "step": 3,
-      "weight": 15,
-      "task": "trucking-cdl"
-    },
-    {
-      "step": 3,
-      "weight": 17,
-      "task": "logistics-warehouse"
     }
   ],
   "name": "Logistics",
@@ -55,7 +50,7 @@
     "isCpaRequiredApplicable": false,
     "isTransportation": false
   },
-  "isEnabled": false,
+  "isEnabled": true,
   "additionalSearchTerms": "freight, trucking, movers, box truck company, transportation, truck driving, hauling, truck haul, logistics, trucking company, ",
   "id": "logistics",
   "description": "Stores commercial goods in a warehouse for transportation"
