@@ -1,0 +1,32 @@
+---
+urlSlug: daycare-license
+filename: daycare-license
+name: Obtain a Child Care Center License
+id: daycare-license
+callToActionLink: https://njccis.com/njccis/home
+callToActionText: Apply for My License
+required: true
+issuingAgency: New Jersey Department of Children and Families
+---
+You must obtain a license prior to operating as a Daycare
+
+---
+### Eligibility
+- 6 or more children under your care
+- Staff must be 18 years old at a minimum
+
+### Application Requirements
+- `EIN|ein`
+-  `Business Registration Certificate|business-reg-certificate`
+- `Certificate of Formation|certificate-formation`
+- Letter of certification from the municipality indicating the building’s previous type of use
+- Water bills and water testing reports from your municipality
+- Site map of your site with the location of the outdoor playing area 
+- Pay any associated fees
+
+### After Initial Application
+- You will receive a notice via email to request forms from the State of New Jersey for criminal background checks and Child Abuse Record Information (CARI) checks for all representatives of your business and regularly scheduled staff
+- You will be contacted by a representative from the Office of Licensing to arrange for an official site inspection
+
+>**Once completed, you will have:**
+>- A Child Care Center License mailed to you
