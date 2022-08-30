@@ -4,7 +4,7 @@ filename: logistics-site-evaluation
 name: Evaluate Your Location
 id: logistics-site-evaluation
 ---
-You will need a commercial warehouse with a loading dock to store goods while you coordinate their transportation.
+You will need a commercial warehouse with a loading dock to legally store goods while you coordinate their transportation. The type of warehouse you will need will depend on the type of commercial goods you plan to store.
 
 ---
 ### Common Types of Warehouse Spaces
