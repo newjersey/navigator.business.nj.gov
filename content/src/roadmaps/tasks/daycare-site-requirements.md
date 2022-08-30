@@ -1,7 +1,7 @@
 ---
 urlSlug: daycare-site-requirements
 filename: daycare-site-requirements
-name: Comply with Site Requirements
+name: Obtain a Certificate of Occupancy
 id: daycare-site-requirements
 required: true
 ---
