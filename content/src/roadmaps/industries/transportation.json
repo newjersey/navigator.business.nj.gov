@@ -64,7 +64,7 @@
     "isCpaRequiredApplicable": false,
     "isTransportation": true
   },
-  "isEnabled": false,
+  "isEnabled": true,
   "additionalSearchTerms": "taxi, limo, bus, shuttle, transport van, car service",
   "id": "transportation",
   "description": "Offers transportation services in vehicles with a passenger capacity of more than 10 people"
