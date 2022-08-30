@@ -11,7 +11,7 @@ The [DCF’s licensing manual](https://www.nj.gov/dcf/providers/licensing/Unders
 
 ---
 ### Safety Permits
-- **`Certificate of Occupancy or Approval|certificate-occupancy`:** Your space needs specific certifications depending on the children’s ages:  
+- **`Certificate of Occupancy or Approval|certificate-occupancy`:** Your space needs a specific Certificate of Occupancy depending on the children’s ages:  
 Children 2 ½ years or younger: Institutional (I-4)  
 Six or more children older than 2 ½ years of age: Educational (E)  
 School-aged child care program or Assembly: (A-3 or A-4) 
