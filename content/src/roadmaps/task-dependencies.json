@@ -254,6 +254,12 @@
       "dependencies": [
         "register-for-taxes"
       ]
+    },
+    {
+      "name": "moving-company-license",
+      "dependencies": [
+        "form-business-entity"
+      ]
     }
   ]
 }
