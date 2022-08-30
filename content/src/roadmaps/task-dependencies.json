@@ -248,6 +248,12 @@
       "dependencies": [
         "certificate-good-standing-foreign"
       ]
+    },
+    {
+      "name": "daycare-license",
+      "dependencies": [
+        "register-for-taxes"
+      ]
     }
   ]
 }
