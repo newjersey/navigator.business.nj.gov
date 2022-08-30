@@ -4,7 +4,7 @@ filename: daycare-evaluate-location
 name: Evaluate Your Location
 id: daycare-evaluate-location
 ---
-Daycare spaces will be inspected to ensure they meet New Jersey's requirements.
+Your daycare space will be inspected to ensure they meet New Jersey's requirements.
 
 ---
 ### Site Selection Considerations
