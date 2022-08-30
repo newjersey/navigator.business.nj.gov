@@ -59,7 +59,7 @@
     "isCpaRequiredApplicable": false,
     "isTransportation": true
   },
-  "isEnabled": false,
+  "isEnabled": true,
   "additionalSearchTerms": "bus, school bus, ",
   "id": "school-bus",
   "description": "Transports children to and from school, day camps, or other activities"
