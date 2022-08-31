@@ -1,7 +1,6 @@
 {
-  "naicsCodes": "485999, 485210, 485310, 485320, 485410, 485510",
   "defaultSectorId": "other-services",
-  "canHavePermanentLocation": true,
+  "canHavePermanentLocation": false,
   "roadmapSteps": [
     {
       "step": 1,
@@ -31,42 +30,27 @@
     {
       "step": 3,
       "weight": 15,
-      "task": "transport-insurance"
-    },
-    {
-      "step": 3,
-      "weight": 20,
-      "task": "transportation-entity-id"
-    },
-    {
-      "step": 3,
-      "weight": 25,
-      "task": "transportation-inspection"
+      "task": "get-insurance"
     },
     {
       "step": 3,
       "weight": 30,
-      "task": "transportation-cpcn"
-    },
-    {
-      "step": 4,
-      "weight": 10,
-      "task": "transportation-assessment-usdot"
+      "task": "family-daycare-register"
     }
   ],
-  "name": "Car Service (Large Capacity Vehicles)",
+  "name": "Family Daycare",
   "industryOnboardingQuestions": {
-    "canBeHomeBased": true,
+    "canBeHomeBased": false,
     "isProvidesStaffingServicesApplicable": false,
     "isCertifiedInteriorDesignerApplicable": false,
     "isRealEstateAppraisalManagementApplicable": false,
-    "canBeReseller": false,
+    "canBeReseller": true,
     "isLiquorLicenseApplicable": false,
     "isCpaRequiredApplicable": false,
-    "isTransportation": true
+    "isTransportation": false
   },
-  "isEnabled": true,
-  "additionalSearchTerms": "taxi, limo, bus, shuttle, transport van, car service",
-  "id": "transportation",
-  "description": "Offers transportation services in vehicles with a passenger capacity of more than 10 people"
+  "isEnabled": false,
+  "additionalSearchTerms": "home daycare",
+  "id": "family-daycare",
+  "description": "Provides daycare services for 5 or less children in the business owner's home"
 }

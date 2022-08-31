@@ -1,12 +1,21 @@
 {
-  "naicsCodes": "485999, 485210, 485310, 485320, 485410, 485510",
   "defaultSectorId": "other-services",
-  "canHavePermanentLocation": true,
+  "canHavePermanentLocation": false,
   "roadmapSteps": [
     {
       "step": 1,
       "weight": 1,
       "task": "business-plan"
+    },
+    {
+      "step": 1,
+      "weight": 2,
+      "task": "daycare-evaluate-location"
+    },
+    {
+      "step": 1,
+      "weight": 3,
+      "task": "daycare-site-requirements"
     },
     {
       "step": 1,
@@ -31,42 +40,27 @@
     {
       "step": 3,
       "weight": 15,
-      "task": "transport-insurance"
+      "task": "get-insurance"
     },
     {
       "step": 3,
       "weight": 20,
-      "task": "transportation-entity-id"
-    },
-    {
-      "step": 3,
-      "weight": 25,
-      "task": "transportation-inspection"
-    },
-    {
-      "step": 3,
-      "weight": 30,
-      "task": "transportation-cpcn"
-    },
-    {
-      "step": 4,
-      "weight": 10,
-      "task": "transportation-assessment-usdot"
+      "task": "daycare-license"
     }
   ],
-  "name": "Car Service (Large Capacity Vehicles)",
+  "name": "Daycare",
   "industryOnboardingQuestions": {
-    "canBeHomeBased": true,
+    "canBeHomeBased": false,
     "isProvidesStaffingServicesApplicable": false,
     "isCertifiedInteriorDesignerApplicable": false,
     "isRealEstateAppraisalManagementApplicable": false,
-    "canBeReseller": false,
+    "canBeReseller": true,
     "isLiquorLicenseApplicable": false,
     "isCpaRequiredApplicable": false,
-    "isTransportation": true
+    "isTransportation": false
   },
-  "isEnabled": true,
-  "additionalSearchTerms": "taxi, limo, bus, shuttle, transport van, car service",
-  "id": "transportation",
-  "description": "Offers transportation services in vehicles with a passenger capacity of more than 10 people"
+  "isEnabled": false,
+  "additionalSearchTerms": "daycare, childcare",
+  "id": "daycare",
+  "description": "Provides daycare services for 6 or more children in a dedicated space"
 }

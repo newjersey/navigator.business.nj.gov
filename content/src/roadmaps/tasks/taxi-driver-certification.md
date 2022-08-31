@@ -10,7 +10,7 @@ issuingAgency: New Jersey Motor Vehicle Commission
 ---
 All drivers need to have a letter of certification before they can legally operate company vehicles. It’s the employer’s responsibility to file an application for a driver's certification if the driver doesn't already have one. 
  
-**Note:** Only drivers holding a Commercial Driver’s License with a Passenger endorsement are exempt form this requirement.
+**Note:** Only drivers holding a Commercial Driver’s License (CDL) with a Passenger (P) endorsement are exempt from this requirement.
  
 ---
 ### Eligibility Requirements
@@ -27,7 +27,7 @@ All drivers need to have a letter of certification before they can legally opera
 - Driver’s SSN
  
 >**Once completed, you will have:**  
->- A letter of qualification or disqualification for the driver.  
+>- A letter of qualification or disqualification for the driver  
 > **Note:** The letter will only be mailed to the employer. The process takes about 2 weeks after the application is processed.
  
 >**What if don’t complete this task?**  

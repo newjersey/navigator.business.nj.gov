@@ -1,21 +1,29 @@
 {
   "formationErrors": [
     {
-      "fields": ["signers"],
+      "fields": [
+        "signers"
+      ],
       "label": "Signatures",
       "message": "Review the signatures section"
     },
     {
-      "fields": ["members"],
+      "fields": [
+        "members"
+      ],
       "type": "director",
       "label": "Directors"
     },
     {
-      "fields": ["members"],
+      "fields": [
+        "members"
+      ],
       "label": "Members"
     },
     {
-      "fields": ["businessAddressZipCode"],
+      "fields": [
+        "businessAddressZipCode"
+      ],
       "label": "Zip Code"
     },
     {
@@ -28,6 +36,30 @@
         "makeDistributionTerms"
       ],
       "label": "Partnership Rights"
+    },
+    {
+      "fields": [
+        "businessStartDate"
+      ],
+      "label": "Effective Date"
+    },
+    {
+      "fields": [
+        "contactFirstName"
+      ],
+      "label": "First Name"
+    },
+    {
+      "fields": [
+        "contactLastName"
+      ],
+      "label": "Last Name"
+    },
+    {
+      "fields": [
+        "contactPhoneNumber"
+      ],
+      "label": "Phone Number"
     }
   ],
   "apiErrors": [
@@ -44,33 +76,47 @@
   ],
   "inlineErrors": [
     {
-      "fields": ["signers"],
+      "fields": [
+        "signers"
+      ],
       "type": "checkbox",
       "label": "Sign by clicking the checkbox(s) below.",
       "priority": 2
     },
     {
-      "fields": ["canCreateLimitedPartner", "canGetDistribution", "canMakeDistribution"],
+      "fields": [
+        "canCreateLimitedPartner",
+        "canGetDistribution",
+        "canMakeDistribution"
+      ],
       "label": "Please make a selection for the following question(s)."
     },
     {
-      "fields": ["paymentType"],
+      "fields": [
+        "paymentType"
+      ],
       "label": "Please make a selection"
     },
     {
-      "fields": ["signers"],
+      "fields": [
+        "signers"
+      ],
       "type": "name",
       "label": "Signer field is empty",
       "priority": 1
     },
     {
-      "fields": ["signers"],
+      "fields": [
+        "signers"
+      ],
       "type": "minimum",
       "label": "Enter at least 1 signer.",
       "priority": 0
     },
     {
-      "fields": ["members"],
+      "fields": [
+        "members"
+      ],
       "type": "minimum",
       "label": "Enter at least 1 director.",
       "priority": 0

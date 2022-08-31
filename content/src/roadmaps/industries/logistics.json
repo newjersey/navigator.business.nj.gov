@@ -1,5 +1,5 @@
 {
-  "naicsCodes": "484210",
+  "naicsCodes": "493110, 493190, 493120, 493130",
   "defaultSectorId": "other-services",
   "canHavePermanentLocation": true,
   "roadmapSteps": [
@@ -7,6 +7,11 @@
       "step": 1,
       "weight": 1,
       "task": "business-plan"
+    },
+    {
+      "step": 1,
+      "weight": 2,
+      "task": "logistics-site-evaluation"
     },
     {
       "step": 1,
@@ -30,33 +35,23 @@
     },
     {
       "step": 3,
-      "weight": 15,
-      "task": "moving-company-insurance"
-    },
-    {
-      "step": 3,
-      "weight": 20,
-      "task": "moving-company-license"
-    },
-    {
-      "step": 3,
-      "weight": 22,
-      "task": "trucking-cdl"
+      "weight": 12,
+      "task": "get-insurance"
     }
   ],
-  "name": "Moving Company",
+  "name": "Logistics",
   "industryOnboardingQuestions": {
-    "canBeHomeBased": true,
-    "canBeReseller": false,
-    "isCpaRequiredApplicable": false,
-    "isLiquorLicenseApplicable": false,
-    "isRealEstateAppraisalManagementApplicable": false,
-    "isCertifiedInteriorDesignerApplicable": false,
+    "canBeHomeBased": false,
     "isProvidesStaffingServicesApplicable": false,
-    "isTransportation": true
+    "isCertifiedInteriorDesignerApplicable": false,
+    "isRealEstateAppraisalManagementApplicable": false,
+    "canBeReseller": false,
+    "isLiquorLicenseApplicable": false,
+    "isCpaRequiredApplicable": false,
+    "isTransportation": false
   },
   "isEnabled": true,
   "additionalSearchTerms": "freight, trucking, movers, box truck company, transportation, truck driving, hauling, truck haul, logistics, trucking company, ",
-  "id": "moving-company",
-  "description": "Transports personal belongings from on location to another"
+  "id": "logistics",
+  "description": "Stores commercial goods in a warehouse for transportation"
 }
