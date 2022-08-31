@@ -91,7 +91,9 @@
     "IRP",
     "cpcn",
     "Gov2Go",
-    "GWRS"
+    "GWRS",
+    "Mantoux",
+    "CARI"
   ],
   "ignorePaths": ["node_modules/**", "out/**", "web/out/**", "package.json"]
 }
