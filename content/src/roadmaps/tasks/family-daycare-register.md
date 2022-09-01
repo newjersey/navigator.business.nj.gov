@@ -7,7 +7,7 @@ callToActionLink: https://www.childcarenj.gov/Parents/CCRR
 callToActionText: Register My Daycare
 issuingAgency: New Jersey Department of Human Services Division of Family Development
 ---
-Register your Family Child Care business to ensure you’re in compliance with State rules and regulations and gain more credibility for your business.
+Register your Family Daycare business to ensure you’re in compliance with State rules and regulations and gain more credibility for your business.
 
 ---
 ### Eligibility
