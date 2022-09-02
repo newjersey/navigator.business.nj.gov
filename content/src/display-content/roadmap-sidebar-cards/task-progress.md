@@ -8,7 +8,7 @@ imgPath: ""
 ctaText: ""
 color: accent-cool-darker
 headerBackgroundColor: white
-borderColor: accent-cool
+borderColor: accent-cool-light
 ---
 
 You have **${numberOptionalTasks}** left to complete and **${numberRequiredTasks}**.
