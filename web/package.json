@@ -132,7 +132,7 @@
     "cypress-wait-until": "1.7.2",
     "dayjs": "1.11.5",
     "dependency-cruiser": "11.15.0",
-    "dotenv": "16.0.1",
+    "dotenv": "16.0.2",
     "eslint": "8.22.0",
     "eslint-config-next": "12.2.5",
     "eslint-config-prettier": "8.5.0",
