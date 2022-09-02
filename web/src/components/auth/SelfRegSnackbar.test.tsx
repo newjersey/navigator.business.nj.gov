@@ -35,7 +35,7 @@ describe("SelfRegSnackbar", () => {
 
   it("updates registration status when user is authenticated and had completed the registration process", () => {
     setupHookWithAuth(IsAuthenticated.TRUE, "IN_PROGRESS");
-    expect(setRegistrationAlertStatus).toBeCalledWith("SUCCESS");
+    expect(setRegistrationAlertStatus).toHaveBeenCalledWith("SUCCESS");
   });
 
   it("shows registration success snackbar when user is authenticated and had completed the registration process", () => {

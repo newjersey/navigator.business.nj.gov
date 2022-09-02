@@ -45,7 +45,7 @@ describe("SignUpSnackbar", () => {
   it("is able to close registration alert when user is in guest mode", () => {
     setupHookWithAuth(IsAuthenticated.FALSE);
     fireEvent.click(screen.getByLabelText("close"));
-    expect(setAlertIsVisible).toBeCalledWith(false);
+    expect(setAlertIsVisible).toHaveBeenCalledWith(false);
   });
 
   it("does not show registration alert when alertIsVisible is false", () => {

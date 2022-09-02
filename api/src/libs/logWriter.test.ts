@@ -14,11 +14,11 @@ describe("Logger", () => {
 
   it("Logs an error message", () => {
     logger.LogError("test error");
-    expect(mockWinston.error).toBeCalledTimes(1);
+    expect(mockWinston.error).toHaveBeenCalledTimes(1);
   });
 
   it("Logs an info message", () => {
     logger.LogInfo("test error");
-    expect(mockWinston.info).toBeCalledTimes(1);
+    expect(mockWinston.info).toHaveBeenCalledTimes(1);
   });
 });
