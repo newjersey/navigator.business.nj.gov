@@ -19,7 +19,6 @@ export const SidebarCardGeneric = (props: Props) => {
   const closeSelf = async () => {
     await hideCard(props.card.id);
   };
-
   return (
     <>
       <div
@@ -27,7 +26,11 @@ export const SidebarCardGeneric = (props: Props) => {
         {...{ "data-testid": props.card.id }}
       >
         {props.headerText && (
-          <div className={`bg-${props.card.headerBackgroundColor} padding-y-105 padding-x-205 radius-top-md`}>
+          <div
+            className={`bg-${props.card.headerBackgroundColor} ${
+              props.card.headerBackgroundColor === "white" ? "margin-top-1" : ""
+            } padding-y-105 padding-x-205 radius-top-md`}
+          >
             <div className="flex flex-justify">
               <h3
                 className={`margin-bottom-0 text-${props.card.color} ${
