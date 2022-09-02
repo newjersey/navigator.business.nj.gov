@@ -93,7 +93,8 @@
     "Gov2Go",
     "GWRS",
     "Mantoux",
-    "CARI"
+    "CARI",
+    "DORES"
   ],
   "ignorePaths": ["node_modules/**", "out/**", "web/out/**", "package.json"]
 }
