@@ -38,7 +38,6 @@ export const VerticalStepIndicator = (props: Props): ReactElement => {
 
   useEffect(resizeVerticalBarToContent, [props.last, props.stepNumber, verticalHeight, sectionIsOpen]);
   useOnWindowResize(resizeVerticalBarToContent);
-
   return (
     <div className={`vertical-step-indicator`}>
       <div className={`usa-step-indicator usa-step-indicator--counters usa-step-indicator__segments`}>
