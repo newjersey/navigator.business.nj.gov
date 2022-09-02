@@ -5,7 +5,7 @@ imgPath: /img/check-mark-circular-blue.svg
 ctaText: ""
 color: accent-cool-darker
 headerBackgroundColor: cool-lighter
-borderColor: accent-cool-darker
+borderColor: secondary-light
 hasCloseButton: true
 weight: 1
 ---

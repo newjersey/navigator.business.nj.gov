@@ -20,7 +20,8 @@
     top: calc((2.5rem - 0.5rem) / -2);
     z-index: 100;
     font-size: 18px;
-    margin-top: 16px;
+    margin-top: 12px;
+    margin-left: 3px;
     color: $primary-darker !important;
     box-shadow: inset 0 0 0 0.2rem $primary-darker, 0 0 0 0 #fff !important;
   }
@@ -38,9 +39,8 @@
     position: absolute;
     height: 0rem;
     z-index: 90;
-    left: calc(((2rem - 0.25rem) / 2));
     background-color: $base-lighter;
-    left: 39px;
+    left: 42px;
   }
 
   .vertical-bar-smaller {

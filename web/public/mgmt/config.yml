@@ -3156,7 +3156,15 @@ collections:
           name: "borderColor",
           widget: "select",
           required: true,
-          options: ["accent-cool", "accent-cooler", "primary-light", "accent-cool-darker"],
+          options:
+            [
+              "accent-cooler-light",
+              "accent-cool-light",
+              "primary-light",
+              "secondary-light",
+              "info-light",
+              "secondary-light",
+            ],
         }
 
   - name: "settings"
