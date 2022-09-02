@@ -43,9 +43,9 @@ describe("useDocuments", () => {
     });
     setupHook();
     await waitFor(() => expect(mockGetSignedS3Link).toHaveBeenCalledTimes(3));
-    expect(mockGetSignedS3Link).toBeCalledWith("whatever.pdf");
-    expect(mockGetSignedS3Link).toBeCalledWith("zp.zip");
-    expect(mockGetSignedS3Link).toBeCalledWith("lol.pdf");
+    expect(mockGetSignedS3Link).toHaveBeenCalledWith("whatever.pdf");
+    expect(mockGetSignedS3Link).toHaveBeenCalledWith("zp.zip");
+    expect(mockGetSignedS3Link).toHaveBeenCalledWith("lol.pdf");
   });
 
   it("regenerates documents when calling checkData", async () => {
