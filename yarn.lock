@@ -3735,13 +3735,13 @@ __metadata:
     cross-env: 7.0.3
     cspell: 6.8.1
     css-loader: 6.7.1
-    cypress: 10.6.0
+    cypress: 10.7.0
     cypress-dotenv: 2.0.0
     cypress-wait-until: 1.7.2
     dayjs: 1.11.5
     dedent: 0.7.0
     dependency-cruiser: 11.15.0
-    dotenv: 16.0.1
+    dotenv: 16.0.2
     eslint: 8.22.0
     eslint-config-next: 12.2.5
     eslint-config-prettier: 8.5.0
@@ -3925,12 +3925,12 @@ __metadata:
     cross-env: 7.0.3
     cspell: 6.8.1
     css-loader: 6.7.1
-    cypress: 10.6.0
+    cypress: 10.7.0
     cypress-dotenv: 2.0.0
     cypress-wait-until: 1.7.2
     dayjs: 1.11.5
     dependency-cruiser: 11.15.0
-    dotenv: 16.0.1
+    dotenv: 16.0.2
     eslint: 8.22.0
     eslint-config-next: 12.2.5
     eslint-config-prettier: 8.5.0
@@ -14320,9 +14320,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cypress@npm:10.6.0":
-  version: 10.6.0
-  resolution: "cypress@npm:10.6.0"
+"cypress@npm:10.7.0":
+  version: 10.7.0
+  resolution: "cypress@npm:10.7.0"
   dependencies:
     "@cypress/request": ^2.88.10
     "@cypress/xvfb": ^1.2.4
@@ -14368,7 +14368,7 @@ __metadata:
     yauzl: ^2.10.0
   bin:
     cypress: bin/cypress
-  checksum: 53993d2d712222df13ef4802db051fee8a7ac59b180ed11b22e6f10d36f5d9b2c2622f1bbfa012f61c7756139287a976abd075275ddd37191b13f40ec8deaa85
+  checksum: ef8a5ae54f3404f7926e1e248ba7a27c7f66e654a9603bf9df6366731d8dd75455f6ec9cc34d7e55e1a8c3cb8e0e36ce59add81b7b14466f2063cfe45e6c00f4
   languageName: node
   linkType: hard
 
@@ -15238,10 +15238,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dotenv@npm:16.0.1":
-  version: 16.0.1
-  resolution: "dotenv@npm:16.0.1"
-  checksum: f459ffce07b977b7f15d8cc4ee69cdff77d4dd8c5dc8c85d2d485ee84655352c2415f9dd09d42b5b5985ced3be186130871b34e2f3e2569ebc72fbc2e8096792
+"dotenv@npm:16.0.2":
+  version: 16.0.2
+  resolution: "dotenv@npm:16.0.2"
+  checksum: ca8f9ca2d67929c7771069f4c31b4e46b9932621009e658e5afd655dde2d69b77642bf36dbc9e72bc170523dfd908a9ee41c26f034c1fdc605ace3b1b4b10faf
   languageName: node
   linkType: hard
 
