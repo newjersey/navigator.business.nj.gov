@@ -5,7 +5,7 @@ imgPath: /img/nudge-icon.svg
 ctaText: ""
 color: accent-cool-darker
 headerBackgroundColor: accent-cool-lighter
-borderColor: accent-cool
+borderColor: info-light
 hasCloseButton: false
 weight: 1
 ---

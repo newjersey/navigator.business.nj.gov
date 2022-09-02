@@ -7,7 +7,7 @@ weight: 3
 imgPath: /img/congratulations-purple.svg
 color: accent-cooler
 headerBackgroundColor: accent-cooler-lightest
-borderColor: accent-cooler
+borderColor: accent-cooler-light
 ---
 
 Welcome to the Navigator, your personalized guide to launch, operate, and grow your business in New Jersey.

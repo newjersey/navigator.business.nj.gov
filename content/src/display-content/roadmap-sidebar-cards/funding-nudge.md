@@ -5,7 +5,7 @@ imgPath: /img/nudge-icon.svg
 ctaText: Hide Tasks & Show Funding
 color: accent-cool-darker
 headerBackgroundColor: accent-cool-lighter
-borderColor: accent-cool
+borderColor: accent-cool-light
 hasCloseButton: false
 weight: 1
 ---
