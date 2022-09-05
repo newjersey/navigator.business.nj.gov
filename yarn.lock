@@ -3597,7 +3597,7 @@ __metadata:
     jsonwebtoken: 8.5.1
     lodash: 4.17.21
     prettier: 2.7.1
-    prettier-plugin-organize-imports: 3.1.0
+    prettier-plugin-organize-imports: 3.1.1
     rimraf: 3.0.2
     serverless: 3.22.0
     serverless-dynamodb-local: 0.2.40
@@ -3777,7 +3777,7 @@ __metadata:
     next: 12.1.6
     next-seo: 5.5.0
     prettier: 2.7.1
-    prettier-plugin-organize-imports: 3.1.0
+    prettier-plugin-organize-imports: 3.1.1
     raw-loader: 4.0.2
     react: 18.2.0
     react-dom: 18.2.0
@@ -3957,7 +3957,7 @@ __metadata:
     next: 12.1.6
     next-seo: 5.5.0
     prettier: 2.7.1
-    prettier-plugin-organize-imports: 3.1.0
+    prettier-plugin-organize-imports: 3.1.1
     raw-loader: 4.0.2
     react: 18.2.0
     react-dom: 18.2.0
@@ -27173,17 +27173,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier-plugin-organize-imports@npm:3.1.0":
-  version: 3.1.0
-  resolution: "prettier-plugin-organize-imports@npm:3.1.0"
+"prettier-plugin-organize-imports@npm:3.1.1":
+  version: 3.1.1
+  resolution: "prettier-plugin-organize-imports@npm:3.1.1"
   peerDependencies:
-    "@volar/vue-typescript": ">=0.39.0"
+    "@volar/vue-typescript": ">=0.40.2"
     prettier: ">=2.0"
     typescript: ">=2.9"
   peerDependenciesMeta:
     "@volar/vue-typescript":
       optional: true
-  checksum: 3b22bf4ec44dd64a4b2e3d958633276c290590c49df440ea9f5b66182925d83979f4f42319ed788d5b5b0ef6d262559f888145c40fc95f29064dcd13f325a3a4
+  checksum: a5776ddf70ba83990c5f97799a57e9844379226c25c5d3e89c072dce3615575aacc1da9c0870b86dcfd4df80df4194971538765f84a168cbb41d36de81740c30
   languageName: node
   linkType: hard
 
