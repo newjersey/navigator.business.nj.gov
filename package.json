@@ -26,8 +26,8 @@
     "verify:node": "check-node-version --node $(cat .nvmrc) --npm 8"
   },
   "dependencies": {
-    "@aws-amplify/auth": "4.6.4",
-    "@aws-amplify/core": "4.7.2",
+    "@aws-amplify/auth": "4.6.5",
+    "@aws-amplify/core": "4.7.3",
     "@aws-crypto/sha256-browser": "2.0.1",
     "@aws-sdk/client-cloudwatch-logs": "3.163.0",
     "@aws-sdk/client-dynamodb": "3.163.0",
