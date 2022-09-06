@@ -248,6 +248,42 @@
       "dependencies": [
         "certificate-good-standing-foreign"
       ]
+    },
+    {
+      "name": "daycare-license",
+      "dependencies": [
+        "register-for-taxes"
+      ]
+    },
+    {
+      "name": "moving-company-license",
+      "dependencies": [
+        "form-business-entity"
+      ]
+    },
+    {
+      "name": "bus-inspection",
+      "dependencies": [
+        "school-bus-insurance"
+      ]
+    },
+    {
+      "name": "transportation-entity-id",
+      "dependencies": [
+        "form-business-entity"
+      ]
+    },
+    {
+      "name": "transportation-inspection",
+      "dependencies": [
+        "transport-insurance"
+      ]
+    },
+    {
+      "name": "transportation-cpcn",
+      "dependencies": [
+        "transportation-entity-id"
+      ]
     }
   ]
 }
