@@ -29,7 +29,7 @@ export const FormationMunicipality = (): ReactElement => {
         value={state.formationFormData.businessAddressCity}
         onSelect={onSelect}
         placeholderText={Config.businessFormationDefaults.notSetBusinessAddressCityLabel}
-        helperText={Config.profileDefaults.STARTING.municipality.errorTextRequired ?? " "}
+        helperText={Config.businessFormationDefaults.addressCityErrorText}
       />
     </div>
   );
