@@ -90,6 +90,12 @@
         "paymentType"
       ],
       "label": "Payment Type"
+    },
+    {
+      "fields": [
+        "businessTotalStock"
+      ],
+      "label": "Stock"
     }
   ],
   "apiErrors": [
