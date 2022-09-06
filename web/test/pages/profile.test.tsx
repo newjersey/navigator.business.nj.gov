@@ -500,7 +500,7 @@ describe("profile", () => {
       clickBack();
       fireEvent.click(screen.getByText(Config.profileDefaults.escapeModalReturn));
       await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith(ROUTES.dashboard));
-      await waitFor(() => expect(() => currentUserData()).toThrowError());
+      await waitFor(() => expect(() => currentUserData()).toThrow());
     });
 
     describe("formation date", () => {
@@ -896,7 +896,7 @@ describe("profile", () => {
       await waitFor(() => {
         expect(mockRouter.mockPush).toHaveBeenCalledWith(ROUTES.dashboard);
       });
-      expect(() => currentUserData()).toThrowError();
+      expect(() => currentUserData()).toThrow();
     });
 
     it("displays business info tab", () => {
