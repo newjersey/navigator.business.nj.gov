@@ -15,7 +15,9 @@ import {
 } from "@/test/mock/withStatefulUserData";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
-jest.mock("next/router");
+jest.mock("next/router", () => ({
+  useRouter: jest.fn(),
+}));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/auth/sessionHelper", () => ({ triggerSignIn: jest.fn() }));
 jest.mock("@/lib/auth/signinHelper", () => ({ onGuestSignIn: jest.fn() }));

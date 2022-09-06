@@ -17,7 +17,9 @@ function setupMockAnalytics(): typeof analytics {
   };
 }
 
-jest.mock("next/router");
+jest.mock("next/router", () => ({
+  useRouter: jest.fn(),
+}));
 jest.mock("@/lib/auth/signinHelper", () => ({ onSelfRegister: jest.fn() }));
 jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));

@@ -32,7 +32,9 @@ function mockMaterialUI(): typeof materialUi {
 const Config = getMergedConfig();
 
 jest.mock("@mui/material", () => mockMaterialUI());
-jest.mock("next/router");
+jest.mock("next/router", () => ({
+  useRouter: jest.fn(),
+}));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 
