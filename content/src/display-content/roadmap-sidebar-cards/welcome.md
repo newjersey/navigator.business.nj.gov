@@ -1,7 +1,7 @@
 ---
 id: welcome
 header: Welcome!
-hasCloseButton: false
+hasCloseButton: true
 ctaText: ""
 weight: 3
 imgPath: /img/congratulations-purple.svg
