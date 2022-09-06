@@ -3626,7 +3626,7 @@ __metadata:
     serverless: 3.22.0
     serverless-dynamodb-local: 0.2.40
     serverless-http: 3.0.2
-    serverless-offline: 9.2.6
+    serverless-offline: 10.0.0
     serverless-offline-ssm: 6.2.0
     serverless-webpack: 5.9.0
     simple-oauth2: 4.3.0
@@ -3819,7 +3819,7 @@ __metadata:
     serverless: 3.22.0
     serverless-dynamodb-local: 0.2.40
     serverless-http: 3.0.2
-    serverless-offline: 9.2.6
+    serverless-offline: 10.0.0
     serverless-offline-ssm: 6.2.0
     serverless-webpack: 5.9.0
     simple-oauth2: 4.3.0
@@ -11442,9 +11442,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"aws-sdk@npm:^2.1195.0, aws-sdk@npm:^2.7.0":
-  version: 2.1209.0
-  resolution: "aws-sdk@npm:2.1209.0"
+"aws-sdk@npm:^2.1195.0, aws-sdk@npm:^2.1209.0, aws-sdk@npm:^2.7.0":
+  version: 2.1210.0
+  resolution: "aws-sdk@npm:2.1210.0"
   dependencies:
     buffer: 4.9.2
     events: 1.1.1
@@ -11456,7 +11456,7 @@ __metadata:
     util: ^0.12.4
     uuid: 8.0.0
     xml2js: 0.4.19
-  checksum: da4cae7da28b218dfa67398e5a63acb894b1636337e2842f6e0800bad6eb5fc692d0b703dc84f67fdc9f1d59ee9f82f4ccc9d71fe8fb6a49a8292697ab77b92c
+  checksum: 3f90e2035930b39c07c5634d693dac8777c196ed015954401c982399fd299525274e4db06e26a814955b4b14f1fc9caee41a8d71c3820aa2953e7797ab07f78c
   languageName: node
   linkType: hard
 
@@ -21527,7 +21527,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jsonpath-plus@npm:^7.0.0":
+"jsonpath-plus@npm:^7.2.0":
   version: 7.2.0
   resolution: "jsonpath-plus@npm:7.2.0"
   checksum: 05f447339d29be861e307d6e812aec1b9b88a3ba6bba286966a4e8bed3e752bee3d715eabfc21dce968be85ccb48bf79d2c1af78da7b9b74cd1b446d4d5d02f5
@@ -22860,7 +22860,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"luxon@npm:^3.0.1":
+"luxon@npm:^3.0.3":
   version: 3.0.3
   resolution: "luxon@npm:3.0.3"
   checksum: 67d143f102f520761c4202086579a5cf30b230ea299da27cacb31e9f9d372cadef90f14cbe7e2621b70825b267fe00128b8176ed8b7172b48f77a403a662d5aa
@@ -30312,26 +30312,26 @@ __metadata:
   languageName: node
   linkType: hard
 
-"serverless-offline@npm:9.2.6":
-  version: 9.2.6
-  resolution: "serverless-offline@npm:9.2.6"
+"serverless-offline@npm:10.0.0":
+  version: 10.0.0
+  resolution: "serverless-offline@npm:10.0.0"
   dependencies:
     "@hapi/boom": ^10.0.0
     "@hapi/h2o2": ^9.1.0
     "@hapi/hapi": ^20.2.2
     "@serverless/utils": ^6.7.0
-    aws-sdk: ^2.1195.0
+    aws-sdk: ^2.1209.0
     boxen: ^7.0.0
     chalk: ^5.0.1
     execa: ^6.1.0
     fs-extra: ^10.1.0
     java-invoke-local: 0.0.6
     js-string-escape: ^1.0.1
-    jsonpath-plus: ^7.0.0
+    jsonpath-plus: ^7.2.0
     jsonschema: ^1.4.1
     jsonwebtoken: ^8.5.1
     jszip: ^3.10.1
-    luxon: ^3.0.1
+    luxon: ^3.0.3
     node-fetch: ^3.2.10
     node-schedule: ^2.1.0
     object.hasown: ^1.1.1
@@ -30341,7 +30341,7 @@ __metadata:
     ws: ^8.8.1
   peerDependencies:
     serverless: ^3.2.0
-  checksum: d395e27155376e8f5691e90ce2ad86f0642417eae4721f6223a924231d94ff816f6194c1593ae163fc39b28b3b295aad0967dd322701598eb01e1be7a79e4c6a
+  checksum: a3ed541e82cee92efbb5436d8f5709e1c553a76d2166ee9248771b4d2352f2185407187d1c79c993cc18629f62109407a4e459946c7f79008b95eea6717fae16
   languageName: node
   linkType: hard
 
