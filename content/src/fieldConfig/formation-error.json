@@ -144,7 +144,7 @@
         "signers"
       ],
       "type": "name",
-      "label": "Signer field is empty",
+      "label": "Signer field is empty.",
       "priority": 1
     },
     {
