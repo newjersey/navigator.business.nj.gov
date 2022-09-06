@@ -8,7 +8,7 @@ required: true
 issuingAgency: New Jersey Division of Revenue and Enterprise Services
 formName: NJ-Reg
 ---
-It's time to register your business for State taxes. Doing so will tell the State more about your business and determine what taxes and employer contributions you're liable for.
+It's time to register your business for State taxes. Doing so will tell the State more about your business and determine the taxes and employer contributions you're responsible for.
 
 - - -
 
