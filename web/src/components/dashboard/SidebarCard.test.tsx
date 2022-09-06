@@ -7,7 +7,9 @@ import { render, screen } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("next/router");
+jest.mock("next/router", () => ({
+  useRouter: jest.fn(),
+}));
 
 describe("<SidebarCard />", () => {
   beforeEach(() => {

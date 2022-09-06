@@ -8,10 +8,11 @@ import * as materialUi from "@mui/material";
 import { useMediaQuery } from "@mui/material";
 import { fireEvent, render, screen } from "@testing-library/react";
 
-jest.mock("next/router");
 jest.mock("@/lib/api-client/apiClient", () => ({ postSelfReg: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("next/router");
+jest.mock("next/router", () => ({
+  useRouter: jest.fn(),
+}));
 jest.mock("@/lib/auth/sessionHelper", () => ({ triggerSignIn: jest.fn() }));
 
 function mockMaterialUI(): typeof materialUi {

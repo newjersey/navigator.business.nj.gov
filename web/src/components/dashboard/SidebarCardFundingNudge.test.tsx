@@ -18,7 +18,9 @@ import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, within } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("next/router");
+jest.mock("next/router", () => ({
+  useRouter: jest.fn(),
+}));
 
 const Config = getMergedConfig();
 

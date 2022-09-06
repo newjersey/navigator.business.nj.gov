@@ -19,7 +19,9 @@ import {
 import { createEmptyUserData, getCurrentDate, ProfileData } from "@businessnjgovnavigator/shared/";
 import { act, fireEvent, screen, waitFor, within } from "@testing-library/react";
 
-jest.mock("next/router");
+jest.mock("next/router", () => ({
+  useRouter: jest.fn(),
+}));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({

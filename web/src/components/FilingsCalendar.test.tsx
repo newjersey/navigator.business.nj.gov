@@ -31,7 +31,9 @@ function mockMaterialUI(): typeof materialUi {
 
 jest.mock("@mui/material", () => mockMaterialUI());
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("next/router");
+jest.mock("next/router", () => ({
+  useRouter: jest.fn(),
+}));
 
 const renderFilingsCalendar = (
   operateReferences: Record<string, OperateReference>,
