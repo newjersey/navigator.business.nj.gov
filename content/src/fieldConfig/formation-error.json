@@ -84,6 +84,12 @@
         "agentOfficeAddressZipCode"
       ],
       "label": "Zip Code"
+    },
+    {
+      "fields": [
+        "paymentType"
+      ],
+      "label": "Payment Type"
     }
   ],
   "apiErrors": [
