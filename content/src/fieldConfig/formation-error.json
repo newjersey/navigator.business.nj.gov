@@ -96,6 +96,12 @@
         "businessTotalStock"
       ],
       "label": "Stock"
+    },
+    {
+      "fields": [
+        "agentNumber"
+      ],
+      "label": "Registered Agent ID Number"
     }
   ],
   "apiErrors": [
