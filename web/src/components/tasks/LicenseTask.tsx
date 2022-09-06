@@ -108,20 +108,18 @@ export const LicenseTask = (props: Props): ReactElement => {
               <TabList
                 onChange={onSelectTab}
                 aria-label="License task"
-                sx={{ borderBottom: 0, borderColor: "divider", marginTop: ".25rem" }}
+                sx={{ borderBottom: 1, borderColor: "divider", marginTop: ".25rem", marginLeft: ".5rem" }}
               >
-                <Box role="tab" sx={{ border: 0, borderColor: "divider", width: ".5rem" }} />
                 <Tab
                   value="0"
-                  sx={{ border: 1, borderColor: "divider" }}
+                  sx={{ border: 1, borderBottom: 0, borderColor: "divider" }}
                   label={Config.licenseSearchTask.tab1Text}
                 />
                 <Tab
                   value="1"
-                  sx={{ border: 1, borderColor: "divider" }}
+                  sx={{ border: 1, borderBottom: 0, borderColor: "divider" }}
                   label={Config.licenseSearchTask.tab2Text}
                 />
-                <Box sx={{ borderBottom: 1, borderColor: "divider", width: "100%" }} />
               </TabList>
             </Box>
             <TabPanel value="0" sx={{ paddingX: 0 }}>
