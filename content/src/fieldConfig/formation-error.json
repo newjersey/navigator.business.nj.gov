@@ -66,6 +66,24 @@
         "businessAddressCity"
       ],
       "label": "City"
+    },
+    {
+      "fields": [
+        "agentOfficeAddressLine1"
+      ],
+      "label": "Office Address Line 1"
+    },
+    {
+      "fields": [
+        "agentOfficeAddressCity"
+      ],
+      "label": "City"
+    },
+    {
+      "fields": [
+        "agentOfficeAddressZipCode"
+      ],
+      "label": "Zip Code"
     }
   ],
   "apiErrors": [
