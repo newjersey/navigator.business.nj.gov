@@ -60,6 +60,12 @@
         "contactPhoneNumber"
       ],
       "label": "Phone Number"
+    },
+    {
+      "fields": [
+        "businessAddressCity"
+      ],
+      "label": "City"
     }
   ],
   "apiErrors": [
