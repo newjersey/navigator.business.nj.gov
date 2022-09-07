@@ -456,31 +456,54 @@ export default {
         },
       },
     },
+    business_formation_name_step: {
+      arrive: {
+        arrive_on_business_formation_name_step: () => {
+          sendEvent("business_formation_name_step", "arrive", "arrive_on_business_formation_name_step");
+        },
+      },
+    },
+    business_formation_name_step_continue_button: {
+      click: {
+        arrive_on_business_formation_business_step: () => {
+          sendEvent(
+            "business_formation_name_step_continue_button",
+            "click",
+            "arrive_on_business_formation_business_step"
+          );
+        },
+      },
+    },
     business_formation_business_step_continue_button: {
       click: {
-        go_to_next_formation_step: () => {
-          sendEvent("business_formation_business_step_continue_button", "click", "go_to_next_formation_step");
+        arrive_on_business_formation_contacts_step: () => {
+          sendEvent(
+            "business_formation_business_step_continue_button",
+            "click",
+            "arrive_on_business_formation_contacts_step"
+          );
         },
       },
     },
     business_formation_contacts_step_continue_button: {
       click: {
-        go_to_next_formation_step: () => {
-          sendEvent("business_formation_contacts_step_continue_button", "click", "go_to_next_formation_step");
-        },
-      },
-    },
-    business_formation_review_step_continue_button: {
-      click: {
-        go_to_next_formation_step: () => {
-          sendEvent("business_formation_review_step_continue_button", "click", "go_to_next_formation_step");
+        arrive_on_business_formation_billing_step: () => {
+          sendEvent(
+            "business_formation_contacts_step_continue_button",
+            "click",
+            "arrive_on_business_formation_billing_step"
+          );
         },
       },
     },
     business_formation_billing_step_continue_button: {
       click: {
-        go_to_next_formation_step: () => {
-          sendEvent("business_formation_billing_step_continue_button", "click", "go_to_next_formation_step");
+        arrive_on_business_formation_review_step: () => {
+          sendEvent(
+            "business_formation_billing_step_continue_button",
+            "click",
+            "arrive_on_business_formation_review_step"
+          );
         },
       },
     },
@@ -520,13 +543,6 @@ export default {
         },
       },
     },
-    business_formation_name_step_continue_button: {
-      click: {
-        go_to_next_formation_step: () => {
-          sendEvent("business_formation_name_step_continue_button", "click", "go_to_next_formation_step");
-        },
-      },
-    },
     business_formation_members: {
       submit: {
         members_submitted_with_formation: (number) => {
@@ -552,6 +568,41 @@ export default {
       submit: {
         purpose_submitted_with_formation: () => {
           sendEvent("business_formation_purpose", "submit", "purpose_submitted_with_formation");
+        },
+      },
+    },
+    business_formation_name_tab: {
+      click: {
+        arrive_on_business_formation_name_step: () => {
+          sendEvent("business_formation_name_tab", "click", "arrive_on_business_formation_name_step");
+        },
+      },
+    },
+    business_formation_business_tab: {
+      click: {
+        arrive_on_business_formation_business_step: () => {
+          sendEvent("business_formation_business_tab", "click", "arrive_on_business_formation_business_step");
+        },
+      },
+    },
+    business_formation_contacts_tab: {
+      click: {
+        arrive_on_business_formation_contacts_step: () => {
+          sendEvent("business_formation_contacts_tab", "click", "arrive_on_business_formation_contacts_step");
+        },
+      },
+    },
+    business_formation_billing_tab: {
+      click: {
+        arrive_on_business_formation_billing_step: () => {
+          sendEvent("business_formation_billing_tab", "click", "arrive_on_business_formation_billing_step");
+        },
+      },
+    },
+    business_formation_review_tab: {
+      click: {
+        arrive_on_business_formation_review_step: () => {
+          sendEvent("business_formation_review_tab", "click", "arrive_on_business_formation_review_step");
         },
       },
     },

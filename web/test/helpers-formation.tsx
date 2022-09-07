@@ -1,4 +1,5 @@
 import { BusinessFormation } from "@/components/tasks/business-formation/BusinessFormation";
+import { LookupTabIndexByName } from "@/components/tasks/business-formation/BusinessFormationTabsConfiguration";
 import * as api from "@/lib/api-client/apiClient";
 import { FormationDisplayContentMap, NameAvailability, Task } from "@/lib/types/types";
 import {
@@ -29,7 +30,7 @@ import {
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import { act, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 
-function flushPromises() {
+export function flushPromises() {
   return new Promise((resolve) => process.nextTick(resolve));
 }
 
@@ -104,10 +105,19 @@ export const setDesktopScreen = (value: boolean): void => {
 
 export type FormationPageHelpers = {
   fillText: (label: string, value: string) => void;
-  submitBusinessNameTab: (businessName?: string) => Promise<void>;
+  fillAndSubmitBusinessNameTab: (businessName?: string) => Promise<void>;
+  completeRequiredBillingFields: () => void;
+  submitBusinessNameTab: () => Promise<void>;
   submitBusinessTab: (completed?: boolean) => Promise<void>;
   submitContactsTab: (completed?: boolean) => Promise<void>;
+  submitBillingTab: () => Promise<void>;
   submitReviewTab: () => Promise<void>;
+  stepperClickToBusinessNameTab: () => Promise<void>;
+  stepperClickToBusinessTab: () => Promise<void>;
+  stepperClickToContactsTab: () => Promise<void>;
+  stepperClickToBillingTab: () => Promise<void>;
+  stepperClickToReviewTab: () => Promise<void>;
+  getStepperTabState: (index: number) => string;
   searchBusinessName: (nameAvailability: Partial<NameAvailability>) => Promise<void>;
   searchBusinessNameAndGetError: (errorCode?: number) => Promise<void>;
   chooseRadio: (value: string) => void;
@@ -134,12 +144,58 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     fireEvent.blur(item);
   };
 
-  const submitBusinessNameTab = async (businessName = "Default Test Name"): Promise<void> => {
+  const fillAndSubmitBusinessNameTab = async (businessName = "Default Test Name"): Promise<void> => {
     fillText("Search business name", businessName);
     await searchBusinessName({ status: "AVAILABLE" });
 
     fireEvent.click(screen.getByText(Config.businessFormationDefaults.initialNextButtonText));
 
+    await waitFor(() => {
+      expect(screen.queryByTestId("business-section")).toBeInTheDocument();
+    });
+  };
+
+  const stepperClickToBusinessNameTab = async (): Promise<void> => {
+    fireEvent.click(screen.getByTestId(`stepper-${LookupTabIndexByName("Name")}`));
+    await waitFor(() => {
+      expect(screen.queryByTestId("business-name-section")).toBeInTheDocument();
+    });
+  };
+
+  const stepperClickToBusinessTab = async (): Promise<void> => {
+    fireEvent.click(screen.getByTestId(`stepper-${LookupTabIndexByName("Business")}`));
+    await waitFor(() => {
+      expect(screen.queryByTestId("business-section")).toBeInTheDocument();
+    });
+  };
+
+  const stepperClickToContactsTab = async (): Promise<void> => {
+    fireEvent.click(screen.getByTestId(`stepper-${LookupTabIndexByName("Contacts")}`));
+    await waitFor(() => {
+      expect(screen.queryByTestId("contacts-section")).toBeInTheDocument();
+    });
+  };
+
+  const stepperClickToBillingTab = async (): Promise<void> => {
+    fireEvent.click(screen.getByTestId(`stepper-${LookupTabIndexByName("Billing")}`));
+    await waitFor(() => {
+      expect(screen.queryByTestId("payment-section")).toBeInTheDocument();
+    });
+  };
+
+  const stepperClickToReviewTab = async (): Promise<void> => {
+    fireEvent.click(screen.getByTestId(`stepper-${LookupTabIndexByName("Review")}`));
+    await waitFor(() => {
+      expect(screen.queryByTestId("review-section")).toBeInTheDocument();
+    });
+  };
+
+  const getStepperTabState = (index: number): string => {
+    return screen.getByTestId(`stepper-${index}`).dataset.state || "";
+  };
+
+  const submitBusinessNameTab = async (): Promise<void> => {
+    fireEvent.click(screen.getByText(Config.businessFormationDefaults.initialNextButtonText));
     await waitFor(() => {
       expect(screen.queryByTestId("business-section")).toBeInTheDocument();
     });
@@ -162,15 +218,22 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
 
     if (completed)
       await waitFor(() => {
-        expect(screen.queryByTestId("review-section")).toBeInTheDocument();
+        expect(screen.queryByTestId("payment-section")).toBeInTheDocument();
       });
   };
 
-  const submitReviewTab = async (): Promise<void> => {
+  const submitBillingTab = async (): Promise<void> => {
     fireEvent.click(screen.getByText(Config.businessFormationDefaults.nextButtonText));
 
     await waitFor(() => {
-      expect(screen.queryByTestId("payment-section")).toBeInTheDocument();
+      expect(screen.queryByTestId("review-section")).toBeInTheDocument();
+    });
+  };
+
+  const submitReviewTab = async (): Promise<void> => {
+    fireEvent.click(screen.getByText(Config.businessFormationDefaults.submitButtonText));
+    await act(async () => {
+      await flushPromises();
     });
   };
 
@@ -270,11 +333,20 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     fireEvent.blur(screen.getByLabelText("Business start date"));
   };
 
+  const completeRequiredBillingFields = () => {
+    fireEvent.click(screen.getByLabelText("Credit card"));
+    fillText("Contact first name", "John");
+    fillText("Contact last name", "Smith");
+    fillText("Contact phone number", "1234567890");
+  };
+
   return {
     fillText,
+    fillAndSubmitBusinessNameTab,
     submitBusinessNameTab,
     submitBusinessTab,
     submitContactsTab,
+    submitBillingTab,
     submitReviewTab,
     searchBusinessName,
     searchBusinessNameAndGetError,
@@ -291,5 +363,12 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     fillAndSubmitAddressModal,
     clickSubmit,
     selectDate,
+    stepperClickToBusinessNameTab,
+    stepperClickToBusinessTab,
+    stepperClickToContactsTab,
+    stepperClickToBillingTab,
+    stepperClickToReviewTab,
+    getStepperTabState,
+    completeRequiredBillingFields,
   };
 };

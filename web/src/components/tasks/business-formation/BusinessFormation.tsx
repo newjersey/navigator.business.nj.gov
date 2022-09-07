@@ -1,12 +1,10 @@
 import { Content } from "@/components/Content";
 import { LoadingIndicator } from "@/components/LoadingIndicator";
 import { Alert } from "@/components/njwds-extended/Alert";
-import { HorizontalStepper } from "@/components/njwds-extended/HorizontalStepper";
 import { TaskCTA } from "@/components/TaskCTA";
 import { TaskHeader } from "@/components/TaskHeader";
-import { BusinessFormationAlert } from "@/components/tasks/business-formation/BusinessFormationAlert";
+import { BusinessFormationPaginator } from "@/components/tasks/business-formation/BusinessFormationPaginator";
 import { BusinessFormationTabs } from "@/components/tasks/business-formation/BusinessFormationTabs";
-import { BusinessFormationTabsConfiguration } from "@/components/tasks/business-formation/BusinessFormationTabsConfiguration";
 import { FormationSuccessPage } from "@/components/tasks/business-formation/success/FormationSuccessPage";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
@@ -15,7 +13,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { splitFullName } from "@/lib/domain-logic/splitFullName";
-import { FormationDisplayContentMap, FormationFieldErrorMap, Task } from "@/lib/types/types";
+import { FormationDisplayContentMap, NameAvailability, Task } from "@/lib/types/types";
 import { getModifiedTaskContent, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import {
   createEmptyFormationFormData,
@@ -52,14 +50,6 @@ interface Props {
   municipalities: Municipality[];
 }
 
-const allFormationFormFields = Object.keys(createEmptyFormationFormData()) as (keyof FormationFormData)[];
-
-const createFormationFieldErrorMap = (): FormationFieldErrorMap =>
-  allFormationFormFields.reduce((acc, field: FormationFields) => {
-    acc[field] = { invalid: false, name: field };
-    return acc;
-  }, {} as FormationFieldErrorMap);
-
 export const BusinessFormation = (props: Props): ReactElement => {
   const { roadmap } = useRoadmap();
   const { userData, update } = useUserData();
@@ -69,30 +59,30 @@ export const BusinessFormation = (props: Props): ReactElement => {
   const [formationFormData, setFormationFormData] = useState<FormationFormData>(
     createEmptyFormationFormData()
   );
-  const [tab, updateTab] = useState(0);
-  const [errorMap, setErrorMap] = useState<FormationFieldErrorMap>(createFormationFieldErrorMap());
+  const [tab, setTab] = useState(0);
+  const [interactedFields, setInteractedFields] = useState<FormationFields[]>([]);
   const [showResponseAlert, setShowResponseAlert] = useState<boolean>(false);
   const [isLoadingGetFiling, setIsLoadingGetFiling] = useState<boolean>(false);
-  const [showErrors, setShowErrors] = useState<boolean>(false);
+  const [hasBeenSubmitted, setHasBeenSubmitted] = useState<boolean>(false);
+  const [businessNameAvailability, _setBusinessNameAvailability] = useState<NameAvailability | undefined>(
+    undefined
+  );
+  const [hasBusinessNameBeenSearched, setHasBusinessNameBeenSearched] = useState<boolean>(false);
   const getCompletedFilingApiCallOccurred = useRef<boolean>(false);
 
-  const setTab = (tabNumber: number) => {
-    updateTab(tabNumber);
-    setShowErrors(false);
-  };
-  const fieldsAreInvalid = (fields: FormationFields[]) =>
-    fields.map((i) => errorMap[i]).some((i) => i.invalid);
   const isValidLegalStructure = allowFormation(userData?.profileData.legalStructureId);
+
+  const setBusinessNameAvailability = (nameAvailability: NameAvailability | undefined) => {
+    _setBusinessNameAvailability(nameAvailability);
+    if (nameAvailability !== undefined && !hasBusinessNameBeenSearched) {
+      setHasBusinessNameBeenSearched(true);
+    }
+  };
 
   const getDate = (date?: string): string =>
     !date || parseDateWithFormat(date, "YYYY-MM-DD").isBefore(getCurrentDate())
       ? getCurrentDateFormatted("YYYY-MM-DD")
       : date;
-
-  const stepNames = BusinessFormationTabsConfiguration.map((value) => ({
-    name: value.name,
-    hasError: false,
-  }));
 
   useMountEffectWhenDefined(() => {
     if (!userData) return;
@@ -150,6 +140,16 @@ export const BusinessFormation = (props: Props): ReactElement => {
     () => (userData?.profileData.legalStructureId ?? defaultFormationLegalType) as FormationLegalType,
     [userData?.profileData.legalStructureId]
   );
+
+  const setFieldInteracted = (field: FormationFields, config?: { setToUninteracted: boolean }) => {
+    setInteractedFields((prevState) => {
+      const prevStateFieldRemoved = prevState.filter((it) => it !== field);
+      if (config?.setToUninteracted) {
+        return [...prevStateFieldRemoved];
+      }
+      return [...prevStateFieldRemoved, field];
+    });
+  };
 
   if (!isValidLegalStructure) {
     return (
@@ -214,16 +214,18 @@ export const BusinessFormation = (props: Props): ReactElement => {
           formationFormData: formationFormData,
           displayContent: props.displayContent[legalStructureId],
           municipalities: props.municipalities,
-          errorMap: errorMap,
-          showErrors,
           showResponseAlert: showResponseAlert,
+          interactedFields,
+          hasBeenSubmitted,
+          businessNameAvailability,
+          hasBusinessNameBeenSearched,
         },
         setFormationFormData,
-        setErrorMap,
         setTab,
-        fieldsAreInvalid,
-        setShowErrors,
         setShowResponseAlert,
+        setFieldInteracted,
+        setHasBeenSubmitted,
+        setBusinessNameAvailability,
       }}
     >
       <div className="flex flex-column  minh-38">
@@ -238,16 +240,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
             </>
           )}
         </div>
-        <BusinessFormationAlert showErrors={showErrors} errorData={errorMap} />
-        <div className="margin-top-3">
-          <HorizontalStepper steps={stepNames} currentStep={tab} />
-        </div>
-        <div className="display-block">
-          <hr className="margin-bottom-4" />
-        </div>
-        <div data-testid="formation-form" className="fg1 flex flex-column space-between">
-          {BusinessFormationTabs[tab].component}
-        </div>
+        <BusinessFormationPaginator>{BusinessFormationTabs[tab].component}</BusinessFormationPaginator>
       </div>
     </BusinessFormationContext.Provider>
   );

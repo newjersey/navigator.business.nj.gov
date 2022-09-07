@@ -9,6 +9,7 @@ import { ReactElement, useContext } from "react";
 export const ReviewRegisteredAgent = (): ReactElement => {
   const { state, setTab } = useContext(BusinessFormationContext);
   const headerLevelTwo = setHeaderRole(2, "h3-styling");
+  const italicNotEnteredText = `*${Config.businessFormationDefaults.reviewPageNotEnteredText}*`;
 
   return (
     <>
@@ -22,7 +23,7 @@ export const ReviewRegisteredAgent = (): ReactElement => {
           <Button
             style="tertiary"
             onClick={() => {
-              setTab(LookupTabIndexByName("Business"));
+              setTab(LookupTabIndexByName("Contacts"));
               scrollToTop();
             }}
             underline
@@ -37,7 +38,11 @@ export const ReviewRegisteredAgent = (): ReactElement => {
           <div className="text-bold width-11rem">
             <Content>{Config.businessFormationDefaults.reviewPageRegisteredAgentNumberLabel}</Content>
           </div>
-          <div>{state.formationFormData.agentNumber}</div>
+          <div>
+            {state.formationFormData.agentNumber || (
+              <i>{Config.businessFormationDefaults.reviewPageNotEnteredText}</i>
+            )}
+          </div>
         </div>
       )}
       {state.formationFormData.agentNumberOrManual === "MANUAL_ENTRY" && (
@@ -46,27 +51,35 @@ export const ReviewRegisteredAgent = (): ReactElement => {
             <div className="text-bold width-11rem">
               <Content>{Config.businessFormationDefaults.reviewPageRegisteredAgentNameLabel}</Content>
             </div>
-            <div>{state.formationFormData.agentName}</div>
+            <div>
+              {state.formationFormData.agentName || (
+                <i>{Config.businessFormationDefaults.reviewPageNotEnteredText}</i>
+              )}
+            </div>
           </div>
           <div className="display-block tablet:display-flex margin-top-1">
             <div className="text-bold width-11rem">
               <Content>{Config.businessFormationDefaults.reviewPageEmailLabel}</Content>
             </div>
-            <div>{state.formationFormData.agentEmail}</div>
+            <div>
+              {state.formationFormData.agentEmail || (
+                <i>{Config.businessFormationDefaults.reviewPageNotEnteredText}</i>
+              )}
+            </div>
           </div>
           <div className="display-block tablet:display-flex margin-top-1">
             <div className="text-bold width-11rem">
               <Content>{Config.businessFormationDefaults.reviewPageAddressLabel}</Content>
             </div>
-            <div>
+            <Content>
               {getStringifiedAddress(
-                state.formationFormData.agentOfficeAddressLine1,
-                state.formationFormData.agentOfficeAddressCity,
-                state.formationFormData.agentOfficeAddressState,
-                state.formationFormData.agentOfficeAddressZipCode,
+                state.formationFormData.agentOfficeAddressLine1 || italicNotEnteredText,
+                state.formationFormData.agentOfficeAddressCity || italicNotEnteredText,
+                state.formationFormData.agentOfficeAddressState || italicNotEnteredText,
+                state.formationFormData.agentOfficeAddressZipCode || italicNotEnteredText,
                 state.formationFormData.agentOfficeAddressLine2
               )}
-            </div>
+            </Content>
           </div>
         </div>
       )}

@@ -141,7 +141,7 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
                   className="fg1 width-100"
                   margin="dense"
                   value={currentName}
-                  onChange={updateCurrentName}
+                  onChange={(event) => updateCurrentName(event.target.value)}
                   variant="outlined"
                   placeholder={props.config.inputPlaceholderText}
                   inputProps={{

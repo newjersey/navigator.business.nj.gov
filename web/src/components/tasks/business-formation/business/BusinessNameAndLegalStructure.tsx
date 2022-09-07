@@ -8,7 +8,6 @@ import analytics from "@/lib/utils/analytics";
 import { scrollToTop, setHeaderRole } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { FormationLegalType, LookupLegalStructureById } from "@businessnjgovnavigator/shared/";
-import { FormHelperText } from "@mui/material";
 import { useRouter } from "next/router";
 import { ReactElement, useContext, useState } from "react";
 
@@ -18,7 +17,7 @@ interface Props {
 
 export const BusinessNameAndLegalStructure = ({ reviewPage = false }: Props): ReactElement => {
   const [legalStructureWarningIsOpen, setLegalStructureWarningIsOpen] = useState<boolean>(false);
-  const { state, setTab } = useContext(BusinessFormationContext);
+  const { setTab } = useContext(BusinessFormationContext);
   const { userData } = useUserData();
   const router = useRouter();
 
@@ -73,11 +72,7 @@ export const BusinessNameAndLegalStructure = ({ reviewPage = false }: Props): Re
         </div>
       </div>
 
-      <div
-        className={`min-height-575rem bg-base-lightest margin-bottom-1 display-block tablet:display-flex tablet:flex-row ${
-          state.errorMap["businessName"].invalid && "radius-md border-1px border-error"
-        }`}
-      >
+      <div className="min-height-575rem bg-base-lightest margin-bottom-1 display-block tablet:display-flex tablet:flex-row">
         <div className="padding-205 flex-half">
           <Content>{Config.businessFormationDefaults.reviewPageBusinessNameLabel}</Content>
           <span className="text-accent-cool-darker">
@@ -117,10 +112,6 @@ export const BusinessNameAndLegalStructure = ({ reviewPage = false }: Props): Re
           )}
         </div>
       </div>
-      <FormHelperText id={"businessNameAndLegalStructure"} className="Mui-error">
-        {state.errorMap["businessName"].invalid &&
-          Config.businessFormationDefaults.notSetBusinessNameErrorText}
-      </FormHelperText>
       <ModalTwoButton
         isOpen={legalStructureWarningIsOpen}
         close={() => setLegalStructureWarningIsOpen(false)}

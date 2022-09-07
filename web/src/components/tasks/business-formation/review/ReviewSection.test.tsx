@@ -58,36 +58,34 @@ describe("Formation - ReviewSection", () => {
       generateFormationDisplayContent({})
     );
 
-    await page.submitBusinessNameTab();
-    await page.submitBusinessTab();
-    await page.submitContactsTab();
+    await page.stepperClickToReviewTab();
   };
 
-  it("displays the first tab when the edit button in the main business section is clicked", async () => {
+  it("displays the business step when the edit button in the main business section is clicked", async () => {
     await renderSection({}, {});
     fireEvent.click(screen.getByTestId("edit-business-name-section"));
     expect(screen.getByTestId("business-section")).toBeInTheDocument();
   });
 
-  it("displays the first tab when the edit button in the location section is clicked", async () => {
+  it("displays the business step when the edit button in the location section is clicked", async () => {
     await renderSection({}, {});
     fireEvent.click(screen.getByTestId("edit-location-section"));
     expect(screen.getByTestId("business-section")).toBeInTheDocument();
   });
 
-  it("displays the first tab when the edit button in the registered agent section is clicked", async () => {
+  it("displays the contacts step when the edit button in the registered agent section is clicked", async () => {
     await renderSection({}, {});
     fireEvent.click(screen.getByTestId("edit-registered-agent-section"));
-    expect(screen.getByTestId("business-section")).toBeInTheDocument();
+    expect(screen.getByTestId("contacts-section")).toBeInTheDocument();
   });
 
-  it("displays the first tab when the edit button in the business purpose section is clicked", async () => {
+  it("displays the business step when the edit button in the business purpose section is clicked", async () => {
     await renderSection({}, { businessPurpose: "some purpose" });
     fireEvent.click(screen.getByTestId("edit-business-purpose"));
     expect(screen.getByTestId("business-section")).toBeInTheDocument();
   });
 
-  it("displays the first tab when the edit button in the provisions section is clicked", async () => {
+  it("displays the business step when the edit button in the provisions section is clicked", async () => {
     await renderSection({}, { provisions: ["some provision"] });
     fireEvent.click(screen.getByTestId("edit-provisions"));
     expect(screen.getByTestId("business-section")).toBeInTheDocument();

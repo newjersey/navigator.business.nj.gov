@@ -1,6 +1,6 @@
 import { Content } from "@/components/Content";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
-import { useMountEffect } from "@/lib/utils/helpers";
+import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import {
   advancedDateLibrary,
@@ -15,16 +15,12 @@ import { ReactElement, useContext } from "react";
 advancedDateLibrary();
 
 export const FormationStartDate = (): ReactElement => {
-  const { state, setFormationFormData, setErrorMap } = useContext(BusinessFormationContext);
-
-  useMountEffect(() => {
-    if (!state.formationFormData.businessStartDate) {
-      setErrorMap({ ...state.errorMap, businessStartDate: { invalid: true } });
-    }
-  });
+  const FIELD_NAME = "businessStartDate";
+  const { state, setFormationFormData, setFieldInteracted } = useContext(BusinessFormationContext);
+  const { doesFieldHaveError } = useFormationErrors();
 
   const handleChange = (value: string) => {
-    setErrorMap({ ...state.errorMap, businessStartDate: { invalid: !value } });
+    setFieldInteracted(FIELD_NAME);
     setFormationFormData({
       ...state.formationFormData,
       businessStartDate: value,
@@ -50,18 +46,13 @@ export const FormationStartDate = (): ReactElement => {
               if (newValue) handleChange(newValue.format("YYYY-MM-DD"));
               if (newValue === null) handleChange("");
             }}
-            onError={(hasError: string | null) => {
-              setErrorMap({ ...state.errorMap, businessStartDate: { invalid: !!hasError } });
-            }}
             renderInput={(params) => (
               <TextField
                 {...params}
                 variant="outlined"
                 fullWidth
                 helperText={
-                  state.errorMap["businessStartDate"].invalid
-                    ? Config.businessFormationDefaults.startDateErrorText
-                    : " "
+                  doesFieldHaveError(FIELD_NAME) ? Config.businessFormationDefaults.startDateErrorText : " "
                 }
                 inputProps={{
                   ...params.inputProps,

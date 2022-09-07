@@ -217,125 +217,6 @@ collections:
       - { label: "Header", name: "header", widget: "string" }
       - { label: "Content", name: "body", widget: "markdown" }
       - { label: "Filename", name: "slug", widget: "slug", required: false }
-  - name: "formation-settings"
-    label: "Business Formation Settings"
-    editor:
-      preview: false
-    files:
-      - label: "Formation Errors"
-        name: "formationErrors"
-        file: "content/src/fieldConfig/formation-error.json"
-        fields:
-          - label: Errors
-            name: formationErrors
-            widget: list
-            summary: "{{fields}} {{type}}"
-            fields:
-              - label: Fields
-                name: fields
-                widget: select
-                multiple: true
-                options:
-                  [
-                    businessName,
-                    businessSuffix,
-                    businessTotalStock,
-                    businessStartDate,
-                    businessAddressCity,
-                    businessAddressLine1,
-                    businessAddressZipCode,
-                    withdrawals,
-                    dissolution,
-                    combinedInvestment,
-                    canCreateLimitedPartner,
-                    createLimitedPartnerTerms,
-                    canGetDistribution,
-                    getDistributionTerms,
-                    canMakeDistribution,
-                    makeDistributionTerms,
-                    agentNumberOrManual,
-                    agentNumber,
-                    agentName,
-                    agentEmail,
-                    agentOfficeAddressLine1,
-                    agentOfficeAddressCity,
-                    agentOfficeAddressState,
-                    agentOfficeAddressZipCode,
-                    members,
-                    signers,
-                    paymentType,
-                    contactFirstName,
-                    contactLastName,
-                    contactPhoneNumber,
-                  ]
-                required: true
-              - label: Type
-                name: type
-                widget: select
-                options: ["director"]
-                required: false
-              - label: Label
-                name: label
-                widget: string
-                required: true
-              - label: Message
-                name: message
-                widget: markdown
-                required: false
-          - label: API Errors
-            name: apiErrors
-            widget: list
-            summary: "{{field}}"
-            fields:
-              - label: Field
-                name: field
-                widget: select
-                multiple: false
-                options: [Registered Agent - Id, UNKNOWN]
-                required: true
-              - label: Label
-                name: label
-                widget: string
-                required: true
-              - label: Message
-                name: message
-                widget: markdown
-                required: false
-          - label: Inline Errors
-            name: inlineErrors
-            widget: list
-            summary: "{{fields}} {{type}} {{priority}}"
-            fields:
-              - label: Fields
-                name: fields
-                widget: select
-                multiple: true
-                options:
-                  [
-                    signers,
-                    members,
-                    paymentType,
-                    canCreateLimitedPartner,
-                    canGetDistribution,
-                    canMakeDistribution,
-                  ]
-                required: true
-              - label: Type
-                name: type
-                widget: select
-                options: [checkbox, name, minimum]
-                required: false
-              - label: Label
-                name: label
-                widget: string
-                required: true
-              - label: "Priority"
-                name: "priority"
-                widget: "number"
-                default: 0
-                value_type: "int"
-                min: 0
-                required: false
   - name: "dashboard-settings"
     label: "Dashboard Settings"
     editor:
@@ -710,6 +591,21 @@ collections:
               - { label: ACH Payment label, name: achPaymentTypeLabel, widget: string }
               - { label: Add New Signer Button, name: addNewSignerButtonText, widget: string }
               - {
+                  label: Business Name Check - Error Text Empty Field,
+                  name: nameCheckEmptyFieldErrorText,
+                  widget: string,
+                }
+              - {
+                  label: Business Name Check - Error Text Needs to Search,
+                  name: nameCheckNeedsToSearchErrorText,
+                  widget: string,
+                }
+              - {
+                  label: Business Name Check - Error Text Name Unavailable,
+                  name: nameCheckUnavailableInlineErrorText,
+                  widget: string,
+                }
+              - {
                   label: Business Name & Legal Structure Header,
                   name: businessNameAndLegalStructureHeader,
                   widget: string,
@@ -935,7 +831,12 @@ collections:
                   name: legalStructureWarningModalCancelButtonText,
                   widget: string,
                 }
-              - { label: Generic Error Text, name: genericErrorText, widget: string }
+              - { label: Error Text - Generic, name: genericErrorText, widget: string }
+              - {
+                  label: Error Text - Incomplete Steps Header,
+                  name: incompleteStepsOnSubmitText,
+                  widget: string,
+                }
               - { label: Members Modal - Title, name: membersModalTitle, widget: string }
               - { label: Director Modal - Title, name: directorsModalTitle, widget: string }
               - { label: Signer (Incorporator) Modal - Title, name: incorporatorsModalTitle, widget: string }
@@ -964,6 +865,11 @@ collections:
                   widget: string,
                 }
               - { label: Director - Success Message Header, name: directorsSuccessTextHeader, widget: string }
+              - {
+                  label: Director - Error Text At Least 1 Needed,
+                  name: directorsMinimumErrorText,
+                  widget: string,
+                }
               - { label: Address - Table Column Headers, name: addressesTableColumn, widget: string }
               - { label: Member - Add Member Button, name: membersNewButtonText, widget: string }
               - { label: Director - Add Director Button, name: directorsNewButtonText, widget: string }
@@ -1063,6 +969,11 @@ collections:
                   name: paymentTypeTableTotalCostLabel,
                   widget: string,
                 }
+              - {
+                  label: Payment Type - Error Text when Missing,
+                  name: paymentTypeErrorMessage,
+                  widget: string,
+                }
               - { label: Previous Button Text, name: previousButtonText, widget: string }
               - { label: ProvisionsTitle, name: provisionsTitle, widget: string }
               - { label: ProvisionsOptionalLabel, name: provisionsOptionalLabel, widget: string }
@@ -1146,6 +1057,11 @@ collections:
               - {
                   label: Partnership Rights - Can Make Distributions Body,
                   name: partnershipRightsCanMakeDistributions,
+                  widget: string,
+                }
+              - {
+                  label: Partnership Rights - Error Text when Missing,
+                  name: partnershipRightsRadioErrorText,
                   widget: string,
                 }
               - {
@@ -1423,11 +1339,14 @@ collections:
                   widget: string,
                   hint: This field supports Markdown,
                 }
+              - { label: Review Page - Not Entered Text, name: reviewPageNotEnteredText, widget: string }
               - { label: Same Agent Info As Account, name: sameAgentInfoAsAccount, widget: string }
               - { label: Same Agent Address As Business, name: sameAgentAddressAsBusiness, widget: string }
               - { label: Signature Column Label, name: signatureColumnLabel, widget: string }
               - { label: Signature Aid Text, name: signatureAidText, widget: string }
               - { label: Signature Delete Mobile Text, name: signatureDeleteMobileText, widget: string }
+              - { label: Signature Checkbox Error Text, name: signatureCheckboxErrorText, widget: string }
+              - { label: Signature Empty Error Text, name: signersEmptyErrorText, widget: string }
               - {
                   label: Additional Signature Name Error Text,
                   name: additionalSignatureNameErrorText,
@@ -1440,6 +1359,9 @@ collections:
                   hint: This field supports Markdown,
                 }
               - { label: Signer - Placeholder, name: signerPlaceholder, widget: string }
+              - { label: Signer - Error Text Name Missing, name: signerNameErrorText, widget: string }
+              - { label: Signer - Error Text At Least 1 Needed, name: signerMinimumErrorText, widget: string }
+              - { label: Signer - Error Text Checkbox Missing, name: signerCheckboxErrorText, widget: string }
               - { label: Submit Button Text, name: submitButtonText, widget: string }
               - { label: Success Page - Body, name: successPageBody, widget: string }
               - { label: Success Page - Header, name: successPageHeader, widget: string }
@@ -1450,6 +1372,75 @@ collections:
                   widget: markdown,
                 }
               - { label: Update your Profile text, name: updateYourProfileLinkText, widget: string }
+              - label: Required Fields Labels (for error alert box)
+                name: requiredFieldsBulletPointLabel
+                collapsed: true
+                widget: object
+                fields:
+                  - { label: "Business Name", name: businessName, widget: string }
+                  - { label: "Business Designator", name: businessSuffix, widget: string }
+                  - { label: "Effective Date", name: businessStartDate, widget: string }
+                  - { label: "Business Address City", name: businessAddressCity, widget: string }
+                  - { label: "Business Address Line 1", name: businessAddressLine1, widget: string }
+                  - { label: "Business Address Zip Code", name: businessAddressZipCode, widget: string }
+                  - { label: "Signers", name: signers, widget: string }
+                  - { label: "Payment Type", name: paymentType, widget: string }
+                  - { label: "Contact First Name", name: contactFirstName, widget: string }
+                  - { label: "Contact Last Name", name: contactLastName, widget: string }
+                  - { label: "Contact Phone Number", name: contactPhoneNumber, widget: string }
+                  - { label: "Withdrawals", name: withdrawals, widget: string }
+                  - { label: "Combined Investment", name: combinedInvestment, widget: string }
+                  - { label: "Dissolution", name: dissolution, widget: string }
+                  - {
+                      label: "Partnership Rights - canCreateLimitedPartner",
+                      name: canCreateLimitedPartner,
+                      widget: string,
+                    }
+                  - {
+                      label: "Partnership Rights - canGetDistribution",
+                      name: canGetDistribution,
+                      widget: string,
+                    }
+                  - {
+                      label: "Partnership Rights - canMakeDistribution",
+                      name: canMakeDistribution,
+                      widget: string,
+                    }
+                  - {
+                      label: "Partnership Rights - createLimitedPartnerTerms",
+                      name: createLimitedPartnerTerms,
+                      widget: string,
+                    }
+                  - {
+                      label: "Partnership Rights - getDistributionTerms",
+                      name: getDistributionTerms,
+                      widget: string,
+                    }
+                  - {
+                      label: "Partnership Rights - makeDistributionTerms",
+                      name: makeDistributionTerms,
+                      widget: string,
+                    }
+                  - { label: "Business Total Stock", name: businessTotalStock, widget: string }
+                  - { label: "Directors", name: members, widget: string }
+                  - { label: "Registered Agent Name", name: agentName, widget: string }
+                  - { label: "Registered Agent Email", name: agentEmail, widget: string }
+                  - {
+                      label: "Registered Agent Office Address Line 1",
+                      name: agentOfficeAddressLine1,
+                      widget: string,
+                    }
+                  - {
+                      label: "Registered Agent Office Address City",
+                      name: agentOfficeAddressCity,
+                      widget: string,
+                    }
+                  - {
+                      label: "Registered Agent Office Address Zip Code",
+                      name: agentOfficeAddressZipCode,
+                      widget: string,
+                    }
+                  - { label: "Registered Agent Number", name: agentNumber, widget: string }
           - label: Dashboard Defaults
             name: dashboardDefaults
             collapsed: true

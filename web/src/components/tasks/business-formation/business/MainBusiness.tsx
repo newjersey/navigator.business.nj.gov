@@ -5,35 +5,36 @@ import { FormationStartDate } from "@/components/tasks/business-formation/busine
 import { SuffixDropdown } from "@/components/tasks/business-formation/business/SuffixDropdown";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
+import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { MediaQueries } from "@/lib/PageSizes";
-import { zipCodeRange } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { corpLegalStructures } from "@businessnjgovnavigator/shared/";
 import { useMediaQuery } from "@mui/material";
 import { ReactElement, useContext } from "react";
 
 export const MainBusiness = (): ReactElement => {
-  const { state, fieldsAreInvalid } = useContext(BusinessFormationContext);
+  const { state } = useContext(BusinessFormationContext);
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
+  const { doSomeFieldsHaveError, doesFieldHaveError } = useFormationErrors();
 
   return (
     <>
       <BusinessNameAndLegalStructure />
       <div
         className={`${isTabletAndUp ? "input-error-bar" : ""} ${
-          fieldsAreInvalid(["businessSuffix", "businessStartDate"]) ? `error` : ""
+          doSomeFieldsHaveError(["businessSuffix", "businessStartDate"]) ? `error` : ""
         } grid-row tablet:grid-gap-1`}
       >
         <div
           className={`${!isTabletAndUp ? "input-error-bar" : ""} ${
-            fieldsAreInvalid(["businessSuffix"]) ? `error` : ""
+            doesFieldHaveError("businessSuffix") ? `error` : ""
           } tablet:grid-col-6`}
         >
           <SuffixDropdown />
         </div>
         <div
           className={`${!isTabletAndUp ? "input-error-bar" : ""} ${
-            fieldsAreInvalid(["businessStartDate"]) ? `error` : ""
+            doesFieldHaveError("businessStartDate") ? `error` : ""
           } tablet:grid-col-6`}
         >
           <FormationStartDate />
@@ -54,7 +55,7 @@ export const MainBusiness = (): ReactElement => {
             validationText={Config.businessFormationDefaults.businessTotalStockErrorText}
             className="grid-col-6"
           />
-          <div className="grid-col-6"></div>
+          <div className="grid-col-6" />
         </div>
       ) : (
         <></>
@@ -78,20 +79,20 @@ export const MainBusiness = (): ReactElement => {
         placeholder={Config.businessFormationDefaults.businessAddressAddressLine2Placeholder}
         fieldName="businessAddressLine2"
         formInputFull
-        className={"margin-bottom-2"}
+        className="margin-bottom-2"
       />
 
       <div
         className={`${
           isTabletAndUp &&
-          fieldsAreInvalid(["businessAddressState", "businessAddressZipCode", "businessAddressCity"])
+          doSomeFieldsHaveError(["businessAddressState", "businessAddressZipCode", "businessAddressCity"])
             ? `error`
             : ""
         } input-error-bar grid-gap-1 grid-row margin-top-2`}
       >
         <div
           className={`${!isTabletAndUp ? "input-error-bar" : ""} ${
-            fieldsAreInvalid(["businessAddressCity"]) ? "error" : ""
+            doesFieldHaveError("businessAddressCity") ? "error" : ""
           } grid-col-12 tablet:grid-col-6 padding-left-0`}
         >
           <span className="text-bold">{Config.businessFormationDefaults.businessAddressCityLabel}</span>
@@ -105,7 +106,7 @@ export const MainBusiness = (): ReactElement => {
           inlineErrorStyling={true}
           disabled={true}
           className={`${!isTabletAndUp ? "input-error-bar" : ""} ${
-            fieldsAreInvalid(["businessAddressState", "businessAddressZipCode"]) ? `error` : ""
+            doSomeFieldsHaveError(["businessAddressState", "businessAddressZipCode"]) ? `error` : ""
           } form-input grid-col-5 tablet:grid-col-2`}
         />
         <BusinessFormationTextField
@@ -118,7 +119,6 @@ export const MainBusiness = (): ReactElement => {
           inlineErrorStyling={true}
           fieldName={"businessAddressZipCode"}
           validationText={Config.businessFormationDefaults.businessAddressZipCodeErrorText}
-          additionalValidation={zipCodeRange}
           className="form-input grid-col-7 tablet:grid-col-4"
         />
       </div>

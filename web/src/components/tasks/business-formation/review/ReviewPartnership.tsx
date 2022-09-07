@@ -4,11 +4,40 @@ import { LookupTabIndexByName } from "@/components/tasks/business-formation/Busi
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { scrollToTop, setHeaderRole } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { useContext } from "react";
+import { ReactElement, useContext } from "react";
 
 export const ReviewPartnership = () => {
   const { state, setTab } = useContext(BusinessFormationContext);
   const headerLevelTwo = setHeaderRole(2, "h3-styling");
+
+  const notEnteredText = (question: string): ReactElement => (
+    <>
+      <div>
+        <i>{Config.businessFormationDefaults.reviewPageNotEnteredText}</i> - {question}
+      </div>
+    </>
+  );
+
+  const displayPartnershipAnswer = (config: {
+    radioData: boolean | undefined;
+    termsData: string;
+    questionText: string;
+    yesBody: string;
+    noBody: string;
+  }): ReactElement => (
+    <>
+      {config.radioData === undefined ? (
+        notEnteredText(config.questionText)
+      ) : (
+        <Content className="margin-bottom-2">{config.radioData ? config.yesBody : config.noBody}</Content>
+      )}
+      {config.radioData && (
+        <Content className="margin-left-4">
+          {`${Config.businessFormationDefaults.reviewPagePartnershipTermTitle} ${config.termsData}`}
+        </Content>
+      )}
+    </>
+  );
 
   return (
     <>
@@ -34,55 +63,31 @@ export const ReviewPartnership = () => {
       </div>
       <div className="" data-testid="partnership">
         <div className="margin-bottom-3">
-          <Content className="margin-bottom-2">
-            {state.formationFormData.canCreateLimitedPartner
-              ? Config.businessFormationDefaults.reviewPagePartnershipYesLimitedPartnerBody
-              : Config.businessFormationDefaults.reviewPagePartnershipNoLimitedPartnerBody}
-          </Content>
-          {state.formationFormData.canCreateLimitedPartner ? (
-            <Content className="margin-left-4">
-              {[
-                Config.businessFormationDefaults.reviewPagePartnershipTermTitle,
-                state.formationFormData.createLimitedPartnerTerms,
-              ].join(" ")}
-            </Content>
-          ) : (
-            <></>
-          )}
+          {displayPartnershipAnswer({
+            radioData: state.formationFormData.canCreateLimitedPartner,
+            termsData: state.formationFormData.createLimitedPartnerTerms,
+            questionText: Config.businessFormationDefaults.partnershipRightsCanAssignRights,
+            yesBody: Config.businessFormationDefaults.reviewPagePartnershipYesLimitedPartnerBody,
+            noBody: Config.businessFormationDefaults.reviewPagePartnershipNoLimitedPartnerBody,
+          })}
         </div>
         <div className="margin-bottom-3">
-          <Content className="margin-bottom-2">
-            {state.formationFormData.canGetDistribution
-              ? Config.businessFormationDefaults.reviewPagePartnershipYesCanReceiveDistributions
-              : Config.businessFormationDefaults.reviewPagePartnershipNoCanReceiveDistributions}
-          </Content>
-          {state.formationFormData.canGetDistribution ? (
-            <Content className="margin-left-4">
-              {[
-                Config.businessFormationDefaults.reviewPagePartnershipTermTitle,
-                state.formationFormData.getDistributionTerms,
-              ].join(" ")}
-            </Content>
-          ) : (
-            <></>
-          )}
+          {displayPartnershipAnswer({
+            radioData: state.formationFormData.canGetDistribution,
+            termsData: state.formationFormData.getDistributionTerms,
+            questionText: Config.businessFormationDefaults.partnershipRightsCanReceiveDistributions,
+            yesBody: Config.businessFormationDefaults.reviewPagePartnershipYesCanReceiveDistributions,
+            noBody: Config.businessFormationDefaults.reviewPagePartnershipNoCanReceiveDistributions,
+          })}
         </div>
         <div className="margin-bottom-3">
-          <Content className="margin-bottom-2">
-            {state.formationFormData.canMakeDistribution
-              ? Config.businessFormationDefaults.reviewPagePartnershipYesCanMakeDistributions
-              : Config.businessFormationDefaults.reviewPagePartnershipNoCanMakeDistributions}
-          </Content>
-          {state.formationFormData.canMakeDistribution ? (
-            <Content className="margin-left-4">
-              {[
-                Config.businessFormationDefaults.reviewPagePartnershipTermTitle,
-                state.formationFormData.makeDistributionTerms,
-              ].join(" ")}
-            </Content>
-          ) : (
-            <></>
-          )}
+          {displayPartnershipAnswer({
+            radioData: state.formationFormData.canMakeDistribution,
+            termsData: state.formationFormData.makeDistributionTerms,
+            questionText: Config.businessFormationDefaults.partnershipRightsCanMakeDistributions,
+            yesBody: Config.businessFormationDefaults.reviewPagePartnershipYesCanMakeDistributions,
+            noBody: Config.businessFormationDefaults.reviewPagePartnershipNoCanMakeDistributions,
+          })}
         </div>
       </div>
       <hr className="margin-y-205" />

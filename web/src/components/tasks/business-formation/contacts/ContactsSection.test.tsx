@@ -1,4 +1,3 @@
-import { camelCaseToSentence } from "@/lib/utils/helpers";
 import {
   generateFormationAddress,
   generateFormationDisplayContent,
@@ -14,9 +13,8 @@ import {
   setDesktopScreen,
   useSetupInitialMocks,
 } from "@/test/helpers-formation";
-import { currentUserData, userDataUpdatedNTimes } from "@/test/mock/withStatefulUserData";
+import { currentUserData } from "@/test/mock/withStatefulUserData";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import FormationErrors from "@businessnjgovnavigator/content/fieldConfig/formation-error.json";
 import {
   BusinessUser,
   createEmptyFormationAddress,
@@ -80,7 +78,7 @@ describe("Formation - ContactsSection", () => {
       displayContent
     );
 
-    await page.submitBusinessNameTab();
+    await page.fillAndSubmitBusinessNameTab();
     await page.submitBusinessTab();
     return page;
   };
@@ -341,13 +339,9 @@ describe("Formation - ContactsSection", () => {
 
     it("fires validations when directors are empty", async () => {
       const page = await getPageHelper({ legalStructureId }, { members: [] });
-      await page.submitContactsTab(false);
+      await attemptApiSubmission(page);
       expect(
-        screen.getByText(
-          FormationErrors.inlineErrors.find((i) => i.fields.includes("members") && i.type === "minimum")
-            ?.label as string,
-          { exact: false }
-        )
+        screen.getByText(Config.businessFormationDefaults.directorsMinimumErrorText)
       ).toBeInTheDocument();
     });
 
@@ -428,13 +422,10 @@ describe("Formation - ContactsSection", () => {
       it("fires validations when signers do not fill out all the fields", async () => {
         const signers = [generateFormationAddress({ name: "" })];
         const page = await getPageHelper({ legalStructureId }, { signers });
-        await page.submitContactsTab(false);
+        await attemptApiSubmission(page);
+
         const signerErrorText = () =>
-          screen.queryByText(
-            FormationErrors.inlineErrors.find((i) => i.fields.includes("signers") && i.type === "name")
-              ?.label as string,
-            { exact: false }
-          );
+          screen.queryByText(Config.businessFormationDefaults.signerNameErrorText, { exact: false });
         expect(signerErrorText()).toBeInTheDocument();
         const nameTd = screen.getByText(signers[0].addressLine1, { exact: false });
         // eslint-disable-next-line testing-library/no-node-access
@@ -447,13 +438,9 @@ describe("Formation - ContactsSection", () => {
       it("fires validations when signers do not check the sign checkbox", async () => {
         const signers = [generateFormationAddress({})];
         const page = await getPageHelper({ legalStructureId }, { signers });
-        await page.submitContactsTab(false);
+        await attemptApiSubmission(page);
         const signerCheckboxErrorText = () =>
-          screen.queryByText(
-            FormationErrors.inlineErrors.find((i) => i.fields.includes("signers") && i.type === "checkbox")
-              ?.label as string,
-            { exact: false }
-          );
+          screen.queryByText(Config.businessFormationDefaults.signerCheckboxErrorText, { exact: false });
         expect(signerCheckboxErrorText()).toBeInTheDocument();
         page.checkSignerBox(0);
         expect(signerCheckboxErrorText()).not.toBeInTheDocument();
@@ -786,13 +773,9 @@ describe("Formation - ContactsSection", () => {
           { legalStructureId },
           { signers: [generateFormationAddress({ name: "" })] }
         );
-        await page.submitContactsTab(false);
+        await attemptApiSubmission(page);
         const signerErrorText = () =>
-          screen.queryByText(
-            FormationErrors.inlineErrors.find((i) => i.fields.includes("signers") && i.type === "name")
-              ?.label as string,
-            { exact: false }
-          );
+          screen.queryByText(Config.businessFormationDefaults.signerNameErrorText, { exact: false });
         expect(signerErrorText()).toBeInTheDocument();
         page.fillText("Signer 0", "Elrond");
         expect(signerErrorText()).not.toBeInTheDocument();
@@ -803,64 +786,13 @@ describe("Formation - ContactsSection", () => {
           { legalStructureId },
           { signers: [generateFormationAddress({ signature: false })] }
         );
-        await page.submitContactsTab(false);
+        await attemptApiSubmission(page);
         const signerCheckboxErrorText = () =>
-          screen.queryByText(
-            FormationErrors.inlineErrors.find((i) => i.fields.includes("signers") && i.type === "checkbox")
-              ?.label as string,
-            { exact: false }
-          );
+          screen.queryByText(Config.businessFormationDefaults.signerCheckboxErrorText, { exact: false });
         expect(signerCheckboxErrorText()).toBeInTheDocument();
         page.selectCheckbox(`${Config.businessFormationDefaults.signatureColumnLabel}*`);
         expect(signerCheckboxErrorText()).not.toBeInTheDocument();
         await page.submitContactsTab();
-      });
-
-      describe("required fields", () => {
-        it("signer name", async () => {
-          const page = await getPageHelper(
-            { legalStructureId },
-            { signers: [generateFormationAddress({ name: "", signature: true })] }
-          );
-          await page.submitContactsTab(false);
-          expect(userDataUpdatedNTimes()).toEqual(2);
-        });
-
-        it("signer signature", async () => {
-          const page = await getPageHelper(
-            { legalStructureId },
-            { signers: [generateFormationAddress({ name: "asdf", signature: false })] }
-          );
-          await page.submitContactsTab(false);
-          expect(userDataUpdatedNTimes()).toEqual(2);
-        });
-
-        it("additional signer signature", async () => {
-          const page = await getPageHelper(
-            { legalStructureId },
-            { signers: [generateFormationAddress({ name: "asdf", signature: false })] }
-          );
-          await page.submitContactsTab(false);
-          expect(userDataUpdatedNTimes()).toEqual(2);
-        });
-
-        it("additional signer name", async () => {
-          const page = await getPageHelper(
-            { legalStructureId },
-            { signers: [generateFormationAddress({ name: "", signature: true })] }
-          );
-          await page.submitContactsTab(false);
-          expect(userDataUpdatedNTimes()).toEqual(2);
-        });
-
-        it("does not require additional signer", async () => {
-          const page = await getPageHelper(
-            { legalStructureId },
-            { signers: [generateFormationAddress({ signature: true })] }
-          );
-          await page.submitContactsTab();
-          expect(userDataUpdatedNTimes()).toEqual(3);
-        });
       });
     });
   });
@@ -1054,12 +986,10 @@ describe("Formation - ContactsSection", () => {
 
       page.fillText("Agent office address zip code", "22222");
 
-      await page.submitContactsTab(false);
-      await waitFor(() => {
-        expect(
-          screen.getByText(Config.businessFormationDefaults.agentOfficeAddressZipCodeErrorText)
-        ).toBeInTheDocument();
-      });
+      await attemptApiSubmission(page);
+      expect(
+        screen.getByText(Config.businessFormationDefaults.agentOfficeAddressZipCodeErrorText)
+      ).toBeInTheDocument();
       expect(
         screen.getByText(Config.businessFormationDefaults.missingFieldsOnSubmitModalText)
       ).toBeInTheDocument();
@@ -1077,10 +1007,8 @@ describe("Formation - ContactsSection", () => {
 
         page.fillText("Agent email", "deeb.gmail");
 
-        await page.submitContactsTab(false);
-        await waitFor(() => {
-          expect(screen.getByText(Config.businessFormationDefaults.agentEmailErrorText)).toBeInTheDocument();
-        });
+        await attemptApiSubmission(page);
+        expect(screen.getByText(Config.businessFormationDefaults.agentEmailErrorText)).toBeInTheDocument();
         expect(
           screen.getByText(Config.businessFormationDefaults.missingFieldsOnSubmitModalText)
         ).toBeInTheDocument();
@@ -1097,10 +1025,8 @@ describe("Formation - ContactsSection", () => {
 
         page.fillText("Agent email", "deeb@");
 
-        await page.submitContactsTab(false);
-        await waitFor(() => {
-          expect(screen.getByText(Config.businessFormationDefaults.agentEmailErrorText)).toBeInTheDocument();
-        });
+        await attemptApiSubmission(page);
+        expect(screen.getByText(Config.businessFormationDefaults.agentEmailErrorText)).toBeInTheDocument();
         expect(
           screen.getByText(Config.businessFormationDefaults.missingFieldsOnSubmitModalText)
         ).toBeInTheDocument();
@@ -1116,8 +1042,7 @@ describe("Formation - ContactsSection", () => {
         );
 
         page.fillText("Agent email", "lol@deeb.gmail");
-
-        await page.submitContactsTab();
+        await attemptApiSubmission(page);
         expect(
           screen.queryByText(Config.businessFormationDefaults.agentEmailErrorText)
         ).not.toBeInTheDocument();
@@ -1133,10 +1058,9 @@ describe("Formation - ContactsSection", () => {
             agentNumberOrManual: "NUMBER",
           }
         );
-        await page.submitContactsTab(false);
+        await attemptApiSubmission(page);
         expect(screen.getByRole("alert")).toHaveTextContent(
-          FormationErrors.formationErrors.find((i) => i.fields.includes("agentNumber"))?.label ??
-            camelCaseToSentence("agentNumber")
+          Config.businessFormationDefaults.requiredFieldsBulletPointLabel.agentNumber
         );
       });
     });
@@ -1150,10 +1074,9 @@ describe("Formation - ContactsSection", () => {
             agentNumberOrManual: "MANUAL_ENTRY",
           }
         );
-        await page.submitContactsTab(false);
+        await attemptApiSubmission(page);
         expect(screen.getByRole("alert")).toHaveTextContent(
-          FormationErrors.formationErrors.find((i) => i.fields.includes("agentName"))?.label ??
-            camelCaseToSentence("agentName")
+          Config.businessFormationDefaults.requiredFieldsBulletPointLabel.agentName
         );
       });
 
@@ -1165,10 +1088,9 @@ describe("Formation - ContactsSection", () => {
             agentNumberOrManual: "MANUAL_ENTRY",
           }
         );
-        await page.submitContactsTab(false);
+        await attemptApiSubmission(page);
         expect(screen.getByRole("alert")).toHaveTextContent(
-          FormationErrors.formationErrors.find((i) => i.fields.includes("agentEmail"))?.label ??
-            camelCaseToSentence("agentEmail")
+          Config.businessFormationDefaults.requiredFieldsBulletPointLabel.agentEmail
         );
       });
 
@@ -1180,10 +1102,9 @@ describe("Formation - ContactsSection", () => {
             agentNumberOrManual: "MANUAL_ENTRY",
           }
         );
-        await page.submitContactsTab(false);
+        await attemptApiSubmission(page);
         expect(screen.getByRole("alert")).toHaveTextContent(
-          FormationErrors.formationErrors.find((i) => i.fields.includes("agentOfficeAddressLine1"))?.label ??
-            camelCaseToSentence("agentOfficeAddressLine1")
+          Config.businessFormationDefaults.requiredFieldsBulletPointLabel.agentOfficeAddressLine1
         );
       });
 
@@ -1195,10 +1116,9 @@ describe("Formation - ContactsSection", () => {
             agentNumberOrManual: "MANUAL_ENTRY",
           }
         );
-        await page.submitContactsTab(false);
+        await attemptApiSubmission(page);
         expect(screen.getByRole("alert")).toHaveTextContent(
-          FormationErrors.formationErrors.find((i) => i.fields.includes("agentOfficeAddressCity"))?.label ??
-            camelCaseToSentence("agentOfficeAddressCity")
+          Config.businessFormationDefaults.requiredFieldsBulletPointLabel.agentOfficeAddressCity
         );
       });
 
@@ -1210,26 +1130,17 @@ describe("Formation - ContactsSection", () => {
             agentNumberOrManual: "MANUAL_ENTRY",
           }
         );
-        await page.submitContactsTab(false);
+        await attemptApiSubmission(page);
         expect(screen.getByRole("alert")).toHaveTextContent(
-          FormationErrors.formationErrors.find((i) => i.fields.includes("agentOfficeAddressZipCode"))
-            ?.label ?? camelCaseToSentence("agentOfficeAddressZipCode")
+          Config.businessFormationDefaults.requiredFieldsBulletPointLabel.agentOfficeAddressZipCode
         );
-      });
-    });
-
-    describe("optional fields - submits successfully", () => {
-      it("agent address line 2", async () => {
-        const page = await getPageHelper(
-          {},
-          {
-            agentOfficeAddressLine2: "",
-            agentNumberOrManual: "MANUAL_ENTRY",
-          }
-        );
-        await page.submitContactsTab();
-        expect(userDataUpdatedNTimes()).toEqual(3);
       });
     });
   });
+
+  const attemptApiSubmission = async (page: FormationPageHelpers) => {
+    await page.stepperClickToReviewTab();
+    await page.clickSubmit();
+    await page.stepperClickToContactsTab();
+  };
 });
