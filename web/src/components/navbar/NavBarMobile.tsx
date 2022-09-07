@@ -2,7 +2,6 @@ import { FocusTrappedSidebar } from "@/components/FocusTrappedSidebar";
 import { NavigatorLogo } from "@/components/navbar/NavigatorLogo";
 import { NavSidebarUserSettings } from "@/components/navbar/NavSidebarUserSettings";
 import { Icon } from "@/components/njwds/Icon";
-import { MiniOperateSection } from "@/components/roadmap/MiniOperateSection";
 import { MiniRoadmap } from "@/components/roadmap/MiniRoadmap";
 import { AuthContext } from "@/contexts/authContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -94,16 +93,14 @@ export const NavBarMobile = ({
             </button>
           </h4>
           <NavSidebarUserSettings />
-          {sidebarPageLayout && (
-            <div>
-              <hr />
-            </div>
-          )}
           {sidebarPageLayout &&
-            (operateReferences != null && Object.keys(operateReferences).length > 0 ? (
-              <MiniOperateSection operateReferences={operateReferences} onClose={close} />
+            (operateReferences ? (
+              <></>
             ) : (
-              <MiniRoadmap activeTaskId={task?.id} onTaskClick={close} />
+              <div>
+                <hr />
+                <MiniRoadmap activeTaskId={task?.id} onTaskClick={close} />
+              </div>
             ))}
         </nav>
       </FocusTrappedSidebar>

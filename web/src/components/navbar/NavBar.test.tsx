@@ -457,7 +457,7 @@ describe("<NavBar />", () => {
         expect(screen.queryByText(Config.sectionHeaders.OPERATE)).not.toBeInTheDocument();
       });
 
-      it("displays mini-roadmap with OPERATE when operateReferences does exists", () => {
+      it("does not display mini-roadmap when operateReferences exists", () => {
         useMockUserData({});
         useMockRoadmap(
           generateRoadmap({
@@ -469,7 +469,6 @@ describe("<NavBar />", () => {
         );
 
         renderMobileTaskNav()({ includeOperateRef: true });
-        expect(screen.getByText(Config.sectionHeaders.OPERATE)).toBeInTheDocument();
         expect(screen.queryByText("step1")).not.toBeInTheDocument();
         expect(screen.queryByText(Config.sectionHeaders.PLAN)).not.toBeInTheDocument();
         expect(screen.queryByText(Config.sectionHeaders.START)).not.toBeInTheDocument();
@@ -489,17 +488,6 @@ describe("<NavBar />", () => {
 
         await waitForElementToBeRemoved(() => screen.queryByTestId("nav-sidebar-menu"));
         expect(screen.queryByText("task1")).not.toBeInTheDocument();
-        expect(screen.queryByTestId("nav-sidebar-menu")).not.toBeInTheDocument();
-      });
-
-      it("hide drawer when filings task is clicked when operate refs exist", async () => {
-        useMockUserData({});
-
-        renderMobileTaskNav()({ includeOperateRef: true });
-        fireEvent.click(screen.getByTestId("some-filing-name-1"));
-
-        await waitForElementToBeRemoved(() => screen.queryByTestId("nav-sidebar-menu"));
-        expect(screen.queryByText("some-filing-name-1")).not.toBeInTheDocument();
         expect(screen.queryByTestId("nav-sidebar-menu")).not.toBeInTheDocument();
       });
     });
