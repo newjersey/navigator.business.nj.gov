@@ -5,7 +5,7 @@ import { corpLegalStructures } from "@businessnjgovnavigator/shared";
 import { ReactElement, useContext } from "react";
 
 export const Members = (): ReactElement => {
-  const { state, setFormationFormData, setErrorMap } = useContext(BusinessFormationContext);
+  const { state, setFormationFormData } = useContext(BusinessFormationContext);
   const isCorp = corpLegalStructures.includes(state.legalStructureId);
 
   const defaultAddress = !isCorp
@@ -46,13 +46,6 @@ export const Members = (): ReactElement => {
       addressData={state.formationFormData.members}
       setData={(members) => {
         setFormationFormData({ ...state.formationFormData, members });
-        if (
-          members.every(
-            (it) => it.name && it.addressCity && it.addressLine1 && it.addressState && it.addressZipCode
-          )
-        ) {
-          setErrorMap({ ...state.errorMap, members: { invalid: false } });
-        }
       }}
       needSignature={false}
       displayContent={{

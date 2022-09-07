@@ -2,16 +2,15 @@ import { Content } from "@/components/Content";
 import { Button } from "@/components/njwds-extended/Button";
 import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
 import { Icon } from "@/components/njwds/Icon";
-import { BusinessFormationInlineFieldAlert } from "@/components/tasks/business-formation/BusinessFormationInlineFieldAlert";
 import { AddressModal } from "@/components/tasks/business-formation/contacts/AddressModal";
 import { ValidatedCheckbox } from "@/components/ValidatedCheckbox";
-import { BusinessFormationContext } from "@/contexts/businessFormationContext";
+import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { MediaQueries } from "@/lib/PageSizes";
 import styles from "@/styles/sections/members.module.scss";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { FormationAddress, FormationFields } from "@businessnjgovnavigator/shared/";
 import { IconButton, useMediaQuery } from "@mui/material";
-import React, { ChangeEvent, ReactElement, useContext, useState } from "react";
+import React, { ChangeEvent, ReactElement, useState } from "react";
 
 const formatAddress = (address: FormationAddress) =>
   `${address.addressLine1}, ${address.addressLine2 ? `${address.addressLine2},` : ""} ${
@@ -43,7 +42,7 @@ export const Addresses = (props: Props): ReactElement => {
   const [editIndex, setEditIndex] = useState<number | undefined>(undefined);
   const [alert, setAlert] = useState<boolean | undefined>(undefined);
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
-  const { state, setErrorMap } = useContext(BusinessFormationContext);
+  const { doesFieldHaveError } = useFormationErrors();
 
   const handleSignerCheckbox = (event: ChangeEvent<HTMLInputElement>, index: number): void => {
     const addresses = [...props.addressData];
@@ -52,9 +51,6 @@ export const Addresses = (props: Props): ReactElement => {
       signature: event.target.checked,
     };
     props.setData(addresses);
-    if (event.target.checked && addresses.every((it) => it.signature && it.name)) {
-      setErrorMap({ ...state.errorMap, [props.fieldName]: { invalid: false } });
-    }
   };
 
   const renderSignatureColumn = ({
@@ -82,7 +78,7 @@ export const Addresses = (props: Props): ReactElement => {
             id={index ? `signature-checkbox-${fieldName}-${index}` : `signature-checkbox-${fieldName}`}
             onChange={onChange}
             checked={checked}
-            error={state.errorMap[fieldName].invalid && !checked}
+            error={doesFieldHaveError(fieldName) && !checked}
           />
         </div>
       </div>
@@ -170,6 +166,7 @@ export const Addresses = (props: Props): ReactElement => {
       </tfoot>
     </table>
   );
+
   const renderMobileTable =
     props.addressData.length > 0 ? (
       <>
@@ -239,7 +236,7 @@ export const Addresses = (props: Props): ReactElement => {
         </table>
       </>
     ) : (
-      <div className="margin-bottom-3"></div>
+      <div className="margin-bottom-3" />
     );
 
   return (
@@ -265,9 +262,8 @@ export const Addresses = (props: Props): ReactElement => {
         >
           {props.displayContent.contentMd}
         </Content>
-        <BusinessFormationInlineFieldAlert fields={[props.fieldName]} />
         <div>
-          <div className={`${state.errorMap[props.fieldName].invalid ? "error" : ""} input-error-bar`}>
+          <div className={`${doesFieldHaveError(props.fieldName) ? "error" : ""} input-error-bar`}>
             {isTabletAndUp ? renderDesktopTable : renderMobileTable}
           </div>
 

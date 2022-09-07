@@ -1,22 +1,16 @@
 import {
   generateFormationDisplayContent,
   generateFormationFormData,
-  generateFormationSubmitError,
-  generateFormationSubmitResponse,
   generateUser,
   generateUserData,
 } from "@/test/factories";
 import {
   FormationPageHelpers,
   generateFormationProfileData,
-  mockApiResponse,
   preparePage,
   useSetupInitialMocks,
 } from "@/test/helpers-formation";
-import { mockPush } from "@/test/mock/mockRouter";
-import { userDataUpdatedNTimes } from "@/test/mock/withStatefulUserData";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import FormationErrors from "@businessnjgovnavigator/content/fieldConfig/formation-error.json";
 import {
   BusinessUser,
   FormationFormData,
@@ -24,7 +18,7 @@ import {
   ProfileData,
 } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
-import { fireEvent, screen, waitFor } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 
 function mockMaterialUI(): typeof materialUi {
   return {
@@ -98,10 +92,7 @@ describe("Formation - PaymentSection", () => {
       displayContent
     );
 
-    await page.submitBusinessNameTab();
-    await page.submitBusinessTab();
-    await page.submitContactsTab();
-    await page.submitReviewTab();
+    await page.stepperClickToBillingTab();
     return page;
   };
 
@@ -204,92 +195,51 @@ describe("Formation - PaymentSection", () => {
     expect(page.getInputElementByLabel("Contact last name").value).toEqual("Name");
   });
 
-  it("redirects to payment redirect URL on success", async () => {
-    mockApiResponse(
-      generateFormationSubmitResponse({
-        success: true,
-        redirect: "www.example.com",
-      })
-    );
-
-    const page = await getPageHelper({}, {});
-    await page.clickSubmit();
-    expect(mockPush).toHaveBeenCalledWith("www.example.com");
-  });
-
-  it("displays error messages on error and hides error when payment page is revisited", async () => {
-    mockApiResponse(
-      generateFormationSubmitResponse({
-        success: false,
-        errors: [
-          generateFormationSubmitError({
-            field: "some field 1",
-            message: "very bad input",
-            type: "RESPONSE",
-          }),
-          generateFormationSubmitError({
-            field: "some field 2",
-            message: "must be nj zipcode",
-            type: "RESPONSE",
-          }),
-        ],
-      })
-    );
-
-    const page = await getPageHelper({}, {});
-    await page.clickSubmit();
-    expect(mockPush).not.toHaveBeenCalled();
-    expect(screen.getByText("some field 1")).toBeInTheDocument();
-    expect(screen.getByText("very bad input")).toBeInTheDocument();
-    expect(screen.getByText("some field 2")).toBeInTheDocument();
-    expect(screen.getByText("must be nj zipcode")).toBeInTheDocument();
-
-    fireEvent.click(screen.getByText(Config.businessFormationDefaults.previousButtonText));
-
-    await waitFor(() => {
-      expect(screen.getByTestId("review-section")).toBeInTheDocument();
-    });
-
-    await page.submitReviewTab();
-
-    expect(screen.queryByText("some field 1")).not.toBeInTheDocument();
-    expect(screen.queryByText("very bad input")).not.toBeInTheDocument();
-    expect(screen.queryByText("some field 2")).not.toBeInTheDocument();
-    expect(screen.queryByText("must be nj zipcode")).not.toBeInTheDocument();
-  });
-
   describe("required fields", () => {
     it("Contact first name", async () => {
       const page = await getPageHelper({}, { contactFirstName: "" }, { name: "" });
-      await page.clickSubmit();
-      expect(userDataUpdatedNTimes()).toEqual(3);
+      await attemptApiSubmission(page);
+      expect(screen.getByRole("alert")).toHaveTextContent(
+        Config.businessFormationDefaults.requiredFieldsBulletPointLabel.contactFirstName
+      );
+      expect(
+        screen.getByText(Config.businessFormationDefaults.contactFirstNameErrorText)
+      ).toBeInTheDocument();
     });
 
     it("Contact last name", async () => {
       const page = await getPageHelper({}, { contactLastName: "" }, { name: "" });
-      await page.clickSubmit();
-      expect(userDataUpdatedNTimes()).toEqual(3);
+      await attemptApiSubmission(page);
+      expect(screen.getByRole("alert")).toHaveTextContent(
+        Config.businessFormationDefaults.requiredFieldsBulletPointLabel.contactLastName
+      );
+      expect(screen.getByText(Config.businessFormationDefaults.contactLastNameErrorText)).toBeInTheDocument();
     });
 
     it("Contact phone number", async () => {
       const page = await getPageHelper({}, { contactPhoneNumber: "" });
-      await page.clickSubmit();
-      expect(userDataUpdatedNTimes()).toEqual(3);
+      await attemptApiSubmission(page);
+      expect(screen.getByRole("alert")).toHaveTextContent(
+        Config.businessFormationDefaults.requiredFieldsBulletPointLabel.contactPhoneNumber
+      );
+      expect(
+        screen.getByText(Config.businessFormationDefaults.contactPhoneNumberErrorText)
+      ).toBeInTheDocument();
     });
 
     it("Payment type", async () => {
       const page = await getPageHelper({}, { paymentType: undefined });
-      await page.clickSubmit();
+      await attemptApiSubmission(page);
+      expect(screen.getAllByRole("alert")[0]).toHaveTextContent(
+        Config.businessFormationDefaults.requiredFieldsBulletPointLabel.paymentType
+      );
       expect(screen.getByText(Config.businessFormationDefaults.paymentTypeErrorText)).toBeInTheDocument();
-      expect(
-        screen.getByText(
-          FormationErrors.inlineErrors.find((i) => i.fields.includes("paymentType"))?.label as string,
-          {
-            exact: false,
-          }
-        )
-      ).toBeInTheDocument();
-      expect(userDataUpdatedNTimes()).toEqual(3);
     });
   });
+
+  const attemptApiSubmission = async (page: FormationPageHelpers) => {
+    await page.stepperClickToReviewTab();
+    await page.clickSubmit();
+    await page.stepperClickToBillingTab();
+  };
 });

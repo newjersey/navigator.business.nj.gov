@@ -5,9 +5,10 @@ import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import { ReactElement, useContext } from "react";
 
 export const FormationChooseNotifications = (): ReactElement => {
-  const { state, setFormationFormData } = useContext(BusinessFormationContext);
+  const { state, setFormationFormData, setFieldInteracted } = useContext(BusinessFormationContext);
 
   const handleAnnualReportClick = () => {
+    setFieldInteracted("annualReportNotification");
     setFormationFormData({
       ...state.formationFormData,
       annualReportNotification: !state.formationFormData.annualReportNotification,
@@ -15,6 +16,7 @@ export const FormationChooseNotifications = (): ReactElement => {
   };
 
   const handleCorpWatchClick = () => {
+    setFieldInteracted("corpWatchNotification");
     setFormationFormData({
       ...state.formationFormData,
       corpWatchNotification: !state.formationFormData.corpWatchNotification,

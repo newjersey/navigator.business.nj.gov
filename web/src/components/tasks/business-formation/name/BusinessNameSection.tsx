@@ -1,18 +1,16 @@
 import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { Button } from "@/components/njwds-extended/Button";
-import { AuthAlertContext } from "@/contexts/authAlertContext";
+import { getErrorStateForField } from "@/components/tasks/business-formation/getErrorStateForField";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
-import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useBusinessNameSearch } from "@/lib/data-hooks/useBusinessNameSearch";
+import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { MediaQueries } from "@/lib/PageSizes";
 import { SearchBusinessNameError } from "@/lib/types/types";
-import analytics from "@/lib/utils/analytics";
-import { templateEval } from "@/lib/utils/helpers";
+import { templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { FormControl, TextField, useMediaQuery } from "@mui/material";
-import { FormEvent, ReactElement, useContext } from "react";
+import { FormControl, TextField } from "@mui/material";
+import { FocusEvent, FormEvent, ReactElement, useContext, useEffect } from "react";
 
 const SearchBusinessNameErrorLookup: Record<SearchBusinessNameError, string> = {
   BAD_INPUT: Config.searchBusinessNameTask.errorTextBadInput,
@@ -20,14 +18,13 @@ const SearchBusinessNameErrorLookup: Record<SearchBusinessNameError, string> = {
 };
 
 export const BusinessNameSection = (): ReactElement => {
-  const { state, setTab, setFormationFormData } = useContext(BusinessFormationContext);
-  const { userData, update } = useUserData();
-  const isMobile = useMediaQuery(MediaQueries.isMobile);
-  const { isAuthenticated, setModalIsVisible } = useContext(AuthAlertContext);
+  const FIELD_NAME = "businessName";
+  const { state, setFormationFormData, setFieldInteracted, setBusinessNameAvailability } =
+    useContext(BusinessFormationContext);
+  const { userData } = useUserData();
   const {
     currentName,
     submittedName,
-    isNameFieldEmpty,
     isLoading,
     error,
     nameAvailability,
@@ -35,49 +32,37 @@ export const BusinessNameSection = (): ReactElement => {
     onBlurNameField,
     searchBusinessName,
   } = useBusinessNameSearch({ isBusinessFormation: true, isDba: false });
+  const { doesFieldHaveError } = useFormationErrors();
 
-  const submitNameAndContinue = async () => {
+  useMountEffectWhenDefined(() => {
     if (!userData) return;
+    updateCurrentName(state.formationFormData.businessName || userData.profileData.businessName);
+  }, userData);
 
-    if (isAuthenticated === IsAuthenticated.FALSE) {
-      setModalIsVisible(true);
-      return;
-    }
+  useEffect(() => {
+    setBusinessNameAvailability(nameAvailability);
+  }, [nameAvailability, setBusinessNameAvailability]);
 
-    const newFormationFormData = {
+  const setNameInFormationData = () => {
+    setFormationFormData({
       ...state.formationFormData,
-      businessName: submittedName,
-    };
-    setFormationFormData(newFormationFormData);
-    update({
-      ...userData,
-      profileData: {
-        ...userData.profileData,
-        businessName: submittedName,
-      },
-      formationData: {
-        ...userData.formationData,
-        formationFormData: newFormationFormData,
-      },
+      businessName: currentName,
     });
-    analytics.event.business_formation_name_step_continue_button.click.go_to_next_formation_step();
-    setTab(state.tab + 1);
   };
-
-  let initialNextButtonText = Config.businessFormationDefaults.initialNextButtonText;
-  if (isAuthenticated === IsAuthenticated.FALSE) {
-    initialNextButtonText = `Register & ${initialNextButtonText}`;
-  }
 
   const doSearch = (event: FormEvent<HTMLFormElement>): void => {
     searchBusinessName(event).catch(() => {});
+    setNameInFormationData();
+    setFieldInteracted(FIELD_NAME);
   };
+
+  const hasError = doesFieldHaveError(FIELD_NAME) && state.hasBusinessNameBeenSearched && !isLoading;
 
   return (
     <div data-testid="business-name-section">
       <form onSubmit={doSearch} className="usa-prose grid-container padding-0">
         <Content>{state.displayContent.businessNameCheck.contentMd}</Content>
-        <div className={`${isNameFieldEmpty ? `error` : ""} input-error-bar`}>
+        <div className={`${hasError ? "error" : ""} input-error-bar`}>
           <div className="text-bold margin-top-1">{Config.businessFormationDefaults.nameCheckFieldLabel}</div>
           <div className="grid-row grid-gap-2">
             <div className="tablet:grid-col-8">
@@ -86,17 +71,23 @@ export const BusinessNameSection = (): ReactElement => {
                 className="fg1 width-100"
                 margin="dense"
                 value={currentName}
-                onChange={updateCurrentName}
+                onChange={(event) => updateCurrentName(event.target.value)}
                 variant="outlined"
                 placeholder={Config.businessFormationDefaults.nameCheckPlaceholderText}
                 inputProps={{
                   "aria-label": "Search business name",
                 }}
-                error={isNameFieldEmpty}
+                error={hasError}
                 helperText={
-                  isNameFieldEmpty ? Config.businessFormationDefaults.nameCheckValidationErrorText : undefined
+                  hasError
+                    ? getErrorStateForField("businessName", state.formationFormData, nameAvailability).label
+                    : undefined
                 }
-                onBlur={onBlurNameField}
+                onBlur={(event: FocusEvent<HTMLInputElement>) => {
+                  setNameInFormationData();
+                  setFieldInteracted(FIELD_NAME);
+                  onBlurNameField(event);
+                }}
               />
             </div>
             <div className="flex flex-justify-end tablet:flex-auto tablet:flex-justify tablet:grid-col-4">
@@ -157,7 +148,7 @@ export const BusinessNameSection = (): ReactElement => {
           )}
         </Alert>
       )}
-      {nameAvailability?.status === "AVAILABLE" && submittedName === currentName && (
+      {nameAvailability?.status === "AVAILABLE" && (
         <Alert variant="success" dataTestid="available-text">
           <span className="font-sans-xs">
             {templateEval(Config.businessFormationDefaults.nameCheckAvailableText, {
@@ -166,23 +157,6 @@ export const BusinessNameSection = (): ReactElement => {
           </span>
         </Alert>
       )}
-      <div
-        className="flex flex-justify-end bg-base-lightest margin-x-neg-4 padding-3 margin-top-3 margin-bottom-neg-4"
-        style={{
-          visibility:
-            nameAvailability?.status === "AVAILABLE" && submittedName === currentName ? "visible" : "hidden",
-        }}
-      >
-        <Button
-          style="primary"
-          onClick={submitNameAndContinue}
-          noRightMargin
-          widthAutoOnMobile
-          heightAutoOnMobile={isMobile}
-        >
-          {initialNextButtonText}
-        </Button>
-      </div>
     </div>
   );
 };

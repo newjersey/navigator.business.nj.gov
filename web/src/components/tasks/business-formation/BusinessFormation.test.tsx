@@ -202,7 +202,7 @@ describe("<BusinessFormation />", () => {
     const formationData = generateEmptyFormationData();
     const page = preparePage({ profileData, formationData }, displayContent);
 
-    await page.submitBusinessNameTab("Pizza Joint");
+    await page.fillAndSubmitBusinessNameTab("Pizza Joint");
 
     page.selectByText("Business suffix", "LLC");
     const threeDaysFromNow = getCurrentDate().add(3, "days");
@@ -242,7 +242,6 @@ describe("<BusinessFormation />", () => {
     page.fillText("Signer 0", "Elrond");
     page.checkSignerBox(0);
     await page.submitContactsTab();
-    await page.submitReviewTab();
 
     page.fillText("Contact first name", "John");
     page.fillText("Contact last name", "Smith");
@@ -262,7 +261,8 @@ describe("<BusinessFormation />", () => {
       displayContent[legalStructureId].officialFormationDocument.cost;
 
     expect(screen.getByText(getDollarValue(expectedTotalCost))).toBeInTheDocument();
-    await page.clickSubmit();
+    await page.submitBillingTab();
+    await page.submitReviewTab();
 
     const formationFormData = currentUserData().formationData.formationFormData;
     await waitFor(() => {
@@ -312,7 +312,7 @@ describe("<BusinessFormation />", () => {
     const formationData = generateEmptyFormationData();
     const page = preparePage({ profileData, formationData }, displayContent);
 
-    await page.submitBusinessNameTab("Pizza Joint");
+    await page.fillAndSubmitBusinessNameTab("Pizza Joint");
 
     page.selectByText("Business suffix", "LLP");
     const threeDaysFromNow = getCurrentDate().add(3, "days");
@@ -342,7 +342,6 @@ describe("<BusinessFormation />", () => {
     page.fillText("Signer 0", "Elrond");
     page.checkSignerBox(0);
     await page.submitContactsTab();
-    await page.submitReviewTab();
 
     page.fillText("Contact first name", "John");
     page.fillText("Contact last name", "Smith");
@@ -362,7 +361,8 @@ describe("<BusinessFormation />", () => {
       displayContent[legalStructureId].officialFormationDocument.cost;
 
     expect(screen.getByText(getDollarValue(expectedTotalCost))).toBeInTheDocument();
-    await page.clickSubmit();
+    await page.submitBillingTab();
+    await page.submitReviewTab();
 
     const formationFormData = currentUserData().formationData.formationFormData;
     await waitFor(() => {
@@ -406,7 +406,7 @@ describe("<BusinessFormation />", () => {
     const formationData = generateEmptyFormationData();
     const page = preparePage({ profileData, formationData }, displayContent);
 
-    await page.submitBusinessNameTab("Pizza Joint");
+    await page.fillAndSubmitBusinessNameTab("Pizza Joint");
 
     page.selectByText("Business suffix", "LP");
     const threeDaysFromNow = getCurrentDate().add(3, "days");
@@ -456,7 +456,6 @@ describe("<BusinessFormation />", () => {
     await page.fillAndSubmitAddressModal(member, "signers");
     page.checkSignerBox(0);
     await page.submitContactsTab();
-    await page.submitReviewTab();
 
     page.fillText("Contact first name", "John");
     page.fillText("Contact last name", "Smith");
@@ -476,7 +475,8 @@ describe("<BusinessFormation />", () => {
       displayContent[legalStructureId].officialFormationDocument.cost;
 
     expect(screen.getByText(getDollarValue(expectedTotalCost))).toBeInTheDocument();
-    await page.clickSubmit();
+    await page.submitBillingTab();
+    await page.submitReviewTab();
 
     const formationFormData = currentUserData().formationData.formationFormData;
     await waitFor(() => {
@@ -543,7 +543,7 @@ describe("<BusinessFormation />", () => {
       signature: false,
     };
 
-    await page.submitBusinessNameTab("Pizza Joint");
+    await page.fillAndSubmitBusinessNameTab("Pizza Joint");
 
     page.selectByText("Business suffix", "CORPORATION");
     page.fillText("Business total stock", "123");
@@ -578,7 +578,6 @@ describe("<BusinessFormation />", () => {
     page.checkSignerBox(0);
 
     await page.submitContactsTab();
-    await page.submitReviewTab();
 
     page.fillText("Contact first name", "John");
     page.fillText("Contact last name", "Smith");
@@ -598,7 +597,8 @@ describe("<BusinessFormation />", () => {
       displayContent[legalStructureId].officialFormationDocument.cost;
 
     expect(screen.getByText(getDollarValue(expectedTotalCost))).toBeInTheDocument();
-    await page.clickSubmit();
+    await page.submitBillingTab();
+    await page.submitReviewTab();
 
     const formationFormData = currentUserData().formationData.formationFormData;
     await waitFor(() => {
@@ -637,38 +637,10 @@ describe("<BusinessFormation />", () => {
     expect(formationFormData.corpWatchNotification).toEqual(false);
   });
 
-  it("navigates from business tab to payment tab and back to business tab", async () => {
-    const page = preparePage({}, displayContent);
-    await page.submitBusinessNameTab();
-    await page.submitBusinessTab();
-    await page.submitContactsTab();
-    await page.submitReviewTab();
-
-    fireEvent.click(screen.getByText(Config.businessFormationDefaults.previousButtonText));
-    await waitFor(() => {
-      expect(screen.getByTestId("review-section")).toBeInTheDocument();
-    });
-
-    fireEvent.click(screen.getByText(Config.businessFormationDefaults.previousButtonText));
-    await waitFor(() => {
-      expect(screen.getByTestId("contacts-section")).toBeInTheDocument();
-    });
-
-    fireEvent.click(screen.getByText(Config.businessFormationDefaults.previousButtonText));
-    await waitFor(() => {
-      expect(screen.getByTestId("business-section")).toBeInTheDocument();
-    });
-
-    fireEvent.click(screen.getByText(Config.businessFormationDefaults.previousButtonText));
-    await waitFor(() => {
-      expect(screen.getByTestId("business-name-section")).toBeInTheDocument();
-    });
-  });
-
   it("loads different displayContent depending on users LegalStructureId", async () => {
     const profileData = generateFormationProfileData({});
     const page = preparePage({ profileData }, displayContent);
-    await page.submitBusinessNameTab();
+    await page.fillAndSubmitBusinessNameTab();
     await page.submitBusinessTab();
     expect(
       screen.getByText(

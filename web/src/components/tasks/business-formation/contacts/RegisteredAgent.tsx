@@ -2,16 +2,13 @@ import { Content } from "@/components/Content";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { validateEmail, zipCodeRange } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { Checkbox, FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import React, { ReactElement, useContext, useEffect } from "react";
 
 export const RegisteredAgent = (): ReactElement => {
-  const { state, setFormationFormData, setErrorMap } = useContext(BusinessFormationContext);
+  const { state, setFormationFormData, setFieldInteracted } = useContext(BusinessFormationContext);
   const { userData } = useUserData();
-  // const [useAccountInfo, setUseAccountInfo] = useState<boolean>(false);
-  // const [useBusinessAddress, setUseBusinessAddress] = useState<boolean>(false);
 
   useEffect(
     function setAgentCheckboxFalseWhenAddressChanged() {
@@ -40,23 +37,20 @@ export const RegisteredAgent = (): ReactElement => {
     [state.formationFormData, setFormationFormData]
   );
 
-  const resetAgentFieldsInErrorMap = (): void => {
-    setErrorMap({
-      ...state.errorMap,
-      agentNumberOrManual: { invalid: false },
-      agentNumber: { invalid: false },
-      agentName: { invalid: false },
-      agentEmail: { invalid: false },
-      agentOfficeAddressLine1: { invalid: false },
-      agentOfficeAddressLine2: { invalid: false },
-      agentOfficeAddressCity: { invalid: false },
-      agentOfficeAddressState: { invalid: false },
-      agentOfficeAddressZipCode: { invalid: false },
-    });
+  const resetAgentFieldsInteraction = (): void => {
+    setFieldInteracted("agentNumberOrManual", { setToUninteracted: true });
+    setFieldInteracted("agentNumber", { setToUninteracted: true });
+    setFieldInteracted("agentName", { setToUninteracted: true });
+    setFieldInteracted("agentEmail", { setToUninteracted: true });
+    setFieldInteracted("agentOfficeAddressLine1", { setToUninteracted: true });
+    setFieldInteracted("agentOfficeAddressLine2", { setToUninteracted: true });
+    setFieldInteracted("agentOfficeAddressCity", { setToUninteracted: true });
+    setFieldInteracted("agentOfficeAddressState", { setToUninteracted: true });
+    setFieldInteracted("agentOfficeAddressZipCode", { setToUninteracted: true });
   };
 
   const handleRadioSelection = (event: React.ChangeEvent<{ name?: string; value: unknown }>) => {
-    resetAgentFieldsInErrorMap();
+    resetAgentFieldsInteraction();
     setFormationFormData({
       ...state.formationFormData,
       agentNumberOrManual: event.target.value as "NUMBER" | "MANUAL_ENTRY",
@@ -72,11 +66,6 @@ export const RegisteredAgent = (): ReactElement => {
         agentEmail: userData?.user.email ?? "",
         agentUseAccountInfo: checked,
       });
-      setErrorMap({
-        ...state.errorMap,
-        agentName: { invalid: false },
-        agentEmail: { invalid: false },
-      });
     } else {
       setFormationFormData({
         ...state.formationFormData,
@@ -87,7 +76,6 @@ export const RegisteredAgent = (): ReactElement => {
 
   const toggleUseBusinessAddress = (event: React.ChangeEvent<HTMLInputElement>) => {
     const checked = event.target.checked;
-    // setUseBusinessAddress(checked);
     if (checked) {
       setFormationFormData({
         ...state.formationFormData,
@@ -97,14 +85,6 @@ export const RegisteredAgent = (): ReactElement => {
         agentOfficeAddressState: state.formationFormData.businessAddressState,
         agentOfficeAddressZipCode: state.formationFormData.businessAddressZipCode,
         agentUseBusinessAddress: checked,
-      });
-      setErrorMap({
-        ...state.errorMap,
-        agentOfficeAddressLine1: { invalid: false },
-        agentOfficeAddressLine2: { invalid: false },
-        agentOfficeAddressCity: { invalid: false },
-        agentOfficeAddressState: { invalid: false },
-        agentOfficeAddressZipCode: { invalid: false },
       });
     } else {
       setFormationFormData({
@@ -195,7 +175,6 @@ export const RegisteredAgent = (): ReactElement => {
                     placeholder={Config.businessFormationDefaults.registeredAgentEmailPlaceholder}
                     fieldName="agentEmail"
                     inlineErrorStyling={true}
-                    additionalValidation={validateEmail}
                     required={true}
                     validationText={Config.businessFormationDefaults.agentEmailErrorText}
                     disabled={state.formationFormData.agentUseAccountInfo}
@@ -259,7 +238,6 @@ export const RegisteredAgent = (): ReactElement => {
                     label={Config.businessFormationDefaults.registeredAgentZipCodeLabel}
                     placeholder={Config.businessFormationDefaults.registeredAgentZipCodePlaceholder}
                     validationText={Config.businessFormationDefaults.agentOfficeAddressZipCodeErrorText}
-                    additionalValidation={zipCodeRange}
                     inlineErrorStyling={true}
                     required={true}
                     disabled={state.formationFormData.agentUseBusinessAddress}

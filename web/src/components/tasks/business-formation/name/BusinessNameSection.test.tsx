@@ -1,25 +1,13 @@
-import { BusinessFormation } from "@/components/tasks/business-formation/BusinessFormation";
-import { IsAuthenticated } from "@/lib/auth/AuthContext";
+import { generateFormationDisplayContent, generateUserData } from "@/test/factories";
 import {
-  generateEmptyFormationData,
-  generateFormationDisplayContent,
-  generateTask,
-  generateUserData,
-} from "@/test/factories";
-import { withAuthAlert } from "@/test/helpers";
-import {
-  createFormationPageHelpers,
   FormationPageHelpers,
   generateFormationProfileData,
   preparePage,
   useSetupInitialMocks,
 } from "@/test/helpers-formation";
-import { currentUserData, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { createEmptyFormationFormData } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
-import { createTheme, ThemeProvider } from "@mui/material";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 
 function mockMaterialUI(): typeof materialUi {
   return {
@@ -79,68 +67,14 @@ describe("Formation - BusinessNameSection", () => {
     );
   });
 
-  it("does not display continue button on business name tab if name is unavailable", async () => {
+  it("does not display available alert if user types in new name after finding an available one", async () => {
     const page = getPageHelper();
-    expect(screen.queryByText(Config.businessFormationDefaults.initialNextButtonText)).not.toBeVisible();
-
-    page.fillText("Search business name", "My taken test business");
-    await page.searchBusinessName({ status: "UNAVAILABLE" });
-    expect(screen.queryByText(Config.businessFormationDefaults.initialNextButtonText)).not.toBeVisible();
-  });
-
-  it("does not display continue button on business name tab if the designator is included in the name", async () => {
-    const page = getPageHelper();
-    expect(screen.queryByText(Config.businessFormationDefaults.initialNextButtonText)).not.toBeVisible();
-
-    page.fillText("Search business name", "My taken test business LLC");
-    await page.searchBusinessName({ status: "UNAVAILABLE" });
-    expect(screen.queryByText(Config.businessFormationDefaults.initialNextButtonText)).not.toBeVisible();
-  });
-
-  it("does not display continue button on business name tab if a special character is included in the name", async () => {
-    const page = getPageHelper();
-    expect(screen.queryByText(Config.businessFormationDefaults.initialNextButtonText)).not.toBeVisible();
-
-    page.fillText("Search business name", "My taken test business!");
-    await page.searchBusinessName({ status: "UNAVAILABLE" });
-    expect(screen.queryByText(Config.businessFormationDefaults.initialNextButtonText)).not.toBeVisible();
-  });
-
-  it("displays continue button on business name tab only once name is available", async () => {
-    const page = getPageHelper();
-    expect(screen.queryByText(Config.businessFormationDefaults.initialNextButtonText)).not.toBeVisible();
-
-    page.fillText("Search business name", "My test business");
-    await page.searchBusinessName({ status: "AVAILABLE" });
-    expect(screen.getByText(Config.businessFormationDefaults.initialNextButtonText)).toBeVisible();
-  });
-
-  it("does not display the continue button on business name tab if there is an error", async () => {
-    const page = getPageHelper();
-    expect(screen.queryByText(Config.businessFormationDefaults.initialNextButtonText)).not.toBeVisible();
-
-    page.fillText("Search business name", "Anything");
-    await page.searchBusinessNameAndGetError();
-    expect(screen.queryByText(Config.businessFormationDefaults.initialNextButtonText)).not.toBeVisible();
-  });
-
-  it("saves business name to profile after clicking continue", async () => {
-    const page = getPageHelper();
-    await page.submitBusinessNameTab("My Test Business");
-    await waitFor(() => expect(currentUserData().profileData.businessName).toEqual("My Test Business"));
-  });
-
-  it("does not display continue button and available alert if user types in new name after finding an available one", async () => {
-    const page = getPageHelper();
-    expect(screen.queryByText(Config.businessFormationDefaults.initialNextButtonText)).not.toBeVisible();
 
     page.fillText("Search business name", "First Name");
     await page.searchBusinessName({ status: "AVAILABLE" });
-    expect(screen.getByText(Config.businessFormationDefaults.initialNextButtonText)).toBeVisible();
     expect(screen.getByTestId("available-text")).toBeInTheDocument();
 
     page.fillText("Search business name", "Second Name");
-    expect(screen.queryByText(Config.businessFormationDefaults.initialNextButtonText)).not.toBeVisible();
     expect(screen.queryByTestId("available-text")).not.toBeInTheDocument();
   });
 
@@ -171,36 +105,6 @@ describe("Formation - BusinessNameSection", () => {
     expect(screen.getByText("Pizzapizza")).toBeInTheDocument();
   });
 
-  it("shows validation error if user searches with empty name", async () => {
-    const page = getPageHelper();
-
-    fireEvent.change(screen.getByLabelText("Search business name"), { target: { value: "" } });
-    await page.searchBusinessName({ status: "AVAILABLE" });
-    expect(
-      screen.getByText(Config.businessFormationDefaults.nameCheckValidationErrorText)
-    ).toBeInTheDocument();
-
-    page.fillText("Search business name", "Anything");
-    await page.searchBusinessName({ status: "AVAILABLE" });
-    expect(
-      screen.queryByText(Config.businessFormationDefaults.nameCheckValidationErrorText)
-    ).not.toBeInTheDocument();
-  });
-
-  it("shows validation error but no error alert if user blurs with empty name", async () => {
-    const page = getPageHelper();
-
-    page.fillText("Search business name", "");
-    expect(
-      screen.getByText(Config.businessFormationDefaults.nameCheckValidationErrorText)
-    ).toBeInTheDocument();
-
-    page.fillText("Search business name", "Anything");
-    expect(
-      screen.queryByText(Config.businessFormationDefaults.nameCheckValidationErrorText)
-    ).not.toBeInTheDocument();
-  });
-
   it("shows message if search returns 400", async () => {
     const page = getPageHelper();
 
@@ -222,79 +126,5 @@ describe("Formation - BusinessNameSection", () => {
     page.fillText("Search business name", "Anything else");
     await page.searchBusinessName({ status: "AVAILABLE", similarNames: [] });
     expect(screen.queryByTestId("error-alert-SEARCH_FAILED")).not.toBeInTheDocument();
-  });
-
-  it("prepends register to the next button when in guest mode", async () => {
-    const initialUserData = generateUserData({
-      formationData: {
-        formationFormData: createEmptyFormationFormData(),
-        formationResponse: undefined,
-        getFilingResponse: undefined,
-        completedFilingPayment: false,
-      },
-      profileData: generateFormationProfileData({}),
-    });
-
-    const setModalIsVisible = jest.fn();
-
-    render(
-      withAuthAlert(
-        <WithStatefulUserData initialUserData={initialUserData}>
-          <ThemeProvider theme={createTheme()}>
-            <BusinessFormation
-              task={generateTask({})}
-              displayContent={generateFormationDisplayContent({})}
-              municipalities={[]}
-            />
-          </ThemeProvider>
-        </WithStatefulUserData>,
-        IsAuthenticated.FALSE,
-        { modalIsVisible: false, setModalIsVisible }
-      )
-    );
-    const page = createFormationPageHelpers();
-
-    page.fillText("Search business name", "My test business");
-    await page.searchBusinessName({ status: "AVAILABLE" });
-    expect(
-      screen.getByText(`Register & ${Config.businessFormationDefaults.initialNextButtonText}`)
-    ).toBeInTheDocument();
-  });
-
-  it("opens registration modal when guest mode user tries to continue", async () => {
-    const initialUserData = generateUserData({
-      formationData: generateEmptyFormationData(),
-      profileData: generateFormationProfileData({}),
-    });
-
-    const setModalIsVisible = jest.fn();
-
-    render(
-      withAuthAlert(
-        <WithStatefulUserData initialUserData={initialUserData}>
-          <ThemeProvider theme={createTheme()}>
-            <BusinessFormation
-              task={generateTask({})}
-              displayContent={generateFormationDisplayContent({})}
-              municipalities={[]}
-            />
-          </ThemeProvider>
-        </WithStatefulUserData>,
-        IsAuthenticated.FALSE,
-        { modalIsVisible: false, setModalIsVisible }
-      )
-    );
-    const page = createFormationPageHelpers();
-
-    page.fillText("Search business name", "My test business");
-    await page.searchBusinessName({ status: "AVAILABLE" });
-    expect(setModalIsVisible).not.toHaveBeenCalled();
-    fireEvent.click(screen.getByText(`Register & ${Config.businessFormationDefaults.initialNextButtonText}`));
-    expect(setModalIsVisible).toHaveBeenCalledWith(true);
-  });
-
-  it("displays dependency alert", async () => {
-    getPageHelper();
-    expect(screen.getByTestId("dependency-alert")).toBeInTheDocument();
   });
 });

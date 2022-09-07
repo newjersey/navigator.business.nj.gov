@@ -1,7 +1,7 @@
 import {
   createEmptyFormationDisplayContent,
   FormationDisplayContent,
-  FormationFieldErrorMap,
+  NameAvailability,
 } from "@/lib/types/types";
 import {
   createEmptyFormationFormData,
@@ -12,33 +12,27 @@ import {
 } from "@businessnjgovnavigator/shared/";
 import { createContext } from "react";
 
-const allFormationFormFields = Object.keys(createEmptyFormationFormData()) as (keyof FormationFormData)[];
-
-const createFormationFieldErrorMap = (): FormationFieldErrorMap =>
-  allFormationFormFields.reduce((acc, field: FormationFields) => {
-    acc[field] = { name: field, invalid: false };
-    return acc;
-  }, {} as FormationFieldErrorMap);
-
 interface BusinessFormationState {
   tab: number;
   formationFormData: FormationFormData;
   legalStructureId: FormationLegalType;
   displayContent: FormationDisplayContent;
   municipalities: Municipality[];
-  showErrors: boolean;
-  errorMap: FormationFieldErrorMap;
   showResponseAlert: boolean;
+  hasBeenSubmitted: boolean;
+  interactedFields: FormationFields[];
+  businessNameAvailability: NameAvailability | undefined;
+  hasBusinessNameBeenSearched: boolean;
 }
 
 interface BusinessFormationContextType {
   state: BusinessFormationState;
   setFormationFormData: (formationFormData: FormationFormData) => void;
-  fieldsAreInvalid: (fields: FormationFields[]) => boolean;
-  setErrorMap: (errorMap: FormationFieldErrorMap) => void;
   setTab: (value: number) => void;
   setShowResponseAlert: React.Dispatch<React.SetStateAction<boolean>>;
-  setShowErrors: React.Dispatch<React.SetStateAction<boolean>>;
+  setFieldInteracted: (field: FormationFields, config?: { setToUninteracted: boolean }) => void;
+  setHasBeenSubmitted: (hasBeenSubmitted: boolean) => void;
+  setBusinessNameAvailability: (nameAvailability: NameAvailability | undefined) => void;
 }
 
 export const BusinessFormationContext = createContext<BusinessFormationContextType>({
@@ -48,16 +42,16 @@ export const BusinessFormationContext = createContext<BusinessFormationContextTy
     formationFormData: createEmptyFormationFormData(),
     displayContent: createEmptyFormationDisplayContent()["limited-liability-company"],
     municipalities: [],
-    showErrors: false,
-    errorMap: createFormationFieldErrorMap(),
     showResponseAlert: false,
+    hasBeenSubmitted: false,
+    interactedFields: [],
+    businessNameAvailability: undefined,
+    hasBusinessNameBeenSearched: false,
   },
   setFormationFormData: () => {},
-  fieldsAreInvalid: () => {
-    return false;
-  },
-  setErrorMap: () => {},
-  setShowErrors: () => {},
   setTab: () => {},
   setShowResponseAlert: () => {},
+  setFieldInteracted: () => {},
+  setHasBeenSubmitted: () => {},
+  setBusinessNameAvailability: () => {},
 });

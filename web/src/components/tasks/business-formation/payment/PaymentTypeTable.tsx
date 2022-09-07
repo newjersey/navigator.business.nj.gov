@@ -1,5 +1,6 @@
 import { Content } from "@/components/Content";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
+import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { getDollarValue } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { PaymentType } from "@businessnjgovnavigator/shared/";
@@ -7,6 +8,7 @@ import { FormHelperText, Radio } from "@mui/material";
 import React, { ReactElement, useContext, useEffect, useState } from "react";
 
 export const PaymentTypeTable = (): ReactElement => {
+  const FIELD = "paymentType";
   const achPaymentCost = Number.parseFloat(Config.businessFormationDefaults.achPaymentCost);
   const creditCardPaymentCostExtra = Number.parseFloat(
     Config.businessFormationDefaults.creditCardPaymentCostExtra
@@ -15,10 +17,11 @@ export const PaymentTypeTable = (): ReactElement => {
     Config.businessFormationDefaults.creditCardPaymentCostInitial
   );
 
-  const { state, setFormationFormData, setErrorMap } = useContext(BusinessFormationContext);
+  const { state, setFormationFormData } = useContext(BusinessFormationContext);
   const [totalCost, setTotalCost] = useState<number>(state.displayContent.officialFormationDocument.cost);
   const [creditCardCost, setCreditCardCost] = useState<number>(creditCardPaymentCostInitial);
   const [achCost, setAchCost] = useState<number>(achPaymentCost);
+  const { doesFieldHaveError } = useFormationErrors();
 
   useEffect(() => {
     const costs = [state.displayContent.officialFormationDocument.cost];
@@ -46,15 +49,16 @@ export const PaymentTypeTable = (): ReactElement => {
   ]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setErrorMap({ ...state.errorMap, paymentType: { invalid: false } });
     setFormationFormData({
       ...state.formationFormData,
       paymentType: event.target.value as PaymentType,
     });
   };
 
+  const hasError = doesFieldHaveError(FIELD);
+
   return (
-    <div className={`${state.errorMap["paymentType"].invalid ? "error" : ""} input-error-bar`}>
+    <div className={`${hasError ? "error" : ""} input-error-bar`}>
       <table className="business-formation-table business-formation-payment">
         <thead>
           <tr>
@@ -64,7 +68,7 @@ export const PaymentTypeTable = (): ReactElement => {
           </tr>
           <tr>
             <th colSpan={3}>
-              {state.errorMap.paymentType.invalid ? (
+              {hasError ? (
                 <FormHelperText className={"text-error-dark"}>
                   {Config.businessFormationDefaults.paymentTypeErrorText}
                 </FormHelperText>
@@ -80,7 +84,7 @@ export const PaymentTypeTable = (): ReactElement => {
               <div className="business-formation-table-checkboxes">
                 <Radio
                   id="paymentTypeCreditCardRadio"
-                  color={state.errorMap.paymentType.invalid ? "error" : "primary"}
+                  color={hasError ? "error" : "primary"}
                   checked={state.formationFormData.paymentType === "CC"}
                   onChange={handleChange}
                   inputProps={{
@@ -95,7 +99,7 @@ export const PaymentTypeTable = (): ReactElement => {
               <label
                 htmlFor="creditCardRadio"
                 className={
-                  state.errorMap.paymentType.invalid
+                  hasError
                     ? "text-error"
                     : state.formationFormData.paymentType === "CC"
                     ? "text-success-dark text-bold"
@@ -114,7 +118,7 @@ export const PaymentTypeTable = (): ReactElement => {
               <div className="business-formation-table-checkboxes">
                 <Radio
                   id="paymentTypeACHRadio"
-                  color={state.errorMap.paymentType.invalid ? "error" : "primary"}
+                  color={hasError ? "error" : "primary"}
                   checked={state.formationFormData.paymentType === "ACH"}
                   onChange={handleChange}
                   value="ACH"
@@ -129,7 +133,7 @@ export const PaymentTypeTable = (): ReactElement => {
               <label
                 htmlFor="paymentTypeACHRadio"
                 className={
-                  state.errorMap.paymentType.invalid
+                  doesFieldHaveError(FIELD)
                     ? "text-error"
                     : state.formationFormData.paymentType === "ACH"
                     ? "text-success-dark text-bold"

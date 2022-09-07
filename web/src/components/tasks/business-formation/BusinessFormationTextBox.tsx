@@ -3,6 +3,7 @@ import { Button } from "@/components/njwds-extended/Button";
 import { Icon } from "@/components/njwds/Icon";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
+import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { camelCaseToSentence } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { FormationTextField } from "@businessnjgovnavigator/shared/formationData";
@@ -22,8 +23,9 @@ interface Props {
 }
 
 export const BusinessFormationTextBox = (props: Props): ReactElement => {
-  const { state, setFormationFormData, fieldsAreInvalid } = useContext(BusinessFormationContext);
+  const { state, setFormationFormData } = useContext(BusinessFormationContext);
   const [isExpanded, setIsExpanded] = useState(props.required || !!state.formationFormData[props.fieldName]);
+  const { doesFieldHaveError } = useFormationErrors();
 
   const handleAddButtonClick = (): void => {
     setIsExpanded(true);
@@ -61,7 +63,7 @@ export const BusinessFormationTextBox = (props: Props): ReactElement => {
       {isExpanded ? (
         <div
           className={`${props.className ?? ""} ${
-            fieldsAreInvalid([props.fieldName]) ? "error" : ""
+            doesFieldHaveError(props.fieldName) ? "error" : ""
           } input-error-bar`}
         >
           <Content className="margin-bottom-2">{props.contentMd}</Content>
