@@ -343,28 +343,8 @@ const ProfilePage = (props: Props): ReactElement => {
       <>
         <hr className="margin-top-4" aria-hidden={true} />
         <h2 className="padding-bottom-3" style={{ fontWeight: 300 }}>
-          {" "}
           {Config.profileDefaults.profileTabRefTitle}
         </h2>
-        <OnboardingEmployerId
-          onValidation={onValidation}
-          fieldStates={fieldStates}
-          handleChangeOverride={showRegistrationModalForGuest()}
-        />
-        <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
-        <OnboardingEntityId
-          onValidation={onValidation}
-          fieldStates={fieldStates}
-          disabled={userData?.formationData?.getFilingResponse?.success}
-          handleChangeOverride={showRegistrationModalForGuest()}
-        />
-        <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
-        <OnboardingTaxId
-          onValidation={onValidation}
-          fieldStates={fieldStates}
-          handleChangeOverride={showRegistrationModalForGuest()}
-        />
-        <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
         <ProfileNaicsCode />
         {userData?.profileData.dateOfFormation && (
           <>
@@ -377,6 +357,25 @@ const ProfilePage = (props: Props): ReactElement => {
             />
           </>
         )}
+        <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
+        <OnboardingEntityId
+          onValidation={onValidation}
+          fieldStates={fieldStates}
+          disabled={userData?.formationData?.getFilingResponse?.success}
+          handleChangeOverride={showRegistrationModalForGuest()}
+        />
+        <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
+        <OnboardingEmployerId
+          onValidation={onValidation}
+          fieldStates={fieldStates}
+          handleChangeOverride={showRegistrationModalForGuest()}
+        />
+        <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
+        <OnboardingTaxId
+          onValidation={onValidation}
+          fieldStates={fieldStates}
+          handleChangeOverride={showRegistrationModalForGuest()}
+        />
       </>
     ),
   };
@@ -440,11 +439,12 @@ const ProfilePage = (props: Props): ReactElement => {
           {Config.profileDefaults.profileTabRefTitle}
         </h2>
         <div className="margin-top-4">
-          <OnboardingEmployerId
+          <OnboardingDateOfFormation
             onValidation={onValidation}
             fieldStates={fieldStates}
             headerAriaLevel={3}
-            handleChangeOverride={showRegistrationModalForGuest()}
+            disabled={userData?.formationData.getFilingResponse?.success}
+            futureAllowed={false}
           />
         </div>
         <div className="margin-top-4">
@@ -457,12 +457,11 @@ const ProfilePage = (props: Props): ReactElement => {
           />
         </div>
         <div className="margin-top-4">
-          <OnboardingDateOfFormation
+          <OnboardingEmployerId
             onValidation={onValidation}
             fieldStates={fieldStates}
             headerAriaLevel={3}
-            disabled={userData?.formationData.getFilingResponse?.success}
-            futureAllowed={false}
+            handleChangeOverride={showRegistrationModalForGuest()}
           />
         </div>
         <div className="margin-top-4">
