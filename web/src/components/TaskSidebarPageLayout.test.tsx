@@ -1,5 +1,5 @@
 import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
-import { generateOperateReference, generateStep, generateUserData } from "@/test/factories";
+import { generateStep, generateUserData } from "@/test/factories";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
@@ -31,14 +31,6 @@ describe("<TaskSidebarPageLayout />", () => {
       steps: [generateStep({ section: "PLAN" }), generateStep({ section: "START" })],
     });
     (useMediaQuery as jest.Mock).mockImplementation(() => true); // set large screen
-  });
-
-  it("shows only operate section when there are operateReferences", () => {
-    const operateReferences = { "some-id": generateOperateReference({}) };
-    render(<TaskSidebarPageLayout operateReferences={operateReferences}>stuff</TaskSidebarPageLayout>);
-    expect(screen.getByText(Config.sectionHeaders.OPERATE)).toBeInTheDocument();
-    expect(screen.queryByText(Config.sectionHeaders.PLAN)).not.toBeInTheDocument();
-    expect(screen.queryByText(Config.sectionHeaders.START)).not.toBeInTheDocument();
   });
 
   it("shows only plan/start sections when there are no operateReferences", () => {
