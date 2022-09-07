@@ -1,3 +1,10 @@
+## [5.2.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.2.0...v5.2.1) (2022-09-07)
+
+
+### Bug Fixes
+
+* set completedFilingPayment to false if user has no successful getFiling response ([2e2f675](https://github.com/newjersey/navigator.business.nj.gov/commit/2e2f6758be4ee89c87d15606982b18e537befc9e))
+
 # [5.2.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.1.1...v5.2.0) (2022-09-01)
 
 
