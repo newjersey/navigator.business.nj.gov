@@ -36,11 +36,6 @@ You or any staff providing HVACR services must be licensed as an HVACR Contracto
 >
 > * All of these documents can be uploaded to your online application. If you need to mail them instead, include your Applicant ID number on all the documents. Your Applicant ID is displayed in your online application.
 
-> **Mailing address:**\
-  State Board of Examiners of HVAC Contractors\
-  P.O. Box 47031,\
-  Newark, NJ 07101
-
 > **Once completed you will have:**
 >
 > * An HVACR Contractor License
