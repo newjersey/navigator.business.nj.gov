@@ -17,7 +17,7 @@ export const CongratulatoryModal = (props: Props): ReactElement => {
   const onClickComplete = () => router.push(ROUTES.dashboard);
 
   const publicName = props.nextSectionType ? Config.sectionHeaders[props.nextSectionType] : "";
-  const hideLink = !props.nextSectionType || props.nextSectionType === "OPERATE";
+  const hideLink = !props.nextSectionType;
 
   return (
     <Dialog

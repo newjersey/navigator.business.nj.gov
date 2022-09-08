@@ -35,7 +35,6 @@ describe("<TaskSidebarPageLayout />", () => {
 
   it("shows only plan/start sections when there are no operateReferences", () => {
     render(<TaskSidebarPageLayout>stuff</TaskSidebarPageLayout>);
-    expect(screen.queryByText(Config.sectionHeaders.OPERATE)).not.toBeInTheDocument();
     expect(screen.getByText(Config.sectionHeaders.PLAN)).toBeInTheDocument();
     expect(screen.getByText(Config.sectionHeaders.START)).toBeInTheDocument();
   });

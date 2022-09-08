@@ -1819,7 +1819,6 @@ collections:
             fields:
               - { label: Plan Label, name: PLAN, widget: string }
               - { label: Start Label, name: START, widget: string }
-              - { label: Operate Label, name: OPERATE, widget: string }
           - label: Self Registration
             name: selfRegistration
             collapsed: true
