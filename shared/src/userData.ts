@@ -61,4 +61,4 @@ export interface Preferences {
 
 export type FormProgress = "UNSTARTED" | "COMPLETED";
 
-export type SectionType = "PLAN" | "START" | "OPERATE";
+export type SectionType = "PLAN" | "START";
