@@ -2,19 +2,24 @@ import { Content } from "@/components/Content";
 import { GenericTextField } from "@/components/GenericTextField";
 import { Button } from "@/components/njwds-extended/Button";
 import { Icon } from "@/components/njwds/Icon";
-import { BusinessFormationInlineFieldAlert } from "@/components/tasks/business-formation/BusinessFormationInlineFieldAlert";
 import { ValidatedCheckbox } from "@/components/ValidatedCheckbox";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
+import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { MediaQueries } from "@/lib/PageSizes";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { createEmptyFormationAddress, FormationFields } from "@businessnjgovnavigator/shared";
+import {
+  createEmptyFormationAddress,
+  FormationAddress,
+  FormationFields,
+} from "@businessnjgovnavigator/shared";
 import { useMediaQuery } from "@mui/material";
 import React, { ChangeEvent, ReactElement, useContext } from "react";
-import { FormationAddress } from "../../../../../../shared/lib/shared/src/formationData";
 
 export const Signatures = (): ReactElement => {
-  const { state, setFormationFormData, setErrorMap } = useContext(BusinessFormationContext);
+  const FIELD_NAME = "signers";
+  const { state, setFormationFormData, setFieldInteracted } = useContext(BusinessFormationContext);
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
+  const { doesFieldHaveError } = useFormationErrors();
 
   const addSignerField = () => {
     setFormationFormData({
@@ -43,10 +48,6 @@ export const Signatures = (): ReactElement => {
       ...state.formationFormData,
       signers,
     });
-
-    if (value.trim() && signers.every((it: FormationAddress) => it.signature && it.name)) {
-      setErrorMap({ ...state.errorMap, signers: { invalid: false } });
-    }
   };
 
   const handleSignerCheckbox = (event: ChangeEvent<HTMLInputElement>, index: number): void => {
@@ -59,10 +60,6 @@ export const Signatures = (): ReactElement => {
       ...state.formationFormData,
       signers,
     });
-
-    if (event.target.checked && signers.every((it: FormationAddress) => it.signature && it.name)) {
-      setErrorMap({ ...state.errorMap, signers: { invalid: false } });
-    }
   };
 
   const renderSignatureColumn = ({
@@ -90,7 +87,7 @@ export const Signatures = (): ReactElement => {
             id={index ? `signature-checkbox-${fieldName}-${index}` : `signature-checkbox-${fieldName}`}
             onChange={onChange}
             checked={checked}
-            error={state.errorMap[fieldName].invalid && !checked}
+            error={doesFieldHaveError(fieldName) && !checked}
           />
         </div>
       </div>
@@ -119,14 +116,15 @@ export const Signatures = (): ReactElement => {
     );
   };
 
+  const hasError = doesFieldHaveError(FIELD_NAME);
+
   return (
     <>
       <div className="margin-bottom-2">
         <Content>{state.displayContent.signatureHeader.contentMd}</Content>
-        {state.errorMap["signers"].invalid && state.showErrors ? <></> : <br />}
-        <BusinessFormationInlineFieldAlert fields={["signers"]} />
+        {hasError ? <></> : <br />}
         <div className="grid-row flex-align-center">
-          <div className={`grid-col input-error-bar ${state.errorMap["signers"].invalid ? "error" : ""}`}>
+          <div className={`grid-col input-error-bar ${hasError ? "error" : ""}`}>
             <div className="fdr space-between">
               <Content>{Config.businessFormationDefaults.signerLabel}</Content>
               <Content>{`${Config.businessFormationDefaults.signatureColumnLabel}*`}</Content>
@@ -144,10 +142,9 @@ export const Signatures = (): ReactElement => {
                     value={state.formationFormData.signers[0]?.name}
                     placeholder={Config.businessFormationDefaults.signerPlaceholder}
                     handleChange={(value: string) => handleSignerChange(value, 0)}
-                    error={state.errorMap["signers"].invalid && !state.formationFormData.signers[0]?.name}
-                    onValidation={(fieldName: string, invalid: boolean) => {
-                      const isSignerInvalid = invalid || !state.formationFormData.signers[0]?.signature;
-                      setErrorMap({ ...state.errorMap, signers: { invalid: isSignerInvalid } });
+                    error={hasError && !state.formationFormData.signers[0]?.name}
+                    onValidation={() => {
+                      setFieldInteracted(FIELD_NAME);
                     }}
                     validationText={Config.businessFormationDefaults.signerErrorText}
                     fieldName="signer"
@@ -180,14 +177,7 @@ export const Signatures = (): ReactElement => {
                     value={it.name}
                     placeholder={Config.businessFormationDefaults.signerPlaceholder ?? ""}
                     handleChange={(value: string) => handleSignerChange(value, index)}
-                    error={state.errorMap.signers.invalid && !state.formationFormData.signers[index].name}
-                    onValidation={(fieldName: string, invalid: boolean) => {
-                      const isSignerInvalid = invalid || !state.formationFormData.signers[index].signature;
-                      setErrorMap({
-                        ...state.errorMap,
-                        signers: { invalid: isSignerInvalid },
-                      });
-                    }}
+                    error={hasError && !state.formationFormData.signers[index].name}
                     validationText={Config.businessFormationDefaults.additionalSignatureNameErrorText}
                     fieldName="signers"
                     ariaLabel={`Signer ${index}`}

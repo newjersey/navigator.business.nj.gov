@@ -120,11 +120,13 @@ export const createEmptyFormationDisplayContent = (): FormationDisplayContentMap
 
 export type OnboardingStatus = "SUCCESS" | "ERROR";
 
-export type FormationFieldErrorMap = Record<FormationFields, FormationFieldStatus>;
+export type FormationStepNames = "Name" | "Business" | "Contacts" | "Billing" | "Review";
 
-export type FormationErrorType = "checkbox" | "name" | "minimum" | "director";
-
-export type FormationFieldStatus = { invalid: boolean; name?: FormationFields; types?: FormationErrorType[] };
+export type FormationFieldErrorState = {
+  field: FormationFields;
+  hasError: boolean;
+  label: string;
+};
 
 const profileFieldsFromConfig = merge(
   getMergedConfig().profileDefaults["STARTING"],
@@ -134,7 +136,8 @@ const profileFieldsFromConfig = merge(
 
 export type ProfileFields = (keyof ProfileData & keyof typeof profileFieldsFromConfig) | keyof BusinessUser;
 
-export type ProfileFieldErrorMap = Record<ProfileFields, FormationFieldStatus>;
+export type FieldStatus = { invalid: boolean };
+export type ProfileFieldErrorMap = Record<ProfileFields, FieldStatus>;
 
 const allProfileFields = Object.keys(profileFieldsFromConfig) as ProfileFields[];
 

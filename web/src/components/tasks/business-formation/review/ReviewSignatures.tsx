@@ -42,6 +42,9 @@ export const ReviewSignatures = (): ReactElement => {
           </Button>
         </div>
       </div>
+      {state.formationFormData.signers.length === 0 && (
+        <i>{Config.businessFormationDefaults.reviewPageNotEnteredText}</i>
+      )}
       {state.formationFormData.signers.map((signer, index) => (
         <div key={`${signer}-${index}`} className={index !== 0 ? "margin-top-2" : ""}>
           <div className="display-block tablet:display-flex">
@@ -52,7 +55,7 @@ export const ReviewSignatures = (): ReactElement => {
                   : Config.businessFormationDefaults.reviewPageSignerNameLabel}
               </Content>
             </div>
-            <div>{signer.name}</div>
+            <div>{signer.name || <i>{Config.businessFormationDefaults.reviewPageNotEnteredText}</i>}</div>
           </div>
           {(isCorp || state.legalStructureId == "limited-partnership") && (
             <>

@@ -127,6 +127,10 @@ export const scrollToTop = (props?: { smooth?: boolean }): void => {
     : window.scrollTo(0, 0);
 };
 
+export const scrollToTopOfFormation = () => {
+  setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 100);
+};
+
 export const isStepCompleted = (
   roadmap: Roadmap | undefined,
   step: Step,

@@ -1,4 +1,3 @@
-import { camelCaseToSentence } from "@/lib/utils/helpers";
 import {
   generateFormationDisplayContent,
   generateFormationFormData,
@@ -13,9 +12,8 @@ import {
   useSetupInitialMocks,
 } from "@/test/helpers-formation";
 import { mockPush } from "@/test/mock/mockRouter";
-import { currentUserData, userDataUpdatedNTimes } from "@/test/mock/withStatefulUserData";
+import { currentUserData } from "@/test/mock/withStatefulUserData";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import FormationErrors from "@businessnjgovnavigator/content/fieldConfig/formation-error.json";
 import {
   BusinessUser,
   FormationFormData,
@@ -26,7 +24,7 @@ import {
   ProfileData,
 } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
-import { fireEvent, screen, waitFor, within } from "@testing-library/react";
+import { fireEvent, screen, within } from "@testing-library/react";
 
 function mockMaterialUI(): typeof materialUi {
   return {
@@ -76,7 +74,7 @@ describe("Formation - BusinessSection", () => {
       generateFormationDisplayContent({}),
       municipalities
     );
-    await page.submitBusinessNameTab();
+    await page.stepperClickToBusinessTab();
     return page;
   };
 
@@ -131,41 +129,6 @@ describe("Formation - BusinessSection", () => {
     expect(page.getInputElementByLabel("Business purpose").value).toBe("some cool purpose");
   });
 
-  it("saves business address city to profile after clicking continue", async () => {
-    const page = await getPageHelper({ municipality: generateMunicipality({ displayName: "Newark" }) }, {}, [
-      generateMunicipality({ displayName: "Whatever Town" }),
-    ]);
-
-    expect((screen.getByLabelText("Business address city") as HTMLInputElement).value).toEqual("Newark");
-    page.selectByText("Business address city", "Whatever Town");
-    expect((screen.getByLabelText("Business address city") as HTMLInputElement).value).toEqual(
-      "Whatever Town"
-    );
-    await page.submitBusinessTab();
-    await waitFor(() => {
-      expect(currentUserData().profileData.municipality?.displayName).toEqual("Whatever Town");
-    });
-    expect(currentUserData().formationData.formationFormData.businessAddressCity?.displayName).toEqual(
-      "Whatever Town"
-    );
-  });
-
-  it("does not save business address city to profile when page is invalid", async () => {
-    const page = await getPageHelper({ municipality: generateMunicipality({ displayName: "Newark" }) }, {}, [
-      generateMunicipality({ displayName: "Whatever Town" }),
-    ]);
-    page.selectByText("Business address city", "Whatever Town");
-    page.fillText("Business address zip code", "AAAAA");
-    await page.submitBusinessTab(false);
-
-    await waitFor(() => {
-      expect(currentUserData().profileData.municipality?.displayName).toEqual("Newark");
-    });
-    expect(currentUserData().formationData.formationFormData.businessAddressCity?.displayName).toEqual(
-      "Whatever Town"
-    );
-  });
-
   it("does not display dependency alert", async () => {
     await getPageHelper({}, {});
     expect(screen.queryByTestId("dependency-alert")).not.toBeInTheDocument();
@@ -177,22 +140,17 @@ describe("Formation - BusinessSection", () => {
     expect(screen.getByTestId("business-name-section")).toBeInTheDocument();
   });
 
-  it("displays alert and highlights fields when submitting with missing fields", async () => {
+  it("displays alert and highlights fields when blur with missing fields", async () => {
     const page = await getPageHelper({}, { businessAddressLine1: "" });
-    await page.submitBusinessTab(false);
+
+    fireEvent.blur(screen.getByLabelText("Business address line1"));
+
     expect(
       screen.getByText(Config.businessFormationDefaults.businessAddressLine1ErrorText)
     ).toBeInTheDocument();
-    expect(
-      screen.getByText(Config.businessFormationDefaults.missingFieldsOnSubmitModalText)
-    ).toBeInTheDocument();
     page.fillText("Business address line1", "1234 main street");
-    await page.submitBusinessTab();
     expect(
       screen.queryByText(Config.businessFormationDefaults.businessAddressLine1ErrorText)
-    ).not.toBeInTheDocument();
-    expect(
-      screen.queryByText(Config.businessFormationDefaults.missingFieldsOnSubmitModalText)
     ).not.toBeInTheDocument();
   });
 
@@ -299,20 +257,6 @@ describe("Formation - BusinessSection", () => {
       ]);
     });
 
-    it("removes empty provisions when moving to next tab", async () => {
-      const page = await getPageHelper({}, { provisions: ["provision0"] });
-      fireEvent.click(screen.getByText(Config.businessFormationDefaults.provisionsAddAnotherButtonText));
-      fireEvent.click(screen.getByText(Config.businessFormationDefaults.provisionsAddAnotherButtonText));
-      page.fillText("Provisions 2", "provision2");
-      await page.submitBusinessTab();
-      expect(currentUserData().formationData.formationFormData.provisions).toEqual([
-        "provision0",
-        "provision2",
-      ]);
-      fireEvent.click(screen.getByText(Config.businessFormationDefaults.previousButtonText));
-      expect(screen.queryAllByLabelText("remove provision")).toHaveLength(2);
-    });
-
     it("updates char count in real time", async () => {
       const page = await getPageHelper({}, { provisions: [] });
       fireEvent.click(screen.getByText(Config.businessFormationDefaults.provisionsAddButtonText));
@@ -343,7 +287,7 @@ describe("Formation - BusinessSection", () => {
       expect(currentUserData().formationData.formationFormData.businessTotalStock).toEqual("123");
     });
 
-    it("trims leading zeroe", async () => {
+    it("trims leading zeros", async () => {
       const page = await getPageHelper(
         { legalStructureId: "c-corporation" },
         { businessTotalStock: undefined }
@@ -358,36 +302,23 @@ describe("Formation - BusinessSection", () => {
     it("displays error message when non-NJ zipcode is entered in main business address", async () => {
       const page = await getPageHelper({}, { businessAddressZipCode: "" });
       page.fillText("Business address zip code", "22222");
-
-      await page.submitBusinessTab(false);
-      await waitFor(() => {
-        expect(
-          screen.getByText(Config.businessFormationDefaults.businessAddressZipCodeErrorText)
-        ).toBeInTheDocument();
-      });
       expect(
-        screen.getByText(Config.businessFormationDefaults.missingFieldsOnSubmitModalText)
+        screen.getByText(Config.businessFormationDefaults.businessAddressZipCodeErrorText)
       ).toBeInTheDocument();
     });
 
     it("displays error message when alphabetical zipcode is entered in main business address", async () => {
       const page = await getPageHelper({}, { businessAddressZipCode: "" });
       page.fillText("Business address zip code", "AAAAA");
-      await page.submitBusinessTab(false);
-      await waitFor(() => {
-        expect(
-          screen.getByText(Config.businessFormationDefaults.businessAddressZipCodeErrorText)
-        ).toBeInTheDocument();
-      });
       expect(
-        screen.getByText(Config.businessFormationDefaults.missingFieldsOnSubmitModalText)
+        screen.getByText(Config.businessFormationDefaults.businessAddressZipCodeErrorText)
       ).toBeInTheDocument();
     });
 
     it("passes zipcode validation in main business address", async () => {
       const page = await getPageHelper({}, { businessAddressZipCode: "" });
       page.fillText("Business address zip code", "07001");
-      await page.submitBusinessTab(true);
+      await page.submitBusinessTab();
       expect(currentUserData().formationData.formationFormData.businessAddressZipCode).toEqual("07001");
     });
   });
@@ -403,24 +334,15 @@ describe("Formation - BusinessSection", () => {
     });
 
     it("resets date on initial load", async () => {
-      await getPageHelper(
-        {},
-        {
-          businessStartDate: getCurrentDate().subtract(1, "day").format("YYYY-MM-DD"),
-        }
-      );
-
+      const yesterday = getCurrentDate().subtract(1, "day").format("YYYY-MM-DD");
+      await getPageHelper({}, { businessStartDate: yesterday });
       expect(screen.getByLabelText("Business start date")).toHaveValue(getCurrentDateFormatted("MM/DD/YYYY"));
     });
 
-    it("validates date on submit", async () => {
+    it("validates date", async () => {
       const page = await getPageHelper({}, {});
       page.selectDate(getCurrentDate().subtract(4, "day"));
-      await page.submitBusinessTab(false);
       expect(screen.getByText(Config.businessFormationDefaults.startDateErrorText)).toBeInTheDocument();
-      expect(
-        screen.getByText(Config.businessFormationDefaults.missingFieldsOnSubmitModalText)
-      ).toBeInTheDocument();
     });
   });
 
@@ -459,7 +381,7 @@ describe("Formation - BusinessSection", () => {
       const page = await getPageHelper({ businessName: "some cool name" }, {});
 
       fireEvent.click(screen.getByText(Config.businessFormationDefaults.previousButtonText));
-      await page.submitBusinessNameTab("another cool name");
+      await page.fillAndSubmitBusinessNameTab("another cool name");
 
       expect(screen.getByText("another cool name", { exact: false })).toBeInTheDocument();
       expect(screen.queryByText("some cool name", { exact: false })).not.toBeInTheDocument();
@@ -482,31 +404,34 @@ describe("Formation - BusinessSection", () => {
   });
 
   describe("required fields", () => {
+    const attemptApiSubmission = async (page: FormationPageHelpers) => {
+      await page.stepperClickToReviewTab();
+      await page.clickSubmit();
+      await page.stepperClickToBusinessTab();
+    };
+
     it("Business suffix", async () => {
       const page = await getPageHelper({}, { businessSuffix: undefined });
-      await page.submitBusinessTab(false);
+      await attemptApiSubmission(page);
       expect(screen.getByRole("alert")).toHaveTextContent(
-        FormationErrors.formationErrors.find((i) => i.fields.includes("businessSuffix"))?.label ??
-          camelCaseToSentence("businessSuffix")
+        Config.businessFormationDefaults.requiredFieldsBulletPointLabel.businessSuffix
       );
     });
 
     it("Withdrawals", async () => {
       const page = await getPageHelper({ legalStructureId: "limited-partnership" }, { withdrawals: "" });
-      await page.submitBusinessTab(false);
+      await attemptApiSubmission(page);
       expect(screen.getByText(Config.businessFormationDefaults.genericErrorText)).toBeInTheDocument();
       expect(screen.getByRole("alert")).toHaveTextContent(
-        FormationErrors.formationErrors.find((i) => i.fields.includes("withdrawals"))?.label ??
-          camelCaseToSentence("withdrawals")
+        Config.businessFormationDefaults.requiredFieldsBulletPointLabel.withdrawals
       );
     });
 
     it("Dissolution", async () => {
       const page = await getPageHelper({ legalStructureId: "limited-partnership" }, { dissolution: "" });
-      await page.submitBusinessTab(false);
+      await attemptApiSubmission(page);
       expect(screen.getByRole("alert")).toHaveTextContent(
-        FormationErrors.formationErrors.find((i) => i.fields.includes("dissolution"))?.label ??
-          camelCaseToSentence("dissolution")
+        Config.businessFormationDefaults.requiredFieldsBulletPointLabel.dissolution
       );
     });
 
@@ -515,10 +440,9 @@ describe("Formation - BusinessSection", () => {
         { legalStructureId: "limited-partnership" },
         { combinedInvestment: "" }
       );
-      await page.submitBusinessTab(false);
+      await attemptApiSubmission(page);
       expect(screen.getByRole("alert")).toHaveTextContent(
-        FormationErrors.formationErrors.find((i) => i.fields.includes("combinedInvestment"))?.label ??
-          camelCaseToSentence("combinedInvestment")
+        Config.businessFormationDefaults.requiredFieldsBulletPointLabel.combinedInvestment
       );
     });
 
@@ -527,15 +451,11 @@ describe("Formation - BusinessSection", () => {
         { legalStructureId: "limited-partnership" },
         { canCreateLimitedPartner: undefined }
       );
-      await page.submitBusinessTab(false);
+      await attemptApiSubmission(page);
       expect(screen.getByText(Config.businessFormationDefaults.genericErrorText)).toBeInTheDocument();
-      expect(
-        screen.getByText(
-          FormationErrors.inlineErrors.find((i) => i.fields.includes("canCreateLimitedPartner"))
-            ?.label as string,
-          { exact: false }
-        )
-      ).toBeInTheDocument();
+      expect(screen.getAllByRole("alert")[0]).toHaveTextContent(
+        Config.businessFormationDefaults.requiredFieldsBulletPointLabel.canCreateLimitedPartner
+      );
     });
 
     it("Partnership Rights Limited Partner Terms", async () => {
@@ -544,11 +464,9 @@ describe("Formation - BusinessSection", () => {
         { canCreateLimitedPartner: undefined, createLimitedPartnerTerms: "" }
       );
       fireEvent.click(screen.getByTestId("canCreateLimitedPartner-true"));
-      await page.submitBusinessTab(false);
-      expect(screen.getByText(Config.businessFormationDefaults.genericErrorText)).toBeInTheDocument();
+      await attemptApiSubmission(page);
       expect(screen.getByRole("alert")).toHaveTextContent(
-        FormationErrors.formationErrors.find((i) => i.fields.includes("createLimitedPartnerTerms"))?.label ??
-          camelCaseToSentence("createLimitedPartnerTerms")
+        Config.businessFormationDefaults.requiredFieldsBulletPointLabel.createLimitedPartnerTerms
       );
     });
 
@@ -557,13 +475,10 @@ describe("Formation - BusinessSection", () => {
         { legalStructureId: "limited-partnership" },
         { canMakeDistribution: undefined }
       );
-      await page.submitBusinessTab(false);
-      expect(
-        screen.getByText(
-          FormationErrors.inlineErrors.find((i) => i.fields.includes("canMakeDistribution"))?.label as string,
-          { exact: false }
-        )
-      ).toBeInTheDocument();
+      await attemptApiSubmission(page);
+      expect(screen.getAllByRole("alert")[0]).toHaveTextContent(
+        Config.businessFormationDefaults.requiredFieldsBulletPointLabel.canMakeDistribution
+      );
     });
 
     it("Partnership Rights make distribution terms", async () => {
@@ -572,10 +487,9 @@ describe("Formation - BusinessSection", () => {
         { canMakeDistribution: undefined, makeDistributionTerms: "" }
       );
       fireEvent.click(screen.getByTestId("canMakeDistribution-true"));
-      await page.submitBusinessTab(false);
+      await attemptApiSubmission(page);
       expect(screen.getByRole("alert")).toHaveTextContent(
-        FormationErrors.formationErrors.find((i) => i.fields.includes("makeDistributionTerms"))?.label ??
-          camelCaseToSentence("makeDistributionTerms")
+        Config.businessFormationDefaults.requiredFieldsBulletPointLabel.makeDistributionTerms
       );
     });
 
@@ -584,14 +498,10 @@ describe("Formation - BusinessSection", () => {
         { legalStructureId: "limited-partnership" },
         { canGetDistribution: undefined }
       );
-      await page.submitBusinessTab(false);
-
-      expect(
-        screen.getByText(
-          FormationErrors.inlineErrors.find((i) => i.fields.includes("canGetDistribution"))?.label as string,
-          { exact: false }
-        )
-      ).toBeInTheDocument();
+      await attemptApiSubmission(page);
+      expect(screen.getAllByRole("alert")[0]).toHaveTextContent(
+        Config.businessFormationDefaults.requiredFieldsBulletPointLabel.canGetDistribution
+      );
     });
 
     it("Partnership Rights get distribution terms", async () => {
@@ -600,22 +510,17 @@ describe("Formation - BusinessSection", () => {
         { canGetDistribution: undefined, getDistributionTerms: "" }
       );
       fireEvent.click(screen.getByTestId("canGetDistribution-true"));
-      await page.submitBusinessTab(false);
+      await attemptApiSubmission(page);
       expect(screen.getByRole("alert")).toHaveTextContent(
-        FormationErrors.formationErrors.find((i) => i.fields.includes("getDistributionTerms"))?.label ??
-          camelCaseToSentence("getDistributionTerms")
+        Config.businessFormationDefaults.requiredFieldsBulletPointLabel.getDistributionTerms
       );
     });
 
     it("Total Shares", async () => {
-      const page = await getPageHelper(
-        { legalStructureId: "c-corporation" },
-        { businessTotalStock: undefined }
-      );
-      await page.submitBusinessTab(false);
+      const page = await getPageHelper({ legalStructureId: "c-corporation" }, { businessTotalStock: "" });
+      await attemptApiSubmission(page);
       expect(screen.getByRole("alert")).toHaveTextContent(
-        FormationErrors.formationErrors.find((i) => i.fields.includes("businessTotalStock"))?.label ??
-          camelCaseToSentence("businessTotalStock")
+        Config.businessFormationDefaults.requiredFieldsBulletPointLabel.businessTotalStock
       );
       expect(
         screen.getByText(Config.businessFormationDefaults.businessTotalStockErrorText)
@@ -624,26 +529,18 @@ describe("Formation - BusinessSection", () => {
 
     it("Business address line1", async () => {
       const page = await getPageHelper({}, { businessAddressLine1: "" });
-      await page.submitBusinessTab(false);
+      await attemptApiSubmission(page);
       expect(screen.getByRole("alert")).toHaveTextContent(
-        FormationErrors.formationErrors.find((i) => i.fields.includes("businessAddressLine1"))?.label ??
-          camelCaseToSentence("businessAddressLine1")
+        Config.businessFormationDefaults.requiredFieldsBulletPointLabel.businessAddressLine1
       );
     });
 
     it("Business address zip code", async () => {
       const page = await getPageHelper({}, { businessAddressZipCode: "" });
-      await page.submitBusinessTab(false);
+      await attemptApiSubmission(page);
       expect(screen.getByRole("alert")).toHaveTextContent(
-        FormationErrors.formationErrors.find((i) => i.fields.includes("businessAddressZipCode"))?.label ??
-          camelCaseToSentence("businessAddressZipCode")
+        Config.businessFormationDefaults.requiredFieldsBulletPointLabel.businessAddressZipCode
       );
-    });
-
-    it("does not require business address line 2", async () => {
-      const page = await getPageHelper({}, { businessAddressLine2: "" });
-      await page.submitBusinessTab();
-      expect(userDataUpdatedNTimes()).toEqual(2);
     });
   });
 });

@@ -1,6 +1,7 @@
 import { Content } from "@/components/Content";
 import { GenericTextField, GenericTextFieldProps } from "@/components/GenericTextField";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
+import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { FormationTextField } from "@businessnjgovnavigator/shared/";
 import { ReactElement, useContext } from "react";
 
@@ -11,7 +12,8 @@ export interface Props extends Omit<GenericTextFieldProps, "value" | "fieldName"
 }
 
 export const BusinessFormationTextField = ({ className, ...props }: Props): ReactElement => {
-  const { state, setFormationFormData, setErrorMap } = useContext(BusinessFormationContext);
+  const { state, setFormationFormData, setFieldInteracted } = useContext(BusinessFormationContext);
+  const { doesFieldHaveError } = useFormationErrors();
 
   const handleChange = (value: string): void => {
     props.handleChange && props.handleChange(value);
@@ -20,11 +22,11 @@ export const BusinessFormationTextField = ({ className, ...props }: Props): Reac
     setFormationFormData({ ...formationFormData });
   };
 
-  const onValidation = (fieldName: string, invalid: boolean) => {
-    setErrorMap({ ...state.errorMap, [fieldName]: { invalid, name: fieldName } });
+  const onValidation = () => {
+    setFieldInteracted(props.fieldName);
   };
 
-  const error = props.error ?? state.errorMap[props.fieldName].invalid;
+  const error = props.error ?? doesFieldHaveError(props.fieldName);
   return (
     <div
       className={`${className ?? ""} ${error ? "error" : ""} ${

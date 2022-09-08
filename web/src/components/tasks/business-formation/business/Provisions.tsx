@@ -8,7 +8,7 @@ import { ReactElement, useContext } from "react";
 
 export const Provisions = (): ReactElement => {
   const MAX_CHARS = 3000;
-  const { state, setFormationFormData } = useContext(BusinessFormationContext);
+  const { state, setFormationFormData, setFieldInteracted } = useContext(BusinessFormationContext);
   const isExpanded = state.formationFormData.provisions.length > 0;
 
   const handleAddButtonClick = (): void => {
@@ -19,6 +19,7 @@ export const Provisions = (): ReactElement => {
   };
 
   const handleProvisionChange = (value: string, index: number) => {
+    setFieldInteracted("provisions");
     const newProvisions = [...state.formationFormData.provisions];
     newProvisions[index] = value;
     setFormationFormData({

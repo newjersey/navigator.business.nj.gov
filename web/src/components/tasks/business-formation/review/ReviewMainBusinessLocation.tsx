@@ -12,6 +12,7 @@ export const ReviewMainBusinessLocation = (): ReactElement => {
   const { userData } = useUserData();
 
   const headerLevelTwo = setHeaderRole(2, "h3-styling");
+  const italicNotEnteredText = `*${Config.businessFormationDefaults.reviewPageNotEnteredText}*`;
 
   return (
     <>
@@ -39,15 +40,15 @@ export const ReviewMainBusinessLocation = (): ReactElement => {
         <div className="text-bold width-11rem">
           <Content>{Config.businessFormationDefaults.reviewPageAddressLabel}</Content>
         </div>
-        <div>
+        <Content>
           {getStringifiedAddress(
-            state.formationFormData.businessAddressLine1,
-            userData?.profileData.municipality?.name as string,
-            state.formationFormData.businessAddressState,
-            state.formationFormData.businessAddressZipCode,
+            state.formationFormData.businessAddressLine1 || italicNotEnteredText,
+            (userData?.profileData.municipality?.name as string) || italicNotEnteredText,
+            state.formationFormData.businessAddressState || italicNotEnteredText,
+            state.formationFormData.businessAddressZipCode || italicNotEnteredText,
             state.formationFormData.businessAddressLine2
           )}
-        </div>
+        </Content>
       </div>
       <hr className="margin-y-205" />
     </>

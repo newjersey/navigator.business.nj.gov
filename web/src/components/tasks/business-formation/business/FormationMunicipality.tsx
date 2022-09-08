@@ -1,19 +1,16 @@
 import { MunicipalityDropdown } from "@/components/onboarding/MunicipalityDropdown";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { Municipality } from "@businessnjgovnavigator/shared/";
-import { FocusEvent, ReactElement, useContext } from "react";
+import { ReactElement, useContext } from "react";
 
 export const FormationMunicipality = (): ReactElement => {
-  const { state, setFormationFormData, setErrorMap } = useContext(BusinessFormationContext);
+  const { state, setFormationFormData } = useContext(BusinessFormationContext);
   const { Config } = useConfig();
-
-  const onValidation = (event: FocusEvent<HTMLInputElement>) => {
-    setErrorMap({ ...state.errorMap, businessAddressCity: { invalid: !event.target.value.trim() } });
-  };
+  const { doesFieldHaveError } = useFormationErrors();
 
   const onSelect = (value: Municipality | undefined): void => {
-    setErrorMap({ ...state.errorMap, businessAddressCity: { invalid: false } });
     setFormationFormData({ ...state.formationFormData, businessAddressCity: value });
   };
 
@@ -21,11 +18,9 @@ export const FormationMunicipality = (): ReactElement => {
     <div className="margin-top-2">
       <MunicipalityDropdown
         municipalities={state.municipalities}
-        onValidation={onValidation}
         fieldName={"businessAddressCity"}
-        error={state.errorMap.businessAddressCity.invalid}
+        error={doesFieldHaveError("businessAddressCity")}
         validationLabel="Error"
-        handleChange={() => setErrorMap({ ...state.errorMap, businessAddressCity: { invalid: false } })}
         value={state.formationFormData.businessAddressCity}
         onSelect={onSelect}
         placeholderText={Config.businessFormationDefaults.notSetBusinessAddressCityLabel}

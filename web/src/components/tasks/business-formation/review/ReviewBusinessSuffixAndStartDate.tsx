@@ -16,7 +16,12 @@ export const ReviewBusinessSuffixAndStartDate = (): ReactElement => {
           <Content>{Config.businessFormationDefaults.reviewPageBusinessSuffixLabel}</Content>
         </div>
         <div>
-          {userData?.profileData.businessName} {state.formationFormData.businessSuffix}
+          {userData?.profileData.businessName || (
+            <i>{Config.businessFormationDefaults.reviewPageNotEnteredText}</i>
+          )}{" "}
+          {state.formationFormData.businessSuffix || (
+            <i>{Config.businessFormationDefaults.reviewPageNotEnteredText}</i>
+          )}
         </div>
       </div>
       <div className="display-block tablet:display-flex margin-top-1">

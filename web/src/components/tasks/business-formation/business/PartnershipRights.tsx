@@ -1,15 +1,18 @@
 import { Content } from "@/components/Content";
-import { BusinessFormationInlineFieldAlert } from "@/components/tasks/business-formation/BusinessFormationInlineFieldAlert";
+import { Alert } from "@/components/njwds-extended/Alert";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { camelCaseToSentence } from "@/lib/utils/helpers";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { FormationFields, FormationTextField } from "@businessnjgovnavigator/shared";
 import { FormControl, FormControlLabel, FormHelperText, Radio, RadioGroup } from "@mui/material";
 import { ReactElement, useContext } from "react";
 
 export const PartnershipRights = (): ReactElement => {
-  const { state, setFormationFormData, setErrorMap } = useContext(BusinessFormationContext);
+  const { state, setFormationFormData, setFieldInteracted } = useContext(BusinessFormationContext);
+  const { Config } = useConfig();
+  const { doesFieldHaveError, doSomeFieldsHaveError } = useFormationErrors();
 
   const getTextField = (fieldName: FormationTextField) => (
     <div className="margin-top-1">
@@ -43,62 +46,58 @@ export const PartnershipRights = (): ReactElement => {
     </div>
   );
 
-  const getRadio = (fieldName: FormationFields, title: string) => (
-    <div
-      className={state.errorMap[fieldName].invalid ? `input-error-bar error margin-top-2` : "input-error-bar"}
-    >
-      <Content>{title}</Content>
-      <FormControl error={state.errorMap[fieldName].invalid}>
-        <RadioGroup
-          aria-label={camelCaseToSentence(fieldName)}
-          name={camelCaseToSentence(fieldName)}
-          value={state.formationFormData[fieldName]?.toString() ?? ""}
-          onChange={(e) => {
-            setFormationFormData({
-              ...state.formationFormData,
-              [fieldName]: JSON.parse(e.target.value),
-            });
-            setErrorMap({ ...state.errorMap, [fieldName]: { invalid: !e.target.value } });
-          }}
-          row
-        >
-          <FormControlLabel
-            style={{ marginTop: ".75rem", alignItems: "flex-start" }}
-            value={"true"}
-            control={
-              <Radio
-                required={true}
-                data-testid={`${fieldName}-true`}
-                color={state.errorMap[fieldName].invalid ? "error" : "primary"}
-                sx={{
-                  paddingTop: "0px",
-                }}
-              />
-            }
-            label={Config.businessFormationDefaults.partnershipRightsRadioYesText}
-          />
-          <FormControlLabel
-            style={{ marginTop: ".75rem", alignItems: "flex-start" }}
-            value={"false"}
-            control={
-              <Radio
-                required={true}
-                color={state.errorMap[fieldName].invalid ? "error" : "primary"}
-                sx={{
-                  paddingTop: "0px",
-                }}
-                data-testid={`${fieldName}-false`}
-              />
-            }
-            label={Config.businessFormationDefaults.partnershipRightsRadioNoText}
-          />
-        </RadioGroup>
-        <FormHelperText>
-          {state.errorMap[fieldName].invalid ? Config.businessFormationDefaults.genericErrorText : ""}
-        </FormHelperText>
-      </FormControl>
-    </div>
-  );
+  const getRadio = (fieldName: FormationFields, title: string) => {
+    const hasError = doesFieldHaveError(fieldName);
+    return (
+      <div className={hasError ? `input-error-bar error margin-top-2` : "input-error-bar"}>
+        <Content>{title}</Content>
+        <FormControl error={hasError} className={hasError ? `input-error-bar` : ""}>
+          <RadioGroup
+            aria-label={camelCaseToSentence(fieldName)}
+            name={camelCaseToSentence(fieldName)}
+            value={state.formationFormData[fieldName]?.toString() ?? ""}
+            onChange={(e) => {
+              setFormationFormData({
+                ...state.formationFormData,
+                [fieldName]: JSON.parse(e.target.value),
+              });
+              setFieldInteracted(fieldName);
+            }}
+            row
+          >
+            <FormControlLabel
+              style={{ marginTop: ".75rem", alignItems: "flex-start" }}
+              value={"true"}
+              control={
+                <Radio
+                  required={true}
+                  data-testid={`${fieldName}-true`}
+                  color={hasError ? "error" : "primary"}
+                  sx={{ paddingTop: "0px" }}
+                />
+              }
+              label={Config.businessFormationDefaults.partnershipRightsRadioYesText}
+            />
+            <FormControlLabel
+              style={{ marginTop: ".75rem", alignItems: "flex-start" }}
+              value={"false"}
+              control={
+                <Radio
+                  required={true}
+                  color={hasError ? "error" : "primary"}
+                  sx={{ paddingTop: "0px" }}
+                  data-testid={`${fieldName}-false`}
+                />
+              }
+              label={Config.businessFormationDefaults.partnershipRightsRadioNoText}
+            />
+          </RadioGroup>
+          <FormHelperText>{hasError ? Config.businessFormationDefaults.genericErrorText : ""}</FormHelperText>
+        </FormControl>
+      </div>
+    );
+  };
+
   return (
     <>
       <div className="flex flex-column mobile-lg:flex-row mobile-lg:flex-align-center margin-bottom-2">
@@ -106,9 +105,9 @@ export const PartnershipRights = (): ReactElement => {
           {Config.businessFormationDefaults.partnershipRightsTitle}
         </div>
       </div>
-      <BusinessFormationInlineFieldAlert
-        fields={["canCreateLimitedPartner", "canMakeDistribution", "canGetDistribution"]}
-      />
+      {doSomeFieldsHaveError(["canCreateLimitedPartner", "canMakeDistribution", "canGetDistribution"]) && (
+        <Alert variant="error">{Config.businessFormationDefaults.partnershipRightsRadioErrorText}</Alert>
+      )}
       {getRadio("canCreateLimitedPartner", Config.businessFormationDefaults.partnershipRightsCanAssignRights)}
       {state.formationFormData.canCreateLimitedPartner && getTextField("createLimitedPartnerTerms")}
       {getRadio(
