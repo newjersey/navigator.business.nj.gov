@@ -6,8 +6,7 @@
   },
   "sectionHeaders": {
     "PLAN": "Plan",
-    "START": "Start",
-    "OPERATE": "Operate"
+    "START": "Start"
   },
   "taskProgressCard": {
     "optionalTasksSingular": "${numTasks} optional task",

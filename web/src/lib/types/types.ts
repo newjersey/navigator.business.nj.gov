@@ -297,7 +297,7 @@ export interface RoadmapStatus {
 
 export type SectionCompletion = Record<SectionType, boolean>;
 
-export const sectionNames = ["PLAN", "START", "OPERATE"] as const;
+export const sectionNames = ["PLAN", "START"] as const;
 export type SectionType = typeof sectionNames[number];
 
 export interface Step {

@@ -341,13 +341,6 @@ describe("<NavBar />", () => {
       renderMobileRoadmapNav();
       expect(screen.queryByText("step1")).not.toBeInTheDocument();
     });
-
-    it("does not display operate section", () => {
-      useMockUserData({});
-      renderMobileRoadmapNav();
-      const sectionName = Config.sectionHeaders.OPERATE.toLowerCase();
-      expect(screen.queryByTestId(`section-${sectionName}`)).not.toBeInTheDocument();
-    });
   });
 
   describe("mobile navbar - renders roadmap within drawer", () => {
@@ -454,7 +447,6 @@ describe("<NavBar />", () => {
         expect(screen.getByText("step1")).toBeInTheDocument();
         expect(screen.getByText(Config.sectionHeaders.PLAN)).toBeInTheDocument();
         expect(screen.getByText(Config.sectionHeaders.START)).toBeInTheDocument();
-        expect(screen.queryByText(Config.sectionHeaders.OPERATE)).not.toBeInTheDocument();
       });
 
       it("does not display mini-roadmap when operateReferences exists", () => {
