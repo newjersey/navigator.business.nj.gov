@@ -68,38 +68,44 @@ const Home = (): ReactElement => {
     imageAlt: string,
     reverseOrder?: boolean
   ) => (
-    <div className="grid-row margin-top-5 desktop:margin-top-10 ">
-      <div
-        className={`desktop:grid-col ${isDesktopAndUp ? "" : "text-center"} ${
-          reverseOrder && isDesktopAndUp ? "order-last desktop:margin-left-8" : "desktop:margin-right-8"
-        }`}
-      >
-        {isDesktopAndUp ? (
-          <>
-            <h2 className="h1-styling text-base-darkest margin-bottom-4 desktop:margin-bottom-3">
-              {headingText}
-            </h2>
-            <div className="text-base-dark">{supportingText}</div>
-          </>
-        ) : (
-          <>
-            <h2 className="h1-styling text-base-darkest margin-bottom-4 desktop:margin-bottom-3">
-              {headingText}
-            </h2>
-            <img src={imageSrc} alt={imageAlt} />
-          </>
-        )}
-      </div>
-      <div
-        className={`desktop:grid-col ${
-          reverseOrder ? "desktop:margin-right-8" : "desktop:margin-left-8"
-        } margin-top-3 desktop:margin-top-0`}
-      >
-        {isDesktopAndUp ? (
-          <img src={imageSrc} alt={imageAlt} />
-        ) : (
-          <div className="text-base-dark margin-bottom-2">{supportingText}</div>
-        )}
+    <div className={`${isDesktopAndUp ? "landing-two-column-row" : "landing-one-column-row"}`}>
+      <div className="grid-row">
+        <div
+          className={`desktop:grid-col ${isDesktopAndUp ? "" : "text-center"} ${
+            reverseOrder && isDesktopAndUp ? "order-last desktop:margin-left-8" : "desktop:margin-right-3"
+          }`}
+        >
+          {isDesktopAndUp ? (
+            <>
+              <div className="landing-feature-text">
+                <h2 className="h1-styling text-base-darkest margin-bottom-4 desktop:margin-bottom-3">
+                  {headingText}
+                </h2>
+                <div className="text-base-dark">{supportingText}</div>
+              </div>
+            </>
+          ) : (
+            <>
+              <h2 className="h1-styling text-base-darkest margin-right-2 margin-left-2 margin-top-10">
+                {headingText}
+              </h2>
+              <img src={imageSrc} alt={imageAlt} />
+            </>
+          )}
+        </div>
+        <div
+          className={`desktop:grid-col ${
+            reverseOrder ? "desktop:margin-right-8" : "desktop:margin-left-3"
+          } margin-top-3 desktop:margin-top-0`}
+        >
+          {isDesktopAndUp ? (
+            <img src={imageSrc} alt={imageAlt} className="landing-feature-img" />
+          ) : (
+            <div className="text-base-dark margin-right-2 margin-left-2 margin-bottom-2">
+              {supportingText}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
@@ -149,36 +155,32 @@ const Home = (): ReactElement => {
           </div>
         </section>
 
-        <section
-          aria-label="Available Tools"
-          className="desktop:grid-container-widescreen padding-x-2 padding-top-2 padding-bottom-5 desktop:padding-x-7 desktop:padding-top-0 width-100 desktop:padding-bottom-205"
-        >
-          <div className="desktop:padding-x-8">
-            <div className="padding-top-205 ">
-              {renderTwoColumnRow(
-                landingPageConfig.section5FirstHeaderText,
-                landingPageConfig.section5FirstSupportingText,
-                "/img/Landing-step-by-step.svg",
-                "step by step guide"
-              )}
-            </div>
-            {renderTwoColumnRow(
-              landingPageConfig.section5SecondHeaderText,
-              landingPageConfig.section5SecondSupportingText,
-              "/img/Landing-funding-and-certifications.svg",
-              "funding and certifications opportunities",
-              true
-            )}
-            {renderTwoColumnRow(
-              landingPageConfig.section5ThirdHeaderText,
-              landingPageConfig.section5ThirdSupportingText,
-              "/img/Landing-and-more.svg",
-              "and more tools and features"
-            )}
-          </div>
+        <section aria-label="Available Tools">
+          {renderTwoColumnRow(
+            landingPageConfig.section5FirstHeaderText,
+            landingPageConfig.section5FirstSupportingText,
+            "/img/Landing-step-by-step.svg",
+            "step by step guide"
+          )}
+          {renderTwoColumnRow(
+            landingPageConfig.section5SecondHeaderText,
+            landingPageConfig.section5SecondSupportingText,
+            "/img/Landing-funding-and-certifications.svg",
+            "funding and certifications opportunities",
+            true
+          )}
+          {renderTwoColumnRow(
+            landingPageConfig.section5ThirdHeaderText,
+            landingPageConfig.section5ThirdSupportingText,
+            "/img/Landing-and-more.svg",
+            "and more tools and features"
+          )}
         </section>
 
-        <section aria-label="Looking for more support?">
+        <section
+          aria-label="Looking for more support?"
+          className={`${isDesktopAndUp ? "landing-support-container" : ""}`}
+        >
           <div className="bg-base-extra-light padding-x-2 desktop:padding-x-0 desktop:padding-bottom-10">
             <div className="desktop:grid-container-widescreen flex flex-column flex-align-center">
               <h2 className="base-darkest margin-top-7 text-center margin-bottom-5 desktop:margin-top-10 desktop:margin-bottom-8">

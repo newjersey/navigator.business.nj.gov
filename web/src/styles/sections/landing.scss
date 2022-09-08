@@ -32,3 +32,65 @@
   background: $success-lighter url(/img/Bg-wavy-white@2x.png) bottom center no-repeat;
   background-size: 200%;
 }
+
+.landing-two-column-row {
+  .landing-feature-text {
+    margin-left: 3.5rem;
+    margin-right: 2.5rem;
+  }
+  img {
+    margin-left: 2.5rem;
+  }
+  &:first-child {
+    margin-top: -15rem;
+    .landing-feature-text {
+      margin-top: 30rem;
+    }
+  }
+  &:nth-child(2) {
+    margin-top: -20rem;
+    .landing-feature-text {
+      margin-top: 25rem;
+      margin-left: 2.5rem;
+      margin-right: 3.5rem;
+    }
+    img {
+      margin-right: 2.5rem;
+      margin-left: 0rem;
+    }
+  }
+  &:nth-child(3) {
+    margin-top: -5rem;
+    .landing-feature-text {
+      margin-top: 10rem;
+      margin-left: 3.5rem;
+    }
+  }
+}
+
+.landing-one-column-row {
+  margin-top: -2rem;
+  .landing-feature-text {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+  &:first-child {
+    img {
+      margin-top: -8rem;
+    }
+  }
+  &:nth-child(2) {
+    img {
+      margin-top: -7rem;
+    }
+  }
+}
+
+.landing-feature-img {
+  min-height: 850px;
+  min-width: 50vw;
+}
+
+.landing-support-container {
+  margin-top: -18rem;
+}
