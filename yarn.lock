@@ -3605,7 +3605,7 @@ __metadata:
     serverless-http: 3.0.2
     serverless-offline: 10.0.0
     serverless-offline-ssm: 6.2.0
-    serverless-webpack: 5.9.0
+    serverless-webpack: 5.9.1
     simple-oauth2: 4.3.0
     supertest: 6.2.4
     ts-jest: 28.0.8
@@ -3798,7 +3798,7 @@ __metadata:
     serverless-http: 3.0.2
     serverless-offline: 10.0.0
     serverless-offline-ssm: 6.2.0
-    serverless-webpack: 5.9.0
+    serverless-webpack: 5.9.1
     simple-oauth2: 4.3.0
     storybook-addon-designs: 6.3.1
     storybook-addon-pseudo-states: 1.15.1
@@ -30343,9 +30343,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"serverless-webpack@npm:5.9.0":
-  version: 5.9.0
-  resolution: "serverless-webpack@npm:5.9.0"
+"serverless-webpack@npm:5.9.1":
+  version: 5.9.1
+  resolution: "serverless-webpack@npm:5.9.1"
   dependencies:
     archiver: ^5.3.1
     bluebird: ^3.7.2
@@ -30361,7 +30361,7 @@ __metadata:
   dependenciesMeta:
     ts-node:
       optional: true
-  checksum: 3f4bb515f1693e87bec8d5b761b92df7e4e91fad910538bd90d1b5bf64f0a7cd98bc42437bae0e1d9fa7109ebc5954818df84d6e427cc193c546e69e3c16eb65
+  checksum: 20d0bcdb990b4277f71bbed4fead8f9b5872f91410262adcec75dd5f928fca9ebb83ef702909f3461fd9acf6fde254b4ac2d4194aa921ce7a173f5a2738e4415
   languageName: node
   linkType: hard
 
