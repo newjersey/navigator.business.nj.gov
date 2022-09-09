@@ -1,4 +1,6 @@
 import { BusinessNameAndLegalStructure } from "@/components/tasks/business-formation/business/BusinessNameAndLegalStructure";
+import { ReviewBillingContact } from "@/components/tasks/business-formation/review/ReviewBillingContact";
+import { ReviewBillingServices } from "@/components/tasks/business-formation/review/ReviewBillingServices";
 import { ReviewBusinessSuffixAndStartDate } from "@/components/tasks/business-formation/review/ReviewBusinessSuffixAndStartDate";
 import { ReviewMainBusinessLocation } from "@/components/tasks/business-formation/review/ReviewMainBusinessLocation";
 import { ReviewMembers } from "@/components/tasks/business-formation/review/ReviewMembers";
@@ -14,47 +16,52 @@ import { ReactElement, useContext } from "react";
 export const ReviewStep = (): ReactElement => {
   const { state } = useContext(BusinessFormationContext);
 
+  const isLP = state.legalStructureId == "limited-partnership";
+  const hasProvisions = state.formationFormData.provisions.length > 0;
+  const hasPurpose = !!state.formationFormData.businessPurpose;
+  const hasMembers = state.formationFormData.members.length > 0;
+
   return (
     <>
       <div data-testid="review-step">
         <BusinessNameAndLegalStructure isReviewStep />
         <ReviewBusinessSuffixAndStartDate />
         <ReviewMainBusinessLocation />
-        {state.legalStructureId == "limited-partnership" ? (
+        {isLP && (
           <ReviewText
             header={Config.businessFormationDefaults.reviewStepCombinedInvestmentHeader}
             fieldName={"combinedInvestment"}
             stepName={"Business"}
           />
-        ) : null}
-        {state.legalStructureId == "limited-partnership" ? (
+        )}
+        {isLP && (
           <ReviewText
             header={Config.businessFormationDefaults.reviewStepWithdrawalsHeader}
             fieldName={"withdrawals"}
             stepName={"Business"}
           />
-        ) : null}
-        {state.legalStructureId == "limited-partnership" ? <ReviewPartnership /> : <></>}
-        {state.legalStructureId == "limited-partnership" ? (
+        )}
+        {isLP && <ReviewPartnership />}
+        {isLP && (
           <ReviewText
             header={Config.businessFormationDefaults.reviewStepDissolutionHeader}
             fieldName={"dissolution"}
             stepName={"Business"}
           />
-        ) : null}
-        {state.formationFormData.provisions.length > 0 ? <ReviewProvisions /> : null}
-        {state.formationFormData.businessPurpose ? (
+        )}
+        {hasProvisions && <ReviewProvisions />}
+        {hasPurpose && (
           <ReviewText
             header={Config.businessFormationDefaults.reviewStepBusinessPurposeHeader}
             fieldName={"businessPurpose"}
             stepName={"Business"}
           />
-        ) : null}
+        )}
         <ReviewRegisteredAgent />
-        {state.formationFormData.members.length > 0 && state.legalStructureId != "limited-partnership" ? (
-          <ReviewMembers />
-        ) : null}
+        {hasMembers && !isLP && <ReviewMembers />}
         <ReviewSignatures />
+        <ReviewBillingContact />
+        <ReviewBillingServices />
       </div>
     </>
   );

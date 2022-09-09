@@ -36,7 +36,7 @@ export const ReviewSignatures = (): ReactElement => {
               scrollToTop();
             }}
             underline
-            dataTestid="edit-signature-section"
+            dataTestid="edit-signature-step"
           >
             {Config.businessFormationDefaults.editButtonText}
           </Button>
@@ -77,6 +77,7 @@ export const ReviewSignatures = (): ReactElement => {
           )}
         </div>
       ))}
+      <hr className="margin-y-205" />
     </>
   );
 };
