@@ -1,29 +1,29 @@
 import { Content } from "@/components/Content";
 import { Button } from "@/components/njwds-extended/Button";
-import { LookupTabIndexByName } from "@/components/tasks/business-formation/BusinessFormationTabsConfiguration";
+import { LookupStepIndexByName } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { getStringifiedAddress, scrollToTop, setHeaderRole } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { ReactElement, useContext } from "react";
 
 export const ReviewRegisteredAgent = (): ReactElement => {
-  const { state, setTab } = useContext(BusinessFormationContext);
+  const { state, setStepIndex } = useContext(BusinessFormationContext);
   const headerLevelTwo = setHeaderRole(2, "h3-styling");
-  const italicNotEnteredText = `*${Config.businessFormationDefaults.reviewPageNotEnteredText}*`;
+  const italicNotEnteredText = `*${Config.businessFormationDefaults.reviewStepNotEnteredText}*`;
 
   return (
     <>
       <div className="flex space-between">
         <div className="maxw-mobile-lg margin-bottom-2">
           <Content overrides={{ h3: headerLevelTwo }}>
-            {Config.businessFormationDefaults.reviewPageRegisteredAgentHeader}
+            {Config.businessFormationDefaults.reviewStepRegisteredAgentHeader}
           </Content>
         </div>
         <div className="margin-left-2">
           <Button
             style="tertiary"
             onClick={() => {
-              setTab(LookupTabIndexByName("Contacts"));
+              setStepIndex(LookupStepIndexByName("Contacts"));
               scrollToTop();
             }}
             underline
@@ -36,11 +36,11 @@ export const ReviewRegisteredAgent = (): ReactElement => {
       {state.formationFormData.agentNumberOrManual === "NUMBER" && (
         <div className="display-block tablet:display-flex" data-testid="agent-number">
           <div className="text-bold width-11rem">
-            <Content>{Config.businessFormationDefaults.reviewPageRegisteredAgentNumberLabel}</Content>
+            <Content>{Config.businessFormationDefaults.reviewStepRegisteredAgentNumberLabel}</Content>
           </div>
           <div>
             {state.formationFormData.agentNumber || (
-              <i>{Config.businessFormationDefaults.reviewPageNotEnteredText}</i>
+              <i>{Config.businessFormationDefaults.reviewStepNotEnteredText}</i>
             )}
           </div>
         </div>
@@ -49,27 +49,27 @@ export const ReviewRegisteredAgent = (): ReactElement => {
         <div data-testid="agent-manual-entry">
           <div className="display-block tablet:display-flex">
             <div className="text-bold width-11rem">
-              <Content>{Config.businessFormationDefaults.reviewPageRegisteredAgentNameLabel}</Content>
+              <Content>{Config.businessFormationDefaults.reviewStepRegisteredAgentNameLabel}</Content>
             </div>
             <div>
               {state.formationFormData.agentName || (
-                <i>{Config.businessFormationDefaults.reviewPageNotEnteredText}</i>
+                <i>{Config.businessFormationDefaults.reviewStepNotEnteredText}</i>
               )}
             </div>
           </div>
           <div className="display-block tablet:display-flex margin-top-1">
             <div className="text-bold width-11rem">
-              <Content>{Config.businessFormationDefaults.reviewPageEmailLabel}</Content>
+              <Content>{Config.businessFormationDefaults.reviewStepEmailLabel}</Content>
             </div>
             <div>
               {state.formationFormData.agentEmail || (
-                <i>{Config.businessFormationDefaults.reviewPageNotEnteredText}</i>
+                <i>{Config.businessFormationDefaults.reviewStepNotEnteredText}</i>
               )}
             </div>
           </div>
           <div className="display-block tablet:display-flex margin-top-1">
             <div className="text-bold width-11rem">
-              <Content>{Config.businessFormationDefaults.reviewPageAddressLabel}</Content>
+              <Content>{Config.businessFormationDefaults.reviewStepAddressLabel}</Content>
             </div>
             <Content>
               {getStringifiedAddress(

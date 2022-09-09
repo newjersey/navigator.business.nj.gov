@@ -1,6 +1,6 @@
 import { Content } from "@/components/Content";
 import { Button } from "@/components/njwds-extended/Button";
-import { LookupTabIndexByName } from "@/components/tasks/business-formation/BusinessFormationTabsConfiguration";
+import { LookupStepIndexByName } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getStringifiedAddress, scrollToTop, setHeaderRole } from "@/lib/utils/helpers";
@@ -9,7 +9,7 @@ import { corpLegalStructures, FormationLegalType } from "@businessnjgovnavigator
 import { ReactElement, useContext } from "react";
 
 export const ReviewMembers = (): ReactElement => {
-  const { setTab } = useContext(BusinessFormationContext);
+  const { setStepIndex } = useContext(BusinessFormationContext);
   const { userData } = useUserData();
 
   const headerLevelTwo = setHeaderRole(2, "h3-styling");
@@ -23,15 +23,15 @@ export const ReviewMembers = (): ReactElement => {
         <div className="maxw-mobile-lg margin-bottom-2">
           <Content overrides={{ h3: headerLevelTwo }}>
             {isCorp
-              ? Config.businessFormationDefaults.reviewPageDirectorsHeader
-              : Config.businessFormationDefaults.reviewPageMembersHeader}
+              ? Config.businessFormationDefaults.reviewStepDirectorsHeader
+              : Config.businessFormationDefaults.reviewStepMembersHeader}
           </Content>
         </div>
         <div className="margin-left-2">
           <Button
             style="tertiary"
             onClick={() => {
-              setTab(LookupTabIndexByName("Contacts"));
+              setStepIndex(LookupStepIndexByName("Contacts"));
               scrollToTop();
             }}
             underline
@@ -47,8 +47,8 @@ export const ReviewMembers = (): ReactElement => {
             <div className={`text-bold width-11rem ${index !== 0 ? "margin-top-2" : ""}`}>
               <Content>
                 {isCorp
-                  ? Config.businessFormationDefaults.reviewPageDirectorNameLabel
-                  : Config.businessFormationDefaults.reviewPageMemberNameLabel}
+                  ? Config.businessFormationDefaults.reviewStepDirectorNameLabel
+                  : Config.businessFormationDefaults.reviewStepMemberNameLabel}
               </Content>
             </div>
             <div className={index !== 0 ? "tablet:margin-top-2" : ""}>{member.name}</div>
@@ -57,7 +57,7 @@ export const ReviewMembers = (): ReactElement => {
             <>
               <div className="display-block tablet:display-flex">
                 <div className="text-bold width-11rem">
-                  <Content>{Config.businessFormationDefaults.reviewPageDirectorAddressLabel}</Content>
+                  <Content>{Config.businessFormationDefaults.reviewStepDirectorAddressLabel}</Content>
                 </div>
                 <div>
                   {getStringifiedAddress(

@@ -17,7 +17,7 @@ const SearchBusinessNameErrorLookup: Record<SearchBusinessNameError, string> = {
   SEARCH_FAILED: Config.searchBusinessNameTask.errorTextSearchFailed,
 };
 
-export const BusinessNameSection = (): ReactElement => {
+export const BusinessNameStep = (): ReactElement => {
   const FIELD_NAME = "businessName";
   const { state, setFormationFormData, setFieldInteracted, setBusinessNameAvailability } =
     useContext(BusinessFormationContext);
@@ -59,7 +59,7 @@ export const BusinessNameSection = (): ReactElement => {
   const hasError = doesFieldHaveError(FIELD_NAME) && state.hasBusinessNameBeenSearched && !isLoading;
 
   return (
-    <div data-testid="business-name-section">
+    <div data-testid="business-name-step">
       <form onSubmit={doSearch} className="usa-prose grid-container padding-0">
         <Content>{state.displayContent.businessNameCheck.contentMd}</Content>
         <div className={`${hasError ? "error" : ""} input-error-bar`}>

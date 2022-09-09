@@ -11,25 +11,25 @@ import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { ReactElement, useContext } from "react";
 
-export const ReviewSection = (): ReactElement => {
+export const ReviewStep = (): ReactElement => {
   const { state } = useContext(BusinessFormationContext);
 
   return (
     <>
-      <div data-testid="review-section">
-        <BusinessNameAndLegalStructure reviewPage />
+      <div data-testid="review-step">
+        <BusinessNameAndLegalStructure isReviewStep />
         <ReviewBusinessSuffixAndStartDate />
         <ReviewMainBusinessLocation />
         {state.legalStructureId == "limited-partnership" ? (
           <ReviewText
-            header={Config.businessFormationDefaults.reviewPageCombinedInvestmentHeader}
+            header={Config.businessFormationDefaults.reviewStepCombinedInvestmentHeader}
             fieldName={"combinedInvestment"}
             stepName={"Business"}
           />
         ) : null}
         {state.legalStructureId == "limited-partnership" ? (
           <ReviewText
-            header={Config.businessFormationDefaults.reviewPageWithdrawalsHeader}
+            header={Config.businessFormationDefaults.reviewStepWithdrawalsHeader}
             fieldName={"withdrawals"}
             stepName={"Business"}
           />
@@ -37,7 +37,7 @@ export const ReviewSection = (): ReactElement => {
         {state.legalStructureId == "limited-partnership" ? <ReviewPartnership /> : <></>}
         {state.legalStructureId == "limited-partnership" ? (
           <ReviewText
-            header={Config.businessFormationDefaults.reviewPageDissolutionHeader}
+            header={Config.businessFormationDefaults.reviewStepDissolutionHeader}
             fieldName={"dissolution"}
             stepName={"Business"}
           />
@@ -45,7 +45,7 @@ export const ReviewSection = (): ReactElement => {
         {state.formationFormData.provisions.length > 0 ? <ReviewProvisions /> : null}
         {state.formationFormData.businessPurpose ? (
           <ReviewText
-            header={Config.businessFormationDefaults.reviewPageBusinessPurposeHeader}
+            header={Config.businessFormationDefaults.reviewStepBusinessPurposeHeader}
             fieldName={"businessPurpose"}
             stepName={"Business"}
           />

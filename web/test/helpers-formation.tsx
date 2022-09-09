@@ -1,5 +1,5 @@
 import { BusinessFormation } from "@/components/tasks/business-formation/BusinessFormation";
-import { LookupTabIndexByName } from "@/components/tasks/business-formation/BusinessFormationTabsConfiguration";
+import { LookupStepIndexByName } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
 import * as api from "@/lib/api-client/apiClient";
 import { FormationDisplayContentMap, NameAvailability, Task } from "@/lib/types/types";
 import {
@@ -105,19 +105,19 @@ export const setDesktopScreen = (value: boolean): void => {
 
 export type FormationPageHelpers = {
   fillText: (label: string, value: string) => void;
-  fillAndSubmitBusinessNameTab: (businessName?: string) => Promise<void>;
+  fillAndSubmitBusinessNameStep: (businessName?: string) => Promise<void>;
   completeRequiredBillingFields: () => void;
-  submitBusinessNameTab: () => Promise<void>;
-  submitBusinessTab: (completed?: boolean) => Promise<void>;
-  submitContactsTab: (completed?: boolean) => Promise<void>;
-  submitBillingTab: () => Promise<void>;
-  submitReviewTab: () => Promise<void>;
-  stepperClickToBusinessNameTab: () => Promise<void>;
-  stepperClickToBusinessTab: () => Promise<void>;
-  stepperClickToContactsTab: () => Promise<void>;
-  stepperClickToBillingTab: () => Promise<void>;
-  stepperClickToReviewTab: () => Promise<void>;
-  getStepperTabState: (index: number) => string;
+  submitBusinessNameStep: () => Promise<void>;
+  submitBusinessStep: (completed?: boolean) => Promise<void>;
+  submitContactsStep: (completed?: boolean) => Promise<void>;
+  submitBillingStep: () => Promise<void>;
+  submitReviewStep: () => Promise<void>;
+  stepperClickToBusinessNameStep: () => Promise<void>;
+  stepperClickToBusinessStep: () => Promise<void>;
+  stepperClickToContactsStep: () => Promise<void>;
+  stepperClickToBillingStep: () => Promise<void>;
+  stepperClickToReviewStep: () => Promise<void>;
+  getStepStateInStepper: (index: number) => string;
   searchBusinessName: (nameAvailability: Partial<NameAvailability>) => Promise<void>;
   searchBusinessNameAndGetError: (errorCode?: number) => Promise<void>;
   chooseRadio: (value: string) => void;
@@ -144,93 +144,93 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     fireEvent.blur(item);
   };
 
-  const fillAndSubmitBusinessNameTab = async (businessName = "Default Test Name"): Promise<void> => {
+  const fillAndSubmitBusinessNameStep = async (businessName = "Default Test Name"): Promise<void> => {
     fillText("Search business name", businessName);
     await searchBusinessName({ status: "AVAILABLE" });
 
     fireEvent.click(screen.getByText(Config.businessFormationDefaults.initialNextButtonText));
 
     await waitFor(() => {
-      expect(screen.queryByTestId("business-section")).toBeInTheDocument();
+      expect(screen.queryByTestId("business-step")).toBeInTheDocument();
     });
   };
 
-  const stepperClickToBusinessNameTab = async (): Promise<void> => {
-    fireEvent.click(screen.getByTestId(`stepper-${LookupTabIndexByName("Name")}`));
+  const stepperClickToBusinessNameStep = async (): Promise<void> => {
+    fireEvent.click(screen.getByTestId(`stepper-${LookupStepIndexByName("Name")}`));
     await waitFor(() => {
-      expect(screen.queryByTestId("business-name-section")).toBeInTheDocument();
+      expect(screen.queryByTestId("business-name-step")).toBeInTheDocument();
     });
   };
 
-  const stepperClickToBusinessTab = async (): Promise<void> => {
-    fireEvent.click(screen.getByTestId(`stepper-${LookupTabIndexByName("Business")}`));
+  const stepperClickToBusinessStep = async (): Promise<void> => {
+    fireEvent.click(screen.getByTestId(`stepper-${LookupStepIndexByName("Business")}`));
     await waitFor(() => {
-      expect(screen.queryByTestId("business-section")).toBeInTheDocument();
+      expect(screen.queryByTestId("business-step")).toBeInTheDocument();
     });
   };
 
-  const stepperClickToContactsTab = async (): Promise<void> => {
-    fireEvent.click(screen.getByTestId(`stepper-${LookupTabIndexByName("Contacts")}`));
+  const stepperClickToContactsStep = async (): Promise<void> => {
+    fireEvent.click(screen.getByTestId(`stepper-${LookupStepIndexByName("Contacts")}`));
     await waitFor(() => {
-      expect(screen.queryByTestId("contacts-section")).toBeInTheDocument();
+      expect(screen.queryByTestId("contacts-step")).toBeInTheDocument();
     });
   };
 
-  const stepperClickToBillingTab = async (): Promise<void> => {
-    fireEvent.click(screen.getByTestId(`stepper-${LookupTabIndexByName("Billing")}`));
+  const stepperClickToBillingStep = async (): Promise<void> => {
+    fireEvent.click(screen.getByTestId(`stepper-${LookupStepIndexByName("Billing")}`));
     await waitFor(() => {
-      expect(screen.queryByTestId("payment-section")).toBeInTheDocument();
+      expect(screen.queryByTestId("billing-step")).toBeInTheDocument();
     });
   };
 
-  const stepperClickToReviewTab = async (): Promise<void> => {
-    fireEvent.click(screen.getByTestId(`stepper-${LookupTabIndexByName("Review")}`));
+  const stepperClickToReviewStep = async (): Promise<void> => {
+    fireEvent.click(screen.getByTestId(`stepper-${LookupStepIndexByName("Review")}`));
     await waitFor(() => {
-      expect(screen.queryByTestId("review-section")).toBeInTheDocument();
+      expect(screen.queryByTestId("review-step")).toBeInTheDocument();
     });
   };
 
-  const getStepperTabState = (index: number): string => {
+  const getStepStateInStepper = (index: number): string => {
     return screen.getByTestId(`stepper-${index}`).dataset.state || "";
   };
 
-  const submitBusinessNameTab = async (): Promise<void> => {
+  const submitBusinessNameStep = async (): Promise<void> => {
     fireEvent.click(screen.getByText(Config.businessFormationDefaults.initialNextButtonText));
     await waitFor(() => {
-      expect(screen.queryByTestId("business-section")).toBeInTheDocument();
+      expect(screen.queryByTestId("business-step")).toBeInTheDocument();
     });
   };
 
-  const submitBusinessTab = async (completed = true): Promise<void> => {
+  const submitBusinessStep = async (completed = true): Promise<void> => {
     fireEvent.click(screen.getByText(Config.businessFormationDefaults.nextButtonText));
 
     await (completed
       ? waitFor(() => {
-          expect(screen.queryByTestId("contacts-section")).toBeInTheDocument();
+          expect(screen.queryByTestId("contacts-step")).toBeInTheDocument();
         })
       : waitFor(() => {
-          expect(screen.queryByTestId("contacts-section")).not.toBeInTheDocument();
+          expect(screen.queryByTestId("contacts-step")).not.toBeInTheDocument();
         }));
   };
 
-  const submitContactsTab = async (completed = true): Promise<void> => {
+  const submitContactsStep = async (completed = true): Promise<void> => {
     fireEvent.click(screen.getByText(Config.businessFormationDefaults.nextButtonText));
 
     if (completed)
       await waitFor(() => {
-        expect(screen.queryByTestId("payment-section")).toBeInTheDocument();
+        expect(screen.queryByTestId("billing-step")).toBeInTheDocument();
       });
   };
 
-  const submitBillingTab = async (): Promise<void> => {
+  const submitBillingStep = async (): Promise<void> => {
     fireEvent.click(screen.getByText(Config.businessFormationDefaults.nextButtonText));
 
     await waitFor(() => {
-      expect(screen.queryByTestId("review-section")).toBeInTheDocument();
+      expect(screen.queryByTestId("review-step")).toBeInTheDocument();
     });
   };
 
-  const submitReviewTab = async (): Promise<void> => {
+  const submitReviewStep = async (): Promise<void> => {
     fireEvent.click(screen.getByText(Config.businessFormationDefaults.submitButtonText));
     await act(async () => {
       await flushPromises();
@@ -342,12 +342,12 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
 
   return {
     fillText,
-    fillAndSubmitBusinessNameTab,
-    submitBusinessNameTab,
-    submitBusinessTab,
-    submitContactsTab,
-    submitBillingTab,
-    submitReviewTab,
+    fillAndSubmitBusinessNameStep,
+    submitBusinessNameStep,
+    submitBusinessStep,
+    submitContactsStep,
+    submitBillingStep,
+    submitReviewStep,
     searchBusinessName,
     searchBusinessNameAndGetError,
     chooseRadio,
@@ -363,12 +363,12 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     fillAndSubmitAddressModal,
     clickSubmit,
     selectDate,
-    stepperClickToBusinessNameTab,
-    stepperClickToBusinessTab,
-    stepperClickToContactsTab,
-    stepperClickToBillingTab,
-    stepperClickToReviewTab,
-    getStepperTabState,
+    stepperClickToBusinessNameStep,
+    stepperClickToBusinessStep,
+    stepperClickToContactsStep,
+    stepperClickToBillingStep,
+    stepperClickToReviewStep,
+    getStepStateInStepper,
     completeRequiredBillingFields,
   };
 };

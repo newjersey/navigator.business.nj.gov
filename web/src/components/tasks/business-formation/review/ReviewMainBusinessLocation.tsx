@@ -1,6 +1,6 @@
 import { Content } from "@/components/Content";
 import { Button } from "@/components/njwds-extended/Button";
-import { LookupTabIndexByName } from "@/components/tasks/business-formation/BusinessFormationTabsConfiguration";
+import { LookupStepIndexByName } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getStringifiedAddress, scrollToTop, setHeaderRole } from "@/lib/utils/helpers";
@@ -8,25 +8,25 @@ import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { ReactElement, useContext } from "react";
 
 export const ReviewMainBusinessLocation = (): ReactElement => {
-  const { state, setTab } = useContext(BusinessFormationContext);
+  const { state, setStepIndex } = useContext(BusinessFormationContext);
   const { userData } = useUserData();
 
   const headerLevelTwo = setHeaderRole(2, "h3-styling");
-  const italicNotEnteredText = `*${Config.businessFormationDefaults.reviewPageNotEnteredText}*`;
+  const italicNotEnteredText = `*${Config.businessFormationDefaults.reviewStepNotEnteredText}*`;
 
   return (
     <>
       <div className="flex space-between">
         <div className="maxw-mobile-lg margin-bottom-2">
           <Content overrides={{ h3: headerLevelTwo }}>
-            {Config.businessFormationDefaults.reviewPageLocationHeader}
+            {Config.businessFormationDefaults.reviewStepLocationHeader}
           </Content>
         </div>
         <div className="margin-left-2">
           <Button
             style="tertiary"
             onClick={() => {
-              setTab(LookupTabIndexByName("Business"));
+              setStepIndex(LookupStepIndexByName("Business"));
               scrollToTop();
             }}
             underline
@@ -38,7 +38,7 @@ export const ReviewMainBusinessLocation = (): ReactElement => {
       </div>
       <div className="display-block tablet:display-flex">
         <div className="text-bold width-11rem">
-          <Content>{Config.businessFormationDefaults.reviewPageAddressLabel}</Content>
+          <Content>{Config.businessFormationDefaults.reviewStepAddressLabel}</Content>
         </div>
         <Content>
           {getStringifiedAddress(

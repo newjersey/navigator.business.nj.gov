@@ -1,7 +1,7 @@
 import { Content } from "@/components/Content";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { Button } from "@/components/njwds-extended/Button";
-import { LookupTabIndexByName } from "@/components/tasks/business-formation/BusinessFormationTabsConfiguration";
+import { LookupStepIndexByName } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
@@ -12,12 +12,12 @@ import { useRouter } from "next/router";
 import { ReactElement, useContext, useState } from "react";
 
 interface Props {
-  reviewPage?: boolean;
+  isReviewStep?: boolean;
 }
 
-export const BusinessNameAndLegalStructure = ({ reviewPage = false }: Props): ReactElement => {
+export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): ReactElement => {
   const [legalStructureWarningIsOpen, setLegalStructureWarningIsOpen] = useState<boolean>(false);
-  const { setTab } = useContext(BusinessFormationContext);
+  const { setStepIndex } = useContext(BusinessFormationContext);
   const { userData } = useUserData();
   const router = useRouter();
 
@@ -55,12 +55,12 @@ export const BusinessNameAndLegalStructure = ({ reviewPage = false }: Props): Re
           </Content>
         </div>
         <div className="margin-left-2">
-          {reviewPage && (
+          {isReviewStep && (
             <Button
               style="tertiary"
               onClick={() => {
                 analytics.event.business_formation_business_name_edit.click.go_to_name_search_step();
-                setTab(LookupTabIndexByName("Business"));
+                setStepIndex(LookupStepIndexByName("Business"));
                 scrollToTop();
               }}
               underline
@@ -74,17 +74,17 @@ export const BusinessNameAndLegalStructure = ({ reviewPage = false }: Props): Re
 
       <div className="min-height-575rem bg-base-lightest margin-bottom-1 display-block tablet:display-flex tablet:flex-row">
         <div className="padding-205 flex-half">
-          <Content>{Config.businessFormationDefaults.reviewPageBusinessNameLabel}</Content>
+          <Content>{Config.businessFormationDefaults.reviewStepBusinessNameLabel}</Content>
           <span className="text-accent-cool-darker">
             {userData.formationData.formationFormData.businessName ||
               Config.businessFormationDefaults.notSetBusinessNameText}
           </span>{" "}
-          {!reviewPage && (
+          {!isReviewStep && (
             <Button
               style="tertiary"
               widthAutoOnMobile
               onClick={() => {
-                setTab(LookupTabIndexByName("Name"));
+                setStepIndex(LookupStepIndexByName("Name"));
               }}
               underline
               dataTestid="edit-business-name"
@@ -97,9 +97,9 @@ export const BusinessNameAndLegalStructure = ({ reviewPage = false }: Props): Re
           className="padding-bottom-205 padding-x-205 tablet:padding-205 flex-half"
           data-testid="legal-structure"
         >
-          <Content>{Config.businessFormationDefaults.reviewPageLegalStructureLabel}</Content>
+          <Content>{Config.businessFormationDefaults.reviewStepLegalStructureLabel}</Content>
           <span>{legalStructureName}</span>{" "}
-          {!reviewPage && (
+          {!isReviewStep && (
             <Button
               style="tertiary"
               widthAutoOnMobile

@@ -4,7 +4,7 @@ import { Alert } from "@/components/njwds-extended/Alert";
 import { TaskCTA } from "@/components/TaskCTA";
 import { TaskHeader } from "@/components/TaskHeader";
 import { BusinessFormationPaginator } from "@/components/tasks/business-formation/BusinessFormationPaginator";
-import { BusinessFormationTabs } from "@/components/tasks/business-formation/BusinessFormationTabs";
+import { BusinessFormationSteps } from "@/components/tasks/business-formation/BusinessFormationSteps";
 import { FormationSuccessPage } from "@/components/tasks/business-formation/success/FormationSuccessPage";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
@@ -59,7 +59,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
   const [formationFormData, setFormationFormData] = useState<FormationFormData>(
     createEmptyFormationFormData()
   );
-  const [tab, setTab] = useState(0);
+  const [stepIndex, setStepIndex] = useState(0);
   const [interactedFields, setInteractedFields] = useState<FormationFields[]>([]);
   const [showResponseAlert, setShowResponseAlert] = useState<boolean>(false);
   const [isLoadingGetFiling, setIsLoadingGetFiling] = useState<boolean>(false);
@@ -209,7 +209,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
     <BusinessFormationContext.Provider
       value={{
         state: {
-          tab: tab,
+          stepIndex: stepIndex,
           legalStructureId: legalStructureId,
           formationFormData: formationFormData,
           displayContent: props.displayContent[legalStructureId],
@@ -221,7 +221,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
           hasBusinessNameBeenSearched,
         },
         setFormationFormData,
-        setTab,
+        setStepIndex,
         setShowResponseAlert,
         setFieldInteracted,
         setHasBeenSubmitted,
@@ -231,7 +231,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
       <div className="flex flex-column  minh-38">
         <div>
           <TaskHeader task={props.task} />
-          {tab === 0 && (
+          {stepIndex === 0 && (
             <>
               <UnlockedBy task={props.task} dataTestid="dependency-alert" />
               <div className="margin-bottom-2">
@@ -240,7 +240,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
             </>
           )}
         </div>
-        <BusinessFormationPaginator>{BusinessFormationTabs[tab].component}</BusinessFormationPaginator>
+        <BusinessFormationPaginator>{BusinessFormationSteps[stepIndex].component}</BusinessFormationPaginator>
       </div>
     </BusinessFormationContext.Provider>
   );
