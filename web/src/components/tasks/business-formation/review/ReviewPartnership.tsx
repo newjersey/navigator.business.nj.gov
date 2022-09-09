@@ -1,14 +1,11 @@
 import { Content } from "@/components/Content";
-import { Button } from "@/components/njwds-extended/Button";
-import { LookupStepIndexByName } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
+import { ReviewSectionHeader } from "@/components/tasks/business-formation/review/ReviewSectionHeader";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
-import { scrollToTop, setHeaderRole } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { ReactElement, useContext } from "react";
 
 export const ReviewPartnership = () => {
-  const { state, setStepIndex } = useContext(BusinessFormationContext);
-  const headerLevelTwo = setHeaderRole(2, "h3-styling");
+  const { state } = useContext(BusinessFormationContext);
 
   const notEnteredText = (question: string): ReactElement => (
     <>
@@ -41,26 +38,11 @@ export const ReviewPartnership = () => {
 
   return (
     <>
-      <div className="flex space-between">
-        <div className="maxw-mobile-lg margin-bottom-2">
-          <Content overrides={{ h3: headerLevelTwo }}>
-            {Config.businessFormationDefaults.reviewStepPartnershipHeader}
-          </Content>
-        </div>
-        <div className="margin-left-2">
-          <Button
-            style="tertiary"
-            onClick={() => {
-              setStepIndex(LookupStepIndexByName("Business"));
-              scrollToTop();
-            }}
-            underline
-            dataTestid="edit-partnership"
-          >
-            {Config.businessFormationDefaults.editButtonText}
-          </Button>
-        </div>
-      </div>
+      <ReviewSectionHeader
+        header={Config.businessFormationDefaults.reviewStepPartnershipHeader}
+        stepName="Business"
+        testId="partnership"
+      />
       <div className="" data-testid="partnership">
         <div className="margin-bottom-3">
           {displayPartnershipAnswer({
