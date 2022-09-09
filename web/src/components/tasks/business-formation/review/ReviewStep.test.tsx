@@ -87,7 +87,7 @@ describe("Formation - ReviewStep", () => {
 
   it("displays the business step when the edit button in the provisions section is clicked", async () => {
     await renderStep({}, { provisions: ["some provision"] });
-    fireEvent.click(screen.getByTestId("edit-provisions"));
+    fireEvent.click(screen.getByTestId("edit-provisions-step"));
     expect(screen.getByTestId("business-step")).toBeInTheDocument();
   });
 

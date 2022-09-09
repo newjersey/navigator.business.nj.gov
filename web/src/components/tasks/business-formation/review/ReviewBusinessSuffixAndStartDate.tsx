@@ -1,4 +1,4 @@
-import { Content } from "@/components/Content";
+import { ReviewLineItem } from "@/components/tasks/business-formation/review/ReviewLineItem";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
@@ -8,41 +8,33 @@ import { ReactElement, useContext } from "react";
 export const ReviewBusinessSuffixAndStartDate = (): ReactElement => {
   const { state } = useContext(BusinessFormationContext);
   const { userData } = useUserData();
+  const italicNotEnteredText = `*${Config.businessFormationDefaults.reviewStepNotEnteredText}*`;
+
+  const getBusinessNameDisplay = (): string => {
+    const name = userData?.profileData.businessName || italicNotEnteredText;
+    const suffix = state.formationFormData.businessSuffix || italicNotEnteredText;
+    return `${name} ${suffix}`;
+  };
 
   return (
-    <>
-      <div className="display-block tablet:display-flex">
-        <div className="text-bold width-11rem">
-          <Content>{Config.businessFormationDefaults.reviewStepBusinessSuffixLabel}</Content>
-        </div>
-        <div>
-          {userData?.profileData.businessName || (
-            <i>{Config.businessFormationDefaults.reviewStepNotEnteredText}</i>
-          )}{" "}
-          {state.formationFormData.businessSuffix || (
-            <i>{Config.businessFormationDefaults.reviewStepNotEnteredText}</i>
-          )}
-        </div>
-      </div>
-      <div className="display-block tablet:display-flex margin-top-1">
-        <div className="text-bold width-11rem">
-          <Content>{Config.businessFormationDefaults.reviewStepBusinessStartDateLabel}</Content>
-        </div>
-        <div>
-          {parseDateWithFormat(state.formationFormData.businessStartDate, "YYYY-MM-DD").format("MM/DD/YYYY")}
-        </div>
-      </div>
+    <div className="margin-top-2">
+      <ReviewLineItem
+        label={Config.businessFormationDefaults.reviewStepBusinessSuffixLabel}
+        value={getBusinessNameDisplay()}
+      />
+      <ReviewLineItem
+        label={Config.businessFormationDefaults.reviewStepBusinessStartDateLabel}
+        value={parseDateWithFormat(state.formationFormData.businessStartDate, "YYYY-MM-DD").format(
+          "MM/DD/YYYY"
+        )}
+      />
       {state.formationFormData.businessTotalStock.length > 0 && (
-        <>
-          <div className="display-block tablet:display-flex margin-top-1">
-            <div className="text-bold width-11rem">
-              <Content>{Config.businessFormationDefaults.reviewBusinessTotalStockLabel}</Content>
-            </div>
-            <div>{state.formationFormData.businessTotalStock}</div>
-          </div>
-        </>
+        <ReviewLineItem
+          label={Config.businessFormationDefaults.reviewBusinessTotalStockLabel}
+          value={state.formationFormData.businessTotalStock}
+        />
       )}
       <hr className="margin-y-205" />
-    </>
+    </div>
   );
 };

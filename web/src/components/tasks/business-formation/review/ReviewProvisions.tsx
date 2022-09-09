@@ -1,37 +1,19 @@
 import { Content } from "@/components/Content";
-import { Button } from "@/components/njwds-extended/Button";
-import { LookupStepIndexByName } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
+import { ReviewSectionHeader } from "@/components/tasks/business-formation/review/ReviewSectionHeader";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
-import { scrollToTop, setHeaderRole } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { useContext } from "react";
 
 export const ReviewProvisions = () => {
-  const { state, setStepIndex } = useContext(BusinessFormationContext);
-  const headerLevelTwo = setHeaderRole(2, "h3-styling");
+  const { state } = useContext(BusinessFormationContext);
 
   return (
     <>
-      <div className="flex space-between">
-        <div className="maxw-mobile-lg margin-bottom-2">
-          <Content overrides={{ h3: headerLevelTwo }}>
-            {Config.businessFormationDefaults.reviewStepProvisionsHeader}
-          </Content>
-        </div>
-        <div className="margin-left-2">
-          <Button
-            style="tertiary"
-            onClick={() => {
-              setStepIndex(LookupStepIndexByName("Business"));
-              scrollToTop();
-            }}
-            underline
-            dataTestid="edit-provisions"
-          >
-            {Config.businessFormationDefaults.editButtonText}
-          </Button>
-        </div>
-      </div>
+      <ReviewSectionHeader
+        header={Config.businessFormationDefaults.reviewStepProvisionsHeader}
+        stepName="Business"
+        testId="provisions"
+      />
       <div className="" data-testid="provisions">
         {state.formationFormData.provisions.map((provision, index) => (
           <div className="margin-bottom-2" key={index}>
