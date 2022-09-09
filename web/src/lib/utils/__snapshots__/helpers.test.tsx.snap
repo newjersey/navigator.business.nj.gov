@@ -3,7 +3,7 @@
 exports[`helpers splitAndBoldSearchText properly displays the found text as bold 1`] = `
 <span
   style={
-    Object {
+    {
       "whiteSpace": "pre-wrap",
     }
   }
