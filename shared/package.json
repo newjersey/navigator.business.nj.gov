@@ -14,6 +14,7 @@
     "dev": "yarn build",
     "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint . --max-warnings 0 --fix",
+    "snapshot:update": "jest --updateSnapshot",
     "prettier": "prettier --write . --ignore-path=./.eslintignore",
     "prettier:check": "prettier . --check --ignore-path=./.eslintignore",
     "test": "jest",
