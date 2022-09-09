@@ -1,13 +1,13 @@
 import { Content } from "@/components/Content";
 import { Button } from "@/components/njwds-extended/Button";
-import { LookupTabIndexByName } from "@/components/tasks/business-formation/BusinessFormationTabsConfiguration";
+import { LookupStepIndexByName } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { scrollToTop, setHeaderRole } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { useContext } from "react";
 
 export const ReviewProvisions = () => {
-  const { state, setTab } = useContext(BusinessFormationContext);
+  const { state, setStepIndex } = useContext(BusinessFormationContext);
   const headerLevelTwo = setHeaderRole(2, "h3-styling");
 
   return (
@@ -15,14 +15,14 @@ export const ReviewProvisions = () => {
       <div className="flex space-between">
         <div className="maxw-mobile-lg margin-bottom-2">
           <Content overrides={{ h3: headerLevelTwo }}>
-            {Config.businessFormationDefaults.reviewPageProvisionsHeader}
+            {Config.businessFormationDefaults.reviewStepProvisionsHeader}
           </Content>
         </div>
         <div className="margin-left-2">
           <Button
             style="tertiary"
             onClick={() => {
-              setTab(LookupTabIndexByName("Business"));
+              setStepIndex(LookupStepIndexByName("Business"));
               scrollToTop();
             }}
             underline
@@ -36,7 +36,7 @@ export const ReviewProvisions = () => {
         {state.formationFormData.provisions.map((provision, index) => (
           <div className="margin-bottom-2" key={index}>
             <div className="text-bold margin-bottom-05">
-              {index + 1}. {Config.businessFormationDefaults.reviewPageProvisionsSubheader}
+              {index + 1}. {Config.businessFormationDefaults.reviewStepProvisionsSubheader}
             </div>
             <Content>{provision}</Content>
           </div>

@@ -11,7 +11,7 @@ import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { corpLegalStructures } from "@businessnjgovnavigator/shared/";
 import { ReactElement, useContext } from "react";
 
-export const ContactsSection = (): ReactElement => {
+export const ContactsStep = (): ReactElement => {
   const { userData } = useUserData();
   const { state, setFormationFormData } = useContext(BusinessFormationContext);
   const { doesFieldHaveError } = useFormationErrors();
@@ -28,7 +28,7 @@ export const ContactsSection = (): ReactElement => {
 
   return (
     <>
-      <div data-testid="contacts-section">
+      <div data-testid="contacts-step">
         <RegisteredAgent />
         {shouldShowMembers() && (
           <>

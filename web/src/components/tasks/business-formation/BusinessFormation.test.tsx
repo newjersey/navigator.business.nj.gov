@@ -76,7 +76,7 @@ describe("<BusinessFormation />", () => {
       displayContent
     );
     expect(screen.getByTestId("formation-form")).toBeInTheDocument();
-    expect(screen.getByTestId("business-name-section")).toBeInTheDocument();
+    expect(screen.getByTestId("business-name-step")).toBeInTheDocument();
   });
 
   describe("when completedFilingPayment is true and no getFilingResponse exists", () => {
@@ -196,13 +196,13 @@ describe("<BusinessFormation />", () => {
     expect(screen.getByText(Config.businessFormationDefaults.successPageHeader)).toBeInTheDocument();
   });
 
-  it("fills multi-tab form, submits, and updates userData when LLC", async () => {
+  it("fills multi-step form, submits, and updates userData when LLC", async () => {
     const legalStructureId = "limited-liability-company";
     const profileData = generateFormationProfileData({ legalStructureId });
     const formationData = generateEmptyFormationData();
     const page = preparePage({ profileData, formationData }, displayContent);
 
-    await page.fillAndSubmitBusinessNameTab("Pizza Joint");
+    await page.fillAndSubmitBusinessNameStep("Pizza Joint");
 
     page.selectByText("Business suffix", "LLC");
     const threeDaysFromNow = getCurrentDate().add(3, "days");
@@ -214,7 +214,7 @@ describe("<BusinessFormation />", () => {
     fireEvent.click(screen.getByText(Config.businessFormationDefaults.businessPurposeAddButtonText));
     page.fillText("Business purpose", "to take over the world");
 
-    await page.submitBusinessTab();
+    await page.submitBusinessStep();
 
     page.chooseRadio("registered-agent-manual");
     page.fillText("Agent name", "Hugo Weaving");
@@ -241,7 +241,7 @@ describe("<BusinessFormation />", () => {
     page.clickAddNewSigner();
     page.fillText("Signer 0", "Elrond");
     page.checkSignerBox(0);
-    await page.submitContactsTab();
+    await page.submitContactsStep();
 
     page.fillText("Contact first name", "John");
     page.fillText("Contact last name", "Smith");
@@ -261,8 +261,8 @@ describe("<BusinessFormation />", () => {
       displayContent[legalStructureId].officialFormationDocument.cost;
 
     expect(screen.getByText(getDollarValue(expectedTotalCost))).toBeInTheDocument();
-    await page.submitBillingTab();
-    await page.submitReviewTab();
+    await page.submitBillingStep();
+    await page.submitReviewStep();
 
     const formationFormData = currentUserData().formationData.formationFormData;
     await waitFor(() => {
@@ -306,13 +306,13 @@ describe("<BusinessFormation />", () => {
     expect(formationFormData.corpWatchNotification).toEqual(false);
   });
 
-  it("fills multi-tab form, submits, and updates userData when LLP", async () => {
+  it("fills multi-step form, submits, and updates userData when LLP", async () => {
     const legalStructureId = "limited-liability-partnership";
     const profileData = generateFormationProfileData({ legalStructureId });
     const formationData = generateEmptyFormationData();
     const page = preparePage({ profileData, formationData }, displayContent);
 
-    await page.fillAndSubmitBusinessNameTab("Pizza Joint");
+    await page.fillAndSubmitBusinessNameStep("Pizza Joint");
 
     page.selectByText("Business suffix", "LLP");
     const threeDaysFromNow = getCurrentDate().add(3, "days");
@@ -324,7 +324,7 @@ describe("<BusinessFormation />", () => {
     fireEvent.click(screen.getByText(Config.businessFormationDefaults.businessPurposeAddButtonText));
     page.fillText("Business purpose", "to take over the world");
 
-    await page.submitBusinessTab();
+    await page.submitBusinessStep();
 
     page.chooseRadio("registered-agent-manual");
     page.fillText("Agent name", "Hugo Weaving");
@@ -341,7 +341,7 @@ describe("<BusinessFormation />", () => {
     page.clickAddNewSigner();
     page.fillText("Signer 0", "Elrond");
     page.checkSignerBox(0);
-    await page.submitContactsTab();
+    await page.submitContactsStep();
 
     page.fillText("Contact first name", "John");
     page.fillText("Contact last name", "Smith");
@@ -361,8 +361,8 @@ describe("<BusinessFormation />", () => {
       displayContent[legalStructureId].officialFormationDocument.cost;
 
     expect(screen.getByText(getDollarValue(expectedTotalCost))).toBeInTheDocument();
-    await page.submitBillingTab();
-    await page.submitReviewTab();
+    await page.submitBillingStep();
+    await page.submitReviewStep();
 
     const formationFormData = currentUserData().formationData.formationFormData;
     await waitFor(() => {
@@ -400,13 +400,13 @@ describe("<BusinessFormation />", () => {
     expect(formationFormData.corpWatchNotification).toEqual(false);
   });
 
-  it("fills multi-tab form, submits, and updates userData when LP", async () => {
+  it("fills multi-step form, submits, and updates userData when LP", async () => {
     const legalStructureId = "limited-partnership";
     const profileData = generateFormationProfileData({ legalStructureId });
     const formationData = generateEmptyFormationData();
     const page = preparePage({ profileData, formationData }, displayContent);
 
-    await page.fillAndSubmitBusinessNameTab("Pizza Joint");
+    await page.fillAndSubmitBusinessNameStep("Pizza Joint");
 
     page.selectByText("Business suffix", "LP");
     const threeDaysFromNow = getCurrentDate().add(3, "days");
@@ -426,7 +426,7 @@ describe("<BusinessFormation />", () => {
     page.fillText("Get distribution terms", "to get distribution over the world");
     page.chooseRadio("canMakeDistribution-false");
 
-    await page.submitBusinessTab();
+    await page.submitBusinessStep();
 
     page.chooseRadio("registered-agent-manual");
     page.fillText("Agent name", "Hugo Weaving");
@@ -455,7 +455,7 @@ describe("<BusinessFormation />", () => {
     ).toBeInTheDocument();
     await page.fillAndSubmitAddressModal(member, "signers");
     page.checkSignerBox(0);
-    await page.submitContactsTab();
+    await page.submitContactsStep();
 
     page.fillText("Contact first name", "John");
     page.fillText("Contact last name", "Smith");
@@ -475,8 +475,8 @@ describe("<BusinessFormation />", () => {
       displayContent[legalStructureId].officialFormationDocument.cost;
 
     expect(screen.getByText(getDollarValue(expectedTotalCost))).toBeInTheDocument();
-    await page.submitBillingTab();
-    await page.submitReviewTab();
+    await page.submitBillingStep();
+    await page.submitReviewStep();
 
     const formationFormData = currentUserData().formationData.formationFormData;
     await waitFor(() => {
@@ -527,7 +527,7 @@ describe("<BusinessFormation />", () => {
     expect(formationFormData.corpWatchNotification).toEqual(false);
   });
 
-  it("fills multi-tab form, submits, and updates userData when corp", async () => {
+  it("fills multi-step form, submits, and updates userData when corp", async () => {
     const legalStructureId = "c-corporation";
     const profileData = generateFormationProfileData({ legalStructureId });
     const formationData = generateEmptyFormationData();
@@ -543,7 +543,7 @@ describe("<BusinessFormation />", () => {
       signature: false,
     };
 
-    await page.fillAndSubmitBusinessNameTab("Pizza Joint");
+    await page.fillAndSubmitBusinessNameStep("Pizza Joint");
 
     page.selectByText("Business suffix", "CORPORATION");
     page.fillText("Business total stock", "123");
@@ -556,7 +556,7 @@ describe("<BusinessFormation />", () => {
     fireEvent.click(screen.getByText(Config.businessFormationDefaults.businessPurposeAddButtonText));
     page.fillText("Business purpose", "to take over the world");
 
-    await page.submitBusinessTab();
+    await page.submitBusinessStep();
 
     page.chooseRadio("registered-agent-manual");
     page.fillText("Agent name", "Hugo Weaving");
@@ -577,7 +577,7 @@ describe("<BusinessFormation />", () => {
     await page.fillAndSubmitAddressModal(member, "signers");
     page.checkSignerBox(0);
 
-    await page.submitContactsTab();
+    await page.submitContactsStep();
 
     page.fillText("Contact first name", "John");
     page.fillText("Contact last name", "Smith");
@@ -597,8 +597,8 @@ describe("<BusinessFormation />", () => {
       displayContent[legalStructureId].officialFormationDocument.cost;
 
     expect(screen.getByText(getDollarValue(expectedTotalCost))).toBeInTheDocument();
-    await page.submitBillingTab();
-    await page.submitReviewTab();
+    await page.submitBillingStep();
+    await page.submitReviewStep();
 
     const formationFormData = currentUserData().formationData.formationFormData;
     await waitFor(() => {
@@ -640,8 +640,8 @@ describe("<BusinessFormation />", () => {
   it("loads different displayContent depending on users LegalStructureId", async () => {
     const profileData = generateFormationProfileData({});
     const page = preparePage({ profileData }, displayContent);
-    await page.fillAndSubmitBusinessNameTab();
-    await page.submitBusinessTab();
+    await page.fillAndSubmitBusinessNameStep();
+    await page.submitBusinessStep();
     expect(
       screen.getByText(
         `${displayContent[profileData.legalStructureId as FormationLegalType].agentNumberOrManual.contentMd}`

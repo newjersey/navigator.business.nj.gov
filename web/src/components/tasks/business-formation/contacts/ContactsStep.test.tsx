@@ -45,7 +45,7 @@ jest.mock("@/lib/api-client/apiClient", () => ({
   searchBusinessName: jest.fn(),
 }));
 
-describe("Formation - ContactsSection", () => {
+describe("Formation - ContactsStep", () => {
   const displayContent = generateFormationDisplayContent({});
 
   beforeEach(() => {
@@ -78,8 +78,8 @@ describe("Formation - ContactsSection", () => {
       displayContent
     );
 
-    await page.fillAndSubmitBusinessNameTab();
-    await page.submitBusinessTab();
+    await page.fillAndSubmitBusinessNameStep();
+    await page.submitBusinessStep();
     return page;
   };
 
@@ -182,7 +182,7 @@ describe("Formation - ContactsSection", () => {
       page.fillText("Address zip code", signer.addressZipCode);
       page.clickAddressSubmit();
       page.checkSignerBox(0);
-      await page.submitContactsTab();
+      await page.submitContactsStep();
       expect(currentUserData().formationData.formationFormData.signers).toEqual([
         { ...signer, signature: true },
       ]);
@@ -331,7 +331,7 @@ describe("Formation - ContactsSection", () => {
         ).toBeInTheDocument();
       });
       expect(screen.getByText(newName, { exact: false })).toBeInTheDocument();
-      await page.submitContactsTab();
+      await page.submitContactsStep();
       const newMembers = currentUserData().formationData.formationFormData.members;
       expect(newMembers.length).toEqual(2);
       expect(newMembers.findIndex((member) => member.name == newName)).toEqual(1);
@@ -361,7 +361,7 @@ describe("Formation - ContactsSection", () => {
         page.fillText("Address zip code", signer.addressZipCode);
         page.clickAddressSubmit();
         page.checkSignerBox(0);
-        await page.submitContactsTab();
+        await page.submitContactsStep();
         expect(currentUserData().formationData.formationFormData.signers).toEqual([
           { ...signer, signature: true },
         ]);
@@ -395,7 +395,7 @@ describe("Formation - ContactsSection", () => {
           ).toBeInTheDocument();
         });
         expect(screen.getByText(newName, { exact: false })).toBeInTheDocument();
-        await page.submitContactsTab();
+        await page.submitContactsStep();
         const newSigners = currentUserData().formationData.formationFormData.signers;
         expect(newSigners.length).toEqual(2);
         expect(newSigners.findIndex((signer) => signer.name == newName)).toEqual(1);
@@ -407,7 +407,7 @@ describe("Formation - ContactsSection", () => {
         const nameTd = screen.getByText(signers[1].name, { exact: false });
         // eslint-disable-next-line testing-library/no-node-access
         fireEvent.click(nameTd.parentElement?.querySelector('button[aria-label="delete"]') as Element);
-        await page.submitContactsTab();
+        await page.submitContactsStep();
         expect(currentUserData().formationData.formationFormData.signers).toEqual([signers[0]]);
       });
 
@@ -444,7 +444,7 @@ describe("Formation - ContactsSection", () => {
         expect(signerCheckboxErrorText()).toBeInTheDocument();
         page.checkSignerBox(0);
         expect(signerCheckboxErrorText()).not.toBeInTheDocument();
-        await page.submitContactsTab();
+        await page.submitContactsStep();
       });
     });
   });
@@ -544,7 +544,7 @@ describe("Formation - ContactsSection", () => {
           ).toBeInTheDocument();
         });
         expect(screen.getByText(newName, { exact: false })).toBeInTheDocument();
-        await page.submitContactsTab();
+        await page.submitContactsStep();
         const newMembers = currentUserData().formationData.formationFormData.members;
         expect(newMembers.length).toEqual(2);
         expect(newMembers.findIndex((member) => member.name == newName)).toEqual(1);
@@ -558,7 +558,7 @@ describe("Formation - ContactsSection", () => {
         expect(nameTd).toBeInTheDocument();
         // eslint-disable-next-line testing-library/no-node-access
         fireEvent.click(nameTd.parentElement?.querySelector('button[aria-label="delete"]') as Element);
-        await page.submitContactsTab();
+        await page.submitContactsStep();
         const newMembers = currentUserData().formationData.formationFormData.members;
         expect(newMembers.length).toEqual(1);
         expect(newMembers.find((member) => member == members[1])).toBeFalsy();
@@ -704,7 +704,7 @@ describe("Formation - ContactsSection", () => {
         expect(
           screen.queryByText(Config.businessFormationDefaults.membersNewButtonText, { exact: false })
         ).not.toBeInTheDocument();
-        await page.submitContactsTab();
+        await page.submitContactsStep();
         expect(currentUserData().formationData.formationFormData.members.length).toEqual(10);
       });
 
@@ -730,7 +730,7 @@ describe("Formation - ContactsSection", () => {
         page.fillText("Signer 1", "V");
         page.checkSignerBox(1);
 
-        await page.submitContactsTab();
+        await page.submitContactsStep();
         expect(currentUserData().formationData.formationFormData.signers).toEqual([
           { ...createEmptyFormationAddress(), name: "Red Skull", signature: true },
           { ...createEmptyFormationAddress(), name: "V", signature: true },
@@ -749,7 +749,7 @@ describe("Formation - ContactsSection", () => {
 
         fireEvent.click(screen.getAllByLabelText("delete additional signer")[0]);
 
-        await page.submitContactsTab();
+        await page.submitContactsStep();
         expect(currentUserData().formationData.formationFormData.signers).toEqual([
           { ...createEmptyFormationAddress(), name: "Red Skull", signature: true },
         ]);
@@ -792,7 +792,7 @@ describe("Formation - ContactsSection", () => {
         expect(signerCheckboxErrorText()).toBeInTheDocument();
         page.selectCheckbox(`${Config.businessFormationDefaults.signatureColumnLabel}*`);
         expect(signerCheckboxErrorText()).not.toBeInTheDocument();
-        await page.submitContactsTab();
+        await page.submitContactsStep();
       });
     });
   });
@@ -1139,8 +1139,8 @@ describe("Formation - ContactsSection", () => {
   });
 
   const attemptApiSubmission = async (page: FormationPageHelpers) => {
-    await page.stepperClickToReviewTab();
+    await page.stepperClickToReviewStep();
     await page.clickSubmit();
-    await page.stepperClickToContactsTab();
+    await page.stepperClickToContactsStep();
   };
 });

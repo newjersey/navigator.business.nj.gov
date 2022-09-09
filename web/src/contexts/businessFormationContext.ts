@@ -13,7 +13,7 @@ import {
 import { createContext } from "react";
 
 interface BusinessFormationState {
-  tab: number;
+  stepIndex: number;
   formationFormData: FormationFormData;
   legalStructureId: FormationLegalType;
   displayContent: FormationDisplayContent;
@@ -28,7 +28,7 @@ interface BusinessFormationState {
 interface BusinessFormationContextType {
   state: BusinessFormationState;
   setFormationFormData: (formationFormData: FormationFormData) => void;
-  setTab: (value: number) => void;
+  setStepIndex: (value: number) => void;
   setShowResponseAlert: React.Dispatch<React.SetStateAction<boolean>>;
   setFieldInteracted: (field: FormationFields, config?: { setToUninteracted: boolean }) => void;
   setHasBeenSubmitted: (hasBeenSubmitted: boolean) => void;
@@ -37,7 +37,7 @@ interface BusinessFormationContextType {
 
 export const BusinessFormationContext = createContext<BusinessFormationContextType>({
   state: {
-    tab: 0,
+    stepIndex: 0,
     legalStructureId: "limited-liability-company",
     formationFormData: createEmptyFormationFormData(),
     displayContent: createEmptyFormationDisplayContent()["limited-liability-company"],
@@ -49,7 +49,7 @@ export const BusinessFormationContext = createContext<BusinessFormationContextTy
     hasBusinessNameBeenSearched: false,
   },
   setFormationFormData: () => {},
-  setTab: () => {},
+  setStepIndex: () => {},
   setShowResponseAlert: () => {},
   setFieldInteracted: () => {},
   setHasBeenSubmitted: () => {},

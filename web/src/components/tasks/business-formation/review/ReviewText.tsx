@@ -1,6 +1,6 @@
 import { Content } from "@/components/Content";
 import { Button } from "@/components/njwds-extended/Button";
-import { LookupTabIndexByName } from "@/components/tasks/business-formation/BusinessFormationTabsConfiguration";
+import { LookupStepIndexByName } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { FormationStepNames } from "@/lib/types/types";
 import { camelCaseToSnakeCase, scrollToTop, setHeaderRole } from "@/lib/utils/helpers";
@@ -14,7 +14,7 @@ interface Props {
   stepName: FormationStepNames;
 }
 export const ReviewText = (props: Props) => {
-  const { state, setTab } = useContext(BusinessFormationContext);
+  const { state, setStepIndex } = useContext(BusinessFormationContext);
   const headerLevelTwo = setHeaderRole(2, "h3-styling");
   const snakeCaseFieldName = camelCaseToSnakeCase(props.fieldName);
   return (
@@ -27,7 +27,7 @@ export const ReviewText = (props: Props) => {
           <Button
             style="tertiary"
             onClick={() => {
-              setTab(LookupTabIndexByName(props.stepName));
+              setStepIndex(LookupStepIndexByName(props.stepName));
               scrollToTop();
             }}
             underline
@@ -40,7 +40,7 @@ export const ReviewText = (props: Props) => {
       <div className="display-block tablet:display-flex" data-testid={snakeCaseFieldName}>
         <div>
           {state.formationFormData[props.fieldName] || (
-            <i>{Config.businessFormationDefaults.reviewPageNotEnteredText}</i>
+            <i>{Config.businessFormationDefaults.reviewStepNotEnteredText}</i>
           )}
         </div>
       </div>

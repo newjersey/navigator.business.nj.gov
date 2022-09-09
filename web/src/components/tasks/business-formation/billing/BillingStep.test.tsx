@@ -40,7 +40,7 @@ jest.mock("@/lib/api-client/apiClient", () => ({
   searchBusinessName: jest.fn(),
 }));
 
-describe("Formation - PaymentSection", () => {
+describe("Formation - BillingStep", () => {
   const defaultContent = {
     officialFormationDocument: {
       contentMd: "Official formation document",
@@ -92,7 +92,7 @@ describe("Formation - PaymentSection", () => {
       displayContent
     );
 
-    await page.stepperClickToBillingTab();
+    await page.stepperClickToBillingStep();
     return page;
   };
 
@@ -238,8 +238,8 @@ describe("Formation - PaymentSection", () => {
   });
 
   const attemptApiSubmission = async (page: FormationPageHelpers) => {
-    await page.stepperClickToReviewTab();
+    await page.stepperClickToReviewStep();
     await page.clickSubmit();
-    await page.stepperClickToBillingTab();
+    await page.stepperClickToBillingStep();
   };
 });

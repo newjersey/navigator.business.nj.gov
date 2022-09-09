@@ -6,11 +6,11 @@ import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { ReactElement, useContext } from "react";
 
-export const BusinessSection = (): ReactElement => {
+export const BusinessStep = (): ReactElement => {
   const { state } = useContext(BusinessFormationContext);
 
   return (
-    <div data-testid="business-section">
+    <div data-testid="business-step">
       <MainBusiness />
       {state.legalStructureId == "limited-partnership" ? (
         <>

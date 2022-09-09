@@ -13,20 +13,20 @@ export const ReviewBusinessSuffixAndStartDate = (): ReactElement => {
     <>
       <div className="display-block tablet:display-flex">
         <div className="text-bold width-11rem">
-          <Content>{Config.businessFormationDefaults.reviewPageBusinessSuffixLabel}</Content>
+          <Content>{Config.businessFormationDefaults.reviewStepBusinessSuffixLabel}</Content>
         </div>
         <div>
           {userData?.profileData.businessName || (
-            <i>{Config.businessFormationDefaults.reviewPageNotEnteredText}</i>
+            <i>{Config.businessFormationDefaults.reviewStepNotEnteredText}</i>
           )}{" "}
           {state.formationFormData.businessSuffix || (
-            <i>{Config.businessFormationDefaults.reviewPageNotEnteredText}</i>
+            <i>{Config.businessFormationDefaults.reviewStepNotEnteredText}</i>
           )}
         </div>
       </div>
       <div className="display-block tablet:display-flex margin-top-1">
         <div className="text-bold width-11rem">
-          <Content>{Config.businessFormationDefaults.reviewPageBusinessStartDateLabel}</Content>
+          <Content>{Config.businessFormationDefaults.reviewStepBusinessStartDateLabel}</Content>
         </div>
         <div>
           {parseDateWithFormat(state.formationFormData.businessStartDate, "YYYY-MM-DD").format("MM/DD/YYYY")}

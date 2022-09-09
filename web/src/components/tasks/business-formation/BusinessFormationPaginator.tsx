@@ -3,9 +3,9 @@ import { Alert } from "@/components/njwds-extended/Alert";
 import { Button } from "@/components/njwds-extended/Button";
 import { HorizontalStepper } from "@/components/njwds-extended/HorizontalStepper";
 import {
-  BusinessFormationTabsConfiguration,
-  LookupNameByTabIndex,
-} from "@/components/tasks/business-formation/BusinessFormationTabsConfiguration";
+  BusinessFormationStepsConfiguration,
+  LookupNameByStepIndex,
+} from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
 import { getFieldByApiField } from "@/components/tasks/business-formation/getFieldForApiField";
 import { requiredFieldsForUser } from "@/components/tasks/business-formation/requiredFieldsForUser";
 import { AuthAlertContext } from "@/contexts/authAlertContext";
@@ -33,13 +33,13 @@ interface Props {
 
 export const BusinessFormationPaginator = (props: Props): ReactElement => {
   const { userData, update } = useUserData();
-  const { state, setTab, setHasBeenSubmitted, setFormationFormData, setFieldInteracted } =
+  const { state, setStepIndex, setHasBeenSubmitted, setFormationFormData, setFieldInteracted } =
     useContext(BusinessFormationContext);
   const { isAuthenticated, setModalIsVisible } = useContext(AuthAlertContext);
   const { Config } = useConfig();
   const { doesStepHaveError, isStepCompleted, allCurrentErrorsForStep, getApiErrorMessage } =
     useFormationErrors();
-  const currentStepName = LookupNameByTabIndex(state.tab);
+  const currentStepName = LookupNameByStepIndex(state.stepIndex);
   const router = useRouter();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -48,7 +48,7 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
   });
 
   const determineStepsWithErrors = (overrides?: { hasSubmitted: boolean }) => {
-    const stepStates = BusinessFormationTabsConfiguration.map((value) => {
+    const stepStates = BusinessFormationStepsConfiguration.map((value) => {
       return {
         name: value.name,
         hasError: doesStepHaveError(value.name, overrides),
@@ -62,8 +62,8 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
 
   const { stepsWithErrors, stepStates } = determineStepsWithErrors();
 
-  const moveToPage = (tabIndex: number): void => {
-    setTab(tabIndex);
+  const moveToStep = (stepIndex: number): void => {
+    setStepIndex(stepIndex);
   };
 
   const isStep = (stepName: FormationStepNames): boolean => {
@@ -72,19 +72,19 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
 
   const onPreviousButtonClick = (): void => {
     scrollToTopOfFormation();
-    moveToPage(state.tab - 1);
+    moveToStep(state.stepIndex - 1);
   };
 
-  const onMoveToStep = (tabIndex: number, config: { moveType: "NEXT_BUTTON" | "STEPPER" }): void => {
+  const onMoveToStep = (stepIndex: number, config: { moveType: "NEXT_BUTTON" | "STEPPER" }): void => {
     scrollToTopOfFormation();
     if (isAuthenticated === IsAuthenticated.FALSE) {
       setModalIsVisible(true);
       return;
     }
 
-    const isSubmittingFromFinalPage = tabIndex >= BusinessFormationTabsConfiguration.length;
+    const isSubmittingFromFinalStep = stepIndex >= BusinessFormationStepsConfiguration.length;
 
-    if (isSubmittingFromFinalPage) {
+    if (isSubmittingFromFinalStep) {
       setHasBeenSubmitted(true);
       const { stepsWithErrors } = determineStepsWithErrors({ hasSubmitted: true });
       if (stepsWithErrors.length > 0) return;
@@ -95,8 +95,8 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
     const filteredUserData = getFilteredUserData();
     const userDataWithProfileChanges = updateChangesInProfileData(filteredUserData);
     update(userDataWithProfileChanges);
-    changePageAnalytics(filteredUserData?.formationData.formationFormData, tabIndex, config.moveType);
-    moveToPage(tabIndex);
+    onStepChangeAnalytics(filteredUserData?.formationData.formationFormData, stepIndex, config.moveType);
+    moveToStep(stepIndex);
   };
 
   const updateChangesInProfileData = (userData: UserData | undefined): UserData | undefined => {
@@ -151,27 +151,27 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
     };
   };
 
-  const changePageAnalytics = (
+  const onStepChangeAnalytics = (
     formationFormData: FormationFormData | undefined,
-    nextTab: number,
+    nextStepIndex: number,
     moveType: "NEXT_BUTTON" | "STEPPER"
   ) => {
     if (!formationFormData) return;
 
     if (moveType === "STEPPER") {
-      if (LookupNameByTabIndex(nextTab) === "Name") {
+      if (LookupNameByStepIndex(nextStepIndex) === "Name") {
         analytics.event.business_formation_name_tab.click.arrive_on_business_formation_name_step();
       }
-      if (LookupNameByTabIndex(nextTab) === "Business") {
+      if (LookupNameByStepIndex(nextStepIndex) === "Business") {
         analytics.event.business_formation_business_tab.click.arrive_on_business_formation_business_step();
       }
-      if (LookupNameByTabIndex(nextTab) === "Contacts") {
+      if (LookupNameByStepIndex(nextStepIndex) === "Contacts") {
         analytics.event.business_formation_contacts_tab.click.arrive_on_business_formation_contacts_step();
       }
-      if (LookupNameByTabIndex(nextTab) === "Billing") {
+      if (LookupNameByStepIndex(nextStepIndex) === "Billing") {
         analytics.event.business_formation_billing_tab.click.arrive_on_business_formation_billing_step();
       }
-      if (LookupNameByTabIndex(nextTab) === "Review") {
+      if (LookupNameByStepIndex(nextStepIndex) === "Review") {
         analytics.event.business_formation_review_tab.click.arrive_on_business_formation_review_step();
       }
     }
@@ -255,15 +255,15 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
   };
 
   const shouldDisplayPreviousButton = (): boolean => {
-    return state.tab !== 0;
+    return state.stepIndex !== 0;
   };
 
   const getNextButtonText = (): string => {
     if (isAuthenticated === IsAuthenticated.FALSE) {
       return `Register & ${Config.businessFormationDefaults.initialNextButtonText}`;
-    } else if (state.tab === 0) {
+    } else if (state.stepIndex === 0) {
       return Config.businessFormationDefaults.initialNextButtonText;
-    } else if (state.tab === BusinessFormationTabsConfiguration.length - 1) {
+    } else if (state.stepIndex === BusinessFormationStepsConfiguration.length - 1) {
       return Config.businessFormationDefaults.submitButtonText;
     } else {
       return Config.businessFormationDefaults.nextButtonText;
@@ -280,7 +280,7 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
         )}
         <Button
           style="primary"
-          onClick={() => onMoveToStep(state.tab + 1, { moveType: "NEXT_BUTTON" })}
+          onClick={() => onMoveToStep(state.stepIndex + 1, { moveType: "NEXT_BUTTON" })}
           widthAutoOnMobile
           noRightMargin
           loading={isLoading}
@@ -385,7 +385,7 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
       <div className="margin-top-3">
         <HorizontalStepper
           steps={stepStates}
-          currentStep={state.tab}
+          currentStep={state.stepIndex}
           onStepClicked={(step: number) => onMoveToStep(step, { moveType: "STEPPER" })}
         />
       </div>
