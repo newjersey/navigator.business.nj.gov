@@ -27,7 +27,7 @@ export const ReviewRegisteredAgent = (): ReactElement => {
               scrollToTop();
             }}
             underline
-            dataTestid="edit-registered-agent-section"
+            dataTestid="edit-registered-agent-step"
           >
             {Config.businessFormationDefaults.editButtonText}
           </Button>

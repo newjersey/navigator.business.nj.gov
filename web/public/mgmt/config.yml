@@ -1131,215 +1131,253 @@ collections:
                   widget: string,
                 }
               - {
-                  label: Review Page - Address Label,
+                  label: Review Step - Address Label,
                   name: reviewStepAddressLabel,
                   widget: string,
                   hint: This field supports Markdown,
                 }
               - {
-                  label: Review Page - Business Name Label,
+                  label: Review Step - Billing Contact Header,
+                  name: reviewStepBillingContactHeader,
+                  widget: string,
+                }
+              - {
+                  label: Review Step - Billing Services Header,
+                  name: reviewStepBillingServicesHeader,
+                  widget: string,
+                }
+              - {
+                  label: Review Step - Billing Contact First Name,
+                  name: reviewStepContactFirstName,
+                  widget: string,
+                }
+              - {
+                  label: Review Step - Billing Contact Last Name,
+                  name: reviewStepContactLastName,
+                  widget: string,
+                }
+              - { label: Review Step - Billing Contact Phone, name: reviewStepContactPhone, widget: string }
+              - { label: Review Step - Billing Services, name: reviewStepServices, widget: string }
+              - { label: Review Step - Billing Payment Type, name: reviewStepPaymentType, widget: string }
+              - {
+                  label: Review Step - Billing Formation Doc Label,
+                  name: reviewStepFormationDoc,
+                  widget: string,
+                }
+              - {
+                  label: Review Step - Billing Certificate of Good Standing Label,
+                  name: reviewStepGoodStandingDoc,
+                  widget: string,
+                }
+              - {
+                  label: Review Step - Billing Certified Copy Label,
+                  name: reviewStepCertifiedCopyDoc,
+                  widget: string,
+                }
+              - {
+                  label: Review Step - Business Name Label,
                   name: reviewStepBusinessNameLabel,
                   widget: string,
                   hint: This field supports Markdown,
                 }
               - {
-                  label: Review Page - Business Start Date Label,
+                  label: Review Step - Business Start Date Label,
                   name: reviewStepBusinessStartDateLabel,
                   widget: string,
                   hint: This field supports Markdown,
                 }
               - {
-                  label: Review Page Business Purpose Header,
+                  label: Review Step - Business Purpose Header,
                   name: reviewStepBusinessPurposeHeader,
                   widget: string,
                   hint: This field supports Markdown,
                 }
               - {
-                  label: Review Page - Business Total Stock Label,
+                  label: Review Step - Business Total Stock Label,
                   name: reviewBusinessTotalStockLabel,
                   widget: string,
                   hint: This field supports Markdown,
                 }
               - {
-                  label: Review Page - Business Suffix Label,
+                  label: Review Step - Business Suffix Label,
                   name: reviewStepBusinessSuffixLabel,
                   widget: string,
                   hint: This field supports Markdown,
                 }
               - {
-                  label: Review Page - Email Label,
+                  label: Review Step - Email Label,
                   name: reviewStepEmailLabel,
                   widget: string,
                   hint: This field supports Markdown,
                 }
               - {
-                  label: Review Page - Dissolution Label,
+                  label: Review Step - Dissolution Label,
                   name: reviewStepDissolutionHeader,
                   widget: string,
                   hint: This field supports Markdown,
                 }
               - {
-                  label: Review Page - Withdrawals Label,
+                  label: Review Step - Withdrawals Label,
                   name: reviewStepWithdrawalsHeader,
                   widget: string,
                   hint: This field supports Markdown,
                 }
               - {
-                  label: Review Page - Combined Investment Label,
+                  label: Review Step - Combined Investment Label,
                   name: reviewStepCombinedInvestmentHeader,
                   widget: string,
                   hint: This field supports Markdown,
                 }
               - {
-                  label: Review Page - Partnership - LimitedPartner - Yes Text,
+                  label: Review Step - Partnership - LimitedPartner - Yes Text,
                   name: reviewStepPartnershipYesLimitedPartnerBody,
                   widget: string,
                   hint: This field supports Markdown,
                 }
               - {
-                  label: Review Page - Partnership - LimitedPartner - No Text,
+                  label: Review Step - Partnership - LimitedPartner - No Text,
                   name: reviewStepPartnershipNoLimitedPartnerBody,
                   widget: string,
                   hint: This field supports Markdown,
                 }
               - {
-                  label: Review Page - Partnership - Receive Distributions - Yes Text,
+                  label: Review Step - Partnership - Receive Distributions - Yes Text,
                   name: reviewStepPartnershipYesCanReceiveDistributions,
                   widget: string,
                   hint: This field supports Markdown,
                 }
               - {
-                  label: Review Page - Partnership - Receive Distributions - No Text,
+                  label: Review Step - Partnership - Receive Distributions - No Text,
                   name: reviewStepPartnershipNoCanReceiveDistributions,
                   widget: string,
                   hint: This field supports Markdown,
                 }
               - {
-                  label: Review Page - Partnership - Make Distributions - Yes Text,
+                  label: Review Step - Partnership - Make Distributions - Yes Text,
                   name: reviewStepPartnershipYesCanMakeDistributions,
                   widget: string,
                   hint: This field supports Markdown,
                 }
               - {
-                  label: Review Page - Partnership - Make Distributions - No Text,
+                  label: Review Step - Partnership - Make Distributions - No Text,
                   name: reviewStepPartnershipNoCanMakeDistributions,
                   widget: string,
                   hint: This field supports Markdown,
                 }
               - {
-                  label: Review Page - Partnership - Term Label,
+                  label: Review Step - Partnership - Term Label,
                   name: reviewStepPartnershipTermTitle,
                   widget: string,
                   hint: This field supports Markdown,
                 }
               - {
-                  label: Review Page - Legal Structure Label,
+                  label: Review Step - Legal Structure Label,
                   name: reviewStepLegalStructureLabel,
                   widget: string,
                   hint: This field supports Markdown,
                 }
               - {
-                  label: Review Page - Location Header,
+                  label: Review Step - Location Header,
                   name: reviewStepLocationHeader,
                   widget: string,
                   hint: This field supports Markdown,
                 }
               - {
-                  label: Review Page - Members Header,
+                  label: Review Step - Members Header,
                   name: reviewStepMembersHeader,
                   widget: string,
                   hint: This field supports Markdown,
                 }
               - {
-                  label: Review Page - Member Name Label,
+                  label: Review Step - Member Name Label,
                   name: reviewStepMemberNameLabel,
                   widget: string,
                   hint: This field supports Markdown,
                 }
               - {
-                  label: Review Page - Directors Header,
+                  label: Review Step - Directors Header,
                   name: reviewStepDirectorsHeader,
                   widget: string,
                   hint: This field supports Markdown,
                 }
               - {
-                  label: Review Page - Director Name Label,
+                  label: Review Step - Director Name Label,
                   name: reviewStepDirectorNameLabel,
                   widget: string,
                   hint: This field supports Markdown,
                 }
               - {
-                  label: Review Page - Director Address Label,
+                  label: Review Step - Director Address Label,
                   name: reviewStepDirectorAddressLabel,
                   widget: string,
                   hint: This field supports Markdown,
                 }
               - {
-                  label: Review Page - Partnership Header,
+                  label: Review Step - Partnership Header,
                   name: reviewStepPartnershipHeader,
                   widget: string,
                   hint: This field supports Markdown,
                 }
               - {
-                  label: Review Page - Provisions Header,
+                  label: Review Step - Provisions Header,
                   name: reviewStepProvisionsHeader,
                   widget: string,
                   hint: This field supports Markdown,
                 }
               - {
-                  label: Review Page - Provisions Subheader,
+                  label: Review Step - Provisions Subheader,
                   name: reviewStepProvisionsSubheader,
                   widget: string,
                 }
               - {
-                  label: Review Page - Registered Agent Header,
+                  label: Review Step - Registered Agent Header,
                   name: reviewStepRegisteredAgentHeader,
                   widget: string,
                   hint: This field supports Markdown,
                 }
               - {
-                  label: Review Page - Registered Agent Name Label,
+                  label: Review Step - Registered Agent Name Label,
                   name: reviewStepRegisteredAgentNameLabel,
                   widget: string,
                   hint: This field supports Markdown,
                 }
               - {
-                  label: Review Page - Registered Agent Number Label,
+                  label: Review Step - Registered Agent Number Label,
                   name: reviewStepRegisteredAgentNumberLabel,
                   widget: string,
                   hint: This field supports Markdown,
                 }
               - {
-                  label: Review Page - Signatures Header,
+                  label: Review Step - Signatures Header,
                   name: reviewStepSignaturesHeader,
                   widget: string,
                   hint: This field supports Markdown,
                 }
               - {
-                  label: Review Page - Signers (Incorporators) Header,
+                  label: Review Step - Signers (Incorporators) Header,
                   name: reviewStepIncorporatorsHeader,
                   widget: string,
                   hint: This field supports Markdown,
                 }
               - {
-                  label: Review Page - Signer Name Label,
+                  label: Review Step - Signer Name Label,
                   name: reviewStepSignerNameLabel,
                   widget: string,
                   hint: This field supports Markdown,
                 }
               - {
-                  label: Review Page - Signer (Incorporator) Label,
+                  label: Review Step - Signer (Incorporator) Label,
                   name: reviewStepIncorporatorNameLabel,
                   widget: string,
                   hint: This field supports Markdown,
                 }
               - {
-                  label: Review Page - Signer (Incorporator) Name Label,
+                  label: Review Step - Signer (Incorporator) Name Label,
                   name: reviewStepIncorporatorAddressLabel,
                   widget: string,
                   hint: This field supports Markdown,
                 }
-              - { label: Review Page - Not Entered Text, name: reviewStepNotEnteredText, widget: string }
+              - { label: Review Step - Not Entered Text, name: reviewStepNotEnteredText, widget: string }
               - { label: Same Agent Info As Account, name: sameAgentInfoAsAccount, widget: string }
               - { label: Same Agent Address As Business, name: sameAgentAddressAsBusiness, widget: string }
               - { label: Signature Column Label, name: signatureColumnLabel, widget: string }

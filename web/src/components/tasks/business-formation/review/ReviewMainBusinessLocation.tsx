@@ -30,7 +30,7 @@ export const ReviewMainBusinessLocation = (): ReactElement => {
               scrollToTop();
             }}
             underline
-            dataTestid="edit-location-section"
+            dataTestid="edit-location-step"
           >
             {Config.businessFormationDefaults.editButtonText}
           </Button>

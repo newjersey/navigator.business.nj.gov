@@ -35,7 +35,7 @@ export const ReviewMembers = (): ReactElement => {
               scrollToTop();
             }}
             underline
-            dataTestid="edit-members-section"
+            dataTestid="edit-members-step"
           >
             {Config.businessFormationDefaults.editButtonText}
           </Button>

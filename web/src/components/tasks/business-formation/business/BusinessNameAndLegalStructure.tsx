@@ -64,7 +64,7 @@ export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): 
                 scrollToTop();
               }}
               underline
-              dataTestid="edit-business-name-section"
+              dataTestid="edit-business-name-step"
             >
               {Config.businessFormationDefaults.editButtonText}
             </Button>
