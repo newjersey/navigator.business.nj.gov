@@ -70,6 +70,7 @@ const serverlessConfiguration: AWS = {
       host: isDocker ? "0.0.0.0" : "localhost",
       httpPort: offlinePort,
       lambdaPort: offlineLambdaPort,
+      noTimeout: true,
     },
     ssmLocation: ssmLocation,
   },
