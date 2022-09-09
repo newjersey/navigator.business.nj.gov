@@ -29,7 +29,7 @@ jest.mock("@/lib/api-client/apiClient", () => ({
   searchBusinessName: jest.fn(),
 }));
 
-describe("Formation - BusinessNameSection", () => {
+describe("Formation - BusinessNameStep", () => {
   beforeEach(() => {
     jest.resetAllMocks();
     useSetupInitialMocks();

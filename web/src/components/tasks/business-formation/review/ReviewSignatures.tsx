@@ -1,6 +1,6 @@
 import { Content } from "@/components/Content";
 import { Button } from "@/components/njwds-extended/Button";
-import { LookupTabIndexByName } from "@/components/tasks/business-formation/BusinessFormationTabsConfiguration";
+import { LookupStepIndexByName } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { getStringifiedAddress, scrollToTop, setHeaderRole } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
@@ -8,7 +8,7 @@ import { corpLegalStructures } from "@businessnjgovnavigator/shared";
 import { ReactElement, useContext } from "react";
 
 export const ReviewSignatures = (): ReactElement => {
-  const { state, setTab } = useContext(BusinessFormationContext);
+  const { state, setStepIndex } = useContext(BusinessFormationContext);
 
   const headerLevelTwo = setHeaderRole(2, "h3-styling");
 
@@ -16,10 +16,10 @@ export const ReviewSignatures = (): ReactElement => {
 
   const getHeader = () => {
     if (isCorp) {
-      return Config.businessFormationDefaults.reviewPageIncorporatorsHeader;
+      return Config.businessFormationDefaults.reviewStepIncorporatorsHeader;
     } else if (state.legalStructureId == "limited-partnership") {
-      return Config.businessFormationDefaults.reviewPageSignaturesHeader;
-    } else return Config.businessFormationDefaults.reviewPageSignaturesHeader;
+      return Config.businessFormationDefaults.reviewStepSignaturesHeader;
+    } else return Config.businessFormationDefaults.reviewStepSignaturesHeader;
   };
 
   return (
@@ -32,7 +32,7 @@ export const ReviewSignatures = (): ReactElement => {
           <Button
             style="tertiary"
             onClick={() => {
-              setTab(LookupTabIndexByName("Contacts"));
+              setStepIndex(LookupStepIndexByName("Contacts"));
               scrollToTop();
             }}
             underline
@@ -43,7 +43,7 @@ export const ReviewSignatures = (): ReactElement => {
         </div>
       </div>
       {state.formationFormData.signers.length === 0 && (
-        <i>{Config.businessFormationDefaults.reviewPageNotEnteredText}</i>
+        <i>{Config.businessFormationDefaults.reviewStepNotEnteredText}</i>
       )}
       {state.formationFormData.signers.map((signer, index) => (
         <div key={`${signer}-${index}`} className={index !== 0 ? "margin-top-2" : ""}>
@@ -51,17 +51,17 @@ export const ReviewSignatures = (): ReactElement => {
             <div className="text-bold width-11rem">
               <Content>
                 {isCorp
-                  ? Config.businessFormationDefaults.reviewPageIncorporatorNameLabel
-                  : Config.businessFormationDefaults.reviewPageSignerNameLabel}
+                  ? Config.businessFormationDefaults.reviewStepIncorporatorNameLabel
+                  : Config.businessFormationDefaults.reviewStepSignerNameLabel}
               </Content>
             </div>
-            <div>{signer.name || <i>{Config.businessFormationDefaults.reviewPageNotEnteredText}</i>}</div>
+            <div>{signer.name || <i>{Config.businessFormationDefaults.reviewStepNotEnteredText}</i>}</div>
           </div>
           {(isCorp || state.legalStructureId == "limited-partnership") && (
             <>
               <div className="display-block tablet:display-flex margin-top-1">
                 <div className="text-bold width-11rem">
-                  <Content>{Config.businessFormationDefaults.reviewPageIncorporatorAddressLabel}</Content>
+                  <Content>{Config.businessFormationDefaults.reviewStepIncorporatorAddressLabel}</Content>
                 </div>
                 <div>
                   {getStringifiedAddress(

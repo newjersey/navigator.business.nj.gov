@@ -1,9 +1,9 @@
 import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
+import { FormationChooseDocuments } from "@/components/tasks/business-formation/billing/FormationChooseDocuments";
+import { FormationChooseNotifications } from "@/components/tasks/business-formation/billing/FormationChooseNotifications";
+import { PaymentTypeTable } from "@/components/tasks/business-formation/billing/PaymentTypeTable";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
-import { FormationChooseDocuments } from "@/components/tasks/business-formation/payment/FormationChooseDocuments";
-import { FormationChooseNotifications } from "@/components/tasks/business-formation/payment/FormationChooseNotifications";
-import { PaymentTypeTable } from "@/components/tasks/business-formation/payment/PaymentTypeTable";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { MediaQueries } from "@/lib/PageSizes";
@@ -12,13 +12,13 @@ import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { useMediaQuery } from "@mui/material";
 import { ReactElement, useContext } from "react";
 
-export const PaymentSection = (): ReactElement => {
+export const BillingStep = (): ReactElement => {
   const { state } = useContext(BusinessFormationContext);
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
   const { doSomeFieldsHaveError, doesFieldHaveError } = useFormationErrors();
 
   return (
-    <div data-testid="payment-section">
+    <div data-testid="billing-step">
       <Content>{Config.businessFormationDefaults.contactInformationHeader}</Content>
       <div
         className={`grid-row grid-gap-2 margin-top-2 ${isTabletAndUp ? "input-error-bar" : ""} ${

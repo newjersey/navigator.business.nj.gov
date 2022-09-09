@@ -46,7 +46,7 @@ jest.mock("@/lib/api-client/apiClient", () => ({
   searchBusinessName: jest.fn(),
 }));
 
-describe("Formation - BusinessSection", () => {
+describe("Formation - BusinessStep", () => {
   beforeEach(() => {
     jest.resetAllMocks();
     useSetupInitialMocks();
@@ -74,7 +74,7 @@ describe("Formation - BusinessSection", () => {
       generateFormationDisplayContent({}),
       municipalities
     );
-    await page.stepperClickToBusinessTab();
+    await page.stepperClickToBusinessStep();
     return page;
   };
 
@@ -134,10 +134,10 @@ describe("Formation - BusinessSection", () => {
     expect(screen.queryByTestId("dependency-alert")).not.toBeInTheDocument();
   });
 
-  it("goes back to name tab when edit business name button is clicked", async () => {
+  it("goes back to name step when edit business name button is clicked", async () => {
     await getPageHelper({}, {});
     fireEvent.click(screen.getByTestId("edit-business-name"));
-    expect(screen.getByTestId("business-name-section")).toBeInTheDocument();
+    expect(screen.getByTestId("business-name-step")).toBeInTheDocument();
   });
 
   it("displays alert and highlights fields when blur with missing fields", async () => {
@@ -188,7 +188,7 @@ describe("Formation - BusinessSection", () => {
     it("removes business purpose when Remove button clicked", async () => {
       const page = await getPageHelper({}, { businessPurpose: "some purpose" });
       fireEvent.click(screen.getByLabelText("remove business purpose"));
-      await page.submitBusinessTab();
+      await page.submitBusinessStep();
       expect(currentUserData().formationData.formationFormData.businessPurpose).toEqual("");
     });
 
@@ -250,7 +250,7 @@ describe("Formation - BusinessSection", () => {
       );
       const removeProvision2Button = screen.getAllByLabelText("remove provision")[1];
       fireEvent.click(removeProvision2Button);
-      await page.submitBusinessTab();
+      await page.submitBusinessStep();
       expect(currentUserData().formationData.formationFormData.provisions).toEqual([
         "provision1",
         "provision3",
@@ -283,7 +283,7 @@ describe("Formation - BusinessSection", () => {
         { businessTotalStock: undefined }
       );
       page.fillText("Business total stock", "123");
-      await page.submitBusinessTab(true);
+      await page.submitBusinessStep(true);
       expect(currentUserData().formationData.formationFormData.businessTotalStock).toEqual("123");
     });
 
@@ -293,7 +293,7 @@ describe("Formation - BusinessSection", () => {
         { businessTotalStock: undefined }
       );
       page.fillText("Business total stock", "0123");
-      await page.submitBusinessTab(true);
+      await page.submitBusinessStep(true);
       expect(currentUserData().formationData.formationFormData.businessTotalStock).toEqual("123");
     });
   });
@@ -318,7 +318,7 @@ describe("Formation - BusinessSection", () => {
     it("passes zipcode validation in main business address", async () => {
       const page = await getPageHelper({}, { businessAddressZipCode: "" });
       page.fillText("Business address zip code", "07001");
-      await page.submitBusinessTab();
+      await page.submitBusinessStep();
       expect(currentUserData().formationData.formationFormData.businessAddressZipCode).toEqual("07001");
     });
   });
@@ -327,7 +327,7 @@ describe("Formation - BusinessSection", () => {
     it("defaults date picker to current date when it has no value", async () => {
       const page = await getPageHelper({}, { businessStartDate: "" });
       expect(screen.getByLabelText("Business start date")).toBeInTheDocument();
-      await page.submitBusinessTab();
+      await page.submitBusinessStep();
       expect(currentUserData().formationData.formationFormData.businessStartDate).toEqual(
         getCurrentDateFormatted("YYYY-MM-DD")
       );
@@ -377,11 +377,11 @@ describe("Formation - BusinessSection", () => {
       expect(displayLegalStructure).toHaveTextContent(Config.businessFormationDefaults.cCorpText);
     });
 
-    it("displays business name from name check section and overrides profile", async () => {
+    it("displays business name from name check step and overrides profile", async () => {
       const page = await getPageHelper({ businessName: "some cool name" }, {});
 
       fireEvent.click(screen.getByText(Config.businessFormationDefaults.previousButtonText));
-      await page.fillAndSubmitBusinessNameTab("another cool name");
+      await page.fillAndSubmitBusinessNameStep("another cool name");
 
       expect(screen.getByText("another cool name", { exact: false })).toBeInTheDocument();
       expect(screen.queryByText("some cool name", { exact: false })).not.toBeInTheDocument();
@@ -405,9 +405,9 @@ describe("Formation - BusinessSection", () => {
 
   describe("required fields", () => {
     const attemptApiSubmission = async (page: FormationPageHelpers) => {
-      await page.stepperClickToReviewTab();
+      await page.stepperClickToReviewStep();
       await page.clickSubmit();
-      await page.stepperClickToBusinessTab();
+      await page.stepperClickToBusinessStep();
     };
 
     it("Business suffix", async () => {
