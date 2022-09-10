@@ -84,7 +84,7 @@
     "ua-parser-js": "1.0.2",
     "unified": "10.1.2",
     "uuid": "9.0.0",
-    "winston": "3.8.1",
+    "winston": "3.8.2",
     "winston-cloudwatch": "6.1.1",
     "xml2js": "0.4.23"
   },
