@@ -618,6 +618,77 @@ describe("Formation - ContactsStep", () => {
         expect(page.getInputElementByLabel("Address zip code").value).toBe("07601");
       });
 
+      it("only fills & disables required fields with values when checkbox checked", async () => {
+        const page = await getPageHelper(
+          {
+            legalStructureId,
+            municipality: generateMunicipality({ displayName: "Hampton Borough", name: "Hampton" }),
+          },
+          {
+            members: [],
+            businessAddressLine1: "123 business address",
+            businessAddressLine2: "",
+            businessAddressZipCode: "",
+          }
+        );
+        await page.openAddressModal("members");
+
+        page.selectCheckbox(Config.businessFormationDefaults.membersCheckboxText);
+        expect(page.getInputElementByLabel("Address line1").value).toBe("123 business address");
+        expect(page.getInputElementByLabel("Address line2").value).toBe("");
+        expect(page.getInputElementByLabel("Address zip code").value).toBe("");
+        expect(page.getInputElementByLabel("Address line1").disabled).toBe(true);
+        expect(page.getInputElementByLabel("Address line2").disabled).toEqual(true);
+        expect(page.getInputElementByLabel("Address zip code").disabled).toEqual(false);
+      });
+
+      it("shows inline validation for missing fields with checkbox", async () => {
+        const page = await getPageHelper(
+          {
+            legalStructureId,
+            municipality: generateMunicipality({ displayName: "Hampton Borough", name: "Hampton" }),
+          },
+          {
+            members: [],
+            businessAddressLine1: "",
+          }
+        );
+        await page.openAddressModal("members");
+
+        page.selectCheckbox(Config.businessFormationDefaults.membersCheckboxText);
+        expect(screen.getByText(Config.businessFormationDefaults.addressErrorText)).toBeInTheDocument();
+      });
+
+      it("unselects checkbox when interacting with non-disabled fields", async () => {
+        const page = await getPageHelper(
+          {
+            legalStructureId,
+            municipality: generateMunicipality({ displayName: "Hampton Borough", name: "Hampton" }),
+          },
+          {
+            members: [],
+            businessAddressLine1: "123 business address",
+            businessAddressLine2: "",
+            businessAddressZipCode: "",
+          }
+        );
+        await page.openAddressModal("members");
+
+        page.selectCheckbox(Config.businessFormationDefaults.membersCheckboxText);
+        expect(
+          page.getInputElementByLabel(Config.businessFormationDefaults.membersCheckboxText).checked
+        ).toEqual(true);
+        page.fillText("Address zip code", "12345");
+        expect(
+          page.getInputElementByLabel(Config.businessFormationDefaults.membersCheckboxText).checked
+        ).toEqual(false);
+        expect(page.getInputElementByLabel("Address line1").disabled).toBe(false);
+        expect(page.getInputElementByLabel("Address line2").disabled).toEqual(false);
+        expect(page.getInputElementByLabel("Address city").disabled).toBe(false);
+        expect(page.getInputElementByLabel("Address state").disabled).toBe(false);
+        expect(page.getInputElementByLabel("Address zip code").disabled).toEqual(false);
+      });
+
       it("shows validation on submit", async () => {
         const page = await getPageHelper({ legalStructureId }, {});
         await page.openAddressModal("members");
@@ -943,6 +1014,74 @@ describe("Formation - ContactsStep", () => {
       expect(page.getInputElementByLabel("Agent office address line2").disabled).toEqual(true);
       expect(page.getInputElementByLabel("Agent office address city").disabled).toEqual(true);
       expect(page.getInputElementByLabel("Agent office address zip code").disabled).toEqual(true);
+    });
+
+    it("fills & disables only fields with values when some fields missing", async () => {
+      const page = await getPageHelper(
+        { municipality: generateMunicipality({ name: "New Test City" }) },
+        {
+          agentNumberOrManual: "MANUAL_ENTRY",
+          agentOfficeAddressLine1: "",
+          agentOfficeAddressZipCode: "",
+          agentOfficeAddressState: "",
+          businessAddressLine1: "New Add 123",
+          businessAddressZipCode: "",
+          businessAddressState: "NJ",
+          agentUseAccountInfo: false,
+        }
+      );
+
+      page.selectCheckbox(Config.businessFormationDefaults.sameAgentAddressAsBusiness);
+
+      expect(page.getInputElementByLabel("Agent office address line1").value).toEqual("New Add 123");
+      expect(page.getInputElementByLabel("Agent office address zip code").value).toEqual("");
+      expect(page.getInputElementByLabel("Agent office address state").value).toEqual("NJ");
+      expect(page.getInputElementByLabel("Agent office address line1").disabled).toEqual(true);
+      expect(page.getInputElementByLabel("Agent office address line2").disabled).toEqual(true);
+      expect(page.getInputElementByLabel("Agent office address city").disabled).toEqual(true);
+      expect(page.getInputElementByLabel("Agent office address zip code").disabled).toEqual(false);
+    });
+
+    it("shows inline validation for missing fields with checkbox", async () => {
+      const page = await getPageHelper(
+        { municipality: generateMunicipality({ name: "New Test City" }) },
+        {
+          agentNumberOrManual: "MANUAL_ENTRY",
+          agentOfficeAddressLine1: "",
+          businessAddressLine1: "",
+          agentUseAccountInfo: false,
+        }
+      );
+
+      page.selectCheckbox(Config.businessFormationDefaults.sameAgentAddressAsBusiness);
+      expect(
+        screen.getByText(Config.businessFormationDefaults.agentOfficeAddressLine1ErrorText)
+      ).toBeInTheDocument();
+    });
+
+    it("unselects checkbox when user interacts with non-disabled field", async () => {
+      const page = await getPageHelper(
+        { municipality: generateMunicipality({ name: "New Test City" }) },
+        {
+          agentNumberOrManual: "MANUAL_ENTRY",
+          agentOfficeAddressZipCode: "",
+          businessAddressZipCode: "",
+          agentUseAccountInfo: false,
+        }
+      );
+
+      page.selectCheckbox(Config.businessFormationDefaults.sameAgentAddressAsBusiness);
+      expect(
+        page.getInputElementByLabel(Config.businessFormationDefaults.sameAgentAddressAsBusiness).checked
+      ).toEqual(true);
+      page.fillText("Agent office address zip code", "12345");
+      expect(
+        page.getInputElementByLabel(Config.businessFormationDefaults.sameAgentAddressAsBusiness).checked
+      ).toEqual(false);
+      expect(page.getInputElementByLabel("Agent office address line1").disabled).toEqual(false);
+      expect(page.getInputElementByLabel("Agent office address line2").disabled).toEqual(false);
+      expect(page.getInputElementByLabel("Agent office address city").disabled).toEqual(false);
+      expect(page.getInputElementByLabel("Agent office address zip code").disabled).toEqual(false);
     });
 
     it("un-disables fields but leaves values when user unchecks same business address box", async () => {
