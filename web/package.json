@@ -37,8 +37,8 @@
     "endOfLine": "auto"
   },
   "dependencies": {
-    "@aws-amplify/auth": "4.6.5",
-    "@aws-amplify/core": "4.7.3",
+    "@aws-amplify/auth": "4.6.6",
+    "@aws-amplify/core": "4.7.4",
     "@aws-crypto/sha256-browser": "2.0.2",
     "@aws-sdk/protocol-http": "3.162.0",
     "@aws-sdk/s3-request-presigner": "3.163.0",
