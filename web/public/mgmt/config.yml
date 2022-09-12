@@ -3226,10 +3226,10 @@ collections:
       preview: true
     fields:
       - { label: "Content", name: "body", widget: "markdown" }
-      - { label: "Url Slug", name: "urlSlug", widget: "string" }
-      - { label: "Filename", name: "filename", widget: "slug", required: false }
+      - { label: "Url Slug", name: "urlSlug", widget: "nospace" }
+      - { label: "Filename", name: "filename", widget: "nospace", required: false }
       - { label: "Name", name: "name", widget: "string" }
-      - { label: "Id", name: "id", widget: "string" }
+      - { label: "Id", name: "id", widget: "nospace" }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
       - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
       - label: Industry
@@ -3279,10 +3279,10 @@ collections:
           preview: true
         fields:
           - { label: "Content", name: "body", widget: "markdown" }
-          - { label: "Url Slug", name: "urlSlug", widget: "string" }
-          - { label: "Filename", name: "filename", widget: "slug", required: false }
+          - { label: "Url Slug", name: "urlSlug", widget: "nospace" }
+          - { label: "Filename", name: "filename", widget: "nospace", required: false }
           - { label: "Name", name: "name", widget: "string" }
-          - { label: "Id", name: "id", widget: "string" }
+          - { label: "Id", name: "id", widget: "nospace" }
           - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
           - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
           - label: Industry
@@ -3305,10 +3305,10 @@ collections:
           preview: true
         fields:
           - { label: "Content", name: "body", widget: "markdown" }
-          - { label: "Url Slug", name: "urlSlug", widget: "string" }
-          - { label: "Filename", name: "filename", widget: "slug", required: false }
+          - { label: "Url Slug", name: "urlSlug", widget: "nospace" }
+          - { label: "Filename", name: "filename", widget: "nospace", required: false }
           - { label: "Name", name: "name", widget: "string" }
-          - { label: "Id", name: "id", widget: "string" }
+          - { label: "Id", name: "id", widget: "nospace" }
           - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
           - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
           - label: Industry
@@ -3454,10 +3454,10 @@ collections:
           preview: true
         fields:
           - { label: "Content", name: "body", widget: "markdown" }
-          - { label: "Url Slug", name: "urlSlug", widget: "string" }
-          - { label: "Filename", name: "filename", widget: "slug", required: false }
+          - { label: "Url Slug", name: "urlSlug", widget: "nospace" }
+          - { label: "Filename", name: "filename", widget: "nospace", required: false }
           - { label: "Name", name: "name", widget: "string" }
-          - { label: "Id", name: "id", widget: "string" }
+          - { label: "Id", name: "id", widget: "nospace" }
           - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
           - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
           - label: Industry
@@ -3561,10 +3561,10 @@ collections:
           preview: true
         fields:
           - { label: "Content", name: "body", widget: "markdown" }
-          - { label: "Url Slug", name: "urlSlug", widget: "string" }
-          - { label: "Filename", name: "filename", widget: "slug", required: false }
+          - { label: "Url Slug", name: "urlSlug", widget: "nospace" }
+          - { label: "Filename", name: "filename", widget: "nospace", required: false }
           - { label: "Name", name: "name", widget: "string" }
-          - { label: "Id", name: "id", widget: "string" }
+          - { label: "Id", name: "id", widget: "nospace" }
           - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
           - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
           - label: Industry
@@ -3615,9 +3615,9 @@ collections:
           preview: true
         fields:
           - { label: "Content", name: "body", widget: "markdown" }
-          - { label: "Url Slug", name: "urlSlug", widget: "string" }
+          - { label: "Url Slug", name: "urlSlug", widget: "nospace" }
           - { label: "Name", name: "name", widget: "string" }
-          - { label: "Id", name: "id", widget: "string" }
+          - { label: "Id", name: "id", widget: "nospace" }
           - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
           - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
           - { label: "Required", name: "required", widget: "boolean", required: false }
@@ -3660,10 +3660,10 @@ collections:
           preview: true
         fields:
           - { label: "Content", name: "body", widget: "markdown" }
-          - { label: "Url Slug", name: "urlSlug", widget: "string" }
-          - { label: "Filename", name: "filename", widget: "slug", required: false }
+          - { label: "Url Slug", name: "urlSlug", widget: "nospace" }
+          - { label: "Filename", name: "filename", widget: "nospace", required: false }
           - { label: "Name", name: "name", widget: "string" }
-          - { label: "Id", name: "id", widget: "string" }
+          - { label: "Id", name: "id", widget: "nospace" }
           - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
           - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
           - label: Industry
@@ -3747,10 +3747,10 @@ collections:
           preview: true
         fields:
           - { label: "Content", name: "body", widget: "markdown" }
-          - { label: "Url Slug", name: "urlSlug", widget: "string" }
-          - { label: "Filename", name: "filename", widget: "slug", required: false }
+          - { label: "Url Slug", name: "urlSlug", widget: "nospace" }
+          - { label: "Filename", name: "filename", widget: "nospace", required: false }
           - { label: "Name", name: "name", widget: "string" }
-          - { label: "Id", name: "id", widget: "string" }
+          - { label: "Id", name: "id", widget: "nospace" }
           - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
           - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
           - label: Industry
@@ -3799,10 +3799,10 @@ collections:
           preview: true
         fields:
           - { label: "Content", name: "body", widget: "markdown" }
-          - { label: "Url Slug", name: "urlSlug", widget: "string" }
-          - { label: "Filename", name: "filename", widget: "slug", required: false }
+          - { label: "Url Slug", name: "urlSlug", widget: "nospace" }
+          - { label: "Filename", name: "filename", widget: "nospace", required: false }
           - { label: "Name", name: "name", widget: "string" }
-          - { label: "Id", name: "id", widget: "string" }
+          - { label: "Id", name: "id", widget: "nospace" }
           - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
           - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
           - label: Industry
