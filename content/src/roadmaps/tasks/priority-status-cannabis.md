@@ -2,7 +2,7 @@
 urlSlug: priority-status-cannabis
 filename: priority-status-cannabis
 name: Determine if You are Eligible for Priority Status
-id: priority-statuscannabis
+id: priority-statucannabis
 required: true
 issuingAgency: ""
 ---
