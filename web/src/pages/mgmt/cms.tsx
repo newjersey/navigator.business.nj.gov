@@ -1,4 +1,5 @@
 import ContextEditor from "@/lib/cms/editors/context-info";
+import { NoSpaceControl } from "@/lib/cms/fields/nospacefield";
 import { SlugControl } from "@/lib/cms/fields/slugfield";
 import CannabisLicensePreview from "@/lib/cms/previews/cannabis-license/cannabis-license";
 import CannabisPriorityStatusPreview from "@/lib/cms/previews/cannabis-priority-status";
@@ -38,6 +39,8 @@ const CMS = dynamic(
       CMS.init({ CMS_CONFIG });
       // @ts-expect-error: No type definition available
       CMS.registerWidget("slug", SlugControl);
+      // @ts-expect-error: No type definition available
+      CMS.registerWidget("nospace", NoSpaceControl);
       // @ts-expect-error: No type definition available
       CMS.registerPreviewTemplate("tasks", TaskPreview);
       // @ts-expect-error: No type definition available
