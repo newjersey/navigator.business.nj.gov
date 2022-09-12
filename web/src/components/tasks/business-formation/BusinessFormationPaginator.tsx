@@ -15,17 +15,19 @@ import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { MediaQueries } from "@/lib/PageSizes";
 import { FormationStepNames } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
-import { scrollToTopOfFormation, useMountEffect } from "@/lib/utils/helpers";
+import { scrollToTopOfElement, useMountEffect } from "@/lib/utils/helpers";
 import {
   FormationAddress,
   FormationFormData,
   FormationLegalType,
 } from "@businessnjgovnavigator/shared/formationData";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
+import { useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router";
-import { ReactElement, ReactNode, useContext, useState } from "react";
+import { ReactElement, ReactNode, useContext, useEffect, useRef, useState } from "react";
 
 interface Props {
   children: ReactNode;
@@ -42,8 +44,20 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
   const currentStepName = LookupNameByStepIndex(state.stepIndex);
   const router = useRouter();
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const stepperRef = useRef<HTMLDivElement>(null);
+  const errorAlertRef = useRef<HTMLDivElement>(null);
+  const isMounted = useRef(false);
+  const isDesktop = useMediaQuery(MediaQueries.desktopAndUp);
+
+  useEffect(() => {
+    if (isMounted.current) {
+      const element = state.hasBeenSubmitted ? errorAlertRef.current : stepperRef.current;
+      scrollToTopOfElement(element, { isDesktop });
+    }
+  }, [state.stepIndex, isDesktop, state.hasBeenSubmitted]);
 
   useMountEffect(() => {
+    isMounted.current = true;
     analytics.event.business_formation_name_step.arrive.arrive_on_business_formation_name_step();
   });
 
@@ -71,12 +85,10 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
   };
 
   const onPreviousButtonClick = (): void => {
-    scrollToTopOfFormation();
     moveToStep(state.stepIndex - 1);
   };
 
   const onMoveToStep = (stepIndex: number, config: { moveType: "NEXT_BUTTON" | "STEPPER" }): void => {
-    scrollToTopOfFormation();
     if (isAuthenticated === IsAuthenticated.FALSE) {
       setModalIsVisible(true);
       return;
@@ -87,7 +99,10 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
     if (isSubmittingFromFinalStep) {
       setHasBeenSubmitted(true);
       const { stepsWithErrors } = determineStepsWithErrors({ hasSubmitted: true });
-      if (stepsWithErrors.length > 0) return;
+      if (stepsWithErrors.length > 0) {
+        scrollToTopOfElement(errorAlertRef.current, { isDesktop });
+        return;
+      }
       submitToApi();
       return;
     }
@@ -381,8 +396,8 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
 
   return (
     <>
-      {getErrorComponent()}
-      <div className="margin-top-3">
+      <div ref={errorAlertRef}>{getErrorComponent()}</div>
+      <div className="margin-top-3" ref={stepperRef}>
         <HorizontalStepper
           steps={stepStates}
           currentStep={state.stepIndex}

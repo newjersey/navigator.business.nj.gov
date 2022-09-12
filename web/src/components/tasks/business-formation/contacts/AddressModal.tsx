@@ -51,6 +51,22 @@ export const AddressModal = (props: Props): ReactElement => {
 
   const [addressErrorMap, setMemberErrorMap] = useState<MemberErrorMap>(createMemberErrorMap());
 
+  useEffect(
+    function setCheckboxFalseWhenAddressChanged() {
+      if (!props.defaultAddress) return;
+      if (
+        props.defaultAddress.addressLine1 !== addressData.addressLine1 ||
+        props.defaultAddress.addressLine2 !== addressData.addressLine2 ||
+        props.defaultAddress.addressCity !== addressData.addressCity ||
+        props.defaultAddress.addressState !== addressData.addressState ||
+        props.defaultAddress.addressZipCode !== addressData.addressZipCode
+      ) {
+        setUseDefaultAddress(false);
+      }
+    },
+    [addressData, setUseDefaultAddress, props.defaultAddress]
+  );
+
   useEffect(() => {
     if (props.index !== undefined) {
       setAddressData({ ...props.addressData[props.index] });
@@ -71,11 +87,26 @@ export const AddressModal = (props: Props): ReactElement => {
         ...props.defaultAddress,
       };
       setAddressData(data);
+
+      const errorMap = requiredFields.reduce(
+        (prev: MemberErrorMap, curr: ErrorFields) => ({
+          ...prev,
+          [curr]: { invalid: !data[curr as keyof FormationAddress] },
+        }),
+        {} as MemberErrorMap
+      );
+
       setMemberErrorMap({
-        ...createMemberErrorMap(false),
+        ...errorMap,
         addressName: { invalid: data.name.trim() ? false : undefined },
       });
     }
+  };
+
+  const shouldBeDisabled = (field: keyof FormationAddress): boolean => {
+    const isCheckboxChecked = useDefaultAddress;
+    const hasValue = !!addressData[field];
+    return isCheckboxChecked && hasValue;
   };
 
   const onValidation = (fieldName: string, invalid: boolean) => {
@@ -163,7 +194,7 @@ export const AddressModal = (props: Props): ReactElement => {
             onValidation={onValidation}
             autoComplete="address-line1"
             validationText={Config.businessFormationDefaults.addressErrorText}
-            disabled={useDefaultAddress}
+            disabled={shouldBeDisabled("addressLine1")}
             required={true}
           />
           <Content
@@ -192,7 +223,7 @@ export const AddressModal = (props: Props): ReactElement => {
                 fieldName="addressCity"
                 autoComplete="address-level2"
                 value={addressData.addressCity}
-                disabled={useDefaultAddress}
+                disabled={shouldBeDisabled("addressCity")}
                 required={true}
                 placeholder={Config.businessFormationDefaults.addressModalCityPlaceholder}
                 handleChange={(value: string) => setAddressData({ ...addressData, addressCity: value })}
@@ -215,7 +246,7 @@ export const AddressModal = (props: Props): ReactElement => {
                 }
                 error={addressErrorMap["addressState"].invalid}
                 autoComplete="address-level1"
-                disabled={useDefaultAddress}
+                disabled={shouldBeDisabled("addressState")}
                 onValidation={onValidation}
                 required={true}
               />
@@ -226,7 +257,7 @@ export const AddressModal = (props: Props): ReactElement => {
                 numericProps={{
                   maxLength: 5,
                 }}
-                disabled={useDefaultAddress}
+                disabled={shouldBeDisabled("addressZipCode")}
                 fieldName={"addressZipCode"}
                 autoComplete="postal-code"
                 error={addressErrorMap["addressZipCode"].invalid}

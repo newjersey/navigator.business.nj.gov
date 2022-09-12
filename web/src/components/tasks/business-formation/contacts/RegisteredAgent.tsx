@@ -3,6 +3,7 @@ import { BusinessFormationTextField } from "@/components/tasks/business-formatio
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
+import { FormationFields } from "@businessnjgovnavigator/shared/formationData";
 import { Checkbox, FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import React, { ReactElement, useContext, useEffect } from "react";
 
@@ -66,12 +67,23 @@ export const RegisteredAgent = (): ReactElement => {
         agentEmail: userData?.user.email ?? "",
         agentUseAccountInfo: checked,
       });
+      setFieldInteracted("agentName");
+      setFieldInteracted("agentEmail");
     } else {
       setFormationFormData({
         ...state.formationFormData,
         agentUseAccountInfo: checked,
       });
     }
+  };
+
+  const shouldBeDisabled = (field: FormationFields, type: "ACCOUNT" | "ADDRESS"): boolean => {
+    const isCorrespondingCheckboxChecked =
+      type === "ACCOUNT"
+        ? state.formationFormData.agentUseAccountInfo
+        : state.formationFormData.agentUseBusinessAddress;
+    const hasValue = !!state.formationFormData[field];
+    return isCorrespondingCheckboxChecked && hasValue;
   };
 
   const toggleUseBusinessAddress = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -86,6 +98,11 @@ export const RegisteredAgent = (): ReactElement => {
         agentOfficeAddressZipCode: state.formationFormData.businessAddressZipCode,
         agentUseBusinessAddress: checked,
       });
+      setFieldInteracted("agentOfficeAddressLine1");
+      setFieldInteracted("agentOfficeAddressLine2");
+      setFieldInteracted("agentOfficeAddressCity");
+      setFieldInteracted("agentOfficeAddressState");
+      setFieldInteracted("agentOfficeAddressZipCode");
     } else {
       setFormationFormData({
         ...state.formationFormData,
@@ -132,10 +149,7 @@ export const RegisteredAgent = (): ReactElement => {
               <BusinessFormationTextField
                 label={Config.businessFormationDefaults.registeredAgentNumberLabel}
                 placeholder={Config.businessFormationDefaults.registeredAgentNumberPlaceholder}
-                numericProps={{
-                  minLength: 4,
-                  maxLength: 7,
-                }}
+                numericProps={{ minLength: 4, maxLength: 7 }}
                 fieldName="agentNumber"
                 required={true}
                 validationText={Config.businessFormationDefaults.agentNumberErrorText}
@@ -165,7 +179,7 @@ export const RegisteredAgent = (): ReactElement => {
                     required={true}
                     validationText={Config.businessFormationDefaults.agentNameErrorText}
                     fieldName="agentName"
-                    disabled={state.formationFormData.agentUseAccountInfo}
+                    disabled={shouldBeDisabled("agentName", "ACCOUNT")}
                     formInputFull
                   />
                 </div>
@@ -177,7 +191,7 @@ export const RegisteredAgent = (): ReactElement => {
                     inlineErrorStyling={true}
                     required={true}
                     validationText={Config.businessFormationDefaults.agentEmailErrorText}
-                    disabled={state.formationFormData.agentUseAccountInfo}
+                    disabled={shouldBeDisabled("agentEmail", "ACCOUNT")}
                     formInputFull
                   />
                 </div>
@@ -199,7 +213,7 @@ export const RegisteredAgent = (): ReactElement => {
                 fieldName="agentOfficeAddressLine1"
                 required={true}
                 validationText={Config.businessFormationDefaults.agentOfficeAddressLine1ErrorText}
-                disabled={state.formationFormData.agentUseBusinessAddress}
+                disabled={shouldBeDisabled("agentOfficeAddressLine1", "ADDRESS")}
                 formInputFull
               />
               <BusinessFormationTextField
@@ -217,7 +231,7 @@ export const RegisteredAgent = (): ReactElement => {
                     fieldName="agentOfficeAddressCity"
                     required={true}
                     validationText={Config.businessFormationDefaults.agentOfficeAddressCityErrorText}
-                    disabled={state.formationFormData.agentUseBusinessAddress}
+                    disabled={shouldBeDisabled("agentOfficeAddressCity", "ADDRESS")}
                     formInputFull
                   />
                 </div>
@@ -231,16 +245,14 @@ export const RegisteredAgent = (): ReactElement => {
                 </div>
                 <div className="grid-col-7 tablet:grid-col-4">
                   <BusinessFormationTextField
-                    numericProps={{
-                      maxLength: 5,
-                    }}
+                    numericProps={{ maxLength: 5 }}
                     fieldName="agentOfficeAddressZipCode"
                     label={Config.businessFormationDefaults.registeredAgentZipCodeLabel}
                     placeholder={Config.businessFormationDefaults.registeredAgentZipCodePlaceholder}
                     validationText={Config.businessFormationDefaults.agentOfficeAddressZipCodeErrorText}
                     inlineErrorStyling={true}
                     required={true}
-                    disabled={state.formationFormData.agentUseBusinessAddress}
+                    disabled={shouldBeDisabled("agentOfficeAddressZipCode", "ADDRESS")}
                   />
                 </div>
               </div>
