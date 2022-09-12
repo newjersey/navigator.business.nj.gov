@@ -127,8 +127,19 @@ export const scrollToTop = (props?: { smooth?: boolean }): void => {
     : window.scrollTo(0, 0);
 };
 
-export const scrollToTopOfFormation = () => {
-  setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 100);
+export const scrollToTopOfElement = (
+  element: HTMLDivElement | null,
+  { isDesktop }: { isDesktop: boolean }
+) => {
+  let y = 0;
+  if (element) {
+    y = window.scrollY + element.getBoundingClientRect().top;
+    if (!isDesktop) {
+      const mobileNavBarHeight = 47;
+      y -= mobileNavBarHeight;
+    }
+  }
+  setTimeout(() => window.scrollTo({ top: y, behavior: "smooth" }), 100);
 };
 
 export const isStepCompleted = (
