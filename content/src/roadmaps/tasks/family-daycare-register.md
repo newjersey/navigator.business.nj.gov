@@ -1,15 +1,15 @@
 ---
 urlSlug: family-daycare-register
 filename: family-daycare-register
-name: Register Your Family Daycare
+name: Register My Family Daycare
 id: family-daycare-register
 callToActionLink: https://www.childcarenj.gov/Parents/CCRR
-callToActionText: Register My Daycare
+callToActionText: Find My Referral Agency
 issuingAgency: New Jersey Department of Human Services Division of Family Development
 ---
 Register your Family Daycare business to ensure you’re in compliance with State rules and regulations and gain more credibility for your business. 
 
-You'll need to speak with your local government for their specific registration forms and additional requirements. 
+Use the link below to identify your local agency. You'll need to speak with your local government for their specific registration forms and additional requirements.  
 
 ---
 ### Eligibility
@@ -28,7 +28,7 @@ You'll need to speak with your local government for their specific registration 
 - Medical examination and Tuberculin Mantoux test results for all staff
 - Background check for staff and anyone over the age of 14 living in the Family Daycare 
 - Names and contact information for 2 people who can provide a character reference for the business owner
-- Pass a home inspection by Child Care Resource and Referral Agencies
+- Family Daycare inspection by Child Care Resource and Referral Agencies 
 - Pay any associated fees
 
 >**Once completed, you will have:**
