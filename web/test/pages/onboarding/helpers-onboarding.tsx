@@ -250,6 +250,40 @@ export const runSelfRegPageTests = ({
     expect(screen.queryByText(Config.selfRegistration.errorTextFullName)).toBeInTheDocument();
   });
 
+  it("prevents user from registering if the name contains a special character", () => {
+    useMockRouter({ isReady: true, query: { page: selfRegPage } });
+    const render = renderPage({ userData, isAuthenticated: IsAuthenticated.FALSE });
+    const page = render.page;
+    page.fillText(Config.selfRegistration.nameFieldLabel, "Some & Name");
+    page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
+    page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
+    act(() => page.clickNext());
+    expect(screen.queryByText(Config.selfRegistration.errorTextFullNameSpecialCharacter)).toBeInTheDocument();
+  });
+
+  it("prevents user from registering if the name is greater than 50 characters", () => {
+    useMockRouter({ isReady: true, query: { page: selfRegPage } });
+    const render = renderPage({ userData, isAuthenticated: IsAuthenticated.FALSE });
+    const page = render.page;
+    const name = Array(51).fill("a").join("");
+    page.fillText(Config.selfRegistration.nameFieldLabel, name);
+    page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
+    page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
+    act(() => page.clickNext());
+    expect(screen.queryByText(Config.selfRegistration.errorTextFullNameLength)).toBeInTheDocument();
+  });
+
+  it("prevents user from registering if the name does not start with a letter", () => {
+    useMockRouter({ isReady: true, query: { page: selfRegPage } });
+    const render = renderPage({ userData, isAuthenticated: IsAuthenticated.FALSE });
+    const page = render.page;
+    page.fillText(Config.selfRegistration.nameFieldLabel, "12345");
+    page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
+    page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
+    act(() => page.clickNext());
+    expect(screen.queryByText(Config.selfRegistration.errorTextFullNameStartWithLetter)).toBeInTheDocument();
+  });
+
   it("prevents user from registering if the email is empty", () => {
     useMockRouter({ isReady: true, query: { page: selfRegPage } });
     const render = renderPage({ userData, isAuthenticated: IsAuthenticated.FALSE });
