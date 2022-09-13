@@ -151,7 +151,13 @@ export const userRouterFactory = (
   };
 
   const updateLegalStructureIfNeeded = async (userData: UserData): Promise<UserData> => {
-    const oldUserData = await userDataClient.get(userData.user.id);
+    let oldUserData;
+    try {
+      oldUserData = await userDataClient.get(userData.user.id);
+    } catch {
+      return userData;
+    }
+
     if (await legalStructureHasChanged(oldUserData, userData)) {
       // prevent legal structure from changing is business has been formed
       if (await businessHasFormed(oldUserData)) {
