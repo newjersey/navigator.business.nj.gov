@@ -54,17 +54,57 @@
 }
 
 .horizontal-step-indicator {
+  /* ----- STEP INDICATOR STYLING ----- */
   .usa-step-indicator {
     margin-bottom: 0 !important;
+    margin-left: 0;
+    margin-right: 0;
   }
 
   .usa-step-indicator__segment {
     max-width: none;
   }
+
+  .usa-step-indicator--counters .usa-step-indicator__segment,
+  .usa-step-indicator--counters-sm .usa-step-indicator__segment {
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: calc(((2.5rem - 0.5rem) / 2) + 0.25rem);
+    padding-bottom: 2rem;
+    @media (min-width: 40em) {
+      padding-bottom: 1rem;
+    }
+  }
+
+  /* ----- SEGMENT STYLING (horizontal line connecting steps) ----- */
+
+  .usa-step-indicator__segment:after {
+    height: 2px !important;
+    left: 50%;
+    right: -50%;
+    top: 0.125rem;
+  }
+
+  .usa-step-indicator__segment:after,
+  .usa-step-indicator__segment--current:after,
+  .usa-step-indicator__segment--error:after,
+  .usa-step-indicator__segment--complete:after {
+    background-color: $base-light;
+  }
+
+  .usa-step-indicator--counters-sm.usa-step-indicator .usa-step-indicator__segment:last-child:after,
+  .usa-step-indicator--counters.usa-step-indicator .usa-step-indicator__segment:last-child:after {
+    display: block;
+    right: 50%;
+    width: auto;
+  }
+
+  /* ----- LABEL STYLING ----- */
+
   .usa-step-indicator__segment-label {
     color: $base;
     text-align: center;
-    padding: 0px;
+    padding: 0;
   }
 
   .usa-step-indicator__segment--current .usa-step-indicator__segment-label {
@@ -79,20 +119,29 @@
     color: $error-dark;
   }
 
-  .usa-step-indicator__segment:after {
-    background-color: $base-light;
-  }
+  /* ----- COUNTER CIRCLES STYLING ----- */
 
-  .usa-step-indicator__segment--error:after {
-    background-color: $error-dark !important;
-  }
-
-  .usa-step-indicator__segment--current:after {
-    background-color: $info-darker !important;
-  }
-
-  .usa-step-indicator__segment--complete:after {
-    background-color: $primary;
+  .usa-step-indicator--counters .usa-step-indicator__segment:before,
+  .usa-step-indicator--counters-sm .usa-step-indicator__segment:before {
+    height: 1.5rem;
+    border-radius: 99rem;
+    width: 1.5rem;
+    font-size: 0.88rem;
+    padding: calc(0.25rem + 1px);
+    top: calc((1.5rem - 0.5rem) / -2);
+    font-feature-settings: "tnum" 1, "kern" 1;
+    background-color: #fff;
+    box-shadow: inset 0 0 0 0.25rem #e6e6e6, 0 0 0 0.25rem #fff;
+    color: #5c5c5c;
+    content: counter(usa-step-indicator);
+    display: block;
+    font-weight: 700;
+    line-height: 1;
+    position: absolute;
+    text-align: center;
+    z-index: 100;
+    margin-left: 1px;
+    margin-right: 1px;
   }
 
   .usa-step-indicator__segment::before {
@@ -113,33 +162,12 @@
     background-color: $primary !important;
   }
 
-  @media all and (min-width: $sm) {
-    .usa-step-indicator__segment:before {
-      left: calc(50% - 12px) !important;
-    }
-    .usa-step-indicator__segment:first-child:after {
-      left: 50%;
-    }
-
-    .usa-step-indicator__segment:after {
-      left: 50%;
-      right: -50%;
-      height: 0.25rem;
-      top: 0.125rem;
-    }
-
-    .usa-step-indicator--counters-sm.usa-step-indicator .usa-step-indicator__segment:last-child:after,
-    .usa-step-indicator--counters.usa-step-indicator .usa-step-indicator__segment:last-child:after {
-      display: block;
-      right: 50%;
-      width: auto;
-    }
-
-    .usa-step-indicator__segment--complete:before,
-    .usa-step-indicator__segment--error:before,
-    .usa-step-indicator__segment--current:before {
-      content: attr(data-num) !important;
-    }
+  .usa-step-indicator__segment--complete:before,
+  .usa-step-indicator__segment--error:before,
+  .usa-step-indicator__segment--current:before,
+  .usa-step-indicator__segment:before {
+    content: attr(data-num) !important;
+    left: calc(50% - 12px) !important;
   }
 }
 
