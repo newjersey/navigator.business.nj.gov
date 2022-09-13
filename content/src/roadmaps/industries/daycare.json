@@ -1,4 +1,5 @@
 {
+  "naicsCodes": "624410",
   "defaultSectorId": "other-services",
   "canHavePermanentLocation": false,
   "roadmapSteps": [
@@ -11,11 +12,6 @@
       "step": 1,
       "weight": 2,
       "task": "daycare-evaluate-location"
-    },
-    {
-      "step": 1,
-      "weight": 3,
-      "task": "daycare-site-requirements"
     },
     {
       "step": 1,
@@ -44,11 +40,16 @@
     },
     {
       "step": 3,
+      "weight": 17,
+      "task": "daycare-site-requirements"
+    },
+    {
+      "step": 3,
       "weight": 20,
       "task": "daycare-license"
     }
   ],
-  "name": "Daycare",
+  "name": "Child Care Center",
   "industryOnboardingQuestions": {
     "canBeHomeBased": false,
     "isProvidesStaffingServicesApplicable": false,
@@ -59,7 +60,7 @@
     "isCpaRequiredApplicable": false,
     "isTransportation": false
   },
-  "isEnabled": false,
+  "isEnabled": true,
   "additionalSearchTerms": "daycare, childcare",
   "id": "daycare",
   "description": "Provides daycare services for 6 or more children in a dedicated space"
