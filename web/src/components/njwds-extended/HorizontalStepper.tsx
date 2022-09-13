@@ -88,9 +88,9 @@ export const HorizontalStepper = (props: Props): ReactElement => {
       case "ERROR-ACTIVE":
         return "border-error-dark";
       case "COMPLETE-ACTIVE":
-        return "border-accent-cool-darker";
-      case "INCOMPLETE-ACTIVE":
         return "border-primary";
+      case "INCOMPLETE-ACTIVE":
+        return "border-accent-cool-darker";
       default:
         return "border-base-lighter";
     }
