@@ -932,7 +932,6 @@ collections:
                   widget: string,
                 }
               - { label: Name Check Placeholder Text, name: nameCheckPlaceholderText, widget: string }
-              - { label: Name Check Validation Text, name: nameCheckValidationErrorText, widget: string }
               - { label: Name Check Unavailable Text, name: nameCheckUnavailableText, widget: text }
               - { label: Name Check Designator Error Text, name: nameCheckDesignatorText, widget: text }
               - {
