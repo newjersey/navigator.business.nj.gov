@@ -70,24 +70,51 @@ export const HorizontalStepper = (props: Props): ReactElement => {
     }
   };
 
+  const getBoldClass = (index: number): string => {
+    const state = determineState(index);
+    switch (state) {
+      case "ERROR-ACTIVE":
+      case "COMPLETE-ACTIVE":
+      case "INCOMPLETE-ACTIVE":
+        return "text-bold";
+      default:
+        return "";
+    }
+  };
+
+  const getBorderColor = (index: number): string => {
+    const state = determineState(index);
+    switch (state) {
+      case "ERROR-ACTIVE":
+        return "border-error-dark";
+      case "COMPLETE-ACTIVE":
+        return "border-accent-cool-darker";
+      case "INCOMPLETE-ACTIVE":
+        return "border-primary";
+      default:
+        return "border-base-lighter";
+    }
+  };
+
   return (
     <>
       <div className="horizontal-step-indicator display-block">
         <div className="usa-step-indicator usa-step-indicator--counters-sm">
-          <ol className="usa-step-indicator__segments">
+          <ol className="usa-step-indicator__segments margin-bottom-4">
             {props.steps.map((step: StepperStep, index: number) => (
               <li
                 key={`${step.name}-${index}`}
-                className={`cursor-pointer usa-step-indicator__segment usa-step-indicator__segment${getCSSClassColor(
-                  index
-                )}`}
+                className={
+                  `border-bottom-2px ${getBorderColor(index)} padding-bottom-2 cursor-pointer ` +
+                  `usa-step-indicator__segment usa-step-indicator__segment${getCSSClassColor(index)}`
+                }
                 aria-hidden
                 data-num={getIcon(index)}
                 data-state={determineState(index)}
                 onClick={() => props.onStepClicked(index)}
                 data-testid={`stepper-${index}`}
               >
-                <span className="usa-step-indicator__segment-label" aria-hidden>
+                <span className={`usa-step-indicator__segment-label ${getBoldClass(index)}`} aria-hidden>
                   {step.name}
                 </span>
               </li>

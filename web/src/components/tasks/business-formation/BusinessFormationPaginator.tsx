@@ -404,9 +404,6 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
           onStepClicked={(step: number) => onMoveToStep(step, { moveType: "STEPPER" })}
         />
       </div>
-      <div className="display-block">
-        <hr className="margin-bottom-4" />
-      </div>
       <div data-testid="formation-form" className="fg1 flex flex-column space-between">
         {props.children}
         {displayButtons()}
