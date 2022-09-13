@@ -13,7 +13,7 @@ import { OnboardingNameAndEmail } from "@/components/onboarding/OnboardingNameAn
 import { OnboardingOwnership } from "@/components/onboarding/OnboardingOwnership";
 import { OnboardingSectors } from "@/components/onboarding/OnboardingSectors";
 import { FlowType, ProfileError, ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
-import { validateEmail } from "@/lib/utils/helpers";
+import { validateEmail, validateFullName } from "@/lib/utils/helpers";
 import { BusinessUser, ProfileData } from "@businessnjgovnavigator/shared/";
 import { ReactNode } from "react";
 
@@ -123,7 +123,7 @@ export const getOnboardingFlows = (
             inline: [
               {
                 name: "name",
-                valid: !!businessUser.name && businessUser.name.length > 0 && !fieldStates.name.invalid,
+                valid: validateFullName(businessUser.name).isValid && !fieldStates.name.invalid,
               },
               {
                 name: "email",

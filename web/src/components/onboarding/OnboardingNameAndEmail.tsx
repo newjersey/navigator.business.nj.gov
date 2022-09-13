@@ -2,7 +2,7 @@ import { GenericTextField } from "@/components/GenericTextField";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
-import { validateEmail } from "@/lib/utils/helpers";
+import { validateEmail, validateFullName } from "@/lib/utils/helpers";
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import { ReactElement, useContext, useState } from "react";
 
@@ -59,10 +59,11 @@ export const OnboardingNameAndEmail = (props: Props): ReactElement => {
           fieldName={"name"}
           error={props.fieldStates["name"].invalid}
           onValidation={onValidation}
-          validationText={Config.selfRegistration.errorTextFullName}
+          validationText={validateFullName(state.user?.name).errorMessage || " "}
           required={true}
           placeholder={Config.selfRegistration.nameFieldPlaceholder}
           handleChange={handleName}
+          additionalValidation={(value) => validateFullName(value).isValid}
         />
       </div>
       <div className="margin-top-2">
