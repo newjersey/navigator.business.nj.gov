@@ -94,7 +94,8 @@
     "GWRS",
     "Mantoux",
     "CARI",
-    "DORES"
+    "DORES",
+    "DCF"
   ],
   "ignorePaths": ["node_modules/**", "out/**", "web/out/**", "package.json"]
 }
