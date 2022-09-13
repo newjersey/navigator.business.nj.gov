@@ -41,6 +41,10 @@ describe("calculateNextAnnualFilingDate", () => {
     it("finds the this-year date for a much older formation date of this month", () => {
       expect(calculateNextAnnualFilingDate("2001-10-01")).toEqual("2021-10-31");
     });
+
+    it("finds the future-year date for a formation date in the future", () => {
+      expect(calculateNextAnnualFilingDate("2030-08-29")).toEqual("2031-08-31");
+    });
   });
 
   describe("when today is October 31, 2021", () => {
