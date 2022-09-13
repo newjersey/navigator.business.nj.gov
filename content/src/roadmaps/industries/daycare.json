@@ -1,4 +1,5 @@
 {
+  "naicsCodes": "624120",
   "defaultSectorId": "other-services",
   "canHavePermanentLocation": false,
   "roadmapSteps": [
@@ -11,11 +12,6 @@
       "step": 1,
       "weight": 2,
       "task": "daycare-evaluate-location"
-    },
-    {
-      "step": 1,
-      "weight": 3,
-      "task": "daycare-site-requirements"
     },
     {
       "step": 1,
@@ -41,6 +37,11 @@
       "step": 3,
       "weight": 15,
       "task": "get-insurance"
+    },
+    {
+      "step": 3,
+      "weight": 17,
+      "task": "daycare-site-requirements"
     },
     {
       "step": 3,
