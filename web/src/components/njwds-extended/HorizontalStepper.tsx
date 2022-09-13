@@ -96,16 +96,20 @@ export const HorizontalStepper = (props: Props): ReactElement => {
     }
   };
 
+  const getBottomMargin = (): string => {
+    return isTabletAndUp ? "margin-bottom-4" : "";
+  };
+
   return (
     <>
       <div className="horizontal-step-indicator display-block">
         <div className="usa-step-indicator usa-step-indicator--counters-sm">
-          <ol className="usa-step-indicator__segments margin-bottom-4">
+          <ol className={`usa-step-indicator__segments ${getBottomMargin()}`}>
             {props.steps.map((step: StepperStep, index: number) => (
               <li
                 key={`${step.name}-${index}`}
                 className={
-                  `border-bottom-2px ${getBorderColor(index)} padding-bottom-2 cursor-pointer ` +
+                  `border-bottom-2px ${getBorderColor(index)} cursor-pointer ` +
                   `usa-step-indicator__segment usa-step-indicator__segment${getCSSClassColor(index)}`
                 }
                 aria-hidden
@@ -123,7 +127,8 @@ export const HorizontalStepper = (props: Props): ReactElement => {
         </div>
       </div>
       <div className={isTabletAndUp ? "visually-hidden-centered" : "margin-top-05 margin-bottom-2"}>
-        {`Step ${props.currentStep + 1} of ${props.steps.length} - ${props.steps[props.currentStep].name}`}
+        <b>{`Step ${props.currentStep + 1} of ${props.steps.length}:`}</b>
+        {` ${props.steps[props.currentStep].name}`}
       </div>
     </>
   );
