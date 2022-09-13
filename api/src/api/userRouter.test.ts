@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken";
 import request from "supertest";
 import {
   generateFormationData,
+  generateFormationSubmitResponse,
   generateGetFilingResponse,
   generateLicenseData,
   generateProfileData,
@@ -336,40 +337,42 @@ describe("userRouter", () => {
 
       it("changes the legal structure if formation is not completed", async () => {
         mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
-        const formationData = generateFormationData({});
-        const updatedFormationData = {
-          ...formationData,
-          getFilingResponse: generateGetFilingResponse({ success: false }),
-        };
-        const existingProfileUserData = generateUserData({
+
+        const existingUserData = generateUserData({
           user: generateUser({ id: "123" }),
           profileData: generateProfileData({ legalStructureId: "limited-liability-company" }),
-          formationData: updatedFormationData,
+          formationData: generateFormationData({
+            formationResponse: generateFormationSubmitResponse({}),
+            getFilingResponse: generateGetFilingResponse({ success: false }),
+          }),
         });
 
-        const newProfileData = {
-          ...existingProfileUserData,
+        stubUserDataClient.get.mockResolvedValue(existingUserData);
+
+        const newUserData = {
+          ...existingUserData,
           profileData: {
-            ...existingProfileUserData.profileData,
+            ...existingUserData.profileData,
             legalStructureId: "c-corporation",
-          },
-          formationData: {
-            ...formationData,
-            formationFormData: createEmptyFormationFormData(),
           },
         };
 
-        stubUserDataClient.get.mockResolvedValue(existingProfileUserData);
-        stubUserDataClient.put.mockResolvedValue(newProfileData);
+        stubUserDataClient.put.mockResolvedValue(newUserData);
 
         const response = await request(app)
           .post(`/users`)
-          .send(newProfileData)
+          .send(newUserData)
           .set("Authorization", "Bearer user-123-token");
 
         expect(response.body.profileData.legalStructureId).toBe("c-corporation");
         expect(stubUserDataClient.put).toHaveBeenCalledWith({
-          ...newProfileData,
+          ...newUserData,
+          formationData: {
+            formationFormData: createEmptyFormationFormData(),
+            formationResponse: undefined,
+            getFilingResponse: undefined,
+            completedFilingPayment: false,
+          },
         });
       });
 

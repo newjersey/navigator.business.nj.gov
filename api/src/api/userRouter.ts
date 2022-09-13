@@ -66,6 +66,14 @@ export const getSignedInUserId = (req: Request): string => {
   return myNJIdentityPayload?.userId || signedInUser.sub;
 };
 
+const legalStructureHasChanged = (oldUserData: UserData, newUserData: UserData): boolean => {
+  return oldUserData.profileData.legalStructureId !== newUserData.profileData.legalStructureId;
+};
+
+const businessHasFormed = (userData: UserData): boolean => {
+  return userData.formationData.getFilingResponse?.success ?? false;
+};
+
 export const userRouterFactory = (
   userDataClient: UserDataClient,
   updateLicenseStatus: UpdateLicenseStatus,
@@ -142,29 +150,11 @@ export const userRouterFactory = (
     }
   };
 
-  const legalStructureHasChanged = async (userData: UserData): Promise<boolean> => {
-    try {
-      const oldUserData = await userDataClient.get(userData.user.id);
-      return oldUserData.profileData.legalStructureId !== userData.profileData.legalStructureId;
-    } catch {
-      return false;
-    }
-  };
-
-  const businessHasFormed = async (userData: UserData): Promise<boolean> => {
-    try {
-      const oldUserData = await userDataClient.get(userData.user.id);
-      return oldUserData.formationData.getFilingResponse?.success ?? false;
-    } catch {
-      return false;
-    }
-  };
-
   const updateLegalStructureIfNeeded = async (userData: UserData): Promise<UserData> => {
-    if (await legalStructureHasChanged(userData)) {
+    const oldUserData = await userDataClient.get(userData.user.id);
+    if (await legalStructureHasChanged(oldUserData, userData)) {
       // prevent legal structure from changing is business has been formed
-      if (await businessHasFormed(userData)) {
-        const oldUserData = await userDataClient.get(userData.user.id);
+      if (await businessHasFormed(oldUserData)) {
         userData = {
           ...userData,
           profileData: {
@@ -175,7 +165,12 @@ export const userRouterFactory = (
       } else {
         userData = {
           ...userData,
-          formationData: { ...userData.formationData, formationFormData: createEmptyFormationFormData() },
+          formationData: {
+            formationResponse: undefined,
+            getFilingResponse: undefined,
+            completedFilingPayment: false,
+            formationFormData: createEmptyFormationFormData(),
+          },
         };
 
         if (
