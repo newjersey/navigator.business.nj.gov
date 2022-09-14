@@ -3584,7 +3584,7 @@ __metadata:
     "@types/express": 4.17.13
     "@types/jest": 29.0.0
     "@types/jsonwebtoken": 8.5.9
-    "@types/lodash": 4.14.184
+    "@types/lodash": 4.14.185
     "@types/node": 16.11.58
     "@types/simple-oauth2": 4.1.1
     "@types/supertest": 2.0.12
@@ -3722,7 +3722,7 @@ __metadata:
     "@types/jest": 29.0.0
     "@types/js-yaml": 4.0.5
     "@types/jsonwebtoken": 8.5.9
-    "@types/lodash": 4.14.184
+    "@types/lodash": 4.14.185
     "@types/node": 16.11.58
     "@types/react": 18.0.18
     "@types/react-dom": 18.0.6
@@ -3921,7 +3921,7 @@ __metadata:
     "@types/cypress-dotenv": 2.0.0
     "@types/jest": 29.0.0
     "@types/js-yaml": 4.0.5
-    "@types/lodash": 4.14.184
+    "@types/lodash": 4.14.185
     "@types/node": 16.11.58
     "@types/react": 18.0.18
     "@types/react-dom": 18.0.6
@@ -9256,14 +9256,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/lodash@npm:4.14.184":
-  version: 4.14.184
-  resolution: "@types/lodash@npm:4.14.184"
-  checksum: 6d9a4d67f7f9d0ec3fd21174f3dd3d00629dc1227eb469450eace53adbc1f7e2330699c28d0fe093e5f0fef0f0e763098be1f779268857213224af082b62be21
-  languageName: node
-  linkType: hard
-
-"@types/lodash@npm:^4.14.123, @types/lodash@npm:^4.14.167":
+"@types/lodash@npm:4.14.185, @types/lodash@npm:^4.14.123, @types/lodash@npm:^4.14.167":
   version: 4.14.185
   resolution: "@types/lodash@npm:4.14.185"
   checksum: f81d13da5ecab110ca9c5c7cc2bedc3c9802a6acf668576aecd1b8f4b134ed81d06c15f1e600fb08f05975098280a0d97d30cddfc2cb39ec1c6b56e971ca53b3
