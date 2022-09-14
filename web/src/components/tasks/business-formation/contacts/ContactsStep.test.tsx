@@ -701,13 +701,13 @@ describe("Formation - ContactsStep", () => {
           screen.getByText(Config.businessFormationDefaults.addressErrorText, { exact: false })
         ).toBeInTheDocument();
         expect(
-          screen.getByText(Config.businessFormationDefaults.addressCityErrorText, { exact: false })
+          screen.getByText(Config.businessFormationDefaults.addressModalCityErrorText, { exact: false })
         ).toBeInTheDocument();
         expect(
           screen.getByText(Config.businessFormationDefaults.addressStateErrorText, { exact: false })
         ).toBeInTheDocument();
         expect(
-          screen.getByText(Config.businessFormationDefaults.addressZipCodeErrorText, { exact: false })
+          screen.getByText(Config.businessFormationDefaults.addressModalZipCodeErrorText, { exact: false })
         ).toBeInTheDocument();
         await page.fillAddressModal({});
         expect(
@@ -723,7 +723,7 @@ describe("Formation - ContactsStep", () => {
           screen.queryByText(Config.businessFormationDefaults.addressStateErrorText, { exact: false })
         ).not.toBeInTheDocument();
         expect(
-          screen.queryByText(Config.businessFormationDefaults.addressZipCodeErrorText, { exact: false })
+          screen.queryByText(Config.businessFormationDefaults.addressModalZipCodeErrorText, { exact: false })
         ).not.toBeInTheDocument();
         page.clickAddressSubmit();
         await waitFor(() => {

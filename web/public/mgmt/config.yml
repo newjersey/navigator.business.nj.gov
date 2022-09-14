@@ -765,7 +765,8 @@ collections:
               - { label: Entity ID Label, name: entityIdLabel, widget: string }
               - { label: Error - Address City, name: addressCityErrorText, widget: string }
               - { label: Error - Address State, name: addressStateErrorText, widget: string }
-              - { label: Error - Address Zip Code, name: addressZipCodeErrorText, widget: string }
+              - { label: Error - Address State (Modal), name: addressModalCityErrorText, widget: string }
+              - { label: Error - Address Zip Code, name: addressModalZipCodeErrorText, widget: string }
               - { label: Error - Address, name: addressErrorText, widget: string }
               - { label: Error - Agent Address City, name: agentOfficeAddressCityErrorText, widget: string }
               - {
