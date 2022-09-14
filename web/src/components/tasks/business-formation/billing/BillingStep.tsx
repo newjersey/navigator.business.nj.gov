@@ -67,7 +67,9 @@ export const BillingStep = (): ReactElement => {
       <hr className="margin-bottom-2" />
       <Content>{state.displayContent.services.contentMd}</Content>
       {doesFieldHaveError("paymentType") && (
-        <Alert variant="error">{Config.businessFormationDefaults.paymentTypeErrorMessage}</Alert>
+        <Alert dataTestid="payment-alert" variant="error">
+          {Config.businessFormationDefaults.paymentTypeErrorMessage}
+        </Alert>
       )}
       <FormationChooseDocuments />
 
