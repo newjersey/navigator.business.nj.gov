@@ -229,7 +229,7 @@ export const AddressModal = (props: Props): ReactElement => {
                 handleChange={(value: string) => setAddressData({ ...addressData, addressCity: value })}
                 error={addressErrorMap["addressCity"].invalid}
                 onValidation={onValidation}
-                validationText={Config.businessFormationDefaults.addressCityErrorText}
+                validationText={Config.businessFormationDefaults.addressModalCityErrorText}
               />
             </div>
             <div className="grid-col-6 tablet:grid-col-3">
@@ -263,7 +263,7 @@ export const AddressModal = (props: Props): ReactElement => {
                 error={addressErrorMap["addressZipCode"].invalid}
                 handleChange={(value: string) => setAddressData({ ...addressData, addressZipCode: value })}
                 value={addressData.addressZipCode}
-                validationText={Config.businessFormationDefaults.addressZipCodeErrorText}
+                validationText={Config.businessFormationDefaults.addressModalZipCodeErrorText}
                 onValidation={onValidation}
                 required={true}
                 placeholder={Config.businessFormationDefaults.addressModalZipCodePlaceholder}
