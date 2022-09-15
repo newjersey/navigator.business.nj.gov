@@ -39,7 +39,12 @@ export const FilingsCalendar = (props: Props): ReactElement => {
     }
 
     const thisMonthFilings = taxFilings
-      .filter((it) => parseDateWithFormat(it.dueDate, "YYYY-MM-DD").month() === date.month())
+      .filter((it) => {
+        return (
+          parseDateWithFormat(it.dueDate, "YYYY-MM-DD").month() === date.month() &&
+          parseDateWithFormat(it.dueDate, "YYYY-MM-DD").year() === date.year()
+        );
+      })
       .sort((a, b) =>
         parseDateWithFormat(a.dueDate, "YYYY-MM-DD").isBefore(parseDateWithFormat(b.dueDate, "YYYY-MM-DD"))
           ? -1
