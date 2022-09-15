@@ -1,5 +1,6 @@
 import { Content } from "@/components/Content";
 import { Button } from "@/components/njwds-extended/Button";
+import { ButtonDropdown } from "@/components/njwds-extended/ButtonDropdown";
 import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -65,6 +66,52 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
       !displaySocialEquityPriorityType &&
       !displayNoPriorityType
     );
+  };
+
+  const openInNewTab = (link: string) => {
+    window.open(link, "_ blank");
+  };
+
+  const renderCTAButtons = () => {
+    const ctaButtons = [];
+    if (displaySocialEquityPriorityType) {
+      ctaButtons.push({
+        text: Config.cannabisPriorityStatus.socialEquityButtonText,
+        onClick: () => openInNewTab(Config.cannabisPriorityStatus.socialEquityButtonLink),
+      });
+    }
+    if (displayMWPriorityType || displayVeteranPriorityType) {
+      ctaButtons.push({
+        text: Config.cannabisPriorityStatus.certificationButtonText,
+        onClick: () => openInNewTab(Config.cannabisPriorityStatus.certificationButtonLink),
+      });
+    }
+    if (showTaskCompleteButton()) {
+      return (
+        <Button
+          className="mobile-lg:margin-top-0 margin-top-1"
+          style="primary"
+          noRightMargin
+          onClick={props.onComplete}
+        >
+          {Config.cannabisPriorityStatus.completeTaskProgressButtonText}
+        </Button>
+      );
+    } else if (ctaButtons.length === 1) {
+      return (
+        <Button style="primary" onClick={ctaButtons[0].onClick}>
+          {ctaButtons[0].text}
+        </Button>
+      );
+    } else if (ctaButtons.length > 1) {
+      return (
+        <ButtonDropdown dropdownOptions={ctaButtons}>
+          {Config.cannabisPriorityStatus.dropdownCTAButtonText}
+        </ButtonDropdown>
+      );
+    } else {
+      return <></>;
+    }
   };
 
   return (
@@ -165,45 +212,7 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
         <Button style="secondary" dataTestid="backButton" onClick={props.onBack}>
           {Config.cannabisPriorityStatus.backButtonText}
         </Button>
-        {displaySocialEquityPriorityType && (
-          <a
-            className="mobile-lg:margin-top-0 margin-top-1"
-            href={Config.cannabisPriorityStatus.socialEquityButtonLink}
-            target="_blank"
-            rel="noreferrer noopener"
-          >
-            <Button
-              style="primary"
-              dataTestid="socialEquityButton"
-              noRightMargin={!(displayMWPriorityType || displayVeteranPriorityType)}
-            >
-              {Config.cannabisPriorityStatus.socialEquityButtonText}
-            </Button>
-          </a>
-        )}
-        {(displayMWPriorityType || displayVeteranPriorityType) && (
-          <a
-            className="mobile-lg:margin-top-0 margin-top-1"
-            href={Config.cannabisPriorityStatus.certificationButtonLink}
-            target="_blank"
-            rel="noreferrer noopener"
-          >
-            <Button style="primary" dataTestid="certificationButton" noRightMargin>
-              {Config.cannabisPriorityStatus.certificationButtonText}
-            </Button>
-          </a>
-        )}
-        {showTaskCompleteButton() && (
-          <Button
-            className="mobile-lg:margin-top-0 margin-top-1"
-            style="primary"
-            noRightMargin
-            dataTestid="completeTaskProgressButton"
-            onClick={props.onComplete}
-          >
-            {Config.cannabisPriorityStatus.completeTaskProgressButtonText}
-          </Button>
-        )}
+        {renderCTAButtons()}
       </div>
     </>
   );

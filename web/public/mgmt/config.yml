@@ -3575,6 +3575,7 @@ collections:
               - { label: Green Box Veteran Text, name: greenBoxVeteranText, widget: string }
               - { label: Green Box Social Equity Text, name: greenBoxSocialEquityText, widget: string }
               - { label: Back Button Text, name: backButtonText, widget: string }
+              - { label: Dropdown CTA Button Text, name: dropdownCTAButtonText, widget: string }
               - { label: Social Equity Button Text, name: socialEquityButtonText, widget: string }
               - { label: Social Equity Button Link, name: socialEquityButtonLink, widget: string }
               - {
