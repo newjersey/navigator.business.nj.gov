@@ -266,10 +266,10 @@ export default {
         },
       },
     },
-    task_formation_date_modal: {
+    formation_date_modal: {
       submit: {
         formation_status_set_to_complete: () => {
-          sendEvent("task_formation_date_modal", "submit", "formation_status_set_to_complete");
+          sendEvent("formation_date_modal", "submit", "formation_status_set_to_complete");
         },
       },
     },
