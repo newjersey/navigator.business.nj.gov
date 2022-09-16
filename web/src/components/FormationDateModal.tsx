@@ -45,7 +45,7 @@ export const FormationDateModal = (props: Props): ReactElement => {
       onValidation("dateOfFormation", true);
       return;
     }
-    analytics.event.task_formation_date_modal.submit.formation_status_set_to_complete();
+    analytics.event.formation_date_modal.submit.formation_status_set_to_complete();
     const updatedUserData = { ...userData, profileData };
     props.onSave("COMPLETED", updatedUserData, { redirectOnSuccess: true });
   };
