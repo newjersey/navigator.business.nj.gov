@@ -25,7 +25,7 @@ export const OnboardingTaxPin = (props: Props): ReactElement => {
         fieldName={fieldName}
         maxLength={4}
         minLength={4}
-        validationText={Config.profileDefaults[state.flow].taxPin.errorText}
+        validationText={Config.profileDefaults[state.flow].taxPin.errorTextRequired}
         headerAriaLevel={props.headerAriaLevel}
         handleChange={props.handleChangeOverride}
       />

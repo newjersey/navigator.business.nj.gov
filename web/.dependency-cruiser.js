@@ -298,6 +298,14 @@ module.exports = {
       from: {},
       to: { path: "ua-parser-js" },
     },
+    {
+      from: { path: "../shared/src" },
+      to: { path: "../shared/src" },
+    },
+    {
+      from: {},
+      to: { path: "@aws-amplify/auth" },
+    },
   ],
   forbidden: [
     /* rules from the 'recommended' preset: */

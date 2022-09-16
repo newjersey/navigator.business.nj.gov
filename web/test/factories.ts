@@ -101,6 +101,7 @@ export const generateUserData = (overrides: Partial<UserData>): UserData => {
 
 export const generateTaxFilingData = (overrides: Partial<TaxFilingData>): TaxFilingData => {
   return {
+    state: undefined,
     filings: [generateTaxFiling({})],
     ...overrides,
   };
@@ -137,7 +138,7 @@ export const generateProfileData = (
     dateOfFormation: getCurrentDateFormatted("YYYY-MM-DD"),
     entityId: randomInt(10).toString(),
     employerId: randomInt(9).toString(),
-    taxId: randomInt(9).toString(),
+    taxId: randomInt() % 2 ? randomInt(9).toString() : randomInt(12).toString(),
     notes: `some-notes-${randomInt()}`,
     ownershipTypeIds: [],
     documents: {
@@ -293,6 +294,16 @@ export const generateNameAndAddress = (overrides: Partial<NameAndAddress>): Name
     addressLine1: `some-address-1-${randomInt()}`,
     addressLine2: `some-address-2-${randomInt()}`,
     zipCode: `some-zipcode-${randomInt()}`,
+    ...overrides,
+  };
+};
+
+export const generateTaxIdAndBusinessName = (
+  overrides: Partial<{ businessName: string; taxId: string }>
+): { businessName: string; taxId: string } => {
+  return {
+    businessName: `some-name-${randomInt()}`,
+    taxId: `${randomInt(12)}`,
     ...overrides,
   };
 };

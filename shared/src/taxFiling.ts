@@ -1,5 +1,8 @@
+export type TaxFilingState = "SUCCESS" | "FAILED" | "PENDING" | "API_ERROR";
+
 export type TaxFilingData = {
-  filings: TaxFiling[];
+  readonly state?: TaxFilingState;
+  readonly filings: TaxFiling[];
 };
 
 export type TaxFiling = {

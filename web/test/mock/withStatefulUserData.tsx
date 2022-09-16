@@ -1,25 +1,19 @@
 import * as useUserModule from "@/lib/data-hooks/useUserData";
-import { getLastCalledWith, getNumberOfMockCalls } from "@/test/helpers";
+import { StatefulDataContext, statefulDataHelpers, WithStatefulData } from "@/test/mock/withStatefulData";
 import { UserData } from "@businessnjgovnavigator/shared/";
-import { createContext, ReactElement, ReactNode, useContext, useState } from "react";
+import { ReactElement, ReactNode, useContext } from "react";
 
 const updateSpy = jest.fn();
 
-export const getLastCalledWithConfig = (): { local?: boolean } => {
-  return getLastCalledWith(updateSpy)[1] as { local?: boolean };
-};
+export const helpers = statefulDataHelpers(updateSpy);
 
-export const currentUserData = (): UserData => {
-  return getLastCalledWith(updateSpy)[0] as UserData;
-};
+export const getLastCalledWithConfig = helpers.getLastCalledWithConfig;
 
-export const userDataWasNotUpdated = (): boolean => {
-  return getLastCalledWith(updateSpy) === undefined;
-};
+export const currentUserData = helpers.currentData as () => UserData;
 
-export const userDataUpdatedNTimes = (): number => {
-  return getNumberOfMockCalls(updateSpy);
-};
+export const userDataWasNotUpdated = helpers.dataWasNotUpdated;
+
+export const userDataUpdatedNTimes = helpers.dataUpdatedNTimes;
 
 export const WithStatefulUserData = ({
   children,
@@ -27,40 +21,16 @@ export const WithStatefulUserData = ({
 }: {
   children: ReactNode;
   initialUserData: UserData | undefined;
-}): ReactElement => {
-  const [userData, setUserData] = useState<UserData | undefined>(initialUserData);
-
-  const update = (newUserData: UserData | undefined, config?: { local?: boolean }): Promise<void> => {
-    updateSpy(newUserData, config);
-    setUserData(newUserData);
-    return Promise.resolve();
-  };
-
-  return (
-    <StatefulUserDataContext.Provider value={{ userData, update }}>
-      {children}
-    </StatefulUserDataContext.Provider>
-  );
-};
-
-interface StatefulUserDataContextType {
-  userData: UserData | undefined;
-  update: (userData: UserData | undefined) => Promise<void>;
-}
-
-export const StatefulUserDataContext = createContext<StatefulUserDataContextType>({
-  userData: undefined,
-  update: () => Promise.resolve(),
-});
+}): ReactElement => WithStatefulData(updateSpy)({ children, initialData: initialUserData });
 
 const mockUseUserData = (useUserModule as jest.Mocked<typeof useUserModule>).useUserData;
 
 export const setupStatefulUserDataContext = (): void => {
   mockUseUserData.mockImplementation(() => {
-    const { userData, update } = useContext(StatefulUserDataContext);
+    const { genericData, update } = useContext(StatefulDataContext);
 
     return {
-      userData: userData,
+      userData: genericData as UserData | undefined,
       isLoading: false,
       error: undefined,
       update: update,
