@@ -23,6 +23,9 @@ const formationApiAccount = process.env.FORMATION_API_ACCOUNT || "";
 const formationApiKey = process.env.FORMATION_API_KEY || "";
 const formationApiBaseUrl = process.env.FORMATION_API_BASE_URL || "";
 
+const gov2goRegApiKey = process.env.GOV2GO_REGISTRATION_API_KEY || "";
+const gov2goRegBaseUrl = process.env.GOV2GO_REGISTRATION_BASE_URL || "";
+
 const airtableApiKey = process.env.AIRTABLE_API_KEY || "";
 const airtableUserResearchBaseId = process.env.AIRTABLE_USER_RESEARCH_BASE_ID || "";
 const airtableBaseUrl = process.env.AIRTABLE_BASE_URL || "";
@@ -153,6 +156,8 @@ const serverlessConfiguration: AWS = {
       MYNJ_SERVICE_URL: myNJServiceUrl,
       USE_FAKE_SELF_REG: useFakeSelfReg,
       ADMIN_PASSWORD: adminPassword,
+      GOV2GO_REGISTRATION_API_KEY: gov2goRegApiKey,
+      GOV2GO_REGISTRATION_BASE_URL: gov2goRegBaseUrl,
       STAGE: stage,
       INTERCOM_HASH_SECRET: intercomHashSecret,
     },

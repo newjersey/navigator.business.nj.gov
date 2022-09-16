@@ -95,7 +95,12 @@
     "Mantoux",
     "CARI",
     "DORES",
-    "DCF"
+    "DCF",
+    "CBTU",
+    "CDIS",
+    "CWIP",
+    "Millville",
+    "orcnr"
   ],
   "ignorePaths": ["node_modules/**", "out/**", "web/out/**", "package.json"]
 }

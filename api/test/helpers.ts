@@ -20,3 +20,9 @@ export const generateHashedKey = (key: string) =>
 export const randomElementFromArray = <T>(array: T[]): T => {
   return array[Math.floor(Math.random() * array.length)];
 };
+
+export const getRandomDateInBetween = (start: string, end: string) => {
+  const startDate = Date.parse(start);
+  const endDate = Date.parse(end);
+  return new Date(Math.floor(Math.random() * (endDate - startDate + 1) + startDate));
+};

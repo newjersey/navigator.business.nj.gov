@@ -33,7 +33,7 @@ export const OnboardingEntityId = ({ headerAriaLevel = 2, ...props }: Props): Re
         <span className="text-light">{Config.profileDefaults[state.flow].entityId.headerNotBolded}</span>
       </div>
       <OnboardingNumericField
-        showHeader={false}
+        hideHeader={true}
         onValidation={props.onValidation}
         error={props.fieldStates[fieldName].invalid}
         fieldName={fieldName}

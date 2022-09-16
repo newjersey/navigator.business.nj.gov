@@ -4,18 +4,19 @@
       "taxId": {
         "placeholder": "Enter Tax ID number",
         "header": "## New Jersey Tax ID",
-        "description": "What is your `Tax ID?|tax-id`"
+        "description": "What is your `Tax ID?|tax-id`",
+        "errorTextRequired": "Enter a 12-digit NJ Tax ID"
       },
       "dateOfFormation": {
         "header": "",
         "description": "",
-        "errorText": ""
+        "errorTextRequired": ""
       },
       "taxPin": {
         "header": "",
         "placeholder": "",
         "description": "",
-        "errorText": ""
+        "errorTextRequired": ""
       },
       "entityId": {
         "placeholder": "",

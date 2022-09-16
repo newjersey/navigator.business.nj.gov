@@ -5,6 +5,7 @@ interface OperatingPhase {
   readonly displayFundings: boolean;
   readonly displayListCalendar: boolean;
   readonly displayFullCalendar: boolean;
+  readonly displayTaxAccessButton: boolean;
   readonly displayRoadmapTasks: boolean;
   readonly displayHideableRoadmapTasks: boolean;
 }
@@ -28,6 +29,7 @@ export const LookupOperatingPhaseById = (id: OperatingPhaseId | undefined): Oper
       displayFundings: false,
       displayListCalendar: false,
       displayFullCalendar: false,
+      displayTaxAccessButton: false,
       displayRoadmapTasks: false,
       displayHideableRoadmapTasks: false,
     }
@@ -42,6 +44,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displayFundings: false,
     displayListCalendar: false,
     displayFullCalendar: false,
+    displayTaxAccessButton: false,
     displayRoadmapTasks: true,
     displayHideableRoadmapTasks: false,
   },
@@ -52,6 +55,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displayFundings: true,
     displayListCalendar: false,
     displayFullCalendar: true,
+    displayTaxAccessButton: false,
     displayRoadmapTasks: false,
     displayHideableRoadmapTasks: false,
   },
@@ -63,6 +67,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displayListCalendar: true,
     displayFullCalendar: false,
     displayRoadmapTasks: true,
+    displayTaxAccessButton: false,
     displayHideableRoadmapTasks: false,
   },
   {
@@ -73,6 +78,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displayListCalendar: false,
     displayFullCalendar: false,
     displayRoadmapTasks: true,
+    displayTaxAccessButton: false,
     displayHideableRoadmapTasks: false,
   },
   {
@@ -82,6 +88,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displayFundings: false,
     displayListCalendar: true,
     displayFullCalendar: false,
+    displayTaxAccessButton: false,
     displayRoadmapTasks: true,
     displayHideableRoadmapTasks: false,
   },
@@ -92,6 +99,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displayFundings: true,
     displayListCalendar: false,
     displayFullCalendar: true,
+    displayTaxAccessButton: true,
     displayRoadmapTasks: false,
     displayHideableRoadmapTasks: true,
   },
@@ -102,6 +110,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displayFundings: true,
     displayListCalendar: false,
     displayFullCalendar: true,
+    displayTaxAccessButton: true,
     displayRoadmapTasks: false,
     displayHideableRoadmapTasks: false,
   },

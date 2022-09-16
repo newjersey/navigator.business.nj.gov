@@ -60,6 +60,7 @@ export default {
       styleOverrides: {
         root: {
           fontWeight: 800,
+          marginLeft: 2,
           fontSize: 16,
           "&.Mui-error": {
             color: "#b50909",

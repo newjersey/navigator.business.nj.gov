@@ -14,14 +14,20 @@ export interface OnboardingProps extends Omit<GenericTextFieldProps, "value" | "
   fieldName: Exclude<ProfileFields, keyof BusinessUser | "businessPersona">;
   onValidation?: (field: ProfileFields, invalid: boolean) => void;
   headerAriaLevel?: number;
-  showHeader?: boolean;
+  headerMarkdown?: string;
+  descriptionMarkdown?: string;
+  hideHeader?: boolean;
+  hideDescription?: boolean;
   fieldOptions?: TextFieldProps;
 }
 
 export const OnboardingField = ({
   fieldName,
   headerAriaLevel = 2,
-  showHeader = true,
+  hideHeader = false,
+  inputErrorBar,
+  className,
+  hideDescription = false,
   ...props
 }: OnboardingProps): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
@@ -37,7 +43,6 @@ export const OnboardingField = ({
       props.handleChange(value);
       return;
     }
-
     const profileData = { ...state.profileData } as Record<
       keyof ProfileData,
       keyof ProfileData[keyof ProfileData]
@@ -51,22 +56,34 @@ export const OnboardingField = ({
   const headerLevelTwo = setHeaderRole(headerAriaLevel, "h3-styling");
 
   return (
-    <div>
-      {showHeader && (
-        <Content overrides={{ h2: headerLevelTwo }}>
-          {Config.profileDefaults[state.flow][fieldName].header}
+    <div className={`${className} ${inputErrorBar ? "input-error-bar" : ""} ${props.error ? "error" : ""}`}>
+      {!hideHeader && (
+        <Content className="margin-bottom-105" overrides={{ h2: headerLevelTwo }}>
+          {props.headerMarkdown ?? Config.profileDefaults[state.flow][fieldName].header}
         </Content>
       )}
-      {Object.keys(Config.profileDefaults[state.flow][fieldName]).includes("description") && (
-        <div className="margin-bottom-2" data-testid={`onboardingFieldContent-${fieldName}`}>
-          <Content>{(Config.profileDefaults[state.flow][fieldName] as any).description}</Content>
-        </div>
-      )}
+      {!hideDescription &&
+        (Object.keys(Config.profileDefaults[state.flow][fieldName]).includes("description") ||
+          props.descriptionMarkdown) && (
+          <div className="margin-bottom-2" data-testid={`onboardingFieldContent-${fieldName}`}>
+            <Content>
+              {props.descriptionMarkdown ??
+                (Config.profileDefaults[state.flow][fieldName] as any).description}
+            </Content>
+          </div>
+        )}
       <GenericTextField
         value={state.profileData[fieldName] as string | undefined}
         fieldName={fieldName as string}
-        placeholder={(Config.profileDefaults[state.flow][fieldName] as any).placeholder ?? ""}
         {...props}
+        placeholder={
+          props.placeholder ?? (Config.profileDefaults[state.flow][fieldName] as any).placeholder ?? ""
+        }
+        validationText={
+          props.validationText ??
+          (Config.profileDefaults[state.flow][fieldName] as any).errorTextRequired ??
+          ""
+        }
         handleChange={handleChange}
         onValidation={onValidation}
       />
