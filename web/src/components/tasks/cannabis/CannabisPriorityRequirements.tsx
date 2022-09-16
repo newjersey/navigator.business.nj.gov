@@ -88,12 +88,7 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
     }
     if (showTaskCompleteButton()) {
       return (
-        <Button
-          className="mobile-lg:margin-top-0 margin-top-1"
-          style="primary"
-          noRightMargin
-          onClick={props.onComplete}
-        >
+        <Button style="primary" noRightMargin onClick={props.onComplete}>
           {Config.cannabisPriorityStatus.completeTaskProgressButtonText}
         </Button>
       );
@@ -207,9 +202,14 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
       </div>
       <div
         style={{ marginTop: "auto" }}
-        className="flex flex-justify-end bg-base-lightest margin-x-neg-205 padding-3 margin-bottom-neg-205 flex-column mobile-lg:flex-row"
+        className="flex flex-justify-end bg-base-lightest margin-x-neg-4 padding-3 margin-bottom-neg-4 flex-column mobile-lg:flex-row"
       >
-        <Button style="secondary" dataTestid="backButton" onClick={props.onBack}>
+        <Button
+          className="mobile-lg:margin-bottom-0 margin-bottom-1"
+          style="secondary"
+          dataTestid="backButton"
+          onClick={props.onBack}
+        >
           {Config.cannabisPriorityStatus.backButtonText}
         </Button>
         {renderCTAButtons()}
