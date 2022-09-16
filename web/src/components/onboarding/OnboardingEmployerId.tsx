@@ -26,7 +26,7 @@ export const OnboardingEmployerId = ({ headerAriaLevel = 2, ...props }: Props): 
       </div>
       <OnboardingNumericField
         fieldName={fieldName}
-        showHeader={false}
+        hideHeader={true}
         onValidation={props.onValidation}
         error={props.fieldStates[fieldName].invalid}
         validationText={templateEval(Config.onboardingDefaults.errorTextMinimumNumericField, {

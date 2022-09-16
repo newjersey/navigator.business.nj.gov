@@ -1530,6 +1530,74 @@ collections:
               - { label: Show Task Button Text, name: showTaskText, widget: text }
               - { label: Hide Task Button Text, name: hideTaskText, widget: text }
               - { label: Number of Hidden Tasks Text, name: hiddenTasksText, widget: text }
+              - { label: Tax Calendar Access Body, name: taxCalendarAccessBody, widget: markdown }
+              - { label: Tax Calendar Pending Body, name: taxCalendarPendingCopyMarkdown, widget: markdown }
+              - { label: Tax Calendar Access Open Modal Button, name: taxCalendarAccessButton, widget: text }
+              - {
+                  label: Tax Calendar Modal Previous Button,
+                  name: taxCalendarModalPreviousButton,
+                  widget: text,
+                }
+              - { label: Tax Calendar Modal Next Button, name: taxCalendarModalNextButton, widget: text }
+              - { label: Tax Calendar Modal Header, name: taxCalendarModalHeader, widget: text }
+              - { label: Tax Calendar Modal Error Header, name: taxCalendarModalErrorHeader, widget: text }
+              - { label: Tax Calendar Modal Body Text, name: taxCalendarModalBody, widget: markdown }
+              - {
+                  label: Tax Calendar Modal BusinessName Field Header,
+                  name: taxCalendarModalBusinessFieldHeader,
+                  widget: markdown,
+                }
+              - {
+                  label: Tax Calendar Modal BusinessName Field Error Alert Text,
+                  name: taxCalendarModalBusinessFieldErrorName,
+                  widget: text,
+                }
+              - {
+                  label: Tax Calendar Modal BusinessName Field Text,
+                  name: taxCalendarModalBusinessFieldMarkdown,
+                  widget: markdown,
+                }
+              - {
+                  label: Tax Calendar Modal TaxId Field Error Alert Text,
+                  name: taxCalendarModalTaxErrorName,
+                  widget: text,
+                }
+              - {
+                  label: Tax Calendar Modal TaxId Field Header,
+                  name: taxCalendarModalTaxIdHeader,
+                  widget: markdown,
+                }
+              - {
+                  label: Tax Calendar Modal TaxId Field Text,
+                  name: taxCalendarModalTaxIdMarkdown,
+                  widget: markdown,
+                }
+              - {
+                  label: Tax Calendar Modal Failed Alert Text,
+                  name: taxCalendarFailedErrorMessageMarkdown,
+                  widget: markdown,
+                }
+              - {
+                  label: Tax Calendar Modal Unknown Failure Alert Text,
+                  name: taxCalendarFailedUnknownMarkdown,
+                  widget: markdown,
+                }
+              - {
+                  label: Tax Calendar Modal BusinessName API Failed Helper Text,
+                  name: taxCalendarFailedBusinessFieldHelper,
+                  widget: text,
+                }
+              - {
+                  label: Tax Calendar Modal TaxId API Failed Helper Text,
+                  name: taxCalendarFailedTaxIdHelper,
+                  widget: text,
+                }
+              - {
+                  label: Tax Calendar Success Alert Header,
+                  name: taxCalendarSnackbarSuccessHeader,
+                  widget: text,
+                }
+              - { label: Tax Calendar Success Alert Body, name: taxCalendarSnackbarSuccessBody, widget: text }
 
           - label: Feedback Modal
             name: feedbackModal
@@ -1807,6 +1875,11 @@ collections:
               - {
                   label: Error Text - Minimum Numeric Field,
                   name: errorTextMinimumNumericField,
+                  widget: string,
+                }
+              - {
+                  label: Error Text - Minimum Numeric Range Field,
+                  name: errorTextMinimumRangeNumericField,
                   widget: string,
                 }
           - label: Page Footer

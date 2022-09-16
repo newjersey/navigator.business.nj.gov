@@ -5,8 +5,9 @@ import {
   generateTaxFiling,
   generateTaxFilingData,
   generateUserData,
+  randomLegalStructure,
 } from "@/test/factories";
-import { markdownToText } from "@/test/helpers";
+import { markdownToText, randomElementFromArray } from "@/test/helpers";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import {
   currentUserData,
@@ -14,12 +15,13 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { TaxFiling, UserData } from "@businessnjgovnavigator/shared/";
+import { OperatingPhases, randomInt, TaxFiling, UserData } from "@businessnjgovnavigator/shared/";
 import { getCurrentDate, parseDateWithFormat } from "@businessnjgovnavigator/shared/dateHelpers";
 import * as materialUi from "@mui/material";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import { fireEvent, render, screen } from "@testing-library/react";
 import dayjs from "dayjs";
+import { generateProfileData } from "../../test/factories";
 import { FilingsCalendar } from "./FilingsCalendar";
 
 function mockMaterialUI(): typeof materialUi {
@@ -138,6 +140,99 @@ describe("<FilingsCalendar />", () => {
         `Annual Report ${parseDateWithFormat(annualReport.dueDate, "YYYY-MM-DD").format("YYYY")}`
       )
     ).toBeInTheDocument();
+  });
+
+  describe("tax calendar access button", () => {
+    beforeEach(() => {
+      setTabletScreen(Boolean(randomInt() % 2));
+    });
+
+    it("displays button on filings calendar", () => {
+      const dueDate = getCurrentDate().add(2, "months");
+      const annualReport = generateTaxFiling({
+        identifier: "annual-report",
+        dueDate: dueDate.format("YYYY-MM-DD"),
+      });
+
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          legalStructureId: randomLegalStructure(true).id,
+          operatingPhase: randomElementFromArray(
+            OperatingPhases.filter((obj) => obj.displayTaxAccessButton === true)
+          ).id,
+        }),
+        taxFilingData: generateTaxFilingData({ filings: [annualReport] }),
+      });
+
+      const operateReferences: Record<string, OperateReference> = {
+        "annual-report": {
+          name: "Annual Report",
+          urlSlug: "annual-report-url",
+          urlPath: "annual_report-url-path",
+        },
+      };
+
+      renderFilingsCalendar(operateReferences, userData);
+
+      expect(screen.getByTestId("get-tax-access")).toBeInTheDocument();
+    });
+
+    it("hides button on filings calendar when sp/gp", () => {
+      const whateverReport = generateTaxFiling({
+        identifier: "whatever-report",
+      });
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          legalStructureId: randomLegalStructure(false).id,
+          operatingPhase: randomElementFromArray(
+            OperatingPhases.filter((obj) => obj.displayTaxAccessButton === true)
+          ).id,
+        }),
+        taxFilingData: generateTaxFilingData({ filings: [whateverReport] }),
+      });
+
+      const operateReferences: Record<string, OperateReference> = {
+        "whatever-report": {
+          name: "Whatever",
+          urlSlug: "whatever-report-url",
+          urlPath: "whatever_report-url-path",
+        },
+      };
+
+      renderFilingsCalendar(operateReferences, userData);
+
+      expect(screen.queryByTestId("get-tax-access")).not.toBeInTheDocument();
+    });
+
+    it("hides button on filings calendar when displayTaxAccessButton is false", () => {
+      const dueDate = getCurrentDate().add(2, "months");
+      const annualReport = generateTaxFiling({
+        identifier: "annual-report",
+        dueDate: dueDate.format("YYYY-MM-DD"),
+      });
+
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          legalStructureId: randomLegalStructure(true).id,
+          operatingPhase: randomElementFromArray(
+            OperatingPhases.filter((obj) => obj.displayTaxAccessButton !== true)
+          ).id,
+        }),
+        taxFilingData: generateTaxFilingData({ filings: [annualReport] }),
+      });
+
+      const operateReferences: Record<string, OperateReference> = {
+        "annual-report": {
+          name: "Annual Report",
+          urlSlug: "annual-report-url",
+          urlPath: "annual_report-url-path",
+        },
+      };
+
+      renderFilingsCalendar(operateReferences, userData);
+
+      expect(screen.queryByTestId("get-tax-access")).not.toBeInTheDocument();
+    });
   });
 
   describe("filings calendar in mobile", () => {

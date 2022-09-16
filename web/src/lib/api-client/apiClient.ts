@@ -37,6 +37,13 @@ export const getCompletedFiling = (): Promise<UserData> => {
   return get(`/completed-filing`);
 };
 
+export const postTaxRegistrationOnboarding = (props: {
+  businessName: string;
+  taxId: string;
+}): Promise<UserData> => {
+  return post(`/gov2go/onboarding`, props);
+};
+
 export const postNewsletter = (userData: UserData): Promise<UserData> => {
   return post(`/external/newsletter`, userData, false);
 };

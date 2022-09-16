@@ -40,7 +40,8 @@ export const OnboardingDateOfFormation = ({ headerAriaLevel = 2, ...props }: Pro
     description:
       props.configOverrides?.description || Config.profileDefaults[state.flow].dateOfFormation.description,
     errorText:
-      props.configOverrides?.errorText || Config.profileDefaults[state.flow].dateOfFormation.errorText,
+      props.configOverrides?.errorText ||
+      Config.profileDefaults[state.flow].dateOfFormation.errorTextRequired,
   };
 
   useMountEffectWhenDefined(() => {

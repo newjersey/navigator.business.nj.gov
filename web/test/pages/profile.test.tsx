@@ -468,7 +468,7 @@ describe("profile", () => {
       chooseTab("numbers");
       expect(getEmployerIdValue()).toEqual("12-3456789");
       expect(getEntityIdValue()).toEqual("1234567890");
-      expect(getTaxIdValue()).toEqual("123456790");
+      expect(getTaxIdValue()).toEqual("123-456-790");
       chooseTab("notes");
       expect(getNotesValue()).toEqual("whats appppppp");
     });
@@ -778,7 +778,7 @@ describe("profile", () => {
       chooseTab("numbers");
       expect(getEmployerIdValue()).toEqual("12-3456789");
       expect(getEntityIdValue()).toEqual("1234567890");
-      expect(getTaxIdValue()).toEqual("123456790");
+      expect(getTaxIdValue()).toEqual("123-456-790");
       expect(getDateOfFormation()).toEqual(date.format("MM/YYYY"));
       expect(getTaxPinValue()).toEqual("6666");
       chooseTab("notes");
@@ -795,14 +795,14 @@ describe("profile", () => {
       fillText("Tax pin", "");
       fireEvent.blur(screen.getByLabelText("Tax pin"));
       expect(
-        screen.queryByText(Config.profileDefaults[getFlow(userData)].taxPin.errorText)
+        screen.queryByText(Config.profileDefaults[getFlow(userData)].taxPin.errorTextRequired)
       ).not.toBeInTheDocument();
 
       fillText("Tax pin", "123");
       fireEvent.blur(screen.getByLabelText("Tax pin"));
       await waitFor(() => {
         expect(
-          screen.getByText(Config.profileDefaults[getFlow(userData)].taxPin.errorText)
+          screen.getByText(Config.profileDefaults[getFlow(userData)].taxPin.errorTextRequired)
         ).toBeInTheDocument();
       });
 
@@ -810,7 +810,7 @@ describe("profile", () => {
       fireEvent.blur(screen.getByLabelText("Tax pin"));
       await waitFor(() => {
         expect(
-          screen.queryByText(Config.profileDefaults[getFlow(userData)].taxPin.errorText)
+          screen.queryByText(Config.profileDefaults[getFlow(userData)].taxPin.errorTextRequired)
         ).not.toBeInTheDocument();
       });
     });

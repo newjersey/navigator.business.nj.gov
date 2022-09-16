@@ -2,6 +2,7 @@ import { BusinessUser, NewsletterResponse, UserTestingResponse } from "@shared/b
 import { UserFeedbackRequest, UserIssueRequest } from "@shared/feedbackRequest";
 import { FormationSubmitResponse, GetFilingResponse } from "@shared/formationData";
 import { LicenseEntity, LicenseStatusResult, NameAndAddress } from "@shared/license";
+import { TaxFiling, TaxFilingState } from "@shared/taxFiling";
 import { UserData } from "@shared/userData";
 import * as https from "node:https";
 export interface UserDataClient {
@@ -29,6 +30,16 @@ export interface FormationClient {
   getCompletedFiling: (formationId: string) => Promise<GetFilingResponse>;
 }
 
+export interface ApiTaxFilingClient {
+  lookup: (taxId: string, businessName: string) => Promise<TaxFilingLookupResponse>;
+  onboarding: (taxId: string, email: string, businessName: string) => Promise<TaxFilingOnboardingResponse>;
+}
+
+export interface TaxFilingClient {
+  lookup: (props: { userId: string; taxId: string; businessName: string }) => Promise<UserData>;
+  onboarding: (props: { userId: string; taxId: string; businessName: string }) => Promise<UserData>;
+}
+
 export type AddNewsletter = (userData: UserData) => Promise<UserData>;
 export type AddToUserTesting = (userData: UserData) => Promise<UserData>;
 
@@ -50,6 +61,16 @@ export interface SelfRegClient {
   resume: (authID: string) => Promise<SelfRegResponse>;
 }
 
+export type TaxFilingResults = { Content: string; Id: string; Values: string[] }[] | null;
+
+export type TaxFilingOnboardingResponse = {
+  state: TaxFilingState;
+  errorField?: "Business Name" | "Taxpayer ID";
+};
+export interface TaxFilingLookupResponse {
+  state: TaxFilingState;
+  filings: TaxFiling[];
+}
 export type SelfRegResponse = {
   authRedirectURL: string;
   myNJUserKey: string;
