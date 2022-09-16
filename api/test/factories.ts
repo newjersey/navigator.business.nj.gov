@@ -24,7 +24,7 @@ import {
   GetFilingResponse,
 } from "@shared/formationData";
 import { Industries, Industry } from "@shared/industry";
-import { randomInt } from "@shared/intHelpers";
+import { randomInt, randomIntFromInterval } from "@shared/intHelpers";
 import { LegalStructure, LegalStructures } from "@shared/legalStructure";
 import {
   LicenseData,
@@ -38,7 +38,8 @@ import { ProfileData } from "@shared/profileData";
 import { arrayOfSectors as sectors, SectorType } from "@shared/sector";
 import { TaxFiling, TaxFilingData } from "@shared/taxFiling";
 import { Preferences, UserData } from "@shared/userData";
-import { SelfRegResponse } from "../src/domain/types";
+import { SelfRegResponse, TaxFilingResults } from "../src/domain/types";
+import { getRandomDateInBetween } from "./helpers";
 
 export const generateUser = (overrides: Partial<BusinessUser>): BusinessUser => {
   return {
@@ -51,6 +52,23 @@ export const generateUser = (overrides: Partial<BusinessUser>): BusinessUser => 
     abExperience: randomInt() % 2 === 0 ? "ExperienceA" : "ExperienceB",
     ...overrides,
   };
+};
+
+export const generateTaxFilingResults = (ids?: string[], number?: number): TaxFilingResults => {
+  const generateValues = () => {
+    const dateToShortISO = (date: Date): string => date.toISOString().split("T")[0];
+    const date = new Date();
+    const futureDate = new Date();
+    futureDate.setFullYear(futureDate.getFullYear() + 2);
+    return [...Array.from({ length: Number(number ?? randomIntFromInterval("4", "12")) }).keys()].map(() =>
+      getRandomDateInBetween(dateToShortISO(date), dateToShortISO(futureDate)).toLocaleDateString()
+    );
+  };
+  return (ids ?? ["st-50/450", "st-51/451", "nj-927/927-w"]).map((Id) => ({
+    Content: `some-content-${Id}`,
+    Id,
+    Values: generateValues(),
+  }));
 };
 
 export const generateFormationUserData = (
@@ -109,6 +127,7 @@ export const generateUserData = (overrides: Partial<UserData>): UserData => {
 
 export const generateTaxFilingData = (overrides: Partial<TaxFilingData>): TaxFilingData => {
   return {
+    state: undefined,
     filings: [generateTaxFiling({})],
     ...overrides,
   };
@@ -141,7 +160,7 @@ export const generateProfileData = (overrides: Partial<ProfileData>): ProfileDat
     dateOfFormation: undefined,
     entityId: randomInt(10).toString(),
     employerId: randomInt(9).toString(),
-    taxId: randomInt(9).toString(),
+    taxId: randomInt() % 2 ? randomInt(9).toString() : randomInt(12).toString(),
     notes: `some-notes-${randomInt()}`,
     ownershipTypeIds: [],
     documents: {
@@ -187,6 +206,26 @@ export const generateLicenseStatusResult = (overrides: Partial<LicenseStatusResu
   return {
     status: "PENDING",
     checklistItems: [generateLicenseStatusItem({})],
+    ...overrides,
+  };
+};
+
+export const generateTaxIdAndBusinessName = (
+  overrides: Partial<{ businessName: string; taxId: string }>
+): { businessName: string; taxId: string } => {
+  return {
+    businessName: `some-name-${randomInt()}`,
+    taxId: `${randomInt(12)}`,
+    ...overrides,
+  };
+};
+
+export const generateTaxIdAndBusinessNameAndEmail = (
+  overrides: Partial<{ businessName: string; taxId: string; email: string }>
+): { businessName: string; taxId: string; email: string } => {
+  return {
+    ...generateTaxIdAndBusinessName({}),
+    email: `some-email-${randomInt()}@whatever.com`,
     ...overrides,
   };
 };

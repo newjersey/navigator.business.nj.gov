@@ -266,13 +266,14 @@ export default {
         },
       },
     },
-    task_formation_date_modal: {
+    formation_date_modal: {
       submit: {
         formation_status_set_to_complete: () => {
-          sendEvent("task_formation_date_modal", "submit", "formation_status_set_to_complete");
+          sendEvent("formation_date_modal", "submit", "formation_status_set_to_complete");
         },
       },
     },
+
     task_status_checklist_edit_button: {
       click: {
         edit_address_form: () => {
@@ -660,6 +661,32 @@ export default {
       click: {
         go_to_date_detail_screen: () => {
           sendEvent("calendar_date", "click", "go_to_date_detail_screen");
+        },
+      },
+    },
+
+    tax_calendar_banner_button: {
+      click: {
+        show_tax_calendar_modal: () =>
+          sendEvent("tax_calendar_banner_button", "click", "show_tax_calendar_modal"),
+      },
+    },
+    tax_calendar_modal: {
+      submit: {
+        tax_calendar_modal_validation_error: () =>
+          sendEvent("tax_calendar_modal", "submit", "tax_calendar_modal_validation_error"),
+        tax_calendar_business_does_not_exist: () =>
+          sendEvent("tax_calendar_modal", "submit", "tax_calendar_business_does_not_exist"),
+        business_exists_but_not_in_Gov2Go: () =>
+          sendEvent("tax_calendar_modal", "submit", "business_exists_but_not_in_Gov2Go"),
+        tax_deadlines_added_to_calendar: () =>
+          sendEvent("tax_calendar_modal", "submit", "tax_deadlines_added_to_calendar"),
+        formation_date_modal: {
+          submit: {
+            formation_status_set_to_complete: () => {
+              sendEvent("formation_date_modal", "submit", "formation_status_set_to_complete");
+            },
+          },
         },
       },
     },

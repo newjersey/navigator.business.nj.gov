@@ -35,6 +35,7 @@ export const createEmptyUserData = (user: BusinessUser): UserData => {
       isHideableRoadmapOpen: false,
     },
     taxFilingData: {
+      state: undefined,
       filings: [],
     },
     formationData: {

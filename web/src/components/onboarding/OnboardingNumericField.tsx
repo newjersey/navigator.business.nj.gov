@@ -11,13 +11,20 @@ interface NumericFieldProps {
 interface Props extends Omit<OnboardingProps, "numericProps">, NumericFieldProps {}
 
 export const OnboardingNumericField = ({ minLength, maxLength, ...props }: Props): ReactElement => {
+  const validationText =
+    minLength === undefined
+      ? templateEval(Config.onboardingDefaults.errorTextMinimumNumericField, {
+          length: maxLength.toString(),
+        })
+      : templateEval(Config.onboardingDefaults.errorTextMinimumRangeNumericField, {
+          min: minLength.toString(),
+          max: maxLength.toString(),
+        });
   return (
     <OnboardingField
-      validationText={templateEval(Config.onboardingDefaults.errorTextMinimumNumericField, {
-        length: maxLength.toString(),
-      })}
-      {...props}
       numericProps={{ minLength, maxLength }}
+      {...props}
+      validationText={props.validationText ?? validationText}
     />
   );
 };

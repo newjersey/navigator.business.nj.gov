@@ -1,4 +1,9 @@
-import { generateNameAndAddress, generateUser, generateUserData } from "@/test/factories";
+import {
+  generateNameAndAddress,
+  generateTaxIdAndBusinessName,
+  generateUser,
+  generateUserData,
+} from "@/test/factories";
 import axios from "axios";
 import {
   checkLicenseStatus,
@@ -7,6 +12,7 @@ import {
   postFeedback,
   postIssue,
   postNewsletter,
+  postTaxRegistrationOnboarding,
   postUserData,
 } from "./apiClient";
 
@@ -53,6 +59,15 @@ describe("apiClient", () => {
     const nameAndAddress = generateNameAndAddress({});
     await checkLicenseStatus(nameAndAddress);
     expect(mockAxios.post).toHaveBeenCalledWith("/api/license-status", nameAndAddress, {
+      headers: { Authorization: "Bearer some-token" },
+    });
+  });
+
+  it("posts gov2go onboarding request", async () => {
+    mockAxios.post.mockResolvedValue({ data: {} });
+    const taxIdAndBusinessName = generateTaxIdAndBusinessName({});
+    await postTaxRegistrationOnboarding(taxIdAndBusinessName);
+    expect(mockAxios.post).toHaveBeenCalledWith("/api/gov2go/onboarding", taxIdAndBusinessName, {
       headers: { Authorization: "Bearer some-token" },
     });
   });

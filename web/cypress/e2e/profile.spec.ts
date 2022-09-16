@@ -264,7 +264,7 @@ describe("Profile [feature] [all] [group1]", () => {
     });
 
     updateForeignBusinessProfilePage({
-      taxId: randomInt(9).toString(),
+      taxId: randomInt() % 2 ? randomInt(9).toString() : randomInt(12).toString(),
       notes: `Notes ${randomInt()}`,
     });
   });

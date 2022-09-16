@@ -17,7 +17,7 @@ interface ProfileDataState {
   municipalities: Municipality[];
 }
 
-interface ProfileDataContextType {
+export interface ProfileDataContextType {
   state: ProfileDataState;
   setProfileData: (profileData: ProfileData) => void;
   setUser: (user: BusinessUser) => void;
