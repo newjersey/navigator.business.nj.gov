@@ -74,7 +74,14 @@ export const ButtonDropdown = (props: Props): ReactElement => {
         </div>
       </button>
 
-      <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal={true}>
+      <Popper
+        open={open}
+        anchorEl={anchorRef.current}
+        className="z-100"
+        role={undefined}
+        transition
+        disablePortal={true}
+      >
         {({ TransitionProps, placement }) => (
           <Grow
             {...TransitionProps}
