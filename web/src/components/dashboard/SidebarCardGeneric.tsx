@@ -67,7 +67,7 @@ export const SidebarCardGeneric = (props: Props) => {
           {props.ctaOnClick && props.card.ctaText && (
             <div className="margin-top-205 flex flex-justify-end">
               <Button
-                style="primary"
+                style="secondary"
                 onClick={props.ctaOnClick}
                 noRightMargin
                 dataTestid={`cta-${props.card.id}`}
