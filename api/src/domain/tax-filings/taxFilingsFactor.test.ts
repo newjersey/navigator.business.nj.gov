@@ -1,5 +1,5 @@
 import { randomInt } from "@shared/intHelpers";
-import { UserData } from "@shared/UserData";
+import { UserData } from "@shared/userData";
 import {
   generateTaxFiling,
   generateTaxFilingData,
