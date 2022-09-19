@@ -102,6 +102,8 @@ export const generateUserData = (overrides: Partial<UserData>): UserData => {
 export const generateTaxFilingData = (overrides: Partial<TaxFilingData>): TaxFilingData => {
   return {
     state: undefined,
+    businessName: undefined,
+    lastUpdated: overrides.state ? new Date(Date.now()).toISOString() : undefined,
     filings: [generateTaxFiling({})],
     ...overrides,
   };

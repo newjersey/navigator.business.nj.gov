@@ -99,6 +99,8 @@ type v85TaxFilingState = "SUCCESS" | "FAILED" | "PENDING" | "API_ERROR";
 
 type v85TaxFilingData = {
   state?: v85TaxFilingState;
+  lastUpdated?: string;
+  businessName?: string;
   filings: v85TaxFiling[];
 };
 

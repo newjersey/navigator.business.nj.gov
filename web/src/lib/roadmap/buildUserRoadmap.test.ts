@@ -287,15 +287,6 @@ describe("buildUserRoadmap", () => {
           expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("formation");
           process.env.FEATURE_BUSINESS_CCORP = "true";
         });
-
-        it("does not add formation for scorp legal type when feature flag is disabled", async () => {
-          process.env.FEATURE_BUSINESS_SCORP = "false";
-          await buildUserRoadmap(generateStartingProfile({ legalStructureId: "s-corporation" }));
-          expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("public-record-filing");
-          expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("trade-name");
-          expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("formation");
-          process.env.FEATURE_BUSINESS_SCORP = "true";
-        });
       });
     });
 

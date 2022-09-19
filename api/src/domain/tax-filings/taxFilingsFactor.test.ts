@@ -19,7 +19,11 @@ describe("TaxFilingsFactory", () => {
   let taxFilingClient: TaxFilingClient;
   let stubUserDataClient: jest.Mocked<UserDataClient>;
   let apiTaxFilingClient: jest.Mocked<ApiTaxFilingClient>;
+
   const userIdTaxIdBusinessName = { userId: randomInt(4).toString(), ...generateTaxIdAndBusinessName({}) };
+  const dateNow = Date.now();
+  const currentDate = new Date(dateNow);
+  const realDateNow = Date.now.bind(global.Date);
 
   beforeEach(async () => {
     jest.resetAllMocks();
@@ -27,6 +31,8 @@ describe("TaxFilingsFactory", () => {
       lookup: jest.fn(),
       onboarding: jest.fn(),
     };
+    const dateNowStub = jest.fn(() => dateNow);
+    global.Date.now = dateNowStub;
     stubUserDataClient = {
       get: jest.fn(),
       put: jest.fn(),
@@ -35,11 +41,16 @@ describe("TaxFilingsFactory", () => {
     taxFilingClient = taxFilingsFactory(stubUserDataClient, apiTaxFilingClient);
   });
 
+  afterEach(() => {
+    global.Date.now = realDateNow;
+  });
+
   describe("lookup", () => {
     describe("updates only state field when", () => {
       const userData = generateUserData({
         taxFilingData: generateTaxFilingData({
           state: undefined,
+          lastUpdated: undefined,
           filings: [generateTaxFiling({})],
         }),
       });
@@ -52,7 +63,12 @@ describe("TaxFilingsFactory", () => {
         stubUserDataClient.get.mockResolvedValue(userData);
         expect(await taxFilingClient.lookup(userIdTaxIdBusinessName)).toEqual({
           ...userData,
-          taxFilingData: { ...userData.taxFilingData, state: "FAILED" },
+          taxFilingData: {
+            ...userData.taxFilingData,
+            state: "FAILED",
+            businessName: userIdTaxIdBusinessName.businessName,
+            lastUpdated: currentDate.toISOString(),
+          },
         });
       });
 
@@ -64,7 +80,12 @@ describe("TaxFilingsFactory", () => {
         stubUserDataClient.get.mockResolvedValue(userData);
         expect(await taxFilingClient.lookup(userIdTaxIdBusinessName)).toEqual({
           ...userData,
-          taxFilingData: { ...userData.taxFilingData, state: "PENDING" },
+          taxFilingData: {
+            ...userData.taxFilingData,
+            state: "PENDING",
+            businessName: userIdTaxIdBusinessName.businessName,
+            lastUpdated: currentDate.toISOString(),
+          },
         });
       });
 
@@ -76,7 +97,12 @@ describe("TaxFilingsFactory", () => {
         stubUserDataClient.get.mockResolvedValue(userData);
         expect(await taxFilingClient.lookup(userIdTaxIdBusinessName)).toEqual({
           ...userData,
-          taxFilingData: { ...userData.taxFilingData, state: "API_ERROR" },
+          taxFilingData: {
+            ...userData.taxFilingData,
+            state: "API_ERROR",
+            businessName: userIdTaxIdBusinessName.businessName,
+            lastUpdated: currentDate.toISOString(),
+          },
         });
       });
     });
@@ -86,6 +112,7 @@ describe("TaxFilingsFactory", () => {
       const userData = generateUserData({
         taxFilingData: generateTaxFilingData({
           state: undefined,
+          lastUpdated: undefined,
           filings: [generateTaxFiling({})],
         }),
       });
@@ -96,7 +123,13 @@ describe("TaxFilingsFactory", () => {
       stubUserDataClient.get.mockResolvedValue(userData);
       expect(await taxFilingClient.lookup(userIdTaxIdBusinessName)).toEqual({
         ...userData,
-        taxFilingData: { ...userData.taxFilingData, state: "SUCCESS", filings: [filingData] },
+        taxFilingData: {
+          ...userData.taxFilingData,
+          state: "SUCCESS",
+          businessName: userIdTaxIdBusinessName.businessName,
+          filings: [filingData],
+          lastUpdated: currentDate.toISOString(),
+        },
       });
     });
   });
@@ -109,6 +142,7 @@ describe("TaxFilingsFactory", () => {
         userData = generateUserData({
           taxFilingData: generateTaxFilingData({
             state: undefined,
+            lastUpdated: undefined,
             filings: [generateTaxFiling({})],
           }),
         });
@@ -122,7 +156,12 @@ describe("TaxFilingsFactory", () => {
         stubUserDataClient.get.mockResolvedValue(userData);
         expect(await taxFilingClient.onboarding(userIdTaxIdBusinessName)).toEqual({
           ...userData,
-          taxFilingData: { ...userData.taxFilingData, state: "API_ERROR" },
+          taxFilingData: {
+            ...userData.taxFilingData,
+            state: "API_ERROR",
+            businessName: userIdTaxIdBusinessName.businessName,
+            lastUpdated: currentDate.toISOString(),
+          },
         });
         expect(apiTaxFilingClient.onboarding).not.toHaveBeenCalled();
       });
@@ -135,7 +174,12 @@ describe("TaxFilingsFactory", () => {
         stubUserDataClient.get.mockResolvedValue(userData);
         expect(await taxFilingClient.onboarding(userIdTaxIdBusinessName)).toEqual({
           ...userData,
-          taxFilingData: { ...userData.taxFilingData, state: "PENDING" },
+          taxFilingData: {
+            ...userData.taxFilingData,
+            state: "PENDING",
+            businessName: userIdTaxIdBusinessName.businessName,
+            lastUpdated: currentDate.toISOString(),
+          },
         });
         expect(apiTaxFilingClient.onboarding).not.toHaveBeenCalled();
       });
@@ -149,7 +193,13 @@ describe("TaxFilingsFactory", () => {
         stubUserDataClient.get.mockResolvedValue(userData);
         expect(await taxFilingClient.onboarding(userIdTaxIdBusinessName)).toEqual({
           ...userData,
-          taxFilingData: { ...userData.taxFilingData, state: "SUCCESS", filings: [filingData] },
+          taxFilingData: {
+            ...userData.taxFilingData,
+            state: "SUCCESS",
+            businessName: userIdTaxIdBusinessName.businessName,
+            filings: [filingData],
+            lastUpdated: currentDate.toISOString(),
+          },
         });
         expect(apiTaxFilingClient.onboarding).not.toHaveBeenCalled();
       });
@@ -159,6 +209,7 @@ describe("TaxFilingsFactory", () => {
       const userData = generateUserData({
         taxFilingData: generateTaxFilingData({
           state: undefined,
+          lastUpdated: undefined,
           filings: [generateTaxFiling({})],
         }),
       });
@@ -170,7 +221,12 @@ describe("TaxFilingsFactory", () => {
       stubUserDataClient.get.mockResolvedValue(userData);
       expect(await taxFilingClient.onboarding(userIdTaxIdBusinessName)).toEqual({
         ...userData,
-        taxFilingData: { ...userData.taxFilingData, state: "PENDING" },
+        taxFilingData: {
+          ...userData.taxFilingData,
+          state: "PENDING",
+          businessName: userIdTaxIdBusinessName.businessName,
+          lastUpdated: currentDate.toISOString(),
+        },
       });
     });
 
@@ -179,6 +235,7 @@ describe("TaxFilingsFactory", () => {
         const userData = generateUserData({
           taxFilingData: generateTaxFilingData({
             state: undefined,
+            lastUpdated: undefined,
             filings: [generateTaxFiling({})],
           }),
         });
@@ -190,7 +247,12 @@ describe("TaxFilingsFactory", () => {
         stubUserDataClient.get.mockResolvedValue(userData);
         expect(await taxFilingClient.onboarding(userIdTaxIdBusinessName)).toEqual({
           ...userData,
-          taxFilingData: { ...userData.taxFilingData, state: "PENDING" },
+          taxFilingData: {
+            ...userData.taxFilingData,
+            state: "PENDING",
+            businessName: userIdTaxIdBusinessName.businessName,
+            lastUpdated: currentDate.toISOString(),
+          },
         });
       });
 
@@ -199,6 +261,7 @@ describe("TaxFilingsFactory", () => {
           const userData = generateUserData({
             taxFilingData: generateTaxFilingData({
               state: undefined,
+              lastUpdated: undefined,
               filings: [generateTaxFiling({})],
             }),
           });
@@ -212,7 +275,12 @@ describe("TaxFilingsFactory", () => {
           stubUserDataClient.get.mockResolvedValue(userData);
           expect(await taxFilingClient.onboarding(userIdTaxIdBusinessName)).toEqual({
             ...userData,
-            taxFilingData: { ...userData.taxFilingData, state: "API_ERROR" },
+            taxFilingData: {
+              ...userData.taxFilingData,
+              state: "API_ERROR",
+              businessName: userIdTaxIdBusinessName.businessName,
+              lastUpdated: currentDate.toISOString(),
+            },
           });
         });
 
@@ -220,6 +288,7 @@ describe("TaxFilingsFactory", () => {
           const userData = generateUserData({
             taxFilingData: generateTaxFilingData({
               state: undefined,
+              lastUpdated: undefined,
               filings: [generateTaxFiling({})],
             }),
           });
@@ -231,7 +300,12 @@ describe("TaxFilingsFactory", () => {
           stubUserDataClient.get.mockResolvedValue(userData);
           expect(await taxFilingClient.onboarding(userIdTaxIdBusinessName)).toEqual({
             ...userData,
-            taxFilingData: { ...userData.taxFilingData, state: "FAILED" },
+            taxFilingData: {
+              ...userData.taxFilingData,
+              state: "FAILED",
+              businessName: userIdTaxIdBusinessName.businessName,
+              lastUpdated: currentDate.toISOString(),
+            },
           });
         });
       });

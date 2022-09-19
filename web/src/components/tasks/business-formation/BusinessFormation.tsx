@@ -36,7 +36,6 @@ export const allowFormation = (legalStructureId: string | undefined) => {
     "limited-partnership": process.env.FEATURE_BUSINESS_LP == "true",
     "limited-liability-partnership": process.env.FEATURE_BUSINESS_LLP == "true",
     "c-corporation": process.env.FEATURE_BUSINESS_CCORP == "true",
-    "s-corporation": process.env.FEATURE_BUSINESS_SCORP == "true",
   };
   if (FormationLegalTypes.includes(legalStructureId as FormationLegalType)) {
     return featureFlagMap[legalStructureId as FormationLegalType] ?? true;

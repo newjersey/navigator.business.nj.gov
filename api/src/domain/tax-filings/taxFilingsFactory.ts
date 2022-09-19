@@ -3,7 +3,7 @@ import { ApiTaxFilingClient, TaxFilingClient, UserDataClient } from "../types";
 
 export const taxFilingsFactory = (
   userDataClient: UserDataClient,
-  taxFilingClient: ApiTaxFilingClient
+  apiTaxFilingClient: ApiTaxFilingClient
 ): TaxFilingClient => {
   const lookup = async (props: {
     userId: string;
@@ -11,11 +11,27 @@ export const taxFilingsFactory = (
     businessName: string;
   }): Promise<UserData> => {
     let userData = await userDataClient.get(props.userId);
-    const response = await taxFilingClient.lookup(props.taxId, props.businessName);
+    const response = await apiTaxFilingClient.lookup(props.taxId, props.businessName);
     userData =
       response.state == "SUCCESS"
-        ? { ...userData, taxFilingData: { ...userData.taxFilingData, ...response } }
-        : { ...userData, taxFilingData: { ...userData.taxFilingData, state: response.state } };
+        ? {
+            ...userData,
+            taxFilingData: {
+              ...userData.taxFilingData,
+              businessName: props.businessName,
+              lastUpdated: new Date(Date.now()).toISOString(),
+              ...response,
+            },
+          }
+        : {
+            ...userData,
+            taxFilingData: {
+              ...userData.taxFilingData,
+              businessName: props.businessName,
+              lastUpdated: new Date(Date.now()).toISOString(),
+              state: response.state,
+            },
+          };
     return userData;
   };
 
@@ -30,11 +46,31 @@ export const taxFilingsFactory = (
       businessName: props.businessName,
     });
     if (userData.taxFilingData.state === "FAILED") {
-      const response = await taxFilingClient.onboarding(props.taxId, userData.user.email, props.businessName);
+      const response = await apiTaxFilingClient.onboarding(
+        props.taxId,
+        userData.user.email,
+        props.businessName
+      );
       userData =
         response.state == "SUCCESS"
-          ? { ...userData, taxFilingData: { ...userData.taxFilingData, state: "PENDING" } }
-          : { ...userData, taxFilingData: { ...userData.taxFilingData, state: response.state } };
+          ? {
+              ...userData,
+              taxFilingData: {
+                ...userData.taxFilingData,
+                businessName: props.businessName,
+                lastUpdated: new Date(Date.now()).toISOString(),
+                state: "PENDING",
+              },
+            }
+          : {
+              ...userData,
+              taxFilingData: {
+                ...userData.taxFilingData,
+                businessName: props.businessName,
+                lastUpdated: new Date(Date.now()).toISOString(),
+                state: response.state,
+              },
+            };
     }
     return userData;
   };

@@ -4,6 +4,7 @@ import { OnboardingTaxId } from "@/components/onboarding/OnboardingTaxId";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { postTaxRegistrationOnboarding } from "@/lib/api-client/apiClient";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import analytics from "@/lib/utils/analytics";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { createEmptyProfileData, ProfileData, UserData } from "@businessnjgovnavigator/shared";
 import { Backdrop, CircularProgress } from "@mui/material";
@@ -54,7 +55,10 @@ export const Gov2GoModal = (props: Props): ReactElement => {
     setOnSubmitClicked(true);
     const errors = getErrors();
     setFieldStates((prev) => ({ ...prev, ...errors }));
-    if (hasErrors(errors)) return;
+    if (hasErrors(errors)) {
+      analytics.event.tax_calendar_modal.submit.tax_calendar_modal_validation_error();
+      return;
+    }
     setIsLoading(true);
     let userDataToSet: UserData;
     try {
@@ -75,11 +79,13 @@ export const Gov2GoModal = (props: Props): ReactElement => {
     await update(userDataToSet);
     if (userDataToSet.taxFilingData.state == "SUCCESS") {
       setIsLoading(false);
+      analytics.event.tax_calendar_modal.submit.tax_deadlines_added_to_calendar();
       props.onSuccess();
     }
 
     if (userDataToSet.taxFilingData.state == "PENDING") {
       setIsLoading(false);
+      analytics.event.tax_calendar_modal.submit.business_exists_but_not_in_Gov2Go();
       props.close();
     }
 
@@ -94,6 +100,7 @@ export const Gov2GoModal = (props: Props): ReactElement => {
         ),
       }));
       setOnAPIfailed("FAILED");
+      analytics.event.tax_calendar_modal.submit.tax_calendar_business_does_not_exist();
       setIsLoading(false);
     }
 
