@@ -11,7 +11,8 @@ export const OnboardingLocationInNewJersey = (): ReactElement => {
   const { Config } = useConfig();
 
   const handleSelection = (event: React.ChangeEvent<{ name?: string; value: unknown }>) => {
-    const hasLocationInNJ = event.target.value === "true";
+    let hasLocationInNJ;
+    event.target.value === "true" ? (hasLocationInNJ = true) : (hasLocationInNJ = false);
     setProfileData({
       ...state.profileData,
       nexusLocationInNewJersey: hasLocationInNJ,
