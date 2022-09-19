@@ -47,21 +47,22 @@ export const TaxRegistrationModal = (props: Props): ReactElement => {
     const errorMap = {
       ...fieldStates,
       businessName: {
-        invalid:
-          !profileData.businessName &&
-          LookupLegalStructureById(userData?.profileData.legalStructureId).requiresPublicFiling,
+        invalid: !profileData.businessName && showBusinessField(),
       },
       existingEmployees: { invalid: !profileData.existingEmployees },
       taxId: {
-        invalid:
-          !profileData.taxId &&
-          LookupLegalStructureById(userData?.profileData.legalStructureId).requiresPublicFiling,
+        invalid: !profileData.taxId && showTaxIdField(),
       },
     };
     setFieldStates(errorMap);
     if (Object.keys(errorMap).some((k) => errorMap[k as ProfileFields].invalid)) return;
+    let { taxFilingData } = userData;
 
-    const updatedUserData = { ...userData, profileData };
+    if (userData.profileData.taxId != profileData.taxId) {
+      taxFilingData = { ...taxFilingData, state: undefined };
+    }
+
+    const updatedUserData = { ...userData, profileData, taxFilingData };
     await update(updatedUserData);
     props.onSave("COMPLETED", updatedUserData, { redirectOnSuccess: true });
     props.close();
@@ -100,9 +101,11 @@ export const TaxRegistrationModal = (props: Props): ReactElement => {
           <Content>{Config.taxRegistrationModal.subtitle}</Content>
         </div>
         {showBusinessField() && (
-          <OnboardingBusinessName onValidation={onValidation} fieldStates={fieldStates} />
+          <OnboardingBusinessName onValidation={onValidation} fieldStates={fieldStates} required />
         )}
-        {showTaxIdField() && <OnboardingTaxId onValidation={onValidation} fieldStates={fieldStates} />}
+        {showTaxIdField() && (
+          <OnboardingTaxId onValidation={onValidation} fieldStates={fieldStates} required />
+        )}
         <OnboardingOwnership headerAriaLevel={3} />
         <div className="margin-top-3" aria-hidden={true} />
         <OnboardingExistingEmployees

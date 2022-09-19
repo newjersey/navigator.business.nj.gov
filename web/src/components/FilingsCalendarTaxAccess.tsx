@@ -1,18 +1,34 @@
 import { Content } from "@/components/Content";
 import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
+import { postTaxRegistrationOnboarding } from "@/lib/api-client/apiClient";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import analytics from "@/lib/utils/analytics";
 import { LookupLegalStructureById, LookupOperatingPhaseById } from "@businessnjgovnavigator/shared/";
 
 import { ReactElement, useState } from "react";
+import { useMountEffectWhenDefined } from "../lib/utils/helpers";
 import { Gov2GoModal } from "./Gov2GoModal";
 import { Button } from "./njwds-extended/Button";
 
 export const FilingsCalendarTaxAccess = (): ReactElement => {
-  const { userData } = useUserData();
+  const { userData, update } = useUserData();
   const { Config } = useConfig();
   const [showModal, setShowModal] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
+
+  useMountEffectWhenDefined(() => {
+    if (!userData) return;
+    (async () => {
+      if (userData.taxFilingData.state == "PENDING") {
+        const updatedUserData = await postTaxRegistrationOnboarding({
+          businessName: userData.taxFilingData.businessName as string,
+          taxId: userData.profileData.taxId as string,
+        });
+        update(updatedUserData);
+      }
+    })();
+  }, userData);
 
   const getBody = () => {
     if (userData?.taxFilingData.state == "PENDING") {
@@ -46,7 +62,8 @@ export const FilingsCalendarTaxAccess = (): ReactElement => {
             style={"secondary"}
             noRightMargin
             onClick={() => {
-              setShowModal(!showModal);
+              analytics.event.tax_calendar_banner_button.click.show_tax_calendar_modal();
+              setShowModal(true);
             }}
           >
             {Config.dashboardDefaults.taxCalendarAccessButton}
@@ -59,16 +76,22 @@ export const FilingsCalendarTaxAccess = (): ReactElement => {
   };
   return (
     <>
-      <SnackbarAlert
-        variant={"success"}
-        isOpen={showAlert}
-        close={() => setShowAlert(false)}
-        heading={Config.dashboardDefaults.taxCalendarSnackbarSuccessHeader}
-        dataTestid={"tax-success"}
-      >
-        <Content>{Config.dashboardDefaults.taxCalendarSnackbarSuccessBody}</Content>
-      </SnackbarAlert>
-      {getBody()}
+      {process.env.FEATURE_TAX_CALENDAR == "true" ? (
+        <>
+          <SnackbarAlert
+            variant={"success"}
+            isOpen={showAlert}
+            close={() => setShowAlert(false)}
+            heading={Config.dashboardDefaults.taxCalendarSnackbarSuccessHeader}
+            dataTestid={"tax-success"}
+          >
+            <Content>{Config.dashboardDefaults.taxCalendarSnackbarSuccessBody}</Content>
+          </SnackbarAlert>
+          {getBody()}
+        </>
+      ) : (
+        <></>
+      )}
     </>
   );
 };

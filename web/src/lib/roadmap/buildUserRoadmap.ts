@@ -23,9 +23,7 @@ const enableFormation = (legalStructureId: string): boolean => {
     case "c-corporation": {
       return process.env.FEATURE_BUSINESS_CCORP === "true";
     }
-    case "s-corporation": {
-      return process.env.FEATURE_BUSINESS_SCORP === "true";
-    }
+
     default:
       return true;
   }

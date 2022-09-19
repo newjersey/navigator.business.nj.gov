@@ -169,8 +169,14 @@ const ProfilePage = (props: Props): ReactElement => {
     setRoadmap(newRoadmap);
 
     const { taskProgress } = userData;
+    let { taxFilingData } = userData;
+
     if (profileData.employerId && profileData.employerId.length > 0) {
       taskProgress[einTaskId] = "COMPLETED";
+    }
+
+    if (userData.profileData.taxId != profileData.taxId) {
+      taxFilingData = { ...taxFilingData, state: undefined };
     }
 
     let newUserData: UserData = {
@@ -178,7 +184,9 @@ const ProfilePage = (props: Props): ReactElement => {
       profileData: profileData,
       formProgress: "COMPLETED",
       taskProgress,
+      taxFilingData,
     };
+
     setSectionCompletion(getSectionCompletion(newRoadmap, newUserData));
     newUserData = await postGetAnnualFilings(newUserData);
     update(newUserData).then(async () => {

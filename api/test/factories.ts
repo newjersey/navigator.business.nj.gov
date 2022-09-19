@@ -57,8 +57,8 @@ export const generateUser = (overrides: Partial<BusinessUser>): BusinessUser => 
 export const generateTaxFilingResults = (ids?: string[], number?: number): TaxFilingResults => {
   const generateValues = () => {
     const dateToShortISO = (date: Date): string => date.toISOString().split("T")[0];
-    const date = new Date();
-    const futureDate = new Date();
+    const date = new Date(Date.now());
+    const futureDate = new Date(Date.now());
     futureDate.setFullYear(futureDate.getFullYear() + 2);
     return [...Array.from({ length: Number(number ?? randomIntFromInterval("4", "12")) }).keys()].map(() =>
       getRandomDateInBetween(dateToShortISO(date), dateToShortISO(futureDate)).toLocaleDateString()
@@ -128,6 +128,8 @@ export const generateUserData = (overrides: Partial<UserData>): UserData => {
 export const generateTaxFilingData = (overrides: Partial<TaxFilingData>): TaxFilingData => {
   return {
     state: undefined,
+    businessName: undefined,
+    lastUpdated: overrides.state ? new Date(Date.now()).toISOString() : undefined,
     filings: [generateTaxFiling({})],
     ...overrides,
   };
