@@ -5,9 +5,10 @@ import { GenericTextField } from "@/components/GenericTextField";
 import { OnboardingField, OnboardingProps } from "@/components/onboarding/OnboardingField";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { formatTaxId } from "@/lib/domain-logic/formatTaxId";
 import { ProfileFieldErrorMap } from "@/lib/types/types";
-import { getTaxIdFormat, setHeaderRole } from "@/lib/utils/helpers";
-import { ReactElement, useContext, useEffect, useRef, useState } from "react";
+import { setHeaderRole } from "@/lib/utils/helpers";
+import { ReactElement, useContext, useRef, useState } from "react";
 
 interface Props extends Omit<OnboardingProps, "fieldName" | "handleChange"> {
   fieldStates: ProfileFieldErrorMap;
@@ -41,17 +42,27 @@ export const OnboardingTaxId = ({
   const [taxIdValue, setTaxIdValue] = useState(state.profileData[fieldName]?.trim().slice(0, 9) ?? "");
   const [errorMap, setErrorMap] = useState({ taxId: false, taxIdLocation: false });
 
-  useEffect(() => {
-    const resolvedValue = "".concat(...taxIdValue, ...locationValue);
+  const handleChange = (value: string, type: "taxId" | "taxIdLocation") => {
+    let resolvedValue = "".concat(...taxIdValue, ...locationValue);
+    if (type == "taxId") {
+      setTaxIdValue(value);
+      resolvedValue = "".concat(...value, ...locationValue);
+      if (value.length === 9) locationBoxRef.current?.querySelector("input")?.focus();
+    }
+    if (type == "taxIdLocation") {
+      resolvedValue = "".concat(...taxIdValue, ...value);
+      setLocationValue(value);
+    }
+
     if (handleChangeOverride) {
       handleChangeOverride(resolvedValue);
       return;
     }
+
     const profileData = { ...state.profileData };
     profileData[fieldName] = resolvedValue;
     setProfileData(profileData);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [handleChangeOverride, locationValue, taxIdValue]);
+  };
 
   const onValidation = (valFieldName: string, invalid: boolean) => {
     const errors = { ...errorMap, [valFieldName]: invalid };
@@ -72,7 +83,7 @@ export const OnboardingTaxId = ({
       <OnboardingField
         error={error}
         fieldName={fieldName}
-        visualFilter={getTaxIdFormat}
+        visualFilter={formatTaxId}
         validationText={validationText}
         inputErrorBar={inputErrorBar}
         numericProps={{ minLength: 9, maxLength: 12 }}
@@ -110,15 +121,14 @@ export const OnboardingTaxId = ({
           }}
           fieldName={fieldName as string}
           error={error}
-          visualFilter={getTaxIdFormat}
+          visualFilter={formatTaxId}
           {...props}
           numericProps={{ minLength: 9, maxLength: 9 }}
           validationText={
             validationText ?? (Config.profileDefaults[state.flow][fieldName] as any).errorTextRequired ?? ""
           }
           handleChange={(value) => {
-            setTaxIdValue(value);
-            if (value.length === 9) locationBoxRef.current?.querySelector("input")?.focus();
+            handleChange(value, "taxId");
           }}
           onValidation={onValidation}
         />
@@ -132,7 +142,7 @@ export const OnboardingTaxId = ({
           {...props}
           numericProps={{ minLength: 3, maxLength: 3 }}
           handleChange={(value) => {
-            setLocationValue(value);
+            handleChange(value, "taxIdLocation");
           }}
           onValidation={onValidation}
         />

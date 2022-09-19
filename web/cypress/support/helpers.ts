@@ -1,3 +1,4 @@
+import { formatTaxId } from "@/lib/domain-logic/formatTaxId";
 import { isEntityIdApplicable } from "@/lib/domain-logic/isEntityIdApplicable";
 import {
   arrayOfSectors,
@@ -510,9 +511,8 @@ export const checkNewBusinessProfilePage = ({
 
   const employerIdWithMatch = employerId.match("^[0-9]$") ? employerId.match("^[0-9]$") : "";
   onProfilePage.getEmployerId().invoke("prop", "value").should("contain", employerIdWithMatch);
-  onProfilePage.getTaxId().invoke("prop", "value").should("contain", taxId);
+  onProfilePage.getTaxId().invoke("prop", "value").should("contain", formatTaxId(taxId));
   onProfilePage.getNotes().invoke("prop", "value").should("contain", notes);
-
   if (isEntityIdApplicable(companyType)) {
     onProfilePage.getEntityId().should("exist");
     onProfilePage.getEntityId().invoke("prop", "value").should("contain", entityId);
@@ -573,7 +573,7 @@ export const checkExistingBusinessProfilePage = ({
     .invoke("prop", "value")
     .should("contain", businessFormationDate);
 
-  onProfilePage.getTaxId().invoke("prop", "value").should("contain", taxId);
+  onProfilePage.getTaxId().invoke("prop", "value").should("contain", formatTaxId(taxId));
   onProfilePage.getNotes().invoke("prop", "value").should("contain", notes);
   onProfilePage.getTaxPin().invoke("prop", "value").should("contain", taxPin);
 
@@ -657,8 +657,8 @@ export const updateNewBusinessProfilePage = ({
   }
 
   if (taxId) {
-    onProfilePage.typeTaxId(taxId);
-    onProfilePage.getTaxId().invoke("prop", "value").should("contain", taxId);
+    onProfilePage.typeTaxId(formatTaxId(taxId));
+    onProfilePage.getTaxId().invoke("prop", "value").should("contain", formatTaxId(taxId));
   }
 
   if (notes) {
@@ -753,8 +753,8 @@ export const updateExistingBusinessProfilePage = ({
   }
 
   if (taxId) {
-    onProfilePage.typeTaxId(taxId);
-    onProfilePage.getTaxId().invoke("prop", "value").should("contain", taxId);
+    onProfilePage.typeTaxId(formatTaxId(taxId));
+    onProfilePage.getTaxId().invoke("prop", "value").should("contain", formatTaxId(taxId));
   }
 
   if (taxPin) {
@@ -778,8 +778,8 @@ export const updateForeignBusinessProfilePage = ({ taxId, notes }: Partial<Forei
   cy.wait(1000);
 
   if (taxId) {
-    onProfilePage.typeTaxId(taxId);
-    onProfilePage.getTaxId().invoke("prop", "value").should("contain", taxId);
+    onProfilePage.typeTaxId(formatTaxId(taxId));
+    onProfilePage.getTaxId().invoke("prop", "value").should("contain", formatTaxId(taxId));
   }
 
   if (notes) {
