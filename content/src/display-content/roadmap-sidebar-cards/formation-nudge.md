@@ -10,6 +10,4 @@ hasCloseButton: false
 weight: 1
 ---
 
-[Form Your Business](/tasks/form-business-entity) to see your annual reporting due date.
-
-**Already completed formation?** Mark the task as "Complete".
+[Form Your Business](/tasks/form-business-entity) to see your annual reporting due date. Annual reports are required and keeps your business formation information up to date.
