@@ -229,14 +229,23 @@ export const getOnboardingFlows = (
         name: "municipality-page",
         component: (
           <>
-            <OnboardingMunicipality onValidation={onValidation} fieldStates={fieldStates} />
+            <OnboardingLocationInNewJersey />
             <div className="margin-top-3">
-              <OnboardingLocationInNewJersey />
+              {profileData.nexusLocationInNewJersey && (
+                <OnboardingMunicipality onValidation={onValidation} fieldStates={fieldStates} />
+              )}
             </div>
           </>
         ),
         getErrorMap: () => ({
-          inline: [{ name: "municipality", valid: profileData.municipality !== undefined }],
+          inline: [
+            {
+              name: "municipality",
+              valid:
+                profileData.municipality !== undefined ||
+                (profileData.municipality === undefined && profileData.nexusLocationInNewJersey === false),
+            },
+          ],
           banner: [
             {
               name: "REQUIRED_NEXUS_LOCATION_IN_NJ",

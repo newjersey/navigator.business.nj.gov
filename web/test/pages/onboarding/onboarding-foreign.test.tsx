@@ -330,8 +330,8 @@ describe("onboarding - foreign business", () => {
 
     it("displays location question and saves in profileData", async () => {
       const { page } = renderPage({ userData, municipalities: [newark] });
-      page.selectByText("Location", "Newark");
       page.chooseRadio("location-in-new-jersey-true");
+      page.selectByText("Location", "Newark");
       await page.visitStep(6);
       expect(currentUserData().profileData.municipality?.displayName).toEqual("Newark");
     });
@@ -352,8 +352,8 @@ describe("onboarding - foreign business", () => {
 
     it("sets homeBasedBusiness to false when YES is selected for Location In New Jersey", async () => {
       const { page } = renderPage({ userData, municipalities: [newark] });
-      page.selectByText("Location", "Newark");
       page.chooseRadio("location-in-new-jersey-true");
+      page.selectByText("Location", "Newark");
       await page.visitStep(6);
       expect(currentUserData().profileData.homeBasedBusiness).toEqual(false);
       expect(currentUserData().profileData.nexusLocationInNewJersey).toEqual(true);
@@ -361,7 +361,6 @@ describe("onboarding - foreign business", () => {
 
     it("displays homeBasedBusiness question when NO is selected for Location In New Jersey", async () => {
       const { page } = renderPage({ userData, municipalities: [newark] });
-      page.selectByText("Location", "Newark");
       expect(
         screen.queryByText(markdownToText(Config.profileDefaults.FOREIGN.homeBased.header))
       ).not.toBeInTheDocument();
@@ -369,6 +368,28 @@ describe("onboarding - foreign business", () => {
       expect(
         screen.getByText(markdownToText(Config.profileDefaults.FOREIGN.homeBased.header))
       ).toBeInTheDocument();
+    });
+
+    it("displays location question when YES is selected for Location In New Jersey", async () => {
+      const { page } = renderPage({ userData, municipalities: [newark] });
+      expect(
+        screen.queryByText(markdownToText(Config.profileDefaults.FOREIGN.municipality.header))
+      ).not.toBeInTheDocument();
+      page.chooseRadio("location-in-new-jersey-true");
+      expect(
+        screen.getByText(markdownToText(Config.profileDefaults.FOREIGN.municipality.header))
+      ).toBeInTheDocument();
+    });
+
+    it("doesn't display location question when NO is selected for Location In New Jersey", async () => {
+      const { page } = renderPage({ userData, municipalities: [newark] });
+      expect(
+        screen.queryByText(markdownToText(Config.profileDefaults.FOREIGN.municipality.header))
+      ).not.toBeInTheDocument();
+      page.chooseRadio("location-in-new-jersey-false");
+      expect(
+        screen.queryByText(markdownToText(Config.profileDefaults.FOREIGN.municipality.header))
+      ).not.toBeInTheDocument();
     });
 
     it("prevents user from moving past Step 5 if you have not selected a location", async () => {
@@ -386,32 +407,36 @@ describe("onboarding - foreign business", () => {
       await page.visitStep(6);
     });
 
-    it("prevents user from moving past Step 5 if you have not selected whether Location is in New Jersey", async () => {
+    it("prevents user from moving past Step 5 if you have not selected a municipality in New Jersey", async () => {
       const { page } = renderPage({ userData, municipalities: [newark] });
-      page.selectByText("Location", "Newark");
-      act(() => page.clickNext());
-      expect(screen.getByTestId("step-5")).toBeInTheDocument();
-      expect(screen.queryByTestId("step-6")).not.toBeInTheDocument();
-      expect(
-        screen.getByText(Config.profileDefaults.FOREIGN.locationInNewJersey.errorTextRequired)
-      ).toBeInTheDocument();
-
       page.chooseRadio("location-in-new-jersey-true");
-      await page.visitStep(6);
-    });
-
-    it("shows both error messages if both are missing", async () => {
-      const { page } = renderPage({ userData, municipalities: [newark] });
       act(() => page.clickNext());
       expect(screen.getByTestId("step-5")).toBeInTheDocument();
       expect(screen.queryByTestId("step-6")).not.toBeInTheDocument();
-      expect(
-        screen.getByText(Config.profileDefaults.FOREIGN.locationInNewJersey.errorTextRequired)
-      ).toBeInTheDocument();
       expect(
         screen.getByText(Config.profileDefaults.FOREIGN.municipality.errorTextRequired)
       ).toBeInTheDocument();
+      page.selectByText("Location", "Newark");
+      await page.visitStep(6);
+    });
+
+    it("shows error message a option for whether Location in New Jersey is not selected", async () => {
+      const { page } = renderPage({ userData, municipalities: [newark] });
+      act(() => page.clickNext());
+      expect(screen.getByTestId("step-5")).toBeInTheDocument();
+      expect(screen.queryByTestId("step-6")).not.toBeInTheDocument();
+      expect(
+        screen.getByText(Config.profileDefaults.FOREIGN.locationInNewJersey.errorTextRequired)
+      ).toBeInTheDocument();
       expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
+    });
+
+    it("lets the user progress if they don't plan on owning or leasing a space and don't select a location", async () => {
+      const { page } = renderPage({ userData, municipalities: [newark] });
+      page.chooseRadio("location-in-new-jersey-false");
+      await page.visitStep(6);
+      expect(screen.queryByTestId("step-5")).not.toBeInTheDocument();
+      expect(screen.getByTestId("step-6")).toBeInTheDocument();
     });
   });
 
