@@ -44,7 +44,7 @@ describe("<SidebarCardFormationNudge />", () => {
       card = generateSidebarCardContent({ id: "formation-nudge" });
     });
 
-    it("allows user in NEEDS_TO_FORM Phase to see modal", () => {
+    it("opens the modal when the user clicks the formation nudge", () => {
       renderWithUserData({
         profileData: generateProfileData({
           businessPersona: "STARTING",
@@ -90,7 +90,7 @@ describe("<SidebarCardFormationNudge />", () => {
       );
     });
 
-    it("allows user to click the cancel button", () => {
+    it("closes the modal and does not update user data when the user clicks the cancel button", () => {
       const initialUserData = generateUserData({});
       renderWithUserData(initialUserData);
 
