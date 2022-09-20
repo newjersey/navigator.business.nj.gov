@@ -1,5 +1,4 @@
 import { ArrowTooltip } from "@/components/ArrowTooltip";
-import { CongratulatoryModal } from "@/components/CongratulatoryModal";
 import { Content } from "@/components/Content";
 import { FormationDateModal } from "@/components/FormationDateModal";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
@@ -11,18 +10,13 @@ import { TaskProgressTagLookup } from "@/components/TaskProgressTagLookup";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
+import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { routeForPersona } from "@/lib/domain-logic/routeForPersona";
-import { SectionType, Task, TaskProgress } from "@/lib/types/types";
+import { Task, TaskProgress } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
-import {
-  getModifiedTaskBooleanUndefined,
-  getModifiedTaskContent,
-  getSectionCompletion,
-  getSectionPositions,
-  setPreferencesCloseSection,
-} from "@/lib/utils/helpers";
-import { emptyProfileData, isFormationTask, isTaxTask, UserData } from "@businessnjgovnavigator/shared";
+import { getModifiedTaskBooleanUndefined, getModifiedTaskContent } from "@/lib/utils/helpers";
+import { emptyProfileData, isFormationTask, isTaxTask } from "@businessnjgovnavigator/shared";
 import { useRouter } from "next/router";
 import { ReactElement, useState } from "react";
 import { TaxRegistrationModal } from "./TaxRegistrationModal";
@@ -33,10 +27,8 @@ interface Props {
 }
 
 export const TaskHeader = (props: Props): ReactElement => {
-  const { userData, update } = useUserData();
-  const { roadmap, sectionCompletion, updateStatus } = useRoadmap();
-  const [nextSection, setNextSection] = useState<SectionType | undefined>(undefined);
-  const [congratulatoryModalIsOpen, setCongratulatoryModalIsOpen] = useState<boolean>(false);
+  const { userData, updateQueue } = useUserData();
+  const { roadmap } = useRoadmap();
   const [formationModalIsOpen, setFormationModalIsOpen] = useState<boolean>(false);
   const [taxRegistrationModalIsOpen, setTaxRegistrationModalIsOpen] = useState<boolean>(false);
   const [areYouSureModalDesiredNewStatus, setAreYouSureModalDesiredNewStatus] = useState<
@@ -47,20 +39,16 @@ export const TaskHeader = (props: Props): ReactElement => {
     TaskProgress | undefined
   >(undefined);
   const router = useRouter();
+  const { queueUpdateTaskProgress, congratulatoryModal } = useUpdateTaskProgress();
 
   const { Config } = useConfig();
-
-  const handleModalClose = (): void => {
-    setCongratulatoryModalIsOpen(false);
-  };
 
   const hasCompletedAPIFormation = (): boolean => {
     return userData?.formationData.getFilingResponse?.success === true;
   };
 
   const onDropdownChanged = (newValue: TaskProgress): void => {
-    if (!userData) return;
-    let updatedUserData = { ...userData };
+    if (!userData || !updateQueue) return;
     const currentTaskProgress = userData.taskProgress[props.task.id];
     if (currentTaskProgress === newValue) return;
 
@@ -73,13 +61,7 @@ export const TaskHeader = (props: Props): ReactElement => {
         setAreYouSureModalDesiredNewStatus(newValue);
         return;
       } else {
-        updatedUserData = {
-          ...userData,
-          profileData: {
-            ...userData.profileData,
-            dateOfFormation: emptyProfileData.dateOfFormation,
-          },
-        };
+        updateQueue.queueProfileData({ dateOfFormation: emptyProfileData.dateOfFormation });
       }
       setAreYouSureModalDesiredNewStatus(undefined);
     }
@@ -97,48 +79,28 @@ export const TaskHeader = (props: Props): ReactElement => {
 
     setFormationModalIsOpen(false);
     setTaxRegistrationModalIsOpen(false);
-    updateTaskProgress(newValue, updatedUserData, { redirectOnSuccess: false });
+    updateAndReroute(newValue, { redirectOnSuccess: false });
   };
 
-  const updateTaskProgress = (
+  const updateAndReroute = (
     newValue: TaskProgress,
-    userData: UserData,
     { redirectOnSuccess }: { redirectOnSuccess: boolean }
   ): void => {
-    if (!sectionCompletion || !roadmap) return;
-    const updatedUserData = {
-      ...userData,
-      taskProgress: { ...userData?.taskProgress, [props.task.id]: newValue },
-    };
-    const updatedSectionCompletion = getSectionCompletion(roadmap, updatedUserData);
-    const currentSectionPositions = getSectionPositions(updatedSectionCompletion, roadmap, props.task.id);
+    if (!userData || !updateQueue) return;
 
-    let preferences = updatedUserData.preferences;
-
-    const sectionStatusHasChanged =
-      updatedSectionCompletion[currentSectionPositions.current] !==
-      sectionCompletion[currentSectionPositions.current];
-    if (sectionStatusHasChanged && updatedSectionCompletion[currentSectionPositions.current]) {
-      setNextSection(currentSectionPositions.next);
-      setCongratulatoryModalIsOpen(true);
-      preferences = setPreferencesCloseSection(updatedUserData.preferences, currentSectionPositions.current);
-    }
-    updateStatus(updatedSectionCompletion);
-    update({
-      ...updatedUserData,
-      preferences,
-    })
+    queueUpdateTaskProgress(props.task.id, newValue);
+    updateQueue
+      .update()
       .then(() => {
         setSuccessSnackbarIsOpen(true);
-        if (redirectOnSuccess) {
-          router.push({
-            pathname: routeForPersona(userData.profileData.businessPersona),
-            query: {
-              fromFormBusinessEntity: isFormationTask(props.task.id) ? "true" : "false",
-              fromTaxRegistration: isTaxTask(props.task.id) ? "true" : "false",
-            },
-          });
-        }
+        if (!redirectOnSuccess) return;
+        router.push({
+          pathname: routeForPersona(userData.profileData.businessPersona),
+          query: {
+            fromFormBusinessEntity: isFormationTask(props.task.id) ? "true" : "false",
+            fromTaxRegistration: isTaxTask(props.task.id) ? "true" : "false",
+          },
+        });
       })
       .catch(() => {});
   };
@@ -192,20 +154,17 @@ export const TaskHeader = (props: Props): ReactElement => {
         )}
       </div>
       <UserDataErrorAlert />
-      <CongratulatoryModal
-        nextSectionType={nextSection}
-        handleClose={handleModalClose}
-        open={congratulatoryModalIsOpen}
-      />
+
+      <>{congratulatoryModal}</>
       <FormationDateModal
         isOpen={formationModalIsOpen}
         close={() => setFormationModalIsOpen(false)}
-        onSave={updateTaskProgress}
+        onSave={updateAndReroute}
       />
       <TaxRegistrationModal
         isOpen={taxRegistrationModalIsOpen}
         close={() => setTaxRegistrationModalIsOpen(false)}
-        onSave={updateTaskProgress}
+        onSave={updateAndReroute}
       />
       <ModalTwoButton
         isOpen={areYouSureTaxModalDesiredNewStatus !== undefined}

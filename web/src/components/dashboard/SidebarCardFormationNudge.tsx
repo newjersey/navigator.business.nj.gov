@@ -1,7 +1,8 @@
+import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { SidebarCardContent } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
-import { formationTaskId, TaskProgress, UserData } from "@businessnjgovnavigator/shared/";
+import { formationTaskId, TaskProgress } from "@businessnjgovnavigator/shared/";
 import { useRouter } from "next/router";
 import { ReactElement, useState } from "react";
 import { FormationDateModal } from "../FormationDateModal";
@@ -14,26 +15,13 @@ type Props = {
 export const SidebarCardFormationNudge = (props: Props): ReactElement => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const router = useRouter();
-  const { userData, update } = useUserData();
+  const { userData, updateQueue } = useUserData();
+  const { queueUpdateTaskProgress } = useUpdateTaskProgress();
 
-  const updateFormationDateAndTaskProgress = async (
-    newValue: TaskProgress,
-    userDataWithNewDateOfFormation: UserData
-  ) => {
-    if (!userData) return;
-
-    const newDateOfFormation = userDataWithNewDateOfFormation.profileData.dateOfFormation;
-    await update({
-      ...userData,
-      taskProgress: {
-        ...userData.taskProgress,
-        [formationTaskId]: "COMPLETED",
-      },
-      profileData: {
-        ...userData.profileData,
-        dateOfFormation: newDateOfFormation,
-      },
-    });
+  const updateFormationDateAndTaskProgress = async (newValue: TaskProgress) => {
+    if (!userData || !updateQueue) return;
+    queueUpdateTaskProgress(formationTaskId, newValue);
+    await updateQueue.update();
     router.push({ query: { fromForming: "true" } }, undefined, { shallow: true });
   };
 
@@ -55,7 +43,7 @@ export const SidebarCardFormationNudge = (props: Props): ReactElement => {
         bodyText={props.card.contentMd}
         headerText={props.card.header}
         ctaOnClick={onClick}
-      ></SidebarCardGeneric>
+      />
     </>
   );
 };

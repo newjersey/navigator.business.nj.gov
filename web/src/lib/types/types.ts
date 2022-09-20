@@ -5,11 +5,13 @@ import {
   FormationLegalType,
   FormationLegalTypes,
   PaymentType,
+  Preferences,
   ProfileData,
   UserData,
 } from "@businessnjgovnavigator/shared/";
 import { emptyBusinessUser } from "@businessnjgovnavigator/shared/businessUser";
 import { emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
+import { TaxFilingData } from "@businessnjgovnavigator/shared/taxFiling";
 import { merge } from "lodash";
 
 // returns all keys in an object of a type
@@ -424,3 +426,14 @@ export type FeedbackRequestModalNames =
   | "Report Issue";
 
 export type ProfileTabs = "info" | "numbers" | "documents" | "notes";
+
+export interface UpdateQueue {
+  queue: (userData: UserData) => UpdateQueue;
+  queueTaskProgress: (taskProgress: Record<string, TaskProgress>) => UpdateQueue;
+  queueUser: (user: Partial<BusinessUser>) => UpdateQueue;
+  queueProfileData: (profileData: Partial<ProfileData>) => UpdateQueue;
+  queuePreferences: (preferences: Partial<Preferences>) => UpdateQueue;
+  queueTaxFilingData: (taxFilingData: Partial<TaxFilingData>) => UpdateQueue;
+  update: () => Promise<void>;
+  current: () => UserData;
+}

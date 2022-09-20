@@ -22,11 +22,11 @@ jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 describe("<SectionAccordion />", () => {
   beforeEach(() => {
     jest.resetAllMocks();
+    setupStatefulUserDataContext();
     useMockRoadmap({});
   });
 
   const statefulRender = (type: SectionType, userData: UserData) => {
-    setupStatefulUserDataContext();
     render(
       <WithStatefulUserData initialUserData={userData}>
         <SectionAccordion sectionType={type}>BODY CONTENT</SectionAccordion>

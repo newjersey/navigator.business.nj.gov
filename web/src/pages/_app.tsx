@@ -4,7 +4,7 @@ import { ContextualInfoPanel } from "@/components/ContextualInfoPanel";
 import { AuthReducer, authReducer } from "@/lib/auth/AuthContext";
 import { getCurrentUser } from "@/lib/auth/sessionHelper";
 import { onGuestSignIn, onSignIn } from "@/lib/auth/signinHelper";
-import { Roadmap, SectionCompletion, UserDataError } from "@/lib/types/types";
+import { Roadmap, SectionCompletion, UpdateQueue, UserDataError } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffect } from "@/lib/utils/helpers";
 import { Hub, HubCapsule } from "@aws-amplify/core";
@@ -28,6 +28,7 @@ import { ContextualInfo, ContextualInfoContext } from "@/contexts/contextualInfo
 import { UserDataErrorContext } from "@/contexts/userDataErrorContext";
 import { AuthContext, initialState } from "@/contexts/authContext";
 import muiTheme from "@/lib/muiTheme";
+import { UpdateQueueContext } from "@/contexts/updateQueueContext";
 
 declare module "@mui/styles/defaultTheme" {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -44,6 +45,7 @@ const theme = createTheme(muiTheme);
 
 const App = ({ Component, pageProps }: AppProps): ReactElement => {
   const [state, dispatch] = useReducer<AuthReducer>(authReducer, initialState);
+  const [updateQueue, setUpdateQueue] = useState<UpdateQueue | undefined>(undefined);
   const [roadmap, setRoadmap] = useState<Roadmap | undefined>(undefined);
   const [registrationAlertStatus, _setRegistrationAlertStatus] = useState<RegistrationStatus | undefined>(
     UserDataStorageFactory().getRegistrationStatus()
@@ -154,31 +156,33 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
         <StyledEngineProvider injectFirst>
           <ThemeProvider theme={theme}>
             <AuthContext.Provider value={{ state, dispatch }}>
-              <UserDataErrorContext.Provider value={{ userDataError, setUserDataError }}>
-                <ContextualInfoContext.Provider value={{ contextualInfo, setContextualInfo }}>
-                  <RoadmapContext.Provider
-                    value={{ roadmap, setRoadmap, sectionCompletion, setSectionCompletion }}
-                  >
-                    <AuthAlertContext.Provider
-                      value={{
-                        isAuthenticated: state.isAuthenticated,
-                        alertIsVisible: authSnackbar,
-                        modalIsVisible: authModal,
-                        registrationAlertStatus,
-                        setRegistrationAlertStatus,
-                        setAlertIsVisible: setAuthSnackbar,
-                        setModalIsVisible: setAuthModal,
-                      }}
+              <UpdateQueueContext.Provider value={{ updateQueue, setUpdateQueue }}>
+                <UserDataErrorContext.Provider value={{ userDataError, setUserDataError }}>
+                  <ContextualInfoContext.Provider value={{ contextualInfo, setContextualInfo }}>
+                    <RoadmapContext.Provider
+                      value={{ roadmap, setRoadmap, sectionCompletion, setSectionCompletion }}
                     >
-                      <ContextualInfoPanel />
-                      <Component {...pageProps} />
-                      <SignUpSnackbar />
-                      <SignUpModal />
-                      <SelfRegSnackbar />
-                    </AuthAlertContext.Provider>
-                  </RoadmapContext.Provider>
-                </ContextualInfoContext.Provider>
-              </UserDataErrorContext.Provider>
+                      <AuthAlertContext.Provider
+                        value={{
+                          isAuthenticated: state.isAuthenticated,
+                          alertIsVisible: authSnackbar,
+                          modalIsVisible: authModal,
+                          registrationAlertStatus,
+                          setRegistrationAlertStatus,
+                          setAlertIsVisible: setAuthSnackbar,
+                          setModalIsVisible: setAuthModal,
+                        }}
+                      >
+                        <ContextualInfoPanel />
+                        <Component {...pageProps} />
+                        <SignUpSnackbar />
+                        <SignUpModal />
+                        <SelfRegSnackbar />
+                      </AuthAlertContext.Provider>
+                    </RoadmapContext.Provider>
+                  </ContextualInfoContext.Provider>
+                </UserDataErrorContext.Provider>
+              </UpdateQueueContext.Provider>
             </AuthContext.Provider>
           </ThemeProvider>
         </StyledEngineProvider>

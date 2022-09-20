@@ -19,6 +19,7 @@ export const SidebarCardGeneric = (props: Props) => {
   const closeSelf = async () => {
     await hideCard(props.card.id);
   };
+
   return (
     <>
       <div

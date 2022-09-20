@@ -11,7 +11,7 @@ import {
   Step,
   Task,
 } from "@/lib/types/types";
-import { Preferences, UserData } from "@businessnjgovnavigator/shared/";
+import { UserData } from "@businessnjgovnavigator/shared/";
 import { BusinessPersona, ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { ReactElement, useEffect, useRef } from "react";
 
@@ -71,9 +71,10 @@ export const getSectionCompletion = (
     return accumulator;
   }, {} as SectionCompletion);
 };
+
 interface SectionPosition {
-  current: SectionType;
-  next: SectionType | undefined;
+  currentSection: SectionType;
+  nextSection: SectionType | undefined;
 }
 
 export const getSectionPositions = (
@@ -85,14 +86,7 @@ export const getSectionPositions = (
   const nextSection = sectionNames
     .slice(sectionNames.indexOf(currentSection))
     .find((currentValue: SectionType) => !sectionCompletion[currentValue]);
-  return { current: currentSection, next: nextSection };
-};
-
-export const setPreferencesCloseSection = (preferences: Preferences, current: SectionType): Preferences => {
-  return {
-    ...preferences,
-    roadmapOpenSections: preferences.roadmapOpenSections.filter((currentValue) => currentValue !== current),
-  } as Preferences;
+  return { currentSection, nextSection };
 };
 
 export const getModifiedTaskContent = (
@@ -348,7 +342,7 @@ export const getFlow = (data: UserData | ProfileData): FlowType => {
   return persona || "STARTING";
 };
 
-function isUserData(data: UserData | ProfileData): data is UserData {
+export function isUserData(data: UserData | ProfileData): data is UserData {
   return (data as UserData).user !== undefined;
 }
 

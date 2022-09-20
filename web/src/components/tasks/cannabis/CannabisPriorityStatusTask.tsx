@@ -4,6 +4,7 @@ import { CannabisPriorityRequirements } from "@/components/tasks/cannabis/Cannab
 import { CannabisPriorityTypes } from "@/components/tasks/cannabis/CannabisPriorityTypes";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { Task } from "@/lib/types/types";
 import { scrollToTop, useMountEffect } from "@/lib/utils/helpers";
@@ -15,10 +16,11 @@ interface Props {
 }
 
 export const CannabisPriorityStatusTask = (props: Props) => {
-  const { userData, update } = useUserData();
+  const { userData, updateQueue } = useUserData();
   const [successSnackbarIsOpen, setSuccessSnackbarIsOpen] = useState(false);
   const [displayFirstTab, setDisplayFirstTab] = useState(true);
   const { Config } = useConfig();
+  const { queueUpdateTaskProgress } = useUpdateTaskProgress();
 
   useMountEffect(() => {
     if (props.CMS_ONLY_tab === "1") {
@@ -29,7 +31,7 @@ export const CannabisPriorityStatusTask = (props: Props) => {
   });
 
   const handleNextTabButtonClick = () => {
-    if (!userData) return;
+    if (!userData || !updateQueue) return;
 
     setDisplayFirstTab(false);
     scrollToTop();
@@ -38,13 +40,7 @@ export const CannabisPriorityStatusTask = (props: Props) => {
       userData.taskProgress[props.task.id] === "NOT_STARTED"
     ) {
       setSuccessSnackbarIsOpen(true);
-      update({
-        ...userData,
-        taskProgress: {
-          ...userData.taskProgress,
-          [props.task.id]: "IN_PROGRESS",
-        },
-      });
+      updateQueue.queueTaskProgress({ [props.task.id]: "IN_PROGRESS" }).update();
     }
   };
 
@@ -54,16 +50,11 @@ export const CannabisPriorityStatusTask = (props: Props) => {
   };
 
   const handleCompleteTaskButtonClick = () => {
-    if (!userData) return;
+    if (!userData || !updateQueue) return;
 
     setSuccessSnackbarIsOpen(true);
-    update({
-      ...userData,
-      taskProgress: {
-        ...userData.taskProgress,
-        [props.task.id]: "COMPLETED",
-      },
-    });
+    queueUpdateTaskProgress(props.task.id, "COMPLETED");
+    updateQueue.update();
   };
 
   return (
