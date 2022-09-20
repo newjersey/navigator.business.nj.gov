@@ -11,7 +11,8 @@ export type TagVariant =
   | "baseDarkest"
   | "required"
   | "certification"
-  | "funding";
+  | "funding"
+  | "annual";
 
 interface Props {
   tagVariant: TagVariant;
@@ -59,11 +60,17 @@ export const Tag = (props: Props): ReactElement => {
       styling =
         "bg-white text-accent-cool-darker border-1px border-accent-cool-darker padding-y-0 padding-left-0";
       break;
+    case "annual":
+      styling = "bg-warning-light text-base-dark";
+      break;
   }
 
   switch (props.hover) {
     case props.tagVariant === "info":
       hoverStyling = "accent-cool-hover-override";
+      break;
+    case props.tagVariant === "annual":
+      hoverStyling = "warning-extra-light-hover-override";
       break;
   }
 

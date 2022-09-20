@@ -6,6 +6,10 @@
   background-color: $accent-cool !important;
 }
 
+.warning-extra-light-hover-override:hover {
+  background-color: $warning-extra-light !important;
+}
+
 .tag-fixed-width {
   width: 134px !important;
   text-align: center;
