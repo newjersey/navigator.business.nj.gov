@@ -69,15 +69,15 @@ export const FilingsCalendar = (props: Props): ReactElement => {
                   >
                     <Tag
                       textWrap={true}
-                      tagVariant={filing.identifier === "ANNUAL_FILING" ? "info" : "accent"}
+                      tagVariant={filing.identifier === "ANNUAL_FILING" ? "annual" : "accent"}
                       hover={true}
                     >
-                      <span className="text-bold text-uppercase ">
+                      <span className="text-bold text-uppercase">
                         {Config.dashboardDefaults.calendarFilingDueDateLabel}{" "}
                         {parseDateWithFormat(filing.dueDate, "YYYY-MM-DD").format("M/D")}
                       </span>
                       {" - "}
-                      <span className="text-no-uppercase">
+                      <span className="text-no-uppercase text-underline">
                         {props.operateReferences[filing.identifier].name}
                       </span>
                     </Tag>
@@ -134,7 +134,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
             {Config.dashboardDefaults.calendarListViewButton}
           </Button>
         </div>
-        <hr className="bg-base-lighter margin-bottom-4" aria-hidden={true} />
+        <hr className="bg-base-lighter margin-top-2 margin-bottom-4" aria-hidden={true} />
         <FilingsCalendarTaxAccess />
         <table data-testid="filings-calendar-as-table">
           <tbody>
@@ -152,7 +152,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
             })}
           </tbody>
         </table>
-        <p className="text-base-dark">{Config.dashboardDefaults.calendarLegalText}</p>
+        <p className="text-base-dark margin-bottom-1">{Config.dashboardDefaults.calendarLegalText}</p>
       </div>
     );
   };
