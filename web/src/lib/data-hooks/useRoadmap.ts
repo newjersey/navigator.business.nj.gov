@@ -8,7 +8,7 @@ import { useContext } from "react";
 export const useRoadmap = (): {
   roadmap: Roadmap | undefined;
   sectionCompletion: SectionCompletion | undefined;
-  updateStatus: (sectionCompletion?: SectionCompletion) => Promise<SectionCompletion>;
+  updateSectionCompletion: (sectionCompletion?: SectionCompletion) => SectionCompletion;
 } => {
   const { roadmap, sectionCompletion, setRoadmap, setSectionCompletion } = useContext(RoadmapContext);
   const { userData } = useUserData();
@@ -27,11 +27,11 @@ export const useRoadmap = (): {
     }
   };
 
-  const updateStatus = async (sectionCompletion?: SectionCompletion) => {
+  const updateSectionCompletion = (sectionCompletion?: SectionCompletion) => {
     const _roadmapStatus = sectionCompletion ?? getSectionCompletion(roadmap, userData);
     setSectionCompletion(_roadmapStatus);
     return _roadmapStatus;
   };
 
-  return { roadmap, sectionCompletion, updateStatus };
+  return { roadmap, sectionCompletion, updateSectionCompletion };
 };

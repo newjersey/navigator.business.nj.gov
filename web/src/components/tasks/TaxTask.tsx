@@ -18,7 +18,7 @@ interface Props {
 
 export const TaxTask = (props: Props): ReactElement => {
   const [showInput, setShowInput] = useState<boolean>(true);
-  const { userData, update } = useUserData();
+  const { userData, updateQueue } = useUserData();
   const { isAuthenticated, setModalIsVisible } = useContext(AuthAlertContext);
   const { Config } = useConfig();
 
@@ -29,14 +29,13 @@ export const TaxTask = (props: Props): ReactElement => {
   }, userData);
 
   const setBackToEditing = ({ remove }: { remove: boolean }) => {
-    if (!userData) return;
+    if (!userData || !updateQueue) return;
     setShowInput(true);
     const newTaxValue = remove ? emptyProfileData.taxId : userData.profileData.taxId;
-    update({
-      ...userData,
-      profileData: { ...userData.profileData, taxId: newTaxValue },
-      taskProgress: { ...userData.taskProgress, [props.task.id]: "IN_PROGRESS" },
-    });
+    updateQueue
+      .queueTaskProgress({ [props.task.id]: "IN_PROGRESS" })
+      .queueProfileData({ taxId: newTaxValue })
+      .update();
   };
 
   const onEdit = () => setBackToEditing({ remove: false });

@@ -11,22 +11,18 @@ import {
   TaskProgress,
 } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
-import { createEmptyProfileData, ProfileData, UserData } from "@businessnjgovnavigator/shared";
+import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared";
 import { ReactElement, useEffect, useState } from "react";
 
 interface Props {
   isOpen: boolean;
   close: () => void;
-  onSave: (
-    newValue: TaskProgress,
-    userData: UserData,
-    { redirectOnSuccess }: { redirectOnSuccess: boolean }
-  ) => void;
+  onSave: (newValue: TaskProgress, { redirectOnSuccess }: { redirectOnSuccess: boolean }) => void;
 }
 
 export const FormationDateModal = (props: Props): ReactElement => {
   const { Config } = useConfig();
-  const { userData } = useUserData();
+  const { userData, updateQueue } = useUserData();
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
   const [fieldStates, setFieldStates] = useState<ProfileFieldErrorMap>(createProfileFieldErrorMap());
 
@@ -40,14 +36,14 @@ export const FormationDateModal = (props: Props): ReactElement => {
   };
 
   const saveDateOfFormation = (): void => {
-    if (!userData) return;
+    if (!userData || !updateQueue) return;
     if (!profileData.dateOfFormation || fieldStates.dateOfFormation.invalid) {
       onValidation("dateOfFormation", true);
       return;
     }
     analytics.event.formation_date_modal.submit.formation_status_set_to_complete();
-    const updatedUserData = { ...userData, profileData };
-    props.onSave("COMPLETED", updatedUserData, { redirectOnSuccess: true });
+    updateQueue.queueProfileData(profileData);
+    props.onSave("COMPLETED", { redirectOnSuccess: true });
   };
 
   return (

@@ -6,7 +6,6 @@ import { Task, TaskProgress } from "@/lib/types/types";
 import {
   generateFormationData,
   generateGetFilingResponse,
-  generatePreferences,
   generateProfileData,
   generateStep,
   generateTask,
@@ -33,9 +32,7 @@ import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { Dayjs } from "dayjs";
 
-jest.mock("next/router", () => ({
-  useRouter: jest.fn(),
-}));
+jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 
@@ -103,6 +100,7 @@ describe("<TaskHeader />", () => {
         [taskId]: "IN_PROGRESS",
       })
     );
+    await within(dropDown).findByText(Config.taskProgress.IN_PROGRESS);
   });
 
   it("shows a success snackbar when an option is selected", async () => {
@@ -136,85 +134,6 @@ describe("<TaskHeader />", () => {
     });
     renderTaskHeader(taskStaticGeneration);
     expect(screen.queryByText(Config.taskDefaults.requiredTagText)).not.toBeInTheDocument();
-  });
-
-  describe("congratulatory modal", () => {
-    it("shows congratulatory modal without link when START section completed", () => {
-      const planTaskId = "123";
-      const startTaskId = "124";
-
-      const planTask = generateTask({ id: planTaskId, stepNumber: 1 });
-      const startTask = generateTask({ id: startTaskId, stepNumber: 2 });
-
-      const userData = generateUserData({
-        taskProgress: {
-          [planTaskId]: "COMPLETED",
-          [startTaskId]: "NOT_STARTED",
-        },
-        preferences: generatePreferences({ roadmapOpenSections: ["START"] }),
-      });
-
-      useMockRoadmap({
-        steps: [
-          generateStep({ stepNumber: 1, section: "PLAN" }),
-          generateStep({ stepNumber: 2, section: "START" }),
-        ],
-        tasks: [planTask, startTask],
-      });
-
-      renderTaskHeader(startTask, userData);
-      changeTaskNotStartedToCompleted();
-
-      expect(currentUserData().taskProgress).toEqual({
-        [planTaskId]: "COMPLETED",
-        [startTaskId]: "COMPLETED",
-      });
-
-      expect(currentUserData().preferences.roadmapOpenSections).toEqual([]);
-      expect(
-        screen.queryByText(Config.dashboardDefaults.congratulatoryModalLinkText, { exact: false })
-      ).not.toBeInTheDocument();
-    });
-
-    it("shows congratulatory modal with link when PLAN section completed", async () => {
-      const planTaskId = "123";
-      const startTaskId = "124";
-
-      const planTask = generateTask({ id: planTaskId, stepNumber: 1 });
-      const startTask = generateTask({ id: startTaskId, stepNumber: 2 });
-
-      const userData = generateUserData({
-        taskProgress: {
-          [planTaskId]: "NOT_STARTED",
-          [startTaskId]: "NOT_STARTED",
-        },
-        preferences: generatePreferences({ roadmapOpenSections: ["PLAN", "START"] }),
-      });
-
-      useMockRoadmap({
-        steps: [
-          generateStep({ stepNumber: 1, section: "PLAN" }),
-          generateStep({ stepNumber: 2, section: "START" }),
-        ],
-        tasks: [planTask, startTask],
-      });
-
-      renderTaskHeader(planTask, userData);
-      changeTaskNotStartedToCompleted();
-
-      expect(currentUserData().taskProgress).toEqual({
-        [planTaskId]: "COMPLETED",
-        [startTaskId]: "NOT_STARTED",
-      });
-
-      expect(currentUserData().preferences.roadmapOpenSections).toEqual(["START"]);
-      const link = screen.queryByText(
-        `${Config.sectionHeaders["START"]} ${Config.dashboardDefaults.congratulatoryModalLinkText}`
-      );
-      expect(link).toBeInTheDocument();
-      fireEvent.click(link as HTMLElement);
-      expect(mockPush).toHaveBeenCalledWith(ROUTES.dashboard);
-    });
   });
 
   describe("tax registration modal", () => {
@@ -621,12 +540,6 @@ describe("<TaskHeader />", () => {
     const dropDown = screen.getByTestId("taskProgress");
     fireEvent.click(dropDown);
     fireEvent.click(screen.getByText(Config.taskProgress.COMPLETED));
-  };
-
-  const changeTaskNotStartedToCompleted = (): void => {
-    selectCompleted();
-    const dropDown = screen.getByTestId("taskProgress");
-    expect(within(dropDown).getByText(Config.taskProgress.COMPLETED)).toBeInTheDocument();
   };
 
   const selectDate = (date: Dayjs) => {

@@ -1,12 +1,19 @@
 /* eslint-disable react/display-name */
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable react-hooks/rules-of-hooks */
+
+import { UpdateQueueContext } from "@/contexts/updateQueueContext";
+import { UpdateQueue } from "@/lib/types/types";
+import { UpdateQueueFactory } from "@/lib/UpdateQueue";
+import { isUserData } from "@/lib/utils/helpers";
 import { getLastCalledWith, getNumberOfMockCalls } from "@/test/helpers";
-import { createContext, ReactElement, ReactNode, useState } from "react";
+import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
+import { UserData } from "@businessnjgovnavigator/shared/userData";
+import { createContext, ReactElement, ReactNode, useEffect, useState } from "react";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type GenericData = Record<string, any>;
 
-export const statefulDataHelpers = (spy: jest.Mock<any, any>) => ({
+export const statefulDataHelpers = (spy: jest.Mock) => ({
   getLastCalledWithConfig: (): { local?: boolean } => {
     return getLastCalledWith(spy)[1] as { local?: boolean };
   },
@@ -20,8 +27,9 @@ export const statefulDataHelpers = (spy: jest.Mock<any, any>) => ({
     return getNumberOfMockCalls(spy);
   },
 });
+
 export const WithStatefulData =
-  (spy: jest.Mock<any, any>) =>
+  (spy: jest.Mock) =>
   ({
     children,
     initialData,
@@ -29,8 +37,8 @@ export const WithStatefulData =
     children: ReactNode;
     initialData: GenericData | undefined;
   }): ReactElement => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [genericData, setGenericData] = useState<GenericData | undefined>(initialData);
+    const [updateQueue, setUpdateQueue] = useState<UpdateQueue | undefined>(undefined);
 
     const update = (newData: GenericData | undefined, config?: { local?: boolean }): Promise<void> => {
       spy(newData, config);
@@ -38,8 +46,19 @@ export const WithStatefulData =
       return Promise.resolve();
     };
 
+    useEffect(() => {
+      if (genericData && isUserData(genericData as UserData | ProfileData)) {
+        setUpdateQueue(new UpdateQueueFactory(genericData as UserData, update));
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [genericData]);
+
     return (
-      <StatefulDataContext.Provider value={{ genericData, update }}>{children}</StatefulDataContext.Provider>
+      <UpdateQueueContext.Provider value={{ updateQueue, setUpdateQueue }}>
+        <StatefulDataContext.Provider value={{ genericData, update }}>
+          {children}
+        </StatefulDataContext.Provider>
+      </UpdateQueueContext.Provider>
     );
   };
 

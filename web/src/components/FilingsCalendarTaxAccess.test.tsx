@@ -25,6 +25,7 @@ import { generateFormationData } from "../../test/factories";
 import { FilingsCalendarTaxAccess } from "./FilingsCalendarTaxAccess";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
+jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({
   postTaxRegistrationOnboarding: jest.fn(),
   postTaxRegistrationLookup: jest.fn(),

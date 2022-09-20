@@ -2,10 +2,10 @@ import { GenericTextField } from "@/components/GenericTextField";
 import { Button } from "@/components/njwds-extended/Button";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { Task } from "@/lib/types/types";
 import { templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { FormControl } from "@mui/material";
 import { ReactElement, useState } from "react";
 
@@ -21,7 +21,8 @@ export const TaxInput = (props: Props): ReactElement => {
   const [isInvalid, setIsInvalid] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [taxId, setTaxId] = useState<string>("");
-  const { userData, update } = useUserData();
+  const { userData, updateQueue } = useUserData();
+  const { queueUpdateTaskProgress } = useUpdateTaskProgress();
 
   let saveButtonText = Config.tax.saveButtonText;
   if (props.isAuthenticated === IsAuthenticated.FALSE) {
@@ -38,7 +39,7 @@ export const TaxInput = (props: Props): ReactElement => {
   };
 
   const save = async (): Promise<void> => {
-    if (!userData) return;
+    if (!updateQueue) return;
 
     if (taxId.length !== LENGTH) {
       setIsInvalid(true);
@@ -47,24 +48,18 @@ export const TaxInput = (props: Props): ReactElement => {
 
     setIsInvalid(false);
     setIsLoading(true);
-    const updatedUserData: UserData = {
-      ...userData,
-      profileData: {
-        ...userData.profileData,
-        taxId,
-      },
-      taskProgress: {
-        ...userData.taskProgress,
-        [props.task.id]: "COMPLETED",
-      },
-    };
-    try {
-      await update(updatedUserData);
-      setIsLoading(false);
-      props.onSave();
-    } catch {
-      setIsLoading(false);
-    }
+
+    queueUpdateTaskProgress(props.task.id, "COMPLETED");
+    updateQueue
+      .queueProfileData({ taxId })
+      .update()
+      .then(async () => {
+        setIsLoading(false);
+        props.onSave();
+      })
+      .catch(() => {
+        setIsLoading(false);
+      });
   };
 
   return (

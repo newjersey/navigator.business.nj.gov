@@ -17,11 +17,10 @@ export const setMockRoadmapResponse = (
   roadmap: Roadmap | undefined,
   sectionCompletion?: SectionCompletion
 ): void => {
-  const updateStatus = (sectionCompletion?: SectionCompletion): Promise<SectionCompletion> => {
-    const _roadmapStatus = sectionCompletion ?? generateSectionCompletion(roadmap as Roadmap, {});
-    return Promise.resolve(_roadmapStatus);
+  const updateSectionCompletion = (sectionCompletion?: SectionCompletion): SectionCompletion => {
+    return sectionCompletion ?? generateSectionCompletion(roadmap as Roadmap, {});
   };
-  mockUseRoadmap.mockReturnValue({ roadmap, sectionCompletion, updateStatus });
+  mockUseRoadmap.mockReturnValue({ roadmap, sectionCompletion, updateSectionCompletion });
 };
 
 export const useMockRoadmapTask = (overrides: Partial<Task>): void => {

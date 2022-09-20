@@ -9,7 +9,6 @@ import {
   LookupLegalStructureById,
   ProfileData,
   TaskProgress,
-  UserData,
 } from "@businessnjgovnavigator/shared";
 import { ReactElement, useEffect, useState } from "react";
 import { OnboardingBusinessName } from "./onboarding/OnboardingBusinessName";
@@ -20,16 +19,12 @@ import { OnboardingTaxId } from "./onboarding/OnboardingTaxId";
 interface Props {
   isOpen: boolean;
   close: () => void;
-  onSave: (
-    newValue: TaskProgress,
-    userData: UserData,
-    { redirectOnSuccess }: { redirectOnSuccess: boolean }
-  ) => void;
+  onSave: (newValue: TaskProgress, { redirectOnSuccess }: { redirectOnSuccess: boolean }) => void;
 }
 
 export const TaxRegistrationModal = (props: Props): ReactElement => {
   const { Config } = useConfig();
-  const { userData, update } = useUserData();
+  const { userData, updateQueue } = useUserData();
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
   const [fieldStates, setFieldStates] = useState<ProfileFieldErrorMap>(createProfileFieldErrorMap());
 
@@ -43,7 +38,7 @@ export const TaxRegistrationModal = (props: Props): ReactElement => {
   };
 
   const onSubmit = async () => {
-    if (!userData) return;
+    if (!userData || !updateQueue) return;
     const errorMap = {
       ...fieldStates,
       businessName: {
@@ -56,15 +51,14 @@ export const TaxRegistrationModal = (props: Props): ReactElement => {
     };
     setFieldStates(errorMap);
     if (Object.keys(errorMap).some((k) => errorMap[k as ProfileFields].invalid)) return;
-    let { taxFilingData } = userData;
 
+    let { taxFilingData } = userData;
     if (userData.profileData.taxId != profileData.taxId) {
       taxFilingData = { ...taxFilingData, state: undefined, filings: [] };
     }
 
-    const updatedUserData = { ...userData, profileData, taxFilingData };
-    await update(updatedUserData);
-    props.onSave("COMPLETED", updatedUserData, { redirectOnSuccess: true });
+    updateQueue.queueProfileData(profileData).queueTaxFilingData(taxFilingData);
+    props.onSave("COMPLETED", { redirectOnSuccess: true });
     props.close();
   };
 
