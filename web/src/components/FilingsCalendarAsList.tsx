@@ -1,6 +1,10 @@
-import { FilingsCalendarTaxAccess } from "@/components/FilingsCalendarTaxAccess";
+import {
+  FilingsCalendarTaxAccess,
+  shouldRenderFilingsCalendarTaxAccess,
+} from "@/components/FilingsCalendarTaxAccess";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { sortFilterFilingsWithinAYear } from "@/lib/domain-logic/filterFilings";
 import { MediaQueries } from "@/lib/PageSizes";
 import { OperateReference } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
@@ -19,11 +23,14 @@ interface Props {
 
 export const FilingsCalendarAsList = (props: Props): ReactElement => {
   const { userData } = useUserData();
-  const taxFilings = userData?.taxFilingData.filings || [];
   const { Config } = useConfig();
   const isDesktopAndUp = useMediaQuery(MediaQueries.tabletAndUp);
 
-  if (taxFilings.length === 0) return <></>;
+  const sortedFilteredFilingsWithinAYear = userData?.taxFilingData.filings
+    ? sortFilterFilingsWithinAYear(userData.taxFilingData.filings)
+    : [];
+
+  if (sortedFilteredFilingsWithinAYear.length === 0) return <></>;
 
   return (
     <div data-testid="filings-calendar-as-list">
@@ -55,8 +62,8 @@ export const FilingsCalendarAsList = (props: Props): ReactElement => {
           )}
         </div>
         <hr className="bg-base-lighter margin-top-0 margin-bottom-4" aria-hidden={true} />
-        <FilingsCalendarTaxAccess />
-        {taxFilings
+        {shouldRenderFilingsCalendarTaxAccess(userData) && <FilingsCalendarTaxAccess />}
+        {sortedFilteredFilingsWithinAYear
           .filter((filing) => props.operateReferences[filing.identifier])
           .map((filing) => (
             <div className="flex margin-bottom-2 minh-6" key={`${filing.identifier}-${filing.dueDate}`}>

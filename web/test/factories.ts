@@ -62,6 +62,7 @@ import {
   SectorType,
   TaxFiling,
   TaxFilingData,
+  TaxFilingLookUpRequest,
   UserData,
 } from "@businessnjgovnavigator/shared/";
 import { createEmptyFormationFormData } from "@businessnjgovnavigator/shared/formationData";
@@ -103,7 +104,7 @@ export const generateTaxFilingData = (overrides: Partial<TaxFilingData>): TaxFil
   return {
     state: undefined,
     businessName: undefined,
-    lastUpdated: overrides.state ? new Date(Date.now()).toISOString() : undefined,
+    lastUpdatedISO: overrides.state ? new Date(Date.now()).toISOString() : undefined,
     filings: [generateTaxFiling({})],
     ...overrides,
   };
@@ -301,8 +302,8 @@ export const generateNameAndAddress = (overrides: Partial<NameAndAddress>): Name
 };
 
 export const generateTaxIdAndBusinessName = (
-  overrides: Partial<{ businessName: string; taxId: string }>
-): { businessName: string; taxId: string } => {
+  overrides: Partial<TaxFilingLookUpRequest>
+): TaxFilingLookUpRequest => {
   return {
     businessName: `some-name-${randomInt()}`,
     taxId: `${randomInt(12)}`,

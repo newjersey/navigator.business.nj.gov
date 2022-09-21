@@ -89,6 +89,96 @@ describe("<FilingsCalendar />", () => {
     expect(screen.getByText("Annual Report")).toBeInTheDocument();
   });
 
+  it("displays filings only within a year in list view", () => {
+    const farDueDate = getCurrentDate().add(2, "years");
+    const farReport = generateTaxFiling({
+      identifier: "whatever",
+      dueDate: farDueDate.format("YYYY-MM-DD"),
+    });
+    const recentDueDate = getCurrentDate().add(2, "months");
+
+    const recentReport = generateTaxFiling({
+      identifier: "whatever2",
+      dueDate: recentDueDate.format("YYYY-MM-DD"),
+    });
+
+    const userData = generateUserData({
+      taxFilingData: generateTaxFilingData({ filings: [farReport, recentReport] }),
+      preferences: generatePreferences({ isCalendarFullView: false }),
+    });
+
+    const operateReferences: Record<string, OperateReference> = {
+      whatever: {
+        name: "Whatever Report",
+        urlSlug: "whatever-url",
+        urlPath: "whatever-url-path",
+      },
+      whatever2: {
+        name: "Whatever2 Report",
+        urlSlug: "whatever2-url",
+        urlPath: "whatever2-url-path",
+      },
+    };
+
+    renderFilingsCalendar(operateReferences, userData);
+    expect(screen.getByTestId("filings-calendar-as-list")).toBeInTheDocument();
+    expect(screen.queryByText(farDueDate.format("MMMM DD, YYYY"), { exact: false })).not.toBeInTheDocument();
+    expect(screen.getByText(recentDueDate.format("MMMM DD, YYYY"), { exact: false })).toBeInTheDocument();
+  });
+
+  it("displays calendar content when there are filings in the next 11 months", () => {
+    const dueDate = getCurrentDate().endOf("month").add(11, "months");
+    const annualReport = generateTaxFiling({
+      identifier: "annual-report",
+      dueDate: dueDate.format("YYYY-MM-DD"),
+    });
+    const userData = generateUserData({
+      taxFilingData: generateTaxFilingData({ filings: [annualReport] }),
+      preferences: generatePreferences({ isCalendarFullView: true }),
+    });
+
+    const operateReferences: Record<string, OperateReference> = {
+      "annual-report": {
+        name: "Annual Report",
+        urlSlug: "annual-report-url",
+        urlPath: "annual_report-url-path",
+      },
+    };
+
+    renderFilingsCalendar(operateReferences, userData);
+
+    expect(screen.getByTestId("filings-calendar-as-table")).toBeInTheDocument();
+    expect(
+      screen.queryByText(markdownToText(Config.dashboardDefaults.emptyCalendarTitleText))
+    ).not.toBeInTheDocument();
+  });
+
+  it("displays empty calendar content when there are no filings in the next 11 months", () => {
+    const dueDate = getCurrentDate().endOf("month").add(12, "months");
+    const annualReport = generateTaxFiling({
+      identifier: "annual-report",
+      dueDate: dueDate.format("YYYY-MM-DD"),
+    });
+    const userData = generateUserData({
+      taxFilingData: generateTaxFilingData({ filings: [annualReport] }),
+    });
+
+    const operateReferences: Record<string, OperateReference> = {
+      "annual-report": {
+        name: "Annual Report",
+        urlSlug: "annual-report-url",
+        urlPath: "annual_report-url-path",
+      },
+    };
+
+    renderFilingsCalendar(operateReferences, userData);
+
+    expect(screen.queryByTestId("filings-calendar-as-table")).not.toBeInTheDocument();
+    expect(
+      screen.getByText(markdownToText(Config.dashboardDefaults.emptyCalendarTitleText))
+    ).toBeInTheDocument();
+  });
+
   it("displays empty calendar content when there are no filings", () => {
     const userData = generateUserData({
       taxFilingData: generateTaxFilingData({ filings: [] }),
@@ -232,6 +322,40 @@ describe("<FilingsCalendar />", () => {
       renderFilingsCalendar(operateReferences, userData);
 
       expect(screen.queryByTestId("get-tax-access")).not.toBeInTheDocument();
+    });
+
+    it("hides button on filings calendar when feature flag is disabled", () => {
+      process.env.FEATURE_TAX_CALENDAR = "false";
+      const dueDate = getCurrentDate().add(2, "months");
+      const annualReport = generateTaxFiling({
+        identifier: "annual-report",
+        dueDate: dueDate.format("YYYY-MM-DD"),
+      });
+
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          legalStructureId: randomLegalStructure(true).id,
+          operatingPhase: randomElementFromArray(
+            OperatingPhases.filter((obj) => obj.displayTaxAccessButton == true)
+          ).id,
+        }),
+        taxFilingData: generateTaxFilingData({ filings: [annualReport] }),
+      });
+
+      const operateReferences: Record<string, OperateReference> = {
+        "annual-report": {
+          name: "Annual Report",
+          urlSlug: "annual-report-url",
+          urlPath: "annual_report-url-path",
+        },
+      };
+
+      renderFilingsCalendar(operateReferences, userData);
+
+      expect(screen.queryByTestId("get-tax-access")).not.toBeInTheDocument();
+      expect(screen.queryByTestId("pending-container")).not.toBeInTheDocument();
+      expect(screen.queryByTestId("button-container")).not.toBeInTheDocument();
+      process.env.FEATURE_TAX_CALENDAR = "true";
     });
   });
 

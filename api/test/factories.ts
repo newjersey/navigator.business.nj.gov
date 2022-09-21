@@ -36,9 +36,9 @@ import {
 import { Municipality } from "@shared/municipality";
 import { ProfileData } from "@shared/profileData";
 import { arrayOfSectors as sectors, SectorType } from "@shared/sector";
-import { TaxFiling, TaxFilingData } from "@shared/taxFiling";
+import { TaxFiling, TaxFilingData, TaxFilingLookUpRequest } from "@shared/taxFiling";
 import { Preferences, UserData } from "@shared/userData";
-import { SelfRegResponse, TaxFilingResults } from "../src/domain/types";
+import { SelfRegResponse, TaxFilingResult } from "../src/domain/types";
 import { getRandomDateInBetween } from "./helpers";
 
 export const generateUser = (overrides: Partial<BusinessUser>): BusinessUser => {
@@ -54,21 +54,23 @@ export const generateUser = (overrides: Partial<BusinessUser>): BusinessUser => 
   };
 };
 
-export const generateTaxFilingResults = (ids?: string[], number?: number): TaxFilingResults => {
-  const generateValues = () => {
-    const dateToShortISO = (date: Date): string => date.toISOString().split("T")[0];
-    const date = new Date(Date.now());
-    const futureDate = new Date(Date.now());
-    futureDate.setFullYear(futureDate.getFullYear() + 2);
-    return [...Array.from({ length: Number(number ?? randomIntFromInterval("4", "12")) }).keys()].map(() =>
-      getRandomDateInBetween(dateToShortISO(date), dateToShortISO(futureDate)).toLocaleDateString()
-    );
+export const generateTaxFilingDates = (numberOfDates: number) => {
+  const dateToShortISO = (date: Date): string => date.toISOString().split("T")[0];
+  const date = new Date(Date.now());
+  const futureDate = new Date(Date.now());
+  futureDate.setFullYear(futureDate.getFullYear() + 2);
+  return [...Array.from({ length: numberOfDates }).keys()].map(() =>
+    getRandomDateInBetween(dateToShortISO(date), dateToShortISO(futureDate)).toLocaleDateString()
+  );
+};
+
+export const generateTaxFilingResult = (overrides: Partial<TaxFilingResult>): TaxFilingResult => {
+  return {
+    Content: `some-content-${randomInt()}`,
+    Id: `some-Id-${randomInt()}`,
+    Values: generateTaxFilingDates(randomIntFromInterval("4", "12")),
+    ...overrides,
   };
-  return (ids ?? ["st-50/450", "st-51/451", "nj-927/927-w"]).map((Id) => ({
-    Content: `some-content-${Id}`,
-    Id,
-    Values: generateValues(),
-  }));
 };
 
 export const generateFormationUserData = (
@@ -129,7 +131,7 @@ export const generateTaxFilingData = (overrides: Partial<TaxFilingData>): TaxFil
   return {
     state: undefined,
     businessName: undefined,
-    lastUpdated: overrides.state ? new Date(Date.now()).toISOString() : undefined,
+    lastUpdatedISO: overrides.state ? new Date(Date.now()).toISOString() : undefined,
     filings: [generateTaxFiling({})],
     ...overrides,
   };
@@ -213,21 +215,11 @@ export const generateLicenseStatusResult = (overrides: Partial<LicenseStatusResu
 };
 
 export const generateTaxIdAndBusinessName = (
-  overrides: Partial<{ businessName: string; taxId: string }>
-): { businessName: string; taxId: string } => {
+  overrides: Partial<TaxFilingLookUpRequest>
+): TaxFilingLookUpRequest => {
   return {
     businessName: `some-name-${randomInt()}`,
     taxId: `${randomInt(12)}`,
-    ...overrides,
-  };
-};
-
-export const generateTaxIdAndBusinessNameAndEmail = (
-  overrides: Partial<{ businessName: string; taxId: string; email: string }>
-): { businessName: string; taxId: string; email: string } => {
-  return {
-    ...generateTaxIdAndBusinessName({}),
-    email: `some-email-${randomInt()}@whatever.com`,
     ...overrides,
   };
 };

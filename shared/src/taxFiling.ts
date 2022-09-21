@@ -3,8 +3,13 @@ export type TaxFilingState = "SUCCESS" | "FAILED" | "PENDING" | "API_ERROR";
 export type TaxFilingData = {
   readonly state?: TaxFilingState;
   readonly businessName?: string;
-  readonly lastUpdated?: string; // ISOString
+  readonly lastUpdatedISO?: string;
   readonly filings: TaxFiling[];
+};
+
+export type TaxFilingLookUpRequest = {
+  readonly businessName: string;
+  readonly taxId: string;
 };
 
 export type TaxFiling = {

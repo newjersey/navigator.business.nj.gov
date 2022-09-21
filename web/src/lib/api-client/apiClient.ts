@@ -41,7 +41,14 @@ export const postTaxRegistrationOnboarding = (props: {
   businessName: string;
   taxId: string;
 }): Promise<UserData> => {
-  return post(`/gov2go/onboarding`, props);
+  return post(`/taxFilings/onboarding`, props);
+};
+
+export const postTaxRegistrationLookup = (props: {
+  businessName: string;
+  taxId: string;
+}): Promise<UserData> => {
+  return post(`/taxFilings/lookup`, props);
 };
 
 export const postNewsletter = (userData: UserData): Promise<UserData> => {

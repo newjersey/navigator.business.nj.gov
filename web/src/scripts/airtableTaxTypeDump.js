@@ -31,10 +31,10 @@ const saveRecords = async () => {
   }
 };
 
-const reformatTaxId = (id) => id.trim().replaceAll(" ", "").replaceAll("/", "_").toLowerCase();
+const slugifyTaxId = (id) => id.trim().replaceAll(" ", "").replaceAll("/", "_").toLowerCase();
 
 const airtableToOpportunity = (airtableOpp) => {
-  const id = reformatTaxId(airtableOpp["Form #"]);
+  const id = slugifyTaxId(airtableOpp["Form #"]);
 
   return {
     name: airtableOpp["Tax Name"].trim(),

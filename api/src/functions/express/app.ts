@@ -8,9 +8,9 @@ import { externalEndpointRouterFactory } from "src/api/externalEndpointRouter";
 import { guestRouterFactory } from "src/api/guestRouter";
 import { taxFilingRouterFactory } from "src/api/taxFilingRouter";
 import { AirtableFeedbackClient } from "src/client/AirtableFeedbackClient";
-import { apiTaxFilingClient as ApiTaxFilingClient } from "src/client/ApiTaxFilingClient";
+import { ApiTaxFilingClient } from "src/client/ApiTaxFilingClient";
 import { addNewsletterFactory } from "src/domain/newsletter/addNewsletterFactory";
-import { taxFilingsFactory } from "src/domain/tax-filings/taxFilingsFactory";
+import { taxFilingsInterfaceFactory } from "src/domain/tax-filings/taxFilingsInterfaceFactory";
 import { updateOperatingPhase } from "../..//domain/user/updateOperatingPhase";
 import { formationRouterFactory } from "../../api/formationRouter";
 import { licenseStatusRouterFactory } from "../../api/licenseStatusRouter";
@@ -91,7 +91,7 @@ const FORMATION_API_BASE_URL = process.env.FORMATION_API_BASE_URL || "";
 const GOV2GO_REGISTRATION_API_KEY = process.env.GOV2GO_REGISTRATION_API_KEY || "";
 const GOV2GO_REGISTRATION_BASE_URL = process.env.GOV2GO_REGISTRATION_BASE_URL || "";
 
-const apiTaxFilingClient = ApiTaxFilingClient(
+const taxFilingClient = ApiTaxFilingClient(
   {
     baseUrl: GOV2GO_REGISTRATION_BASE_URL,
     apiKey: GOV2GO_REGISTRATION_API_KEY,
@@ -131,7 +131,7 @@ const airtableFeedbackClient = AirtableFeedbackClient(
 const USERS_TABLE = process.env.USERS_TABLE || "users-table-local";
 const userDataClient = DynamoUserDataClient(dynamoDb, USERS_TABLE);
 
-const taxFilingsClient = taxFilingsFactory(userDataClient, apiTaxFilingClient);
+const taxFilingInterface = taxFilingsInterfaceFactory(taxFilingClient);
 
 const addGovDeliveryNewsletter = addNewsletterFactory(govDeliveryNewsletterClient);
 const addToAirtableUserTesting = addToUserTestingFactory(airtableUserTestingClient);
@@ -176,7 +176,7 @@ app.use("/api/guest", guestRouterFactory(businessNameClient));
 app.use("/api", licenseStatusRouterFactory(updateLicenseStatus));
 app.use("/api", selfRegRouterFactory(userDataClient, selfRegClient));
 app.use("/api", formationRouterFactory(apiFormationClient, userDataClient));
-app.use("/api/gov2go", taxFilingRouterFactory(userDataClient, taxFilingsClient));
+app.use("/api/taxFilings", taxFilingRouterFactory(userDataClient, taxFilingInterface));
 
 app.post("/api/mgmt/auth", (req, res) => {
   if (req.body.password === process.env.ADMIN_PASSWORD) {
