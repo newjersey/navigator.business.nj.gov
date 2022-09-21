@@ -31,9 +31,7 @@ function mockMaterialUI(): typeof materialUi {
 
 const mockApi = api as jest.Mocked<typeof api>;
 
-jest.mock("next/router", () => ({
-  useRouter: jest.fn(),
-}));
+jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@mui/material", () => mockMaterialUI());
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));

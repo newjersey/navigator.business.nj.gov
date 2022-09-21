@@ -7,9 +7,7 @@ import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { RegistrationStatus } from "@businessnjgovnavigator/shared/";
 import { render, screen } from "@testing-library/react";
 
-jest.mock("next/router", () => ({
-  useRouter: jest.fn(),
-}));
+jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({ postSelfReg: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/auth/sessionHelper", () => ({ triggerSignIn: jest.fn() }));
