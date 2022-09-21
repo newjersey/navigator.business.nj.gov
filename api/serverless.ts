@@ -47,6 +47,7 @@ const useFakeSelfReg = process.env.USE_FAKE_SELF_REG || "";
 const intercomHashSecret = process.env.INTERCOM_HASH_SECRET || "";
 
 const documentS3Bucket = `nj-bfs-user-documents-${stage}`;
+const skipSaveDocumentsToS3 = process.env.SKIP_SAVE_DOCUMENTS_TO_S3 || "";
 
 const serverlessConfiguration: AWS = {
   useDotenv: true,
@@ -160,6 +161,7 @@ const serverlessConfiguration: AWS = {
       GOV2GO_REGISTRATION_BASE_URL: gov2goRegBaseUrl,
       STAGE: stage,
       INTERCOM_HASH_SECRET: intercomHashSecret,
+      SKIP_SAVE_DOCUMENTS_TO_S3: skipSaveDocumentsToS3,
     },
     logRetentionInDays: 180,
   },

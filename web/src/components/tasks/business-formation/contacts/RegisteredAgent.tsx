@@ -167,6 +167,7 @@ export const RegisteredAgent = (): ReactElement => {
                     <Checkbox
                       checked={state.formationFormData.agentUseAccountInfo}
                       onChange={toggleUseAccountInfo}
+                      id="same-agent-info-as-account-checkbox"
                     />
                   }
                 />
@@ -203,6 +204,7 @@ export const RegisteredAgent = (): ReactElement => {
                     <Checkbox
                       checked={state.formationFormData.agentUseBusinessAddress}
                       onChange={toggleUseBusinessAddress}
+                      id="same-agent-address-as-business-checkbox"
                     />
                   }
                 />

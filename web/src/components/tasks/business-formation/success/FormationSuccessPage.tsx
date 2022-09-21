@@ -19,7 +19,7 @@ export const FormationSuccessPage = (props: Props): ReactElement => {
 
   return (
     <>
-      <div className="fdc fac margin-bottom-2">
+      <div className="fdc fac margin-bottom-2" data-testid="formation-success-page">
         <img src={`/img/trophy-illustration.svg`} alt="" />
         <h2 className="margin-bottom-0">{Config.businessFormationDefaults.successPageHeader}</h2>
         <p className="text-center">{Config.businessFormationDefaults.successPageSubheader}</p>

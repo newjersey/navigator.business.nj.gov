@@ -1,0 +1,9 @@
+{
+  "Success": true,
+  "Id": "some-id-123",
+  "PayUrl": {
+    "PortalPayId": "some-pay-id-456",
+    "RedirectToUrl": "/tasks/form-business-entity?completeFiling=true",
+    "StatusCode": 1
+  }
+}

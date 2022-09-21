@@ -56,7 +56,7 @@ export const Provisions = (): ReactElement => {
         </div>
         <div className="mobile-lg:margin-left-auto flex mobile-lg:flex-justify-center">
           {!isExpanded && (
-            <Button style="tertiary" onClick={handleAddButtonClick}>
+            <Button style="tertiary" onClick={handleAddButtonClick} dataTestid="show-provisions">
               {Config.businessFormationDefaults.provisionsAddButtonText}
             </Button>
           )}
@@ -108,7 +108,12 @@ export const Provisions = (): ReactElement => {
         </div>
       ))}
       {isExpanded && state.formationFormData.provisions.length < 10 && (
-        <Button onClick={handleAddAnother} className="margin-top-2" style="tertiary">
+        <Button
+          onClick={handleAddAnother}
+          className="margin-top-2"
+          style="tertiary"
+          dataTestid="add-new-provision"
+        >
           <Icon>add</Icon>
           {Config.businessFormationDefaults.provisionsAddAnotherButtonText}
         </Button>

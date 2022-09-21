@@ -202,7 +202,7 @@ export const Signatures = (): ReactElement => {
         })}
 
         {state.formationFormData.signers.length < 10 && (
-          <Button style="tertiary" onClick={addSignerField}>
+          <Button style="tertiary" onClick={addSignerField} dataTestid="add-new-signer">
             <Icon>add</Icon>{" "}
             <span className="text-underline" style={{ textUnderlinePosition: "under" }}>
               {Config.businessFormationDefaults.addNewSignerButtonText}

@@ -8,7 +8,8 @@ import { getSignedInUser, getSignedInUserId } from "./userRouter";
 
 export const formationRouterFactory = (
   formationClient: FormationClient,
-  userDataClient: UserDataClient
+  userDataClient: UserDataClient,
+  config: { shouldSaveDocuments: boolean }
 ): Router => {
   const router = Router();
 
@@ -57,7 +58,7 @@ export const formationRouterFactory = (
           standingDoc: "",
         };
 
-        if (getFilingResponse.success) {
+        if (getFilingResponse.success && config.shouldSaveDocuments) {
           taskProgress[formationTaskId] = "COMPLETED";
           entityId = getFilingResponse.entityId;
           dateOfFormation = userData.formationData.formationFormData.businessStartDate;
