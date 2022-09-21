@@ -19,6 +19,7 @@ const renderMiniRoadMap = (taskId: string) => {
 describe("<MiniRoadmap />", () => {
   beforeEach(() => {
     jest.resetAllMocks();
+    setupStatefulUserDataContext();
     useMockRoadmap({
       steps: [
         generateStep({
@@ -114,7 +115,6 @@ describe("<MiniRoadmap />", () => {
   });
 
   const renderStatefulMiniRoadMap = (taskId: string, userData = generateUserData({})) => {
-    setupStatefulUserDataContext();
     render(
       <WithStatefulUserData initialUserData={userData}>
         <MiniRoadmap activeTaskId={taskId} />;

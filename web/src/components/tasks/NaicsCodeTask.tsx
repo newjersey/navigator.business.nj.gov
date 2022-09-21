@@ -17,7 +17,7 @@ interface Props {
 
 export const NaicsCodeTask = (props: Props): ReactElement => {
   const [showInput, setShowInput] = useState<boolean>(true);
-  const { userData, update } = useUserData();
+  const { userData, updateQueue } = useUserData();
   const { isAuthenticated, setModalIsVisible } = useContext(AuthAlertContext);
 
   useMountEffectWhenDefined(() => {
@@ -27,14 +27,13 @@ export const NaicsCodeTask = (props: Props): ReactElement => {
   }, userData);
 
   const setBackToEditing = ({ remove }: { remove: boolean }) => {
-    if (!userData) return;
+    if (!userData || !updateQueue) return;
     setShowInput(true);
     const newNaicsValue = remove ? emptyProfileData.naicsCode : userData.profileData.naicsCode;
-    update({
-      ...userData,
-      profileData: { ...userData.profileData, naicsCode: newNaicsValue },
-      taskProgress: { ...userData.taskProgress, [props.task.id]: "IN_PROGRESS" },
-    });
+    updateQueue
+      .queueTaskProgress({ [props.task.id]: "IN_PROGRESS" })
+      .queueProfileData({ naicsCode: newNaicsValue })
+      .update();
   };
 
   const onEdit = () => setBackToEditing({ remove: false });

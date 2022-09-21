@@ -22,7 +22,7 @@ interface Props {
 
 export const CannabisApplyForLicenseTask = (props: Props): ReactElement => {
   const userDataFromHook = useUserData();
-  const update = userDataFromHook.update;
+  const updateQueue = userDataFromHook.updateQueue;
   const userData = props.CMS_ONLY_fakeUserData ?? userDataFromHook.userData;
 
   const [displayFirstTab, setDisplayFirstTab] = useState<boolean>(true);
@@ -99,7 +99,7 @@ export const CannabisApplyForLicenseTask = (props: Props): ReactElement => {
   };
 
   const handleNextTabButtonClick = (): void => {
-    if (!userData) return;
+    if (!userData || !updateQueue) return;
     setDisplayFirstTab(false);
     scrollToTop();
     sendNextTabButtonAnalytics();
@@ -108,13 +108,7 @@ export const CannabisApplyForLicenseTask = (props: Props): ReactElement => {
       userData.taskProgress[props.task.id] === "NOT_STARTED"
     ) {
       setSuccessSnackbarIsOpen(true);
-      update({
-        ...userData,
-        taskProgress: {
-          ...userData.taskProgress,
-          [props.task.id]: "IN_PROGRESS",
-        },
-      });
+      updateQueue.queueTaskProgress({ [props.task.id]: "IN_PROGRESS" }).update();
     }
   };
 

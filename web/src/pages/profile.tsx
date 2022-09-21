@@ -86,8 +86,8 @@ const defaultTabForPersona: Record<string, ProfileTabs> = {
 };
 
 const ProfilePage = (props: Props): ReactElement => {
-  const { setRoadmap, setSectionCompletion } = useContext(RoadmapContext);
-  const { roadmap } = useRoadmap();
+  const { setRoadmap } = useContext(RoadmapContext);
+  const { roadmap, updateSectionCompletion } = useRoadmap();
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
   const router = useRouter();
   const [alert, setAlert] = useState<OnboardingStatus | undefined>(undefined);
@@ -187,7 +187,7 @@ const ProfilePage = (props: Props): ReactElement => {
       taxFilingData,
     };
 
-    setSectionCompletion(getSectionCompletion(newRoadmap, newUserData));
+    updateSectionCompletion(getSectionCompletion(newRoadmap, newUserData));
     newUserData = await postGetAnnualFilings(newUserData);
     update(newUserData).then(async () => {
       setIsLoading(false);

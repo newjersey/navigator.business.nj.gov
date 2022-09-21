@@ -108,6 +108,7 @@ export const generateUseUserDataResponse = (
   error: undefined,
   isLoading: false,
   refresh: jest.fn().mockResolvedValue({}),
+  updateQueue: undefined,
   ...overrides,
 });
 

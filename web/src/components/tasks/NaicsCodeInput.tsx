@@ -4,6 +4,7 @@ import { Button } from "@/components/njwds-extended/Button";
 import { RoadmapContext } from "@/contexts/roadmapContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import NaicsCodes from "@/lib/static/records/naics2022.json";
@@ -35,10 +36,11 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
   const [isInvalid, setIsInvalid] = useState<NaicsErrorTypes | undefined>(undefined);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [displayInputState, setDisplayInput] = useState<boolean>(false);
+  const { queueUpdateTaskProgress } = useUpdateTaskProgress();
   const userDataFromHook = useUserData();
   const userData = props.CMS_ONLY_fakeUserData ?? userDataFromHook.userData;
   const displayInput = props.CMS_ONLY_displayInput ?? displayInputState;
-  const update = userDataFromHook.update;
+  const updateQueue = userDataFromHook.updateQueue;
 
   const getCode = (code: string) =>
     (NaicsCodes as NaicsCodeObject[]).find((element) => element?.SixDigitCode?.toString() == code);
@@ -65,7 +67,7 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
   }, userData);
 
   const saveNaicsCode = async (): Promise<void> => {
-    if (!userData) return;
+    if (!updateQueue) return;
 
     if (naicsCode?.length !== LENGTH) {
       setIsInvalid("length");
@@ -79,21 +81,20 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
 
     setIsInvalid(undefined);
     setIsLoading(true);
-    const updatedUserData: UserData = {
-      ...userData,
-      profileData: { ...userData.profileData, naicsCode: naicsCode },
-      taskProgress: { ...userData.taskProgress, [props.task.id]: "COMPLETED" },
-    };
-    try {
-      await update(updatedUserData);
 
-      setIsLoading(false);
-      props.onSave();
-      const newRoadmap = await buildUserRoadmap(updatedUserData.profileData);
-      setRoadmap(newRoadmap);
-    } catch {
-      setIsLoading(false);
-    }
+    queueUpdateTaskProgress(props.task.id, "COMPLETED");
+    updateQueue
+      .queueProfileData({ naicsCode })
+      .update()
+      .then(async () => {
+        setIsLoading(false);
+        props.onSave();
+        const newRoadmap = await buildUserRoadmap(updateQueue.current().profileData);
+        setRoadmap(newRoadmap);
+      })
+      .catch(() => {
+        setIsLoading(false);
+      });
   };
 
   const handleChange = (value: string): void => {
@@ -110,11 +111,8 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
   };
 
   const setInProgress = () => {
-    if (!userData) return;
-    update({
-      ...userData,
-      taskProgress: { ...userData.taskProgress, [props.task.id]: "IN_PROGRESS" },
-    });
+    if (!updateQueue) return;
+    updateQueue.queueTaskProgress({ [props.task.id]: "IN_PROGRESS" }).update();
   };
 
   let saveButtonText = Config.determineNaicsCode.saveButtonText;
