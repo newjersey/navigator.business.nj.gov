@@ -30,14 +30,14 @@ export interface FormationClient {
   getCompletedFiling: (formationId: string) => Promise<GetFilingResponse>;
 }
 
-export interface ApiTaxFilingClient {
+export interface TaxFilingClient {
   lookup: (taxId: string, businessName: string) => Promise<TaxFilingLookupResponse>;
   onboarding: (taxId: string, email: string, businessName: string) => Promise<TaxFilingOnboardingResponse>;
 }
 
-export interface TaxFilingClient {
-  lookup: (props: { userId: string; taxId: string; businessName: string }) => Promise<UserData>;
-  onboarding: (props: { userId: string; taxId: string; businessName: string }) => Promise<UserData>;
+export interface TaxFilingInterface {
+  lookup: (props: { userData: UserData; taxId: string; businessName: string }) => Promise<UserData>;
+  onboarding: (props: { userData: UserData; taxId: string; businessName: string }) => Promise<UserData>;
 }
 
 export type AddNewsletter = (userData: UserData) => Promise<UserData>;
@@ -61,7 +61,9 @@ export interface SelfRegClient {
   resume: (authID: string) => Promise<SelfRegResponse>;
 }
 
-export type TaxFilingResults = { Content: string; Id: string; Values: string[] }[] | null;
+export type TaxFilingResult = { Content: string; Id: string; Values: string[] };
+
+export type TaxIdentifierToIdsRecord = Record<string, string[]>;
 
 export type TaxFilingOnboardingResponse = {
   state: TaxFilingState;

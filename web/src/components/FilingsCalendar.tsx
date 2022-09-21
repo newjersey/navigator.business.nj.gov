@@ -1,14 +1,18 @@
 import { ArrowTooltip } from "@/components/ArrowTooltip";
-import { FilingsCalendarTaxAccess } from "@/components/FilingsCalendarTaxAccess";
+import {
+  FilingsCalendarTaxAccess,
+  shouldRenderFilingsCalendarTaxAccess,
+} from "@/components/FilingsCalendarTaxAccess";
 import { Tag } from "@/components/njwds-extended/Tag";
 import { Icon } from "@/components/njwds/Icon";
 import { getMergedConfig } from "@/contexts/configContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { sortFilterFilingsWithinAYear } from "@/lib/domain-logic/filterFilings";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { MediaQueries } from "@/lib/PageSizes";
 import { OperateReference } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
-import { getCurrentDate, parseDateWithFormat } from "@businessnjgovnavigator/shared/";
+import { getCurrentDate, parseDateWithFormat, TaxFiling } from "@businessnjgovnavigator/shared/";
 import { useMediaQuery } from "@mui/material";
 import Link from "next/link";
 import router from "next/router";
@@ -25,17 +29,17 @@ export const FilingsCalendar = (props: Props): ReactElement => {
   const Config = getMergedConfig();
   const { userData, update } = useUserData();
   const isLargeScreen = useMediaQuery(MediaQueries.tabletAndUp);
-  const taxFilings =
-    userData?.taxFilingData.filings.sort((a, b) =>
-      parseDateWithFormat(a.dueDate, "YYYY-MM-DD").isBefore(parseDateWithFormat(b.dueDate, "YYYY-MM-DD"))
-        ? -1
-        : 1
-    ) || [];
+
+  const sortedFilteredFilingsWithinAYear: TaxFiling[] = userData?.taxFilingData.filings
+    ? sortFilterFilingsWithinAYear(userData.taxFilingData.filings)
+    : [];
 
   const editOnClick = () => {
     analytics.event.roadmap_profile_edit_button.click.go_to_profile_screen();
     router.push(ROUTES.profile);
   };
+
+  const hasDeadlinesWithinAYear = (): boolean => sortedFilteredFilingsWithinAYear.length > 0;
 
   const getMonth = (num: number): ReactElement => {
     const date = getCurrentDate().add(num, "months");
@@ -44,7 +48,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
       textColor = "text-green";
     }
 
-    const thisMonthFilings = taxFilings.filter((it) => {
+    const thisMonthFilings = sortedFilteredFilingsWithinAYear.filter((it) => {
       return (
         parseDateWithFormat(it.dueDate, "YYYY-MM-DD").month() === date.month() &&
         parseDateWithFormat(it.dueDate, "YYYY-MM-DD").year() === date.year()
@@ -135,7 +139,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
           </Button>
         </div>
         <hr className="bg-base-lighter margin-top-2 margin-bottom-4" aria-hidden={true} />
-        <FilingsCalendarTaxAccess />
+        {shouldRenderFilingsCalendarTaxAccess(userData) && <FilingsCalendarTaxAccess />}
         <table data-testid="filings-calendar-as-table">
           <tbody>
             {rowIndices.map((rowIndex) => {
@@ -157,7 +161,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
     );
   };
 
-  return taxFilings.length > 0 ? (
+  return hasDeadlinesWithinAYear() ? (
     <>
       {isLargeScreen && userData?.preferences.isCalendarFullView ? (
         renderCalendar()
@@ -166,7 +170,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
       )}
     </>
   ) : (
-    <div data-testid="empty-calendar" className=" padding-y-2 ">
+    <div data-testid="empty-calendar" className="padding-y-2">
       <h2 className="margin-bottom-0">{Config.dashboardDefaults.calendarHeader}</h2>
       <hr className="bg-base-light margin-y-3 margin-right-105" aria-hidden={true} />
       <div className="flex flex-column space-between fac text-align-center flex-desktop:grid-col bg-base-lightest usa-prose padding-y-205 padding-x-3">

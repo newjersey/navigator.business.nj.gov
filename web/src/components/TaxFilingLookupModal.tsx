@@ -19,7 +19,7 @@ interface Props {
   close: () => void;
   onSuccess: () => void;
 }
-export const Gov2GoModal = (props: Props): ReactElement => {
+export const TaxFilingLookupModal = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const { userData, update } = useUserData();
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
@@ -27,8 +27,8 @@ export const Gov2GoModal = (props: Props): ReactElement => {
   const fields: ProfileFields[] = ["businessName", "taxId"];
 
   const errorMessages: Partial<Record<ProfileFields, string>> = {
-    businessName: Config.dashboardDefaults.taxCalendarModalBusinessFieldErrorName,
-    taxId: Config.dashboardDefaults.taxCalendarModalTaxErrorName,
+    businessName: Config.taxCalendar.ModalBusinessFieldErrorName,
+    taxId: Config.taxCalendar.ModalTaxErrorName,
   };
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -90,13 +90,13 @@ export const Gov2GoModal = (props: Props): ReactElement => {
     }
 
     if (userDataToSet.taxFilingData.state == "FAILED") {
-      setFieldStates((prev) => ({
+      setFieldStates((previousState) => ({
         ...fields.reduce(
-          (p, c) => {
-            p[c] = { ...p[c], invalid: true };
-            return p;
+          (reducer, value) => {
+            reducer[value] = { ...reducer[value], invalid: true };
+            return reducer;
           },
-          { ...prev }
+          { ...previousState }
         ),
       }));
       setOnAPIfailed("FAILED");
@@ -117,8 +117,9 @@ export const Gov2GoModal = (props: Props): ReactElement => {
   }, userData);
 
   const onClose = () => {
+    if (!userData) return;
     props.close();
-    userData && setProfileData(userData.profileData);
+    setProfileData(userData.profileData);
     setOnAPIfailed(undefined);
     setOnSubmitClicked(false);
     setFieldStates(createProfileFieldErrorMap());
@@ -143,14 +144,14 @@ export const Gov2GoModal = (props: Props): ReactElement => {
       <ModalTwoButton
         isOpen={props.isOpen}
         close={onClose}
-        title={Config.dashboardDefaults.taxCalendarModalHeader}
-        primaryButtonText={Config.dashboardDefaults.taxCalendarModalNextButton}
+        title={Config.taxCalendar.ModalHeader}
+        primaryButtonText={Config.taxCalendar.ModalNextButton}
         primaryButtonOnClick={onSubmit}
-        secondaryButtonText={Config.dashboardDefaults.taxCalendarModalPreviousButton}
+        secondaryButtonText={Config.taxCalendar.ModalPreviousButton}
       >
-        {hasErrors() && onSubmitClicked && !apiFailed ? (
+        {hasErrors() && onSubmitClicked && !apiFailed && (
           <Alert variant={"error"}>
-            {Config.dashboardDefaults.taxCalendarModalErrorHeader}
+            {Config.taxCalendar.ModalErrorHeader}
             <ul>
               {fields.map((i) => {
                 if (fieldStates[i].invalid && errorMessages[i]) {
@@ -159,32 +160,26 @@ export const Gov2GoModal = (props: Props): ReactElement => {
               })}
             </ul>
           </Alert>
-        ) : (
-          <></>
         )}
-        {apiFailed ? (
+        {apiFailed && (
           <Alert variant={"error"}>
             {" "}
             <Content>
               {apiFailed == "FAILED"
-                ? Config.dashboardDefaults.taxCalendarFailedErrorMessageMarkdown
-                : Config.dashboardDefaults.taxCalendarFailedUnknownMarkdown}
+                ? Config.taxCalendar.FailedErrorMessageMarkdown
+                : Config.taxCalendar.FailedUnknownMarkdown}
             </Content>
           </Alert>
-        ) : (
-          <></>
         )}
-        <Content>{Config.dashboardDefaults.taxCalendarModalBody}</Content>
+        <Content>{Config.taxCalendar.ModalBody}</Content>
         <OnboardingBusinessName
           className="margin-top-4"
           inputErrorBar
           onValidation={onValidation}
           fieldStates={fieldStates}
-          headerMarkdown={Config.dashboardDefaults.taxCalendarModalBusinessFieldHeader}
-          descriptionMarkdown={Config.dashboardDefaults.taxCalendarModalBusinessFieldMarkdown}
-          validationText={
-            apiFailed == "FAILED" ? Config.dashboardDefaults.taxCalendarFailedBusinessFieldHelper : undefined
-          }
+          headerMarkdown={Config.taxCalendar.ModalBusinessFieldHeader}
+          descriptionMarkdown={Config.taxCalendar.ModalBusinessFieldMarkdown}
+          validationText={apiFailed == "FAILED" ? Config.taxCalendar.FailedBusinessFieldHelper : undefined}
           disabled={userData?.formationData.completedFilingPayment}
         />
         <OnboardingTaxId
@@ -192,12 +187,10 @@ export const Gov2GoModal = (props: Props): ReactElement => {
           onValidation={onValidation}
           inputErrorBar
           splitField
-          descriptionMarkdown={Config.dashboardDefaults.taxCalendarModalTaxIdMarkdown}
-          headerMarkdown={Config.dashboardDefaults.taxCalendarModalTaxIdHeader}
+          descriptionMarkdown={Config.taxCalendar.ModalTaxIdMarkdown}
+          headerMarkdown={Config.taxCalendar.ModalTaxIdHeader}
           fieldStates={fieldStates}
-          validationText={
-            apiFailed == "FAILED" ? Config.dashboardDefaults.taxCalendarFailedTaxIdHelper : undefined
-          }
+          validationText={apiFailed == "FAILED" ? Config.taxCalendar.FailedTaxIdHelper : undefined}
           required
         />
       </ModalTwoButton>

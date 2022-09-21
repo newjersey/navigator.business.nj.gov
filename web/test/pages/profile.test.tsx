@@ -10,6 +10,7 @@ import {
   generateGetFilingResponse,
   generateMunicipality,
   generateProfileData,
+  generateTaxFiling,
   generateTaxFilingData,
   generateUser,
   generateUserData,
@@ -725,6 +726,7 @@ describe("profile", () => {
       expect(currentUserData()).toEqual({
         ...userData,
         formProgress: "COMPLETED",
+        taxFilingData: { ...userData.taxFilingData, state: undefined, filings: [] },
         profileData: {
           ...userData.profileData,
           businessName: "Cool Computers",
@@ -783,6 +785,39 @@ describe("profile", () => {
       expect(getTaxPinValue()).toEqual("6666");
       chooseTab("notes");
       expect(getNotesValue()).toEqual("whats appppppp");
+    });
+
+    it("resets taxFiling data when taxId is changed", async () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          businessPersona: "OWNING",
+          businessName: "Applebees",
+          entityId: "1234567890",
+          employerId: "123456789",
+          dateOfFormation,
+          taxId: "123456790",
+          notes: "whats appppppp",
+          municipality: generateMunicipality({
+            displayName: "Newark",
+          }),
+          ownershipTypeIds: ["veteran-owned", "woman-owned"],
+          homeBasedBusiness: false,
+          existingEmployees: "123",
+          taxPin: "6666",
+          sectorId: "clean-energy",
+        }),
+        taxFilingData: generateTaxFilingData({ state: "SUCCESS", filings: [generateTaxFiling({})] }),
+      });
+
+      renderPage({ userData });
+      chooseTab("numbers");
+      fillText("Tax id", "123456789123");
+      clickSave();
+      await waitFor(() => {
+        expect(screen.getByTestId("snackbar-alert-SUCCESS")).toBeInTheDocument();
+      });
+      expect(currentUserData().taxFilingData.state).toEqual(undefined);
+      expect(currentUserData().taxFilingData.filings).toEqual([]);
     });
 
     it("shows an error when tax pin input is not empty or is less than 4 digits", async () => {

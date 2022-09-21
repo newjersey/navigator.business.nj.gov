@@ -59,7 +59,7 @@ export const TaxRegistrationModal = (props: Props): ReactElement => {
     let { taxFilingData } = userData;
 
     if (userData.profileData.taxId != profileData.taxId) {
-      taxFilingData = { ...taxFilingData, state: undefined };
+      taxFilingData = { ...taxFilingData, state: undefined, filings: [] };
     }
 
     const updatedUserData = { ...userData, profileData, taxFilingData };

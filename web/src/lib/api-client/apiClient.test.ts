@@ -12,6 +12,7 @@ import {
   postFeedback,
   postIssue,
   postNewsletter,
+  postTaxRegistrationLookup,
   postTaxRegistrationOnboarding,
   postUserData,
 } from "./apiClient";
@@ -63,11 +64,20 @@ describe("apiClient", () => {
     });
   });
 
-  it("posts gov2go onboarding request", async () => {
+  it("posts taxFilings onboarding request", async () => {
     mockAxios.post.mockResolvedValue({ data: {} });
     const taxIdAndBusinessName = generateTaxIdAndBusinessName({});
     await postTaxRegistrationOnboarding(taxIdAndBusinessName);
-    expect(mockAxios.post).toHaveBeenCalledWith("/api/gov2go/onboarding", taxIdAndBusinessName, {
+    expect(mockAxios.post).toHaveBeenCalledWith("/api/taxFilings/onboarding", taxIdAndBusinessName, {
+      headers: { Authorization: "Bearer some-token" },
+    });
+  });
+
+  it("posts taxFilings lookup request", async () => {
+    mockAxios.post.mockResolvedValue({ data: {} });
+    const taxIdAndBusinessName = generateTaxIdAndBusinessName({});
+    await postTaxRegistrationLookup(taxIdAndBusinessName);
+    expect(mockAxios.post).toHaveBeenCalledWith("/api/taxFilings/lookup", taxIdAndBusinessName, {
       headers: { Authorization: "Bearer some-token" },
     });
   });

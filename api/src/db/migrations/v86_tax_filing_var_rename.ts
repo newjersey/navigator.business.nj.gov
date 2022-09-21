@@ -1,58 +1,54 @@
-import { v84UserData } from "./v84_fix_completed_filing";
+import { v85UserData } from "./v85_add_tax_filing_state";
 
-export interface v85UserData {
-  user: v85BusinessUser;
-  profileData: v85ProfileData;
-  formProgress: v85FormProgress;
-  taskProgress: Record<string, v85TaskProgress>;
+export interface v86UserData {
+  user: v86BusinessUser;
+  profileData: v86ProfileData;
+  formProgress: v86FormProgress;
+  taskProgress: Record<string, v86TaskProgress>;
   taskItemChecklist: Record<string, boolean>;
-  licenseData: v85LicenseData | undefined;
-  preferences: v85Preferences;
-  taxFilingData: v85TaxFilingData;
-  formationData: v85FormationData;
+  licenseData: v86LicenseData | undefined;
+  preferences: v86Preferences;
+  taxFilingData: v86TaxFilingData;
+  formationData: v86FormationData;
   version: number;
 }
 
-export const migrate_v84_to_v85 = (v84Data: v84UserData): v85UserData => {
+export const migrate_v85_to_v86 = (v85Data: v85UserData): v86UserData => {
+  const { lastUpdated: lastUpdatedISO, ...taxFiling } = v85Data.taxFilingData;
   return {
-    ...v84Data,
-    taxFilingData: {
-      ...v84Data.taxFilingData,
-      state: undefined,
-      lastUpdated: undefined,
-      businessName: undefined,
-    },
-    version: 85,
+    ...v85Data,
+    taxFilingData: { lastUpdatedISO, ...taxFiling },
+    version: 86,
   };
 };
 
-// ---------------- v85 types ----------------
+// ---------------- v86 types ----------------
 
-type v85TaskProgress = "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
-type v85FormProgress = "UNSTARTED" | "COMPLETED";
-export type v85ABExperience = "ExperienceA" | "ExperienceB";
+type v86TaskProgress = "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
+type v86FormProgress = "UNSTARTED" | "COMPLETED";
+export type v86ABExperience = "ExperienceA" | "ExperienceB";
 
-type v85BusinessUser = {
+type v86BusinessUser = {
   name?: string;
   email: string;
   id: string;
   receiveNewsletter: boolean;
   userTesting: boolean;
-  externalStatus: v85ExternalStatus;
+  externalStatus: v86ExternalStatus;
   myNJUserKey?: string;
   intercomHash?: string;
-  abExperience: v85ABExperience;
+  abExperience: v86ABExperience;
 };
 
-interface v85ProfileDocuments {
+interface v86ProfileDocuments {
   formationDoc: string;
   standingDoc: string;
   certifiedDoc: string;
 }
 
-type v85BusinessPersona = "STARTING" | "OWNING" | "FOREIGN" | undefined;
-type v85ForeignBusinessType = "REMOTE_WORKER" | "REMOTE_SELLER" | "NEXUS" | "NONE" | undefined;
-type v85OperatingPhase =
+type v86BusinessPersona = "STARTING" | "OWNING" | "FOREIGN" | undefined;
+type v86ForeignBusinessType = "REMOTE_WORKER" | "REMOTE_SELLER" | "NEXUS" | "NONE" | undefined;
+type v86OperatingPhase =
   | "GUEST_MODE"
   | "NEEDS_TO_FORM"
   | "NEEDS_TO_REGISTER_FOR_TAXES"
@@ -61,12 +57,12 @@ type v85OperatingPhase =
   | "UP_AND_RUNNING_OWNING"
   | undefined;
 
-interface v85ProfileData {
-  businessPersona: v85BusinessPersona;
+interface v86ProfileData {
+  businessPersona: v86BusinessPersona;
   businessName: string;
   industryId: string | undefined;
   legalStructureId: string | undefined;
-  municipality: v85Municipality | undefined;
+  municipality: v86Municipality | undefined;
   liquorLicense: boolean;
   requiresCpa: boolean;
   homeBasedBusiness: boolean;
@@ -78,60 +74,60 @@ interface v85ProfileData {
   employerId: string | undefined;
   taxId: string | undefined;
   notes: string;
-  documents: v85ProfileDocuments;
+  documents: v86ProfileDocuments;
   ownershipTypeIds: string[];
   existingEmployees: string | undefined;
   taxPin: string | undefined;
   sectorId: string | undefined;
   naicsCode: string;
-  foreignBusinessType: v85ForeignBusinessType;
+  foreignBusinessType: v86ForeignBusinessType;
   foreignBusinessTypeIds: string[];
   nexusLocationInNewJersey: boolean | undefined;
   nexusDbaName: string | undefined;
   providesStaffingService: boolean;
   certifiedInteriorDesigner: boolean;
   realEstateAppraisalManagement: boolean;
-  operatingPhase: v85OperatingPhase;
+  operatingPhase: v86OperatingPhase;
 }
 
-type v85Municipality = {
+type v86Municipality = {
   name: string;
   displayName: string;
   county: string;
   id: string;
 };
 
-type v85TaxFilingState = "SUCCESS" | "FAILED" | "PENDING" | "API_ERROR";
+type v86TaxFilingState = "SUCCESS" | "FAILED" | "PENDING" | "API_ERROR";
 
-type v85TaxFilingData = {
-  state?: v85TaxFilingState;
-  lastUpdated?: string;
+type v86TaxFilingData = {
+  state?: v86TaxFilingState;
+  lastUpdatedISO?: string;
   businessName?: string;
-  filings: v85TaxFiling[];
+  filings: v86TaxFiling[];
 };
 
-type v85TaxFiling = {
+type v86TaxFiling = {
   identifier: string;
   dueDate: string;
 };
 
-type v85NameAndAddress = {
+type v86NameAndAddress = {
   name: string;
   addressLine1: string;
   addressLine2: string;
   zipCode: string;
 };
 
-type v85LicenseData = {
-  nameAndAddress: v85NameAndAddress;
+type v86LicenseData = {
+  nameAndAddress: v86NameAndAddress;
   completedSearch: boolean;
   lastCheckedStatus: string;
-  status: v85LicenseStatus;
-  items: v85LicenseStatusItem[];
+  status: v86LicenseStatus;
+  items: v86LicenseStatusItem[];
 };
 
-type v85Preferences = {
-  roadmapOpenSections: v85SectionType[];
+type v86Preferences = {
+  roadmapOpenSections: v86SectionType[];
   roadmapOpenSteps: number[];
   hiddenFundingIds: string[];
   hiddenCertificationIds: string[];
@@ -141,14 +137,14 @@ type v85Preferences = {
   isHideableRoadmapOpen: boolean;
 };
 
-type v85LicenseStatusItem = {
+type v86LicenseStatusItem = {
   title: string;
-  status: v85CheckoffStatus;
+  status: v86CheckoffStatus;
 };
 
-type v85CheckoffStatus = "ACTIVE" | "PENDING" | "UNKNOWN";
+type v86CheckoffStatus = "ACTIVE" | "PENDING" | "UNKNOWN";
 
-type v85LicenseStatus =
+type v86LicenseStatus =
   | "ACTIVE"
   | "PENDING"
   | "UNKNOWN"
@@ -162,30 +158,30 @@ type v85LicenseStatus =
   | "VOLUNTARY_SURRENDER"
   | "WITHDRAWN";
 
-type v85SectionType = "PLAN" | "START";
+type v86SectionType = "PLAN" | "START";
 
-type v85ExternalStatus = {
-  newsletter?: v85NewsletterResponse;
-  userTesting?: v85UserTestingResponse;
+type v86ExternalStatus = {
+  newsletter?: v86NewsletterResponse;
+  userTesting?: v86UserTestingResponse;
 };
 
-interface v85NewsletterResponse {
+interface v86NewsletterResponse {
   success?: boolean;
-  status: v85NewsletterStatus;
+  status: v86NewsletterStatus;
 }
 
-interface v85UserTestingResponse {
+interface v86UserTestingResponse {
   success?: boolean;
-  status: v85UserTestingStatus;
+  status: v86UserTestingStatus;
 }
 
-type v85NewsletterStatus = typeof newsletterStatusList[number];
+type v86NewsletterStatus = typeof newsletterStatusList[number];
 
 const externalStatusList = ["SUCCESS", "IN_PROGRESS", "CONNECTION_ERROR"] as const;
 
 const userTestingStatusList = [...externalStatusList] as const;
 
-type v85UserTestingStatus = typeof userTestingStatusList[number];
+type v86UserTestingStatus = typeof userTestingStatusList[number];
 
 const newsletterStatusList = [
   ...externalStatusList,
@@ -197,19 +193,19 @@ const newsletterStatusList = [
   "QUESTION_WARNING",
 ] as const;
 
-interface v85FormationData {
-  formationFormData: v85FormationFormData;
-  formationResponse: v85FormationSubmitResponse | undefined;
-  getFilingResponse: v85GetFilingResponse | undefined;
+interface v86FormationData {
+  formationFormData: v86FormationFormData;
+  formationResponse: v86FormationSubmitResponse | undefined;
+  getFilingResponse: v86GetFilingResponse | undefined;
   completedFilingPayment: boolean;
 }
 
-interface v85FormationFormData {
+interface v86FormationFormData {
   readonly businessName: string;
-  readonly businessSuffix: v85BusinessSuffix | undefined;
+  readonly businessSuffix: v86BusinessSuffix | undefined;
   readonly businessTotalStock: string;
   readonly businessStartDate: string;
-  readonly businessAddressCity: v85Municipality | undefined;
+  readonly businessAddressCity: v86Municipality | undefined;
   readonly businessAddressLine1: string;
   readonly businessAddressLine2: string;
   readonly businessAddressState: string;
@@ -227,9 +223,9 @@ interface v85FormationFormData {
   readonly agentOfficeAddressZipCode: string;
   readonly agentUseAccountInfo: boolean;
   readonly agentUseBusinessAddress: boolean;
-  readonly members: v85FormationAddress[];
-  readonly signers: v85FormationAddress[];
-  readonly paymentType: v85PaymentType;
+  readonly members: v86FormationAddress[];
+  readonly signers: v86FormationAddress[];
+  readonly paymentType: v86PaymentType;
   readonly annualReportNotification: boolean;
   readonly corpWatchNotification: boolean;
   readonly officialFormationDocument: boolean;
@@ -240,7 +236,7 @@ interface v85FormationFormData {
   readonly contactPhoneNumber: string;
 }
 
-export interface v85FormationAddress {
+export interface v86FormationAddress {
   readonly name: string;
   readonly addressLine1: string;
   readonly addressLine2: string;
@@ -250,7 +246,7 @@ export interface v85FormationAddress {
   readonly signature: boolean;
 }
 
-type v85PaymentType = "CC" | "ACH" | undefined;
+type v86PaymentType = "CC" | "ACH" | undefined;
 
 const llcBusinessSuffix = [
   "LLC",
@@ -287,22 +283,22 @@ export const corpBusinessSuffix = [
 
 const AllBusinessSuffixes = [...llcBusinessSuffix, ...llpBusinessSuffix, ...corpBusinessSuffix] as const;
 
-type v85BusinessSuffix = typeof AllBusinessSuffixes[number];
+type v86BusinessSuffix = typeof AllBusinessSuffixes[number];
 
-type v85FormationSubmitResponse = {
+type v86FormationSubmitResponse = {
   success: boolean;
   token: string | undefined;
   formationId: string | undefined;
   redirect: string | undefined;
-  errors: v85FormationSubmitError[];
+  errors: v86FormationSubmitError[];
 };
 
-type v85FormationSubmitError = {
+type v86FormationSubmitError = {
   field: string;
   message: string;
 };
 
-type v85GetFilingResponse = {
+type v86GetFilingResponse = {
   success: boolean;
   entityId: string;
   transactionDate: string;
@@ -312,4 +308,4 @@ type v85GetFilingResponse = {
   certifiedDoc: string;
 };
 
-// ---------------- v85 factories ----------------
+// ---------------- v86 factories ----------------

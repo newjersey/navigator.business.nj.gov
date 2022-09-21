@@ -1,10 +1,11 @@
 import axios, { AxiosError } from "axios";
-import { flattenDeDupAndMapTaxFilings } from "../domain/tax-filings/taxIdHelper";
+import { flattenDeDupAndConvertTaxFilings } from "../domain/tax-filings/taxIdHelper";
 import {
-  ApiTaxFilingClient,
+  TaxFilingClient,
   TaxFilingLookupResponse,
   TaxFilingOnboardingResponse,
-  TaxFilingResults,
+  TaxFilingResult,
+  TaxIdentifierToIdsRecord,
 } from "../domain/types";
 import { LogWriterType } from "../libs/logWriter";
 
@@ -13,10 +14,10 @@ type ApiConfig = {
   baseUrl: string;
 };
 
-export const apiTaxFilingClient = (config: ApiConfig, logger: LogWriterType): ApiTaxFilingClient => {
+export const ApiTaxFilingClient = (config: ApiConfig, logger: LogWriterType): TaxFilingClient => {
   const logId = logger.GetId();
 
-  const taxIdMap: Record<string, string[]> = {
+  const taxIdMap: TaxIdentifierToIdsRecord = {
     "cr-1orcnr-11": ["cr-1orcnr-1"],
     "cr-1orcnr-12": ["cr-1orcnr-1"],
   };
@@ -49,7 +50,10 @@ export const apiTaxFilingClient = (config: ApiConfig, logger: LogWriterType): Ap
         `TaxFiling Lookup - NICUSA - Id:${logId} - Response received: ${JSON.stringify(response.data)}`
       );
       const apiResponse = response.data as ApiTaxFilingLookupResponse;
-      return { state: "SUCCESS", filings: flattenDeDupAndMapTaxFilings(apiResponse.Results, taxIdMap) };
+      return {
+        state: "SUCCESS",
+        filings: flattenDeDupAndConvertTaxFilings(apiResponse.Results ?? [], taxIdMap),
+      };
     } catch (error) {
       const axiosError = error as AxiosError;
       if (axiosError.response?.status === 400) {
@@ -156,7 +160,7 @@ export type ApiTaxFilingLookupResponse = {
       }[]
     | null;
   Errors: { Error: string; Field: string }[] | null;
-  Results: TaxFilingResults;
+  Results: TaxFilingResult[] | null;
 };
 
 export type ApiTaxFilingOnboardingResponse = {

@@ -1,17 +1,18 @@
 ---
-id: "cdis-1and2"
-urlSlug: "cdis-1and2"
-name: "Cigarette Tax"
-callToActionLink: "https://www.nj.gov/treasury/taxation/cigarette_tax_form.shtml"
-callToActionText: "File and Pay"
-treasuryLink: "https://www.nj.gov/treasury/taxation/cigarette.shtml"
-extension: "false"
-frequency: "Monthly, 10th of each month"
-taxRates: "Per Pack - $2.70"
-additionalInfo: "Revenues are deposited in the State Treasury for general State use. Initial collections of $391.5 million are deposited in the Health Care Subsidy Fund."
-filingMethod: "paper-or-by-mail-only"
-filingDetails: ""
-agency: "New Jersey Division of Taxation"
+id: cdis-1and2
+urlSlug: cdis-1and2
+name: Cigarette Tax
+callToActionLink: https://www.nj.gov/treasury/taxation/cigarette_tax_form.shtml
+callToActionText: File and Pay
+treasuryLink: https://www.nj.gov/treasury/taxation/cigarette.shtml
+extension: false
+frequency: Monthly, 10th of each month
+taxRates: Per Pack - $2.70
+additionalInfo: >-
+  Revenues are deposited in the State Treasury for general State use. Initial collections of $391.5 million are deposited in the Health Care Subsidy Fund.
+filingMethod: paper-or-by-mail-only
+filingDetails:
+agency: New Jersey Division of Taxation
 ---
 
 This Cigarette Tax is collected from distributors to report taxable cigarettes sold in New Jersey includes to unlicensed cigarette dealers and unlicensed or licensed wholesalers.

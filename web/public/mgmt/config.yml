@@ -270,7 +270,26 @@ collections:
       - { label: "Id", name: "id", widget: "string" }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
       - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
+      - { label: "Description", name: "description", widget: "markdown", required: false }
+      - { label: "Frequency", name: "frequency", widget: "markdown", required: false }
+      - { label: "Extension", name: "extension", widget: "boolean", required: false }
+      - { label: "Tax Rates", name: "taxRates", widget: "markdown", required: false }
 
+      - {
+          label: "Filing Method",
+          name: "filingMethod",
+          widget: "select",
+          required: false,
+          options:
+            ["online", "paper-or-by-mail-only", "online-required", "technical assistance", "online-or-phone"],
+        }
+      - { label: "Filing Details", name: "filingDetails", widget: "markdown", required: false }
+      - label: "Agency"
+        name: "agency"
+        widget: "select"
+        # multiple: true
+        options: ["New Jersey Division of Taxation"]
+        required: false
   - name: "funding-opportunities"
     label: "Funding Opportunities Content"
     folder: "content/src/fundings"
@@ -1530,74 +1549,64 @@ collections:
               - { label: Show Task Button Text, name: showTaskText, widget: text }
               - { label: Hide Task Button Text, name: hideTaskText, widget: text }
               - { label: Number of Hidden Tasks Text, name: hiddenTasksText, widget: text }
-              - { label: Tax Calendar Access Body, name: taxCalendarAccessBody, widget: markdown }
-              - { label: Tax Calendar Pending Body, name: taxCalendarPendingCopyMarkdown, widget: markdown }
-              - { label: Tax Calendar Access Open Modal Button, name: taxCalendarAccessButton, widget: text }
-              - {
-                  label: Tax Calendar Modal Previous Button,
-                  name: taxCalendarModalPreviousButton,
-                  widget: text,
-                }
-              - { label: Tax Calendar Modal Next Button, name: taxCalendarModalNextButton, widget: text }
-              - { label: Tax Calendar Modal Header, name: taxCalendarModalHeader, widget: text }
-              - { label: Tax Calendar Modal Error Header, name: taxCalendarModalErrorHeader, widget: text }
-              - { label: Tax Calendar Modal Body Text, name: taxCalendarModalBody, widget: markdown }
+          - label: Tax Calendar Defaults
+            name: taxCalendar
+            collapsed: true
+            widget: object
+            summary: "{{taxCalendar}}"
+            fields:
+              - { label: Tax Calendar Access Body, name: AccessBody, widget: markdown }
+              - { label: Tax Calendar Pending Body, name: PendingCopyMarkdown, widget: markdown }
+              - { label: Tax Calendar Access Open Modal Button, name: AccessButton, widget: text }
+              - { label: Tax Calendar Modal Previous Button, name: ModalPreviousButton, widget: text }
+              - { label: Tax Calendar Modal Next Button, name: ModalNextButton, widget: text }
+              - { label: Tax Calendar Modal Header, name: ModalHeader, widget: text }
+              - { label: Tax Calendar Modal Error Header, name: ModalErrorHeader, widget: text }
+              - { label: Tax Calendar Modal Body Text, name: ModalBody, widget: markdown }
               - {
                   label: Tax Calendar Modal BusinessName Field Header,
-                  name: taxCalendarModalBusinessFieldHeader,
+                  name: ModalBusinessFieldHeader,
                   widget: markdown,
                 }
               - {
                   label: Tax Calendar Modal BusinessName Field Error Alert Text,
-                  name: taxCalendarModalBusinessFieldErrorName,
+                  name: ModalBusinessFieldErrorName,
                   widget: text,
                 }
               - {
                   label: Tax Calendar Modal BusinessName Field Text,
-                  name: taxCalendarModalBusinessFieldMarkdown,
+                  name: ModalBusinessFieldMarkdown,
                   widget: markdown,
                 }
               - {
                   label: Tax Calendar Modal TaxId Field Error Alert Text,
-                  name: taxCalendarModalTaxErrorName,
+                  name: ModalTaxErrorName,
                   widget: text,
                 }
-              - {
-                  label: Tax Calendar Modal TaxId Field Header,
-                  name: taxCalendarModalTaxIdHeader,
-                  widget: markdown,
-                }
-              - {
-                  label: Tax Calendar Modal TaxId Field Text,
-                  name: taxCalendarModalTaxIdMarkdown,
-                  widget: markdown,
-                }
+              - { label: Tax Calendar Modal TaxId Field Header, name: ModalTaxIdHeader, widget: markdown }
+              - { label: Tax Calendar Modal TaxId Field Text, name: ModalTaxIdMarkdown, widget: markdown }
               - {
                   label: Tax Calendar Modal Failed Alert Text,
-                  name: taxCalendarFailedErrorMessageMarkdown,
+                  name: FailedErrorMessageMarkdown,
                   widget: markdown,
                 }
               - {
                   label: Tax Calendar Modal Unknown Failure Alert Text,
-                  name: taxCalendarFailedUnknownMarkdown,
+                  name: FailedUnknownMarkdown,
                   widget: markdown,
                 }
               - {
                   label: Tax Calendar Modal BusinessName API Failed Helper Text,
-                  name: taxCalendarFailedBusinessFieldHelper,
+                  name: FailedBusinessFieldHelper,
                   widget: text,
                 }
               - {
                   label: Tax Calendar Modal TaxId API Failed Helper Text,
-                  name: taxCalendarFailedTaxIdHelper,
+                  name: FailedTaxIdHelper,
                   widget: text,
                 }
-              - {
-                  label: Tax Calendar Success Alert Header,
-                  name: taxCalendarSnackbarSuccessHeader,
-                  widget: text,
-                }
-              - { label: Tax Calendar Success Alert Body, name: taxCalendarSnackbarSuccessBody, widget: text }
+              - { label: Tax Calendar Success Alert Header, name: SnackbarSuccessHeader, widget: text }
+              - { label: Tax Calendar Success Alert Body, name: SnackbarSuccessBody, widget: text }
 
           - label: Feedback Modal
             name: feedbackModal

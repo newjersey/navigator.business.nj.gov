@@ -37,7 +37,7 @@ export const createEmptyUserData = (user: BusinessUser): UserData => {
     taxFilingData: {
       state: undefined,
       businessName: undefined,
-      lastUpdated: undefined,
+      lastUpdatedISO: undefined,
       filings: [],
     },
     formationData: {
