@@ -86,7 +86,8 @@ const AIRTABLE_BASE_URL =
 
 const FORMATION_API_ACCOUNT = process.env.FORMATION_API_ACCOUNT || "";
 const FORMATION_API_KEY = process.env.FORMATION_API_KEY || "";
-const FORMATION_API_BASE_URL = process.env.FORMATION_API_BASE_URL || "";
+const FORMATION_API_BASE_URL =
+  process.env.FORMATION_API_BASE_URL || `http://${IS_DOCKER ? "wiremock" : "localhost"}:9000`;
 
 const GOV2GO_REGISTRATION_API_KEY = process.env.GOV2GO_REGISTRATION_API_KEY || "";
 const GOV2GO_REGISTRATION_BASE_URL = process.env.GOV2GO_REGISTRATION_BASE_URL || "";
@@ -157,6 +158,7 @@ const apiFormationClient = ApiFormationClient(
   },
   logger
 );
+const shouldSaveDocuments = !(process.env.SKIP_SAVE_DOCUMENTS_TO_S3 === "true");
 
 app.use(bodyParser.json({ strict: false }));
 app.use(
@@ -175,7 +177,7 @@ app.use(
 app.use("/api/guest", guestRouterFactory(businessNameClient));
 app.use("/api", licenseStatusRouterFactory(updateLicenseStatus));
 app.use("/api", selfRegRouterFactory(userDataClient, selfRegClient));
-app.use("/api", formationRouterFactory(apiFormationClient, userDataClient));
+app.use("/api", formationRouterFactory(apiFormationClient, userDataClient, { shouldSaveDocuments }));
 app.use("/api/taxFilings", taxFilingRouterFactory(userDataClient, taxFilingInterface));
 
 app.post("/api/mgmt/auth", (req, res) => {

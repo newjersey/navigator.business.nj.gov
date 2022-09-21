@@ -210,6 +210,7 @@ commands:
             echo 'export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY_DEV' >> $BASH_ENV
             echo 'export CHECK_DEAD_LINKS=$CHECK_DEAD_LINKS_DEV' >> $BASH_ENV
             echo 'export ADMIN_PASSWORD=Test1!' >> $BASH_ENV
+            echo 'export SKIP_SAVE_DOCUMENTS_TO_S3=true' >> $BASH_ENV
 
   set-staging-env-vars:
     steps:

@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "/GetCompletedFiling"
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "business-formation-llc-completed-filing.json",
+    "headers": {
+      "Content-Type": "text/json"
+    }
+  }
+}
