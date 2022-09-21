@@ -98,6 +98,7 @@ export const BusinessNameStep = (): ReactElement => {
                   loading={isLoading}
                   typeSubmit
                   noRightMargin
+                  dataTestid="business-name-search-submit"
                 >
                   {Config.searchBusinessNameTask.searchButtonText}
                 </Button>

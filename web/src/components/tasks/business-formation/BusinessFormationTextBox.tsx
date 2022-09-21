@@ -54,7 +54,7 @@ export const BusinessFormationTextBox = (props: Props): ReactElement => {
         </div>
         <div className="mobile-lg:margin-left-auto flex mobile-lg:flex-justify-center">
           {!isExpanded && (
-            <Button style="tertiary" onClick={handleAddButtonClick}>
+            <Button style="tertiary" onClick={handleAddButtonClick} dataTestid={`show-${props.fieldName}`}>
               {props.addButtonText}
             </Button>
           )}

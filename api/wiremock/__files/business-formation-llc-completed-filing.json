@@ -1,0 +1,10 @@
+{
+  "Success": true,
+  "BusinessName": "My Cool Business",
+  "EntityId": "12345",
+  "TransactionDate": "2022-10-05T14:48:00.000Z",
+  "ConfirmationNumber": "22262000889",
+  "FormationDoc": "formation doc 123",
+  "StandingDoc": "StandingDoc doc 123",
+  "CertifiedDoc": "CertifiedDoc doc 123"
+}

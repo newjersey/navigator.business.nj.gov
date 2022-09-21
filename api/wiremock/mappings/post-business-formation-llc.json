@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "/PrepareFiling"
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "business-formation-llc-redirect.json",
+    "headers": {
+      "Content-Type": "text/json"
+    }
+  }
+}

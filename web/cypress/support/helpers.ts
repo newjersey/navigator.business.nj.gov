@@ -2,13 +2,18 @@ import { formatTaxId } from "@/lib/domain-logic/formatTaxId";
 import { isEntityIdApplicable } from "@/lib/domain-logic/isEntityIdApplicable";
 import {
   arrayOfSectors,
+  arrayOfStateObjects as states,
+  FormationAddress,
+  FormationFormData,
   Industries,
   Industry,
   LegalStructure,
   LegalStructures,
   LookupLegalStructureById,
   LookupSectorTypeById,
+  Municipality,
   randomInt,
+  randomIntFromInterval,
 } from "@businessnjgovnavigator/shared/";
 import { onDashboardPage } from "./page_objects/dashboardPage";
 import { onOnboardingPage } from "./page_objects/onboardingPage";
@@ -789,4 +794,45 @@ export const updateForeignBusinessProfilePage = ({ taxId, notes }: Partial<Forei
 
   onProfilePage.clickSaveButton();
   cy.url().should("contain", "/dashboard");
+};
+
+export interface AdditionalFormation extends Partial<FormationFormData> {
+  registeredAgentSameAsAccountCheckbox: boolean;
+  getRegisteredAgentSameAsBusinessAddressCheckbox: boolean;
+}
+
+export const generateMunicipality = (overrides: Partial<Municipality>): Municipality => {
+  return {
+    displayName: `some-display-name-${randomInt()}`,
+    name: `some-name-${randomInt()}`,
+    county: `some-county-${randomInt()}`,
+    id: `some-id-${randomInt()}`,
+    ...overrides,
+  };
+};
+
+export const generateFormationAddress = (overrides: Partial<FormationAddress>): FormationAddress => ({
+  name: `some-members-name-${randomInt()}`,
+  addressLine1: `some-members-address-1-${randomInt()}`,
+  addressLine2: `some-members-address-2-${randomInt()}`,
+  addressCity: `some-members-address-city-${randomInt()}`,
+  addressState: generateStateItem().shortCode,
+  addressZipCode: generateZipCode(),
+  signature: false,
+  ...overrides,
+});
+
+const generateStateItem = () => states[randomIntFromInterval("0", (states.length - 1).toString())];
+
+const generateZipCode = () => {
+  const zip = randomIntFromInterval("1", "99999").toString();
+  return "0".repeat(5 - zip.length) + zip;
+};
+
+export const getPhoneNumberFormat = (phoneNumber: string) => {
+  const length = phoneNumber.length;
+  if (length === 0) return phoneNumber;
+  if (length < 4) return `(${phoneNumber}`;
+  if (length < 7) return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3)}`;
+  return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6, 10)}`;
 };
