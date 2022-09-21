@@ -10,9 +10,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 
 jest.mock("@/lib/api-client/apiClient", () => ({ postSelfReg: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("next/router", () => ({
-  useRouter: jest.fn(),
-}));
+jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/auth/sessionHelper", () => ({ triggerSignIn: jest.fn() }));
 
 function mockMaterialUI(): typeof materialUi {

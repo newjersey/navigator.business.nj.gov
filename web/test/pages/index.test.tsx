@@ -7,9 +7,7 @@ import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { setMockUserDataResponse, useMockUserData } from "@/test/mock/mockUseUserData";
 import { fireEvent, render, screen } from "@testing-library/react";
 
-jest.mock("next/router", () => ({
-  useRouter: jest.fn(),
-}));
+jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 
 describe("HomePage", () => {

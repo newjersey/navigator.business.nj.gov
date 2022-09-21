@@ -4,9 +4,7 @@ import { withAuth, withAuthAlert } from "@/test/helpers";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { render } from "@testing-library/react";
 
-jest.mock("next/router", () => ({
-  useRouter: jest.fn(),
-}));
+jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 
 describe("useAuthAlertPage", () => {
   let setAlertIsVisible: jest.Mock;

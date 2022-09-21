@@ -45,9 +45,7 @@ const Config = getMergedConfig();
 const dateOfFormation = date.format("YYYY-MM-DD");
 const mockApi = api as jest.Mocked<typeof api>;
 
-jest.mock("next/router", () => ({
-  useRouter: jest.fn(),
-}));
+jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useDocuments");
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
