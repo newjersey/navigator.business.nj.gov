@@ -4,18 +4,14 @@ interface Props {
   style:
     | "primary"
     | "secondary"
-    | "tertiary"
-    | "primary-big"
-    | "secondary-big"
     | "secondary-blue"
-    | "secondary-input-field-height"
-    | "primary-input-field-height"
-    | "narrow-light"
     | "light"
     | "narrow-accent-cool-lightest"
-    | "accent-cool-darker-big"
-    | "accent-cooler"
-    | "info";
+    | "tertiary"
+    | "narrow-light"
+    | "primary-big"
+    | "secondary-big"
+    | "accent-cool-darker-big";
   children: React.ReactNode;
   onClick?: (() => void) | ((event: React.MouseEvent) => Promise<void>) | ((event: React.MouseEvent) => void);
   dataTestid?: string;
@@ -42,37 +38,25 @@ export const Button = (props: Props): ReactElement => {
 
   switch (props.style) {
     case "primary":
-      style = "usa-button padding-y-1";
-      disabledClass = "usa-button--disabled";
-      break;
-    case "primary-input-field-height":
-      style = "usa-button padding-y-2";
-      disabledClass = "usa-button--disabled padding-y-2";
-      break;
-    case "primary-big":
-      style = "usa-button usa-button--big";
-      disabledClass = "usa-button--disabled";
-      break;
-    case "accent-cool-darker-big":
-      style = "usa-button usa-button--big btn-accent-cool-darker";
+      style = "usa-button height-6";
       disabledClass = "usa-button--disabled";
       break;
     case "secondary":
-      style = "usa-button usa-button--outline padding-y-1";
+      style = "usa-button usa-button--outline height-6";
       disabledClass = "usa-button--outline-disabled";
       break;
     case "secondary-blue":
-      style = "usa-button usa-button--secondary text-normal";
+      style = "usa-button usa-button--secondary height-6 text-normal";
       disabledClass = "usa-button--secondary-disabled";
       break;
-    case "secondary-input-field-height":
-      style = "usa-button usa-button--outline padding-y-2";
-      disabledClass = "usa-button--outline-disabled padding-y-2";
+    case "light":
+      style =
+        "usa-button bg-transparent text-normal text-base border-1px border-base-light hide-unhide-button height-6";
       break;
-    case "secondary-big":
-      style = "usa-button usa-button--big usa-button--outline border-2px";
-      disabledClass = "usa-button--outline-disabled";
+    case "narrow-accent-cool-lightest":
+      style = "usa-button btn-accent-cool-lightest text-normal height-6";
       break;
+
     case "tertiary":
       style = "usa-button usa-button--unstyled width-auto";
       break;
@@ -80,12 +64,18 @@ export const Button = (props: Props): ReactElement => {
       style =
         "usa-button usa-tag bg-transparent text-normal text-base border-1px border-base-light hide-unhide-button";
       break;
-    case "light":
-      style =
-        "usa-button bg-transparent text-normal text-base border-1px border-base-light hide-unhide-button";
+
+    case "primary-big":
+      style = "usa-button usa-button--big height-8 padding-top-0 padding-bottom-0";
+      disabledClass = "usa-button--disabled";
       break;
-    case "narrow-accent-cool-lightest":
-      style = "usa-button btn-accent-cool-lightest padding-y-1 text-normal ";
+    case "accent-cool-darker-big":
+      style = "usa-button usa-button--big btn-accent-cool-darker height-8 padding-top-0 padding-bottom-0";
+      disabledClass = "usa-button--disabled";
+      break;
+    case "secondary-big":
+      style = "usa-button usa-button--big usa-button--outline height-8 padding-top-0 padding-bottom-0";
+      disabledClass = "usa-button--outline-disabled";
       break;
   }
   const showDisabledClass = props.loading ? disabledClass : "";

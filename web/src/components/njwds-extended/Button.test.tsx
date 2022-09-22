@@ -28,16 +28,6 @@ describe("Button", () => {
       expect(view).toMatchSnapshot();
     });
 
-    it("secondary-input-field-height displays correctly", () => {
-      const view = render(<Button style="secondary-input-field-height">Test Button</Button>).baseElement;
-      expect(view).toMatchSnapshot();
-    });
-
-    it("primary-input-field-height displays correctly", () => {
-      const view = render(<Button style="primary-input-field-height">Test Button</Button>).baseElement;
-      expect(view).toMatchSnapshot();
-    });
-
     it("narrow-light displays correctly", () => {
       const view = render(<Button style="narrow-light">Test Button</Button>).baseElement;
       expect(view).toMatchSnapshot();
@@ -45,16 +35,6 @@ describe("Button", () => {
 
     it("accent-cool-darker-big displays correctly", () => {
       const view = render(<Button style="accent-cool-darker-big">Test Button</Button>).baseElement;
-      expect(view).toMatchSnapshot();
-    });
-
-    it("accent-cooler displays correctly", () => {
-      const view = render(<Button style="accent-cooler">Test Button</Button>).baseElement;
-      expect(view).toMatchSnapshot();
-    });
-
-    it("info displays correctly", () => {
-      const view = render(<Button style="info">Test Button</Button>).baseElement;
       expect(view).toMatchSnapshot();
     });
   });
