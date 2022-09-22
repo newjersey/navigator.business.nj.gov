@@ -31,7 +31,9 @@ The School and Small Business Energy Efficiency Stimulus Program provides grants
 
 ## Eligibility
 
-Any small New Jersey business  and is certified by the State as a women’s business or minority business, as those terms are defined in L.1987, c.55 § 2 (N.J.S.A. 52:27H-21.8)
+Any small New Jersey business with 100 or fewer employees, agross revenues below $12M, and with a Minority or Women-owned Business Enterprise Certification. 
+
+<!--EndFragment-->  and is certified by the State as a women’s business or minority business, as those terms are defined in L.1987, c.55 § 2 (N.J.S.A. 52:27H-21.8)
 
 > ### Benefits
 >
