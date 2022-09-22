@@ -1717,7 +1717,31 @@ collections:
             widget: object
             summary: "{{filingDefaults}}"
             fields:
-              - { label: Tag Content before Due Date, name: tagContentBeforeDueDate, widget: string }
+              - { label: Due Date Header, name: beforeDueDateText, widget: string }
+              - { label: Issuing Agency Header, name: issuingAgencyText, widget: string }
+              - { label: Form Id Header, name: formText, widget: string }
+              - { label: Extension Tag Text, name: extensionTagText, widget: string }
+              - { label: Tax Rate Header, name: taxRateTitle, widget: string }
+              - { label: Filing Method Header, name: filingMethod, widget: string }
+              - { label: Filing Frequency Header, name: filingFrequency, widget: markdown }
+              - { label: Late Filing Header, name: lateFilingsTitle, widget: string }
+              - { label: Late Filing Markdown, name: lateFilingsMarkdown, widget: markdown }
+              - { label: Treasury Link Text, name: treasuryLinkText, widget: string }
+              - { label: Additional Info Header, name: additionalInfo, widget: markdown }
+              - { label: Online Method Text, name: onlineTaxFilingMethod, widget: string }
+              - { label: Only Required Method Text, name: onlineRequiredTaxFilingMethod, widget: string }
+              - {
+                  label: Paper or Mail Only Method Text,
+                  name: paperOrMailOnlyTaxFilingMethod,
+                  widget: string,
+                }
+              - {
+                  label: Technical Assistance Method Text,
+                  name: technicalAssistanceTaxFilingMethod,
+                  widget: string,
+                }
+              - { label: Online or Phone Method Text, name: onlineOrPhoneTaxFilingMethod, widget: string }
+
           - label: Formation Task - Date of Formation Modal
             name: formationDateModal
             collapsed: true
