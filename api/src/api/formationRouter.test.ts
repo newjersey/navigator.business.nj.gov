@@ -54,7 +54,7 @@ describe("formationRouter", () => {
       put: jest.fn(),
     };
     app = setupExpress(false);
-    app.use(formationRouterFactory(stubFormationClient, stubUserDataClient));
+    app.use(formationRouterFactory(stubFormationClient, stubUserDataClient, { shouldSaveDocuments: true }));
   });
 
   afterAll(async () => {
