@@ -49,7 +49,7 @@
       "task": "daycare-license"
     }
   ],
-  "name": "Child Care Center",
+  "name": "Childcare Center",
   "industryOnboardingQuestions": {
     "canBeHomeBased": false,
     "isProvidesStaffingServicesApplicable": false,
@@ -61,7 +61,7 @@
     "isTransportation": false
   },
   "isEnabled": true,
-  "additionalSearchTerms": "daycare, childcare",
+  "additionalSearchTerms": "daycare, childcare, after school program",
   "id": "daycare",
   "description": "Provides daycare services for 6 or more children in a dedicated space"
 }
