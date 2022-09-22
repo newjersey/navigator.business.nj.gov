@@ -51,7 +51,7 @@
     "isTransportation": false
   },
   "isEnabled": true,
-  "additionalSearchTerms": "home daycare",
+  "additionalSearchTerms": "home daycare, family ",
   "id": "family-daycare",
   "description": "Provides daycare services for 5 or less children in the business owner's home"
 }
