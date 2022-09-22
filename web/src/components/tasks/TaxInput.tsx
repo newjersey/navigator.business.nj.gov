@@ -82,7 +82,7 @@ export const TaxInput = (props: Props): ReactElement => {
         <FormControl margin="dense">
           <Button
             className="margin-top-1 margin-left-1"
-            style="secondary-input-field-height"
+            style="secondary"
             onClick={save}
             loading={isLoading}
             typeSubmit
