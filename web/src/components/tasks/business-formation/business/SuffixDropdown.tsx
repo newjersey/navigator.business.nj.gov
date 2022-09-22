@@ -45,9 +45,9 @@ export const SuffixDropdown = (): ReactElement => {
             renderValue={(selected) => {
               if (selected.length === 0) {
                 return (
-                  <div className="text-base">
+                  <span className="text-base">
                     {Config.businessFormationDefaults.businessSuffixPlaceholder}
-                  </div>
+                  </span>
                 );
               }
 

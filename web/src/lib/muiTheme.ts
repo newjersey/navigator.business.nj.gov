@@ -102,6 +102,16 @@ export default {
         input: { padding: "12.5px 12px" },
       },
     },
+    MuiSelect: {
+      styleOverrides: {
+        select: { padding: "12.5px 12px" },
+      },
+    },
+    MuiAutocomplete: {
+      styleOverrides: {
+        inputRoot: { padding: "5px 9px" },
+      },
+    },
     MuiOutlinedInput: {
       styleOverrides: {
         root: {
