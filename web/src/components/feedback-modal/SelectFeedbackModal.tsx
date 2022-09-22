@@ -16,12 +16,13 @@ type Props = {
 export const SelectFeedbackModal = ({ onClose, isOpen, setCurrentFeedback }: Props): ReactElement => {
   const { userData } = useUserData();
   const { Config } = useConfig();
-
   const getFeedbackLink = (): string => {
     switch (userData?.profileData.businessPersona) {
       case "OWNING":
         return Config.feedbackModal.feedbackModalLinkOwning;
       case "STARTING":
+        return Config.feedbackModal.feedbackModalLinkStarting;
+      case "FOREIGN":
         return Config.feedbackModal.feedbackModalLinkStarting;
       default:
         return "";
