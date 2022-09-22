@@ -34,7 +34,7 @@ export const MiniRoadmapStep = (props: Props): ReactElement => {
 
   const toggleOpen = () => {
     props.toggleStep(stepNumber, !isOpen, true);
-    setIsOpen(!isOpen);
+    setIsOpen((prevOpen) => !prevOpen);
   };
 
   return (

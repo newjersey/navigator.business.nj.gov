@@ -92,12 +92,9 @@ const OnboardingPage = (props: Props): ReactElement => {
   const [currentFlow, setCurrentFlow] = useState<FlowType>("STARTING");
   const hasHandledRouting = useRef<boolean>(false);
 
-  const onValidation = useCallback(
-    (field: ProfileFields, invalid: boolean): void => {
-      setFieldStates({ ...fieldStates, [field]: { invalid } });
-    },
-    [setFieldStates, fieldStates]
-  );
+  const onValidation = (field: ProfileFields, invalid: boolean): void => {
+    setFieldStates((prevFieldStates) => ({ ...prevFieldStates, [field]: { invalid } }));
+  };
 
   const onboardingFlows = useMemo(() => {
     let onboardingFlows = getOnboardingFlows(profileData, user, onValidation, fieldStates);
@@ -124,7 +121,7 @@ const OnboardingPage = (props: Props): ReactElement => {
     }
 
     return onboardingFlows;
-  }, [profileData, user, onValidation, fieldStates]);
+  }, [profileData, user, fieldStates]);
 
   const queryShallowPush = useCallback(
     (page: number) => router.push({ query: { page: page } }, undefined, { shallow: true }),
@@ -217,9 +214,10 @@ const OnboardingPage = (props: Props): ReactElement => {
       banner: errorMap?.banner && errorMap?.banner.some((error) => !error.valid),
       inline: errorMap?.inline && errorMap?.inline.some((error) => !error.valid),
     };
+
     if (hasErrors.banner || hasErrors.inline) {
       if (hasErrors.banner && errorMap?.banner) {
-        setError(errorMap.banner.find((error) => !error.valid)?.name);
+        setError(errorMap.banner.find((bannerError) => !bannerError.valid)?.name);
       }
       if (hasErrors.inline && errorMap?.inline) {
         setAlert("ERROR");
