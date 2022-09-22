@@ -49,7 +49,7 @@
       "task": "daycare-license"
     }
   ],
-  "name": "Child Care Center",
+  "name": "Childcare Center",
   "industryOnboardingQuestions": {
     "canBeHomeBased": false,
     "isProvidesStaffingServicesApplicable": false,
