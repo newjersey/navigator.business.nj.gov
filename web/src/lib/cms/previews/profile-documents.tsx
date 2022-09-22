@@ -31,7 +31,7 @@ const ProfilePreviewDocuments = (props: Props) => {
   const dataString = JSON.stringify(data);
 
   useEffect(() => {
-    setConfig(JSON.parse(JSON.stringify(merge(config, data))));
+    setConfig((prevConfig) => JSON.parse(JSON.stringify(merge(prevConfig, data))));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataString]);
 

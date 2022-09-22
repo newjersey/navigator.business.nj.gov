@@ -38,9 +38,10 @@ export const OnboardingTaxId = ({
   const locationBoxRef = useRef<HTMLDivElement>(null);
   const taxIdBoxRef = useRef<HTMLDivElement>(null);
 
+  type ErrorMapType = { taxId: boolean; taxIdLocation: boolean };
   const [locationValue, setLocationValue] = useState(state.profileData[fieldName]?.trim().slice(9, 12) ?? "");
   const [taxIdValue, setTaxIdValue] = useState(state.profileData[fieldName]?.trim().slice(0, 9) ?? "");
-  const [errorMap, setErrorMap] = useState({ taxId: false, taxIdLocation: false });
+  const [errorMap, setErrorMap] = useState<ErrorMapType>({ taxId: false, taxIdLocation: false });
 
   const handleChange = (value: string, type: "taxId" | "taxIdLocation") => {
     let resolvedValue = "".concat(...taxIdValue, ...locationValue);
@@ -65,12 +66,12 @@ export const OnboardingTaxId = ({
   };
 
   const onValidation = (valFieldName: string, invalid: boolean) => {
-    const errors = { ...errorMap, [valFieldName]: invalid };
-    setErrorMap(errors);
+    const errors = (errorMap: ErrorMapType) => ({ ...errorMap, [valFieldName]: invalid });
+    setErrorMap((errorMap) => errors(errorMap));
     props.onValidation &&
       props.onValidation(
         fieldName,
-        Object.values(errors).some((v) => v == true)
+        Object.values(errors(errorMap)).some((v) => v == true)
       );
   };
 

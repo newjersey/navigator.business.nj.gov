@@ -128,7 +128,7 @@ const ProfilePage = (props: Props): ReactElement => {
   }, userData);
 
   const onValidation = (field: ProfileFields, invalid: boolean) => {
-    setFieldStates({ ...fieldStates, [field]: { invalid } });
+    setFieldStates((prevFieldStates) => ({ ...prevFieldStates, [field]: { invalid } }));
   };
 
   const onBack = () => {
