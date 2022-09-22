@@ -39,7 +39,7 @@
       "task": "family-daycare-register"
     }
   ],
-  "name": "Family Child Care",
+  "name": "Childcare Center (Family)",
   "industryOnboardingQuestions": {
     "canBeHomeBased": false,
     "isProvidesStaffingServicesApplicable": false,
