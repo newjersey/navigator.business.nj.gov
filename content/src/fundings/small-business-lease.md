@@ -35,4 +35,4 @@ The Small Business Lease Grant supports the growth and success of small business
 
 > **Benefits**
 >
-> Two grant awards of 20% of the annual lease payment
+> Two grant awards of 20% of the annual lease payment.
