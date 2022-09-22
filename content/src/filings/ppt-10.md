@@ -6,9 +6,9 @@ callToActionLink: https://www.nj.gov/treasury/taxation/petroleum.shtml
 callToActionText: File and Pay
 treasuryLink:
 extension: false
-frequency: >-
+frequency: |
   Quarterly, 25th day following the month in which the quarter ends
-taxRates: >-
+taxRates: |
   Gasoline & LPG - per gallon - $0.402
   Diesel - per gallon - $0.442
   Fuel Oil - per gallon - $0.124

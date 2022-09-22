@@ -7,7 +7,7 @@ callToActionText: File and Pay
 treasuryLink: https://www.nj.gov/treasury/taxation/motorfuels.shtml
 extension: false
 frequency: Monthly, Due on the 20th of each month.
-taxRates: >-
+taxRates: |
   Gasoline - per gallon - $0.105
   Diesel - per gallon - $0.135
   Aviation fuel - per gallon - $0.02

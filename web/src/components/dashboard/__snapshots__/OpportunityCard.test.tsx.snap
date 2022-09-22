@@ -12,13 +12,7 @@ exports[`OpportunityCard snapshots matches the layout 1`] = `
       >
         <div>
           <span
-            class="flex flex-align-center flex-justify usa-tag font-sans-2xs width-full width-auto line-height-sans-2 padding-y-2px
-        text-no-wrap
-        bg-white text-base-darkest bg-certification
-        
-        
-        
-      "
+            class="flex flex-align-center flex-justify usa-tag font-sans-2xs width-full width-auto line-height-sans-2 padding-y-2px bg-white text-base-darkest bg-certification text-no-wrap"
           >
             Funding
           </span>
@@ -94,13 +88,7 @@ exports[`OpportunityCard snapshots matches the layout when status is first come 
       >
         <div>
           <span
-            class="flex flex-align-center flex-justify usa-tag font-sans-2xs width-full width-auto line-height-sans-2 padding-y-2px
-        text-no-wrap
-        bg-white text-base-darkest bg-certification
-        
-        
-        
-      "
+            class="flex flex-align-center flex-justify usa-tag font-sans-2xs width-full width-auto line-height-sans-2 padding-y-2px bg-white text-base-darkest bg-certification text-no-wrap"
           >
             Funding
           </span>
@@ -181,13 +169,7 @@ exports[`OpportunityCard snapshots matches the layout when status is rolling app
       >
         <div>
           <span
-            class="flex flex-align-center flex-justify usa-tag font-sans-2xs width-full width-auto line-height-sans-2 padding-y-2px
-        text-no-wrap
-        bg-white text-base-darkest bg-certification
-        
-        
-        
-      "
+            class="flex flex-align-center flex-justify usa-tag font-sans-2xs width-full width-auto line-height-sans-2 padding-y-2px bg-white text-base-darkest bg-certification text-no-wrap"
           >
             Funding
           </span>
@@ -268,13 +250,7 @@ exports[`OpportunityCard snapshots matches the layout with a due date 1`] = `
       >
         <div>
           <span
-            class="flex flex-align-center flex-justify usa-tag font-sans-2xs width-full width-auto line-height-sans-2 padding-y-2px
-        text-no-wrap
-        bg-white text-base-darkest bg-certification
-        
-        
-        
-      "
+            class="flex flex-align-center flex-justify usa-tag font-sans-2xs width-full width-auto line-height-sans-2 padding-y-2px bg-white text-base-darkest bg-certification text-no-wrap"
           >
             Funding
           </span>

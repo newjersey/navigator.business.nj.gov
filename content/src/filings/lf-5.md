@@ -7,10 +7,10 @@ callToActionText: File and Pay
 treasuryLink:
 extension: false
 frequency: Annually, march 15th
-taxRates: >-
+taxRates: |
   Wholesale - Gross Receipts 0.03%
   Retail - Gross Receipts - 0.0225%
-additionalInfo: >-
+additionalInfo: |
   Disposition of Revenues
   Revenue from this tax is deposited in the Clean Communities Program Fund and are used for litter pickup and removal, and to provide recycling grants to New Jersey counties and municipalities.
 filingMethod: online

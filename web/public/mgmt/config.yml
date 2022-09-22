@@ -10,7 +10,7 @@ backend:
     create: "chore: creating {{collection}} {{slug}}"
     update: "fix: updating {{collection}} {{slug}}"
 publish_mode: editorial_workflow
-# local_backend: true
+local_backend: true
 media_folder: web/public/img
 logo_url: https://dev.navigator.business.nj.gov/img/Navigator-logo.svg
 public_folder: web/public
@@ -3971,34 +3971,3 @@ collections:
               - { label: CTA Modal Body, name: dbaCtaModalBody, widget: markdown }
               - { label: CTA Modal Continue Button, name: dbaCtaModalContinueButtonText, widget: string }
               - { label: CTA Modal Cancel Button, name: dbaCtaModalCancelButtonText, widget: string }
-
-  - name: "taxes"
-    label: "Tax Types"
-    folder: "content/src/taxes"
-    summary: "/{{urlSlug}} - {{name}}"
-    identifier_field: "{{urlSlug}}"
-    slug: "{{urlSlug}}"
-    delete: true
-    create: true
-    editor:
-      preview: false
-    fields:
-      - { label: "Filename", name: "filename", widget: "string", required: false }
-      - { label: "Url Slug", name: "urlSlug", widget: "slug" }
-      - { label: "Tax Name", name: "taxName", widget: "string" }
-      - { label: "Description", name: "description", widget: "markdown" }
-      - { label: "Treasury Link", name: "treasuryLink", widget: "string" }
-      - label: "Frequency"
-        name: "frequency"
-        widget: "string"
-        required: true
-      - { label: "Tax Rates", name: "taxRates", widget: "markdown" }
-      - { label: "Additional Info", name: "additionalInfo", widget: "markdown" }
-      - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
-      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
-      - label: "Can be filed online?"
-        name: "onlineFiling"
-        widget: "string"
-        required: true
-      - { label: "Managing Agency", name: "managingAgency", widget: "string" }
-      - { label: "Form Number(s)", name: "formNumber", widget: "string" }

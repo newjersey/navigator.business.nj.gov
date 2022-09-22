@@ -6,10 +6,10 @@ callToActionLink: https://www1.state.nj.us/TYTR_BusinessFilings/jsp/common/Login
 callToActionText: File and Pay
 treasuryLink: https://www.nj.gov/treasury/taxation/cbt/index.shtml
 extension: true
-frequency: >-
+frequency: |
   Annually
   (\15th day of the fourth month following the ending month of the accounting period\)
-taxRates: >-
+taxRates: |
   If your Entire Net Income is:
   * Greater than $100,000, the tax rate is 9%
   * Greater than $50,000 and less than or equal to $100,000, the tax rate is 7.5%

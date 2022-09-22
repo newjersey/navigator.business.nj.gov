@@ -471,7 +471,23 @@
     "eligibleModalBody": "We recommend you first [Determine if You are Eligible for Priority Status](/tasks/priority-status-cannabis) before proceeding."
   },
   "filingDefaults": {
-    "tagContentBeforeDueDate": "Next Due:"
+    "beforeDueDateText": "Due Date:",
+    "issuingAgencyText": "Issuing Agency:",
+    "formText": "Form:",
+    "extensionTagText": "Tax Extension",
+    "requiredText": "Required",
+    "taxRateTitle": "Tax Rate:",
+    "filingMethod": "Filing Method:",
+    "filingFrequency": "Filing Frequency:",
+    "lateFilingsTitle": "Late Filings and Payments:",
+    "treasuryLinkText": "Learn more",
+    "lateFilingsMarkdown": "All New Jersey taxes that are filed or paid past the due  date, (penalities, interest, and collection fees)[https://www.nj.gov/treasury/taxation/njit19.shtml] may be asssed. If you are filing or paying late, read up on (abatements of penalities)[https://www.state.nj.us/treasury/taxation/abatement-info.shtml].",
+    "additionalInfo": "Disposition of Revenues",
+    "onlineTaxFilingMethod": "Online",
+    "onlineRequiredTaxFilingMethod": "Required to file online",
+    "paperOrMailOnlyTaxFilingMethod": "Paper or by Mail Only",
+    "technicalAssistanceTaxFilingMethod": "Technical Assistance",
+    "onlineOrPhoneTaxFilingMethod": "Online or Phone"
   },
   "cannabisPriorityTypes": {
     "minorityWomenOrVeteran": "a `Diversely-Owned Business|diversely-owned-business-cannabis`",

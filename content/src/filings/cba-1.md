@@ -7,7 +7,7 @@ callToActionText: File and Pay
 treasuryLink: https://www.nj.gov/treasury/taxation/cbt/index.shtml
 extension: false
 frequency: Annually on April 15th
-taxRates: >-
+taxRates: |
   If your Entire Net Income is:
   * Greater than $100,000, the tax rate is 9%
   * Greater than $50,000 and less than or equal to $100,000, the tax rate is 7.5%
@@ -18,7 +18,7 @@ taxRates: >-
   * 6.5% rate if the prorated entire net income does not exceed $4,166 per month
 additionalInfo:
 filingMethod: paper-or-by-mail-only
-filingDetails: ""
+filingDetails: null
 agency: New Jersey Division of Taxation
 ---
 

@@ -1,15 +1,17 @@
-import { Content } from "@/components/Content";
+import { Content, ExternalLink, GreenBox } from "@/components/Content";
 import { NavBar } from "@/components/navbar/NavBar";
 import { Tag } from "@/components/njwds-extended/Tag";
+import { Icon } from "@/components/njwds/Icon";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { TaskCTA } from "@/components/TaskCTA";
 import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { FilingUrlSlugParam, loadAllFilingUrlSlugs, loadFilingByUrlSlug } from "@/lib/static/loadFilings";
 import { loadOperateReferences } from "@/lib/static/loadOperateReferences";
-import { Filing, OperateReference } from "@/lib/types/types";
+import { Filing, OperateReference, TaxFilingMethod } from "@/lib/types/types";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { parseDate } from "@businessnjgovnavigator/shared/dateHelpers";
+import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
 import { ReactElement } from "react";
@@ -19,21 +21,141 @@ interface Props {
   operateReferences: Record<string, OperateReference>;
 }
 
-export const FilingElement = (props: { filing: Filing; dueDate: string }): ReactElement => {
+export const taxFilingMethodMap: Record<TaxFilingMethod, string> = {
+  online: Config.filingDefaults.onlineTaxFilingMethod,
+  "paper-or-by-mail-only": Config.filingDefaults.paperOrMailOnlyTaxFilingMethod,
+  "online-required": Config.filingDefaults.onlineRequiredTaxFilingMethod,
+  "technical assistance": Config.filingDefaults.technicalAssistanceTaxFilingMethod,
+  "online-or-phone": Config.filingDefaults.onlineOrPhoneTaxFilingMethod,
+};
+
+export const FilingElement = (props: {
+  filing: Filing;
+  dueDate: string;
+  preview?: boolean;
+}): ReactElement => {
+  const getFilingMethod = () => {
+    if (props.filing.filingMethod)
+      return (
+        <span className="flex flex-row" data-testid="filing-method">
+          <Icon className="usa-icon--size-3 minw-3 margin-1 text-green margin-right-2">print</Icon>
+          <span className="flex flex-column margin-top-1">
+            <Content className="flex">{`**${Config.filingDefaults.filingMethod}**&nbsp;&nbsp;${
+              taxFilingMethodMap[props.filing.filingMethod]
+            }`}</Content>
+            {props.filing.filingDetails && (
+              <>
+                {" "}
+                <br />
+                <Content data-testid="filing-details">{props.filing.filingDetails}</Content>
+              </>
+            )}
+
+            <br />
+          </span>
+        </span>
+      );
+  };
+
   return (
     <>
       <div className="minh-38">
-        <div className="margin-bottom-2">
-          <h1>{props.filing.name}</h1>
-        </div>
-        <div className="display-inline-flex margin-bottom-4" data-testid="due-date">
-          <Tag tagVariant="baseDark" bold={true}>
-            {Config.filingDefaults.tagContentBeforeDueDate} {props.dueDate}
-          </Tag>
+        <div className="bg-base-extra-light margin-x-neg-4 margin-top-neg-4 padding-top-105 margin-bottom-4">
+          <div className="margin-bottom-2 margin-x-4">
+            <h1>{props.filing.name}</h1>
+          </div>
+          <div className="display-inline-flex margin-bottom-4 margin-x-4">
+            <span className="text-bold">{Config.filingDefaults.beforeDueDateText.toUpperCase()}</span> &nbsp;{" "}
+            <span data-testid="due-date">
+              {parseDate(props.dueDate).format("MMMM D, YYYY").toUpperCase()}
+            </span>
+            {props.filing.extension && (
+              <Tag tagVariant="base" disableUppercase className="margin-left-5" data-testid="extension">
+                {Config.filingDefaults.extensionTagText}
+              </Tag>
+            )}
+          </div>
         </div>
         <Content>{props.filing.contentMd}</Content>
+        {props.filing.treasuryLink && (
+          <div className="padding-top-1" data-testid="treasury-link">
+            <ExternalLink href={props.filing.treasuryLink}>
+              {Config.filingDefaults.treasuryLinkText}
+            </ExternalLink>
+          </div>
+        )}
+        {props.filing.taxRates && (
+          <GreenBox>
+            <span className="flex" data-testid="tax-rates">
+              <Icon className="usa-icon--size-3 minw-3 margin-1 text-green margin-right-2">attach_money</Icon>
+              <Content className="margin-top-1">{`**${Config.filingDefaults.taxRateTitle}**&nbsp;&nbsp;${props.filing.taxRates}`}</Content>
+            </span>
+            <br />
+            {getFilingMethod()}
+            {props.filing.frequency && (
+              <>
+                <span className="flex">
+                  <Icon className="usa-icon--size-3 minw-3 margin-1 text-green margin-right-2">event</Icon>
+                  <Content className="margin-top-1">{`**${Config.filingDefaults.filingFrequency}**&nbsp;&nbsp;${props.filing.frequency}`}</Content>
+                </span>
+                <br />
+              </>
+            )}
+            <span className="flex">
+              <Icon className="usa-icon--size-3 minw-3 margin-1 text-green margin-right-2">cancel</Icon>
+              <Content className="margin-top-1">{`**${Config.filingDefaults.lateFilingsTitle}**&nbsp;&nbsp;${Config.filingDefaults.lateFilingsMarkdown}`}</Content>
+            </span>
+          </GreenBox>
+        )}
+
+        {props.filing.additionalInfo ? (
+          <>
+            <Accordion
+              data-testid="additional-info"
+              elevation={0}
+              defaultExpanded={props.preview}
+              className="margin-top-2"
+            >
+              <AccordionSummary
+                expandIcon={<Icon className="usa-icon--size-5 margin-x-1">expand_more</Icon>}
+                aria-controls={`${Config.filingDefaults.additionalInfo
+                  .toLowerCase()
+                  .replaceAll(" ", "-")}-content`}
+              >
+                <h3 className="margin-y-3">{Config.filingDefaults.additionalInfo}</h3>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Content>{props.filing.additionalInfo}</Content>
+              </AccordionDetails>
+            </Accordion>
+            <hr className="margin-bottom-2" />
+          </>
+        ) : (
+          <hr className="margin-y-3" />
+        )}
+
+        {props.filing.agency && (
+          <>
+            <div>
+              <span className="h5-styling" data-testid="agency-header">
+                {Config.filingDefaults.issuingAgencyText} &nbsp;
+              </span>
+              <span className="h6-styling">{props.filing.agency.toString()}</span>
+            </div>
+          </>
+        )}
+        <>
+          <div>
+            <span className="h5-styling" data-testid="form-id-header">
+              {Config.filingDefaults.formText}&nbsp;
+            </span>
+            <span className="h6-styling">{props.filing.id.replaceAll("_", "/")}</span>
+          </div>
+        </>
       </div>
-      <TaskCTA link={props.filing.callToActionLink} text={props.filing.callToActionText} />
+      {props.filing.callToActionLink && props.filing.callToActionText && (
+        <TaskCTA link={props.filing.callToActionLink} text={props.filing.callToActionText} />
+      )}
     </>
   );
 };

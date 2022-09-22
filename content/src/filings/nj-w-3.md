@@ -6,7 +6,7 @@ callToActionLink: https://www.nj.gov/treasury/taxation/businesses/payroll/payrol
 callToActionText: File and Pay
 treasuryLink: https://www.nj.gov/treasury/taxation/businesses/payroll/index.shtml
 extension: false
-frequency: >-
+frequency: |
   Annual:
   on or before February 15 of the following year. If February 15 falls on a weekend or holiday, the due date is the next business day. If you stop paying wages during the year, you must file Form NJ-W-3 within 30 days after the last month the business was active or wages were paid.
 taxRates: Tax rate varies?

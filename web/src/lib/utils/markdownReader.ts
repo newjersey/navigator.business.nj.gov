@@ -12,6 +12,8 @@ import {
   FundingStatus,
   FundingType,
   OpportunityAgency,
+  TaxAgency,
+  TaxFilingMethod,
 } from "@/lib/types/types";
 import matter from "gray-matter";
 
@@ -26,12 +28,22 @@ export const convertContextualInfoMd = (contentMdContents: string): ContextualIn
   };
 };
 
-export const convertTaskMd = (taskMdContents: string): TaskWithoutLinks | Filing => {
+export const convertTaskMd = (taskMdContents: string): TaskWithoutLinks => {
   const matterResult = matter(taskMdContents);
   const taskGrayMatter = matterResult.data as TaskGrayMatter;
 
   return {
     contentMd: matterResult.content,
+    ...taskGrayMatter,
+  };
+};
+
+export const convertFilingMd = (taskMdContents: string, filename: string): Filing => {
+  const matterResult = matter(taskMdContents);
+  const taskGrayMatter = matterResult.data as FilingGrayMatter;
+  return {
+    contentMd: matterResult.content,
+    filename,
     ...taskGrayMatter,
   };
 };
@@ -69,6 +81,22 @@ export const getMarkdown = (mdContents: string): MarkdownResult => {
 
 type ContextualInfoGrayMatter = {
   header: string;
+};
+
+type FilingGrayMatter = {
+  id: string;
+  name: string;
+  urlSlug: string;
+  callToActionLink: string;
+  callToActionText: string;
+  additionalInfo: string;
+  frequency: string;
+  extension: boolean;
+  taxRates: string;
+  treasuryLink: string;
+  filingMethod: TaxFilingMethod;
+  filingDetails: string;
+  agency: TaxAgency;
 };
 
 type TaskGrayMatter = {

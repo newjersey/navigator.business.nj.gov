@@ -7,7 +7,7 @@ callToActionText: File and Pay
 treasuryLink: https://www.state.nj.us/treasury/taxation/prntpetr.shtml
 extension: false
 frequency: Monthly
-taxRates: >-
+taxRates: |
   Gasoline & LPG - per gallon - $0.402
   Diesel - per gallon - $0.442
   Fuel Oil - per gallon - $0.124

@@ -6,12 +6,12 @@ callToActionLink: https://www1.state.nj.us/TYTR_BusinessFilings/jsp/common/Login
 callToActionText: File and Pay
 treasuryLink: https://www.nj.gov/treasury/taxation/businesses/partnerships/index.shtml
 extension: true
-frequency: >-
+frequency: |
   Annually, Due before NJ-1065
 
   PART-200-T extension requests, along with payment, can be filed online until 11:59 p.m. on or before the original due date of
   the return
-taxRates: >-
+taxRates: |
   Partnerships may be required to
   * Make a payment of $150 for each owner up to a maximum of $250,000. The State also requires a 50% installment payment, unless it is the partnership’s final year of operation;
 
@@ -20,7 +20,7 @@ taxRates: >-
   The installment payments will be credited to the accounts of the nonresident partners in proportion to their share of ownership.
 additionalInfo:
 filingMethod: online-required
-filingDetails: >-
+filingDetails: |
   Partnerships subject to the provisions of the Corporation Business Tax Act (that is partnerships
   that remit tax based on any nonresident corporate and nonresident non-corporate partner’s allowable share of NJ partnership
   income) that use the services of a paid preparer must file all their returns completed by that practitioner by electronic means.

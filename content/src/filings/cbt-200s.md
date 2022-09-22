@@ -7,7 +7,7 @@ callToActionText: File and Pay
 treasuryLink: https://www.nj.gov/treasury/taxation/cbt/index.shtml
 extension: true
 frequency: Annually
-taxRates: >-
+taxRates: |
   If your Entire Net Income is:
   * Greater than $100,000, the tax rate is 9%
   * Greater than $50,000 and less than or equal to $100,000, the tax rate is 7.5%
