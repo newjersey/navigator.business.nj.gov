@@ -3603,7 +3603,7 @@ __metadata:
     serverless: 3.22.0
     serverless-dynamodb-local: 0.2.40
     serverless-http: 3.0.2
-    serverless-offline: 10.0.2
+    serverless-offline: 10.1.0
     serverless-offline-ssm: 6.2.0
     serverless-webpack: 5.9.1
     simple-oauth2: 4.3.0
@@ -3796,7 +3796,7 @@ __metadata:
     serverless: 3.22.0
     serverless-dynamodb-local: 0.2.40
     serverless-http: 3.0.2
-    serverless-offline: 10.0.2
+    serverless-offline: 10.1.0
     serverless-offline-ssm: 6.2.0
     serverless-webpack: 5.9.1
     simple-oauth2: 4.3.0
@@ -11403,9 +11403,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"aws-sdk@npm:^2.1195.0, aws-sdk@npm:^2.1213.0, aws-sdk@npm:^2.7.0":
-  version: 2.1218.0
-  resolution: "aws-sdk@npm:2.1218.0"
+"aws-sdk@npm:^2.1195.0, aws-sdk@npm:^2.1215.0, aws-sdk@npm:^2.7.0":
+  version: 2.1221.0
+  resolution: "aws-sdk@npm:2.1221.0"
   dependencies:
     buffer: 4.9.2
     events: 1.1.1
@@ -11417,7 +11417,7 @@ __metadata:
     util: ^0.12.4
     uuid: 8.0.0
     xml2js: 0.4.19
-  checksum: e1bb41bf8b647e5f6e64f5955beb3972473916af31187d87d20f0a3ed6dab23dff47d490c0d351bb500f331823ec72956c8b510cf232be4bf25386b98652be41
+  checksum: 2024498a0f38df5176c5d33b46422f05f744c9a773db847893e07f50b56bab8001d303e31a00a24ec2eca487690d6337c562da558df30f332b712adf8b2ed5c1
   languageName: node
   linkType: hard
 
@@ -30163,15 +30163,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"serverless-offline@npm:10.0.2":
-  version: 10.0.2
-  resolution: "serverless-offline@npm:10.0.2"
+"serverless-offline@npm:10.1.0":
+  version: 10.1.0
+  resolution: "serverless-offline@npm:10.1.0"
   dependencies:
     "@hapi/boom": ^10.0.0
     "@hapi/h2o2": ^9.1.0
     "@hapi/hapi": ^20.2.2
     "@serverless/utils": ^6.7.0
-    aws-sdk: ^2.1213.0
+    aws-sdk: ^2.1215.0
     boxen: ^7.0.0
     chalk: ^5.0.1
     execa: ^6.1.0
@@ -30192,7 +30192,7 @@ __metadata:
     ws: ^8.8.1
   peerDependencies:
     serverless: ^3.2.0
-  checksum: d709ea407d7f6329bd844615e088ca56ce28be3a0d650f78b7ddcb53dc6100caf85007f7d658da0fc45f36be36196709f2daf8741d4ce40577545f525fb788ce
+  checksum: 85c23e89f6fc79ad880c81eef9bb0f101728900aff2565608441ec14b783811ef8316281b9a286abddf9d254e4d78bb3b2f926c4351a1187d109bb30e23f4936
   languageName: node
   linkType: hard
 
