@@ -67,7 +67,7 @@ export const FilingsCalendarAsList = (props: Props): ReactElement => {
           .filter((filing) => props.operateReferences[filing.identifier])
           .map((filing) => (
             <div className="flex margin-bottom-2 minh-6" key={`${filing.identifier}-${filing.dueDate}`}>
-              <div className="width-05 bg-primary" />
+              <div className="width-05 bg-primary minw-05" />
               <div className="margin-left-205">
                 <div className="text-bold">
                   {parseDateWithFormat(filing.dueDate, "YYYY-MM-DD").format("MMMM D, YYYY")}
