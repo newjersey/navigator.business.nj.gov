@@ -7,12 +7,12 @@ callToActionText: File and Pay
 treasuryLink: https://www.nj.gov/treasury/taxation/tobacco_over.shtml
 extension: false
 frequency: Monthly
-taxRates: >-
+taxRates: |
   Tobacco Products - wholesale price - 30%
   Liquid Nicotine - per milliliter - $0.10
   Moist Snuff - per ounce - $0.75
   Container E-liquid – retail sales price – 10%
-additionalInfo: >-
+additionalInfo: |
   Disposition of Revenues
   Revenues are deposited in the State Treasury for general State use.
 filingMethod: paper-or-by-mail-only

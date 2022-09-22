@@ -4,14 +4,14 @@ name: Spill Compensation & Control Tax
 id: scc-5_6
 callToActionLink: https://www.state.nj.us/treasury/taxation/spill_over.shtml
 callToActionText: File and Pay
-frequency: >-
+frequency: |
   Monthly
 
   This return must be filed by the 20th day of the month following the close of the tax period.
 
   This return must be filed by the 20th day of the month following the close of the tax period.
 extension: false
-taxRates: >-
+taxRates: |
   * Petroleum and Petroleum Products - per barrel - 0.023%
 
   * Other Hazardous Substances - fair market value - 1.53%

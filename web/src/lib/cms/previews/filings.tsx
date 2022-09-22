@@ -23,7 +23,7 @@ const FilingsPreview = (props: Props) => {
 
   return (
     <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
-      <FilingElement filing={filing} dueDate={"01/01/20XX"} />
+      <FilingElement filing={filing} dueDate={"01/01/2024"} preview />
     </div>
   );
 };

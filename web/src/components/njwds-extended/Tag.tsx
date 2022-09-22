@@ -20,8 +20,10 @@ interface Props {
   dataTestid?: string;
   textWrap?: boolean;
   bold?: boolean;
+  className?: string;
   hover?: boolean;
   fixedWidth?: boolean;
+  disableUppercase?: boolean;
 }
 
 export const Tag = (props: Props): ReactElement => {
@@ -74,17 +76,29 @@ export const Tag = (props: Props): ReactElement => {
       break;
   }
 
+  const defaultStyle =
+    "flex flex-align-center flex-justify usa-tag font-sans-2xs width-full width-auto line-height-sans-2 padding-y-2px";
+  const textWrap = props.textWrap ? "text-wrap display-block" : "text-no-wrap";
+  const textBold = props.bold ? "text-bold" : "";
+  const fixedWidth = props.fixedWidth ? "tag-fixed-width display-inline-block" : "";
+  const disableUppercase = props.disableUppercase ? "text-no-uppercase" : "";
+
+  const className = [
+    defaultStyle,
+    props.className,
+    styling,
+    hoverStyling,
+    textWrap,
+    fixedWidth,
+    disableUppercase,
+    textBold,
+  ]
+    .map((i) => i?.trim())
+    .filter((value: string | undefined) => value && value.length > 0)
+    .join(" ");
+
   return (
-    <span
-      className={`flex flex-align-center flex-justify usa-tag font-sans-2xs width-full width-auto line-height-sans-2 padding-y-2px
-        ${props.textWrap ? "text-wrap display-block" : "text-no-wrap"}
-        ${styling}
-        ${hoverStyling}
-        ${props.bold ? "text-bold" : ""}
-        ${props.fixedWidth ? "tag-fixed-width display-inline-block" : ""}
-      `}
-      {...(props.dataTestid ? { "data-testid": props.dataTestid } : {})}
-    >
+    <span className={className} {...(props.dataTestid ? { "data-testid": props.dataTestid } : {})}>
       {props.children}
     </span>
   );

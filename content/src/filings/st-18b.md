@@ -7,7 +7,7 @@ callToActionText: File and Pay
 treasuryLink:
 extension: false
 frequency: Annually
-taxRates: >-
+taxRates: |
   New Jersey assesses a 6.625% Sales Tax on sales of most tangible personal property, specified digital products, and certain services.
 
   The Use Tax rate is also 6.625%

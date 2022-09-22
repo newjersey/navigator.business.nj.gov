@@ -7,7 +7,7 @@ callToActionText: File and Pay
 treasuryLink: https://www.nj.gov/treasury/taxation/cbt/index.shtml
 extension: false
 frequency: Quarterly
-taxRates: >-
+taxRates: |
   This page shows adjusted rates based on how much they paid in company taxes on the previous year, as well as how much revenue they had.
 additionalInfo:
 filingMethod: online

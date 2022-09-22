@@ -54,7 +54,7 @@ const Link = (onClick?: () => void) => {
       if (/^https?:\/\/(.*)/.test(props.href)) {
         return (
           <ExternalLink href={props.href} onClick={onClick}>
-            {props.children}
+            {props.children[0]}
           </ExternalLink>
         );
       } else if (props.href.startsWith("/self-register")) {
@@ -70,12 +70,12 @@ const Link = (onClick?: () => void) => {
   );
 };
 
-const ExternalLink = ({
+export const ExternalLink = ({
   children,
   href,
   onClick,
 }: {
-  children: string[];
+  children: string;
   href: string;
   onClick?: () => void;
 }): ReactElement => {
@@ -87,7 +87,7 @@ const ExternalLink = ({
       rel="noreferrer noopener"
       onClick={onClick ?? analytics.event.external_link.click.open_external_website}
     >
-      {children[0]}
+      {children}
       <Icon className="">launch</Icon>
     </a>
   );
@@ -103,7 +103,7 @@ const OutlineBox = (props: any): ReactElement => {
   );
 };
 
-const GreenBox = (props: any): ReactElement => {
+export const GreenBox = (props: any): ReactElement => {
   return (
     <div className="green-box text-normal padding-2 margin-top-2 bg-success-lighter radius-lg">
       {props.children}

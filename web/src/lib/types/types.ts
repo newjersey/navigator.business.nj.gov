@@ -341,14 +341,33 @@ export type TaskDependencies = {
   dependencies: string[];
 };
 
+export const taxFilingMethod = [
+  "online",
+  "paper-or-by-mail-only",
+  "online-required",
+  "technical assistance",
+  "online-or-phone",
+] as const;
+export type TaxFilingMethod = typeof taxFilingMethod[number];
+
+export type TaxAgency = "New Jersey Division of Taxation";
+
 export interface Filing {
   id: string;
   filename: string;
   name: string;
   urlSlug: string;
-  callToActionLink: string;
-  callToActionText: string;
+  callToActionLink?: string;
+  callToActionText?: string;
   contentMd: string;
+  treasuryLink?: string;
+  additionalInfo?: string;
+  frequency?: string;
+  extension?: boolean;
+  taxRates?: string;
+  filingMethod?: TaxFilingMethod;
+  filingDetails?: string;
+  agency?: TaxAgency;
 }
 
 export type OperateReference = {

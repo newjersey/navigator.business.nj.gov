@@ -6,10 +6,10 @@ callToActionLink: https://www.nj.gov/treasury/taxation/cigarette_tax_form.shtml
 callToActionText: File and Pay
 treasuryLink: https://www.nj.gov/treasury/taxation/cigarette.shtml
 extension: false
-frequency: >-
+frequency: |
   Monthly, Due on the 20th of each month, or 10th day of the month if the distributor deals in non NJ stamped cigarettes
 taxRates: Per Pack - $2.70
-additionalInfo: >-
+additionalInfo: |
   Disposition of Revenues
   Revenues are deposited in the State Treasury for general State use. Initial collections of $391.5 million are deposited in the Health Care Subsidy Fund.
 filingMethod: paper-or-by-mail-only

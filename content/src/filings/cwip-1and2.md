@@ -8,7 +8,7 @@ treasuryLink: https://www.nj.gov/treasury/taxation/cigarette.shtml
 extension: false
 frequency: Monthly, Report is due on the 10 of each month
 taxRates: Per Pack - $2.70
-additionalInfo: >-
+additionalInfo: |
   Disposition of Revenues
   Revenues are deposited in the State Treasury for general State use. Initial collections of $391.5 million are deposited in the Health Care Subsidy Fund.
 filingMethod: paper-or-by-mail-only
