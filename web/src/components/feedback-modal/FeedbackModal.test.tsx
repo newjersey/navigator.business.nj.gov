@@ -85,6 +85,20 @@ describe("<feedbackModal />", () => {
         Config.feedbackModal.feedbackModalLinkStarting
       );
     });
+
+    it("links to correct feedback form when completed onboarding and a foreign business", () => {
+      useMockUserData({
+        formProgress: "COMPLETED",
+        profileData: generateProfileData({ businessPersona: "FOREIGN" }),
+      });
+      renderFeedbackModal({});
+
+      expect(screen.getByText(Config.feedbackModal.feedbackModalShareFeedbackButtonText)).toBeInTheDocument();
+      expect(screen.getByTestId("feedback-link")).toHaveAttribute(
+        "href",
+        Config.feedbackModal.feedbackModalLinkStarting
+      );
+    });
   });
 
   describe("request a feature", () => {
