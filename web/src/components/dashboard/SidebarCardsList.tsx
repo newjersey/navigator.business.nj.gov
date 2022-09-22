@@ -78,7 +78,7 @@ export const SidebarCardsList = (props: Props): ReactElement => {
             <Accordion
               elevation={0}
               expanded={hiddenAccordionIsOpen}
-              onChange={() => setHiddenAccordionIsOpen(!hiddenAccordionIsOpen)}
+              onChange={() => setHiddenAccordionIsOpen((prevAccordionStatus) => !prevAccordionStatus)}
               sx={{
                 backgroundColor: `#F9FBFB`,
               }}

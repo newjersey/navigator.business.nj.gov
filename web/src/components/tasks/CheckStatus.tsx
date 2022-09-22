@@ -48,10 +48,10 @@ export const CheckStatus = (props: Props): ReactElement => {
     if (userData.licenseData) {
       setFormValues(userData.licenseData.nameAndAddress);
     } else {
-      setFormValues({
-        ...formValues,
+      setFormValues((prevValues) => ({
+        ...prevValues,
         name: userData.profileData.businessName,
-      });
+      }));
     }
   }, userData);
 
@@ -64,10 +64,10 @@ export const CheckStatus = (props: Props): ReactElement => {
   const handleChange =
     (key: keyof NameAndAddress) =>
     (event: ChangeEvent<HTMLInputElement>): void => {
-      setFormValues({
-        ...formValues,
+      setFormValues((prevValues) => ({
+        ...prevValues,
         [key]: event.target.value,
-      });
+      }));
     };
 
   const getErrorAlert = (): ReactElement => {

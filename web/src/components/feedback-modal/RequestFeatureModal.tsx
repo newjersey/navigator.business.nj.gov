@@ -40,7 +40,7 @@ export const RequestFeatureModal = ({ onClose, isOpen, setCurrentFeedback }: Pro
   }, [isOpen]);
 
   const onValidation = (fieldName: string, invalid: boolean) => {
-    setErrorMap({ ...errorMap, [fieldName]: { invalid } });
+    setErrorMap((prevErrorMap) => ({ ...prevErrorMap, [fieldName]: { invalid } }));
   };
   const handleFeedbackRequestSubmission = () => {
     if (!userData) return;
