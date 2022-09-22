@@ -31,7 +31,7 @@ The School and Small Business Energy Efficiency Stimulus Program provides grants
 
 ## Eligibility
 
-A sole proprietorship, partnership, or corporation that has its principal place of business in New Jersey, is a small business pursuant to N.J.A.C. 17:13-1.2, and is certified by the State as a women’s business or minority business, as those terms are defined in L.1987, c.55 § 2 (N.J.S.A. 52:27H-21.8)
+Any small New Jersey business  and is certified by the State as a women’s business or minority business, as those terms are defined in L.1987, c.55 § 2 (N.J.S.A. 52:27H-21.8)
 
 > ### Benefits
 >
