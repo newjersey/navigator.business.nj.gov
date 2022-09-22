@@ -152,7 +152,7 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
               <div className="tablet:grid-col-4">
                 <FormControl margin="dense" className="">
                   <Button
-                    style="secondary-input-field-height"
+                    style="secondary"
                     onClick={() => {}}
                     loading={isLoading}
                     typeSubmit

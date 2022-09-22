@@ -93,7 +93,7 @@ export const BusinessNameStep = (): ReactElement => {
             <div className="flex flex-justify-end tablet:flex-auto tablet:flex-justify tablet:grid-col-4">
               <FormControl margin="dense">
                 <Button
-                  style="secondary-input-field-height"
+                  style="secondary"
                   onClick={() => {}}
                   loading={isLoading}
                   typeSubmit

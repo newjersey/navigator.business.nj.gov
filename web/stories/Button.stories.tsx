@@ -32,10 +32,3 @@ NoMargins.args = {
   children: "button",
   noRightMargin: true,
 };
-
-export const MatchesInputFieldHeight = Template.bind({});
-
-MatchesInputFieldHeight.args = {
-  style: "primary-input-field-height",
-  children: "button",
-};

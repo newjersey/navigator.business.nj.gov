@@ -99,6 +99,7 @@ export default {
     MuiInputBase: {
       styleOverrides: {
         root: { marginTop: "0px" },
+        input: { padding: "12.5px 12px" },
       },
     },
     MuiOutlinedInput: {
@@ -111,6 +112,7 @@ export default {
             borderColor: "#b50909",
           },
           input: {
+            padding: "12.5px 12px",
             "&.Mui-disabled": {
               color: "#1b1b1b",
               webkitTextFillColor: "#1b1b1b",
