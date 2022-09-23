@@ -31,8 +31,9 @@ Programs funded through PACE provide education and training leading to one of th
 
 ---
 ### Eligibility
-This competitive grant opportunity is open to the following entities who are developing new, or building upon existing Registered Apprenticeship programs:
-Any employer; Employer / Trade Associations; Any labor organization which represents workers in the occupation for which the apprentices will be trained; and any other organization as listed within the Notice of Grant Opportunity.
+* Entities who are developing new, or building upon existing Registered Apprenticeship programs.
+* Any employer, Trade Associations, or labor organization which represents workers in the occupation for which the apprentices will be trained.
+* Any other organization as listed within the Notice of Grant Opportunity.
 
 > ### Benefit
->Eligible applicants can apply for funding through the PACE program for costs associated with a pre-apprenticeship program that has a documented partnership with at least one Registered Apprenticeship program sponsor and together, expands the participant’s career pathway opportunities with industry-based training coupled with classroom instruction. Allowed costs include personnel expenses, instructor costs, non-personnel costs, pre-apprentice training, supplies and materials, and other direct costs as outlined within the Notice of Grant Opportunity. Applicants may also include stipends for participants of the program based on participants reaching program milestones.
+>Eligible applicants can apply for funding for costs associated with personnel expenses, instructor costs, non-personnel costs, pre-apprentice training, supplies and materials, and other direct costs as outlined within the Notice of Grant Opportunity. Applicants may also include stipends for participants of the program based on participants reaching program milestones.
