@@ -2041,7 +2041,6 @@ collections:
               - { label: Unlocked By - Plural, name: unlockedByPlural, widget: string }
               - { label: Loading Tasks Text, name: loadingTaskDependencies, widget: string }
               - { label: Required Label Text, name: requiredLabelText, widget: string }
-              - { label: Required Tag Text, name: requiredTagText, widget: string }
               - { label: Issuing Agency Label, name: issuingAgencyText, widget: string }
               - { label: Form Label, name: formNameText, widget: string }
           - label: Task - Business Name Search

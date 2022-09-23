@@ -39,7 +39,7 @@
       "task": "family-daycare-register"
     }
   ],
-  "name": "Family Child Care",
+  "name": "Childcare Center (Family)",
   "industryOnboardingQuestions": {
     "canBeHomeBased": false,
     "isProvidesStaffingServicesApplicable": false,
@@ -51,7 +51,7 @@
     "isTransportation": false
   },
   "isEnabled": true,
-  "additionalSearchTerms": "home daycare",
+  "additionalSearchTerms": "home daycare, family, after school program",
   "id": "family-daycare",
   "description": "Provides daycare services for 5 or less children in the business owner's home"
 }
