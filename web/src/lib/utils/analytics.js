@@ -690,5 +690,17 @@ export default {
           sendEvent("tax_calendar_modal", "submit", "tax_deadlines_added_to_calendar"),
       },
     },
+    tax_registration_nudge_button: {
+      click: {
+        show_tax_registration_modal: () =>
+          sendEvent("tax_registration_nudge_button", "click", "show_tax_registration_modal"),
+      },
+    },
+    tax_registration_modal: {
+      submit: {
+        tax_registration_status_set_to_complete: () =>
+          sendEvent("tax_registration_modal", "submit", "tax_registration_status_set_to_complete"),
+      },
+    },
   },
 };

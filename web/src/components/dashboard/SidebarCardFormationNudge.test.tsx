@@ -35,7 +35,7 @@ describe("<SidebarCardFormationNudge />", () => {
     );
   };
 
-  describe("when clicking funding button", () => {
+  describe("when clicking formation button", () => {
     beforeEach(() => {
       jest.resetAllMocks();
       useMockRouter({});
