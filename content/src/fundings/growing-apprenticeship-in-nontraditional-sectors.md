@@ -24,7 +24,7 @@ dueDate: ""
 ---
 The mission of the Growing Apprenticeship in Nontraditional Sectors (GAINS) program is to promote the expansion and development of [USDOL-approved Registered Apprenticeship](https://www.apprenticeship.gov/employers/registered-apprenticeship-program) programs. The goals of GAINS are to establish new programs, expand existing programs, and establish apprenticeship programs in occupations, sectors, or industries in New Jersey not currently registered with USDOL.
 
-The GAINS program provides New Jersey businesses/organizations or current registered apprenticeship sponsors in targeted sectors with support for new Registered Apprenticeship program development or existing Registered Apprenticeship programs seeking to expand into new USDOL-approved occupations.
+The GAINS program provides New Jersey businesses/organizations or current registered apprenticeship sponsors in targeted sectors with support for new [Registered Apprenticeship](https://www.nj.gov/labor/career-services/apprenticeship/findaprogram.shtml) program development or existing Registered Apprenticeship programs seeking to expand into new [USDOL-approved occupations](https://www.apprenticeship.gov/apprenticeship-occupations).
 
 - - -
 
