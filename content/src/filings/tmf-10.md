@@ -18,4 +18,4 @@ treasuryLink: https://www.nj.gov/treasury/taxation/motorfuels.shtml
 extension: false
 ---
 
-This tax is to be paid by any person licensed as a terminal operator in New Jersey selling motor fuel.
+This tax is to be paid by any person licensed as a terminal operator selling motor fuel in New Jersey.
