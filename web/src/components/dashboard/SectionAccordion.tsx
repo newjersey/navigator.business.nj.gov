@@ -2,11 +2,10 @@ import { Icon } from "@/components/njwds/Icon";
 import { SectionAccordionContext } from "@/contexts/sectionAccordionContext";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { MediaQueries } from "@/lib/PageSizes";
 import { SectionType } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { Accordion, AccordionDetails, AccordionSummary, useMediaQuery } from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import { ReactElement, ReactNode } from "react";
 
 interface Props {
@@ -27,7 +26,6 @@ export const SectionAccordion = (props: Props): ReactElement => {
   const sectionName = props.sectionType.toLowerCase();
   const isOpen = userData?.preferences.roadmapOpenSections.includes(props.sectionType) ?? false;
   const isCompleted = sectionCompletion ? sectionCompletion[props.sectionType] : false;
-  const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
 
   const handleAccordionStateChange = async (): Promise<void> => {
     const roadmapOpenSections = userData?.preferences.roadmapOpenSections;
