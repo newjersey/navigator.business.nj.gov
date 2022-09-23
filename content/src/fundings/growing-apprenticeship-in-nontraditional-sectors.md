@@ -31,9 +31,11 @@ The GAINS program provides New Jersey businesses or current registered apprentic
 ### Eligibility
 
 * Entities who are developing new, or building upon existing Registered Apprenticeship programs
-* Any employer, Trade Associations, or labor organization which represents workers in the occupation for which the apprentices will be trained
-* Any other organization as listed within the [Notice of Grant Opportunity](https://www.nj.gov/education/grants/discretionary/apps/ovr_ngo_dga.shtml)
+* Any employer, trade association, labor organization, and others providing apprenticeship programs for their industry
 
 > ### Benefit
 >
-> Eligible applicants can request funding up to $9,500 per registered apprentice to offset administrative costs incurred creating the Registered Apprenticeship Program, costs incurred for training the new apprentice, and provides a 50% wage reimbursement for the first twelve months of newly hired apprentices’ employment for occupations paying a starting wage of at least $16.00 per hour.
+> Eligible applicants can request funding up to $9,500 per registered apprentice to:
+> 1) Offset administrative costs incurred creating the Registered Apprenticeship Program
+> 2) Offset costs incurred for training the new apprentice 
+> 3) Provide a 50% wage reimbursement for the first twelve months of newly hired apprentices’ employment for occupations paying a starting wage of at least $16.00 per hour
