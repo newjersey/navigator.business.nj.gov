@@ -33,7 +33,7 @@ Funded programs are expected to increase the number of high school graduates ent
 
 * Eligibile businesses must be developing, new, or building upon existing Registered Apprenticeship programs
 * Any employer, trade associations, or labor organization which represents workers in the occupation for which the apprentices will be trained
-* Any other organization as listed within the Notice of Grant Opportunity
+* Any other organization as listed within the [Notice of Grant Opportunity](https://www.nj.gov/education/grants/discretionary/apps/ovr_ngo_dga.shtml)
 
 > ### B﻿enefits
 >
