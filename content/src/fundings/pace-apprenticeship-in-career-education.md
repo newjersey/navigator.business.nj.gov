@@ -40,4 +40,4 @@ Programs funded through PACE provide education and training leading to one of th
 
 > ### Benefit
 >
-> Eligible applicants can apply for funding for costs associated with personnel expenses, instructor costs, non-personnel costs, pre-apprentice training, supplies and materials, and other direct costs as outlined within the Notice of Grant Opportunity. Applicants may also include stipends for participants of the program based on participants reaching program milestones.
+> Eligible applicants can apply for funding up to $8,000 per participant/trainee for costs associated with personnel expenses, instructor costs, non-personnel costs, pre-apprentice training, supplies and materials, and other direct costs as outlined within the Notice of Grant Opportunity. Applicants may also include stipends for participants of the program based on participants reaching program milestones.
