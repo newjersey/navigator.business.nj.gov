@@ -67,7 +67,7 @@ export const OpportunityCard = (props: Props): ReactElement => {
   return (
     <div
       data-testid={props.opportunity.id}
-      className={`bg-white border-1px border-base-lighter padding-3 radius-md${
+      className={`bg-white border-1px border-base-lighter padding-3 maxWidth-400px radius-md${
         props.isLast ? "" : " margin-bottom-205"
       }`}
     >
