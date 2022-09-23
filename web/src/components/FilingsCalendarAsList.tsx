@@ -35,7 +35,7 @@ export const FilingsCalendarAsList = (props: Props): ReactElement => {
   return (
     <div data-testid="filings-calendar-as-list">
       <div className="calendar-container">
-        <div className="flex flex-align-end padding-top-2 margin-bottom-1 flex-justify">
+        <div className="flex flex-align-end margin-bottom-1 flex-justify">
           <div className="flex flex-align-end">
             <h2 className="margin-bottom-0">{Config.dashboardDefaults.calendarHeader}</h2>
             <div className="margin-top-05">
@@ -61,7 +61,7 @@ export const FilingsCalendarAsList = (props: Props): ReactElement => {
             </Button>
           )}
         </div>
-        <hr className="bg-base-lighter margin-top-0 margin-bottom-4" aria-hidden={true} />
+        <hr className="bg-base-lighter margin-top-2 margin-bottom-4" aria-hidden={true} />
         {shouldRenderFilingsCalendarTaxAccess(userData) && <FilingsCalendarTaxAccess />}
         {sortedFilteredFilingsWithinAYear
           .filter((filing) => props.operateReferences[filing.identifier])
@@ -88,8 +88,8 @@ export const FilingsCalendarAsList = (props: Props): ReactElement => {
               </div>
             </div>
           ))}
+        <p className="text-base-dark">{Config.dashboardDefaults.calendarLegalText}</p>
       </div>
-      <p className="text-base-dark">{Config.dashboardDefaults.calendarLegalText}</p>
     </div>
   );
 };
