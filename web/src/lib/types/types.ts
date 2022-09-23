@@ -12,13 +12,12 @@ import {
 import { emptyBusinessUser } from "@businessnjgovnavigator/shared/businessUser";
 import { emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { TaxFilingData } from "@businessnjgovnavigator/shared/taxFiling";
+import { TaskProgress } from "@businessnjgovnavigator/shared/userData";
 import { merge } from "lodash";
 
 // returns all keys in an object of a type
 // e.g. KeysOfType<Task, boolean> will give all keys in the Task that have boolean types
 export type KeysOfType<T, V> = { [K in keyof T]-?: T[K] extends V ? K : never }[keyof T];
-
-export type TaskProgress = "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
 
 export type UserDataError = "NO_DATA" | "CACHED_ONLY" | "UPDATE_FAILED";
 

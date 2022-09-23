@@ -1,8 +1,7 @@
 import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { SidebarCardContent } from "@/lib/types/types";
-import analytics from "@/lib/utils/analytics";
-import { formationTaskId, TaskProgress } from "@businessnjgovnavigator/shared/";
+import { formationTaskId } from "@businessnjgovnavigator/shared/";
 import { useRouter } from "next/router";
 import { ReactElement, useState } from "react";
 import { FormationDateModal } from "../FormationDateModal";
@@ -18,9 +17,9 @@ export const SidebarCardFormationNudge = (props: Props): ReactElement => {
   const { userData, updateQueue } = useUserData();
   const { queueUpdateTaskProgress } = useUpdateTaskProgress();
 
-  const updateFormationDateAndTaskProgress = async (newValue: TaskProgress) => {
+  const updateFormationDateAndTaskProgress = async () => {
     if (!userData || !updateQueue) return;
-    queueUpdateTaskProgress(formationTaskId, newValue);
+    queueUpdateTaskProgress(formationTaskId, "COMPLETED");
     await updateQueue.update();
     router.push({ query: { fromForming: "true" } }, undefined, { shallow: true });
   };
@@ -28,7 +27,6 @@ export const SidebarCardFormationNudge = (props: Props): ReactElement => {
   const onClick = async () => {
     if (!userData) return;
     setModalOpen(true);
-    analytics.event.formation_date_modal.submit.formation_status_set_to_complete();
   };
 
   return (

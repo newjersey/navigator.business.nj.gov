@@ -4,11 +4,11 @@ import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { createProfileFieldErrorMap, ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
+import analytics from "@/lib/utils/analytics";
 import {
   createEmptyProfileData,
   LookupLegalStructureById,
   ProfileData,
-  TaskProgress,
 } from "@businessnjgovnavigator/shared";
 import { ReactElement, useEffect, useState } from "react";
 import { OnboardingBusinessName } from "./onboarding/OnboardingBusinessName";
@@ -19,7 +19,7 @@ import { OnboardingTaxId } from "./onboarding/OnboardingTaxId";
 interface Props {
   isOpen: boolean;
   close: () => void;
-  onSave: (newValue: TaskProgress, { redirectOnSuccess }: { redirectOnSuccess: boolean }) => void;
+  onSave: ({ redirectOnSuccess }: { redirectOnSuccess: boolean }) => void;
 }
 
 export const TaxRegistrationModal = (props: Props): ReactElement => {
@@ -58,7 +58,8 @@ export const TaxRegistrationModal = (props: Props): ReactElement => {
     }
 
     updateQueue.queueProfileData(profileData).queueTaxFilingData(taxFilingData);
-    props.onSave("COMPLETED", { redirectOnSuccess: true });
+    analytics.event.task_tax_registration_date_modal.submit.tax_registration_status_set_to_complete();
+    props.onSave({ redirectOnSuccess: true });
     props.close();
   };
 

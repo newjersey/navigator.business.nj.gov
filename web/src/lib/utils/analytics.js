@@ -266,13 +266,6 @@ export default {
         },
       },
     },
-    formation_date_modal: {
-      submit: {
-        formation_status_set_to_complete: () => {
-          sendEvent("formation_date_modal", "submit", "formation_status_set_to_complete");
-        },
-      },
-    },
     task_status_checklist_edit_button: {
       click: {
         edit_address_form: () => {
@@ -287,23 +280,38 @@ export default {
         },
       },
     },
-    task_status_dropdown: {
-      click_not_started: {
+    task_status_checkbox: {
+      click: {
         selected_not_started_status: () => {
-          sendEvent("task_status_dropdown", "click_not_started", "selected_not_started_status");
+          sendEvent("task_status_checkbox", "click", "selected_not_started_status");
         },
-      },
-      click_in_progress: {
         selected_in_progress_status: () => {
-          sendEvent("task_status_dropdown", "click_in_progress", "selected_in_progress_status");
+          sendEvent("task_status_checkbox", "click", "selected_in_progress_status");
+        },
+        selected_completed_status: () => {
+          sendEvent("task_status_checkbox", "click", "selected_completed_status");
         },
       },
       click_completed: {
-        selected_completed_status: () => {
-          sendEvent("task_status_dropdown", "click_completed", "selected_completed_status");
-        },
         show_formation_date_modal: () => {
-          sendEvent("task_status_dropdown", "click_completed", "show_formation_date_modal");
+          sendEvent("task_status_checkbox", "click_completed", "show_formation_date_modal");
+        },
+        show_tax_registration_date_modal: () => {
+          sendEvent("task_status_checkbox", "click_completed", "show_tax_registration_date_modal");
+        },
+      },
+    },
+    formation_date_modal: {
+      submit: {
+        formation_status_set_to_complete: () => {
+          sendEvent("formation_date_modal", "submit", "formation_status_set_to_complete");
+        },
+      },
+    },
+    task_tax_registration_date_modal: {
+      submit: {
+        tax_registration_status_set_to_complete: () => {
+          sendEvent("task_tax_registration_date_modal", "submit", "tax_registration_status_set_to_complete");
         },
       },
     },
