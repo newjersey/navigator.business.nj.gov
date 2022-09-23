@@ -8,7 +8,7 @@ programPurpose: Both
 agency:
   - NJDOL
 agencyContact: james.manning@dol.nj.gov
-publishStageArchive: ""
+publishStageArchive: Do Not Publish
 status: deadline
 programFrequency: reoccuring
 businessStage: both
@@ -22,9 +22,9 @@ sector: []
 openDate: ""
 dueDate: ""
 ---
-The mission of the Growing Apprenticeship in Nontraditional Sectors (GAINS) program is to promote the expansion and development of [USDOL-approved Registered Apprenticeship](https://www.apprenticeship.gov/employers/registered-apprenticeship-program) programs. The goals of GAINS are to establish new programs, expand existing programs, and establish apprenticeship programs in occupations, sectors, or industries in New Jersey not currently registered with USDOL.
+The Growing Apprenticeship in Nontraditional Sectors (GAINS) program aims to promote the expansion and development of [USDOL-approved Registered Apprenticeship](https://www.apprenticeship.gov/employers/registered-apprenticeship-program) programs. 
 
-The GAINS program provides New Jersey businesses/organizations or current registered apprenticeship sponsors in targeted sectors with support for new [Registered Apprenticeship](https://www.nj.gov/labor/career-services/apprenticeship/findaprogram.shtml) program development or existing Registered Apprenticeship programs seeking to expand into new [USDOL-approved occupations](https://www.apprenticeship.gov/apprenticeship-occupations).
+The GAINS program provides New Jersey businesses or current registered apprenticeship sponsors looking to create or expand Registered Apprenticeship programs in new [USDOL-approved occupations](https://www.apprenticeship.gov/apprenticeship-occupations).
 
 - - -
 
@@ -32,7 +32,7 @@ The GAINS program provides New Jersey businesses/organizations or current regist
 
 * Entities who are developing new, or building upon existing Registered Apprenticeship programs
 * Any employer, Trade Associations, or labor organization which represents workers in the occupation for which the apprentices will be trained
-* Any other organization as listed within the N[Notice of Grant Opportunity](https://www.nj.gov/education/grants/discretionary/apps/ovr_ngo_dga.shtml)
+* Any other organization as listed within the [Notice of Grant Opportunity](https://www.nj.gov/education/grants/discretionary/apps/ovr_ngo_dga.shtml)
 
 > ### Benefit
 >
