@@ -68,7 +68,7 @@ export const SectionAccordion = (props: Props): ReactElement => {
             id={`${sectionName}-header`}
             data-testid={`${sectionName}-header`}
           >
-            <div className={`margin-y-2${!props.mini && isTabletAndUp ? " margin-left-3" : ""}`}>
+            <div className="margin-y-2">
               <h2 className={`flex flex-align-center margin-0-override ${headerClasses}`}>
                 <img
                   role="presentation"
