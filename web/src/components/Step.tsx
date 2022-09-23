@@ -17,7 +17,7 @@ export const Step = (props: Props): ReactElement => {
 
   return (
     <div
-      className={`margin-top-3 margin-left-2px tablet:margin-left-3 ${props.last ? "margin-bottom-1" : ""}`}
+      className={`margin-top-3 ${props.last ? "margin-bottom-1" : ""}`}
       id={`vertical-content-${props.step.stepNumber}`}
     >
       <div className="tablet:margin-right-4 minh-4">
