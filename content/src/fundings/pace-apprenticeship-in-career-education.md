@@ -26,7 +26,7 @@ The Pre-Apprenticeship in Career Education (PACE) program aims to better align s
 
 Programs funded through PACE provide education and training leading to one of the following outcomes:  
 
-1. Admission into a USDOL Registered Apprenticeship program; 
+1. Admission into a USDOL [Registered Apprenticeship](https://www.nj.gov/labor/career-services/apprenticeship/findaprogram.shtml) program; 
 2. Admission into a post-secondary college, or occupation-specific career training; or 
 3. Employment with a starting wage no lower than $15 per hour.
 
@@ -35,7 +35,7 @@ Programs funded through PACE provide education and training leading to one of th
 ### Eligibility
 
 * Entities who are developing new, or building upon existing Registered Apprenticeship programs
-* Any employer, Trade Associations, or labor organization which represents workers in the occupation for which the apprentices will be trained
+* Any employer, trade associations, or labor organization which represents workers in the occupation for which the apprentices will be trained
 * Any other organization as listed within the Notice of Grant Opportunity
 
 > ### Benefit
