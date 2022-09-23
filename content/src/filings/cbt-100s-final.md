@@ -6,7 +6,7 @@ callToActionLink: https://www.njportal.com/taxation/CBT
 callToActionText: File and Pay
 frequency: Annually
 taxRates: >
-  If your Entire Net Income is:
+  If your `net income|tax-net-income` is:
 
   * Greater than $100,000, the tax rate is 9%
 
