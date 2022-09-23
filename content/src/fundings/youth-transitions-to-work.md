@@ -29,11 +29,9 @@ The mission of the Youth Transitions to Work (YTTW) program is to recruit, scree
 
 ### E﻿ligibility
 
-Eligibile businesses must be developing, new, or building upon existing Registered Apprenticeship programs.
-
-Any employer, Trade Associations, or labor organization which represents workers in the occupation for which the apprentices will be trained.
-
-Any other organization as listed within the Notice of Grant Opportunity.
+* Eligibile businesses must be developing, new, or building upon existing Registered Apprenticeship programs.
+* Any employer, Trade Associations, or labor organization which represents workers in the occupation for which the apprentices will be trained.
+* Any other organization as listed within the Notice of Grant Opportunity.
 
 > ### B﻿enefits
 >
