@@ -5,7 +5,7 @@ id: ppt-10
 callToActionLink: https://www.nj.gov/treasury/taxation/petroleum.shtml
 callToActionText: File and Pay
 frequency: |
-  Quarterly (due on the 25th day of the new quarter)
+  Quarterly (due on the 25th day of the following quarter)
 taxRates: |
   
   - Gasoline & LPG per gallon: $0.402
