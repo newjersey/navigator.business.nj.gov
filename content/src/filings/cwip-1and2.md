@@ -4,8 +4,8 @@ name: Cigarette Tax
 id: cwip-1and2
 callToActionLink: https://www.nj.gov/treasury/taxation/cigarette_tax_form.shtml
 callToActionText: File and Pay
-frequency: Monthly, Report is due on the 10 of each month
-taxRates: Per Pack - $2.70
+frequency: Monthly (due on the 10 of each month)
+taxRates: $2.70 per pack
 filingDetails: null
 agency: New Jersey Division of Taxation
 additionalInfo: >
