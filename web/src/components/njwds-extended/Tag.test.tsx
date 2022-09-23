@@ -3,8 +3,13 @@ import { render } from "@testing-library/react";
 
 describe("Tag", () => {
   describe("Variants", () => {
-    it("Primary displays correctly", () => {
-      const view = render(<Tag tagVariant="primary">Primary Test</Tag>).baseElement;
+    it("completed displays correctly", () => {
+      const view = render(<Tag tagVariant="completed">Primary Test</Tag>).baseElement;
+      expect(view).toMatchSnapshot();
+    });
+
+    it("notStarted displays correctly", () => {
+      const view = render(<Tag tagVariant="notStarted">Base Test</Tag>).baseElement;
       expect(view).toMatchSnapshot();
     });
 
@@ -13,32 +18,13 @@ describe("Tag", () => {
       expect(view).toMatchSnapshot();
     });
 
-    it("info displays correctly", () => {
-      const view = render(<Tag tagVariant="info">Info Test</Tag>).baseElement;
-      expect(view).toMatchSnapshot();
-    });
-
-    it("info with hover displays correctly", () => {
-      const view = render(
-        <Tag tagVariant="info" hover>
-          Info with hover Test
-        </Tag>
-      ).baseElement;
-      expect(view).toMatchSnapshot();
-    });
-
-    it("error displays correctly", () => {
-      const view = render(<Tag tagVariant="error">Error Test</Tag>).baseElement;
+    it("inProgress displays correctly", () => {
+      const view = render(<Tag tagVariant="inProgress">Info Test</Tag>).baseElement;
       expect(view).toMatchSnapshot();
     });
 
     it("accent displays correctly", () => {
       const view = render(<Tag tagVariant="accent">Accent Test</Tag>).baseElement;
-      expect(view).toMatchSnapshot();
-    });
-
-    it("noBg displays correctly", () => {
-      const view = render(<Tag tagVariant="noBg">NoBg Test</Tag>).baseElement;
       expect(view).toMatchSnapshot();
     });
 
@@ -48,18 +34,18 @@ describe("Tag", () => {
     });
   });
 
-  it("Primary Bold displays correctly", () => {
+  it("completed Bold displays correctly", () => {
     const view = render(
-      <Tag tagVariant="primary" bold>
+      <Tag tagVariant="completed" bold>
         Primary Test
       </Tag>
     ).baseElement;
     expect(view).toMatchSnapshot();
   });
 
-  it("Primary textWrap displays correctly", () => {
+  it("completed textWrap displays correctly", () => {
     const view = render(
-      <Tag tagVariant="primary" textWrap>
+      <Tag tagVariant="completed" textWrap>
         Primary Test with a really really really really long child
       </Tag>
     ).baseElement;

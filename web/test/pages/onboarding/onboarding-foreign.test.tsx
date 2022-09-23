@@ -185,8 +185,9 @@ describe("onboarding - foreign business", () => {
       const { page } = renderPage({ userData });
       page.checkByLabelText(none);
       act(() => page.clickNext());
+
       await waitFor(() => {
-        expect(userDataWasNotUpdated).toBeTruthy();
+        expect(userDataWasNotUpdated()).toBe(true);
       });
     });
 

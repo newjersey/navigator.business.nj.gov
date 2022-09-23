@@ -1,41 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Tag Primary Bold displays correctly 1`] = `
-<body>
-  <div>
-    <span
-      class="flex flex-align-center flex-justify usa-tag font-sans-2xs width-full width-auto line-height-sans-2 padding-y-2px bg-primary-lighter text-primary-dark text-no-wrap text-bold"
-    >
-      Primary Test
-    </span>
-  </div>
-</body>
-`;
-
-exports[`Tag Primary textWrap displays correctly 1`] = `
-<body>
-  <div>
-    <span
-      class="flex flex-align-center flex-justify usa-tag font-sans-2xs width-full width-auto line-height-sans-2 padding-y-2px bg-primary-lighter text-primary-dark text-wrap display-block"
-    >
-      Primary Test with a really really really really long child
-    </span>
-  </div>
-</body>
-`;
-
-exports[`Tag Variants Primary displays correctly 1`] = `
-<body>
-  <div>
-    <span
-      class="flex flex-align-center flex-justify usa-tag font-sans-2xs width-full width-auto line-height-sans-2 padding-y-2px bg-primary-lighter text-primary-dark text-no-wrap"
-    >
-      Primary Test
-    </span>
-  </div>
-</body>
-`;
-
 exports[`Tag Variants accent displays correctly 1`] = `
 <body>
   <div>
@@ -72,23 +36,23 @@ exports[`Tag Variants baseDark displays correctly 1`] = `
 </body>
 `;
 
-exports[`Tag Variants error displays correctly 1`] = `
+exports[`Tag Variants completed displays correctly 1`] = `
 <body>
   <div>
     <span
-      class="flex flex-align-center flex-justify usa-tag font-sans-2xs width-full width-auto line-height-sans-2 padding-y-2px bg-error-extra-light text-error-dark text-no-wrap"
+      class="flex flex-align-center flex-justify usa-tag font-sans-2xs width-full width-auto line-height-sans-2 padding-y-2px bg-primary-lightest text-primary-dark text-no-wrap"
     >
-      Error Test
+      Primary Test
     </span>
   </div>
 </body>
 `;
 
-exports[`Tag Variants info displays correctly 1`] = `
+exports[`Tag Variants inProgress displays correctly 1`] = `
 <body>
   <div>
     <span
-      class="flex flex-align-center flex-justify usa-tag font-sans-2xs width-full width-auto line-height-sans-2 padding-y-2px bg-info-extra-light text-info-darker text-no-wrap"
+      class="flex flex-align-center flex-justify usa-tag font-sans-2xs width-full width-auto line-height-sans-2 padding-y-2px bg-accent-cool-lighter text-accent-cool-darker text-no-wrap"
     >
       Info Test
     </span>
@@ -96,25 +60,37 @@ exports[`Tag Variants info displays correctly 1`] = `
 </body>
 `;
 
-exports[`Tag Variants info with hover displays correctly 1`] = `
+exports[`Tag Variants notStarted displays correctly 1`] = `
 <body>
   <div>
     <span
-      class="flex flex-align-center flex-justify usa-tag font-sans-2xs width-full width-auto line-height-sans-2 padding-y-2px bg-info-extra-light text-info-darker accent-cool-hover-override text-no-wrap"
+      class="flex flex-align-center flex-justify usa-tag font-sans-2xs width-full width-auto line-height-sans-2 padding-y-2px bg-base-lighter text-base-dark text-no-wrap"
     >
-      Info with hover Test
+      Base Test
     </span>
   </div>
 </body>
 `;
 
-exports[`Tag Variants noBg displays correctly 1`] = `
+exports[`Tag completed Bold displays correctly 1`] = `
 <body>
   <div>
     <span
-      class="flex flex-align-center flex-justify usa-tag font-sans-2xs width-full width-auto line-height-sans-2 padding-y-2px bg-white text-base text-no-wrap"
+      class="flex flex-align-center flex-justify usa-tag font-sans-2xs width-full width-auto line-height-sans-2 padding-y-2px bg-primary-lightest text-primary-dark text-no-wrap text-bold"
     >
-      NoBg Test
+      Primary Test
+    </span>
+  </div>
+</body>
+`;
+
+exports[`Tag completed textWrap displays correctly 1`] = `
+<body>
+  <div>
+    <span
+      class="flex flex-align-center flex-justify usa-tag font-sans-2xs width-full width-auto line-height-sans-2 padding-y-2px bg-primary-lightest text-primary-dark text-wrap display-block"
+    >
+      Primary Test with a really really really really long child
     </span>
   </div>
 </body>
