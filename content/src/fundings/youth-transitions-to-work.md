@@ -25,12 +25,13 @@ dueDate: ""
 ---
 The mission of the Youth Transitions to Work (YTTW) program is to recruit, screen and facilitate effective transitions of high school juniors, seniors and Out of School Youth (ages 16-24) to high-skill, high-wage employment in labor demand occupations. Programs funded are expected to establish YTTW programs in new apprenticeship occupations or industries, link secondary education and higher educational institutions to existing USDOL apprenticeship programs, reactivate registered programs that are not currently in use, and increase the number of high school graduates entering Registered Apprenticeship programs in NJ.
 
----
+- - -
+
 ### E﻿ligibility
 
 This competitive grant opportunity is open to the following entities who are developing new, or building upon existing Registered Apprenticeship programs:\
 Any employer; Employer / Trade Associations; Any labor organization which represents workers in the occupation for which the apprentices will be trained; and any other organization as listed within the Notice of Grant Opportunity.
 
->### B﻿enefits
->﻿
->Eligible applicants can apply for funding through the YTTW program for personnel expenses, costs associated with the pre-apprenticeship training and other expenses such as development of marketing/promotional materials, costs to prepare articulations agreements with institutions of higher education, curriculum development, support services, and aptitude testing
+> ### B﻿enefits
+>
+> Eligible applicants can apply for funding through the YTTW program for personnel expenses, costs associated with the pre-apprenticeship training and other expenses such as development of marketing/promotional materials, costs to prepare articulations agreements with institutions of higher education, curriculum development, support services, and aptitude testing
