@@ -100,7 +100,9 @@
     "CDIS",
     "CWIP",
     "Millville",
-    "orcnr"
+    "orcnr",
+    "VEEVR",
+    "NPFA"
   ],
   "ignorePaths": ["node_modules/**", "out/**", "web/out/**", "package.json"]
 }
