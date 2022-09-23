@@ -26,8 +26,8 @@ The Pre-Apprenticeship in Career Education (PACE) program aims to better align s
 
 Programs funded through PACE provide education and training leading to one of the following outcomes:  
 
-1. Admission into a USDOL [Registered Apprenticeship](https://www.nj.gov/labor/career-services/apprenticeship/findaprogram.shtml) program; 
-2. Admission into a post-secondary college, or occupation-specific career training; or 
+1. Admission into a USDOL [Registered Apprenticeship](https://www.nj.gov/labor/career-services/apprenticeship/findaprogram.shtml) program
+2. Admission into a post-secondary college, or occupation-specific career training
 3. Employment with a starting wage no lower than $15 per hour.
 
 - - -
@@ -35,9 +35,11 @@ Programs funded through PACE provide education and training leading to one of th
 ### Eligibility
 
 * Entities who are developing new, or building upon existing Registered Apprenticeship programs
-* Any employer, trade associations, or labor organization which represents workers in the occupation for which the apprentices will be trained
-* Any other organization as listed within the [Notice of Grant Opportunity](https://www.nj.gov/education/grants/discretionary/apps/ovr_ngo_dga.shtml)
+* Any employer, trade associations, labor organization, or others with programs supporting the industries in which they work
 
 > ### Benefit
 >
-> Eligible applicants can apply for funding up to $8,000 per participant/trainee for costs associated with personnel expenses, instructor costs, non-personnel costs, pre-apprentice training, supplies and materials, and other direct costs as outlined within the Notice of Grant Opportunity. Applicants may also include stipends for participants of the program based on participants reaching program milestones.
+> Eligible applicants can apply for funding up to $8,000 per participant for:
+>
+> 1. Costs associated with personnel expenses, instructor costs, non-personnel costs, pre-apprentice training, supplies and materials, and other direct costs as outlined in the program details
+> 2. Stipends for participants of the program based on participants reaching program milestones
