@@ -36,7 +36,7 @@ Programs funded through PACE provide education and training leading to one of th
 
 * Entities who are developing new, or building upon existing Registered Apprenticeship programs
 * Any employer, trade associations, or labor organization which represents workers in the occupation for which the apprentices will be trained
-* Any other organization as listed within the Notice of Grant Opportunity
+* Any other organization as listed within the [Notice of Grant Opportunity](https://www.nj.gov/education/grants/discretionary/apps/ovr_ngo_dga.shtml)
 
 > ### Benefit
 >
