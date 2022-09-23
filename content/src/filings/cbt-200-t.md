@@ -9,7 +9,7 @@ frequency: >
 
   (4 months after the end of your accounting period, on the 15th day. For example, if your accounting period ends December 31st, your taxes are due by April 15th.)
 taxRates: >
-  If your Entire Net Income is:
+  If your `net income|tax-net-income` is:
 
   * Greater than $100,000, the tax rate is 9%
 
