@@ -2,7 +2,7 @@
 
 import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { TaskProgress, UpdateQueue } from "@/lib/types/types";
+import { UpdateQueue } from "@/lib/types/types";
 import { generatePreferences, generateStep, generateTask, generateUserData } from "@/test/factories";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import {
@@ -10,7 +10,7 @@ import {
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { UserData } from "@businessnjgovnavigator/shared/userData";
+import { TaskProgress, UserData } from "@businessnjgovnavigator/shared/userData";
 import { act, render } from "@testing-library/react";
 import { ReactNode } from "react";
 

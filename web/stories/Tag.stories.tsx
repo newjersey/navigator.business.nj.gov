@@ -78,7 +78,7 @@ const Template: ComponentStory<typeof Tag> = ({ children, ...args }) => (
 export const TagComponent = Template.bind({});
 
 TagComponent.args = {
-  tagVariant: "info",
+  tagVariant: "baseDark",
 };
 
 TagComponent.parameters = { pseudo: { hover: true } };

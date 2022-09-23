@@ -1,15 +1,13 @@
 import React, { ReactElement } from "react";
 
 export type TagVariant =
-  | "primary"
   | "base"
-  | "info"
-  | "error"
+  | "completed"
+  | "notStarted"
+  | "inProgress"
   | "accent"
-  | "noBg"
   | "baseDark"
   | "baseDarkest"
-  | "required"
   | "certification"
   | "funding"
   | "annual";
@@ -31,23 +29,18 @@ export const Tag = (props: Props): ReactElement => {
   let hoverStyling = "";
 
   switch (props.tagVariant) {
-    case "primary":
-      styling = "bg-primary-lighter text-primary-dark";
+    case "completed":
+      styling = "bg-primary-lightest text-primary-dark";
       break;
+    case "notStarted":
     case "base":
       styling = "bg-base-lighter text-base-dark";
       break;
-    case "info":
-      styling = "bg-info-extra-light text-info-darker";
-      break;
-    case "error":
-      styling = "bg-error-extra-light text-error-dark";
+    case "inProgress":
+      styling = "bg-accent-cool-lighter text-accent-cool-darker";
       break;
     case "accent":
       styling = "bg-accent-warm-lighter text-accent-warm-darker";
-      break;
-    case "noBg":
-      styling = "bg-white text-base";
       break;
     case "baseDark":
       styling = "bg-white text-base-dark border usa-tag-padding-override";
@@ -58,19 +51,12 @@ export const Tag = (props: Props): ReactElement => {
     case "funding":
       styling = "bg-white text-base-darkest bg-funding";
       break;
-    case "required":
-      styling =
-        "bg-white text-accent-cool-darker border-1px border-accent-cool-darker padding-y-0 padding-left-0";
-      break;
     case "annual":
       styling = "bg-warning-light text-base-dark";
       break;
   }
 
   switch (props.hover) {
-    case props.tagVariant === "info":
-      hoverStyling = "accent-cool-hover-override";
-      break;
     case props.tagVariant === "annual":
       hoverStyling = "warning-extra-light-hover-override";
       break;

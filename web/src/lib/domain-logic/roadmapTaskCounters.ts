@@ -1,5 +1,5 @@
-import { Roadmap, TaskProgress } from "@/lib/types/types";
-import { UserData } from "@businessnjgovnavigator/shared";
+import { Roadmap } from "@/lib/types/types";
+import { TaskProgress, UserData } from "@businessnjgovnavigator/shared";
 
 export const getTotalTaskCount = (roadmap: Roadmap | undefined): number => {
   if (!roadmap) return 1;

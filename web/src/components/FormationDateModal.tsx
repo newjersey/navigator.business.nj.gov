@@ -4,12 +4,7 @@ import { OnboardingDateOfFormation } from "@/components/onboarding/OnboardingDat
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import {
-  createProfileFieldErrorMap,
-  ProfileFieldErrorMap,
-  ProfileFields,
-  TaskProgress,
-} from "@/lib/types/types";
+import { createProfileFieldErrorMap, ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared";
 import { ReactElement, useEffect, useState } from "react";
@@ -17,7 +12,7 @@ import { ReactElement, useEffect, useState } from "react";
 interface Props {
   isOpen: boolean;
   close: () => void;
-  onSave: (newValue: TaskProgress, { redirectOnSuccess }: { redirectOnSuccess: boolean }) => void;
+  onSave: ({ redirectOnSuccess }: { redirectOnSuccess: boolean }) => void;
 }
 
 export const FormationDateModal = (props: Props): ReactElement => {
@@ -43,7 +38,7 @@ export const FormationDateModal = (props: Props): ReactElement => {
     }
     analytics.event.formation_date_modal.submit.formation_status_set_to_complete();
     updateQueue.queueProfileData(profileData);
-    props.onSave("COMPLETED", { redirectOnSuccess: true });
+    props.onSave({ redirectOnSuccess: true });
   };
 
   return (
