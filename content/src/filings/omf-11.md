@@ -1,11 +1,6 @@
 ---
-urlSlug: omf-11
 name: Motor Fuels Tax
-id: omf-11
 callToActionLink: https://www.state.nj.us/treasury/taxation/pdf/other_forms/motorfuel/omf11.pdf
-callToActionText: File and Pay
-frequency: |
-  Monthly (due on the 25th day of the next month)
 taxRates: |
   
   - Gasoline per gallon: $0.105
@@ -14,6 +9,10 @@ taxRates: |
 filingDetails: null
 agency: New Jersey Division of Taxation
 additionalInfo: null
+urlSlug: omf-11
+id: omf-11
+callToActionText: File and Pay
+frequency: Monthly *(due on the 25th day of the next month)*
 filingMethod: paper-or-by-mail-only
 treasuryLink: https://www.nj.gov/treasury/taxation/motorfuels.shtml
 extension: false
