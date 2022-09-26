@@ -66,7 +66,7 @@ export const SidebarCardGeneric = (props: Props) => {
           {props.preBodyContent && <div className={`padding-bottom-205`}>{props.preBodyContent}</div>}
           <Content>{props.bodyText}</Content>
           {props.ctaOnClick && props.card.ctaText && (
-            <div className="margin-top-205 flex flex-justify-end">
+            <div className="margin-top-205 flex flex-justify-center desktop:flex-justify-end">
               <Button
                 style="secondary"
                 onClick={props.ctaOnClick}

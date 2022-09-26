@@ -58,7 +58,7 @@ export const TaxRegistrationModal = (props: Props): ReactElement => {
     }
 
     updateQueue.queueProfileData(profileData).queueTaxFilingData(taxFilingData);
-    analytics.event.task_tax_registration_date_modal.submit.tax_registration_status_set_to_complete();
+    analytics.event.tax_registration_modal.submit.tax_registration_status_set_to_complete();
     props.onSave({ redirectOnSuccess: true });
     props.close();
   };

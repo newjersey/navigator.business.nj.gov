@@ -1,8 +1,8 @@
 ---
 id: tax-registration-nudge
-header: Access Certifications
+header: Access Certification Opportunities
 imgPath: /img/nudge-icon.svg
-ctaText: ""
+ctaText: "I'm Registered for Taxes"
 color: accent-cool-darker
 headerBackgroundColor: accent-cool-lighter
 borderColor: info-light
@@ -10,6 +10,4 @@ hasCloseButton: false
 weight: 1
 ---
 
-[Register for State Taxes](/tasks/register-for-taxes) to discover and apply for State certifications your business may be eligible for.
-
-**Already registered?** Mark the task as "Complete".
+[Register for State Taxes](/tasks/register-for-taxes) to discover State certifications your business may be eligible for.
