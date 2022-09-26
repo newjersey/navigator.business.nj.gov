@@ -27,10 +27,14 @@ sector:
 openDate: 07/25/2022
 dueDate: 10/31/2022
 ---
-The EV Tourism Program is offering incentives to promote electric vehicle (“EV”) adoption and tourism through investment in EV chargers at key New Jersey tourism sites, landmarks, and other Tourism Areas.
+The Electric Vehicle (EV) Tourism Program is offering incentives to promote electric vehicle adoption and tourism through investment in EV chargers at key New Jersey tourism sites, landmarks, and other [Tourism Areas](https://visitnj.org/).
 
----
+- - -
+
 ### Eligibility
-Selection for participation in the EV Tourism Program will be based on the recommendations of a review committee comprised of Board staff. The Review Committee will evaluate and score each application based on the answers provided in this application. The scoring criteria worksheet that the Review Committee will utilize is publicly available. Applicants may use this scoring criteria to guide the development of their application, as some items may be weighted more heavily than others. Staff will accept applications during specific timeframes.
->### Benefit
->Assisting local businesses and municipalities with charging infrastructure in Tourism Areas moves New Jersey closer to the goals for public and overnight lodging charging locations as established by the EV Act. In addition, it will reduce range anxiety for residents and tourists in New Jersey, while also promoting New Jersey tourism and business. Up to $5,000 for an eligible L2 charger, up to the cost of the charger; and Up to $50,000 for a Direct Current Fast Charger, up to the cost of the charger.
+
+Selection for participation in the EV Tourism Program will be based on the recommendations of a review committee comprised of board staff. The Review Committee evaluate and score each application based on answers provided in the application. The scoring criteria worksheet is publicly available. Applicants may use this scoring criteria to guide the development of their application, as some items may be weighted more heavily than others.
+
+> ### Benefit
+>
+> Awardees will receive up to $5,000 for an eligible L2 charger, up to the cost of the charger; and up to $50,000 for a Direct Current Fast Charger, up to the cost of the charger.
