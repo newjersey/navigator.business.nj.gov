@@ -25,9 +25,7 @@ frequency: >-
   Annually *(due on April 15th)*
 
 
-
-
-  * Any `short period|tax-short-period` return must be filed on the same due date as Federal form 1065.
+  - Any `short period|tax-short-period` return must be filed on the same due date as Federal form 1065
 filingMethod: online-required
 treasuryLink: https://www.nj.gov/treasury/taxation/businesses/partnerships/index.shtml
 extension: false
