@@ -1,6 +1,7 @@
 import ContextEditor from "@/lib/cms/editors/context-info";
 import { NoSpaceControl } from "@/lib/cms/fields/nospacefield";
 import { SlugControl } from "@/lib/cms/fields/slugfield";
+import CannabisEligibilityModalPreview from "@/lib/cms/previews/cannabis-eligibility-modal";
 import CannabisLicensePreview from "@/lib/cms/previews/cannabis-license/cannabis-license";
 import CannabisPriorityStatusPreview from "@/lib/cms/previews/cannabis-priority-status";
 import CertificationsPreview from "@/lib/cms/previews/certifications";
@@ -139,6 +140,8 @@ const CMS = dynamic(
         "cannabisLicenseAnnual-2",
         "cannabisLicenseConditional-2",
       ]);
+      // @ts-expect-error: No type definition available
+      CMS.registerPreviewTemplate("cannabis-eligibility-modal", CannabisEligibilityModalPreview);
 
       // ----- Cannabis Priority Status -----
       registerAsContent(CMS, [

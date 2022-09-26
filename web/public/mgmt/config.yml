@@ -787,7 +787,7 @@ collections:
         name: cannabis-eligibility-modal
         file: content/src/fieldConfig/config.json
         editor:
-          preview: false
+          preview: true
         fields:
           - label: Cannabis Eligibility Modal
             name: cannabisEligibilityModal
@@ -3525,106 +3525,105 @@ collections:
                     fields:
                       - { label: "Header", name: "header", widget: "string" }
                       - { label: "Placeholder", name: "placeholder", widget: "markdown" }
-          - label: "Notes Tab (Poppy)"
-            name: "profile-notes-poppy"
-            file: "content/src/fieldConfig/profile-notes-poppy.json"
-            editor:
-              preview: true
+      - label: "Notes Tab (Poppy)"
+        name: "profile-notes-poppy"
+        file: "content/src/fieldConfig/profile-notes-poppy.json"
+        editor:
+          preview: true
+        fields:
+          - label: Profile Defaults
+            name: "profileDefaults"
+            collapsed: false
+            widget: object
             fields:
-              - label: Profile Defaults
-                name: "profileDefaults"
+              - { label: "Notes Tab", name: "profileTabNoteTitle", widget: "string" }
+              - label: Fields
+                name: STARTING
                 collapsed: false
                 widget: object
                 fields:
-                  - { label: "Notes Tab", name: "profileTabNoteTitle", widget: "string" }
-                  - label: Fields
-                    name: STARTING
-                    collapsed: false
+                  - label: Notes
+                    name: notes
+                    collapsed: true
                     widget: object
+                    summary: "{{notes}}"
                     fields:
-                      - label: Notes
-                        name: notes
-                        collapsed: true
-                        widget: object
-                        summary: "{{notes}}"
-                        fields:
-                          - { label: "Header", name: "header", widget: "string" }
-                          - { label: "Placeholder", name: "placeholder", widget: "string" }
-                          - { label: "Description", name: "description", widget: "markdown" }
-          - label: "Notes Tab (Oscar)"
-            name: "profile-notes-oscar"
-            file: "content/src/fieldConfig/profile-notes-oscar.json"
-            editor:
-              preview: true
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - { label: "Description", name: "description", widget: "markdown" }
+      - label: "Notes Tab (Oscar)"
+        name: "profile-notes-oscar"
+        file: "content/src/fieldConfig/profile-notes-oscar.json"
+        editor:
+          preview: true
+        fields:
+          - label: Profile Defaults
+            name: "profileDefaults"
+            collapsed: false
+            widget: object
             fields:
-              - label: Profile Defaults
-                name: "profileDefaults"
+              - label: Fields
+                name: OWNING
                 collapsed: false
                 widget: object
                 fields:
-                  - label: Fields
-                    name: OWNING
-                    collapsed: false
+                  - label: Notes
+                    name: notes
+                    collapsed: true
                     widget: object
+                    summary: "{{notes}}"
                     fields:
-                      - label: Notes
-                        name: notes
-                        collapsed: true
-                        widget: object
-                        summary: "{{notes}}"
-                        fields:
-                          - { label: "Header", name: "header", widget: "string" }
-                          - { label: "Placeholder", name: "placeholder", widget: "string" }
-                          - { label: "Description", name: "description", widget: "markdown" }
-              - label: "Notes Tab (Dakota)"
-                name: "profile-notes-dakota"
-                file: "content/src/fieldConfig/profile-notes-dakota.json"
-                editor:
-                  preview: true
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - { label: "Description", name: "description", widget: "markdown" }
+      - label: "Notes Tab (Dakota)"
+        name: "profile-notes-dakota"
+        file: "content/src/fieldConfig/profile-notes-dakota.json"
+        editor:
+          preview: true
+        fields:
+          - label: Profile Defaults
+            name: "profileDefaults"
+            collapsed: false
+            widget: object
+            fields:
+              - label: Fields
+                name: FOREIGN
+                collapsed: false
+                widget: object
                 fields:
-                  - label: Profile Defaults
-                    name: "profileDefaults"
-                    collapsed: false
+                  - label: Notes
+                    name: notes
+                    collapsed: true
                     widget: object
+                    summary: "{{notes}}"
                     fields:
-                      - label: Fields
-                        name: FOREIGN
-                        collapsed: false
-                        widget: object
-                        fields:
-                          - label: Notes
-                            name: notes
-                            collapsed: true
-                            widget: object
-                            summary: "{{notes}}"
-                            fields:
-                              - { label: "Header", name: "header", widget: "string" }
-                              - { label: "Placeholder", name: "placeholder", widget: "string" }
-                              - { label: "Description", name: "description", widget: "markdown" }
-
-              - label: "Profile Page Misc"
-                name: "profile-misc"
-                file: "content/src/fieldConfig/config.json"
-                editor:
-                  preview: true
-                fields:
-                  - label: Profile Defaults
-                    name: profileDefaults
-                    collapsed: false
-                    widget: object
-                    summary: "{{profileDefaults}}"
-                    fields:
-                      - { label: Escape Modal - Header, name: escapeModalHeader, widget: string }
-                      - { label: Escape Model - Body, name: escapeModalBody, widget: string }
-                      - { label: Escape Modal - Return, name: escapeModalReturn, widget: string }
-                      - { label: Escape Modal - Escape, name: escapeModalEscape, widget: string }
-                      - { label: Success Alert - Header, name: successTextHeader, widget: string }
-                      - { label: Success Alert - Body, name: successTextBody, widget: string }
-                      - { label: Error Alert - Header, name: errorTextHeader, widget: string }
-                      - { label: Error Alert - Body, name: errorTextBody, widget: string }
-                      - { label: Page Title, name: pageTitle, widget: string }
-                      - { label: Save Button Text, name: saveButtonText, widget: string }
-                      - { label: Back Button Text, name: backButtonText, widget: string }
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - { label: "Description", name: "description", widget: "markdown" }
+      - label: "Profile Page Misc"
+        name: "profile-misc"
+        file: "content/src/fieldConfig/config.json"
+        editor:
+          preview: true
+        fields:
+          - label: Profile Defaults
+            name: profileDefaults
+            collapsed: false
+            widget: object
+            summary: "{{profileDefaults}}"
+            fields:
+              - { label: Escape Modal - Header, name: escapeModalHeader, widget: string }
+              - { label: Escape Model - Body, name: escapeModalBody, widget: string }
+              - { label: Escape Modal - Return, name: escapeModalReturn, widget: string }
+              - { label: Escape Modal - Escape, name: escapeModalEscape, widget: string }
+              - { label: Success Alert - Header, name: successTextHeader, widget: string }
+              - { label: Success Alert - Body, name: successTextBody, widget: string }
+              - { label: Error Alert - Header, name: errorTextHeader, widget: string }
+              - { label: Error Alert - Body, name: errorTextBody, widget: string }
+              - { label: Page Title, name: pageTitle, widget: string }
+              - { label: Save Button Text, name: saveButtonText, widget: string }
+              - { label: Back Button Text, name: backButtonText, widget: string }
       - label: "Industry-Specific Questions (Poppy)"
         name: "profile-industries-poppy"
         file: "content/src/fieldConfig/profile-industries-poppy.json"
