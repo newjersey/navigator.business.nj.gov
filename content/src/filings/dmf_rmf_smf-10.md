@@ -1,11 +1,6 @@
 ---
-urlSlug: dmf_rmf_smf-10
 name: Motor Fuels Tax
-id: dmf_rmf_smf-10
 callToActionLink: https://www.state.nj.us/treasury/taxation/prntmf.shtml
-callToActionText: File and Pay
-frequency: |
-  Monthly (22 days after the end of the month)
 taxRates: |
   
   - Gasoline per gallon: $0.105
@@ -14,6 +9,11 @@ taxRates: |
 filingDetails: null
 agency: New Jersey Division of Taxation
 additionalInfo: null
+urlSlug: dmf_rmf_smf-10
+id: dmf_rmf_smf-10
+callToActionText: File and Pay
+frequency: |
+  Monthly
 filingMethod: paper-or-by-mail-only
 treasuryLink: https://www.nj.gov/treasury/taxation/motorfuels.shtml
 extension: false
