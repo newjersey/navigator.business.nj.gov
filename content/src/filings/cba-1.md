@@ -1,10 +1,6 @@
 ---
-urlSlug: cba-1
 name: Corporation Business Tax
-id: cba-1
 callToActionLink: https://www.state.nj.us/treasury/taxation/pdf/current/cbt/cba1.pdf
-callToActionText: File and Pay
-frequency: Annually on April 15th
 taxRates: >
   If your entire `net income|tax-net-income` is:
 
@@ -15,7 +11,7 @@ taxRates: >
   * $50,000 or less, the tax rate is 6.5%
 
 
-  Tax periods of less than 12 months qualify for:[LJ[1]
+  Tax periods of less than 12 months qualify for:
 
   * 7.5% rate if the prorated entire net income does not exceed $8,333 per month
 
@@ -23,6 +19,10 @@ taxRates: >
 filingDetails: null
 agency: New Jersey Division of Taxation
 additionalInfo: null
+urlSlug: cba-1
+id: cba-1
+callToActionText: File and Pay
+frequency: Annually on April 15th
 filingMethod: paper-or-by-mail-only
 treasuryLink: https://www.nj.gov/treasury/taxation/cbt/index.shtml
 extension: false
