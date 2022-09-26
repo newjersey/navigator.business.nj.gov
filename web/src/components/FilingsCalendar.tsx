@@ -110,7 +110,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
 
     return (
       <div className="calendar-container">
-        <div className="flex flex-align-end padding-top-2 flex-justify" data-testid="filings-calendar">
+        <div className="flex flex-align-end flex-justify" data-testid="filings-calendar">
           <div className="flex flex-align-end">
             <h2 className="margin-bottom-0">{Config.dashboardDefaults.calendarHeader}</h2>
             <div className="margin-top-05">
@@ -152,7 +152,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
             })}
           </tbody>
         </table>
-        <p className="text-base-dark margin-bottom-1">{Config.dashboardDefaults.calendarLegalText}</p>
+        <p className="text-base-dark">{Config.dashboardDefaults.calendarLegalText}</p>
       </div>
     );
   };

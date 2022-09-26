@@ -397,7 +397,7 @@ const OnboardingPage = (props: Props): ReactElement => {
       <PageSkeleton>
         <NavBar />
         <main className="usa-section padding-top-0 desktop:padding-top-8" id="main">
-          <SingleColumnContainer>
+          <SingleColumnContainer isSmallerWidth>
             {header()}
             {!isLargeScreen && <hr />}
             {error && (
@@ -437,7 +437,7 @@ const OnboardingPage = (props: Props): ReactElement => {
                 timeout={getTimeout(index + 1)}
                 classNames={`width-100 ${getAnimation()}`}
               >
-                <SingleColumnContainer>
+                <SingleColumnContainer isSmallerWidth>
                   <form
                     onSubmit={onSubmit}
                     className={`usa-prose onboarding-form margin-top-2`}

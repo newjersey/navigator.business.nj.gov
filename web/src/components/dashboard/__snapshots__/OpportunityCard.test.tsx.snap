@@ -4,7 +4,7 @@ exports[`OpportunityCard snapshots matches the layout 1`] = `
 <body>
   <div>
     <div
-      class="bg-white border-1px border-base-lighter padding-3 radius-md margin-bottom-205"
+      class="bg-white border-1px border-base-lighter padding-3 maxWidth-400px radius-md margin-bottom-205"
       data-testid="test"
     >
       <div
@@ -80,7 +80,7 @@ exports[`OpportunityCard snapshots matches the layout when status is first come 
 <body>
   <div>
     <div
-      class="bg-white border-1px border-base-lighter padding-3 radius-md margin-bottom-205"
+      class="bg-white border-1px border-base-lighter padding-3 maxWidth-400px radius-md margin-bottom-205"
       data-testid="test"
     >
       <div
@@ -161,7 +161,7 @@ exports[`OpportunityCard snapshots matches the layout when status is rolling app
 <body>
   <div>
     <div
-      class="bg-white border-1px border-base-lighter padding-3 radius-md margin-bottom-205"
+      class="bg-white border-1px border-base-lighter padding-3 maxWidth-400px radius-md margin-bottom-205"
       data-testid="test"
     >
       <div
@@ -242,7 +242,7 @@ exports[`OpportunityCard snapshots matches the layout with a due date 1`] = `
 <body>
   <div>
     <div
-      class="bg-white border-1px border-base-lighter padding-3 radius-md margin-bottom-205"
+      class="bg-white border-1px border-base-lighter padding-3 maxWidth-400px radius-md margin-bottom-205"
       data-testid="test"
     >
       <div
