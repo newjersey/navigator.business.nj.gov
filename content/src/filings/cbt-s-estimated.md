@@ -1,9 +1,8 @@
 ---
 name: Corporation Business Tax
 callToActionLink: https://www.njportal.com/taxation/CBT
-taxRates: >
-  The rate is adjusted based on the previous year's tax payment and the current
-  year's revenue
+taxRates: The rate is adjusted based on the previous year's tax payment and the
+  current year's revenue.
 filingDetails: null
 agency: New Jersey Division of Taxation
 additionalInfo: null
