@@ -1,12 +1,6 @@
 ---
-urlSlug: scc-5_6
 name: Spill Compensation & Control Tax
-id: scc-5_6
 callToActionLink: https://www.state.nj.us/treasury/taxation/spill_over.shtml
-callToActionText: File and Pay
-frequency: |+
-  Monthly (due on the 20th day of the month after the end of the tax year)
-
 taxRates: >
   
   * Petroleum and Petroleum Products per barrel: 0.023%
@@ -19,6 +13,10 @@ taxRates: >
 filingDetails: null
 agency: New Jersey Division of Taxation
 additionalInfo: null
+urlSlug: scc-5_6
+id: scc-5_6
+callToActionText: File and Pay
+frequency: Monthly *(due on the 20th day of the month after the end of the tax year)*
 filingMethod: online
 treasuryLink: https://www.state.nj.us/treasury/taxation/prntspil.shtml
 extension: false
