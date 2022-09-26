@@ -1,11 +1,6 @@
 ---
-urlSlug: ppt-10
 name: Petroleum Products Gross Receipts Tax
-id: ppt-10
 callToActionLink: https://www.nj.gov/treasury/taxation/petroleum.shtml
-callToActionText: File and Pay
-frequency: |
-  Quarterly (due on the 25th day of the following quarter)
 taxRates: |
   
   - Gasoline & LPG per gallon: $0.402
@@ -16,6 +11,10 @@ taxRates: |
 filingDetails: null
 agency: New Jersey Division of Taxation
 additionalInfo: null
+urlSlug: ppt-10
+id: ppt-10
+callToActionText: File and Pay
+frequency: Quarterly (*due on the 25th day of the following quarter)*
 filingMethod: online
 treasuryLink: null
 extension: false
