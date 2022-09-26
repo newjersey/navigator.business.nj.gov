@@ -1,13 +1,6 @@
 ---
-urlSlug: cbt-200-t
 name: Corporation Business Tax
-id: cbt-200-t
 callToActionLink: https://www1.state.nj.us/TYTR_BusinessFilings/jsp/common/Login.jsp?taxcode=20
-callToActionText: File and Pay
-frequency: >
-  Annually
-
-  (4 months after the end of your accounting period, on the 15th day. For example, if your accounting period ends December 31st, your taxes are due by April 15th.)
 taxRates: >
   If your `net income|tax-net-income` is:
 
@@ -26,6 +19,14 @@ taxRates: >
 filingDetails: null
 agency: New Jersey Division of Taxation
 additionalInfo: null
+urlSlug: cbt-200-t
+id: cbt-200-t
+callToActionText: File and Pay
+frequency: >
+  Annually
+
+
+  4 months after the end of your accounting period, on the 15th day. (For example, if your accounting period ends December 31st, your taxes are due by April 15th.)
 filingMethod: online
 treasuryLink: https://www.nj.gov/treasury/taxation/cbt/index.shtml
 extension: true
