@@ -15,8 +15,14 @@ media_folder: web/public/img
 logo_url: https://dev.navigator.business.nj.gov/img/Navigator-logo.svg
 public_folder: web/public
 collections:
+  - name: "business-formation-label"
+    label: "🟥 BUSINESS FORMATION"
+    folder: ""
+    fields:
+      - { name: "", label: "" }
+
   - name: "business-formation-c-corp"
-    label: "Business Formation - Corporation"
+    label: ". . . 🔴 Corporation"
     folder: "content/src/display-content/business-formation/c-corporation"
     summary: "{{filename}}"
     identifier_field: "{{fields.slug}}"
@@ -46,7 +52,7 @@ collections:
       - { label: "Bolded Heading", name: "headingBolded", widget: "string", required: false }
       - { label: "Sub Heading", name: "headingNotBolded", widget: "string", required: false }
   - name: "business-formation-llc"
-    label: "Business Formation - LLC"
+    label: ". . . 🔴 LLC"
     folder: "content/src/display-content/business-formation/limited-liability-company"
     summary: "{{filename}}"
     identifier_field: "{{fields.slug}}"
@@ -76,7 +82,7 @@ collections:
       - { label: "Bolded Heading", name: "headingBolded", widget: "string", required: false }
       - { label: "Sub Heading", name: "headingNotBolded", widget: "string", required: false }
   - name: "business-formation-llp"
-    label: "Business Formation - LLP"
+    label: ". . . 🔴 LLP"
     folder: "content/src/display-content/business-formation/limited-liability-partnership"
     summary: "{{filename}}"
     identifier_field: "{{fields.slug}}"
@@ -106,7 +112,7 @@ collections:
       - { label: "Bolded Heading", name: "headingBolded", widget: "string", required: false }
       - { label: "Sub Heading", name: "headingNotBolded", widget: "string", required: false }
   - name: "business-formation-s-corp"
-    label: "Business Formation - S Corp"
+    label: ". . . 🔴 S Corp"
     folder: "content/src/display-content/business-formation/s-corporation"
     summary: "{{filename}}"
     identifier_field: "{{fields.slug}}"
@@ -135,8 +141,14 @@ collections:
       - { label: "Optional Label", name: "optionalLabel", widget: "string", required: false }
       - { label: "Bolded Heading", name: "headingBolded", widget: "string", required: false }
       - { label: "Sub Heading", name: "headingNotBolded", widget: "string", required: false }
+
+  - name: "certification-label"
+    label: "🟧 CERTIFICATION OPPS"
+    folder: ""
+    fields:
+      - { name: "", label: "" }
   - name: "certification-opportunities"
-    label: "Certification Opportunities Content"
+    label: ". . . 🟠 Content"
     folder: "content/src/certifications"
     summary: "/{{urlSlug}} - {{name}}"
     identifier_field: "{{urlSlug}}"
@@ -170,7 +182,7 @@ collections:
       - { label: "For a small business", name: "isSbe", widget: boolean, default: false }
 
   - name: "archived-certification-opportunities"
-    label: "Certification Opportunities Content - Archived"
+    label: ". . . 🟠 Archived"
     folder: "content/src/archived-certifications"
     summary: "/{{urlSlug}} - {{name}}"
     identifier_field: "{{urlSlug}}"
@@ -203,95 +215,13 @@ collections:
         display_fields: ["arrayOfOwnershipTypes.*.name"]
       - { label: "For a small business", name: "isSbe", widget: boolean, default: false }
 
-  - name: "contextual-information"
-    label: "Contextual Information"
-    folder: "content/src/display-content/contextual-information"
-    summary: "{{filename}}"
-    identifier_field: "{{fields.slug}}"
-    slug: "{{fields.slug}}"
-    delete: true
-    create: true
-    editor:
-      preview: true
+  - name: "funding-label"
+    label: "🟨 FUNDING OPPS"
+    folder: ""
     fields:
-      - { label: "Header", name: "header", widget: "string" }
-      - { label: "Content", name: "body", widget: "markdown" }
-      - { label: "Filename", name: "slug", widget: "slug", required: false }
-  - name: "dashboard-settings"
-    label: "Dashboard Settings"
-    editor:
-      preview: false
-    files:
-      - label: "Industry Sectors"
-        name: "arrayOfSectors"
-        file: "content/src/dashboard/sectors.json"
-        fields:
-          - label: Sectors
-            name: arrayOfSectors
-            widget: list
-            summary: "{{name}}"
-            fields:
-              - label: Name
-                name: name
-                widget: string
-              - label: Id
-                name: id
-                widget: hidden
-      - label: "Ownership Types"
-        name: "arrayOfOwnershipTypes"
-        file: "content/src/dashboard/ownershipTypes.json"
-        fields:
-          - label: Ownership Types
-            name: arrayOfOwnershipTypes
-            widget: list
-            summary: "{{name}}"
-            fields:
-              - label: Name
-                name: name
-                widget: string
-              - label: Id
-                name: id
-                widget: hidden
-
-  - name: "filings"
-    label: "Filings Content"
-    folder: "content/src/filings"
-    summary: "/{{urlSlug}} - {{name}}"
-    identifier_field: "{{urlSlug}}"
-    slug: "{{urlSlug}}"
-    delete: true
-    create: true
-    editor:
-      preview: true
-    fields:
-      - { label: "Content", name: "body", widget: "markdown" }
-      - { label: "Url Slug / Filename", name: "urlSlug", widget: "slug" }
-      - { label: "Name", name: "name", widget: "string" }
-      - { label: "Id", name: "id", widget: "string" }
-      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
-      - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
-      - { label: "Description", name: "description", widget: "markdown", required: false }
-      - { label: "Frequency", name: "frequency", widget: "markdown", required: false }
-      - { label: "Extension", name: "extension", widget: "boolean", required: false }
-      - { label: "Tax Rates", name: "taxRates", widget: "markdown", required: false }
-
-      - {
-          label: "Filing Method",
-          name: "filingMethod",
-          widget: "select",
-          required: false,
-          options:
-            ["online", "paper-or-by-mail-only", "online-required", "technical assistance", "online-or-phone"],
-        }
-      - { label: "Filing Details", name: "filingDetails", widget: "markdown", required: false }
-      - label: "Agency"
-        name: "agency"
-        widget: "select"
-        # multiple: true
-        options: ["New Jersey Division of Taxation"]
-        required: false
+      - { name: "", label: "" }
   - name: "funding-opportunities"
-    label: "Funding Opportunities Content"
+    label: ". . . 🟡 Content"
     folder: "content/src/fundings"
     summary: "/{{urlSlug}} - {{name}}"
     identifier_field: "{{filename}}"
@@ -428,9 +358,8 @@ collections:
           default: "",
           format: "MM/DD/yyyy",
         }
-
   - name: "archived-funding-opportunities"
-    label: "Funding Opportunities Content - Archived"
+    label: ". . . 🟡 Archived"
     folder: "content/src/archived-fundings"
     summary: "/{{urlSlug}} - {{name}}"
     identifier_field: "{{urlSlug}}"
@@ -564,6 +493,959 @@ collections:
           default: "",
           format: "MM/DD/yyyy",
         }
+  - name: "roadmaps-label"
+    label: "🟩 ROADMAPS"
+    folder: ""
+    fields:
+      - { name: "", label: "" }
+  - name: "roadmaps"
+    label: ". . . 🟢 Industries"
+    folder: "content/src/roadmaps/industries"
+    slug: "{{id}}"
+    identifier_field: "{{id}}"
+    extension: "json"
+    create: true
+    delete: true
+    format: "json"
+    summary: "{{filename}}"
+    editor:
+      preview: false
+    fields:
+      - label: Name
+        name: name
+        widget: string
+      - label: Description
+        name: description
+        widget: string
+        required: false
+      - label: Enabled
+        name: isEnabled
+        widget: boolean
+        default: false
+        hint: This field should not be changed if already set to true
+      - label: Can Have Permanent Location
+        name: canHavePermanentLocation
+        widget: boolean
+        default: true
+        hint: Enable this field if the business can have a permanent location
+      - label: Additional Search Teams
+        name: additionalSearchTerms
+        widget: string
+        required: false
+      - label: Default Sector
+        name: defaultSectorId
+        widget: relation
+        required: false
+        collection: "dashboard-settings"
+        search_fields: ["arrayOfSectors.*.name"]
+        value_field: "arrayOfSectors.*.id"
+        display_fields: ["arrayOfSectors.*.name"]
+      - label: NAICS Codes
+        name: naicsCodes
+        widget: string
+        required: false
+      - label: Id / Filename
+        name: id
+        widget: string
+      - label: Onboarding Questions
+        name: industryOnboardingQuestions
+        widget: object
+        fields:
+          - label: Home Based
+            name: canBeHomeBased
+            widget: boolean
+            default: false
+          - label: Liquor License
+            name: isLiquorLicenseApplicable
+            widget: boolean
+            default: false
+          - label: CPA Required
+            name: isCpaRequiredApplicable
+            widget: boolean
+            default: false
+          - label: Staffing Service
+            name: isProvidesStaffingServicesApplicable
+            widget: boolean
+            default: false
+          - label: Certified Interior Designer
+            name: isCertifiedInteriorDesignerApplicable
+            widget: boolean
+            default: false
+          - label: Real Estate Appraisal Management
+            name: isRealEstateAppraisalManagementApplicable
+            widget: boolean
+            default: false
+          - label: Reseller
+            name: canBeReseller
+            widget: boolean
+            default: false
+          - label: Transportation
+            name: isTransportation
+            widget: boolean
+            default: false
+      - label: Roadmap Steps
+        name: roadmapSteps
+        widget: list
+        summary: "Step {{step}} - {{task}}"
+        fields:
+          - label: Roadmap Step
+            name: step
+            widget: relation
+            collection: "settings"
+            search_fields: ["steps.*.name"]
+            value_field: "steps.*.stepNumber"
+            display_fields: ["steps.*.name"]
+          - label: Weight
+            name: weight
+            widget: number
+          - label: Task
+            name: task
+            widget: "relation"
+            collection: "tasks"
+            search_fields: ["{{filename}}", "name", "urlSlug"]
+            value_field: "{{filename}}"
+            display_fields: ["{{filename}}"]
+      - label: Task Overrides
+        name: modifications
+        widget: list
+        summary: "{{taskToReplaceFilename}}"
+        fields:
+          - label: Task To Replace
+            name: taskToReplaceFilename
+            widget: "relation"
+            collection: "tasks"
+            search_fields: ["{{filename}}", "name", "urlSlug"]
+            value_field: "{{filename}}"
+            display_fields: ["{{filename}}"]
+          - label: Modified Task
+            name: replaceWithFilename
+            widget: "relation"
+            collection: "tasks"
+            search_fields: ["{{filename}}", "name", "urlSlug"]
+            value_field: "{{filename}}"
+            display_fields: ["{{filename}}"]
+  - name: addons
+    label: ". . . 🟢 Add-ons"
+    folder: "content/src/roadmaps/add-ons"
+    extension: "json"
+    identifier_field: "{{filename}}"
+    summary: "{{filename}}"
+    editor:
+      preview: false
+    fields:
+      - label: Roadmap Steps
+        name: roadmapSteps
+        widget: list
+        summary: "Step {{step}} - {{task}}"
+        fields:
+          - label: Roadmap Step
+            name: step
+            widget: relation
+            collection: "settings"
+            search_fields: ["steps.*.name"]
+            value_field: "steps.*.stepNumber"
+            display_fields: ["steps.*.name"]
+          - label: Weight
+            name: weight
+            widget: number
+          - label: Task
+            name: task
+            widget: "relation"
+            collection: "tasks"
+            search_fields: ["{{filename}}", "name", "urlSlug"]
+            value_field: "{{filename}}"
+            display_fields: ["{{filename}}"]
+      - label: Task Overrides
+        name: modifications
+        widget: list
+        summary: "{{taskToReplaceFilename}}"
+        fields:
+          - label: Task To Replace
+            name: taskToReplaceFilename
+            widget: "relation"
+            collection: "tasks"
+            search_fields: ["{{filename}}", "name", "urlSlug"]
+            value_field: "{{filename}}"
+            display_fields: ["{{filename}}"]
+          - label: Modified Task
+            name: replaceWithFilename
+            widget: "relation"
+            collection: "tasks"
+            search_fields: ["{{filename}}", "name", "urlSlug"]
+            value_field: "{{filename}}"
+            display_fields: ["{{filename}}"]
+  - name: "roadmap-content"
+    label: ". . . 🟢 Roadmap Content"
+    folder: "content/src/display-content/roadmap"
+    summary: "{{filename}}"
+    identifier_field: "{{fields.slug}}"
+    slug: "{{fields.slug}}"
+    delete: false
+    create: true
+    editor:
+      preview: true
+    fields:
+      - { label: "Content", name: "body", widget: "markdown" }
+      - { label: "Filename", name: "slug", widget: "slug", required: false }
+  - name: "settings"
+    label: ". . . 🟢 Settings"
+    editor:
+      preview: false
+    files:
+      - label: "Steps"
+        name: "steps"
+        file: "content/src/roadmaps/steps.json"
+        fields:
+          - label: steps
+            name: steps
+            widget: list
+            summary: "{{name}}"
+            fields:
+              - label: Name
+                name: name
+                widget: string
+              - label: Section
+                name: section
+                widget: select
+                options: ["PLAN", "START"]
+              - label: Time Estimate
+                name: timeEstimate
+                widget: string
+              - label: Description
+                name: description
+                widget: string
+              - label: Number
+                name: stepNumber
+                widget: number
+                min: 0
+                value_type: int
+      - label: "Task Dependencies"
+        name: "task-dependencies"
+        file: "content/src/roadmaps/task-dependencies.json"
+        fields:
+          - label: Tasks
+            name: dependencies
+            widget: list
+            fields:
+              - label: Task
+                name: name
+                widget: "relation"
+                collection: "tasks"
+                search_fields: ["{{filename}}", "name", "urlSlug"]
+                value_field: "{{filename}}"
+                display_fields: ["{{filename}}"]
+              - label: Dependencies
+                name: dependencies
+                widget: "relation"
+                collection: "tasks"
+                search_fields: ["{{filename}}", "name", "urlSlug"]
+                value_field: "{{filename}}"
+                display_fields: ["{{filename}}"]
+                multiple: true
+
+  - name: "tasks-label"
+    label: "🟦 TASKS"
+    folder: ""
+    fields:
+      - { name: "", label: "" }
+  - name: "tasks"
+    label: ". . . 🔵 Tasks"
+    folder: "content/src/roadmaps/tasks"
+    summary: "{{filename}} - {{name}}"
+    identifier_field: "{{filename}}"
+    slug: "{{fields.filename}}"
+    delete: true
+    sortable_fields: ["id", "name", "{{urlSlug}}", "industryId"]
+    create: true
+    editor:
+      preview: true
+    fields:
+      - { label: "Content", name: "body", widget: "markdown" }
+      - { label: "Url Slug", name: "urlSlug", widget: "nospace" }
+      - { label: "Filename", name: "filename", widget: "nospace", required: false }
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Id", name: "id", widget: "nospace" }
+      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
+      - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
+      - label: Industry
+        name: industryId
+        widget: "relation"
+        collection: "roadmaps"
+        search_fields: ["{{id}}"]
+        value_field: "{{id}}"
+        display_fields: ["{{id}}"]
+        required: false
+      - { label: "Required", name: "required", widget: "boolean", required: false }
+      - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
+      - { label: "Form Name", name: "formName", widget: "string", required: false }
+  - name: "cannabis-license"
+    label: ". . . 🔵 Cannabis License"
+    delete: false
+    create: false
+    files:
+      - label: Cannabis Eligibility Modal
+        name: cannabis-eligibility-modal
+        file: content/src/fieldConfig/config.json
+        editor:
+          preview: false
+        fields:
+          - label: Cannabis Eligibility Modal
+            name: cannabisEligibilityModal
+            collapsed: false
+            widget: object
+            summary: "{{cannabisEligibilityModal}}"
+            fields:
+              - { label: Eligible Modal Title, name: eligibleModalTitle, widget: string }
+              - {
+                  label: Eligible Modal Body,
+                  name: eligibleModalBody,
+                  widget: text,
+                  hint: This field supports Markdown,
+                }
+              - { label: Eligible Modal Continue Button, name: eligibleModalContinueButton, widget: string }
+              - { label: Eligible Modal Cancel Button, name: eligibleModalCancelButton, widget: string }
+      - label: "Conditional License Task Metadata"
+        name: "applyForConditionalLicense-task"
+        file: "content/src/roadmaps/tasks/conditional-permit-cannabis.md"
+        identifier_field: "{{fields.slug}}"
+        slug: "{{fields.slug}}"
+        editor:
+          preview: true
+        fields:
+          - { label: "Content", name: "body", widget: "markdown" }
+          - { label: "Url Slug", name: "urlSlug", widget: "nospace" }
+          - { label: "Filename", name: "filename", widget: "nospace", required: false }
+          - { label: "Name", name: "name", widget: "string" }
+          - { label: "Id", name: "id", widget: "nospace" }
+          - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
+          - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
+          - label: Industry
+            name: industryId
+            widget: "relation"
+            collection: "roadmaps"
+            search_fields: ["{{id}}"]
+            value_field: "{{id}}"
+            display_fields: ["{{id}}"]
+            required: false
+          - { label: "Required", name: "required", widget: "boolean", required: false }
+          - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
+          - { label: "Form Name", name: "formName", widget: "string", required: false }
+      - label: "Annual License Task Metadata"
+        name: "applyForAnnualLicense-task"
+        file: "content/src/roadmaps/tasks/annual-license-cannabis.md"
+        identifier_field: "{{fields.slug}}"
+        slug: "{{fields.slug}}"
+        editor:
+          preview: true
+        fields:
+          - { label: "Content", name: "body", widget: "markdown" }
+          - { label: "Url Slug", name: "urlSlug", widget: "nospace" }
+          - { label: "Filename", name: "filename", widget: "nospace", required: false }
+          - { label: "Name", name: "name", widget: "string" }
+          - { label: "Id", name: "id", widget: "nospace" }
+          - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
+          - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
+          - label: Industry
+            name: industryId
+            widget: "relation"
+            collection: "roadmaps"
+            search_fields: ["{{id}}"]
+            value_field: "{{id}}"
+            display_fields: ["{{id}}"]
+            required: false
+          - { label: "Required", name: "required", widget: "boolean", required: false }
+          - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
+          - { label: "Form Name", name: "formName", widget: "string", required: false }
+
+      - label: "Tab 1 (Business Size and Priority Status)"
+        name: "cannabisLicense-1"
+        file: "content/src/fieldConfig/cannabis-license-tab1.json"
+        editor:
+          preview: true
+        fields:
+          - label: Business Size and Priority Status
+            name: cannabisApplyForLicense
+            collapsed: false
+            widget: object
+            summary: "{{cannabisApplyForLicense}}"
+            fields:
+              - {
+                  label: Priority Status None Selected Text,
+                  name: priorityStatusNoneSelectedText,
+                  widget: markdown,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Application Questions Text,
+                  name: applicationQuestionsText,
+                  widget: markdown,
+                  hint: This field supports Markdown,
+                }
+              - { label: Business Size Header, name: businessSizeHeader, widget: string }
+              - {
+                  label: Microbusiness Radio Question,
+                  name: microbusinessRadioQuestion,
+                  widget: markdown,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Microbusiness Radio Yes,
+                  name: microbusinessRadioYes,
+                  widget: markdown,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Microbusiness Radio No,
+                  name: microbusinessRadioNo,
+                  widget: markdown,
+                  hint: This field supports Markdown,
+                }
+              - { label: Priority Status Header, name: priorityStatusHeader, widget: string }
+              - {
+                  label: Priority Status Text,
+                  name: priorityStatusText,
+                  widget: markdown,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Diversely Owned Label,
+                  name: diverselyOwnedLabel,
+                  widget: markdown,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Impact Zone Label,
+                  name: impactZoneLabel,
+                  widget: markdown,
+                  hint: This field supports Markdown,
+                }
+              - { label: SBE Label, name: sbeLabel, widget: markdown, hint: This field supports Markdown }
+              - { label: View Requirements Button, name: viewRequirementsButton, widget: string }
+
+      - label: "Tab 2 Annual (Defaults + Requirements)"
+        name: "cannabisLicenseAnnual-2"
+        file: "content/src/fieldConfig/cannabis-license-annual-tab2.json"
+        editor:
+          preview: true
+        fields:
+          - label: Annual Requirements
+            name: cannabisApplyForLicense
+            collapsed: false
+            widget: object
+            summary: "{{cannabisApplyForLicense}}"
+            fields:
+              - { label: Application Page Helper Text, name: applicationPageHelperText, widget: string }
+              - { label: Application Needs Header, name: applicationNeedsHeader, widget: string }
+              - { label: General Application Needs, name: generalApplicationNeeds, widget: string }
+              - { label: General Annual Requirements, name: annualGeneralRequirements, widget: markdown }
+              - {
+                  label: Microbusiness Application Needs,
+                  name: microbusinessApplicationNeeds,
+                  widget: string,
+                }
+              - { label: Microbusiness Requirements, name: microbusinessRequirements, widget: markdown }
+              - {
+                  label: Priority Status Application Needs,
+                  name: priorityStatusApplicationNeeds,
+                  widget: string,
+                }
+              - { label: Diversely Owned Requirements, name: diverselyOwnedRequirements, widget: markdown }
+              - { label: Impact Zone Requirements, name: impactZoneRequirements, widget: markdown }
+              - { label: Social Equity Requirements, name: socialEquityRequirements, widget: markdown }
+              - { label: Back To First Tab Button, name: backToFirstTabButton, widget: string }
+              - { label: Annual - After Requirements, name: annualBottomOfTask, widget: markdown }
+
+      - label: "Tab 2 Conditional (Conditional Specific Requirements)"
+        name: "cannabisLicenseConditional-2"
+        file: "content/src/fieldConfig/cannabis-license-conditional-tab2.json"
+        editor:
+          preview: true
+        fields:
+          - label: Conditional Requirements
+            name: cannabisApplyForLicense
+            collapsed: false
+            widget: object
+            summary: "{{cannabisApplyForLicense}}"
+            fields:
+              - {
+                  label: General Conditional Requirements,
+                  name: conditionalGeneralRequirements,
+                  widget: markdown,
+                }
+              - { label: Conditional - After Requirements, name: conditionalBottomOfTask, widget: markdown }
+  - name: "cannabis-priority-status"
+    label: ". . . 🔵 Cannabis Priority Status"
+    delete: false
+    create: false
+    files:
+      - label: "Task Metadata"
+        name: "cannabisPriority-task"
+        file: "content/src/roadmaps/tasks/priority-status-cannabis.md"
+        identifier_field: "{{fields.slug}}"
+        slug: "{{fields.slug}}"
+        editor:
+          preview: true
+        fields:
+          - { label: "Content", name: "body", widget: "markdown" }
+          - { label: "Url Slug", name: "urlSlug", widget: "nospace" }
+          - { label: "Filename", name: "filename", widget: "nospace", required: false }
+          - { label: "Name", name: "name", widget: "string" }
+          - { label: "Id", name: "id", widget: "nospace" }
+          - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
+          - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
+          - label: Industry
+            name: industryId
+            widget: "relation"
+            collection: "roadmaps"
+            search_fields: ["{{id}}"]
+            value_field: "{{id}}"
+            display_fields: ["{{id}}"]
+            required: false
+          - { label: "Required", name: "required", widget: "boolean", required: false }
+          - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
+          - { label: "Form Name", name: "formName", widget: "string", required: false }
+
+      - label: "Tab 1 (Statuses)"
+        name: "cannabisPriority-1"
+        file: "content/src/fieldConfig/cannabis-priority-status-tab1.json"
+        editor:
+          preview: true
+        fields:
+          - label: Cannabis Priority Status
+            name: cannabisPriorityStatus
+            collapsed: false
+            widget: object
+            summary: "{{cannabisPriorityStatus}}"
+            fields:
+              - { label: Next Button Text, name: nextButtonText, widget: string }
+              - {
+                  label: None Of The Above Checkbox Label,
+                  name: noPriorityStatusCheckboxText,
+                  widget: string,
+                }
+              - { label: Content Body, name: tab1Content, widget: markdown }
+
+      - label: "Tab 2 (Requirements)"
+        name: "cannabisPriority-2"
+        file: "content/src/fieldConfig/cannabis-priority-status-tab2.json"
+        editor:
+          preview: true
+        fields:
+          - label: Cannabis Priority Status
+            name: cannabisPriorityStatus
+            collapsed: false
+            widget: object
+            summary: "{{cannabisPriorityStatus}}"
+            fields:
+              - { label: Text Before Header, name: secondTabDescriptionText, widget: text }
+              - { label: Header Text, name: secondTabHeaderText, widget: string }
+              - { label: Minority / Women Header Text, name: minorityOrWomenHeaderText, widget: string }
+              - {
+                  label: Minority / Women Requirements,
+                  name: minorityWomenOwnedRequirements,
+                  widget: markdown,
+                }
+              - { label: Veteran Header Text, name: veteranHeaderText, widget: string }
+              - { label: Veteran Owned Requirements, name: veteranOwnedRequirements, widget: markdown }
+              - { label: Social Equity Header Text, name: socialEquityHeaderText, widget: string }
+              - { label: Social Equity Requirements, name: socialEquityRequirements, widget: markdown }
+              - { label: Impact Zone Header Text, name: impactZoneHeaderText, widget: string }
+              - { label: Impact Zone Text, name: impactZoneText, widget: string }
+
+              - { label: Green Box Bolded Text, name: greenBoxBoldedText, widget: string }
+              - { label: Green Box Minority Or Women Text, name: greenBoxMinorityOrWomenText, widget: string }
+              - { label: Green Box Veteran Text, name: greenBoxVeteranText, widget: string }
+              - { label: Green Box Social Equity Text, name: greenBoxSocialEquityText, widget: string }
+              - { label: Back Button Text, name: backButtonText, widget: string }
+              - { label: Dropdown CTA Button Text, name: dropdownCTAButtonText, widget: string }
+              - { label: Social Equity Button Text, name: socialEquityButtonText, widget: string }
+              - { label: Social Equity Button Link, name: socialEquityButtonLink, widget: string }
+              - {
+                  label: Veteran Minority Or Women Button Text,
+                  name: certificationButtonText,
+                  widget: string,
+                }
+              - {
+                  label: Veteran Minority Or Women Button Link,
+                  name: certificationButtonLink,
+                  widget: string,
+                }
+              - {
+                  label: Text For None Of The Above Checkbox Selection,
+                  name: noPriorityStatusText,
+                  widget: text,
+                }
+              - {
+                  label: Complete Task Progress Button Text,
+                  name: completeTaskProgressButtonText,
+                  widget: string,
+                }
+  - name: "ein-task"
+    label: ". . . 🔵 EIN"
+    delete: false
+    create: false
+    files:
+      - label: "Register for EIN - Task Metadata"
+        name: "ein-task-metadata"
+        file: "content/src/roadmaps/tasks/register-for-ein.md"
+        identifier_field: "{{fields.slug}}"
+        slug: "{{fields.slug}}"
+        editor:
+          preview: true
+        fields:
+          - { label: "Content", name: "body", widget: "markdown" }
+          - { label: "Url Slug", name: "urlSlug", widget: "nospace" }
+          - { label: "Filename", name: "filename", widget: "nospace", required: false }
+          - { label: "Name", name: "name", widget: "string" }
+          - { label: "Id", name: "id", widget: "nospace" }
+          - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
+          - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
+          - label: Industry
+            name: industryId
+            widget: "relation"
+            collection: "roadmaps"
+            search_fields: ["{{id}}"]
+            value_field: "{{id}}"
+            display_fields: ["{{id}}"]
+            required: false
+          - { label: "Required", name: "required", widget: "boolean", required: false }
+          - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
+          - { label: "Form Name", name: "formName", widget: "string", required: false }
+      - label: "EIN Input Section"
+        name: "ein-input-section"
+        file: content/src/fieldConfig/ein.json
+        editor:
+          preview: true
+        fields:
+          - label: EIN
+            name: ein
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Description Text, name: descriptionText, widget: markdown }
+              - { label: Input Placeholder Text, name: placeholderText, widget: string }
+              - { label: Save Button Text, name: saveButtonText, widget: string }
+              - {
+                  label: Success Message Text,
+                  name: successText,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - { label: Edit EIN Button Text, name: editText, widget: string }
+              - { label: Remove EIN Button Text, name: removeText, widget: string }
+  - name: "tax-task"
+    label: ". . . 🔵 Tax ID"
+    delete: false
+    create: false
+    files:
+      - label: "Register for Tax ID - Task Metadata"
+        name: "tax-task-metadata"
+        file: "content/src/roadmaps/tasks/register-for-taxes.md"
+        identifier_field: "{{fields.slug}}"
+        slug: "{{fields.slug}}"
+        editor:
+          preview: true
+        fields:
+          - { label: "Content", name: "body", widget: "markdown" }
+          - { label: "Url Slug", name: "urlSlug", widget: "nospace" }
+          - { label: "Name", name: "name", widget: "string" }
+          - { label: "Id", name: "id", widget: "nospace" }
+          - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
+          - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
+          - { label: "Required", name: "required", widget: "boolean", required: false }
+          - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
+          - { label: "Form Name", name: "formName", widget: "string", required: false }
+      - label: "Tax ID Input Section"
+        name: "tax-input-section"
+        file: content/src/fieldConfig/tax.json
+        editor:
+          preview: true
+        fields:
+          - label: Tax ID
+            name: tax
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Description Text, name: descriptionText, widget: markdown }
+              - { label: Input Placeholder Text, name: placeholderText, widget: string }
+              - { label: Save Button Text, name: saveButtonText, widget: string }
+              - {
+                  label: Success Message Text,
+                  name: successText,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - { label: Edit Tax ID Button Text, name: editText, widget: string }
+              - { label: Remove Tax ID Button Text, name: removeText, widget: string }
+  - name: "naics-code"
+    label: ". . . 🔵 NAICS Code"
+    delete: false
+    create: false
+    files:
+      - label: "Determine NAICS Code - Task Metadata"
+        name: "naics-code-task"
+        file: "content/src/roadmaps/tasks/determine-naics-code.md"
+        identifier_field: "{{fields.slug}}"
+        slug: "{{fields.slug}}"
+        editor:
+          preview: true
+        fields:
+          - { label: "Content", name: "body", widget: "markdown" }
+          - { label: "Url Slug", name: "urlSlug", widget: "nospace" }
+          - { label: "Filename", name: "filename", widget: "nospace", required: false }
+          - { label: "Name", name: "name", widget: "string" }
+          - { label: "Id", name: "id", widget: "nospace" }
+          - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
+          - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
+          - label: Industry
+            name: industryId
+            widget: "relation"
+            collection: "roadmaps"
+            search_fields: ["{{id}}"]
+            value_field: "{{id}}"
+            display_fields: ["{{id}}"]
+            required: false
+          - { label: "Required", name: "required", widget: "boolean", required: false }
+          - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
+          - { label: "Form Name", name: "formName", widget: "string", required: false }
+      - label: "NAICS Code Lookup Section"
+        name: naics-code-lookup
+        file: content/src/fieldConfig/naics-code.json
+        editor:
+          preview: true
+        fields:
+          - label: Determine NAICS Code
+            name: determineNaicsCode
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Find Code Header, name: findCodeHeader, widget: string }
+              - {
+                  label: Find Code Body Text,
+                  name: findCodeBodyText,
+                  widget: text,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: Suggested Code Body Text,
+                  name: suggestedCodeBodyText,
+                  widget: text,
+                  hint: This field supports Markdown,
+                }
+              - {
+                  label: siccode.com Link,
+                  name: sicCodeLink,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - { label: naics.com Link, name: naicsLink, widget: string, hint: This field supports Markdown }
+              - { label: Input Label, name: inputLabel, widget: string, hint: This field supports Markdown }
+              - { label: Input Placeholder, name: inputPlaceholder, widget: string }
+              - { label: Save Button Text, name: saveButtonText, widget: string }
+              - { label: Invalid Validation Error Text, name: invalidValidationErrorText, widget: string }
+              - { label: Length Validation Error Text, name: lengthValidationErrorText, widget: string }
+              - { label: Has Saved Code Header, name: hasSavedCodeHeader, widget: string }
+              - {
+                  label: Success Message,
+                  name: successMessage,
+                  widget: text,
+                  hint: This field supports Markdown,
+                }
+              - { label: Edit Text, name: editText, widget: string }
+              - { label: Remove Text, name: removeText, widget: string }
+              - {
+                  label: Register for Taxes - NAICS Display Text,
+                  name: registerForTaxesNAICSCodePlaceholder,
+                  widget: string,
+                }
+              - {
+                  label: Register for Taxes - Placeholder Text When NAICS Missing,
+                  name: registerForTaxesMissingNAICSCodePlaceholder,
+                  widget: string,
+                }
+  - name: nexus
+    label: ". . . 🔵 Nexus"
+    delete: false
+    create: false
+    files:
+      - label: "Nexus Name Search - Task Metadata"
+        name: "nexus-name-search-task"
+        file: "content/src/roadmaps/tasks/search-business-name-nexus.md"
+        identifier_field: "{{fields.slug}}"
+        slug: "{{fields.slug}}"
+        editor:
+          preview: true
+        fields:
+          - { label: "Content", name: "body", widget: "markdown" }
+          - { label: "Url Slug", name: "urlSlug", widget: "nospace" }
+          - { label: "Filename", name: "filename", widget: "nospace", required: false }
+          - { label: "Name", name: "name", widget: "string" }
+          - { label: "Id", name: "id", widget: "nospace" }
+          - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
+          - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
+          - label: Industry
+            name: industryId
+            widget: "relation"
+            collection: "roadmaps"
+            search_fields: ["{{id}}"]
+            value_field: "{{id}}"
+            display_fields: ["{{id}}"]
+            required: false
+          - { label: "Required", name: "required", widget: "boolean", required: false }
+          - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
+          - { label: "Form Name", name: "formName", widget: "string", required: false }
+      - label: "Name Search"
+        name: nexus-name-search
+        file: content/src/fieldConfig/nexus-name-search.json
+        editor:
+          preview: true
+        fields:
+          - label: Name Search
+            name: nexusNameSearch
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Available Text, name: availableText, widget: markdown }
+              - { label: Unavailable Text, name: unavailableText, widget: markdown }
+              - { label: Search Again Button text, name: searchAgainButtonText, widget: string }
+              - {
+                  label: DBA Name Section Header,
+                  name: dbaNameHeader,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - { label: DBA Name Description, name: dbaNameDescription, widget: markdown }
+              - { label: DBA Name Search Placeholder, name: dbaNameSearchPlaceholder, widget: string }
+              - { label: DBA Name Search Label, name: dbaNameSearchLabel, widget: string }
+              - { label: DBA Name Search Submit Button, name: dbaNameSearchSubmitButton, widget: string }
+              - { label: DBA Available Text, name: dbaAvailableText, widget: markdown }
+              - { label: DBA Unavailable Text, name: dbaUnavailableText, widget: markdown }
+      - label: "DBA Formation - Task Metadata"
+        name: "nexus-dba-formation-task"
+        file: "content/src/roadmaps/tasks/form-business-entity-foreign.md"
+        identifier_field: "{{fields.slug}}"
+        slug: "{{fields.slug}}"
+        editor:
+          preview: true
+        fields:
+          - { label: "Content", name: "body", widget: "markdown" }
+          - { label: "Url Slug", name: "urlSlug", widget: "nospace" }
+          - { label: "Filename", name: "filename", widget: "nospace", required: false }
+          - { label: "Name", name: "name", widget: "string" }
+          - { label: "Id", name: "id", widget: "nospace" }
+          - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
+          - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
+          - label: Industry
+            name: industryId
+            widget: "relation"
+            collection: "roadmaps"
+            search_fields: ["{{id}}"]
+            value_field: "{{id}}"
+            display_fields: ["{{id}}"]
+            required: false
+          - { label: "Required", name: "required", widget: "boolean", required: false }
+          - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
+          - { label: "Form Name", name: "formName", widget: "string", required: false }
+      - label: DBA Formation
+        name: nexus-dba-formation
+        file: content/src/fieldConfig/nexus-dba-formation.json
+        editor:
+          preview: true
+        fields:
+          - label: DBA Formation
+            name: nexusFormationTask
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Warning Text, name: warningText, widget: markdown }
+              - {
+                  label: Description (Shown Below Warning),
+                  name: descriptionShownWithWarning,
+                  widget: markdown,
+                }
+              - { label: CTA Modal Header, name: dbaCtaModalHeader, widget: string }
+              - { label: CTA Modal Body, name: dbaCtaModalBody, widget: markdown }
+              - { label: CTA Modal Continue Button, name: dbaCtaModalContinueButtonText, widget: string }
+              - { label: CTA Modal Cancel Button, name: dbaCtaModalCancelButtonText, widget: string }
+
+  - name: "taxes-filings-label"
+    label: "🟪 TAXES & FILINGS"
+    folder: ""
+    fields:
+      - { name: "", label: "" }
+  - name: "filings"
+    label: ". . . 🟣 Filings Content"
+    folder: "content/src/filings"
+    summary: "/{{urlSlug}} - {{name}}"
+    identifier_field: "{{urlSlug}}"
+    slug: "{{urlSlug}}"
+    delete: true
+    create: true
+    editor:
+      preview: true
+    fields:
+      - { label: "Content", name: "body", widget: "markdown" }
+      - { label: "Url Slug / Filename", name: "urlSlug", widget: "slug" }
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Id", name: "id", widget: "string" }
+      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
+      - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
+      - { label: "Description", name: "description", widget: "markdown", required: false }
+      - { label: "Frequency", name: "frequency", widget: "markdown", required: false }
+      - { label: "Extension", name: "extension", widget: "boolean", required: false }
+      - { label: "Tax Rates", name: "taxRates", widget: "markdown", required: false }
+
+      - {
+          label: "Filing Method",
+          name: "filingMethod",
+          widget: "select",
+          required: false,
+          options:
+            ["online", "paper-or-by-mail-only", "online-required", "technical assistance", "online-or-phone"],
+        }
+      - { label: "Filing Details", name: "filingDetails", widget: "markdown", required: false }
+      - label: "Agency"
+        name: "agency"
+        widget: "select"
+        # multiple: true
+        options: ["New Jersey Division of Taxation"]
+        required: false
+
+  - name: "dashboard-settings"
+    label: "Dashboard Settings"
+    editor:
+      preview: false
+    files:
+      - label: "Industry Sectors"
+        name: "arrayOfSectors"
+        file: "content/src/dashboard/sectors.json"
+        fields:
+          - label: Sectors
+            name: arrayOfSectors
+            widget: list
+            summary: "{{name}}"
+            fields:
+              - label: Name
+                name: name
+                widget: string
+              - label: Id
+                name: id
+                widget: hidden
+      - label: "Ownership Types"
+        name: "arrayOfOwnershipTypes"
+        file: "content/src/dashboard/ownershipTypes.json"
+        fields:
+          - label: Ownership Types
+            name: arrayOfOwnershipTypes
+            widget: list
+            summary: "{{name}}"
+            fields:
+              - label: Name
+                name: name
+                widget: string
+              - label: Id
+                name: id
+                widget: hidden
 
   - name: "config"
     label: "General Config"
@@ -2141,155 +3023,64 @@ collections:
               - { label: Title, name: title, widget: string }
               - { label: Subtitle, name: subtitle, widget: markdown }
 
-  - name: "roadmaps"
-    label: "Industry Roadmaps"
-    folder: "content/src/roadmaps/industries"
-    slug: "{{id}}"
+  - name: "roadmap-sidebar-card"
+    label: "Sidebar Cards Content"
+    folder: "content/src/display-content/roadmap-sidebar-cards"
+    summary: "{{id}}"
     identifier_field: "{{id}}"
-    extension: "json"
-    create: true
+    slug: "{{id}}"
     delete: true
-    format: "json"
-    summary: "{{filename}}"
-    editor:
-      preview: false
-    fields:
-      - label: Name
-        name: name
-        widget: string
-      - label: Description
-        name: description
-        widget: string
-        required: false
-      - label: Enabled
-        name: isEnabled
-        widget: boolean
-        default: false
-        hint: This field should not be changed if already set to true
-      - label: Can Have Permanent Location
-        name: canHavePermanentLocation
-        widget: boolean
-        default: true
-        hint: Enable this field if the business can have a permanent location
-      - label: Additional Search Teams
-        name: additionalSearchTerms
-        widget: string
-        required: false
-      - label: Default Sector
-        name: defaultSectorId
-        widget: relation
-        required: false
-        collection: "dashboard-settings"
-        search_fields: ["arrayOfSectors.*.name"]
-        value_field: "arrayOfSectors.*.id"
-        display_fields: ["arrayOfSectors.*.name"]
-      - label: NAICS Codes
-        name: naicsCodes
-        widget: string
-        required: false
-      - label: Id / Filename
-        name: id
-        widget: string
-      - label: Onboarding Questions
-        name: industryOnboardingQuestions
-        widget: object
-        fields:
-          - label: Home Based
-            name: canBeHomeBased
-            widget: boolean
-            default: false
-          - label: Liquor License
-            name: isLiquorLicenseApplicable
-            widget: boolean
-            default: false
-          - label: CPA Required
-            name: isCpaRequiredApplicable
-            widget: boolean
-            default: false
-          - label: Staffing Service
-            name: isProvidesStaffingServicesApplicable
-            widget: boolean
-            default: false
-          - label: Certified Interior Designer
-            name: isCertifiedInteriorDesignerApplicable
-            widget: boolean
-            default: false
-          - label: Real Estate Appraisal Management
-            name: isRealEstateAppraisalManagementApplicable
-            widget: boolean
-            default: false
-          - label: Reseller
-            name: canBeReseller
-            widget: boolean
-            default: false
-          - label: Transportation
-            name: isTransportation
-            widget: boolean
-            default: false
-      - label: Roadmap Steps
-        name: roadmapSteps
-        widget: list
-        summary: "Step {{step}} - {{task}}"
-        fields:
-          - label: Roadmap Step
-            name: step
-            widget: relation
-            collection: "settings"
-            search_fields: ["steps.*.name"]
-            value_field: "steps.*.stepNumber"
-            display_fields: ["steps.*.name"]
-          - label: Weight
-            name: weight
-            widget: number
-          - label: Task
-            name: task
-            widget: "relation"
-            collection: "tasks"
-            search_fields: ["{{filename}}", "name", "urlSlug"]
-            value_field: "{{filename}}"
-            display_fields: ["{{filename}}"]
-      - label: Task Overrides
-        name: modifications
-        widget: list
-        summary: "{{taskToReplaceFilename}}"
-        fields:
-          - label: Task To Replace
-            name: taskToReplaceFilename
-            widget: "relation"
-            collection: "tasks"
-            search_fields: ["{{filename}}", "name", "urlSlug"]
-            value_field: "{{filename}}"
-            display_fields: ["{{filename}}"]
-          - label: Modified Task
-            name: replaceWithFilename
-            widget: "relation"
-            collection: "tasks"
-            search_fields: ["{{filename}}", "name", "urlSlug"]
-            value_field: "{{filename}}"
-            display_fields: ["{{filename}}"]
-
-  - name: "post-onboarding-content"
-    label: "Post Onboarding Content"
-    folder: "content/src/display-content/post-onboarding"
-    summary: "{{filename}}"
-    identifier_field: "{{fields.slug}}"
-    slug: "{{fields.slug}}"
-    delete: false
     create: true
     editor:
       preview: true
     fields:
+      - { label: "Id", name: "id", widget: "string" }
+      - { label: "Header", name: "header", widget: "string", required: false }
+      - { label: "Not Started Header", name: "notStartedHeader", widget: "string", required: false }
+      - { label: "Completed Header", name: "completedHeader", widget: "string", required: false }
+      - { label: "Has Close Button", name: "hasCloseButton", widget: "boolean", required: false }
+      - { label: "CTA Text", name: "ctaText", widget: "string", required: false }
+      - { label: "Weight (lower weights sort first)", name: "weight", widget: "number", required: true }
+      - {
+          label: "Image (header required)",
+          name: "imgPath",
+          widget: "select",
+          required: false,
+          options: ["/img/congratulations-purple.svg", "/img/check-mark-circular-blue.svg"],
+        }
       - { label: "Content", name: "body", widget: "markdown" }
-      - { label: "Filename", name: "slug", widget: "slug", required: false }
-      - { label: "Question Copy", name: "radioQuestion", widget: "string", required: false }
-      - { label: "Yes Button Copy", name: "radioYes", widget: "string", required: false }
-      - { label: "No Button Copy", name: "radioNo", widget: "string", required: false }
-      - { label: "No Button Content", name: "radioNoContent", widget: "string", required: false }
-      - { label: "Bolded Heading", name: "headingBolded", widget: "string", required: false }
-      - { label: "Sub Heading", name: "headingNotBolded", widget: "string", required: false }
+      - {
+          label: "Color",
+          name: "color",
+          widget: "select",
+          required: true,
+          options: ["primary", "accent-cool-darker", "accent-cooler"],
+        }
+      - {
+          label: "Header Background Color",
+          name: "headerBackgroundColor",
+          widget: "select",
+          required: false,
+          options: ["accent-cooler-lightest", "primary-light", "cool-lighter"],
+        }
+      - {
+          label: "Border Color",
+          name: "borderColor",
+          widget: "select",
+          required: true,
+          options:
+            [
+              "accent-cooler-light",
+              "accent-cool-light",
+              "primary-light",
+              "secondary-light",
+              "info-light",
+              "secondary-light",
+            ],
+        }
 
   - name: "profile-onboarding"
-    label: "Profile / Onboarding"
+    label: "Profile Page"
     delete: false
     create: false
     files:
@@ -3192,60 +3983,10 @@ collections:
                         }
                       - { label: "Radio Button - Yes", name: "radioButtonYesText", widget: "string" }
                       - { label: "Radio Button - No", name: "radioButtonNoText", widget: "string" }
-  - name: addons
-    label: Roadmap Add-ons
-    folder: "content/src/roadmaps/add-ons"
-    extension: "json"
-    identifier_field: "{{filename}}"
-    summary: "{{filename}}"
-    editor:
-      preview: false
-    fields:
-      - label: Roadmap Steps
-        name: roadmapSteps
-        widget: list
-        summary: "Step {{step}} - {{task}}"
-        fields:
-          - label: Roadmap Step
-            name: step
-            widget: relation
-            collection: "settings"
-            search_fields: ["steps.*.name"]
-            value_field: "steps.*.stepNumber"
-            display_fields: ["steps.*.name"]
-          - label: Weight
-            name: weight
-            widget: number
-          - label: Task
-            name: task
-            widget: "relation"
-            collection: "tasks"
-            search_fields: ["{{filename}}", "name", "urlSlug"]
-            value_field: "{{filename}}"
-            display_fields: ["{{filename}}"]
-      - label: Task Overrides
-        name: modifications
-        widget: list
-        summary: "{{taskToReplaceFilename}}"
-        fields:
-          - label: Task To Replace
-            name: taskToReplaceFilename
-            widget: "relation"
-            collection: "tasks"
-            search_fields: ["{{filename}}", "name", "urlSlug"]
-            value_field: "{{filename}}"
-            display_fields: ["{{filename}}"]
-          - label: Modified Task
-            name: replaceWithFilename
-            widget: "relation"
-            collection: "tasks"
-            search_fields: ["{{filename}}", "name", "urlSlug"]
-            value_field: "{{filename}}"
-            display_fields: ["{{filename}}"]
 
-  - name: "roadmap-content"
-    label: "Roadmap Content"
-    folder: "content/src/display-content/roadmap"
+  - name: "post-onboarding-content"
+    label: "Post Onboarding Content"
+    folder: "content/src/display-content/post-onboarding"
     summary: "{{filename}}"
     identifier_field: "{{fields.slug}}"
     slug: "{{fields.slug}}"
@@ -3256,741 +3997,24 @@ collections:
     fields:
       - { label: "Content", name: "body", widget: "markdown" }
       - { label: "Filename", name: "slug", widget: "slug", required: false }
+      - { label: "Question Copy", name: "radioQuestion", widget: "string", required: false }
+      - { label: "Yes Button Copy", name: "radioYes", widget: "string", required: false }
+      - { label: "No Button Copy", name: "radioNo", widget: "string", required: false }
+      - { label: "No Button Content", name: "radioNoContent", widget: "string", required: false }
+      - { label: "Bolded Heading", name: "headingBolded", widget: "string", required: false }
+      - { label: "Sub Heading", name: "headingNotBolded", widget: "string", required: false }
 
-  - name: "roadmap-sidebar-card"
-    label: "Roadmap Sidebar Cards Content"
-    folder: "content/src/display-content/roadmap-sidebar-cards"
-    summary: "{{id}}"
-    identifier_field: "{{id}}"
-    slug: "{{id}}"
+  - name: "contextual-information"
+    label: "Contextual Information"
+    folder: "content/src/display-content/contextual-information"
+    summary: "{{filename}}"
+    identifier_field: "{{fields.slug}}"
+    slug: "{{fields.slug}}"
     delete: true
     create: true
     editor:
       preview: true
     fields:
-      - { label: "Id", name: "id", widget: "string" }
-      - { label: "Header", name: "header", widget: "string", required: false }
-      - { label: "Not Started Header", name: "notStartedHeader", widget: "string", required: false }
-      - { label: "Completed Header", name: "completedHeader", widget: "string", required: false }
-      - { label: "Has Close Button", name: "hasCloseButton", widget: "boolean", required: false }
-      - { label: "CTA Text", name: "ctaText", widget: "string", required: false }
-      - { label: "Weight (lower weights sort first)", name: "weight", widget: "number", required: true }
-      - {
-          label: "Image (header required)",
-          name: "imgPath",
-          widget: "select",
-          required: false,
-          options: ["/img/congratulations-purple.svg", "/img/check-mark-circular-blue.svg"],
-        }
+      - { label: "Header", name: "header", widget: "string" }
       - { label: "Content", name: "body", widget: "markdown" }
-      - {
-          label: "Color",
-          name: "color",
-          widget: "select",
-          required: true,
-          options: ["primary", "accent-cool-darker", "accent-cooler"],
-        }
-      - {
-          label: "Header Background Color",
-          name: "headerBackgroundColor",
-          widget: "select",
-          required: false,
-          options: ["accent-cooler-lightest", "primary-light", "cool-lighter"],
-        }
-      - {
-          label: "Border Color",
-          name: "borderColor",
-          widget: "select",
-          required: true,
-          options:
-            [
-              "accent-cooler-light",
-              "accent-cool-light",
-              "primary-light",
-              "secondary-light",
-              "info-light",
-              "secondary-light",
-            ],
-        }
-
-  - name: "settings"
-    label: "Roadmap Settings"
-    editor:
-      preview: false
-    files:
-      - label: "Steps"
-        name: "steps"
-        file: "content/src/roadmaps/steps.json"
-        fields:
-          - label: steps
-            name: steps
-            widget: list
-            summary: "{{name}}"
-            fields:
-              - label: Name
-                name: name
-                widget: string
-              - label: Section
-                name: section
-                widget: select
-                options: ["PLAN", "START"]
-              - label: Time Estimate
-                name: timeEstimate
-                widget: string
-              - label: Description
-                name: description
-                widget: string
-              - label: Number
-                name: stepNumber
-                widget: number
-                min: 0
-                value_type: int
-      - label: "Task Dependencies"
-        name: "task-dependencies"
-        file: "content/src/roadmaps/task-dependencies.json"
-        fields:
-          - label: Tasks
-            name: dependencies
-            widget: list
-            fields:
-              - label: Task
-                name: name
-                widget: "relation"
-                collection: "tasks"
-                search_fields: ["{{filename}}", "name", "urlSlug"]
-                value_field: "{{filename}}"
-                display_fields: ["{{filename}}"]
-              - label: Dependencies
-                name: dependencies
-                widget: "relation"
-                collection: "tasks"
-                search_fields: ["{{filename}}", "name", "urlSlug"]
-                value_field: "{{filename}}"
-                display_fields: ["{{filename}}"]
-                multiple: true
-
-  - name: "tasks"
-    label: "Tasks"
-    folder: "content/src/roadmaps/tasks"
-    summary: "{{filename}} - {{name}}"
-    identifier_field: "{{filename}}"
-    slug: "{{fields.filename}}"
-    delete: true
-    sortable_fields: ["id", "name", "{{urlSlug}}", "industryId"]
-    create: true
-    editor:
-      preview: true
-    fields:
-      - { label: "Content", name: "body", widget: "markdown" }
-      - { label: "Url Slug", name: "urlSlug", widget: "nospace" }
-      - { label: "Filename", name: "filename", widget: "nospace", required: false }
-      - { label: "Name", name: "name", widget: "string" }
-      - { label: "Id", name: "id", widget: "nospace" }
-      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
-      - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
-      - label: Industry
-        name: industryId
-        widget: "relation"
-        collection: "roadmaps"
-        search_fields: ["{{id}}"]
-        value_field: "{{id}}"
-        display_fields: ["{{id}}"]
-        required: false
-      - { label: "Required", name: "required", widget: "boolean", required: false }
-      - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
-      - { label: "Form Name", name: "formName", widget: "string", required: false }
-
-  - name: "cannabis-license"
-    label: "Tasks - Cannabis License"
-    delete: false
-    create: false
-    files:
-      - label: Cannabis Eligibility Modal
-        name: cannabis-eligibility-modal
-        file: content/src/fieldConfig/config.json
-        editor:
-          preview: false
-        fields:
-          - label: Cannabis Eligibility Modal
-            name: cannabisEligibilityModal
-            collapsed: false
-            widget: object
-            summary: "{{cannabisEligibilityModal}}"
-            fields:
-              - { label: Eligible Modal Title, name: eligibleModalTitle, widget: string }
-              - {
-                  label: Eligible Modal Body,
-                  name: eligibleModalBody,
-                  widget: text,
-                  hint: This field supports Markdown,
-                }
-              - { label: Eligible Modal Continue Button, name: eligibleModalContinueButton, widget: string }
-              - { label: Eligible Modal Cancel Button, name: eligibleModalCancelButton, widget: string }
-      - label: "Conditional License Task Metadata"
-        name: "applyForConditionalLicense-task"
-        file: "content/src/roadmaps/tasks/conditional-permit-cannabis.md"
-        identifier_field: "{{fields.slug}}"
-        slug: "{{fields.slug}}"
-        editor:
-          preview: true
-        fields:
-          - { label: "Content", name: "body", widget: "markdown" }
-          - { label: "Url Slug", name: "urlSlug", widget: "nospace" }
-          - { label: "Filename", name: "filename", widget: "nospace", required: false }
-          - { label: "Name", name: "name", widget: "string" }
-          - { label: "Id", name: "id", widget: "nospace" }
-          - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
-          - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
-          - label: Industry
-            name: industryId
-            widget: "relation"
-            collection: "roadmaps"
-            search_fields: ["{{id}}"]
-            value_field: "{{id}}"
-            display_fields: ["{{id}}"]
-            required: false
-          - { label: "Required", name: "required", widget: "boolean", required: false }
-          - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
-          - { label: "Form Name", name: "formName", widget: "string", required: false }
-      - label: "Annual License Task Metadata"
-        name: "applyForAnnualLicense-task"
-        file: "content/src/roadmaps/tasks/annual-license-cannabis.md"
-        identifier_field: "{{fields.slug}}"
-        slug: "{{fields.slug}}"
-        editor:
-          preview: true
-        fields:
-          - { label: "Content", name: "body", widget: "markdown" }
-          - { label: "Url Slug", name: "urlSlug", widget: "nospace" }
-          - { label: "Filename", name: "filename", widget: "nospace", required: false }
-          - { label: "Name", name: "name", widget: "string" }
-          - { label: "Id", name: "id", widget: "nospace" }
-          - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
-          - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
-          - label: Industry
-            name: industryId
-            widget: "relation"
-            collection: "roadmaps"
-            search_fields: ["{{id}}"]
-            value_field: "{{id}}"
-            display_fields: ["{{id}}"]
-            required: false
-          - { label: "Required", name: "required", widget: "boolean", required: false }
-          - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
-          - { label: "Form Name", name: "formName", widget: "string", required: false }
-
-      - label: "Tab 1 (Business Size and Priority Status)"
-        name: "cannabisLicense-1"
-        file: "content/src/fieldConfig/cannabis-license-tab1.json"
-        editor:
-          preview: true
-        fields:
-          - label: Business Size and Priority Status
-            name: cannabisApplyForLicense
-            collapsed: false
-            widget: object
-            summary: "{{cannabisApplyForLicense}}"
-            fields:
-              - {
-                  label: Priority Status None Selected Text,
-                  name: priorityStatusNoneSelectedText,
-                  widget: markdown,
-                  hint: This field supports Markdown,
-                }
-              - {
-                  label: Application Questions Text,
-                  name: applicationQuestionsText,
-                  widget: markdown,
-                  hint: This field supports Markdown,
-                }
-              - { label: Business Size Header, name: businessSizeHeader, widget: string }
-              - {
-                  label: Microbusiness Radio Question,
-                  name: microbusinessRadioQuestion,
-                  widget: markdown,
-                  hint: This field supports Markdown,
-                }
-              - {
-                  label: Microbusiness Radio Yes,
-                  name: microbusinessRadioYes,
-                  widget: markdown,
-                  hint: This field supports Markdown,
-                }
-              - {
-                  label: Microbusiness Radio No,
-                  name: microbusinessRadioNo,
-                  widget: markdown,
-                  hint: This field supports Markdown,
-                }
-              - { label: Priority Status Header, name: priorityStatusHeader, widget: string }
-              - {
-                  label: Priority Status Text,
-                  name: priorityStatusText,
-                  widget: markdown,
-                  hint: This field supports Markdown,
-                }
-              - {
-                  label: Diversely Owned Label,
-                  name: diverselyOwnedLabel,
-                  widget: markdown,
-                  hint: This field supports Markdown,
-                }
-              - {
-                  label: Impact Zone Label,
-                  name: impactZoneLabel,
-                  widget: markdown,
-                  hint: This field supports Markdown,
-                }
-              - { label: SBE Label, name: sbeLabel, widget: markdown, hint: This field supports Markdown }
-              - { label: View Requirements Button, name: viewRequirementsButton, widget: string }
-
-      - label: "Tab 2 Annual (Defaults + Requirements)"
-        name: "cannabisLicenseAnnual-2"
-        file: "content/src/fieldConfig/cannabis-license-annual-tab2.json"
-        editor:
-          preview: true
-        fields:
-          - label: Annual Requirements
-            name: cannabisApplyForLicense
-            collapsed: false
-            widget: object
-            summary: "{{cannabisApplyForLicense}}"
-            fields:
-              - { label: Application Page Helper Text, name: applicationPageHelperText, widget: string }
-              - { label: Application Needs Header, name: applicationNeedsHeader, widget: string }
-              - { label: General Application Needs, name: generalApplicationNeeds, widget: string }
-              - { label: General Annual Requirements, name: annualGeneralRequirements, widget: markdown }
-              - {
-                  label: Microbusiness Application Needs,
-                  name: microbusinessApplicationNeeds,
-                  widget: string,
-                }
-              - { label: Microbusiness Requirements, name: microbusinessRequirements, widget: markdown }
-              - {
-                  label: Priority Status Application Needs,
-                  name: priorityStatusApplicationNeeds,
-                  widget: string,
-                }
-              - { label: Diversely Owned Requirements, name: diverselyOwnedRequirements, widget: markdown }
-              - { label: Impact Zone Requirements, name: impactZoneRequirements, widget: markdown }
-              - { label: Social Equity Requirements, name: socialEquityRequirements, widget: markdown }
-              - { label: Back To First Tab Button, name: backToFirstTabButton, widget: string }
-              - { label: Annual - After Requirements, name: annualBottomOfTask, widget: markdown }
-
-      - label: "Tab 2 Conditional (Conditional Specific Requirements)"
-        name: "cannabisLicenseConditional-2"
-        file: "content/src/fieldConfig/cannabis-license-conditional-tab2.json"
-        editor:
-          preview: true
-        fields:
-          - label: Conditional Requirements
-            name: cannabisApplyForLicense
-            collapsed: false
-            widget: object
-            summary: "{{cannabisApplyForLicense}}"
-            fields:
-              - {
-                  label: General Conditional Requirements,
-                  name: conditionalGeneralRequirements,
-                  widget: markdown,
-                }
-              - { label: Conditional - After Requirements, name: conditionalBottomOfTask, widget: markdown }
-
-  - name: "cannabis-priority-status"
-    label: "Tasks - Cannabis Priority Status"
-    delete: false
-    create: false
-    files:
-      - label: "Task Metadata"
-        name: "cannabisPriority-task"
-        file: "content/src/roadmaps/tasks/priority-status-cannabis.md"
-        identifier_field: "{{fields.slug}}"
-        slug: "{{fields.slug}}"
-        editor:
-          preview: true
-        fields:
-          - { label: "Content", name: "body", widget: "markdown" }
-          - { label: "Url Slug", name: "urlSlug", widget: "nospace" }
-          - { label: "Filename", name: "filename", widget: "nospace", required: false }
-          - { label: "Name", name: "name", widget: "string" }
-          - { label: "Id", name: "id", widget: "nospace" }
-          - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
-          - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
-          - label: Industry
-            name: industryId
-            widget: "relation"
-            collection: "roadmaps"
-            search_fields: ["{{id}}"]
-            value_field: "{{id}}"
-            display_fields: ["{{id}}"]
-            required: false
-          - { label: "Required", name: "required", widget: "boolean", required: false }
-          - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
-          - { label: "Form Name", name: "formName", widget: "string", required: false }
-
-      - label: "Tab 1 (Statuses)"
-        name: "cannabisPriority-1"
-        file: "content/src/fieldConfig/cannabis-priority-status-tab1.json"
-        editor:
-          preview: true
-        fields:
-          - label: Cannabis Priority Status
-            name: cannabisPriorityStatus
-            collapsed: false
-            widget: object
-            summary: "{{cannabisPriorityStatus}}"
-            fields:
-              - { label: Next Button Text, name: nextButtonText, widget: string }
-              - {
-                  label: None Of The Above Checkbox Label,
-                  name: noPriorityStatusCheckboxText,
-                  widget: string,
-                }
-              - { label: Content Body, name: tab1Content, widget: markdown }
-
-      - label: "Tab 2 (Requirements)"
-        name: "cannabisPriority-2"
-        file: "content/src/fieldConfig/cannabis-priority-status-tab2.json"
-        editor:
-          preview: true
-        fields:
-          - label: Cannabis Priority Status
-            name: cannabisPriorityStatus
-            collapsed: false
-            widget: object
-            summary: "{{cannabisPriorityStatus}}"
-            fields:
-              - { label: Text Before Header, name: secondTabDescriptionText, widget: text }
-              - { label: Header Text, name: secondTabHeaderText, widget: string }
-              - { label: Minority / Women Header Text, name: minorityOrWomenHeaderText, widget: string }
-              - {
-                  label: Minority / Women Requirements,
-                  name: minorityWomenOwnedRequirements,
-                  widget: markdown,
-                }
-              - { label: Veteran Header Text, name: veteranHeaderText, widget: string }
-              - { label: Veteran Owned Requirements, name: veteranOwnedRequirements, widget: markdown }
-              - { label: Social Equity Header Text, name: socialEquityHeaderText, widget: string }
-              - { label: Social Equity Requirements, name: socialEquityRequirements, widget: markdown }
-              - { label: Impact Zone Header Text, name: impactZoneHeaderText, widget: string }
-              - { label: Impact Zone Text, name: impactZoneText, widget: string }
-
-              - { label: Green Box Bolded Text, name: greenBoxBoldedText, widget: string }
-              - { label: Green Box Minority Or Women Text, name: greenBoxMinorityOrWomenText, widget: string }
-              - { label: Green Box Veteran Text, name: greenBoxVeteranText, widget: string }
-              - { label: Green Box Social Equity Text, name: greenBoxSocialEquityText, widget: string }
-              - { label: Back Button Text, name: backButtonText, widget: string }
-              - { label: Dropdown CTA Button Text, name: dropdownCTAButtonText, widget: string }
-              - { label: Social Equity Button Text, name: socialEquityButtonText, widget: string }
-              - { label: Social Equity Button Link, name: socialEquityButtonLink, widget: string }
-              - {
-                  label: Veteran Minority Or Women Button Text,
-                  name: certificationButtonText,
-                  widget: string,
-                }
-              - {
-                  label: Veteran Minority Or Women Button Link,
-                  name: certificationButtonLink,
-                  widget: string,
-                }
-              - {
-                  label: Text For None Of The Above Checkbox Selection,
-                  name: noPriorityStatusText,
-                  widget: text,
-                }
-              - {
-                  label: Complete Task Progress Button Text,
-                  name: completeTaskProgressButtonText,
-                  widget: string,
-                }
-
-  - name: "ein-task"
-    label: "Tasks - EIN"
-    delete: false
-    create: false
-    files:
-      - label: "Register for EIN - Task Metadata"
-        name: "ein-task-metadata"
-        file: "content/src/roadmaps/tasks/register-for-ein.md"
-        identifier_field: "{{fields.slug}}"
-        slug: "{{fields.slug}}"
-        editor:
-          preview: true
-        fields:
-          - { label: "Content", name: "body", widget: "markdown" }
-          - { label: "Url Slug", name: "urlSlug", widget: "nospace" }
-          - { label: "Filename", name: "filename", widget: "nospace", required: false }
-          - { label: "Name", name: "name", widget: "string" }
-          - { label: "Id", name: "id", widget: "nospace" }
-          - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
-          - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
-          - label: Industry
-            name: industryId
-            widget: "relation"
-            collection: "roadmaps"
-            search_fields: ["{{id}}"]
-            value_field: "{{id}}"
-            display_fields: ["{{id}}"]
-            required: false
-          - { label: "Required", name: "required", widget: "boolean", required: false }
-          - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
-          - { label: "Form Name", name: "formName", widget: "string", required: false }
-      - label: "EIN Input Section"
-        name: "ein-input-section"
-        file: content/src/fieldConfig/ein.json
-        editor:
-          preview: true
-        fields:
-          - label: EIN
-            name: ein
-            collapsed: false
-            widget: object
-            fields:
-              - { label: Description Text, name: descriptionText, widget: markdown }
-              - { label: Input Placeholder Text, name: placeholderText, widget: string }
-              - { label: Save Button Text, name: saveButtonText, widget: string }
-              - {
-                  label: Success Message Text,
-                  name: successText,
-                  widget: string,
-                  hint: This field supports Markdown,
-                }
-              - { label: Edit EIN Button Text, name: editText, widget: string }
-              - { label: Remove EIN Button Text, name: removeText, widget: string }
-
-  - name: "tax-task"
-    label: "Tasks - Tax ID"
-    delete: false
-    create: false
-    files:
-      - label: "Register for Tax ID - Task Metadata"
-        name: "tax-task-metadata"
-        file: "content/src/roadmaps/tasks/register-for-taxes.md"
-        identifier_field: "{{fields.slug}}"
-        slug: "{{fields.slug}}"
-        editor:
-          preview: true
-        fields:
-          - { label: "Content", name: "body", widget: "markdown" }
-          - { label: "Url Slug", name: "urlSlug", widget: "nospace" }
-          - { label: "Name", name: "name", widget: "string" }
-          - { label: "Id", name: "id", widget: "nospace" }
-          - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
-          - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
-          - { label: "Required", name: "required", widget: "boolean", required: false }
-          - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
-          - { label: "Form Name", name: "formName", widget: "string", required: false }
-      - label: "Tax ID Input Section"
-        name: "tax-input-section"
-        file: content/src/fieldConfig/tax.json
-        editor:
-          preview: true
-        fields:
-          - label: Tax ID
-            name: tax
-            collapsed: false
-            widget: object
-            fields:
-              - { label: Description Text, name: descriptionText, widget: markdown }
-              - { label: Input Placeholder Text, name: placeholderText, widget: string }
-              - { label: Save Button Text, name: saveButtonText, widget: string }
-              - {
-                  label: Success Message Text,
-                  name: successText,
-                  widget: string,
-                  hint: This field supports Markdown,
-                }
-              - { label: Edit Tax ID Button Text, name: editText, widget: string }
-              - { label: Remove Tax ID Button Text, name: removeText, widget: string }
-
-  - name: "naics-code"
-    label: "Tasks - NAICS Code"
-    delete: false
-    create: false
-    files:
-      - label: "Determine NAICS Code - Task Metadata"
-        name: "naics-code-task"
-        file: "content/src/roadmaps/tasks/determine-naics-code.md"
-        identifier_field: "{{fields.slug}}"
-        slug: "{{fields.slug}}"
-        editor:
-          preview: true
-        fields:
-          - { label: "Content", name: "body", widget: "markdown" }
-          - { label: "Url Slug", name: "urlSlug", widget: "nospace" }
-          - { label: "Filename", name: "filename", widget: "nospace", required: false }
-          - { label: "Name", name: "name", widget: "string" }
-          - { label: "Id", name: "id", widget: "nospace" }
-          - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
-          - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
-          - label: Industry
-            name: industryId
-            widget: "relation"
-            collection: "roadmaps"
-            search_fields: ["{{id}}"]
-            value_field: "{{id}}"
-            display_fields: ["{{id}}"]
-            required: false
-          - { label: "Required", name: "required", widget: "boolean", required: false }
-          - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
-          - { label: "Form Name", name: "formName", widget: "string", required: false }
-      - label: "NAICS Code Lookup Section"
-        name: naics-code-lookup
-        file: content/src/fieldConfig/naics-code.json
-        editor:
-          preview: true
-        fields:
-          - label: Determine NAICS Code
-            name: determineNaicsCode
-            collapsed: false
-            widget: object
-            fields:
-              - { label: Find Code Header, name: findCodeHeader, widget: string }
-              - {
-                  label: Find Code Body Text,
-                  name: findCodeBodyText,
-                  widget: text,
-                  hint: This field supports Markdown,
-                }
-              - {
-                  label: Suggested Code Body Text,
-                  name: suggestedCodeBodyText,
-                  widget: text,
-                  hint: This field supports Markdown,
-                }
-              - {
-                  label: siccode.com Link,
-                  name: sicCodeLink,
-                  widget: string,
-                  hint: This field supports Markdown,
-                }
-              - { label: naics.com Link, name: naicsLink, widget: string, hint: This field supports Markdown }
-              - { label: Input Label, name: inputLabel, widget: string, hint: This field supports Markdown }
-              - { label: Input Placeholder, name: inputPlaceholder, widget: string }
-              - { label: Save Button Text, name: saveButtonText, widget: string }
-              - { label: Invalid Validation Error Text, name: invalidValidationErrorText, widget: string }
-              - { label: Length Validation Error Text, name: lengthValidationErrorText, widget: string }
-              - { label: Has Saved Code Header, name: hasSavedCodeHeader, widget: string }
-              - {
-                  label: Success Message,
-                  name: successMessage,
-                  widget: text,
-                  hint: This field supports Markdown,
-                }
-              - { label: Edit Text, name: editText, widget: string }
-              - { label: Remove Text, name: removeText, widget: string }
-              - {
-                  label: Register for Taxes - NAICS Display Text,
-                  name: registerForTaxesNAICSCodePlaceholder,
-                  widget: string,
-                }
-              - {
-                  label: Register for Taxes - Placeholder Text When NAICS Missing,
-                  name: registerForTaxesMissingNAICSCodePlaceholder,
-                  widget: string,
-                }
-
-  - name: nexus
-    label: "Tasks - Nexus"
-    delete: false
-    create: false
-    files:
-      - label: "Nexus Name Search - Task Metadata"
-        name: "nexus-name-search-task"
-        file: "content/src/roadmaps/tasks/search-business-name-nexus.md"
-        identifier_field: "{{fields.slug}}"
-        slug: "{{fields.slug}}"
-        editor:
-          preview: true
-        fields:
-          - { label: "Content", name: "body", widget: "markdown" }
-          - { label: "Url Slug", name: "urlSlug", widget: "nospace" }
-          - { label: "Filename", name: "filename", widget: "nospace", required: false }
-          - { label: "Name", name: "name", widget: "string" }
-          - { label: "Id", name: "id", widget: "nospace" }
-          - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
-          - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
-          - label: Industry
-            name: industryId
-            widget: "relation"
-            collection: "roadmaps"
-            search_fields: ["{{id}}"]
-            value_field: "{{id}}"
-            display_fields: ["{{id}}"]
-            required: false
-          - { label: "Required", name: "required", widget: "boolean", required: false }
-          - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
-          - { label: "Form Name", name: "formName", widget: "string", required: false }
-      - label: "Name Search"
-        name: nexus-name-search
-        file: content/src/fieldConfig/nexus-name-search.json
-        editor:
-          preview: true
-        fields:
-          - label: Name Search
-            name: nexusNameSearch
-            collapsed: false
-            widget: object
-            fields:
-              - { label: Available Text, name: availableText, widget: markdown }
-              - { label: Unavailable Text, name: unavailableText, widget: markdown }
-              - { label: Search Again Button text, name: searchAgainButtonText, widget: string }
-              - {
-                  label: DBA Name Section Header,
-                  name: dbaNameHeader,
-                  widget: string,
-                  hint: This field supports Markdown,
-                }
-              - { label: DBA Name Description, name: dbaNameDescription, widget: markdown }
-              - { label: DBA Name Search Placeholder, name: dbaNameSearchPlaceholder, widget: string }
-              - { label: DBA Name Search Label, name: dbaNameSearchLabel, widget: string }
-              - { label: DBA Name Search Submit Button, name: dbaNameSearchSubmitButton, widget: string }
-              - { label: DBA Available Text, name: dbaAvailableText, widget: markdown }
-              - { label: DBA Unavailable Text, name: dbaUnavailableText, widget: markdown }
-      - label: "DBA Formation - Task Metadata"
-        name: "nexus-dba-formation-task"
-        file: "content/src/roadmaps/tasks/form-business-entity-foreign.md"
-        identifier_field: "{{fields.slug}}"
-        slug: "{{fields.slug}}"
-        editor:
-          preview: true
-        fields:
-          - { label: "Content", name: "body", widget: "markdown" }
-          - { label: "Url Slug", name: "urlSlug", widget: "nospace" }
-          - { label: "Filename", name: "filename", widget: "nospace", required: false }
-          - { label: "Name", name: "name", widget: "string" }
-          - { label: "Id", name: "id", widget: "nospace" }
-          - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
-          - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
-          - label: Industry
-            name: industryId
-            widget: "relation"
-            collection: "roadmaps"
-            search_fields: ["{{id}}"]
-            value_field: "{{id}}"
-            display_fields: ["{{id}}"]
-            required: false
-          - { label: "Required", name: "required", widget: "boolean", required: false }
-          - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
-          - { label: "Form Name", name: "formName", widget: "string", required: false }
-      - label: DBA Formation
-        name: nexus-dba-formation
-        file: content/src/fieldConfig/nexus-dba-formation.json
-        editor:
-          preview: true
-        fields:
-          - label: DBA Formation
-            name: nexusFormationTask
-            collapsed: false
-            widget: object
-            fields:
-              - { label: Warning Text, name: warningText, widget: markdown }
-              - {
-                  label: Description (Shown Below Warning),
-                  name: descriptionShownWithWarning,
-                  widget: markdown,
-                }
-              - { label: CTA Modal Header, name: dbaCtaModalHeader, widget: string }
-              - { label: CTA Modal Body, name: dbaCtaModalBody, widget: markdown }
-              - { label: CTA Modal Continue Button, name: dbaCtaModalContinueButtonText, widget: string }
-              - { label: CTA Modal Cancel Button, name: dbaCtaModalCancelButtonText, widget: string }
+      - { label: "Filename", name: "slug", widget: "slug", required: false }
