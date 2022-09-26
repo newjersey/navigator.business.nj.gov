@@ -1,10 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { EscapeModal } from "@/components/profile/EscapeModal";
-import { ProfileSnackbarAlert } from "@/components/profile/ProfileSnackbarAlert";
+import { Content } from "@/components/Content";
+import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { ConfigContext, ConfigType, getMergedConfig } from "@/contexts/configContext";
-import Profile from "@/pages/profile";
-import { generateUser } from "@/test/factories";
-import { createEmptyUserData } from "@businessnjgovnavigator/shared/userData";
 import { merge } from "lodash";
 import { useEffect, useRef, useState } from "react";
 
@@ -18,7 +15,7 @@ type Props = {
   getAsset: (string: string) => any;
 };
 
-const ProfilePreviewMisc = (props: Props) => {
+const CannabisEligibilityModalPreview = (props: Props) => {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     ref?.current?.ownerDocument.head.replaceWith(props.window.parent.document.head.cloneNode(true));
@@ -36,40 +33,30 @@ const ProfilePreviewMisc = (props: Props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataString]);
 
-  const emptyUserData = createEmptyUserData(generateUser({}));
-
   return (
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
+      <h2>Eligibility Modal</h2>
+      <button className="margin-2" onClick={() => setModalOpen(true)}>
+        Open Modal
+      </button>
       <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
-        <h2>Escape Modal:</h2>
-        <div ref={ref} style={{ pointerEvents: "all" }}>
-          <button onClick={() => setModalOpen(true)}>Open Modal</button>
-        </div>
-        <EscapeModal
+        <ModalTwoButton
           isOpen={modalOpen}
-          close={() => setModalOpen(false)}
-          primaryButtonOnClick={() => setModalOpen(false)}
-        />
-        <hr className="margin-y-4" />
-
-        <h2>Success Alert:</h2>
-        <ProfileSnackbarAlert alert="SUCCESS" close={() => {}} />
-        <hr className="margin-y-4" />
-
-        <h2>Error Alert</h2>
-        <ProfileSnackbarAlert alert="ERROR" close={() => {}} />
-        <hr className="margin-y-4" />
-
-        <h2 className="margin-bottom-4">Misc Buttons & Labels:</h2>
-        <Profile
-          municipalities={[]}
-          CMS_ONLY_tab="notes"
-          CMS_ONLY_businessPersona="STARTING"
-          CMS_ONLY_fakeUserData={emptyUserData}
-        />
+          close={() => {
+            setModalOpen(false);
+          }}
+          title={data.cannabisEligibilityModal.eligibleModalTitle}
+          primaryButtonText={data.cannabisEligibilityModal.eligibleModalContinueButton}
+          primaryButtonOnClick={() => {
+            setModalOpen(false);
+          }}
+          secondaryButtonText={data.cannabisEligibilityModal.eligibleModalCancelButton}
+        >
+          <Content>{data.cannabisEligibilityModal.eligibleModalBody}</Content>
+        </ModalTwoButton>
       </div>
     </ConfigContext.Provider>
   );
 };
 
-export default ProfilePreviewMisc;
+export default CannabisEligibilityModalPreview;

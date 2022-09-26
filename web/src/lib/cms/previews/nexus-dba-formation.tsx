@@ -1,4 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { Content } from "@/components/Content";
+import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { NexusFormationTask } from "@/components/tasks/NexusFormationTask";
 import { ConfigContext, ConfigType, getMergedConfig } from "@/contexts/configContext";
 import { generateProfileData, generateTask, generateUserData } from "@/test/factories";
@@ -23,6 +25,7 @@ const NexusDbaFormationPreview = (props: Props) => {
   }, [ref]);
 
   const [config, setConfig] = useState<ConfigType>(getMergedConfig());
+  const [modalOpen, setModalOpen] = useState(false);
 
   const data = JSON.parse(JSON.stringify(props.entry.getIn(["data"])));
   const dataString = JSON.stringify(data);
@@ -46,6 +49,24 @@ const NexusDbaFormationPreview = (props: Props) => {
           task={generateTask({ name: "Name is controlled by Task Metadata" })}
           CMS_ONLY_fakeUserData={noNameSearchUserData}
         />
+
+        <hr className="margin-y-4" />
+
+        <div ref={ref} style={{ pointerEvents: "all" }}>
+          <h2>CTA Modal</h2>
+          <button onClick={() => setModalOpen(true)}>Open CTA Modal</button>
+        </div>
+
+        <ModalTwoButton
+          isOpen={modalOpen}
+          close={() => setModalOpen(false)}
+          title={data.nexusFormationTask.dbaCtaModalHeader}
+          primaryButtonText={data.nexusFormationTask.dbaCtaModalContinueButtonText}
+          primaryButtonOnClick={() => setModalOpen(false)}
+          secondaryButtonText={data.nexusFormationTask.dbaCtaModalCancelButtonText}
+        >
+          <Content>{data.nexusFormationTask.dbaCtaModalBody}</Content>
+        </ModalTwoButton>
       </div>
     </ConfigContext.Provider>
   );
