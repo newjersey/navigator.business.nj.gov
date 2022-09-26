@@ -15,7 +15,7 @@ callToActionText: File and Pay
 frequency: |-
   Monthly 
 
-  (Due on the 20th of each month).
+  *(Due on the 20th of each month).*
 filingMethod: paper-or-by-mail-only
 treasuryLink: https://www.nj.gov/treasury/taxation/motorfuels.shtml
 extension: false
