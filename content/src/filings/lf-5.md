@@ -1,10 +1,6 @@
 ---
-urlSlug: lf-5
 name: Litter Control Fee
-id: lf-5
 callToActionLink: https://www.nj.gov/treasury/taxation/littercontrolfee.shtml
-callToActionText: File and Pay
-frequency: Annually (due on march 15th)
 taxRates: |
   
   - Wholesale - Gross Receipts: 0.03%
@@ -15,6 +11,13 @@ additionalInfo: >
   Disposition of Revenues
 
   Revenue from this tax is deposited in the Clean Communities Program Fund and are used for litter pickup and removal, and to provide recycling grants to New Jersey counties and municipalities.
+urlSlug: lf-5
+id: lf-5
+callToActionText: File and Pay
+frequency: |-
+  Annually 
+
+  (Due on March 15th).
 filingMethod: online
 treasuryLink: null
 extension: false
