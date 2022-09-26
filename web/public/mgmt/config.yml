@@ -785,7 +785,7 @@ collections:
     files:
       - label: Cannabis Eligibility Modal
         name: cannabis-eligibility-modal
-        file: content/src/fieldConfig/config.json
+        file: content/src/fieldConfig/cannabis-license-eligibility-modal.json
         editor:
           preview: true
         fields:
@@ -1015,7 +1015,6 @@ collections:
             name: cannabisPriorityStatus
             collapsed: false
             widget: object
-            summary: "{{cannabisPriorityStatus}}"
             fields:
               - { label: Next Button Text, name: nextButtonText, widget: string }
               - {
@@ -1024,6 +1023,16 @@ collections:
                   widget: string,
                 }
               - { label: Content Body, name: tab1Content, widget: markdown }
+              - { label: Phrase With One Priority Type, name: phrase1, widget: string }
+              - { label: Phrase With Two Priority Types, name: phrase2, widget: string }
+              - { label: Phrase With Three Priority Types, name: phrase3, widget: string }
+              - {
+                  label: Priority Type - Minority Women Or Veteran,
+                  name: minorityWomenOrVeteran,
+                  widget: markdown,
+                }
+              - { label: Priority Type - Impact Zone, name: impactZone, widget: markdown }
+              - { label: Priority Type - Social Equity, name: socialEquity, widget: markdown }
 
       - label: "Tab 2 (Requirements)"
         name: "cannabisPriority-2"
@@ -1035,7 +1044,6 @@ collections:
             name: cannabisPriorityStatus
             collapsed: false
             widget: object
-            summary: "{{cannabisPriorityStatus}}"
             fields:
               - { label: Text Before Header, name: secondTabDescriptionText, widget: text }
               - { label: Header Text, name: secondTabHeaderText, widget: string }
@@ -1464,24 +1472,6 @@ collections:
             fields:
               - { label: Beta Main Text, name: betaMainText, widget: string }
               - { label: Beta Modal Button Text, name: betaModalButtonText, widget: string }
-          - label: Cannabis Priority Status
-            name: cannabisPriorityStatus
-            collapsed: true
-            widget: object
-            summary: "{{cannabisPriorityStatus}}"
-            fields:
-              - { label: Phrase With One Priority, name: phrase1, widget: string }
-              - { label: Phrase With Two Priorities, name: phrase2, widget: string }
-              - { label: Phrase With Three Priorities, name: phrase3, widget: string }
-          - label: Cannabis Priority Types
-            name: cannabisPriorityTypes
-            collapsed: true
-            widget: object
-            summary: "{{cannabisPriorityTypes}}"
-            fields:
-              - { label: Minority Women Or Veteran, name: minorityWomenOrVeteran, widget: string }
-              - { label: Impact Zone, name: impactZone, widget: string }
-              - { label: Social Equity, name: socialEquity, widget: string }
           - label: Business Formation Defaults
             name: businessFormationDefaults
             collapsed: true

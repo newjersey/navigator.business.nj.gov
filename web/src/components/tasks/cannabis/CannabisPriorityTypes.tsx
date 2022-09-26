@@ -71,13 +71,13 @@ export const CannabisPriorityTypes = (props: Props): ReactElement => {
     const priorityStatusArray: Array<string> = [];
 
     if (isCheckboxesSelected("minorityOrWomen") || isCheckboxesSelected("veteran")) {
-      priorityStatusArray.push(Config.cannabisPriorityTypes.minorityWomenOrVeteran);
+      priorityStatusArray.push(Config.cannabisPriorityStatus.minorityWomenOrVeteran);
     }
     if (isCheckboxesSelected("impactZone")) {
-      priorityStatusArray.push(Config.cannabisPriorityTypes.impactZone);
+      priorityStatusArray.push(Config.cannabisPriorityStatus.impactZone);
     }
     if (isCheckboxesSelected("socialEquity")) {
-      priorityStatusArray.push(Config.cannabisPriorityTypes.socialEquity);
+      priorityStatusArray.push(Config.cannabisPriorityStatus.socialEquity);
     }
 
     const priorityStatusesAsIndexMap: Record<string, string> = {};
@@ -93,7 +93,7 @@ export const CannabisPriorityTypes = (props: Props): ReactElement => {
     } else {
       setEligibiltyPhrase("");
     }
-  }, [userData, Config.cannabisPriorityStatus, Config.cannabisPriorityTypes]);
+  }, [userData, Config.cannabisPriorityStatus]);
 
   const handleNoneOfTheAboveCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (!userData) return;

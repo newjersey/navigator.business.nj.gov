@@ -376,7 +376,7 @@ describe("<CannabisPriorityStatusTask />", () => {
       const randomVeteranType = randomElementFromArray([...priorityTypesObj.veteran]);
 
       const eligibilityPhrase = templateEval(C.phrase1, {
-        type1: Config.cannabisPriorityTypes.minorityWomenOrVeteran,
+        type1: Config.cannabisPriorityStatus.minorityWomenOrVeteran,
       });
 
       expect(screen.queryByText(eligibilityPhrase)).not.toBeInTheDocument();
@@ -394,7 +394,7 @@ describe("<CannabisPriorityStatusTask />", () => {
       const randomImpactZonePriorityType = randomElementFromArray([...priorityTypesObj.impactZone]);
 
       const eligibilityPhrase = templateEval(C.phrase1, {
-        type1: Config.cannabisPriorityTypes.impactZone,
+        type1: Config.cannabisPriorityStatus.impactZone,
       });
 
       expect(screen.queryByText(eligibilityPhrase)).not.toBeInTheDocument();
@@ -410,7 +410,7 @@ describe("<CannabisPriorityStatusTask />", () => {
       const randomSocialEquityPriorityType = randomElementFromArray([...priorityTypesObj.socialEquity]);
 
       const eligibilityPhrase = templateEval(C.phrase1, {
-        type1: Config.cannabisPriorityTypes.socialEquity,
+        type1: Config.cannabisPriorityStatus.socialEquity,
       });
 
       expect(screen.queryByText(eligibilityPhrase)).not.toBeInTheDocument();
@@ -427,8 +427,8 @@ describe("<CannabisPriorityStatusTask />", () => {
       const randomImpactZonePriorityType = randomElementFromArray([...priorityTypesObj.impactZone]);
 
       const eligibilityPhrase = templateEval(C.phrase2, {
-        type1: Config.cannabisPriorityTypes.minorityWomenOrVeteran,
-        type2: Config.cannabisPriorityTypes.impactZone,
+        type1: Config.cannabisPriorityStatus.minorityWomenOrVeteran,
+        type2: Config.cannabisPriorityStatus.impactZone,
       });
 
       expect(screen.queryByText(eligibilityPhrase)).not.toBeInTheDocument();
@@ -447,8 +447,8 @@ describe("<CannabisPriorityStatusTask />", () => {
       const randomSocialEquityPriorityType = randomElementFromArray([...priorityTypesObj.socialEquity]);
 
       const eligibilityPhrase = templateEval(C.phrase2, {
-        type1: Config.cannabisPriorityTypes.minorityWomenOrVeteran,
-        type2: Config.cannabisPriorityTypes.socialEquity,
+        type1: Config.cannabisPriorityStatus.minorityWomenOrVeteran,
+        type2: Config.cannabisPriorityStatus.socialEquity,
       });
 
       expect(screen.queryByText(eligibilityPhrase)).not.toBeInTheDocument();
@@ -468,9 +468,9 @@ describe("<CannabisPriorityStatusTask />", () => {
       const randomImpactZonePriorityType = randomElementFromArray([...priorityTypesObj.impactZone]);
 
       const eligibilityPhrase = templateEval(C.phrase3, {
-        type1: Config.cannabisPriorityTypes.minorityWomenOrVeteran,
-        type2: Config.cannabisPriorityTypes.impactZone,
-        type3: Config.cannabisPriorityTypes.socialEquity,
+        type1: Config.cannabisPriorityStatus.minorityWomenOrVeteran,
+        type2: Config.cannabisPriorityStatus.impactZone,
+        type3: Config.cannabisPriorityStatus.socialEquity,
       });
 
       expect(screen.queryByText(eligibilityPhrase)).not.toBeInTheDocument();

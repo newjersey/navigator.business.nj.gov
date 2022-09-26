@@ -1,5 +1,6 @@
 import * as CannabisLicenseAnnualTab2 from "@businessnjgovnavigator/content/fieldConfig/cannabis-license-annual-tab2.json";
 import * as CannabisLicenseConditionalTab2 from "@businessnjgovnavigator/content/fieldConfig/cannabis-license-conditional-tab2.json";
+import * as CannabisLicenseEligibilityModal from "@businessnjgovnavigator/content/fieldConfig/cannabis-license-eligibility-modal.json";
 import * as CannabisLicenseTab1 from "@businessnjgovnavigator/content/fieldConfig/cannabis-license-tab1.json";
 import * as CannabisPriorityStatusTab1 from "@businessnjgovnavigator/content/fieldConfig/cannabis-priority-status-tab1.json";
 import * as CannabisPriorityStatusTab2 from "@businessnjgovnavigator/content/fieldConfig/cannabis-priority-status-tab2.json";
@@ -27,6 +28,7 @@ import * as ProfileOnboardingDakota from "@businessnjgovnavigator/content/fieldC
 import * as ProfileOnboardingOscar from "@businessnjgovnavigator/content/fieldConfig/profile-onboarding-oscar.json";
 import * as ProfileOnboardingPoppy from "@businessnjgovnavigator/content/fieldConfig/profile-onboarding-poppy.json";
 import * as Tax from "@businessnjgovnavigator/content/fieldConfig/tax.json";
+
 import { merge } from "lodash";
 import { createContext } from "react";
 
@@ -61,7 +63,8 @@ const merged = JSON.parse(
       NexusDbaFormation,
       NaicsCode,
       Ein,
-      Tax
+      Tax,
+      CannabisLicenseEligibilityModal
     )
   )
 );
@@ -94,7 +97,8 @@ export type ConfigType = typeof ConfigOriginal &
   typeof NexusDbaFormation &
   typeof NaicsCode &
   typeof Ein &
-  typeof Tax;
+  typeof Tax &
+  typeof CannabisLicenseEligibilityModal;
 
 export const getMergedConfig = (): ConfigType => {
   return merge(
@@ -126,7 +130,8 @@ export const getMergedConfig = (): ConfigType => {
     NexusDbaFormation,
     NaicsCode,
     Ein,
-    Tax
+    Tax,
+    CannabisLicenseEligibilityModal
   );
 };
 
