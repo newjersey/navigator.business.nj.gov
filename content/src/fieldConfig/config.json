@@ -464,12 +464,6 @@
     "areYouSureTaxContinueButton": "Continue",
     "areYouSureTaxCancelButton": "Cancel"
   },
-  "cannabisEligibilityModal": {
-    "eligibleModalCancelButton": "I'm not sure",
-    "eligibleModalTitle": "Ensure Your Eligibility",
-    "eligibleModalContinueButton": "I am eligible",
-    "eligibleModalBody": "We recommend you first [Determine if You are Eligible for Priority Status](/tasks/priority-status-cannabis) before proceeding."
-  },
   "filingDefaults": {
     "filingFrequency": "Filing Frequency:",
     "lateFilingsMarkdown": "All New Jersey taxes that are filed or paid past the due date, (penalities, interest, and collection fees)[https://www.nj.gov/treasury/taxation/njit19.shtml] may be assessed. If you are filing or paying late, read up on (abatements of penalities)[https://www.state.nj.us/treasury/taxation/abatement-info.shtml].",
@@ -487,11 +481,6 @@
     "onlineRequiredTaxFilingMethod": "Required to file online",
     "additionalInfo": "Disposition of Revenues",
     "filingMethod": "Filing Method:"
-  },
-  "cannabisPriorityTypes": {
-    "minorityWomenOrVeteran": "a `Diversely-Owned Business|diversely-owned-business-cannabis`",
-    "impactZone": "an `Impact Zone Business|impact-zone-business-cannabis`",
-    "socialEquity": "a `Social Equity Business|social-equity-business-cannabis`"
   },
   "onboardingDefaults": {
     "errorTextMinimumNumericField": "Must be ${length} digits long.",
@@ -645,11 +634,6 @@
   "unsupportedNavigatorUserPage": {
     "title": "Chat with a New Jersey Business Representative",
     "subtitle": "It seems like you might have some unique needs, please use our chat feature to get guidance from a New Jersey-based business advocate. Should something change, you can come back and use this tool again later."
-  },
-  "cannabisPriorityStatus": {
-    "phrase1": "It sounds like you're eligible as ${type1}",
-    "phrase2": "It sounds like you're eligible as ${type1} and ${type2}",
-    "phrase3": "It sounds like you're eligible as ${type1}, ${type2}, and ${type3}"
   },
   "headerDefaults": {
     "noUserNameHeaderText": "Hello!",

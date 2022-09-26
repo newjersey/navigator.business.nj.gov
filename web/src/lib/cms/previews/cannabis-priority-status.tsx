@@ -1,7 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { Content } from "@/components/Content";
+import { Alert } from "@/components/njwds-extended/Alert";
 import { CannabisPriorityStatusTask } from "@/components/tasks/cannabis/CannabisPriorityStatusTask";
 import { ConfigContext, ConfigType, getMergedConfig } from "@/contexts/configContext";
 import { getMetadataFromSlug } from "@/lib/cms/previews/preview-helpers";
+import { templateEval } from "@/lib/utils/helpers";
 import { generateTask } from "@/test/factories";
 import { merge } from "lodash";
 import { useEffect, useRef, useState } from "react";
@@ -35,6 +38,12 @@ const CannabisPriorityStatusPreview = (props: Props) => {
 
   const { tab } = getMetadataFromSlug(props.entry.toJS().slug);
 
+  const priorityStatusTypes = {
+    type1: data.cannabisPriorityStatus.minorityWomenOrVeteran,
+    type2: data.cannabisPriorityStatus.impactZone,
+    type3: data.cannabisPriorityStatus.socialEquity,
+  };
+
   return (
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
       <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
@@ -42,6 +51,25 @@ const CannabisPriorityStatusPreview = (props: Props) => {
           task={generateTask({ name: "Name is controlled by Task Metadata" })}
           CMS_ONLY_tab={tab}
         />
+
+        {tab === "1" && (
+          <>
+            <hr className="margin-y-4" />
+            <h2>Priority Status Types</h2>
+
+            <Alert variant="info">
+              <Content>{templateEval(data.cannabisPriorityStatus.phrase1, priorityStatusTypes)}</Content>
+            </Alert>
+
+            <Alert variant="info">
+              <Content>{templateEval(data.cannabisPriorityStatus.phrase2, priorityStatusTypes)}</Content>
+            </Alert>
+
+            <Alert variant="info">
+              <Content>{templateEval(data.cannabisPriorityStatus.phrase3, priorityStatusTypes)}</Content>
+            </Alert>
+          </>
+        )}
       </div>
     </ConfigContext.Provider>
   );
