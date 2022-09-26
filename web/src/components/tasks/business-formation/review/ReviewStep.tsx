@@ -1,3 +1,5 @@
+import { Content } from "@/components/Content";
+import { Alert } from "@/components/njwds-extended/Alert";
 import { BusinessNameAndLegalStructure } from "@/components/tasks/business-formation/business/BusinessNameAndLegalStructure";
 import { ReviewBillingContact } from "@/components/tasks/business-formation/review/ReviewBillingContact";
 import { ReviewBillingServices } from "@/components/tasks/business-formation/review/ReviewBillingServices";
@@ -10,11 +12,13 @@ import { ReviewRegisteredAgent } from "@/components/tasks/business-formation/rev
 import { ReviewSignatures } from "@/components/tasks/business-formation/review/ReviewSignatures";
 import { ReviewText } from "@/components/tasks/business-formation/review/ReviewText";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
+import { useConfig } from "@/lib/data-hooks/useConfig";
+import analytics from "@/lib/utils/analytics";
 import { ReactElement, useContext } from "react";
 
 export const ReviewStep = (): ReactElement => {
   const { state } = useContext(BusinessFormationContext);
+  const { Config } = useConfig();
 
   const isLP = state.legalStructureId == "limited-partnership";
   const hasProvisions = state.formationFormData.provisions.length > 0;
@@ -62,6 +66,12 @@ export const ReviewStep = (): ReactElement => {
         <ReviewSignatures />
         <ReviewBillingContact />
         <ReviewBillingServices />
+        <hr className="margin-y-205" />
+        <Alert variant="info">
+          <Content onClick={() => analytics.event.business_formation_review_amendments_external_link}>
+            {Config.businessFormationDefaults.reviewPageAmendmentText}
+          </Content>
+        </Alert>
       </div>
     </>
   );

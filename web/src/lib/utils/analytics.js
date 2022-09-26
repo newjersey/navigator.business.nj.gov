@@ -702,5 +702,27 @@ export default {
           sendEvent("tax_registration_modal", "submit", "tax_registration_status_set_to_complete"),
       },
     },
+    business_formation_review_amendments_external_link: {
+      click: {
+        go_to_Treasury_amendments_page: () => {
+          sendEvent(
+            "business_formation_review_amendments_external_link",
+            "click",
+            "go_to_Treasury_amendments_page"
+          );
+        },
+      },
+    },
+    business_formation_success_amendments_external_link: {
+      click: {
+        go_to_Treasury_amendments_page: () => {
+          sendEvent(
+            "business_formation_success_amendments_external_link",
+            "click",
+            "go_to_Treasury_amendments_page"
+          );
+        },
+      },
+    },
   },
 };

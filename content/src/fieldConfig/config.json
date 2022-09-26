@@ -285,7 +285,9 @@
     "addressModalBackButtonText": "Cancel",
     "paymentTypeErrorMessage": "Select a payment method.",
     "reviewStepContactFirstName": "First Name",
-    "provisionsAddAnotherButtonText": "Add a Provision"
+    "provisionsAddAnotherButtonText": "Add a Provision",
+    "reviewPageAmendmentText": "#### Make sure everything is accurate before submitting. \n\n If you need to make a change after submitting, you will need to file a [paper amendment](https://www.nj.gov/treasury/).",
+    "successPageAmendmentText": "**Made a mistake?** Submit a [paper amendment](https://www.nj.gov/treasury/)."
   },
   "selfRegistration": {
     "errorTextGeneric": "Something went wrong, please try again later.",

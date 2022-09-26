@@ -1,3 +1,4 @@
+import { Content } from "@/components/Content";
 import { FormationSuccessDocument } from "@/components/tasks/business-formation/success/FormationSuccessDocument";
 import { useDocuments } from "@/lib/data-hooks/useDocuments";
 import analytics from "@/lib/utils/analytics";
@@ -58,6 +59,11 @@ export const FormationSuccessPage = (props: Props): ReactElement => {
         {Config.businessFormationDefaults.confirmationNumberLabel}
         <span>{props.userData.formationData.getFilingResponse?.confirmationNumber}</span>
       </p>
+      <div className="text-center">
+        <Content onClick={() => analytics.event.business_formation_success_amendments_external_link}>
+          {Config.businessFormationDefaults.successPageAmendmentText}
+        </Content>
+      </div>
     </>
   );
 };

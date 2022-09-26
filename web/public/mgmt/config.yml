@@ -2268,6 +2268,12 @@ collections:
                   widget: string,
                   hint: This field supports Markdown,
                 }
+              - {
+                  label: Review Step - Paper Amendment Info Text,
+                  name: reviewPageAmendmentText,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
               - { label: Review Step - Not Entered Text, name: reviewStepNotEnteredText, widget: string }
               - { label: Same Agent Info As Account, name: sameAgentInfoAsAccount, widget: string }
               - { label: Same Agent Address As Business, name: sameAgentAddressAsBusiness, widget: string }
@@ -2297,6 +2303,12 @@ collections:
                   label: Success Page - API Call Failed Alert Message,
                   name: getFilingApiErrorText,
                   widget: markdown,
+                }
+              - {
+                  label: Success Page - Paper Amendment Text,
+                  name: successPageAmendmentText,
+                  widget: string,
+                  hint: supports markdown,
                 }
               - { label: Update your Profile text, name: updateYourProfileLinkText, widget: string }
               - label: Required Fields Labels (for error alert box)
