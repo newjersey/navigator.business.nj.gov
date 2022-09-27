@@ -24,6 +24,7 @@ sector:
   - accommodation-and-food-services
   - agriculture-forestry-fishing-and-hunting
   - arts-entertainment-and-recreation
+  - other-services
 openDate: 07/25/2022
 dueDate: 10/31/2022
 ---
