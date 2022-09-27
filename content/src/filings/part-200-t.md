@@ -11,14 +11,7 @@ taxRates: >-
 
 
   The installment payments will be credited to the accounts of the nonresident partners in proportion to their share of ownership.
-filingDetails: >-
-  Partnerships subject to the provisions of the Corporation Business Tax Act
-  (that is partnerships that remit tax based on any nonresident partner’s
-  allowable share of NJ partnership income) must file all their returns
-  electronically, even when using the services of a paid preparer.
-
-
-  Payments of the partnership liabilities along with the submission of payment-related returns (NJ-1065-V and PART-200-T) must also be made electronically either by the partnership or by a paid tax preparer. Partnerships with 10 or more partners must file all returns electronically.
+filingDetails: ""
 agency: New Jersey Division of Taxation
 additionalInfo: null
 urlSlug: part-200-t
@@ -28,7 +21,7 @@ frequency: >-
   Annually
 
 
-  Part-200-T extension requests, along with payment, can be filed online until 11:59 p.m. on or before the original due date of the return.
+  *Part-200-T extension requests, along with payment, can be filed online until 11:59 p.m. on or before the original due date of the return.*
 filingMethod: online-required
 treasuryLink: https://www.nj.gov/treasury/taxation/businesses/partnerships/index.shtml
 extension: true
