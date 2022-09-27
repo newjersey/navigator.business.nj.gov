@@ -33,7 +33,7 @@ The Electric Vehicle (EV) Tourism Program is offering incentives to promote elec
 
 ### Eligibility
 
-Selection for participation in the EV Tourism Program will be based on the recommendations of a review committee comprised of board staff. The Review Committee evaluate and score each application based on answers provided in the application. The scoring criteria worksheet is publicly available. Applicants may use this scoring criteria to guide the development of their application, as some items may be weighted more heavily than others.
+Eligible applicant include, but are not limited to those situated in locations which offer amusement, arts, culture, attractions, dining, entertainment, history, outdoor recreation, overnight lodging, and shopping.
 
 > ### Benefit
 >
