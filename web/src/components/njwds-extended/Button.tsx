@@ -5,6 +5,7 @@ interface Props {
     | "primary"
     | "secondary"
     | "secondary-blue"
+    | "secondary-blue-narrow"
     | "light"
     | "narrow-accent-cool-lightest"
     | "tertiary"
@@ -47,6 +48,10 @@ export const Button = (props: Props): ReactElement => {
       break;
     case "secondary-blue":
       style = "usa-button usa-button--secondary height-6 text-normal";
+      disabledClass = "usa-button--secondary-disabled";
+      break;
+    case "secondary-blue-narrow":
+      style = "usa-button usa-button--secondary text-normal";
       disabledClass = "usa-button--secondary-disabled";
       break;
     case "light":
