@@ -1,4 +1,4 @@
-import { getCurrentDate, parseDateWithFormat, TaxFiling } from "@businessnjgovnavigator/shared/";
+import { getCurrentDate, parseDateWithFormat, TaxFiling } from "@businessnjgovnavigator/shared";
 
 export const sortFilingsEarliestToLatest = (filings: TaxFiling[]): TaxFiling[] => {
   return filings.sort((a, b) =>

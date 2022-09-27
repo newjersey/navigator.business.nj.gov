@@ -1392,32 +1392,33 @@ collections:
     editor:
       preview: true
     fields:
-      - { label: "Content", name: "body", widget: "markdown" }
       - { label: "Url Slug / Filename", name: "urlSlug", widget: "slug" }
       - { label: "Name", name: "name", widget: "string" }
-      - { label: "Id", name: "id", widget: "string" }
-      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
-      - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
-      - { label: "Description", name: "description", widget: "markdown", required: false }
-      - { label: "Frequency", name: "frequency", widget: "markdown", required: false }
       - { label: "Extension", name: "extension", widget: "boolean", required: false }
+      - { label: "Content", name: "body", widget: "markdown" }
+      - { label: "Learn More Link", name: "treasuryLink", widget: "string", required: false }
       - { label: "Tax Rates", name: "taxRates", widget: "markdown", required: false }
-
       - {
           label: "Filing Method",
           name: "filingMethod",
           widget: "select",
           required: false,
-          options:
-            ["online", "paper-or-by-mail-only", "online-required", "technical assistance", "online-or-phone"],
+          options: ["online", "paper-or-by-mail-only", "online-required", "online-or-phone"],
         }
       - { label: "Filing Details", name: "filingDetails", widget: "markdown", required: false }
-      - label: "Agency"
-        name: "agency"
-        widget: "select"
-        # multiple: true
-        options: ["New Jersey Division of Taxation"]
-        required: false
+      - { label: "Frequency", name: "frequency", widget: "markdown", required: false }
+      - { label: "Disposition Content", name: "additionalInfo", widget: "markdown", required: false }
+      - {
+          label: "Agency",
+          name: "agency",
+          widget: "select",
+          options:
+            ["New Jersey Division of Taxation", "Internal Revenue Service (IRS)", "NJ Department of Labor"],
+          required: false,
+        }
+      - { label: "Form Id", name: "id", widget: "string" }
+      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
+      - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
 
   - name: "dashboard-settings"
     label: "Dashboard Settings"
@@ -2617,11 +2618,6 @@ collections:
               - {
                   label: Paper or Mail Only Method Text,
                   name: paperOrMailOnlyTaxFilingMethod,
-                  widget: string,
-                }
-              - {
-                  label: Technical Assistance Method Text,
-                  name: technicalAssistanceTaxFilingMethod,
                   widget: string,
                 }
               - { label: Online or Phone Method Text, name: onlineOrPhoneTaxFilingMethod, widget: string }

@@ -4,7 +4,7 @@ import FilingPage from "@/pages/filings/[filingUrlSlug]";
 import { generateProfileData, generateTaxFiling, generateTaxFilingData } from "@/test/factories";
 import { randomElementFromArray } from "@/test/helpers";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
-import { randomInt } from "@businessnjgovnavigator/shared";
+import { getCurrentDate, randomInt } from "@businessnjgovnavigator/shared";
 import { fireEvent, render, screen } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -18,7 +18,7 @@ describe("filing page", () => {
   const generateFiling = (overrides: Partial<Filing>): Filing => {
     const id = randomInt(4);
     return {
-      id: `filing-identifier-${id}`,
+      id: `id identifier ${id}`,
       filename: `filename-${id}`,
       name: `filing-name-${id}`,
       urlSlug: `url-slug-${id}`,
@@ -49,10 +49,10 @@ describe("filing page", () => {
     });
 
     const filing = generateFiling({
-      id: "filing-identifier-1",
+      urlSlug: "filing-identifier-1",
+      id: "filing id 1",
       filename: "filename-1",
       name: "filing-name-1",
-      urlSlug: "url-slug-1",
       callToActionLink: "cta-link-1",
       callToActionText: "cta-text-1",
       contentMd: "content-1",
@@ -69,7 +69,7 @@ describe("filing page", () => {
     expect(screen.getByText("filing-name-1")).toBeInTheDocument();
     expect(screen.getByText("cta-text-1")).toBeInTheDocument();
     expect(screen.getByText("content-1")).toBeInTheDocument();
-    expect(screen.getByText("filing-identifier-1")).toBeInTheDocument();
+    expect(screen.getByText("filing id 1")).toBeInTheDocument();
     expect(screen.getByTestId("due-date")).toHaveTextContent("APRIL 30, 2022");
     expect(screen.queryByTestId("filing-method")).not.toBeInTheDocument();
     expect(screen.queryByTestId("filing-details")).not.toBeInTheDocument();
@@ -84,18 +84,12 @@ describe("filing page", () => {
     useMockUserData({
       profileData: generateProfileData({ entityId: "1234567890" }),
       taxFilingData: generateTaxFilingData({
-        filings: [
-          generateTaxFiling({}),
-          generateTaxFiling({ identifier: "filing-identifier-1", dueDate: "2022-04-30" }),
-        ],
+        filings: [generateTaxFiling({}), generateTaxFiling({ identifier: "filing-identifier-1" })],
       }),
     });
 
     const filing: Filing = generateFiling({
-      id: "filing-identifier-1",
-      name: "filing-name-1",
-      callToActionText: "cta-text-1",
-      contentMd: "content-1",
+      urlSlug: "filing-identifier-1",
       extension: true,
       filingMethod: "paper-or-by-mail-only",
       frequency: "every day, all day",
@@ -108,11 +102,6 @@ describe("filing page", () => {
 
     render(<FilingPage filing={filing} operateReferences={{}} />);
 
-    expect(screen.getByText("filing-name-1")).toBeInTheDocument();
-    expect(screen.getByText("cta-text-1")).toBeInTheDocument();
-    expect(screen.getByText("content-1")).toBeInTheDocument();
-    expect(screen.getByText("filing-identifier-1")).toBeInTheDocument();
-    expect(screen.getByTestId("due-date")).toHaveTextContent("APRIL 30, 2022");
     expect(screen.getByText(Config.filingDefaults.paperOrMailOnlyTaxFilingMethod)).toBeInTheDocument();
     expect(screen.getByText("every day, all day")).toBeInTheDocument();
     expect(screen.getByText("please file this way")).toBeInTheDocument();
@@ -123,5 +112,74 @@ describe("filing page", () => {
     fireEvent.click(screen.getByText(Config.filingDefaults.additionalInfo));
     expect(screen.getByText("additional info stuff")).toBeVisible();
     expect(screen.getByText("New Jersey Division of Taxation")).toBeInTheDocument();
+    expect(screen.getByTestId("late-filing")).toBeInTheDocument();
+  });
+
+  it("hides late filing content when not New Jersey Division of Taxation", () => {
+    useMockUserData({
+      profileData: generateProfileData({ entityId: "1234567890" }),
+      taxFilingData: generateTaxFilingData({
+        filings: [generateTaxFiling({}), generateTaxFiling({ identifier: "filing-identifier-1" })],
+      }),
+    });
+
+    const filing: Filing = generateFiling({
+      urlSlug: "filing-identifier-1",
+      agency: "Internal Revenue Service (IRS)",
+    });
+
+    render(<FilingPage filing={filing} operateReferences={{}} />);
+    expect(screen.queryByTestId("late-filing")).not.toBeInTheDocument();
+  });
+
+  it("returns the most recent tax deadline date", () => {
+    const closestDate = getCurrentDate().add(1, "day");
+
+    useMockUserData({
+      profileData: generateProfileData({ entityId: "1234567890" }),
+      taxFilingData: generateTaxFilingData({
+        filings: [
+          generateTaxFiling({
+            identifier: "filing-identifier-1",
+            dueDate: getCurrentDate().add(2, "month").format("YYYY-MM-DD"),
+          }),
+          generateTaxFiling({
+            identifier: "filing-identifier-1",
+            dueDate: getCurrentDate().add(3, "month").format("YYYY-MM-DD"),
+          }),
+          generateTaxFiling({
+            identifier: "filing-identifier-1",
+            dueDate: getCurrentDate().add(8, "month").format("YYYY-MM-DD"),
+          }),
+          generateTaxFiling({
+            identifier: "filing-identifier-1",
+            dueDate: getCurrentDate().add(1, "month").format("YYYY-MM-DD"),
+          }),
+          generateTaxFiling({ identifier: "filing-identifier-1", dueDate: closestDate.format("YYYY-MM-DD") }),
+          generateTaxFiling({
+            identifier: "filing-identifier-1",
+            dueDate: getCurrentDate().add(7, "month").format("YYYY-MM-DD"),
+          }),
+          generateTaxFiling({
+            identifier: "filing-identifier-1",
+            dueDate: getCurrentDate().add(4, "month").format("YYYY-MM-DD"),
+          }),
+          generateTaxFiling({
+            identifier: "filing-identifier-1",
+            dueDate: getCurrentDate().add(6, "month").format("YYYY-MM-DD"),
+          }),
+        ],
+      }),
+    });
+
+    const filing: Filing = generateFiling({
+      urlSlug: "filing-identifier-1",
+      agency: "Internal Revenue Service (IRS)",
+    });
+
+    render(<FilingPage filing={filing} operateReferences={{}} />);
+    expect(screen.getByTestId("due-date")).toHaveTextContent(
+      closestDate.format("MMMM D, YYYY").toUpperCase()
+    );
   });
 });
