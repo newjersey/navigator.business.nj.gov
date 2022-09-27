@@ -33,12 +33,10 @@ filingMethod: online-required
 treasuryLink: https://www.nj.gov/treasury/taxation/businesses/partnerships/index.shtml
 extension: true
 ---
-
 This is a tax on businesses that have elected a form of partnership (i.e. limited liability partnership) as their legal structure. Income and gains derived from a partnership are taxed whether or not they are actually distributed among the partners.
 
-This form provides an extension of up to 5 months to file Form NJ-1065.
+This form provides an extension of up to five months to file form NJ-1065.
 
 To be eligible for an extension, you must have paid at least 80% of the amount due by the original due date of your return, either through an installment payment or a payment made with this form. If the 80% requirement is not met or you do not file form NJ-1065 by the extended due date, the extension will be denied.
-
 
 Penalty and interest charges will be imposed from the original due date of the return.
