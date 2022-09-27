@@ -57,7 +57,9 @@ export const FormationSuccessPage = (props: Props): ReactElement => {
 
       <p className="text-center font-body-2xs">
         {Config.businessFormationDefaults.confirmationNumberLabel}
-        <span>{props.userData.formationData.getFilingResponse?.confirmationNumber}</span>
+        <span className="margin-left-05">
+          {props.userData.formationData.getFilingResponse?.confirmationNumber}
+        </span>
       </p>
       <div className="text-center">
         <Content onClick={() => analytics.event.business_formation_success_amendments_external_link}>
