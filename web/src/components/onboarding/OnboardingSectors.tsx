@@ -1,10 +1,8 @@
-import { Content } from "@/components/Content";
 import { MenuOptionSelected } from "@/components/MenuOptionSelected";
 import { MenuOptionUnselected } from "@/components/MenuOptionUnselected";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
-import { setHeaderRole } from "@/lib/utils/helpers";
 import { arrayOfSectors as sectors, LookupSectorTypeById, SectorType } from "@businessnjgovnavigator/shared/";
 import { Autocomplete, TextField } from "@mui/material";
 import { orderBy } from "lodash";
@@ -13,10 +11,9 @@ import React, { ChangeEvent, ReactElement, useContext, useState } from "react";
 interface Props {
   onValidation: (field: ProfileFields, invalid: boolean) => void;
   fieldStates: ProfileFieldErrorMap;
-  headerAriaLevel?: number;
 }
 
-export const OnboardingSectors = ({ headerAriaLevel = 2, ...props }: Props): ReactElement => {
+export const OnboardingSectors = (props: Props): ReactElement => {
   const [searchText, setSearchText] = useState<string>("");
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { Config } = useConfig();
@@ -24,8 +21,6 @@ export const OnboardingSectors = ({ headerAriaLevel = 2, ...props }: Props): Rea
   const SectorsOrdered: SectorType[] = orderBy(sectors, (SectorType: SectorType) => {
     return SectorType.name;
   });
-
-  const headerLevelTwo = setHeaderRole(headerAriaLevel, "h3-styling");
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setSearchText(event.target.value);
@@ -51,12 +46,6 @@ export const OnboardingSectors = ({ headerAriaLevel = 2, ...props }: Props): Rea
 
   return (
     <>
-      <Content overrides={{ h2: headerLevelTwo }}>
-        {Config.profileDefaults[state.flow].sectorId.header}
-      </Content>
-      <Content overrides={{ h2: headerLevelTwo }}>
-        {Config.profileDefaults[state.flow].sectorId.description}
-      </Content>
       <div className="form-input margin-top-2">
         <Autocomplete
           id="sectorId"

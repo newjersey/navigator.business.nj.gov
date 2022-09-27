@@ -13,8 +13,8 @@
           "sole-proprietorship": ""
         }
       },
-      "foreignBusinessType": {
-        "header": "## Out-of-State Businesses",
+      "foreignBusinessTypeIds": {
+        "header": "Out-of-State Businesses",
         "description": "Which of the following are **true** about your business? **Select all that apply.**",
         "errorTextRequired": "Please make a selection",
         "optionContent": {
@@ -28,8 +28,8 @@
         "REMOTE_SELLER": "It sounds like you're a `Remote Seller|remote-seller` .",
         "NEXUS": "It sounds like you’re a `Nexus Business|nexus-business` ."
       },
-      "locationInNewJersey": {
-        "header": "## Will you own or lease space in New Jersey?",
+      "nexusLocationInNewJersey": {
+        "header": "Will you own or lease space in New Jersey?",
         "description": "",
         "errorTextRequired": "Please select whether you will have a New Jersey location",
         "radioButtonYesText": "Yes, I will own or lease space in New Jersey",

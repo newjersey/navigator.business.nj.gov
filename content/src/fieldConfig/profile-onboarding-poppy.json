@@ -1,7 +1,7 @@
 {
   "profileDefaults": {
     "businessPersona": {
-      "header": "## Business Status",
+      "header": "Business Status",
       "radioButtonStartingText": "Starting a New Jersey-based business",
       "radioButtonOwningText": "A New Jersey business already up and running",
       "radioButtonForeignText": "An out-of-state business",
@@ -21,7 +21,7 @@
           "sole-proprietorship": "In a sole proprietorship you alone own the company and are responsible for its assets and liabilities. [Learn more](https://business.nj.gov/pages/sole-proprietorship)"
         }
       },
-      "foreignBusinessType": {
+      "foreignBusinessTypeIds": {
         "header": "",
         "description": "",
         "errorTextRequired": "",
@@ -36,7 +36,7 @@
         "REMOTE_SELLER": "",
         "NEXUS": ""
       },
-      "locationInNewJersey": {
+      "nexusLocationInNewJersey": {
         "header": "",
         "description": "",
         "errorTextRequired": "",

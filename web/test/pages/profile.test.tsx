@@ -1051,7 +1051,6 @@ describe("profile", () => {
         expect(
           screen.getByText(markdownToText(Config.profileDefaults.FOREIGN.nexusDbaName.header))
         ).toBeInTheDocument();
-        expect(screen.getByTestId("onboardingFieldContent-nexusDbaName")).toBeInTheDocument();
       });
 
       it("doesn't display the user's dba name if they don't have one", () => {
@@ -1065,7 +1064,6 @@ describe("profile", () => {
         expect(
           screen.queryByText(Config.profileDefaults.FOREIGN.nexusDbaName.header)
         ).not.toBeInTheDocument();
-        expect(screen.queryByTestId("onboardingFieldContent-nexusDbaName")).not.toBeInTheDocument();
       });
     });
   });

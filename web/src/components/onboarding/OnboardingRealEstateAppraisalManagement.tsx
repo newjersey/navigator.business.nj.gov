@@ -1,4 +1,3 @@
-import { Content } from "@/components/Content";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
@@ -19,10 +18,6 @@ export const OnboardingRealEstateAppraisalManagement = (): ReactElement => {
 
   return (
     <>
-      <div className="margin-bottom-2">
-        <Content>{Config.profileDefaults[state.flow].realEstateAppraisalManagement.header}</Content>
-      </div>
-      <Content>{Config.profileDefaults[state.flow].realEstateAppraisalManagement.description}</Content>
       <FormControl variant="outlined" fullWidth>
         <RadioGroup
           aria-label="Real Estate Appraisal Management"

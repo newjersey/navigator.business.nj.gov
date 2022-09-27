@@ -1,9 +1,10 @@
 import { Content } from "@/components/Content";
+import { FieldLabelProfile } from "@/components/onboarding/FieldLabelProfile";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { lookupNaicsCode } from "@/lib/domain-logic/lookupNaicsCode";
-import { getFlow, getTaskFromRoadmap, setHeaderRole } from "@/lib/utils/helpers";
+import { getFlow, getTaskFromRoadmap } from "@/lib/utils/helpers";
 import { ReactElement, useContext, useMemo } from "react";
 
 export const ProfileNaicsCode = (): ReactElement => {
@@ -19,9 +20,7 @@ export const ProfileNaicsCode = (): ReactElement => {
   return (
     <>
       <div className="flex flex-row">
-        <Content overrides={{ h2: setHeaderRole(3, "h3-styling") }}>
-          {Config.profileDefaults[getFlow(state.profileData)].naicsCode.header}
-        </Content>
+        <FieldLabelProfile fieldName="naicsCode" />
         <a className="margin-left-2" href={naicsTaskUrl}>
           {Config.profileDefaults[getFlow(state.profileData)].naicsCode.editText}
         </a>

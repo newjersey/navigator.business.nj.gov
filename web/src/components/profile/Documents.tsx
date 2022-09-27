@@ -24,10 +24,7 @@ export const Documents = (props: Props): ReactElement => {
   );
 
   return (
-    <div className="margin-top-4 margin-bottom-6">
-      <div className="margin-bottom-2" data-testid={`profileContent-documents`}>
-        <Content>{Config.profileDefaults[state.flow].documents.header}</Content>
-      </div>
+    <div className="margin-bottom-6" data-testid={`profileContent-documents`}>
       {listOfDocuments.some((value) => !!value) ? (
         <ol className="padding-left-3 padding-top-1">
           {userData?.profileData.documents.formationDoc ? (

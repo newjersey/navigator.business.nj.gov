@@ -213,7 +213,7 @@ describe("<TaskProgressCheckbox />", () => {
           screen.getByText(markdownToText(Config.profileDefaults.STARTING.existingEmployees.header))
         ).toBeInTheDocument();
         expect(
-          screen.getByText(markdownToText(Config.profileDefaults.STARTING.ownership.header))
+          screen.getByText(markdownToText(Config.profileDefaults.STARTING.ownershipTypeIds.header))
         ).toBeInTheDocument();
       });
 
@@ -263,7 +263,7 @@ describe("<TaskProgressCheckbox />", () => {
           screen.getByText(markdownToText(Config.profileDefaults.STARTING.existingEmployees.header))
         ).toBeInTheDocument();
         expect(
-          screen.getByText(markdownToText(Config.profileDefaults.STARTING.ownership.header))
+          screen.getByText(markdownToText(Config.profileDefaults.STARTING.ownershipTypeIds.header))
         ).toBeInTheDocument();
       });
 

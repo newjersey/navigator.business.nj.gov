@@ -1,9 +1,7 @@
-import { Content } from "@/components/Content";
 import { MenuOptionSelected } from "@/components/MenuOptionSelected";
 import { MenuOptionUnselected } from "@/components/MenuOptionUnselected";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { setHeaderRole } from "@/lib/utils/helpers";
 import { LegalStructure, LegalStructures, LookupLegalStructureById } from "@businessnjgovnavigator/shared/";
 import { FormControl, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import { orderBy } from "lodash";
@@ -57,16 +55,8 @@ export const OnboardingLegalStructureDropdown = (props: Props): ReactElement => 
     return <>{LookupLegalStructureById(value as string).name}</>;
   };
 
-  const headerLevelTwo = setHeaderRole(2, "h3-styling");
-
   return (
     <>
-      <Content overrides={{ h2: headerLevelTwo }}>
-        {Config.profileDefaults[state.flow].legalStructureId.header}
-      </Content>
-      <Content overrides={{ h2: headerLevelTwo }}>
-        {Config.profileDefaults[state.flow].legalStructureId.description}
-      </Content>
       <div className="form-input margin-top-2">
         <FormControl variant="outlined" fullWidth>
           <Select

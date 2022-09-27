@@ -1,5 +1,6 @@
 import { Content } from "@/components/Content";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
+import { FieldLabelModal } from "@/components/onboarding/FieldLabelModal";
 import { OnboardingSectors } from "@/components/onboarding/OnboardingSectors";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -74,7 +75,8 @@ export const SectorModal = (props: Props): ReactElement => {
           <Content>{Config.dashboardDefaults.sectorModalBody}</Content>
           <FormControl fullWidth={true}>
             <div className="margin-top-2">
-              <OnboardingSectors onValidation={onValidation} fieldStates={fieldStates} headerAriaLevel={3} />
+              <FieldLabelModal fieldName="sectorId" />
+              <OnboardingSectors onValidation={onValidation} fieldStates={fieldStates} />
             </div>
           </FormControl>
         </div>

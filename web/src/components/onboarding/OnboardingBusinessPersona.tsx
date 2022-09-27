@@ -1,7 +1,6 @@
 import { Content } from "@/components/Content";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { setHeaderRole } from "@/lib/utils/helpers";
 import { BusinessPersona } from "@businessnjgovnavigator/shared/";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import React, { ReactElement, useContext } from "react";
@@ -17,12 +16,12 @@ export const OnboardingBusinessPersona = (): ReactElement => {
     });
   };
 
-  const header = setHeaderRole(2, "h3-styling");
-
   return (
     <>
-      <Content overrides={{ h2: header }}>{Config.profileDefaults.businessPersona.header}</Content>
-      <Content overrides={{ h2: header }}>{Config.profileDefaults.businessPersona.description}</Content>
+      <div role="heading" aria-level={2} className="h3-styling margin-bottom-2">
+        {Config.profileDefaults.businessPersona.header}
+      </div>
+      <Content>{Config.profileDefaults.businessPersona.description}</Content>
       <FormControl fullWidth>
         <RadioGroup
           aria-label="Business Persona"

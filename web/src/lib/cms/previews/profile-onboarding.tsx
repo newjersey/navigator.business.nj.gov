@@ -67,13 +67,13 @@ const ProfilePreviewOnboarding = (props: Props) => {
             <>
               <OnboardingForeignBusinessType />
               <Alert variant="info">
-                <Content>{config.profileDefaults.FOREIGN.foreignBusinessType.REMOTE_SELLER}</Content>
+                <Content>{config.profileDefaults.FOREIGN.foreignBusinessTypeIds.REMOTE_SELLER}</Content>
               </Alert>
               <Alert variant="info">
-                <Content>{config.profileDefaults.FOREIGN.foreignBusinessType.REMOTE_WORKER}</Content>
+                <Content>{config.profileDefaults.FOREIGN.foreignBusinessTypeIds.REMOTE_WORKER}</Content>
               </Alert>
               <Alert variant="info">
-                <Content>{config.profileDefaults.FOREIGN.foreignBusinessType.NEXUS}</Content>
+                <Content>{config.profileDefaults.FOREIGN.foreignBusinessTypeIds.NEXUS}</Content>
               </Alert>
 
               <hr className="margin-y-4" />

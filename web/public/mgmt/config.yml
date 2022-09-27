@@ -1,7 +1,7 @@
 backend:
   name: github
   repo: newjersey/navigator.business.nj.gov
-  branch: content-repo
+  branch: refactor-onboarding-labels
   base_url: https://0szgd6wmlk.execute-api.us-east-1.amazonaws.com
   auth_endpoint: /dev/api/cms/auth
   use_graphql: true
@@ -3145,7 +3145,7 @@ collections:
                       - { label: "Error Text (when not set)", name: "errorTextRequired", widget: "string" }
                       - { label: "Description", name: "description", widget: "markdown" }
                   - label: Business Ownership
-                    name: "ownership"
+                    name: "ownershipTypeIds"
                     collapsed: true
                     widget: object
                     fields:
@@ -3233,7 +3233,7 @@ collections:
                         }
                       - { label: "Description", name: "description", widget: "markdown" }
                   - label: Ownership
-                    name: ownership
+                    name: ownershipTypeIds
                     collapsed: true
                     widget: object
                     fields:
@@ -3631,10 +3631,9 @@ collections:
                 widget: object
                 fields:
                   - label: Cannabis License
-                    name: cannabisLicense
+                    name: cannabisLicenseType
                     collapsed: true
                     widget: object
-                    summary: "{{cannabisLicense}}"
                     fields:
                       - { label: "Header", name: "header", widget: "string" }
                       - { label: "Radio Button Annual Text", name: "radioButtonAnnualText", widget: "string" }
@@ -3648,17 +3647,15 @@ collections:
                     name: certifiedInteriorDesigner
                     collapsed: true
                     widget: object
-                    summary: "{{certifiedInteriorDesigner}}"
                     fields:
                       - { label: "Header", name: "header", widget: "string" }
                       - { label: "Radio Button Yes Text", name: "radioButtonYesText", widget: "string" }
                       - { label: "Radio Button No Text", name: "radioButtonNoText", widget: "string" }
                       - { label: "Description", name: "description", widget: "markdown" }
                   - label: CPA
-                    name: cpa
+                    name: requiresCpa
                     collapsed: true
                     widget: object
-                    summary: "{{cpa}}"
                     fields:
                       - { label: "Header", name: "header", widget: "string" }
                       - { label: "Radio Button Yes Text", name: "radioButtonYesText", widget: "string" }
@@ -3668,14 +3665,12 @@ collections:
                     name: employmentAgency
                     collapsed: true
                     widget: object
-                    summary: "{{employmentAgency}}"
                     fields:
                       - { label: "Description", name: "description", widget: "markdown" }
                   - label: Home-Based Business
-                    name: "homeBased"
+                    name: "homeBasedBusiness"
                     collapsed: true
                     widget: object
-                    summary: "{{homeBased}}"
                     fields:
                       - { label: "Header", name: "header", widget: "string" }
                       - { label: "Radio Button Yes Text", name: "radioButtonYesText", widget: "string" }
@@ -3685,14 +3680,12 @@ collections:
                     name: homeContractor
                     collapsed: true
                     widget: object
-                    summary: "{{homeContractor}}"
                     fields:
                       - { label: "Description", name: "description", widget: "markdown" }
                   - label: Liquor License
                     name: liquorLicense
                     collapsed: true
                     widget: object
-                    summary: "{{liquorLicense}}"
                     fields:
                       - { label: "Header", name: "header", widget: "string" }
                       - { label: "Radio Button Yes Text", name: "radioButtonYesText", widget: "string" }
@@ -3702,17 +3695,15 @@ collections:
                     name: realEstateAppraisalManagement
                     collapsed: true
                     widget: object
-                    summary: "{{realEstateAppraisalManagement}}"
                     fields:
                       - { label: "Header", name: "header", widget: "string" }
                       - { label: "Radio Button Yes Text", name: "radioButtonYesText", widget: "string" }
                       - { label: "Radio Button No Text", name: "radioButtonNoText", widget: "string" }
                       - { label: "Description", name: "description", widget: "markdown" }
                   - label: Staffing Service
-                    name: staffingService
+                    name: providesStaffingService
                     collapsed: true
                     widget: object
-                    summary: "{{staffingService}}"
                     fields:
                       - { label: "Header", name: "header", widget: "string" }
                       - { label: "Radio Button Yes Text", name: "radioButtonYesText", widget: "string" }
@@ -3736,10 +3727,9 @@ collections:
                 widget: object
                 fields:
                   - label: Home-Based Business
-                    name: "homeBased"
+                    name: "homeBasedBusiness"
                     collapsed: true
                     widget: object
-                    summary: "{{homeBased}}"
                     fields:
                       - { label: "Header", name: "header", widget: "string" }
                       - { label: "Radio Button Yes Text", name: "radioButtonYesText", widget: "string" }
@@ -3923,19 +3913,16 @@ collections:
             name: profileDefaults
             collapsed: false
             widget: object
-            summary: "{{profileDefaults}}"
             fields:
               - label: Fields
                 name: FOREIGN
                 collapsed: false
                 widget: object
-                summary: "{{profileFields}}"
                 fields:
                   - label: Foreign Business Type
-                    name: foreignBusinessType
+                    name: foreignBusinessTypeIds
                     collapsed: true
                     widget: object
-                    summary: "{{foreignBusinessType}}"
                     fields:
                       - { label: "Header", name: "header", widget: "string" }
                       - {
@@ -3948,7 +3935,6 @@ collections:
                         name: optionContent
                         collapsed: false
                         widget: object
-                        summary: "{{optionContent}}"
                         fields:
                           - { label: "operationsInNJ", name: "operationsInNJ", widget: "string" }
                           - { label: "employeesInNJ", name: "employeesInNJ", widget: "string" }
@@ -3958,11 +3944,10 @@ collections:
                       - { label: "Remote Seller Alert", name: "REMOTE_SELLER", widget: "markdown" }
                       - { label: "Remote Worker Alert", name: "REMOTE_WORKER", widget: "markdown" }
                       - { label: "Nexus Alert", name: "NEXUS", widget: "markdown" }
-                  - label: Location in New Jersey Question
-                    name: locationInNewJersey
+                  - label: (Nexus) Location in New Jersey Question
+                    name: nexusLocationInNewJersey
                     collapsed: true
                     widget: object
-                    summary: "{{locationInNewJersey}}"
                     fields:
                       - { label: "Header", name: "header", widget: "string" }
                       - {
