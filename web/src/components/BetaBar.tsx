@@ -15,7 +15,7 @@ export const BetaBar = (): ReactElement => {
       <span className="margin-left-1 margin-right-1">{Config.betaBar.betaMainText}</span>
       <Button
         className="padding-y-0"
-        style="secondary-blue"
+        style="secondary-blue-narrow"
         smallText
         onClick={() => setShowModal(true)}
         widthAutoOnMobile
