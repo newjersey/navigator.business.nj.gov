@@ -27,7 +27,7 @@ sector:
 openDate: 07/25/2022
 dueDate: 10/31/2022
 ---
-The Electric Vehicle (EV) Tourism Program is offering incentives to promote electric vehicle adoption and tourism through investment in EV chargers at key New Jersey tourism sites, landmarks, and other [Tourism Areas](https://visitnj.org/).
+The Electric Vehicle (EV) Tourism Program is offering incentives to promote electric vehicle adoption and tourism through investment in EV chargers at key New Jersey tourism sites, landmarks, and other Tourism Areas.
 
 - - -
 
