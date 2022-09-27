@@ -1,3 +1,4 @@
+import { FieldLabelOnboarding } from "@/components/onboarding/FieldLabelOnboarding";
 import { OnboardingBusinessName } from "@/components/onboarding/OnboardingBusinessName";
 import { OnboardingBusinessPersona } from "@/components/onboarding/OnboardingBusinessPersona";
 import { OnboardingDateOfFormation } from "@/components/onboarding/OnboardingDateOfFormation";
@@ -45,6 +46,7 @@ export const getOnboardingFlows = (
           <>
             <OnboardingBusinessPersona />
             <div className="padding-top-3">
+              <FieldLabelOnboarding fieldName="legalStructureId" />
               <OnboardingLegalStructureDropdown />
             </div>
           </>
@@ -60,11 +62,13 @@ export const getOnboardingFlows = (
         name: "date-and-entity-id-for-public-filing",
         component: (
           <>
+            <FieldLabelOnboarding fieldName="dateOfFormation" />
             <OnboardingDateOfFormation
               onValidation={onValidation}
               fieldStates={fieldStates}
               futureAllowed={false}
             />
+            <FieldLabelOnboarding fieldName="entityId" />
             <OnboardingEntityId onValidation={onValidation} fieldStates={fieldStates} />
           </>
         ),
@@ -81,9 +85,11 @@ export const getOnboardingFlows = (
       {
         component: (
           <>
+            <FieldLabelOnboarding fieldName="businessName" />
             <OnboardingBusinessName onValidation={onValidation} fieldStates={fieldStates} />
             <div className="margin-top-205" />
-            <OnboardingSectors onValidation={onValidation} fieldStates={fieldStates} headerAriaLevel={3} />
+            <FieldLabelOnboarding fieldName="sectorId" />
+            <OnboardingSectors onValidation={onValidation} fieldStates={fieldStates} />
           </>
         ),
         getErrorMap: () => ({
@@ -99,10 +105,13 @@ export const getOnboardingFlows = (
       {
         component: (
           <>
+            <FieldLabelOnboarding fieldName="existingEmployees" />
             <OnboardingExistingEmployees onValidation={onValidation} fieldStates={fieldStates} />
             <div className="margin-top-205" />
+            <FieldLabelOnboarding fieldName="municipality" />
             <OnboardingMunicipality onValidation={onValidation} fieldStates={fieldStates} />
             <div className="margin-top-205" />
+            <FieldLabelOnboarding fieldName="ownershipTypeIds" />
             <OnboardingOwnership />
           </>
         ),
@@ -148,19 +157,34 @@ export const getOnboardingFlows = (
       },
       {
         name: "industry-page",
-        component: <OnboardingIndustry onValidation={onValidation} fieldStates={fieldStates} />,
+        component: (
+          <>
+            <FieldLabelOnboarding fieldName="industryId" />
+            <OnboardingIndustry onValidation={onValidation} fieldStates={fieldStates} />
+          </>
+        ),
         getErrorMap: () => ({
           inline: [{ name: "industryId", valid: profileData.industryId !== undefined }],
         }),
       },
       {
-        component: <OnboardingLegalStructure />,
+        component: (
+          <>
+            <FieldLabelOnboarding fieldName="legalStructureId" />
+            <OnboardingLegalStructure />
+          </>
+        ),
         getErrorMap: () => ({
           banner: [{ name: "REQUIRED_LEGAL", valid: profileData.legalStructureId !== undefined }],
         }),
       },
       {
-        component: <OnboardingMunicipality onValidation={onValidation} fieldStates={fieldStates} />,
+        component: (
+          <>
+            <FieldLabelOnboarding fieldName="municipality" />
+            <OnboardingMunicipality onValidation={onValidation} fieldStates={fieldStates} />
+          </>
+        ),
         getErrorMap: () => ({
           inline: [{ name: "municipality", valid: profileData.municipality !== undefined }],
         }),
@@ -190,11 +214,7 @@ export const getOnboardingFlows = (
   FOREIGN: {
     pages: [
       {
-        component: (
-          <>
-            <OnboardingBusinessPersona />
-          </>
-        ),
+        component: <OnboardingBusinessPersona />,
         getErrorMap: () => ({
           banner: [{ name: "REQUIRED_EXISTING_BUSINESS", valid: profileData.businessPersona !== undefined }],
         }),
@@ -202,6 +222,7 @@ export const getOnboardingFlows = (
       {
         component: (
           <>
+            <FieldLabelOnboarding fieldName="foreignBusinessTypeIds" />
             <OnboardingForeignBusinessType />
           </>
         ),
@@ -213,14 +234,24 @@ export const getOnboardingFlows = (
       },
       {
         name: "industry-page",
-        component: <OnboardingIndustry onValidation={onValidation} fieldStates={fieldStates} />,
+        component: (
+          <>
+            <FieldLabelOnboarding fieldName="industryId" />
+            <OnboardingIndustry onValidation={onValidation} fieldStates={fieldStates} />
+          </>
+        ),
         getErrorMap: () => ({
           inline: [{ name: "industryId", valid: profileData.industryId !== undefined }],
         }),
       },
       {
         name: "legal-structure-page",
-        component: <OnboardingLegalStructure />,
+        component: (
+          <>
+            <FieldLabelOnboarding fieldName="legalStructureId" />
+            <OnboardingLegalStructure />
+          </>
+        ),
         getErrorMap: () => ({
           banner: [{ name: "REQUIRED_LEGAL", valid: profileData.legalStructureId !== undefined }],
         }),
@@ -229,10 +260,14 @@ export const getOnboardingFlows = (
         name: "municipality-page",
         component: (
           <>
+            <FieldLabelOnboarding fieldName="nexusLocationInNewJersey" />
             <OnboardingLocationInNewJersey />
             <div className="margin-top-3">
               {profileData.nexusLocationInNewJersey && (
-                <OnboardingMunicipality onValidation={onValidation} fieldStates={fieldStates} />
+                <>
+                  <FieldLabelOnboarding fieldName="municipality" />
+                  <OnboardingMunicipality onValidation={onValidation} fieldStates={fieldStates} />
+                </>
               )}
             </div>
           </>

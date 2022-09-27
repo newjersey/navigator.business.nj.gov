@@ -1,4 +1,4 @@
-import { Content } from "@/components/Content";
+import { FieldLabelProfile } from "@/components/onboarding/FieldLabelProfile";
 import { IndustryDropdown } from "@/components/onboarding/IndustryDropdown";
 import { OnboardingCannabisLicense } from "@/components/onboarding/OnboardingCannabisLicense";
 import { OnboardingCpa } from "@/components/onboarding/OnboardingCpa";
@@ -14,7 +14,6 @@ import { isLiquorLicenseApplicable } from "@/lib/domain-logic/isLiquorLicenseApp
 import { isProvidesStaffingServicesApplicable } from "@/lib/domain-logic/isProvidesStaffingServicesApplicable";
 import { isRealEstateAppraisalManagementApplicable } from "@/lib/domain-logic/isRealEstateAppraisalManagementApplicable";
 import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
-import { setHeaderRole } from "@/lib/utils/helpers";
 import { FocusEvent, ReactElement, useContext } from "react";
 import { OnboardingCertifiedInteriorDesigner } from "./OnboardingCertifiedInteriorDesigner";
 import { OnboardingRealEstateAppraisalManagement } from "./OnboardingRealEstateAppraisalManagement";
@@ -23,10 +22,9 @@ import { OnboardingStaffingService } from "./OnboardingStaffingService";
 interface Props {
   onValidation: (field: ProfileFields, invalid: boolean) => void;
   fieldStates: ProfileFieldErrorMap;
-  headerAriaLevel?: number;
 }
 
-export const OnboardingIndustry = ({ headerAriaLevel = 2, ...props }: Props): ReactElement => {
+export const OnboardingIndustry = (props: Props): ReactElement => {
   const { state } = useContext(ProfileDataContext);
   const { Config } = useConfig();
 
@@ -39,73 +37,69 @@ export const OnboardingIndustry = ({ headerAriaLevel = 2, ...props }: Props): Re
 
   const fieldName = "industryId";
 
-  const headerLevelTwo = setHeaderRole(headerAriaLevel, "h3-styling");
-
   return (
-    <>
-      <Content overrides={{ h2: headerLevelTwo }}>
-        {Config.profileDefaults[state.flow].industryId.header}
-      </Content>
-      <Content overrides={{ h2: headerLevelTwo }}>
-        {Config.profileDefaults[state.flow].industryId.description}
-      </Content>
-      <div className="form-input margin-top-2">
-        <IndustryDropdown
-          error={props.fieldStates[fieldName].invalid}
-          validationLabel="Error"
-          validationText={Config.profileDefaults[state.flow].industryId.errorTextRequired}
-          handleChange={handleChange}
-          onValidation={onValidation}
-        />
+    <div className="form-input margin-top-2">
+      <IndustryDropdown
+        error={props.fieldStates[fieldName].invalid}
+        validationLabel="Error"
+        validationText={Config.profileDefaults[state.flow].industryId.errorTextRequired}
+        handleChange={handleChange}
+        onValidation={onValidation}
+      />
 
-        {state.profileData.industryId === "home-contractor" && (
-          <div className="margin-top-2" data-testid={`industry-specific-${state.profileData.industryId}`}>
-            <OnboardingHomeContractor />
-          </div>
-        )}
+      {state.profileData.industryId === "home-contractor" && (
+        <div className="margin-top-2" data-testid={`industry-specific-${state.profileData.industryId}`}>
+          <OnboardingHomeContractor />
+        </div>
+      )}
 
-        {state.profileData.industryId === "employment-agency" && (
-          <div className="margin-top-2" data-testid={`industry-specific-${state.profileData.industryId}`}>
-            <OnboardingEmploymentAgency />
-          </div>
-        )}
+      {state.profileData.industryId === "employment-agency" && (
+        <div className="margin-top-2" data-testid={`industry-specific-${state.profileData.industryId}`}>
+          <OnboardingEmploymentAgency />
+        </div>
+      )}
 
-        {isCpaRequiredApplicable(state.profileData.industryId) && (
-          <div className="margin-top-4" data-testid={`industry-specific-${state.profileData.industryId}`}>
-            <OnboardingCpa />
-          </div>
-        )}
+      {isCpaRequiredApplicable(state.profileData.industryId) && (
+        <div className="margin-top-4" data-testid={`industry-specific-${state.profileData.industryId}`}>
+          <FieldLabelProfile fieldName="requiresCpa" />
+          <OnboardingCpa />
+        </div>
+      )}
 
-        {isLiquorLicenseApplicable(state.profileData.industryId) && (
-          <div className="margin-top-4" data-testid="liquor-license">
-            <OnboardingLiquorLicense />
-          </div>
-        )}
+      {isLiquorLicenseApplicable(state.profileData.industryId) && (
+        <div className="margin-top-4" data-testid="liquor-license">
+          <FieldLabelProfile fieldName="liquorLicense" />
+          <OnboardingLiquorLicense />
+        </div>
+      )}
 
-        {isCannabisLicenseApplicable(state.profileData.industryId) && (
-          <div className="margin-top-4" data-testid={`industry-specific-${state.profileData.industryId}`}>
-            <OnboardingCannabisLicense />
-          </div>
-        )}
+      {isCannabisLicenseApplicable(state.profileData.industryId) && (
+        <div className="margin-top-4" data-testid={`industry-specific-${state.profileData.industryId}`}>
+          <FieldLabelProfile fieldName="cannabisLicenseType" />
+          <OnboardingCannabisLicense />
+        </div>
+      )}
 
-        {isCertifiedInteriorDesignerApplicable(state.profileData.industryId) && (
-          <div className="margin-top-4" data-testid={`industry-specific-${state.profileData.industryId}`}>
-            <OnboardingCertifiedInteriorDesigner />
-          </div>
-        )}
+      {isCertifiedInteriorDesignerApplicable(state.profileData.industryId) && (
+        <div className="margin-top-4" data-testid={`industry-specific-${state.profileData.industryId}`}>
+          <FieldLabelProfile fieldName="certifiedInteriorDesigner" />
+          <OnboardingCertifiedInteriorDesigner />
+        </div>
+      )}
 
-        {isProvidesStaffingServicesApplicable(state.profileData.industryId) && (
-          <div className="margin-top-4" data-testid={`industry-specific-${state.profileData.industryId}`}>
-            <OnboardingStaffingService />
-          </div>
-        )}
+      {isProvidesStaffingServicesApplicable(state.profileData.industryId) && (
+        <div className="margin-top-4" data-testid={`industry-specific-${state.profileData.industryId}`}>
+          <FieldLabelProfile fieldName="providesStaffingService" />
+          <OnboardingStaffingService />
+        </div>
+      )}
 
-        {isRealEstateAppraisalManagementApplicable(state.profileData.industryId) && (
-          <div className="margin-top-4" data-testid={`industry-specific-${state.profileData.industryId}`}>
-            <OnboardingRealEstateAppraisalManagement />
-          </div>
-        )}
-      </div>
-    </>
+      {isRealEstateAppraisalManagementApplicable(state.profileData.industryId) && (
+        <div className="margin-top-4" data-testid={`industry-specific-${state.profileData.industryId}`}>
+          <FieldLabelProfile fieldName="realEstateAppraisalManagement" />
+          <OnboardingRealEstateAppraisalManagement />
+        </div>
+      )}
+    </div>
   );
 };

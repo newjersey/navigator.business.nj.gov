@@ -1,5 +1,6 @@
 import { Content } from "@/components/Content";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
+import { FieldLabelModal } from "@/components/onboarding/FieldLabelModal";
 import { OnboardingDateOfFormation } from "@/components/onboarding/OnboardingDateOfFormation";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -65,18 +66,20 @@ export const FormationDateModal = (props: Props): ReactElement => {
         <div className="margin-bottom-3">
           <Content>{Config.formationDateModal.description}</Content>
         </div>
+        <FieldLabelModal
+          fieldName="dateOfFormation"
+          overrides={{
+            header: Config.formationDateModal.fieldLabel,
+            description: Config.formationDateModal.fieldDescription,
+          }}
+        />
         <OnboardingDateOfFormation
           onValidation={onValidation}
           fieldStates={fieldStates}
           required={true}
           disabled={false}
           futureAllowed={true}
-          headerAriaLevel={3}
-          configOverrides={{
-            header: Config.formationDateModal.fieldLabel,
-            description: Config.formationDateModal.fieldDescription,
-            errorText: Config.formationDateModal.errorText,
-          }}
+          errorTextOverride={Config.formationDateModal.errorText}
         />
       </ModalTwoButton>
     </ProfileDataContext.Provider>

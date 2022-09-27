@@ -503,7 +503,7 @@
     "lockedStatusTooltipText": "You have successfully completed forming your business in this task.",
     "errorText": "Your effective date must be formatted as MM/YYYY.",
     "cancelButtonText": "Cancel",
-    "fieldLabel": "**Business Effective Date**",
+    "fieldLabel": "Business Effective Date",
     "areYouSureModalHeader": "Didn't Form Yet?",
     "saveButtonText": "Save",
     "description": "To see your annual report due date, please provide your Business' `effective date|effective-date` (the date you formed your business) below."

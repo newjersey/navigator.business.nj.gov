@@ -3,13 +3,8 @@ import { Alert } from "@/components/njwds-extended/Alert";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { determineForeignBusinessType } from "@/lib/domain-logic/determineForeignBusinessType";
-import { setHeaderRole } from "@/lib/utils/helpers";
 import { Checkbox, FormControl, FormControlLabel } from "@mui/material";
 import { ChangeEvent, ReactElement, useContext } from "react";
-
-interface Props {
-  headerAriaLevel?: number;
-}
 
 const allForeignBusinessTypeIdsOrdered = [
   "operationsInNJ",
@@ -19,7 +14,7 @@ const allForeignBusinessTypeIdsOrdered = [
   "none",
 ];
 
-export const OnboardingForeignBusinessType = ({ headerAriaLevel = 2 }: Props): ReactElement => {
+export const OnboardingForeignBusinessType = (): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { Config } = useConfig();
 
@@ -44,16 +39,9 @@ export const OnboardingForeignBusinessType = ({ headerAriaLevel = 2 }: Props): R
       foreignBusinessTypeIds: ids,
     });
   };
-  const headerLevelTwo = setHeaderRole(headerAriaLevel, "h3-styling");
 
   return (
     <>
-      <Content overrides={{ h2: headerLevelTwo }}>
-        {Config.profileDefaults[state.flow].foreignBusinessType.header}
-      </Content>
-      <Content overrides={{ h2: headerLevelTwo }}>
-        {Config.profileDefaults[state.flow].foreignBusinessType.description}
-      </Content>
       <div className="margin-top-3">
         <FormControl variant="outlined" fullWidth aria-label="Out of state business">
           {allForeignBusinessTypeIdsOrdered.map((id: string) => (
@@ -76,7 +64,7 @@ export const OnboardingForeignBusinessType = ({ headerAriaLevel = 2 }: Props): R
                 <Content>
                   {
                     (
-                      Config.profileDefaults.FOREIGN.foreignBusinessType.optionContent as Record<
+                      Config.profileDefaults.FOREIGN.foreignBusinessTypeIds.optionContent as Record<
                         string,
                         string
                       >
@@ -93,7 +81,7 @@ export const OnboardingForeignBusinessType = ({ headerAriaLevel = 2 }: Props): R
         state.profileData.foreignBusinessType !== "NONE" && (
           <Alert variant="info">
             <Content key={state.profileData.foreignBusinessType}>
-              {Config.profileDefaults.FOREIGN.foreignBusinessType[state.profileData.foreignBusinessType]}
+              {Config.profileDefaults.FOREIGN.foreignBusinessTypeIds[state.profileData.foreignBusinessType]}
             </Content>
           </Alert>
         )}

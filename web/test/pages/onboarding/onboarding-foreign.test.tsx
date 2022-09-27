@@ -30,7 +30,7 @@ jest.mock("@/lib/api-client/apiClient", () => ({
 
 const Config = getMergedConfig();
 const { employeesInNJ, transactionsInNJ, revenueInNJ, operationsInNJ, none } =
-  Config.profileDefaults.FOREIGN.foreignBusinessType.optionContent;
+  Config.profileDefaults.FOREIGN.foreignBusinessTypeIds.optionContent;
 
 const generateTestUserData = (overrides: Partial<ProfileData>) =>
   generateUserData({
@@ -85,10 +85,12 @@ describe("onboarding - foreign business", () => {
     it("sets user as Nexus (and displays alert) when operationsInNJ checkbox checked", async () => {
       const { page } = renderPage({ userData });
       expect(
-        screen.queryByText(Config.profileDefaults.FOREIGN.foreignBusinessType.NEXUS)
+        screen.queryByText(Config.profileDefaults.FOREIGN.foreignBusinessTypeIds.NEXUS)
       ).not.toBeInTheDocument();
       page.checkByLabelText(operationsInNJ);
-      expect(screen.getByText(Config.profileDefaults.FOREIGN.foreignBusinessType.NEXUS)).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.profileDefaults.FOREIGN.foreignBusinessTypeIds.NEXUS)
+      ).toBeInTheDocument();
 
       await page.visitStep(3);
       expect(currentUserData().profileData.foreignBusinessType).toEqual("NEXUS");
@@ -98,11 +100,11 @@ describe("onboarding - foreign business", () => {
     it("sets user as Remote Workers (and displays alert) when employeesInNJ checkbox checked", async () => {
       const { page } = renderPage({ userData });
       expect(
-        screen.queryByText(Config.profileDefaults.FOREIGN.foreignBusinessType.REMOTE_WORKER)
+        screen.queryByText(Config.profileDefaults.FOREIGN.foreignBusinessTypeIds.REMOTE_WORKER)
       ).not.toBeInTheDocument();
       page.checkByLabelText(employeesInNJ);
       expect(
-        screen.getByText(Config.profileDefaults.FOREIGN.foreignBusinessType.REMOTE_WORKER)
+        screen.getByText(Config.profileDefaults.FOREIGN.foreignBusinessTypeIds.REMOTE_WORKER)
       ).toBeInTheDocument();
 
       await page.visitStep(3);
@@ -113,11 +115,11 @@ describe("onboarding - foreign business", () => {
     it("sets user as Remote Seller (and displays alert) when revenueInNJ checkbox checked", async () => {
       const { page } = renderPage({ userData });
       expect(
-        screen.queryByText(Config.profileDefaults.FOREIGN.foreignBusinessType.REMOTE_SELLER)
+        screen.queryByText(Config.profileDefaults.FOREIGN.foreignBusinessTypeIds.REMOTE_SELLER)
       ).not.toBeInTheDocument();
       page.checkByLabelText(revenueInNJ);
       expect(
-        screen.getByText(Config.profileDefaults.FOREIGN.foreignBusinessType.REMOTE_SELLER)
+        screen.getByText(Config.profileDefaults.FOREIGN.foreignBusinessTypeIds.REMOTE_SELLER)
       ).toBeInTheDocument();
       await page.visitStep(3);
       expect(currentUserData().profileData.foreignBusinessType).toEqual("REMOTE_SELLER");
@@ -127,11 +129,11 @@ describe("onboarding - foreign business", () => {
     it("sets user as Remote Seller (and displays alert) when transactionsInNJ checkbox checked", async () => {
       const { page } = renderPage({ userData });
       expect(
-        screen.queryByText(Config.profileDefaults.FOREIGN.foreignBusinessType.REMOTE_SELLER)
+        screen.queryByText(Config.profileDefaults.FOREIGN.foreignBusinessTypeIds.REMOTE_SELLER)
       ).not.toBeInTheDocument();
       page.checkByLabelText(transactionsInNJ);
       expect(
-        screen.getByText(Config.profileDefaults.FOREIGN.foreignBusinessType.REMOTE_SELLER)
+        screen.getByText(Config.profileDefaults.FOREIGN.foreignBusinessTypeIds.REMOTE_SELLER)
       ).toBeInTheDocument();
 
       await page.visitStep(3);
@@ -149,7 +151,7 @@ describe("onboarding - foreign business", () => {
       });
       expect(screen.queryByTestId("step-3")).not.toBeInTheDocument();
       expect(
-        screen.getByText(Config.profileDefaults.FOREIGN.foreignBusinessType.errorTextRequired)
+        screen.getByText(Config.profileDefaults.FOREIGN.foreignBusinessTypeIds.errorTextRequired)
       ).toBeInTheDocument();
     });
 
@@ -164,7 +166,7 @@ describe("onboarding - foreign business", () => {
       });
       expect(screen.queryByTestId("step-2")).not.toBeInTheDocument();
       expect(
-        screen.queryByText(Config.profileDefaults.FOREIGN.foreignBusinessType.errorTextRequired)
+        screen.queryByText(Config.profileDefaults.FOREIGN.foreignBusinessTypeIds.errorTextRequired)
       ).not.toBeInTheDocument();
     });
 
@@ -339,14 +341,14 @@ describe("onboarding - foreign business", () => {
     it("does not display home-based business question even for applicable industry (generic)", () => {
       renderPage({ userData });
       expect(
-        screen.queryByText(markdownToText(Config.profileDefaults.FOREIGN.homeBased.header))
+        screen.queryByText(markdownToText(Config.profileDefaults.FOREIGN.homeBasedBusiness.header))
       ).not.toBeInTheDocument();
     });
 
     it("displays Location In New Jersey question", () => {
       renderPage({ userData });
       expect(
-        screen.getByText(markdownToText(Config.profileDefaults.FOREIGN.locationInNewJersey.header))
+        screen.getByText(markdownToText(Config.profileDefaults.FOREIGN.nexusLocationInNewJersey.header))
       ).toBeInTheDocument();
     });
 
@@ -362,11 +364,11 @@ describe("onboarding - foreign business", () => {
     it("displays homeBasedBusiness question when NO is selected for Location In New Jersey", async () => {
       const { page } = renderPage({ userData, municipalities: [newark] });
       expect(
-        screen.queryByText(markdownToText(Config.profileDefaults.FOREIGN.homeBased.header))
+        screen.queryByText(markdownToText(Config.profileDefaults.FOREIGN.homeBasedBusiness.header))
       ).not.toBeInTheDocument();
       page.chooseRadio("location-in-new-jersey-false");
       expect(
-        screen.getByText(markdownToText(Config.profileDefaults.FOREIGN.homeBased.header))
+        screen.getByText(markdownToText(Config.profileDefaults.FOREIGN.homeBasedBusiness.header))
       ).toBeInTheDocument();
     });
 
@@ -426,7 +428,7 @@ describe("onboarding - foreign business", () => {
       expect(screen.getByTestId("step-5")).toBeInTheDocument();
       expect(screen.queryByTestId("step-6")).not.toBeInTheDocument();
       expect(
-        screen.getByText(Config.profileDefaults.FOREIGN.locationInNewJersey.errorTextRequired)
+        screen.getByText(Config.profileDefaults.FOREIGN.nexusLocationInNewJersey.errorTextRequired)
       ).toBeInTheDocument();
       expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
     });

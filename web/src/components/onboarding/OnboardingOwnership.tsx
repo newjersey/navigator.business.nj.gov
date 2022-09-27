@@ -1,7 +1,5 @@
-import { Content } from "@/components/Content";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { setHeaderRole } from "@/lib/utils/helpers";
 import {
   arrayOfOwnershipTypes,
   LookupOwnershipTypeById,
@@ -10,11 +8,7 @@ import {
 import { Checkbox, FormControl, ListItemText, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import { ReactElement, useContext } from "react";
 
-interface Props {
-  headerAriaLevel?: number;
-}
-
-export const OnboardingOwnership = ({ headerAriaLevel = 2 }: Props): ReactElement => {
+export const OnboardingOwnership = (): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { Config } = useConfig();
 
@@ -25,17 +19,9 @@ export const OnboardingOwnership = ({ headerAriaLevel = 2 }: Props): ReactElemen
       ownershipTypeIds: value,
     });
   };
-  const headerLevelTwo = setHeaderRole(headerAriaLevel, "h3-styling");
 
   return (
     <>
-      <div role="heading" aria-level={headerAriaLevel} className="h3-styling margin-bottom-2">
-        {Config.profileDefaults[state.flow].ownership.header}{" "}
-        <span className="text-light">{Config.profileDefaults[state.flow].ownership.headerNotBolded}</span>
-      </div>
-      <Content overrides={{ h2: headerLevelTwo }}>
-        {Config.profileDefaults[state.flow].ownership.description}
-      </Content>
       <div className="form-input margin-top-3">
         <FormControl variant="outlined" fullWidth>
           <Select
@@ -46,7 +32,9 @@ export const OnboardingOwnership = ({ headerAriaLevel = 2 }: Props): ReactElemen
             renderValue={(selected) => {
               if (selected.length === 0) {
                 return (
-                  <div className="text-base">{Config.profileDefaults[state.flow].ownership.placeholder}</div>
+                  <div className="text-base">
+                    {Config.profileDefaults[state.flow].ownershipTypeIds.placeholder}
+                  </div>
                 );
               }
 

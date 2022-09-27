@@ -3,6 +3,7 @@ import { NavBar } from "@/components/navbar/NavBar";
 import { Button } from "@/components/njwds-extended/Button";
 import { SidebarPageLayout } from "@/components/njwds-extended/SidebarPageLayout";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
+import { FieldLabelProfile } from "@/components/onboarding/FieldLabelProfile";
 import { OnboardingBusinessName } from "@/components/onboarding/OnboardingBusinessName";
 import { OnboardingDateOfFormation } from "@/components/onboarding/OnboardingDateOfFormation";
 import { OnboardingEmployerId } from "@/components/onboarding/OnboardingEmployerId";
@@ -230,15 +231,24 @@ const ProfilePage = (props: Props): ReactElement => {
             <div className="margin-top-3" aria-hidden={true} />
             <ProfileNexusBusinessNameField />
             <div className="margin-top-3" aria-hidden={true} />
-            <ProfileNexusDBANameField />
+            {profileData.nexusDbaName && (
+              <>
+                <FieldLabelProfile fieldName="nexusDbaName" />
+                <ProfileNexusDBANameField />
+              </>
+            )}
             <div className="margin-top-3" aria-hidden={true} />
           </>
         )}
+        <FieldLabelProfile fieldName="industryId" />
         <OnboardingIndustry onValidation={onValidation} fieldStates={fieldStates} />
         <div className="margin-top-3" aria-hidden={true} />
+        <FieldLabelProfile fieldName="legalStructureId" />
         <OnboardingLegalStructureDropdown disabled={userData?.formationData.getFilingResponse?.success} />
         <div className="margin-top-3" aria-hidden={true} />
-        <OnboardingMunicipality onValidation={onValidation} fieldStates={fieldStates} h3Heading={true} />
+        <FieldLabelProfile fieldName="municipality" />
+        <OnboardingMunicipality onValidation={onValidation} fieldStates={fieldStates} />
+        <FieldLabelProfile fieldName="nexusLocationInNewJersey" />
         <OnboardingLocationInNewJersey />
       </>
     ),
@@ -246,7 +256,8 @@ const ProfilePage = (props: Props): ReactElement => {
     notes: (
       <>
         <hr className="margin-top-4 margin-bottom-4" aria-hidden={true} />
-        <OnboardingNotes headerAriaLevel={3} handleChangeOverride={showRegistrationModalForGuest()} />
+        <FieldLabelProfile fieldName="notes" />
+        <OnboardingNotes handleChangeOverride={showRegistrationModalForGuest()} />
       </>
     ),
     numbers: (
@@ -257,10 +268,10 @@ const ProfilePage = (props: Props): ReactElement => {
           {Config.profileDefaults.profileTabRefTitle}
         </h2>
         <div className="margin-top-4">
+          <FieldLabelProfile fieldName="taxId" />
           <OnboardingTaxId
             onValidation={onValidation}
             fieldStates={fieldStates}
-            headerAriaLevel={3}
             handleChangeOverride={showRegistrationModalForGuest()}
           />
         </div>
@@ -274,7 +285,8 @@ const ProfilePage = (props: Props): ReactElement => {
     notes: (
       <>
         <hr className="margin-top-4 margin-bottom-4" aria-hidden={true} />
-        <OnboardingNotes headerAriaLevel={3} handleChangeOverride={showRegistrationModalForGuest()} />
+        <FieldLabelProfile fieldName="notes" />
+        <OnboardingNotes handleChangeOverride={showRegistrationModalForGuest()} />
       </>
     ),
     numbers: (
@@ -285,10 +297,10 @@ const ProfilePage = (props: Props): ReactElement => {
           {Config.profileDefaults.profileTabRefTitle}
         </h2>
         <div className="margin-top-4">
+          <FieldLabelProfile fieldName="taxId" />
           <OnboardingTaxId
             onValidation={onValidation}
             fieldStates={fieldStates}
-            headerAriaLevel={3}
             handleChangeOverride={showRegistrationModalForGuest()}
           />
         </div>
@@ -300,16 +312,18 @@ const ProfilePage = (props: Props): ReactElement => {
     notes: (
       <>
         <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
+        <FieldLabelProfile fieldName="notes" />
         <OnboardingNotes handleChangeOverride={showRegistrationModalForGuest()} />
       </>
     ),
     documents: (
       <>
-        <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
-        {LookupLegalStructureById(userData?.profileData.legalStructureId).requiresPublicFiling ? (
-          <Documents />
-        ) : (
-          <></>
+        <hr className="margin-top-4 margin-bottom-4" aria-hidden={true} />
+        {LookupLegalStructureById(userData?.profileData.legalStructureId).requiresPublicFiling && (
+          <>
+            <FieldLabelProfile fieldName="documents" />
+            <Documents />
+          </>
         )}
       </>
     ),
@@ -320,29 +334,40 @@ const ProfilePage = (props: Props): ReactElement => {
           {" "}
           {Config.profileDefaults.profileTabInfoTitle}
         </h2>
+
+        <FieldLabelProfile fieldName="businessName" />
         <OnboardingBusinessName disabled={userData?.formationData.getFilingResponse?.success} />
+
         <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
+
+        <FieldLabelProfile fieldName="industryId" />
         <OnboardingIndustry onValidation={onValidation} fieldStates={fieldStates} />
         {(profileData.industryId === "generic" || props.CMS_ONLY_fakeUserData) && (
           <div className="margin-top-4 margin-bottom-2">
-            <OnboardingSectors onValidation={onValidation} fieldStates={fieldStates} headerAriaLevel={3} />
+            <FieldLabelProfile fieldName="sectorId" />
+            <OnboardingSectors onValidation={onValidation} fieldStates={fieldStates} />
           </div>
         )}
+
         <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
+
+        <FieldLabelProfile fieldName="legalStructureId" />
         <OnboardingLegalStructureDropdown disabled={userData?.formationData.getFilingResponse?.success} />
+
         <hr className="margin-top-6 margin-bottom-2" aria-hidden={true} />
-        <OnboardingMunicipality onValidation={onValidation} fieldStates={fieldStates} h3Heading={true} />
+
+        <FieldLabelProfile fieldName="municipality" />
+        <OnboardingMunicipality onValidation={onValidation} fieldStates={fieldStates} />
+
         {LookupOperatingPhaseById(userData?.profileData.operatingPhase)
           .displayCompanyDemographicProfileFields && (
           <>
             <hr className="margin-top-6 margin-bottom-2" aria-hidden={true} />
-            <OnboardingOwnership headerAriaLevel={3} />
+            <FieldLabelProfile fieldName="ownershipTypeIds" />
+            <OnboardingOwnership />
             <hr className="margin-top-6 margin-bottom-2" aria-hidden={true} />
-            <OnboardingExistingEmployees
-              onValidation={onValidation}
-              fieldStates={fieldStates}
-              headerAriaLevel={3}
-            />
+            <FieldLabelProfile fieldName="existingEmployees" />
+            <OnboardingExistingEmployees onValidation={onValidation} fieldStates={fieldStates} />
           </>
         )}
       </>
@@ -357,6 +382,7 @@ const ProfilePage = (props: Props): ReactElement => {
         {userData?.profileData.dateOfFormation && (
           <>
             <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
+            <FieldLabelProfile fieldName="dateOfFormation" />
             <OnboardingDateOfFormation
               onValidation={onValidation}
               fieldStates={fieldStates}
@@ -366,6 +392,7 @@ const ProfilePage = (props: Props): ReactElement => {
           </>
         )}
         <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
+        <FieldLabelProfile fieldName="entityId" />
         <OnboardingEntityId
           onValidation={onValidation}
           fieldStates={fieldStates}
@@ -373,12 +400,14 @@ const ProfilePage = (props: Props): ReactElement => {
           handleChangeOverride={showRegistrationModalForGuest()}
         />
         <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
+        <FieldLabelProfile fieldName="employerId" />
         <OnboardingEmployerId
           onValidation={onValidation}
           fieldStates={fieldStates}
           handleChangeOverride={showRegistrationModalForGuest()}
         />
         <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
+        <FieldLabelProfile fieldName="taxId" />
         <OnboardingTaxId
           onValidation={onValidation}
           fieldStates={fieldStates}
@@ -392,12 +421,14 @@ const ProfilePage = (props: Props): ReactElement => {
     notes: (
       <>
         <hr className="margin-top-4 margin-bottom-4" aria-hidden={true} />
-        <OnboardingNotes headerAriaLevel={3} handleChangeOverride={showRegistrationModalForGuest()} />
+        <FieldLabelProfile fieldName="notes" />
+        <OnboardingNotes handleChangeOverride={showRegistrationModalForGuest()} />
       </>
     ),
     documents: (
       <>
         <hr className="margin-top-4 margin-bottom-4" aria-hidden={true} />
+        <FieldLabelProfile fieldName="documents" />
         <Documents />
       </>
     ),
@@ -408,35 +439,30 @@ const ProfilePage = (props: Props): ReactElement => {
           {Config.profileDefaults.profileTabInfoTitle}
         </h2>
         <div className="margin-top-4">
+          <FieldLabelProfile fieldName="businessName" />
           <OnboardingBusinessName
             onValidation={onValidation}
             fieldStates={fieldStates}
-            headerAriaLevel={3}
             disabled={userData?.formationData.getFilingResponse?.success}
           />
         </div>
-        {(profileData.businessPersona === "OWNING" || props.CMS_ONLY_fakeUserData) && (
+        {(props.CMS_ONLY_fakeUserData || true) && (
           <div className="margin-top-4">
-            <OnboardingSectors onValidation={onValidation} fieldStates={fieldStates} headerAriaLevel={3} />
+            <FieldLabelProfile fieldName="sectorId" />
+            <OnboardingSectors onValidation={onValidation} fieldStates={fieldStates} />
           </div>
         )}
         <div className="margin-top-4">
-          <OnboardingExistingEmployees
-            onValidation={onValidation}
-            fieldStates={fieldStates}
-            headerAriaLevel={3}
-          />
+          <FieldLabelProfile fieldName="existingEmployees" />
+          <OnboardingExistingEmployees onValidation={onValidation} fieldStates={fieldStates} />
         </div>
         <div className="margin-top-4">
-          <OnboardingMunicipality
-            onValidation={onValidation}
-            fieldStates={fieldStates}
-            h3Heading={false}
-            headerAriaLevel={3}
-          />
+          <FieldLabelProfile fieldName="municipality" />
+          <OnboardingMunicipality onValidation={onValidation} fieldStates={fieldStates} />
         </div>
         <div className="margin-top-4">
-          <OnboardingOwnership headerAriaLevel={3} />
+          <FieldLabelProfile fieldName="ownershipTypeIds" />
+          <OnboardingOwnership />
         </div>
       </>
     ),
@@ -447,44 +473,44 @@ const ProfilePage = (props: Props): ReactElement => {
           {Config.profileDefaults.profileTabRefTitle}
         </h2>
         <div className="margin-top-4">
+          <FieldLabelProfile fieldName="dateOfFormation" />
           <OnboardingDateOfFormation
             onValidation={onValidation}
             fieldStates={fieldStates}
-            headerAriaLevel={3}
             disabled={userData?.formationData.getFilingResponse?.success}
             futureAllowed={false}
           />
         </div>
         <div className="margin-top-4">
+          <FieldLabelProfile fieldName="entityId" />
           <OnboardingEntityId
             onValidation={onValidation}
             fieldStates={fieldStates}
-            headerAriaLevel={3}
             disabled={userData?.formationData.getFilingResponse?.success}
             handleChangeOverride={showRegistrationModalForGuest()}
           />
         </div>
         <div className="margin-top-4">
+          <FieldLabelProfile fieldName="employerId" />
           <OnboardingEmployerId
             onValidation={onValidation}
             fieldStates={fieldStates}
-            headerAriaLevel={3}
             handleChangeOverride={showRegistrationModalForGuest()}
           />
         </div>
         <div className="margin-top-4">
+          <FieldLabelProfile fieldName="taxId" />
           <OnboardingTaxId
             onValidation={onValidation}
             fieldStates={fieldStates}
-            headerAriaLevel={3}
             handleChangeOverride={showRegistrationModalForGuest()}
           />
         </div>
         <div className="margin-top-4">
+          <FieldLabelProfile fieldName="taxPin" />
           <OnboardingTaxPin
             onValidation={onValidation}
             fieldStates={fieldStates}
-            headerAriaLevel={3}
             handleChangeOverride={showRegistrationModalForGuest()}
           />
         </div>

@@ -9,7 +9,6 @@ import { ReactElement, useContext, useState } from "react";
 interface Props {
   onValidation: (fieldName: ProfileFields, invalid: boolean) => void;
   fieldStates: ProfileFieldErrorMap;
-  headerAriaLevel?: number;
 }
 
 export const OnboardingNameAndEmail = (props: Props): ReactElement => {

@@ -1,4 +1,3 @@
-import { Content } from "@/components/Content";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
@@ -19,10 +18,6 @@ export const OnboardingStaffingService = (): ReactElement => {
 
   return (
     <>
-      <div className="margin-bottom-2">
-        <Content>{Config.profileDefaults[state.flow].staffingService.header}</Content>
-      </div>
-      <Content>{Config.profileDefaults[state.flow].staffingService.description}</Content>
       <FormControl variant="outlined" fullWidth>
         <RadioGroup
           aria-label="Staffing Service"
@@ -37,7 +32,7 @@ export const OnboardingStaffingService = (): ReactElement => {
             data-testid="staffing-service-true"
             value={true}
             control={<Radio color="primary" sx={{ paddingTop: "0px" }} />}
-            label={Config.profileDefaults[state.flow].staffingService.radioButtonYesText}
+            label={Config.profileDefaults[state.flow].providesStaffingService.radioButtonYesText}
           />
           <FormControlLabel
             style={{ marginTop: ".75rem", alignItems: "flex-start" }}
@@ -45,7 +40,7 @@ export const OnboardingStaffingService = (): ReactElement => {
             data-testid="staffing-service-false"
             value={false}
             control={<Radio color="primary" sx={{ paddingTop: "0px" }} />}
-            label={Config.profileDefaults[state.flow].staffingService.radioButtonNoText}
+            label={Config.profileDefaults[state.flow].providesStaffingService.radioButtonNoText}
           />
         </RadioGroup>
       </FormControl>

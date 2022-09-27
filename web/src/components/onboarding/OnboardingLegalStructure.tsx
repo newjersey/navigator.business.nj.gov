@@ -3,7 +3,6 @@
 import { Content } from "@/components/Content";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { setHeaderRole } from "@/lib/utils/helpers";
 import { LegalStructure, LegalStructures, LookupLegalStructureById } from "@businessnjgovnavigator/shared/";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import { orderBy } from "lodash";
@@ -40,16 +39,8 @@ export const OnboardingLegalStructure = (): ReactElement => {
     );
   };
 
-  const headerLevelTwo = setHeaderRole(2, "h3-styling");
-
   return (
     <>
-      <Content overrides={{ h2: headerLevelTwo }}>
-        {Config.profileDefaults[state.flow].legalStructureId.header}
-      </Content>
-      <Content overrides={{ h2: headerLevelTwo }}>
-        {Config.profileDefaults[state.flow].legalStructureId.description}
-      </Content>
       <div className="form-input-wide margin-top-3">
         <FormControl variant="outlined" fullWidth>
           <RadioGroup

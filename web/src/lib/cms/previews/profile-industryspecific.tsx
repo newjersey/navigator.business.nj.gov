@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { FieldLabelOnboarding } from "@/components/onboarding/FieldLabelOnboarding";
 import { OnboardingCannabisLicense } from "@/components/onboarding/OnboardingCannabisLicense";
 import { OnboardingCertifiedInteriorDesigner } from "@/components/onboarding/OnboardingCertifiedInteriorDesigner";
 import { OnboardingCpa } from "@/components/onboarding/OnboardingCpa";
@@ -58,23 +59,30 @@ const ProfilePreviewIndustrySpecific = (props: Props) => {
             onBack: () => {},
           }}
         >
-          <h1>Displays Preview For Starting A New Business</h1>
+          <h1>Preview Fields</h1>
+          <FieldLabelOnboarding fieldName="cannabisLicenseType" />
           <OnboardingCannabisLicense />
           <hr className="margin-y-4" />
+          <FieldLabelOnboarding fieldName="certifiedInteriorDesigner" />
           <OnboardingCertifiedInteriorDesigner />
           <hr className="margin-y-4" />
+          <FieldLabelOnboarding fieldName="requiresCpa" />
           <OnboardingCpa />
           <hr className="margin-y-4" />
           <OnboardingEmploymentAgency />
           <hr className="margin-y-4" />
-          <OnboardingHomeBasedBusiness headerAriaLevel={2} h3Heading={true} />
+          <FieldLabelOnboarding fieldName="homeBasedBusiness" />
+          <OnboardingHomeBasedBusiness />
           <hr className="margin-y-4" />
           <OnboardingHomeContractor />
           <hr className="margin-y-4" />
+          <FieldLabelOnboarding fieldName="liquorLicense" />
           <OnboardingLiquorLicense />
           <hr className="margin-y-4" />
+          <FieldLabelOnboarding fieldName="realEstateAppraisalManagement" />
           <OnboardingRealEstateAppraisalManagement />
           <hr className="margin-y-4" />
+          <FieldLabelOnboarding fieldName="providesStaffingService" />
           <OnboardingStaffingService />
           <hr className="margin-y-4" />
         </ProfileDataContext.Provider>
