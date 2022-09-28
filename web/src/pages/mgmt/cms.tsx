@@ -9,6 +9,7 @@ import ContentPreview from "@/lib/cms/previews/content";
 import ContextInfoPreview from "@/lib/cms/previews/context-info";
 import EinInputPreview from "@/lib/cms/previews/ein-input";
 import FilingsPreview from "@/lib/cms/previews/filings";
+import FormationInterimSuccessPreview from "@/lib/cms/previews/formation-interim-success";
 import FundingsPreview from "@/lib/cms/previews/fundings";
 import NaicsLookupPreview from "@/lib/cms/previews/naics-lookup";
 import NexusDbaFormationPreview from "@/lib/cms/previews/nexus-dba-formation";
@@ -149,6 +150,10 @@ const CMS = dynamic(
         "cannabis-social-equity",
         "cannabis-veteran-owned",
       ]);
+
+      // ----- Formation -----
+      // @ts-expect-error: No type definition available
+      CMS.registerPreviewTemplate("business-formation-interim-success-page", FormationInterimSuccessPreview);
     }),
   { ssr: false, loading: Loading }
 );

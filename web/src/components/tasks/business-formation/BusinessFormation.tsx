@@ -1,15 +1,14 @@
 import { Content } from "@/components/Content";
 import { LoadingIndicator } from "@/components/LoadingIndicator";
-import { Alert } from "@/components/njwds-extended/Alert";
 import { TaskCTA } from "@/components/TaskCTA";
 import { TaskHeader } from "@/components/TaskHeader";
 import { BusinessFormationPaginator } from "@/components/tasks/business-formation/BusinessFormationPaginator";
 import { BusinessFormationSteps } from "@/components/tasks/business-formation/BusinessFormationSteps";
+import { FormationInterimSuccessPage } from "@/components/tasks/business-formation/FormationInterimSuccessPage";
 import { FormationSuccessPage } from "@/components/tasks/business-formation/success/FormationSuccessPage";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import * as api from "@/lib/api-client/apiClient";
-import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { splitFullName } from "@/lib/domain-logic/splitFullName";
@@ -53,7 +52,6 @@ export const BusinessFormation = (props: Props): ReactElement => {
   const { roadmap } = useRoadmap();
   const { userData, update } = useUserData();
   const router = useRouter();
-  const { Config } = useConfig();
 
   const [formationFormData, setFormationFormData] = useState<FormationFormData>(
     createEmptyFormationFormData()
@@ -176,10 +174,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
     return (
       <div className="flex flex-column minh-38">
         <TaskHeader task={props.task} />
-        <Alert variant="warning" dataTestid="api-error-text">
-          <Content>{Config.businessFormationDefaults.getFilingApiErrorText}</Content>
-        </Alert>
-        <img className="maxh-card-lg margin-top-6" src={`/img/signpost.svg`} alt="" />
+        <FormationInterimSuccessPage taskUrlSlug={props.task.urlSlug} setStepIndex={setStepIndex} />
       </div>
     );
   }
