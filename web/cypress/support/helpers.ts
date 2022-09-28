@@ -828,11 +828,3 @@ const generateZipCode = () => {
   const zip = randomIntFromInterval("1", "99999").toString();
   return "0".repeat(5 - zip.length) + zip;
 };
-
-export const getPhoneNumberFormat = (phoneNumber: string) => {
-  const length = phoneNumber.length;
-  if (length === 0) return phoneNumber;
-  if (length < 4) return `(${phoneNumber}`;
-  if (length < 7) return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3)}`;
-  return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6, 10)}`;
-};
