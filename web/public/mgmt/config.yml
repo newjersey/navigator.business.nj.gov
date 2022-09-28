@@ -17,9 +17,9 @@ public_folder: web/public
 collections:
   - name: "business-formation-label"
     label: "🟥 BUSINESS FORMATION"
-    folder: ""
+    folder: "content/src"
     fields:
-      - { name: "", label: "" }
+      - { name: "" }
 
   - name: "business-formation-c-corp"
     label: ". . . 🔴 Corporation"
@@ -166,9 +166,10 @@ collections:
               - { label: "Modal Body", name: "interimSuccessPageModalBody", widget: "markdown" }
   - name: "certification-label"
     label: "🟧 CERTIFICATION OPPS"
-    folder: ""
+    folder: "content/src"
     fields:
-      - { name: "", label: "" }
+      - { name: "" }
+
   - name: "certification-opportunities"
     label: ". . . 🟠 Content"
     folder: "content/src/certifications"
@@ -239,9 +240,10 @@ collections:
 
   - name: "funding-label"
     label: "🟨 FUNDING OPPS"
-    folder: ""
+    folder: "content/src"
     fields:
-      - { name: "", label: "" }
+      - { name: "" }
+
   - name: "funding-opportunities"
     label: ". . . 🟡 Content"
     folder: "content/src/fundings"
@@ -517,9 +519,10 @@ collections:
         }
   - name: "roadmaps-label"
     label: "🟩 ROADMAPS"
-    folder: ""
+    folder: "content/src"
     fields:
-      - { name: "", label: "" }
+      - { name: "" }
+
   - name: "roadmaps"
     label: ". . . 🟢 Industries"
     folder: "content/src/roadmaps/industries"
@@ -767,9 +770,10 @@ collections:
 
   - name: "tasks-label"
     label: "🟦 TASKS"
-    folder: ""
+    folder: "content/src"
     fields:
-      - { name: "", label: "" }
+      - { name: "" }
+
   - name: "tasks"
     label: ". . . 🔵 Tasks"
     folder: "content/src/roadmaps/tasks"
@@ -1400,9 +1404,10 @@ collections:
 
   - name: "taxes-filings-label"
     label: "🟪 TAXES & FILINGS"
-    folder: ""
+    folder: "content/src"
     fields:
-      - { name: "", label: "" }
+      - { name: "" }
+
   - name: "filings"
     label: ". . . 🟣 Filings Content"
     folder: "content/src/filings"
