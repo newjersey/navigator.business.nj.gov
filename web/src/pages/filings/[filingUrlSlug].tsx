@@ -47,7 +47,7 @@ export const FilingElement = (props: {
               {parseDate(props.dueDate).format("MMMM D, YYYY").toUpperCase()}
             </span>
             {props.filing.extension && (
-              <Tag tagVariant="base" disableUppercase className="margin-left-5" data-testid="extension">
+              <Tag tagVariant="base" disableUppercase className="margin-left-4" data-testid="extension">
                 {Config.filingDefaults.extensionTagText}
               </Tag>
             )}
@@ -72,7 +72,7 @@ export const FilingElement = (props: {
                   <Icon className="usa-icon--size-3 minw-3 margin-1 text-green margin-right-2">
                     attach_money
                   </Icon>
-                  <Content className="margin-top-1">{`**${Config.filingDefaults.taxRateTitle}**&nbsp;&nbsp;${props.filing.taxRates}`}</Content>
+                  <Content className="margin-top-1">{`**${Config.filingDefaults.taxRateTitle}** &nbsp;&nbsp;${props.filing.taxRates}`}</Content>
                 </span>
                 <br />
               </>
@@ -85,7 +85,7 @@ export const FilingElement = (props: {
                   alt=""
                 />
                 <span className="flex flex-column margin-top-1">
-                  <Content className="flex">{`**${Config.filingDefaults.filingMethod}**&nbsp;&nbsp;${
+                  <Content className="flex">{`**${Config.filingDefaults.filingMethod}** &nbsp;&nbsp;${
                     taxFilingMethodMap[props.filing.filingMethod]
                   }`}</Content>
                   {props.filing.filingDetails && (
@@ -104,7 +104,7 @@ export const FilingElement = (props: {
               <>
                 <span className="flex">
                   <Icon className="usa-icon--size-3 minw-3 margin-1 text-green margin-right-2">event</Icon>
-                  <Content className="margin-top-1">{`**${Config.filingDefaults.filingFrequency}**&nbsp;&nbsp;${props.filing.frequency}`}</Content>
+                  <Content className="margin-top-1">{`**${Config.filingDefaults.filingFrequency}** &nbsp;&nbsp;${props.filing.frequency}`}</Content>
                 </span>
                 <br />
               </>
@@ -112,7 +112,7 @@ export const FilingElement = (props: {
             {props.filing.agency == "New Jersey Division of Taxation" && (
               <span className="flex" data-testid="late-filing">
                 <Icon className="usa-icon--size-3 minw-3 margin-1 text-green margin-right-2">cancel</Icon>
-                <Content className="margin-top-1">{`**${Config.filingDefaults.lateFilingsTitle}**&nbsp;&nbsp;${Config.filingDefaults.lateFilingsMarkdown}`}</Content>
+                <Content className="margin-top-1">{`**${Config.filingDefaults.lateFilingsTitle}** &nbsp;&nbsp;${Config.filingDefaults.lateFilingsMarkdown}`}</Content>
               </span>
             )}
           </GreenBox>
@@ -157,7 +157,7 @@ export const FilingElement = (props: {
         <>
           <div>
             <span className="h5-styling" data-testid="form-id-header">
-              {Config.filingDefaults.formText}&nbsp;
+              {Config.filingDefaults.formText} &nbsp;
             </span>
             <span className="h6-styling">{props.filing.id}</span>
           </div>
