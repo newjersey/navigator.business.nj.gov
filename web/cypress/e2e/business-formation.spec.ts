@@ -5,7 +5,6 @@ import {
   completeNewBusinessOnboarding,
   generateFormationAddress,
   generateMunicipality,
-  getPhoneNumberFormat,
 } from "cypress/support/helpers";
 import { onAddressModal } from "cypress/support/page_objects/addressModal";
 import { onBusinessFormationPage } from "cypress/support/page_objects/businessFormationPage";
@@ -23,7 +22,7 @@ describe("Business Formation [feature] [all] [group2]", () => {
     const businessNameSearch = "My Cool Business";
     const businessStartDate = dayjs().add(2, "months").format("MM/DD/YYYY");
     const businessSuffix = "LIMITED LIABILITY CO";
-    const businessAddressLine1 = `some-business-address-1-${randomInt()}`; // do this do all the other strings
+    const businessAddressLine1 = `some-business-address-1-${randomInt()}`;
     const businessAddressLine2 = `some-business-address-2-${randomInt()}`;
     const businessAddressCity = generateMunicipality({ displayName: "Allendale" });
     const businessAddressZipCode = "07005";
@@ -316,7 +315,13 @@ const typeBillingContactInfo = ({
     onBusinessFormationPage
       .getContactPhoneNumber()
       .invoke("prop", "value")
-      .should("contain", getPhoneNumberFormat(contactPhoneNumber));
+      .should(
+        "contain",
+        `(${contactPhoneNumber.slice(0, 3)}) ${contactPhoneNumber.slice(3, 6)}-${contactPhoneNumber.slice(
+          6,
+          10
+        )}`
+      );
   }
 };
 

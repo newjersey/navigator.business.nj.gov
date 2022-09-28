@@ -39,15 +39,15 @@ export const Button = (props: Props): ReactElement => {
 
   switch (props.style) {
     case "primary":
-      style = "usa-button height-6";
+      style = "usa-button padding-y-11px";
       disabledClass = "usa-button--disabled";
       break;
     case "secondary":
-      style = "usa-button usa-button--outline height-6";
+      style = "usa-button usa-button--outline padding-y-11px";
       disabledClass = "usa-button--outline-disabled";
       break;
     case "secondary-blue":
-      style = "usa-button usa-button--secondary height-6 text-normal";
+      style = "usa-button usa-button--secondary text-normal padding-y-11px";
       disabledClass = "usa-button--secondary-disabled";
       break;
     case "secondary-blue-narrow":
@@ -56,10 +56,10 @@ export const Button = (props: Props): ReactElement => {
       break;
     case "light":
       style =
-        "usa-button bg-transparent text-normal text-base border-1px border-base-light hide-unhide-button height-6";
+        "usa-button bg-transparent text-normal text-base border-1px border-base-light hide-unhide-button padding-y-11px";
       break;
     case "narrow-accent-cool-lightest":
-      style = "usa-button btn-accent-cool-lightest text-normal height-6";
+      style = "usa-button btn-accent-cool-lightest text-normal padding-y-11px";
       break;
 
     case "tertiary":
@@ -71,15 +71,15 @@ export const Button = (props: Props): ReactElement => {
       break;
 
     case "primary-big":
-      style = "usa-button usa-button--big height-8 padding-top-0 padding-bottom-0";
+      style = "usa-button usa-button--big padding-y-14px";
       disabledClass = "usa-button--disabled";
       break;
     case "accent-cool-darker-big":
-      style = "usa-button usa-button--big btn-accent-cool-darker height-8 padding-top-0 padding-bottom-0";
+      style = "usa-button usa-button--big btn-accent-cool-darker padding-y-14px";
       disabledClass = "usa-button--disabled";
       break;
     case "secondary-big":
-      style = "usa-button usa-button--big usa-button--outline height-8 padding-top-0 padding-bottom-0";
+      style = "usa-button usa-button--big usa-button--outline padding-y-14px";
       disabledClass = "usa-button--outline-disabled";
       break;
   }

@@ -23,7 +23,7 @@ export const SidebarCardGeneric = (props: Props) => {
   return (
     <>
       <div
-        className={`border radius-md border-${props.card.borderColor} margin-right-105 margin-bottom-3 maxWidth-400px`}
+        className={`border radius-md border-${props.card.borderColor} desktop:margin-right-3 margin-bottom-3`}
         {...{ "data-testid": props.card.id }}
       >
         {props.headerText && (
