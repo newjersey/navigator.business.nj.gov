@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { FieldLabelOnboarding } from "@/components/onboarding/FieldLabelOnboarding";
 import { OnboardingCannabisLicense } from "@/components/onboarding/OnboardingCannabisLicense";
 import { OnboardingCertifiedInteriorDesigner } from "@/components/onboarding/OnboardingCertifiedInteriorDesigner";
@@ -9,39 +8,17 @@ import { OnboardingHomeContractor } from "@/components/onboarding/OnboardingHome
 import { OnboardingLiquorLicense } from "@/components/onboarding/OnboardingLiquorLicense";
 import { OnboardingRealEstateAppraisalManagement } from "@/components/onboarding/OnboardingRealEstateAppraisalManagement";
 import { OnboardingStaffingService } from "@/components/onboarding/OnboardingStaffingService";
-import { ConfigContext, ConfigType, getMergedConfig } from "@/contexts/configContext";
+import { ConfigContext } from "@/contexts/configContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
+import { getMetadataFromSlug, PreviewProps } from "@/lib/cms/helpers/previewHelpers";
+import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
+import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { createEmptyProfileData } from "@businessnjgovnavigator/shared/profileData";
-import { merge } from "lodash";
-import { useEffect, useRef, useState } from "react";
-import { getMetadataFromSlug } from "./preview-helpers";
 
-type Props = {
-  entry?: any;
-  window: Window;
-  document: Document;
-  fieldsMetaData: any;
-  widgetsFor: (string: string) => any;
-  widgetFor: (string: string) => any;
-  getAsset: (string: string) => any;
-};
+const ProfilePreviewIndustrySpecific = (props: PreviewProps) => {
+  const { config, setConfig } = usePreviewConfig(props);
+  const ref = usePreviewRef(props);
 
-const ProfilePreviewIndustrySpecific = (props: Props) => {
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    ref?.current?.ownerDocument.head.replaceWith(props.window.parent.document.head.cloneNode(true));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ref]);
-
-  const [config, setConfig] = useState<ConfigType>(getMergedConfig());
-
-  const data = JSON.parse(JSON.stringify(props.entry.getIn(["data"])));
-  const dataString = JSON.stringify(data);
-
-  useEffect(() => {
-    setConfig((prevConfig) => JSON.parse(JSON.stringify(merge(prevConfig, data))));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dataString]);
   const { businessPersona } = getMetadataFromSlug(props.entry.toJS().slug);
 
   return (

@@ -1,0 +1,35 @@
+import { Content } from "@/components/Content";
+import { TaxDisplay } from "@/components/tasks/TaxDisplay";
+import { TaxInput } from "@/components/tasks/TaxInput";
+import { ConfigContext } from "@/contexts/configContext";
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
+import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
+import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
+import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
+import { generateTask } from "@/test/factories";
+
+const TaxInputPreview = (props: PreviewProps) => {
+  const { config, setConfig } = usePreviewConfig(props);
+  const ref = usePreviewRef(props);
+
+  const task = generateTask({
+    name: "Name is controlled by Task Metadata",
+    contentMd: "Body content is controlled by Task Metadata",
+  });
+
+  return (
+    <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
+      <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
+        <Content>{config.tax.descriptionText}</Content>
+        <TaxInput task={task} isAuthenticated={IsAuthenticated.TRUE} onSave={() => {}} />
+
+        <hr className="margin-y-6" />
+
+        <Content>{config.tax.descriptionText}</Content>
+        <TaxDisplay onEdit={() => {}} onRemove={() => {}} taxId="123456789" />
+      </div>
+    </ConfigContext.Provider>
+  );
+};
+
+export default TaxInputPreview;

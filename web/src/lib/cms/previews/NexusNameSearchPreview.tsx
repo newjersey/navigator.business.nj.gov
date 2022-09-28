@@ -1,40 +1,17 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { DbaAvailable } from "@/components/tasks/search-business-name/DbaAvailable";
 import { DbaUnavailable } from "@/components/tasks/search-business-name/DbaUnavailable";
 import { NexusAvailable } from "@/components/tasks/search-business-name/NexusAvailable";
 import { NexusSearchBusinessNameTask } from "@/components/tasks/search-business-name/NexusSearchBusinessNameTask";
 import { NexusUnavailable } from "@/components/tasks/search-business-name/NexusUnavailable";
-import { ConfigContext, ConfigType, getMergedConfig } from "@/contexts/configContext";
+import { ConfigContext } from "@/contexts/configContext";
+import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
+import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
+import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { generateTask } from "@/test/factories";
-import { merge } from "lodash";
-import { useEffect, useRef, useState } from "react";
 
-type Props = {
-  entry?: any;
-  window: Window;
-  document: Document;
-  fieldsMetaData: any;
-  widgetsFor: (string: string) => any;
-  widgetFor: (string: string) => any;
-  getAsset: (string: string) => any;
-};
-
-const NexusNameSearchPreview = (props: Props) => {
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    ref?.current?.ownerDocument.head.replaceWith(props.window.parent.document.head.cloneNode(true));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ref]);
-
-  const [config, setConfig] = useState<ConfigType>(getMergedConfig());
-
-  const data = JSON.parse(JSON.stringify(props.entry.getIn(["data"])));
-  const dataString = JSON.stringify(data);
-
-  useEffect(() => {
-    setConfig((prevConfig) => JSON.parse(JSON.stringify(merge(prevConfig, data))));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dataString]);
+const NexusNameSearchPreview = (props: PreviewProps) => {
+  const { config, setConfig } = usePreviewConfig(props);
+  const ref = usePreviewRef(props);
 
   return (
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>

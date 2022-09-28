@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { BusinessPersona } from "@businessnjgovnavigator/shared";
 
 // slug in the form anyLabel-info-poppy
@@ -19,4 +21,14 @@ export const getMetadataFromSlug = (slug: string): { tab: string; businessPerson
     tab: tab,
     businessPersona,
   };
+};
+
+export type PreviewProps = {
+  entry?: any;
+  window: Window;
+  document: Document;
+  fieldsMetaData: any;
+  widgetsFor: (string: string) => any;
+  widgetFor: (string: string) => any;
+  getAsset: (string: string) => any;
 };

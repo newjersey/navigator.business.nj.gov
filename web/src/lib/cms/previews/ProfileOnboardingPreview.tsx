@@ -1,43 +1,19 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { OnboardingBusinessPersona } from "@/components/onboarding/OnboardingBusinessPersona";
 import { OnboardingForeignBusinessType } from "@/components/onboarding/OnboardingForeignBusinessType";
 import { OnboardingLegalStructure } from "@/components/onboarding/OnboardingLegalStructure";
 import { OnboardingLocationInNewJersey } from "@/components/onboarding/OnboardingLocationInNewJersey";
-import { ConfigContext, ConfigType, getMergedConfig } from "@/contexts/configContext";
+import { ConfigContext } from "@/contexts/configContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { getMetadataFromSlug } from "@/lib/cms/previews/preview-helpers";
+import { getMetadataFromSlug, PreviewProps } from "@/lib/cms/helpers/previewHelpers";
+import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
+import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { createEmptyProfileData } from "@businessnjgovnavigator/shared/profileData";
-import { merge } from "lodash";
-import { useEffect, useRef, useState } from "react";
 
-type Props = {
-  entry?: any;
-  window: Window;
-  document: Document;
-  fieldsMetaData: any;
-  widgetsFor: (string: string) => any;
-  widgetFor: (string: string) => any;
-  getAsset: (string: string) => any;
-};
-
-const ProfilePreviewOnboarding = (props: Props) => {
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    ref?.current?.ownerDocument.head.replaceWith(props.window.parent.document.head.cloneNode(true));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ref]);
-
-  const [config, setConfig] = useState<ConfigType>(getMergedConfig());
-
-  const data = JSON.parse(JSON.stringify(props.entry.getIn(["data"])));
-  const dataString = JSON.stringify(data);
-
-  useEffect(() => {
-    setConfig((prevConfig) => JSON.parse(JSON.stringify(merge(prevConfig, data))));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dataString]);
+const ProfilePreviewOnboarding = (props: PreviewProps) => {
+  const { config, setConfig } = usePreviewConfig(props);
+  const ref = usePreviewRef(props);
 
   const { businessPersona } = getMetadataFromSlug(props.entry.toJS().slug);
 
