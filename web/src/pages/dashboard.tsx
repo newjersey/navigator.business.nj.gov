@@ -134,7 +134,6 @@ const DashboardPage = (props: Props): ReactElement => {
           </div>
         ) : (
           <RightSidebarPageLayout
-            color="blue"
             mainContent={renderRoadmap}
             sidebarContent={
               <SidebarCardsList
