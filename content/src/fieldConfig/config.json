@@ -32,6 +32,7 @@
     "businessAddressHeader": "### Business Address",
     "businessTotalStockLabel": "**Stock** (Total Number of Shares)",
     "reviewStepBillingServicesHeader": "### Services",
+    "businessLocationInfoAlertMarkdown": "**Cant find your city?** Unincorporated places are not listed here. Search for [your official jurisdiction](https://www.google.com) (you will type in your community into the local name field).",
     "businessPurposePlaceholderText": "Describe your business purpose",
     "reviewStepMembersHeader": "### Members",
     "provisionsAddButtonText": "Add Provisions/Articles",

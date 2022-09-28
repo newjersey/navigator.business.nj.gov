@@ -1,4 +1,5 @@
 import { Content } from "@/components/Content";
+import { Alert } from "@/components/njwds-extended/Alert";
 import { BusinessNameAndLegalStructure } from "@/components/tasks/business-formation/business/BusinessNameAndLegalStructure";
 import { FormationMunicipality } from "@/components/tasks/business-formation/business/FormationMunicipality";
 import { FormationStartDate } from "@/components/tasks/business-formation/business/FormationStartDate";
@@ -122,6 +123,9 @@ export const MainBusiness = (): ReactElement => {
           className="form-input grid-col-7 tablet:grid-col-4"
         />
       </div>
+      <Alert variant="info" className="margin-bottom-5">
+        <Content>{Config.businessFormationDefaults.businessLocationInfoAlertMarkdown}</Content>
+      </Alert>
     </>
   );
 };

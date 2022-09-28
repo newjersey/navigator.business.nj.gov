@@ -1581,6 +1581,11 @@ collections:
                   name: businessAddressZipCodePlaceholder,
                   widget: string,
                 }
+              - {
+                  label: Business Step - Location Info Alert Text,
+                  name: businessLocationInfoAlertMarkdown,
+                  widget: markdown,
+                }
               - { label: Business Name - Not Set, name: notSetBusinessNameText, widget: string }
               - {
                   label: Business Suffix Label,
@@ -2033,6 +2038,7 @@ collections:
                   name: reviewStepBillingContactHeader,
                   widget: string,
                 }
+
               - {
                   label: Review Step - Billing Services Header,
                   name: reviewStepBillingServicesHeader,

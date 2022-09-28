@@ -5,6 +5,7 @@ import {
   generateUser,
   generateUserData,
 } from "@/test/factories";
+import { markdownToText } from "@/test/helpers";
 import {
   FormationPageHelpers,
   generateFormationProfileData,
@@ -84,6 +85,13 @@ describe("Formation - BusinessStep", () => {
     fireEvent.click(screen.getByTestId("edit-legal-structure"));
     expect(
       screen.getByText(Config.businessFormationDefaults.legalStructureWarningModalHeader)
+    ).toBeInTheDocument();
+  });
+
+  it("displays jurisdiction alert info box", async () => {
+    await getPageHelper({}, {});
+    expect(
+      screen.getByText(markdownToText(Config.businessFormationDefaults.businessLocationInfoAlertMarkdown))
     ).toBeInTheDocument();
   });
 
