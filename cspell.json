@@ -103,7 +103,8 @@
     "orcnr",
     "VEEVR",
     "NPFA",
-    "OPPS"
+    "OPPS",
+    "evtp"
   ],
   "ignorePaths": ["node_modules/**", "out/**", "web/out/**", "package.json"]
 }
