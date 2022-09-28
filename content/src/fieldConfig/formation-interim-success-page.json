@@ -1,0 +1,11 @@
+{
+  "businessFormationDefaults": {
+    "interimSuccessPageAlertText": "We are unable find your completed filing information at this time.",
+    "interimSuccessPageBodyText": "If you completed payment, your formation documents are available in your email. Visit this page again later.\n\nIf you did not successfully complete payment, you can review and ~button~",
+    "interimSuccessPageButtonText": "re-submit your formation.",
+    "interimSuccessPageModalTitle": "Please verify before proceeding",
+    "interimSuccessPageModalCancel": "Cancel",
+    "interimSuccessPageModalContinue": "I understand",
+    "interimSuccessPageModalBody": "This action will return you to your formation form to review and re-submit. You will be required to enter your payment information again. If you have already paid your formation fees, do not perform this operation.\n\n**Only proceed if you are confident that your payment has not completed.**"
+  }
+}
