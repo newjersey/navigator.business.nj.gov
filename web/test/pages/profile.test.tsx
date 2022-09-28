@@ -995,9 +995,6 @@ describe("profile", () => {
         expect(
           screen.getByText(markdownToText(Config.profileDefaults.FOREIGN.legalStructureId.header))
         ).toBeInTheDocument();
-        expect(
-          screen.getByText(markdownToText(Config.profileDefaults.FOREIGN.municipality.header))
-        ).toBeInTheDocument();
       });
 
       it("displays the out of state business name field", () => {
@@ -1064,6 +1061,26 @@ describe("profile", () => {
         expect(
           screen.queryByText(Config.profileDefaults.FOREIGN.nexusDbaName.header)
         ).not.toBeInTheDocument();
+      });
+
+      it("shows the location question if the user plans to lease a space in NJ and not home-based business question", () => {
+        renderPage({
+          userData: nexusForeignBusinessProfile({
+            nexusLocationInNewJersey: true,
+          }),
+        });
+        expect(screen.getByText("Location")).toBeInTheDocument();
+        expect(screen.queryByText("Home-based business")).not.toBeInTheDocument();
+      });
+
+      it("shows the home-based question if the user does not plan to lease a space in NJ and not location question", () => {
+        renderPage({
+          userData: nexusForeignBusinessProfile({
+            nexusLocationInNewJersey: false,
+          }),
+        });
+        expect(screen.getByText("Home-based business")).toBeInTheDocument();
+        expect(screen.queryByText("Location")).not.toBeInTheDocument();
       });
     });
   });

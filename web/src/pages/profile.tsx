@@ -246,10 +246,15 @@ const ProfilePage = (props: Props): ReactElement => {
         <FieldLabelProfile fieldName="legalStructureId" />
         <OnboardingLegalStructureDropdown disabled={userData?.formationData.getFilingResponse?.success} />
         <div className="margin-top-3" aria-hidden={true} />
-        <FieldLabelProfile fieldName="municipality" />
-        <OnboardingMunicipality onValidation={onValidation} fieldStates={fieldStates} />
         <FieldLabelProfile fieldName="nexusLocationInNewJersey" />
         <OnboardingLocationInNewJersey />
+        {profileData.nexusLocationInNewJersey && (
+          <>
+            <div className="margin-top-3" aria-hidden={true} />
+            <FieldLabelProfile fieldName="municipality" />
+            <OnboardingMunicipality onValidation={onValidation} fieldStates={fieldStates} />
+          </>
+        )}
       </>
     ),
     documents: <></>,
