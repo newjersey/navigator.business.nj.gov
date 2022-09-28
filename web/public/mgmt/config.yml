@@ -164,6 +164,34 @@ collections:
               - { label: "Modal Cancel Button", name: "interimSuccessPageModalCancel", widget: "string" }
               - { label: "Modal Continue Button", name: "interimSuccessPageModalContinue", widget: "string" }
               - { label: "Modal Body", name: "interimSuccessPageModalBody", widget: "markdown" }
+      - label: "Success Page"
+        name: "business-formation-success-page"
+        file: "content/src/fieldConfig/formation-success-page.json"
+        editor:
+          preview: true
+        fields:
+          - label: Business Formation Defaults
+            name: businessFormationDefaults
+            collapsed: false
+            widget: object
+            fields:
+              - { label: "Page Header", name: "successPageHeader", widget: "string" }
+              - { label: "Page Subheader", name: "successPageSubheader", widget: "markdown" }
+              - { label: "Body", name: "successPageBody", widget: "markdown" }
+              - { label: "Amendment Text", name: "successPageAmendmentText", widget: "markdown" }
+              - {
+                  label: "Certified Copy of Formation - Document Label",
+                  name: "certifiedDocLabel",
+                  widget: "string",
+                }
+              - {
+                  label: "Certificate of Good Standing - Document Label",
+                  name: "standingDocLabel",
+                  widget: "string",
+                }
+              - { label: "Official Formation - Document Label", name: "formationDocLabel", widget: "string" }
+              - { label: "Entity ID label", name: "entityIdLabel", widget: "markdown" }
+              - { label: "Confirmation Number label", name: "confirmationNumberLabel", widget: "markdown" }
   - name: "certification-label"
     label: "🟧 CERTIFICATION OPPS"
     folder: "content/src"
@@ -1640,7 +1668,6 @@ collections:
                   widget: string,
                 }
               - { label: Characters Label, name: charactersLabel, widget: string }
-              - { label: Confirmation Label, name: confirmationNumberLabel, widget: string }
               - {
                   label: Contact Section Header,
                   name: contactInformationHeader,
@@ -1675,9 +1702,6 @@ collections:
               - { label: Credit Card Payment Cost, name: creditCardPaymentCostInitial, widget: string }
               - { label: Credit Card Payment Extra Cost, name: creditCardPaymentCostExtra, widget: string }
               - { label: Credit Card Payment label, name: creditCardPaymentTypeLabel, widget: string }
-              - { label: Document - Certified Label, name: certifiedDocLabel, widget: string }
-              - { label: Document - Formation Label, name: formationDocLabel, widget: string }
-              - { label: Document - Standing Label, name: standingDocLabel, widget: string }
               - { label: Document Table - Column 2 Label, name: documentTableColumn2Label, widget: string }
               - { label: Document Table - Column 3 Label, name: documentTableColumn3Label, widget: string }
               - {
@@ -1686,7 +1710,6 @@ collections:
                   widget: string,
                 }
               - { label: Edit Button Text, name: editButtonText, widget: string }
-              - { label: Entity ID Label, name: entityIdLabel, widget: string }
               - { label: Error - Address City, name: addressCityErrorText, widget: string }
               - { label: Error - Address State, name: addressStateErrorText, widget: string }
               - { label: Error - Address State (Modal), name: addressModalCityErrorText, widget: string }
@@ -2305,8 +2328,7 @@ collections:
               - {
                   label: Review Step - Paper Amendment Info Text,
                   name: reviewPageAmendmentText,
-                  widget: string,
-                  hint: This field supports Markdown,
+                  widget: markdown,
                 }
               - { label: Review Step - Not Entered Text, name: reviewStepNotEnteredText, widget: string }
               - { label: Same Agent Info As Account, name: sameAgentInfoAsAccount, widget: string }
@@ -2330,20 +2352,6 @@ collections:
               - { label: Signer - Error Text At Least 1 Needed, name: signerMinimumErrorText, widget: string }
               - { label: Signer - Error Text Checkbox Missing, name: signerCheckboxErrorText, widget: string }
               - { label: Submit Button Text, name: submitButtonText, widget: string }
-              - { label: Success Page - Body, name: successPageBody, widget: string }
-              - { label: Success Page - Header, name: successPageHeader, widget: string }
-              - { label: Success Page - Subheader, name: successPageSubheader, widget: string }
-              - {
-                  label: Success Page - API Call Failed Alert Message,
-                  name: getFilingApiErrorText,
-                  widget: markdown,
-                }
-              - {
-                  label: Success Page - Paper Amendment Text,
-                  name: successPageAmendmentText,
-                  widget: string,
-                  hint: supports markdown,
-                }
               - { label: Update your Profile text, name: updateYourProfileLinkText, widget: string }
               - label: Required Fields Labels (for error alert box)
                 name: requiredFieldsBulletPointLabel

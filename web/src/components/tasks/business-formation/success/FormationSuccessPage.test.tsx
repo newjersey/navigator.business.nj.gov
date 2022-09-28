@@ -1,12 +1,13 @@
 import { FormationSuccessPage } from "@/components/tasks/business-formation/success/FormationSuccessPage";
+import { getMergedConfig } from "@/contexts/configContext";
 import { generateFormationData, generateGetFilingResponse, generateUserData } from "@/test/factories";
 import { generateFormationProfileData } from "@/test/helpers-formation";
 import { setMockDocumentsResponse, useMockDocuments } from "@/test/mock/mockUseDocuments";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { FormationLegalType, GetFilingResponse, ProfileData } from "@businessnjgovnavigator/shared";
 import { render, screen } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useDocuments");
+const Config = getMergedConfig();
 
 describe("Formation - <FormationSuccessPage />", () => {
   let getFilingResponse: GetFilingResponse;
