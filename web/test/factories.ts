@@ -64,7 +64,7 @@ import {
   TaxFilingData,
   TaxFilingLookUpRequest,
   UserData,
-} from "@businessnjgovnavigator/shared/";
+} from "@businessnjgovnavigator/shared";
 import { createEmptyFormationFormData } from "@businessnjgovnavigator/shared/formationData";
 
 export const generateSectionType = (): SectionType => {
@@ -113,7 +113,7 @@ export const generateTaxFilingData = (overrides: Partial<TaxFilingData>): TaxFil
 export const generateTaxFiling = (overrides: Partial<TaxFiling>): TaxFiling => {
   return {
     identifier: `some-identifier-${randomInt()}`,
-    dueDate: getCurrentDateFormatted("YYYY-MM-DD"),
+    dueDate: getCurrentDate().add(randomInt(), "month").format("YYYY-MM-DD"),
     ...overrides,
   };
 };

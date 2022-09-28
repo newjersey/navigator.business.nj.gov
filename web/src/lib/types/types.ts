@@ -344,12 +344,14 @@ export const taxFilingMethod = [
   "online",
   "paper-or-by-mail-only",
   "online-required",
-  "technical assistance",
   "online-or-phone",
 ] as const;
 export type TaxFilingMethod = typeof taxFilingMethod[number];
 
-export type TaxAgency = "New Jersey Division of Taxation";
+export type TaxAgency =
+  | "New Jersey Division of Taxation"
+  | "Internal Revenue Service (IRS)"
+  | "NJ Department of Labor";
 
 export interface Filing {
   id: string;

@@ -187,6 +187,9 @@ ol {
 .usa-link,
 .usa-prose > a {
   color: $primary !important;
+  @media all and (max-width: $sm) {
+    word-wrap: anywhere !important;
+  }
 }
 
 .usa-link:visited,

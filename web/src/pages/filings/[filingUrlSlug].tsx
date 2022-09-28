@@ -6,11 +6,12 @@ import { PageSkeleton } from "@/components/PageSkeleton";
 import { TaskCTA } from "@/components/TaskCTA";
 import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { sortFilterFilingsWithinAYear } from "@/lib/domain-logic/filterFilings";
 import { FilingUrlSlugParam, loadAllFilingUrlSlugs, loadFilingByUrlSlug } from "@/lib/static/loadFilings";
 import { loadOperateReferences } from "@/lib/static/loadOperateReferences";
 import { Filing, OperateReference, TaxFilingMethod } from "@/lib/types/types";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { parseDate } from "@businessnjgovnavigator/shared/dateHelpers";
+import { parseDate, TaxFiling } from "@businessnjgovnavigator/shared";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
@@ -25,7 +26,6 @@ export const taxFilingMethodMap: Record<TaxFilingMethod, string> = {
   online: Config.filingDefaults.onlineTaxFilingMethod,
   "paper-or-by-mail-only": Config.filingDefaults.paperOrMailOnlyTaxFilingMethod,
   "online-required": Config.filingDefaults.onlineRequiredTaxFilingMethod,
-  "technical assistance": Config.filingDefaults.technicalAssistanceTaxFilingMethod,
   "online-or-phone": Config.filingDefaults.onlineOrPhoneTaxFilingMethod,
 };
 
@@ -34,29 +34,6 @@ export const FilingElement = (props: {
   dueDate: string;
   preview?: boolean;
 }): ReactElement => {
-  const getFilingMethod = () => {
-    if (props.filing.filingMethod)
-      return (
-        <span className="flex flex-row" data-testid="filing-method">
-          <Icon className="usa-icon--size-3 minw-3 margin-1 text-green margin-right-2">print</Icon>
-          <span className="flex flex-column margin-top-1">
-            <Content className="flex">{`**${Config.filingDefaults.filingMethod}**&nbsp;&nbsp;${
-              taxFilingMethodMap[props.filing.filingMethod]
-            }`}</Content>
-            {props.filing.filingDetails && (
-              <>
-                {" "}
-                <br />
-                <Content data-testid="filing-details">{props.filing.filingDetails}</Content>
-              </>
-            )}
-
-            <br />
-          </span>
-        </span>
-      );
-  };
-
   return (
     <>
       <div className="minh-38">
@@ -84,14 +61,45 @@ export const FilingElement = (props: {
             </ExternalLink>
           </div>
         )}
-        {props.filing.taxRates && (
+        {(props.filing.taxRates ||
+          props.filing.filingMethod ||
+          props.filing.frequency ||
+          props.filing.agency == "New Jersey Division of Taxation") && (
           <GreenBox>
-            <span className="flex" data-testid="tax-rates">
-              <Icon className="usa-icon--size-3 minw-3 margin-1 text-green margin-right-2">attach_money</Icon>
-              <Content className="margin-top-1">{`**${Config.filingDefaults.taxRateTitle}**&nbsp;&nbsp;${props.filing.taxRates}`}</Content>
-            </span>
-            <br />
-            {getFilingMethod()}
+            {props.filing.taxRates && (
+              <>
+                <span className="flex" data-testid="tax-rates">
+                  <Icon className="usa-icon--size-3 minw-3 margin-1 text-green margin-right-2">
+                    attach_money
+                  </Icon>
+                  <Content className="margin-top-1">{`**${Config.filingDefaults.taxRateTitle}**&nbsp;&nbsp;${props.filing.taxRates}`}</Content>
+                </span>
+                <br />
+              </>
+            )}
+            {props.filing.filingMethod && (
+              <span className="flex flex-row" data-testid="filing-method">
+                <img
+                  className="usa-icon--size-3 minw-3 margin-1 margin-right-2"
+                  src={`/img/file-document-outline.svg`}
+                  alt=""
+                />
+                <span className="flex flex-column margin-top-1">
+                  <Content className="flex">{`**${Config.filingDefaults.filingMethod}**&nbsp;&nbsp;${
+                    taxFilingMethodMap[props.filing.filingMethod]
+                  }`}</Content>
+                  {props.filing.filingDetails && (
+                    <>
+                      {" "}
+                      <br />
+                      <Content data-testid="filing-details">{props.filing.filingDetails}</Content>
+                    </>
+                  )}
+
+                  <br />
+                </span>
+              </span>
+            )}
             {props.filing.frequency && (
               <>
                 <span className="flex">
@@ -101,10 +109,12 @@ export const FilingElement = (props: {
                 <br />
               </>
             )}
-            <span className="flex">
-              <Icon className="usa-icon--size-3 minw-3 margin-1 text-green margin-right-2">cancel</Icon>
-              <Content className="margin-top-1">{`**${Config.filingDefaults.lateFilingsTitle}**&nbsp;&nbsp;${Config.filingDefaults.lateFilingsMarkdown}`}</Content>
-            </span>
+            {props.filing.agency == "New Jersey Division of Taxation" && (
+              <span className="flex" data-testid="late-filing">
+                <Icon className="usa-icon--size-3 minw-3 margin-1 text-green margin-right-2">cancel</Icon>
+                <Content className="margin-top-1">{`**${Config.filingDefaults.lateFilingsTitle}**&nbsp;&nbsp;${Config.filingDefaults.lateFilingsMarkdown}`}</Content>
+              </span>
+            )}
           </GreenBox>
         )}
 
@@ -149,7 +159,7 @@ export const FilingElement = (props: {
             <span className="h5-styling" data-testid="form-id-header">
               {Config.filingDefaults.formText}&nbsp;
             </span>
-            <span className="h6-styling">{props.filing.id.replaceAll("_", "/")}</span>
+            <span className="h6-styling">{props.filing.id}</span>
           </div>
         </>
       </div>
@@ -162,7 +172,9 @@ export const FilingElement = (props: {
 
 const FilingPage = (props: Props): ReactElement => {
   const { userData } = useUserData();
-  const matchingFiling = userData?.taxFilingData.filings.find((it) => it.identifier === props.filing.id);
+  const matchingFiling = sortFilterFilingsWithinAYear(userData?.taxFilingData.filings ?? []).find(
+    (it: TaxFiling) => it.identifier === props.filing.urlSlug
+  );
   const dueDate = matchingFiling ? parseDate(matchingFiling.dueDate).format("MM/DD/YYYY") : "";
 
   return (
