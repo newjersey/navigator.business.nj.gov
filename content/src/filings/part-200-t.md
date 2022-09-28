@@ -1,6 +1,8 @@
 ---
+urlSlug: part-200-t
 name: Partnership
-callToActionLink: https://www1.state.nj.us/TYTR_BusinessFilings/jsp/common/Login.jsp?taxcode=43
+extension: true
+treasuryLink: https://www.nj.gov/treasury/taxation/businesses/partnerships/index.shtml
 taxRates: >-
   Partnerships may be required to:
 
@@ -11,20 +13,18 @@ taxRates: >-
 
 
   The installment payments will be credited to the accounts of the nonresident partners in proportion to their share of ownership.
+filingMethod: online-required
 filingDetails: ""
-agency: New Jersey Division of Taxation
-additionalInfo: null
-urlSlug: part-200-t
-id: part-200-t
-callToActionText: File and Pay
 frequency: >-
   Annually
 
 
-  *Part-200-T extension requests, along with payment, can be filed online until 11:59 p.m. on or before the original due date of the return.*
-filingMethod: online-required
-treasuryLink: https://www.nj.gov/treasury/taxation/businesses/partnerships/index.shtml
-extension: true
+  * Part-200-T extension requests, along with payment, can be filed online until 11:59 p.m. on or before the original due date of the return.
+additionalInfo: null
+agency: New Jersey Division of Taxation
+id: part-200-t
+callToActionLink: https://www1.state.nj.us/TYTR_BusinessFilings/jsp/common/Login.jsp?taxcode=43
+callToActionText: File and Pay
 ---
 This is a tax on businesses that have elected a form of partnership (i.e. limited liability partnership) as their legal structure. Income and gains derived from a partnership are taxed whether or not they are actually distributed among the partners.
 
