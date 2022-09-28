@@ -3,7 +3,7 @@ import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { CannabisPriorityStatusTask } from "@/components/tasks/cannabis/CannabisPriorityStatusTask";
 import { ConfigContext, ConfigType, getMergedConfig } from "@/contexts/configContext";
-import { getMetadataFromSlug } from "@/lib/cms/previews/preview-helpers";
+import { getMetadataFromSlug } from "@/lib/cms/previews/previewHelpers";
 import { templateEval } from "@/lib/utils/helpers";
 import { generateTask } from "@/test/factories";
 import { merge } from "lodash";

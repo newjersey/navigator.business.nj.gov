@@ -2,7 +2,7 @@
 import { Content } from "@/components/Content";
 import { CannabisApplyForLicenseTask } from "@/components/tasks/cannabis/CannabisApplyForLicenseTask";
 import { ConfigContext, ConfigType, getMergedConfig } from "@/contexts/configContext";
-import { getMetadataFromSlug } from "@/lib/cms/previews/preview-helpers";
+import { getMetadataFromSlug } from "@/lib/cms/previews/previewHelpers";
 import { generateProfileData, generateTask, generateUserData } from "@/test/factories";
 import { merge } from "lodash";
 import { useEffect, useRef, useState } from "react";

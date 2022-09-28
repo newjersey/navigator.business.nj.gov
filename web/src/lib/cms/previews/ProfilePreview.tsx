@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Documents } from "@/components/profile/Documents";
 import { ConfigContext, ConfigType, getMergedConfig } from "@/contexts/configContext";
-import { getMetadataFromSlug } from "@/lib/cms/previews/preview-helpers";
+import { getMetadataFromSlug } from "@/lib/cms/previews/previewHelpers";
 import { ProfileTabs } from "@/lib/types/types";
 import Profile from "@/pages/profile";
-import { generateProfileData, generateUserData } from "@/test/factories";
+import { generateUser } from "@/test/factories";
+import { OperatingPhaseId } from "@businessnjgovnavigator/shared/operatingPhase";
+import { createEmptyUserData } from "@businessnjgovnavigator/shared/userData";
 import { merge } from "lodash";
 import { useEffect, useRef, useState } from "react";
 
@@ -18,7 +19,7 @@ type Props = {
   getAsset: (string: string) => any;
 };
 
-const ProfilePreviewDocuments = (props: Props) => {
+const ProfilePreview = (props: Props) => {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     ref?.current?.ownerDocument.head.replaceWith(props.window.parent.document.head.cloneNode(true));
@@ -36,40 +37,34 @@ const ProfilePreviewDocuments = (props: Props) => {
   }, [dataString]);
 
   const { tab, businessPersona } = getMetadataFromSlug(props.entry.toJS().slug);
+  const emptyUserData = createEmptyUserData(generateUser({}));
 
-  const llcUserDataNoDocs = generateUserData({
-    profileData: generateProfileData({
-      legalStructureId: "limited-liability-company",
-    }),
-  });
-
-  const llcUserDataWithDocs = generateUserData({
-    profileData: generateProfileData({
-      legalStructureId: "limited-liability-company",
-      documents: {
-        formationDoc: "asdf",
-        standingDoc: "asdf",
-        certifiedDoc: "asdf",
-      },
-    }),
-  });
+  const userData = {
+    ...emptyUserData,
+    profileData: {
+      ...emptyUserData.profileData,
+      businessName: "cmsPreview",
+      nexusDbaName: "cmsPreview",
+      legalStructureId:
+        tab === "numbers" || businessPersona === "FOREIGN" ? "limited-liability-company" : undefined,
+      businessPersona,
+      operatingPhase: "FORMED_AND_REGISTERED" as OperatingPhaseId,
+    },
+  };
 
   return (
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
       <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
-        <h2>Formation completed state:</h2>
-        <Documents CMS_ONLY_fakeUserData={llcUserDataWithDocs} />
-        <hr className="margin-y-4" />
-        <h2 className="margin-bottom-4">Formation not completed (or non-LLC) state:</h2>
         <Profile
           municipalities={[]}
           CMS_ONLY_tab={tab as ProfileTabs}
           CMS_ONLY_businessPersona={businessPersona}
-          CMS_ONLY_fakeUserData={llcUserDataNoDocs}
+          CMS_ONLY_foreignBusinessType={businessPersona === "FOREIGN" ? "NEXUS" : "NONE"}
+          CMS_ONLY_fakeUserData={userData}
         />
       </div>
     </ConfigContext.Provider>
   );
 };
 
-export default ProfilePreviewDocuments;
+export default ProfilePreview;

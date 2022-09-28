@@ -11,10 +11,10 @@ import { OnboardingRealEstateAppraisalManagement } from "@/components/onboarding
 import { OnboardingStaffingService } from "@/components/onboarding/OnboardingStaffingService";
 import { ConfigContext, ConfigType, getMergedConfig } from "@/contexts/configContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
+import { getMetadataFromSlug } from "@/lib/cms/previews/previewHelpers";
 import { createEmptyProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { merge } from "lodash";
 import { useEffect, useRef, useState } from "react";
-import { getMetadataFromSlug } from "./preview-helpers";
 
 type Props = {
   entry?: any;

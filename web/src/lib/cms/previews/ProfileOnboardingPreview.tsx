@@ -7,7 +7,7 @@ import { OnboardingLegalStructure } from "@/components/onboarding/OnboardingLega
 import { OnboardingLocationInNewJersey } from "@/components/onboarding/OnboardingLocationInNewJersey";
 import { ConfigContext, ConfigType, getMergedConfig } from "@/contexts/configContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { getMetadataFromSlug } from "@/lib/cms/previews/preview-helpers";
+import { getMetadataFromSlug } from "@/lib/cms/previews/previewHelpers";
 import { createEmptyProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { merge } from "lodash";
 import { useEffect, useRef, useState } from "react";

@@ -1,28 +1,28 @@
 import ContextEditor from "@/lib/cms/editors/context-info";
 import { NoSpaceControl } from "@/lib/cms/fields/nospacefield";
 import { SlugControl } from "@/lib/cms/fields/slugfield";
-import CannabisEligibilityModalPreview from "@/lib/cms/previews/cannabis-eligibility-modal";
-import CannabisLicensePreview from "@/lib/cms/previews/cannabis-license/cannabis-license";
-import CannabisPriorityStatusPreview from "@/lib/cms/previews/cannabis-priority-status";
-import CertificationsPreview from "@/lib/cms/previews/certifications";
-import ContentPreview from "@/lib/cms/previews/content";
-import ContextInfoPreview from "@/lib/cms/previews/context-info";
-import EinInputPreview from "@/lib/cms/previews/ein-input";
-import FilingsPreview from "@/lib/cms/previews/filings";
-import FormationInterimSuccessPreview from "@/lib/cms/previews/formation-interim-success";
-import FormationSuccessPreview from "@/lib/cms/previews/formation-success-page";
-import FundingsPreview from "@/lib/cms/previews/fundings";
-import NaicsLookupPreview from "@/lib/cms/previews/naics-lookup";
-import NexusDbaFormationPreview from "@/lib/cms/previews/nexus-dba-formation";
-import NexusNameSearchPreview from "@/lib/cms/previews/nexus-name-search";
-import ProfilePreview from "@/lib/cms/previews/profile";
-import ProfilePreviewDocuments from "@/lib/cms/previews/profile-documents";
-import ProfilePreviewIndustrySpecific from "@/lib/cms/previews/profile-industryspecific";
-import ProfilePreviewMisc from "@/lib/cms/previews/profile-misc";
-import ProfilePreviewOnboarding from "@/lib/cms/previews/profile-onboarding";
-import RoadmapSidebarCardPreview from "@/lib/cms/previews/roadmap-sidebar-card";
-import TaskPreview from "@/lib/cms/previews/task";
-import TaxInputPreview from "@/lib/cms/previews/tax-input";
+import CannabisEligibilityModalPreview from "@/lib/cms/previews/CannabisEligibilityModalPreview";
+import CannabisLicensePreview from "@/lib/cms/previews/CannabisLicensePreview";
+import CannabisPriorityStatusPreview from "@/lib/cms/previews/CannabisPriorityStatusPreview";
+import CertificationsPreview from "@/lib/cms/previews/CertificationsPreview";
+import ContentPreview from "@/lib/cms/previews/ContentPreview";
+import ContextInfoPreview from "@/lib/cms/previews/ContextInfoPreview";
+import EinInputPreview from "@/lib/cms/previews/EinInputPreview";
+import FilingsPreview from "@/lib/cms/previews/FilingsPreview";
+import FormationInterimSuccessPreview from "@/lib/cms/previews/FormationInterimSuccessPreview";
+import FormationSuccessPreview from "@/lib/cms/previews/FormationSuccessPagePreview";
+import FundingsPreview from "@/lib/cms/previews/FundingsPreview";
+import NaicsLookupPreview from "@/lib/cms/previews/NaicsLookupPreview";
+import NexusDbaFormationPreview from "@/lib/cms/previews/NexusDbaFormationPreview";
+import NexusNameSearchPreview from "@/lib/cms/previews/NexusNameSearchPreview";
+import ProfilePreviewDocuments from "@/lib/cms/previews/ProfileDocumentsPreview";
+import ProfilePreviewIndustrySpecific from "@/lib/cms/previews/ProfileIndustrySpecificPreview";
+import ProfilePreviewMisc from "@/lib/cms/previews/ProfileMiscPreview";
+import ProfilePreviewOnboarding from "@/lib/cms/previews/ProfileOnboardingPreview";
+import ProfilePreview from "@/lib/cms/previews/ProfilePreview";
+import RoadmapSidebarCardPreview from "@/lib/cms/previews/SidebarCardPreview";
+import TaskPreview from "@/lib/cms/previews/TaskPreview";
+import TaxInputPreview from "@/lib/cms/previews/TaxInputPreview";
 import { useMountEffect } from "@/lib/utils/helpers";
 import dynamic from "next/dynamic";
 
@@ -45,128 +45,73 @@ const CMS = dynamic(
       // @ts-expect-error: No type definition available
       CMS.registerWidget("nospace", NoSpaceControl);
       // @ts-expect-error: No type definition available
-      CMS.registerPreviewTemplate("tasks", TaskPreview);
-      // @ts-expect-error: No type definition available
-      CMS.registerPreviewTemplate("funding-opportunities", FundingsPreview);
-      // @ts-expect-error: No type definition available
-      CMS.registerPreviewTemplate("post-onboarding-content", ContentPreview);
-      // @ts-expect-error: No type definition available
-      CMS.registerPreviewTemplate("archived-funding-opportunities", FundingsPreview);
-      // @ts-expect-error: No type definition available
-      CMS.registerPreviewTemplate("certification-opportunities", CertificationsPreview);
-      // @ts-expect-error: No type definition available
-      CMS.registerPreviewTemplate("archived-certification-opportunities", CertificationsPreview);
-      // @ts-expect-error: No type definition available
-      CMS.registerPreviewTemplate("certification-checklist", CertificationsPreview);
-      // @ts-expect-error: No type definition available
       CMS.registerEditorComponent(ContextEditor);
-      // @ts-expect-error: No type definition available
-      CMS.registerPreviewTemplate("contextual-information", ContextInfoPreview);
-      // @ts-expect-error: No type definition available
-      CMS.registerPreviewTemplate("filings", FilingsPreview);
+
+      registerPreview(CMS, "tasks", TaskPreview);
+      registerPreview(CMS, "funding-opportunities", FundingsPreview);
+      registerPreview(CMS, "post-onboarding-content", ContentPreview);
+      registerPreview(CMS, "archived-funding-opportunities", FundingsPreview);
+      registerPreview(CMS, "certification-opportunities", CertificationsPreview);
+      registerPreview(CMS, "archived-certification-opportunities", CertificationsPreview);
+      registerPreview(CMS, "certification-checklist", CertificationsPreview);
+      registerPreview(CMS, "contextual-information", ContextInfoPreview);
+      registerPreview(CMS, "filings", FilingsPreview);
 
       // ----- Roadmap Sidebar Card -----
-      // @ts-expect-error: No type definition available
-      CMS.registerPreviewTemplate("roadmap-sidebar-card", RoadmapSidebarCardPreview);
+      registerPreview(CMS, "roadmap-sidebar-card", RoadmapSidebarCardPreview);
 
-      // @ts-expect-error: No type definition available
-      CMS.registerPreviewTemplate("profile-info-poppy", ProfilePreview);
-      // @ts-expect-error: No type definition available
-      CMS.registerPreviewTemplate("profile-info-oscar", ProfilePreview);
-      // @ts-expect-error: No type definition available
-      CMS.registerPreviewTemplate("profile-info-dakota", ProfilePreview);
-      // @ts-expect-error: No type definition available
-      CMS.registerPreviewTemplate("profile-numbers-poppy", ProfilePreview);
-      // @ts-expect-error: No type definition available
-      CMS.registerPreviewTemplate("profile-numbers-oscar", ProfilePreview);
-      // @ts-expect-error: No type definition available
-      CMS.registerPreviewTemplate("profile-numbers-dakota", ProfilePreview);
-      // @ts-expect-error: No type definition available
-      CMS.registerPreviewTemplate("profile-documents-oscar", ProfilePreviewDocuments);
-      // @ts-expect-error: No type definition available
-      CMS.registerPreviewTemplate("profile-documents-poppy", ProfilePreviewDocuments);
-      // @ts-expect-error: No type definition available
-      CMS.registerPreviewTemplate("profile-notes-poppy", ProfilePreview);
-      // @ts-expect-error: No type definition available
-      CMS.registerPreviewTemplate("profile-notes-oscar", ProfilePreview);
-      // @ts-expect-error: No type definition available
-      CMS.registerPreviewTemplate("profile-notes-dakota", ProfilePreview);
-      // @ts-expect-error: No type definition available
-      CMS.registerPreviewTemplate("profile-industries-poppy", ProfilePreviewIndustrySpecific);
-      // @ts-expect-error: No type definition available
-      CMS.registerPreviewTemplate("profile-industries-oscar", ProfilePreviewIndustrySpecific);
-      // @ts-expect-error: No type definition available
-      CMS.registerPreviewTemplate("profile-industries-dakota", ProfilePreviewIndustrySpecific);
-      // @ts-expect-error: No type definition available
-      CMS.registerPreviewTemplate("profile-onboarding-poppy", ProfilePreviewOnboarding);
-      // @ts-expect-error: No type definition available
-      CMS.registerPreviewTemplate("profile-onboarding-dakota", ProfilePreviewOnboarding);
-      // @ts-expect-error: No type definition available
-      CMS.registerPreviewTemplate("profile-misc", ProfilePreviewMisc);
+      // ----- Profile -----
+      registerPreview(CMS, "profile-info-poppy", ProfilePreview);
+      registerPreview(CMS, "profile-info-oscar", ProfilePreview);
+      registerPreview(CMS, "profile-info-dakota", ProfilePreview);
+      registerPreview(CMS, "profile-numbers-poppy", ProfilePreview);
+      registerPreview(CMS, "profile-numbers-oscar", ProfilePreview);
+      registerPreview(CMS, "profile-numbers-dakota", ProfilePreview);
+      registerPreview(CMS, "profile-documents-oscar", ProfilePreviewDocuments);
+      registerPreview(CMS, "profile-documents-poppy", ProfilePreviewDocuments);
+      registerPreview(CMS, "profile-notes-poppy", ProfilePreview);
+      registerPreview(CMS, "profile-notes-oscar", ProfilePreview);
+      registerPreview(CMS, "profile-notes-dakota", ProfilePreview);
+      registerPreview(CMS, "profile-industries-poppy", ProfilePreviewIndustrySpecific);
+      registerPreview(CMS, "profile-industries-oscar", ProfilePreviewIndustrySpecific);
+      registerPreview(CMS, "profile-industries-dakota", ProfilePreviewIndustrySpecific);
+      registerPreview(CMS, "profile-onboarding-poppy", ProfilePreviewOnboarding);
+      registerPreview(CMS, "profile-onboarding-dakota", ProfilePreviewOnboarding);
+      registerPreview(CMS, "profile-misc", ProfilePreviewMisc);
 
-      // @ts-expect-error: No type definition available
-      CMS.registerPreviewTemplate("cannabisPriority-task", TaskPreview);
-      // @ts-expect-error: No type definition available
-      CMS.registerPreviewTemplate("cannabisPriority-1", CannabisPriorityStatusPreview);
-      // @ts-expect-error: No type definition available
-      CMS.registerPreviewTemplate("cannabisPriority-2", CannabisPriorityStatusPreview);
+      registerPreview(CMS, "cannabisPriority-task", TaskPreview);
+      registerPreview(CMS, "cannabisPriority-1", CannabisPriorityStatusPreview);
+      registerPreview(CMS, "cannabisPriority-2", CannabisPriorityStatusPreview);
 
-      // @ts-expect-error: No type definition available
-      CMS.registerPreviewTemplate("nexus-name-search", NexusNameSearchPreview);
-      // @ts-expect-error: No type definition available
-      CMS.registerPreviewTemplate("nexus-dba-formation", NexusDbaFormationPreview);
-      // @ts-expect-error: No type definition available
-      CMS.registerPreviewTemplate("nexus-name-search-task", TaskPreview);
-      // @ts-expect-error: No type definition available
-      CMS.registerPreviewTemplate("nexus-dba-formation-task", TaskPreview);
+      registerPreview(CMS, "nexus-name-search", NexusNameSearchPreview);
+      registerPreview(CMS, "nexus-dba-formation", NexusDbaFormationPreview);
+      registerPreview(CMS, "nexus-name-search-task", TaskPreview);
+      registerPreview(CMS, "nexus-dba-formation-task", TaskPreview);
 
-      // @ts-expect-error: No type definition available
-      CMS.registerPreviewTemplate("naics-code-task", TaskPreview);
-      // @ts-expect-error: No type definition available
-      CMS.registerPreviewTemplate("naics-code-lookup", NaicsLookupPreview);
+      registerPreview(CMS, "naics-code-task", TaskPreview);
+      registerPreview(CMS, "naics-code-lookup", NaicsLookupPreview);
 
-      // @ts-expect-error: No type definition available
-      CMS.registerPreviewTemplate("ein-task-metadata", TaskPreview);
-      // @ts-expect-error: No type definition available
-      CMS.registerPreviewTemplate("ein-input-section", EinInputPreview);
+      registerPreview(CMS, "ein-task-metadata", TaskPreview);
+      registerPreview(CMS, "ein-input-section", EinInputPreview);
 
-      // @ts-expect-error: No type definition available
-      CMS.registerPreviewTemplate("tax-task-metadata", TaskPreview);
-      // @ts-expect-error: No type definition available
-      CMS.registerPreviewTemplate("tax-input-section", TaxInputPreview);
+      registerPreview(CMS, "tax-task-metadata", TaskPreview);
+      registerPreview(CMS, "tax-input-section", TaxInputPreview);
 
       // ----- Cannabis License -----
+      registerPreview(CMS, "cannabis-eligibility-modal", CannabisEligibilityModalPreview);
       registerAsTask(CMS, ["applyForAnnualLicense-task", "applyForConditionalLicense-task"]);
       registerAsCannabisLicensePreview(CMS, [
         "cannabisLicense-1",
         "cannabisLicenseAnnual-2",
         "cannabisLicenseConditional-2",
       ]);
-      // @ts-expect-error: No type definition available
-      CMS.registerPreviewTemplate("cannabis-eligibility-modal", CannabisEligibilityModalPreview);
-
-      // ----- Cannabis Priority Status -----
-      registerAsContent(CMS, [
-        "cannabis-minority-and-women-owned",
-        "cannabis-social-equity",
-        "cannabis-veteran-owned",
-      ]);
 
       // ----- Formation -----
-      // @ts-expect-error: No type definition available
-      CMS.registerPreviewTemplate("business-formation-interim-success-page", FormationInterimSuccessPreview);
-      // @ts-expect-error: No type definition available
-      CMS.registerPreviewTemplate("business-formation-success-page", FormationSuccessPreview);
+      registerPreview(CMS, "business-formation-interim-success-page", FormationInterimSuccessPreview);
+      registerPreview(CMS, "business-formation-success-page", FormationSuccessPreview);
     }),
   { ssr: false, loading: Loading }
 );
-
-const registerAsContent = (CMS: typeof import("netlify-cms-app"), names: string[]) => {
-  for (const name of names) {
-    // @ts-expect-error: No type definition available
-    CMS.registerPreviewTemplate(name, ContentPreview);
-  }
-};
 
 const registerAsTask = (CMS: typeof import("netlify-cms-app"), names: string[]) => {
   for (const name of names) {
@@ -180,6 +125,16 @@ const registerAsCannabisLicensePreview = (CMS: typeof import("netlify-cms-app"),
     // @ts-expect-error: No type definition available
     CMS.registerPreviewTemplate(name, CannabisLicensePreview);
   }
+};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const registerPreview = (
+  CMS: typeof import("netlify-cms-app"),
+  name: string,
+  preview: (props: any) => JSX.Element
+) => {
+  // @ts-expect-error: No type definition available
+  CMS.registerPreviewTemplate(name, preview);
 };
 
 const Admin = () => {
