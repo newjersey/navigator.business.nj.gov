@@ -1,39 +1,15 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Documents } from "@/components/profile/Documents";
-import { ConfigContext, ConfigType, getMergedConfig } from "@/contexts/configContext";
-import { getMetadataFromSlug } from "@/lib/cms/previews/previewHelpers";
+import { ConfigContext } from "@/contexts/configContext";
+import { getMetadataFromSlug, PreviewProps } from "@/lib/cms/helpers/previewHelpers";
+import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
+import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { ProfileTabs } from "@/lib/types/types";
 import Profile from "@/pages/profile";
 import { generateProfileData, generateUserData } from "@/test/factories";
-import { merge } from "lodash";
-import { useEffect, useRef, useState } from "react";
 
-type Props = {
-  entry?: any;
-  window: Window;
-  document: Document;
-  fieldsMetaData: any;
-  widgetsFor: (string: string) => any;
-  widgetFor: (string: string) => any;
-  getAsset: (string: string) => any;
-};
-
-const ProfilePreviewDocuments = (props: Props) => {
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    ref?.current?.ownerDocument.head.replaceWith(props.window.parent.document.head.cloneNode(true));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ref]);
-
-  const [config, setConfig] = useState<ConfigType>(getMergedConfig());
-
-  const data = JSON.parse(JSON.stringify(props.entry.getIn(["data"])));
-  const dataString = JSON.stringify(data);
-
-  useEffect(() => {
-    setConfig((prevConfig) => JSON.parse(JSON.stringify(merge(prevConfig, data))));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dataString]);
+const ProfilePreviewDocuments = (props: PreviewProps) => {
+  const { config, setConfig } = usePreviewConfig(props);
+  const ref = usePreviewRef(props);
 
   const { tab, businessPersona } = getMetadataFromSlug(props.entry.toJS().slug);
 

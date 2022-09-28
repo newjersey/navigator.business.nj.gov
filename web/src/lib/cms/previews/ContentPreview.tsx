@@ -1,21 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Content } from "@/components/Content";
-import { useEffect, useRef } from "react";
-type Props = {
-  entry?: any;
-  window: Window;
-  document: Document;
-  widgetsFor: (string: string) => any;
-  widgetFor: (string: string) => any;
-  getAsset: (string: string) => any;
-};
+import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
+import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 
-const ContentPreview = (props: Props) => {
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    ref?.current?.ownerDocument.head.replaceWith(props.window.parent.document.head.cloneNode(true));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ref]);
+const ContentPreview = (props: PreviewProps) => {
+  const ref = usePreviewRef(props);
 
   const { body } = JSON.parse(JSON.stringify(props.entry.getIn(["data"])));
 

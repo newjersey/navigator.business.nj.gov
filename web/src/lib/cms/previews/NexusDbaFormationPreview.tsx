@@ -1,39 +1,18 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Content } from "@/components/Content";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { NexusFormationTask } from "@/components/tasks/NexusFormationTask";
-import { ConfigContext, ConfigType, getMergedConfig } from "@/contexts/configContext";
+import { ConfigContext } from "@/contexts/configContext";
+import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
+import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
+import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { generateProfileData, generateTask, generateUserData } from "@/test/factories";
-import { merge } from "lodash";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 
-type Props = {
-  entry?: any;
-  window: Window;
-  document: Document;
-  fieldsMetaData: any;
-  widgetsFor: (string: string) => any;
-  widgetFor: (string: string) => any;
-  getAsset: (string: string) => any;
-};
+const NexusDbaFormationPreview = (props: PreviewProps) => {
+  const { config, setConfig } = usePreviewConfig(props);
+  const ref = usePreviewRef(props);
 
-const NexusDbaFormationPreview = (props: Props) => {
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    ref?.current?.ownerDocument.head.replaceWith(props.window.parent.document.head.cloneNode(true));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ref]);
-
-  const [config, setConfig] = useState<ConfigType>(getMergedConfig());
   const [modalOpen, setModalOpen] = useState(false);
-
-  const data = JSON.parse(JSON.stringify(props.entry.getIn(["data"])));
-  const dataString = JSON.stringify(data);
-
-  useEffect(() => {
-    setConfig((prevConfig) => JSON.parse(JSON.stringify(merge(prevConfig, data))));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dataString]);
 
   const noNameSearchUserData = generateUserData({
     profileData: generateProfileData({
@@ -60,12 +39,12 @@ const NexusDbaFormationPreview = (props: Props) => {
         <ModalTwoButton
           isOpen={modalOpen}
           close={() => setModalOpen(false)}
-          title={data.nexusFormationTask.dbaCtaModalHeader}
-          primaryButtonText={data.nexusFormationTask.dbaCtaModalContinueButtonText}
+          title={config.nexusFormationTask.dbaCtaModalHeader}
+          primaryButtonText={config.nexusFormationTask.dbaCtaModalContinueButtonText}
           primaryButtonOnClick={() => setModalOpen(false)}
-          secondaryButtonText={data.nexusFormationTask.dbaCtaModalCancelButtonText}
+          secondaryButtonText={config.nexusFormationTask.dbaCtaModalCancelButtonText}
         >
-          <Content>{data.nexusFormationTask.dbaCtaModalBody}</Content>
+          <Content>{config.nexusFormationTask.dbaCtaModalBody}</Content>
         </ModalTwoButton>
       </div>
     </ConfigContext.Provider>

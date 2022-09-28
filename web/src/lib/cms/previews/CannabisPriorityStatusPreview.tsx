@@ -1,47 +1,23 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { CannabisPriorityStatusTask } from "@/components/tasks/cannabis/CannabisPriorityStatusTask";
-import { ConfigContext, ConfigType, getMergedConfig } from "@/contexts/configContext";
-import { getMetadataFromSlug } from "@/lib/cms/previews/previewHelpers";
+import { ConfigContext } from "@/contexts/configContext";
+import { getMetadataFromSlug, PreviewProps } from "@/lib/cms/helpers/previewHelpers";
+import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
+import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { templateEval } from "@/lib/utils/helpers";
 import { generateTask } from "@/test/factories";
-import { merge } from "lodash";
-import { useEffect, useRef, useState } from "react";
 
-type Props = {
-  entry?: any;
-  window: Window;
-  document: Document;
-  fieldsMetaData: any;
-  widgetsFor: (string: string) => any;
-  widgetFor: (string: string) => any;
-  getAsset: (string: string) => any;
-};
-
-const CannabisPriorityStatusPreview = (props: Props) => {
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    ref?.current?.ownerDocument.head.replaceWith(props.window.parent.document.head.cloneNode(true));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ref]);
-
-  const [config, setConfig] = useState<ConfigType>(getMergedConfig());
-
-  const data = JSON.parse(JSON.stringify(props.entry.getIn(["data"])));
-  const dataString = JSON.stringify(data);
-
-  useEffect(() => {
-    setConfig((prevConfig) => JSON.parse(JSON.stringify(merge(prevConfig, data))));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dataString]);
+const CannabisPriorityStatusPreview = (props: PreviewProps) => {
+  const { config, setConfig } = usePreviewConfig(props);
+  const ref = usePreviewRef(props);
 
   const { tab } = getMetadataFromSlug(props.entry.toJS().slug);
 
   const priorityStatusTypes = {
-    type1: data.cannabisPriorityStatus.minorityWomenOrVeteran,
-    type2: data.cannabisPriorityStatus.impactZone,
-    type3: data.cannabisPriorityStatus.socialEquity,
+    type1: config.cannabisPriorityStatus.minorityWomenOrVeteran,
+    type2: config.cannabisPriorityStatus.impactZone,
+    type3: config.cannabisPriorityStatus.socialEquity,
   };
 
   return (
@@ -58,15 +34,15 @@ const CannabisPriorityStatusPreview = (props: Props) => {
             <h2>Priority Status Types</h2>
 
             <Alert variant="info">
-              <Content>{templateEval(data.cannabisPriorityStatus.phrase1, priorityStatusTypes)}</Content>
+              <Content>{templateEval(config.cannabisPriorityStatus.phrase1, priorityStatusTypes)}</Content>
             </Alert>
 
             <Alert variant="info">
-              <Content>{templateEval(data.cannabisPriorityStatus.phrase2, priorityStatusTypes)}</Content>
+              <Content>{templateEval(config.cannabisPriorityStatus.phrase2, priorityStatusTypes)}</Content>
             </Alert>
 
             <Alert variant="info">
-              <Content>{templateEval(data.cannabisPriorityStatus.phrase3, priorityStatusTypes)}</Content>
+              <Content>{templateEval(config.cannabisPriorityStatus.phrase3, priorityStatusTypes)}</Content>
             </Alert>
           </>
         )}
