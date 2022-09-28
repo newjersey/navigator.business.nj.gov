@@ -24,6 +24,7 @@ import TaskPreview from "@/lib/cms/previews/task";
 import TaxInputPreview from "@/lib/cms/previews/tax-input";
 import { useMountEffect } from "@/lib/utils/helpers";
 import dynamic from "next/dynamic";
+import FormationSuccessPreview from "@/lib/cms/previews/formation-success-page";
 
 const CMS_CONFIG = {};
 const Loading = () => (
@@ -154,6 +155,8 @@ const CMS = dynamic(
       // ----- Formation -----
       // @ts-expect-error: No type definition available
       CMS.registerPreviewTemplate("business-formation-interim-success-page", FormationInterimSuccessPreview);
+      // @ts-expect-error: No type definition available
+      CMS.registerPreviewTemplate("business-formation-success-page", FormationSuccessPreview);
     }),
   { ssr: false, loading: Loading }
 );
