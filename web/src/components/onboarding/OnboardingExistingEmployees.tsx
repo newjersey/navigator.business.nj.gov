@@ -8,7 +8,6 @@ interface Props {
   onValidation: (field: ProfileFields, invalid: boolean) => void;
   fieldStates: ProfileFieldErrorMap;
   children?: ReactNode;
-  headerAriaLevel?: number;
 }
 
 export const OnboardingExistingEmployees = (props: Props): ReactElement => {
@@ -26,7 +25,6 @@ export const OnboardingExistingEmployees = (props: Props): ReactElement => {
         minLength={1}
         validationText={Config.profileDefaults[state.flow].existingEmployees.errorTextRequired}
         required={true}
-        headerAriaLevel={props.headerAriaLevel}
       />
       {props.children}
     </>

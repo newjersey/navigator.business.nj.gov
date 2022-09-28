@@ -1,13 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { Content } from "@/components/Content";
 import { GenericTextField } from "@/components/GenericTextField";
 import { OnboardingField, OnboardingProps } from "@/components/onboarding/OnboardingField";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { formatTaxId } from "@/lib/domain-logic/formatTaxId";
 import { ProfileFieldErrorMap } from "@/lib/types/types";
-import { setHeaderRole } from "@/lib/utils/helpers";
 import { ReactElement, useContext, useRef, useState } from "react";
 
 interface Props extends Omit<OnboardingProps, "fieldName" | "handleChange"> {
@@ -75,8 +73,6 @@ export const OnboardingTaxId = ({
       );
   };
 
-  const headerLevelTwo = setHeaderRole(props.headerAriaLevel ?? 2, "h3-styling");
-
   const error = fieldStates[fieldName].invalid;
 
   if (initialType.current == "FULL")
@@ -95,23 +91,6 @@ export const OnboardingTaxId = ({
 
   return (
     <div className={`${className} ${inputErrorBar ? "input-error-bar" : ""} ${error ? "error" : ""}`}>
-      {!props.hideHeader && (
-        <Content className="margin-bottom-105" overrides={{ h2: headerLevelTwo }}>
-          {props.headerMarkdown ?? Config.profileDefaults[state.flow][fieldName].header}
-        </Content>
-      )}
-
-      {!props.hideDescription &&
-        (Object.keys(Config.profileDefaults[state.flow][fieldName]).includes("description") ||
-          props.descriptionMarkdown) && (
-          <div className="margin-bottom-2" data-testid={`onboardingFieldContent-${fieldName}`}>
-            <Content>
-              {props.descriptionMarkdown ??
-                (Config.profileDefaults[state.flow][fieldName] as any).description}
-            </Content>
-          </div>
-        )}
-
       <div className="flex flex-row">
         <GenericTextField
           ref={taxIdBoxRef}

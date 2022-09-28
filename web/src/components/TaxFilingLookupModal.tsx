@@ -1,4 +1,5 @@
 import { Content } from "@/components/Content";
+import { FieldLabelModal } from "@/components/onboarding/FieldLabelModal";
 import { OnboardingBusinessName } from "@/components/onboarding/OnboardingBusinessName";
 import { OnboardingTaxId } from "@/components/onboarding/OnboardingTaxId";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
@@ -171,24 +172,34 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
             </Content>
           </Alert>
         )}
-        <Content>{Config.taxCalendar.ModalBody}</Content>
+        <div className="margin-bottom-4">
+          <Content>{Config.taxCalendar.ModalBody}</Content>
+        </div>
+        <FieldLabelModal
+          fieldName="businessName"
+          overrides={{
+            header: Config.taxCalendar.ModalBusinessFieldHeader,
+            description: Config.taxCalendar.ModalBusinessFieldMarkdown,
+          }}
+        />
         <OnboardingBusinessName
-          className="margin-top-4"
           inputErrorBar
           onValidation={onValidation}
           fieldStates={fieldStates}
-          headerMarkdown={Config.taxCalendar.ModalBusinessFieldHeader}
-          descriptionMarkdown={Config.taxCalendar.ModalBusinessFieldMarkdown}
           validationText={apiFailed == "FAILED" ? Config.taxCalendar.FailedBusinessFieldHelper : undefined}
           disabled={userData?.formationData.completedFilingPayment}
         />
+        <FieldLabelModal
+          fieldName="businessName"
+          overrides={{
+            header: Config.taxCalendar.ModalTaxIdHeader,
+            description: Config.taxCalendar.ModalTaxIdMarkdown,
+          }}
+        />
         <OnboardingTaxId
-          className="margin-top-1"
           onValidation={onValidation}
           inputErrorBar
           splitField
-          descriptionMarkdown={Config.taxCalendar.ModalTaxIdMarkdown}
-          headerMarkdown={Config.taxCalendar.ModalTaxIdHeader}
           fieldStates={fieldStates}
           validationText={apiFailed == "FAILED" ? Config.taxCalendar.FailedTaxIdHelper : undefined}
           required

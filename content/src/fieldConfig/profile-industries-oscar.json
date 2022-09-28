@@ -1,7 +1,7 @@
 {
   "profileDefaults": {
     "OWNING": {
-      "cannabisLicense": {
+      "cannabisLicenseType": {
         "description": "",
         "header": "",
         "radioButtonAnnualText": "",
@@ -13,7 +13,7 @@
         "header": "",
         "description": ""
       },
-      "cpa": {
+      "requiresCpa": {
         "header": "",
         "description": "",
         "radioButtonYesText": "",
@@ -23,10 +23,10 @@
         "header": "",
         "description": ""
       },
-      "homeBased": {
+      "homeBasedBusiness": {
         "radioButtonYesText": "Yes",
         "radioButtonNoText": "No",
-        "header": "### Home-based business",
+        "header": "Home-based business",
         "description": "Are you a `home-based business|home-based-business`?"
       },
       "homeContractor": {
@@ -45,7 +45,7 @@
         "header": "",
         "description": ""
       },
-      "staffingService": {
+      "providesStaffingService": {
         "radioButtonYesText": "",
         "radioButtonNoText": "",
         "header": "",

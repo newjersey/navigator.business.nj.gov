@@ -13,7 +13,7 @@
           "sole-proprietorship": ""
         }
       },
-      "foreignBusinessType": {
+      "foreignBusinessTypeIds": {
         "header": "",
         "description": "",
         "errorTextRequired": "",
@@ -28,7 +28,7 @@
         "REMOTE_SELLER": "",
         "NEXUS": ""
       },
-      "locationInNewJersey": {
+      "nexusLocationInNewJersey": {
         "header": "",
         "description": "",
         "errorTextRequired": "",

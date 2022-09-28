@@ -4,7 +4,7 @@
     "STARTING": {
       "notes": {
         "placeholder": "Enter notes",
-        "header": "## Notes",
+        "header": "Notes",
         "description": "Use this space to add any information for quick reference."
       }
     }

@@ -1,4 +1,3 @@
-import { Content } from "@/components/Content";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
@@ -17,10 +16,6 @@ export const OnboardingCpa = (): ReactElement => {
 
   return (
     <>
-      <div className="margin-bottom-2">
-        <Content>{Config.profileDefaults[state.flow].cpa.header}</Content>
-      </div>
-      <Content>{Config.profileDefaults[state.flow].cpa.description}</Content>
       <FormControl variant="outlined" fullWidth>
         <RadioGroup
           aria-label="Certified Public Accountant"
@@ -35,7 +30,7 @@ export const OnboardingCpa = (): ReactElement => {
             data-testid="cpa-true"
             value={true}
             control={<Radio color="primary" sx={{ paddingTop: "0px" }} />}
-            label={Config.profileDefaults[state.flow].cpa.radioButtonYesText}
+            label={Config.profileDefaults[state.flow].requiresCpa.radioButtonYesText}
           />
           <FormControlLabel
             style={{ marginTop: ".75rem", alignItems: "flex-start" }}
@@ -43,7 +38,7 @@ export const OnboardingCpa = (): ReactElement => {
             data-testid="cpa-false"
             value={false}
             control={<Radio color="primary" sx={{ paddingTop: "0px" }} />}
-            label={Config.profileDefaults[state.flow].cpa.radioButtonNoText}
+            label={Config.profileDefaults[state.flow].requiresCpa.radioButtonNoText}
           />
         </RadioGroup>
       </FormControl>

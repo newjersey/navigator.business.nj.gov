@@ -8,7 +8,6 @@ interface Props {
   onValidation: (field: ProfileFields, invalid: boolean) => void;
   fieldStates: ProfileFieldErrorMap;
   children?: ReactNode;
-  headerAriaLevel?: number;
   handleChangeOverride?: (value: string) => void;
 }
 
@@ -26,7 +25,6 @@ export const OnboardingTaxPin = (props: Props): ReactElement => {
         maxLength={4}
         minLength={4}
         validationText={Config.profileDefaults[state.flow].taxPin.errorTextRequired}
-        headerAriaLevel={props.headerAriaLevel}
         handleChange={props.handleChangeOverride}
       />
       {props.children}

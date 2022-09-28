@@ -436,7 +436,7 @@ describe("onboarding - shared", () => {
       renderPage({ userData });
 
       expect(
-        screen.queryByText(Config.profileDefaults[getFlow(userData)].homeBased.description)
+        screen.queryByText(Config.profileDefaults[getFlow(userData)].homeBasedBusiness.description)
       ).not.toBeInTheDocument();
     });
 

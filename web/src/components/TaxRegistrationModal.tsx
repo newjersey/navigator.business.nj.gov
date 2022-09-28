@@ -1,5 +1,6 @@
 import { Content } from "@/components/Content";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
+import { FieldLabelModal } from "@/components/onboarding/FieldLabelModal";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -96,18 +97,22 @@ export const TaxRegistrationModal = (props: Props): ReactElement => {
           <Content>{Config.taxRegistrationModal.subtitle}</Content>
         </div>
         {showBusinessField() && (
-          <OnboardingBusinessName onValidation={onValidation} fieldStates={fieldStates} required />
+          <>
+            <FieldLabelModal fieldName="businessName" />
+            <OnboardingBusinessName onValidation={onValidation} fieldStates={fieldStates} required />
+          </>
         )}
         {showTaxIdField() && (
-          <OnboardingTaxId onValidation={onValidation} fieldStates={fieldStates} required />
+          <>
+            <FieldLabelModal fieldName="taxId" />
+            <OnboardingTaxId onValidation={onValidation} fieldStates={fieldStates} required />
+          </>
         )}
-        <OnboardingOwnership headerAriaLevel={3} />
+        <FieldLabelModal fieldName="ownershipTypeIds" />
+        <OnboardingOwnership />
         <div className="margin-top-3" aria-hidden={true} />
-        <OnboardingExistingEmployees
-          onValidation={onValidation}
-          fieldStates={fieldStates}
-          headerAriaLevel={3}
-        />
+        <FieldLabelModal fieldName="existingEmployees" />
+        <OnboardingExistingEmployees onValidation={onValidation} fieldStates={fieldStates} />
       </ModalTwoButton>
     </ProfileDataContext.Provider>
   );

@@ -1,8 +1,7 @@
-import { Content } from "@/components/Content";
+import { FieldLabelOnboarding } from "@/components/onboarding/FieldLabelOnboarding";
 import { OnboardingHomeBasedBusiness } from "@/components/onboarding/OnboardingHomeBasedBusiness";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { setHeaderRole } from "@/lib/utils/helpers";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import React, { ReactElement, useContext } from "react";
 
@@ -20,16 +19,11 @@ export const OnboardingLocationInNewJersey = (): ReactElement => {
     });
   };
 
-  const header = setHeaderRole(2, "h3-styling");
-
   const renderHomeBasedBusinessQuestion = state.profileData.nexusLocationInNewJersey === false;
 
   return (
     <>
       <div data-testid="location-in-new-jersey">
-        <Content overrides={{ h2: header }}>
-          {Config.profileDefaults[state.flow].locationInNewJersey.header}
-        </Content>
         <FormControl fullWidth>
           <RadioGroup
             aria-label="Location in New Jersye"
@@ -48,7 +42,7 @@ export const OnboardingLocationInNewJersey = (): ReactElement => {
               data-testid="location-in-new-jersey-true"
               value={true}
               control={<Radio color="primary" />}
-              label={Config.profileDefaults[state.flow].locationInNewJersey.radioButtonYesText}
+              label={Config.profileDefaults[state.flow].nexusLocationInNewJersey.radioButtonYesText}
             />
             <FormControlLabel
               style={{ marginRight: "3rem" }}
@@ -56,7 +50,7 @@ export const OnboardingLocationInNewJersey = (): ReactElement => {
               data-testid="location-in-new-jersey-false"
               value={false}
               control={<Radio color="primary" />}
-              label={Config.profileDefaults[state.flow].locationInNewJersey.radioButtonNoText}
+              label={Config.profileDefaults[state.flow].nexusLocationInNewJersey.radioButtonNoText}
             />
           </RadioGroup>
         </FormControl>
@@ -64,7 +58,8 @@ export const OnboardingLocationInNewJersey = (): ReactElement => {
 
       {renderHomeBasedBusinessQuestion && (
         <div className="margin-top-3">
-          <OnboardingHomeBasedBusiness h3Heading={false} headerAriaLevel={3} />
+          <FieldLabelOnboarding fieldName="homeBasedBusiness" />
+          <OnboardingHomeBasedBusiness />
         </div>
       )}
     </>
