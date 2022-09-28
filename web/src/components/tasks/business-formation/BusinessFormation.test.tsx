@@ -1,3 +1,4 @@
+import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { Task } from "@/lib/types/types";
 import { getDollarValue } from "@/lib/utils/helpers";
@@ -14,7 +15,6 @@ import {
 import { generateFormationProfileData, preparePage, useSetupInitialMocks } from "@/test/helpers-formation";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { currentUserData } from "@/test/mock/withStatefulUserData";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import {
   createEmptyFormationAddress,
   FormationAddress,
@@ -33,6 +33,8 @@ function mockMaterialUI(): typeof materialUi {
     useMediaQuery: jest.fn(),
   };
 }
+
+const Config = getMergedConfig();
 
 jest.mock("@mui/material", () => mockMaterialUI());
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -182,6 +184,19 @@ describe("<BusinessFormation />", () => {
         await waitFor(() => {
           expect(screen.getByTestId("api-error-text")).toBeInTheDocument();
         });
+      });
+
+      it("resets completedFilingPayment and brings back to review page", async () => {
+        await act(async () => {
+          preparePage({ formationData }, displayContent, undefined, task);
+        });
+
+        fireEvent.click(screen.getByText(Config.businessFormationDefaults.interimSuccessPageButtonText));
+        fireEvent.click(screen.getByText(Config.businessFormationDefaults.interimSuccessPageModalContinue));
+
+        await screen.findByTestId("review-step");
+        expect(screen.queryByText("api-error-text")).not.toBeInTheDocument();
+        expect(currentUserData().formationData.completedFilingPayment).toEqual(false);
       });
     });
   });

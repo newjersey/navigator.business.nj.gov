@@ -141,7 +141,29 @@ collections:
       - { label: "Optional Label", name: "optionalLabel", widget: "string", required: false }
       - { label: "Bolded Heading", name: "headingBolded", widget: "string", required: false }
       - { label: "Sub Heading", name: "headingNotBolded", widget: "string", required: false }
-
+  - name: "business-formation-config"
+    label: ". . . 🔴 Config"
+    delete: false
+    create: false
+    files:
+      - label: "Interim Success Page"
+        name: "business-formation-interim-success-page"
+        file: "content/src/fieldConfig/formation-interim-success-page.json"
+        editor:
+          preview: true
+        fields:
+          - label: Business Formation Defaults
+            name: businessFormationDefaults
+            collapsed: false
+            widget: object
+            fields:
+              - { label: "Alert Box Text", name: "interimSuccessPageAlertText", widget: "markdown" }
+              - { label: "Body Text", name: "interimSuccessPageBodyText", widget: "markdown" }
+              - { label: "Button Text", name: "interimSuccessPageButtonText", widget: "string" }
+              - { label: "Modal Title", name: "interimSuccessPageModalTitle", widget: "string" }
+              - { label: "Modal Cancel Button", name: "interimSuccessPageModalCancel", widget: "string" }
+              - { label: "Modal Continue Button", name: "interimSuccessPageModalContinue", widget: "string" }
+              - { label: "Modal Body", name: "interimSuccessPageModalBody", widget: "markdown" }
   - name: "certification-label"
     label: "🟧 CERTIFICATION OPPS"
     folder: ""
