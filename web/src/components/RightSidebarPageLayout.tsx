@@ -1,38 +1,20 @@
 import { MediaQueries } from "@/lib/PageSizes";
 import { useMediaQuery } from "@mui/material";
 import React, { ReactElement } from "react";
-
-const defaultColor = {
-  gutter: "grayRightGutter",
-  border: "border-base-lighter",
-  mobileBoarder: "border-base-light",
-  bgColor: "bg-base-lightest",
-};
-
-const blueColor = {
-  gutter: "blueRightGutter",
-  border: "border-cool-lighter",
-  mobileBoarder: "border-base-light",
-  bgColor: "bg-cool-extra-light",
-};
-
 export interface RightSidebarPageLayoutProps {
-  color: "default" | "blue";
   mainContent: React.ReactNode;
   sidebarContent: React.ReactNode;
 }
 
 export const RightSidebarPageLayout = ({
-  color,
   mainContent,
   sidebarContent,
 }: RightSidebarPageLayoutProps): ReactElement => {
   const isDesktopAndUp = useMediaQuery(MediaQueries.desktopAndUp);
-  const selectedColor = color === "blue" ? blueColor : defaultColor;
 
   return (
     <div
-      className={`desktop:margin-top-4 desktop:margin-top-0 ${isDesktopAndUp ? selectedColor.gutter : ""}`}
+      className={`desktop:margin-top-4 desktop:margin-top-0 ${isDesktopAndUp ? "blueRightGutter" : ""}`}
       data-testid="rightSidebarPageLayout"
     >
       <div className="desktop:grid-container-widescreen desktop:padding-x-7 width-100">
@@ -41,12 +23,8 @@ export const RightSidebarPageLayout = ({
             {mainContent}
           </div>
           <div
-            className={`desktop:grid-col-5 usa-prose ${selectedColor.border} padding-top-6 ${
-              selectedColor.bgColor
-            } padding-bottom-15 ${
-              !isDesktopAndUp
-                ? `padding-x-2 border-top ${selectedColor.mobileBoarder} `
-                : "border-left-2px padding-left-5"
+            className={`desktop:grid-col-5 usa-prose border-cool-lighter padding-top-6 bg-cool-extra-light padding-bottom-15 ${
+              !isDesktopAndUp ? "padding-x-2 border-top border-base-light" : "border-left-2px padding-left-5"
             }`}
           >
             {sidebarContent}

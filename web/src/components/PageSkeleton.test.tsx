@@ -4,7 +4,7 @@ import { render, screen } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 
-describe("<RightSidebarPageLayout />", () => {
+describe("<PageSkeleton />", () => {
   beforeEach(() => {
     jest.resetAllMocks();
   });
