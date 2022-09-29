@@ -8,10 +8,9 @@ filingMethod: paper-or-by-mail-only
 filingDetails: null
 frequency: Monthly *(due on the 20th of each month, or 10th day of the month if
   the distributor deals in non-NJ stamped cigarettes)*
-additionalInfo: >
-  Disposition of Revenues
-
-  Revenues are deposited in the State Treasury for general State use. Initial collections of $391.5 million are deposited in the Health Care Subsidy Fund.
+additionalInfo: Revenues are deposited in the State Treasury for general State
+  use. Initial collections of $391.5 million are deposited in the Health Care
+  Subsidy Fund.
 agency: New Jersey Division of Taxation
 id: cr-1 or cnr-1
 callToActionLink: https://www.nj.gov/treasury/taxation/cigarette_tax_form.shtml
