@@ -119,7 +119,7 @@
     "@types/testing-library__jest-dom": "5.14.5",
     "@typescript-eslint/eslint-plugin": "5.38.1",
     "@typescript-eslint/parser": "5.38.1",
-    "airtable": "0.11.4",
+    "airtable": "0.11.5",
     "babel-jest": "29.0.3",
     "babel-loader": "8.2.5",
     "clean-webpack-plugin": "4.0.0",

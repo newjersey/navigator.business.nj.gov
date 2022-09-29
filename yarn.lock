@@ -3576,7 +3576,7 @@ __metadata:
     "@types/xml2js": 0.4.11
     "@typescript-eslint/eslint-plugin": 5.38.1
     "@typescript-eslint/parser": 5.38.1
-    airtable: 0.11.4
+    airtable: 0.11.5
     axios: 0.27.2
     body-parser: 1.20.0
     copy-webpack-plugin: 11.0.0
@@ -3722,7 +3722,7 @@ __metadata:
     "@types/xml2js": 0.4.11
     "@typescript-eslint/eslint-plugin": 5.38.1
     "@typescript-eslint/parser": 5.38.1
-    airtable: 0.11.4
+    airtable: 0.11.5
     axios: 0.27.2
     babel-jest: 29.0.3
     babel-loader: 8.2.5
@@ -3916,7 +3916,7 @@ __metadata:
     "@types/ua-parser-js": 0.7.36
     "@typescript-eslint/eslint-plugin": 5.38.1
     "@typescript-eslint/parser": 5.38.1
-    airtable: 0.11.4
+    airtable: 0.11.5
     axios: 0.27.2
     babel-jest: 29.0.3
     babel-loader: 8.2.5
@@ -10431,16 +10431,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"airtable@npm:0.11.4":
-  version: 0.11.4
-  resolution: "airtable@npm:0.11.4"
+"airtable@npm:0.11.5":
+  version: 0.11.5
+  resolution: "airtable@npm:0.11.5"
   dependencies:
     "@types/node": ">=8.0.0 <15"
     abort-controller: ^3.0.0
     abortcontroller-polyfill: ^1.4.0
     lodash: ^4.17.21
     node-fetch: ^2.6.7
-  checksum: a5c1d85902e688f54ed194e76ace2baa113b25800ed7108846b3a4ff18bf467f705063b488baa6cf2e5def80c733b18359b25ce88ad28b8392bcfd0a6f516b99
+  checksum: 228cc7b527c2fb1863778a1729cabde5947f76e095d05f1c402788b4a3d5c09108456e0268426fba5245694c31d4c267b47a44ee3f3304f59af51a541ec5c619
   languageName: node
   linkType: hard
 
