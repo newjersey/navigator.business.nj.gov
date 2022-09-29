@@ -1,9 +1,10 @@
 import { TaskProgressCheckbox } from "@/components/TaskProgressCheckbox";
 import { getMergedConfig } from "@/contexts/configContext";
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { routeForPersona } from "@/lib/domain-logic/routeForPersona";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { generateProfileData, generateUserData } from "@/test/factories";
-import { markdownToText } from "@/test/helpers";
+import { markdownToText, withAuthAlert } from "@/test/helpers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import {
@@ -35,10 +36,12 @@ const randomPublicFilingLegalStructure = () => {
   const nonTradeNameLegalStructures = LegalStructures.filter((x) => x.requiresPublicFiling);
   return nonTradeNameLegalStructures[randomInt() % nonTradeNameLegalStructures.length].id;
 };
+let setModalIsVisible: jest.Mock;
 
 describe("<TaskProgressCheckbox />", () => {
   beforeEach(() => {
     jest.resetAllMocks();
+    setModalIsVisible = jest.fn();
     useMockRoadmap({});
     useMockRouter({});
     setupStatefulUserDataContext();
@@ -52,6 +55,18 @@ describe("<TaskProgressCheckbox />", () => {
         </WithStatefulUserData>
       </ThemeProvider>
     );
+
+  const renderTaskCheckboxWithAuthAlert = (taskId: string, initialUserData?: UserData) => {
+    render(
+      withAuthAlert(
+        <WithStatefulUserData initialUserData={initialUserData}>
+          <TaskProgressCheckbox taskId={taskId} disabledTooltipText={undefined} />
+        </WithStatefulUserData>,
+        IsAuthenticated.FALSE,
+        { modalIsVisible: false, setModalIsVisible }
+      )
+    );
+  };
 
   it("displays Not Started status when user data does not contain status", () => {
     renderTaskCheckbox("123", generateUserData({}));
@@ -99,6 +114,12 @@ describe("<TaskProgressCheckbox />", () => {
 
     fireEvent.click(screen.getByTestId("change-task-progress-checkbox"));
     await screen.findByText(Config.taskDefaults.taskProgressSuccessSnackbarBody);
+  });
+
+  it("opens registration modal for guest mode user when checkbox is clicked", async () => {
+    renderTaskCheckboxWithAuthAlert("123", generateUserData({}));
+    fireEvent.click(screen.getByTestId("change-task-progress-checkbox"));
+    await waitFor(() => expect(setModalIsVisible).toHaveBeenCalledWith(true));
   });
 
   describe("tax registration modal", () => {
