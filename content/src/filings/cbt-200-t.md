@@ -24,7 +24,7 @@ frequency: >-
   Annually
 
 
-  * 4 months after the end of your accounting period, on the 15th day. For example, if your accounting period ends December 31st, your taxes are due by April 15th.
+  * four months after the end of your accounting period, on the 15th day. For example, if your accounting period ends December 31st, your taxes are due by April 15th.
 additionalInfo: null
 agency: New Jersey Division of Taxation
 id: cbt-200-t
