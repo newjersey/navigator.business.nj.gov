@@ -8,8 +8,8 @@ filingMethod: paper-or-by-mail-only
 filingDetails: null
 frequency: Monthly *(due on the 10th of each month)*
 additionalInfo: Revenues are deposited in the State Treasury for general State
-  use. Initial collections of $391.5 million are deposited in the Health Care
-  Subsidy Fund.
+  use. Initial collections of $391.5M are deposited in the Health Care Subsidy
+  Fund.
 agency: New Jersey Division of Taxation
 id: mss-1
 callToActionLink: https://www.nj.gov/treasury/taxation/cigarette_tax_form.shtml
