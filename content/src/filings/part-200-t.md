@@ -7,9 +7,9 @@ taxRates: >-
   Partnerships may be required to:
 
 
-  * Make a payment of $150 for each owner up to a maximum of $250,000. The State also requires a 50% installment payment, unless it is the partnership’s final year of operation
+  * Make a payment of $150 for each owner up to a maximum of $250,000. The State also requires a 50% installment payment, unless it is the partnership’s final year of operation.
 
-  * Make a quarterly tax payment on behalf of any nonresident partners equal to 25% of the tax due, on the 15th day of the 4th, 6th, and 9th month of the tax year
+  * Make a quarterly tax payment on behalf of any nonresident partners equal to 25% of the tax due, on the 15th day of the 4th, 6th, and 9th month of the tax year.
 
 
   The installment payments will be credited to the accounts of the nonresident partners in proportion to their share of ownership.
