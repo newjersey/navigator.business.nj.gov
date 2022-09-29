@@ -33,7 +33,7 @@
   "devDependencies": {
     "@jest/types": "29.0.3",
     "@types/jest": "29.0.3",
-    "@types/node": "16.11.59",
+    "@types/node": "16.11.62",
     "@types/uuid": "8.3.4",
     "@typescript-eslint/eslint-plugin": "5.38.1",
     "@typescript-eslint/parser": "5.38.1",
