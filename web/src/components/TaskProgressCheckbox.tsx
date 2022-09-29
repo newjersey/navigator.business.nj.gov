@@ -5,6 +5,8 @@ import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
 import { TaskProgressTagLookup } from "@/components/TaskProgressTagLookup";
 import { TaxRegistrationModal } from "@/components/TaxRegistrationModal";
+import { AuthAlertContext } from "@/contexts/authAlertContext";
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -14,7 +16,7 @@ import { isFormationTask, isTaxTask } from "@businessnjgovnavigator/shared/domai
 import { emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { TaskProgress } from "@businessnjgovnavigator/shared/userData";
 import { useRouter } from "next/router";
-import { ReactElement, useState } from "react";
+import { ReactElement, useContext, useState } from "react";
 import { Icon } from "./njwds/Icon";
 
 interface Props {
@@ -26,6 +28,7 @@ type ModalTypes = "formation" | "formation-unset" | "tax-registration" | "tax-re
 
 export const TaskProgressCheckbox = (props: Props): ReactElement => {
   const { userData, updateQueue } = useUserData();
+  const { isAuthenticated, setModalIsVisible } = useContext(AuthAlertContext);
   const { queueUpdateTaskProgress, congratulatoryModal } = useUpdateTaskProgress();
   const [successSnackbarIsOpen, setSuccessSnackbarIsOpen] = useState<boolean>(false);
   const [currentOpenModal, setCurrentOpenModal] = useState<ModalTypes | undefined>(undefined);
@@ -48,6 +51,10 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
 
   const setToNextStatus = (config?: { redirectOnSuccess: boolean }) => {
     if (!updateQueue || !userData) return;
+    if (isAuthenticated === IsAuthenticated.FALSE) {
+      setModalIsVisible(true);
+      return;
+    }
     const nextStatus = getNextStatus();
 
     if (isFormationTask(props.taskId)) {
@@ -55,10 +62,12 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
         setCurrentOpenModal("formation");
         analytics.event.task_status_checkbox.click_completed.show_formation_date_modal();
         return;
-      } else if (currentTaskProgress === "COMPLETED" && currentOpenModal === undefined) {
+      }
+      if (currentTaskProgress === "COMPLETED" && currentOpenModal === undefined) {
         setCurrentOpenModal("formation-unset");
         return;
-      } else if (currentOpenModal === "formation-unset") {
+      }
+      if (currentOpenModal === "formation-unset") {
         updateQueue.queueProfileData({ dateOfFormation: emptyProfileData.dateOfFormation });
       }
     }
@@ -68,7 +77,8 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
         setCurrentOpenModal("tax-registration");
         analytics.event.task_status_checkbox.click_completed.show_tax_registration_date_modal();
         return;
-      } else if (currentTaskProgress === "COMPLETED" && currentOpenModal === undefined) {
+      }
+      if (currentTaskProgress === "COMPLETED" && currentOpenModal === undefined) {
         setCurrentOpenModal("tax-registration-unset");
         return;
       }
