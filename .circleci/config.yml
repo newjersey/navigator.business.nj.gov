@@ -656,119 +656,119 @@ workflows:
                 - /^release-.*/
                 - /^staging-.*/
                 - /^cms/.*/
-      - lint-and-test:
-          filters:
-            branches:
-              ignore:
-                - /^release-.*/
-                - /^staging-.*/
-                - /^cms/.*/
-          requires:
-            - build
-      - integration-tests:
-          name: Integration Tests - Group 1
-          suite: group1
-          filters:
-            branches:
-              ignore:
-                - main
-                - /^release-.*/
-                - /^staging-.*/
-                - /^cms/.*/
-          requires:
-            - build
-      - integration-tests:
-          name: Integration Tests - Group 2
-          suite: group2
-          filters:
-            branches:
-              ignore:
-                - main
-                - /^release-.*/
-                - /^staging-.*/
-                - /^cms/.*/
-          requires:
-            - build
-      - integration-tests:
-          name: Integration Tests - Group 3
-          suite: group3
-          filters:
-            branches:
-              ignore:
-                - main
-                - /^release-.*/
-                - /^staging-.*/
-                - /^cms/.*/
-          requires:
-            - build
-      - integration-tests:
-          name: Integration Tests - Group 4
-          suite: group4
-          filters:
-            branches:
-              ignore:
-                - main
-                - /^release-.*/
-                - /^staging-.*/
-                - /^cms/.*/
-          requires:
-            - build
-      - integration-tests:
-          name: Integration Tests - Group 1
-          enable-dashboard: true
-          suite: group1
-          filters:
-            branches:
-              only:
-                - main
-          requires:
-            - build
-      - integration-tests:
-          name: Integration Tests - Group 2
-          enable-dashboard: true
-          suite: group2
-          filters:
-            branches:
-              only:
-                - main
-          requires:
-            - build
-      - integration-tests:
-          name: Integration Tests - Group 3
-          enable-dashboard: true
-          suite: group3
-          filters:
-            branches:
-              only:
-                - main
-          requires:
-            - build
-      - integration-tests:
-          name: Integration Tests - Group 4
-          enable-dashboard: true
-          suite: group4
-          filters:
-            branches:
-              only:
-                - main
-          requires:
-            - build
-      - deploy-dev:
-          name: dev-deploy
-          filters:
-            branches:
-              only:
-                - main
-          requires:
-            - build
-      - deploy-content:
-          name: content-deploy
-          filters:
-            branches:
-              only:
-                - content-repo
-          requires:
-            - build
+      # - lint-and-test:
+      #     filters:
+      #       branches:
+      #         ignore:
+      #           - /^release-.*/
+      #           - /^staging-.*/
+      #           - /^cms/.*/
+      #     requires:
+      #       - build
+      # - integration-tests:
+      #     name: Integration Tests - Group 1
+      #     suite: group1
+      #     filters:
+      #       branches:
+      #         ignore:
+      #           - main
+      #           - /^release-.*/
+      #           - /^staging-.*/
+      #           - /^cms/.*/
+      #     requires:
+      #       - build
+      # - integration-tests:
+      #     name: Integration Tests - Group 2
+      #     suite: group2
+      #     filters:
+      #       branches:
+      #         ignore:
+      #           - main
+      #           - /^release-.*/
+      #           - /^staging-.*/
+      #           - /^cms/.*/
+      #     requires:
+      #       - build
+      # - integration-tests:
+      #     name: Integration Tests - Group 3
+      #     suite: group3
+      #     filters:
+      #       branches:
+      #         ignore:
+      #           - main
+      #           - /^release-.*/
+      #           - /^staging-.*/
+      #           - /^cms/.*/
+      #     requires:
+      #       - build
+      # - integration-tests:
+      #     name: Integration Tests - Group 4
+      #     suite: group4
+      #     filters:
+      #       branches:
+      #         ignore:
+      #           - main
+      #           - /^release-.*/
+      #           - /^staging-.*/
+      #           - /^cms/.*/
+      #     requires:
+      #       - build
+      # - integration-tests:
+      #     name: Integration Tests - Group 1
+      #     enable-dashboard: true
+      #     suite: group1
+      #     filters:
+      #       branches:
+      #         only:
+      #           - main
+      #     requires:
+      #       - build
+      # - integration-tests:
+      #     name: Integration Tests - Group 2
+      #     enable-dashboard: true
+      #     suite: group2
+      #     filters:
+      #       branches:
+      #         only:
+      #           - main
+      #     requires:
+      #       - build
+      # - integration-tests:
+      #     name: Integration Tests - Group 3
+      #     enable-dashboard: true
+      #     suite: group3
+      #     filters:
+      #       branches:
+      #         only:
+      #           - main
+      #     requires:
+      #       - build
+      # - integration-tests:
+      #     name: Integration Tests - Group 4
+      #     enable-dashboard: true
+      #     suite: group4
+      #     filters:
+      #       branches:
+      #         only:
+      #           - main
+      #     requires:
+      #       - build
+      # - deploy-dev:
+      #     name: dev-deploy
+      #     filters:
+      #       branches:
+      #         only:
+      #           - main
+      #     requires:
+      #       - build
+      # - deploy-content:
+      #     name: content-deploy
+      #     filters:
+      #       branches:
+      #         only:
+      #           - content-repo
+      #     requires:
+      #       - build
 
       #- smoke-tests:
       #    name: Deployment Smoke Tests
@@ -780,49 +780,49 @@ workflows:
       #          - main
       #    requires:
       #      - dev-deploy
-      - merge-content:
-          filters:
-            branches:
-              only:
-                - main
-          requires:
-            - build
+      # - merge-content:
+      #     filters:
+      #       branches:
+      #         only:
+      #           - main
+      #     requires:
+      #       - build
 
-  browser-testing:
-    triggers:
-      - schedule:
-          cron: "0 0 * * *"
-          filters:
-            branches:
-              only:
-                - main
-    jobs:
-      - build
+      # browser-testing:
+      # triggers:
+      #   - schedule:
+      #       cron: "0 0 * * *"
+      #       filters:
+      #         branches:
+      #           only:
+      #             - main
+      # jobs:
+      #   - build
       # edge integration tests
-      - integration-tests:
-          name: Integration Tests - Edge - Group 1
-          suite: group1
-          browser: edge
-          requires:
-            - build
-      - integration-tests:
-          name: Integration Tests - Edge - Group 2
-          suite: group2
-          browser: edge
-          requires:
-            - build
-      - integration-tests:
-          name: Integration Tests - Edge - Group 3
-          suite: group3
-          browser: edge
-          requires:
-            - build
-      - integration-tests:
-          name: Integration Tests - Edge - Group 4
-          suite: group4
-          browser: edge
-          requires:
-            - build
+      # - integration-tests:
+      #     name: Integration Tests - Edge - Group 1
+      #     suite: group1
+      #     browser: edge
+      #     requires:
+      #       - build
+      # - integration-tests:
+      #     name: Integration Tests - Edge - Group 2
+      #     suite: group2
+      #     browser: edge
+      #     requires:
+      #       - build
+      # - integration-tests:
+      #     name: Integration Tests - Edge - Group 3
+      #     suite: group3
+      #     browser: edge
+      #     requires:
+      #       - build
+      # - integration-tests:
+      #     name: Integration Tests - Edge - Group 4
+      #     suite: group4
+      #     browser: edge
+      #     requires:
+      #       - build
       # firefox integration tests
       - integration-tests:
           name: Integration Tests - Firefox - Group 1

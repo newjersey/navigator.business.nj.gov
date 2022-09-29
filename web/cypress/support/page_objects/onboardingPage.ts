@@ -31,7 +31,7 @@ export class OnboardingPage {
   }
 
   getIndustryDropdown() {
-    return cy.get('[data-testid="industryid"]');
+    return cy.get('input[data-testid="industryid"]');
   }
 
   getBusinessFormationDatePicker() {
@@ -43,7 +43,7 @@ export class OnboardingPage {
   }
 
   getIndustrySectorDropdown() {
-    return cy.get('[data-testid="sectorId"]');
+    return cy.get('input[data-testid="sectorId"]');
   }
 
   getNumberOfEmployees() {
@@ -113,13 +113,13 @@ export class OnboardingPage {
   selectIndustry(industry: string) {
     const industryValue = LookupIndustryById(industry).name;
     this.getIndustryDropdown().click();
-    cy.get('[role="listbox"]').contains(industryValue).click();
+    cy.get('[role="listbox"]').contains(industryValue).click({ force: true });
   }
 
   selectIndustrySector(sectorId: string) {
     const sectorValue = LookupSectorTypeById(sectorId).name;
     this.getIndustrySectorDropdown().click();
-    cy.get('[role="listbox"]').contains(sectorValue).click();
+    cy.get('[role="listbox"]').contains(sectorValue).click({ force: true });
   }
 
   selectLegalStructure(companyType: string) {
