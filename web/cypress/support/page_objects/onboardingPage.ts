@@ -113,13 +113,13 @@ export class OnboardingPage {
   selectIndustry(industry: string) {
     const industryValue = LookupIndustryById(industry).name;
     this.getIndustryDropdown().click();
-    cy.contains(industryValue).click({ force: true });
+    cy.get('[role="listbox"]').contains(industryValue).click();
   }
 
   selectIndustrySector(sectorId: string) {
     const sectorValue = LookupSectorTypeById(sectorId).name;
     this.getIndustrySectorDropdown().click();
-    cy.contains(sectorValue).click({ force: true });
+    cy.get('[role="listbox"]').contains(sectorValue).click();
   }
 
   selectLegalStructure(companyType: string) {
