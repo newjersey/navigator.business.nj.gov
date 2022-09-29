@@ -10,10 +10,9 @@ taxRates: |
 filingMethod: online
 filingDetails: null
 frequency: Annually *(due on March 15th)*
-additionalInfo: >
-  Disposition of Revenues
-
-  Revenue from this tax is deposited in the Clean Communities Program Fund and are used for litter pickup and removal, and to provide recycling grants to New Jersey counties and municipalities.
+additionalInfo: Revenue from this tax is deposited in the Clean Communities
+  Program Fund and are used for litter pickup and removal, and to provide
+  recycling grants to New Jersey counties and municipalities.
 agency: New Jersey Division of Taxation
 id: lf-5
 callToActionLink: https://www.nj.gov/treasury/taxation/littercontrolfee.shtml
