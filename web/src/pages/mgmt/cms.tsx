@@ -127,10 +127,10 @@ const registerAsCannabisLicensePreview = (CMS: typeof import("netlify-cms-app"),
   }
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const registerPreview = (
   CMS: typeof import("netlify-cms-app"),
   name: string,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   preview: (props: any) => JSX.Element
 ) => {
   // @ts-expect-error: No type definition available
