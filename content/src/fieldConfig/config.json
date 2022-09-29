@@ -32,7 +32,6 @@
     "businessAddressHeader": "### Business Address",
     "businessTotalStockLabel": "**Stock** (Total Number of Shares)",
     "reviewStepBillingServicesHeader": "### Services",
-    "businessLocationInfoAlertMarkdown": "**Cant find your city?** Unincorporated places are not listed here. Search for [your official jurisdiction](https://www.google.com) (you will type in your community into the local name field).",
     "businessPurposePlaceholderText": "Describe your business purpose",
     "reviewStepMembersHeader": "### Members",
     "provisionsAddButtonText": "Add Provisions/Articles",
@@ -81,6 +80,7 @@
     "registeredAgentNumberPlaceholder": "Registered Agent ID Number",
     "signerCheckboxErrorText": "Sign by clicking the checkbox(s) below.",
     "reviewStepBusinessStartDateLabel": "**Business Start Date**",
+    "businessLocationInfoAlertMarkdown": "**Cant find your city?** Unincorporated places are not listed here. Search for [your official jurisdiction](https://www.google.com) (you will type in your community into the local name field).",
     "addNewSignerButtonText": "Add New Signer",
     "registeredAgentAddressLine1Label": "**Office Address Line 1**",
     "partnershipRightsTermsLabel": "**List the applicable terms**",
@@ -159,6 +159,7 @@
     "nameCheckNeedsToSearchErrorText": "Please check availability of this name.",
     "addressModalAddressLine1Label": "**Address Line 1**",
     "contactLastNameLabel": "**Last Name**",
+    "reviewPageAmendmentText": "#### Make sure everything is accurate before submitting. \n\n If you need to make a change after submitting, you will need to file a [paper amendment](https://www.njportal.com/DOR/BusinessAmendments/Forms/IdentifyBusiness).",
     "businessNameAndLegalStructureHeader": "### Business Name and Legal Structure",
     "incorporatorsModalNextButtonText": "Add Signer",
     "updateYourProfileLinkText": "update your profile",
@@ -277,8 +278,7 @@
     "addressModalBackButtonText": "Cancel",
     "paymentTypeErrorMessage": "Select a payment method.",
     "reviewStepContactFirstName": "First Name",
-    "provisionsAddAnotherButtonText": "Add a Provision",
-    "reviewPageAmendmentText": "#### Make sure everything is accurate before submitting. \n\n If you need to make a change after submitting, you will need to file a [paper amendment](https://www.njportal.com/DOR/BusinessAmendments/Forms/IdentifyBusiness)."
+    "provisionsAddAnotherButtonText": "Add a Provision"
   },
   "selfRegistration": {
     "errorTextGeneric": "Something went wrong, please try again later.",
@@ -459,7 +459,7 @@
   },
   "filingDefaults": {
     "filingFrequency": "Filing Frequency:",
-    "lateFilingsMarkdown": "All New Jersey taxes that are filed or paid past the due date, [penalties, interest, and collection fees](https://www.nj.gov/treasury/taxation/njit19.shtml) may be assessed. If you are filing or paying late, read up on [abatements of penalities](https://www.state.nj.us/treasury/taxation/abatement-info.shtml).",
+    "lateFilingsMarkdown": "All New Jersey taxes that are filed or paid past the due date, [penalties, interest, and collection fees](https://www.nj.gov/treasury/taxation/njit19.shtml) may be assessed. If you are filing or paying late, read up on [abatements of penalties](https://www.state.nj.us/treasury/taxation/abatement-info.shtml).",
     "lateFilingsTitle": "Late Filings and Payments:",
     "extensionTagText": "Tax Extension",
     "issuingAgencyText": "Issuing Agency:",
