@@ -1,26 +1,22 @@
 ---
+urlSlug: lf-5
 name: Litter Control Fee
-callToActionLink: https://www.nj.gov/treasury/taxation/littercontrolfee.shtml
+extension: false
+treasuryLink: null
 taxRates: |
   
   - Wholesale - Gross Receipts: 0.03%
   - Retail - Gross Receipts: 0.0225%
-filingDetails: null
-agency: New Jersey Division of Taxation
-additionalInfo: >
-  Disposition of Revenues
-
-  Revenue from this tax is deposited in the Clean Communities Program Fund and are used for litter pickup and removal, and to provide recycling grants to New Jersey counties and municipalities.
-urlSlug: lf-5
-id: lf-5
-callToActionText: File and Pay
-frequency: |-
-  Annually 
-
-  (Due on March 15th).
 filingMethod: online
-treasuryLink: null
-extension: false
+filingDetails: null
+frequency: Annually *(due on March 15th)*
+additionalInfo: Revenue from this tax is deposited in the Clean Communities
+  Program Fund and are used for litter pickup and removal, and to provide
+  recycling grants to New Jersey counties and municipalities.
+agency: New Jersey Division of Taxation
+id: lf-5
+callToActionLink: https://www.nj.gov/treasury/taxation/littercontrolfee.shtml
+callToActionText: File and Pay
 ---
 
 This fee is charged on all gross receipts from sales of litter-generating products sold inside or into New Jersey by a manufacturer, wholesaler, distributor, or retailer.
