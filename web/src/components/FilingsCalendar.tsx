@@ -39,8 +39,6 @@ export const FilingsCalendar = (props: Props): ReactElement => {
     router.push(ROUTES.profile);
   };
 
-  const hasDeadlinesWithinAYear = (): boolean => sortedFilteredFilingsWithinAYear.length > 0;
-
   const getMonth = (num: number): ReactElement => {
     const date = getCurrentDate().add(num, "months");
     let textColor = "text-base-dark";
@@ -159,7 +157,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
     );
   };
 
-  return hasDeadlinesWithinAYear() ? (
+  return userData?.taxFilingData && userData?.taxFilingData.filings.length > 0 ? (
     <>
       {isLargeScreen && userData?.preferences.isCalendarFullView ? (
         renderCalendar()

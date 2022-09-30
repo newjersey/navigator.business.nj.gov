@@ -124,6 +124,33 @@ describe("TaxFilingsInterfaceFactory", () => {
   });
 
   describe("onboarding", () => {
+    it("checks the onboarding api when lookup fails", async () => {
+      const userData = generateUserData({
+        taxFilingData: generateTaxFilingData({
+          state: undefined,
+          lastUpdatedISO: undefined,
+          filings: [generateTaxFiling({})],
+        }),
+      });
+      taxFilingClient.lookup.mockResolvedValue({
+        state: "FAILED",
+        filings: [],
+      } as TaxFilingLookupResponse);
+
+      taxFilingClient.onboarding.mockResolvedValue({ state: "SUCCESS" } as TaxFilingOnboardingResponse);
+
+      expect(await taxFilingInterface.onboarding({ userData, ...taxIdBusinessName })).toEqual({
+        ...userData,
+        taxFilingData: {
+          ...userData.taxFilingData,
+          state: "PENDING",
+          registered: true,
+          businessName: taxIdBusinessName.businessName,
+          lastUpdatedISO: currentDate.toISOString(),
+        },
+      });
+    });
+
     describe("only does a lookup", () => {
       let userData: UserData;
 
@@ -147,6 +174,7 @@ describe("TaxFilingsInterfaceFactory", () => {
           taxFilingData: {
             ...userData.taxFilingData,
             state: "API_ERROR",
+            registered: false,
             businessName: taxIdBusinessName.businessName,
             lastUpdatedISO: currentDate.toISOString(),
           },
@@ -164,6 +192,7 @@ describe("TaxFilingsInterfaceFactory", () => {
           taxFilingData: {
             ...userData.taxFilingData,
             state: "PENDING",
+            registered: true,
             businessName: taxIdBusinessName.businessName,
             lastUpdatedISO: currentDate.toISOString(),
           },
@@ -183,35 +212,12 @@ describe("TaxFilingsInterfaceFactory", () => {
             ...userData.taxFilingData,
             state: "SUCCESS",
             businessName: taxIdBusinessName.businessName,
+            registered: true,
             filings: [filingData],
             lastUpdatedISO: currentDate.toISOString(),
           },
         });
         expect(taxFilingClient.onboarding).not.toHaveBeenCalled();
-      });
-    });
-
-    it("checks the onboarding api when lookup fails", async () => {
-      const userData = generateUserData({
-        taxFilingData: generateTaxFilingData({
-          state: undefined,
-          lastUpdatedISO: undefined,
-          filings: [generateTaxFiling({})],
-        }),
-      });
-      taxFilingClient.lookup.mockResolvedValue({
-        state: "FAILED",
-        filings: [],
-      } as TaxFilingLookupResponse);
-      taxFilingClient.onboarding.mockResolvedValue({ state: "SUCCESS" } as TaxFilingOnboardingResponse);
-      expect(await taxFilingInterface.onboarding({ userData, ...taxIdBusinessName })).toEqual({
-        ...userData,
-        taxFilingData: {
-          ...userData.taxFilingData,
-          state: "PENDING",
-          businessName: taxIdBusinessName.businessName,
-          lastUpdatedISO: currentDate.toISOString(),
-        },
       });
     });
 
@@ -234,6 +240,7 @@ describe("TaxFilingsInterfaceFactory", () => {
           taxFilingData: {
             ...userData.taxFilingData,
             state: "PENDING",
+            registered: true,
             businessName: taxIdBusinessName.businessName,
             lastUpdatedISO: currentDate.toISOString(),
           },
@@ -261,6 +268,7 @@ describe("TaxFilingsInterfaceFactory", () => {
             taxFilingData: {
               ...userData.taxFilingData,
               state: "API_ERROR",
+              registered: false,
               businessName: taxIdBusinessName.businessName,
               lastUpdatedISO: currentDate.toISOString(),
             },
@@ -285,6 +293,7 @@ describe("TaxFilingsInterfaceFactory", () => {
             taxFilingData: {
               ...userData.taxFilingData,
               state: "FAILED",
+              registered: false,
               businessName: taxIdBusinessName.businessName,
               lastUpdatedISO: currentDate.toISOString(),
             },

@@ -105,6 +105,7 @@ export const generateTaxFilingData = (overrides: Partial<TaxFilingData>): TaxFil
     state: undefined,
     businessName: undefined,
     lastUpdatedISO: overrides.state ? new Date(Date.now()).toISOString() : undefined,
+    registered: false,
     filings: [generateTaxFiling({})],
     ...overrides,
   };

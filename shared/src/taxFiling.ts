@@ -4,6 +4,7 @@ export type TaxFilingData = {
   readonly state?: TaxFilingState;
   readonly businessName?: string;
   readonly lastUpdatedISO?: string;
+  readonly registered: boolean;
   readonly filings: TaxFiling[];
 };
 
