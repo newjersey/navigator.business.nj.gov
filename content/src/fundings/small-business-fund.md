@@ -35,4 +35,4 @@ The Small Business Fund provides access to financing to credit-worthy small, min
 
 > **Benefits**
 >
-> Businesses receive financing up to $500,000
+> Businesses receive financing up to $500,000.
