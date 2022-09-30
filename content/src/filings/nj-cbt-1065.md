@@ -1,6 +1,8 @@
 ---
+urlSlug: nj-cbt-1065
 name: Partnership
-callToActionLink: https://www1.state.nj.us/TYTR_BusinessFilings/jsp/common/Login.jsp?taxcode=43
+extension: false
+treasuryLink: https://www.nj.gov/treasury/taxation/businesses/partnerships/index.shtml
 taxRates: >-
   Partnerships may be required to
 
@@ -11,24 +13,22 @@ taxRates: >-
 
 
   The installment payments will be credited to the accounts of the nonresident partners in proportion to their share of ownership.
+filingMethod: online-required
 filingDetails: >-
   * NJ-1065 filers with ten or more partners are required to file by
   electronically
 
   * Partnerships with 50 partners or less can file online
-agency: New Jersey Division of Taxation
-additionalInfo: null
-urlSlug: nj-cbt-1065
-id: nj-cbt-1065
-callToActionText: File and Pay
 frequency: >-
   Annually *(due on April 15th)*
 
 
-  - Any `short period|tax-short-period` return must be filed on the same due date as Federal form 1065
-filingMethod: online-required
-treasuryLink: https://www.nj.gov/treasury/taxation/businesses/partnerships/index.shtml
-extension: false
+  - Any `short period return|tax-short-period` must be filed on the same due date as Federal form 1065
+additionalInfo: null
+agency: New Jersey Division of Taxation
+id: nj-cbt-1065
+callToActionLink: https://www1.state.nj.us/TYTR_BusinessFilings/jsp/common/Login.jsp?taxcode=43
+callToActionText: File and Pay
 ---
 
 Entities are required to calculate a tax for their nonresident partner(s).
