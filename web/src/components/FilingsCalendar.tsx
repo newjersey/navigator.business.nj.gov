@@ -152,7 +152,9 @@ export const FilingsCalendar = (props: Props): ReactElement => {
             })}
           </tbody>
         </table>
-        <p className="text-base-dark">{Config.dashboardDefaults.calendarLegalText}</p>
+        <div className="margin-top-2">
+          <p className="text-base-dark h6-styling">{Config.dashboardDefaults.calendarLegalText}</p>
+        </div>
       </div>
     );
   };
