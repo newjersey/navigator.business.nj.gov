@@ -638,6 +638,8 @@ collections:
             default: false
           - label: Car Service
             name: isCarServiceApplicable
+          - label: Moving Company
+            name: isInterstateTransportApplicable
             widget: boolean
             default: false
       - label: Roadmap Steps
@@ -3773,6 +3775,15 @@ collections:
                       - { label: "Description", name: "description", widget: "markdown" }
                   - label: Staffing Service
                     name: providesStaffingService
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "Radio Button Yes Text", name: "radioButtonYesText", widget: "string" }
+                      - { label: "Radio Button No Text", name: "radioButtonNoText", widget: "string" }
+                      - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Moving Company
+                    name: interstateTransport
                     collapsed: true
                     widget: object
                     fields:

@@ -106,6 +106,7 @@ interface StartingOnboardingData {
   providesStaffingService: boolean | undefined;
   certifiedInteriorDesigner: boolean | undefined;
   realEstateAppraisalManagement: boolean | undefined;
+  interstateTransport: boolean | undefined;
 }
 
 interface ExistingOnboardingData {
@@ -134,6 +135,7 @@ export const completeNewBusinessOnboarding = ({
   providesStaffingService = undefined,
   certifiedInteriorDesigner = undefined,
   realEstateAppraisalManagement = undefined,
+  interstateTransport = undefined,
   fullName = `Michael Smith ${randomInt()}`,
   email = `MichaelSmith${randomInt()}@gmail.com`,
   isNewsletterChecked = false,
@@ -179,6 +181,13 @@ export const completeNewBusinessOnboarding = ({
   if (realEstateAppraisalManagement === undefined) {
     realEstateAppraisalManagement =
       industry.industryOnboardingQuestions.isRealEstateAppraisalManagementApplicable === false
+        ? undefined
+        : Boolean(randomInt() % 2);
+  }
+
+  if (interstateTransport === undefined) {
+    interstateTransport =
+      industry.industryOnboardingQuestions.isInterstateTransportApplicable === false
         ? undefined
         : Boolean(randomInt() % 2);
   }
@@ -248,6 +257,14 @@ export const completeNewBusinessOnboarding = ({
     onOnboardingPage.selectRealEstateAppraisal(realEstateAppraisalManagement);
     onOnboardingPage.getRealEstateAppraisal(realEstateAppraisalManagement).should("be.checked");
     onOnboardingPage.getRealEstateAppraisal(!realEstateAppraisalManagement).should("not.be.checked");
+  }
+
+  if (interstateTransport === undefined) {
+    onOnboardingPage.getMovingCompany().should("not.exist");
+  } else {
+    onOnboardingPage.selectMovingCompany(interstateTransport);
+    onOnboardingPage.getMovingCompany(interstateTransport).should("be.checked");
+    onOnboardingPage.getMovingCompany(!interstateTransport).should("not.be.checked");
   }
 
   onOnboardingPage.clickNext();

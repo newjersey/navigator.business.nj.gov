@@ -39,7 +39,8 @@
     "isLiquorLicenseApplicable": false,
     "isCpaRequiredApplicable": false,
     "isTransportation": true,
-    "isCarServiceApplicable": true
+    "isCarServiceApplicable": true,
+    "isInterstateTransportApplicable": false
   },
   "isEnabled": true,
   "additionalSearchTerms": "taxi, limo, bus, shuttle, transport van, car service",
