@@ -263,7 +263,7 @@ export const completeNewBusinessOnboarding = ({
     onOnboardingPage.getMovingCompany().should("not.exist");
   } else {
     onOnboardingPage.selectMovingCompany(interstateTransport);
-    onOnboardingPage.getMovingCompany(interstateTransport).should("be checked");
+    onOnboardingPage.getMovingCompany(interstateTransport).should("be.checked");
     onOnboardingPage.getMovingCompany(!interstateTransport).should("not.be.checked");
   }
 
