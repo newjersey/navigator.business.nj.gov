@@ -248,6 +248,7 @@ const OnboardingPage = (props: Props): ReactElement => {
         certifiedInteriorDesigner: profileData.certifiedInteriorDesigner,
         realEstateAppraisalManagement: profileData.realEstateAppraisalManagement,
         operatingPhase: profileData.businessPersona === "OWNING" ? "GUEST_MODE_OWNING" : "GUEST_MODE",
+        interstateTransport: profileData.interstateTransport,
       };
 
       setProfileData(newProfileData);

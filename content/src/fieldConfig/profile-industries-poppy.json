@@ -57,6 +57,12 @@
         "radioButtonNoText": "No",
         "header": "Staffing Services",
         "description": "Will you provide staffing services?"
+      },
+      "interstateTransport": {
+        "radioButtonYesText": "Yes",
+        "radioButtonNoText": "No",
+        "header": "Moving Goods Across State Lines",
+        "description": "Do you plan to move goods across state lines?"
       }
     }
   }

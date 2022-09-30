@@ -25,6 +25,7 @@ interface IndustryOnboardingQuestions {
   readonly canBeHomeBased: boolean;
   readonly isTransportation: boolean;
   readonly isCarServiceApplicable: boolean;
+  readonly isInterstateTransportApplicable: boolean;
 }
 
 export interface AddOn {
@@ -58,6 +59,7 @@ export const LookupIndustryById = (id: string | undefined): Industry => {
         isCpaRequiredApplicable: false,
         isTransportation: false,
         isCarServiceApplicable: false,
+        isInterstateTransportApplicable: false,
       },
     }
   );

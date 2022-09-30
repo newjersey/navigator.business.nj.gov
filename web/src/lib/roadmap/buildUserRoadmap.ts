@@ -12,6 +12,7 @@ import {
   ProfileData,
 } from "@businessnjgovnavigator/shared/";
 import { isCarServiceApplicable } from "../domain-logic/isCarServiceApplicable";
+import { isInterstateTransportApplicable } from "../domain-logic/isInterstateTransportApplicable";
 
 const enableFormation = (legalStructureId: string): boolean => {
   switch (legalStructureId) {
@@ -144,6 +145,9 @@ const getIndustryBasedAddOns = (profileData: ProfileData, industryId: string | u
         break;
       }
     }
+  }
+  if (isInterstateTransportApplicable(industryId) && profileData.interstateTransport) {
+    addOns.push("interstate-transport");
   }
 
   if (industry.industryOnboardingQuestions.canBeReseller) {

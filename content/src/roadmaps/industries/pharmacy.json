@@ -11,7 +11,8 @@
     "isRealEstateAppraisalManagementApplicable": false,
     "isLiquorLicenseApplicable": false,
     "isTransportation": false,
-    "isCarServiceApplicable": false
+    "isCarServiceApplicable": false,
+    "isInterstateTransportApplicable": false
   },
   "isEnabled": true,
   "roadmapSteps": [

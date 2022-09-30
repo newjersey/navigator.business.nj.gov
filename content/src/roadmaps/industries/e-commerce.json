@@ -49,7 +49,8 @@
     "isCpaRequiredApplicable": false,
     "isLiquorLicenseApplicable": false,
     "isTransportation": false,
-    "isCarServiceApplicable": false
+    "isCarServiceApplicable": false,
+    "isInterstateTransportApplicable": false
   },
   "isEnabled": true,
   "additionalSearchTerms": "online store, ecommerce, e-business, retail, online business",

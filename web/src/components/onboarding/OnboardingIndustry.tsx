@@ -11,6 +11,7 @@ import { isCannabisLicenseApplicable } from "@/lib/domain-logic/isCannabisLicens
 import { isCarServiceApplicable } from "@/lib/domain-logic/isCarServiceApplicable";
 import { isCertifiedInteriorDesignerApplicable } from "@/lib/domain-logic/isCertifiedInteriorDesignerApplicable";
 import { isCpaRequiredApplicable } from "@/lib/domain-logic/isCpaRequiredApplicable";
+import { isInterstateTransportApplicable } from "@/lib/domain-logic/isInterstateTransportApplicable";
 import { isLiquorLicenseApplicable } from "@/lib/domain-logic/isLiquorLicenseApplicable";
 import { isProvidesStaffingServicesApplicable } from "@/lib/domain-logic/isProvidesStaffingServicesApplicable";
 import { isRealEstateAppraisalManagementApplicable } from "@/lib/domain-logic/isRealEstateAppraisalManagementApplicable";
@@ -18,6 +19,7 @@ import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import { FocusEvent, ReactElement, useContext } from "react";
 import { OnboardingCarService } from "./OnboardingCarService";
 import { OnboardingCertifiedInteriorDesigner } from "./OnboardingCertifiedInteriorDesigner";
+import { OnboardingMovingCompany } from "./OnboardingMovingCompany";
 import { OnboardingRealEstateAppraisalManagement } from "./OnboardingRealEstateAppraisalManagement";
 import { OnboardingStaffingService } from "./OnboardingStaffingService";
 
@@ -107,6 +109,12 @@ export const OnboardingIndustry = (props: Props): ReactElement => {
         <div className="margin-top-4" data-testid={`industry-specific-${state.profileData.industryId}`}>
           <FieldLabelProfile fieldName="carService" />
           <OnboardingCarService />
+        </div>
+      )}
+      {isInterstateTransportApplicable(state.profileData.industryId) && (
+        <div className="margin-top-4" data-testid={`industry-specific-${state.profileData.industryId}`}>
+          <FieldLabelProfile fieldName="interstateTransport" />
+          <OnboardingMovingCompany />
         </div>
       )}
     </div>

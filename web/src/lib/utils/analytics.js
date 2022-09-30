@@ -406,6 +406,16 @@ export default {
         },
       },
     },
+    onboarding_moving_company_question: {
+      submit: {
+        yes_moving_across_state_lines: () => {
+          sendEvent("onboarding_moving_company_question", "submit", "yes_moving_across_state_lines");
+        },
+        no_moving_across_state_lines: () => {
+          sendEvent("onboarding_moving_company_question", "submit", "no_moving_across_state_lines");
+        },
+      },
+    },
     onboarding_cpa_question: {
       submit: {
         yes_i_offer_public_accounting: () => {

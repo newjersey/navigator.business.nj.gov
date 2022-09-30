@@ -185,6 +185,7 @@ export const generateProfileData = (overrides: Partial<ProfileData>): ProfileDat
     realEstateAppraisalManagement: false,
     carService: undefined,
     operatingPhase: "NEEDS_TO_FORM",
+    interstateTransport: false,
     ...overrides,
   };
 };
