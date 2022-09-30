@@ -59,7 +59,8 @@
     "isLiquorLicenseApplicable": false,
     "isCpaRequiredApplicable": false,
     "isTransportation": false,
-    "isCarServiceApplicable": false
+    "isCarServiceApplicable": false,
+    "isInterstateTransportApplicable": false
   },
   "isEnabled": true,
   "additionalSearchTerms": "daycare, childcare, after school program",

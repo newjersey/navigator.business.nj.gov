@@ -39,6 +39,7 @@ export interface ProfileData {
   readonly realEstateAppraisalManagement: boolean;
   readonly carService: CarServiceType | undefined;
   readonly operatingPhase: OperatingPhaseId;
+  readonly interstateTransport: boolean;
 }
 
 export const emptyProfileData: ProfileData = {
@@ -73,6 +74,7 @@ export const emptyProfileData: ProfileData = {
   realEstateAppraisalManagement: false,
   carService: undefined,
   operatingPhase: "GUEST_MODE",
+  interstateTransport: false,
 };
 
 export const createEmptyProfileData = (): ProfileData => {

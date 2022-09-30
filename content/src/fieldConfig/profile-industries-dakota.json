@@ -57,6 +57,12 @@
         "radioButtonNoText": "No",
         "header": "Staffing Services",
         "description": "Will you provide staffing services?"
+      },
+      "interstateTransport": {
+        "radioButtonYesText": "",
+        "radioButtonNoText": "",
+        "header": "",
+        "description": ""
       }
     }
   }

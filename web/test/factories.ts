@@ -162,6 +162,7 @@ export const generateProfileData = (
     realEstateAppraisalManagement: false,
     carService: undefined,
     operatingPhase: "NEEDS_TO_FORM",
+    interstateTransport: false,
     ...overrides,
   };
 };

@@ -57,6 +57,12 @@
         "radioButtonNoText": "",
         "header": "",
         "description": ""
+      },
+      "interstateTransport": {
+        "radioButtonYesText": "",
+        "radioButtonNoText": "",
+        "header": "",
+        "description": ""
       }
     }
   }

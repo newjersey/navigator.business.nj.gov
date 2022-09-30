@@ -11,7 +11,8 @@
     "isCertifiedInteriorDesignerApplicable": false,
     "isProvidesStaffingServicesApplicable": false,
     "isTransportation": false,
-    "isCarServiceApplicable": false
+    "isCarServiceApplicable": false,
+    "isInterstateTransportApplicable": false
   },
   "roadmapSteps": [
     {

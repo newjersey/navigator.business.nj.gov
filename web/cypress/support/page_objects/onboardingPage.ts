@@ -30,6 +30,10 @@ export class OnboardingPage {
     return cy.get(`input[name="real-estate-appraisal"]${radio === undefined ? "" : `[value="${radio}"]`}`);
   }
 
+  getMovingCompany(radio?: boolean) {
+    return cy.get(`input[name="interstate-transport"]${radio === undefined ? "" : `[value="${radio}"]`}`);
+  }
+
   getIndustryDropdown() {
     return cy.get('[data-testid="industryid"]');
   }
@@ -108,6 +112,10 @@ export class OnboardingPage {
 
   selectRealEstateAppraisal(radio: boolean) {
     this.getRealEstateAppraisal(radio).check();
+  }
+
+  selectMovingCompany(radio: boolean) {
+    this.getMovingCompany(radio).check();
   }
 
   selectIndustry(industry: string) {

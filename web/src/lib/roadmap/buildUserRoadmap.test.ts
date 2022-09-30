@@ -651,4 +651,21 @@ describe("buildUserRoadmap", () => {
       );
     });
   });
+
+  describe("moving company", () => {
+    it("adds interstateTransport add-on if true and industry is moving-company", () => {
+      buildUserRoadmap(generateStartingProfile({ interstateTransport: true, industryId: "moving-company" }));
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("interstate-transport");
+    });
+
+    it("does not add interstateTransport if false and industry is moving-company", () => {
+      buildUserRoadmap(generateStartingProfile({ interstateTransport: false, industryId: "moving-company" }));
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("interstate-transport");
+    });
+
+    it("does not add interstateTransport if true and industry is not applicable", () => {
+      buildUserRoadmap(generateStartingProfile({ interstateTransport: true, industryId: "generic" }));
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("interstate-transport");
+    });
+  });
 });
