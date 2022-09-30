@@ -3603,9 +3603,9 @@ __metadata:
     serverless: 3.22.0
     serverless-dynamodb-local: 0.2.40
     serverless-http: 3.0.2
-    serverless-offline: 10.1.0
+    serverless-offline: 10.3.2
     serverless-offline-ssm: 6.2.0
-    serverless-webpack: 5.9.1
+    serverless-webpack: 5.10.0
     simple-oauth2: 4.3.0
     supertest: 6.2.4
     ts-jest: 29.0.2
@@ -3796,9 +3796,9 @@ __metadata:
     serverless: 3.22.0
     serverless-dynamodb-local: 0.2.40
     serverless-http: 3.0.2
-    serverless-offline: 10.1.0
+    serverless-offline: 10.3.2
     serverless-offline-ssm: 6.2.0
-    serverless-webpack: 5.9.1
+    serverless-webpack: 5.10.0
     simple-oauth2: 4.3.0
     storybook-addon-designs: 6.3.1
     storybook-addon-pseudo-states: 1.15.1
@@ -5180,6 +5180,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@hapi/bourne@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "@hapi/bourne@npm:3.0.0"
+  checksum: 7174cab6c33191918fcdb1953fe3169a1106e6ac79a67ef5fd08b351f0813f8f608170f2239786cbe5519e03cdfe5ab748ea1635caa06dcd5802410295514ef8
+  languageName: node
+  linkType: hard
+
 "@hapi/call@npm:^8.0.0":
   version: 8.0.1
   resolution: "@hapi/call@npm:8.0.1"
@@ -5237,15 +5244,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hapi/h2o2@npm:^9.1.0":
-  version: 9.1.0
-  resolution: "@hapi/h2o2@npm:9.1.0"
+"@hapi/h2o2@npm:^10.0.0":
+  version: 10.0.0
+  resolution: "@hapi/h2o2@npm:10.0.0"
   dependencies:
-    "@hapi/boom": 9.x.x
-    "@hapi/hoek": 9.x.x
-    "@hapi/validate": 1.x.x
-    "@hapi/wreck": 17.x.x
-  checksum: 88f8cd39c87980bd989642c7da5b3cd0a66441f8ece8a6576dc8d3b544c52db3b78a21ced42ef458621078ac924aaadbba3873dcb838a420d9ee93c784dc0146
+    "@hapi/boom": ^10.0.0
+    "@hapi/hoek": ^10.0.0
+    "@hapi/validate": ^2.0.0
+    "@hapi/wreck": ^18.0.0
+  checksum: 285d9ce4ba5157c2c863fa777c280a388cc3982e80b8f7fe327fe7b70dccfdd37ea07927a93b86f34bda9545a0e453e7cc23abf57f3e0555da8eaa34db954e95
   languageName: node
   linkType: hard
 
@@ -5286,7 +5293,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hapi/hoek@npm:10.x.x":
+"@hapi/hoek@npm:10.x.x, @hapi/hoek@npm:^10.0.0":
   version: 10.0.1
   resolution: "@hapi/hoek@npm:10.0.1"
   checksum: 6dbcd7ae138fc751b2d81169516668bc6e4b878bb2bfdfab5eb3d51fdfd361544cc791ff12375587bf71dbeb801810cd62105f5d744dfa457140fb1709bbea6f
@@ -5423,6 +5430,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@hapi/topo@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "@hapi/topo@npm:6.0.0"
+  dependencies:
+    "@hapi/hoek": ^10.0.0
+  checksum: 6e85904a7b3e15d407a82363b16196fc8c6e7b906d447f91b2ae2f72ad6d32571e8b1ed9fe8153ed971f512e771177f648568f176ebb3429955ef5d8aa26eaec
+  languageName: node
+  linkType: hard
+
 "@hapi/validate@npm:1.x.x, @hapi/validate@npm:^1.1.1":
   version: 1.1.3
   resolution: "@hapi/validate@npm:1.1.3"
@@ -5430,6 +5446,16 @@ __metadata:
     "@hapi/hoek": ^9.0.0
     "@hapi/topo": ^5.0.0
   checksum: dd6f8d6e33ac55d430448bc83c33572a593702ae856186610161a9488a611110ac4f793339043ea44a6f79bebe689bc7f86122df2f817725255159a0c1cb62ec
+  languageName: node
+  linkType: hard
+
+"@hapi/validate@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "@hapi/validate@npm:2.0.0"
+  dependencies:
+    "@hapi/hoek": ^10.0.0
+    "@hapi/topo": ^6.0.0
+  checksum: fda3ddd2ecadea2d1ed9e5da11b12fdb654a75e631b312dc410a53aeb4fd8a8238a5bcc7f6e6109623b3b729db31a9480ae3782b4bce7d48694b25b008863b42
   languageName: node
   linkType: hard
 
@@ -5450,6 +5476,17 @@ __metadata:
     "@hapi/bourne": 2.x.x
     "@hapi/hoek": 9.x.x
   checksum: 50a7c3d146c9d580a7cc6543968fbeed1605983c3defd81c098dfd57acd7ac5912103966041226c428841191a7fed0ce8c31a14051c9812a52fe686be3cd5965
+  languageName: node
+  linkType: hard
+
+"@hapi/wreck@npm:^18.0.0":
+  version: 18.0.0
+  resolution: "@hapi/wreck@npm:18.0.0"
+  dependencies:
+    "@hapi/boom": ^10.0.0
+    "@hapi/bourne": ^3.0.0
+    "@hapi/hoek": ^10.0.0
+  checksum: ea9e608ec4f27e51c77cf66350fc958c4cdf26ab6fdca9fb82ed95e28250d39ec3d703f824578b6d112a85b60c8acdba5d649790d558624bf40dce40ffe97852
   languageName: node
   linkType: hard
 
@@ -11309,9 +11346,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"aws-sdk@npm:^2.1195.0, aws-sdk@npm:^2.1215.0, aws-sdk@npm:^2.7.0":
-  version: 2.1221.0
-  resolution: "aws-sdk@npm:2.1221.0"
+"aws-sdk@npm:^2.1195.0, aws-sdk@npm:^2.1224.0, aws-sdk@npm:^2.7.0":
+  version: 2.1226.0
+  resolution: "aws-sdk@npm:2.1226.0"
   dependencies:
     buffer: 4.9.2
     events: 1.1.1
@@ -11323,7 +11360,7 @@ __metadata:
     util: ^0.12.4
     uuid: 8.0.0
     xml2js: 0.4.19
-  checksum: 2024498a0f38df5176c5d33b46422f05f744c9a773db847893e07f50b56bab8001d303e31a00a24ec2eca487690d6337c562da558df30f332b712adf8b2ed5c1
+  checksum: 281bbe4d4a7b7cce52ff55a6c5235bfc9b57c6cd1c79ddfd5007a001edede66f3177d1f8a14efca95a33bb8fa21564483f58648c54ff68233a47f4a17beb46df
   languageName: node
   linkType: hard
 
@@ -21000,6 +21037,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"jose@npm:^4.9.3":
+  version: 4.10.0
+  resolution: "jose@npm:4.10.0"
+  checksum: c575bf2519b758592b3037cac0da34ff2641e56a050b156fe6ab18c03cd6c22e5338d28d1fe3dd997c9b3c0cc7deda72faca4a93ff41274a587850c6519852d0
+  languageName: node
+  linkType: hard
+
 "jpeg-js@npm:^0.4.1, jpeg-js@npm:^0.4.3":
   version: 0.4.4
   resolution: "jpeg-js@npm:0.4.4"
@@ -21317,7 +21361,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jsonwebtoken@npm:8.5.1, jsonwebtoken@npm:^8.5.1":
+"jsonwebtoken@npm:8.5.1":
   version: 8.5.1
   resolution: "jsonwebtoken@npm:8.5.1"
   dependencies:
@@ -22636,10 +22680,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"luxon@npm:^3.0.3":
-  version: 3.0.3
-  resolution: "luxon@npm:3.0.3"
-  checksum: 67d143f102f520761c4202086579a5cf30b230ea299da27cacb31e9f9d372cadef90f14cbe7e2621b70825b267fe00128b8176ed8b7172b48f77a403a662d5aa
+"luxon@npm:^3.0.4":
+  version: 3.0.4
+  resolution: "luxon@npm:3.0.4"
+  checksum: d0908c3951da2a10ccf23040210ead23b0da5366a9d0954e7d5db3560189a7bd703d8af1e00084f197effc9cd7158d1bddf32886d98a70d59ce9bc3fe88bbce0
   languageName: node
   linkType: hard
 
@@ -30070,42 +30114,42 @@ __metadata:
   languageName: node
   linkType: hard
 
-"serverless-offline@npm:10.1.0":
-  version: 10.1.0
-  resolution: "serverless-offline@npm:10.1.0"
+"serverless-offline@npm:10.3.2":
+  version: 10.3.2
+  resolution: "serverless-offline@npm:10.3.2"
   dependencies:
     "@hapi/boom": ^10.0.0
-    "@hapi/h2o2": ^9.1.0
+    "@hapi/h2o2": ^10.0.0
     "@hapi/hapi": ^20.2.2
     "@serverless/utils": ^6.7.0
-    aws-sdk: ^2.1215.0
+    aws-sdk: ^2.1224.0
     boxen: ^7.0.0
     chalk: ^5.0.1
     execa: ^6.1.0
     fs-extra: ^10.1.0
     java-invoke-local: 0.0.6
+    jose: ^4.9.3
     js-string-escape: ^1.0.1
     jsonpath-plus: ^7.2.0
     jsonschema: ^1.4.1
-    jsonwebtoken: ^8.5.1
     jszip: ^3.10.1
-    luxon: ^3.0.3
+    luxon: ^3.0.4
     node-fetch: ^3.2.10
     node-schedule: ^2.1.0
     object.hasown: ^1.1.1
     p-memoize: ^7.1.0
     p-retry: ^5.1.1
     velocityjs: ^2.0.6
-    ws: ^8.8.1
+    ws: ^8.9.0
   peerDependencies:
     serverless: ^3.2.0
-  checksum: 85c23e89f6fc79ad880c81eef9bb0f101728900aff2565608441ec14b783811ef8316281b9a286abddf9d254e4d78bb3b2f926c4351a1187d109bb30e23f4936
+  checksum: 6bf5a330cb54afb7ac720a78a5d8431afe7d394fe705664e2f45a9b323dd0d6193b40519621814c2909771c8c9865eec6530db5ff68bbe0c9b7493104b0eea6e
   languageName: node
   linkType: hard
 
-"serverless-webpack@npm:5.9.1":
-  version: 5.9.1
-  resolution: "serverless-webpack@npm:5.9.1"
+"serverless-webpack@npm:5.10.0":
+  version: 5.10.0
+  resolution: "serverless-webpack@npm:5.10.0"
   dependencies:
     archiver: ^5.3.1
     bluebird: ^3.7.2
@@ -30121,7 +30165,7 @@ __metadata:
   dependenciesMeta:
     ts-node:
       optional: true
-  checksum: 20d0bcdb990b4277f71bbed4fead8f9b5872f91410262adcec75dd5f928fca9ebb83ef702909f3461fd9acf6fde254b4ac2d4194aa921ce7a173f5a2738e4415
+  checksum: 837c6da360c7a56b2db6642e42e97c3c5152398a5bbed032593713c5ddf857dd51a02c8ab87c10ba896ca3f6bcd8957de92e32d728416275df3735c0da5c5726
   languageName: node
   linkType: hard
 
@@ -34469,9 +34513,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ws@npm:^8.2.3, ws@npm:^8.8.0, ws@npm:^8.8.1":
-  version: 8.8.1
-  resolution: "ws@npm:8.8.1"
+"ws@npm:^8.2.3, ws@npm:^8.8.0, ws@npm:^8.9.0":
+  version: 8.9.0
+  resolution: "ws@npm:8.9.0"
   peerDependencies:
     bufferutil: ^4.0.1
     utf-8-validate: ^5.0.2
@@ -34480,7 +34524,7 @@ __metadata:
       optional: true
     utf-8-validate:
       optional: true
-  checksum: 2152cf862cae0693f3775bc688a6afb2e989d19d626d215e70f5fcd8eb55b1c3b0d3a6a4052905ec320e2d7734e20aeedbf9744496d62f15a26ad79cf4cf7dae
+  checksum: 23aa0f021b2eb65c108ec4c3e08c0d81ba01f82b500432dfe327fd6be36079c1d81fdb0eac6464d2a0eb49904d34a9ab8c59619d673fa07b8346f83aeb0cbf12
   languageName: node
   linkType: hard
 
