@@ -1,0 +1,19 @@
+{
+    "roadmapSteps": [
+        {
+            "step": 3,
+            "weight": 15,
+            "task": "taxi-insurance"
+        },
+        {
+            "step": 3,
+            "weight": 20,
+            "task": "taxi-authorization-local"
+        },
+        {
+            "step": 3,
+            "weight": 25,
+            "task": "taxi-driver-certification"
+        }
+    ]
+}

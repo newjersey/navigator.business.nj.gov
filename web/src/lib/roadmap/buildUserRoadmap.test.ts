@@ -459,6 +459,30 @@ describe("buildUserRoadmap", () => {
       });
     });
 
+    describe("car service", () => {
+      it("adds only the standard car service tasks to the roadmap if the user selects the standard choice", async () => {
+        await buildUserRoadmap(
+          generateStartingProfile({ carService: "STANDARD", industryId: "car-service" })
+        );
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("car-service-standard");
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("car-service-high-capacity");
+      });
+
+      it("adds only the high capacity car service tasks to the roadmap if the user selects the high capacity choice", async () => {
+        await buildUserRoadmap(
+          generateStartingProfile({ carService: "HIGH_CAPACITY", industryId: "car-service" })
+        );
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("car-service-high-capacity");
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("car-service-standard");
+      });
+
+      it("adds both the standard and high capacity car service tasks to the roadmap if the user selects the both choice", async () => {
+        await buildUserRoadmap(generateStartingProfile({ carService: "BOTH", industryId: "car-service" }));
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("car-service-high-capacity");
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("car-service-standard");
+      });
+    });
+
     describe("liquor license", () => {
       it("adds liquor-license add-on and modification if is true", async () => {
         await buildUserRoadmap(generateStartingProfile({ liquorLicense: true }));

@@ -48,7 +48,8 @@
     "canBeReseller": true,
     "isLiquorLicenseApplicable": false,
     "isCpaRequiredApplicable": false,
-    "isTransportation": false
+    "isTransportation": false,
+    "isCarServiceApplicable": false
   },
   "isEnabled": true,
   "additionalSearchTerms": "home daycare, family, after school program",

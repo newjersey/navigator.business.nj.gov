@@ -45,6 +45,13 @@
         "header": "",
         "description": ""
       },
+      "carService": {
+        "radioButtonStandardText": "",
+        "radioButtonHighCapacityText": "",
+        "radioButtonBothText": "",
+        "header": "",
+        "description": ""
+      },
       "providesStaffingService": {
         "radioButtonYesText": "",
         "radioButtonNoText": "",

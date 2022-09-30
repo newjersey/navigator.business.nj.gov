@@ -724,5 +724,18 @@ export default {
         },
       },
     },
+    onboarding_car_service_question: {
+      submit: {
+        taxi_size: () => {
+          sendEvent("onboarding_car_service_question", "submit", "taxi_size");
+        },
+        large_size: () => {
+          sendEvent("onboarding_car_service_question", "submit", "large_size");
+        },
+        both_sizes: () => {
+          sendEvent("onboarding_car_service_question", "submit", "both_sizes");
+        },
+      },
+    },
   },
 };

@@ -1,55 +1,66 @@
 import { randomInt } from "@shared/intHelpers";
-import { v85UserData } from "./v85_add_tax_filing_state";
+import { v86UserData } from "./v86_tax_filing_var_rename";
 
-export interface v86UserData {
-  user: v86BusinessUser;
-  profileData: v86ProfileData;
-  formProgress: v86FormProgress;
-  taskProgress: Record<string, v86TaskProgress>;
+export interface v87UserData {
+  user: v87BusinessUser;
+  profileData: v87ProfileData;
+  formProgress: v87FormProgress;
+  taskProgress: Record<string, v87TaskProgress>;
   taskItemChecklist: Record<string, boolean>;
-  licenseData: v86LicenseData | undefined;
-  preferences: v86Preferences;
-  taxFilingData: v86TaxFilingData;
-  formationData: v86FormationData;
+  licenseData: v87LicenseData | undefined;
+  preferences: v87Preferences;
+  taxFilingData: v87TaxFilingData;
+  formationData: v87FormationData;
   version: number;
 }
 
-export const migrate_v85_to_v86 = (v85Data: v85UserData): v86UserData => {
-  const { lastUpdated: lastUpdatedISO, ...taxFiling } = v85Data.taxFilingData;
+export const migrate_v86_to_v87 = (v86Data: v86UserData): v87UserData => {
+  let newIndustryID;
+  let newCarServiceType: v87CarServiceType;
+  if (v86Data.profileData.industryId === "car-service") {
+    newCarServiceType = "STANDARD";
+  } else if (v86Data.profileData.industryId === "transportation") {
+    newIndustryID = "car-service";
+    newCarServiceType = "HIGH_CAPACITY";
+  }
   return {
-    ...v85Data,
-    taxFilingData: { lastUpdatedISO, ...taxFiling },
-    version: 86,
+    ...v86Data,
+    profileData: {
+      ...v86Data.profileData,
+      carService: newCarServiceType,
+      industryId: newIndustryID || v86Data.profileData.industryId,
+    },
+    version: 87,
   };
 };
 
-// ---------------- v86 types ----------------
+// ---------------- v87 types ----------------
 
-type v86TaskProgress = "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
-type v86FormProgress = "UNSTARTED" | "COMPLETED";
-export type v86ABExperience = "ExperienceA" | "ExperienceB";
+type v87TaskProgress = "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
+type v87FormProgress = "UNSTARTED" | "COMPLETED";
+export type v87ABExperience = "ExperienceA" | "ExperienceB";
 
-type v86BusinessUser = {
+type v87BusinessUser = {
   name?: string;
   email: string;
   id: string;
   receiveNewsletter: boolean;
   userTesting: boolean;
-  externalStatus: v86ExternalStatus;
+  externalStatus: v87ExternalStatus;
   myNJUserKey?: string;
   intercomHash?: string;
-  abExperience: v86ABExperience;
+  abExperience: v87ABExperience;
 };
 
-interface v86ProfileDocuments {
+interface v87ProfileDocuments {
   formationDoc: string;
   standingDoc: string;
   certifiedDoc: string;
 }
 
-type v86BusinessPersona = "STARTING" | "OWNING" | "FOREIGN" | undefined;
-type v86ForeignBusinessType = "REMOTE_WORKER" | "REMOTE_SELLER" | "NEXUS" | "NONE" | undefined;
-type v86OperatingPhase =
+type v87BusinessPersona = "STARTING" | "OWNING" | "FOREIGN" | undefined;
+type v87ForeignBusinessType = "REMOTE_WORKER" | "REMOTE_SELLER" | "NEXUS" | "NONE" | undefined;
+type v87OperatingPhase =
   | "GUEST_MODE"
   | "NEEDS_TO_FORM"
   | "NEEDS_TO_REGISTER_FOR_TAXES"
@@ -57,13 +68,14 @@ type v86OperatingPhase =
   | "UP_AND_RUNNING"
   | "UP_AND_RUNNING_OWNING"
   | undefined;
+type v87CarServiceType = "STANDARD" | "HIGH_CAPACITY" | "BOTH" | undefined;
 
-export interface v86ProfileData {
-  businessPersona: v86BusinessPersona;
+interface v87ProfileData {
+  businessPersona: v87BusinessPersona;
   businessName: string;
   industryId: string | undefined;
   legalStructureId: string | undefined;
-  municipality: v86Municipality | undefined;
+  municipality: v87Municipality | undefined;
   liquorLicense: boolean;
   requiresCpa: boolean;
   homeBasedBusiness: boolean;
@@ -75,60 +87,61 @@ export interface v86ProfileData {
   employerId: string | undefined;
   taxId: string | undefined;
   notes: string;
-  documents: v86ProfileDocuments;
+  documents: v87ProfileDocuments;
   ownershipTypeIds: string[];
   existingEmployees: string | undefined;
   taxPin: string | undefined;
   sectorId: string | undefined;
   naicsCode: string;
-  foreignBusinessType: v86ForeignBusinessType;
+  foreignBusinessType: v87ForeignBusinessType;
   foreignBusinessTypeIds: string[];
   nexusLocationInNewJersey: boolean | undefined;
   nexusDbaName: string | undefined;
   providesStaffingService: boolean;
   certifiedInteriorDesigner: boolean;
   realEstateAppraisalManagement: boolean;
-  operatingPhase: v86OperatingPhase;
+  operatingPhase: v87OperatingPhase;
+  carService: v87CarServiceType | undefined;
 }
 
-type v86Municipality = {
+type v87Municipality = {
   name: string;
   displayName: string;
   county: string;
   id: string;
 };
 
-type v86TaxFilingState = "SUCCESS" | "FAILED" | "PENDING" | "API_ERROR";
+type v87TaxFilingState = "SUCCESS" | "FAILED" | "PENDING" | "API_ERROR";
 
-type v86TaxFilingData = {
-  state?: v86TaxFilingState;
+type v87TaxFilingData = {
+  state?: v87TaxFilingState;
   lastUpdatedISO?: string;
   businessName?: string;
-  filings: v86TaxFiling[];
+  filings: v87TaxFiling[];
 };
 
-type v86TaxFiling = {
+type v87TaxFiling = {
   identifier: string;
   dueDate: string;
 };
 
-type v86NameAndAddress = {
+type v87NameAndAddress = {
   name: string;
   addressLine1: string;
   addressLine2: string;
   zipCode: string;
 };
 
-type v86LicenseData = {
-  nameAndAddress: v86NameAndAddress;
+type v87LicenseData = {
+  nameAndAddress: v87NameAndAddress;
   completedSearch: boolean;
   lastCheckedStatus: string;
-  status: v86LicenseStatus;
-  items: v86LicenseStatusItem[];
+  status: v87LicenseStatus;
+  items: v87LicenseStatusItem[];
 };
 
-type v86Preferences = {
-  roadmapOpenSections: v86SectionType[];
+type v87Preferences = {
+  roadmapOpenSections: v87SectionType[];
   roadmapOpenSteps: number[];
   hiddenFundingIds: string[];
   hiddenCertificationIds: string[];
@@ -138,14 +151,14 @@ type v86Preferences = {
   isHideableRoadmapOpen: boolean;
 };
 
-type v86LicenseStatusItem = {
+type v87LicenseStatusItem = {
   title: string;
-  status: v86CheckoffStatus;
+  status: v87CheckoffStatus;
 };
 
-type v86CheckoffStatus = "ACTIVE" | "PENDING" | "UNKNOWN";
+type v87CheckoffStatus = "ACTIVE" | "PENDING" | "UNKNOWN";
 
-type v86LicenseStatus =
+type v87LicenseStatus =
   | "ACTIVE"
   | "PENDING"
   | "UNKNOWN"
@@ -159,30 +172,30 @@ type v86LicenseStatus =
   | "VOLUNTARY_SURRENDER"
   | "WITHDRAWN";
 
-type v86SectionType = "PLAN" | "START";
+type v87SectionType = "PLAN" | "START";
 
-type v86ExternalStatus = {
-  newsletter?: v86NewsletterResponse;
-  userTesting?: v86UserTestingResponse;
+type v87ExternalStatus = {
+  newsletter?: v87NewsletterResponse;
+  userTesting?: v87UserTestingResponse;
 };
 
-interface v86NewsletterResponse {
+interface v87NewsletterResponse {
   success?: boolean;
-  status: v86NewsletterStatus;
+  status: v87NewsletterStatus;
 }
 
-interface v86UserTestingResponse {
+interface v87UserTestingResponse {
   success?: boolean;
-  status: v86UserTestingStatus;
+  status: v87UserTestingStatus;
 }
 
-type v86NewsletterStatus = typeof newsletterStatusList[number];
+type v87NewsletterStatus = typeof newsletterStatusList[number];
 
 const externalStatusList = ["SUCCESS", "IN_PROGRESS", "CONNECTION_ERROR"] as const;
 
 const userTestingStatusList = [...externalStatusList] as const;
 
-type v86UserTestingStatus = typeof userTestingStatusList[number];
+type v87UserTestingStatus = typeof userTestingStatusList[number];
 
 const newsletterStatusList = [
   ...externalStatusList,
@@ -194,19 +207,19 @@ const newsletterStatusList = [
   "QUESTION_WARNING",
 ] as const;
 
-interface v86FormationData {
-  formationFormData: v86FormationFormData;
-  formationResponse: v86FormationSubmitResponse | undefined;
-  getFilingResponse: v86GetFilingResponse | undefined;
+interface v87FormationData {
+  formationFormData: v87FormationFormData;
+  formationResponse: v87FormationSubmitResponse | undefined;
+  getFilingResponse: v87GetFilingResponse | undefined;
   completedFilingPayment: boolean;
 }
 
-interface v86FormationFormData {
+interface v87FormationFormData {
   readonly businessName: string;
-  readonly businessSuffix: v86BusinessSuffix | undefined;
+  readonly businessSuffix: v87BusinessSuffix | undefined;
   readonly businessTotalStock: string;
   readonly businessStartDate: string;
-  readonly businessAddressCity: v86Municipality | undefined;
+  readonly businessAddressCity: v87Municipality | undefined;
   readonly businessAddressLine1: string;
   readonly businessAddressLine2: string;
   readonly businessAddressState: string;
@@ -224,9 +237,9 @@ interface v86FormationFormData {
   readonly agentOfficeAddressZipCode: string;
   readonly agentUseAccountInfo: boolean;
   readonly agentUseBusinessAddress: boolean;
-  readonly members: v86FormationAddress[];
-  readonly signers: v86FormationAddress[];
-  readonly paymentType: v86PaymentType;
+  readonly members: v87FormationAddress[];
+  readonly signers: v87FormationAddress[];
+  readonly paymentType: v87PaymentType;
   readonly annualReportNotification: boolean;
   readonly corpWatchNotification: boolean;
   readonly officialFormationDocument: boolean;
@@ -237,7 +250,7 @@ interface v86FormationFormData {
   readonly contactPhoneNumber: string;
 }
 
-export interface v86FormationAddress {
+export interface v87FormationAddress {
   readonly name: string;
   readonly addressLine1: string;
   readonly addressLine2: string;
@@ -247,7 +260,7 @@ export interface v86FormationAddress {
   readonly signature: boolean;
 }
 
-type v86PaymentType = "CC" | "ACH" | undefined;
+type v87PaymentType = "CC" | "ACH" | undefined;
 
 const llcBusinessSuffix = [
   "LLC",
@@ -284,22 +297,22 @@ export const corpBusinessSuffix = [
 
 const AllBusinessSuffixes = [...llcBusinessSuffix, ...llpBusinessSuffix, ...corpBusinessSuffix] as const;
 
-type v86BusinessSuffix = typeof AllBusinessSuffixes[number];
+type v87BusinessSuffix = typeof AllBusinessSuffixes[number];
 
-type v86FormationSubmitResponse = {
+type v87FormationSubmitResponse = {
   success: boolean;
   token: string | undefined;
   formationId: string | undefined;
   redirect: string | undefined;
-  errors: v86FormationSubmitError[];
+  errors: v87FormationSubmitError[];
 };
 
-type v86FormationSubmitError = {
+type v87FormationSubmitError = {
   field: string;
   message: string;
 };
 
-type v86GetFilingResponse = {
+type v87GetFilingResponse = {
   success: boolean;
   entityId: string;
   transactionDate: string;
@@ -309,8 +322,8 @@ type v86GetFilingResponse = {
   certifiedDoc: string;
 };
 
-// ---------------- v86 factories ----------------
-export const generatev86User = (overrides: Partial<v86BusinessUser>): v86BusinessUser => {
+// ---------------- v87 factories ----------------
+export const generatev87User = (overrides: Partial<v87BusinessUser>): v87BusinessUser => {
   return {
     name: `some-name-${randomInt()}`,
     email: `some-email-${randomInt()}@example.com`,
@@ -325,7 +338,7 @@ export const generatev86User = (overrides: Partial<v86BusinessUser>): v86Busines
   };
 };
 
-export const generatev86ProfileData = (overrides: Partial<v86ProfileData>): v86ProfileData => {
+export const generatev87ProfileData = (overrides: Partial<v87ProfileData>): v87ProfileData => {
   return {
     businessPersona: "STARTING",
     businessName: `some-business-name-${randomInt()}`,
@@ -366,13 +379,14 @@ export const generatev86ProfileData = (overrides: Partial<v86ProfileData>): v86P
     certifiedInteriorDesigner: false,
     providesStaffingService: false,
     operatingPhase: undefined,
+    carService: undefined,
     ...overrides,
   };
 };
 
-export const generatev86FormationFormData = (
-  overrides: Partial<v86FormationFormData>
-): v86FormationFormData => {
+export const generatev87FormationFormData = (
+  overrides: Partial<v87FormationFormData>
+): v87FormationFormData => {
   return {
     businessName: "",
     businessSuffix: undefined,
