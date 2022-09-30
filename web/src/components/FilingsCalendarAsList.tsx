@@ -88,7 +88,10 @@ export const FilingsCalendarAsList = (props: Props): ReactElement => {
               </div>
             </div>
           ))}
-        <p className="text-base-dark">{Config.dashboardDefaults.calendarLegalText}</p>
+        <hr />
+        <div className="margin-top-2">
+          <p className="text-base-dark h6-styling">{Config.dashboardDefaults.calendarLegalText}</p>
+        </div>
       </div>
     </div>
   );

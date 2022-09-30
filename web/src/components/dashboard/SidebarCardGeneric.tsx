@@ -28,9 +28,9 @@ export const SidebarCardGeneric = (props: Props) => {
       >
         {props.headerText && (
           <div
-            className={`bg-${props.card.headerBackgroundColor} ${
-              props.card.headerBackgroundColor === "white" ? "margin-top-1" : ""
-            } padding-y-105 padding-x-205 radius-top-md`}
+            className={`bg-${props.card.headerBackgroundColor} padding-y-105 padding-x-205 ${
+              props.card.headerBackgroundColor === "white" ? "padding-top-105 padding-bottom-105" : ""
+            } radius-top-md`}
           >
             <div className="flex flex-justify">
               <h3
@@ -72,7 +72,7 @@ export const SidebarCardGeneric = (props: Props) => {
                 onClick={props.ctaOnClick}
                 noRightMargin
                 dataTestid={`cta-${props.card.id}`}
-                widthAutoOnMobile
+                fullWidth
               >
                 {props.card.ctaText}
               </Button>

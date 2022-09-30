@@ -28,6 +28,7 @@ interface Props {
   className?: string;
   align?: "start" | "end" | "center";
   ariaLabel?: string;
+  fullWidth?: boolean;
 }
 
 export const Button = (props: Props): ReactElement => {
@@ -103,6 +104,7 @@ export const Button = (props: Props): ReactElement => {
   const smallText = props.smallText ? "font-body-2xs" : "";
   const textBold = props.textBold ? "text-bold" : "";
   const intercomButton = props.intercomButton ? "intercom-button" : "";
+  const fullWidth = props.fullWidth ? "width-100" : "";
 
   const className = [
     style,
@@ -115,6 +117,7 @@ export const Button = (props: Props): ReactElement => {
     textBold,
     intercomButton,
     showDisabledClass,
+    fullWidth,
   ]
     .map((i) => i?.trim())
     .filter((value: string | undefined) => value && value.length > 0)
