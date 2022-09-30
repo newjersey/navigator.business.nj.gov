@@ -5,6 +5,7 @@ import { ABExperience, ProfileData } from "@businessnjgovnavigator/shared/";
 import { OperatingPhaseId } from "@businessnjgovnavigator/shared/operatingPhase";
 import { BusinessPersona, ForeignBusinessType } from "@businessnjgovnavigator/shared/profileData";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
+import { isCarServiceApplicable } from "../domain-logic/isCarServiceApplicable";
 
 type RegistrationProgress = "Not Started" | "Began Onboarding" | "Onboarded Guest" | "Fully Registered";
 
@@ -123,6 +124,23 @@ export const sendOnboardingOnSubmitEvents = (newProfileData: ProfileData, pageNa
         analytics.event.onboarding_cpa_question.submit.yes_i_offer_public_accounting();
       } else {
         analytics.event.onboarding_cpa_question.submit.no_i_dont_offer_public_accounting();
+      }
+    }
+
+    if (isCarServiceApplicable(newProfileData.industryId)) {
+      switch (newProfileData.carService) {
+        case "STANDARD": {
+          analytics.event.onboarding_car_service_question.submit.taxi_size();
+          break;
+        }
+        case "HIGH_CAPACITY": {
+          analytics.event.onboarding_car_service_question.submit.large_size();
+          break;
+        }
+        case "BOTH": {
+          analytics.event.onboarding_car_service_question.submit.both_sizes();
+          break;
+        }
       }
     }
   }

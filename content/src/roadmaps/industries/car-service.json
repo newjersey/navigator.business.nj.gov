@@ -27,21 +27,6 @@
       "step": 3,
       "weight": 10,
       "task": "bank-account"
-    },
-    {
-      "step": 3,
-      "weight": 15,
-      "task": "taxi-insurance"
-    },
-    {
-      "step": 3,
-      "weight": 20,
-      "task": "taxi-authorization-local"
-    },
-    {
-      "step": 3,
-      "weight": 25,
-      "task": "taxi-driver-certification"
     }
   ],
   "name": "Car Service",
@@ -53,10 +38,11 @@
     "canBeReseller": false,
     "isLiquorLicenseApplicable": false,
     "isCpaRequiredApplicable": false,
-    "isTransportation": true
+    "isTransportation": true,
+    "isCarServiceApplicable": true
   },
   "isEnabled": true,
   "additionalSearchTerms": "taxi, limo, bus, shuttle, transport van, car service",
   "id": "car-service",
-  "description": "Offers transportation services in vehicles with a capacity of 10 passengers or less"
+  "description": "Offers transportation services in vehicles with any capacity."
 }

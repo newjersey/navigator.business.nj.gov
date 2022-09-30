@@ -9,7 +9,8 @@
     "isRealEstateAppraisalManagementApplicable": true,
     "isCertifiedInteriorDesignerApplicable": false,
     "isProvidesStaffingServicesApplicable": false,
-    "isTransportation": false
+    "isTransportation": false,
+    "isCarServiceApplicable": false
   },
   "roadmapSteps": [
     {

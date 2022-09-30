@@ -63,7 +63,8 @@
     "isRealEstateAppraisalManagementApplicable": false,
     "isCertifiedInteriorDesignerApplicable": false,
     "isProvidesStaffingServicesApplicable": false,
-    "isTransportation": true
+    "isTransportation": true,
+    "isCarServiceApplicable": false
   },
   "isEnabled": true,
   "additionalSearchTerms": "freight, trucking, movers, box truck company, transportation, truck driving, hauling, truck haul, logistics, trucking company, ",
