@@ -24,15 +24,14 @@ sector: []
 openDate: ""
 dueDate: ""
 ---
-
 The Small Business Bonding Readiness Assistance Program prepares small, minority-, and women-owned businesses to obtain surety bonds, which will make them more competitive when applying for state and federal government contracts.
 
----
+- - -
 
 ### Eligibility
 
-- Small businesses, with particular emphasis on minority- and women-owned businesses
+* Small businesses, with particular emphasis on minority- and women-owned businesses
 
 > **Benefits**
 >
-> A comprehensive series of classes, workshops, and strategic counseling sessions covering a variety of topics relevant to small businesses in all sectors
+> A comprehensive series of classes, workshops, and strategic counseling sessions covering a variety of topics relevant to small businesses in all sectors.
