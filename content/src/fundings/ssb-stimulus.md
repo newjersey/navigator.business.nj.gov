@@ -31,9 +31,8 @@ The School and Small Business Energy Efficiency Stimulus Program provides grants
 
 ### Eligibility
 
-Any small New Jersey business with 100 or fewer employees, a gross revenue below $12M, and with a [Minority or Women-owned Business Enterprise Certification](https://business.nj.gov/pages/mwbe). 
+* Any small New Jersey business with 100 or fewer employees, a gross revenue below $12M, and with a [Minority or Women-owned Business Enterprise Certification](https://business.nj.gov/pages/mwbe)
 
 > ### Benefits
 >
-> Each program provides grants to cover 75% of eligible project costs, with a cap of up to $500,000 per business, per program. 
->
+> Each program provides grants to cover 75% of eligible project costs, with a cap of up to $500,000 per business, per program.
