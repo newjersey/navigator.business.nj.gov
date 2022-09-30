@@ -72,7 +72,7 @@ export const SidebarCardGeneric = (props: Props) => {
                 onClick={props.ctaOnClick}
                 noRightMargin
                 dataTestid={`cta-${props.card.id}`}
-                widthAutoOnMobile
+                fullWidth
               >
                 {props.card.ctaText}
               </Button>
