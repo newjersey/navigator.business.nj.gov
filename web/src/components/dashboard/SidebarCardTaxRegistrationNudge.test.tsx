@@ -100,6 +100,7 @@ describe("<SidebarCardTaxRegistrationNudge />", () => {
           [taxTaskId]: "COMPLETED",
         },
         taxFilingData: {
+          ...initialUserData.taxFilingData,
           filings: [],
         },
       };
