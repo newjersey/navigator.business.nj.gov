@@ -260,9 +260,11 @@ export const completeNewBusinessOnboarding = ({
   }
 
   if (interstateTransport === undefined) {
-    onOnboardingPage.getMovingCompany(interstateTransport);
+    onOnboardingPage.getMovingCompany().should("not.exist");
+  } else {
+    onOnboardingPage.selectMovingCompany(interstateTransport);
     onOnboardingPage.getMovingCompany(interstateTransport).should("be checked");
-    onOnboardingPage.getMovingCompany(interstateTransport).should("not.be.checked");
+    onOnboardingPage.getMovingCompany(!interstateTransport).should("not.be.checked");
   }
 
   onOnboardingPage.clickNext();
