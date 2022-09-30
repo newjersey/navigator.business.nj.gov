@@ -84,6 +84,7 @@ import { migrate_v82_to_v83 } from "./v83_add_hideable_roadmap_to_preferences";
 import { migrate_v83_to_v84 } from "./v84_fix_completed_filing";
 import { migrate_v84_to_v85 } from "./v85_add_tax_filing_state";
 import { migrate_v85_to_v86 } from "./v86_tax_filing_var_rename";
+import { migrate_v86_to_v87 } from "./v87_add_car_service";
 import { migrate_v7_to_v8 } from "./v8_remove_bcorp";
 import { migrate_v8_to_v9 } from "./v9_add_license_status_to_data";
 
@@ -176,6 +177,7 @@ export const Migrations: MigrationFunction[] = [
   migrate_v83_to_v84,
   migrate_v84_to_v85,
   migrate_v85_to_v86,
+  migrate_v86_to_v87,
 ];
 
 export const CURRENT_VERSION = Migrations.length;

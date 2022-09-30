@@ -10,7 +10,8 @@
     "isRealEstateAppraisalManagementApplicable": false,
     "isCpaRequiredApplicable": false,
     "isLiquorLicenseApplicable": true,
-    "isTransportation": false
+    "isTransportation": false,
+    "isCarServiceApplicable": false
   },
   "isEnabled": true,
   "roadmapSteps": [

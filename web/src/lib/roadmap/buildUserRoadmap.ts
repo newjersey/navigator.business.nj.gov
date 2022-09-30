@@ -11,6 +11,7 @@ import {
   LookupLegalStructureById,
   ProfileData,
 } from "@businessnjgovnavigator/shared/";
+import { isCarServiceApplicable } from "../domain-logic/isCarServiceApplicable";
 
 const enableFormation = (legalStructureId: string): boolean => {
   switch (legalStructureId) {
@@ -124,6 +125,24 @@ const getIndustryBasedAddOns = (profileData: ProfileData, industryId: string | u
       addOns.push("real-estate-appraisal-management");
     } else {
       addOns.push("real-estate-appraiser");
+    }
+  }
+
+  if (isCarServiceApplicable(industryId)) {
+    switch (profileData.carService) {
+      case "STANDARD": {
+        addOns.push("car-service-standard");
+        break;
+      }
+      case "HIGH_CAPACITY": {
+        addOns.push("car-service-high-capacity");
+        break;
+      }
+      case "BOTH": {
+        addOns.push("car-service-standard");
+        addOns.push("car-service-high-capacity");
+        break;
+      }
     }
   }
 

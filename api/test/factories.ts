@@ -183,6 +183,7 @@ export const generateProfileData = (overrides: Partial<ProfileData>): ProfileDat
     providesStaffingService: false,
     certifiedInteriorDesigner: industry.industryOnboardingQuestions.isCertifiedInteriorDesignerApplicable,
     realEstateAppraisalManagement: false,
+    carService: undefined,
     operatingPhase: "NEEDS_TO_FORM",
     ...overrides,
   };

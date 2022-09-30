@@ -58,7 +58,8 @@
     "canBeReseller": false,
     "isLiquorLicenseApplicable": false,
     "isCpaRequiredApplicable": false,
-    "isTransportation": true
+    "isTransportation": true,
+    "isCarServiceApplicable": false
   },
   "isEnabled": true,
   "additionalSearchTerms": "bus, school bus, ",

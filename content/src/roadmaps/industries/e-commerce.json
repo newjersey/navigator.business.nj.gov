@@ -48,7 +48,8 @@
     "isRealEstateAppraisalManagementApplicable": false,
     "isCpaRequiredApplicable": false,
     "isLiquorLicenseApplicable": false,
-    "isTransportation": false
+    "isTransportation": false,
+    "isCarServiceApplicable": false
   },
   "isEnabled": true,
   "additionalSearchTerms": "online store, ecommerce, e-business, retail, online business",

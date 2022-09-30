@@ -45,6 +45,13 @@
         "header": "Appraisal Management",
         "description": "Are you looking to start an appraisal management company?"
       },
+      "carService": {
+        "radioButtonStandardText": "I will only have standard-size vehicles (taxis, limos, etc.)",
+        "radioButtonHighCapacityText": "I will only have high-capacity vehicles (15+ passenger vehicles)",
+        "radioButtonBothText": "I will have both standard and high-capacity vehicles",
+        "header": "Car Service",
+        "description": "What type of vehicles will you have?"
+      },
       "providesStaffingService": {
         "radioButtonYesText": "Yes",
         "radioButtonNoText": "No",

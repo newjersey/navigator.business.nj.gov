@@ -521,6 +521,51 @@ describe("onboarding - shared", () => {
         expect(currentUserData().profileData.cannabisLicenseType).toBeUndefined();
       });
     });
+
+    describe("car service type question", () => {
+      it("displays car service question for car service only", async () => {
+        const { page } = renderPage({});
+        fireEvent.click(screen.getByRole("radio", { name: "Business Status - Starting" }));
+        await page.visitStep(2);
+        expect(screen.queryByTestId("industry-specific-car-service")).not.toBeInTheDocument();
+        page.selectByValue("Industry", "car-service");
+        expect(screen.getByTestId("industry-specific-car-service")).toBeInTheDocument();
+        page.selectByValue("Industry", "generic");
+        expect(screen.queryByTestId("industry-specific-car-service")).not.toBeInTheDocument();
+      });
+
+      it("updates carServiceType to STANDARD if the first radio button is picked", async () => {
+        const { page } = renderPage({});
+        fireEvent.click(screen.getByRole("radio", { name: "Business Status - Starting" }));
+        await page.visitStep(2);
+        page.selectByValue("Industry", "car-service");
+        fireEvent.click(screen.getByText(Config.profileDefaults.STARTING.carService.radioButtonStandardText));
+        await page.visitStep(3);
+        expect(currentUserData().profileData.carService).toBe("STANDARD");
+      });
+
+      it("updates carServiceType to HIGH_CAPACITY if the second radio button is picked", async () => {
+        const { page } = renderPage({});
+        fireEvent.click(screen.getByRole("radio", { name: "Business Status - Starting" }));
+        await page.visitStep(2);
+        page.selectByValue("Industry", "car-service");
+        fireEvent.click(
+          screen.getByText(Config.profileDefaults.STARTING.carService.radioButtonHighCapacityText)
+        );
+        await page.visitStep(3);
+        expect(currentUserData().profileData.carService).toBe("HIGH_CAPACITY");
+      });
+
+      it("updates carServiceType to BOTH if the third radio button is picked", async () => {
+        const { page } = renderPage({});
+        fireEvent.click(screen.getByRole("radio", { name: "Business Status - Starting" }));
+        await page.visitStep(2);
+        page.selectByValue("Industry", "car-service");
+        fireEvent.click(screen.getByText(Config.profileDefaults.STARTING.carService.radioButtonBothText));
+        await page.visitStep(3);
+        expect(currentUserData().profileData.carService).toBe("BOTH");
+      });
+    });
   });
 
   it("displays error message when @ is missing in email input field", async () => {

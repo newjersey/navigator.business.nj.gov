@@ -160,6 +160,7 @@ export const generateProfileData = (
     providesStaffingService: false,
     certifiedInteriorDesigner: industry.industryOnboardingQuestions.isCertifiedInteriorDesignerApplicable,
     realEstateAppraisalManagement: false,
+    carService: undefined,
     operatingPhase: "NEEDS_TO_FORM",
     ...overrides,
   };

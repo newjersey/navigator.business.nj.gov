@@ -636,6 +636,10 @@ collections:
             name: isTransportation
             widget: boolean
             default: false
+          - label: Car Service
+            name: isCarServiceApplicable
+            widget: boolean
+            default: false
       - label: Roadmap Steps
         name: roadmapSteps
         widget: list
@@ -3749,6 +3753,24 @@ collections:
                       - { label: "Radio Button Yes Text", name: "radioButtonYesText", widget: "string" }
                       - { label: "Radio Button No Text", name: "radioButtonNoText", widget: "string" }
                       - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Car Service
+                    name: carService
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Header", name: "header", widget: "string" }
+                      - {
+                          label: "Radio Button Standard Text",
+                          name: "radioButtonStandardText",
+                          widget: "string",
+                        }
+                      - {
+                          label: "Radio Button High Capacity Text",
+                          name: "radioButtonHighCapacityText",
+                          widget: "string",
+                        }
+                      - { label: "Radio Button Both Text", name: "radioButtonBothText", widget: "string" }
+                      - { label: "Description", name: "description", widget: "markdown" }
                   - label: Staffing Service
                     name: providesStaffingService
                     collapsed: true
@@ -3878,6 +3900,25 @@ collections:
                       - { label: "Header", name: "header", widget: "string" }
                       - { label: "Radio Button Yes Text", name: "radioButtonYesText", widget: "string" }
                       - { label: "Radio Button No Text", name: "radioButtonNoText", widget: "string" }
+                      - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Car Service
+                    name: carService
+                    collapsed: true
+                    widget: object
+                    summary: "{{realEstateAppraisalManagement}}"
+                    fields:
+                      - { label: "Header", name: "header", widget: "string" }
+                      - {
+                          label: "Radio Button Standard Text",
+                          name: "radioButtonStandardText",
+                          widget: "string",
+                        }
+                      - {
+                          label: "Radio Button High Capacity Text",
+                          name: "radioButtonHighCapacityText",
+                          widget: "string",
+                        }
+                      - { label: "Radio Button Both Text", name: "radioButtonBothText", widget: "string" }
                       - { label: "Description", name: "description", widget: "markdown" }
                   - label: Staffing Service
                     name: staffingService

@@ -37,6 +37,7 @@ export interface ProfileData {
   readonly providesStaffingService: boolean;
   readonly certifiedInteriorDesigner: boolean;
   readonly realEstateAppraisalManagement: boolean;
+  readonly carService: CarServiceType | undefined;
   readonly operatingPhase: OperatingPhaseId;
 }
 
@@ -70,6 +71,7 @@ export const emptyProfileData: ProfileData = {
   providesStaffingService: false,
   certifiedInteriorDesigner: false,
   realEstateAppraisalManagement: false,
+  carService: undefined,
   operatingPhase: "GUEST_MODE",
 };
 
@@ -78,6 +80,7 @@ export const createEmptyProfileData = (): ProfileData => {
 };
 
 export type CannabisLicenseType = "CONDITIONAL" | "ANNUAL" | undefined;
+export type CarServiceType = "STANDARD" | "HIGH_CAPACITY" | "BOTH" | undefined;
 
 export type BusinessPersona = "STARTING" | "OWNING" | "FOREIGN" | undefined;
 export type ForeignBusinessType = "REMOTE_WORKER" | "REMOTE_SELLER" | "NEXUS" | "NONE" | undefined;
