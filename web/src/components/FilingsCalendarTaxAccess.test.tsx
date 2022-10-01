@@ -11,7 +11,6 @@ import {
   currentUserData,
   setupStatefulUserDataContext,
   userDataUpdatedNTimes,
-  userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import { FormationLegalType } from "@businessnjgovnavigator/shared/index";
@@ -19,7 +18,6 @@ import { randomInt } from "@businessnjgovnavigator/shared/intHelpers";
 import { OperatingPhases } from "@businessnjgovnavigator/shared/operatingPhase";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
-import { getCurrentDate } from "../../../shared/src/dateHelpers";
 import { BusinessPersona } from "../../../shared/src/profileData";
 import { generateFormationData } from "../../test/factories";
 import { FilingsCalendarTaxAccess } from "./FilingsCalendarTaxAccess";
@@ -55,6 +53,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
         ...userDataWithExternalFormation,
         taxFilingData: generateTaxFilingData({
           state: "SUCCESS",
+          registered: true,
           businessName: userDataWithExternalFormation.profileData.businessName,
         }),
       })
@@ -362,96 +361,134 @@ describe("<FilingsCalendarTaxAccess />", () => {
     });
   });
 
-  describe("different taxFiling states", () => {
-    it("displays button if taxFiling lookup failed previously", async () => {
+  describe("different taxFiling states and update behavior", () => {
+    it("does not do taxFiling lookup on page load if not registered", async () => {
+      renderFilingsCalendarTaxAccess({
+        ...userDataWithExternalFormation,
+        taxFilingData: generateTaxFilingData({
+          registered: false,
+          businessName: userDataWithExternalFormation.profileData.businessName,
+        }),
+      });
+      expect(mockApi.postTaxRegistrationLookup).not.toHaveBeenCalled();
+    });
+
+    it("does taxFiling lookup on page load if registered", async () => {
+      renderFilingsCalendarTaxAccess({
+        ...userDataWithExternalFormation,
+        taxFilingData: generateTaxFilingData({
+          registered: true,
+          businessName: userDataWithExternalFormation.profileData.businessName,
+        }),
+      });
+      expect(mockApi.postTaxRegistrationLookup).toHaveBeenCalled();
+      await waitFor(() => expect(userDataUpdatedNTimes()).toEqual(1));
+    });
+
+    it("shows button component when state is FAILED and unregistered", async () => {
       renderFilingsCalendarTaxAccess({
         ...userDataWithExternalFormation,
         taxFilingData: generateTaxFilingData({
           state: "FAILED",
+          registered: false,
           businessName: userDataWithExternalFormation.profileData.businessName,
         }),
       });
+      expect(mockApi.postTaxRegistrationLookup).not.toHaveBeenCalled();
+      expect(screen.queryByTestId("pending-container")).not.toBeInTheDocument();
       expect(screen.getByTestId("button-container")).toBeInTheDocument();
     });
 
-    it("displays nothing if taxFiling lookup was successful", async () => {
+    it("shows button component when state is undefined and unregistered", async () => {
       renderFilingsCalendarTaxAccess({
         ...userDataWithExternalFormation,
         taxFilingData: generateTaxFilingData({
-          state: "SUCCESS",
+          state: undefined,
+          registered: false,
           businessName: userDataWithExternalFormation.profileData.businessName,
         }),
       });
+      expect(mockApi.postTaxRegistrationLookup).not.toHaveBeenCalled();
+      expect(screen.queryByTestId("pending-container")).not.toBeInTheDocument();
+      expect(screen.getByTestId("button-container")).toBeInTheDocument();
+    });
+
+    it("hides pending and button components when state is SUCCESS", async () => {
+      mockApi.postTaxRegistrationLookup.mockImplementation(() =>
+        Promise.resolve({
+          ...userDataWithExternalFormation,
+          taxFilingData: generateTaxFilingData({
+            registered: true,
+            state: "SUCCESS",
+            businessName: userDataWithExternalFormation.profileData.businessName,
+          }),
+        })
+      );
+      renderFilingsCalendarTaxAccess({
+        ...userDataWithExternalFormation,
+        taxFilingData: generateTaxFilingData({
+          registered: true,
+          state: "PENDING",
+          businessName: userDataWithExternalFormation.profileData.businessName,
+        }),
+      });
+      expect(mockApi.postTaxRegistrationLookup).toHaveBeenCalled();
+      await waitFor(() => expect(userDataUpdatedNTimes()).toEqual(1));
+      await waitFor(() => expect(currentUserData().taxFilingData.state).toEqual("SUCCESS"));
       expect(screen.queryByTestId("pending-container")).not.toBeInTheDocument();
       expect(screen.queryByTestId("button-container")).not.toBeInTheDocument();
     });
 
-    describe("tax api lookup on page load and pending state", () => {
-      it("displays pending message container if the taxFiling lookup was pending", async () => {
-        mockApi.postTaxRegistrationLookup.mockImplementation(() =>
-          Promise.resolve({
-            ...userDataWithExternalFormation,
-            taxFilingData: generateTaxFilingData({
-              state: "PENDING",
-              businessName: userDataWithExternalFormation.profileData.businessName,
-            }),
-          })
-        );
-        renderFilingsCalendarTaxAccess({
+    it("hides pending and button components when state is API_ERROR but registered", async () => {
+      mockApi.postTaxRegistrationLookup.mockImplementation(() =>
+        Promise.resolve({
+          ...userDataWithExternalFormation,
+          taxFilingData: generateTaxFilingData({
+            registered: true,
+            state: "API_ERROR",
+            businessName: userDataWithExternalFormation.profileData.businessName,
+          }),
+        })
+      );
+      renderFilingsCalendarTaxAccess({
+        ...userDataWithExternalFormation,
+        taxFilingData: generateTaxFilingData({
+          registered: true,
+          state: "PENDING",
+          businessName: userDataWithExternalFormation.profileData.businessName,
+        }),
+      });
+      expect(mockApi.postTaxRegistrationLookup).toHaveBeenCalled();
+      await waitFor(() => expect(userDataUpdatedNTimes()).toEqual(1));
+      await waitFor(() => expect(currentUserData().taxFilingData.state).toEqual("API_ERROR"));
+      expect(screen.queryByTestId("pending-container")).not.toBeInTheDocument();
+      expect(screen.queryByTestId("button-container")).not.toBeInTheDocument();
+    });
+
+    it("shows pending component when state is PENDING", async () => {
+      mockApi.postTaxRegistrationLookup.mockImplementation(() =>
+        Promise.resolve({
           ...userDataWithExternalFormation,
           taxFilingData: generateTaxFilingData({
             state: "PENDING",
+            registered: true,
             businessName: userDataWithExternalFormation.profileData.businessName,
-            lastUpdatedISO: getCurrentDate().subtract(1, "day").toISOString(),
           }),
-        });
-        await waitFor(() => expect(userDataUpdatedNTimes()).toEqual(1));
-        expect(screen.getByTestId("pending-container")).toBeInTheDocument();
-        expect(screen.queryByTestId("button-container")).not.toBeInTheDocument();
+        })
+      );
+      renderFilingsCalendarTaxAccess({
+        ...userDataWithExternalFormation,
+        taxFilingData: generateTaxFilingData({
+          state: "API_ERROR",
+          registered: true,
+          businessName: userDataWithExternalFormation.profileData.businessName,
+        }),
       });
-
-      it("updates userData and hides the container if the taxFiling lookup was successful", async () => {
-        userDataWithExternalFormation = {
-          ...userDataWithExternalFormation,
-          taxFilingData: generateTaxFilingData({
-            state: "PENDING",
-            businessName: userDataWithExternalFormation.profileData.businessName,
-            lastUpdatedISO: getCurrentDate().subtract(1, "day").toISOString(),
-          }),
-        };
-        mockApi.postTaxRegistrationLookup.mockImplementation(() =>
-          Promise.resolve({
-            ...userDataWithExternalFormation,
-            taxFilingData: generateTaxFilingData({
-              state: "SUCCESS",
-              businessName: userDataWithExternalFormation.profileData.businessName,
-            }),
-          })
-        );
-
-        renderFilingsCalendarTaxAccess(userDataWithExternalFormation);
-        await waitFor(() => expect(currentUserData().taxFilingData.state).toEqual("SUCCESS"));
-        expect(mockApi.postTaxRegistrationLookup).toHaveBeenCalled();
-        expect(screen.queryByTestId("pending-container")).not.toBeInTheDocument();
-        expect(screen.queryByTestId("button-container")).not.toBeInTheDocument();
-      });
-
-      it("does not check if the lastUpdatedISO date is of the same day", async () => {
-        userDataWithExternalFormation = {
-          ...userDataWithExternalFormation,
-          taxFilingData: generateTaxFilingData({
-            state: "PENDING",
-            businessName: userDataWithExternalFormation.profileData.businessName,
-            lastUpdatedISO: getCurrentDate().toISOString(),
-          }),
-        };
-
-        renderFilingsCalendarTaxAccess(userDataWithExternalFormation);
-        await waitFor(() => expect(userDataWasNotUpdated()).toBeTruthy());
-
-        expect(mockApi.postTaxRegistrationLookup).not.toHaveBeenCalled();
-        expect(screen.getByTestId("pending-container")).toBeInTheDocument();
-      });
+      expect(mockApi.postTaxRegistrationLookup).toHaveBeenCalled();
+      await waitFor(() => expect(userDataUpdatedNTimes()).toEqual(1));
+      await waitFor(() => expect(currentUserData().taxFilingData.state).toEqual("PENDING"));
+      expect(screen.getByTestId("pending-container")).toBeInTheDocument();
+      expect(screen.queryByTestId("button-container")).not.toBeInTheDocument();
     });
   });
 });

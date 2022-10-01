@@ -5,10 +5,8 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 import {
-  getCurrentDate,
   LookupLegalStructureById,
   LookupOperatingPhaseById,
-  parseDate,
   UserData,
 } from "@businessnjgovnavigator/shared/";
 
@@ -32,10 +30,7 @@ export const FilingsCalendarTaxAccess = (): ReactElement => {
   useMountEffectWhenDefined(() => {
     if (!userData) return;
     (async () => {
-      if (
-        userData.taxFilingData.state == "PENDING" &&
-        parseDate(userData.taxFilingData.lastUpdatedISO).day() !== getCurrentDate().day()
-      ) {
+      if (userData.taxFilingData.registered) {
         const updatedUserData = await postTaxRegistrationLookup({
           businessName: userData.taxFilingData.businessName as string,
           taxId: userData.profileData.taxId as string,
@@ -63,7 +58,8 @@ export const FilingsCalendarTaxAccess = (): ReactElement => {
           </div>
         </div>
       ) : (
-        userData?.taxFilingData.state != "SUCCESS" && (
+        userData?.taxFilingData.state != "SUCCESS" &&
+        !userData?.taxFilingData.registered && (
           <>
             <TaxFilingLookupModal
               isOpen={showModal}

@@ -36,11 +36,18 @@ export const taxFilingsInterfaceFactory = (apiTaxFilingClient: TaxFilingClient):
           ...userData.taxFilingData,
           businessName: request.businessName,
           lastUpdatedISO: new Date(Date.now()).toISOString(),
+          registered: ["SUCCESS", "PENDING"].includes(response.state),
           state: response.state == "SUCCESS" ? "PENDING" : response.state,
         },
       };
     } else {
-      return userData;
+      return {
+        ...userData,
+        taxFilingData: {
+          ...userData.taxFilingData,
+          registered: ["SUCCESS", "PENDING"].includes(userData.taxFilingData.state ?? ""),
+        },
+      };
     }
   };
 

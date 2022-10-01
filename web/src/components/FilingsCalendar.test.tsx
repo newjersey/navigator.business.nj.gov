@@ -121,15 +121,13 @@ describe("<FilingsCalendar />", () => {
 
     renderFilingsCalendar(operateReferences, userData);
     expect(screen.getByTestId("filings-calendar-as-list")).toBeInTheDocument();
-    expect(screen.queryByText(farDueDate.format("MMMM DD, YYYY"), { exact: false })).not.toBeInTheDocument();
-    expect(screen.getByText(recentDueDate.format("MMMM DD, YYYY"), { exact: false })).toBeInTheDocument();
+    expect(screen.queryByText(farDueDate.format("MMMM D, YYYY"), { exact: false })).not.toBeInTheDocument();
+    expect(screen.getByText(recentDueDate.format("MMMM D, YYYY"), { exact: false })).toBeInTheDocument();
   });
 
-  it("displays calendar content when there are filings in the next 11 months", () => {
-    const dueDate = getCurrentDate().endOf("month").add(11, "months");
+  it("displays calendar content when there are filings", () => {
     const annualReport = generateTaxFiling({
       identifier: "annual-report",
-      dueDate: dueDate.format("YYYY-MM-DD"),
     });
     const userData = generateUserData({
       taxFilingData: generateTaxFilingData({ filings: [annualReport] }),
@@ -150,32 +148,6 @@ describe("<FilingsCalendar />", () => {
     expect(
       screen.queryByText(markdownToText(Config.dashboardDefaults.emptyCalendarTitleText))
     ).not.toBeInTheDocument();
-  });
-
-  it("displays empty calendar content when there are no filings in the next 11 months", () => {
-    const dueDate = getCurrentDate().endOf("month").add(12, "months");
-    const annualReport = generateTaxFiling({
-      identifier: "annual-report",
-      dueDate: dueDate.format("YYYY-MM-DD"),
-    });
-    const userData = generateUserData({
-      taxFilingData: generateTaxFilingData({ filings: [annualReport] }),
-    });
-
-    const operateReferences: Record<string, OperateReference> = {
-      "annual-report": {
-        name: "Annual Report",
-        urlSlug: "annual-report-url",
-        urlPath: "annual_report-url-path",
-      },
-    };
-
-    renderFilingsCalendar(operateReferences, userData);
-
-    expect(screen.queryByTestId("filings-calendar-as-table")).not.toBeInTheDocument();
-    expect(
-      screen.getByText(markdownToText(Config.dashboardDefaults.emptyCalendarTitleText))
-    ).toBeInTheDocument();
   });
 
   it("displays empty calendar content when there are no filings", () => {

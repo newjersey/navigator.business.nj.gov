@@ -1,4 +1,9 @@
-import { generateProfileData, generateUser, generateUserData } from "../../../test/factories";
+import {
+  generateProfileData,
+  generateTaxFilingData,
+  generateUser,
+  generateUserData,
+} from "../../../test/factories";
 import { determineAnnualFilingDate } from "../../../test/helpers";
 import { getAnnualFilings } from "./getAnnualFilings";
 
@@ -11,7 +16,9 @@ describe("getAnnualFilings", () => {
         entityId: undefined,
         legalStructureId: "limited-liability-company",
       }),
-      taxFilingData: { filings: [] },
+      taxFilingData: generateTaxFilingData({
+        filings: [],
+      }),
     });
 
     const response = getAnnualFilings(postedUserData);
@@ -33,9 +40,9 @@ describe("getAnnualFilings", () => {
         entityId: undefined,
         legalStructureId: "limited-liability-company",
       }),
-      taxFilingData: {
+      taxFilingData: generateTaxFilingData({
         filings: [{ identifier: "ANNUAL_FILING", dueDate: "2019-10-31" }],
-      },
+      }),
     });
 
     const response = getAnnualFilings(postedUserData);
@@ -43,6 +50,7 @@ describe("getAnnualFilings", () => {
     expect(response).toEqual({
       ...postedUserData,
       taxFilingData: {
+        ...postedUserData.taxFilingData,
         filings: [{ identifier: "ANNUAL_FILING", dueDate: determineAnnualFilingDate("2021-03-01") }],
       },
     });
@@ -56,7 +64,9 @@ describe("getAnnualFilings", () => {
         entityId: undefined,
         legalStructureId: undefined,
       }),
-      taxFilingData: { filings: [] },
+      taxFilingData: generateTaxFilingData({
+        filings: [],
+      }),
     });
 
     const response = getAnnualFilings(postedUserData);
@@ -78,18 +88,18 @@ describe("getAnnualFilings", () => {
         entityId: undefined,
         legalStructureId: "sole-proprietorship",
       }),
-      taxFilingData: {
+      taxFilingData: generateTaxFilingData({
         filings: [{ identifier: "ANNUAL_FILING", dueDate: "2019-10-31" }],
-      },
+      }),
     });
 
     const response = getAnnualFilings(postedUserData);
 
     expect(response).toEqual({
       ...postedUserData,
-      taxFilingData: {
+      taxFilingData: generateTaxFilingData({
         filings: [],
-      },
+      }),
     });
   });
 });

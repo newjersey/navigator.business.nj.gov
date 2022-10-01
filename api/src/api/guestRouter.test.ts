@@ -1,6 +1,11 @@
 import { Express } from "express";
 import request from "supertest";
-import { generateProfileData, generateUser, generateUserData } from "../../test/factories";
+import {
+  generateProfileData,
+  generateTaxFilingData,
+  generateUser,
+  generateUserData,
+} from "../../test/factories";
 import { determineAnnualFilingDate } from "../../test/helpers";
 import { BusinessNameClient, NameAvailability } from "../domain/types";
 import { setupExpress } from "../libs/express";
@@ -30,7 +35,9 @@ describe("guestRouter", () => {
           entityId: undefined,
           legalStructureId: "limited-liability-company",
         }),
-        taxFilingData: { filings: [] },
+        taxFilingData: generateTaxFilingData({
+          filings: [],
+        }),
       });
 
       const response = await request(app).post(`/annualFilings`).send(postedUserData);

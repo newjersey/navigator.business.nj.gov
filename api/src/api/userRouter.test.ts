@@ -9,6 +9,7 @@ import {
   generateGetFilingResponse,
   generateLicenseData,
   generateProfileData,
+  generateTaxFilingData,
   generateUser,
   generateUserData,
 } from "../../test/factories";
@@ -208,7 +209,9 @@ describe("userRouter", () => {
           entityId: undefined,
           legalStructureId: "limited-liability-company",
         }),
-        taxFilingData: { filings: [] },
+        taxFilingData: generateTaxFilingData({
+          filings: [],
+        }),
       });
 
       stubUserDataClient.get.mockResolvedValue(postedUserData);
