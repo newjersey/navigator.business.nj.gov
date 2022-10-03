@@ -3,6 +3,8 @@ filename: Growing Apprenticeship in Nontraditional Sectors
 urlSlug: gains
 name: Growing Apprenticeship in Nontraditional Sectors
 id: gains
+callToActionLink: https://www.nj.gov/labor/research-info/grants.shtml
+callToActionText: Learn more
 fundingType: grant
 programPurpose: Both
 agency:
