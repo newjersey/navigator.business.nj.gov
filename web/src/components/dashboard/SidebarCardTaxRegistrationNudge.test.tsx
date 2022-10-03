@@ -4,6 +4,7 @@ import {
   generatePreferences,
   generateProfileData,
   generateSidebarCardContent,
+  generateTaxFilingData,
   generateUserData,
 } from "@/test/factories";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
@@ -16,6 +17,7 @@ import {
 import { taxTaskId } from "@businessnjgovnavigator/shared/index";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
+import { generateTaxFiling } from "../../../test/factories";
 import { SidebarCardTaxRegistrationNudge } from "./SidebarCardTaxRegistrationNudge";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -64,6 +66,11 @@ describe("<SidebarCardTaxRegistrationNudge />", () => {
           businessName: "",
           legalStructureId: "limited-liability-partnership",
         }),
+        taxFilingData: generateTaxFilingData({
+          registered: true,
+          filings: [generateTaxFiling({})],
+          state: "SUCCESS",
+        }),
       });
       renderWithUserData(initialUserData);
 
@@ -101,6 +108,8 @@ describe("<SidebarCardTaxRegistrationNudge />", () => {
         },
         taxFilingData: {
           ...initialUserData.taxFilingData,
+          registered: false,
+          state: undefined,
           filings: [],
         },
       };

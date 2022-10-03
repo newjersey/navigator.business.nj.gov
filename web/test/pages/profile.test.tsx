@@ -26,17 +26,18 @@ import {
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { formationTaskId, ProfileData } from "@businessnjgovnavigator/shared";
 import {
   createEmptyUserData,
   einTaskId,
+  formationTaskId,
   getCurrentDate,
   LookupIndustryById,
   LookupOwnershipTypeById,
   LookupSectorTypeById,
   Municipality,
+  ProfileData,
   UserData,
-} from "@businessnjgovnavigator/shared/";
+} from "@businessnjgovnavigator/shared";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 
 const date = getCurrentDate().subtract(1, "month").date(1);
@@ -293,6 +294,7 @@ describe("profile", () => {
       await waitFor(() => {
         expect(screen.getByTestId("snackbar-alert-SUCCESS")).toBeInTheDocument();
       });
+
       expect(currentUserData()).toEqual({
         ...initialUserData,
         taxFilingData: { ...taxData, filings: [] },
@@ -724,7 +726,7 @@ describe("profile", () => {
       expect(currentUserData()).toEqual({
         ...userData,
         formProgress: "COMPLETED",
-        taxFilingData: { ...userData.taxFilingData, state: undefined, filings: [] },
+        taxFilingData: { ...userData.taxFilingData, state: undefined, filings: [], registered: false },
         profileData: {
           ...userData.profileData,
           businessName: "Cool Computers",
@@ -814,8 +816,13 @@ describe("profile", () => {
       await waitFor(() => {
         expect(screen.getByTestId("snackbar-alert-SUCCESS")).toBeInTheDocument();
       });
-      expect(currentUserData().taxFilingData.state).toEqual(undefined);
-      expect(currentUserData().taxFilingData.filings).toEqual([]);
+
+      expect(currentUserData().taxFilingData).toEqual({
+        ...userData.taxFilingData,
+        state: undefined,
+        filings: [],
+        registered: false,
+      });
     });
 
     it("shows an error when tax pin input is not empty or is less than 4 digits", async () => {
