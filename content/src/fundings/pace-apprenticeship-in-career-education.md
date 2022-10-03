@@ -21,7 +21,7 @@ preferenceForOpportunityZone: no
 county:
   - All
 sector: []
-openDate: ""
+openDate: 11/01/2022
 dueDate: ""
 ---
 The Pre-Apprenticeship in Career Education (PACE) program aims to better align secondary, post-secondary, adult education, and occupational training to meet labor demands unique to New Jersey and develop career pathways leading to economically sustainable wages. 
