@@ -24,7 +24,7 @@ import {
   parseDateWithFormat,
   RegistrationStatus,
   UserData,
-} from "@businessnjgovnavigator/shared/";
+} from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import { act, render, screen, waitFor, within } from "@testing-library/react";
@@ -304,7 +304,7 @@ describe("roadmap page", () => {
     expect(screen.getByTestId("hiddenTasks-alert")).toBeInTheDocument();
   });
 
-  it("displays filings calendar as list when taxfiling is populated and operatingPhase has displayListCalendar", () => {
+  it("displays filings calendar as list when taxfiling is populated and operatingPhase has ListCalendar", () => {
     const dueDate = getCurrentDate().add(12, "months");
     const annualReport = generateTaxFiling({
       identifier: "annual-report",

@@ -15,7 +15,7 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { OperatingPhases, randomInt, TaxFiling, UserData } from "@businessnjgovnavigator/shared/";
+import { OperatingPhases, randomInt, TaxFiling, UserData } from "@businessnjgovnavigator/shared";
 import { getCurrentDate, parseDateWithFormat } from "@businessnjgovnavigator/shared/dateHelpers";
 import * as materialUi from "@mui/material";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
@@ -69,6 +69,11 @@ describe("<FilingsCalendar />", () => {
     });
 
     const userData = generateUserData({
+      profileData: generateProfileData({
+        operatingPhase: randomElementFromArray(
+          OperatingPhases.filter((obj) => obj.displayCalendarType === "FULL")
+        ).id,
+      }),
       taxFilingData: generateTaxFilingData({ filings: [annualReport] }),
       preferences: generatePreferences({ isCalendarFullView: true }),
     });
@@ -102,6 +107,11 @@ describe("<FilingsCalendar />", () => {
     });
 
     const userData = generateUserData({
+      profileData: generateProfileData({
+        operatingPhase: randomElementFromArray(
+          OperatingPhases.filter((obj) => obj.displayCalendarType === "LIST")
+        ).id,
+      }),
       taxFilingData: generateTaxFilingData({ filings: [farReport, recentReport] }),
       preferences: generatePreferences({ isCalendarFullView: false }),
     });
@@ -125,11 +135,52 @@ describe("<FilingsCalendar />", () => {
     expect(screen.getByText(recentDueDate.format("MMMM D, YYYY"), { exact: false })).toBeInTheDocument();
   });
 
-  it("displays calendar content when there are filings", () => {
+  it("displays calendar content when there are filings inside of the year", () => {
     const annualReport = generateTaxFiling({
       identifier: "annual-report",
+      dueDate: getCurrentDate().add(2, "months").format("YYYY-MM-DD"),
     });
+
     const userData = generateUserData({
+      profileData: generateProfileData({
+        operatingPhase: randomElementFromArray(
+          OperatingPhases.filter((obj) => obj.displayCalendarType === "FULL")
+        ).id,
+      }),
+      taxFilingData: generateTaxFilingData({ filings: [annualReport] }),
+      preferences: generatePreferences({ isCalendarFullView: true }),
+    });
+
+    const operateReferences: Record<string, OperateReference> = {
+      "annual-report": {
+        name: "Annual Report",
+        urlSlug: "annual-report-url",
+        urlPath: "annual_report-url-path",
+      },
+    };
+
+    renderFilingsCalendar(operateReferences, userData);
+    expect(
+      screen.getByText(Config.dashboardDefaults.calendarListViewButton, { exact: false })
+    ).toBeInTheDocument();
+    expect(screen.getByTestId("filings-calendar-as-table")).toBeInTheDocument();
+    expect(
+      screen.queryByText(markdownToText(Config.dashboardDefaults.emptyCalendarTitleText))
+    ).not.toBeInTheDocument();
+  });
+
+  it("displays empty calendar image without body text when there are no filings inside of the year", () => {
+    const annualReport = generateTaxFiling({
+      identifier: "annual-report",
+      dueDate: getCurrentDate().add(2, "years").format("YYYY-MM-DD"),
+    });
+
+    const userData = generateUserData({
+      profileData: generateProfileData({
+        operatingPhase: randomElementFromArray(
+          OperatingPhases.filter((obj) => obj.displayCalendarType === "FULL")
+        ).id,
+      }),
       taxFilingData: generateTaxFilingData({ filings: [annualReport] }),
       preferences: generatePreferences({ isCalendarFullView: true }),
     });
@@ -144,14 +195,25 @@ describe("<FilingsCalendar />", () => {
 
     renderFilingsCalendar(operateReferences, userData);
 
-    expect(screen.getByTestId("filings-calendar-as-table")).toBeInTheDocument();
+    expect(screen.queryByTestId("filings-calendar-as-table")).not.toBeInTheDocument();
     expect(
-      screen.queryByText(markdownToText(Config.dashboardDefaults.emptyCalendarTitleText))
+      screen.queryByText(Config.dashboardDefaults.calendarListViewButton, { exact: false })
+    ).not.toBeInTheDocument();
+    expect(
+      screen.getByText(markdownToText(Config.dashboardDefaults.emptyCalendarTitleText))
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByText(markdownToText(Config.dashboardDefaults.emptyCalendarBodyText))
     ).not.toBeInTheDocument();
   });
 
   it("displays empty calendar content when there are no filings", () => {
     const userData = generateUserData({
+      profileData: generateProfileData({
+        operatingPhase: randomElementFromArray(
+          OperatingPhases.filter((obj) => obj.displayCalendarType === "FULL")
+        ).id,
+      }),
       taxFilingData: generateTaxFilingData({ filings: [] }),
       preferences: generatePreferences({ isCalendarFullView: true }),
     });
@@ -168,7 +230,13 @@ describe("<FilingsCalendar />", () => {
 
     expect(screen.queryByTestId("filings-calendar-as-table")).not.toBeInTheDocument();
     expect(
+      screen.queryByText(Config.dashboardDefaults.calendarListViewButton, { exact: false })
+    ).not.toBeInTheDocument();
+    expect(
       screen.getByText(markdownToText(Config.dashboardDefaults.emptyCalendarTitleText))
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(markdownToText(Config.dashboardDefaults.emptyCalendarBodyText))
     ).toBeInTheDocument();
   });
 
@@ -180,6 +248,11 @@ describe("<FilingsCalendar />", () => {
     });
 
     const userData = generateUserData({
+      profileData: generateProfileData({
+        operatingPhase: randomElementFromArray(
+          OperatingPhases.filter((obj) => obj.displayCalendarType === "LIST")
+        ).id,
+      }),
       taxFilingData: generateTaxFilingData({ filings: [annualReport] }),
       preferences: generatePreferences({ isCalendarFullView: false }),
     });
@@ -219,7 +292,9 @@ describe("<FilingsCalendar />", () => {
         profileData: generateProfileData({
           legalStructureId: randomLegalStructure(true).id,
           operatingPhase: randomElementFromArray(
-            OperatingPhases.filter((obj) => obj.displayTaxAccessButton === true)
+            OperatingPhases.filter(
+              (obj) => obj.displayTaxAccessButton === true && obj.displayCalendarType != "NONE"
+            )
           ).id,
         }),
         taxFilingData: generateTaxFilingData({ filings: [annualReport] }),
@@ -246,7 +321,9 @@ describe("<FilingsCalendar />", () => {
         profileData: generateProfileData({
           legalStructureId: randomLegalStructure(false).id,
           operatingPhase: randomElementFromArray(
-            OperatingPhases.filter((obj) => obj.displayTaxAccessButton === true)
+            OperatingPhases.filter(
+              (obj) => obj.displayTaxAccessButton === true && obj.displayCalendarType != "NONE"
+            )
           ).id,
         }),
         taxFilingData: generateTaxFilingData({ filings: [whateverReport] }),
@@ -276,7 +353,9 @@ describe("<FilingsCalendar />", () => {
         profileData: generateProfileData({
           legalStructureId: randomLegalStructure(true).id,
           operatingPhase: randomElementFromArray(
-            OperatingPhases.filter((obj) => obj.displayTaxAccessButton !== true)
+            OperatingPhases.filter(
+              (obj) => obj.displayTaxAccessButton !== true && obj.displayCalendarType != "NONE"
+            )
           ).id,
         }),
         taxFilingData: generateTaxFilingData({ filings: [annualReport] }),
@@ -307,7 +386,9 @@ describe("<FilingsCalendar />", () => {
         profileData: generateProfileData({
           legalStructureId: randomLegalStructure(true).id,
           operatingPhase: randomElementFromArray(
-            OperatingPhases.filter((obj) => obj.displayTaxAccessButton == true)
+            OperatingPhases.filter(
+              (obj) => obj.displayTaxAccessButton == true && obj.displayCalendarType != "NONE"
+            )
           ).id,
         }),
         taxFilingData: generateTaxFilingData({ filings: [annualReport] }),
@@ -346,6 +427,11 @@ describe("<FilingsCalendar />", () => {
       });
 
       userData = generateUserData({
+        profileData: generateProfileData({
+          operatingPhase: randomElementFromArray(
+            OperatingPhases.filter((obj) => obj.displayCalendarType === "FULL")
+          ).id,
+        }),
         taxFilingData: generateTaxFilingData({ filings: [annualReport] }),
         preferences: generatePreferences({ isCalendarFullView: true }),
       });
@@ -385,6 +471,11 @@ describe("<FilingsCalendar />", () => {
       });
 
       userData = generateUserData({
+        profileData: generateProfileData({
+          operatingPhase: randomElementFromArray(
+            OperatingPhases.filter((obj) => obj.displayCalendarType === "FULL")
+          ).id,
+        }),
         taxFilingData: generateTaxFilingData({ filings: [annualReport] }),
         preferences: generatePreferences({ isCalendarFullView: true }),
       });

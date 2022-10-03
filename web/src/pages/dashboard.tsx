@@ -2,7 +2,6 @@ import { HideableTasks } from "@/components/dashboard/HideableTasks";
 import { Roadmap } from "@/components/dashboard/Roadmap";
 import { SidebarCardsList } from "@/components/dashboard/SidebarCardsList";
 import { FilingsCalendar } from "@/components/FilingsCalendar";
-import { FilingsCalendarAsList } from "@/components/FilingsCalendarAsList";
 import { Header } from "@/components/Header";
 import { LoadingIndicator } from "@/components/LoadingIndicator";
 import { NavBar } from "@/components/navbar/NavBar";
@@ -21,7 +20,7 @@ import { loadAllFundings } from "@/lib/static/loadFundings";
 import { loadOperateReferences } from "@/lib/static/loadOperateReferences";
 import { Certification, Funding, OperateReference, RoadmapDisplayContent } from "@/lib/types/types";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { LookupOperatingPhaseById } from "@businessnjgovnavigator/shared/";
+import { LookupOperatingPhaseById } from "@businessnjgovnavigator/shared";
 import { GetStaticPropsResult } from "next";
 import { useRouter } from "next/router";
 import { ReactElement } from "react";
@@ -108,13 +107,7 @@ const DashboardPage = (props: Props): ReactElement => {
                 <Roadmap />
               </>
             )}
-            {LookupOperatingPhaseById(userData?.profileData.operatingPhase).displayListCalendar &&
-              (userData?.taxFilingData.filings || []).length > 0 && (
-                <div>
-                  <FilingsCalendarAsList operateReferences={props.operateReferences} />
-                </div>
-              )}
-            {LookupOperatingPhaseById(userData?.profileData.operatingPhase).displayFullCalendar && (
+            {LookupOperatingPhaseById(userData?.profileData.operatingPhase).displayCalendarType != "NONE" && (
               <FilingsCalendar operateReferences={props.operateReferences} />
             )}
             <HideableTasks />
