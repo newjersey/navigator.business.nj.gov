@@ -3,6 +3,8 @@ filename: Pace Apprenticeship in Career Education
 urlSlug: pace-apprentice
 name: Pace Apprenticeship in Career Education
 id: pace
+callToActionLink: https://www.nj.gov/labor/research-info/grants.shtml
+callToActionText: Learn more
 fundingType: grant
 programPurpose: Both
 agency:
@@ -12,7 +14,7 @@ publishStageArchive: ""
 status: deadline
 programFrequency: reoccuring
 businessStage: both
-employeesRequired: n/a
+employeesRequired: yes
 homeBased: no
 mwvb: n/a
 preferenceForOpportunityZone: no
