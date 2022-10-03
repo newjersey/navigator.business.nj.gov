@@ -110,7 +110,7 @@ const getIndustryBasedAddOns = (profileData: ProfileData, industryId: string | u
   }
 
   if (profileData.homeBasedBusiness && industry.industryOnboardingQuestions.isTransportation) {
-    addOns.push("home-based-transporation");
+    addOns.push("home-based-transportation");
   }
 
   if (profileData.cannabisLicenseType === "ANNUAL") {

@@ -443,19 +443,19 @@ describe("buildUserRoadmap", () => {
     });
 
     describe("transportation", () => {
-      it("adds home-based-transporation add-on if transportation and home-based", async () => {
+      it("adds home-based-transportation add-on if transportation and home-based", async () => {
         await buildUserRoadmap(generateStartingProfile({ homeBasedBusiness: true, industryId: "trucking" }));
-        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("home-based-transporation");
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("home-based-transportation");
       });
 
-      it("does not add home-based-transporation add-on if transportation and not home-based", async () => {
+      it("does not add home-based-transportation add-on if transportation and not home-based", async () => {
         await buildUserRoadmap(generateStartingProfile({ homeBasedBusiness: false, industryId: "trucking" }));
-        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("home-based-transporation");
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("home-based-transportation");
       });
 
-      it("does not add home-based-transporation add-on if not transportation", async () => {
+      it("does not add home-based-transportation add-on if not transportation", async () => {
         await buildUserRoadmap(generateStartingProfile({ homeBasedBusiness: true, industryId: "generic" }));
-        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("home-based-transporation");
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("home-based-transportation");
       });
     });
 
