@@ -13,7 +13,7 @@ publishStageArchive: Do Not Publish
 status: deadline
 programFrequency: reoccuring
 businessStage: both
-employeesRequired: n/a
+employeesRequired: yes
 homeBased: no
 mwvb: n/a
 preferenceForOpportunityZone: no
