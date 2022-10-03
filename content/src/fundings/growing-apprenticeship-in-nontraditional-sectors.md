@@ -28,6 +28,8 @@ The Growing Apprenticeship in Nontraditional Sectors (GAINS) program aims to pro
 
 The GAINS program provides New Jersey businesses or current registered apprenticeship sponsors looking to create or expand Registered Apprenticeship programs in new [USDOL-approved occupations](https://www.apprenticeship.gov/apprenticeship-occupations).
 
+While all industries are encouraged to apply, preference will be given to targeted sectors including: Advanced Manufacturing Bio Pharma/Life Sciences Energy, Utilities and Infrastructure Retail, Hospitality and Tourism Financial Services/Insurance Transportation, Logistics and Distribution Information Technology/Cyber Security, Renewable Energy, Healthcare, Other Science, Technology, Engineering, and Mathematics (STEM) related sectors/occupations Construction & Building Trades Public Service.
+
 - - -
 
 ### Eligibility
