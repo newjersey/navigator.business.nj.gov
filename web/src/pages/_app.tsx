@@ -17,7 +17,7 @@ import "njwds/dist/css/styles.css";
 import { ReactElement, useEffect, useReducer, useState } from "react";
 import SEO from "../../next-seo.config";
 import { SWRConfig } from "swr";
-import { RegistrationStatus } from "@businessnjgovnavigator/shared/";
+import { RegistrationStatus } from "@businessnjgovnavigator/shared";
 import { SignUpSnackbar } from "@/components/auth/SignUpSnackbar";
 import { SignUpModal } from "@/components/auth/SignUpModal";
 import { SelfRegSnackbar } from "@/components/auth/SelfRegSnackbar";
