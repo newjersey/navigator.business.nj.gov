@@ -177,7 +177,7 @@ const ProfilePage = (props: Props): ReactElement => {
     }
 
     if (userData.profileData.taxId != profileData.taxId) {
-      taxFilingData = { ...taxFilingData, state: undefined, filings: [] };
+      taxFilingData = { ...taxFilingData, state: undefined, registered: false, filings: [] };
     }
 
     let newUserData: UserData = {

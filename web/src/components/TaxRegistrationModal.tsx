@@ -55,7 +55,7 @@ export const TaxRegistrationModal = (props: Props): ReactElement => {
 
     let { taxFilingData } = userData;
     if (userData.profileData.taxId != profileData.taxId) {
-      taxFilingData = { ...taxFilingData, state: undefined, filings: [] };
+      taxFilingData = { ...taxFilingData, state: undefined, registered: false, filings: [] };
     }
 
     updateQueue.queueProfileData(profileData).queueTaxFilingData(taxFilingData);
