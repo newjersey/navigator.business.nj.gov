@@ -60,6 +60,10 @@ export const buildUserRoadmap = async (profileData: ProfileData): Promise<Roadma
     roadmap = removeTask(roadmap, "register-for-ein");
   }
 
+  if (isCarServiceApplicable(profileData.industryId) && profileData.carService == "BOTH") {
+    roadmap = removeTask(roadmap, "taxi-insurance");
+  }
+
   return roadmap;
 };
 

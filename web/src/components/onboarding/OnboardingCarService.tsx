@@ -25,6 +25,7 @@ export const OnboardingCarService = (): ReactElement => {
           onChange={handleCarServiceSelection}
         >
           <FormControlLabel
+            aria-label="Car Service Type - Standard (Taxis, Limos, etc.)"
             style={{ marginTop: ".75rem", alignItems: "flex-start", marginRight: "3rem" }}
             labelPlacement="end"
             data-testid="car-service-standard"
@@ -33,6 +34,7 @@ export const OnboardingCarService = (): ReactElement => {
             label={Config.profileDefaults[state.flow].carService.radioButtonStandardText}
           />
           <FormControlLabel
+            aria-label="Car Service Type - High Capacity (15+ Passenger Vehicles)"
             style={{ marginTop: ".75rem", alignItems: "flex-start", marginRight: "3rem" }}
             labelPlacement="end"
             data-testid="car-service-high-capacity"
@@ -41,6 +43,7 @@ export const OnboardingCarService = (): ReactElement => {
             label={Config.profileDefaults[state.flow].carService.radioButtonHighCapacityText}
           />
           <FormControlLabel
+            aria-label="Car Service Type - Both"
             style={{ marginTop: ".75rem", alignItems: "flex-start", marginRight: "3rem" }}
             labelPlacement="end"
             data-testid="car-service-both"
