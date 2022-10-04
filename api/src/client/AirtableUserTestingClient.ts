@@ -1,6 +1,7 @@
 import { LogWriterType } from "@libs/logWriter";
 import { BusinessUser, UserTestingResponse } from "@shared/businessUser";
 import { getCurrentDateFormatted } from "@shared/dateHelpers";
+import { ProfileData } from "@shared/profileData";
 import Airtable from "airtable";
 import { UserTestingClient } from "../domain/types";
 
@@ -23,11 +24,15 @@ export const AirtableUserTestingClient = (
   const logId = logWriter.GetId();
   const base = Airtable.base(config.baseId);
 
-  const add = (user: BusinessUser): Promise<UserTestingResponse> => {
+  const add = (user: BusinessUser, profileData: ProfileData): Promise<UserTestingResponse> => {
     return new Promise((resolve) => {
       const fields = {
         "Email Address": user.email,
         "First Name": user.name,
+        Persona: profileData.businessPersona,
+        "Sub-Persona": profileData.foreignBusinessType,
+        Industry: profileData.industryId,
+        Sector: profileData.sectorId,
         "Registration Date": getCurrentDateFormatted("YYYY-MM-DD"),
         Source: "Opted In Navigator",
       };
