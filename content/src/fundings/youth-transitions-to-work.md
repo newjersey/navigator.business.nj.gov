@@ -31,7 +31,7 @@ Funded programs are expected to increase the number of high school graduates ent
 
 ### E﻿ligibility
 
-* The funding opportunity is limited to only grantees who received funding in FY21
+* **The funding opportunity is limited to only grantees who received funding in FY21**
 * Eligibile businesses must be developing, new, or building upon existing Registered Apprenticeship programs
 * Any employer, trade associations, labor organization, or others with programs supporting the industries in which they work
 
