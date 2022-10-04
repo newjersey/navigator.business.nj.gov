@@ -25,6 +25,7 @@ sector:
   - life-sciences
   - clean-energy
   - other-services
+  - arts-entertainment-and-recreation
 openDate: ""
 dueDate: ""
 ---
