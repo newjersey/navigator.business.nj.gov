@@ -1,0 +1,8 @@
+{
+    "pageNotFoundError": {
+        "errorHeader": "An Error Occurred",
+        "errorDescriptionPt1": "Central Jersey exists! But this page doesn't...",
+        "errorDescriptionPt2": "You can return to your [Navigator](/) or",
+        "errorChatWithExpert": "Chat with a NJ-based business expert."
+    }
+}
