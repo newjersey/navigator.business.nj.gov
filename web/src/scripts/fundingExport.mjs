@@ -1,10 +1,13 @@
 import fs from "fs";
 import matter from "gray-matter";
 import path from "path";
+import { fileURLToPath } from "url";
 
-const fundingDir = "../content/src/fundings";
+const fundingDir = path.resolve(
+  `${path.dirname(fileURLToPath(import.meta.url))}/../../../content/src/fundings`
+);
 
-export const convertFundingMd = (oppMdContents, filename) => {
+const convertFundingMd = (oppMdContents, filename) => {
   const matterResult = matter(oppMdContents);
   const oppGrayMatter = matterResult.data;
 
@@ -22,7 +25,7 @@ export const loadAllFundings = () => {
   });
 };
 
-export const loadFundingByFileName = (fileName) => {
+const loadFundingByFileName = (fileName) => {
   const fullPath = path.join(fundingDir, `${fileName}`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
 
@@ -30,7 +33,7 @@ export const loadFundingByFileName = (fileName) => {
   return convertFundingMd(fileContents, fileNameWithoutMd);
 };
 
-const exportFundings = () => {
+export const exportFundings = () => {
   const fundings = loadAllFundings();
   const writeStream = fs.createWriteStream("fundings.csv");
   writeStream.write(
@@ -53,4 +56,14 @@ const exportFundings = () => {
   }
 };
 
-exportFundings();
+// eslint-disable-next-line no-undef
+if (!process.argv.some((i) => i.includes("fundingExport")) || process.env.NODE_ENV == "test") {
+  // eslint-disable-next-line no-undef
+} else if (process.argv.some((i) => i.includes("--export"))) {
+  exportFundings();
+  // eslint-disable-next-line unicorn/no-process-exit, no-undef
+  process.exit(1);
+} else {
+  console.log("Expected at least one argument! Use one of the following: ");
+  console.log("--export = exports fundings as csv");
+}

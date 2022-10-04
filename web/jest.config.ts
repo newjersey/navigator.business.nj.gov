@@ -23,7 +23,7 @@ export default async (): Promise<Config.InitialOptions> => {
     transformIgnorePatterns: [`<rootDir>/node_modules/(?!(${esModules.join("|")}))`],
     transform: {
       "\\.md$": "<rootDir>/test/jest-raw-loader.js",
-      "\\.[jt]sx?$": [
+      "\\.m?[jt]sx?$": [
         "@swc/jest",
         {
           jsc: {
