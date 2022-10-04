@@ -21,19 +21,20 @@ preferenceForOpportunityZone: ""
 county:
   - All
 sector:
-  - Manufacturing
+  - manufacturing
 openDate: ""
 dueDate: ""
 ---
+
 The Urban Enterprise Zone (UEZ) Manufacturers Energy Sales Tax Exemption provides manufacturers in UEZs a sales and use tax exemption for electricity and natural gas.
 
-- - -
+---
 
 ### Eligibility
 
-* UEZ-certified manufacturers with at least 250 full-time employees
-* At least 50% of employees must be involved in the manufacturing process
-* The energy and utility services must be consumed exclusively at the facility
+- UEZ-certified manufacturers with at least 250 full-time employees
+- At least 50% of employees must be involved in the manufacturing process
+- The energy and utility services must be consumed exclusively at the facility
 
 > **Benefits**
 >

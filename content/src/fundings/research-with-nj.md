@@ -21,13 +21,13 @@ preferenceForOpportunityZone: ""
 county:
   - All
 sector:
-  - Life Sciences
-  - Technology
-  - Clean Energy
-  - Educational Services
-  - Manufacturing
-  - Offshore Wind
-  - "Transportation and Warehousing "
+  - life-sciences
+  - technology
+  - clean-energy
+  - educational-services
+  - manufacturing
+  - clean-energy
+  - transportation-and-warehousing
 openDate: ""
 dueDate: ""
 ---

@@ -21,8 +21,8 @@ preferenceForOpportunityZone: ""
 county:
   - All
 sector:
-  - Technology
-  - Life Sciences
+  - technology
+  - life-sciences
 openDate: ""
 dueDate: ""
 ---

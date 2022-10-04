@@ -21,11 +21,11 @@ preferenceForOpportunityZone: ""
 county:
   - All
 sector:
-  - Clean Energy
-  - Offshore Wind
-  - Professional, Scientific and Technical Services
-  - Manufacturing
-  - Other Services (except Public Administration)
+  - clean-energy
+  - clean-energy
+  - professional-scientific-and-technical-services
+  - manufacturing
+  - other-services
 openDate: ""
 dueDate: 07/01/2025
 ---

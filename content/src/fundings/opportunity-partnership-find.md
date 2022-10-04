@@ -21,26 +21,27 @@ preferenceForOpportunityZone: no
 county:
   - All
 sector:
-  - Life Sciences
-  - Technology
-  - Clean Energy
-  - Educational Services
-  - Manufacturing
-  - Offshore Wind
-  - Accommodation and Food Services
-  - Digital and Print Media
-  - Finance, Insurance and Professional Services
-  - Other Services (except Public Administration)
+  - life-sciences
+  - technology
+  - clean-energy
+  - educational-services
+  - manufacturing
+  - clean-energy
+  - accommodation-and-food-services
+  - digital-and-print-media
+  - finance-and-insurance
+  - other-services
 openDate: ""
 dueDate: ""
 ---
+
 Opportunity Partnership helps employers identify an appropriate educational institution or training provider to train employees. The business and the school develop training programs to teach necessary skills. Upon completing the program, trainees must qualify for entry-level positions in your company.
 
-- - -
+---
 
 ### Eligibility
 
-* Any business can be part of the application, though funding is tied to individuals becoming future employees, not businesses
+- Any business can be part of the application, though funding is tied to individuals becoming future employees, not businesses
 
 > **Benefits**
 >

@@ -200,6 +200,23 @@ module.exports = {
     },
     {
       from: {},
+      to: { path: "rehype-format" },
+    },
+    {
+      from: {},
+      to: { path: "rehype-raw" },
+    },
+
+    {
+      from: {},
+      to: { path: "rehype-rewrite" },
+    },
+    {
+      from: {},
+      to: { path: "rehype-stringify" },
+    },
+    {
+      from: {},
       to: { path: "remark-parse" },
     },
     {
@@ -221,6 +238,10 @@ module.exports = {
     {
       from: {},
       to: { path: "swr" },
+    },
+    {
+      from: {},
+      to: { path: "url" },
     },
     {
       from: { path: "components" },
@@ -301,6 +322,10 @@ module.exports = {
     {
       from: { path: "../shared/src" },
       to: { path: "../shared/src" },
+    },
+    {
+      from: { path: "src/scripts" },
+      to: { path: "src/scripts" },
     },
     {
       from: {},

@@ -1,5 +1,5 @@
 import { County, Funding } from "@/lib/types/types";
-import { getCurrentDate, parseDateWithFormat, UserData } from "@businessnjgovnavigator/shared/";
+import { getCurrentDate, parseDateWithFormat, UserData } from "@businessnjgovnavigator/shared";
 
 export const filterFundings = (fundings: Funding[], userData: UserData): Funding[] => {
   return fundings.filter((it) => {
