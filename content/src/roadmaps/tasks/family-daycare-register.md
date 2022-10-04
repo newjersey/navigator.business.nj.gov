@@ -1,7 +1,7 @@
 ---
 urlSlug: family-daycare-register
 filename: family-daycare-register
-name: Register My Family Daycare
+name: "Register My Family Child Care "
 id: family-daycare-register
 callToActionLink: https://www.childcarenj.gov/Parents/CCRR
 callToActionText: Find My Referral Agency

@@ -104,7 +104,9 @@
     "VEEVR",
     "NPFA",
     "OPPS",
-    "evtp"
+    "evtp",
+    "USDOL",
+    "Pharma"
   ],
   "ignorePaths": ["node_modules/**", "out/**", "web/out/**", "package.json"]
 }

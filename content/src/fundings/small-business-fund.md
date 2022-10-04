@@ -24,16 +24,15 @@ sector: []
 openDate: ""
 dueDate: ""
 ---
-
 The Small Business Fund provides access to financing to credit-worthy small, minority-owned, and women-owned businesses and nonprofits in New Jersey.
 
----
+- - -
 
 ### Eligibility
 
-- Small businesses in operation for at least 1 full year and not-for-profits in operation for at least 3 full years
-- The business or nonprofit must not have more than $3M in total revenue
+* Small businesses in operation for at least 1 full year and not-for-profits in operation for at least 3 full years
+* The business or nonprofit must not have more than $3M in total revenue
 
 > **Benefits**
 >
-> Financing up to $500,000
+> Businesses receive financing up to $500,000.
