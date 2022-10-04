@@ -4093,3 +4093,24 @@ collections:
       - { label: "Header", name: "header", widget: "string" }
       - { label: "Content", name: "body", widget: "markdown" }
       - { label: "Filename", name: "slug", widget: "slug", required: false }
+
+  - name: "page-not-found-error"
+    label: "404 Page"
+    delete: false
+    create: false
+    files:
+      - label: "404 Page Text"
+        name: "page-not-found-error"
+        file: "content/src/fieldConfig/page-not-found-error.json"
+        editor:
+          preview: true
+        fields:
+          - label: "404 Error Page Text"
+            name: pageNotFoundError
+            collapsed: false
+            widget: object
+            fields:
+              - { label: "Header", name: "errorHeader", widget: "string" }
+              - { label: "Error Description 1", name: "errorDescriptionPt1", widget: "markdown" }
+              - { label: "Error Description 2", name: "errorDescriptionPt2", widget: "markdown" }
+              - { label: "Chat with Expert", name: "errorChatWithExpert", widget: "markdown" }
