@@ -28,14 +28,15 @@ sector:
 openDate: 07/25/2022
 dueDate: 10/31/2022
 ---
+
 The Electric Vehicle (EV) Tourism Program is offering incentives to promote electric vehicle adoption and tourism through investment in EV chargers at key New Jersey tourism sites, landmarks, and other `Tourism Areas|tourism-areas` .
 
-- - -
+---
 
 ### Eligibility
 
 Eligible applicant include, but are not limited to those situated in locations which offer amusement, arts, culture, attractions, dining, entertainment, history, outdoor recreation, overnight lodging, and shopping.
 
-> ### Benefits
+> **Benefits**
 >
 > Awardees will receive up to $5,000 for an eligible L2 charger, up to the cost of the charger; and up to $50,000 for a Direct Current Fast Charger, up to the cost of the charger.
