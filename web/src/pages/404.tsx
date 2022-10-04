@@ -19,7 +19,7 @@ const PageNotFound = (): ReactElement => {
             </h1>
             <div className="text-align-center">
               <Content>{Config.pageNotFoundError.errorDescriptionPt1}</Content>
-              <div className="display-flex">
+              <div className="tablet:display-flex">
                 <Content>{Config.pageNotFoundError.errorDescriptionPt2}</Content>
                 <Button className="margin-left-05" style="tertiary" underline intercomButton>
                   <Content>{Config.pageNotFoundError.errorChatWithExpert}</Content>
