@@ -11,7 +11,7 @@ agency:
   - NJEDA
 agencyContact: nmarshall@njeda.com
 publishStageArchive: ""
-status: deadline
+status: first come, first serve
 programFrequency: pilot
 businessStage: both
 employeesRequired: yes
