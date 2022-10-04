@@ -11,6 +11,7 @@ import * as FormationSuccessPage from "@businessnjgovnavigator/content/fieldConf
 import * as NaicsCode from "@businessnjgovnavigator/content/fieldConfig/naics-code.json";
 import * as NexusDbaFormation from "@businessnjgovnavigator/content/fieldConfig/nexus-dba-formation.json";
 import * as NexusNameSearch from "@businessnjgovnavigator/content/fieldConfig/nexus-name-search.json";
+import * as PageNotFoundError from "@businessnjgovnavigator/content/fieldConfig/page-not-found-error.json";
 import * as ProfileTabDocumentsDakota from "@businessnjgovnavigator/content/fieldConfig/profile-documents-dakota.json";
 import * as ProfileTabDocumentsOscar from "@businessnjgovnavigator/content/fieldConfig/profile-documents-oscar.json";
 import * as ProfileTabDocumentsPoppy from "@businessnjgovnavigator/content/fieldConfig/profile-documents-poppy.json";
@@ -68,7 +69,8 @@ const merged = JSON.parse(
       Tax,
       CannabisLicenseEligibilityModal,
       FormationInterimSuccessPage,
-      FormationSuccessPage
+      FormationSuccessPage,
+      PageNotFoundError
     )
   )
 );
@@ -104,7 +106,8 @@ export type ConfigType = typeof ConfigOriginal &
   typeof Tax &
   typeof CannabisLicenseEligibilityModal &
   typeof FormationInterimSuccessPage &
-  typeof FormationSuccessPage;
+  typeof FormationSuccessPage &
+  typeof PageNotFoundError;
 
 export const getMergedConfig = (): ConfigType => {
   return merge(
@@ -139,7 +142,8 @@ export const getMergedConfig = (): ConfigType => {
     Tax,
     CannabisLicenseEligibilityModal,
     FormationInterimSuccessPage,
-    FormationSuccessPage
+    FormationSuccessPage,
+    PageNotFoundError
   );
 };
 

@@ -15,6 +15,7 @@ import FundingsPreview from "@/lib/cms/previews/FundingsPreview";
 import NaicsLookupPreview from "@/lib/cms/previews/NaicsLookupPreview";
 import NexusDbaFormationPreview from "@/lib/cms/previews/NexusDbaFormationPreview";
 import NexusNameSearchPreview from "@/lib/cms/previews/NexusNameSearchPreview";
+import PageNotFoundPreview from "@/lib/cms/previews/PageNotFoundPreview";
 import ProfilePreviewDocuments from "@/lib/cms/previews/ProfileDocumentsPreview";
 import ProfilePreviewIndustrySpecific from "@/lib/cms/previews/ProfileIndustrySpecificPreview";
 import ProfilePreviewMisc from "@/lib/cms/previews/ProfileMiscPreview";
@@ -56,6 +57,7 @@ const CMS = dynamic(
       registerPreview(CMS, "certification-checklist", CertificationsPreview);
       registerPreview(CMS, "contextual-information", ContextInfoPreview);
       registerPreview(CMS, "filings", FilingsPreview);
+      registerPreview(CMS, "page-not-found-error", PageNotFoundPreview);
 
       // ----- Roadmap Sidebar Card -----
       registerPreview(CMS, "roadmap-sidebar-card", RoadmapSidebarCardPreview);
