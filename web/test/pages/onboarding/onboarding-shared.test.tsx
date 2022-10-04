@@ -1,7 +1,7 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import { getFlow, templateEval } from "@/lib/utils/helpers";
+import { templateEval } from "@/lib/utils/helpers";
 import Onboarding from "@/pages/onboarding";
 import { generateMunicipality, generateProfileData, generateUser, generateUserData } from "@/test/factories";
 import { withAuth, withRoadmap } from "@/test/helpers";
@@ -14,9 +14,8 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import { createPageHelpers, PageHelpers, renderPage } from "@/test/pages/onboarding/helpers-onboarding";
-import { createEmptyProfileData, getCurrentDate, ProfileData } from "@businessnjgovnavigator/shared/";
-import { createEmptyUserData } from "@businessnjgovnavigator/shared/userData";
-import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { createEmptyProfileData, getCurrentDate } from "@businessnjgovnavigator/shared/";
+import { render, screen, waitFor } from "@testing-library/react";
 
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -32,14 +31,6 @@ jest.mock("@/lib/api-client/apiClient", () => ({
 const mockApi = api as jest.Mocked<typeof api>;
 const date = getCurrentDate().subtract(1, "month").date(1);
 const Config = getMergedConfig();
-
-const generateTestUserData = (overrides: Partial<ProfileData>) =>
-  generateUserData({
-    profileData: generateProfileData({
-      ...overrides,
-    }),
-    formProgress: "UNSTARTED",
-  });
 
 describe("onboarding - shared", () => {
   beforeEach(() => {
@@ -359,212 +350,6 @@ describe("onboarding - shared", () => {
       ownershipTypeIds: ["veteran-owned"],
       sectorId: "clean-energy",
       operatingPhase: "GUEST_MODE_OWNING",
-    });
-  });
-
-  describe("when industry changes", () => {
-    it("displays industry-specific content for home contractors when selected", async () => {
-      const { page } = renderPage({});
-
-      page.chooseRadio("business-persona-starting");
-      await page.visitStep(2);
-      expect(screen.queryByTestId("industry-specific-home-contractor")).not.toBeInTheDocument();
-      page.selectByValue("Industry", "home-contractor");
-      expect(screen.getByTestId("industry-specific-home-contractor")).toBeInTheDocument();
-
-      await waitFor(() => {
-        page.selectByValue("Industry", "e-commerce");
-        expect(screen.queryByTestId("industry-specific-home-contractor")).not.toBeInTheDocument();
-      });
-    });
-
-    it("displays industry-specific content for employment agency when selected", async () => {
-      const { page } = renderPage({});
-      page.chooseRadio("business-persona-starting");
-      await page.visitStep(2);
-
-      expect(screen.queryByTestId("industry-specific-employment-agency")).not.toBeInTheDocument();
-      page.selectByValue("Industry", "employment-agency");
-      expect(screen.getByTestId("industry-specific-employment-agency")).toBeInTheDocument();
-
-      await waitFor(() => {
-        page.selectByValue("Industry", "e-commerce");
-        expect(screen.queryByTestId("industry-specific-employment-agency")).not.toBeInTheDocument();
-      });
-    });
-
-    it("displays liquor license question for restaurants when selected", async () => {
-      const userData = createEmptyUserData(generateUser({}));
-      const { page } = renderPage({ userData });
-      page.chooseRadio("business-persona-starting");
-      await page.visitStep(2);
-
-      expect(
-        screen.queryByText(Config.profileDefaults[getFlow(userData)].liquorLicense.description)
-      ).not.toBeInTheDocument();
-      page.selectByValue("Industry", "restaurant");
-      expect(
-        screen.getByText(Config.profileDefaults[getFlow(userData)].liquorLicense.description)
-      ).toBeInTheDocument();
-      page.chooseRadio("liquor-license-true");
-      await page.visitStep(3);
-
-      expect(currentUserData().profileData.liquorLicense).toEqual(true);
-    });
-
-    it("displays home-based business question for applicable industries on municipality page", async () => {
-      const newark = generateMunicipality({ displayName: "Newark" });
-      const userData = generateTestUserData({
-        businessPersona: "STARTING",
-        industryId: "home-contractor",
-        municipality: newark,
-      });
-      useMockRouter({ isReady: true, query: { page: "4" } });
-
-      const { page } = renderPage({ userData, municipalities: [newark] });
-      expect(screen.getByTestId("home-based-business-section")).toBeInTheDocument();
-      page.selectByText("Location", "Newark");
-      page.chooseRadio("home-based-business-true");
-      await page.visitStep(5);
-      await waitFor(() => expect(currentUserData().profileData.homeBasedBusiness).toEqual(true));
-    });
-
-    it("does not display home-based business question for non-applicable industries", async () => {
-      const userData = generateTestUserData({ businessPersona: "STARTING", industryId: "restaurant" });
-      useMockRouter({ isReady: true, query: { page: "4" } });
-
-      renderPage({ userData });
-
-      expect(
-        screen.queryByText(Config.profileDefaults[getFlow(userData)].homeBasedBusiness.description)
-      ).not.toBeInTheDocument();
-    });
-
-    it("sets liquor license back to false if they select a different industry", async () => {
-      const { page } = renderPage({});
-      page.chooseRadio("business-persona-starting");
-      await page.visitStep(2);
-
-      page.selectByValue("Industry", "restaurant");
-      page.chooseRadio("liquor-license-true");
-      await page.visitStep(3);
-      expect(currentUserData().profileData.liquorLicense).toEqual(true);
-
-      page.clickBack();
-      page.selectByValue("Industry", "cosmetology");
-      await page.visitStep(3);
-      expect(currentUserData().profileData.liquorLicense).toEqual(false);
-    });
-
-    it("sets sector for industry", async () => {
-      const { page } = renderPage({});
-      page.chooseRadio("business-persona-starting");
-      await page.visitStep(2);
-
-      page.selectByValue("Industry", "restaurant");
-      await page.visitStep(3);
-      expect(currentUserData().profileData.sectorId).toEqual("accommodation-and-food-services");
-
-      page.clickBack();
-      page.selectByValue("Industry", "cannabis");
-      await page.visitStep(3);
-      expect(currentUserData().profileData.sectorId).toEqual("cannabis");
-    });
-
-    describe("cannabis license type question", () => {
-      it("displays cannabis license type question for cannabis only", async () => {
-        const { page } = renderPage({});
-
-        fireEvent.click(screen.getByRole("radio", { name: "Business Status - Starting" }));
-        await page.visitStep(2);
-        expect(screen.queryByTestId("industry-specific-cannabis")).not.toBeInTheDocument();
-        page.selectByValue("Industry", "cannabis");
-        expect(screen.getByTestId("industry-specific-cannabis")).toBeInTheDocument();
-
-        page.selectByValue("Industry", "generic");
-        expect(screen.queryByTestId("industry-specific-cannabis")).not.toBeInTheDocument();
-      });
-
-      it("defaults cannabis license type to CONDITIONAL", async () => {
-        const { page } = renderPage({});
-
-        fireEvent.click(screen.getByRole("radio", { name: "Business Status - Starting" }));
-        await page.visitStep(2);
-        page.selectByValue("Industry", "cannabis");
-        await page.visitStep(3);
-        expect(currentUserData().profileData.cannabisLicenseType).toEqual("CONDITIONAL");
-      });
-
-      it("allows switching cannabis license type to ANNUAL", async () => {
-        const { page } = renderPage({});
-
-        fireEvent.click(screen.getByRole("radio", { name: "Business Status - Starting" }));
-        await page.visitStep(2);
-        page.selectByValue("Industry", "cannabis");
-        page.chooseRadio("cannabis-license-annual");
-        await page.visitStep(3);
-        expect(currentUserData().profileData.cannabisLicenseType).toEqual("ANNUAL");
-      });
-
-      it("sets cannabis license type to back undefined when switching back to non-cannabis industry", async () => {
-        const { page } = renderPage({});
-
-        fireEvent.click(screen.getByRole("radio", { name: "Business Status - Starting" }));
-        await page.visitStep(2);
-        expect(currentUserData().profileData.cannabisLicenseType).toBeUndefined();
-        page.selectByValue("Industry", "cannabis");
-        await page.visitStep(3);
-        expect(currentUserData().profileData.cannabisLicenseType).toEqual("CONDITIONAL");
-        act(() => page.clickBack());
-        page.selectByValue("Industry", "generic");
-        await page.visitStep(3);
-        expect(currentUserData().profileData.cannabisLicenseType).toBeUndefined();
-      });
-    });
-
-    describe("car service type question", () => {
-      it("displays car service question for car service only", async () => {
-        const { page } = renderPage({});
-        fireEvent.click(screen.getByRole("radio", { name: "Business Status - Starting" }));
-        await page.visitStep(2);
-        expect(screen.queryByTestId("industry-specific-car-service")).not.toBeInTheDocument();
-        page.selectByValue("Industry", "car-service");
-        expect(screen.getByTestId("industry-specific-car-service")).toBeInTheDocument();
-        page.selectByValue("Industry", "generic");
-        expect(screen.queryByTestId("industry-specific-car-service")).not.toBeInTheDocument();
-      });
-
-      it("updates carServiceType to STANDARD if the first radio button is picked", async () => {
-        const { page } = renderPage({});
-        fireEvent.click(screen.getByRole("radio", { name: "Business Status - Starting" }));
-        await page.visitStep(2);
-        page.selectByValue("Industry", "car-service");
-        fireEvent.click(screen.getByText(Config.profileDefaults.STARTING.carService.radioButtonStandardText));
-        await page.visitStep(3);
-        expect(currentUserData().profileData.carService).toBe("STANDARD");
-      });
-
-      it("updates carServiceType to HIGH_CAPACITY if the second radio button is picked", async () => {
-        const { page } = renderPage({});
-        fireEvent.click(screen.getByRole("radio", { name: "Business Status - Starting" }));
-        await page.visitStep(2);
-        page.selectByValue("Industry", "car-service");
-        fireEvent.click(
-          screen.getByText(Config.profileDefaults.STARTING.carService.radioButtonHighCapacityText)
-        );
-        await page.visitStep(3);
-        expect(currentUserData().profileData.carService).toBe("HIGH_CAPACITY");
-      });
-
-      it("updates carServiceType to BOTH if the third radio button is picked", async () => {
-        const { page } = renderPage({});
-        fireEvent.click(screen.getByRole("radio", { name: "Business Status - Starting" }));
-        await page.visitStep(2);
-        page.selectByValue("Industry", "car-service");
-        fireEvent.click(screen.getByText(Config.profileDefaults.STARTING.carService.radioButtonBothText));
-        await page.visitStep(3);
-        expect(currentUserData().profileData.carService).toBe("BOTH");
-      });
     });
   });
 
