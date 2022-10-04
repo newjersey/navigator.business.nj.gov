@@ -1,7 +1,7 @@
 ---
 urlSlug: moving-company-insurance
 filename: moving-company-insurance
-name: Get a Commercial Insurance policy
+name: Get a Commercial Insurance Policy
 id: moving-company-insurance
 required: true
 ---
