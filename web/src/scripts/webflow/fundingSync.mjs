@@ -101,8 +101,7 @@ const contentMdToObject = (content) => {
     if (eligibilityIndex == -1) throw new Error("Eligibility section missing");
     if (benefitIndex == -1) throw new Error(`Benefits section missing `);
   } catch (error) {
-    console.log(error);
-    console.error(content);
+    console.info(content);
     throw error;
   }
   const getHtml = (arrayOfStrings, start, stop) =>
@@ -199,21 +198,29 @@ const syncFundings = async () => {
 // eslint-disable-next-line no-empty
 if (!process.argv.some((i) => i.includes("fundingSync")) || process.env.NODE_ENV == "test") {
 } else if (process.argv.some((i) => i.includes("--sync"))) {
-  await syncFundings();
-  process.exit(1);
+  await (async () => {
+    await syncFundings();
+    process.exit(1);
+  })()
 } else if (process.argv.some((i) => i.includes("--previewUnused"))) {
-  console.info(await getUnUsedFundings());
-  process.exit(1);
+  await (async () => {
+    console.info(await getUnUsedFundings());
+    process.exit(1);
+  })()
 } else if (process.argv.some((i) => i.includes("--previewCreate"))) {
-  console.info(await getNewFundings());
-  process.exit(1);
+  await (async () => {
+    console.info(await getNewFundings());
+    process.exit(1);
+  })()
 } else if (process.argv.some((i) => i.includes("--full"))) {
-  await syncSectors();
-  await syncFundings();
-  process.exit(1);
+  await (async () => {
+    await syncSectors();
+    await syncFundings();
+    process.exit(1);
+  })()
 } else {
   console.log("Expected at least one argument! Use one of the following: ");
-  console.log("--sync =  Syncsfundings");
+  console.log("--sync =  Syncs fundings");
   console.log("--full = Syncs sectors and fundings");
   console.log("--previewUnused = Preview Fundings to Delete");
   console.log("--previewCreate = Preview Fundings to Create");
