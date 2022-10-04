@@ -121,7 +121,7 @@ export class OnboardingPage {
   selectIndustry(industry: string) {
     const industryValue = LookupIndustryById(industry).name;
     this.getIndustryDropdown().click();
-    cy.get('[role="listbox"]').contains(industryValue).click();
+    cy.get('[data-testid="industry-name"]').contains(industryValue).click();
   }
 
   selectIndustrySector(sectorId: string) {
