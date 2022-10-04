@@ -201,23 +201,23 @@ if (!process.argv.some((i) => i.includes("fundingSync")) || process.env.NODE_ENV
   await (async () => {
     await syncFundings();
     process.exit(1);
-  })()
+  })();
 } else if (process.argv.some((i) => i.includes("--previewUnused"))) {
   await (async () => {
     console.info(await getUnUsedFundings());
     process.exit(1);
-  })()
+  })();
 } else if (process.argv.some((i) => i.includes("--previewCreate"))) {
   await (async () => {
     console.info(await getNewFundings());
     process.exit(1);
-  })()
+  })();
 } else if (process.argv.some((i) => i.includes("--full"))) {
   await (async () => {
     await syncSectors();
     await syncFundings();
     process.exit(1);
-  })()
+  })();
 } else {
   console.log("Expected at least one argument! Use one of the following: ");
   console.log("--sync =  Syncs fundings");
