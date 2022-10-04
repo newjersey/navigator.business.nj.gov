@@ -27,7 +27,7 @@ county:
   - Gloucester
   - Mercer or Salem County
 sector:
-  - Arts, Entertainment, and Recreation
+  - arts-entertainment-and-recreation
 openDate: ""
 dueDate: ""
 ---

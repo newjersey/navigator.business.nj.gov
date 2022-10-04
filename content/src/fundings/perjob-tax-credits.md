@@ -19,16 +19,16 @@ preferenceForOpportunityZone: ""
 county:
   - All
 sector:
-  - Technology
-  - Professional, Scientific and Technical Services
-  - Life Sciences
-  - Clean Energy
-  - Transportation and Warehousing
-  - Accommodation and Food Services
-  - Manufacturing
-  - Finance, Insurance and Professional Services
-  - Digital and Print Media
-  - Other Services (except Public Administration)
+  - technology
+  - professional-scientific-and-technical-services
+  - life-sciences
+  - clean-energy
+  - transportation-and-warehousing
+  - accommodation-and-food-services
+  - manufacturing
+  - finance-and-insurance
+  - digital-and-print-media
+  - other-services
 openDate: ""
 dueDate: ""
 programPurpose: ""

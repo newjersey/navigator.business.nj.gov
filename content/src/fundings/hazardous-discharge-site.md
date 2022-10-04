@@ -21,11 +21,11 @@ preferenceForOpportunityZone: ""
 county:
   - All
 sector:
-  - Real Estate and Rental and Leasing
-  - Construction
-  - Agriculture, Forestry, and Fishing and Hunting
-  - Other Services (except Public Administration)
-  - Waste Management
+  - real-estate
+  - construction
+  - agriculture-forestry-fishing-and-hunting
+  - other-services
+  - waste-management-and-Remediation
 openDate: ""
 dueDate: ""
 ---

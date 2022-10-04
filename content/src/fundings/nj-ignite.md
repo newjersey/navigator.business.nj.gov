@@ -21,10 +21,10 @@ preferenceForOpportunityZone: yes
 county:
   - All
 sector:
-  - Real Estate and Rental and Leasing
-  - Technology
-  - Life Sciences
-  - Other Services (except Public Administration)
+  - real-estate
+  - technology
+  - life-sciences
+  - other-services
 openDate: ""
 dueDate: ""
 ---

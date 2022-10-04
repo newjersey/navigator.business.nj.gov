@@ -208,7 +208,12 @@ export interface Opportunity {
   status?: string;
 }
 
-export type OpportunityAgency = "NJEDA" | "NJDOL";
+export type OpportunityAgency =
+  | "NJEDA"
+  | "NJDOL"
+  | "NJDEP"
+  | "NJ Department of Treasury"
+  | "NJ Board of Public Utilities";
 
 export type FundingType =
   | "tax credit"

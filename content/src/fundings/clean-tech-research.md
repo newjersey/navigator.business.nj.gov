@@ -21,22 +21,23 @@ preferenceForOpportunityZone: ""
 county:
   - All
 sector:
-  - Technology
-  - Clean Energy
-  - Professional, Scientific and Technical Services
-  - Manufacturing
-  - Other Services (except Public Administration)
+  - technology
+  - clean-energy
+  - professional-scientific-and-technical-services
+  - manufacturing
+  - other-services
 openDate: ""
 dueDate: ""
 ---
+
 The Clean Tech Research & Development (R&D) Voucher Program helps New Jersey early-stage clean tech and clean energy companies offset the cost of accessing equipment at participating New Jersey universities or federal labs for R&D.
 
-- - -
+---
 
 ### Eligibility
 
-* Must be a New Jersey-based clean energy and clean technology company
-* Company must have 50 or fewer full-time employees
+- Must be a New Jersey-based clean energy and clean technology company
+- Company must have 50 or fewer full-time employees
 
 > **Benefits**
 >
