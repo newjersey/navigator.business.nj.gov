@@ -39,7 +39,7 @@ Nonprofit, for profit, and home-based micro businesses interested in applying fo
 * Must be formed at least six months prior to the date of application, as evidenced by the date of formation/incorporation
 * Must be in good standing with the New Jersey Department of Labor and Workforce Development (LWD) and NJ Department of Environmental Protection at the time of application to be eligible for a micro business loan
 * Must provide a current tax clearance prior to approval to demonstrate the applicant is in good standing with the NJ Division of Taxation
-* One loan per business entity (verified by the business’s employer identification number, or EIN). A business entity with multiple locations (that is, all locations operate under only one EIN) will be limited to one application under this new product (under the sole business entity)
+* One loan per business entity (verified by the business’s employer identification number, or EIN). A business entity with multiple locations will be limited to one application under this new product
 
 > ### Benefit
 >
