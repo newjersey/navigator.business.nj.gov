@@ -109,22 +109,22 @@ if (!process.argv.some((i) => i.includes("sectorSync")) || process.env.NODE_ENV 
   await (async () => {
     await syncSectors();
     process.exit(1);
-  })()
+  })();
 } else if (process.argv.some((i) => i.includes("--previewUnused"))) {
   await (async () => {
     console.info(await getUnUsedSectors());
     process.exit(1);
-  })()
+  })();
 } else if (process.argv.some((i) => i.includes("--previewCreate"))) {
   await (async () => {
     console.info(await getNewSectors());
     process.exit(1);
-  })()
+  })();
 } else if (process.argv.some((i) => i.includes("--previewUpdate"))) {
   await (async () => {
     console.info(await getUpdatedSectorNames());
     process.exit(1);
-  })()
+  })();
 } else {
   console.log("Expected at least one argument! Use one of the following: ");
   console.log("--previewUnused = Preview Sectors to Delete");
