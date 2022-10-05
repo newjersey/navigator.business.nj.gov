@@ -6,8 +6,7 @@ if (typeof process != "undefined") {
 }
 
 // eslint-disable-next-line no-undef
-if (process.env.WEBFLOW_API_TOKEN == undefined)
-  throw new Error("No Webflow API Token in Env");
+if (process.env.WEBFLOW_API_TOKEN == undefined) throw new Error("No Webflow API Token in Env");
 
 // eslint-disable-next-line no-undef
 const headers = { Authorization: `Bearer ${process.env.WEBFLOW_API_TOKEN}` };
