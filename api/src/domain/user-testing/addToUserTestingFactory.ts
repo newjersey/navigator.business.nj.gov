@@ -3,7 +3,7 @@ import { AddToUserTesting, UserTestingClient } from "../types";
 
 export const addToUserTestingFactory = (userTestingClient: UserTestingClient): AddToUserTesting => {
   return async (userData: UserData): Promise<UserData> => {
-    const userTesting = await userTestingClient.add(userData.user);
+    const userTesting = await userTestingClient.add(userData.user, userData.profileData);
     const user: UserData = {
       ...userData,
       user: {

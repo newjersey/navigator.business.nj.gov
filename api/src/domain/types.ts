@@ -2,6 +2,7 @@ import { BusinessUser, NewsletterResponse, UserTestingResponse } from "@shared/b
 import { UserFeedbackRequest, UserIssueRequest } from "@shared/feedbackRequest";
 import { FormationSubmitResponse, GetFilingResponse } from "@shared/formationData";
 import { LicenseEntity, LicenseStatusResult, NameAndAddress } from "@shared/license";
+import { ProfileData } from "@shared/profileData";
 import { TaxFiling, TaxFilingState } from "@shared/taxFiling";
 import { UserData } from "@shared/userData";
 import * as https from "node:https";
@@ -48,7 +49,7 @@ export interface LicenseStatusClient {
 }
 
 export interface UserTestingClient {
-  add: (user: BusinessUser) => Promise<UserTestingResponse>;
+  add: (user: BusinessUser, profileData: ProfileData) => Promise<UserTestingResponse>;
 }
 
 export interface FeedbackClient {
