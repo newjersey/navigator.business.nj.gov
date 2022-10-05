@@ -279,7 +279,7 @@ describe("webflow syncing", () => {
         },
         responseType: "json",
         headers: {
-          Authorization: "Bearer undefined",
+          Authorization: "Bearer 12345678910",
           "content-type": "application/json",
         },
       });
@@ -315,7 +315,7 @@ describe("webflow syncing", () => {
         }`,
         data: { fields: { name: "Electric, Gas, and Oil suppliers" } },
         responseType: "json",
-        headers: { Authorization: "Bearer undefined" },
+        headers: { Authorization: "Bearer 12345678910" },
       });
     });
 
@@ -341,7 +341,7 @@ describe("webflow syncing", () => {
         method: "delete",
         url: `https://api.webflow.com/collections/61c21253f7640b5f5ce829a4/items/${utilitiesSector._id}`,
         params: { live: false },
-        headers: { Authorization: "Bearer undefined" },
+        headers: { Authorization: "Bearer 12345678910" },
       });
     });
 
@@ -517,7 +517,7 @@ describe("webflow syncing", () => {
         },
         responseType: "json",
         headers: {
-          Authorization: "Bearer undefined",
+          Authorization: "Bearer 12345678910",
           "content-type": "application/json",
         },
       });
@@ -541,7 +541,7 @@ describe("webflow syncing", () => {
           live: false,
         },
         headers: {
-          Authorization: "Bearer undefined",
+          Authorization: "Bearer 12345678910",
         },
       });
     });
@@ -579,7 +579,7 @@ describe("webflow syncing", () => {
         },
         responseType: "json",
         headers: {
-          Authorization: "Bearer undefined",
+          Authorization: "Bearer 12345678910",
         },
       });
     });
