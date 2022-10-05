@@ -3783,11 +3783,11 @@ __metadata:
     react: 18.2.0
     react-dom: 18.2.0
     react-transition-group: 4.4.5
-    rehype-format: ^4.0.1
-    rehype-raw: ^6.1.1
+    rehype-format: 4.0.1
+    rehype-raw: 6.1.1
     rehype-react: 7.1.1
-    rehype-rewrite: ^3.0.6
-    rehype-stringify: ^9.0.3
+    rehype-rewrite: 3.0.6
+    rehype-stringify: 9.0.3
     remark-gfm: 3.0.1
     remark-parse: 10.0.1
     remark-rehype: 10.1.0
@@ -3967,11 +3967,11 @@ __metadata:
     react: 18.2.0
     react-dom: 18.2.0
     react-transition-group: 4.4.5
-    rehype-format: ^4.0.1
-    rehype-raw: ^6.1.1
+    rehype-format: 4.0.1
+    rehype-raw: 6.1.1
     rehype-react: 7.1.1
-    rehype-rewrite: ^3.0.6
-    rehype-stringify: ^9.0.3
+    rehype-rewrite: 3.0.6
+    rehype-stringify: 9.0.3
     remark-gfm: 3.0.1
     remark-parse: 10.0.1
     remark-rehype: 10.1.0
@@ -29205,7 +29205,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rehype-format@npm:^4.0.1":
+"rehype-format@npm:4.0.1":
   version: 4.0.1
   resolution: "rehype-format@npm:4.0.1"
   dependencies:
@@ -29259,7 +29259,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rehype-raw@npm:^6.1.1":
+"rehype-raw@npm:6.1.1":
   version: 6.1.1
   resolution: "rehype-raw@npm:6.1.1"
   dependencies:
@@ -29297,7 +29297,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rehype-rewrite@npm:^3.0.6":
+"rehype-rewrite@npm:3.0.6":
   version: 3.0.6
   resolution: "rehype-rewrite@npm:3.0.6"
   dependencies:
@@ -29308,17 +29308,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rehype-stringify@npm:^7.0.0":
-  version: 7.0.0
-  resolution: "rehype-stringify@npm:7.0.0"
-  dependencies:
-    hast-util-to-html: ^7.0.0
-    xtend: ^4.0.0
-  checksum: 89929ec0d624e320c4211693b0d5f300879dc08ff672ae33e5fa1aa92961feb124d98edc10188078bc07393b167d52bbecdcc1cf2344f5c06d56576e3e61f26f
-  languageName: node
-  linkType: hard
-
-"rehype-stringify@npm:^9.0.3":
+"rehype-stringify@npm:9.0.3":
   version: 9.0.3
   resolution: "rehype-stringify@npm:9.0.3"
   dependencies:
@@ -29326,6 +29316,16 @@ __metadata:
     hast-util-to-html: ^8.0.0
     unified: ^10.0.0
   checksum: ff4b1f3f88f2747a9f88d84f8cd9811e892a7309574480547ddfd94022725a62e17a9ccc69f9d909620a20f2a6ad750ea74b317f06ab50955209b5c0ede5cd3f
+  languageName: node
+  linkType: hard
+
+"rehype-stringify@npm:^7.0.0":
+  version: 7.0.0
+  resolution: "rehype-stringify@npm:7.0.0"
+  dependencies:
+    hast-util-to-html: ^7.0.0
+    xtend: ^4.0.0
+  checksum: 89929ec0d624e320c4211693b0d5f300879dc08ff672ae33e5fa1aa92961feb124d98edc10188078bc07393b167d52bbecdcc1cf2344f5c06d56576e3e61f26f
   languageName: node
   linkType: hard
 
