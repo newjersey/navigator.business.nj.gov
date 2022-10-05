@@ -10,7 +10,7 @@ const PageNotFound = (): ReactElement => {
 
   return (
     <PageSkeleton>
-      <main className="usa-section padding-top-0 desktop:padding-top-8" id="main">
+      <main className="page-not-found usa-section padding-top-8 desktop:padding-top-15" id="main">
         <SingleColumnContainer>
           <div className="flex flex-column flex-align-center">
             <img src="./img/page-not-found-icon.svg" alt="404 icon" />
