@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { getCurrentDateFormatted } from "@shared/dateHelpers";
 import * as Airtable from "airtable";
-import { generateUser } from "../../test/factories";
+import { generateProfileData, generateUser } from "../../test/factories";
 import { UserTestingClient } from "../domain/types";
 import { LogWriter, LogWriterType } from "../libs/logWriter";
 import { AirtableUserTestingClient } from "./AirtableUserTestingClient";
@@ -37,7 +37,8 @@ describe("AirtableUserTestingClient", () => {
 
   it("sends user data to airtable", async () => {
     const user = generateUser({});
-    const result = await client.add(user);
+    const profileData = generateProfileData({});
+    const result = await client.add(user, profileData);
     expect(result).toEqual({ success: true, status: "SUCCESS" });
     expect(mockAirtable.baseIdCalledWith).toEqual("some-base-id");
     expect(mockAirtable.tableIdCalledWith).toEqual("some-users-table");
@@ -46,6 +47,10 @@ describe("AirtableUserTestingClient", () => {
         fields: {
           "Email Address": user.email,
           "First Name": user.name,
+          Persona: profileData.businessPersona,
+          "Sub-Persona": profileData.foreignBusinessType,
+          Industry: profileData.industryId,
+          Sector: profileData.sectorId,
           "Registration Date": getCurrentDateFormatted("YYYY-MM-DD"),
           Source: "Opted In Navigator",
         },
