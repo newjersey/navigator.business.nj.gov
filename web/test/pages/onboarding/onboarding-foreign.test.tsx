@@ -325,7 +325,7 @@ describe("onboarding - foreign business", () => {
         businessPersona: "FOREIGN",
         foreignBusinessType: "NEXUS",
         municipality: undefined,
-        homeBasedBusiness: true,
+        homeBasedBusiness: undefined,
       });
       useMockRouter({ isReady: true, query: { page: "5" } });
     });
@@ -336,13 +336,6 @@ describe("onboarding - foreign business", () => {
       page.selectByText("Location", "Newark");
       await page.visitStep(6);
       expect(currentUserData().profileData.municipality?.displayName).toEqual("Newark");
-    });
-
-    it("does not display home-based business question even for applicable industry (generic)", () => {
-      renderPage({ userData });
-      expect(
-        screen.queryByText(markdownToText(Config.profileDefaults.FOREIGN.homeBasedBusiness.header))
-      ).not.toBeInTheDocument();
     });
 
     it("displays Location In New Jersey question", () => {
@@ -359,17 +352,6 @@ describe("onboarding - foreign business", () => {
       await page.visitStep(6);
       expect(currentUserData().profileData.homeBasedBusiness).toEqual(false);
       expect(currentUserData().profileData.nexusLocationInNewJersey).toEqual(true);
-    });
-
-    it("displays homeBasedBusiness question when NO is selected for Location In New Jersey", async () => {
-      const { page } = renderPage({ userData, municipalities: [newark] });
-      expect(
-        screen.queryByText(markdownToText(Config.profileDefaults.FOREIGN.homeBasedBusiness.header))
-      ).not.toBeInTheDocument();
-      page.chooseRadio("location-in-new-jersey-false");
-      expect(
-        screen.getByText(markdownToText(Config.profileDefaults.FOREIGN.homeBasedBusiness.header))
-      ).toBeInTheDocument();
     });
 
     it("displays location question when YES is selected for Location In New Jersey", async () => {

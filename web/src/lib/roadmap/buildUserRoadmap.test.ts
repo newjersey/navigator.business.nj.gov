@@ -157,7 +157,14 @@ describe("buildUserRoadmap", () => {
     });
 
     it("does not add permanent-location-business add-on if home-based business is true", async () => {
-      await buildUserRoadmap(generateStartingProfile({ homeBasedBusiness: true }));
+      await buildUserRoadmap(generateStartingProfile({ industryId: "generic", homeBasedBusiness: true }));
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("permanent-location-business");
+    });
+
+    it("does not add permanent-location-business add-on if home-based business is undefined", async () => {
+      await buildUserRoadmap(
+        generateStartingProfile({ industryId: "generic", homeBasedBusiness: undefined })
+      );
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("permanent-location-business");
     });
 

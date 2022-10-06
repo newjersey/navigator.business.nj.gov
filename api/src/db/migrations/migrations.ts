@@ -88,6 +88,7 @@ import { migrate_v86_to_v87 } from "./v87_add_car_service";
 import { migrate_v87_to_v88 } from "./v88_add_interstate_transport";
 import { migrate_v88_to_v89 } from "./v89_tax_filing_registered_bool";
 import { migrate_v7_to_v8 } from "./v8_remove_bcorp";
+import { migrate_v89_to_v90 } from "./v90_home_based_business_can_be_undefined";
 import { migrate_v8_to_v9 } from "./v9_add_license_status_to_data";
 
 export type MigrationFunction = (data: any) => any;
@@ -182,6 +183,7 @@ export const Migrations: MigrationFunction[] = [
   migrate_v86_to_v87,
   migrate_v87_to_v88,
   migrate_v88_to_v89,
+  migrate_v89_to_v90,
 ];
 
 export const CURRENT_VERSION = Migrations.length;

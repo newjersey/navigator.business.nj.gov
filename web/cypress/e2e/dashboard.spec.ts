@@ -1,4 +1,6 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
+/* eslint-disable testing-library/await-async-utils */
+
 import { LookupIndustryById } from "@businessnjgovnavigator/shared/";
 import { onDashboardPage } from "cypress/support/page_objects/dashboardPage";
 import { onProfilePage } from "cypress/support/page_objects/profilePage";
@@ -30,12 +32,10 @@ describe("Dashboard [feature] [all] [group2]", () => {
     describe("Starting a Business", () => {
       it("enters user info and shows the dashboard", () => {
         const industry = LookupIndustryById("e-commerce");
-        const homeBasedQuestion = false;
         const legalStructureId = "general-partnership";
 
         completeNewBusinessOnboarding({
           industry,
-          homeBasedQuestion,
           legalStructureId,
         });
 
@@ -65,14 +65,20 @@ describe("Dashboard [feature] [all] [group2]", () => {
 
       it("verifies the task screen and mini-roadmap displays", () => {
         const industry = LookupIndustryById("e-commerce");
-        const homeBasedQuestion = false;
         const legalStructureId = "general-partnership";
 
         completeNewBusinessOnboarding({
           industry,
-          homeBasedQuestion,
           legalStructureId,
         });
+
+        // answer deferred question to get local-requirements task
+        onDashboardPage.getHomeBased().should("exist");
+        onDashboardPage.selectHomeBased(false);
+        onDashboardPage.clickDeferredSaveButton();
+        onDashboardPage.getHomeBased().should("not.exist");
+        cy.get('[data-task="identify-potential-lease"]').should("exist");
+        cy.wait(1000);
 
         // tasks screen
         cy.get('[data-task="register-trade-name"]').click({ force: true });
@@ -91,12 +97,10 @@ describe("Dashboard [feature] [all] [group2]", () => {
 
       it("update the industry and verifies the dashboard tasks are updated", () => {
         const industry = LookupIndustryById("e-commerce");
-        const homeBasedQuestion = false;
         const legalStructureId = "general-partnership";
 
         completeNewBusinessOnboarding({
           industry,
-          homeBasedQuestion,
           legalStructureId,
         });
 

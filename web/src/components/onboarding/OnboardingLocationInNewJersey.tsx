@@ -1,5 +1,3 @@
-import { FieldLabelOnboarding } from "@/components/onboarding/FieldLabelOnboarding";
-import { OnboardingHomeBasedBusiness } from "@/components/onboarding/OnboardingHomeBasedBusiness";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
@@ -19,14 +17,12 @@ export const OnboardingLocationInNewJersey = (): ReactElement => {
     });
   };
 
-  const renderHomeBasedBusinessQuestion = state.profileData.nexusLocationInNewJersey === false;
-
   return (
     <>
       <div data-testid="location-in-new-jersey">
         <FormControl fullWidth>
           <RadioGroup
-            aria-label="Location in New Jersye"
+            aria-label="Location in New Jersey"
             name="location-in-new-jersey"
             value={
               state.profileData.nexusLocationInNewJersey !== undefined
@@ -55,13 +51,6 @@ export const OnboardingLocationInNewJersey = (): ReactElement => {
           </RadioGroup>
         </FormControl>
       </div>
-
-      {renderHomeBasedBusinessQuestion && (
-        <div className="margin-top-3">
-          <FieldLabelOnboarding fieldName="homeBasedBusiness" />
-          <OnboardingHomeBasedBusiness />
-        </div>
-      )}
     </>
   );
 };

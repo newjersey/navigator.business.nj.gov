@@ -95,7 +95,7 @@ const getIndustryBasedAddOns = (profileData: ProfileData, industryId: string | u
 
   if (
     industry.canHavePermanentLocation &&
-    !profileData.homeBasedBusiness &&
+    profileData.homeBasedBusiness === false &&
     profileData.nexusLocationInNewJersey !== false
   ) {
     addOns.push("permanent-location-business");
