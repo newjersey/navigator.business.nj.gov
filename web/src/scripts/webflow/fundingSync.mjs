@@ -95,8 +95,9 @@ const contentMdToObject = (content) => {
   itemsToRemove.map((i) => (result = result.replaceAll(i, "")));
 
   const lines = result.split("\n");
-  const eligibilityIndex = lines.findIndex((line) => line.includes("<h3>Eligibility</h3>"));
-  const benefitIndex = lines.findIndex((line) => line.includes("<strong>Benefits"));
+  const benefitRegExp = new RegExp(`>Benefit[s:]*?</`)
+  const eligibilityIndex = lines.findIndex((line) => line.includes(">Eligibility</"));
+  const benefitIndex = lines.findIndex((line) => benefitRegExp.test(line));
   try {
     if (eligibilityIndex == -1) throw new Error("Eligibility section missing");
     if (benefitIndex == -1) throw new Error(`Benefits section missing `);

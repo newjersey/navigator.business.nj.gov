@@ -372,7 +372,22 @@ describe("webflow syncing", () => {
     describe("markdown parser", () => {
       it("parses and splits the Eligibility and Benefits sections", async () => {
         expect(() => contentMdToObject("whatever")).toThrow("Eligibility section missing");
-        expect(() => contentMdToObject("### Eligibility\n")).toThrow("Benefits section missing");
+        expect(() => contentMdToObject("## Eligibility\n")).not.toThrow("Eligibility section missing");
+        expect(() => contentMdToObject("## Eligibility\n")).toThrow("Benefits section missing");
+        expect(() => contentMdToObject("## Eligibility\n **Bill:**\n")).toThrow("Benefits section missing");
+        expect(() => contentMdToObject("## Eligibility\n ### Benefits\n")).not.toThrow(
+          "Benefits section missing"
+        );
+        expect(() => contentMdToObject("## Eligibility\n **Benefit**\n")).not.toThrow(
+          "Benefits section missing"
+        );
+        expect(() => contentMdToObject("## Eligibility\n **Benefits**\n")).not.toThrow(
+          "Benefits section missing"
+        );
+        expect(() => contentMdToObject("## Eligibility\n **Benefits:**\n")).not.toThrow(
+          "Benefits section missing"
+        );
+
         const sampleMd =
           "Summary\n" +
           "\n" +
