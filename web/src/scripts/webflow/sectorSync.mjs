@@ -14,7 +14,10 @@ const getSectors = () =>
 
 const sectorCollectionId = "61c21253f7640b5f5ce829a4";
 
-const getCurrentSectors = async () => await getAllItems(sectorCollectionId);
+const getCurrentSectors = async () => {
+  const itemResponse = await getAllItems(sectorCollectionId);
+  return itemResponse.data.items;
+};
 
 const allIndustryId = "61c48e1b3257cc374781ee12";
 

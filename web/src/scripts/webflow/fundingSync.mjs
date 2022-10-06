@@ -9,10 +9,13 @@ import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
 import { unified } from "unified";
 import { loadAllFundings } from "../fundingExport.mjs";
-import { createItem, deleteItem, getAllItems, modifyItem } from "./methods.mjs";
+import { createItem, deleteItem, getAllItems, getCollection, modifyItem } from "./methods.mjs";
 import { allIndustryId, getCurrentSectors, syncSectors } from "./sectorSync.mjs";
 
-// const fundingTypesOptions = fundingCollection.fields.find((i) => i.slug == 'funding-type').validations['options']
+const getFundingTypeOptions = async () => {
+  const itemResponse = await getCollection(fundingCollectionId);
+  return itemResponse.data.fields.find((i) => i.slug == "funding-type").validations["options"];
+};
 
 const fundingTypeMap = [
   { name: "Grant", slug: "grant", id: "e84141a8393db92e7fbb14aad810be6d" },
@@ -31,7 +34,10 @@ const fundingTypeMap = [
   { name: "Tax Exemption", slug: "tax exemption", id: "2c5989291051fa966295bd3cd6722fe6" },
 ];
 
-// const agencyOptions = fundingCollection.fields.find((i) => i.slug == 'agency').validations['options']
+const getAgencyOptions = async () => {
+  const itemResponse = await getCollection(fundingCollectionId);
+  return itemResponse.data.fields.find((i) => i.slug == "agency").validations["options"];
+};
 
 const agencyMap = [
   { name: "NJEDA", slug: "NJEDA", id: "af647a925b907472a8ad9f5fe07ba6ed" },
@@ -49,7 +55,10 @@ const agencyMap = [
   },
 ];
 
-// const statusOptions = fundingCollection.fields.find((i) => i.slug == 'funding-status').validations['options']
+const getFundingOptions = async () => {
+  const itemResponse = await getCollection(fundingCollectionId);
+  return itemResponse.data.fields.find((i) => i.slug == "funding-status").validations["options"];
+};
 
 const fundingStatusMap = [
   {
@@ -62,11 +71,17 @@ const fundingStatusMap = [
     slug: "first come, first serve",
     id: "c44fb3cfdfb8a5b52d694a578d0338c1",
   },
+  { name: "Deadline", slug: "deadline", id: "f8f3b6be7e7062b37365aa256928f47b" },
+  { name: "Opening Soon", slug: "opening soon", id: "092a680902d359a5febce1189eec5aca" },
+  { name: "Closed", slug: "closed", id: "d81ba489e3c255947bb4f67cb7012f6f" },
 ];
 
 const fundingCollectionId = "6112e6b88aa567fdbc725ffc";
 
-const getCurrentFundings = async () => await getAllItems(fundingCollectionId);
+const getCurrentFundings = async () => {
+  const itemResponse = await getAllItems(fundingCollectionId);
+  return itemResponse.data.items;
+};
 
 const contentMdToObject = (content) => {
   let result = unified()
@@ -95,7 +110,7 @@ const contentMdToObject = (content) => {
   itemsToRemove.map((i) => (result = result.replaceAll(i, "")));
 
   const lines = result.split("\n");
-  const benefitRegExp = new RegExp(`>Benefit[s:]*?</`)
+  const benefitRegExp = new RegExp(`>Benefit[s:]*?</`);
   const eligibilityIndex = lines.findIndex((line) => line.includes(">Eligibility</"));
   const benefitIndex = lines.findIndex((line) => benefitRegExp.test(line));
   try {
@@ -127,6 +142,8 @@ const getFundingFromMd = (i, sectors) => {
   if (fundingType == undefined) throw new Error("Funding Types are mis-matched, please check with webflow");
   const agency = agencyMap.find((v) => v.slug == i.agency[0])?.id;
   if (agency == undefined) throw new Error("Agency Types are mis-matched, please check with webflow");
+  const status = fundingStatusMap.find((v) => v.slug == i.status)?.id;
+  if (status == undefined) throw new Error("Funding Status Types are mis-matched, please check with webflow");
 
   return {
     ...contentMdToObject(i.contentMd),
@@ -136,7 +153,8 @@ const getFundingFromMd = (i, sectors) => {
     "start-date": i.openDate ? new Date(i.openDate).toISOString() : null,
     name: i.name,
     slug: i.id,
-    "funding-status": i.status ? fundingStatusMap.find((v) => v.slug == i.status)?.id ?? null : null,
+    "last-updated": new Date(Date.now()).toISOString(),
+    "funding-status": status,
     "funding-type": fundingType,
     "industry-reference": industryReferenceArray.length > 0 ? industryReferenceArray : [allIndustryId],
   };
@@ -162,25 +180,54 @@ const getUnUsedFundings = async () => {
   return current.filter((item) => !overLap.includes(item));
 };
 
-const deleteFundings = async () =>
-  [...(await getUnUsedFundings())].map((item) => deleteItem(item, fundingCollectionId));
+const deleteFundings = async () => {
+  const fundings = await getUnUsedFundings();
+  const deleteFunding = async (funding) => {
+    console.info(`Attempting to create ${funding.slug}`);
+    try {
+      return await deleteItem(funding, fundingCollectionId);
+    } catch (error) {
+      console.error(error.response.data);
+      throw error;
+    }
+  };
+  await Promise.all(fundings.map(async (item) => await deleteFunding(item)));
+};
 
 const updateFundings = async () => {
   const sectors = await getCurrentSectors();
   const fundings = loadAllFundings();
-  return [...(await getOverlappingFundings())].map((item) =>
-    modifyItem(
-      item._id,
-      fundingCollectionId,
-      getFundingFromMd(
-        fundings.find((i) => i.id == item.slug),
-        sectors
-      )
-    )
-  );
+  const overlappingFundings = await getOverlappingFundings();
+
+  const modify = async (item) => {
+    const funding = getFundingFromMd(
+      fundings.find((i) => i.id == item.slug),
+      sectors
+    );
+    console.info(`Attempting to modify ${funding.slug}`);
+    try {
+      return await modifyItem(item._id, fundingCollectionId, funding);
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
+
+  return Promise.all(overlappingFundings.map(async (item) => await modify(item)));
 };
-const createNewFundings = async () =>
-  [...(await getNewFundings())].map((item) => createItem(item, fundingCollectionId, false));
+const createNewFundings = async () => {
+  const newFundings = await getNewFundings();
+  const create = async (funding) => {
+    console.info(`Attempting to create ${funding.slug}`);
+    try {
+      return await createItem(funding, fundingCollectionId, false);
+    } catch (error) {
+      console.error(error.response.data);
+      throw error;
+    }
+  };
+  return await Promise.all(newFundings.map(async (item) => await create(item)));
+};
 
 const wait = (milliseconds = 10000) => new Promise((resolve) => setTimeout(resolve, milliseconds));
 
@@ -235,5 +282,8 @@ export {
   syncFundings,
   getCurrentFundings,
   contentMdToObject,
+  getFundingTypeOptions,
+  getAgencyOptions,
+  getFundingOptions,
   agencyMap,
 };
