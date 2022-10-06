@@ -13,7 +13,7 @@ import {
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { createPageHelpers, PageHelpers, renderPage } from "@/test/pages/onboarding/helpers-onboarding";
+import { createPageHelpers, renderPage } from "@/test/pages/onboarding/helpers-onboarding";
 import { createEmptyProfileData, getCurrentDate } from "@businessnjgovnavigator/shared/";
 import { render, screen, waitFor } from "@testing-library/react";
 
@@ -205,7 +205,7 @@ describe("onboarding - shared", () => {
       entityId: undefined,
       businessName: "",
       industryId: "generic",
-      homeBasedBusiness: true,
+      homeBasedBusiness: undefined,
       legalStructureId: "c-corporation",
       municipality: newark,
       liquorLicense: false,
@@ -234,7 +234,6 @@ describe("onboarding - shared", () => {
     await page.visitStep(3);
     page.selectByText("Location", "Newark");
     page.selectByValue("Ownership", "veteran-owned");
-    page.chooseRadio("home-based-business-true");
 
     page.clickBack();
     page.clickBack();
@@ -247,7 +246,7 @@ describe("onboarding - shared", () => {
       entityId: undefined,
       businessName: "Cool Computers",
       industryId: undefined,
-      homeBasedBusiness: true,
+      homeBasedBusiness: undefined,
       dateOfFormation: undefined,
       legalStructureId: "sole-proprietorship",
       municipality: newark,
@@ -279,7 +278,6 @@ describe("onboarding - shared", () => {
     await page.visitStep(4);
     page.selectByText("Location", "Newark");
     page.selectByValue("Ownership", "veteran-owned");
-    page.chooseRadio("home-based-business-true");
 
     page.clickBack();
     page.clickBack();
@@ -293,7 +291,7 @@ describe("onboarding - shared", () => {
       entityId: undefined,
       businessName: "Cool Computers",
       industryId: undefined,
-      homeBasedBusiness: true,
+      homeBasedBusiness: undefined,
       dateOfFormation: undefined,
       legalStructureId: "c-corporation",
       municipality: newark,
@@ -325,7 +323,6 @@ describe("onboarding - shared", () => {
     await page.visitStep(4);
     page.selectByText("Location", "Newark");
     page.selectByValue("Ownership", "veteran-owned");
-    page.chooseRadio("home-based-business-true");
 
     page.clickBack();
     page.clickBack();
@@ -340,7 +337,7 @@ describe("onboarding - shared", () => {
       businessName: "Cool Computers",
       industryId: "generic",
       dateOfFormation: date.format("YYYY-MM-DD"),
-      homeBasedBusiness: true,
+      homeBasedBusiness: undefined,
       municipality: newark,
       liquorLicense: false,
       constructionRenovationPlan: undefined,
@@ -387,53 +384,5 @@ describe("onboarding - shared", () => {
     await waitFor(() => {
       expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
     });
-  });
-
-  describe("updates to industry affecting home-based business", () => {
-    it("sets home-based business back to false if they select a non-applicable industry", async () => {
-      const { page } = renderPage({});
-      await selectInitialIndustry("home-contractor", page);
-      expect(currentUserData().profileData.homeBasedBusiness).toEqual(true);
-      await reselectNewIndustry("restaurant", page);
-      expect(currentUserData().profileData.homeBasedBusiness).toEqual(false);
-    });
-
-    it("sets home-based business back to true if they select an applicable industry", async () => {
-      const { page } = renderPage({});
-      await selectInitialIndustry("restaurant", page);
-      expect(currentUserData().profileData.homeBasedBusiness).toEqual(false);
-      await reselectNewIndustry("e-commerce", page);
-      expect(currentUserData().profileData.homeBasedBusiness).toEqual(true);
-    });
-
-    it("keeps home-based business value if they select a different but still applicable industry", async () => {
-      const { page } = renderPage({});
-      await selectInitialIndustry("e-commerce", page);
-      expect(currentUserData().profileData.homeBasedBusiness).toEqual(true);
-      await selectHomeBasedBusiness("false", page);
-      await reselectNewIndustry("home-contractor", page);
-      expect(currentUserData().profileData.homeBasedBusiness).toEqual(false);
-    });
-
-    const selectInitialIndustry = async (industry: string, page: PageHelpers): Promise<void> => {
-      page.chooseRadio("business-persona-starting");
-      await page.visitStep(2);
-      page.selectByValue("Industry", industry);
-
-      await page.visitStep(3);
-      page.chooseRadio("general-partnership");
-    };
-
-    const selectHomeBasedBusiness = async (value: string, page: PageHelpers): Promise<void> => {
-      await page.visitStep(4);
-      page.chooseRadio(`home-based-business-${value}`);
-      page.clickBack();
-    };
-
-    const reselectNewIndustry = async (industry: string, page: PageHelpers): Promise<void> => {
-      page.clickBack();
-      page.selectByValue("Industry", industry);
-      await page.visitStep(3);
-    };
   });
 });

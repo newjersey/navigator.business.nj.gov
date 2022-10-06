@@ -2,7 +2,7 @@ import { OnboardingIndustry } from "@/components/onboarding/OnboardingIndustry";
 import { getMergedConfig } from "@/contexts/configContext";
 import { createProfileFieldErrorMap } from "@/lib/types/types";
 import { getFlow } from "@/lib/utils/helpers";
-import { generateProfileData } from "@/test/factories";
+import { generateProfileData, randomHomeBasedIndustry, randomNonHomeBasedIndustry } from "@/test/factories";
 import { currentProfileData, WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
 import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { fireEvent, render, screen, within } from "@testing-library/react";
@@ -76,6 +76,20 @@ describe("<OnboardingIndustry />", () => {
 
       selectIndustry("cannabis");
       expect(currentProfileData().sectorId).toEqual("cannabis");
+    });
+
+    describe("updates to industry affecting home-based business", () => {
+      it("sets home-based business to false if they select an non-applicable industry", async () => {
+        renderComponent();
+        selectIndustry(randomNonHomeBasedIndustry());
+        expect(currentProfileData().homeBasedBusiness).toEqual(false);
+      });
+
+      it("sets home-based business to undefined if they select an applicable industry", async () => {
+        renderComponent();
+        selectIndustry(randomHomeBasedIndustry());
+        expect(currentProfileData().homeBasedBusiness).toEqual(undefined);
+      });
     });
 
     describe("cannabis license type question", () => {

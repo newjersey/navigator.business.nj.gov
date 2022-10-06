@@ -228,7 +228,6 @@ describe("onboarding - starting a business", () => {
     page.selectByValue("Industry", "e-commerce");
     await page.visitStep(3);
     expect(currentUserData().profileData.industryId).toEqual("e-commerce");
-    expect(currentUserData().profileData.homeBasedBusiness).toEqual(true);
 
     page.chooseRadio("general-partnership");
     await page.visitStep(4);
@@ -252,7 +251,7 @@ describe("onboarding - starting a business", () => {
         businessName: "",
         industryId: "e-commerce",
         sectorId: "retail-trade-and-ecommerce",
-        homeBasedBusiness: true,
+        homeBasedBusiness: undefined,
         legalStructureId: "general-partnership",
         municipality: newark,
       },

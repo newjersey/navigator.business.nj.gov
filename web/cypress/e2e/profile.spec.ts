@@ -15,10 +15,11 @@ import {
   completeForeignBusinessOnboarding,
   completeNewBusinessOnboarding,
   homeBasedIndustries,
-  industriesNotHomeBasedOrLiquorLicense,
   legalStructureWithTradeName,
   liquorLicenseIndustries,
   randomElementFromArray,
+  randomHomeBasedIndustry,
+  randomNonHomeBasedIndustry,
   updateExistingBusinessProfilePage,
   updateForeignBusinessProfilePage,
   updateNewBusinessProfilePage,
@@ -31,25 +32,21 @@ describe("Profile [feature] [all] [group1]", () => {
 
   describe("navigates to profile page and updates all fields", () => {
     it("onboards random industry where homebase doesn't apply, then changes to industry where it applies and updates all fields in profile", () => {
-      const industry = randomElementFromArray(
-        industriesNotHomeBasedOrLiquorLicense.filter((x) => x.isEnabled) as Industry[]
-      );
+      const industry = randomNonHomeBasedIndustry();
       const legalStructureId = randomElementFromArray(LegalStructures as LegalStructure[]).id;
       const townDisplayName = "Atlantic";
-      const homeBasedQuestion =
-        industry.industryOnboardingQuestions.canBeHomeBased === false ? undefined : Boolean(randomInt() % 2);
-      const liquorLicenseQuestion =
-        industry.industryOnboardingQuestions.isLiquorLicenseApplicable === false
-          ? undefined
-          : Boolean(randomInt() % 2);
-      const requiresCpa =
-        industry.industryOnboardingQuestions.isCpaRequiredApplicable === false
-          ? undefined
-          : Boolean(randomInt() % 2);
+      const homeBasedQuestion = industry.industryOnboardingQuestions.canBeHomeBased
+        ? Boolean(randomInt() % 2)
+        : undefined;
+      const liquorLicenseQuestion = industry.industryOnboardingQuestions.isLiquorLicenseApplicable
+        ? Boolean(randomInt() % 2)
+        : undefined;
+      const requiresCpa = industry.industryOnboardingQuestions.isCpaRequiredApplicable
+        ? Boolean(randomInt() % 2)
+        : undefined;
 
       completeNewBusinessOnboarding({
         industry,
-        homeBasedQuestion,
         liquorLicenseQuestion,
         townDisplayName,
         legalStructureId,
@@ -88,26 +85,27 @@ describe("Profile [feature] [all] [group1]", () => {
     });
 
     it("onboards random homebased industry, then updates the field in profile", () => {
-      const industry = randomElementFromArray(homeBasedIndustries.filter((x) => x.isEnabled) as Industry[]);
+      const industry = randomHomeBasedIndustry();
       const homeBasedQuestion = Boolean(randomInt() % 2);
-      const liquorLicenseQuestion =
-        industry.industryOnboardingQuestions.isLiquorLicenseApplicable === false
-          ? undefined
-          : Boolean(randomInt() % 2);
+      const liquorLicenseQuestion = industry.industryOnboardingQuestions.isLiquorLicenseApplicable
+        ? Boolean(randomInt() % 2)
+        : undefined;
       const legalStructureId = randomElementFromArray(LegalStructures as LegalStructure[]).id;
       const townDisplayName = "Atlantic";
-      const requiresCpa =
-        industry.industryOnboardingQuestions.isCpaRequiredApplicable === false
-          ? undefined
-          : Boolean(randomInt() % 2);
+      const requiresCpa = industry.industryOnboardingQuestions.isCpaRequiredApplicable
+        ? Boolean(randomInt() % 2)
+        : undefined;
 
       completeNewBusinessOnboarding({
         industry,
-        homeBasedQuestion,
         liquorLicenseQuestion,
         legalStructureId,
         townDisplayName,
         requiresCpa,
+      });
+
+      updateNewBusinessProfilePage({
+        homeBasedQuestion: homeBasedQuestion,
       });
 
       checkNewBusinessProfilePage({
@@ -116,10 +114,6 @@ describe("Profile [feature] [all] [group1]", () => {
         liquorLicenseQuestion,
         legalStructureId,
         townDisplayName,
-      });
-
-      updateNewBusinessProfilePage({
-        homeBasedQuestion: !homeBasedQuestion,
       });
     });
 
@@ -127,19 +121,15 @@ describe("Profile [feature] [all] [group1]", () => {
       const industry = randomElementFromArray(
         liquorLicenseIndustries.filter((x) => x.isEnabled) as Industry[]
       );
-      const homeBasedQuestion =
-        industry.industryOnboardingQuestions.canBeHomeBased === false ? undefined : Boolean(randomInt() % 2);
       const liquorLicenseQuestion = Boolean(randomInt() % 2);
       const legalStructureId = randomElementFromArray(LegalStructures as LegalStructure[]).id;
       const townDisplayName = "Atlantic";
-      const requiresCpa =
-        industry.industryOnboardingQuestions.isCpaRequiredApplicable === false
-          ? undefined
-          : Boolean(randomInt() % 2);
+      const requiresCpa = industry.industryOnboardingQuestions.isCpaRequiredApplicable
+        ? Boolean(randomInt() % 2)
+        : undefined;
 
       completeNewBusinessOnboarding({
         industry,
-        homeBasedQuestion,
         liquorLicenseQuestion,
         legalStructureId,
         townDisplayName,
@@ -148,7 +138,6 @@ describe("Profile [feature] [all] [group1]", () => {
 
       checkNewBusinessProfilePage({
         industry,
-        homeBasedQuestion,
         liquorLicenseQuestion,
         legalStructureId,
         townDisplayName,
@@ -162,23 +151,18 @@ describe("Profile [feature] [all] [group1]", () => {
     it("onboards random industry with legal structure that enables entity id field, then updates the field in profile", () => {
       const industry = randomElementFromArray(Industries.filter((x) => x.isEnabled) as Industry[]);
       const legalStructureId = randomElementFromArray(legalStructureWithTradeName as LegalStructure[]).id;
-      const homeBasedQuestion =
-        industry.industryOnboardingQuestions.canBeHomeBased === false ? undefined : Boolean(randomInt() % 2);
-      const liquorLicenseQuestion =
-        industry.industryOnboardingQuestions.isLiquorLicenseApplicable === false
-          ? undefined
-          : Boolean(randomInt() % 2);
+      const liquorLicenseQuestion = industry.industryOnboardingQuestions.isLiquorLicenseApplicable
+        ? Boolean(randomInt() % 2)
+        : undefined;
       const townDisplayName = "Atlantic";
       const updatedEntityId = randomInt(10).toString();
-      const requiresCpa =
-        industry.industryOnboardingQuestions.isCpaRequiredApplicable === false
-          ? undefined
-          : Boolean(randomInt() % 2);
+      const requiresCpa = industry.industryOnboardingQuestions.isCpaRequiredApplicable
+        ? Boolean(randomInt() % 2)
+        : undefined;
 
       completeNewBusinessOnboarding({
         industry,
         legalStructureId,
-        homeBasedQuestion,
         liquorLicenseQuestion,
         townDisplayName,
         requiresCpa,
@@ -187,7 +171,6 @@ describe("Profile [feature] [all] [group1]", () => {
       checkNewBusinessProfilePage({
         industry,
         legalStructureId,
-        homeBasedQuestion,
         liquorLicenseQuestion,
         townDisplayName,
       });
@@ -205,7 +188,6 @@ describe("Profile [feature] [all] [group1]", () => {
     const sectorId = randomElementFromArray(arrayOfSectors).id;
     const numberOfEmployees = randomInt(1).toString();
     const townDisplayName = "Atlantic";
-    const homeBasedQuestion = Boolean(randomInt() % 2);
     const ownershipDataValues = ["woman-owned", "veteran-owned"];
 
     completeExistingBusinessOnboarding({
@@ -215,7 +197,6 @@ describe("Profile [feature] [all] [group1]", () => {
       sectorId,
       numberOfEmployees,
       townDisplayName,
-      homeBasedQuestion,
       ownershipDataValues,
     });
 
@@ -226,7 +207,6 @@ describe("Profile [feature] [all] [group1]", () => {
       sectorId,
       numberOfEmployees,
       townDisplayName,
-      homeBasedQuestion,
       ownershipDataValues,
     });
 
@@ -249,7 +229,7 @@ describe("Profile [feature] [all] [group1]", () => {
       sectorId: updatedSectorId,
       numberOfEmployees: updatedNumberOfEmployees,
       townDisplayName: updatedTownDisplayName,
-      homeBasedQuestion: !homeBasedQuestion,
+      homeBasedQuestion: Boolean(randomInt() % 2),
       ownershipDataValues: updatedOwnershipDataValues,
       employerId,
       taxId,

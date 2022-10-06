@@ -9,6 +9,7 @@ import { OnboardingDateOfFormation } from "@/components/onboarding/OnboardingDat
 import { OnboardingEmployerId } from "@/components/onboarding/OnboardingEmployerId";
 import { OnboardingEntityId } from "@/components/onboarding/OnboardingEntityId";
 import { OnboardingExistingEmployees } from "@/components/onboarding/OnboardingExistingEmployees";
+import { OnboardingHomeBasedBusiness } from "@/components/onboarding/OnboardingHomeBasedBusiness";
 import { OnboardingIndustry } from "@/components/onboarding/OnboardingIndustry";
 import { OnboardingLegalStructureDropdown } from "@/components/onboarding/OnboardingLegalStructureDropDown";
 import { OnboardingLocationInNewJersey } from "@/components/onboarding/OnboardingLocationInNewJersey";
@@ -35,6 +36,7 @@ import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
 import { routeForPersona } from "@/lib/domain-logic/routeForPersona";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
@@ -218,6 +220,15 @@ const ProfilePage = (props: Props): ReactElement => {
     return LookupLegalStructureById(userData.profileData.legalStructureId).requiresPublicFiling;
   };
 
+  const displayHomedBaseBusinessQuestion = (): boolean => {
+    if (!userData) return false;
+    if (!profileData.industryId) return true;
+    if (profileData.foreignBusinessType === "NEXUS" && profileData.nexusLocationInNewJersey) {
+      return false;
+    }
+    return isHomeBasedBusinessApplicable(profileData.industryId);
+  };
+
   const nexusBusinessElements: Record<ProfileTabs, ReactNode> = {
     info: (
       <>
@@ -254,6 +265,12 @@ const ProfilePage = (props: Props): ReactElement => {
             <FieldLabelProfile fieldName="municipality" />
             <OnboardingMunicipality onValidation={onValidation} fieldStates={fieldStates} />
           </>
+        )}
+        {displayHomedBaseBusinessQuestion() && (
+          <div className="margin-top-3">
+            <FieldLabelProfile fieldName="homeBasedBusiness" />
+            <OnboardingHomeBasedBusiness />
+          </div>
         )}
       </>
     ),
@@ -364,6 +381,13 @@ const ProfilePage = (props: Props): ReactElement => {
         <FieldLabelProfile fieldName="municipality" />
         <OnboardingMunicipality onValidation={onValidation} fieldStates={fieldStates} />
 
+        {displayHomedBaseBusinessQuestion() && (
+          <div className="margin-top-3">
+            <FieldLabelProfile fieldName="homeBasedBusiness" />
+            <OnboardingHomeBasedBusiness />
+          </div>
+        )}
+
         {LookupOperatingPhaseById(userData?.profileData.operatingPhase)
           .displayCompanyDemographicProfileFields && (
           <>
@@ -465,6 +489,12 @@ const ProfilePage = (props: Props): ReactElement => {
           <FieldLabelProfile fieldName="municipality" />
           <OnboardingMunicipality onValidation={onValidation} fieldStates={fieldStates} />
         </div>
+        {displayHomedBaseBusinessQuestion() && (
+          <div className="margin-top-3">
+            <FieldLabelProfile fieldName="homeBasedBusiness" />
+            <OnboardingHomeBasedBusiness />
+          </div>
+        )}
         <div className="margin-top-4">
           <FieldLabelProfile fieldName="ownershipTypeIds" />
           <OnboardingOwnership />

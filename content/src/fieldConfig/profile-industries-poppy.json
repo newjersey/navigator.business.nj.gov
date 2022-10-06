@@ -27,7 +27,7 @@
         "radioButtonYesText": "Yes",
         "radioButtonNoText": "No",
         "header": "Home-based business",
-        "description": "Do you plan to be a `home-based business|home-based-business`?"
+        "description": "Are you a `home-based business|home-based-business`?"
       },
       "homeContractor": {
         "header": "",

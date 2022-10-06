@@ -71,7 +71,7 @@ export const randomElementFromArray = (array: any[]) => {
 };
 
 export const homeBasedIndustries = Industries.filter((industry) => {
-  return industry.industryOnboardingQuestions.canBeHomeBased;
+  return industry.industryOnboardingQuestions.canBeHomeBased && industry.canHavePermanentLocation;
 });
 
 export const liquorLicenseIndustries = Industries.filter((industry) => {
@@ -81,6 +81,7 @@ export const liquorLicenseIndustries = Industries.filter((industry) => {
 export const industriesNotHomeBasedOrLiquorLicense = Industries.filter((industry) => {
   return (
     !industry.industryOnboardingQuestions.canBeHomeBased &&
+    industry.canHavePermanentLocation &&
     !industry.industryOnboardingQuestions.isLiquorLicenseApplicable
   );
 });
@@ -123,13 +124,13 @@ interface ExistingOnboardingData {
 
 interface ForeignOnboardingData {
   foreignBusinessTypeIds: string[];
+  locationInNewJersey: boolean;
 }
 
 export const completeNewBusinessOnboarding = ({
   industry = undefined,
   legalStructureId = undefined,
   townDisplayName = "Absecon",
-  homeBasedQuestion = undefined,
   liquorLicenseQuestion = undefined,
   requiresCpa = undefined,
   providesStaffingService = undefined,
@@ -143,11 +144,6 @@ export const completeNewBusinessOnboarding = ({
 }: Partial<StartingOnboardingData> & Partial<Registration>): void => {
   if (industry === undefined) {
     industry = randomElementFromArray(Industries.filter((x) => x.isEnabled) as Industry[]) as Industry;
-  }
-
-  if (homeBasedQuestion === undefined) {
-    homeBasedQuestion =
-      industry.industryOnboardingQuestions.canBeHomeBased === false ? undefined : Boolean(randomInt() % 2);
   }
 
   if (liquorLicenseQuestion === undefined) {
@@ -194,10 +190,6 @@ export const completeNewBusinessOnboarding = ({
 
   if (legalStructureId === undefined) {
     legalStructureId = randomElementFromArray(LegalStructures as LegalStructure[]).id;
-  }
-
-  if (!industry.industryOnboardingQuestions.canBeHomeBased && homeBasedQuestion) {
-    throw "Cypress configuration error - home based set for non-homebased industry";
   }
 
   if (!industry.industryOnboardingQuestions.isCpaRequiredApplicable && requiresCpa) {
@@ -289,14 +281,6 @@ export const completeNewBusinessOnboarding = ({
     onOnboardingPage.getLocationDropdown().invoke("prop", "value").should("not.eq", "");
   }
 
-  if (homeBasedQuestion === undefined) {
-    onOnboardingPage.getHomeBased().should("not.exist");
-  } else {
-    onOnboardingPage.selectHomeBased(homeBasedQuestion);
-    onOnboardingPage.getHomeBased(homeBasedQuestion).should("be.checked");
-    onOnboardingPage.getHomeBased(!homeBasedQuestion).should("not.be.checked");
-  }
-
   onOnboardingPage.clickNext();
   cy.url().should("include", "onboarding?page=5");
   onOnboardingPage.typeFullName(fullName);
@@ -321,7 +305,6 @@ export const completeExistingBusinessOnboarding = ({
   sectorId = randomElementFromArray(arrayOfSectors).id,
   numberOfEmployees = randomInt(1).toString(),
   townDisplayName = "Atlantic",
-  homeBasedQuestion = Boolean(randomInt() % 2),
   ownershipDataValues = ["woman-owned", "veteran-owned"],
   legalStructureId = businessFormationDate || entityId || randomInt() % 2
     ? "limited-partnership"
@@ -387,9 +370,6 @@ export const completeExistingBusinessOnboarding = ({
   onOnboardingPage.getNumberOfEmployees().invoke("prop", "value").should("contain", numberOfEmployees);
   onOnboardingPage.selectLocation(townDisplayName);
   onOnboardingPage.getLocationDropdown().invoke("prop", "value").should("contain", townDisplayName);
-  onOnboardingPage.selectHomeBased(homeBasedQuestion);
-  onOnboardingPage.getHomeBased(homeBasedQuestion).should("be.checked");
-  onOnboardingPage.getHomeBased(!homeBasedQuestion).should("not.be.checked");
   if (!!ownershipDataValues && ownershipDataValues.length) {
     onOnboardingPage.selectOwnership(ownershipDataValues);
     ownershipDataValues.forEach((dataValue) => {
@@ -422,7 +402,7 @@ export const completeForeignBusinessOnboarding = ({
   email = `MichaelSmith${randomInt()}@gmail.com`,
   isNewsletterChecked = false,
   isContactMeChecked = false,
-}: ForeignOnboardingData & Partial<Registration>): void => {
+}: Partial<ForeignOnboardingData> & Partial<Registration>): void => {
   let pageIndex = 1;
   cy.url().should("include", `onboarding?page=${pageIndex}`);
 
@@ -435,8 +415,10 @@ export const completeForeignBusinessOnboarding = ({
   pageIndex += 1;
   cy.url().should("include", `onboarding?page=${pageIndex}`);
 
-  for (const id of foreignBusinessTypeIds) {
-    onOnboardingPage.checkForeignBusinessType(id);
+  if (foreignBusinessTypeIds) {
+    for (const id of foreignBusinessTypeIds) {
+      onOnboardingPage.checkForeignBusinessType(id);
+    }
   }
 
   onOnboardingPage.clickNext();
@@ -444,6 +426,90 @@ export const completeForeignBusinessOnboarding = ({
   pageIndex += 1;
   cy.url().should("include", `onboarding?page=${pageIndex}`);
 
+  onOnboardingPage.typeFullName(fullName);
+  onOnboardingPage.getFullName().invoke("prop", "value").should("contain", fullName);
+  onOnboardingPage.typeEmail(email);
+  onOnboardingPage.getEmail().invoke("prop", "value").should("contain", email);
+  onOnboardingPage.typeConfirmEmail(email);
+  onOnboardingPage.getConfirmEmail().invoke("prop", "value").should("contain", email);
+  onOnboardingPage.toggleNewsletterCheckbox(isNewsletterChecked);
+  onOnboardingPage.toggleContactMeCheckbox(isContactMeChecked);
+  onOnboardingPage.getNewsletterCheckbox().should(`${isNewsletterChecked ? "be" : "not.be"}.checked`);
+  onOnboardingPage.getContactMeCheckbox().should(`${isContactMeChecked ? "be" : "not.be"}.checked`);
+
+  onOnboardingPage.clickNext();
+  cy.url().should("include", `dashboard`);
+};
+
+export const completeForeignNexusBusinessOnboarding = ({
+  fullName = `Michael Smith ${randomInt()}`,
+  email = `MichaelSmith${randomInt()}@gmail.com`,
+  isNewsletterChecked = false,
+  isContactMeChecked = false,
+  industry = undefined,
+  legalStructureId = undefined,
+  townDisplayName = "Absecon",
+  locationInNewJersey = false,
+}: Partial<ForeignOnboardingData> & Partial<StartingOnboardingData> & Partial<Registration>): void => {
+  let pageIndex = 1;
+  cy.url().should("include", `onboarding?page=${pageIndex}`);
+
+  onOnboardingPage.selectBusinessPersona("FOREIGN");
+  onOnboardingPage.getBusinessPersona("FOREIGN").should("be.checked");
+  onOnboardingPage.getBusinessPersona("STARTING").should("not.be.checked");
+  onOnboardingPage.getBusinessPersona("OWNING").should("not.be.checked");
+  onOnboardingPage.clickNext();
+
+  pageIndex += 1;
+  cy.url().should("include", `onboarding?page=${pageIndex}`);
+
+  onOnboardingPage.checkForeignBusinessType("operationsInNJ");
+  onOnboardingPage.clickNext();
+  cy.url().should("include", `onboarding?page=3`);
+
+  if (industry === undefined) {
+    industry = randomElementFromArray(Industries.filter((x) => x.isEnabled) as Industry[]) as Industry;
+  }
+
+  onOnboardingPage.selectIndustry((industry as Industry).id);
+  onOnboardingPage
+    .getIndustryDropdown()
+    .invoke("prop", "value")
+    .should("contain", (industry as Industry).name);
+
+  onOnboardingPage.clickNext();
+
+  cy.url().should("include", "onboarding?page=4");
+
+  if (legalStructureId === undefined) {
+    legalStructureId = randomInt() % 2 ? "limited-partnership" : "sole-proprietorship";
+  }
+
+  onOnboardingPage.selectLegalStructure(legalStructureId!);
+  onOnboardingPage
+    .getLegalStructure(legalStructureId!)
+    .parents(`[data-testid=${legalStructureId}]`)
+    .find("span")
+    .first()
+    .should("have.class", "Mui-checked");
+  onOnboardingPage.clickNext();
+
+  cy.url().should("include", "onboarding?page=5");
+
+  onOnboardingPage.selectLocationInNewJersey(locationInNewJersey);
+
+  if (locationInNewJersey) {
+    if (townDisplayName) {
+      onOnboardingPage.selectLocation(townDisplayName);
+      onOnboardingPage.getLocationDropdown().invoke("prop", "value").should("contain", townDisplayName);
+    } else {
+      onOnboardingPage.selectRandomLocation();
+      onOnboardingPage.getLocationDropdown().invoke("prop", "value").should("not.eq", "");
+    }
+  }
+
+  onOnboardingPage.clickNext();
+  cy.url().should("include", "onboarding?page=6");
   onOnboardingPage.typeFullName(fullName);
   onOnboardingPage.getFullName().invoke("prop", "value").should("contain", fullName);
   onOnboardingPage.typeEmail(email);
@@ -494,6 +560,7 @@ export const checkNewBusinessProfilePage = ({
   cy.url().should("contain", "/dashboard");
   onDashboardPage.clickEditProfileLink();
   cy.url().should("contain", "/profile");
+  cy.wait(1000);
 
   if (businessName) {
     onProfilePage.getBusinessName().invoke("prop", "value").should("contain", businessName);
@@ -517,9 +584,7 @@ export const checkNewBusinessProfilePage = ({
     onProfilePage.getLocationDropdown().invoke("prop", "value").should("not.eq", "");
   }
 
-  if (homeBasedQuestion === undefined) {
-    onProfilePage.getHomeBased().should("not.exist");
-  } else {
+  if (homeBasedQuestion !== undefined) {
     onProfilePage.getHomeBased(homeBasedQuestion).should("be.checked");
     onProfilePage.getHomeBased(!homeBasedQuestion).should("not.be.checked");
   }
@@ -575,8 +640,10 @@ export const checkExistingBusinessProfilePage = ({
     });
   onProfilePage.getNumberOfEmployees().invoke("prop", "value").should("contain", numberOfEmployees);
   onProfilePage.getLocationDropdown().invoke("prop", "value").should("contain", townDisplayName);
-  onProfilePage.getHomeBased(homeBasedQuestion).should("be.checked");
-  onProfilePage.getHomeBased(!homeBasedQuestion).should("not.be.checked");
+  if (homeBasedQuestion !== undefined) {
+    onProfilePage.getHomeBased(homeBasedQuestion).should("be.checked");
+    onProfilePage.getHomeBased(!homeBasedQuestion).should("not.be.checked");
+  }
   if (!!ownershipDataValues && ownershipDataValues.length) {
     ownershipDataValues.forEach((dataValue) => {
       onProfilePage.getOwnershipDropdown().invoke("prop", "value").should("contain", dataValue);
@@ -618,6 +685,7 @@ export const updateNewBusinessProfilePage = ({
   cy.url().should("contain", "/dashboard");
   onDashboardPage.clickEditProfileLink();
   cy.url().should("contain", "/profile");
+  cy.wait(1000);
 
   if (businessName) {
     onProfilePage.typeBusinessName(businessName);
@@ -844,4 +912,14 @@ const generateStateItem = () => states[randomIntFromInterval("0", (states.length
 const generateZipCode = () => {
   const zip = randomIntFromInterval("1", "99999").toString();
   return "0".repeat(5 - zip.length) + zip;
+};
+
+export const randomHomeBasedIndustry = (): Industry => {
+  return randomElementFromArray(homeBasedIndustries.filter((x) => x.isEnabled) as Industry[]);
+};
+
+export const randomNonHomeBasedIndustry = (): Industry => {
+  return randomElementFromArray(
+    industriesNotHomeBasedOrLiquorLicense.filter((x) => x.isEnabled) as Industry[]
+  );
 };

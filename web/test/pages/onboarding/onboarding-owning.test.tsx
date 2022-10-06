@@ -342,7 +342,6 @@ describe("onboarding - owning a business", () => {
     page.selectByText("Location", "Newark");
     page.selectByValue("Ownership", "veteran-owned");
     page.selectByValue("Ownership", "disabled-veteran");
-    page.chooseRadio("home-based-business-true");
 
     await page.visitStep(5);
     const page5 = within(screen.getByTestId("page-5-form"));
@@ -374,7 +373,6 @@ describe("onboarding - owning a business", () => {
     page.selectByText("Location", "Newark");
     page.selectByValue("Ownership", "veteran-owned");
     page.selectByValue("Ownership", "disabled-veteran");
-    page.chooseRadio("home-based-business-true");
 
     await page.visitStep(4);
     const page4 = within(screen.getByTestId("page-4-form"));
@@ -399,12 +397,10 @@ describe("onboarding - owning a business", () => {
     page.fillText("Business name", "Cool Computers");
     page.selectByValue("Sector", "clean-energy");
     await page.visitStep(4);
-    expect(currentUserData().profileData.homeBasedBusiness).toEqual(false);
     page.fillText("Existing employees", "1234567");
     page.selectByText("Location", "Newark");
     page.selectByValue("Ownership", "veteran-owned");
     page.selectByValue("Ownership", "disabled-veteran");
-    page.chooseRadio("home-based-business-true");
     await page.visitStep(5);
     expect(currentUserData()).toEqual({
       ...initialUserData,
@@ -413,7 +409,7 @@ describe("onboarding - owning a business", () => {
         ...initialUserData.profileData,
         businessPersona: "OWNING",
         businessName: "Cool Computers",
-        homeBasedBusiness: true,
+        homeBasedBusiness: undefined,
         legalStructureId: "c-corporation",
         dateOfFormation,
         municipality: newark,
