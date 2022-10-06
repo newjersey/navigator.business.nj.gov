@@ -12,15 +12,20 @@ if (process.env.WEBFLOW_API_TOKEN == undefined) throw new Error("No Webflow API 
 const headers = { Authorization: `Bearer ${process.env.WEBFLOW_API_TOKEN}` };
 
 const getAllItems = async (id) =>
-  (
-    await axios({
-      method: "get",
-      url: `https://api.webflow.com/collections/${id}/items`,
-      headers,
-      responseType: "json",
-      // eslint-disable-next-line unicorn/no-await-expression-member
-    })
-  ).data.items;
+  axios({
+    method: "get",
+    url: `https://api.webflow.com/collections/${id}/items`,
+    headers,
+    responseType: "json",
+  });
+
+const getCollection = async (id) =>
+  axios({
+    method: "get",
+    url: `https://api.webflow.com/collections/${id}`,
+    headers,
+    responseType: "json",
+  });
 
 const createItem = (item, collectionId, draft = true) =>
   axios({
@@ -58,4 +63,4 @@ const deleteItem = (item, collectionId, unPublish = false) =>
     headers,
   });
 
-export { deleteItem, modifyItem, createItem, getAllItems };
+export { deleteItem, modifyItem, createItem, getAllItems, getCollection };

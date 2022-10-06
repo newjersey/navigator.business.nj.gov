@@ -233,7 +233,15 @@ jest.mock("fs", () => {
 });
 
 describe("webflow syncing", () => {
+  const dateNow = Date.now();
+  const currentDate = new Date(dateNow);
+  // eslint-disable-next-line no-undef
+  const realDateNow = Date.now.bind(global.Date);
+
   beforeEach(async () => {
+    const dateNowStub = jest.fn(() => dateNow);
+    // eslint-disable-next-line no-undef
+    global.Date.now = dateNowStub;
     loadAllFundings.mockReturnValue(fundingMd);
     fs.readFileSync.mockImplementation((e) => {
       const original = jest.requireActual("fs");
@@ -246,6 +254,11 @@ describe("webflow syncing", () => {
         return { data: { items: fundings } };
       else console.log(request);
     });
+  });
+
+  afterEach(() => {
+    // eslint-disable-next-line no-undef
+    global.Date.now = realDateNow;
   });
 
   describe("sectors", () => {
@@ -527,6 +540,7 @@ describe("webflow syncing", () => {
             _draft: false,
             "application-close-date": null,
             "start-date": null,
+            "last-updated": currentDate.toISOString(),
             ...rest,
           },
         },
@@ -578,7 +592,7 @@ describe("webflow syncing", () => {
       await updateFundings();
       const { _archived, _draft, _id, ...rest } = fundings.find((item) => item.slug == "nj-accelerate");
       delete rest["feature-on-recents"];
-
+      console.log(rest);
       expect(axios).toHaveBeenLastCalledWith({
         method: "patch",
         url: `https://api.webflow.com/collections/6112e6b88aa567fdbc725ffc/items/${
@@ -587,6 +601,7 @@ describe("webflow syncing", () => {
         data: {
           fields: {
             ...rest,
+            "last-updated": currentDate.toISOString(),
             "application-close-date": null,
             "start-date": null,
             agency: agencyMap.find((i) => i.slug == "NJDEP").id,
