@@ -98,6 +98,15 @@ export const LicenseTask = (props: Props): ReactElement => {
       });
   };
 
+  const tabStyle = {
+    border: 1,
+    borderBottom: 0,
+    borderColor: "divider",
+    fontSize: "14px",
+    fontWeight: "600",
+    color: "#757575",
+  };
+
   return (
     <SignUpModalWrapper>
       <div className="flex flex-column">
@@ -110,16 +119,8 @@ export const LicenseTask = (props: Props): ReactElement => {
                 aria-label="License task"
                 sx={{ borderBottom: 1, borderColor: "divider", marginTop: ".25rem", marginLeft: ".5rem" }}
               >
-                <Tab
-                  value="0"
-                  sx={{ border: 1, borderBottom: 0, borderColor: "divider" }}
-                  label={Config.licenseSearchTask.tab1Text}
-                />
-                <Tab
-                  value="1"
-                  sx={{ border: 1, borderBottom: 0, borderColor: "divider" }}
-                  label={Config.licenseSearchTask.tab2Text}
-                />
+                <Tab value="0" sx={tabStyle} label={Config.licenseSearchTask.tab1Text} />
+                <Tab value="1" sx={tabStyle} label={Config.licenseSearchTask.tab2Text} />
               </TabList>
             </Box>
             <TabPanel value="0" sx={{ paddingX: 0 }}>
