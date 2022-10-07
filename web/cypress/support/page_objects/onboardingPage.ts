@@ -62,12 +62,12 @@ export class OnboardingPage {
     return cy.get(`input[name="liquor-license"]${radio === undefined ? "" : `[value="${radio}"]`}`);
   }
 
-  getHomeBased(radio?: boolean) {
-    return cy.get(`input[name="home-based-business"]${radio === undefined ? "" : `[value="${radio}"]`}`);
-  }
-
   getLocationDropdown() {
     return cy.get('[data-testid="municipality"]');
+  }
+
+  getLocationInNewJersey(radio?: boolean) {
+    return cy.get(`input[name="location-in-new-jersey"]${radio === undefined ? "" : `[value="${radio}"]`}`);
   }
 
   getOwnershipDropdown() {
@@ -143,12 +143,12 @@ export class OnboardingPage {
     cy.get('[role="listbox"]').contains(companyType).click({ force: true });
   }
 
-  selectHomeBased(radio: boolean) {
-    this.getHomeBased(radio).check();
-  }
-
   selectLiquorLicense(radio: boolean) {
     this.getLiquorLicense(radio).check();
+  }
+
+  selectLocationInNewJersey(radio: boolean) {
+    this.getLocationInNewJersey(radio).check();
   }
 
   selectOwnership(arrayOfOwnership: string[]) {

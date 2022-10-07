@@ -31,7 +31,6 @@ describe("Onboarding [feature] [all] [group2]", () => {
 
     cy.url().should("include", "onboarding?page=4");
     onOnboardingPage.selectLocation("Absecon");
-    onOnboardingPage.selectHomeBased(false);
     onOnboardingPage.clickNext();
 
     cy.url().should("include", "onboarding?page=5");

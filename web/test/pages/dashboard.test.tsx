@@ -3,6 +3,7 @@ import { getMergedConfig } from "@/contexts/configContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { Certification, Funding, OperateReference, SidebarCardContent } from "@/lib/types/types";
+import { getFlow } from "@/lib/utils/helpers";
 import DashboardPage from "@/pages/dashboard";
 import {
   generatePreferences,
@@ -13,12 +14,18 @@ import {
   generateTaxFiling,
   generateTaxFilingData,
   generateUserData,
+  randomHomeBasedIndustry,
+  randomNonHomeBasedIndustry,
 } from "@/test/factories";
 import { withAuthAlert } from "@/test/helpers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { setMockUserDataResponse, useMockProfileData, useMockUserData } from "@/test/mock/mockUseUserData";
-import { setupStatefulUserDataContext, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
+import {
+  currentUserData,
+  setupStatefulUserDataContext,
+  WithStatefulUserData,
+} from "@/test/mock/withStatefulUserData";
 import {
   getCurrentDate,
   parseDateWithFormat,
@@ -27,7 +34,7 @@ import {
 } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
-import { act, render, screen, waitFor, within } from "@testing-library/react";
+import { act, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 
 function mockMaterialUI(): typeof materialUi {
   return {
@@ -40,6 +47,7 @@ jest.mock("@mui/material", () => mockMaterialUI());
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
+jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
 
 const Config = getMergedConfig();
 
@@ -54,7 +62,7 @@ const createDisplayContent = (sidebar?: Record<string, SidebarCardContent>) => (
   },
 });
 
-describe("roadmap page", () => {
+describe("dashboard page", () => {
   beforeEach(() => {
     jest.resetAllMocks();
     useMockUserData({});
@@ -64,7 +72,7 @@ describe("roadmap page", () => {
     jest.useFakeTimers();
   });
 
-  const renderRoadmapPage = ({
+  const renderDashboardPage = ({
     sidebarDisplayContent,
     operateReferences,
   }: {
@@ -80,6 +88,23 @@ describe("roadmap page", () => {
           certifications={[]}
         />
       </ThemeProvider>
+    );
+  };
+
+  const renderStatefulPage = (userData?: UserData) => {
+    setupStatefulUserDataContext();
+
+    render(
+      <WithStatefulUserData initialUserData={userData || generateUserData({})}>
+        <ThemeProvider theme={createTheme()}>
+          <DashboardPage
+            operateReferences={{}}
+            displayContent={createDisplayContent()}
+            fundings={[]}
+            certifications={[]}
+          />
+        </ThemeProvider>
+      </WithStatefulUserData>
     );
   };
 
@@ -125,26 +150,26 @@ describe("roadmap page", () => {
 
   it("shows loading page if page has not loaded yet", () => {
     setMockUserDataResponse({ userData: undefined });
-    renderRoadmapPage({});
+    renderDashboardPage({});
     expect(screen.getByText("Loading", { exact: false })).toBeInTheDocument();
   });
 
   it("shows loading page if user not finished onboarding", () => {
     useMockUserData({ formProgress: "UNSTARTED" });
-    renderRoadmapPage({});
+    renderDashboardPage({});
     expect(screen.getByText("Loading", { exact: false })).toBeInTheDocument();
   });
 
   it("redirects to onboarding if user not finished onboarding", () => {
     useMockUserData({ formProgress: "UNSTARTED" });
-    renderRoadmapPage({});
+    renderDashboardPage({});
     expect(mockPush).toHaveBeenCalledWith(ROUTES.onboarding);
   });
 
   it("shows snackbar alert when success query is true", () => {
     useMockProfileData({});
     useMockRouter({ isReady: true, query: { success: "true" } });
-    renderRoadmapPage({});
+    renderDashboardPage({});
     expect(screen.getByText(Config.profileDefaults.successTextHeader)).toBeInTheDocument();
   });
 
@@ -168,7 +193,7 @@ describe("roadmap page", () => {
       ],
     });
 
-    renderRoadmapPage({});
+    renderDashboardPage({});
 
     expect(screen.getByText("step1", { exact: false })).toBeInTheDocument();
     expect(screen.getByText("(1-2 weeks)")).toBeInTheDocument();
@@ -193,7 +218,7 @@ describe("roadmap page", () => {
       taskProgress: { task1: "IN_PROGRESS", task2: "COMPLETED" },
     });
 
-    renderRoadmapPage({});
+    renderDashboardPage({});
 
     expect(screen.getByText("In progress")).toBeInTheDocument();
     expect(screen.getByText("Completed")).toBeInTheDocument();
@@ -210,7 +235,7 @@ describe("roadmap page", () => {
       ],
     });
 
-    renderRoadmapPage({});
+    renderDashboardPage({});
 
     const sectionPlan = screen.getByTestId("section-plan");
 
@@ -242,7 +267,7 @@ describe("roadmap page", () => {
       taxFilingData: generateTaxFilingData({}),
     });
 
-    renderRoadmapPage({});
+    renderDashboardPage({});
 
     const sectionStart = screen.getByTestId("section-start");
     const sectionPlan = screen.getByTestId("section-plan");
@@ -276,20 +301,20 @@ describe("roadmap page", () => {
 
   it("renders calendar snackbar when fromFormBusinessEntity query parameter is provided", () => {
     useMockRouter({ isReady: true, query: { fromFormBusinessEntity: "true" } });
-    renderRoadmapPage({});
+    renderDashboardPage({});
     expect(screen.getByTestId("snackbar-alert-calendar")).toBeInTheDocument();
   });
 
   it("renders certification snackbar when fromTaxRegistration query parameter is provided", () => {
     useMockRouter({ isReady: true, query: { fromTaxRegistration: "true" } });
-    renderRoadmapPage({});
-    expect(screen.getByTestId("toast-alert-certification")).toBeInTheDocument();
+    renderDashboardPage({});
+    expect(screen.getByTestId("certification-alert")).toBeInTheDocument();
   });
 
   it("renders funding snackbar when fromFunding query parameter is provided", async () => {
     useMockRouter({ isReady: true, query: { fromFunding: "true" } });
 
-    renderRoadmapPage({});
+    renderDashboardPage({});
     expect(screen.getByTestId("funding-alert")).toBeInTheDocument();
   });
 
@@ -297,11 +322,18 @@ describe("roadmap page", () => {
     jest.useFakeTimers();
     useMockRouter({ isReady: true, query: { fromFunding: "true" } });
 
-    renderRoadmapPage({});
+    renderDashboardPage({});
     await act(() => {
       jest.advanceTimersByTime(6000);
     });
     expect(screen.getByTestId("hiddenTasks-alert")).toBeInTheDocument();
+  });
+
+  it("renders deferred question snackbar when deferredQuestionAnswered query parameter is provided", async () => {
+    useMockRouter({ isReady: true, query: { deferredQuestionAnswered: "true" } });
+
+    renderDashboardPage({});
+    expect(screen.getByTestId("deferredQuestionAnswered-alert")).toBeInTheDocument();
   });
 
   it("displays filings calendar as list when taxfiling is populated and operatingPhase has ListCalendar", () => {
@@ -321,7 +353,7 @@ describe("roadmap page", () => {
         urlPath: "annual_report-url-path",
       },
     };
-    renderRoadmapPage({ operateReferences });
+    renderDashboardPage({ operateReferences });
 
     expect(screen.getByTestId("filings-calendar-as-list")).toBeInTheDocument();
     expect(screen.getByText(dueDate.format("MMMM D, YYYY"), { exact: false })).toBeInTheDocument();
@@ -347,7 +379,7 @@ describe("roadmap page", () => {
         urlPath: "annual_report-url-path",
       },
     };
-    renderRoadmapPage({ operateReferences });
+    renderDashboardPage({ operateReferences });
 
     expect(screen.queryByTestId("filings-calendar-as-list")).not.toBeInTheDocument();
   });
@@ -369,8 +401,76 @@ describe("roadmap page", () => {
         urlPath: "annual_report-url-path",
       },
     };
-    renderRoadmapPage({ operateReferences });
+    renderDashboardPage({ operateReferences });
 
     expect(screen.queryByTestId("filings-calendar-as-list")).not.toBeInTheDocument();
+  });
+
+  describe("deferred onboarding question", () => {
+    it("shows home-based business question when applicable to industry and not yet answered", () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          industryId: randomHomeBasedIndustry(),
+          homeBasedBusiness: undefined,
+        }),
+      });
+      useMockUserData(userData);
+      renderDashboardPage({});
+      expect(
+        screen.getByText(Config.profileDefaults[getFlow(userData)].homeBasedBusiness.description)
+      ).toBeInTheDocument();
+    });
+
+    it("does not show home-based business question when already answered", () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          industryId: randomHomeBasedIndustry(),
+          homeBasedBusiness: false,
+        }),
+      });
+      useMockUserData(userData);
+      renderDashboardPage({});
+      expect(
+        screen.queryByText(Config.profileDefaults[getFlow(userData)].homeBasedBusiness.description)
+      ).not.toBeInTheDocument();
+    });
+
+    it("does not show home-based business question when not applicable to industry", () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          industryId: randomNonHomeBasedIndustry(),
+          homeBasedBusiness: undefined,
+        }),
+      });
+      useMockUserData(userData);
+      renderDashboardPage({});
+      expect(
+        screen.queryByText(Config.profileDefaults[getFlow(userData)].homeBasedBusiness.description)
+      ).not.toBeInTheDocument();
+    });
+
+    it("sets homeBasedBusiness in profile and removes question when radio is selected", async () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          industryId: randomHomeBasedIndustry(),
+          homeBasedBusiness: undefined,
+        }),
+      });
+      useMockUserData(userData);
+      renderStatefulPage(userData);
+      chooseHomeBasedValue("true");
+      fireEvent.click(screen.getByText(Config.dashboardDefaults.deferredOnboardingSaveButtonText));
+
+      await waitFor(() =>
+        expect(
+          screen.queryByText(Config.profileDefaults[getFlow(userData)].homeBasedBusiness.description)
+        ).not.toBeInTheDocument()
+      );
+      expect(currentUserData().profileData.homeBasedBusiness).toEqual(true);
+    });
+
+    const chooseHomeBasedValue = (value: "true" | "false") => {
+      fireEvent.click(screen.getByTestId(`home-based-business-${value}`));
+    };
   });
 });

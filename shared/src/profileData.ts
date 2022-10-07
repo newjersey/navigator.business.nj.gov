@@ -15,7 +15,7 @@ export interface ProfileData {
   readonly municipality: Municipality | undefined;
   readonly liquorLicense: boolean;
   readonly requiresCpa: boolean;
-  readonly homeBasedBusiness: boolean;
+  readonly homeBasedBusiness: boolean | undefined;
   readonly cannabisLicenseType: CannabisLicenseType;
   readonly cannabisMicrobusiness: boolean | undefined;
   readonly constructionRenovationPlan: boolean | undefined;
@@ -50,7 +50,7 @@ export const emptyProfileData: ProfileData = {
   municipality: undefined,
   liquorLicense: false,
   requiresCpa: false,
-  homeBasedBusiness: false,
+  homeBasedBusiness: undefined,
   cannabisLicenseType: undefined,
   cannabisMicrobusiness: undefined,
   constructionRenovationPlan: undefined,

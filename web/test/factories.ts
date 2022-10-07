@@ -699,3 +699,17 @@ export const randomIndustry = (canHavePermanentLocation = false): Industry => {
   const randomIndex = Math.floor(Math.random() * filteredIndustries.length);
   return filteredIndustries[randomIndex];
 };
+
+export const randomHomeBasedIndustry = () => {
+  const homeBasedIndustries = Industries.filter((it) => it.industryOnboardingQuestions.canBeHomeBased);
+  const randomIndex = Math.floor(Math.random() * homeBasedIndustries.length);
+  return homeBasedIndustries[randomIndex].id;
+};
+
+export const randomNonHomeBasedIndustry = () => {
+  const nonHomeBasedIndustries = Industries.filter(
+    (it) => !it.industryOnboardingQuestions.canBeHomeBased && it.canHavePermanentLocation
+  );
+  const randomIndex = Math.floor(Math.random() * nonHomeBasedIndustries.length);
+  return nonHomeBasedIndustries[randomIndex].id;
+};

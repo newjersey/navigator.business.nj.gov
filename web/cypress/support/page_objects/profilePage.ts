@@ -71,6 +71,14 @@ export class ProfilePage extends OnboardingPage {
     cy.get('[data-testid="numbers"').click({ force: true });
     this.getEntityId().clear().type(EID);
   }
+
+  selectHomeBased(radio: boolean) {
+    this.getHomeBased(radio).check();
+  }
+
+  getHomeBased(radio?: boolean) {
+    return cy.get(`input[name="home-based-business"]${radio === undefined ? "" : `[value="${radio}"]`}`);
+  }
 }
 
 export const onProfilePage = new ProfilePage();

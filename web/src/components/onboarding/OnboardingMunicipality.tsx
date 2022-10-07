@@ -1,9 +1,6 @@
-import { FieldLabelOnboarding } from "@/components/onboarding/FieldLabelOnboarding";
 import { MunicipalityDropdown } from "@/components/onboarding/MunicipalityDropdown";
-import { OnboardingHomeBasedBusiness } from "@/components/onboarding/OnboardingHomeBasedBusiness";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
 import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import { Municipality } from "@businessnjgovnavigator/shared/";
 import { FocusEvent, ReactElement, useContext } from "react";
@@ -33,11 +30,6 @@ export const OnboardingMunicipality = (props: Props): ReactElement => {
     });
   };
 
-  const renderHomeBasedBusinessQuestion =
-    state.profileData.businessPersona !== "FOREIGN" &&
-    (isHomeBasedBusinessApplicable(state.profileData.industryId) ||
-      state.profileData.businessPersona === "OWNING");
-
   return (
     <div className="form-input margin-top-2">
       <MunicipalityDropdown
@@ -53,13 +45,6 @@ export const OnboardingMunicipality = (props: Props): ReactElement => {
         placeholderText={Config.profileDefaults[state.flow].municipality.placeholder ?? ""}
         helperText={Config.profileDefaults[state.flow].municipality.errorTextRequired ?? " "}
       />
-
-      {renderHomeBasedBusinessQuestion && (
-        <div className="margin-top-3">
-          <FieldLabelOnboarding fieldName="homeBasedBusiness" />
-          <OnboardingHomeBasedBusiness />
-        </div>
-      )}
     </div>
   );
 };

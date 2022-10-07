@@ -2481,6 +2481,21 @@ collections:
               - { label: Show Task Button Text, name: showTaskText, widget: text }
               - { label: Hide Task Button Text, name: hideTaskText, widget: text }
               - { label: Number of Hidden Tasks Text, name: hiddenTasksText, widget: text }
+              - {
+                  label: Deferred Onboarding - Save Button Text,
+                  name: deferredOnboardingSaveButtonText,
+                  widget: text,
+                }
+              - {
+                  label: Deferred Onboarding - Snackbar Header,
+                  name: deferredOnboardingSnackbarHeader,
+                  widget: text,
+                }
+              - {
+                  label: Deferred Onboarding - Snackbar Body,
+                  name: deferredOnboardingSnackbarBody,
+                  widget: markdown,
+                }
           - label: Tax Calendar Defaults
             name: taxCalendar
             collapsed: true

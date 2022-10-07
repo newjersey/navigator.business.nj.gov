@@ -46,7 +46,7 @@ export const Header = () => {
   };
 
   return (
-    <div className="bg-white margin-bottom-4 tablet:margin-bottom-7">
+    <div className="bg-white margin-bottom-4">
       <h1 className="h2-styling break-word">{getHeader()}</h1>
       <Button
         style="tertiary"

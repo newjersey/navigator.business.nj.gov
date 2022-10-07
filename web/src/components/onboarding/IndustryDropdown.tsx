@@ -43,18 +43,11 @@ export const IndustryDropdown = (props: Props): ReactElement => {
   ).filter((x) => x.isEnabled || process.env.SHOW_DISABLED_INDUSTRIES == "true");
 
   const onIndustryIdChange = (industryId: string | undefined) => {
-    let homeBasedBusiness = true;
+    let homeBasedBusiness: boolean | undefined = undefined;
     let cannabisLicenseType = undefined;
 
     if (!isHomeBasedBusinessApplicable(industryId)) {
       homeBasedBusiness = false;
-    } else {
-      const wasHomeBasedBusinessPreviouslyApplicable = isHomeBasedBusinessApplicable(
-        state.profileData.industryId
-      );
-      if (wasHomeBasedBusinessPreviouslyApplicable) {
-        homeBasedBusiness = state.profileData.homeBasedBusiness;
-      }
     }
 
     if (isCannabisLicenseApplicable(industryId)) {

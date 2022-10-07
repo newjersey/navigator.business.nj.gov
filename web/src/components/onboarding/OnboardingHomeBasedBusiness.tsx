@@ -20,7 +20,7 @@ export const OnboardingHomeBasedBusiness = (): ReactElement => {
         <RadioGroup
           aria-label="Home-based Business"
           name="home-based-business"
-          value={state.profileData.homeBasedBusiness}
+          value={state.profileData.homeBasedBusiness ?? ""}
           onChange={handleSelection}
           row
         >

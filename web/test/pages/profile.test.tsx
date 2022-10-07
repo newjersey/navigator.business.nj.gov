@@ -14,7 +14,9 @@ import {
   generateTaxFilingData,
   generateUser,
   generateUserData,
+  randomHomeBasedIndustry,
   randomIndustry,
+  randomNonHomeBasedIndustry,
 } from "@/test/factories";
 import { markdownToText, withAuthAlert, withRoadmap } from "@/test/helpers";
 import * as mockRouter from "@/test/mock/mockRouter";
@@ -763,6 +765,7 @@ describe("profile", () => {
           existingEmployees: "123",
           taxPin: "6666",
           sectorId: "clean-energy",
+          industryId: "generic",
         }),
       });
 
@@ -1069,26 +1072,6 @@ describe("profile", () => {
           screen.queryByText(Config.profileDefaults.FOREIGN.nexusDbaName.header)
         ).not.toBeInTheDocument();
       });
-
-      it("shows the location question if the user plans to lease a space in NJ and not home-based business question", () => {
-        renderPage({
-          userData: nexusForeignBusinessProfile({
-            nexusLocationInNewJersey: true,
-          }),
-        });
-        expect(screen.getByText("Location")).toBeInTheDocument();
-        expect(screen.queryByText("Home-based business")).not.toBeInTheDocument();
-      });
-
-      it("shows the home-based question if the user does not plan to lease a space in NJ and not location question", () => {
-        renderPage({
-          userData: nexusForeignBusinessProfile({
-            nexusLocationInNewJersey: false,
-          }),
-        });
-        expect(screen.getByText("Home-based business")).toBeInTheDocument();
-        expect(screen.queryByText("Location")).not.toBeInTheDocument();
-      });
     });
   });
 
@@ -1118,6 +1101,71 @@ describe("profile", () => {
 
     renderPage({ userData });
     expect((screen.queryByTestId("legal-structure") as HTMLInputElement)?.disabled).toEqual(true);
+  });
+
+  it("shows the home-based question if applicable to industry", () => {
+    renderPage({
+      userData: generateUserData({
+        profileData: generateProfileData({
+          businessPersona: "STARTING",
+          industryId: randomHomeBasedIndustry(),
+        }),
+      }),
+    });
+    expect(screen.getByText("Home-based business")).toBeInTheDocument();
+  });
+
+  it("shows the home-based question when user changes to applicable industry, even before saving", () => {
+    renderPage({
+      userData: generateUserData({
+        profileData: generateProfileData({
+          industryId: randomNonHomeBasedIndustry(),
+          businessPersona: "STARTING",
+        }),
+      }),
+    });
+    expect(screen.queryByText("Home-based business")).not.toBeInTheDocument();
+
+    selectByValue("Industry", randomHomeBasedIndustry());
+    expect(screen.getByText("Home-based business")).toBeInTheDocument();
+  });
+
+  it("shows the home-based question when industry is undefined", () => {
+    renderPage({
+      userData: generateUserData({
+        profileData: generateProfileData({
+          industryId: undefined,
+          businessPersona: "STARTING",
+        }),
+      }),
+    });
+    expect(screen.getByText("Home-based business")).toBeInTheDocument();
+  });
+
+  it("does not show the home-based question if not applicable to industry", () => {
+    renderPage({
+      userData: generateUserData({
+        profileData: generateProfileData({
+          industryId: randomNonHomeBasedIndustry(),
+          businessPersona: "STARTING",
+        }),
+      }),
+    });
+    expect(screen.queryByText("Home-based business")).not.toBeInTheDocument();
+  });
+
+  it("does not show the home-based question if FOREIGN locationInNewJersey=true, even if industry applicable", () => {
+    renderPage({
+      userData: generateUserData({
+        profileData: generateProfileData({
+          businessPersona: "FOREIGN",
+          foreignBusinessType: "NEXUS",
+          nexusLocationInNewJersey: true,
+          industryId: randomHomeBasedIndustry(),
+        }),
+      }),
+    });
+    expect(screen.queryByText("Home-based business")).not.toBeInTheDocument();
   });
 
   describe("Document Section", () => {

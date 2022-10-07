@@ -1,10 +1,13 @@
 import { HideableTasks } from "@/components/dashboard/HideableTasks";
 import { Roadmap } from "@/components/dashboard/Roadmap";
 import { SidebarCardsList } from "@/components/dashboard/SidebarCardsList";
+import { DeferredOnboardingQuestion } from "@/components/DeferredOnboardingQuestion";
 import { FilingsCalendar } from "@/components/FilingsCalendar";
 import { Header } from "@/components/Header";
 import { LoadingIndicator } from "@/components/LoadingIndicator";
 import { NavBar } from "@/components/navbar/NavBar";
+import { FieldLabelDeferred } from "@/components/onboarding/FieldLabelDeferred";
+import { OnboardingHomeBasedBusiness } from "@/components/onboarding/OnboardingHomeBasedBusiness";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { RightSidebarPageLayout } from "@/components/RightSidebarPageLayout";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
@@ -13,6 +16,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useQueryControlledAlert } from "@/lib/data-hooks/useQueryControlledAlert";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { loadAllCertifications } from "@/lib/static/loadCertifications";
 import { loadRoadmapDisplayContent } from "@/lib/static/loadDisplayContent";
@@ -62,7 +66,7 @@ const DashboardPage = (props: Props): ReactElement => {
     headerText: Config.dashboardDefaults.certificationsSnackbarHeading,
     bodyText: Config.dashboardDefaults.certificationsSnackbarBody,
     variant: "success",
-    dataTestId: "toast-alert-certification",
+    dataTestId: "certification-alert",
   });
 
   const FundingAlert = useQueryControlledAlert({
@@ -84,6 +88,15 @@ const DashboardPage = (props: Props): ReactElement => {
     delayInMilliseconds: 6000,
   });
 
+  const DeferredQuestionAnsweredAlert = useQueryControlledAlert({
+    queryKey: "deferredQuestionAnswered",
+    pagePath: ROUTES.dashboard,
+    headerText: Config.dashboardDefaults.deferredOnboardingSnackbarHeader,
+    bodyText: Config.dashboardDefaults.deferredOnboardingSnackbarBody,
+    variant: "success",
+    dataTestId: "deferredQuestionAnswered-alert",
+  });
+
   useMountEffectWhenDefined(() => {
     (async () => {
       if (userData?.formProgress !== "COMPLETED") {
@@ -91,6 +104,14 @@ const DashboardPage = (props: Props): ReactElement => {
       }
     })();
   }, userData);
+
+  const displayHomedBaseBusinessQuestion = (): boolean => {
+    if (!userData) return false;
+    return (
+      isHomeBasedBusinessApplicable(userData.profileData.industryId) &&
+      userData.profileData.homeBasedBusiness === undefined
+    );
+  };
 
   const renderRoadmap = (
     <div className="margin-top-0 desktop:margin-top-0">
@@ -101,6 +122,14 @@ const DashboardPage = (props: Props): ReactElement => {
           <LoadingIndicator />
         ) : (
           <>
+            <div className="margin-bottom-4">
+              {displayHomedBaseBusinessQuestion() && (
+                <DeferredOnboardingQuestion>
+                  <FieldLabelDeferred fieldName="homeBasedBusiness" />
+                  <OnboardingHomeBasedBusiness />
+                </DeferredOnboardingQuestion>
+              )}
+            </div>
             {LookupOperatingPhaseById(userData?.profileData.operatingPhase).displayRoadmapTasks && (
               <>
                 <hr />
@@ -142,6 +171,7 @@ const DashboardPage = (props: Props): ReactElement => {
         <>{CertificationsAlert}</>
         <>{FundingAlert}</>
         <>{HiddenTasksAlert}</>
+        <>{DeferredQuestionAnsweredAlert}</>
       </main>
     </PageSkeleton>
   );

@@ -1,4 +1,5 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
+/* eslint-disable testing-library/await-async-utils */
 
 import { LookupIndustryById } from "@businessnjgovnavigator/shared/";
 import { onDashboardPage } from "cypress/support/page_objects/dashboardPage";
@@ -16,7 +17,6 @@ describe("Guest Dashboard [feature] [all] [group2]", () => {
     cy.get('[data-testid="hero-login-button"]').click();
     completeNewBusinessOnboarding({
       industry,
-      homeBasedQuestion: false,
       townDisplayName,
       legalStructureId,
     });
@@ -31,6 +31,14 @@ describe("Guest Dashboard [feature] [all] [group2]", () => {
     cy.get('[data-testid="self-reg-snackbar"]').should("be.visible");
     cy.get('[aria-label="close"]').click({ force: true });
     cy.get('[data-testid="self-reg-snackbar"]').should("not.exist");
+
+    // answer deferred question to get local-requirements task
+    onDashboardPage.getHomeBased().should("exist");
+    onDashboardPage.selectHomeBased(false);
+    onDashboardPage.clickDeferredSaveButton();
+    onDashboardPage.getHomeBased().should("not.exist");
+    cy.get('[data-task="identify-potential-lease"]').should("exist");
+    cy.wait(1000);
 
     // step 1
     cy.get(`[id="plan-content"]`).should("be.visible");
