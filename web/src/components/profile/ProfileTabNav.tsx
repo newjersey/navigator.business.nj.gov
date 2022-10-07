@@ -5,7 +5,6 @@ import { ProfileTabs } from "@/lib/types/types";
 import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
 import { BusinessPersona, ForeignBusinessType } from "@businessnjgovnavigator/shared/profileData";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
-import { Box } from "@mui/material";
 import { ReactElement } from "react";
 
 interface Props {
@@ -18,7 +17,6 @@ interface Props {
 
 export const ProfileTabNav = (props: Props): ReactElement => {
   const { Config } = useConfig();
-  const border = "2px #e6e6e6";
 
   const shouldShowInfo = () => {
     return props.businessPersona !== "FOREIGN" || props.foreignBusinessType === "NEXUS";
@@ -41,15 +39,15 @@ export const ProfileTabNav = (props: Props): ReactElement => {
   };
 
   return (
-    <Box sx={{ fontSize: 18, fontWeight: 500 }}>
-      <Box className="bg-base-lightest padding-y-2 padding-x-3" sx={{ border, borderStyle: "solid" }}>
+    <div className="width-100 font-body-md">
+      <div className="bg-base-lightest padding-y-2 padding-x-3 border-2px border-base-lighter">
         <Content>{Config.profileDefaults.pageTitle}</Content>
-      </Box>
+      </div>
 
       {shouldShowInfo() && <ProfileTab {...props} tab="info" />}
       {shouldShowNumbers() && <ProfileTab {...props} tab="numbers" />}
       {shouldShowDocuments() && <ProfileTab {...props} tab="documents" />}
       {shouldShowNotes() && <ProfileTab {...props} tab="notes" />}
-    </Box>
+    </div>
   );
 };
