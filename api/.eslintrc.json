@@ -77,7 +77,8 @@
         "unicorn/prevent-abbreviations": "off",
         "unicorn/numeric-separators-style": "off",
         "unicorn/prefer-module": "off",
-        "unicorn/no-array-reduce": "off"
+        "unicorn/no-array-reduce": "off",
+        "unicorn/switch-case-braces": "off"
       }
     }
   ]
