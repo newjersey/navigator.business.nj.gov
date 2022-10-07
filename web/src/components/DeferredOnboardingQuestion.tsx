@@ -52,11 +52,11 @@ export const DeferredOnboardingQuestion = (props: Props) => {
         onBack: () => {},
       }}
     >
-      <div className="radius-md border-primary-light border-1px padding-3 display-flex flex-row flex-align-center">
+      <div className="radius-md border-primary-light border-1px padding-3 display-flex mobile-lg:flex-row flex-column mobile-lg:flex-align-center">
         <div>{props.children}</div>
         <Button
           style="secondary"
-          className="margin-left-auto"
+          className="margin-left-auto mobile-lg:margin-top-0 margin-top-2"
           onClick={onSave}
           dataTestid="deferred-question-save"
         >

@@ -98,6 +98,12 @@
   }
 }
 
+.mobile-lg\:flex-align-center {
+  @media (min-width: 30em) {
+    align-items: center !important;
+  }
+}
+
 @media only screen and (min-width: $sm) {
   .flex-direction {
     flex-direction: column !important;
