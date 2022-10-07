@@ -23,6 +23,12 @@ import {
   updateSectorNames,
 } from "./sectorSync.mjs";
 
+const adjustDateByDay = (dayValue) => {
+  const d = new Date();
+  d.setDate(d.getDate() + dayValue);
+  return d.toLocaleDateString("en-US");
+};
+
 //todo create generator functions for this test data
 const fundingMd = [
   {
@@ -65,7 +71,7 @@ const fundingMd = [
       "other-services",
     ],
     openDate: "",
-    dueDate: "",
+    dueDate: adjustDateByDay(5),
     programPurpose: "",
     agencyContact: "",
   },
@@ -554,6 +560,30 @@ describe("webflow syncing", () => {
 
     it("gets fundings to delete", async () => {
       loadAllFundings.mockReturnValue(fundingMd.filter((i) => i.id != "nj-accelerate"));
+      const unUsedFundings = await getUnUsedFundings();
+      expect(unUsedFundings).toMatchObject([{ slug: "nj-accelerate" }]);
+    });
+
+    it("filters fundings that are past the due date", async () => {
+      loadAllFundings.mockReturnValue([
+        ...fundingMd.filter((i) => i.id != "nj-accelerate"),
+        {
+          ...fundingMd.find((i) => i.id === "nj-accelerate"),
+          dueDate: adjustDateByDay(-5),
+        },
+      ]);
+      const unUsedFundings = await getUnUsedFundings();
+      expect(unUsedFundings).toMatchObject([{ slug: "nj-accelerate" }]);
+    });
+
+    it("filters fundings that which publishStageArchive is set to 'Do Not Publish'", async () => {
+      loadAllFundings.mockReturnValue([
+        ...fundingMd.filter((i) => i.id != "nj-accelerate"),
+        {
+          ...fundingMd.find((i) => i.id === "nj-accelerate"),
+          publishStageArchive: "Do Not Publish",
+        },
+      ]);
       const unUsedFundings = await getUnUsedFundings();
       expect(unUsedFundings).toMatchObject([{ slug: "nj-accelerate" }]);
     });

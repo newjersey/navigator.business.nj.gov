@@ -133,7 +133,19 @@ const contentMdToObject = (content) => {
   };
 };
 
-const fundingIdArray = () => new Set(loadAllFundings().map((i) => i.id));
+const validDate = (dueDate) => {
+  if (!dueDate) return true;
+  const due = new Date(dueDate);
+  due.setHours(0, 0, 0, 0);
+  const current = new Date();
+  current.setHours(0, 0, 0, 0);
+  return due > current;
+};
+
+const getFilteredFundings = () =>
+  loadAllFundings().filter(
+    (funding) => validDate(funding.dueDate) && funding.publishStageArchive != "Do Not Publish"
+  );
 
 const getFundingFromMd = (i, sectors) => {
   const industryReferenceArray = i.sector.map((i) => sectors.find((v) => v.slug == i)?._id);
@@ -161,7 +173,7 @@ const getFundingFromMd = (i, sectors) => {
 };
 
 const getOverlappingFundingsFunc = (currentFundings) =>
-  currentFundings.filter((item) => fundingIdArray().has(item.slug));
+  currentFundings.filter((item) => new Set(getFilteredFundings().map((i) => i.id)).has(item.slug));
 
 const getOverlappingFundings = async () => getOverlappingFundingsFunc(await getCurrentFundings());
 
@@ -169,7 +181,7 @@ const getNewFundings = async () => {
   const current = await getCurrentFundings();
   const sectors = await getCurrentSectors();
   const currentIdArray = new Set(current.map((sec) => sec.slug));
-  return loadAllFundings()
+  return getFilteredFundings()
     .filter((i) => !currentIdArray.has(i.id))
     .map((i) => getFundingFromMd(i, sectors));
 };
@@ -183,7 +195,7 @@ const getUnUsedFundings = async () => {
 const deleteFundings = async () => {
   const fundings = await getUnUsedFundings();
   const deleteFunding = async (funding) => {
-    console.info(`Attempting to create ${funding.slug}`);
+    console.info(`Attempting to delete ${funding.slug}`);
     try {
       return await deleteItem(funding, fundingCollectionId);
     } catch (error) {
@@ -196,7 +208,7 @@ const deleteFundings = async () => {
 
 const updateFundings = async () => {
   const sectors = await getCurrentSectors();
-  const fundings = loadAllFundings();
+  const fundings = getFilteredFundings();
   const overlappingFundings = await getOverlappingFundings();
 
   const modify = async (item) => {
