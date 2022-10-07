@@ -6,7 +6,7 @@ import { UserDataErrorContext } from "@/contexts/userDataErrorContext";
 import { AuthAction, AuthState, IsAuthenticated } from "@/lib/auth/AuthContext";
 import { UseUserDataResponse } from "@/lib/data-hooks/useUserData";
 import { Roadmap, SectionCompletion, UserDataError } from "@/lib/types/types";
-import { generateUserData } from "@/test/factories";
+import { generateProfileData, generateUserData } from "@/test/factories";
 import { BusinessUser, RegistrationStatus } from "@businessnjgovnavigator/shared/";
 import { MatcherFunction } from "@testing-library/react";
 import { Dispatch, ReactElement, SetStateAction } from "react";
@@ -151,3 +151,12 @@ export const markdownToText = (text: string): string => {
   }
   return returnText;
 };
+
+export const getProfileDataForUnfilteredOpportunities = generateProfileData({
+  operatingPhase: "UP_AND_RUNNING",
+  homeBasedBusiness: false,
+  municipality: undefined,
+  existingEmployees: "1",
+  sectorId: undefined,
+  ownershipTypeIds: ["veteran-owned", "disabled-veteran", "minority-owned", "woman-owned"],
+});

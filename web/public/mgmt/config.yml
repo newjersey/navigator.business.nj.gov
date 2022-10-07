@@ -2496,6 +2496,8 @@ collections:
                   name: deferredOnboardingSnackbarBody,
                   widget: markdown,
                 }
+              - { label: Mobile View - First Tab Text, name: mobileFirstTabText, widget: text }
+              - { label: Mobile View - Second Tab Text, name: mobileSecondTabText, widget: text }
           - label: Tax Calendar Defaults
             name: taxCalendar
             collapsed: true
