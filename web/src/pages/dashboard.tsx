@@ -1,6 +1,7 @@
 import { HideableTasks } from "@/components/dashboard/HideableTasks";
 import { Roadmap } from "@/components/dashboard/Roadmap";
 import { SidebarCardsList } from "@/components/dashboard/SidebarCardsList";
+import TwoTabDashboardLayout from "@/components/dashboard/TwoTabDashboardLayout";
 import { DeferredOnboardingQuestion } from "@/components/DeferredOnboardingQuestion";
 import { FilingsCalendar } from "@/components/FilingsCalendar";
 import { Header } from "@/components/Header";
@@ -18,6 +19,7 @@ import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
 import { ROUTES } from "@/lib/domain-logic/routes";
+import { MediaQueries } from "@/lib/PageSizes";
 import { loadAllCertifications } from "@/lib/static/loadCertifications";
 import { loadRoadmapDisplayContent } from "@/lib/static/loadDisplayContent";
 import { loadAllFundings } from "@/lib/static/loadFundings";
@@ -25,6 +27,7 @@ import { loadOperateReferences } from "@/lib/static/loadOperateReferences";
 import { Certification, Funding, OperateReference, RoadmapDisplayContent } from "@/lib/types/types";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { LookupOperatingPhaseById } from "@businessnjgovnavigator/shared";
+import { useMediaQuery } from "@mui/material";
 import { GetStaticPropsResult } from "next";
 import { useRouter } from "next/router";
 import { ReactElement } from "react";
@@ -42,6 +45,7 @@ const DashboardPage = (props: Props): ReactElement => {
   const router = useRouter();
   const { roadmap } = useRoadmap();
   const { Config } = useConfig();
+  const isDesktopAndUp = useMediaQuery(MediaQueries.desktopAndUp);
 
   const ProfileUpdatedAlert = useQueryControlledAlert({
     queryKey: "success",
@@ -154,7 +158,7 @@ const DashboardPage = (props: Props): ReactElement => {
           <div className="margin-top-3 desktop:margin-top-0 padding-top-0 desktop:padding-top-6 padding-bottom-15">
             <LoadingIndicator />
           </div>
-        ) : (
+        ) : isDesktopAndUp ? (
           <RightSidebarPageLayout
             mainContent={renderRoadmap}
             sidebarContent={
@@ -164,6 +168,19 @@ const DashboardPage = (props: Props): ReactElement => {
                 fundings={props.fundings}
               />
             }
+          />
+        ) : (
+          <TwoTabDashboardLayout
+            firstTab={renderRoadmap}
+            secondTab={
+              <SidebarCardsList
+                sidebarDisplayContent={props.displayContent.sidebarDisplayContent}
+                certifications={props.certifications}
+                fundings={props.fundings}
+              />
+            }
+            certifications={props.certifications}
+            fundings={props.fundings}
           />
         )}
         <>{ProfileUpdatedAlert}</>

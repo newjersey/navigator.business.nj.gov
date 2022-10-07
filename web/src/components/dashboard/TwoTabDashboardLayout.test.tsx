@@ -1,0 +1,160 @@
+import { getMergedConfig } from "@/contexts/configContext";
+import { Certification, Funding } from "@/lib/types/types";
+import { templateEval } from "@/lib/utils/helpers";
+import { generateCertification, generateFunding, generatePreferences } from "@/test/factories";
+import { getProfileDataForUnfilteredOpportunities, randomElementFromArray } from "@/test/helpers";
+import { useMockUserData } from "@/test/mock/mockUseUserData";
+import { OperatingPhases } from "@businessnjgovnavigator/shared/operatingPhase";
+import { fireEvent, render, screen } from "@testing-library/react";
+import TwoTabDashboardLayout from "./TwoTabDashboardLayout";
+
+jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
+
+const Config = getMergedConfig();
+
+describe("<TwoTabDashboardLayout />", () => {
+  beforeEach(() => {
+    useMockUserData({});
+  });
+
+  const renderPage = ({
+    certificationsArray,
+    fundingsArray,
+  }: {
+    certificationsArray?: Certification[];
+    fundingsArray?: Funding[];
+  }) => {
+    render(
+      <TwoTabDashboardLayout
+        firstTab={<div>First Tab Content</div>}
+        secondTab={<div>Second Tab Content</div>}
+        certifications={certificationsArray ?? certs}
+        fundings={fundingsArray ?? fundings}
+      />
+    );
+  };
+
+  it("only renders the content in the first tab", () => {
+    renderPage({});
+
+    expect(screen.getByText("First Tab Content")).toBeInTheDocument();
+    expect(screen.queryByText("Second Tab Content")).not.toBeInTheDocument();
+  });
+
+  it("renders the content in the second tab when second tab button is clicked", () => {
+    renderPage({});
+
+    fireEvent.click(
+      screen.getByText(
+        templateEval(Config.dashboardDefaults.mobileSecondTabText, {
+          count: "1",
+        })
+      )
+    );
+
+    expect(screen.getByText("Second Tab Content")).toBeInTheDocument();
+    expect(screen.queryByText("First Tab Content")).not.toBeInTheDocument();
+  });
+
+  describe("displays the correct count of cards within second tab", () => {
+    it("only counts the nudge cards", () => {
+      const operatingPhases = OperatingPhases.filter((phase) => {
+        return phase.displayFundings !== true && phase.displayCertifications !== true;
+      });
+
+      useMockUserData({
+        preferences: generatePreferences({ visibleSidebarCards: ["welcome", "not-registered"] }),
+        profileData: {
+          ...getProfileDataForUnfilteredOpportunities,
+          operatingPhase: randomElementFromArray(operatingPhases).id,
+        },
+      });
+
+      renderPage({});
+
+      expect(
+        screen.getByText(
+          templateEval(Config.dashboardDefaults.mobileSecondTabText, {
+            count: "2",
+          })
+        )
+      ).toBeInTheDocument();
+    });
+
+    it("only counts the nudge and certification cards", () => {
+      const operatingPhases = OperatingPhases.filter((phase) => {
+        return phase.displayFundings !== true && phase.displayCertifications === true;
+      });
+
+      useMockUserData({
+        preferences: generatePreferences({ visibleSidebarCards: ["welcome", "not-registered"] }),
+        profileData: {
+          ...getProfileDataForUnfilteredOpportunities,
+          operatingPhase: randomElementFromArray(operatingPhases).id,
+          ownershipTypeIds: ["disabled-veteran", "minority-owned"],
+        },
+      });
+
+      renderPage({});
+
+      expect(
+        screen.getByText(
+          templateEval(Config.dashboardDefaults.mobileSecondTabText, {
+            count: "5",
+          })
+        )
+      ).toBeInTheDocument();
+    });
+
+    it("counts the nudge, certification, and funding cards", () => {
+      const operatingPhases = OperatingPhases.filter((phase) => {
+        return phase.displayFundings === true && phase.displayCertifications === true;
+      });
+
+      useMockUserData({
+        preferences: generatePreferences({ visibleSidebarCards: ["welcome", "not-registered"] }),
+        profileData: {
+          ...getProfileDataForUnfilteredOpportunities,
+
+          operatingPhase: randomElementFromArray(operatingPhases).id,
+          ownershipTypeIds: ["disabled-veteran", "minority-owned"],
+        },
+      });
+
+      renderPage({});
+
+      expect(
+        screen.getByText(
+          templateEval(Config.dashboardDefaults.mobileSecondTabText, {
+            count: "7",
+          })
+        )
+      ).toBeInTheDocument();
+    });
+  });
+});
+
+const certs = [
+  generateCertification({
+    name: "Cert 1",
+    applicableOwnershipTypes: ["veteran-owned"],
+  }),
+  generateCertification({
+    name: "Cert 2",
+    applicableOwnershipTypes: ["disabled-veteran"],
+  }),
+  generateCertification({
+    name: "Cert 3",
+    applicableOwnershipTypes: ["minority-owned"],
+  }),
+  generateCertification({
+    name: "Cert 4",
+    applicableOwnershipTypes: ["woman-owned"],
+  }),
+  generateCertification({ name: "Cert 5", applicableOwnershipTypes: [] }),
+];
+
+const fundings = [
+  generateFunding({ name: "Funding 4", sector: [], status: "deadline" }),
+  generateFunding({ name: "Funding 5", sector: [], status: "first come, first serve" }),
+];
