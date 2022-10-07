@@ -22,7 +22,7 @@ collections:
       - { name: "" }
 
   - name: "business-formation-c-corp"
-    label: ". . . 🔴 Corporation"
+    label: "Biz Form - Corporation"
     folder: "content/src/display-content/business-formation/c-corporation"
     summary: "{{filename}}"
     identifier_field: "{{fields.slug}}"
@@ -52,7 +52,7 @@ collections:
       - { label: "Bolded Heading", name: "headingBolded", widget: "string", required: false }
       - { label: "Sub Heading", name: "headingNotBolded", widget: "string", required: false }
   - name: "business-formation-llc"
-    label: ". . . 🔴 LLC"
+    label: "Biz Form - LLC"
     folder: "content/src/display-content/business-formation/limited-liability-company"
     summary: "{{filename}}"
     identifier_field: "{{fields.slug}}"
@@ -82,7 +82,7 @@ collections:
       - { label: "Bolded Heading", name: "headingBolded", widget: "string", required: false }
       - { label: "Sub Heading", name: "headingNotBolded", widget: "string", required: false }
   - name: "business-formation-llp"
-    label: ". . . 🔴 LLP"
+    label: "Biz Form - LLP"
     folder: "content/src/display-content/business-formation/limited-liability-partnership"
     summary: "{{filename}}"
     identifier_field: "{{fields.slug}}"
@@ -112,7 +112,7 @@ collections:
       - { label: "Bolded Heading", name: "headingBolded", widget: "string", required: false }
       - { label: "Sub Heading", name: "headingNotBolded", widget: "string", required: false }
   - name: "business-formation-s-corp"
-    label: ". . . 🔴 S Corp"
+    label: "Biz Form - S Corp"
     folder: "content/src/display-content/business-formation/s-corporation"
     summary: "{{filename}}"
     identifier_field: "{{fields.slug}}"
@@ -142,7 +142,7 @@ collections:
       - { label: "Bolded Heading", name: "headingBolded", widget: "string", required: false }
       - { label: "Sub Heading", name: "headingNotBolded", widget: "string", required: false }
   - name: "business-formation-config"
-    label: ". . . 🔴 Config"
+    label: "Biz Form - Config"
     delete: false
     create: false
     files:
@@ -199,7 +199,7 @@ collections:
       - { name: "" }
 
   - name: "certification-opportunities"
-    label: ". . . 🟠 Content"
+    label: "Cert Opps - Content"
     folder: "content/src/certifications"
     summary: "/{{urlSlug}} - {{name}}"
     identifier_field: "{{urlSlug}}"
@@ -233,7 +233,7 @@ collections:
       - { label: "For a small business", name: "isSbe", widget: boolean, default: false }
 
   - name: "archived-certification-opportunities"
-    label: ". . . 🟠 Archived"
+    label: "Cert Opps - Archived"
     folder: "content/src/archived-certifications"
     summary: "/{{urlSlug}} - {{name}}"
     identifier_field: "{{urlSlug}}"
@@ -273,7 +273,7 @@ collections:
       - { name: "" }
 
   - name: "funding-opportunities"
-    label: ". . . 🟡 Content"
+    label: "Fund Opps - Content"
     folder: "content/src/fundings"
     summary: "/{{urlSlug}} - {{name}}"
     identifier_field: "{{filename}}"
@@ -411,7 +411,7 @@ collections:
           format: "MM/DD/yyyy",
         }
   - name: "archived-funding-opportunities"
-    label: ". . . 🟡 Archived"
+    label: "Fund Opps - Archived"
     folder: "content/src/archived-fundings"
     summary: "/{{urlSlug}} - {{name}}"
     identifier_field: "{{urlSlug}}"
@@ -552,7 +552,7 @@ collections:
       - { name: "" }
 
   - name: "roadmaps"
-    label: ". . . 🟢 Industries"
+    label: "Roadmaps - Industries"
     folder: "content/src/roadmaps/industries"
     slug: "{{id}}"
     identifier_field: "{{id}}"
@@ -684,7 +684,7 @@ collections:
             value_field: "{{filename}}"
             display_fields: ["{{filename}}"]
   - name: addons
-    label: ". . . 🟢 Add-ons"
+    label: "Roadmaps - Add-ons"
     folder: "content/src/roadmaps/add-ons"
     extension: "json"
     identifier_field: "{{filename}}"
@@ -734,7 +734,7 @@ collections:
             value_field: "{{filename}}"
             display_fields: ["{{filename}}"]
   - name: "roadmap-content"
-    label: ". . . 🟢 Roadmap Content"
+    label: "Roadmaps - Display Content"
     folder: "content/src/display-content/roadmap"
     summary: "{{filename}}"
     identifier_field: "{{fields.slug}}"
@@ -747,7 +747,7 @@ collections:
       - { label: "Content", name: "body", widget: "markdown" }
       - { label: "Filename", name: "slug", widget: "slug", required: false }
   - name: "settings"
-    label: ". . . 🟢 Settings"
+    label: "Roadmaps - Settings"
     editor:
       preview: false
     files:
@@ -809,7 +809,7 @@ collections:
       - { name: "" }
 
   - name: "tasks"
-    label: ". . . 🔵 Tasks"
+    label: "Tasks - All"
     folder: "content/src/roadmaps/tasks"
     summary: "{{filename}} - {{name}}"
     identifier_field: "{{filename}}"
@@ -839,7 +839,7 @@ collections:
       - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
       - { label: "Form Name", name: "formName", widget: "string", required: false }
   - name: "cannabis-license"
-    label: ". . . 🔵 Cannabis License"
+    label: "Tasks - Cannabis License"
     delete: false
     create: false
     files:
@@ -1034,7 +1034,7 @@ collections:
                 }
               - { label: Conditional - After Requirements, name: conditionalBottomOfTask, widget: markdown }
   - name: "cannabis-priority-status"
-    label: ". . . 🔵 Cannabis Priority Status"
+    label: "Tasks - Cannabis Priority Status"
     delete: false
     create: false
     files:
@@ -1149,7 +1149,7 @@ collections:
                   widget: string,
                 }
   - name: "ein-task"
-    label: ". . . 🔵 EIN"
+    label: "Tasks - EIN"
     delete: false
     create: false
     files:
@@ -1202,7 +1202,7 @@ collections:
               - { label: Edit EIN Button Text, name: editText, widget: string }
               - { label: Remove EIN Button Text, name: removeText, widget: string }
   - name: "tax-task"
-    label: ". . . 🔵 Tax ID"
+    label: "Tasks - Tax ID"
     delete: false
     create: false
     files:
@@ -1246,7 +1246,7 @@ collections:
               - { label: Edit Tax ID Button Text, name: editText, widget: string }
               - { label: Remove Tax ID Button Text, name: removeText, widget: string }
   - name: "naics-code"
-    label: ". . . 🔵 NAICS Code"
+    label: "Tasks - NAICS Code"
     delete: false
     create: false
     files:
@@ -1332,7 +1332,7 @@ collections:
                   widget: string,
                 }
   - name: nexus
-    label: ". . . 🔵 Nexus"
+    label: "Tasks - Nexus"
     delete: false
     create: false
     files:
@@ -1443,7 +1443,7 @@ collections:
       - { name: "" }
 
   - name: "filings"
-    label: ". . . 🟣 Filings Content"
+    label: "Taxes Filings - All"
     folder: "content/src/filings"
     summary: "/{{urlSlug}} - {{name}}"
     identifier_field: "{{urlSlug}}"
