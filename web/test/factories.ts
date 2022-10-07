@@ -701,14 +701,16 @@ export const randomIndustry = (canHavePermanentLocation = false): Industry => {
 };
 
 export const randomHomeBasedIndustry = () => {
-  const homeBasedIndustries = Industries.filter((it) => it.industryOnboardingQuestions.canBeHomeBased);
+  const homeBasedIndustries = Industries.filter(
+    (it) => it.industryOnboardingQuestions.canBeHomeBased && it.isEnabled
+  );
   const randomIndex = Math.floor(Math.random() * homeBasedIndustries.length);
   return homeBasedIndustries[randomIndex].id;
 };
 
 export const randomNonHomeBasedIndustry = () => {
   const nonHomeBasedIndustries = Industries.filter(
-    (it) => !it.industryOnboardingQuestions.canBeHomeBased && it.canHavePermanentLocation
+    (it) => !it.industryOnboardingQuestions.canBeHomeBased && it.canHavePermanentLocation && it.isEnabled
   );
   const randomIndex = Math.floor(Math.random() * nonHomeBasedIndustries.length);
   return nonHomeBasedIndustries[randomIndex].id;
