@@ -326,6 +326,7 @@
   "dashboardDefaults": {
     "fundingSnackbarHeading": "Funding Programs Added!",
     "certificationsSnackbarBody": "The certification programs you may be eligible for are now listed in the “For You” section on the right side of the screen.",
+    "deferredOnboardingSnackbarBody": "You can update it anytime in your [profile](/profile).",
     "congratulatoryModalBody": "You can now start your",
     "certificationsSnackbarHeading": "Certifications Added!",
     "fundingSnackbarBody": "The funding programs you may be eligible for are now listed in the “For You” section on the right side of the screen.",
@@ -340,6 +341,7 @@
     "fundingTagText": "Funding",
     "hiddenTasksSnackbarBody": "As an up-and-running business, we have streamlined your experience.",
     "calendarHeader": "Calendar",
+    "deferredOnboardingSnackbarHeader": "Your Answer Was Saved",
     "learnMoreFundingOpportunities": "Learn about other [Funding Opportunities](https://business.nj.gov/funding)",
     "certificationTagText": "Certification",
     "congratulatoryModalHeader": "You reached a crucial milestone as a business.",
@@ -354,16 +356,14 @@
     "hideTaskText": "Hide",
     "upAndRunningTaskHeader": "My Registration Tasks",
     "sectorModalSaveButton": "Save",
+    "deferredOnboardingSaveButtonText": "Save",
     "congratulatoryModalTitle": "You did it!",
     "hiddenTasksSnackbarHeading": "Your Tasks Are Hidden!",
     "emptyCalendarTitleText": "### Looks like you do not have any filings due!",
     "emptyCalendarBodyText": "If you are an LLC, C Corp, L,P, or LLP, you need to tell us your business formation date so we can tell you when your next filing is due. You can do this by [updating your profile](#).",
     "calendarGridViewButton": "Grid View",
     "hideOpportunityText": "Hide",
-    "calendarSnackbarHeading": "Calendar Added!",
-    "deferredOnboardingSaveButtonText": "Save",
-    "deferredOnboardingSnackbarHeader": "Your Answer Was Saved",
-    "deferredOnboardingSnackbarBody": "You can update it anytime in your [profile](/profile)."
+    "calendarSnackbarHeading": "Calendar Added!"
   },
   "landingPage": {
     "section5FirstSupportingText": "Knowing exactly what your business needs to do to start can be difficult. Our step-by-step guide is unique to your industry and even includes Cannabis retailers. Find what licenses, forms, and permits you need to start your business in New Jersey. Learn the requirements of each application, find out what you get after submitting your application, and store critical business identification numbers all in one place. ",
@@ -434,7 +434,7 @@
     "ModalTaxIdHeader": " `#### New Jersey Tax ID|tax-id`",
     "ModalBusinessFieldErrorName": "Business Name",
     "ModalErrorHeader": "Review the fields below for errors or omissions",
-    "ModalTaxIdMarkdown": "Enter the 12-digit number below (xxx-xxx-xxx/xxx). \n\n (You can find your Tax ID listed as your 'Filer ID' in your email confirmation subject 'Confirmation of New Jersey Business Registration').",
+    "ModalTaxIdMarkdown": "Enter the 12-digit number below (xxx-xxx-xxx/xxx). \n\n(You can find your Tax ID listed as your 'NJ Taxpayer ID' in your email confirmation: 'Confirmation of New Jersey Business Registration.' If you registered before 10/6/22 your confirmation may say \"Filer ID\")",
     "FailedBusinessFieldHelper": "Enter your correct business name",
     "FailedErrorMessageMarkdown": "Review your Tax ID and/or business name for a match with the information in your Business Registration Certificate. If you need assistance, you can chat with one of our business advocates.",
     "SnackbarSuccessHeader": "Tax Calendar Added!",
