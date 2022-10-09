@@ -52,7 +52,7 @@
     "airtable": "0.11.5",
     "axios": "0.27.2",
     "babel-jest": "29.1.2",
-    "body-parser": "1.20.0",
+    "body-parser": "1.20.1",
     "broken-link-checker": "0.7.8",
     "cors": "2.8.5",
     "dayjs": "1.11.5",
