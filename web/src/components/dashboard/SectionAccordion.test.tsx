@@ -1,5 +1,4 @@
 import { SectionAccordion } from "@/components/dashboard/SectionAccordion";
-import { SectionType } from "@/lib/types/types";
 import {
   generatePreferences,
   generateRoadmap,
@@ -13,7 +12,7 @@ import {
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { UserData } from "@businessnjgovnavigator/shared/";
+import { SectionType, UserData } from "@businessnjgovnavigator/shared/";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));

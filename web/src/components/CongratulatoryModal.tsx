@@ -1,7 +1,7 @@
 import { Icon } from "@/components/njwds/Icon";
 import { ROUTES } from "@/lib/domain-logic/routes";
-import { SectionType } from "@/lib/types/types";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
+import { SectionType } from "@businessnjgovnavigator/shared";
 import { Dialog, DialogContent, IconButton } from "@mui/material";
 import { useRouter } from "next/router";
 import { ReactElement } from "react";

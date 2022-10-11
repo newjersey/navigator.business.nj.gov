@@ -2,9 +2,9 @@ import { Icon } from "@/components/njwds/Icon";
 import { SectionAccordionContext } from "@/contexts/sectionAccordionContext";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { SectionType } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
+import { SectionType } from "@businessnjgovnavigator/shared";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import { ReactElement, ReactNode } from "react";
 

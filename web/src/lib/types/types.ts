@@ -12,7 +12,7 @@ import {
 import { emptyBusinessUser } from "@businessnjgovnavigator/shared/businessUser";
 import { emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { TaxFilingData } from "@businessnjgovnavigator/shared/taxFiling";
-import { TaskProgress } from "@businessnjgovnavigator/shared/userData";
+import { SectionType, TaskProgress } from "@businessnjgovnavigator/shared/userData";
 import { merge } from "lodash";
 
 // returns all keys in an object of a type
@@ -305,9 +305,6 @@ export interface RoadmapStatus {
 }
 
 export type SectionCompletion = Record<SectionType, boolean>;
-
-export const sectionNames = ["PLAN", "START"] as const;
-export type SectionType = typeof sectionNames[number];
 
 export interface Step {
   stepNumber: number;

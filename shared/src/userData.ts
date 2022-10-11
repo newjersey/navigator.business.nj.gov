@@ -65,4 +65,5 @@ export interface Preferences {
 
 export type FormProgress = "UNSTARTED" | "COMPLETED";
 
-export type SectionType = "PLAN" | "START";
+export const sectionNames = ["PLAN", "START"] as const;
+export type SectionType = typeof sectionNames[number];
