@@ -4,15 +4,7 @@
   "defaultSectorId": "professional-scientific-and-technical-services",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
-    "canBeReseller": true,
-    "isProvidesStaffingServicesApplicable": false,
-    "isCertifiedInteriorDesignerApplicable": false,
-    "isRealEstateAppraisalManagementApplicable": false,
-    "isCpaRequiredApplicable": false,
-    "isLiquorLicenseApplicable": false,
-    "isTransportation": false,
-    "isCarServiceApplicable": false,
-    "isInterstateTransportApplicable": false
+    "canBeReseller": true
   },
   "isEnabled": true,
   "roadmapSteps": [

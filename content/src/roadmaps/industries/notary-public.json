@@ -2,16 +2,7 @@
   "naicsCodes": "541120",
   "defaultSectorId": "other-services",
   "industryOnboardingQuestions": {
-    "canBeHomeBased": true,
-    "canBeReseller": false,
-    "isCpaRequiredApplicable": false,
-    "isProvidesStaffingServicesApplicable": false,
-    "isCertifiedInteriorDesignerApplicable": false,
-    "isRealEstateAppraisalManagementApplicable": false,
-    "isLiquorLicenseApplicable": false,
-    "isTransportation": false,
-    "isCarServiceApplicable": false,
-    "isInterstateTransportApplicable": false
+    "canBeHomeBased": true
   },
   "canHavePermanentLocation": true,
   "roadmapSteps": [

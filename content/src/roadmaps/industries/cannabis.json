@@ -2,18 +2,7 @@
   "naicsCodes": "459991",
   "defaultSectorId": "cannabis",
   "canHavePermanentLocation": true,
-  "industryOnboardingQuestions": {
-    "canBeHomeBased": false,
-    "canBeReseller": false,
-    "isProvidesStaffingServicesApplicable": false,
-    "isCertifiedInteriorDesignerApplicable": false,
-    "isRealEstateAppraisalManagementApplicable": false,
-    "isCpaRequiredApplicable": false,
-    "isLiquorLicenseApplicable": false,
-    "isTransportation": false,
-    "isCarServiceApplicable": false,
-    "isInterstateTransportApplicable": false
-  },
+  "industryOnboardingQuestions": {},
   "roadmapSteps": [
     {
       "step": 1,

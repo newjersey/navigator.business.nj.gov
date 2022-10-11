@@ -41,16 +41,7 @@
   ],
   "name": "Childcare Center (Family)",
   "industryOnboardingQuestions": {
-    "canBeHomeBased": false,
-    "isProvidesStaffingServicesApplicable": false,
-    "isCertifiedInteriorDesignerApplicable": false,
-    "isRealEstateAppraisalManagementApplicable": false,
-    "canBeReseller": true,
-    "isLiquorLicenseApplicable": false,
-    "isCpaRequiredApplicable": false,
-    "isTransportation": false,
-    "isCarServiceApplicable": false,
-    "isInterstateTransportApplicable": false
+    "canBeReseller": true
   },
   "isEnabled": true,
   "additionalSearchTerms": "home daycare, family, after school program",

@@ -2,16 +2,7 @@
   "naicsCodes": "445132, 454210",
   "defaultSectorId": "accommodation-and-food-services",
   "industryOnboardingQuestions": {
-    "canBeHomeBased": false,
-    "canBeReseller": true,
-    "isCpaRequiredApplicable": false,
-    "isProvidesStaffingServicesApplicable": false,
-    "isCertifiedInteriorDesignerApplicable": false,
-    "isLiquorLicenseApplicable": false,
-    "isRealEstateAppraisalManagementApplicable": false,
-    "isTransportation": false,
-    "isCarServiceApplicable": false,
-    "isInterstateTransportApplicable": false
+    "canBeReseller": true
   },
   "canHavePermanentLocation": false,
   "roadmapSteps": [

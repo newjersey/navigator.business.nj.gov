@@ -485,9 +485,10 @@ describe("dashboard page", () => {
       );
       expect(currentUserData().profileData.homeBasedBusiness).toEqual(true);
     });
+
+    const chooseHomeBasedValue = (value: "true" | "false") => {
+      fireEvent.click(screen.getByTestId(`home-based-business-radio-${value}`));
+    };
   });
 
-  const chooseHomeBasedValue = (value: "true" | "false") => {
-    fireEvent.click(screen.getByTestId(`home-based-business-${value}`));
-  };
 });

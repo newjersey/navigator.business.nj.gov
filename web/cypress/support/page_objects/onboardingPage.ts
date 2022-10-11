@@ -15,19 +15,25 @@ export class OnboardingPage {
   }
 
   getCpa(radio?: boolean) {
-    return cy.get(`input[name="cpa"]${radio === undefined ? "" : `[value="${radio}"]`}`);
+    return cy.get(`input[name="requires-cpa"]${radio === undefined ? "" : `[value="${radio}"]`}`);
   }
 
   getStaffingService(radio?: boolean) {
-    return cy.get(`input[name="staffing-service"]${radio === undefined ? "" : `[value="${radio}"]`}`);
+    return cy.get(
+      `input[name="provides-staffing-service"]${radio === undefined ? "" : `[value="${radio}"]`}`
+    );
   }
 
   getInteriorDesigner(radio?: boolean) {
-    return cy.get(`input[name="interior-designer"]${radio === undefined ? "" : `[value="${radio}"]`}`);
+    return cy.get(
+      `input[name="certified-interior-designer"]${radio === undefined ? "" : `[value="${radio}"]`}`
+    );
   }
 
   getRealEstateAppraisal(radio?: boolean) {
-    return cy.get(`input[name="real-estate-appraisal"]${radio === undefined ? "" : `[value="${radio}"]`}`);
+    return cy.get(
+      `input[name="real-estate-appraisal-management"]${radio === undefined ? "" : `[value="${radio}"]`}`
+    );
   }
 
   getMovingCompany(radio?: boolean) {

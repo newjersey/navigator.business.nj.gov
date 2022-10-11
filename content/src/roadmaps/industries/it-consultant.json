@@ -4,14 +4,7 @@
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
     "canBeReseller": true,
-    "isProvidesStaffingServicesApplicable": true,
-    "isCertifiedInteriorDesignerApplicable": false,
-    "isRealEstateAppraisalManagementApplicable": false,
-    "isCpaRequiredApplicable": false,
-    "isLiquorLicenseApplicable": false,
-    "isTransportation": false,
-    "isCarServiceApplicable": false,
-    "isInterstateTransportApplicable": false
+    "isProvidesStaffingServicesApplicable": true
   },
   "canHavePermanentLocation": true,
   "roadmapSteps": [

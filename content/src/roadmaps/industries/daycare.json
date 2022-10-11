@@ -51,16 +51,7 @@
   ],
   "name": "Childcare Center",
   "industryOnboardingQuestions": {
-    "canBeHomeBased": false,
-    "isProvidesStaffingServicesApplicable": false,
-    "isCertifiedInteriorDesignerApplicable": false,
-    "isRealEstateAppraisalManagementApplicable": false,
-    "canBeReseller": true,
-    "isLiquorLicenseApplicable": false,
-    "isCpaRequiredApplicable": false,
-    "isTransportation": false,
-    "isCarServiceApplicable": false,
-    "isInterstateTransportApplicable": false
+    "canBeReseller": true
   },
   "isEnabled": true,
   "additionalSearchTerms": "daycare, childcare, after school program",

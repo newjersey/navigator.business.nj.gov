@@ -3,16 +3,7 @@
   "canHavePermanentLocation": true,
   "defaultSectorId": "construction",
   "industryOnboardingQuestions" : {
-    "canBeHomeBased": true,
-    "canBeReseller": false,
-    "isProvidesStaffingServicesApplicable": false,
-    "isCertifiedInteriorDesignerApplicable": false,
-    "isRealEstateAppraisalManagementApplicable": false,
-    "isCpaRequiredApplicable": false,
-    "isLiquorLicenseApplicable": false,
-    "isTransportation": false,
-    "isCarServiceApplicable": false,
-    "isInterstateTransportApplicable": false
+    "canBeHomeBased": true
   },
   "roadmapSteps": [
     {

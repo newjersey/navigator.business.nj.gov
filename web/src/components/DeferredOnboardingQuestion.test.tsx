@@ -54,7 +54,7 @@ describe("<DeferredOnboardingQuestion />", () => {
 
   it("saves changes to profile data", () => {
     renderComponent();
-    fireEvent.click(screen.getByTestId("home-based-business-true"));
+    fireEvent.click(screen.getByTestId("home-based-business-radio-true"));
     fireEvent.click(screen.getByText(Config.dashboardDefaults.deferredOnboardingSaveButtonText));
     expect(currentUserData().profileData.homeBasedBusiness).toEqual(true);
   });
@@ -62,7 +62,7 @@ describe("<DeferredOnboardingQuestion />", () => {
   it("sets analytics dimensions", async () => {
     const profileData = generateProfileData({ homeBasedBusiness: undefined });
     renderComponent(generateUserData({ profileData }));
-    fireEvent.click(screen.getByTestId("home-based-business-true"));
+    fireEvent.click(screen.getByTestId("home-based-business-radio-true"));
     fireEvent.click(screen.getByText(Config.dashboardDefaults.deferredOnboardingSaveButtonText));
     await waitFor(() =>
       expect(mockAnalyticsHelpers.setAnalyticsDimensions).toHaveBeenCalledWith({
@@ -75,7 +75,7 @@ describe("<DeferredOnboardingQuestion />", () => {
   it("builds and sets new roadmap", async () => {
     const profileData = generateProfileData({ homeBasedBusiness: undefined });
     renderComponent(generateUserData({ profileData }));
-    fireEvent.click(screen.getByTestId("home-based-business-true"));
+    fireEvent.click(screen.getByTestId("home-based-business-radio-true"));
     fireEvent.click(screen.getByText(Config.dashboardDefaults.deferredOnboardingSaveButtonText));
 
     const returnedRoadmap = generateRoadmap({});
@@ -91,7 +91,7 @@ describe("<DeferredOnboardingQuestion />", () => {
 
   it("shallow routes to dashboard with query parameter", async () => {
     renderComponent();
-    fireEvent.click(screen.getByTestId("home-based-business-true"));
+    fireEvent.click(screen.getByTestId("home-based-business-radio-true"));
     fireEvent.click(screen.getByText(Config.dashboardDefaults.deferredOnboardingSaveButtonText));
     await waitFor(() =>
       expect(mockPush).toHaveBeenCalledWith({ query: { deferredQuestionAnswered: "true" } }, undefined, {

@@ -4,15 +4,7 @@
   "defaultSectorId": "other-services",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
-    "isLiquorLicenseApplicable": false,
-    "canBeReseller": true,
-    "isProvidesStaffingServicesApplicable": false,
-    "isCertifiedInteriorDesignerApplicable": false,
-    "isRealEstateAppraisalManagementApplicable": false,
-    "isCpaRequiredApplicable": false,
-    "isTransportation": false,
-    "isCarServiceApplicable": false,
-    "isInterstateTransportApplicable": false
+    "canBeReseller": true
   },
   "isEnabled": true,
   "roadmapSteps": [

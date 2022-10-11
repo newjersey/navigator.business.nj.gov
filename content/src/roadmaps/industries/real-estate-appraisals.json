@@ -3,15 +3,7 @@
   "canHavePermanentLocation": true,
   "industryOnboardingQuestions" : {
     "canBeHomeBased": true,
-    "canBeReseller": false,
-    "isCpaRequiredApplicable": false,
-    "isLiquorLicenseApplicable": false,
-    "isRealEstateAppraisalManagementApplicable": true,
-    "isCertifiedInteriorDesignerApplicable": false,
-    "isProvidesStaffingServicesApplicable": false,
-    "isTransportation": false,
-    "isCarServiceApplicable": false,
-    "isInterstateTransportApplicable": false
+    "isRealEstateAppraisalManagementApplicable": true
   },
   "roadmapSteps": [
     {
