@@ -147,45 +147,40 @@ export const completeNewBusinessOnboarding = ({
   }
 
   if (liquorLicenseQuestion === undefined) {
-    liquorLicenseQuestion =
-      industry.industryOnboardingQuestions.isLiquorLicenseApplicable === false
-        ? undefined
-        : Boolean(randomInt() % 2);
+    liquorLicenseQuestion = industry.industryOnboardingQuestions.isLiquorLicenseApplicable
+      ? Boolean(randomInt() % 2)
+      : undefined;
   }
 
   if (requiresCpa === undefined) {
-    requiresCpa =
-      industry.industryOnboardingQuestions.isCpaRequiredApplicable === false
-        ? undefined
-        : Boolean(randomInt() % 2);
+    requiresCpa = industry.industryOnboardingQuestions.isCpaRequiredApplicable
+      ? Boolean(randomInt() % 2)
+      : undefined;
   }
 
   if (providesStaffingService === undefined) {
-    providesStaffingService =
-      industry.industryOnboardingQuestions.isProvidesStaffingServicesApplicable === false
-        ? undefined
-        : Boolean(randomInt() % 2);
+    providesStaffingService = industry.industryOnboardingQuestions.isProvidesStaffingServicesApplicable
+      ? Boolean(randomInt() % 2)
+      : undefined;
   }
 
   if (certifiedInteriorDesigner === undefined) {
-    certifiedInteriorDesigner =
-      industry.industryOnboardingQuestions.isCertifiedInteriorDesignerApplicable === false
-        ? undefined
-        : Boolean(randomInt() % 2);
+    certifiedInteriorDesigner = industry.industryOnboardingQuestions.isCertifiedInteriorDesignerApplicable
+      ? Boolean(randomInt() % 2)
+      : undefined;
   }
 
   if (realEstateAppraisalManagement === undefined) {
-    realEstateAppraisalManagement =
-      industry.industryOnboardingQuestions.isRealEstateAppraisalManagementApplicable === false
-        ? undefined
-        : Boolean(randomInt() % 2);
+    realEstateAppraisalManagement = industry.industryOnboardingQuestions
+      .isRealEstateAppraisalManagementApplicable
+      ? Boolean(randomInt() % 2)
+      : undefined;
   }
 
   if (interstateTransport === undefined) {
-    interstateTransport =
-      industry.industryOnboardingQuestions.isInterstateTransportApplicable === false
-        ? undefined
-        : Boolean(randomInt() % 2);
+    interstateTransport = industry.industryOnboardingQuestions.isInterstateTransportApplicable
+      ? Boolean(randomInt() % 2)
+      : undefined;
   }
 
   if (legalStructureId === undefined) {

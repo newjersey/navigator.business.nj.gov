@@ -252,7 +252,7 @@ describe("profile", () => {
       selectByText("Location", newark.displayName);
       selectByValue("Industry", "e-commerce");
       selectByValue("Legal structure", "c-corporation");
-      chooseRadio("home-based-business-true");
+      chooseRadio("home-based-business-radio-true");
 
       chooseTab("numbers");
       fillText("Entity id", "0234567890");
@@ -711,7 +711,7 @@ describe("profile", () => {
       selectByText("Location", newark.displayName);
       selectByValue("Ownership", "veteran-owned");
       selectByValue("Ownership", "woman-owned");
-      chooseRadio("home-based-business-true");
+      chooseRadio("home-based-business-radio-true");
       chooseTab("numbers");
       fillText("Employer id", "02-3456780");
       fillText("Entity id", "0234567890");
@@ -778,7 +778,7 @@ describe("profile", () => {
       expect(getMunicipalityValue()).toEqual("Newark");
       expect(getSectorIDValue()).toEqual(LookupSectorTypeById("clean-energy").name);
       expect(screen.queryByLabelText("Ownership")).toHaveTextContent(`${veteran}, ${woman}`);
-      expect(getRadioButtonFromFormControlLabel("home-based-business-false")).toBeChecked();
+      expect(getRadioButtonFromFormControlLabel("home-based-business-radio-false")).toBeChecked();
       expect(getExistingEmployeesValue()).toEqual("123");
       chooseTab("numbers");
       expect(getEmployerIdValue()).toEqual("12-3456789");

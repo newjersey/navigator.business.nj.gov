@@ -32,15 +32,8 @@
   "name": "Car Service",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
-    "isProvidesStaffingServicesApplicable": false,
-    "isCertifiedInteriorDesignerApplicable": false,
-    "isRealEstateAppraisalManagementApplicable": false,
-    "canBeReseller": false,
-    "isLiquorLicenseApplicable": false,
-    "isCpaRequiredApplicable": false,
-    "isTransportation": true,
     "isCarServiceApplicable": true,
-    "isInterstateTransportApplicable": false
+    "isTransportation": true
   },
   "isEnabled": true,
   "additionalSearchTerms": "taxi, limo, bus, shuttle, transport van, car service",

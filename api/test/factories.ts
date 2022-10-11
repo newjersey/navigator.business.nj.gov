@@ -34,7 +34,7 @@ import {
   NameAndAddress,
 } from "@shared/license";
 import { Municipality } from "@shared/municipality";
-import { ProfileData } from "@shared/profileData";
+import { IndustrySpecificData, ProfileData } from "@shared/profileData";
 import { arrayOfSectors as sectors, SectorType } from "@shared/sector";
 import { TaxFiling, TaxFilingData, TaxFilingLookUpRequest } from "@shared/taxFiling";
 import { Preferences, UserData } from "@shared/userData";
@@ -146,22 +146,38 @@ export const generateTaxFiling = (overrides: Partial<TaxFiling>): TaxFiling => {
   };
 };
 
-export const generateProfileData = (overrides: Partial<ProfileData>): ProfileData => {
-  const id = `some-id-${randomInt()}`;
-  const persona = randomInt() % 2 ? "STARTING" : "OWNING";
-  const industry = randomIndustry();
+export const generateIndustrySpecificData = (
+  overrides: Partial<IndustrySpecificData>,
+  industry?: Industry
+): IndustrySpecificData => {
+  const _industry = industry ?? randomIndustry();
   return {
-    businessPersona: persona,
-    businessName: `some-business-name-${randomInt()}`,
-    industryId: industry.id,
-    legalStructureId: randomLegalStructure().id,
-    municipality: generateMunicipality({}),
     liquorLicense: false,
     requiresCpa: false,
     homeBasedBusiness: false,
     cannabisLicenseType: undefined,
     cannabisMicrobusiness: undefined,
     constructionRenovationPlan: undefined,
+    providesStaffingService: false,
+    certifiedInteriorDesigner: !!_industry.industryOnboardingQuestions.isCertifiedInteriorDesignerApplicable,
+    realEstateAppraisalManagement: false,
+    carService: undefined,
+    interstateTransport: false,
+    ...overrides,
+  };
+};
+
+export const generateProfileData = (overrides: Partial<ProfileData>): ProfileData => {
+  const id = `some-id-${randomInt()}`;
+  const persona = randomInt() % 2 ? "STARTING" : "OWNING";
+  const industry = randomIndustry();
+  return {
+    ...generateIndustrySpecificData({}, industry),
+    businessPersona: persona,
+    businessName: `some-business-name-${randomInt()}`,
+    industryId: industry.id,
+    legalStructureId: randomLegalStructure().id,
+    municipality: generateMunicipality({}),
     dateOfFormation: undefined,
     entityId: randomInt(10).toString(),
     employerId: randomInt(9).toString(),
@@ -181,12 +197,7 @@ export const generateProfileData = (overrides: Partial<ProfileData>): ProfileDat
     foreignBusinessTypeIds: [],
     nexusDbaName: undefined,
     nexusLocationInNewJersey: undefined,
-    providesStaffingService: false,
-    certifiedInteriorDesigner: industry.industryOnboardingQuestions.isCertifiedInteriorDesignerApplicable,
-    realEstateAppraisalManagement: false,
-    carService: undefined,
     operatingPhase: "NEEDS_TO_FORM",
-    interstateTransport: false,
     ...overrides,
   };
 };

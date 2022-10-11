@@ -3,16 +3,6 @@
   "canHavePermanentLocation": true,
   "defaultSectorId": "health-care-and-social-assistance",
   "industryOnboardingQuestions": {
-    "canBeHomeBased": false,
-    "canBeReseller": false,
-    "isCpaRequiredApplicable": false,
-    "isProvidesStaffingServicesApplicable": false,
-    "isCertifiedInteriorDesignerApplicable": false,
-    "isRealEstateAppraisalManagementApplicable": false,
-    "isLiquorLicenseApplicable": false,
-    "isTransportation": false,
-    "isCarServiceApplicable": false,
-    "isInterstateTransportApplicable": false
   },
   "isEnabled": true,
   "roadmapSteps": [

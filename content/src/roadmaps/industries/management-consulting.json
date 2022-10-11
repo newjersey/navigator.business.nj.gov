@@ -4,15 +4,7 @@
   "defaultSectorId": "organizational-or-financial-management",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
-    "canBeReseller": false,
-    "isProvidesStaffingServicesApplicable": true,
-    "isCertifiedInteriorDesignerApplicable": false,
-    "isRealEstateAppraisalManagementApplicable": false,
-    "isCpaRequiredApplicable": false,
-    "isLiquorLicenseApplicable": false,
-    "isTransportation": false,
-    "isCarServiceApplicable": false,
-    "isInterstateTransportApplicable": false
+    "isProvidesStaffingServicesApplicable": true
   },
   "isEnabled": true,
   "roadmapSteps": [

@@ -470,7 +470,7 @@ describe("dashboard page", () => {
     });
 
     const chooseHomeBasedValue = (value: "true" | "false") => {
-      fireEvent.click(screen.getByTestId(`home-based-business-${value}`));
+      fireEvent.click(screen.getByTestId(`home-based-business-radio-${value}`));
     };
   });
 });

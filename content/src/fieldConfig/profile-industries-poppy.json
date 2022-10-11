@@ -8,14 +8,14 @@
         "radioButtonConditionalText": "Conditional"
       },
       "certifiedInteriorDesigner": {
-        "radioButtonYesText": "Yes",
-        "radioButtonNoText": "No",
+        "radioButtonTrueText": "Yes",
+        "radioButtonFalseText": "No",
         "header": "Certified Interior Designer",
         "description": "Will you market as a certified interior designer?"
       },
       "requiresCpa": {
-        "radioButtonYesText": "Yes",
-        "radioButtonNoText": "No",
+        "radioButtonTrueText": "Yes",
+        "radioButtonFalseText": "No",
         "header": "Public Accounting Services",
         "description": "Will you provide Certified Public Accounting Services?"
       },
@@ -24,8 +24,8 @@
         "description": "Learn about other `employment and personnel industries|employment-agency-types`."
       },
       "homeBasedBusiness": {
-        "radioButtonYesText": "Yes",
-        "radioButtonNoText": "No",
+        "radioButtonTrueText": "Yes",
+        "radioButtonFalseText": "No",
         "header": "Home-based business",
         "description": "Are you a `home-based business|home-based-business`?"
       },
@@ -34,14 +34,14 @@
         "description": "`Learn what activities qualify as a Home Improvement Contractor|home-contractors-activities`"
       },
       "liquorLicense": {
-        "radioButtonYesText": "Yes",
-        "radioButtonNoText": "No",
+        "radioButtonTrueText": "Yes",
+        "radioButtonFalseText": "No",
         "header": "Liquor",
         "description": "Do you plan to serve liquor, including beer or wine?"
       },
       "realEstateAppraisalManagement": {
-        "radioButtonYesText": "Yes",
-        "radioButtonNoText": "No",
+        "radioButtonTrueText": "Yes",
+        "radioButtonFalseText": "No",
         "header": "Appraisal Management",
         "description": "Are you looking to start an appraisal management company?"
       },
@@ -53,14 +53,14 @@
         "description": "What type of vehicles will you have?"
       },
       "providesStaffingService": {
-        "radioButtonYesText": "Yes",
-        "radioButtonNoText": "No",
+        "radioButtonTrueText": "Yes",
+        "radioButtonFalseText": "No",
         "header": "Staffing Services",
         "description": "Will you provide staffing services?"
       },
       "interstateTransport": {
-        "radioButtonYesText": "Yes",
-        "radioButtonNoText": "No",
+        "radioButtonTrueText": "Yes",
+        "radioButtonFalseText": "No",
         "header": "Moving Goods Across State Lines",
         "description": "Do you plan to move goods across state lines?"
       }

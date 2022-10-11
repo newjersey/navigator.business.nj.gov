@@ -417,7 +417,10 @@ describe("buildUserRoadmap", () => {
 
         it("does not add either real estate add-on and modification if is false and industry is not real-estate-appraisals", async () => {
           await buildUserRoadmap(
-            generateStartingProfile({ realEstateAppraisalManagement: false, industryId: "generic" })
+            generateStartingProfile({
+              realEstateAppraisalManagement: false,
+              industryId: "generic",
+            })
           );
           expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("real-estate-appraiser");
           expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain(

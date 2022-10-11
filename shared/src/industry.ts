@@ -16,16 +16,16 @@ export interface Industry {
 }
 
 interface IndustryOnboardingQuestions {
-  readonly isProvidesStaffingServicesApplicable: boolean;
-  readonly isCertifiedInteriorDesignerApplicable: boolean;
-  readonly isRealEstateAppraisalManagementApplicable: boolean;
-  readonly canBeReseller: boolean;
-  readonly isLiquorLicenseApplicable: boolean;
-  readonly isCpaRequiredApplicable: boolean;
-  readonly canBeHomeBased: boolean;
-  readonly isTransportation: boolean;
-  readonly isCarServiceApplicable: boolean;
-  readonly isInterstateTransportApplicable: boolean;
+  readonly isProvidesStaffingServicesApplicable?: boolean;
+  readonly isCertifiedInteriorDesignerApplicable?: boolean;
+  readonly isRealEstateAppraisalManagementApplicable?: boolean;
+  readonly canBeReseller?: boolean;
+  readonly isLiquorLicenseApplicable?: boolean;
+  readonly isCpaRequiredApplicable?: boolean;
+  readonly canBeHomeBased?: boolean;
+  readonly isTransportation?: boolean;
+  readonly isCarServiceApplicable?: boolean;
+  readonly isInterstateTransportApplicable?: boolean;
 }
 
 export interface AddOn {
@@ -50,16 +50,16 @@ export const LookupIndustryById = (id: string | undefined): Industry => {
       naicsCodes: "",
       isEnabled: false,
       industryOnboardingQuestions: {
-        isProvidesStaffingServicesApplicable: false,
-        isCertifiedInteriorDesignerApplicable: false,
-        isRealEstateAppraisalManagementApplicable: false,
-        canBeReseller: true,
-        canBeHomeBased: false,
-        isLiquorLicenseApplicable: false,
-        isCpaRequiredApplicable: false,
-        isTransportation: false,
-        isCarServiceApplicable: false,
-        isInterstateTransportApplicable: false,
+        isProvidesStaffingServicesApplicable: undefined,
+        isCertifiedInteriorDesignerApplicable: undefined,
+        isRealEstateAppraisalManagementApplicable: undefined,
+        canBeReseller: undefined,
+        canBeHomeBased: undefined,
+        isLiquorLicenseApplicable: undefined,
+        isCpaRequiredApplicable: undefined,
+        isTransportation: undefined,
+        isCarServiceApplicable: undefined,
+        isInterstateTransportApplicable: undefined,
       },
     }
   );

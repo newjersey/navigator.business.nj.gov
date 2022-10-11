@@ -4,6 +4,7 @@ import {
   FormationFields,
   FormationLegalType,
   FormationLegalTypes,
+  IndustrySpecificData,
   PaymentType,
   Preferences,
   ProfileData,
@@ -135,7 +136,9 @@ const profileFieldsFromConfig = merge(
   getMergedConfig().profileDefaults["FOREIGN"]
 );
 
-export type ProfileFields = (keyof ProfileData & keyof typeof profileFieldsFromConfig) | keyof BusinessUser;
+export type ProfileFields =
+  | ((keyof ProfileData | keyof IndustrySpecificData) & keyof typeof profileFieldsFromConfig)
+  | keyof BusinessUser;
 
 export type FieldStatus = { invalid: boolean };
 export type ProfileFieldErrorMap = Record<ProfileFields, FieldStatus>;

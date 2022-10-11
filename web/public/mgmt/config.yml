@@ -607,41 +607,43 @@ collections:
           - label: Home Based
             name: canBeHomeBased
             widget: boolean
-            default: false
+            required: false
           - label: Liquor License
             name: isLiquorLicenseApplicable
             widget: boolean
-            default: false
+            required: false
           - label: CPA Required
             name: isCpaRequiredApplicable
             widget: boolean
-            default: false
+            required: false
           - label: Staffing Service
             name: isProvidesStaffingServicesApplicable
             widget: boolean
-            default: false
+            required: false
           - label: Certified Interior Designer
             name: isCertifiedInteriorDesignerApplicable
             widget: boolean
-            default: false
+            required: false
           - label: Real Estate Appraisal Management
             name: isRealEstateAppraisalManagementApplicable
             widget: boolean
-            default: false
+            required: false
           - label: Reseller
             name: canBeReseller
             widget: boolean
-            default: false
+            required: false
           - label: Transportation
             name: isTransportation
             widget: boolean
-            default: false
+            required: false
           - label: Car Service
+            widget: boolean
             name: isCarServiceApplicable
+            required: false
           - label: Moving Company
             name: isInterstateTransportApplicable
             widget: boolean
-            default: false
+            required: false
       - label: Roadmap Steps
         name: roadmapSteps
         widget: list
@@ -3719,8 +3721,8 @@ collections:
                     widget: object
                     fields:
                       - { label: "Header", name: "header", widget: "string" }
-                      - { label: "Radio Button Yes Text", name: "radioButtonYesText", widget: "string" }
-                      - { label: "Radio Button No Text", name: "radioButtonNoText", widget: "string" }
+                      - { label: "Radio Button Yes Text", name: "radioButtonTrueText", widget: "string" }
+                      - { label: "Radio Button No Text", name: "radioButtonFalseText", widget: "string" }
                       - { label: "Description", name: "description", widget: "markdown" }
                   - label: CPA
                     name: requiresCpa
@@ -3728,8 +3730,8 @@ collections:
                     widget: object
                     fields:
                       - { label: "Header", name: "header", widget: "string" }
-                      - { label: "Radio Button Yes Text", name: "radioButtonYesText", widget: "string" }
-                      - { label: "Radio Button No Text", name: "radioButtonNoText", widget: "string" }
+                      - { label: "Radio Button Yes Text", name: "radioButtonTrueText", widget: "string" }
+                      - { label: "Radio Button No Text", name: "radioButtonFalseText", widget: "string" }
                       - { label: "Description", name: "description", widget: "markdown" }
                   - label: Employment Agency
                     name: employmentAgency
@@ -3743,8 +3745,8 @@ collections:
                     widget: object
                     fields:
                       - { label: "Header", name: "header", widget: "string" }
-                      - { label: "Radio Button Yes Text", name: "radioButtonYesText", widget: "string" }
-                      - { label: "Radio Button No Text", name: "radioButtonNoText", widget: "string" }
+                      - { label: "Radio Button Yes Text", name: "radioButtonTrueText", widget: "string" }
+                      - { label: "Radio Button No Text", name: "radioButtonFalseText", widget: "string" }
                       - { label: "Description", name: "description", widget: "markdown" }
                   - label: Home Contractor
                     name: homeContractor
@@ -3758,8 +3760,8 @@ collections:
                     widget: object
                     fields:
                       - { label: "Header", name: "header", widget: "string" }
-                      - { label: "Radio Button Yes Text", name: "radioButtonYesText", widget: "string" }
-                      - { label: "Radio Button No Text", name: "radioButtonNoText", widget: "string" }
+                      - { label: "Radio Button Yes Text", name: "radioButtonTrueText", widget: "string" }
+                      - { label: "Radio Button No Text", name: "radioButtonFalseText", widget: "string" }
                       - { label: "Description", name: "description", widget: "markdown" }
                   - label: Real Estate Appraisal Management
                     name: realEstateAppraisalManagement
@@ -3767,8 +3769,8 @@ collections:
                     widget: object
                     fields:
                       - { label: "Header", name: "header", widget: "string" }
-                      - { label: "Radio Button Yes Text", name: "radioButtonYesText", widget: "string" }
-                      - { label: "Radio Button No Text", name: "radioButtonNoText", widget: "string" }
+                      - { label: "Radio Button Yes Text", name: "radioButtonTrueText", widget: "string" }
+                      - { label: "Radio Button No Text", name: "radioButtonFalseText", widget: "string" }
                       - { label: "Description", name: "description", widget: "markdown" }
                   - label: Car Service
                     name: carService
@@ -3794,8 +3796,8 @@ collections:
                     widget: object
                     fields:
                       - { label: "Header", name: "header", widget: "string" }
-                      - { label: "Radio Button Yes Text", name: "radioButtonYesText", widget: "string" }
-                      - { label: "Radio Button No Text", name: "radioButtonNoText", widget: "string" }
+                      - { label: "Radio Button Yes Text", name: "radioButtonTrueText", widget: "string" }
+                      - { label: "Radio Button No Text", name: "radioButtonFalseText", widget: "string" }
                       - { label: "Description", name: "description", widget: "markdown" }
                   - label: Moving Company
                     name: interstateTransport
@@ -3829,8 +3831,8 @@ collections:
                     widget: object
                     fields:
                       - { label: "Header", name: "header", widget: "string" }
-                      - { label: "Radio Button Yes Text", name: "radioButtonYesText", widget: "string" }
-                      - { label: "Radio Button No Text", name: "radioButtonNoText", widget: "string" }
+                      - { label: "Radio Button Yes Text", name: "radioButtonTrueText", widget: "string" }
+                      - { label: "Radio Button No Text", name: "radioButtonFalseText", widget: "string" }
                       - { label: "Description", name: "description", widget: "markdown" }
 
       - label: "Industry-Specific Questions (Dakota)"
@@ -3870,8 +3872,8 @@ collections:
                     summary: "{{certifiedInteriorDesigner}}"
                     fields:
                       - { label: "Header", name: "header", widget: "string" }
-                      - { label: "Radio Button Yes Text", name: "radioButtonYesText", widget: "string" }
-                      - { label: "Radio Button No Text", name: "radioButtonNoText", widget: "string" }
+                      - { label: "Radio Button Yes Text", name: "radioButtonTrueText", widget: "string" }
+                      - { label: "Radio Button No Text", name: "radioButtonFalseText", widget: "string" }
                       - { label: "Description", name: "description", widget: "markdown" }
                   - label: CPA
                     name: cpa
@@ -3880,8 +3882,8 @@ collections:
                     summary: "{{cpa}}"
                     fields:
                       - { label: "Header", name: "header", widget: "string" }
-                      - { label: "Radio Button Yes Text", name: "radioButtonYesText", widget: "string" }
-                      - { label: "Radio Button No Text", name: "radioButtonNoText", widget: "string" }
+                      - { label: "Radio Button Yes Text", name: "radioButtonTrueText", widget: "string" }
+                      - { label: "Radio Button No Text", name: "radioButtonFalseText", widget: "string" }
                       - { label: "Description", name: "description", widget: "markdown" }
                   - label: Employment Agency
                     name: employmentAgency
@@ -3897,8 +3899,8 @@ collections:
                     summary: "{{homeBased}}"
                     fields:
                       - { label: "Header", name: "header", widget: "string" }
-                      - { label: "Radio Button Yes Text", name: "radioButtonYesText", widget: "string" }
-                      - { label: "Radio Button No Text", name: "radioButtonNoText", widget: "string" }
+                      - { label: "Radio Button Yes Text", name: "radioButtonTrueText", widget: "string" }
+                      - { label: "Radio Button No Text", name: "radioButtonFalseText", widget: "string" }
                       - { label: "Description", name: "description", widget: "markdown" }
                   - label: Home Contractor
                     name: homeContractor
@@ -3914,8 +3916,8 @@ collections:
                     summary: "{{liquorLicense}}"
                     fields:
                       - { label: "Header", name: "header", widget: "string" }
-                      - { label: "Radio Button Yes Text", name: "radioButtonYesText", widget: "string" }
-                      - { label: "Radio Button No Text", name: "radioButtonNoText", widget: "string" }
+                      - { label: "Radio Button Yes Text", name: "radioButtonTrueText", widget: "string" }
+                      - { label: "Radio Button No Text", name: "radioButtonFalseText", widget: "string" }
                       - { label: "Description", name: "description", widget: "markdown" }
                   - label: Real Estate Appraisal Management
                     name: realEstateAppraisalManagement
@@ -3924,8 +3926,8 @@ collections:
                     summary: "{{realEstateAppraisalManagement}}"
                     fields:
                       - { label: "Header", name: "header", widget: "string" }
-                      - { label: "Radio Button Yes Text", name: "radioButtonYesText", widget: "string" }
-                      - { label: "Radio Button No Text", name: "radioButtonNoText", widget: "string" }
+                      - { label: "Radio Button Yes Text", name: "radioButtonTrueText", widget: "string" }
+                      - { label: "Radio Button No Text", name: "radioButtonFalseText", widget: "string" }
                       - { label: "Description", name: "description", widget: "markdown" }
                   - label: Car Service
                     name: carService
@@ -3953,8 +3955,8 @@ collections:
                     summary: "{{staffingService}}"
                     fields:
                       - { label: "Header", name: "header", widget: "string" }
-                      - { label: "Radio Button Yes Text", name: "radioButtonYesText", widget: "string" }
-                      - { label: "Radio Button No Text", name: "radioButtonNoText", widget: "string" }
+                      - { label: "Radio Button Yes Text", name: "radioButtonTrueText", widget: "string" }
+                      - { label: "Radio Button No Text", name: "radioButtonFalseText", widget: "string" }
                       - { label: "Description", name: "description", widget: "markdown" }
 
       - label: "Onboarding-Only Questions (Poppy & Shared)"

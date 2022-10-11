@@ -3,16 +3,8 @@
   "canHavePermanentLocation": true,
   "defaultSectorId": "accommodation-and-food-services",
   "industryOnboardingQuestions": {
-    "canBeHomeBased": false,
     "canBeReseller": true,
-    "isProvidesStaffingServicesApplicable": false,
-    "isCertifiedInteriorDesignerApplicable": false,
-    "isRealEstateAppraisalManagementApplicable": false,
-    "isCpaRequiredApplicable": false,
-    "isLiquorLicenseApplicable": true,
-    "isTransportation": false,
-    "isCarServiceApplicable": false,
-    "isInterstateTransportApplicable": false
+    "isLiquorLicenseApplicable": true
   },
   "isEnabled": true,
   "roadmapSteps": [

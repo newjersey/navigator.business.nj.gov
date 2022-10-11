@@ -53,7 +53,7 @@ describe("<OnboardingIndustry />", () => {
       screen.getByText(Config.profileDefaults[getFlow(profileData)].liquorLicense.description)
     ).toBeInTheDocument();
 
-    chooseRadio("liquor-license-true");
+    chooseRadio("liquor-license-radio-true");
     expect(currentProfileData().liquorLicense).toEqual(true);
   });
 
@@ -62,7 +62,7 @@ describe("<OnboardingIndustry />", () => {
       renderComponent();
 
       selectIndustry("restaurant");
-      chooseRadio("liquor-license-true");
+      chooseRadio("liquor-license-radio-true");
       expect(currentProfileData().liquorLicense).toEqual(true);
 
       selectIndustry("cosmetology");
@@ -114,7 +114,7 @@ describe("<OnboardingIndustry />", () => {
         renderComponent();
         selectIndustry("cannabis");
 
-        chooseRadio("cannabis-license-annual");
+        chooseRadio("cannabis-license-type-radio-annual");
         expect(currentProfileData().cannabisLicenseType).toEqual("ANNUAL");
       });
 

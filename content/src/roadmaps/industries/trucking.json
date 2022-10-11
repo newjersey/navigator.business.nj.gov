@@ -57,15 +57,7 @@
   "name": "Trucking",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
-    "canBeReseller": false,
-    "isCpaRequiredApplicable": false,
-    "isLiquorLicenseApplicable": false,
-    "isRealEstateAppraisalManagementApplicable": false,
-    "isCertifiedInteriorDesignerApplicable": false,
-    "isProvidesStaffingServicesApplicable": false,
-    "isTransportation": true,
-    "isCarServiceApplicable": false,
-    "isInterstateTransportApplicable": false
+    "isTransportation": true
   },
   "isEnabled": true,
   "additionalSearchTerms": "freight, trucking, movers, box truck company, transportation, truck driving, hauling, truck haul, logistics, trucking company, ",
