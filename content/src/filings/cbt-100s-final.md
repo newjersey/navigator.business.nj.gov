@@ -18,7 +18,7 @@ taxRates: >
   * 7.5% rate if the prorated entire net income does not exceed $8,333 per month
 
   * 6.5% rate if the prorated entire net income does not exceed $4,166 per month
-filingMethod: online
+filingMethod: online-required
 filingDetails: "* All Corporation Business Tax (CBT) returns and payments,
   whether self-prepared or prepared by a tax professional, must be submitted
   electronically. This includes returns, estimated payments, extensions, and
