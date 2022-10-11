@@ -6,13 +6,16 @@ import {
   ProfileError,
   Roadmap,
   SectionCompletion,
-  sectionNames,
-  SectionType,
   Step,
   Task,
 } from "@/lib/types/types";
-import { UserData } from "@businessnjgovnavigator/shared/";
-import { BusinessPersona, ProfileData } from "@businessnjgovnavigator/shared/profileData";
+import {
+  BusinessPersona,
+  ProfileData,
+  sectionNames,
+  SectionType,
+  UserData,
+} from "@businessnjgovnavigator/shared";
 import { ReactElement, useEffect, useRef } from "react";
 
 const Config = getMergedConfig();
