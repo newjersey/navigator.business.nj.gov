@@ -5,7 +5,7 @@ id: check-site-requirements
 callToActionLink: ""
 callToActionText: ""
 ---
-Your business site will need to be inspected and approved by your local government to verify that it's safe for customers and employees.
+Speak to your local government to determine specific requirements for your site and business. Prior to opening, your business site will need to be inspected and approved to ensure customer and employee safety.
 
 ---
 ### Safety Permits
