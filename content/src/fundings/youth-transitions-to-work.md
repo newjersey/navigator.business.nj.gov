@@ -9,7 +9,7 @@ fundingType: grant
 agency:
   - NJDOL
 agencyContact: james.manning@dol.nj.gov
-publishStageArchive: Do Not Publish
+publishStageArchive: null
 status: deadline
 programFrequency: reoccuring
 businessStage: both
