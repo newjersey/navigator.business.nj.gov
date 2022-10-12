@@ -47,7 +47,7 @@
     "isCertifiedInteriorDesignerApplicable": false,
     "isProvidesStaffingServicesApplicable": false
   },
-  "isEnabled": false,
+  "isEnabled": true,
   "additionalSearchTerms": "logistics, shipping, freight moving",
   "id": "freight-forwarding",
   "description": "Organizes the transportation of goods from a warehouse to its final destination"
