@@ -5,18 +5,20 @@ import { OnboardingCpa } from "@/components/onboarding/OnboardingCpa";
 import { OnboardingEmploymentAgency } from "@/components/onboarding/OnboardingEmploymentAgency";
 import { OnboardingHomeContractor } from "@/components/onboarding/OnboardingHomeContractor";
 import { OnboardingLiquorLicense } from "@/components/onboarding/OnboardingLiquorLicense";
+import { OnboardingLogisticsCompany } from "@/components/onboarding/OnboardingLogisticsCompany";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { isCannabisLicenseApplicable } from "@/lib/domain-logic/isCannabisLicenseApplicable";
 import { isCarServiceApplicable } from "@/lib/domain-logic/isCarServiceApplicable";
 import { isCertifiedInteriorDesignerApplicable } from "@/lib/domain-logic/isCertifiedInteriorDesignerApplicable";
 import { isCpaRequiredApplicable } from "@/lib/domain-logic/isCpaRequiredApplicable";
-import { isInterstateTransportApplicable } from "@/lib/domain-logic/isInterstateTransportApplicable";
+import { isInterstateMovingApplicable } from "@/lib/domain-logic/isInterstateMovingApplicable";
 import { isLiquorLicenseApplicable } from "@/lib/domain-logic/isLiquorLicenseApplicable";
 import { isProvidesStaffingServicesApplicable } from "@/lib/domain-logic/isProvidesStaffingServicesApplicable";
 import { isRealEstateAppraisalManagementApplicable } from "@/lib/domain-logic/isRealEstateAppraisalManagementApplicable";
 import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import { FocusEvent, ReactElement, useContext } from "react";
+import { isInterstateLogisticsApplicable } from "../../lib/domain-logic/isInterstateLogisticsApplicable";
 import { OnboardingCarService } from "./OnboardingCarService";
 import { OnboardingCertifiedInteriorDesigner } from "./OnboardingCertifiedInteriorDesigner";
 import { OnboardingMovingCompany } from "./OnboardingMovingCompany";
@@ -111,10 +113,16 @@ export const OnboardingIndustry = (props: Props): ReactElement => {
           <OnboardingCarService />
         </div>
       )}
-      {isInterstateTransportApplicable(state.profileData.industryId) && (
+      {isInterstateMovingApplicable(state.profileData.industryId) && (
         <div className="margin-top-4" data-testid={`industry-specific-${state.profileData.industryId}`}>
-          <FieldLabelProfile fieldName="interstateTransport" />
+          <FieldLabelProfile fieldName="interstateMoving" />
           <OnboardingMovingCompany />
+        </div>
+      )}
+      {isInterstateLogisticsApplicable(state.profileData.industryId) && (
+        <div className="margin-top-4" data-testid={`industry-specific-${state.profileData.industryId}`}>
+          <FieldLabelProfile fieldName="interstateLogistics" />
+          <OnboardingLogisticsCompany />
         </div>
       )}
     </div>

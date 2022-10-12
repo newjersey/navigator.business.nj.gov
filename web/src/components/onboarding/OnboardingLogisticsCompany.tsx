@@ -1,13 +1,12 @@
 import { OnboardingRadioQuestion } from "@/components/onboarding/OnboardingRadioQuestion";
 import { ReactElement } from "react";
 
-export const OnboardingMovingCompany = (): ReactElement => {
+export const OnboardingLogisticsCompany = (): ReactElement => {
   return (
     <OnboardingRadioQuestion<boolean>
       fieldName={"interstateTransport"}
-      contentFieldName={"interstateMoving"}
+      contentFieldName={"interstateLogistics"}
       choices={[true, false]}
-      ariaLabel={"Moves Goods Across State Lines"}
     />
   );
 };

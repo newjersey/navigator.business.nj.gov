@@ -6,7 +6,8 @@ import { OperatingPhaseId } from "@businessnjgovnavigator/shared/operatingPhase"
 import { BusinessPersona, ForeignBusinessType } from "@businessnjgovnavigator/shared/profileData";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { isCarServiceApplicable } from "../domain-logic/isCarServiceApplicable";
-import { isInterstateTransportApplicable } from "../domain-logic/isInterstateTransportApplicable";
+import { isInterstateLogisticsApplicable } from "../domain-logic/isInterstateLogisticsApplicable";
+import { isInterstateMovingApplicable } from "../domain-logic/isInterstateMovingApplicable";
 
 type RegistrationProgress = "Not Started" | "Began Onboarding" | "Onboarded Guest" | "Fully Registered";
 
@@ -128,11 +129,19 @@ export const sendOnboardingOnSubmitEvents = (newProfileData: ProfileData, pageNa
       }
     }
 
-    if (isInterstateTransportApplicable(newProfileData.industryId)) {
+    if (isInterstateMovingApplicable(newProfileData.industryId)) {
       if (newProfileData.interstateTransport) {
         analytics.event.onboarding_moving_company_question.submit.yes_moving_across_state_lines();
       } else {
         analytics.event.onboarding_moving_company_question.submit.no_moving_across_state_lines();
+      }
+    }
+
+    if (isInterstateLogisticsApplicable(newProfileData.industryId)) {
+      if (newProfileData.interstateTransport) {
+        analytics.event.onboarding_logistics_business_question.submit.yes_moving_across_state_lines();
+      } else {
+        analytics.event.onboarding_logistics_business_question.submit.no_not_moving_across_state_lines();
       }
     }
 

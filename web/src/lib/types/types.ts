@@ -136,8 +136,11 @@ const profileFieldsFromConfig = merge(
   getMergedConfig().profileDefaults["FOREIGN"]
 );
 
+export type IndustrySpecificDataAddOnFields = "interstateLogistics" | "interstateMoving";
+
 export type ProfileFields =
-  | ((keyof ProfileData | keyof IndustrySpecificData) & keyof typeof profileFieldsFromConfig)
+  | ((keyof ProfileData | keyof IndustrySpecificData | IndustrySpecificDataAddOnFields) &
+      keyof typeof profileFieldsFromConfig)
   | keyof BusinessUser;
 
 export type FieldStatus = { invalid: boolean };

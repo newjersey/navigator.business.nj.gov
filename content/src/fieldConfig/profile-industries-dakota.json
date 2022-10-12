@@ -58,7 +58,13 @@
         "header": "Staffing Services",
         "description": "Will you provide staffing services?"
       },
-      "interstateTransport": {
+      "interstateMoving": {
+        "radioButtonTrueText": "",
+        "radioButtonFalseText": "",
+        "header": "",
+        "description": ""
+      },
+      "interstateLogistics": {
         "radioButtonTrueText": "",
         "radioButtonFalseText": "",
         "header": "",

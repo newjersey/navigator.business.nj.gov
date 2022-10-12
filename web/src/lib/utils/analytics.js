@@ -747,5 +747,15 @@ export default {
         },
       },
     },
+    onboarding_logistics_business_question: {
+      submit: {
+        yes_moving_across_state_lines: () => {
+          sendEvent("onboarding_logistics_business_question", "submit", "yes_moving_across_state_lines");
+        },
+        no_not_moving_across_state_lines: () => {
+          sendEvent("onboarding_logistics_business_question", "submit", "no_not_moving_across_state_lines");
+        },
+      },
+    },
   },
 };

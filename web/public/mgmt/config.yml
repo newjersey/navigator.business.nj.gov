@@ -3810,6 +3810,15 @@ collections:
                       - { label: "Radio Button Yes Text", name: "radioButtonYesText", widget: "string" }
                       - { label: "Radio Button No Text", name: "radioButtonNoText", widget: "string" }
                       - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Logistics Company
+                    name: interstateLogistics
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "Radio Button Yes Text", name: "radioButtonYesText", widget: "string" }
+                      - { label: "Radio Button No Text", name: "radioButtonNoText", widget: "string" }
+                      - { label: "Description", name: "description", widget: "markdown" }
 
       - label: "Industry-Specific Questions (Oscar)"
         name: "profile-industries-oscar"
