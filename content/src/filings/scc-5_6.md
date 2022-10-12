@@ -1,6 +1,8 @@
 ---
+urlSlug: scc-5_6
 name: Spill Compensation & Control Tax
-callToActionLink: https://www.state.nj.us/treasury/taxation/spill_over.shtml
+extension: false
+treasuryLink: https://www.state.nj.us/treasury/taxation/prntspil.shtml
 taxRates: >
   
   * Petroleum and Petroleum Products per barrel: 0.023%
@@ -10,16 +12,14 @@ taxRates: >
 
 
   * Precious Metals, Elemental Phosphorus, Elemental Antimony or Antimony Trioxide per barrel: 0.023%
-filingDetails: null
-agency: New Jersey Division of Taxation
-additionalInfo: null
-urlSlug: scc-5_6
-id: scc-5_6
-callToActionText: File and Pay
-frequency: Monthly *(due on the 20th day of the month after the end of the tax year)*
 filingMethod: online
-treasuryLink: https://www.state.nj.us/treasury/taxation/prntspil.shtml
-extension: false
+filingDetails: null
+frequency: Monthly *(due on the 20th day of the month after the end of the tax year)*
+additionalInfo: null
+agency: New Jersey Division of Taxation
+id: scc-5/scc-6
+callToActionLink: https://www.state.nj.us/treasury/taxation/spill_over.shtml
+callToActionText: File and Pay
 ---
 
 This is a tax imposed on owners or operators of major facilities used to refine, store, produce, handle, transfer, process, or transport hazardous substances, including petroleum products.

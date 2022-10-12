@@ -29,7 +29,7 @@
         "NEXUS": "It sounds like you’re a `Nexus Business|nexus-business` ."
       },
       "nexusLocationInNewJersey": {
-        "header": "Will you own or lease space in New Jersey?",
+        "header": "Will you own or lease commercial or manufacturing space in New Jersey?",
         "description": "",
         "errorTextRequired": "Please select whether you will have a New Jersey location",
         "radioButtonYesText": "Yes, I will own or lease space in New Jersey",
