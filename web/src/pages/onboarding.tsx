@@ -14,7 +14,7 @@ import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { routeForPersona } from "@/lib/domain-logic/routeForPersona";
-import { ROUTES } from "@/lib/domain-logic/routes";
+import { QUERIES, ROUTES, routeShallowWithQuery } from "@/lib/domain-logic/routes";
 import { MediaQueries } from "@/lib/PageSizes";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
@@ -123,10 +123,7 @@ const OnboardingPage = (props: Props): ReactElement => {
     return onboardingFlows;
   }, [profileData, user, fieldStates]);
 
-  const queryShallowPush = useCallback(
-    (page: number) => router.push({ query: { page: page } }, undefined, { shallow: true }),
-    [router]
-  );
+  const routeToPage = useCallback((page: number) => routeShallowWithQuery(router, "page", page), [router]);
 
   const industryQueryParamIsValid = (industryId: string | undefined): boolean => {
     return !!LookupIndustryById(industryId).id;
@@ -165,8 +162,8 @@ const OnboardingPage = (props: Props): ReactElement => {
           await router.replace(ROUTES.profile);
           return;
         } else {
-          const queryPage = Number(router.query.page);
-          const queryIndustryId = router.query.industry as string | undefined;
+          const queryPage = Number(router.query[QUERIES.page]);
+          const queryIndustryId = router.query[QUERIES.industry] as string | undefined;
 
           if (industryQueryParamIsValid(queryIndustryId)) {
             await setIndustryAndRouteToPage2(currentUserData, queryIndustryId);
@@ -174,7 +171,7 @@ const OnboardingPage = (props: Props): ReactElement => {
             setPage({ current: queryPage, previous: queryPage - 1 });
           } else {
             setPage({ current: 1, previous: 1 });
-            queryShallowPush(1);
+            routeToPage(1);
           }
 
           hasHandledRouting.current = true;
@@ -274,7 +271,7 @@ const OnboardingPage = (props: Props): ReactElement => {
           current: nextCurrentPage,
           previous: page.current,
         });
-        queryShallowPush(nextCurrentPage);
+        routeToPage(nextCurrentPage);
         headerRef.current?.focus();
       });
     } else {
@@ -315,7 +312,7 @@ const OnboardingPage = (props: Props): ReactElement => {
       await update(updatedUserData);
       await router.push({
         pathname: routeForPersona(updatedUserData.profileData.businessPersona),
-        query: { fromOnboarding: "true" },
+        query: { [QUERIES.fromOnboarding]: "true" },
       });
     }
   };
@@ -329,7 +326,7 @@ const OnboardingPage = (props: Props): ReactElement => {
         current: previousPage,
         previous: page.current,
       });
-      queryShallowPush(previousPage);
+      routeToPage(previousPage);
       headerRef.current?.focus();
     }
   };
@@ -446,7 +443,7 @@ const OnboardingPage = (props: Props): ReactElement => {
                   >
                     {onboardingPage.component}
                     <hr className="margin-top-6 margin-bottom-4" aria-hidden={true} />
-                    <DevOnlySkipOnboardingButton setPage={setPage} queryShallowPush={queryShallowPush} />
+                    <DevOnlySkipOnboardingButton setPage={setPage} routeToPage={routeToPage} />
                     <OnboardingButtonGroup
                       isFinal={page.current === onboardingFlows[currentFlow].pages.length}
                     />

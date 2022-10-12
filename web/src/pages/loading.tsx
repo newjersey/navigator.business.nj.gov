@@ -10,7 +10,7 @@ import { onGuestSignIn } from "@/lib/auth/signinHelper";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { routeForPersona } from "@/lib/domain-logic/routeForPersona";
-import { ROUTES } from "@/lib/domain-logic/routes";
+import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { onboardingCompleted } from "@businessnjgovnavigator/shared/domain-logic/onboarding";
 import { useRouter } from "next/router";
@@ -28,7 +28,7 @@ const LoadingPage = (): ReactElement => {
 
   useEffect(() => {
     if (!router.isReady) return;
-    if (router.query.code) {
+    if (router.query[QUERIES.code]) {
       getCurrentUser().then((currentUser) => {
         dispatch({ type: "LOGIN", user: currentUser });
       });

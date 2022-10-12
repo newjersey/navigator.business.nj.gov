@@ -1,11 +1,12 @@
 import { Content } from "@/components/Content";
 import { AlertVariant } from "@/components/njwds-extended/Alert";
 import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
+import { QUERIES } from "@/lib/domain-logic/routes";
 import { useRouter } from "next/router";
 import { ReactElement, useCallback, useEffect, useRef, useState } from "react";
 
 interface QueryControlledAlertConfig {
-  queryKey: string;
+  queryKey: QUERIES;
   pagePath: string;
   headerText: string;
   bodyText: string;

@@ -3,6 +3,7 @@ import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { RoadmapContext } from "@/contexts/roadmapContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { QUERIES, routeShallowWithQuery } from "@/lib/domain-logic/routes";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import { setAnalyticsDimensions } from "@/lib/utils/analytics-helpers";
 import { getFlow, useMountEffectWhenDefined } from "@/lib/utils/helpers";
@@ -36,7 +37,7 @@ export const DeferredOnboardingQuestion = (props: Props) => {
     setAnalyticsDimensions(profileData);
     const newRoadmap = await buildUserRoadmap(profileData);
     setRoadmap(newRoadmap);
-    router.push({ query: { deferredQuestionAnswered: "true" } }, undefined, { shallow: true });
+    routeShallowWithQuery(router, QUERIES.deferredQuestionAnswered, "true");
   };
 
   return (

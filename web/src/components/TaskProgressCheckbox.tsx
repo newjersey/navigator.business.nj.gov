@@ -11,6 +11,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { routeForPersona } from "@/lib/domain-logic/routeForPersona";
+import { QUERIES, routeWithQuery } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
 import { isFormationTask, isTaxTask } from "@businessnjgovnavigator/shared/domain-logic/taskIds";
 import { emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
@@ -92,11 +93,11 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
       .then(() => {
         setSuccessSnackbarIsOpen(true);
         if (!config?.redirectOnSuccess) return;
-        router.push({
-          pathname: routeForPersona(userData.profileData.businessPersona),
-          query: {
-            fromFormBusinessEntity: isFormationTask(props.taskId) ? "true" : "false",
-            fromTaxRegistration: isTaxTask(props.taskId) ? "true" : "false",
+        routeWithQuery(router, {
+          path: routeForPersona(userData.profileData.businessPersona),
+          queries: {
+            [QUERIES.fromFormBusinessEntity]: isFormationTask(props.taskId) ? "true" : "false",
+            [QUERIES.fromTaxRegistration]: isTaxTask(props.taskId) ? "true" : "false",
           },
         });
       })

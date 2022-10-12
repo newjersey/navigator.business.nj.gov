@@ -5,7 +5,7 @@ import { PageSkeleton } from "@/components/PageSkeleton";
 import { SupportExploreSignUpChatCards } from "@/components/SupportExploreSignUpChatCards";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { routeForPersona } from "@/lib/domain-logic/routeForPersona";
-import { ROUTES } from "@/lib/domain-logic/routes";
+import { checkQueryValue, QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import { MediaQueries } from "@/lib/PageSizes";
 import { ABStorageFactory } from "@/lib/storage/ABStorage";
 import { setABExperienceDimension } from "@/lib/utils/analytics-helpers";
@@ -55,8 +55,8 @@ const Home = (): ReactElement => {
   }, [userData, error, router]);
 
   useEffect(() => {
-    if (!router.isReady || !router.query.signUp) return;
-    if (router.query.signUp === "true") {
+    if (!router.isReady || !router.query[QUERIES.signUp]) return;
+    if (checkQueryValue(router, QUERIES.signUp, "true")) {
       router.replace(ROUTES.onboarding);
     }
   }, [router.isReady, router, router.query]);

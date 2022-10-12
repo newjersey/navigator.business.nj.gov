@@ -18,8 +18,8 @@ import { useQueryControlledAlert } from "@/lib/data-hooks/useQueryControlledAler
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
-import { ROUTES } from "@/lib/domain-logic/routes";
 import { MediaQueries } from "@/lib/PageSizes";
+import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import { loadAllCertifications } from "@/lib/static/loadCertifications";
 import { loadRoadmapDisplayContent } from "@/lib/static/loadDisplayContent";
 import { loadAllFundings } from "@/lib/static/loadFundings";
@@ -48,7 +48,7 @@ const DashboardPage = (props: Props): ReactElement => {
   const isDesktopAndUp = useMediaQuery(MediaQueries.desktopAndUp);
 
   const ProfileUpdatedAlert = useQueryControlledAlert({
-    queryKey: "success",
+    queryKey: QUERIES.success,
     pagePath: ROUTES.dashboard,
     headerText: Config.profileDefaults.successTextHeader,
     bodyText: Config.profileDefaults.successTextBody,
@@ -56,7 +56,7 @@ const DashboardPage = (props: Props): ReactElement => {
   });
 
   const CalendarAlert = useQueryControlledAlert({
-    queryKey: "fromFormBusinessEntity",
+    queryKey: QUERIES.fromFormBusinessEntity,
     pagePath: ROUTES.dashboard,
     headerText: Config.dashboardDefaults.calendarSnackbarHeading,
     bodyText: Config.dashboardDefaults.calendarSnackbarBody,
@@ -65,7 +65,7 @@ const DashboardPage = (props: Props): ReactElement => {
   });
 
   const CertificationsAlert = useQueryControlledAlert({
-    queryKey: "fromTaxRegistration",
+    queryKey: QUERIES.fromTaxRegistration,
     pagePath: ROUTES.dashboard,
     headerText: Config.dashboardDefaults.certificationsSnackbarHeading,
     bodyText: Config.dashboardDefaults.certificationsSnackbarBody,
@@ -74,7 +74,7 @@ const DashboardPage = (props: Props): ReactElement => {
   });
 
   const FundingAlert = useQueryControlledAlert({
-    queryKey: "fromFunding",
+    queryKey: QUERIES.fromFunding,
     pagePath: ROUTES.dashboard,
     headerText: Config.dashboardDefaults.fundingSnackbarHeading,
     bodyText: Config.dashboardDefaults.fundingSnackbarBody,
@@ -83,7 +83,7 @@ const DashboardPage = (props: Props): ReactElement => {
   });
 
   const HiddenTasksAlert = useQueryControlledAlert({
-    queryKey: "fromFunding",
+    queryKey: QUERIES.fromFunding,
     pagePath: ROUTES.dashboard,
     headerText: Config.dashboardDefaults.hiddenTasksSnackbarHeading,
     bodyText: Config.dashboardDefaults.hiddenTasksSnackbarBody,
@@ -93,7 +93,7 @@ const DashboardPage = (props: Props): ReactElement => {
   });
 
   const DeferredQuestionAnsweredAlert = useQueryControlledAlert({
-    queryKey: "deferredQuestionAnswered",
+    queryKey: QUERIES.deferredQuestionAnswered,
     pagePath: ROUTES.dashboard,
     headerText: Config.dashboardDefaults.deferredOnboardingSnackbarHeader,
     bodyText: Config.dashboardDefaults.deferredOnboardingSnackbarBody,
