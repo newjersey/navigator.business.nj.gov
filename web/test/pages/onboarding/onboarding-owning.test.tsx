@@ -342,7 +342,6 @@ describe("onboarding - owning a business", () => {
     page.selectByText("Location", "Newark");
     page.selectByValue("Ownership", "veteran-owned");
     page.selectByValue("Ownership", "disabled-veteran");
-
     await page.visitStep(5);
     const page5 = within(screen.getByTestId("page-5-form"));
     expect(page5.queryByText(Config.onboardingDefaults.nextButtonText)).not.toBeInTheDocument();
@@ -373,7 +372,6 @@ describe("onboarding - owning a business", () => {
     page.selectByText("Location", "Newark");
     page.selectByValue("Ownership", "veteran-owned");
     page.selectByValue("Ownership", "disabled-veteran");
-
     await page.visitStep(4);
     const page4 = within(screen.getByTestId("page-4-form"));
     expect(page4.queryByText(Config.onboardingDefaults.nextButtonText)).not.toBeInTheDocument();

@@ -47,14 +47,7 @@
   "name": "Moving Company",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
-    "canBeReseller": false,
-    "isCpaRequiredApplicable": false,
-    "isLiquorLicenseApplicable": false,
-    "isRealEstateAppraisalManagementApplicable": false,
-    "isCertifiedInteriorDesignerApplicable": false,
-    "isProvidesStaffingServicesApplicable": false,
     "isTransportation": true,
-    "isCarServiceApplicable": false,
     "isInterstateTransportApplicable": true
   },
   "isEnabled": true,

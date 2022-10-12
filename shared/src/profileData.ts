@@ -7,18 +7,40 @@ export interface ProfileDocuments {
   readonly certifiedDoc: string;
 }
 
-export interface ProfileData {
+export interface IndustrySpecificData {
+  readonly liquorLicense: boolean;
+  readonly requiresCpa: boolean;
+  readonly homeBasedBusiness: boolean | undefined;
+  readonly providesStaffingService: boolean;
+  readonly certifiedInteriorDesigner: boolean;
+  readonly realEstateAppraisalManagement: boolean;
+  readonly cannabisLicenseType: CannabisLicenseType;
+  readonly cannabisMicrobusiness: boolean | undefined;
+  readonly constructionRenovationPlan: boolean | undefined;
+  readonly carService: CarServiceType | undefined;
+  readonly interstateTransport: boolean;
+}
+
+export const emptyIndustrySpecificData: IndustrySpecificData = {
+  liquorLicense: false,
+  requiresCpa: false,
+  homeBasedBusiness: undefined,
+  cannabisLicenseType: undefined,
+  cannabisMicrobusiness: undefined,
+  constructionRenovationPlan: undefined,
+  providesStaffingService: false,
+  certifiedInteriorDesigner: false,
+  realEstateAppraisalManagement: false,
+  carService: undefined,
+  interstateTransport: false,
+};
+
+export interface ProfileData extends IndustrySpecificData {
   readonly businessPersona: BusinessPersona;
   readonly businessName: string;
   readonly industryId: string | undefined;
   readonly legalStructureId: string | undefined;
   readonly municipality: Municipality | undefined;
-  readonly liquorLicense: boolean;
-  readonly requiresCpa: boolean;
-  readonly homeBasedBusiness: boolean | undefined;
-  readonly cannabisLicenseType: CannabisLicenseType;
-  readonly cannabisMicrobusiness: boolean | undefined;
-  readonly constructionRenovationPlan: boolean | undefined;
   readonly dateOfFormation: string | undefined;
   readonly entityId: string | undefined;
   readonly employerId: string | undefined;
@@ -34,12 +56,7 @@ export interface ProfileData {
   readonly foreignBusinessTypeIds: string[];
   readonly nexusLocationInNewJersey: boolean | undefined;
   readonly nexusDbaName: string | undefined;
-  readonly providesStaffingService: boolean;
-  readonly certifiedInteriorDesigner: boolean;
-  readonly realEstateAppraisalManagement: boolean;
-  readonly carService: CarServiceType | undefined;
   readonly operatingPhase: OperatingPhaseId;
-  readonly interstateTransport: boolean;
 }
 
 export const emptyProfileData: ProfileData = {
@@ -48,12 +65,6 @@ export const emptyProfileData: ProfileData = {
   industryId: undefined,
   legalStructureId: undefined,
   municipality: undefined,
-  liquorLicense: false,
-  requiresCpa: false,
-  homeBasedBusiness: undefined,
-  cannabisLicenseType: undefined,
-  cannabisMicrobusiness: undefined,
-  constructionRenovationPlan: undefined,
   dateOfFormation: undefined,
   entityId: undefined,
   employerId: undefined,
@@ -67,14 +78,10 @@ export const emptyProfileData: ProfileData = {
   naicsCode: "",
   foreignBusinessType: undefined,
   foreignBusinessTypeIds: [],
-  nexusLocationInNewJersey: undefined,
   nexusDbaName: undefined,
-  providesStaffingService: false,
-  certifiedInteriorDesigner: false,
-  realEstateAppraisalManagement: false,
-  carService: undefined,
+  nexusLocationInNewJersey: undefined,
   operatingPhase: "GUEST_MODE",
-  interstateTransport: false,
+  ...emptyIndustrySpecificData,
 };
 
 export const createEmptyProfileData = (): ProfileData => {

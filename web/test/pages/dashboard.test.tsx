@@ -51,7 +51,7 @@ jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn()
 
 const Config = getMergedConfig();
 
-const setMobileScreen = (value: boolean): void => {
+const setDesktopScreen = (value: boolean): void => {
   (useMediaQuery as jest.Mock).mockImplementation(() => value);
 };
 
@@ -68,7 +68,7 @@ describe("dashboard page", () => {
     useMockUserData({});
     useMockRoadmap({});
     useMockRouter({});
-    setMobileScreen(false);
+    setDesktopScreen(true);
     jest.useFakeTimers();
   });
 
@@ -277,6 +277,7 @@ describe("dashboard page", () => {
   });
 
   it("renders registration card when routing is not from onboarding and authentication is false,", async () => {
+    setDesktopScreen(true);
     const setAlertIsVisible = jest.fn();
     useMockRouter({ query: { fromOnboarding: "false" } });
 
@@ -406,6 +407,22 @@ describe("dashboard page", () => {
     expect(screen.queryByTestId("filings-calendar-as-list")).not.toBeInTheDocument();
   });
 
+  it("renders tabs in mobile view", () => {
+    setDesktopScreen(false);
+    renderDashboardPage({});
+
+    expect(screen.queryByTestId("rightSidebarPageLayout")).not.toBeInTheDocument();
+    expect(screen.getByTestId("two-tab-Layout")).toBeInTheDocument();
+  });
+
+  it("does not render tabs in desktop view", () => {
+    setDesktopScreen(true);
+    renderDashboardPage({});
+
+    expect(screen.getByTestId("rightSidebarPageLayout")).toBeInTheDocument();
+    expect(screen.queryByTestId("two-tab-Layout")).not.toBeInTheDocument();
+  });
+
   describe("deferred onboarding question", () => {
     it("shows home-based business question when applicable to industry and not yet answered", () => {
       const userData = generateUserData({
@@ -470,7 +487,7 @@ describe("dashboard page", () => {
     });
 
     const chooseHomeBasedValue = (value: "true" | "false") => {
-      fireEvent.click(screen.getByTestId(`home-based-business-${value}`));
+      fireEvent.click(screen.getByTestId(`home-based-business-radio-${value}`));
     };
   });
 });

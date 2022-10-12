@@ -272,15 +272,25 @@ export const getPhoneNumberFormat = (phoneNumber: string) => {
   return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6, 10)}`;
 };
 
+export const capitalizeFirstLetter = (text: string): string => text.charAt(0).toUpperCase() + text.slice(1);
+
 export const camelCaseToSentence = (text: string): string => {
   const spacedCase = text
     .split(/(?=[A-Z])/)
     .join(" ")
     .toLowerCase();
-  return spacedCase.charAt(0).toUpperCase() + spacedCase.slice(1);
+  return capitalizeFirstLetter(spacedCase);
 };
 
-export const camelCaseToSnakeCase = (text: string): string => {
+export const kabobSnakeSentenceToCamelCase = (text: string): string => {
+  return text
+    .toLowerCase()
+    .split(/[\s_-]/gm)
+    .map((cased, index) => (index == 0 ? cased : capitalizeFirstLetter(cased)))
+    .join("");
+};
+
+export const camelCaseToKabobCase = (text: string): string => {
   return text
     .split(/(?=[A-Z])/)
     .join("-")

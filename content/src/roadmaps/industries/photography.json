@@ -4,15 +4,7 @@
   "defaultSectorId": "digital-and-print-media",
   "industryOnboardingQuestions" : {
     "canBeHomeBased": true,
-    "canBeReseller": true,
-    "isCpaRequiredApplicable": false,
-    "isProvidesStaffingServicesApplicable": false,
-    "isCertifiedInteriorDesignerApplicable": false,
-    "isRealEstateAppraisalManagementApplicable": false,
-    "isLiquorLicenseApplicable": false,
-    "isTransportation": false,
-    "isCarServiceApplicable": false,
-    "isInterstateTransportApplicable": false
+    "canBeReseller": true
   },
   "isEnabled": true,
   "roadmapSteps": [

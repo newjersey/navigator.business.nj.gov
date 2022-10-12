@@ -66,6 +66,7 @@ import {
   UserData,
 } from "@businessnjgovnavigator/shared";
 import { createEmptyFormationFormData } from "@businessnjgovnavigator/shared/formationData";
+import { IndustrySpecificData } from "../../shared/lib/shared/src/profileData";
 
 export const generateSectionType = (): SectionType => {
   const num = randomInt();
@@ -119,6 +120,28 @@ export const generateTaxFiling = (overrides: Partial<TaxFiling>): TaxFiling => {
   };
 };
 
+export const generateIndustrySpecificData = (
+  overrides: Partial<IndustrySpecificData>,
+  industry?: Industry,
+  canHavePermanentLocation?: boolean
+): IndustrySpecificData => {
+  const _industry = industry ?? randomIndustry(canHavePermanentLocation);
+  return {
+    liquorLicense: false,
+    requiresCpa: false,
+    homeBasedBusiness: false,
+    cannabisLicenseType: undefined,
+    cannabisMicrobusiness: undefined,
+    constructionRenovationPlan: undefined,
+    providesStaffingService: false,
+    certifiedInteriorDesigner: !!_industry.industryOnboardingQuestions.isCertifiedInteriorDesignerApplicable,
+    realEstateAppraisalManagement: false,
+    carService: undefined,
+    interstateTransport: false,
+    ...overrides,
+  };
+};
+
 export const generateProfileData = (
   overrides: Partial<ProfileData>,
   canHavePermanentLocation?: boolean
@@ -128,17 +151,12 @@ export const generateProfileData = (
   const industry = randomIndustry(canHavePermanentLocation);
 
   return {
+    ...generateIndustrySpecificData({}, industry),
     businessPersona: persona,
     businessName: `some-business-name-${randomInt()}`,
     industryId: industry.id,
     legalStructureId: randomLegalStructure().id,
     municipality: generateMunicipality({}),
-    liquorLicense: false,
-    requiresCpa: false,
-    homeBasedBusiness: false,
-    cannabisLicenseType: undefined,
-    cannabisMicrobusiness: undefined,
-    constructionRenovationPlan: undefined,
     dateOfFormation: getCurrentDateFormatted("YYYY-MM-DD"),
     entityId: randomInt(10).toString(),
     employerId: randomInt(9).toString(),
@@ -158,12 +176,7 @@ export const generateProfileData = (
     foreignBusinessTypeIds: [],
     nexusLocationInNewJersey: undefined,
     nexusDbaName: undefined,
-    providesStaffingService: false,
-    certifiedInteriorDesigner: industry.industryOnboardingQuestions.isCertifiedInteriorDesignerApplicable,
-    realEstateAppraisalManagement: false,
-    carService: undefined,
     operatingPhase: "NEEDS_TO_FORM",
-    interstateTransport: false,
     ...overrides,
   };
 };

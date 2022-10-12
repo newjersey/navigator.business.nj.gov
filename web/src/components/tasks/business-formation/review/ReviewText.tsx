@@ -3,7 +3,7 @@ import { Button } from "@/components/njwds-extended/Button";
 import { LookupStepIndexByName } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { FormationStepNames } from "@/lib/types/types";
-import { camelCaseToSnakeCase, scrollToTop, setHeaderRole } from "@/lib/utils/helpers";
+import { camelCaseToKabobCase, scrollToTop, setHeaderRole } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { FormationTextField } from "@businessnjgovnavigator/shared/formationData";
 import { useContext } from "react";
@@ -16,7 +16,7 @@ interface Props {
 export const ReviewText = (props: Props) => {
   const { state, setStepIndex } = useContext(BusinessFormationContext);
   const headerLevelTwo = setHeaderRole(2, "h3-styling");
-  const snakeCaseFieldName = camelCaseToSnakeCase(props.fieldName);
+  const snakeCaseFieldName = camelCaseToKabobCase(props.fieldName);
   return (
     <>
       <div className="flex space-between">

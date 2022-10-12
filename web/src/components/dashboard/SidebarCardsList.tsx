@@ -5,12 +5,14 @@ import { Icon } from "@/components/njwds/Icon";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { filterCertifications } from "@/lib/domain-logic/filterCertifications";
 import { filterFundings } from "@/lib/domain-logic/filterFundings";
+import { getVisibleCertifications } from "@/lib/domain-logic/getVisibleCertifications";
+import { getVisibleFundings } from "@/lib/domain-logic/getVisibleFundings";
 import { sortCertifications } from "@/lib/domain-logic/sortCertifications";
 import { sortFundings } from "@/lib/domain-logic/sortFundings";
 import { Certification, Funding, SidebarCardContent } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { LookupOperatingPhaseById } from "@businessnjgovnavigator/shared";
+import { LookupOperatingPhaseById, UserData } from "@businessnjgovnavigator/shared";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import { ReactElement, useState } from "react";
 
@@ -30,12 +32,11 @@ export const SidebarCardsList = (props: Props): ReactElement => {
     ? sortCertifications(filterCertifications(props.certifications, userData))
     : [];
 
-  const visibleSortedFundings = filteredSortedFundings.filter(
-    (it) => !userData?.preferences.hiddenFundingIds.includes(it.id)
-  );
+  const visibleSortedFundings = getVisibleFundings(filteredSortedFundings, userData as UserData);
 
-  const visibleSortedCertifications = filteredSortedCertifications.filter(
-    (it) => !userData?.preferences.hiddenCertificationIds.includes(it.id)
+  const visibleSortedCertifications = getVisibleCertifications(
+    filteredSortedCertifications,
+    userData as UserData
   );
 
   const hiddenSortedCertifications = sortCertifications(

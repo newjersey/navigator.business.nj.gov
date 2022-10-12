@@ -8,24 +8,24 @@
         "radioButtonConditionalText": ""
       },
       "certifiedInteriorDesigner": {
-        "radioButtonYesText": "",
-        "radioButtonNoText": "",
+        "radioButtonTrueText": "",
+        "radioButtonFalseText": "",
         "header": "",
         "description": ""
       },
       "requiresCpa": {
         "header": "",
         "description": "",
-        "radioButtonYesText": "",
-        "radioButtonNoText": ""
+        "radioButtonTrueText": "",
+        "radioButtonFalseText": ""
       },
       "employmentAgency": {
         "header": "",
         "description": ""
       },
       "homeBasedBusiness": {
-        "radioButtonYesText": "Yes",
-        "radioButtonNoText": "No",
+        "radioButtonTrueText": "Yes",
+        "radioButtonFalseText": "No",
         "header": "Home-based business",
         "description": "Are you a `home-based business|home-based-business`?"
       },
@@ -36,12 +36,12 @@
       "liquorLicense": {
         "header": "",
         "description": "",
-        "radioButtonYesText": "",
-        "radioButtonNoText": ""
+        "radioButtonTrueText": "",
+        "radioButtonFalseText": ""
       },
       "realEstateAppraisalManagement": {
-        "radioButtonYesText": "",
-        "radioButtonNoText": "",
+        "radioButtonTrueText": "",
+        "radioButtonFalseText": "",
         "header": "",
         "description": ""
       },
@@ -53,14 +53,14 @@
         "description": ""
       },
       "providesStaffingService": {
-        "radioButtonYesText": "",
-        "radioButtonNoText": "",
+        "radioButtonTrueText": "",
+        "radioButtonFalseText": "",
         "header": "",
         "description": ""
       },
       "interstateTransport": {
-        "radioButtonYesText": "",
-        "radioButtonNoText": "",
+        "radioButtonTrueText": "",
+        "radioButtonFalseText": "",
         "header": "",
         "description": ""
       }

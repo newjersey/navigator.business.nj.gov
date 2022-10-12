@@ -4,15 +4,7 @@
   "defaultSectorId": "finance-and-insurance",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
-    "canBeReseller": false,
-    "isProvidesStaffingServicesApplicable": false,
-    "isCertifiedInteriorDesignerApplicable": false,
-    "isRealEstateAppraisalManagementApplicable": false,
-    "isCpaRequiredApplicable": true,
-    "isLiquorLicenseApplicable": false,
-    "isTransportation": false,
-    "isCarServiceApplicable": false,
-    "isInterstateTransportApplicable": false
+    "isCpaRequiredApplicable": true
   },
   "isEnabled": true,
   "roadmapSteps": [

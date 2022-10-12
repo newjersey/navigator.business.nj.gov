@@ -3,16 +3,6 @@
   "defaultSectorId": "real-estate",
   "canHavePermanentLocation": true,
   "industryOnboardingQuestions" : {
-    "canBeHomeBased": false,
-    "canBeReseller": false,
-    "isCpaRequiredApplicable": false,
-    "isLiquorLicenseApplicable": false,
-    "isRealEstateAppraisalManagementApplicable": false,
-    "isCertifiedInteriorDesignerApplicable": false,
-    "isProvidesStaffingServicesApplicable": false,
-    "isTransportation": false,
-    "isCarServiceApplicable": false,
-    "isInterstateTransportApplicable": false
   },
   "roadmapSteps": [
     {

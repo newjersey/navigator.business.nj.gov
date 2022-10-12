@@ -52,15 +52,7 @@
   "name": "School Bus",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
-    "isProvidesStaffingServicesApplicable": false,
-    "isCertifiedInteriorDesignerApplicable": false,
-    "isRealEstateAppraisalManagementApplicable": false,
-    "canBeReseller": false,
-    "isLiquorLicenseApplicable": false,
-    "isCpaRequiredApplicable": false,
-    "isTransportation": true,
-    "isCarServiceApplicable": false,
-    "isInterstateTransportApplicable": false
+    "isTransportation": true
   },
   "isEnabled": true,
   "additionalSearchTerms": "bus, school bus, ",
