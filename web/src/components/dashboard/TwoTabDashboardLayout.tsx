@@ -41,11 +41,14 @@ export default function TwoTabDashboardLayout({ firstTab, secondTab, certificati
         color: "white",
       },
     },
+    minHeight: "auto",
   };
   const unselectedButtonStyling = {
     textTransform: "none",
     color: "#5c5c5c !important",
     borderRadius: "8px",
+    padding: "8px",
+    minHeight: "44px",
   };
   const selectedButtonStyling = {
     backgroundColor: "white",
@@ -53,6 +56,8 @@ export default function TwoTabDashboardLayout({ firstTab, secondTab, certificati
     borderRadius: "8px",
     textTransform: "none",
     color: "#1b1b1b !important",
+    padding: "8px",
+    minHeight: "44px",
   };
 
   const getContentWithCardCount = () => {
