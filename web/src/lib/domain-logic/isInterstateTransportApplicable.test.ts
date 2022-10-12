@@ -16,4 +16,8 @@ describe("isInterstateTransportApplicable", () => {
   it("returns true when industry is a moving company", () => {
     expect(isInterstateTransportApplicable("moving-company")).toEqual(true);
   });
+
+  it("returns true when industry is a logistics company", () => {
+    expect(isInterstateTransportApplicable("logistics")).toEqual(true);
+  });
 });

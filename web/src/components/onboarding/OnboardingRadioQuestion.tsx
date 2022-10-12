@@ -1,6 +1,7 @@
 import { Content } from "@/components/Content";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { IndustrySpecificDataAddOnFields } from "@/lib/types/types";
 import { ProfileData } from "@businessnjgovnavigator/shared";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import React, { ReactElement, useContext } from "react";
@@ -14,6 +15,7 @@ import {
 type ProfileDataTypes = ProfileData[keyof ProfileData];
 interface Props<T> {
   fieldName: keyof ProfileData;
+  contentFieldName?: IndustrySpecificDataAddOnFields;
   ariaLabel?: string;
   choices: Exclude<T, undefined>[];
   labels?: Record<string, string>;
@@ -58,7 +60,9 @@ export const OnboardingRadioQuestion = <T extends ProfileDataTypes>(props: Props
                     {props.labels
                       ? props.labels[val.toString()]
                       : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                        (Config.profileDefaults[state.flow] as any)[props.fieldName][
+                        (Config.profileDefaults[state.flow] as any)[
+                          props.contentFieldName ?? props.fieldName
+                        ][
                           `radioButton${capitalizeFirstLetter(
                             kabobSnakeSentenceToCamelCase(val.toString())
                           )}Text`

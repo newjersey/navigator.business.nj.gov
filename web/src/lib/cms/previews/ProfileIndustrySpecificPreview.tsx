@@ -6,6 +6,7 @@ import { OnboardingEmploymentAgency } from "@/components/onboarding/OnboardingEm
 import { OnboardingHomeBasedBusiness } from "@/components/onboarding/OnboardingHomeBasedBusiness";
 import { OnboardingHomeContractor } from "@/components/onboarding/OnboardingHomeContractor";
 import { OnboardingLiquorLicense } from "@/components/onboarding/OnboardingLiquorLicense";
+import { OnboardingLogisticsCompany } from "@/components/onboarding/OnboardingLogisticsCompany";
 import { OnboardingMovingCompany } from "@/components/onboarding/OnboardingMovingCompany";
 import { OnboardingRealEstateAppraisalManagement } from "@/components/onboarding/OnboardingRealEstateAppraisalManagement";
 import { OnboardingStaffingService } from "@/components/onboarding/OnboardingStaffingService";
@@ -63,8 +64,11 @@ const ProfilePreviewIndustrySpecific = (props: PreviewProps) => {
           <FieldLabelOnboarding fieldName="providesStaffingService" />
           <OnboardingStaffingService />
           <hr className="margin-y-4" />
-          <FieldLabelOnboarding fieldName="interstateTransport" />
+          <FieldLabelOnboarding fieldName="interstateMoving" />
           <OnboardingMovingCompany />
+          <hr className="margin-y-4" />
+          <FieldLabelOnboarding fieldName="interstateLogistics" />
+          <OnboardingLogisticsCompany />
           <hr className="margin-y-440" />
         </ProfileDataContext.Provider>
       </div>

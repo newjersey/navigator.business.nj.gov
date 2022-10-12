@@ -58,7 +58,13 @@
         "header": "",
         "description": ""
       },
-      "interstateTransport": {
+      "interstateMoving": {
+        "radioButtonTrueText": "",
+        "radioButtonFalseText": "",
+        "header": "",
+        "description": ""
+      },
+      "interstateLogistics": {
         "radioButtonTrueText": "",
         "radioButtonFalseText": "",
         "header": "",
