@@ -46,7 +46,7 @@
     "isCertifiedInteriorDesignerApplicable": false,
     "isProvidesStaffingServicesApplicable": false
   },
-  "isEnabled": false,
+  "isEnabled": true,
   "additionalSearchTerms": "independent artist, independent writer, independent performer",
   "id": "independent-artist",
   "description": "Unaffiliated artists such as writers, performers, and other creators"
