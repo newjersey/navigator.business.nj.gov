@@ -71,7 +71,6 @@ interface v92IndustrySpecificData {
   interstateTransport: boolean;
 }
 
-
 interface v92ProfileData extends v92IndustrySpecificData {
   businessPersona: v92BusinessPersona;
   businessName: string;

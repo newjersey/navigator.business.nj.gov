@@ -187,7 +187,7 @@ export const Migrations: MigrationFunction[] = [
   migrate_v88_to_v89,
   migrate_v89_to_v90,
   migrate_v90_to_v91,
-  migrate_v91_to_v92
+  migrate_v91_to_v92,
 ];
 
 export const CURRENT_VERSION = Migrations.length;

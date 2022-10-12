@@ -490,5 +490,4 @@ describe("dashboard page", () => {
       fireEvent.click(screen.getByTestId(`home-based-business-radio-${value}`));
     };
   });
-
 });
