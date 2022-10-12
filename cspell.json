@@ -106,7 +106,8 @@
     "OPPS",
     "evtp",
     "USDOL",
-    "Pharma"
+    "Pharma",
+    "YTTW"
   ],
   "ignorePaths": ["node_modules/**", "out/**", "web/out/**", "package.json"]
 }
