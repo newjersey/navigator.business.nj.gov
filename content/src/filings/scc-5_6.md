@@ -15,7 +15,9 @@ taxRates: >
 filingMethod: online
 filingDetails: null
 frequency: Monthly *(due on the 20th day of the month after the end of the tax year)*
-additionalInfo: null
+additionalInfo: The revenue from this tax is collected by the New Jersey Spill
+  Compensation Fund to carry out the purposes of the New Jersey Spill
+  Compensation and Control Act.
 agency: New Jersey Division of Taxation
 id: scc-5/scc-6
 callToActionLink: https://www.state.nj.us/treasury/taxation/spill_over.shtml
