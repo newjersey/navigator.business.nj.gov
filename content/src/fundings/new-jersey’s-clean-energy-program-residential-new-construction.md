@@ -26,13 +26,16 @@ sector:
 openDate: ""
 dueDate: ""
 ---
-The Residential New Construction (RNC) Program is designed to increase the energy efficiency and environmental performance of residential new construction buildings (single and multifamily) in New Jersey.  The program strategy is to establish standards for energy efficient new construction in New Jersey based on national platforms, including EPA ENERGY STAR® Certified Homes Program, DOE Zero Energy Ready Home (ZERH) Program, EPA Multifamily New Construction, and the EPA ENERGY STAR Multifamily High‐Rise Program (MFHR).  The RNC program offers technical support and incentives to builders of new single or multi‐family residential structures or homes undergoing a complete rehabilitation (gut) that comply with these standards.  
+The Residential New Construction (RNC) Program is designed to increase the energy efficiency and environmental performance of residential new construction buildings (single and multifamily) in New Jersey by offering technical support and incentives to builders that comply with these standards.  The program strategy is to establish standards for energy efficient new construction in New Jersey based on national platforms, including EPA ENERGY STAR® Certified Homes Program, DOE Zero Energy Ready Home (ZERH) Program, EPA Multifamily New Construction, and the EPA ENERGY STAR Multifamily High‐Rise Program (MFHR). 
 
----
+- - -
+
 ### Eligibility
+
 * Must use natural gas and/or electricity as the primary heating fuel supplied by a New Jersey investor‐owned utility
 * Must be newly constructed single family, multi‐single low‐rise, and high‐rise multifamily buildings
-* The RNC Program will also enroll any existing home undergoing substantial gut renovation or remodeling that meets the criteria above.
+* The RNC Program will also enroll any existing home undergoing substantial gut renovation or remodeling that meets the criteria above
 
->### Benefit
->The program offers builders and raters varying incentives from $500 to $6,000+ per home to develop projects designed beyond the minimum efficiency requirements with high efficiency systems and upgrades not found in standard new homes that reduce energy use and in turn reduce energy bills.  
+> ### Benefit
+>
+> The program offers builders and raters varying incentives from $500 to $6,000+ per home to develop projects designed beyond the minimum efficiency requirements with high efficiency systems and upgrades not found in standard new homes that reduce energy use and in turn reduce energy bills.
