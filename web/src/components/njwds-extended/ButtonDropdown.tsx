@@ -59,7 +59,7 @@ export const ButtonDropdown = (props: Props): ReactElement => {
   return (
     <>
       <button
-        className="usa-button padding-y-0 padding-right-0"
+        className="usa-button padding-y-05 padding-right-0"
         onClick={toggleDropdown}
         type="button"
         ref={anchorRef}
