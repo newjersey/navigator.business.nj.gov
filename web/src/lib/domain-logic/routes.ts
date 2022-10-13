@@ -21,8 +21,8 @@ interface QUERY_PARAMS_VALUES {
   success: "true";
   path: "businessFormation";
   signUp: "true";
-  industry: any;
-  code: any;
+  industry: string;
+  code: string;
 }
 
 export enum QUERIES {

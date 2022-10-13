@@ -96,6 +96,8 @@ export const BusinessFormation = (props: Props): ReactElement => {
     });
   }, userData);
 
+  const completeFilingQuery = router.query[QUERIES.completeFiling];
+
   useEffect(() => {
     const shouldFetchCompletedFiling = (): boolean => {
       if (!userData || getCompletedFilingApiCallOccurred.current) return false;
@@ -132,7 +134,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
         });
       }
     })();
-  }, [router.isReady, router.query[QUERIES.completeFiling], update, router, props.task.urlSlug, userData]);
+  }, [router.isReady, completeFilingQuery, update, router, props.task.urlSlug, userData]);
 
   const legalStructureId = useMemo(
     () => (userData?.profileData.legalStructureId ?? defaultFormationLegalType) as FormationLegalType,

@@ -18,8 +18,8 @@ import { useQueryControlledAlert } from "@/lib/data-hooks/useQueryControlledAler
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
-import { MediaQueries } from "@/lib/PageSizes";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
+import { MediaQueries } from "@/lib/PageSizes";
 import { loadAllCertifications } from "@/lib/static/loadCertifications";
 import { loadRoadmapDisplayContent } from "@/lib/static/loadDisplayContent";
 import { loadAllFundings } from "@/lib/static/loadFundings";
