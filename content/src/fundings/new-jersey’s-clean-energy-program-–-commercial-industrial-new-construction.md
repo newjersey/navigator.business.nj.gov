@@ -20,7 +20,11 @@ mwvb: n/a
 preferenceForOpportunityZone: no
 county:
   - All
-sector: []
+sector:
+  - construction
+  - clean-energy
+  - other-services
+  - manufacturing
 openDate: ""
 dueDate: ""
 ---
@@ -31,8 +35,11 @@ New Jersey’s Clean Energy Program (NJCEP) encourages energy efficient new cons
 ### Eligibility
 
 * Participants must be electric and/or gas customers of New Jersey investor-owned utilities and pay the monthly Societal Benefits Charge (SBC)
-* Incentives are offered for new construction and substantial renovation (gut rehab). Substantial renovations (gut rehab) are defined as one of the following: change of use and reconstruction of an existing building; construction work of a nature requiring that the building or portion of the building within be out of service for at least 30 consecutive days; or reconstruction of a vacant structure or a portion of the building within
+* Incentives are offered for new construction and substantial renovation (gut rehab) defined as one of the following: 
+  change of use and reconstruction of an existing building
+  construction work of a nature requiring that the building or portion of the building within be out of service for at least 30 consecutive days
+  reconstruction of a vacant structure or a portion of the building within
 
-> ### Benefit
+> ### Benefits
 >
-> There is an entity cap of $4,000,000 per fiscal year. New construction projects designed beyond the minimum efficiency requirements can reduce energy use and in turn reduce energy bills. Energy efficiency projects are designed to increase long term comfort and safety.
+> There is an entity cap of $4M per fiscal year.
