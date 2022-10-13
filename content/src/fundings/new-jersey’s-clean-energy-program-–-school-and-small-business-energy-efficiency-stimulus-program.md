@@ -38,7 +38,7 @@ A grant is available for New Jersey-based small businesses that are:
 
 * Certified by the State as women or minority-owned that are independently owned and operated
 * Have no more than 100 full-time employees
-* Have annual gross revenues that does not exceed $12 million
+* Have annual gross revenues that does not exceed $12M
 
 > ### Benefit
 >
