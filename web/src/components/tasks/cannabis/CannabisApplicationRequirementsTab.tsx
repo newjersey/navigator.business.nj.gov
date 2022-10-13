@@ -127,7 +127,7 @@ export const CannabisApplicationRequirementsTab = (props: Props): ReactElement =
 
       <div
         style={{ marginTop: "auto" }}
-        className="flex flex-justify-end bg-base-lightest margin-x-neg-205 padding-3 margin-bottom-neg-205 flex-column mobile-lg:flex-row"
+        className="flex flex-justify-end bg-base-lightest margin-x-neg-4 padding-3 margin-top-3 margin-bottom-neg-4 flex-column mobile-lg:flex-row"
       >
         <Button style="secondary" dataTestid="backButton" onClick={props.onBack}>
           {Config.cannabisPriorityStatus.backButtonText}
