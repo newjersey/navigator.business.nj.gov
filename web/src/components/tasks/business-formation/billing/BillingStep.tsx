@@ -50,7 +50,7 @@ export const BillingStep = (): ReactElement => {
       </div>
       <div className="grid-row">
         <div className="tablet:grid-col-6">
-          <div className="form-input margin-bottom-2">
+          <div className="form-input">
             <BusinessFormationTextField
               validationText={Config.businessFormationDefaults.contactPhoneNumberErrorText}
               label={Config.businessFormationDefaults.contactPhoneNumberLabel}

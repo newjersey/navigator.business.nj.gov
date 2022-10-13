@@ -114,7 +114,7 @@ export const RegisteredAgent = (): ReactElement => {
   return (
     <>
       <Content>{state.displayContent.agentNumberOrManual.contentMd}</Content>
-      <div className="margin-bottom-2" id="registeredAgent">
+      <div id="registeredAgent">
         <div className="form-input">
           <FormControl fullWidth>
             <RadioGroup
