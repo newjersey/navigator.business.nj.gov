@@ -26,7 +26,7 @@ sector:
 openDate: ""
 dueDate: ""
 ---
-The Residential New Construction (RNC) Program is designed to increase the energy efficiency and environmental performance of residential new construction buildings (single and multifamily) in New Jersey by offering technical support and incentives to builders that comply with these standards.  The program strategy is to establish standards for energy efficient new construction in New Jersey based on national platforms, including EPA ENERGY STAR® Certified Homes Program, DOE Zero Energy Ready Home (ZERH) Program, EPA Multifamily New Construction, and the EPA ENERGY STAR Multifamily High‐Rise Program (MFHR). 
+The Residential New Construction (RNC) Program is designed to increase the energy efficiency and environmental performance of residential new construction buildings (single and multifamily) in New Jersey by offering technical support and incentives to builders that comply with these standards. 
 
 - - -
 
