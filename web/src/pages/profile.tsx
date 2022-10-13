@@ -38,6 +38,7 @@ import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
 import { routeForPersona } from "@/lib/domain-logic/routeForPersona";
+import { checkQueryValue, QUERIES } from "@/lib/domain-logic/routes";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import {
@@ -114,7 +115,7 @@ const ProfilePage = (props: Props): ReactElement => {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const redirect = (params?: { [key: string]: any }, routerType = router.push): Promise<boolean> => {
-    if (router.query.path === "businessFormation") {
+    if (checkQueryValue(router, QUERIES.path, "businessFormation")) {
       const formationUrlSlug = getTaskFromRoadmap(roadmap, formationTaskId)?.urlSlug ?? "";
       return routerType(`/tasks/${formationUrlSlug}`);
     }

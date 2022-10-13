@@ -1,6 +1,7 @@
 import { AuthAlertContext } from "@/contexts/authAlertContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useSidebarCards } from "@/lib/data-hooks/useSidebarCards";
+import { checkQueryValue, QUERIES } from "@/lib/domain-logic/routes";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { useRouter } from "next/router";
 import { useContext, useEffect } from "react";
@@ -10,7 +11,10 @@ export const useAuthAlertPage = (): void => {
   const { isAuthenticated, setAlertIsVisible, modalIsVisible } = useContext(AuthAlertContext);
   const router = useRouter();
   useMountEffectWhenDefined(() => {
-    if (isAuthenticated === IsAuthenticated.FALSE && router.query.fromOnboarding === "true") {
+    if (
+      isAuthenticated === IsAuthenticated.FALSE &&
+      checkQueryValue(router, QUERIES.fromOnboarding, "true")
+    ) {
       setAlertIsVisible(true);
       return;
     }

@@ -1,5 +1,6 @@
 import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { QUERIES, routeShallowWithQuery } from "@/lib/domain-logic/routes";
 import { SidebarCardContent } from "@/lib/types/types";
 import { formationTaskId } from "@businessnjgovnavigator/shared/";
 import { useRouter } from "next/router";
@@ -21,7 +22,7 @@ export const SidebarCardFormationNudge = (props: Props): ReactElement => {
     if (!userData || !updateQueue) return;
     queueUpdateTaskProgress(formationTaskId, "COMPLETED");
     await updateQueue.update();
-    router.push({ query: { fromForming: "true" } }, undefined, { shallow: true });
+    routeShallowWithQuery(router, QUERIES.fromForming, "true");
   };
 
   const onClick = async () => {

@@ -5,7 +5,7 @@ import { useContext } from "react";
 
 interface Props {
   setPage: (page: { current: number; previous: number }) => void;
-  queryShallowPush: (page: number) => void;
+  routeToPage: (page: number) => void;
 }
 
 export const DevOnlySkipOnboardingButton = (props: Props) => {
@@ -25,7 +25,7 @@ export const DevOnlySkipOnboardingButton = (props: Props) => {
       },
     });
     props.setPage({ current: 5, previous: 4 });
-    props.queryShallowPush(5);
+    props.routeToPage(5);
   };
 
   if (state.page === 1 && process.env.NODE_ENV === "development") {

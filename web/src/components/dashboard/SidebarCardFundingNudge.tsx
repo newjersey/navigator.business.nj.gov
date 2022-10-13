@@ -1,6 +1,7 @@
 import { SectorModal } from "@/components/dashboard/SectorModal";
 import { SidebarCardGeneric } from "@/components/dashboard/SidebarCardGeneric";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { QUERIES, routeShallowWithQuery } from "@/lib/domain-logic/routes";
 import { SidebarCardContent } from "@/lib/types/types";
 import { useRouter } from "next/router";
 import { ReactElement, useState } from "react";
@@ -23,7 +24,7 @@ export const SidebarCardFundingNudge = (props: Props): ReactElement => {
         operatingPhase: "UP_AND_RUNNING",
       },
     });
-    router.push({ query: { fromFunding: "true" } }, undefined, { shallow: true });
+    routeShallowWithQuery(router, QUERIES.fromFunding, "true");
   };
 
   const onClick = async () => {

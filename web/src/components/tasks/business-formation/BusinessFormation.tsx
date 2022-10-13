@@ -11,6 +11,7 @@ import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import * as api from "@/lib/api-client/apiClient";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { checkQueryValue, QUERIES } from "@/lib/domain-logic/routes";
 import { splitFullName } from "@/lib/domain-logic/splitFullName";
 import { FormationDisplayContentMap, NameAvailability, Task } from "@/lib/types/types";
 import { getModifiedTaskContent, useMountEffectWhenDefined } from "@/lib/utils/helpers";
@@ -98,7 +99,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
   useEffect(() => {
     const shouldFetchCompletedFiling = (): boolean => {
       if (!userData || getCompletedFilingApiCallOccurred.current) return false;
-      const completeFilingQueryParamExists = router.query.completeFiling === "true";
+      const completeFilingQueryParamExists = checkQueryValue(router, QUERIES.completeFiling, "true");
       const completedPayment = userData.formationData.completedFilingPayment;
       const noCompletedFilingExists = !userData.formationData.getFilingResponse?.success;
       return completeFilingQueryParamExists || (completedPayment && noCompletedFilingExists);
@@ -131,7 +132,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
         });
       }
     })();
-  }, [router.isReady, router.query.completeFiling, update, router, props.task.urlSlug, userData]);
+  }, [router.isReady, router.query[QUERIES.completeFiling], update, router, props.task.urlSlug, userData]);
 
   const legalStructureId = useMemo(
     () => (userData?.profileData.legalStructureId ?? defaultFormationLegalType) as FormationLegalType,
