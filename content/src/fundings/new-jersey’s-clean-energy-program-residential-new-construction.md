@@ -34,7 +34,7 @@ The Residential New Construction (RNC) Program is designed to increase the energ
 
 * Must use natural gas and/or electricity as the primary heating fuel supplied by a New Jersey investor‐owned utility
 * Must be newly constructed single family, multi‐single low‐rise, and high‐rise multifamily buildings
-* The RNC Program will also enroll any existing home undergoing substantial gut renovation or remodeling that meets the criteria above
+* The program will also enroll any existing home undergoing substantial gut renovation or remodeling that meets the criteria above
 
 > ### Benefit
 >
