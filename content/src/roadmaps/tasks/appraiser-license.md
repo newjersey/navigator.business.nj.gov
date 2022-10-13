@@ -20,6 +20,7 @@ You need to be a Licensed Appraiser before you can offer professional services.
 ### Application Requirements
 - Criminal background check
 - Pay any associated fees
+- []{bla} bla
 
 >**Once completed you will have:** 
 >- Appraiser License number
