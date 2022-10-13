@@ -23,6 +23,7 @@ county:
 sector:
   - construction
   - other-services
+  - real-estate
 openDate: ""
 dueDate: ""
 ---
@@ -38,4 +39,4 @@ The Residential New Construction (RNC) Program is designed to increase the energ
 
 > ### Benefit
 >
-> The program offers builders and raters varying incentives from $500 to $6,000+ per home to develop projects designed beyond the minimum efficiency requirements with high efficiency systems and upgrades not found in standard new homes that reduce energy use and in turn reduce energy bills.
+> The program offers builders and raters varying incentives from $500 to $6,000+ per home.
