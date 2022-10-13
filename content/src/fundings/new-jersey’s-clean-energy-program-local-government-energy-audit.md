@@ -10,7 +10,7 @@ programPurpose: In State
 agency:
   - NJ Board of Public Utilities
 agencyContact: LGEA@NJCleanEnergy.com
-publishStageArchive: ""
+publishStageArchive: Do Not Publish
 status: rolling application
 programFrequency: ongoing
 businessStage: both
