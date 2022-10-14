@@ -1,8 +1,13 @@
 {
   "naicsCodes": "111419, 111998, 424590, 459991",
   "defaultSectorId": "cannabis",
-  "canHavePermanentLocation": true,
+  "canHavePermanentLocation": false,
   "roadmapSteps": [
+    {
+      "step": 1,
+      "weight": 10,
+      "task": "cannabis-evaluate-location"
+    },
     {
       "step": 1,
       "weight": 30,
@@ -26,22 +31,42 @@
     {
       "step": 3,
       "weight": 10,
-      "task": "bank-account"
+      "task": "cannabis-bank-account"
+    },
+    {
+      "weight": 15,
+      "step": 3,
+      "task": "cannabis-site-requirements"
     },
     {
       "step": 3,
       "weight": 20,
       "task": "get-insurance"
+    },
+    {
+      "step": 3,
+      "weight": 25,
+      "task": "cannabis-sign-lease"
+    },
+    {
+      "step": 3,
+      "weight": 30,
+      "task": "zoning-cannabis"
+    },
+    {
+      "step": 3,
+      "weight": 35,
+      "task": "building-permit"
+    },
+    {
+      "step": 4,
+      "weight": 30,
+      "task": "site-safety-permits"
     }
   ],
   "name": "Cannabis",
   "industryOnboardingQuestions": {},
-  "modifications": [
-    {
-      "taskToReplaceFilename": "zoning",
-      "replaceWithFilename": "zoning-cannabis"
-    }
-  ],
+  "modifications": [],
   "isEnabled": true,
   "additionalSearchTerms": "marijuana, ACT, cannabis business, micro license, cultivation, dispensary, grow, retail, pot, weed",
   "id": "cannabis",
