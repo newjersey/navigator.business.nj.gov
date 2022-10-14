@@ -8,8 +8,12 @@ A business bank account separates your business finances from your personal expe
 
 Some banks may request other documentation in addition to what is listed below. Compare and confirm document requirements, services, and fees.
 
+**﻿Note:**
+
+FDIC insured banks are not able to open accounts for cannabis businesses
+
 ---
-### To Open a Business Account, Bring Your:
+### Documents Required
 
 * `EIN|ein` 
 
@@ -20,7 +24,3 @@ Some banks may request other documentation in addition to what is listed below. 
 > **After you complete this task, you will have:**
 >
 > * A business bank account
-
-> **What if I don’t complete this task?**
->
-> Mixing your personal and business expenses may result in inaccurate tax filings. This task is a recommendation and not a requirement.
