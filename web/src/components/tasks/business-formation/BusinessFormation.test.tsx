@@ -14,7 +14,7 @@ import {
 } from "@/test/factories";
 import { generateFormationProfileData, preparePage, useSetupInitialMocks } from "@/test/helpers-formation";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
-import { currentUserData } from "@/test/mock/withStatefulUserData";
+import { currentUserData, userDataWasNotUpdated } from "@/test/mock/withStatefulUserData";
 import {
   createEmptyFormationAddress,
   FormationAddress,
@@ -113,6 +113,45 @@ describe("<BusinessFormation />", () => {
     });
   });
 
+  describe("when completeFiling=false query param", () => {
+    let formationData: FormationData;
+    let task: Task;
+
+    beforeEach(() => {
+      useMockRouter({ isReady: true, query: { completeFiling: "false" } });
+      task = generateTask({});
+    });
+
+    it("directs user back to Review Step in form, without setting completedFilingPayment to true", async () => {
+      formationData = generateFormationData({
+        formationResponse: generateFormationSubmitResponse({ success: true }),
+        getFilingResponse: undefined,
+      });
+
+      await act(async () => {
+        preparePage({ formationData }, displayContent, undefined, task);
+      });
+
+      expect(screen.getByTestId("review-step")).toBeInTheDocument();
+      expect(userDataWasNotUpdated()).toEqual(true);
+      expect(mockPush).toHaveBeenCalledWith({ pathname: `/tasks/${task.urlSlug}` }, undefined, {
+        shallow: true,
+      });
+    });
+
+    it("shows success page when user has successfully paid", async () => {
+      formationData = generateFormationData({
+        formationResponse: generateFormationSubmitResponse({ success: true }),
+        getFilingResponse: generateGetFilingResponse({ success: true }),
+      });
+      await act(async () => {
+        preparePage({ formationData }, displayContent, undefined, task);
+      });
+
+      expect(screen.getByText(Config.businessFormationDefaults.successPageHeader)).toBeInTheDocument();
+    });
+  });
+
   describe("when completeFiling=true query param", () => {
     let formationData: FormationData;
     let task: Task;
@@ -125,7 +164,7 @@ describe("<BusinessFormation />", () => {
       });
     });
 
-    describe("on API success", () => {
+    describe("on API getFiling success", () => {
       let userDataReturnFromApi: UserData;
 
       beforeEach(() => {
@@ -162,7 +201,7 @@ describe("<BusinessFormation />", () => {
       });
     });
 
-    describe("on API error", () => {
+    describe("on API getFiling error", () => {
       beforeEach(() => {
         mockApi.getCompletedFiling.mockRejectedValue({});
       });

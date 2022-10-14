@@ -4,6 +4,7 @@ import { TaskCTA } from "@/components/TaskCTA";
 import { TaskHeader } from "@/components/TaskHeader";
 import { BusinessFormationPaginator } from "@/components/tasks/business-formation/BusinessFormationPaginator";
 import { BusinessFormationSteps } from "@/components/tasks/business-formation/BusinessFormationSteps";
+import { LookupStepIndexByName } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
 import { FormationInterimSuccessPage } from "@/components/tasks/business-formation/FormationInterimSuccessPage";
 import { FormationSuccessPage } from "@/components/tasks/business-formation/success/FormationSuccessPage";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
@@ -96,7 +97,13 @@ export const BusinessFormation = (props: Props): ReactElement => {
     });
   }, userData);
 
-  const completeFilingQuery = router.query[QUERIES.completeFiling];
+  useEffect(() => {
+    if (!router.isReady) return;
+    if (checkQueryValue(router, QUERIES.completeFiling, "false")) {
+      setStepIndex(LookupStepIndexByName("Review"));
+      router.replace({ pathname: `/tasks/${props.task.urlSlug}` }, undefined, { shallow: true });
+    }
+  }, [router, router.isReady, props.task.urlSlug]);
 
   useEffect(() => {
     const shouldFetchCompletedFiling = (): boolean => {
@@ -134,7 +141,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
         });
       }
     })();
-  }, [router.isReady, completeFilingQuery, update, router, props.task.urlSlug, userData]);
+  }, [router.isReady, update, router, props.task.urlSlug, userData]);
 
   const legalStructureId = useMemo(
     () => (userData?.profileData.legalStructureId ?? defaultFormationLegalType) as FormationLegalType,
