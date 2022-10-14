@@ -6,10 +6,10 @@ id: cannabis-evaluate-location
 callToActionLink: ""
 callToActionText: ""
 ---
-If you're looking for a location for your business, there are a few things to keep in mind as you decide on that perfect space.
+There are a few things to keep in mind as you decide on that perfect space, but most importantly, check with the local government for your site to confirm that their ordinances allow cannabis businesses. 
 
 ---
-### Site Selection Considerations
+### General Site Considerations
 
 - **Demographics Considerations:** Research where to locate your business to most effectively reach and serve your target customer base. [Explore demographic tools](https://business.nj.gov/pages/select-a-location) to help you with your research
 - **Zoning:** Consult with your local government's Zoning Office to determine if the site is suitable for your business. Find out [how zoning may impact your site](https://business.nj.gov/pages/select-a-location) selection
