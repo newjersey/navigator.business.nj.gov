@@ -107,7 +107,12 @@
     "evtp",
     "USDOL",
     "Pharma",
-    "YTTW"
+    "YTTW",
+    "njcep",
+    "lgea",
+    "chpfc",
+    "cinc",
+    "LEUP"
   ],
   "ignorePaths": ["node_modules/**", "out/**", "web/out/**", "package.json"]
 }

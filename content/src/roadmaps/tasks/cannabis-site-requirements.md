@@ -1,7 +1,8 @@
 ---
-urlSlug: check-site-requirements
+urlSlug: cannabis-site-requirements
+filename: cannabis-site-requirements
 name: Determine Site Requirements
-id: check-site-requirements
+id: cannabis-site-requirements
 callToActionLink: ""
 callToActionText: ""
 ---
