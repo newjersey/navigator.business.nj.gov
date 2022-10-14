@@ -1,8 +1,13 @@
 {
   "naicsCodes": "111419, 111998, 424590, 459991",
   "defaultSectorId": "cannabis",
-  "canHavePermanentLocation": true,
+  "canHavePermanentLocation": false,
   "roadmapSteps": [
+    {
+      "step": 1,
+      "weight": 10,
+      "task": "cannabis-evaluate-location"
+    },
     {
       "step": 1,
       "weight": 30,
@@ -26,7 +31,12 @@
     {
       "step": 3,
       "weight": 10,
-      "task": "bank-account"
+      "task": "cannabis-bank-account"
+    },
+    {
+      "weight": 15,
+      "step": 3,
+      "task": "cannabis-site-requirements"
     },
     {
       "step": 3,
