@@ -6,9 +6,9 @@ id: cannabis-bank-account
 ---
 A business bank account separates your business finances from your personal expenses. This helps you keep accurate and organized accounting records for tax purposes and business operations.
 
-Some banks may request other documentation in addition to what is listed below. Compare and confirm document requirements, services, and fees.
+B﻿ecause cannabis is not legal at the federal level, FDIC-insured banks are not able to open accounts for cannabis businesses. Confirm the bank is able to service cannabis businesses, their document requirements, services, and fees. 
 
-**Note:** FDIC insured banks are not able to open accounts for cannabis businesses
+**Note:** Private financing is not the same as a business bank account. 
 
 - - -
 
