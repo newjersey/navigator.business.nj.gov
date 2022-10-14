@@ -109,7 +109,10 @@
     "Pharma",
     "YTTW",
     "njcep",
-    "lgea"
+    "lgea",
+    "chpfc",
+    "cinc",
+    "LEUP"
   ],
   "ignorePaths": ["node_modules/**", "out/**", "web/out/**", "package.json"]
 }
