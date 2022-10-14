@@ -20,7 +20,11 @@ mwvb: n/a
 preferenceForOpportunityZone: no
 county:
   - All
-sector: []
+sector:
+  - clean-energy
+  - construction
+  - real-estate
+  - other-services
 openDate: ""
 dueDate: ""
 ---
