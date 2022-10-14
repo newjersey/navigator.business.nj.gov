@@ -37,7 +37,7 @@ The Combined Heat and Power - Fuel Cells (CHP-FC) program aims to enhance energy
 * CHP or Waste Heat to Power projects must achieve an annual system efficiency of at least 60% (Higher Heating Value - HHV), based on total energy input and total utilized energy output
 * FC systems must achieve an annual electric system efficiency of at least 40% (HHV) based on Net Useful Electric Power plus Net Useful Thermal Production (if any) divided by the Total Fuel Input at HHV
 
-> ### Benefit
+> ### Benefits
 >
 > * No more than $4.5M in new incentive commitments can be made towards ≥40% Fuel Cells during Fiscal Year 2023
 > * Of the $4.5M, no single prime mover manufacturer can qualify for a total of $1.5M in incentives for qualifying ≥40% Fuel Cells equipment
