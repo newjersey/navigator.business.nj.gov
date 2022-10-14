@@ -24,6 +24,7 @@ sector:
   - construction
   - other-services
   - real-estate
+  - clean-energy
 openDate: ""
 dueDate: ""
 ---
@@ -37,6 +38,6 @@ The Residential New Construction (RNC) Program is designed to increase the energ
 * Must be newly constructed single family, multi‐single low‐rise, and high‐rise multifamily buildings
 * Existing homes undergoing `substantial renovation|substantial-renovation` or remodeling that meets the criteria above
 
-> ### Benefit
+> ### Benefits
 >
 > The program offers builders and raters varying incentives from $500 to $6,000+ per home.
