@@ -8,11 +8,10 @@ A business bank account separates your business finances from your personal expe
 
 Some banks may request other documentation in addition to what is listed below. Compare and confirm document requirements, services, and fees.
 
-**﻿Note:**
+**Note:** FDIC insured banks are not able to open accounts for cannabis businesses
 
-FDIC insured banks are not able to open accounts for cannabis businesses
+- - -
 
----
 ### Documents Required
 
 * `EIN|ein` 
