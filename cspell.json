@@ -107,7 +107,9 @@
     "evtp",
     "USDOL",
     "Pharma",
-    "YTTW"
+    "YTTW",
+    "njcep",
+    "lgea"
   ],
   "ignorePaths": ["node_modules/**", "out/**", "web/out/**", "package.json"]
 }
