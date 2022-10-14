@@ -193,6 +193,7 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
       Account: config.account,
       Key: config.key,
       ReturnUrl: `${returnUrl}?completeFiling=true`,
+      FailureReturnUrl: `${returnUrl}?completeFiling=false`,
       Payer: {
         CompanyName: formationFormData.businessName,
         Address1: formationFormData.businessAddressLine1,

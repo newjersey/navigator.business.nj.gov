@@ -106,12 +106,13 @@ describe("ApiFormationClient", () => {
           formationFormData
         );
 
-        await client.form(userData, "hostname.com/form-business");
+        await client.form(userData, "navigator.com/form-business");
 
         expect(mockAxios.post).toHaveBeenCalledWith("example.com/formation/PrepareFiling", {
           Account: "12345",
           Key: "abcdef",
-          ReturnUrl: "hostname.com/form-business?completeFiling=true",
+          ReturnUrl: "navigator.com/form-business?completeFiling=true",
+          FailureReturnUrl: "navigator.com/form-business?completeFiling=false",
           Payer: {
             CompanyName: formationFormData.businessName,
             Address1: formationFormData.businessAddressLine1,
@@ -234,6 +235,7 @@ describe("ApiFormationClient", () => {
           Account: "12345",
           Key: "abcdef",
           ReturnUrl: "hostname.com/form-business?completeFiling=true",
+          FailureReturnUrl: "hostname.com/form-business?completeFiling=false",
           Payer: {
             CompanyName: formationFormData.businessName,
             Address1: formationFormData.businessAddressLine1,
@@ -385,6 +387,7 @@ describe("ApiFormationClient", () => {
           Account: "12345",
           Key: "abcdef",
           ReturnUrl: "hostname.com/form-business?completeFiling=true",
+          FailureReturnUrl: "hostname.com/form-business?completeFiling=false",
           Payer: {
             CompanyName: formationFormData.businessName,
             Address1: formationFormData.businessAddressLine1,
@@ -512,6 +515,7 @@ describe("ApiFormationClient", () => {
           Account: "12345",
           Key: "abcdef",
           ReturnUrl: "hostname.com/form-business?completeFiling=true",
+          FailureReturnUrl: "hostname.com/form-business?completeFiling=false",
           Payer: {
             CompanyName: formationFormData.businessName,
             Address1: formationFormData.businessAddressLine1,

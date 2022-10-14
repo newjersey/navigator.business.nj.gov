@@ -17,7 +17,7 @@ interface QUERY_PARAMS_VALUES {
   fromForming: "true";
   fromFunding: "true";
   fromOnboarding: "true";
-  completeFiling: "true";
+  completeFiling: "true" | "false";
   success: "true";
   path: "businessFormation";
   signUp: "true";
