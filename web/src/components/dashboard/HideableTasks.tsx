@@ -3,7 +3,6 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { templateEval } from "@/lib/utils/helpers";
-import { LookupOperatingPhaseById } from "@businessnjgovnavigator/shared";
 import { ReactElement } from "react";
 import { Button } from "../njwds-extended/Button";
 import { Roadmap } from "./Roadmap";
@@ -12,10 +11,6 @@ export const HideableTasks = (): ReactElement => {
   const { userData, update } = useUserData();
   const { roadmap } = useRoadmap();
   const { Config } = useConfig();
-
-  if (!LookupOperatingPhaseById(userData?.profileData.operatingPhase).displayHideableRoadmapTasks) {
-    return <></>;
-  }
 
   const handleToggleClick = () => {
     if (!userData) return;

@@ -17,7 +17,7 @@ import {
   randomHomeBasedIndustry,
   randomNonHomeBasedIndustry,
 } from "@/test/factories";
-import { withAuthAlert } from "@/test/helpers";
+import { randomElementFromArray, withAuthAlert } from "@/test/helpers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { setMockUserDataResponse, useMockProfileData, useMockUserData } from "@/test/mock/mockUseUserData";
@@ -28,6 +28,7 @@ import {
 } from "@/test/mock/withStatefulUserData";
 import {
   getCurrentDate,
+  OperatingPhases,
   parseDateWithFormat,
   RegistrationStatus,
   UserData,
@@ -405,6 +406,28 @@ describe("dashboard page", () => {
     renderDashboardPage({ operateReferences });
 
     expect(screen.queryByTestId("filings-calendar-as-list")).not.toBeInTheDocument();
+  });
+
+  it("does not render HideableTasks for operating phases that don't display HideableRoadmapTasks", () => {
+    const randomOperatingPhase = randomElementFromArray(
+      OperatingPhases.filter((obj) => !obj.displayHideableRoadmapTasks)
+    );
+
+    useMockUserData({ profileData: generateProfileData({ operatingPhase: randomOperatingPhase.id }) });
+    renderDashboardPage({});
+
+    expect(screen.queryByText(Config.dashboardDefaults.upAndRunningTaskHeader)).not.toBeInTheDocument();
+  });
+
+  it("renders HideableTasks for operating phases that display HideableRoadmapTasks", () => {
+    const randomOperatingPhase = randomElementFromArray(
+      OperatingPhases.filter((obj) => obj.displayHideableRoadmapTasks)
+    );
+
+    useMockUserData({ profileData: generateProfileData({ operatingPhase: randomOperatingPhase.id }) });
+    renderDashboardPage({});
+
+    expect(screen.getByText(Config.dashboardDefaults.upAndRunningTaskHeader)).toBeInTheDocument();
   });
 
   it("renders tabs in mobile view", () => {
