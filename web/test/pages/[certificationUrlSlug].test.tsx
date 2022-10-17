@@ -10,7 +10,7 @@ describe("certification page", () => {
       contentMd: "Some content description",
     });
 
-    render(<CertificationPage certification={certification} operateReferences={{}} />);
+    render(<CertificationPage certification={certification} />);
 
     expect(screen.getByText("Some Cert Name")).toBeInTheDocument();
     expect(screen.getByText("Click here")).toBeInTheDocument();

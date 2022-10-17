@@ -7,8 +7,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getNaicsDisplayMd } from "@/lib/domain-logic/getNaicsDisplayMd";
 import { MediaQueries } from "@/lib/PageSizes";
 import { FundingUrlSlugParam, loadAllFundingUrlSlugs, loadFundingByUrlSlug } from "@/lib/static/loadFundings";
-import { loadOperateReferences } from "@/lib/static/loadOperateReferences";
-import { Funding, OperateReference } from "@/lib/types/types";
+import { Funding } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { useMediaQuery } from "@mui/material";
@@ -18,7 +17,6 @@ import { ReactElement } from "react";
 
 interface Props {
   funding: Funding;
-  operateReferences: Record<string, OperateReference>;
 }
 
 export const FundingElement = (props: { funding: Funding }): ReactElement => {
@@ -80,8 +78,8 @@ const FundingPage = (props: Props): ReactElement => {
     <>
       <NextSeo title={`Business.NJ.gov Navigator - ${props.funding.name}`} />
       <PageSkeleton>
-        <NavBar sidebarPageLayout={true} operateReferences={props.operateReferences} />
-        <TaskSidebarPageLayout operateReferences={props.operateReferences}>
+        <NavBar showSidebar={true} hideMiniRoadmap={true} />
+        <TaskSidebarPageLayout hideMiniRoadmap={true}>
           <FundingElement funding={props.funding} />
         </TaskSidebarPageLayout>
       </PageSkeleton>
@@ -101,7 +99,6 @@ export const getStaticProps = ({ params }: { params: FundingUrlSlugParam }): Get
   return {
     props: {
       funding: loadFundingByUrlSlug(params.fundingUrlSlug),
-      operateReferences: loadOperateReferences(),
     },
   };
 };

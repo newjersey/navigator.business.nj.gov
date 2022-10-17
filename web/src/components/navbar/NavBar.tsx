@@ -3,15 +3,15 @@ import { NavBarLanding } from "@/components/navbar/NavBarLanding";
 import { NavBarLogoOnly } from "@/components/navbar/NavBarLogoOnly";
 import { NavBarMobile } from "@/components/navbar/NavBarMobile";
 import { MediaQueries } from "@/lib/PageSizes";
-import { OperateReference, Task } from "@/lib/types/types";
+import { Task } from "@/lib/types/types";
 import { useMediaQuery } from "@mui/material";
 import { ReactElement, useEffect, useState } from "react";
 
 type Props = {
   landingPage?: boolean;
   task?: Task;
-  sidebarPageLayout?: boolean;
-  operateReferences?: Record<string, OperateReference>;
+  showSidebar?: boolean;
+  hideMiniRoadmap?: boolean;
   logoOnly?: boolean;
 };
 
@@ -47,8 +47,8 @@ export const NavBar = (props: Props): ReactElement => {
         <NavBarMobile
           scrolled={scrolled}
           task={props.task}
-          sidebarPageLayout={props.sidebarPageLayout}
-          operateReferences={props.operateReferences}
+          showSidebar={props.showSidebar}
+          hideMiniRoadmap={props.hideMiniRoadmap}
         />
         <div className={!isLargeScreen && scrolled ? "padding-top-6" : ""} />
       </>

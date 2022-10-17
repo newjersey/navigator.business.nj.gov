@@ -10,8 +10,7 @@ import {
   loadAllCertificationUrlSlugs,
   loadCertificationByUrlSlug,
 } from "@/lib/static/loadCertifications";
-import { loadOperateReferences } from "@/lib/static/loadOperateReferences";
-import { Certification, OperateReference } from "@/lib/types/types";
+import { Certification } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
@@ -19,7 +18,6 @@ import { ReactElement } from "react";
 
 interface Props {
   certification: Certification;
-  operateReferences: Record<string, OperateReference>;
 }
 
 export const CertificationElement = (props: { certification: Certification }): ReactElement => {
@@ -49,8 +47,8 @@ const CertificationPage = (props: Props): ReactElement => {
     <>
       <NextSeo title={`Business.NJ.gov Navigator - ${props.certification.name}`} />
       <PageSkeleton>
-        <NavBar sidebarPageLayout={true} operateReferences={props.operateReferences} />
-        <TaskSidebarPageLayout operateReferences={props.operateReferences}>
+        <NavBar showSidebar={true} hideMiniRoadmap={true} />
+        <TaskSidebarPageLayout hideMiniRoadmap={true}>
           <CertificationElement certification={props.certification} />
         </TaskSidebarPageLayout>
       </PageSkeleton>
@@ -74,7 +72,6 @@ export const getStaticProps = ({
   return {
     props: {
       certification: loadCertificationByUrlSlug(params.certificationUrlSlug),
-      operateReferences: loadOperateReferences(),
     },
   };
 };

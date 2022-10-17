@@ -64,7 +64,7 @@ describe("filing page", () => {
       agency: undefined,
     });
 
-    render(<FilingPage filing={filing} operateReferences={{}} />);
+    render(<FilingPage filing={filing} />);
 
     expect(screen.getByText("filing-name-1")).toBeInTheDocument();
     expect(screen.getByText("cta-text-1")).toBeInTheDocument();
@@ -100,7 +100,7 @@ describe("filing page", () => {
       agency: "New Jersey Division of Taxation",
     });
 
-    render(<FilingPage filing={filing} operateReferences={{}} />);
+    render(<FilingPage filing={filing} />);
 
     expect(screen.getByText(Config.filingDefaults.paperOrMailOnlyTaxFilingMethod)).toBeInTheDocument();
     expect(screen.getByText("every day, all day")).toBeInTheDocument();
@@ -128,7 +128,7 @@ describe("filing page", () => {
       agency: "Internal Revenue Service (IRS)",
     });
 
-    render(<FilingPage filing={filing} operateReferences={{}} />);
+    render(<FilingPage filing={filing} />);
     expect(screen.queryByTestId("late-filing")).not.toBeInTheDocument();
   });
 
@@ -177,7 +177,7 @@ describe("filing page", () => {
       agency: "Internal Revenue Service (IRS)",
     });
 
-    render(<FilingPage filing={filing} operateReferences={{}} />);
+    render(<FilingPage filing={filing} />);
     expect(screen.getByTestId("due-date")).toHaveTextContent(
       closestDate.format("MMMM D, YYYY").toUpperCase()
     );
