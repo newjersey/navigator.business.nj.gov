@@ -4,7 +4,7 @@ import { PageSkeleton } from "@/components/PageSkeleton";
 import { TaskCTA } from "@/components/TaskCTA";
 import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { getNaicsTemplateValue } from "@/lib/domain-logic/getNaicsTemplateValue";
+import { getNaicsDisplayMd } from "@/lib/domain-logic/getNaicsDisplayMd";
 import {
   CertificationUrlSlugParam,
   loadAllCertificationUrlSlugs,
@@ -27,7 +27,7 @@ export const CertificationElement = (props: { certification: Certification }): R
 
   const addNaicsCodeData = (contentMd: string): string => {
     const naicsCode = userData?.profileData.naicsCode || "";
-    const naicsTemplateValue = getNaicsTemplateValue(naicsCode);
+    const naicsTemplateValue = getNaicsDisplayMd(naicsCode);
     return templateEval(contentMd, { naicsCode: naicsTemplateValue });
   };
 

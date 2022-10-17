@@ -2,7 +2,6 @@ import { getMergedConfig } from "@/contexts/configContext";
 import * as fetchMunicipality from "@/lib/async-content-fetchers/fetchMunicipalityById";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import * as roadmapBuilderModule from "@/lib/roadmap/roadmapBuilder";
-import { templateEval } from "@/lib/utils/helpers";
 import {
   generateMunicipality,
   generateMunicipalityDetail,
@@ -610,10 +609,9 @@ describe("buildUserRoadmap", () => {
       const roadmap = await buildUserRoadmap(profileData);
 
       const task = roadmap.tasks[0];
-      const expectedTemplate = templateEval(Config.determineNaicsCode.registerForTaxesNAICSCodePlaceholder, {
-        naicsCode: "621399 - Offices of All Other Miscellaneous Health Practitioners",
-      });
-      expect(task.contentMd).toEqual(`NAICS code ${expectedTemplate}`);
+      expect(task.contentMd).toContain("NAICS code");
+      expect(task.contentMd).toContain("621399");
+      expect(task.contentMd).toContain("Offices of All Other Miscellaneous Health Practitioners");
     });
 
     it("replaces tasks with NAICS code and tasks with municipality", async () => {
@@ -638,10 +636,9 @@ describe("buildUserRoadmap", () => {
 
       const naicsTask = roadmap.tasks[0];
       const municipalityTask = roadmap.tasks[1];
-      const expectedTemplate = templateEval(Config.determineNaicsCode.registerForTaxesNAICSCodePlaceholder, {
-        naicsCode: "123456 - Unknown Code",
-      });
-      expect(naicsTask.contentMd).toEqual(`NAICS code ${expectedTemplate}`);
+      expect(naicsTask.contentMd).toContain(`NAICS code`);
+      expect(naicsTask.contentMd).toContain(`123456`);
+      expect(naicsTask.contentMd).toContain(`Unknown Code`);
       expect(municipalityTask.contentMd).toEqual("Visit the Cool Town Website");
     });
 
@@ -656,9 +653,7 @@ describe("buildUserRoadmap", () => {
       const roadmap = await buildUserRoadmap(profileData);
 
       const task = roadmap.tasks[0];
-      expect(task.contentMd).toEqual(
-        `NAICS code ${Config.determineNaicsCode.registerForTaxesMissingNAICSCodePlaceholder}`
-      );
+      expect(task.contentMd).toEqual(`NAICS code ${Config.determineNaicsCode.missingNAICSCodePlaceholder}`);
     });
   });
 

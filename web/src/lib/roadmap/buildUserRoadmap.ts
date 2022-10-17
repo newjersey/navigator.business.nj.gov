@@ -1,5 +1,5 @@
 import { fetchMunicipalityById } from "@/lib/async-content-fetchers/fetchMunicipalityById";
-import { getNaicsTemplateValue } from "@/lib/domain-logic/getNaicsTemplateValue";
+import { getNaicsDisplayMd } from "@/lib/domain-logic/getNaicsDisplayMd";
 import { isRealEstateAppraisalManagementApplicable } from "@/lib/domain-logic/isRealEstateAppraisalManagementApplicable";
 import { buildRoadmap } from "@/lib/roadmap/roadmapBuilder";
 import { Roadmap } from "@/lib/types/types";
@@ -207,7 +207,7 @@ const addMunicipalitySpecificData = async (roadmap: Roadmap, municipalityId: str
 };
 
 const addNaicsCodeData = (roadmap: Roadmap, naicsCode: string): Roadmap => {
-  const naicsTemplateValue = getNaicsTemplateValue(naicsCode);
+  const naicsTemplateValue = getNaicsDisplayMd(naicsCode);
   return applyTemplateEvalForAllTasks(roadmap, { naicsCode: naicsTemplateValue });
 };
 

@@ -1324,13 +1324,8 @@ collections:
               - { label: Edit Text, name: editText, widget: string }
               - { label: Remove Text, name: removeText, widget: string }
               - {
-                  label: Register for Taxes - NAICS Display Text,
-                  name: registerForTaxesNAICSCodePlaceholder,
-                  widget: string,
-                }
-              - {
-                  label: Register for Taxes - Placeholder Text When NAICS Missing,
-                  name: registerForTaxesMissingNAICSCodePlaceholder,
+                  label: Placeholder Text (in Tasks) When NAICS Missing,
+                  name: missingNAICSCodePlaceholder,
                   widget: string,
                 }
   - name: nexus
