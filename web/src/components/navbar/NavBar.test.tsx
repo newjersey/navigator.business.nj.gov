@@ -2,7 +2,6 @@ import { NavBar } from "@/components/navbar/NavBar";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { ROUTES } from "@/lib/domain-logic/routes";
-import { OperateReference } from "@/lib/types/types";
 import {
   generateRoadmap,
   generateStep,
@@ -56,14 +55,14 @@ describe("<NavBar />", () => {
     it("displays landing page navbar when prop is passed", () => {
       setLargeScreen(true);
 
-      render(<NavBar landingPage={true} task={undefined} sidebarPageLayout={false} operateReferences={{}} />);
+      render(<NavBar landingPage={true} />);
       expect(screen.getByText(Config.navigationDefaults.registerButton)).toBeInTheDocument();
     });
 
     it("goes to onboarding when signup is clicked", () => {
       setLargeScreen(true);
 
-      render(<NavBar landingPage={true} task={undefined} sidebarPageLayout={false} operateReferences={{}} />);
+      render(<NavBar landingPage={true} />);
 
       fireEvent.click(screen.getByText(Config.navigationDefaults.registerButton));
       expect(mockPush).toHaveBeenCalledWith(ROUTES.onboarding);
@@ -80,10 +79,9 @@ describe("<NavBar />", () => {
       const renderDesktopNav = () => {
         setLargeScreen(true);
         render(
-          withAuth(
-            <NavBar landingPage={false} task={undefined} sidebarPageLayout={false} operateReferences={{}} />,
-            { isAuthenticated: IsAuthenticated.FALSE }
-          )
+          withAuth(<NavBar landingPage={false} showSidebar={false} />, {
+            isAuthenticated: IsAuthenticated.FALSE,
+          })
         );
       };
 
@@ -111,10 +109,9 @@ describe("<NavBar />", () => {
       const renderMobileRoadmapNav = () => {
         setLargeScreen(false);
         render(
-          withAuth(
-            <NavBar landingPage={false} task={undefined} sidebarPageLayout={false} operateReferences={{}} />,
-            { isAuthenticated: IsAuthenticated.FALSE }
-          )
+          withAuth(<NavBar landingPage={false} showSidebar={false} />, {
+            isAuthenticated: IsAuthenticated.FALSE,
+          })
         );
         fireEvent.click(screen.getByTestId("nav-menu-open"));
       };
@@ -157,10 +154,9 @@ describe("<NavBar />", () => {
     const renderDesktopNav = () => {
       setLargeScreen(true);
       render(
-        withAuth(
-          <NavBar landingPage={false} task={undefined} sidebarPageLayout={false} operateReferences={{}} />,
-          { isAuthenticated: IsAuthenticated.TRUE }
-        )
+        withAuth(<NavBar landingPage={false} task={undefined} showSidebar={false} />, {
+          isAuthenticated: IsAuthenticated.TRUE,
+        })
       );
     };
 
@@ -212,12 +208,6 @@ describe("<NavBar />", () => {
         expect(screen.getByText(Config.navigationDefaults.logoutButton)).toBeInTheDocument();
       });
       expect(screen.getByText(Config.navigationDefaults.myNJAccountText)).toBeInTheDocument();
-
-      /* userEvent.click(menuEl);
-      await waitFor(() => {
-        expect(screen.queryByText(Config.navigationDefaults.logoutButton)).not.toBeInTheDocument();
-      });
-      expect(screen.queryByText(Config.navigationDefaults.myNJAccountText)).not.toBeInTheDocument();*/
     });
   });
 
@@ -225,10 +215,9 @@ describe("<NavBar />", () => {
     const renderDesktopNav = () => {
       setLargeScreen(true);
       render(
-        withAuth(
-          <NavBar landingPage={false} task={undefined} sidebarPageLayout={false} operateReferences={{}} />,
-          { isAuthenticated: IsAuthenticated.FALSE }
-        )
+        withAuth(<NavBar landingPage={false} task={undefined} showSidebar={false} />, {
+          isAuthenticated: IsAuthenticated.FALSE,
+        })
       );
     };
 
@@ -290,7 +279,7 @@ describe("<NavBar />", () => {
       render(
         withAuth(
           <WithStatefulUserData initialUserData={userData}>
-            <NavBar landingPage={false} task={undefined} sidebarPageLayout={false} operateReferences={{}} />
+            <NavBar landingPage={false} showSidebar={false} />
           </WithStatefulUserData>,
           { user, isAuthenticated: IsAuthenticated.FALSE }
         )
@@ -319,14 +308,13 @@ describe("<NavBar />", () => {
     });
   });
 
-  describe("mobile navbar - doesn't render roadmap within drawer", () => {
+  describe("mobile navbar - non-sidebar view", () => {
     const renderMobileRoadmapNav = () => {
       setLargeScreen(false);
       render(
-        withAuth(
-          <NavBar landingPage={false} task={undefined} sidebarPageLayout={false} operateReferences={{}} />,
-          { isAuthenticated: IsAuthenticated.TRUE }
-        )
+        withAuth(<NavBar landingPage={false} task={undefined} showSidebar={false} />, {
+          isAuthenticated: IsAuthenticated.TRUE,
+        })
       );
       fireEvent.click(screen.getByTestId("nav-menu-open"));
     };
@@ -341,45 +329,29 @@ describe("<NavBar />", () => {
     });
   });
 
-  describe("mobile navbar - renders roadmap within drawer", () => {
+  describe("mobile navbar - sidebar view", () => {
     beforeEach(() => {
       useMockRouter({});
       useMockRoadmap({});
     });
 
-    const renderMobileTaskNav =
-      (isAuthenticated = IsAuthenticated.TRUE) =>
-      (config?: { includeOperateRef: boolean }) => {
-        setLargeScreen(false);
+    const renderMobileTaskNav = (isAuthenticated = IsAuthenticated.TRUE) => {
+      setLargeScreen(false);
 
-        const operateRef: Record<string, OperateReference> = {
-          "some-tax-filing-identifier-1": {
-            name: "some-filing-name-1",
-            urlSlug: "some-urlSlug-1",
-            urlPath: "some-path",
-          },
-        };
-
-        render(
-          withAuth(
-            <NavBar
-              landingPage={false}
-              task={generateTask({})}
-              sidebarPageLayout={true}
-              operateReferences={config?.includeOperateRef ? operateRef : undefined}
-            />,
-            { isAuthenticated }
-          )
-        );
-        fireEvent.click(screen.getByTestId("nav-menu-open"));
-      };
+      render(
+        withAuth(<NavBar landingPage={false} task={generateTask({})} showSidebar={true} />, {
+          isAuthenticated,
+        })
+      );
+      fireEvent.click(screen.getByTestId("nav-menu-open"));
+    };
 
     describe("authenticated mobile navbar - renders roadmap within drawer", () => {
-      displaysUserNameOrEmail(renderMobileTaskNav(IsAuthenticated.TRUE));
+      displaysUserNameOrEmail(() => renderMobileTaskNav(IsAuthenticated.TRUE));
 
       it("displays user profile links", async () => {
         useMockUserData({ user: generateUser({ name: "Grace Hopper" }) });
-        renderMobileTaskNav(IsAuthenticated.TRUE)();
+        renderMobileTaskNav(IsAuthenticated.TRUE);
 
         expect(screen.queryByText(Config.navigationDefaults.myNJAccountText)).toBeVisible();
         expect(screen.queryByText(Config.navigationDefaults.profileLinkText)).toBeVisible();
@@ -389,7 +361,7 @@ describe("<NavBar />", () => {
     describe("guest mode mobile navbar - renders roadmap within drawer", () => {
       it("displays user registration links", async () => {
         useMockUserData({});
-        renderMobileTaskNav(IsAuthenticated.FALSE)();
+        renderMobileTaskNav(IsAuthenticated.FALSE);
 
         expect(screen.queryByText(Config.navigationDefaults.navBarGuestRegistrationText)).toBeVisible();
       });
@@ -402,7 +374,7 @@ describe("<NavBar />", () => {
         render(
           withAuth(
             <WithStatefulUserData initialUserData={userData}>
-              <NavBar landingPage={false} task={undefined} sidebarPageLayout={false} operateReferences={{}} />
+              <NavBar landingPage={false} task={undefined} showSidebar={false} />
             </WithStatefulUserData>,
             { user, isAuthenticated: IsAuthenticated.FALSE }
           )
@@ -431,7 +403,7 @@ describe("<NavBar />", () => {
         expect(mockPush).toHaveBeenCalled();
       });
 
-      it("displays mini-roadmap with PLAN/START when operateReferences does not exist", () => {
+      it("displays mini-roadmap with PLAN/START when hideMiniRoadmap does not exist", () => {
         useMockUserData({});
         useMockRoadmap(
           generateRoadmap({
@@ -441,13 +413,13 @@ describe("<NavBar />", () => {
             ],
           })
         );
-        renderMobileTaskNav()();
+        renderMobileTaskNav();
         expect(screen.getByText("step1")).toBeInTheDocument();
         expect(screen.getByText(Config.sectionHeaders.PLAN)).toBeInTheDocument();
         expect(screen.getByText(Config.sectionHeaders.START)).toBeInTheDocument();
       });
 
-      it("does not display mini-roadmap when operateReferences exists", () => {
+      it("does not display mini-roadmap when hideMiniRoadmap is true", () => {
         useMockUserData({});
         useMockRoadmap(
           generateRoadmap({
@@ -458,7 +430,14 @@ describe("<NavBar />", () => {
           })
         );
 
-        renderMobileTaskNav()({ includeOperateRef: true });
+        render(
+          withAuth(
+            <NavBar landingPage={false} task={generateTask({})} showSidebar={true} hideMiniRoadmap={true} />,
+            { isAuthenticated: IsAuthenticated.TRUE }
+          )
+        );
+        fireEvent.click(screen.getByTestId("nav-menu-open"));
+
         expect(screen.queryByText("step1")).not.toBeInTheDocument();
         expect(screen.queryByText(Config.sectionHeaders.PLAN)).not.toBeInTheDocument();
         expect(screen.queryByText(Config.sectionHeaders.START)).not.toBeInTheDocument();
@@ -472,7 +451,7 @@ describe("<NavBar />", () => {
             tasks: [generateTask({ name: "task1", stepNumber: 1 })],
           })
         );
-        renderMobileTaskNav()();
+        renderMobileTaskNav();
         fireEvent.click(screen.getByText("step1"));
         fireEvent.click(screen.getByText("task1"));
 

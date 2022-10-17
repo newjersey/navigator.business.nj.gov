@@ -120,7 +120,7 @@ const TaskPage = (props: Props): ReactElement => {
     <>
       <NextSeo title={`Business.NJ.gov Navigator - ${props.task.name}`} />
       <PageSkeleton>
-        <NavBar task={props.task} sidebarPageLayout={true} />
+        <NavBar task={props.task} showSidebar={true} />
         <TaskSidebarPageLayout task={props.task} belowBoxComponent={renderNextAndPreviousButtons()}>
           {rswitch(props.task.id, {
             "search-business-name": <SearchBusinessNameTask task={props.task} />,

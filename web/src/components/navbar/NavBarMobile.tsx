@@ -5,7 +5,7 @@ import { Icon } from "@/components/njwds/Icon";
 import { MiniRoadmap } from "@/components/roadmap/MiniRoadmap";
 import { AuthContext } from "@/contexts/authContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { OperateReference, Task } from "@/lib/types/types";
+import { Task } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { getUserNameOrEmail } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
@@ -13,16 +13,11 @@ import { ReactElement, useContext, useMemo, useState } from "react";
 interface Props {
   scrolled: boolean;
   task?: Task;
-  sidebarPageLayout?: boolean;
-  operateReferences?: Record<string, OperateReference>;
+  hideMiniRoadmap?: boolean;
+  showSidebar?: boolean;
 }
 
-export const NavBarMobile = ({
-  scrolled,
-  task,
-  sidebarPageLayout,
-  operateReferences,
-}: Props): ReactElement => {
+export const NavBarMobile = ({ scrolled, task, showSidebar, hideMiniRoadmap }: Props): ReactElement => {
   const { userData } = useUserData();
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
   const { state } = useContext(AuthContext);
@@ -63,7 +58,7 @@ export const NavBarMobile = ({
           <Icon className="font-sans-xl">menu</Icon>
         </button>
         <div className={`usa-logo ${scrolled ? "bg-white" : ""}`}>
-          {sidebarPageLayout ? (
+          {showSidebar ? (
             <div className="text-bold">{Config.navigationDefaults.taskPageNavBarHeading}</div>
           ) : (
             <NavigatorLogo />
@@ -93,15 +88,12 @@ export const NavBarMobile = ({
             </button>
           </h4>
           <NavSidebarUserSettings />
-          {sidebarPageLayout &&
-            (operateReferences ? (
-              <></>
-            ) : (
-              <div>
-                <hr />
-                <MiniRoadmap activeTaskId={task?.id} onTaskClick={close} />
-              </div>
-            ))}
+          {showSidebar && !hideMiniRoadmap && (
+            <div>
+              <hr />
+              <MiniRoadmap activeTaskId={task?.id} onTaskClick={close} />
+            </div>
+          )}
         </nav>
       </FocusTrappedSidebar>
     </>

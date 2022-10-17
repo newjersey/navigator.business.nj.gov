@@ -12,7 +12,7 @@ describe("funding page", () => {
       status: "deadline",
     });
 
-    render(<FundingPage funding={funding} operateReferences={{}} />);
+    render(<FundingPage funding={funding} />);
 
     expect(screen.getByText("Some Funding Name")).toBeInTheDocument();
     expect(screen.getByText("DUE: 07/01/2025")).toBeInTheDocument();
@@ -30,7 +30,7 @@ describe("funding page", () => {
       agency: ["NJEDA"],
     });
 
-    render(<FundingPage funding={funding} operateReferences={{}} />);
+    render(<FundingPage funding={funding} />);
 
     expect(screen.getByTestId("funding-agency-header")).toBeInTheDocument();
     expect(screen.getByText("NJEDA")).toBeInTheDocument();
@@ -46,7 +46,7 @@ describe("funding page", () => {
       agency: [],
     });
 
-    render(<FundingPage funding={funding} operateReferences={{}} />);
+    render(<FundingPage funding={funding} />);
 
     expect(screen.queryByTestId("funding-agency-header")).not.toBeInTheDocument();
   });
@@ -62,7 +62,7 @@ describe("funding page", () => {
         agency: [],
       });
 
-      render(<FundingPage funding={funding} operateReferences={{}} />);
+      render(<FundingPage funding={funding} />);
 
       expect(screen.getByText("FIRST COME, FIRST SERVE")).toBeInTheDocument();
     });
@@ -77,7 +77,7 @@ describe("funding page", () => {
         agency: [],
       });
 
-      render(<FundingPage funding={funding} operateReferences={{}} />);
+      render(<FundingPage funding={funding} />);
 
       expect(screen.getByText("DEADLINE")).toBeInTheDocument();
     });
@@ -92,7 +92,7 @@ describe("funding page", () => {
         agency: [],
       });
 
-      render(<FundingPage funding={funding} operateReferences={{}} />);
+      render(<FundingPage funding={funding} />);
 
       expect(screen.queryByText("DEADLINE")).not.toBeInTheDocument();
     });

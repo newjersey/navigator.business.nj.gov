@@ -8,8 +8,7 @@ import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { sortFilterFilingsWithinAYear } from "@/lib/domain-logic/filterFilings";
 import { FilingUrlSlugParam, loadAllFilingUrlSlugs, loadFilingByUrlSlug } from "@/lib/static/loadFilings";
-import { loadOperateReferences } from "@/lib/static/loadOperateReferences";
-import { Filing, OperateReference, TaxFilingMethod } from "@/lib/types/types";
+import { Filing, TaxFilingMethod } from "@/lib/types/types";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { parseDate, TaxFiling } from "@businessnjgovnavigator/shared";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
@@ -19,7 +18,6 @@ import { ReactElement } from "react";
 
 interface Props {
   filing: Filing;
-  operateReferences: Record<string, OperateReference>;
 }
 
 export const taxFilingMethodMap: Record<TaxFilingMethod, string> = {
@@ -181,8 +179,8 @@ const FilingPage = (props: Props): ReactElement => {
     <>
       <NextSeo title={`Business.NJ.gov Navigator - ${props.filing.name}`} />
       <PageSkeleton>
-        <NavBar sidebarPageLayout={true} operateReferences={props.operateReferences} />
-        <TaskSidebarPageLayout operateReferences={props.operateReferences}>
+        <NavBar showSidebar={true} hideMiniRoadmap={true} />
+        <TaskSidebarPageLayout>
           <FilingElement filing={props.filing} dueDate={dueDate} />
         </TaskSidebarPageLayout>
       </PageSkeleton>
@@ -202,7 +200,6 @@ export const getStaticProps = ({ params }: { params: FilingUrlSlugParam }): GetS
   return {
     props: {
       filing: loadFilingByUrlSlug(params.filingUrlSlug),
-      operateReferences: loadOperateReferences(),
     },
   };
 };
