@@ -1328,6 +1328,7 @@ collections:
                   name: missingNAICSCodePlaceholder,
                   widget: string,
                 }
+              - { label: NAICS Description External URL, name: naicsDescriptionURL, widget: string }
   - name: nexus
     label: "Tasks - Nexus"
     delete: false

@@ -1,7 +1,9 @@
 import { NaicsCodeTask } from "@/components/tasks/NaicsCodeTask";
 import { getMergedConfig } from "@/contexts/configContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import { Task } from "@/lib/types/types";
+import NaicsCodes from "@/lib/static/records/naics2022.json";
+import { NaicsCodeObject, Task } from "@/lib/types/types";
+import { templateEval } from "@/lib/utils/helpers";
 import { generateProfileData, generateTask, generateUserData } from "@/test/factories";
 import { withAuthAlert } from "@/test/helpers";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
@@ -29,7 +31,8 @@ jest.mock("@/lib/static/records/naics2022.json", () => {
 });
 
 const validIndustryId = "auto-body-repair";
-const validNaicsCode = LookupIndustryById(validIndustryId).naicsCodes?.split(",")[0];
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+const validNaicsCode = LookupIndustryById(validIndustryId).naicsCodes!.split(",")[0];
 const Config = getMergedConfig();
 
 describe("<NaicsCodeTask />", () => {
@@ -78,6 +81,21 @@ describe("<NaicsCodeTask />", () => {
       expect(screen.getByTestId("naics-radio-input")).toBeInTheDocument();
       expect(screen.getByLabelText("Recommended NAICS codes")).toBeInTheDocument();
       expect(screen.getByTestId(`naics-radio-${validNaicsCode}`)).toBeInTheDocument();
+    });
+
+    it("links description to NAICS code website", () => {
+      renderPage();
+
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      const description = (NaicsCodes as NaicsCodeObject[]).find(
+        (element) => element.SixDigitCode?.toString() === validNaicsCode
+      )!.SixDigitDescription!;
+
+      const expectedUrl = templateEval(Config.determineNaicsCode.naicsDescriptionURL, {
+        code: validNaicsCode,
+      });
+
+      expect(screen.getByText(description)).toHaveAttribute("href", expectedUrl);
     });
 
     it("hides input field by default", () => {
