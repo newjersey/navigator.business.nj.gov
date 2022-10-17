@@ -143,7 +143,9 @@ const DashboardPage = (props: Props): ReactElement => {
             {LookupOperatingPhaseById(userData?.profileData.operatingPhase).displayCalendarType != "NONE" && (
               <FilingsCalendar operateReferences={props.operateReferences} />
             )}
-            <HideableTasks />
+            {LookupOperatingPhaseById(userData?.profileData.operatingPhase).displayHideableRoadmapTasks && (
+              <HideableTasks />
+            )}
           </>
         )}
       </div>
