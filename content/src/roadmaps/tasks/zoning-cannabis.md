@@ -21,8 +21,9 @@ To obtain a Cannabis license you will need zoning approval from your local gover
 - Must include any zoning variances granted to the business
 
 ### Letter of Resolution 
-- If your local government has a governing body, they must provide you with a written resolution indicating that your business location is approved for your cannabis business activities  
-- If your local government has no governing body, the municipality's executive must provide you with a letter indicating that your location is suitable for your cannabis business activities 
+- If your local government has a governing body, they must provide you with a written resolution   
+- If your local government has no governing body, the municipality's executive must provide you with a letter  
+- The resolution or letter must indicate that your business location is approved for your cannabis business activities and confirm that your business will not exceed the local governments' limit for licensed cannabis businesses, if they have set a limit
 
 >**Once completed, you will have:**
 >- Evidence of compliance with local codes and ordinances for the proposed location
