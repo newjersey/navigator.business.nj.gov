@@ -13,6 +13,12 @@ To obtain a Cannabis license you will need zoning approval from your local gover
 **To complete this task you must meet with your local Zoning Office.**
 
 ---
+#﻿## Zoning Approval  
+-﻿ Must be a letter or an affidavit from the local government official(s)  
+-﻿ Must indicate that the business location complies with zoning requirements for the business activities
+-﻿ Must include any zoning variances granted to the business.
+
+
 
 > **Once completed, you will have:**
 >
