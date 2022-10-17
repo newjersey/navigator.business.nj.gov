@@ -20,11 +20,18 @@ import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { getNaicsDisplayMd } from "@/lib/domain-logic/getNaicsDisplayMd";
 import { loadTasksDisplayContent } from "@/lib/static/loadDisplayContent";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import { loadAllTaskUrlSlugs, loadTaskByUrlSlug, TaskUrlSlugParam } from "@/lib/static/loadTasks";
 import { Task, TasksDisplayContent } from "@/lib/types/types";
-import { getModifiedTaskContent, getTaskFromRoadmap, getUrlSlugs, rswitch } from "@/lib/utils/helpers";
+import {
+  getModifiedTaskContent,
+  getTaskFromRoadmap,
+  getUrlSlugs,
+  rswitch,
+  templateEval,
+} from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { formationTaskId, Municipality } from "@businessnjgovnavigator/shared/";
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";
@@ -51,10 +58,16 @@ const TaskPage = (props: Props): ReactElement => {
     };
   }, [props.task.urlSlug, roadmap]);
 
+  const addNaicsCodeData = (contentMd: string): string => {
+    const naicsCode = userData?.profileData.naicsCode || "";
+    const naicsTemplateValue = getNaicsDisplayMd(naicsCode);
+    return templateEval(contentMd, { naicsCode: naicsTemplateValue });
+  };
+
   const getTaskBody = (): ReactElement => {
     const task = {
       ...props.task,
-      contentMd: getModifiedTaskContent(roadmap, props.task, "contentMd"),
+      contentMd: addNaicsCodeData(getModifiedTaskContent(roadmap, props.task, "contentMd")),
       callToActionLink: getModifiedTaskContent(roadmap, props.task, "callToActionLink"),
       callToActionText: getModifiedTaskContent(roadmap, props.task, "callToActionText"),
     };

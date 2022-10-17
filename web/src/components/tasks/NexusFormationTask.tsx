@@ -8,8 +8,9 @@ import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import { fetchTaskByFilename } from "@/lib/async-content-fetchers/fetchTaskByFilename";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { getNaicsDisplayMd } from "@/lib/domain-logic/getNaicsDisplayMd";
 import { Task } from "@/lib/types/types";
-import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import { templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { ReactElement, useState } from "react";
 
@@ -40,9 +41,15 @@ export const NexusFormationTask = (props: Props): ReactElement => {
     return userData ? userData.profileData.nexusDbaName !== undefined : false;
   };
 
+  const addNaicsCodeData = (contentMd: string): string => {
+    const naicsCode = userData?.profileData.naicsCode || "";
+    const naicsTemplateValue = getNaicsDisplayMd(naicsCode);
+    return templateEval(contentMd, { naicsCode: naicsTemplateValue });
+  };
+
   const getFormattedBody = (): ReactElement => {
     if (!isDba()) {
-      return <Content>{taskToDisplay.contentMd}</Content>;
+      return <Content>{addNaicsCodeData(taskToDisplay.contentMd)}</Content>;
     }
 
     const [beforeIndentation, after] = taskToDisplay.contentMd.split("${beginIndentationSection}");

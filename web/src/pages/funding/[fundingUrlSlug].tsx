@@ -4,7 +4,7 @@ import { PageSkeleton } from "@/components/PageSkeleton";
 import { TaskCTA } from "@/components/TaskCTA";
 import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { getNaicsTemplateValue } from "@/lib/domain-logic/getNaicsTemplateValue";
+import { getNaicsDisplayMd } from "@/lib/domain-logic/getNaicsDisplayMd";
 import { MediaQueries } from "@/lib/PageSizes";
 import { FundingUrlSlugParam, loadAllFundingUrlSlugs, loadFundingByUrlSlug } from "@/lib/static/loadFundings";
 import { loadOperateReferences } from "@/lib/static/loadOperateReferences";
@@ -28,7 +28,7 @@ export const FundingElement = (props: { funding: Funding }): ReactElement => {
 
   const addNaicsCodeData = (contentMd: string): string => {
     const naicsCode = userData?.profileData.naicsCode || "";
-    const naicsTemplateValue = getNaicsTemplateValue(naicsCode);
+    const naicsTemplateValue = getNaicsDisplayMd(naicsCode);
     return templateEval(contentMd, { naicsCode: naicsTemplateValue });
   };
 

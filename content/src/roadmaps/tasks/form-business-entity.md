@@ -16,7 +16,7 @@ You must register your business name and form your `legal structure|legal-struct
 
 - Available business name
 - Legal structure
-- [NAICS code](/tasks/determine-naics-code) (optional) ${naicsCode}
+- [NAICS code](/tasks/determine-naics-code) (optional): ${naicsCode}
 - `EIN|ein` (optional)
 - Business description
 - Business address (this may be a home address if you are a home-based business)
