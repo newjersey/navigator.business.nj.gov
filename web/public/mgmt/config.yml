@@ -283,11 +283,27 @@ collections:
     editor:
       preview: true
     fields:
-      - { label: "Content", name: "body", widget: "markdown" }
       - { label: "File Name", name: "filename", widget: "slug" }
-      - { label: "Url Slug", name: "urlSlug", widget: "string" }
       - { label: "Name", name: "name", widget: "string" }
+      - { label: "Url Slug", name: "urlSlug", widget: "string" }
       - { label: "Id", name: "id", widget: "string" }
+      - {
+          label: "Open Date",
+          name: "openDate",
+          widget: "datetime",
+          required: false,
+          default: "",
+          format: "MM/DD/yyyy",
+        }
+      - {
+          label: "Due Date",
+          name: "dueDate",
+          widget: "datetime",
+          required: false,
+          default: "",
+          format: "MM/DD/yyyy",
+        }
+      - { label: "Content", name: "body", widget: "markdown" }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
       - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
       - label: "Funding Type"
@@ -302,7 +318,16 @@ collections:
             "hiring and employee training support",
             "tax exemption",
           ]
-      - label: "Program Purpose"
+      - label: "Program Frequency"
+        name: "programFrequency"
+        widget: "select"
+        options: ["annual", "ongoing", "reoccuring", "one-time", "pilot", "other"]
+      - label: "Status"
+        name: "status"
+        widget: "select"
+        required: true
+        options: ["rolling application", "opening soon", "deadline", "first come, first serve", "closed"]
+      - label: "In-State/Out-of-State"
         name: "programPurpose"
         widget: "select"
         options: ["In State", "Out of State", "Both"]
@@ -314,21 +339,6 @@ collections:
         options: ["NJEDA", "NJDOL", "NJDEP", "NJ Department of Treasury", "NJ Board of Public Utilities"]
         required: false
       - { label: "Agency Contact", name: "agencyContact", widget: "string", required: false }
-      - label: "Publish/Stage/Archive"
-        name: "publishStageArchive"
-        widget: "select"
-        options: ["Do Not Publish"]
-        default: ""
-        required: false
-      - label: "Status"
-        name: "status"
-        widget: "select"
-        required: true
-        options: ["rolling application", "opening soon", "deadline", "first come, first serve", "closed"]
-      - label: "Program Frequency"
-        name: "programFrequency"
-        widget: "select"
-        options: ["annual", "ongoing", "reoccuring", "one-time", "pilot", "other"]
       - label: "Business Stage"
         name: "businessStage"
         widget: "select"
@@ -394,6 +404,28 @@ collections:
         search_fields: ["arrayOfSectors.*.name"]
         value_field: "arrayOfSectors.*.id"
         display_fields: ["arrayOfSectors.*.name"]
+      - label: "Publish/Stage/Archive"
+        name: "publishStageArchive"
+        widget: "select"
+        options: ["Do Not Publish"]
+        default: ""
+        required: false
+
+  - name: "archived-funding-opportunities"
+    label: "Fund Opps - Archived"
+    folder: "content/src/archived-fundings"
+    summary: "/{{urlSlug}} - {{name}}"
+    identifier_field: "{{urlSlug}}"
+    slug: "{{urlSlug}}"
+    delete: true
+    create: true
+    editor:
+      preview: true
+    fields:
+      - { label: "File Name", name: "filename", widget: "slug" }
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Url Slug", name: "urlSlug", widget: "string" }
+      - { label: "Id", name: "id", widget: "string" }
       - {
           label: "Open Date",
           name: "openDate",
@@ -410,21 +442,7 @@ collections:
           default: "",
           format: "MM/DD/yyyy",
         }
-  - name: "archived-funding-opportunities"
-    label: "Fund Opps - Archived"
-    folder: "content/src/archived-fundings"
-    summary: "/{{urlSlug}} - {{name}}"
-    identifier_field: "{{urlSlug}}"
-    slug: "{{urlSlug}}"
-    delete: true
-    create: true
-    editor:
-      preview: true
-    fields:
       - { label: "Content", name: "body", widget: "markdown" }
-      - { label: "Url Slug / Filename", name: "urlSlug", widget: "slug" }
-      - { label: "Name", name: "name", widget: "string" }
-      - { label: "Id", name: "id", widget: "string" }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
       - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
       - label: "Funding Type"
@@ -439,7 +457,16 @@ collections:
             "hiring and employee training support",
             "tax exemption",
           ]
-      - label: "Program Purpose"
+      - label: "Program Frequency"
+        name: "programFrequency"
+        widget: "select"
+        options: ["annual", "ongoing", "reoccuring", "one-time", "pilot", "other"]
+      - label: "Status"
+        name: "status"
+        widget: "select"
+        required: true
+        options: ["rolling application", "opening soon", "deadline", "first come, first serve", "closed"]
+      - label: "In-State/Out-of-State"
         name: "programPurpose"
         widget: "select"
         options: ["In State", "Out of State", "Both"]
@@ -451,20 +478,6 @@ collections:
         options: ["NJEDA", "NJDOL", "NJDEP", "NJ Department of Treasury", "NJ Board of Public Utilities"]
         required: false
       - { label: "Agency Contact", name: "agencyContact", widget: "string", required: false }
-      - label: "Publish/Stage/Archive"
-        name: "publishStageArchive"
-        widget: "select"
-        options: ["Do Not Publish"]
-        required: false
-      - label: "Status"
-        name: "status"
-        widget: "select"
-        required: true
-        options: ["open", "opening soon", "deadline", "first come, first serve", "closed"]
-      - label: "Program Frequency"
-        name: "programFrequency"
-        widget: "select"
-        options: ["annual", "ongoing", "reoccuring", "one-time", "pilot", "other"]
       - label: "Business Stage"
         name: "businessStage"
         widget: "select"
@@ -497,6 +510,7 @@ collections:
         min: 0
         options:
           [
+            "All",
             "Atlantic",
             "Bergen",
             "Burlington",
@@ -529,22 +543,12 @@ collections:
         search_fields: ["arrayOfSectors.*.name"]
         value_field: "arrayOfSectors.*.id"
         display_fields: ["arrayOfSectors.*.name"]
-      - {
-          label: "Open Date",
-          name: "openDate",
-          widget: "datetime",
-          required: false,
-          default: "",
-          format: "MM/DD/yyyy",
-        }
-      - {
-          label: "Due Date",
-          name: "dueDate",
-          widget: "datetime",
-          required: false,
-          default: "",
-          format: "MM/DD/yyyy",
-        }
+      - label: "Publish/Stage/Archive"
+        name: "publishStageArchive"
+        widget: "select"
+        options: ["Do Not Publish"]
+        default: ""
+        required: false
   - name: "roadmaps-label"
     label: "🟩 ROADMAPS"
     folder: "content/src"
