@@ -14,6 +14,7 @@
     "editText": "Edit",
     "removeText": "Remove",
     "saveButtonText": "Save NAICS Code",
-    "suggestedCodeBodyText": "Based on the information you have provided, we recommend the NAICS codes listed below.\n **This information is used for data and analysis purposes by State and Federal governments, and does not directly impact your business.**\n\nPlease select one that best represents your primary business activity."
+    "suggestedCodeBodyText": "Based on the information you have provided, we recommend the NAICS codes listed below.\n **This information is used for data and analysis purposes by State and Federal governments, and does not directly impact your business.**\n\nPlease select one that best represents your primary business activity.",
+    "naicsDescriptionURL": "https://www.naics.com/naics-code-description/?v=2022&code=${code}"
   }
 }

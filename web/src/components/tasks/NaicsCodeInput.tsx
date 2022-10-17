@@ -1,4 +1,4 @@
-import { Content } from "@/components/Content";
+import { Content, ExternalLink } from "@/components/Content";
 import { GenericTextField } from "@/components/GenericTextField";
 import { Button } from "@/components/njwds-extended/Button";
 import { RoadmapContext } from "@/contexts/roadmapContext";
@@ -9,7 +9,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import NaicsCodes from "@/lib/static/records/naics2022.json";
 import { NaicsCodeObject, Task } from "@/lib/types/types";
-import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import { templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { LookupIndustryById, UserData } from "@businessnjgovnavigator/shared";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import React, { ReactElement, useContext, useMemo, useState } from "react";
@@ -151,13 +151,14 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
                   control={<Radio color="primary" />}
                   label={
                     <div className="padding-y-1">
-                      <span className="text-bold margin-right-05">{code}</span>-{" "}
-                      <span className="margin-left-05">
-                        {
-                          descriptions.find((obj) => obj.SixDigitCode?.toString() == code)
-                            ?.SixDigitDescription
-                        }
-                      </span>
+                      <span className="text-bold margin-right-05">{code}</span>
+                      <span className="margin-right-05">- </span>
+                      <ExternalLink
+                        href={templateEval(Config.determineNaicsCode.naicsDescriptionURL, { code: code })}
+                      >
+                        {descriptions.find((obj) => obj.SixDigitCode?.toString() == code)
+                          ?.SixDigitDescription ?? ""}
+                      </ExternalLink>
                     </div>
                   }
                 />
