@@ -82,7 +82,7 @@ describe("<SidebarCardTaxRegistrationNudge />", () => {
       fireEvent.change(businessNameInput, { target: { value: "NJ Services" } });
 
       const taxIdInput = screen.getByLabelText("Tax id");
-      fireEvent.change(taxIdInput, { target: { value: "123456789" } });
+      fireEvent.change(taxIdInput, { target: { value: "123456789000" } });
 
       fireEvent.mouseDown(screen.getByLabelText("Ownership"));
       const listbox = within(screen.getByRole("listbox"));
@@ -98,7 +98,7 @@ describe("<SidebarCardTaxRegistrationNudge />", () => {
         profileData: {
           ...initialUserData.profileData,
           businessName: "NJ Services",
-          taxId: "123456789",
+          taxId: "123456789000",
           ownershipTypeIds: ["woman-owned"],
           existingEmployees: "3",
         },

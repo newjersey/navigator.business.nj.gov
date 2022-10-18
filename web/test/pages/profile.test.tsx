@@ -332,7 +332,7 @@ describe("profile", () => {
 
       chooseTab("numbers");
       fillText("Entity id", "0234567890");
-      fillText("Tax id", "023456790");
+      fillText("Tax id", "023456790123");
       fillText("Employer id", "02-3456780");
       chooseTab("notes");
       fillText("Notes", "whats appppppp");
@@ -352,7 +352,7 @@ describe("profile", () => {
           homeBasedBusiness: true,
           legalStructureId: "c-corporation",
           municipality: newark,
-          taxId: "023456790",
+          taxId: "023456790123",
           entityId: "0234567890",
           employerId: "023456780",
           notes: "whats appppppp",
@@ -822,7 +822,7 @@ describe("profile", () => {
       const userData = generateUserData({
         profileData: generateProfileData({
           businessPersona: "OWNING",
-          industryId: undefined,
+          industryId: "generic",
         }),
       });
       const newark = generateMunicipality({ displayName: "Newark" });
@@ -840,7 +840,7 @@ describe("profile", () => {
       fillText("Employer id", "02-3456780");
       fillText("Entity id", "0234567890");
       fillText("Date of formation", date.format("MM/YYYY"));
-      fillText("Tax id", "023456790");
+      fillText("Tax id", "023456790123");
       fillText("Tax pin", "6666");
       chooseTab("notes");
       fillText("Notes", "whats appppppp");
@@ -861,7 +861,7 @@ describe("profile", () => {
           ownershipTypeIds: ["veteran-owned", "woman-owned"],
           municipality: newark,
           dateOfFormation,
-          taxId: "023456790",
+          taxId: "023456790123",
           entityId: "0234567890",
           employerId: "023456780",
           notes: "whats appppppp",
@@ -922,7 +922,7 @@ describe("profile", () => {
           entityId: "1234567890",
           employerId: "123456789",
           dateOfFormation,
-          taxId: "123456790",
+          taxId: "123456790888",
           notes: "whats appppppp",
           municipality: generateMunicipality({
             displayName: "Newark",
