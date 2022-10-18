@@ -47,14 +47,14 @@ export const TaxRegistrationModal = (props: Props): ReactElement => {
       },
       existingEmployees: { invalid: !profileData.existingEmployees },
       taxId: {
-        invalid: !profileData.taxId && showTaxIdField(),
+        invalid: profileData.taxId?.length !== 12 && showTaxIdField(),
       },
     };
     setFieldStates(errorMap);
     if (Object.keys(errorMap).some((k) => errorMap[k as ProfileFields].invalid)) return;
 
     let { taxFilingData } = userData;
-    if (userData.profileData.taxId != profileData.taxId) {
+    if (userData.profileData.taxId !== profileData.taxId) {
       taxFilingData = { ...taxFilingData, state: undefined, registered: false, filings: [] };
     }
 

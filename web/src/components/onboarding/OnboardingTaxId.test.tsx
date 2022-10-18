@@ -23,7 +23,6 @@ const renderComponent = (profileData: ProfileData, errorProps: ErrorProps, field
       <OnboardingTaxId
         fieldStates={errorProps.errorMap}
         onValidation={errorProps.onValidation}
-        splitField
         {...fieldProps}
       />
     </WithStatefulProfileData>
@@ -56,18 +55,6 @@ describe("<OnboardingTaxId />", () => {
       errorProps
     );
     expect(screen.getByLabelText("Tax id location")).toBeInTheDocument();
-  });
-
-  it("does not render taxIdLocation field with an existing 9 digit taxId when splitField is disabled", () => {
-    renderComponent(
-      {
-        ...profileData,
-        taxId: randomInt(9).toString(),
-      },
-      errorProps,
-      { splitField: false }
-    );
-    expect(screen.queryByLabelText("Tax id location")).not.toBeInTheDocument();
   });
 
   it("does not render taxIdLocation field with an existing 12 digit taxId", () => {

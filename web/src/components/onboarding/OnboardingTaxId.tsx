@@ -10,7 +10,6 @@ import { ReactElement, useContext, useRef, useState } from "react";
 
 interface Props extends Omit<OnboardingProps, "fieldName" | "handleChange"> {
   fieldStates: ProfileFieldErrorMap;
-  splitField?: boolean;
   handleChangeOverride?: (value: string) => void;
 }
 export const OnboardingTaxId = ({
@@ -28,11 +27,11 @@ export const OnboardingTaxId = ({
 
   const getFieldType = () => {
     const initialValue = state.profileData[fieldName]?.trim().length ?? 0;
-    if (initialValue == 0 || initialValue == 12) return "FULL";
+    if (initialValue === 0 || initialValue === 12) return "FULL";
     return "SPLIT";
   };
 
-  const initialType = useRef<"FULL" | "SPLIT">(props.splitField ? getFieldType() : "FULL");
+  const initialType = useRef<"FULL" | "SPLIT">(getFieldType());
   const locationBoxRef = useRef<HTMLDivElement>(null);
   const taxIdBoxRef = useRef<HTMLDivElement>(null);
 
@@ -43,12 +42,12 @@ export const OnboardingTaxId = ({
 
   const handleChange = (value: string, type: "taxId" | "taxIdLocation") => {
     let resolvedValue = "".concat(...taxIdValue, ...locationValue);
-    if (type == "taxId") {
+    if (type === "taxId") {
       setTaxIdValue(value);
       resolvedValue = "".concat(...value, ...locationValue);
       if (value.length === 9) locationBoxRef.current?.querySelector("input")?.focus();
     }
-    if (type == "taxIdLocation") {
+    if (type === "taxIdLocation") {
       resolvedValue = "".concat(...taxIdValue, ...value);
       setLocationValue(value);
     }
@@ -66,16 +65,12 @@ export const OnboardingTaxId = ({
   const onValidation = (valFieldName: string, invalid: boolean) => {
     const errors = (errorMap: ErrorMapType) => ({ ...errorMap, [valFieldName]: invalid });
     setErrorMap((errorMap) => errors(errorMap));
-    props.onValidation &&
-      props.onValidation(
-        fieldName,
-        Object.values(errors(errorMap)).some((v) => v == true)
-      );
+    props.onValidation && props.onValidation(fieldName, Object.values(errors(errorMap)).includes(true));
   };
 
   const error = fieldStates[fieldName].invalid;
 
-  if (initialType.current == "FULL")
+  if (initialType.current === "FULL")
     return (
       <OnboardingField
         error={error}
@@ -83,7 +78,7 @@ export const OnboardingTaxId = ({
         visualFilter={formatTaxId}
         validationText={validationText}
         inputErrorBar={inputErrorBar}
-        numericProps={{ minLength: 9, maxLength: 12 }}
+        numericProps={{ minLength: 12, maxLength: 12 }}
         handleChange={handleChangeOverride}
         {...props}
       />
