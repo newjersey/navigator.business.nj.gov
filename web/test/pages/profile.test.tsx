@@ -39,6 +39,7 @@ import {
   LookupSectorTypeById,
   Municipality,
   ProfileData,
+  randomInt,
   UserData,
 } from "@businessnjgovnavigator/shared";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
@@ -319,6 +320,7 @@ describe("profile", () => {
         ...emptyData,
         profileData: {
           ...emptyData.profileData,
+          taxId: "",
           businessPersona: "STARTING",
         },
       };
@@ -821,6 +823,7 @@ describe("profile", () => {
     it("updates the user data on save", async () => {
       const userData = generateUserData({
         profileData: generateProfileData({
+          taxId: randomInt(9).toString(),
           businessPersona: "OWNING",
           industryId: "generic",
         }),
@@ -840,7 +843,8 @@ describe("profile", () => {
       fillText("Employer id", "02-3456780");
       fillText("Entity id", "0234567890");
       fillText("Date of formation", date.format("MM/YYYY"));
-      fillText("Tax id", "023456790123");
+      fillText("Tax id", "023456790");
+      fillText("Tax id location", "123");
       fillText("Tax pin", "6666");
       chooseTab("notes");
       fillText("Notes", "whats appppppp");
