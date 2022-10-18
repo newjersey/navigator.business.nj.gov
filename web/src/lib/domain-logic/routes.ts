@@ -23,6 +23,7 @@ interface QUERY_PARAMS_VALUES {
   signUp: "true";
   industry: string;
   code: string;
+  openTaxFilingsModal: "true";
 }
 
 export enum QUERIES {
@@ -39,6 +40,7 @@ export enum QUERIES {
   signUp = "signUp",
   industry = "industry",
   code = "code",
+  openTaxFilingsModal = "openTaxFilingsModal",
 }
 
 export const routeShallowWithQuery = <K extends keyof QUERY_PARAMS_VALUES>(

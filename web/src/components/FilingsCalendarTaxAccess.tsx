@@ -1,16 +1,20 @@
 import { Content } from "@/components/Content";
 import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
+import { AuthAlertContext } from "@/contexts/authAlertContext";
 import { postTaxRegistrationLookup } from "@/lib/api-client/apiClient";
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { checkQueryValue, QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
 import {
   LookupLegalStructureById,
   LookupOperatingPhaseById,
   UserData,
 } from "@businessnjgovnavigator/shared/";
+import { useRouter } from "next/router";
 
-import { ReactElement, useState } from "react";
+import { ReactElement, useContext, useEffect, useRef, useState } from "react";
 import { useMountEffectWhenDefined } from "../lib/utils/helpers";
 import { Button } from "./njwds-extended/Button";
 import { TaxFilingLookupModal } from "./TaxFilingLookupModal";
@@ -24,8 +28,11 @@ export const shouldRenderFilingsCalendarTaxAccess = (userData?: UserData) =>
 export const FilingsCalendarTaxAccess = (): ReactElement => {
   const { userData, update } = useUserData();
   const { Config } = useConfig();
-  const [showModal, setShowModal] = useState(false);
+  const { isAuthenticated, setModalIsVisible, modalIsVisible } = useContext(AuthAlertContext);
+  const [showTaxModal, setShowTaxModal] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
+  const router = useRouter();
+  const prevModalIsVisible = useRef<boolean | undefined>(undefined);
 
   useMountEffectWhenDefined(() => {
     if (!userData) return;
@@ -39,6 +46,41 @@ export const FilingsCalendarTaxAccess = (): ReactElement => {
       }
     })();
   }, userData);
+
+  useEffect(() => {
+    if (!router.isReady) return;
+    if (checkQueryValue(router, QUERIES.openTaxFilingsModal, "true")) {
+      router.replace({ pathname: ROUTES.dashboard }, undefined, { shallow: true });
+      setShowTaxModal(true);
+    }
+  }, [router, router.isReady]);
+
+  useEffect(() => {
+    if (!userData) return;
+    if (modalIsVisible === false && prevModalIsVisible.current === true) {
+      update({ ...userData, preferences: { ...userData.preferences, returnToLink: "" } });
+    }
+    prevModalIsVisible.current = modalIsVisible;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [modalIsVisible]);
+
+  const openRegisterOrTaxModal = () => {
+    if (!userData) return;
+    if (isAuthenticated === IsAuthenticated.FALSE) {
+      update({
+        ...userData,
+        preferences: {
+          ...userData.preferences,
+          returnToLink: `${ROUTES.dashboard}?${QUERIES.openTaxFilingsModal}=true`,
+        },
+      });
+      analytics.event.tax_calendar_banner_button.click.show_myNJ_registration_prompt_modal();
+      setModalIsVisible(true);
+    } else {
+      analytics.event.tax_calendar_banner_button.click.show_tax_calendar_modal();
+      setShowTaxModal(true);
+    }
+  };
 
   return (
     <>
@@ -62,10 +104,10 @@ export const FilingsCalendarTaxAccess = (): ReactElement => {
         !userData?.taxFilingData.registered && (
           <>
             <TaxFilingLookupModal
-              isOpen={showModal}
-              close={() => setShowModal(false)}
+              isOpen={showTaxModal}
+              close={() => setShowTaxModal(false)}
               onSuccess={async () => {
-                setShowModal(false);
+                setShowTaxModal(false);
                 await new Promise((resolve) => setTimeout(resolve, 500));
                 setShowAlert(true);
               }}
@@ -78,10 +120,7 @@ export const FilingsCalendarTaxAccess = (): ReactElement => {
                 dataTestid="get-tax-access"
                 style={"secondary"}
                 noRightMargin
-                onClick={() => {
-                  analytics.event.tax_calendar_banner_button.click.show_tax_calendar_modal();
-                  setShowModal(true);
-                }}
+                onClick={openRegisterOrTaxModal}
               >
                 {Config.taxCalendar.AccessButton}
               </Button>

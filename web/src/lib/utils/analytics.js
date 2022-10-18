@@ -686,6 +686,8 @@ export default {
       click: {
         show_tax_calendar_modal: () =>
           sendEvent("tax_calendar_banner_button", "click", "show_tax_calendar_modal"),
+        show_myNJ_registration_prompt_modal: () =>
+          sendEvent("tax_calendar_banner_button", "click", "show_myNJ_registration_prompt_modal"),
       },
     },
     tax_calendar_modal: {
@@ -754,6 +756,13 @@ export default {
         },
         no_not_moving_across_state_lines: () => {
           sendEvent("onboarding_logistics_business_question", "submit", "no_not_moving_across_state_lines");
+        },
+      },
+    },
+    myNJ_prompt_modal_complete_button: {
+      click: {
+        go_to_myNJ_registration: () => {
+          sendEvent("myNJ_prompt_modal_complete_button", "click", "go_to_myNJ_registration");
         },
       },
     },

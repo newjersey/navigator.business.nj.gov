@@ -409,6 +409,29 @@ describe("<FilingsCalendar />", () => {
       expect(screen.queryByTestId("button-container")).not.toBeInTheDocument();
       process.env.FEATURE_TAX_CALENDAR = "true";
     });
+
+    it("displays button on filings calendar in up and running guest mode for non sp/gp", () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          legalStructureId: randomLegalStructure(true).id,
+          operatingPhase: "GUEST_MODE_OWNING",
+        }),
+      });
+      renderFilingsCalendar({}, userData);
+      expect(screen.getByTestId("get-tax-access")).toBeInTheDocument();
+    });
+
+    it("doesn't display button on filings calendar in up and running guest mode for sp/gp", () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          legalStructureId: randomLegalStructure(false).id,
+          operatingPhase: "GUEST_MODE_OWNING",
+        }),
+        taxFilingData: generateTaxFilingData({ filings: [generateTaxFiling({})] }),
+      });
+      renderFilingsCalendar({}, userData);
+      expect(screen.queryByTestId("get-tax-access")).not.toBeInTheDocument();
+    });
   });
 
   describe("filings calendar in mobile", () => {
