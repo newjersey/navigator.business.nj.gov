@@ -1,12 +1,15 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
+import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import {
   generateProfileData,
   generateTaxFilingData,
   generateUserData,
   randomLegalStructure,
 } from "@/test/factories";
-import { markdownToText, randomElementFromArray } from "@/test/helpers";
+import { markdownToText, randomElementFromArray, withAuthAlert } from "@/test/helpers";
+import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import {
   currentUserData,
   setupStatefulUserDataContext,
@@ -28,9 +31,11 @@ jest.mock("@/lib/api-client/apiClient", () => ({
   postTaxRegistrationOnboarding: jest.fn(),
   postTaxRegistrationLookup: jest.fn(),
 }));
+jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 const mockApi = api as jest.Mocked<typeof api>;
 
 const Config = getMergedConfig();
+let setModalIsVisible: jest.Mock;
 
 const renderFilingsCalendarTaxAccess = (initialUserData?: UserData) => {
   render(
@@ -40,12 +45,25 @@ const renderFilingsCalendarTaxAccess = (initialUserData?: UserData) => {
   );
 };
 
+const renderUnauthenticatedFilingsCalendarTaxAccess = (initialUserData?: UserData) => {
+  render(
+    withAuthAlert(
+      <WithStatefulUserData initialUserData={initialUserData}>
+        <FilingsCalendarTaxAccess />
+      </WithStatefulUserData>,
+      IsAuthenticated.FALSE,
+      { modalIsVisible: false, setModalIsVisible }
+    )
+  );
+};
+
 describe("<FilingsCalendarTaxAccess />", () => {
   let userDataWithExternalFormation: UserData;
   let flow: Exclude<BusinessPersona, undefined>;
 
   beforeEach(() => {
     jest.resetAllMocks();
+    setModalIsVisible = jest.fn();
     const legalStructure = randomLegalStructure(true);
 
     mockApi.postTaxRegistrationOnboarding.mockImplementation(() =>
@@ -72,12 +90,58 @@ describe("<FilingsCalendarTaxAccess />", () => {
     });
     flow = userDataWithExternalFormation.profileData.businessPersona ?? flow;
     setupStatefulUserDataContext();
+    useMockRouter({});
   });
 
   it("opens Gov2Go modal when on button click", () => {
     renderFilingsCalendarTaxAccess(userDataWithExternalFormation);
     fireEvent.click(screen.getByTestId("get-tax-access"));
     expect(screen.getByTestId("modal-content")).toBeInTheDocument();
+  });
+
+  it("opens the sign up modal when button is clicked in up and running guest mode for non sp/gp instead of tax modal", async () => {
+    const userData = generateUserData({
+      profileData: generateProfileData({
+        legalStructureId: randomLegalStructure(true).id,
+        operatingPhase: "GUEST_MODE_OWNING",
+      }),
+    });
+
+    renderUnauthenticatedFilingsCalendarTaxAccess(userData);
+    expect(screen.getByTestId("get-tax-access")).toBeInTheDocument();
+    fireEvent.click(screen.getByTestId("get-tax-access"));
+    expect(screen.queryByTestId("modal-content")).not.toBeInTheDocument();
+    await waitFor(() => expect(setModalIsVisible).toHaveBeenCalledWith(true));
+  });
+
+  it("updates userData with return link when the button is clicked in up and running guest mode", async () => {
+    const userData = generateUserData({
+      profileData: generateProfileData({
+        legalStructureId: randomLegalStructure(true).id,
+        operatingPhase: "GUEST_MODE_OWNING",
+      }),
+    });
+    renderUnauthenticatedFilingsCalendarTaxAccess(userData);
+    expect(screen.getByTestId("get-tax-access")).toBeInTheDocument();
+    fireEvent.click(screen.getByTestId("get-tax-access"));
+    await waitFor(() =>
+      expect(currentUserData().preferences.returnToLink).toEqual(
+        `${ROUTES.dashboard}?${QUERIES.openTaxFilingsModal}=true`
+      )
+    );
+  });
+
+  it("opens tax modal if the query parameter openTaxFilingsModal is true and shallow reloads", async () => {
+    const userData = generateUserData({
+      profileData: generateProfileData({
+        legalStructureId: randomLegalStructure(true).id,
+        operatingPhase: "GUEST_MODE_OWNING",
+      }),
+    });
+    useMockRouter({ query: { openTaxFilingsModal: "true" }, isReady: true });
+    renderFilingsCalendarTaxAccess(userData);
+    await screen.findByTestId("modal-content");
+    expect(mockPush).toHaveBeenCalledWith({ pathname: ROUTES.dashboard }, undefined, { shallow: true });
   });
 
   it("pre-populates fields with userData values", () => {

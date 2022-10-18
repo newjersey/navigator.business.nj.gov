@@ -51,7 +51,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displayCertifications: true,
     displayFundings: true,
     displayCalendarType: "FULL",
-    displayTaxAccessButton: false,
+    displayTaxAccessButton: true,
     displayRoadmapTasks: false,
     displayHideableRoadmapTasks: false,
   },
