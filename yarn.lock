@@ -3638,7 +3638,7 @@ __metadata:
     serverless: 3.23.0
     serverless-dynamodb-local: 0.2.40
     serverless-http: 3.0.3
-    serverless-offline: 10.3.2
+    serverless-offline: 11.1.3
     serverless-offline-ssm: 6.2.0
     serverless-webpack: 5.10.0
     simple-oauth2: 4.3.0
@@ -3835,7 +3835,7 @@ __metadata:
     serverless: 3.23.0
     serverless-dynamodb-local: 0.2.40
     serverless-http: 3.0.3
-    serverless-offline: 10.3.2
+    serverless-offline: 11.1.3
     serverless-offline-ssm: 6.2.0
     serverless-webpack: 5.10.0
     simple-oauth2: 4.3.0
@@ -7250,7 +7250,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@serverless/utils@npm:^6.0.3, @serverless/utils@npm:^6.7.0":
+"@serverless/utils@npm:^6.0.3, @serverless/utils@npm:^6.7.0, @serverless/utils@npm:^6.8.0":
   version: 6.8.0
   resolution: "@serverless/utils@npm:6.8.0"
   dependencies:
@@ -11492,7 +11492,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"aws-sdk@npm:^2.1224.0, aws-sdk@npm:^2.1231.0, aws-sdk@npm:^2.7.0":
+"aws-sdk@npm:^2.1231.0, aws-sdk@npm:^2.1233.0, aws-sdk@npm:^2.7.0":
   version: 2.1234.0
   resolution: "aws-sdk@npm:2.1234.0"
   dependencies:
@@ -12845,7 +12845,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chalk@npm:^5.0.0, chalk@npm:^5.0.1":
+"chalk@npm:^5.0.0, chalk@npm:^5.0.1, chalk@npm:^5.1.2":
   version: 5.1.2
   resolution: "chalk@npm:5.1.2"
   checksum: 804d7485e33531abe45b14e91026ceb5615974a8c04259ab0806f214a7666f6ea03e39ab124f7d5a0c78a83fda89005f236db3c5f10c2abe9ae875f7aa56bcb5
@@ -21446,7 +21446,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jose@npm:^4.9.3":
+"jose@npm:^4.10.0":
   version: 4.10.0
   resolution: "jose@npm:4.10.0"
   checksum: c575bf2519b758592b3037cac0da34ff2641e56a050b156fe6ab18c03cd6c22e5338d28d1fe3dd997c9b3c0cc7deda72faca4a93ff41274a587850c6519852d0
@@ -26788,7 +26788,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"p-memoize@npm:^7.1.0":
+"p-memoize@npm:^7.1.1":
   version: 7.1.1
   resolution: "p-memoize@npm:7.1.1"
   dependencies:
@@ -30565,21 +30565,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"serverless-offline@npm:10.3.2":
-  version: 10.3.2
-  resolution: "serverless-offline@npm:10.3.2"
+"serverless-offline@npm:11.1.3":
+  version: 11.1.3
+  resolution: "serverless-offline@npm:11.1.3"
   dependencies:
     "@hapi/boom": ^10.0.0
     "@hapi/h2o2": ^10.0.0
     "@hapi/hapi": ^20.2.2
-    "@serverless/utils": ^6.7.0
-    aws-sdk: ^2.1224.0
+    "@serverless/utils": ^6.8.0
+    aws-sdk: ^2.1233.0
     boxen: ^7.0.0
-    chalk: ^5.0.1
+    chalk: ^5.1.2
     execa: ^6.1.0
     fs-extra: ^10.1.0
     java-invoke-local: 0.0.6
-    jose: ^4.9.3
+    jose: ^4.10.0
     js-string-escape: ^1.0.1
     jsonpath-plus: ^7.2.0
     jsonschema: ^1.4.1
@@ -30588,13 +30588,13 @@ __metadata:
     node-fetch: ^3.2.10
     node-schedule: ^2.1.0
     object.hasown: ^1.1.1
-    p-memoize: ^7.1.0
+    p-memoize: ^7.1.1
     p-retry: ^5.1.1
     velocityjs: ^2.0.6
     ws: ^8.9.0
   peerDependencies:
     serverless: ^3.2.0
-  checksum: 6bf5a330cb54afb7ac720a78a5d8431afe7d394fe705664e2f45a9b323dd0d6193b40519621814c2909771c8c9865eec6530db5ff68bbe0c9b7493104b0eea6e
+  checksum: 4a941fd4d36ecfe83a8b06bc1f18fa12310a916c9cb2ce6348aedae83c74e093da91c36cb5908c55859a0945209abadfe16427bcd17f66a129d73a7feb756153
   languageName: node
   linkType: hard
 
