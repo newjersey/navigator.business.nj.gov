@@ -17,12 +17,16 @@ import { ReactElement, useContext } from "react";
 export const SignUpModal = (): ReactElement => {
   const { userData, update } = useUserData();
   const router = useRouter();
-  const { isAuthenticated, modalIsVisible, setModalIsVisible, setRegistrationAlertStatus } =
-    useContext(AuthAlertContext);
+  const {
+    isAuthenticated,
+    registrationModalIsVisible,
+    setRegistrationModalIsVisible,
+    setRegistrationAlertStatus,
+  } = useContext(AuthAlertContext);
 
   useMountEffectWhenDefined(() => {
     if (isAuthenticated == IsAuthenticated.TRUE) {
-      setModalIsVisible(false);
+      setRegistrationModalIsVisible(false);
     }
   }, isAuthenticated);
 
@@ -41,16 +45,16 @@ export const SignUpModal = (): ReactElement => {
 
   return (
     <Dialog
-      open={modalIsVisible}
+      open={registrationModalIsVisible}
       maxWidth="xs"
-      onClose={() => setModalIsVisible(false)}
+      onClose={() => setRegistrationModalIsVisible(false)}
       data-testid={"self-reg-modal"}
     >
       <DialogTitle sx={{ p: 5, paddingRight: 10 }}>
         <Content>{Config.navigationDefaults.guestModalTitle}</Content>
         <IconButton
           aria-label="close"
-          onClick={() => setModalIsVisible(false)}
+          onClick={() => setRegistrationModalIsVisible(false)}
           sx={{
             position: "absolute",
             right: 10,

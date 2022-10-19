@@ -56,11 +56,11 @@ jest.mock("@/lib/api-client/apiClient", () => ({ postGetAnnualFilings: jest.fn()
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 
 describe("profile", () => {
-  let setModalIsVisible: jest.Mock;
+  let setRegistrationModalIsVisible: jest.Mock;
 
   beforeEach(() => {
     jest.resetAllMocks();
-    setModalIsVisible = jest.fn();
+    setRegistrationModalIsVisible = jest.fn();
     useMockRouter({});
     useMockRoadmap({});
     setupStatefulUserDataContext();
@@ -91,7 +91,7 @@ describe("profile", () => {
           <Profile municipalities={municipalities ? [genericTown, ...municipalities] : [genericTown]} />
         </WithStatefulUserData>,
         isAuthenticated ?? IsAuthenticated.TRUE,
-        { modalIsVisible: false, setModalIsVisible }
+        { registrationModalIsVisible: false, setRegistrationModalIsVisible }
       )
     );
   };
@@ -137,7 +137,7 @@ describe("profile", () => {
         renderPage({ userData: initialUserData, isAuthenticated: IsAuthenticated.FALSE });
         chooseTab("numbers");
         fireEvent.change(screen.getByLabelText("Tax pin"), { target: { value: "123456789" } });
-        expect(setModalIsVisible).toHaveBeenCalledWith(true);
+        expect(setRegistrationModalIsVisible).toHaveBeenCalledWith(true);
       });
     });
 
@@ -153,28 +153,28 @@ describe("profile", () => {
         renderPage({ userData: initialUserData, isAuthenticated: IsAuthenticated.FALSE });
         chooseTab("numbers");
         fireEvent.change(screen.getByLabelText("Employer id"), { target: { value: "123456789" } });
-        expect(setModalIsVisible).toHaveBeenCalledWith(true);
+        expect(setRegistrationModalIsVisible).toHaveBeenCalledWith(true);
       });
 
       it("opens registration modal when user tries to change entity ID", () => {
         renderPage({ userData: initialUserData, isAuthenticated: IsAuthenticated.FALSE });
         chooseTab("numbers");
         fireEvent.change(screen.getByLabelText("Entity id"), { target: { value: "123456789" } });
-        expect(setModalIsVisible).toHaveBeenCalledWith(true);
+        expect(setRegistrationModalIsVisible).toHaveBeenCalledWith(true);
       });
 
       it("opens registration modal when user tries to change NJ Tax ID", () => {
         renderPage({ userData: initialUserData, isAuthenticated: IsAuthenticated.FALSE });
         chooseTab("numbers");
         fireEvent.change(screen.getByLabelText("Tax id"), { target: { value: "123456789" } });
-        expect(setModalIsVisible).toHaveBeenCalledWith(true);
+        expect(setRegistrationModalIsVisible).toHaveBeenCalledWith(true);
       });
 
       it("opens registration modal when user tries to change Notes", () => {
         renderPage({ userData: initialUserData, isAuthenticated: IsAuthenticated.FALSE });
         chooseTab("notes");
         fireEvent.change(screen.getByLabelText("Notes"), { target: { value: "some note" } });
-        expect(setModalIsVisible).toHaveBeenCalledWith(true);
+        expect(setRegistrationModalIsVisible).toHaveBeenCalledWith(true);
       });
     }
   });

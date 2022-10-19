@@ -14,11 +14,11 @@ jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 
 describe("<TaskCheckbox />", () => {
-  let setModalIsVisible: jest.Mock;
+  let setRegistrationModalIsVisible: jest.Mock;
 
   beforeEach(() => {
     jest.resetAllMocks();
-    setModalIsVisible = jest.fn();
+    setRegistrationModalIsVisible = jest.fn();
     setupStatefulUserDataContext();
   });
 
@@ -37,7 +37,7 @@ describe("<TaskCheckbox />", () => {
           <TaskCheckbox checklistItemId={checklistItemId} />
         </WithStatefulUserData>,
         isAuthenticated ?? IsAuthenticated.TRUE,
-        { modalIsVisible: false, setModalIsVisible }
+        { registrationModalIsVisible: false, setRegistrationModalIsVisible }
       )
     );
   };
@@ -75,6 +75,6 @@ describe("<TaskCheckbox />", () => {
       isAuthenticated: IsAuthenticated.FALSE,
     });
     fireEvent.click(screen.getByRole("checkbox"));
-    expect(setModalIsVisible).toHaveBeenCalledWith(true);
+    expect(setRegistrationModalIsVisible).toHaveBeenCalledWith(true);
   });
 });

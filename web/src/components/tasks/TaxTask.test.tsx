@@ -171,7 +171,7 @@ describe("<TaxTask />", () => {
 
   describe("guest mode", () => {
     let initialUserData: UserData;
-    const setModalIsVisible = jest.fn();
+    const setRegistrationModalIsVisible = jest.fn();
 
     const renderPage = () => {
       render(
@@ -180,7 +180,7 @@ describe("<TaxTask />", () => {
             <TaxTask task={task} />
           </WithStatefulUserData>,
           IsAuthenticated.FALSE,
-          { modalIsVisible: false, setModalIsVisible }
+          { registrationModalIsVisible: false, setRegistrationModalIsVisible }
         )
       );
     };
@@ -203,7 +203,7 @@ describe("<TaxTask />", () => {
         target: { value: "123456789" },
       });
       fireEvent.click(screen.getByText(`Register & ${Config.tax.saveButtonText}`));
-      await waitFor(() => expect(setModalIsVisible).toHaveBeenCalledWith(true));
+      await waitFor(() => expect(setRegistrationModalIsVisible).toHaveBeenCalledWith(true));
     });
   });
 });

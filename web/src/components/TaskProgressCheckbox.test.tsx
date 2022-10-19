@@ -36,12 +36,12 @@ const randomPublicFilingLegalStructure = () => {
   const nonTradeNameLegalStructures = LegalStructures.filter((x) => x.requiresPublicFiling);
   return nonTradeNameLegalStructures[randomInt() % nonTradeNameLegalStructures.length].id;
 };
-let setModalIsVisible: jest.Mock;
+let setRegistrationModalIsVisible: jest.Mock;
 
 describe("<TaskProgressCheckbox />", () => {
   beforeEach(() => {
     jest.resetAllMocks();
-    setModalIsVisible = jest.fn();
+    setRegistrationModalIsVisible = jest.fn();
     useMockRoadmap({});
     useMockRouter({});
     setupStatefulUserDataContext();
@@ -63,7 +63,7 @@ describe("<TaskProgressCheckbox />", () => {
           <TaskProgressCheckbox taskId={taskId} disabledTooltipText={undefined} />
         </WithStatefulUserData>,
         IsAuthenticated.FALSE,
-        { modalIsVisible: false, setModalIsVisible }
+        { registrationModalIsVisible: false, setRegistrationModalIsVisible }
       )
     );
   };
@@ -119,7 +119,7 @@ describe("<TaskProgressCheckbox />", () => {
   it("opens registration modal for guest mode user when checkbox is clicked", async () => {
     renderTaskCheckboxWithAuthAlert("123", generateUserData({}));
     fireEvent.click(screen.getByTestId("change-task-progress-checkbox"));
-    await waitFor(() => expect(setModalIsVisible).toHaveBeenCalledWith(true));
+    await waitFor(() => expect(setRegistrationModalIsVisible).toHaveBeenCalledWith(true));
   });
 
   describe("tax registration modal", () => {

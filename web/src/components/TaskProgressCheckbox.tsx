@@ -29,7 +29,7 @@ type ModalTypes = "formation" | "formation-unset" | "tax-registration" | "tax-re
 
 export const TaskProgressCheckbox = (props: Props): ReactElement => {
   const { userData, updateQueue } = useUserData();
-  const { isAuthenticated, setModalIsVisible } = useContext(AuthAlertContext);
+  const { isAuthenticated, setRegistrationModalIsVisible } = useContext(AuthAlertContext);
   const { queueUpdateTaskProgress, congratulatoryModal } = useUpdateTaskProgress();
   const [successSnackbarIsOpen, setSuccessSnackbarIsOpen] = useState<boolean>(false);
   const [currentOpenModal, setCurrentOpenModal] = useState<ModalTypes | undefined>(undefined);
@@ -53,7 +53,7 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
   const setToNextStatus = (config?: { redirectOnSuccess: boolean }) => {
     if (!updateQueue || !userData) return;
     if (isAuthenticated === IsAuthenticated.FALSE) {
-      setModalIsVisible(true);
+      setRegistrationModalIsVisible(true);
       return;
     }
     const nextStatus = getNextStatus();

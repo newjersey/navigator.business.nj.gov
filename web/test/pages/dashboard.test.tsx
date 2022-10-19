@@ -115,18 +115,18 @@ describe("dashboard page", () => {
     sidebarDisplayContent,
     fundings,
     certifications,
-    alertIsVisible,
+    registrationAlertIsVisible,
     registrationAlertStatus,
-    setAlertIsVisible,
+    setRegistrationAlertIsVisible,
   }: {
     userData?: UserData;
     isAuthenticated?: IsAuthenticated;
     sidebarDisplayContent?: Record<string, SidebarCardContent>;
     fundings?: Funding[];
     certifications?: Certification[];
-    alertIsVisible?: boolean;
+    registrationAlertIsVisible?: boolean;
     registrationAlertStatus?: RegistrationStatus;
-    setAlertIsVisible?: jest.Mock<() => void>;
+    setRegistrationAlertIsVisible?: jest.Mock<() => void>;
   }) => {
     setupStatefulUserDataContext();
 
@@ -144,7 +144,11 @@ describe("dashboard page", () => {
           </ThemeProvider>
         </WithStatefulUserData>,
         isAuthenticated ?? IsAuthenticated.TRUE,
-        { alertIsVisible: alertIsVisible ?? false, registrationAlertStatus, setAlertIsVisible }
+        {
+          registrationAlertIsVisible: registrationAlertIsVisible ?? false,
+          registrationAlertStatus,
+          setRegistrationAlertIsVisible,
+        }
       )
     );
   };
@@ -279,7 +283,7 @@ describe("dashboard page", () => {
 
   it("renders registration card when routing is not from onboarding and authentication is false,", async () => {
     setDesktopScreen(true);
-    const setAlertIsVisible = jest.fn();
+    const setRegistrationAlertIsVisible = jest.fn();
     useMockRouter({ query: { fromOnboarding: "false" } });
 
     const sidebarDisplayContent = {
@@ -287,10 +291,10 @@ describe("dashboard page", () => {
       welcome: generateSidebarCardContent({ contentMd: "WelcomeCardContent" }),
     };
     renderPageWithAuthAlert({
-      alertIsVisible: true,
+      registrationAlertIsVisible: true,
       sidebarDisplayContent,
       isAuthenticated: IsAuthenticated.FALSE,
-      setAlertIsVisible,
+      setRegistrationAlertIsVisible,
     });
 
     expect(screen.getByText("NotRegisteredContent")).toBeInTheDocument();
@@ -298,7 +302,7 @@ describe("dashboard page", () => {
     await waitFor(() => {
       expect(screen.getByText("WelcomeCardContent")).toBeInTheDocument();
     });
-    expect(setAlertIsVisible).toHaveBeenCalledWith(false);
+    expect(setRegistrationAlertIsVisible).toHaveBeenCalledWith(false);
   });
 
   it("renders calendar snackbar when fromFormBusinessEntity query parameter is provided", () => {
