@@ -37,7 +37,7 @@
   "name": "Healthcare ",
   "industryOnboardingQuestions": {
     "canBeHomeBased": false,
-    "canBeReseller": true
+    "canBeReseller": false
   },
   "isEnabled": false,
   "additionalSearchTerms": "physician, medical examiners, nurses, nursing, midwives, midwifery, occupational therapy, physical therapy, therapist, optometrists, psychologist, psychoanalyst, family therapy, counseling, marriage counselor, speech therapy, audiologists, dietitian, nutritionist",
