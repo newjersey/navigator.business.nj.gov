@@ -290,7 +290,7 @@ describe("<FilingsCalendar />", () => {
 
       const userData = generateUserData({
         profileData: generateProfileData({
-          legalStructureId: randomLegalStructure(true).id,
+          legalStructureId: randomLegalStructure({ requiresPublicFiling: true }).id,
           operatingPhase: randomElementFromArray(
             OperatingPhases.filter(
               (obj) => obj.displayTaxAccessButton === true && obj.displayCalendarType != "NONE"
@@ -319,7 +319,7 @@ describe("<FilingsCalendar />", () => {
       });
       const userData = generateUserData({
         profileData: generateProfileData({
-          legalStructureId: randomLegalStructure(false).id,
+          legalStructureId: randomLegalStructure({ requiresPublicFiling: false }).id,
           operatingPhase: randomElementFromArray(
             OperatingPhases.filter(
               (obj) => obj.displayTaxAccessButton === true && obj.displayCalendarType != "NONE"
@@ -351,7 +351,7 @@ describe("<FilingsCalendar />", () => {
 
       const userData = generateUserData({
         profileData: generateProfileData({
-          legalStructureId: randomLegalStructure(true).id,
+          legalStructureId: randomLegalStructure({ requiresPublicFiling: true }).id,
           operatingPhase: randomElementFromArray(
             OperatingPhases.filter(
               (obj) => obj.displayTaxAccessButton !== true && obj.displayCalendarType != "NONE"
@@ -384,7 +384,7 @@ describe("<FilingsCalendar />", () => {
 
       const userData = generateUserData({
         profileData: generateProfileData({
-          legalStructureId: randomLegalStructure(true).id,
+          legalStructureId: randomLegalStructure({ requiresPublicFiling: true }).id,
           operatingPhase: randomElementFromArray(
             OperatingPhases.filter(
               (obj) => obj.displayTaxAccessButton == true && obj.displayCalendarType != "NONE"
@@ -413,7 +413,7 @@ describe("<FilingsCalendar />", () => {
     it("displays button on filings calendar in up and running guest mode for non sp/gp", () => {
       const userData = generateUserData({
         profileData: generateProfileData({
-          legalStructureId: randomLegalStructure(true).id,
+          legalStructureId: randomLegalStructure({ requiresPublicFiling: true }).id,
           operatingPhase: "GUEST_MODE_OWNING",
         }),
       });
@@ -424,7 +424,7 @@ describe("<FilingsCalendar />", () => {
     it("doesn't display button on filings calendar in up and running guest mode for sp/gp", () => {
       const userData = generateUserData({
         profileData: generateProfileData({
-          legalStructureId: randomLegalStructure(false).id,
+          legalStructureId: randomLegalStructure({ requiresPublicFiling: false }).id,
           operatingPhase: "GUEST_MODE_OWNING",
         }),
         taxFilingData: generateTaxFilingData({ filings: [generateTaxFiling({})] }),

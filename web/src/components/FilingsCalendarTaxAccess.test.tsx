@@ -64,7 +64,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
   beforeEach(() => {
     jest.resetAllMocks();
     setRegistrationModalIsVisible = jest.fn();
-    const legalStructure = randomLegalStructure(true);
+    const legalStructure = randomLegalStructure({ requiresPublicFiling: true });
 
     mockApi.postTaxRegistrationOnboarding.mockImplementation(() =>
       Promise.resolve({
@@ -102,7 +102,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
   it("opens the sign up modal when button is clicked in up and running guest mode for non sp/gp instead of tax modal", async () => {
     const userData = generateUserData({
       profileData: generateProfileData({
-        legalStructureId: randomLegalStructure(true).id,
+        legalStructureId: randomLegalStructure({ requiresPublicFiling: true }).id,
         operatingPhase: "GUEST_MODE_OWNING",
       }),
     });
@@ -117,7 +117,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
   it("updates userData with return link when the button is clicked in up and running guest mode", async () => {
     const userData = generateUserData({
       profileData: generateProfileData({
-        legalStructureId: randomLegalStructure(true).id,
+        legalStructureId: randomLegalStructure({ requiresPublicFiling: true }).id,
         operatingPhase: "GUEST_MODE_OWNING",
       }),
     });
@@ -134,7 +134,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
   it("opens tax modal if the query parameter openTaxFilingsModal is true and shallow reloads", async () => {
     const userData = generateUserData({
       profileData: generateProfileData({
-        legalStructureId: randomLegalStructure(true).id,
+        legalStructureId: randomLegalStructure({ requiresPublicFiling: true }).id,
         operatingPhase: "GUEST_MODE_OWNING",
       }),
     });
