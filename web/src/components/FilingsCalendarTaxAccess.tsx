@@ -28,7 +28,8 @@ export const shouldRenderFilingsCalendarTaxAccess = (userData?: UserData) =>
 export const FilingsCalendarTaxAccess = (): ReactElement => {
   const { userData, update } = useUserData();
   const { Config } = useConfig();
-  const { isAuthenticated, setModalIsVisible, modalIsVisible } = useContext(AuthAlertContext);
+  const { isAuthenticated, setRegistrationModalIsVisible, registrationModalIsVisible } =
+    useContext(AuthAlertContext);
   const [showTaxModal, setShowTaxModal] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const router = useRouter();
@@ -57,12 +58,12 @@ export const FilingsCalendarTaxAccess = (): ReactElement => {
 
   useEffect(() => {
     if (!userData) return;
-    if (modalIsVisible === false && prevModalIsVisible.current === true) {
+    if (registrationModalIsVisible === false && prevModalIsVisible.current === true) {
       update({ ...userData, preferences: { ...userData.preferences, returnToLink: "" } });
     }
-    prevModalIsVisible.current = modalIsVisible;
+    prevModalIsVisible.current = registrationModalIsVisible;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [modalIsVisible]);
+  }, [registrationModalIsVisible]);
 
   const openRegisterOrTaxModal = () => {
     if (!userData) return;
@@ -75,7 +76,7 @@ export const FilingsCalendarTaxAccess = (): ReactElement => {
         },
       });
       analytics.event.tax_calendar_banner_button.click.show_myNJ_registration_prompt_modal();
-      setModalIsVisible(true);
+      setRegistrationModalIsVisible(true);
     } else {
       analytics.event.tax_calendar_banner_button.click.show_tax_calendar_modal();
       setShowTaxModal(true);

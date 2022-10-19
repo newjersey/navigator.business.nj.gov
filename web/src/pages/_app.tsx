@@ -165,12 +165,12 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
                       <AuthAlertContext.Provider
                         value={{
                           isAuthenticated: state.isAuthenticated,
-                          alertIsVisible: authSnackbar,
-                          modalIsVisible: authModal,
+                          registrationAlertIsVisible: authSnackbar,
+                          registrationModalIsVisible: authModal,
                           registrationAlertStatus,
                           setRegistrationAlertStatus,
-                          setAlertIsVisible: setAuthSnackbar,
-                          setModalIsVisible: setAuthModal,
+                          setRegistrationAlertIsVisible: setAuthSnackbar,
+                          setRegistrationModalIsVisible: setAuthModal,
                         }}
                       >
                         <ContextualInfoPanel />

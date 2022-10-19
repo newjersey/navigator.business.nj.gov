@@ -35,7 +35,7 @@ jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 const mockApi = api as jest.Mocked<typeof api>;
 
 const Config = getMergedConfig();
-let setModalIsVisible: jest.Mock;
+let setRegistrationModalIsVisible: jest.Mock;
 
 const renderFilingsCalendarTaxAccess = (initialUserData?: UserData) => {
   render(
@@ -52,7 +52,7 @@ const renderUnauthenticatedFilingsCalendarTaxAccess = (initialUserData?: UserDat
         <FilingsCalendarTaxAccess />
       </WithStatefulUserData>,
       IsAuthenticated.FALSE,
-      { modalIsVisible: false, setModalIsVisible }
+      { registrationModalIsVisible: false, setRegistrationModalIsVisible }
     )
   );
 };
@@ -63,7 +63,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
 
   beforeEach(() => {
     jest.resetAllMocks();
-    setModalIsVisible = jest.fn();
+    setRegistrationModalIsVisible = jest.fn();
     const legalStructure = randomLegalStructure(true);
 
     mockApi.postTaxRegistrationOnboarding.mockImplementation(() =>
@@ -111,7 +111,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
     expect(screen.getByTestId("get-tax-access")).toBeInTheDocument();
     fireEvent.click(screen.getByTestId("get-tax-access"));
     expect(screen.queryByTestId("modal-content")).not.toBeInTheDocument();
-    await waitFor(() => expect(setModalIsVisible).toHaveBeenCalledWith(true));
+    await waitFor(() => expect(setRegistrationModalIsVisible).toHaveBeenCalledWith(true));
   });
 
   it("updates userData with return link when the button is clicked in up and running guest mode", async () => {

@@ -4,10 +4,10 @@ import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { ReactElement, ReactNode, useContext } from "react";
 
 export const SignUpModalWrapper = (props: { children: ReactNode }): ReactElement => {
-  const { isAuthenticated, setModalIsVisible } = useContext(AuthAlertContext);
+  const { isAuthenticated, setRegistrationModalIsVisible } = useContext(AuthAlertContext);
   useMountEffectWhenDefined(() => {
     if (isAuthenticated != IsAuthenticated.TRUE) {
-      setModalIsVisible(true);
+      setRegistrationModalIsVisible(true);
     }
   }, isAuthenticated);
 

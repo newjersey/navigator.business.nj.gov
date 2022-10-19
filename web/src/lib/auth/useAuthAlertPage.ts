@@ -8,14 +8,15 @@ import { useContext, useEffect } from "react";
 
 export const useAuthAlertPage = (): void => {
   const { showCard } = useSidebarCards();
-  const { isAuthenticated, setAlertIsVisible, modalIsVisible } = useContext(AuthAlertContext);
+  const { isAuthenticated, setRegistrationAlertIsVisible, registrationModalIsVisible } =
+    useContext(AuthAlertContext);
   const router = useRouter();
   useMountEffectWhenDefined(() => {
     if (
       isAuthenticated === IsAuthenticated.FALSE &&
       checkQueryValue(router, QUERIES.fromOnboarding, "true")
     ) {
-      setAlertIsVisible(true);
+      setRegistrationAlertIsVisible(true);
       return;
     }
 
@@ -23,12 +24,12 @@ export const useAuthAlertPage = (): void => {
       showCard("not-registered");
     }
 
-    setAlertIsVisible(false);
+    setRegistrationAlertIsVisible(false);
   }, isAuthenticated);
 
   useEffect(() => {
-    if (modalIsVisible) {
-      setAlertIsVisible(false);
+    if (registrationModalIsVisible) {
+      setRegistrationAlertIsVisible(false);
     }
-  }, [modalIsVisible, setAlertIsVisible]);
+  }, [registrationModalIsVisible, setRegistrationAlertIsVisible]);
 };

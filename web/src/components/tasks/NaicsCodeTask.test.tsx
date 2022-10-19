@@ -335,7 +335,7 @@ describe("<NaicsCodeTask />", () => {
 
   describe("guest mode", () => {
     let initialUserData: UserData;
-    let setModalIsVisible: jest.Mock;
+    let setRegistrationModalIsVisible: jest.Mock;
 
     const renderPage = () => {
       render(
@@ -344,13 +344,13 @@ describe("<NaicsCodeTask />", () => {
             <NaicsCodeTask task={task} />
           </WithStatefulUserData>,
           IsAuthenticated.FALSE,
-          { modalIsVisible: false, setModalIsVisible }
+          { registrationModalIsVisible: false, setRegistrationModalIsVisible }
         )
       );
     };
 
     beforeEach(() => {
-      setModalIsVisible = jest.fn();
+      setRegistrationModalIsVisible = jest.fn();
       initialUserData = generateUserData({
         profileData: generateProfileData({ naicsCode: "", industryId: "" }),
         taskProgress: { [taskId]: "NOT_STARTED" },
@@ -368,7 +368,7 @@ describe("<NaicsCodeTask />", () => {
         target: { value: validNaicsCode },
       });
       fireEvent.click(screen.getByText(`Register & ${Config.determineNaicsCode.saveButtonText}`));
-      await waitFor(() => expect(setModalIsVisible).toHaveBeenCalledWith(true));
+      await waitFor(() => expect(setRegistrationModalIsVisible).toHaveBeenCalledWith(true));
     });
   });
 });

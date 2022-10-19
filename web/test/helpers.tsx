@@ -42,24 +42,24 @@ export const withAuthAlert = (
   subject: ReactElement,
   isAuthenticated: IsAuthenticated,
   context?: {
-    alertIsVisible?: boolean;
-    modalIsVisible?: boolean;
+    registrationAlertIsVisible?: boolean;
+    registrationModalIsVisible?: boolean;
     registrationAlertStatus?: RegistrationStatus;
     setRegistrationAlertStatus?: (value: RegistrationStatus | undefined) => void;
-    setAlertIsVisible?: (value: boolean) => void;
-    setModalIsVisible?: (value: boolean) => void;
+    setRegistrationAlertIsVisible?: (value: boolean) => void;
+    setRegistrationModalIsVisible?: (value: boolean) => void;
   }
 ): ReactElement => {
   return (
     <AuthAlertContext.Provider
       value={{
         isAuthenticated,
-        alertIsVisible: context?.alertIsVisible ?? false,
-        modalIsVisible: context?.modalIsVisible ?? false,
+        registrationAlertIsVisible: context?.registrationAlertIsVisible ?? false,
+        registrationModalIsVisible: context?.registrationModalIsVisible ?? false,
         registrationAlertStatus: context?.registrationAlertStatus ?? undefined,
         setRegistrationAlertStatus: context?.setRegistrationAlertStatus || jest.fn(),
-        setAlertIsVisible: context?.setAlertIsVisible || jest.fn(),
-        setModalIsVisible: context?.setModalIsVisible || jest.fn(),
+        setRegistrationAlertIsVisible: context?.setRegistrationAlertIsVisible || jest.fn(),
+        setRegistrationModalIsVisible: context?.setRegistrationModalIsVisible || jest.fn(),
       }}
     >
       {subject}

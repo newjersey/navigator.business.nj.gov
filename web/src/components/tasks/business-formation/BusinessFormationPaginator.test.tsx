@@ -89,10 +89,10 @@ describe("<BusinessFormationPaginator />", () => {
 
   describe("when in guest mode", () => {
     const guestModeNextButtonText = `Register & ${Config.businessFormationDefaults.initialNextButtonText}`;
-    let setModalIsVisible: jest.Mock;
+    let setRegistrationModalIsVisible: jest.Mock;
 
     beforeEach(() => {
-      setModalIsVisible = jest.fn();
+      setRegistrationModalIsVisible = jest.fn();
     });
 
     const renderAsGuest = () => {
@@ -102,7 +102,7 @@ describe("<BusinessFormationPaginator />", () => {
             <BusinessFormation task={generateTask({})} displayContent={displayContent} municipalities={[]} />
           </WithStatefulUserData>,
           IsAuthenticated.FALSE,
-          { modalIsVisible: false, setModalIsVisible }
+          { registrationModalIsVisible: false, setRegistrationModalIsVisible }
         )
       );
     };
@@ -115,14 +115,14 @@ describe("<BusinessFormationPaginator />", () => {
     it("shows registration modal when clicking continue button from step one", () => {
       renderAsGuest();
       fireEvent.click(screen.getByText(guestModeNextButtonText));
-      expect(setModalIsVisible).toHaveBeenCalled();
+      expect(setRegistrationModalIsVisible).toHaveBeenCalled();
       expect(screen.queryByTestId("business-step")).not.toBeInTheDocument();
     });
 
     it("shows registration modal when clicking a step in the stepper", () => {
       renderAsGuest();
       fireEvent.click(screen.getByTestId(`stepper-1`));
-      expect(setModalIsVisible).toHaveBeenCalled();
+      expect(setRegistrationModalIsVisible).toHaveBeenCalled();
       expect(screen.queryByTestId("business-step")).not.toBeInTheDocument();
     });
   });

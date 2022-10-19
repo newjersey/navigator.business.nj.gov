@@ -24,10 +24,15 @@ describe("SignUpModal", () => {
     useMockUserData({});
   });
 
-  const setModalIsVisible = jest.fn();
+  const setRegistrationModalIsVisible = jest.fn();
 
-  const setupHookWithAuth = (isAuthenticated: IsAuthenticated, modalIsVisible = true) => {
-    render(withAuthAlert(<SignUpModal />, isAuthenticated, { modalIsVisible, setModalIsVisible }));
+  const setupHookWithAuth = (isAuthenticated: IsAuthenticated, registrationModalIsVisible = true) => {
+    render(
+      withAuthAlert(<SignUpModal />, isAuthenticated, {
+        registrationModalIsVisible,
+        setRegistrationModalIsVisible,
+      })
+    );
   };
 
   it("shows registration alert when user is in guest mode", () => {
@@ -43,7 +48,7 @@ describe("SignUpModal", () => {
   it("returns user to previous page when modal is closed", () => {
     setupHookWithAuth(IsAuthenticated.FALSE);
     fireEvent.click(screen.getByLabelText("close"));
-    expect(setModalIsVisible).toHaveBeenCalledWith(false);
+    expect(setRegistrationModalIsVisible).toHaveBeenCalledWith(false);
   });
 
   it("does not show registration alert when user is in authenticated", () => {

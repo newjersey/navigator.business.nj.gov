@@ -175,7 +175,7 @@ describe("<EinTask />", () => {
 
   describe("guest mode", () => {
     let initialUserData: UserData;
-    const setModalIsVisible = jest.fn();
+    const setRegistrationModalIsVisible = jest.fn();
 
     const renderPage = () => {
       render(
@@ -184,7 +184,7 @@ describe("<EinTask />", () => {
             <EinTask task={task} />
           </WithStatefulUserData>,
           IsAuthenticated.FALSE,
-          { modalIsVisible: false, setModalIsVisible }
+          { registrationModalIsVisible: false, setRegistrationModalIsVisible }
         )
       );
     };
@@ -207,7 +207,7 @@ describe("<EinTask />", () => {
         target: { value: "123456789" },
       });
       fireEvent.click(screen.getByText(`Register & ${Config.ein.saveButtonText}`));
-      await waitFor(() => expect(setModalIsVisible).toHaveBeenCalledWith(true));
+      await waitFor(() => expect(setRegistrationModalIsVisible).toHaveBeenCalledWith(true));
     });
   });
 });
