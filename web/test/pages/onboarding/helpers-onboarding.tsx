@@ -208,7 +208,7 @@ export const runSelfRegPageTests = ({
     formProgress: "UNSTARTED",
     profileData: generateProfileData({
       businessPersona,
-      legalStructureId: randomLegalStructure(requiresPublicFiling)?.id,
+      legalStructureId: randomLegalStructure({ requiresPublicFiling: requiresPublicFiling })?.id,
     }),
   });
 
