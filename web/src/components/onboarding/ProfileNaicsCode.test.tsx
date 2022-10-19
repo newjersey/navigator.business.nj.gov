@@ -48,16 +48,26 @@ describe("<ProfileNaicsCode />", () => {
     );
   });
 
-  it("displays Not Entered text when user has no NAICS code", () => {
-    renderComponent({ naicsCode: "" });
-    expect(screen.getByText(Config.profileDefaults.STARTING.naicsCode.notEnteredText)).toBeInTheDocument();
-  });
-
   it("displays NAICS code when exists", () => {
     renderComponent({ naicsCode: "123456" });
-    expect(
-      screen.queryByText(Config.profileDefaults.STARTING.naicsCode.notEnteredText)
-    ).not.toBeInTheDocument();
+    expect(screen.queryByTestId("not-entered")).not.toBeInTheDocument();
     expect(screen.getByText("123456")).toBeInTheDocument();
+  });
+
+  it("Display Edit when there is naics code", () => {
+    renderComponent({ naicsCode: "624410" });
+    expect(screen.getByText(Config.profileDefaults.STARTING.naicsCode.editText)).toBeInTheDocument();
+    expect(screen.queryByText(Config.profileDefaults.STARTING.naicsCode.addText)).not.toBeInTheDocument();
+  });
+
+  it("displays Not Entered text when user has no NAICS code", () => {
+    renderComponent({ naicsCode: "" });
+    expect(screen.getByTestId("not-entered")).toBeInTheDocument();
+  });
+
+  it("Displays Add text when naics code field is empty", () => {
+    renderComponent({ naicsCode: "" });
+    expect(screen.getByText(Config.profileDefaults.STARTING.naicsCode.addText)).toBeInTheDocument();
+    expect(screen.queryByText(Config.profileDefaults.STARTING.naicsCode.editText)).not.toBeInTheDocument();
   });
 });

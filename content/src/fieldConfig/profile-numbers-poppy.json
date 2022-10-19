@@ -23,7 +23,8 @@
       "naicsCode": {
         "header": "NAICS Code",
         "editText": "Edit",
-        "notEnteredText": "What is your `NAICS|naics` code?"
+        "addText": "Add",
+        "notEnteredText": "*Not entered*"
       },
       "dateOfFormation": {
         "header": "Date of Formation",

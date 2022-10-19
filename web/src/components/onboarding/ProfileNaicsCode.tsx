@@ -22,7 +22,9 @@ export const ProfileNaicsCode = (): ReactElement => {
       <div className="flex flex-row">
         <FieldLabelProfile fieldName="naicsCode" />
         <a className="margin-left-2" href={naicsTaskUrl}>
-          {Config.profileDefaults[getFlow(state.profileData)].naicsCode.editText}
+          {state.profileData.naicsCode
+            ? Config.profileDefaults[getFlow(state.profileData)].naicsCode.editText
+            : Config.profileDefaults[getFlow(state.profileData)].naicsCode.addText}
         </a>
       </div>
       {state.profileData.naicsCode && (
@@ -35,7 +37,9 @@ export const ProfileNaicsCode = (): ReactElement => {
         </>
       )}
       {!state.profileData.naicsCode && (
-        <Content>{Config.profileDefaults[getFlow(state.profileData)].naicsCode.notEnteredText}</Content>
+        <div data-testid="not-entered">
+          <Content>{Config.profileDefaults[getFlow(state.profileData)].naicsCode.notEnteredText}</Content>
+        </div>
       )}
     </>
   );

@@ -33,7 +33,8 @@
       "naicsCode": {
         "header": "",
         "editText": "",
-        "notEnteredText": ""
+        "notEnteredText": "", 
+        "addText": ""
       }
     }
   }
