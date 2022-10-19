@@ -3444,6 +3444,7 @@ collections:
                           hint: This field supports Markdown,
                         }
                       - { label: "Edit Text", name: "editText", widget: "string" }
+                      - { label: "Add Text", name: "addText", widget: "string" }
                       - {
                           label: "Not Entered Text",
                           name: "notEnteredText",
