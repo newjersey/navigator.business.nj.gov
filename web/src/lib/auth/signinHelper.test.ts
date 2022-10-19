@@ -82,6 +82,18 @@ describe("SigninHelper", () => {
       });
     });
 
+    it("posts userData to api self-reg with the returnToLink if called with true for the useReturnToLink", async () => {
+      userData = generateUserData({
+        preferences: { ...userData.preferences, returnToLink: "/pathname?query=true" },
+      });
+      mockApi.postSelfReg.mockResolvedValue({ userData: userData, authRedirectURL: "" });
+      await onSelfRegister(fakeRouter, userData, update, mockSetAlertStatus, true);
+      expect(mockApi.postSelfReg).toHaveBeenCalledWith({
+        ...userData,
+        preferences: { ...userData.preferences, returnToLink: "/pathname?query=true" },
+      });
+    });
+
     it("updates userData and redirects to authRedirect on success", async () => {
       const returnedUserData = generateUserData({});
       mockApi.postSelfReg.mockResolvedValue({
