@@ -164,7 +164,7 @@
     "cypress": "10.10.0",
     "cypress-dotenv": "2.0.0",
     "cypress-wait-until": "1.7.2",
-    "dependency-cruiser": "11.16.1",
+    "dependency-cruiser": "11.17.0",
     "dotenv": "16.0.3",
     "eslint": "8.24.0",
     "eslint-config-next": "12.3.1",
