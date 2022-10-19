@@ -1,4 +1,4 @@
-import type { AWS } from "@serverless/typescript";
+import type { AWS, AwsLambdaEnvironment } from "@serverless/typescript";
 import "dotenv/config";
 import { env } from "node:process";
 import dynamoDbSchema from "./dynamodb-schema.json";
@@ -138,6 +138,7 @@ const serverlessConfiguration: AWS = {
       CMS_OAUTH_CLIENT_ID: cmsoAuthClientId,
       CMS_OAUTH_CLIENT_SECRET: cmsoAuthClientSecret,
       BUSINESS_NAME_BASE_URL: businessNameBaseUrl,
+      DYNAMO_PORT: dynamoOfflinePort,
       GOV_DELIVERY_BASE_URL: govDeliveryBaseUrl,
       GOV_DELIVERY_TOPIC: govDeliveryTopic,
       GOV_DELIVERY_API_KEY: govDeliveryApiKey,
@@ -162,7 +163,7 @@ const serverlessConfiguration: AWS = {
       STAGE: stage,
       INTERCOM_HASH_SECRET: intercomHashSecret,
       SKIP_SAVE_DOCUMENTS_TO_S3: skipSaveDocumentsToS3,
-    },
+    } as AwsLambdaEnvironment,
     logRetentionInDays: 180,
   },
   functions: {},
