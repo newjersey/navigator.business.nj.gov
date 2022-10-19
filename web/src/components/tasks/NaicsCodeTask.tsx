@@ -18,7 +18,7 @@ interface Props {
 export const NaicsCodeTask = (props: Props): ReactElement => {
   const [showInput, setShowInput] = useState<boolean>(true);
   const { userData, updateQueue } = useUserData();
-  const { isAuthenticated, setModalIsVisible } = useContext(AuthAlertContext);
+  const { isAuthenticated, setRegistrationModalIsVisible } = useContext(AuthAlertContext);
 
   useMountEffectWhenDefined(() => {
     if (!userData) return;
@@ -41,7 +41,7 @@ export const NaicsCodeTask = (props: Props): ReactElement => {
 
   const onSave = () => {
     if (isAuthenticated === IsAuthenticated.FALSE) {
-      setModalIsVisible(true);
+      setRegistrationModalIsVisible(true);
       return;
     }
     setShowInput(false);

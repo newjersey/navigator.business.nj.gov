@@ -100,7 +100,7 @@ const ProfilePage = (props: Props): ReactElement => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const userDataFromHook = useUserData();
   const update = userDataFromHook.update;
-  const { isAuthenticated, setModalIsVisible } = useContext(AuthAlertContext);
+  const { isAuthenticated, setRegistrationModalIsVisible } = useContext(AuthAlertContext);
   const { Config } = useConfig();
 
   const userData = props.CMS_ONLY_fakeUserData ?? userDataFromHook.userData;
@@ -149,7 +149,7 @@ const ProfilePage = (props: Props): ReactElement => {
 
   const showRegistrationModalForGuest = (): (() => void) | undefined => {
     if (isAuthenticated === IsAuthenticated.FALSE) {
-      return () => setModalIsVisible(true);
+      return () => setRegistrationModalIsVisible(true);
     }
     return undefined;
   };

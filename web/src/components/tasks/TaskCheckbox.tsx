@@ -11,7 +11,7 @@ interface Props {
 
 export const TaskCheckbox = (props: Props) => {
   const { userData, update } = useUserData();
-  const { isAuthenticated, setModalIsVisible } = useContext(AuthAlertContext);
+  const { isAuthenticated, setRegistrationModalIsVisible } = useContext(AuthAlertContext);
 
   const checklistItemStatus = userData?.taskItemChecklist[props.checklistItemId] ?? false;
 
@@ -19,7 +19,7 @@ export const TaskCheckbox = (props: Props) => {
     if (!userData) return;
 
     if (isAuthenticated !== IsAuthenticated.TRUE) {
-      setModalIsVisible(true);
+      setRegistrationModalIsVisible(true);
       return;
     }
 

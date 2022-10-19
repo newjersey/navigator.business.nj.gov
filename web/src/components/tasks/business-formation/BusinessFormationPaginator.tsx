@@ -37,7 +37,7 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
   const { userData, update } = useUserData();
   const { state, setStepIndex, setHasBeenSubmitted, setFormationFormData, setFieldInteracted } =
     useContext(BusinessFormationContext);
-  const { isAuthenticated, setModalIsVisible } = useContext(AuthAlertContext);
+  const { isAuthenticated, setRegistrationModalIsVisible } = useContext(AuthAlertContext);
   const { Config } = useConfig();
   const { doesStepHaveError, isStepCompleted, allCurrentErrorsForStep, getApiErrorMessage } =
     useFormationErrors();
@@ -90,7 +90,7 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
 
   const onMoveToStep = (stepIndex: number, config: { moveType: "NEXT_BUTTON" | "STEPPER" }): void => {
     if (isAuthenticated === IsAuthenticated.FALSE) {
-      setModalIsVisible(true);
+      setRegistrationModalIsVisible(true);
       return;
     }
 

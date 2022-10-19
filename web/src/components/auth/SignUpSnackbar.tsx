@@ -10,22 +10,22 @@ import { ReactElement, useContext } from "react";
 
 export const SignUpSnackbar = (): ReactElement => {
   const { showCard } = useSidebarCards();
-  const { alertIsVisible, setAlertIsVisible } = useContext(AuthAlertContext);
+  const { registrationAlertIsVisible, setRegistrationAlertIsVisible } = useContext(AuthAlertContext);
   const isDesktopAndUp = useMediaQuery(MediaQueries.desktopAndUp);
 
-  if (!alertIsVisible) {
+  if (!registrationAlertIsVisible) {
     return <></>;
   }
 
   const handleClose = async () => {
-    setAlertIsVisible(false);
+    setRegistrationAlertIsVisible(false);
     await showCard("not-registered");
   };
 
   return (
     <SnackbarAlert
-      isOpen={alertIsVisible}
-      close={() => setAlertIsVisible(false)}
+      isOpen={registrationAlertIsVisible}
+      close={() => setRegistrationAlertIsVisible(false)}
       variant="info"
       noIcon={true}
       autoHideDuration={null}

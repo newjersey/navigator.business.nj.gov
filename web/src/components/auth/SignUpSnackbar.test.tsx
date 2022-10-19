@@ -31,9 +31,14 @@ describe("SignUpSnackbar", () => {
     useMockUserData({});
   });
 
-  const setAlertIsVisible = jest.fn();
-  const setupHookWithAuth = (isAuthenticated: IsAuthenticated, alertIsVisible = true) => {
-    render(withAuthAlert(<SignUpSnackbar />, isAuthenticated, { alertIsVisible, setAlertIsVisible }));
+  const setRegistrationAlertIsVisible = jest.fn();
+  const setupHookWithAuth = (isAuthenticated: IsAuthenticated, registrationAlertIsVisible = true) => {
+    render(
+      withAuthAlert(<SignUpSnackbar />, isAuthenticated, {
+        registrationAlertIsVisible,
+        setRegistrationAlertIsVisible,
+      })
+    );
   };
 
   it("shows registration alert when user is in guest mode", () => {
@@ -44,10 +49,10 @@ describe("SignUpSnackbar", () => {
   it("is able to close registration alert when user is in guest mode", () => {
     setupHookWithAuth(IsAuthenticated.FALSE);
     fireEvent.click(screen.getByLabelText("close"));
-    expect(setAlertIsVisible).toHaveBeenCalledWith(false);
+    expect(setRegistrationAlertIsVisible).toHaveBeenCalledWith(false);
   });
 
-  it("does not show registration alert when alertIsVisible is false", () => {
+  it("does not show registration alert when registrationAlertIsVisible is false", () => {
     setupHookWithAuth(IsAuthenticated.FALSE, false);
     expect(
       screen.queryByText(markdownToText(Config.navigationDefaults.guestAlertTitle))
