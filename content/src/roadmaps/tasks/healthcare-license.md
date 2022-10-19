@@ -8,7 +8,7 @@ All healthcare providers in your medical center need to be licensed medical prof
 
 -﻿--
 
-#﻿## Licensing Requirements  
+#﻿## Licensing Requirements
 - [Medical Examiners](https://www.njconsumeraffairs.gov/bme/Pages/applications.aspx)  
 - [Midwives](https://www.njconsumeraffairs.gov/mid/Pages/default.aspx)  
 - [Nurses](https://www.njconsumeraffairs.gov/nur/Pages/default.aspx)  
