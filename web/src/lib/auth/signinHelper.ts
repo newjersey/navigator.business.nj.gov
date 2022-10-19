@@ -41,14 +41,22 @@ export const onSelfRegister = (
   router: SelfRegRouter,
   userData: UserData | undefined,
   update: UseUserDataResponse["update"],
-  setRegistrationAlertStatus: AuthAlertContextType["setRegistrationAlertStatus"]
+  setRegistrationAlertStatus: AuthAlertContextType["setRegistrationAlertStatus"],
+  usereturnToLink?: boolean
 ) => {
   if (!userData) return;
   setRegistrationAlertStatus("IN_PROGRESS");
+  let route;
+  if (usereturnToLink) {
+    route = userData.preferences.returnToLink;
+  } else {
+    route = router.asPath;
+  }
+
   api
     .postSelfReg({
       ...userData,
-      preferences: { ...userData.preferences, returnToLink: router.asPath || "" },
+      preferences: { ...userData.preferences, returnToLink: route || "" },
     })
     .then(async (response) => {
       await update(response.userData);
