@@ -21,3 +21,6 @@ All healthcare providers in your medical center need to be licensed medical prof
 - [Respiratory Care Therapists](https://www.njconsumeraffairs.gov/resp/Pages/default.aspx)  
 - [Audiologists and Speech-Language Pathologists](https://www.njconsumeraffairs.gov/aud/Pages/default.aspx)  
 - [Dietitians and Nutritionists](https://www.njconsumeraffairs.gov/dan/Pages/default.aspx)  
+
+>﻿**Once complete, you will have:**  
+>﻿- Confirmation that your healthcare staff is licensed
