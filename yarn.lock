@@ -3619,7 +3619,7 @@ __metadata:
     cross-env: 7.0.3
     dayjs: 1.11.5
     dedent: 0.7.0
-    dependency-cruiser: 11.16.1
+    dependency-cruiser: 11.17.0
     eslint: 8.24.0
     eslint-config-prettier: 8.5.0
     eslint-plugin-jest: 27.0.4
@@ -3776,7 +3776,7 @@ __metadata:
     cypress-wait-until: 1.7.2
     dayjs: 1.11.5
     dedent: 0.7.0
-    dependency-cruiser: 11.16.1
+    dependency-cruiser: 11.17.0
     dotenv: 16.0.3
     eslint: 8.24.0
     eslint-config-next: 12.3.1
@@ -3969,7 +3969,7 @@ __metadata:
     cypress-dotenv: 2.0.0
     cypress-wait-until: 1.7.2
     dayjs: 1.11.5
-    dependency-cruiser: 11.16.1
+    dependency-cruiser: 11.17.0
     dotenv: 16.0.3
     eslint: 8.24.0
     eslint-config-next: 12.3.1
@@ -13582,10 +13582,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"commander@npm:9.4.0":
-  version: 9.4.0
-  resolution: "commander@npm:9.4.0"
-  checksum: a322de584a6ccd1ea83c24f6a660e52d16ffbe2613fcfbb8d2cc68bc9dec637492456d754fe8bb5b039ad843ed8e04fb0b107e581a75f62cde9e1a0ab1546e09
+"commander@npm:9.4.1, commander@npm:^9.3.0, commander@npm:^9.4.0":
+  version: 9.4.1
+  resolution: "commander@npm:9.4.1"
+  checksum: bfb18e325a5bdf772763c2213d5c7d9e77144d944124e988bcd8e5e65fb6d45d5d4e86b09155d0f2556c9a59c31e428720e57968bcd050b2306e910a0bf3cf13
   languageName: node
   linkType: hard
 
@@ -13621,13 +13621,6 @@ __metadata:
   version: 8.3.0
   resolution: "commander@npm:8.3.0"
   checksum: 0f82321821fc27b83bd409510bb9deeebcfa799ff0bf5d102128b500b7af22872c0c92cb6a0ebc5a4cf19c6b550fba9cedfa7329d18c6442a625f851377bacf0
-  languageName: node
-  linkType: hard
-
-"commander@npm:^9.3.0, commander@npm:^9.4.0":
-  version: 9.4.1
-  resolution: "commander@npm:9.4.1"
-  checksum: bfb18e325a5bdf772763c2213d5c7d9e77144d944124e988bcd8e5e65fb6d45d5d4e86b09155d0f2556c9a59c31e428720e57968bcd050b2306e910a0bf3cf13
   languageName: node
   linkType: hard
 
@@ -15098,9 +15091,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dependency-cruiser@npm:11.16.1":
-  version: 11.16.1
-  resolution: "dependency-cruiser@npm:11.16.1"
+"dependency-cruiser@npm:11.17.0":
+  version: 11.17.0
+  resolution: "dependency-cruiser@npm:11.17.0"
   dependencies:
     acorn: 8.8.0
     acorn-jsx: 5.3.2
@@ -15109,7 +15102,7 @@ __metadata:
     acorn-walk: 8.2.0
     ajv: 8.11.0
     chalk: ^4.1.2
-    commander: 9.4.0
+    commander: 9.4.1
     enhanced-resolve: 5.10.0
     figures: ^3.2.0
     get-stream: ^6.0.1
@@ -15124,7 +15117,7 @@ __metadata:
     rechoir: ^0.8.0
     safe-regex: 2.1.1
     semver: ^7.3.7
-    semver-try-require: ^5.0.2
+    semver-try-require: 5.0.4
     teamcity-service-messages: 0.1.14
     tsconfig-paths-webpack-plugin: 4.0.0
     watskeburt: 0.7.0
@@ -15136,7 +15129,7 @@ __metadata:
     depcruise-wrap-stream-in-html: bin/wrap-stream-in-html.js
     dependency-cruise: bin/dependency-cruise.js
     dependency-cruiser: bin/dependency-cruise.js
-  checksum: 86c2202370372d32f90d9e042e7e2fd0ab1258bddce9fa499d11f92b889296024e546591fff01c202182da85df02ddb0118fedea5d71408f5869b26ff9405bb9
+  checksum: ed63225da020f378c31650ecaf6072c31fcd715f0ddf299b36f79943f926b7404da7b16768fe56d58ad78de5996f47e492a38db950a0c83baf2a6a4211e16e6a
   languageName: node
   linkType: hard
 
@@ -30444,7 +30437,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semver-try-require@npm:^5.0.2":
+"semver-try-require@npm:5.0.4":
   version: 5.0.4
   resolution: "semver-try-require@npm:5.0.4"
   dependencies:
