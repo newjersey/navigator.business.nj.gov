@@ -8,7 +8,6 @@ callToActionText: ""
 ---
 I﻿t's important that you and your attorney review your lease thoroughly to confirm that you're in agreement with all the clauses. Signing your lease under your registered business name may protect you from liabilities and costs associated with your new commercial or industrial location.
 
-**N﻿ote:** .  
 
 - - -
 
