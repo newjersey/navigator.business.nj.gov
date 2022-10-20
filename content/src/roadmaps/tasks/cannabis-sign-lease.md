@@ -8,7 +8,7 @@ callToActionText: ""
 ---
 I﻿t's important that you and your attorney review your lease thoroughly to confirm that you're in agreement with all the clauses. Signing your lease under your registered business name may protect you from liabilities and costs associated with your new commercial or industrial location.
 
-**N﻿ote:** Ask your landlord if the property has an FDIC-backed mortgage. Because cannabis is not legal at a federal level, properties with federally insured mortgages cannot be used for cannabis businesses. 
+**N﻿ote:** Ask your landlord if the property has an FDIC-backed mortgage. Cannabis is not legal at a federal level. For this reason, properties with federally insured mortgages cannot be used for cannabis businesses.  
 
 - - -
 
