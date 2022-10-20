@@ -6,7 +6,7 @@ id: healthcare-license
 ---
 All healthcare providers in your medical center need to be licensed medical professionals.
 
--﻿--
+---
 
 ### Licensing Requirements
 - [Medical Examiners](https://www.njconsumeraffairs.gov/bme/Pages/applications.aspx)  
@@ -22,5 +22,5 @@ All healthcare providers in your medical center need to be licensed medical prof
 - [Audiologists and Speech-Language Pathologists](https://www.njconsumeraffairs.gov/aud/Pages/default.aspx)  
 - [Dietitians and Nutritionists](https://www.njconsumeraffairs.gov/dan/Pages/default.aspx)  
 
->﻿**Once complete, you will have:**  
->﻿- Confirmation that your healthcare staff is licensed
+>**Once complete, you will have:**  
+>- Confirmation that your healthcare staff is licensed
