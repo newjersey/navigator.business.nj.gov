@@ -6,7 +6,7 @@ id: license-pi
 callToActionLink: ""
 issuingAgency: New Jersey State Police
 ---
-A﻿ll staff providing detective or background check services must be licensed as a Private Detective.
+All staff providing detective or background check services must be licensed as a Private Detective.
 
--﻿--
+---
 
