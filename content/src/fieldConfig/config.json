@@ -490,7 +490,7 @@
     "nextButtonText": "Next"
   },
   "formationDateModal": {
-    "fieldDescription": "Find your effective date on your `Certificate of Formation|certificate-formation` . Once you submit your effective date, you will not be able to change it.",
+    "fieldDescription": "Find your effective date on your `Certificate of Formation|certificate-formation` .",
     "areYouSureModalCancelButtonText": "Cancel",
     "header": "Congratulations!",
     "areYouSureModalBody": "If you change your task status, you will need to resubmit your Business `Effective Date|effective-date` and will lose access to your calendar.",

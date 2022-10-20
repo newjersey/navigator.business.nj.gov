@@ -158,6 +158,7 @@ const ProfilePage = (props: Props): ReactElement => {
     event.preventDefault();
     if (!userData) return;
     analytics.event.profile_save.click.save_profile_changes();
+
     const fieldStatesCopy = cloneDeep(fieldStates);
     if (profileData.sectorId) {
       onValidation("sectorId", false);
@@ -167,6 +168,7 @@ const ProfilePage = (props: Props): ReactElement => {
       setAlert("ERROR");
       return;
     }
+
     setIsLoading(true);
     setAnalyticsDimensions(profileData);
     const newRoadmap = await buildUserRoadmap(profileData);
@@ -181,6 +183,13 @@ const ProfilePage = (props: Props): ReactElement => {
 
     if (userData.profileData.taxId != profileData.taxId) {
       taxFilingData = { ...taxFilingData, state: undefined, registered: false, filings: [] };
+    }
+
+    if (
+      userData.profileData.dateOfFormation !== profileData.dateOfFormation &&
+      !!profileData.dateOfFormation
+    ) {
+      analytics.event.profile_formation_date.submit.formation_date_changed();
     }
 
     let newUserData: UserData = {
@@ -416,8 +425,9 @@ const ProfilePage = (props: Props): ReactElement => {
             <OnboardingDateOfFormation
               onValidation={onValidation}
               fieldStates={fieldStates}
-              disabled={true}
+              disabled={userData?.formationData.getFilingResponse?.success}
               futureAllowed={true}
+              required
             />
           </>
         )}
@@ -470,11 +480,7 @@ const ProfilePage = (props: Props): ReactElement => {
         </h2>
         <div className="margin-top-4">
           <FieldLabelProfile fieldName="businessName" />
-          <OnboardingBusinessName
-            onValidation={onValidation}
-            fieldStates={fieldStates}
-            disabled={userData?.formationData.getFilingResponse?.success}
-          />
+          <OnboardingBusinessName onValidation={onValidation} fieldStates={fieldStates} />
         </div>
         {(props.CMS_ONLY_fakeUserData || true) && (
           <div className="margin-top-4">
@@ -513,7 +519,6 @@ const ProfilePage = (props: Props): ReactElement => {
           <OnboardingDateOfFormation
             onValidation={onValidation}
             fieldStates={fieldStates}
-            disabled={userData?.formationData.getFilingResponse?.success}
             futureAllowed={false}
           />
         </div>
@@ -522,7 +527,6 @@ const ProfilePage = (props: Props): ReactElement => {
           <OnboardingEntityId
             onValidation={onValidation}
             fieldStates={fieldStates}
-            disabled={userData?.formationData.getFilingResponse?.success}
             handleChangeOverride={showRegistrationModalForGuest()}
           />
         </div>

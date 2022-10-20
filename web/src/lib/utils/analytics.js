@@ -749,6 +749,13 @@ export default {
         },
       },
     },
+    profile_formation_date: {
+      submit: {
+        formation_date_changed: () => {
+          sendEvent("profile_formation_date", "submit", "formation_date_changed");
+        },
+      },
+    },
     onboarding_logistics_business_question: {
       submit: {
         yes_moving_across_state_lines: () => {

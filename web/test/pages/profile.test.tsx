@@ -188,6 +188,81 @@ describe("profile", () => {
       });
     });
 
+    describe("disables fields when formation getFiling success", () => {
+      const legalStructure = "limited-liability-company";
+      const userData = {
+        userData: generateUserData({
+          formationData: generateFormationData({
+            getFilingResponse: generateGetFilingResponse({
+              success: true,
+            }),
+          }),
+          profileData: generateProfileData({
+            dateOfFormation: "2020-01-01",
+            businessPersona: "STARTING",
+            legalStructureId: legalStructure,
+            entityId: "some-id",
+            businessName: "some-name",
+          }),
+        }),
+      };
+
+      it("disables businessName", () => {
+        renderPage(userData);
+        expect(screen.getByLabelText("Business name")).toBeDisabled();
+      });
+
+      it("disables entityID", () => {
+        renderPage(userData);
+        chooseTab("numbers");
+        expect(screen.getByLabelText("Entity id")).toBeDisabled();
+      });
+
+      it("disables dateOfFormation", () => {
+        renderPage(userData);
+        chooseTab("numbers");
+        expect(screen.getByLabelText("Date of formation")).toBeDisabled();
+      });
+    });
+
+    describe("formation date", () => {
+      it("does not display when empty", () => {
+        const initialUserData = generateUserData({
+          profileData: generateProfileData({ businessPersona: "STARTING", dateOfFormation: "" }),
+        });
+        const newark = generateMunicipality({ displayName: "Newark" });
+        renderPage({ userData: initialUserData, municipalities: [newark] });
+        chooseTab("numbers");
+        expect(getDateOfFormation()).toBeUndefined();
+      });
+
+      it("displays when populated", () => {
+        const initialUserData = generateUserData({
+          profileData: generateProfileData({ businessPersona: "STARTING", dateOfFormation: "2020-01-01" }),
+        });
+        const newark = generateMunicipality({ displayName: "Newark" });
+        renderPage({ userData: initialUserData, municipalities: [newark] });
+        chooseTab("numbers");
+        expect(getDateOfFormation()).toBe("01/2020");
+      });
+
+      it("does not save when formation date is empty", async () => {
+        const initialUserData = generateUserData({
+          profileData: generateProfileData({ businessPersona: "STARTING", dateOfFormation: "2020-01-01" }),
+        });
+        const newark = generateMunicipality({ displayName: "Newark" });
+        renderPage({ userData: initialUserData, municipalities: [newark] });
+        chooseTab("numbers");
+        fillText("Date of formation", "");
+
+        clickSave();
+
+        await waitFor(() => {
+          expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
+        });
+      });
+    });
+
     it("displays business info tab", () => {
       renderPage({ userData });
       expect(screen.getByTestId("info")).toBeInTheDocument();
@@ -321,72 +396,6 @@ describe("profile", () => {
       });
     });
 
-    describe("disables fields when formation getFiling success", () => {
-      describe("starting a business", () => {
-        const userData = {
-          userData: generateUserData({
-            formationData: generateFormationData({
-              getFilingResponse: generateGetFilingResponse({
-                success: true,
-              }),
-            }),
-            profileData: generateProfileData({
-              businessPersona: "STARTING",
-              legalStructureId: "limited-liability-company",
-              entityId: "some-id",
-              businessName: "some-name",
-            }),
-          }),
-        };
-
-        it("disables businessName", () => {
-          renderPage(userData);
-          expect(screen.getByLabelText("Business name")).toBeDisabled();
-        });
-
-        it("disables entityID", () => {
-          renderPage(userData);
-          chooseTab("numbers");
-          expect(screen.getByLabelText("Entity id")).toBeDisabled();
-        });
-      });
-
-      describe("owning a business", () => {
-        const userData = {
-          userData: generateUserData({
-            formationData: generateFormationData({
-              getFilingResponse: generateGetFilingResponse({
-                success: true,
-              }),
-            }),
-            profileData: generateProfileData({
-              businessPersona: "OWNING",
-              legalStructureId: "limited-liability-company",
-              entityId: "some-id",
-              businessName: "some-name",
-            }),
-          }),
-        };
-
-        it("disables businessName", () => {
-          renderPage(userData);
-          expect(screen.getByLabelText("Business name")).toBeDisabled();
-        });
-
-        it("disables entityID", () => {
-          renderPage(userData);
-          chooseTab("numbers");
-          expect(screen.getByLabelText("Entity id")).toBeDisabled();
-        });
-
-        it("disables dateOfFormation", () => {
-          renderPage(userData);
-          chooseTab("numbers");
-          expect(screen.getByLabelText("Date of formation")).toBeDisabled();
-        });
-      });
-    });
-
     it("prevents user from saving if they have not selected a location", async () => {
       const newark = generateMunicipality({ displayName: "Newark" });
       const userData = generateUserData({});
@@ -506,38 +515,6 @@ describe("profile", () => {
       fireEvent.click(screen.getByText(Config.profileDefaults.escapeModalReturn));
       await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith(ROUTES.dashboard));
       await waitFor(() => expect(() => currentUserData()).toThrow());
-    });
-
-    describe("formation date", () => {
-      it("does not display when empty", () => {
-        const initialUserData = generateUserData({
-          profileData: generateProfileData({ businessPersona: "STARTING", dateOfFormation: "" }),
-        });
-        const newark = generateMunicipality({ displayName: "Newark" });
-        renderPage({ userData: initialUserData, municipalities: [newark] });
-        chooseTab("numbers");
-        expect(getDateOfFormation()).toBeUndefined();
-      });
-
-      it("displays when populated", () => {
-        const initialUserData = generateUserData({
-          profileData: generateProfileData({ businessPersona: "STARTING", dateOfFormation: "2020-01-01" }),
-        });
-        const newark = generateMunicipality({ displayName: "Newark" });
-        renderPage({ userData: initialUserData, municipalities: [newark] });
-        chooseTab("numbers");
-        expect(getDateOfFormation()).toBe("01/2020");
-      });
-
-      it("is read only", () => {
-        const initialUserData = generateUserData({
-          profileData: generateProfileData({ businessPersona: "STARTING", dateOfFormation: "2020-02-01" }),
-        });
-        const newark = generateMunicipality({ displayName: "Newark" });
-        renderPage({ userData: initialUserData, municipalities: [newark] });
-        chooseTab("numbers");
-        expect(screen.getByLabelText("Date of formation")).toBeDisabled();
-      });
     });
 
     describe("tax related profile fields", () => {
@@ -1073,20 +1050,6 @@ describe("profile", () => {
         ).not.toBeInTheDocument();
       });
     });
-  });
-
-  it("disables business name field if formation getFiling success", () => {
-    const userData = generateUserData({
-      profileData: generateProfileData({ businessPersona: "OWNING" }),
-      formationData: generateFormationData({
-        getFilingResponse: generateGetFilingResponse({
-          success: true,
-        }),
-      }),
-    });
-
-    renderPage({ userData });
-    expect(screen.getByLabelText("Business name")).toBeDisabled();
   });
 
   it("disables legal structure field if formation getFiling success", () => {
