@@ -6,7 +6,7 @@ id: cannabis-evaluate-location
 callToActionLink: ""
 callToActionText: ""
 ---
-There are a few things to keep in mind as you decide on that perfect space, but most importantly, check with your site's local government to confirm that their ordinances allow cannabis businesses. 
+There are a few things to keep in mind as you decide on that perfect space, but the most important is to check with the local government for your site to confirm that their ordinances allow cannabis businesses. 
 
 ---
 ### Other Site Considerations
