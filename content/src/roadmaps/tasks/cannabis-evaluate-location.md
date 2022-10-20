@@ -17,4 +17,4 @@ There are a few things to keep in mind as you decide on that perfect space, but 
 
 >**Once completed, you will have:**
 >
->- A viable shop location and can start to plan for site renovations
+>- A viable site in a community that allows your cannabis business activities 
