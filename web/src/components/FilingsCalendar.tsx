@@ -69,7 +69,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
                     data-testid={filing.identifier.toLowerCase()}
                     className="usa-link text-secondary-darker text-secondary-darker:hover text-no-underline"
                   >
-                    <Tag className="radius-md" textWrap={true} tagVariant={"annual"} hover={true}>
+                    <Tag backgroundColor="warning-light" isHover isRadiusMd isWrappingText>
                       <span className="text-bold text-uppercase">
                         {Config.dashboardDefaults.calendarFilingDueDateLabel}{" "}
                         {parseDateWithFormat(filing.dueDate, "YYYY-MM-DD").format("M/D")}

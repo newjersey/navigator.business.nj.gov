@@ -5,17 +5,17 @@ import { ReactElement } from "react";
 
 export const TaskProgressTagLookup: Record<TaskProgress, ReactElement> = {
   NOT_STARTED: (
-    <Tag tagVariant="notStarted" dataTestid="NOT_STARTED" fixedWidth>
+    <Tag backgroundColor="base-lighter" dataTestid="NOT_STARTED" isFixedWidth>
       {Config.taskProgress.NOT_STARTED}
     </Tag>
   ),
   IN_PROGRESS: (
-    <Tag tagVariant="inProgress" dataTestid="IN_PROGRESS" fixedWidth>
+    <Tag backgroundColor="accent-cool-lighter" dataTestid="IN_PROGRESS" isFixedWidth>
       {Config.taskProgress.IN_PROGRESS}
     </Tag>
   ),
   COMPLETED: (
-    <Tag tagVariant="completed" dataTestid="COMPLETED" fixedWidth>
+    <Tag backgroundColor="primary-lightest" dataTestid="COMPLETED" isFixedWidth>
       {Config.taskProgress.COMPLETED}
     </Tag>
   ),

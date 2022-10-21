@@ -1,84 +1,75 @@
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
-export type TagVariant =
-  | "base"
-  | "completed"
-  | "notStarted"
-  | "inProgress"
-  | "accent"
-  | "baseDark"
-  | "baseDarkest"
-  | "certification"
-  | "funding"
-  | "annual";
+export type BgColors =
+  | "primary-lightest"
+  | "base-lighter"
+  | "accent-cool-lighter"
+  | "accent-warm-lighter"
+  | "white"
+  | "accent-cooler-lightest"
+  | "accent-cool-light"
+  | "info-light"
+  | "warning-light";
 
 interface Props {
-  tagVariant: TagVariant;
+  backgroundColor: BgColors;
   children: React.ReactNode;
   dataTestid?: string;
-  textWrap?: boolean;
-  bold?: boolean;
-  className?: string;
-  hover?: boolean;
-  fixedWidth?: boolean;
-  disableUppercase?: boolean;
+  isFixedWidth?: boolean;
+  isHover?: boolean;
+  isLowerCase?: boolean;
+  isRadiusMd?: boolean;
+  isWrappingText?: boolean;
 }
 
 export const Tag = (props: Props): ReactElement => {
   let styling = "";
   let hoverStyling = "";
 
-  switch (props.tagVariant) {
-    case "completed":
+  switch (props.backgroundColor) {
+    case "primary-lightest":
       styling = "bg-primary-lightest text-primary-dark";
       break;
-    case "notStarted":
-    case "base":
+    case "base-lighter":
       styling = "bg-base-lighter text-base-dark";
       break;
-    case "inProgress":
+    case "accent-cool-lighter":
       styling = "bg-accent-cool-lighter text-accent-cool-darker";
       break;
-    case "accent":
+    case "accent-warm-lighter":
       styling = "bg-accent-warm-lighter text-accent-warm-darker";
       break;
-    case "baseDark":
-      styling = "bg-white text-base-dark border usa-tag-padding-override";
+    case "white":
+      styling = "bg-white text-base-dark border";
       break;
-    case "certification":
-      styling = "bg-white text-base-darkest bg-certification";
+    case "accent-cool-light":
+      styling = "bg-white text-base-darkest bg-accent-cool-light";
       break;
-    case "funding":
-      styling = "bg-white text-base-darkest bg-funding";
+    case "info-light":
+      styling = "bg-white text-base-darkest bg-info-light";
       break;
-    case "annual":
+    case "warning-light":
       styling = "bg-warning-light text-base-dark";
+      break;
+    case "accent-cooler-lightest":
+      styling = "bg-accent-cooler-lightest text-base-darkest border border-accent-cooler-light";
       break;
   }
 
-  switch (props.hover) {
-    case props.tagVariant === "annual":
-      hoverStyling = "warning-extra-light-hover-override";
+  switch (props.isHover) {
+    case props.backgroundColor === "warning-light":
+      hoverStyling = "bg-warning-extra-light-on-hover";
       break;
   }
 
   const defaultStyle =
     "flex flex-align-center flex-justify usa-tag font-sans-2xs width-full width-auto line-height-sans-2 padding-y-2px";
-  const textWrap = props.textWrap ? "text-wrap display-block" : "text-no-wrap";
-  const textBold = props.bold ? "text-bold" : "";
-  const fixedWidth = props.fixedWidth ? "tag-fixed-width display-inline-block" : "";
-  const disableUppercase = props.disableUppercase ? "text-no-uppercase" : "";
+  const textWrap = props.isWrappingText ? "text-wrap display-block" : "text-no-wrap";
+  const fixedWidth = props.isFixedWidth ? "tag-fixed-width display-inline-block" : "";
+  const disableUppercase = props.isLowerCase ? "text-no-uppercase" : "";
+  const radius = props.isRadiusMd ? "radius-md" : "";
 
-  const className = [
-    defaultStyle,
-    props.className,
-    styling,
-    hoverStyling,
-    textWrap,
-    fixedWidth,
-    disableUppercase,
-    textBold,
-  ]
+  const className = [defaultStyle, styling, hoverStyling, textWrap, fixedWidth, disableUppercase, radius]
     .map((i) => i?.trim())
     .filter((value: string | undefined) => value && value.length > 0)
     .join(" ");

@@ -45,9 +45,11 @@ export const FilingElement = (props: {
               {parseDate(props.dueDate).format("MMMM D, YYYY").toUpperCase()}
             </span>
             {props.filing.extension && (
-              <Tag tagVariant="base" disableUppercase className="margin-left-4" data-testid="extension">
-                {Config.filingDefaults.extensionTagText}
-              </Tag>
+              <div className="margin-left-4">
+                <Tag backgroundColor="accent-cooler-lightest" data-testid="extension" isLowerCase>
+                  {Config.filingDefaults.extensionTagText}
+                </Tag>
+              </div>
             )}
           </div>
         </div>

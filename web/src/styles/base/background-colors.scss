@@ -98,12 +98,12 @@
   background-color: $base-extra-light !important;
 }
 
-.bg-certification {
-  background-color: #99c8ef !important;
+.bg-accent-cool-light {
+  background-color: $accent-cool-light !important;
 }
 
-.bg-funding {
-  background-color: #80def1 !important;
+.bg-info-light {
+  background-color: $info-light !important;
 }
 
 .bg-cool-extra-light {
@@ -160,4 +160,12 @@
 
 .bg-accent-cooler-darker {
   background-color: $accent-cooler-darker !important;
+}
+
+.bg-accent-cooler-lightest {
+  background-color: $accent-cooler-lightest !important;
+}
+
+.bg-warning-extra-light-on-hover:hover {
+  background-color: $warning-extra-light !important;
 }
