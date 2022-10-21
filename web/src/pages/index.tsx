@@ -4,7 +4,6 @@ import { Hero } from "@/components/njwds/Hero";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { SupportExploreSignUpChatCards } from "@/components/SupportExploreSignUpChatCards";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { routeForPersona } from "@/lib/domain-logic/routeForPersona";
 import { checkQueryValue, QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import { MediaQueries } from "@/lib/PageSizes";
 import { ABStorageFactory } from "@/lib/storage/ABStorage";
@@ -45,8 +44,7 @@ const Home = (): ReactElement => {
 
   useEffect(() => {
     if (userData?.formProgress === "COMPLETED") {
-      const route = routeForPersona(userData?.profileData.businessPersona);
-      router.replace(route);
+      router.replace(ROUTES.dashboard);
     } else if (userData?.formProgress === "UNSTARTED") {
       router.replace(ROUTES.onboarding);
     } else if (userData === undefined && error != undefined) {

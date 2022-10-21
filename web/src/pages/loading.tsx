@@ -9,7 +9,6 @@ import { getCurrentUser, triggerSignIn } from "@/lib/auth/sessionHelper";
 import { onGuestSignIn } from "@/lib/auth/signinHelper";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { routeForPersona } from "@/lib/domain-logic/routeForPersona";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { onboardingCompleted } from "@businessnjgovnavigator/shared/domain-logic/onboarding";
@@ -49,7 +48,7 @@ const LoadingPage = (): ReactElement => {
         router.push(pageLink);
       });
     } else {
-      router.push(routeForPersona(userData.profileData.businessPersona));
+      router.push(ROUTES.dashboard);
     }
   }, userData);
 

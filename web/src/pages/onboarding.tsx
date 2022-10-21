@@ -13,7 +13,6 @@ import { RoadmapContext } from "@/contexts/roadmapContext";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { routeForPersona } from "@/lib/domain-logic/routeForPersona";
 import { QUERIES, ROUTES, routeShallowWithQuery } from "@/lib/domain-logic/routes";
 import { MediaQueries } from "@/lib/PageSizes";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
@@ -311,7 +310,7 @@ const OnboardingPage = (props: Props): ReactElement => {
 
       await update(updatedUserData);
       await router.push({
-        pathname: routeForPersona(updatedUserData.profileData.businessPersona),
+        pathname: ROUTES.dashboard,
         query: { [QUERIES.fromOnboarding]: "true" },
       });
     }
@@ -367,11 +366,6 @@ const OnboardingPage = (props: Props): ReactElement => {
     return slidePage === page.previous ? 100 : 300;
   };
 
-  const redirectUrl = useMemo(
-    () => routeForPersona(userData?.profileData.businessPersona),
-    [userData?.profileData.businessPersona]
-  );
-
   return (
     <ProfileDataContext.Provider
       value={{
@@ -414,8 +408,8 @@ const OnboardingPage = (props: Props): ReactElement => {
                 <>
                   {OnboardingStatusLookup()[alert].body}
                   {OnboardingStatusLookup()[alert] && (
-                    <Link href={redirectUrl}>
-                      <a href={redirectUrl} data-testid={`snackbar-link`}>
+                    <Link href={ROUTES.dashboard}>
+                      <a href={ROUTES.dashboard} data-testid={`snackbar-link`}>
                         {OnboardingStatusLookup()[alert].link}
                       </a>
                     </Link>
