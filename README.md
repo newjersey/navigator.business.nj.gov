@@ -193,7 +193,7 @@ If you want to change the structure of the `UserData` object, here's how:
 |                    | local dev & CI feature tests | local feature tests | unit tests |
 | ------------------ | ---------------------------- | ------------------- | ---------- |
 | Nextjs frontend    | 3000                         | 3001                |            |
-| Serverless backend | 5000                         | 5001                |            |
+| Serverless backend | 5002                         | 5001                |            |
 | DynamoDB           | 8000                         | 8001                |            |
 | Lambda port        | 5050                         | 5051                |            |
 | Dynalite local     |                              |                     | 8002       |

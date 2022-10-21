@@ -9,7 +9,7 @@ import updateExternalStatus from "./src/functions/updateExternalStatus";
 const isDocker = process.env.IS_DOCKER == "true" || false; // set in docker-compose
 const stage = process.env.STAGE || "local";
 const dynamoOfflinePort = process.env.DYNAMO_PORT || 8000;
-const offlinePort = process.env.API_PORT || 5000;
+const offlinePort = process.env.API_PORT || 5002;
 const offlineLambdaPort = process.env.LAMBDA_PORT || 5050;
 const licenseStatusBaseUrl = process.env.LICENSE_STATUS_BASE_URL || "";
 const businessNameBaseUrl = process.env.BUSINESS_NAME_BASE_URL || "";
