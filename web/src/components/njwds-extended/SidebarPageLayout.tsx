@@ -1,6 +1,5 @@
 import { Icon } from "@/components/njwds/Icon";
-import { useUserData } from "@/lib/data-hooks/useUserData";
-import { routeForPersona } from "@/lib/domain-logic/routeForPersona";
+import { ROUTES } from "@/lib/domain-logic/routes";
 import { MediaQueries } from "@/lib/PageSizes";
 import analytics from "@/lib/utils/analytics";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
@@ -26,14 +25,11 @@ export const SidebarPageLayout = ({
   belowBoxComponent,
 }: SidebarPageLayoutProps): ReactElement => {
   const isLargeScreen = useMediaQuery(MediaQueries.desktopAndUp);
-  const { userData } = useUserData();
-
-  const mainPageLink = routeForPersona(userData?.profileData.businessPersona);
 
   const backButton = (
-    <Link href={mainPageLink} passHref>
+    <Link href={ROUTES.dashboard} passHref>
       <a
-        href={mainPageLink}
+        href={ROUTES.dashboard}
         data-testid="back-to-dashboard"
         className="usa-link fdr fac margin-top-3 margin-bottom-3 usa-link-hover-override desktop:margin-top-0 desktop:margin-bottom-4"
         onClick={analytics.event.task_back_to_roadmap.click.view_roadmap}

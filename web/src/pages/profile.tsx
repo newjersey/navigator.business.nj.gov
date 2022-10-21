@@ -37,8 +37,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
-import { routeForPersona } from "@/lib/domain-logic/routeForPersona";
-import { checkQueryValue, QUERIES } from "@/lib/domain-logic/routes";
+import { checkQueryValue, QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import {
@@ -120,9 +119,8 @@ const ProfilePage = (props: Props): ReactElement => {
       return routerType(`/tasks/${formationUrlSlug}`);
     }
 
-    const route = routeForPersona(businessPersona);
     const urlParams = params ? `?${new URLSearchParams(params).toString()}` : "";
-    return routerType(`${route}${urlParams}`);
+    return routerType(`${ROUTES.dashboard}${urlParams}`);
   };
 
   useMountEffectWhenDefined(() => {
