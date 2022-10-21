@@ -143,6 +143,11 @@ export const SidebarCardsList = (props: Props): ReactElement => {
       })
       .map((card: SidebarCardContent) => <SidebarCard card={card} key={card.id} />);
 
+  const showEmptyState = () =>
+    certificationsUnlocked() &&
+    displayFundingCards() &&
+    visibleSortedCertifications.length + visibleSortedFundings.length === 0;
+
   return (
     <>
       <h2>{Config.dashboardDefaults.sidebarHeading}</h2>
@@ -163,7 +168,7 @@ export const SidebarCardsList = (props: Props): ReactElement => {
             visibleSortedFundings.map((funding) => (
               <OpportunityCard key={funding.id} opportunity={funding} urlPath="funding" />
             ))}
-          {visibleSortedCertifications.length + visibleSortedFundings.length === 0 && (
+          {showEmptyState() && (
             <div className="fdc fac margin-y-3">
               <h3 className="text-normal">{Config.dashboardDefaults.emptyOpportunitiesHeader}</h3>
               <img src={`/img/signpost.svg`} className="" alt="" />

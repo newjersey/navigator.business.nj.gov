@@ -378,5 +378,21 @@ describe("SidebarCards List", () => {
       renderWithUserData(initialUserData, { certifications, fundings });
       expect(screen.getByText(Config.dashboardDefaults.emptyOpportunitiesHeader)).toBeInTheDocument();
     });
+
+    it("doesn't show empty state when all opportunities are hidden if user ungraduates", () => {
+      const initialUserData = generateUserData({
+        profileData: generateProfileData({
+          operatingPhase: "NEEDS_TO_REGISTER_FOR_TAXES",
+          ownershipTypeIds: ["veteran-owned", "disabled-veteran", "minority-owned", "woman-owned"],
+        }),
+        preferences: generatePreferences({
+          hiddenCertificationIds: ["cert1-id"],
+          hiddenFundingIds: ["fund1-id"],
+        }),
+      });
+
+      renderWithUserData(initialUserData, { certifications, fundings });
+      expect(screen.queryByText(Config.dashboardDefaults.emptyOpportunitiesHeader)).not.toBeInTheDocument();
+    });
   });
 });
