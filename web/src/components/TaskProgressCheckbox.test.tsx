@@ -1,7 +1,6 @@
 import { TaskProgressCheckbox } from "@/components/TaskProgressCheckbox";
 import { getMergedConfig } from "@/contexts/configContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import { routeForPersona } from "@/lib/domain-logic/routeForPersona";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { generateProfileData, generateUserData } from "@/test/factories";
 import { markdownToText, withAuthAlert } from "@/test/helpers";
@@ -169,7 +168,7 @@ describe("<TaskProgressCheckbox />", () => {
       fireEvent.click(screen.getByText(Config.taxRegistrationModal.saveButtonText));
       await waitFor(() => {
         expect(mockPush).toHaveBeenCalledWith({
-          pathname: routeForPersona(userData.profileData.businessPersona),
+          pathname: ROUTES.dashboard,
           query: { fromFormBusinessEntity: "false", fromTaxRegistration: "true" },
         });
       });
@@ -252,7 +251,7 @@ describe("<TaskProgressCheckbox />", () => {
         fireEvent.click(screen.getByText(Config.taxRegistrationModal.saveButtonText));
         await waitFor(() => {
           expect(mockPush).toHaveBeenCalledWith({
-            pathname: routeForPersona(userData.profileData.businessPersona),
+            pathname: ROUTES.dashboard,
             query: { fromFormBusinessEntity: "false", fromTaxRegistration: "true" },
           });
         });
