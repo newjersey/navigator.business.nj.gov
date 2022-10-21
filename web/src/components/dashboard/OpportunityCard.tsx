@@ -18,8 +18,10 @@ interface Props {
 }
 
 const TYPE_TO_LABEL: Record<"funding" | "certification", ReactElement> = {
-  funding: <Tag tagVariant="certification">{Config.dashboardDefaults.fundingTagText}</Tag>,
-  certification: <Tag tagVariant="funding">{Config.dashboardDefaults.certificationTagText}</Tag>,
+  funding: <Tag backgroundColor="info-light">{Config.dashboardDefaults.fundingTagText}</Tag>,
+  certification: (
+    <Tag backgroundColor="accent-cool-light">{Config.dashboardDefaults.certificationTagText}</Tag>
+  ),
 };
 
 const MAX_CONTENT_CHARS = 150;
