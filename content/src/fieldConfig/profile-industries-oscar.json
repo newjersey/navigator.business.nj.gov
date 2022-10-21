@@ -24,7 +24,7 @@
         "description": ""
       },
       "homeBasedBusiness": {
-        "radioButtonTrueText": "Yes",
+        "radioButtonTrueText": "",
         "radioButtonFalseText": "No",
         "header": "Home-based business",
         "description": "Are you a `home-based business|home-based-business`?"
@@ -65,6 +65,12 @@
         "description": ""
       },
       "interstateLogistics": {
+        "radioButtonTrueText": "",
+        "radioButtonFalseText": "",
+        "header": "",
+        "description": ""
+      },
+      "isChildcareForSixOrMore": {
         "radioButtonTrueText": "",
         "radioButtonFalseText": "",
         "header": "",

@@ -690,5 +690,19 @@ describe("buildUserRoadmap", () => {
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("interstate-transport");
       });
     });
+
+    describe("if industry is childcare services", () => {
+      it("adds daycare add-on if 6 or more children", () => {
+        buildUserRoadmap(generateStartingProfile({ isChildcareForSixOrMore: true, industryId: "daycare" }));
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("daycare");
+      });
+
+      it("adds family daycare add-on if 5 children or less", () => {
+        buildUserRoadmap(
+          generateStartingProfile({ isChildcareForSixOrMore: false, industryId: "family-daycare" })
+        );
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("daycare");
+      });
+    });
   });
 });

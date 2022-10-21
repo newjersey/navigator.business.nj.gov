@@ -138,6 +138,7 @@ export const generateIndustrySpecificData = (
     realEstateAppraisalManagement: false,
     carService: undefined,
     interstateTransport: false,
+    isChildcareForSixOrMore: undefined,
     ...overrides,
   };
 };

@@ -11,6 +11,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { isCannabisLicenseApplicable } from "@/lib/domain-logic/isCannabisLicenseApplicable";
 import { isCarServiceApplicable } from "@/lib/domain-logic/isCarServiceApplicable";
 import { isCertifiedInteriorDesignerApplicable } from "@/lib/domain-logic/isCertifiedInteriorDesignerApplicable";
+import { isChildcareForSixOrMoreApplicable } from "@/lib/domain-logic/isChildcareForSixOrMoreApplicable";
 import { isCpaRequiredApplicable } from "@/lib/domain-logic/isCpaRequiredApplicable";
 import { isInterstateMovingApplicable } from "@/lib/domain-logic/isInterstateMovingApplicable";
 import { isLiquorLicenseApplicable } from "@/lib/domain-logic/isLiquorLicenseApplicable";
@@ -21,6 +22,7 @@ import { FocusEvent, ReactElement, useContext } from "react";
 import { isInterstateLogisticsApplicable } from "../../lib/domain-logic/isInterstateLogisticsApplicable";
 import { OnboardingCarService } from "./OnboardingCarService";
 import { OnboardingCertifiedInteriorDesigner } from "./OnboardingCertifiedInteriorDesigner";
+import { OnboardingChildcare } from "./OnboardingChildcare";
 import { OnboardingMovingCompany } from "./OnboardingMovingCompany";
 import { OnboardingRealEstateAppraisalManagement } from "./OnboardingRealEstateAppraisalManagement";
 import { OnboardingStaffingService } from "./OnboardingStaffingService";
@@ -113,16 +115,25 @@ export const OnboardingIndustry = (props: Props): ReactElement => {
           <OnboardingCarService />
         </div>
       )}
+
       {isInterstateMovingApplicable(state.profileData.industryId) && (
         <div className="margin-top-4" data-testid={`industry-specific-${state.profileData.industryId}`}>
           <FieldLabelProfile fieldName="interstateMoving" />
           <OnboardingMovingCompany />
         </div>
       )}
+
       {isInterstateLogisticsApplicable(state.profileData.industryId) && (
         <div className="margin-top-4" data-testid={`industry-specific-${state.profileData.industryId}`}>
           <FieldLabelProfile fieldName="interstateLogistics" />
           <OnboardingLogisticsCompany />
+        </div>
+      )}
+
+      {isChildcareForSixOrMoreApplicable(state.profileData.industryId) && (
+        <div className="margin-top-4" data-testid={`industry-specific-${state.profileData.industryId}`}>
+          <FieldLabelProfile fieldName="isChildcareForSixOrMore" />
+          <OnboardingChildcare />
         </div>
       )}
     </div>
