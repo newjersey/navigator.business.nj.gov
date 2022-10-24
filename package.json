@@ -55,7 +55,7 @@
     "body-parser": "1.20.1",
     "broken-link-checker": "0.7.8",
     "cors": "2.8.5",
-    "dayjs": "1.11.5",
+    "dayjs": "1.11.6",
     "dedent": "0.7.0",
     "express": "4.18.2",
     "fast-deep-equal": "3.1.3",
