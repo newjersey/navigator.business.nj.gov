@@ -24,7 +24,7 @@
         "description": ""
       },
       "homeBasedBusiness": {
-        "radioButtonTrueText": "",
+        "radioButtonTrueText": "Yes",
         "radioButtonFalseText": "No",
         "header": "Home-based business",
         "description": "Are you a `home-based business|home-based-business`?"

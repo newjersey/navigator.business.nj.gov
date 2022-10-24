@@ -695,12 +695,12 @@ describe("buildUserRoadmap", () => {
       it("adds daycare add-on if 6 or more children", () => {
         buildUserRoadmap(generateStartingProfile({ isChildcareForSixOrMore: true, industryId: "daycare" }));
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("daycare");
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("family-daycare");
       });
 
       it("adds family daycare add-on if 5 children or less", () => {
-        buildUserRoadmap(
-          generateStartingProfile({ isChildcareForSixOrMore: false, industryId: "family-daycare" })
-        );
+        buildUserRoadmap(generateStartingProfile({ isChildcareForSixOrMore: false, industryId: "daycare" }));
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("family-daycare");
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("daycare");
       });
     });
