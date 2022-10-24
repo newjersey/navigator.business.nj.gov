@@ -26,6 +26,7 @@ import { useMockRoadmap, useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
 import {
   currentUserData,
   setupStatefulUserDataContext,
+  userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
@@ -38,6 +39,7 @@ import {
   LookupSectorTypeById,
   Municipality,
   ProfileData,
+  randomInt,
   UserData,
 } from "@businessnjgovnavigator/shared";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
@@ -318,6 +320,7 @@ describe("profile", () => {
         ...emptyData,
         profileData: {
           ...emptyData.profileData,
+          taxId: "",
           businessPersona: "STARTING",
         },
       };
@@ -331,7 +334,7 @@ describe("profile", () => {
 
       chooseTab("numbers");
       fillText("Entity id", "0234567890");
-      fillText("Tax id", "023456790");
+      fillText("Tax id", "023456790123");
       fillText("Employer id", "02-3456780");
       chooseTab("notes");
       fillText("Notes", "whats appppppp");
@@ -351,7 +354,7 @@ describe("profile", () => {
           homeBasedBusiness: true,
           legalStructureId: "c-corporation",
           municipality: newark,
-          taxId: "023456790",
+          taxId: "023456790123",
           entityId: "0234567890",
           employerId: "023456780",
           notes: "whats appppppp",
@@ -450,6 +453,152 @@ describe("profile", () => {
       renderPage({ userData });
       clickBack();
       await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith(ROUTES.dashboard));
+    });
+
+    describe("the tax ID field behavior", () => {
+      describe("when the tax ID is initially 9 digits in length", () => {
+        const userData = generateUserData({
+          profileData: generateProfileData({
+            taxId: "123456789",
+          }),
+        });
+
+        it("will save if tax ID does not change", async () => {
+          renderPage({ userData });
+          chooseTab("numbers");
+          fireEvent.change(screen.getByLabelText("Tax id"));
+          fireEvent.blur(screen.getByLabelText("Tax id"));
+          clickSave();
+          await waitFor(() => expect(currentUserData()).toEqual(userData));
+        });
+
+        it("will not save if tax ID changes to a different 9 digit tax Id", async () => {
+          renderPage({ userData });
+          chooseTab("numbers");
+          fireEvent.change(screen.getByLabelText("Tax id"), { target: { value: "666666666" } });
+          fireEvent.blur(screen.getByLabelText("Tax id"));
+          clickSave();
+          await waitFor(() => expect(userDataWasNotUpdated()).toEqual(true));
+          expect(
+            screen.getByText(Config.profileDefaults[getFlow(userData.profileData)].taxId.errorTextRequired)
+          ).toBeInTheDocument();
+          expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
+        });
+
+        it("will save if Tax ID changes to 12 digits in length", async () => {
+          renderPage({ userData });
+          chooseTab("numbers");
+          fireEvent.change(screen.getByLabelText("Tax id"), { target: { value: "123456789" } });
+          fireEvent.blur(screen.getByLabelText("Tax id"));
+          fireEvent.change(screen.getByLabelText("Tax id location"), { target: { value: "123" } });
+          fireEvent.blur(screen.getByLabelText("Tax id location"));
+          clickSave();
+          await waitFor(() =>
+            expect(currentUserData()).toEqual({
+              ...userData,
+              taxFilingData: { ...userData.taxFilingData, filings: [], state: undefined, registered: false },
+              profileData: { ...userData.profileData, taxId: "123456789123" },
+            })
+          );
+        });
+
+        it("will save if tax ID changes to 0 digits in length", async () => {
+          renderPage({ userData });
+          chooseTab("numbers");
+          fireEvent.change(screen.getByLabelText("Tax id"), { target: { value: "" } });
+          fireEvent.blur(screen.getByLabelText("Tax id"));
+          clickSave();
+          await waitFor(() =>
+            expect(currentUserData()).toEqual({
+              ...userData,
+              taxFilingData: { ...userData.taxFilingData, filings: [], state: undefined, registered: false },
+              profileData: { ...userData.profileData, taxId: "" },
+            })
+          );
+        });
+      });
+
+      describe("when the tax ID is initially 12 digits in length", () => {
+        const userData = generateUserData({
+          profileData: generateProfileData({
+            taxId: "123456789123",
+          }),
+        });
+
+        it("will save if tax ID does not change", async () => {
+          renderPage({ userData });
+          chooseTab("numbers");
+          fireEvent.click(screen.getByLabelText("Tax id"));
+          fireEvent.blur(screen.getByLabelText("Tax id"));
+          clickSave();
+          await waitFor(() => expect(currentUserData()).toEqual(userData));
+        });
+
+        it("will not save if tax ID is less than 12 digits in length", async () => {
+          renderPage({ userData });
+          chooseTab("numbers");
+          fireEvent.change(screen.getByLabelText("Tax id"), { target: { value: "123456789" } });
+          fireEvent.blur(screen.getByLabelText("Tax id"));
+          clickSave();
+          await waitFor(() => expect(userDataWasNotUpdated()).toEqual(true));
+        });
+
+        it("will save if Tax ID changes to a different 12 digits", async () => {
+          renderPage({ userData });
+          chooseTab("numbers");
+          fireEvent.change(screen.getByLabelText("Tax id"), { target: { value: "666666666666" } });
+          fireEvent.blur(screen.getByLabelText("Tax id"));
+          clickSave();
+          await waitFor(() =>
+            expect(currentUserData()).toEqual({
+              ...userData,
+              taxFilingData: { ...userData.taxFilingData, filings: [], state: undefined, registered: false },
+              profileData: { ...userData.profileData, taxId: "666666666666" },
+            })
+          );
+        });
+      });
+
+      describe("when the tax ID is initially 0  in length", () => {
+        const userData = generateUserData({
+          profileData: generateProfileData({
+            taxId: "",
+          }),
+        });
+
+        it("will save if tax ID does not change", async () => {
+          renderPage({ userData });
+          chooseTab("numbers");
+          fireEvent.click(screen.getByLabelText("Tax id"));
+          fireEvent.blur(screen.getByLabelText("Tax id"));
+          clickSave();
+          await waitFor(() => expect(currentUserData()).toEqual(userData));
+        });
+
+        it("will not save if tax ID is less than 12 digits in length", async () => {
+          renderPage({ userData });
+          chooseTab("numbers");
+          fireEvent.change(screen.getByLabelText("Tax id"), { target: { value: "123456789" } });
+          fireEvent.blur(screen.getByLabelText("Tax id"));
+          clickSave();
+          await waitFor(() => expect(userDataWasNotUpdated()).toEqual(true));
+        });
+
+        it("will save if Tax ID changes to 12 digits in length", async () => {
+          renderPage({ userData });
+          chooseTab("numbers");
+          fireEvent.change(screen.getByLabelText("Tax id"), { target: { value: "123456789123" } });
+          fireEvent.blur(screen.getByLabelText("Tax id"));
+          clickSave();
+          await waitFor(() =>
+            expect(currentUserData()).toEqual({
+              ...userData,
+              taxFilingData: { ...userData.taxFilingData, filings: [], state: undefined, registered: false },
+              profileData: { ...userData.profileData, taxId: "123456789123" },
+            })
+          );
+        });
+      });
     });
 
     it("prefills form from existing user data", () => {
@@ -674,8 +823,9 @@ describe("profile", () => {
     it("updates the user data on save", async () => {
       const userData = generateUserData({
         profileData: generateProfileData({
+          taxId: randomInt(9).toString(),
           businessPersona: "OWNING",
-          industryId: undefined,
+          industryId: "generic",
         }),
       });
       const newark = generateMunicipality({ displayName: "Newark" });
@@ -694,6 +844,7 @@ describe("profile", () => {
       fillText("Entity id", "0234567890");
       fillText("Date of formation", date.format("MM/YYYY"));
       fillText("Tax id", "023456790");
+      fillText("Tax id location", "123");
       fillText("Tax pin", "6666");
       chooseTab("notes");
       fillText("Notes", "whats appppppp");
@@ -714,7 +865,7 @@ describe("profile", () => {
           ownershipTypeIds: ["veteran-owned", "woman-owned"],
           municipality: newark,
           dateOfFormation,
-          taxId: "023456790",
+          taxId: "023456790123",
           entityId: "0234567890",
           employerId: "023456780",
           notes: "whats appppppp",
@@ -775,7 +926,7 @@ describe("profile", () => {
           entityId: "1234567890",
           employerId: "123456789",
           dateOfFormation,
-          taxId: "123456790",
+          taxId: "123456790888",
           notes: "whats appppppp",
           municipality: generateMunicipality({
             displayName: "Newark",

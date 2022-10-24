@@ -162,6 +162,17 @@ const ProfilePage = (props: Props): ReactElement => {
       onValidation("sectorId", false);
       fieldStatesCopy["sectorId"] = { invalid: false };
     }
+    const { taskProgress } = userData;
+    let { taxFilingData } = userData;
+
+    if (userData.profileData.taxId != profileData.taxId) {
+      if (!(profileData.taxId?.length === 0 || profileData.taxId?.length === 12)) {
+        onValidation("taxId", true);
+        fieldStatesCopy["taxId"] = { invalid: true };
+      }
+      taxFilingData = { ...taxFilingData, state: undefined, registered: false, filings: [] };
+    }
+
     if (Object.keys(fieldStatesCopy).some((k) => fieldStatesCopy[k as ProfileFields].invalid)) {
       setAlert("ERROR");
       return;
@@ -172,15 +183,8 @@ const ProfilePage = (props: Props): ReactElement => {
     const newRoadmap = await buildUserRoadmap(profileData);
     setRoadmap(newRoadmap);
 
-    const { taskProgress } = userData;
-    let { taxFilingData } = userData;
-
     if (profileData.employerId && profileData.employerId.length > 0) {
       taskProgress[einTaskId] = "COMPLETED";
-    }
-
-    if (userData.profileData.taxId != profileData.taxId) {
-      taxFilingData = { ...taxFilingData, state: undefined, registered: false, filings: [] };
     }
 
     if (

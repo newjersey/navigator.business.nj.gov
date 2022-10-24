@@ -69,7 +69,7 @@ describe("Profile [feature] [all] [group1]", () => {
       const newtownDisplayName = "Bass River";
       const newHomeBasedQuestion = Boolean(randomInt() % 2);
       const newEmployerId = randomInt(9).toString();
-      const newTaxId = randomInt() % 2 ? randomInt(9).toString() : randomInt(12).toString();
+      const newTaxId = randomInt(12).toString();
       const newNotes = `New notes ${randomInt()}`;
 
       updateNewBusinessProfilePage({
@@ -218,7 +218,7 @@ describe("Profile [feature] [all] [group1]", () => {
     const updatedTownDisplayName = "Bass River";
     const updatedOwnershipDataValues = ["disabled-veteran"];
     const employerId = randomInt(10).toString();
-    const taxId = randomInt() % 2 ? randomInt(9).toString() : randomInt(12).toString();
+    const taxId = randomInt(12).toString();
     const notes = `Notes ${randomInt()}`;
     const taxPin = randomInt(4).toString();
 
@@ -244,7 +244,7 @@ describe("Profile [feature] [all] [group1]", () => {
     });
 
     updateForeignBusinessProfilePage({
-      taxId: randomInt() % 2 ? randomInt(9).toString() : randomInt(12).toString(),
+      taxId: randomInt(12).toString(),
       notes: `Notes ${randomInt()}`,
     });
   });

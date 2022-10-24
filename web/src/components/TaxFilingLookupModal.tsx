@@ -199,7 +199,6 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
         <OnboardingTaxId
           onValidation={onValidation}
           inputErrorBar
-          splitField
           fieldStates={fieldStates}
           validationText={apiFailed == "FAILED" ? Config.taxCalendar.FailedTaxIdHelper : undefined}
           required
