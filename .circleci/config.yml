@@ -573,7 +573,7 @@ jobs:
       suite:
         type: string
     docker:
-      - image: cimg/node:16.16.0-browsers
+      - image: cimg/node:16.18.0-browsers
     steps:
       - attach_workspace:
           at: .
@@ -587,7 +587,7 @@ jobs:
   #Maybe have a move this to a image folder
   docker-build-builder-image:
     docker:
-      - image: cimg/node:16.16.0
+      - image: cimg/node:16.18.0
     steps:
       - set-dev-env-vars
       - docker-setup-navigator-builder-image
