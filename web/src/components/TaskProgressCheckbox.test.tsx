@@ -147,6 +147,7 @@ describe("<TaskProgressCheckbox />", () => {
     it("updates the task progress when the modal is saved", async () => {
       const userData = generateUserData({
         taskProgress: { [taxTaskId]: "NOT_STARTED" },
+        profileData: generateProfileData({ taxId: randomInt(12).toString() }),
       });
       renderTaskCheckbox(taxTaskId, userData);
       await selectCompleted();
@@ -159,7 +160,7 @@ describe("<TaskProgressCheckbox />", () => {
     it("gets redirected to dashboard with the proper query parameter when completed", async () => {
       const userData = generateUserData({
         taskProgress: { [taxTaskId]: "NOT_STARTED" },
-        profileData: generateProfileData({ businessPersona: "STARTING" }),
+        profileData: generateProfileData({ businessPersona: "STARTING", taxId: randomInt(12).toString() }),
       });
 
       renderTaskCheckbox(taxTaskId, userData);

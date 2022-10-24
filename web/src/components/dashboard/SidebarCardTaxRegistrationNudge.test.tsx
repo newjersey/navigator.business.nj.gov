@@ -64,6 +64,7 @@ describe("<SidebarCardTaxRegistrationNudge />", () => {
       const initialUserData = generateUserData({
         profileData: generateProfileData({
           businessName: "",
+          taxId: "",
           legalStructureId: "limited-liability-partnership",
         }),
         taxFilingData: generateTaxFilingData({
