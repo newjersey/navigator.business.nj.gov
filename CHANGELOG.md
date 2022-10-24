@@ -1,3 +1,42 @@
+# [5.7.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.6.0...v5.7.0) (2022-10-24)
+
+
+### Bug Fixes
+
+* [[#183014824](https://github.com/newjersey/navigator.business.nj.gov/issues/183014824)] tax filings modal open after registration redirect ([7767d95](https://github.com/newjersey/navigator.business.nj.gov/commit/7767d9544486d11fdfbe7f653702972834d73f48))
+* corrected spelling error ([caec846](https://github.com/newjersey/navigator.business.nj.gov/commit/caec846c6f2b3b588f0d25ff91a3a4f73324cd2f))
+* **deps:** update aws-amplify ([029ca08](https://github.com/newjersey/navigator.business.nj.gov/commit/029ca08b81eb13334874e8466f7cff4329cac1ec))
+* **deps:** update dependency next-seo to v5.6.0 ([56ee838](https://github.com/newjersey/navigator.business.nj.gov/commit/56ee83841f12cfad2c47e8f4be33297f420cc8db))
+* **deps:** update dependency ua-parser-js to v1.0.32 ([31dbebc](https://github.com/newjersey/navigator.business.nj.gov/commit/31dbebc5d2475952efd8663c368ae91bfc46eabd))
+* **deps:** update material-ui ([8f0fa96](https://github.com/newjersey/navigator.business.nj.gov/commit/8f0fa96c6db54e873aeda3c80ddf36369d3f2df9))
+* passing dyanmo_port into serverless for feature-test script ([09f9046](https://github.com/newjersey/navigator.business.nj.gov/commit/09f904601f9d8773c5ea4169a2983d98b9946fb3))
+* spelling error ([af3ce72](https://github.com/newjersey/navigator.business.nj.gov/commit/af3ce72f1d75e4f782c4975c0479f8d85374726c))
+* updating General Config config ([#4538](https://github.com/newjersey/navigator.business.nj.gov/issues/4538)) ([c8792e8](https://github.com/newjersey/navigator.business.nj.gov/commit/c8792e8d8c026275954da89b7aadc52ad94831bc))
+* updating General Config config ([#4543](https://github.com/newjersey/navigator.business.nj.gov/issues/4543)) ([f763896](https://github.com/newjersey/navigator.business.nj.gov/commit/f763896b3f671975e0dea8d082387f01ec68ce37))
+* updating Profile Page profile-info-poppy ([#4548](https://github.com/newjersey/navigator.business.nj.gov/issues/4548)) ([db6c025](https://github.com/newjersey/navigator.business.nj.gov/commit/db6c0258295e23f4300f379213f86fb817955641))
+* updating Profile Page profile-numbers-poppy ([#4545](https://github.com/newjersey/navigator.business.nj.gov/issues/4545)) ([0e91c3d](https://github.com/newjersey/navigator.business.nj.gov/commit/0e91c3d51fb33f434dbd05f92f35b7957f211e23))
+* updating Roadmaps - Industries cannabis ([#4497](https://github.com/newjersey/navigator.business.nj.gov/issues/4497)) ([060a943](https://github.com/newjersey/navigator.business.nj.gov/commit/060a943e89fbed43e0719cedc6d3ec4b9579d91a))
+* updating Roadmaps - Industries cannabis ([#4498](https://github.com/newjersey/navigator.business.nj.gov/issues/4498)) ([3c417f6](https://github.com/newjersey/navigator.business.nj.gov/commit/3c417f6eeb4bf9b47dab7eb333fda7d9af3dfed0))
+* updating Roadmaps - Industries cannabis ([#4531](https://github.com/newjersey/navigator.business.nj.gov/issues/4531)) ([9d13135](https://github.com/newjersey/navigator.business.nj.gov/commit/9d1313544e255acacf8ecf2c9137cbe14ccaec80))
+* updating Roadmaps - Industries home-contractor ([#4518](https://github.com/newjersey/navigator.business.nj.gov/issues/4518)) ([b0b1c9e](https://github.com/newjersey/navigator.business.nj.gov/commit/b0b1c9e0b81b921a3fb3ca18fc7331f5a0c22f18))
+* updating Tasks - All cannabis-bank-account ([#4540](https://github.com/newjersey/navigator.business.nj.gov/issues/4540)) ([cc16440](https://github.com/newjersey/navigator.business.nj.gov/commit/cc164402c0cce5d0f7d4ebb827aed10c22241b8f))
+* updating Tasks - All cannabis-evaluate-location ([#4539](https://github.com/newjersey/navigator.business.nj.gov/issues/4539)) ([52703eb](https://github.com/newjersey/navigator.business.nj.gov/commit/52703eb70dda4face3c897285255ccdc07aa436b))
+* updating Tasks - All cannabis-sign-lease ([#4495](https://github.com/newjersey/navigator.business.nj.gov/issues/4495)) ([c6fd13f](https://github.com/newjersey/navigator.business.nj.gov/commit/c6fd13f96f51e9f2b20781b996108bd275e1189c))
+* updating Tasks - All cannabis-sign-lease ([#4541](https://github.com/newjersey/navigator.business.nj.gov/issues/4541)) ([34a84c6](https://github.com/newjersey/navigator.business.nj.gov/commit/34a84c6d043535d9fae57ef213cab58f8a1d3059))
+* updating Tasks - All healthcare-license ([92177dc](https://github.com/newjersey/navigator.business.nj.gov/commit/92177dcf42bf2ab9d2659bd8b34a4e12d20ac3c8))
+* updating Tasks - All zoning-cannabis ([#4509](https://github.com/newjersey/navigator.business.nj.gov/issues/4509)) ([d564e82](https://github.com/newjersey/navigator.business.nj.gov/commit/d564e8287ae3e51837d3455026c53b4a1caa2f92))
+* updating Tasks - All zoning-cannabis ([#4510](https://github.com/newjersey/navigator.business.nj.gov/issues/4510)) ([999746b](https://github.com/newjersey/navigator.business.nj.gov/commit/999746b86e7e7a45ba9e6f43c7ee664d7f13ba6e))
+* updating Tasks - All zoning-cannabis ([#4511](https://github.com/newjersey/navigator.business.nj.gov/issues/4511)) ([74f276f](https://github.com/newjersey/navigator.business.nj.gov/commit/74f276f02a4707fb11d79bd5ae506da9eaa1c21c))
+* updating Tasks - All zoning-cannabis ([#4517](https://github.com/newjersey/navigator.business.nj.gov/issues/4517)) ([9ef35a9](https://github.com/newjersey/navigator.business.nj.gov/commit/9ef35a9fdb84d4096068394187247b6bdad6ff1b))
+
+
+### Features
+
+* [[#182492643](https://github.com/newjersey/navigator.business.nj.gov/issues/182492643)] update display formatting of naics code ([3af82c6](https://github.com/newjersey/navigator.business.nj.gov/commit/3af82c619909c86b18af92ce09f826c28ee50788))
+* [[#183014824](https://github.com/newjersey/navigator.business.nj.gov/issues/183014824)] see taxes banner for up and running non sp/gp guests ([95dc7b6](https://github.com/newjersey/navigator.business.nj.gov/commit/95dc7b6d14aad20300b7e9eb6dd8cdd4d8afe265))
+* [[#183315372](https://github.com/newjersey/navigator.business.nj.gov/issues/183315372)] link naics codes descriptions to federal naics site ([6bd59f3](https://github.com/newjersey/navigator.business.nj.gov/commit/6bd59f38d07f600a21f221df588ddbbda2643516))
+* [[#183546596](https://github.com/newjersey/navigator.business.nj.gov/issues/183546596)] redirect user to review step if they cancel from payment ([0ba1803](https://github.com/newjersey/navigator.business.nj.gov/commit/0ba18033d35efeaf6baa85ed878e340f3065d8a4))
+
 # [5.6.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.5.0...v5.6.0) (2022-10-14)
 
 
