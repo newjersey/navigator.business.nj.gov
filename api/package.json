@@ -51,7 +51,7 @@
     "helmet": "6.0.0",
     "jsonwebtoken": "8.5.1",
     "lodash": "4.17.21",
-    "serverless-http": "3.0.3",
+    "serverless-http": "3.1.0",
     "simple-oauth2": "4.3.0",
     "uuid": "9.0.0",
     "winston": "3.8.2",
