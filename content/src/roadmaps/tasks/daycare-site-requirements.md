@@ -9,7 +9,7 @@ Your Daycare needs to be inspected and approved by your local government and the
 
 - - -
 
-### Certificate of Occupancy
+### State Requirements
 
 * [DCF’s licensing manual](https://www.nj.gov/dcf/providers/licensing/Understanding.Licensing.Packet.pdf) has site requirements based on the children's ages:  
 
@@ -19,9 +19,10 @@ Your Daycare needs to be inspected and approved by your local government and the
 
 [](https://www.nj.gov/dcf/providers/licensing/Understanding.Licensing.Packet.pdf)You can schedule a free preliminary inspection with their Office of Licensing at 1-877-667-9845.
 
-### Additional Site Requirements
+### Local Level Site Requirements
 
-* **Fire Prevention Permits:** Talk to your Fire Department to make sure your space meets requirements, like working sprinklers, extinguishers, and signage
+* **Certificate of Occupancy/Approval:
+* Fire Prevention Permits:** Talk to your Fire Department to make sure your space meets requirements, like working sprinklers, extinguishers, and signage
 * **Signage:** Speak to your local Zoning Office and Building/Construction Department to make sure the signage you're proposing is permitted
 * **Construction Permits:** Check with your local government's Building/Construction Department for any permit requirements prior to starting renovations. Find out the requirements for a construction permit at your site
 
