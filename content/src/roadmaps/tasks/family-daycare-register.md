@@ -7,16 +7,14 @@ callToActionLink: https://www.childcarenj.gov/Parents/CCRR
 callToActionText: Find My Referral Agency
 issuingAgency: New Jersey Department of Human Services Division of Family Development
 ---
-Register your Family Daycare business to ensure you’re in compliance with State rules and regulations and gain more credibility for your business. 
-
-Use the link below to identify your local agency. You'll need to speak with your local government for their specific registration forms and additional requirements.  
+Register your Family Daycare business with a Child Care Resource and Referral Agency to ensure you’re in compliance with State rules and regulations and gain more credibility for your business. 
 
 ---
-### Eligibility
-- 5 or fewer children under your care 
+### Eligibility Criteria
+- five or fewer children under your care 
 - Daycare Administrator:  
   - Bachelor's degree, or 
-  - 3 years of management experience in human services, child care services, child development, education, nursing, social work, or business
+  - three years of management experience in human services, child care services, child development, education, nursing, social work, or business
 - Staff:
   - Must be 18 years old at minimum  
   - Associate's degree in human services, child care services, child development, education, nursing or social work and one year of experience working with children, or 
@@ -24,7 +22,7 @@ Use the link below to identify your local agency. You'll need to speak with your
   - Three years of full-time experience in the fields of child development, education, nursing, or social work 
 - Read the [Family Daycare provider manual](https://www.nj.gov/dcf/providers/licensing/laws/FCCmanual.pdf) for a full list of home inspection requirements
 
-### Registration Requirements
+### Application Needs
 - Medical examination and Tuberculin Mantoux test results for all staff
 - Background check for staff and anyone over the age of 14 living in the Family Daycare 
 - Names and contact information for 2 people who can provide a character reference for the business owner
