@@ -23,15 +23,17 @@ county:
 sector: []
 openDate: ""
 dueDate: ""
+descriptionMd: The Sales and Use Tax Exemption Program allows qualified businesses to receive a sales tax exemption certificate for purchases related to the construction and renovation of a new business location.
 ---
-The Small Business Fund provides access to financing to credit-worthy small, minority-owned, and women-owned businesses and nonprofits in New Jersey.
 
-- - -
+The Sales and Use Tax Exemption Program allows qualified businesses to receive a sales tax exemption certificate for purchases related to the construction and renovation of a new business location.
+
+---
 
 ### Eligibility
 
-* Small businesses in operation for at least 1 full year and not-for-profits in operation for at least 3 full years
-* The business or nonprofit must not have more than $3M in total revenue
+- Small businesses in operation for at least 1 full year and not-for-profits in operation for at least 3 full years
+- The business or nonprofit must not have more than $3M in total revenue
 
 > **Benefits**
 >

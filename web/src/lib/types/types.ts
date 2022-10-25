@@ -174,6 +174,7 @@ export type Funding = {
   callToActionLink: string;
   callToActionText: string;
   contentMd: string;
+  descriptionMd: string;
   fundingType: FundingType;
   agency: OpportunityAgency[];
   publishStageArchive: FundingPublishStatus | null;
@@ -200,6 +201,7 @@ export type Certification = {
   callToActionLink: string;
   callToActionText: string;
   contentMd: string;
+  descriptionMd: string;
   agency: OpportunityAgency[];
   applicableOwnershipTypes: string[];
   isSbe: boolean;
@@ -210,6 +212,7 @@ export interface Opportunity {
   name: string;
   urlSlug: string;
   contentMd: string;
+  descriptionMd: string;
   dueDate?: string;
   status?: string;
 }

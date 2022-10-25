@@ -26,6 +26,7 @@ sector:
   - real-estate
 openDate: ""
 dueDate: ""
+descriptionMd: Aspire is a gap financing tool to support commercial, mixed-use, and residential real estate development projects. This tool replaces the Economic Redevelopment and Growth Grant (ERG).
 ---
 
 Aspire is a gap financing tool to support commercial, mixed-use, and residential real estate development projects. This tool replaces the Economic Redevelopment and Growth Grant (ERG).

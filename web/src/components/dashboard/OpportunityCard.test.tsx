@@ -48,7 +48,7 @@ describe("OpportunityCard", () => {
     const characters = Array(151).fill("a").join("");
     const expectedTextOnPage = `${Array(150).fill("a").join("")}...`;
 
-    const opportunity = generateOpportunity({ contentMd: characters });
+    const opportunity = generateOpportunity({ descriptionMd: characters });
     render(<OpportunityCard opportunity={opportunity} urlPath="funding" />);
     expect(screen.getByText(expectedTextOnPage)).toBeInTheDocument();
   });
@@ -57,7 +57,7 @@ describe("OpportunityCard", () => {
     const characters = Array(145).fill("a").join("");
     const boldContent = `${characters} *a bold text*`;
 
-    const opportunity = generateOpportunity({ contentMd: boldContent });
+    const opportunity = generateOpportunity({ descriptionMd: boldContent });
     render(<OpportunityCard opportunity={opportunity} urlPath="funding" />);
     expect(screen.getByText("a bo")).toBeInTheDocument();
   });
@@ -66,7 +66,7 @@ describe("OpportunityCard", () => {
     const characters = Array(145).fill("a").join("");
     const linkContent = `${characters} [a link text](www.example.com)`;
 
-    const opportunity = generateOpportunity({ contentMd: linkContent });
+    const opportunity = generateOpportunity({ descriptionMd: linkContent });
     render(<OpportunityCard opportunity={opportunity} urlPath="funding" />);
     expect(screen.getByText("a li")).toBeInTheDocument();
   });

@@ -24,6 +24,7 @@ sector:
   - construction
 openDate: ""
 dueDate: ""
+descriptionMd: This program offers a tax credit for historic, income-producing properties within the state of New Jersey. It's administered by the New Jersey Economic Development Authority in coordination with the New Jersey Historic Preservation Office and the New Jersey Division of Taxation in the Department of the Treasury.
 ---
 
 This program offers a tax credit for historic, income-producing properties within the state of New Jersey. It's administered by the New Jersey Economic Development Authority in coordination with the New Jersey Historic Preservation Office and the New Jersey Division of Taxation in the Department of the Treasury.

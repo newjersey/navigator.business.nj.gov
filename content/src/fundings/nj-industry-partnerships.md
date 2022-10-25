@@ -23,6 +23,7 @@ openDate: ""
 dueDate: ""
 programPurpose: ""
 agencyContact: ""
+descriptionMd: NJ Industry Partnerships can provide you with access to government resources, professional connections, and potential funding opportunities to help your business achieve its goals. The New Jersey Department of Labor, acting as a hub, will connect you with other local voices in your industry to address the economic and logistical needs of your operation.
 ---
 
 NJ Industry Partnerships can provide you with access to government resources, professional connections, and potential funding opportunities to help your business achieve its goals. The New Jersey Department of Labor, acting as a hub, will connect you with other local voices in your industry to address the economic and logistical needs of your operation.

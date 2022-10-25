@@ -24,6 +24,7 @@ sector:
   - manufacturing
 openDate: ""
 dueDate: ""
+descriptionMd: The Urban Enterprise Zone (UEZ) Manufacturers Energy Sales Tax Exemption provides manufacturers in UEZs a sales and use tax exemption for electricity and natural gas.
 ---
 
 The Urban Enterprise Zone (UEZ) Manufacturers Energy Sales Tax Exemption provides manufacturers in UEZs a sales and use tax exemption for electricity and natural gas.

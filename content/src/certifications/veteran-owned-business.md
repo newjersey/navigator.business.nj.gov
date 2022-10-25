@@ -8,10 +8,12 @@ applicableOwnershipTypes:
   - veteran-owned
   - disabled-veteran
 isSbe: false
+descriptionMd: "A `Veteran|veteran` -Owned Business (VOB) certification may not provide an advantage for New Jersey State contracts. Learn more about [government contracts](https://business.nj.gov/pages/contract-with-new-jersey)."
 ---
-*A `Veteran|veteran` *\-Owned Business (VOB) certification may not provide an advantage for New Jersey State contracts. Learn more about [government contracts](https://business.nj.gov/pages/contract-with-new-jersey)*.
 
-- - -
+_A `Veteran|veteran` _\-Owned Business (VOB) certification may not provide an advantage for New Jersey State contracts. Learn more about [government contracts](https://business.nj.gov/pages/contract-with-new-jersey)\*.
+
+---
 
 ### Eligibility Criteria
 
@@ -19,9 +21,9 @@ VOB is a business that has its principal place of business in the State of New J
 
 ### Application Needs
 
-* Proof of Honorable Discharge from the US Military form DD-214 for the majority of owner(s)
-* Proof of New Jersey residency for majority owner(s)
+- Proof of Honorable Discharge from the US Military form DD-214 for the majority of owner(s)
+- Proof of New Jersey residency for majority owner(s)
 
 > **After you complete this, you will have:**
 >
-> * Veteran-Owned Business certificate
+> - Veteran-Owned Business certificate
