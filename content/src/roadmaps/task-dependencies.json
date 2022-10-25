@@ -288,7 +288,7 @@
     {
       "name": "daycare-license",
       "dependencies": [
-        "form-business-entity"
+        "daycare-site-requirements"
       ]
     }
   ]
