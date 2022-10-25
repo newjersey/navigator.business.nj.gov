@@ -2673,6 +2673,7 @@ collections:
             summary: "{{filingDefaults}}"
             fields:
               - { label: Due Date Header, name: beforeDueDateText, widget: string }
+              - { label: Due Date Tool Tip, name: dueDateToolTip, widget: text }
               - { label: Issuing Agency Header, name: issuingAgencyText, widget: string }
               - { label: Form Id Header, name: formText, widget: string }
               - { label: Extension Tag Text, name: extensionTagText, widget: string }
