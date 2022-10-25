@@ -32,67 +32,15 @@
       ]
     },
     {
-      "name": "sign-lease",
-      "dependencies": [
-        "form-business-entity",
-        "form-business-entity-llc",
-        "register-for-taxes"
-      ]
-    },
-    {
-      "name": "get-insurance",
-      "dependencies": [
-        "form-business-entity",
-        "form-business-entity-llc",
-        "register-for-taxes"
-      ]
-    },
-    {
-      "name": "get-insurance-home-contractor",
-      "dependencies": [
-        "form-business-entity",
-        "form-business-entity-llc",
-        "register-for-taxes"
-      ]
-    },
-    {
       "name": "floor-plan-approval-doh",
       "dependencies": [
-        "form-business-entity",
-        "form-business-entity-llc",
         "sign-lease"
-      ]
-    },
-    {
-      "name": "home-health-aide-license",
-      "dependencies": [
-        "form-business-entity",
-        "form-business-entity-llc",
-        "register-for-taxes"
       ]
     },
     {
       "name": "individual-staff-licenses-health-aide",
       "dependencies": [
-        "form-business-entity",
-        "form-business-entity-llc",
         "home-health-aide-license"
-      ]
-    },
-    {
-      "name": "search-licenses",
-      "dependencies": [
-        "form-business-entity",
-        "form-business-entity-llc",
-        "register-for-taxes"
-      ]
-    },
-    {
-      "name": "search-licenses-employment-agency",
-      "dependencies": [
-        "form-business-entity",
-        "form-business-entity-llc",
-        "register-for-taxes"
       ]
     },
     {
@@ -105,7 +53,6 @@
     {
       "name": "town-mercantile-license-liquor",
       "dependencies": [
-        "register-for-taxes",
         "sign-lease",
         "liquor-license-availability"
       ]
@@ -114,14 +61,6 @@
       "name": "zoning",
       "dependencies": [
         "sign-lease"
-      ]
-    },
-    {
-      "name": "sign-lease-food-truck",
-      "dependencies": [
-        "form-business-entity",
-        "form-business-entity-llc",
-        "register-for-taxes"
       ]
     },
     {
