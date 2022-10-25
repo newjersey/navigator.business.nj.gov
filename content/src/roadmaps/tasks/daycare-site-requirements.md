@@ -19,7 +19,7 @@ Your Daycare space needs to be inspected and approved by your local government a
 
 [](https://www.nj.gov/dcf/providers/licensing/Understanding.Licensing.Packet.pdf)You can schedule a free preliminary inspection with their Office of Licensing at 1-877-667-9845.
 
-### Safety Permits
+### Additional Site Requirements
 
 * **Fire Prevention Permits:** Talk to your Fire Department to make sure your space meets requirements, like working sprinklers, extinguishers, and signage
 * **Signage:** Speak to your local Zoning Office and Building/Construction Department to make sure the signage you're proposing is permitted
