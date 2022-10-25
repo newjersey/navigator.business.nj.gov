@@ -10,11 +10,6 @@
     },
     {
       "step": 1,
-      "weight": 2,
-      "task": "daycare-evaluate-location"
-    },
-    {
-      "step": 1,
       "weight": 30,
       "task": "determine-naics-code"
     },
@@ -37,21 +32,12 @@
       "step": 3,
       "weight": 15,
       "task": "get-insurance"
-    },
-    {
-      "step": 3,
-      "weight": 17,
-      "task": "daycare-site-requirements"
-    },
-    {
-      "step": 3,
-      "weight": 20,
-      "task": "daycare-license"
     }
   ],
   "name": "Childcare Center",
   "industryOnboardingQuestions": {
-    "canBeReseller": true
+    "canBeReseller": true,
+    "isChildcareForSixOrMore": true
   },
   "isEnabled": true,
   "additionalSearchTerms": "daycare, childcare, after school program",

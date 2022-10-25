@@ -648,6 +648,10 @@ collections:
             name: isInterstateTransportApplicable
             widget: boolean
             required: false
+          - label: Childcare Services
+            name: isChildcareForSixOrMore
+            widget: boolean
+            required: false
       - label: Roadmap Steps
         name: roadmapSteps
         widget: list
@@ -3813,6 +3817,15 @@ collections:
                       - { label: "Description", name: "description", widget: "markdown" }
                   - label: Logistics Company
                     name: interstateLogistics
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "Radio Button Yes Text", name: "radioButtonYesText", widget: "string" }
+                      - { label: "Radio Button No Text", name: "radioButtonNoText", widget: "string" }
+                      - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Childcare Services
+                    name: childcareServices
                     collapsed: true
                     widget: object
                     fields:
