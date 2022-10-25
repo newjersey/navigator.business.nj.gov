@@ -5,6 +5,7 @@ import { generateProfileData, generateTaxFiling, generateTaxFilingData } from "@
 import { randomElementFromArray } from "@/test/helpers";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
 import { getCurrentDate, randomInt } from "@businessnjgovnavigator/shared";
+import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -14,6 +15,14 @@ describe("filing page", () => {
   beforeEach(() => {
     jest.resetAllMocks();
   });
+
+  const renderFilingPage = (filing: Filing) => {
+    render(
+      <ThemeProvider theme={createTheme()}>
+        <FilingPage filing={filing} />
+      </ThemeProvider>
+    );
+  };
 
   const generateFiling = (overrides: Partial<Filing>): Filing => {
     const id = randomInt(4);
@@ -64,7 +73,7 @@ describe("filing page", () => {
       agency: undefined,
     });
 
-    render(<FilingPage filing={filing} />);
+    renderFilingPage(filing);
 
     expect(screen.getByText("filing-name-1")).toBeInTheDocument();
     expect(screen.getByText("cta-text-1")).toBeInTheDocument();
@@ -100,7 +109,7 @@ describe("filing page", () => {
       agency: "New Jersey Division of Taxation",
     });
 
-    render(<FilingPage filing={filing} />);
+    renderFilingPage(filing);
 
     expect(screen.getByText(Config.filingDefaults.paperOrMailOnlyTaxFilingMethod)).toBeInTheDocument();
     expect(screen.getByText("every day, all day")).toBeInTheDocument();
@@ -128,7 +137,7 @@ describe("filing page", () => {
       agency: "Internal Revenue Service (IRS)",
     });
 
-    render(<FilingPage filing={filing} />);
+    renderFilingPage(filing);
     expect(screen.queryByTestId("late-filing")).not.toBeInTheDocument();
   });
 
@@ -177,9 +186,26 @@ describe("filing page", () => {
       agency: "Internal Revenue Service (IRS)",
     });
 
-    render(<FilingPage filing={filing} />);
+    renderFilingPage(filing);
     expect(screen.getByTestId("due-date")).toHaveTextContent(
       closestDate.format("MMMM D, YYYY").toUpperCase()
     );
+  });
+
+  it("contains a tooltip with a note regarding filing date in the annual report", async () => {
+    useMockUserData({
+      taxFilingData: generateTaxFilingData({
+        filings: [generateTaxFiling({ identifier: "annual-report" })],
+      }),
+    });
+
+    const filing: Filing = generateFiling({
+      urlSlug: "annual-report",
+    });
+
+    renderFilingPage(filing);
+    expect(screen.getByTestId("due-date-tooltip")).toBeInTheDocument();
+    fireEvent.mouseOver(screen.getByTestId("due-date-tooltip"));
+    await screen.findByText(Config.filingDefaults.dueDateToolTip);
   });
 });
