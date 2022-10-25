@@ -5,7 +5,7 @@ name: Obtain a Certificate of Occupancy and Other Site Safety Permits
 id: daycare-site-requirements
 required: true
 ---
-Your Daycare space needs to be inspected and approved by your local government and the New Jersey Department of Children and Families (DCF) to verify that it's safe for customers and employees.
+Your Daycare needs to be inspected and approved by your local government and the New Jersey Department of Children and Families (DCF) to verify that it's safe for customers and employees.
 
 - - -
 
