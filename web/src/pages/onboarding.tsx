@@ -251,7 +251,7 @@ const OnboardingPage = (props: Props): ReactElement => {
       setCurrentFlow(getFlow(profileData));
     }
 
-    const currentPage = onboardingFlows[currentFlow].pages[page.current];
+    const currentPage = onboardingFlows[currentFlow].pages[page.current - 1];
     sendOnboardingOnSubmitEvents(newProfileData, currentPage?.name);
     setAnalyticsDimensions(newProfileData);
     setAlert(undefined);
