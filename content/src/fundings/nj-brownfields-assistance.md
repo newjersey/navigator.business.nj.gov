@@ -23,6 +23,7 @@ county:
 sector: []
 openDate: ""
 dueDate: ""
+descriptionMd: The NJ Brownfields Assistance Center provides free guidance, tools, and resources to New Jersey county and municipal governments interested in redeveloping and reclaiming brownfield sites.
 ---
 
 The NJ Brownfields Assistance Center provides free guidance, tools, and resources to New Jersey county and municipal governments interested in redeveloping and reclaiming brownfield sites.

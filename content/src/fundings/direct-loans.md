@@ -23,14 +23,16 @@ county:
 sector: []
 openDate: ""
 dueDate: ""
+descriptionMd: New Jersey businesses committed to job creation or retention may be eligible for direct loans through the New Jersey Economic Development Authority (NJEDA) when conventional financing is not available.
 ---
+
 New Jersey businesses committed to job creation or retention may be eligible for direct loans through the New Jersey Economic Development Authority (NJEDA) when conventional financing is not available.
 
-- - -
+---
 
 ### Eligibility
 
-* Businesses must commit to creating or maintaining 1 job for every $65,000 of assistance. There is an application fee of $1,000
+- Businesses must commit to creating or maintaining 1 job for every $65,000 of assistance. There is an application fee of $1,000
 
 > **Benefits**
 >

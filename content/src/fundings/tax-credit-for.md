@@ -23,6 +23,7 @@ county:
 sector: []
 openDate: ""
 dueDate: ""
+descriptionMd: The Work Opportunity tax credit program is a Federal tax credit for businesses who hire and retain veterans and individuals from other target groups with significant barriers to employment such as qualified TANF recipients, qualified veterans, qualified ex-felons, designated community residents, vocational rehabilitation referrals, recipient of SNAP benefits (food stamps), Supplemental Security Income (SSI) recipients, long-term family assistance recipients, and qualified long-term unemployment recipients.
 ---
 
 The Work Opportunity tax credit program is a Federal tax credit for businesses who hire and retain veterans and individuals from other target groups with significant barriers to employment such as qualified TANF recipients, qualified veterans, qualified ex-felons, designated community residents, vocational rehabilitation referrals, recipient of SNAP benefits (food stamps), Supplemental Security Income (SSI) recipients, long-term family assistance recipients, and qualified long-term unemployment recipients.

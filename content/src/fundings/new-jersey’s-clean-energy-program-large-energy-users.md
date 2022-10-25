@@ -28,6 +28,7 @@ sector:
   - manufacturing
 openDate: ""
 dueDate: ""
+descriptionMd: The Large Energy Users Program (LEUP) encourages large commercial and industrial utility customers that have facilities in New Jersey to to upgrade or install energy conserving measures in existing buildings and to help offset these capital costs. These efficiency upgrades are customized to meet the requirements of the customers’ existing facilities, while advancing the State’s energy efficiency, conservation, and greenhouse gas reduction goals.
 ---
 
 The Large Energy Users Program (LEUP) encourages large commercial and industrial utility customers that have facilities in New Jersey to to upgrade or install energy conserving measures in existing buildings and to help offset these capital costs. These efficiency upgrades are customized to meet the requirements of the customers’ existing facilities, while advancing the State’s energy efficiency, conservation, and greenhouse gas reduction goals.

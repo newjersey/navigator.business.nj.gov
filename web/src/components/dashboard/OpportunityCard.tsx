@@ -29,7 +29,7 @@ const MAX_CONTENT_CHARS = 150;
 export const OpportunityCard = (props: Props): ReactElement => {
   const { userData, update } = useUserData();
 
-  const truncatedMd = truncateMarkdown(props.opportunity.contentMd, {
+  const truncatedMd = truncateMarkdown(props.opportunity.descriptionMd, {
     limit: MAX_CONTENT_CHARS,
     ellipsis: true,
   });

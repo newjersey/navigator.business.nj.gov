@@ -27,16 +27,18 @@ sector:
   - clean-energy
 openDate: ""
 dueDate: ""
+descriptionMd: The Residential New Construction (RNC) Program is designed to increase the energy efficiency and environmental performance of residential new construction buildings (single and multifamily) in New Jersey by offering technical support and incentives to builders that comply with these standards.
 ---
-The Residential New Construction (RNC) Program is designed to increase the energy efficiency and environmental performance of residential new construction buildings (single and multifamily) in New Jersey by offering technical support and incentives to builders that comply with these standards. 
 
-- - -
+The Residential New Construction (RNC) Program is designed to increase the energy efficiency and environmental performance of residential new construction buildings (single and multifamily) in New Jersey by offering technical support and incentives to builders that comply with these standards.
+
+---
 
 ### Eligibility
 
-* Must use natural gas and/or electricity as the primary heating fuel supplied by a New Jersey investor‐owned utility
-* Must be newly constructed single family, multi‐single low‐rise, and high‐rise multifamily buildings
-* Existing homes undergoing `substantial renovation|substantial-renovation` or remodeling that meets the criteria above
+- Must use natural gas and/or electricity as the primary heating fuel supplied by a New Jersey investor‐owned utility
+- Must be newly constructed single family, multi‐single low‐rise, and high‐rise multifamily buildings
+- Existing homes undergoing `substantial renovation|substantial-renovation` or remodeling that meets the criteria above
 
 > ### Benefits
 >

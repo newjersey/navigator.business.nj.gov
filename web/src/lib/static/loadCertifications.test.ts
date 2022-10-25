@@ -27,6 +27,7 @@ describe("loadFundings", () => {
         'callToActionText: "Click here 1"\n' +
         "agency:\n" +
         "  - NJEDA\n" +
+        'descriptionMd: "*some cool* description"\n' +
         "---\n" +
         "Some content description 1";
 
@@ -55,6 +56,7 @@ describe("loadFundings", () => {
             callToActionLink: "https://www.example.com/1",
             callToActionText: "Click here 1",
             contentMd: "Some content description 1",
+            descriptionMd: "*some cool* description",
             agency: ["NJEDA"],
           },
           {
@@ -65,6 +67,7 @@ describe("loadFundings", () => {
             callToActionLink: "https://www.example.com/2",
             callToActionText: "Click here 2",
             contentMd: "Some content description 2",
+            descriptionMd: "",
           },
         ])
       );
@@ -145,6 +148,7 @@ describe("loadFundings", () => {
         callToActionLink: "https://www.example.com/2",
         callToActionText: "Click here 2",
         contentMd: "Some content description 2",
+        descriptionMd: "",
       });
     });
   });
