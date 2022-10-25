@@ -595,7 +595,7 @@
     "errorTextUpdateFailed": "Something went wrong with your request. Please try again later."
   },
   "reportAnIssueBar": {
-    "reportAnIssueBarText": "Report an issue."
+    "reportAnIssueBarText": "Report something that is broken."
   },
   "footer": {
     "creditLinkText": "Open Source",
