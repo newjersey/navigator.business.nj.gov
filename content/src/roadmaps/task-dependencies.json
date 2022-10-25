@@ -125,28 +125,9 @@
       ]
     },
     {
-      "name": "apply-for-food-truck-license",
-      "dependencies": [
-        "form-business-entity",
-        "form-business-entity-llc",
-        "register-for-taxes"
-      ]
-    },
-    {
       "name": "logisticare",
       "dependencies": [
-        "form-business-entity",
-        "form-business-entity-llc",
-        "register-for-taxes",
         "register-vehicle"
-      ]
-    },
-    {
-      "name": "search-licenses-retail",
-      "dependencies": [
-        "form-business-entity",
-        "form-business-entity-llc",
-        "register-for-taxes"
       ]
     },
     {
@@ -180,14 +161,6 @@
       ]
     },
     {
-      "name": "license-accounting",
-      "dependencies": [
-        "form-business-entity",
-        "form-business-entity-llc",
-        "register-for-taxes"
-      ]
-    },
-    {
       "name": "conversion-license-cannabis",
       "dependencies": [
         "zoning-cannabis",
@@ -205,12 +178,6 @@
       "name": "conditional-permit-cannabis",
       "dependencies": [
         "priority-status-cannabis"
-      ]
-    },
-    {
-      "name": "trucking-usdot",
-      "dependencies": [
-        "register-for-taxes"
       ]
     },
     {
@@ -250,27 +217,9 @@
       ]
     },
     {
-      "name": "daycare-license",
-      "dependencies": [
-        "register-for-taxes"
-      ]
-    },
-    {
-      "name": "moving-company-license",
-      "dependencies": [
-        "form-business-entity"
-      ]
-    },
-    {
       "name": "bus-inspection",
       "dependencies": [
         "school-bus-insurance"
-      ]
-    },
-    {
-      "name": "transportation-entity-id",
-      "dependencies": [
-        "form-business-entity"
       ]
     },
     {
