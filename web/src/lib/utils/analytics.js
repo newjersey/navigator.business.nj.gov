@@ -783,5 +783,12 @@ export default {
         },
       },
     },
+    formation_nudge_button: {
+      click: {
+        show_formation_date_modal: () => {
+          sendEvent("formation_nudge_button", "click", "show_formation_date_modal");
+        },
+      },
+    },
   },
 };

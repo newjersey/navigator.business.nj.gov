@@ -2,6 +2,7 @@ import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { QUERIES, routeShallowWithQuery } from "@/lib/domain-logic/routes";
 import { SidebarCardContent } from "@/lib/types/types";
+import analytics from "@/lib/utils/analytics";
 import { formationTaskId } from "@businessnjgovnavigator/shared/";
 import { useRouter } from "next/router";
 import { ReactElement, useState } from "react";
@@ -28,6 +29,7 @@ export const SidebarCardFormationNudge = (props: Props): ReactElement => {
   const onClick = async () => {
     if (!userData) return;
     setModalOpen(true);
+    analytics.event.formation_nudge_button.click.show_formation_date_modal();
   };
 
   return (
