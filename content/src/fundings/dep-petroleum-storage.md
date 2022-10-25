@@ -27,6 +27,7 @@ sector:
   - utilities
 openDate: ""
 dueDate: ""
+descriptionMd: The Underground Storage Tank Fund (UST) provides financial assistance in the form of loans and grants to eligible owners and operators for the closure and remediation of discharges from unregulated petroleum underground storage tanks, and for the closure and remediation of State-regulated petroleum underground storage tanks.
 ---
 
 The Underground Storage Tank Fund (UST) provides financial assistance in the form of loans and grants to eligible owners and operators for the closure and remediation of discharges from unregulated petroleum underground storage tanks, and for the closure and remediation of State-regulated petroleum underground storage tanks.

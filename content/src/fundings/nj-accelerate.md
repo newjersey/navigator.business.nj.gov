@@ -25,6 +25,7 @@ sector:
   - life-sciences
 openDate: ""
 dueDate: ""
+descriptionMd: NJ Accelerate supports accelerator programs and their graduate companies. Incentivizes graduate companies to locate and grow in New Jersey.
 ---
 
 NJ Accelerate supports accelerator programs and their graduate companies. Incentivizes graduate companies to locate and grow in New Jersey.

@@ -27,15 +27,17 @@ sector:
   - other-services
 openDate: 07/25/2022
 dueDate: 10/31/2022
+descriptionMd: The Electric Vehicle (EV) Tourism Program is offering incentives to promote electric vehicle adoption and tourism through investment in EV chargers at key New Jersey tourism sites, landmarks, and other `Tourism Areas|tourism-areas` .
 ---
+
 The Electric Vehicle (EV) Tourism Program is offering incentives to promote electric vehicle adoption and tourism through investment in EV chargers at key New Jersey tourism sites, landmarks, and other `Tourism Areas|tourism-areas` .
 
-- - -
+---
 
 ### Eligibility
 
-* Eligible applicant include, but are not limited to those situated in locations which offer amusement, arts, culture, attractions, dining, entertainment, history, outdoor recreation, overnight lodging, and shopping
-* The scoring rubric used by the program can be found on the [New Jersey Clean Energy Program website](https://njcleanenergy.com/ev)
+- Eligible applicant include, but are not limited to those situated in locations which offer amusement, arts, culture, attractions, dining, entertainment, history, outdoor recreation, overnight lodging, and shopping
+- The scoring rubric used by the program can be found on the [New Jersey Clean Energy Program website](https://njcleanenergy.com/ev)
 
 > **Benefits**
 >

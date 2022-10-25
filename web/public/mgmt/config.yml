@@ -209,6 +209,7 @@ collections:
     editor:
       preview: true
     fields:
+      - { label: "Description", name: "descriptionMd", widget: "markdown" }
       - { label: "Content", name: "body", widget: "markdown" }
       - { label: "Url Slug / Filename", name: "urlSlug", widget: "slug" }
       - { label: "Name", name: "name", widget: "string" }
@@ -243,6 +244,7 @@ collections:
     editor:
       preview: true
     fields:
+      - { label: "Description", name: "descriptionMd", widget: "markdown" }
       - { label: "Content", name: "body", widget: "markdown" }
       - { label: "Url Slug / Filename", name: "urlSlug", widget: "slug" }
       - { label: "Name", name: "name", widget: "string" }
@@ -303,6 +305,7 @@ collections:
           default: "",
           format: "MM/DD/yyyy",
         }
+      - { label: "Description", name: "descriptionMd", widget: "markdown" }
       - { label: "Content", name: "body", widget: "markdown" }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
       - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
@@ -442,6 +445,7 @@ collections:
           default: "",
           format: "MM/DD/yyyy",
         }
+      - { label: "Description", name: "descriptionMd", widget: "markdown" }
       - { label: "Content", name: "body", widget: "markdown" }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
       - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }

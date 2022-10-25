@@ -22,6 +22,7 @@ county:
 sector: []
 openDate: 10/07/2022
 dueDate: 11/10/2022
+descriptionMd: The mission of the Youth Transitions to Work (YTTW) program is to recruit, screen, and facilitate effective transitions of high school juniors, seniors, and Out of School Youth (ages 16-24) to high-skill, high-wage employment in labor demand occupations.
 ---
 
 The mission of the Youth Transitions to Work (YTTW) program is to recruit, screen, and facilitate effective transitions of high school juniors, seniors, and Out of School Youth (ages 16-24) to high-skill, high-wage employment in labor demand occupations.

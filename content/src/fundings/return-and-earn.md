@@ -23,6 +23,7 @@ county:
 sector: []
 openDate: ""
 dueDate: ""
+descriptionMd: The Return and Earn program is a grant for employers who hire unemployed workers, train them, and provide those workers with a new skill required for the job.
 ---
 
 The Return and Earn program is a grant for employers who hire unemployed workers, train them, and provide those workers with a new skill required for the job.

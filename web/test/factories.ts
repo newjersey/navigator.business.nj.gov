@@ -561,6 +561,7 @@ export const generateFunding = (overrides: Partial<Funding>): Funding => {
     callToActionLink: `some-cta-link-${randomInt()}`,
     callToActionText: `some-cta-text-${randomInt()}`,
     contentMd: `some-content-${randomInt()}`,
+    descriptionMd: `some-description-${randomInt()}`,
     fundingType: randomFundingType(),
     agency: [randomInt() % 2 ? "NJEDA" : "NJDOL"],
     publishStageArchive: null,
@@ -590,6 +591,7 @@ export const generateCertification = (overrides: Partial<Certification>): Certif
     callToActionLink: `some-cta-link-${randomInt()}`,
     callToActionText: `some-cta-text-${randomInt()}`,
     contentMd: `some-content-${randomInt()}`,
+    descriptionMd: `some-description-${randomInt()}`,
     agency: [randomInt() % 2 ? "NJEDA" : "NJDOL"],
     applicableOwnershipTypes: [randomOwnershipType().id],
     isSbe: false,
@@ -603,6 +605,7 @@ export const generateOpportunity = (overrides: Partial<Opportunity>): Opportunit
     name: `some-name-${randomInt()}`,
     urlSlug: `some-url-slug-${randomInt()}`,
     contentMd: `some-content-${randomInt()}`,
+    descriptionMd: `some-description-${randomInt()}`,
     ...overrides,
   };
 };

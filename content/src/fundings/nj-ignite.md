@@ -27,6 +27,7 @@ sector:
   - other-services
 openDate: ""
 dueDate: ""
+descriptionMd: NJ Ignite provides rent support for technology startups that are moving to an approved collaborative workspace.
 ---
 
 NJ Ignite provides rent support for technology startups that are moving to an approved collaborative workspace.

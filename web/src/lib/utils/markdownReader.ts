@@ -56,6 +56,7 @@ export const convertFundingMd = (oppMdContents: string, filename: string): Fundi
     contentMd: matterResult.content,
     filename: filename,
     ...oppGrayMatter,
+    descriptionMd: oppGrayMatter.descriptionMd ?? "",
   };
 };
 
@@ -67,6 +68,7 @@ export const convertCertificationMd = (mdContents: string, filename: string): Ce
     contentMd: matterResult.content,
     filename: filename,
     ...grayMatter,
+    descriptionMd: grayMatter.descriptionMd ?? "",
   };
 };
 
@@ -133,6 +135,7 @@ type FundingGrayMatter = {
   sector: string[];
   programPurpose: string;
   agencyContact: string;
+  descriptionMd: string;
 };
 
 type CertificationGrayMatter = {
@@ -144,6 +147,7 @@ type CertificationGrayMatter = {
   agency: OpportunityAgency[];
   applicableOwnershipTypes: string[];
   isSbe: boolean;
+  descriptionMd: string;
 };
 
 export type MarkdownResult = {
