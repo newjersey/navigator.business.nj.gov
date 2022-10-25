@@ -26,6 +26,7 @@ interface IndustryOnboardingQuestions {
   readonly isTransportation?: boolean;
   readonly isCarServiceApplicable?: boolean;
   readonly isInterstateTransportApplicable?: boolean;
+  readonly isChildcareForSixOrMore?: boolean;
 }
 
 export interface AddOn {
@@ -60,6 +61,7 @@ export const LookupIndustryById = (id: string | undefined): Industry => {
         isTransportation: undefined,
         isCarServiceApplicable: undefined,
         isInterstateTransportApplicable: undefined,
+        isChildcareForSixOrMore: undefined,
       },
     }
   );

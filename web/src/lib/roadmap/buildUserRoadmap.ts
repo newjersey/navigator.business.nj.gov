@@ -12,6 +12,7 @@ import {
   ProfileData,
 } from "@businessnjgovnavigator/shared/";
 import { isCarServiceApplicable } from "../domain-logic/isCarServiceApplicable";
+import { isChildcareForSixOrMoreApplicable } from "../domain-logic/isChildcareForSixOrMoreApplicable";
 import { isInterstateTransportApplicable } from "../domain-logic/isInterstateTransportApplicable";
 
 const enableFormation = (legalStructureId: string): boolean => {
@@ -152,6 +153,14 @@ const getIndustryBasedAddOns = (profileData: ProfileData, industryId: string | u
   }
   if (isInterstateTransportApplicable(industryId) && profileData.interstateTransport) {
     addOns.push("interstate-transport");
+  }
+
+  if (isChildcareForSixOrMoreApplicable(industryId)) {
+    if (profileData.isChildcareForSixOrMore) {
+      addOns.push("daycare");
+    } else {
+      addOns.push("family-daycare");
+    }
   }
 
   if (industry.industryOnboardingQuestions.canBeReseller) {

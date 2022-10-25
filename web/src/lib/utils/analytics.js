@@ -773,5 +773,15 @@ export default {
         },
       },
     },
+    onboarding_childcare_business_question: {
+      submit: {
+        yes_more_than_6_children: () => {
+          sendEvent("onboarding_childcare_business_question", "submit", "yes_more_than_6_children");
+        },
+        no_5_or_fewer_children: () => {
+          sendEvent("onboarding_childcare_business_question", "submit", "no_5_or_fewer_children");
+        },
+      },
+    },
   },
 };

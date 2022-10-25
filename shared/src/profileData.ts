@@ -19,6 +19,7 @@ export interface IndustrySpecificData {
   readonly constructionRenovationPlan: boolean | undefined;
   readonly carService: CarServiceType | undefined;
   readonly interstateTransport: boolean;
+  readonly isChildcareForSixOrMore: boolean | undefined;
 }
 
 export const emptyIndustrySpecificData: IndustrySpecificData = {
@@ -33,6 +34,7 @@ export const emptyIndustrySpecificData: IndustrySpecificData = {
   realEstateAppraisalManagement: false,
   carService: undefined,
   interstateTransport: false,
+  isChildcareForSixOrMore: undefined,
 };
 
 export interface ProfileData extends IndustrySpecificData {

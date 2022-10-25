@@ -1,3 +1,4 @@
+import { randomInt } from "@shared/intHelpers";
 import { v91UserData } from "./v91_consolidate_section_type";
 
 export interface v92UserData {
@@ -316,3 +317,149 @@ type v92GetFilingResponse = {
 };
 
 // ---------------- v92 factories ----------------
+
+export const generatev92User = (overrides: Partial<v92BusinessUser>): v92BusinessUser => {
+  return {
+    name: `some-name-${randomInt()}`,
+    email: `some-email-${randomInt()}@example.com`,
+    id: `some-id-${randomInt()}`,
+    receiveNewsletter: false,
+    userTesting: false,
+    externalStatus: {},
+    myNJUserKey: undefined,
+    intercomHash: undefined,
+    abExperience: "ExperienceA",
+    ...overrides,
+  };
+};
+
+export const createEmptyv92FormationFormData = (): v92FormationFormData => {
+  return {
+    businessName: "",
+    businessSuffix: undefined,
+    businessTotalStock: "",
+    businessStartDate: "",
+    businessAddressCity: undefined,
+    businessAddressLine1: "",
+    businessAddressLine2: "",
+    businessAddressState: "NJ",
+    businessAddressZipCode: "",
+    businessPurpose: "",
+    provisions: [],
+    agentNumberOrManual: "NUMBER",
+    agentNumber: "",
+    agentName: "",
+    agentEmail: "",
+    agentOfficeAddressLine1: "",
+    agentOfficeAddressLine2: "",
+    agentOfficeAddressCity: "",
+    agentOfficeAddressState: "NJ",
+    agentOfficeAddressZipCode: "",
+    agentUseAccountInfo: false,
+    agentUseBusinessAddress: false,
+    members: [],
+    signers: [],
+    paymentType: undefined,
+    annualReportNotification: true,
+    corpWatchNotification: true,
+    officialFormationDocument: true,
+    certificateOfStanding: false,
+    certifiedCopyOfFormationDocument: false,
+    contactFirstName: "",
+    contactLastName: "",
+    contactPhoneNumber: "",
+  };
+};
+
+export const generatev92IndustrySpecificData = (
+  overrides: Partial<v92IndustrySpecificData>
+): v92IndustrySpecificData => {
+  return {
+    liquorLicense: false,
+    requiresCpa: false,
+    homeBasedBusiness: false,
+    cannabisLicenseType: undefined,
+    cannabisMicrobusiness: undefined,
+    constructionRenovationPlan: undefined,
+    providesStaffingService: false,
+    certifiedInteriorDesigner: false,
+    realEstateAppraisalManagement: false,
+    carService: undefined,
+    interstateTransport: false,
+    ...overrides,
+  };
+};
+
+export const generatev92ProfileData = (overrides: Partial<v92ProfileData>): v92ProfileData => {
+  const id = `some-id-${randomInt()}`;
+  const persona = randomInt() % 2 ? "STARTING" : "OWNING";
+  return {
+    ...generatev92IndustrySpecificData({}),
+    businessPersona: persona,
+    businessName: `some-business-name-${randomInt()}`,
+    industryId: "restaurant",
+    legalStructureId: "limited-liability-partnership",
+    municipality: {
+      name: `some-name-${randomInt()}`,
+      displayName: `some-display-name-${randomInt()}`,
+      county: `some-county-${randomInt()}`,
+      id: `some-id-${randomInt()}`,
+    },
+    dateOfFormation: undefined,
+    entityId: randomInt(10).toString(),
+    employerId: randomInt(9).toString(),
+    taxId: randomInt() % 2 ? randomInt(9).toString() : randomInt(12).toString(),
+    notes: `some-notes-${randomInt()}`,
+    ownershipTypeIds: [],
+    documents: {
+      certifiedDoc: `${id}/certifiedDoc-${randomInt()}.pdf`,
+      formationDoc: `${id}/formationDoc-${randomInt()}.pdf`,
+      standingDoc: `${id}/standingDoc-${randomInt()}.pdf`,
+    },
+    existingEmployees: randomInt(7).toString(),
+    taxPin: randomInt(4).toString(),
+    sectorId: undefined,
+    naicsCode: randomInt(6).toString(),
+    foreignBusinessType: undefined,
+    foreignBusinessTypeIds: [],
+    nexusDbaName: undefined,
+    nexusLocationInNewJersey: undefined,
+    operatingPhase: "NEEDS_TO_FORM",
+    ...overrides,
+  };
+};
+
+export const v92UserDataGenerator = (overrides: Partial<v92ProfileData>): v92UserData => {
+  return {
+    version: 92,
+    user: generatev92User({}),
+    profileData: generatev92ProfileData(overrides),
+    formProgress: "UNSTARTED",
+    taskProgress: {},
+    taskItemChecklist: {},
+    licenseData: undefined,
+    preferences: {
+      roadmapOpenSections: ["PLAN", "START"],
+      roadmapOpenSteps: [],
+      hiddenCertificationIds: [],
+      hiddenFundingIds: [],
+      visibleSidebarCards: ["welcome"],
+      returnToLink: "",
+      isCalendarFullView: true,
+      isHideableRoadmapOpen: false,
+    },
+    taxFilingData: {
+      state: undefined,
+      businessName: undefined,
+      lastUpdatedISO: undefined,
+      registered: false,
+      filings: [],
+    },
+    formationData: {
+      formationFormData: createEmptyv92FormationFormData(),
+      formationResponse: undefined,
+      getFilingResponse: undefined,
+      completedFilingPayment: false,
+    },
+  };
+};

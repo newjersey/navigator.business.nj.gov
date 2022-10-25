@@ -69,6 +69,12 @@
         "radioButtonFalseText": "No",
         "header": "Driving Across State Lines",
         "description": "Will you be driving your commercial vehicle across state lines?"
+      },
+      "isChildcareForSixOrMore": {
+        "radioButtonTrueText": "Yes",
+        "radioButtonFalseText": "No",
+        "header": "Childcare Services",
+        "description": "Do you provide childcare services for 6 or more children in a dedicated space?"
       }
     }
   }
