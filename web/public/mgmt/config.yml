@@ -3807,13 +3807,13 @@ collections:
                       - { label: "Radio Button No Text", name: "radioButtonFalseText", widget: "string" }
                       - { label: "Description", name: "description", widget: "markdown" }
                   - label: Moving Company
-                    name: interstateTransport
+                    name: interstateMoving
                     collapsed: true
                     widget: object
                     fields:
                       - { label: "Header", name: "header", widget: "string" }
-                      - { label: "Radio Button Yes Text", name: "radioButtonYesText", widget: "string" }
-                      - { label: "Radio Button No Text", name: "radioButtonNoText", widget: "string" }
+                      - { label: "Radio Button Yes Text", name: "radioButtonTrueText", widget: "string" }
+                      - { label: "Radio Button No Text", name: "radioButtonFalseText", widget: "string" }
                       - { label: "Description", name: "description", widget: "markdown" }
                   - label: Logistics Company
                     name: interstateLogistics
@@ -3821,17 +3821,17 @@ collections:
                     widget: object
                     fields:
                       - { label: "Header", name: "header", widget: "string" }
-                      - { label: "Radio Button Yes Text", name: "radioButtonYesText", widget: "string" }
-                      - { label: "Radio Button No Text", name: "radioButtonNoText", widget: "string" }
+                      - { label: "Radio Button Yes Text", name: "radioButtonTrueText", widget: "string" }
+                      - { label: "Radio Button No Text", name: "radioButtonFalseText", widget: "string" }
                       - { label: "Description", name: "description", widget: "markdown" }
                   - label: Childcare Services
-                    name: childcareServices
+                    name: isChildcareForSixOrMore
                     collapsed: true
                     widget: object
                     fields:
                       - { label: "Header", name: "header", widget: "string" }
-                      - { label: "Radio Button Yes Text", name: "radioButtonYesText", widget: "string" }
-                      - { label: "Radio Button No Text", name: "radioButtonNoText", widget: "string" }
+                      - { label: "Radio Button Yes Text", name: "radioButtonTrueText", widget: "string" }
+                      - { label: "Radio Button No Text", name: "radioButtonFalseText", widget: "string" }
                       - { label: "Description", name: "description", widget: "markdown" }
 
       - label: "Industry-Specific Questions (Oscar)"
