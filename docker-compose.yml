@@ -57,7 +57,7 @@ services:
       - ./scripts:/scripts
       - api_node_modules:/api/node_modules
     ports:
-      - "5000:5000"
+      - "5002:5002"
     working_dir: /api
     environment:
       - AWS_PROFILE=nj-default
