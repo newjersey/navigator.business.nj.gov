@@ -34,7 +34,7 @@ describe("filing page", () => {
       callToActionLink: `cta-link-${id}`,
       callToActionText: `cta-text-${id}`,
       contentMd: `content-${id}`,
-      extension: randomInt() % 2 ? true : false,
+      extension: !!(randomInt() % 2),
       filingMethod: randomElementFromArray([...taxFilingMethod]),
       frequency: `frequency-${id}`,
       filingDetails: `filingDetails-${id}`,
@@ -58,8 +58,8 @@ describe("filing page", () => {
     });
 
     const filing = generateFiling({
-      urlSlug: "filing-identifier-1",
-      id: "filing id 1",
+      urlSlug: "filing-url-slug-1",
+      id: "filing-identifier-1",
       filename: "filename-1",
       name: "filing-name-1",
       callToActionLink: "cta-link-1",
@@ -78,7 +78,7 @@ describe("filing page", () => {
     expect(screen.getByText("filing-name-1")).toBeInTheDocument();
     expect(screen.getByText("cta-text-1")).toBeInTheDocument();
     expect(screen.getByText("content-1")).toBeInTheDocument();
-    expect(screen.getByText("filing id 1")).toBeInTheDocument();
+    expect(screen.getByText("filing-identifier-1")).toBeInTheDocument();
     expect(screen.getByTestId("due-date")).toHaveTextContent("APRIL 30, 2022");
     expect(screen.queryByTestId("filing-method")).not.toBeInTheDocument();
     expect(screen.queryByTestId("filing-details")).not.toBeInTheDocument();
@@ -87,6 +87,21 @@ describe("filing page", () => {
     expect(screen.queryByTestId("tax-rates")).not.toBeInTheDocument();
     expect(screen.queryByTestId("additional-info")).not.toBeInTheDocument();
     expect(screen.queryByTestId("agency-header")).not.toBeInTheDocument();
+  });
+
+  it("shows correct date for a filing id with spaces in it", () => {
+    useMockUserData({
+      profileData: generateProfileData({ entityId: "1234567890" }),
+      taxFilingData: generateTaxFilingData({
+        filings: [generateTaxFiling({ identifier: "filing id", dueDate: "2022-04-30" })],
+      }),
+    });
+
+    const filing = generateFiling({ id: "filing id" });
+    renderFilingPage(filing);
+
+    expect(screen.getByText("filing id")).toBeInTheDocument();
+    expect(screen.getByTestId("due-date")).toHaveTextContent("APRIL 30, 2022");
   });
 
   it("shows the full filing details and correct due date", () => {
@@ -182,7 +197,7 @@ describe("filing page", () => {
     });
 
     const filing: Filing = generateFiling({
-      urlSlug: "filing-identifier-1",
+      id: "filing-identifier-1",
       agency: "Internal Revenue Service (IRS)",
     });
 
