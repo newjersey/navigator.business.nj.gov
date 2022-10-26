@@ -758,6 +758,7 @@ describe("profile", () => {
         profileData: {
           ...userData.profileData,
           industryId: newIndustry,
+          cannabisLicenseType: newIndustry == "cannabis" ? "CONDITIONAL" : undefined,
           sectorId: LookupIndustryById(newIndustry).defaultSectorId,
         },
       });
