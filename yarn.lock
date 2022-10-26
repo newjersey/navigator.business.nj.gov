@@ -3600,7 +3600,7 @@ __metadata:
     "@types/jest": 29.2.0
     "@types/jsonwebtoken": 8.5.9
     "@types/lodash": 4.14.186
-    "@types/node": 16.11.64
+    "@types/node": 16.11.68
     "@types/simple-oauth2": 4.1.1
     "@types/supertest": 2.0.12
     "@types/webpack-node-externals": 2.5.3
@@ -3659,7 +3659,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@businessnjgovnavigator/content@workspace:content"
   dependencies:
-    "@types/node": 16.11.64
+    "@types/node": 16.11.68
     cross-env: 7.0.3
     cspell: 6.12.0
     prettier: 2.7.1
@@ -3738,7 +3738,7 @@ __metadata:
     "@types/js-yaml": 4.0.5
     "@types/jsonwebtoken": 8.5.9
     "@types/lodash": 4.14.186
-    "@types/node": 16.11.64
+    "@types/node": 16.11.68
     "@types/react": 18.0.21
     "@types/react-dom": 18.0.6
     "@types/react-swipeable-views": 0.13.1
@@ -3866,7 +3866,7 @@ __metadata:
     "@businessnjgovnavigator/content": "*"
     "@jest/types": 29.2.1
     "@types/jest": 29.2.0
-    "@types/node": 16.11.64
+    "@types/node": 16.11.68
     "@types/uuid": 8.3.4
     "@typescript-eslint/eslint-plugin": 5.40.1
     "@typescript-eslint/parser": 5.40.1
@@ -3941,7 +3941,7 @@ __metadata:
     "@types/jest": 29.2.0
     "@types/js-yaml": 4.0.5
     "@types/lodash": 4.14.186
-    "@types/node": 16.11.64
+    "@types/node": 16.11.68
     "@types/react": 18.0.21
     "@types/react-dom": 18.0.6
     "@types/react-swipeable-views": 0.13.1
@@ -9370,10 +9370,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:16.11.64":
-  version: 16.11.64
-  resolution: "@types/node@npm:16.11.64"
-  checksum: 3634477efbeb586f8cdc1baf7670d8ea89c1eba1beac0354fa9123ca193d794da84ec40d4f8a54f694587ba5469e4124ebbba37542ed88eca95a3980ec45551a
+"@types/node@npm:16.11.68, @types/node@npm:^14.0.10 || ^16.0.0, @types/node@npm:^14.14.20 || ^16.0.0":
+  version: 16.11.68
+  resolution: "@types/node@npm:16.11.68"
+  checksum: a35293b6b8867e10ab9e10b6cd5f0e4224a86256d5ef102581dcb9f79f35f255ad87443e8584ddf8dce1229ee28885c58187e41822cf8d1e82495e7897c47c3f
   languageName: node
   linkType: hard
 
@@ -9381,13 +9381,6 @@ __metadata:
   version: 14.18.32
   resolution: "@types/node@npm:14.18.32"
   checksum: 45463114bf85d06dc12925d876dd90b7fff43d9ee10a40e48fd16aece3d0201c76426c128e41230b2818d386422be06c5be33b3d94d90ee924b6fa4d54574035
-  languageName: node
-  linkType: hard
-
-"@types/node@npm:^14.0.10 || ^16.0.0, @types/node@npm:^14.14.20 || ^16.0.0":
-  version: 16.11.66
-  resolution: "@types/node@npm:16.11.66"
-  checksum: bf190db14d1f32ab10588dd1a1e30bb2e9ba9b78281fce7a81fa80d914f9b3203d48cf1c6a8f96ef6b0edbba281478d2c68d6ebb7719c896f2dd62429c64ef09
   languageName: node
   linkType: hard
 
