@@ -2,7 +2,7 @@ import { OnboardingIndustry } from "@/components/onboarding/OnboardingIndustry";
 import { getMergedConfig } from "@/contexts/configContext";
 import { createProfileFieldErrorMap } from "@/lib/types/types";
 import { getFlow } from "@/lib/utils/helpers";
-import { generateProfileData, randomHomeBasedIndustry, randomNonHomeBasedIndustry } from "@/test/factories";
+import { randomHomeBasedIndustry, randomNonHomeBasedIndustry } from "@/test/factories";
 import { currentProfileData, WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
 import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { fireEvent, render, screen, within } from "@testing-library/react";
@@ -12,7 +12,7 @@ const Config = getMergedConfig();
 describe("<OnboardingIndustry />", () => {
   const renderComponent = (profileData?: ProfileData) => {
     render(
-      <WithStatefulProfileData initialData={profileData || generateProfileData({})}>
+      <WithStatefulProfileData initialData={profileData || createEmptyProfileData()}>
         <OnboardingIndustry onValidation={() => {}} fieldStates={createProfileFieldErrorMap()} />
       </WithStatefulProfileData>
     );
@@ -105,7 +105,7 @@ describe("<OnboardingIndustry />", () => {
       });
 
       it("defaults cannabis license type to CONDITIONAL", () => {
-        renderComponent(createEmptyProfileData());
+        renderComponent();
         selectIndustry("cannabis");
         expect(currentProfileData().cannabisLicenseType).toEqual("CONDITIONAL");
       });
@@ -142,7 +142,7 @@ describe("<OnboardingIndustry />", () => {
       });
 
       it("updates carServiceType to STANDARD if the standard radio button is picked", () => {
-        renderComponent(createEmptyProfileData());
+        renderComponent();
 
         selectIndustry("car-service");
         fireEvent.click(screen.getByText(Config.profileDefaults.STARTING.carService.radioButtonStandardText));
@@ -151,7 +151,7 @@ describe("<OnboardingIndustry />", () => {
       });
 
       it("updates carServiceType to HIGH_CAPACITY if the high capacity radio button is picked", () => {
-        renderComponent(createEmptyProfileData());
+        renderComponent();
 
         selectIndustry("car-service");
         fireEvent.click(
@@ -161,7 +161,7 @@ describe("<OnboardingIndustry />", () => {
       });
 
       it("updates carServiceType to BOTH if the both radio button is picked", () => {
-        renderComponent(createEmptyProfileData());
+        renderComponent();
         selectIndustry("car-service");
         fireEvent.click(screen.getByText(Config.profileDefaults.STARTING.carService.radioButtonBothText));
         expect(currentProfileData().carService).toBe("BOTH");
