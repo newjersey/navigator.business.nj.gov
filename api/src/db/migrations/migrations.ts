@@ -92,8 +92,10 @@ import { migrate_v89_to_v90 } from "./v90_home_based_business_can_be_undefined";
 import { migrate_v90_to_v91 } from "./v91_consolidate_section_type";
 import { migrate_v91_to_v92 } from "./v92_splits_profiledata_interface";
 import { migrate_v92_to_v93 } from "./v93_merge_childcare_roadmaps";
+import { migrate_v93_to_v94 } from "./v94_add_missing_formation_types";
 import { migrate_v8_to_v9 } from "./v9_add_license_status_to_data";
 
+migrate_v92_to_v93;
 export type MigrationFunction = (data: any) => any;
 
 export const Migrations: MigrationFunction[] = [
@@ -190,6 +192,7 @@ export const Migrations: MigrationFunction[] = [
   migrate_v90_to_v91,
   migrate_v91_to_v92,
   migrate_v92_to_v93,
+  migrate_v93_to_v94,
 ];
 
 export const CURRENT_VERSION = Migrations.length;
