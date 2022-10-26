@@ -790,5 +790,19 @@ export default {
         },
       },
     },
+    landing_page_how_it_works: {
+      scroll: {
+        how_it_works_seen: () => {
+          sendEvent("landing_page_how_it_works", "scroll", "how_it_works_seen");
+        },
+      },
+    },
+    landing_page_more_support: {
+      scroll: {
+        more_support_seen: () => {
+          sendEvent("landing_page_more_support", "scroll", "more_support_seen");
+        },
+      },
+    },
   },
 };
