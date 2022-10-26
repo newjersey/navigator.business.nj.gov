@@ -8,13 +8,13 @@ callToActionText: Apply for My License
 required: true
 issuingAgency: New Jersey Department of Children and Families
 ---
-You must obtain a license prior to operating as a Daycare.
+You must obtain a license with the NJ Department of Children and Families prior to operating as a Daycare.
 
-The [DCF’s licensing manual](https://www.nj.gov/dcf/providers/licensing/Understanding.Licensing.Packet.pdf) can provide additional information regarding licensing and operation requirements.
+The [DCF’s licensing manual](https://www.nj.gov/dcf/providers/licensing/Understanding.Licensing.Packet.pdf) provides information regarding license and operation requirements.
 
 ---
 ### Eligibility
-- 6 or more children under your care
+- six or more children under your care
 - Staff must be at least 18 years old
 
 ### Application Requirements
@@ -26,7 +26,7 @@ The [DCF’s licensing manual](https://www.nj.gov/dcf/providers/licensing/Unders
 - Site map of your site with the location of the outdoor playing area 
 - Pay any associated fees
 
-### After Initial Application
+### After the Initial Application
 - You will receive a notice via email to request forms from the State of New Jersey for criminal background checks and Child Abuse Record Information (CARI) checks for all staff and business representatives
 - You will be contacted by a representative from the Office of Licensing to arrange for an official site inspection
 
