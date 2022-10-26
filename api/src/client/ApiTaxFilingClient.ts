@@ -63,6 +63,8 @@ export const ApiTaxFilingClient = (config: ApiConfig, logger: LogWriterType): Ta
         );
         if (apiResponse.Errors?.some((error) => error.Error.includes("no specific tax eligibility")))
           return { state: "PENDING", filings: [] };
+        if (apiResponse.Errors?.some((error) => error.Error.includes("not been onboarded")))
+          return { state: "UNREGISTERED", filings: [] };
         if (apiResponse.Errors?.some((error) => error.Error.includes("verify your")))
           return { state: "FAILED", filings: [] };
         throw error;
