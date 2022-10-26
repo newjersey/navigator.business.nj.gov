@@ -55,22 +55,27 @@ const generateSuccessfulApiTaxFilingLookupResponse = (
 
 const generateErroredApiTaxFilingLookupResponse = (
   overrides: Partial<ApiTaxFilingLookupResponse>,
-  state: "PENDING" | "FAILED"
-): ApiTaxFilingLookupResponse => ({
-  ApiKey: `some-ApiKey-${randomInt()}`,
-  Data: null,
-  Errors: [
-    {
-      Error:
-        state == "PENDING"
-          ? "There is no specific tax eligibility for this business at the moment but please do come back to check later since we get weekly updates."
-          : "No matching record found for the business. Please verify your Taxpayer ID and Business Name.",
-      Field: "Results",
-    },
-  ],
-  Results: null,
-  ...overrides,
-});
+  state: "PENDING" | "FAILED" | "UNREGISTERED"
+): ApiTaxFilingLookupResponse => {
+  const stateErrorMap = {
+    PENDING:
+      "There is no specific tax eligibility for this business at the moment but please do come back to check later since we get weekly updates.",
+    FAILED: "No matching record found for the business. Please verify your Taxpayer ID and Business Name.",
+    UNREGISTERED: "This business has not been onboarded to Gov2Go Tax calendar Service so far",
+  };
+  return {
+    ApiKey: `some-ApiKey-${randomInt()}`,
+    Data: null,
+    Errors: [
+      {
+        Error: stateErrorMap[state],
+        Field: "Results",
+      },
+    ],
+    Results: null,
+    ...overrides,
+  };
+};
 
 const generateSuccessfulApiTaxFilingOnboardingResponse = (
   overrides: Partial<ApiTaxFilingOnboardingResponse>
@@ -183,6 +188,19 @@ describe("ApiTaxFilingClient", () => {
       );
       expect(response).toEqual({
         state: "PENDING",
+        filings: [],
+      });
+    });
+
+    it("returns only taxFiling state on unregistered", async () => {
+      const stubResponse = generateErroredApiTaxFilingLookupResponse({}, "UNREGISTERED");
+      mockAxios.post.mockRejectedValue({ response: { data: stubResponse, status: 400 } });
+      const response = await client.lookup(
+        taxIdAndBusinessNameAndEmail.taxId,
+        taxIdAndBusinessNameAndEmail.businessName
+      );
+      expect(response).toEqual({
+        state: "UNREGISTERED",
         filings: [],
       });
     });

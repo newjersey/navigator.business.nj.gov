@@ -24,7 +24,7 @@ export const taxFilingsInterfaceFactory = (apiTaxFilingClient: TaxFilingClient):
 
   const onboarding = async (request: taxFilingInterfaceRequest): Promise<UserData> => {
     const userData = await lookup(request);
-    if (userData.taxFilingData.state === "FAILED") {
+    if (userData.taxFilingData.state === "UNREGISTERED") {
       const response = await apiTaxFilingClient.onboarding(
         request.taxId,
         userData.user.email,
@@ -37,6 +37,7 @@ export const taxFilingsInterfaceFactory = (apiTaxFilingClient: TaxFilingClient):
           businessName: request.businessName,
           lastUpdatedISO: new Date(Date.now()).toISOString(),
           registered: ["SUCCESS", "PENDING"].includes(response.state),
+          errorField: response.errorField,
           state: response.state == "SUCCESS" ? "PENDING" : response.state,
         },
       };

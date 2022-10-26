@@ -124,33 +124,6 @@ describe("TaxFilingsInterfaceFactory", () => {
   });
 
   describe("onboarding", () => {
-    it("checks the onboarding api when lookup fails", async () => {
-      const userData = generateUserData({
-        taxFilingData: generateTaxFilingData({
-          state: undefined,
-          lastUpdatedISO: undefined,
-          filings: [generateTaxFiling({})],
-        }),
-      });
-      taxFilingClient.lookup.mockResolvedValue({
-        state: "FAILED",
-        filings: [],
-      } as TaxFilingLookupResponse);
-
-      taxFilingClient.onboarding.mockResolvedValue({ state: "SUCCESS" } as TaxFilingOnboardingResponse);
-
-      expect(await taxFilingInterface.onboarding({ userData, ...taxIdBusinessName })).toEqual({
-        ...userData,
-        taxFilingData: {
-          ...userData.taxFilingData,
-          state: "PENDING",
-          registered: true,
-          businessName: taxIdBusinessName.businessName,
-          lastUpdatedISO: currentDate.toISOString(),
-        },
-      });
-    });
-
     describe("only does a lookup", () => {
       let userData: UserData;
 
@@ -174,6 +147,24 @@ describe("TaxFilingsInterfaceFactory", () => {
           taxFilingData: {
             ...userData.taxFilingData,
             state: "API_ERROR",
+            registered: false,
+            businessName: taxIdBusinessName.businessName,
+            lastUpdatedISO: currentDate.toISOString(),
+          },
+        });
+        expect(taxFilingClient.onboarding).not.toHaveBeenCalled();
+      });
+
+      it("returns lookup response when lookup returns FAILED", async () => {
+        taxFilingClient.lookup.mockResolvedValue({
+          state: "FAILED",
+          filings: [],
+        } as TaxFilingLookupResponse);
+        expect(await taxFilingInterface.onboarding({ userData, ...taxIdBusinessName })).toEqual({
+          ...userData,
+          taxFilingData: {
+            ...userData.taxFilingData,
+            state: "FAILED",
             registered: false,
             businessName: taxIdBusinessName.businessName,
             lastUpdatedISO: currentDate.toISOString(),
@@ -221,7 +212,7 @@ describe("TaxFilingsInterfaceFactory", () => {
       });
     });
 
-    describe("returns onboarding data when lookup failed", () => {
+    describe("returns onboarding data when lookup returns UNREGISTERED", () => {
       it("returns pending when onboarding is successful", async () => {
         const userData = generateUserData({
           taxFilingData: generateTaxFilingData({
@@ -231,7 +222,7 @@ describe("TaxFilingsInterfaceFactory", () => {
           }),
         });
         taxFilingClient.lookup.mockResolvedValue({
-          state: "FAILED",
+          state: "UNREGISTERED",
           filings: [],
         } as TaxFilingLookupResponse);
         taxFilingClient.onboarding.mockResolvedValue({ state: "SUCCESS" } as TaxFilingOnboardingResponse);
@@ -257,7 +248,7 @@ describe("TaxFilingsInterfaceFactory", () => {
             }),
           });
           taxFilingClient.lookup.mockResolvedValue({
-            state: "FAILED",
+            state: "UNREGISTERED",
             filings: [],
           } as TaxFilingLookupResponse);
           taxFilingClient.onboarding.mockResolvedValue({
@@ -284,16 +275,20 @@ describe("TaxFilingsInterfaceFactory", () => {
             }),
           });
           taxFilingClient.lookup.mockResolvedValue({
-            state: "FAILED",
+            state: "UNREGISTERED",
             filings: [],
           } as TaxFilingLookupResponse);
-          taxFilingClient.onboarding.mockResolvedValue({ state: "FAILED" } as TaxFilingOnboardingResponse);
+          taxFilingClient.onboarding.mockResolvedValue({
+            state: "FAILED",
+            errorField: "Business Name",
+          } as TaxFilingOnboardingResponse);
           expect(await taxFilingInterface.onboarding({ userData, ...taxIdBusinessName })).toEqual({
             ...userData,
             taxFilingData: {
               ...userData.taxFilingData,
               state: "FAILED",
               registered: false,
+              errorField: "Business Name",
               businessName: taxIdBusinessName.businessName,
               lastUpdatedISO: currentDate.toISOString(),
             },
