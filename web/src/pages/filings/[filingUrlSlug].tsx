@@ -182,7 +182,7 @@ export const FilingElement = (props: {
 const FilingPage = (props: Props): ReactElement => {
   const { userData } = useUserData();
   const matchingFiling = sortFilterFilingsWithinAYear(userData?.taxFilingData.filings ?? []).find(
-    (it: TaxFiling) => it.identifier === props.filing.urlSlug
+    (it: TaxFiling) => it.identifier === props.filing.id
   );
   const dueDate = matchingFiling ? parseDate(matchingFiling.dueDate).format("MM/DD/YYYY") : "";
 
