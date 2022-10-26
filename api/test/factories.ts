@@ -39,7 +39,7 @@ import { arrayOfSectors as sectors, SectorType } from "@shared/sector";
 import { TaxFiling, TaxFilingData, TaxFilingLookUpRequest } from "@shared/taxFiling";
 import { Preferences, UserData } from "@shared/userData";
 import { SelfRegResponse, TaxFilingResult } from "../src/domain/types";
-import { getRandomDateInBetween } from "./helpers";
+import { getRandomDateInBetween, randomElementFromArray } from "./helpers";
 
 export const generateUser = (overrides: Partial<BusinessUser>): BusinessUser => {
   return {
@@ -131,6 +131,10 @@ export const generateTaxFilingData = (overrides: Partial<TaxFilingData>): TaxFil
   return {
     state: undefined,
     businessName: undefined,
+    errorField:
+      overrides.state == "FAILED"
+        ? randomElementFromArray(["Business Name", "Taxpayer ID", undefined])
+        : undefined,
     lastUpdatedISO: overrides.state ? new Date(Date.now()).toISOString() : undefined,
     registered: false,
     filings: [generateTaxFiling({})],
