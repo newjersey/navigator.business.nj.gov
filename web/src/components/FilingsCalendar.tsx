@@ -162,30 +162,36 @@ export const FilingsCalendar = (props: Props): ReactElement => {
 
   const renderToggleButton = (): ReactElement => {
     if (!userData) return <></>;
-
-    return userData.preferences.isCalendarFullView ? (
-      <Button
-        style="light"
-        noRightMargin
-        className="font-body-2xs padding-y-05 padding-x-1"
-        onClick={handleCalendarOnClick}
-      >
-        <Icon className="usa-icon--size-3 margin-right-05">list</Icon>
-        {Config.dashboardDefaults.calendarListViewButton}
-      </Button>
-    ) : isLargeScreen ? (
-      <Button
-        style="light"
-        noRightMargin
-        className="font-body-2xs padding-y-05 padding-x-1"
-        onClick={handleCalendarOnClick}
-      >
-        <Icon className="usa-icon--size-3 margin-right-05">grid_view</Icon>
-        {Config.dashboardDefaults.calendarGridViewButton}
-      </Button>
-    ) : (
-      <></>
-    );
+    if (
+      sortedFilteredFilingsWithinAYear.length > 0 &&
+      LookupOperatingPhaseById(userData?.profileData.operatingPhase).displayCalendarToggleButton
+    ) {
+      return userData.preferences.isCalendarFullView ? (
+        <Button
+          style="light"
+          noRightMargin
+          className="font-body-2xs padding-y-05 padding-x-1"
+          onClick={handleCalendarOnClick}
+        >
+          <Icon className="usa-icon--size-3 margin-right-05">list</Icon>
+          {Config.dashboardDefaults.calendarListViewButton}
+        </Button>
+      ) : isLargeScreen ? (
+        <Button
+          style="light"
+          noRightMargin
+          className="font-body-2xs padding-y-05 padding-x-1"
+          onClick={handleCalendarOnClick}
+        >
+          <Icon className="usa-icon--size-3 margin-right-05">grid_view</Icon>
+          {Config.dashboardDefaults.calendarGridViewButton}
+        </Button>
+      ) : (
+        <></>
+      );
+    } else {
+      return <></>;
+    }
   };
 
   const handleCalendarOnClick = () => {
@@ -215,7 +221,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
             </ArrowTooltip>
           </div>
         </div>
-        {sortedFilteredFilingsWithinAYear.length > 0 ? renderToggleButton() : <></>}
+        {renderToggleButton()}
       </div>
       <hr className="bg-base-lighter margin-top-2 margin-bottom-4" aria-hidden={true} />
       {shouldRenderFilingsCalendarTaxAccess(userData) && <FilingsCalendarTaxAccess />}
