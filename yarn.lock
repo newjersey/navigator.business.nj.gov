@@ -3736,8 +3736,8 @@ __metadata:
     "@types/jsonwebtoken": 8.5.9
     "@types/lodash": 4.14.186
     "@types/node": 16.11.68
-    "@types/react": 18.0.21
-    "@types/react-dom": 18.0.6
+    "@types/react": 18.0.22
+    "@types/react-dom": 18.0.7
     "@types/react-swipeable-views": 0.13.1
     "@types/react-transition-group": 4.4.5
     "@types/remove-markdown": 0.3.1
@@ -3939,8 +3939,8 @@ __metadata:
     "@types/js-yaml": 4.0.5
     "@types/lodash": 4.14.186
     "@types/node": 16.11.68
-    "@types/react": 18.0.21
-    "@types/react-dom": 18.0.6
+    "@types/react": 18.0.22
+    "@types/react-dom": 18.0.7
     "@types/react-swipeable-views": 0.13.1
     "@types/react-transition-group": 4.4.5
     "@types/remove-markdown": 0.3.1
@@ -9458,16 +9458,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:18.0.6":
-  version: 18.0.6
-  resolution: "@types/react-dom@npm:18.0.6"
-  dependencies:
-    "@types/react": "*"
-  checksum: db571047af1a567631758700b9f7d143e566df939cfe5fbf7535347cc0c726a1cdbb5e3f8566d076e54cf708b6c1166689de194a9ba09ee35efc9e1d45911685
-  languageName: node
-  linkType: hard
-
-"@types/react-dom@npm:^18.0.0":
+"@types/react-dom@npm:18.0.7, @types/react-dom@npm:^18.0.0":
   version: 18.0.7
   resolution: "@types/react-dom@npm:18.0.7"
   dependencies:
@@ -9526,14 +9517,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:18.0.21":
-  version: 18.0.21
-  resolution: "@types/react@npm:18.0.21"
+"@types/react@npm:18.0.22":
+  version: 18.0.22
+  resolution: "@types/react@npm:18.0.22"
   dependencies:
     "@types/prop-types": "*"
     "@types/scheduler": "*"
     csstype: ^3.0.2
-  checksum: 36c1a7c9d507e81e2e629c1ad3db51d7b84d8b010c2d5008da411874286c6a5ccc711ae1d4c470efc0bdc77153cc8804a40e927e929e5164c669ca41b84b846d
+  checksum: e9e294c1b5467c502936f964be68e7284ec6a5d40c703e7429037d9b39ba5f9b0299d303dde06d0468e4e79957ac71ab5ab3ee8252bf6ff3cc09c2ee03695789
   languageName: node
   linkType: hard
 
