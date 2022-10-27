@@ -234,7 +234,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
         </>
       ) : (
         <div data-testid="empty-calendar" className="padding-y-0">
-          <div className="flex flex-column space-between fac text-align-center flex-desktop:grid-col bg-base-lightest usa-prose padding-y-205 padding-x-3">
+          <div className="flex flex-column space-between fac text-align-center flex-desktop:grid-col usa-prose padding-y-205 padding-x-3">
             <Content>{Config.dashboardDefaults.emptyCalendarTitleText}</Content>
             <img className="padding-y-2" src={`/img/empty-trophy-illustration.png`} alt="empty calendar" />
             {userData?.taxFilingData && userData?.taxFilingData.filings.length === 0 && (
