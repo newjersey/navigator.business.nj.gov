@@ -7,17 +7,36 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { checkQueryValue, QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import { MediaQueries } from "@/lib/PageSizes";
 import { ABStorageFactory } from "@/lib/storage/ABStorage";
+import analytics from "@/lib/utils/analytics";
 import { setABExperienceDimension } from "@/lib/utils/analytics-helpers";
+import { useIntersectionOnElement } from "@/lib/utils/useIntersectionOnElement";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { ABExperience, decideABExperience } from "@businessnjgovnavigator/shared/";
 import { useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router";
-import { ReactElement, useEffect } from "react";
+import { ReactElement, useEffect, useRef, useState } from "react";
 
 const Home = (): ReactElement => {
   const { userData, error } = useUserData();
   const router = useRouter();
   const isDesktopAndUp = useMediaQuery(MediaQueries.desktopAndUp);
+  const sectionHowItWorks = useRef(null);
+  const [fireAnalyticsForSectionHowItWorks, setFireAnalyticsForSectionHowItWorks] = useState(true);
+  const sectionHowItWorksInViewport = useIntersectionOnElement(sectionHowItWorks, "-150px");
+  const sectionLookingForSupport = useRef(null);
+  const [fireAnalyticsForSectionLookingForSupport, setFireAnalyticsForSectionLookingForSupport] =
+    useState(true);
+  const sectionLookingForSupportInViewport = useIntersectionOnElement(sectionLookingForSupport, "-150px");
+
+  if (sectionHowItWorksInViewport && fireAnalyticsForSectionHowItWorks) {
+    analytics.event.landing_page_how_it_works.scroll.how_it_works_seen();
+    setFireAnalyticsForSectionHowItWorks(false);
+  }
+
+  if (sectionLookingForSupportInViewport && fireAnalyticsForSectionLookingForSupport) {
+    analytics.event.landing_page_more_support.scroll.more_support_seen();
+    setFireAnalyticsForSectionLookingForSupport(false);
+  }
 
   let landingPageConfig = Config.landingPage;
   if (typeof window !== "undefined") {
@@ -113,7 +132,7 @@ const Home = (): ReactElement => {
       <NavBar landingPage={true} />
       <main data-testid="main">
         <Hero />
-        <section aria-label="How it works">
+        <section ref={sectionHowItWorks} aria-label="How it works">
           <div className="minh-mobile margin-top-2 desktop:margin-top-neg-205  padding-bottom-6 text-center bg-base-extra-light">
             <h2 className="text-accent-cool-darker h1-styling margin-bottom-6 padding-top-6">
               {landingPageConfig.section4HeaderText}
@@ -176,6 +195,7 @@ const Home = (): ReactElement => {
         </section>
 
         <section
+          ref={sectionLookingForSupport}
           aria-label="Looking for more support?"
           className={`${isDesktopAndUp ? "landing-support-container" : ""}`}
         >
