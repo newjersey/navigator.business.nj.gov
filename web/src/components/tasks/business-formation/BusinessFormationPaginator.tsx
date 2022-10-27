@@ -6,7 +6,10 @@ import {
   BusinessFormationStepsConfiguration,
   LookupNameByStepIndex,
 } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
-import { getFieldByApiField } from "@/components/tasks/business-formation/getFieldForApiField";
+import {
+  getFieldByApiField,
+  UNKNOWN_API_ERROR_FIELD,
+} from "@/components/tasks/business-formation/getFieldForApiField";
 import { requiredFieldsForUser } from "@/components/tasks/business-formation/requiredFieldsForUser";
 import { AuthAlertContext } from "@/contexts/authAlertContext";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
@@ -315,7 +318,7 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
     if (!hasApiError) return false;
 
     const allApiErrorsHaveMappings = userData.formationData.formationResponse.errors.every(
-      (error) => getFieldByApiField(error.field) !== ""
+      (error) => getFieldByApiField(error.field) !== UNKNOWN_API_ERROR_FIELD
     );
 
     return !allApiErrorsHaveMappings;
