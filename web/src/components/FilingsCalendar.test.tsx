@@ -144,7 +144,9 @@ describe("<FilingsCalendar />", () => {
     const userData = generateUserData({
       profileData: generateProfileData({
         operatingPhase: randomElementFromArray(
-          OperatingPhases.filter((obj) => obj.displayCalendarType === "FULL")
+          OperatingPhases.filter((obj) => {
+            return obj.displayCalendarType === "FULL" && obj.displayCalendarToggleButton;
+          })
         ).id,
       }),
       taxFilingData: generateTaxFilingData({ filings: [annualReport] }),
@@ -496,7 +498,9 @@ describe("<FilingsCalendar />", () => {
       userData = generateUserData({
         profileData: generateProfileData({
           operatingPhase: randomElementFromArray(
-            OperatingPhases.filter((obj) => obj.displayCalendarType === "FULL")
+            OperatingPhases.filter((obj) => {
+              return obj.displayCalendarType === "FULL" && obj.displayCalendarToggleButton;
+            })
           ).id,
         }),
         taxFilingData: generateTaxFilingData({ filings: [annualReport] }),
@@ -528,6 +532,36 @@ describe("<FilingsCalendar />", () => {
       expect(currentUserData().preferences.isCalendarFullView).toBeTruthy();
       expect(screen.getByTestId("filings-calendar-as-table")).toBeInTheDocument();
       expect(screen.queryByTestId("filings-calendar-as-list")).not.toBeInTheDocument();
+    });
+
+    it("displays the calendar toggle button in operating phases that need it", () => {
+      userData = generateUserData({
+        profileData: generateProfileData({
+          operatingPhase: randomElementFromArray(
+            OperatingPhases.filter((obj) => obj.displayCalendarToggleButton === true)
+          ).id,
+        }),
+        taxFilingData: generateTaxFilingData({ filings: [annualReport] }),
+        preferences: generatePreferences({ isCalendarFullView: false }),
+      });
+
+      renderFilingsCalendar(operateReferences, userData);
+      expect(screen.getByText(Config.dashboardDefaults.calendarGridViewButton)).toBeInTheDocument();
+    });
+
+    it("doesnt't display the toggle button for operating phases that don't need it", () => {
+      userData = generateUserData({
+        profileData: generateProfileData({
+          operatingPhase: randomElementFromArray(
+            OperatingPhases.filter((obj) => obj.displayCalendarToggleButton === false)
+          ).id,
+        }),
+        taxFilingData: generateTaxFilingData({ filings: [annualReport] }),
+        preferences: generatePreferences({ isCalendarFullView: false }),
+      });
+
+      renderFilingsCalendar(operateReferences, userData);
+      expect(screen.queryByText(Config.dashboardDefaults.calendarGridViewButton)).not.toBeInTheDocument();
     });
   });
 });
