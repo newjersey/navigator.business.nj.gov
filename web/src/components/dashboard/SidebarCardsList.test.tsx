@@ -1,5 +1,6 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import { Certification, Funding, SidebarCardContent } from "@/lib/types/types";
+import { templateEval } from "@/lib/utils/helpers";
 import {
   generateCertification,
   generateFunding,
@@ -393,6 +394,40 @@ describe("SidebarCards List", () => {
 
       renderWithUserData(initialUserData, { certifications, fundings });
       expect(screen.queryByText(Config.dashboardDefaults.emptyOpportunitiesHeader)).not.toBeInTheDocument();
+    });
+
+    it("only counts hidden certifications before fundings are unlocked", () => {
+      const initialUserData = generateUserData({
+        profileData: generateProfileData({
+          operatingPhase: "FORMED_AND_REGISTERED",
+        }),
+        preferences: generatePreferences({
+          hiddenCertificationIds: ["cert1-id"],
+          hiddenFundingIds: ["fund1-id"],
+        }),
+      });
+
+      renderWithUserData(initialUserData, { certifications, fundings });
+      expect(
+        screen.getByText(templateEval(Config.dashboardDefaults.hiddenOpportunitiesHeader, { count: "1" }))
+      ).toBeInTheDocument();
+    });
+
+    it("counts both hidden fundings and certifications after fundings are unlocked", () => {
+      const initialUserData = generateUserData({
+        profileData: generateProfileData({
+          operatingPhase: "UP_AND_RUNNING",
+        }),
+        preferences: generatePreferences({
+          hiddenCertificationIds: ["cert1-id"],
+          hiddenFundingIds: ["fund1-id"],
+        }),
+      });
+
+      renderWithUserData(initialUserData, { certifications, fundings });
+      expect(
+        screen.getByText(templateEval(Config.dashboardDefaults.hiddenOpportunitiesHeader, { count: "2" }))
+      ).toBeInTheDocument();
     });
   });
 });
