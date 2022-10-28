@@ -8,17 +8,28 @@ import { isInterstateMovingApplicable } from "@/lib/domain-logic/essentialQuesti
 import { isLiquorLicenseApplicable } from "@/lib/domain-logic/essentialQuestions/isLiquorLicenseApplicable";
 import { isProvidesStaffingServicesApplicable } from "@/lib/domain-logic/essentialQuestions/isProvidesStaffingServicesApplicable";
 import { isRealEstateAppraisalManagementApplicable } from "@/lib/domain-logic/essentialQuestions/isRealEstateAppraisalManagementApplicable";
+import { isInterstateTransportApplicable } from "./isInterstateTransportApplicable";
 
-export const hasEssentialQuestion = (industryId: string | undefined) =>
-  [
-    isCannabisLicenseApplicable(industryId),
-    isCarServiceApplicable(industryId),
-    isCertifiedInteriorDesignerApplicable(industryId),
-    isChildcareForSixOrMoreApplicable(industryId),
-    isCpaRequiredApplicable(industryId),
-    isInterstateLogisticsApplicable(industryId),
-    isInterstateMovingApplicable(industryId),
-    isLiquorLicenseApplicable(industryId),
-    isProvidesStaffingServicesApplicable(industryId),
-    isRealEstateAppraisalManagementApplicable(industryId),
-  ].includes(true);
+export type EssentialQuestionFunction = (industryId: string) => boolean;
+
+export const EssentialQuestions = [
+  isCannabisLicenseApplicable,
+  isCarServiceApplicable,
+  isCertifiedInteriorDesignerApplicable,
+  isChildcareForSixOrMoreApplicable,
+  isCpaRequiredApplicable,
+  isInterstateLogisticsApplicable,
+  isInterstateTransportApplicable,
+  isInterstateMovingApplicable,
+  isLiquorLicenseApplicable,
+  isProvidesStaffingServicesApplicable,
+  isRealEstateAppraisalManagementApplicable,
+];
+
+export const hasEssentialQuestion = (industryId: string | undefined): boolean => {
+  const essentialQuestionResults = EssentialQuestions.map((essentialQuestionFunction) => {
+    return essentialQuestionFunction(industryId);
+  });
+
+  return essentialQuestionResults.includes(true);
+};
