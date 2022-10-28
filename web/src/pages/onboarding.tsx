@@ -13,6 +13,7 @@ import { RoadmapContext } from "@/contexts/roadmapContext";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { hasEssentialQuestion } from "@/lib/domain-logic/essentialQuestions/hasEssentialQuestion";
 import { QUERIES, ROUTES, routeShallowWithQuery } from "@/lib/domain-logic/routes";
 import { MediaQueries } from "@/lib/PageSizes";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
@@ -165,7 +166,7 @@ const OnboardingPage = (props: Props): ReactElement => {
           const queryIndustryId = router.query[QUERIES.industry] as string | undefined;
 
           if (industryQueryParamIsValid(queryIndustryId)) {
-            await setIndustryAndRouteToPage2(currentUserData, queryIndustryId);
+            await setIndustryAndRouteToPage(currentUserData, queryIndustryId);
           } else if (pageQueryParamisValid(currentUserData, queryPage)) {
             setPage({ current: queryPage, previous: queryPage - 1 });
           } else {
@@ -187,7 +188,7 @@ const OnboardingPage = (props: Props): ReactElement => {
     return hasAnsweredBusinessPersona && requestedPageIsInRange;
   };
 
-  const setIndustryAndRouteToPage2 = async (
+  const setIndustryAndRouteToPage = async (
     userData: UserData,
     industryId: string | undefined
   ): Promise<void> => {
@@ -196,7 +197,12 @@ const OnboardingPage = (props: Props): ReactElement => {
       businessPersona: "STARTING",
       industryId: industryId,
     });
-    setPage({ current: 2, previous: 1 });
+
+    if (hasEssentialQuestion(industryId)) {
+      setPage({ current: 2, previous: 1 });
+    } else {
+      setPage({ current: 3, previous: 2 });
+    }
   };
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>): Promise<void> => {

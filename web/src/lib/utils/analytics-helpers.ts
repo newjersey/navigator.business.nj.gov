@@ -1,14 +1,14 @@
-import { isCannabisLicenseApplicable } from "@/lib/domain-logic/isCannabisLicenseApplicable";
-import { isCpaRequiredApplicable } from "@/lib/domain-logic/isCpaRequiredApplicable";
+import { isCannabisLicenseApplicable } from "@/lib/domain-logic/essentialQuestions/isCannabisLicenseApplicable";
+import { isCpaRequiredApplicable } from "@/lib/domain-logic/essentialQuestions/isCpaRequiredApplicable";
 import analytics from "@/lib/utils/analytics";
 import { ABExperience, ProfileData } from "@businessnjgovnavigator/shared/";
 import { OperatingPhaseId } from "@businessnjgovnavigator/shared/operatingPhase";
 import { BusinessPersona, ForeignBusinessType } from "@businessnjgovnavigator/shared/profileData";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
-import { isCarServiceApplicable } from "../domain-logic/isCarServiceApplicable";
-import { isChildcareForSixOrMoreApplicable } from "../domain-logic/isChildcareForSixOrMoreApplicable";
-import { isInterstateLogisticsApplicable } from "../domain-logic/isInterstateLogisticsApplicable";
-import { isInterstateMovingApplicable } from "../domain-logic/isInterstateMovingApplicable";
+import { isCarServiceApplicable } from "../domain-logic/essentialQuestions/isCarServiceApplicable";
+import { isChildcareForSixOrMoreApplicable } from "../domain-logic/essentialQuestions/isChildcareForSixOrMoreApplicable";
+import { isInterstateLogisticsApplicable } from "../domain-logic/essentialQuestions/isInterstateLogisticsApplicable";
+import { isInterstateMovingApplicable } from "../domain-logic/essentialQuestions/isInterstateMovingApplicable";
 
 type RegistrationProgress = "Not Started" | "Began Onboarding" | "Onboarded Guest" | "Fully Registered";
 

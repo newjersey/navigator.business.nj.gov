@@ -1,6 +1,6 @@
 import { fetchMunicipalityById } from "@/lib/async-content-fetchers/fetchMunicipalityById";
+import { isRealEstateAppraisalManagementApplicable } from "@/lib/domain-logic/essentialQuestions/isRealEstateAppraisalManagementApplicable";
 import { getNaicsDisplayMd } from "@/lib/domain-logic/getNaicsDisplayMd";
-import { isRealEstateAppraisalManagementApplicable } from "@/lib/domain-logic/isRealEstateAppraisalManagementApplicable";
 import { buildRoadmap } from "@/lib/roadmap/roadmapBuilder";
 import { Roadmap } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
@@ -11,9 +11,9 @@ import {
   LookupLegalStructureById,
   ProfileData,
 } from "@businessnjgovnavigator/shared/";
-import { isCarServiceApplicable } from "../domain-logic/isCarServiceApplicable";
-import { isChildcareForSixOrMoreApplicable } from "../domain-logic/isChildcareForSixOrMoreApplicable";
-import { isInterstateTransportApplicable } from "../domain-logic/isInterstateTransportApplicable";
+import { isCarServiceApplicable } from "../domain-logic/essentialQuestions/isCarServiceApplicable";
+import { isChildcareForSixOrMoreApplicable } from "../domain-logic/essentialQuestions/isChildcareForSixOrMoreApplicable";
+import { isInterstateTransportApplicable } from "../domain-logic/essentialQuestions/isInterstateTransportApplicable";
 
 const enableFormation = (legalStructureId: string): boolean => {
   switch (legalStructureId) {
