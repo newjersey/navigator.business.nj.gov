@@ -51,9 +51,29 @@ export const SidebarCardsList = (props: Props): ReactElement => {
       .filter((it) => it !== undefined) as Funding[]
   );
 
+  const displayFundingCards = () =>
+    LookupOperatingPhaseById(userData?.profileData.operatingPhase).displayFundings;
+
+  const displayCertificationsCards = () =>
+    LookupOperatingPhaseById(userData?.profileData.operatingPhase).displayCertifications;
+
   const hiddenOpportunitiesCount = (): number => {
     if (!userData) return 0;
-    return userData.preferences.hiddenFundingIds.length + userData.preferences.hiddenCertificationIds.length;
+
+    const displayCertifications = displayCertificationsCards();
+    const displayFunding = displayFundingCards();
+
+    if (displayCertifications && displayFunding) {
+      return (
+        userData.preferences.hiddenFundingIds.length + userData.preferences.hiddenCertificationIds.length
+      );
+    } else if (displayCertifications) {
+      return userData.preferences.hiddenCertificationIds.length;
+    } else if (displayFunding) {
+      return userData.preferences.hiddenFundingIds.length;
+    } else {
+      return 0;
+    }
   };
 
   const visibleCardsOrderedByWeight = userData
@@ -64,14 +84,8 @@ export const SidebarCardsList = (props: Props): ReactElement => {
         })
     : [];
 
-  const displayFundingCards = () =>
-    LookupOperatingPhaseById(userData?.profileData.operatingPhase).displayFundings;
-
-  const certificationsUnlocked = () =>
-    LookupOperatingPhaseById(userData?.profileData.operatingPhase).displayCertifications;
-
   const hiddenCardsAccordion = () => {
-    if (certificationsUnlocked()) {
+    if (displayCertificationsCards()) {
       return (
         <>
           <hr className="desktop:margin-right-1 margin-top-3 bg-cool-lighter" aria-hidden={true} />
@@ -144,7 +158,7 @@ export const SidebarCardsList = (props: Props): ReactElement => {
       .map((card: SidebarCardContent) => <SidebarCard card={card} key={card.id} />);
 
   const showEmptyState = () =>
-    certificationsUnlocked() &&
+    displayCertificationsCards() &&
     displayFundingCards() &&
     visibleSortedCertifications.length + visibleSortedFundings.length === 0;
 
@@ -159,7 +173,7 @@ export const SidebarCardsList = (props: Props): ReactElement => {
       <div className="dashboard-opportunities-list desktop:margin-right-1">
         <>{getTopCards()}</>
         <div className="desktop:padding-right-105" data-testid="visible-opportunities">
-          {certificationsUnlocked() &&
+          {displayCertificationsCards() &&
             visibleSortedCertifications.map((cert) => (
               <OpportunityCard key={cert.id} opportunity={cert} urlPath="certification" />
             ))}
