@@ -3759,7 +3759,7 @@ __metadata:
     airtable: 0.11.5
     axios: 0.27.2
     babel-jest: 29.2.2
-    babel-loader: 8.2.5
+    babel-loader: 9.0.0
     body-parser: 1.20.1
     broken-link-checker: 0.7.8
     cat: 0.2.0
@@ -3957,7 +3957,7 @@ __metadata:
     airtable: 0.11.5
     axios: 0.27.2
     babel-jest: 29.2.2
-    babel-loader: 8.2.5
+    babel-loader: 9.0.0
     broken-link-checker: 0.7.8
     clean-webpack-plugin: 4.0.0
     copy-webpack-plugin: 11.0.0
@@ -11497,7 +11497,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-loader@npm:8.2.5, babel-loader@npm:^8.0.0":
+"babel-loader@npm:9.0.0":
+  version: 9.0.0
+  resolution: "babel-loader@npm:9.0.0"
+  dependencies:
+    find-cache-dir: ^3.3.2
+    schema-utils: ^4.0.0
+  peerDependencies:
+    "@babel/core": ^7.12.0
+    webpack: ">=5"
+  checksum: 6b146e33c81fd948ffdefa8a6319efa1bea6e17c946bfac4641375710e51831aeb7f4a20c88604eaa00f5ecd4b6591da5a65ade326feba792609f932df150645
+  languageName: node
+  linkType: hard
+
+"babel-loader@npm:^8.0.0":
   version: 8.2.5
   resolution: "babel-loader@npm:8.2.5"
   dependencies:
@@ -17169,7 +17182,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"find-cache-dir@npm:^3.3.1":
+"find-cache-dir@npm:^3.3.1, find-cache-dir@npm:^3.3.2":
   version: 3.3.2
   resolution: "find-cache-dir@npm:3.3.2"
   dependencies:
