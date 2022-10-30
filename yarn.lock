@@ -3637,7 +3637,7 @@ __metadata:
     serverless: 3.23.0
     serverless-dynamodb-local: 0.2.40
     serverless-http: 3.1.0
-    serverless-offline: 11.1.3
+    serverless-offline: 11.2.0
     serverless-offline-ssm: 6.2.0
     serverless-webpack: 5.10.0
     simple-oauth2: 5.0.0
@@ -3834,7 +3834,7 @@ __metadata:
     serverless: 3.23.0
     serverless-dynamodb-local: 0.2.40
     serverless-http: 3.1.0
-    serverless-offline: 11.1.3
+    serverless-offline: 11.2.0
     serverless-offline-ssm: 6.2.0
     serverless-webpack: 5.10.0
     simple-oauth2: 5.0.0
@@ -7242,9 +7242,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@serverless/utils@npm:^6.0.3, @serverless/utils@npm:^6.7.0, @serverless/utils@npm:^6.8.0":
-  version: 6.8.0
-  resolution: "@serverless/utils@npm:6.8.0"
+"@serverless/utils@npm:^6.0.3, @serverless/utils@npm:^6.7.0, @serverless/utils@npm:^6.8.1":
+  version: 6.8.1
+  resolution: "@serverless/utils@npm:6.8.1"
   dependencies:
     archive-type: ^4.0.0
     chalk: ^4.1.2
@@ -7260,7 +7260,7 @@ __metadata:
     filenamify: ^4.3.0
     get-stream: ^6.0.1
     got: ^11.8.5
-    inquirer: ^8.2.4
+    inquirer: ^8.2.5
     js-yaml: ^4.1.0
     jwt-decode: ^3.1.2
     lodash: ^4.17.21
@@ -7278,7 +7278,7 @@ __metadata:
     uni-global: ^1.0.0
     uuid: ^8.3.2
     write-file-atomic: ^4.0.2
-  checksum: bcad1e65fea26ef46977b7d4209638fd40c77d4b9edf46ff281104de543c4c4d1b507ae6a933920794d71c52afa077bd7c487bd2da3e265dd1330849385800b6
+  checksum: 0b7d2515b148c56cf5f1fbb98cb4eba9d0c5f5c6c9c5b103bcc8418136061cbbd82080465c7835fd78f64233ae43c0138e58b010ca61e8a432a7d8922d8845e9
   languageName: node
   linkType: hard
 
@@ -11401,9 +11401,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"aws-sdk@npm:^2.1231.0, aws-sdk@npm:^2.1233.0, aws-sdk@npm:^2.7.0":
-  version: 2.1240.0
-  resolution: "aws-sdk@npm:2.1240.0"
+"aws-sdk@npm:^2.1231.0, aws-sdk@npm:^2.1241.0, aws-sdk@npm:^2.7.0":
+  version: 2.1243.0
+  resolution: "aws-sdk@npm:2.1243.0"
   dependencies:
     buffer: 4.9.2
     events: 1.1.1
@@ -11415,7 +11415,7 @@ __metadata:
     util: ^0.12.4
     uuid: 8.0.0
     xml2js: 0.4.19
-  checksum: 09377d1824c86ecd33617fd457cc16446f342a9adb63aba55bcdc5055e7205f9249e970f6656b555a549d62ef28fc6df53e2fad97a191516ff6f4d4e76394892
+  checksum: bd5a32918aa0f06c79acc63db8271ce1447f77af76c700a15837c21b8407b0af894ecf139366b194820c69408f25dc1cc9db8b10ee59a0522788cdd2cddfcfd2
   languageName: node
   linkType: hard
 
@@ -19666,7 +19666,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"inquirer@npm:^8.2.4":
+"inquirer@npm:^8.2.5":
   version: 8.2.5
   resolution: "inquirer@npm:8.2.5"
   dependencies:
@@ -21364,10 +21364,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jose@npm:^4.10.0":
-  version: 4.10.3
-  resolution: "jose@npm:4.10.3"
-  checksum: 9fa5e1ebfbddb8924a08a3ca2789dfb63c522d615e2eb66021adc632a83efc7fc990e1abbf3546baff8913b4ee585fd86521212f47968aec27930ed658f0bea6
+"jose@npm:^4.10.3":
+  version: 4.10.4
+  resolution: "jose@npm:4.10.4"
+  checksum: 0e6caaae0b0303534c0ac23711d45eadfbdbff63d9aeed80965c668b5532c254ab25b48afddc3e1ecfcfd36b4275dee41174a097c5a47a25ce04268c78f3c130
   languageName: node
   linkType: hard
 
@@ -30493,21 +30493,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"serverless-offline@npm:11.1.3":
-  version: 11.1.3
-  resolution: "serverless-offline@npm:11.1.3"
+"serverless-offline@npm:11.2.0":
+  version: 11.2.0
+  resolution: "serverless-offline@npm:11.2.0"
   dependencies:
     "@hapi/boom": ^10.0.0
     "@hapi/h2o2": ^10.0.0
     "@hapi/hapi": ^20.2.2
-    "@serverless/utils": ^6.8.0
-    aws-sdk: ^2.1233.0
+    "@serverless/utils": ^6.8.1
+    aws-sdk: ^2.1241.0
     boxen: ^7.0.0
     chalk: ^5.1.2
     execa: ^6.1.0
     fs-extra: ^10.1.0
     java-invoke-local: 0.0.6
-    jose: ^4.10.0
+    jose: ^4.10.3
     js-string-escape: ^1.0.1
     jsonpath-plus: ^7.2.0
     jsonschema: ^1.4.1
@@ -30519,10 +30519,10 @@ __metadata:
     p-memoize: ^7.1.1
     p-retry: ^5.1.1
     velocityjs: ^2.0.6
-    ws: ^8.9.0
+    ws: ^8.10.0
   peerDependencies:
     serverless: ^3.2.0
-  checksum: 4a941fd4d36ecfe83a8b06bc1f18fa12310a916c9cb2ce6348aedae83c74e093da91c36cb5908c55859a0945209abadfe16427bcd17f66a129d73a7feb756153
+  checksum: 17b9c1cecc257905a8dafc3d271824166a12ccf70e656464578cc79c8004e81597cc80174c2f13df7b42e88dc53115890191c9cf42099a259fb147dbd2162029
   languageName: node
   linkType: hard
 
@@ -34903,7 +34903,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ws@npm:^8.2.3, ws@npm:^8.9.0":
+"ws@npm:^8.10.0, ws@npm:^8.2.3, ws@npm:^8.9.0":
   version: 8.10.0
   resolution: "ws@npm:8.10.0"
   peerDependencies:
