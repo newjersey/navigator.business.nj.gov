@@ -16,7 +16,7 @@ interface Props {
 }
 
 export const TaxInput = (props: Props): ReactElement => {
-  const LENGTH = 9;
+  const LENGTH = 12;
   const { Config } = useConfig();
   const [isInvalid, setIsInvalid] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);

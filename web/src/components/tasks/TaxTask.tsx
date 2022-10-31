@@ -23,14 +23,21 @@ export const TaxTask = (props: Props): ReactElement => {
   const { Config } = useConfig();
 
   useMountEffectWhenDefined(() => {
-    if (!userData) {
+    if (!userData || !updateQueue) {
       return;
     }
     if (isAuthenticated === IsAuthenticated.FALSE) {
       return;
     }
-    setShowInput(!userData.profileData.taxId);
-  }, userData);
+    setShowInput(userData.profileData.taxId?.length != 12);
+    if (
+      userData.profileData.taxId &&
+      userData.profileData.taxId?.length > 0 &&
+      userData.profileData.taxId?.length < 12
+    ) {
+      updateQueue.queueTaskProgress({ [props.task.id]: "IN_PROGRESS" }).update();
+    }
+  }, userData && updateQueue);
 
   const setBackToEditing = ({ remove }: { remove: boolean }) => {
     if (!userData || !updateQueue) {
