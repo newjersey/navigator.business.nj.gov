@@ -12,6 +12,7 @@ import {
   LookupOperatingPhaseById,
   UserData,
 } from "@businessnjgovnavigator/shared/";
+import { getCurrentDate, parseDate } from "@businessnjgovnavigator/shared/index";
 import { useRouter } from "next/router";
 
 import { ReactElement, useContext, useEffect, useRef, useState } from "react";
@@ -26,6 +27,11 @@ export const shouldRenderFilingsCalendarTaxAccess = (userData?: UserData) => {
     LookupLegalStructureById(userData.profileData.legalStructureId).requiresPublicFiling &&
     process.env.FEATURE_TAX_CALENDAR == "true"
   );
+};
+
+const isBeforeTheFollowingSaturday = (registeredISO: string | undefined) => {
+  const sundayAfterRegisteredDate = parseDate(registeredISO).day(7);
+  return getCurrentDate().isBefore(sundayAfterRegisteredDate);
 };
 
 export const FilingsCalendarTaxAccess = (): ReactElement => {
@@ -43,7 +49,7 @@ export const FilingsCalendarTaxAccess = (): ReactElement => {
       return;
     }
     (async () => {
-      if (userData.taxFilingData.registered) {
+      if (userData.taxFilingData.registeredISO) {
         const updatedUserData = await postTaxRegistrationLookup({
           businessName: userData.taxFilingData.businessName as string,
           taxId: userData.profileData.taxId as string,
@@ -94,6 +100,59 @@ export const FilingsCalendarTaxAccess = (): ReactElement => {
     }
   };
 
+  const getWidgetComponent = (): ReactElement => {
+    if (userData?.taxFilingData.registeredISO) {
+      if (userData?.taxFilingData.state == "PENDING") {
+        return (
+          <div className="tax-calendar-upper-widget-container" data-testid="pending-container">
+            <div className="margin-bottom-2 tablet:margin-bottom-0 margin-right-2">
+              <Content>{Config.taxCalendar.PendingCopyMarkdown}</Content>
+            </div>
+          </div>
+        );
+      } else if (isBeforeTheFollowingSaturday(userData.taxFilingData.registeredISO)) {
+        return (
+          <div className="tax-calendar-upper-widget-container" data-testid="alert-content-container">
+            <div className="margin-bottom-2 tablet:margin-bottom-0 margin-right-2">
+              <Content>{Config.taxCalendar.RegistrationFollowUpCopyMarkdown}</Content>
+            </div>
+          </div>
+        );
+      }
+    } else {
+      return (
+        <>
+          <TaxFilingLookupModal
+            isOpen={showTaxModal}
+            close={() => {
+              return setShowTaxModal(false);
+            }}
+            onSuccess={async () => {
+              setShowTaxModal(false);
+              await new Promise((resolve) => {
+                return setTimeout(resolve, 500);
+              });
+              setShowAlert(true);
+            }}
+          />
+          <div className="tax-calendar-upper-widget-container grid-row" data-testid="button-container">
+            <div className="margin-bottom-2 tablet:margin-bottom-0 margin-right-2 mobile-lg:grid-col-6 grid-col-12">
+              <Content>{Config.taxCalendar.AccessBody}</Content>
+            </div>
+            <Button
+              dataTestid="get-tax-access"
+              style={"secondary"}
+              noRightMargin
+              onClick={openRegisterOrTaxModal}
+            >
+              {Config.taxCalendar.AccessButton}
+            </Button>
+          </div>
+        </>
+      );
+    }
+    return <></>;
+  };
   return (
     <>
       <SnackbarAlert
@@ -107,45 +166,7 @@ export const FilingsCalendarTaxAccess = (): ReactElement => {
       >
         <Content>{Config.taxCalendar.SnackbarSuccessBody}</Content>
       </SnackbarAlert>
-      {userData?.taxFilingData.state == "PENDING" ? (
-        <div className="tax-calendar-button-container" data-testid="pending-container">
-          <div className="margin-bottom-2 tablet:margin-bottom-0 margin-right-2">
-            <Content>{Config.taxCalendar.PendingCopyMarkdown}</Content>
-          </div>
-        </div>
-      ) : (
-        userData?.taxFilingData.state != "SUCCESS" &&
-        !userData?.taxFilingData.registered && (
-          <>
-            <TaxFilingLookupModal
-              isOpen={showTaxModal}
-              close={() => {
-                return setShowTaxModal(false);
-              }}
-              onSuccess={async () => {
-                setShowTaxModal(false);
-                await new Promise((resolve) => {
-                  return setTimeout(resolve, 500);
-                });
-                setShowAlert(true);
-              }}
-            />
-            <div className="tax-calendar-button-container grid-row" data-testid="button-container">
-              <div className="margin-bottom-2 tablet:margin-bottom-0 margin-right-2 mobile-lg:grid-col-6 grid-col-12">
-                <Content>{Config.taxCalendar.AccessBody}</Content>
-              </div>
-              <Button
-                dataTestid="get-tax-access"
-                style={"secondary"}
-                noRightMargin
-                onClick={openRegisterOrTaxModal}
-              >
-                {Config.taxCalendar.AccessButton}
-              </Button>
-            </div>
-          </>
-        )
-      )}
+      {getWidgetComponent()}
     </>
   );
 };

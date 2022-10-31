@@ -14,6 +14,7 @@ import {
   userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
+import { getCurrentDateISOString } from "@businessnjgovnavigator/shared/dateHelpers";
 import { taxTaskId } from "@businessnjgovnavigator/shared/index";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
@@ -74,7 +75,7 @@ describe("<SidebarCardTaxRegistrationNudge />", () => {
           legalStructureId: "limited-liability-partnership",
         }),
         taxFilingData: generateTaxFilingData({
-          registered: true,
+          registeredISO: getCurrentDateISOString(),
           filings: [generateTaxFiling({})],
           state: "SUCCESS",
         }),
@@ -115,7 +116,7 @@ describe("<SidebarCardTaxRegistrationNudge />", () => {
         },
         taxFilingData: {
           ...initialUserData.taxFilingData,
-          registered: false,
+          registeredISO: undefined,
           state: undefined,
           filings: [],
         },

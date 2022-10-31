@@ -134,6 +134,7 @@ describe("TaxFilingsInterfaceFactory", () => {
           taxFilingData: generateTaxFilingData({
             state: undefined,
             lastUpdatedISO: undefined,
+            registeredISO: undefined,
             filings: [generateTaxFiling({})],
           }),
         });
@@ -149,7 +150,7 @@ describe("TaxFilingsInterfaceFactory", () => {
           taxFilingData: {
             ...userData.taxFilingData,
             state: "API_ERROR",
-            registered: false,
+            registeredISO: undefined,
             businessName: taxIdBusinessName.businessName,
             lastUpdatedISO: currentDate.toISOString(),
           },
@@ -167,7 +168,7 @@ describe("TaxFilingsInterfaceFactory", () => {
           taxFilingData: {
             ...userData.taxFilingData,
             state: "FAILED",
-            registered: false,
+            registeredISO: undefined,
             businessName: taxIdBusinessName.businessName,
             lastUpdatedISO: currentDate.toISOString(),
           },
@@ -185,9 +186,9 @@ describe("TaxFilingsInterfaceFactory", () => {
           taxFilingData: {
             ...userData.taxFilingData,
             state: "PENDING",
-            registered: true,
-            businessName: taxIdBusinessName.businessName,
             lastUpdatedISO: currentDate.toISOString(),
+            businessName: taxIdBusinessName.businessName,
+            registeredISO: currentDate.toISOString(),
           },
         });
         expect(taxFilingClient.onboarding).not.toHaveBeenCalled();
@@ -205,7 +206,7 @@ describe("TaxFilingsInterfaceFactory", () => {
             ...userData.taxFilingData,
             state: "SUCCESS",
             businessName: taxIdBusinessName.businessName,
-            registered: true,
+            registeredISO: currentDate.toISOString(),
             filings: [filingData],
             lastUpdatedISO: currentDate.toISOString(),
           },
@@ -220,6 +221,7 @@ describe("TaxFilingsInterfaceFactory", () => {
           taxFilingData: generateTaxFilingData({
             state: undefined,
             lastUpdatedISO: undefined,
+            registeredISO: undefined,
             filings: [generateTaxFiling({})],
           }),
         });
@@ -233,7 +235,7 @@ describe("TaxFilingsInterfaceFactory", () => {
           taxFilingData: {
             ...userData.taxFilingData,
             state: "PENDING",
-            registered: true,
+            registeredISO: currentDate.toISOString(),
             businessName: taxIdBusinessName.businessName,
             lastUpdatedISO: currentDate.toISOString(),
           },
@@ -246,6 +248,8 @@ describe("TaxFilingsInterfaceFactory", () => {
             taxFilingData: generateTaxFilingData({
               state: undefined,
               lastUpdatedISO: undefined,
+              registeredISO: undefined,
+
               filings: [generateTaxFiling({})],
             }),
           });
@@ -261,7 +265,7 @@ describe("TaxFilingsInterfaceFactory", () => {
             taxFilingData: {
               ...userData.taxFilingData,
               state: "API_ERROR",
-              registered: false,
+              registeredISO: undefined,
               businessName: taxIdBusinessName.businessName,
               lastUpdatedISO: currentDate.toISOString(),
             },
@@ -273,6 +277,7 @@ describe("TaxFilingsInterfaceFactory", () => {
             taxFilingData: generateTaxFilingData({
               state: undefined,
               lastUpdatedISO: undefined,
+              registeredISO: undefined,
               filings: [generateTaxFiling({})],
             }),
           });
@@ -289,7 +294,7 @@ describe("TaxFilingsInterfaceFactory", () => {
             taxFilingData: {
               ...userData.taxFilingData,
               state: "FAILED",
-              registered: false,
+              registeredISO: undefined,
               errorField: "Business Name",
               businessName: taxIdBusinessName.businessName,
               lastUpdatedISO: currentDate.toISOString(),

@@ -1,3 +1,4 @@
+import { randomInt } from "@shared/intHelpers";
 import { v94UserData } from "./v94_add_missing_formation_types";
 
 export interface v95UserData {
@@ -325,4 +326,169 @@ type v95GetFilingResponse = {
   formationDoc: string;
   standingDoc: string;
   certifiedDoc: string;
+};
+
+// ---------------- v95 factories ----------------
+
+export const generatev95User = (overrides: Partial<v95BusinessUser>): v95BusinessUser => {
+  return {
+    name: `some-name-${randomInt()}`,
+    email: `some-email-${randomInt()}@example.com`,
+    id: `some-id-${randomInt()}`,
+    receiveNewsletter: false,
+    userTesting: false,
+    externalStatus: {},
+    myNJUserKey: undefined,
+    intercomHash: undefined,
+    abExperience: "ExperienceA",
+    ...overrides,
+  };
+};
+
+export const createEmptyv95FormationFormData = (): v95FormationFormData => {
+  return {
+    businessName: "",
+    businessSuffix: undefined,
+    businessTotalStock: "",
+    businessStartDate: "",
+    businessAddressCity: undefined,
+    businessAddressLine1: "",
+    businessAddressLine2: "",
+    businessAddressState: "NJ",
+    businessAddressZipCode: "",
+    businessPurpose: "",
+    withdrawals: "",
+    combinedInvestment: "",
+    dissolution: "",
+    canCreateLimitedPartner: undefined,
+    createLimitedPartnerTerms: "",
+    canGetDistribution: undefined,
+    getDistributionTerms: "",
+    canMakeDistribution: undefined,
+    makeDistributionTerms: "",
+    provisions: [],
+    agentNumberOrManual: "NUMBER",
+    agentNumber: "",
+    agentName: "",
+    agentEmail: "",
+    agentOfficeAddressLine1: "",
+    agentOfficeAddressLine2: "",
+    agentOfficeAddressCity: "",
+    agentOfficeAddressState: "NJ",
+    agentOfficeAddressZipCode: "",
+    agentUseAccountInfo: false,
+    agentUseBusinessAddress: false,
+    members: [],
+    signers: [],
+    paymentType: undefined,
+    annualReportNotification: true,
+    corpWatchNotification: true,
+    officialFormationDocument: true,
+    certificateOfStanding: false,
+    certifiedCopyOfFormationDocument: false,
+    contactFirstName: "",
+    contactLastName: "",
+    contactPhoneNumber: "",
+  };
+};
+
+export const generatev95IndustrySpecificData = (
+  overrides: Partial<v95IndustrySpecificData>
+): v95IndustrySpecificData => {
+  return {
+    liquorLicense: false,
+    requiresCpa: false,
+    homeBasedBusiness: false,
+    cannabisLicenseType: undefined,
+    cannabisMicrobusiness: undefined,
+    constructionRenovationPlan: undefined,
+    providesStaffingService: false,
+    certifiedInteriorDesigner: false,
+    realEstateAppraisalManagement: false,
+    carService: undefined,
+    interstateTransport: false,
+    isChildcareForSixOrMore: undefined,
+    ...overrides,
+  };
+};
+
+export const generatev95ProfileData = (overrides: Partial<v95ProfileData>): v95ProfileData => {
+  const id = `some-id-${randomInt()}`;
+  const persona = randomInt() % 2 ? "STARTING" : "OWNING";
+  return {
+    ...generatev95IndustrySpecificData({}),
+    businessPersona: persona,
+    businessName: `some-business-name-${randomInt()}`,
+    industryId: "restaurant",
+    legalStructureId: "limited-liability-partnership",
+    municipality: {
+      name: `some-name-${randomInt()}`,
+      displayName: `some-display-name-${randomInt()}`,
+      county: `some-county-${randomInt()}`,
+      id: `some-id-${randomInt()}`,
+    },
+    dateOfFormation: undefined,
+    entityId: randomInt(10).toString(),
+    employerId: randomInt(9).toString(),
+    taxId: randomInt() % 2 ? randomInt(9).toString() : randomInt(12).toString(),
+    notes: `some-notes-${randomInt()}`,
+    ownershipTypeIds: [],
+    documents: {
+      certifiedDoc: `${id}/certifiedDoc-${randomInt()}.pdf`,
+      formationDoc: `${id}/formationDoc-${randomInt()}.pdf`,
+      standingDoc: `${id}/standingDoc-${randomInt()}.pdf`,
+    },
+    existingEmployees: randomInt(7).toString(),
+    taxPin: randomInt(4).toString(),
+    sectorId: undefined,
+    naicsCode: randomInt(6).toString(),
+    foreignBusinessType: undefined,
+    foreignBusinessTypeIds: [],
+    nexusDbaName: undefined,
+    nexusLocationInNewJersey: undefined,
+    operatingPhase: "NEEDS_TO_FORM",
+    ...overrides,
+  };
+};
+
+export const v95TaxFilingDataGenerator = (overrides: Partial<v95TaxFilingData>): v95TaxFilingData => {
+  return {
+    state: undefined,
+    businessName: undefined,
+    errorField: undefined,
+    lastUpdatedISO: undefined,
+    registered: false,
+    filings: [],
+    ...overrides,
+  };
+};
+
+export const v95UserDataGenerator = (overrides: Partial<v95UserData>): v95UserData => {
+  return {
+    version: 92,
+    user: generatev95User({}),
+    profileData: generatev95ProfileData({}),
+    formProgress: "UNSTARTED",
+    taskProgress: {},
+    taskItemChecklist: {},
+    licenseData: undefined,
+    preferences: {
+      roadmapOpenSections: ["PLAN", "START"],
+      roadmapOpenSteps: [],
+      hiddenCertificationIds: [],
+      hiddenFundingIds: [],
+      visibleSidebarCards: ["welcome"],
+      returnToLink: "",
+      isCalendarFullView: true,
+      isHideableRoadmapOpen: false,
+    },
+    taxFilingData: v95TaxFilingDataGenerator({}),
+    formationData: {
+      formationFormData: createEmptyv95FormationFormData(),
+      formationResponse: undefined,
+      getFilingResponse: undefined,
+      completedFilingPayment: false,
+    },
+    ...overrides,
+  };
 };

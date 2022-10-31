@@ -30,23 +30,27 @@ export const taxFilingsInterfaceFactory = (apiTaxFilingClient: TaxFilingClient):
         userData.user.email,
         request.businessName
       );
+      const registered = ["SUCCESS", "PENDING"].includes(response.state);
       return {
         ...userData,
         taxFilingData: {
           ...userData.taxFilingData,
           businessName: request.businessName,
           lastUpdatedISO: new Date(Date.now()).toISOString(),
-          registered: ["SUCCESS", "PENDING"].includes(response.state),
+          registeredISO: registered ? new Date(Date.now()).toISOString() : undefined,
           errorField: response.errorField,
           state: response.state == "SUCCESS" ? "PENDING" : response.state,
         },
       };
     } else {
+      const registered = ["SUCCESS", "PENDING"].includes(userData.taxFilingData.state ?? "");
       return {
         ...userData,
         taxFilingData: {
           ...userData.taxFilingData,
-          registered: ["SUCCESS", "PENDING"].includes(userData.taxFilingData.state ?? ""),
+          registeredISO:
+            userData.taxFilingData.registeredISO ??
+            (registered ? new Date(Date.now()).toISOString() : undefined),
         },
       };
     }

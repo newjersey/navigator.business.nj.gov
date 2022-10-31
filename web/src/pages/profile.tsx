@@ -178,7 +178,7 @@ const ProfilePage = (props: Props): ReactElement => {
         onValidation("taxId", true);
         fieldStatesCopy["taxId"] = { invalid: true };
       }
-      taxFilingData = { ...taxFilingData, state: undefined, registered: false, filings: [] };
+      taxFilingData = { ...taxFilingData, state: undefined, registeredISO: undefined, filings: [] };
     }
 
     if (
