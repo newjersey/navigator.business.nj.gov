@@ -13,15 +13,17 @@ import { styled } from "@mui/material";
 import LinearProgress, { linearProgressClasses } from "@mui/material/LinearProgress";
 import { ReactElement, ReactNode } from "react";
 
-const BorderLinearProgress = styled(LinearProgress)(() => ({
-  height: 11,
-  borderRadius: 5,
-  border: "1px solid #0076D6",
-  backgroundColor: "#D9E8F6",
-  [`& .${linearProgressClasses.determinate}`]: {
-    backgroundColor: "#2378C3",
-  },
-}));
+const BorderLinearProgress = styled(LinearProgress)(() => {
+  return {
+    height: 11,
+    borderRadius: 5,
+    border: "1px solid #0076D6",
+    backgroundColor: "#D9E8F6",
+    [`& .${linearProgressClasses.determinate}`]: {
+      backgroundColor: "#2378C3",
+    },
+  };
+});
 
 type Props = {
   card: SidebarCardContent;
@@ -75,14 +77,16 @@ export const SidebarCardTaskProgress = (props: Props): ReactElement => {
     });
   };
 
-  const renderProgressBar = (): ReactNode => (
-    <BorderLinearProgress
-      variant="determinate"
-      color="secondary"
-      value={progressBarValue()}
-      aria-label="Task progress bar"
-    />
-  );
+  const renderProgressBar = (): ReactNode => {
+    return (
+      <BorderLinearProgress
+        variant="determinate"
+        color="secondary"
+        value={progressBarValue()}
+        aria-label="Task progress bar"
+      />
+    );
+  };
 
   return (
     <SidebarCardGeneric

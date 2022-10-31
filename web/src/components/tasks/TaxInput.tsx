@@ -30,7 +30,9 @@ export const TaxInput = (props: Props): ReactElement => {
   }
 
   useMountEffectWhenDefined(() => {
-    if (!userData) return;
+    if (!userData) {
+      return;
+    }
     setTaxId(userData.profileData.taxId || "");
   }, userData);
 
@@ -39,7 +41,9 @@ export const TaxInput = (props: Props): ReactElement => {
   };
 
   const save = async (): Promise<void> => {
-    if (!updateQueue) return;
+    if (!updateQueue) {
+      return;
+    }
 
     if (taxId.length !== LENGTH) {
       setIsInvalid(true);

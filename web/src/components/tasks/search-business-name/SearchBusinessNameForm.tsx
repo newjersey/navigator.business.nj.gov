@@ -74,8 +74,12 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
 
   useEffect(() => {
     (function showBusinessNameSearchResultsIfDBANameExists() {
-      if (!userData) return;
-      if (props.isDba) return;
+      if (!userData) {
+        return;
+      }
+      if (props.isDba) {
+        return;
+      }
       const shouldDoInitialSearch = currentName.length > 0 && userData.profileData.nexusDbaName !== undefined;
       if (shouldDoInitialSearch && !didInitialSearch.current) {
         didInitialSearch.current = true;
@@ -85,7 +89,9 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
   }, [currentName, userData, props.isDba, doSearch]);
 
   const showBadInputError = (): ReactElement => {
-    if (error !== "BAD_INPUT") return <></>;
+    if (error !== "BAD_INPUT") {
+      return <></>;
+    }
     return (
       <div data-testid={`error-alert-${error}`} className="text-orange">
         {SearchBusinessNameErrorLookup[error]}
@@ -94,7 +100,9 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
   };
 
   const showErrorAlert = (): ReactElement => {
-    if (!error || error === "BAD_INPUT") return <></>;
+    if (!error || error === "BAD_INPUT") {
+      return <></>;
+    }
     return (
       <Alert dataTestid={`error-alert-${error}`} variant="error">
         {SearchBusinessNameErrorLookup[error]}
@@ -131,7 +139,9 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
             </div>
           )}
           <form
-            onSubmit={(event) => doSearch(event, { isInitialSubmit: false })}
+            onSubmit={(event) => {
+              return doSearch(event, { isInitialSubmit: false });
+            }}
             className={`usa-prose grid-container padding-0`}
           >
             <div className="grid-row grid-gap-1">
@@ -141,7 +151,9 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
                   className="fg1 width-100"
                   margin="dense"
                   value={currentName}
-                  onChange={(event) => updateCurrentName(event.target.value)}
+                  onChange={(event) => {
+                    return updateCurrentName(event.target.value);
+                  }}
                   variant="outlined"
                   placeholder={props.config.inputPlaceholderText}
                   inputProps={{

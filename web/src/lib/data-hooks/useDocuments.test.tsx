@@ -7,11 +7,17 @@ import { act, render, waitFor } from "@testing-library/react";
 
 const mockGetSignedS3Link = (sessionHelper as jest.Mocked<typeof sessionHelper>).getSignedS3Link;
 
-jest.mock("@/lib/auth/sessionHelper", () => ({
-  getSignedS3Link: jest.fn((url) => `${url}`),
-}));
+jest.mock("@/lib/auth/sessionHelper", () => {
+  return {
+    getSignedS3Link: jest.fn((url) => {
+      return `${url}`;
+    }),
+  };
+});
 
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
+jest.mock("@/lib/data-hooks/useUserData", () => {
+  return { useUserData: jest.fn() };
+});
 
 describe("useDocuments", () => {
   beforeEach(() => {
@@ -25,7 +31,9 @@ describe("useDocuments", () => {
   } => {
     const returnVal = {
       documents: undefined,
-      checkData: () => Promise.resolve(),
+      checkData: () => {
+        return Promise.resolve();
+      },
     };
     function TestComponent() {
       Object.assign(returnVal, useDocuments());
@@ -42,7 +50,9 @@ describe("useDocuments", () => {
       }),
     });
     setupHook();
-    await waitFor(() => expect(mockGetSignedS3Link).toHaveBeenCalledTimes(3));
+    await waitFor(() => {
+      return expect(mockGetSignedS3Link).toHaveBeenCalledTimes(3);
+    });
     expect(mockGetSignedS3Link).toHaveBeenCalledWith("whatever.pdf");
     expect(mockGetSignedS3Link).toHaveBeenCalledWith("zp.zip");
     expect(mockGetSignedS3Link).toHaveBeenCalledWith("lol.pdf");
@@ -56,7 +66,9 @@ describe("useDocuments", () => {
     });
     const { checkData } = setupHook();
     checkData();
-    await waitFor(() => expect(mockGetSignedS3Link).toHaveBeenCalledTimes(6));
+    await waitFor(() => {
+      return expect(mockGetSignedS3Link).toHaveBeenCalledTimes(6);
+    });
   });
 
   it("regenerates documents every 15 minutes", async () => {
@@ -69,15 +81,21 @@ describe("useDocuments", () => {
     act(() => {
       setupHook();
     });
-    await waitFor(() => expect(mockGetSignedS3Link).toHaveBeenCalledTimes(3));
+    await waitFor(() => {
+      return expect(mockGetSignedS3Link).toHaveBeenCalledTimes(3);
+    });
     act(() => {
       jest.advanceTimersByTime(900000);
     });
-    await waitFor(() => expect(mockGetSignedS3Link).toHaveBeenCalledTimes(6));
+    await waitFor(() => {
+      return expect(mockGetSignedS3Link).toHaveBeenCalledTimes(6);
+    });
     act(() => {
       jest.advanceTimersByTime(900000);
     });
-    await waitFor(() => expect(mockGetSignedS3Link).toHaveBeenCalledTimes(9));
+    await waitFor(() => {
+      return expect(mockGetSignedS3Link).toHaveBeenCalledTimes(9);
+    });
   });
 
   it("does not regenerate documents before 15 minutes", async () => {
@@ -90,10 +108,14 @@ describe("useDocuments", () => {
     act(() => {
       setupHook();
     });
-    await waitFor(() => expect(mockGetSignedS3Link).toHaveBeenCalledTimes(3));
+    await waitFor(() => {
+      return expect(mockGetSignedS3Link).toHaveBeenCalledTimes(3);
+    });
     act(() => {
       jest.advanceTimersByTime(840000);
     });
-    await waitFor(() => expect(mockGetSignedS3Link).toHaveBeenCalledTimes(3));
+    await waitFor(() => {
+      return expect(mockGetSignedS3Link).toHaveBeenCalledTimes(3);
+    });
   });
 });

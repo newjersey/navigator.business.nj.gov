@@ -100,17 +100,17 @@ export const withRoadmap = (
   );
 };
 
-export const generateUseUserDataResponse = (
-  overrides: Partial<UseUserDataResponse>
-): UseUserDataResponse => ({
-  userData: generateUserData({}),
-  update: jest.fn().mockResolvedValue({}),
-  error: undefined,
-  isLoading: false,
-  refresh: jest.fn().mockResolvedValue({}),
-  updateQueue: undefined,
-  ...overrides,
-});
+export const generateUseUserDataResponse = (overrides: Partial<UseUserDataResponse>): UseUserDataResponse => {
+  return {
+    userData: generateUserData({}),
+    update: jest.fn().mockResolvedValue({}),
+    error: undefined,
+    isLoading: false,
+    refresh: jest.fn().mockResolvedValue({}),
+    updateQueue: undefined,
+    ...overrides,
+  };
+};
 
 export const getLastCalledWith = <T, R>(fn: jest.MockInstance<T, R[]>): R[] => {
   const lastIndex = fn.mock.calls.length - 1;
@@ -127,16 +127,21 @@ export const randomElementFromArray = <T,>(array: T[]): T => {
 
 type Query = (f: MatcherFunction) => HTMLElement;
 
-export const withMarkup =
-  (query: Query) =>
-  (text: string): HTMLElement =>
+export const withMarkup = (query: Query) => {
+  return (text: string): HTMLElement => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    query((_content: string, node: any) => {
-      const hasText = (node: HTMLElement) => node.textContent === text;
+    return query((_content: string, node: any) => {
+      const hasText = (node: HTMLElement) => {
+        return node.textContent === text;
+      };
       // eslint-disable-next-line testing-library/no-node-access
-      const childrenDontHaveText = [...node.children].every((child) => !hasText(child as HTMLElement));
+      const childrenDontHaveText = [...node.children].every((child) => {
+        return !hasText(child as HTMLElement);
+      });
       return hasText(node) && childrenDontHaveText;
     });
+  };
+};
 
 export const markdownToText = (text: string): string => {
   let returnText = text;

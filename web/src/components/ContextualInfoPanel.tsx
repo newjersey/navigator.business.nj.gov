@@ -10,16 +10,20 @@ export const ContextualInfoPanel = (): ReactElement => {
 
   const close = () => {
     analytics.event.contextual_sidebar_close_button.click.close_contextual_sidebar();
-    setContextualInfo((prevContextualInfo: ContextualInfo) => ({
-      ...prevContextualInfo,
-      isVisible: false,
-    }));
+    setContextualInfo((prevContextualInfo: ContextualInfo) => {
+      return {
+        ...prevContextualInfo,
+        isVisible: false,
+      };
+    });
 
     setTimeout(() => {
-      setContextualInfo((prevContextualInfo: ContextualInfo) => ({
-        ...prevContextualInfo,
-        markdown: "",
-      }));
+      setContextualInfo((prevContextualInfo: ContextualInfo) => {
+        return {
+          ...prevContextualInfo,
+          markdown: "",
+        };
+      });
     }, 300);
   };
 

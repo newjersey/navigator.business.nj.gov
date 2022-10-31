@@ -11,26 +11,30 @@ import { AddNewsletter, AddToUserTesting, FeedbackClient, UserDataClient } from 
 import { setupExpress } from "../libs/express";
 import { externalEndpointRouterFactory } from "./externalEndpointRouter";
 
-jest.mock("jsonwebtoken", () => ({
-  decode: jest.fn(),
-}));
+jest.mock("jsonwebtoken", () => {
+  return {
+    decode: jest.fn(),
+  };
+});
 const mockJwt = jwt as jest.Mocked<typeof jwt>;
 
-const cognitoPayload = ({ id }: { id: string }) => ({
-  sub: "some-sub",
-  "custom:myNJUserKey": undefined,
-  email: "some-eamail",
-  identities: [
-    {
-      dateCreated: "some-date",
-      issuer: "some-issuer",
-      primary: "some-primary",
-      providerName: "myNJ",
-      providerType: "some-provider-type",
-      userId: id,
-    },
-  ],
-});
+const cognitoPayload = ({ id }: { id: string }) => {
+  return {
+    sub: "some-sub",
+    "custom:myNJUserKey": undefined,
+    email: "some-eamail",
+    identities: [
+      {
+        dateCreated: "some-date",
+        issuer: "some-issuer",
+        primary: "some-primary",
+        providerName: "myNJ",
+        providerType: "some-provider-type",
+        userId: id,
+      },
+    ],
+  };
+};
 
 describe("externalEndpointRouter", () => {
   let app: Express;
@@ -64,7 +68,9 @@ describe("externalEndpointRouter", () => {
   });
 
   afterAll(async () => {
-    await new Promise((resolve) => setTimeout(resolve, 500));
+    await new Promise((resolve) => {
+      return setTimeout(resolve, 500);
+    });
   });
 
   describe("POST", () => {

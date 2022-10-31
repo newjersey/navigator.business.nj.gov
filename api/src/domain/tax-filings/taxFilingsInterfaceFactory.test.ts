@@ -28,7 +28,9 @@ describe("TaxFilingsInterfaceFactory", () => {
       lookup: jest.fn(),
       onboarding: jest.fn(),
     };
-    const dateNowStub = jest.fn(() => dateNow);
+    const dateNowStub = jest.fn(() => {
+      return dateNow;
+    });
     global.Date.now = dateNowStub;
 
     taxFilingInterface = taxFilingsInterfaceFactory(taxFilingClient);

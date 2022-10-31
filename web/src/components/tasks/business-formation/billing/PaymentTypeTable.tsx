@@ -40,7 +40,11 @@ export const PaymentTypeTable = (): ReactElement => {
 
     setCreditCardCost(creditCardCost);
     setAchCost(achCost);
-    setTotalCost(costs.reduce((a, b) => a + b, 0));
+    setTotalCost(
+      costs.reduce((a, b) => {
+        return a + b;
+      }, 0)
+    );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     state.formationFormData.certificateOfStanding,

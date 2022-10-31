@@ -10,5 +10,10 @@ export const useMockDocuments = (overrides: Partial<ProfileDocuments>): void => 
 };
 
 export const setMockDocumentsResponse = (documents: ProfileDocuments | undefined): void => {
-  mockUseDocuments.mockReturnValue({ documents, checkData: () => Promise.resolve() });
+  mockUseDocuments.mockReturnValue({
+    documents,
+    checkData: () => {
+      return Promise.resolve();
+    },
+  });
 };

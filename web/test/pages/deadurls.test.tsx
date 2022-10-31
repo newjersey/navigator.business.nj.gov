@@ -3,37 +3,43 @@ import DeadUrlsPage from "@/pages/mgmt/deadurls";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { Options } from "broken-link-checker";
 
-jest.mock("@/lib/api-client/apiClient", () => ({ post: jest.fn() }));
+jest.mock("@/lib/api-client/apiClient", () => {
+  return { post: jest.fn() };
+});
 const mockApi = api as jest.Mocked<typeof api>;
 
-jest.mock("broken-link-checker", () => ({
-  HtmlUrlChecker: function SpyHtmlUrlChecker(
-    options: Options,
-    handlers: {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      link?: ((result: any) => void) | undefined;
-      end?: (() => void) | undefined;
-    }
-  ) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const enqueue = (pageUrl: any): any => {
-      if (!handlers.link || !handlers.end) return;
-      if (pageUrl.includes("task1")) {
-        handlers.link({
-          url: { original: "http://www.example.com" },
-          broken: true,
-        });
-      } else {
-        handlers.link({
-          url: { original: "" },
-          broken: false,
-        });
+jest.mock("broken-link-checker", () => {
+  return {
+    HtmlUrlChecker: function SpyHtmlUrlChecker(
+      options: Options,
+      handlers: {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        link?: ((result: any) => void) | undefined;
+        end?: (() => void) | undefined;
       }
-      handlers.end();
-    };
-    return { enqueue };
-  },
-}));
+    ) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const enqueue = (pageUrl: any): any => {
+        if (!handlers.link || !handlers.end) {
+          return;
+        }
+        if (pageUrl.includes("task1")) {
+          handlers.link({
+            url: { original: "http://www.example.com" },
+            broken: true,
+          });
+        } else {
+          handlers.link({
+            url: { original: "" },
+            broken: false,
+          });
+        }
+        handlers.end();
+      };
+      return { enqueue };
+    },
+  };
+});
 
 describe("DeadUrls page", () => {
   it("displays content when password is successful", async () => {

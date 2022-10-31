@@ -2,7 +2,9 @@ import { Roadmap } from "@/lib/types/types";
 import { TaskProgress, UserData } from "@businessnjgovnavigator/shared";
 
 export const getTotalTaskCount = (roadmap: Roadmap | undefined): number => {
-  if (!roadmap) return 1;
+  if (!roadmap) {
+    return 1;
+  }
   return roadmap.tasks.length;
 };
 
@@ -31,7 +33,9 @@ const getTaskCountForStatus = ({
   roadmap: Roadmap | undefined;
   userData: UserData | undefined;
 }): TaskCount => {
-  if (!roadmap || !userData) return { required: 0, optional: 0, total: 0 };
+  if (!roadmap || !userData) {
+    return { required: 0, optional: 0, total: 0 };
+  }
 
   let optionalTaskCountForStatus = 0;
   let requiredTotalTaskCountForStatus = 0;

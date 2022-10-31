@@ -39,8 +39,12 @@ const loadTaskByFileName = (fileName: string): Task => {
   const taskWithoutLinks = convertTaskMd(fileContents);
   const fileNameWithoutMd = fileName.split(".md")[0];
   const unlockedByTaskLinks = (
-    dependencies.find((dependency) => dependency.name === fileNameWithoutMd)?.dependencies || []
-  ).map((dependencyFileName) => loadTaskLinkByFilename(dependencyFileName));
+    dependencies.find((dependency) => {
+      return dependency.name === fileNameWithoutMd;
+    })?.dependencies || []
+  ).map((dependencyFileName) => {
+    return loadTaskLinkByFilename(dependencyFileName);
+  });
 
   return {
     ...taskWithoutLinks,

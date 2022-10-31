@@ -15,7 +15,9 @@ export const useUpdateTaskProgress = (): {
   const [congratulatoryModalIsOpen, setCongratulatoryModalIsOpen] = useState<boolean>(false);
 
   const queueUpdateTaskProgress = (taskId: string, newValue: TaskProgress): void => {
-    if (!sectionCompletion || !roadmap || !updateQueue || !userData) return;
+    if (!sectionCompletion || !roadmap || !updateQueue || !userData) {
+      return;
+    }
 
     updateQueue.queueTaskProgress({ [taskId]: newValue });
 
@@ -30,9 +32,9 @@ export const useUpdateTaskProgress = (): {
       setNextSection(nextSection);
       setCongratulatoryModalIsOpen(true);
       updateQueue.queuePreferences({
-        roadmapOpenSections: userData.preferences.roadmapOpenSections.filter(
-          (section) => section !== currentSection
-        ),
+        roadmapOpenSections: userData.preferences.roadmapOpenSections.filter((section) => {
+          return section !== currentSection;
+        }),
       });
     }
 

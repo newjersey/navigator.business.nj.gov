@@ -22,9 +22,13 @@ export const UserDataStorageFactory = (): UserDataStorage => {
   const browserStorage = BrowserStorageFactory("session");
 
   const get = (key?: string): UserData | undefined => {
-    if (!key) return undefined;
+    if (!key) {
+      return undefined;
+    }
     const bufferData = buffer.get(key);
-    if (bufferData) return bufferData;
+    if (bufferData) {
+      return bufferData;
+    }
     const data = browserStorage.get(`${prefix(key)}${key}`);
     if (data) {
       const userObject = JSON.parse(data);
@@ -35,13 +39,17 @@ export const UserDataStorageFactory = (): UserDataStorage => {
   };
 
   const set = (key: string, value: UserData): boolean => {
-    if (!key) return false;
+    if (!key) {
+      return false;
+    }
     buffer.set(key, value);
     return browserStorage.set(`${prefix(key)}${key}`, JSON.stringify(value));
   };
 
   const _delete = (key?: string): void => {
-    if (!key) return undefined;
+    if (!key) {
+      return undefined;
+    }
     buffer.delete(key);
     browserStorage.delete(`${prefix(key)}${key}`);
   };
@@ -61,7 +69,9 @@ export const UserDataStorageFactory = (): UserDataStorage => {
 
   const getCurrentUserId = (): string | undefined => {
     const keys = getCurrentUsers();
-    if (keys.length === 0) return undefined;
+    if (keys.length === 0) {
+      return undefined;
+    }
     if (keys.length > 1) {
       for (const key of keys) {
         _delete(key);
@@ -82,11 +92,14 @@ export const UserDataStorageFactory = (): UserDataStorage => {
   };
 
   const getCurrentUsers = (): string[] => {
-    return browserStorage.keys().filter((value: string) => value.includes(userDataPrefix));
+    return browserStorage.keys().filter((value: string) => {
+      return value.includes(userDataPrefix);
+    });
   };
 
-  const prefix = (key: string): string =>
-    key.includes(swrPrefixToIgnore) ? "" : key.includes(userDataPrefix) ? "" : userDataPrefix;
+  const prefix = (key: string): string => {
+    return key.includes(swrPrefixToIgnore) ? "" : key.includes(userDataPrefix) ? "" : userDataPrefix;
+  };
 
   return {
     get,

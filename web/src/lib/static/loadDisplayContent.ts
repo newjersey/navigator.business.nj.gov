@@ -46,11 +46,13 @@ const getFormationFields = (
   legalId: FormationLegalType,
   defaultStore?: FormationDisplayContent
 ): FormationDisplayContent => {
-  const getPath = (filename: string, type?: FormationLegalType): string =>
-    path.join(displayContentDir, "business-formation", type ?? "", filename);
+  const getPath = (filename: string, type?: FormationLegalType): string => {
+    return path.join(displayContentDir, "business-formation", type ?? "", filename);
+  };
 
-  const loadFile = (filename: string, type?: FormationLegalType): string =>
-    fs.readFileSync(getPath(filename, type), "utf8");
+  const loadFile = (filename: string, type?: FormationLegalType): string => {
+    return fs.readFileSync(getPath(filename, type), "utf8");
+  };
 
   const getTextFieldContent = (filename: string, type: FormationLegalType) => {
     const markdown = getMarkdown(loadFile(filename, type));
@@ -60,20 +62,36 @@ const getFormationFields = (
     };
   };
 
-  const introParagraph = (type: FormationLegalType) =>
-    getTextFieldContent("form-business-entity-intro.md", type);
-  const businessNameCheck = (type: FormationLegalType) => getTextFieldContent("business-name-check.md", type);
-  const services = (type: FormationLegalType) => getTextFieldContent(`services.md`, type);
-  const officialFormationDocument = (type: FormationLegalType) =>
-    getTextFieldContent(`doc-official-formation.md`, type);
-  const certificateOfStanding = (type: FormationLegalType) =>
-    getTextFieldContent(`doc-certificate-of-standing.md`, type);
-  const certifiedCopyOfFormationDocument = (type: FormationLegalType) =>
-    getTextFieldContent(`doc-certified-copy-of-formation-document.md`, type);
-  const notification = (type: FormationLegalType) => getTextFieldContent(`notification.md`, type);
-  const agentNumberOrManual = (type: FormationLegalType) => getTextFieldContent(`registered-agent.md`, type);
-  const members = (type: FormationLegalType) => getTextFieldContent(`members.md`, type);
-  const signatureHeader = (type: FormationLegalType) => getTextFieldContent(`signatures.md`, type);
+  const introParagraph = (type: FormationLegalType) => {
+    return getTextFieldContent("form-business-entity-intro.md", type);
+  };
+  const businessNameCheck = (type: FormationLegalType) => {
+    return getTextFieldContent("business-name-check.md", type);
+  };
+  const services = (type: FormationLegalType) => {
+    return getTextFieldContent(`services.md`, type);
+  };
+  const officialFormationDocument = (type: FormationLegalType) => {
+    return getTextFieldContent(`doc-official-formation.md`, type);
+  };
+  const certificateOfStanding = (type: FormationLegalType) => {
+    return getTextFieldContent(`doc-certificate-of-standing.md`, type);
+  };
+  const certifiedCopyOfFormationDocument = (type: FormationLegalType) => {
+    return getTextFieldContent(`doc-certified-copy-of-formation-document.md`, type);
+  };
+  const notification = (type: FormationLegalType) => {
+    return getTextFieldContent(`notification.md`, type);
+  };
+  const agentNumberOrManual = (type: FormationLegalType) => {
+    return getTextFieldContent(`registered-agent.md`, type);
+  };
+  const members = (type: FormationLegalType) => {
+    return getTextFieldContent(`members.md`, type);
+  };
+  const signatureHeader = (type: FormationLegalType) => {
+    return getTextFieldContent(`signatures.md`, type);
+  };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const fieldFunctions: Record<keyof FormationDisplayContent, (type: FormationLegalType) => any> = {
@@ -115,9 +133,9 @@ const getFormationFields = (
 export const loadTasksDisplayContent = (): TasksDisplayContent => {
   const defaultFormationDisplayContent = getFormationFields(defaultFormationLegalType);
 
-  const formationDisplayContent = FormationLegalTypes.filter(
-    (val) => val != defaultFormationLegalType
-  ).reduce((accumulator: FormationDisplayContentMap, legalId: FormationLegalType) => {
+  const formationDisplayContent = FormationLegalTypes.filter((val) => {
+    return val != defaultFormationLegalType;
+  }).reduce((accumulator: FormationDisplayContentMap, legalId: FormationLegalType) => {
     accumulator[legalId] = getFormationFields(legalId, defaultFormationDisplayContent);
     return accumulator;
   }, {} as FormationDisplayContentMap);

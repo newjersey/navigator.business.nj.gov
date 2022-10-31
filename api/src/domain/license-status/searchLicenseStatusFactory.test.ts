@@ -3,12 +3,13 @@ import { generateLicenseEntity, generateNameAndAddress } from "../../../test/fac
 import { LicenseStatusClient, SearchLicenseStatus } from "../types";
 import { determineLicenseStatus, searchLicenseStatusFactory } from "./searchLicenseStatusFactory";
 
-const entityWithAddress = (address: string) =>
-  generateLicenseEntity({
+const entityWithAddress = (address: string) => {
+  return generateLicenseEntity({
     checkoffStatus: "Completed",
     licenseStatus: "Active",
     addressLine1: address,
   });
+};
 
 describe("searchLicenseStatus", () => {
   let stubLicenseStatusClient: jest.Mocked<LicenseStatusClient>;
@@ -206,13 +207,14 @@ describe("searchLicenseStatus", () => {
     );
   });
 
-  const queryWithAddress = async (address: string): Promise<LicenseStatusResult> =>
-    await searchLicenseStatus(
+  const queryWithAddress = async (address: string): Promise<LicenseStatusResult> => {
+    return await searchLicenseStatus(
       generateNameAndAddress({
         addressLine1: address,
       }),
       "Home improvement"
     );
+  };
 
   describe("detailed address matching logic", () => {
     it("matches on address ignoring spaces and non-alphanumeric characters", async () => {

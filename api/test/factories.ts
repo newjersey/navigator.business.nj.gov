@@ -55,13 +55,15 @@ export const generateUser = (overrides: Partial<BusinessUser>): BusinessUser => 
 };
 
 export const generateTaxFilingDates = (numberOfDates: number) => {
-  const dateToShortISO = (date: Date): string => date.toISOString().split("T")[0];
+  const dateToShortISO = (date: Date): string => {
+    return date.toISOString().split("T")[0];
+  };
   const date = new Date(Date.now());
   const futureDate = new Date(Date.now());
   futureDate.setFullYear(futureDate.getFullYear() + 2);
-  return [...Array.from({ length: numberOfDates }).keys()].map(() =>
-    getRandomDateInBetween(dateToShortISO(date), dateToShortISO(futureDate)).toLocaleDateString()
-  );
+  return [...Array.from({ length: numberOfDates }).keys()].map(() => {
+    return getRandomDateInBetween(dateToShortISO(date), dateToShortISO(futureDate)).toLocaleDateString();
+  });
 };
 
 export const generateTaxFilingResult = (overrides: Partial<TaxFilingResult>): TaxFilingResult => {
@@ -325,8 +327,12 @@ export const randomIndustry = (): Industry => {
 
 export const randomNewsletterStatus = (failed = !!(randomInt() % 2)): NewsletterStatus => {
   const status = failed
-    ? newsletterStatusList.filter((i) => i.includes("ERROR"))
-    : newsletterStatusList.filter((i) => !i.includes("ERROR"));
+    ? newsletterStatusList.filter((i) => {
+        return i.includes("ERROR");
+      })
+    : newsletterStatusList.filter((i) => {
+        return !i.includes("ERROR");
+      });
   const randomIndex = Math.floor(Math.random() * status.length);
   return status[randomIndex];
 };
@@ -449,16 +455,18 @@ export const generateFormationSubmitResponse = (
   };
 };
 
-export const generateFormationAddress = (overrides: Partial<FormationAddress>): FormationAddress => ({
-  name: `some-members-name-${randomInt()}`,
-  addressLine1: `some-members-address-1-${randomInt()}`,
-  addressLine2: `some-members-address-2-${randomInt()}`,
-  addressCity: `some-members-address-city-${randomInt()}`,
-  addressState: `New Jersey`,
-  addressZipCode: `some-agent-office-zipcode-${randomInt()}`,
-  signature: false,
-  ...overrides,
-});
+export const generateFormationAddress = (overrides: Partial<FormationAddress>): FormationAddress => {
+  return {
+    name: `some-members-name-${randomInt()}`,
+    addressLine1: `some-members-address-1-${randomInt()}`,
+    addressLine2: `some-members-address-2-${randomInt()}`,
+    addressCity: `some-members-address-city-${randomInt()}`,
+    addressState: `New Jersey`,
+    addressZipCode: `some-agent-office-zipcode-${randomInt()}`,
+    signature: false,
+    ...overrides,
+  };
+};
 
 export const randomFormationLegalType = (): FormationLegalType => {
   const randomIndex = Math.floor(Math.random() * FormationLegalTypes.length);

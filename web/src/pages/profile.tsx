@@ -130,11 +130,15 @@ const ProfilePage = (props: Props): ReactElement => {
   }, userData);
 
   const onValidation = (field: ProfileFields, invalid: boolean) => {
-    setFieldStates((prevFieldStates) => ({ ...prevFieldStates, [field]: { invalid } }));
+    setFieldStates((prevFieldStates) => {
+      return { ...prevFieldStates, [field]: { invalid } };
+    });
   };
 
   const onBack = () => {
-    if (!userData) return;
+    if (!userData) {
+      return;
+    }
     if (businessPersona === "STARTING") {
       analytics.event.profile_back_to_roadmap.click.view_roadmap();
     }
@@ -147,14 +151,18 @@ const ProfilePage = (props: Props): ReactElement => {
 
   const showRegistrationModalForGuest = (): (() => void) | undefined => {
     if (isAuthenticated === IsAuthenticated.FALSE) {
-      return () => setRegistrationModalIsVisible(true);
+      return () => {
+        return setRegistrationModalIsVisible(true);
+      };
     }
     return undefined;
   };
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
-    if (!userData) return;
+    if (!userData) {
+      return;
+    }
     analytics.event.profile_save.click.save_profile_changes();
 
     const fieldStatesCopy = cloneDeep(fieldStates);
@@ -173,7 +181,11 @@ const ProfilePage = (props: Props): ReactElement => {
       taxFilingData = { ...taxFilingData, state: undefined, registered: false, filings: [] };
     }
 
-    if (Object.keys(fieldStatesCopy).some((k) => fieldStatesCopy[k as ProfileFields].invalid)) {
+    if (
+      Object.keys(fieldStatesCopy).some((k) => {
+        return fieldStatesCopy[k as ProfileFields].invalid;
+      })
+    ) {
       setAlert("ERROR");
       return;
     }
@@ -228,13 +240,19 @@ const ProfilePage = (props: Props): ReactElement => {
   };
 
   const shouldShowNexusBusinessNameElements = (): boolean => {
-    if (!userData) return false;
+    if (!userData) {
+      return false;
+    }
     return LookupLegalStructureById(userData.profileData.legalStructureId).requiresPublicFiling;
   };
 
   const displayHomedBaseBusinessQuestion = (): boolean => {
-    if (!userData) return false;
-    if (!profileData.industryId) return true;
+    if (!userData) {
+      return false;
+    }
+    if (!profileData.industryId) {
+      return true;
+    }
     if (profileData.foreignBusinessType === "NEXUS" && profileData.nexusLocationInNewJersey) {
       return false;
     }
@@ -579,11 +597,22 @@ const ProfilePage = (props: Props): ReactElement => {
           <div className="usa-section padding-top-0 desktop:padding-top-3">
             <EscapeModal
               isOpen={escapeModal}
-              close={() => setEscapeModal(false)}
-              primaryButtonOnClick={() => redirect()}
+              close={() => {
+                return setEscapeModal(false);
+              }}
+              primaryButtonOnClick={() => {
+                return redirect();
+              }}
             />
             <SingleColumnContainer>
-              {alert && <ProfileSnackbarAlert alert={alert} close={() => setAlert(undefined)} />}
+              {alert && (
+                <ProfileSnackbarAlert
+                  alert={alert}
+                  close={() => {
+                    return setAlert(undefined);
+                  }}
+                />
+              )}
               <UserDataErrorAlert />
             </SingleColumnContainer>
             <div className="margin-top-6 desktop:margin-top-0">
@@ -612,7 +641,13 @@ const ProfilePage = (props: Props): ReactElement => {
 
                       <hr className="margin-top-7 margin-bottom-2" aria-hidden={true} />
                       <div className="float-right fdr">
-                        <Button style="secondary" onClick={() => onBack()} dataTestid="back">
+                        <Button
+                          style="secondary"
+                          onClick={() => {
+                            return onBack();
+                          }}
+                          dataTestid="back"
+                        >
                           {Config.profileDefaults.backButtonText}
                         </Button>
                         <Button

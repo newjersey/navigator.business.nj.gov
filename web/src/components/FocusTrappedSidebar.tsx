@@ -17,9 +17,13 @@ export const FocusTrappedSidebar = ({ children, close, isOpen, delayTime = 300 }
     if (isOpen && !showDiv) {
       setShowDiv(true);
     } else if (!isOpen && showDiv) {
-      timeoutId = setTimeout(() => setShowDiv(false), delayTime);
+      timeoutId = setTimeout(() => {
+        return setShowDiv(false);
+      }, delayTime);
     }
-    return () => clearTimeout(timeoutId);
+    return () => {
+      return clearTimeout(timeoutId);
+    };
   }, [isOpen, delayTime, showDiv]);
 
   useMountEffect(() => {

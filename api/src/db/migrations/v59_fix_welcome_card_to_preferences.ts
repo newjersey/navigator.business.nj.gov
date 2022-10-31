@@ -14,7 +14,9 @@ export interface v59UserData {
 }
 
 export const migrate_v58_to_v59 = (v58Data: v58UserData): v59UserData => {
-  const removedWelcomeCard = v58Data.preferences.visibleRoadmapSidebarCards.filter((id) => id !== "welcome");
+  const removedWelcomeCard = v58Data.preferences.visibleRoadmapSidebarCards.filter((id) => {
+    return id !== "welcome";
+  });
 
   return {
     ...v58Data,

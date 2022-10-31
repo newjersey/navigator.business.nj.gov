@@ -2,9 +2,11 @@ import { MgmtAuth } from "@/components/auth/MgmtAuth";
 import * as api from "@/lib/api-client/apiClient";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
-jest.mock("@/lib/api-client/apiClient", () => ({
-  post: jest.fn(),
-}));
+jest.mock("@/lib/api-client/apiClient", () => {
+  return {
+    post: jest.fn(),
+  };
+});
 
 const mockApi = api as jest.Mocked<typeof api>;
 
@@ -46,7 +48,9 @@ describe("<MgmtAuth />", () => {
     const pwField = screen.getByTestId("mgmt-password-field");
     fireEvent.change(pwField, { target: { value: "1234" } });
     fireEvent.click(screen.getByTestId("mgmt-submit-bttn"));
-    await waitFor(() => expect(mockApi.post).toHaveBeenCalled());
+    await waitFor(() => {
+      return expect(mockApi.post).toHaveBeenCalled();
+    });
     expect(isAuthed).toEqual(true);
   });
 
@@ -57,7 +61,9 @@ describe("<MgmtAuth />", () => {
     const pwField = screen.getByTestId("mgmt-password-field");
     fireEvent.change(pwField, { target: { value: "1234" } });
     fireEvent.keyPress(pwField, { key: "Enter", keyCode: 13 });
-    await waitFor(() => expect(mockApi.post).toHaveBeenCalled());
+    await waitFor(() => {
+      return expect(mockApi.post).toHaveBeenCalled();
+    });
     expect(isAuthed).toEqual(true);
   });
 
@@ -68,7 +74,9 @@ describe("<MgmtAuth />", () => {
     const pwField = screen.getByTestId("mgmt-password-field");
     fireEvent.change(pwField, { target: { value: "1234" } });
     fireEvent.click(screen.getByTestId("mgmt-submit-bttn"));
-    await waitFor(() => expect(mockApi.post).toHaveBeenCalled());
+    await waitFor(() => {
+      return expect(mockApi.post).toHaveBeenCalled();
+    });
     expect(isAuthed).toEqual(false);
   });
 });

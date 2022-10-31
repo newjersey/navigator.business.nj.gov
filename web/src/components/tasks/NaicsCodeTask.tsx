@@ -21,13 +21,19 @@ export const NaicsCodeTask = (props: Props): ReactElement => {
   const { isAuthenticated, setRegistrationModalIsVisible } = useContext(AuthAlertContext);
 
   useMountEffectWhenDefined(() => {
-    if (!userData) return;
-    if (isAuthenticated === IsAuthenticated.FALSE) return;
+    if (!userData) {
+      return;
+    }
+    if (isAuthenticated === IsAuthenticated.FALSE) {
+      return;
+    }
     setShowInput(!userData.profileData.naicsCode);
   }, userData);
 
   const setBackToEditing = ({ remove }: { remove: boolean }) => {
-    if (!userData || !updateQueue) return;
+    if (!userData || !updateQueue) {
+      return;
+    }
     setShowInput(true);
     const newNaicsValue = remove ? emptyProfileData.naicsCode : userData.profileData.naicsCode;
     updateQueue
@@ -36,8 +42,12 @@ export const NaicsCodeTask = (props: Props): ReactElement => {
       .update();
   };
 
-  const onEdit = () => setBackToEditing({ remove: false });
-  const onRemove = () => setBackToEditing({ remove: true });
+  const onEdit = () => {
+    return setBackToEditing({ remove: false });
+  };
+  const onRemove = () => {
+    return setBackToEditing({ remove: true });
+  };
 
   const onSave = () => {
     if (isAuthenticated === IsAuthenticated.FALSE) {

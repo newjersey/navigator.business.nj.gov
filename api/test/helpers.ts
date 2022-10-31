@@ -12,10 +12,11 @@ export const determineAnnualFilingDate = (dateOfFormation: string) => {
   return parseDate(`${year}-${nextMonth}-01`).add(-1, "day").format("YYYY-MM-DD");
 };
 
-export const generateHashedKey = (key: string) =>
-  createHmac("sha256", process.env.INTERCOM_HASH_SECRET || "")
+export const generateHashedKey = (key: string) => {
+  return createHmac("sha256", process.env.INTERCOM_HASH_SECRET || "")
     .update(key)
     .digest("hex");
+};
 
 export const randomElementFromArray = <T>(array: T[]): T => {
   return array[Math.floor(Math.random() * array.length)];

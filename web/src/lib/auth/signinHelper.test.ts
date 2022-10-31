@@ -11,22 +11,30 @@ const userDataStorage = {
   delete: jest.fn(),
 };
 
-jest.mock("@/lib/storage/UserDataStorage", () => ({
-  UserDataStorageFactory: jest.fn(() => userDataStorage),
-}));
+jest.mock("@/lib/storage/UserDataStorage", () => {
+  return {
+    UserDataStorageFactory: jest.fn(() => {
+      return userDataStorage;
+    }),
+  };
+});
 
-jest.mock("./sessionHelper", () => ({
-  getCurrentUser: jest.fn(),
-  triggerSignOut: jest.fn().mockResolvedValue({}),
-}));
+jest.mock("./sessionHelper", () => {
+  return {
+    getCurrentUser: jest.fn(),
+    triggerSignOut: jest.fn().mockResolvedValue({}),
+  };
+});
 
 const mockSession = session as jest.Mocked<typeof session>;
 
-jest.mock("@/lib/api-client/apiClient", () => ({
-  getUserData: jest.fn(),
-  postUserData: jest.fn(),
-  postSelfReg: jest.fn(),
-}));
+jest.mock("@/lib/api-client/apiClient", () => {
+  return {
+    getUserData: jest.fn(),
+    postUserData: jest.fn(),
+    postSelfReg: jest.fn(),
+  };
+});
 const mockApi = api as jest.Mocked<typeof api>;
 
 describe("SigninHelper", () => {
@@ -101,14 +109,18 @@ describe("SigninHelper", () => {
         authRedirectURL: "/some-url",
       });
       await onSelfRegister(fakeRouter, userData, update, mockSetAlertStatus);
-      await waitFor(() => expect(mockPush).toHaveBeenCalledWith("/some-url"));
+      await waitFor(() => {
+        return expect(mockPush).toHaveBeenCalledWith("/some-url");
+      });
       expect(update).toHaveBeenCalledWith(returnedUserData);
     });
 
     it("sets alert to DUPLICATE_ERROR on 409 response code", async () => {
       mockApi.postSelfReg.mockRejectedValue(409);
       await onSelfRegister(fakeRouter, userData, update, mockSetAlertStatus);
-      await waitFor(() => expect(mockSetAlertStatus).toHaveBeenCalledWith("DUPLICATE_ERROR"));
+      await waitFor(() => {
+        return expect(mockSetAlertStatus).toHaveBeenCalledWith("DUPLICATE_ERROR");
+      });
       expect(update).not.toHaveBeenCalled();
       expect(mockPush).not.toHaveBeenCalled();
     });
@@ -116,7 +128,9 @@ describe("SigninHelper", () => {
     it("sets alert to RESPONSE_ERROR on generic error", async () => {
       mockApi.postSelfReg.mockRejectedValue(500);
       await onSelfRegister(fakeRouter, userData, update, mockSetAlertStatus);
-      await waitFor(() => expect(mockSetAlertStatus).toHaveBeenCalledWith("RESPONSE_ERROR"));
+      await waitFor(() => {
+        return expect(mockSetAlertStatus).toHaveBeenCalledWith("RESPONSE_ERROR");
+      });
       expect(update).not.toHaveBeenCalled();
       expect(mockPush).not.toHaveBeenCalled();
     });
@@ -126,7 +140,9 @@ describe("SigninHelper", () => {
     it("dispatches guest user login", async () => {
       const user = generateUser({});
       const userData = generateUserData({ user });
-      const userStorageMock = userDataStorage.getCurrentUserData.mockImplementation(() => userData);
+      const userStorageMock = userDataStorage.getCurrentUserData.mockImplementation(() => {
+        return userData;
+      });
       await onGuestSignIn(mockPush, ROUTES.landing, mockDispatch);
       expect(userStorageMock).toHaveBeenCalled();
       expect(mockDispatch).toHaveBeenCalledWith({
@@ -138,7 +154,9 @@ describe("SigninHelper", () => {
     it("redirect user to onboarding if still in progress", async () => {
       const user = generateUser({});
       const userData = generateUserData({ user, formProgress: "UNSTARTED" });
-      userDataStorage.getCurrentUserData.mockImplementation(() => userData);
+      userDataStorage.getCurrentUserData.mockImplementation(() => {
+        return userData;
+      });
       mockSession.getCurrentUser.mockImplementation(() => {
         throw new Error("New");
       });
@@ -147,7 +165,9 @@ describe("SigninHelper", () => {
     });
 
     it("redirect user to home if no user data is found", async () => {
-      userDataStorage.getCurrentUserData.mockImplementation(() => undefined);
+      userDataStorage.getCurrentUserData.mockImplementation(() => {
+        return undefined;
+      });
       mockSession.getCurrentUser.mockImplementation(() => {
         throw new Error("New");
       });
@@ -156,7 +176,9 @@ describe("SigninHelper", () => {
     });
 
     it("does not redirect user when at /onboarding", async () => {
-      userDataStorage.getCurrentUserData.mockImplementation(() => undefined);
+      userDataStorage.getCurrentUserData.mockImplementation(() => {
+        return undefined;
+      });
       mockSession.getCurrentUser.mockImplementation(() => {
         throw new Error("New");
       });

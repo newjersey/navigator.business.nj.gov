@@ -49,18 +49,20 @@ export const OnboardingLegalStructure = (): ReactElement => {
             value={state.profileData.legalStructureId || ""}
             onChange={handleLegalStructure}
           >
-            {LegalStructuresOrdered.map((legalStructure) => (
-              <FormControlLabel
-                aria-label={legalStructure.id}
-                style={{ alignItems: "flex-start" }}
-                labelPlacement="end"
-                key={legalStructure.id}
-                data-testid={legalStructure.id}
-                value={legalStructure.id}
-                control={<Radio color="primary" />}
-                label={makeLabel(legalStructure.id)}
-              />
-            ))}
+            {LegalStructuresOrdered.map((legalStructure) => {
+              return (
+                <FormControlLabel
+                  aria-label={legalStructure.id}
+                  style={{ alignItems: "flex-start" }}
+                  labelPlacement="end"
+                  key={legalStructure.id}
+                  data-testid={legalStructure.id}
+                  value={legalStructure.id}
+                  control={<Radio color="primary" />}
+                  label={makeLabel(legalStructure.id)}
+                />
+              );
+            })}
           </RadioGroup>
         </FormControl>
       </div>

@@ -110,7 +110,9 @@ const DashboardPage = (props: Props): ReactElement => {
   }, userData);
 
   const displayHomedBaseBusinessQuestion = (): boolean => {
-    if (!userData) return false;
+    if (!userData) {
+      return false;
+    }
     return (
       isHomeBasedBusinessApplicable(userData.profileData.industryId) &&
       userData.profileData.homeBasedBusiness === undefined

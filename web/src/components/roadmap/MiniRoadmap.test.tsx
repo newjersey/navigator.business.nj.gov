@@ -9,8 +9,12 @@ import {
 } from "@/test/mock/withStatefulUserData";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
+jest.mock("@/lib/data-hooks/useRoadmap", () => {
+  return { useRoadmap: jest.fn() };
+});
+jest.mock("@/lib/data-hooks/useUserData", () => {
+  return { useUserData: jest.fn() };
+});
 
 const renderMiniRoadMap = (taskId: string) => {
   render(<MiniRoadmap activeTaskId={taskId} />);
@@ -166,9 +170,9 @@ describe("<MiniRoadmap />", () => {
     it("adds step to userData openSteps when step is active", async () => {
       renderStatefulMiniRoadMap("task1", userData);
       expect(screen.getByText("task1")).toBeInTheDocument();
-      await waitFor(() =>
-        expect(currentUserData().preferences.roadmapOpenSteps).toEqual(expect.arrayContaining([1, 2]))
-      );
+      await waitFor(() => {
+        return expect(currentUserData().preferences.roadmapOpenSteps).toEqual(expect.arrayContaining([1, 2]));
+      });
     });
 
     it("adds step to userData openSteps when step is clicked", async () => {
@@ -177,18 +181,18 @@ describe("<MiniRoadmap />", () => {
       fireEvent.click(screen.getByText("step1"));
       expect(screen.getByText("task1")).toBeInTheDocument();
       expect(screen.getByText("task2")).toBeInTheDocument();
-      await waitFor(() =>
-        expect(currentUserData().preferences.roadmapOpenSteps).toEqual(expect.arrayContaining([1, 2]))
-      );
+      await waitFor(() => {
+        return expect(currentUserData().preferences.roadmapOpenSteps).toEqual(expect.arrayContaining([1, 2]));
+      });
     });
 
     it("removes active step from userData openSteps when active step is clicked", async () => {
       renderStatefulMiniRoadMap("task1", userData);
       fireEvent.click(screen.getByText("step1"));
       expect(screen.queryByText("task1")).not.toBeInTheDocument();
-      await waitFor(() =>
-        expect(currentUserData().preferences.roadmapOpenSteps).toEqual(expect.arrayContaining([2]))
-      );
+      await waitFor(() => {
+        return expect(currentUserData().preferences.roadmapOpenSteps).toEqual(expect.arrayContaining([2]));
+      });
     });
   });
 });

@@ -31,7 +31,9 @@ export const ProfileTabNav = (props: Props): ReactElement => {
   };
 
   const shouldShowDocuments = () => {
-    if (props.userData?.formationData.getFilingResponse?.success) return true;
+    if (props.userData?.formationData.getFilingResponse?.success) {
+      return true;
+    }
     if (props.businessPersona == "STARTING") {
       return LookupLegalStructureById(props.userData?.profileData.legalStructureId).requiresPublicFiling;
     }

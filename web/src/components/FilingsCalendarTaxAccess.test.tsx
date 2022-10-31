@@ -25,13 +25,21 @@ import { BusinessPersona } from "../../../shared/src/profileData";
 import { generateFormationData } from "../../test/factories";
 import { FilingsCalendarTaxAccess } from "./FilingsCalendarTaxAccess";
 
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("@/lib/api-client/apiClient", () => ({
-  postTaxRegistrationOnboarding: jest.fn(),
-  postTaxRegistrationLookup: jest.fn(),
-}));
-jest.mock("next/router", () => ({ useRouter: jest.fn() }));
+jest.mock("@/lib/data-hooks/useUserData", () => {
+  return { useUserData: jest.fn() };
+});
+jest.mock("@/lib/data-hooks/useRoadmap", () => {
+  return { useRoadmap: jest.fn() };
+});
+jest.mock("@/lib/api-client/apiClient", () => {
+  return {
+    postTaxRegistrationOnboarding: jest.fn(),
+    postTaxRegistrationLookup: jest.fn(),
+  };
+});
+jest.mock("next/router", () => {
+  return { useRouter: jest.fn() };
+});
 const mockApi = api as jest.Mocked<typeof api>;
 
 const Config = getMergedConfig();
@@ -66,21 +74,23 @@ describe("<FilingsCalendarTaxAccess />", () => {
     setRegistrationModalIsVisible = jest.fn();
     const legalStructure = randomLegalStructure({ requiresPublicFiling: true });
 
-    mockApi.postTaxRegistrationOnboarding.mockImplementation(() =>
-      Promise.resolve({
+    mockApi.postTaxRegistrationOnboarding.mockImplementation(() => {
+      return Promise.resolve({
         ...userDataWithExternalFormation,
         taxFilingData: generateTaxFilingData({
           state: "SUCCESS",
           registered: true,
           businessName: userDataWithExternalFormation.profileData.businessName,
         }),
-      })
-    );
+      });
+    });
     userDataWithExternalFormation = generateUserData({
       profileData: generateProfileData({
         legalStructureId: legalStructure.id,
         operatingPhase: randomElementFromArray(
-          OperatingPhases.filter((obj) => obj.displayTaxAccessButton === true)
+          OperatingPhases.filter((obj) => {
+            return obj.displayTaxAccessButton === true;
+          })
         ).id,
       }),
       formationData: generateFormationData(
@@ -111,7 +121,9 @@ describe("<FilingsCalendarTaxAccess />", () => {
     expect(screen.getByTestId("get-tax-access")).toBeInTheDocument();
     fireEvent.click(screen.getByTestId("get-tax-access"));
     expect(screen.queryByTestId("modal-content")).not.toBeInTheDocument();
-    await waitFor(() => expect(setRegistrationModalIsVisible).toHaveBeenCalledWith(true));
+    await waitFor(() => {
+      return expect(setRegistrationModalIsVisible).toHaveBeenCalledWith(true);
+    });
   });
 
   it("updates userData with return link when the button is clicked in up and running guest mode", async () => {
@@ -124,11 +136,11 @@ describe("<FilingsCalendarTaxAccess />", () => {
     renderUnauthenticatedFilingsCalendarTaxAccess(userData);
     expect(screen.getByTestId("get-tax-access")).toBeInTheDocument();
     fireEvent.click(screen.getByTestId("get-tax-access"));
-    await waitFor(() =>
-      expect(currentUserData().preferences.returnToLink).toEqual(
+    await waitFor(() => {
+      return expect(currentUserData().preferences.returnToLink).toEqual(
         `${ROUTES.dashboard}?${QUERIES.openTaxFilingsModal}=true`
-      )
-    );
+      );
+    });
   });
 
   it("opens tax modal if the query parameter openTaxFilingsModal is true and shallow reloads", async () => {
@@ -186,7 +198,9 @@ describe("<FilingsCalendarTaxAccess />", () => {
     });
     fireEvent.click(screen.getByTestId("get-tax-access"));
     fireEvent.click(screen.getByTestId("modal-button-primary"));
-    await waitFor(() => expect(currentUserData().taxFilingData.state).toEqual("SUCCESS"));
+    await waitFor(() => {
+      return expect(currentUserData().taxFilingData.state).toEqual("SUCCESS");
+    });
     await screen.findByTestId("tax-success");
     expect(screen.getByText(Config.taxCalendar.SnackbarSuccessHeader)).toBeInTheDocument();
   });
@@ -215,8 +229,12 @@ describe("<FilingsCalendarTaxAccess />", () => {
       target: { value: "123456789000" },
     });
     fireEvent.click(screen.getByTestId("modal-button-primary"));
-    await waitFor(() => expect(currentUserData().profileData.businessName).not.toEqual("zoom"));
-    await waitFor(() => expect(currentUserData().profileData.taxId).toEqual("123456789000"));
+    await waitFor(() => {
+      return expect(currentUserData().profileData.businessName).not.toEqual("zoom");
+    });
+    await waitFor(() => {
+      return expect(currentUserData().profileData.taxId).toEqual("123456789000");
+    });
   });
 
   it("displays in-line error and alert when businessName field is empty and save button is clicked", () => {
@@ -329,15 +347,15 @@ describe("<FilingsCalendarTaxAccess />", () => {
         },
         taxFilingData: generateTaxFilingData({ state: undefined }),
       });
-      mockApi.postTaxRegistrationOnboarding.mockImplementation(() =>
-        Promise.resolve({
+      mockApi.postTaxRegistrationOnboarding.mockImplementation(() => {
+        return Promise.resolve({
           ...userDataWithExternalFormation,
           taxFilingData: generateTaxFilingData({
             state: "FAILED",
             businessName: userDataWithExternalFormation.profileData.businessName,
           }),
-        })
-      );
+        });
+      });
 
       fireEvent.click(screen.getByTestId("get-tax-access"));
       fireEvent.click(screen.getByTestId("modal-button-primary"));
@@ -446,7 +464,9 @@ describe("<FilingsCalendarTaxAccess />", () => {
         }),
       });
       expect(mockApi.postTaxRegistrationLookup).toHaveBeenCalled();
-      await waitFor(() => expect(userDataUpdatedNTimes()).toEqual(1));
+      await waitFor(() => {
+        return expect(userDataUpdatedNTimes()).toEqual(1);
+      });
     });
 
     it("shows button component when state is FAILED and unregistered", async () => {
@@ -478,16 +498,16 @@ describe("<FilingsCalendarTaxAccess />", () => {
     });
 
     it("hides pending and button components when state is SUCCESS", async () => {
-      mockApi.postTaxRegistrationLookup.mockImplementation(() =>
-        Promise.resolve({
+      mockApi.postTaxRegistrationLookup.mockImplementation(() => {
+        return Promise.resolve({
           ...userDataWithExternalFormation,
           taxFilingData: generateTaxFilingData({
             registered: true,
             state: "SUCCESS",
             businessName: userDataWithExternalFormation.profileData.businessName,
           }),
-        })
-      );
+        });
+      });
       renderFilingsCalendarTaxAccess({
         ...userDataWithExternalFormation,
         taxFilingData: generateTaxFilingData({
@@ -497,23 +517,27 @@ describe("<FilingsCalendarTaxAccess />", () => {
         }),
       });
       expect(mockApi.postTaxRegistrationLookup).toHaveBeenCalled();
-      await waitFor(() => expect(userDataUpdatedNTimes()).toEqual(1));
-      await waitFor(() => expect(currentUserData().taxFilingData.state).toEqual("SUCCESS"));
+      await waitFor(() => {
+        return expect(userDataUpdatedNTimes()).toEqual(1);
+      });
+      await waitFor(() => {
+        return expect(currentUserData().taxFilingData.state).toEqual("SUCCESS");
+      });
       expect(screen.queryByTestId("pending-container")).not.toBeInTheDocument();
       expect(screen.queryByTestId("button-container")).not.toBeInTheDocument();
     });
 
     it("hides pending and button components when state is API_ERROR but registered", async () => {
-      mockApi.postTaxRegistrationLookup.mockImplementation(() =>
-        Promise.resolve({
+      mockApi.postTaxRegistrationLookup.mockImplementation(() => {
+        return Promise.resolve({
           ...userDataWithExternalFormation,
           taxFilingData: generateTaxFilingData({
             registered: true,
             state: "API_ERROR",
             businessName: userDataWithExternalFormation.profileData.businessName,
           }),
-        })
-      );
+        });
+      });
       renderFilingsCalendarTaxAccess({
         ...userDataWithExternalFormation,
         taxFilingData: generateTaxFilingData({
@@ -523,23 +547,27 @@ describe("<FilingsCalendarTaxAccess />", () => {
         }),
       });
       expect(mockApi.postTaxRegistrationLookup).toHaveBeenCalled();
-      await waitFor(() => expect(userDataUpdatedNTimes()).toEqual(1));
-      await waitFor(() => expect(currentUserData().taxFilingData.state).toEqual("API_ERROR"));
+      await waitFor(() => {
+        return expect(userDataUpdatedNTimes()).toEqual(1);
+      });
+      await waitFor(() => {
+        return expect(currentUserData().taxFilingData.state).toEqual("API_ERROR");
+      });
       expect(screen.queryByTestId("pending-container")).not.toBeInTheDocument();
       expect(screen.queryByTestId("button-container")).not.toBeInTheDocument();
     });
 
     it("shows pending component when state is PENDING", async () => {
-      mockApi.postTaxRegistrationLookup.mockImplementation(() =>
-        Promise.resolve({
+      mockApi.postTaxRegistrationLookup.mockImplementation(() => {
+        return Promise.resolve({
           ...userDataWithExternalFormation,
           taxFilingData: generateTaxFilingData({
             state: "PENDING",
             registered: true,
             businessName: userDataWithExternalFormation.profileData.businessName,
           }),
-        })
-      );
+        });
+      });
       renderFilingsCalendarTaxAccess({
         ...userDataWithExternalFormation,
         taxFilingData: generateTaxFilingData({
@@ -549,8 +577,12 @@ describe("<FilingsCalendarTaxAccess />", () => {
         }),
       });
       expect(mockApi.postTaxRegistrationLookup).toHaveBeenCalled();
-      await waitFor(() => expect(userDataUpdatedNTimes()).toEqual(1));
-      await waitFor(() => expect(currentUserData().taxFilingData.state).toEqual("PENDING"));
+      await waitFor(() => {
+        return expect(userDataUpdatedNTimes()).toEqual(1);
+      });
+      await waitFor(() => {
+        return expect(currentUserData().taxFilingData.state).toEqual("PENDING");
+      });
       expect(screen.getByTestId("pending-container")).toBeInTheDocument();
       expect(screen.queryByTestId("button-container")).not.toBeInTheDocument();
     });

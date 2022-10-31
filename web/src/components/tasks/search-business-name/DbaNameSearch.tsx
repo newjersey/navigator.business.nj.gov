@@ -12,7 +12,9 @@ export const DbaNameSearch = (): ReactElement => {
   const { userData, update } = useUserData();
 
   const onSubmit = async (submittedName: string, nameAvailability: NameAvailability): Promise<void> => {
-    if (!nameAvailability || !userData) return;
+    if (!nameAvailability || !userData) {
+      return;
+    }
     if (nameAvailability.status === "AVAILABLE") {
       await update({
         ...userData,

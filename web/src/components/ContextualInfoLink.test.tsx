@@ -3,9 +3,11 @@ import * as FetchContextualInfoModule from "@/lib/async-content-fetchers/fetchCo
 import { withContextualInfo } from "@/test/helpers";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
-jest.mock("@/lib/async-content-fetchers/fetchContextualInfo", () => ({
-  fetchContextualInfo: jest.fn(),
-}));
+jest.mock("@/lib/async-content-fetchers/fetchContextualInfo", () => {
+  return {
+    fetchContextualInfo: jest.fn(),
+  };
+});
 const mockFetchContextualInfo = (FetchContextualInfoModule as jest.Mocked<typeof FetchContextualInfoModule>)
   .fetchContextualInfo;
 
@@ -35,13 +37,13 @@ describe("<ContextualInfoLink />", () => {
       )
     );
     fireEvent.click(screen.getByText("legal structure"));
-    await waitFor(() =>
-      expect(setContent).toHaveBeenCalledWith({
+    await waitFor(() => {
+      return expect(setContent).toHaveBeenCalledWith({
         isVisible: true,
         header: "some header content",
         markdown: "some markdown content",
-      })
-    );
+      });
+    });
   });
 
   it("caches the content so it does not fetch again", async () => {
@@ -59,13 +61,13 @@ describe("<ContextualInfoLink />", () => {
       )
     );
     fireEvent.click(screen.getByText("legal structure"));
-    await waitFor(() =>
-      expect(setContent).toHaveBeenCalledWith({
+    await waitFor(() => {
+      return expect(setContent).toHaveBeenCalledWith({
         isVisible: true,
         header: "some header content",
         markdown: "some markdown content",
-      })
-    );
+      });
+    });
     fireEvent.click(screen.getByText("legal structure"));
     expect(mockFetchContextualInfo).toHaveBeenCalledTimes(1);
   });

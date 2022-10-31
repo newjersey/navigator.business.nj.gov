@@ -7,13 +7,15 @@ import { ReactElement, useContext } from "react";
 export const ReviewPartnership = () => {
   const { state } = useContext(BusinessFormationContext);
 
-  const notEnteredText = (question: string): ReactElement => (
-    <>
-      <div>
-        <i>{Config.businessFormationDefaults.reviewStepNotEnteredText}</i> - {question}
-      </div>
-    </>
-  );
+  const notEnteredText = (question: string): ReactElement => {
+    return (
+      <>
+        <div>
+          <i>{Config.businessFormationDefaults.reviewStepNotEnteredText}</i> - {question}
+        </div>
+      </>
+    );
+  };
 
   const displayPartnershipAnswer = (config: {
     radioData: boolean | undefined;
@@ -21,20 +23,22 @@ export const ReviewPartnership = () => {
     questionText: string;
     yesBody: string;
     noBody: string;
-  }): ReactElement => (
-    <>
-      {config.radioData === undefined ? (
-        notEnteredText(config.questionText)
-      ) : (
-        <Content className="margin-bottom-2">{config.radioData ? config.yesBody : config.noBody}</Content>
-      )}
-      {config.radioData && (
-        <Content className="margin-left-4">
-          {`${Config.businessFormationDefaults.reviewStepPartnershipTermTitle} ${config.termsData}`}
-        </Content>
-      )}
-    </>
-  );
+  }): ReactElement => {
+    return (
+      <>
+        {config.radioData === undefined ? (
+          notEnteredText(config.questionText)
+        ) : (
+          <Content className="margin-bottom-2">{config.radioData ? config.yesBody : config.noBody}</Content>
+        )}
+        {config.radioData && (
+          <Content className="margin-left-4">
+            {`${Config.businessFormationDefaults.reviewStepPartnershipTermTitle} ${config.termsData}`}
+          </Content>
+        )}
+      </>
+    );
+  };
 
   return (
     <>

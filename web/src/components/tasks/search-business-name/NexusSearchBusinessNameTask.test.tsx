@@ -19,10 +19,18 @@ import {
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
-jest.mock("@/lib/api-client/apiClient", () => ({ searchBusinessName: jest.fn() }));
+jest.mock("@/lib/data-hooks/useUserData", () => {
+  return { useUserData: jest.fn() };
+});
+jest.mock("@/lib/data-hooks/useRoadmap", () => {
+  return { useRoadmap: jest.fn() };
+});
+jest.mock("@/lib/roadmap/buildUserRoadmap", () => {
+  return { buildUserRoadmap: jest.fn() };
+});
+jest.mock("@/lib/api-client/apiClient", () => {
+  return { searchBusinessName: jest.fn() };
+});
 
 const Config = getMergedConfig();
 
@@ -64,7 +72,9 @@ describe("<NexusSearchBusinessNameTask />", () => {
 
     fillText("My Cool Business");
     await searchAndGetValue({ status: "UNAVAILABLE" });
-    await waitFor(() => expect(mockSetRoadmap).toHaveBeenCalledTimes(1));
+    await waitFor(() => {
+      return expect(mockSetRoadmap).toHaveBeenCalledTimes(1);
+    });
   });
 
   it("lets you click to search again when unavailable", async () => {

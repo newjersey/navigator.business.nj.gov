@@ -50,45 +50,53 @@ export const OnboardingSectors = (props: Props): ReactElement => {
         <Autocomplete
           id="sectorId"
           options={SectorsOrdered}
-          getOptionLabel={(sector: SectorType) => sector.name}
-          renderOption={(props, option, { selected }) => (
-            <li {...props}>
-              {selected ? (
-                <div className="padding-top-1 padding-bottom-1" data-testid={option.id}>
-                  <MenuOptionSelected>{option.name}</MenuOptionSelected>
-                </div>
-              ) : (
-                <div className="padding-top-1 padding-bottom-1" data-testid={option.id}>
-                  <MenuOptionUnselected>{option.name}</MenuOptionUnselected>
-                </div>
-              )}
-            </li>
-          )}
-          isOptionEqualToValue={(option: SectorType, value: SectorType) => option.id === value.id}
+          getOptionLabel={(sector: SectorType) => {
+            return sector.name;
+          }}
+          renderOption={(props, option, { selected }) => {
+            return (
+              <li {...props}>
+                {selected ? (
+                  <div className="padding-top-1 padding-bottom-1" data-testid={option.id}>
+                    <MenuOptionSelected>{option.name}</MenuOptionSelected>
+                  </div>
+                ) : (
+                  <div className="padding-top-1 padding-bottom-1" data-testid={option.id}>
+                    <MenuOptionUnselected>{option.name}</MenuOptionUnselected>
+                  </div>
+                )}
+              </li>
+            );
+          }}
+          isOptionEqualToValue={(option: SectorType, value: SectorType) => {
+            return option.id === value.id;
+          }}
           value={state.profileData.sectorId ? LookupSectorTypeById(state.profileData.sectorId) : null}
           onChange={handleSectorSelect}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              inputProps={{
-                "aria-label": "Sector",
-                "data-testid": "sectorId",
-                ...params.inputProps,
-              }}
-              onBlur={onValidation}
-              onSubmit={onValidation}
-              value={searchText}
-              onChange={handleChange}
-              variant="outlined"
-              placeholder={Config.profileDefaults[state.flow].sectorId.placeholder}
-              error={props.fieldStates.sectorId.invalid}
-              helperText={
-                props.fieldStates.sectorId.invalid
-                  ? Config.profileDefaults[state.flow].sectorId.errorTextRequired
-                  : " "
-              }
-            />
-          )}
+          renderInput={(params) => {
+            return (
+              <TextField
+                {...params}
+                inputProps={{
+                  "aria-label": "Sector",
+                  "data-testid": "sectorId",
+                  ...params.inputProps,
+                }}
+                onBlur={onValidation}
+                onSubmit={onValidation}
+                value={searchText}
+                onChange={handleChange}
+                variant="outlined"
+                placeholder={Config.profileDefaults[state.flow].sectorId.placeholder}
+                error={props.fieldStates.sectorId.invalid}
+                helperText={
+                  props.fieldStates.sectorId.invalid
+                    ? Config.profileDefaults[state.flow].sectorId.errorTextRequired
+                    : " "
+                }
+              />
+            );
+          }}
           fullWidth
           openOnFocus
           clearOnEscape

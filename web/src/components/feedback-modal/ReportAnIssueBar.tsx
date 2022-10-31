@@ -27,7 +27,13 @@ export const ReportAnIssueBar = (): ReactElement => {
         </div>
       </Button>
 
-      <FeedbackModal isOpen={showModal} handleClose={() => setShowModal(false)} isReportAnIssueBar />
+      <FeedbackModal
+        isOpen={showModal}
+        handleClose={() => {
+          return setShowModal(false);
+        }}
+        isReportAnIssueBar
+      />
     </div>
   );
 };

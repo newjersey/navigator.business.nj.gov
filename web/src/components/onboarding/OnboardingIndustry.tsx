@@ -41,7 +41,9 @@ export const OnboardingIndustry = (props: Props): ReactElement => {
     props.onValidation(fieldName, !valid);
   };
 
-  const handleChange = (): void => props.onValidation(fieldName, false);
+  const handleChange = (): void => {
+    return props.onValidation(fieldName, false);
+  };
 
   const fieldName = "industryId";
 

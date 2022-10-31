@@ -29,7 +29,9 @@ export const SectorModal = (props: Props): ReactElement => {
   }, userData);
 
   const onValidation = (field: ProfileFields, invalid: boolean) => {
-    setFieldStates((prevFieldStates) => ({ ...prevFieldStates, [field]: { invalid } }));
+    setFieldStates((prevFieldStates) => {
+      return { ...prevFieldStates, [field]: { invalid } };
+    });
   };
 
   const handleClose = () => {
@@ -38,13 +40,21 @@ export const SectorModal = (props: Props): ReactElement => {
   };
 
   const onSubmit = async () => {
-    if (!userData) return;
+    if (!userData) {
+      return;
+    }
     const errorMap = {
       ...fieldStates,
       sectorId: { invalid: !profileData.sectorId },
     };
     setFieldStates(errorMap);
-    if (Object.keys(errorMap).some((k) => errorMap[k as ProfileFields].invalid)) return;
+    if (
+      Object.keys(errorMap).some((k) => {
+        return errorMap[k as ProfileFields].invalid;
+      })
+    ) {
+      return;
+    }
 
     await props.onContinue();
   };

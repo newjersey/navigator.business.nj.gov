@@ -19,7 +19,9 @@ export const OnboardingMunicipality = (props: Props): ReactElement => {
     props.onValidation(fieldName, !valid);
   };
 
-  const handleChange = (): void => props.onValidation(fieldName, false);
+  const handleChange = (): void => {
+    return props.onValidation(fieldName, false);
+  };
 
   const fieldName = "municipality";
 

@@ -22,9 +22,9 @@ export const migrate_v93_to_v94 = (v93Data: v93UserData): v94UserData => {
       formationResponse: v93Data.formationData.formationResponse
         ? {
             ...v93Data.formationData.formationResponse,
-            errors: v93Data.formationData.formationResponse.errors.flatMap((err) =>
-              (err as v94FormationSubmitError).type ? [err as v94FormationSubmitError] : []
-            ),
+            errors: v93Data.formationData.formationResponse.errors.flatMap((err) => {
+              return (err as v94FormationSubmitError).type ? [err as v94FormationSubmitError] : [];
+            }),
           }
         : undefined,
       formationFormData: {

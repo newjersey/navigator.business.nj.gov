@@ -52,14 +52,16 @@ export default {
   collapsed: true,
   summary: "{{fields.title}}",
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  fromBlock: (match: any) => ({
-    preFormat: match[1],
-    preContext: match[2],
-    title: match[3],
-    contextId: match[4],
-    postContext: match[5],
-    postFormat: match[6],
-  }),
+  fromBlock: (match: any) => {
+    return {
+      preFormat: match[1],
+      preContext: match[2],
+      title: match[3],
+      contextId: match[4],
+      postContext: match[5],
+      postFormat: match[6],
+    };
+  },
   // Function to create a text block from an instance of this component
   toBlock: (obj: {
     preFormat: string;
@@ -68,10 +70,11 @@ export default {
     contextId: string;
     postContext: string;
     postFormat: string;
-  }) =>
-    `${obj.preFormat || ""}${(obj.preContext || "").trim()} \`${(obj.title || "").trim()}|${
+  }) => {
+    return `${obj.preFormat || ""}${(obj.preContext || "").trim()} \`${(obj.title || "").trim()}|${
       obj.contextId || ""
-    }\` ${(obj.postContext || "").trim()}${obj.postFormat || ""}`,
+    }\` ${(obj.postContext || "").trim()}${obj.postFormat || ""}`;
+  },
 
   toPreview: (obj: {
     preFormat: string;
@@ -80,8 +83,9 @@ export default {
     contextId: string;
     postContext: string;
     postFormat: string;
-  }) =>
-    `${(obj.preContext || "").trim()} \`${(obj.title || "").trim()}|${obj.contextId || ""}\` ${(
+  }) => {
+    return `${(obj.preContext || "").trim()} \`${(obj.title || "").trim()}|${obj.contextId || ""}\` ${(
       obj.postContext || ""
-    ).trim()}`,
+    ).trim()}`;
+  },
 };

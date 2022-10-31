@@ -23,7 +23,9 @@ export const WithStatefulUserData = ({
 }: {
   children: ReactNode;
   initialUserData: UserData | undefined;
-}): ReactElement => WithStatefulData(updateSpy)({ children, initialData: initialUserData });
+}): ReactElement => {
+  return WithStatefulData(updateSpy)({ children, initialData: initialUserData });
+};
 
 const mockUseUserData = (useUserModule as jest.Mocked<typeof useUserModule>).useUserData;
 

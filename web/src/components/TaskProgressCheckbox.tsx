@@ -50,7 +50,9 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
   };
 
   const setToNextStatus = (config?: { redirectOnSuccess: boolean }) => {
-    if (!updateQueue || !userData) return;
+    if (!updateQueue || !userData) {
+      return;
+    }
     if (isAuthenticated === IsAuthenticated.FALSE) {
       setRegistrationModalIsVisible(true);
       return;
@@ -91,7 +93,9 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
       .update()
       .then(() => {
         setSuccessSnackbarIsOpen(true);
-        if (!config?.redirectOnSuccess) return;
+        if (!config?.redirectOnSuccess) {
+          return;
+        }
         routeWithQuery(router, {
           path: ROUTES.dashboard,
           queries: {
@@ -181,7 +185,13 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
       <button
         data-testid="change-task-progress-checkbox"
         aria-label="update task status"
-        onClick={isDisabled ? undefined : () => setToNextStatus()}
+        onClick={
+          isDisabled
+            ? undefined
+            : () => {
+                return setToNextStatus();
+              }
+        }
         className={
           `cursor-pointer border-2px radius-md margin-right-105 padding-0 ` +
           `display-flex flex-row flex-justify-center flex-align-center ` +
@@ -211,29 +221,43 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
       <SnackbarAlert
         variant="success"
         isOpen={successSnackbarIsOpen}
-        close={() => setSuccessSnackbarIsOpen(false)}
+        close={() => {
+          return setSuccessSnackbarIsOpen(false);
+        }}
       >
         {Config.taskDefaults.taskProgressSuccessSnackbarBody}
       </SnackbarAlert>
 
       <FormationDateModal
         isOpen={currentOpenModal === "formation"}
-        close={() => setCurrentOpenModal(undefined)}
-        onSave={(config) => setToNextStatus(config)}
+        close={() => {
+          return setCurrentOpenModal(undefined);
+        }}
+        onSave={(config) => {
+          return setToNextStatus(config);
+        }}
       />
 
       <TaxRegistrationModal
         isOpen={currentOpenModal === "tax-registration"}
-        close={() => setCurrentOpenModal(undefined)}
-        onSave={(config) => setToNextStatus(config)}
+        close={() => {
+          return setCurrentOpenModal(undefined);
+        }}
+        onSave={(config) => {
+          return setToNextStatus(config);
+        }}
       />
 
       <ModalTwoButton
         isOpen={currentOpenModal === "tax-registration-unset"}
-        close={() => setCurrentOpenModal(undefined)}
+        close={() => {
+          return setCurrentOpenModal(undefined);
+        }}
         title={Config.taxRegistrationModal.areYouSureTaxTitle}
         primaryButtonText={Config.taxRegistrationModal.areYouSureTaxContinueButton}
-        primaryButtonOnClick={() => setToNextStatus()}
+        primaryButtonOnClick={() => {
+          return setToNextStatus();
+        }}
         secondaryButtonText={Config.taxRegistrationModal.areYouSureTaxCancelButton}
       >
         <Content>{Config.taxRegistrationModal.areYouSureTaxBody}</Content>
@@ -241,10 +265,14 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
 
       <ModalTwoButton
         isOpen={currentOpenModal === "formation-unset"}
-        close={() => setCurrentOpenModal(undefined)}
+        close={() => {
+          return setCurrentOpenModal(undefined);
+        }}
         title={Config.formationDateModal.areYouSureModalHeader}
         primaryButtonText={Config.formationDateModal.areYouSureModalContinueButtonText}
-        primaryButtonOnClick={() => setToNextStatus()}
+        primaryButtonOnClick={() => {
+          return setToNextStatus();
+        }}
         secondaryButtonText={Config.formationDateModal.areYouSureModalCancelButtonText}
       >
         <Content>{Config.formationDateModal.areYouSureModalBody}</Content>

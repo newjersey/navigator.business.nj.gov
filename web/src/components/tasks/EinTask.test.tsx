@@ -15,8 +15,12 @@ import {
 import { UserData } from "@businessnjgovnavigator/shared";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
+jest.mock("@/lib/data-hooks/useUserData", () => {
+  return { useUserData: jest.fn() };
+});
+jest.mock("@/lib/data-hooks/useRoadmap", () => {
+  return { useRoadmap: jest.fn() };
+});
 
 const Config = getMergedConfig();
 
@@ -207,7 +211,9 @@ describe("<EinTask />", () => {
         target: { value: "123456789" },
       });
       fireEvent.click(screen.getByText(`Register & ${Config.ein.saveButtonText}`));
-      await waitFor(() => expect(setRegistrationModalIsVisible).toHaveBeenCalledWith(true));
+      await waitFor(() => {
+        return expect(setRegistrationModalIsVisible).toHaveBeenCalledWith(true);
+      });
     });
   });
 });

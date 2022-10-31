@@ -24,7 +24,9 @@ export const MgmtAuth = (props: Props) => {
   const onSubmit = (): void => {
     apiClient
       .post("/mgmt/auth", { password }, false)
-      .then(() => props.setIsAuthed(true))
+      .then(() => {
+        return props.setIsAuthed(true);
+      })
       .catch(() => {});
   };
 

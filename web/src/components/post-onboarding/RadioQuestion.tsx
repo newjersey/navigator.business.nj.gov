@@ -28,7 +28,9 @@ export const RadioQuestion = (props: Props): ReactElement => {
   }, [props.id]);
 
   const handleRadioChange = async (event: React.ChangeEvent<{ name?: string; value: string }>) => {
-    if (!userData) return;
+    if (!userData) {
+      return;
+    }
     await update({
       ...userData,
       profileData: {

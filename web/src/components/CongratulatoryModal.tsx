@@ -14,7 +14,9 @@ interface Props {
 
 export const CongratulatoryModal = (props: Props): ReactElement => {
   const router = useRouter();
-  const onClickComplete = () => router.push(ROUTES.dashboard);
+  const onClickComplete = () => {
+    return router.push(ROUTES.dashboard);
+  };
 
   const publicName = props.nextSectionType ? Config.sectionHeaders[props.nextSectionType] : "";
   const hideLink = !props.nextSectionType;
@@ -41,7 +43,9 @@ export const CongratulatoryModal = (props: Props): ReactElement => {
             position: "absolute",
             right: 8,
             top: 8,
-            color: (theme) => theme.palette.grey[500],
+            color: (theme) => {
+              return theme.palette.grey[500];
+            },
           }}
         >
           <Icon className="usa-icon--size-4">close</Icon>
@@ -72,8 +76,12 @@ export const CongratulatoryModal = (props: Props): ReactElement => {
                 <span
                   role={"button"}
                   tabIndex={0}
-                  onClick={() => onClickComplete()}
-                  onKeyDown={() => onClickComplete()}
+                  onClick={() => {
+                    return onClickComplete();
+                  }}
+                  onKeyDown={() => {
+                    return onClickComplete();
+                  }}
                   className="text-underline"
                   style={{
                     fontWeight: 700,

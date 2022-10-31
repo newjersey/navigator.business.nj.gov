@@ -61,12 +61,27 @@ export const ApiTaxFilingClient = (config: ApiConfig, logger: LogWriterType): Ta
         logger.LogInfo(
           `TaxFiling Lookup - NICUSA - Id:${logId} - Response received: ${JSON.stringify(apiResponse)}`
         );
-        if (apiResponse.Errors?.some((error) => error.Error.includes("no specific tax eligibility")))
+        if (
+          apiResponse.Errors?.some((error) => {
+            return error.Error.includes("no specific tax eligibility");
+          })
+        ) {
           return { state: "PENDING", filings: [] };
-        if (apiResponse.Errors?.some((error) => error.Error.includes("not been onboarded")))
+        }
+        if (
+          apiResponse.Errors?.some((error) => {
+            return error.Error.includes("not been onboarded");
+          })
+        ) {
           return { state: "UNREGISTERED", filings: [] };
-        if (apiResponse.Errors?.some((error) => error.Error.includes("verify your")))
+        }
+        if (
+          apiResponse.Errors?.some((error) => {
+            return error.Error.includes("verify your");
+          })
+        ) {
           return { state: "FAILED", filings: [] };
+        }
         throw error;
       } else {
         logger.LogError(
@@ -121,8 +136,9 @@ export const ApiTaxFilingClient = (config: ApiConfig, logger: LogWriterType): Ta
     } catch (error) {
       const axiosError = error as AxiosError;
       const apiResponse = axiosError.response?.data as ApiTaxFilingOnboardingResponse;
-      if (axiosError.response?.status === 400)
+      if (axiosError.response?.status === 400) {
         return { state: "FAILED", errorField: apiResponse.Errors[0]?.Field };
+      }
       logger.LogError(
         `TaxFiling Onboarding - NICUSA - Id:${logId} - Unknown error received: ${JSON.stringify(error)}`
       );

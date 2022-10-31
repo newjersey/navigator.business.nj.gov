@@ -3,9 +3,13 @@ import { loadAllFilingUrlSlugs, loadFilingByUrlSlug } from "./loadFilings";
 
 jest.mock("fs");
 
-jest.mock("process", () => ({
-  cwd: () => "/test",
-}));
+jest.mock("process", () => {
+  return {
+    cwd: () => {
+      return "/test";
+    },
+  };
+});
 
 describe("loadFilings", () => {
   let mockedFs: jest.Mocked<typeof fs>;

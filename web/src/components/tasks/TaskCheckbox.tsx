@@ -16,7 +16,9 @@ export const TaskCheckbox = (props: Props) => {
   const checklistItemStatus = userData?.taskItemChecklist[props.checklistItemId] ?? false;
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (!userData) return;
+    if (!userData) {
+      return;
+    }
 
     if (isAuthenticated !== IsAuthenticated.TRUE) {
       setRegistrationModalIsVisible(true);

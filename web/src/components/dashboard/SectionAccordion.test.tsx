@@ -15,8 +15,12 @@ import {
 import { SectionType, UserData } from "@businessnjgovnavigator/shared/";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
+jest.mock("@/lib/data-hooks/useUserData", () => {
+  return { useUserData: jest.fn() };
+});
+jest.mock("@/lib/data-hooks/useRoadmap", () => {
+  return { useRoadmap: jest.fn() };
+});
 
 describe("<SectionAccordion />", () => {
   beforeEach(() => {
@@ -46,14 +50,14 @@ describe("<SectionAccordion />", () => {
     expect(within(screen.getByTestId("section-plan")).getByText("BODY CONTENT")).not.toBeVisible();
 
     fireEvent.click(screen.getByTestId("plan-header"));
-    await waitFor(() =>
-      expect(within(screen.getByTestId("section-plan")).getByText("BODY CONTENT")).toBeVisible()
-    );
+    await waitFor(() => {
+      return expect(within(screen.getByTestId("section-plan")).getByText("BODY CONTENT")).toBeVisible();
+    });
 
     fireEvent.click(screen.getByTestId("plan-header"));
-    await waitFor(() =>
-      expect(within(screen.getByTestId("section-plan")).getByText("BODY CONTENT")).not.toBeVisible()
-    );
+    await waitFor(() => {
+      return expect(within(screen.getByTestId("section-plan")).getByText("BODY CONTENT")).not.toBeVisible();
+    });
   });
 
   it("adds and removes section from preferences on accordion open/close", () => {

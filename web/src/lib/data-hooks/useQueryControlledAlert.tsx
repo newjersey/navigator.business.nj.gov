@@ -25,10 +25,14 @@ export const useQueryControlledAlert = (config: QueryControlledAlertConfig): Rea
   }, [router, config.pagePath]);
 
   useEffect(() => {
-    if (!router.isReady || effectOccurred.current) return;
+    if (!router.isReady || effectOccurred.current) {
+      return;
+    }
     if (router.query[config.queryKey] === "true") {
       if (config.delayInMilliseconds) {
-        setTimeout(() => setRegistrationAlertIsVisible(true), config.delayInMilliseconds);
+        setTimeout(() => {
+          return setRegistrationAlertIsVisible(true);
+        }, config.delayInMilliseconds);
       } else {
         setRegistrationAlertIsVisible(true);
       }

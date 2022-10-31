@@ -7,7 +7,9 @@ export interface SectorType {
 
 export const LookupSectorTypeById = (id: string): SectorType => {
   return (
-    arrayOfSectors.find((x) => x.id === id) ?? {
+    arrayOfSectors.find((x) => {
+      return x.id === id;
+    }) ?? {
       id: "",
       name: "",
     }

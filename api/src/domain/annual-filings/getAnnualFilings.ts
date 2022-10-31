@@ -3,7 +3,9 @@ import { UserData } from "@shared/userData";
 import { calculateNextAnnualFilingDate } from "./calculateNextAnnualFilingDate";
 
 export const getAnnualFilings = (userData: UserData) => {
-  const filings = userData.taxFilingData.filings.filter((it) => it.identifier !== "ANNUAL_FILING");
+  const filings = userData.taxFilingData.filings.filter((it) => {
+    return it.identifier !== "ANNUAL_FILING";
+  });
 
   let requiresPublicFiling = true;
 

@@ -24,7 +24,9 @@ export const VerticalStepIndicator = (props: Props): ReactElement => {
     const content = document.getElementById(`vertical-content-${props.stepNumber}`);
     const verticalBar = document.getElementById(`vertical-bar-${props.stepNumber}`);
 
-    if (!content || !verticalBar) return;
+    if (!content || !verticalBar) {
+      return;
+    }
 
     if (props.last) {
       verticalBar.style.height = `${content.offsetHeight}px`;

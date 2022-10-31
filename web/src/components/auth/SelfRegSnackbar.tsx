@@ -34,12 +34,16 @@ export const SelfRegSnackbar = (): ReactElement => {
     RESPONSE_ERROR: Config.selfRegistration.errorTextGeneric,
   };
 
-  if (!registrationAlertStatus || registrationAlertStatus === "IN_PROGRESS") return <></>;
+  if (!registrationAlertStatus || registrationAlertStatus === "IN_PROGRESS") {
+    return <></>;
+  }
 
   return (
     <SnackbarAlert
       isOpen={!!registrationAlertStatus}
-      close={() => setRegistrationAlertStatus(undefined)}
+      close={() => {
+        return setRegistrationAlertStatus(undefined);
+      }}
       variant={alertMap[registrationAlertStatus]}
       noIcon={true}
       autoHideDuration={null}
@@ -65,12 +69,16 @@ export const SelfRegSnackbar = (): ReactElement => {
           )}
           <IconButton
             aria-label="close"
-            onClick={() => setRegistrationAlertStatus(undefined)}
+            onClick={() => {
+              return setRegistrationAlertStatus(undefined);
+            }}
             sx={{
               position: "absolute",
               right: 0,
               top: 0,
-              color: (theme) => theme.palette.grey[500],
+              color: (theme) => {
+                return theme.palette.grey[500];
+              },
             }}
           >
             <Icon className="usa-icon--size-4">close</Icon>

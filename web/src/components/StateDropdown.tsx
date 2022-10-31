@@ -46,57 +46,72 @@ export const StateDropdown = (props: Props): ReactElement => {
   const filterOptions = createFilterOptions({
     matchFrom: "start",
     trim: true,
-    stringify: (option: StateObject) => option.shortCode,
+    stringify: (option: StateObject) => {
+      return option.shortCode;
+    },
   });
 
-  const getState = (value: string | undefined): StateObject | undefined =>
-    states.find((state: StateObject) => state.name == value || state.shortCode == value?.toUpperCase());
+  const getState = (value: string | undefined): StateObject | undefined => {
+    return states.find((state: StateObject) => {
+      return state.name == value || state.shortCode == value?.toUpperCase();
+    });
+  };
 
   return (
     <Autocomplete
       options={states}
       value={getState(props.value) || null}
       filterOptions={filterOptions}
-      getOptionLabel={(option: StateObject) => option.shortCode}
-      isOptionEqualToValue={(option: StateObject, value: StateObject) =>
-        option.shortCode === value.shortCode || option.name === value.name
-      }
+      getOptionLabel={(option: StateObject) => {
+        return option.shortCode;
+      }}
+      isOptionEqualToValue={(option: StateObject, value: StateObject) => {
+        return option.shortCode === value.shortCode || option.name === value.name;
+      }}
       open={open}
       disabled={props.disabled}
-      onClose={() => setOpen(false)}
+      onClose={() => {
+        return setOpen(false);
+      }}
       onChange={handleOnChange}
       onInputChange={handleInputChange}
       onBlur={onValidation}
       onSubmit={onValidation}
-      renderOption={(props, option, { selected }) => (
-        <li {...props}>
-          {selected ? (
-            <MenuOptionSelected>{option.shortCode}</MenuOptionSelected>
-          ) : (
-            <MenuOptionUnselected>{option.shortCode}</MenuOptionUnselected>
-          )}
-        </li>
-      )}
-      renderInput={(params) => (
-        <TextField
-          {...params}
-          id={props.fieldName}
-          name={props.fieldName}
-          disabled={props.disabled}
-          inputProps={{
-            "aria-label": camelCaseToSentence(props.fieldName),
-            "data-testid": props.fieldName,
-            ...params.inputProps,
-          }}
-          onSubmit={onValidation}
-          autoComplete={props.autoComplete}
-          variant="outlined"
-          placeholder={props.placeholder}
-          onClick={() => (props.disabled ? null : setOpen(true))}
-          error={props.error}
-          helperText={props.error ? props.validationText ?? " " : " "}
-        />
-      )}
+      renderOption={(props, option, { selected }) => {
+        return (
+          <li {...props}>
+            {selected ? (
+              <MenuOptionSelected>{option.shortCode}</MenuOptionSelected>
+            ) : (
+              <MenuOptionUnselected>{option.shortCode}</MenuOptionUnselected>
+            )}
+          </li>
+        );
+      }}
+      renderInput={(params) => {
+        return (
+          <TextField
+            {...params}
+            id={props.fieldName}
+            name={props.fieldName}
+            disabled={props.disabled}
+            inputProps={{
+              "aria-label": camelCaseToSentence(props.fieldName),
+              "data-testid": props.fieldName,
+              ...params.inputProps,
+            }}
+            onSubmit={onValidation}
+            autoComplete={props.autoComplete}
+            variant="outlined"
+            placeholder={props.placeholder}
+            onClick={() => {
+              return props.disabled ? null : setOpen(true);
+            }}
+            error={props.error}
+            helperText={props.error ? props.validationText ?? " " : " "}
+          />
+        );
+      }}
       fullWidth
       openOnFocus
       clearOnEscape

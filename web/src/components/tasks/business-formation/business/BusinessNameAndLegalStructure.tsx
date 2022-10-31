@@ -44,7 +44,9 @@ export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): 
     } as Record<FormationLegalType, string>
   )[legalStructure.id as FormationLegalType];
 
-  if (!userData) return <></>;
+  if (!userData) {
+    return <></>;
+  }
 
   return (
     <>
@@ -114,7 +116,9 @@ export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): 
       </div>
       <ModalTwoButton
         isOpen={legalStructureWarningIsOpen}
-        close={() => setLegalStructureWarningIsOpen(false)}
+        close={() => {
+          return setLegalStructureWarningIsOpen(false);
+        }}
         title={Config.businessFormationDefaults.legalStructureWarningModalHeader}
         primaryButtonText={Config.businessFormationDefaults.legalStructureWarningModalContinueButtonText}
         primaryButtonOnClick={editLegalStructure}

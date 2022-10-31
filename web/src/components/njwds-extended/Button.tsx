@@ -94,7 +94,9 @@ export const Button = (props: Props): ReactElement => {
   }, [height, width, props.loading, disabledClass]);
 
   const getRightMargin = () => {
-    if (props.style === "tertiary") return "margin-right-0";
+    if (props.style === "tertiary") {
+      return "margin-right-0";
+    }
     return props.noRightMargin ? "margin-right-0" : "margin-right-2";
   };
   const heightAutoOnMobile = props.heightAutoOnMobile ? "height-auto" : "";
@@ -119,8 +121,12 @@ export const Button = (props: Props): ReactElement => {
     showDisabledClass,
     fullWidth,
   ]
-    .map((i) => i?.trim())
-    .filter((value: string | undefined) => value && value.length > 0)
+    .map((i) => {
+      return i?.trim();
+    })
+    .filter((value: string | undefined) => {
+      return value && value.length > 0;
+    })
     .join(" ");
 
   return (

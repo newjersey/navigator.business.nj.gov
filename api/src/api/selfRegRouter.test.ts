@@ -30,10 +30,14 @@ describe("selfRegRouter", () => {
   });
 
   afterAll(async () => {
-    await new Promise((resolve) => setTimeout(resolve, 500));
+    await new Promise((resolve) => {
+      return setTimeout(resolve, 500);
+    });
   });
 
-  const sendRequest = async (userData: UserData) => request(app).post(`/self-reg`).send(userData);
+  const sendRequest = async (userData: UserData) => {
+    return request(app).post(`/self-reg`).send(userData);
+  };
 
   describe("when record has a myNJ key", () => {
     const myNJKey = "some-mynj-key";

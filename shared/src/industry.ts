@@ -42,7 +42,9 @@ export interface TaskModification {
 
 export const LookupIndustryById = (id: string | undefined): Industry => {
   return (
-    Industries.find((x) => x.id === id) ?? {
+    Industries.find((x) => {
+      return x.id === id;
+    }) ?? {
       id: "",
       name: "",
       description: "",

@@ -50,39 +50,54 @@ const getFlattenedFilenames = (dir: string): string[] => {
   return paths;
 };
 
-const getFilenames = (): Filenames => ({
-  tasks: fs.readdirSync(tasksDir),
-  industries: fs.readdirSync(industriesDir),
-  filings: fs.readdirSync(filingsDir),
-  addOns: fs.readdirSync(addOnsDir),
-  contextualInfos: fs.readdirSync(contextualInfoDir),
-  displayContents: getFlattenedFilenames(displayContentDir).filter((it) => it.endsWith(".md")),
-  fieldConfigs: fs.readdirSync(fieldConfigDir),
-});
+const getFilenames = (): Filenames => {
+  return {
+    tasks: fs.readdirSync(tasksDir),
+    industries: fs.readdirSync(industriesDir),
+    filings: fs.readdirSync(filingsDir),
+    addOns: fs.readdirSync(addOnsDir),
+    contextualInfos: fs.readdirSync(contextualInfoDir),
+    displayContents: getFlattenedFilenames(displayContentDir).filter((it) => {
+      return it.endsWith(".md");
+    }),
+    fieldConfigs: fs.readdirSync(fieldConfigDir),
+  };
+};
 
 const getContents = (filenames: Filenames): FileContents => {
-  const industries = filenames.industries.map(
-    (it) => JSON.parse(fs.readFileSync(path.join(roadmapsDir, "industries", it), "utf8")) as IndustryRoadmap
-  );
-  const addOns = filenames.addOns.map(
-    (it) => JSON.parse(fs.readFileSync(path.join(roadmapsDir, "add-ons", it), "utf8")) as IndustryRoadmap
-  );
-  const fieldConfigs = filenames.fieldConfigs.map((it) =>
-    fs.readFileSync(path.join(fieldConfigDir, it), "utf8")
-  );
+  const industries = filenames.industries.map((it) => {
+    return JSON.parse(fs.readFileSync(path.join(roadmapsDir, "industries", it), "utf8")) as IndustryRoadmap;
+  });
+  const addOns = filenames.addOns.map((it) => {
+    return JSON.parse(fs.readFileSync(path.join(roadmapsDir, "add-ons", it), "utf8")) as IndustryRoadmap;
+  });
+  const fieldConfigs = filenames.fieldConfigs.map((it) => {
+    return fs.readFileSync(path.join(fieldConfigDir, it), "utf8");
+  });
 
   return {
-    tasks: filenames.tasks.map(
-      (it) => matter(fs.readFileSync(path.join(roadmapsDir, "tasks", it), "utf8")).content
-    ),
+    tasks: filenames.tasks.map((it) => {
+      return matter(fs.readFileSync(path.join(roadmapsDir, "tasks", it), "utf8")).content;
+    }),
     industries,
-    addOns: addOns.map((i) => i.roadmapSteps),
-    modifications: [...industries.map((i) => i.modifications), ...addOns.map((i) => i.modifications)],
-    contextualInfos: filenames.contextualInfos.map(
-      (it) =>
-        matter(fs.readFileSync(path.join(displayContentDir, "contextual-information", it), "utf8")).content
-    ),
-    displayContents: filenames.displayContents.map((it) => matter(fs.readFileSync(it, "utf8")).content),
+    addOns: addOns.map((i) => {
+      return i.roadmapSteps;
+    }),
+    modifications: [
+      ...industries.map((i) => {
+        return i.modifications;
+      }),
+      ...addOns.map((i) => {
+        return i.modifications;
+      }),
+    ],
+    contextualInfos: filenames.contextualInfos.map((it) => {
+      return matter(fs.readFileSync(path.join(displayContentDir, "contextual-information", it), "utf8"))
+        .content;
+    }),
+    displayContents: filenames.displayContents.map((it) => {
+      return matter(fs.readFileSync(it, "utf8")).content;
+    }),
     fieldConfigs,
   };
 };
@@ -122,7 +137,11 @@ const isReferencedInARoadmap = async (filename: string, contents: FileContents):
   const filenameWithoutMd = filename.split(".md")[0];
 
   for (const industry of contents.industries) {
-    if (industry.roadmapSteps.some((it) => it.task === filenameWithoutMd)) {
+    if (
+      industry.roadmapSteps.some((it) => {
+        return it.task === filenameWithoutMd;
+      })
+    ) {
       containedInAnAddOn = true;
       break;
     }
@@ -131,7 +150,9 @@ const isReferencedInARoadmap = async (filename: string, contents: FileContents):
   for (const industry of contents.industries) {
     if (
       industry.modifications &&
-      industry.modifications.some((it) => it.replaceWithFilename === filenameWithoutMd)
+      industry.modifications.some((it) => {
+        return it.replaceWithFilename === filenameWithoutMd;
+      })
     ) {
       containedInAModification = true;
       break;
@@ -139,14 +160,23 @@ const isReferencedInARoadmap = async (filename: string, contents: FileContents):
   }
 
   for (const addOn of contents.addOns) {
-    if (addOn.some((it) => it.task === filenameWithoutMd)) {
+    if (
+      addOn.some((it) => {
+        return it.task === filenameWithoutMd;
+      })
+    ) {
       containedInAnAddOn = true;
       break;
     }
   }
 
   for (const modification of contents.modifications) {
-    if (modification && modification.some((it) => it.replaceWithFilename === filenameWithoutMd)) {
+    if (
+      modification &&
+      modification.some((it) => {
+        return it.replaceWithFilename === filenameWithoutMd;
+      })
+    ) {
       containedInAModification = true;
       break;
     }
@@ -176,8 +206,12 @@ export const findDeadLinks = async (): Promise<Record<string, string[]>> => {
     "/onboarding?page=4",
     "/profile",
     "/dashboard",
-    ...filenames.tasks.map((it) => `/tasks/${it.split(".md")[0]}`),
-    ...filenames.filings.map((it) => `/filings/${it.split(".md")[0]}`),
+    ...filenames.tasks.map((it) => {
+      return `/tasks/${it.split(".md")[0]}`;
+    }),
+    ...filenames.filings.map((it) => {
+      return `/filings/${it.split(".md")[0]}`;
+    }),
   ];
 
   const deadLinks = pages.reduce((acc, cur) => {
@@ -196,7 +230,12 @@ export const findDeadLinks = async (): Promise<Record<string, string[]>> => {
   ];
 
   const isTemplateLink = (url: string): boolean => {
-    return url.startsWith("$") && templateEvals.some((it) => url.includes(it));
+    return (
+      url.startsWith("$") &&
+      templateEvals.some((it) => {
+        return url.includes(it);
+      })
+    );
   };
 
   for (const page of pages) {

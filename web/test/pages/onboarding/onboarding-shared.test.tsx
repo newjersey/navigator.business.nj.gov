@@ -17,16 +17,26 @@ import { createPageHelpers, renderPage } from "@/test/pages/onboarding/helpers-o
 import { createEmptyProfileData, getCurrentDate } from "@businessnjgovnavigator/shared/";
 import { render, screen, waitFor } from "@testing-library/react";
 
-jest.mock("next/router", () => ({ useRouter: jest.fn() }));
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
-jest.mock("@/lib/api-client/apiClient", () => ({
-  postSelfReg: jest.fn(),
-  postNewsletter: jest.fn(),
-  postUserTesting: jest.fn(),
-  postGetAnnualFilings: jest.fn(),
-}));
+jest.mock("next/router", () => {
+  return { useRouter: jest.fn() };
+});
+jest.mock("@/lib/data-hooks/useUserData", () => {
+  return { useUserData: jest.fn() };
+});
+jest.mock("@/lib/data-hooks/useRoadmap", () => {
+  return { useRoadmap: jest.fn() };
+});
+jest.mock("@/lib/roadmap/buildUserRoadmap", () => {
+  return { buildUserRoadmap: jest.fn() };
+});
+jest.mock("@/lib/api-client/apiClient", () => {
+  return {
+    postSelfReg: jest.fn(),
+    postNewsletter: jest.fn(),
+    postUserTesting: jest.fn(),
+    postGetAnnualFilings: jest.fn(),
+  };
+});
 
 const mockApi = api as jest.Mocked<typeof api>;
 const date = getCurrentDate().subtract(1, "month").date(1);
@@ -38,7 +48,9 @@ describe("onboarding - shared", () => {
     useMockRouter({ isReady: true });
     setupStatefulUserDataContext();
     mockApi.postSelfReg.mockResolvedValue({ authRedirectURL: "", userData: generateUserData({}) });
-    mockApi.postGetAnnualFilings.mockImplementation((request) => Promise.resolve(request));
+    mockApi.postGetAnnualFilings.mockImplementation((request) => {
+      return Promise.resolve(request);
+    });
   });
 
   it("routes to the first onboarding question when they have not answered the first question", async () => {
@@ -125,19 +137,27 @@ describe("onboarding - shared", () => {
     expect(mockSetRoadmap).toHaveBeenCalledTimes(3);
 
     page.clickNext();
-    await waitFor(() => expect(mockSetRoadmap).toHaveBeenCalledTimes(4));
+    await waitFor(() => {
+      return expect(mockSetRoadmap).toHaveBeenCalledTimes(4);
+    });
   });
 
   it("generates a new empty userData object during guest checkout", async () => {
     renderPage({ userData: null, user: generateUser({}), isAuthenticated: IsAuthenticated.FALSE });
-    await waitFor(() => expect(currentUserData().user).not.toBeFalsy());
+    await waitFor(() => {
+      return expect(currentUserData().user).not.toBeFalsy();
+    });
   });
 
   it("updates locally for each step", async () => {
     const userData = generateUserData({ profileData: generateProfileData({ businessPersona: "STARTING" }) });
     const { page } = renderPage({ userData });
-    mockApi.postNewsletter.mockImplementation((request) => Promise.resolve(request));
-    mockApi.postUserTesting.mockImplementation((request) => Promise.resolve(request));
+    mockApi.postNewsletter.mockImplementation((request) => {
+      return Promise.resolve(request);
+    });
+    mockApi.postUserTesting.mockImplementation((request) => {
+      return Promise.resolve(request);
+    });
     await page.visitStep(2);
     expect(getLastCalledWithConfig().local).toEqual(true);
     await page.visitStep(3);

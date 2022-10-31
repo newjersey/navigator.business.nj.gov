@@ -15,7 +15,9 @@ export const NexusUnavailable = (props: UnavailableProps): ReactElement => {
   }).split("${searchAgainButton}");
 
   const inlineParagraphComponent = {
-    p: (props: { children: string[] }) => <div className="display-inline">{props.children}</div>,
+    p: (props: { children: string[] }) => {
+      return <div className="display-inline">{props.children}</div>;
+    },
   };
 
   return (

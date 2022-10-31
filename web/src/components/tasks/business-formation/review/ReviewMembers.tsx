@@ -24,31 +24,33 @@ export const ReviewMembers = (): ReactElement => {
         stepName="Contacts"
         testId="members"
       />
-      {userData?.formationData.formationFormData.members.map((member, index) => (
-        <div key={`${member.name}-${index}`}>
-          <ReviewLineItem
-            label={
-              isCorp
-                ? Config.businessFormationDefaults.reviewStepDirectorNameLabel
-                : Config.businessFormationDefaults.reviewStepMemberNameLabel
-            }
-            value={member.name}
-            marginOverride={index === 0 ? "margin-top-0" : "margin-top-2"}
-          />
-          {isCorp && (
+      {userData?.formationData.formationFormData.members.map((member, index) => {
+        return (
+          <div key={`${member.name}-${index}`}>
             <ReviewLineItem
-              label={Config.businessFormationDefaults.reviewStepDirectorAddressLabel}
-              value={getStringifiedAddress(
-                member.addressLine1,
-                member.addressCity,
-                member.addressState,
-                member.addressZipCode,
-                member.addressLine2
-              )}
+              label={
+                isCorp
+                  ? Config.businessFormationDefaults.reviewStepDirectorNameLabel
+                  : Config.businessFormationDefaults.reviewStepMemberNameLabel
+              }
+              value={member.name}
+              marginOverride={index === 0 ? "margin-top-0" : "margin-top-2"}
             />
-          )}
-        </div>
-      ))}
+            {isCorp && (
+              <ReviewLineItem
+                label={Config.businessFormationDefaults.reviewStepDirectorAddressLabel}
+                value={getStringifiedAddress(
+                  member.addressLine1,
+                  member.addressCity,
+                  member.addressState,
+                  member.addressZipCode,
+                  member.addressLine2
+                )}
+              />
+            )}
+          </div>
+        );
+      })}
       <hr className="margin-y-205" />
     </>
   );

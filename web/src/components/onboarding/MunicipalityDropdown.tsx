@@ -35,7 +35,9 @@ export const MunicipalityDropdown = (props: Props): ReactElement => {
 
   const filterOptions = createFilterOptions({
     matchFrom: "any",
-    stringify: (option: Municipality) => option.displayName,
+    stringify: (option: Municipality) => {
+      return option.displayName;
+    },
   });
 
   return (
@@ -43,40 +45,48 @@ export const MunicipalityDropdown = (props: Props): ReactElement => {
       options={props.municipalities}
       id={props.fieldName}
       filterOptions={filterOptions}
-      getOptionLabel={(municipality: Municipality) => municipality.displayName}
-      isOptionEqualToValue={(option: Municipality, value: Municipality) => option.id === value.id}
+      getOptionLabel={(municipality: Municipality) => {
+        return municipality.displayName;
+      }}
+      isOptionEqualToValue={(option: Municipality, value: Municipality) => {
+        return option.id === value.id;
+      }}
       value={props.value || null}
       onChange={handleMunicipality}
       onBlur={props.onValidation}
       onSubmit={props.onValidation}
-      renderOption={(props, option, { selected }) => (
-        <li {...props}>
-          {selected ? (
-            <MenuOptionSelected>{option.displayName}</MenuOptionSelected>
-          ) : (
-            <MenuOptionUnselected>
-              {splitAndBoldSearchText(option.displayName, searchText)}
-            </MenuOptionUnselected>
-          )}
-        </li>
-      )}
-      renderInput={(params) => (
-        <TextField
-          {...params}
-          inputProps={{
-            "aria-label": props.ariaLabel ?? camelCaseToSentence(props.fieldName),
-            "data-testid": props.fieldName,
-            ...params.inputProps,
-          }}
-          value={searchText}
-          onChange={handleChange}
-          onSubmit={props.onValidation}
-          variant="outlined"
-          placeholder={props.placeholderText}
-          error={props.error}
-          helperText={props.error ? props.helperText : " "}
-        />
-      )}
+      renderOption={(props, option, { selected }) => {
+        return (
+          <li {...props}>
+            {selected ? (
+              <MenuOptionSelected>{option.displayName}</MenuOptionSelected>
+            ) : (
+              <MenuOptionUnselected>
+                {splitAndBoldSearchText(option.displayName, searchText)}
+              </MenuOptionUnselected>
+            )}
+          </li>
+        );
+      }}
+      renderInput={(params) => {
+        return (
+          <TextField
+            {...params}
+            inputProps={{
+              "aria-label": props.ariaLabel ?? camelCaseToSentence(props.fieldName),
+              "data-testid": props.fieldName,
+              ...params.inputProps,
+            }}
+            value={searchText}
+            onChange={handleChange}
+            onSubmit={props.onValidation}
+            variant="outlined"
+            placeholder={props.placeholderText}
+            error={props.error}
+            helperText={props.error ? props.helperText : " "}
+          />
+        );
+      }}
       fullWidth
       openOnFocus
       clearOnEscape

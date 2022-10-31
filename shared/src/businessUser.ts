@@ -39,10 +39,12 @@ export const emptyBusinessUser: BusinessUser = {
   abExperience: decideABExperience(),
 };
 
-export const createEmptyUser = (abExperience?: ABExperience): BusinessUser => ({
-  ...emptyBusinessUser,
-  abExperience: abExperience ?? decideABExperience(),
-});
+export const createEmptyUser = (abExperience?: ABExperience): BusinessUser => {
+  return {
+    ...emptyBusinessUser,
+    abExperience: abExperience ?? decideABExperience(),
+  };
+};
 
 export type ExternalStatus = {
   newsletter?: NewsletterResponse;

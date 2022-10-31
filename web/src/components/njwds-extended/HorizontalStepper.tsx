@@ -105,24 +105,28 @@ export const HorizontalStepper = (props: Props): ReactElement => {
       <div className="horizontal-step-indicator display-block">
         <div className="usa-step-indicator usa-step-indicator--counters-sm">
           <ol className={`usa-step-indicator__segments ${getBottomMargin()}`}>
-            {props.steps.map((step: StepperStep, index: number) => (
-              <li
-                key={`${step.name}-${index}`}
-                className={
-                  `border-bottom-2px ${getBorderColor(index)} cursor-pointer ` +
-                  `usa-step-indicator__segment usa-step-indicator__segment${getCSSClassColor(index)}`
-                }
-                aria-hidden
-                data-num={getIcon(index)}
-                data-state={determineState(index)}
-                onClick={() => props.onStepClicked(index)}
-                data-testid={`stepper-${index}`}
-              >
-                <span className={`usa-step-indicator__segment-label ${getBoldClass(index)}`} aria-hidden>
-                  {step.name}
-                </span>
-              </li>
-            ))}
+            {props.steps.map((step: StepperStep, index: number) => {
+              return (
+                <li
+                  key={`${step.name}-${index}`}
+                  className={
+                    `border-bottom-2px ${getBorderColor(index)} cursor-pointer ` +
+                    `usa-step-indicator__segment usa-step-indicator__segment${getCSSClassColor(index)}`
+                  }
+                  aria-hidden
+                  data-num={getIcon(index)}
+                  data-state={determineState(index)}
+                  onClick={() => {
+                    return props.onStepClicked(index);
+                  }}
+                  data-testid={`stepper-${index}`}
+                >
+                  <span className={`usa-step-indicator__segment-label ${getBoldClass(index)}`} aria-hidden>
+                    {step.name}
+                  </span>
+                </li>
+              );
+            })}
           </ol>
         </div>
       </div>

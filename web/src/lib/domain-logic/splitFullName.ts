@@ -1,5 +1,7 @@
 export const splitFullName = (name: string | undefined): SplitName => {
-  if (!name) return { firstName: "", lastName: "" };
+  if (!name) {
+    return { firstName: "", lastName: "" };
+  }
   const words = name.split(" ");
   return {
     firstName: words.shift() || "",

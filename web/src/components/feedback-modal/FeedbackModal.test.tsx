@@ -6,12 +6,18 @@ import { useMockUserData, useUndefinedUserData } from "@/test/mock/mockUseUserDa
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("next/router", () => ({ useRouter: jest.fn() }));
-jest.mock("@/lib/api-client/apiClient", () => ({
-  postFeedback: jest.fn(),
-  postIssue: jest.fn(),
-}));
+jest.mock("@/lib/data-hooks/useUserData", () => {
+  return { useUserData: jest.fn() };
+});
+jest.mock("next/router", () => {
+  return { useRouter: jest.fn() };
+});
+jest.mock("@/lib/api-client/apiClient", () => {
+  return {
+    postFeedback: jest.fn(),
+    postIssue: jest.fn(),
+  };
+});
 const mockApi = api as jest.Mocked<typeof api>;
 
 const getResult = jest.fn();
@@ -30,7 +36,9 @@ describe("<feedbackModal />", () => {
     mockApi.postFeedback.mockReturnValue(Promise.resolve());
     mockApi.postIssue.mockReturnValue(Promise.resolve());
 
-    getResult.mockImplementation(() => generateParsedUserAgent({}));
+    getResult.mockImplementation(() => {
+      return generateParsedUserAgent({});
+    });
   });
 
   afterEach(() => {

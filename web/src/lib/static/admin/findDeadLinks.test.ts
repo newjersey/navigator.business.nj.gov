@@ -6,9 +6,13 @@ import { Options } from "broken-link-checker";
 import fs from "fs";
 
 jest.mock("fs");
-jest.mock("process", () => ({
-  cwd: () => "/test",
-}));
+jest.mock("process", () => {
+  return {
+    cwd: () => {
+      return "/test";
+    },
+  };
+});
 
 describe("findDeadLinks", () => {
   let mockedFs: jest.Mocked<typeof fs>;
@@ -98,29 +102,33 @@ describe("findDeadLinks", () => {
   });
 });
 
-jest.mock("broken-link-checker", () => ({
-  HtmlUrlChecker: function SpyHtmlUrlChecker(
-    options: Options,
-    handlers: {
-      link?: ((result: any) => void) | undefined;
-      end?: (() => void) | undefined;
-    }
-  ) {
-    const enqueue = (pageUrl: any): any => {
-      if (!handlers.link || !handlers.end) return;
-      if (pageUrl.includes("task1")) {
-        handlers.link({
-          url: { original: "http://www.example.com" },
-          broken: true,
-        });
-      } else {
-        handlers.link({
-          url: { original: "" },
-          broken: false,
-        });
+jest.mock("broken-link-checker", () => {
+  return {
+    HtmlUrlChecker: function SpyHtmlUrlChecker(
+      options: Options,
+      handlers: {
+        link?: ((result: any) => void) | undefined;
+        end?: (() => void) | undefined;
       }
-      handlers.end();
-    };
-    return { enqueue };
-  },
-}));
+    ) {
+      const enqueue = (pageUrl: any): any => {
+        if (!handlers.link || !handlers.end) {
+          return;
+        }
+        if (pageUrl.includes("task1")) {
+          handlers.link({
+            url: { original: "http://www.example.com" },
+            broken: true,
+          });
+        } else {
+          handlers.link({
+            url: { original: "" },
+            broken: false,
+          });
+        }
+        handlers.end();
+      };
+      return { enqueue };
+    },
+  };
+});

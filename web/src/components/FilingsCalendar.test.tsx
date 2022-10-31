@@ -31,10 +31,18 @@ function mockMaterialUI(): typeof materialUi {
   };
 }
 
-jest.mock("@mui/material", () => mockMaterialUI());
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("next/router", () => ({ useRouter: jest.fn() }));
+jest.mock("@mui/material", () => {
+  return mockMaterialUI();
+});
+jest.mock("@/lib/data-hooks/useUserData", () => {
+  return { useUserData: jest.fn() };
+});
+jest.mock("@/lib/data-hooks/useRoadmap", () => {
+  return { useRoadmap: jest.fn() };
+});
+jest.mock("next/router", () => {
+  return { useRouter: jest.fn() };
+});
 
 const renderFilingsCalendar = (
   operateReferences: Record<string, OperateReference>,
@@ -50,7 +58,9 @@ const renderFilingsCalendar = (
 };
 
 const setTabletScreen = (value: boolean): void => {
-  (useMediaQuery as jest.Mock).mockImplementation(() => value);
+  (useMediaQuery as jest.Mock).mockImplementation(() => {
+    return value;
+  });
 };
 
 describe("<FilingsCalendar />", () => {
@@ -71,7 +81,9 @@ describe("<FilingsCalendar />", () => {
     const userData = generateUserData({
       profileData: generateProfileData({
         operatingPhase: randomElementFromArray(
-          OperatingPhases.filter((obj) => obj.displayCalendarType === "FULL")
+          OperatingPhases.filter((obj) => {
+            return obj.displayCalendarType === "FULL";
+          })
         ).id,
       }),
       taxFilingData: generateTaxFilingData({ filings: [annualReport] }),
@@ -109,7 +121,9 @@ describe("<FilingsCalendar />", () => {
     const userData = generateUserData({
       profileData: generateProfileData({
         operatingPhase: randomElementFromArray(
-          OperatingPhases.filter((obj) => obj.displayCalendarType === "LIST")
+          OperatingPhases.filter((obj) => {
+            return obj.displayCalendarType === "LIST";
+          })
         ).id,
       }),
       taxFilingData: generateTaxFilingData({ filings: [farReport, recentReport] }),
@@ -180,7 +194,9 @@ describe("<FilingsCalendar />", () => {
     const userData = generateUserData({
       profileData: generateProfileData({
         operatingPhase: randomElementFromArray(
-          OperatingPhases.filter((obj) => obj.displayCalendarType === "FULL")
+          OperatingPhases.filter((obj) => {
+            return obj.displayCalendarType === "FULL";
+          })
         ).id,
       }),
       taxFilingData: generateTaxFilingData({ filings: [annualReport] }),
@@ -213,7 +229,9 @@ describe("<FilingsCalendar />", () => {
     const userData = generateUserData({
       profileData: generateProfileData({
         operatingPhase: randomElementFromArray(
-          OperatingPhases.filter((obj) => obj.displayCalendarType === "FULL")
+          OperatingPhases.filter((obj) => {
+            return obj.displayCalendarType === "FULL";
+          })
         ).id,
       }),
       taxFilingData: generateTaxFilingData({ filings: [] }),
@@ -252,7 +270,9 @@ describe("<FilingsCalendar />", () => {
     const userData = generateUserData({
       profileData: generateProfileData({
         operatingPhase: randomElementFromArray(
-          OperatingPhases.filter((obj) => obj.displayCalendarType === "LIST")
+          OperatingPhases.filter((obj) => {
+            return obj.displayCalendarType === "LIST";
+          })
         ).id,
       }),
       taxFilingData: generateTaxFilingData({ filings: [annualReport] }),
@@ -294,9 +314,9 @@ describe("<FilingsCalendar />", () => {
         profileData: generateProfileData({
           legalStructureId: randomLegalStructure({ requiresPublicFiling: true }).id,
           operatingPhase: randomElementFromArray(
-            OperatingPhases.filter(
-              (obj) => obj.displayTaxAccessButton === true && obj.displayCalendarType != "NONE"
-            )
+            OperatingPhases.filter((obj) => {
+              return obj.displayTaxAccessButton === true && obj.displayCalendarType != "NONE";
+            })
           ).id,
         }),
         taxFilingData: generateTaxFilingData({ filings: [annualReport] }),
@@ -323,9 +343,9 @@ describe("<FilingsCalendar />", () => {
         profileData: generateProfileData({
           legalStructureId: randomLegalStructure({ requiresPublicFiling: false }).id,
           operatingPhase: randomElementFromArray(
-            OperatingPhases.filter(
-              (obj) => obj.displayTaxAccessButton === true && obj.displayCalendarType != "NONE"
-            )
+            OperatingPhases.filter((obj) => {
+              return obj.displayTaxAccessButton === true && obj.displayCalendarType != "NONE";
+            })
           ).id,
         }),
         taxFilingData: generateTaxFilingData({ filings: [whateverReport] }),
@@ -355,9 +375,9 @@ describe("<FilingsCalendar />", () => {
         profileData: generateProfileData({
           legalStructureId: randomLegalStructure({ requiresPublicFiling: true }).id,
           operatingPhase: randomElementFromArray(
-            OperatingPhases.filter(
-              (obj) => obj.displayTaxAccessButton !== true && obj.displayCalendarType != "NONE"
-            )
+            OperatingPhases.filter((obj) => {
+              return obj.displayTaxAccessButton !== true && obj.displayCalendarType != "NONE";
+            })
           ).id,
         }),
         taxFilingData: generateTaxFilingData({ filings: [annualReport] }),
@@ -388,9 +408,9 @@ describe("<FilingsCalendar />", () => {
         profileData: generateProfileData({
           legalStructureId: randomLegalStructure({ requiresPublicFiling: true }).id,
           operatingPhase: randomElementFromArray(
-            OperatingPhases.filter(
-              (obj) => obj.displayTaxAccessButton == true && obj.displayCalendarType != "NONE"
-            )
+            OperatingPhases.filter((obj) => {
+              return obj.displayTaxAccessButton == true && obj.displayCalendarType != "NONE";
+            })
           ).id,
         }),
         taxFilingData: generateTaxFilingData({ filings: [annualReport] }),
@@ -454,7 +474,9 @@ describe("<FilingsCalendar />", () => {
       userData = generateUserData({
         profileData: generateProfileData({
           operatingPhase: randomElementFromArray(
-            OperatingPhases.filter((obj) => obj.displayCalendarType === "FULL")
+            OperatingPhases.filter((obj) => {
+              return obj.displayCalendarType === "FULL";
+            })
           ).id,
         }),
         taxFilingData: generateTaxFilingData({ filings: [annualReport] }),
@@ -538,7 +560,9 @@ describe("<FilingsCalendar />", () => {
       userData = generateUserData({
         profileData: generateProfileData({
           operatingPhase: randomElementFromArray(
-            OperatingPhases.filter((obj) => obj.displayCalendarToggleButton === true)
+            OperatingPhases.filter((obj) => {
+              return obj.displayCalendarToggleButton === true;
+            })
           ).id,
         }),
         taxFilingData: generateTaxFilingData({ filings: [annualReport] }),
@@ -553,7 +577,9 @@ describe("<FilingsCalendar />", () => {
       userData = generateUserData({
         profileData: generateProfileData({
           operatingPhase: randomElementFromArray(
-            OperatingPhases.filter((obj) => obj.displayCalendarToggleButton === false)
+            OperatingPhases.filter((obj) => {
+              return obj.displayCalendarToggleButton === false;
+            })
           ).id,
         }),
         taxFilingData: generateTaxFilingData({ filings: [annualReport] }),

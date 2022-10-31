@@ -13,21 +13,28 @@ import { useMockUserData } from "@/test/mock/mockUseUserData";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
 
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("@/lib/api-client/apiClient", () => ({ checkLicenseStatus: jest.fn(), getUserData: jest.fn() }));
+jest.mock("@/lib/data-hooks/useUserData", () => {
+  return { useUserData: jest.fn() };
+});
+jest.mock("@/lib/data-hooks/useRoadmap", () => {
+  return { useRoadmap: jest.fn() };
+});
+jest.mock("@/lib/api-client/apiClient", () => {
+  return { checkLicenseStatus: jest.fn(), getUserData: jest.fn() };
+});
 const mockApi = api as jest.Mocked<typeof api>;
 
 describe("<LicenseTask />", () => {
   const task = generateTask({});
   const initialUserData = generateUserData({ licenseData: generateLicenseData({}) });
 
-  const renderTask = () =>
-    render(
+  const renderTask = () => {
+    return render(
       <ThemeProvider theme={createTheme()}>
         <LicenseTask task={task} />
       </ThemeProvider>
     );
+  };
 
   beforeEach(() => {
     jest.resetAllMocks();
@@ -261,7 +268,9 @@ describe("<LicenseTask />", () => {
 
     fireEvent.submit(screen.getByTestId("check-status-submit"));
     expect(screen.getByTestId("loading-spinner")).toBeInTheDocument();
-    await act(() => returnedPromise.catch(() => {}));
+    await act(() => {
+      return returnedPromise.catch(() => {});
+    });
     expect(screen.queryByTestId("loading-spinner")).not.toBeInTheDocument();
   });
 
@@ -328,5 +337,7 @@ describe("<LicenseTask />", () => {
     fireEvent.change(screen.getByTestId(testid), { target: { value: value } });
   };
 
-  const getValue = (testid: string): string => (screen.getByTestId(testid) as HTMLInputElement)?.value;
+  const getValue = (testid: string): string => {
+    return (screen.getByTestId(testid) as HTMLInputElement)?.value;
+  };
 });

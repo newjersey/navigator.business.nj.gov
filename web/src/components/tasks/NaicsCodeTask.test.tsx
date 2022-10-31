@@ -16,9 +16,15 @@ import {
 import { LookupIndustryById, UserData } from "@businessnjgovnavigator/shared";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
-jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
+jest.mock("@/lib/roadmap/buildUserRoadmap", () => {
+  return { buildUserRoadmap: jest.fn() };
+});
+jest.mock("@/lib/data-hooks/useUserData", () => {
+  return { useUserData: jest.fn() };
+});
+jest.mock("@/lib/data-hooks/useRoadmap", () => {
+  return { useRoadmap: jest.fn() };
+});
 jest.mock("@/lib/static/records/naics2022.json", () => {
   const industryId = "auto-body-repair";
   // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -87,9 +93,9 @@ describe("<NaicsCodeTask />", () => {
       renderPage();
 
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      const description = (NaicsCodes as NaicsCodeObject[]).find(
-        (element) => element.SixDigitCode?.toString() === validNaicsCode
-      )!.SixDigitDescription!;
+      const description = (NaicsCodes as NaicsCodeObject[]).find((element) => {
+        return element.SixDigitCode?.toString() === validNaicsCode;
+      })!.SixDigitDescription!;
 
       const expectedUrl = templateEval(Config.determineNaicsCode.naicsDescriptionURL, {
         code: validNaicsCode,
@@ -368,7 +374,9 @@ describe("<NaicsCodeTask />", () => {
         target: { value: validNaicsCode },
       });
       fireEvent.click(screen.getByText(`Register & ${Config.determineNaicsCode.saveButtonText}`));
-      await waitFor(() => expect(setRegistrationModalIsVisible).toHaveBeenCalledWith(true));
+      await waitFor(() => {
+        return expect(setRegistrationModalIsVisible).toHaveBeenCalledWith(true);
+      });
     });
   });
 });

@@ -26,10 +26,16 @@ export const useDocuments = (): {
   };
 
   useMountEffectWhenDefined(() => {
-    if (!userData) return;
+    if (!userData) {
+      return;
+    }
     checkData();
-    const interval = setInterval(() => checkData(), 900000);
-    return () => clearInterval(interval);
+    const interval = setInterval(() => {
+      return checkData();
+    }, 900000);
+    return () => {
+      return clearInterval(interval);
+    };
   }, userData);
 
   return { documents, checkData };

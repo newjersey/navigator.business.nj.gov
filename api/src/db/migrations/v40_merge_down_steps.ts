@@ -29,7 +29,11 @@ export const migrate_v39_to_v40 = (v39Data: v39UserData): v40UserData => {
     preferences: {
       ...v39Data.preferences,
       roadmapOpenSteps: [
-        ...new Set(v39Data.preferences.roadmapOpenSteps.map((value) => determineOpenSteps(value))),
+        ...new Set(
+          v39Data.preferences.roadmapOpenSteps.map((value) => {
+            return determineOpenSteps(value);
+          })
+        ),
       ],
     },
     version: 40,

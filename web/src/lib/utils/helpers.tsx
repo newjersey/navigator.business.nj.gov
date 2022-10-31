@@ -20,16 +20,19 @@ import { ReactElement, useEffect, useRef } from "react";
 
 const Config = getMergedConfig();
 
-// eslint-disable-next-line react-hooks/exhaustive-deps
-export const useMountEffect = (fun: () => void): void => useEffect(fun, []);
+export const useMountEffect = (fun: () => void): void => {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  return useEffect(fun, []);
+};
 
-export const useOnWindowResize = (fun: () => void): void =>
-  useEffect(() => {
+export const useOnWindowResize = (fun: () => void): void => {
+  return useEffect(() => {
     window.addEventListener("resize", fun);
     return function cleanup() {
       window.removeEventListener("resize", fun);
     };
   });
+};
 
 export const useMountEffectWhenDefined = (fun: () => void, thingToBeDefined: unknown | undefined): void => {
   const effectOccurred = useRef<boolean>(false);
@@ -57,8 +60,11 @@ export const templateEval = (template: string, args: Record<string, string>): st
   return newTemplate;
 };
 
-export const getTaskFromRoadmap = (roadmap: Roadmap | undefined, taskId: string): Task | undefined =>
-  roadmap?.tasks.find((task) => task.id === taskId);
+export const getTaskFromRoadmap = (roadmap: Roadmap | undefined, taskId: string): Task | undefined => {
+  return roadmap?.tasks.find((task) => {
+    return task.id === taskId;
+  });
+};
 
 export const getSectionCompletion = (
   roadmap: Roadmap | undefined,
@@ -70,7 +76,9 @@ export const getSectionCompletion = (
   const taskMap = sectionsToTasksMap(roadmap) as Record<SectionType, Task[]>;
   return sectionNames.reduce((accumulator, currentValue: SectionType) => {
     accumulator[currentValue] =
-      taskMap[currentValue]?.every((task: Task) => userData.taskProgress[task.id] === "COMPLETED") ?? false;
+      taskMap[currentValue]?.every((task: Task) => {
+        return userData.taskProgress[task.id] === "COMPLETED";
+      }) ?? false;
     return accumulator;
   }, {} as SectionCompletion);
 };
@@ -88,7 +96,9 @@ export const getSectionPositions = (
   const currentSection = stepInRoadmap(roadmap, taskId)?.section as SectionType;
   const nextSection = sectionNames
     .slice(sectionNames.indexOf(currentSection))
-    .find((currentValue: SectionType) => !sectionCompletion[currentValue]);
+    .find((currentValue: SectionType) => {
+      return !sectionCompletion[currentValue];
+    });
   return { currentSection, nextSection };
 };
 
@@ -122,7 +132,9 @@ export const rswitch = <T,>(param: string, cases: { default: T; [k: string]: T }
 
 export const scrollToTop = (props?: { smooth?: boolean }): void => {
   props?.smooth
-    ? setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 100)
+    ? setTimeout(() => {
+        return window.scrollTo({ top: 0, behavior: "smooth" });
+      }, 100)
     : window.scrollTo(0, 0);
 };
 
@@ -138,7 +150,9 @@ export const scrollToTopOfElement = (
       y -= mobileNavBarHeight;
     }
   }
-  setTimeout(() => window.scrollTo({ top: y, behavior: "smooth" }), 100);
+  setTimeout(() => {
+    return window.scrollTo({ top: y, behavior: "smooth" });
+  }, 100);
 };
 
 export const isStepCompleted = (
@@ -149,10 +163,11 @@ export const isStepCompleted = (
   if (!roadmap) {
     return false;
   }
-  return roadmap.tasks.every(
-    (currentTask) =>
+  return roadmap.tasks.every((currentTask) => {
+    return (
       currentTask.stepNumber == step.stepNumber && userData?.taskProgress[currentTask.id] !== "COMPLETED"
-  );
+    );
+  });
 };
 
 interface AlertProps {
@@ -190,9 +205,13 @@ export const OnboardingErrorLookup: Record<ProfileError, string> = {
 };
 
 export const getUserNameOrEmail = (userData: UserData | undefined): string => {
-  if (userData?.user.name) return userData.user.name;
-  else if (userData?.user.email) return userData.user.email;
-  else return getMergedConfig().navigationDefaults.myNJAccountText;
+  if (userData?.user.name) {
+    return userData.user.name;
+  } else if (userData?.user.email) {
+    return userData.user.email;
+  } else {
+    return getMergedConfig().navigationDefaults.myNJAccountText;
+  }
 };
 
 export const validateEmail = (email: string): boolean => {
@@ -224,8 +243,12 @@ export const validateFullName = (name: string | undefined): { isValid: boolean; 
 };
 
 export const getUrlSlugs = (roadmap: Roadmap | undefined): string[] => {
-  if (!roadmap) return [];
-  return roadmap.tasks.map((task) => task.urlSlug);
+  if (!roadmap) {
+    return [];
+  }
+  return roadmap.tasks.map((task) => {
+    return task.urlSlug;
+  });
 };
 
 export const setHeaderRole = (
@@ -244,7 +267,9 @@ export const setHeaderRole = (
 };
 
 export const getSectionNames = (roadmap: Roadmap | undefined): SectionType[] => {
-  if (!roadmap) return [];
+  if (!roadmap) {
+    return [];
+  }
   const { steps } = roadmap;
   const sections: SectionType[] = [];
   for (const step of steps) {
@@ -266,13 +291,21 @@ export const createRoadmapSections = (
 
 export const getPhoneNumberFormat = (phoneNumber: string) => {
   const length = phoneNumber.length;
-  if (length === 0) return phoneNumber;
-  if (length < 4) return `(${phoneNumber}`;
-  if (length < 7) return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3)}`;
+  if (length === 0) {
+    return phoneNumber;
+  }
+  if (length < 4) {
+    return `(${phoneNumber}`;
+  }
+  if (length < 7) {
+    return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3)}`;
+  }
   return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6, 10)}`;
 };
 
-export const capitalizeFirstLetter = (text: string): string => text.charAt(0).toUpperCase() + text.slice(1);
+export const capitalizeFirstLetter = (text: string): string => {
+  return text.charAt(0).toUpperCase() + text.slice(1);
+};
 
 export const camelCaseToSentence = (text: string): string => {
   const spacedCase = text
@@ -286,7 +319,9 @@ export const kabobSnakeSentenceToCamelCase = (text: string): string => {
   return text
     .toLowerCase()
     .split(/[\s_-]/gm)
-    .map((cased, index) => (index == 0 ? cased : capitalizeFirstLetter(cased)))
+    .map((cased, index) => {
+      return index == 0 ? cased : capitalizeFirstLetter(cased);
+    })
     .join("");
 };
 
@@ -297,17 +332,26 @@ export const camelCaseToKabobCase = (text: string): string => {
     .toLowerCase();
 };
 
-const sectionsToTasksMap = (roadmap: Roadmap | undefined): Record<SectionType, Task[]> | undefined =>
-  roadmap?.steps.reduce((accumulator, currentStep: Step) => {
-    const currentStepTasks = roadmap.tasks.filter((task) => task.stepNumber === currentStep.stepNumber);
+const sectionsToTasksMap = (roadmap: Roadmap | undefined): Record<SectionType, Task[]> | undefined => {
+  return roadmap?.steps.reduce((accumulator, currentStep: Step) => {
+    const currentStepTasks = roadmap.tasks.filter((task) => {
+      return task.stepNumber === currentStep.stepNumber;
+    });
     accumulator[currentStep.section] = [...(accumulator[currentStep.section] || []), ...currentStepTasks];
     return accumulator;
   }, {} as Record<SectionType, Task[]>);
+};
 
 const stepInRoadmap = (roadmap: Roadmap | undefined, taskId: string): Step | undefined => {
-  const taskAtHand = roadmap?.tasks.find((task) => task.id === taskId);
-  if (!taskAtHand) return;
-  return roadmap?.steps.find((step) => step.stepNumber === taskAtHand.stepNumber);
+  const taskAtHand = roadmap?.tasks.find((task) => {
+    return task.id === taskId;
+  });
+  if (!taskAtHand) {
+    return;
+  }
+  return roadmap?.steps.find((step) => {
+    return step.stepNumber === taskAtHand.stepNumber;
+  });
 };
 export const splitAndBoldSearchText = (displayText: string, searchText: string): ReactElement => {
   const index = displayText.toLowerCase().indexOf(searchText.toLowerCase());
@@ -335,7 +379,9 @@ export const getDollarValue = (currVal: string | number): string => {
 
 export const zipCodeRange = (value: string) => {
   const parsedValue = Number.parseInt(value);
-  if (typeof parsedValue !== "number") return false;
+  if (typeof parsedValue !== "number") {
+    return false;
+  }
   return parsedValue >= 7001 && parsedValue <= 8999;
 };
 
@@ -359,15 +405,17 @@ export function isUserData(data: UserData | ProfileData): data is UserData {
   return (data as UserData).user !== undefined;
 }
 
-export const makeButtonIcon = (svgFilename: string, size = "20px"): ReactElement => (
-  <img
-    className="margin-right-05 margin-left-neg-1"
-    width={size}
-    height={size}
-    src={`/img/${svgFilename}.svg`}
-    alt=""
-  />
-);
+export const makeButtonIcon = (svgFilename: string, size = "20px"): ReactElement => {
+  return (
+    <img
+      className="margin-right-05 margin-left-neg-1"
+      width={size}
+      height={size}
+      src={`/img/${svgFilename}.svg`}
+      alt=""
+    />
+  );
+};
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const flattenObject = (obj: any) => {

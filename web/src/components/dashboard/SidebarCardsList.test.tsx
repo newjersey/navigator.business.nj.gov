@@ -21,8 +21,12 @@ import { UserData } from "@businessnjgovnavigator/shared";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { SidebarCardsList } from "./SidebarCardsList";
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
+jest.mock("@/lib/data-hooks/useUserData", () => {
+  return { useUserData: jest.fn() };
+});
+jest.mock("@/lib/data-hooks/useRoadmap", () => {
+  return { useRoadmap: jest.fn() };
+});
 
 const Config = getMergedConfig();
 
@@ -33,12 +37,14 @@ describe("SidebarCards List", () => {
     setupStatefulUserDataContext();
   });
 
-  const createDisplayContent = (sidebar?: Record<string, SidebarCardContent>) => ({
-    contentMd: "",
-    sidebarDisplayContent: sidebar ?? {
-      welcome: generateSidebarCardContent({}),
-    },
-  });
+  const createDisplayContent = (sidebar?: Record<string, SidebarCardContent>) => {
+    return {
+      contentMd: "",
+      sidebarDisplayContent: sidebar ?? {
+        welcome: generateSidebarCardContent({}),
+      },
+    };
+  };
 
   const renderPage = (overrides: {
     sidebarCards?: Record<string, SidebarCardContent>;

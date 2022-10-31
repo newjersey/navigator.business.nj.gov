@@ -93,9 +93,8 @@ describe("AirtableFeedbackClient", () => {
   });
 });
 
-jest.mock(
-  "airtable",
-  (): MockAirtableType => ({
+jest.mock("airtable", (): MockAirtableType => {
+  return {
     baseIdCalledWith: "",
     tableIdCalledWith: "",
     dataCalledWith: undefined,
@@ -113,5 +112,5 @@ jest.mock(
       };
     },
     configure: function MockConfigure() {},
-  })
-);
+  };
+});

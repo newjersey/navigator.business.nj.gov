@@ -15,8 +15,16 @@ const FeatureFlagsPage = (props: Props): ReactElement => {
   const [password, setPassword] = useState<string>("");
 
   const envVars = JSON.parse(props.envVars);
-  const featuresWithSuffixes = Object.keys(envVars).filter((it) => it.startsWith("FEATURE_"));
-  const features = [...new Set(featuresWithSuffixes.map((it) => it.split("_").slice(1, -1).join("_")))];
+  const featuresWithSuffixes = Object.keys(envVars).filter((it) => {
+    return it.startsWith("FEATURE_");
+  });
+  const features = [
+    ...new Set(
+      featuresWithSuffixes.map((it) => {
+        return it.split("_").slice(1, -1).join("_");
+      })
+    ),
+  ];
 
   const authedView = (
     <>
@@ -30,17 +38,19 @@ const FeatureFlagsPage = (props: Props): ReactElement => {
           </tr>
         </thead>
         <tbody>
-          {features.map((it) => (
-            <tr key={it}>
-              <td>{it}</td>
-              <td className={envVars[`FEATURE_${it}_STAGING`]?.includes("true") ? "enabled" : "disabled"}>
-                {envVars[`FEATURE_${it}_STAGING`] || "false"}
-              </td>
-              <td className={envVars[`FEATURE_${it}_PROD`]?.includes("true") ? "enabled" : "disabled"}>
-                {envVars[`FEATURE_${it}_PROD`] || "false"}
-              </td>
-            </tr>
-          ))}
+          {features.map((it) => {
+            return (
+              <tr key={it}>
+                <td>{it}</td>
+                <td className={envVars[`FEATURE_${it}_STAGING`]?.includes("true") ? "enabled" : "disabled"}>
+                  {envVars[`FEATURE_${it}_STAGING`] || "false"}
+                </td>
+                <td className={envVars[`FEATURE_${it}_PROD`]?.includes("true") ? "enabled" : "disabled"}>
+                  {envVars[`FEATURE_${it}_PROD`] || "false"}
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </>

@@ -20,7 +20,9 @@ export const FormationInterimSuccessPage = (props: Props): ReactElement => {
   const router = useRouter();
 
   const resetCompletedFilingPayment = () => {
-    if (!userData) return;
+    if (!userData) {
+      return;
+    }
     const updatedUserData = {
       ...userData,
       formationData: { ...userData.formationData, completedFilingPayment: false },
@@ -39,7 +41,13 @@ export const FormationInterimSuccessPage = (props: Props): ReactElement => {
       <Content
         customComponents={{
           button: (
-            <Button style="tertiary" underline onClick={() => setShowConfirmResubmitModal(true)}>
+            <Button
+              style="tertiary"
+              underline
+              onClick={() => {
+                return setShowConfirmResubmitModal(true);
+              }}
+            >
               {Config.businessFormationDefaults.interimSuccessPageButtonText}
             </Button>
           ),
@@ -50,7 +58,9 @@ export const FormationInterimSuccessPage = (props: Props): ReactElement => {
       <img className="maxh-card-lg margin-top-6" src={`/img/signpost.svg`} alt="" />
       <ModalTwoButton
         isOpen={showConfirmResubmitModal}
-        close={() => setShowConfirmResubmitModal(false)}
+        close={() => {
+          return setShowConfirmResubmitModal(false);
+        }}
         title={Config.businessFormationDefaults.interimSuccessPageModalTitle}
         primaryButtonText={Config.businessFormationDefaults.interimSuccessPageModalContinue}
         primaryButtonOnClick={resetCompletedFilingPayment}

@@ -23,13 +23,19 @@ export const EinTask = (props: Props): ReactElement => {
   const { Config } = useConfig();
 
   useMountEffectWhenDefined(() => {
-    if (!userData) return;
-    if (isAuthenticated === IsAuthenticated.FALSE) return;
+    if (!userData) {
+      return;
+    }
+    if (isAuthenticated === IsAuthenticated.FALSE) {
+      return;
+    }
     setShowInput(!userData.profileData.employerId);
   }, userData);
 
   const setBackToEditing = ({ remove }: { remove: boolean }) => {
-    if (!userData || !updateQueue) return;
+    if (!userData || !updateQueue) {
+      return;
+    }
     setShowInput(true);
     const newEinValue = remove ? emptyProfileData.employerId : userData.profileData.employerId;
     updateQueue
@@ -38,8 +44,12 @@ export const EinTask = (props: Props): ReactElement => {
       .update();
   };
 
-  const onEdit = () => setBackToEditing({ remove: false });
-  const onRemove = () => setBackToEditing({ remove: true });
+  const onEdit = () => {
+    return setBackToEditing({ remove: false });
+  };
+  const onRemove = () => {
+    return setBackToEditing({ remove: true });
+  };
 
   const onSave = () => {
     if (isAuthenticated === IsAuthenticated.FALSE) {

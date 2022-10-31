@@ -50,12 +50,22 @@ const Config = getMergedConfig();
 const dateOfFormation = date.format("YYYY-MM-DD");
 const mockApi = api as jest.Mocked<typeof api>;
 
-jest.mock("next/router", () => ({ useRouter: jest.fn() }));
+jest.mock("next/router", () => {
+  return { useRouter: jest.fn() };
+});
 jest.mock("@/lib/data-hooks/useDocuments");
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
-jest.mock("@/lib/api-client/apiClient", () => ({ postGetAnnualFilings: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
+jest.mock("@/lib/data-hooks/useUserData", () => {
+  return { useUserData: jest.fn() };
+});
+jest.mock("@/lib/roadmap/buildUserRoadmap", () => {
+  return { buildUserRoadmap: jest.fn() };
+});
+jest.mock("@/lib/api-client/apiClient", () => {
+  return { postGetAnnualFilings: jest.fn() };
+});
+jest.mock("@/lib/data-hooks/useRoadmap", () => {
+  return { useRoadmap: jest.fn() };
+});
 
 describe("profile", () => {
   let setRegistrationModalIsVisible: jest.Mock;
@@ -67,7 +77,9 @@ describe("profile", () => {
     useMockRoadmap({});
     setupStatefulUserDataContext();
     useMockDocuments({});
-    mockApi.postGetAnnualFilings.mockImplementation((userData) => Promise.resolve(userData));
+    mockApi.postGetAnnualFilings.mockImplementation((userData) => {
+      return Promise.resolve(userData);
+    });
   });
 
   const renderPage = ({
@@ -148,7 +160,9 @@ describe("profile", () => {
         renderPage({ userData: initialUserData, isAuthenticated: IsAuthenticated.FALSE });
         fillText("Business name", "Cool Computers");
         clickSave();
-        await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalled());
+        await waitFor(() => {
+          return expect(mockRouter.mockPush).toHaveBeenCalled();
+        });
       });
 
       it("opens registration modal when user tries to change EIN", () => {
@@ -274,9 +288,9 @@ describe("profile", () => {
       renderPage({ userData });
       fillText("Business name", "Cool Computers");
       clickSave();
-      await waitFor(() =>
-        expect(mockRouter.mockPush).toHaveBeenCalledWith(`${ROUTES.dashboard}?success=true`)
-      );
+      await waitFor(() => {
+        return expect(mockRouter.mockPush).toHaveBeenCalledWith(`${ROUTES.dashboard}?success=true`);
+      });
     });
 
     it("returns user to Business Formation after save using query string", async () => {
@@ -286,7 +300,9 @@ describe("profile", () => {
       renderPage({ userData });
       fillText("Business name", "Cool Computers");
       clickSave();
-      await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith("/tasks/some-formation-url"));
+      await waitFor(() => {
+        return expect(mockRouter.mockPush).toHaveBeenCalledWith("/tasks/some-formation-url");
+      });
     });
 
     it("returns user to Business Formation on back using query string", async () => {
@@ -295,7 +311,9 @@ describe("profile", () => {
 
       renderPage({ userData });
       clickBack();
-      await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith("/tasks/some-formation-url"));
+      await waitFor(() => {
+        return expect(mockRouter.mockPush).toHaveBeenCalledWith("/tasks/some-formation-url");
+      });
     });
 
     it("prevents user from going back to dashboard if there are unsaved changes", () => {
@@ -364,9 +382,9 @@ describe("profile", () => {
 
     it("updates tax filing data on save", async () => {
       const taxData = generateTaxFilingData({});
-      mockApi.postGetAnnualFilings.mockImplementation((userData: UserData) =>
-        Promise.resolve({ ...userData, taxFilingData: { ...taxData, filings: [] } })
-      );
+      mockApi.postGetAnnualFilings.mockImplementation((userData: UserData) => {
+        return Promise.resolve({ ...userData, taxFilingData: { ...taxData, filings: [] } });
+      });
       const initialUserData = generateUserData({ taxFilingData: taxData });
       renderPage({ userData: initialUserData });
       clickSave();
@@ -411,11 +429,11 @@ describe("profile", () => {
       ).toBeInTheDocument();
       expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
       selectByText("Location", newark.displayName);
-      await waitFor(() =>
-        expect(
+      await waitFor(() => {
+        return expect(
           screen.queryByText(Config.profileDefaults[getFlow(userData)].municipality.errorTextRequired)
-        ).not.toBeInTheDocument()
-      );
+        ).not.toBeInTheDocument();
+      });
     });
 
     it("entity-id field existing depends on legal structure when starting", () => {
@@ -452,7 +470,9 @@ describe("profile", () => {
       });
       renderPage({ userData });
       clickBack();
-      await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith(ROUTES.dashboard));
+      await waitFor(() => {
+        return expect(mockRouter.mockPush).toHaveBeenCalledWith(ROUTES.dashboard);
+      });
     });
 
     describe("the tax ID field behavior", () => {
@@ -469,7 +489,9 @@ describe("profile", () => {
           fireEvent.change(screen.getByLabelText("Tax id"));
           fireEvent.blur(screen.getByLabelText("Tax id"));
           clickSave();
-          await waitFor(() => expect(currentUserData()).toEqual(userData));
+          await waitFor(() => {
+            return expect(currentUserData()).toEqual(userData);
+          });
         });
 
         it("will not save if tax ID changes to a different 9 digit tax Id", async () => {
@@ -478,7 +500,9 @@ describe("profile", () => {
           fireEvent.change(screen.getByLabelText("Tax id"), { target: { value: "666666666" } });
           fireEvent.blur(screen.getByLabelText("Tax id"));
           clickSave();
-          await waitFor(() => expect(userDataWasNotUpdated()).toEqual(true));
+          await waitFor(() => {
+            return expect(userDataWasNotUpdated()).toEqual(true);
+          });
           expect(
             screen.getByText(Config.profileDefaults[getFlow(userData.profileData)].taxId.errorTextRequired)
           ).toBeInTheDocument();
@@ -493,13 +517,13 @@ describe("profile", () => {
           fireEvent.change(screen.getByLabelText("Tax id location"), { target: { value: "123" } });
           fireEvent.blur(screen.getByLabelText("Tax id location"));
           clickSave();
-          await waitFor(() =>
-            expect(currentUserData()).toEqual({
+          await waitFor(() => {
+            return expect(currentUserData()).toEqual({
               ...userData,
               taxFilingData: { ...userData.taxFilingData, filings: [], state: undefined, registered: false },
               profileData: { ...userData.profileData, taxId: "123456789123" },
-            })
-          );
+            });
+          });
         });
 
         it("will save if tax ID changes to 0 digits in length", async () => {
@@ -508,13 +532,13 @@ describe("profile", () => {
           fireEvent.change(screen.getByLabelText("Tax id"), { target: { value: "" } });
           fireEvent.blur(screen.getByLabelText("Tax id"));
           clickSave();
-          await waitFor(() =>
-            expect(currentUserData()).toEqual({
+          await waitFor(() => {
+            return expect(currentUserData()).toEqual({
               ...userData,
               taxFilingData: { ...userData.taxFilingData, filings: [], state: undefined, registered: false },
               profileData: { ...userData.profileData, taxId: "" },
-            })
-          );
+            });
+          });
         });
       });
 
@@ -531,7 +555,9 @@ describe("profile", () => {
           fireEvent.click(screen.getByLabelText("Tax id"));
           fireEvent.blur(screen.getByLabelText("Tax id"));
           clickSave();
-          await waitFor(() => expect(currentUserData()).toEqual(userData));
+          await waitFor(() => {
+            return expect(currentUserData()).toEqual(userData);
+          });
         });
 
         it("will not save if tax ID is less than 12 digits in length", async () => {
@@ -540,7 +566,9 @@ describe("profile", () => {
           fireEvent.change(screen.getByLabelText("Tax id"), { target: { value: "123456789" } });
           fireEvent.blur(screen.getByLabelText("Tax id"));
           clickSave();
-          await waitFor(() => expect(userDataWasNotUpdated()).toEqual(true));
+          await waitFor(() => {
+            return expect(userDataWasNotUpdated()).toEqual(true);
+          });
         });
 
         it("will save if Tax ID changes to a different 12 digits", async () => {
@@ -549,13 +577,13 @@ describe("profile", () => {
           fireEvent.change(screen.getByLabelText("Tax id"), { target: { value: "666666666666" } });
           fireEvent.blur(screen.getByLabelText("Tax id"));
           clickSave();
-          await waitFor(() =>
-            expect(currentUserData()).toEqual({
+          await waitFor(() => {
+            return expect(currentUserData()).toEqual({
               ...userData,
               taxFilingData: { ...userData.taxFilingData, filings: [], state: undefined, registered: false },
               profileData: { ...userData.profileData, taxId: "666666666666" },
-            })
-          );
+            });
+          });
         });
       });
 
@@ -572,7 +600,9 @@ describe("profile", () => {
           fireEvent.click(screen.getByLabelText("Tax id"));
           fireEvent.blur(screen.getByLabelText("Tax id"));
           clickSave();
-          await waitFor(() => expect(currentUserData()).toEqual(userData));
+          await waitFor(() => {
+            return expect(currentUserData()).toEqual(userData);
+          });
         });
 
         it("will not save if tax ID is less than 12 digits in length", async () => {
@@ -581,7 +611,9 @@ describe("profile", () => {
           fireEvent.change(screen.getByLabelText("Tax id"), { target: { value: "123456789" } });
           fireEvent.blur(screen.getByLabelText("Tax id"));
           clickSave();
-          await waitFor(() => expect(userDataWasNotUpdated()).toEqual(true));
+          await waitFor(() => {
+            return expect(userDataWasNotUpdated()).toEqual(true);
+          });
         });
 
         it("will save if Tax ID changes to 12 digits in length", async () => {
@@ -590,13 +622,13 @@ describe("profile", () => {
           fireEvent.change(screen.getByLabelText("Tax id"), { target: { value: "123456789123" } });
           fireEvent.blur(screen.getByLabelText("Tax id"));
           clickSave();
-          await waitFor(() =>
-            expect(currentUserData()).toEqual({
+          await waitFor(() => {
+            return expect(currentUserData()).toEqual({
               ...userData,
               taxFilingData: { ...userData.taxFilingData, filings: [], state: undefined, registered: false },
               profileData: { ...userData.profileData, taxId: "123456789123" },
-            })
-          );
+            });
+          });
         });
       });
     });
@@ -649,8 +681,12 @@ describe("profile", () => {
         )
       );
       clickSave();
-      await waitFor(() => expect(currentUserData()).not.toBeFalsy());
-      await waitFor(() => expect(mockSetRoadmap).toHaveBeenCalledTimes(1));
+      await waitFor(() => {
+        return expect(currentUserData()).not.toBeFalsy();
+      });
+      await waitFor(() => {
+        return expect(mockSetRoadmap).toHaveBeenCalledTimes(1);
+      });
     });
 
     it("returns user to dashboard from un-saved changes modal", async () => {
@@ -662,8 +698,14 @@ describe("profile", () => {
       selectByText("Location", newark.displayName);
       clickBack();
       fireEvent.click(screen.getByText(Config.profileDefaults.escapeModalReturn));
-      await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith(ROUTES.dashboard));
-      await waitFor(() => expect(() => currentUserData()).toThrow());
+      await waitFor(() => {
+        return expect(mockRouter.mockPush).toHaveBeenCalledWith(ROUTES.dashboard);
+      });
+      await waitFor(() => {
+        return expect(() => {
+          return currentUserData();
+        }).toThrow();
+      });
     });
 
     describe("tax related profile fields", () => {
@@ -795,7 +837,9 @@ describe("profile", () => {
 
       fillText("Business name", "Cool Computers");
       clickSave();
-      await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith("/dashboard?success=true"));
+      await waitFor(() => {
+        return expect(mockRouter.mockPush).toHaveBeenCalledWith("/dashboard?success=true");
+      });
     });
 
     it("prevents user from going back to dashboard if there are unsaved changes", () => {
@@ -1033,7 +1077,9 @@ describe("profile", () => {
       renderPage({ userData: userData });
 
       clickBack();
-      await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith(ROUTES.dashboard));
+      await waitFor(() => {
+        return expect(mockRouter.mockPush).toHaveBeenCalledWith(ROUTES.dashboard);
+      });
     });
 
     it("builds and sets roadmap on save", async () => {
@@ -1070,7 +1116,9 @@ describe("profile", () => {
       await waitFor(() => {
         expect(mockRouter.mockPush).toHaveBeenCalledWith(ROUTES.dashboard);
       });
-      expect(() => currentUserData()).toThrow();
+      expect(() => {
+        return currentUserData();
+      }).toThrow();
     });
 
     it("displays business info tab", () => {
@@ -1095,7 +1143,9 @@ describe("profile", () => {
     it("sends user back to dashboard", async () => {
       renderPage({ userData: userData });
       clickBack();
-      await waitFor(() => expect(mockRouter.mockPush).toHaveBeenCalledWith(ROUTES.dashboard));
+      await waitFor(() => {
+        return expect(mockRouter.mockPush).toHaveBeenCalledWith(ROUTES.dashboard);
+      });
     });
 
     it("displays only the numbers and notes tabs", () => {
@@ -1460,38 +1510,57 @@ describe("profile", () => {
     fireEvent.click(screen.getAllByTestId("back")[0]);
   };
 
-  const getBusinessNameValue = (): string =>
-    (screen.queryByLabelText("Business name") as HTMLInputElement)?.value;
+  const getBusinessNameValue = (): string => {
+    return (screen.queryByLabelText("Business name") as HTMLInputElement)?.value;
+  };
 
-  const getSectorIDValue = (): string => (screen.queryByLabelText("Sector") as HTMLInputElement)?.value;
+  const getSectorIDValue = (): string => {
+    return (screen.queryByLabelText("Sector") as HTMLInputElement)?.value;
+  };
 
-  const getEntityIdValue = (): string => (screen.queryByLabelText("Entity id") as HTMLInputElement)?.value;
+  const getEntityIdValue = (): string => {
+    return (screen.queryByLabelText("Entity id") as HTMLInputElement)?.value;
+  };
 
-  const getDateOfFormation = (): string =>
-    (screen.queryByLabelText("Date of formation") as HTMLInputElement)?.value;
+  const getDateOfFormation = (): string => {
+    return (screen.queryByLabelText("Date of formation") as HTMLInputElement)?.value;
+  };
 
-  const getNotesValue = (): string => (screen.queryByLabelText("Notes") as HTMLInputElement)?.value;
+  const getNotesValue = (): string => {
+    return (screen.queryByLabelText("Notes") as HTMLInputElement)?.value;
+  };
 
-  const getTaxIdValue = (): string => (screen.queryByLabelText("Tax id") as HTMLInputElement)?.value;
+  const getTaxIdValue = (): string => {
+    return (screen.queryByLabelText("Tax id") as HTMLInputElement)?.value;
+  };
 
-  const getEmployerIdValue = (): string =>
-    (screen.queryByLabelText("Employer id") as HTMLInputElement)?.value;
+  const getEmployerIdValue = (): string => {
+    return (screen.queryByLabelText("Employer id") as HTMLInputElement)?.value;
+  };
 
-  const getIndustryValue = (): string => (screen.queryByTestId("industryid") as HTMLInputElement)?.value;
+  const getIndustryValue = (): string => {
+    return (screen.queryByTestId("industryid") as HTMLInputElement)?.value;
+  };
 
-  const getMunicipalityValue = (): string =>
-    (screen.queryByTestId("municipality") as HTMLInputElement)?.value;
+  const getMunicipalityValue = (): string => {
+    return (screen.queryByTestId("municipality") as HTMLInputElement)?.value;
+  };
 
-  const getLegalStructureValue = (): string =>
-    (screen.queryByTestId("legal-structure") as HTMLInputElement)?.value;
+  const getLegalStructureValue = (): string => {
+    return (screen.queryByTestId("legal-structure") as HTMLInputElement)?.value;
+  };
 
-  const getExistingEmployeesValue = (): string =>
-    (screen.getByLabelText("Existing employees") as HTMLInputElement).value;
+  const getExistingEmployeesValue = (): string => {
+    return (screen.getByLabelText("Existing employees") as HTMLInputElement).value;
+  };
 
-  const getTaxPinValue = (): string => (screen.getByLabelText("Tax pin") as HTMLInputElement).value;
+  const getTaxPinValue = (): string => {
+    return (screen.getByLabelText("Tax pin") as HTMLInputElement).value;
+  };
 
-  const getRadioButtonFromFormControlLabel = (dataTestId: string): HTMLInputElement =>
-    within(screen.getByTestId(dataTestId) as HTMLInputElement).getByRole("radio");
+  const getRadioButtonFromFormControlLabel = (dataTestId: string): HTMLInputElement => {
+    return within(screen.getByTestId(dataTestId) as HTMLInputElement).getByRole("radio");
+  };
 
   const chooseRadio = (value: string) => {
     fireEvent.click(screen.getByTestId(value));

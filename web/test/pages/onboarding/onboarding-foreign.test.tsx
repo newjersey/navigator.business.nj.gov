@@ -18,27 +18,38 @@ import { ProfileData } from "@businessnjgovnavigator/shared/";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { act, screen, waitFor } from "@testing-library/react";
 
-jest.mock("next/router", () => ({ useRouter: jest.fn() }));
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
-jest.mock("@/lib/api-client/apiClient", () => ({
-  postNewsletter: jest.fn(),
-  postUserTesting: jest.fn(),
-  postGetAnnualFilings: jest.fn(),
-}));
+jest.mock("next/router", () => {
+  return { useRouter: jest.fn() };
+});
+jest.mock("@/lib/data-hooks/useUserData", () => {
+  return { useUserData: jest.fn() };
+});
+jest.mock("@/lib/data-hooks/useRoadmap", () => {
+  return { useRoadmap: jest.fn() };
+});
+jest.mock("@/lib/roadmap/buildUserRoadmap", () => {
+  return { buildUserRoadmap: jest.fn() };
+});
+jest.mock("@/lib/api-client/apiClient", () => {
+  return {
+    postNewsletter: jest.fn(),
+    postUserTesting: jest.fn(),
+    postGetAnnualFilings: jest.fn(),
+  };
+});
 
 const Config = getMergedConfig();
 const { employeesInNJ, transactionsInNJ, revenueInNJ, operationsInNJ, none } =
   Config.profileDefaults.FOREIGN.foreignBusinessTypeIds.optionContent;
 
-const generateTestUserData = (overrides: Partial<ProfileData>) =>
-  generateUserData({
+const generateTestUserData = (overrides: Partial<ProfileData>) => {
+  return generateUserData({
     profileData: generateProfileData({
       ...overrides,
     }),
     formProgress: "UNSTARTED",
   });
+};
 
 describe("onboarding - foreign business", () => {
   beforeEach(() => {
@@ -145,7 +156,9 @@ describe("onboarding - foreign business", () => {
       useMockRouter({ isReady: true, query: { page: "2" } });
       const { page } = renderPage({ userData });
 
-      act(() => page.clickNext());
+      act(() => {
+        return page.clickNext();
+      });
       await waitFor(() => {
         expect(screen.getByTestId("step-2")).toBeInTheDocument();
       });
@@ -186,7 +199,9 @@ describe("onboarding - foreign business", () => {
     it("doesn't update user data when none is selected and submitted", async () => {
       const { page } = renderPage({ userData });
       page.checkByLabelText(none);
-      act(() => page.clickNext());
+      act(() => {
+        return page.clickNext();
+      });
 
       await waitFor(() => {
         expect(userDataWasNotUpdated()).toBe(true);
@@ -206,8 +221,12 @@ describe("onboarding - foreign business", () => {
       const { page } = renderPage({ userData });
       page.checkByLabelText(none);
 
-      act(() => page.clickNext());
-      await waitFor(() => expect(mockPush).toHaveBeenCalledWith(ROUTES.unsupported));
+      act(() => {
+        return page.clickNext();
+      });
+      await waitFor(() => {
+        return expect(mockPush).toHaveBeenCalledWith(ROUTES.unsupported);
+      });
     });
   });
 
@@ -278,7 +297,9 @@ describe("onboarding - foreign business", () => {
     it("prevents user from moving past Step 3 if you have not selected an industry", async () => {
       useMockRouter({ isReady: true, query: { page: "3" } });
       const { page } = renderPage({ userData });
-      act(() => page.clickNext());
+      act(() => {
+        return page.clickNext();
+      });
       expect(screen.getByTestId("step-3")).toBeInTheDocument();
       expect(screen.queryByTestId("step-4")).not.toBeInTheDocument();
       expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
@@ -307,7 +328,9 @@ describe("onboarding - foreign business", () => {
 
     it("prevents user from moving past Step 4 if you have not selected a legal structure", async () => {
       const { page } = renderPage({ userData });
-      act(() => page.clickNext());
+      act(() => {
+        return page.clickNext();
+      });
       expect(screen.getByTestId("step-4")).toBeInTheDocument();
       expect(screen.queryByTestId("step-5")).not.toBeInTheDocument();
       expect(screen.getByTestId("error-alert-REQUIRED_LEGAL")).toBeInTheDocument();
@@ -378,7 +401,9 @@ describe("onboarding - foreign business", () => {
 
     it("prevents user from moving past Step 5 if you have not selected a location", async () => {
       const { page } = renderPage({ userData, municipalities: [newark] });
-      act(() => page.clickNext());
+      act(() => {
+        return page.clickNext();
+      });
       page.chooseRadio("location-in-new-jersey-true");
       expect(screen.getByTestId("step-5")).toBeInTheDocument();
       expect(screen.queryByTestId("step-6")).not.toBeInTheDocument();
@@ -394,7 +419,9 @@ describe("onboarding - foreign business", () => {
     it("prevents user from moving past Step 5 if you have not selected a municipality in New Jersey", async () => {
       const { page } = renderPage({ userData, municipalities: [newark] });
       page.chooseRadio("location-in-new-jersey-true");
-      act(() => page.clickNext());
+      act(() => {
+        return page.clickNext();
+      });
       expect(screen.getByTestId("step-5")).toBeInTheDocument();
       expect(screen.queryByTestId("step-6")).not.toBeInTheDocument();
       expect(
@@ -406,7 +433,9 @@ describe("onboarding - foreign business", () => {
 
     it("shows error message a option for whether Location in New Jersey is not selected", async () => {
       const { page } = renderPage({ userData, municipalities: [newark] });
-      act(() => page.clickNext());
+      act(() => {
+        return page.clickNext();
+      });
       expect(screen.getByTestId("step-5")).toBeInTheDocument();
       expect(screen.queryByTestId("step-6")).not.toBeInTheDocument();
       expect(

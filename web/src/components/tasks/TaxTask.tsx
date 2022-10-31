@@ -23,13 +23,19 @@ export const TaxTask = (props: Props): ReactElement => {
   const { Config } = useConfig();
 
   useMountEffectWhenDefined(() => {
-    if (!userData) return;
-    if (isAuthenticated === IsAuthenticated.FALSE) return;
+    if (!userData) {
+      return;
+    }
+    if (isAuthenticated === IsAuthenticated.FALSE) {
+      return;
+    }
     setShowInput(!userData.profileData.taxId);
   }, userData);
 
   const setBackToEditing = ({ remove }: { remove: boolean }) => {
-    if (!userData || !updateQueue) return;
+    if (!userData || !updateQueue) {
+      return;
+    }
     setShowInput(true);
     const newTaxValue = remove ? emptyProfileData.taxId : userData.profileData.taxId;
     updateQueue
@@ -38,8 +44,12 @@ export const TaxTask = (props: Props): ReactElement => {
       .update();
   };
 
-  const onEdit = () => setBackToEditing({ remove: false });
-  const onRemove = () => setBackToEditing({ remove: true });
+  const onEdit = () => {
+    return setBackToEditing({ remove: false });
+  };
+  const onRemove = () => {
+    return setBackToEditing({ remove: true });
+  };
 
   const onSave = () => {
     if (isAuthenticated === IsAuthenticated.FALSE) {

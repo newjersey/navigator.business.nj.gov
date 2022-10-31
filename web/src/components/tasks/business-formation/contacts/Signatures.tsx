@@ -141,7 +141,9 @@ export const Signatures = (): ReactElement => {
                   <GenericTextField
                     value={state.formationFormData.signers[0]?.name}
                     placeholder={Config.businessFormationDefaults.signerPlaceholder}
-                    handleChange={(value: string) => handleSignerChange(value, 0)}
+                    handleChange={(value: string) => {
+                      return handleSignerChange(value, 0);
+                    }}
                     error={hasError && !state.formationFormData.signers[0]?.name}
                     onValidation={() => {
                       setFieldInteracted(FIELD_NAME);
@@ -155,7 +157,9 @@ export const Signatures = (): ReactElement => {
                 </div>
                 <div style={{ marginBottom: "19px" }}>
                   {renderSignatureColumn({
-                    onChange: (event) => handleSignerCheckbox(event, 0),
+                    onChange: (event) => {
+                      return handleSignerCheckbox(event, 0);
+                    },
                     checked: state.formationFormData.signers[0]?.signature,
                     fieldName: "signers",
                   })}
@@ -176,7 +180,9 @@ export const Signatures = (): ReactElement => {
                     noValidationMargin={true}
                     value={it.name}
                     placeholder={Config.businessFormationDefaults.signerPlaceholder ?? ""}
-                    handleChange={(value: string) => handleSignerChange(value, index)}
+                    handleChange={(value: string) => {
+                      return handleSignerChange(value, index);
+                    }}
                     error={hasError && !state.formationFormData.signers[index].name}
                     validationText={Config.businessFormationDefaults.additionalSignatureNameErrorText}
                     fieldName="signers"
@@ -185,15 +191,29 @@ export const Signatures = (): ReactElement => {
                   />
                 </div>
                 {renderSignatureColumn({
-                  onChange: (event) => handleSignerCheckbox(event, index),
+                  onChange: (event) => {
+                    return handleSignerCheckbox(event, index);
+                  },
                   checked: state.formationFormData.signers[index].signature,
                   fieldName: "signers",
                   index: index,
                 })}
-                {isTabletAndUp && renderDeleteColumn({ visible: true, onClick: () => removeSigner(index) })}
+                {isTabletAndUp &&
+                  renderDeleteColumn({
+                    visible: true,
+                    onClick: () => {
+                      return removeSigner(index);
+                    },
+                  })}
               </div>
               {!isTabletAndUp && (
-                <Button style="tertiary" underline onClick={() => removeSigner(index)}>
+                <Button
+                  style="tertiary"
+                  underline
+                  onClick={() => {
+                    return removeSigner(index);
+                  }}
+                >
                   {Config.businessFormationDefaults.signatureDeleteMobileText}
                 </Button>
               )}

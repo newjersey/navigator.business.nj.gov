@@ -38,19 +38,25 @@ export const OnboardingOwnership = (): ReactElement => {
                 );
               }
 
-              return selected.map((it) => LookupOwnershipTypeById(it).name).join(", ");
+              return selected
+                .map((it) => {
+                  return LookupOwnershipTypeById(it).name;
+                })
+                .join(", ");
             }}
             inputProps={{
               "aria-label": "Ownership",
               "data-testid": "ownership",
             }}
           >
-            {arrayOfOwnershipTypes.map((ownership: OwnershipType) => (
-              <MenuItem key={ownership.id} value={ownership.id} data-testid={ownership.id}>
-                <Checkbox checked={state.profileData.ownershipTypeIds.includes(ownership.id)} />
-                <ListItemText className="text-wrap" primary={ownership.name} />
-              </MenuItem>
-            ))}
+            {arrayOfOwnershipTypes.map((ownership: OwnershipType) => {
+              return (
+                <MenuItem key={ownership.id} value={ownership.id} data-testid={ownership.id}>
+                  <Checkbox checked={state.profileData.ownershipTypeIds.includes(ownership.id)} />
+                  <ListItemText className="text-wrap" primary={ownership.name} />
+                </MenuItem>
+              );
+            })}
           </Select>
         </FormControl>
       </div>

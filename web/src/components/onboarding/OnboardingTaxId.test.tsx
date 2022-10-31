@@ -8,7 +8,9 @@ import { ProfileFields } from "../../lib/types/types";
 import { getFlow } from "../../lib/utils/helpers";
 import { OnboardingTaxId } from "./OnboardingTaxId";
 
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
+jest.mock("@/lib/data-hooks/useRoadmap", () => {
+  return { useRoadmap: jest.fn() };
+});
 const Config = getMergedConfig();
 
 type ErrorProps = {

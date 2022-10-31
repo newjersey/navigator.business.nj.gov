@@ -50,11 +50,13 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
           );
           if (Array.isArray(response.data)) {
             const apiError = response.data as ApiErrorResponse;
-            errors = apiError.map((error) => ({
-              field: splitErrorField(error.Name),
-              message: error.ErrorMessage,
-              type: "FIELD",
-            }));
+            errors = apiError.map((error) => {
+              return {
+                field: splitErrorField(error.Name),
+                message: error.ErrorMessage,
+                type: "FIELD",
+              };
+            });
           } else {
             errors = [{ field: "", message: "Response Error", type: "RESPONSE" }];
           }
@@ -149,7 +151,9 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
       BusinessTypeMap[userData.profileData.legalStructureId as FormationLegalType].additionalDataRequired
         ? {
             [BusinessTypeMap[userData.profileData.legalStructureId as FormationLegalType]
-              .provisionsFieldName]: formationFormData.provisions.map((it: string) => ({ Provision: it })),
+              .provisionsFieldName]: formationFormData.provisions.map((it: string) => {
+              return { Provision: it };
+            }),
             ...(userData.profileData.legalStructureId == "limited-partnership"
               ? {
                   AggregateAmount: formationFormData.combinedInvestment,
@@ -253,23 +257,27 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
             : undefined,
         },
         MemberAttestation: isCorp ? true : undefined,
-        Members: formationFormData.members.map((member) => ({
-          Name: member.name,
-          Location: {
-            Address1: member.addressLine1,
-            Address2: member.addressLine2,
-            City: member.addressCity,
-            State: member.addressState,
-            Zipcode: member.addressZipCode,
-            Country: "US",
-          },
-        })),
+        Members: formationFormData.members.map((member) => {
+          return {
+            Name: member.name,
+            Location: {
+              Address1: member.addressLine1,
+              Address2: member.addressLine2,
+              City: member.addressCity,
+              State: member.addressState,
+              Zipcode: member.addressZipCode,
+              Country: "US",
+            },
+          };
+        }),
         Incorporators,
-        Signers: formationFormData.signers.map((signer) => ({
-          Name: signer.name,
-          Title: BusinessTypeMap[userData.profileData.legalStructureId as FormationLegalType].signerTitle,
-          Signed: signer.signature,
-        })),
+        Signers: formationFormData.signers.map((signer) => {
+          return {
+            Name: signer.name,
+            Title: BusinessTypeMap[userData.profileData.legalStructureId as FormationLegalType].signerTitle,
+            Signed: signer.signature,
+          };
+        }),
 
         ContactFirstName: formationFormData.contactFirstName,
         ContactLastName: formationFormData.contactLastName,

@@ -51,13 +51,17 @@ describe("userDataStorage", () => {
   });
 
   it("returns stored userData from sessionStorage on initialization", async () => {
-    getItemSpy.mockImplementation(() => JSON.stringify(user));
+    getItemSpy.mockImplementation(() => {
+      return JSON.stringify(user);
+    });
     expect(storage.get("whatever")).toEqual(user);
     expect(getItemSpy).toHaveBeenCalledWith(`${userDataPrefix}whatever`);
   });
 
   it("returns stored userData from memory cache after initialization", async () => {
-    getItemSpy.mockImplementation(() => JSON.stringify(user));
+    getItemSpy.mockImplementation(() => {
+      return JSON.stringify(user);
+    });
     expect(storage.get("whatever")).toEqual(user);
     expect(storage.get("whatever")).toEqual(user);
     expect(getItemSpy).toHaveBeenCalledTimes(1);

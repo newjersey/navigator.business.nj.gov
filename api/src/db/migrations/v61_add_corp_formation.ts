@@ -24,15 +24,19 @@ export const migrate_v60_to_v61 = (v60Data: v60UserData): v61UserData => {
         businessTotalStock: "",
         signers: [
           { ...createEmptyFormationAddress(), ...v60Data.formationData.formationFormData.signer },
-          ...v60Data.formationData.formationFormData.additionalSigners.map((signer) => ({
-            ...createEmptyFormationAddress(),
-            ...signer,
-          })),
+          ...v60Data.formationData.formationFormData.additionalSigners.map((signer) => {
+            return {
+              ...createEmptyFormationAddress(),
+              ...signer,
+            };
+          }),
         ],
-        members: v60Data.formationData.formationFormData.members.map((member) => ({
-          ...member,
-          signature: false,
-        })),
+        members: v60Data.formationData.formationFormData.members.map((member) => {
+          return {
+            ...member,
+            signature: false,
+          };
+        }),
       },
     },
     version: 61,
@@ -268,15 +272,17 @@ export const corpBusinessSuffix = [
   "INC.",
 ] as const;
 
-export const createEmptyFormationAddress = (): v61FormationAddress => ({
-  name: "",
-  addressLine1: "",
-  addressLine2: "",
-  addressCity: "",
-  addressState: "",
-  addressZipCode: "",
-  signature: false,
-});
+export const createEmptyFormationAddress = (): v61FormationAddress => {
+  return {
+    name: "",
+    addressLine1: "",
+    addressLine2: "",
+    addressCity: "",
+    addressState: "",
+    addressZipCode: "",
+    signature: false,
+  };
+};
 
 const AllBusinessSuffixes = [...llcBusinessSuffix, ...llpBusinessSuffix, ...corpBusinessSuffix] as const;
 

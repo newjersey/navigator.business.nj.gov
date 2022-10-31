@@ -63,7 +63,9 @@ describe("Profile [feature] [all] [group1]", () => {
 
       const newBusinessName = `Generic Business Name ${randomInt()}`;
       const newIndustry = randomElementFromArray(
-        homeBasedIndustries.filter((x) => x.isEnabled) as Industry[]
+        homeBasedIndustries.filter((x) => {
+          return x.isEnabled;
+        }) as Industry[]
       );
       const newLegalStructureId = randomElementFromArray(LegalStructures as LegalStructure[]).id;
       const newtownDisplayName = "Bass River";
@@ -119,7 +121,9 @@ describe("Profile [feature] [all] [group1]", () => {
 
     it("onboards random liquor license industry, then updates the field in profile", () => {
       const industry = randomElementFromArray(
-        liquorLicenseIndustries.filter((x) => x.isEnabled) as Industry[]
+        liquorLicenseIndustries.filter((x) => {
+          return x.isEnabled;
+        }) as Industry[]
       );
       const liquorLicenseQuestion = Boolean(randomInt() % 2);
       const legalStructureId = randomElementFromArray(LegalStructures as LegalStructure[]).id;
@@ -149,7 +153,11 @@ describe("Profile [feature] [all] [group1]", () => {
     });
 
     it("onboards random industry with legal structure that enables entity id field, then updates the field in profile", () => {
-      const industry = randomElementFromArray(Industries.filter((x) => x.isEnabled) as Industry[]);
+      const industry = randomElementFromArray(
+        Industries.filter((x) => {
+          return x.isEnabled;
+        }) as Industry[]
+      );
       const legalStructureId = randomElementFromArray(legalStructureWithTradeName as LegalStructure[]).id;
       const liquorLicenseQuestion = industry.industryOnboardingQuestions.isLiquorLicenseApplicable
         ? Boolean(randomInt() % 2)

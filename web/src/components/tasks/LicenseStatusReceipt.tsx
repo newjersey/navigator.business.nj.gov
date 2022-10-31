@@ -91,7 +91,9 @@ export const LicenseStatusReceipt = (props: Props): ReactElement => {
   };
 
   const getOneLineAddress = (): string => {
-    if (!userData || !userData.licenseData) return "";
+    if (!userData || !userData.licenseData) {
+      return "";
+    }
     const { nameAndAddress } = userData.licenseData;
 
     const secondLineAddress = nameAndAddress.addressLine2 ? ` ${nameAndAddress.addressLine2}` : "";

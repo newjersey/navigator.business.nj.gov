@@ -20,8 +20,12 @@ export const Alert = (props: Props): ReactElement => {
   const alertRole = variant === "error" ? { role: "alert" } : {};
   const defaultClassNames = "usa-alert margin-y-2 usa-alert--slim";
   const className = [defaultClassNames, roundedClass, variantClass, noIconClass, props.className ?? ""]
-    .map((i) => i?.trim())
-    .filter((value: string | undefined) => value && value.length > 0)
+    .map((i) => {
+      return i?.trim();
+    })
+    .filter((value: string | undefined) => {
+      return value && value.length > 0;
+    })
     .join(" ");
 
   return (

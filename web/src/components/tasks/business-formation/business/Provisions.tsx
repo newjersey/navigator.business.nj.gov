@@ -65,48 +65,54 @@ export const Provisions = (): ReactElement => {
       {isExpanded && (
         <Content className="margin-bottom-2">{Config.businessFormationDefaults.provisionsBodyText}</Content>
       )}
-      {state.formationFormData.provisions.map((provision: string, index: number) => (
-        <div key={index}>
-          <Content>{Config.businessFormationDefaults.provisionsLabel}</Content>
-          <div className="grid-row">
-            <div className="grid-col">
-              <GenericTextField
-                value={provision}
-                placeholder={Config.businessFormationDefaults.provisionsPlaceholderText}
-                handleChange={(value) => handleProvisionChange(value, index)}
-                fieldName={`provisions ${index}`}
-                formInputFull
-                fieldOptions={{
-                  multiline: true,
-                  minRows: 3,
-                  maxRows: 20,
-                  className: "override-padding",
-                  inputProps: {
-                    maxLength: MAX_CHARS,
-                    sx: {
-                      padding: "1rem",
+      {state.formationFormData.provisions.map((provision: string, index: number) => {
+        return (
+          <div key={index}>
+            <Content>{Config.businessFormationDefaults.provisionsLabel}</Content>
+            <div className="grid-row">
+              <div className="grid-col">
+                <GenericTextField
+                  value={provision}
+                  placeholder={Config.businessFormationDefaults.provisionsPlaceholderText}
+                  handleChange={(value) => {
+                    return handleProvisionChange(value, index);
+                  }}
+                  fieldName={`provisions ${index}`}
+                  formInputFull
+                  fieldOptions={{
+                    multiline: true,
+                    minRows: 3,
+                    maxRows: 20,
+                    className: "override-padding",
+                    inputProps: {
+                      maxLength: MAX_CHARS,
+                      sx: {
+                        padding: "1rem",
+                      },
                     },
-                  },
-                }}
-              />
+                  }}
+                />
+              </div>
+              <div className="grid-col-auto margin-x-2 margin-top-3 display-flex flex-column flex-justify-center">
+                <Button
+                  style="tertiary"
+                  onClick={() => {
+                    return removeProvision(index);
+                  }}
+                  className="display-flex flex-column flex-justify-center"
+                >
+                  <Icon className="font-body-lg" label="remove provision">
+                    delete
+                  </Icon>
+                </Button>
+              </div>
             </div>
-            <div className="grid-col-auto margin-x-2 margin-top-3 display-flex flex-column flex-justify-center">
-              <Button
-                style="tertiary"
-                onClick={() => removeProvision(index)}
-                className="display-flex flex-column flex-justify-center"
-              >
-                <Icon className="font-body-lg" label="remove provision">
-                  delete
-                </Icon>
-              </Button>
+            <div className="text-base-dark margin-top-1 margin-bottom-2">
+              {provision.length} / {MAX_CHARS} {Config.businessFormationDefaults.charactersLabel}
             </div>
           </div>
-          <div className="text-base-dark margin-top-1 margin-bottom-2">
-            {provision.length} / {MAX_CHARS} {Config.businessFormationDefaults.charactersLabel}
-          </div>
-        </div>
-      ))}
+        );
+      })}
       {isExpanded && state.formationFormData.provisions.length < 10 && (
         <Button
           onClick={handleAddAnother}

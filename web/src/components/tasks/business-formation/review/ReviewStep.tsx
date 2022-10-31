@@ -68,7 +68,11 @@ export const ReviewStep = (): ReactElement => {
         <ReviewBillingServices />
         <hr className="margin-y-205" />
         <Alert variant="info">
-          <Content onClick={() => analytics.event.business_formation_review_amendments_external_link}>
+          <Content
+            onClick={() => {
+              return analytics.event.business_formation_review_amendments_external_link;
+            }}
+          >
             {Config.businessFormationDefaults.reviewPageAmendmentText}
           </Content>
         </Alert>

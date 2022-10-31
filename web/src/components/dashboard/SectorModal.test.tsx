@@ -11,7 +11,9 @@ const submitSectorModal = (): void => {
 
 const Config = getMergedConfig();
 
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
+jest.mock("@/lib/data-hooks/useUserData", () => {
+  return { useUserData: jest.fn() };
+});
 
 describe("<SectorModal />", () => {
   beforeEach(() => {

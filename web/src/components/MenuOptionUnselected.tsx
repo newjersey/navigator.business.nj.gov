@@ -5,14 +5,16 @@ interface Props {
   secondaryText?: ReactNode;
 }
 
-export const MenuOptionUnselected = (props: Props): ReactElement => (
-  <>
-    <div className="padding-left-205 text-wrap" data-testid="industry-name">
-      {props.children}
-    </div>
+export const MenuOptionUnselected = (props: Props): ReactElement => {
+  return (
+    <>
+      <div className="padding-left-205 text-wrap" data-testid="industry-name">
+        {props.children}
+      </div>
 
-    {props.secondaryText && (
-      <div className="font-body-3xs text-base-dark padding-left-205 text-wrap">{props.secondaryText}</div>
-    )}
-  </>
-);
+      {props.secondaryText && (
+        <div className="font-body-3xs text-base-dark padding-left-205 text-wrap">{props.secondaryText}</div>
+      )}
+    </>
+  );
+};

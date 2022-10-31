@@ -14,8 +14,12 @@ import { TaskProgress, UserData } from "@businessnjgovnavigator/shared/userData"
 import { act, render } from "@testing-library/react";
 import { ReactNode } from "react";
 
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
+jest.mock("@/lib/data-hooks/useUserData", () => {
+  return { useUserData: jest.fn() };
+});
+jest.mock("@/lib/data-hooks/useRoadmap", () => {
+  return { useRoadmap: jest.fn() };
+});
 
 describe("useUpdateTaskProgress", () => {
   beforeEach(() => {
@@ -60,7 +64,9 @@ describe("useUpdateTaskProgress", () => {
     });
     const { queueUpdateTaskProgress, updateQueue } = setupHook(initialUserData);
     queueUpdateTaskProgress("some-other-id", "IN_PROGRESS");
-    await act(() => updateQueue.update());
+    await act(() => {
+      return updateQueue.update();
+    });
     expect(currentUserData().taskProgress).toEqual({
       "some-id": "COMPLETED",
       "some-other-id": "IN_PROGRESS",
@@ -94,8 +100,12 @@ describe("useUpdateTaskProgress", () => {
       });
 
       const { queueUpdateTaskProgress, updateQueue } = setupHook(userData);
-      act(() => queueUpdateTaskProgress(startTaskId, "COMPLETED"));
-      await act(() => updateQueue.update());
+      act(() => {
+        return queueUpdateTaskProgress(startTaskId, "COMPLETED");
+      });
+      await act(() => {
+        return updateQueue.update();
+      });
 
       expect(currentUserData().taskProgress).toEqual({
         [planTaskId]: "COMPLETED",
@@ -115,8 +125,12 @@ describe("useUpdateTaskProgress", () => {
       });
 
       const { queueUpdateTaskProgress, updateQueue } = setupHook(userData);
-      act(() => queueUpdateTaskProgress(planTaskId, "COMPLETED"));
-      await act(() => updateQueue.update());
+      act(() => {
+        return queueUpdateTaskProgress(planTaskId, "COMPLETED");
+      });
+      await act(() => {
+        return updateQueue.update();
+      });
 
       expect(currentUserData().taskProgress).toEqual({
         [planTaskId]: "COMPLETED",
