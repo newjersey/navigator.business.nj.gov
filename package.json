@@ -46,7 +46,7 @@
     "@mui/lab": "5.0.0-alpha.105",
     "@mui/material": "5.10.11",
     "@mui/styles": "5.10.10",
-    "@mui/x-date-pickers": "5.0.5",
+    "@mui/x-date-pickers": "5.0.6",
     "@storybook/addon-outline": "6.5.13",
     "@types/ua-parser-js": "0.7.36",
     "airtable": "0.11.5",
