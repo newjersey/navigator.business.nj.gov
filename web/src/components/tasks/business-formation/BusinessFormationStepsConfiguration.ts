@@ -9,11 +9,19 @@ export const BusinessFormationStepsConfiguration: { name: FormationStepNames; st
 ];
 
 export const LookupStepIndexByName = (name: FormationStepNames): number => {
-  return BusinessFormationStepsConfiguration.find((x) => x.name === name)?.stepIndex ?? 0;
+  return (
+    BusinessFormationStepsConfiguration.find((x) => {
+      return x.name === name;
+    })?.stepIndex ?? 0
+  );
 };
 
 export const LookupNameByStepIndex = (index: number): FormationStepNames => {
-  const foundName = BusinessFormationStepsConfiguration.find((x) => x.stepIndex === index)?.name;
-  if (!foundName) throw "No step exists for index";
+  const foundName = BusinessFormationStepsConfiguration.find((x) => {
+    return x.stepIndex === index;
+  })?.name;
+  if (!foundName) {
+    throw "No step exists for index";
+  }
   return foundName;
 };

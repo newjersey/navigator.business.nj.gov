@@ -37,7 +37,9 @@ export const LicenseTask = (props: Props): ReactElement => {
   };
 
   useMountEffectWhenDefined(() => {
-    if (!userData) return;
+    if (!userData) {
+      return;
+    }
     if (userData.licenseData) {
       setTabIndex(STATUS_TAB_INDEX);
     }
@@ -65,7 +67,9 @@ export const LicenseTask = (props: Props): ReactElement => {
   };
 
   const onSubmit = (nameAndAddress: NameAndAddress): void => {
-    if (!userData || !userData.profileData.industryId) return;
+    if (!userData || !userData.profileData.industryId) {
+      return;
+    }
 
     if (!allFieldsHaveValues(nameAndAddress)) {
       setError("FIELDS_REQUIRED");
@@ -77,7 +81,9 @@ export const LicenseTask = (props: Props): ReactElement => {
       .checkLicenseStatus(nameAndAddress)
       .then((result: UserData) => {
         analytics.event.task_address_form.response.success_application_found();
-        if (!result.licenseData) return;
+        if (!result.licenseData) {
+          return;
+        }
         setLicenseStatusResult({
           status: result.licenseData.status,
           checklistItems: result.licenseData.items,

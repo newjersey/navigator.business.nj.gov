@@ -19,15 +19,25 @@ import {
 import { createEmptyUserData, getCurrentDate, ProfileData } from "@businessnjgovnavigator/shared/";
 import { act, fireEvent, screen, waitFor, within } from "@testing-library/react";
 
-jest.mock("next/router", () => ({ useRouter: jest.fn() }));
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
-jest.mock("@/lib/api-client/apiClient", () => ({
-  postNewsletter: jest.fn(),
-  postUserTesting: jest.fn(),
-  postGetAnnualFilings: jest.fn(),
-}));
+jest.mock("next/router", () => {
+  return { useRouter: jest.fn() };
+});
+jest.mock("@/lib/data-hooks/useUserData", () => {
+  return { useUserData: jest.fn() };
+});
+jest.mock("@/lib/data-hooks/useRoadmap", () => {
+  return { useRoadmap: jest.fn() };
+});
+jest.mock("@/lib/roadmap/buildUserRoadmap", () => {
+  return { buildUserRoadmap: jest.fn() };
+});
+jest.mock("@/lib/api-client/apiClient", () => {
+  return {
+    postNewsletter: jest.fn(),
+    postUserTesting: jest.fn(),
+    postGetAnnualFilings: jest.fn(),
+  };
+});
 
 const mockApi = api as jest.Mocked<typeof api>;
 
@@ -35,20 +45,22 @@ const Config = getMergedConfig();
 
 const date = getCurrentDate().subtract(1, "month").date(1);
 const dateOfFormation = date.format("YYYY-MM-DD");
-const generateTestUserData = (overrides: Partial<ProfileData>) =>
-  generateUserData({
+const generateTestUserData = (overrides: Partial<ProfileData>) => {
+  return generateUserData({
     profileData: generateProfileData({
       ...overrides,
     }),
     formProgress: "UNSTARTED",
   });
+};
 
-const generateCCorpTestUserData = (overrides: Partial<ProfileData>) =>
-  generateTestUserData({
+const generateCCorpTestUserData = (overrides: Partial<ProfileData>) => {
+  return generateTestUserData({
     ...overrides,
     businessPersona: "OWNING",
     legalStructureId: "c-corporation",
   });
+};
 
 describe("onboarding - owning a business", () => {
   beforeEach(() => {
@@ -116,7 +128,9 @@ describe("onboarding - owning a business", () => {
       page.selectDate("Date of formation", date);
       page.fillText("Entity id", "123");
       fireEvent.blur(screen.getByLabelText("Entity id"));
-      act(() => page.clickNext());
+      act(() => {
+        return page.clickNext();
+      });
 
       await waitFor(() => {
         expect(screen.getByTestId("step-2")).toBeInTheDocument();
@@ -155,7 +169,9 @@ describe("onboarding - owning a business", () => {
       const userData = generateCCorpTestUserData({ businessName: undefined });
       useMockRouter({ isReady: true, query: { page: "3" } });
       const { page } = renderPage({ userData });
-      act(() => page.clickNext());
+      act(() => {
+        return page.clickNext();
+      });
       await waitFor(() => {
         expect(screen.getByTestId("step-3")).toBeInTheDocument();
       });
@@ -186,7 +202,9 @@ describe("onboarding - owning a business", () => {
       const userData = generateCCorpTestUserData({ sectorId: undefined });
       useMockRouter({ isReady: true, query: { page: "3" } });
       const { page } = renderPage({ userData });
-      act(() => page.clickNext());
+      act(() => {
+        return page.clickNext();
+      });
       await waitFor(() => {
         expect(screen.getByTestId("step-3")).toBeInTheDocument();
       });
@@ -220,7 +238,9 @@ describe("onboarding - owning a business", () => {
       useMockRouter({ isReady: true, query: { page: "4" } });
       const newark = generateMunicipality({ displayName: "Newark" });
       const { page } = renderPage({ municipalities: [newark], userData });
-      act(() => page.clickNext());
+      act(() => {
+        return page.clickNext();
+      });
       await waitFor(() => {
         expect(screen.getByTestId("step-4")).toBeInTheDocument();
       });
@@ -255,7 +275,9 @@ describe("onboarding - owning a business", () => {
       });
       expect(screen.getByTestId("step-4")).toBeInTheDocument();
       page.selectByText("Location", "Newark");
-      act(() => page.clickNext());
+      act(() => {
+        return page.clickNext();
+      });
 
       await waitFor(() => {
         screen.getByText(Config.profileDefaults[getFlow(userData)].existingEmployees.errorTextRequired);
@@ -456,9 +478,9 @@ describe("onboarding - owning a business", () => {
 
   it("updates tax filing data on save", async () => {
     const taxData = generateTaxFilingData({});
-    mockApi.postGetAnnualFilings.mockImplementation((userData) =>
-      Promise.resolve({ ...userData, taxFilingData: { ...taxData, filings: [] } })
-    );
+    mockApi.postGetAnnualFilings.mockImplementation((userData) => {
+      return Promise.resolve({ ...userData, taxFilingData: { ...taxData, filings: [] } });
+    });
     const initialUserData = generateUserData({
       taxFilingData: taxData,
       profileData: generateProfileData({

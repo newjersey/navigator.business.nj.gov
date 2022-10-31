@@ -35,28 +35,52 @@ describe("Tax-Filings Helpers", () => {
 
     it("merges filings", () => {
       const filings = flattenDeDupAndConvertTaxFilings(
-        ["cr-1orcnr-11", "cr-1orcnr-12"].map((Id) => generateTaxFilingResult({ Id })),
+        ["cr-1orcnr-11", "cr-1orcnr-12"].map((Id) => {
+          return generateTaxFilingResult({ Id });
+        }),
         taxIdMap
       );
-      const ids = [...new Set(filings.map((i) => i.identifier))];
+      const ids = [
+        ...new Set(
+          filings.map((i) => {
+            return i.identifier;
+          })
+        ),
+      ];
       expect(ids).toEqual(["cr-1orcnr-1"]);
     });
 
     it("splits filings", () => {
       const filings = flattenDeDupAndConvertTaxFilings(
-        ["st-250_350"].map((Id) => generateTaxFilingResult({ Id })),
+        ["st-250_350"].map((Id) => {
+          return generateTaxFilingResult({ Id });
+        }),
         taxIdMap
       );
-      const ids = [...new Set(filings.map((i) => i.identifier))];
+      const ids = [
+        ...new Set(
+          filings.map((i) => {
+            return i.identifier;
+          })
+        ),
+      ];
       expect(ids).toEqual(["st-250", "st-350"]);
     });
 
     it("adds additional filings", () => {
       const filings = flattenDeDupAndConvertTaxFilings(
-        ["nj-927_927-w"].map((Id) => generateTaxFilingResult({ Id })),
+        ["nj-927_927-w"].map((Id) => {
+          return generateTaxFilingResult({ Id });
+        }),
         taxIdMap
       );
-      const ids = [...new Set(filings.map((i) => i.identifier))];
+      const ids = [
+        ...new Set(
+          filings.map((i) => {
+            return i.identifier;
+          })
+        ),
+      ];
       expect(ids).toEqual(["nj-927_927-w", "nj-927-w"]);
     });
   });

@@ -18,9 +18,15 @@ import { formationTaskId } from "@businessnjgovnavigator/shared/";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("next/router", () => ({ useRouter: jest.fn() }));
+jest.mock("@/lib/data-hooks/useUserData", () => {
+  return { useUserData: jest.fn() };
+});
+jest.mock("@/lib/data-hooks/useRoadmap", () => {
+  return { useRoadmap: jest.fn() };
+});
+jest.mock("next/router", () => {
+  return { useRouter: jest.fn() };
+});
 
 const Config = getMergedConfig();
 
@@ -82,11 +88,11 @@ describe("<SidebarCardFormationNudge />", () => {
 
       expect(currentUserData()).toEqual(updatedUserData);
       expect(screen.queryByTestId(Config.formationDateModal.header)).not.toBeInTheDocument();
-      await waitFor(() =>
-        expect(mockPush).toHaveBeenCalledWith({ query: { fromForming: "true" } }, undefined, {
+      await waitFor(() => {
+        return expect(mockPush).toHaveBeenCalledWith({ query: { fromForming: "true" } }, undefined, {
           shallow: true,
-        })
-      );
+        });
+      });
     });
 
     it("closes the modal and does not update user data when the user clicks the cancel button", () => {

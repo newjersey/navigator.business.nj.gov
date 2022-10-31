@@ -19,27 +19,38 @@ import {
 } from "@businessnjgovnavigator/shared/";
 import { act, screen, waitFor, within } from "@testing-library/react";
 
-jest.mock("next/router", () => ({ useRouter: jest.fn() }));
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
-jest.mock("@/lib/api-client/apiClient", () => ({
-  postNewsletter: jest.fn(),
-  postUserTesting: jest.fn(),
-  postGetAnnualFilings: jest.fn(),
-}));
+jest.mock("next/router", () => {
+  return { useRouter: jest.fn() };
+});
+jest.mock("@/lib/data-hooks/useUserData", () => {
+  return { useUserData: jest.fn() };
+});
+jest.mock("@/lib/data-hooks/useRoadmap", () => {
+  return { useRoadmap: jest.fn() };
+});
+jest.mock("@/lib/roadmap/buildUserRoadmap", () => {
+  return { buildUserRoadmap: jest.fn() };
+});
+jest.mock("@/lib/api-client/apiClient", () => {
+  return {
+    postNewsletter: jest.fn(),
+    postUserTesting: jest.fn(),
+    postGetAnnualFilings: jest.fn(),
+  };
+});
 
 const mockApi = api as jest.Mocked<typeof api>;
 const Config = getMergedConfig();
 
-const generateTestUserData = (overrides: Partial<ProfileData>) =>
-  generateUserData({
+const generateTestUserData = (overrides: Partial<ProfileData>) => {
+  return generateUserData({
     profileData: generateProfileData({
       businessPersona: "STARTING",
       ...overrides,
     }),
     formProgress: "UNSTARTED",
   });
+};
 
 describe("onboarding - starting a business", () => {
   beforeEach(() => {
@@ -55,7 +66,9 @@ describe("onboarding - starting a business", () => {
       const userData = generateTestUserData({ industryId: undefined });
       useMockRouter({ isReady: true, query: { page: "2" } });
       const { page } = renderPage({ userData });
-      act(() => page.clickNext());
+      act(() => {
+        return page.clickNext();
+      });
       expect(screen.getByTestId("step-2")).toBeInTheDocument();
       expect(screen.queryByTestId("step-3")).not.toBeInTheDocument();
       expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
@@ -77,7 +90,9 @@ describe("onboarding - starting a business", () => {
       const userData = generateTestUserData({ legalStructureId: undefined });
       useMockRouter({ isReady: true, query: { page: "3" } });
       const { page } = renderPage({ userData });
-      act(() => page.clickNext());
+      act(() => {
+        return page.clickNext();
+      });
       expect(screen.getByTestId("step-3")).toBeInTheDocument();
       expect(screen.queryByTestId("step-4")).not.toBeInTheDocument();
       expect(screen.getByTestId("error-alert-REQUIRED_LEGAL")).toBeInTheDocument();
@@ -99,7 +114,9 @@ describe("onboarding - starting a business", () => {
       useMockRouter({ isReady: true, query: { page: "4" } });
       const newark = generateMunicipality({ displayName: "Newark" });
       const { page } = renderPage({ municipalities: [newark], userData });
-      act(() => page.clickNext());
+      act(() => {
+        return page.clickNext();
+      });
       await waitFor(() => {
         expect(screen.getByTestId("step-4")).toBeInTheDocument();
       });
@@ -301,7 +318,9 @@ describe("onboarding - starting a business", () => {
     await page.visitStep(2);
     page.selectByText("Industry", "All Other Businesses");
     await page.visitStep(3);
-    act(() => page.clickNext());
+    act(() => {
+      return page.clickNext();
+    });
     expect(screen.getByTestId("step-3")).toBeInTheDocument();
     expect(screen.getByTestId("error-alert-REQUIRED_LEGAL")).toBeInTheDocument();
     page.clickBack();

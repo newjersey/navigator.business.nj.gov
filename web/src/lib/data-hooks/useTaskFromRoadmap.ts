@@ -5,5 +5,7 @@ import { useMemo } from "react";
 
 export const useTaskFromRoadmap = (id: string): Task | undefined => {
   const { roadmap } = useRoadmap();
-  return useMemo(() => getTaskFromRoadmap(roadmap, id), [id, roadmap]);
+  return useMemo(() => {
+    return getTaskFromRoadmap(roadmap, id);
+  }, [id, roadmap]);
 };

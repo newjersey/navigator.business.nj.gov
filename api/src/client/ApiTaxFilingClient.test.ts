@@ -40,18 +40,22 @@ const generateTaxIdAndBusinessNameAndEmail = (
 
 const generateSuccessfulApiTaxFilingLookupResponse = (
   overrides: Partial<ApiTaxFilingLookupResponse>
-): ApiTaxFilingLookupResponse => ({
-  ApiKey: `some-ApiKey-${randomInt()}`,
-  Data: [
-    { Name: "taxpayer-id", Value: randomInt(9).toString() },
-    { Name: "taxpayer-location", Value: randomInt(3).toString() },
-    { Name: "tax-business-name", Value: `Some, Name-${randomInt()}` },
-    { Name: "tax-name-control", Value: "Some" },
-  ],
-  Errors: null,
-  Results: ["st-50/450", "st-51/451", "nj-927/927-w"].map((Id) => generateTaxFilingResult({ Id })),
-  ...overrides,
-});
+): ApiTaxFilingLookupResponse => {
+  return {
+    ApiKey: `some-ApiKey-${randomInt()}`,
+    Data: [
+      { Name: "taxpayer-id", Value: randomInt(9).toString() },
+      { Name: "taxpayer-location", Value: randomInt(3).toString() },
+      { Name: "tax-business-name", Value: `Some, Name-${randomInt()}` },
+      { Name: "tax-name-control", Value: "Some" },
+    ],
+    Errors: null,
+    Results: ["st-50/450", "st-51/451", "nj-927/927-w"].map((Id) => {
+      return generateTaxFilingResult({ Id });
+    }),
+    ...overrides,
+  };
+};
 
 const generateErroredApiTaxFilingLookupResponse = (
   overrides: Partial<ApiTaxFilingLookupResponse>,

@@ -25,7 +25,9 @@ export const SignUpSnackbar = (): ReactElement => {
   return (
     <SnackbarAlert
       isOpen={registrationAlertIsVisible}
-      close={() => setRegistrationAlertIsVisible(false)}
+      close={() => {
+        return setRegistrationAlertIsVisible(false);
+      }}
       variant="info"
       noIcon={true}
       autoHideDuration={null}
@@ -52,7 +54,9 @@ export const SignUpSnackbar = (): ReactElement => {
               position: "absolute",
               right: 0,
               top: 0,
-              color: (theme) => theme.palette.grey[500],
+              color: (theme) => {
+                return theme.palette.grey[500];
+              },
             }}
           >
             <Icon className="usa-icon--size-4">close</Icon>

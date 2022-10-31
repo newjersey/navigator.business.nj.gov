@@ -46,7 +46,9 @@ export const DynamoQlUserDataClient = (db: DynamoDBClient, tableName: string): U
       const { version, ...userData } = migrateUserData(data);
       return userData;
     };
-    return Items.map((i) => get(i));
+    return Items.map((i) => {
+      return get(i);
+    });
   };
 
   const getNeedNewsletterUsers = () => {

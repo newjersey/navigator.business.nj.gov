@@ -68,7 +68,9 @@ export const SelectFeedbackModal = ({ onClose, isOpen, setCurrentFeedback }: Pro
               className="width-100 margin-top-1"
               style="narrow-accent-cool-lightest"
               align="start"
-              onClick={() => setCurrentFeedback("Report Issue")}
+              onClick={() => {
+                return setCurrentFeedback("Report Issue");
+              }}
             >
               {makeButtonIcon("bug")}
               <span className="text-left">{Config.feedbackModal.feedbackModalReportIssueButtonText}</span>
@@ -78,7 +80,9 @@ export const SelectFeedbackModal = ({ onClose, isOpen, setCurrentFeedback }: Pro
               className="width-100 margin-top-1"
               style="narrow-accent-cool-lightest"
               align="start"
-              onClick={() => setCurrentFeedback("Feature Request")}
+              onClick={() => {
+                return setCurrentFeedback("Feature Request");
+              }}
             >
               {makeButtonIcon("lightbulb-on")}
               <span className="text-left">{Config.feedbackModal.feedbackModalFeatureRequestButtonText}</span>

@@ -45,10 +45,12 @@ export const Step = (props: Props): ReactElement => {
           <p className="margin-bottom-205">{props.step.description}</p>
           <ul className="usa-list usa-list--unstyled">
             {roadmap?.tasks
-              .filter((task) => task.stepNumber == props.step.stepNumber)
-              .map((task) => (
-                <Task key={task.id} task={task} />
-              ))}
+              .filter((task) => {
+                return task.stepNumber == props.step.stepNumber;
+              })
+              .map((task) => {
+                return <Task key={task.id} task={task} />;
+              })}
           </ul>
         </div>
       </div>

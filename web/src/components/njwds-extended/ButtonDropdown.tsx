@@ -25,7 +25,9 @@ export const ButtonDropdown = (props: Props): ReactElement => {
   }, [open]);
 
   const toggleDropdown = () => {
-    setOpen((prevOpen) => !prevOpen);
+    setOpen((prevOpen) => {
+      return !prevOpen;
+    });
   };
 
   const handleClose = (
@@ -44,17 +46,21 @@ export const ButtonDropdown = (props: Props): ReactElement => {
     }
   }
 
-  const DropdownMenu = () => (
-    <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-      {props.dropdownOptions.map((option, i) => (
-        <MenuItem onClick={option.onClick} key={i}>
-          <Button style="tertiary" textBold smallText>
-            {option.text}
-          </Button>
-        </MenuItem>
-      ))}
-    </MenuList>
-  );
+  const DropdownMenu = () => {
+    return (
+      <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
+        {props.dropdownOptions.map((option, i) => {
+          return (
+            <MenuItem onClick={option.onClick} key={i}>
+              <Button style="tertiary" textBold smallText>
+                {option.text}
+              </Button>
+            </MenuItem>
+          );
+        })}
+      </MenuList>
+    );
+  };
 
   return (
     <>
@@ -82,18 +88,20 @@ export const ButtonDropdown = (props: Props): ReactElement => {
         transition
         disablePortal={true}
       >
-        {({ TransitionProps, placement }) => (
-          <Grow
-            {...TransitionProps}
-            style={{
-              transformOrigin: placement === "bottom" ? "center top" : "center bottom",
-            }}
-          >
-            <Paper>
-              <ClickAwayListener onClickAway={handleClose}>{DropdownMenu()}</ClickAwayListener>
-            </Paper>
-          </Grow>
-        )}
+        {({ TransitionProps, placement }) => {
+          return (
+            <Grow
+              {...TransitionProps}
+              style={{
+                transformOrigin: placement === "bottom" ? "center top" : "center bottom",
+              }}
+            >
+              <Paper>
+                <ClickAwayListener onClickAway={handleClose}>{DropdownMenu()}</ClickAwayListener>
+              </Paper>
+            </Grow>
+          );
+        }}
       </Popper>
     </>
   );

@@ -28,7 +28,9 @@ export const NexusFormationTask = (props: Props): ReactElement => {
   const userData = props.CMS_ONLY_fakeUserData ?? userDataFromHook.userData;
 
   useMountEffectWhenDefined(async () => {
-    if (!userData) return;
+    if (!userData) {
+      return;
+    }
     if (!userData.profileData.businessName) {
       setShowWarning(true);
     } else if (userData.profileData.nexusDbaName === undefined) {
@@ -77,10 +79,14 @@ export const NexusFormationTask = (props: Props): ReactElement => {
     <div id="taskElement" className="flex flex-column space-between minh-38">
       <ModalTwoButton
         isOpen={showCtaModal}
-        close={() => setShowCtaModal(false)}
+        close={() => {
+          return setShowCtaModal(false);
+        }}
         title={Config.nexusFormationTask.dbaCtaModalHeader}
         primaryButtonText={Config.nexusFormationTask.dbaCtaModalContinueButtonText}
-        primaryButtonOnClick={() => window.open(taskToDisplay.callToActionLink, "_ blank")}
+        primaryButtonOnClick={() => {
+          return window.open(taskToDisplay.callToActionLink, "_ blank");
+        }}
         secondaryButtonText={Config.nexusFormationTask.dbaCtaModalCancelButtonText}
       >
         <Content>{Config.nexusFormationTask.dbaCtaModalBody}</Content>
@@ -123,7 +129,13 @@ export const NexusFormationTask = (props: Props): ReactElement => {
         <TaskCTA
           link={taskToDisplay.callToActionLink}
           text={taskToDisplay.callToActionText}
-          onClick={isDba() ? () => setShowCtaModal(true) : undefined}
+          onClick={
+            isDba()
+              ? () => {
+                  return setShowCtaModal(true);
+                }
+              : undefined
+          }
         />
       )}
     </div>

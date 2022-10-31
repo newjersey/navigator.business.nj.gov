@@ -18,14 +18,15 @@ export const Documents = (props: Props): ReactElement => {
 
   const userData = props.CMS_ONLY_fakeUserData ?? userDataFromHook.userData;
 
-  const listOfDocuments = useMemo(
-    () => Object.values(userData?.profileData.documents ?? {}),
-    [userData?.profileData.documents]
-  );
+  const listOfDocuments = useMemo(() => {
+    return Object.values(userData?.profileData.documents ?? {});
+  }, [userData?.profileData.documents]);
 
   return (
     <div className="margin-bottom-6" data-testid={`profileContent-documents`}>
-      {listOfDocuments.some((value) => !!value) ? (
+      {listOfDocuments.some((value) => {
+        return !!value;
+      }) ? (
         <ol className="padding-left-3 padding-top-1">
           {userData?.profileData.documents.formationDoc ? (
             <li>

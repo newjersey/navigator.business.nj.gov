@@ -72,7 +72,9 @@ const Home = (): ReactElement => {
   }, [userData, error, router]);
 
   useEffect(() => {
-    if (!router.isReady || !router.query[QUERIES.signUp]) return;
+    if (!router.isReady || !router.query[QUERIES.signUp]) {
+      return;
+    }
     if (checkQueryValue(router, QUERIES.signUp, "true")) {
       router.replace(ROUTES.onboarding);
     }
@@ -84,48 +86,50 @@ const Home = (): ReactElement => {
     imageSrc: string,
     imageAlt: string,
     reverseOrder?: boolean
-  ) => (
-    <div className={`${isDesktopAndUp ? "landing-two-column-row" : "landing-one-column-row"}`}>
-      <div className="grid-row">
-        <div
-          className={`desktop:grid-col ${isDesktopAndUp ? "" : "text-center"} ${
-            reverseOrder && isDesktopAndUp ? "order-last desktop:margin-left-8" : "desktop:margin-right-3"
-          }`}
-        >
-          {isDesktopAndUp ? (
-            <>
-              <div className="landing-feature-text">
-                <h2 className="h1-styling text-base-darkest margin-bottom-4 desktop:margin-bottom-3">
+  ) => {
+    return (
+      <div className={`${isDesktopAndUp ? "landing-two-column-row" : "landing-one-column-row"}`}>
+        <div className="grid-row">
+          <div
+            className={`desktop:grid-col ${isDesktopAndUp ? "" : "text-center"} ${
+              reverseOrder && isDesktopAndUp ? "order-last desktop:margin-left-8" : "desktop:margin-right-3"
+            }`}
+          >
+            {isDesktopAndUp ? (
+              <>
+                <div className="landing-feature-text">
+                  <h2 className="h1-styling text-base-darkest margin-bottom-4 desktop:margin-bottom-3">
+                    {headingText}
+                  </h2>
+                  <div className="text-base-dark">{supportingText}</div>
+                </div>
+              </>
+            ) : (
+              <>
+                <h2 className="h1-styling text-base-darkest margin-right-2 margin-left-2 margin-top-10">
                   {headingText}
                 </h2>
-                <div className="text-base-dark">{supportingText}</div>
+                <img src={imageSrc} alt={imageAlt} />
+              </>
+            )}
+          </div>
+          <div
+            className={`desktop:grid-col ${
+              reverseOrder ? "desktop:margin-right-8" : "desktop:margin-left-3"
+            } margin-top-3 desktop:margin-top-0`}
+          >
+            {isDesktopAndUp ? (
+              <img src={imageSrc} alt={imageAlt} className="landing-feature-img" />
+            ) : (
+              <div className="text-base-dark margin-right-2 margin-left-2 margin-bottom-2">
+                {supportingText}
               </div>
-            </>
-          ) : (
-            <>
-              <h2 className="h1-styling text-base-darkest margin-right-2 margin-left-2 margin-top-10">
-                {headingText}
-              </h2>
-              <img src={imageSrc} alt={imageAlt} />
-            </>
-          )}
-        </div>
-        <div
-          className={`desktop:grid-col ${
-            reverseOrder ? "desktop:margin-right-8" : "desktop:margin-left-3"
-          } margin-top-3 desktop:margin-top-0`}
-        >
-          {isDesktopAndUp ? (
-            <img src={imageSrc} alt={imageAlt} className="landing-feature-img" />
-          ) : (
-            <div className="text-base-dark margin-right-2 margin-left-2 margin-bottom-2">
-              {supportingText}
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   return (
     <PageSkeleton landingPage={true}>

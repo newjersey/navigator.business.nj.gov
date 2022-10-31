@@ -22,9 +22,15 @@ export const NavBarMobile = ({ scrolled, task, showSidebar, hideMiniRoadmap }: P
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
   const { state } = useContext(AuthContext);
 
-  const open = () => setSidebarIsOpen(true);
-  const close = () => setSidebarIsOpen(false);
-  const isAuthenticated = useMemo(() => state.isAuthenticated == "TRUE", [state.isAuthenticated]);
+  const open = () => {
+    return setSidebarIsOpen(true);
+  };
+  const close = () => {
+    return setSidebarIsOpen(false);
+  };
+  const isAuthenticated = useMemo(() => {
+    return state.isAuthenticated == "TRUE";
+  }, [state.isAuthenticated]);
   const userName = getUserNameOrEmail(userData);
   const textColor = isAuthenticated ? "primary" : "base";
   const accountIcon = isAuthenticated ? "account_circle" : "help";

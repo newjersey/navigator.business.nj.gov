@@ -41,24 +41,40 @@ export const SidebarCardsList = (props: Props): ReactElement => {
 
   const hiddenSortedCertifications = sortCertifications(
     (userData?.preferences.hiddenCertificationIds || [])
-      .map((id) => props.certifications.find((it) => it.id === id))
-      .filter((it) => it !== undefined) as Certification[]
+      .map((id) => {
+        return props.certifications.find((it) => {
+          return it.id === id;
+        });
+      })
+      .filter((it) => {
+        return it !== undefined;
+      }) as Certification[]
   );
 
   const hiddenSortedFundings = sortFundings(
     (userData?.preferences.hiddenFundingIds || [])
-      .map((id) => props.fundings.find((it) => it.id === id))
-      .filter((it) => it !== undefined) as Funding[]
+      .map((id) => {
+        return props.fundings.find((it) => {
+          return it.id === id;
+        });
+      })
+      .filter((it) => {
+        return it !== undefined;
+      }) as Funding[]
   );
 
-  const displayFundingCards = () =>
-    LookupOperatingPhaseById(userData?.profileData.operatingPhase).displayFundings;
+  const displayFundingCards = () => {
+    return LookupOperatingPhaseById(userData?.profileData.operatingPhase).displayFundings;
+  };
 
-  const displayCertificationsCards = () =>
-    LookupOperatingPhaseById(userData?.profileData.operatingPhase).displayCertifications;
+  const displayCertificationsCards = () => {
+    return LookupOperatingPhaseById(userData?.profileData.operatingPhase).displayCertifications;
+  };
 
   const hiddenOpportunitiesCount = (): number => {
-    if (!userData) return 0;
+    if (!userData) {
+      return 0;
+    }
 
     const displayCertifications = displayCertificationsCards();
     const displayFunding = displayFundingCards();
@@ -78,7 +94,9 @@ export const SidebarCardsList = (props: Props): ReactElement => {
 
   const visibleCardsOrderedByWeight = userData
     ? userData.preferences.visibleSidebarCards
-        .map((id: string) => props.sidebarDisplayContent[id])
+        .map((id: string) => {
+          return props.sidebarDisplayContent[id];
+        })
         .sort((cardA: SidebarCardContent, cardB: SidebarCardContent): number => {
           return cardA.weight < cardB.weight ? -1 : 1;
         })
@@ -93,7 +111,11 @@ export const SidebarCardsList = (props: Props): ReactElement => {
             <Accordion
               elevation={0}
               expanded={hiddenAccordionIsOpen}
-              onChange={() => setHiddenAccordionIsOpen((prevAccordionStatus) => !prevAccordionStatus)}
+              onChange={() => {
+                return setHiddenAccordionIsOpen((prevAccordionStatus) => {
+                  return !prevAccordionStatus;
+                });
+              }}
               sx={{
                 backgroundColor: `#F9FBFB`,
               }}
@@ -115,13 +137,13 @@ export const SidebarCardsList = (props: Props): ReactElement => {
                 </div>
               </AccordionSummary>
               <AccordionDetails data-testid="hidden-opportunities">
-                {hiddenSortedCertifications.map((cert) => (
-                  <OpportunityCard key={cert.id} opportunity={cert} urlPath="certification" />
-                ))}
+                {hiddenSortedCertifications.map((cert) => {
+                  return <OpportunityCard key={cert.id} opportunity={cert} urlPath="certification" />;
+                })}
                 {displayFundingCards() &&
-                  hiddenSortedFundings.map((funding) => (
-                    <OpportunityCard key={funding.id} opportunity={funding} urlPath="funding" />
-                  ))}
+                  hiddenSortedFundings.map((funding) => {
+                    return <OpportunityCard key={funding.id} opportunity={funding} urlPath="funding" />;
+                  })}
               </AccordionDetails>
             </Accordion>
           </div>
@@ -133,34 +155,45 @@ export const SidebarCardsList = (props: Props): ReactElement => {
     }
   };
 
-  const learnMoreAboutFundingsLink = () => (
-    <>
-      <hr className="desktop:margin-right-1 margin-top-3 bg-cool-lighter" aria-hidden={true} />
-      <div className="margin-y-205 weight-unset-override">
-        <Content>{Config.dashboardDefaults.learnMoreFundingOpportunities}</Content>
-      </div>
-    </>
-  );
+  const learnMoreAboutFundingsLink = () => {
+    return (
+      <>
+        <hr className="desktop:margin-right-1 margin-top-3 bg-cool-lighter" aria-hidden={true} />
+        <div className="margin-y-205 weight-unset-override">
+          <Content>{Config.dashboardDefaults.learnMoreFundingOpportunities}</Content>
+        </div>
+      </>
+    );
+  };
 
   const topCardIds = new Set(["funding-nudge"]);
-  const getTopCards = () =>
-    visibleCardsOrderedByWeight
+  const getTopCards = () => {
+    return visibleCardsOrderedByWeight
       .filter((card) => {
         return topCardIds.has(card.id);
       })
-      .map((card: SidebarCardContent) => <SidebarCard card={card} key={card.id} />);
+      .map((card: SidebarCardContent) => {
+        return <SidebarCard card={card} key={card.id} />;
+      });
+  };
 
-  const getBottomCards = () =>
-    visibleCardsOrderedByWeight
+  const getBottomCards = () => {
+    return visibleCardsOrderedByWeight
       .filter((card) => {
         return !topCardIds.has(card.id);
       })
-      .map((card: SidebarCardContent) => <SidebarCard card={card} key={card.id} />);
+      .map((card: SidebarCardContent) => {
+        return <SidebarCard card={card} key={card.id} />;
+      });
+  };
 
-  const showEmptyState = () =>
-    displayCertificationsCards() &&
-    displayFundingCards() &&
-    visibleSortedCertifications.length + visibleSortedFundings.length === 0;
+  const showEmptyState = () => {
+    return (
+      displayCertificationsCards() &&
+      displayFundingCards() &&
+      visibleSortedCertifications.length + visibleSortedFundings.length === 0
+    );
+  };
 
   return (
     <>
@@ -174,14 +207,14 @@ export const SidebarCardsList = (props: Props): ReactElement => {
         <>{getTopCards()}</>
         <div className="desktop:padding-right-105" data-testid="visible-opportunities">
           {displayCertificationsCards() &&
-            visibleSortedCertifications.map((cert) => (
-              <OpportunityCard key={cert.id} opportunity={cert} urlPath="certification" />
-            ))}
+            visibleSortedCertifications.map((cert) => {
+              return <OpportunityCard key={cert.id} opportunity={cert} urlPath="certification" />;
+            })}
 
           {displayFundingCards() &&
-            visibleSortedFundings.map((funding) => (
-              <OpportunityCard key={funding.id} opportunity={funding} urlPath="funding" />
-            ))}
+            visibleSortedFundings.map((funding) => {
+              return <OpportunityCard key={funding.id} opportunity={funding} urlPath="funding" />;
+            })}
           {showEmptyState() && (
             <div className="fdc fac margin-y-3">
               <h3 className="text-normal">{Config.dashboardDefaults.emptyOpportunitiesHeader}</h3>

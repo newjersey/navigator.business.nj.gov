@@ -8,7 +8,9 @@ export interface LegalStructure {
 
 export const LookupLegalStructureById = (id: string | undefined): LegalStructure => {
   return (
-    LegalStructures.find((x) => x.id === id) ?? {
+    LegalStructures.find((x) => {
+      return x.id === id;
+    }) ?? {
       id: "",
       name: "",
       requiresPublicFiling: false,

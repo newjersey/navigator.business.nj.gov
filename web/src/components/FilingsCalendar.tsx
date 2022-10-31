@@ -60,29 +60,33 @@ export const FilingsCalendar = (props: Props): ReactElement => {
         </div>
         <div>
           {thisMonthFilings
-            .filter((filing) => props.operateReferences[filing.identifier])
-            .map((filing) => (
-              <div key={filing.identifier} className="line-height-1 margin-bottom-1" data-testid="filing">
-                <Link href={`filings/${props.operateReferences[filing.identifier].urlSlug}`}>
-                  <a
-                    href={`filings/${props.operateReferences[filing.identifier].urlSlug}`}
-                    data-testid={filing.identifier.toLowerCase()}
-                    className="usa-link text-secondary-darker text-secondary-darker:hover text-no-underline"
-                  >
-                    <Tag backgroundColor="warning-light" isHover isRadiusMd isWrappingText>
-                      <span className="text-bold text-uppercase">
-                        {Config.dashboardDefaults.calendarFilingDueDateLabel}{" "}
-                        {parseDateWithFormat(filing.dueDate, "YYYY-MM-DD").format("M/D")}
-                      </span>
-                      {" - "}
-                      <span className="text-no-uppercase text-underline">
-                        {props.operateReferences[filing.identifier].name}
-                      </span>
-                    </Tag>
-                  </a>
-                </Link>
-              </div>
-            ))}
+            .filter((filing) => {
+              return props.operateReferences[filing.identifier];
+            })
+            .map((filing) => {
+              return (
+                <div key={filing.identifier} className="line-height-1 margin-bottom-1" data-testid="filing">
+                  <Link href={`filings/${props.operateReferences[filing.identifier].urlSlug}`}>
+                    <a
+                      href={`filings/${props.operateReferences[filing.identifier].urlSlug}`}
+                      data-testid={filing.identifier.toLowerCase()}
+                      className="usa-link text-secondary-darker text-secondary-darker:hover text-no-underline"
+                    >
+                      <Tag backgroundColor="warning-light" isHover isRadiusMd isWrappingText>
+                        <span className="text-bold text-uppercase">
+                          {Config.dashboardDefaults.calendarFilingDueDateLabel}{" "}
+                          {parseDateWithFormat(filing.dueDate, "YYYY-MM-DD").format("M/D")}
+                        </span>
+                        {" - "}
+                        <span className="text-no-uppercase text-underline">
+                          {props.operateReferences[filing.identifier].name}
+                        </span>
+                      </Tag>
+                    </a>
+                  </Link>
+                </div>
+              );
+            })}
         </div>
       </div>
     );
@@ -93,7 +97,9 @@ export const FilingsCalendar = (props: Props): ReactElement => {
 
     const monthsPerRow = 4;
 
-    const rowIndices = monthIndices.filter((num) => num % monthsPerRow === 0);
+    const rowIndices = monthIndices.filter((num) => {
+      return num % monthsPerRow === 0;
+    });
 
     return (
       <table data-testid="filings-calendar-as-table">
@@ -102,11 +108,13 @@ export const FilingsCalendar = (props: Props): ReactElement => {
             const monthIndicesForRow = monthIndices.slice(rowIndex, rowIndex + monthsPerRow);
             return (
               <tr key={rowIndex}>
-                {monthIndicesForRow.map((month) => (
-                  <td key={month} className="td-gray-border">
-                    {getMonth(month)}
-                  </td>
-                ))}
+                {monthIndicesForRow.map((month) => {
+                  return (
+                    <td key={month} className="td-gray-border">
+                      {getMonth(month)}
+                    </td>
+                  );
+                })}
               </tr>
             );
           })}
@@ -116,35 +124,41 @@ export const FilingsCalendar = (props: Props): ReactElement => {
   };
 
   const renderCalendarAsList = (): ReactElement => {
-    if (sortedFilteredFilingsWithinAYear.length === 0) return <></>;
+    if (sortedFilteredFilingsWithinAYear.length === 0) {
+      return <></>;
+    }
 
     return (
       <div data-testid="filings-calendar-as-list">
         {sortedFilteredFilingsWithinAYear
-          .filter((filing) => props.operateReferences[filing.identifier])
-          .map((filing) => (
-            <div className="flex margin-bottom-2 minh-6" key={`${filing.identifier}-${filing.dueDate}`}>
-              <div className="width-05 bg-primary minw-05" />
-              <div className="margin-left-205">
-                <div className="text-bold">
-                  {parseDateWithFormat(filing.dueDate, "YYYY-MM-DD").format("MMMM D, YYYY")}
-                </div>
-                <div>
-                  <Link href={`filings/${props.operateReferences[filing.identifier].urlSlug}`} passHref>
-                    <a
-                      href={`filings/${props.operateReferences[filing.identifier].urlSlug}`}
-                      onClick={() => {
-                        analytics.event.calendar_date.click.go_to_date_detail_screen();
-                      }}
-                    >
-                      {props.operateReferences[filing.identifier].name}{" "}
-                      {parseDateWithFormat(filing.dueDate, "YYYY-MM-DD").format("YYYY")}
-                    </a>
-                  </Link>
+          .filter((filing) => {
+            return props.operateReferences[filing.identifier];
+          })
+          .map((filing) => {
+            return (
+              <div className="flex margin-bottom-2 minh-6" key={`${filing.identifier}-${filing.dueDate}`}>
+                <div className="width-05 bg-primary minw-05" />
+                <div className="margin-left-205">
+                  <div className="text-bold">
+                    {parseDateWithFormat(filing.dueDate, "YYYY-MM-DD").format("MMMM D, YYYY")}
+                  </div>
+                  <div>
+                    <Link href={`filings/${props.operateReferences[filing.identifier].urlSlug}`} passHref>
+                      <a
+                        href={`filings/${props.operateReferences[filing.identifier].urlSlug}`}
+                        onClick={() => {
+                          analytics.event.calendar_date.click.go_to_date_detail_screen();
+                        }}
+                      >
+                        {props.operateReferences[filing.identifier].name}{" "}
+                        {parseDateWithFormat(filing.dueDate, "YYYY-MM-DD").format("YYYY")}
+                      </a>
+                    </Link>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}{" "}
+            );
+          })}{" "}
         <hr />
       </div>
     );
@@ -152,16 +166,22 @@ export const FilingsCalendar = (props: Props): ReactElement => {
 
   const renderCalendar = (): ReactElement => {
     const type = LookupOperatingPhaseById(userData?.profileData.operatingPhase).displayCalendarType;
-    if (type === "LIST") return renderCalendarAsList();
+    if (type === "LIST") {
+      return renderCalendarAsList();
+    }
     if (type === "FULL") {
-      if (isLargeScreen && userData?.preferences.isCalendarFullView) return renderCalendarAsGrid();
+      if (isLargeScreen && userData?.preferences.isCalendarFullView) {
+        return renderCalendarAsGrid();
+      }
       return renderCalendarAsList();
     }
     return <></>;
   };
 
   const renderToggleButton = (): ReactElement => {
-    if (!userData) return <></>;
+    if (!userData) {
+      return <></>;
+    }
     if (
       sortedFilteredFilingsWithinAYear.length > 0 &&
       LookupOperatingPhaseById(userData?.profileData.operatingPhase).displayCalendarToggleButton
@@ -195,7 +215,9 @@ export const FilingsCalendar = (props: Props): ReactElement => {
   };
 
   const handleCalendarOnClick = () => {
-    if (!userData) return;
+    if (!userData) {
+      return;
+    }
     update({
       ...userData,
       preferences: {

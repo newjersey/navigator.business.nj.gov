@@ -93,7 +93,9 @@ const OnboardingPage = (props: Props): ReactElement => {
   const hasHandledRouting = useRef<boolean>(false);
 
   const onValidation = (field: ProfileFields, invalid: boolean): void => {
-    setFieldStates((prevFieldStates) => ({ ...prevFieldStates, [field]: { invalid } }));
+    setFieldStates((prevFieldStates) => {
+      return { ...prevFieldStates, [field]: { invalid } };
+    });
   };
 
   const onboardingFlows = useMemo(() => {
@@ -104,7 +106,9 @@ const OnboardingPage = (props: Props): ReactElement => {
         ...onboardingFlows,
         [flow]: {
           ...onboardingFlows[flow],
-          pages: onboardingFlows[flow].pages.filter((it) => it.name !== pageName),
+          pages: onboardingFlows[flow].pages.filter((it) => {
+            return it.name !== pageName;
+          }),
         },
       };
     };
@@ -123,7 +127,12 @@ const OnboardingPage = (props: Props): ReactElement => {
     return onboardingFlows;
   }, [profileData, user, fieldStates]);
 
-  const routeToPage = useCallback((page: number) => routeShallowWithQuery(router, "page", page), [router]);
+  const routeToPage = useCallback(
+    (page: number) => {
+      return routeShallowWithQuery(router, "page", page);
+    },
+    [router]
+  );
 
   const industryQueryParamIsValid = (industryId: string | undefined): boolean => {
     return !!LookupIndustryById(industryId).id;
@@ -140,8 +149,9 @@ const OnboardingPage = (props: Props): ReactElement => {
         hasHandledRouting.current ||
         !state.user ||
         state.isAuthenticated === IsAuthenticated.UNKNOWN
-      )
+      ) {
         return;
+      }
 
       let currentUserData = userData;
 
@@ -213,17 +223,34 @@ const OnboardingPage = (props: Props): ReactElement => {
     const currentPageFlow = onboardingFlows[currentFlow].pages[page.current - 1];
     const errorMap = currentPageFlow.getErrorMap();
     const hasErrors = {
-      banner: errorMap?.banner && errorMap?.banner.some((error) => !error.valid),
-      inline: errorMap?.inline && errorMap?.inline.some((error) => !error.valid),
+      banner:
+        errorMap?.banner &&
+        errorMap?.banner.some((error) => {
+          return !error.valid;
+        }),
+      inline:
+        errorMap?.inline &&
+        errorMap?.inline.some((error) => {
+          return !error.valid;
+        }),
     };
 
     if (hasErrors.banner || hasErrors.inline) {
       if (hasErrors.banner && errorMap?.banner) {
-        setError(errorMap.banner.find((bannerError) => !bannerError.valid)?.name);
+        setError(
+          errorMap.banner.find((bannerError) => {
+            return !bannerError.valid;
+          })?.name
+        );
       }
       if (hasErrors.inline && errorMap?.inline) {
         setAlert("ERROR");
-        onValidation(errorMap.inline.find((error) => !error.valid)?.name as ProfileFields, true);
+        onValidation(
+          errorMap.inline.find((error) => {
+            return !error.valid;
+          })?.name as ProfileFields,
+          true
+        );
       }
       headerRef.current?.focus();
       scrollToTop();
@@ -303,9 +330,9 @@ const OnboardingPage = (props: Props): ReactElement => {
         ...newUserData.preferences,
         visibleSidebarCards:
           newProfileData.businessPersona === "OWNING"
-            ? newUserData.preferences.visibleSidebarCards.filter(
-                (cardId: string) => cardId !== "task-progress"
-              )
+            ? newUserData.preferences.visibleSidebarCards.filter((cardId: string) => {
+                return cardId !== "task-progress";
+              })
             : [...newUserData.preferences.visibleSidebarCards, "task-progress"],
       };
 
@@ -353,16 +380,18 @@ const OnboardingPage = (props: Props): ReactElement => {
     }
   };
 
-  const header = () => (
-    <div className="margin-y-2 desktop:margin-y-0 desktop:padding-bottom-4">
-      <h1 ref={headerRef}>
-        {Config.onboardingDefaults.pageTitle}{" "}
-        <span className="text-light" data-testid={`step-${page.current.toString()}`}>
-          {evalHeaderStepsTemplate()}
-        </span>
-      </h1>
-    </div>
-  );
+  const header = () => {
+    return (
+      <div className="margin-y-2 desktop:margin-y-0 desktop:padding-bottom-4">
+        <h1 ref={headerRef}>
+          {Config.onboardingDefaults.pageTitle}{" "}
+          <span className="text-light" data-testid={`step-${page.current.toString()}`}>
+            {evalHeaderStepsTemplate()}
+          </span>
+        </h1>
+      </div>
+    );
+  };
 
   const getAnimation = (): string => {
     return page.previous < page.current ? "slide" : "slide-back";
@@ -407,7 +436,9 @@ const OnboardingPage = (props: Props): ReactElement => {
               <SnackbarAlert
                 variant={OnboardingStatusLookup()[alert].variant}
                 isOpen={alert !== undefined}
-                close={() => setAlert(undefined)}
+                close={() => {
+                  return setAlert(undefined);
+                }}
                 dataTestid={`snackbar-alert-${alert}`}
                 heading={OnboardingStatusLookup()[alert].header}
               >
@@ -427,30 +458,32 @@ const OnboardingPage = (props: Props): ReactElement => {
             <UserDataErrorAlert />
           </SingleColumnContainer>
           <div className="slide-container">
-            {onboardingFlows[currentFlow].pages.map((onboardingPage, index) => (
-              <CSSTransition
-                key={index}
-                in={page.current === index + 1}
-                unmountOnExit
-                timeout={getTimeout(index + 1)}
-                classNames={`width-100 ${getAnimation()}`}
-              >
-                <SingleColumnContainer isSmallerWidth>
-                  <form
-                    onSubmit={onSubmit}
-                    className={`usa-prose onboarding-form margin-top-2`}
-                    data-testid={`page-${index + 1}-form`}
-                  >
-                    {onboardingPage.component}
-                    <hr className="margin-top-6 margin-bottom-4" aria-hidden={true} />
-                    <DevOnlySkipOnboardingButton setPage={setPage} routeToPage={routeToPage} />
-                    <OnboardingButtonGroup
-                      isFinal={page.current === onboardingFlows[currentFlow].pages.length}
-                    />
-                  </form>
-                </SingleColumnContainer>
-              </CSSTransition>
-            ))}
+            {onboardingFlows[currentFlow].pages.map((onboardingPage, index) => {
+              return (
+                <CSSTransition
+                  key={index}
+                  in={page.current === index + 1}
+                  unmountOnExit
+                  timeout={getTimeout(index + 1)}
+                  classNames={`width-100 ${getAnimation()}`}
+                >
+                  <SingleColumnContainer isSmallerWidth>
+                    <form
+                      onSubmit={onSubmit}
+                      className={`usa-prose onboarding-form margin-top-2`}
+                      data-testid={`page-${index + 1}-form`}
+                    >
+                      {onboardingPage.component}
+                      <hr className="margin-top-6 margin-bottom-4" aria-hidden={true} />
+                      <DevOnlySkipOnboardingButton setPage={setPage} routeToPage={routeToPage} />
+                      <OnboardingButtonGroup
+                        isFinal={page.current === onboardingFlows[currentFlow].pages.length}
+                      />
+                    </form>
+                  </SingleColumnContainer>
+                </CSSTransition>
+              );
+            })}
           </div>
         </main>
       </PageSkeleton>

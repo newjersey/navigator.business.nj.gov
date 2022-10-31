@@ -357,8 +357,8 @@ export const generateLicenseData = (overrides: Partial<LicenseData>): LicenseDat
 
 export const generateFormationDisplayContent = (
   overrides: Partial<Record<FormationLegalType, Partial<FormationDisplayContent>>>
-): FormationDisplayContentMap =>
-  FormationLegalTypes.reduce((accumulator, curr) => {
+): FormationDisplayContentMap => {
+  return FormationLegalTypes.reduce((accumulator, curr) => {
     accumulator[curr] = {
       introParagraph: {
         contentMd: `some-intro-content-${curr}-${randomInt()}`,
@@ -404,6 +404,7 @@ export const generateFormationDisplayContent = (
     };
     return accumulator;
   }, {} as FormationDisplayContentMap);
+};
 
 export const generateFormationFormData = (
   overrides: Partial<FormationFormData>,
@@ -480,20 +481,26 @@ const generateZipCode = () => {
   return "0".repeat(5 - zip.length) + zip;
 };
 
-const generateStateItem = () => states[randomIntFromInterval("0", (states.length - 1).toString())];
+const generateStateItem = () => {
+  return states[randomIntFromInterval("0", (states.length - 1).toString())];
+};
 
-export const generateStateInput = () => generateStateItem()[randomInt() % 2 ? "shortCode" : "name"];
+export const generateStateInput = () => {
+  return generateStateItem()[randomInt() % 2 ? "shortCode" : "name"];
+};
 
-export const generateFormationAddress = (overrides: Partial<FormationAddress>): FormationAddress => ({
-  name: `some-members-name-${randomInt()}`,
-  addressLine1: `some-members-address-1-${randomInt()}`,
-  addressLine2: `some-members-address-2-${randomInt()}`,
-  addressCity: `some-members-address-city-${randomInt()}`,
-  addressState: generateStateItem().shortCode,
-  addressZipCode: generateZipCode(),
-  signature: false,
-  ...overrides,
-});
+export const generateFormationAddress = (overrides: Partial<FormationAddress>): FormationAddress => {
+  return {
+    name: `some-members-name-${randomInt()}`,
+    addressLine1: `some-members-address-1-${randomInt()}`,
+    addressLine2: `some-members-address-2-${randomInt()}`,
+    addressCity: `some-members-address-city-${randomInt()}`,
+    addressState: generateStateItem().shortCode,
+    addressZipCode: generateZipCode(),
+    signature: false,
+    ...overrides,
+  };
+};
 
 export const generateFormationData = (
   overrides: Partial<FormationData>,
@@ -508,12 +515,14 @@ export const generateFormationData = (
   };
 };
 
-export const generateEmptyFormationData = () => ({
-  formationFormData: createEmptyFormationFormData(),
-  formationResponse: undefined,
-  getFilingResponse: undefined,
-  completedFilingPayment: false,
-});
+export const generateEmptyFormationData = () => {
+  return {
+    formationFormData: createEmptyFormationFormData(),
+    formationResponse: undefined,
+    getFilingResponse: undefined,
+    completedFilingPayment: false,
+  };
+};
 
 export const generateFormationSubmitResponse = (
   overrides: Partial<FormationSubmitResponse>
@@ -694,9 +703,9 @@ export const randomLegalStructure = (publicFiling?: {
   requiresPublicFiling: boolean | undefined;
 }): LegalStructure => {
   const _requiresPublicFiling = publicFiling?.requiresPublicFiling ?? Boolean(randomInt() % 2);
-  const LegalPublicFilings = LegalStructures.filter(
-    (item) => item.requiresPublicFiling === _requiresPublicFiling
-  );
+  const LegalPublicFilings = LegalStructures.filter((item) => {
+    return item.requiresPublicFiling === _requiresPublicFiling;
+  });
   const randomIndex = Math.floor(Math.random() * LegalPublicFilings.length);
   return LegalPublicFilings[randomIndex];
 };
@@ -712,25 +721,25 @@ export const randomOwnershipType = (): OwnershipType => {
 };
 
 export const randomIndustry = (canHavePermanentLocation = false): Industry => {
-  const filteredIndustries = Industries.filter(
-    (x: Industry) => x.canHavePermanentLocation === canHavePermanentLocation && x.isEnabled
-  );
+  const filteredIndustries = Industries.filter((x: Industry) => {
+    return x.canHavePermanentLocation === canHavePermanentLocation && x.isEnabled;
+  });
   const randomIndex = Math.floor(Math.random() * filteredIndustries.length);
   return filteredIndustries[randomIndex];
 };
 
 export const randomHomeBasedIndustry = () => {
-  const homeBasedIndustries = Industries.filter(
-    (it) => it.industryOnboardingQuestions.canBeHomeBased && it.isEnabled
-  );
+  const homeBasedIndustries = Industries.filter((it) => {
+    return it.industryOnboardingQuestions.canBeHomeBased && it.isEnabled;
+  });
   const randomIndex = Math.floor(Math.random() * homeBasedIndustries.length);
   return homeBasedIndustries[randomIndex].id;
 };
 
 export const randomNonHomeBasedIndustry = () => {
-  const nonHomeBasedIndustries = Industries.filter(
-    (it) => !it.industryOnboardingQuestions.canBeHomeBased && it.canHavePermanentLocation && it.isEnabled
-  );
+  const nonHomeBasedIndustries = Industries.filter((it) => {
+    return !it.industryOnboardingQuestions.canBeHomeBased && it.canHavePermanentLocation && it.isEnabled;
+  });
   const randomIndex = Math.floor(Math.random() * nonHomeBasedIndustries.length);
   return nonHomeBasedIndustries[randomIndex].id;
 };

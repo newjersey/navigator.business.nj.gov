@@ -31,23 +31,34 @@ function mockMaterialUI(): typeof materialUi {
 
 const Config = getMergedConfig();
 
-jest.mock("@mui/material", () => mockMaterialUI());
-jest.mock("next/router", () => ({ useRouter: jest.fn() }));
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
+jest.mock("@mui/material", () => {
+  return mockMaterialUI();
+});
+jest.mock("next/router", () => {
+  return { useRouter: jest.fn() };
+});
+jest.mock("@/lib/data-hooks/useUserData", () => {
+  return { useUserData: jest.fn() };
+});
+jest.mock("@/lib/data-hooks/useRoadmap", () => {
+  return { useRoadmap: jest.fn() };
+});
 
 const setLargeScreen = (): void => {
-  (useMediaQuery as jest.Mock).mockImplementation(() => true);
+  (useMediaQuery as jest.Mock).mockImplementation(() => {
+    return true;
+  });
 };
 
-const renderPage = (task: Task, initialUserData?: UserData) =>
-  render(
+const renderPage = (task: Task, initialUserData?: UserData) => {
+  return render(
     <materialUi.ThemeProvider theme={materialUi.createTheme()}>
       <WithStatefulUserData initialUserData={initialUserData}>
         <TaskPage task={task} displayContent={createEmptyTaskDisplayContent()} municipalities={[]} />
       </WithStatefulUserData>
     </materialUi.ThemeProvider>
   );
+};
 
 describe("task page", () => {
   beforeEach(() => {

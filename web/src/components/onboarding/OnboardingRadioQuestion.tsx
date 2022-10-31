@@ -27,8 +27,10 @@ export const OnboardingRadioQuestion = <T extends ProfileDataTypes>(props: Props
   const { Config } = useConfig();
 
   const handleChange = (event: React.ChangeEvent<{ name?: string; value: unknown }>) => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const value = props.choices.find((val) => val.toString() === (event.target.value as any).toString()) as T;
+    const value = props.choices.find((val) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      return val.toString() === (event.target.value as any).toString();
+    }) as T;
     setProfileData({
       ...state.profileData,
       [props.fieldName]: value,
@@ -47,30 +49,34 @@ export const OnboardingRadioQuestion = <T extends ProfileDataTypes>(props: Props
           row={props.choices.length === 2}
         >
           <>
-            {props.choices.map((val) => (
-              <FormControlLabel
-                key={val.toString()}
-                style={{ marginTop: ".75rem", alignItems: "flex-start", marginRight: "3rem" }}
-                labelPlacement="end"
-                data-testid={`${camelCaseToKabobCase(props.fieldName)}-radio-${val.toString().toLowerCase()}`}
-                value={val.toString()}
-                control={<Radio color="primary" sx={{ paddingTop: "0px" }} />}
-                label={
-                  <Content>
-                    {props.labels
-                      ? props.labels[val.toString()]
-                      : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                        (Config.profileDefaults[state.flow] as any)[
-                          props.contentFieldName ?? props.fieldName
-                        ][
-                          `radioButton${capitalizeFirstLetter(
-                            kabobSnakeSentenceToCamelCase(val.toString())
-                          )}Text`
-                        ]}
-                  </Content>
-                }
-              />
-            ))}
+            {props.choices.map((val) => {
+              return (
+                <FormControlLabel
+                  key={val.toString()}
+                  style={{ marginTop: ".75rem", alignItems: "flex-start", marginRight: "3rem" }}
+                  labelPlacement="end"
+                  data-testid={`${camelCaseToKabobCase(props.fieldName)}-radio-${val
+                    .toString()
+                    .toLowerCase()}`}
+                  value={val.toString()}
+                  control={<Radio color="primary" sx={{ paddingTop: "0px" }} />}
+                  label={
+                    <Content>
+                      {props.labels
+                        ? props.labels[val.toString()]
+                        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                          (Config.profileDefaults[state.flow] as any)[
+                            props.contentFieldName ?? props.fieldName
+                          ][
+                            `radioButton${capitalizeFirstLetter(
+                              kabobSnakeSentenceToCamelCase(val.toString())
+                            )}Text`
+                          ]}
+                    </Content>
+                  }
+                />
+              );
+            })}
           </>
         </RadioGroup>
       </FormControl>

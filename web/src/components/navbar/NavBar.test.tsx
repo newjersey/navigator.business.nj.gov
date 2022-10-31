@@ -30,11 +30,21 @@ function mockMaterialUI(): typeof materialUi {
 
 const mockApi = api as jest.Mocked<typeof api>;
 
-jest.mock("next/router", () => ({ useRouter: jest.fn() }));
-jest.mock("@mui/material", () => mockMaterialUI());
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("@/lib/api-client/apiClient", () => ({ postSelfReg: jest.fn() }));
+jest.mock("next/router", () => {
+  return { useRouter: jest.fn() };
+});
+jest.mock("@mui/material", () => {
+  return mockMaterialUI();
+});
+jest.mock("@/lib/data-hooks/useUserData", () => {
+  return { useUserData: jest.fn() };
+});
+jest.mock("@/lib/data-hooks/useRoadmap", () => {
+  return { useRoadmap: jest.fn() };
+});
+jest.mock("@/lib/api-client/apiClient", () => {
+  return { postSelfReg: jest.fn() };
+});
 jest.mock("next/link", () => {
   return ({ children }: { children: ReactNode }) => {
     return children;
@@ -42,7 +52,9 @@ jest.mock("next/link", () => {
 });
 
 const setLargeScreen = (value: boolean): void => {
-  (useMediaQuery as jest.Mock).mockImplementation(() => value);
+  (useMediaQuery as jest.Mock).mockImplementation(() => {
+    return value;
+  });
 };
 
 describe("<NavBar />", () => {
@@ -347,7 +359,9 @@ describe("<NavBar />", () => {
     };
 
     describe("authenticated mobile navbar - renders roadmap within drawer", () => {
-      displaysUserNameOrEmail(() => renderMobileTaskNav(IsAuthenticated.TRUE));
+      displaysUserNameOrEmail(() => {
+        return renderMobileTaskNav(IsAuthenticated.TRUE);
+      });
 
       it("displays user profile links", async () => {
         useMockUserData({ user: generateUser({ name: "Grace Hopper" }) });
@@ -455,7 +469,9 @@ describe("<NavBar />", () => {
         fireEvent.click(screen.getByText("step1"));
         fireEvent.click(screen.getByText("task1"));
 
-        await waitForElementToBeRemoved(() => screen.queryByTestId("nav-sidebar-menu"));
+        await waitForElementToBeRemoved(() => {
+          return screen.queryByTestId("nav-sidebar-menu");
+        });
         expect(screen.queryByText("task1")).not.toBeInTheDocument();
         expect(screen.queryByTestId("nav-sidebar-menu")).not.toBeInTheDocument();
       });

@@ -15,7 +15,9 @@ export const useUserData = (): UseUserDataResponse => {
   const { updateQueue, setUpdateQueue } = useContext(UpdateQueueContext);
   const { userDataError, setUserDataError } = useContext(UserDataErrorContext);
   const { data, error, mutate } = useSWR<UserData | undefined>(state.user?.id || null, api.getUserData, {
-    isPaused: () => state.isAuthenticated != IsAuthenticated.TRUE,
+    isPaused: () => {
+      return state.isAuthenticated != IsAuthenticated.TRUE;
+    },
   });
   const dataExists = !!data;
 
@@ -27,7 +29,9 @@ export const useUserData = (): UseUserDataResponse => {
   }, []);
 
   useEffect(() => {
-    if (!data || !state.user || state.isAuthenticated != IsAuthenticated.TRUE) return;
+    if (!data || !state.user || state.isAuthenticated != IsAuthenticated.TRUE) {
+      return;
+    }
     dispatch({
       type: "UPDATE_USER",
       user: {
@@ -53,7 +57,9 @@ export const useUserData = (): UseUserDataResponse => {
   const update = async (newUserData: UserData | undefined, config?: { local?: boolean }): Promise<void> => {
     if (newUserData) {
       mutate(newUserData, false);
-      if (config?.local || state.isAuthenticated != IsAuthenticated.TRUE) return;
+      if (config?.local || state.isAuthenticated != IsAuthenticated.TRUE) {
+        return;
+      }
       return postUserData(newUserData)
         .then((response: UserData) => {
           setUserDataError(undefined);

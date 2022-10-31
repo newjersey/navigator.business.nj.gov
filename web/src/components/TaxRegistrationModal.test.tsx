@@ -7,8 +7,12 @@ import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { TaxRegistrationModal } from "./TaxRegistrationModal";
 
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
+jest.mock("@/lib/data-hooks/useUserData", () => {
+  return { useUserData: jest.fn() };
+});
+jest.mock("@/lib/data-hooks/useRoadmap", () => {
+  return { useRoadmap: jest.fn() };
+});
 const modalOnClose = jest.fn();
 const onSave = jest.fn();
 const Config = getMergedConfig();

@@ -8,7 +8,9 @@ import { OperatingPhases } from "@businessnjgovnavigator/shared/operatingPhase";
 import { fireEvent, render, screen } from "@testing-library/react";
 import TwoTabDashboardLayout from "./TwoTabDashboardLayout";
 
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
+jest.mock("@/lib/data-hooks/useUserData", () => {
+  return { useUserData: jest.fn() };
+});
 
 const Config = getMergedConfig();
 

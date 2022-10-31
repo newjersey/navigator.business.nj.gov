@@ -22,11 +22,21 @@ export const Content = (props: ContentProps): ReactElement => {
   const isTest = process.env.NODE_ENV === "test";
 
   const components = {
-    code: isTest ? (props: any) => <>`{props.children}`</> : ContextualInfoLink,
+    code: isTest
+      ? (props: any) => {
+          return <>`{props.children}`</>;
+        }
+      : ContextualInfoLink,
     a: Link(props.onClick),
-    h5: (props: any) => <div className="h5-styling">{props.children}</div>,
-    h6: (props: any) => <div className="h6-styling">{props.children}</div>,
-    hr: () => <hr className="margin-y-3" />,
+    h5: (props: any) => {
+      return <div className="h5-styling">{props.children}</div>;
+    },
+    h6: (props: any) => {
+      return <div className="h6-styling">{props.children}</div>;
+    },
+    hr: () => {
+      return <hr className="margin-y-3" />;
+    },
     blockquote: GreenBox,
     table: OutlineBox,
     li: ListOrCheckbox,
@@ -93,7 +103,9 @@ export const ExternalLink = ({
   );
 };
 
-const Unformatted = (props: any): ReactElement => <div>{props.children}</div>;
+const Unformatted = (props: any): ReactElement => {
+  return <div>{props.children}</div>;
+};
 
 const OutlineBox = (props: any): ReactElement => {
   return (

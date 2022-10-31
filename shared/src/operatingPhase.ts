@@ -22,7 +22,9 @@ export type OperatingPhaseId =
 
 export const LookupOperatingPhaseById = (id: OperatingPhaseId | undefined): OperatingPhase => {
   return (
-    OperatingPhases.find((x) => x.id === id) ?? {
+    OperatingPhases.find((x) => {
+      return x.id === id;
+    }) ?? {
       id: "",
       displayCompanyDemographicProfileFields: false,
       displayCertifications: false,

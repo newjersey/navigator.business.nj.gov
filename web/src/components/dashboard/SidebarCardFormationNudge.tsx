@@ -20,14 +20,18 @@ export const SidebarCardFormationNudge = (props: Props): ReactElement => {
   const { queueUpdateTaskProgress } = useUpdateTaskProgress();
 
   const updateFormationDateAndTaskProgress = async () => {
-    if (!userData || !updateQueue) return;
+    if (!userData || !updateQueue) {
+      return;
+    }
     queueUpdateTaskProgress(formationTaskId, "COMPLETED");
     await updateQueue.update();
     routeShallowWithQuery(router, QUERIES.fromForming, "true");
   };
 
   const onClick = async () => {
-    if (!userData) return;
+    if (!userData) {
+      return;
+    }
     setModalOpen(true);
     analytics.event.formation_nudge_button.click.show_formation_date_modal();
   };
@@ -36,7 +40,9 @@ export const SidebarCardFormationNudge = (props: Props): ReactElement => {
     <>
       <FormationDateModal
         isOpen={modalOpen}
-        close={() => setModalOpen(false)}
+        close={() => {
+          return setModalOpen(false);
+        }}
         onSave={updateFormationDateAndTaskProgress}
       />
       <SidebarCardGeneric

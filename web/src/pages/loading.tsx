@@ -26,7 +26,9 @@ const LoadingPage = (): ReactElement => {
   const { Config } = useConfig();
 
   useEffect(() => {
-    if (!router.isReady) return;
+    if (!router.isReady) {
+      return;
+    }
     if (router.query[QUERIES.code]) {
       getCurrentUser().then((currentUser) => {
         dispatch({ type: "LOGIN", user: currentUser });
@@ -39,7 +41,9 @@ const LoadingPage = (): ReactElement => {
   }, [router, dispatch]);
 
   useMountEffectWhenDefined(() => {
-    if (!userData) return;
+    if (!userData) {
+      return;
+    }
     if (!onboardingCompleted(userData)) {
       router.push(ROUTES.onboarding);
     } else if (userData.preferences.returnToLink) {
@@ -54,7 +58,9 @@ const LoadingPage = (): ReactElement => {
 
   const sendToOnboarding = async () => {
     setRedirectIsLoading(true);
-    onGuestSignIn(router.push, router.pathname, dispatch).then(() => setRedirectIsLoading(false));
+    onGuestSignIn(router.push, router.pathname, dispatch).then(() => {
+      return setRedirectIsLoading(false);
+    });
   };
 
   return (
@@ -66,7 +72,9 @@ const LoadingPage = (): ReactElement => {
         </SingleColumnContainer>
         <ModalOneButton
           isOpen={showLoginErrorModal}
-          close={() => setShowLoginErrorModal(false)}
+          close={() => {
+            return setShowLoginErrorModal(false);
+          }}
           title={Config.selfRegistration.loginErrorModalTitle}
           primaryButtonText={Config.selfRegistration.loginErrorModalContinueButton}
           primaryButtonOnClick={sendToOnboarding}

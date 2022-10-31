@@ -18,7 +18,9 @@ export const PriorityStatusCheckboxes = (props: Props): ReactElement => {
   const { Config } = useConfig();
 
   const handleCheckbox = (event: React.ChangeEvent<HTMLInputElement>, type: PriorityApplicationType) => {
-    if (!userData) return;
+    if (!userData) {
+      return;
+    }
     if (event.target.checked) {
       setEligibleModalIsOpenWith(type);
     } else {
@@ -27,7 +29,9 @@ export const PriorityStatusCheckboxes = (props: Props): ReactElement => {
   };
 
   const setEligibilityChecked = () => {
-    if (eligibleModalIsOpenWith === "") return;
+    if (eligibleModalIsOpenWith === "") {
+      return;
+    }
     props.onCheckboxChange(eligibleModalIsOpenWith, true);
     setEligibleModalIsOpenWith("");
   };
@@ -43,7 +47,9 @@ export const PriorityStatusCheckboxes = (props: Props): ReactElement => {
               control={
                 <Checkbox
                   name="diversely-owned-checkbox"
-                  onChange={(event) => handleCheckbox(event, "diverselyOwned")}
+                  onChange={(event) => {
+                    return handleCheckbox(event, "diverselyOwned");
+                  }}
                   checked={props.priorityStatusState.diverselyOwned}
                   sx={{ alignSelf: "start", paddingTop: "1px", paddingBottom: "0px", paddingLeft: "0px" }}
                   data-testid="diversely-owned-checkbox"
@@ -55,7 +61,9 @@ export const PriorityStatusCheckboxes = (props: Props): ReactElement => {
               label={<Content>{Config.cannabisApplyForLicense.impactZoneLabel}</Content>}
               control={
                 <Checkbox
-                  onChange={(event) => handleCheckbox(event, "impactZone")}
+                  onChange={(event) => {
+                    return handleCheckbox(event, "impactZone");
+                  }}
                   checked={props.priorityStatusState.impactZone}
                   sx={{ alignSelf: "start", paddingTop: "1px", paddingBottom: "0px", paddingLeft: "0px" }}
                   data-testid="impact-zone-checkbox"
@@ -67,7 +75,9 @@ export const PriorityStatusCheckboxes = (props: Props): ReactElement => {
               label={<Content>{Config.cannabisApplyForLicense.sbeLabel}</Content>}
               control={
                 <Checkbox
-                  onChange={(event) => handleCheckbox(event, "socialEquity")}
+                  onChange={(event) => {
+                    return handleCheckbox(event, "socialEquity");
+                  }}
                   checked={props.priorityStatusState.socialEquity}
                   sx={{ alignSelf: "start", paddingTop: "1px", paddingBottom: "0px", paddingLeft: "0px" }}
                   data-testid="sbe-checkbox"
@@ -80,7 +90,9 @@ export const PriorityStatusCheckboxes = (props: Props): ReactElement => {
 
       <ModalTwoButton
         isOpen={eligibleModalIsOpenWith !== ""}
-        close={() => setEligibleModalIsOpenWith("")}
+        close={() => {
+          return setEligibleModalIsOpenWith("");
+        }}
         title={Config.cannabisEligibilityModal.eligibleModalTitle}
         primaryButtonText={Config.cannabisEligibilityModal.eligibleModalContinueButton}
         primaryButtonOnClick={setEligibilityChecked}

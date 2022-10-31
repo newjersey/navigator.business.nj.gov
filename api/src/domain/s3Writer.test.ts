@@ -6,26 +6,30 @@ jest.mock("axios");
 
 const mockAxios = axios as jest.Mocked<typeof axios>;
 
-const mockS3Upload = jest.fn(async () => ({
-  $metadata: { httpStatusCode: 200 },
-}));
+const mockS3Upload = jest.fn(async () => {
+  return {
+    $metadata: { httpStatusCode: 200 },
+  };
+});
 
 jest.mock("@aws-sdk/client-s3", () => {
   const originalModule = jest.requireActual("@aws-sdk/client-s3");
   return {
     ...originalModule,
-    S3Client: jest.fn().mockImplementation(() => ({
-      send: mockS3Upload,
-    })),
+    S3Client: jest.fn().mockImplementation(() => {
+      return {
+        send: mockS3Upload,
+      };
+    }),
   };
 });
 
 describe("s3Writer", () => {
   it("downloads a file and uploads it to a S3 Bucket", async () => {
     const data = Buffer.from("asdasd");
-    mockAxios.get.mockImplementation(() =>
-      Promise.resolve({ data, headers: { "content-type": "application/pdf" } })
-    );
+    mockAxios.get.mockImplementation(() => {
+      return Promise.resolve({ data, headers: { "content-type": "application/pdf" } });
+    });
     const hashSum = createHash("md5");
     hashSum.update(data);
     const params = {

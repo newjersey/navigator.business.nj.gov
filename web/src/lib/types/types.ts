@@ -68,14 +68,16 @@ export type FormationDisplayContent = {
   };
 };
 
-export const createEmptyTaskDisplayContent = (): TasksDisplayContent => ({
-  formationDisplayContent: createEmptyFormationDisplayContent(),
-});
+export const createEmptyTaskDisplayContent = (): TasksDisplayContent => {
+  return {
+    formationDisplayContent: createEmptyFormationDisplayContent(),
+  };
+};
 
 export type AllPaymentTypes = { type: PaymentType; displayText: string }[];
 
-export const createEmptyFormationDisplayContent = (): FormationDisplayContentMap =>
-  FormationLegalTypes.reduce((accumulator, curr) => {
+export const createEmptyFormationDisplayContent = (): FormationDisplayContentMap => {
+  return FormationLegalTypes.reduce((accumulator, curr) => {
     accumulator[curr] = {
       introParagraph: {
         contentMd: "",
@@ -119,6 +121,7 @@ export const createEmptyFormationDisplayContent = (): FormationDisplayContentMap
     };
     return accumulator;
   }, {} as FormationDisplayContentMap);
+};
 
 export type OnboardingStatus = "SUCCESS" | "ERROR";
 
@@ -155,11 +158,12 @@ export const profileFields: ProfileFields[] = [
   ...new Set([...allProfileFields, ...onboardingDataFields, ...businessUserDisplayFields]),
 ] as ProfileFields[];
 
-export const createProfileFieldErrorMap = (): ProfileFieldErrorMap =>
-  profileFields.reduce((p, c: ProfileFields) => {
+export const createProfileFieldErrorMap = (): ProfileFieldErrorMap => {
+  return profileFields.reduce((p, c: ProfileFields) => {
     p[c] = { invalid: false };
     return p;
   }, {} as ProfileFieldErrorMap);
+};
 
 export type RoadmapDisplayContent = {
   contentMd: string;

@@ -113,7 +113,9 @@ export const getCurrentUser = async (): Promise<BusinessUser> => {
 };
 
 const cognitoPayloadToBusinessUser = (cognitoPayload: CognitoIdPayload): BusinessUser => {
-  const myNJIdentityPayload = cognitoPayload.identities?.find((it) => it.providerName === "myNJ");
+  const myNJIdentityPayload = cognitoPayload.identities?.find((it) => {
+    return it.providerName === "myNJ";
+  });
   return {
     name: undefined,
     id: myNJIdentityPayload?.userId || cognitoPayload.sub,

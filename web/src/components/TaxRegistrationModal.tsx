@@ -30,16 +30,22 @@ export const TaxRegistrationModal = (props: Props): ReactElement => {
   const [fieldStates, setFieldStates] = useState<ProfileFieldErrorMap>(createProfileFieldErrorMap());
 
   useEffect(() => {
-    if (!userData) return;
+    if (!userData) {
+      return;
+    }
     setProfileData(userData.profileData);
   }, [userData]);
 
   const onValidation = (field: ProfileFields, invalid: boolean) => {
-    setFieldStates((prevFieldStates) => ({ ...prevFieldStates, [field]: { invalid } }));
+    setFieldStates((prevFieldStates) => {
+      return { ...prevFieldStates, [field]: { invalid } };
+    });
   };
 
   const onSubmit = async () => {
-    if (!userData || !updateQueue) return;
+    if (!userData || !updateQueue) {
+      return;
+    }
     const errorMap = {
       ...fieldStates,
       businessName: {
@@ -51,7 +57,13 @@ export const TaxRegistrationModal = (props: Props): ReactElement => {
       },
     };
     setFieldStates(errorMap);
-    if (Object.keys(errorMap).some((k) => errorMap[k as ProfileFields].invalid)) return;
+    if (
+      Object.keys(errorMap).some((k) => {
+        return errorMap[k as ProfileFields].invalid;
+      })
+    ) {
+      return;
+    }
 
     let { taxFilingData } = userData;
     if (userData.profileData.taxId !== profileData.taxId) {
@@ -64,12 +76,16 @@ export const TaxRegistrationModal = (props: Props): ReactElement => {
     props.close();
   };
 
-  const showBusinessField = () =>
-    userData?.profileData.businessName === "" &&
-    LookupLegalStructureById(userData?.profileData.legalStructureId).requiresPublicFiling;
+  const showBusinessField = () => {
+    return (
+      userData?.profileData.businessName === "" &&
+      LookupLegalStructureById(userData?.profileData.legalStructureId).requiresPublicFiling
+    );
+  };
 
-  const showTaxIdField = () =>
-    LookupLegalStructureById(userData?.profileData.legalStructureId).requiresPublicFiling;
+  const showTaxIdField = () => {
+    return LookupLegalStructureById(userData?.profileData.legalStructureId).requiresPublicFiling;
+  };
 
   return (
     <ProfileDataContext.Provider

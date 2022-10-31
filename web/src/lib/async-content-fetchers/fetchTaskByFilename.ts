@@ -6,9 +6,11 @@ export const fetchTaskByFilename = async (filename: string): Promise<Task> => {
 
   const dependencies = await fetchDependenciesFile();
   const unlockedByTaskLinks = await Promise.all(
-    (dependencies.find((dependency) => dependency.name === filename)?.dependencies || []).map(
-      fetchTaskLinkByFilename
-    )
+    (
+      dependencies.find((dependency) => {
+        return dependency.name === filename;
+      })?.dependencies || []
+    ).map(fetchTaskLinkByFilename)
   );
 
   return {

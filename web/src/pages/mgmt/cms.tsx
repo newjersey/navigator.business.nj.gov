@@ -28,16 +28,18 @@ import { useMountEffect } from "@/lib/utils/helpers";
 import dynamic from "next/dynamic";
 
 const CMS_CONFIG = {};
-const Loading = () => (
-  <div className="min-h-screen flex items-center justify-center">
-    <p className="text-gray-500 font-semibold text-xl">Loading...</p>
-  </div>
-);
+const Loading = () => {
+  return (
+    <div className="min-h-screen flex items-center justify-center">
+      <p className="text-gray-500 font-semibold text-xl">Loading...</p>
+    </div>
+  );
+};
 
 const CMS = dynamic(
   // @ts-expect-error: No type definition available
-  () =>
-    import("netlify-cms-app").then((CMS) => {
+  () => {
+    return import("netlify-cms-app").then((CMS) => {
       // eslint-disable-next-line @typescript-eslint/no-var-requires
       // @ts-expect-error: No type definition available
       CMS.init({ CMS_CONFIG });
@@ -111,7 +113,8 @@ const CMS = dynamic(
       // ----- Formation -----
       registerPreview(CMS, "business-formation-interim-success-page", FormationInterimSuccessPreview);
       registerPreview(CMS, "business-formation-success-page", FormationSuccessPreview);
-    }),
+    });
+  },
   { ssr: false, loading: Loading }
 );
 
@@ -140,11 +143,11 @@ const registerPreview = (
 };
 
 const Admin = () => {
-  useMountEffect(() =>
-    setInterval(() => {
+  useMountEffect(() => {
+    return setInterval(() => {
       window.location.reload();
-    }, 3600000)
-  );
+    }, 3600000);
+  });
 
   return (
     <>

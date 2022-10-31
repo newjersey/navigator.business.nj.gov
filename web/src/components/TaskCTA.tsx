@@ -23,7 +23,9 @@ export const TaskCTA = (props: Props): ReactElement => {
           noRightMargin
           onClick={() => {
             analytics.event.task_primary_call_to_action.click.open_external_website();
-            if (props.onClick) props.onClick();
+            if (props.onClick) {
+              props.onClick();
+            }
           }}
         >
           {props.text || Config.taskDefaults.defaultCallToActionText}

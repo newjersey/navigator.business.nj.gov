@@ -99,15 +99,17 @@ export type FormationTextField = Exclude<
   | "canMakeDistribution"
 >;
 
-export const createEmptyFormationAddress = (): FormationAddress => ({
-  name: "",
-  addressLine1: "",
-  addressLine2: "",
-  addressCity: "",
-  addressState: "",
-  addressZipCode: "",
-  signature: false,
-});
+export const createEmptyFormationAddress = (): FormationAddress => {
+  return {
+    name: "",
+    addressLine1: "",
+    addressLine2: "",
+    addressCity: "",
+    addressState: "",
+    addressZipCode: "",
+    signature: false,
+  };
+};
 
 export const createEmptyFormationFormData = (): FormationFormData => {
   return {

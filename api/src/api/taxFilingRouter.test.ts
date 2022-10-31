@@ -7,9 +7,11 @@ import { setupExpress } from "../libs/express";
 import { taxFilingRouterFactory } from "./taxFilingRouter";
 import { getSignedInUserId } from "./userRouter";
 
-jest.mock("./userRouter", () => ({
-  getSignedInUserId: jest.fn(),
-}));
+jest.mock("./userRouter", () => {
+  return {
+    getSignedInUserId: jest.fn(),
+  };
+});
 const fakeSignedInUserId = getSignedInUserId as jest.Mock;
 
 describe("taxFilingRouter", () => {
@@ -35,13 +37,17 @@ describe("taxFilingRouter", () => {
       onboarding: jest.fn(),
     };
     stubUserDataClient.get.mockResolvedValue(userData);
-    stubUserDataClient.put.mockImplementation((userData) => Promise.resolve(userData));
+    stubUserDataClient.put.mockImplementation((userData) => {
+      return Promise.resolve(userData);
+    });
     app = setupExpress(false);
     app.use(taxFilingRouterFactory(stubUserDataClient, apiTaxFilingClient));
   });
 
   afterAll(async () => {
-    await new Promise((resolve) => setTimeout(resolve, 500));
+    await new Promise((resolve) => {
+      return setTimeout(resolve, 500);
+    });
   });
 
   describe("/lookup", () => {

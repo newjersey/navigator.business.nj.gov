@@ -33,16 +33,26 @@ function mockMaterialUI(): typeof materialUi {
   };
 }
 
-jest.mock("@mui/material", () => mockMaterialUI());
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
+jest.mock("@mui/material", () => {
+  return mockMaterialUI();
+});
+jest.mock("@/lib/data-hooks/useUserData", () => {
+  return { useUserData: jest.fn() };
+});
+jest.mock("@/lib/data-hooks/useRoadmap", () => {
+  return { useRoadmap: jest.fn() };
+});
 jest.mock("@/lib/data-hooks/useDocuments");
-jest.mock("next/router", () => ({ useRouter: jest.fn() }));
-jest.mock("@/lib/api-client/apiClient", () => ({
-  postBusinessFormation: jest.fn(),
-  getCompletedFiling: jest.fn(),
-  searchBusinessName: jest.fn(),
-}));
+jest.mock("next/router", () => {
+  return { useRouter: jest.fn() };
+});
+jest.mock("@/lib/api-client/apiClient", () => {
+  return {
+    postBusinessFormation: jest.fn(),
+    getCompletedFiling: jest.fn(),
+    searchBusinessName: jest.fn(),
+  };
+});
 
 describe("<BusinessFormationPaginator />", () => {
   let initialUserData: UserData;
@@ -446,7 +456,9 @@ describe("<BusinessFormationPaginator />", () => {
         await page.fillAndSubmitBusinessNameStep();
         await page.stepperClickToReviewStep();
         await page.clickSubmit();
-        await waitFor(() => expect(mockPush).toHaveBeenCalledWith("www.example.com"));
+        await waitFor(() => {
+          return expect(mockPush).toHaveBeenCalledWith("www.example.com");
+        });
       });
 
       describe("on known API error (registered agent)", () => {

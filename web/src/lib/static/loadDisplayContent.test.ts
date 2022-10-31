@@ -3,9 +3,13 @@ import { loadRoadmapDisplayContent, loadTasksDisplayContent } from "./loadDispla
 
 jest.mock("fs");
 
-jest.mock("process", () => ({
-  cwd: () => "/test",
-}));
+jest.mock("process", () => {
+  return {
+    cwd: () => {
+      return "/test";
+    },
+  };
+});
 
 describe("loadDisplayContent", () => {
   let mockedFs: jest.Mocked<typeof fs>;

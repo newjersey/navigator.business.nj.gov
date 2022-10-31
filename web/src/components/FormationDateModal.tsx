@@ -23,7 +23,9 @@ export const FormationDateModal = (props: Props): ReactElement => {
   const [fieldStates, setFieldStates] = useState<ProfileFieldErrorMap>(createProfileFieldErrorMap());
 
   useEffect(() => {
-    if (!userData) return;
+    if (!userData) {
+      return;
+    }
     setProfileData(userData.profileData);
   }, [userData]);
 
@@ -32,7 +34,9 @@ export const FormationDateModal = (props: Props): ReactElement => {
   };
 
   const saveDateOfFormation = (): void => {
-    if (!userData || !updateQueue) return;
+    if (!userData || !updateQueue) {
+      return;
+    }
     if (!profileData.dateOfFormation || fieldStates.dateOfFormation.invalid) {
       onValidation("dateOfFormation", true);
       return;

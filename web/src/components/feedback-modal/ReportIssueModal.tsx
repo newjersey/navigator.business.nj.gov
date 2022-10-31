@@ -12,10 +12,12 @@ import { useRouter } from "next/router";
 import { ReactElement, useEffect, useState } from "react";
 import UAParser from "ua-parser-js";
 
-const createReportIssueErrorMap = () => ({
-  issueSummary: { invalid: false },
-  issueDetails: { invalid: false },
-});
+const createReportIssueErrorMap = () => {
+  return {
+    issueSummary: { invalid: false },
+    issueDetails: { invalid: false },
+  };
+};
 
 type Props = {
   onClose: () => void;
@@ -51,7 +53,9 @@ export const ReportIssueModal = ({ onClose, isOpen, setCurrentFeedback }: Props)
   };
 
   const handleReportIssueSubmission = () => {
-    if (!userData) return;
+    if (!userData) {
+      return;
+    }
 
     const parsedUserAgent = new UAParser().getResult();
     const operatingSystem = parsedUserAgent.os.name

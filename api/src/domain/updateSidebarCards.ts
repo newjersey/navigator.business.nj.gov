@@ -6,12 +6,16 @@ export const updateSidebarCards: UpdateSidebarCards = (userData: UserData): User
   const operatingPhase = userData.profileData.operatingPhase;
 
   const showCard = (id: string): void => {
-    const allCardsExceptDesired = cards.filter((cardId: string) => cardId !== id);
+    const allCardsExceptDesired = cards.filter((cardId: string) => {
+      return cardId !== id;
+    });
     cards = [...allCardsExceptDesired, id];
   };
 
   const hideCard = (id: string): void => {
-    const allCardsExceptIdToHide = cards.filter((cardId: string) => cardId !== id);
+    const allCardsExceptIdToHide = cards.filter((cardId: string) => {
+      return cardId !== id;
+    });
     cards = [...allCardsExceptIdToHide];
   };
 

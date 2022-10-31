@@ -36,16 +36,26 @@ function mockMaterialUI(): typeof materialUi {
 
 const Config = getMergedConfig();
 
-jest.mock("@mui/material", () => mockMaterialUI());
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
+jest.mock("@mui/material", () => {
+  return mockMaterialUI();
+});
+jest.mock("@/lib/data-hooks/useUserData", () => {
+  return { useUserData: jest.fn() };
+});
+jest.mock("@/lib/data-hooks/useRoadmap", () => {
+  return { useRoadmap: jest.fn() };
+});
 jest.mock("@/lib/data-hooks/useDocuments");
-jest.mock("next/router", () => ({ useRouter: jest.fn() }));
-jest.mock("@/lib/api-client/apiClient", () => ({
-  postBusinessFormation: jest.fn(),
-  getCompletedFiling: jest.fn(),
-  searchBusinessName: jest.fn(),
-}));
+jest.mock("next/router", () => {
+  return { useRouter: jest.fn() };
+});
+jest.mock("@/lib/api-client/apiClient", () => {
+  return {
+    postBusinessFormation: jest.fn(),
+    getCompletedFiling: jest.fn(),
+    searchBusinessName: jest.fn(),
+  };
+});
 const mockApi = api as jest.Mocked<typeof api>;
 
 describe("<BusinessFormation />", () => {
@@ -193,11 +203,11 @@ describe("<BusinessFormation />", () => {
         await act(async () => {
           preparePage({ formationData }, displayContent, undefined, task);
         });
-        await waitFor(() =>
-          expect(mockPush).toHaveBeenCalledWith({ pathname: "/tasks/some-formation-url" }, undefined, {
+        await waitFor(() => {
+          return expect(mockPush).toHaveBeenCalledWith({ pathname: "/tasks/some-formation-url" }, undefined, {
             shallow: true,
-          })
-        );
+          });
+        });
       });
     });
 
@@ -703,9 +713,9 @@ describe("<BusinessFormation />", () => {
       screen.queryByText(
         `${
           displayContent[
-            FormationLegalTypes.filter(
-              (id: FormationLegalType) => id != profileData.legalStructureId
-            ).pop() as FormationLegalType
+            FormationLegalTypes.filter((id: FormationLegalType) => {
+              return id != profileData.legalStructureId;
+            }).pop() as FormationLegalType
           ].agentNumberOrManual.contentMd
         }`
       )

@@ -29,7 +29,9 @@ export const NexusSearchBusinessNameTask = (props: Props): ReactElement => {
     nameAvailability: NameAvailability,
     isInitialSubmit: boolean
   ): Promise<void> => {
-    if (!nameAvailability || !userData || isInitialSubmit) return;
+    if (!nameAvailability || !userData || isInitialSubmit) {
+      return;
+    }
     let newUserData;
     if (nameAvailability.status === "AVAILABLE") {
       newUserData = {

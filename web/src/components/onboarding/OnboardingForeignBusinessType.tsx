@@ -28,7 +28,9 @@ export const OnboardingForeignBusinessType = (): ReactElement => {
     } else {
       ids = event.target.checked
         ? [...ids, event.target.value]
-        : ids.filter((it) => it !== event.target.value);
+        : ids.filter((it) => {
+            return it !== event.target.value;
+          });
     }
 
     const foreignBusinessType = determineForeignBusinessType(ids);
@@ -44,36 +46,38 @@ export const OnboardingForeignBusinessType = (): ReactElement => {
     <>
       <div className="margin-top-3">
         <FormControl variant="outlined" fullWidth aria-label="Out of state business">
-          {allForeignBusinessTypeIdsOrdered.map((id: string) => (
-            <FormControlLabel
-              key={id}
-              style={{ alignItems: "flex-start" }}
-              className="padding-y-1"
-              control={
-                <div style={{ display: "table-cell", width: "42px" }}>
-                  <Checkbox
-                    name="foreign-business-type"
-                    value={id}
-                    style={{ paddingTop: 0, paddingBottom: 0 }}
-                    onChange={handleChange}
-                    checked={state.profileData.foreignBusinessTypeIds.includes(id)}
-                  />
-                </div>
-              }
-              label={
-                <Content>
-                  {
-                    (
-                      Config.profileDefaults.FOREIGN.foreignBusinessTypeIds.optionContent as Record<
-                        string,
-                        string
-                      >
-                    )[id]
-                  }
-                </Content>
-              }
-            />
-          ))}
+          {allForeignBusinessTypeIdsOrdered.map((id: string) => {
+            return (
+              <FormControlLabel
+                key={id}
+                style={{ alignItems: "flex-start" }}
+                className="padding-y-1"
+                control={
+                  <div style={{ display: "table-cell", width: "42px" }}>
+                    <Checkbox
+                      name="foreign-business-type"
+                      value={id}
+                      style={{ paddingTop: 0, paddingBottom: 0 }}
+                      onChange={handleChange}
+                      checked={state.profileData.foreignBusinessTypeIds.includes(id)}
+                    />
+                  </div>
+                }
+                label={
+                  <Content>
+                    {
+                      (
+                        Config.profileDefaults.FOREIGN.foreignBusinessTypeIds.optionContent as Record<
+                          string,
+                          string
+                        >
+                      )[id]
+                    }
+                  </Content>
+                }
+              />
+            );
+          })}
         </FormControl>
       </div>
 

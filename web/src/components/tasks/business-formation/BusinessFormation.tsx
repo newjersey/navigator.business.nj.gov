@@ -78,13 +78,16 @@ export const BusinessFormation = (props: Props): ReactElement => {
     }
   };
 
-  const getDate = (date?: string): string =>
-    !date || parseDateWithFormat(date, "YYYY-MM-DD").isBefore(getCurrentDate())
+  const getDate = (date?: string): string => {
+    return !date || parseDateWithFormat(date, "YYYY-MM-DD").isBefore(getCurrentDate())
       ? getCurrentDateFormatted("YYYY-MM-DD")
       : date;
+  };
 
   useMountEffectWhenDefined(() => {
-    if (!userData) return;
+    if (!userData) {
+      return;
+    }
     const splitName = splitFullName(userData.user.name);
     setFormationFormData({
       ...userData.formationData.formationFormData,
@@ -98,7 +101,9 @@ export const BusinessFormation = (props: Props): ReactElement => {
   }, userData);
 
   useEffect(() => {
-    if (!router.isReady) return;
+    if (!router.isReady) {
+      return;
+    }
     if (checkQueryValue(router, QUERIES.completeFiling, "false")) {
       setStepIndex(LookupStepIndexByName("Review"));
       router.replace({ pathname: `/tasks/${props.task.urlSlug}` }, undefined, { shallow: true });
@@ -107,7 +112,9 @@ export const BusinessFormation = (props: Props): ReactElement => {
 
   useEffect(() => {
     const shouldFetchCompletedFiling = (): boolean => {
-      if (!userData || getCompletedFilingApiCallOccurred.current) return false;
+      if (!userData || getCompletedFilingApiCallOccurred.current) {
+        return false;
+      }
       const completeFilingQueryParamExists = checkQueryValue(router, QUERIES.completeFiling, "true");
       const completedPayment = userData.formationData.completedFilingPayment;
       const noCompletedFilingExists = !userData.formationData.getFilingResponse?.success;
@@ -122,7 +129,9 @@ export const BusinessFormation = (props: Props): ReactElement => {
     };
 
     (async function fetchCompletedFiling() {
-      if (!router.isReady || !userData) return;
+      if (!router.isReady || !userData) {
+        return;
+      }
       if (shouldFetchCompletedFiling()) {
         setIsLoadingGetFiling(true);
         getCompletedFilingApiCallOccurred.current = true;
@@ -143,14 +152,15 @@ export const BusinessFormation = (props: Props): ReactElement => {
     })();
   }, [router.isReady, update, router, props.task.urlSlug, userData]);
 
-  const legalStructureId = useMemo(
-    () => (userData?.profileData.legalStructureId ?? defaultFormationLegalType) as FormationLegalType,
-    [userData?.profileData.legalStructureId]
-  );
+  const legalStructureId = useMemo(() => {
+    return (userData?.profileData.legalStructureId ?? defaultFormationLegalType) as FormationLegalType;
+  }, [userData?.profileData.legalStructureId]);
 
   const setFieldInteracted = (field: FormationFields, config?: { setToUninteracted: boolean }) => {
     setInteractedFields((prevState) => {
-      const prevStateFieldRemoved = prevState.filter((it) => it !== field);
+      const prevStateFieldRemoved = prevState.filter((it) => {
+        return it !== field;
+      });
       if (config?.setToUninteracted) {
         return [...prevStateFieldRemoved];
       }

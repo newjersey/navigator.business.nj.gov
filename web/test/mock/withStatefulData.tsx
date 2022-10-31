@@ -13,24 +13,25 @@ import { createContext, ReactElement, ReactNode, useEffect, useState } from "rea
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type GenericData = Record<string, any>;
 
-export const statefulDataHelpers = (spy: jest.Mock) => ({
-  getLastCalledWithConfig: (): { local?: boolean } => {
-    return getLastCalledWith(spy)[1] as { local?: boolean };
-  },
-  currentData: (): GenericData => {
-    return getLastCalledWith(spy)[0] as GenericData;
-  },
-  dataWasNotUpdated: (): boolean => {
-    return getLastCalledWith(spy) === undefined;
-  },
-  dataUpdatedNTimes: (): number => {
-    return getNumberOfMockCalls(spy);
-  },
-});
+export const statefulDataHelpers = (spy: jest.Mock) => {
+  return {
+    getLastCalledWithConfig: (): { local?: boolean } => {
+      return getLastCalledWith(spy)[1] as { local?: boolean };
+    },
+    currentData: (): GenericData => {
+      return getLastCalledWith(spy)[0] as GenericData;
+    },
+    dataWasNotUpdated: (): boolean => {
+      return getLastCalledWith(spy) === undefined;
+    },
+    dataUpdatedNTimes: (): number => {
+      return getNumberOfMockCalls(spy);
+    },
+  };
+};
 
-export const WithStatefulData =
-  (spy: jest.Mock) =>
-  ({
+export const WithStatefulData = (spy: jest.Mock) => {
+  return ({
     children,
     initialData,
   }: {
@@ -61,6 +62,7 @@ export const WithStatefulData =
       </UpdateQueueContext.Provider>
     );
   };
+};
 
 interface StatefulDataContextType {
   genericData: GenericData | undefined;
@@ -69,5 +71,7 @@ interface StatefulDataContextType {
 
 export const StatefulDataContext = createContext<StatefulDataContextType>({
   genericData: undefined,
-  update: () => Promise.resolve(),
+  update: () => {
+    return Promise.resolve();
+  },
 });

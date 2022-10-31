@@ -6,7 +6,9 @@ import { LicenseEntity } from "./license";
 
 export type DateObject = Dayjs;
 
-export const getCurrentDate = (): Dayjs => dayjs();
+export const getCurrentDate = (): Dayjs => {
+  return dayjs();
+};
 
 export const getCurrentDateInNewJersey = (): Dayjs => {
   dayjs.extend(utc);
@@ -14,13 +16,21 @@ export const getCurrentDateInNewJersey = (): Dayjs => {
   return dayjs().tz("America/New_York");
 };
 
-export const getCurrentDateFormatted = (format: string): string => dayjs().format(format);
+export const getCurrentDateFormatted = (format: string): string => {
+  return dayjs().format(format);
+};
 
-export const getCurrentDateISOString = (): string => dayjs().toISOString();
+export const getCurrentDateISOString = (): string => {
+  return dayjs().toISOString();
+};
 
-export const parseDate = (date: string | number | undefined): Dayjs => dayjs(date);
+export const parseDate = (date: string | number | undefined): Dayjs => {
+  return dayjs(date);
+};
 
-export const parseDateWithFormat = (date: string, format: string): Dayjs => dayjs(date, format);
+export const parseDateWithFormat = (date: string, format: string): Dayjs => {
+  return dayjs(date, format);
+};
 
 export const getLicenseDate = (entity: LicenseEntity): dayjs.Dayjs => {
   if (entity.issueDate) {

@@ -12,10 +12,11 @@ import { FormationAddress, FormationFields } from "@businessnjgovnavigator/share
 import { IconButton, useMediaQuery } from "@mui/material";
 import React, { ChangeEvent, ReactElement, useState } from "react";
 
-const formatAddress = (address: FormationAddress) =>
-  `${address.addressLine1}, ${address.addressLine2 ? `${address.addressLine2},` : ""} ${
+const formatAddress = (address: FormationAddress) => {
+  return `${address.addressLine1}, ${address.addressLine2 ? `${address.addressLine2},` : ""} ${
     address.addressCity
   }, ${address.addressState} ${address.addressZipCode}`;
+};
 
 interface DisplayContent {
   title: string;
@@ -85,8 +86,12 @@ export const Addresses = (props: Props): ReactElement => {
     );
   };
 
-  const deleteAddress = (index: number) =>
-    props.setData([...[...props.addressData].slice(0, index), ...[...props.addressData].slice(index + 1)]);
+  const deleteAddress = (index: number) => {
+    return props.setData([
+      ...[...props.addressData].slice(0, index),
+      ...[...props.addressData].slice(index + 1),
+    ]);
+  };
 
   const renderDesktopTable = (
     <table className={`addresses margin-top-2 margin-bottom-3`}>
@@ -94,12 +99,16 @@ export const Addresses = (props: Props): ReactElement => {
         <tr>
           {Config.businessFormationDefaults.addressesTableColumn
             .split(",")
-            .filter((_, index) => (props.needSignature ? true : index != 2))
-            .map((value: string) => (
-              <th className="margin-bottom-2" key={value.toLowerCase()}>
-                {value}
-              </th>
-            ))}
+            .filter((_, index) => {
+              return props.needSignature ? true : index != 2;
+            })
+            .map((value: string) => {
+              return (
+                <th className="margin-bottom-2" key={value.toLowerCase()}>
+                  {value}
+                </th>
+              );
+            })}
         </tr>
       </thead>
       <tbody>
@@ -113,7 +122,9 @@ export const Addresses = (props: Props): ReactElement => {
                   <td className="padding-y-0">
                     {" "}
                     {renderSignatureColumn({
-                      onChange: (event) => handleSignerCheckbox(event, index),
+                      onChange: (event) => {
+                        return handleSignerCheckbox(event, index);
+                      },
                       checked: it.signature,
                       fieldName: props.fieldName,
                       index,
@@ -175,63 +186,67 @@ export const Addresses = (props: Props): ReactElement => {
           className={`addresses-mobile margin-y-2`}
         >
           <tbody>
-            {props.addressData.map((it, index) => (
-              <tr key={index}>
-                <td className="flex-column">
-                  <div className="flex-column">
-                    <div className="margin-bottom-2">{it.name}</div>
-                    <div>{it.addressLine1}</div>
-                    <div>{it.addressLine2}</div>
-                    <div className="margin-bottom-2">
-                      {it.addressCity}, {it.addressState} {it.addressZipCode}
+            {props.addressData.map((it, index) => {
+              return (
+                <tr key={index}>
+                  <td className="flex-column">
+                    <div className="flex-column">
+                      <div className="margin-bottom-2">{it.name}</div>
+                      <div>{it.addressLine1}</div>
+                      <div>{it.addressLine2}</div>
+                      <div className="margin-bottom-2">
+                        {it.addressCity}, {it.addressState} {it.addressZipCode}
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex flex-row fac fjb">
-                    <span className="flex fac">
-                      {props.needSignature ? (
-                        <>
-                          {" "}
-                          <Content>{`${Config.businessFormationDefaults.signatureColumnLabel}*`}</Content>
-                          <div>
-                            {renderSignatureColumn({
-                              onChange: (event) => handleSignerCheckbox(event, index),
-                              checked: it.signature,
-                              fieldName: "signers",
-                              index,
-                            })}{" "}
-                          </div>
-                        </>
-                      ) : (
-                        <></>
-                      )}
-                    </span>
-                    <span>
-                      <span className="vl border-base-light padding-y-05 padding-right-2 margin-right-2">
+                    <div className="flex flex-row fac fjb">
+                      <span className="flex fac">
+                        {props.needSignature ? (
+                          <>
+                            {" "}
+                            <Content>{`${Config.businessFormationDefaults.signatureColumnLabel}*`}</Content>
+                            <div>
+                              {renderSignatureColumn({
+                                onChange: (event) => {
+                                  return handleSignerCheckbox(event, index);
+                                },
+                                checked: it.signature,
+                                fieldName: "signers",
+                                index,
+                              })}{" "}
+                            </div>
+                          </>
+                        ) : (
+                          <></>
+                        )}
+                      </span>
+                      <span>
+                        <span className="vl border-base-light padding-y-05 padding-right-2 margin-right-2">
+                          <IconButton
+                            aria-label="edit"
+                            onClick={() => {
+                              setEditIndex(index);
+                              setModalOpen(true);
+                            }}
+                            className="usa-button usa-button--unstyled width-auto"
+                          >
+                            <Icon className="usa-icon--size-3">edit</Icon>
+                          </IconButton>
+                        </span>
                         <IconButton
-                          aria-label="edit"
+                          aria-label="delete"
                           onClick={() => {
-                            setEditIndex(index);
-                            setModalOpen(true);
+                            deleteAddress(index);
                           }}
                           className="usa-button usa-button--unstyled width-auto"
                         >
-                          <Icon className="usa-icon--size-3">edit</Icon>
+                          <Icon className="usa-icon--size-3">delete</Icon>
                         </IconButton>
                       </span>
-                      <IconButton
-                        aria-label="delete"
-                        onClick={() => {
-                          deleteAddress(index);
-                        }}
-                        className="usa-button usa-button--unstyled width-auto"
-                      >
-                        <Icon className="usa-icon--size-3">delete</Icon>
-                      </IconButton>
-                    </span>
-                  </div>
-                </td>
-              </tr>
-            ))}
+                    </div>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </>
@@ -245,7 +260,9 @@ export const Addresses = (props: Props): ReactElement => {
         <SnackbarAlert
           variant="success"
           isOpen={alert !== undefined}
-          close={() => setAlert(undefined)}
+          close={() => {
+            return setAlert(undefined);
+          }}
           dataTestid="snackbar-alert-success"
           heading={props.displayContent.alertHeader}
         >
@@ -255,9 +272,9 @@ export const Addresses = (props: Props): ReactElement => {
       <div className={`margin-bottom-3 ${styles.membersTable}`} data-testid={`addresses-${props.fieldName}`}>
         <Content
           overrides={{
-            h3: ({ children }: { children: string[] }): ReactElement => (
-              <h3 style={{ display: "inline" }}>{children}</h3>
-            ),
+            h3: ({ children }: { children: string[] }): ReactElement => {
+              return <h3 style={{ display: "inline" }}>{children}</h3>;
+            },
           }}
         >
           {props.displayContent.contentMd}
@@ -298,13 +315,19 @@ export const Addresses = (props: Props): ReactElement => {
         open={modalOpen}
         key={`${editIndex}-${props.fieldName}`}
         fieldName={props.fieldName}
-        handleClose={() => setModalOpen(false)}
-        setData={(addressData) => props.setData(addressData)}
+        handleClose={() => {
+          return setModalOpen(false);
+        }}
+        setData={(addressData) => {
+          return props.setData(addressData);
+        }}
         index={editIndex}
         defaultAddress={props.defaultAddress}
         displayContent={{ ...props.displayContent }}
         addressData={props.addressData}
-        onSave={() => setAlert(true)}
+        onSave={() => {
+          return setAlert(true);
+        }}
       />
     </>
   );

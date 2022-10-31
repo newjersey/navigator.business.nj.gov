@@ -10,7 +10,9 @@ export const usePreviewConfig = (props: PreviewProps) => {
   const dataString = JSON.stringify(data);
 
   useEffect(() => {
-    setConfig((prevConfig) => JSON.parse(JSON.stringify(merge(prevConfig, data))));
+    setConfig((prevConfig) => {
+      return JSON.parse(JSON.stringify(merge(prevConfig, data)));
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataString]);
 

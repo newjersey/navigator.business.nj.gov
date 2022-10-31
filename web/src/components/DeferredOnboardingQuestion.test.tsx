@@ -15,11 +15,21 @@ import {
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
-jest.mock("@/lib/utils/analytics-helpers", () => ({ setAnalyticsDimensions: jest.fn() }));
-jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("next/router", () => ({ useRouter: jest.fn() }));
+jest.mock("@/lib/utils/analytics-helpers", () => {
+  return { setAnalyticsDimensions: jest.fn() };
+});
+jest.mock("@/lib/roadmap/buildUserRoadmap", () => {
+  return { buildUserRoadmap: jest.fn() };
+});
+jest.mock("@/lib/data-hooks/useUserData", () => {
+  return { useUserData: jest.fn() };
+});
+jest.mock("@/lib/data-hooks/useRoadmap", () => {
+  return { useRoadmap: jest.fn() };
+});
+jest.mock("next/router", () => {
+  return { useRouter: jest.fn() };
+});
 
 const mockAnalyticsHelpers = analyticsHelpers as jest.Mocked<typeof analyticsHelpers>;
 const mockBuildUserRoadmap = buildUserRoadmap as jest.Mocked<typeof buildUserRoadmap>;
@@ -64,12 +74,12 @@ describe("<DeferredOnboardingQuestion />", () => {
     renderComponent(generateUserData({ profileData }));
     fireEvent.click(screen.getByTestId("home-based-business-radio-true"));
     fireEvent.click(screen.getByText(Config.dashboardDefaults.deferredOnboardingSaveButtonText));
-    await waitFor(() =>
-      expect(mockAnalyticsHelpers.setAnalyticsDimensions).toHaveBeenCalledWith({
+    await waitFor(() => {
+      return expect(mockAnalyticsHelpers.setAnalyticsDimensions).toHaveBeenCalledWith({
         ...profileData,
         homeBasedBusiness: true,
-      })
-    );
+      });
+    });
   });
 
   it("builds and sets new roadmap", async () => {
@@ -80,12 +90,12 @@ describe("<DeferredOnboardingQuestion />", () => {
 
     const returnedRoadmap = generateRoadmap({});
     mockBuildUserRoadmap.buildUserRoadmap.mockResolvedValue(returnedRoadmap);
-    await waitFor(() =>
-      expect(mockBuildUserRoadmap.buildUserRoadmap).toHaveBeenCalledWith({
+    await waitFor(() => {
+      return expect(mockBuildUserRoadmap.buildUserRoadmap).toHaveBeenCalledWith({
         ...profileData,
         homeBasedBusiness: true,
-      })
-    );
+      });
+    });
     expect(setRoadmap).toHaveBeenCalledWith(returnedRoadmap);
   });
 
@@ -93,11 +103,15 @@ describe("<DeferredOnboardingQuestion />", () => {
     renderComponent();
     fireEvent.click(screen.getByTestId("home-based-business-radio-true"));
     fireEvent.click(screen.getByText(Config.dashboardDefaults.deferredOnboardingSaveButtonText));
-    await waitFor(() =>
-      expect(mockPush).toHaveBeenCalledWith({ query: { deferredQuestionAnswered: "true" } }, undefined, {
-        shallow: true,
-      })
-    );
+    await waitFor(() => {
+      return expect(mockPush).toHaveBeenCalledWith(
+        { query: { deferredQuestionAnswered: "true" } },
+        undefined,
+        {
+          shallow: true,
+        }
+      );
+    });
   });
 
   it("does not update if no answer provided", () => {

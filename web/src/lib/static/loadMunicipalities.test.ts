@@ -4,9 +4,13 @@ import { loadAllMunicipalities } from "./loadMunicipalities";
 
 jest.mock("fs");
 
-jest.mock("process", () => ({
-  cwd: () => "/test",
-}));
+jest.mock("process", () => {
+  return {
+    cwd: () => {
+      return "/test";
+    },
+  };
+});
 
 describe("loadMunicipalities", () => {
   let mockedFs: jest.Mocked<typeof fs>;

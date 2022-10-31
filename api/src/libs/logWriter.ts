@@ -50,10 +50,10 @@ export const LogWriter = (groupName: string, logStream: string, region?: string)
   };
 
   const FlushLog = async (): Promise<void> => {
-    const winstonCloudWatchTransport = logger.transports.find(
+    const winstonCloudWatchTransport = logger.transports.find((t) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (t) => (t as unknown as any).name === `NavigatorCloudWatch-WinstonLogging${groupName}${logStream}`
-    );
+      return (t as unknown as any).name === `NavigatorCloudWatch-WinstonLogging${groupName}${logStream}`;
+    });
     await new Promise((resolve) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (winstonCloudWatchTransport as unknown as any).kthxbye(resolve);

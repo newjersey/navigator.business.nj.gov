@@ -48,19 +48,25 @@ export const SignUpModal = (): ReactElement => {
     <Dialog
       open={registrationModalIsVisible}
       maxWidth="xs"
-      onClose={() => setRegistrationModalIsVisible(false)}
+      onClose={() => {
+        return setRegistrationModalIsVisible(false);
+      }}
       data-testid={"self-reg-modal"}
     >
       <DialogTitle sx={{ p: 5, paddingRight: 10 }}>
         <Content>{Config.navigationDefaults.guestModalTitle}</Content>
         <IconButton
           aria-label="close"
-          onClick={() => setRegistrationModalIsVisible(false)}
+          onClick={() => {
+            return setRegistrationModalIsVisible(false);
+          }}
           sx={{
             position: "absolute",
             right: 10,
             top: 12,
-            color: (theme) => theme.palette.grey[500],
+            color: (theme) => {
+              return theme.palette.grey[500];
+            },
           }}
         >
           <Icon className="usa-icon--size-4">close</Icon>

@@ -19,11 +19,14 @@ import { useMountEffectWhenDefined } from "../lib/utils/helpers";
 import { Button } from "./njwds-extended/Button";
 import { TaxFilingLookupModal } from "./TaxFilingLookupModal";
 
-export const shouldRenderFilingsCalendarTaxAccess = (userData?: UserData) =>
-  userData &&
-  LookupOperatingPhaseById(userData.profileData.operatingPhase).displayTaxAccessButton &&
-  LookupLegalStructureById(userData.profileData.legalStructureId).requiresPublicFiling &&
-  process.env.FEATURE_TAX_CALENDAR == "true";
+export const shouldRenderFilingsCalendarTaxAccess = (userData?: UserData) => {
+  return (
+    userData &&
+    LookupOperatingPhaseById(userData.profileData.operatingPhase).displayTaxAccessButton &&
+    LookupLegalStructureById(userData.profileData.legalStructureId).requiresPublicFiling &&
+    process.env.FEATURE_TAX_CALENDAR == "true"
+  );
+};
 
 export const FilingsCalendarTaxAccess = (): ReactElement => {
   const { userData, update } = useUserData();
@@ -36,7 +39,9 @@ export const FilingsCalendarTaxAccess = (): ReactElement => {
   const prevModalIsVisible = useRef<boolean | undefined>(undefined);
 
   useMountEffectWhenDefined(() => {
-    if (!userData) return;
+    if (!userData) {
+      return;
+    }
     (async () => {
       if (userData.taxFilingData.registered) {
         const updatedUserData = await postTaxRegistrationLookup({
@@ -49,7 +54,9 @@ export const FilingsCalendarTaxAccess = (): ReactElement => {
   }, userData);
 
   useEffect(() => {
-    if (!router.isReady) return;
+    if (!router.isReady) {
+      return;
+    }
     if (checkQueryValue(router, QUERIES.openTaxFilingsModal, "true")) {
       router.replace({ pathname: ROUTES.dashboard }, undefined, { shallow: true });
       setShowTaxModal(true);
@@ -57,7 +64,9 @@ export const FilingsCalendarTaxAccess = (): ReactElement => {
   }, [router, router.isReady]);
 
   useEffect(() => {
-    if (!userData) return;
+    if (!userData) {
+      return;
+    }
     if (registrationModalIsVisible === false && prevModalIsVisible.current === true) {
       update({ ...userData, preferences: { ...userData.preferences, returnToLink: "" } });
     }
@@ -66,7 +75,9 @@ export const FilingsCalendarTaxAccess = (): ReactElement => {
   }, [registrationModalIsVisible]);
 
   const openRegisterOrTaxModal = () => {
-    if (!userData) return;
+    if (!userData) {
+      return;
+    }
     if (isAuthenticated === IsAuthenticated.FALSE) {
       update({
         ...userData,
@@ -88,7 +99,9 @@ export const FilingsCalendarTaxAccess = (): ReactElement => {
       <SnackbarAlert
         variant={"success"}
         isOpen={showAlert}
-        close={() => setShowAlert(false)}
+        close={() => {
+          return setShowAlert(false);
+        }}
         heading={Config.taxCalendar.SnackbarSuccessHeader}
         dataTestid={"tax-success"}
       >
@@ -106,10 +119,14 @@ export const FilingsCalendarTaxAccess = (): ReactElement => {
           <>
             <TaxFilingLookupModal
               isOpen={showTaxModal}
-              close={() => setShowTaxModal(false)}
+              close={() => {
+                return setShowTaxModal(false);
+              }}
               onSuccess={async () => {
                 setShowTaxModal(false);
-                await new Promise((resolve) => setTimeout(resolve, 500));
+                await new Promise((resolve) => {
+                  return setTimeout(resolve, 500);
+                });
                 setShowAlert(true);
               }}
             />

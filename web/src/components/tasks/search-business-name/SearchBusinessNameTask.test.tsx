@@ -10,11 +10,17 @@ import {
 } from "@/test/mock/withStatefulUserData";
 import { fireEvent, render, screen } from "@testing-library/react";
 
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("@/lib/api-client/apiClient", () => ({
-  searchBusinessName: jest.fn(),
-}));
+jest.mock("@/lib/data-hooks/useUserData", () => {
+  return { useUserData: jest.fn() };
+});
+jest.mock("@/lib/data-hooks/useRoadmap", () => {
+  return { useRoadmap: jest.fn() };
+});
+jest.mock("@/lib/api-client/apiClient", () => {
+  return {
+    searchBusinessName: jest.fn(),
+  };
+});
 
 describe("<SearchBusinessNameTask />", () => {
   beforeEach(() => {
@@ -70,7 +76,13 @@ describe("<SearchBusinessNameTask />", () => {
     expect(screen.getByText("Pizzapizza")).toBeInTheDocument();
   });
 
-  const updateNameButton = () => screen.getByTestId("update-name");
-  const updateNameButtonExists = () => screen.queryByTestId("update-name") !== null;
-  const nameHasBeenUpdatedTextExists = () => screen.queryByTestId("name-has-been-updated") !== null;
+  const updateNameButton = () => {
+    return screen.getByTestId("update-name");
+  };
+  const updateNameButtonExists = () => {
+    return screen.queryByTestId("update-name") !== null;
+  };
+  const nameHasBeenUpdatedTextExists = () => {
+    return screen.queryByTestId("name-has-been-updated") !== null;
+  };
 });

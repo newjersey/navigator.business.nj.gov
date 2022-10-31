@@ -15,10 +15,18 @@ function mockMaterialUI(): typeof materialUi {
   };
 }
 
-jest.mock("@mui/material", () => mockMaterialUI());
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("next/router", () => ({ useRouter: jest.fn() }));
+jest.mock("@mui/material", () => {
+  return mockMaterialUI();
+});
+jest.mock("@/lib/data-hooks/useUserData", () => {
+  return { useUserData: jest.fn() };
+});
+jest.mock("@/lib/data-hooks/useRoadmap", () => {
+  return { useRoadmap: jest.fn() };
+});
+jest.mock("next/router", () => {
+  return { useRouter: jest.fn() };
+});
 
 describe("<TaskSidebarPageLayout />", () => {
   beforeEach(() => {
@@ -28,7 +36,9 @@ describe("<TaskSidebarPageLayout />", () => {
     useMockRoadmap({
       steps: [generateStep({ section: "PLAN" }), generateStep({ section: "START" })],
     });
-    (useMediaQuery as jest.Mock).mockImplementation(() => true); // set large screen
+    (useMediaQuery as jest.Mock).mockImplementation(() => {
+      return true;
+    }); // set large screen
   });
 
   it("shows only plan/start sections when there are no operateReferences", () => {

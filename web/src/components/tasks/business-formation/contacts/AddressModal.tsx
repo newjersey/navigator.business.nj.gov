@@ -43,17 +43,19 @@ export const AddressModal = (props: Props): ReactElement => {
   type ErrorFields = typeof requiredFields[number];
   type MemberErrorMap = Record<ErrorFields, FieldStatus>;
 
-  const createMemberErrorMap = (invalid?: boolean): MemberErrorMap =>
-    requiredFields.reduce(
-      (prev: MemberErrorMap, curr: ErrorFields) => ({ ...prev, [curr]: { invalid } }),
-      {} as MemberErrorMap
-    );
+  const createMemberErrorMap = (invalid?: boolean): MemberErrorMap => {
+    return requiredFields.reduce((prev: MemberErrorMap, curr: ErrorFields) => {
+      return { ...prev, [curr]: { invalid } };
+    }, {} as MemberErrorMap);
+  };
 
   const [addressErrorMap, setMemberErrorMap] = useState<MemberErrorMap>(createMemberErrorMap());
 
   useEffect(
     function setCheckboxFalseWhenAddressChanged() {
-      if (!props.defaultAddress) return;
+      if (!props.defaultAddress) {
+        return;
+      }
       if (
         props.defaultAddress.addressLine1 !== addressData.addressLine1 ||
         props.defaultAddress.addressLine2 !== addressData.addressLine2 ||
@@ -88,13 +90,12 @@ export const AddressModal = (props: Props): ReactElement => {
       };
       setAddressData(data);
 
-      const errorMap = requiredFields.reduce(
-        (prev: MemberErrorMap, curr: ErrorFields) => ({
+      const errorMap = requiredFields.reduce((prev: MemberErrorMap, curr: ErrorFields) => {
+        return {
           ...prev,
           [curr]: { invalid: !data[curr as keyof FormationAddress] },
-        }),
-        {} as MemberErrorMap
-      );
+        };
+      }, {} as MemberErrorMap);
 
       setMemberErrorMap({
         ...errorMap,
@@ -114,21 +115,27 @@ export const AddressModal = (props: Props): ReactElement => {
   };
 
   const onSubmit = (): void => {
-    const unValidated = Object.values(addressErrorMap).some((i) => i.invalid === undefined);
+    const unValidated = Object.values(addressErrorMap).some((i) => {
+      return i.invalid === undefined;
+    });
     if (unValidated) {
       setMemberErrorMap(
         requiredFields.reduce(
-          (prev: MemberErrorMap, curr: ErrorFields) => ({
-            ...prev,
-            [curr]: { invalid: prev[curr].invalid ?? true },
-          }),
+          (prev: MemberErrorMap, curr: ErrorFields) => {
+            return {
+              ...prev,
+              [curr]: { invalid: prev[curr].invalid ?? true },
+            };
+          },
           { ...addressErrorMap } as MemberErrorMap
         )
       );
       return;
     }
 
-    const failedValidation = Object.values(addressErrorMap).some((i) => i.invalid);
+    const failedValidation = Object.values(addressErrorMap).some((i) => {
+      return i.invalid;
+    });
 
     if (failedValidation) {
       return;
@@ -163,7 +170,9 @@ export const AddressModal = (props: Props): ReactElement => {
               control={
                 <Checkbox
                   checked={useDefaultAddress}
-                  onChange={(event) => checkBoxCheck(event.target.checked)}
+                  onChange={(event) => {
+                    return checkBoxCheck(event.target.checked);
+                  }}
                 />
               }
             />
@@ -176,9 +185,11 @@ export const AddressModal = (props: Props): ReactElement => {
           <GenericTextField
             value={addressData.name}
             placeholder={Config.businessFormationDefaults.addressModalNamePlaceholder}
-            handleChange={(value: string) =>
-              setAddressData((prevAddressData) => ({ ...prevAddressData, name: value }))
-            }
+            handleChange={(value: string) => {
+              return setAddressData((prevAddressData) => {
+                return { ...prevAddressData, name: value };
+              });
+            }}
             error={addressErrorMap["addressName"].invalid}
             onValidation={onValidation}
             validationText={Config.businessFormationDefaults.nameErrorText}
@@ -191,9 +202,11 @@ export const AddressModal = (props: Props): ReactElement => {
             fieldName="addressLine1"
             value={addressData.addressLine1}
             placeholder={Config.businessFormationDefaults.addressModalAddressLine1Placeholder}
-            handleChange={(value: string) =>
-              setAddressData((prevAddressData) => ({ ...prevAddressData, addressLine1: value }))
-            }
+            handleChange={(value: string) => {
+              return setAddressData((prevAddressData) => {
+                return { ...prevAddressData, addressLine1: value };
+              });
+            }}
             error={addressErrorMap["addressLine1"].invalid}
             onValidation={onValidation}
             autoComplete="address-line1"
@@ -204,9 +217,9 @@ export const AddressModal = (props: Props): ReactElement => {
           <Content
             style={{ display: "inline" }}
             overrides={{
-              p: ({ children }: { children: string[] }): ReactElement => (
-                <p style={{ display: "inline" }}>{children}</p>
-              ),
+              p: ({ children }: { children: string[] }): ReactElement => {
+                return <p style={{ display: "inline" }}>{children}</p>;
+              },
             }}
           >
             {Config.businessFormationDefaults.addressModalAddressLine2Label}
@@ -218,9 +231,11 @@ export const AddressModal = (props: Props): ReactElement => {
             placeholder={Config.businessFormationDefaults.addressModalAddressLine2Placeholder}
             disabled={useDefaultAddress}
             autoComplete="address-line2"
-            handleChange={(value: string) =>
-              setAddressData((prevAddressData) => ({ ...prevAddressData, addressLine2: value }))
-            }
+            handleChange={(value: string) => {
+              return setAddressData((prevAddressData) => {
+                return { ...prevAddressData, addressLine2: value };
+              });
+            }}
           />
           <div className="grid-row grid-gap-2 margin-top-2">
             <div className="grid-col-12 tablet:grid-col-6">
@@ -232,9 +247,11 @@ export const AddressModal = (props: Props): ReactElement => {
                 disabled={shouldBeDisabled("addressCity")}
                 required={true}
                 placeholder={Config.businessFormationDefaults.addressModalCityPlaceholder}
-                handleChange={(value: string) =>
-                  setAddressData((prevAddressData) => ({ ...prevAddressData, addressCity: value }))
-                }
+                handleChange={(value: string) => {
+                  return setAddressData((prevAddressData) => {
+                    return { ...prevAddressData, addressCity: value };
+                  });
+                }}
                 error={addressErrorMap["addressCity"].invalid}
                 onValidation={onValidation}
                 validationText={Config.businessFormationDefaults.addressModalCityErrorText}
@@ -249,9 +266,9 @@ export const AddressModal = (props: Props): ReactElement => {
                 value={addressData.addressState}
                 placeholder={Config.businessFormationDefaults.addressModalStatePlaceholder}
                 validationText={Config.businessFormationDefaults.addressStateErrorText}
-                onSelect={(value: string | undefined) =>
-                  setAddressData({ ...addressData, addressState: value ?? "" })
-                }
+                onSelect={(value: string | undefined) => {
+                  return setAddressData({ ...addressData, addressState: value ?? "" });
+                }}
                 error={addressErrorMap["addressState"].invalid}
                 autoComplete="address-level1"
                 disabled={shouldBeDisabled("addressState")}
@@ -269,9 +286,11 @@ export const AddressModal = (props: Props): ReactElement => {
                 fieldName={"addressZipCode"}
                 autoComplete="postal-code"
                 error={addressErrorMap["addressZipCode"].invalid}
-                handleChange={(value: string) =>
-                  setAddressData((prevAddressData) => ({ ...prevAddressData, addressZipCode: value }))
-                }
+                handleChange={(value: string) => {
+                  return setAddressData((prevAddressData) => {
+                    return { ...prevAddressData, addressZipCode: value };
+                  });
+                }}
                 value={addressData.addressZipCode}
                 validationText={Config.businessFormationDefaults.addressModalZipCodeErrorText}
                 onValidation={onValidation}

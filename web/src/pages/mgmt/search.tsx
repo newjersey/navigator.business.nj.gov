@@ -32,10 +32,11 @@ const SearchContentPage = (props: Props): ReactElement => {
 
   const { Config } = useConfig();
 
-  const netlifyGeneralConfigList = useMemo(
-    () => props.netlifyConfig["collections"].find((it: any) => it.name === "config")["files"][0]["fields"],
-    [props.netlifyConfig]
-  );
+  const netlifyGeneralConfigList = useMemo(() => {
+    return props.netlifyConfig["collections"].find((it: any) => {
+      return it.name === "config";
+    })["files"][0]["fields"];
+  }, [props.netlifyConfig]);
 
   const handleKeyPress = (event: KeyboardEvent<HTMLDivElement>, submit: () => void): void => {
     if (event.code === "Enter") {
@@ -79,8 +80,12 @@ const SearchContentPage = (props: Props): ReactElement => {
   };
 
   const lookupNetlifyLabels = (match: ConfigMatch): ConfigMatch => {
-    const group = netlifyGeneralConfigList.find((it: any) => it.name === match.topLevel);
-    const entry = group["fields"].find((it: any) => it.name === match.secondLevel);
+    const group = netlifyGeneralConfigList.find((it: any) => {
+      return it.name === match.topLevel;
+    });
+    const entry = group["fields"].find((it: any) => {
+      return it.name === match.secondLevel;
+    });
 
     return {
       ...match,
@@ -110,7 +115,9 @@ const SearchContentPage = (props: Props): ReactElement => {
           type="text"
           value={searchTerm}
           onChange={handleSearchInput}
-          onKeyPress={(event) => handleKeyPress(event, onSearchSubmit)}
+          onKeyPress={(event) => {
+            return handleKeyPress(event, onSearchSubmit);
+          }}
           inputProps={{
             id: "search",
           }}
@@ -128,20 +135,24 @@ const SearchContentPage = (props: Props): ReactElement => {
           </h1>
         </div>
       )}
-      {Object.keys(groupedMatches).map((collectioName) => (
-        <div key={collectioName}>
-          <h2 className="margin-top-3">{collectioName}</h2>
-          {groupedMatches[collectioName].map((it, i) => (
-            <div key={i}>
-              <div>
-                <strong>{it.netlifyFieldLabel}</strong>
-              </div>
-              <div>{it.value}</div>
-              <hr />
-            </div>
-          ))}
-        </div>
-      ))}
+      {Object.keys(groupedMatches).map((collectioName) => {
+        return (
+          <div key={collectioName}>
+            <h2 className="margin-top-3">{collectioName}</h2>
+            {groupedMatches[collectioName].map((it, i) => {
+              return (
+                <div key={i}>
+                  <div>
+                    <strong>{it.netlifyFieldLabel}</strong>
+                  </div>
+                  <div>{it.value}</div>
+                  <hr />
+                </div>
+              );
+            })}
+          </div>
+        );
+      })}
     </>
   );
 

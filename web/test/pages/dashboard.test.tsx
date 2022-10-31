@@ -44,24 +44,38 @@ function mockMaterialUI(): typeof materialUi {
   };
 }
 
-jest.mock("@mui/material", () => mockMaterialUI());
-jest.mock("next/router", () => ({ useRouter: jest.fn() }));
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
+jest.mock("@mui/material", () => {
+  return mockMaterialUI();
+});
+jest.mock("next/router", () => {
+  return { useRouter: jest.fn() };
+});
+jest.mock("@/lib/data-hooks/useUserData", () => {
+  return { useUserData: jest.fn() };
+});
+jest.mock("@/lib/data-hooks/useRoadmap", () => {
+  return { useRoadmap: jest.fn() };
+});
+jest.mock("@/lib/roadmap/buildUserRoadmap", () => {
+  return { buildUserRoadmap: jest.fn() };
+});
 
 const Config = getMergedConfig();
 
 const setDesktopScreen = (value: boolean): void => {
-  (useMediaQuery as jest.Mock).mockImplementation(() => value);
+  (useMediaQuery as jest.Mock).mockImplementation(() => {
+    return value;
+  });
 };
 
-const createDisplayContent = (sidebar?: Record<string, SidebarCardContent>) => ({
-  contentMd: "",
-  sidebarDisplayContent: sidebar ?? {
-    welcome: generateSidebarCardContent({}),
-  },
-});
+const createDisplayContent = (sidebar?: Record<string, SidebarCardContent>) => {
+  return {
+    contentMd: "",
+    sidebarDisplayContent: sidebar ?? {
+      welcome: generateSidebarCardContent({}),
+    },
+  };
+};
 
 describe("dashboard page", () => {
   beforeEach(() => {
@@ -414,7 +428,9 @@ describe("dashboard page", () => {
 
   it("does not render HideableTasks for operating phases that don't display HideableRoadmapTasks", () => {
     const randomOperatingPhase = randomElementFromArray(
-      OperatingPhases.filter((obj) => !obj.displayHideableRoadmapTasks)
+      OperatingPhases.filter((obj) => {
+        return !obj.displayHideableRoadmapTasks;
+      })
     );
 
     useMockUserData({ profileData: generateProfileData({ operatingPhase: randomOperatingPhase.id }) });
@@ -425,7 +441,9 @@ describe("dashboard page", () => {
 
   it("renders HideableTasks for operating phases that display HideableRoadmapTasks", () => {
     const randomOperatingPhase = randomElementFromArray(
-      OperatingPhases.filter((obj) => obj.displayHideableRoadmapTasks)
+      OperatingPhases.filter((obj) => {
+        return obj.displayHideableRoadmapTasks;
+      })
     );
 
     useMockUserData({ profileData: generateProfileData({ operatingPhase: randomOperatingPhase.id }) });
@@ -505,11 +523,11 @@ describe("dashboard page", () => {
       chooseHomeBasedValue("true");
       fireEvent.click(screen.getByText(Config.dashboardDefaults.deferredOnboardingSaveButtonText));
 
-      await waitFor(() =>
-        expect(
+      await waitFor(() => {
+        return expect(
           screen.queryByText(Config.profileDefaults[getFlow(userData)].homeBasedBusiness.description)
-        ).not.toBeInTheDocument()
-      );
+        ).not.toBeInTheDocument();
+      });
       expect(currentUserData().profileData.homeBasedBusiness).toEqual(true);
     });
 

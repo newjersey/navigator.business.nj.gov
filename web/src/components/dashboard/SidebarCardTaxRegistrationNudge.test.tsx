@@ -20,11 +20,17 @@ import { fireEvent, render, screen, waitFor, within } from "@testing-library/rea
 import { generateTaxFiling } from "../../../test/factories";
 import { SidebarCardTaxRegistrationNudge } from "./SidebarCardTaxRegistrationNudge";
 
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("next/router", () => ({
-  useRouter: jest.fn(),
-}));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
+jest.mock("@/lib/data-hooks/useUserData", () => {
+  return { useUserData: jest.fn() };
+});
+jest.mock("next/router", () => {
+  return {
+    useRouter: jest.fn(),
+  };
+});
+jest.mock("@/lib/data-hooks/useRoadmap", () => {
+  return { useRoadmap: jest.fn() };
+});
 
 const Config = getMergedConfig();
 
@@ -115,10 +121,12 @@ describe("<SidebarCardTaxRegistrationNudge />", () => {
         },
       };
 
-      await waitFor(() => expect(currentUserData()).toEqual(updatedUserData));
-      await waitFor(() =>
-        expect(screen.queryByText(Config.taxRegistrationModal.title)).not.toBeInTheDocument()
-      );
+      await waitFor(() => {
+        return expect(currentUserData()).toEqual(updatedUserData);
+      });
+      await waitFor(() => {
+        return expect(screen.queryByText(Config.taxRegistrationModal.title)).not.toBeInTheDocument();
+      });
       expect(mockPush).toHaveBeenCalledWith("/dashboard");
     });
 
@@ -132,9 +140,9 @@ describe("<SidebarCardTaxRegistrationNudge />", () => {
 
       fireEvent.click(screen.getByTestId("modal-button-secondary"));
 
-      await waitFor(() =>
-        expect(screen.queryByText(Config.taxRegistrationModal.title)).not.toBeInTheDocument()
-      );
+      await waitFor(() => {
+        return expect(screen.queryByText(Config.taxRegistrationModal.title)).not.toBeInTheDocument();
+      });
 
       expect(userDataWasNotUpdated()).toEqual(true);
     });

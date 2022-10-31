@@ -6,7 +6,9 @@ const sendEvent = (category, action, label, value = undefined) => {
     event_category: category,
     event_label: label,
   };
-  if (value && Number.parseInt(value) >= 0) response["value"] = Number.parseInt(value);
+  if (value && Number.parseInt(value) >= 0) {
+    response["value"] = Number.parseInt(value);
+  }
   window.gtag("event", action, response);
 };
 
@@ -684,34 +686,42 @@ export default {
 
     tax_calendar_banner_button: {
       click: {
-        show_tax_calendar_modal: () =>
-          sendEvent("tax_calendar_banner_button", "click", "show_tax_calendar_modal"),
-        show_myNJ_registration_prompt_modal: () =>
-          sendEvent("tax_calendar_banner_button", "click", "show_myNJ_registration_prompt_modal"),
+        show_tax_calendar_modal: () => {
+          return sendEvent("tax_calendar_banner_button", "click", "show_tax_calendar_modal");
+        },
+        show_myNJ_registration_prompt_modal: () => {
+          return sendEvent("tax_calendar_banner_button", "click", "show_myNJ_registration_prompt_modal");
+        },
       },
     },
     tax_calendar_modal: {
       submit: {
-        tax_calendar_modal_validation_error: () =>
-          sendEvent("tax_calendar_modal", "submit", "tax_calendar_modal_validation_error"),
-        tax_calendar_business_does_not_exist: () =>
-          sendEvent("tax_calendar_modal", "submit", "tax_calendar_business_does_not_exist"),
-        business_exists_but_not_in_Gov2Go: () =>
-          sendEvent("tax_calendar_modal", "submit", "business_exists_but_not_in_Gov2Go"),
-        tax_deadlines_added_to_calendar: () =>
-          sendEvent("tax_calendar_modal", "submit", "tax_deadlines_added_to_calendar"),
+        tax_calendar_modal_validation_error: () => {
+          return sendEvent("tax_calendar_modal", "submit", "tax_calendar_modal_validation_error");
+        },
+        tax_calendar_business_does_not_exist: () => {
+          return sendEvent("tax_calendar_modal", "submit", "tax_calendar_business_does_not_exist");
+        },
+        business_exists_but_not_in_Gov2Go: () => {
+          return sendEvent("tax_calendar_modal", "submit", "business_exists_but_not_in_Gov2Go");
+        },
+        tax_deadlines_added_to_calendar: () => {
+          return sendEvent("tax_calendar_modal", "submit", "tax_deadlines_added_to_calendar");
+        },
       },
     },
     tax_registration_nudge_button: {
       click: {
-        show_tax_registration_modal: () =>
-          sendEvent("tax_registration_nudge_button", "click", "show_tax_registration_modal"),
+        show_tax_registration_modal: () => {
+          return sendEvent("tax_registration_nudge_button", "click", "show_tax_registration_modal");
+        },
       },
     },
     tax_registration_modal: {
       submit: {
-        tax_registration_status_set_to_complete: () =>
-          sendEvent("tax_registration_modal", "submit", "tax_registration_status_set_to_complete"),
+        tax_registration_status_set_to_complete: () => {
+          return sendEvent("tax_registration_modal", "submit", "tax_registration_status_set_to_complete");
+        },
       },
     },
     business_formation_review_amendments_external_link: {

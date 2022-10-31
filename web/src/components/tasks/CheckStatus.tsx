@@ -11,8 +11,8 @@ import createStyles from "@mui/styles/createStyles";
 import makeStyles from "@mui/styles/makeStyles";
 import { ChangeEvent, FormEvent, ReactElement, useState } from "react";
 
-const useStyles = makeStyles(() =>
-  createStyles({
+const useStyles = makeStyles(() => {
+  return createStyles({
     disabledTextField: {
       background: "#e6e6e6",
     },
@@ -22,8 +22,8 @@ const useStyles = makeStyles(() =>
           display: "none",
         },
     },
-  })
-);
+  });
+});
 
 interface Props {
   onSubmit: (nameAndAddress: NameAndAddress) => void;
@@ -43,15 +43,19 @@ export const CheckStatus = (props: Props): ReactElement => {
   const { userData } = useUserData();
 
   useMountEffectWhenDefined(() => {
-    if (!userData) return;
+    if (!userData) {
+      return;
+    }
 
     if (userData.licenseData) {
       setFormValues(userData.licenseData.nameAndAddress);
     } else {
-      setFormValues((prevValues) => ({
-        ...prevValues,
-        name: userData.profileData.businessName,
-      }));
+      setFormValues((prevValues) => {
+        return {
+          ...prevValues,
+          name: userData.profileData.businessName,
+        };
+      });
     }
   }, userData);
 
@@ -61,17 +65,21 @@ export const CheckStatus = (props: Props): ReactElement => {
     props.onSubmit(formValues);
   };
 
-  const handleChange =
-    (key: keyof NameAndAddress) =>
-    (event: ChangeEvent<HTMLInputElement>): void => {
-      setFormValues((prevValues) => ({
-        ...prevValues,
-        [key]: event.target.value,
-      }));
+  const handleChange = (key: keyof NameAndAddress) => {
+    return (event: ChangeEvent<HTMLInputElement>): void => {
+      setFormValues((prevValues) => {
+        return {
+          ...prevValues,
+          [key]: event.target.value,
+        };
+      });
     };
+  };
 
   const getErrorAlert = (): ReactElement => {
-    if (!props.error) return <></>;
+    if (!props.error) {
+      return <></>;
+    }
     return (
       <Alert dataTestid={`error-alert-${props.error}`} variant="error">
         {LicenseSearchErrorLookup[props.error]}

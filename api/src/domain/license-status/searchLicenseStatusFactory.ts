@@ -12,23 +12,31 @@ export const searchLicenseStatusFactory = (licenseStatusClient: LicenseStatusCli
 
     const entities = await licenseStatusClient.search(searchName, nameAndAddress.zipCode, licenseType);
 
-    const allMatchingAddressesArray = entities.filter((it) =>
-      cleanAddress(it.addressLine1).startsWith(cleanAddress(nameAndAddress.addressLine1))
-    );
+    const allMatchingAddressesArray = entities.filter((it) => {
+      return cleanAddress(it.addressLine1).startsWith(cleanAddress(nameAndAddress.addressLine1));
+    });
 
     if (allMatchingAddressesArray.length === 0) {
       throw "NO_MATCH";
     }
 
-    const match = allMatchingAddressesArray.reduce((a, b) => (getLicenseDate(a) > getLicenseDate(b) ? a : b));
+    const match = allMatchingAddressesArray.reduce((a, b) => {
+      return getLicenseDate(a) > getLicenseDate(b) ? a : b;
+    });
 
     const items: LicenseStatusItem[] = entities
-      .filter((it) => it.applicationNumber === match.applicationNumber)
-      .filter((it) => it.checkoffStatus === "Unchecked" || it.checkoffStatus === "Completed")
-      .map((it) => ({
-        title: it.checklistItem,
-        status: it.checkoffStatus === "Completed" ? "ACTIVE" : "PENDING",
-      }));
+      .filter((it) => {
+        return it.applicationNumber === match.applicationNumber;
+      })
+      .filter((it) => {
+        return it.checkoffStatus === "Unchecked" || it.checkoffStatus === "Completed";
+      })
+      .map((it) => {
+        return {
+          title: it.checklistItem,
+          status: it.checkoffStatus === "Completed" ? "ACTIVE" : "PENDING",
+        };
+      });
 
     return {
       status: determineLicenseStatus(match.licenseStatus),
@@ -66,5 +74,6 @@ export const determineLicenseStatus = (value: string): LicenseStatus => {
   }
 };
 
-export const cleanAddress = (value: string): string =>
-  inputManipulator(value).makeLowerCase().stripPunctuation().stripWhitespace().value;
+export const cleanAddress = (value: string): string => {
+  return inputManipulator(value).makeLowerCase().stripPunctuation().stripWhitespace().value;
+};

@@ -9,12 +9,14 @@ export const loadAllMunicipalities = async (): Promise<Municipality[]> => {
 
   const records = JSON.parse(fs.readFileSync(fullPath, "utf8")) as MunicipalityRecords;
 
-  return Object.values(records).map((municipality) => ({
-    displayName: municipality.townDisplayName,
-    id: municipality.id,
-    name: municipality.townName,
-    county: municipality.countyName,
-  }));
+  return Object.values(records).map((municipality) => {
+    return {
+      displayName: municipality.townDisplayName,
+      id: municipality.id,
+      name: municipality.townName,
+      county: municipality.countyName,
+    };
+  });
 };
 
 type MunicipalityRecords = Record<string, MunicipalityDetail>;

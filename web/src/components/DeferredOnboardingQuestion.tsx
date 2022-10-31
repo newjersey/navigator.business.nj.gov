@@ -23,14 +23,20 @@ export const DeferredOnboardingQuestion = (props: Props) => {
   const router = useRouter();
 
   useMountEffectWhenDefined(() => {
-    if (!userData) return;
+    if (!userData) {
+      return;
+    }
     setProfileData(userData.profileData);
   }, userData);
 
   const onSave = async () => {
-    if (!updateQueue || !userData) return;
+    if (!updateQueue || !userData) {
+      return;
+    }
     const profileDataHasNotChanged = JSON.stringify(profileData) === JSON.stringify(userData.profileData);
-    if (profileDataHasNotChanged) return;
+    if (profileDataHasNotChanged) {
+      return;
+    }
 
     await updateQueue.queueProfileData(profileData).update();
 

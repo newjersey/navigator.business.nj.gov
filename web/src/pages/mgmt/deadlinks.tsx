@@ -22,15 +22,15 @@ const DeadLinksPage = (props: Props): ReactElement => {
       <h1>Dead Content</h1>
       <h2 data-testid="dl-task-header">Tasks not referenced in any roadmap:</h2>
       <ul>
-        {props.deadTasks.map((task, i) => (
-          <li key={i}>{task}</li>
-        ))}
+        {props.deadTasks.map((task, i) => {
+          return <li key={i}>{task}</li>;
+        })}
       </ul>
       <h2>Contextual infos not referenced anywhere:</h2>
       <ul>
-        {props.deadContextualInfo.map((info, i) => (
-          <li key={i}>{info}</li>
-        ))}
+        {props.deadContextualInfo.map((info, i) => {
+          return <li key={i}>{info}</li>;
+        })}
       </ul>
     </>
   );

@@ -14,37 +14,39 @@ export const PartnershipRights = (): ReactElement => {
   const { Config } = useConfig();
   const { doesFieldHaveError, doSomeFieldsHaveError } = useFormationErrors();
 
-  const getTextField = (fieldName: FormationTextField) => (
-    <div className="margin-top-1">
-      <div className="grid-row">
-        <div className="grid-col">
-          <BusinessFormationTextField
-            placeholder={Config.businessFormationDefaults.partnershipRightsTermsPlaceholder}
-            fieldName={fieldName}
-            required={true}
-            validationText={Config.businessFormationDefaults.genericErrorText}
-            label={Config.businessFormationDefaults.partnershipRightsTermsLabel}
-            formInputFull
-            fieldOptions={{
-              multiline: true,
-              rows: 3,
-              className: "override-padding",
-              inputProps: {
-                maxLength: 400,
-                sx: {
-                  padding: "1rem",
+  const getTextField = (fieldName: FormationTextField) => {
+    return (
+      <div className="margin-top-1">
+        <div className="grid-row">
+          <div className="grid-col">
+            <BusinessFormationTextField
+              placeholder={Config.businessFormationDefaults.partnershipRightsTermsPlaceholder}
+              fieldName={fieldName}
+              required={true}
+              validationText={Config.businessFormationDefaults.genericErrorText}
+              label={Config.businessFormationDefaults.partnershipRightsTermsLabel}
+              formInputFull
+              fieldOptions={{
+                multiline: true,
+                rows: 3,
+                className: "override-padding",
+                inputProps: {
+                  maxLength: 400,
+                  sx: {
+                    padding: "1rem",
+                  },
                 },
-              },
-            }}
-          />
+              }}
+            />
+          </div>
+        </div>
+        <div className="text-base-dark margin-top-1 margin-bottom-2">
+          {(state.formationFormData[fieldName] as string)?.length ?? 0} / {400}{" "}
+          {Config.businessFormationDefaults.charactersLabel}
         </div>
       </div>
-      <div className="text-base-dark margin-top-1 margin-bottom-2">
-        {(state.formationFormData[fieldName] as string)?.length ?? 0} / {400}{" "}
-        {Config.businessFormationDefaults.charactersLabel}
-      </div>
-    </div>
-  );
+    );
+  };
 
   const getRadio = (fieldName: FormationFields, title: string) => {
     const hasError = doesFieldHaveError(fieldName);

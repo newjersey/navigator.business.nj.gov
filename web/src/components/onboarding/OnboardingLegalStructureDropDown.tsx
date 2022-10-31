@@ -31,19 +31,21 @@ export const OnboardingLegalStructureDropdown = (props: Props): ReactElement => 
     }
   };
 
-  const renderOption = (legalStructureId: string): ReactElement => (
-    <div className="padding-top-1 padding-bottom-1">
-      {state.profileData.legalStructureId === legalStructureId ? (
-        <MenuOptionSelected secondaryText={LookupLegalStructureById(legalStructureId).name}>
-          {LookupLegalStructureById(legalStructureId).name}
-        </MenuOptionSelected>
-      ) : (
-        <MenuOptionUnselected secondaryText={LookupLegalStructureById(legalStructureId).name}>
-          {LookupLegalStructureById(legalStructureId).name}
-        </MenuOptionUnselected>
-      )}
-    </div>
-  );
+  const renderOption = (legalStructureId: string): ReactElement => {
+    return (
+      <div className="padding-top-1 padding-bottom-1">
+        {state.profileData.legalStructureId === legalStructureId ? (
+          <MenuOptionSelected secondaryText={LookupLegalStructureById(legalStructureId).name}>
+            {LookupLegalStructureById(legalStructureId).name}
+          </MenuOptionSelected>
+        ) : (
+          <MenuOptionUnselected secondaryText={LookupLegalStructureById(legalStructureId).name}>
+            {LookupLegalStructureById(legalStructureId).name}
+          </MenuOptionUnselected>
+        )}
+      </div>
+    );
+  };
 
   const renderValue = (value: unknown): ReactNode => {
     if (value === "") {
@@ -72,11 +74,13 @@ export const OnboardingLegalStructureDropdown = (props: Props): ReactElement => 
             renderValue={renderValue}
             disabled={props.disabled}
           >
-            {LegalStructuresOrdered.map((legalStructure) => (
-              <MenuItem key={legalStructure.id} value={legalStructure.id} data-testid={legalStructure.id}>
-                {renderOption(legalStructure.id)}
-              </MenuItem>
-            ))}
+            {LegalStructuresOrdered.map((legalStructure) => {
+              return (
+                <MenuItem key={legalStructure.id} value={legalStructure.id} data-testid={legalStructure.id}>
+                  {renderOption(legalStructure.id)}
+                </MenuItem>
+              );
+            })}
           </Select>
         </FormControl>
       </div>
