@@ -520,7 +520,12 @@ describe("profile", () => {
           await waitFor(() => {
             return expect(currentUserData()).toEqual({
               ...userData,
-              taxFilingData: { ...userData.taxFilingData, filings: [], state: undefined, registered: false },
+              taxFilingData: {
+                ...userData.taxFilingData,
+                filings: [],
+                state: undefined,
+                registeredISO: undefined,
+              },
               profileData: { ...userData.profileData, taxId: "123456789123" },
             });
           });
@@ -535,7 +540,12 @@ describe("profile", () => {
           await waitFor(() => {
             return expect(currentUserData()).toEqual({
               ...userData,
-              taxFilingData: { ...userData.taxFilingData, filings: [], state: undefined, registered: false },
+              taxFilingData: {
+                ...userData.taxFilingData,
+                filings: [],
+                state: undefined,
+                registeredISO: undefined,
+              },
               profileData: { ...userData.profileData, taxId: "" },
             });
           });
@@ -580,7 +590,12 @@ describe("profile", () => {
           await waitFor(() => {
             return expect(currentUserData()).toEqual({
               ...userData,
-              taxFilingData: { ...userData.taxFilingData, filings: [], state: undefined, registered: false },
+              taxFilingData: {
+                ...userData.taxFilingData,
+                filings: [],
+                state: undefined,
+                registeredISO: undefined,
+              },
               profileData: { ...userData.profileData, taxId: "666666666666" },
             });
           });
@@ -625,7 +640,12 @@ describe("profile", () => {
           await waitFor(() => {
             return expect(currentUserData()).toEqual({
               ...userData,
-              taxFilingData: { ...userData.taxFilingData, filings: [], state: undefined, registered: false },
+              taxFilingData: {
+                ...userData.taxFilingData,
+                filings: [],
+                state: undefined,
+                registeredISO: undefined,
+              },
               profileData: { ...userData.profileData, taxId: "123456789123" },
             });
           });
@@ -901,7 +921,7 @@ describe("profile", () => {
       expect(currentUserData()).toEqual({
         ...userData,
         formProgress: "COMPLETED",
-        taxFilingData: { ...userData.taxFilingData, state: undefined, filings: [], registered: false },
+        taxFilingData: { ...userData.taxFilingData, state: undefined, filings: [], registeredISO: undefined },
         profileData: {
           ...userData.profileData,
           businessName: "Cool Computers",
@@ -997,7 +1017,7 @@ describe("profile", () => {
         ...userData.taxFilingData,
         state: undefined,
         filings: [],
-        registered: false,
+        registeredISO: undefined,
       });
     });
 

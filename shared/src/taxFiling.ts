@@ -5,7 +5,7 @@ export type TaxFilingData = {
   readonly businessName?: string;
   readonly errorField?: TaxFilingErrorFields;
   readonly lastUpdatedISO?: string;
-  readonly registered: boolean;
+  readonly registeredISO?: string;
   readonly filings: TaxFiling[];
 };
 

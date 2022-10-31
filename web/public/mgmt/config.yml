@@ -2516,6 +2516,11 @@ collections:
             fields:
               - { label: Tax Calendar Access Body, name: AccessBody, widget: markdown }
               - { label: Tax Calendar Pending Body, name: PendingCopyMarkdown, widget: markdown }
+              - {
+                  label: Tax Calendar Registration Follow Up Body,
+                  name: RegistrationFollowUpCopyMarkdown,
+                  widget: markdown,
+                }
               - { label: Tax Calendar Access Open Modal Button, name: AccessButton, widget: text }
               - { label: Tax Calendar Modal Previous Button, name: ModalPreviousButton, widget: text }
               - { label: Tax Calendar Modal Next Button, name: ModalNextButton, widget: text }

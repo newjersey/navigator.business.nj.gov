@@ -16,7 +16,7 @@ import {
   userDataUpdatedNTimes,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { FormationLegalType } from "@businessnjgovnavigator/shared/index";
+import { FormationLegalType, getCurrentDateISOString } from "@businessnjgovnavigator/shared/index";
 import { randomInt } from "@businessnjgovnavigator/shared/intHelpers";
 import { OperatingPhases } from "@businessnjgovnavigator/shared/operatingPhase";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
@@ -79,7 +79,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
         ...userDataWithExternalFormation,
         taxFilingData: generateTaxFilingData({
           state: "SUCCESS",
-          registered: true,
+          registeredISO: getCurrentDateISOString(),
           businessName: userDataWithExternalFormation.profileData.businessName,
         }),
       });
@@ -448,7 +448,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
       renderFilingsCalendarTaxAccess({
         ...userDataWithExternalFormation,
         taxFilingData: generateTaxFilingData({
-          registered: false,
+          registeredISO: undefined,
           businessName: userDataWithExternalFormation.profileData.businessName,
         }),
       });
@@ -459,7 +459,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
       renderFilingsCalendarTaxAccess({
         ...userDataWithExternalFormation,
         taxFilingData: generateTaxFilingData({
-          registered: true,
+          registeredISO: getCurrentDateISOString(),
           businessName: userDataWithExternalFormation.profileData.businessName,
         }),
       });
@@ -474,7 +474,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
         ...userDataWithExternalFormation,
         taxFilingData: generateTaxFilingData({
           state: "FAILED",
-          registered: false,
+          registeredISO: undefined,
           businessName: userDataWithExternalFormation.profileData.businessName,
         }),
       });
@@ -488,7 +488,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
         ...userDataWithExternalFormation,
         taxFilingData: generateTaxFilingData({
           state: undefined,
-          registered: false,
+          registeredISO: undefined,
           businessName: userDataWithExternalFormation.profileData.businessName,
         }),
       });
@@ -502,7 +502,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
         return Promise.resolve({
           ...userDataWithExternalFormation,
           taxFilingData: generateTaxFilingData({
-            registered: true,
+            registeredISO: getCurrentDateISOString(),
             state: "SUCCESS",
             businessName: userDataWithExternalFormation.profileData.businessName,
           }),
@@ -511,7 +511,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
       renderFilingsCalendarTaxAccess({
         ...userDataWithExternalFormation,
         taxFilingData: generateTaxFilingData({
-          registered: true,
+          registeredISO: getCurrentDateISOString(),
           state: "PENDING",
           businessName: userDataWithExternalFormation.profileData.businessName,
         }),
@@ -532,7 +532,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
         return Promise.resolve({
           ...userDataWithExternalFormation,
           taxFilingData: generateTaxFilingData({
-            registered: true,
+            registeredISO: getCurrentDateISOString(),
             state: "API_ERROR",
             businessName: userDataWithExternalFormation.profileData.businessName,
           }),
@@ -541,7 +541,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
       renderFilingsCalendarTaxAccess({
         ...userDataWithExternalFormation,
         taxFilingData: generateTaxFilingData({
-          registered: true,
+          registeredISO: getCurrentDateISOString(),
           state: "PENDING",
           businessName: userDataWithExternalFormation.profileData.businessName,
         }),
@@ -557,22 +557,52 @@ describe("<FilingsCalendarTaxAccess />", () => {
       expect(screen.queryByTestId("button-container")).not.toBeInTheDocument();
     });
 
+    it("shows registration followup component when state is SUCCESS but it's before the Saturday after registration", async () => {
+      const userData = {
+        ...userDataWithExternalFormation,
+        taxFilingData: generateTaxFilingData({
+          state: "SUCCESS",
+          registeredISO: getCurrentDateISOString(),
+          businessName: userDataWithExternalFormation.profileData.businessName,
+        }),
+      };
+      mockApi.postTaxRegistrationLookup.mockImplementation(() => {
+        return Promise.resolve(userData);
+      });
+      renderFilingsCalendarTaxAccess({
+        ...userDataWithExternalFormation,
+        taxFilingData: generateTaxFilingData({
+          state: "PENDING",
+          registeredISO: getCurrentDateISOString(),
+          businessName: userDataWithExternalFormation.profileData.businessName,
+        }),
+      });
+      await waitFor(() => {
+        return expect(userDataUpdatedNTimes()).toEqual(1);
+      });
+      expect(screen.queryByTestId("get-tax-access")).not.toBeInTheDocument();
+      expect(screen.queryByTestId("pending-container")).not.toBeInTheDocument();
+      expect(screen.queryByTestId("button-container")).not.toBeInTheDocument();
+      expect(screen.getByTestId("alert-content-container")).toBeInTheDocument();
+    });
+
     it("shows pending component when state is PENDING", async () => {
       mockApi.postTaxRegistrationLookup.mockImplementation(() => {
         return Promise.resolve({
           ...userDataWithExternalFormation,
           taxFilingData: generateTaxFilingData({
             state: "PENDING",
-            registered: true,
+            registeredISO: getCurrentDateISOString(),
             businessName: userDataWithExternalFormation.profileData.businessName,
           }),
         });
       });
+
       renderFilingsCalendarTaxAccess({
         ...userDataWithExternalFormation,
         taxFilingData: generateTaxFilingData({
           state: "API_ERROR",
-          registered: true,
+          registeredISO: getCurrentDateISOString(),
           businessName: userDataWithExternalFormation.profileData.businessName,
         }),
       });
@@ -585,6 +615,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
       });
       expect(screen.getByTestId("pending-container")).toBeInTheDocument();
       expect(screen.queryByTestId("button-container")).not.toBeInTheDocument();
+      expect(screen.queryByTestId("alert-content-container")).not.toBeInTheDocument();
     });
   });
 });

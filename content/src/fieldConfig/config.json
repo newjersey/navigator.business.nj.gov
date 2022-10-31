@@ -448,6 +448,7 @@
     "FailedTaxIdHelper": "Enter a correct 12-digit NJ Tax ID",
     "ModalBusinessFieldHeader": "#### Business Name",
     "ModalHeader": "See Your Tax Due Dates",
+    "RegistrationFollowUpCopyMarkdown": "#### Your Tax Calendar is pending. \n\n While some tax eligibilities are available below, your tax calendar is still being calculated by the Department of Treasury. Check back in **7 days** for possible additions to your calendar.",
     "PendingCopyMarkdown": "#### Your Tax Calendar is pending. \n\n Your tax due dates are being added, check back in **7 days**.",
     "FailedUnknownMarkdown": "There was a problem with your verification process, please try again later.",
     "ModalBusinessFieldMarkdown": "Your business name must match exactly with the name listed on your `Business Registration Certificate|business-reg-certificate` or your tax registration confirmation email."

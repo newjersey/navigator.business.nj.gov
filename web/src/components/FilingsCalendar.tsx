@@ -12,8 +12,12 @@ import { ROUTES } from "@/lib/domain-logic/routes";
 import { MediaQueries } from "@/lib/PageSizes";
 import { OperateReference } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
-import { getCurrentDate, parseDateWithFormat, TaxFiling } from "@businessnjgovnavigator/shared";
-import { LookupOperatingPhaseById } from "@businessnjgovnavigator/shared/index";
+import {
+  getCurrentDate,
+  LookupOperatingPhaseById,
+  parseDateWithFormat,
+  TaxFiling,
+} from "@businessnjgovnavigator/shared";
 import { useMediaQuery } from "@mui/material";
 import Link from "next/link";
 import router from "next/router";

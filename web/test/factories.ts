@@ -105,8 +105,10 @@ export const generateTaxFilingData = (overrides: Partial<TaxFilingData>): TaxFil
   return {
     state: undefined,
     businessName: undefined,
-    lastUpdatedISO: overrides.state ? new Date(Date.now()).toISOString() : undefined,
-    registered: false,
+    lastUpdatedISO: overrides.state ? getCurrentDateISOString() : undefined,
+    registeredISO: ["SUCCESS", "PENDING"].includes(overrides.state ?? "")
+      ? getCurrentDateISOString()
+      : undefined,
     filings: [generateTaxFiling({})],
     ...overrides,
   };
