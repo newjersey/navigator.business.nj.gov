@@ -20,7 +20,9 @@ export const SidebarCardTaxRegistrationNudge = (props: Props): ReactElement => {
   const router = useRouter();
 
   const updateTaxInformationAndTaskProgress = async () => {
-    if (!updateQueue) return;
+    if (!updateQueue) {
+      return;
+    }
     queueUpdateTaskProgress(taxTaskId, "COMPLETED");
     await updateQueue.update();
     router.push("/dashboard");
@@ -35,7 +37,9 @@ export const SidebarCardTaxRegistrationNudge = (props: Props): ReactElement => {
     <>
       <TaxRegistrationModal
         isOpen={modalOpen}
-        close={() => setModalOpen(false)}
+        close={() => {
+          return setModalOpen(false);
+        }}
         onSave={updateTaxInformationAndTaskProgress}
       />
       <SidebarCardGeneric

@@ -13,12 +13,16 @@ import { getLastCalledWith } from "@/test/helpers";
 import { Industries } from "@businessnjgovnavigator/shared/";
 import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
 
-jest.mock("@/lib/roadmap/roadmapBuilder", () => ({ buildRoadmap: jest.fn() }));
+jest.mock("@/lib/roadmap/roadmapBuilder", () => {
+  return { buildRoadmap: jest.fn() };
+});
 const mockRoadmapBuilder = (roadmapBuilderModule as jest.Mocked<typeof roadmapBuilderModule>).buildRoadmap;
 
-jest.mock("@/lib/async-content-fetchers/fetchMunicipalityById", () => ({
-  fetchMunicipalityById: jest.fn(),
-}));
+jest.mock("@/lib/async-content-fetchers/fetchMunicipalityById", () => {
+  return {
+    fetchMunicipalityById: jest.fn(),
+  };
+});
 const mockFetchMunicipality = (fetchMunicipality as jest.Mocked<typeof fetchMunicipality>)
   .fetchMunicipalityById;
 
@@ -320,13 +324,17 @@ describe("buildUserRoadmap", () => {
   });
 
   describe("industry", () => {
-    for (const industry of Industries.filter((x) => x.id !== "generic")) {
+    for (const industry of Industries.filter((x) => {
+      return x.id !== "generic";
+    })) {
       it(`adds ${industry.name} industry and modifications`, async () => {
         await buildUserRoadmap(
           generateStartingProfile({ industryId: industry.id, certifiedInteriorDesigner: true })
         );
         const lastCalledWith = getLastCalledWith(mockRoadmapBuilder)[0];
-        const shouldNotContainIndustries = Industries.filter((it) => it.id !== industry.id);
+        const shouldNotContainIndustries = Industries.filter((it) => {
+          return it.id !== industry.id;
+        });
         expect(lastCalledWith.industryId).toBe(industry.id);
         for (const shouldNotContainIndustry of shouldNotContainIndustries) {
           expect(lastCalledWith.addOns).not.toContain(shouldNotContainIndustry);
@@ -336,9 +344,9 @@ describe("buildUserRoadmap", () => {
 
     describe("on-boarding modifications", () => {
       describe("staffing service", () => {
-        for (const industry of Industries.filter(
-          (x) => x.industryOnboardingQuestions.isProvidesStaffingServicesApplicable
-        )) {
+        for (const industry of Industries.filter((x) => {
+          return x.industryOnboardingQuestions.isProvidesStaffingServicesApplicable;
+        })) {
           it(`set industry to employment-agency if ${industry.name} with staffing service`, async () => {
             const profileData: ProfileData = {
               ...createEmptyProfileData(),

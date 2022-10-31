@@ -43,24 +43,30 @@ export const FormationStartDate = (): ReactElement => {
             value={parseDateWithFormat(state.formationFormData.businessStartDate, "YYYY-MM-DD")}
             inputFormat={"MM/DD/YYYY"}
             onChange={(newValue: DateObject | null): void => {
-              if (newValue) handleChange(newValue.format("YYYY-MM-DD"));
-              if (newValue === null) handleChange("");
+              if (newValue) {
+                handleChange(newValue.format("YYYY-MM-DD"));
+              }
+              if (newValue === null) {
+                handleChange("");
+              }
             }}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                variant="outlined"
-                fullWidth
-                helperText={
-                  doesFieldHaveError(FIELD_NAME) ? Config.businessFormationDefaults.startDateErrorText : " "
-                }
-                inputProps={{
-                  ...params.inputProps,
-                  "aria-label": "Business start date",
-                  "data-testid": "date-textfield",
-                }}
-              />
-            )}
+            renderInput={(params) => {
+              return (
+                <TextField
+                  {...params}
+                  variant="outlined"
+                  fullWidth
+                  helperText={
+                    doesFieldHaveError(FIELD_NAME) ? Config.businessFormationDefaults.startDateErrorText : " "
+                  }
+                  inputProps={{
+                    ...params.inputProps,
+                    "aria-label": "Business start date",
+                    "data-testid": "date-textfield",
+                  }}
+                />
+              );
+            }}
           />
         </LocalizationProvider>
       </div>

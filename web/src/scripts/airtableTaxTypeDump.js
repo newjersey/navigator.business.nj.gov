@@ -26,12 +26,16 @@ const saveRecords = async () => {
   for (const opp of records) {
     const file = writeMarkdownString(opp);
     fs.writeFile(`${outDir}/${opp.filename}.md`, file, (err) => {
-      if (err) throw err;
+      if (err) {
+        throw err;
+      }
     });
   }
 };
 
-const slugifyTaxId = (id) => id.trim().replaceAll(" ", "").replaceAll("/", "_").toLowerCase();
+const slugifyTaxId = (id) => {
+  return id.trim().replaceAll(" ", "").replaceAll("/", "_").toLowerCase();
+};
 
 const airtableToOpportunity = (airtableOpp) => {
   const id = slugifyTaxId(airtableOpp["Form #"]);

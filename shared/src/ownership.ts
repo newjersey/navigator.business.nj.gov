@@ -6,7 +6,9 @@ export interface OwnershipType {
 
 export const LookupOwnershipTypeById = (id: string): OwnershipType => {
   return (
-    arrayOfOwnershipTypes.find((x) => x.id === id) ?? {
+    arrayOfOwnershipTypes.find((x) => {
+      return x.id === id;
+    }) ?? {
       id: "",
       name: "",
     }

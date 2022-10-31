@@ -24,7 +24,9 @@ export const FeedbackModal = ({ handleClose, isOpen, isReportAnIssueBar }: Props
     }
   }, [isOpen, isReportAnIssueBar]);
 
-  if (!isOpen) return <></>;
+  if (!isOpen) {
+    return <></>;
+  }
 
   return (
     <>

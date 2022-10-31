@@ -19,20 +19,22 @@ const DeadUrlsPage = (props: Props): ReactElement => {
     <>
       <h1>Dead URLs</h1>
       <h2>Potentially broken links:</h2>
-      {Object.keys(props.deadLinks).map((page, i) => (
-        <div key={i}>
-          {props.deadLinks[page].length > 0 && (
-            <>
-              <div className="h4-styling">Page: {page}</div>
-              <ul>
-                {props.deadLinks[page].map((link, i) => (
-                  <li key={i}>{link}</li>
-                ))}
-              </ul>
-            </>
-          )}
-        </div>
-      ))}
+      {Object.keys(props.deadLinks).map((page, i) => {
+        return (
+          <div key={i}>
+            {props.deadLinks[page].length > 0 && (
+              <>
+                <div className="h4-styling">Page: {page}</div>
+                <ul>
+                  {props.deadLinks[page].map((link, i) => {
+                    return <li key={i}>{link}</li>;
+                  })}
+                </ul>
+              </>
+            )}
+          </div>
+        );
+      })}
     </>
   );
 

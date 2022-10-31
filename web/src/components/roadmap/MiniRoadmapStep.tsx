@@ -20,8 +20,12 @@ export const MiniRoadmapStep = (props: Props): ReactElement => {
   const [isOpen, setIsOpen] = useState<boolean>(props.isOpen ?? false);
   const stepNumber = props.step.stepNumber;
   const isActive = useMemo(() => {
-    if (!props.activeTaskId || !roadmap?.tasks) return undefined;
-    return roadmap?.tasks.some((task) => task.id === props.activeTaskId && task.stepNumber == stepNumber);
+    if (!props.activeTaskId || !roadmap?.tasks) {
+      return undefined;
+    }
+    return roadmap?.tasks.some((task) => {
+      return task.id === props.activeTaskId && task.stepNumber == stepNumber;
+    });
   }, [props.activeTaskId, roadmap?.tasks, stepNumber]);
   useEffect(() => {
     if (isActive) {
@@ -34,7 +38,9 @@ export const MiniRoadmapStep = (props: Props): ReactElement => {
 
   const toggleOpen = () => {
     props.toggleStep(stepNumber, !isOpen, true);
-    setIsOpen((prevOpen) => !prevOpen);
+    setIsOpen((prevOpen) => {
+      return !prevOpen;
+    });
   };
 
   return (
@@ -71,15 +77,19 @@ export const MiniRoadmapStep = (props: Props): ReactElement => {
       <div className="margin-left-5 font-sans-xs">
         {isOpen &&
           roadmap?.tasks
-            .filter((task) => task.stepNumber == props.step.stepNumber)
-            .map((task) => (
-              <MiniRoadmapTask
-                key={task.id}
-                task={task}
-                active={task.id === props.activeTaskId}
-                onTaskClick={props.onTaskClick}
-              />
-            ))}
+            .filter((task) => {
+              return task.stepNumber == props.step.stepNumber;
+            })
+            .map((task) => {
+              return (
+                <MiniRoadmapTask
+                  key={task.id}
+                  task={task}
+                  active={task.id === props.activeTaskId}
+                  onTaskClick={props.onTaskClick}
+                />
+              );
+            })}
       </div>
     </div>
   );

@@ -13,7 +13,9 @@ export const HideableTasks = (): ReactElement => {
   const { Config } = useConfig();
 
   const handleToggleClick = () => {
-    if (!userData) return;
+    if (!userData) {
+      return;
+    }
     update({
       ...userData,
       preferences: {
@@ -24,7 +26,9 @@ export const HideableTasks = (): ReactElement => {
   };
 
   const hiddenTasksCount = (): number => {
-    if (!roadmap) return 0;
+    if (!roadmap) {
+      return 0;
+    }
     return roadmap.tasks.length;
   };
 

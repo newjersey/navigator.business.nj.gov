@@ -44,7 +44,9 @@ export const onSelfRegister = (
   setRegistrationAlertStatus: AuthAlertContextType["setRegistrationAlertStatus"],
   usereturnToLink?: boolean
 ) => {
-  if (!userData) return;
+  if (!userData) {
+    return;
+  }
   setRegistrationAlertStatus("IN_PROGRESS");
   let route;
   if (usereturnToLink) {

@@ -31,7 +31,9 @@ export const EinInput = (props: Props): ReactElement => {
   }
 
   useMountEffectWhenDefined(() => {
-    if (!userData) return;
+    if (!userData) {
+      return;
+    }
     setEmployerId(userData.profileData.employerId || "");
   }, userData);
 
@@ -40,7 +42,9 @@ export const EinInput = (props: Props): ReactElement => {
   };
 
   const save = async (): Promise<void> => {
-    if (!userData || !updateQueue) return;
+    if (!userData || !updateQueue) {
+      return;
+    }
 
     if (employerId.length !== LENGTH) {
       setIsInvalid(true);

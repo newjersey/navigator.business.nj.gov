@@ -81,8 +81,8 @@ export const MyNJSelfRegClientFactory = (config: MyNJConfig, logger: LogWriterTy
       });
   };
 
-  const createResumeBody = (myNJUserKey: string) =>
-    `<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:my="http://my.state.nj.us/">\
+  const createResumeBody = (myNJUserKey: string) => {
+    return `<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:my="http://my.state.nj.us/">\
             <soapenv:Header/>\
             <soapenv:Body>\
               <my:resume>\
@@ -91,9 +91,10 @@ export const MyNJSelfRegClientFactory = (config: MyNJConfig, logger: LogWriterTy
               </my:resume>\
             </soapenv:Body>\
           </soapenv:Envelope>`;
+  };
 
-  const createGrantBody = (user: BusinessUser) =>
-    `<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:my="http://my.state.nj.us/">\
+  const createGrantBody = (user: BusinessUser) => {
+    return `<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:my="http://my.state.nj.us/">\
           <soapenv:Header/>\
           <soapenv:Body>\
             <my:grant>\
@@ -107,6 +108,7 @@ export const MyNJSelfRegClientFactory = (config: MyNJConfig, logger: LogWriterTy
             </my:grant>\
           </soapenv:Body>\
           </soapenv:Envelope>`;
+  };
 
   return {
     grant,

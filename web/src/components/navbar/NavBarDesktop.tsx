@@ -29,11 +29,15 @@ export const NavBarDesktop = (): ReactElement => {
     if (!open) {
       analytics.event.account_name.click.expand_account_menu();
     }
-    setOpen((prevOpen) => !prevOpen);
+    setOpen((prevOpen) => {
+      return !prevOpen;
+    });
   };
 
   const currentlyOnboarding = (): boolean => {
-    if (!router) return false;
+    if (!router) {
+      return false;
+    }
     return router.pathname === ROUTES.onboarding;
   };
 
@@ -72,50 +76,56 @@ export const NavBarDesktop = (): ReactElement => {
     prevOpen.current = open;
   }, [open]);
 
-  const isAuthenticated = useMemo(() => state.isAuthenticated == "TRUE", [state.isAuthenticated]);
+  const isAuthenticated = useMemo(() => {
+    return state.isAuthenticated == "TRUE";
+  }, [state.isAuthenticated]);
   const textColor = isAuthenticated ? "primary" : "base";
   const accountIcon = isAuthenticated ? "account_circle" : "help";
   const accountString = isAuthenticated ? userName : Config.navigationDefaults.navBarGuestText;
 
-  const UnAuthenticatedMenu = () => (
-    <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-      <MenuItem
-        onClick={() => {
-          analytics.event.account_menu_my_profile.click.go_to_profile_screen();
-          router.push(ROUTES.profile);
-        }}
-      >
-        <Button style="tertiary" textBold smallText>
-          {Config.navigationDefaults.profileLinkText}
-        </Button>
-      </MenuItem>
-    </MenuList>
-  );
+  const UnAuthenticatedMenu = () => {
+    return (
+      <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
+        <MenuItem
+          onClick={() => {
+            analytics.event.account_menu_my_profile.click.go_to_profile_screen();
+            router.push(ROUTES.profile);
+          }}
+        >
+          <Button style="tertiary" textBold smallText>
+            {Config.navigationDefaults.profileLinkText}
+          </Button>
+        </MenuItem>
+      </MenuList>
+    );
+  };
 
-  const AuthenticatedMenu = () => (
-    <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-      <MenuItem onClick={handleProfileClick}>
-        <Button style="tertiary" textBold smallText>
-          {Config.navigationDefaults.myNJAccountText}
-        </Button>
-      </MenuItem>
-      <MenuItem
-        onClick={() => {
-          analytics.event.account_menu_my_profile.click.go_to_profile_screen();
-          router.push(ROUTES.profile);
-        }}
-      >
-        <Button style="tertiary" textBold smallText dataTestid="profile-link">
-          {Config.navigationDefaults.profileLinkText}
-        </Button>
-      </MenuItem>
-      <MenuItem onClick={handleLogoutClick}>
-        <Button style="tertiary" textBold smallText>
-          {Config.navigationDefaults.logoutButton}
-        </Button>
-      </MenuItem>
-    </MenuList>
-  );
+  const AuthenticatedMenu = () => {
+    return (
+      <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
+        <MenuItem onClick={handleProfileClick}>
+          <Button style="tertiary" textBold smallText>
+            {Config.navigationDefaults.myNJAccountText}
+          </Button>
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            analytics.event.account_menu_my_profile.click.go_to_profile_screen();
+            router.push(ROUTES.profile);
+          }}
+        >
+          <Button style="tertiary" textBold smallText dataTestid="profile-link">
+            {Config.navigationDefaults.profileLinkText}
+          </Button>
+        </MenuItem>
+        <MenuItem onClick={handleLogoutClick}>
+          <Button style="tertiary" textBold smallText>
+            {Config.navigationDefaults.logoutButton}
+          </Button>
+        </MenuItem>
+      </MenuList>
+    );
+  };
   return (
     <>
       <nav aria-label="Primary" className="grid-container-widescreen desktop:padding-x-7">
@@ -182,20 +192,22 @@ export const NavBarDesktop = (): ReactElement => {
             )}
 
             <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal={true}>
-              {({ TransitionProps, placement }) => (
-                <Grow
-                  {...TransitionProps}
-                  style={{
-                    transformOrigin: placement === "bottom" ? "center top" : "center bottom",
-                  }}
-                >
-                  <Paper>
-                    <ClickAwayListener onClickAway={handleClose}>
-                      {isAuthenticated ? AuthenticatedMenu() : UnAuthenticatedMenu()}
-                    </ClickAwayListener>
-                  </Paper>
-                </Grow>
-              )}
+              {({ TransitionProps, placement }) => {
+                return (
+                  <Grow
+                    {...TransitionProps}
+                    style={{
+                      transformOrigin: placement === "bottom" ? "center top" : "center bottom",
+                    }}
+                  >
+                    <Paper>
+                      <ClickAwayListener onClickAway={handleClose}>
+                        {isAuthenticated ? AuthenticatedMenu() : UnAuthenticatedMenu()}
+                      </ClickAwayListener>
+                    </Paper>
+                  </Grow>
+                );
+              }}
             </Popper>
           </div>
         </div>

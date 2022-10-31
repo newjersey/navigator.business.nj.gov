@@ -54,11 +54,13 @@ export const SuffixDropdown = (): ReactElement => {
               return selected;
             }}
           >
-            {BusinessSuffixMap[userData?.profileData.legalStructureId as FormationLegalType].map((suffix) => (
-              <MenuItem key={suffix} value={suffix} data-testid={suffix}>
-                {suffix}
-              </MenuItem>
-            ))}
+            {BusinessSuffixMap[userData?.profileData.legalStructureId as FormationLegalType].map((suffix) => {
+              return (
+                <MenuItem key={suffix} value={suffix} data-testid={suffix}>
+                  {suffix}
+                </MenuItem>
+              );
+            })}
           </Select>
           <FormHelperText>
             {doesFieldHaveError(FIELD) ? Config.businessFormationDefaults.suffixErrorText : " "}

@@ -16,7 +16,9 @@ export const ReviewSignatures = (): ReactElement => {
       return Config.businessFormationDefaults.reviewStepIncorporatorsHeader;
     } else if (state.legalStructureId == "limited-partnership") {
       return Config.businessFormationDefaults.reviewStepSignaturesHeader;
-    } else return Config.businessFormationDefaults.reviewStepSignaturesHeader;
+    } else {
+      return Config.businessFormationDefaults.reviewStepSignaturesHeader;
+    }
   };
 
   return (
@@ -25,31 +27,33 @@ export const ReviewSignatures = (): ReactElement => {
       {state.formationFormData.signers.length === 0 && (
         <i>{Config.businessFormationDefaults.reviewStepNotEnteredText}</i>
       )}
-      {state.formationFormData.signers.map((signer, index) => (
-        <div key={`${signer}-${index}`} className={index !== 0 ? "margin-top-2" : ""}>
-          <ReviewLineItem
-            label={
-              isCorp
-                ? Config.businessFormationDefaults.reviewStepIncorporatorNameLabel
-                : Config.businessFormationDefaults.reviewStepSignerNameLabel
-            }
-            value={signer.name || italicNotEnteredText}
-            marginOverride={index === 0 ? "margin-top-0" : "margin-top-2"}
-          />
-          {(isCorp || state.legalStructureId == "limited-partnership") && (
+      {state.formationFormData.signers.map((signer, index) => {
+        return (
+          <div key={`${signer}-${index}`} className={index !== 0 ? "margin-top-2" : ""}>
             <ReviewLineItem
-              label={Config.businessFormationDefaults.reviewStepIncorporatorAddressLabel}
-              value={getStringifiedAddress(
-                signer.addressLine1,
-                signer.addressCity,
-                signer.addressState,
-                signer.addressZipCode,
-                signer.addressLine2
-              )}
+              label={
+                isCorp
+                  ? Config.businessFormationDefaults.reviewStepIncorporatorNameLabel
+                  : Config.businessFormationDefaults.reviewStepSignerNameLabel
+              }
+              value={signer.name || italicNotEnteredText}
+              marginOverride={index === 0 ? "margin-top-0" : "margin-top-2"}
             />
-          )}
-        </div>
-      ))}
+            {(isCorp || state.legalStructureId == "limited-partnership") && (
+              <ReviewLineItem
+                label={Config.businessFormationDefaults.reviewStepIncorporatorAddressLabel}
+                value={getStringifiedAddress(
+                  signer.addressLine1,
+                  signer.addressCity,
+                  signer.addressState,
+                  signer.addressZipCode,
+                  signer.addressLine2
+                )}
+              />
+            )}
+          </div>
+        );
+      })}
       <hr className="margin-y-205" />
     </>
   );

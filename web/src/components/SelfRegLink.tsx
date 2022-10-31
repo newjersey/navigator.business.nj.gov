@@ -16,7 +16,9 @@ export const SelfRegLink = (props: Props): ReactElement => {
   const { setRegistrationAlertStatus } = useContext(AuthAlertContext);
 
   const onClick = async () => {
-    if (!userData) return;
+    if (!userData) {
+      return;
+    }
     parseAndSendAnalyticsEvent(props.href);
     onSelfRegister(router, userData, update, setRegistrationAlertStatus);
   };

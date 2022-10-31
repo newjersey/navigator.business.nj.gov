@@ -7,10 +7,12 @@ export const useSidebarCards = (): {
   const { userData, update } = useUserData();
 
   const showCard = async (id: string): Promise<void> => {
-    if (!userData) return;
-    const allCardsExceptDesired = userData.preferences.visibleSidebarCards.filter(
-      (cardId: string) => cardId !== id
-    );
+    if (!userData) {
+      return;
+    }
+    const allCardsExceptDesired = userData.preferences.visibleSidebarCards.filter((cardId: string) => {
+      return cardId !== id;
+    });
     await update({
       ...userData,
       preferences: {
@@ -21,10 +23,12 @@ export const useSidebarCards = (): {
   };
 
   const hideCard = async (id: string): Promise<void> => {
-    if (!userData) return;
-    const allCardsExceptIdToHide = userData.preferences.visibleSidebarCards.filter(
-      (cardId: string) => cardId !== id
-    );
+    if (!userData) {
+      return;
+    }
+    const allCardsExceptIdToHide = userData.preferences.visibleSidebarCards.filter((cardId: string) => {
+      return cardId !== id;
+    });
     await update({
       ...userData,
       preferences: {

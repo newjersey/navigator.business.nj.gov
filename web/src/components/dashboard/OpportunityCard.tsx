@@ -35,13 +35,17 @@ export const OpportunityCard = (props: Props): ReactElement => {
   });
 
   const isHidden = (): boolean => {
-    if (!userData) return false;
+    if (!userData) {
+      return false;
+    }
     const property = props.urlPath === "funding" ? "hiddenFundingIds" : "hiddenCertificationIds";
     return userData.preferences[property].includes(props.opportunity.id);
   };
 
   const hideSelf = async () => {
-    if (!userData) return;
+    if (!userData) {
+      return;
+    }
     const propertyToUpdate = props.urlPath === "funding" ? "hiddenFundingIds" : "hiddenCertificationIds";
     await update({
       ...userData,
@@ -53,15 +57,17 @@ export const OpportunityCard = (props: Props): ReactElement => {
   };
 
   const unhideSelf = async () => {
-    if (!userData) return;
+    if (!userData) {
+      return;
+    }
     const propertyToUpdate = props.urlPath === "funding" ? "hiddenFundingIds" : "hiddenCertificationIds";
     await update({
       ...userData,
       preferences: {
         ...userData.preferences,
-        [propertyToUpdate]: userData.preferences[propertyToUpdate].filter(
-          (it: string) => it !== props.opportunity.id
-        ),
+        [propertyToUpdate]: userData.preferences[propertyToUpdate].filter((it: string) => {
+          return it !== props.opportunity.id;
+        }),
       },
     });
   };
@@ -76,7 +82,12 @@ export const OpportunityCard = (props: Props): ReactElement => {
       <div className="fdr margin-bottom-105">
         <div>{TYPE_TO_LABEL[props.urlPath]}</div>
         <div className="mla">
-          <Button style="narrow-light" onClick={() => (isHidden() ? unhideSelf() : hideSelf())}>
+          <Button
+            style="narrow-light"
+            onClick={() => {
+              return isHidden() ? unhideSelf() : hideSelf();
+            }}
+          >
             <div className="fdr fac">
               <Icon>{isHidden() ? "visibility" : "visibility_off"}</Icon>
               <span className="margin-left-05 line-height-sans-2">

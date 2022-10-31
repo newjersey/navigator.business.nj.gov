@@ -6,7 +6,9 @@ import { fireEvent, render, screen } from "@testing-library/react";
 
 const Config = getMergedConfig();
 
-jest.mock("next/router", () => ({ useRouter: jest.fn() }));
+jest.mock("next/router", () => {
+  return { useRouter: jest.fn() };
+});
 
 describe("<CongratulatoryModal />", () => {
   beforeEach(() => {

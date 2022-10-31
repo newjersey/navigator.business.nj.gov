@@ -39,23 +39,32 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
   const [apiFailed, setOnAPIfailed] = useState<undefined | "FAILED" | "UNKNOWN">(undefined);
   const [onSubmitClicked, setOnSubmitClicked] = useState<boolean>(false);
 
-  const getErrors = () => ({
-    businessName: { invalid: profileData.businessName.trim().length === 0 },
-    taxId: { invalid: profileData.taxId?.trim().length != 12 ?? true },
-  });
+  const getErrors = () => {
+    return {
+      businessName: { invalid: profileData.businessName.trim().length === 0 },
+      taxId: { invalid: profileData.taxId?.trim().length != 12 ?? true },
+    };
+  };
 
-  const hasErrors = (errors?: Partial<ProfileFieldErrorMap>) =>
-    fields.some((i) => (errors ?? fieldStates)[i]?.invalid == true);
+  const hasErrors = (errors?: Partial<ProfileFieldErrorMap>) => {
+    return fields.some((i) => {
+      return (errors ?? fieldStates)[i]?.invalid == true;
+    });
+  };
 
   const onValidation = (field: ProfileFields, invalid: boolean) => {
     setFieldStates({ ...fieldStates, [field]: { ...fieldStates[field], invalid } });
   };
 
   const onSubmit = async () => {
-    if (!userData) return;
+    if (!userData) {
+      return;
+    }
     setOnSubmitClicked(true);
     const errors = getErrors();
-    setFieldStates((prev) => ({ ...prev, ...errors }));
+    setFieldStates((prev) => {
+      return { ...prev, ...errors };
+    });
     if (hasErrors(errors)) {
       analytics.event.tax_calendar_modal.submit.tax_calendar_modal_validation_error();
       return;
@@ -91,15 +100,17 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
     }
 
     if (userDataToSet.taxFilingData.state == "FAILED") {
-      setFieldStates((previousState) => ({
-        ...fields.reduce(
-          (reducer, value) => {
-            reducer[value] = { ...reducer[value], invalid: true };
-            return reducer;
-          },
-          { ...previousState }
-        ),
-      }));
+      setFieldStates((previousState) => {
+        return {
+          ...fields.reduce(
+            (reducer, value) => {
+              reducer[value] = { ...reducer[value], invalid: true };
+              return reducer;
+            },
+            { ...previousState }
+          ),
+        };
+      });
       setOnAPIfailed("FAILED");
       analytics.event.tax_calendar_modal.submit.tax_calendar_business_does_not_exist();
       setIsLoading(false);
@@ -118,7 +129,9 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
   }, userData);
 
   const onClose = () => {
-    if (!userData) return;
+    if (!userData) {
+      return;
+    }
     props.close();
     setProfileData(userData.profileData);
     setOnAPIfailed(undefined);

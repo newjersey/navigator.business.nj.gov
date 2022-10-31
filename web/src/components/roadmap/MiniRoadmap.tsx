@@ -27,14 +27,22 @@ export const MiniRoadmap = (props: Props): ReactElement => {
             }
           : undefined;
       };
-      if (!userData) return;
+      if (!userData) {
+        return;
+      }
       const openSteps = userData?.preferences.roadmapOpenSteps;
       click && analytics.event.task_mini_roadmap_step.click.expand_contract();
       if (openSteps.includes(stepNumber)) {
         if (setOpen) {
           return;
         }
-        await update(updateSteps(openSteps?.filter((openStep) => openStep !== stepNumber)));
+        await update(
+          updateSteps(
+            openSteps?.filter((openStep) => {
+              return openStep !== stepNumber;
+            })
+          )
+        );
       } else {
         await update(updateSteps([...openSteps, stepNumber]));
       }
@@ -44,24 +52,30 @@ export const MiniRoadmap = (props: Props): ReactElement => {
 
   return (
     <>
-      {getSectionNames(roadmap).map((section) => (
-        <SectionAccordion key={section} sectionType={section} mini={true}>
-          {roadmap?.steps
-            .filter((step) => step.section === section)
-            .map((step, index, array) => (
-              <MiniRoadmapStep
-                step={step}
-                isLast={index === array.length - 1}
-                activeTaskId={props.activeTaskId}
-                completed={isStepCompleted(roadmap, step, userData)}
-                isOpen={userData?.preferences.roadmapOpenSteps.includes(step.stepNumber)}
-                toggleStep={onToggleStep}
-                onTaskClick={props.onTaskClick}
-                key={step.stepNumber}
-              />
-            ))}
-        </SectionAccordion>
-      ))}
+      {getSectionNames(roadmap).map((section) => {
+        return (
+          <SectionAccordion key={section} sectionType={section} mini={true}>
+            {roadmap?.steps
+              .filter((step) => {
+                return step.section === section;
+              })
+              .map((step, index, array) => {
+                return (
+                  <MiniRoadmapStep
+                    step={step}
+                    isLast={index === array.length - 1}
+                    activeTaskId={props.activeTaskId}
+                    completed={isStepCompleted(roadmap, step, userData)}
+                    isOpen={userData?.preferences.roadmapOpenSteps.includes(step.stepNumber)}
+                    toggleStep={onToggleStep}
+                    onTaskClick={props.onTaskClick}
+                    key={step.stepNumber}
+                  />
+                );
+              })}
+          </SectionAccordion>
+        );
+      })}
     </>
   );
 };

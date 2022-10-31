@@ -13,18 +13,22 @@ const dbConfig = {
   tableName: "users-table-test",
 };
 
-const makeParams = (data: any) => ({
-  TableName: dbConfig.tableName,
-  Item: {
-    userId: data.user.id,
-    data: { ...data },
-  },
-});
+const makeParams = (data: any) => {
+  return {
+    TableName: dbConfig.tableName,
+    Item: {
+      userId: data.user.id,
+      data: { ...data },
+    },
+  };
+};
 
-jest.mock("./migrations/migrations", () => ({
-  Migrations: [migrate_v0_to_v1, migrate_v1_to_v2],
-  CURRENT_VERSION: 2,
-}));
+jest.mock("./migrations/migrations", () => {
+  return {
+    Migrations: [migrate_v0_to_v1, migrate_v1_to_v2],
+    CURRENT_VERSION: 2,
+  };
+});
 
 describe("DynamoUserDataClient Migrations", () => {
   const config = {
@@ -126,7 +130,9 @@ describe("DynamoUserDataClient Migrations", () => {
       },
     };
 
-    return client.send(new GetCommand(params)).then((result) => result.Item?.data);
+    return client.send(new GetCommand(params)).then((result) => {
+      return result.Item?.data;
+    });
   };
 });
 

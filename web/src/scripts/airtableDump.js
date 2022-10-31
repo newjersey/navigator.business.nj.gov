@@ -20,7 +20,11 @@ const outPath = `${process.cwd()}/src/lib/static/records/municipalities.json`;
 
 const saveRecords = async () => {
   const results = await airtableSelectAll();
-  const records = results.filter((it) => !!it["Town Name"]).map(airtableToMunicipalityDetail);
+  const records = results
+    .filter((it) => {
+      return !!it["Town Name"];
+    })
+    .map(airtableToMunicipalityDetail);
   const recordsKeyedById = {};
 
   for (const record of records) {
@@ -30,21 +34,25 @@ const saveRecords = async () => {
   const json = JSON.stringify(recordsKeyedById);
 
   fs.writeFile(outPath, json, (err) => {
-    if (err) throw err;
+    if (err) {
+      throw err;
+    }
   });
 };
 
-const airtableToMunicipalityDetail = (airtableMunicipality) => ({
-  id: airtableMunicipality.id,
-  townName: airtableMunicipality.Municipality,
-  townDisplayName: airtableMunicipality["Town Name"],
-  townWebsite: airtableMunicipality["Town Website"],
-  countyId: airtableMunicipality["County (Data)"][0],
-  countyName: airtableMunicipality["County Name"][0],
-  countyClerkPhone: airtableMunicipality["County Clerk Phone"][0],
-  countyClerkWebsite: airtableMunicipality["County Clerks Office Webpage"][0],
-  countyWebsite: airtableMunicipality["County Website"][0],
-});
+const airtableToMunicipalityDetail = (airtableMunicipality) => {
+  return {
+    id: airtableMunicipality.id,
+    townName: airtableMunicipality.Municipality,
+    townDisplayName: airtableMunicipality["Town Name"],
+    townWebsite: airtableMunicipality["Town Website"],
+    countyId: airtableMunicipality["County (Data)"][0],
+    countyName: airtableMunicipality["County Name"][0],
+    countyClerkPhone: airtableMunicipality["County Clerk Phone"][0],
+    countyClerkWebsite: airtableMunicipality["County Clerks Office Webpage"][0],
+    countyWebsite: airtableMunicipality["County Website"][0],
+  };
+};
 
 const airtableSelectAll = () => {
   return new Promise((resolve, reject) => {

@@ -20,7 +20,9 @@ export const Task = (props: Props): ReactElement => {
   const taskProgress = (userData?.taskProgress && userData.taskProgress[props.task.id]) || "NOT_STARTED";
 
   const renderRequiredLabel = () => {
-    if (!props.task.required) return <></>;
+    if (!props.task.required) {
+      return <></>;
+    }
     return (
       <span className="text-base text-no-underline display-inline-block" data-testid="required task">
         <Content>{Config.taskDefaults.requiredLabelText}</Content>
@@ -43,7 +45,9 @@ export const Task = (props: Props): ReactElement => {
         <div>
           <Link href={`/tasks/${props.task.urlSlug}`} passHref>
             <a
-              onClick={() => analytics.event.roadmap_task_title.click.go_to_task()}
+              onClick={() => {
+                return analytics.event.roadmap_task_title.click.go_to_task();
+              }}
               href={`/tasks/${props.task.urlSlug}`}
               className={`usa-link margin-right-105 ${props.task.required ? "text-bold" : ""}`}
               data-task={props.task.id}

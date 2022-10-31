@@ -21,13 +21,17 @@ const outDir = `${process.cwd()}/../content/src/opportunities`;
 const saveRecords = async () => {
   const results = await airtableSelectAll();
   const records = results
-    .filter((it) => it["Website Copy (public)"] && it["Website Copy (public)"] !== "Program Name")
+    .filter((it) => {
+      return it["Website Copy (public)"] && it["Website Copy (public)"] !== "Program Name";
+    })
     .map(airtableToOpportunity);
 
   for (const opp of records) {
     const file = writeMarkdownString(opp);
     fs.writeFile(`${outDir}/${opp.filename}.md`, file, (err) => {
-      if (err) throw err;
+      if (err) {
+        throw err;
+      }
     });
   }
 };
@@ -214,8 +218,16 @@ const writeMarkdownString = (opportunity) => {
     `benefits: "${opportunity.benefits.replace(/"/g, '\\"')}"\n` +
     `eligibility: "${opportunity.eligibility.replace(/"/g, '\\"')}"\n` +
     `publishStageArchive: "${opportunity.publishStageArchive}"\n` +
-    `industry:  [${opportunity.industry.map((it) => `"${it}"`).join(",")}]\n` +
-    `agency:  [${opportunity.agency.map((it) => `"${it}"`).join(",")}]\n` +
+    `industry:  [${opportunity.industry
+      .map((it) => {
+        return `"${it}"`;
+      })
+      .join(",")}]\n` +
+    `agency:  [${opportunity.agency
+      .map((it) => {
+        return `"${it}"`;
+      })
+      .join(",")}]\n` +
     `openDate: "${opportunity.openDate}"\n` +
     `dueDate: "${opportunity.dueDate}"\n` +
     `status: "${opportunity.status}"\n` +
@@ -225,7 +237,11 @@ const writeMarkdownString = (opportunity) => {
     `homeBased: "${opportunity.homeBased}"\n` +
     `mwvb: "${opportunity.mwvb}"\n` +
     `preferenceForOpportunityZone: "${opportunity.preferenceForOpportunityZone}"\n` +
-    `county: [${opportunity.county.map((it) => `"${it}"`).join(",")}]\n` +
+    `county: [${opportunity.county
+      .map((it) => {
+        return `"${it}"`;
+      })
+      .join(",")}]\n` +
     `---\n` +
     `\n` +
     `${opportunity.description}`

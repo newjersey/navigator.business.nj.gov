@@ -16,7 +16,9 @@ export const SidebarCardFundingNudge = (props: Props): ReactElement => {
   const { userData, update } = useUserData();
 
   const updateUserToUpAndRunning = async () => {
-    if (!userData) return;
+    if (!userData) {
+      return;
+    }
     await update({
       ...userData,
       profileData: {
@@ -28,7 +30,9 @@ export const SidebarCardFundingNudge = (props: Props): ReactElement => {
   };
 
   const onClick = async () => {
-    if (!userData) return;
+    if (!userData) {
+      return;
+    }
     if (userData.profileData.industryId === "generic" || !userData.profileData.industryId) {
       setModalOpen(true);
     } else {
@@ -40,7 +44,9 @@ export const SidebarCardFundingNudge = (props: Props): ReactElement => {
     <>
       <SectorModal
         open={modalOpen}
-        handleClose={() => setModalOpen(false)}
+        handleClose={() => {
+          return setModalOpen(false);
+        }}
         onContinue={updateUserToUpAndRunning}
       />
       <SidebarCardGeneric

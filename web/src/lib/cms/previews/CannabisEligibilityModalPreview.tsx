@@ -15,7 +15,12 @@ const CannabisEligibilityModalPreview = (props: PreviewProps) => {
   return (
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
       <h2>Eligibility Modal</h2>
-      <button className="margin-2" onClick={() => setModalOpen(true)}>
+      <button
+        className="margin-2"
+        onClick={() => {
+          return setModalOpen(true);
+        }}
+      >
         Open Modal
       </button>
       <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>

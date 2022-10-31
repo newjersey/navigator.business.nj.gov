@@ -12,9 +12,11 @@ import { useRouter } from "next/router";
 import { ReactElement, useEffect, useState } from "react";
 import UAParser from "ua-parser-js";
 
-const createFeedbackModalErrorMap = () => ({
-  featureRequest: { invalid: false },
-});
+const createFeedbackModalErrorMap = () => {
+  return {
+    featureRequest: { invalid: false },
+  };
+};
 
 type Props = {
   onClose: () => void;
@@ -40,10 +42,14 @@ export const RequestFeatureModal = ({ onClose, isOpen, setCurrentFeedback }: Pro
   }, [isOpen]);
 
   const onValidation = (fieldName: string, invalid: boolean) => {
-    setErrorMap((prevErrorMap) => ({ ...prevErrorMap, [fieldName]: { invalid } }));
+    setErrorMap((prevErrorMap) => {
+      return { ...prevErrorMap, [fieldName]: { invalid } };
+    });
   };
   const handleFeedbackRequestSubmission = () => {
-    if (!userData) return;
+    if (!userData) {
+      return;
+    }
 
     const parsedUserAgent = new UAParser().getResult();
     const operatingSystem = parsedUserAgent.os.name
@@ -62,7 +68,9 @@ export const RequestFeatureModal = ({ onClose, isOpen, setCurrentFeedback }: Pro
       screenWidth: `${window.innerWidth} px`,
     };
 
-    if (featureRequest.trim().length === 0) onValidation("featureRequest", true);
+    if (featureRequest.trim().length === 0) {
+      onValidation("featureRequest", true);
+    }
     if (featureRequest.trim().length > 0) {
       setIsLoading(true);
       api

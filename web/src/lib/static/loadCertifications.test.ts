@@ -4,9 +4,13 @@ import fs from "fs";
 
 jest.mock("fs");
 
-jest.mock("process", () => ({
-  cwd: () => "/test",
-}));
+jest.mock("process", () => {
+  return {
+    cwd: () => {
+      return "/test";
+    },
+  };
+});
 
 describe("loadFundings", () => {
   let mockedFs: jest.Mocked<typeof fs>;

@@ -13,18 +13,24 @@ export const loadOperateReferences = (): Record<string, OperateReference> => {
   const filingFilenames = fs.readdirSync(filingsDir);
   const fundingFilenames = fs.readdirSync(fundingsDir);
   const certFilenames = fs.readdirSync(certificationsDir);
-  const filingFileContents = filingFilenames.map((fileName) => ({
-    ...loadFilingByFileName(fileName),
-    origin: "filings" as Origin,
-  }));
-  const fundingFileContents = fundingFilenames.map((fileName) => ({
-    ...loadFundingByFileName(fileName),
-    origin: "funding" as Origin,
-  }));
-  const certificationFileContents = certFilenames.map((fileName) => ({
-    ...loadCertificationByFileName(fileName),
-    origin: "certification" as Origin,
-  }));
+  const filingFileContents = filingFilenames.map((fileName) => {
+    return {
+      ...loadFilingByFileName(fileName),
+      origin: "filings" as Origin,
+    };
+  });
+  const fundingFileContents = fundingFilenames.map((fileName) => {
+    return {
+      ...loadFundingByFileName(fileName),
+      origin: "funding" as Origin,
+    };
+  });
+  const certificationFileContents = certFilenames.map((fileName) => {
+    return {
+      ...loadCertificationByFileName(fileName),
+      origin: "certification" as Origin,
+    };
+  });
 
   const allContents: FileProperties[] = [
     ...filingFileContents,

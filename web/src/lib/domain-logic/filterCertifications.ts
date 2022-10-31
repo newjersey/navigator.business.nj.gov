@@ -14,7 +14,9 @@ export const filterCertifications = (
       const ownerShipType = it.applicableOwnershipTypes.some((cert) => {
         return userData.profileData.ownershipTypeIds.includes(cert);
       });
-      if (!ownerShipType) allowedCertification = false;
+      if (!ownerShipType) {
+        allowedCertification = false;
+      }
     }
 
     if (it.isSbe) {

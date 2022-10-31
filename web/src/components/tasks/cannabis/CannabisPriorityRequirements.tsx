@@ -34,21 +34,23 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
   });
 
   useMountEffectWhenDefined(() => {
-    if (!userData) return;
-    const minorityOrWomenPriorityTypeSelected = priorityTypesObj.minorityOrWomen.some(
-      (key) => userData.taskItemChecklist[key] === true
-    );
-    const veteranPriorityTypeSelected = priorityTypesObj.veteran.some(
-      (key) => userData.taskItemChecklist[key] === true
-    );
+    if (!userData) {
+      return;
+    }
+    const minorityOrWomenPriorityTypeSelected = priorityTypesObj.minorityOrWomen.some((key) => {
+      return userData.taskItemChecklist[key] === true;
+    });
+    const veteranPriorityTypeSelected = priorityTypesObj.veteran.some((key) => {
+      return userData.taskItemChecklist[key] === true;
+    });
 
-    const impactZonePriorityTypeSelected = priorityTypesObj.impactZone.some(
-      (key) => userData.taskItemChecklist[key] === true
-    );
+    const impactZonePriorityTypeSelected = priorityTypesObj.impactZone.some((key) => {
+      return userData.taskItemChecklist[key] === true;
+    });
 
-    const socialEquityPriorityTypeSelected = priorityTypesObj.socialEquity.some(
-      (key) => userData.taskItemChecklist[key] === true
-    );
+    const socialEquityPriorityTypeSelected = priorityTypesObj.socialEquity.some((key) => {
+      return userData.taskItemChecklist[key] === true;
+    });
 
     setDisplayMWPriorityType(minorityOrWomenPriorityTypeSelected);
     setDisplayVeteranPriorityType(veteranPriorityTypeSelected);
@@ -58,7 +60,9 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
   }, [userData]);
 
   const showTaskCompleteButton = () => {
-    if (displayNoPriorityType) return true;
+    if (displayNoPriorityType) {
+      return true;
+    }
     return (
       displayImpactZonePriorityType &&
       !displayMWPriorityType &&
@@ -77,13 +81,17 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
     if (displaySocialEquityPriorityType) {
       ctaButtons.push({
         text: Config.cannabisPriorityStatus.socialEquityButtonText,
-        onClick: () => openInNewTab(Config.cannabisPriorityStatus.socialEquityButtonLink),
+        onClick: () => {
+          return openInNewTab(Config.cannabisPriorityStatus.socialEquityButtonLink);
+        },
       });
     }
     if (displayMWPriorityType || displayVeteranPriorityType) {
       ctaButtons.push({
         text: Config.cannabisPriorityStatus.certificationButtonText,
-        onClick: () => openInNewTab(Config.cannabisPriorityStatus.certificationButtonLink),
+        onClick: () => {
+          return openInNewTab(Config.cannabisPriorityStatus.certificationButtonLink);
+        },
       });
     }
     if (showTaskCompleteButton()) {

@@ -17,36 +17,42 @@ export const AuthButton = (props?: Props): ReactElement => {
   const { state, dispatch } = useContext(AuthContext);
   const router = useRouter();
 
-  const loginButton = () => (
-    <Button
-      style={props?.position === "HERO" ? `secondary-big` : "tertiary"}
-      dataTestid="login-button"
-      noRightMargin
-      widthAutoOnMobile
-      onClick={() => {
-        triggerSignIn();
-        if (props?.position === "HERO") {
-          analytics.event.landing_page_hero_log_in.click.go_to_myNJ_login();
-        } else if (props?.position === "NAVBAR") {
-          analytics.event.landing_page_navbar_log_in.click.go_to_myNJ_login();
-        }
-      }}
-    >
-      {Config.navigationDefaults.logInButton}
-    </Button>
-  );
+  const loginButton = () => {
+    return (
+      <Button
+        style={props?.position === "HERO" ? `secondary-big` : "tertiary"}
+        dataTestid="login-button"
+        noRightMargin
+        widthAutoOnMobile
+        onClick={() => {
+          triggerSignIn();
+          if (props?.position === "HERO") {
+            analytics.event.landing_page_hero_log_in.click.go_to_myNJ_login();
+          } else if (props?.position === "NAVBAR") {
+            analytics.event.landing_page_navbar_log_in.click.go_to_myNJ_login();
+          }
+        }}
+      >
+        {Config.navigationDefaults.logInButton}
+      </Button>
+    );
+  };
 
-  const logoutButton = () => (
-    <Button
-      style={props?.position === "HERO" ? `secondary-big` : "tertiary"}
-      noRightMargin
-      onClick={() => onSignOut(router.push, dispatch)}
-    >
-      <span className={props?.landing ? "text-primary" : "text-base"}>
-        {Config.navigationDefaults.logoutButton}
-      </span>
-    </Button>
-  );
+  const logoutButton = () => {
+    return (
+      <Button
+        style={props?.position === "HERO" ? `secondary-big` : "tertiary"}
+        noRightMargin
+        onClick={() => {
+          return onSignOut(router.push, dispatch);
+        }}
+      >
+        <span className={props?.landing ? "text-primary" : "text-base"}>
+          {Config.navigationDefaults.logoutButton}
+        </span>
+      </Button>
+    );
+  };
 
   switch (state.isAuthenticated) {
     case IsAuthenticated.FALSE:

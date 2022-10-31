@@ -35,7 +35,9 @@ export const BusinessNameStep = (): ReactElement => {
   const { doesFieldHaveError } = useFormationErrors();
 
   useMountEffectWhenDefined(() => {
-    if (!userData) return;
+    if (!userData) {
+      return;
+    }
     updateCurrentName(state.formationFormData.businessName || userData.profileData.businessName);
   }, userData);
 
@@ -71,7 +73,9 @@ export const BusinessNameStep = (): ReactElement => {
                 className="fg1 width-100"
                 margin="dense"
                 value={currentName}
-                onChange={(event) => updateCurrentName(event.target.value)}
+                onChange={(event) => {
+                  return updateCurrentName(event.target.value);
+                }}
                 variant="outlined"
                 placeholder={Config.businessFormationDefaults.nameCheckPlaceholderText}
                 inputProps={{
@@ -139,11 +143,13 @@ export const BusinessNameStep = (): ReactElement => {
                 {Config.searchBusinessNameTask.similarUnavailableNamesText}
               </p>
               <ul className="usa-list">
-                {nameAvailability.similarNames.map((otherName) => (
-                  <li className="text-uppercase text-bold margin-y-0 font-sans-xs" key={otherName}>
-                    {otherName}
-                  </li>
-                ))}
+                {nameAvailability.similarNames.map((otherName) => {
+                  return (
+                    <li className="text-uppercase text-bold margin-y-0 font-sans-xs" key={otherName}>
+                      {otherName}
+                    </li>
+                  );
+                })}
               </ul>
             </>
           )}

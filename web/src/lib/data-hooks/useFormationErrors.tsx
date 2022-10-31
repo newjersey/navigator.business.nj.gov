@@ -17,8 +17,12 @@ export const useFormationErrors = () => {
   const { userData } = useUserData();
 
   const requiredFields = useMemo((): FormationFields[] => {
-    if (!userData?.profileData.legalStructureId) return [];
-    if (!FormationLegalTypes.includes(userData.profileData.legalStructureId as FormationLegalType)) return [];
+    if (!userData?.profileData.legalStructureId) {
+      return [];
+    }
+    if (!FormationLegalTypes.includes(userData.profileData.legalStructureId as FormationLegalType)) {
+      return [];
+    }
     return requiredFieldsForUser(
       userData.profileData.legalStructureId as FormationLegalType,
       state.formationFormData
@@ -26,13 +30,12 @@ export const useFormationErrors = () => {
   }, [userData?.profileData.legalStructureId, state.formationFormData]);
 
   const errorStates: Record<FormationFields, FormationFieldErrorState> = useMemo(() => {
-    return requiredFields.reduce(
-      (acc, field) => ({
+    return requiredFields.reduce((acc, field) => {
+      return {
         ...acc,
         [field]: getErrorStateForField(field, state.formationFormData, state.businessNameAvailability),
-      }),
-      {} as Record<FormationFields, FormationFieldErrorState>
-    );
+      };
+    }, {} as Record<FormationFields, FormationFieldErrorState>);
   }, [state.formationFormData, state.businessNameAvailability, requiredFields]);
 
   const getApiFieldErrorState = (field: FormationFields): FormationFieldErrorState | undefined => {
@@ -44,9 +47,9 @@ export const useFormationErrors = () => {
     }
 
     const apiField = getApiField(field);
-    const apiErrorForField = userData.formationData.formationResponse.errors.find(
-      (error) => error.field === apiField
-    );
+    const apiErrorForField = userData.formationData.formationResponse.errors.find((error) => {
+      return error.field === apiField;
+    });
     const hasApiFieldError = apiErrorForField !== undefined;
     const hasFieldBeenInteracted = state.interactedFields.includes(field);
 
@@ -76,22 +79,32 @@ export const useFormationErrors = () => {
     overrides?: { hasSubmitted: boolean }
   ): FormationFieldErrorState[] => {
     const allErrorsForStep = requiredFields
-      .filter((field) => getStepForField(field) === step)
-      .map((field) => errorStates[field])
-      .map((fieldErrorState) => overrideErrorStateForApiErrors(fieldErrorState))
-      .filter((fieldErrorState) => fieldErrorState.hasError);
+      .filter((field) => {
+        return getStepForField(field) === step;
+      })
+      .map((field) => {
+        return errorStates[field];
+      })
+      .map((fieldErrorState) => {
+        return overrideErrorStateForApiErrors(fieldErrorState);
+      })
+      .filter((fieldErrorState) => {
+        return fieldErrorState.hasError;
+      });
 
     if (overrides?.hasSubmitted ?? state.hasBeenSubmitted) {
       return allErrorsForStep;
     } else {
-      return allErrorsForStep.filter((fieldErrorState) =>
-        state.interactedFields.includes(fieldErrorState.field)
-      );
+      return allErrorsForStep.filter((fieldErrorState) => {
+        return state.interactedFields.includes(fieldErrorState.field);
+      });
     }
   };
 
   const doesFieldHaveError = (field: FormationFields): boolean => {
-    if (!requiredFields.includes(field)) return false;
+    if (!requiredFields.includes(field)) {
+      return false;
+    }
     const fieldErrorState = overrideErrorStateForApiErrors(errorStates[field]);
     const fieldHasError = fieldErrorState.hasError;
     if (state.hasBeenSubmitted) {
@@ -103,16 +116,24 @@ export const useFormationErrors = () => {
 
   const doSomeFieldsHaveError = (fields: FormationFields[]): boolean => {
     return fields
-      .filter((field) => requiredFields.includes(field))
-      .some((field) => doesFieldHaveError(field));
+      .filter((field) => {
+        return requiredFields.includes(field);
+      })
+      .some((field) => {
+        return doesFieldHaveError(field);
+      });
   };
 
   const requiredFieldsForStep = (step: FormationStepNames): FormationFields[] => {
-    return requiredFields.filter((field) => getStepForField(field) === step);
+    return requiredFields.filter((field) => {
+      return getStepForField(field) === step;
+    });
   };
 
   const isStepCompleted = (step: FormationStepNames): boolean => {
-    if (step === "Review") return false;
+    if (step === "Review") {
+      return false;
+    }
 
     return requiredFieldsForStep(step).every((field) => {
       const errorState =

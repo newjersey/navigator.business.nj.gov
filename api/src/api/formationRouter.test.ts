@@ -16,14 +16,18 @@ import { setupExpress } from "../libs/express";
 import { formationRouterFactory } from "./formationRouter";
 import { getSignedInUser, getSignedInUserId } from "./userRouter";
 
-jest.mock("./userRouter", () => ({
-  getSignedInUserId: jest.fn(),
-  getSignedInUser: jest.fn(),
-}));
+jest.mock("./userRouter", () => {
+  return {
+    getSignedInUserId: jest.fn(),
+    getSignedInUser: jest.fn(),
+  };
+});
 
-jest.mock("../domain/s3Writer.ts", () => ({
-  saveFileFromUrl: jest.fn(),
-}));
+jest.mock("../domain/s3Writer.ts", () => {
+  return {
+    saveFileFromUrl: jest.fn(),
+  };
+});
 
 const fakeSaveFileFromUrl = saveFileFromUrl as jest.Mock;
 const fakeSignedInUserId = getSignedInUserId as jest.Mock;
@@ -58,7 +62,9 @@ describe("formationRouter", () => {
   });
 
   afterAll(async () => {
-    await new Promise((resolve) => setTimeout(resolve, 500));
+    await new Promise((resolve) => {
+      return setTimeout(resolve, 500);
+    });
   });
 
   describe("/formation", () => {
@@ -119,11 +125,13 @@ describe("formationRouter", () => {
     let dateNowSpy: jest.SpyInstance;
 
     beforeEach(() => {
-      dateNowSpy = jest.spyOn(Date, "now").mockImplementation(() => 1_487_076_708_000);
+      dateNowSpy = jest.spyOn(Date, "now").mockImplementation(() => {
+        return 1_487_076_708_000;
+      });
       fakeSaveFileFromUrl.mockReset();
-      fakeSaveFileFromUrl.mockImplementation((link, location, bucket) =>
-        Promise.resolve(`http://${location}`)
-      );
+      fakeSaveFileFromUrl.mockImplementation((link, location, bucket) => {
+        return Promise.resolve(`http://${location}`);
+      });
     });
 
     afterAll(() => {

@@ -34,11 +34,12 @@ export const OnboardingDateOfFormation = (props: Props): ReactElement => {
     setDateValue(parseDate(state.profileData.dateOfFormation));
   }, state.profileData.dateOfFormation);
 
-  const onValidation = (): void =>
-    props.onValidation(
+  const onValidation = (): void => {
+    return props.onValidation(
       fieldName,
       !((dateValue == null && !props.required) || (dateValue?.isValid() && !dateError))
     );
+  };
 
   const handleChange = (date: DateObject | null) => {
     setDateValue(date);
@@ -65,22 +66,26 @@ export const OnboardingDateOfFormation = (props: Props): ReactElement => {
         value={dateValue}
         onClose={onValidation}
         onChange={handleChange}
-        onError={(hasError: string | null) => setDateError(!!hasError)}
-        renderInput={(params: TextFieldProps) => (
-          <div>
-            <GenericTextField
-              fieldName={fieldName}
-              onValidation={onValidation}
-              validationText={errorText}
-              error={props.fieldStates[fieldName].invalid}
-              fieldOptions={{
-                ...params,
-                sx: { width: "50%", ...params.sx },
-                error: props.fieldStates[fieldName].invalid,
-              }}
-            />
-          </div>
-        )}
+        onError={(hasError: string | null) => {
+          return setDateError(!!hasError);
+        }}
+        renderInput={(params: TextFieldProps) => {
+          return (
+            <div>
+              <GenericTextField
+                fieldName={fieldName}
+                onValidation={onValidation}
+                validationText={errorText}
+                error={props.fieldStates[fieldName].invalid}
+                fieldOptions={{
+                  ...params,
+                  sx: { width: "50%", ...params.sx },
+                  error: props.fieldStates[fieldName].invalid,
+                }}
+              />
+            </div>
+          );
+        }}
       />
     </LocalizationProvider>
   );

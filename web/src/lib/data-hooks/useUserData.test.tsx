@@ -8,10 +8,12 @@ import { BusinessUser } from "@businessnjgovnavigator/shared/";
 import { act, render } from "@testing-library/react";
 import { SWRConfig } from "swr";
 
-jest.mock("@/lib/api-client/apiClient", () => ({
-  getUserData: jest.fn(),
-  postUserData: jest.fn(),
-}));
+jest.mock("@/lib/api-client/apiClient", () => {
+  return {
+    getUserData: jest.fn(),
+    postUserData: jest.fn(),
+  };
+});
 const mockApi = api as jest.Mocked<typeof api>;
 
 const userDataStorage = UserDataStorageFactory();
@@ -40,7 +42,13 @@ describe("useUserData", () => {
       withUserDataError(
         withAuth(
           <>
-            <SWRConfig value={{ provider: () => userDataStorage }}>
+            <SWRConfig
+              value={{
+                provider: () => {
+                  return userDataStorage;
+                },
+              }}
+            >
               <TestComponent />
             </SWRConfig>
           </>,
@@ -56,14 +64,18 @@ describe("useUserData", () => {
   it("does not post update when local flag is true", async () => {
     const currentUser = generateUser({});
     const { update } = setupHook(currentUser);
-    await act(() => update(generateUserData({}), { local: true }));
+    await act(() => {
+      return update(generateUserData({}), { local: true });
+    });
     expect(mockApi.postUserData).not.toHaveBeenCalled();
   });
 
   it("does not post update when user is unauthenticated", async () => {
     const currentUser = generateUser({});
     const { update } = setupHook(currentUser, IsAuthenticated.FALSE);
-    await act(() => update(generateUserData({})));
+    await act(() => {
+      return update(generateUserData({}));
+    });
     expect(mockApi.postUserData).not.toHaveBeenCalled();
   });
 
@@ -87,7 +99,9 @@ describe("useUserData", () => {
 
       const { update } = setupHook(currentUser);
       const newUserData = generateUserData({});
-      await act(() => update(newUserData));
+      await act(() => {
+        return update(newUserData);
+      });
       expect(mockApi.postUserData).toHaveBeenCalledWith(newUserData);
     });
 
@@ -97,7 +111,9 @@ describe("useUserData", () => {
       const { refresh } = setupHook(currentUser);
       const newUserData = generateUserData({});
       mockApi.getUserData.mockResolvedValue(newUserData);
-      await act(() => refresh());
+      await act(() => {
+        return refresh();
+      });
 
       expect(mockApi.getUserData).toHaveBeenCalled();
     });
@@ -107,7 +123,9 @@ describe("useUserData", () => {
       const currentUserData = generateUserData({ user: { ...currentUser, myNJUserKey: "1234" } });
       mockApi.getUserData.mockResolvedValue(currentUserData);
       const { refresh } = setupHook(currentUser, IsAuthenticated.TRUE);
-      await act(() => refresh());
+      await act(() => {
+        return refresh();
+      });
       expect(mockDispatch).toHaveBeenCalledWith({
         type: "UPDATE_USER",
         user: {
@@ -123,7 +141,9 @@ describe("useUserData", () => {
       mockApi.getUserData.mockReturnValue(rejectedPromise);
       const result = setupHook(currentUser);
 
-      await act(() => rejectedPromise.catch(() => {}));
+      await act(() => {
+        return rejectedPromise.catch(() => {});
+      });
 
       expect(mockSetError).toHaveBeenCalledWith("NO_DATA");
       expect(result.userData).toEqual(undefined);
@@ -136,7 +156,9 @@ describe("useUserData", () => {
 
       const { update } = setupHook(currentUser);
       const newUserData = generateUserData({});
-      await act(() => update(newUserData).catch(() => {}));
+      await act(() => {
+        return update(newUserData).catch(() => {});
+      });
       expect(mockSetError).toHaveBeenCalledWith("UPDATE_FAILED");
     });
   });
@@ -160,7 +182,9 @@ describe("useUserData", () => {
       const { update } = setupHook(currentUser, IsAuthenticated.FALSE);
       expect(userDataStorage.getCurrentUserData()).toBeUndefined();
       const currentUserData = generateUserData({ user: currentUser });
-      await act(() => update(currentUserData));
+      await act(() => {
+        return update(currentUserData);
+      });
       expect(mockApi.postUserData).not.toHaveBeenCalled();
       expect(userDataStorage.getCurrentUserData()).toEqual(currentUserData);
     });
@@ -170,14 +194,18 @@ describe("useUserData", () => {
       const currentUserData = generateUserData({ user: currentUser });
       userDataStorage.set(currentUser.id, currentUserData);
       const { refresh } = setupHook(currentUser, IsAuthenticated.FALSE);
-      await act(() => refresh());
+      await act(() => {
+        return refresh();
+      });
       expect(mockDispatch).not.toHaveBeenCalled();
     });
 
     it("does not update data from api when calling refresh", async () => {
       const currentUser = generateUser({});
       const { refresh } = setupHook(currentUser, IsAuthenticated.FALSE);
-      await act(() => refresh());
+      await act(() => {
+        return refresh();
+      });
       expect(mockApi.postUserData).not.toHaveBeenCalled();
     });
   });

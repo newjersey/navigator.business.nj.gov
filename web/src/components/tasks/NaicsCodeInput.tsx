@@ -42,22 +42,30 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
   const displayInput = props.CMS_ONLY_displayInput ?? displayInputState;
   const updateQueue = userDataFromHook.updateQueue;
 
-  const getCode = (code: string) =>
-    (NaicsCodes as NaicsCodeObject[]).find((element) => element?.SixDigitCode?.toString() == code);
+  const getCode = (code: string) => {
+    return (NaicsCodes as NaicsCodeObject[]).find((element) => {
+      return element?.SixDigitCode?.toString() == code;
+    });
+  };
 
-  const getDescriptions = (codes: string[]) =>
-    (NaicsCodes as NaicsCodeObject[]).filter((element) =>
-      codes.includes(element?.SixDigitCode?.toString() ?? "")
-    );
+  const getDescriptions = (codes: string[]) => {
+    return (NaicsCodes as NaicsCodeObject[]).filter((element) => {
+      return codes.includes(element?.SixDigitCode?.toString() ?? "");
+    });
+  };
 
   useMountEffectWhenDefined(() => {
-    if (!userData) return;
+    if (!userData) {
+      return;
+    }
     setNaicsCode(userData.profileData.naicsCode);
     const industryNaicsCodes =
       LookupIndustryById(userData.profileData.industryId)
         .naicsCodes?.replace(/\s/g, "")
         .split(",")
-        .filter((value) => value.length > 0) ?? [];
+        .filter((value) => {
+          return value.length > 0;
+        }) ?? [];
     setIndustryCodes(industryNaicsCodes);
     const hasExistingCode = userData.profileData.naicsCode.length > 0;
     const existingCodeIsIndustryCode = industryNaicsCodes.includes(userData.profileData.naicsCode);
@@ -67,7 +75,9 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
   }, userData);
 
   const saveNaicsCode = async (): Promise<void> => {
-    if (!updateQueue) return;
+    if (!updateQueue) {
+      return;
+    }
 
     if (naicsCode?.length !== LENGTH) {
       setIsInvalid("length");
@@ -111,7 +121,9 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
   };
 
   const setInProgress = () => {
-    if (!updateQueue) return;
+    if (!updateQueue) {
+      return;
+    }
     updateQueue.queueTaskProgress({ [props.task.id]: "IN_PROGRESS" }).update();
   };
 
@@ -120,7 +132,9 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
     saveButtonText = `Register & ${saveButtonText}`;
   }
 
-  const descriptions = useMemo(() => getDescriptions(industryCodes ?? []), [industryCodes]);
+  const descriptions = useMemo(() => {
+    return getDescriptions(industryCodes ?? []);
+  }, [industryCodes]);
 
   return (
     <>
@@ -140,29 +154,32 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
               }}
               data-testid="post-onboarding-radio-btn"
             >
-              {industryCodes?.map((code) => (
-                <FormControlLabel
-                  key={code}
-                  style={{ marginRight: "0", alignItems: "flex-start" }}
-                  labelPlacement="end"
-                  className="text-bold"
-                  data-testid={`naics-radio-${code}`}
-                  value={code}
-                  control={<Radio color="primary" />}
-                  label={
-                    <div className="padding-y-1">
-                      <span className="text-bold margin-right-05">{code}</span>
-                      <span className="margin-right-05">- </span>
-                      <ExternalLink
-                        href={templateEval(Config.determineNaicsCode.naicsDescriptionURL, { code: code })}
-                      >
-                        {descriptions.find((obj) => obj.SixDigitCode?.toString() == code)
-                          ?.SixDigitDescription ?? ""}
-                      </ExternalLink>
-                    </div>
-                  }
-                />
-              ))}
+              {industryCodes?.map((code) => {
+                return (
+                  <FormControlLabel
+                    key={code}
+                    style={{ marginRight: "0", alignItems: "flex-start" }}
+                    labelPlacement="end"
+                    className="text-bold"
+                    data-testid={`naics-radio-${code}`}
+                    value={code}
+                    control={<Radio color="primary" />}
+                    label={
+                      <div className="padding-y-1">
+                        <span className="text-bold margin-right-05">{code}</span>
+                        <span className="margin-right-05">- </span>
+                        <ExternalLink
+                          href={templateEval(Config.determineNaicsCode.naicsDescriptionURL, { code: code })}
+                        >
+                          {descriptions.find((obj) => {
+                            return obj.SixDigitCode?.toString() == code;
+                          })?.SixDigitDescription ?? ""}
+                        </ExternalLink>
+                      </div>
+                    }
+                  />
+                );
+              })}
             </RadioGroup>
             <FormControlLabel
               style={{ marginRight: "0", paddingTop: "0em", paddingBottom: "1em" }}

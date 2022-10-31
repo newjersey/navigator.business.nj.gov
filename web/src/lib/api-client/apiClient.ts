@@ -78,7 +78,9 @@ export const postIssue = (issueRequest: UserIssueRequest, userData: UserData): P
 export const postSelfReg = (userData: UserData): Promise<SelfRegResponse> => {
   return axios
     .post(`${apiBaseUrl}/api/self-reg`, userData)
-    .then((response) => response.data)
+    .then((response) => {
+      return response.data;
+    })
     .catch((error: AxiosError) => {
       throw error.response?.status;
     });
@@ -88,7 +90,9 @@ export const get = async <T>(url: string, auth = true): Promise<T> => {
   const authHeader = auth ? await authConfig() : {};
   return axios
     .get(`${apiBaseUrl}/api${url}`, authHeader)
-    .then((response) => response.data)
+    .then((response) => {
+      return response.data;
+    })
     .catch((error: AxiosError) => {
       throw error.response?.status || 500;
     });
@@ -98,7 +102,9 @@ export const post = async <T, R>(url: string, data: R, auth = true): Promise<T> 
   const authHeader = auth ? await authConfig() : {};
   return axios
     .post(`${apiBaseUrl}/api${url}`, data, authHeader)
-    .then((response) => response.data)
+    .then((response) => {
+      return response.data;
+    })
     .catch((error: AxiosError) => {
       throw error.response?.status;
     });

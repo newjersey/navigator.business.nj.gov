@@ -29,16 +29,18 @@ export const SectionAccordion = (props: Props): ReactElement => {
 
   const handleAccordionStateChange = async (): Promise<void> => {
     const roadmapOpenSections = userData?.preferences.roadmapOpenSections;
-    if (!roadmapOpenSections) return;
+    if (!roadmapOpenSections) {
+      return;
+    }
     analytics.event.roadmap_section.click.expand_contract();
     if (isOpen) {
       const newUserData = {
         ...userData,
         preferences: {
           ...userData.preferences,
-          roadmapOpenSections: roadmapOpenSections?.filter(
-            (roadmapOpenSection) => roadmapOpenSection !== props.sectionType
-          ),
+          roadmapOpenSections: roadmapOpenSections?.filter((roadmapOpenSection) => {
+            return roadmapOpenSection !== props.sectionType;
+          }),
         },
       };
 

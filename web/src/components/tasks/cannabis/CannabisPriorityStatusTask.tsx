@@ -31,7 +31,9 @@ export const CannabisPriorityStatusTask = (props: Props) => {
   });
 
   const handleNextTabButtonClick = () => {
-    if (!userData || !updateQueue) return;
+    if (!userData || !updateQueue) {
+      return;
+    }
 
     setDisplayFirstTab(false);
     scrollToTop();
@@ -50,7 +52,9 @@ export const CannabisPriorityStatusTask = (props: Props) => {
   };
 
   const handleCompleteTaskButtonClick = () => {
-    if (!userData || !updateQueue) return;
+    if (!userData || !updateQueue) {
+      return;
+    }
 
     setSuccessSnackbarIsOpen(true);
     queueUpdateTaskProgress(props.task.id, "COMPLETED");
@@ -62,7 +66,9 @@ export const CannabisPriorityStatusTask = (props: Props) => {
       <SnackbarAlert
         variant="success"
         isOpen={successSnackbarIsOpen}
-        close={() => setSuccessSnackbarIsOpen(false)}
+        close={() => {
+          return setSuccessSnackbarIsOpen(false);
+        }}
       >
         {Config.taskDefaults.taskProgressSuccessSnackbarBody}
       </SnackbarAlert>

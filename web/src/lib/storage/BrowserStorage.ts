@@ -11,7 +11,9 @@ export type BrowserStorage = {
 export const BrowserStorageFactory = (type?: StorageType): BrowserStorage => {
   const storageType: "localStorage" | "sessionStorage" = `${type ?? "session"}Storage`;
 
-  const isBrowser: boolean = ((): boolean => typeof window !== "undefined")();
+  const isBrowser: boolean = ((): boolean => {
+    return typeof window !== "undefined";
+  })();
 
   const get = (key: string): string | undefined => {
     return isBrowser ? window[storageType].getItem(key) ?? undefined : undefined;
@@ -25,10 +27,15 @@ export const BrowserStorageFactory = (type?: StorageType): BrowserStorage => {
     return false;
   };
 
-  const keys = () =>
-    [...Array(window[storageType].length)].map((_, i) => window[storageType].key(i)) as string[];
+  const keys = () => {
+    return [...Array(window[storageType].length)].map((_, i) => {
+      return window[storageType].key(i);
+    }) as string[];
+  };
 
-  const clear = () => window[storageType].clear();
+  const clear = () => {
+    return window[storageType].clear();
+  };
 
   const _delete = (key: string): void => {
     window[storageType].removeItem(key);

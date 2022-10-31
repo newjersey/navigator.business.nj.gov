@@ -32,16 +32,26 @@ function mockMaterialUI(): typeof materialUi {
   };
 }
 
-jest.mock("@mui/material", () => mockMaterialUI());
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
+jest.mock("@mui/material", () => {
+  return mockMaterialUI();
+});
+jest.mock("@/lib/data-hooks/useUserData", () => {
+  return { useUserData: jest.fn() };
+});
+jest.mock("@/lib/data-hooks/useRoadmap", () => {
+  return { useRoadmap: jest.fn() };
+});
 jest.mock("@/lib/data-hooks/useDocuments");
-jest.mock("next/router", () => ({ useRouter: jest.fn() }));
-jest.mock("@/lib/api-client/apiClient", () => ({
-  postBusinessFormation: jest.fn(),
-  getCompletedFiling: jest.fn(),
-  searchBusinessName: jest.fn(),
-}));
+jest.mock("next/router", () => {
+  return { useRouter: jest.fn() };
+});
+jest.mock("@/lib/api-client/apiClient", () => {
+  return {
+    postBusinessFormation: jest.fn(),
+    getCompletedFiling: jest.fn(),
+    searchBusinessName: jest.fn(),
+  };
+});
 
 describe("Formation - ContactsStep", () => {
   const displayContent = generateFormationDisplayContent({});
@@ -298,7 +308,9 @@ describe("Formation - ContactsStep", () => {
     });
 
     it("edits directors", async () => {
-      const members = [...Array(2)].map(() => generateFormationAddress({}));
+      const members = [...Array(2)].map(() => {
+        return generateFormationAddress({});
+      });
       const page = await getPageHelper({ legalStructureId }, { members });
 
       expect(
@@ -332,7 +344,11 @@ describe("Formation - ContactsStep", () => {
       await page.submitContactsStep();
       const newMembers = currentUserData().formationData.formationFormData.members;
       expect(newMembers.length).toEqual(2);
-      expect(newMembers.findIndex((member) => member.name == newName)).toEqual(1);
+      expect(
+        newMembers.findIndex((member) => {
+          return member.name == newName;
+        })
+      ).toEqual(1);
     });
 
     it("fires validations when directors are empty", async () => {
@@ -366,7 +382,9 @@ describe("Formation - ContactsStep", () => {
       });
 
       it("edits signers", async () => {
-        const signers = [...Array(2)].map(() => generateFormationAddress({ signature: true }));
+        const signers = [...Array(2)].map(() => {
+          return generateFormationAddress({ signature: true });
+        });
         const page = await getPageHelper({ legalStructureId }, { signers });
         const nameTd = screen.getByText(signers[1].name, { exact: false });
         expect(nameTd).toBeInTheDocument();
@@ -396,11 +414,17 @@ describe("Formation - ContactsStep", () => {
         await page.submitContactsStep();
         const newSigners = currentUserData().formationData.formationFormData.signers;
         expect(newSigners.length).toEqual(2);
-        expect(newSigners.findIndex((signer) => signer.name == newName)).toEqual(1);
+        expect(
+          newSigners.findIndex((signer) => {
+            return signer.name == newName;
+          })
+        ).toEqual(1);
       });
 
       it("deletes an additional signer", async () => {
-        const signers = [...Array(2)].map(() => generateFormationAddress({ signature: true }));
+        const signers = [...Array(2)].map(() => {
+          return generateFormationAddress({ signature: true });
+        });
         const page = await getPageHelper({ legalStructureId }, { signers });
         const nameTd = screen.getByText(signers[1].name, { exact: false });
         // eslint-disable-next-line testing-library/no-node-access
@@ -422,8 +446,9 @@ describe("Formation - ContactsStep", () => {
         const page = await getPageHelper({ legalStructureId }, { signers });
         await attemptApiSubmission(page);
 
-        const signerErrorText = () =>
-          screen.queryByText(Config.businessFormationDefaults.signerNameErrorText, { exact: false });
+        const signerErrorText = () => {
+          return screen.queryByText(Config.businessFormationDefaults.signerNameErrorText, { exact: false });
+        };
         expect(signerErrorText()).toBeInTheDocument();
         const nameTd = screen.getByText(signers[0].addressLine1, { exact: false });
         // eslint-disable-next-line testing-library/no-node-access
@@ -437,8 +462,11 @@ describe("Formation - ContactsStep", () => {
         const signers = [generateFormationAddress({})];
         const page = await getPageHelper({ legalStructureId }, { signers });
         await attemptApiSubmission(page);
-        const signerCheckboxErrorText = () =>
-          screen.queryByText(Config.businessFormationDefaults.signerCheckboxErrorText, { exact: false });
+        const signerCheckboxErrorText = () => {
+          return screen.queryByText(Config.businessFormationDefaults.signerCheckboxErrorText, {
+            exact: false,
+          });
+        };
         expect(signerCheckboxErrorText()).toBeInTheDocument();
         page.checkSignerBox(0);
         expect(signerCheckboxErrorText()).not.toBeInTheDocument();
@@ -511,7 +539,9 @@ describe("Formation - ContactsStep", () => {
 
     describe(`members for ${legalStructureId}`, () => {
       it("edits members", async () => {
-        const members = [...Array(2)].map(() => generateFormationAddress({}));
+        const members = [...Array(2)].map(() => {
+          return generateFormationAddress({});
+        });
         const page = await getPageHelper({ legalStructureId }, { members });
 
         expect(
@@ -545,11 +575,17 @@ describe("Formation - ContactsStep", () => {
         await page.submitContactsStep();
         const newMembers = currentUserData().formationData.formationFormData.members;
         expect(newMembers.length).toEqual(2);
-        expect(newMembers.findIndex((member) => member.name == newName)).toEqual(1);
+        expect(
+          newMembers.findIndex((member) => {
+            return member.name == newName;
+          })
+        ).toEqual(1);
       });
 
       it("is able to delete members", async () => {
-        const members = [...Array(2)].map(() => generateFormationAddress({}));
+        const members = [...Array(2)].map(() => {
+          return generateFormationAddress({});
+        });
         const page = await getPageHelper({ legalStructureId }, { members });
 
         const nameTd = screen.getByText(members[1].name, { exact: false });
@@ -559,7 +595,11 @@ describe("Formation - ContactsStep", () => {
         await page.submitContactsStep();
         const newMembers = currentUserData().formationData.formationFormData.members;
         expect(newMembers.length).toEqual(1);
-        expect(newMembers.find((member) => member == members[1])).toBeFalsy();
+        expect(
+          newMembers.find((member) => {
+            return member == members[1];
+          })
+        ).toBeFalsy();
       });
 
       it("adds members using business data using checkbox with name", async () => {
@@ -738,11 +778,11 @@ describe("Formation - ContactsStep", () => {
         page.selectCheckbox(Config.businessFormationDefaults.membersCheckboxText);
         page.fillText("Address name", "Lincoln");
         fireEvent.click(screen.getByText(Config.businessFormationDefaults.addressModalBackButtonText));
-        await waitFor(() =>
-          expect(
+        await waitFor(() => {
+          return expect(
             screen.queryByText(Config.businessFormationDefaults.addressModalBackButtonText)
-          ).not.toBeInTheDocument()
-        );
+          ).not.toBeInTheDocument();
+        });
         await page.openAddressModal("members");
         expect(page.getInputElementByLabel("Address name").value).toBe("");
       });
@@ -765,11 +805,11 @@ describe("Formation - ContactsStep", () => {
         page.fillText("Address name", "Lincoln");
         page.clickAddressSubmit();
 
-        await waitFor(() =>
-          expect(
+        await waitFor(() => {
+          return expect(
             screen.queryByText(Config.businessFormationDefaults.addressModalBackButtonText)
-          ).not.toBeInTheDocument()
-        );
+          ).not.toBeInTheDocument();
+        });
         expect(
           screen.queryByText(Config.businessFormationDefaults.membersNewButtonText, { exact: false })
         ).not.toBeInTheDocument();
@@ -843,8 +883,9 @@ describe("Formation - ContactsStep", () => {
           { signers: [generateFormationAddress({ name: "" })] }
         );
         await attemptApiSubmission(page);
-        const signerErrorText = () =>
-          screen.queryByText(Config.businessFormationDefaults.signerNameErrorText, { exact: false });
+        const signerErrorText = () => {
+          return screen.queryByText(Config.businessFormationDefaults.signerNameErrorText, { exact: false });
+        };
         expect(signerErrorText()).toBeInTheDocument();
         page.fillText("Signer 0", "Elrond");
         expect(signerErrorText()).not.toBeInTheDocument();
@@ -856,8 +897,11 @@ describe("Formation - ContactsStep", () => {
           { signers: [generateFormationAddress({ signature: false })] }
         );
         await attemptApiSubmission(page);
-        const signerCheckboxErrorText = () =>
-          screen.queryByText(Config.businessFormationDefaults.signerCheckboxErrorText, { exact: false });
+        const signerCheckboxErrorText = () => {
+          return screen.queryByText(Config.businessFormationDefaults.signerCheckboxErrorText, {
+            exact: false,
+          });
+        };
         expect(signerCheckboxErrorText()).toBeInTheDocument();
         page.selectCheckbox(`${Config.businessFormationDefaults.signatureColumnLabel}*`);
         expect(signerCheckboxErrorText()).not.toBeInTheDocument();

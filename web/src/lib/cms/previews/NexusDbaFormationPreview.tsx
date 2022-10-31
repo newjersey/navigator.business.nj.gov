@@ -33,15 +33,25 @@ const NexusDbaFormationPreview = (props: PreviewProps) => {
 
         <div ref={ref} style={{ pointerEvents: "all" }}>
           <h2>CTA Modal</h2>
-          <button onClick={() => setModalOpen(true)}>Open CTA Modal</button>
+          <button
+            onClick={() => {
+              return setModalOpen(true);
+            }}
+          >
+            Open CTA Modal
+          </button>
         </div>
 
         <ModalTwoButton
           isOpen={modalOpen}
-          close={() => setModalOpen(false)}
+          close={() => {
+            return setModalOpen(false);
+          }}
           title={config.nexusFormationTask.dbaCtaModalHeader}
           primaryButtonText={config.nexusFormationTask.dbaCtaModalContinueButtonText}
-          primaryButtonOnClick={() => setModalOpen(false)}
+          primaryButtonOnClick={() => {
+            return setModalOpen(false);
+          }}
           secondaryButtonText={config.nexusFormationTask.dbaCtaModalCancelButtonText}
         >
           <Content>{config.nexusFormationTask.dbaCtaModalBody}</Content>

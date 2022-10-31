@@ -12,7 +12,9 @@ describe("Guest Dashboard [feature] [all] [group2]", () => {
 
   beforeEach(() => {
     cy.clearCookies();
-    cy.window().then((window) => window.sessionStorage.clear());
+    cy.window().then((window) => {
+      return window.sessionStorage.clear();
+    });
     cy.visit("/");
     cy.get('[data-testid="hero-login-button"]').click();
     completeNewBusinessOnboarding({

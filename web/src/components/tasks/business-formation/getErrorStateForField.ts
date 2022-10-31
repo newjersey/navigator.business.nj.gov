@@ -76,8 +76,12 @@ export const getErrorStateForField = (
   }
 
   if (field === "signers") {
-    const someSignersMissingName = formationFormData.signers.some((signer) => !signer.name.trim());
-    const someSignersMissingCheckbox = formationFormData.signers.some((signer) => !signer.signature);
+    const someSignersMissingName = formationFormData.signers.some((signer) => {
+      return !signer.name.trim();
+    });
+    const someSignersMissingCheckbox = formationFormData.signers.some((signer) => {
+      return !signer.signature;
+    });
 
     if (formationFormData.signers.length === 0) {
       return {
@@ -104,9 +108,9 @@ export const getErrorStateForField = (
         label: Config.businessFormationDefaults.directorsMinimumErrorText,
       };
     } else {
-      const allValid = formationFormData.members.every(
-        (it) => it.name && it.addressCity && it.addressLine1 && it.addressState && it.addressZipCode
-      );
+      const allValid = formationFormData.members.every((it) => {
+        return it.name && it.addressCity && it.addressLine1 && it.addressState && it.addressZipCode;
+      });
       return {
         ...errorState,
         hasError: !allValid,
@@ -132,6 +136,8 @@ export const getErrorStateForField = (
 };
 
 const isStartDateValid = (value: string): boolean => {
-  if (!value) return false;
+  if (!value) {
+    return false;
+  }
   return parseDate(value).isValid() && parseDate(value).isAfter(getCurrentDate().subtract(1, "day"), "day");
 };

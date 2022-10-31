@@ -16,7 +16,9 @@ export const UnlockedBy = (props: Props): ReactElement => {
   const taskFromRoadmap = useTaskFromRoadmap(props.task.id);
 
   const unlockedByTaskLinks = taskFromRoadmap
-    ? taskFromRoadmap.unlockedBy.filter((it) => userData?.taskProgress[it.id] !== "COMPLETED")
+    ? taskFromRoadmap.unlockedBy.filter((it) => {
+        return userData?.taskProgress[it.id] !== "COMPLETED";
+      })
     : [];
 
   return (

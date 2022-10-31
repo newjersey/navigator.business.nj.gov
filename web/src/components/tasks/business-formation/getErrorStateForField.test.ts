@@ -342,7 +342,9 @@ describe("getErrorStateForField", () => {
           const expectedLabel = (Config.businessFormationDefaults.requiredFieldsBulletPointLabel as any)[
             field
           ];
-          if (!expectedLabel) throw `label missing in config for ${field}`;
+          if (!expectedLabel) {
+            throw `label missing in config for ${field}`;
+          }
           expect(getErrorStateForField(field, formData, undefined).label).toEqual(expectedLabel);
         });
       });
@@ -393,7 +395,9 @@ describe("getErrorStateForField", () => {
           const expectedLabel = (Config.businessFormationDefaults.requiredFieldsBulletPointLabel as any)[
             field
           ];
-          if (!expectedLabel) throw `label missing in config for ${field}`;
+          if (!expectedLabel) {
+            throw `label missing in config for ${field}`;
+          }
           expect(getErrorStateForField(field, formData, undefined).label).toEqual(expectedLabel);
         });
       });

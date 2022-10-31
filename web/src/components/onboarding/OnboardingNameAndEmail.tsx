@@ -33,9 +33,8 @@ export const OnboardingNameAndEmail = (props: Props): ReactElement => {
     state.user && setUser({ ...state.user, name: value });
   };
 
-  const handleEmail =
-    (confirm = false) =>
-    (value: string) => {
+  const handleEmail = (confirm = false) => {
+    return (value: string) => {
       if (confirm) {
         setConfirmEmail(value);
         email == value && email.length > 0 ? updateEmailState(email) : updateEmailState("");
@@ -44,9 +43,11 @@ export const OnboardingNameAndEmail = (props: Props): ReactElement => {
         confirmEmail == value && value.length > 0 ? updateEmailState(value) : updateEmailState("");
       }
     };
+  };
 
-  const onValidation = (fieldName: string, invalid: boolean): void =>
-    props.onValidation(fieldName as ProfileFields, invalid);
+  const onValidation = (fieldName: string, invalid: boolean): void => {
+    return props.onValidation(fieldName as ProfileFields, invalid);
+  };
 
   return (
     <div className="tablet:padding-y-2">
@@ -62,7 +63,9 @@ export const OnboardingNameAndEmail = (props: Props): ReactElement => {
           required={true}
           placeholder={Config.selfRegistration.nameFieldPlaceholder}
           handleChange={handleName}
-          additionalValidation={(value) => validateFullName(value).isValid}
+          additionalValidation={(value) => {
+            return validateFullName(value).isValid;
+          }}
         />
       </div>
       <div className="margin-top-2">
@@ -75,9 +78,9 @@ export const OnboardingNameAndEmail = (props: Props): ReactElement => {
           onValidation={onValidation}
           validationText={Config.selfRegistration.errorTextEmailsNotMatching}
           required={true}
-          additionalValidation={(value) =>
-            confirmEmail ? value == confirmEmail : true && validateEmail(value)
-          }
+          additionalValidation={(value) => {
+            return confirmEmail ? value == confirmEmail : true && validateEmail(value);
+          }}
           placeholder={Config.selfRegistration.emailFieldPlaceholder}
         />
       </div>
@@ -87,9 +90,13 @@ export const OnboardingNameAndEmail = (props: Props): ReactElement => {
           value={confirmEmail}
           error={props.fieldStates["email"].invalid}
           handleChange={handleEmail(true)}
-          onValidation={(_, invalid) => onValidation("email", invalid)}
+          onValidation={(_, invalid) => {
+            return onValidation("email", invalid);
+          }}
           required={true}
-          additionalValidation={(value) => value == email && validateEmail(value)}
+          additionalValidation={(value) => {
+            return value == email && validateEmail(value);
+          }}
           validationText={Config.selfRegistration.errorTextEmailsNotMatching}
           placeholder={Config.selfRegistration.confirmEmailFieldPlaceholder}
           fieldName={"confirm-email"}
@@ -103,7 +110,9 @@ export const OnboardingNameAndEmail = (props: Props): ReactElement => {
             <div style={{ display: "table-cell", width: "42px" }}>
               <Checkbox
                 checked={state.user?.receiveNewsletter}
-                onChange={(event) => handleNewsletter(event.target.checked)}
+                onChange={(event) => {
+                  return handleNewsletter(event.target.checked);
+                }}
                 id="newsletterCheckbox"
               />
             </div>
@@ -116,7 +125,9 @@ export const OnboardingNameAndEmail = (props: Props): ReactElement => {
             <div style={{ display: "table-cell", width: "42px" }}>
               <Checkbox
                 checked={state.user?.userTesting}
-                onChange={(event) => handleUserTesting(event.target.checked)}
+                onChange={(event) => {
+                  return handleUserTesting(event.target.checked);
+                }}
                 id="contactMeCheckbox"
               />
             </div>

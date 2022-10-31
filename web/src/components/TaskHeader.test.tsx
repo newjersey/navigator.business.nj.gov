@@ -15,18 +15,25 @@ import { formationTaskId, TaskProgress, UserData } from "@businessnjgovnavigator
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen } from "@testing-library/react";
 
-jest.mock("next/router", () => ({ useRouter: jest.fn() }));
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
+jest.mock("next/router", () => {
+  return { useRouter: jest.fn() };
+});
+jest.mock("@/lib/data-hooks/useUserData", () => {
+  return { useUserData: jest.fn() };
+});
+jest.mock("@/lib/data-hooks/useRoadmap", () => {
+  return { useRoadmap: jest.fn() };
+});
 
-const renderTaskHeader = (task: Task, initialUserData?: UserData) =>
-  render(
+const renderTaskHeader = (task: Task, initialUserData?: UserData) => {
+  return render(
     <ThemeProvider theme={createTheme()}>
       <WithStatefulUserData initialUserData={initialUserData}>
         <TaskHeader task={task} />
       </WithStatefulUserData>
     </ThemeProvider>
   );
+};
 
 const Config = getMergedConfig();
 

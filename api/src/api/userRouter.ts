@@ -42,8 +42,9 @@ type CognitoIdentityPayload = {
   userId: string;
 };
 
-const hasBeenMoreThanOneHour = (lastCheckedDate: string): boolean =>
-  parseDate(lastCheckedDate).isBefore(getCurrentDate().subtract(1, "hour"));
+const hasBeenMoreThanOneHour = (lastCheckedDate: string): boolean => {
+  return parseDate(lastCheckedDate).isBefore(getCurrentDate().subtract(1, "hour"));
+};
 
 const clearTaskItemChecklists = (userData: UserData): UserData => {
   return {
@@ -52,17 +53,23 @@ const clearTaskItemChecklists = (userData: UserData): UserData => {
   };
 };
 
-const shouldCheckLicense = (userData: UserData): boolean =>
-  userData.licenseData !== undefined &&
-  industryHasALicenseType(userData.profileData.industryId) &&
-  hasBeenMoreThanOneHour(userData.licenseData.lastCheckedStatus);
+const shouldCheckLicense = (userData: UserData): boolean => {
+  return (
+    userData.licenseData !== undefined &&
+    industryHasALicenseType(userData.profileData.industryId) &&
+    hasBeenMoreThanOneHour(userData.licenseData.lastCheckedStatus)
+  );
+};
 
-export const getSignedInUser = (req: Request): CognitoJWTPayload =>
-  jwt.decode(getTokenFromHeader(req)) as CognitoJWTPayload;
+export const getSignedInUser = (req: Request): CognitoJWTPayload => {
+  return jwt.decode(getTokenFromHeader(req)) as CognitoJWTPayload;
+};
 
 export const getSignedInUserId = (req: Request): string => {
   const signedInUser = getSignedInUser(req);
-  const myNJIdentityPayload = signedInUser.identities?.find((it) => it.providerName === "myNJ");
+  const myNJIdentityPayload = signedInUser.identities?.find((it) => {
+    return it.providerName === "myNJ";
+  });
   return myNJIdentityPayload?.userId || signedInUser.sub;
 };
 

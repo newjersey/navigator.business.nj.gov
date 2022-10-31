@@ -6,21 +6,23 @@ interface Props {
   secondaryText?: string;
 }
 
-export const MenuOptionSelected = (props: Props): ReactElement => (
-  <>
-    <div className="flex flex-row">
-      <div className="padding-right-05">
-        <Icon>check</Icon>
+export const MenuOptionSelected = (props: Props): ReactElement => {
+  return (
+    <>
+      <div className="flex flex-row">
+        <div className="padding-right-05">
+          <Icon>check</Icon>
+        </div>
+        <div className="text-bold" data-testid="industry-name">
+          {props.children}
+        </div>
       </div>
-      <div className="text-bold" data-testid="industry-name">
-        {props.children}
-      </div>
-    </div>
 
-    {props.secondaryText && (
-      <div className="font-body-3xs text-base-dark text-bold padding-left-205 text-wrap">
-        {props.secondaryText}
-      </div>
-    )}
-  </>
-);
+      {props.secondaryText && (
+        <div className="font-body-3xs text-base-dark text-bold padding-left-205 text-wrap">
+          {props.secondaryText}
+        </div>
+      )}
+    </>
+  );
+};

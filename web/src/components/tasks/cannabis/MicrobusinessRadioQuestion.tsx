@@ -10,7 +10,9 @@ export const MicrobusinessRadioQuestion = (): ReactElement => {
   const { Config } = useConfig();
 
   const handleRadioChange = async (event: React.ChangeEvent<{ name?: string; value: string }>) => {
-    if (!userData) return;
+    if (!userData) {
+      return;
+    }
     const isMicrobusiness = event.target.value === "true";
     await update({
       ...userData,

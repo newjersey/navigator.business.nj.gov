@@ -14,7 +14,9 @@ export const buildRoadmap = async ({
   const results = await stepImporter();
 
   let roadmapBuilder: RoadmapBuilder = {
-    steps: results.map((step: GenericStep) => ({ ...step })),
+    steps: results.map((step: GenericStep) => {
+      return { ...step };
+    }),
     tasks: [],
   };
 
@@ -130,28 +132,40 @@ const findTaskInRoadmapByFilename = (
   roadmapBuilder: RoadmapBuilder,
   taskFilename: string
 ): TaskBuilder | undefined => {
-  return roadmapBuilder.tasks.find((task) => task.filename === taskFilename);
+  return roadmapBuilder.tasks.find((task) => {
+    return task.filename === taskFilename;
+  });
 };
 
 const convertToRoadmap = async (roadmapBuilder: RoadmapBuilder): Promise<Roadmap> => {
   const roadmap = {
     steps: roadmapBuilder.steps,
     tasks: await Promise.all(
-      roadmapBuilder.tasks.sort(orderByWeight).map(async (task: TaskBuilder) => ({
-        ...(await fetchTaskByFilename(task.filename)),
-        stepNumber: task.stepNumber,
-      }))
+      roadmapBuilder.tasks.sort(orderByWeight).map(async (task: TaskBuilder) => {
+        return {
+          ...(await fetchTaskByFilename(task.filename)),
+          stepNumber: task.stepNumber,
+        };
+      })
     ),
   };
 
-  const allFilenames = new Set(roadmap.tasks.map((task) => task.filename));
+  const allFilenames = new Set(
+    roadmap.tasks.map((task) => {
+      return task.filename;
+    })
+  );
 
   return {
     ...roadmap,
-    tasks: roadmap.tasks.map((task) => ({
-      ...task,
-      unlockedBy: task.unlockedBy.filter((it) => allFilenames.has(it.filename)),
-    })),
+    tasks: roadmap.tasks.map((task) => {
+      return {
+        ...task,
+        unlockedBy: task.unlockedBy.filter((it) => {
+          return allFilenames.has(it.filename);
+        }),
+      };
+    }),
   };
 };
 
@@ -161,7 +175,9 @@ const hasSteps = (roadmap: RoadmapBuilder): boolean => {
 
 const lastStepHasNoTasks = (roadmap: RoadmapBuilder): boolean => {
   const lastStepNumber = roadmap.steps[roadmap.steps.length - 1].stepNumber;
-  return roadmap.tasks.every((task) => task.stepNumber !== lastStepNumber);
+  return roadmap.tasks.every((task) => {
+    return task.stepNumber !== lastStepNumber;
+  });
 };
 
 const removeLastStep = (roadmapBuilder: RoadmapBuilder): RoadmapBuilder => {

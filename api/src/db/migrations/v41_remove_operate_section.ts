@@ -17,9 +17,9 @@ export const migrate_v40_to_v41 = (v40Data: v40UserData): v41UserData => {
     ...v40Data,
     preferences: {
       ...v40Data.preferences,
-      roadmapOpenSections: v40Data.preferences.roadmapOpenSections.filter(
-        (it) => it !== "OPERATE"
-      ) as v41SectionType[],
+      roadmapOpenSections: v40Data.preferences.roadmapOpenSections.filter((it) => {
+        return it !== "OPERATE";
+      }) as v41SectionType[],
     },
     taxFilingData: {
       filings: v40Data.taxFilingData.filings,

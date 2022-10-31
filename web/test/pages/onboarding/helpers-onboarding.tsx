@@ -120,17 +120,25 @@ export const createPageHelpers = (): PageHelpers => {
     fireEvent.click(screen.getAllByTestId("back")[0]);
   };
 
-  const getEntityIdValue = (): string => (screen.queryByLabelText("Entity id") as HTMLInputElement)?.value;
+  const getEntityIdValue = (): string => {
+    return (screen.queryByLabelText("Entity id") as HTMLInputElement)?.value;
+  };
 
-  const getDateOfFormationValue = (): string =>
-    (screen.queryByLabelText("Date of formation") as HTMLInputElement)?.value;
+  const getDateOfFormationValue = (): string => {
+    return (screen.queryByLabelText("Date of formation") as HTMLInputElement)?.value;
+  };
 
-  const getBusinessNameValue = (): string =>
-    (screen.queryByLabelText("Business name") as HTMLInputElement)?.value;
+  const getBusinessNameValue = (): string => {
+    return (screen.queryByLabelText("Business name") as HTMLInputElement)?.value;
+  };
 
-  const getSectorIDValue = (): string => (screen.queryByLabelText("Sector") as HTMLInputElement)?.value;
+  const getSectorIDValue = (): string => {
+    return (screen.queryByLabelText("Sector") as HTMLInputElement)?.value;
+  };
 
-  const getIndustryValue = (): string => (screen.queryByTestId("industryid") as HTMLInputElement)?.value;
+  const getIndustryValue = (): string => {
+    return (screen.queryByTestId("industryid") as HTMLInputElement)?.value;
+  };
 
   const getRadioGroup = (sectionAriaLabel: string): HTMLElement => {
     const radiogroup = screen.getByRole("radiogroup", { name: sectionAriaLabel });
@@ -142,25 +150,35 @@ export const createPageHelpers = (): PageHelpers => {
     return radio;
   };
 
-  const getMunicipalityValue = (): string =>
-    (screen.queryByTestId("municipality") as HTMLInputElement)?.value;
+  const getMunicipalityValue = (): string => {
+    return (screen.queryByTestId("municipality") as HTMLInputElement)?.value;
+  };
 
-  const getLegalStructureValue = (): string =>
-    (screen.queryByTestId("legal-structure") as HTMLInputElement)?.value;
+  const getLegalStructureValue = (): string => {
+    return (screen.queryByTestId("legal-structure") as HTMLInputElement)?.value;
+  };
 
-  const getFullNameValue = (): string =>
-    (screen.queryByLabelText(Config.selfRegistration.nameFieldLabel) as HTMLInputElement)?.value;
+  const getFullNameValue = (): string => {
+    return (screen.queryByLabelText(Config.selfRegistration.nameFieldLabel) as HTMLInputElement)?.value;
+  };
 
-  const getEmailValue = (): string =>
-    (screen.queryByLabelText(Config.selfRegistration.emailFieldLabel) as HTMLInputElement)?.value;
+  const getEmailValue = (): string => {
+    return (screen.queryByLabelText(Config.selfRegistration.emailFieldLabel) as HTMLInputElement)?.value;
+  };
 
-  const getConfirmEmailValue = (): string =>
-    (screen.queryByLabelText(Config.selfRegistration.confirmEmailFieldLabel) as HTMLInputElement)?.value;
+  const getConfirmEmailValue = (): string => {
+    return (screen.queryByLabelText(Config.selfRegistration.confirmEmailFieldLabel) as HTMLInputElement)
+      ?.value;
+  };
 
   const visitStep = async (step: number) => {
-    act(() => clickNext());
+    act(() => {
+      return clickNext();
+    });
     const currentStep = step - 1;
-    await waitForElementToBeRemoved(() => screen.getByTestId(`step-${currentStep}`));
+    await waitForElementToBeRemoved(() => {
+      return screen.getByTestId(`step-${currentStep}`);
+    });
     expect(screen.getByTestId(`step-${step}`)).toBeInTheDocument();
   };
 
@@ -223,7 +241,9 @@ export const runSelfRegPageTests = ({
     page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
     page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
     page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.co");
-    act(() => page.clickNext());
+    act(() => {
+      return page.clickNext();
+    });
     expect(screen.queryAllByText(Config.selfRegistration.errorTextEmailsNotMatching).length).toEqual(2);
   });
 
@@ -235,7 +255,9 @@ export const runSelfRegPageTests = ({
     page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
     page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
     page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.co");
-    act(() => page.clickNext());
+    act(() => {
+      return page.clickNext();
+    });
     expect(screen.queryAllByText(Config.selfRegistration.errorTextEmailsNotMatching).length).toEqual(2);
   });
 
@@ -246,7 +268,9 @@ export const runSelfRegPageTests = ({
     page.fillText(Config.selfRegistration.nameFieldLabel, "");
     page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
     page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
-    act(() => page.clickNext());
+    act(() => {
+      return page.clickNext();
+    });
     expect(screen.queryByText(Config.selfRegistration.errorTextFullName)).toBeInTheDocument();
   });
 
@@ -257,7 +281,9 @@ export const runSelfRegPageTests = ({
     page.fillText(Config.selfRegistration.nameFieldLabel, "Some & Name");
     page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
     page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
-    act(() => page.clickNext());
+    act(() => {
+      return page.clickNext();
+    });
     expect(screen.queryByText(Config.selfRegistration.errorTextFullNameSpecialCharacter)).toBeInTheDocument();
   });
 
@@ -269,7 +295,9 @@ export const runSelfRegPageTests = ({
     page.fillText(Config.selfRegistration.nameFieldLabel, name);
     page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
     page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
-    act(() => page.clickNext());
+    act(() => {
+      return page.clickNext();
+    });
     expect(screen.queryByText(Config.selfRegistration.errorTextFullNameLength)).toBeInTheDocument();
   });
 
@@ -280,7 +308,9 @@ export const runSelfRegPageTests = ({
     page.fillText(Config.selfRegistration.nameFieldLabel, "12345");
     page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
     page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
-    act(() => page.clickNext());
+    act(() => {
+      return page.clickNext();
+    });
     expect(screen.queryByText(Config.selfRegistration.errorTextFullNameStartWithLetter)).toBeInTheDocument();
   });
 
@@ -291,7 +321,9 @@ export const runSelfRegPageTests = ({
     page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
     page.fillText(Config.selfRegistration.emailFieldLabel, "");
     page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "");
-    act(() => page.clickNext());
+    act(() => {
+      return page.clickNext();
+    });
     expect(screen.queryAllByText(Config.selfRegistration.errorTextEmailsNotMatching).length).toEqual(2);
   });
 
@@ -303,7 +335,9 @@ export const runSelfRegPageTests = ({
     page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
     page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
     fireEvent.click(screen.getByLabelText(Config.selfRegistration.newsletterCheckboxLabel));
-    act(() => page.clickNext());
+    act(() => {
+      return page.clickNext();
+    });
     const businessUser = {
       ...user,
       email: "email@example.com",
@@ -326,7 +360,9 @@ export const runSelfRegPageTests = ({
     page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
     page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
     fireEvent.click(screen.getByLabelText(Config.selfRegistration.userTestingCheckboxLabel));
-    act(() => page.clickNext());
+    act(() => {
+      return page.clickNext();
+    });
     const businessUser = {
       ...user,
       email: "email@example.com",
@@ -351,7 +387,9 @@ export const runSelfRegPageTests = ({
     page.fillText(Config.selfRegistration.nameFieldLabel, "My Name");
     page.fillText(Config.selfRegistration.emailFieldLabel, "email@example.com");
     page.fillText(Config.selfRegistration.confirmEmailFieldLabel, "email@example.com");
-    act(() => page.clickNext());
+    act(() => {
+      return page.clickNext();
+    });
     const businessUser = {
       ...user,
       email: "email@example.com",
@@ -374,15 +412,23 @@ export const runSelfRegPageTests = ({
 };
 
 export const mockEmptyApiSignups = (): void => {
-  mockApi.postGetAnnualFilings.mockImplementation((request) => Promise.resolve(request));
-  mockApi.postNewsletter.mockImplementation((request) => Promise.resolve(request));
-  mockApi.postUserTesting.mockImplementation((request) => Promise.resolve(request));
+  mockApi.postGetAnnualFilings.mockImplementation((request) => {
+    return Promise.resolve(request);
+  });
+  mockApi.postNewsletter.mockImplementation((request) => {
+    return Promise.resolve(request);
+  });
+  mockApi.postUserTesting.mockImplementation((request) => {
+    return Promise.resolve(request);
+  });
 };
 
 export const mockSuccessfulApiSignups = (): void => {
-  mockApi.postGetAnnualFilings.mockImplementation((request) => Promise.resolve(request));
-  mockApi.postNewsletter.mockImplementation((request) =>
-    Promise.resolve({
+  mockApi.postGetAnnualFilings.mockImplementation((request) => {
+    return Promise.resolve(request);
+  });
+  mockApi.postNewsletter.mockImplementation((request) => {
+    return Promise.resolve({
       ...request,
       user: {
         ...request.user,
@@ -391,11 +437,11 @@ export const mockSuccessfulApiSignups = (): void => {
           newsletter: { status: "SUCCESS", success: true },
         },
       },
-    })
-  );
+    });
+  });
 
-  mockApi.postUserTesting.mockImplementation((request) =>
-    Promise.resolve({
+  mockApi.postUserTesting.mockImplementation((request) => {
+    return Promise.resolve({
       ...request,
       user: {
         ...request.user,
@@ -404,6 +450,6 @@ export const mockSuccessfulApiSignups = (): void => {
           userTesting: { status: "SUCCESS", success: true },
         },
       },
-    })
-  );
+    });
+  });
 };

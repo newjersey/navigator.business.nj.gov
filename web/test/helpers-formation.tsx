@@ -31,7 +31,9 @@ import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import { act, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 
 export function flushPromises() {
-  return new Promise((resolve) => process.nextTick(resolve));
+  return new Promise((resolve) => {
+    return process.nextTick(resolve);
+  });
 }
 
 export const generateFormationLegalType = (): FormationLegalType => {
@@ -100,7 +102,9 @@ export const mockApiResponse = (response?: FormationSubmitResponse) => {
 };
 
 export const setDesktopScreen = (value: boolean): void => {
-  (useMediaQuery as jest.Mock).mockImplementation(() => value);
+  (useMediaQuery as jest.Mock).mockImplementation(() => {
+    return value;
+  });
 };
 
 export type FormationPageHelpers = {
@@ -216,10 +220,11 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
   const submitContactsStep = async (completed = true): Promise<void> => {
     fireEvent.click(screen.getByText(Config.businessFormationDefaults.nextButtonText));
 
-    if (completed)
+    if (completed) {
       await waitFor(() => {
         expect(screen.queryByTestId("billing-step")).toBeInTheDocument();
       });
+    }
   };
 
   const submitBillingStep = async (): Promise<void> => {
@@ -241,14 +246,18 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     const returnedPromise = Promise.resolve(generateNameAvailability(nameAvailability));
     mockApi.searchBusinessName.mockReturnValue(returnedPromise);
     fireEvent.click(screen.getByText(Config.searchBusinessNameTask.searchButtonText));
-    await act(() => returnedPromise.then());
+    await act(() => {
+      return returnedPromise.then();
+    });
   };
 
   const searchBusinessNameAndGetError = async (errorCode = 500): Promise<void> => {
     const returnedPromise = Promise.reject(errorCode);
     mockApi.searchBusinessName.mockReturnValue(returnedPromise);
     fireEvent.click(screen.getByText(Config.searchBusinessNameTask.searchButtonText));
-    await act(() => returnedPromise.catch(() => {}));
+    await act(() => {
+      return returnedPromise.catch(() => {});
+    });
   };
 
   const chooseRadio = (value: string): void => {

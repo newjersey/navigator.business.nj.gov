@@ -7,8 +7,12 @@ import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { HideableTasks } from "./HideableTasks";
 
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
+jest.mock("@/lib/data-hooks/useUserData", () => {
+  return { useUserData: jest.fn() };
+});
+jest.mock("@/lib/data-hooks/useRoadmap", () => {
+  return { useRoadmap: jest.fn() };
+});
 
 const Config = getMergedConfig();
 
@@ -19,12 +23,13 @@ describe("<HideableTasks />", () => {
     useMockRoadmap({});
   });
 
-  const renderHideableTask = (initialUserData?: UserData) =>
-    render(
+  const renderHideableTask = (initialUserData?: UserData) => {
+    return render(
       <WithStatefulUserData initialUserData={initialUserData}>
         <HideableTasks />
       </WithStatefulUserData>
     );
+  };
 
   it("displays number of hidden tasks when hide toggle is clicked", async () => {
     const tasks = [generateTask({}), generateTask({})];

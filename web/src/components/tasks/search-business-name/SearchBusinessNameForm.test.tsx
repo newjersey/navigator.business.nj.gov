@@ -14,11 +14,17 @@ import { useMockProfileData, useMockUserData } from "@/test/mock/mockUseUserData
 import { fireEvent, render, screen } from "@testing-library/react";
 import { ReactElement } from "react";
 
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("@/lib/api-client/apiClient", () => ({
-  searchBusinessName: jest.fn(),
-}));
+jest.mock("@/lib/data-hooks/useUserData", () => {
+  return { useUserData: jest.fn() };
+});
+jest.mock("@/lib/data-hooks/useRoadmap", () => {
+  return { useRoadmap: jest.fn() };
+});
+jest.mock("@/lib/api-client/apiClient", () => {
+  return {
+    searchBusinessName: jest.fn(),
+  };
+});
 const mockApi = api as jest.Mocked<typeof api>;
 
 const Config = getMergedConfig();
@@ -32,8 +38,12 @@ describe("<SearchBusinessNameForm />", () => {
 
   const availableText = "AVAILABLE!";
   const unavailableText = "UNAVAILABLE!";
-  const FakeAvailable = (): ReactElement => <div>{availableText}</div>;
-  const FakeUnavailable = (): ReactElement => <div>{unavailableText}</div>;
+  const FakeAvailable = (): ReactElement => {
+    return <div>{availableText}</div>;
+  };
+  const FakeUnavailable = (): ReactElement => {
+    return <div>{unavailableText}</div>;
+  };
 
   const renderForm = () => {
     render(
@@ -126,7 +136,13 @@ describe("<SearchBusinessNameForm />", () => {
     expect(screen.queryByTestId("error-alert-SEARCH_FAILED")).not.toBeInTheDocument();
   });
 
-  const availableTextExists = () => screen.queryByText(availableText) !== null;
-  const unavailableTextExists = () => screen.queryByText(unavailableText) !== null;
-  const designatorTextExists = () => screen.queryByTestId("designator-text") !== null;
+  const availableTextExists = () => {
+    return screen.queryByText(availableText) !== null;
+  };
+  const unavailableTextExists = () => {
+    return screen.queryByText(unavailableText) !== null;
+  };
+  const designatorTextExists = () => {
+    return screen.queryByTestId("designator-text") !== null;
+  };
 });

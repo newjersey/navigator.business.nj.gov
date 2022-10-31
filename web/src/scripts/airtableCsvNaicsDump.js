@@ -10,17 +10,31 @@ const saveRecords = async () => {
   const records = airtableSelectAll();
   const json = JSON.stringify(records);
   fs.writeFile(outPath, json, (err) => {
-    if (err) throw err;
+    if (err) {
+      throw err;
+    }
   });
 };
 
 const DigitRangeToArray = (value) => {
-  if (!value) return [];
-  if (Number.isInteger(value)) return [value];
-  if (!value.includes("-")) return [Number.parseInt(value)];
-  const values = value.split("-").map((value) => Number.parseInt(value));
-  if (values.length != 2) return;
-  return Array.from({ length: values[1] + 1 - values[0] }, (v, k) => k + values[0]);
+  if (!value) {
+    return [];
+  }
+  if (Number.isInteger(value)) {
+    return [value];
+  }
+  if (!value.includes("-")) {
+    return [Number.parseInt(value)];
+  }
+  const values = value.split("-").map((value) => {
+    return Number.parseInt(value);
+  });
+  if (values.length != 2) {
+    return;
+  }
+  return Array.from({ length: values[1] + 1 - values[0] }, (v, k) => {
+    return k + values[0];
+  });
 };
 
 const sixDigitRenameCodes = [
@@ -30,23 +44,29 @@ const sixDigitRenameCodes = [
   { name: "FourDigitCode", fieldName: "4 digit code (from 4 digit description)" },
   { name: "TwoDigitDescription", fieldName: "2 digit (from 4 digit description)" },
   { name: "TwoDigitCode", fieldName: "2 digit code (from 4 digit description)", convert: DigitRangeToArray },
-  { name: "industryIds", fieldName: "BFS Industries", convert: (value) => value?.split(",") ?? undefined },
+  {
+    name: "industryIds",
+    fieldName: "BFS Industries",
+    convert: (value) => {
+      return value?.split(",") ?? undefined;
+    },
+  },
 ];
 
 const airtableSelectAll = () => {
   const csv = fs.readFileSync(inPath).toString().split('"""').join('"');
   const records = csvToJson(csv);
 
-  return records.map((record) =>
-    sixDigitRenameCodes.reduce((acc, curr) => {
+  return records.map((record) => {
+    return sixDigitRenameCodes.reduce((acc, curr) => {
       if ("convert" in curr) {
         acc[curr.name] = curr.convert(record[curr.fieldName]);
       } else {
         acc[curr.name] = record[curr.fieldName];
       }
       return acc;
-    }, {})
-  );
+    }, {});
+  });
 };
 
 /**
@@ -63,7 +83,9 @@ function csvToJson(text, headers, quoteChar = '"', delimiter = ",") {
   const regex = new RegExp(`\\s*(${quoteChar})?(.*?)\\1\\s*(?:${delimiter}|$)`, "gs");
 
   const match = (line) => {
-    const matches = [...line.matchAll(regex)].map((m) => m[2]);
+    const matches = [...line.matchAll(regex)].map((m) => {
+      return m[2];
+    });
     matches.pop(); // cut off blank match at the end
     return matches;
   };

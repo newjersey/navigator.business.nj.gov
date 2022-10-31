@@ -77,20 +77,32 @@ const TaskPage = (props: Props): ReactElement => {
   const renderNextAndPreviousButtons = () => {
     const isValidLegalStructure = allowFormation(userData?.profileData.legalStructureId);
     const isStarting = userData?.profileData.businessPersona === "STARTING";
-    if (props.task.id === formationTaskId && isValidLegalStructure && isStarting) return;
+    if (props.task.id === formationTaskId && isValidLegalStructure && isStarting) {
+      return;
+    }
     return (
       <div
         className={`flex flex-row ${previousUrlSlug ? "flex-justify" : "flex-justify-end"} margin-top-2 `}
         data-testid="nextAndPreviousButtons"
       >
         {previousUrlSlug && (
-          <Button style="tertiary" onClick={() => router.push(`/tasks/${previousUrlSlug}`)}>
+          <Button
+            style="tertiary"
+            onClick={() => {
+              return router.push(`/tasks/${previousUrlSlug}`);
+            }}
+          >
             <Icon className="usa-icon--size-4">navigate_before</Icon>
             <span className="margin-left-2"> {Config.taskDefaults.previousTaskButtonText}</span>
           </Button>
         )}
         {nextUrlSlug && (
-          <Button style="tertiary" onClick={() => router.push(`/tasks/${nextUrlSlug}`)}>
+          <Button
+            style="tertiary"
+            onClick={() => {
+              return router.push(`/tasks/${nextUrlSlug}`);
+            }}
+          >
             <span className="margin-right-2">{Config.taskDefaults.nextTaskButtonText}</span>
             <Icon className="usa-icon--size-4">navigate_next</Icon>
           </Button>
@@ -101,7 +113,9 @@ const TaskPage = (props: Props): ReactElement => {
 
   const renderFormationTask = (): ReactElement => {
     const taskInRoadmap = getTaskFromRoadmap(roadmap, props.task.id);
-    if (!taskInRoadmap) return <></>;
+    if (!taskInRoadmap) {
+      return <></>;
+    }
 
     if (userData?.profileData.businessPersona === "FOREIGN") {
       return <NexusFormationTask task={taskInRoadmap} />;
@@ -146,7 +160,9 @@ const TaskPage = (props: Props): ReactElement => {
 };
 
 const getPostOnboardingQuestion = (task: Task): ReactElement => {
-  if (!task.postOnboardingQuestion) return <></>;
+  if (!task.postOnboardingQuestion) {
+    return <></>;
+  }
   return rswitch(task.postOnboardingQuestion, {
     "construction-renovation": (
       <RadioQuestion id="construction-renovation" onboardingKey="constructionRenovationPlan" />

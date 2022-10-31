@@ -27,7 +27,9 @@ export const OnboardingTaxId = ({
 
   const getFieldType = () => {
     const initialValue = state.profileData[fieldName]?.trim().length ?? 0;
-    if (initialValue === 0 || initialValue === 12) return "FULL";
+    if (initialValue === 0 || initialValue === 12) {
+      return "FULL";
+    }
     return "SPLIT";
   };
 
@@ -45,7 +47,9 @@ export const OnboardingTaxId = ({
     if (type === "taxId") {
       setTaxIdValue(value);
       resolvedValue = "".concat(...value, ...locationValue);
-      if (value.length === 9) locationBoxRef.current?.querySelector("input")?.focus();
+      if (value.length === 9) {
+        locationBoxRef.current?.querySelector("input")?.focus();
+      }
     }
     if (type === "taxIdLocation") {
       resolvedValue = "".concat(...taxIdValue, ...value);
@@ -63,14 +67,18 @@ export const OnboardingTaxId = ({
   };
 
   const onValidation = (valFieldName: string, invalid: boolean) => {
-    const errors = (errorMap: ErrorMapType) => ({ ...errorMap, [valFieldName]: invalid });
-    setErrorMap((errorMap) => errors(errorMap));
+    const errors = (errorMap: ErrorMapType) => {
+      return { ...errorMap, [valFieldName]: invalid };
+    };
+    setErrorMap((errorMap) => {
+      return errors(errorMap);
+    });
     props.onValidation && props.onValidation(fieldName, Object.values(errors(errorMap)).includes(true));
   };
 
   const error = fieldStates[fieldName].invalid;
 
-  if (initialType.current === "FULL")
+  if (initialType.current === "FULL") {
     return (
       <OnboardingField
         error={error}
@@ -83,6 +91,7 @@ export const OnboardingTaxId = ({
         {...props}
       />
     );
+  }
 
   return (
     <div className={`${className} ${inputErrorBar ? "input-error-bar" : ""} ${error ? "error" : ""}`}>

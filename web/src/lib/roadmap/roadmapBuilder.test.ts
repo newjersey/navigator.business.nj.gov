@@ -26,7 +26,11 @@ describe("roadmapBuilder", () => {
       industryId: undefined,
       addOns: ["tea"],
     });
-    expect(roadmap.tasks.map((it) => it.id)).toEqual(expect.arrayContaining(["tea-task-1-id"]));
+    expect(
+      roadmap.tasks.map((it) => {
+        return it.id;
+      })
+    ).toEqual(expect.arrayContaining(["tea-task-1-id"]));
   });
 
   it("removes any steps that have no tasks", async () => {
@@ -52,7 +56,11 @@ describe("roadmapBuilder", () => {
       addOns: ["tea"],
     });
 
-    expect(roadmap.tasks.map((it) => ({ id: it.id, stepNumber: it.stepNumber }))).toEqual(
+    expect(
+      roadmap.tasks.map((it) => {
+        return { id: it.id, stepNumber: it.stepNumber };
+      })
+    ).toEqual(
       expect.arrayContaining([
         { id: "generic-task-1-id", stepNumber: 1 },
         { id: "coffee-task-1-id", stepNumber: 1 },
@@ -71,7 +79,11 @@ describe("roadmapBuilder", () => {
       addOns: [],
     });
 
-    expect(roadmap.tasks.map((it) => ({ id: it.id, stepNumber: it.stepNumber }))).toEqual([
+    expect(
+      roadmap.tasks.map((it) => {
+        return { id: it.id, stepNumber: it.stepNumber };
+      })
+    ).toEqual([
       { id: "generic-task-1-id", stepNumber: 1 },
       { id: "coffee-task-2-id", stepNumber: 1 },
       { id: "coffee-task-1-id", stepNumber: 1 },
@@ -87,7 +99,11 @@ describe("roadmapBuilder", () => {
       addOns: ["weighted"],
     });
 
-    expect(roadmap.tasks.map((it) => ({ id: it.id, stepNumber: it.stepNumber }))).toEqual([
+    expect(
+      roadmap.tasks.map((it) => {
+        return { id: it.id, stepNumber: it.stepNumber };
+      })
+    ).toEqual([
       { id: "weighted-task-0-id", stepNumber: 1 },
       { id: "generic-task-1-id", stepNumber: 1 },
       { id: "generic-task-2-id", stepNumber: 1 },
@@ -104,7 +120,13 @@ describe("roadmapBuilder", () => {
       addOns: ["mocha"],
     });
 
-    expect(roadmap.tasks.map((it) => it.id).includes("mocha-task-5-id")).toBeTruthy();
+    expect(
+      roadmap.tasks
+        .map((it) => {
+          return it.id;
+        })
+        .includes("mocha-task-5-id")
+    ).toBeTruthy();
   });
 
   it("adds unlockedBy to tasks from dependencies file without duplicate url-slugs", async () => {
@@ -113,7 +135,9 @@ describe("roadmapBuilder", () => {
       addOns: ["blocking"],
     });
 
-    const blockedTask = roadmap.tasks.find((it) => it.id === "blocked-id");
+    const blockedTask = roadmap.tasks.find((it) => {
+      return it.id === "blocked-id";
+    });
     expect(blockedTask?.unlockedBy).toEqual([
       {
         name: "Blocking Task 2",

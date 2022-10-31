@@ -8,10 +8,18 @@ import * as materialUi from "@mui/material";
 import { useMediaQuery } from "@mui/material";
 import { fireEvent, render, screen } from "@testing-library/react";
 
-jest.mock("@/lib/api-client/apiClient", () => ({ postSelfReg: jest.fn() }));
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("next/router", () => ({ useRouter: jest.fn() }));
-jest.mock("@/lib/auth/sessionHelper", () => ({ triggerSignIn: jest.fn() }));
+jest.mock("@/lib/api-client/apiClient", () => {
+  return { postSelfReg: jest.fn() };
+});
+jest.mock("@/lib/data-hooks/useUserData", () => {
+  return { useUserData: jest.fn() };
+});
+jest.mock("next/router", () => {
+  return { useRouter: jest.fn() };
+});
+jest.mock("@/lib/auth/sessionHelper", () => {
+  return { triggerSignIn: jest.fn() };
+});
 
 function mockMaterialUI(): typeof materialUi {
   return {
@@ -19,9 +27,13 @@ function mockMaterialUI(): typeof materialUi {
     useMediaQuery: jest.fn(),
   };
 }
-jest.mock("@mui/material", () => mockMaterialUI());
+jest.mock("@mui/material", () => {
+  return mockMaterialUI();
+});
 const setLargeScreen = (value: boolean): void => {
-  (useMediaQuery as jest.Mock).mockImplementation(() => value);
+  (useMediaQuery as jest.Mock).mockImplementation(() => {
+    return value;
+  });
 };
 
 describe("SignUpSnackbar", () => {

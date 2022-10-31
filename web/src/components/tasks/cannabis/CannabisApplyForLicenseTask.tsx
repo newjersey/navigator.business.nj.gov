@@ -42,23 +42,25 @@ export const CannabisApplyForLicenseTask = (props: Props): ReactElement => {
       setDisplayFirstTab(false);
     }
 
-    if (!userData) return;
+    if (!userData) {
+      return;
+    }
 
-    const minorityOrWomenPriorityTypeSelected = priorityTypesObj.minorityOrWomen.some(
-      (key) => userData.taskItemChecklist[key] === true
-    );
+    const minorityOrWomenPriorityTypeSelected = priorityTypesObj.minorityOrWomen.some((key) => {
+      return userData.taskItemChecklist[key] === true;
+    });
 
-    const veteranPriorityTypeSelected = priorityTypesObj.veteran.some(
-      (key) => userData.taskItemChecklist[key] === true
-    );
+    const veteranPriorityTypeSelected = priorityTypesObj.veteran.some((key) => {
+      return userData.taskItemChecklist[key] === true;
+    });
 
-    const impactZonePriorityTypeSelected = priorityTypesObj.impactZone.some(
-      (key) => userData.taskItemChecklist[key] === true
-    );
+    const impactZonePriorityTypeSelected = priorityTypesObj.impactZone.some((key) => {
+      return userData.taskItemChecklist[key] === true;
+    });
 
-    const socialEquityPriorityTypeSelected = priorityTypesObj.socialEquity.some(
-      (key) => userData.taskItemChecklist[key] === true
-    );
+    const socialEquityPriorityTypeSelected = priorityTypesObj.socialEquity.some((key) => {
+      return userData.taskItemChecklist[key] === true;
+    });
 
     setPriorityStatusState({
       diverselyOwned: minorityOrWomenPriorityTypeSelected || veteranPriorityTypeSelected,
@@ -74,10 +76,12 @@ export const CannabisApplyForLicenseTask = (props: Props): ReactElement => {
   }, userData);
 
   const onCheckboxChange = (type: PriorityApplicationType, checked: boolean): void => {
-    setPriorityStatusState((current) => ({
-      ...current,
-      [type]: checked,
-    }));
+    setPriorityStatusState((current) => {
+      return {
+        ...current,
+        [type]: checked,
+      };
+    });
   };
 
   const onBack = (): void => {
@@ -99,7 +103,9 @@ export const CannabisApplyForLicenseTask = (props: Props): ReactElement => {
   };
 
   const handleNextTabButtonClick = (): void => {
-    if (!userData || !updateQueue) return;
+    if (!userData || !updateQueue) {
+      return;
+    }
     setDisplayFirstTab(false);
     scrollToTop();
     sendNextTabButtonAnalytics();
@@ -117,7 +123,9 @@ export const CannabisApplyForLicenseTask = (props: Props): ReactElement => {
       <SnackbarAlert
         variant="success"
         isOpen={successSnackbarIsOpen}
-        close={() => setSuccessSnackbarIsOpen(false)}
+        close={() => {
+          return setSuccessSnackbarIsOpen(false);
+        }}
       >
         {Config.taskDefaults.taskProgressSuccessSnackbarBody}
       </SnackbarAlert>

@@ -9,16 +9,20 @@ export const Roadmap = (): ReactElement => {
 
   return (
     <>
-      {getSectionNames(roadmap).map((section) => (
-        <SectionAccordion key={section} sectionType={section}>
-          {roadmap &&
-            roadmap.steps
-              .filter((step) => step.section === section)
-              .map((step, index, array) => (
-                <Step key={step.stepNumber} step={step} last={index === array.length - 1} />
-              ))}
-        </SectionAccordion>
-      ))}
+      {getSectionNames(roadmap).map((section) => {
+        return (
+          <SectionAccordion key={section} sectionType={section}>
+            {roadmap &&
+              roadmap.steps
+                .filter((step) => {
+                  return step.section === section;
+                })
+                .map((step, index, array) => {
+                  return <Step key={step.stepNumber} step={step} last={index === array.length - 1} />;
+                })}
+          </SectionAccordion>
+        );
+      })}
     </>
   );
 };

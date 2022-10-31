@@ -17,14 +17,21 @@ export const BetaBar = (): ReactElement => {
         className="padding-y-0"
         style="secondary-blue-narrow"
         smallText
-        onClick={() => setShowModal(true)}
+        onClick={() => {
+          return setShowModal(true);
+        }}
         widthAutoOnMobile
       >
         {makeButtonIcon("lightbulb-on-warning-light", "16px")}
         {Config.betaBar.betaModalButtonText}
       </Button>
 
-      <FeedbackModal isOpen={showModal} handleClose={() => setShowModal(false)} />
+      <FeedbackModal
+        isOpen={showModal}
+        handleClose={() => {
+          return setShowModal(false);
+        }}
+      />
     </div>
   );
 };

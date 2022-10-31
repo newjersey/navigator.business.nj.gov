@@ -37,7 +37,9 @@ describe("Onboarding [feature] [all] [group2]", () => {
   });
 
   it("user data is updated if opted into newsletter", () => {
-    cy.intercept("POST", "/local/api/users", (req) => req.continue()).as("new-user");
+    cy.intercept("POST", "/local/api/users", (req) => {
+      return req.continue();
+    }).as("new-user");
 
     completeNewBusinessOnboarding({
       isNewsletterChecked: true,

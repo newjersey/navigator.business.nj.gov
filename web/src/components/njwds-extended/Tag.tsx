@@ -70,8 +70,12 @@ export const Tag = (props: Props): ReactElement => {
   const radius = props.isRadiusMd ? "radius-md" : "";
 
   const className = [defaultStyle, styling, hoverStyling, textWrap, fixedWidth, disableUppercase, radius]
-    .map((i) => i?.trim())
-    .filter((value: string | undefined) => value && value.length > 0)
+    .map((i) => {
+      return i?.trim();
+    })
+    .filter((value: string | undefined) => {
+      return value && value.length > 0;
+    })
     .join(" ");
 
   return (

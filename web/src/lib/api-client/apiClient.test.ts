@@ -20,9 +20,13 @@ import {
 jest.mock("axios");
 const mockAxios = axios as jest.Mocked<typeof axios>;
 
-jest.mock("@/lib/auth/sessionHelper", () => ({
-  getCurrentToken: () => "some-token",
-}));
+jest.mock("@/lib/auth/sessionHelper", () => {
+  return {
+    getCurrentToken: () => {
+      return "some-token";
+    },
+  };
+});
 
 describe("apiClient", () => {
   beforeEach(() => {

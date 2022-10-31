@@ -15,14 +15,16 @@ export const ReviewProvisions = () => {
         testId="provisions"
       />
       <div className="" data-testid="provisions">
-        {state.formationFormData.provisions.map((provision, index) => (
-          <div className="margin-bottom-2" key={index}>
-            <div className="text-bold margin-bottom-05">
-              {index + 1}. {Config.businessFormationDefaults.reviewStepProvisionsSubheader}
+        {state.formationFormData.provisions.map((provision, index) => {
+          return (
+            <div className="margin-bottom-2" key={index}>
+              <div className="text-bold margin-bottom-05">
+                {index + 1}. {Config.businessFormationDefaults.reviewStepProvisionsSubheader}
+              </div>
+              <Content>{provision}</Content>
             </div>
-            <Content>{provision}</Content>
-          </div>
-        ))}
+          );
+        })}
       </div>
       <hr className="margin-y-205" />
     </>

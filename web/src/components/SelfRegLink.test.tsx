@@ -17,10 +17,18 @@ function setupMockAnalytics(): typeof analytics {
   };
 }
 
-jest.mock("next/router", () => ({ useRouter: jest.fn() }));
-jest.mock("@/lib/auth/signinHelper", () => ({ onSelfRegister: jest.fn() }));
-jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
+jest.mock("next/router", () => {
+  return { useRouter: jest.fn() };
+});
+jest.mock("@/lib/auth/signinHelper", () => {
+  return { onSelfRegister: jest.fn() };
+});
+jest.mock("@/lib/utils/analytics", () => {
+  return setupMockAnalytics();
+});
+jest.mock("@/lib/data-hooks/useUserData", () => {
+  return { useUserData: jest.fn() };
+});
 
 const mockSigninHelper = signinHelper as jest.Mocked<typeof signinHelper>;
 const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
@@ -44,25 +52,33 @@ describe("<SelfRegLink />", () => {
   it("calls custom analytics event when provided as second half of /self-register", async () => {
     renderSelfRegLink("/self-register/guest_snackbar");
     fireEvent.click(screen.getByText("link"));
-    await waitFor(() => expect(mockSigninHelper.onSelfRegister).toHaveBeenCalled());
+    await waitFor(() => {
+      return expect(mockSigninHelper.onSelfRegister).toHaveBeenCalled();
+    });
     expect(mockAnalytics.event.guest_snackbar.click.go_to_myNJ_registration).toHaveBeenCalled();
   });
 
   it("does not blow up if second half of url is not an analytics key", async () => {
     renderSelfRegLink("/self-register/something_random");
     fireEvent.click(screen.getByText("link"));
-    await waitFor(() => expect(mockSigninHelper.onSelfRegister).toHaveBeenCalled());
+    await waitFor(() => {
+      return expect(mockSigninHelper.onSelfRegister).toHaveBeenCalled();
+    });
   });
 
   it("does not blow up if second half of url has no analytics click event", async () => {
     renderSelfRegLink("/self-register/no_click_key");
     fireEvent.click(screen.getByText("link"));
-    await waitFor(() => expect(mockSigninHelper.onSelfRegister).toHaveBeenCalled());
+    await waitFor(() => {
+      return expect(mockSigninHelper.onSelfRegister).toHaveBeenCalled();
+    });
   });
 
   it("does not blow up if second half of url has no analytics myNJ event", async () => {
     renderSelfRegLink("/self-register/no_mynj_key");
     fireEvent.click(screen.getByText("link"));
-    await waitFor(() => expect(mockSigninHelper.onSelfRegister).toHaveBeenCalled());
+    await waitFor(() => {
+      return expect(mockSigninHelper.onSelfRegister).toHaveBeenCalled();
+    });
   });
 });

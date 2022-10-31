@@ -18,64 +18,70 @@ export const NavSidebarUserSettings = (): ReactElement => {
 
   const router = useRouter();
 
-  const isAuthenticated = useMemo(() => state.isAuthenticated == "TRUE", [state.isAuthenticated]);
+  const isAuthenticated = useMemo(() => {
+    return state.isAuthenticated == "TRUE";
+  }, [state.isAuthenticated]);
 
-  const UnAuthenticatedMenu = () => (
-    <>
-      <div className="margin-bottom-2">
-        <Link href={ROUTES.profile} passHref>
+  const UnAuthenticatedMenu = () => {
+    return (
+      <>
+        <div className="margin-bottom-2">
+          <Link href={ROUTES.profile} passHref>
+            <Button
+              style="tertiary"
+              onClick={() => {
+                analytics.event.account_menu_my_profile.click.go_to_profile_screen();
+              }}
+            >
+              <span className="text-base">{Config.navigationDefaults.profileLinkText}</span>
+            </Button>
+          </Link>
+        </div>
+        <div className="margin-bottom-2">
           <Button
             style="tertiary"
             onClick={() => {
-              analytics.event.account_menu_my_profile.click.go_to_profile_screen();
+              analytics.event.guest_menu.click.go_to_myNJ_registration();
+              onSelfRegister(router, userData, update, setRegistrationAlertStatus);
             }}
           >
-            <span className="text-base">{Config.navigationDefaults.profileLinkText}</span>
+            <span className="text-base">{Config.navigationDefaults.navBarGuestRegistrationText}</span>
           </Button>
-        </Link>
-      </div>
-      <div className="margin-bottom-2">
-        <Button
-          style="tertiary"
-          onClick={() => {
-            analytics.event.guest_menu.click.go_to_myNJ_registration();
-            onSelfRegister(router, userData, update, setRegistrationAlertStatus);
-          }}
-        >
-          <span className="text-base">{Config.navigationDefaults.navBarGuestRegistrationText}</span>
-        </Button>
-      </div>
-    </>
-  );
+        </div>
+      </>
+    );
+  };
 
-  const AuthenticatedMenu = () => (
-    <>
-      <div className="margin-bottom-2">
-        <Button
-          style="tertiary"
-          onClick={(event) => {
-            event.preventDefault();
-            analytics.event.account_menu_myNJ_account.click.go_to_myNJ_home();
-            window.open(process.env.MYNJ_PROFILE_LINK || "", "_ blank");
-          }}
-        >
-          <span className="text-base">{Config.navigationDefaults.myNJAccountText}</span>
-        </Button>
-      </div>
-      <div className="margin-bottom-2">
-        <Link href={ROUTES.profile} passHref>
+  const AuthenticatedMenu = () => {
+    return (
+      <>
+        <div className="margin-bottom-2">
           <Button
             style="tertiary"
-            onClick={() => {
-              analytics.event.account_menu_my_profile.click.go_to_profile_screen();
+            onClick={(event) => {
+              event.preventDefault();
+              analytics.event.account_menu_myNJ_account.click.go_to_myNJ_home();
+              window.open(process.env.MYNJ_PROFILE_LINK || "", "_ blank");
             }}
           >
-            <span className="text-base">{Config.navigationDefaults.profileLinkText}</span>
+            <span className="text-base">{Config.navigationDefaults.myNJAccountText}</span>
           </Button>
-        </Link>
-      </div>
-    </>
-  );
+        </div>
+        <div className="margin-bottom-2">
+          <Link href={ROUTES.profile} passHref>
+            <Button
+              style="tertiary"
+              onClick={() => {
+                analytics.event.account_menu_my_profile.click.go_to_profile_screen();
+              }}
+            >
+              <span className="text-base">{Config.navigationDefaults.profileLinkText}</span>
+            </Button>
+          </Link>
+        </div>
+      </>
+    );
+  };
 
   const renderMenu = () => {
     if (router.pathname === ROUTES.onboarding) {

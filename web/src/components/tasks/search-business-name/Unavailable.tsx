@@ -14,11 +14,13 @@ export const Unavailable = (props: UnavailableProps): ReactElement => {
       </p>
       <ul className="usa-list--unstyled font-body-2xs text-red">
         {props.nameAvailability &&
-          props.nameAvailability.similarNames.map((otherName) => (
-            <li className="text-uppercase text-bold margin-top-0" key={otherName}>
-              {otherName}
-            </li>
-          ))}
+          props.nameAvailability.similarNames.map((otherName) => {
+            return (
+              <li className="text-uppercase text-bold margin-top-0" key={otherName}>
+                {otherName}
+              </li>
+            );
+          })}
       </ul>
     </div>
   );

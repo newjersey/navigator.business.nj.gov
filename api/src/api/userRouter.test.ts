@@ -18,26 +18,30 @@ import { UserDataClient } from "../domain/types";
 import { setupExpress } from "../libs/express";
 import { userRouterFactory } from "./userRouter";
 
-jest.mock("jsonwebtoken", () => ({
-  decode: jest.fn(),
-}));
+jest.mock("jsonwebtoken", () => {
+  return {
+    decode: jest.fn(),
+  };
+});
 const mockJwt = jwt as jest.Mocked<typeof jwt>;
 
-const cognitoPayload = ({ id }: { id: string }) => ({
-  sub: "some-sub",
-  "custom:myNJUserKey": undefined,
-  email: "some-eamail",
-  identities: [
-    {
-      dateCreated: "some-date",
-      issuer: "some-issuer",
-      primary: "some-primary",
-      providerName: "myNJ",
-      providerType: "some-provider-type",
-      userId: id,
-    },
-  ],
-});
+const cognitoPayload = ({ id }: { id: string }) => {
+  return {
+    sub: "some-sub",
+    "custom:myNJUserKey": undefined,
+    email: "some-eamail",
+    identities: [
+      {
+        dateCreated: "some-date",
+        issuer: "some-issuer",
+        primary: "some-primary",
+        providerName: "myNJ",
+        providerType: "some-provider-type",
+        userId: id,
+      },
+    ],
+  };
+};
 
 describe("userRouter", () => {
   let app: Express;
@@ -55,9 +59,13 @@ describe("userRouter", () => {
     };
     stubUpdateLicenseStatus = jest.fn();
     stubUpdateRoadmapSidebarCards = jest.fn();
-    stubUpdateRoadmapSidebarCards.mockImplementation((userData) => userData);
+    stubUpdateRoadmapSidebarCards.mockImplementation((userData) => {
+      return userData;
+    });
     stubUpdateOperatingPhase = jest.fn();
-    stubUpdateOperatingPhase.mockImplementation((userData) => userData);
+    stubUpdateOperatingPhase.mockImplementation((userData) => {
+      return userData;
+    });
 
     app = setupExpress(false);
     app.use(
@@ -71,7 +79,9 @@ describe("userRouter", () => {
   });
 
   afterAll(async () => {
-    await new Promise((resolve) => setTimeout(resolve, 500));
+    await new Promise((resolve) => {
+      return setTimeout(resolve, 500);
+    });
   });
 
   describe("GET", () => {
@@ -87,7 +97,9 @@ describe("userRouter", () => {
     });
 
     it("returns a 404 when a user isn't registered", async () => {
-      stubUserDataClient.get.mockImplementation(() => Promise.reject("Not found"));
+      stubUserDataClient.get.mockImplementation(() => {
+        return Promise.reject("Not found");
+      });
       mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
       const response = await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
       expect(mockJwt.decode).toHaveBeenCalledWith("user-123-token");

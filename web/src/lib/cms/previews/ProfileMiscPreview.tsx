@@ -22,12 +22,22 @@ const ProfilePreviewMisc = (props: PreviewProps) => {
       <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
         <h2>Escape Modal:</h2>
         <div ref={ref} style={{ pointerEvents: "all" }}>
-          <button onClick={() => setModalOpen(true)}>Open Modal</button>
+          <button
+            onClick={() => {
+              return setModalOpen(true);
+            }}
+          >
+            Open Modal
+          </button>
         </div>
         <EscapeModal
           isOpen={modalOpen}
-          close={() => setModalOpen(false)}
-          primaryButtonOnClick={() => setModalOpen(false)}
+          close={() => {
+            return setModalOpen(false);
+          }}
+          primaryButtonOnClick={() => {
+            return setModalOpen(false);
+          }}
         />
         <hr className="margin-y-4" />
 

@@ -24,7 +24,9 @@ const deleteCypressRecords = async () => {
 };
 
 const isTestRecord = (record) => {
-  if (!record["First Name"]) return false;
+  if (!record["First Name"]) {
+    return false;
+  }
 
   return (
     record["First Name"].startsWith("Michael Smith") ||
@@ -36,7 +38,9 @@ const isTestRecord = (record) => {
 const deleteRecords = (records) => {
   for (let i = 0; i < records.length; i += 10) {
     const recordsToSend = records.slice(i, i + 10);
-    const idsToSend = recordsToSend.map((it) => it["id"]);
+    const idsToSend = recordsToSend.map((it) => {
+      return it["id"];
+    });
     base(table).destroy(idsToSend, function (err, deletedRecords) {
       if (err) {
         console.error(err);

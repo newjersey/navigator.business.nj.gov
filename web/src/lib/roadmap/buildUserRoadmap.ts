@@ -91,7 +91,9 @@ const getForeignAddOns = (profileData: ProfileData): string[] => {
 
 const getIndustryBasedAddOns = (profileData: ProfileData, industryId: string | undefined): string[] => {
   const industry = LookupIndustryById(industryId);
-  if (industry.id === "") return [];
+  if (industry.id === "") {
+    return [];
+  }
   const addOns = [];
 
   if (
@@ -171,7 +173,9 @@ const getIndustryBasedAddOns = (profileData: ProfileData, industryId: string | u
 };
 
 const getLegalStructureAddOns = (profileData: ProfileData): string[] => {
-  if (!profileData.legalStructureId) return [];
+  if (!profileData.legalStructureId) {
+    return [];
+  }
 
   const addOns = [];
   if (profileData.businessPersona !== "FOREIGN") {
@@ -204,7 +208,9 @@ const getLegalStructureAddOns = (profileData: ProfileData): string[] => {
 
 const addMunicipalitySpecificData = async (roadmap: Roadmap, municipalityId: string): Promise<Roadmap> => {
   const municipality = await fetchMunicipalityById(municipalityId);
-  if (!municipality) return roadmap;
+  if (!municipality) {
+    return roadmap;
+  }
 
   return applyTemplateEvalForAllTasks(roadmap, {
     municipalityWebsite: municipality.townWebsite,
@@ -233,7 +239,9 @@ const cleanupMunicipalitySpecificData = (roadmap: Roadmap): Roadmap => {
 const removeTask = (roadmap: Roadmap, taskId: string): Roadmap => {
   return {
     ...roadmap,
-    tasks: roadmap.tasks.filter((task) => task.id !== taskId),
+    tasks: roadmap.tasks.filter((task) => {
+      return task.id !== taskId;
+    }),
   };
 };
 

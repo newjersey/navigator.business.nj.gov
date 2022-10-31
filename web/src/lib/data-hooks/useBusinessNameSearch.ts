@@ -38,7 +38,9 @@ export const useBusinessNameSearch = ({
   const [isNameFieldEmpty, setIsNameFieldEmpty] = useState<boolean>(false);
 
   useMountEffectWhenDefined(() => {
-    if (!userData) return;
+    if (!userData) {
+      return;
+    }
     setCurrentName(isDba ? userData.profileData.nexusDbaName || "" : userData.profileData.businessName);
   }, userData);
 
@@ -62,7 +64,9 @@ export const useBusinessNameSearch = ({
   const searchBusinessName = async (
     event?: FormEvent<HTMLFormElement>
   ): Promise<{ nameAvailability: NameAvailability; submittedName: string }> => {
-    if (event) event.preventDefault();
+    if (event) {
+      event.preventDefault();
+    }
 
     const resetState = () => {
       setNameAvailability(undefined);
@@ -103,7 +107,9 @@ export const useBusinessNameSearch = ({
   };
 
   const updateNameOnProfile = (): void => {
-    if (!userData) return;
+    if (!userData) {
+      return;
+    }
     setUpdateButtonClicked(true);
     const newData = isDba ? { nexusDbaName: submittedName } : { businessName: submittedName };
     update({

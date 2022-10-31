@@ -21,7 +21,9 @@ export const CannabisApplicationRequirementsTab = (props: Props): ReactElement =
   const { Config } = useConfig();
 
   const hasPriorityStatus = (Object.keys(props.priorityStatusState) as PriorityApplicationType[]).some(
-    (key) => props.priorityStatusState[key]
+    (key) => {
+      return props.priorityStatusState[key];
+    }
   );
 
   return (

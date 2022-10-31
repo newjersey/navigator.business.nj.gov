@@ -255,15 +255,17 @@ export const corpBusinessSuffix = [
   "INC.",
 ] as const;
 
-export const createEmptyFormationAddress = (): v62FormationAddress => ({
-  name: "",
-  addressLine1: "",
-  addressLine2: "",
-  addressCity: "",
-  addressState: "",
-  addressZipCode: "",
-  signature: false,
-});
+export const createEmptyFormationAddress = (): v62FormationAddress => {
+  return {
+    name: "",
+    addressLine1: "",
+    addressLine2: "",
+    addressCity: "",
+    addressState: "",
+    addressZipCode: "",
+    signature: false,
+  };
+};
 
 const AllBusinessSuffixes = [...llcBusinessSuffix, ...llpBusinessSuffix, ...corpBusinessSuffix] as const;
 

@@ -61,9 +61,11 @@ export const saveFileFromUrl = async function (
       .then((object) => {
         uploadFile(fullName, object.data, object.headers["content-type"], bucket)
           .then((s3response) => {
-            if (s3response.$metadata.httpStatusCode === 200)
+            if (s3response.$metadata.httpStatusCode === 200) {
               resolve(escapeColons(`https://${bucket}.s3.us-east-1.amazonaws.com/${fullName}`));
-            else reject(s3response.$metadata.httpStatusCode);
+            } else {
+              reject(s3response.$metadata.httpStatusCode);
+            }
           })
           .catch((error) => {
             reject(error);

@@ -43,15 +43,19 @@ export const GenericTextField = forwardRef(
     let fieldOptions = props.fieldOptions;
 
     if (props.numericProps) {
-      const regex = (value: string): string =>
-        value.replace(props.numericProps?.trimLeadingZeroes ? /^0+|\D/g : /\D/g, "");
+      const regex = (value: string): string => {
+        return value.replace(props.numericProps?.trimLeadingZeroes ? /^0+|\D/g : /\D/g, "");
+      };
 
-      visualFilter = (value: string): string =>
-        props.visualFilter ? props.visualFilter(regex(value)) : regex(value);
+      visualFilter = (value: string): string => {
+        return props.visualFilter ? props.visualFilter(regex(value)) : regex(value);
+      };
 
       const maxLength = props.numericProps?.maxLength;
 
-      valueFilter = (value) => (maxLength ? regex(value).slice(0, maxLength) : regex(value));
+      valueFilter = (value) => {
+        return maxLength ? regex(value).slice(0, maxLength) : regex(value);
+      };
 
       const validMinimumValue = (value: string): boolean => {
         if (!props.required && value.length === 0) {
@@ -66,12 +70,15 @@ export const GenericTextField = forwardRef(
         return true;
       };
 
-      additionalValidation = (returnedValue: string): boolean =>
-        ![
+      additionalValidation = (returnedValue: string): boolean => {
+        return ![
           validMinimumValue(returnedValue),
           returnedValue.length <= (maxLength ?? Number.POSITIVE_INFINITY),
           props.additionalValidation ? props.additionalValidation(returnedValue) : true,
-        ].some((i) => !i);
+        ].some((i) => {
+          return !i;
+        });
+      };
       fieldOptions = {
         ...fieldOptions,
         inputProps: { ...fieldOptions?.inputProps, inputMode: "numeric" },
@@ -85,7 +92,9 @@ export const GenericTextField = forwardRef(
       props.onValidation &&
         props.onValidation(
           props.fieldName,
-          [invalidRequired, invalid].some((i) => !!i),
+          [invalidRequired, invalid].some((i) => {
+            return !!i;
+          }),
           currentValue
         );
     };

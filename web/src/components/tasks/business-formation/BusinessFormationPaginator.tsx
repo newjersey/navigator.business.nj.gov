@@ -73,7 +73,9 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
       };
     });
 
-    const stepsWithErrors = stepStates.filter((stepState) => stepState.hasError);
+    const stepsWithErrors = stepStates.filter((stepState) => {
+      return stepState.hasError;
+    });
     return { stepsWithErrors, stepStates };
   };
 
@@ -118,7 +120,9 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
   };
 
   const updateChangesInProfileData = (userData: UserData | undefined): UserData | undefined => {
-    if (!userData) return;
+    if (!userData) {
+      return;
+    }
     let userDataWithChanges = { ...userData };
 
     if (isStep("Business")) {
@@ -145,17 +149,23 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
   };
 
   const getFilteredUserData = (): UserData | undefined => {
-    if (!userData) return;
+    if (!userData) {
+      return;
+    }
 
     let formationFormDataToSubmit = { ...state.formationFormData };
 
     if (isStep("Business")) {
-      const filteredProvisions = state.formationFormData.provisions.filter((it) => it !== "");
+      const filteredProvisions = state.formationFormData.provisions.filter((it) => {
+        return it !== "";
+      });
       formationFormDataToSubmit = { ...formationFormDataToSubmit, provisions: filteredProvisions };
     }
 
     if (isStep("Contacts")) {
-      const filteredSigners = state.formationFormData.signers.filter((it: FormationAddress) => !!it);
+      const filteredSigners = state.formationFormData.signers.filter((it: FormationAddress) => {
+        return !!it;
+      });
       formationFormDataToSubmit = { ...formationFormDataToSubmit, signers: filteredSigners };
     }
 
@@ -174,7 +184,9 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
     nextStepIndex: number,
     moveType: "NEXT_BUTTON" | "STEPPER"
   ) => {
-    if (!formationFormData) return;
+    if (!formationFormData) {
+      return;
+    }
 
     if (moveType === "STEPPER") {
       if (LookupNameByStepIndex(nextStepIndex) === "Name") {
@@ -217,8 +229,9 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
       formationFormData.provisions.length
     );
 
-    if (formationFormData.businessPurpose.trim().length > 0)
+    if (formationFormData.businessPurpose.trim().length > 0) {
       analytics.event.business_formation_purpose.submit.purpose_submitted_with_formation();
+    }
 
     analytics.event.business_formation_members.submit.members_submitted_with_formation(
       formationFormData.members.length
@@ -241,7 +254,9 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
 
   const submitToApi = async () => {
     const filteredUserData = getFilteredUserData();
-    if (!filteredUserData) return;
+    if (!filteredUserData) {
+      return;
+    }
 
     setIsLoading(true);
 
@@ -288,59 +303,69 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
     }
   };
 
-  const displayButtons = () => (
-    <div className="margin-top-2">
-      <div className="flex flex-justify-end bg-base-lightest margin-x-neg-4 padding-3 margin-top-3 margin-bottom-neg-4">
-        {shouldDisplayPreviousButton() && (
-          <Button style="secondary" widthAutoOnMobile onClick={onPreviousButtonClick}>
-            {Config.businessFormationDefaults.previousButtonText}
+  const displayButtons = () => {
+    return (
+      <div className="margin-top-2">
+        <div className="flex flex-justify-end bg-base-lightest margin-x-neg-4 padding-3 margin-top-3 margin-bottom-neg-4">
+          {shouldDisplayPreviousButton() && (
+            <Button style="secondary" widthAutoOnMobile onClick={onPreviousButtonClick}>
+              {Config.businessFormationDefaults.previousButtonText}
+            </Button>
+          )}
+          <Button
+            style="primary"
+            onClick={() => {
+              return onMoveToStep(state.stepIndex + 1, { moveType: "NEXT_BUTTON" });
+            }}
+            widthAutoOnMobile
+            noRightMargin
+            loading={isLoading}
+            dataTestid="next-button"
+          >
+            {getNextButtonText()}
           </Button>
-        )}
-        <Button
-          style="primary"
-          onClick={() => onMoveToStep(state.stepIndex + 1, { moveType: "NEXT_BUTTON" })}
-          widthAutoOnMobile
-          noRightMargin
-          loading={isLoading}
-          dataTestid="next-button"
-        >
-          {getNextButtonText()}
-        </Button>
+        </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   const hasGenericApiError = () => {
     const hasApiError =
       userData?.formationData.formationResponse !== undefined &&
       userData.formationData.formationResponse.errors.length > 0;
 
-    if (!hasApiError) return false;
+    if (!hasApiError) {
+      return false;
+    }
 
-    const allApiErrorsHaveMappings = userData.formationData.formationResponse.errors.every(
-      (error) => getFieldByApiField(error.field) !== UNKNOWN_API_ERROR_FIELD
-    );
+    const allApiErrorsHaveMappings = userData.formationData.formationResponse.errors.every((error) => {
+      return getFieldByApiField(error.field) !== UNKNOWN_API_ERROR_FIELD;
+    });
 
     return !allApiErrorsHaveMappings;
   };
 
   const getErrorComponent = () => {
     if (hasGenericApiError()) {
-      if (!userData || !userData.formationData.formationResponse) return <></>;
+      if (!userData || !userData.formationData.formationResponse) {
+        return <></>;
+      }
       return (
         <Alert variant="error">
           <div>{Config.businessFormationDefaults.submitErrorHeading}</div>
           <ul style={{ wordBreak: "break-word" }}>
-            {userData.formationData.formationResponse.errors.map((it) => (
-              <li key={it.field}>
-                {it.field}
-                <ul>
-                  <li>
-                    <Content>{it.message}</Content>
-                  </li>
-                </ul>
-              </li>
-            ))}
+            {userData.formationData.formationResponse.errors.map((it) => {
+              return (
+                <li key={it.field}>
+                  {it.field}
+                  <ul>
+                    <li>
+                      <Content>{it.message}</Content>
+                    </li>
+                  </ul>
+                </li>
+              );
+            })}
           </ul>
         </Alert>
       );
@@ -365,9 +390,14 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
     }
 
     if (doesStepHaveError(currentStepName)) {
-      const dedupedFieldErrors = allCurrentErrorsForStep(currentStepName).filter(
-        (value, index, self) => index === self.findIndex((error) => error.label === value.label)
-      );
+      const dedupedFieldErrors = allCurrentErrorsForStep(currentStepName).filter((value, index, self) => {
+        return (
+          index ===
+          self.findIndex((error) => {
+            return error.label === value.label;
+          })
+        );
+      });
 
       return (
         <Alert variant="error">
@@ -404,7 +434,9 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
         <HorizontalStepper
           steps={stepStates}
           currentStep={state.stepIndex}
-          onStepClicked={(step: number) => onMoveToStep(step, { moveType: "STEPPER" })}
+          onStepClicked={(step: number) => {
+            return onMoveToStep(step, { moveType: "STEPPER" });
+          }}
         />
       </div>
       <div data-testid="formation-form" className="fg1 flex flex-column space-between">

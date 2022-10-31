@@ -17,8 +17,12 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 const Config = getMergedConfig();
 
-jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
-jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
+jest.mock("@/lib/data-hooks/useUserData", () => {
+  return { useUserData: jest.fn() };
+});
+jest.mock("@/lib/data-hooks/useRoadmap", () => {
+  return { useRoadmap: jest.fn() };
+});
 
 const renderPage = (task: Task, initialUserData?: UserData) => {
   render(
@@ -314,7 +318,13 @@ describe("<CannabisApplyForLicenseTask />", () => {
     return screen.getByRole("checkbox", { name: name });
   };
 
-  const sbeCheckbox = () => getInputByName(Config.cannabisApplyForLicense.sbeLabel);
-  const diverselyOwnedCheckbox = () => getInputByName(Config.cannabisApplyForLicense.diverselyOwnedLabel);
-  const impactZoneCheckbox = () => getInputByName(Config.cannabisApplyForLicense.impactZoneLabel);
+  const sbeCheckbox = () => {
+    return getInputByName(Config.cannabisApplyForLicense.sbeLabel);
+  };
+  const diverselyOwnedCheckbox = () => {
+    return getInputByName(Config.cannabisApplyForLicense.diverselyOwnedLabel);
+  };
+  const impactZoneCheckbox = () => {
+    return getInputByName(Config.cannabisApplyForLicense.impactZoneLabel);
+  };
 });

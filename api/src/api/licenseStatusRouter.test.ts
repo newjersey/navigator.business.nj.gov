@@ -11,9 +11,11 @@ import { setupExpress } from "../libs/express";
 import { licenseStatusRouterFactory } from "./licenseStatusRouter";
 import { getSignedInUserId } from "./userRouter";
 
-jest.mock("./userRouter", () => ({
-  getSignedInUserId: jest.fn(),
-}));
+jest.mock("./userRouter", () => {
+  return {
+    getSignedInUserId: jest.fn(),
+  };
+});
 const fakeSignedInUserId = getSignedInUserId as jest.Mock;
 
 describe("licenseStatusRouter", () => {
@@ -30,7 +32,9 @@ describe("licenseStatusRouter", () => {
   });
 
   afterAll(async () => {
-    await new Promise((resolve) => setTimeout(resolve, 500));
+    await new Promise((resolve) => {
+      return setTimeout(resolve, 500);
+    });
   });
 
   it("returns user data with updated license status", async () => {
