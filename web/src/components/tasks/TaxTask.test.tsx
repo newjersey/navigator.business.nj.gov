@@ -70,24 +70,36 @@ describe("<TaxTask />", () => {
       expect(screen.getByText(Config.tax.saveButtonText)).toBeInTheDocument();
     });
 
+    it("displays the Tax ID field with an existing 9 digit tax Id and updates the progress to IN_PROGRESS", async () => {
+      initialUserData = generateUserData({
+        profileData: generateProfileData({ taxId: "123456789" }),
+        taskProgress: { [taskId]: "COMPLETED" },
+      });
+      renderPage();
+      expect(screen.getByLabelText("Save your Tax ID")).toBeInTheDocument();
+      await waitFor(() => {
+        expect(currentUserData().taskProgress[taskId]).toEqual("IN_PROGRESS");
+      });
+    });
+
     it("enters and saves Tax ID", async () => {
       renderPage();
       fireEvent.change(screen.getByPlaceholderText(Config.tax.placeholderText), {
-        target: { value: "123456789" },
+        target: { value: "123456789123" },
       });
       fireEvent.click(screen.getByText(Config.tax.saveButtonText));
       await waitFor(() => {
-        expect(currentUserData().profileData.taxId).toEqual("123456789");
+        expect(currentUserData().profileData.taxId).toEqual("123456789123");
       });
     });
 
     it("shows error on length validation failure", () => {
       renderPage();
       const expectedErrorMessage = templateEval(Config.onboardingDefaults.errorTextMinimumNumericField, {
-        length: "9",
+        length: "12",
       });
       fireEvent.change(screen.getByPlaceholderText(Config.tax.placeholderText), {
-        target: { value: "12345" },
+        target: { value: "123123123" },
       });
       fireEvent.click(screen.getByText(Config.tax.saveButtonText));
       expect(screen.getByText(expectedErrorMessage)).toBeInTheDocument();
@@ -97,7 +109,7 @@ describe("<TaxTask />", () => {
     it("displays tax id with success message on save", async () => {
       renderPage();
       fireEvent.change(screen.getByPlaceholderText(Config.tax.placeholderText), {
-        target: { value: "123456789" },
+        target: { value: "123456789123" },
       });
       fireEvent.click(screen.getByText(Config.tax.saveButtonText));
       await waitFor(() => {
@@ -109,7 +121,7 @@ describe("<TaxTask />", () => {
     it("sets task status to COMPLETED on save", async () => {
       renderPage();
       fireEvent.change(screen.getByPlaceholderText(Config.tax.placeholderText), {
-        target: { value: "123456789" },
+        target: { value: "123456789123" },
       });
       fireEvent.click(screen.getByText(Config.tax.saveButtonText));
       await waitFor(() => {
@@ -134,16 +146,16 @@ describe("<TaxTask />", () => {
 
     beforeEach(() => {
       initialUserData = generateUserData({
-        profileData: generateProfileData({ taxId: "123456789" }),
+        profileData: generateProfileData({ taxId: "123456789123" }),
         taskProgress: { [taskId]: "COMPLETED" },
       });
     });
 
-    it("displays tax id when it exists in data", () => {
+    it("displays tax id when it exists in data and is 12 digits in length", () => {
       renderPage();
       expect(screen.queryByText(Config.tax.placeholderText)).not.toBeInTheDocument();
       expect(
-        screen.getByText(templateEval(Config.tax.successText, { taxID: "123456789" }))
+        screen.getByText(templateEval(Config.tax.successText, { taxID: "123456789123" }))
       ).toBeInTheDocument();
     });
 
@@ -152,7 +164,7 @@ describe("<TaxTask />", () => {
       fireEvent.click(screen.getByText(Config.tax.editText));
       expect(screen.getByText(Config.tax.saveButtonText)).toBeInTheDocument();
       expect((screen.getByPlaceholderText(Config.tax.placeholderText) as HTMLInputElement).value).toEqual(
-        "123456789"
+        "123456789123"
       );
       expect(screen.queryByText(Config.tax.editText)).not.toBeInTheDocument();
     });
@@ -204,7 +216,7 @@ describe("<TaxTask />", () => {
     it("opens registration modal on save button click", async () => {
       renderPage();
       fireEvent.change(screen.getByPlaceholderText(Config.tax.placeholderText), {
-        target: { value: "123456789" },
+        target: { value: "123456789123" },
       });
       fireEvent.click(screen.getByText(`Register & ${Config.tax.saveButtonText}`));
       await waitFor(() => {
