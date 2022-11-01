@@ -3,6 +3,9 @@ urlSlug: healthcare-license
 filename: healthcare-license
 name: Ensure Your Staff is Licensed
 id: healthcare-license
+callToActionLink: https://newjersey.mylicense.com/verification/Search.aspx?facility=N
+callToActionText: Verify Licenses
+issuingAgency: New Jersey Division of Consumer Affairs
 ---
 All healthcare providers in your medical center need to be licensed medical professionals.
 
