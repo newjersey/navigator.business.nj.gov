@@ -8,7 +8,7 @@ import { generateFormationProfileData, preparePage, useSetupInitialMocks } from 
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { FormationFormData, FormationLegalType, ProfileData } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
-import { fireEvent, screen } from "@testing-library/react";
+import { fireEvent, screen, within } from "@testing-library/react";
 
 function mockMaterialUI(): typeof materialUi {
   return {
@@ -68,6 +68,15 @@ describe("Formation - ReviewStep", () => {
 
     await page.stepperClickToReviewStep();
   };
+
+  it("displays business name entered in step 1 as part of business designator line", async () => {
+    const initialProfileData = { businessName: "name in profile" };
+    const formationFormData = { businessName: "name entered in step 1" };
+    await renderStep(initialProfileData, formationFormData);
+    const designatorSection = within(screen.getByTestId("review-suffix-and-start-date"));
+    expect(designatorSection.getByText("name entered in step 1", { exact: false })).toBeInTheDocument();
+    expect(designatorSection.queryByText("name in profile", { exact: false })).not.toBeInTheDocument();
+  });
 
   it("displays the business step when the edit button in the main business section is clicked", async () => {
     await renderStep({}, {});
