@@ -33,15 +33,15 @@
         "errorTextRequired": "Please select a sector."
       },
       "existingEmployees": {
-        "placeholder": "Enter Number of Employees",
-        "header": "Current Number of Employees",
+        "placeholder": "Enter Number of NJ Employees",
+        "header": "Current Number of NJ Employees",
         "description": "If you have no employees right now enter 0. You can change this as you add employees.",
-        "errorTextRequired": "Please enter number of employees."
+        "errorTextRequired": "Please enter number of NJ employees. If you don't have Nj employees, enter 0."
       },
       "ownershipTypeIds": {
         "placeholder": "Select Ownership",
         "header": "Business Ownership",
-        "description": "At least 51% of my business is owned and controlled by (select all that apply):",
+        "description": "At least 51% of my business is owned by (select all that apply):",
         "headerNotBolded": ""
       },
       "nexusDbaName": {
