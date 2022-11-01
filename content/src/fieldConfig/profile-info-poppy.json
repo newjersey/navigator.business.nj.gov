@@ -36,7 +36,7 @@
         "placeholder": "Enter Number of NJ Employees",
         "header": "Current Number of NJ Employees",
         "description": "If you have no employees right now enter 0. You can change this as you add employees.",
-        "errorTextRequired": "Please enter number of NJ employees. If you don't have Nj employees, enter 0."
+        "errorTextRequired": "Please enter number of NJ employees or enter 0."
       },
       "ownershipTypeIds": {
         "placeholder": "Select Ownership",
