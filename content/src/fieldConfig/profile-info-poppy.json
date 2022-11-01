@@ -33,7 +33,7 @@
         "errorTextRequired": "Please select a sector."
       },
       "existingEmployees": {
-        "placeholder": "Enter Number of NJ Employees",
+        "placeholder": "Number of NJ Employees",
         "header": "Current Number of NJ Employees",
         "description": "If you have no employees right now enter 0. You can change this as you add employees.",
         "errorTextRequired": "Please enter number of NJ employees or enter 0."
