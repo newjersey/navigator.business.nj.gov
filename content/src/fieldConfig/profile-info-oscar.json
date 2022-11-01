@@ -17,7 +17,7 @@
         "placeholder": "Select Ownership",
         "header": "Ownership",
         "headerNotBolded": "(Optional)",
-        "description": "At least 51% of my business is owned and controlled by (select all that apply)."
+        "description": "At least 51% of my business is owned by (select all that apply)."
       },
       "nexusDbaName": {
         "placeholder": "",
@@ -38,10 +38,10 @@
         "searchAffirmation": "_\"**${searchText}**\" falls under the industries below:_"
       },
       "existingEmployees": {
-        "placeholder": "Enter Number of Employees",
-        "header": "Number of Employees",
+        "placeholder": "Number of NJ Employees",
+        "header": "Number of NJ Employees",
         "description": "How many employees does your business have? If you have no employees enter 0.",
-        "errorTextRequired": "Please enter number of employees."
+        "errorTextRequired": "Please enter the number of NJ employees or enter 0."
       },
       "municipality": {
         "placeholder": "Type in the name of your town (i.e Newark, Jersey City, etc)",
