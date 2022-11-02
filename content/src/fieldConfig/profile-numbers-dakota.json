@@ -2,9 +2,9 @@
   "profileDefaults": {
     "FOREIGN": {
       "taxId": {
-        "placeholder": "Enter Tax ID number",
-        "header": "New Jersey Tax ID",
-        "description": "What is your `Tax ID?|tax-id`",
+        "placeholder": "Enter NJ Tax ID number",
+        "header": "NJ Tax ID",
+        "description": "What is your `NJ Tax ID?|tax-id`",
         "errorTextRequired": "Enter a 12-digit NJ Tax ID"
       },
       "dateOfFormation": {

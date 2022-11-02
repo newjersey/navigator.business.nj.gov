@@ -1,10 +1,10 @@
 {
     "tax": {
-      "descriptionText": "Save your 12-digit New Jersey Tax ID below to discover State grants, loans, and certifications your business may be eligible for.",
-      "placeholderText": "Type your Tax ID",
+      "descriptionText": "Save your 12-digit NJ Tax ID below to discover State grants, loans, and certifications your business may be eligible for.",
+      "placeholderText": "Type your NJ Tax ID",
       "saveButtonText": "Save",
-      "successText": "New Jersey Tax ID \"${taxID}\" has been saved.",
-      "editText": "Edit Tax ID",
-      "removeText": "Remove Tax ID"
+      "successText": "NJ Tax ID \"${taxID}\" has been saved.",
+      "editText": "Edit NJ Tax ID",
+      "removeText": "Remove NJ Tax ID"
     }
 }
