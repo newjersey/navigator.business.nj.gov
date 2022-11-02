@@ -1,18 +1,23 @@
 ---
 filename: Pace Apprenticeship in Career Education
-urlSlug: pace-apprentice
 name: Pace Apprenticeship in Career Education
+urlSlug: pace-apprentice
 id: pace
+openDate: 11/01/2022
+dueDate: ""
+descriptionMd: The Pre-Apprenticeship in Career Education (PACE) program aims to
+  better align secondary, post-secondary, adult education, and occupational
+  training to meet labor demands unique to New Jersey and develop career
+  pathways leading to economically sustainable wages.
 callToActionLink: https://www.nj.gov/labor/research-info/grants.shtml
 callToActionText: Learn more
 fundingType: grant
+programFrequency: reoccuring
+status: deadline
 programPurpose: Both
 agency:
   - NJDOL
 agencyContact: james.manning@dol.nj.gov
-publishStageArchive: Do Not Publish
-status: deadline
-programFrequency: reoccuring
 businessStage: both
 employeesRequired: yes
 homeBased: no
@@ -21,9 +26,7 @@ preferenceForOpportunityZone: no
 county:
   - All
 sector: []
-openDate: 11/01/2022
-dueDate: ""
-descriptionMd: The Pre-Apprenticeship in Career Education (PACE) program aims to better align secondary, post-secondary, adult education, and occupational training to meet labor demands unique to New Jersey and develop career pathways leading to economically sustainable wages.
+publishStageArchive: null
 ---
 
 The Pre-Apprenticeship in Career Education (PACE) program aims to better align secondary, post-secondary, adult education, and occupational training to meet labor demands unique to New Jersey and develop career pathways leading to economically sustainable wages.

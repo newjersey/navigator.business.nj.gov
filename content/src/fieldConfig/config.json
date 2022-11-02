@@ -432,7 +432,7 @@
   },
   "taxCalendar": {
     "SnackbarSuccessBody": "Your businesses tax deadlines are now in your calendar.",
-    "AccessBody": "Get access to your tax calendar",
+    "AccessBody": "Get access to your tax calendar.",
     "ModalTaxIdHeader": " `#### NJ Tax ID|tax-id`",
     "ModalBusinessFieldErrorName": "Business Name",
     "ModalErrorHeader": "Review the fields below for errors or omissions",
@@ -597,7 +597,7 @@
     "errorTextUpdateFailed": "Something went wrong with your request. Please try again later."
   },
   "reportAnIssueBar": {
-    "reportAnIssueBarText": "Report an issue."
+    "reportAnIssueBarText": "Report something that is broken."
   },
   "footer": {
     "creditLinkText": "Open Source",
