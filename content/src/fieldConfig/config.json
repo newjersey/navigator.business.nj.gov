@@ -79,7 +79,7 @@
     "registeredAgentAddressLine2Label": "**Office Address Line 2**",
     "registeredAgentNumberPlaceholder": "Registered Agent ID Number",
     "signerCheckboxErrorText": "Sign by clicking the checkbox(s) below.",
-    "reviewStepBusinessStartDateLabel": "`**Business Effective Date**|effective-date`",
+    "reviewStepBusinessStartDateLabel": "`**NJ Business Effective Date**|effective-date`",
     "businessLocationInfoAlertMarkdown": "**Can't find your city?** Unincorporated places are not listed here. Search for [your official jurisdiction](https://www.nj.gov/nj/gov/county/localities.html) (type in your community's name into the local name field).",
     "addNewSignerButtonText": "Add New Signer",
     "registeredAgentAddressLine1Label": "**Office Address Line 1**",
@@ -500,7 +500,7 @@
     "lockedStatusTooltipText": "You have successfully completed forming your business in this task.",
     "errorText": "Your effective date must be formatted as MM/YYYY.",
     "cancelButtonText": "Cancel",
-    "fieldLabel": "Business Effective Date",
+    "fieldLabel": "NJ Business Effective Date",
     "areYouSureModalHeader": "Didn't Form Yet?",
     "saveButtonText": "Save",
     "description": "To see your annual report due date, please provide your Business' `effective date|effective-date` (the date you formed your business) below."
