@@ -1,11 +1,25 @@
+import { Content } from "@/components/Content";
 import { OnboardingIndustry } from "@/components/onboarding/OnboardingIndustry";
 import { getMergedConfig } from "@/contexts/configContext";
-import { createProfileFieldErrorMap } from "@/lib/types/types";
-import { getFlow } from "@/lib/utils/helpers";
-import { randomHomeBasedIndustry, randomNonHomeBasedIndustry } from "@/test/factories";
+import { EssentialQuestions } from "@/lib/domain-logic/essentialQuestions";
+import { createProfileFieldErrorMap, FlowType } from "@/lib/types/types";
+import { capitalizeFirstLetter, kebabSnakeSentenceToCamelCase } from "@/lib/utils/helpers";
+import {
+  randomFilteredIndustry,
+  randomHomeBasedIndustry,
+  randomIndustry,
+  randomNegativeFilteredIndustry,
+  randomNonHomeBasedIndustry,
+} from "@/test/factories";
 import { currentProfileData, WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
-import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
+import {
+  createEmptyProfileData,
+  emptyIndustrySpecificData,
+  industrySpecificDataChoices,
+  ProfileData,
+} from "@businessnjgovnavigator/shared/profileData";
 import { fireEvent, render, screen, within } from "@testing-library/react";
+import { renderToStaticMarkup } from "react-dom/server";
 
 const Config = getMergedConfig();
 
@@ -40,131 +54,94 @@ describe("<OnboardingIndustry />", () => {
     expect(screen.queryByTestId("industry-specific-employment-agency")).not.toBeInTheDocument();
   });
 
-  it("displays liquor license question for restaurants when selected", () => {
-    const profileData = createEmptyProfileData();
-    renderComponent(profileData);
+  describe("updates to industry affecting home-based business", () => {
+    it("sets home-based business to false if they select an non-applicable industry", async () => {
+      renderComponent();
+      selectIndustry(randomNonHomeBasedIndustry());
+      expect(currentProfileData().homeBasedBusiness).toEqual(false);
+    });
 
-    expect(
-      screen.queryByText(Config.profileDefaults[getFlow(profileData)].liquorLicense.description)
-    ).not.toBeInTheDocument();
-
-    selectIndustry("restaurant");
-    expect(
-      screen.getByText(Config.profileDefaults[getFlow(profileData)].liquorLicense.description)
-    ).toBeInTheDocument();
-
-    chooseRadio("liquor-license-radio-true");
-    expect(currentProfileData().liquorLicense).toEqual(true);
+    it("sets home-based business to undefined if they select an applicable industry", async () => {
+      renderComponent();
+      selectIndustry(randomHomeBasedIndustry());
+      expect(currentProfileData().homeBasedBusiness).toEqual(undefined);
+    });
   });
 
-  describe("when industry changes", () => {
-    it("sets liquor license back to false if they select a different industry", () => {
+  it("sets default sector for industry", async () => {
+    renderComponent();
+    const industry = randomIndustry();
+    selectIndustry(industry.id);
+    expect(currentProfileData().sectorId).toEqual(industry.defaultSectorId);
+    selectIndustry("generic");
+    expect(currentProfileData().sectorId).toEqual("other-services");
+  });
+
+  describe("essential questions", () => {
+    it("defaults cannabis license type to CONDITIONAL", () => {
       renderComponent();
-
-      selectIndustry("restaurant");
-      chooseRadio("liquor-license-radio-true");
-      expect(currentProfileData().liquorLicense).toEqual(true);
-
-      selectIndustry("cosmetology");
-      expect(currentProfileData().liquorLicense).toEqual(false);
-    });
-
-    it("sets sector for industry", async () => {
-      renderComponent();
-      selectIndustry("restaurant");
-      expect(currentProfileData().sectorId).toEqual("accommodation-and-food-services");
-
       selectIndustry("cannabis");
-      expect(currentProfileData().sectorId).toEqual("cannabis");
+      expect(currentProfileData().cannabisLicenseType).toEqual("CONDITIONAL");
     });
 
-    describe("updates to industry affecting home-based business", () => {
-      it("sets home-based business to false if they select an non-applicable industry", async () => {
-        renderComponent();
-        selectIndustry(randomNonHomeBasedIndustry());
-        expect(currentProfileData().homeBasedBusiness).toEqual(false);
-      });
+    const businessPersonas = ["STARTING", "FOREIGN"];
+    let profileData: ProfileData;
+    EssentialQuestions.map((el) => {
+      const validIndustryId = randomFilteredIndustry(el.isQuestionApplicableToIndustry, { isEnabled: true });
+      const nonValidIndustryId = randomNegativeFilteredIndustry(el.isQuestionApplicableToIndustry);
+      profileData = {
+        ...createEmptyProfileData(),
+        industryId: nonValidIndustryId.id,
+      };
+      businessPersonas.map((persona) => {
+        const choices = industrySpecificDataChoices[el.fieldName];
+        const flowConfig = Config.profileDefaults[persona as FlowType];
+        const fieldContent = flowConfig[
+          el.contentFieldName ?? (el.fieldName as keyof typeof flowConfig)
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        ] as any;
 
-      it("sets home-based business to undefined if they select an applicable industry", async () => {
-        renderComponent();
-        selectIndustry(randomHomeBasedIndustry());
-        expect(currentProfileData().homeBasedBusiness).toEqual(undefined);
-      });
-    });
+        const chooseRadioWithContent = (choice: string) => {
+          fireEvent.click(
+            screen.getByText(
+              fieldContent[`radioButton${capitalizeFirstLetter(kebabSnakeSentenceToCamelCase(choice))}Text`]
+            )
+          );
+        };
 
-    describe("cannabis license type question", () => {
-      it("displays cannabis license type question for cannabis only", () => {
-        renderComponent();
-        expect(screen.queryByTestId("industry-specific-cannabis")).not.toBeInTheDocument();
+        it(`displays ${el.contentFieldName ?? el.fieldName} for ${
+          validIndustryId.id
+        } as a ${persona} when selected`, () => {
+          renderComponent(profileData);
+          expect(screen.queryByTestId(`industry-specific-${validIndustryId.id}`)).not.toBeInTheDocument();
 
-        selectIndustry("cannabis");
-        expect(screen.getByTestId("industry-specific-cannabis")).toBeInTheDocument();
+          selectIndustry(validIndustryId.id);
+          expect(screen.getByTestId(`industry-specific-${validIndustryId.id}`)).toContainHTML(
+            renderToStaticMarkup(
+              Content({
+                children: fieldContent.description,
+              })
+            )
+          );
 
-        selectIndustry("generic");
-        expect(screen.queryByTestId("industry-specific-cannabis")).not.toBeInTheDocument();
-      });
+          choices.map((choice) => {
+            chooseRadioWithContent(choice.toString());
+            expect(currentProfileData()[el.fieldName]).toEqual(choice);
+          });
+          selectIndustry("generic");
+          expect(screen.queryByTestId(`industry-specific-${validIndustryId.id}`)).not.toBeInTheDocument();
+        });
 
-      it("defaults cannabis license type to CONDITIONAL", () => {
-        renderComponent();
-        selectIndustry("cannabis");
-        expect(currentProfileData().cannabisLicenseType).toEqual("CONDITIONAL");
-      });
-
-      it("allows switching cannabis license type to ANNUAL", async () => {
-        renderComponent();
-        selectIndustry("cannabis");
-
-        chooseRadio("cannabis-license-type-radio-annual");
-        expect(currentProfileData().cannabisLicenseType).toEqual("ANNUAL");
-      });
-
-      it("sets cannabis license type to back undefined when switching back to non-cannabis industry", () => {
-        renderComponent();
-
-        selectIndustry("cannabis");
-        expect(currentProfileData().cannabisLicenseType).toEqual("CONDITIONAL");
-
-        selectIndustry("generic");
-        expect(currentProfileData().cannabisLicenseType).toBeUndefined();
-      });
-    });
-
-    describe("car service type question", () => {
-      it("displays car service question for car service only", () => {
-        renderComponent();
-        expect(screen.queryByTestId("industry-specific-car-service")).not.toBeInTheDocument();
-
-        selectIndustry("car-service");
-        expect(screen.getByTestId("industry-specific-car-service")).toBeInTheDocument();
-
-        selectIndustry("generic");
-        expect(screen.queryByTestId("industry-specific-car-service")).not.toBeInTheDocument();
-      });
-
-      it("updates carServiceType to STANDARD if the standard radio button is picked", () => {
-        renderComponent();
-
-        selectIndustry("car-service");
-        fireEvent.click(screen.getByText(Config.profileDefaults.STARTING.carService.radioButtonStandardText));
-
-        expect(currentProfileData().carService).toBe("STANDARD");
-      });
-
-      it("updates carServiceType to HIGH_CAPACITY if the high capacity radio button is picked", () => {
-        renderComponent();
-
-        selectIndustry("car-service");
-        fireEvent.click(
-          screen.getByText(Config.profileDefaults.STARTING.carService.radioButtonHighCapacityText)
-        );
-        expect(currentProfileData().carService).toBe("HIGH_CAPACITY");
-      });
-
-      it("updates carServiceType to BOTH if the both radio button is picked", () => {
-        renderComponent();
-        selectIndustry("car-service");
-        fireEvent.click(screen.getByText(Config.profileDefaults.STARTING.carService.radioButtonBothText));
-        expect(currentProfileData().carService).toBe("BOTH");
+        it(`sets ${el.contentFieldName ?? el.fieldName} back to ${
+          emptyIndustrySpecificData[el.fieldName]
+        } if they select a different industry`, () => {
+          renderComponent(profileData);
+          selectIndustry(validIndustryId.id);
+          chooseRadioWithContent(choices[0].toString());
+          expect(currentProfileData()[el.fieldName]).toEqual(choices[0]);
+          selectIndustry("generic");
+          expect(currentProfileData()[el.fieldName]).toEqual(emptyIndustrySpecificData[el.fieldName]);
+        });
       });
     });
   });
@@ -173,9 +150,5 @@ describe("<OnboardingIndustry />", () => {
     fireEvent.mouseDown(screen.getByLabelText("Industry"));
     const listbox = within(screen.getByRole("listbox"));
     fireEvent.click(listbox.getByTestId(value));
-  };
-
-  const chooseRadio = (value: string) => {
-    fireEvent.click(screen.getByTestId(value));
   };
 });

@@ -3,8 +3,7 @@
 import { Content } from "@/components/Content";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { ProfileFields } from "@/lib/types/types";
-import { BusinessUser } from "@businessnjgovnavigator/shared/businessUser";
+import { ProfileContentField } from "@/lib/types/types";
 import { useContext } from "react";
 
 interface FieldOverrides {
@@ -14,7 +13,7 @@ interface FieldOverrides {
 }
 
 interface Props {
-  fieldName: Exclude<ProfileFields, keyof BusinessUser | "businessPersona">;
+  fieldName: ProfileContentField;
   overrides?: FieldOverrides;
 }
 

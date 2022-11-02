@@ -1,26 +1,27 @@
 import { Content } from "@/components/Content";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { IndustrySpecificDataAddOnFields } from "@/lib/types/types";
+import { ProfileContentField } from "@/lib/types/types";
 import { ProfileData } from "@businessnjgovnavigator/shared";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import React, { ReactElement, useContext } from "react";
 import {
-  camelCaseToKabobCase,
+  camelCaseToKebabCase,
   camelCaseToSentence,
   capitalizeFirstLetter,
-  kabobSnakeSentenceToCamelCase,
+  kebabSnakeSentenceToCamelCase,
 } from "../../lib/utils/helpers";
 
 type ProfileDataTypes = ProfileData[keyof ProfileData];
-interface Props<T> {
+
+type Props<T> = {
   fieldName: keyof ProfileData;
-  contentFieldName?: IndustrySpecificDataAddOnFields;
+  contentFieldName?: ProfileContentField;
   ariaLabel?: string;
   choices: Exclude<T, undefined>[];
   labels?: Record<string, string>;
   onChange?: (value: T) => void;
-}
+};
 
 export const OnboardingRadioQuestion = <T extends ProfileDataTypes>(props: Props<T>): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
@@ -43,7 +44,7 @@ export const OnboardingRadioQuestion = <T extends ProfileDataTypes>(props: Props
       <FormControl variant="outlined" fullWidth>
         <RadioGroup
           aria-label={props.ariaLabel ?? camelCaseToSentence(props.fieldName)}
-          name={camelCaseToKabobCase(props.fieldName)}
+          name={camelCaseToKebabCase(props.fieldName)}
           value={state.profileData[props.fieldName]?.toString() ?? ""}
           onChange={handleChange}
           row={props.choices.length === 2}
@@ -55,7 +56,7 @@ export const OnboardingRadioQuestion = <T extends ProfileDataTypes>(props: Props
                   key={val.toString()}
                   style={{ marginTop: ".75rem", alignItems: "flex-start", marginRight: "3rem" }}
                   labelPlacement="end"
-                  data-testid={`${camelCaseToKabobCase(props.fieldName)}-radio-${val
+                  data-testid={`${camelCaseToKebabCase(props.fieldName)}-radio-${val
                     .toString()
                     .toLowerCase()}`}
                   value={val.toString()}
@@ -69,7 +70,7 @@ export const OnboardingRadioQuestion = <T extends ProfileDataTypes>(props: Props
                             props.contentFieldName ?? props.fieldName
                           ][
                             `radioButton${capitalizeFirstLetter(
-                              kabobSnakeSentenceToCamelCase(val.toString())
+                              kebabSnakeSentenceToCamelCase(val.toString())
                             )}Text`
                           ]}
                     </Content>

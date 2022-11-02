@@ -2,12 +2,10 @@ import { MenuOptionSelected } from "@/components/MenuOptionSelected";
 import { MenuOptionUnselected } from "@/components/MenuOptionUnselected";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { isCannabisLicenseApplicable } from "@/lib/domain-logic/essentialQuestions/isCannabisLicenseApplicable";
-import { isCertifiedInteriorDesignerApplicable } from "@/lib/domain-logic/essentialQuestions/isCertifiedInteriorDesignerApplicable";
-import { isCpaRequiredApplicable } from "@/lib/domain-logic/essentialQuestions/isCpaRequiredApplicable";
-import { isLiquorLicenseApplicable } from "@/lib/domain-logic/essentialQuestions/isLiquorLicenseApplicable";
-import { isProvidesStaffingServicesApplicable } from "@/lib/domain-logic/essentialQuestions/isProvidesStaffingServicesApplicable";
-import { isRealEstateAppraisalManagementApplicable } from "@/lib/domain-logic/essentialQuestions/isRealEstateAppraisalManagementApplicable";
+import {
+  getIsApplicableToFunctionByFieldName,
+  getResetIndustrySpecificData,
+} from "@/lib/domain-logic/essentialQuestions";
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
 import { splitAndBoldSearchText, templateEval } from "@/lib/utils/helpers";
 import {
@@ -17,7 +15,6 @@ import {
   isIndustryIdGeneric,
   LookupIndustryById,
 } from "@businessnjgovnavigator/shared/";
-import { emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { Autocomplete, createFilterOptions, FilterOptionsState, TextField } from "@mui/material";
 import { orderBy } from "lodash";
 import { ChangeEvent, FocusEvent, ReactElement, useContext, useState } from "react";
@@ -52,8 +49,10 @@ export const IndustryDropdown = (props: Props): ReactElement => {
       homeBasedBusiness = false;
     }
 
-    if (isCannabisLicenseApplicable(industryId)) {
-      const wasCannabisPreviouslyApplicable = isCannabisLicenseApplicable(state.profileData.industryId);
+    if (getIsApplicableToFunctionByFieldName("cannabisLicenseType")(industryId)) {
+      const wasCannabisPreviouslyApplicable = getIsApplicableToFunctionByFieldName("cannabisLicenseType")(
+        state.profileData.industryId
+      );
       cannabisLicenseType = wasCannabisPreviouslyApplicable
         ? state.profileData.cannabisLicenseType
         : ("CONDITIONAL" as CannabisLicenseType);
@@ -63,21 +62,7 @@ export const IndustryDropdown = (props: Props): ReactElement => {
 
     setProfileData({
       ...state.profileData,
-      liquorLicense: isLiquorLicenseApplicable(industryId)
-        ? state.profileData.liquorLicense
-        : emptyProfileData.liquorLicense,
-      requiresCpa: isCpaRequiredApplicable(industryId)
-        ? state.profileData.requiresCpa
-        : emptyProfileData.requiresCpa,
-      realEstateAppraisalManagement: isRealEstateAppraisalManagementApplicable(industryId)
-        ? state.profileData.realEstateAppraisalManagement
-        : emptyProfileData.realEstateAppraisalManagement,
-      certifiedInteriorDesigner: isCertifiedInteriorDesignerApplicable(industryId)
-        ? state.profileData.certifiedInteriorDesigner
-        : emptyProfileData.certifiedInteriorDesigner,
-      providesStaffingService: isProvidesStaffingServicesApplicable(industryId)
-        ? state.profileData.providesStaffingService
-        : emptyProfileData.providesStaffingService,
+      ...getResetIndustrySpecificData(industryId),
       homeBasedBusiness,
       cannabisLicenseType,
       industryId: industryId,
