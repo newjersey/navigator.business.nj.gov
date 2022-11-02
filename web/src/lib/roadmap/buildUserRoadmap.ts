@@ -1,5 +1,5 @@
 import { fetchMunicipalityById } from "@/lib/async-content-fetchers/fetchMunicipalityById";
-import { isRealEstateAppraisalManagementApplicable } from "@/lib/domain-logic/essentialQuestions/isRealEstateAppraisalManagementApplicable";
+import { getIsApplicableToFunctionByFieldName } from "@/lib/domain-logic/essentialQuestions";
 import { getNaicsDisplayMd } from "@/lib/domain-logic/getNaicsDisplayMd";
 import { buildRoadmap } from "@/lib/roadmap/roadmapBuilder";
 import { Roadmap } from "@/lib/types/types";
@@ -11,9 +11,7 @@ import {
   LookupLegalStructureById,
   ProfileData,
 } from "@businessnjgovnavigator/shared/";
-import { isCarServiceApplicable } from "../domain-logic/essentialQuestions/isCarServiceApplicable";
-import { isChildcareForSixOrMoreApplicable } from "../domain-logic/essentialQuestions/isChildcareForSixOrMoreApplicable";
-import { isInterstateTransportApplicable } from "../domain-logic/essentialQuestions/isInterstateTransportApplicable";
+import { isInterstateTransportApplicable } from "../domain-logic/isInterstateTransportApplicable";
 
 const enableFormation = (legalStructureId: string): boolean => {
   switch (legalStructureId) {
@@ -61,7 +59,10 @@ export const buildUserRoadmap = async (profileData: ProfileData): Promise<Roadma
     roadmap = removeTask(roadmap, "register-for-ein");
   }
 
-  if (isCarServiceApplicable(profileData.industryId) && profileData.carService == "BOTH") {
+  if (
+    getIsApplicableToFunctionByFieldName("carService")(profileData.industryId) &&
+    profileData.carService == "BOTH"
+  ) {
     roadmap = removeTask(roadmap, "taxi-insurance");
   }
 
@@ -128,7 +129,7 @@ const getIndustryBasedAddOns = (profileData: ProfileData, industryId: string | u
     addOns.push("cannabis-conditional");
   }
 
-  if (isRealEstateAppraisalManagementApplicable(industryId)) {
+  if (getIsApplicableToFunctionByFieldName("realEstateAppraisalManagement")(industryId)) {
     if (profileData.realEstateAppraisalManagement) {
       addOns.push("real-estate-appraisal-management");
     } else {
@@ -136,7 +137,7 @@ const getIndustryBasedAddOns = (profileData: ProfileData, industryId: string | u
     }
   }
 
-  if (isCarServiceApplicable(industryId)) {
+  if (getIsApplicableToFunctionByFieldName("carService")(industryId)) {
     switch (profileData.carService) {
       case "STANDARD": {
         addOns.push("car-service-standard");
@@ -157,7 +158,7 @@ const getIndustryBasedAddOns = (profileData: ProfileData, industryId: string | u
     addOns.push("interstate-transport");
   }
 
-  if (isChildcareForSixOrMoreApplicable(industryId)) {
+  if (getIsApplicableToFunctionByFieldName("isChildcareForSixOrMore")(industryId)) {
     if (profileData.isChildcareForSixOrMore) {
       addOns.push("daycare");
     } else {

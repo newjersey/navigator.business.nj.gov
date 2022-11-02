@@ -1,4 +1,4 @@
-import { kabobSnakeSentenceToCamelCase, splitAndBoldSearchText } from "./helpers";
+import { kebabSnakeSentenceToCamelCase, splitAndBoldSearchText } from "./helpers";
 
 describe("helpers", () => {
   describe("splitAndBoldSearchText", () => {
@@ -11,17 +11,17 @@ describe("helpers", () => {
     });
   });
 
-  describe("kabobSnakeSentenceToCamelCase", () => {
-    it("converts kabob-case to camelCase", () => {
-      expect(kabobSnakeSentenceToCamelCase("food-truck-whatever")).toEqual("foodTruckWhatever");
+  describe("kebabSnakeSentenceToCamelCase", () => {
+    it("converts kebab-case to camelCase", () => {
+      expect(kebabSnakeSentenceToCamelCase("food-truck-whatever")).toEqual("foodTruckWhatever");
     });
 
     it("converts sentence case to camelCase", () => {
-      expect(kabobSnakeSentenceToCamelCase("food truck whatever")).toEqual("foodTruckWhatever");
+      expect(kebabSnakeSentenceToCamelCase("food truck whatever")).toEqual("foodTruckWhatever");
     });
 
     it("converts snake_case to camelCase", () => {
-      expect(kabobSnakeSentenceToCamelCase("FOOD_TRUCK_WHATEVER")).toEqual("foodTruckWhatever");
+      expect(kebabSnakeSentenceToCamelCase("FOOD_TRUCK_WHATEVER")).toEqual("foodTruckWhatever");
     });
   });
 });

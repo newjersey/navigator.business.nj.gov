@@ -59,22 +59,22 @@
         "description": "Will you provide staffing services?"
       },
       "interstateMoving": {
-        "radioButtonTrueText": "",
-        "radioButtonFalseText": "",
-        "header": "",
-        "description": ""
+        "radioButtonTrueText": "Yes",
+        "radioButtonFalseText": "No",
+        "header": "Moving Goods Across State Lines",
+        "description": "Do you plan to move goods across state lines?"
       },
       "interstateLogistics": {
-        "radioButtonTrueText": "",
-        "radioButtonFalseText": "",
-        "header": "",
-        "description": ""
+        "radioButtonTrueText": "Yes",
+        "radioButtonFalseText": "No",
+        "header": "Driving Across State Lines",
+        "description": "Will you be driving your commercial vehicle across state lines?"
       },
       "isChildcareForSixOrMore": {
-        "radioButtonTrueText": "",
-        "radioButtonFalseText": "",
-        "header": "",
-        "description": ""
+        "radioButtonTrueText": "Yes",
+        "radioButtonFalseText": "No",
+        "header": "Childcare Services",
+        "description": "Do you provide childcare services for 6 or more children in a dedicated space?"
       }
     }
   }

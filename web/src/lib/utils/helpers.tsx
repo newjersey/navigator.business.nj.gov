@@ -315,7 +315,7 @@ export const camelCaseToSentence = (text: string): string => {
   return capitalizeFirstLetter(spacedCase);
 };
 
-export const kabobSnakeSentenceToCamelCase = (text: string): string => {
+export const kebabSnakeSentenceToCamelCase = (text: string): string => {
   return text
     .toLowerCase()
     .split(/[\s_-]/gm)
@@ -325,7 +325,7 @@ export const kabobSnakeSentenceToCamelCase = (text: string): string => {
     .join("");
 };
 
-export const camelCaseToKabobCase = (text: string): string => {
+export const camelCaseToKebabCase = (text: string): string => {
   return text
     .split(/(?=[A-Z])/)
     .join("-")

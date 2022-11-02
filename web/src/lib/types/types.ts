@@ -141,10 +141,13 @@ const profileFieldsFromConfig = merge(
 
 export type IndustrySpecificDataAddOnFields = "interstateLogistics" | "interstateMoving";
 
-export type ProfileFields =
-  | ((keyof ProfileData | keyof IndustrySpecificData | IndustrySpecificDataAddOnFields) &
-      keyof typeof profileFieldsFromConfig)
-  | keyof BusinessUser;
+export type ProfileContentField = Exclude<
+  (keyof ProfileData | keyof IndustrySpecificData | IndustrySpecificDataAddOnFields) &
+    keyof typeof profileFieldsFromConfig,
+  "businessPersona"
+>;
+
+export type ProfileFields = keyof ProfileData | keyof BusinessUser;
 
 export type FieldStatus = { invalid: boolean };
 export type ProfileFieldErrorMap = Record<ProfileFields, FieldStatus>;

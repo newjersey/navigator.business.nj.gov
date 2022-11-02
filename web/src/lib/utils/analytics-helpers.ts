@@ -1,14 +1,9 @@
-import { isCannabisLicenseApplicable } from "@/lib/domain-logic/essentialQuestions/isCannabisLicenseApplicable";
-import { isCpaRequiredApplicable } from "@/lib/domain-logic/essentialQuestions/isCpaRequiredApplicable";
+import { getIsApplicableToFunctionByFieldName } from "@/lib/domain-logic/essentialQuestions";
 import analytics from "@/lib/utils/analytics";
 import { ABExperience, ProfileData } from "@businessnjgovnavigator/shared/";
 import { OperatingPhaseId } from "@businessnjgovnavigator/shared/operatingPhase";
 import { BusinessPersona, ForeignBusinessType } from "@businessnjgovnavigator/shared/profileData";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
-import { isCarServiceApplicable } from "../domain-logic/essentialQuestions/isCarServiceApplicable";
-import { isChildcareForSixOrMoreApplicable } from "../domain-logic/essentialQuestions/isChildcareForSixOrMoreApplicable";
-import { isInterstateLogisticsApplicable } from "../domain-logic/essentialQuestions/isInterstateLogisticsApplicable";
-import { isInterstateMovingApplicable } from "../domain-logic/essentialQuestions/isInterstateMovingApplicable";
 
 type RegistrationProgress = "Not Started" | "Began Onboarding" | "Onboarded Guest" | "Fully Registered";
 
@@ -114,7 +109,7 @@ const getSubPersonaDimension = (type: ForeignBusinessType): string => {
 
 export const sendOnboardingOnSubmitEvents = (newProfileData: ProfileData, pageName?: string): void => {
   if (pageName === "industry-page") {
-    if (isCannabisLicenseApplicable(newProfileData.industryId)) {
+    if (getIsApplicableToFunctionByFieldName("cannabisLicenseType")(newProfileData.industryId)) {
       if (newProfileData.cannabisLicenseType === "CONDITIONAL") {
         analytics.event.onboarding_cannabis_question.submit.conditional_cannabis_license();
       } else if (newProfileData.cannabisLicenseType === "ANNUAL") {
@@ -122,7 +117,7 @@ export const sendOnboardingOnSubmitEvents = (newProfileData: ProfileData, pageNa
       }
     }
 
-    if (isCpaRequiredApplicable(newProfileData.industryId)) {
+    if (getIsApplicableToFunctionByFieldName("requiresCpa")(newProfileData.industryId)) {
       if (newProfileData.requiresCpa) {
         analytics.event.onboarding_cpa_question.submit.yes_i_offer_public_accounting();
       } else {
@@ -130,7 +125,7 @@ export const sendOnboardingOnSubmitEvents = (newProfileData: ProfileData, pageNa
       }
     }
 
-    if (isInterstateMovingApplicable(newProfileData.industryId)) {
+    if (getIsApplicableToFunctionByFieldName("interstateMoving")(newProfileData.industryId)) {
       if (newProfileData.interstateTransport) {
         analytics.event.onboarding_moving_company_question.submit.yes_moving_across_state_lines();
       } else {
@@ -138,7 +133,7 @@ export const sendOnboardingOnSubmitEvents = (newProfileData: ProfileData, pageNa
       }
     }
 
-    if (isInterstateLogisticsApplicable(newProfileData.industryId)) {
+    if (getIsApplicableToFunctionByFieldName("interstateLogistics")(newProfileData.industryId)) {
       if (newProfileData.interstateTransport) {
         analytics.event.onboarding_logistics_business_question.submit.yes_moving_across_state_lines();
       } else {
@@ -146,7 +141,7 @@ export const sendOnboardingOnSubmitEvents = (newProfileData: ProfileData, pageNa
       }
     }
 
-    if (isCarServiceApplicable(newProfileData.industryId)) {
+    if (getIsApplicableToFunctionByFieldName("carService")(newProfileData.industryId)) {
       switch (newProfileData.carService) {
         case "STANDARD": {
           analytics.event.onboarding_car_service_question.submit.taxi_size();
@@ -163,7 +158,7 @@ export const sendOnboardingOnSubmitEvents = (newProfileData: ProfileData, pageNa
       }
     }
 
-    if (isChildcareForSixOrMoreApplicable(newProfileData.industryId)) {
+    if (getIsApplicableToFunctionByFieldName("isChildcareForSixOrMore")(newProfileData.industryId)) {
       if (newProfileData.isChildcareForSixOrMore) {
         analytics.event.onboarding_childcare_business_question.submit.yes_more_than_6_children();
       } else {

@@ -31,6 +31,7 @@ import {
   BusinessSuffixMap,
   BusinessUser,
   corpLegalStructures,
+  createEmptyFormationFormData,
   defaultFormationLegalType,
   FormationAddress,
   FormationData,
@@ -45,6 +46,7 @@ import {
   GetFilingResponse,
   Industries,
   Industry,
+  IndustrySpecificData,
   LegalStructure,
   LegalStructures,
   LicenseData,
@@ -65,8 +67,6 @@ import {
   TaxFilingLookUpRequest,
   UserData,
 } from "@businessnjgovnavigator/shared";
-import { createEmptyFormationFormData } from "@businessnjgovnavigator/shared/formationData";
-import { IndustrySpecificData } from "../../shared/lib/shared/src/profileData";
 
 export const generateSectionType = (): SectionType => {
   const num = randomInt();
@@ -722,26 +722,43 @@ export const randomOwnershipType = (): OwnershipType => {
   return ownershipTypes[randomIndex];
 };
 
-export const randomIndustry = (canHavePermanentLocation = false): Industry => {
+export const randomFilteredIndustry = (
+  func: (industry: Industry) => boolean,
+  { isEnabled = true }
+): Industry => {
   const filteredIndustries = Industries.filter((x: Industry) => {
-    return x.canHavePermanentLocation === canHavePermanentLocation && x.isEnabled;
+    return func(x) && x.isEnabled == isEnabled;
   });
   const randomIndex = Math.floor(Math.random() * filteredIndustries.length);
   return filteredIndustries[randomIndex];
 };
 
-export const randomHomeBasedIndustry = () => {
-  const homeBasedIndustries = Industries.filter((it) => {
-    return it.industryOnboardingQuestions.canBeHomeBased && it.isEnabled;
-  });
-  const randomIndex = Math.floor(Math.random() * homeBasedIndustries.length);
-  return homeBasedIndustries[randomIndex].id;
+export const randomNegativeFilteredIndustry = (func: (industry: Industry) => boolean): Industry => {
+  return randomFilteredIndustry(
+    (industry: Industry) => {
+      return !func(industry);
+    },
+    { isEnabled: true }
+  );
 };
 
-export const randomNonHomeBasedIndustry = () => {
-  const nonHomeBasedIndustries = Industries.filter((it) => {
-    return !it.industryOnboardingQuestions.canBeHomeBased && it.canHavePermanentLocation && it.isEnabled;
-  });
-  const randomIndex = Math.floor(Math.random() * nonHomeBasedIndustries.length);
-  return nonHomeBasedIndustries[randomIndex].id;
+export const randomIndustry = (canHavePermanentLocation = false): Industry => {
+  const filter = (x: Industry) => {
+    return x.canHavePermanentLocation === canHavePermanentLocation;
+  };
+  return randomFilteredIndustry(filter, { isEnabled: true });
+};
+
+export const randomHomeBasedIndustry = (): string => {
+  const filter = (it: Industry) => {
+    return !!it.industryOnboardingQuestions.canBeHomeBased;
+  };
+  return randomFilteredIndustry(filter, { isEnabled: true }).id;
+};
+
+export const randomNonHomeBasedIndustry = (): string => {
+  const filter = (it: Industry) => {
+    return !it.industryOnboardingQuestions.canBeHomeBased && it.canHavePermanentLocation;
+  };
+  return randomFilteredIndustry(filter, { isEnabled: true }).id;
 };

@@ -7,6 +7,9 @@ export interface ProfileDocuments {
   readonly certifiedDoc: string;
 }
 
+const booleanChoice = [true, false];
+export const cannabisLicenseOptions = ["CONDITIONAL", "ANNUAL"] as const;
+export const carServiceOptions = ["STANDARD", "HIGH_CAPACITY", "BOTH"] as const;
 export interface IndustrySpecificData {
   readonly liquorLicense: boolean;
   readonly requiresCpa: boolean;
@@ -21,6 +24,25 @@ export interface IndustrySpecificData {
   readonly interstateTransport: boolean;
   readonly isChildcareForSixOrMore: boolean | undefined;
 }
+
+type IndustrySpecificDataChoices = {
+  [index in keyof IndustrySpecificData]: Exclude<IndustrySpecificData[index], undefined>[];
+};
+
+export const industrySpecificDataChoices: IndustrySpecificDataChoices = {
+  liquorLicense: booleanChoice,
+  requiresCpa: booleanChoice,
+  homeBasedBusiness: booleanChoice,
+  providesStaffingService: booleanChoice,
+  certifiedInteriorDesigner: booleanChoice,
+  realEstateAppraisalManagement: booleanChoice,
+  cannabisLicenseType: [...cannabisLicenseOptions],
+  cannabisMicrobusiness: booleanChoice,
+  constructionRenovationPlan: booleanChoice,
+  carService: [...carServiceOptions],
+  interstateTransport: booleanChoice,
+  isChildcareForSixOrMore: booleanChoice,
+};
 
 export const emptyIndustrySpecificData: IndustrySpecificData = {
   liquorLicense: false,
@@ -90,8 +112,8 @@ export const createEmptyProfileData = (): ProfileData => {
   return emptyProfileData;
 };
 
-export type CannabisLicenseType = "CONDITIONAL" | "ANNUAL" | undefined;
-export type CarServiceType = "STANDARD" | "HIGH_CAPACITY" | "BOTH" | undefined;
+export type CannabisLicenseType = typeof cannabisLicenseOptions[number] | undefined;
+export type CarServiceType = typeof carServiceOptions[number] | undefined;
 
 export type BusinessPersona = "STARTING" | "OWNING" | "FOREIGN" | undefined;
 export type ForeignBusinessType = "REMOTE_WORKER" | "REMOTE_SELLER" | "NEXUS" | "NONE" | undefined;

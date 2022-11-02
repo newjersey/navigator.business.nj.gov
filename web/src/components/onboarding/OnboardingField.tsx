@@ -3,13 +3,13 @@
 import { GenericTextField, GenericTextFieldProps } from "@/components/GenericTextField";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { IndustrySpecificDataAddOnFields, ProfileFields } from "@/lib/types/types";
-import { BusinessUser, ProfileData } from "@businessnjgovnavigator/shared/";
+import { IndustrySpecificDataAddOnFields, ProfileContentField, ProfileFields } from "@/lib/types/types";
+import { ProfileData } from "@businessnjgovnavigator/shared/";
 import { TextFieldProps } from "@mui/material";
 import { ReactElement, useContext } from "react";
 
 export interface OnboardingProps extends Omit<GenericTextFieldProps, "value" | "onValidation" | "fieldName"> {
-  fieldName: Exclude<ProfileFields, keyof BusinessUser | "businessPersona" | IndustrySpecificDataAddOnFields>;
+  fieldName: Exclude<ProfileContentField, IndustrySpecificDataAddOnFields>;
   onValidation?: (field: ProfileFields, invalid: boolean) => void;
   fieldOptions?: TextFieldProps;
 }

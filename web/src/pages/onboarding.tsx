@@ -13,7 +13,7 @@ import { RoadmapContext } from "@/contexts/roadmapContext";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { hasEssentialQuestion } from "@/lib/domain-logic/essentialQuestions/hasEssentialQuestion";
+import { hasEssentialQuestion } from "@/lib/domain-logic/essentialQuestions";
 import { QUERIES, ROUTES, routeShallowWithQuery } from "@/lib/domain-logic/routes";
 import { MediaQueries } from "@/lib/PageSizes";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
