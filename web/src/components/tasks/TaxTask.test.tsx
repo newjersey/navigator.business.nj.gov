@@ -76,7 +76,7 @@ describe("<TaxTask />", () => {
         taskProgress: { [taskId]: "COMPLETED" },
       });
       renderPage();
-      expect(screen.getByLabelText("Save your Tax ID")).toBeInTheDocument();
+      expect(screen.getByLabelText("Save your NJ Tax ID")).toBeInTheDocument();
       await waitFor(() => {
         expect(currentUserData().taskProgress[taskId]).toEqual("IN_PROGRESS");
       });

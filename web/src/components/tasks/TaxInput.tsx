@@ -81,7 +81,7 @@ export const TaxInput = (props: Props): ReactElement => {
           handleChange={handleChange}
           value={taxId}
           formInputFull
-          ariaLabel="Save your Tax ID"
+          ariaLabel="Save your NJ Tax ID"
         />
         <FormControl margin="dense">
           <Button
