@@ -4,7 +4,7 @@ name: Motor Fuels Tax
 extension: false
 treasuryLink: https://www.nj.gov/treasury/taxation/motorfuels.shtml
 taxRates: |
-  
+
   - Gasoline per gallon: $0.105
   - Diesel per gallon: $0.135
   - Aviation fuel per gallon: $0.02
@@ -14,7 +14,7 @@ frequency: |
   Monthly
 additionalInfo: null
 agency: New Jersey Division of Taxation
-id: dmf-10/rmf-10/smf-10
+id: dmf_rmf_smf-10
 callToActionLink: https://www.state.nj.us/treasury/taxation/prntmf.shtml
 callToActionText: File and Pay
 ---
