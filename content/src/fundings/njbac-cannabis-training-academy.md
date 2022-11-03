@@ -36,7 +36,7 @@ New Jersey Business Action Center's (NJBAC) Cannabis Training Academy is a no-co
 ### Eligibility
 
 * Individuals who are considering applying for a conditional or annual license
-* Must be in the social equity, legacy, Impact Zone, diverse-owned, veteran, veteran-disabled, LGBTQ+ and/or microbusiness categories
+* Must be in the social equity, legacy, Impact Zone, diverse-owned, veteran, veteran-disabled, LGBTQ+ and/or microbusiness categories as defined on the [New Jersey Cannabis Businesses website](https://www.nj.gov/cannabis/businesses/priority-applications/)
 
 > **Benefits**
 >
