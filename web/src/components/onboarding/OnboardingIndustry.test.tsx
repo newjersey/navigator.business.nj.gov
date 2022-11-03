@@ -88,9 +88,9 @@ describe("<OnboardingIndustry />", () => {
     let profileData: ProfileData;
     EssentialQuestions.map((el) => {
       const validIndustryId = randomFilteredIndustry(el.isQuestionApplicableToIndustry, { isEnabled: true });
+      const nonValidIndustryId = randomNegativeFilteredIndustry(el.isQuestionApplicableToIndustry);
 
       beforeEach(() => {
-        const nonValidIndustryId = randomNegativeFilteredIndustry(el.isQuestionApplicableToIndustry);
         profileData = {
           ...createEmptyProfileData(),
           industryId: nonValidIndustryId.id,
@@ -115,7 +115,9 @@ describe("<OnboardingIndustry />", () => {
 
         it(`displays ${el.contentFieldName ?? el.fieldName} for ${
           validIndustryId.id
-        } as a ${persona} when selected`, () => {
+        } as a ${persona} when industry is changed from a previous industry of ${
+          nonValidIndustryId.id
+        }`, () => {
           renderComponent(profileData);
           expect(screen.queryByTestId(`industry-specific-${validIndustryId.id}`)).not.toBeInTheDocument();
 
@@ -141,8 +143,11 @@ describe("<OnboardingIndustry />", () => {
         } if they select a different industry`, () => {
           renderComponent(profileData);
           selectIndustry(validIndustryId.id);
-          chooseRadioWithContent(choices[0].toString());
-          expect(currentProfileData()[el.fieldName]).toEqual(choices[0]);
+          const nonDefaultChoice = (choices as (string | boolean)[]).find((val) => {
+            return val !== emptyIndustrySpecificData[el.fieldName];
+          });
+          chooseRadioWithContent(nonDefaultChoice?.toString() ?? "");
+          expect(currentProfileData()[el.fieldName]).toEqual(nonDefaultChoice);
           selectIndustry("generic");
           expect(currentProfileData()[el.fieldName]).toEqual(emptyIndustrySpecificData[el.fieldName]);
         });
