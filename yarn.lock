@@ -3804,7 +3804,7 @@ __metadata:
     airtable: 0.11.5
     axios: 0.27.2
     babel-jest: 29.2.2
-    babel-loader: 9.0.0
+    babel-loader: 9.0.1
     body-parser: 1.20.1
     broken-link-checker: 0.7.8
     cat: 0.2.0
@@ -3855,7 +3855,7 @@ __metadata:
     nc: "git+https://github.com/dsueltenfuss/nc.git"
     netlify-cms-app: 2.15.72
     next: 12.2.5
-    next-seo: 5.11.1
+    next-seo: 5.13.0
     prettier: 2.7.1
     prettier-plugin-organize-imports: 3.1.1
     raw-loader: 4.0.2
@@ -4002,7 +4002,7 @@ __metadata:
     airtable: 0.11.5
     axios: 0.27.2
     babel-jest: 29.2.2
-    babel-loader: 9.0.0
+    babel-loader: 9.0.1
     broken-link-checker: 0.7.8
     clean-webpack-plugin: 4.0.0
     copy-webpack-plugin: 11.0.0
@@ -4039,7 +4039,7 @@ __metadata:
     napa: 3.0.0
     netlify-cms-app: 2.15.72
     next: 12.2.5
-    next-seo: 5.11.1
+    next-seo: 5.13.0
     prettier: 2.7.1
     prettier-plugin-organize-imports: 3.1.1
     raw-loader: 4.0.2
@@ -11542,16 +11542,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-loader@npm:9.0.0":
-  version: 9.0.0
-  resolution: "babel-loader@npm:9.0.0"
+"babel-loader@npm:9.0.1":
+  version: 9.0.1
+  resolution: "babel-loader@npm:9.0.1"
   dependencies:
     find-cache-dir: ^3.3.2
     schema-utils: ^4.0.0
   peerDependencies:
     "@babel/core": ^7.12.0
     webpack: ">=5"
-  checksum: 6b146e33c81fd948ffdefa8a6319efa1bea6e17c946bfac4641375710e51831aeb7f4a20c88604eaa00f5ecd4b6591da5a65ade326feba792609f932df150645
+  checksum: 28164515105c54ab89c72a51fdad7076d40cf871df94e37a3fcbce6c69410f3f03ec93e83148e7ce1839d4e86c0f7be6e81b3eeb9f1a4cb52fcc78af6a438ef6
   languageName: node
   linkType: hard
 
@@ -25496,14 +25496,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next-seo@npm:5.11.1":
-  version: 5.11.1
-  resolution: "next-seo@npm:5.11.1"
+"next-seo@npm:5.13.0":
+  version: 5.13.0
+  resolution: "next-seo@npm:5.13.0"
   peerDependencies:
     next: ^8.1.1-canary.54 || >=9.0.0
     react: ">=16.0.0"
     react-dom: ">=16.0.0"
-  checksum: 92c2f5e64063f8bdf40c9437443c67e45784b58e101dcb65e1b3acc6b16627a72aaf5afedbd5881361390442a1b84d8deb74c7283be1d386967eb03d8025cf22
+  checksum: f566dfe6bafa18953789fc7bb0f466432c64121a80bc40e32a82d3d4e5d8cc16cc217ca5f6a4bf088f530b263d97cb6e6b237b7bdb6ffcfa16d01008d007a291
   languageName: node
   linkType: hard
 
