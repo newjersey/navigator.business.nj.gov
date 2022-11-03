@@ -18,8 +18,6 @@ fundingType: technical assistance
 programFrequency: ongoing
 status: opening soon
 programPurpose: In State
-agency:
-  - NJEDA
 agencyContact: businessactioncenter@sos.nj.gov
 businessStage: both
 employeesRequired: n/a
@@ -31,7 +29,9 @@ county:
 sector: []
 publishStageArchive: Do Not Publish
 ---
-#﻿## Eligibility
+### Eligibility
+
+
 Individuals who are considering applying for a conditional or annual license are eligible to join NJBAC's Cannabis Training Academy. Applicants must be in the social equity, legacy, Impact Zone, diverse-owned, veteran, veteran-disabled, LGBTQ+ and/or microbusiness categories to qualify for technical assistance.
 
-#Qualified individuals will receive assistance filling out their application to submit to the NJ Cannabis Regulatory Commission whether it is conditional, annual or conversion and receive general training to create and run a sustainable business operation.
+\#Qualified individuals will receive assistance filling out their application to submit to the NJ Cannabis Regulatory Commission whether it is conditional, annual or conversion and receive general training to create and run a sustainable business operation.
