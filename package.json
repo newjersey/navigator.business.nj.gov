@@ -153,7 +153,7 @@
     "@types/xml2js": "0.4.11",
     "@typescript-eslint/eslint-plugin": "5.41.0",
     "@typescript-eslint/parser": "5.41.0",
-    "babel-loader": "9.0.0",
+    "babel-loader": "9.0.1",
     "cat": "0.2.0",
     "check-node-version": "4.2.1",
     "clean-webpack-plugin": "4.0.0",
