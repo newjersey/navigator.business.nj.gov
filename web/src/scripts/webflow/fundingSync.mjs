@@ -14,7 +14,9 @@ import { allIndustryId, getCurrentSectors, syncSectors } from "./sectorSync.mjs"
 
 const getFundingTypeOptions = async () => {
   const itemResponse = await getCollection(fundingCollectionId);
-  return itemResponse.data.fields.find((i) => { return i.slug == "funding-type" }).validations["options"];
+  return itemResponse.data.fields.find((i) => {
+    return i.slug == "funding-type";
+  }).validations["options"];
 };
 
 const fundingTypeMap = [
@@ -36,11 +38,12 @@ const fundingTypeMap = [
 
 const getAgencyOptions = async () => {
   const itemResponse = await getCollection(fundingCollectionId);
-  return itemResponse.data.fields.find((i) => { return i.slug == "agency" }).validations["options"];
+  return itemResponse.data.fields.find((i) => {
+    return i.slug == "agency";
+  }).validations["options"];
 };
 
 const agencyMap = [
-
   { name: "NJEDA", slug: "NJEDA", id: "af647a925b907472a8ad9f5fe07ba6ed" },
   { name: "NJDOL", slug: "NJDOL", id: "868ea3a1400bc3ae3d48cdabc909727a" },
   { name: "NJDEP", slug: "NJDEP", id: "e5191b387dca9f56520a9fb24ad56f74" },
@@ -55,15 +58,17 @@ const agencyMap = [
     id: "b96fca38c289eabd7cda9bc33be8996a",
   },
   {
-    name: 'New Jersey Business Action Center',
-    slug: 'New Jersey Business Action Center',
-    id: '529992b90dbeaba3826e4afa761c1c8e'
-  }
+    name: "New Jersey Business Action Center",
+    slug: "New Jersey Business Action Center",
+    id: "529992b90dbeaba3826e4afa761c1c8e",
+  },
 ];
 
 const getFundingOptions = async () => {
   const itemResponse = await getCollection(fundingCollectionId);
-  return itemResponse.data.fields.find((i) => { return i.slug == "funding-status" }).validations["options"];
+  return itemResponse.data.fields.find((i) => {
+    return i.slug == "funding-status";
+  }).validations["options"];
 };
 
 const fundingStatusMap = [
@@ -113,15 +118,25 @@ const contentMdToObject = (content) => {
     .processSync(content).value;
 
   const itemsToRemove = ["<blockquote>", "</blockquote>", "<hr>"];
-  itemsToRemove.map((i) => { return (result = result.replaceAll(i, "")) });
+  itemsToRemove.map((i) => {
+    return (result = result.replaceAll(i, ""));
+  });
 
   const lines = result.split("\n");
   const benefitRegExp = new RegExp(`>Benefit[s:]*?</`);
-  const eligibilityIndex = lines.findIndex((line) => { return line.includes(">Eligibility</") });
-  const benefitIndex = lines.findIndex((line) => { return benefitRegExp.test(line) });
+  const eligibilityIndex = lines.findIndex((line) => {
+    return line.includes(">Eligibility</");
+  });
+  const benefitIndex = lines.findIndex((line) => {
+    return benefitRegExp.test(line);
+  });
   try {
-    if (eligibilityIndex == -1) { throw new Error("Eligibility section missing"); }
-    if (benefitIndex == -1) { throw new Error(`Benefits section missing `); }
+    if (eligibilityIndex == -1) {
+      throw new Error("Eligibility section missing");
+    }
+    if (benefitIndex == -1) {
+      throw new Error(`Benefits section missing `);
+    }
   } catch (error) {
     console.info(content);
     throw error;
@@ -129,9 +144,11 @@ const contentMdToObject = (content) => {
   const getHtml = (arrayOfStrings, start, stop) => {
     return arrayOfStrings
       .slice(start, stop)
-      .map((i) => { return i.trim() })
+      .map((i) => {
+        return i.trim();
+      })
       .join(" ")
-      .trim()
+      .trim();
   };
   return {
     "program-overview": getHtml(lines, 0, eligibilityIndex),
@@ -141,7 +158,9 @@ const contentMdToObject = (content) => {
 };
 
 const validDate = (dueDate) => {
-  if (!dueDate) { return true; }
+  if (!dueDate) {
+    return true;
+  }
   const due = new Date(dueDate);
   due.setHours(0, 0, 0, 0);
   const current = new Date();
@@ -150,20 +169,42 @@ const validDate = (dueDate) => {
 };
 
 const getFilteredFundings = () => {
-  return loadAllFundings().filter(
-    (funding) => { return validDate(funding.dueDate) && funding.publishStageArchive != "Do Not Publish" }
-  )
+  return loadAllFundings().filter((funding) => {
+    return validDate(funding.dueDate) && funding.publishStageArchive != "Do Not Publish";
+  });
 };
 
 const getFundingFromMd = (i, sectors) => {
-  const industryReferenceArray = i.sector.map((i) => { return sectors.find((v) => { return v.slug == i })?._id });
-  if (industryReferenceArray.some((i) => { return i == undefined })) { throw new Error("Sectors must be synced first"); }
-  const fundingType = fundingTypeMap.find((v) => { return v.slug == i.fundingType })?.id;
-  if (fundingType == undefined) { throw new Error("Funding Types are mis-matched, please check with webflow"); }
-  const agency = agencyMap.find((v) => { return v.slug == i.agency[0] })?.id;
-  if (agency == undefined) { throw new Error("Agency Types are mis-matched, please check with webflow"); }
-  const status = fundingStatusMap.find((v) => { return v.slug == i.status })?.id;
-  if (status == undefined) { throw new Error("Funding Status Types are mis-matched, please check with webflow"); }
+  const industryReferenceArray = i.sector.map((i) => {
+    return sectors.find((v) => {
+      return v.slug == i;
+    })?._id;
+  });
+  if (
+    industryReferenceArray.some((i) => {
+      return i == undefined;
+    })
+  ) {
+    throw new Error("Sectors must be synced first");
+  }
+  const fundingType = fundingTypeMap.find((v) => {
+    return v.slug == i.fundingType;
+  })?.id;
+  if (fundingType == undefined) {
+    throw new Error("Funding Types are mis-matched, please check with webflow");
+  }
+  const agency = agencyMap.find((v) => {
+    return v.slug == i.agency[0];
+  })?.id;
+  if (agency == undefined) {
+    throw new Error("Agency Types are mis-matched, please check with webflow");
+  }
+  const status = fundingStatusMap.find((v) => {
+    return v.slug == i.status;
+  })?.id;
+  if (status == undefined) {
+    throw new Error("Funding Status Types are mis-matched, please check with webflow");
+  }
 
   return {
     ...contentMdToObject(i.contentMd),
@@ -180,23 +221,43 @@ const getFundingFromMd = (i, sectors) => {
   };
 };
 
-const getOverlappingFundingsFunc = (currentFundings) => { return currentFundings.filter((item) => { return new Set(getFilteredFundings().map((i) => { return i.id })).has(item.slug) }) };
+const getOverlappingFundingsFunc = (currentFundings) => {
+  return currentFundings.filter((item) => {
+    return new Set(
+      getFilteredFundings().map((i) => {
+        return i.id;
+      })
+    ).has(item.slug);
+  });
+};
 
-const getOverlappingFundings = async () => { return getOverlappingFundingsFunc(await getCurrentFundings()) };
+const getOverlappingFundings = async () => {
+  return getOverlappingFundingsFunc(await getCurrentFundings());
+};
 
 const getNewFundings = async () => {
   const current = await getCurrentFundings();
   const sectors = await getCurrentSectors();
-  const currentIdArray = new Set(current.map((sec) => { return sec.slug }));
+  const currentIdArray = new Set(
+    current.map((sec) => {
+      return sec.slug;
+    })
+  );
   return getFilteredFundings()
-    .filter((i) => { return !currentIdArray.has(i.id) })
-    .map((i) => { return getFundingFromMd(i, sectors) });
+    .filter((i) => {
+      return !currentIdArray.has(i.id);
+    })
+    .map((i) => {
+      return getFundingFromMd(i, sectors);
+    });
 };
 
 const getUnUsedFundings = async () => {
   const current = await getCurrentFundings();
   const overLap = getOverlappingFundingsFunc(current);
-  return current.filter((item) => { return !overLap.includes(item) });
+  return current.filter((item) => {
+    return !overLap.includes(item);
+  });
 };
 
 const deleteFundings = async () => {
@@ -210,7 +271,11 @@ const deleteFundings = async () => {
       throw error;
     }
   };
-  await Promise.all(fundings.map(async (item) => { return await deleteFunding(item) }));
+  await Promise.all(
+    fundings.map(async (item) => {
+      return await deleteFunding(item);
+    })
+  );
 };
 
 const updateFundings = async () => {
@@ -220,7 +285,9 @@ const updateFundings = async () => {
 
   const modify = async (item) => {
     const funding = getFundingFromMd(
-      fundings.find((i) => { return i.id == item.slug }),
+      fundings.find((i) => {
+        return i.id == item.slug;
+      }),
       sectors
     );
     console.info(`Attempting to modify ${funding.slug}`);
@@ -232,7 +299,11 @@ const updateFundings = async () => {
     }
   };
 
-  return Promise.all(overlappingFundings.map(async (item) => { return await modify(item) }));
+  return Promise.all(
+    overlappingFundings.map(async (item) => {
+      return await modify(item);
+    })
+  );
 };
 const createNewFundings = async () => {
   const newFundings = await getNewFundings();
@@ -245,10 +316,18 @@ const createNewFundings = async () => {
       throw error;
     }
   };
-  return await Promise.all(newFundings.map(async (item) => { return await create(item) }));
+  return await Promise.all(
+    newFundings.map(async (item) => {
+      return await create(item);
+    })
+  );
 };
 
-const wait = (milliseconds = 10000) => { return new Promise((resolve) => { return setTimeout(resolve, milliseconds) }) };
+const wait = (milliseconds = 10000) => {
+  return new Promise((resolve) => {
+    return setTimeout(resolve, milliseconds);
+  });
+};
 
 const syncFundings = async () => {
   console.log("deleting unused fundings");
@@ -263,23 +342,44 @@ const syncFundings = async () => {
 };
 
 // eslint-disable-next-line no-empty
-if (!process.argv.some((i) => { return i.includes("fundingSync") }) || process.env.NODE_ENV == "test") {
-} else if (process.argv.some((i) => { return i.includes("--sync") })) {
+if (
+  !process.argv.some((i) => {
+    return i.includes("fundingSync");
+  }) ||
+  process.env.NODE_ENV == "test"
+) {
+} else if (
+  process.argv.some((i) => {
+    return i.includes("--sync");
+  })
+) {
   await (async () => {
     await syncFundings();
     process.exit(1);
   })();
-} else if (process.argv.some((i) => { return i.includes("--previewUnused") })) {
+} else if (
+  process.argv.some((i) => {
+    return i.includes("--previewUnused");
+  })
+) {
   await (async () => {
     console.info(await getUnUsedFundings());
     process.exit(1);
   })();
-} else if (process.argv.some((i) => { return i.includes("--previewCreate") })) {
+} else if (
+  process.argv.some((i) => {
+    return i.includes("--previewCreate");
+  })
+) {
   await (async () => {
     console.info(await getNewFundings());
     process.exit(1);
   })();
-} else if (process.argv.some((i) => { return i.includes("--full") })) {
+} else if (
+  process.argv.some((i) => {
+    return i.includes("--full");
+  })
+) {
   await (async () => {
     await syncSectors();
     await syncFundings();
