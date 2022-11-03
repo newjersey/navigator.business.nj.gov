@@ -18,6 +18,8 @@ fundingType: technical assistance
 programFrequency: ongoing
 status: opening soon
 programPurpose: In State
+agency:
+  - NJEDA
 agencyContact: businessactioncenter@sos.nj.gov
 businessStage: both
 employeesRequired: n/a
