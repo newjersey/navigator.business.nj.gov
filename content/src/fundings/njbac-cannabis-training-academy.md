@@ -18,7 +18,8 @@ fundingType: technical assistance
 programFrequency: ongoing
 status: opening soon
 programPurpose: In State
-agency: null
+agency:
+  - New Jersey Business Action Center
 agencyContact: businessactioncenter@sos.nj.gov
 businessStage: both
 employeesRequired: n/a
