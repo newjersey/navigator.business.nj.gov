@@ -88,11 +88,15 @@ describe("<OnboardingIndustry />", () => {
     let profileData: ProfileData;
     EssentialQuestions.map((el) => {
       const validIndustryId = randomFilteredIndustry(el.isQuestionApplicableToIndustry, { isEnabled: true });
-      const nonValidIndustryId = randomNegativeFilteredIndustry(el.isQuestionApplicableToIndustry);
-      profileData = {
-        ...createEmptyProfileData(),
-        industryId: nonValidIndustryId.id,
-      };
+
+      beforeEach(() => {
+        const nonValidIndustryId = randomNegativeFilteredIndustry(el.isQuestionApplicableToIndustry);
+        profileData = {
+          ...createEmptyProfileData(),
+          industryId: nonValidIndustryId.id,
+        };
+      });
+
       businessPersonas.map((persona) => {
         const choices = industrySpecificDataChoices[el.fieldName];
         const flowConfig = Config.profileDefaults[persona as FlowType];
