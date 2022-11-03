@@ -44,7 +44,7 @@
     "canBeHomeBased": false,
     "canBeReseller": false
   },
-  "isEnabled": false,
+  "isEnabled": true,
   "additionalSearchTerms": "physician, medical examiners, nurses, nursing, midwives, midwifery, occupational therapy, physical therapy, therapist, optometrists, psychologist, psychoanalyst, family therapy, counseling, marriage counselor, speech therapy, audiologists, dietitian, nutritionist",
   "id": "healthcare",
   "description": "Provides licensed health-related services"
