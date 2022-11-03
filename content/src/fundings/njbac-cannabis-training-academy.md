@@ -34,7 +34,7 @@ sector: []
 publishStageArchive: Do Not Publish
 ---
 ### Eligibility
-Individuals who are considering applying for a conditional or annual license are eligible to join NJBAC's Cannabis Training Academy. Applicants must be in the social equity, legacy, Impact Zone, diverse-owned, veteran, veteran-disabled, LGBTQ+ and/or microbusiness categories to qualify for technical assistance.
+* Individuals who are considering applying for a conditional or annual license are eligible to join NJBAC's Cannabis Training Academy. Applicants must be in the social equity, legacy, Impact Zone, diverse-owned, veteran, veteran-disabled, LGBTQ+ and/or microbusiness categories to qualify for technical assistance.
 
 > **Benefits**
 >
