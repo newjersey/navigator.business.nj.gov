@@ -339,7 +339,15 @@ collections:
         name: "agency"
         widget: "select"
         multiple: true
-        options: ["NJEDA", "NJDOL", "NJDEP", "NJ Department of Treasury", "NJ Board of Public Utilities"]
+        options:
+          [
+            "NJEDA",
+            "NJDOL",
+            "NJDEP",
+            "NJ Department of Treasury",
+            "NJ Board of Public Utilities",
+            "New Jersey Business Action Center",
+          ]
         required: false
       - { label: "Agency Contact", name: "agencyContact", widget: "string", required: false }
       - label: "Business Stage"

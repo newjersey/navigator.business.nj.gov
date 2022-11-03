@@ -6,29 +6,29 @@ if (typeof process != "undefined") {
 }
 
 // eslint-disable-next-line no-undef
-if (process.env.WEBFLOW_API_TOKEN == undefined) throw new Error("No Webflow API Token in Env");
+if (process.env.WEBFLOW_API_TOKEN == undefined) {throw new Error("No Webflow API Token in Env");}
 
 // eslint-disable-next-line no-undef
 const headers = { Authorization: `Bearer ${process.env.WEBFLOW_API_TOKEN}` };
 
 const getAllItems = async (id) =>
-  axios({
+  {return axios({
     method: "get",
     url: `https://api.webflow.com/collections/${id}/items`,
     headers,
     responseType: "json",
-  });
+  })};
 
 const getCollection = async (id) =>
-  axios({
+  {return axios({
     method: "get",
     url: `https://api.webflow.com/collections/${id}`,
     headers,
     responseType: "json",
-  });
+  })};
 
 const createItem = (item, collectionId, draft = true) =>
-  axios({
+  {return axios({
     method: "post",
     url: `https://api.webflow.com/collections/${collectionId}/items`,
     headers: { ...headers, "content-type": "application/json" },
@@ -40,10 +40,10 @@ const createItem = (item, collectionId, draft = true) =>
       },
     },
     responseType: "json",
-  });
+  })};
 
 const modifyItem = (id, collectionId, body, method = "patch") =>
-  axios({
+  {return axios({
     method: method,
     url: `https://api.webflow.com/collections/${collectionId}/items/${id}`,
     headers,
@@ -53,14 +53,14 @@ const modifyItem = (id, collectionId, body, method = "patch") =>
       },
     },
     responseType: "json",
-  });
+  })};
 
 const deleteItem = (item, collectionId, unPublish = false) =>
-  axios({
+  {return axios({
     method: "delete",
     url: `https://api.webflow.com/collections/${collectionId}/items/${item._id}`,
     params: { live: unPublish },
     headers,
-  });
+  })};
 
 export { deleteItem, modifyItem, createItem, getAllItems, getCollection };

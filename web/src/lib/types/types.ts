@@ -229,7 +229,8 @@ export type OpportunityAgency =
   | "NJDOL"
   | "NJDEP"
   | "NJ Department of Treasury"
-  | "NJ Board of Public Utilities";
+  | "NJ Board of Public Utilities"
+  | "New Jersey Business Action Center";
 
 export type FundingType =
   | "tax credit"
