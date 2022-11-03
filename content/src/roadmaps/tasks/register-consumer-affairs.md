@@ -7,7 +7,7 @@ callToActionText: Obtain My Contractor License
 required: true
 issuingAgency: New Jersey Division of Consumer Affairs Home Improvement Unit
 ---
-All home improvement contractors (individuals and corporate entities) must register and commit to following regulations and guidelines set out in the [Contractor's Registration Act](https://www.njconsumeraffairs.gov/hic/Applications/Home-Improvement-Contractor-Application-for-Initial-Registration.pdf).
+All home improvement contractors (individuals and corporate entities) must register and commit to following regulations and guidelines set out in the [Contractor's Registration Act](https://www.njconsumeraffairs.gov/hic/Applications/Home-Improvement-Contractor-Application-for-Initial-Registration.pdf)
 
 ---
 ### Application Requirements
