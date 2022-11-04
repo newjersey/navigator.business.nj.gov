@@ -29,9 +29,6 @@ export default {
     legalStructure: (value) => {
       window.gtag("set", "dimension3", value);
     },
-    liquorLicense: (value) => {
-      window.gtag("set", "dimension4", value);
-    },
     homeBasedBusiness: (value) => {
       window.gtag("set", "dimension5", value);
     },
@@ -790,6 +787,16 @@ export default {
         },
         no_5_or_fewer_children: () => {
           sendEvent("onboarding_childcare_business_question", "submit", "no_5_or_fewer_children");
+        },
+      },
+    },
+    onboarding_liquor_question: {
+      submit: {
+        yes_require_liquor_license: () => {
+          sendEvent("onboarding_liquor_question", "submit", "yes_require_liquor_license");
+        },
+        no_dont_require_liquor_license: () => {
+          sendEvent("onboarding_liquor_question", "submit", "no_dont_require_liquor_license");
         },
       },
     },
