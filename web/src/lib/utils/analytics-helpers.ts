@@ -50,7 +50,6 @@ export const setAnalyticsDimensions = (profileData: ProfileData): void => {
   analytics.dimensions.industry(profileData.industryId);
   analytics.dimensions.municipality(profileData.municipality?.displayName);
   analytics.dimensions.legalStructure(profileData.legalStructureId);
-  analytics.dimensions.liquorLicense(profileData.liquorLicense ? "true" : "false");
   analytics.dimensions.homeBasedBusiness(profileData.homeBasedBusiness ? "true" : "false");
   analytics.dimensions.persona(getPersonaDimension(profileData.businessPersona));
   analytics.dimensions.naicsCode(profileData.naicsCode);
@@ -163,6 +162,14 @@ export const sendOnboardingOnSubmitEvents = (newProfileData: ProfileData, pageNa
         analytics.event.onboarding_childcare_business_question.submit.yes_more_than_6_children();
       } else {
         analytics.event.onboarding_childcare_business_question.submit.no_5_or_fewer_children();
+      }
+    }
+
+    if (getIsApplicableToFunctionByFieldName("liquorLicense")(newProfileData.industryId)) {
+      if (newProfileData.liquorLicense) {
+        analytics.event.onboarding_liquor_question.submit.yes_require_liquor_license();
+      } else {
+        analytics.event.onboarding_liquor_question.submit.no_dont_require_liquor_license();
       }
     }
   }

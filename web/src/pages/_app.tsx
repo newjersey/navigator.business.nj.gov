@@ -125,7 +125,6 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
           'dimension1': 'Industry',
           'dimension2': 'Municipality',
           'dimension3': 'Legal Structure',
-          'dimension4': 'Liquor License',
           'dimension5': 'Home-Based Business',
           'dimension6': 'Persona',
           'dimension7': 'Registration Process',
