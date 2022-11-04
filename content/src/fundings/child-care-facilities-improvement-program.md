@@ -8,6 +8,8 @@ dueDate: ""
 descriptionMd: The Child Care Facilities Improvement Program provides grants to
   New Jersey child care providers for facilities improvements that will
   contribute to high quality early childhood learning environments.
+callToActionLink: https://www.njeda.com/child-care-improvement-program/
+callToActionText: Learn more
 fundingType: grant
 programFrequency: pilot
 status: opening soon
@@ -26,38 +28,28 @@ sector:
   - educational-services
 publishStageArchive: Do Not Publish
 ---
-The Child Care Facilities Improvement Program provides grants to New Jersey child care providers for facilities improvements that will contribute to high quality early childhood learning environments.
+The Child Care Facilities Improvement Program provides grants to New Jersey child care providers for facilities improvements that will contribute to high quality early childhood learning environments. 
+
+Applicants are limited to one application per DCF-licensed child care center location, and two applications per Employer Identification (EIN)
 
 - - -
 
 ### Eligibility
 
-Applicants are limited to two applications per Employer Identification Number (EIN). Applicants operating from multiple locations under a sole EIN must submit separate applications for each NJDCF-licensed location, up to two locations.
-
 Applicants must meet the following eligibility requirements:
 
-* Child care center licensed by NJDCF as of June 4, 2021*
-* Applicants must currently enroll, or have enrolled in the 12 months prior to the date of application, at least one (1) child receiving support through New Jersey Department of Human Services (NJDHS) Child Care Assistance Program
-* Applicants may be for-profit businesses or non-profit organizations
-* Can own or lease space
-* Applicants must be in good standing with the New Jersey Departments of Labor and Workforce Development, Environmental Protection, NJDCF, and NJDHS
-* Applicant must not be debarred from receiving federal funds, as indicated through System for Award Management (SAM)
-* Applicants are limited to one (1) application per DCF-licensed child care center location, and two (2) applications per Employer Identification (EIN).
-* Applicants who are not currently enrolled in DHS’ Grow NJ Kids (GNJK) quality rating system must commit to enroll within one (1) year of executing a grant agreement with the EDA.
-* Grantees must commit to maintaining their licensure with DCF to provide child care for four (4) years following execution of the grant agreement at the location of the facility improvement project.
-* Home-based child care providers are not eligible for the first phase of the program. Funding for registered family child care homes will be available in subsequent program phases.
+* Child care center licensed by NJDCF as of June 4, 2021
+* Currently enroll, or have enrolled in the 12 months prior to the date of application, at least one child receiving support through New Jersey Department of Human Services (NJDHS) Child Care Assistance Program
+* For-profit businesses or non-profit organizations that can own or lease space
+* Be in good standing with the New Jersey Departments of Labor and Workforce Development, Environmental Protection, NJDCF, and NJDHS
+* Must not be debarred from receiving federal funds, as indicated through System for Award Management (SAM)
 
 Facility improvement projects must meet the following eligibility requirements:
 
-* Labor and materials cost for interior and exterior facility improvements to create high quality early childhood learning environments. Please see the full list of eligible facility improvement projects here.
+* Labor and materials cost for interior and exterior facility improvements to create high quality early childhood learning environments. See the full list of [eligible facility improvement projects](https://www.njeda.com/wp-content/uploads/2022/05/Child-Care-Facilities-Improvement-Eligible-Projects.pdf)
 * Contractors conducting facility improvements must be DOL Public Works Registered Contractors and abide by state prevailing wage and affirmative action requirements
 
 > **Benefits**
 >
 > * Total project costs between $50,000 and $200,000
 > * Soft costs are capped at up to 20% of total grant and are limited to: architect fees, permit fees, construction management, freight and shipping delivery, environmental assessment
->
->
-> Provide funding to businesses—including many minority- and women-owned businesses and those in Opportunity Zone eligible census tracts—that otherwise may not have access to resources to fund facility improvements. Promote healthy childhood environments for children, families, and child care providers that were impacted by the COVID-19 pandemic. Support the capacity of child care providers to provide infant and toddler care in tandem with the expansion of Universal Pre-K to serve more 4-year-olds in the state. Engage providers to participate in New Jersey’s child care quality improvement rating system, Grow NJ Kids. Target resources to communities of greater need due to historic disinvestment, through set-aside for providers located in Opportunity Zones and include the requirement that providers serve low-income children receiving Child Care Assistance subsidies.
->
-> *The Program will not provide reimbursement for costs already incurred prior to award*
