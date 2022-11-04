@@ -32,8 +32,6 @@ The Child Care Facilities Improvement Program provides grants to New Jersey chil
 
 ### Eligibility
 
-Child care centers licensed by the NJ Department of Children and Families (NJDCF) as of June 4, 2021 are eligible to apply for facility improvement grants. Child care providers may own or lease the space where the facility improvement will occur.
-
 Applicants are limited to two applications per Employer Identification Number (EIN). Applicants operating from multiple locations under a sole EIN must submit separate applications for each NJDCF-licensed location, up to two locations.
 
 Applicants must meet the following eligibility requirements:
@@ -51,11 +49,15 @@ Applicants must meet the following eligibility requirements:
 
 Facility improvement projects must meet the following eligibility requirements:
 
-* Total project costs between $50,000 and $200,000
 * Labor and materials cost for interior and exterior facility improvements to create high quality early childhood learning environments. Please see the full list of eligible facility improvement projects here.
-* Soft costs are capped at up to 20% of total grant and are limited to: architect fees, permit fees, construction management, freight and shipping delivery, environmental assessment
-* Contractors conducting facility improvements must be a DOL Public Works Registered Contractor and abide by state prevailing wage and affirmative action requirements
-* The Program will not provide reimbursement for costs already incurred prior to award
+* Contractors conducting facility improvements must be DOL Public Works Registered Contractors and abide by state prevailing wage and affirmative action requirements
 
 > **Benefits**
+>
+> * Total project costs between $50,000 and $200,000
+> * Soft costs are capped at up to 20% of total grant and are limited to: architect fees, permit fees, construction management, freight and shipping delivery, environmental assessment
+>
+>
 > Provide funding to businesses—including many minority- and women-owned businesses and those in Opportunity Zone eligible census tracts—that otherwise may not have access to resources to fund facility improvements. Promote healthy childhood environments for children, families, and child care providers that were impacted by the COVID-19 pandemic. Support the capacity of child care providers to provide infant and toddler care in tandem with the expansion of Universal Pre-K to serve more 4-year-olds in the state. Engage providers to participate in New Jersey’s child care quality improvement rating system, Grow NJ Kids. Target resources to communities of greater need due to historic disinvestment, through set-aside for providers located in Opportunity Zones and include the requirement that providers serve low-income children receiving Child Care Assistance subsidies.
+>
+> *The Program will not provide reimbursement for costs already incurred prior to award*
