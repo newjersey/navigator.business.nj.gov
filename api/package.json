@@ -88,7 +88,7 @@
     "prettier": "2.7.1",
     "prettier-plugin-organize-imports": "3.1.1",
     "rimraf": "3.0.2",
-    "serverless": "3.23.0",
+    "serverless": "3.24.0",
     "serverless-dynamodb-local": "0.2.40",
     "serverless-offline": "11.2.3",
     "serverless-offline-ssm": "6.2.0",
