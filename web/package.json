@@ -50,7 +50,7 @@
     "@mui/lab": "5.0.0-alpha.106",
     "@mui/material": "5.10.12",
     "@mui/styles": "5.10.10",
-    "@mui/x-date-pickers": "5.0.6",
+    "@mui/x-date-pickers": "5.0.7",
     "@types/ua-parser-js": "0.7.36",
     "axios": "0.27.2",
     "broken-link-checker": "0.7.8",
