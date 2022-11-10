@@ -40,7 +40,7 @@ Applicants are limited to one application per DCF-licensed child care center loc
 
 ### Eligibility
 
-* Child care center licensed by NJDCF as of June 4, 2021
+* Child care center licensed by NJDCF as of June 4th, 2021
 * Currently enroll, or have enrolled in the 12 months prior to the date of application, at least one child receiving support through New Jersey Department of Human Services (NJDHS) Child Care Assistance Program
 * For-profit businesses or non-profit organizations that can own or lease space
 * Be in good standing with the New Jersey Departments of Labor and Workforce Development, Environmental Protection, NJDCF, and NJDHS
