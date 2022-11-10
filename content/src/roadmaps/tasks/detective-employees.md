@@ -6,13 +6,13 @@ id: detective-employees
 required: true
 issuingAgency: New Jersey State Police Private Detective Unit
 ---
-Any staff working in your Detective Agency must be registered before they can be scheduled for work.
- 
--﻿-- 
- 
+Any staff working in your Detective Agency must be registered before they can be scheduled for work.  
+
+-﻿--
+
 ### Registration Requirements
 - [Employee Statement form](https://www.nj.gov/njsp/private-detective/pdf/pd-agency-statement.pdf) completed, signed and notarized 
-- Notification letter on the company’s letterhead indicating the agency license number, the employee’s full name, date of birth, full social security number, position, and date of hire
+- Notification letter on the company’s letterhead indicating the agency license number, the employee’s full name, date of birth, social security number, position, and date of hire
 - Original fingerprint receipt from IdentoGo
 - Pay any associated fees  
  
