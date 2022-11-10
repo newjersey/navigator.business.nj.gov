@@ -7,9 +7,10 @@ openDate: 03/30/2023
 dueDate: ""
 descriptionMd: New Jersey Business Action Center's (NJBAC) Cannabis Training
   Academy is a no-cost, virtual technical assistance and training program for
-  cannabis applicants. The program includes live question and answer sessions
-  every other week to provide non-legal advice and direction. Instructors and
-  mentors are faculty who are in or have supported the cannabis industry.
+  cannabis license applicants. The program includes live question and answer
+  sessions every other week to provide non-legal advice and direction.
+  Instructors and mentors are faculty who are in or have supported the cannabis
+  industry.
 callToActionLink: https://nj.gov/state/bac/cannabis.shtml
 callToActionText: Learn more
 fundingType: technical assistance
@@ -29,7 +30,9 @@ county:
 sector: []
 publishStageArchive: Do Not Publish
 ---
-New Jersey Business Action Center's (NJBAC) Cannabis Training Academy is a no-cost, virtual technical assistance and training program for cannabis applicants. The program includes live question and answer sessions every other week to provide non-legal advice and direction. Instructors and mentors are faculty who are in or have supported the cannabis industry.
+New Jersey Business Action Center's (NJBAC) Cannabis Training Academy is a no-cost, virtual technical assistance and training program for cannabis applicants. The program includes live question and answer sessions every other week to provide direction. Instructors and mentors are faculty who are in or have supported the cannabis industry.
+
+The academy does not provide legal advice.
 
 - - -
 
