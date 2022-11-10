@@ -8,7 +8,7 @@ issuingAgency: New Jersey State Police Private Detective Unit
 ---
 Any staff working in your Detective Agency must be registered before they can be scheduled for work.
  
-—
+-﻿-- 
  
 ### Registration Requirements
 - [Employee Statement form](https://www.nj.gov/njsp/private-detective/pdf/pd-agency-statement.pdf) completed, signed and notarized 
