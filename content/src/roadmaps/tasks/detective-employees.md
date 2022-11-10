@@ -3,6 +3,8 @@ urlSlug: detective-employees
 filename: detective-employees
 name: Register Your Employees
 id: detective-employees
+callToActionLink: https://www.nj.gov/njsp/private-detective/pdf/Employee_Registration_Instructions.pdf
+callToActionText: See Instructions
 required: true
 issuingAgency: New Jersey State Police Private Detective Unit
 ---
