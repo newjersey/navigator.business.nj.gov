@@ -246,6 +246,10 @@ const ProfilePage = (props: Props): ReactElement => {
     return LookupLegalStructureById(userData.profileData.legalStructureId).requiresPublicFiling;
   };
 
+  const displayAltHomeBasedBusinessDescription = LookupOperatingPhaseById(
+    userData?.profileData.operatingPhase
+  ).displayAltHomeBasedBusinessDescription;
+
   const displayHomedBaseBusinessQuestion = (): boolean => {
     if (!userData) {
       return false;
@@ -298,7 +302,10 @@ const ProfilePage = (props: Props): ReactElement => {
         )}
         {displayHomedBaseBusinessQuestion() && (
           <div className="margin-top-3">
-            <FieldLabelProfile fieldName="homeBasedBusiness" />
+            <FieldLabelProfile
+              fieldName="homeBasedBusiness"
+              isAltDescriptionDisplayed={displayAltHomeBasedBusinessDescription}
+            />
             <OnboardingHomeBasedBusiness />
           </div>
         )}
@@ -413,7 +420,10 @@ const ProfilePage = (props: Props): ReactElement => {
 
         {displayHomedBaseBusinessQuestion() && (
           <div className="margin-top-3">
-            <FieldLabelProfile fieldName="homeBasedBusiness" />
+            <FieldLabelProfile
+              fieldName="homeBasedBusiness"
+              isAltDescriptionDisplayed={displayAltHomeBasedBusinessDescription}
+            />
             <OnboardingHomeBasedBusiness />
           </div>
         )}
@@ -518,7 +528,10 @@ const ProfilePage = (props: Props): ReactElement => {
         </div>
         {displayHomedBaseBusinessQuestion() && (
           <div className="margin-top-3">
-            <FieldLabelProfile fieldName="homeBasedBusiness" />
+            <FieldLabelProfile
+              fieldName="homeBasedBusiness"
+              isAltDescriptionDisplayed={displayAltHomeBasedBusinessDescription}
+            />
             <OnboardingHomeBasedBusiness />
           </div>
         )}

@@ -4,7 +4,6 @@ import { GenericTextField, GenericTextFieldProps } from "@/components/GenericTex
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { IndustrySpecificDataAddOnFields, ProfileContentField, ProfileFields } from "@/lib/types/types";
-import { ProfileData } from "@businessnjgovnavigator/shared/";
 import { TextFieldProps } from "@mui/material";
 import { ReactElement, useContext } from "react";
 
@@ -33,13 +32,10 @@ export const OnboardingField = ({
       props.handleChange(value);
       return;
     }
-    const profileData = { ...state.profileData } as Record<
-      keyof ProfileData,
-      keyof ProfileData[keyof ProfileData]
-    >;
-    profileData[fieldName as keyof ProfileData] = value as keyof ProfileData[keyof ProfileData];
+
     setProfileData({
-      ...profileData,
+      ...state.profileData,
+      [fieldName]: value,
     });
   };
 

@@ -3773,6 +3773,7 @@ collections:
                       - { label: "Radio Button Yes Text", name: "radioButtonTrueText", widget: "string" }
                       - { label: "Radio Button No Text", name: "radioButtonFalseText", widget: "string" }
                       - { label: "Description", name: "description", widget: "markdown" }
+                      - { label: "Alt Description", name: "altDescription", widget: "markdown" }
                   - label: Home Contractor
                     name: homeContractor
                     collapsed: true

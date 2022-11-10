@@ -56,6 +56,9 @@ const ProfilePreviewIndustrySpecific = (props: PreviewProps) => {
           <h1>Preview Fields</h1>
           <OnboardingEmploymentAgency />
           <hr className="margin-y-4" />
+          <FieldLabelOnboarding fieldName="homeBasedBusiness" isAltDescriptionDisplayed />
+          <OnboardingHomeBasedBusiness />
+          <div className="margin-top-2"></div>
           <FieldLabelOnboarding fieldName="homeBasedBusiness" />
           <OnboardingHomeBasedBusiness />
           <hr className="margin-y-4" />

@@ -131,7 +131,13 @@ const DashboardPage = (props: Props): ReactElement => {
             <div className="margin-bottom-4">
               {displayHomedBaseBusinessQuestion() && (
                 <DeferredOnboardingQuestion>
-                  <FieldLabelDeferred fieldName="homeBasedBusiness" />
+                  <FieldLabelDeferred
+                    fieldName="homeBasedBusiness"
+                    isAltDescriptionDisplayed={
+                      LookupOperatingPhaseById(userData?.profileData.operatingPhase)
+                        .displayAltHomeBasedBusinessDescription
+                    }
+                  />
                   <OnboardingHomeBasedBusiness />
                 </DeferredOnboardingQuestion>
               )}
