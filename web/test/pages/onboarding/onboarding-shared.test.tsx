@@ -1,6 +1,8 @@
+import { getOnboardingFlows } from "@/components/onboarding/getOnboardingFlows";
 import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
+import { createProfileFieldErrorMap } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
 import Onboarding from "@/pages/onboarding";
 import { generateMunicipality, generateProfileData, generateUser, generateUserData } from "@/test/factories";
@@ -129,16 +131,21 @@ describe("onboarding - shared", () => {
 
     const page = createPageHelpers();
 
-    await page.visitStep(2);
-    expect(mockSetRoadmap).toHaveBeenCalledTimes(1);
-    await page.visitStep(3);
-    expect(mockSetRoadmap).toHaveBeenCalledTimes(2);
-    await page.visitStep(4);
-    expect(mockSetRoadmap).toHaveBeenCalledTimes(3);
+    const numberOfPages = getOnboardingFlows(
+      userData.profileData,
+      userData.user,
+      () => {},
+      createProfileFieldErrorMap()
+    ).STARTING.pages.length;
+
+    for (let pageNumber = 2; pageNumber < numberOfPages; pageNumber += 1) {
+      await page.visitStep(pageNumber);
+      expect(mockSetRoadmap).toHaveBeenCalledTimes(pageNumber - 1);
+    }
 
     page.clickNext();
     await waitFor(() => {
-      return expect(mockSetRoadmap).toHaveBeenCalledTimes(4);
+      return expect(mockSetRoadmap).toHaveBeenCalledTimes(numberOfPages - 1);
     });
   });
 
@@ -158,21 +165,24 @@ describe("onboarding - shared", () => {
     mockApi.postUserTesting.mockImplementation((request) => {
       return Promise.resolve(request);
     });
-    await page.visitStep(2);
-    expect(getLastCalledWithConfig().local).toEqual(true);
-    await page.visitStep(3);
-    expect(getLastCalledWithConfig().local).toEqual(true);
-    await page.visitStep(4);
-    expect(getLastCalledWithConfig().local).toEqual(true);
-    await page.visitStep(5);
-    expect(getLastCalledWithConfig().local).toEqual(true);
+    const numberOfPages = getOnboardingFlows(
+      userData.profileData,
+      userData.user,
+      () => {},
+      createProfileFieldErrorMap()
+    ).STARTING.pages.length;
+
+    for (let pageNumber = 2; pageNumber < numberOfPages; pageNumber += 1) {
+      await page.visitStep(pageNumber);
+      expect(getLastCalledWithConfig().local).toEqual(true);
+    }
   });
 
   it("prevents user from moving after Step 1 if you have not selected whether you own a business", async () => {
     const { page } = renderPage({});
     page.clickNext();
     expect(screen.getByTestId("step-1")).toBeInTheDocument();
-    expect(screen.getByTestId("error-alert-REQUIRED_EXISTING_BUSINESS")).toBeInTheDocument();
+    expect(screen.getByTestId("banner-alert-REQUIRED_EXISTING_BUSINESS")).toBeInTheDocument();
   });
 
   it("allows user to move past Step 1 if you have selected whether you own a business", async () => {
@@ -192,22 +202,18 @@ describe("onboarding - shared", () => {
   });
 
   it("resets non-shared information when switching from starting flow to owning flow", async () => {
-    const newark = generateMunicipality({ displayName: "Newark" });
     const initialUserData = generateUserData({
       formProgress: "UNSTARTED",
       profileData: createEmptyProfileData(),
     });
-    const { page } = renderPage({ municipalities: [newark], userData: initialUserData });
+    const { page } = renderPage({ userData: initialUserData });
 
     page.chooseRadio("business-persona-starting");
     await page.visitStep(2);
     page.selectByValue("Industry", "e-commerce");
     await page.visitStep(3);
     page.chooseRadio("general-partnership");
-    await page.visitStep(4);
-    page.selectByText("Location", "Newark");
 
-    page.clickBack();
     page.clickBack();
     page.clickBack();
 
@@ -227,7 +233,7 @@ describe("onboarding - shared", () => {
       industryId: "generic",
       homeBasedBusiness: undefined,
       legalStructureId: "c-corporation",
-      municipality: newark,
+      municipality: undefined,
       liquorLicense: false,
       constructionRenovationPlan: undefined,
       employerId: undefined,
@@ -371,7 +377,7 @@ describe("onboarding - shared", () => {
   });
 
   it("displays error message when @ is missing in email input field", async () => {
-    useMockRouter({ isReady: true, query: { page: "5" } });
+    useMockRouter({ isReady: true, query: { page: "4" } });
     const { page } = renderPage({
       userData: generateUserData({
         user: generateUser({ email: `some-emailexample.com` }),
@@ -389,7 +395,7 @@ describe("onboarding - shared", () => {
   });
 
   it("displays error message when . is missing in email input field", async () => {
-    useMockRouter({ isReady: true, query: { page: "5" } });
+    useMockRouter({ isReady: true, query: { page: "4" } });
     const { page } = renderPage({
       userData: generateUserData({
         user: generateUser({ email: `some-email@examplecom` }),

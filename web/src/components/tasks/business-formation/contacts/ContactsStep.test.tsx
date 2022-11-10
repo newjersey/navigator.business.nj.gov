@@ -32,6 +32,9 @@ function mockMaterialUI(): typeof materialUi {
   };
 }
 
+jest.mock("@/lib/roadmap/buildUserRoadmap", () => {
+  return { buildUserRoadmap: jest.fn() };
+});
 jest.mock("@mui/material", () => {
   return mockMaterialUI();
 });

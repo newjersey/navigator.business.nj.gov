@@ -3,16 +3,18 @@ import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { RoadmapContext } from "@/contexts/roadmapContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { QUERIES, routeShallowWithQuery } from "@/lib/domain-logic/routes";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import { setAnalyticsDimensions } from "@/lib/utils/analytics-helpers";
-import { getFlow, useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import { getFlow } from "@/lib/utils/helpers";
 import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
-import { useRouter } from "next/router";
-import { ReactNode, useContext, useState } from "react";
+import { ReactNode, useContext, useEffect, useState } from "react";
 
 interface Props {
   children: ReactNode;
+  label: ReactNode;
+  onSave: () => void;
+  removeStyling?: boolean;
+  adjustPaddingForHelperText?: boolean;
 }
 
 export const DeferredOnboardingQuestion = (props: Props) => {
@@ -20,14 +22,13 @@ export const DeferredOnboardingQuestion = (props: Props) => {
   const { userData, updateQueue } = useUserData();
   const { Config } = useConfig();
   const { setRoadmap } = useContext(RoadmapContext);
-  const router = useRouter();
 
-  useMountEffectWhenDefined(() => {
+  useEffect(() => {
     if (!userData) {
       return;
     }
     setProfileData(userData.profileData);
-  }, userData);
+  }, [userData]);
 
   const onSave = async () => {
     if (!updateQueue || !userData) {
@@ -43,7 +44,7 @@ export const DeferredOnboardingQuestion = (props: Props) => {
     setAnalyticsDimensions(profileData);
     const newRoadmap = await buildUserRoadmap(profileData);
     setRoadmap(newRoadmap);
-    routeShallowWithQuery(router, QUERIES.deferredQuestionAnswered, "true");
+    props.onSave();
   };
 
   return (
@@ -52,23 +53,27 @@ export const DeferredOnboardingQuestion = (props: Props) => {
         state: {
           profileData: profileData,
           flow: getFlow(profileData),
-          municipalities: [],
         },
         setUser: () => {},
         setProfileData,
         onBack: () => {},
       }}
     >
-      <div className="radius-md border-primary-light border-1px padding-3 display-flex mobile-lg:flex-row flex-column mobile-lg:flex-align-center">
-        <div>{props.children}</div>
-        <Button
-          style="secondary"
-          className="margin-left-auto mobile-lg:margin-top-0 margin-top-2"
-          onClick={onSave}
-          dataTestid="deferred-question-save"
-        >
-          {Config.dashboardDefaults.deferredOnboardingSaveButtonText}
-        </Button>
+      <div className={`${props.removeStyling ? "" : "radius-md border-primary-light border-1px"} padding-3`}>
+        {props.label}
+        <div className="display-flex mobile-lg:flex-row flex-column mobile-lg:flex-align-center">
+          <div className="width-100 margin-right-1">{props.children}</div>
+          <Button
+            style="secondary"
+            className={`margin-left-auto mobile-lg:margin-top-0 margin-top-2 ${
+              props.adjustPaddingForHelperText ? "margin-bottom-105 height-6" : ""
+            }`}
+            onClick={onSave}
+            dataTestid="deferred-question-save"
+          >
+            {Config.dashboardDefaults.deferredOnboardingSaveButtonText}
+          </Button>
+        </div>
       </div>
     </ProfileDataContext.Provider>
   );

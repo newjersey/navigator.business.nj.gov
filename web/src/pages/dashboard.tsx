@@ -12,21 +12,23 @@ import { OnboardingHomeBasedBusiness } from "@/components/onboarding/OnboardingH
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { RightSidebarPageLayout } from "@/components/RightSidebarPageLayout";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
+import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { useAuthAlertPage } from "@/lib/auth/useAuthAlertPage";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useQueryControlledAlert } from "@/lib/data-hooks/useQueryControlledAlert";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
-import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
+import { QUERIES, ROUTES, routeShallowWithQuery } from "@/lib/domain-logic/routes";
 import { MediaQueries } from "@/lib/PageSizes";
 import { loadAllCertifications } from "@/lib/static/loadCertifications";
 import { loadRoadmapDisplayContent } from "@/lib/static/loadDisplayContent";
 import { loadAllFundings } from "@/lib/static/loadFundings";
+import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import { loadOperateReferences } from "@/lib/static/loadOperateReferences";
 import { Certification, Funding, OperateReference, RoadmapDisplayContent } from "@/lib/types/types";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { LookupOperatingPhaseById } from "@businessnjgovnavigator/shared";
+import { LookupOperatingPhaseById, Municipality } from "@businessnjgovnavigator/shared";
 import { useMediaQuery } from "@mui/material";
 import { GetStaticPropsResult } from "next";
 import { useRouter } from "next/router";
@@ -37,6 +39,7 @@ interface Props {
   operateReferences: Record<string, OperateReference>;
   fundings: Funding[];
   certifications: Certification[];
+  municipalities: Municipality[];
 }
 
 const DashboardPage = (props: Props): ReactElement => {
@@ -130,14 +133,20 @@ const DashboardPage = (props: Props): ReactElement => {
           <>
             <div className="margin-bottom-4">
               {displayHomedBaseBusinessQuestion() && (
-                <DeferredOnboardingQuestion>
-                  <FieldLabelDeferred
-                    fieldName="homeBasedBusiness"
-                    isAltDescriptionDisplayed={
-                      LookupOperatingPhaseById(userData?.profileData.operatingPhase)
-                        .displayAltHomeBasedBusinessDescription
-                    }
-                  />
+                <DeferredOnboardingQuestion
+                  label={
+                    <FieldLabelDeferred
+                      fieldName="homeBasedBusiness"
+                      isAltDescriptionDisplayed={
+                        LookupOperatingPhaseById(userData?.profileData.operatingPhase)
+                          .displayAltHomeBasedBusinessDescription
+                      }
+                    />
+                  }
+                  onSave={() => {
+                    return routeShallowWithQuery(router, QUERIES.deferredQuestionAnswered, "true");
+                  }}
+                >
                   <OnboardingHomeBasedBusiness />
                 </DeferredOnboardingQuestion>
               )}
@@ -161,56 +170,59 @@ const DashboardPage = (props: Props): ReactElement => {
   );
 
   return (
-    <PageSkeleton>
-      <NavBar />
-      <main id="main">
-        {!userData || userData?.formProgress !== "COMPLETED" ? (
-          <div className="margin-top-3 desktop:margin-top-0 padding-top-0 desktop:padding-top-6 padding-bottom-15">
-            <LoadingIndicator />
-          </div>
-        ) : isDesktopAndUp ? (
-          <RightSidebarPageLayout
-            mainContent={renderRoadmap}
-            sidebarContent={
-              <SidebarCardsList
-                sidebarDisplayContent={props.displayContent.sidebarDisplayContent}
-                certifications={props.certifications}
-                fundings={props.fundings}
-              />
-            }
-          />
-        ) : (
-          <TwoTabDashboardLayout
-            firstTab={renderRoadmap}
-            secondTab={
-              <SidebarCardsList
-                sidebarDisplayContent={props.displayContent.sidebarDisplayContent}
-                certifications={props.certifications}
-                fundings={props.fundings}
-              />
-            }
-            certifications={props.certifications}
-            fundings={props.fundings}
-          />
-        )}
-        <>{ProfileUpdatedAlert}</>
-        <>{CalendarAlert}</>
-        <>{CertificationsAlert}</>
-        <>{FundingAlert}</>
-        <>{HiddenTasksAlert}</>
-        <>{DeferredQuestionAnsweredAlert}</>
-      </main>
-    </PageSkeleton>
+    <MunicipalitiesContext.Provider value={{ municipalities: props.municipalities }}>
+      <PageSkeleton>
+        <NavBar />
+        <main id="main">
+          {!userData || userData?.formProgress !== "COMPLETED" ? (
+            <div className="margin-top-3 desktop:margin-top-0 padding-top-0 desktop:padding-top-6 padding-bottom-15">
+              <LoadingIndicator />
+            </div>
+          ) : isDesktopAndUp ? (
+            <RightSidebarPageLayout
+              mainContent={renderRoadmap}
+              sidebarContent={
+                <SidebarCardsList
+                  sidebarDisplayContent={props.displayContent.sidebarDisplayContent}
+                  certifications={props.certifications}
+                  fundings={props.fundings}
+                />
+              }
+            />
+          ) : (
+            <TwoTabDashboardLayout
+              firstTab={renderRoadmap}
+              secondTab={
+                <SidebarCardsList
+                  sidebarDisplayContent={props.displayContent.sidebarDisplayContent}
+                  certifications={props.certifications}
+                  fundings={props.fundings}
+                />
+              }
+              certifications={props.certifications}
+              fundings={props.fundings}
+            />
+          )}
+          <>{ProfileUpdatedAlert}</>
+          <>{CalendarAlert}</>
+          <>{CertificationsAlert}</>
+          <>{FundingAlert}</>
+          <>{HiddenTasksAlert}</>
+          <>{DeferredQuestionAnsweredAlert}</>
+        </main>
+      </PageSkeleton>
+    </MunicipalitiesContext.Provider>
   );
 };
 
-export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => {
+export const getStaticProps = (): GetStaticPropsResult<Props> => {
   return {
     props: {
       displayContent: loadRoadmapDisplayContent(),
       operateReferences: loadOperateReferences(),
       fundings: loadAllFundings(),
       certifications: loadAllCertifications(),
+      municipalities: loadAllMunicipalities(),
     },
   };
 };

@@ -1,13 +1,15 @@
 import { BusinessFormation } from "@/components/tasks/business-formation/BusinessFormation";
 import { LookupStepIndexByName } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
+import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import * as api from "@/lib/api-client/apiClient";
+import * as buildUserRoadmap from "@/lib/roadmap/buildUserRoadmap";
 import { FormationDisplayContentMap, NameAvailability, Task } from "@/lib/types/types";
 import {
   generateFormationAddress,
   generateFormationData,
-  generateMunicipality,
   generateNameAvailability,
   generateProfileData,
+  generateRoadmap,
   generateStateInput,
   generateTask,
   generateUserData,
@@ -49,12 +51,14 @@ export const generateFormationProfileData = (data: Partial<ProfileData>): Profil
 };
 
 export const useSetupInitialMocks = () => {
+  const mockBuildUserRoadmap = buildUserRoadmap as jest.Mocked<typeof buildUserRoadmap>;
   useMockRoadmap({});
   useMockRouter({});
   setupStatefulUserDataContext();
   useMockDocuments({});
   mockApiResponse();
   setDesktopScreen(true);
+  mockBuildUserRoadmap.buildUserRoadmap.mockResolvedValue(generateRoadmap({}));
 };
 
 export const preparePage = (
@@ -63,9 +67,7 @@ export const preparePage = (
   municipalities?: Municipality[],
   task?: Task
 ): FormationPageHelpers => {
-  const genericTown =
-    userData.profileData?.municipality ?? generateMunicipality({ displayName: "GenericTown" });
-  const profileData = generateFormationProfileData({ ...userData.profileData, municipality: genericTown });
+  const profileData = generateFormationProfileData({ ...userData.profileData });
   const initialUserData = generateUserData({
     ...userData,
     profileData,
@@ -74,16 +76,17 @@ export const preparePage = (
       profileData.legalStructureId as FormationLegalType
     ),
   });
+
+  const municipalitiesValue = municipalities ?? [];
+
   render(
-    <WithStatefulUserData initialUserData={initialUserData}>
-      <ThemeProvider theme={createTheme()}>
-        <BusinessFormation
-          task={task ?? generateTask({})}
-          displayContent={displayContent}
-          municipalities={municipalities ? [genericTown, ...municipalities] : [genericTown]}
-        />
-      </ThemeProvider>
-    </WithStatefulUserData>
+    <MunicipalitiesContext.Provider value={{ municipalities: municipalitiesValue }}>
+      <WithStatefulUserData initialUserData={initialUserData}>
+        <ThemeProvider theme={createTheme()}>
+          <BusinessFormation task={task ?? generateTask({})} displayContent={displayContent} />
+        </ThemeProvider>
+      </WithStatefulUserData>
+    </MunicipalitiesContext.Provider>
   );
   return createFormationPageHelpers();
 };

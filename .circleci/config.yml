@@ -92,8 +92,10 @@ commands:
           name: Start services
           command: yarn workspace @businessnjgovnavigator/api start & yarn workspace @businessnjgovnavigator/api start:wiremock & yarn workspace @businessnjgovnavigator/web start
           background: true
+          no_output_timeout: 30m
       - run:
           name: Run Tests
+          no_output_timeout: 30m
           command: yarn cypress:run --browser=<< parameters.browser >> --record=<< parameters.enable-dashboard >> --env SUITE=<< parameters.suite >>
           working_directory: web
       - store_test_results:
@@ -714,6 +716,18 @@ workflows:
           requires:
             - build
       - integration-tests:
+          name: Integration Tests - Group 5
+          suite: group5
+          filters:
+            branches:
+              ignore:
+                - main
+                - /^release-.*/
+                - /^staging-.*/
+                - /^cms/.*/
+          requires:
+            - build
+      - integration-tests:
           name: Integration Tests - Group 1
           enable-dashboard: true
           suite: group1
@@ -747,6 +761,16 @@ workflows:
           name: Integration Tests - Group 4
           enable-dashboard: true
           suite: group4
+          filters:
+            branches:
+              only:
+                - main
+          requires:
+            - build
+      - integration-tests:
+          name: Integration Tests - Group 5
+          enable-dashboard: true
+          suite: group5
           filters:
             branches:
               only:
@@ -823,6 +847,12 @@ workflows:
           browser: edge
           requires:
             - build
+      - integration-tests:
+          name: Integration Tests - Edge - Group 5
+          suite: group5
+          browser: edge
+          requires:
+            - build
       # firefox integration tests
       - integration-tests:
           name: Integration Tests - Firefox - Group 1
@@ -845,6 +875,12 @@ workflows:
       - integration-tests:
           name: Integration Tests - Firefox - Group 4
           suite: group4
+          browser: firefox
+          requires:
+            - build
+      - integration-tests:
+          name: Integration Tests - Firefox - Group 5
+          suite: group5
           browser: firefox
           requires:
             - build

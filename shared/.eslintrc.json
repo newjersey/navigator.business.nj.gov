@@ -28,7 +28,7 @@
       }
     ],
     "curly": "error",
-    "arrow-body-style": ["error", "always"]
+    "arrow-body-style": ["warn", "always"]
   },
   "overrides": [
     {

@@ -1,9 +1,11 @@
 import { SidebarCardFormationNudge } from "@/components/dashboard/SidebarCardFormationNudge";
 import { getMergedConfig } from "@/contexts/configContext";
+import * as buildUserRoadmap from "@/lib/roadmap/buildUserRoadmap";
 import { SidebarCardContent } from "@/lib/types/types";
 import {
   generatePreferences,
   generateProfileData,
+  generateRoadmap,
   generateSidebarCardContent,
   generateUserData,
 } from "@/test/factories";
@@ -27,6 +29,10 @@ jest.mock("@/lib/data-hooks/useRoadmap", () => {
 jest.mock("next/router", () => {
   return { useRouter: jest.fn() };
 });
+jest.mock("@/lib/roadmap/buildUserRoadmap", () => {
+  return { buildUserRoadmap: jest.fn() };
+});
+const mockBuildUserRoadmap = buildUserRoadmap as jest.Mocked<typeof buildUserRoadmap>;
 
 const Config = getMergedConfig();
 
@@ -47,6 +53,7 @@ describe("<SidebarCardFormationNudge />", () => {
       useMockRouter({});
       setupStatefulUserDataContext();
       card = generateSidebarCardContent({ id: "formation-nudge" });
+      mockBuildUserRoadmap.buildUserRoadmap.mockResolvedValue(generateRoadmap({}));
     });
 
     it("opens the modal when the user clicks the formation nudge", () => {
@@ -85,8 +92,9 @@ describe("<SidebarCardFormationNudge />", () => {
           [formationTaskId]: "COMPLETED",
         },
       };
-
-      expect(currentUserData()).toEqual(updatedUserData);
+      await waitFor(() => {
+        expect(currentUserData()).toEqual(updatedUserData);
+      });
       expect(screen.queryByTestId(Config.formationDateModal.header)).not.toBeInTheDocument();
       await waitFor(() => {
         return expect(mockPush).toHaveBeenCalledWith({ query: { fromForming: "true" } }, undefined, {

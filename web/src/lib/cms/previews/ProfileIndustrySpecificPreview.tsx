@@ -46,7 +46,6 @@ const ProfilePreviewIndustrySpecific = (props: PreviewProps) => {
             state: {
               profileData: createEmptyProfileData(),
               flow: businessPersona || "STARTING",
-              municipalities: [],
             },
             setUser: () => {},
             setProfileData: () => {},

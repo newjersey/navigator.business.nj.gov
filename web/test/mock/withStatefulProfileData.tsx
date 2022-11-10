@@ -39,7 +39,6 @@ export const WithStatefulProfileData = ({
           page: 1,
           user: createEmptyUser(),
           flow: getFlow(genericData),
-          municipalities: [],
           profileData: genericData,
         },
         onBack: jest.fn(),

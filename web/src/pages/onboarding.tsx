@@ -8,6 +8,7 @@ import { OnboardingButtonGroup } from "@/components/onboarding/OnboardingButtonG
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { AuthContext } from "@/contexts/authContext";
+import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { RoadmapContext } from "@/contexts/roadmapContext";
 import * as api from "@/lib/api-client/apiClient";
@@ -113,9 +114,13 @@ const OnboardingPage = (props: Props): ReactElement => {
       };
     };
 
-    const requiresPublicFiling = LookupLegalStructureById(profileData.legalStructureId).requiresPublicFiling;
-    if (!requiresPublicFiling) {
-      removePageFromFlow("date-and-entity-id-for-public-filing", "OWNING");
+    if (profileData.legalStructureId) {
+      const requiresPublicFiling = LookupLegalStructureById(
+        profileData.legalStructureId
+      ).requiresPublicFiling;
+      if (!requiresPublicFiling) {
+        removePageFromFlow("date-and-entity-id-for-public-filing", "OWNING");
+      }
     }
 
     if (profileData.businessPersona === "FOREIGN" && profileData.foreignBusinessType !== "NEXUS") {
@@ -193,7 +198,8 @@ const OnboardingPage = (props: Props): ReactElement => {
 
   const pageQueryParamisValid = (userData: UserData, page: number): boolean => {
     const hasAnsweredBusinessPersona = userData?.profileData.businessPersona !== undefined;
-    const requestedPageIsInRange = page <= onboardingFlows[currentFlow].pages.length && page > 0;
+    const flow = getFlow(userData);
+    const requestedPageIsInRange = page <= onboardingFlows[flow].pages.length && page > 0;
 
     return hasAnsweredBusinessPersona && requestedPageIsInRange;
   };
@@ -402,101 +408,100 @@ const OnboardingPage = (props: Props): ReactElement => {
   };
 
   return (
-    <ProfileDataContext.Provider
-      value={{
-        state: {
-          page: page.current,
-          profileData: profileData,
-          user: user,
-          flow: currentFlow,
-          municipalities: props.municipalities,
-        },
-        setProfileData,
-        setUser,
-        onBack,
-      }}
-    >
-      <NextSeo
-        title={`Business.NJ.gov Navigator - ${
-          Config.onboardingDefaults.pageTitle
-        } ${evalHeaderStepsTemplate()} `}
-      />
-      <PageSkeleton>
-        <NavBar />
-        <main className="usa-section padding-top-0 desktop:padding-top-8" id="main">
-          <SingleColumnContainer isSmallerWidth>
-            {header()}
-            {!isLargeScreen && <hr />}
-            {error && (
-              <Alert dataTestid={`error-alert-${error}`} variant="error">
-                {OnboardingErrorLookup[error]}
-              </Alert>
-            )}
-            {alert && (
-              <SnackbarAlert
-                variant={OnboardingStatusLookup()[alert].variant}
-                isOpen={alert !== undefined}
-                close={() => {
-                  return setAlert(undefined);
-                }}
-                dataTestid={`snackbar-alert-${alert}`}
-                heading={OnboardingStatusLookup()[alert].header}
-              >
-                <>
-                  {OnboardingStatusLookup()[alert].body}
-                  {OnboardingStatusLookup()[alert] && (
-                    <Link href={ROUTES.dashboard}>
-                      <a href={ROUTES.dashboard} data-testid={`snackbar-link`}>
-                        {OnboardingStatusLookup()[alert].link}
-                      </a>
-                    </Link>
-                  )}
-                </>
-              </SnackbarAlert>
-            )}
-
-            <UserDataErrorAlert />
-          </SingleColumnContainer>
-          <div className="slide-container">
-            {onboardingFlows[currentFlow].pages.map((onboardingPage, index) => {
-              return (
-                <CSSTransition
-                  key={index}
-                  in={page.current === index + 1}
-                  unmountOnExit
-                  timeout={getTimeout(index + 1)}
-                  classNames={`width-100 ${getAnimation()}`}
+    <MunicipalitiesContext.Provider value={{ municipalities: props.municipalities }}>
+      <ProfileDataContext.Provider
+        value={{
+          state: {
+            page: page.current,
+            profileData: profileData,
+            user: user,
+            flow: currentFlow,
+          },
+          setProfileData,
+          setUser,
+          onBack,
+        }}
+      >
+        <NextSeo
+          title={`Business.NJ.gov Navigator - ${
+            Config.onboardingDefaults.pageTitle
+          } ${evalHeaderStepsTemplate()} `}
+        />
+        <PageSkeleton>
+          <NavBar />
+          <main className="usa-section padding-top-0 desktop:padding-top-8" id="main">
+            <SingleColumnContainer isSmallerWidth>
+              {header()}
+              {!isLargeScreen && <hr />}
+              {error && (
+                <Alert dataTestid={`banner-alert-${error}`} variant="error">
+                  {OnboardingErrorLookup[error]}
+                </Alert>
+              )}
+              {alert && (
+                <SnackbarAlert
+                  variant={OnboardingStatusLookup()[alert].variant}
+                  isOpen={alert !== undefined}
+                  close={() => {
+                    return setAlert(undefined);
+                  }}
+                  dataTestid={`snackbar-alert-${alert}`}
+                  heading={OnboardingStatusLookup()[alert].header}
                 >
-                  <SingleColumnContainer isSmallerWidth>
-                    <form
-                      onSubmit={onSubmit}
-                      className={`usa-prose onboarding-form margin-top-2`}
-                      data-testid={`page-${index + 1}-form`}
-                    >
-                      {onboardingPage.component}
-                      <hr className="margin-top-6 margin-bottom-4" aria-hidden={true} />
-                      <DevOnlySkipOnboardingButton setPage={setPage} routeToPage={routeToPage} />
-                      <OnboardingButtonGroup
-                        isFinal={page.current === onboardingFlows[currentFlow].pages.length}
-                      />
-                    </form>
-                  </SingleColumnContainer>
-                </CSSTransition>
-              );
-            })}
-          </div>
-        </main>
-      </PageSkeleton>
-    </ProfileDataContext.Provider>
+                  <>
+                    {OnboardingStatusLookup()[alert].body}
+                    {OnboardingStatusLookup()[alert] && (
+                      <Link href={ROUTES.dashboard}>
+                        <a href={ROUTES.dashboard} data-testid={`snackbar-link`}>
+                          {OnboardingStatusLookup()[alert].link}
+                        </a>
+                      </Link>
+                    )}
+                  </>
+                </SnackbarAlert>
+              )}
+
+              <UserDataErrorAlert />
+            </SingleColumnContainer>
+            <div className="slide-container">
+              {onboardingFlows[currentFlow].pages.map((onboardingPage, index) => {
+                return (
+                  <CSSTransition
+                    key={index}
+                    in={page.current === index + 1}
+                    unmountOnExit
+                    timeout={getTimeout(index + 1)}
+                    classNames={`width-100 ${getAnimation()}`}
+                  >
+                    <SingleColumnContainer isSmallerWidth>
+                      <form
+                        onSubmit={onSubmit}
+                        className={`usa-prose onboarding-form margin-top-2`}
+                        data-testid={`page-${index + 1}-form`}
+                      >
+                        {onboardingPage.component}
+                        <hr className="margin-top-6 margin-bottom-4" aria-hidden={true} />
+                        <DevOnlySkipOnboardingButton setPage={setPage} routeToPage={routeToPage} />
+                        <OnboardingButtonGroup
+                          isFinal={page.current === onboardingFlows[currentFlow].pages.length}
+                        />
+                      </form>
+                    </SingleColumnContainer>
+                  </CSSTransition>
+                );
+              })}
+            </div>
+          </main>
+        </PageSkeleton>
+      </ProfileDataContext.Provider>
+    </MunicipalitiesContext.Provider>
   );
 };
 
-export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => {
-  const municipalities = await loadAllMunicipalities();
-
+export const getStaticProps = (): GetStaticPropsResult<Props> => {
   return {
     props: {
-      municipalities,
+      municipalities: loadAllMunicipalities(),
     },
   };
 };

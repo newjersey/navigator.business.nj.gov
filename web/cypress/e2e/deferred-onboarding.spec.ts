@@ -2,19 +2,150 @@
 /* eslint-disable testing-library/await-async-utils */
 
 import {
+  clickDeferredSaveButton,
   completeExistingBusinessOnboarding,
   completeForeignBusinessOnboarding,
   completeForeignNexusBusinessOnboarding,
   completeNewBusinessOnboarding,
   randomHomeBasedIndustry,
   randomNonHomeBasedIndustry,
+  randomPublicFilingLegalStructure,
 } from "../support/helpers";
 import { onDashboardPage } from "../support/page_objects/dashboardPage";
 import { onProfilePage } from "../support/page_objects/profilePage";
 
-describe("Deferred Onboarding [feature] [all] [group1]", () => {
+describe("Deferred Onboarding [feature] [all] [group5]", () => {
   beforeEach(() => {
     cy.loginByCognitoApi();
+  });
+
+  describe("deferred location", () => {
+    describe("onboarded as STARTING - PublicFiling", () => {
+      const testLocationInThreePlaces = () => {
+        it("can provide location in Location-Dependent task", () => {
+          goToMercantileTask();
+          selectLocation("Allendale");
+          clickDeferredSaveButton();
+
+          expectLocationSuccessBanner("Allendale");
+          expectLocationSpecificContentInTask("Allendale");
+          navigateBackToDashboard();
+          expectLocationQuestionIsCompletedInProfile("Allendale");
+        });
+
+        // TODO: fix this once we fix the flakey date-of-formation issue
+        // it("can provide location in Formation Date Modal", () => {
+        //   openFormationDateModal();
+        //   selectDate("04/2021");
+        //   selectLocation("Allendale");
+        //   clickModalSaveButton();
+        //
+        //   goToMercantileTask();
+        //   expectLocationSpecificContentInTask("Allendale");
+        //   navigateBackToDashboard();
+        //   expectLocationQuestionIsCompletedInProfile("Allendale");
+        // });
+
+        it("can provide location in profile", () => {
+          goToProfile();
+          selectLocation("Allendale");
+          onProfilePage.clickSaveButton();
+
+          goToMercantileTask();
+          expectLocationSpecificContentInTask("Allendale");
+        });
+      };
+
+      describe("when home-based business question does not exist", () => {
+        beforeEach(() => {
+          completeNewBusinessOnboarding({
+            industry: randomNonHomeBasedIndustry(),
+            legalStructureId: randomPublicFilingLegalStructure(),
+          });
+        });
+
+        testLocationInThreePlaces();
+      });
+
+      describe("when we answer No to home-based business question immediately", () => {
+        beforeEach(() => {
+          completeNewBusinessOnboarding({
+            industry: randomHomeBasedIndustry(),
+            legalStructureId: randomPublicFilingLegalStructure(),
+          });
+
+          selectHomeBased(false);
+        });
+
+        testLocationInThreePlaces();
+      });
+
+      describe("when we answer No to home-based business question after providing location", () => {
+        beforeEach(() => {
+          completeNewBusinessOnboarding({
+            industry: randomHomeBasedIndustry(),
+            legalStructureId: randomPublicFilingLegalStructure(),
+          });
+        });
+
+        // todo: fix when dateOfFormation bug resolved
+        // it("can provide location in Formation Date Modal", () => {
+        //   openFormationDateModal();
+        //   selectDate("04/2021");
+        //   selectLocation("Allendale");
+        //   clickModalSaveButton();
+        //
+        //   selectHomeBased(false);
+        //
+        //   goToMercantileTask();
+        //   expectLocationSpecificContentInTask("Allendale");
+        //   navigateBackToDashboard();
+        //   expectLocationQuestionIsCompletedInProfile("Allendale");
+        // });
+
+        it("can provide location in profile", () => {
+          goToProfile();
+          selectLocation("Allendale");
+          onProfilePage.clickSaveButton();
+          cy.url().should("contain", "/dashboard");
+          onProfilePage.getLocationDropdown().should("not.exist");
+
+          selectHomeBased(false);
+
+          goToMercantileTask();
+          expectLocationSpecificContentInTask("Allendale");
+        });
+      });
+    });
+    //
+    // describe('onboarded as STARTING - TradeName', () => {
+    //   it('can provide location in Location-Dependent task', () => {
+    //
+    //   })
+    //
+    //   it('can provide location in Registered For Taxes Modal', () => {
+    //
+    //   })
+    //
+    //   it('can provide location in profile', () => {
+    //
+    //   })
+    // });
+    //
+    // describe('onboarded as FOREIGN NEXUS - PublicFiling', () => {
+    //
+    // });
+    //
+    // describe('onboarded as FOREIGN NEXUS - TradeName', () => {
+    //
+    // });
+    //
+    describe("onboarded as OWNING", () => {
+      it("answers location question as part of onboarding", () => {
+        completeExistingBusinessOnboarding({ townDisplayName: "Allendale" });
+        expectLocationQuestionIsCompletedInProfile("Allendale");
+      });
+    });
   });
 
   describe("home-based business", () => {
@@ -109,13 +240,17 @@ describe("Deferred Onboarding [feature] [all] [group1]", () => {
     onProfilePage.getHomeBased().should("not.exist");
   };
 
-  const showsAndAnswersHomeBasedBusinessQuestionOnDashboard = () => {
+  const selectHomeBased = (value: boolean) => {
     onDashboardPage.getHomeBased().should("exist");
-    onDashboardPage.selectHomeBased(true);
-    onDashboardPage.clickDeferredSaveButton();
+    onDashboardPage.selectHomeBased(value);
+    clickDeferredSaveButton();
+    cy.wait(1000);
 
     onDashboardPage.getHomeBased().should("not.exist");
-    cy.wait(1000);
+  };
+
+  const showsAndAnswersHomeBasedBusinessQuestionOnDashboard = () => {
+    selectHomeBased(true);
 
     onDashboardPage.clickEditProfileLink();
     cy.url().should("contain", "/profile");
@@ -125,4 +260,50 @@ describe("Deferred Onboarding [feature] [all] [group1]", () => {
     onProfilePage.getHomeBased(true).should("be.checked");
     onProfilePage.getHomeBased(false).should("not.be.checked");
   };
+
+  const goToProfile = () => {
+    onDashboardPage.clickEditProfileLink();
+    cy.url().should("contain", "/profile");
+    cy.wait(1000);
+  };
+
+  const expectLocationQuestionIsCompletedInProfile = (townDisplayName: string) => {
+    goToProfile();
+    onProfilePage.getLocationDropdown().invoke("prop", "value").should("contain", townDisplayName);
+  };
+
+  const goToMercantileTask = () => {
+    cy.get('[data-task="check-local-requirements"]').click({ force: true });
+  };
+
+  const selectLocation = (townDisplayName: string) => {
+    cy.get('[data-testid="municipality"]').type(townDisplayName);
+    cy.get("#municipality-option-0").click({ force: true });
+  };
+
+  const expectLocationSuccessBanner = (townDisplayName: string) => {
+    cy.get(`[data-testid="city-success-banner"]`).should("contain", townDisplayName);
+  };
+
+  const expectLocationSpecificContentInTask = (townDisplayName: string) => {
+    cy.get('[data-testid="deferred-location-task"]').find(".usa-link").should("have.length", 2);
+    cy.get('[data-testid="deferred-location-task"] .usa-link').first().should("contain", townDisplayName);
+  };
+
+  const navigateBackToDashboard = () => {
+    return cy.get(`[data-testid="back-to-dashboard"]`).click();
+  };
+
+  // const openFormationDateModal = () => {
+  //   cy.get('[data-testid="cta-formation-nudge"]').click();
+  // };
+  //
+  // const selectDate = (monthYear: string) => {
+  //   cy.chooseDatePicker('[name="dateOfFormation"]', monthYear);
+  // };
+  //
+  // const clickModalSaveButton = () => {
+  //   cy.get('[data-testid="modal-button-primary"]').click();
+  //   cy.wait(1000);
+  // };
 });

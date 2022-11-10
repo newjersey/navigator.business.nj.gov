@@ -23,7 +23,6 @@ const renderComponent = (profileData: Partial<ProfileData>) => {
         state: {
           profileData: data,
           flow: getFlow(data),
-          municipalities: [],
         },
         setProfileData: () => {},
         setUser: () => {},

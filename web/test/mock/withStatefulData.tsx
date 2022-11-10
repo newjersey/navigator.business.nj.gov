@@ -58,6 +58,13 @@ export const WithStatefulData = (spy: jest.Mock) => {
       <UpdateQueueContext.Provider value={{ updateQueue, setUpdateQueue }}>
         <StatefulDataContext.Provider value={{ genericData, update }}>
           {children}
+          <button
+            onClick={() => {
+              return updateQueue?.update();
+            }}
+          >
+            trigger queue update
+          </button>
         </StatefulDataContext.Provider>
       </UpdateQueueContext.Provider>
     );

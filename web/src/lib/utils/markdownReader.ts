@@ -111,6 +111,7 @@ type TaskGrayMatter = {
   required?: boolean;
   issuingAgency?: string;
   formName?: string;
+  requiresLocation?: boolean;
 };
 
 type FundingGrayMatter = {

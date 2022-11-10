@@ -3,6 +3,7 @@ import * as useUserModule from "@/lib/data-hooks/useUserData";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { StatefulDataContext, statefulDataHelpers, WithStatefulData } from "@/test/mock/withStatefulData";
 import { UserData } from "@businessnjgovnavigator/shared/";
+import { fireEvent, screen } from "@testing-library/react";
 import { ReactElement, ReactNode, useContext } from "react";
 
 const updateSpy = jest.fn();
@@ -16,6 +17,10 @@ export const currentUserData = helpers.currentData as () => UserData;
 export const userDataWasNotUpdated = helpers.dataWasNotUpdated;
 
 export const userDataUpdatedNTimes = helpers.dataUpdatedNTimes;
+
+export const triggerQueueUpdate = () => {
+  fireEvent.click(screen.getByText("trigger queue update"));
+};
 
 export const WithStatefulUserData = ({
   children,

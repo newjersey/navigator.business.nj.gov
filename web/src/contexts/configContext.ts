@@ -5,6 +5,7 @@ import * as CannabisLicenseTab1 from "@businessnjgovnavigator/content/fieldConfi
 import * as CannabisPriorityStatusTab1 from "@businessnjgovnavigator/content/fieldConfig/cannabis-priority-status-tab1.json";
 import * as CannabisPriorityStatusTab2 from "@businessnjgovnavigator/content/fieldConfig/cannabis-priority-status-tab2.json";
 import * as ConfigOriginal from "@businessnjgovnavigator/content/fieldConfig/config.json";
+import * as DeferredLocation from "@businessnjgovnavigator/content/fieldConfig/deferred-location.json";
 import * as Ein from "@businessnjgovnavigator/content/fieldConfig/ein.json";
 import * as FormationInterimSuccessPage from "@businessnjgovnavigator/content/fieldConfig/formation-interim-success-page.json";
 import * as FormationSuccessPage from "@businessnjgovnavigator/content/fieldConfig/formation-success-page.json";
@@ -70,7 +71,8 @@ const merged = JSON.parse(
       CannabisLicenseEligibilityModal,
       FormationInterimSuccessPage,
       FormationSuccessPage,
-      PageNotFoundError
+      PageNotFoundError,
+      DeferredLocation
     )
   )
 );
@@ -107,7 +109,8 @@ export type ConfigType = typeof ConfigOriginal &
   typeof CannabisLicenseEligibilityModal &
   typeof FormationInterimSuccessPage &
   typeof FormationSuccessPage &
-  typeof PageNotFoundError;
+  typeof PageNotFoundError &
+  typeof DeferredLocation;
 
 export const getMergedConfig = (): ConfigType => {
   return merge(
@@ -143,7 +146,8 @@ export const getMergedConfig = (): ConfigType => {
     CannabisLicenseEligibilityModal,
     FormationInterimSuccessPage,
     FormationSuccessPage,
-    PageNotFoundError
+    PageNotFoundError,
+    DeferredLocation
   );
 };
 
