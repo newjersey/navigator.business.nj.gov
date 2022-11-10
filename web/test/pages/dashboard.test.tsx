@@ -6,6 +6,7 @@ import { Certification, Funding, OperateReference, SidebarCardContent } from "@/
 import { getFlow } from "@/lib/utils/helpers";
 import DashboardPage from "@/pages/dashboard";
 import {
+  generateBusinessPersona,
   generatePreferences,
   generateProfileData,
   generateSidebarCardContent,
@@ -33,6 +34,7 @@ import {
   RegistrationStatus,
   UserData,
 } from "@businessnjgovnavigator/shared";
+import { OperatingPhase } from "@businessnjgovnavigator/shared/src/operatingPhase";
 import * as materialUi from "@mui/material";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import { act, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
@@ -428,7 +430,7 @@ describe("dashboard page", () => {
 
   it("does not render HideableTasks for operating phases that don't display HideableRoadmapTasks", () => {
     const randomOperatingPhase = randomElementFromArray(
-      OperatingPhases.filter((obj) => {
+      (OperatingPhases as OperatingPhase[]).filter((obj) => {
         return !obj.displayHideableRoadmapTasks;
       })
     );
@@ -441,7 +443,7 @@ describe("dashboard page", () => {
 
   it("renders HideableTasks for operating phases that display HideableRoadmapTasks", () => {
     const randomOperatingPhase = randomElementFromArray(
-      OperatingPhases.filter((obj) => {
+      (OperatingPhases as OperatingPhase[]).filter((obj) => {
         return obj.displayHideableRoadmapTasks;
       })
     );
@@ -469,18 +471,28 @@ describe("dashboard page", () => {
   });
 
   describe("deferred onboarding question", () => {
-    it("shows home-based business question when applicable to industry and not yet answered", () => {
+    it("shows home-based business question with default description when applicable to industry and not yet answered", () => {
+      const defaultDescOperatingPhases = OperatingPhases.filter((phase: OperatingPhase) => {
+        return phase.displayAltHomeBasedBusinessDescription === false;
+      });
+
       const userData = generateUserData({
         profileData: generateProfileData({
           industryId: randomHomeBasedIndustry(),
           homeBasedBusiness: undefined,
+          businessPersona: generateBusinessPersona(),
+          operatingPhase: randomElementFromArray(defaultDescOperatingPhases as OperatingPhase[]).id,
         }),
       });
       useMockUserData(userData);
+
       renderDashboardPage({});
       expect(
         screen.getByText(Config.profileDefaults[getFlow(userData)].homeBasedBusiness.description)
       ).toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.profileDefaults[getFlow(userData)].homeBasedBusiness.altDescription)
+      ).not.toBeInTheDocument();
     });
 
     it("does not show home-based business question when already answered", () => {
@@ -494,6 +506,9 @@ describe("dashboard page", () => {
       renderDashboardPage({});
       expect(
         screen.queryByText(Config.profileDefaults[getFlow(userData)].homeBasedBusiness.description)
+      ).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.profileDefaults[getFlow(userData)].homeBasedBusiness.altDescription)
       ).not.toBeInTheDocument();
     });
 
@@ -509,6 +524,32 @@ describe("dashboard page", () => {
       expect(
         screen.queryByText(Config.profileDefaults[getFlow(userData)].homeBasedBusiness.description)
       ).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.profileDefaults[getFlow(userData)].homeBasedBusiness.altDescription)
+      ).not.toBeInTheDocument();
+    });
+
+    it("shows home-based business question with alt description when applicable to industry and not yet answered", () => {
+      const altDescOperatingPhases = OperatingPhases.filter((phase: OperatingPhase) => {
+        return phase.displayAltHomeBasedBusinessDescription === true;
+      });
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          industryId: randomHomeBasedIndustry(),
+          homeBasedBusiness: undefined,
+          businessPersona: generateBusinessPersona(),
+          operatingPhase: randomElementFromArray(altDescOperatingPhases as OperatingPhase[]).id,
+        }),
+      });
+      useMockUserData(userData);
+
+      renderDashboardPage({});
+      expect(
+        screen.queryByText(Config.profileDefaults[getFlow(userData)].homeBasedBusiness.description)
+      ).not.toBeInTheDocument();
+      expect(
+        screen.getByText(Config.profileDefaults[getFlow(userData)].homeBasedBusiness.altDescription)
+      ).toBeInTheDocument();
     });
 
     it("sets homeBasedBusiness in profile and removes question when radio is selected", async () => {

@@ -8,6 +8,7 @@ import { useContext } from "react";
 
 interface Props {
   fieldName: ProfileContentField;
+  isAltDescriptionDisplayed?: boolean;
 }
 
 export const FieldLabelDeferred = (props: Props) => {
@@ -15,10 +16,11 @@ export const FieldLabelDeferred = (props: Props) => {
   const { state } = useContext(ProfileDataContext);
 
   const description = (Config.profileDefaults[state.flow][props.fieldName] as any).description;
+  const altDescription = (Config.profileDefaults[state.flow][props.fieldName] as any).altDescription;
 
   return (
     <>
-      <Content>{description}</Content>
+      <Content>{props.isAltDescriptionDisplayed ? altDescription : description}</Content>
     </>
   );
 };
