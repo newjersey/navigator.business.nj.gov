@@ -6,6 +6,7 @@ import { ProfileTabs } from "@/lib/types/types";
 import { getFlow, templateEval } from "@/lib/utils/helpers";
 import Profile from "@/pages/profile";
 import {
+  generateBusinessPersona,
   generateFormationData,
   generateGetFilingResponse,
   generateMunicipality,
@@ -18,7 +19,7 @@ import {
   randomIndustry,
   randomNonHomeBasedIndustry,
 } from "@/test/factories";
-import { markdownToText, withAuthAlert, withRoadmap } from "@/test/helpers";
+import { markdownToText, randomElementFromArray, withAuthAlert, withRoadmap } from "@/test/helpers";
 import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { setMockDocumentsResponse, useMockDocuments } from "@/test/mock/mockUseDocuments";
@@ -38,6 +39,8 @@ import {
   LookupOwnershipTypeById,
   LookupSectorTypeById,
   Municipality,
+  OperatingPhase,
+  OperatingPhases,
   ProfileData,
   randomInt,
   UserData,
@@ -1328,15 +1331,67 @@ describe("profile", () => {
   });
 
   it("does not show the home-based question if not applicable to industry", () => {
-    renderPage({
-      userData: generateUserData({
-        profileData: generateProfileData({
-          industryId: randomNonHomeBasedIndustry(),
-          businessPersona: "STARTING",
-        }),
+    const userData = generateUserData({
+      profileData: generateProfileData({
+        industryId: randomNonHomeBasedIndustry(),
+        businessPersona: "STARTING",
       }),
     });
-    expect(screen.queryByText("Home-based business")).not.toBeInTheDocument();
+    renderPage({ userData });
+
+    expect(
+      screen.queryByText(Config.profileDefaults[getFlow(userData)].homeBasedBusiness.description)
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.profileDefaults[getFlow(userData)].homeBasedBusiness.altDescription)
+    ).not.toBeInTheDocument();
+  });
+
+  it("shows home-based business question with default description when applicable to industry", () => {
+    const defaultDescOperatingPhases = OperatingPhases.filter((phase: OperatingPhase) => {
+      return phase.displayAltHomeBasedBusinessDescription === false;
+    });
+
+    const userData = generateUserData({
+      profileData: generateProfileData({
+        industryId: randomHomeBasedIndustry(),
+        businessPersona: generateBusinessPersona(),
+        operatingPhase: randomElementFromArray(defaultDescOperatingPhases as OperatingPhase[]).id,
+        nexusLocationInNewJersey: false,
+      }),
+    });
+
+    renderPage({ userData });
+
+    expect(
+      screen.getByText(Config.profileDefaults[getFlow(userData)].homeBasedBusiness.description)
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.profileDefaults[getFlow(userData)].homeBasedBusiness.altDescription)
+    ).not.toBeInTheDocument();
+  });
+
+  it("shows home-based business question with alt description when applicable to industry", () => {
+    const altDescOperatingPhases = OperatingPhases.filter((phase: OperatingPhase) => {
+      return phase.displayAltHomeBasedBusinessDescription === true;
+    });
+    const userData = generateUserData({
+      profileData: generateProfileData({
+        industryId: randomHomeBasedIndustry(),
+        businessPersona: generateBusinessPersona(),
+        operatingPhase: randomElementFromArray(altDescOperatingPhases as OperatingPhase[]).id,
+        nexusLocationInNewJersey: false,
+      }),
+    });
+
+    renderPage({ userData });
+
+    expect(
+      screen.queryByText(Config.profileDefaults[getFlow(userData)].homeBasedBusiness.description)
+    ).not.toBeInTheDocument();
+    expect(
+      screen.getByText(Config.profileDefaults[getFlow(userData)].homeBasedBusiness.altDescription)
+    ).toBeInTheDocument();
   });
 
   it("does not show the home-based question if FOREIGN locationInNewJersey=true, even if industry applicable", () => {

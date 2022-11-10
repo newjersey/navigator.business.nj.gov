@@ -1,4 +1,4 @@
-interface OperatingPhase {
+export interface OperatingPhase {
   readonly id: OperatingPhaseId;
   readonly displayCompanyDemographicProfileFields: boolean;
   readonly displayCertifications: boolean;
@@ -8,6 +8,7 @@ interface OperatingPhase {
   readonly displayCalendarToggleButton: boolean;
   readonly displayRoadmapTasks: boolean;
   readonly displayHideableRoadmapTasks: boolean;
+  readonly displayAltHomeBasedBusinessDescription: boolean;
 }
 
 export type OperatingPhaseId =
@@ -34,6 +35,7 @@ export const LookupOperatingPhaseById = (id: OperatingPhaseId | undefined): Oper
       displayCalendarToggleButton: false,
       displayRoadmapTasks: false,
       displayHideableRoadmapTasks: false,
+      displayAltHomeBasedBusinessDescription: false,
     }
   );
 };
@@ -49,6 +51,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displayCalendarToggleButton: false,
     displayRoadmapTasks: true,
     displayHideableRoadmapTasks: false,
+    displayAltHomeBasedBusinessDescription: true,
   },
   {
     id: "GUEST_MODE_OWNING",
@@ -60,6 +63,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displayCalendarToggleButton: true,
     displayRoadmapTasks: false,
     displayHideableRoadmapTasks: false,
+    displayAltHomeBasedBusinessDescription: true,
   },
   {
     id: "FORMED_AND_REGISTERED",
@@ -71,6 +75,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displayTaxAccessButton: false,
     displayCalendarToggleButton: false,
     displayHideableRoadmapTasks: false,
+    displayAltHomeBasedBusinessDescription: true,
   },
   {
     id: "NEEDS_TO_FORM",
@@ -82,6 +87,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displayTaxAccessButton: false,
     displayCalendarToggleButton: false,
     displayHideableRoadmapTasks: false,
+    displayAltHomeBasedBusinessDescription: true,
   },
   {
     id: "NEEDS_TO_REGISTER_FOR_TAXES",
@@ -93,6 +99,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displayCalendarToggleButton: false,
     displayRoadmapTasks: true,
     displayHideableRoadmapTasks: false,
+    displayAltHomeBasedBusinessDescription: true,
   },
   {
     id: "UP_AND_RUNNING",
@@ -104,6 +111,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displayCalendarToggleButton: true,
     displayRoadmapTasks: false,
     displayHideableRoadmapTasks: true,
+    displayAltHomeBasedBusinessDescription: false,
   },
   {
     id: "UP_AND_RUNNING_OWNING",
@@ -115,5 +123,6 @@ export const OperatingPhases: OperatingPhase[] = [
     displayCalendarToggleButton: true,
     displayRoadmapTasks: false,
     displayHideableRoadmapTasks: false,
+    displayAltHomeBasedBusinessDescription: false,
   },
 ];

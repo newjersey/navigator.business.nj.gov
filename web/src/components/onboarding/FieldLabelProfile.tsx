@@ -8,6 +8,7 @@ import { useContext } from "react";
 
 interface Props {
   fieldName: ProfileContentField;
+  isAltDescriptionDisplayed?: boolean;
 }
 
 export const FieldLabelProfile = (props: Props) => {
@@ -16,6 +17,7 @@ export const FieldLabelProfile = (props: Props) => {
 
   const unboldedHeader = (Config.profileDefaults[state.flow][props.fieldName] as any).headerNotBolded;
   const description = (Config.profileDefaults[state.flow][props.fieldName] as any).description;
+  const altDescription = (Config.profileDefaults[state.flow][props.fieldName] as any).altDescription;
 
   return (
     <>
@@ -28,7 +30,7 @@ export const FieldLabelProfile = (props: Props) => {
           </>
         )}
       </div>
-      {description && <Content>{description}</Content>}
+      {description && <Content>{props.isAltDescriptionDisplayed ? altDescription : description}</Content>}
     </>
   );
 };

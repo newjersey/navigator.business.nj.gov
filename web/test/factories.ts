@@ -67,6 +67,7 @@ import {
   TaxFilingLookUpRequest,
   UserData,
 } from "@businessnjgovnavigator/shared";
+import { BusinessPersona } from "@businessnjgovnavigator/shared/profileData";
 
 export const generateSectionType = (): SectionType => {
   const num = randomInt();
@@ -761,4 +762,10 @@ export const randomNonHomeBasedIndustry = (): string => {
     return !it.industryOnboardingQuestions.canBeHomeBased && it.canHavePermanentLocation;
   };
   return randomFilteredIndustry(filter, { isEnabled: true }).id;
+};
+
+export const generateBusinessPersona = (): Exclude<BusinessPersona, undefined> => {
+  const all = ["STARTING", "OWNING", "FOREIGN"];
+  const randomIndex = Math.floor(Math.random() * all.length);
+  return all[randomIndex] as Exclude<BusinessPersona, undefined>;
 };
