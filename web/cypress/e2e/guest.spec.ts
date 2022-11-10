@@ -3,7 +3,7 @@
 
 import { LookupIndustryById } from "@businessnjgovnavigator/shared/";
 import { onDashboardPage } from "cypress/support/page_objects/dashboardPage";
-import { completeNewBusinessOnboarding } from "../support/helpers";
+import { clickDeferredSaveButton, completeNewBusinessOnboarding } from "../support/helpers";
 
 describe("Guest Dashboard [feature] [all] [group2]", () => {
   const industry = LookupIndustryById("home-contractor");
@@ -37,7 +37,7 @@ describe("Guest Dashboard [feature] [all] [group2]", () => {
     // answer deferred question to get local-requirements task
     onDashboardPage.getHomeBased().should("exist");
     onDashboardPage.selectHomeBased(false);
-    onDashboardPage.clickDeferredSaveButton();
+    clickDeferredSaveButton();
     onDashboardPage.getHomeBased().should("not.exist");
     cy.get('[data-task="identify-potential-lease"]').should("exist");
     cy.wait(1000);

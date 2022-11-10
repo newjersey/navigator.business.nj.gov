@@ -35,10 +35,6 @@ export class DashboardPage {
   getHomeBased(radio?: boolean) {
     return cy.get(`input[name="home-based-business"]${radio === undefined ? "" : `[value="${radio}"]`}`);
   }
-
-  clickDeferredSaveButton() {
-    return cy.get(`button[data-testid="deferred-question-save"]`).click();
-  }
 }
 
 export const onDashboardPage = new DashboardPage();

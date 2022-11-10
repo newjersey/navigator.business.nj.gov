@@ -1,5 +1,5 @@
 import { getMergedConfig } from "@/contexts/configContext";
-import * as fetchMunicipality from "@/lib/async-content-fetchers/fetchMunicipalityById";
+import * as fetchMunicipality from "@/lib/async-content-fetchers/fetchMunicipalities";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import * as roadmapBuilderModule from "@/lib/roadmap/roadmapBuilder";
 import {
@@ -18,7 +18,7 @@ jest.mock("@/lib/roadmap/roadmapBuilder", () => {
 });
 const mockRoadmapBuilder = (roadmapBuilderModule as jest.Mocked<typeof roadmapBuilderModule>).buildRoadmap;
 
-jest.mock("@/lib/async-content-fetchers/fetchMunicipalityById", () => {
+jest.mock("@/lib/async-content-fetchers/fetchMunicipalities", () => {
   return {
     fetchMunicipalityById: jest.fn(),
   };

@@ -1,12 +1,14 @@
+/* eslint-disable jest/expect-expect */
 import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { ProfileTabs } from "@/lib/types/types";
+import analytics from "@/lib/utils/analytics";
 import { getFlow, templateEval } from "@/lib/utils/helpers";
 import Profile from "@/pages/profile";
 import {
-  generateBusinessPersona,
+  allLegalStructuresOfType,
   generateFormationData,
   generateGetFilingResponse,
   generateMunicipality,
@@ -31,15 +33,18 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
+  BusinessPersona,
   createEmptyUserData,
   einTaskId,
   formationTaskId,
   getCurrentDate,
+  LegalStructures,
   LookupIndustryById,
   LookupOwnershipTypeById,
   LookupSectorTypeById,
   Municipality,
   OperatingPhase,
+  OperatingPhaseId,
   OperatingPhases,
   ProfileData,
   randomInt,
@@ -52,6 +57,20 @@ const Config = getMergedConfig();
 
 const dateOfFormation = date.format("YYYY-MM-DD");
 const mockApi = api as jest.Mocked<typeof api>;
+
+function setupMockAnalytics(): typeof analytics {
+  return {
+    ...jest.requireActual("@/lib/utils/analytics").default,
+    event: {
+      ...jest.requireActual("@/lib/utils/analytics").default.event,
+      profile_location_question: {
+        submit: {
+          location_entered_for_first_time: jest.fn(),
+        },
+      },
+    },
+  };
+}
 
 jest.mock("next/router", () => {
   return { useRouter: jest.fn() };
@@ -69,6 +88,11 @@ jest.mock("@/lib/api-client/apiClient", () => {
 jest.mock("@/lib/data-hooks/useRoadmap", () => {
   return { useRoadmap: jest.fn() };
 });
+jest.mock("@/lib/utils/analytics", () => {
+  return setupMockAnalytics();
+});
+
+const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
 
 describe("profile", () => {
   let setRegistrationModalIsVisible: jest.Mock;
@@ -420,22 +444,110 @@ describe("profile", () => {
       });
     });
 
-    it("prevents user from saving if they have not selected a location", async () => {
-      const newark = generateMunicipality({ displayName: "Newark" });
-      const userData = generateUserData({});
-      renderPage({ municipalities: [newark], userData });
-      fillText("Location", "");
-      fireEvent.blur(screen.getByLabelText("Location"));
-      clickSave();
-      expect(
-        screen.getByText(Config.profileDefaults[getFlow(userData)].municipality.errorTextRequired)
-      ).toBeInTheDocument();
-      expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
-      selectByText("Location", newark.displayName);
-      await waitFor(() => {
-        return expect(
-          screen.queryByText(Config.profileDefaults[getFlow(userData)].municipality.errorTextRequired)
-        ).not.toBeInTheDocument();
+    describe("location", () => {
+      const renderWithLegalStructureAndPhase = (params: {
+        legalStructureId: string;
+        operatingPhase: OperatingPhaseId;
+      }) => {
+        const newark = generateMunicipality({ displayName: "Newark" });
+        const userData = generateUserData({
+          profileData: generateProfileData({
+            legalStructureId: params.legalStructureId,
+            operatingPhase: params.operatingPhase,
+            businessPersona: "STARTING",
+          }),
+        });
+        renderPage({ municipalities: [newark], userData });
+      };
+
+      describe("when location is optional", () => {
+        describe("legalStructure is Public Filing and operating Phase is GUEST_MODE or NEEDS_TO_FORM", () => {
+          const allPublicFilingLegalStructures = allLegalStructuresOfType({ type: "publicFiling" }).map(
+            (it) => {
+              return it.id;
+            }
+          );
+          const operatingPhases: OperatingPhaseId[] = ["GUEST_MODE", "NEEDS_TO_FORM"];
+
+          for (const legalStructure of allPublicFilingLegalStructures) {
+            for (const operatingPhase of operatingPhases) {
+              it(`allows saving with empty location for ${legalStructure} in ${operatingPhase}`, async () => {
+                renderWithLegalStructureAndPhase({
+                  legalStructureId: legalStructure,
+                  operatingPhase: operatingPhase,
+                });
+                removeLocationAndSave();
+                await expectLocationSavedAsUndefined();
+              });
+            }
+          }
+        });
+
+        describe("legalStructure is Trade Name and operating Phase is GUEST_MODE or NEEDS_TO_REGISTER", () => {
+          const allTradeNameLegalStructures = allLegalStructuresOfType({ type: "tradeName" }).map((it) => {
+            return it.id;
+          });
+          const operatingPhases: OperatingPhaseId[] = ["GUEST_MODE", "NEEDS_TO_REGISTER_FOR_TAXES"];
+
+          for (const legalStructure of allTradeNameLegalStructures) {
+            for (const operatingPhase of operatingPhases) {
+              it(`allows saving with empty location for ${legalStructure} in ${operatingPhase}`, async () => {
+                renderWithLegalStructureAndPhase({
+                  legalStructureId: legalStructure,
+                  operatingPhase: operatingPhase,
+                });
+                removeLocationAndSave();
+                await expectLocationSavedAsUndefined();
+              });
+            }
+          }
+        });
+      });
+
+      describe("when location is required", () => {
+        describe("legalStructure is Public Filing and operating Phase is any phase beyond NEEDS_TO_FORM", () => {
+          const allPublicFilingLegalStructures = allLegalStructuresOfType({ type: "publicFiling" }).map(
+            (it) => {
+              return it.id;
+            }
+          );
+          const operatingPhases: OperatingPhaseId[] = [
+            "NEEDS_TO_REGISTER_FOR_TAXES",
+            "FORMED_AND_REGISTERED",
+            "UP_AND_RUNNING",
+          ];
+          for (const legalStructure of allPublicFilingLegalStructures) {
+            for (const operatingPhase of operatingPhases) {
+              it(`prevents saving with empty location for ${legalStructure} in ${operatingPhase}`, async () => {
+                renderWithLegalStructureAndPhase({
+                  legalStructureId: legalStructure,
+                  operatingPhase: operatingPhase,
+                });
+                removeLocationAndSave();
+                expectLocationNotSavedAndError("STARTING");
+              });
+            }
+          }
+        });
+
+        describe("legalStructure is Trade Name and operating Phase is any phase beyond NEEDS_TO_REGISTER", () => {
+          const allTradeNameLegalStructures = allLegalStructuresOfType({ type: "tradeName" }).map((it) => {
+            return it.id;
+          });
+          const operatingPhases: OperatingPhaseId[] = ["FORMED_AND_REGISTERED", "UP_AND_RUNNING"];
+          for (const legalStructure of allTradeNameLegalStructures) {
+            for (const operatingPhase of operatingPhases) {
+              it(`prevents saving with empty location for ${legalStructure} in ${operatingPhase}`, async () => {
+                renderWithLegalStructureAndPhase({
+                  legalStructureId: legalStructure,
+                  operatingPhase: operatingPhase,
+                });
+                removeLocationAndSave();
+                expectLocationNotSavedAndError("STARTING");
+              });
+            }
+          }
+        });
       });
     });
 
@@ -1152,6 +1264,44 @@ describe("profile", () => {
       });
       expect(screen.getByTestId("info")).toBeInTheDocument();
     });
+
+    describe("location", () => {
+      const renderWithLegalStructureAndPhase = (params: {
+        legalStructureId: string;
+        operatingPhase: OperatingPhaseId;
+      }) => {
+        const newark = generateMunicipality({ displayName: "Newark" });
+        const userData = generateUserData({
+          profileData: generateProfileData({
+            legalStructureId: params.legalStructureId,
+            operatingPhase: params.operatingPhase,
+            businessPersona: "OWNING",
+          }),
+        });
+        renderPage({ municipalities: [newark], userData });
+      };
+
+      describe("when location is required (always)", () => {
+        describe("any legal structure and operating Phase is any OWNING phase", () => {
+          const allLegalStructures = LegalStructures.map((it) => {
+            return it.id;
+          });
+          const operatingPhases: OperatingPhaseId[] = ["GUEST_MODE_OWNING", "UP_AND_RUNNING_OWNING"];
+          for (const legalStructure of allLegalStructures) {
+            for (const operatingPhase of operatingPhases) {
+              it(`prevents saving with empty location for ${legalStructure} in ${operatingPhase}`, async () => {
+                renderWithLegalStructureAndPhase({
+                  legalStructureId: legalStructure,
+                  operatingPhase: operatingPhase,
+                });
+                removeLocationAndSave();
+                expectLocationNotSavedAndError("OWNING");
+              });
+            }
+          }
+        });
+      });
+    });
   });
 
   describe("foreign business", () => {
@@ -1274,6 +1424,115 @@ describe("profile", () => {
           screen.queryByText(Config.profileDefaults.FOREIGN.nexusDbaName.header)
         ).not.toBeInTheDocument();
       });
+
+      describe("location", () => {
+        const renderWithLegalStructureAndPhase = (params: {
+          legalStructureId: string;
+          operatingPhase: OperatingPhaseId;
+        }) => {
+          const newark = generateMunicipality({ displayName: "Newark" });
+          const userData = generateUserData({
+            profileData: generateProfileData({
+              legalStructureId: params.legalStructureId,
+              operatingPhase: params.operatingPhase,
+              businessPersona: "FOREIGN",
+              foreignBusinessType: "NEXUS",
+              nexusLocationInNewJersey: true,
+            }),
+          });
+          renderPage({ municipalities: [newark], userData });
+        };
+
+        describe("when location is optional", () => {
+          describe("legalStructure is Public Filing and operating Phase is GUEST_MODE or NEEDS_TO_FORM", () => {
+            const allPublicFilingLegalStructures = allLegalStructuresOfType({ type: "publicFiling" }).map(
+              (it) => {
+                return it.id;
+              }
+            );
+            const operatingPhases: OperatingPhaseId[] = ["GUEST_MODE", "NEEDS_TO_FORM"];
+
+            for (const legalStructure of allPublicFilingLegalStructures) {
+              for (const operatingPhase of operatingPhases) {
+                it(`allows saving with empty location for ${legalStructure} in ${operatingPhase}`, async () => {
+                  renderWithLegalStructureAndPhase({
+                    legalStructureId: legalStructure,
+                    operatingPhase: operatingPhase,
+                  });
+                  removeLocationAndSave();
+                  await expectLocationSavedAsUndefined();
+                });
+              }
+            }
+          });
+
+          describe("legalStructure is Trade Name and operating Phase is GUEST_MODE or NEEDS_TO_REGISTER", () => {
+            const allTradeNameLegalStructures = allLegalStructuresOfType({ type: "tradeName" }).map((it) => {
+              return it.id;
+            });
+            const operatingPhases: OperatingPhaseId[] = ["GUEST_MODE", "NEEDS_TO_REGISTER_FOR_TAXES"];
+
+            for (const legalStructure of allTradeNameLegalStructures) {
+              for (const operatingPhase of operatingPhases) {
+                it(`allows saving with empty location for ${legalStructure} in ${operatingPhase}`, async () => {
+                  renderWithLegalStructureAndPhase({
+                    legalStructureId: legalStructure,
+                    operatingPhase: operatingPhase,
+                  });
+                  removeLocationAndSave();
+                  await expectLocationSavedAsUndefined();
+                });
+              }
+            }
+          });
+        });
+
+        describe("when location is required", () => {
+          describe("legalStructure is Public Filing and operating Phase is any phase beyond NEEDS_TO_FORM", () => {
+            const allPublicFilingLegalStructures = allLegalStructuresOfType({ type: "publicFiling" }).map(
+              (it) => {
+                return it.id;
+              }
+            );
+            const operatingPhases: OperatingPhaseId[] = [
+              "NEEDS_TO_REGISTER_FOR_TAXES",
+              "FORMED_AND_REGISTERED",
+              "UP_AND_RUNNING",
+            ];
+            for (const legalStructure of allPublicFilingLegalStructures) {
+              for (const operatingPhase of operatingPhases) {
+                it(`prevents saving with empty location for ${legalStructure} in ${operatingPhase}`, async () => {
+                  renderWithLegalStructureAndPhase({
+                    legalStructureId: legalStructure,
+                    operatingPhase: operatingPhase,
+                  });
+                  removeLocationAndSave();
+                  expectLocationNotSavedAndError("FOREIGN");
+                });
+              }
+            }
+          });
+
+          describe("legalStructure is Trade Name and operating Phase is any phase beyond NEEDS_TO_REGISTER", () => {
+            const allTradeNameLegalStructures = allLegalStructuresOfType({ type: "tradeName" }).map((it) => {
+              return it.id;
+            });
+            const operatingPhases: OperatingPhaseId[] = ["FORMED_AND_REGISTERED", "UP_AND_RUNNING"];
+            for (const legalStructure of allTradeNameLegalStructures) {
+              for (const operatingPhase of operatingPhases) {
+                it(`prevents saving with empty location for ${legalStructure} in ${operatingPhase}`, async () => {
+                  renderWithLegalStructureAndPhase({
+                    legalStructureId: legalStructure,
+                    operatingPhase: operatingPhase,
+                  });
+                  removeLocationAndSave();
+                  expectLocationNotSavedAndError("FOREIGN");
+                });
+              }
+            }
+          });
+        });
+      });
     });
   });
 
@@ -1349,13 +1608,12 @@ describe("profile", () => {
 
   it("shows home-based business question with default description when applicable to industry", () => {
     const defaultDescOperatingPhases = OperatingPhases.filter((phase: OperatingPhase) => {
-      return phase.displayAltHomeBasedBusinessDescription === false;
+      return !phase.displayAltHomeBasedBusinessDescription;
     });
 
     const userData = generateUserData({
       profileData: generateProfileData({
         industryId: randomHomeBasedIndustry(),
-        businessPersona: generateBusinessPersona(),
         operatingPhase: randomElementFromArray(defaultDescOperatingPhases as OperatingPhase[]).id,
         nexusLocationInNewJersey: false,
       }),
@@ -1373,12 +1631,11 @@ describe("profile", () => {
 
   it("shows home-based business question with alt description when applicable to industry", () => {
     const altDescOperatingPhases = OperatingPhases.filter((phase: OperatingPhase) => {
-      return phase.displayAltHomeBasedBusinessDescription === true;
+      return phase.displayAltHomeBasedBusinessDescription;
     });
     const userData = generateUserData({
       profileData: generateProfileData({
         industryId: randomHomeBasedIndustry(),
-        businessPersona: generateBusinessPersona(),
         operatingPhase: randomElementFromArray(altDescOperatingPhases as OperatingPhase[]).id,
         nexusLocationInNewJersey: false,
       }),
@@ -1406,6 +1663,45 @@ describe("profile", () => {
       }),
     });
     expect(screen.queryByText("Home-based business")).not.toBeInTheDocument();
+  });
+
+  it("sends analytics when municipality entered for first time", async () => {
+    const initialUserData = generateUserData({
+      profileData: generateProfileData({
+        municipality: undefined,
+      }),
+    });
+
+    const newark = generateMunicipality({ displayName: "Newark" });
+    renderPage({ userData: initialUserData, municipalities: [newark] });
+    selectByText("Location", newark.displayName);
+    clickSave();
+    await waitFor(() => {
+      return expect(currentUserData().profileData.municipality).toEqual(newark);
+    });
+    expect(
+      mockAnalytics.event.profile_location_question.submit.location_entered_for_first_time
+    ).toHaveBeenCalled();
+  });
+
+  it("does not send analytics when municipality already existed", async () => {
+    const newark = generateMunicipality({ displayName: "Newark" });
+
+    const initialUserData = generateUserData({
+      profileData: generateProfileData({
+        municipality: generateMunicipality({ displayName: "Jersey City" }),
+      }),
+    });
+
+    renderPage({ userData: initialUserData, municipalities: [newark] });
+    selectByText("Location", newark.displayName);
+    clickSave();
+    await waitFor(() => {
+      return expect(currentUserData().profileData.municipality).toEqual(newark);
+    });
+    expect(
+      mockAnalytics.event.profile_location_question.submit.location_entered_for_first_time
+    ).not.toHaveBeenCalled();
   });
 
   describe("Document Section", () => {
@@ -1643,5 +1939,25 @@ describe("profile", () => {
 
   const chooseTab = (value: ProfileTabs) => {
     fireEvent.click(screen.getByTestId(value));
+  };
+
+  const removeLocationAndSave = () => {
+    fillText("Location", "");
+    fireEvent.blur(screen.getByLabelText("Location"));
+    clickSave();
+  };
+
+  const expectLocationSavedAsUndefined = async () => {
+    await waitFor(() => {
+      return expect(currentUserData().profileData.municipality).toEqual(undefined);
+    });
+  };
+
+  const expectLocationNotSavedAndError = (persona: Exclude<BusinessPersona, undefined>) => {
+    expect(userDataWasNotUpdated()).toBe(true);
+    expect(
+      screen.getByText(Config.profileDefaults[persona].municipality.errorTextRequired)
+    ).toBeInTheDocument();
+    expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
   };
 });

@@ -11,6 +11,8 @@ import {
 } from "@/lib/types/types";
 import {
   BusinessPersona,
+  Municipality,
+  MunicipalityDetail,
   ProfileData,
   sectionNames,
   SectionType,
@@ -437,4 +439,13 @@ export const flattenObject = (obj: any) => {
   } else {
     return obj;
   }
+};
+
+export const mapMunicipalityDetailToMunicipality = (municipalityDetail: MunicipalityDetail): Municipality => {
+  return {
+    displayName: municipalityDetail.townDisplayName,
+    id: municipalityDetail.id,
+    name: municipalityDetail.townName,
+    county: municipalityDetail.countyName,
+  };
 };

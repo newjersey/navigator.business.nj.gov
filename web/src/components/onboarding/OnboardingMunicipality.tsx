@@ -1,6 +1,8 @@
 import { MunicipalityDropdown } from "@/components/onboarding/MunicipalityDropdown";
+import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { isMunicipalityRequired } from "@/lib/domain-logic/isMunicipalityRequired";
 import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import { Municipality } from "@businessnjgovnavigator/shared/";
 import { FocusEvent, ReactElement, useContext } from "react";
@@ -12,11 +14,21 @@ interface Props {
 
 export const OnboardingMunicipality = (props: Props): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
+  const { municipalities } = useContext(MunicipalitiesContext);
   const { Config } = useConfig();
 
   const onValidation = (event: FocusEvent<HTMLInputElement>): void => {
-    const valid = event.target.value.length > 0;
-    props.onValidation(fieldName, !valid);
+    if (
+      isMunicipalityRequired({
+        legalStructureId: state.profileData.legalStructureId,
+        operatingPhase: state.profileData.operatingPhase,
+      })
+    ) {
+      const valid = event.target.value.length > 0;
+      props.onValidation(fieldName, !valid);
+    } else {
+      props.onValidation(fieldName, false);
+    }
   };
 
   const handleChange = (): void => {
@@ -35,7 +47,7 @@ export const OnboardingMunicipality = (props: Props): ReactElement => {
   return (
     <div className="form-input margin-top-2">
       <MunicipalityDropdown
-        municipalities={state.municipalities}
+        municipalities={municipalities}
         ariaLabel="Location"
         onValidation={onValidation}
         fieldName={fieldName}

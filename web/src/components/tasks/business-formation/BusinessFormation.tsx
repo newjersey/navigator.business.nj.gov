@@ -25,7 +25,6 @@ import {
   FormationLegalTypes,
   getCurrentDate,
   getCurrentDateFormatted,
-  Municipality,
 } from "@businessnjgovnavigator/shared/";
 import { parseDateWithFormat } from "@businessnjgovnavigator/shared/dateHelpers";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
@@ -47,7 +46,6 @@ export const allowFormation = (legalStructureId: string | undefined) => {
 interface Props {
   task: Task;
   displayContent: FormationDisplayContentMap;
-  municipalities: Municipality[];
 }
 
 export const BusinessFormation = (props: Props): ReactElement => {
@@ -227,7 +225,6 @@ export const BusinessFormation = (props: Props): ReactElement => {
           legalStructureId: legalStructureId,
           formationFormData: formationFormData,
           displayContent: props.displayContent[legalStructureId],
-          municipalities: props.municipalities,
           showResponseAlert: showResponseAlert,
           interactedFields,
           hasBeenSubmitted,

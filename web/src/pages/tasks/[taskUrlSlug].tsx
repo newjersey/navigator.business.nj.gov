@@ -1,4 +1,5 @@
 import { Content } from "@/components/Content";
+import { DeferredLocationQuestion } from "@/components/DeferredLocationQuestion";
 import { NavBar } from "@/components/navbar/NavBar";
 import { Button } from "@/components/njwds-extended/Button";
 import { Icon } from "@/components/njwds/Icon";
@@ -18,6 +19,7 @@ import { SearchBusinessNameTask } from "@/components/tasks/search-business-name/
 import { TaxTask } from "@/components/tasks/TaxTask";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
+import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getNaicsDisplayMd } from "@/lib/domain-logic/getNaicsDisplayMd";
@@ -124,14 +126,13 @@ const TaskPage = (props: Props): ReactElement => {
         <BusinessFormation
           task={taskInRoadmap}
           displayContent={props.displayContent.formationDisplayContent}
-          municipalities={props.municipalities}
         />
       );
     }
   };
 
   return (
-    <>
+    <MunicipalitiesContext.Provider value={{ municipalities: props.municipalities }}>
       <NextSeo title={`Business.NJ.gov Navigator - ${props.task.name}`} />
       <PageSkeleton>
         <NavBar task={props.task} showSidebar={true} />
@@ -155,7 +156,7 @@ const TaskPage = (props: Props): ReactElement => {
           })}
         </TaskSidebarPageLayout>
       </PageSkeleton>
-    </>
+    </MunicipalitiesContext.Provider>
   );
 };
 
@@ -172,16 +173,49 @@ const getPostOnboardingQuestion = (task: Task): ReactElement => {
 };
 
 export const TaskElement = (props: { task: Task; children?: ReactNode | ReactNode[] }) => {
+  const hasPostOnboardingQuestion = !!props.task.postOnboardingQuestion;
   const [beforeQuestion, afterQuestion] = props.task.contentMd.split("{postOnboardingQuestion}");
+
+  const shouldShowDeferredQuestion = props.task.requiresLocation;
+  const hasDeferredLocationQuestion =
+    props.task.contentMd.includes("${beginLocationDependentSection}") &&
+    props.task.contentMd.includes("${endLocationDependentSection}");
+
+  let deferredQuestionInnerContent = "";
+  let afterDeferredQuestion = "";
+  const [beforeDeferredQuestion, after] = props.task.contentMd.split("${beginLocationDependentSection}");
+  if (after) {
+    [deferredQuestionInnerContent, afterDeferredQuestion] = after.split("${endLocationDependentSection}");
+  }
 
   return (
     <div id="taskElement" className="flex flex-column space-between minh-38">
       <div>
         <TaskHeader task={props.task} />
         {props.children}
-        <Content>{beforeQuestion}</Content>
-        {getPostOnboardingQuestion(props.task)}
-        <Content>{afterQuestion}</Content>
+
+        {hasDeferredLocationQuestion && (
+          <>
+            <Content>{beforeDeferredQuestion}</Content>
+            {shouldShowDeferredQuestion && (
+              <DeferredLocationQuestion innerContent={deferredQuestionInnerContent} />
+            )}
+            <Content>{afterDeferredQuestion}</Content>
+          </>
+        )}
+
+        {hasPostOnboardingQuestion && (
+          <>
+            <Content>{beforeQuestion}</Content>
+            {getPostOnboardingQuestion(props.task)}
+            <Content>{afterQuestion}</Content>
+          </>
+        )}
+
+        {!hasPostOnboardingQuestion && !hasDeferredLocationQuestion && (
+          <Content>{props.task.contentMd}</Content>
+        )}
+
         {props.task.issuingAgency || props.task.formName ? (
           <>
             <hr className="margin-y-3" />
@@ -213,17 +247,12 @@ export const getStaticPaths = (): GetStaticPathsResult<TaskUrlSlugParam> => {
   };
 };
 
-export const getStaticProps = async ({
-  params,
-}: {
-  params: TaskUrlSlugParam;
-}): Promise<GetStaticPropsResult<Props>> => {
-  const municipalities = await loadAllMunicipalities();
+export const getStaticProps = ({ params }: { params: TaskUrlSlugParam }): GetStaticPropsResult<Props> => {
   return {
     props: {
       task: loadTaskByUrlSlug(params.taskUrlSlug),
       displayContent: loadTasksDisplayContent(),
-      municipalities,
+      municipalities: loadAllMunicipalities(),
     },
   };
 };

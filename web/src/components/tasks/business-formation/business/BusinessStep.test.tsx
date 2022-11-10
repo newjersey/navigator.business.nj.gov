@@ -54,6 +54,9 @@ jest.mock("@/lib/api-client/apiClient", () => {
     searchBusinessName: jest.fn(),
   };
 });
+jest.mock("@/lib/roadmap/buildUserRoadmap", () => {
+  return { buildUserRoadmap: jest.fn() };
+});
 
 describe("Formation - BusinessStep", () => {
   beforeEach(() => {
@@ -412,7 +415,7 @@ describe("Formation - BusinessStep", () => {
       expect((screen.getByLabelText("Business address city") as HTMLInputElement).value).toEqual("Newark");
 
       expect(
-        screen.queryByText(Config.businessFormationDefaults.notSetBusinessAddressCityLabel, {
+        screen.queryByText(Config.businessFormationDefaults.businessAddressCityPlaceholder, {
           exact: false,
         })
       ).not.toBeInTheDocument();

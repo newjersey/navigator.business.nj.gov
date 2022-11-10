@@ -130,7 +130,6 @@ interface ForeignOnboardingData {
 export const completeNewBusinessOnboarding = ({
   industry = undefined,
   legalStructureId = undefined,
-  townDisplayName = "Absecon",
   liquorLicenseQuestion = undefined,
   requiresCpa = undefined,
   providesStaffingService = undefined,
@@ -268,16 +267,6 @@ export const completeNewBusinessOnboarding = ({
 
   cy.url().should("include", "onboarding?page=4");
 
-  if (townDisplayName) {
-    onOnboardingPage.selectLocation(townDisplayName);
-    onOnboardingPage.getLocationDropdown().invoke("prop", "value").should("contain", townDisplayName);
-  } else {
-    onOnboardingPage.selectRandomLocation();
-    onOnboardingPage.getLocationDropdown().invoke("prop", "value").should("not.eq", "");
-  }
-
-  onOnboardingPage.clickNext();
-  cy.url().should("include", "onboarding?page=5");
   onOnboardingPage.typeFullName(fullName);
   onOnboardingPage.getFullName().invoke("prop", "value").should("contain", fullName);
   onOnboardingPage.typeEmail(email);
@@ -493,16 +482,6 @@ export const completeForeignNexusBusinessOnboarding = ({
 
   onOnboardingPage.selectLocationInNewJersey(locationInNewJersey);
 
-  if (locationInNewJersey) {
-    if (townDisplayName) {
-      onOnboardingPage.selectLocation(townDisplayName);
-      onOnboardingPage.getLocationDropdown().invoke("prop", "value").should("contain", townDisplayName);
-    } else {
-      onOnboardingPage.selectRandomLocation();
-      onOnboardingPage.getLocationDropdown().invoke("prop", "value").should("not.eq", "");
-    }
-  }
-
   onOnboardingPage.clickNext();
   cy.url().should("include", "onboarding?page=6");
   onOnboardingPage.typeFullName(fullName);
@@ -575,8 +554,6 @@ export const checkNewBusinessProfilePage = ({
 
   if (townDisplayName) {
     onProfilePage.getLocationDropdown().invoke("prop", "value").should("contain", townDisplayName);
-  } else {
-    onProfilePage.getLocationDropdown().invoke("prop", "value").should("not.eq", "");
   }
 
   if (homeBasedQuestion !== undefined) {
@@ -917,4 +894,16 @@ export const randomNonHomeBasedIndustry = (): Industry => {
   return randomElementFromArray(
     industriesNotHomeBasedOrLiquorLicense.filter((x) => x.isEnabled) as Industry[]
   );
+};
+
+export const randomPublicFilingLegalStructure = (): string => {
+  return randomElementFromArray(LegalStructures.filter((x) => x.requiresPublicFiling)).id;
+};
+
+export const randomTradeNameLegalStructure = (): string => {
+  return randomElementFromArray(LegalStructures.filter((x) => x.hasTradeName)).id;
+};
+
+export const clickDeferredSaveButton = () => {
+  return cy.get(`button[data-testid="deferred-question-save"]`).click();
 };

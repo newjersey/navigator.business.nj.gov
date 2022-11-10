@@ -1,7 +1,11 @@
 import { BusinessFormation } from "@/components/tasks/business-formation/BusinessFormation";
 import { LookupStepIndexByName } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
+import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
+import * as buildUserRoadmap from "@/lib/roadmap/buildUserRoadmap";
 import { FormationDisplayContentMap } from "@/lib/types/types";
+import analytics from "@/lib/utils/analytics";
+import * as analyticsHelpers from "@/lib/utils/analytics-helpers";
 import {
   generateEmptyFormationData,
   generateFormationDisplayContent,
@@ -9,11 +13,13 @@ import {
   generateFormationSubmitError,
   generateFormationSubmitResponse,
   generateMunicipality,
+  generateRoadmap,
   generateTask,
   generateUserData,
 } from "@/test/factories";
-import { withAuthAlert } from "@/test/helpers";
+import { withAuthAlert, withRoadmap } from "@/test/helpers";
 import {
+  createFormationPageHelpers,
   generateFormationProfileData,
   mockApiResponse,
   preparePage,
@@ -24,12 +30,27 @@ import { currentUserData, WithStatefulUserData } from "@/test/mock/withStatefulU
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import * as materialUi from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 function mockMaterialUI(): typeof materialUi {
   return {
     ...jest.requireActual("@mui/material"),
     useMediaQuery: jest.fn(),
+  };
+}
+
+function setupMockAnalytics(): typeof analytics {
+  return {
+    ...jest.requireActual("@/lib/utils/analytics").default,
+    event: {
+      ...jest.requireActual("@/lib/utils/analytics").default.event,
+      business_formation_location_question: {
+        submit: {
+          location_entered_for_first_time: jest.fn(),
+        },
+      },
+    },
   };
 }
 
@@ -54,22 +75,39 @@ jest.mock("@/lib/api-client/apiClient", () => {
   };
 });
 
+jest.mock("@/lib/roadmap/buildUserRoadmap", () => {
+  return { buildUserRoadmap: jest.fn() };
+});
+jest.mock("@/lib/utils/analytics-helpers", () => {
+  return { setAnalyticsDimensions: jest.fn() };
+});
+jest.mock("@/lib/utils/analytics", () => {
+  return setupMockAnalytics();
+});
+
+const mockBuildUserRoadmap = buildUserRoadmap as jest.Mocked<typeof buildUserRoadmap>;
+const mockAnalyticsHelpers = analyticsHelpers as jest.Mocked<typeof analyticsHelpers>;
+const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
+
 describe("<BusinessFormationPaginator />", () => {
   let initialUserData: UserData;
   let displayContent: FormationDisplayContentMap;
+  let setRoadmap: jest.Mock;
 
   beforeEach(() => {
     jest.resetAllMocks();
     useSetupInitialMocks();
 
+    setRoadmap = jest.fn();
     const legalStructureId = "limited-liability-company";
     const profileData = generateFormationProfileData({ legalStructureId });
     const formationData = generateEmptyFormationData();
     displayContent = generateFormationDisplayContent({});
     initialUserData = generateUserData({ profileData, formationData });
+    mockBuildUserRoadmap.buildUserRoadmap.mockResolvedValue(generateRoadmap({}));
   });
 
-  describe("buttons", () => {
+  describe("button text", () => {
     it("shows unique text on button on first step", () => {
       preparePage(initialUserData, displayContent);
       expect(screen.getByText(Config.businessFormationDefaults.initialNextButtonText)).toBeInTheDocument();
@@ -109,7 +147,9 @@ describe("<BusinessFormationPaginator />", () => {
       render(
         withAuthAlert(
           <WithStatefulUserData initialUserData={initialUserData}>
-            <BusinessFormation task={generateTask({})} displayContent={displayContent} municipalities={[]} />
+            <MunicipalitiesContext.Provider value={{ municipalities: [] }}>
+              <BusinessFormation task={generateTask({})} displayContent={displayContent} />
+            </MunicipalitiesContext.Provider>
           </WithStatefulUserData>,
           IsAuthenticated.FALSE,
           { registrationModalIsVisible: false, setRegistrationModalIsVisible }
@@ -243,14 +283,15 @@ describe("<BusinessFormationPaginator />", () => {
       describe("business step", () => {
         it("saves municipality to profile", async () => {
           const municipality = generateMunicipality({ displayName: "New Town" });
+          const municipality2 = generateMunicipality({ displayName: "Newark" });
           const userDataWithMunicipality = {
             ...initialUserData,
             profileData: {
               ...initialUserData.profileData,
-              municipality: generateMunicipality({ displayName: "Newark" }),
+              municipality: municipality2,
             },
           };
-          const page = preparePage(userDataWithMunicipality, displayContent, [municipality]);
+          const page = preparePage(userDataWithMunicipality, displayContent, [municipality, municipality2]);
           await page.stepperClickToBusinessStep();
 
           expect((screen.getByLabelText("Business address city") as HTMLInputElement).value).toEqual(
@@ -267,6 +308,115 @@ describe("<BusinessFormationPaginator />", () => {
           expect(currentUserData().formationData.formationFormData.businessAddressCity?.displayName).toEqual(
             "New Town"
           );
+        });
+
+        it("builds and sets roadmap and updates analytics with new municipality", async () => {
+          const newTownMuncipality = generateMunicipality({ displayName: "New Town" });
+          const newarkMuncipality = generateMunicipality({ displayName: "Newark" });
+          const userDataWithMunicipality = {
+            ...initialUserData,
+            profileData: {
+              ...initialUserData.profileData,
+              municipality: newarkMuncipality,
+            },
+          };
+
+          const returnedRoadmap = generateRoadmap({});
+          mockBuildUserRoadmap.buildUserRoadmap.mockResolvedValue(returnedRoadmap);
+
+          render(
+            withRoadmap(
+              <MunicipalitiesContext.Provider
+                value={{ municipalities: [newTownMuncipality, newarkMuncipality] }}
+              >
+                <WithStatefulUserData initialUserData={userDataWithMunicipality}>
+                  <ThemeProvider theme={createTheme()}>
+                    <BusinessFormation task={generateTask({})} displayContent={displayContent} />
+                  </ThemeProvider>
+                </WithStatefulUserData>
+              </MunicipalitiesContext.Provider>,
+              generateRoadmap({}),
+              undefined,
+              setRoadmap
+            )
+          );
+
+          const page = createFormationPageHelpers();
+          await page.stepperClickToBusinessStep();
+
+          page.selectByText("Business address city", "New Town");
+
+          switchStepFunction();
+          await waitFor(() => {
+            expect(currentUserData().profileData.municipality?.displayName).toEqual("New Town");
+          });
+
+          const newProfileData = {
+            ...userDataWithMunicipality.profileData,
+            municipality: newTownMuncipality,
+          };
+
+          await waitFor(() => {
+            return expect(mockBuildUserRoadmap.buildUserRoadmap).toHaveBeenCalledWith(newProfileData);
+          });
+          await waitFor(() => {
+            return expect(setRoadmap).toHaveBeenCalledWith(returnedRoadmap);
+          });
+          expect(mockAnalyticsHelpers.setAnalyticsDimensions).toHaveBeenCalledWith(newProfileData);
+        });
+
+        it("send analytics when municipality entered for first time", async () => {
+          const newTownMuncipality = generateMunicipality({ displayName: "New Town" });
+
+          const userDataWithMunicipality = {
+            ...initialUserData,
+            profileData: {
+              ...initialUserData.profileData,
+              municipality: undefined,
+            },
+          };
+
+          const page = preparePage(userDataWithMunicipality, displayContent, [newTownMuncipality]);
+          await page.stepperClickToBusinessStep();
+          page.selectByText("Business address city", "New Town");
+
+          switchStepFunction();
+          await waitFor(() => {
+            expect(currentUserData().profileData.municipality?.displayName).toEqual("New Town");
+          });
+
+          expect(
+            mockAnalytics.event.business_formation_location_question.submit.location_entered_for_first_time
+          ).toHaveBeenCalled();
+        });
+
+        it("does not send analytics when municipality was already entered", async () => {
+          const newTownMuncipality = generateMunicipality({ displayName: "New Town" });
+          const newarkMuncipality = generateMunicipality({ displayName: "Newark" });
+
+          const userDataWithMunicipality = {
+            ...initialUserData,
+            profileData: {
+              ...initialUserData.profileData,
+              municipality: newarkMuncipality,
+            },
+          };
+
+          const page = preparePage(userDataWithMunicipality, displayContent, [
+            newTownMuncipality,
+            newarkMuncipality,
+          ]);
+          await page.stepperClickToBusinessStep();
+          page.selectByText("Business address city", "New Town");
+
+          switchStepFunction();
+          await waitFor(() => {
+            expect(currentUserData().profileData.municipality?.displayName).toEqual("New Town");
+          });
+
+          expect(
+            mockAnalytics.event.business_formation_location_question.submit.location_entered_for_first_time
+          ).not.toHaveBeenCalled();
         });
       });
 
