@@ -6,7 +6,7 @@ id: detective-agency-license
 callToActionLink: https://www.nj.gov/njsp/private-detective/pdf/sp-171.pdf
 callToActionText: Apply for My Agency License
 required: true
-issuingAgency: New Jersey State Police
+issuingAgency: New Jersey State Police Private Detective Unit
 ---
 Your detective agency must be licensed prior to offering services to the public.  
 
