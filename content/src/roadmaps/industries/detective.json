@@ -1,4 +1,5 @@
 {
+  "naicsCodes": "561611",
   "defaultSectorId": "professional-scientific-and-technical-services",
   "canHavePermanentLocation": true,
   "roadmapSteps": [
@@ -39,7 +40,7 @@
     },
     {
       "step": 3,
-      "weight": 14,
+      "weight": 17,
       "task": "detective-employees"
     }
   ],
