@@ -3801,7 +3801,7 @@ __metadata:
     "@aws-sdk/types": 3.201.0
     "@aws-sdk/util-dynamodb": 3.204.0
     "@businessnjgovnavigator/shared": "*"
-    "@jest/types": 29.2.1
+    "@jest/types": 29.3.1
     "@serverless/typescript": 3.21.0
     "@types/cors": 2.8.12
     "@types/dedent": 0.7.0
@@ -3832,7 +3832,7 @@ __metadata:
     eslint-plugin-unicorn: 44.0.2
     express: 4.18.2
     helmet: 6.0.0
-    jest: 29.3.0
+    jest: 29.3.1
     jest-dynalite: 3.6.1
     jest-junit: 14.0.1
     jsonwebtoken: 8.5.1
@@ -3903,7 +3903,7 @@ __metadata:
     "@cypress-audit/pa11y": 1.3.1
     "@emotion/react": 11.10.5
     "@emotion/styled": 11.10.5
-    "@jest/types": 29.2.1
+    "@jest/types": 29.3.1
     "@mdx-js/react": 2.1.5
     "@mui/lab": 5.0.0-alpha.106
     "@mui/material": 5.10.12
@@ -3964,7 +3964,7 @@ __metadata:
     "@typescript-eslint/parser": 5.42.1
     airtable: 0.11.5
     axios: 0.27.2
-    babel-jest: 29.3.0
+    babel-jest: 29.3.1
     babel-loader: 9.1.0
     body-parser: 1.20.1
     broken-link-checker: 0.7.8
@@ -4002,9 +4002,9 @@ __metadata:
     helmet: 6.0.0
     husky: 8.0.1
     identity-obj-proxy: 3.0.0
-    jest: 29.3.0
+    jest: 29.3.1
     jest-dynalite: 3.6.1
-    jest-environment-jsdom: 29.3.0
+    jest-environment-jsdom: 29.3.1
     jest-junit: 14.0.1
     js-yaml: 4.1.0
     jsonwebtoken: 8.5.1
@@ -4073,7 +4073,7 @@ __metadata:
   resolution: "@businessnjgovnavigator/shared@workspace:shared"
   dependencies:
     "@businessnjgovnavigator/content": "*"
-    "@jest/types": 29.2.1
+    "@jest/types": 29.3.1
     "@types/jest": 29.2.2
     "@types/node": 16.18.3
     "@types/uuid": 8.3.4
@@ -4086,7 +4086,7 @@ __metadata:
     eslint-plugin-jest: 27.1.4
     eslint-plugin-jest-formatting: 3.1.0
     eslint-plugin-unicorn: 44.0.2
-    jest: 29.3.0
+    jest: 29.3.1
     jest-junit: 14.0.1
     prettier: 2.7.1
     rimraf: 3.0.2
@@ -4115,7 +4115,7 @@ __metadata:
     "@cypress-audit/pa11y": 1.3.1
     "@emotion/react": 11.10.5
     "@emotion/styled": 11.10.5
-    "@jest/types": 29.2.1
+    "@jest/types": 29.3.1
     "@mdx-js/react": 2.1.5
     "@mui/lab": 5.0.0-alpha.106
     "@mui/material": 5.10.12
@@ -4162,7 +4162,7 @@ __metadata:
     "@typescript-eslint/parser": 5.42.1
     airtable: 0.11.5
     axios: 0.27.2
-    babel-jest: 29.3.0
+    babel-jest: 29.3.1
     babel-loader: 9.1.0
     broken-link-checker: 0.7.8
     clean-webpack-plugin: 4.0.0
@@ -4191,8 +4191,8 @@ __metadata:
     focus-trap-react: 10.0.0
     gray-matter: 4.0.3
     identity-obj-proxy: 3.0.0
-    jest: 29.3.0
-    jest-environment-jsdom: 29.3.0
+    jest: 29.3.1
+    jest-environment-jsdom: 29.3.1
     jest-junit: 14.0.1
     js-yaml: 4.1.0
     lodash: 4.17.21
@@ -5827,7 +5827,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jest/core@npm:^29.3.0, @jest/core@npm:^29.3.1":
+"@jest/core@npm:^29.3.1":
   version: 29.3.1
   resolution: "@jest/core@npm:29.3.1"
   dependencies:
@@ -5877,7 +5877,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jest/environment@npm:^29.3.0, @jest/environment@npm:^29.3.1":
+"@jest/environment@npm:^29.3.1":
   version: 29.3.1
   resolution: "@jest/environment@npm:29.3.1"
   dependencies:
@@ -5908,7 +5908,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jest/fake-timers@npm:^29.3.0, @jest/fake-timers@npm:^29.3.1":
+"@jest/fake-timers@npm:^29.3.1":
   version: 29.3.1
   resolution: "@jest/fake-timers@npm:29.3.1"
   dependencies:
@@ -6038,7 +6038,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jest/transform@npm:^29.3.0, @jest/transform@npm:^29.3.1":
+"@jest/transform@npm:^29.3.1":
   version: 29.3.1
   resolution: "@jest/transform@npm:29.3.1"
   dependencies:
@@ -6061,9 +6061,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jest/types@npm:29.2.1":
-  version: 29.2.1
-  resolution: "@jest/types@npm:29.2.1"
+"@jest/types@npm:29.3.1, @jest/types@npm:^29.3.1":
+  version: 29.3.1
+  resolution: "@jest/types@npm:29.3.1"
   dependencies:
     "@jest/schemas": ^29.0.0
     "@types/istanbul-lib-coverage": ^2.0.0
@@ -6071,7 +6071,7 @@ __metadata:
     "@types/node": "*"
     "@types/yargs": ^17.0.8
     chalk: ^4.0.0
-  checksum: a83f20727425179aa05974aa7553c307d207fbb6b7ae5ab1e37fbb6ba9b6655f26655301fc804f2545d33f4c4a6b59d41eed1737c005d2b83fce9e14841b4150
+  checksum: 6f9faf27507b845ff3839c1adc6dbd038d7046d03d37e84c9fc956f60718711a801a5094c7eeee6b39ccf42c0ab61347fdc0fa49ab493ae5a8efd2fd41228ee8
   languageName: node
   linkType: hard
 
@@ -6098,20 +6098,6 @@ __metadata:
     "@types/yargs": ^16.0.0
     chalk: ^4.0.0
   checksum: d1f43cc946d87543ddd79d49547aab2399481d34025d5c5f2025d3d99c573e1d9832fa83cef25e9d9b07a8583500229d15bbb07b8e233d127d911d133e2f14b1
-  languageName: node
-  linkType: hard
-
-"@jest/types@npm:^29.2.1, @jest/types@npm:^29.3.1":
-  version: 29.3.1
-  resolution: "@jest/types@npm:29.3.1"
-  dependencies:
-    "@jest/schemas": ^29.0.0
-    "@types/istanbul-lib-coverage": ^2.0.0
-    "@types/istanbul-reports": ^3.0.0
-    "@types/node": "*"
-    "@types/yargs": ^17.0.8
-    chalk: ^4.0.0
-  checksum: 6f9faf27507b845ff3839c1adc6dbd038d7046d03d37e84c9fc956f60718711a801a5094c7eeee6b39ccf42c0ab61347fdc0fa49ab493ae5a8efd2fd41228ee8
   languageName: node
   linkType: hard
 
@@ -11652,24 +11638,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-jest@npm:29.3.0":
-  version: 29.3.0
-  resolution: "babel-jest@npm:29.3.0"
-  dependencies:
-    "@jest/transform": ^29.3.0
-    "@types/babel__core": ^7.1.14
-    babel-plugin-istanbul: ^6.1.1
-    babel-preset-jest: ^29.2.0
-    chalk: ^4.0.0
-    graceful-fs: ^4.2.9
-    slash: ^3.0.0
-  peerDependencies:
-    "@babel/core": ^7.8.0
-  checksum: bd7c2bfffe2bb733287a50ea08c963a475bdb704393111bf4ca50caae6166b402a4ec95dc163a00337914523d688538786248b64e1708a1d214d984fcf9fd7fd
-  languageName: node
-  linkType: hard
-
-"babel-jest@npm:^29.3.1":
+"babel-jest@npm:29.3.1, babel-jest@npm:^29.3.1":
   version: 29.3.1
   resolution: "babel-jest@npm:29.3.1"
   dependencies:
@@ -21008,7 +20977,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-cli@npm:^29.3.0":
+"jest-cli@npm:^29.3.1":
   version: 29.3.1
   resolution: "jest-cli@npm:29.3.1"
   dependencies:
@@ -21127,24 +21096,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-environment-jsdom@npm:29.3.0":
-  version: 29.3.0
-  resolution: "jest-environment-jsdom@npm:29.3.0"
+"jest-environment-jsdom@npm:29.3.1":
+  version: 29.3.1
+  resolution: "jest-environment-jsdom@npm:29.3.1"
   dependencies:
-    "@jest/environment": ^29.3.0
-    "@jest/fake-timers": ^29.3.0
-    "@jest/types": ^29.2.1
+    "@jest/environment": ^29.3.1
+    "@jest/fake-timers": ^29.3.1
+    "@jest/types": ^29.3.1
     "@types/jsdom": ^20.0.0
     "@types/node": "*"
-    jest-mock: ^29.3.0
-    jest-util: ^29.2.1
+    jest-mock: ^29.3.1
+    jest-util: ^29.3.1
     jsdom: ^20.0.0
   peerDependencies:
     canvas: ^2.5.0
   peerDependenciesMeta:
     canvas:
       optional: true
-  checksum: 35f7d3ec4c32cd1e2ca7538e201aaf3335090ab987fe96b9ee4668b48625025b56d33be59ea3e6b1f805a3244c5d3a050b9bf8765fb72caad685e3e5af45c1c5
+  checksum: 91b04ed02b2275c3a47740e20c2691f67c4295e17174c8ccd3a71fe77707239e487506bd157279b4257ce1be0a8c2be377817ee85689966a9e604bb6ef1199f0
   languageName: node
   linkType: hard
 
@@ -21278,7 +21247,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-mock@npm:^29.3.0, jest-mock@npm:^29.3.1":
+"jest-mock@npm:^29.3.1":
   version: 29.3.1
   resolution: "jest-mock@npm:29.3.1"
   dependencies:
@@ -21457,7 +21426,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-util@npm:^29.0.0, jest-util@npm:^29.2.1, jest-util@npm:^29.3.1":
+"jest-util@npm:^29.0.0, jest-util@npm:^29.3.1":
   version: 29.3.1
   resolution: "jest-util@npm:29.3.1"
   dependencies:
@@ -21535,14 +21504,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest@npm:29.3.0":
-  version: 29.3.0
-  resolution: "jest@npm:29.3.0"
+"jest@npm:29.3.1":
+  version: 29.3.1
+  resolution: "jest@npm:29.3.1"
   dependencies:
-    "@jest/core": ^29.3.0
-    "@jest/types": ^29.2.1
+    "@jest/core": ^29.3.1
+    "@jest/types": ^29.3.1
     import-local: ^3.0.2
-    jest-cli: ^29.3.0
+    jest-cli: ^29.3.1
   peerDependencies:
     node-notifier: ^8.0.1 || ^9.0.0 || ^10.0.0
   peerDependenciesMeta:
@@ -21550,7 +21519,7 @@ __metadata:
       optional: true
   bin:
     jest: bin/jest.js
-  checksum: 0c48f06e81ef68aef11d9342926f222cca60639b44779483b742239b63249c070d633850d26a2a8d61001709ff27722b6b8375a06c99111ef4e99a557fbde6d5
+  checksum: 613f4ec657b14dd84c0056b2fef1468502927fd551bef0b19d4a91576a609678fb316c6a5b5fc6120dd30dd4ff4569070ffef3cb507db9bb0260b28ddaa18d7a
   languageName: node
   linkType: hard
 
