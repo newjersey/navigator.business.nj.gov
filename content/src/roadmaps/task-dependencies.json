@@ -185,6 +185,12 @@
       "dependencies": [
         "architect-license"
       ]
+    },
+    {
+      "name": "auto-body-repair-license",
+      "dependencies": [
+        "register-for-taxes"
+      ]
     }
   ]
 }
