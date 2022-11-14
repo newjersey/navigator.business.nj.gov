@@ -209,6 +209,12 @@
       "dependencies": [
         "form-business-entity-formation"
       ]
+    },
+    {
+      "name": "firm-engineer",
+      "dependencies": [
+        "form-business-entity-formation"
+      ]
     }
   ]
 }
