@@ -197,6 +197,18 @@
       "dependencies": [
         "register-for-taxes"
       ]
+    },
+    {
+      "name": "detective-employees",
+      "dependencies": [
+        "detective-agency-license"
+      ]
+    },
+    {
+      "name": "detective-agency-license",
+      "dependencies": [
+        "form-business-entity-formation"
+      ]
     }
   ]
 }
