@@ -193,12 +193,6 @@
       ]
     },
     {
-      "name": "taxi-driver-certification",
-      "dependencies": [
-        "register-for-taxes"
-      ]
-    },
-    {
       "name": "detective-employees",
       "dependencies": [
         "detective-agency-license"
