@@ -179,6 +179,12 @@
       "dependencies": [
         "architect-license"
       ]
+    },
+    {
+      "name": "authorization-architect-firm",
+      "dependencies": [
+        "architect-license"
+      ]
     }
   ]
 }
