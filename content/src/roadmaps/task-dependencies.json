@@ -173,6 +173,12 @@
       "dependencies": [
         "daycare-site-requirements"
       ]
+    },
+    {
+      "name": "architect-are-exam",
+      "dependencies": [
+        "architect-license"
+      ]
     }
   ]
 }
