@@ -199,18 +199,6 @@
       ]
     },
     {
-      "name": "detective-agency-license",
-      "dependencies": [
-        "form-business-entity-formation"
-      ]
-    },
-    {
-      "name": "firm-engineer",
-      "dependencies": [
-        "form-business-entity-formation"
-      ]
-    },
-    {
       "name": "hvac-license",
       "dependencies": [
         "hvac-insurance-surety-bond"
