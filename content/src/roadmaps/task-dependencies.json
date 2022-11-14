@@ -203,6 +203,12 @@
       "dependencies": [
         "hvac-insurance-surety-bond"
       ]
+    },
+    {
+      "name": "moving-company-license",
+      "dependencies": [
+        "moving-company-insurance"
+      ]
     }
   ]
 }
