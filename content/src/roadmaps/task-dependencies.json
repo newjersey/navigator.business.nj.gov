@@ -191,6 +191,12 @@
       "dependencies": [
         "register-for-taxes"
       ]
+    },
+    {
+      "name": "taxi-driver-certification",
+      "dependencies": [
+        "register-for-taxes"
+      ]
     }
   ]
 }
