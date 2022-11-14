@@ -215,6 +215,12 @@
       "dependencies": [
         "form-business-entity-formation"
       ]
+    },
+    {
+      "name": "hvac-license",
+      "dependencies": [
+        "hvac-insurance-surety-bond"
+      ]
     }
   ]
 }
