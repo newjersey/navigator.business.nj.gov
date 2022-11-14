@@ -146,12 +146,7 @@
     {
       "name": "form-business-entity-foreign",
       "dependencies": [
-        "dba-resolution-foreign"
-      ]
-    },
-    {
-      "name": "form-business-entity-foreign",
-      "dependencies": [
+        "dba-resolution-foreign",
         "certificate-good-standing-foreign"
       ]
     },
