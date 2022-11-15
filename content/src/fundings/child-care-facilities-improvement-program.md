@@ -40,12 +40,12 @@ Applicants are limited to one application per DCF-licensed child care center loc
 
 ### Eligibility
 
-* Child care center licensed by NJDCF as of June 4th, 2021
+* Child care center licensed by New Jersey Department of Children and Families (NJDCF) as of June 4th, 2021
 * Currently enroll, or have enrolled in the 12 months prior to the date of application, at least one child receiving support through New Jersey Department of Human Services (NJDHS) Child Care Assistance Program
 * For-profit businesses or non-profit organizations that can own or lease space
 * Be in good standing with the New Jersey Departments of Labor and Workforce Development, Environmental Protection, NJDCF, and NJDHS
-* Must not be debarred from receiving federal funds, as indicated through System for Award Management (SAM)
-* Contractors conducting facility improvements must be DOL Public Works Registered Contractors and abide by state prevailing wage and affirmative action requirements
+* Must not be debarred from receiving federal funds, as indicated through [System for Award Management (SAM)](https://sam.gov/content/home)
+* Contractors conducting facility improvements must be New Jersey Department of Labor (NJDOL) Public Works Registered Contractors and abide by state prevailing wage and affirmative action requirements
 
 **Project elements that can be covered by this grant:**
 
