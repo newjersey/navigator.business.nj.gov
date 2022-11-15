@@ -9,6 +9,7 @@ required: true
 issuingAgency: New Jersey State Police Private Detective Unit
 ---
 Your detective agency must be licensed prior to offering services to the public.  
+You can read the [Detective Agency license instructions](https://www.nj.gov/njsp/private-detective/pdf/sp-171-instructions_2020.pdf) and the NJ State Police's Private Detective [information page](https://www.nj.gov/njsp/private-detective/index.shtml) for additional details. 
 
 ---
  
