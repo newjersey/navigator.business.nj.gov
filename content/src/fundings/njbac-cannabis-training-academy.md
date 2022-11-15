@@ -39,7 +39,7 @@ The academy does not provide legal advice.
 ### Eligibility
 
 * Individuals who are considering applying for a conditional or annual license
-* Must be in the social equity, legacy, Impact Zone, diverse-owned, veteran, veteran-disabled, LGBTQ+ and/or microbusiness categories
+* Must be in the `Impact Zone|impactzonebusiness-cannabis`, `social equity business|socialequitybusiness-cannabis`, `diversely owned | diverselyownedbusiness-cannabis`, veteran, veteran-disabled, LGBTQ+ and/or microbusiness categories
 
 > **Benefits**
 >
