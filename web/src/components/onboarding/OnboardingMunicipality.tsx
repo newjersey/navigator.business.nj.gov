@@ -10,6 +10,7 @@ import { FocusEvent, ReactElement, useContext } from "react";
 interface Props {
   onValidation: (field: ProfileFields, invalid: boolean) => void;
   fieldStates: ProfileFieldErrorMap;
+  hideErrorLabel?: boolean;
 }
 
 export const OnboardingMunicipality = (props: Props): ReactElement => {
@@ -58,6 +59,7 @@ export const OnboardingMunicipality = (props: Props): ReactElement => {
         onSelect={onSelect}
         placeholderText={Config.profileDefaults[state.flow].municipality.placeholder ?? ""}
         helperText={Config.profileDefaults[state.flow].municipality.errorTextRequired ?? " "}
+        hideErrorLabel={props.hideErrorLabel}
       />
     </div>
   );

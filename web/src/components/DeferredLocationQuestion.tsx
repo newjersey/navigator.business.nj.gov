@@ -102,7 +102,11 @@ export const DeferredLocationQuestion = (props: Props): ReactElement => {
           adjustPaddingForHelperText
           removeStyling
         >
-          <OnboardingMunicipality onValidation={() => {}} fieldStates={createProfileFieldErrorMap()} />
+          <OnboardingMunicipality
+            onValidation={() => {}}
+            fieldStates={createProfileFieldErrorMap()}
+            hideErrorLabel={true}
+          />
         </DeferredOnboardingQuestion>
       ) : (
         <div className="padding-3">

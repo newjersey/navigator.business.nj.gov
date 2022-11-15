@@ -17,6 +17,7 @@ interface Props {
   error?: boolean;
   ariaLabel?: string;
   validationLabel?: string;
+  hideErrorLabel?: boolean;
 }
 
 export const MunicipalityDropdown = (props: Props): ReactElement => {
@@ -39,6 +40,13 @@ export const MunicipalityDropdown = (props: Props): ReactElement => {
       return option.displayName;
     },
   });
+
+  const getHelperText = (): string | undefined => {
+    if (props.hideErrorLabel) {
+      return undefined;
+    }
+    return props.error ? props.helperText : " ";
+  };
 
   return (
     <Autocomplete
@@ -83,7 +91,7 @@ export const MunicipalityDropdown = (props: Props): ReactElement => {
             variant="outlined"
             placeholder={props.placeholderText}
             error={props.error}
-            helperText={props.error ? props.helperText : " "}
+            helperText={getHelperText()}
             sx={{
               "& .MuiInputBase-root": {
                 backgroundColor: "white",
