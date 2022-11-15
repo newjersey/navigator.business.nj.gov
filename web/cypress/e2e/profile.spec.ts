@@ -34,7 +34,6 @@ describe("Profile [feature] [all] [group1]", () => {
     it("onboards random industry where homebase doesn't apply, then changes to industry where it applies and updates all fields in profile", () => {
       const industry = randomNonHomeBasedIndustry();
       const legalStructureId = randomElementFromArray(LegalStructures as LegalStructure[]).id;
-      const townDisplayName = "Atlantic";
       const homeBasedQuestion = industry.industryOnboardingQuestions.canBeHomeBased
         ? Boolean(randomInt() % 2)
         : undefined;
@@ -48,7 +47,6 @@ describe("Profile [feature] [all] [group1]", () => {
       completeNewBusinessOnboarding({
         industry,
         liquorLicenseQuestion,
-        townDisplayName,
         legalStructureId,
         requiresCpa,
       });
@@ -57,7 +55,6 @@ describe("Profile [feature] [all] [group1]", () => {
         industry,
         homeBasedQuestion,
         liquorLicenseQuestion,
-        townDisplayName,
         legalStructureId,
       });
 
@@ -93,7 +90,6 @@ describe("Profile [feature] [all] [group1]", () => {
         ? Boolean(randomInt() % 2)
         : undefined;
       const legalStructureId = randomElementFromArray(LegalStructures as LegalStructure[]).id;
-      const townDisplayName = "Atlantic";
       const requiresCpa = industry.industryOnboardingQuestions.isCpaRequiredApplicable
         ? Boolean(randomInt() % 2)
         : undefined;
@@ -102,7 +98,6 @@ describe("Profile [feature] [all] [group1]", () => {
         industry,
         liquorLicenseQuestion,
         legalStructureId,
-        townDisplayName,
         requiresCpa,
       });
 
@@ -115,7 +110,6 @@ describe("Profile [feature] [all] [group1]", () => {
         homeBasedQuestion,
         liquorLicenseQuestion,
         legalStructureId,
-        townDisplayName,
       });
     });
 
@@ -127,7 +121,6 @@ describe("Profile [feature] [all] [group1]", () => {
       );
       const liquorLicenseQuestion = Boolean(randomInt() % 2);
       const legalStructureId = randomElementFromArray(LegalStructures as LegalStructure[]).id;
-      const townDisplayName = "Atlantic";
       const requiresCpa = industry.industryOnboardingQuestions.isCpaRequiredApplicable
         ? Boolean(randomInt() % 2)
         : undefined;
@@ -136,7 +129,6 @@ describe("Profile [feature] [all] [group1]", () => {
         industry,
         liquorLicenseQuestion,
         legalStructureId,
-        townDisplayName,
         requiresCpa,
       });
 
@@ -144,7 +136,6 @@ describe("Profile [feature] [all] [group1]", () => {
         industry,
         liquorLicenseQuestion,
         legalStructureId,
-        townDisplayName,
       });
 
       updateNewBusinessProfilePage({
@@ -162,7 +153,6 @@ describe("Profile [feature] [all] [group1]", () => {
       const liquorLicenseQuestion = industry.industryOnboardingQuestions.isLiquorLicenseApplicable
         ? Boolean(randomInt() % 2)
         : undefined;
-      const townDisplayName = "Atlantic";
       const updatedEntityId = randomInt(10).toString();
       const requiresCpa = industry.industryOnboardingQuestions.isCpaRequiredApplicable
         ? Boolean(randomInt() % 2)
@@ -172,7 +162,6 @@ describe("Profile [feature] [all] [group1]", () => {
         industry,
         legalStructureId,
         liquorLicenseQuestion,
-        townDisplayName,
         requiresCpa,
       });
 
@@ -180,7 +169,6 @@ describe("Profile [feature] [all] [group1]", () => {
         industry,
         legalStructureId,
         liquorLicenseQuestion,
-        townDisplayName,
       });
 
       updateNewBusinessProfilePage({

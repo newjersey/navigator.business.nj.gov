@@ -1,0 +1,201 @@
+import { DeferredLocationQuestion } from "@/components/DeferredLocationQuestion";
+import { getMergedConfig } from "@/contexts/configContext";
+import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
+import * as buildUserRoadmap from "@/lib/roadmap/buildUserRoadmap";
+import analytics from "@/lib/utils/analytics";
+import * as analyticsHelpers from "@/lib/utils/analytics-helpers";
+import {
+  generateMunicipality,
+  generateProfileData,
+  generateRoadmap,
+  generateUserData,
+} from "@/test/factories";
+import { withRoadmap } from "@/test/helpers";
+import {
+  currentUserData,
+  setupStatefulUserDataContext,
+  WithStatefulUserData,
+} from "@/test/mock/withStatefulUserData";
+import { Municipality } from "@businessnjgovnavigator/shared/municipality";
+import { UserData } from "@businessnjgovnavigator/shared/userData";
+import { act, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
+
+function setupMockAnalytics(): typeof analytics {
+  return {
+    ...jest.requireActual("@/lib/utils/analytics").default,
+    event: {
+      ...jest.requireActual("@/lib/utils/analytics").default.event,
+      task_location_question: {
+        submit: {
+          location_entered_for_first_time: jest.fn(),
+        },
+      },
+    },
+  };
+}
+
+const Config = getMergedConfig();
+jest.mock("@/lib/data-hooks/useUserData", () => {
+  return { useUserData: jest.fn() };
+});
+jest.mock("@/lib/utils/analytics-helpers", () => {
+  return { setAnalyticsDimensions: jest.fn() };
+});
+jest.mock("@/lib/data-hooks/useRoadmap", () => {
+  return { useRoadmap: jest.fn() };
+});
+jest.mock("@/lib/roadmap/buildUserRoadmap", () => {
+  return { buildUserRoadmap: jest.fn() };
+});
+jest.mock("@/lib/utils/analytics", () => {
+  return setupMockAnalytics();
+});
+
+const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
+const mockBuildUserRoadmap = buildUserRoadmap as jest.Mocked<typeof buildUserRoadmap>;
+const mockAnalyticsHelpers = analyticsHelpers as jest.Mocked<typeof analyticsHelpers>;
+
+describe("<DeferredLocationQuestion />", () => {
+  let setRoadmap: jest.Mock;
+
+  beforeEach(() => {
+    jest.resetAllMocks();
+    setupStatefulUserDataContext();
+    setRoadmap = jest.fn();
+    mockBuildUserRoadmap.buildUserRoadmap.mockResolvedValue(generateRoadmap({}));
+  });
+
+  const renderComponent = ({
+    initialUserData,
+    innerContent,
+    municipalities,
+  }: {
+    initialUserData?: UserData;
+    innerContent?: string;
+    municipalities?: Municipality[];
+  }) => {
+    render(
+      withRoadmap(
+        <MunicipalitiesContext.Provider value={{ municipalities: municipalities ?? [] }}>
+          <WithStatefulUserData initialUserData={initialUserData ?? generateUserData({})}>
+            <DeferredLocationQuestion innerContent={innerContent ?? ""} />
+          </WithStatefulUserData>
+        </MunicipalitiesContext.Provider>,
+        generateRoadmap({}),
+        undefined,
+        setRoadmap
+      )
+    );
+  };
+
+  it("shows location question and not inner content if location is not yet answered", () => {
+    const userData = generateUserData({ profileData: generateProfileData({ municipality: undefined }) });
+    renderComponent({ initialUserData: userData, innerContent: "inner-content" });
+    expect(screen.getByText(Config.deferredLocation.header)).toBeInTheDocument();
+    expect(screen.queryByText("inner-content")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("city-success-banner")).not.toBeInTheDocument();
+  });
+
+  it("shows inner content without question nor success banner when already location saved", () => {
+    const municipality = generateMunicipality({});
+    const userData = generateUserData({ profileData: generateProfileData({ municipality }) });
+    renderComponent({ initialUserData: userData, innerContent: "inner-content" });
+    expect(screen.queryByText(Config.deferredLocation.header)).not.toBeInTheDocument();
+    expect(screen.getByText("inner-content")).toBeInTheDocument();
+    expect(screen.queryByTestId("city-success-banner")).not.toBeInTheDocument();
+  });
+
+  describe("when saving location", () => {
+    const newark = generateMunicipality({ displayName: "Newark" });
+    const absecon = generateMunicipality({ displayName: "Absecon" });
+    const userData = generateUserData({ profileData: generateProfileData({ municipality: undefined }) });
+
+    const selectNewarkAndSave = async () => {
+      renderComponent({
+        initialUserData: userData,
+        innerContent: "inner-content",
+        municipalities: [newark, absecon],
+      });
+
+      selectLocationByText("Newark");
+      // eslint-disable-next-line testing-library/no-unnecessary-act
+      await act(() => {
+        fireEvent.click(screen.getByText(Config.dashboardDefaults.deferredOnboardingSaveButtonText));
+      });
+    };
+
+    it("saves municipality to profile", async () => {
+      await selectNewarkAndSave();
+      expect(currentUserData().profileData.municipality).toEqual(newark);
+    });
+
+    it("shows inner content and banner on save", async () => {
+      await selectNewarkAndSave();
+      await screen.findByTestId("city-success-banner");
+      expect(screen.queryByText(Config.deferredLocation.header)).not.toBeInTheDocument();
+      expect(screen.getByText("inner-content")).toBeInTheDocument();
+    });
+
+    it("shows location question when edit button is clicked", async () => {
+      await selectNewarkAndSave();
+      fireEvent.click(screen.getByText(Config.deferredLocation.editText));
+      expect(screen.getByText(Config.deferredLocation.header)).toBeInTheDocument();
+      expect(screen.queryByTestId("city-success-banner")).not.toBeInTheDocument();
+    });
+
+    it("shows inner content when saving location after editing", async () => {
+      await selectNewarkAndSave();
+      fireEvent.click(screen.getByText(Config.deferredLocation.editText));
+      selectLocationByText("Absecon");
+      fireEvent.click(screen.getByText(Config.dashboardDefaults.deferredOnboardingSaveButtonText));
+      await screen.findByTestId("city-success-banner");
+      expect(screen.getByText("inner-content")).toBeInTheDocument();
+    });
+
+    it("removes municipality from user profile when clicking remove button", async () => {
+      await selectNewarkAndSave();
+      fireEvent.click(screen.getByText(Config.deferredLocation.removeText));
+      expect(currentUserData().profileData.municipality).toEqual(undefined);
+    });
+
+    it("shows question and removes inner-content/success banner when removing location", async () => {
+      await selectNewarkAndSave();
+      fireEvent.click(screen.getByText(Config.deferredLocation.removeText));
+      expect(screen.getByText(Config.deferredLocation.header)).toBeInTheDocument();
+      expect(screen.queryByTestId("city-success-banner")).not.toBeInTheDocument();
+      expect(screen.queryByText("inner-content")).not.toBeInTheDocument();
+    });
+
+    it("updates the roadmap and analytics when municipality is removed", async () => {
+      const returnedRoadmap = generateRoadmap({});
+      mockBuildUserRoadmap.buildUserRoadmap.mockResolvedValue(returnedRoadmap);
+
+      await selectNewarkAndSave();
+      fireEvent.click(screen.getByText(Config.deferredLocation.removeText));
+
+      const newProfileData = {
+        ...userData.profileData,
+        municipality: undefined,
+      };
+
+      await waitFor(() => {
+        return expect(mockBuildUserRoadmap.buildUserRoadmap).toHaveBeenCalledWith(newProfileData);
+      });
+      expect(setRoadmap).toHaveBeenCalledWith(returnedRoadmap);
+      expect(mockAnalyticsHelpers.setAnalyticsDimensions).toHaveBeenCalledWith(newProfileData);
+    });
+
+    it("sends analytics when municipality entered for first time", async () => {
+      await selectNewarkAndSave();
+      expect(
+        mockAnalytics.event.task_location_question.submit.location_entered_for_first_time
+      ).toHaveBeenCalled();
+    });
+  });
+
+  const selectLocationByText = (value: string) => {
+    fireEvent.mouseDown(screen.getByLabelText("Location"));
+    const listbox = within(screen.getByRole("listbox"));
+    fireEvent.click(listbox.getByText(value));
+  };
+});

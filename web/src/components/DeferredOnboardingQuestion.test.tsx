@@ -47,11 +47,11 @@ describe("<DeferredOnboardingQuestion />", () => {
     useMockRouter({});
   });
 
-  const renderComponent = (userData?: UserData) => {
+  const renderComponent = ({ userData, onSave }: { userData?: UserData; onSave?: () => void }) => {
     render(
       withRoadmap(
         <WithStatefulUserData initialUserData={userData || generateUserData({})}>
-          <DeferredOnboardingQuestion>
+          <DeferredOnboardingQuestion label="" onSave={onSave || jest.fn()}>
             <OnboardingHomeBasedBusiness />
           </DeferredOnboardingQuestion>
         </WithStatefulUserData>,
@@ -63,7 +63,7 @@ describe("<DeferredOnboardingQuestion />", () => {
   };
 
   it("saves changes to profile data", () => {
-    renderComponent();
+    renderComponent({});
     fireEvent.click(screen.getByTestId("home-based-business-radio-true"));
     fireEvent.click(screen.getByText(Config.dashboardDefaults.deferredOnboardingSaveButtonText));
     expect(currentUserData().profileData.homeBasedBusiness).toEqual(true);
@@ -71,7 +71,7 @@ describe("<DeferredOnboardingQuestion />", () => {
 
   it("sets analytics dimensions", async () => {
     const profileData = generateProfileData({ homeBasedBusiness: undefined });
-    renderComponent(generateUserData({ profileData }));
+    renderComponent({ userData: generateUserData({ profileData }) });
     fireEvent.click(screen.getByTestId("home-based-business-radio-true"));
     fireEvent.click(screen.getByText(Config.dashboardDefaults.deferredOnboardingSaveButtonText));
     await waitFor(() => {
@@ -83,13 +83,14 @@ describe("<DeferredOnboardingQuestion />", () => {
   });
 
   it("builds and sets new roadmap", async () => {
+    const returnedRoadmap = generateRoadmap({});
+    mockBuildUserRoadmap.buildUserRoadmap.mockResolvedValue(returnedRoadmap);
+
     const profileData = generateProfileData({ homeBasedBusiness: undefined });
-    renderComponent(generateUserData({ profileData }));
+    renderComponent({ userData: generateUserData({ profileData }) });
     fireEvent.click(screen.getByTestId("home-based-business-radio-true"));
     fireEvent.click(screen.getByText(Config.dashboardDefaults.deferredOnboardingSaveButtonText));
 
-    const returnedRoadmap = generateRoadmap({});
-    mockBuildUserRoadmap.buildUserRoadmap.mockResolvedValue(returnedRoadmap);
     await waitFor(() => {
       return expect(mockBuildUserRoadmap.buildUserRoadmap).toHaveBeenCalledWith({
         ...profileData,
@@ -99,23 +100,18 @@ describe("<DeferredOnboardingQuestion />", () => {
     expect(setRoadmap).toHaveBeenCalledWith(returnedRoadmap);
   });
 
-  it("shallow routes to dashboard with query parameter", async () => {
-    renderComponent();
+  it("calls onSave prop", async () => {
+    const onSave = jest.fn();
+    renderComponent({ onSave });
     fireEvent.click(screen.getByTestId("home-based-business-radio-true"));
     fireEvent.click(screen.getByText(Config.dashboardDefaults.deferredOnboardingSaveButtonText));
     await waitFor(() => {
-      return expect(mockPush).toHaveBeenCalledWith(
-        { query: { deferredQuestionAnswered: "true" } },
-        undefined,
-        {
-          shallow: true,
-        }
-      );
+      expect(onSave).toHaveBeenCalled();
     });
   });
 
   it("does not update if no answer provided", () => {
-    renderComponent();
+    renderComponent({});
     fireEvent.click(screen.getByText(Config.dashboardDefaults.deferredOnboardingSaveButtonText));
     expect(userDataWasNotUpdated()).toBe(true);
     expect(mockAnalyticsHelpers.setAnalyticsDimensions).not.toHaveBeenCalled();

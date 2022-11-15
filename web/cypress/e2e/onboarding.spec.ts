@@ -30,10 +30,6 @@ describe("Onboarding [feature] [all] [group2]", () => {
     onOnboardingPage.clickNext();
 
     cy.url().should("include", "onboarding?page=4");
-    onOnboardingPage.selectLocation("Absecon");
-    onOnboardingPage.clickNext();
-
-    cy.url().should("include", "onboarding?page=5");
   });
 
   it("user data is updated if opted into newsletter", () => {

@@ -4,7 +4,11 @@
 import { LookupIndustryById } from "@businessnjgovnavigator/shared/";
 import { onDashboardPage } from "cypress/support/page_objects/dashboardPage";
 import { onProfilePage } from "cypress/support/page_objects/profilePage";
-import { completeExistingBusinessOnboarding, completeNewBusinessOnboarding } from "../support/helpers";
+import {
+  clickDeferredSaveButton,
+  completeExistingBusinessOnboarding,
+  completeNewBusinessOnboarding,
+} from "../support/helpers";
 
 const sizes = ["iphone-5", [1024, 768]];
 describe("Dashboard [feature] [all] [group2]", () => {
@@ -75,7 +79,7 @@ describe("Dashboard [feature] [all] [group2]", () => {
         // answer deferred question to get local-requirements task
         onDashboardPage.getHomeBased().should("exist");
         onDashboardPage.selectHomeBased(false);
-        onDashboardPage.clickDeferredSaveButton();
+        clickDeferredSaveButton();
         onDashboardPage.getHomeBased().should("not.exist");
         cy.get('[data-task="identify-potential-lease"]').should("exist");
         cy.wait(1000);
@@ -90,7 +94,6 @@ describe("Dashboard [feature] [all] [group2]", () => {
         cy.get('[data-task="check-local-requirements"]').click({ force: true });
         cy.get('[data-task-id="register-trade-name"]').should("not.exist");
         cy.get('[data-task-id="check-local-requirements"]').should("exist");
-        cy.contains("Absecon").should("exist");
 
         cy.get('[data-testid="back-to-dashboard"]').click({ force: true });
       });

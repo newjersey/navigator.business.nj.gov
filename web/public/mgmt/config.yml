@@ -1634,8 +1634,8 @@ collections:
                 }
               - { label: Business Address - City Label, name: businessAddressCityLabel, widget: string }
               - {
-                  label: Business Address - City - Not Set,
-                  name: notSetBusinessAddressCityLabel,
+                  label: Business Address - City - Placeholder,
+                  name: businessAddressCityPlaceholder,
                   widget: string,
                 }
               - {
@@ -2720,7 +2720,11 @@ collections:
               - { label: Description, name: description, widget: markdown }
               - { label: Date field - label, name: fieldLabel, widget: text }
               - { label: Date field - description, name: fieldDescription, widget: markdown }
-              - { label: Error text (when not entered), name: errorText, widget: string }
+              - {
+                  label: Date of Formation Error text (when not entered),
+                  name: dateOfFormationErrorText,
+                  widget: string,
+                }
               - { label: Save button text, name: saveButtonText, widget: string }
               - { label: Cancel button text, name: cancelButtonText, widget: string }
               - { label: Are-You-Sure Modal Header, name: areYouSureModalHeader, widget: string }

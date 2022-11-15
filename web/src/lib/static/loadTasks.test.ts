@@ -74,6 +74,7 @@ describe("loadTasks", () => {
         'urlSlug: "some-url-slug-2"\n' +
         'callToActionLink: "www.example2.com"\n' +
         'callToActionText: ""\n' +
+        "requiresLocation: true\n" +
         "---\n" +
         "\n" +
         "# I am a header2\n" +
@@ -115,6 +116,7 @@ describe("loadTasks", () => {
         urlSlug: "some-url-slug-2",
         callToActionLink: "www.example2.com",
         callToActionText: "",
+        requiresLocation: true,
         contentMd: "\n# I am a header2\n\nI am a text content2",
         unlockedBy: [
           { name: "Some Task Name3", urlSlug: "some-url-slug-3", filename: "task3", id: "some-id-3" },

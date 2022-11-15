@@ -1,8 +1,10 @@
 import { getMergedConfig } from "@/contexts/configContext";
+import * as buildUserRoadmap from "@/lib/roadmap/buildUserRoadmap";
 import { SidebarCardContent } from "@/lib/types/types";
 import {
   generatePreferences,
   generateProfileData,
+  generateRoadmap,
   generateSidebarCardContent,
   generateTaxFilingData,
   generateUserData,
@@ -32,6 +34,10 @@ jest.mock("next/router", () => {
 jest.mock("@/lib/data-hooks/useRoadmap", () => {
   return { useRoadmap: jest.fn() };
 });
+jest.mock("@/lib/roadmap/buildUserRoadmap", () => {
+  return { buildUserRoadmap: jest.fn() };
+});
+const mockBuildUserRoadmap = buildUserRoadmap as jest.Mocked<typeof buildUserRoadmap>;
 
 const Config = getMergedConfig();
 
@@ -52,6 +58,7 @@ describe("<SidebarCardTaxRegistrationNudge />", () => {
       useMockRouter({});
       setupStatefulUserDataContext();
       card = generateSidebarCardContent({ id: "tax-registration-nudge" });
+      mockBuildUserRoadmap.buildUserRoadmap.mockResolvedValue(generateRoadmap({}));
     });
 
     it("opens the modal when the user clicks the tax registration nudge", () => {

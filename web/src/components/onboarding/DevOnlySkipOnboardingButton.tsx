@@ -17,15 +17,9 @@ export const DevOnlySkipOnboardingButton = (props: Props) => {
       businessPersona: "STARTING",
       industryId: "generic",
       legalStructureId: "limited-liability-company",
-      municipality: {
-        displayName: "Newark",
-        name: "Newark",
-        county: "",
-        id: "12345",
-      },
     });
-    props.setPage({ current: 5, previous: 4 });
-    props.routeToPage(5);
+    props.setPage({ current: 4, previous: 3 });
+    props.routeToPage(4);
   };
 
   if (state.page === 1 && process.env.NODE_ENV === "development") {

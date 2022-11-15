@@ -4,7 +4,6 @@ import {
   BusinessUser,
   createEmptyProfileData,
   createEmptyUser,
-  Municipality,
   ProfileData,
 } from "@businessnjgovnavigator/shared";
 import { createContext } from "react";
@@ -14,7 +13,6 @@ interface ProfileDataState {
   profileData: ProfileData;
   user?: BusinessUser;
   flow: FlowType;
-  municipalities: Municipality[];
 }
 
 interface ProfileDataContextType {
@@ -30,7 +28,6 @@ export const ProfileDataContext = createContext<ProfileDataContextType>({
     profileData: createEmptyProfileData(),
     user: createEmptyUser(ABStorageFactory().getExperience()),
     flow: "STARTING",
-    municipalities: [],
   },
   setProfileData: () => {},
   setUser: () => {},

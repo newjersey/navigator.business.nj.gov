@@ -29,6 +29,7 @@ import { ProfileSnackbarAlert } from "@/components/profile/ProfileSnackbarAlert"
 import { ProfileTabNav } from "@/components/profile/ProfileTabNav";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { AuthAlertContext } from "@/contexts/authAlertContext";
+import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { RoadmapContext } from "@/contexts/roadmapContext";
 import { postGetAnnualFilings } from "@/lib/api-client/apiClient";
@@ -199,12 +200,7 @@ const ProfilePage = (props: Props): ReactElement => {
       taskProgress[einTaskId] = "COMPLETED";
     }
 
-    if (
-      userData.profileData.dateOfFormation !== profileData.dateOfFormation &&
-      !!profileData.dateOfFormation
-    ) {
-      analytics.event.profile_formation_date.submit.formation_date_changed();
-    }
+    sendOnSaveAnalytics(userData.profileData, profileData);
 
     let newUserData: UserData = {
       ...userData,
@@ -221,6 +217,22 @@ const ProfilePage = (props: Props): ReactElement => {
       setAlert("SUCCESS");
       redirect({ success: true });
     });
+  };
+
+  const sendOnSaveAnalytics = (prevProfileData: ProfileData, newProfileData: ProfileData): void => {
+    if (
+      prevProfileData.dateOfFormation !== newProfileData.dateOfFormation &&
+      !!newProfileData.dateOfFormation
+    ) {
+      analytics.event.profile_formation_date.submit.formation_date_changed();
+    }
+
+    const muncipalityEnteredForFirstTime =
+      prevProfileData.municipality === undefined && newProfileData.municipality !== undefined;
+
+    if (muncipalityEnteredForFirstTime) {
+      analytics.event.profile_location_question.submit.location_entered_for_first_time();
+    }
   };
 
   const getElements = (): ReactNode => {
@@ -592,106 +604,105 @@ const ProfilePage = (props: Props): ReactElement => {
   };
 
   return (
-    <ProfileDataContext.Provider
-      value={{
-        state: {
-          profileData: profileData,
-          flow: getFlow(profileData),
-          municipalities: props.municipalities,
-        },
-        setUser: () => {},
-        setProfileData,
-        onBack,
-      }}
-    >
-      <PageSkeleton>
-        <NavBar />
-        <main id="main">
-          <div className="usa-section padding-top-0 desktop:padding-top-3">
-            <EscapeModal
-              isOpen={escapeModal}
-              close={() => {
-                return setEscapeModal(false);
-              }}
-              primaryButtonOnClick={() => {
-                return redirect();
-              }}
-            />
-            <SingleColumnContainer>
-              {alert && (
-                <ProfileSnackbarAlert
-                  alert={alert}
-                  close={() => {
-                    return setAlert(undefined);
-                  }}
-                />
-              )}
-              <UserDataErrorAlert />
-            </SingleColumnContainer>
-            <div className="margin-top-6 desktop:margin-top-0">
-              <SidebarPageLayout
-                divider={false}
-                outlineBox={false}
-                stackNav={true}
-                navChildren={
-                  <ProfileTabNav
-                    userData={userData}
-                    businessPersona={businessPersona}
-                    foreignBusinessType={foreignBusinessType}
-                    activeTab={profileTab}
-                    setProfileTab={setProfileTab}
+    <MunicipalitiesContext.Provider value={{ municipalities: props.municipalities }}>
+      <ProfileDataContext.Provider
+        value={{
+          state: {
+            profileData: profileData,
+            flow: getFlow(profileData),
+          },
+          setUser: () => {},
+          setProfileData,
+          onBack,
+        }}
+      >
+        <PageSkeleton>
+          <NavBar />
+          <main id="main">
+            <div className="usa-section padding-top-0 desktop:padding-top-3">
+              <EscapeModal
+                isOpen={escapeModal}
+                close={() => {
+                  return setEscapeModal(false);
+                }}
+                primaryButtonOnClick={() => {
+                  return redirect();
+                }}
+              />
+              <SingleColumnContainer>
+                {alert && (
+                  <ProfileSnackbarAlert
+                    alert={alert}
+                    close={() => {
+                      return setAlert(undefined);
+                    }}
                   />
-                }
-              >
-                {userData === undefined ? (
-                  <div className="padding-top-0 desktop:padding-top-6 padding-bottom-15">
-                    <LoadingIndicator />
-                  </div>
-                ) : (
-                  <>
-                    <form onSubmit={onSubmit} className={`usa-prose onboarding-form margin-top-2`}>
-                      {getElements()}
-
-                      <hr className="margin-top-7 margin-bottom-2" aria-hidden={true} />
-                      <div className="float-right fdr">
-                        <Button
-                          style="secondary"
-                          onClick={() => {
-                            return onBack();
-                          }}
-                          dataTestid="back"
-                        >
-                          {Config.profileDefaults.backButtonText}
-                        </Button>
-                        <Button
-                          style="primary"
-                          typeSubmit
-                          onClick={() => {}}
-                          noRightMargin
-                          dataTestid="save"
-                          loading={isLoading}
-                        >
-                          {Config.profileDefaults.saveButtonText}
-                        </Button>
-                      </div>
-                    </form>
-                  </>
                 )}
-              </SidebarPageLayout>
+                <UserDataErrorAlert />
+              </SingleColumnContainer>
+              <div className="margin-top-6 desktop:margin-top-0">
+                <SidebarPageLayout
+                  divider={false}
+                  outlineBox={false}
+                  stackNav={true}
+                  navChildren={
+                    <ProfileTabNav
+                      userData={userData}
+                      businessPersona={businessPersona}
+                      foreignBusinessType={foreignBusinessType}
+                      activeTab={profileTab}
+                      setProfileTab={setProfileTab}
+                    />
+                  }
+                >
+                  {userData === undefined ? (
+                    <div className="padding-top-0 desktop:padding-top-6 padding-bottom-15">
+                      <LoadingIndicator />
+                    </div>
+                  ) : (
+                    <>
+                      <form onSubmit={onSubmit} className={`usa-prose onboarding-form margin-top-2`}>
+                        {getElements()}
+
+                        <hr className="margin-top-7 margin-bottom-2" aria-hidden={true} />
+                        <div className="float-right fdr">
+                          <Button
+                            style="secondary"
+                            onClick={() => {
+                              return onBack();
+                            }}
+                            dataTestid="back"
+                          >
+                            {Config.profileDefaults.backButtonText}
+                          </Button>
+                          <Button
+                            style="primary"
+                            typeSubmit
+                            onClick={() => {}}
+                            noRightMargin
+                            dataTestid="save"
+                            loading={isLoading}
+                          >
+                            {Config.profileDefaults.saveButtonText}
+                          </Button>
+                        </div>
+                      </form>
+                    </>
+                  )}
+                </SidebarPageLayout>
+              </div>
             </div>
-          </div>
-        </main>
-      </PageSkeleton>
-    </ProfileDataContext.Provider>
+          </main>
+        </PageSkeleton>
+      </ProfileDataContext.Provider>
+    </MunicipalitiesContext.Provider>
   );
 };
 
-export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => {
-  const municipalities = await loadAllMunicipalities();
-
+export const getStaticProps = (): GetStaticPropsResult<Props> => {
   return {
     props: {
-      municipalities,
+      municipalities: loadAllMunicipalities(),
     },
   };
 };

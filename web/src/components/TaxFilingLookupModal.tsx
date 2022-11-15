@@ -145,7 +145,6 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
         state: {
           profileData: profileData,
           flow: "OWNING",
-          municipalities: [],
         },
         setUser: () => {},
         setProfileData,

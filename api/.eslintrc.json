@@ -33,7 +33,7 @@
     "unicorn/no-array-reduce": "off",
     "unicorn/switch-case-braces": "off",
     "curly": "error",
-    "arrow-body-style": ["error", "always"]
+    "arrow-body-style": ["warn", "always"]
   },
   "overrides": [
     {

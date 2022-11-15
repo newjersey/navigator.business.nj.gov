@@ -1,9 +1,10 @@
 import { TaskProgressCheckbox } from "@/components/TaskProgressCheckbox";
 import { getMergedConfig } from "@/contexts/configContext";
+import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { generateProfileData, generateUserData } from "@/test/factories";
-import { markdownToText, withAuthAlert } from "@/test/helpers";
+import { withAuthAlert } from "@/test/helpers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import {
@@ -15,7 +16,6 @@ import {
 import { getCurrentDate } from "@businessnjgovnavigator/shared/dateHelpers";
 import { formationTaskId, taxTaskId } from "@businessnjgovnavigator/shared/domain-logic/taskIds";
 import { randomInt } from "@businessnjgovnavigator/shared/intHelpers";
-import { LegalStructures } from "@businessnjgovnavigator/shared/legalStructure";
 import { TaskProgress, UserData } from "@businessnjgovnavigator/shared/userData";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
@@ -30,19 +30,11 @@ jest.mock("@/lib/data-hooks/useUserData", () => {
 jest.mock("@/lib/data-hooks/useRoadmap", () => {
   return { useRoadmap: jest.fn() };
 });
+jest.mock("@/lib/roadmap/buildUserRoadmap", () => {
+  return { buildUserRoadmap: jest.fn() };
+});
 
 const Config = getMergedConfig();
-
-const randomTradeNameLegalStructure = () => {
-  return randomInt() % 2 ? "sole-proprietorship" : "general-partnership";
-};
-
-const randomPublicFilingLegalStructure = () => {
-  const nonTradeNameLegalStructures = LegalStructures.filter((x) => {
-    return x.requiresPublicFiling;
-  });
-  return nonTradeNameLegalStructures[randomInt() % nonTradeNameLegalStructures.length].id;
-};
 let setRegistrationModalIsVisible: jest.Mock;
 
 describe("<TaskProgressCheckbox />", () => {
@@ -56,20 +48,24 @@ describe("<TaskProgressCheckbox />", () => {
 
   const renderTaskCheckbox = (taskId: string, initialUserData?: UserData) => {
     return render(
-      <ThemeProvider theme={createTheme()}>
-        <WithStatefulUserData initialUserData={initialUserData}>
-          <TaskProgressCheckbox taskId={taskId} disabledTooltipText={undefined} />
-        </WithStatefulUserData>
-      </ThemeProvider>
+      <MunicipalitiesContext.Provider value={{ municipalities: [] }}>
+        <ThemeProvider theme={createTheme()}>
+          <WithStatefulUserData initialUserData={initialUserData}>
+            <TaskProgressCheckbox taskId={taskId} disabledTooltipText={undefined} />
+          </WithStatefulUserData>
+        </ThemeProvider>
+      </MunicipalitiesContext.Provider>
     );
   };
 
   const renderTaskCheckboxWithAuthAlert = (taskId: string, initialUserData?: UserData) => {
     render(
       withAuthAlert(
-        <WithStatefulUserData initialUserData={initialUserData}>
-          <TaskProgressCheckbox taskId={taskId} disabledTooltipText={undefined} />
-        </WithStatefulUserData>,
+        <MunicipalitiesContext.Provider value={{ municipalities: [] }}>
+          <WithStatefulUserData initialUserData={initialUserData}>
+            <TaskProgressCheckbox taskId={taskId} disabledTooltipText={undefined} />
+          </WithStatefulUserData>
+        </MunicipalitiesContext.Provider>,
         IsAuthenticated.FALSE,
         { registrationModalIsVisible: false, setRegistrationModalIsVisible }
       )
@@ -222,102 +218,6 @@ describe("<TaskProgressCheckbox />", () => {
       expect(screen.getByText(Config.taskProgress.COMPLETED)).toBeInTheDocument();
       expect(userDataWasNotUpdated()).toBe(true);
     });
-
-    describe("when trade name legal structure", () => {
-      it("shows all fields except business name and tax field", async () => {
-        const userData = generateUserData({
-          profileData: generateProfileData({
-            legalStructureId: randomTradeNameLegalStructure(),
-          }),
-          taskProgress: { [taxTaskId]: "NOT_STARTED" },
-        });
-
-        renderTaskCheckbox(taxTaskId, userData);
-        await selectCompleted();
-
-        expect(
-          screen.queryByText(markdownToText(Config.profileDefaults.STARTING.businessName.header))
-        ).not.toBeInTheDocument();
-        expect(
-          screen.queryByText(markdownToText(Config.profileDefaults.STARTING.taxId.header))
-        ).not.toBeInTheDocument();
-        expect(
-          screen.getByText(markdownToText(Config.profileDefaults.STARTING.existingEmployees.header))
-        ).toBeInTheDocument();
-        expect(
-          screen.getByText(markdownToText(Config.profileDefaults.STARTING.ownershipTypeIds.header))
-        ).toBeInTheDocument();
-      });
-
-      it("saves and redirects with just the ownership and current employees field", async () => {
-        const userData = generateUserData({
-          profileData: generateProfileData({
-            legalStructureId: randomTradeNameLegalStructure(),
-          }),
-          taskProgress: { [taxTaskId]: "NOT_STARTED" },
-        });
-
-        renderTaskCheckbox(taxTaskId, userData);
-        await selectCompleted();
-
-        fireEvent.click(screen.getByText(Config.taxRegistrationModal.saveButtonText));
-        await waitFor(() => {
-          expect(mockPush).toHaveBeenCalledWith({
-            pathname: ROUTES.dashboard,
-            query: { fromFormBusinessEntity: "false", fromTaxRegistration: "true" },
-          });
-        });
-      });
-    });
-
-    describe("when public filing legal structure", () => {
-      it("shows all fields when business name not populated", async () => {
-        const userData = generateUserData({
-          profileData: generateProfileData({
-            businessName: "",
-            legalStructureId: randomPublicFilingLegalStructure(),
-          }),
-          taskProgress: {
-            [taxTaskId]: "NOT_STARTED",
-          },
-        });
-
-        renderTaskCheckbox(taxTaskId, userData);
-        await selectCompleted();
-
-        expect(
-          screen.getByText(markdownToText(Config.profileDefaults.STARTING.businessName.header))
-        ).toBeInTheDocument();
-        expect(
-          screen.getByText(markdownToText(Config.profileDefaults.STARTING.taxId.header))
-        ).toBeInTheDocument();
-        expect(
-          screen.getByText(markdownToText(Config.profileDefaults.STARTING.existingEmployees.header))
-        ).toBeInTheDocument();
-        expect(
-          screen.getByText(markdownToText(Config.profileDefaults.STARTING.ownershipTypeIds.header))
-        ).toBeInTheDocument();
-      });
-
-      it("does not show business name field when already populated", async () => {
-        const userData = generateUserData({
-          profileData: generateProfileData({
-            businessName: "test-business",
-            legalStructureId: randomPublicFilingLegalStructure(),
-          }),
-          taskProgress: {
-            [taxTaskId]: "NOT_STARTED",
-          },
-        });
-
-        renderTaskCheckbox(taxTaskId, userData);
-        await selectCompleted();
-
-        expect(
-          screen.queryByText(markdownToText(Config.profileDefaults.STARTING.businessName.header))
-        ).not.toBeInTheDocument();
-      });
-    });
   });
 
   describe("formation completion", () => {
@@ -387,30 +287,6 @@ describe("<TaskProgressCheckbox />", () => {
         pathname: ROUTES.dashboard,
         query: { fromFormBusinessEntity: "true", fromTaxRegistration: "false" },
       });
-    });
-
-    it("allows a date in the future", async () => {
-      renderTaskCheckbox(formationTaskId, generateUserData({}));
-      await selectCompleted();
-      const date = getCurrentDate().add(1, "month").date(1);
-      selectDate(date);
-      fireEvent.click(screen.getByText(Config.formationDateModal.saveButtonText));
-      await waitFor(() => {
-        return expect(currentUserData().profileData.dateOfFormation).toEqual(date.format("YYYY-MM-DD"));
-      });
-    });
-
-    it("shows error when user saves without entering date", async () => {
-      renderTaskCheckbox(
-        formationTaskId,
-        generateUserData({
-          profileData: generateProfileData({ dateOfFormation: undefined }),
-        })
-      );
-      await selectCompleted();
-      expect(screen.queryByText(Config.formationDateModal.errorText)).not.toBeInTheDocument();
-      fireEvent.click(screen.getByText(Config.formationDateModal.saveButtonText));
-      expect(screen.getByText(Config.formationDateModal.errorText)).toBeInTheDocument();
     });
 
     it("shows warning modal and sets dateOfFormation to undefined if user sets back to not completed", async () => {

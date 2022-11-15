@@ -231,6 +231,7 @@ describe("task page", () => {
       generateTask({
         postOnboardingQuestion: "construction-renovation",
         contentMd: "some content\n\nmore content",
+        requiresLocation: false,
       })
     );
     await waitFor(() => {
@@ -245,7 +246,13 @@ describe("task page", () => {
     const initialUserData = generateUserData({
       profileData: generateProfileData({ constructionRenovationPlan: undefined }),
     });
-    renderPage(generateTask({ postOnboardingQuestion: "construction-renovation" }), initialUserData);
+    renderPage(
+      generateTask({
+        postOnboardingQuestion: "construction-renovation",
+        requiresLocation: false,
+      }),
+      initialUserData
+    );
 
     await waitFor(() => {
       expect(screen.getByTestId("construction-renovation")).toBeInTheDocument();
@@ -489,5 +496,49 @@ describe("task page", () => {
     expect(screen.getAllByText("this is the nexus task").length).toBeGreaterThan(0);
     expect(screen.queryByText("this is the form task")).not.toBeInTheDocument();
     expect(screen.getByText(Config.nexusFormationTask.descriptionShownWithWarning)).toBeInTheDocument();
+  });
+
+  describe("deferred location question", () => {
+    const contentWithLocationSection =
+      "some content\n\n" +
+      "${beginLocationDependentSection}\n\n" +
+      "inner content\n\n" +
+      "${endLocationDependentSection}\n\n" +
+      "more content\n\n";
+
+    it("shows deferred location question if task requiresLocation=true", () => {
+      const task = generateTask({
+        requiresLocation: true,
+        contentMd: contentWithLocationSection,
+        postOnboardingQuestion: undefined,
+      });
+      renderPage(task);
+      expect(screen.getByTestId("deferred-location-task")).toBeInTheDocument();
+    });
+
+    it("does not show deferred location question if task requiresLocation=false", () => {
+      const task = generateTask({
+        requiresLocation: false,
+        contentMd: contentWithLocationSection,
+        postOnboardingQuestion: undefined,
+      });
+      renderPage(task);
+      expect(screen.queryByTestId("deferred-location-task")).not.toBeInTheDocument();
+    });
+
+    it("loads deferred location question using keys in template body", async () => {
+      renderPage(
+        generateTask({
+          requiresLocation: true,
+          contentMd: contentWithLocationSection,
+          postOnboardingQuestion: undefined,
+        })
+      );
+      await screen.findByTestId("deferred-location-task");
+      expect(screen.getByText("some content")).toBeInTheDocument();
+      expect(screen.getByText("more content")).toBeInTheDocument();
+      expect(screen.queryByText("${beginLocationDependentSection}")).not.toBeInTheDocument();
+      expect(screen.queryByText("${endLocationDependentSection}")).not.toBeInTheDocument();
+    });
   });
 });

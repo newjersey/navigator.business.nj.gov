@@ -821,5 +821,26 @@ export default {
         },
       },
     },
+    task_location_question: {
+      submit: {
+        location_entered_for_first_time: () => {
+          sendEvent("task_location_question", "submit", "location_entered_for_first_time");
+        },
+      },
+    },
+    profile_location_question: {
+      submit: {
+        location_entered_for_first_time: () => {
+          sendEvent("profile_location_question", "submit", "location_entered_for_first_time");
+        },
+      },
+    },
+    business_formation_location_question: {
+      submit: {
+        location_entered_for_first_time: () => {
+          sendEvent("business_formation_location_question", "submit", "location_entered_for_first_time");
+        },
+      },
+    },
   },
 };

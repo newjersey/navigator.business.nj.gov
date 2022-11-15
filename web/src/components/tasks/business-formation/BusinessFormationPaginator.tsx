@@ -13,14 +13,17 @@ import {
 import { requiredFieldsForUser } from "@/components/tasks/business-formation/requiredFieldsForUser";
 import { AuthAlertContext } from "@/contexts/authAlertContext";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
+import { RoadmapContext } from "@/contexts/roadmapContext";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
+import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import { FormationStepNames } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
+import { setAnalyticsDimensions } from "@/lib/utils/analytics-helpers";
 import { scrollToTopOfElement, useMountEffect } from "@/lib/utils/helpers";
 import {
   FormationAddress,
@@ -51,6 +54,7 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
   const errorAlertRef = useRef<HTMLDivElement>(null);
   const isMounted = useRef(false);
   const isDesktop = useMediaQuery(MediaQueries.desktopAndUp);
+  const { setRoadmap } = useContext(RoadmapContext);
 
   useEffect(() => {
     if (isMounted.current) {
@@ -115,6 +119,14 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
     const filteredUserData = getFilteredUserData();
     const userDataWithProfileChanges = updateChangesInProfileData(filteredUserData);
     update(userDataWithProfileChanges);
+
+    if (userDataWithProfileChanges) {
+      buildUserRoadmap(userDataWithProfileChanges.profileData).then((newRoadmap) => {
+        setRoadmap(newRoadmap);
+        setAnalyticsDimensions(userDataWithProfileChanges.profileData);
+      });
+    }
+
     onStepChangeAnalytics(filteredUserData?.formationData.formationFormData, stepIndex, config.moveType);
     moveToStep(stepIndex);
   };
@@ -126,6 +138,14 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
     let userDataWithChanges = { ...userData };
 
     if (isStep("Business")) {
+      const muncipalityEnteredForFirstTime =
+        userDataWithChanges.profileData.municipality === undefined &&
+        userDataWithChanges.formationData.formationFormData.businessAddressCity !== undefined;
+
+      if (muncipalityEnteredForFirstTime) {
+        analytics.event.business_formation_location_question.submit.location_entered_for_first_time();
+      }
+
       userDataWithChanges = {
         ...userDataWithChanges,
         profileData: {

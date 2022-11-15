@@ -345,6 +345,7 @@ export interface Task {
   required?: boolean;
   issuingAgency?: string;
   formName?: string;
+  requiresLocation?: boolean;
 }
 
 export interface TaskLink {

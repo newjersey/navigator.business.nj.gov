@@ -103,6 +103,7 @@ describe("dashboard page", () => {
           displayContent={createDisplayContent(sidebarDisplayContent)}
           fundings={[]}
           certifications={[]}
+          municipalities={[]}
         />
       </ThemeProvider>
     );
@@ -119,6 +120,7 @@ describe("dashboard page", () => {
             displayContent={createDisplayContent()}
             fundings={[]}
             certifications={[]}
+            municipalities={[]}
           />
         </ThemeProvider>
       </WithStatefulUserData>
@@ -156,6 +158,7 @@ describe("dashboard page", () => {
               displayContent={createDisplayContent(sidebarDisplayContent)}
               fundings={fundings ?? []}
               certifications={certifications ?? []}
+              municipalities={[]}
             />
           </ThemeProvider>
         </WithStatefulUserData>,
@@ -570,6 +573,28 @@ describe("dashboard page", () => {
         ).not.toBeInTheDocument();
       });
       expect(currentUserData().profileData.homeBasedBusiness).toEqual(true);
+    });
+
+    it("shallow routes with query parameter when radio is selected", async () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          industryId: randomHomeBasedIndustry(),
+          homeBasedBusiness: undefined,
+        }),
+      });
+      useMockUserData(userData);
+      renderStatefulPage(userData);
+      chooseHomeBasedValue("false");
+      fireEvent.click(screen.getByText(Config.dashboardDefaults.deferredOnboardingSaveButtonText));
+      await waitFor(() => {
+        return expect(mockPush).toHaveBeenCalledWith(
+          { query: { deferredQuestionAnswered: "true" } },
+          undefined,
+          {
+            shallow: true,
+          }
+        );
+      });
     });
 
     const chooseHomeBasedValue = (value: "true" | "false") => {

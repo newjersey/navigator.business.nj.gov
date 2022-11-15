@@ -15,7 +15,9 @@ function mockMaterialUI(): typeof materialUi {
     useMediaQuery: jest.fn(),
   };
 }
-
+jest.mock("@/lib/roadmap/buildUserRoadmap", () => {
+  return { buildUserRoadmap: jest.fn() };
+});
 jest.mock("@mui/material", () => {
   return mockMaterialUI();
 });

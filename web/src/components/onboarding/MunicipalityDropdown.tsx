@@ -84,6 +84,11 @@ export const MunicipalityDropdown = (props: Props): ReactElement => {
             placeholder={props.placeholderText}
             error={props.error}
             helperText={props.error ? props.helperText : " "}
+            sx={{
+              "& .MuiInputBase-root": {
+                backgroundColor: "white",
+              },
+            }}
           />
         );
       }}

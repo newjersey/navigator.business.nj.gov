@@ -1,7 +1,7 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { templateEval } from "@/lib/utils/helpers";
-import { generateMunicipality, generateProfileData, generateUserData } from "@/test/factories";
+import { generateProfileData, generateUserData } from "@/test/factories";
 import { markdownToText } from "@/test/helpers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import {
@@ -323,7 +323,7 @@ describe("onboarding - foreign business", () => {
       const { page } = renderPage({ userData });
       page.chooseRadio("general-partnership");
       await page.visitStep(5);
-      expect(screen.queryByTestId("error-alert-REQUIRED_LEGAL")).not.toBeInTheDocument();
+      expect(screen.queryByTestId("banner-alert-REQUIRED_LEGAL")).not.toBeInTheDocument();
     });
 
     it("prevents user from moving past Step 4 if you have not selected a legal structure", async () => {
@@ -333,13 +333,12 @@ describe("onboarding - foreign business", () => {
       });
       expect(screen.getByTestId("step-4")).toBeInTheDocument();
       expect(screen.queryByTestId("step-5")).not.toBeInTheDocument();
-      expect(screen.getByTestId("error-alert-REQUIRED_LEGAL")).toBeInTheDocument();
+      expect(screen.getByTestId("banner-alert-REQUIRED_LEGAL")).toBeInTheDocument();
     });
   });
 
   describe("Nexus - step 5", () => {
     let userData: UserData;
-    const newark = generateMunicipality({ displayName: "Newark" });
 
     beforeEach(() => {
       userData = generateTestUserData({
@@ -353,14 +352,6 @@ describe("onboarding - foreign business", () => {
       useMockRouter({ isReady: true, query: { page: "5" } });
     });
 
-    it("displays location question and saves in profileData", async () => {
-      const { page } = renderPage({ userData, municipalities: [newark] });
-      page.chooseRadio("location-in-new-jersey-true");
-      page.selectByText("Location", "Newark");
-      await page.visitStep(6);
-      expect(currentUserData().profileData.municipality?.displayName).toEqual("Newark");
-    });
-
     it("displays Location In New Jersey question", () => {
       renderPage({ userData });
       expect(
@@ -369,70 +360,15 @@ describe("onboarding - foreign business", () => {
     });
 
     it("sets homeBasedBusiness to false when YES is selected for Location In New Jersey", async () => {
-      const { page } = renderPage({ userData, municipalities: [newark] });
+      const { page } = renderPage({ userData });
       page.chooseRadio("location-in-new-jersey-true");
-      page.selectByText("Location", "Newark");
       await page.visitStep(6);
       expect(currentUserData().profileData.homeBasedBusiness).toEqual(false);
       expect(currentUserData().profileData.nexusLocationInNewJersey).toEqual(true);
     });
 
-    it("displays location question when YES is selected for Location In New Jersey", async () => {
-      const { page } = renderPage({ userData, municipalities: [newark] });
-      expect(
-        screen.queryByText(markdownToText(Config.profileDefaults.FOREIGN.municipality.header))
-      ).not.toBeInTheDocument();
-      page.chooseRadio("location-in-new-jersey-true");
-      expect(
-        screen.getByText(markdownToText(Config.profileDefaults.FOREIGN.municipality.header))
-      ).toBeInTheDocument();
-    });
-
-    it("doesn't display location question when NO is selected for Location In New Jersey", async () => {
-      const { page } = renderPage({ userData, municipalities: [newark] });
-      expect(
-        screen.queryByText(markdownToText(Config.profileDefaults.FOREIGN.municipality.header))
-      ).not.toBeInTheDocument();
-      page.chooseRadio("location-in-new-jersey-false");
-      expect(
-        screen.queryByText(markdownToText(Config.profileDefaults.FOREIGN.municipality.header))
-      ).not.toBeInTheDocument();
-    });
-
-    it("prevents user from moving past Step 5 if you have not selected a location", async () => {
-      const { page } = renderPage({ userData, municipalities: [newark] });
-      act(() => {
-        return page.clickNext();
-      });
-      page.chooseRadio("location-in-new-jersey-true");
-      expect(screen.getByTestId("step-5")).toBeInTheDocument();
-      expect(screen.queryByTestId("step-6")).not.toBeInTheDocument();
-      expect(
-        screen.getByText(Config.profileDefaults.FOREIGN.municipality.errorTextRequired)
-      ).toBeInTheDocument();
-      expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
-
-      page.selectByText("Location", "Newark");
-      await page.visitStep(6);
-    });
-
-    it("prevents user from moving past Step 5 if you have not selected a municipality in New Jersey", async () => {
-      const { page } = renderPage({ userData, municipalities: [newark] });
-      page.chooseRadio("location-in-new-jersey-true");
-      act(() => {
-        return page.clickNext();
-      });
-      expect(screen.getByTestId("step-5")).toBeInTheDocument();
-      expect(screen.queryByTestId("step-6")).not.toBeInTheDocument();
-      expect(
-        screen.getByText(Config.profileDefaults.FOREIGN.municipality.errorTextRequired)
-      ).toBeInTheDocument();
-      page.selectByText("Location", "Newark");
-      await page.visitStep(6);
-    });
-
-    it("shows error message a option for whether Location in New Jersey is not selected", async () => {
-      const { page } = renderPage({ userData, municipalities: [newark] });
+    it("shows error message banner when Location in New Jersey is not selected", async () => {
+      const { page } = renderPage({ userData });
       act(() => {
         return page.clickNext();
       });
@@ -441,15 +377,7 @@ describe("onboarding - foreign business", () => {
       expect(
         screen.getByText(Config.profileDefaults.FOREIGN.nexusLocationInNewJersey.errorTextRequired)
       ).toBeInTheDocument();
-      expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
-    });
-
-    it("lets the user progress if they don't plan on owning or leasing a space and don't select a location", async () => {
-      const { page } = renderPage({ userData, municipalities: [newark] });
-      page.chooseRadio("location-in-new-jersey-false");
-      await page.visitStep(6);
-      expect(screen.queryByTestId("step-5")).not.toBeInTheDocument();
-      expect(screen.getByTestId("step-6")).toBeInTheDocument();
+      expect(screen.getByTestId("banner-alert-REQUIRED_NEXUS_LOCATION_IN_NJ")).toBeInTheDocument();
     });
   });
 

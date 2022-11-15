@@ -55,6 +55,8 @@ import {
   Municipality,
   MunicipalityDetail,
   NameAndAddress,
+  OperatingPhaseId,
+  OperatingPhases,
   OwnershipType,
   Preferences,
   ProfileData,
@@ -289,6 +291,7 @@ export const generateTask = (overrides: Partial<Task>): Task => {
     required: Math.random() < 0.5,
     issuingAgency: `some-agency-${randomInt()}`,
     formName: `some-form-${randomInt()}`,
+    requiresLocation: Math.random() < 0.5,
     ...overrides,
   };
 };
@@ -713,9 +716,39 @@ export const randomLegalStructure = (publicFiling?: {
   return LegalPublicFilings[randomIndex];
 };
 
+export const allLegalStructuresOfType = ({
+  type,
+}: {
+  type: "publicFiling" | "tradeName";
+}): LegalStructure[] => {
+  if (type === "publicFiling") {
+    return LegalStructures.filter((item) => {
+      return item.requiresPublicFiling;
+    });
+  }
+
+  if (type === "tradeName") {
+    return LegalStructures.filter((item) => {
+      return item.hasTradeName;
+    });
+  }
+
+  return [];
+};
+
 export const randomSector = (): SectorType => {
   const randomIndex = Math.floor(Math.random() * sectors.length);
   return sectors[randomIndex];
+};
+
+export const randomOperatingPhaseId = (): OperatingPhaseId => {
+  const randomIndex = Math.floor(Math.random() * OperatingPhases.length);
+  return OperatingPhases[randomIndex].id;
+};
+
+export const randomElement = <T>(list: Array<T>): T => {
+  const randomIndex = Math.floor(Math.random() * list.length);
+  return list[randomIndex];
 };
 
 export const randomOwnershipType = (): OwnershipType => {

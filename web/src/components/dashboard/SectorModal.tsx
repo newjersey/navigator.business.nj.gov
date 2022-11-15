@@ -65,7 +65,6 @@ export const SectorModal = (props: Props): ReactElement => {
         state: {
           profileData: profileData,
           flow: "OWNING",
-          municipalities: [],
         },
         setProfileData,
         setUser: () => {},

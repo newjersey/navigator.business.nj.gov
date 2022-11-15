@@ -8,7 +8,6 @@ import {
   FormationFields,
   FormationFormData,
   FormationLegalType,
-  Municipality,
 } from "@businessnjgovnavigator/shared/";
 import { createContext } from "react";
 
@@ -17,7 +16,6 @@ interface BusinessFormationState {
   formationFormData: FormationFormData;
   legalStructureId: FormationLegalType;
   displayContent: FormationDisplayContent;
-  municipalities: Municipality[];
   showResponseAlert: boolean;
   hasBeenSubmitted: boolean;
   interactedFields: FormationFields[];
@@ -41,7 +39,6 @@ export const BusinessFormationContext = createContext<BusinessFormationContextTy
     legalStructureId: "limited-liability-company",
     formationFormData: createEmptyFormationFormData(),
     displayContent: createEmptyFormationDisplayContent()["limited-liability-company"],
-    municipalities: [],
     showResponseAlert: false,
     hasBeenSubmitted: false,
     interactedFields: [],

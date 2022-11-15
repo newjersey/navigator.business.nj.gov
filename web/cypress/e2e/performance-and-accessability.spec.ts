@@ -123,37 +123,6 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
         onOnboardingPage.clickNext();
 
         cy.url().should("include", "onboarding?page=5");
-        onOnboardingPage.selectLocation("Absecon");
-
-        cy.lighthouse(undefined, lighthouseDesktopConfig);
-        cy.pa11y(defaultPa11yThresholds);
-      });
-    });
-
-    describe("Step 6", () => {
-      it("should pass the audits", () => {
-        cy.url().should("include", "onboarding?page=1");
-
-        onOnboardingPage.selectBusinessPersona("STARTING");
-        onOnboardingPage.clickNext();
-
-        cy.url().should("include", "onboarding?page=2");
-        onOnboardingPage.typeBusinessName("Beesapple's");
-        onOnboardingPage.clickNext();
-
-        cy.url().should("include", "onboarding?page=3");
-        onOnboardingPage.selectIndustry("e-commerce");
-        onOnboardingPage.clickNext();
-
-        cy.url().should("include", "onboarding?page=4");
-        onOnboardingPage.selectLegalStructure("general-partnership");
-        onOnboardingPage.clickNext();
-
-        cy.url().should("include", "onboarding?page=5");
-        onOnboardingPage.selectLocation("Absecon");
-        onOnboardingPage.clickNext();
-
-        cy.url().should("include", "onboarding?page=6");
         onOnboardingPage.typeFullName("Michael Smith");
         onOnboardingPage.typeEmail("MichaelSmith@gmail.com");
         onOnboardingPage.typeConfirmEmail("MichaelSmith@gmail.com");

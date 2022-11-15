@@ -1,4 +1,4 @@
-import { fetchMunicipalityById } from "@/lib/async-content-fetchers/fetchMunicipalityById";
+import { fetchMunicipalityById } from "@/lib/async-content-fetchers/fetchMunicipalities";
 import { getIsApplicableToFunctionByFieldName } from "@/lib/domain-logic/essentialQuestions";
 import { getNaicsDisplayMd } from "@/lib/domain-logic/getNaicsDisplayMd";
 import { buildRoadmap } from "@/lib/roadmap/roadmapBuilder";

@@ -196,19 +196,6 @@ export const getOnboardingFlows = (
           },
         },
         {
-          component: (
-            <>
-              <FieldLabelOnboarding fieldName="municipality" />
-              <OnboardingMunicipality onValidation={onValidation} fieldStates={fieldStates} />
-            </>
-          ),
-          getErrorMap: () => {
-            return {
-              inline: [{ name: "municipality", valid: profileData.municipality !== undefined }],
-            };
-          },
-        },
-        {
           component: <OnboardingNameAndEmail onValidation={onValidation} fieldStates={fieldStates} />,
           getErrorMap: () => {
             return {
@@ -294,27 +281,18 @@ export const getOnboardingFlows = (
             <>
               <FieldLabelOnboarding fieldName="nexusLocationInNewJersey" />
               <OnboardingLocationInNewJersey />
-              <div className="margin-top-3">
-                {profileData.nexusLocationInNewJersey && (
-                  <>
-                    <FieldLabelOnboarding fieldName="municipality" />
-                    <OnboardingMunicipality onValidation={onValidation} fieldStates={fieldStates} />
-                  </>
-                )}
-              </div>
+              {/*<div className="margin-top-3">*/}
+              {/*  {profileData.nexusLocationInNewJersey && (*/}
+              {/*    <>*/}
+              {/*      <FieldLabelOnboarding fieldName="municipality" />*/}
+              {/*      <OnboardingMunicipality onValidation={onValidation} fieldStates={fieldStates} />*/}
+              {/*    </>*/}
+              {/*  )}*/}
+              {/*</div>*/}
             </>
           ),
           getErrorMap: () => {
             return {
-              inline: [
-                {
-                  name: "municipality",
-                  valid:
-                    profileData.municipality !== undefined ||
-                    (profileData.municipality === undefined &&
-                      profileData.nexusLocationInNewJersey === false),
-                },
-              ],
               banner: [
                 {
                   name: "REQUIRED_NEXUS_LOCATION_IN_NJ",
