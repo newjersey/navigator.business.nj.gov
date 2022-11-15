@@ -57,7 +57,7 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
         onOnboardingPage.clickNext();
 
         cy.url().should("include", "onboarding?page=2");
-        onOnboardingPage.typeBusinessName("Beesapple's");
+        onOnboardingPage.selectIndustry("e-commerce");
 
         cy.lighthouse(undefined, lighthouseDesktopConfig);
         cy.pa11y(defaultPa11yThresholds);
@@ -71,16 +71,17 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
         onOnboardingPage.clickNext();
 
         cy.url().should("include", "onboarding?page=2");
-        onOnboardingPage.typeBusinessName("Beesapple's");
+        onOnboardingPage.selectIndustry("e-commerce");
         onOnboardingPage.clickNext();
 
         cy.url().should("include", "onboarding?page=3");
-        onOnboardingPage.selectIndustry("e-commerce");
+        onOnboardingPage.selectLegalStructure("general-partnership");
 
         cy.lighthouse(undefined, lighthouseDesktopConfig);
         cy.pa11y(defaultPa11yThresholds);
       });
     });
+
     describe("Step 4", () => {
       it("should pass the audits", () => {
         cy.url().should("include", "onboarding?page=1");
@@ -89,40 +90,14 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
         onOnboardingPage.clickNext();
 
         cy.url().should("include", "onboarding?page=2");
-        onOnboardingPage.typeBusinessName("Beesapple's");
-        onOnboardingPage.clickNext();
-
-        cy.url().should("include", "onboarding?page=3");
         onOnboardingPage.selectIndustry("e-commerce");
         onOnboardingPage.clickNext();
 
-        cy.url().should("include", "onboarding?page=4");
-        onOnboardingPage.selectLegalStructure("general-partnership");
-
-        cy.lighthouse(undefined, lighthouseDesktopConfig);
-        cy.pa11y(defaultPa11yThresholds);
-      });
-    });
-    describe("Step 5", () => {
-      it("should pass the audits", () => {
-        cy.url().should("include", "onboarding?page=1");
-
-        onOnboardingPage.selectBusinessPersona("STARTING");
-        onOnboardingPage.clickNext();
-
-        cy.url().should("include", "onboarding?page=2");
-        onOnboardingPage.typeBusinessName("Beesapple's");
-        onOnboardingPage.clickNext();
-
         cy.url().should("include", "onboarding?page=3");
-        onOnboardingPage.selectIndustry("e-commerce");
-        onOnboardingPage.clickNext();
-
-        cy.url().should("include", "onboarding?page=4");
         onOnboardingPage.selectLegalStructure("general-partnership");
         onOnboardingPage.clickNext();
 
-        cy.url().should("include", "onboarding?page=5");
+        cy.url().should("include", "onboarding?page=4");
         onOnboardingPage.typeFullName("Michael Smith");
         onOnboardingPage.typeEmail("MichaelSmith@gmail.com");
         onOnboardingPage.typeConfirmEmail("MichaelSmith@gmail.com");
@@ -141,6 +116,7 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
         cy.url().should("include", "onboarding?page=1");
 
         onOnboardingPage.selectBusinessPersona("OWNING");
+        onOnboardingPage.selectLegalStructureDropDown("General Partnership");
 
         cy.lighthouse(undefined, lighthouseDesktopConfig);
         cy.pa11y(defaultPa11yThresholds);
@@ -152,11 +128,12 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
         cy.url().should("include", "onboarding?page=1");
 
         onOnboardingPage.selectBusinessPersona("OWNING");
+        onOnboardingPage.selectLegalStructureDropDown("General Partnership");
         onOnboardingPage.clickNext();
 
         cy.url().should("include", "onboarding?page=2");
-        onOnboardingPage.typeBusinessFormationDate("01/2020");
-        onOnboardingPage.typeEntityId("1234567890");
+        onOnboardingPage.typeBusinessName("Beesapple's");
+        onOnboardingPage.selectIndustrySector("clean-energy");
 
         cy.lighthouse(undefined, lighthouseDesktopConfig);
         cy.pa11y(defaultPa11yThresholds);
@@ -168,72 +145,44 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
         cy.url().should("include", "onboarding?page=1");
 
         onOnboardingPage.selectBusinessPersona("OWNING");
+        onOnboardingPage.selectLegalStructureDropDown("General Partnership");
         onOnboardingPage.clickNext();
 
         cy.url().should("include", "onboarding?page=2");
-        onOnboardingPage.typeBusinessFormationDate("01/2020");
-        onOnboardingPage.typeEntityId("1234567890");
+        onOnboardingPage.typeBusinessName("Beesapple's");
+        onOnboardingPage.selectIndustrySector("clean-energy");
         onOnboardingPage.clickNext();
 
         cy.url().should("include", "onboarding?page=3");
-        onOnboardingPage.typeBusinessName("Beesapple's");
-        onOnboardingPage.selectIndustrySector("clean-energy");
+        onOnboardingPage.typeNumberOfEmployees("5");
+        onOnboardingPage.selectLocation("Absecon");
+        onOnboardingPage.selectOwnership(["women-owned"]);
 
         cy.lighthouse(undefined, lighthouseDesktopConfig);
         cy.pa11y(defaultPa11yThresholds);
       });
     });
+
     describe("Step 4", () => {
       it("should pass the audits", () => {
         cy.url().should("include", "onboarding?page=1");
 
         onOnboardingPage.selectBusinessPersona("OWNING");
+        onOnboardingPage.selectLegalStructureDropDown("General Partnership");
         onOnboardingPage.clickNext();
 
         cy.url().should("include", "onboarding?page=2");
-        onOnboardingPage.typeBusinessFormationDate("01/2020");
-        onOnboardingPage.typeEntityId("1234567890");
-        onOnboardingPage.clickNext();
-
-        cy.url().should("include", "onboarding?page=3");
         onOnboardingPage.typeBusinessName("Beesapple's");
         onOnboardingPage.selectIndustrySector("clean-energy");
         onOnboardingPage.clickNext();
 
-        cy.url().should("include", "onboarding?page=4}");
-        onOnboardingPage.typeNumberOfEmployees("5");
-        onOnboardingPage.selectLocation("Absecon");
-        onOnboardingPage.selectOwnership(["women-owned"]);
-
-        cy.lighthouse(undefined, lighthouseDesktopConfig);
-        cy.pa11y(defaultPa11yThresholds);
-      });
-    });
-
-    describe("Step 5", () => {
-      it("should pass the audits", () => {
-        cy.url().should("include", "onboarding?page=1");
-
-        onOnboardingPage.selectBusinessPersona("OWNING");
-        onOnboardingPage.clickNext();
-
-        cy.url().should("include", "onboarding?page=2");
-        onOnboardingPage.typeBusinessFormationDate("01/2020");
-        onOnboardingPage.typeEntityId("1234567890");
-        onOnboardingPage.clickNext();
-
         cy.url().should("include", "onboarding?page=3");
-        onOnboardingPage.typeBusinessName("Beesapple's");
-        onOnboardingPage.selectIndustrySector("clean-energy");
-        onOnboardingPage.clickNext();
-
-        cy.url().should("include", "onboarding?page=4}");
         onOnboardingPage.typeNumberOfEmployees("5");
         onOnboardingPage.selectLocation("Absecon");
         onOnboardingPage.selectOwnership(["women-owned"]);
         onOnboardingPage.clickNext();
 
-        cy.url().should("include", "onboarding?page=5}");
+        cy.url().should("include", "onboarding?page=4");
         onOnboardingPage.typeFullName("Michael Smith");
         onOnboardingPage.typeEmail("MichaelSmith@gmail.com");
         onOnboardingPage.typeConfirmEmail("MichaelSmith@gmail.com");
@@ -247,47 +196,49 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
   });
 });
 
-describe.only("Performance and Accessibility - Dashboard [all] [group3]", () => {
+describe("Performance and Accessibility - Dashboard [all] [group3]", () => {
   beforeEach(() => {
     cy.loginByCognitoApi();
   });
 
-  describe("Dashboard", () => {
-    it("should pass the audits", () => {
-      const industry = LookupIndustryById("e-commerce");
+  it("should pass the audits", () => {
+    const industry = LookupIndustryById("e-commerce");
+    const legalStructureId = "general-partnership";
+
+    completeNewBusinessOnboarding({
+      industry,
+      legalStructureId,
+    });
+
+    onDashboardPage.getEditProfileLink().should("exist");
+
+    cy.lighthouse(undefined, lighthouseDesktopConfig);
+    cy.pa11y(defaultPa11yThresholds);
+  });
+});
+
+describe("Performance and Accessibility - Roadmap Tasks [all] [group3]", () => {
+  beforeEach(() => {
+    cy.loginByCognitoApi();
+  });
+
+  const urlSlugs = ["identify-potential-lease", "check-site-requirements", "reseller", "business-plan"];
+
+  for (const slug of urlSlugs) {
+    it(`should pass the audits on ${slug}`, () => {
+      const industry = LookupIndustryById("cosmetology");
       const legalStructureId = "general-partnership";
+      const townDisplayName = "Absecon";
 
       completeNewBusinessOnboarding({
         industry,
         legalStructureId,
+        townDisplayName,
       });
-
-      // check dashboard
-      onDashboardPage.getEditProfileLink().should("exist");
+      onDashboardPage.clickRoadmapTask(slug);
 
       cy.lighthouse(undefined, lighthouseDesktopConfig);
       cy.pa11y(defaultPa11yThresholds);
     });
-
-    describe("Tasks", () => {
-      const urlSlugs = ["identify-potential-lease", "check-site-requirements", "reseller", "business-plan"];
-      for (const slug of urlSlugs) {
-        it(`should pass the audits on ${slug}`, () => {
-          const industry = LookupIndustryById("cosmetology");
-          const legalStructureId = "general-partnership";
-          const townDisplayName = "Absecon";
-
-          completeNewBusinessOnboarding({
-            industry,
-            legalStructureId,
-            townDisplayName,
-          });
-          onDashboardPage.clickRoadmapTask(slug);
-
-          cy.lighthouse(undefined, lighthouseDesktopConfig);
-          cy.pa11y(defaultPa11yThresholds);
-        });
-      }
-    });
-  });
+  }
 });
