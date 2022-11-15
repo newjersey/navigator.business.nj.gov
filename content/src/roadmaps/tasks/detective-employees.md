@@ -15,7 +15,7 @@ All staff working in your Detective Agency must be registered before they can be
 ### Registration Requirements
 - [Employee Statement form](https://www.nj.gov/njsp/private-detective/pdf/pd-agency-statement.pdf) completed, signed and notarized 
 - Notification letter on the company’s letterhead indicating the agency license number, the employee’s full name, date of birth, social security number, position, and date of hire
-- Original fingerprint receipt from IdentoGo
+- Original fingerprint receipt from `IdentoGo|identogo`
 - Pay any associated fees  
  
 **Note:** The Employee Statement form must be kept as part of your business records. Do not mail it with your registration.  
