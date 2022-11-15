@@ -112,7 +112,8 @@
     "lgea",
     "chpfc",
     "cinc",
-    "LEUP"
+    "LEUP",
+    "IdentoGo"
   ],
   "ignorePaths": ["node_modules/**", "out/**", "web/out/**", "package.json"]
 }
