@@ -15,7 +15,7 @@ Your detective agency must be licensed prior to offering services to the public.
 ### Eligibility Criteria  
 - At least one of the business owners must have five years of experience as an investigator or a police officer  
 - All applicants must be at least 25 years old 
-- All applicants must be US citizens   
+- Applicant and business associates must be US citizens   
 - None of the applicants can be active law enforcement officers  
  
 ## Application Requirements  
