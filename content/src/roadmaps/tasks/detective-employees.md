@@ -21,4 +21,4 @@ All staff working in your Detective Agency must be registered before they can be
 **Note:** The Employee Statement form must be kept as part of your business records. Do not mail it with your registration.  
  
 >**Once completed, you will have:**
->- A registration confirmation for your employees
+>- A registration confirmation for each of your employees 
