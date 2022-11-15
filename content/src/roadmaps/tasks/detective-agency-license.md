@@ -20,7 +20,7 @@ Your detective agency must be licensed prior to offering services to the public.
  
 ## Application Requirements  
 - Copy of your `Certificate of Formation|certificate-formation`  
-- Name and address of all the business owners  
+- Names and addresses for all the business owners  
 - Two trade name options for your agency  
 - Passport photo and personal information for the `qualifying applicant|qualifying-applicant`  
 - Investigative worked history for the qualifying applicant, completed by their former employer  
