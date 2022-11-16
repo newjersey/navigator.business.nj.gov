@@ -18,7 +18,7 @@ You are seeing this task because your business either has a `nexus|nexus-busines
 
 ### Application Requirements
 
-- `Entity ID|eid` (Required only for LLC, Corporations, LLP or LP Nexus businesses)
+- `Entity ID|entity-id` (Required only for LLC, Corporations, LLP or LP Nexus businesses)
 - [NAICS code](/tasks/determine-naics-code): ${naicsCode}
 - `EIN|ein`
 - Estimated start date in New Jersey
