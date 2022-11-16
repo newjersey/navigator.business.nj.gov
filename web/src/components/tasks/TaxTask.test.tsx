@@ -28,12 +28,13 @@ describe("<TaxTask />", () => {
   let task: Task;
   const content = "some content here\n\n" + "${taxInputComponent}\n\n" + "more content";
   const taskId = "12345";
+  const ctaText = "some-CTA-Text";
 
   beforeEach(() => {
     jest.resetAllMocks();
     useMockRoadmap({});
     setupStatefulUserDataContext();
-    task = generateTask({ contentMd: content, id: taskId });
+    task = generateTask({ contentMd: content, id: taskId, callToActionText: ctaText });
   });
 
   it("replaces ${taxInputComponent} with taxInput component", () => {
@@ -42,6 +43,11 @@ describe("<TaxTask />", () => {
     expect(screen.getByText("more content")).toBeInTheDocument();
     expect(screen.queryByText("${taxInputComponent}")).not.toBeInTheDocument();
     expect(screen.getByText(Config.tax.descriptionText)).toBeInTheDocument();
+  });
+
+  it("renders CTA button", () => {
+    render(<TaxTask task={task} />);
+    expect(screen.getByText(ctaText)).toBeInTheDocument();
   });
 
   describe("inputting Tax ID", () => {
