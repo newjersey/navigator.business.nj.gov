@@ -123,7 +123,7 @@ Cypress.Commands.add("chooseDatePicker", (selector, value) => {
       cy.get('[role="dialog"] [aria-label="calendar view is open, go to text input view"]').click({
         force: true,
       });
-      cy.get(`[role="dialog"] input${selector}`).clear({ force: true }).type(value);
+      cy.get(`[role="dialog"] input${selector}`).last().clear({ force: true }).type(value);
       cy.contains('[role="dialog"] button', "OK").click({ force: true });
     } else {
       cy.get(`input${selector} `).clear({ force: true }).type(value).blur();
