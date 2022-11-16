@@ -99,7 +99,6 @@ export const DeferredLocationQuestion = (props: Props): ReactElement => {
           onSave={() => {
             return onSaveNewLocation();
           }}
-          adjustPaddingForHelperText
           removeStyling
         >
           <OnboardingMunicipality
