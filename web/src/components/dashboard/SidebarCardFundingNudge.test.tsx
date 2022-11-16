@@ -7,6 +7,7 @@ import {
   generateSidebarCardContent,
   generateUserData,
 } from "@/test/factories";
+import { selectDropdownByValue } from "@/test/helpers";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import {
   currentUserData,
@@ -15,7 +16,7 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
-import { fireEvent, render, screen, within } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => {
   return { useUserData: jest.fn() };
@@ -75,7 +76,7 @@ describe("<SidebarCardFundingNudge />", () => {
       fireEvent.click(screen.getByTestId("cta-funding-nudge"));
 
       expect(screen.getByText(Config.dashboardDefaults.sectorModalTitle)).toBeInTheDocument();
-      selectByValue("Sector", "clean-energy");
+      selectDropdownByValue("Sector", "clean-energy");
       fireEvent.click(screen.getByText(Config.dashboardDefaults.sectorModalSaveButton));
       expect(currentUserData().profileData.operatingPhase).toEqual("UP_AND_RUNNING");
     });
@@ -92,15 +93,9 @@ describe("<SidebarCardFundingNudge />", () => {
       fireEvent.click(screen.getByTestId("cta-funding-nudge"));
 
       expect(screen.getByText(Config.dashboardDefaults.sectorModalTitle)).toBeInTheDocument();
-      selectByValue("Sector", "clean-energy");
+      selectDropdownByValue("Sector", "clean-energy");
       fireEvent.click(screen.getByText(Config.dashboardDefaults.sectorModalCancelButton));
       expect(userDataWasNotUpdated()).toEqual(true);
     });
   });
-
-  const selectByValue = (label: string, value: string) => {
-    fireEvent.mouseDown(screen.getByLabelText(label));
-    const listbox = within(screen.getByRole("listbox"));
-    fireEvent.click(listbox.getByTestId(value));
-  };
 });

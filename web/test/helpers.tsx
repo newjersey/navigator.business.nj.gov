@@ -8,7 +8,8 @@ import { UseUserDataResponse } from "@/lib/data-hooks/useUserData";
 import { Roadmap, SectionCompletion, UserDataError } from "@/lib/types/types";
 import { generateProfileData, generateUserData } from "@/test/factories";
 import { BusinessUser, RegistrationStatus } from "@businessnjgovnavigator/shared/";
-import { MatcherFunction } from "@testing-library/react";
+import { fireEvent, MatcherFunction, screen, within } from "@testing-library/react";
+import { Dayjs } from "dayjs";
 import { Dispatch, ReactElement, SetStateAction } from "react";
 
 export const withAuth = (
@@ -165,3 +166,27 @@ export const getProfileDataForUnfilteredOpportunities = generateProfileData({
   sectorId: undefined,
   ownershipTypeIds: ["veteran-owned", "disabled-veteran", "minority-owned", "woman-owned"],
 });
+
+export const selectLocationByText = (value: string) => {
+  fireEvent.mouseDown(screen.getByLabelText("Location"));
+  const listbox = within(screen.getByRole("listbox"));
+  fireEvent.click(listbox.getByText(value));
+};
+
+export const fillText = (label: string, value: string) => {
+  const item = screen.getByLabelText(label);
+  fireEvent.change(item, { target: { value: value } });
+  fireEvent.blur(item);
+};
+
+export const selectDate = (date: Dayjs) => {
+  const item = screen.getByLabelText("Date of formation");
+  fireEvent.change(item, { target: { value: date.format("MM/YYYY") } });
+  fireEvent.blur(item);
+};
+
+export const selectDropdownByValue = (label: string, value: string) => {
+  fireEvent.mouseDown(screen.getByLabelText(label));
+  const listbox = within(screen.getByRole("listbox"));
+  fireEvent.click(listbox.getByTestId(value));
+};
