@@ -10,6 +10,7 @@ import {
   randomHomeBasedIndustry,
   randomNonHomeBasedIndustry,
   randomPublicFilingLegalStructure,
+  randomTradeNameLegalStructure,
 } from "../support/helpers";
 import { onDashboardPage } from "../support/page_objects/dashboardPage";
 import { onProfilePage } from "../support/page_objects/profilePage";
@@ -20,41 +21,59 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
   });
 
   describe("deferred location", () => {
+    const testProvideLocationInLocationDependentTask = () => {
+      it("can provide location in Location-Dependent task", () => {
+        goToMercantileTask();
+        selectLocation("Allendale");
+        clickDeferredSaveButton();
+
+        expectLocationSuccessBanner("Allendale");
+        expectLocationSpecificContentInTask("Allendale");
+        navigateBackToDashboard();
+        expectLocationQuestionIsCompletedInProfile("Allendale");
+      });
+    };
+
+    const testProvideLocationInFormationDateModal = () => {
+      it("can provide location in Formation Date Modal", () => {
+        openFormationDateModal();
+        selectDate("04/2021");
+        selectLocation("Allendale");
+        clickModalSaveButton();
+
+        goToMercantileTask();
+        expectLocationSpecificContentInTask("Allendale");
+        navigateBackToDashboard();
+        expectLocationQuestionIsCompletedInProfile("Allendale");
+      });
+    };
+
+    const testProvideLocationInTaxRegistrationModal = () => {
+      it("can provide location in Tax Registration Modal", () => {
+        openTaxRegistrationModal();
+        fillNumberOfEmployees("5");
+        selectLocation("Allendale");
+        clickModalSaveButton();
+
+        goToMercantileTask();
+        expectLocationSpecificContentInTask("Allendale");
+        navigateBackToDashboard();
+        expectLocationQuestionIsCompletedInProfile("Allendale");
+      });
+    };
+
+    const testProvideLocationInProfile = () => {
+      it("can provide location in profile", () => {
+        goToProfile();
+        selectLocation("Allendale");
+        onProfilePage.clickSaveButton();
+
+        goToMercantileTask();
+        expectLocationSpecificContentInTask("Allendale");
+      });
+    };
+
     describe("onboarded as STARTING - PublicFiling", () => {
-      const testLocationInThreePlaces = () => {
-        it("can provide location in Location-Dependent task", () => {
-          goToMercantileTask();
-          selectLocation("Allendale");
-          clickDeferredSaveButton();
-
-          expectLocationSuccessBanner("Allendale");
-          expectLocationSpecificContentInTask("Allendale");
-          navigateBackToDashboard();
-          expectLocationQuestionIsCompletedInProfile("Allendale");
-        });
-
-        it("can provide location in Formation Date Modal", () => {
-          openFormationDateModal();
-          selectDate("04/2021");
-          selectLocation("Allendale");
-          clickModalSaveButton();
-
-          goToMercantileTask();
-          expectLocationSpecificContentInTask("Allendale");
-          navigateBackToDashboard();
-          expectLocationQuestionIsCompletedInProfile("Allendale");
-        });
-
-        it("can provide location in profile", () => {
-          goToProfile();
-          selectLocation("Allendale");
-          onProfilePage.clickSaveButton();
-
-          goToMercantileTask();
-          expectLocationSpecificContentInTask("Allendale");
-        });
-      };
-
       describe("when home-based business question does not exist", () => {
         beforeEach(() => {
           completeNewBusinessOnboarding({
@@ -63,7 +82,9 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
           });
         });
 
-        testLocationInThreePlaces();
+        testProvideLocationInLocationDependentTask();
+        testProvideLocationInFormationDateModal();
+        testProvideLocationInProfile();
       });
 
       describe("when we answer No to home-based business question immediately", () => {
@@ -76,7 +97,9 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
           selectHomeBased(false);
         });
 
-        testLocationInThreePlaces();
+        testProvideLocationInLocationDependentTask();
+        testProvideLocationInFormationDateModal();
+        testProvideLocationInProfile();
       });
 
       describe("when we answer No to home-based business question after providing location", () => {
@@ -115,29 +138,77 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
         });
       });
     });
-    //
-    // describe('onboarded as STARTING - TradeName', () => {
-    //   it('can provide location in Location-Dependent task', () => {
-    //
-    //   })
-    //
-    //   it('can provide location in Registered For Taxes Modal', () => {
-    //
-    //   })
-    //
-    //   it('can provide location in profile', () => {
-    //
-    //   })
-    // });
-    //
-    // describe('onboarded as FOREIGN NEXUS - PublicFiling', () => {
-    //
-    // });
-    //
-    // describe('onboarded as FOREIGN NEXUS - TradeName', () => {
-    //
-    // });
-    //
+
+    describe("onboarded as STARTING - TradeName", () => {
+      describe("when home-based business question does not exist", () => {
+        beforeEach(() => {
+          completeNewBusinessOnboarding({
+            industry: randomNonHomeBasedIndustry(),
+            legalStructureId: randomTradeNameLegalStructure(),
+          });
+        });
+
+        testProvideLocationInLocationDependentTask();
+        testProvideLocationInTaxRegistrationModal();
+        testProvideLocationInProfile();
+      });
+
+      describe("when we answer No to home-based business question immediately", () => {
+        beforeEach(() => {
+          completeNewBusinessOnboarding({
+            industry: randomHomeBasedIndustry(),
+            legalStructureId: randomTradeNameLegalStructure(),
+          });
+
+          selectHomeBased(false);
+        });
+
+        testProvideLocationInLocationDependentTask();
+        testProvideLocationInTaxRegistrationModal();
+        testProvideLocationInProfile();
+      });
+
+      describe("when we answer No to home-based business question after providing location", () => {
+        beforeEach(() => {
+          completeNewBusinessOnboarding({
+            industry: randomHomeBasedIndustry(),
+            legalStructureId: randomTradeNameLegalStructure(),
+          });
+        });
+
+        it("can provide location in Tax Registration Modal", () => {
+          openTaxRegistrationModal();
+          fillNumberOfEmployees("5");
+          selectLocation("Allendale");
+          clickModalSaveButton();
+
+          selectHomeBased(false);
+
+          goToMercantileTask();
+          expectLocationSpecificContentInTask("Allendale");
+          navigateBackToDashboard();
+          expectLocationQuestionIsCompletedInProfile("Allendale");
+        });
+
+        it("can provide location in profile", () => {
+          goToProfile();
+          selectLocation("Allendale");
+          onProfilePage.clickSaveButton();
+          cy.url().should("contain", "/dashboard");
+          onProfilePage.getLocationDropdown().should("not.exist");
+
+          selectHomeBased(false);
+
+          goToMercantileTask();
+          expectLocationSpecificContentInTask("Allendale");
+        });
+      });
+    });
+
+    describe("onboarded as FOREIGN NEXUS - PublicFiling", () => {});
+
+    describe("onboarded as FOREIGN NEXUS - TradeName", () => {});
+
     describe("onboarded as OWNING", () => {
       it("answers location question as part of onboarding", () => {
         completeExistingBusinessOnboarding({ townDisplayName: "Allendale" });
@@ -294,6 +365,14 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
 
   const openFormationDateModal = () => {
     cy.get('[data-testid="cta-formation-nudge"]').click();
+  };
+
+  const openTaxRegistrationModal = () => {
+    cy.get('[data-testid="cta-tax-registration-nudge"]').click();
+  };
+
+  const fillNumberOfEmployees = (value: string) => {
+    cy.get('input[name="existingEmployees"]').clear().type(value);
   };
 
   const selectDate = (monthYear: string) => {
