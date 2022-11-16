@@ -9,6 +9,7 @@ import { Task } from "@/lib/types/types";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { ReactElement, useContext, useState } from "react";
+import { TaskCTA } from "../TaskCTA";
 import { TaxDisplay } from "./TaxDisplay";
 import { TaxInput } from "./TaxInput";
 
@@ -68,7 +69,6 @@ export const TaxTask = (props: Props): ReactElement => {
 
   const preInputContent = props.task.contentMd.split("${taxInputComponent}")[0];
   const postInputContent = props.task.contentMd.split("${taxInputComponent}")[1];
-
   return (
     <div className="minh-38">
       <TaskHeader task={props.task} />
@@ -82,6 +82,7 @@ export const TaxTask = (props: Props): ReactElement => {
         )}
       </div>
       <Content>{postInputContent}</Content>
+      <TaskCTA link={props.task.callToActionLink} text={props.task.callToActionText} />
     </div>
   );
 };
