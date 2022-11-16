@@ -33,18 +33,17 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
           expectLocationQuestionIsCompletedInProfile("Allendale");
         });
 
-        // TODO: fix this once we fix the flakey date-of-formation issue
-        // it("can provide location in Formation Date Modal", () => {
-        //   openFormationDateModal();
-        //   selectDate("04/2021");
-        //   selectLocation("Allendale");
-        //   clickModalSaveButton();
-        //
-        //   goToMercantileTask();
-        //   expectLocationSpecificContentInTask("Allendale");
-        //   navigateBackToDashboard();
-        //   expectLocationQuestionIsCompletedInProfile("Allendale");
-        // });
+        it("can provide location in Formation Date Modal", () => {
+          openFormationDateModal();
+          selectDate("04/2021");
+          selectLocation("Allendale");
+          clickModalSaveButton();
+
+          goToMercantileTask();
+          expectLocationSpecificContentInTask("Allendale");
+          navigateBackToDashboard();
+          expectLocationQuestionIsCompletedInProfile("Allendale");
+        });
 
         it("can provide location in profile", () => {
           goToProfile();
@@ -88,20 +87,19 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
           });
         });
 
-        // todo: fix when dateOfFormation bug resolved
-        // it("can provide location in Formation Date Modal", () => {
-        //   openFormationDateModal();
-        //   selectDate("04/2021");
-        //   selectLocation("Allendale");
-        //   clickModalSaveButton();
-        //
-        //   selectHomeBased(false);
-        //
-        //   goToMercantileTask();
-        //   expectLocationSpecificContentInTask("Allendale");
-        //   navigateBackToDashboard();
-        //   expectLocationQuestionIsCompletedInProfile("Allendale");
-        // });
+        it("can provide location in Formation Date Modal", () => {
+          openFormationDateModal();
+          selectDate("04/2021");
+          selectLocation("Allendale");
+          clickModalSaveButton();
+
+          selectHomeBased(false);
+
+          goToMercantileTask();
+          expectLocationSpecificContentInTask("Allendale");
+          navigateBackToDashboard();
+          expectLocationQuestionIsCompletedInProfile("Allendale");
+        });
 
         it("can provide location in profile", () => {
           goToProfile();
@@ -294,16 +292,16 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
     return cy.get(`[data-testid="back-to-dashboard"]`).click();
   };
 
-  // const openFormationDateModal = () => {
-  //   cy.get('[data-testid="cta-formation-nudge"]').click();
-  // };
-  //
-  // const selectDate = (monthYear: string) => {
-  //   cy.chooseDatePicker('[name="dateOfFormation"]', monthYear);
-  // };
-  //
-  // const clickModalSaveButton = () => {
-  //   cy.get('[data-testid="modal-button-primary"]').click();
-  //   cy.wait(1000);
-  // };
+  const openFormationDateModal = () => {
+    cy.get('[data-testid="cta-formation-nudge"]').click();
+  };
+
+  const selectDate = (monthYear: string) => {
+    cy.chooseDatePicker('[name="dateOfFormation"]', monthYear);
+  };
+
+  const clickModalSaveButton = () => {
+    cy.get('[data-testid="modal-button-primary"]').click();
+    cy.wait(1000);
+  };
 });
