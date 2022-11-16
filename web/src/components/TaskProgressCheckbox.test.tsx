@@ -4,7 +4,7 @@ import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { generateProfileData, generateUserData } from "@/test/factories";
-import { withAuthAlert } from "@/test/helpers";
+import { selectDate, withAuthAlert } from "@/test/helpers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import {
@@ -19,7 +19,6 @@ import { randomInt } from "@businessnjgovnavigator/shared/intHelpers";
 import { TaskProgress, UserData } from "@businessnjgovnavigator/shared/userData";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
-import { Dayjs } from "dayjs";
 
 jest.mock("next/router", () => {
   return { useRouter: jest.fn() };
@@ -346,11 +345,5 @@ describe("<TaskProgressCheckbox />", () => {
     fireEvent.click(screen.getByTestId("change-task-progress-checkbox"));
     await screen.findByText(Config.taskProgress.IN_PROGRESS);
     fireEvent.click(screen.getByTestId("change-task-progress-checkbox"));
-  };
-
-  const selectDate = (date: Dayjs) => {
-    const item = screen.getByLabelText("Date of formation");
-    fireEvent.change(item, { target: { value: date.format("MM/YYYY") } });
-    fireEvent.blur(item);
   };
 });

@@ -10,7 +10,7 @@ import {
   generateRoadmap,
   generateUserData,
 } from "@/test/factories";
-import { withRoadmap } from "@/test/helpers";
+import { selectLocationByText, withRoadmap } from "@/test/helpers";
 import {
   currentUserData,
   setupStatefulUserDataContext,
@@ -18,7 +18,7 @@ import {
 } from "@/test/mock/withStatefulUserData";
 import { Municipality } from "@businessnjgovnavigator/shared/municipality";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
-import { act, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
+import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 function setupMockAnalytics(): typeof analytics {
   return {
@@ -192,10 +192,4 @@ describe("<DeferredLocationQuestion />", () => {
       ).toHaveBeenCalled();
     });
   });
-
-  const selectLocationByText = (value: string) => {
-    fireEvent.mouseDown(screen.getByLabelText("Location"));
-    const listbox = within(screen.getByRole("listbox"));
-    fireEvent.click(listbox.getByText(value));
-  };
 });

@@ -9,7 +9,7 @@ import {
   generateRoadmap,
   generateUserData,
 } from "@/test/factories";
-import { markdownToText, withRoadmap } from "@/test/helpers";
+import { fillText, markdownToText, selectLocationByText, withRoadmap } from "@/test/helpers";
 import {
   currentUserData,
   setupStatefulUserDataContext,
@@ -472,16 +472,4 @@ const selectOwnershipByValue = (value: string) => {
   fireEvent.mouseDown(screen.getByLabelText("Ownership"));
   const listbox = within(screen.getByRole("listbox"));
   fireEvent.click(listbox.getByTestId(value));
-};
-
-const fillText = (label: string, value: string) => {
-  const item = screen.getByLabelText(label);
-  fireEvent.change(item, { target: { value: value } });
-  fireEvent.blur(item);
-};
-
-const selectLocationByText = (value: string) => {
-  fireEvent.mouseDown(screen.getByLabelText("Location"));
-  const listbox = within(screen.getByRole("listbox"));
-  fireEvent.click(listbox.getByText(value));
 };

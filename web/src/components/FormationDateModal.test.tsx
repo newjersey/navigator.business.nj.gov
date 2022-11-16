@@ -9,7 +9,7 @@ import {
   generateRoadmap,
   generateUserData,
 } from "@/test/factories";
-import { withRoadmap } from "@/test/helpers";
+import { selectDate, selectLocationByText, withRoadmap } from "@/test/helpers";
 import {
   currentUserData,
   setupStatefulUserDataContext,
@@ -18,8 +18,7 @@ import {
 } from "@/test/mock/withStatefulUserData";
 import { getCurrentDate } from "@businessnjgovnavigator/shared/dateHelpers";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
-import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
-import { Dayjs } from "dayjs";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useRoadmap", () => {
   return { useRoadmap: jest.fn() };
@@ -162,16 +161,4 @@ describe("<FormationDateModal />", () => {
     });
     expect(mockAnalyticsHelpers.setAnalyticsDimensions).toHaveBeenCalledWith(userData.profileData);
   });
-
-  const selectDate = (date: Dayjs) => {
-    const item = screen.getByLabelText("Date of formation");
-    fireEvent.change(item, { target: { value: date.format("MM/YYYY") } });
-    fireEvent.blur(item);
-  };
-
-  const selectLocationByText = (value: string) => {
-    fireEvent.mouseDown(screen.getByLabelText("Location"));
-    const listbox = within(screen.getByRole("listbox"));
-    fireEvent.click(listbox.getByText(value));
-  };
 });
