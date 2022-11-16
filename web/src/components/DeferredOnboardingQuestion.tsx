@@ -14,7 +14,6 @@ interface Props {
   label: ReactNode;
   onSave: () => void;
   removeStyling?: boolean;
-  adjustPaddingForHelperText?: boolean;
 }
 
 export const DeferredOnboardingQuestion = (props: Props) => {
@@ -61,13 +60,11 @@ export const DeferredOnboardingQuestion = (props: Props) => {
     >
       <div className={`${props.removeStyling ? "" : "radius-md border-primary-light border-1px"} padding-3`}>
         {props.label}
-        <div className="display-flex mobile-lg:flex-row flex-column mobile-lg:flex-align-center">
-          <div className="width-100 margin-right-1">{props.children}</div>
+        <div className="display-flex mobile-lg:flex-row flex-column mobile-lg:flex-align-center margin-top-2">
+          <div className="width-100 margin-right-1 form-input">{props.children}</div>
           <Button
             style="secondary"
-            className={`margin-left-auto mobile-lg:margin-top-0 margin-top-2 ${
-              props.adjustPaddingForHelperText ? "margin-bottom-105 height-6" : ""
-            }`}
+            className="mobile-lg:margin-top-0 margin-top-2"
             onClick={onSave}
             dataTestid="deferred-question-save"
           >
