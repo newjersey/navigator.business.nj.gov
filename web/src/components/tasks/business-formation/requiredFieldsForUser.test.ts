@@ -7,10 +7,9 @@ describe("requiredFieldsForUser", () => {
     "businessName",
     "businessSuffix",
     "businessStartDate",
-    "businessAddressCity",
-    "businessAddressLine1",
-    "businessAddressZipCode",
-    "signers",
+    "addressMunicipality",
+    "addressLine1",
+    "addressZipCode",
     "paymentType",
     "contactFirstName",
     "contactLastName",
@@ -27,7 +26,7 @@ describe("requiredFieldsForUser", () => {
         "agentName",
         "agentEmail",
         "agentOfficeAddressLine1",
-        "agentOfficeAddressCity",
+        "agentOfficeAddressMunicipality",
         "agentOfficeAddressZipCode",
       ];
 
@@ -53,8 +52,10 @@ describe("requiredFieldsForUser", () => {
       const legalStructureId = "limited-liability-company";
       const formationFormData = generateFormationFormData({});
 
+      const expected: FormationFields[] = [...requiredFieldsForAllLegalStructures, "signers"];
+
       expect(requiredFieldsForUser(legalStructureId, formationFormData)).toEqual(
-        expect.arrayContaining(requiredFieldsForAllLegalStructures)
+        expect.arrayContaining(expected)
       );
     });
   });
@@ -64,8 +65,10 @@ describe("requiredFieldsForUser", () => {
       const legalStructureId = "limited-liability-partnership";
       const formationFormData = generateFormationFormData({});
 
+      const expected: FormationFields[] = [...requiredFieldsForAllLegalStructures, "signers"];
+
       expect(requiredFieldsForUser(legalStructureId, formationFormData)).toEqual(
-        expect.arrayContaining(requiredFieldsForAllLegalStructures)
+        expect.arrayContaining(expected)
       );
     });
   });
@@ -79,6 +82,7 @@ describe("requiredFieldsForUser", () => {
         ...requiredFieldsForAllLegalStructures,
         "businessTotalStock",
         "members",
+        "incorporators",
       ];
       expect(requiredFieldsForUser(legalStructureId, formationFormData)).toEqual(
         expect.arrayContaining(expected)
@@ -95,6 +99,7 @@ describe("requiredFieldsForUser", () => {
         ...requiredFieldsForAllLegalStructures,
         "businessTotalStock",
         "members",
+        "incorporators",
       ];
       expect(requiredFieldsForUser(legalStructureId, formationFormData)).toEqual(
         expect.arrayContaining(expected)
@@ -119,6 +124,7 @@ describe("requiredFieldsForUser", () => {
         "canCreateLimitedPartner",
         "canGetDistribution",
         "canMakeDistribution",
+        "incorporators",
       ];
       expect(requiredFieldsForUser(legalStructureId, formationFormData)).toEqual(
         expect.arrayContaining(expected)

@@ -5,11 +5,7 @@ import { requiredFieldsForUser } from "@/components/tasks/business-formation/req
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { FormationFieldErrorState, FormationStepNames } from "@/lib/types/types";
-import {
-  FormationFields,
-  FormationLegalType,
-  FormationLegalTypes,
-} from "@businessnjgovnavigator/shared/formationData";
+import { FormationFields } from "@businessnjgovnavigator/shared/formationData";
 import { useContext, useMemo } from "react";
 
 export const useFormationErrors = () => {
@@ -17,17 +13,8 @@ export const useFormationErrors = () => {
   const { userData } = useUserData();
 
   const requiredFields = useMemo((): FormationFields[] => {
-    if (!userData?.profileData.legalStructureId) {
-      return [];
-    }
-    if (!FormationLegalTypes.includes(userData.profileData.legalStructureId as FormationLegalType)) {
-      return [];
-    }
-    return requiredFieldsForUser(
-      userData.profileData.legalStructureId as FormationLegalType,
-      state.formationFormData
-    );
-  }, [userData?.profileData.legalStructureId, state.formationFormData]);
+    return requiredFieldsForUser(state.legalStructureId, state.formationFormData);
+  }, [state.legalStructureId, state.formationFormData]);
 
   const errorStates: Record<FormationFields, FormationFieldErrorState> = useMemo(() => {
     return requiredFields.reduce((acc, field) => {

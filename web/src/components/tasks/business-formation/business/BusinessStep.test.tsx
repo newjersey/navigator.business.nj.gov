@@ -2,7 +2,6 @@ import {
   generateFormationDisplayContent,
   generateFormationFormData,
   generateMunicipality,
-  generateUser,
   generateUserData,
 } from "@/test/factories";
 import { markdownToText } from "@/test/helpers";
@@ -16,7 +15,6 @@ import { mockPush } from "@/test/mock/mockRouter";
 import { currentUserData } from "@/test/mock/withStatefulUserData";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import {
-  BusinessUser,
   FormationFormData,
   FormationLegalType,
   getCurrentDate,
@@ -67,22 +65,19 @@ describe("Formation - BusinessStep", () => {
   const getPageHelper = async (
     initialProfileData: Partial<ProfileData>,
     formationFormData: Partial<FormationFormData>,
-    municipalities?: Municipality[],
-    initialUser?: Partial<BusinessUser>
+    municipalities?: Municipality[]
   ): Promise<FormationPageHelpers> => {
     const profileData = generateFormationProfileData(initialProfileData);
     const formationData = {
-      formationFormData: generateFormationFormData(
-        formationFormData,
-        profileData.legalStructureId as FormationLegalType
-      ),
+      formationFormData: generateFormationFormData(formationFormData, {
+        legalStructureId: profileData.legalStructureId as FormationLegalType,
+      }),
       formationResponse: undefined,
       getFilingResponse: undefined,
       completedFilingPayment: false,
     };
-    const user = initialUser ? generateUser(initialUser) : generateUser({});
     const page = preparePage(
-      generateUserData({ profileData, formationData, user }),
+      generateUserData({ profileData, formationData }),
       generateFormationDisplayContent({}),
       municipalities
     );
@@ -122,29 +117,30 @@ describe("Formation - BusinessStep", () => {
 
   it("auto-fills fields from userData if it exists", async () => {
     const page = await getPageHelper(
-      { legalStructureId: "limited-liability-company" },
+      {
+        legalStructureId: "limited-liability-company",
+        municipality: generateMunicipality({ displayName: "Newark", name: "Newark" }),
+      },
       {
         businessSuffix: "LTD LIABILITY CO",
         businessStartDate: getCurrentDateFormatted("YYYY-MM-DD"),
-        businessAddressCity: generateMunicipality({ displayName: "Newark" }),
-        businessAddressLine1: "123 main street",
-        businessAddressLine2: "suite 102",
-        businessAddressState: "NJ",
-        businessAddressZipCode: "07601",
+        addressLine1: "123 main street",
+        addressLine2: "suite 102",
+        addressState: { name: "New Jersey", shortCode: "NJ" },
+        addressZipCode: "07601",
         businessPurpose: "some cool purpose",
-      },
-      undefined,
-      {}
+      }
     );
 
     expect(screen.getByText("LTD LIABILITY CO")).toBeInTheDocument();
     expect(page.getInputElementByLabel("Business start date").value).toBe(
       getCurrentDateFormatted("MM/DD/YYYY")
     );
-    expect(page.getInputElementByLabel("Business address line1").value).toBe("123 main street");
-    expect(page.getInputElementByLabel("Business address line2").value).toBe("suite 102");
-    expect(page.getInputElementByLabel("Business address state").value).toBe("NJ");
-    expect(page.getInputElementByLabel("Business address zip code").value).toBe("07601");
+    expect(page.getInputElementByLabel("Address line1").value).toBe("123 main street");
+    expect(page.getInputElementByLabel("Address line2").value).toBe("suite 102");
+    expect(page.getInputElementByLabel("Address municipality").value).toBe("Newark");
+    expect(page.getInputElementByLabel("Address state").value).toBe("NJ");
+    expect(page.getInputElementByLabel("Address zip code").value).toBe("07601");
     expect(page.getInputElementByLabel("Business purpose").value).toBe("some cool purpose");
   });
 
@@ -160,16 +156,14 @@ describe("Formation - BusinessStep", () => {
   });
 
   it("displays alert and highlights fields when blur with missing fields", async () => {
-    const page = await getPageHelper({}, { businessAddressLine1: "" });
+    const page = await getPageHelper({}, { addressLine1: "" });
 
-    fireEvent.blur(screen.getByLabelText("Business address line1"));
+    fireEvent.blur(screen.getByLabelText("Address line1"));
 
+    expect(screen.getByText(Config.businessFormationDefaults.addressLine1ErrorText)).toBeInTheDocument();
+    page.fillText("Address line1", "1234 main street");
     expect(
-      screen.getByText(Config.businessFormationDefaults.businessAddressLine1ErrorText)
-    ).toBeInTheDocument();
-    page.fillText("Business address line1", "1234 main street");
-    expect(
-      screen.queryByText(Config.businessFormationDefaults.businessAddressLine1ErrorText)
+      screen.queryByText(Config.businessFormationDefaults.addressLine1ErrorText)
     ).not.toBeInTheDocument();
   });
 
@@ -318,27 +312,23 @@ describe("Formation - BusinessStep", () => {
   });
 
   describe("NJ zipcode validation", () => {
-    it("displays error message when non-NJ zipcode is entered in main business address", async () => {
-      const page = await getPageHelper({}, { businessAddressZipCode: "" });
-      page.fillText("Business address zip code", "22222");
-      expect(
-        screen.getByText(Config.businessFormationDefaults.businessAddressZipCodeErrorText)
-      ).toBeInTheDocument();
+    it("displays error message when non-NJ zipcode is entered in main Address", async () => {
+      const page = await getPageHelper({}, { addressZipCode: "" });
+      page.fillText("Address zip code", "22222");
+      expect(screen.getByText(Config.businessFormationDefaults.addressZipCodeErrorText)).toBeInTheDocument();
     });
 
-    it("displays error message when alphabetical zipcode is entered in main business address", async () => {
-      const page = await getPageHelper({}, { businessAddressZipCode: "" });
-      page.fillText("Business address zip code", "AAAAA");
-      expect(
-        screen.getByText(Config.businessFormationDefaults.businessAddressZipCodeErrorText)
-      ).toBeInTheDocument();
+    it("displays error message when alphabetical zipcode is entered in main Address", async () => {
+      const page = await getPageHelper({}, { addressZipCode: "" });
+      page.fillText("Address zip code", "AAAAA");
+      expect(screen.getByText(Config.businessFormationDefaults.addressZipCodeErrorText)).toBeInTheDocument();
     });
 
-    it("passes zipcode validation in main business address", async () => {
-      const page = await getPageHelper({}, { businessAddressZipCode: "" });
-      page.fillText("Business address zip code", "07001");
+    it("passes zipcode validation in main Address", async () => {
+      const page = await getPageHelper({}, { addressZipCode: "" });
+      page.fillText("Address zip code", "07001");
       await page.submitBusinessStep();
-      expect(currentUserData().formationData.formationFormData.businessAddressZipCode).toEqual("07001");
+      expect(currentUserData().formationData.formationFormData.addressZipCode).toEqual("07001");
     });
   });
 
@@ -410,12 +400,15 @@ describe("Formation - BusinessStep", () => {
       ).not.toBeInTheDocument();
     });
 
-    it("displays City (Main Business Address) from profile data", async () => {
-      await getPageHelper({ municipality: generateMunicipality({ displayName: "Newark" }) }, {});
-      expect((screen.getByLabelText("Business address city") as HTMLInputElement).value).toEqual("Newark");
+    it("displays City (Main Address) from profile data", async () => {
+      await getPageHelper(
+        { municipality: generateMunicipality({ displayName: "Newark", name: "Newark" }) },
+        {}
+      );
+      expect((screen.getByLabelText("Address municipality") as HTMLInputElement).value).toEqual("Newark");
 
       expect(
-        screen.queryByText(Config.businessFormationDefaults.businessAddressCityPlaceholder, {
+        screen.queryByText(Config.businessFormationDefaults.addressCityPlaceholder, {
           exact: false,
         })
       ).not.toBeInTheDocument();
@@ -546,19 +539,19 @@ describe("Formation - BusinessStep", () => {
       ).toBeInTheDocument();
     });
 
-    it("Business address line1", async () => {
-      const page = await getPageHelper({}, { businessAddressLine1: "" });
+    it("Address line1", async () => {
+      const page = await getPageHelper({}, { addressLine1: "" });
       await attemptApiSubmission(page);
       expect(screen.getByRole("alert")).toHaveTextContent(
-        Config.businessFormationDefaults.requiredFieldsBulletPointLabel.businessAddressLine1
+        Config.businessFormationDefaults.requiredFieldsBulletPointLabel.addressLine1
       );
     });
 
-    it("Business address zip code", async () => {
-      const page = await getPageHelper({}, { businessAddressZipCode: "" });
+    it("Address zip code", async () => {
+      const page = await getPageHelper({}, { addressZipCode: "" });
       await attemptApiSubmission(page);
       expect(screen.getByRole("alert")).toHaveTextContent(
-        Config.businessFormationDefaults.requiredFieldsBulletPointLabel.businessAddressZipCode
+        Config.businessFormationDefaults.requiredFieldsBulletPointLabel.addressZipCode
       );
     });
   });

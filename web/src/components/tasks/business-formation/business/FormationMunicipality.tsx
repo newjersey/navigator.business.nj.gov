@@ -13,19 +13,21 @@ export const FormationMunicipality = (): ReactElement => {
   const { doesFieldHaveError } = useFormationErrors();
 
   const onSelect = (value: Municipality | undefined): void => {
-    setFormationFormData({ ...state.formationFormData, businessAddressCity: value });
+    setFormationFormData((previousFormationFormData) => {
+      return { ...previousFormationFormData, addressMunicipality: value };
+    });
   };
 
   return (
     <div className="margin-top-2">
       <MunicipalityDropdown
         municipalities={municipalities}
-        fieldName={"businessAddressCity"}
-        error={doesFieldHaveError("businessAddressCity")}
+        fieldName={"addressMunicipality"}
+        error={doesFieldHaveError("addressMunicipality")}
         validationLabel="Error"
-        value={state.formationFormData.businessAddressCity}
+        value={state.formationFormData.addressMunicipality}
         onSelect={onSelect}
-        placeholderText={Config.businessFormationDefaults.businessAddressCityPlaceholder}
+        placeholderText={Config.businessFormationDefaults.addressCityPlaceholder}
         helperText={Config.businessFormationDefaults.addressCityErrorText}
       />
     </div>

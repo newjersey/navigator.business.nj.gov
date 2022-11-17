@@ -24,10 +24,10 @@ export const ReviewSignatures = (): ReactElement => {
   return (
     <>
       <ReviewSectionHeader header={getHeader()} stepName="Contacts" testId="signature" />
-      {state.formationFormData.signers.length === 0 && (
+      {state.formationFormData.signers?.length === 0 && (
         <i>{Config.businessFormationDefaults.reviewStepNotEnteredText}</i>
       )}
-      {state.formationFormData.signers.map((signer, index) => {
+      {state.formationFormData.signers?.map((signer, index) => {
         return (
           <div key={`${signer}-${index}`} className={index !== 0 ? "margin-top-2" : ""}>
             <ReviewLineItem
@@ -39,21 +39,26 @@ export const ReviewSignatures = (): ReactElement => {
               value={signer.name || italicNotEnteredText}
               marginOverride={index === 0 ? "margin-top-0" : "margin-top-2"}
             />
-            {(isCorp || state.legalStructureId == "limited-partnership") && (
-              <ReviewLineItem
-                label={Config.businessFormationDefaults.reviewStepIncorporatorAddressLabel}
-                value={getStringifiedAddress(
-                  signer.addressLine1,
-                  signer.addressCity,
-                  signer.addressState,
-                  signer.addressZipCode,
-                  signer.addressLine2
-                )}
-              />
-            )}
           </div>
         );
       })}
+      {state.formationFormData.incorporators?.map((signer, index) => {
+        return (
+          <div key={`${signer}-${index}`} className={index !== 0 ? "margin-top-2" : ""}>
+            <ReviewLineItem
+              label={Config.businessFormationDefaults.reviewStepIncorporatorAddressLabel}
+              value={getStringifiedAddress(
+                signer.addressLine1,
+                signer.addressCity ?? "",
+                signer.addressState?.name ?? "",
+                signer.addressZipCode,
+                signer.addressLine2
+              )}
+            />
+          </div>
+        );
+      })}
+
       <hr className="margin-y-205" />
     </>
   );

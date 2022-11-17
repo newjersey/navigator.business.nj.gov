@@ -2,7 +2,6 @@ import * as useUserModule from "@/lib/data-hooks/useUserData";
 import { UseUserDataResponse } from "@/lib/data-hooks/useUserData";
 import { UserDataError } from "@/lib/types/types";
 import { generateProfileData, generateUserData } from "@/test/factories";
-import { generateUseUserDataResponse } from "@/test/helpers";
 import { ProfileData, UserData } from "@businessnjgovnavigator/shared/";
 
 const mockUseUserData = (useUserModule as jest.Mocked<typeof useUserModule>).useUserData;
@@ -25,6 +24,18 @@ export const useMockProfileData = (profileData: Partial<ProfileData>): void => {
       profileData: generateProfileData(profileData),
     }),
   });
+};
+
+export const generateUseUserDataResponse = (overrides: Partial<UseUserDataResponse>): UseUserDataResponse => {
+  return {
+    userData: generateUserData({}),
+    update: jest.fn().mockResolvedValue({}),
+    error: undefined,
+    isLoading: false,
+    refresh: jest.fn().mockResolvedValue({}),
+    updateQueue: undefined,
+    ...overrides,
+  };
 };
 
 export const setMockUserDataResponse = (overrides: Partial<UseUserDataResponse>): void => {

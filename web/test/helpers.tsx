@@ -4,9 +4,7 @@ import { ContextualInfo, ContextualInfoContext } from "@/contexts/contextualInfo
 import { RoadmapContext } from "@/contexts/roadmapContext";
 import { UserDataErrorContext } from "@/contexts/userDataErrorContext";
 import { AuthAction, AuthState, IsAuthenticated } from "@/lib/auth/AuthContext";
-import { UseUserDataResponse } from "@/lib/data-hooks/useUserData";
 import { Roadmap, SectionCompletion, UserDataError } from "@/lib/types/types";
-import { generateProfileData, generateUserData } from "@/test/factories";
 import { BusinessUser, RegistrationStatus } from "@businessnjgovnavigator/shared/";
 import { fireEvent, MatcherFunction, screen, within } from "@testing-library/react";
 import { Dayjs } from "dayjs";
@@ -101,18 +99,6 @@ export const withRoadmap = (
   );
 };
 
-export const generateUseUserDataResponse = (overrides: Partial<UseUserDataResponse>): UseUserDataResponse => {
-  return {
-    userData: generateUserData({}),
-    update: jest.fn().mockResolvedValue({}),
-    error: undefined,
-    isLoading: false,
-    refresh: jest.fn().mockResolvedValue({}),
-    updateQueue: undefined,
-    ...overrides,
-  };
-};
-
 export const getLastCalledWith = <T, R>(fn: jest.MockInstance<T, R[]>): R[] => {
   const lastIndex = fn.mock.calls.length - 1;
   return fn.mock.calls[lastIndex];
@@ -157,15 +143,6 @@ export const markdownToText = (text: string): string => {
   }
   return returnText;
 };
-
-export const getProfileDataForUnfilteredOpportunities = generateProfileData({
-  operatingPhase: "UP_AND_RUNNING",
-  homeBasedBusiness: false,
-  municipality: undefined,
-  existingEmployees: "1",
-  sectorId: undefined,
-  ownershipTypeIds: ["veteran-owned", "disabled-veteran", "minority-owned", "woman-owned"],
-});
 
 export const selectLocationByText = (value: string) => {
   fireEvent.mouseDown(screen.getByLabelText("Location"));

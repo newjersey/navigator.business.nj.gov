@@ -5,9 +5,14 @@ import * as signinHelper from "@/lib/auth/signinHelper";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import LoadingPage, { signInSamlError } from "@/pages/loading";
 import { generatePreferences, generateProfileData, generateUserData } from "@/test/factories";
-import { generateUseUserDataResponse, withAuth } from "@/test/helpers";
+import { withAuth } from "@/test/helpers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
-import { setMockUserDataResponse, useMockProfileData, useMockUserData } from "@/test/mock/mockUseUserData";
+import {
+  generateUseUserDataResponse,
+  setMockUserDataResponse,
+  useMockProfileData,
+  useMockUserData,
+} from "@/test/mock/mockUseUserData";
 import {
   currentUserData,
   setupStatefulUserDataContext,

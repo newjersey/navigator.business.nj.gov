@@ -3,8 +3,10 @@
 import { getErrorStateForField } from "@/components/tasks/business-formation/getErrorStateForField";
 import { getMergedConfig } from "@/contexts/configContext";
 import {
-  generateFormationAddress,
   generateFormationFormData,
+  generateFormationIncorporator,
+  generateFormationMember,
+  generateFormationSigner,
   generateNameAvailability,
 } from "@/test/factories";
 import { getCurrentDate, getCurrentDateFormatted } from "@businessnjgovnavigator/shared/dateHelpers";
@@ -123,26 +125,26 @@ describe("getErrorStateForField", () => {
     });
   });
 
-  describe("businessAddressZipCode", () => {
+  describe("addressZipCode", () => {
     it("has error if empty", () => {
-      const formData = generateFormationFormData({ businessAddressZipCode: "" });
-      expect(getErrorStateForField("businessAddressZipCode", formData, undefined).hasError).toEqual(true);
+      const formData = generateFormationFormData({ addressZipCode: "" });
+      expect(getErrorStateForField("addressZipCode", formData, undefined).hasError).toEqual(true);
     });
 
     it("has error if not in range", () => {
-      const formData = generateFormationFormData({ businessAddressZipCode: "12345" });
-      expect(getErrorStateForField("businessAddressZipCode", formData, undefined).hasError).toEqual(true);
+      const formData = generateFormationFormData({ addressZipCode: "12345" });
+      expect(getErrorStateForField("addressZipCode", formData, undefined).hasError).toEqual(true);
     });
 
     it("has no error if in range", () => {
-      const formData = generateFormationFormData({ businessAddressZipCode: "08100" });
-      expect(getErrorStateForField("businessAddressZipCode", formData, undefined).hasError).toEqual(false);
+      const formData = generateFormationFormData({ addressZipCode: "08100" });
+      expect(getErrorStateForField("addressZipCode", formData, undefined).hasError).toEqual(false);
     });
 
     it("inserts label from config", () => {
-      const formData = generateFormationFormData({ businessAddressZipCode: "08100" });
-      expect(getErrorStateForField("businessAddressZipCode", formData, undefined).label).toEqual(
-        Config.businessFormationDefaults.requiredFieldsBulletPointLabel.businessAddressZipCode
+      const formData = generateFormationFormData({ addressZipCode: "08100" });
+      expect(getErrorStateForField("addressZipCode", formData, undefined).label).toEqual(
+        Config.businessFormationDefaults.requiredFieldsBulletPointLabel.addressZipCode
       );
     });
   });
@@ -196,72 +198,109 @@ describe("getErrorStateForField", () => {
     });
   });
 
-  describe("signers", () => {
-    it("has NAME-labelled error when some signers do not have a name", () => {
-      const formData = generateFormationFormData({
-        signers: [
-          generateFormationAddress({ name: "", signature: true }),
-          generateFormationAddress({ name: "some-name", signature: true }),
-        ],
-      });
-      expect(getErrorStateForField("signers", formData, undefined).hasError).toEqual(true);
-      expect(getErrorStateForField("signers", formData, undefined).label).toEqual(
-        Config.businessFormationDefaults.signerNameErrorText
-      );
-    });
+  describe(`incorporator and signer fields`, () => {
+    (["signers", "incorporators"] as ("signers" | "incorporators")[]).map((field) => {
+      const generator = field == "signers" ? generateFormationSigner : generateFormationIncorporator;
+      return describe(`${field}`, () => {
+        it(`has NAME-labelled error when some ${field} do not have a name`, () => {
+          const formData = generateFormationFormData({
+            [field]: [
+              generator({ name: "", signature: true }),
+              generator({ name: "some-name", signature: true }),
+            ],
+          });
+          expect(getErrorStateForField(field, formData, undefined).hasError).toEqual(true);
+          expect(getErrorStateForField(field, formData, undefined).label).toEqual(
+            Config.businessFormationDefaults.signerNameErrorText
+          );
+        });
 
-    it("has NAME-labelled error when some signers name is just whitespace", () => {
-      const formData = generateFormationFormData({
-        signers: [generateFormationAddress({ name: " ", signature: true })],
-      });
-      expect(getErrorStateForField("signers", formData, undefined).hasError).toEqual(true);
-      expect(getErrorStateForField("signers", formData, undefined).label).toEqual(
-        Config.businessFormationDefaults.signerNameErrorText
-      );
-    });
+        it(`has NAME-labelled error when some ${field} name is just whitespace`, () => {
+          const formData = generateFormationFormData({
+            [field]: [generator({ name: " ", signature: true })],
+          });
+          expect(getErrorStateForField(field, formData, undefined).hasError).toEqual(true);
+          expect(getErrorStateForField(field, formData, undefined).label).toEqual(
+            Config.businessFormationDefaults.signerNameErrorText
+          );
+        });
 
-    it("has CHECKBOX-labelled error when some signers are not checked", () => {
-      const formData = generateFormationFormData({
-        signers: [
-          generateFormationAddress({ name: "some-name", signature: false }),
-          generateFormationAddress({ name: "some-name", signature: true }),
-        ],
-      });
-      expect(getErrorStateForField("signers", formData, undefined).hasError).toEqual(true);
-      expect(getErrorStateForField("signers", formData, undefined).label).toEqual(
-        Config.businessFormationDefaults.signerCheckboxErrorText
-      );
-    });
+        it(`has CHECKBOX-labelled error when some ${field} are not checked`, () => {
+          const formData = generateFormationFormData({
+            [field]: [
+              generator({ name: "some-name", signature: false }),
+              generator({ name: "some-name", signature: true }),
+            ],
+          });
+          expect(getErrorStateForField(field, formData, undefined).hasError).toEqual(true);
+          expect(getErrorStateForField(field, formData, undefined).label).toEqual(
+            Config.businessFormationDefaults.signerCheckboxErrorText
+          );
+        });
 
-    it("has MINIMUM-labelled error when length of signers is 0", () => {
-      const formData = generateFormationFormData({ signers: [] });
-      expect(getErrorStateForField("signers", formData, undefined).hasError).toEqual(true);
-      expect(getErrorStateForField("signers", formData, undefined).label).toEqual(
-        Config.businessFormationDefaults.signerMinimumErrorText
-      );
-    });
+        it(`has MINIMUM-labelled error when length of ${field} is 0`, () => {
+          const formData = generateFormationFormData({ [field]: [] });
+          expect(getErrorStateForField(field, formData, undefined).hasError).toEqual(true);
+          expect(getErrorStateForField(field, formData, undefined).label).toEqual(
+            Config.businessFormationDefaults.signerMinimumErrorText
+          );
+        });
 
-    it("shows NAME error before CHECKBOX error if signer is missing both", () => {
-      const formData = generateFormationFormData({
-        signers: [
-          generateFormationAddress({ name: "", signature: true }),
-          generateFormationAddress({ name: "some-name", signature: false }),
-        ],
-      });
-      expect(getErrorStateForField("signers", formData, undefined).hasError).toEqual(true);
-      expect(getErrorStateForField("signers", formData, undefined).label).toEqual(
-        Config.businessFormationDefaults.signerNameErrorText
-      );
-    });
+        it(`shows NAME error before CHECKBOX error if ${field} is missing both`, () => {
+          const formData = generateFormationFormData({
+            [field]: [
+              generator({ name: "", signature: true }),
+              generator({ name: "some-name", signature: false }),
+            ],
+          });
+          expect(getErrorStateForField(field, formData, undefined).hasError).toEqual(true);
+          expect(getErrorStateForField(field, formData, undefined).label).toEqual(
+            Config.businessFormationDefaults.signerNameErrorText
+          );
+        });
 
-    it("has no error when all signers have name and checkbox", () => {
-      const formData = generateFormationFormData({
-        signers: [
-          generateFormationAddress({ name: "some-name", signature: true }),
-          generateFormationAddress({ name: "some-name", signature: true }),
-        ],
+        it(`has no error when all ${field} have name and checkbox`, () => {
+          const formData = generateFormationFormData({
+            [field]: [
+              generator({ name: "some-name", signature: true }),
+              generator({ name: "some-name", signature: true }),
+            ],
+          });
+          expect(getErrorStateForField(field, formData, undefined).hasError).toEqual(false);
+        });
+
+        if (field == "incorporators") {
+          it(`has error if some incorporators missing city and municipality`, () => {
+            const formData = generateFormationFormData({
+              incorporators: [
+                generateFormationIncorporator({ addressCity: "", addressMunicipality: undefined }),
+              ],
+            });
+            expect(getErrorStateForField("incorporators", formData, undefined).hasError).toEqual(true);
+          });
+
+          it(`has error if some incorporators missing addressLine1`, () => {
+            const formData = generateFormationFormData({
+              incorporators: [generateFormationIncorporator({ addressLine1: "" })],
+            });
+            expect(getErrorStateForField("incorporators", formData, undefined).hasError).toEqual(true);
+          });
+
+          it(`has error if some incorporators missing state`, () => {
+            const formData = generateFormationFormData({
+              incorporators: [generateFormationIncorporator({ addressState: undefined })],
+            });
+            expect(getErrorStateForField("incorporators", formData, undefined).hasError).toEqual(true);
+          });
+
+          it(`has error if some incorporators missing zip code`, () => {
+            const formData = generateFormationFormData({
+              incorporators: [generateFormationIncorporator({ addressZipCode: "" })],
+            });
+            expect(getErrorStateForField("incorporators", formData, undefined).hasError).toEqual(true);
+          });
+        }
       });
-      expect(getErrorStateForField("signers", formData, undefined).hasError).toEqual(false);
     });
   });
 
@@ -275,39 +314,39 @@ describe("getErrorStateForField", () => {
     });
 
     it("has no error when members exist", () => {
-      const formData = generateFormationFormData({ members: [generateFormationAddress({})] });
+      const formData = generateFormationFormData({ members: [generateFormationMember({})] });
       expect(getErrorStateForField("members", formData, undefined).hasError).toEqual(false);
     });
 
     it("has error if some members missing name", () => {
-      const formData = generateFormationFormData({ members: [generateFormationAddress({ name: "" })] });
+      const formData = generateFormationFormData({ members: [generateFormationMember({ name: "" })] });
       expect(getErrorStateForField("members", formData, undefined).hasError).toEqual(true);
     });
 
-    it("has error if some members missing city", () => {
+    it("has error if some members missing city and municipality", () => {
       const formData = generateFormationFormData({
-        members: [generateFormationAddress({ addressCity: "" })],
+        members: [generateFormationMember({ addressCity: "", addressMunicipality: undefined })],
       });
       expect(getErrorStateForField("members", formData, undefined).hasError).toEqual(true);
     });
 
     it("has error if some members missing addressLine1", () => {
       const formData = generateFormationFormData({
-        members: [generateFormationAddress({ addressLine1: "" })],
+        members: [generateFormationMember({ addressLine1: "" })],
       });
       expect(getErrorStateForField("members", formData, undefined).hasError).toEqual(true);
     });
 
     it("has error if some members missing state", () => {
       const formData = generateFormationFormData({
-        members: [generateFormationAddress({ addressState: "" })],
+        members: [generateFormationMember({ addressState: undefined })],
       });
       expect(getErrorStateForField("members", formData, undefined).hasError).toEqual(true);
     });
 
     it("has error if some members missing zip code", () => {
       const formData = generateFormationFormData({
-        members: [generateFormationAddress({ addressZipCode: "" })],
+        members: [generateFormationMember({ addressZipCode: "" })],
       });
       expect(getErrorStateForField("members", formData, undefined).hasError).toEqual(true);
     });
@@ -354,15 +393,15 @@ describe("getErrorStateForField", () => {
   describe("fields that have error when empty or false", () => {
     const hasErrorIfEmpty: FormationFields[] = [
       "businessSuffix",
-      "businessAddressCity",
-      "businessAddressLine1",
+      "addressMunicipality",
+      "addressLine1",
       "contactFirstName",
       "contactLastName",
       "contactPhoneNumber",
       "agentNumber",
       "agentName",
       "agentOfficeAddressLine1",
-      "agentOfficeAddressCity",
+      "agentOfficeAddressMunicipality",
       "businessTotalStock",
       "withdrawals",
       "combinedInvestment",

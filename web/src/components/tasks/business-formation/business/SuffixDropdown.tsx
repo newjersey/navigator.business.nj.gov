@@ -15,9 +15,11 @@ export const SuffixDropdown = (): ReactElement => {
   const { doesFieldHaveError } = useFormationErrors();
 
   const handleChange = (event: SelectChangeEvent<string>) => {
-    setFormationFormData({
-      ...state.formationFormData,
-      businessSuffix: event.target.value as BusinessSuffix,
+    setFormationFormData((previousFormationData) => {
+      return {
+        ...previousFormationData,
+        businessSuffix: event.target.value as BusinessSuffix,
+      };
     });
   };
 

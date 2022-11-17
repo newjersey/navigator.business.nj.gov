@@ -23,15 +23,15 @@ export const getErrorStateForField = (
 
   const hasErrorIfEmpty: FormationFields[] = [
     "businessSuffix",
-    "businessAddressCity",
-    "businessAddressLine1",
+    "addressMunicipality",
+    "addressLine1",
     "contactFirstName",
     "contactLastName",
     "contactPhoneNumber",
     "agentNumber",
     "agentName",
     "agentOfficeAddressLine1",
-    "agentOfficeAddressCity",
+    "agentOfficeAddressMunicipality",
     "businessTotalStock",
     "withdrawals",
     "combinedInvestment",
@@ -75,15 +75,16 @@ export const getErrorStateForField = (
     return { ...errorState, hasError: true };
   }
 
-  if (field === "signers") {
-    const someSignersMissingName = formationFormData.signers.some((signer) => {
+  if (["signers", "incorporators"].includes(field)) {
+    const newField = field as "signers" | "incorporators";
+    const someSignersMissingName = formationFormData[newField]?.some((signer) => {
       return !signer.name.trim();
     });
-    const someSignersMissingCheckbox = formationFormData.signers.some((signer) => {
+    const someSignersMissingCheckbox = formationFormData[newField]?.some((signer) => {
       return !signer.signature;
     });
 
-    if (formationFormData.signers.length === 0) {
+    if (!formationFormData[newField] || formationFormData[newField]?.length === 0) {
       return {
         ...errorState,
         hasError: true,
@@ -101,7 +102,7 @@ export const getErrorStateForField = (
   }
 
   if (field === "members") {
-    if (formationFormData.members.length === 0) {
+    if (!formationFormData.members || formationFormData.members?.length === 0) {
       return {
         ...errorState,
         hasError: true,
@@ -109,7 +110,14 @@ export const getErrorStateForField = (
       };
     } else {
       const allValid = formationFormData.members.every((it) => {
-        return it.name && it.addressCity && it.addressLine1 && it.addressState && it.addressZipCode;
+        return (
+          it.name &&
+          it.addressCity &&
+          it.addressCity?.length > 0 &&
+          it.addressLine1 &&
+          it.addressState &&
+          it.addressZipCode
+        );
       });
       return {
         ...errorState,
@@ -119,7 +127,7 @@ export const getErrorStateForField = (
     }
   }
 
-  if (field === "businessAddressZipCode" || field === "agentOfficeAddressZipCode") {
+  if (field === "addressZipCode" || field === "agentOfficeAddressZipCode") {
     const exists = !!formationFormData[field];
     const inRange = zipCodeRange(formationFormData[field]);
     const isValid = exists && inRange;

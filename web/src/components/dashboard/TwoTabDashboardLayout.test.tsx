@@ -1,8 +1,13 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import { Certification, Funding } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
-import { generateCertification, generateFunding, generatePreferences } from "@/test/factories";
-import { getProfileDataForUnfilteredOpportunities, randomElementFromArray } from "@/test/helpers";
+import {
+  generateCertification,
+  generateFunding,
+  generatePreferences,
+  getProfileDataForUnfilteredOpportunities,
+} from "@/test/factories";
+import { randomElementFromArray } from "@/test/helpers";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
 import { OperatingPhases } from "@businessnjgovnavigator/shared/operatingPhase";
 import { fireEvent, render, screen } from "@testing-library/react";
@@ -67,7 +72,7 @@ describe("<TwoTabDashboardLayout />", () => {
       useMockUserData({
         preferences: generatePreferences({ visibleSidebarCards: ["welcome", "not-registered"] }),
         profileData: {
-          ...getProfileDataForUnfilteredOpportunities,
+          ...getProfileDataForUnfilteredOpportunities(),
           operatingPhase: randomElementFromArray(operatingPhases).id,
         },
       });
@@ -91,7 +96,7 @@ describe("<TwoTabDashboardLayout />", () => {
       useMockUserData({
         preferences: generatePreferences({ visibleSidebarCards: ["welcome", "not-registered"] }),
         profileData: {
-          ...getProfileDataForUnfilteredOpportunities,
+          ...getProfileDataForUnfilteredOpportunities(),
           operatingPhase: randomElementFromArray(operatingPhases).id,
           ownershipTypeIds: ["disabled-veteran", "minority-owned"],
         },
@@ -116,7 +121,7 @@ describe("<TwoTabDashboardLayout />", () => {
       useMockUserData({
         preferences: generatePreferences({ visibleSidebarCards: ["welcome", "not-registered"] }),
         profileData: {
-          ...getProfileDataForUnfilteredOpportunities,
+          ...getProfileDataForUnfilteredOpportunities(),
 
           operatingPhase: randomElementFromArray(operatingPhases).id,
           ownershipTypeIds: ["disabled-veteran", "minority-owned"],

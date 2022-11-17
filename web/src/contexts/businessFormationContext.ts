@@ -25,7 +25,7 @@ interface BusinessFormationState {
 
 interface BusinessFormationContextType {
   state: BusinessFormationState;
-  setFormationFormData: (formationFormData: FormationFormData) => void;
+  setFormationFormData: React.Dispatch<React.SetStateAction<FormationFormData>>;
   setStepIndex: (value: number) => void;
   setShowResponseAlert: React.Dispatch<React.SetStateAction<boolean>>;
   setFieldInteracted: (field: FormationFields, config?: { setToUninteracted: boolean }) => void;

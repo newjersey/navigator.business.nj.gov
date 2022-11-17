@@ -14,11 +14,11 @@ export const ReviewMainBusinessLocation = (): ReactElement => {
 
   const getAddressDisplay = (): string => {
     return getStringifiedAddress(
-      state.formationFormData.businessAddressLine1 || italicNotEnteredText,
-      (userData?.profileData.municipality?.name as string) || italicNotEnteredText,
-      state.formationFormData.businessAddressState || italicNotEnteredText,
-      state.formationFormData.businessAddressZipCode || italicNotEnteredText,
-      state.formationFormData.businessAddressLine2
+      state.formationFormData.addressLine1 || italicNotEnteredText,
+      userData?.profileData.municipality?.displayName || italicNotEnteredText,
+      state.formationFormData.addressState?.name || italicNotEnteredText,
+      state.formationFormData.addressZipCode || italicNotEnteredText,
+      state.formationFormData.addressLine2
     );
   };
 

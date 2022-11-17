@@ -1,16 +1,22 @@
 import { Content } from "@/components/Content";
+import { MunicipalityDropdown } from "@/components/onboarding/MunicipalityDropdown";
+import { StateDropdown } from "@/components/StateDropdown";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
+import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
+import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { FormationFields } from "@businessnjgovnavigator/shared/formationData";
+import { Municipality } from "@businessnjgovnavigator/shared/index";
 import { Checkbox, FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import React, { ReactElement, useContext, useEffect } from "react";
 
 export const RegisteredAgent = (): ReactElement => {
   const { state, setFormationFormData, setFieldInteracted } = useContext(BusinessFormationContext);
+  const { municipalities } = useContext(MunicipalitiesContext);
   const { userData } = useUserData();
-
+  const { doesFieldHaveError } = useFormationErrors();
   useEffect(
     function setAgentCheckboxFalseWhenAddressChanged() {
       const {
@@ -18,16 +24,19 @@ export const RegisteredAgent = (): ReactElement => {
         agentOfficeAddressLine1,
         agentOfficeAddressLine2,
         agentOfficeAddressZipCode,
-        businessAddressLine1,
-        businessAddressLine2,
-        businessAddressZipCode,
+        agentOfficeAddressMunicipality,
+        addressLine1,
+        addressLine2,
+        addressMunicipality,
+        addressZipCode,
       } = state.formationFormData;
 
       if (
         agentUseBusinessAddress &&
-        (agentOfficeAddressLine1 !== businessAddressLine1 ||
-          agentOfficeAddressLine2 !== businessAddressLine2 ||
-          agentOfficeAddressZipCode !== businessAddressZipCode)
+        (agentOfficeAddressLine1 !== addressLine1 ||
+          agentOfficeAddressLine2 !== addressLine2 ||
+          agentOfficeAddressMunicipality?.name !== addressMunicipality?.name ||
+          agentOfficeAddressZipCode !== addressZipCode)
       ) {
         setFormationFormData({
           ...state.formationFormData,
@@ -45,16 +54,17 @@ export const RegisteredAgent = (): ReactElement => {
     setFieldInteracted("agentEmail", { setToUninteracted: true });
     setFieldInteracted("agentOfficeAddressLine1", { setToUninteracted: true });
     setFieldInteracted("agentOfficeAddressLine2", { setToUninteracted: true });
-    setFieldInteracted("agentOfficeAddressCity", { setToUninteracted: true });
-    setFieldInteracted("agentOfficeAddressState", { setToUninteracted: true });
+    setFieldInteracted("agentOfficeAddressMunicipality", { setToUninteracted: true });
     setFieldInteracted("agentOfficeAddressZipCode", { setToUninteracted: true });
   };
 
   const handleRadioSelection = (event: React.ChangeEvent<{ name?: string; value: unknown }>) => {
     resetAgentFieldsInteraction();
-    setFormationFormData({
-      ...state.formationFormData,
-      agentNumberOrManual: event.target.value as "NUMBER" | "MANUAL_ENTRY",
+    setFormationFormData((previousFormationData) => {
+      return {
+        ...previousFormationData,
+        agentNumberOrManual: event.target.value as "NUMBER" | "MANUAL_ENTRY",
+      };
     });
   };
 
@@ -91,17 +101,15 @@ export const RegisteredAgent = (): ReactElement => {
     if (checked) {
       setFormationFormData({
         ...state.formationFormData,
-        agentOfficeAddressLine1: state.formationFormData.businessAddressLine1,
-        agentOfficeAddressLine2: state.formationFormData.businessAddressLine2,
-        agentOfficeAddressCity: userData?.profileData.municipality?.name ?? "",
-        agentOfficeAddressState: state.formationFormData.businessAddressState,
-        agentOfficeAddressZipCode: state.formationFormData.businessAddressZipCode,
+        agentOfficeAddressLine1: state.formationFormData.addressLine1,
+        agentOfficeAddressLine2: state.formationFormData.addressLine2,
+        agentOfficeAddressMunicipality: state.formationFormData.addressMunicipality,
+        agentOfficeAddressZipCode: state.formationFormData.addressZipCode,
         agentUseBusinessAddress: checked,
       });
       setFieldInteracted("agentOfficeAddressLine1");
       setFieldInteracted("agentOfficeAddressLine2");
-      setFieldInteracted("agentOfficeAddressCity");
-      setFieldInteracted("agentOfficeAddressState");
+      setFieldInteracted("agentOfficeAddressMunicipality");
       setFieldInteracted("agentOfficeAddressZipCode");
     } else {
       setFormationFormData({
@@ -227,22 +235,40 @@ export const RegisteredAgent = (): ReactElement => {
               />
               <div className="grid-row grid-gap-2 margin-top-2">
                 <div className="grid-col-12 tablet:grid-col-6">
-                  <BusinessFormationTextField
-                    label={Config.businessFormationDefaults.registeredAgentCityLabel}
-                    placeholder={Config.businessFormationDefaults.registeredAgentCityPlaceholder}
-                    fieldName="agentOfficeAddressCity"
-                    required={true}
-                    validationText={Config.businessFormationDefaults.agentOfficeAddressCityErrorText}
-                    disabled={shouldBeDisabled("agentOfficeAddressCity", "ADDRESS")}
-                    formInputFull
-                  />
+                  <Content>{Config.businessFormationDefaults.registeredAgentMunicipalityLabel}</Content>
+                  <div className="margin-top-2">
+                    <MunicipalityDropdown
+                      municipalities={municipalities}
+                      fieldName={"agentOfficeAddressMunicipality"}
+                      error={doesFieldHaveError("agentOfficeAddressMunicipality")}
+                      disabled={shouldBeDisabled("agentOfficeAddressMunicipality", "ADDRESS")}
+                      validationLabel="Error"
+                      value={state.formationFormData.agentOfficeAddressMunicipality}
+                      onSelect={(value: Municipality | undefined) => {
+                        return setFormationFormData({
+                          ...state.formationFormData,
+                          agentOfficeAddressMunicipality: value,
+                        });
+                      }}
+                      placeholderText={
+                        Config.businessFormationDefaults.registeredAgentMunicipalityPlaceholder
+                      }
+                      helperText={Config.businessFormationDefaults.addressCityErrorText}
+                    />
+                  </div>
                 </div>
+
                 <div className="grid-col-5 tablet:grid-col-2">
-                  <BusinessFormationTextField
-                    label={Config.businessFormationDefaults.registeredAgentStateLabel}
-                    placeholder={Config.businessFormationDefaults.registeredAgentStatePlaceholder}
+                  <Content>{Config.businessFormationDefaults.addressStateLabel}</Content>
+                  <StateDropdown
                     fieldName="agentOfficeAddressState"
+                    value={"New Jersey"}
+                    placeholder={Config.businessFormationDefaults.addressModalStatePlaceholder}
+                    validationText={Config.businessFormationDefaults.addressStateErrorText}
+                    autoComplete="address-level1"
                     disabled={true}
+                    onSelect={() => {}}
+                    className={"margin-top-2"}
                   />
                 </div>
                 <div className="grid-col-7 tablet:grid-col-4">

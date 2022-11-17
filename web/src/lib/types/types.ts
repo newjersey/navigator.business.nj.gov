@@ -1,9 +1,11 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import {
+  allFormationLegalTypes,
   BusinessUser,
   FormationFields,
   FormationLegalType,
-  FormationLegalTypes,
+  FormationMember,
+  FormationSigner,
   IndustrySpecificData,
   PaymentType,
   Preferences,
@@ -77,7 +79,7 @@ export const createEmptyTaskDisplayContent = (): TasksDisplayContent => {
 export type AllPaymentTypes = { type: PaymentType; displayText: string }[];
 
 export const createEmptyFormationDisplayContent = (): FormationDisplayContentMap => {
-  return FormationLegalTypes.reduce((accumulator, curr) => {
+  return allFormationLegalTypes.reduce((accumulator, curr) => {
     accumulator[curr] = {
       introParagraph: {
         contentMd: "",
@@ -308,6 +310,9 @@ export type County =
   | "Warren";
 
 export type FormationDisplayContentMap = Record<FormationLegalType, FormationDisplayContent>;
+
+export interface FormationSignedAddress extends FormationMember, Partial<Omit<FormationSigner, "name">> {}
+
 export type TasksDisplayContent = {
   formationDisplayContent: FormationDisplayContentMap;
 };
