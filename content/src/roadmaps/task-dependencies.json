@@ -146,12 +146,7 @@
     {
       "name": "form-business-entity-foreign",
       "dependencies": [
-        "dba-resolution-foreign"
-      ]
-    },
-    {
-      "name": "form-business-entity-foreign",
-      "dependencies": [
+        "dba-resolution-foreign",
         "certificate-good-standing-foreign"
       ]
     },
@@ -177,6 +172,42 @@
       "name": "daycare-license",
       "dependencies": [
         "daycare-site-requirements"
+      ]
+    },
+    {
+      "name": "architect-are-exam",
+      "dependencies": [
+        "architect-license"
+      ]
+    },
+    {
+      "name": "authorization-architect-firm",
+      "dependencies": [
+        "architect-license"
+      ]
+    },
+    {
+      "name": "auto-body-repair-license",
+      "dependencies": [
+        "register-for-taxes"
+      ]
+    },
+    {
+      "name": "detective-employees",
+      "dependencies": [
+        "detective-agency-license"
+      ]
+    },
+    {
+      "name": "hvac-license",
+      "dependencies": [
+        "hvac-insurance-surety-bond"
+      ]
+    },
+    {
+      "name": "moving-company-license",
+      "dependencies": [
+        "moving-company-insurance"
       ]
     }
   ]

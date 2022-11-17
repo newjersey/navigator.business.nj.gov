@@ -112,7 +112,14 @@
     "lgea",
     "chpfc",
     "cinc",
-    "LEUP"
+    "LEUP",
+    "IdentoGo",
+    "NJDCF",
+    "NJDHS",
+    "NJDCF",
+    "NJDHS",
+    "NJBAC",
+    "LGBTQ"
   ],
   "ignorePaths": ["node_modules/**", "out/**", "web/out/**", "package.json"]
 }

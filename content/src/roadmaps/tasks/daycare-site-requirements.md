@@ -1,12 +1,10 @@
 ---
 urlSlug: daycare-site-requirements
 filename: daycare-site-requirements
-name: Prepare for NJ Department of Children and Families and Local Level Site
-  Requirements
+name: Prepare for State and Local Site Requirements
 id: daycare-site-requirements
 required: true
 ---
-
 Your Daycare needs to be inspected and approved by your local government and the New Jersey Department of Children and Families (DCF) to verify that it's safe for customers and employees.
 
 ---
@@ -21,7 +19,7 @@ Your Daycare needs to be inspected and approved by your local government and the
 
 You can schedule a free preliminary inspection with their Office of Licensing at 1-877-667-9845.
 
-### Local Level Site Requirements
+### Local Site Requirements
 
 - **Certificate of Occupancy/Approval:** If you've completed site renovations, it's time to obtain a \`Certificate of Occupancy or Approval|certificate-occupancy\` from your local Building/Construction Department.
 - **Fire Prevention Permits:** Talk to your Fire Department to make sure your space meets requirements, like working sprinklers, extinguishers, and signage

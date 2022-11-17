@@ -8,7 +8,7 @@ callToActionText: Apply for My License
 required: true
 issuingAgency: New Jersey Division of Consumer Affairs Board of Architects
 ---
-You need an Architect license prior to offering professional services. 
+You need an Architect license prior to offering professional services as an individual or opening an architect firm.
 
 ---
 ### Eligibility Criteria

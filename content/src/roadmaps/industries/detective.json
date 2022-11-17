@@ -1,0 +1,56 @@
+{
+  "naicsCodes": "561611",
+  "defaultSectorId": "professional-scientific-and-technical-services",
+  "canHavePermanentLocation": true,
+  "roadmapSteps": [
+    {
+      "step": 1,
+      "weight": 1,
+      "task": "business-plan"
+    },
+    {
+      "step": 1,
+      "weight": 30,
+      "task": "determine-naics-code"
+    },
+    {
+      "step": 2,
+      "weight": 20,
+      "task": "register-for-ein"
+    },
+    {
+      "step": 2,
+      "weight": 25,
+      "task": "register-for-taxes"
+    },
+    {
+      "step": 3,
+      "weight": 10,
+      "task": "bank-account"
+    },
+    {
+      "step": 3,
+      "weight": 15,
+      "task": "get-insurance"
+    },
+    {
+      "step": 3,
+      "weight": 16,
+      "task": "detective-agency-license"
+    },
+    {
+      "step": 3,
+      "weight": 17,
+      "task": "detective-employees"
+    }
+  ],
+  "name": "Detective Agency",
+  "industryOnboardingQuestions": {
+    "canBeHomeBased": true,
+    "canBeReseller": false
+  },
+  "isEnabled": false,
+  "additionalSearchTerms": "background check, private investigator, PI",
+  "id": "detective",
+  "description": "Provides investigative services"
+}

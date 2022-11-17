@@ -33,7 +33,7 @@
       "task": "get-insurance"
     }
   ],
-  "name": "Independent Arts",
+  "name": "Independent Artists",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
     "canBeReseller": true,
