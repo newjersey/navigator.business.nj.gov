@@ -113,7 +113,13 @@
     "chpfc",
     "cinc",
     "LEUP",
-    "IdentoGo"
+    "IdentoGo",
+    "NJDCF",
+    "NJDHS",
+    "NJDCF",
+    "NJDHS",
+    "NJBAC",
+    "LGBTQ"
   ],
   "ignorePaths": ["node_modules/**", "out/**", "web/out/**", "package.json"]
 }
