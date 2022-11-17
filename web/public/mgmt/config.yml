@@ -800,6 +800,33 @@ collections:
                 widget: number
                 min: 0
                 value_type: int
+      - label: "Steps - Dakota Remote Seller / Remote Worker"
+        name: "steps-foreign"
+        file: "content/src/roadmaps/steps-foreign.json"
+        fields:
+          - label: steps
+            name: steps
+            widget: list
+            summary: "{{name}}"
+            fields:
+              - label: Name
+                name: name
+                widget: string
+              - label: Section
+                name: section
+                widget: select
+                options: ["PLAN", "START"]
+              - label: Time Estimate
+                name: timeEstimate
+                widget: string
+              - label: Description
+                name: description
+                widget: string
+              - label: Number
+                name: stepNumber
+                widget: number
+                min: 0
+                value_type: int
       - label: "Task Dependencies"
         name: "task-dependencies"
         file: "content/src/roadmaps/task-dependencies.json"
