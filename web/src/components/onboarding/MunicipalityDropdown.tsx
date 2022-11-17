@@ -12,6 +12,7 @@ interface Props {
   onSelect: (value: Municipality | undefined) => void;
   placeholderText: string;
   helperText: string;
+  disabled?: boolean;
   handleChange?: () => void;
   onValidation?: (event: FocusEvent<HTMLInputElement>) => void;
   error?: boolean;
@@ -61,6 +62,7 @@ export const MunicipalityDropdown = (props: Props): ReactElement => {
       }}
       value={props.value || null}
       onChange={handleMunicipality}
+      disabled={props.disabled}
       onBlur={props.onValidation}
       onSubmit={props.onValidation}
       renderOption={(props, option, { selected }) => {

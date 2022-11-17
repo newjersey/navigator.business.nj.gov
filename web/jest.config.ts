@@ -40,9 +40,9 @@ export default async (): Promise<Config.InitialOptions> => {
 };
 
 process.env = Object.assign(process.env, {
-  FEATURE_BUSINESS_LP: "true",
-  FEATURE_BUSINESS_LLP: "true",
-  FEATURE_TAX_CALENDAR: "true",
-  FEATURE_BUSINESS_CCORP: "true",
+  FEATURE_BUSINESS_FLLP: "true",
+  FEATURE_BUSINESS_FLP: "true",
+  FEATURE_BUSINESS_FLC: "true",
+  FEATURE_BUSINESS_FCORP: "true",
   WEBFLOW_API_TOKEN: 12345678910,
 });

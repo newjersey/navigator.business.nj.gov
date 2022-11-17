@@ -7,9 +7,9 @@ import {
 } from "@/lib/types/types";
 import { getMarkdown } from "@/lib/utils/markdownReader";
 import {
+  allFormationLegalTypes,
   defaultFormationLegalType,
   FormationLegalType,
-  FormationLegalTypes,
 } from "@businessnjgovnavigator/shared/";
 import fs from "fs";
 import path from "path";
@@ -133,12 +133,14 @@ const getFormationFields = (
 export const loadTasksDisplayContent = (): TasksDisplayContent => {
   const defaultFormationDisplayContent = getFormationFields(defaultFormationLegalType);
 
-  const formationDisplayContent = FormationLegalTypes.filter((val) => {
-    return val != defaultFormationLegalType;
-  }).reduce((accumulator: FormationDisplayContentMap, legalId: FormationLegalType) => {
-    accumulator[legalId] = getFormationFields(legalId, defaultFormationDisplayContent);
-    return accumulator;
-  }, {} as FormationDisplayContentMap);
+  const formationDisplayContent = allFormationLegalTypes
+    .filter((val) => {
+      return val != defaultFormationLegalType;
+    })
+    .reduce((accumulator: FormationDisplayContentMap, legalId: FormationLegalType) => {
+      accumulator[legalId] = getFormationFields(legalId, defaultFormationDisplayContent);
+      return accumulator;
+    }, {} as FormationDisplayContentMap);
   formationDisplayContent[defaultFormationLegalType] = defaultFormationDisplayContent;
 
   return {

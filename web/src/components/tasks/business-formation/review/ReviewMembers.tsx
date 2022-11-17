@@ -24,7 +24,7 @@ export const ReviewMembers = (): ReactElement => {
         stepName="Contacts"
         testId="members"
       />
-      {userData?.formationData.formationFormData.members.map((member, index) => {
+      {userData?.formationData.formationFormData.members?.map((member, index) => {
         return (
           <div key={`${member.name}-${index}`}>
             <ReviewLineItem
@@ -41,8 +41,8 @@ export const ReviewMembers = (): ReactElement => {
                 label={Config.businessFormationDefaults.reviewStepDirectorAddressLabel}
                 value={getStringifiedAddress(
                   member.addressLine1,
-                  member.addressCity,
-                  member.addressState,
+                  member.addressCity ?? "",
+                  member.addressState?.name ?? "",
                   member.addressZipCode,
                   member.addressLine2
                 )}

@@ -8,15 +8,9 @@ import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { MediaQueries } from "@/lib/PageSizes";
 import styles from "@/styles/sections/members.module.scss";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { FormationAddress, FormationFields } from "@businessnjgovnavigator/shared/";
+import { FormationFields, FormationIncorporator, FormationMember } from "@businessnjgovnavigator/shared/";
 import { IconButton, useMediaQuery } from "@mui/material";
 import React, { ChangeEvent, ReactElement, useState } from "react";
-
-const formatAddress = (address: FormationAddress) => {
-  return `${address.addressLine1}, ${address.addressLine2 ? `${address.addressLine2},` : ""} ${
-    address.addressCity
-  }, ${address.addressState} ${address.addressZipCode}`;
-};
 
 interface DisplayContent {
   title: string;
@@ -29,21 +23,30 @@ interface DisplayContent {
   alertBody: string;
 }
 
-interface Props {
-  defaultAddress?: Partial<FormationAddress>;
+interface Props<T> {
+  defaultAddress?: Partial<T>;
   fieldName: FormationFields;
-  addressData: FormationAddress[];
-  setData: (addressData: FormationAddress[]) => void;
+  addressData: T[];
+  setData: (addressData: T[]) => void;
   needSignature?: boolean;
+  createEmptyAddress: () => T;
   displayContent: DisplayContent;
 }
 
-export const Addresses = (props: Props): ReactElement => {
+export const Addresses = <T extends FormationMember | FormationIncorporator>(
+  props: Props<T>
+): ReactElement => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [editIndex, setEditIndex] = useState<number | undefined>(undefined);
   const [alert, setAlert] = useState<boolean | undefined>(undefined);
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
   const { doesFieldHaveError } = useFormationErrors();
+
+  const formatAddress = (address: T) => {
+    return `${address.addressLine1}, ${address.addressLine2 ? `${address.addressLine2},` : ""} ${
+      address.addressMunicipality?.displayName ?? address.addressCity
+    }, ${address.addressState?.name} ${address.addressZipCode}`;
+  };
 
   const handleSignerCheckbox = (event: ChangeEvent<HTMLInputElement>, index: number): void => {
     const addresses = [...props.addressData];
@@ -118,7 +121,7 @@ export const Addresses = (props: Props): ReactElement => {
               <tr className="margin-bottom-1" key={index} data-testid={`${props.fieldName}-${index}`}>
                 <td>{it.name}</td>
                 <td>{formatAddress(it)}</td>
-                {props.needSignature ? (
+                {"signature" in it ? (
                   <td className="padding-y-0">
                     {" "}
                     {renderSignatureColumn({
@@ -195,12 +198,12 @@ export const Addresses = (props: Props): ReactElement => {
                       <div>{it.addressLine1}</div>
                       <div>{it.addressLine2}</div>
                       <div className="margin-bottom-2">
-                        {it.addressCity}, {it.addressState} {it.addressZipCode}
+                        {it.addressCity}, {it.addressState?.name} {it.addressZipCode}
                       </div>
                     </div>
                     <div className="flex flex-row fac fjb">
                       <span className="flex fac">
-                        {props.needSignature ? (
+                        {"signature" in it ? (
                           <>
                             {" "}
                             <Content>{`${Config.businessFormationDefaults.signatureColumnLabel}*`}</Content>
@@ -210,7 +213,7 @@ export const Addresses = (props: Props): ReactElement => {
                                   return handleSignerCheckbox(event, index);
                                 },
                                 checked: it.signature,
-                                fieldName: "signers",
+                                fieldName: props.fieldName,
                                 index,
                               })}{" "}
                             </div>
@@ -311,9 +314,10 @@ export const Addresses = (props: Props): ReactElement => {
       ) : (
         <></>
       )}
-      <AddressModal
+      <AddressModal<T>
         open={modalOpen}
         key={`${editIndex}-${props.fieldName}`}
+        createEmptyAddress={props.createEmptyAddress}
         fieldName={props.fieldName}
         handleClose={() => {
           return setModalOpen(false);

@@ -33,9 +33,11 @@ export const BusinessFormationTextBox = (props: Props): ReactElement => {
 
   const removeEntry = (): void => {
     setIsExpanded(false);
-    setFormationFormData({
-      ...state.formationFormData,
-      [props.fieldName]: "",
+    setFormationFormData((previousFormationData) => {
+      return {
+        ...previousFormationData,
+        [props.fieldName]: "",
+      };
     });
   };
 

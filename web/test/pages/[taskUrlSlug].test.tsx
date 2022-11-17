@@ -7,8 +7,8 @@ import {
   generateTask,
   generateTaskLink,
   generateUserData,
+  randomPublicFilingLegalType,
 } from "@/test/factories";
-import { generateFormationLegalType } from "@/test/helpers-formation";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap, useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
@@ -415,7 +415,7 @@ describe("task page", () => {
       generateUserData({
         taskProgress: {},
         profileData: generateProfileData({
-          legalStructureId: generateFormationLegalType(),
+          legalStructureId: randomPublicFilingLegalType(),
           businessPersona: "STARTING",
         }),
       })
@@ -424,19 +424,19 @@ describe("task page", () => {
     expect(screen.queryByTestId("nextAndPreviousButtons")).not.toBeInTheDocument();
   });
 
-  it("renders next and previous buttons for FOREIGN when form-business-entity task is rendered", () => {
+  it("does not render next and previous buttons for FOREIGN when legal structure allows for business formation and form-business-entity task is rendered", () => {
     renderPage(
       generateTask({ id: formationTaskId }),
       generateUserData({
         taskProgress: {},
         profileData: generateProfileData({
-          legalStructureId: generateFormationLegalType(),
+          legalStructureId: randomPublicFilingLegalType(),
           businessPersona: "FOREIGN",
         }),
       })
     );
 
-    expect(screen.getByTestId("nextAndPreviousButtons")).toBeInTheDocument();
+    expect(screen.queryByTestId("nextAndPreviousButtons")).not.toBeInTheDocument();
   });
 
   it("renders form-business-entity from roadmap if user is STARTING", () => {

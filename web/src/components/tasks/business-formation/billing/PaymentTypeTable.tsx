@@ -53,9 +53,11 @@ export const PaymentTypeTable = (): ReactElement => {
   ]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFormationFormData({
-      ...state.formationFormData,
-      paymentType: event.target.value as PaymentType,
+    setFormationFormData((previousFormationData) => {
+      return {
+        ...previousFormationData,
+        paymentType: event.target.value as PaymentType,
+      };
     });
   };
 

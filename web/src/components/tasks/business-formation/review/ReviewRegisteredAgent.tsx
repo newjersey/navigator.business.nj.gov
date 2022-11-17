@@ -74,8 +74,7 @@ export const ReviewRegisteredAgent = (): ReactElement => {
             <Content>
               {getStringifiedAddress(
                 state.formationFormData.agentOfficeAddressLine1 || italicNotEnteredText,
-                state.formationFormData.agentOfficeAddressCity || italicNotEnteredText,
-                state.formationFormData.agentOfficeAddressState || italicNotEnteredText,
+                state.formationFormData.agentOfficeAddressMunicipality?.name || italicNotEnteredText,
                 state.formationFormData.agentOfficeAddressZipCode || italicNotEnteredText,
                 state.formationFormData.agentOfficeAddressLine2
               )}

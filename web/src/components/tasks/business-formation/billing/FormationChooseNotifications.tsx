@@ -9,17 +9,21 @@ export const FormationChooseNotifications = (): ReactElement => {
 
   const handleAnnualReportClick = () => {
     setFieldInteracted("annualReportNotification");
-    setFormationFormData({
-      ...state.formationFormData,
-      annualReportNotification: !state.formationFormData.annualReportNotification,
+    setFormationFormData((previousFormationData) => {
+      return {
+        ...previousFormationData,
+        annualReportNotification: !state.formationFormData.annualReportNotification,
+      };
     });
   };
 
   const handleCorpWatchClick = () => {
     setFieldInteracted("corpWatchNotification");
-    setFormationFormData({
-      ...state.formationFormData,
-      corpWatchNotification: !state.formationFormData.corpWatchNotification,
+    setFormationFormData((previousFormationData) => {
+      return {
+        ...previousFormationData,
+        corpWatchNotification: !state.formationFormData.corpWatchNotification,
+      };
     });
   };
 

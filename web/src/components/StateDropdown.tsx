@@ -8,11 +8,12 @@ import { ChangeEvent, FocusEvent, ReactElement, useState } from "react";
 interface Props {
   value: string | undefined;
   fieldName: string;
-  onSelect: (value: string | undefined) => void;
+  onSelect: (value: StateObject | undefined) => void;
   placeholder?: string;
   onValidation?: (fieldName: string, invalid: boolean) => void;
   error?: boolean;
   validationText?: string;
+  className?: string;
   validationLabel?: string;
   autoComplete?: string;
   disabled?: boolean;
@@ -23,7 +24,7 @@ export const StateDropdown = (props: Props): ReactElement => {
   const [open, setOpen] = useState<boolean>(false);
 
   const handleOnChange = (event: ChangeEvent<unknown>, value: StateObject | null) => {
-    props.onSelect(value?.name || undefined);
+    props.onSelect(value || undefined);
   };
 
   const onValidation = (event: FocusEvent<HTMLInputElement>): void => {
@@ -34,8 +35,11 @@ export const StateDropdown = (props: Props): ReactElement => {
   };
 
   const handleInputChange = (event: ChangeEvent<unknown>, value: string | null) => {
-    if (value === null || value === "" || !!getState(value)) {
-      props.onSelect(value || undefined);
+    if (value === null || value === "") {
+      props.onSelect(undefined);
+    } else {
+      const state = getState(value);
+      state && props.onSelect(state);
     }
     if (event && event.nativeEvent.constructor.name === "Event") {
       //Generic events triggered by autofill
@@ -60,6 +64,7 @@ export const StateDropdown = (props: Props): ReactElement => {
   return (
     <Autocomplete
       options={states}
+      className={props.className ?? ""}
       value={getState(props.value) || null}
       filterOptions={filterOptions}
       getOptionLabel={(option: StateObject) => {

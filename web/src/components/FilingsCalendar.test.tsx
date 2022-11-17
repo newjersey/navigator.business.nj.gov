@@ -396,42 +396,6 @@ describe("<FilingsCalendar />", () => {
       expect(screen.queryByTestId("get-tax-access")).not.toBeInTheDocument();
     });
 
-    it("hides button on filings calendar when feature flag is disabled", () => {
-      process.env.FEATURE_TAX_CALENDAR = "false";
-      const dueDate = getCurrentDate().add(2, "months");
-      const annualReport = generateTaxFiling({
-        identifier: "annual-report",
-        dueDate: dueDate.format("YYYY-MM-DD"),
-      });
-
-      const userData = generateUserData({
-        profileData: generateProfileData({
-          legalStructureId: randomLegalStructure({ requiresPublicFiling: true }).id,
-          operatingPhase: randomElementFromArray(
-            OperatingPhases.filter((obj) => {
-              return obj.displayTaxAccessButton == true && obj.displayCalendarType != "NONE";
-            })
-          ).id,
-        }),
-        taxFilingData: generateTaxFilingData({ filings: [annualReport] }),
-      });
-
-      const operateReferences: Record<string, OperateReference> = {
-        "annual-report": {
-          name: "Annual Report",
-          urlSlug: "annual-report-url",
-          urlPath: "annual_report-url-path",
-        },
-      };
-
-      renderFilingsCalendar(operateReferences, userData);
-
-      expect(screen.queryByTestId("get-tax-access")).not.toBeInTheDocument();
-      expect(screen.queryByTestId("pending-container")).not.toBeInTheDocument();
-      expect(screen.queryByTestId("button-container")).not.toBeInTheDocument();
-      process.env.FEATURE_TAX_CALENDAR = "true";
-    });
-
     it("displays button on filings calendar in up and running guest mode for non sp/gp", () => {
       const userData = generateUserData({
         profileData: generateProfileData({

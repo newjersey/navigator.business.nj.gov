@@ -8,9 +8,9 @@ export const getStepForField = (field: FormationFields): FormationStepNames => {
 
     case "businessSuffix":
     case "businessStartDate":
-    case "businessAddressCity":
-    case "businessAddressLine1":
-    case "businessAddressZipCode":
+    case "addressMunicipality":
+    case "addressLine1":
+    case "addressZipCode":
     case "businessTotalStock":
     case "withdrawals":
     case "combinedInvestment":
@@ -27,12 +27,12 @@ export const getStepForField = (field: FormationFields): FormationStepNames => {
     case "agentName":
     case "agentEmail":
     case "agentOfficeAddressLine1":
-    case "agentOfficeAddressCity":
+    case "agentOfficeAddressMunicipality":
     case "agentOfficeAddressZipCode":
     case "members":
     case "signers":
+    case "incorporators":
       return "Contacts";
-
     case "paymentType":
     case "contactFirstName":
     case "contactLastName":

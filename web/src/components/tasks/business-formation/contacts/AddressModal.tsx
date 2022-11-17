@@ -3,7 +3,7 @@ import { GenericTextField } from "@/components/GenericTextField";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { StateDropdown } from "@/components/StateDropdown";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { createEmptyFormationAddress, FormationAddress } from "@businessnjgovnavigator/shared/";
+import { FormationIncorporator, FormationMember, StateObject } from "@businessnjgovnavigator/shared";
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import { ReactElement, useEffect, useState } from "react";
 
@@ -13,21 +13,24 @@ interface DisplayContent {
   saveButton: string;
 }
 
-interface Props {
+interface Props<T> {
   open: boolean;
-  addressData: FormationAddress[];
+  addressData: T[];
   displayContent: DisplayContent;
-  defaultAddress?: Partial<FormationAddress>;
+  defaultAddress?: Partial<T>;
   fieldName: string;
-  setData: (addressData: FormationAddress[]) => void;
+  setData: (addressData: T[]) => void;
   index?: number;
   handleClose: () => void;
+  createEmptyAddress: () => T;
   onSave: () => void;
 }
 
-export const AddressModal = (props: Props): ReactElement => {
+export const AddressModal = <T extends FormationMember | FormationIncorporator>(
+  props: Props<T>
+): ReactElement => {
   const [useDefaultAddress, setUseDefaultAddress] = useState<boolean>(false);
-  const [addressData, setAddressData] = useState<FormationAddress>(createEmptyFormationAddress());
+  const [addressData, setAddressData] = useState<T>(props.createEmptyAddress());
   type FieldStatus = {
     invalid: boolean | undefined;
   };
@@ -41,15 +44,15 @@ export const AddressModal = (props: Props): ReactElement => {
   ] as const;
 
   type ErrorFields = typeof requiredFields[number];
-  type MemberErrorMap = Record<ErrorFields, FieldStatus>;
+  type AddressErrorMap = Record<ErrorFields, FieldStatus>;
 
-  const createMemberErrorMap = (invalid?: boolean): MemberErrorMap => {
-    return requiredFields.reduce((prev: MemberErrorMap, curr: ErrorFields) => {
+  const createAddressErrorMap = (invalid?: boolean): AddressErrorMap => {
+    return requiredFields.reduce((prev: AddressErrorMap, curr: ErrorFields) => {
       return { ...prev, [curr]: { invalid } };
-    }, {} as MemberErrorMap);
+    }, {} as AddressErrorMap);
   };
 
-  const [addressErrorMap, setMemberErrorMap] = useState<MemberErrorMap>(createMemberErrorMap());
+  const [addressErrorMap, setAddressErrorMap] = useState<AddressErrorMap>(createAddressErrorMap());
 
   useEffect(
     function setCheckboxFalseWhenAddressChanged() {
@@ -60,7 +63,7 @@ export const AddressModal = (props: Props): ReactElement => {
         props.defaultAddress.addressLine1 !== addressData.addressLine1 ||
         props.defaultAddress.addressLine2 !== addressData.addressLine2 ||
         props.defaultAddress.addressCity !== addressData.addressCity ||
-        props.defaultAddress.addressState !== addressData.addressState ||
+        props.defaultAddress.addressState?.shortCode !== addressData.addressState?.shortCode ||
         props.defaultAddress.addressZipCode !== addressData.addressZipCode
       ) {
         setUseDefaultAddress(false);
@@ -72,11 +75,11 @@ export const AddressModal = (props: Props): ReactElement => {
   useEffect(() => {
     if (props.index !== undefined) {
       setAddressData({ ...props.addressData[props.index] });
-      setMemberErrorMap(createMemberErrorMap(false));
+      setAddressErrorMap(createAddressErrorMap(false));
     } else {
-      setAddressData(createEmptyFormationAddress());
+      setAddressData(props.createEmptyAddress());
       setUseDefaultAddress(false);
-      setMemberErrorMap(createMemberErrorMap());
+      setAddressErrorMap(createAddressErrorMap());
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.open]);
@@ -90,28 +93,28 @@ export const AddressModal = (props: Props): ReactElement => {
       };
       setAddressData(data);
 
-      const errorMap = requiredFields.reduce((prev: MemberErrorMap, curr: ErrorFields) => {
+      const errorMap = requiredFields.reduce((prev: AddressErrorMap, curr: ErrorFields) => {
         return {
           ...prev,
-          [curr]: { invalid: !data[curr as keyof FormationAddress] },
+          [curr]: { invalid: !data[curr as keyof T] },
         };
-      }, {} as MemberErrorMap);
+      }, {} as AddressErrorMap);
 
-      setMemberErrorMap({
+      setAddressErrorMap({
         ...errorMap,
         addressName: { invalid: data.name.trim() ? false : undefined },
       });
     }
   };
 
-  const shouldBeDisabled = (field: keyof FormationAddress): boolean => {
+  const shouldBeDisabled = (field: keyof T): boolean => {
     const isCheckboxChecked = useDefaultAddress;
     const hasValue = !!addressData[field];
     return isCheckboxChecked && hasValue;
   };
 
   const onValidation = (fieldName: string, invalid: boolean) => {
-    setMemberErrorMap({ ...addressErrorMap, [fieldName]: { invalid } });
+    setAddressErrorMap({ ...addressErrorMap, [fieldName]: { invalid } });
   };
 
   const onSubmit = (): void => {
@@ -119,15 +122,15 @@ export const AddressModal = (props: Props): ReactElement => {
       return i.invalid === undefined;
     });
     if (unValidated) {
-      setMemberErrorMap(
+      setAddressErrorMap(
         requiredFields.reduce(
-          (prev: MemberErrorMap, curr: ErrorFields) => {
+          (prev: AddressErrorMap, curr: ErrorFields) => {
             return {
               ...prev,
               [curr]: { invalid: prev[curr].invalid ?? true },
             };
           },
-          { ...addressErrorMap } as MemberErrorMap
+          { ...addressErrorMap } as AddressErrorMap
         )
       );
       return;
@@ -263,11 +266,13 @@ export const AddressModal = (props: Props): ReactElement => {
               </div>
               <StateDropdown
                 fieldName="addressState"
-                value={addressData.addressState}
+                value={addressData.addressState?.name ?? ""}
                 placeholder={Config.businessFormationDefaults.addressModalStatePlaceholder}
                 validationText={Config.businessFormationDefaults.addressStateErrorText}
-                onSelect={(value: string | undefined) => {
-                  return setAddressData({ ...addressData, addressState: value ?? "" });
+                onSelect={(value: StateObject | undefined) => {
+                  return setAddressData((prevAddressData) => {
+                    return { ...prevAddressData, addressState: value };
+                  });
                 }}
                 error={addressErrorMap["addressState"].invalid}
                 autoComplete="address-level1"

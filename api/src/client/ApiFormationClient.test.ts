@@ -1,9 +1,15 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { getCurrentDateISOString, parseDateWithFormat } from "@shared/dateHelpers";
+import { randomInt } from "@shared/intHelpers";
 import axios from "axios";
 import {
-  generateFormationAddress,
   generateFormationData,
   generateFormationFormData,
+  generateFormationIncorporator,
+  generateFormationMember,
+  generateFormationNJAddress,
+  generateFormationSigner,
+  generateFormationUSAddress,
   generateFormationUserData,
   generateProfileData,
   generateUserData,
@@ -73,35 +79,43 @@ describe("ApiFormationClient", () => {
 
   describe("form", () => {
     describe("when LLC", () => {
-      it("posts to the endpoint with the qapi formation object", async () => {
+      it("posts to the endpoint for a domestic user", async () => {
         const stubResponse = generateApiResponse({});
         mockAxios.post.mockResolvedValue({ data: stubResponse });
+        const members = [
+          generateFormationMember(generateFormationNJAddress({})),
+          generateFormationMember(generateFormationUSAddress({})),
+        ];
 
         const formationFormData = generateFormationFormData(
           {
             agentNumberOrManual: "MANUAL_ENTRY",
             provisions: ["provision1", "provision2"],
-            members: [generateFormationAddress({})],
+            members,
             signers: [
-              generateFormationAddress({
+              generateFormationSigner({
                 name: "faraz",
                 signature: true,
+                title: "Authorized Representative",
               }),
-              generateFormationAddress({
+              generateFormationSigner({
                 name: "anne",
                 signature: true,
+                title: "Authorized Representative",
               }),
-              generateFormationAddress({
+              generateFormationSigner({
                 name: "mike",
                 signature: false,
+                title: "Authorized Representative",
               }),
             ],
           },
-          "limited-liability-company"
+
+          { legalStructureId: "limited-liability-company" }
         );
 
         const userData = generateFormationUserData(
-          { legalStructureId: "limited-liability-company" },
+          { legalStructureId: "limited-liability-company", businessPersona: "STARTING" },
           {},
           formationFormData
         );
@@ -115,11 +129,11 @@ describe("ApiFormationClient", () => {
           FailureReturnUrl: "navigator.com/form-business?completeFiling=false",
           Payer: {
             CompanyName: formationFormData.businessName,
-            Address1: formationFormData.businessAddressLine1,
-            Address2: formationFormData.businessAddressLine2,
-            City: formationFormData.businessAddressCity?.name,
+            Address1: formationFormData.addressLine1,
+            Address2: formationFormData.addressLine2,
+            City: formationFormData.addressMunicipality?.name,
             StateAbbreviation: "NJ",
-            ZipCode: formationFormData.businessAddressZipCode,
+            ZipCode: formationFormData.addressZipCode,
             Email: userData.user.email,
           },
           Formation: {
@@ -139,13 +153,13 @@ describe("ApiFormationClient", () => {
               EffectiveFilingDate: parseDateWithFormat(
                 formationFormData.businessStartDate,
                 "YYYY-MM-DD"
-              ).toISOString(),
+              ).format("MM/DD/YYYY"),
               MainAddress: {
-                Address1: formationFormData.businessAddressLine1,
-                Address2: formationFormData.businessAddressLine2,
-                City: userData.profileData.municipality?.name,
+                Address1: formationFormData.addressLine1,
+                Address2: formationFormData.addressLine2,
+                City: formationFormData.addressMunicipality?.name,
                 State: "New Jersey",
-                Zipcode: formationFormData.businessAddressZipCode,
+                Zipcode: formationFormData.addressZipCode,
                 Country: "US",
               },
             },
@@ -160,7 +174,7 @@ describe("ApiFormationClient", () => {
               Location: {
                 Address1: formationFormData.agentOfficeAddressLine1,
                 Address2: formationFormData.agentOfficeAddressLine2,
-                City: formationFormData.agentOfficeAddressCity,
+                City: formationFormData.agentOfficeAddressMunicipality?.name,
                 State: "New Jersey",
                 Zipcode: formationFormData.agentOfficeAddressZipCode,
                 Country: "US",
@@ -168,13 +182,24 @@ describe("ApiFormationClient", () => {
             },
             Members: [
               {
-                Name: formationFormData.members[0].name,
+                Name: members[0].name,
                 Location: {
-                  Address1: formationFormData.members[0].addressLine1,
-                  Address2: formationFormData.members[0].addressLine2,
-                  City: formationFormData.members[0].addressCity,
-                  State: formationFormData.members[0].addressState,
-                  Zipcode: formationFormData.members[0].addressZipCode,
+                  Address1: members[0].addressLine1,
+                  Address2: members[0].addressLine2,
+                  City: members[0].addressMunicipality?.name,
+                  State: "New Jersey",
+                  Zipcode: members[0].addressZipCode,
+                  Country: "US",
+                },
+              },
+              {
+                Name: members[1].name,
+                Location: {
+                  Address1: members[1].addressLine1,
+                  Address2: members[1].addressLine2,
+                  City: members[1].addressCity,
+                  State: members[1].addressState?.name,
+                  Zipcode: members[1].addressZipCode,
                   Country: "US",
                 },
               },
@@ -202,29 +227,174 @@ describe("ApiFormationClient", () => {
           },
         });
       });
+
+      it("posts to the endpoint for a foreign user", async () => {
+        const stubResponse = generateApiResponse({});
+        mockAxios.post.mockResolvedValue({ data: stubResponse });
+        const formationFormData = generateFormationFormData(
+          {
+            agentNumberOrManual: "MANUAL_ENTRY",
+            foreignDateOfFormation: "2022/10/20",
+            foreignStateOfFormation: "Massachusetts",
+            provisions: ["provision1", "provision2"],
+            members: undefined,
+            signers: [
+              generateFormationSigner({
+                name: "faraz",
+                signature: true,
+                title: "Authorized Representative",
+              }),
+              generateFormationSigner({
+                name: "anne",
+                signature: true,
+                title: "General Partner",
+              }),
+              generateFormationSigner({
+                name: "mike",
+                signature: false,
+                title: "Authorized Representative",
+              }),
+            ],
+          },
+          { foreign: true, legalStructureId: "limited-liability-company" }
+        );
+
+        const userData = generateFormationUserData(
+          { legalStructureId: "limited-liability-company", businessPersona: "FOREIGN" },
+          {},
+          formationFormData
+        );
+
+        await client.form(userData, "navigator.com/form-business");
+
+        expect(mockAxios.post).toHaveBeenCalledWith("example.com/formation/PrepareFiling", {
+          Account: "12345",
+          Key: "abcdef",
+          ReturnUrl: "navigator.com/form-business?completeFiling=true",
+          FailureReturnUrl: "navigator.com/form-business?completeFiling=false",
+          Payer: {
+            CompanyName: formationFormData.businessName,
+            Address1: formationFormData.addressLine1,
+            Address2: formationFormData.addressLine2,
+            City: formationFormData.addressCity,
+            StateAbbreviation:
+              formationFormData.addressCountry == "US"
+                ? formationFormData.addressState?.shortCode
+                : undefined,
+            ZipCode: formationFormData.addressZipCode,
+            Email: userData.user.email,
+          },
+          Formation: {
+            Gov2GoAnnualReports: formationFormData.annualReportNotification,
+            Gov2GoCorpWatch: formationFormData.corpWatchNotification,
+            ShortGoodStanding: formationFormData.certificateOfStanding,
+            Certified: formationFormData.certifiedCopyOfFormationDocument,
+            PayerEmail: "",
+            SelectPaymentType: formationFormData.paymentType,
+            BusinessInformation: {
+              CompanyOrigin: "Foreign",
+              Business: "ForeignLimitedLiabilityCompany",
+              BusinessName: formationFormData.businessName,
+              BusinessDesignator: formationFormData.businessSuffix,
+              Naic: userData.profileData.naicsCode,
+              BusinessPurpose: formationFormData.businessPurpose,
+              EffectiveFilingDate: parseDateWithFormat(
+                formationFormData.businessStartDate,
+                "YYYY-MM-DD"
+              ).format("MM/DD/YYYY"),
+              ForeignDateOfFormation: "10/20/2022",
+              ForeignStateOfFormation: "Massachusetts",
+              MainAddress: {
+                Address1: formationFormData.addressLine1,
+                Address2: formationFormData.addressLine2,
+                City: formationFormData.addressCity,
+                State:
+                  formationFormData.addressCountry == "US" ? formationFormData.addressState?.name : undefined,
+                Zipcode: formationFormData.addressZipCode,
+                Country: formationFormData.addressCountry,
+                Province:
+                  formationFormData.addressCountry == "US" ? undefined : formationFormData.addressProvince,
+              },
+            },
+            CompanyProfit: "Profit",
+            RegisteredAgent: {
+              Id: undefined,
+              Email: formationFormData.agentEmail,
+              Name: formationFormData.agentName,
+              Location: {
+                Address1: formationFormData.agentOfficeAddressLine1,
+                Address2: formationFormData.agentOfficeAddressLine2,
+                City: formationFormData.agentOfficeAddressMunicipality?.name,
+                State: "New Jersey",
+                Zipcode: formationFormData.agentOfficeAddressZipCode,
+                Country: "US",
+              },
+            },
+            Members: undefined,
+            Signers: [
+              {
+                Name: "faraz",
+                Title: "Authorized Representative",
+                Signed: true,
+              },
+              {
+                Name: "anne",
+                Title: "General Partner",
+                Signed: true,
+              },
+              {
+                Name: "mike",
+                Title: "Authorized Representative",
+                Signed: false,
+              },
+            ],
+            ContactFirstName: formationFormData.contactFirstName,
+            ContactLastName: formationFormData.contactLastName,
+            ContactPhoneNumber: formationFormData.contactPhoneNumber,
+          },
+        });
+      });
     });
 
     describe("when CORP", () => {
-      it("posts to the endpoint with the api formation object", async () => {
+      it("posts to the endpoint for a domestic user", async () => {
         const stubResponse = generateApiResponse({});
         mockAxios.post.mockResolvedValue({ data: stubResponse });
+        const legalStructureId = randomInt() % 2 ? "s-corporation" : "c-corporation";
+        const incorporators = [
+          generateFormationIncorporator({
+            name: "faraz",
+            signature: true,
+            title: "Incorporator",
+            ...generateFormationNJAddress({}),
+          }),
+          generateFormationIncorporator({
+            name: "anne",
+            signature: false,
+            title: "Incorporator",
+            ...generateFormationUSAddress({}),
+          }),
+        ];
+
+        const members = [
+          generateFormationMember(generateFormationNJAddress({})),
+          generateFormationMember(generateFormationUSAddress({})),
+        ];
 
         const formationFormData = generateFormationFormData(
           {
             businessTotalStock: "1234",
             agentNumberOrManual: "MANUAL_ENTRY",
             provisions: ["provision1", "provision2"],
-            members: [generateFormationAddress({})],
-            signers: [
-              generateFormationAddress({ name: "faraz", signature: true }),
-              generateFormationAddress({ name: "anne", signature: false }),
-            ],
+            incorporators,
+            members,
           },
-          "s-corporation"
+
+          { legalStructureId }
         );
 
         const userData = generateFormationUserData(
-          { legalStructureId: "s-corporation" },
+          { legalStructureId, businessPersona: "STARTING" },
           {},
           formationFormData
         );
@@ -238,11 +408,11 @@ describe("ApiFormationClient", () => {
           FailureReturnUrl: "hostname.com/form-business?completeFiling=false",
           Payer: {
             CompanyName: formationFormData.businessName,
-            Address1: formationFormData.businessAddressLine1,
-            Address2: formationFormData.businessAddressLine2,
-            City: formationFormData.businessAddressCity?.name,
-            StateAbbreviation: "NJ",
-            ZipCode: formationFormData.businessAddressZipCode,
+            Address1: formationFormData.addressLine1,
+            Address2: formationFormData.addressLine2,
+            City: formationFormData.addressMunicipality?.name,
+            StateAbbreviation: formationFormData.addressState?.shortCode,
+            ZipCode: formationFormData.addressZipCode,
             Email: userData.user.email,
           },
           Formation: {
@@ -263,13 +433,13 @@ describe("ApiFormationClient", () => {
               EffectiveFilingDate: parseDateWithFormat(
                 formationFormData.businessStartDate,
                 "YYYY-MM-DD"
-              ).toISOString(),
+              ).format("MM/DD/YYYY"),
               MainAddress: {
-                Address1: formationFormData.businessAddressLine1,
-                Address2: formationFormData.businessAddressLine2,
-                City: userData.profileData.municipality?.name,
+                Address1: formationFormData.addressLine1,
+                Address2: formationFormData.addressLine2,
+                City: formationFormData.addressMunicipality?.name,
                 State: "New Jersey",
-                Zipcode: formationFormData.businessAddressZipCode,
+                Zipcode: formationFormData.addressZipCode,
                 Country: "US",
               },
             },
@@ -285,7 +455,7 @@ describe("ApiFormationClient", () => {
               Location: {
                 Address1: formationFormData.agentOfficeAddressLine1,
                 Address2: formationFormData.agentOfficeAddressLine2,
-                City: formationFormData.agentOfficeAddressCity,
+                City: formationFormData.agentOfficeAddressMunicipality?.name,
                 State: "New Jersey",
                 Zipcode: formationFormData.agentOfficeAddressZipCode,
                 Country: "US",
@@ -293,13 +463,24 @@ describe("ApiFormationClient", () => {
             },
             Members: [
               {
-                Name: formationFormData.members[0].name,
+                Name: members[0].name,
                 Location: {
-                  Address1: formationFormData.members[0].addressLine1,
-                  Address2: formationFormData.members[0].addressLine2,
-                  City: formationFormData.members[0].addressCity,
-                  State: formationFormData.members[0].addressState,
-                  Zipcode: formationFormData.members[0].addressZipCode,
+                  Address1: members[0].addressLine1,
+                  Address2: members[0].addressLine2,
+                  City: members[0].addressMunicipality?.name,
+                  State: "New Jersey",
+                  Zipcode: members[0].addressZipCode,
+                  Country: "US",
+                },
+              },
+              {
+                Name: members[1].name,
+                Location: {
+                  Address1: members[1].addressLine1,
+                  Address2: members[1].addressLine2,
+                  City: members[1].addressCity,
+                  State: members[1].addressState?.name,
+                  Zipcode: members[1].addressZipCode,
                   Country: "US",
                 },
               },
@@ -308,22 +489,22 @@ describe("ApiFormationClient", () => {
               {
                 Name: "faraz",
                 Location: {
-                  Address1: formationFormData.signers[0].addressLine1,
-                  Address2: formationFormData.signers[0].addressLine2,
-                  City: formationFormData.signers[0].addressCity,
-                  State: formationFormData.signers[0].addressState,
-                  Zipcode: formationFormData.signers[0].addressZipCode,
+                  Address1: incorporators[0].addressLine1,
+                  Address2: incorporators[0].addressLine2,
+                  City: incorporators[0].addressMunicipality?.name,
+                  State: "New Jersey",
+                  Zipcode: incorporators[0].addressZipCode,
                   Country: "US",
                 },
               },
               {
                 Name: "anne",
                 Location: {
-                  Address1: formationFormData.signers[1].addressLine1,
-                  Address2: formationFormData.signers[1].addressLine2,
-                  City: formationFormData.signers[1].addressCity,
-                  State: formationFormData.signers[1].addressState,
-                  Zipcode: formationFormData.signers[1].addressZipCode,
+                  Address1: incorporators[1].addressLine1,
+                  Address2: incorporators[1].addressLine2,
+                  City: incorporators[1].addressCity,
+                  State: incorporators[1].addressState?.name,
+                  Zipcode: incorporators[1].addressZipCode,
                   Country: "US",
                 },
               },
@@ -346,10 +527,145 @@ describe("ApiFormationClient", () => {
           },
         });
       });
+
+      it("posts to the endpoint for a foreign user", async () => {
+        const stubResponse = generateApiResponse({});
+        mockAxios.post.mockResolvedValue({ data: stubResponse });
+        const legalStructureId = randomInt() % 2 ? "s-corporation" : "c-corporation";
+        const signers = [
+          generateFormationSigner({ name: "Faraz", title: "President", signature: true }),
+          generateFormationSigner({ name: "Anne", title: "Vice-President", signature: true }),
+          generateFormationSigner({
+            name: "Mike",
+            title: "Chairman of the Board",
+            signature: true,
+          }),
+          generateFormationSigner({ name: "Dave", title: "CEO", signature: true }),
+        ];
+        const formationFormData = generateFormationFormData(
+          {
+            businessTotalStock: "1234",
+            agentNumberOrManual: "MANUAL_ENTRY",
+            foreignDateOfFormation: "2022/10/20",
+            foreignStateOfFormation: "Massachusetts",
+            provisions: undefined,
+            members: undefined,
+            incorporators: undefined,
+            signers,
+          },
+
+          { legalStructureId, foreign: true }
+        );
+
+        const userData = generateFormationUserData(
+          { legalStructureId, businessPersona: "FOREIGN" },
+          {},
+          formationFormData
+        );
+
+        await client.form(userData, "hostname.com/form-business");
+
+        expect(mockAxios.post).toHaveBeenCalledWith("example.com/formation/PrepareFiling", {
+          Account: "12345",
+          Key: "abcdef",
+          ReturnUrl: "hostname.com/form-business?completeFiling=true",
+          FailureReturnUrl: "hostname.com/form-business?completeFiling=false",
+          Payer: {
+            CompanyName: formationFormData.businessName,
+            Address1: formationFormData.addressLine1,
+            Address2: formationFormData.addressLine2,
+            City: formationFormData.addressCity,
+            StateAbbreviation:
+              formationFormData.addressCountry == "US"
+                ? formationFormData.addressState?.shortCode
+                : undefined,
+            ZipCode: formationFormData.addressZipCode,
+            Email: userData.user.email,
+          },
+          Formation: {
+            Gov2GoAnnualReports: formationFormData.annualReportNotification,
+            Gov2GoCorpWatch: formationFormData.corpWatchNotification,
+            ShortGoodStanding: formationFormData.certificateOfStanding,
+            Certified: formationFormData.certifiedCopyOfFormationDocument,
+            PayerEmail: "",
+            SelectPaymentType: formationFormData.paymentType,
+
+            BusinessInformation: {
+              CompanyOrigin: "Foreign",
+              PracticesLaw: false,
+              Business: "ForeignForProfitCorporation",
+              BusinessName: formationFormData.businessName,
+              BusinessDesignator: formationFormData.businessSuffix,
+              Naic: userData.profileData.naicsCode,
+              TotalShares: 1234,
+              BusinessPurpose: formationFormData.businessPurpose,
+              EffectiveFilingDate: parseDateWithFormat(
+                formationFormData.businessStartDate,
+                "YYYY-MM-DD"
+              ).format("MM/DD/YYYY"),
+              ForeignDateOfFormation: "10/20/2022",
+              ForeignStateOfFormation: "Massachusetts",
+              MainAddress: {
+                Address1: formationFormData.addressLine1,
+                Address2: formationFormData.addressLine2,
+                City: formationFormData.addressCity,
+                State:
+                  formationFormData.addressCountry == "US" ? formationFormData.addressState?.name : undefined,
+                Zipcode: formationFormData.addressZipCode,
+                Country: formationFormData.addressCountry,
+                Province:
+                  formationFormData.addressCountry == "US" ? undefined : formationFormData.addressProvince,
+              },
+            },
+            CompanyProfit: "Profit",
+            MemberAttestation: undefined,
+            RegisteredAgent: {
+              Id: undefined,
+              Email: formationFormData.agentEmail,
+              Name: formationFormData.agentName,
+              Location: {
+                Address1: formationFormData.agentOfficeAddressLine1,
+                Address2: formationFormData.agentOfficeAddressLine2,
+                City: formationFormData.agentOfficeAddressMunicipality?.name,
+                State: "New Jersey",
+                Zipcode: formationFormData.agentOfficeAddressZipCode,
+                Country: "US",
+              },
+            },
+            Members: undefined,
+            Incorporators: undefined,
+            Signers: [
+              {
+                Name: "Faraz",
+                Title: "President",
+                Signed: true,
+              },
+              {
+                Name: "Anne",
+                Title: "Vice-President",
+                Signed: true,
+              },
+              {
+                Name: "Mike",
+                Title: "Chairman of the Board",
+                Signed: true,
+              },
+              {
+                Name: "Dave",
+                Title: "CEO",
+                Signed: true,
+              },
+            ],
+            ContactFirstName: formationFormData.contactFirstName,
+            ContactLastName: formationFormData.contactLastName,
+            ContactPhoneNumber: formationFormData.contactPhoneNumber,
+          },
+        });
+      });
     });
 
     describe("when LLP", () => {
-      it("posts to the endpoint with the api formation object", async () => {
+      it("posts to the endpoint for a domestic user", async () => {
         const stubResponse = generateApiResponse({});
         mockAxios.post.mockResolvedValue({ data: stubResponse });
 
@@ -359,25 +675,32 @@ describe("ApiFormationClient", () => {
             provisions: ["provision1", "provision2"],
             members: [],
             signers: [
-              generateFormationAddress({
+              generateFormationSigner({
                 name: "faraz",
                 signature: true,
+                title: "Authorized Partner",
               }),
-              generateFormationAddress({
+              generateFormationSigner({
                 name: "anne",
                 signature: true,
+                title: "Authorized Partner",
               }),
-              generateFormationAddress({
+              generateFormationSigner({
                 name: "mike",
                 signature: false,
+                title: "Authorized Partner",
               }),
             ],
           },
-          "limited-liability-partnership"
+
+          { legalStructureId: "limited-liability-partnership" }
         );
 
         const userData = generateUserData({
-          profileData: generateProfileData({ legalStructureId: "limited-liability-partnership" }),
+          profileData: generateProfileData({
+            legalStructureId: "limited-liability-partnership",
+            businessPersona: "STARTING",
+          }),
           formationData: generateFormationData({ formationFormData }),
         });
 
@@ -390,11 +713,11 @@ describe("ApiFormationClient", () => {
           FailureReturnUrl: "hostname.com/form-business?completeFiling=false",
           Payer: {
             CompanyName: formationFormData.businessName,
-            Address1: formationFormData.businessAddressLine1,
-            Address2: formationFormData.businessAddressLine2,
-            City: formationFormData.businessAddressCity?.name,
+            Address1: formationFormData.addressLine1,
+            Address2: formationFormData.addressLine2,
+            City: formationFormData.addressMunicipality?.name,
             StateAbbreviation: "NJ",
-            ZipCode: formationFormData.businessAddressZipCode,
+            ZipCode: formationFormData.addressZipCode,
             Email: userData.user.email,
           },
           Formation: {
@@ -414,13 +737,13 @@ describe("ApiFormationClient", () => {
               EffectiveFilingDate: parseDateWithFormat(
                 formationFormData.businessStartDate,
                 "YYYY-MM-DD"
-              ).toISOString(),
+              ).format("MM/DD/YYYY"),
               MainAddress: {
-                Address1: formationFormData.businessAddressLine1,
-                Address2: formationFormData.businessAddressLine2,
-                City: userData.profileData.municipality?.name,
+                Address1: formationFormData.addressLine1,
+                Address2: formationFormData.addressLine2,
+                City: formationFormData.addressMunicipality?.name,
                 State: "New Jersey",
-                Zipcode: formationFormData.businessAddressZipCode,
+                Zipcode: formationFormData.addressZipCode,
                 Country: "US",
               },
             },
@@ -435,7 +758,7 @@ describe("ApiFormationClient", () => {
               Location: {
                 Address1: formationFormData.agentOfficeAddressLine1,
                 Address2: formationFormData.agentOfficeAddressLine2,
-                City: formationFormData.agentOfficeAddressCity,
+                City: formationFormData.agentOfficeAddressMunicipality?.name,
                 State: "New Jersey",
                 Zipcode: formationFormData.agentOfficeAddressZipCode,
                 Country: "US",
@@ -465,47 +788,40 @@ describe("ApiFormationClient", () => {
           },
         });
       });
-    });
 
-    describe("when LP", () => {
-      it("posts to the endpoint with the api formation object", async () => {
+      it("posts to the endpoint for a foreign user", async () => {
         const stubResponse = generateApiResponse({});
         mockAxios.post.mockResolvedValue({ data: stubResponse });
 
         const formationFormData = generateFormationFormData(
           {
+            foreignDateOfFormation: "2022/10/20",
+            foreignStateOfFormation: "Massachusetts",
             agentNumberOrManual: "MANUAL_ENTRY",
             provisions: [],
-            members: [generateFormationAddress({})],
-            withdrawals: "withdrawl",
-            dissolution: "dissolution",
-            combinedInvestment: "combined investment",
-            canCreateLimitedPartner: true,
-            createLimitedPartnerTerms: "partner terms",
-            canGetDistribution: true,
-            getDistributionTerms: "get distro terms",
-            canMakeDistribution: false,
-            makeDistributionTerms: "make distro terms",
+            members: undefined,
             signers: [
-              generateFormationAddress({
+              generateFormationSigner({
                 name: "faraz",
+                title: "Authorized Representative",
                 signature: true,
               }),
-              generateFormationAddress({
+              generateFormationSigner({
                 name: "anne",
+                title: "General Partner",
                 signature: true,
-              }),
-              generateFormationAddress({
-                name: "mike",
-                signature: false,
               }),
             ],
           },
-          "limited-partnership"
+
+          { foreign: true, legalStructureId: "limited-liability-partnership" }
         );
 
         const userData = generateUserData({
-          profileData: generateProfileData({ legalStructureId: "limited-partnership" }),
+          profileData: generateProfileData({
+            legalStructureId: "limited-liability-partnership",
+            businessPersona: "FOREIGN",
+          }),
           formationData: generateFormationData({ formationFormData }),
         });
 
@@ -518,11 +834,149 @@ describe("ApiFormationClient", () => {
           FailureReturnUrl: "hostname.com/form-business?completeFiling=false",
           Payer: {
             CompanyName: formationFormData.businessName,
-            Address1: formationFormData.businessAddressLine1,
-            Address2: formationFormData.businessAddressLine2,
-            City: formationFormData.businessAddressCity?.name,
+            Address1: formationFormData.addressLine1,
+            Address2: formationFormData.addressLine2,
+            City: formationFormData.addressCity,
+            StateAbbreviation:
+              formationFormData.addressCountry == "US"
+                ? formationFormData.addressState?.shortCode
+                : undefined,
+            ZipCode: formationFormData.addressZipCode,
+            Email: userData.user.email,
+          },
+          Formation: {
+            Gov2GoAnnualReports: formationFormData.annualReportNotification,
+            Gov2GoCorpWatch: formationFormData.corpWatchNotification,
+            ShortGoodStanding: formationFormData.certificateOfStanding,
+            Certified: formationFormData.certifiedCopyOfFormationDocument,
+            PayerEmail: "",
+            SelectPaymentType: formationFormData.paymentType,
+            BusinessInformation: {
+              CompanyOrigin: "Foreign",
+              Business: "ForeignLimitedLiabilityPartnership",
+              BusinessName: formationFormData.businessName,
+              BusinessDesignator: formationFormData.businessSuffix,
+              Naic: userData.profileData.naicsCode,
+              BusinessPurpose: formationFormData.businessPurpose,
+              EffectiveFilingDate: parseDateWithFormat(
+                formationFormData.businessStartDate,
+                "YYYY-MM-DD"
+              ).format("MM/DD/YYYY"),
+              ForeignDateOfFormation: "10/20/2022",
+              ForeignStateOfFormation: "Massachusetts",
+              MainAddress: {
+                Address1: formationFormData.addressLine1,
+                Address2: formationFormData.addressLine2,
+                City: formationFormData.addressCity,
+                State:
+                  formationFormData.addressCountry == "US" ? formationFormData.addressState?.name : undefined,
+                Zipcode: formationFormData.addressZipCode,
+                Country: formationFormData.addressCountry,
+                Province:
+                  formationFormData.addressCountry == "US" ? undefined : formationFormData.addressProvince,
+              },
+            },
+            CompanyProfit: "Profit",
+            RegisteredAgent: {
+              Id: undefined,
+              Email: formationFormData.agentEmail,
+              Name: formationFormData.agentName,
+              Location: {
+                Address1: formationFormData.agentOfficeAddressLine1,
+                Address2: formationFormData.agentOfficeAddressLine2,
+                City: formationFormData.agentOfficeAddressMunicipality?.name,
+                State: "New Jersey",
+                Zipcode: formationFormData.agentOfficeAddressZipCode,
+                Country: "US",
+              },
+            },
+            Members: undefined,
+            Signers: [
+              {
+                Name: "faraz",
+                Title: "Authorized Representative",
+                Signed: true,
+              },
+              {
+                Name: "anne",
+                Title: "General Partner",
+                Signed: true,
+              },
+            ],
+            ContactFirstName: formationFormData.contactFirstName,
+            ContactLastName: formationFormData.contactLastName,
+            ContactPhoneNumber: formationFormData.contactPhoneNumber,
+          },
+        });
+      });
+    });
+
+    describe("when LP", () => {
+      it("posts to the endpoint with the api formation object", async () => {
+        const stubResponse = generateApiResponse({});
+        mockAxios.post.mockResolvedValue({ data: stubResponse });
+        const incorporators = [
+          generateFormationIncorporator({
+            name: "faraz",
+            signature: true,
+            title: "General Partner",
+            ...generateFormationNJAddress({}),
+          }),
+          generateFormationIncorporator({
+            name: "anne",
+            signature: true,
+            title: "General Partner",
+            ...generateFormationUSAddress({}),
+          }),
+          generateFormationIncorporator({
+            name: "mike",
+            signature: true,
+            title: "General Partner",
+            ...generateFormationUSAddress({}),
+          }),
+        ];
+        const formationFormData = generateFormationFormData(
+          {
+            agentNumberOrManual: "MANUAL_ENTRY",
+            provisions: [],
+            withdrawals: "withdrawl",
+            dissolution: "dissolution",
+            combinedInvestment: "combined investment",
+            canCreateLimitedPartner: true,
+            createLimitedPartnerTerms: "partner terms",
+            canGetDistribution: true,
+            getDistributionTerms: "get distro terms",
+            canMakeDistribution: false,
+            makeDistributionTerms: "make distro terms",
+            members: undefined,
+            signers: undefined,
+            incorporators,
+          },
+          { legalStructureId: "limited-partnership" }
+        );
+
+        const userData = generateUserData({
+          profileData: generateProfileData({
+            legalStructureId: "limited-partnership",
+            businessPersona: "STARTING",
+          }),
+          formationData: generateFormationData({ formationFormData }),
+        });
+
+        await client.form(userData, "hostname.com/form-business");
+
+        expect(mockAxios.post).toHaveBeenCalledWith("example.com/formation/PrepareFiling", {
+          Account: "12345",
+          Key: "abcdef",
+          ReturnUrl: "hostname.com/form-business?completeFiling=true",
+          FailureReturnUrl: "hostname.com/form-business?completeFiling=false",
+          Payer: {
+            CompanyName: formationFormData.businessName,
+            Address1: formationFormData.addressLine1,
+            Address2: formationFormData.addressLine2,
+            City: formationFormData.addressMunicipality?.name,
             StateAbbreviation: "NJ",
-            ZipCode: formationFormData.businessAddressZipCode,
+            ZipCode: formationFormData.addressZipCode,
             Email: userData.user.email,
           },
           Formation: {
@@ -542,13 +996,13 @@ describe("ApiFormationClient", () => {
               EffectiveFilingDate: parseDateWithFormat(
                 formationFormData.businessStartDate,
                 "YYYY-MM-DD"
-              ).toISOString(),
+              ).format("MM/DD/YYYY"),
               MainAddress: {
-                Address1: formationFormData.businessAddressLine1,
-                Address2: formationFormData.businessAddressLine2,
-                City: userData.profileData.municipality?.name,
+                Address1: formationFormData.addressLine1,
+                Address2: formationFormData.addressLine2,
+                City: formationFormData.addressMunicipality?.name,
                 State: "New Jersey",
-                Zipcode: formationFormData.businessAddressZipCode,
+                Zipcode: formationFormData.addressZipCode,
                 Country: "US",
               },
             },
@@ -572,7 +1026,7 @@ describe("ApiFormationClient", () => {
               Location: {
                 Address1: formationFormData.agentOfficeAddressLine1,
                 Address2: formationFormData.agentOfficeAddressLine2,
-                City: formationFormData.agentOfficeAddressCity,
+                City: formationFormData.agentOfficeAddressMunicipality?.name,
                 State: "New Jersey",
                 Zipcode: formationFormData.agentOfficeAddressZipCode,
                 Country: "US",
@@ -580,32 +1034,54 @@ describe("ApiFormationClient", () => {
             },
             Members: [
               {
-                Name: formationFormData.members[0].name,
+                Name: incorporators[0].name,
                 Location: {
-                  Address1: formationFormData.members[0].addressLine1,
-                  Address2: formationFormData.members[0].addressLine2,
-                  City: formationFormData.members[0].addressCity,
-                  State: formationFormData.members[0].addressState,
-                  Zipcode: formationFormData.members[0].addressZipCode,
+                  Address1: incorporators[0].addressLine1,
+                  Address2: incorporators[0].addressLine2,
+                  City: incorporators[0].addressMunicipality?.name,
+                  State: "New Jersey",
+                  Zipcode: incorporators[0].addressZipCode,
+                  Country: "US",
+                },
+              },
+              {
+                Name: incorporators[1].name,
+                Location: {
+                  Address1: incorporators[1].addressLine1,
+                  Address2: incorporators[1].addressLine2,
+                  City: incorporators[1].addressCity,
+                  State: incorporators[1].addressState?.name,
+                  Zipcode: incorporators[1].addressZipCode,
+                  Country: "US",
+                },
+              },
+              {
+                Name: incorporators[2].name,
+                Location: {
+                  Address1: incorporators[2].addressLine1,
+                  Address2: incorporators[2].addressLine2,
+                  City: incorporators[2].addressCity,
+                  State: incorporators[2].addressState?.name,
+                  Zipcode: incorporators[2].addressZipCode,
                   Country: "US",
                 },
               },
             ],
             Signers: [
               {
-                Name: "faraz",
+                Name: incorporators[0].name,
                 Title: "General Partner",
                 Signed: true,
               },
               {
-                Name: "anne",
+                Name: incorporators[1].name,
                 Title: "General Partner",
                 Signed: true,
               },
               {
-                Name: "mike",
+                Name: incorporators[2].name,
                 Title: "General Partner",
-                Signed: false,
+                Signed: true,
               },
             ],
             ContactFirstName: formationFormData.contactFirstName,

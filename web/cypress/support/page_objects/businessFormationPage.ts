@@ -3,16 +3,16 @@ class BusinessFormationPage {
     return cy.get('[data-testid="available-text"]');
   }
   getBusinessAddressLine1() {
-    return cy.get('input[name="businessAddressLine1"]');
+    return cy.get('input[name="addressLine1"]');
   }
   getBusinessAddressLine2() {
-    return cy.get('input[name="businessAddressLine2"]');
+    return cy.get('input[name="addressLine2"]');
   }
-  getBusinessAddressCity() {
-    return cy.get('[id="businessAddressCity"]');
+  getBusinessAddressMunicipality() {
+    return cy.get('[id="addressMunicipality"]');
   }
   getBusinessAddressZipCode() {
-    return cy.get('input[name="businessAddressZipCode"]');
+    return cy.get('input[name="addressZipCode"]');
   }
   getBusinessNameSearch() {
     return cy.get('[aria-label="Search business name"]');
@@ -56,11 +56,8 @@ class BusinessFormationPage {
   getRegisteredAgentAddressLine2() {
     return cy.get('input[name="agentOfficeAddressLine2"]');
   }
-  getRegisteredAgentCity() {
-    return cy.get('input[name="agentOfficeAddressCity"]');
-  }
-  getRegisteredAgentState() {
-    return cy.get('input[name="agentOfficeAddressState"]');
+  getRegisteredAgentMunicipality() {
+    return cy.get('[id="agentOfficeAddressMunicipality"]');
   }
   getRegisteredAgentZipCode() {
     return cy.get('input[name="agentOfficeAddressZipCode"]');
@@ -119,8 +116,8 @@ class BusinessFormationPage {
     cy.get('[data-testid="add-new-signer"]').click();
   }
 
-  selectBusinessAddressCity(city: string) {
-    this.getBusinessAddressCity().click();
+  selectBusinessAddressMunicipality(city: string) {
+    this.getBusinessAddressMunicipality().click();
     cy.get('[role="listbox"]').contains(city).click();
   }
   selectBusinessDesignator(businessSuffix: string) {
@@ -164,8 +161,9 @@ class BusinessFormationPage {
   typeRegisteredAgentAddressLine2(address: string) {
     this.getRegisteredAgentAddressLine2().clear().type(address).blur();
   }
-  typeRegisteredAgentCity(city: string) {
-    this.getRegisteredAgentCity().clear().type(city).blur();
+  selectRegisteredAgentMunicipality(city: string) {
+    this.getRegisteredAgentMunicipality().click();
+    cy.get('[role="listbox"]').contains(city).click();
   }
   typeRegisteredAgentZipCode(zipCode: string) {
     this.getRegisteredAgentZipCode().clear().type(zipCode).blur();

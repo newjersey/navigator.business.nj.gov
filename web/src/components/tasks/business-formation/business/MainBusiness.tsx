@@ -1,5 +1,6 @@
 import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
+import { StateDropdown } from "@/components/StateDropdown";
 import { BusinessNameAndLegalStructure } from "@/components/tasks/business-formation/business/BusinessNameAndLegalStructure";
 import { FormationMunicipality } from "@/components/tasks/business-formation/business/FormationMunicipality";
 import { FormationStartDate } from "@/components/tasks/business-formation/business/FormationStartDate";
@@ -63,63 +64,68 @@ export const MainBusiness = (): ReactElement => {
       )}
       <hr className="margin-bottom-2 margin-top-0" aria-hidden={true} />
       <div className="margin-bottom-2">
-        <Content>{Config.businessFormationDefaults.businessAddressHeader}</Content>
+        <Content>{Config.businessFormationDefaults.addressHeader}</Content>
       </div>
       <BusinessFormationTextField
-        label={Config.businessFormationDefaults.businessAddressAddressLine1Label}
-        placeholder={Config.businessFormationDefaults.businessAddressAddressLine1Placeholder}
-        fieldName="businessAddressLine1"
+        label={Config.businessFormationDefaults.addressAddressLine1Label}
+        placeholder={Config.businessFormationDefaults.addressAddressLine1Placeholder}
+        fieldName="addressLine1"
         required={true}
         className={"margin-bottom-2"}
         noValidationMargin={true}
-        validationText={Config.businessFormationDefaults.businessAddressLine1ErrorText}
+        validationText={Config.businessFormationDefaults.addressLine1ErrorText}
         formInputFull
       />
       <BusinessFormationTextField
-        label={Config.businessFormationDefaults.businessAddressAddressLine2Label}
-        placeholder={Config.businessFormationDefaults.businessAddressAddressLine2Placeholder}
-        fieldName="businessAddressLine2"
+        label={Config.businessFormationDefaults.addressAddressLine2Label}
+        placeholder={Config.businessFormationDefaults.addressAddressLine2Placeholder}
+        fieldName="addressLine2"
         formInputFull
         className="margin-bottom-2"
       />
 
       <div
         className={`${
-          isTabletAndUp &&
-          doSomeFieldsHaveError(["businessAddressState", "businessAddressZipCode", "businessAddressCity"])
+          isTabletAndUp && doSomeFieldsHaveError(["addressState", "addressZipCode", "addressMunicipality"])
             ? `error`
             : ""
         } input-error-bar grid-gap-1 grid-row margin-top-2`}
       >
         <div
           className={`${!isTabletAndUp ? "input-error-bar" : ""} ${
-            doesFieldHaveError("businessAddressCity") ? "error" : ""
+            doesFieldHaveError("addressMunicipality") ? "error" : ""
           } grid-col-12 tablet:grid-col-6 padding-left-0`}
         >
-          <span className="text-bold">{Config.businessFormationDefaults.businessAddressCityLabel}</span>
+          <span className="text-bold">{Config.businessFormationDefaults.addressCityLabel}</span>
           <FormationMunicipality />
         </div>
-
-        <BusinessFormationTextField
-          label={Config.businessFormationDefaults.businessAddressStateLabel}
-          placeholder={Config.businessFormationDefaults.businessAddressStatePlaceholder}
-          fieldName="businessAddressState"
-          inlineErrorStyling={true}
-          disabled={true}
+        <div
           className={`${!isTabletAndUp ? "input-error-bar" : ""} ${
-            doSomeFieldsHaveError(["businessAddressState", "businessAddressZipCode"]) ? `error` : ""
+            doSomeFieldsHaveError(["addressState", "addressZipCode"]) ? `error` : ""
           } form-input grid-col-5 tablet:grid-col-2`}
-        />
+        >
+          <Content>{Config.businessFormationDefaults.addressMunicipalityLabel}</Content>
+          <StateDropdown
+            fieldName="addressState"
+            value={"New Jersey"}
+            placeholder={Config.businessFormationDefaults.addressModalStatePlaceholder}
+            validationText={Config.businessFormationDefaults.addressStateErrorText}
+            autoComplete="address-level1"
+            disabled={true}
+            onSelect={() => {}}
+            className={"margin-top-2"}
+          />
+        </div>
         <BusinessFormationTextField
-          label={Config.businessFormationDefaults.businessAddressZipCodeLabel}
-          placeholder={Config.businessFormationDefaults.businessAddressZipCodePlaceholder}
+          label={Config.businessFormationDefaults.addressZipCodeLabel}
+          placeholder={Config.businessFormationDefaults.addressZipCodePlaceholder}
           numericProps={{
             maxLength: 5,
           }}
           required={true}
           inlineErrorStyling={true}
-          fieldName={"businessAddressZipCode"}
-          validationText={Config.businessFormationDefaults.businessAddressZipCodeErrorText}
+          fieldName={"addressZipCode"}
+          validationText={Config.businessFormationDefaults.addressZipCodeErrorText}
           className="form-input grid-col-7 tablet:grid-col-4"
         />
       </div>

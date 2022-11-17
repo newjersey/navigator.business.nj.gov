@@ -1,8 +1,20 @@
+import { CountriesShortCodes } from "./countries";
 import { Municipality } from "./municipality";
+import { StateNames, StateObject } from "./states";
 
-export const defaultFormationLegalType: FormationLegalType = "limited-liability-company";
+export const defaultFormationLegalType: PublicFilingLegalType = "limited-liability-company";
 
-export const FormationLegalTypes = [
+export type SignerTitle =
+  | "Authorized Representative"
+  | "Authorized Partner"
+  | "Incorporator"
+  | "General Partner"
+  | "President"
+  | "Vice-President"
+  | "Chairman of the Board"
+  | "CEO";
+
+export const publicFilingLegalTypes = [
   "limited-liability-partnership",
   "limited-liability-company",
   "limited-partnership",
@@ -10,7 +22,35 @@ export const FormationLegalTypes = [
   "s-corporation",
 ] as const;
 
-export type FormationLegalType = typeof FormationLegalTypes[number];
+export type PublicFilingLegalType = typeof publicFilingLegalTypes[number];
+
+export const allFormationLegalTypes = [
+  "limited-liability-partnership",
+  "limited-liability-company",
+  "limited-partnership",
+  "c-corporation",
+  "s-corporation",
+  "foreign-limited-liability-partnership",
+  "foreign-limited-liability-company",
+  "foreign-limited-partnership",
+  "foreign-c-corporation",
+  "foreign-s-corporation",
+] as const;
+
+export type FormationLegalType = typeof allFormationLegalTypes[number];
+
+export const BusinessSignerTypeMap: Record<FormationLegalType, SignerTitle[]> = {
+  "limited-liability-company": ["Authorized Representative"],
+  "limited-liability-partnership": ["Authorized Partner"],
+  "limited-partnership": ["General Partner"],
+  "c-corporation": ["Incorporator"],
+  "s-corporation": ["Incorporator"],
+  "foreign-limited-liability-company": ["Authorized Representative", "General Partner"],
+  "foreign-limited-liability-partnership": ["Authorized Representative", "General Partner"],
+  "foreign-limited-partnership": ["Authorized Representative", "General Partner"],
+  "foreign-c-corporation": ["President", "Vice-President", "Chairman of the Board", "CEO"],
+  "foreign-s-corporation": ["President", "Vice-President", "Chairman of the Board", "CEO"],
+};
 
 export interface FormationData {
   readonly formationFormData: FormationFormData;
@@ -20,25 +60,38 @@ export interface FormationData {
 }
 
 export interface FormationAddress {
-  readonly name: string;
   readonly addressLine1: string;
   readonly addressLine2: string;
-  readonly addressCity: string;
-  readonly addressState: string;
+  readonly addressCity?: string;
+  readonly addressState?: StateObject;
+  readonly addressMunicipality?: Municipality;
+  readonly addressProvince?: string;
   readonly addressZipCode: string;
-  readonly signature: boolean;
+  readonly addressCountry: CountriesShortCodes;
 }
 
-export interface FormationFormData {
+export interface FormationSigner {
+  readonly name: string;
+  readonly signature: boolean;
+  readonly title: SignerTitle;
+}
+
+export interface FormationIncorporator extends FormationSigner, FormationAddress {}
+
+export interface FormationMember extends FormationAddress {
+  readonly name: string;
+}
+
+export type ForeignGoodStandingFileObject = {
+  Extension: "PDF" | "PNG";
+  Content: string; // Binary contents converted to base64 string 4,000,000 string limit (3mb)
+};
+
+export interface FormationFormData extends FormationAddress {
   readonly businessName: string;
   readonly businessSuffix: BusinessSuffix | undefined;
   readonly businessTotalStock: string;
-  readonly businessStartDate: string;
-  readonly businessAddressCity: Municipality | undefined;
-  readonly businessAddressLine1: string;
-  readonly businessAddressLine2: string;
-  readonly businessAddressState: string;
-  readonly businessAddressZipCode: string;
+  readonly businessStartDate: string; // YYYY-MM-DD
   readonly businessPurpose: string;
   readonly withdrawals: string;
   readonly combinedInvestment: string;
@@ -49,20 +102,21 @@ export interface FormationFormData {
   readonly getDistributionTerms: string;
   readonly canMakeDistribution: boolean | undefined;
   readonly makeDistributionTerms: string;
-  readonly provisions: string[];
+  readonly provisions: string[] | undefined;
   readonly agentNumberOrManual: "NUMBER" | "MANUAL_ENTRY";
   readonly agentNumber: string;
   readonly agentName: string;
   readonly agentEmail: string;
   readonly agentOfficeAddressLine1: string;
   readonly agentOfficeAddressLine2: string;
-  readonly agentOfficeAddressCity: string;
-  readonly agentOfficeAddressState: string;
+  readonly agentOfficeAddressMunicipality: Municipality | undefined;
+  readonly agentOfficeAddressCity: string | undefined;
   readonly agentOfficeAddressZipCode: string;
   readonly agentUseAccountInfo: boolean;
   readonly agentUseBusinessAddress: boolean;
-  readonly members: FormationAddress[];
-  readonly signers: FormationAddress[];
+  readonly members: FormationMember[] | undefined;
+  readonly incorporators: FormationIncorporator[] | undefined;
+  readonly signers: FormationSigner[] | undefined;
   readonly paymentType: PaymentType;
   readonly annualReportNotification: boolean;
   readonly corpWatchNotification: boolean;
@@ -72,6 +126,9 @@ export interface FormationFormData {
   readonly contactFirstName: string;
   readonly contactLastName: string;
   readonly contactPhoneNumber: string;
+  readonly foreignStateOfFormation: StateNames | undefined;
+  readonly foreignDateOfFormation: string | undefined; // YYYY-MM-DD
+  readonly foreignGoodStandingFile: ForeignGoodStandingFileObject | undefined;
 }
 
 export type FormationFields = keyof FormationFormData;
@@ -79,10 +136,11 @@ export type FormationFields = keyof FormationFormData;
 export type FormationTextField = Exclude<
   keyof FormationFormData,
   | "businessSuffix"
-  | "businessAddressCity"
+  | "addressMunicipality"
+  | "addressCountry"
+  | "addressState"
   | "businessStartDate"
   | "agentNumberOrManual"
-  | "signers"
   | "paymentType"
   | "annualReportNotification"
   | "corpWatchNotification"
@@ -90,38 +148,66 @@ export type FormationTextField = Exclude<
   | "certificateOfStanding"
   | "certifiedCopyOfFormationDocument"
   | "members"
+  | "signers"
+  | "incorporators"
   | "agentUseAccountInfo"
   | "agentUseBusinessAddress"
+  | "agentOfficeAddressMunicipality"
   | "provisions"
   | "businessName"
   | "canCreateLimitedPartner"
   | "canGetDistribution"
   | "canMakeDistribution"
+  | "foreignDateOfFormation"
+  | "foreignStateOfFormation"
+  | "foreignGoodStandingFile"
 >;
 
 export const createEmptyFormationAddress = (): FormationAddress => {
   return {
-    name: "",
     addressLine1: "",
     addressLine2: "",
-    addressCity: "",
-    addressState: "",
+    addressCity: undefined,
+    addressMunicipality: undefined,
+    addressState: undefined,
     addressZipCode: "",
+    addressProvince: undefined,
+    addressCountry: "US",
+  };
+};
+
+export const createEmptyFormationSigner = (legalStructureId: FormationLegalType): FormationSigner => {
+  return {
+    name: "",
     signature: false,
+    title: BusinessSignerTypeMap[legalStructureId][0],
+  };
+};
+
+export const createEmptyFormationMember = (): FormationMember => {
+  return {
+    name: "",
+    ...createEmptyFormationAddress(),
+  };
+};
+
+export const createEmptyFormationIncorporator = (
+  legalStructureId: FormationLegalType
+): FormationIncorporator => {
+  return {
+    ...createEmptyFormationSigner(legalStructureId),
+    ...createEmptyFormationAddress(),
   };
 };
 
 export const createEmptyFormationFormData = (): FormationFormData => {
   return {
+    ...createEmptyFormationAddress(),
+    addressState: { name: "New Jersey", shortCode: "NJ" },
     businessName: "",
     businessSuffix: undefined,
     businessTotalStock: "",
     businessStartDate: "",
-    businessAddressCity: undefined,
-    businessAddressLine1: "",
-    businessAddressLine2: "",
-    businessAddressState: "NJ",
-    businessAddressZipCode: "",
     businessPurpose: "",
     withdrawals: "",
     dissolution: "",
@@ -132,20 +218,21 @@ export const createEmptyFormationFormData = (): FormationFormData => {
     getDistributionTerms: "",
     canMakeDistribution: undefined,
     makeDistributionTerms: "",
-    provisions: [],
+    provisions: undefined,
     agentNumberOrManual: "NUMBER",
     agentNumber: "",
     agentName: "",
     agentEmail: "",
     agentOfficeAddressLine1: "",
     agentOfficeAddressLine2: "",
-    agentOfficeAddressCity: "",
-    agentOfficeAddressState: "NJ",
+    agentOfficeAddressMunicipality: undefined,
+    agentOfficeAddressCity: undefined,
     agentOfficeAddressZipCode: "",
     agentUseAccountInfo: false,
     agentUseBusinessAddress: false,
-    members: [],
-    signers: [],
+    members: undefined,
+    signers: undefined,
+    incorporators: undefined,
     paymentType: undefined,
     annualReportNotification: true,
     corpWatchNotification: true,
@@ -155,6 +242,9 @@ export const createEmptyFormationFormData = (): FormationFormData => {
     contactFirstName: "",
     contactLastName: "",
     contactPhoneNumber: "",
+    foreignDateOfFormation: undefined,
+    foreignStateOfFormation: undefined,
+    foreignGoodStandingFile: undefined,
   };
 };
 
@@ -197,7 +287,11 @@ export const corpBusinessSuffix = [
   "INC.",
 ] as const;
 
+export const foreignCorpBusinessSuffix = [...corpBusinessSuffix, "P.C.", "P.A."] as const;
+
 export type CorpBusinessSuffix = typeof corpBusinessSuffix[number];
+
+export type ForeignCorpBusinessSuffix = typeof foreignCorpBusinessSuffix[number];
 
 export type LlpBusinessSuffix = typeof llpBusinessSuffix[number];
 
@@ -214,16 +308,29 @@ export type BusinessSuffix = typeof AllBusinessSuffixes[number];
 
 export const BusinessSuffixMap: Record<
   FormationLegalType,
-  LlpBusinessSuffix[] | LlcBusinessSuffix[] | CorpBusinessSuffix[] | LpBusinessSuffix[]
+  | LlpBusinessSuffix[]
+  | LlcBusinessSuffix[]
+  | CorpBusinessSuffix[]
+  | LpBusinessSuffix[]
+  | ForeignCorpBusinessSuffix[]
 > = {
   "limited-liability-company": llcBusinessSuffix as unknown as LlcBusinessSuffix[],
   "limited-liability-partnership": llpBusinessSuffix as unknown as LlpBusinessSuffix[],
   "limited-partnership": lpBusinessSuffix as unknown as LpBusinessSuffix[],
   "c-corporation": corpBusinessSuffix as unknown as CorpBusinessSuffix[],
   "s-corporation": corpBusinessSuffix as unknown as CorpBusinessSuffix[],
+  "foreign-limited-liability-company": llcBusinessSuffix as unknown as LlcBusinessSuffix[],
+  "foreign-limited-liability-partnership": llpBusinessSuffix as unknown as LlpBusinessSuffix[],
+  "foreign-limited-partnership": lpBusinessSuffix as unknown as LpBusinessSuffix[],
+  "foreign-c-corporation": foreignCorpBusinessSuffix as unknown as ForeignCorpBusinessSuffix[],
+  "foreign-s-corporation": foreignCorpBusinessSuffix as unknown as ForeignCorpBusinessSuffix[],
 };
 
 export const corpLegalStructures: FormationLegalType[] = ["s-corporation", "c-corporation"];
+export const incorporationLegalStructures: FormationLegalType[] = [
+  ...corpLegalStructures,
+  "limited-partnership",
+];
 
 export type FormationSubmitResponse = {
   success: boolean;

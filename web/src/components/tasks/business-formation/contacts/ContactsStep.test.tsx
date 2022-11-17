@@ -1,7 +1,10 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {
-  generateFormationAddress,
   generateFormationDisplayContent,
   generateFormationFormData,
+  generateFormationIncorporator,
+  generateFormationMember,
+  generateFormationSigner,
   generateMunicipality,
   generateUser,
   generateUserData,
@@ -17,9 +20,11 @@ import { currentUserData } from "@/test/mock/withStatefulUserData";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import {
   BusinessUser,
-  createEmptyFormationAddress,
+  createEmptyFormationSigner,
   FormationFormData,
+  FormationIncorporator,
   FormationLegalType,
+  FormationMember,
   ProfileData,
 } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
@@ -71,10 +76,9 @@ describe("Formation - ContactsStep", () => {
   ): Promise<FormationPageHelpers> => {
     const profileData = generateFormationProfileData(initialProfileData);
     const formationData = {
-      formationFormData: generateFormationFormData(
-        formationFormData,
-        profileData.legalStructureId as FormationLegalType
-      ),
+      formationFormData: generateFormationFormData(formationFormData, {
+        legalStructureId: profileData.legalStructureId as FormationLegalType,
+      }),
       formationResponse: undefined,
       getFilingResponse: undefined,
       completedFilingPayment: false,
@@ -102,21 +106,21 @@ describe("Formation - ContactsStep", () => {
         {
           members: [],
           signers: [
-            generateFormationAddress({
+            generateFormationSigner({
               name: `signer 1`,
               signature: true,
             }),
-            generateFormationAddress({
+            generateFormationSigner({
               name: `signer 2`,
               signature: true,
             }),
-            generateFormationAddress({
+            generateFormationSigner({
               name: `signer 3`,
               signature: true,
             }),
           ],
         },
-        legalStructureId
+        { legalStructureId }
       );
 
       const page = await getPageHelper({ legalStructureId }, formationFormData);
@@ -134,75 +138,43 @@ describe("Formation - ContactsStep", () => {
     it("auto-fills fields from userData if it exists", async () => {
       const formationFormData = generateFormationFormData(
         {
-          signers: [
+          incorporators: [
             {
               name: "Donald Whatever",
               addressCity: "Miami",
               addressLine1: "160 Something Ave NW",
               addressLine2: "Office of Whatever",
-              addressState: "Florida",
+              addressState: { name: "Florida", shortCode: "FL" },
+              addressCountry: "US",
               addressZipCode: "20501",
+              title: "General Partner",
               signature: true,
             },
-            generateFormationAddress({ signature: false }),
+            generateFormationIncorporator({ signature: false, title: "General Partner" }),
           ],
         },
-        legalStructureId
+        { legalStructureId }
       );
 
       const page = await getPageHelper({ legalStructureId }, formationFormData);
 
       expect(screen.queryByTestId("addresses-members")).not.toBeInTheDocument();
 
-      expect(screen.getByTestId("addresses-signers")).toBeInTheDocument();
+      expect(screen.getByTestId("addresses-incorporators")).toBeInTheDocument();
 
       expect(
         screen.queryByText(displayContent[legalStructureId].members.placeholder as string)
       ).not.toBeInTheDocument();
-      expect(screen.getByText(formationFormData.signers[0].name)).toBeInTheDocument();
-      expect(
-        screen.getByText(formationFormData.signers[0].addressLine1, { exact: false })
-      ).toBeInTheDocument();
-      expect(
-        screen.getByText(formationFormData.signers[0].addressLine2, { exact: false })
-      ).toBeInTheDocument();
-      expect(
-        screen.getByText(formationFormData.signers[0].addressCity, { exact: false })
-      ).toBeInTheDocument();
-      expect(
-        screen.getByText(formationFormData.signers[0].addressState, { exact: false })
-      ).toBeInTheDocument();
-      expect(
-        screen.getByText(formationFormData.signers[0].addressZipCode, { exact: false })
-      ).toBeInTheDocument();
-      expect(page.getSignerBox(0)).toEqual(true);
+      expect(screen.getByText("Donald Whatever")).toBeInTheDocument();
+      expect(screen.getByText("160 Something Ave NW", { exact: false })).toBeInTheDocument();
+      expect(screen.getByText("Office of Whatever", { exact: false })).toBeInTheDocument();
+      expect(screen.getByText("Miami", { exact: false })).toBeInTheDocument();
+      expect(screen.getByText("Florida", { exact: false })).toBeInTheDocument();
+      expect(screen.getByText("20501", { exact: false })).toBeInTheDocument();
+      expect(page.getSignerBox(0, "incorporators")).toEqual(true);
     });
 
-    it("adds and syncs signer to members", async () => {
-      const page = await getPageHelper({ legalStructureId }, { signers: [] });
-      expect(
-        screen.getByText(displayContent[legalStructureId].signatureHeader.placeholder as string)
-      ).toBeInTheDocument();
-      page.clickAddNewSigner();
-      const signer = generateFormationAddress({ name: "Red Skull" });
-      page.fillText("Address name", signer.name);
-      page.fillText("Address line1", signer.addressLine1);
-      page.fillText("Address line2", signer.addressLine2);
-      page.fillText("Address city", signer.addressCity);
-      page.fillText("Address state", signer.addressState);
-      page.fillText("Address zip code", signer.addressZipCode);
-      page.clickAddressSubmit();
-      page.checkSignerBox(0);
-      await page.submitContactsStep();
-      expect(currentUserData().formationData.formationFormData.signers).toEqual([
-        { ...signer, signature: true },
-      ]);
-      expect(currentUserData().formationData.formationFormData.members).toEqual([
-        { ...signer, signature: true },
-      ]);
-    });
-
-    it("adds signers address using business data via checkbox", async () => {
+    it("adds incorporators address using business data via checkbox", async () => {
       const page = await getPageHelper(
         {
           legalStructureId,
@@ -211,18 +183,18 @@ describe("Formation - ContactsStep", () => {
         {
           contactFirstName: "John",
           contactLastName: "Smith",
-          businessAddressLine1: "123 business address",
-          businessAddressLine2: "business suite 201",
-          businessAddressState: "NJ",
-          businessAddressZipCode: "07601",
+          addressLine1: "123 Address",
+          addressLine2: "business suite 201",
+          addressState: { shortCode: "NJ", name: "New Jersey" },
+          addressZipCode: "07601",
         }
       );
       page.clickAddNewSigner();
       fireEvent.click(screen.getByTestId("default-checkbox"));
       expect(page.getInputElementByLabel("Address name").value).toBe("");
-      expect(page.getInputElementByLabel("Address line1").value).toBe("123 business address");
+      expect(page.getInputElementByLabel("Address line1").value).toBe("123 Address");
       expect(page.getInputElementByLabel("Address line2").value).toBe("business suite 201");
-      expect(page.getInputElementByLabel("Address city").value).toBe("Hampton");
+      expect(page.getInputElementByLabel("Address city").value).toBe("Hampton Borough");
       expect(page.getInputElementByLabel("Address state").value).toBe("NJ");
       expect(page.getInputElementByLabel("Address zip code").value).toBe("07601");
       page.fillText("Address name", "The Dude");
@@ -233,33 +205,36 @@ describe("Formation - ContactsStep", () => {
     const legalStructureId = "s-corporation";
 
     it("auto-fills fields from userData if it exists", async () => {
+      const members: FormationMember[] = [
+        {
+          name: "Joe Biden",
+          addressCity: "Washington",
+          addressLine1: "1600 Pennsylvania Ave NW",
+          addressLine2: "Office of the President",
+          addressState: { name: "District of Columbia", shortCode: "DC" },
+          addressCountry: "US",
+          addressZipCode: "20500",
+        },
+      ];
+      const incorporators: FormationIncorporator[] = [
+        {
+          name: "Donald Whatever",
+          addressCity: "Miami",
+          addressLine1: "160 Something Ave NW",
+          addressLine2: "Office of Whatever",
+          addressState: { name: "Florida", shortCode: "FL" },
+          addressCountry: "US",
+          addressZipCode: "20501",
+          title: "Incorporator",
+          signature: true,
+        },
+      ];
       const formationFormData = generateFormationFormData(
         {
-          members: [
-            {
-              name: "Joe Biden",
-              addressCity: "Washington",
-              addressLine1: "1600 Pennsylvania Ave NW",
-              addressLine2: "Office of the President",
-              addressState: "District of Columbia",
-              addressZipCode: "20500",
-              signature: false,
-            },
-          ],
-          signers: [
-            {
-              name: "Donald Whatever",
-              addressCity: "Miami",
-              addressLine1: "160 Something Ave NW",
-              addressLine2: "Office of Whatever",
-              addressState: "Florida",
-              addressZipCode: "20501",
-              signature: true,
-            },
-            generateFormationAddress({ signature: false }),
-          ],
+          members,
+          incorporators,
         },
-        legalStructureId
+        { legalStructureId }
       );
 
       const page = await getPageHelper({ legalStructureId }, formationFormData);
@@ -268,53 +243,29 @@ describe("Formation - ContactsStep", () => {
       expect(
         screen.queryByText(displayContent[legalStructureId].members.placeholder as string)
       ).not.toBeInTheDocument();
-      expect(screen.getByText(formationFormData.members[0].name)).toBeInTheDocument();
-      expect(
-        screen.getByText(formationFormData.members[0].addressLine1, { exact: false })
-      ).toBeInTheDocument();
-      expect(
-        screen.getByText(formationFormData.members[0].addressLine2, { exact: false })
-      ).toBeInTheDocument();
-      expect(
-        screen.getByText(formationFormData.members[0].addressCity, { exact: false })
-      ).toBeInTheDocument();
-      expect(
-        screen.getByText(formationFormData.members[0].addressState, { exact: false })
-      ).toBeInTheDocument();
-      expect(
-        screen.getByText(formationFormData.members[0].addressZipCode, { exact: false })
-      ).toBeInTheDocument();
+      expect(screen.getByText(members[0].name)).toBeInTheDocument();
+      expect(screen.getByText(members[0].addressLine1, { exact: false })).toBeInTheDocument();
+      expect(screen.getByText(members[0].addressLine2, { exact: false })).toBeInTheDocument();
+      expect(screen.getByText(members[0].addressCity as string, { exact: false })).toBeInTheDocument();
+      expect(screen.getByText(members[0].addressState!.name, { exact: false })).toBeInTheDocument();
+      expect(screen.getByText(members[0].addressZipCode, { exact: false })).toBeInTheDocument();
 
-      expect(screen.getByTestId("addresses-signers")).toBeInTheDocument();
-
+      expect(screen.getByTestId("addresses-incorporators")).toBeInTheDocument();
       expect(
         screen.queryByText(displayContent[legalStructureId].members.placeholder as string)
       ).not.toBeInTheDocument();
-      expect(screen.getByText(formationFormData.signers[0].name)).toBeInTheDocument();
-      expect(
-        screen.getByText(formationFormData.signers[0].addressLine1, { exact: false })
-      ).toBeInTheDocument();
-      expect(
-        screen.getByText(formationFormData.signers[0].addressLine2, { exact: false })
-      ).toBeInTheDocument();
-      expect(
-        screen.getByText(formationFormData.signers[0].addressCity, { exact: false })
-      ).toBeInTheDocument();
-      expect(
-        screen.getByText(formationFormData.signers[0].addressState, { exact: false })
-      ).toBeInTheDocument();
-      expect(
-        screen.getByText(formationFormData.signers[0].addressZipCode, { exact: false })
-      ).toBeInTheDocument();
-      expect(page.getSignerBox(0)).toEqual(true);
-      expect(page.getSignerBox(1)).toEqual(false);
+      expect(screen.getByText(incorporators[0].name)).toBeInTheDocument();
+      expect(screen.getByText(incorporators[0].addressLine1, { exact: false })).toBeInTheDocument();
+      expect(screen.getByText(incorporators[0].addressLine2, { exact: false })).toBeInTheDocument();
+      expect(screen.getByText(incorporators[0].addressCity as string, { exact: false })).toBeInTheDocument();
+      expect(screen.getByText(incorporators[0].addressState!.name, { exact: false })).toBeInTheDocument();
+      expect(screen.getByText(incorporators[0].addressZipCode, { exact: false })).toBeInTheDocument();
+      expect(page.getSignerBox(0, "incorporators")).toEqual(true);
     });
 
     it("edits directors", async () => {
-      const members = [...Array(2)].map(() => {
-        return generateFormationAddress({});
-      });
-      const page = await getPageHelper({ legalStructureId }, { members });
+      const members = [generateFormationMember({}), generateFormationMember({})];
+      const page = await getPageHelper({ legalStructureId }, { members, incorporators: [] });
 
       expect(
         screen.getByText(Config.businessFormationDefaults.directorsNewButtonText, { exact: false })
@@ -323,7 +274,7 @@ describe("Formation - ContactsStep", () => {
       expect(nameTd).toBeInTheDocument();
       expect(
         screen.getByText(
-          `${members[1].addressLine1}, ${members[1].addressLine2}, ${members[1].addressCity}, ${members[1].addressState} ${members[1].addressZipCode}`,
+          `${members[1].addressLine1}, ${members[1].addressLine2}, ${members[1].addressCity}, ${members[1].addressState?.name} ${members[1].addressZipCode}`,
           { exact: false }
         )
       ).toBeInTheDocument();
@@ -333,7 +284,9 @@ describe("Formation - ContactsStep", () => {
       expect(page.getInputElementByLabel("Address line1").value).toBe(members[1].addressLine1);
       expect(page.getInputElementByLabel("Address line2").value).toBe(members[1].addressLine2);
       expect(page.getInputElementByLabel("Address city").value).toBe(members[1].addressCity);
-      expect(page.getInputElementByLabel("Address state").value).toBe(members[1].addressState);
+      expect(page.getInputElementByLabel("Address state").value).toBe(
+        members[1].addressState?.shortCode ?? ""
+      );
       expect(page.getInputElementByLabel("Address zip code").value).toBe(members[1].addressZipCode);
       const newName = "John Biden";
       page.fillText("Address name", newName);
@@ -346,9 +299,9 @@ describe("Formation - ContactsStep", () => {
       expect(screen.getByText(newName, { exact: false })).toBeInTheDocument();
       await page.submitContactsStep();
       const newMembers = currentUserData().formationData.formationFormData.members;
-      expect(newMembers.length).toEqual(2);
+      expect(newMembers?.length).toEqual(2);
       expect(
-        newMembers.findIndex((member) => {
+        newMembers?.findIndex((member) => {
           return member.name == newName;
         })
       ).toEqual(1);
@@ -362,49 +315,52 @@ describe("Formation - ContactsStep", () => {
       ).toBeInTheDocument();
     });
 
-    describe(`signers for ${legalStructureId}`, () => {
-      it("adds signer", async () => {
-        const page = await getPageHelper({ legalStructureId }, { signers: [] });
+    describe(`incorporators for ${legalStructureId}`, () => {
+      it("adds incorporator", async () => {
+        const page = await getPageHelper({ legalStructureId }, { incorporators: [] });
         expect(
           screen.getByText(displayContent[legalStructureId].signatureHeader.placeholder as string)
         ).toBeInTheDocument();
         page.clickAddNewSigner();
-        const signer = generateFormationAddress({ name: "Red Skull" });
+        const signer = generateFormationIncorporator({ title: "Incorporator" });
         page.fillText("Address name", signer.name);
         page.fillText("Address line1", signer.addressLine1);
         page.fillText("Address line2", signer.addressLine2);
-        page.fillText("Address city", signer.addressCity);
-        page.fillText("Address state", signer.addressState);
+        page.fillText("Address city", signer.addressCity ?? "");
+        page.fillText("Address state", signer.addressState!.name);
         page.fillText("Address zip code", signer.addressZipCode);
         page.clickAddressSubmit();
-        page.checkSignerBox(0);
+        page.checkSignerBox(0, "incorporators");
         await page.submitContactsStep();
-        expect(currentUserData().formationData.formationFormData.signers).toEqual([
+        expect(currentUserData().formationData.formationFormData.incorporators).toEqual([
           { ...signer, signature: true },
         ]);
       });
 
-      it("edits signers", async () => {
-        const signers = [...Array(2)].map(() => {
-          return generateFormationAddress({ signature: true });
-        });
-        const page = await getPageHelper({ legalStructureId }, { signers });
-        const nameTd = screen.getByText(signers[1].name, { exact: false });
+      it("edits incorporators", async () => {
+        const incorporators = [
+          generateFormationIncorporator({ signature: true, title: "Incorporator" }),
+          generateFormationIncorporator({ signature: true, title: "Incorporator" }),
+        ];
+        const page = await getPageHelper({ legalStructureId }, { incorporators });
+        const nameTd = screen.getByText(incorporators[1].name, { exact: false });
         expect(nameTd).toBeInTheDocument();
         expect(
           screen.getByText(
-            `${signers[1].addressLine1}, ${signers[1].addressLine2}, ${signers[1].addressCity}, ${signers[1].addressState} ${signers[1].addressZipCode}`,
+            `${incorporators[1].addressLine1}, ${incorporators[1].addressLine2}, ${incorporators[1].addressCity}, ${incorporators[1].addressState?.name} ${incorporators[1].addressZipCode}`,
             { exact: false }
           )
         ).toBeInTheDocument();
         // eslint-disable-next-line testing-library/no-node-access
         fireEvent.click(nameTd.parentElement?.querySelector('button[aria-label="edit"]') as Element);
-        expect(page.getInputElementByLabel("Address name").value).toBe(signers[1].name);
-        expect(page.getInputElementByLabel("Address line1").value).toBe(signers[1].addressLine1);
-        expect(page.getInputElementByLabel("Address line2").value).toBe(signers[1].addressLine2);
-        expect(page.getInputElementByLabel("Address city").value).toBe(signers[1].addressCity);
-        expect(page.getInputElementByLabel("Address state").value).toBe(signers[1].addressState);
-        expect(page.getInputElementByLabel("Address zip code").value).toBe(signers[1].addressZipCode);
+        expect(page.getInputElementByLabel("Address name").value).toBe(incorporators[1].name);
+        expect(page.getInputElementByLabel("Address line1").value).toBe(incorporators[1].addressLine1);
+        expect(page.getInputElementByLabel("Address line2").value).toBe(incorporators[1].addressLine2);
+        expect(page.getInputElementByLabel("Address city").value).toBe(incorporators[1].addressCity);
+        expect(page.getInputElementByLabel("Address state").value).toBe(
+          incorporators[1].addressState?.shortCode
+        );
+        expect(page.getInputElementByLabel("Address zip code").value).toBe(incorporators[1].addressZipCode);
         const newName = "Joe Biden";
         page.fillText("Address name", newName);
         page.clickAddressSubmit();
@@ -415,45 +371,48 @@ describe("Formation - ContactsStep", () => {
         });
         expect(screen.getByText(newName, { exact: false })).toBeInTheDocument();
         await page.submitContactsStep();
-        const newSigners = currentUserData().formationData.formationFormData.signers;
-        expect(newSigners.length).toEqual(2);
+        const newIncorporators = currentUserData().formationData.formationFormData.incorporators;
+        expect(newIncorporators?.length).toEqual(2);
         expect(
-          newSigners.findIndex((signer) => {
+          newIncorporators?.findIndex((signer) => {
             return signer.name == newName;
           })
         ).toEqual(1);
       });
 
       it("deletes an additional signer", async () => {
-        const signers = [...Array(2)].map(() => {
-          return generateFormationAddress({ signature: true });
-        });
-        const page = await getPageHelper({ legalStructureId }, { signers });
-        const nameTd = screen.getByText(signers[1].name, { exact: false });
+        const incorporators = [
+          generateFormationIncorporator({ signature: true, title: "Incorporator" }),
+          generateFormationIncorporator({ signature: true, title: "Incorporator" }),
+        ];
+        const page = await getPageHelper({ legalStructureId }, { incorporators });
+        const nameTd = screen.getByText(incorporators[1].name, { exact: false });
         // eslint-disable-next-line testing-library/no-node-access
         fireEvent.click(nameTd.parentElement?.querySelector('button[aria-label="delete"]') as Element);
         await page.submitContactsStep();
-        expect(currentUserData().formationData.formationFormData.signers).toEqual([signers[0]]);
+        expect(currentUserData().formationData.formationFormData.incorporators).toEqual([incorporators[0]]);
       });
 
-      it("does not allow more than 10 signers", async () => {
-        const signers = Array(10).fill(generateFormationAddress({}));
-        await getPageHelper({ legalStructureId }, { signers });
+      it("does not allow more than 10 incorporators", async () => {
+        const incorporators = Array(10).fill(
+          generateFormationIncorporator({ signature: true, title: "Incorporator" })
+        );
+        await getPageHelper({ legalStructureId }, { incorporators });
         expect(
           screen.queryByText(Config.businessFormationDefaults.addNewSignerButtonText, { exact: false })
         ).not.toBeInTheDocument();
       });
 
-      it("fires validations when signers do not fill out all the fields", async () => {
-        const signers = [generateFormationAddress({ name: "" })];
-        const page = await getPageHelper({ legalStructureId }, { signers });
+      it("fires validations when incorporators do not fill out all the fields", async () => {
+        const incorporators = [generateFormationIncorporator({ name: "", title: "Incorporator" })];
+        const page = await getPageHelper({ legalStructureId }, { incorporators });
         await attemptApiSubmission(page);
 
         const signerErrorText = () => {
           return screen.queryByText(Config.businessFormationDefaults.signerNameErrorText, { exact: false });
         };
         expect(signerErrorText()).toBeInTheDocument();
-        const nameTd = screen.getByText(signers[0].addressLine1, { exact: false });
+        const nameTd = screen.getByText(incorporators[0].addressLine1, { exact: false });
         // eslint-disable-next-line testing-library/no-node-access
         fireEvent.click(nameTd.parentElement?.querySelector('button[aria-label="edit"]') as Element);
         page.fillText("Address name", "Elrond");
@@ -461,9 +420,9 @@ describe("Formation - ContactsStep", () => {
         expect(signerErrorText()).not.toBeInTheDocument();
       });
 
-      it("fires validations when signers do not check the sign checkbox", async () => {
-        const signers = [generateFormationAddress({})];
-        const page = await getPageHelper({ legalStructureId }, { signers });
+      it("fires validations when incorporators do not check the sign checkbox", async () => {
+        const incorporators = [generateFormationIncorporator({ title: "Incorporator" })];
+        const page = await getPageHelper({ legalStructureId }, { incorporators });
         await attemptApiSubmission(page);
         const signerCheckboxErrorText = () => {
           return screen.queryByText(Config.businessFormationDefaults.signerCheckboxErrorText, {
@@ -471,7 +430,7 @@ describe("Formation - ContactsStep", () => {
           });
         };
         expect(signerCheckboxErrorText()).toBeInTheDocument();
-        page.checkSignerBox(0);
+        page.checkSignerBox(0, "incorporators");
         expect(signerCheckboxErrorText()).not.toBeInTheDocument();
         await page.submitContactsStep();
       });
@@ -482,35 +441,39 @@ describe("Formation - ContactsStep", () => {
     const legalStructureId = "limited-liability-company";
 
     it("auto-fills fields from userData if it exists", async () => {
+      const members: FormationMember[] = [
+        {
+          name: "Joe Biden",
+          addressCity: "Washington",
+          addressLine1: "1600 Pennsylvania Ave NW",
+          addressLine2: "Office of the President",
+          addressState: { name: "District of Columbia", shortCode: "DC" },
+          addressCountry: "US",
+          addressZipCode: "20500",
+        },
+      ];
       const formationFormData = generateFormationFormData(
         {
-          members: [
-            {
-              name: "Joe Biden",
-              addressCity: "Washington",
-              addressLine1: "1600 Pennsylvania Ave NW",
-              addressLine2: "Office of the President",
-              addressState: "District of Columbia",
-              addressZipCode: "20500",
-              signature: false,
-            },
-          ],
+          members,
           signers: [
-            generateFormationAddress({
+            generateFormationSigner({
               name: `signer 1`,
               signature: true,
+              title: "Authorized Representative",
             }),
-            generateFormationAddress({
+            generateFormationSigner({
               name: `signer 2`,
               signature: true,
+              title: "Authorized Representative",
             }),
-            generateFormationAddress({
+            generateFormationSigner({
               name: `signer 3`,
               signature: true,
+              title: "Authorized Representative",
             }),
           ],
         },
-        legalStructureId
+        { legalStructureId }
       );
 
       const page = await getPageHelper({ legalStructureId }, formationFormData);
@@ -519,22 +482,12 @@ describe("Formation - ContactsStep", () => {
       expect(
         screen.queryByText(displayContent[legalStructureId].members.placeholder as string)
       ).not.toBeInTheDocument();
-      expect(screen.getByText(formationFormData.members[0].name)).toBeInTheDocument();
-      expect(
-        screen.getByText(formationFormData.members[0].addressLine1, { exact: false })
-      ).toBeInTheDocument();
-      expect(
-        screen.getByText(formationFormData.members[0].addressLine2, { exact: false })
-      ).toBeInTheDocument();
-      expect(
-        screen.getByText(formationFormData.members[0].addressCity, { exact: false })
-      ).toBeInTheDocument();
-      expect(
-        screen.getByText(formationFormData.members[0].addressState, { exact: false })
-      ).toBeInTheDocument();
-      expect(
-        screen.getByText(formationFormData.members[0].addressZipCode, { exact: false })
-      ).toBeInTheDocument();
+      expect(screen.getByText(members[0].name)).toBeInTheDocument();
+      expect(screen.getByText(members[0].addressLine1, { exact: false })).toBeInTheDocument();
+      expect(screen.getByText(members[0].addressLine2, { exact: false })).toBeInTheDocument();
+      expect(screen.getByText(members[0].addressCity as string, { exact: false })).toBeInTheDocument();
+      expect(screen.getByText(members[0].addressState!.name, { exact: false })).toBeInTheDocument();
+      expect(screen.getByText(members[0].addressZipCode, { exact: false })).toBeInTheDocument();
       expect(page.getInputElementByLabel("Signer 0").value).toBe("signer 1");
       expect(page.getInputElementByLabel("Signer 1").value).toBe("signer 2");
       expect(page.getInputElementByLabel("Signer 2").value).toBe("signer 3");
@@ -543,7 +496,7 @@ describe("Formation - ContactsStep", () => {
     describe(`members for ${legalStructureId}`, () => {
       it("edits members", async () => {
         const members = [...Array(2)].map(() => {
-          return generateFormationAddress({});
+          return generateFormationMember({});
         });
         const page = await getPageHelper({ legalStructureId }, { members });
 
@@ -554,7 +507,7 @@ describe("Formation - ContactsStep", () => {
         expect(nameTd).toBeInTheDocument();
         expect(
           screen.getByText(
-            `${members[1].addressLine1}, ${members[1].addressLine2}, ${members[1].addressCity}, ${members[1].addressState} ${members[1].addressZipCode}`,
+            `${members[1].addressLine1}, ${members[1].addressLine2}, ${members[1].addressCity}, ${members[1].addressState?.name} ${members[1].addressZipCode}`,
             { exact: false }
           )
         ).toBeInTheDocument();
@@ -564,7 +517,7 @@ describe("Formation - ContactsStep", () => {
         expect(page.getInputElementByLabel("Address line1").value).toBe(members[1].addressLine1);
         expect(page.getInputElementByLabel("Address line2").value).toBe(members[1].addressLine2);
         expect(page.getInputElementByLabel("Address city").value).toBe(members[1].addressCity);
-        expect(page.getInputElementByLabel("Address state").value).toBe(members[1].addressState);
+        expect(page.getInputElementByLabel("Address state").value).toBe(members[1].addressState?.shortCode);
         expect(page.getInputElementByLabel("Address zip code").value).toBe(members[1].addressZipCode);
         const newName = "Joe Biden";
         page.fillText("Address name", newName);
@@ -577,9 +530,9 @@ describe("Formation - ContactsStep", () => {
         expect(screen.getByText(newName, { exact: false })).toBeInTheDocument();
         await page.submitContactsStep();
         const newMembers = currentUserData().formationData.formationFormData.members;
-        expect(newMembers.length).toEqual(2);
+        expect(newMembers?.length).toEqual(2);
         expect(
-          newMembers.findIndex((member) => {
+          newMembers?.findIndex((member) => {
             return member.name == newName;
           })
         ).toEqual(1);
@@ -587,7 +540,7 @@ describe("Formation - ContactsStep", () => {
 
       it("is able to delete members", async () => {
         const members = [...Array(2)].map(() => {
-          return generateFormationAddress({});
+          return generateFormationMember({});
         });
         const page = await getPageHelper({ legalStructureId }, { members });
 
@@ -597,9 +550,9 @@ describe("Formation - ContactsStep", () => {
         fireEvent.click(nameTd.parentElement?.querySelector('button[aria-label="delete"]') as Element);
         await page.submitContactsStep();
         const newMembers = currentUserData().formationData.formationFormData.members;
-        expect(newMembers.length).toEqual(1);
+        expect(newMembers?.length).toEqual(1);
         expect(
-          newMembers.find((member) => {
+          newMembers?.find((member) => {
             return member == members[1];
           })
         ).toBeFalsy();
@@ -615,19 +568,20 @@ describe("Formation - ContactsStep", () => {
             members: [],
             contactFirstName: "John",
             contactLastName: "Smith",
-            businessAddressLine1: "123 business address",
-            businessAddressLine2: "business suite 201",
-            businessAddressState: "NJ",
-            businessAddressZipCode: "07601",
+            addressLine1: "123 Address",
+            addressLine2: "business suite 201",
+            addressCountry: "US",
+            addressState: { shortCode: "NJ", name: "New Jersey" },
+            addressZipCode: "07601",
           }
         );
         await page.openAddressModal("members");
 
         page.selectCheckbox(Config.businessFormationDefaults.membersCheckboxText);
         expect(page.getInputElementByLabel("Address name").value).toBe("John Smith");
-        expect(page.getInputElementByLabel("Address line1").value).toBe("123 business address");
+        expect(page.getInputElementByLabel("Address line1").value).toBe("123 Address");
         expect(page.getInputElementByLabel("Address line2").value).toBe("business suite 201");
-        expect(page.getInputElementByLabel("Address city").value).toBe("Hampton");
+        expect(page.getInputElementByLabel("Address city").value).toBe("Hampton Borough");
         expect(page.getInputElementByLabel("Address state").value).toBe("NJ");
         expect(page.getInputElementByLabel("Address zip code").value).toBe("07601");
       });
@@ -639,22 +593,23 @@ describe("Formation - ContactsStep", () => {
             municipality: generateMunicipality({ displayName: "Hampton Borough", name: "Hampton" }),
           },
           {
-            members: [generateFormationAddress({})],
+            members: [generateFormationMember({})],
             contactFirstName: "John",
             contactLastName: "Smith",
-            businessAddressLine1: "123 business address",
-            businessAddressLine2: "business suite 201",
-            businessAddressState: "NJ",
-            businessAddressZipCode: "07601",
+            addressLine1: "123 Address",
+            addressLine2: "business suite 201",
+            addressCountry: "US",
+            addressState: { shortCode: "NJ", name: "New Jersey" },
+            addressZipCode: "07601",
           }
         );
         await page.openAddressModal("members");
 
         page.selectCheckbox(Config.businessFormationDefaults.membersCheckboxText);
         expect(page.getInputElementByLabel("Address name").value).toBe("");
-        expect(page.getInputElementByLabel("Address line1").value).toBe("123 business address");
+        expect(page.getInputElementByLabel("Address line1").value).toBe("123 Address");
         expect(page.getInputElementByLabel("Address line2").value).toBe("business suite 201");
-        expect(page.getInputElementByLabel("Address city").value).toBe("Hampton");
+        expect(page.getInputElementByLabel("Address city").value).toBe("Hampton Borough");
         expect(page.getInputElementByLabel("Address state").value).toBe("NJ");
         expect(page.getInputElementByLabel("Address zip code").value).toBe("07601");
       });
@@ -667,15 +622,15 @@ describe("Formation - ContactsStep", () => {
           },
           {
             members: [],
-            businessAddressLine1: "123 business address",
-            businessAddressLine2: "",
-            businessAddressZipCode: "",
+            addressLine1: "123 Address",
+            addressLine2: "",
+            addressZipCode: "",
           }
         );
         await page.openAddressModal("members");
 
         page.selectCheckbox(Config.businessFormationDefaults.membersCheckboxText);
-        expect(page.getInputElementByLabel("Address line1").value).toBe("123 business address");
+        expect(page.getInputElementByLabel("Address line1").value).toBe("123 Address");
         expect(page.getInputElementByLabel("Address line2").value).toBe("");
         expect(page.getInputElementByLabel("Address zip code").value).toBe("");
         expect(page.getInputElementByLabel("Address line1").disabled).toBe(true);
@@ -687,11 +642,10 @@ describe("Formation - ContactsStep", () => {
         const page = await getPageHelper(
           {
             legalStructureId,
-            municipality: generateMunicipality({ displayName: "Hampton Borough", name: "Hampton" }),
           },
           {
             members: [],
-            businessAddressLine1: "",
+            addressLine1: "",
           }
         );
         await page.openAddressModal("members");
@@ -704,13 +658,12 @@ describe("Formation - ContactsStep", () => {
         const page = await getPageHelper(
           {
             legalStructureId,
-            municipality: generateMunicipality({ displayName: "Hampton Borough", name: "Hampton" }),
           },
           {
             members: [],
-            businessAddressLine1: "123 business address",
-            businessAddressLine2: "",
-            businessAddressZipCode: "",
+            addressLine1: "123 Address",
+            addressLine2: "",
+            addressZipCode: "",
           }
         );
         await page.openAddressModal("members");
@@ -791,7 +744,7 @@ describe("Formation - ContactsStep", () => {
       });
 
       it("does not add more than 10 members", async () => {
-        const nineMembers = Array(9).fill(generateFormationAddress({}));
+        const nineMembers = Array(9).fill(generateFormationSigner({}));
         const page = await getPageHelper(
           { legalStructureId },
           {
@@ -817,7 +770,7 @@ describe("Formation - ContactsStep", () => {
           screen.queryByText(Config.businessFormationDefaults.membersNewButtonText, { exact: false })
         ).not.toBeInTheDocument();
         await page.submitContactsStep();
-        expect(currentUserData().formationData.formationFormData.members.length).toEqual(10);
+        expect(currentUserData().formationData.formationFormData.members?.length).toEqual(10);
       });
 
       it("renders mobile view of members table", async () => {
@@ -836,16 +789,16 @@ describe("Formation - ContactsStep", () => {
         ).toBeInTheDocument();
         page.clickAddNewSigner();
         page.fillText("Signer 0", "Red Skull");
-        page.checkSignerBox(0);
+        page.checkSignerBox(0, "signers");
 
         page.clickAddNewSigner();
         page.fillText("Signer 1", "V");
-        page.checkSignerBox(1);
+        page.checkSignerBox(1, "signers");
 
         await page.submitContactsStep();
         expect(currentUserData().formationData.formationFormData.signers).toEqual([
-          { ...createEmptyFormationAddress(), name: "Red Skull", signature: true },
-          { ...createEmptyFormationAddress(), name: "V", signature: true },
+          { ...createEmptyFormationSigner(legalStructureId), name: "Red Skull", signature: true },
+          { ...createEmptyFormationSigner(legalStructureId), name: "V", signature: true },
         ]);
       });
 
@@ -853,22 +806,22 @@ describe("Formation - ContactsStep", () => {
         const page = await getPageHelper({ legalStructureId }, { signers: [] });
         page.clickAddNewSigner();
         page.fillText("Signer 0", "Red Skull");
-        page.checkSignerBox(0);
+        page.checkSignerBox(0, "signers");
 
         page.clickAddNewSigner();
         page.fillText("Signer 1", "V");
-        page.checkSignerBox(1);
+        page.checkSignerBox(1, "signers");
 
         fireEvent.click(screen.getAllByLabelText("delete additional signer")[0]);
 
         await page.submitContactsStep();
         expect(currentUserData().formationData.formationFormData.signers).toEqual([
-          { ...createEmptyFormationAddress(), name: "Red Skull", signature: true },
+          { ...createEmptyFormationSigner(legalStructureId), name: "Red Skull", signature: true },
         ]);
       });
 
       it("does not add more than 9 additional signers", async () => {
-        const signers = Array(9).fill(generateFormationAddress({}));
+        const signers = Array(9).fill(generateFormationSigner({}));
         const page = await getPageHelper({ legalStructureId }, { signers });
 
         expect(
@@ -883,7 +836,7 @@ describe("Formation - ContactsStep", () => {
       it("fires validations when signers do not fill out the signature field", async () => {
         const page = await getPageHelper(
           { legalStructureId },
-          { signers: [generateFormationAddress({ name: "" })] }
+          { signers: [generateFormationSigner({ name: "" })] }
         );
         await attemptApiSubmission(page);
         const signerErrorText = () => {
@@ -897,7 +850,7 @@ describe("Formation - ContactsStep", () => {
       it("fires validations when signers do not check the sign checkbox", async () => {
         const page = await getPageHelper(
           { legalStructureId },
-          { signers: [generateFormationAddress({ signature: false })] }
+          { signers: [generateFormationSigner({ signature: false })] }
         );
         await attemptApiSubmission(page);
         const signerCheckboxErrorText = () => {
@@ -934,8 +887,7 @@ describe("Formation - ContactsStep", () => {
           agentEmail: "agent@email.com",
           agentOfficeAddressLine1: "123 agent address",
           agentOfficeAddressLine2: "agent suite 201",
-          agentOfficeAddressCity: "agent-city-402",
-          agentOfficeAddressState: "DC",
+          agentOfficeAddressMunicipality: generateMunicipality({ displayName: "Newark", name: "Newark" }),
           agentOfficeAddressZipCode: "99887",
         }
       );
@@ -946,8 +898,7 @@ describe("Formation - ContactsStep", () => {
       expect(page.getInputElementByLabel("Agent email").value).toEqual("agent@email.com");
       expect(page.getInputElementByLabel("Agent office address line1").value).toEqual("123 agent address");
       expect(page.getInputElementByLabel("Agent office address line2").value).toEqual("agent suite 201");
-      expect(page.getInputElementByLabel("Agent office address city").value).toEqual("agent-city-402");
-      expect(page.getInputElementByLabel("Agent office address state").value).toEqual("DC");
+      expect(page.getInputElementByLabel("Agent office address municipality").value).toEqual("Newark");
       expect(page.getInputElementByLabel("Agent office address zip code").value).toEqual("99887");
     });
 
@@ -1020,44 +971,45 @@ describe("Formation - ContactsStep", () => {
       expect(page.getInputElementByLabel("Agent email").disabled).toEqual(false);
     });
 
-    it("auto-fills and disables (excl. state) agent address from business address when box checked", async () => {
+    it("auto-fills and disables agent address from Address when box checked", async () => {
       const page = await getPageHelper(
-        { municipality: generateMunicipality({ name: "New Test City" }) },
+        { municipality: generateMunicipality({ name: "New Test City", displayName: "New Test City" }) },
         {
           agentNumberOrManual: "MANUAL_ENTRY",
           agentOfficeAddressLine1: "Old Add 123",
           agentOfficeAddressLine2: "Old Add 456",
-          agentOfficeAddressCity: "Old Test City",
+          agentOfficeAddressMunicipality: generateMunicipality({
+            name: "Old Test City",
+            displayName: "Old Test City",
+          }),
           agentOfficeAddressZipCode: "07001",
-          agentOfficeAddressState: "CA",
-          businessAddressLine1: "New Add 123",
-          businessAddressLine2: "New Add 456",
-          businessAddressZipCode: "07002",
-          businessAddressState: "NJ",
+          addressLine1: "New Add 123",
+          addressLine2: "New Add 456",
+          addressZipCode: "07002",
+          addressState: { shortCode: "NJ", name: "New Jersey" },
+          addressCountry: "US",
           agentUseAccountInfo: false,
         }
       );
 
       expect(page.getInputElementByLabel("Agent office address line1").value).toEqual("Old Add 123");
       expect(page.getInputElementByLabel("Agent office address line2").value).toEqual("Old Add 456");
-      expect(page.getInputElementByLabel("Agent office address city").value).toEqual("Old Test City");
+      expect(page.getInputElementByLabel("Agent office address municipality").value).toEqual("Old Test City");
       expect(page.getInputElementByLabel("Agent office address zip code").value).toEqual("07001");
-      expect(page.getInputElementByLabel("Agent office address state").value).toEqual("CA");
       expect(page.getInputElementByLabel("Agent office address line1").disabled).toEqual(false);
       expect(page.getInputElementByLabel("Agent office address line2").disabled).toEqual(false);
-      expect(page.getInputElementByLabel("Agent office address city").disabled).toEqual(false);
+      expect(page.getInputElementByLabel("Agent office address municipality").disabled).toEqual(false);
       expect(page.getInputElementByLabel("Agent office address zip code").disabled).toEqual(false);
 
       page.selectCheckbox(Config.businessFormationDefaults.sameAgentAddressAsBusiness);
 
       expect(page.getInputElementByLabel("Agent office address line1").value).toEqual("New Add 123");
       expect(page.getInputElementByLabel("Agent office address line2").value).toEqual("New Add 456");
-      expect(page.getInputElementByLabel("Agent office address city").value).toEqual("New Test City");
+      expect(page.getInputElementByLabel("Agent office address municipality").value).toEqual("New Test City");
       expect(page.getInputElementByLabel("Agent office address zip code").value).toEqual("07002");
-      expect(page.getInputElementByLabel("Agent office address state").value).toEqual("NJ");
       expect(page.getInputElementByLabel("Agent office address line1").disabled).toEqual(true);
       expect(page.getInputElementByLabel("Agent office address line2").disabled).toEqual(true);
-      expect(page.getInputElementByLabel("Agent office address city").disabled).toEqual(true);
+      expect(page.getInputElementByLabel("Agent office address municipality").disabled).toEqual(true);
       expect(page.getInputElementByLabel("Agent office address zip code").disabled).toEqual(true);
     });
 
@@ -1068,10 +1020,10 @@ describe("Formation - ContactsStep", () => {
           agentNumberOrManual: "MANUAL_ENTRY",
           agentOfficeAddressLine1: "",
           agentOfficeAddressZipCode: "",
-          agentOfficeAddressState: "",
-          businessAddressLine1: "New Add 123",
-          businessAddressZipCode: "",
-          businessAddressState: "NJ",
+          addressLine1: "New Add 123",
+          addressZipCode: "",
+          addressState: { shortCode: "NJ", name: "New Jersey" },
+          addressCountry: "US",
           agentUseAccountInfo: false,
         }
       );
@@ -1080,10 +1032,9 @@ describe("Formation - ContactsStep", () => {
 
       expect(page.getInputElementByLabel("Agent office address line1").value).toEqual("New Add 123");
       expect(page.getInputElementByLabel("Agent office address zip code").value).toEqual("");
-      expect(page.getInputElementByLabel("Agent office address state").value).toEqual("NJ");
       expect(page.getInputElementByLabel("Agent office address line1").disabled).toEqual(true);
       expect(page.getInputElementByLabel("Agent office address line2").disabled).toEqual(true);
-      expect(page.getInputElementByLabel("Agent office address city").disabled).toEqual(true);
+      expect(page.getInputElementByLabel("Agent office address municipality").disabled).toEqual(true);
       expect(page.getInputElementByLabel("Agent office address zip code").disabled).toEqual(false);
     });
 
@@ -1093,7 +1044,7 @@ describe("Formation - ContactsStep", () => {
         {
           agentNumberOrManual: "MANUAL_ENTRY",
           agentOfficeAddressLine1: "",
-          businessAddressLine1: "",
+          addressLine1: "",
           agentUseAccountInfo: false,
         }
       );
@@ -1110,7 +1061,7 @@ describe("Formation - ContactsStep", () => {
         {
           agentNumberOrManual: "MANUAL_ENTRY",
           agentOfficeAddressZipCode: "",
-          businessAddressZipCode: "",
+          addressZipCode: "",
           agentUseAccountInfo: false,
         }
       );
@@ -1125,19 +1076,20 @@ describe("Formation - ContactsStep", () => {
       ).toEqual(false);
       expect(page.getInputElementByLabel("Agent office address line1").disabled).toEqual(false);
       expect(page.getInputElementByLabel("Agent office address line2").disabled).toEqual(false);
-      expect(page.getInputElementByLabel("Agent office address city").disabled).toEqual(false);
+      expect(page.getInputElementByLabel("Agent office address municipality").disabled).toEqual(false);
       expect(page.getInputElementByLabel("Agent office address zip code").disabled).toEqual(false);
     });
 
-    it("un-disables fields but leaves values when user unchecks same business address box", async () => {
+    it("un-disables fields but leaves values when user unchecks same Address box", async () => {
       const page = await getPageHelper(
-        { municipality: generateMunicipality({ name: "New Test City" }) },
+        { municipality: generateMunicipality({ name: "New Test City", displayName: "New Test City" }) },
         {
           agentNumberOrManual: "MANUAL_ENTRY",
-          businessAddressLine1: "New Add 123",
-          businessAddressLine2: "New Add 456",
-          businessAddressZipCode: "07002",
-          businessAddressState: "NJ",
+          addressLine1: "New Add 123",
+          addressLine2: "New Add 456",
+          addressZipCode: "07002",
+          addressState: { shortCode: "NJ", name: "New Jersey" },
+          addressCountry: "US",
           agentUseBusinessAddress: false,
         }
       );
@@ -1150,12 +1102,11 @@ describe("Formation - ContactsStep", () => {
       ).toEqual(false);
       expect(page.getInputElementByLabel("Agent office address line1").value).toEqual("New Add 123");
       expect(page.getInputElementByLabel("Agent office address line2").value).toEqual("New Add 456");
-      expect(page.getInputElementByLabel("Agent office address city").value).toEqual("New Test City");
+      expect(page.getInputElementByLabel("Agent office address municipality").value).toEqual("New Test City");
       expect(page.getInputElementByLabel("Agent office address zip code").value).toEqual("07002");
-      expect(page.getInputElementByLabel("Agent office address state").value).toEqual("NJ");
       expect(page.getInputElementByLabel("Agent office address line1").disabled).toEqual(false);
       expect(page.getInputElementByLabel("Agent office address line2").disabled).toEqual(false);
-      expect(page.getInputElementByLabel("Agent office address city").disabled).toEqual(false);
+      expect(page.getInputElementByLabel("Agent office address municipality").disabled).toEqual(false);
       expect(page.getInputElementByLabel("Agent office address zip code").disabled).toEqual(false);
     });
 
@@ -1292,17 +1243,17 @@ describe("Formation - ContactsStep", () => {
         );
       });
 
-      it("Agent office address city", async () => {
+      it("Agent office address municipality", async () => {
         const page = await getPageHelper(
           {},
           {
-            agentOfficeAddressCity: "",
+            agentOfficeAddressMunicipality: undefined,
             agentNumberOrManual: "MANUAL_ENTRY",
           }
         );
         await attemptApiSubmission(page);
         expect(screen.getByRole("alert")).toHaveTextContent(
-          Config.businessFormationDefaults.requiredFieldsBulletPointLabel.agentOfficeAddressCity
+          Config.businessFormationDefaults.requiredFieldsBulletPointLabel.agentOfficeAddressMunicipality
         );
       });
 
