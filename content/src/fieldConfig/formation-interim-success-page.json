@@ -1,7 +1,7 @@
 {
   "businessFormationDefaults": {
     "interimSuccessPageAlertText": "We are unable find your completed filing information at this time.",
-    "interimSuccessPageBodyText": "I﻿f you completed the business formation steps and submitted payment, you can find your formation documents in your email. You can also come back at a later time to download your formation documents from this page.\n \nI﻿f your business formation o﻿r payment information is incomplete, you can review and ~button~\n\n\n\n",
+    "interimSuccessPageBodyText": "If you completed the business formation steps and submitted payment, you can find your formation documents in your email. You can also come back at a later time to download your formation documents from this page.\n \nIf your business formation or payment information is incomplete, you can review and ~button~\n\n\n\n",
     "interimSuccessPageButtonText": "re-submit your formation.",
     "interimSuccessPageModalTitle": "Please verify before proceeding",
     "interimSuccessPageModalCancel": "Cancel",

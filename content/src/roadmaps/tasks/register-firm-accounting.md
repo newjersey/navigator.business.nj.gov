@@ -8,13 +8,17 @@ callToActionText: Apply for My License
 required: false
 issuingAgency: New Jersey Division of Consumer Affairs Board of Accountancy
 ---
+
 You or any staff providing accounting services must be licensed as a Certified Public Accountant.
 
 ---
+
 ### Eligibility Criteria
+
 - At least 150 credit hours (24 semester credits in Accounting courses and 24 semester credits in Business courses)
 - 1 year of full-time public accounting experience under the supervision of an active CPA
-- Passing scores on the Uniform CPA Exam 
+- Passing scores on the Uniform CPA Exam
 
->**Once completed, you will have:**  
->- A copy of your license (sent via postal mail) with your certified public accountant license number
+> **Once completed, you will have:**
+>
+> - A copy of your license (sent via postal mail) with your certified public accountant license number
