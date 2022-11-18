@@ -30,7 +30,7 @@ county:
   - All
 sector:
   - educational-services
-publishStageArchive: Do Not Publish
+publishStageArchive: null
 ---
 The Child Care Facilities Improvement Program provides grants for facilities improvement to New Jersey child care providers that provide high quality early childhood learning environments. 
 
