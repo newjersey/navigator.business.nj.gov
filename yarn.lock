@@ -3721,7 +3721,7 @@ __metadata:
     serverless: 3.24.1
     serverless-dynamodb-local: 0.2.40
     serverless-http: 3.1.0
-    serverless-offline: 11.4.0
+    serverless-offline: 11.5.0
     serverless-offline-ssm: 6.2.0
     serverless-webpack: 5.10.0
     simple-oauth2: 5.0.0
@@ -3918,7 +3918,7 @@ __metadata:
     serverless: 3.24.1
     serverless-dynamodb-local: 0.2.40
     serverless-http: 3.1.0
-    serverless-offline: 11.4.0
+    serverless-offline: 11.5.0
     serverless-offline-ssm: 6.2.0
     serverless-webpack: 5.10.0
     simple-oauth2: 5.0.0
@@ -30557,9 +30557,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"serverless-offline@npm:11.4.0":
-  version: 11.4.0
-  resolution: "serverless-offline@npm:11.4.0"
+"serverless-offline@npm:11.5.0":
+  version: 11.5.0
+  resolution: "serverless-offline@npm:11.5.0"
   dependencies:
     "@aws-sdk/client-lambda": ^3.210.0
     "@hapi/boom": ^10.0.0
@@ -30587,7 +30587,7 @@ __metadata:
     ws: ^8.11.0
   peerDependencies:
     serverless: ^3.2.0
-  checksum: bed9b9271d5c42ec783a06fe12e2956272f70964218753966e398cda7fb791674b75aca0ec462dfd2b6bd0fe82c3142d504437c2a5c6421be555b68873a92d1c
+  checksum: 01e3b9b302f46c6adadefbb122060a864cf14c38296d34faa38d1ae778629c2d5339ec3311aad346f1c863656632b9e702745aaa4bd285034980df5bc1cee4a8
   languageName: node
   linkType: hard
 
