@@ -3,16 +3,22 @@ import { LookupStepIndexByName } from "@/components/tasks/business-formation/Bus
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import * as api from "@/lib/api-client/apiClient";
 import * as buildUserRoadmap from "@/lib/roadmap/buildUserRoadmap";
-import { FormationDisplayContentMap, NameAvailability, Task } from "@/lib/types/types";
 import {
-  generateFormationAddress,
+  FormationDisplayContentMap,
+  FormationSignedAddress,
+  NameAvailability,
+  Task,
+} from "@/lib/types/types";
+import {
   generateFormationData,
+  generateFormationIncorporator,
+  generateMunicipality,
   generateNameAvailability,
   generateProfileData,
   generateRoadmap,
-  generateStateInput,
   generateTask,
   generateUserData,
+  randomPublicFilingLegalType,
 } from "@/test/factories";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockDocuments } from "@/test/mock/mockUseDocuments";
@@ -21,12 +27,11 @@ import { setupStatefulUserDataContext, WithStatefulUserData } from "@/test/mock/
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import {
   DateObject,
-  FormationAddress,
   FormationLegalType,
-  FormationLegalTypes,
   FormationSubmitResponse,
   Municipality,
   ProfileData,
+  randomInt,
   UserData,
 } from "@businessnjgovnavigator/shared";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
@@ -38,14 +43,9 @@ export function flushPromises() {
   });
 }
 
-export const generateFormationLegalType = (): FormationLegalType => {
-  const randomIndex = Math.floor(Math.random() * FormationLegalTypes.length);
-  return FormationLegalTypes[randomIndex] as FormationLegalType;
-};
-
 export const generateFormationProfileData = (data: Partial<ProfileData>): ProfileData => {
   return generateProfileData({
-    legalStructureId: generateFormationLegalType(),
+    legalStructureId: randomPublicFilingLegalType(),
     ...data,
   });
 };
@@ -76,11 +76,18 @@ export const preparePage = (
       profileData.legalStructureId as FormationLegalType
     ),
   });
-
-  const municipalitiesValue = municipalities ?? [];
-
+  const internalMunicipalities = [
+    profileData?.municipality ?? generateMunicipality({ displayName: "GenericTown" }),
+    ...(municipalities ?? []),
+  ];
+  initialUserData.formationData.formationFormData.addressMunicipality &&
+    internalMunicipalities.push(initialUserData.formationData.formationFormData.addressMunicipality);
+  initialUserData.formationData.formationFormData.agentOfficeAddressMunicipality &&
+    internalMunicipalities.push(
+      initialUserData.formationData.formationFormData.agentOfficeAddressMunicipality
+    );
   render(
-    <MunicipalitiesContext.Provider value={{ municipalities: municipalitiesValue }}>
+    <MunicipalitiesContext.Provider value={{ municipalities: internalMunicipalities }}>
       <WithStatefulUserData initialUserData={initialUserData}>
         <ThemeProvider theme={createTheme()}>
           <BusinessFormation task={task ?? generateTask({})} displayContent={displayContent} />
@@ -132,12 +139,12 @@ export type FormationPageHelpers = {
   selectByText: (label: string, value: string) => void;
   selectCheckbox: (label: string) => void;
   clickAddNewSigner: () => void;
-  getSignerBox: (index: number) => boolean;
-  checkSignerBox: (index: number) => void;
+  getSignerBox: (index: number, type: "signers" | "incorporators") => boolean;
+  checkSignerBox: (index: number, type: "signers" | "incorporators") => void;
   clickAddressSubmit: () => void;
   openAddressModal: (fieldName: string) => Promise<void>;
-  fillAddressModal: (overrides: Partial<FormationAddress>) => Promise<void>;
-  fillAndSubmitAddressModal: (overrides: Partial<FormationAddress>, fieldName: string) => Promise<void>;
+  fillAddressModal: (overrides: Partial<FormationSignedAddress>) => Promise<void>;
+  fillAndSubmitAddressModal: (overrides: Partial<FormationSignedAddress>, fieldName: string) => Promise<void>;
   clickSubmit: () => Promise<void>;
   selectDate: (value: DateObject) => void;
 };
@@ -287,8 +294,8 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     );
   };
 
-  const getSignerBox = (index: number): boolean => {
-    const additionalSigner = within(screen.getByTestId(`signers-${index}`));
+  const getSignerBox = (index: number, type: "signers" | "incorporators"): boolean => {
+    const additionalSigner = within(screen.getByTestId(`${type}-${index}`));
     return (
       additionalSigner.getByLabelText(
         `${Config.businessFormationDefaults.signatureColumnLabel}*`
@@ -296,8 +303,8 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     ).checked;
   };
 
-  const checkSignerBox = (index: number): void => {
-    const additionalSigner = within(screen.getByTestId(`signers-${index}`));
+  const checkSignerBox = (index: number, type: "signers" | "incorporators"): void => {
+    const additionalSigner = within(screen.getByTestId(`${type}-${index}`));
     fireEvent.click(
       additionalSigner.getByLabelText(`${Config.businessFormationDefaults.signatureColumnLabel}*`)
     );
@@ -314,7 +321,7 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     });
   };
 
-  const fillAndSubmitAddressModal = async (overrides: Partial<FormationAddress>, fieldName: string) => {
+  const fillAndSubmitAddressModal = async (overrides: Partial<FormationSignedAddress>, fieldName: string) => {
     await openAddressModal(fieldName);
     await fillAddressModal(overrides);
     clickAddressSubmit();
@@ -323,13 +330,14 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     });
   };
 
-  const fillAddressModal = async (overrides: Partial<FormationAddress>): Promise<void> => {
-    const member = generateFormationAddress({ addressState: generateStateInput(), ...overrides });
+  const fillAddressModal = async (overrides: Partial<FormationSignedAddress>): Promise<void> => {
+    const member = generateFormationIncorporator({ ...overrides });
     fillText("Address name", member.name);
     fillText("Address line1", member.addressLine1);
     fillText("Address line2", member.addressLine2);
-    fillText("Address city", member.addressCity);
-    fillText("Address state", member.addressState);
+    member.addressCity && fillText("Address city", member.addressCity);
+    member.addressState &&
+      fillText("Address state", member.addressState[randomInt() % 2 ? "name" : "shortCode"]);
     fillText("Address zip code", member.addressZipCode);
   };
 

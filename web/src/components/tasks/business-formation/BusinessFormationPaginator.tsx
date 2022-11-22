@@ -25,11 +25,7 @@ import { FormationStepNames } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { setAnalyticsDimensions } from "@/lib/utils/analytics-helpers";
 import { scrollToTopOfElement, useMountEffect } from "@/lib/utils/helpers";
-import {
-  FormationAddress,
-  FormationFormData,
-  FormationLegalType,
-} from "@businessnjgovnavigator/shared/formationData";
+import { FormationFormData, FormationLegalType } from "@businessnjgovnavigator/shared/formationData";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router";
@@ -140,7 +136,7 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
     if (isStep("Business")) {
       const muncipalityEnteredForFirstTime =
         userDataWithChanges.profileData.municipality === undefined &&
-        userDataWithChanges.formationData.formationFormData.businessAddressCity !== undefined;
+        userDataWithChanges.formationData.formationFormData.addressMunicipality !== undefined;
 
       if (muncipalityEnteredForFirstTime) {
         analytics.event.business_formation_location_question.submit.location_entered_for_first_time();
@@ -150,7 +146,7 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
         ...userDataWithChanges,
         profileData: {
           ...userDataWithChanges.profileData,
-          municipality: userDataWithChanges.formationData.formationFormData.businessAddressCity,
+          municipality: userDataWithChanges.formationData.formationFormData.addressMunicipality,
         },
       };
     }
@@ -176,17 +172,25 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
     let formationFormDataToSubmit = { ...state.formationFormData };
 
     if (isStep("Business")) {
-      const filteredProvisions = state.formationFormData.provisions.filter((it) => {
+      const filteredProvisions = state.formationFormData.provisions?.filter((it) => {
         return it !== "";
       });
       formationFormDataToSubmit = { ...formationFormDataToSubmit, provisions: filteredProvisions };
     }
 
     if (isStep("Contacts")) {
-      const filteredSigners = state.formationFormData.signers.filter((it: FormationAddress) => {
+      const filteredSigners = state.formationFormData.signers?.filter((it) => {
         return !!it;
       });
-      formationFormDataToSubmit = { ...formationFormDataToSubmit, signers: filteredSigners };
+      const filteredIncorporators = state.formationFormData.incorporators?.filter((it) => {
+        return !!it;
+      });
+
+      formationFormDataToSubmit = {
+        ...formationFormDataToSubmit,
+        signers: filteredSigners,
+        incorporators: filteredIncorporators,
+      };
     }
 
     setFormationFormData(formationFormDataToSubmit);
@@ -246,7 +250,7 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
     const { formationFormData } = userData.formationData;
 
     analytics.event.business_formation_provisions.submit.provisions_submitted_with_formation(
-      formationFormData.provisions.length
+      formationFormData.provisions?.length ?? 0
     );
 
     if (formationFormData.businessPurpose.trim().length > 0) {
@@ -254,10 +258,10 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
     }
 
     analytics.event.business_formation_members.submit.members_submitted_with_formation(
-      formationFormData.members.length
+      formationFormData.members?.length ?? 0
     );
     analytics.event.business_formation_signers.submit.signers_submitted_with_formation(
-      formationFormData.signers.length
+      formationFormData.signers?.length ?? formationFormData.incorporators?.length ?? 0
     );
     if (formationFormData.agentNumberOrManual === "NUMBER") {
       analytics.event.business_formation_registered_agent_identification.submit.entered_agent_ID();

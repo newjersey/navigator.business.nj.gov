@@ -26,17 +26,21 @@ export const FormationChooseDocuments = (): ReactElement => {
 
   const handleCertificateOfStandingClick = () => {
     setFieldInteracted("certificateOfStanding");
-    setFormationFormData({
-      ...state.formationFormData,
-      certificateOfStanding: !state.formationFormData.certificateOfStanding,
+    setFormationFormData((previousFormationData) => {
+      return {
+        ...previousFormationData,
+        certificateOfStanding: !state.formationFormData.certificateOfStanding,
+      };
     });
   };
 
   const handleCertifiedFormationDocumentClick = () => {
     setFieldInteracted("certifiedCopyOfFormationDocument");
-    setFormationFormData({
-      ...state.formationFormData,
-      certifiedCopyOfFormationDocument: !state.formationFormData.certifiedCopyOfFormationDocument,
+    setFormationFormData((previousFormationData) => {
+      return {
+        ...previousFormationData,
+        certifiedCopyOfFormationDocument: !state.formationFormData.certifiedCopyOfFormationDocument,
+      };
     });
   };
 

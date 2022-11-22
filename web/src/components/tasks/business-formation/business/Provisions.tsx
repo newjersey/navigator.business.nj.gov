@@ -9,39 +9,47 @@ import { ReactElement, useContext } from "react";
 export const Provisions = (): ReactElement => {
   const MAX_CHARS = 3000;
   const { state, setFormationFormData, setFieldInteracted } = useContext(BusinessFormationContext);
-  const isExpanded = state.formationFormData.provisions.length > 0;
+  const isExpanded = state.formationFormData.provisions && state.formationFormData.provisions.length > 0;
 
   const handleAddButtonClick = (): void => {
-    setFormationFormData({
-      ...state.formationFormData,
-      provisions: [""],
+    setFormationFormData((previousFormationData) => {
+      return {
+        ...previousFormationData,
+        provisions: [""],
+      };
     });
   };
 
   const handleProvisionChange = (value: string, index: number) => {
     setFieldInteracted("provisions");
-    const newProvisions = [...state.formationFormData.provisions];
+    const newProvisions = [...(state.formationFormData.provisions ?? [])];
     newProvisions[index] = value;
-    setFormationFormData({
-      ...state.formationFormData,
-      provisions: newProvisions,
+    setFormationFormData((previousFormationData) => {
+      return {
+        ...previousFormationData,
+        provisions: newProvisions,
+      };
     });
   };
 
   const removeProvision = (index: number): void => {
-    const newProvisions = [...state.formationFormData.provisions];
+    const newProvisions = [...(state.formationFormData.provisions ?? [])];
     newProvisions.splice(index, 1);
 
-    setFormationFormData({
-      ...state.formationFormData,
-      provisions: newProvisions,
+    setFormationFormData((previousFormationData) => {
+      return {
+        ...previousFormationData,
+        provisions: newProvisions,
+      };
     });
   };
 
   const handleAddAnother = () => {
-    setFormationFormData({
-      ...state.formationFormData,
-      provisions: [...state.formationFormData.provisions, ""],
+    setFormationFormData((previousFormationData) => {
+      return {
+        ...previousFormationData,
+        provisions: [...(state.formationFormData.provisions ?? []), ""],
+      };
     });
   };
 
@@ -65,7 +73,7 @@ export const Provisions = (): ReactElement => {
       {isExpanded && (
         <Content className="margin-bottom-2">{Config.businessFormationDefaults.provisionsBodyText}</Content>
       )}
-      {state.formationFormData.provisions.map((provision: string, index: number) => {
+      {state.formationFormData.provisions?.map((provision: string, index: number) => {
         return (
           <div key={index}>
             <Content>{Config.businessFormationDefaults.provisionsLabel}</Content>
@@ -113,7 +121,7 @@ export const Provisions = (): ReactElement => {
           </div>
         );
       })}
-      {isExpanded && state.formationFormData.provisions.length < 10 && (
+      {isExpanded && state.formationFormData.provisions && state.formationFormData.provisions.length < 10 && (
         <Button
           onClick={handleAddAnother}
           className="margin-top-2"

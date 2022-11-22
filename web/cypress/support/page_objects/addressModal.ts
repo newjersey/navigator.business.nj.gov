@@ -25,9 +25,11 @@ class AddressModal {
     cy.get('[data-testid="modal-button-primary"]').click();
   }
 
-  selectState(state: string) {
+  selectState(state?: string) {
     this.getState().click();
-    cy.get('[role="listbox"]').contains(state).click();
+    cy.get('[role="listbox"]')
+      .contains(state ? state : "")
+      .click();
   }
 
   typeFullName(name: string) {
@@ -39,8 +41,11 @@ class AddressModal {
   typeAddressLine2(name: string) {
     this.getAddressLine2().clear().type(name).blur();
   }
-  typeCity(name: string) {
-    this.getCity().clear().type(name).blur();
+  typeCity(name?: string) {
+    this.getCity()
+      .clear()
+      .type(name ? name : "")
+      .blur();
   }
   typeZipCode(name: string) {
     this.getZipCode().clear().type(name).blur();

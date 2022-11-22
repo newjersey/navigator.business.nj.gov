@@ -46,9 +46,11 @@ export const BusinessNameStep = (): ReactElement => {
   }, [nameAvailability, setBusinessNameAvailability]);
 
   const setNameInFormationData = () => {
-    setFormationFormData({
-      ...state.formationFormData,
-      businessName: currentName,
+    setFormationFormData((previousFormationData) => {
+      return {
+        ...previousFormationData,
+        businessName: currentName,
+      };
     });
   };
 

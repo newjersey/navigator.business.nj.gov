@@ -1,36 +1,30 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`formationData createEmptyFormationAddress returns the correct object 1`] = `
-{
-  "addressCity": "",
-  "addressLine1": "",
-  "addressLine2": "",
-  "addressState": "",
-  "addressZipCode": "",
-  "name": "",
-  "signature": false,
-}
-`;
-
 exports[`formationData createEmptyFormationFormData returns the correct object 1`] = `
 {
+  "addressCity": undefined,
+  "addressCountry": "US",
+  "addressLine1": "",
+  "addressLine2": "",
+  "addressMunicipality": undefined,
+  "addressProvince": undefined,
+  "addressState": {
+    "name": "New Jersey",
+    "shortCode": "NJ",
+  },
+  "addressZipCode": "",
   "agentEmail": "",
   "agentName": "",
   "agentNumber": "",
   "agentNumberOrManual": "NUMBER",
-  "agentOfficeAddressCity": "",
+  "agentOfficeAddressCity": undefined,
   "agentOfficeAddressLine1": "",
   "agentOfficeAddressLine2": "",
-  "agentOfficeAddressState": "NJ",
+  "agentOfficeAddressMunicipality": undefined,
   "agentOfficeAddressZipCode": "",
   "agentUseAccountInfo": false,
   "agentUseBusinessAddress": false,
   "annualReportNotification": true,
-  "businessAddressCity": undefined,
-  "businessAddressLine1": "",
-  "businessAddressLine2": "",
-  "businessAddressState": "NJ",
-  "businessAddressZipCode": "",
   "businessName": "",
   "businessPurpose": "",
   "businessStartDate": "",
@@ -48,13 +42,17 @@ exports[`formationData createEmptyFormationFormData returns the correct object 1
   "corpWatchNotification": true,
   "createLimitedPartnerTerms": "",
   "dissolution": "",
+  "foreignDateOfFormation": undefined,
+  "foreignGoodStandingFile": undefined,
+  "foreignStateOfFormation": undefined,
   "getDistributionTerms": "",
+  "incorporators": undefined,
   "makeDistributionTerms": "",
-  "members": [],
+  "members": undefined,
   "officialFormationDocument": true,
   "paymentType": undefined,
-  "provisions": [],
-  "signers": [],
+  "provisions": undefined,
+  "signers": undefined,
   "withdrawals": "",
 }
 `;

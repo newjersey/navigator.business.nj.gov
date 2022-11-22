@@ -1,11 +1,6 @@
 import { decideABExperience } from "@shared/businessUser";
 import { getCurrentDate, parseDate } from "@shared/dateHelpers";
-import {
-  corpLegalStructures,
-  createEmptyFormationAddress,
-  createEmptyFormationFormData,
-  FormationLegalType,
-} from "@shared/formationData";
+import { createEmptyFormationFormData } from "@shared/formationData";
 import { createEmptyUserData, UserData } from "@shared/userData";
 import { Request, Response, Router } from "express";
 import jwt from "jsonwebtoken";
@@ -165,36 +160,25 @@ export const userRouterFactory = (
       return userData;
     }
 
-    if (await legalStructureHasChanged(oldUserData, userData)) {
+    if (legalStructureHasChanged(oldUserData, userData)) {
       // prevent legal structure from changing is business has been formed
-      if (await businessHasFormed(oldUserData)) {
-        userData = {
-          ...userData,
-          profileData: {
-            ...userData.profileData,
-            legalStructureId: oldUserData.profileData.legalStructureId,
-          },
-        };
-      } else {
-        userData = {
-          ...userData,
-          formationData: {
-            formationResponse: undefined,
-            getFilingResponse: undefined,
-            completedFilingPayment: false,
-            formationFormData: createEmptyFormationFormData(),
-          },
-        };
-
-        if (
-          ![...corpLegalStructures, "limited-partnership"].includes(
-            userData.profileData.legalStructureId as FormationLegalType
-          ) &&
-          userData.formationData.formationFormData.signers.length === 0
-        ) {
-          userData.formationData.formationFormData.signers.push(createEmptyFormationAddress());
-        }
-      }
+      userData = businessHasFormed(oldUserData)
+        ? {
+            ...userData,
+            profileData: {
+              ...userData.profileData,
+              legalStructureId: oldUserData.profileData.legalStructureId,
+            },
+          }
+        : {
+            ...userData,
+            formationData: {
+              formationResponse: undefined,
+              getFilingResponse: undefined,
+              completedFilingPayment: false,
+              formationFormData: createEmptyFormationFormData(),
+            },
+          };
     }
 
     return userData;

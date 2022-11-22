@@ -21,9 +21,11 @@ export const FormationStartDate = (): ReactElement => {
 
   const handleChange = (value: string) => {
     setFieldInteracted(FIELD_NAME);
-    setFormationFormData({
-      ...state.formationFormData,
-      businessStartDate: value,
+    setFormationFormData((previousFormationData) => {
+      return {
+        ...previousFormationData,
+        businessStartDate: value,
+      };
     });
   };
 

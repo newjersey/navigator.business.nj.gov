@@ -8,8 +8,9 @@ import {
   generateProfileData,
   generateSidebarCardContent,
   generateUserData,
+  getProfileDataForUnfilteredOpportunities,
 } from "@/test/factories";
-import { getProfileDataForUnfilteredOpportunities, markdownToText } from "@/test/helpers";
+import { markdownToText } from "@/test/helpers";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { useMockProfileData, useMockUserData } from "@/test/mock/mockUseUserData";
 import {
@@ -197,7 +198,7 @@ describe("SidebarCards List", () => {
     });
 
     it("links to task page for certifications", () => {
-      useMockProfileData(getProfileDataForUnfilteredOpportunities);
+      useMockProfileData(getProfileDataForUnfilteredOpportunities());
       const certifications = [generateCertification({ urlSlug: "cert1", name: "Cert 1" })];
       renderPage({ certifications });
       expect(screen.getByText("Cert 1")).toHaveAttribute("href", "/certification/cert1");
@@ -259,7 +260,7 @@ describe("SidebarCards List", () => {
     });
 
     it("links to task page for fundings", () => {
-      useMockProfileData(getProfileDataForUnfilteredOpportunities);
+      useMockProfileData(getProfileDataForUnfilteredOpportunities());
       const fundings = [
         generateFunding({ urlSlug: "opp", name: "Funding Opp", status: "rolling application" }),
       ];
@@ -305,7 +306,7 @@ describe("SidebarCards List", () => {
     });
 
     it("moves an opportunity to/from Hidden accordion when hide/unhide is clicked", () => {
-      renderWithUserData(generateUserData({ profileData: getProfileDataForUnfilteredOpportunities }), {
+      renderWithUserData(generateUserData({ profileData: getProfileDataForUnfilteredOpportunities() }), {
         certifications,
         fundings,
       });
@@ -337,7 +338,7 @@ describe("SidebarCards List", () => {
 
     it("saves hidden opportunities to user data", () => {
       const initialUserData = generateUserData({
-        profileData: getProfileDataForUnfilteredOpportunities,
+        profileData: getProfileDataForUnfilteredOpportunities(),
         preferences: generatePreferences({
           hiddenCertificationIds: [],
           hiddenFundingIds: [],
@@ -359,7 +360,7 @@ describe("SidebarCards List", () => {
 
     it("hides opportunities from user data", () => {
       const initialUserData = generateUserData({
-        profileData: getProfileDataForUnfilteredOpportunities,
+        profileData: getProfileDataForUnfilteredOpportunities(),
         preferences: generatePreferences({
           hiddenCertificationIds: [],
           hiddenFundingIds: ["fund1-id"],
@@ -375,7 +376,7 @@ describe("SidebarCards List", () => {
 
     it("displays empty state when all opportunities are hidden", () => {
       const initialUserData = generateUserData({
-        profileData: getProfileDataForUnfilteredOpportunities,
+        profileData: getProfileDataForUnfilteredOpportunities(),
         preferences: generatePreferences({
           hiddenCertificationIds: ["cert1-id"],
           hiddenFundingIds: ["fund1-id"],

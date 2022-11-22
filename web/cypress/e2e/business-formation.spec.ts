@@ -3,7 +3,8 @@ import { FormationFormData, LookupIndustryById, randomInt } from "@businessnjgov
 import {
   AdditionalFormation,
   completeNewBusinessOnboarding,
-  generateFormationAddress,
+  generateFormationMember,
+  generateFormationSigner,
   generateMunicipality,
 } from "cypress/support/helpers";
 import { onAddressModal } from "cypress/support/page_objects/addressModal";
@@ -22,10 +23,10 @@ describe("Business Formation [feature] [all] [group2]", () => {
     const businessNameSearch = "My Cool Business";
     const businessStartDate = dayjs().add(2, "months").format("MM/DD/YYYY");
     const businessSuffix = "LIMITED LIABILITY CO";
-    const businessAddressLine1 = `some-business-address-1-${randomInt()}`;
-    const businessAddressLine2 = `some-business-address-2-${randomInt()}`;
-    const businessAddressCity = generateMunicipality({ displayName: "Allendale" });
-    const businessAddressZipCode = "07005";
+    const addressLine1 = `some-business-address-1-${randomInt()}`;
+    const addressLine2 = `some-business-address-2-${randomInt()}`;
+    const addressMunicipality = generateMunicipality({ displayName: "Allendale" });
+    const addressZipCode = "07005";
     const businessPurpose = "My Business Purpose...";
     const provisions: FormationFormData["provisions"] = ["My Provision 1", "My Provision 2"];
     const agentNumberOrManual: FormationFormData["agentNumberOrManual"] = "MANUAL_ENTRY";
@@ -35,16 +36,16 @@ describe("Business Formation [feature] [all] [group2]", () => {
     const getRegisteredAgentSameAsBusinessAddressCheckbox = false;
     const agentOfficeAddressLine1 = "123 Agent Main St.";
     const agentOfficeAddressLine2 = "Apt Agent 321";
-    const agentOfficeAddressCity = "My City";
+    const agentOfficeAddressMunicipality = generateMunicipality({ displayName: "Allendale" });
     const agentOfficeAddressZipCode = "07666";
     const members: FormationFormData["members"] = [
-      generateFormationAddress({ addressZipCode: "07333" }),
-      generateFormationAddress({ addressZipCode: "07996" }),
+      generateFormationMember({ addressZipCode: "07333" }),
+      generateFormationMember({ addressZipCode: "07996" }),
     ];
-    const signers: FormationFormData["members"] = [
-      generateFormationAddress({}),
-      generateFormationAddress({}),
-      generateFormationAddress({}),
+    const signers: FormationFormData["signers"] = [
+      generateFormationSigner({}, legalStructureId),
+      generateFormationSigner({}, legalStructureId),
+      generateFormationSigner({}, legalStructureId),
     ];
     const contactFirstName = "Joe";
     const contactLastName = "Smith";
@@ -64,10 +65,10 @@ describe("Business Formation [feature] [all] [group2]", () => {
 
     typeDesignatorAndStartDate({ businessStartDate, businessSuffix });
     typeBusinessAddress({
-      businessAddressLine1,
-      businessAddressLine2,
-      businessAddressCity,
-      businessAddressZipCode,
+      addressLine1,
+      addressLine2,
+      addressMunicipality,
+      addressZipCode,
     });
     typeBusinessPurpose(businessPurpose);
     typeProvisions(provisions);
@@ -81,7 +82,7 @@ describe("Business Formation [feature] [all] [group2]", () => {
       getRegisteredAgentSameAsBusinessAddressCheckbox,
       agentOfficeAddressLine1,
       agentOfficeAddressLine2,
-      agentOfficeAddressCity,
+      agentOfficeAddressMunicipality,
       agentOfficeAddressZipCode,
     });
 
@@ -125,38 +126,32 @@ const typeDesignatorAndStartDate = ({ businessSuffix, businessStartDate }: Parti
 };
 
 const typeBusinessAddress = ({
-  businessAddressLine1,
-  businessAddressLine2,
-  businessAddressCity,
-  businessAddressZipCode,
+  addressLine1,
+  addressLine2,
+  addressMunicipality,
+  addressZipCode,
 }: Partial<FormationFormData>) => {
-  if (businessAddressLine1) {
-    onBusinessFormationPage.typeBusinessAddressLine1(businessAddressLine1 as string);
-    onBusinessFormationPage
-      .getBusinessAddressLine1()
-      .invoke("prop", "value")
-      .should("contain", businessAddressLine1);
+  if (addressLine1) {
+    onBusinessFormationPage.typeBusinessAddressLine1(addressLine1 as string);
+    onBusinessFormationPage.getBusinessAddressLine1().invoke("prop", "value").should("contain", addressLine1);
   }
-  if (businessAddressLine2) {
-    onBusinessFormationPage.typeBusinessAddressLine2(businessAddressLine2 as string);
-    onBusinessFormationPage
-      .getBusinessAddressLine2()
-      .invoke("prop", "value")
-      .should("contain", businessAddressLine2);
+  if (addressLine2) {
+    onBusinessFormationPage.typeBusinessAddressLine2(addressLine2 as string);
+    onBusinessFormationPage.getBusinessAddressLine2().invoke("prop", "value").should("contain", addressLine2);
   }
-  if (businessAddressCity) {
-    onBusinessFormationPage.selectBusinessAddressCity(businessAddressCity.displayName);
+  if (addressMunicipality) {
+    onBusinessFormationPage.selectBusinessAddressMunicipality(addressMunicipality.displayName);
     onBusinessFormationPage
-      .getBusinessAddressCity()
+      .getBusinessAddressMunicipality()
       .invoke("prop", "value")
-      .should("contain", businessAddressCity.displayName);
+      .should("contain", addressMunicipality.displayName);
   }
-  if (businessAddressZipCode) {
-    onBusinessFormationPage.typeBusinessAddressZipCode(businessAddressZipCode);
+  if (addressZipCode) {
+    onBusinessFormationPage.typeBusinessAddressZipCode(addressZipCode);
     onBusinessFormationPage
       .getBusinessAddressZipCode()
       .invoke("prop", "value")
-      .should("contain", businessAddressZipCode);
+      .should("contain", addressZipCode);
   }
 };
 
@@ -167,6 +162,9 @@ const typeBusinessPurpose = (businessPurpose: FormationFormData["businessPurpose
 };
 
 const typeProvisions = (provisions: FormationFormData["provisions"]) => {
+  if (!provisions) {
+    return;
+  }
   onBusinessFormationPage.clickAddProvisions();
   for (const [index, privision] of provisions.entries()) {
     onBusinessFormationPage.typeProvision(privision, index);
@@ -186,7 +184,7 @@ const selectAndTypeRegisteredAgent = ({
   getRegisteredAgentSameAsBusinessAddressCheckbox,
   agentOfficeAddressLine1,
   agentOfficeAddressLine2,
-  agentOfficeAddressCity,
+  agentOfficeAddressMunicipality,
   agentOfficeAddressZipCode,
 }: Partial<AdditionalFormation>) => {
   if (agentNumberOrManual === "NUMBER") {
@@ -224,8 +222,7 @@ const selectAndTypeRegisteredAgent = ({
       onBusinessFormationPage.getRegisteredAgentManualRadio().should("be.checked");
       onBusinessFormationPage.getRegisteredAgentAddressLine1().should("be.disabled");
       onBusinessFormationPage.getRegisteredAgentAddressLine2().should("be.disabled");
-      onBusinessFormationPage.getRegisteredAgentCity().should("be.disabled");
-      onBusinessFormationPage.getRegisteredAgentState().should("be.disabled");
+      onBusinessFormationPage.getRegisteredAgentMunicipality().should("be.disabled");
       onBusinessFormationPage.getRegisteredAgentZipCode().should("be.disabled");
     }
     if (agentOfficeAddressLine1) {
@@ -242,12 +239,13 @@ const selectAndTypeRegisteredAgent = ({
         .invoke("prop", "value")
         .should("contain", agentOfficeAddressLine2);
     }
-    if (agentOfficeAddressCity) {
-      onBusinessFormationPage.typeRegisteredAgentCity(agentOfficeAddressCity);
+
+    if (agentOfficeAddressMunicipality) {
+      onBusinessFormationPage.selectRegisteredAgentMunicipality(agentOfficeAddressMunicipality.displayName);
       onBusinessFormationPage
-        .getRegisteredAgentCity()
+        .getRegisteredAgentMunicipality()
         .invoke("prop", "value")
-        .should("contain", agentOfficeAddressCity);
+        .should("contain", agentOfficeAddressMunicipality.displayName);
     }
     if (agentOfficeAddressZipCode) {
       onBusinessFormationPage.typeRegisteredAgentZipCode(agentOfficeAddressZipCode);
@@ -259,7 +257,7 @@ const selectAndTypeRegisteredAgent = ({
   }
 };
 
-const addMembersToFormation = (members: FormationFormData["members"]) => {
+const addMembersToFormation = (members: FormationFormData["members"] = []) => {
   for (const membersObj of members) {
     onBusinessFormationPage.clickAddNewMembers();
     onAddressModal.typeFullName(membersObj.name);
@@ -274,8 +272,11 @@ const addMembersToFormation = (members: FormationFormData["members"]) => {
     onAddressModal.typeCity(membersObj.addressCity);
     onAddressModal.getCity().invoke("prop", "value").should("contain", membersObj.addressCity);
 
-    onAddressModal.selectState(membersObj.addressState);
-    onAddressModal.getState().invoke("prop", "value").should("contain", membersObj.addressState);
+    onAddressModal.selectState(membersObj.addressState ? membersObj.addressState.shortCode : "");
+    onAddressModal
+      .getState()
+      .invoke("prop", "value")
+      .should("contain", membersObj.addressState ? membersObj.addressState.shortCode : "");
 
     onAddressModal.typeZipCode(membersObj.addressZipCode);
     onAddressModal.getZipCode().invoke("prop", "value").should("contain", membersObj.addressZipCode);
@@ -284,7 +285,7 @@ const addMembersToFormation = (members: FormationFormData["members"]) => {
   }
 };
 
-const addSigners = (signers: FormationFormData["signers"]) => {
+const addSigners = (signers: FormationFormData["signers"] = []) => {
   for (const [index, signer] of signers.entries()) {
     onBusinessFormationPage.typeSigner(signer.name, index);
     onBusinessFormationPage.getSigner(index).invoke("prop", "value").should("contain", signer.name);

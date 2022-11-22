@@ -282,30 +282,28 @@ describe("<BusinessFormationPaginator />", () => {
 
       describe("business step", () => {
         it("saves municipality to profile", async () => {
-          const municipality = generateMunicipality({ displayName: "New Town" });
-          const municipality2 = generateMunicipality({ displayName: "Newark" });
           const userDataWithMunicipality = {
             ...initialUserData,
             profileData: {
               ...initialUserData.profileData,
-              municipality: municipality2,
+              municipality: generateMunicipality({ displayName: "Newark", name: "Newark" }),
             },
           };
-          const page = preparePage(userDataWithMunicipality, displayContent, [municipality, municipality2]);
+          const page = preparePage(userDataWithMunicipality, displayContent, [
+            generateMunicipality({ displayName: "New Town", name: "New Town" }),
+          ]);
           await page.stepperClickToBusinessStep();
 
-          expect((screen.getByLabelText("Business address city") as HTMLInputElement).value).toEqual(
-            "Newark"
-          );
-          page.selectByText("Business address city", "New Town");
-          expect((screen.getByLabelText("Business address city") as HTMLInputElement).value).toEqual(
+          expect((screen.getByLabelText("Address municipality") as HTMLInputElement).value).toEqual("Newark");
+          page.selectByText("Address municipality", "New Town");
+          expect((screen.getByLabelText("Address municipality") as HTMLInputElement).value).toEqual(
             "New Town"
           );
           switchStepFunction();
           await waitFor(() => {
             expect(currentUserData().profileData.municipality?.displayName).toEqual("New Town");
           });
-          expect(currentUserData().formationData.formationFormData.businessAddressCity?.displayName).toEqual(
+          expect(currentUserData().formationData.formationFormData.addressMunicipality?.displayName).toEqual(
             "New Town"
           );
         });
@@ -344,7 +342,7 @@ describe("<BusinessFormationPaginator />", () => {
           const page = createFormationPageHelpers();
           await page.stepperClickToBusinessStep();
 
-          page.selectByText("Business address city", "New Town");
+          page.selectByText("Address municipality", "New Town");
 
           switchStepFunction();
           await waitFor(() => {
@@ -378,7 +376,7 @@ describe("<BusinessFormationPaginator />", () => {
 
           const page = preparePage(userDataWithMunicipality, displayContent, [newTownMuncipality]);
           await page.stepperClickToBusinessStep();
-          page.selectByText("Business address city", "New Town");
+          page.selectByText("Address municipality", "New Town");
 
           switchStepFunction();
           await waitFor(() => {
@@ -391,23 +389,19 @@ describe("<BusinessFormationPaginator />", () => {
         });
 
         it("does not send analytics when municipality was already entered", async () => {
-          const newTownMuncipality = generateMunicipality({ displayName: "New Town" });
-          const newarkMuncipality = generateMunicipality({ displayName: "Newark" });
-
           const userDataWithMunicipality = {
             ...initialUserData,
             profileData: {
               ...initialUserData.profileData,
-              municipality: newarkMuncipality,
+              municipality: generateMunicipality({ displayName: "Newark" }),
             },
           };
 
           const page = preparePage(userDataWithMunicipality, displayContent, [
-            newTownMuncipality,
-            newarkMuncipality,
+            generateMunicipality({ displayName: "New Town" }),
           ]);
           await page.stepperClickToBusinessStep();
-          page.selectByText("Business address city", "New Town");
+          page.selectByText("Address municipality", "New Town");
 
           switchStepFunction();
           await waitFor(() => {
@@ -465,9 +459,9 @@ describe("<BusinessFormationPaginator />", () => {
       it("shows existing inline errors when visiting an INCOMPLETE step with inline errors", async () => {
         const page = preparePage(initialUserData, displayContent);
         await page.stepperClickToBusinessStep();
-        page.fillText("Business address zip code", "22222");
+        page.fillText("Address zip code", "22222");
         expect(
-          screen.getByText(Config.businessFormationDefaults.businessAddressZipCodeErrorText)
+          screen.getByText(Config.businessFormationDefaults.addressZipCodeErrorText)
         ).toBeInTheDocument();
 
         switchStepFunction();
@@ -476,7 +470,7 @@ describe("<BusinessFormationPaginator />", () => {
         await page.stepperClickToBusinessStep();
         expect(page.getStepStateInStepper(LookupStepIndexByName("Business"))).toEqual("INCOMPLETE-ACTIVE");
         expect(
-          screen.getByText(Config.businessFormationDefaults.businessAddressZipCodeErrorText)
+          screen.getByText(Config.businessFormationDefaults.addressZipCodeErrorText)
         ).toBeInTheDocument();
       });
     };
@@ -589,7 +583,10 @@ describe("<BusinessFormationPaginator />", () => {
           ...initialUserData,
           formationData: {
             ...initialUserData.formationData,
-            formationFormData: generateFormationFormData({}, "limited-liability-company"),
+            formationFormData: generateFormationFormData(
+              {},
+              { legalStructureId: "limited-liability-company" }
+            ),
           },
         };
       });
@@ -619,7 +616,7 @@ describe("<BusinessFormationPaginator />", () => {
               ...initialUserData.formationData,
               formationFormData: generateFormationFormData(
                 { agentNumberOrManual: "NUMBER", agentNumber: "1111111" },
-                "limited-liability-company"
+                { legalStructureId: "limited-liability-company" }
               ),
               formationResponse: generateFormationSubmitResponse({
                 success: false,
@@ -686,7 +683,10 @@ describe("<BusinessFormationPaginator />", () => {
             ...initialUserData,
             formationData: {
               ...initialUserData.formationData,
-              formationFormData: generateFormationFormData({}, "limited-liability-company"),
+              formationFormData: generateFormationFormData(
+                {},
+                { legalStructureId: "limited-liability-company" }
+              ),
               formationResponse: generateFormationSubmitResponse({
                 success: false,
                 errors: [

@@ -3,6 +3,7 @@ import {
   corpLegalStructures,
   FormationFields,
   FormationFormData,
+  incorporationLegalStructures,
 } from "@businessnjgovnavigator/shared/formationData";
 
 export const requiredFieldsForUser = (
@@ -13,10 +14,9 @@ export const requiredFieldsForUser = (
     "businessName",
     "businessSuffix",
     "businessStartDate",
-    "businessAddressCity",
-    "businessAddressLine1",
-    "businessAddressZipCode",
-    "signers",
+    "addressMunicipality",
+    "addressLine1",
+    "addressZipCode",
     "paymentType",
     "contactFirstName",
     "contactLastName",
@@ -33,9 +33,14 @@ export const requiredFieldsForUser = (
       "agentName",
       "agentEmail",
       "agentOfficeAddressLine1",
-      "agentOfficeAddressCity",
+      "agentOfficeAddressMunicipality",
       "agentOfficeAddressZipCode",
     ];
+  }
+  if (incorporationLegalStructures.includes(legalStructureId)) {
+    requiredFields.push("incorporators");
+  } else {
+    requiredFields.push("signers");
   }
 
   if (corpLegalStructures.includes(legalStructureId)) {

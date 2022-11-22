@@ -8,7 +8,12 @@ import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { corpLegalStructures } from "@businessnjgovnavigator/shared/";
+import {
+  corpLegalStructures,
+  createEmptyFormationIncorporator,
+  FormationIncorporator,
+  incorporationLegalStructures,
+} from "@businessnjgovnavigator/shared/";
 import { ReactElement, useContext } from "react";
 
 export const ContactsStep = (): ReactElement => {
@@ -20,10 +25,6 @@ export const ContactsStep = (): ReactElement => {
     return [...corpLegalStructures, "limited-liability-company"].includes(
       userData?.profileData.legalStructureId ?? ""
     );
-  };
-
-  const shouldShowSignersWithAddresses = (): boolean => {
-    return [...corpLegalStructures, "limited-partnership"].includes(state.legalStructureId);
   };
 
   return (
@@ -47,23 +48,36 @@ export const ContactsStep = (): ReactElement => {
             {getErrorStateForField("signers", state.formationFormData, undefined).label}
           </Alert>
         )}
-        {shouldShowSignersWithAddresses() ? (
-          <Addresses
-            fieldName={"signers"}
-            addressData={state.formationFormData.signers}
-            setData={(signers) => {
-              const members =
-                "limited-partnership" === state.legalStructureId ? signers : state.formationFormData.members;
-              setFormationFormData({ ...state.formationFormData, signers, members });
+        {doesFieldHaveError("incorporators") && (
+          <Alert variant="error">
+            {getErrorStateForField("incorporators", state.formationFormData, undefined).label}
+          </Alert>
+        )}
+        {incorporationLegalStructures.includes(state.legalStructureId) ? (
+          <Addresses<FormationIncorporator>
+            createEmptyAddress={() => {
+              return createEmptyFormationIncorporator(state.legalStructureId);
+            }}
+            fieldName={"incorporators"}
+            addressData={state.formationFormData.incorporators ?? []}
+            setData={(incorporators) => {
+              setFormationFormData((previousFormationData) => {
+                return {
+                  ...previousFormationData,
+                  incorporators: incorporators,
+                };
+              });
             }}
             defaultAddress={
               "limited-partnership" === state.legalStructureId
                 ? {
-                    addressCity: state.formationFormData.businessAddressCity?.name as string,
-                    addressLine1: state.formationFormData.businessAddressLine1,
-                    addressLine2: state.formationFormData.businessAddressLine2,
-                    addressState: state.formationFormData.businessAddressState,
-                    addressZipCode: state.formationFormData.businessAddressZipCode,
+                    addressCity:
+                      state.formationFormData.addressMunicipality?.displayName ??
+                      state.formationFormData.addressCity,
+                    addressLine1: state.formationFormData.addressLine1,
+                    addressLine2: state.formationFormData.addressLine2,
+                    addressState: state.formationFormData.addressState,
+                    addressZipCode: state.formationFormData.addressZipCode,
                   }
                 : undefined
             }

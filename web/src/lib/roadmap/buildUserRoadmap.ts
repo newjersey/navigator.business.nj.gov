@@ -1,34 +1,12 @@
 import { fetchMunicipalityById } from "@/lib/async-content-fetchers/fetchMunicipalities";
+import { allowFormation } from "@/lib/domain-logic/allowFormation";
 import { getIsApplicableToFunctionByFieldName } from "@/lib/domain-logic/essentialQuestions";
 import { getNaicsDisplayMd } from "@/lib/domain-logic/getNaicsDisplayMd";
 import { buildRoadmap } from "@/lib/roadmap/roadmapBuilder";
 import { Roadmap } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
-import {
-  FormationLegalType,
-  FormationLegalTypes,
-  LookupIndustryById,
-  LookupLegalStructureById,
-  ProfileData,
-} from "@businessnjgovnavigator/shared/";
+import { LookupIndustryById, LookupLegalStructureById, ProfileData } from "@businessnjgovnavigator/shared/";
 import { isInterstateTransportApplicable } from "../domain-logic/isInterstateTransportApplicable";
-
-const enableFormation = (legalStructureId: string): boolean => {
-  switch (legalStructureId) {
-    case "limited-liability-partnership": {
-      return process.env.FEATURE_BUSINESS_LLP === "true";
-    }
-    case "limited-partnership": {
-      return process.env.FEATURE_BUSINESS_LP === "true";
-    }
-    case "c-corporation": {
-      return process.env.FEATURE_BUSINESS_CCORP === "true";
-    }
-
-    default:
-      return true;
-  }
-};
 
 export const buildUserRoadmap = async (profileData: ProfileData): Promise<Roadmap> => {
   let industryId = profileData.industryId;
@@ -177,15 +155,11 @@ const getLegalStructureAddOns = (profileData: ProfileData): string[] => {
   if (!profileData.legalStructureId) {
     return [];
   }
-
   const addOns = [];
-  if (profileData.businessPersona !== "FOREIGN") {
-    if (
-      FormationLegalTypes.includes(profileData.legalStructureId as FormationLegalType) &&
-      enableFormation(profileData.legalStructureId)
-    ) {
-      addOns.push("formation");
-    } else if (LookupLegalStructureById(profileData.legalStructureId).requiresPublicFiling) {
+  if (allowFormation(profileData.legalStructureId, profileData.businessPersona)) {
+    addOns.push("formation");
+  } else if (profileData.businessPersona != "FOREIGN") {
+    if (LookupLegalStructureById(profileData.legalStructureId).requiresPublicFiling) {
       addOns.push("public-record-filing");
     } else if (LookupLegalStructureById(profileData.legalStructureId).hasTradeName) {
       addOns.push("trade-name");
@@ -196,14 +170,13 @@ const getLegalStructureAddOns = (profileData: ProfileData): string[] => {
     } else if (LookupLegalStructureById(profileData.legalStructureId).hasTradeName) {
       addOns.push("trade-name");
     }
-    if (
-      profileData.legalStructureId === "s-corporation" ||
-      profileData.legalStructureId === "c-corporation"
-    ) {
-      addOns.push("scorp-ccorp-foreign");
-    }
   }
-
+  if (
+    profileData.businessPersona == "FOREIGN" &&
+    (profileData.legalStructureId === "s-corporation" || profileData.legalStructureId === "c-corporation")
+  ) {
+    addOns.push("scorp-ccorp-foreign");
+  }
   return addOns;
 };
 

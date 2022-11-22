@@ -25,7 +25,7 @@ export const shouldRenderFilingsCalendarTaxAccess = (userData?: UserData) => {
     userData &&
     LookupOperatingPhaseById(userData.profileData.operatingPhase).displayTaxAccessButton &&
     LookupLegalStructureById(userData.profileData.legalStructureId).requiresPublicFiling &&
-    process.env.FEATURE_TAX_CALENDAR == "true"
+    process.env.FEATURE_BUSINESS_FLC == "true"
   );
 };
 

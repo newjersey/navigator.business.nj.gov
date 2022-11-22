@@ -1,10 +1,16 @@
 import { formatTaxId } from "@/lib/domain-logic/formatTaxId";
 import { isEntityIdApplicable } from "@/lib/domain-logic/isEntityIdApplicable";
 import {
+  allFormationLegalTypes,
+  arrayOfCountriesObjects as countries,
   arrayOfSectors,
   arrayOfStateObjects as states,
+  BusinessSignerTypeMap,
   FormationAddress,
   FormationFormData,
+  FormationLegalType,
+  FormationMember,
+  FormationSigner,
   Industries,
   Industry,
   LegalStructure,
@@ -14,7 +20,7 @@ import {
   Municipality,
   randomInt,
   randomIntFromInterval,
-} from "@businessnjgovnavigator/shared/";
+} from "@businessnjgovnavigator/shared";
 import { onDashboardPage } from "./page_objects/dashboardPage";
 import { onOnboardingPage } from "./page_objects/onboardingPage";
 import { onProfilePage } from "./page_objects/profilePage";
@@ -868,22 +874,86 @@ export const generateMunicipality = (overrides: Partial<Municipality>): Municipa
   };
 };
 
-export const generateFormationAddress = (overrides: Partial<FormationAddress>): FormationAddress => ({
-  name: `some-members-name-${randomInt()}`,
-  addressLine1: `some-members-address-1-${randomInt()}`,
-  addressLine2: `some-members-address-2-${randomInt()}`,
-  addressCity: `some-members-address-city-${randomInt()}`,
-  addressState: generateStateItem().shortCode,
-  addressZipCode: generateZipCode(),
-  signature: false,
-  ...overrides,
-});
+export const generateFormationUSAddress = (overrides: Partial<FormationAddress>): FormationAddress => {
+  return {
+    addressLine1: `some-address-1-${randomInt()}`,
+    addressLine2: `some-address-2-${randomInt()}`,
+    addressCity: `some-address-city-${randomInt()}`,
+    addressState: randomElementFromArray(
+      states.filter((state) => {
+        return state.shortCode != "NJ";
+      })
+    ),
+    addressCountry: "US",
+    addressZipCode: randomInt(5).toString(),
+    addressMunicipality: undefined,
+    addressProvince: undefined,
+    ...overrides,
+  };
+};
 
-const generateStateItem = () => states[randomIntFromInterval("0", (states.length - 1).toString())];
+export const generateFormationForeignAddress = (overrides: Partial<FormationAddress>): FormationAddress => {
+  return {
+    addressLine1: `some-address-1-${randomInt()}`,
+    addressLine2: `some-address-2-${randomInt()}`,
+    addressCity: `some-address-city-${randomInt()}`,
+    addressState: undefined,
+    addressMunicipality: undefined,
+    addressCountry: randomElementFromArray(
+      countries.filter((item) => {
+        return item.shortCode != "US";
+      })
+    ).shortCode,
+    addressProvince: `some-address-province-${randomInt()}`,
+    addressZipCode: randomInt(11).toString(),
+    ...overrides,
+  };
+};
 
-const generateZipCode = () => {
-  const zip = randomIntFromInterval("1", "99999").toString();
-  return "0".repeat(5 - zip.length) + zip;
+export const generateFormationNJAddress = (overrides: Partial<FormationAddress>): FormationAddress => {
+  return {
+    addressLine1: `some-address-1-${randomInt()}`,
+    addressLine2: `some-address-2-${randomInt()}`,
+    addressMunicipality: generateMunicipality({ displayName: "Newark", name: "Newark" }),
+    addressCity: undefined,
+    addressProvince: undefined,
+    addressCountry: "US",
+    addressState: { shortCode: "NJ", name: "New Jersey" },
+    addressZipCode: randomIntFromInterval("07001", "08999").toString(),
+    ...overrides,
+  };
+};
+
+export const generateFormationMember = (overrides: Partial<FormationMember>): FormationMember => {
+  return {
+    name: `some-members-name-${randomInt()}`,
+    ...generateFormationUSAddress({}),
+    ...overrides,
+  };
+};
+
+export const randomFormationLegalType = (): FormationLegalType => {
+  return randomElementFromArray(allFormationLegalTypes as unknown as string[]) as FormationLegalType;
+};
+
+export const generateFormationSigner = (
+  overrides: Partial<FormationSigner>,
+  legalStructureId?: FormationLegalType
+): FormationSigner => {
+  return {
+    name: `some-signer-name-${randomInt()}`,
+    signature: false,
+    title: getSignerType(legalStructureId),
+    ...overrides,
+  };
+};
+
+const getSignerType = (legalStructureId?: FormationLegalType) => {
+  return randomElementFromArray(
+    legalStructureId
+      ? BusinessSignerTypeMap[legalStructureId]
+      : BusinessSignerTypeMap[randomFormationLegalType()]
+  );
 };
 
 export const randomHomeBasedIndustry = (): Industry => {

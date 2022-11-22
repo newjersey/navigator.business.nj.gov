@@ -1,5 +1,5 @@
 import { getCurrentDate } from "@shared/dateHelpers";
-import { createEmptyFormationAddress, createEmptyFormationFormData } from "@shared/formationData";
+import { createEmptyFormationFormData } from "@shared/formationData";
 import { Express } from "express";
 import jwt from "jsonwebtoken";
 import request from "supertest";
@@ -388,83 +388,6 @@ describe("userRouter", () => {
             getFilingResponse: undefined,
             completedFilingPayment: false,
           },
-        });
-      });
-
-      it("does not add a blank signer if the legal structure is a corp", async () => {
-        mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
-        const formationData = generateFormationData({});
-        const updatedFormationData = {
-          ...formationData,
-          getFilingResponse: generateGetFilingResponse({ success: false }),
-        };
-        const existingProfileUserData = generateUserData({
-          user: generateUser({ id: "123" }),
-          profileData: generateProfileData({ legalStructureId: "limited-liability-company" }),
-          formationData: updatedFormationData,
-        });
-
-        const newProfileData = {
-          ...existingProfileUserData,
-          profileData: {
-            ...existingProfileUserData.profileData,
-            legalStructureId: "c-corporation",
-          },
-          formationData: {
-            ...formationData,
-            formationFormData: createEmptyFormationFormData(),
-          },
-        };
-
-        stubUserDataClient.get.mockResolvedValue(existingProfileUserData);
-        stubUserDataClient.put.mockResolvedValue(newProfileData);
-
-        const response = await request(app)
-          .post(`/users`)
-          .send(newProfileData)
-          .set("Authorization", "Bearer user-123-token");
-
-        expect(response.body.formationData.formationFormData.signers.length).toBe(0);
-        expect(stubUserDataClient.put).toHaveBeenCalledWith({
-          ...newProfileData,
-        });
-      });
-
-      it("adds a blank signer if the legal structure is not a corp", async () => {
-        mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
-        const formationData = generateFormationData({});
-        const updatedFormationData = {
-          ...formationData,
-          getFilingResponse: generateGetFilingResponse({ success: false }),
-        };
-        const existingProfileUserData = generateUserData({
-          user: generateUser({ id: "123" }),
-          profileData: generateProfileData({ legalStructureId: "c-corporation" }),
-          formationData: updatedFormationData,
-        });
-
-        const newFormationData = createEmptyFormationFormData();
-        newFormationData.signers.push(createEmptyFormationAddress());
-
-        const newProfileData = {
-          ...existingProfileUserData,
-          profileData: {
-            ...existingProfileUserData.profileData,
-            legalStructureId: "limited-liability-company",
-          },
-          formationData: {
-            ...formationData,
-            formationFormData: newFormationData,
-          },
-        };
-
-        stubUserDataClient.get.mockResolvedValue(existingProfileUserData);
-        stubUserDataClient.put.mockResolvedValue(newProfileData);
-
-        await request(app).post(`/users`).send(newProfileData).set("Authorization", "Bearer user-123-token");
-
-        expect(stubUserDataClient.put).toHaveBeenCalledWith({
-          ...newProfileData,
         });
       });
     });

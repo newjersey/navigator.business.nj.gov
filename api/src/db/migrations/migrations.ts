@@ -95,6 +95,7 @@ import { migrate_v92_to_v93 } from "./v93_merge_childcare_roadmaps";
 import { migrate_v93_to_v94 } from "./v94_add_missing_formation_types";
 import { migrate_v94_to_v95 } from "./v95_added_new_tax_calendar_state";
 import { migrate_v95_to_v96 } from "./v96_added_date_field_to_tax_filing_data";
+import { migrate_v96_to_v97 } from "./v97_updating_formation_types";
 import { migrate_v8_to_v9 } from "./v9_add_license_status_to_data";
 
 export type MigrationFunction = (data: any) => any;
@@ -196,6 +197,7 @@ export const Migrations: MigrationFunction[] = [
   migrate_v93_to_v94,
   migrate_v94_to_v95,
   migrate_v95_to_v96,
+  migrate_v96_to_v97,
 ];
 
 export const CURRENT_VERSION = Migrations.length;

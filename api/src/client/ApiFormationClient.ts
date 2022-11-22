@@ -1,12 +1,16 @@
+import { CountriesShortCodes } from "@shared/countries";
 import { parseDateWithFormat } from "@shared/dateHelpers";
 import {
   BusinessSuffix,
-  corpLegalStructures,
+  ForeignGoodStandingFileObject,
   FormationLegalType,
   FormationSubmitError,
   FormationSubmitResponse,
   GetFilingResponse,
+  PaymentType,
+  SignerTitle,
 } from "@shared/formationData";
+import { StateNames, StateShortCodes } from "@shared/states";
 import { UserData } from "@shared/userData";
 import axios from "axios";
 import { FormationClient } from "../domain/types";
@@ -139,72 +143,85 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
       });
   };
 
-  const makePostBody = (userData: UserData, returnUrl: string, config: ApiConfig) => {
+  const makePostBody = (userData: UserData, returnUrl: string, config: ApiConfig): ApiSubmission => {
     const formationFormData = userData.formationData.formationFormData;
+
     const isManual = formationFormData.agentNumberOrManual === "MANUAL_ENTRY";
+
+    const isForeign = userData.profileData.businessPersona === "FOREIGN";
+    const toFormationLegalStructure: FormationLegalType = isForeign
+      ? (`foreign-${userData.profileData.legalStructureId}` as FormationLegalType)
+      : (userData.profileData.legalStructureId as FormationLegalType);
+
     const naicsCode = userData.profileData.naicsCode.length === 6 ? userData.profileData.naicsCode : "";
-    const isCorp = userData.profileData.legalStructureId
-      ? corpLegalStructures.includes(userData.profileData.legalStructureId as FormationLegalType)
-      : false;
-    const additionalProvisions =
-      formationFormData.provisions.length > 0 ||
-      BusinessTypeMap[userData.profileData.legalStructureId as FormationLegalType].additionalDataRequired
-        ? {
-            [BusinessTypeMap[userData.profileData.legalStructureId as FormationLegalType]
-              .provisionsFieldName]: formationFormData.provisions.map((it: string) => {
-              return { Provision: it };
-            }),
-            ...(userData.profileData.legalStructureId == "limited-partnership"
-              ? {
-                  AggregateAmount: formationFormData.combinedInvestment,
-                  LimitedCanCreateLimited: formationFormData.canCreateLimitedPartner ? "Yes" : "No",
-                  LimitedCanCreateLimitedTerms: formationFormData.createLimitedPartnerTerms,
-                  LimitedCanGetDistribution: formationFormData.canGetDistribution ? "Yes" : "No",
-                  LimitedCanGetDistributionTerms: formationFormData.getDistributionTerms,
-                  LimitedCanMakeDistribution: formationFormData.canMakeDistribution ? "Yes" : "No",
-                  LimitedCanMakeDistributionTerms: formationFormData.makeDistributionTerms,
-                  GeneralPartnerWithdrawal: formationFormData.withdrawals,
-                  DissolutionPlan: formationFormData.dissolution,
-                }
-              : {}),
-          }
-        : undefined;
 
-    let Incorporators:
-      | Array<{
-          Name: string;
-          Location: MemberLocation;
-        }>
-      | undefined;
+    const businessType = BusinessTypeMap[toFormationLegalStructure];
 
-    if (isCorp) {
-      Incorporators = formationFormData.signers.map((signer) => {
+    const isCorp = businessType.shortDescription == "DP";
+    const isForeignCorp = businessType.shortDescription == "FR";
+
+    const getAdditionalProvisions = (): Provisions => {
+      const additionalProvisions =
+        formationFormData.provisions?.map((it: string) => {
+          return { Provision: it };
+        }) ?? [];
+      if (toFormationLegalStructure == "limited-partnership") {
         return {
-          Name: signer.name,
-          Location: {
-            Address1: signer.addressLine1,
-            Address2: signer.addressLine2,
-            City: signer.addressCity,
-            State: signer.addressState,
-            Zipcode: signer.addressZipCode,
-            Country: "US",
-          } as MemberLocation,
+          AdditionalLimitedPartnership: {
+            AggregateAmount: formationFormData.combinedInvestment,
+            LimitedCanCreateLimited: formationFormData.canCreateLimitedPartner ? "Yes" : "No",
+            LimitedCanCreateLimitedTerms: formationFormData.createLimitedPartnerTerms,
+            LimitedCanGetDistribution: formationFormData.canGetDistribution ? "Yes" : "No",
+            LimitedCanGetDistributionTerms: formationFormData.getDistributionTerms,
+            LimitedCanMakeDistribution: formationFormData.canMakeDistribution ? "Yes" : "No",
+            LimitedCanMakeDistributionTerms: formationFormData.makeDistributionTerms,
+            GeneralPartnerWithdrawal: formationFormData.withdrawals,
+            DissolutionPlan: formationFormData.dissolution,
+            AdditionalProvisions: additionalProvisions,
+          },
         };
-      });
-    }
+      } else if (toFormationLegalStructure == "foreign-limited-partnership") {
+        return {
+          AdditionalForeignLimitedPartnership: {
+            AggregateAmount: formationFormData.combinedInvestment,
+            AdditionalProvisions: additionalProvisions,
+          },
+        };
+      } else if (toFormationLegalStructure == "limited-liability-company") {
+        return {
+          AdditionalLimitedLiabilityCompany: {
+            OtherProvisions: additionalProvisions,
+          },
+        };
+      } else if (toFormationLegalStructure == "limited-liability-partnership") {
+        return {
+          AdditionalLimitedLiabilityPartnership: {
+            OtherProvisions: additionalProvisions,
+          },
+        };
+      } else if (["c-corporation", "s-corporation"].includes(toFormationLegalStructure)) {
+        return {
+          AdditionalCCorpOrProfessionalCorp: {
+            AdditionalProvisions: additionalProvisions,
+          },
+        };
+      }
+      return {};
+    };
 
     return {
       Account: config.account,
       Key: config.key,
       ReturnUrl: `${returnUrl}?completeFiling=true`,
       FailureReturnUrl: `${returnUrl}?completeFiling=false`,
+      ForeignGoodStandingFile: isForeignCorp ? formationFormData.foreignGoodStandingFile : undefined,
       Payer: {
         CompanyName: formationFormData.businessName,
-        Address1: formationFormData.businessAddressLine1,
-        Address2: formationFormData.businessAddressLine2,
-        City: formationFormData.businessAddressCity?.name,
-        StateAbbreviation: "NJ",
-        ZipCode: formationFormData.businessAddressZipCode,
+        Address1: formationFormData.addressLine1,
+        Address2: formationFormData.addressLine2,
+        City: formationFormData.addressMunicipality?.name ?? formationFormData.addressCity ?? "",
+        StateAbbreviation: formationFormData.addressState?.shortCode,
+        ZipCode: formationFormData.addressZipCode,
         Email: userData.user.email,
       },
       Formation: {
@@ -213,33 +230,37 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
         ShortGoodStanding: formationFormData.certificateOfStanding,
         Certified: formationFormData.certifiedCopyOfFormationDocument,
         PayerEmail: "",
-        SelectPaymentType: formationFormData.paymentType,
+        SelectPaymentType: formationFormData.paymentType as Exclude<PaymentType, undefined>,
         BusinessInformation: {
-          CompanyOrigin: "Domestic",
-          Business: BusinessTypeMap[userData.profileData.legalStructureId as FormationLegalType].businessType,
+          CompanyOrigin: isForeign ? "Foreign" : "Domestic",
+          Business: BusinessTypeMap[toFormationLegalStructure].businessType,
           BusinessName: formationFormData.businessName,
-          BusinessDesignator: formationFormData.businessSuffix,
+          BusinessDesignator: formationFormData.businessSuffix as Exclude<BusinessSuffix, undefined>,
           Naic: naicsCode,
+          PracticesLaw: isForeignCorp ? false : undefined,
+          ForeignStateOfFormation: formationFormData.foreignStateOfFormation,
+          ForeignDateOfFormation: formationFormData.foreignDateOfFormation
+            ? parseDateWithFormat(formationFormData.foreignDateOfFormation, "YYYY-MM-DD").format("MM/DD/YYYY")
+            : undefined,
           BusinessPurpose: formationFormData.businessPurpose || undefined,
-          EffectiveFilingDate: parseDateWithFormat(
-            formationFormData.businessStartDate,
-            "YYYY-MM-DD"
-          ).toISOString(),
+          EffectiveFilingDate: parseDateWithFormat(formationFormData.businessStartDate, "YYYY-MM-DD").format(
+            "MM/DD/YYYY"
+          ),
           MainAddress: {
-            Address1: formationFormData.businessAddressLine1,
-            Address2: formationFormData.businessAddressLine2,
-            City: userData.profileData.municipality?.name,
-            State: "New Jersey",
-            Zipcode: formationFormData.businessAddressZipCode,
-            Country: "US",
+            Address1: formationFormData.addressLine1,
+            Address2: formationFormData.addressLine2,
+            City: formationFormData.addressMunicipality?.name ?? formationFormData.addressCity ?? "",
+            State: formationFormData.addressState?.name,
+            Province: formationFormData.addressProvince,
+            Zipcode: formationFormData.addressZipCode,
+            Country: formationFormData.addressCountry,
           },
           TotalShares:
             formationFormData.businessTotalStock.length > 0
               ? Number.parseInt(formationFormData.businessTotalStock)
               : undefined,
         },
-        [BusinessTypeMap[userData.profileData.legalStructureId as FormationLegalType].additionalDataKey]:
-          additionalProvisions,
+        ...getAdditionalProvisions(),
         CompanyProfit: "Profit",
         RegisteredAgent: {
           Id: isManual ? undefined : formationFormData.agentNumber,
@@ -249,35 +270,78 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
             ? {
                 Address1: formationFormData.agentOfficeAddressLine1,
                 Address2: formationFormData.agentOfficeAddressLine2,
-                City: formationFormData.agentOfficeAddressCity,
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                City: formationFormData.agentOfficeAddressMunicipality!.name,
                 State: "New Jersey",
+                Province: undefined,
                 Zipcode: formationFormData.agentOfficeAddressZipCode,
                 Country: "US",
               }
             : undefined,
         },
-        MemberAttestation: isCorp ? true : undefined,
-        Members: formationFormData.members.map((member) => {
-          return {
-            Name: member.name,
-            Location: {
-              Address1: member.addressLine1,
-              Address2: member.addressLine2,
-              City: member.addressCity,
-              State: member.addressState,
-              Zipcode: member.addressZipCode,
-              Country: "US",
-            },
-          };
-        }),
-        Incorporators,
-        Signers: formationFormData.signers.map((signer) => {
-          return {
-            Name: signer.name,
-            Title: BusinessTypeMap[userData.profileData.legalStructureId as FormationLegalType].signerTitle,
-            Signed: signer.signature,
-          };
-        }),
+        MemberAttestation: isCorp && !isForeignCorp ? true : undefined,
+        Members:
+          businessType.shortDescription === "LP"
+            ? formationFormData.incorporators?.map((member) => {
+                return {
+                  Name: member.name,
+                  Location: {
+                    Address1: member.addressLine1,
+                    Address2: member.addressLine2,
+                    City: member.addressMunicipality?.name ?? member.addressCity ?? "",
+                    State: member.addressState?.name,
+                    Province: member.addressProvince,
+                    Zipcode: member.addressZipCode,
+                    Country: member.addressCountry,
+                  },
+                };
+              })
+            : formationFormData.members?.map((member) => {
+                return {
+                  Name: member.name,
+                  Location: {
+                    Address1: member.addressLine1,
+                    Address2: member.addressLine2,
+                    City: member.addressMunicipality?.name ?? member.addressCity ?? "",
+                    State: member.addressState?.name,
+                    Province: member.addressProvince,
+                    Zipcode: member.addressZipCode,
+                    Country: member.addressCountry,
+                  },
+                };
+              }),
+        Incorporators: isCorp
+          ? formationFormData.incorporators?.map((signer) => {
+              return {
+                Name: signer.name,
+                Location: {
+                  Address1: signer.addressLine1,
+                  Address2: signer.addressLine2,
+                  City: signer.addressMunicipality?.name ?? signer.addressCity ?? "",
+                  State: signer.addressState?.name,
+                  Province: signer.addressProvince,
+                  Zipcode: signer.addressZipCode,
+                  Country: signer.addressCountry,
+                },
+              };
+            })
+          : undefined,
+        Signers: formationFormData.incorporators
+          ? formationFormData.incorporators?.map((signer) => {
+              return {
+                Name: signer.name,
+                Title: signer.title,
+                Signed: signer.signature,
+              };
+            }) ?? []
+          : // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            formationFormData.signers?.map((signer) => {
+              return {
+                Name: signer.name,
+                Title: signer.title,
+                Signed: signer.signature,
+              };
+            }) ?? [],
 
         ContactFirstName: formationFormData.contactFirstName,
         ContactLastName: formationFormData.contactLastName,
@@ -292,86 +356,104 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
   };
 };
 
-export type ApiSubmission = {
+type AdditionalLimitedPartnershipProvision = {
+  AggregateAmount: string; // Max 400 chars
+  LimitedCanCreateLimited: "Yes" | "No";
+  LimitedCanCreateLimitedTerms: string; // Max 400 chars
+  LimitedCanGetDistribution: "Yes" | "No";
+  LimitedCanGetDistributionTerms: string; // Max 400 chars
+  LimitedCanMakeDistribution: "Yes" | "No";
+  LimitedCanMakeDistributionTerms: string; // Max 400 chars
+  GeneralPartnerWithdrawal: string; // Max 400 chars
+  DissolutionPlan: string; // Max 400 chars
+  AdditionalProvisions: AdditionalProvision[];
+};
+type AdditionalForeignLimitedPartnershipProvision = {
+  AggregateAmount: string; // Max 400 chars
+  AdditionalProvisions: AdditionalProvision[];
+};
+type AdditionalProvisions = {
+  AdditionalProvisions: AdditionalProvision[];
+};
+
+type OtherProvisions = {
+  OtherProvisions: AdditionalProvision[];
+};
+
+type Provisions = {
+  AdditionalLimitedLiabilityCompany?: OtherProvisions;
+  AdditionalLimitedLiabilityPartnership?: OtherProvisions;
+  AdditionalCCorpOrProfessionalCorp?: AdditionalProvisions;
+  AdditionalForeignLimitedPartnership?: AdditionalForeignLimitedPartnershipProvision;
+  AdditionalLimitedPartnership?: AdditionalLimitedPartnershipProvision;
+};
+
+interface Formation extends Provisions {
+  Gov2GoAnnualReports: boolean; //This will dictate if the Payer’s email will be subscribed to G2G Annual Reports
+  Gov2GoCorpWatch: boolean; //This will dictate if the Payer’s email will be subscribed to G2G Corpwatch
+  ShortGoodStanding: boolean; //Option to order Good Standing Certificate
+  Certified: boolean; //Option to order Certified Copy of the Formation
+  PayerEmail: string;
+  SelectPaymentType: "ACH" | "CC"; //Method user wishes to use to pay. Valid Values: ACH, CC
+  BusinessInformation: {
+    CompanyOrigin: "Domestic" | "Foreign"; //Domestic if from Jersey. Valid Types: Domestic, Foreign
+    Business: BusinessType; //Business Type (DomesticLimitedLiabilityCompany)
+    BusinessName: string; //The requested business name, must be available and not contain any restricted words. Name plus designator length must be less than 100 characters in length.
+    BusinessDesignator: BusinessSuffix; //The designator - LLC. L.L.C etc
+    PracticesLaw: boolean | undefined;
+    Naic: string; // If supplied must be 6 digits
+    BusinessPurpose: string | undefined; // Max 300 chars
+    EffectiveFilingDate: string; // date mm/dd/yyyy
+    MainAddress: ApiLocation;
+    TotalShares: number | undefined;
+    ForeignStateOfFormation: StateNames | undefined;
+    ForeignDateOfFormation: string | undefined; // date mm/dd/yyyy
+  };
+  CompanyProfit: "Profit"; //Valid Values: Profit, NonProfit
+  RegisteredAgent: {
+    Id: string | undefined; // 7 max, must be valid NJ registered agent number
+    Email: string | undefined; //50 max, must be email address
+    Name: string | undefined; // 50 max, required if no ID
+    Location: ApiLocation | undefined; // required if no ID
+  };
+  MemberAttestation: boolean | undefined;
+  Incorporators: MembersObjects[] | undefined;
+  Members: MembersObjects[] | undefined;
+  Signers: Array<{
+    //This can be a list/array of items. Maximum 10
+    Name: string; // max 50
+    Title: SignerTitle;
+    Signed: boolean;
+  }>;
+  ContactFirstName: string; //Contact person for filing
+  ContactLastName: string;
+  ContactPhoneNumber: string;
+}
+
+export interface ApiSubmission {
   Account: string; //API User Account id
   Key: string; //API Account Key
+  ReturnUrl: string;
+  FailureReturnUrl: string;
   Payer: {
-    FirstName: string; // string (combined with LastName total 49), if not set will use ContactFirstName
-    LastName: string; // string (combined with FirstName total 49), if not set will use ContactLastName
+    FirstName?: string; // string (combined with LastName total 49), if not set will use ContactFirstName
+    LastName?: string; // string (combined with FirstName total 49), if not set will use ContactLastName
     CompanyName: string;
     Address1: string;
     Address2: string;
     City: string;
-    StateAbbreviation: string; // 2 chars
-    ZipCode: string; // 5 chars
-    PhoneNumber: string; // 12 chars, if not set ContactPhoneNumber will be used
-    Email: string;
+    StateAbbreviation?: StateShortCodes; // 2 chars
+    ZipCode?: string; // 5 chars
+    PhoneNumber?: string; // 12 chars, if not set ContactPhoneNumber will be used
+    Email?: string;
   };
-  Formation: {
-    Gov2GoAnnualReports: boolean; //This will dictate if the Payer’s email will be subscribed to G2G Annual Reports
-    Gov2GoCorpWatch: boolean; //This will dictate if the Payer’s email will be subscribed to G2G Corpwatch
-    ShortGoodStanding: boolean; //Option to order Good Standing Certificate
-    Certified: boolean; //Option to order Certified Copy of the Formation
-    PayerEmail: string;
-    SelectPaymentType: "ACH" | "CC"; //Method user wishes to use to pay. Valid Values: ACH, CC
-    BusinessInformation: {
-      CompanyOrigin: "Domestic"; //Domestic if from Jersey. Valid Types: Domestic, Foreign
-      Business: BusinessType; //Business Type (DomesticLimitedLiabilityCompany)
-      BusinessName: string; //The requested business name, must be available and not contain any restricted words. Name plus designator length must be less than 100 characters in length.
-      BusinessDesignator: BusinessSuffix; //The designator - LLC. L.L.C etc
-      Naic: string; // If supplied must be 6 digits
-      BusinessPurpose: string; // Max 300 chars
-      EffectiveFilingDate: string; // date 2021-12-14T10:03:51.0869073-04:00 (anne note: is this correct??)
-      MainAddress: ApiLocation;
-      TotalShares: number | undefined;
-    };
-    AdditionalLimitedLiabilityCompany?: {
-      OtherProvisions: AdditionalProvision[];
-    };
-    AdditionalLimitedLiabilityPartnership?: {
-      OtherProvisions: AdditionalProvision[];
-    };
-    AdditionalCCorpOrProfessionalCorp?: {
-      OtherProvisions: AdditionalProvision[];
-    };
-    AdditionalLimitedPartnership?: {
-      AggregateAmount: string; // Max 400 chars
-      LimitedCanCreateLimited: "Yes" | "No";
-      LimitedCanCreateLimitedTerms: string; // Max 400 chars
-      LimitedCanGetDistribution: "Yes" | "No";
-      LimitedCanGetDistributionTerms: string; // Max 400 chars
-      LimitedCanMakeDistribution: "Yes" | "No";
-      LimitedCanMakeDistributionTerms: string; // Max 400 chars
-      GeneralPartnerWithdrawal: string; // Max 400 chars
-      DissolutionPlan: string; // Max 400 chars
-      AdditionalProvision: AdditionalProvision[];
-    };
-    CompanyProfit: "Profit"; //Valid Values: Profit, NonProfit
-    RegisteredAgent: {
-      Id: string | null; // 7 max, must be valid NJ registered agent number
-      Email: string | null; //50 max, must be email address
-      Name: string | null; // 50 max, required if no ID
-      Location: ApiLocation | null; // required if no ID
-    };
-    MemberAttestation: boolean | undefined;
-    Incorporators: Array<{
-      Name: string; // 50 max
-      Location: MemberLocation;
-    }>;
-    Members: Array<{
-      Name: string; // 50 max
-      Location: MemberLocation;
-    }>;
-    Signers: Array<{
-      //This can be a list/array of items. Maximum 10
-      Name: string; // max 50
-      Title: SignerTitle;
-      Signed: true;
-    }>;
-    ContactFirstName: string; //Contact person for filing
-    ContactLastName: string;
-    ContactPhoneNumber: string;
-  };
+  Formation: Formation;
+  ForeignGoodStandingFile?: ForeignGoodStandingFileObject;
+}
+
+type MembersObjects = {
+  Name: string; // 50 max
+  Location: ApiLocation;
 };
 
 type AdditionalProvision = {
@@ -382,79 +464,67 @@ type ApiLocation = {
   Address1: string; // 35 char max, Can not be left blank, if any other address field has data
   Address2: string; // max 35 char
   City: string; // 30 char max, Can not be left blank, if any other address field has data
-  State: "New Jersey"; // required if country = US. Must be full state name. Ex: Alabama
+  State: StateNames | undefined; // required if country = US. Must be full state name. Ex: Alabama
+  Province: string | undefined;
   Zipcode: string; // max 5 if country=US, 11 otherwise
-  Country: "US"; //alpha-2 iban code
-};
-
-type MemberLocation = {
-  Address1: string; // 35 char max, Can not be left blank, if any other address field has data
-  Address2: string; // max 35 char
-  City: string; // 30 char max, Can not be left blank, if any other address field has data
-  State: string; // required if country = US. Must be full state name. Ex: Alabama
-  Zipcode: string; // max 5 if country=US, 11 otherwise
-  Country: "US"; //alpha-2 iban code
+  Country: CountriesShortCodes; //alpha-2 iban code
 };
 
 type BusinessType =
   | "DomesticLimitedLiabilityCompany"
   | "DomesticLimitedLiabilityPartnership"
   | "DomesticForProfitCorporation"
-  | "DomesticLimitedPartnership";
-
-type SignerTitle = "Authorized Representative" | "Authorized Partner" | "Incorporator" | "General Partner";
-
-type AdditionalDataKey =
-  | "AdditionalCCorpOrProfessionalCorp"
-  | "AdditionalLimitedLiabilityCompany"
-  | "AdditionalLimitedLiabilityPartnership"
-  | "AdditionalLimitedPartnership";
+  | "DomesticLimitedPartnership"
+  | "ForeignForProfitCorporation"
+  | "ForeignLimitedLiabilityCompany"
+  | "ForeignLimitedPartnership"
+  | "ForeignLimitedLiabilityPartnership";
 
 type FormationFields = {
   businessType: BusinessType;
-  shortDescription: string;
-  signerTitle: SignerTitle;
-  additionalDataKey: AdditionalDataKey;
-  additionalDataRequired?: boolean;
-  provisionsFieldName: string;
+  shortDescription: "LLC" | "LLP" | "LP" | "DP" | "LF" | "LFC" | "FLC" | "FLP" | "FR";
 };
 
 const BusinessTypeMap: Record<FormationLegalType, FormationFields> = {
   "limited-liability-company": {
     businessType: "DomesticLimitedLiabilityCompany",
     shortDescription: "LLC",
-    signerTitle: "Authorized Representative",
-    additionalDataKey: "AdditionalLimitedLiabilityCompany",
-    provisionsFieldName: "OtherProvisions",
   },
   "limited-liability-partnership": {
     businessType: "DomesticLimitedLiabilityPartnership",
     shortDescription: "LLP",
-    signerTitle: "Authorized Partner",
-    additionalDataKey: "AdditionalLimitedLiabilityPartnership",
-    provisionsFieldName: "OtherProvisions",
   },
   "limited-partnership": {
     businessType: "DomesticLimitedPartnership",
     shortDescription: "LP",
-    signerTitle: "General Partner",
-    additionalDataRequired: true,
-    additionalDataKey: "AdditionalLimitedPartnership",
-    provisionsFieldName: "AdditionalProvisions",
   },
   "c-corporation": {
     businessType: "DomesticForProfitCorporation",
     shortDescription: "DP",
-    signerTitle: "Incorporator",
-    additionalDataKey: "AdditionalCCorpOrProfessionalCorp",
-    provisionsFieldName: "AdditionalProvisions",
   },
   "s-corporation": {
     businessType: "DomesticForProfitCorporation",
     shortDescription: "DP",
-    signerTitle: "Incorporator",
-    additionalDataKey: "AdditionalCCorpOrProfessionalCorp",
-    provisionsFieldName: "AdditionalProvisions",
+  },
+  "foreign-limited-partnership": {
+    businessType: "ForeignLimitedPartnership",
+    shortDescription: "LF",
+  },
+  "foreign-limited-liability-company": {
+    businessType: "ForeignLimitedLiabilityCompany",
+    shortDescription: "FLC",
+  },
+  "foreign-limited-liability-partnership": {
+    businessType: "ForeignLimitedLiabilityPartnership",
+    shortDescription: "FLP",
+  },
+  "foreign-c-corporation": {
+    businessType: "ForeignForProfitCorporation",
+    shortDescription: "FR",
+  },
+  "foreign-s-corporation": {
+    businessType: "ForeignForProfitCorporation",
+    shortDescription: "FR",
   },
 };
 

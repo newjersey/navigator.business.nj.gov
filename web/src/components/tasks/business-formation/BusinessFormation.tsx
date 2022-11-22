@@ -12,6 +12,7 @@ import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import * as api from "@/lib/api-client/apiClient";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { allowFormation, castPublicFilingLegalTypeToFormationType } from "@/lib/domain-logic/allowFormation";
 import { checkQueryValue, QUERIES } from "@/lib/domain-logic/routes";
 import { splitFullName } from "@/lib/domain-logic/splitFullName";
 import { FormationDisplayContentMap, NameAvailability, Task } from "@/lib/types/types";
@@ -21,27 +22,14 @@ import {
   defaultFormationLegalType,
   FormationFields,
   FormationFormData,
-  FormationLegalType,
-  FormationLegalTypes,
   getCurrentDate,
   getCurrentDateFormatted,
+  PublicFilingLegalType,
 } from "@businessnjgovnavigator/shared/";
 import { parseDateWithFormat } from "@businessnjgovnavigator/shared/dateHelpers";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { useRouter } from "next/router";
 import { ReactElement, useEffect, useMemo, useRef, useState } from "react";
-
-export const allowFormation = (legalStructureId: string | undefined) => {
-  const featureFlagMap: Partial<Record<FormationLegalType, boolean>> = {
-    "limited-partnership": process.env.FEATURE_BUSINESS_LP == "true",
-    "limited-liability-partnership": process.env.FEATURE_BUSINESS_LLP == "true",
-    "c-corporation": process.env.FEATURE_BUSINESS_CCORP == "true",
-  };
-  if (FormationLegalTypes.includes(legalStructureId as FormationLegalType)) {
-    return featureFlagMap[legalStructureId as FormationLegalType] ?? true;
-  }
-  return false;
-};
 
 interface Props {
   task: Task;
@@ -67,7 +55,10 @@ export const BusinessFormation = (props: Props): ReactElement => {
   const [hasBusinessNameBeenSearched, setHasBusinessNameBeenSearched] = useState<boolean>(false);
   const getCompletedFilingApiCallOccurred = useRef<boolean>(false);
 
-  const isValidLegalStructure = allowFormation(userData?.profileData.legalStructureId);
+  const isValidLegalStructure = allowFormation(
+    userData?.profileData.legalStructureId,
+    userData?.profileData.businessPersona
+  );
 
   const setBusinessNameAvailability = (nameAvailability: NameAvailability | undefined) => {
     _setBusinessNameAvailability(nameAvailability);
@@ -92,7 +83,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
       businessName:
         userData.formationData.formationFormData.businessName ?? userData.profileData.businessName,
       businessStartDate: getDate(userData.formationData.formationFormData.businessStartDate),
-      businessAddressCity: userData.profileData.municipality,
+      addressMunicipality: userData.profileData.municipality,
       contactFirstName: userData.formationData.formationFormData.contactFirstName || splitName.firstName,
       contactLastName: userData.formationData.formationFormData.contactLastName || splitName.lastName,
     });
@@ -151,8 +142,11 @@ export const BusinessFormation = (props: Props): ReactElement => {
   }, [router.isReady, update, router, props.task.urlSlug, userData]);
 
   const legalStructureId = useMemo(() => {
-    return (userData?.profileData.legalStructureId ?? defaultFormationLegalType) as FormationLegalType;
-  }, [userData?.profileData.legalStructureId]);
+    return castPublicFilingLegalTypeToFormationType(
+      (userData?.profileData.legalStructureId ?? defaultFormationLegalType) as PublicFilingLegalType,
+      userData?.profileData.businessPersona
+    );
+  }, [userData?.profileData.businessPersona, userData?.profileData.legalStructureId]);
 
   const setFieldInteracted = (field: FormationFields, config?: { setToUninteracted: boolean }) => {
     setInteractedFields((prevState) => {

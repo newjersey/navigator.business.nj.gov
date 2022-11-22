@@ -7,7 +7,7 @@ import { PageSkeleton } from "@/components/PageSkeleton";
 import { RadioQuestion } from "@/components/post-onboarding/RadioQuestion";
 import { TaskCTA } from "@/components/TaskCTA";
 import { TaskHeader } from "@/components/TaskHeader";
-import { allowFormation, BusinessFormation } from "@/components/tasks/business-formation/BusinessFormation";
+import { BusinessFormation } from "@/components/tasks/business-formation/BusinessFormation";
 import { CannabisApplyForLicenseTask } from "@/components/tasks/cannabis/CannabisApplyForLicenseTask";
 import { CannabisPriorityStatusTask } from "@/components/tasks/cannabis/CannabisPriorityStatusTask";
 import { EinTask } from "@/components/tasks/EinTask";
@@ -22,6 +22,7 @@ import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { allowFormation } from "@/lib/domain-logic/allowFormation";
 import { getNaicsDisplayMd } from "@/lib/domain-logic/getNaicsDisplayMd";
 import { loadTasksDisplayContent } from "@/lib/static/loadDisplayContent";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
@@ -77,9 +78,11 @@ const TaskPage = (props: Props): ReactElement => {
   };
 
   const renderNextAndPreviousButtons = () => {
-    const isValidLegalStructure = allowFormation(userData?.profileData.legalStructureId);
-    const isStarting = userData?.profileData.businessPersona === "STARTING";
-    if (props.task.id === formationTaskId && isValidLegalStructure && isStarting) {
+    const isValidLegalStructure = allowFormation(
+      userData?.profileData.legalStructureId,
+      userData?.profileData.businessPersona
+    );
+    if (props.task.id === formationTaskId && isValidLegalStructure) {
       return;
     }
     return (

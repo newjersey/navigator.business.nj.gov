@@ -1633,58 +1633,55 @@ collections:
                 }
               - {
                   label: Business Address - Header,
-                  name: businessAddressHeader,
+                  name: addressHeader,
                   widget: string,
                   hint: This field supports Markdown,
                 }
               - {
                   label: Business Address - Address Line 1 Label,
-                  name: businessAddressAddressLine1Label,
+                  name: addressAddressLine1Label,
                   widget: string,
                   hint: This field supports Markdown,
                 }
               - {
                   label: Business Address - Address Line 1 Placeholder,
-                  name: businessAddressAddressLine1Placeholder,
+                  name: addressAddressLine1Placeholder,
                   widget: string,
                 }
               - {
                   label: Business Address - Address Line 2 Label,
-                  name: businessAddressAddressLine2Label,
+                  name: addressAddressLine2Label,
                   widget: string,
                   hint: This field supports Markdown,
                 }
               - {
                   label: Business Address - Address Line 2 Placeholder,
-                  name: businessAddressAddressLine2Placeholder,
+                  name: addressAddressLine2Placeholder,
                   widget: string,
                 }
-              - { label: Business Address - City Label, name: businessAddressCityLabel, widget: string }
+              - { label: Business Address - City Label, name: addressCityLabel, widget: string }
               - {
-                  label: Business Address - City - Placeholder,
-                  name: businessAddressCityPlaceholder,
+                  label: Business Address - Municipality Label,
+                  name: addressMunicipalityLabel,
                   widget: string,
                 }
+              - { label: Business Address - City - Placeholder, name: addressCityPlaceholder, widget: string }
               - {
                   label: Business Address - State Label,
-                  name: businessAddressStateLabel,
+                  name: addressStateLabel,
                   widget: string,
                   hint: This field supports Markdown,
                 }
-              - {
-                  label: Business Address - State Placeholder,
-                  name: businessAddressStatePlaceholder,
-                  widget: string,
-                }
+              - { label: Business Address - State Placeholder, name: addressStatePlaceholder, widget: string }
               - {
                   label: Business Address - Zip Code Label,
-                  name: businessAddressZipCodeLabel,
+                  name: addressZipCodeLabel,
                   widget: string,
                   hint: This field supports Markdown,
                 }
               - {
                   label: Business Address - Zip Code Placeholder,
-                  name: businessAddressZipCodePlaceholder,
+                  name: addressZipCodePlaceholder,
                   widget: string,
                 }
               - {
@@ -1762,11 +1759,16 @@ collections:
                 }
               - { label: Edit Button Text, name: editButtonText, widget: string }
               - { label: Error - Address City, name: addressCityErrorText, widget: string }
+              - { label: Error - Address City, name: addressMunicipalityErrorText, widget: string }
               - { label: Error - Address State, name: addressStateErrorText, widget: string }
               - { label: Error - Address State (Modal), name: addressModalCityErrorText, widget: string }
               - { label: Error - Address Zip Code, name: addressModalZipCodeErrorText, widget: string }
               - { label: Error - Address, name: addressErrorText, widget: string }
-              - { label: Error - Agent Address City, name: agentOfficeAddressCityErrorText, widget: string }
+              - {
+                  label: Error - Agent Address City,
+                  name: agentOfficeAddressMunicipalityErrorText,
+                  widget: string,
+                }
               - {
                   label: Error - Agent Address Line 1,
                   name: agentOfficeAddressLine1ErrorText,
@@ -1780,16 +1782,8 @@ collections:
               - { label: Error - Agent Email, name: agentEmailErrorText, widget: string }
               - { label: Error - Agent Name, name: agentNameErrorText, widget: string }
               - { label: Error - Agent Number, name: agentNumberErrorText, widget: string }
-              - {
-                  label: Error - Business Address Line 1,
-                  name: businessAddressLine1ErrorText,
-                  widget: string,
-                }
-              - {
-                  label: Error - Business Address Zip Code,
-                  name: businessAddressZipCodeErrorText,
-                  widget: string,
-                }
+              - { label: Error - Business Address Line 1, name: addressLine1ErrorText, widget: string }
+              - { label: Error - Business Address Zip Code, name: addressZipCodeErrorText, widget: string }
               - { label: Error - Business Name Not Set, name: notSetBusinessNameErrorText, widget: string }
               - { label: Error - Contact First Name, name: contactFirstNameErrorText, widget: string }
               - { label: Error - Contact Last Name, name: contactLastNameErrorText, widget: string }
@@ -2097,13 +2091,13 @@ collections:
                 }
               - {
                   label: Registered Agent - City Label,
-                  name: registeredAgentCityLabel,
+                  name: registeredAgentMunicipalityLabel,
                   widget: string,
                   hint: This field supports Markdown,
                 }
               - {
                   label: Registered Agent - City Placeholder,
-                  name: registeredAgentCityPlaceholder,
+                  name: registeredAgentMunicipalityPlaceholder,
                   widget: string,
                 }
               - {
@@ -2412,9 +2406,10 @@ collections:
                   - { label: "Business Name", name: businessName, widget: string }
                   - { label: "Business Designator", name: businessSuffix, widget: string }
                   - { label: "Effective Date", name: businessStartDate, widget: string }
-                  - { label: "Business Address City", name: businessAddressCity, widget: string }
-                  - { label: "Business Address Line 1", name: businessAddressLine1, widget: string }
-                  - { label: "Business Address Zip Code", name: businessAddressZipCode, widget: string }
+                  - { label: "Business Address City", name: addressCity, widget: string }
+                  - { label: "Business Address Municipality", name: addressMunicipality, widget: string }
+                  - { label: "Business Address Line 1", name: addressLine1, widget: string }
+                  - { label: "Business Address Zip Code", name: addressZipCode, widget: string }
                   - { label: "Signers", name: signers, widget: string }
                   - { label: "Payment Type", name: paymentType, widget: string }
                   - { label: "Contact First Name", name: contactFirstName, widget: string }
@@ -2463,8 +2458,8 @@ collections:
                       widget: string,
                     }
                   - {
-                      label: "Registered Agent Office Address City",
-                      name: agentOfficeAddressCity,
+                      label: "Registered Agent office address municipality",
+                      name: agentOfficeAddressMunicipality,
                       widget: string,
                     }
                   - {

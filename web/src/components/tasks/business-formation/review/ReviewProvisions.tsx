@@ -15,7 +15,7 @@ export const ReviewProvisions = () => {
         testId="provisions"
       />
       <div className="" data-testid="provisions">
-        {state.formationFormData.provisions.map((provision, index) => {
+        {state.formationFormData.provisions?.map((provision, index) => {
           return (
             <div className="margin-bottom-2" key={index}>
               <div className="text-bold margin-bottom-05">

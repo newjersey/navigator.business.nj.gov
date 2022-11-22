@@ -84,10 +84,9 @@ describe("Formation - BillingStep", () => {
   ): Promise<FormationPageHelpers> => {
     const profileData = generateFormationProfileData(initialProfileData);
     const formationData = {
-      formationFormData: generateFormationFormData(
-        formationFormData,
-        profileData.legalStructureId as FormationLegalType
-      ),
+      formationFormData: generateFormationFormData(formationFormData, {
+        legalStructureId: profileData.legalStructureId as FormationLegalType,
+      }),
       formationResponse: undefined,
       getFilingResponse: undefined,
       completedFilingPayment: false,
