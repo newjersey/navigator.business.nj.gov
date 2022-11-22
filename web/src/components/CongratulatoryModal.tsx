@@ -1,6 +1,6 @@
 import { Icon } from "@/components/njwds/Icon";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ROUTES } from "@/lib/domain-logic/routes";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { SectionType } from "@businessnjgovnavigator/shared";
 import { Dialog, DialogContent, IconButton } from "@mui/material";
 import { useRouter } from "next/router";
@@ -13,6 +13,7 @@ interface Props {
 }
 
 export const CongratulatoryModal = (props: Props): ReactElement => {
+  const { Config } = useConfig();
   const router = useRouter();
   const onClickComplete = () => {
     return router.push(ROUTES.dashboard);

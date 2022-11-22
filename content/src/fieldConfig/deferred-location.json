@@ -5,6 +5,7 @@
     "placeholderText": "Select a City",
     "successText": "The city \"${city}\" has been saved.",
     "editText": "Edit City",
-    "removeText": "Remove City"
+    "removeText": "Remove City",
+    "deferredOnboardingSaveButtonText": "Save"
   }
 }

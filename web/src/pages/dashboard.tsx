@@ -1,6 +1,6 @@
 import { HideableTasks } from "@/components/dashboard/HideableTasks";
 import { Roadmap } from "@/components/dashboard/Roadmap";
-import { SidebarCardsList } from "@/components/dashboard/SidebarCardsList";
+import { SidebarCardsContainer } from "@/components/dashboard/SidebarCardsContainer";
 import TwoTabDashboardLayout from "@/components/dashboard/TwoTabDashboardLayout";
 import { DeferredOnboardingQuestion } from "@/components/DeferredOnboardingQuestion";
 import { FilingsCalendar } from "@/components/FilingsCalendar";
@@ -182,7 +182,7 @@ const DashboardPage = (props: Props): ReactElement => {
             <RightSidebarPageLayout
               mainContent={renderRoadmap}
               sidebarContent={
-                <SidebarCardsList
+                <SidebarCardsContainer
                   sidebarDisplayContent={props.displayContent.sidebarDisplayContent}
                   certifications={props.certifications}
                   fundings={props.fundings}
@@ -193,7 +193,7 @@ const DashboardPage = (props: Props): ReactElement => {
             <TwoTabDashboardLayout
               firstTab={renderRoadmap}
               secondTab={
-                <SidebarCardsList
+                <SidebarCardsContainer
                   sidebarDisplayContent={props.displayContent.sidebarDisplayContent}
                   certifications={props.certifications}
                   fundings={props.fundings}

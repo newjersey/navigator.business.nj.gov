@@ -1,0 +1,16 @@
+{
+  "dashboardDefaults": {
+    "calendarHeader": "Upcoming",
+    "emptyCalendarTitleText": "It looks like you do not have any filings for the next 12 months. Check back later.",
+    "emptyCalendarBodyText": "If you are an LLC, C Corp, LP, or LLP, you need to tell us your business formation date so we can tell you when your next filing is due. You can do this by [updating your profile](#).",
+    "calendarLegalText": "This calendar is not a complete list of your obligations as a business.",
+    "calendarListViewButton": "List View",
+    "calendarGridViewButton": "Grid View",
+    "calendarFilingDueDateLabel": "Due",
+    "calendarTooltip": "This calendar shows you New Jersey tax and reporting due dates unique to your business. Click on any item to learn where to file.",
+    "upAndRunningTaskHeader": "My Registration Tasks",
+    "showTaskText": "Show",
+    "hideTaskText": "Hide",
+    "hiddenTasksText": "${count} Hidden Tasks"
+  }
+}

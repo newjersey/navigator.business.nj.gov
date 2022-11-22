@@ -68,7 +68,7 @@ export const DeferredOnboardingQuestion = (props: Props) => {
             onClick={onSave}
             dataTestid="deferred-question-save"
           >
-            {Config.dashboardDefaults.deferredOnboardingSaveButtonText}
+            {Config.deferredLocation.deferredOnboardingSaveButtonText}
           </Button>
         </div>
       </div>

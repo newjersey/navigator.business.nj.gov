@@ -1,0 +1,15 @@
+{
+  "dashboardDefaults": {
+    "hideOpportunityText": "Hide",
+    "hiddenOpportunitiesHeader": "View Hidden Items (${count})",
+    "unHideOpportunityText": "Unhide",
+    "sidebarHeading": "For You",
+    "emptyOpportunitiesHeader": "We're looking for State opportunities you may be eligible for, but have not found a match yet.",
+    "emptyOpportunitiesText": "If you're seeing this, you might have hidden all items. Don't worry, you can view all hidden items below.",
+    "fundingTagText": "Funding",
+    "certificationTagText": "Certification",
+    "learnMoreFundingOpportunities": "Learn about other [Funding Opportunities](https://business.nj.gov/funding)",
+    "mobileFirstTabText": "Tasks",
+    "mobileSecondTabText": "For You (${count})"
+  }
+}

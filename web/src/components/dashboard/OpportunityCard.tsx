@@ -2,9 +2,9 @@ import { Content } from "@/components/Content";
 import { Button } from "@/components/njwds-extended/Button";
 import { Tag } from "@/components/njwds-extended/Tag";
 import { Icon } from "@/components/njwds/Icon";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { Opportunity } from "@/lib/types/types";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import truncateMarkdown from "markdown-truncate";
@@ -17,17 +17,18 @@ interface Props {
   isLast?: boolean;
 }
 
-const TYPE_TO_LABEL: Record<"funding" | "certification", ReactElement> = {
-  funding: <Tag backgroundColor="info-light">{Config.dashboardDefaults.fundingTagText}</Tag>,
-  certification: (
-    <Tag backgroundColor="accent-cool-light">{Config.dashboardDefaults.certificationTagText}</Tag>
-  ),
-};
-
 const MAX_CONTENT_CHARS = 150;
 
 export const OpportunityCard = (props: Props): ReactElement => {
   const { userData, update } = useUserData();
+  const { Config } = useConfig();
+
+  const TYPE_TO_LABEL: Record<"funding" | "certification", ReactElement> = {
+    funding: <Tag backgroundColor="info-light">{Config.dashboardDefaults.fundingTagText}</Tag>,
+    certification: (
+      <Tag backgroundColor="accent-cool-light">{Config.dashboardDefaults.certificationTagText}</Tag>
+    ),
+  };
 
   const truncatedMd = truncateMarkdown(props.opportunity.descriptionMd, {
     limit: MAX_CONTENT_CHARS,
