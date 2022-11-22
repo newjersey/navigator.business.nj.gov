@@ -3702,7 +3702,7 @@ __metadata:
     cross-env: 7.0.3
     dayjs: 1.11.6
     dedent: 0.7.0
-    dependency-cruiser: 11.18.0
+    dependency-cruiser: 12.0.0
     eslint: 8.28.0
     eslint-config-prettier: 8.5.0
     eslint-plugin-jest: 27.1.5
@@ -3859,7 +3859,7 @@ __metadata:
     cypress-wait-until: 1.7.2
     dayjs: 1.11.6
     dedent: 0.7.0
-    dependency-cruiser: 11.18.0
+    dependency-cruiser: 12.0.0
     dotenv: 16.0.3
     eslint: 8.28.0
     eslint-config-next: 13.0.4
@@ -4052,7 +4052,7 @@ __metadata:
     cypress-dotenv: 2.0.0
     cypress-wait-until: 1.7.2
     dayjs: 1.11.6
-    dependency-cruiser: 11.18.0
+    dependency-cruiser: 12.0.0
     dotenv: 16.0.3
     eslint: 8.28.0
     eslint-config-next: 13.0.4
@@ -10612,15 +10612,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ajv@npm:8.11.0, ajv@npm:^8.0.0, ajv@npm:^8.11.0, ajv@npm:^8.8.0":
-  version: 8.11.0
-  resolution: "ajv@npm:8.11.0"
+"ajv@npm:8.11.2, ajv@npm:^8.0.0, ajv@npm:^8.11.0, ajv@npm:^8.8.0":
+  version: 8.11.2
+  resolution: "ajv@npm:8.11.2"
   dependencies:
     fast-deep-equal: ^3.1.1
     json-schema-traverse: ^1.0.0
     require-from-string: ^2.0.2
     uri-js: ^4.2.2
-  checksum: 5e0ff226806763be73e93dd7805b634f6f5921e3e90ca04acdf8db81eed9d8d3f0d4c5f1213047f45ebbf8047ffe0c840fa1ef2ec42c3a644899f69aa72b5bef
+  checksum: 53435bf79ee7d1eabba8085962dba4c08d08593334b304db7772887f0b7beebc1b3d957432f7437ed4b60e53b5d966a57b439869890209c50fed610459999e3e
   languageName: node
   linkType: hard
 
@@ -15061,16 +15061,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dependency-cruiser@npm:11.18.0":
-  version: 11.18.0
-  resolution: "dependency-cruiser@npm:11.18.0"
+"dependency-cruiser@npm:12.0.0":
+  version: 12.0.0
+  resolution: "dependency-cruiser@npm:12.0.0"
   dependencies:
     acorn: 8.8.1
     acorn-jsx: 5.3.2
     acorn-jsx-walk: 2.0.0
     acorn-loose: 8.3.0
     acorn-walk: 8.2.0
-    ajv: 8.11.0
+    ajv: 8.11.2
     chalk: ^4.1.2
     commander: 9.4.1
     enhanced-resolve: 5.10.0
@@ -15099,7 +15099,7 @@ __metadata:
     depcruise-wrap-stream-in-html: bin/wrap-stream-in-html.js
     dependency-cruise: bin/dependency-cruise.js
     dependency-cruiser: bin/dependency-cruise.js
-  checksum: ee738e3eea1596ce5dc9f684e8b76c74b72da8b6989ff892c2406c4efd792a734b526b83fec68f667ab7f3bc7f2374323a04ea423b4a58c8a8cf3b78ae236788
+  checksum: 1ec46e0553868323ebdb49a3c562a7a77c52baecf8284aae562b3bf4533574b668c672031b6c182e8292dc20e41551fa79803177ec6dd6a70e377ffe8fa81bfd
   languageName: node
   linkType: hard
 
