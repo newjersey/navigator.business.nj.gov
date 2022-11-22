@@ -2,108 +2,49 @@ import { Content } from "@/components/Content";
 import { OpportunityCard } from "@/components/dashboard/OpportunityCard";
 import { SidebarCard } from "@/components/dashboard/SidebarCard";
 import { Icon } from "@/components/njwds/Icon";
-import { useUserData } from "@/lib/data-hooks/useUserData";
-import { filterCertifications } from "@/lib/domain-logic/filterCertifications";
-import { filterFundings } from "@/lib/domain-logic/filterFundings";
-import { getVisibleCertifications } from "@/lib/domain-logic/getVisibleCertifications";
-import { getVisibleFundings } from "@/lib/domain-logic/getVisibleFundings";
-import { sortCertifications } from "@/lib/domain-logic/sortCertifications";
-import { sortFundings } from "@/lib/domain-logic/sortFundings";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { Certification, Funding, SidebarCardContent } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { LookupOperatingPhaseById, UserData } from "@businessnjgovnavigator/shared";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import { ReactElement, useState } from "react";
 
 interface Props {
-  sidebarDisplayContent: Record<string, SidebarCardContent>;
-  certifications: Certification[];
+  topCards: SidebarCardContent[];
+  bottomCards: SidebarCardContent[];
   fundings: Funding[];
+  hiddenFundings: Funding[];
+  certifications: Certification[];
+  hiddenCertifications: Certification[];
+  displayFundings: boolean;
+  displayCertifications: boolean;
 }
 
 export const SidebarCardsList = (props: Props): ReactElement => {
-  const { userData } = useUserData();
   const [hiddenAccordionIsOpen, setHiddenAccordionIsOpen] = useState<boolean>(false);
-
-  const filteredSortedFundings = userData ? sortFundings(filterFundings(props.fundings, userData)) : [];
-
-  const filteredSortedCertifications = userData
-    ? sortCertifications(filterCertifications(props.certifications, userData))
-    : [];
-
-  const visibleSortedFundings = getVisibleFundings(filteredSortedFundings, userData as UserData);
-
-  const visibleSortedCertifications = getVisibleCertifications(
-    filteredSortedCertifications,
-    userData as UserData
-  );
-
-  const hiddenSortedCertifications = sortCertifications(
-    (userData?.preferences.hiddenCertificationIds || [])
-      .map((id) => {
-        return props.certifications.find((it) => {
-          return it.id === id;
-        });
-      })
-      .filter((it) => {
-        return it !== undefined;
-      }) as Certification[]
-  );
-
-  const hiddenSortedFundings = sortFundings(
-    (userData?.preferences.hiddenFundingIds || [])
-      .map((id) => {
-        return props.fundings.find((it) => {
-          return it.id === id;
-        });
-      })
-      .filter((it) => {
-        return it !== undefined;
-      }) as Funding[]
-  );
-
-  const displayFundingCards = () => {
-    return LookupOperatingPhaseById(userData?.profileData.operatingPhase).displayFundings;
-  };
-
-  const displayCertificationsCards = () => {
-    return LookupOperatingPhaseById(userData?.profileData.operatingPhase).displayCertifications;
-  };
+  const { Config } = useConfig();
 
   const hiddenOpportunitiesCount = (): number => {
-    if (!userData) {
-      return 0;
-    }
-
-    const displayCertifications = displayCertificationsCards();
-    const displayFunding = displayFundingCards();
-
-    if (displayCertifications && displayFunding) {
-      return (
-        userData.preferences.hiddenFundingIds.length + userData.preferences.hiddenCertificationIds.length
-      );
-    } else if (displayCertifications) {
-      return userData.preferences.hiddenCertificationIds.length;
-    } else if (displayFunding) {
-      return userData.preferences.hiddenFundingIds.length;
+    if (props.displayCertifications && props.displayFundings) {
+      return props.hiddenCertifications.length + props.hiddenFundings.length;
+    } else if (props.displayCertifications) {
+      return props.hiddenCertifications.length;
+    } else if (props.hiddenFundings) {
+      return props.hiddenFundings.length;
     } else {
       return 0;
     }
   };
 
-  const visibleCardsOrderedByWeight = userData
-    ? userData.preferences.visibleSidebarCards
-        .map((id: string) => {
-          return props.sidebarDisplayContent[id];
-        })
-        .sort((cardA: SidebarCardContent, cardB: SidebarCardContent): number => {
-          return cardA.weight < cardB.weight ? -1 : 1;
-        })
-    : [];
+  const showEmptyState = () => {
+    return (
+      props.displayCertifications &&
+      props.displayFundings &&
+      props.certifications.length + props.fundings.length === 0
+    );
+  };
 
   const hiddenCardsAccordion = () => {
-    if (displayCertificationsCards()) {
+    if (props.displayCertifications) {
       return (
         <>
           <hr className="desktop:margin-right-1 margin-top-3 bg-cool-lighter" aria-hidden={true} />
@@ -137,11 +78,11 @@ export const SidebarCardsList = (props: Props): ReactElement => {
                 </div>
               </AccordionSummary>
               <AccordionDetails data-testid="hidden-opportunities">
-                {hiddenSortedCertifications.map((cert) => {
+                {props.hiddenCertifications.map((cert) => {
                   return <OpportunityCard key={cert.id} opportunity={cert} urlPath="certification" />;
                 })}
-                {displayFundingCards() &&
-                  hiddenSortedFundings.map((funding) => {
+                {props.displayFundings &&
+                  props.hiddenFundings.map((funding) => {
                     return <OpportunityCard key={funding.id} opportunity={funding} urlPath="funding" />;
                   })}
               </AccordionDetails>
@@ -166,35 +107,6 @@ export const SidebarCardsList = (props: Props): ReactElement => {
     );
   };
 
-  const topCardIds = new Set(["funding-nudge"]);
-  const getTopCards = () => {
-    return visibleCardsOrderedByWeight
-      .filter((card) => {
-        return topCardIds.has(card.id);
-      })
-      .map((card: SidebarCardContent) => {
-        return <SidebarCard card={card} key={card.id} />;
-      });
-  };
-
-  const getBottomCards = () => {
-    return visibleCardsOrderedByWeight
-      .filter((card) => {
-        return !topCardIds.has(card.id);
-      })
-      .map((card: SidebarCardContent) => {
-        return <SidebarCard card={card} key={card.id} />;
-      });
-  };
-
-  const showEmptyState = () => {
-    return (
-      displayCertificationsCards() &&
-      displayFundingCards() &&
-      visibleSortedCertifications.length + visibleSortedFundings.length === 0
-    );
-  };
-
   return (
     <>
       <h2>{Config.dashboardDefaults.sidebarHeading}</h2>
@@ -204,15 +116,19 @@ export const SidebarCardsList = (props: Props): ReactElement => {
       />
 
       <div className="dashboard-opportunities-list desktop:margin-right-1">
-        <>{getTopCards()}</>
+        <>
+          {props.topCards.map((card) => {
+            return <SidebarCard card={card} key={card.id} />;
+          })}
+        </>
         <div className="desktop:padding-right-105" data-testid="visible-opportunities">
-          {displayCertificationsCards() &&
-            visibleSortedCertifications.map((cert) => {
+          {props.displayCertifications &&
+            props.certifications.map((cert) => {
               return <OpportunityCard key={cert.id} opportunity={cert} urlPath="certification" />;
             })}
 
-          {displayFundingCards() &&
-            visibleSortedFundings.map((funding) => {
+          {props.displayFundings &&
+            props.fundings.map((funding) => {
               return <OpportunityCard key={funding.id} opportunity={funding} urlPath="funding" />;
             })}
           {showEmptyState() && (
@@ -223,9 +139,13 @@ export const SidebarCardsList = (props: Props): ReactElement => {
             </div>
           )}
         </div>
-        <>{getBottomCards()}</>
+        <>
+          {props.bottomCards.map((card) => {
+            return <SidebarCard card={card} key={card.id} />;
+          })}
+        </>
       </div>
-      {displayFundingCards() && learnMoreAboutFundingsLink()}
+      {props.displayFundings && learnMoreAboutFundingsLink()}
       {hiddenCardsAccordion()}
     </>
   );

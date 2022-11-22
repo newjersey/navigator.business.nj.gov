@@ -3,10 +3,10 @@ import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { FieldLabelModal } from "@/components/onboarding/FieldLabelModal";
 import { OnboardingSectors } from "@/components/onboarding/OnboardingSectors";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { createProfileFieldErrorMap, ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/";
 import { FormControl } from "@mui/material";
 import { ReactElement, useState } from "react";
@@ -18,6 +18,7 @@ interface Props {
 }
 
 export const SectorModal = (props: Props): ReactElement => {
+  const { Config } = useConfig();
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
   const [fieldStates, setFieldStates] = useState<ProfileFieldErrorMap>(createProfileFieldErrorMap());
   const { userData } = useUserData();

@@ -21,7 +21,7 @@ import {
 import { UserData } from "@businessnjgovnavigator/shared";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
-import { SidebarCardsList } from "./SidebarCardsList";
+import { SidebarCardsContainer } from "./SidebarCardsContainer";
 jest.mock("@/lib/data-hooks/useUserData", () => {
   return { useUserData: jest.fn() };
 });
@@ -31,7 +31,7 @@ jest.mock("@/lib/data-hooks/useRoadmap", () => {
 
 const Config = getMergedConfig();
 
-describe("SidebarCards List", () => {
+describe("<SidebarCardsContainer />", () => {
   beforeEach(() => {
     jest.resetAllMocks();
     useMockRoadmap({});
@@ -53,7 +53,7 @@ describe("SidebarCards List", () => {
     certifications?: Certification[];
   }) => {
     render(
-      <SidebarCardsList
+      <SidebarCardsContainer
         sidebarDisplayContent={createDisplayContent(overrides.sidebarCards).sidebarDisplayContent}
         fundings={overrides.fundings ?? []}
         certifications={overrides.certifications ?? []}
@@ -72,7 +72,7 @@ describe("SidebarCards List", () => {
     return render(
       <WithStatefulUserData initialUserData={userData}>
         <ThemeProvider theme={createTheme()}>
-          <SidebarCardsList
+          <SidebarCardsContainer
             sidebarDisplayContent={createDisplayContent(overrides.sidebarCards).sidebarDisplayContent}
             fundings={overrides.fundings ?? []}
             certifications={overrides.certifications ?? []}

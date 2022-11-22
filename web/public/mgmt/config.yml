@@ -857,6 +857,33 @@ collections:
     fields:
       - { name: "" }
 
+  - name: "tasks-config"
+    label: "Tasks - Config"
+    delete: false
+    create: false
+    files:
+      - label: "Deferred Location"
+        name: "deferred-location-config"
+        file: "content/src/fieldConfig/deferred-location.json"
+        editor:
+          preview: true
+        fields:
+          - label: Deferred Location
+            name: deferredLocation
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Header, name: header, widget: string }
+              - { label: Description, name: description, widget: text }
+              - { label: Success Text, name: successText, widget: string }
+              - { label: Edit Text, name: editText, widget: string }
+              - { label: Remove Text, name: removeText, widget: string }
+              - {
+                  label: Deferred Onboarding Save Button Text,
+                  name: deferredOnboardingSaveButtonText,
+                  widget: string,
+                }
+
   - name: "tasks"
     label: "Tasks - All"
     folder: "content/src/roadmaps/tasks"
@@ -1526,6 +1553,12 @@ collections:
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
       - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
 
+  - name: "dashboard-label"
+    label: "🟥 DASHBOARD"
+    folder: "content/src"
+    fields:
+      - { name: "" }
+
   - name: "dashboard-settings"
     label: "Dashboard Settings"
     editor:
@@ -1561,6 +1594,176 @@ collections:
               - label: Id
                 name: id
                 widget: hidden
+
+  - name: "dashboard-config"
+    label: "Dashboard - Config"
+    delete: false
+    create: false
+    files:
+      - label: "Snackbars"
+        name: "dashboard-config-snackbars"
+        file: "content/src/fieldConfig/dashboard-snackbars.json"
+        editor:
+          preview: true
+        fields:
+          - label: Dashboard Snackbars
+            name: dashboardDefaults
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Calendar Snackbar Heading, name: calendarSnackbarHeading, widget: string }
+              - { label: Calendar Snackbar Body, name: calendarSnackbarBody, widget: text }
+              - {
+                  label: Certifications Snackbar Heading,
+                  name: certificationsSnackbarHeading,
+                  widget: string,
+                }
+              - { label: Certifications Snackbar Body, name: certificationsSnackbarBody, widget: text }
+              - {
+                  label: Deferred Onboarding - Snackbar Header,
+                  name: deferredOnboardingSnackbarHeader,
+                  widget: text,
+                }
+              - {
+                  label: Deferred Onboarding - Snackbar Body,
+                  name: deferredOnboardingSnackbarBody,
+                  widget: markdown,
+                }
+              - { label: Funding Snackbar Heading, name: fundingSnackbarHeading, widget: string }
+              - { label: Funding Snackbar Body, name: fundingSnackbarBody, widget: text }
+              - { label: Hidden Tasks Snackbar Heading, name: hiddenTasksSnackbarHeading, widget: string }
+              - { label: Hidden Tasks Snackbar Body, name: hiddenTasksSnackbarBody, widget: text }
+      - label: "Dashboard Calendar"
+        name: "dashboard-config-calendar"
+        file: "content/src/fieldConfig/dashboard-calendar.json"
+        editor:
+          preview: true
+        fields:
+          - label: Dashboard Calendar
+            name: dashboardDefaults
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Calendar Header, name: calendarHeader, widget: string }
+              - { label: Empty Calendar Title Text, name: emptyCalendarTitleText, widget: string }
+              - { label: Empty Calendar Body Text, name: emptyCalendarBodyText, widget: text }
+              - { label: Calendar Legal Text, name: calendarLegalText, widget: string }
+              - { label: Calendar List View Button, name: calendarListViewButton, widget: string }
+              - { label: Calendar Grid View Button, name: calendarGridViewButton, widget: string }
+              - { label: Calendar Filing Due Date Label, name: calendarFilingDueDateLabel, widget: string }
+              - { label: Calendar Tooltip, name: calendarTooltip, widget: text }
+              - { label: Below Calendar Task Header Text, name: upAndRunningTaskHeader, widget: string }
+              - { label: Show Task Button Text, name: showTaskText, widget: string }
+              - { label: Hide Task Button Text, name: hideTaskText, widget: string }
+              - { label: Number of Hidden Tasks Text, name: hiddenTasksText, widget: string }
+      - label: "Dashboard Modals"
+        name: "dashboard-config-modals"
+        file: "content/src/fieldConfig/dashboard-modals.json"
+        editor:
+          preview: true
+        fields:
+          - label: Dashboard Modals
+            name: dashboardDefaults
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Congratulatory Modal - Title, name: congratulatoryModalTitle, widget: string }
+              - { label: Congratulatory Modal - Header, name: congratulatoryModalHeader, widget: string }
+              - { label: Congratulatory Modal - Body, name: congratulatoryModalBody, widget: string }
+              - { label: Congratulatory Modal - Link Text, name: congratulatoryModalLinkText, widget: string }
+              - { label: Sector Modal Title, name: sectorModalTitle, widget: string }
+              - { label: Sector Modal Body, name: sectorModalBody, widget: text }
+              - { label: Sector Modal Cancel Button, name: sectorModalCancelButton, widget: string }
+              - { label: Sector Modal Save Button, name: sectorModalSaveButton, widget: string }
+      - label: "Dashboard For You / Tabs"
+        name: "dashboard-config-tabs"
+        file: "content/src/fieldConfig/dashboard-tabs.json"
+        editor:
+          preview: true
+        fields:
+          - label: Dashboard Tabs
+            name: dashboardDefaults
+            collapsed: false
+            widget: object
+            fields:
+              - { label: Sidebar Heading, name: sidebarHeading, widget: string }
+              - { label: Empty Opportunities Header, name: emptyOpportunitiesHeader, widget: string }
+              - { label: Empty Opportunities Text, name: emptyOpportunitiesText, widget: string }
+              - { label: Hide Opportunity Text, name: hideOpportunityText, widget: string }
+              - { label: Hidden Opportunities Header, name: hiddenOpportunitiesHeader, widget: string }
+              - { label: Unhide Opportunity Text, name: unHideOpportunityText, widget: string }
+              - { label: Funding Tag Text, name: fundingTagText, widget: string }
+              - { label: Certification Tag Text, name: certificationTagText, widget: string }
+              - {
+                  label: Learn More Funding Opportunities Text,
+                  name: learnMoreFundingOpportunities,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - { label: Mobile View - First Tab Text, name: mobileFirstTabText, widget: string }
+              - { label: Mobile View - Second Tab Text, name: mobileSecondTabText, widget: string }
+
+  - name: "roadmap-sidebar-card"
+    label: "Sidebar Cards Content"
+    folder: "content/src/display-content/roadmap-sidebar-cards"
+    summary: "{{id}}"
+    identifier_field: "{{id}}"
+    slug: "{{id}}"
+    delete: true
+    create: true
+    editor:
+      preview: true
+    fields:
+      - { label: "Id", name: "id", widget: "string" }
+      - { label: "Header", name: "header", widget: "string", required: false }
+      - { label: "Not Started Header", name: "notStartedHeader", widget: "string", required: false }
+      - { label: "Completed Header", name: "completedHeader", widget: "string", required: false }
+      - { label: "Has Close Button", name: "hasCloseButton", widget: "boolean", required: false }
+      - { label: "CTA Text", name: "ctaText", widget: "string", required: false }
+      - { label: "Weight (lower weights sort first)", name: "weight", widget: "number", required: true }
+      - {
+          label: "Image (header required)",
+          name: "imgPath",
+          widget: "select",
+          required: false,
+          options: ["/img/congratulations-purple.svg", "/img/check-mark-circular-blue.svg"],
+        }
+      - { label: "Content", name: "body", widget: "markdown" }
+      - {
+          label: "Color",
+          name: "color",
+          widget: "select",
+          required: true,
+          options: ["primary", "accent-cool-darker", "accent-cooler"],
+        }
+      - {
+          label: "Header Background Color",
+          name: "headerBackgroundColor",
+          widget: "select",
+          required: false,
+          options: ["accent-cooler-lightest", "primary-light", "cool-lighter"],
+        }
+      - {
+          label: "Border Color",
+          name: "borderColor",
+          widget: "select",
+          required: true,
+          options:
+            [
+              "accent-cooler-light",
+              "accent-cool-light",
+              "primary-light",
+              "secondary-light",
+              "info-light",
+              "secondary-light",
+            ],
+        }
+
+  - name: "misc-label"
+    label: "🟧 MISC"
+    folder: "content/src"
+    fields:
+      - { name: "" }
 
   - name: "config"
     label: "General Config"
@@ -2468,76 +2671,6 @@ collections:
                       widget: string,
                     }
                   - { label: "Registered Agent Number", name: agentNumber, widget: string }
-          - label: Dashboard Defaults
-            name: dashboardDefaults
-            collapsed: true
-            widget: object
-            summary: "{{dashboardDefaults}}"
-            fields:
-              - { label: Hidden Opportunities Header, name: hiddenOpportunitiesHeader, widget: string }
-              - { label: Hide Opportunity Text, name: hideOpportunityText, widget: string }
-              - { label: Unhide Opportunity Text, name: unHideOpportunityText, widget: string }
-              - { label: Empty Opportunities Header, name: emptyOpportunitiesHeader, widget: string }
-              - { label: Empty Opportunities Text, name: emptyOpportunitiesText, widget: string }
-              - {
-                  label: Empty Calendar Title Text,
-                  name: emptyCalendarTitleText,
-                  widget: string,
-                  hint: This field supports Markdown,
-                }
-              - { label: Empty Calendar Body Text, name: emptyCalendarBodyText, widget: text }
-              - { label: Funding Tag Text, name: fundingTagText, widget: string }
-              - { label: Certification Tag Text, name: certificationTagText, widget: string }
-              - { label: Calendar Legal Text, name: calendarLegalText, widget: string }
-              - { label: Calendar Header, name: calendarHeader, widget: string }
-              - { label: Calendar Tooltip, name: calendarTooltip, widget: text }
-              - {
-                  label: Learn More Funding Opportunities Text,
-                  name: learnMoreFundingOpportunities,
-                  widget: string,
-                  hint: This field supports Markdown,
-                }
-              - { label: Calendar Filing Due Date Label, name: calendarFilingDueDateLabel, widget: string }
-              - { label: Congratulatory Modal - Title, name: congratulatoryModalTitle, widget: string }
-              - { label: Congratulatory Modal - Header, name: congratulatoryModalHeader, widget: string }
-              - { label: Congratulatory Modal - Body, name: congratulatoryModalBody, widget: string }
-              - { label: Congratulatory Modal - Link Text, name: congratulatoryModalLinkText, widget: string }
-              - { label: Sidebar Heading, name: sidebarHeading, widget: string }
-              - { label: Calendar Snackbar Heading, name: calendarSnackbarHeading, widget: text }
-              - { label: Calendar Snackbar Body, name: calendarSnackbarBody, widget: text }
-              - { label: Certifications Snackbar Heading, name: certificationsSnackbarHeading, widget: text }
-              - { label: Certifications Snackbar Body, name: certificationsSnackbarBody, widget: text }
-              - { label: Funding Snackbar Heading, name: fundingSnackbarHeading, widget: text }
-              - { label: Funding Snackbar Body, name: fundingSnackbarBody, widget: text }
-              - { label: Hidden Tasks Snackbar Heading, name: hiddenTasksSnackbarHeading, widget: text }
-              - { label: Hidden Tasks Snackbar Body, name: hiddenTasksSnackbarBody, widget: text }
-              - { label: Sector Modal Title, name: sectorModalTitle, widget: text }
-              - { label: Sector Modal Body, name: sectorModalBody, widget: text }
-              - { label: Sector Modal Cancel Button, name: sectorModalCancelButton, widget: text }
-              - { label: Sector Modal Save Button, name: sectorModalSaveButton, widget: text }
-              - { label: Calendar List View Button, name: calendarListViewButton, widget: text }
-              - { label: Calendar Grid View Button, name: calendarGridViewButton, widget: text }
-              - { label: Below Calendar Task Header Text, name: upAndRunningTaskHeader, widget: text }
-              - { label: Show Task Button Text, name: showTaskText, widget: text }
-              - { label: Hide Task Button Text, name: hideTaskText, widget: text }
-              - { label: Number of Hidden Tasks Text, name: hiddenTasksText, widget: text }
-              - {
-                  label: Deferred Onboarding - Save Button Text,
-                  name: deferredOnboardingSaveButtonText,
-                  widget: text,
-                }
-              - {
-                  label: Deferred Onboarding - Snackbar Header,
-                  name: deferredOnboardingSnackbarHeader,
-                  widget: text,
-                }
-              - {
-                  label: Deferred Onboarding - Snackbar Body,
-                  name: deferredOnboardingSnackbarBody,
-                  widget: markdown,
-                }
-              - { label: Mobile View - First Tab Text, name: mobileFirstTabText, widget: text }
-              - { label: Mobile View - Second Tab Text, name: mobileSecondTabText, widget: text }
           - label: Tax Calendar Defaults
             name: taxCalendar
             collapsed: true
@@ -3134,62 +3267,6 @@ collections:
             fields:
               - { label: Title, name: title, widget: string }
               - { label: Subtitle, name: subtitle, widget: markdown }
-
-  - name: "roadmap-sidebar-card"
-    label: "Sidebar Cards Content"
-    folder: "content/src/display-content/roadmap-sidebar-cards"
-    summary: "{{id}}"
-    identifier_field: "{{id}}"
-    slug: "{{id}}"
-    delete: true
-    create: true
-    editor:
-      preview: true
-    fields:
-      - { label: "Id", name: "id", widget: "string" }
-      - { label: "Header", name: "header", widget: "string", required: false }
-      - { label: "Not Started Header", name: "notStartedHeader", widget: "string", required: false }
-      - { label: "Completed Header", name: "completedHeader", widget: "string", required: false }
-      - { label: "Has Close Button", name: "hasCloseButton", widget: "boolean", required: false }
-      - { label: "CTA Text", name: "ctaText", widget: "string", required: false }
-      - { label: "Weight (lower weights sort first)", name: "weight", widget: "number", required: true }
-      - {
-          label: "Image (header required)",
-          name: "imgPath",
-          widget: "select",
-          required: false,
-          options: ["/img/congratulations-purple.svg", "/img/check-mark-circular-blue.svg"],
-        }
-      - { label: "Content", name: "body", widget: "markdown" }
-      - {
-          label: "Color",
-          name: "color",
-          widget: "select",
-          required: true,
-          options: ["primary", "accent-cool-darker", "accent-cooler"],
-        }
-      - {
-          label: "Header Background Color",
-          name: "headerBackgroundColor",
-          widget: "select",
-          required: false,
-          options: ["accent-cooler-lightest", "primary-light", "cool-lighter"],
-        }
-      - {
-          label: "Border Color",
-          name: "borderColor",
-          widget: "select",
-          required: true,
-          options:
-            [
-              "accent-cooler-light",
-              "accent-cool-light",
-              "primary-light",
-              "secondary-light",
-              "info-light",
-              "secondary-light",
-            ],
-        }
 
   - name: "profile-onboarding"
     label: "Profile Page"

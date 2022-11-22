@@ -5,6 +5,10 @@ import * as CannabisLicenseTab1 from "@businessnjgovnavigator/content/fieldConfi
 import * as CannabisPriorityStatusTab1 from "@businessnjgovnavigator/content/fieldConfig/cannabis-priority-status-tab1.json";
 import * as CannabisPriorityStatusTab2 from "@businessnjgovnavigator/content/fieldConfig/cannabis-priority-status-tab2.json";
 import * as ConfigOriginal from "@businessnjgovnavigator/content/fieldConfig/config.json";
+import * as DashboardCalendar from "@businessnjgovnavigator/content/fieldConfig/dashboard-calendar.json";
+import * as DashboardModals from "@businessnjgovnavigator/content/fieldConfig/dashboard-modals.json";
+import * as DashboardSnackbars from "@businessnjgovnavigator/content/fieldConfig/dashboard-snackbars.json";
+import * as DashboardTabs from "@businessnjgovnavigator/content/fieldConfig/dashboard-tabs.json";
 import * as DeferredLocation from "@businessnjgovnavigator/content/fieldConfig/deferred-location.json";
 import * as Ein from "@businessnjgovnavigator/content/fieldConfig/ein.json";
 import * as FormationInterimSuccessPage from "@businessnjgovnavigator/content/fieldConfig/formation-interim-success-page.json";
@@ -72,7 +76,11 @@ const merged = JSON.parse(
       FormationInterimSuccessPage,
       FormationSuccessPage,
       PageNotFoundError,
-      DeferredLocation
+      DeferredLocation,
+      DashboardSnackbars,
+      DashboardCalendar,
+      DashboardTabs,
+      DashboardModals
     )
   )
 );
@@ -110,7 +118,11 @@ export type ConfigType = typeof ConfigOriginal &
   typeof FormationInterimSuccessPage &
   typeof FormationSuccessPage &
   typeof PageNotFoundError &
-  typeof DeferredLocation;
+  typeof DeferredLocation &
+  typeof DashboardCalendar &
+  typeof DashboardModals &
+  typeof DashboardTabs &
+  typeof DashboardSnackbars;
 
 export const getMergedConfig = (): ConfigType => {
   return merge(
@@ -147,7 +159,11 @@ export const getMergedConfig = (): ConfigType => {
     FormationInterimSuccessPage,
     FormationSuccessPage,
     PageNotFoundError,
-    DeferredLocation
+    DeferredLocation,
+    DashboardSnackbars,
+    DashboardModals,
+    DashboardTabs,
+    DashboardCalendar
   );
 };
 

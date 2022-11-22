@@ -120,7 +120,7 @@ describe("<DeferredLocationQuestion />", () => {
       selectLocationByText("Newark");
       // eslint-disable-next-line testing-library/no-unnecessary-act
       await act(() => {
-        fireEvent.click(screen.getByText(Config.dashboardDefaults.deferredOnboardingSaveButtonText));
+        fireEvent.click(screen.getByText(Config.deferredLocation.deferredOnboardingSaveButtonText));
       });
     };
 
@@ -147,7 +147,7 @@ describe("<DeferredLocationQuestion />", () => {
       await selectNewarkAndSave();
       fireEvent.click(screen.getByText(Config.deferredLocation.editText));
       selectLocationByText("Absecon");
-      fireEvent.click(screen.getByText(Config.dashboardDefaults.deferredOnboardingSaveButtonText));
+      fireEvent.click(screen.getByText(Config.deferredLocation.deferredOnboardingSaveButtonText));
       await screen.findByTestId("city-success-banner");
       expect(screen.getByText("inner-content")).toBeInTheDocument();
     });
