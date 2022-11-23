@@ -18,7 +18,7 @@ describe("<LandingPageTiles />", () => {
   it("auto-selects businessPersona and routes user to industry selection when the starting a business button is clicked", async () => {
     render(<LandingPageTiles />);
 
-    fireEvent.click(screen.getByText(Config.landingPage.LandingPageTile2Text));
+    fireEvent.click(screen.getByText(Config.landingPage.landingPageTile2Text));
 
     expect(mockPush).toHaveBeenCalledWith({ pathname: "/onboarding", query: { flow: "starting" } });
   });

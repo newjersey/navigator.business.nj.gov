@@ -406,9 +406,9 @@
     "section4ThirdIconText": "NJ Government Services",
     "section5SecondHeaderText": "Funding & Certifications",
     "section6Header": "Looking for More Support?",
-    "LandingPageTile1Text": "Get Started",
-    "LandingPageTile2Text": "I'm starting a business",
-    "LandingPageTile5Text": "How do I register my business?"
+    "landingPageTile1Text": "Get Started",
+    "landingPageTile2Text": "I'm starting a business",
+    "landingPageTile5Text": "How do I register my business?"
   },
   "feedbackModal": {
     "feedbackModalFeatureRequestButtonText": "Request new capabilities",
