@@ -1,4 +1,3 @@
-import { AuthButton } from "@/components/AuthButton";
 import { Button } from "@/components/njwds-extended/Button";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { MediaQueries } from "@/lib/PageSizes";
@@ -8,6 +7,7 @@ import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router";
 import { ReactElement } from "react";
+import { LandingPageTiles } from "../LandingPageTiles";
 
 export const Hero = (): ReactElement => {
   const isDesktopAndUp = useMediaQuery(MediaQueries.desktopAndUp);
@@ -21,11 +21,6 @@ export const Hero = (): ReactElement => {
       ...Config.landingPageExperienceB,
     };
   }
-
-  const primaryCTAOnClick = () => {
-    router.push(ROUTES.onboarding);
-    analytics.event.landing_page_hero_get_started.click.go_to_onboarding();
-  };
 
   const section2CTAOnClick = () => {
     router.push(ROUTES.onboarding);
@@ -43,7 +38,7 @@ export const Hero = (): ReactElement => {
         <div className="desktop:grid-container-widescreen desktop:padding-x-7 width-100">
           <div className="grid-row">
             <div
-              className={`desktop:grid-col-5 padding-top-3 padding-bottom-15 desktop:padding-bottom-10  ${
+              className={`desktop:grid-col-5 padding-top-3 padding-bottom-2 desktop:padding-bottom-10  ${
                 isDesktopAndUp ? "text-left" : "text-center padding-x-2"
               }`}
             >
@@ -57,24 +52,13 @@ export const Hero = (): ReactElement => {
               <div className="text-base-darkest font-sans-lg margin-bottom-3 desktop:margin-bottom-3">
                 {landingPageConfig.heroSupportingText}
               </div>
-              <div className="desktop:display-inline margin-bottom-2 desktop-margin-bottom-0 desktop:margin-right-2">
-                <Button
-                  style="primary-big"
-                  onClick={primaryCTAOnClick}
-                  dataTestid="hero-login-button"
-                  widthAutoOnMobile
-                  noRightMargin
-                >
-                  {landingPageConfig.heroCallToActionText}
-                </Button>
-              </div>
-
-              <AuthButton position="HERO" landing />
             </div>
+
             <div className="desktop:grid-col-7 order-first desktop:order-last margin-auto">
               <img className="width-100" src="/img/Hero-img-climb.svg" alt="Hero People Climbing" />
             </div>
           </div>
+          <LandingPageTiles />
         </div>
       </div>
       <div className={`${isDesktopAndUp ? "hero-gradient-bg-bottom" : "bg-success-lighter"}`}>

@@ -399,14 +399,16 @@
     "card1Button": "Visit the Site",
     "card2Button": "Sign Up",
     "card3Button": "Start Chatting",
-    "heroCallToActionText": "Get Started",
     "section5ThirdSupportingText": "The Navigator is a one-stop-shop for all your New Jersey business needs. You can track your progress, check the status of applications, speak to NJ-based business advocates, and more!",
     "heroSupportingText": "Create your free, personalized guide to register and find funding for your New Jersey or out-of-state business.",
     "section5FirstHeaderText": "Step-by-Step Guide",
     "heroCallOutFirstLineText": "Your Business,",
     "section4ThirdIconText": "NJ Government Services",
     "section5SecondHeaderText": "Funding & Certifications",
-    "section6Header": "Looking for More Support?"
+    "section6Header": "Looking for More Support?",
+    "LandingPageTile1Text": "Get Started",
+    "LandingPageTile2Text": "I'm starting a business",
+    "LandingPageTile5Text": "How do I register my business?"
   },
   "feedbackModal": {
     "feedbackModalFeatureRequestButtonText": "Request new capabilities",

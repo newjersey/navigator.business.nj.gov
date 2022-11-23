@@ -24,6 +24,7 @@ interface QUERY_PARAMS_VALUES {
   industry: string;
   code: string;
   openTaxFilingsModal: "true";
+  flow: "starting" | "owning" | "foreign";
 }
 
 export enum QUERIES {
@@ -41,6 +42,7 @@ export enum QUERIES {
   industry = "industry",
   code = "code",
   openTaxFilingsModal = "openTaxFilingsModal",
+  flow = "flow",
 }
 
 export const routeShallowWithQuery = <K extends keyof QUERY_PARAMS_VALUES>(

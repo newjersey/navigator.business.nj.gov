@@ -15,8 +15,7 @@ describe("Guest Dashboard [feature] [all] [group2]", () => {
     cy.window().then((window) => {
       return window.sessionStorage.clear();
     });
-    cy.visit("/");
-    cy.get('[data-testid="hero-login-button"]').click();
+    cy.visit("/onboarding");
     completeNewBusinessOnboarding({
       industry,
       townDisplayName,

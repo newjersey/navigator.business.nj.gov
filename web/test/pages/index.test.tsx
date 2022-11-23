@@ -5,7 +5,7 @@ import { generateProfileData, generateUser } from "@/test/factories";
 import { withAuth } from "@/test/helpers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { setMockUserDataResponse, useMockUserData } from "@/test/mock/mockUseUserData";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render } from "@testing-library/react";
 
 jest.mock("next/router", () => {
   return { useRouter: jest.fn() };
@@ -22,13 +22,6 @@ describe("HomePage", () => {
     jest.resetAllMocks();
     useMockRouter({});
     useMockUserData({});
-  });
-
-  it("sends to onboarding when Get Started button clicked", () => {
-    useMockUserData({});
-    render(withAuth(<Home />, { user: generateUser({}) }));
-    fireEvent.click(screen.getByTestId("hero-login-button"));
-    expect(mockPush).toHaveBeenCalledWith(ROUTES.onboarding);
   });
 
   it("redirects to dashboard page when user has completed onboarding flow", () => {
