@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 import { ReactElement, useContext } from "react";
 
 interface Props {
-  position: "HERO" | "NAVBAR";
+  position: "NAVBAR";
   landing?: boolean;
 }
 
@@ -20,17 +20,13 @@ export const AuthButton = (props?: Props): ReactElement => {
   const loginButton = () => {
     return (
       <Button
-        style={props?.position === "HERO" ? `secondary-big` : "tertiary"}
+        style="tertiary"
         dataTestid="login-button"
         noRightMargin
         widthAutoOnMobile
         onClick={() => {
           triggerSignIn();
-          if (props?.position === "HERO") {
-            analytics.event.landing_page_hero_log_in.click.go_to_myNJ_login();
-          } else if (props?.position === "NAVBAR") {
-            analytics.event.landing_page_navbar_log_in.click.go_to_myNJ_login();
-          }
+          analytics.event.landing_page_navbar_log_in.click.go_to_myNJ_login();
         }}
       >
         {Config.navigationDefaults.logInButton}
@@ -41,7 +37,7 @@ export const AuthButton = (props?: Props): ReactElement => {
   const logoutButton = () => {
     return (
       <Button
-        style={props?.position === "HERO" ? `secondary-big` : "tertiary"}
+        style="tertiary"
         noRightMargin
         onClick={() => {
           return onSignOut(router.push, dispatch);
