@@ -11,7 +11,7 @@ import {
   UserData,
 } from "@businessnjgovnavigator/shared/";
 import { emptyBusinessUser } from "@businessnjgovnavigator/shared/businessUser";
-import { emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
+import { BusinessPersona, emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { TaxFilingData } from "@businessnjgovnavigator/shared/taxFiling";
 import { SectionType, TaskProgress } from "@businessnjgovnavigator/shared/userData";
 import { merge } from "lodash";
@@ -28,7 +28,7 @@ export type ProfileError =
   | "REQUIRED_FOREIGN_BUSINESS_TYPE"
   | "REQUIRED_NEXUS_LOCATION_IN_NJ";
 
-export type FlowType = "OWNING" | "STARTING" | "FOREIGN";
+export type FlowType = Exclude<BusinessPersona, undefined>;
 
 export type FormationDisplayContent = {
   introParagraph: { contentMd: string };

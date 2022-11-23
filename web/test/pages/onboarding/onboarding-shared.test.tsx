@@ -9,6 +9,8 @@ import { generateMunicipality, generateProfileData, generateUser, generateUserDa
 import { withAuth, withRoadmap } from "@/test/helpers";
 import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
+import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
+import { useMockUserData } from "@/test/mock/mockUseUserData";
 import {
   currentUserData,
   getLastCalledWithConfig,
@@ -409,6 +411,27 @@ describe("onboarding - shared", () => {
     page.clickNext();
     await waitFor(() => {
       expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
+    });
+  });
+
+  describe("when query parameter sets onboarding flow to starting", () => {
+    beforeEach(() => {
+      jest.resetAllMocks();
+      useMockRouter({});
+      useMockUserData({});
+      useMockRoadmap({});
+      setupStatefulUserDataContext();
+    });
+
+    it("routes user to step 2 when query parameter exists and value is starting", async () => {
+      useMockRouter({ isReady: true, query: { flow: "starting" } });
+      const { page } = renderPage({});
+
+      expect(screen.getByTestId("step-2")).toBeInTheDocument();
+      page.selectByText("Industry", "All Other Businesses");
+      await page.visitStep(3);
+
+      expect(currentUserData().profileData.businessPersona).toEqual("STARTING");
     });
   });
 });

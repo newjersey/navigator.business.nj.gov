@@ -114,3 +114,32 @@
     opacity: 0.8;
   }
 }
+
+.landing-page-tile {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  gap: 1rem;
+  font-weight: bold;
+  background-color: $accent-cool-lightest;
+  width: 16.5rem;
+  height: 4.25rem;
+  border: 0.125rem solid $secondary-lighter;
+  border-radius: 0.625rem;
+
+  @media (min-width: $sm) {
+    flex-direction: column;
+    padding: 1.25rem 1.25rem 1.5rem 1.25rem;
+    gap: 1.125rem;
+    width: 12.5rem;
+    height: 9.6875rem;
+    border-radius: 1.25rem;
+  }
+}
+
+.landing-page-secondary-tile {
+  @extend .landing-page-tile;
+  font-weight: normal;
+  background-color: $white;
+  border: 0.125rem solid $base-lighter;
+}

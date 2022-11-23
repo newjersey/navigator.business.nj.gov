@@ -54,7 +54,7 @@ import {
   ProfileData,
   UserData,
 } from "@businessnjgovnavigator/shared/";
-import { emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
+import { businessPersonas, emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { useMediaQuery } from "@mui/material";
 import { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
@@ -143,6 +143,10 @@ const OnboardingPage = (props: Props): ReactElement => {
     return !!LookupIndustryById(industryId).id;
   };
 
+  const flowQueryParamIsValid = (flow: string): boolean => {
+    return businessPersonas.includes(flow as FlowType);
+  };
+
   useEffect(() => {
     setCurrentFlow(getFlow(profileData));
   }, [profileData]);
@@ -159,7 +163,6 @@ const OnboardingPage = (props: Props): ReactElement => {
       }
 
       let currentUserData = userData;
-
       if (currentUserData) {
         setProfileData(currentUserData.profileData);
         setUser(currentUserData.user);
@@ -171,7 +174,6 @@ const OnboardingPage = (props: Props): ReactElement => {
         setProfileData(currentUserData.profileData);
         setUser(currentUserData.user);
       }
-
       if (currentUserData) {
         if (currentUserData?.formProgress === "COMPLETED") {
           await router.replace(ROUTES.profile);
@@ -179,11 +181,14 @@ const OnboardingPage = (props: Props): ReactElement => {
         } else {
           const queryPage = Number(router.query[QUERIES.page]);
           const queryIndustryId = router.query[QUERIES.industry] as string | undefined;
+          const queryFlow = (router.query[QUERIES.flow] as string)?.toUpperCase();
 
           if (industryQueryParamIsValid(queryIndustryId)) {
             await setIndustryAndRouteToPage(currentUserData, queryIndustryId);
           } else if (pageQueryParamisValid(currentUserData, queryPage)) {
             setPage({ current: queryPage, previous: queryPage - 1 });
+          } else if (flowQueryParamIsValid(queryFlow)) {
+            await setBusinessPersonaAndRouteToPage(queryFlow as FlowType);
           } else {
             setPage({ current: 1, previous: 1 });
             routeToPage(1);
@@ -209,7 +214,7 @@ const OnboardingPage = (props: Props): ReactElement => {
     industryId: string | undefined
   ): Promise<void> => {
     setProfileData({
-      ...profileData,
+      ...userData.profileData,
       businessPersona: "STARTING",
       industryId: industryId,
     });
@@ -219,6 +224,17 @@ const OnboardingPage = (props: Props): ReactElement => {
     } else {
       setPage({ current: 3, previous: 2 });
     }
+  };
+
+  const setBusinessPersonaAndRouteToPage = async (flow: FlowType): Promise<void> => {
+    setProfileData((previousProfileData) => {
+      return {
+        ...previousProfileData,
+        businessPersona: flow,
+      };
+    });
+    setCurrentFlow(flow);
+    setPage({ current: 2, previous: 1 });
   };
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>): Promise<void> => {
