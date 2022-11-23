@@ -9,7 +9,6 @@ import { useRouter } from "next/router";
 import { ReactElement, useContext } from "react";
 
 interface Props {
-  position: "NAVBAR";
   landing?: boolean;
 }
 

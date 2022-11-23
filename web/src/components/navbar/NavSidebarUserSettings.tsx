@@ -98,7 +98,7 @@ export const NavSidebarUserSettings = (): ReactElement => {
       <hr />
       <div className="margin-left-2 margin-bottom-2">
         {renderMenu()}
-        <AuthButton position="NAVBAR" />
+        <AuthButton />
       </div>
     </div>
   );

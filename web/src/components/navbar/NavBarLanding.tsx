@@ -19,7 +19,7 @@ export const NavBarLanding = (): ReactElement => {
       <img className="height-4 margin-y-2" src="/img/Navigator-logo@2x.png" alt="Business.NJ.Gov Navigator" />
       <div>
         <span className="margin-right-2">
-          <AuthButton position="NAVBAR" landing />
+          <AuthButton landing />
         </span>
         <Button
           style="tertiary"
