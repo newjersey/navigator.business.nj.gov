@@ -3666,7 +3666,7 @@ __metadata:
     cross-env: 7.0.3
     dayjs: 1.11.6
     dedent: 0.7.0
-    dependency-cruiser: 12.0.0
+    dependency-cruiser: 12.0.1
     eslint: 8.28.0
     eslint-config-prettier: 8.5.0
     eslint-plugin-jest: 27.1.5
@@ -3823,7 +3823,7 @@ __metadata:
     cypress-wait-until: 1.7.2
     dayjs: 1.11.6
     dedent: 0.7.0
-    dependency-cruiser: 12.0.0
+    dependency-cruiser: 12.0.1
     dotenv: 16.0.3
     eslint: 8.28.0
     eslint-config-next: 13.0.4
@@ -4016,7 +4016,7 @@ __metadata:
     cypress-dotenv: 2.0.0
     cypress-wait-until: 1.7.2
     dayjs: 1.11.6
-    dependency-cruiser: 12.0.0
+    dependency-cruiser: 12.0.1
     dotenv: 16.0.3
     eslint: 8.28.0
     eslint-config-next: 13.0.4
@@ -15018,9 +15018,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dependency-cruiser@npm:12.0.0":
-  version: 12.0.0
-  resolution: "dependency-cruiser@npm:12.0.0"
+"dependency-cruiser@npm:12.0.1":
+  version: 12.0.1
+  resolution: "dependency-cruiser@npm:12.0.1"
   dependencies:
     acorn: 8.8.1
     acorn-jsx: 5.3.2
@@ -15044,10 +15044,10 @@ __metadata:
     rechoir: ^0.8.0
     safe-regex: 2.1.1
     semver: ^7.3.7
-    semver-try-require: 5.0.4
+    semver-try-require: 6.0.0
     teamcity-service-messages: 0.1.14
     tsconfig-paths-webpack-plugin: 4.0.0
-    watskeburt: 0.8.1
+    watskeburt: 0.9.0
     wrap-ansi: ^7.0.0
   bin:
     depcruise: bin/dependency-cruise.js
@@ -15056,7 +15056,7 @@ __metadata:
     depcruise-wrap-stream-in-html: bin/wrap-stream-in-html.js
     dependency-cruise: bin/dependency-cruise.js
     dependency-cruiser: bin/dependency-cruise.js
-  checksum: 1ec46e0553868323ebdb49a3c562a7a77c52baecf8284aae562b3bf4533574b668c672031b6c182e8292dc20e41551fa79803177ec6dd6a70e377ffe8fa81bfd
+  checksum: fe0500a8326b2944739eba581e0354bfb3713aa7f39639640d36a0bccac98041a69dc6b6d0ab8d6e9773d5d9fdb1b69dcc8af82eeeb2e45cdb4fbeb4be5191df
   languageName: node
   linkType: hard
 
@@ -30374,12 +30374,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semver-try-require@npm:5.0.4":
-  version: 5.0.4
-  resolution: "semver-try-require@npm:5.0.4"
+"semver-try-require@npm:6.0.0":
+  version: 6.0.0
+  resolution: "semver-try-require@npm:6.0.0"
   dependencies:
     semver: ^7.3.8
-  checksum: f953eadfd0e5f54ae4eaba559950b45d0f041f09092adde05c2fbabd75b3dbc1d9adb09f7b5ab8f59148a33b35247205426e9b59f247d9f483419b3cd6d09ccd
+  checksum: a54ddae01c0deade647c15832a86fa541abdfeeca13d0817ff0f870d18680e330a98633a7aee01e8b2e0cf9167c6975982b0d365d28a8425359e1903cd5da8b6
   languageName: node
   linkType: hard
 
@@ -34322,14 +34322,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"watskeburt@npm:0.8.1":
-  version: 0.8.1
-  resolution: "watskeburt@npm:0.8.1"
+"watskeburt@npm:0.9.0":
+  version: 0.9.0
+  resolution: "watskeburt@npm:0.9.0"
   dependencies:
     commander: 9.4.1
   bin:
     watskeburt: bin/cli.mjs
-  checksum: 7b8807d25e3337807327f3e789d4dbe2ee4282e4397483deabe27b75e365c81d2d0c797a91dde09d61a646634c50d024b59119aaa0b5caa736487e1baa1c6db0
+  checksum: 15e90eacb0978de14a8047378d7818e4c983af9430c68fe8733193fb6e954550fe5773d1abc702cc34b4fe7921224eb8041fde21cbd6938a07cbb8e474c60f06
   languageName: node
   linkType: hard
 
