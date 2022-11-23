@@ -127,6 +127,11 @@
   border: 0.125rem solid $secondary-lighter;
   border-radius: 0.625rem;
 
+  &:hover,
+  :active {
+    background-color: $secondary-lighter;
+  }
+
   @media (min-width: $sm) {
     flex-direction: column;
     padding: 1.25rem 1.25rem 1.5rem 1.25rem;
@@ -142,4 +147,11 @@
   font-weight: normal;
   background-color: $white;
   border: 0.125rem solid $base-lighter;
+  &:hover {
+    background-color: $white;
+    box-shadow: 0.25rem 0.25rem 0.5rem;
+  }
+  &:active {
+    background-color: $base-lightest;
+  }
 }
