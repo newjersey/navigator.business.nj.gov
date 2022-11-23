@@ -7,6 +7,11 @@ import CannabisPriorityStatusPreview from "@/lib/cms/previews/CannabisPrioritySt
 import CertificationsPreview from "@/lib/cms/previews/CertificationsPreview";
 import ContentPreview from "@/lib/cms/previews/ContentPreview";
 import ContextInfoPreview from "@/lib/cms/previews/ContextInfoPreview";
+import DashboardCalendarPreview from "@/lib/cms/previews/DashboardCalendarPreview";
+import DashboardModalsPreview from "@/lib/cms/previews/DashboardModalsPreview";
+import DashboardSnackbarsPreview from "@/lib/cms/previews/DashboardSnackbarsPreview";
+import DashboardTabsPreview from "@/lib/cms/previews/DashboardTabsPreview";
+import DeferredLocationPreview from "@/lib/cms/previews/DeferredLocationPreview";
 import EinInputPreview from "@/lib/cms/previews/EinInputPreview";
 import FilingsPreview from "@/lib/cms/previews/FilingsPreview";
 import FormationInterimSuccessPreview from "@/lib/cms/previews/FormationInterimSuccessPreview";
@@ -113,6 +118,14 @@ const CMS = dynamic(
       // ----- Formation -----
       registerPreview(CMS, "business-formation-interim-success-page", FormationInterimSuccessPreview);
       registerPreview(CMS, "business-formation-success-page", FormationSuccessPreview);
+
+      // ----- Config --------
+      registerPreview(CMS, "dashboard-config-snackbars", DashboardSnackbarsPreview);
+      registerPreview(CMS, "dashboard-config-calendar", DashboardCalendarPreview);
+      registerPreview(CMS, "dashboard-config-modals", DashboardModalsPreview);
+      registerPreview(CMS, "dashboard-config-tabs", DashboardTabsPreview);
+
+      registerPreview(CMS, "deferred-location-config", DeferredLocationPreview);
     });
   },
   { ssr: false, loading: Loading }

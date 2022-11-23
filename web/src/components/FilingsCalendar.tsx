@@ -5,7 +5,7 @@ import {
 } from "@/components/FilingsCalendarTaxAccess";
 import { Tag } from "@/components/njwds-extended/Tag";
 import { Icon } from "@/components/njwds/Icon";
-import { getMergedConfig } from "@/contexts/configContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { sortFilterFilingsWithinAYear } from "@/lib/domain-logic/filterFilings";
 import { ROUTES } from "@/lib/domain-logic/routes";
@@ -17,21 +17,27 @@ import {
   LookupOperatingPhaseById,
   parseDateWithFormat,
   TaxFiling,
+  UserData,
 } from "@businessnjgovnavigator/shared";
 import { useMediaQuery } from "@mui/material";
 import Link from "next/link";
-import router from "next/router";
+import { useRouter } from "next/router";
 import { ReactElement } from "react";
 import { Content } from "./Content";
 import { Button } from "./njwds-extended/Button";
 
 interface Props {
   operateReferences: Record<string, OperateReference>;
+  CMS_ONLY_fakeUserData?: UserData; // for CMS only
 }
 
 export const FilingsCalendar = (props: Props): ReactElement => {
-  const Config = getMergedConfig();
-  const { userData, update } = useUserData();
+  const { Config } = useConfig();
+  const userDataFromHook = useUserData();
+  const update = userDataFromHook.update;
+  const userData = props.CMS_ONLY_fakeUserData ?? userDataFromHook.userData;
+  const router = useRouter();
+
   const isLargeScreen = useMediaQuery(MediaQueries.tabletAndUp);
 
   const sortedFilteredFilingsWithinAYear: TaxFiling[] = userData?.taxFilingData.filings

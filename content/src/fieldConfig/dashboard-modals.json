@@ -1,0 +1,12 @@
+{
+  "dashboardDefaults": {
+    "congratulatoryModalTitle": "You Did It!",
+    "congratulatoryModalHeader": "You reached a crucial milestone as a business.",
+    "congratulatoryModalBody": "You can now start your",
+    "congratulatoryModalLinkText": "tasks.",
+    "sectorModalTitle": "Select an Industry Sector",
+    "sectorModalBody": "To see what funding opportunities you're eligible for, tell us your...",
+    "sectorModalCancelButton": "Cancel",
+    "sectorModalSaveButton": "Save"
+  }
+}

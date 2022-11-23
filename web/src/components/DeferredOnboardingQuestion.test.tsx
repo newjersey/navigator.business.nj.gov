@@ -65,7 +65,7 @@ describe("<DeferredOnboardingQuestion />", () => {
   it("saves changes to profile data", () => {
     renderComponent({});
     fireEvent.click(screen.getByTestId("home-based-business-radio-true"));
-    fireEvent.click(screen.getByText(Config.dashboardDefaults.deferredOnboardingSaveButtonText));
+    fireEvent.click(screen.getByText(Config.deferredLocation.deferredOnboardingSaveButtonText));
     expect(currentUserData().profileData.homeBasedBusiness).toEqual(true);
   });
 
@@ -73,7 +73,7 @@ describe("<DeferredOnboardingQuestion />", () => {
     const profileData = generateProfileData({ homeBasedBusiness: undefined });
     renderComponent({ userData: generateUserData({ profileData }) });
     fireEvent.click(screen.getByTestId("home-based-business-radio-true"));
-    fireEvent.click(screen.getByText(Config.dashboardDefaults.deferredOnboardingSaveButtonText));
+    fireEvent.click(screen.getByText(Config.deferredLocation.deferredOnboardingSaveButtonText));
     await waitFor(() => {
       return expect(mockAnalyticsHelpers.setAnalyticsDimensions).toHaveBeenCalledWith({
         ...profileData,
@@ -89,7 +89,7 @@ describe("<DeferredOnboardingQuestion />", () => {
     const profileData = generateProfileData({ homeBasedBusiness: undefined });
     renderComponent({ userData: generateUserData({ profileData }) });
     fireEvent.click(screen.getByTestId("home-based-business-radio-true"));
-    fireEvent.click(screen.getByText(Config.dashboardDefaults.deferredOnboardingSaveButtonText));
+    fireEvent.click(screen.getByText(Config.deferredLocation.deferredOnboardingSaveButtonText));
 
     await waitFor(() => {
       return expect(mockBuildUserRoadmap.buildUserRoadmap).toHaveBeenCalledWith({
@@ -104,7 +104,7 @@ describe("<DeferredOnboardingQuestion />", () => {
     const onSave = jest.fn();
     renderComponent({ onSave });
     fireEvent.click(screen.getByTestId("home-based-business-radio-true"));
-    fireEvent.click(screen.getByText(Config.dashboardDefaults.deferredOnboardingSaveButtonText));
+    fireEvent.click(screen.getByText(Config.deferredLocation.deferredOnboardingSaveButtonText));
     await waitFor(() => {
       expect(onSave).toHaveBeenCalled();
     });
@@ -112,7 +112,7 @@ describe("<DeferredOnboardingQuestion />", () => {
 
   it("does not update if no answer provided", () => {
     renderComponent({});
-    fireEvent.click(screen.getByText(Config.dashboardDefaults.deferredOnboardingSaveButtonText));
+    fireEvent.click(screen.getByText(Config.deferredLocation.deferredOnboardingSaveButtonText));
     expect(userDataWasNotUpdated()).toBe(true);
     expect(mockAnalyticsHelpers.setAnalyticsDimensions).not.toHaveBeenCalled();
     expect(mockBuildUserRoadmap.buildUserRoadmap).not.toHaveBeenCalled();

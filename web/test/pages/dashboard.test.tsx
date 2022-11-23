@@ -565,7 +565,7 @@ describe("dashboard page", () => {
       useMockUserData(userData);
       renderStatefulPage(userData);
       chooseHomeBasedValue("true");
-      fireEvent.click(screen.getByText(Config.dashboardDefaults.deferredOnboardingSaveButtonText));
+      fireEvent.click(screen.getByText(Config.deferredLocation.deferredOnboardingSaveButtonText));
 
       await waitFor(() => {
         return expect(
@@ -585,7 +585,7 @@ describe("dashboard page", () => {
       useMockUserData(userData);
       renderStatefulPage(userData);
       chooseHomeBasedValue("false");
-      fireEvent.click(screen.getByText(Config.dashboardDefaults.deferredOnboardingSaveButtonText));
+      fireEvent.click(screen.getByText(Config.deferredLocation.deferredOnboardingSaveButtonText));
       await waitFor(() => {
         return expect(mockPush).toHaveBeenCalledWith(
           { query: { deferredQuestionAnswered: "true" } },

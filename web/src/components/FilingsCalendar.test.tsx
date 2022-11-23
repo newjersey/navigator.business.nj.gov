@@ -1,3 +1,4 @@
+import { getMergedConfig } from "@/contexts/configContext";
 import { OperateReference } from "@/lib/types/types";
 import {
   generateOperateReference,
@@ -14,7 +15,6 @@ import {
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { OperatingPhases, randomInt, TaxFiling, UserData } from "@businessnjgovnavigator/shared";
 import { getCurrentDate, parseDateWithFormat } from "@businessnjgovnavigator/shared/dateHelpers";
 import * as materialUi from "@mui/material";
@@ -43,6 +43,8 @@ jest.mock("@/lib/data-hooks/useRoadmap", () => {
 jest.mock("next/router", () => {
   return { useRouter: jest.fn() };
 });
+
+const Config = getMergedConfig();
 
 const renderFilingsCalendar = (
   operateReferences: Record<string, OperateReference>,

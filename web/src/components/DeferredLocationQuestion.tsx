@@ -11,16 +11,24 @@ import { createProfileFieldErrorMap } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { setAnalyticsDimensions } from "@/lib/utils/analytics-helpers";
 import { templateEval } from "@/lib/utils/helpers";
+import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { ReactElement, ReactNode, useContext, useState } from "react";
 
 interface Props {
   innerContent: string;
+  CMS_ONLY_showSuccessBanner?: boolean;
+  CMS_ONLY_fakeUserData?: UserData; // for CMS only
 }
 
 export const DeferredLocationQuestion = (props: Props): ReactElement => {
   const { Config } = useConfig();
-  const { userData, updateQueue } = useUserData();
-  const [showSuccessBanner, setShowSuccessBanner] = useState<boolean>(false);
+  const userDataFromHook = useUserData();
+  const userData = props.CMS_ONLY_fakeUserData ?? userDataFromHook.userData;
+  const updateQueue = userDataFromHook.updateQueue;
+
+  const [showSuccessBanner, setShowSuccessBanner] = useState<boolean>(
+    props.CMS_ONLY_showSuccessBanner ?? false
+  );
   const [showEditLocation, setShowEditLocation] = useState<boolean>(false);
   const { setRoadmap } = useContext(RoadmapContext);
 
