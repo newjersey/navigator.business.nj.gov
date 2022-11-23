@@ -9,8 +9,6 @@ import { generateMunicipality, generateProfileData, generateUser, generateUserDa
 import { withAuth, withRoadmap } from "@/test/helpers";
 import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
-import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
-import { useMockUserData } from "@/test/mock/mockUseUserData";
 import {
   currentUserData,
   getLastCalledWithConfig,
@@ -415,14 +413,6 @@ describe("onboarding - shared", () => {
   });
 
   describe("when query parameter sets onboarding flow to starting", () => {
-    beforeEach(() => {
-      jest.resetAllMocks();
-      useMockRouter({});
-      useMockUserData({});
-      useMockRoadmap({});
-      setupStatefulUserDataContext();
-    });
-
     it("routes user to step 2 when query parameter exists and value is starting", async () => {
       useMockRouter({ isReady: true, query: { flow: "starting" } });
       const { page } = renderPage({});
