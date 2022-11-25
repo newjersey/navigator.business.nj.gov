@@ -32,13 +32,13 @@
     "endOfLine": "auto"
   },
   "dependencies": {
-    "@aws-sdk/client-cloudwatch-logs": "3.215.0",
-    "@aws-sdk/client-dynamodb": "3.215.0",
-    "@aws-sdk/client-s3": "3.215.0",
-    "@aws-sdk/lib-dynamodb": "3.215.0",
+    "@aws-sdk/client-cloudwatch-logs": "3.216.0",
+    "@aws-sdk/client-dynamodb": "3.216.0",
+    "@aws-sdk/client-s3": "3.216.0",
+    "@aws-sdk/lib-dynamodb": "3.216.0",
     "@aws-sdk/smithy-client": "3.215.0",
     "@aws-sdk/types": "3.215.0",
-    "@aws-sdk/util-dynamodb": "3.215.0",
+    "@aws-sdk/util-dynamodb": "3.216.0",
     "@businessnjgovnavigator/shared": "*",
     "@serverless/typescript": "3.21.0",
     "airtable": "0.11.5",
