@@ -180,7 +180,7 @@ commands:
             echo 'export FEATURE_BUSINESS_FLP=false' >> $BASH_ENV
             echo 'export FEATURE_BUSINESS_FLC=false' >> $BASH_ENV
             echo 'export FEATURE_BUSINESS_FCORP=false' >> $BASH_ENV
-            echo 'export FEATURE_LANDING_PAGE_REDIRECT=true' >> $BASH_ENV
+            echo 'export FEATURE_LANDING_PAGE_REDIRECT=$FEATURE_LANDING_PAGE_REDIRECT_DEV' >> $BASH_ENV
             echo 'export ALTERNATE_LANDING_PAGE_URL=$ALTERNATE_LANDING_PAGE_URL' >> $BASH_ENV
             echo 'export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID_DEV' >> $BASH_ENV
             echo 'export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY_DEV' >> $BASH_ENV
