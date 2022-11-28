@@ -5,6 +5,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { FeedbackRequestModalNames } from "@/lib/types/types";
 import { makeButtonIcon } from "@/lib/utils/helpers";
+import { LookupOperatingPhaseById } from "@businessnjgovnavigator/shared/operatingPhase";
 import { ReactElement } from "react";
 
 type Props = {
@@ -17,12 +18,10 @@ export const SelectFeedbackModal = ({ onClose, isOpen, setCurrentFeedback }: Pro
   const { userData } = useUserData();
   const { Config } = useConfig();
   const getFeedbackLink = (): string => {
-    switch (userData?.profileData.businessPersona) {
+    switch (LookupOperatingPhaseById(userData?.profileData.operatingPhase).feedbackFormToDisplay) {
       case "OWNING":
         return Config.feedbackModal.feedbackModalLinkOwning;
       case "STARTING":
-        return Config.feedbackModal.feedbackModalLinkStarting;
-      case "FOREIGN":
         return Config.feedbackModal.feedbackModalLinkStarting;
       default:
         return "";

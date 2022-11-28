@@ -4,6 +4,7 @@ import { generateParsedUserAgent, generateProfileData, generateUserData } from "
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockUserData, useUndefinedUserData } from "@/test/mock/mockUseUserData";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
+import { OperatingPhaseId } from "@businessnjgovnavigator/shared/operatingPhase";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => {
@@ -66,46 +67,51 @@ describe("<feedbackModal />", () => {
       ).not.toBeInTheDocument();
     });
 
-    it("links to correct feedback form when completed onboarding and owns a business", () => {
-      useMockUserData({
-        formProgress: "COMPLETED",
-        profileData: generateProfileData({ businessPersona: "OWNING" }),
-      });
-      renderFeedbackModal({});
+    describe("UP_AND_RUNNING phases", () => {
+      const phases: OperatingPhaseId[] = ["UP_AND_RUNNING", "UP_AND_RUNNING_OWNING", "GUEST_MODE_OWNING"];
+      for (const phase of phases) {
+        it(`links to owning feedback form for ${phase}`, () => {
+          useMockUserData({
+            formProgress: "COMPLETED",
+            profileData: generateProfileData({ operatingPhase: phase }),
+          });
+          renderFeedbackModal({});
 
-      expect(screen.getByText(Config.feedbackModal.feedbackModalShareFeedbackButtonText)).toBeInTheDocument();
-      expect(screen.getByTestId("feedback-link")).toHaveAttribute(
-        "href",
-        Config.feedbackModal.feedbackModalLinkOwning
-      );
+          expect(
+            screen.getByText(Config.feedbackModal.feedbackModalShareFeedbackButtonText)
+          ).toBeInTheDocument();
+          expect(screen.getByTestId("feedback-link")).toHaveAttribute(
+            "href",
+            Config.feedbackModal.feedbackModalLinkOwning
+          );
+        });
+      }
     });
 
-    it("links to correct feedback form when completed onboarding and starting a business", () => {
-      useMockUserData({
-        formProgress: "COMPLETED",
-        profileData: generateProfileData({ businessPersona: "STARTING" }),
-      });
-      renderFeedbackModal({});
+    describe("non - up-and-running phases", () => {
+      const phases: OperatingPhaseId[] = [
+        "GUEST_MODE",
+        "NEEDS_TO_FORM",
+        "NEEDS_TO_REGISTER_FOR_TAXES",
+        "FORMED_AND_REGISTERED",
+      ];
+      for (const phase of phases) {
+        it(`links to starting feedback form for ${phase}`, () => {
+          useMockUserData({
+            formProgress: "COMPLETED",
+            profileData: generateProfileData({ operatingPhase: phase }),
+          });
+          renderFeedbackModal({});
 
-      expect(screen.getByText(Config.feedbackModal.feedbackModalShareFeedbackButtonText)).toBeInTheDocument();
-      expect(screen.getByTestId("feedback-link")).toHaveAttribute(
-        "href",
-        Config.feedbackModal.feedbackModalLinkStarting
-      );
-    });
-
-    it("links to correct feedback form when completed onboarding and a foreign business", () => {
-      useMockUserData({
-        formProgress: "COMPLETED",
-        profileData: generateProfileData({ businessPersona: "FOREIGN" }),
-      });
-      renderFeedbackModal({});
-
-      expect(screen.getByText(Config.feedbackModal.feedbackModalShareFeedbackButtonText)).toBeInTheDocument();
-      expect(screen.getByTestId("feedback-link")).toHaveAttribute(
-        "href",
-        Config.feedbackModal.feedbackModalLinkStarting
-      );
+          expect(
+            screen.getByText(Config.feedbackModal.feedbackModalShareFeedbackButtonText)
+          ).toBeInTheDocument();
+          expect(screen.getByTestId("feedback-link")).toHaveAttribute(
+            "href",
+            Config.feedbackModal.feedbackModalLinkStarting
+          );
+        });
+      }
     });
   });
 
