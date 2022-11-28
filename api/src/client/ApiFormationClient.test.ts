@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { getCurrentDateISOString, parseDateWithFormat } from "@shared/dateHelpers";
+import { defaultDateFormat } from "@shared/defaultConstants";
+import { formationApiDateFormat } from "@shared/formationData";
 import { randomInt } from "@shared/intHelpers";
 import axios from "axios";
 import {
@@ -152,8 +154,8 @@ describe("ApiFormationClient", () => {
               BusinessPurpose: formationFormData.businessPurpose,
               EffectiveFilingDate: parseDateWithFormat(
                 formationFormData.businessStartDate,
-                "YYYY-MM-DD"
-              ).format("MM/DD/YYYY"),
+                defaultDateFormat
+              ).format(formationApiDateFormat),
               MainAddress: {
                 Address1: formationFormData.addressLine1,
                 Address2: formationFormData.addressLine2,
@@ -300,8 +302,8 @@ describe("ApiFormationClient", () => {
               BusinessPurpose: formationFormData.businessPurpose,
               EffectiveFilingDate: parseDateWithFormat(
                 formationFormData.businessStartDate,
-                "YYYY-MM-DD"
-              ).format("MM/DD/YYYY"),
+                defaultDateFormat
+              ).format(formationApiDateFormat),
               ForeignDateOfFormation: "10/20/2022",
               ForeignStateOfFormation: "Massachusetts",
               MainAddress: {
@@ -432,8 +434,8 @@ describe("ApiFormationClient", () => {
               BusinessPurpose: formationFormData.businessPurpose,
               EffectiveFilingDate: parseDateWithFormat(
                 formationFormData.businessStartDate,
-                "YYYY-MM-DD"
-              ).format("MM/DD/YYYY"),
+                defaultDateFormat
+              ).format(formationApiDateFormat),
               MainAddress: {
                 Address1: formationFormData.addressLine1,
                 Address2: formationFormData.addressLine2,
@@ -601,8 +603,8 @@ describe("ApiFormationClient", () => {
               BusinessPurpose: formationFormData.businessPurpose,
               EffectiveFilingDate: parseDateWithFormat(
                 formationFormData.businessStartDate,
-                "YYYY-MM-DD"
-              ).format("MM/DD/YYYY"),
+                defaultDateFormat
+              ).format(formationApiDateFormat),
               ForeignDateOfFormation: "10/20/2022",
               ForeignStateOfFormation: "Massachusetts",
               MainAddress: {
@@ -736,8 +738,8 @@ describe("ApiFormationClient", () => {
               BusinessPurpose: formationFormData.businessPurpose,
               EffectiveFilingDate: parseDateWithFormat(
                 formationFormData.businessStartDate,
-                "YYYY-MM-DD"
-              ).format("MM/DD/YYYY"),
+                defaultDateFormat
+              ).format(formationApiDateFormat),
               MainAddress: {
                 Address1: formationFormData.addressLine1,
                 Address2: formationFormData.addressLine2,
@@ -860,8 +862,8 @@ describe("ApiFormationClient", () => {
               BusinessPurpose: formationFormData.businessPurpose,
               EffectiveFilingDate: parseDateWithFormat(
                 formationFormData.businessStartDate,
-                "YYYY-MM-DD"
-              ).format("MM/DD/YYYY"),
+                defaultDateFormat
+              ).format(formationApiDateFormat),
               ForeignDateOfFormation: "10/20/2022",
               ForeignStateOfFormation: "Massachusetts",
               MainAddress: {
@@ -995,8 +997,8 @@ describe("ApiFormationClient", () => {
               BusinessPurpose: formationFormData.businessPurpose,
               EffectiveFilingDate: parseDateWithFormat(
                 formationFormData.businessStartDate,
-                "YYYY-MM-DD"
-              ).format("MM/DD/YYYY"),
+                defaultDateFormat
+              ).format(formationApiDateFormat),
               MainAddress: {
                 Address1: formationFormData.addressLine1,
                 Address2: formationFormData.addressLine2,

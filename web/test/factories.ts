@@ -35,6 +35,7 @@ import {
   BusinessSuffixMap,
   BusinessUser,
   createEmptyFormationFormData,
+  defaultDateFormat,
   defaultFormationLegalType,
   FormationAddress,
   FormationData,
@@ -128,7 +129,7 @@ export const generateTaxFilingData = (overrides: Partial<TaxFilingData>): TaxFil
 export const generateTaxFiling = (overrides: Partial<TaxFiling>): TaxFiling => {
   return {
     identifier: `some-identifier-${randomInt()}`,
-    dueDate: getCurrentDate().add(randomInt(), "month").format("YYYY-MM-DD"),
+    dueDate: getCurrentDate().add(randomInt(), "month").format(defaultDateFormat),
     ...overrides,
   };
 };
@@ -171,7 +172,7 @@ export const generateProfileData = (
     industryId: industry.id,
     legalStructureId: randomLegalStructure().id,
     municipality: generateMunicipality({}),
-    dateOfFormation: getCurrentDateFormatted("YYYY-MM-DD"),
+    dateOfFormation: getCurrentDateFormatted(defaultDateFormat),
     entityId: randomInt(10).toString(),
     employerId: randomInt(9).toString(),
     taxId: randomInt() % 2 ? randomInt(9).toString() : randomInt(12).toString(),
@@ -448,7 +449,7 @@ export const generateFormationFormData = (
     ...businessAddress,
     businessName: `some-business-name-${randomInt()}`,
     businessSuffix: randomBusinessSuffix(legalStructureId),
-    businessStartDate: getCurrentDate().add(1, "days").format("MM/DD/YYYY"),
+    businessStartDate: getCurrentDate().add(1, "days").format(defaultDateFormat),
     businessTotalStock: isCorp ? randomInt().toString() ?? "" : "",
     businessPurpose: `some-purpose-${randomInt()}`,
     provisions: [`some-provision-${randomInt()}`],
@@ -493,7 +494,7 @@ export const generateFormationFormData = (
     makeDistributionTerms: `some-makeDistributionTerms-text-${randomInt()}`,
     foreignStateOfFormation: options?.foreign ? randomElementFromArray(states).name : undefined,
     foreignDateOfFormation: options?.foreign
-      ? getCurrentDate().add(1, "days").format("YYYY-MM-DD")
+      ? getCurrentDate().add(1, "days").format(defaultDateFormat)
       : undefined,
     foreignGoodStandingFile: undefined,
     ...overrides,

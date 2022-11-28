@@ -11,7 +11,7 @@ import { sortFilterFilingsWithinAYear } from "@/lib/domain-logic/filterFilings";
 import { FilingUrlSlugParam, loadAllFilingUrlSlugs, loadFilingByUrlSlug } from "@/lib/static/loadFilings";
 import { Filing, TaxFilingMethod } from "@/lib/types/types";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { parseDate, TaxFiling } from "@businessnjgovnavigator/shared";
+import { defaultDateFormat, parseDateWithFormat, TaxFiling } from "@businessnjgovnavigator/shared";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
@@ -43,7 +43,7 @@ export const FilingElement = (props: {
           <div className="display-inline-flex margin-bottom-4 margin-x-4">
             <span className="text-bold">{Config.filingDefaults.beforeDueDateText.toUpperCase()}</span> &nbsp;{" "}
             <span data-testid="due-date">
-              {parseDate(props.dueDate).format("MMMM D, YYYY").toUpperCase()}
+              {parseDateWithFormat(props.dueDate, defaultDateFormat).format("MMMM D, YYYY").toUpperCase()}
             </span>
             <ArrowTooltip title={Config.filingDefaults.dueDateToolTip}>
               <div
@@ -186,7 +186,6 @@ const FilingPage = (props: Props): ReactElement => {
       return it.identifier === props.filing.id;
     }
   );
-  const dueDate = matchingFiling ? parseDate(matchingFiling.dueDate).format("MM/DD/YYYY") : "";
 
   return (
     <>
@@ -194,7 +193,7 @@ const FilingPage = (props: Props): ReactElement => {
       <PageSkeleton>
         <NavBar showSidebar={true} hideMiniRoadmap={true} />
         <TaskSidebarPageLayout>
-          <FilingElement filing={props.filing} dueDate={dueDate} />
+          <FilingElement filing={props.filing} dueDate={matchingFiling?.dueDate ?? ""} />
         </TaskSidebarPageLayout>
       </PageSkeleton>
     </>

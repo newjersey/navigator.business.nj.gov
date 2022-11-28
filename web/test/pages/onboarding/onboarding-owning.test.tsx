@@ -16,7 +16,12 @@ import {
   renderPage,
   runSelfRegPageTests,
 } from "@/test/pages/onboarding/helpers-onboarding";
-import { createEmptyUserData, getCurrentDate, ProfileData } from "@businessnjgovnavigator/shared/";
+import {
+  createEmptyUserData,
+  defaultDateFormat,
+  getCurrentDate,
+  ProfileData,
+} from "@businessnjgovnavigator/shared/";
 import { act, fireEvent, screen, waitFor, within } from "@testing-library/react";
 
 jest.mock("next/router", () => {
@@ -44,7 +49,7 @@ const mockApi = api as jest.Mocked<typeof api>;
 const Config = getMergedConfig();
 
 const date = getCurrentDate().subtract(1, "month").date(1);
-const dateOfFormation = date.format("YYYY-MM-DD");
+const dateOfFormation = date.format(defaultDateFormat);
 const generateTestUserData = (overrides: Partial<ProfileData>) => {
   return generateUserData({
     profileData: generateProfileData({

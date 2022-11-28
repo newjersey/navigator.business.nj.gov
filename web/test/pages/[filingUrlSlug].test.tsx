@@ -4,7 +4,7 @@ import FilingPage from "@/pages/filings/[filingUrlSlug]";
 import { generateProfileData, generateTaxFiling, generateTaxFilingData } from "@/test/factories";
 import { randomElementFromArray } from "@/test/helpers";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
-import { getCurrentDate, randomInt } from "@businessnjgovnavigator/shared";
+import { defaultDateFormat, getCurrentDate, randomInt } from "@businessnjgovnavigator/shared";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen } from "@testing-library/react";
 
@@ -167,32 +167,35 @@ describe("filing page", () => {
         filings: [
           generateTaxFiling({
             identifier: "filing-identifier-1",
-            dueDate: getCurrentDate().add(2, "month").format("YYYY-MM-DD"),
+            dueDate: getCurrentDate().add(2, "month").format(defaultDateFormat),
           }),
           generateTaxFiling({
             identifier: "filing-identifier-1",
-            dueDate: getCurrentDate().add(3, "month").format("YYYY-MM-DD"),
+            dueDate: getCurrentDate().add(3, "month").format(defaultDateFormat),
           }),
           generateTaxFiling({
             identifier: "filing-identifier-1",
-            dueDate: getCurrentDate().add(8, "month").format("YYYY-MM-DD"),
+            dueDate: getCurrentDate().add(8, "month").format(defaultDateFormat),
           }),
           generateTaxFiling({
             identifier: "filing-identifier-1",
-            dueDate: getCurrentDate().add(1, "month").format("YYYY-MM-DD"),
-          }),
-          generateTaxFiling({ identifier: "filing-identifier-1", dueDate: closestDate.format("YYYY-MM-DD") }),
-          generateTaxFiling({
-            identifier: "filing-identifier-1",
-            dueDate: getCurrentDate().add(7, "month").format("YYYY-MM-DD"),
+            dueDate: getCurrentDate().add(1, "month").format(defaultDateFormat),
           }),
           generateTaxFiling({
             identifier: "filing-identifier-1",
-            dueDate: getCurrentDate().add(4, "month").format("YYYY-MM-DD"),
+            dueDate: closestDate.format(defaultDateFormat),
           }),
           generateTaxFiling({
             identifier: "filing-identifier-1",
-            dueDate: getCurrentDate().add(6, "month").format("YYYY-MM-DD"),
+            dueDate: getCurrentDate().add(7, "month").format(defaultDateFormat),
+          }),
+          generateTaxFiling({
+            identifier: "filing-identifier-1",
+            dueDate: getCurrentDate().add(4, "month").format(defaultDateFormat),
+          }),
+          generateTaxFiling({
+            identifier: "filing-identifier-1",
+            dueDate: getCurrentDate().add(6, "month").format(defaultDateFormat),
           }),
         ],
       }),

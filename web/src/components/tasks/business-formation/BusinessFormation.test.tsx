@@ -17,6 +17,7 @@ import { generateFormationProfileData, preparePage, useSetupInitialMocks } from 
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { currentUserData, userDataWasNotUpdated } from "@/test/mock/withStatefulUserData";
 import {
+  defaultDateFormat,
   FormationData,
   FormationIncorporator,
   FormationLegalType,
@@ -348,7 +349,7 @@ describe("<BusinessFormation />", () => {
       expect(formationFormData.businessName).toEqual("Pizza Joint");
     });
     expect(formationFormData.businessSuffix).toEqual("LLC");
-    expect(formationFormData.businessStartDate).toEqual(threeDaysFromNow.format("YYYY-MM-DD"));
+    expect(formationFormData.businessStartDate).toEqual(threeDaysFromNow.format(defaultDateFormat));
     expect(formationFormData.addressLine1).toEqual("1234 main street");
     expect(formationFormData.addressLine2).toEqual("Suite 304");
     expect(formationFormData.addressState).toEqual({ name: "New Jersey", shortCode: "NJ" });
@@ -459,7 +460,7 @@ describe("<BusinessFormation />", () => {
       expect(formationFormData.businessName).toEqual("Pizza Joint");
     });
     expect(formationFormData.businessSuffix).toEqual("LLP");
-    expect(formationFormData.businessStartDate).toEqual(threeDaysFromNow.format("YYYY-MM-DD"));
+    expect(formationFormData.businessStartDate).toEqual(threeDaysFromNow.format(defaultDateFormat));
     expect(formationFormData.addressLine1).toEqual("1234 main street");
     expect(formationFormData.addressLine2).toEqual("Suite 304");
     expect(formationFormData.addressState).toEqual({ name: "New Jersey", shortCode: "NJ" });
@@ -583,7 +584,7 @@ describe("<BusinessFormation />", () => {
       expect(formationFormData.businessName).toEqual("Pizza Joint");
     });
     expect(formationFormData.businessSuffix).toEqual("LP");
-    expect(formationFormData.businessStartDate).toEqual(threeDaysFromNow.format("YYYY-MM-DD"));
+    expect(formationFormData.businessStartDate).toEqual(threeDaysFromNow.format(defaultDateFormat));
     expect(formationFormData.addressLine1).toEqual("1234 main street");
     expect(formationFormData.addressLine2).toEqual("Suite 304");
     expect(formationFormData.addressState).toEqual({ name: "New Jersey", shortCode: "NJ" });
@@ -704,7 +705,7 @@ describe("<BusinessFormation />", () => {
     });
     expect(formationFormData.businessSuffix).toEqual("CORPORATION");
     expect(formationFormData.businessTotalStock).toEqual("123");
-    expect(formationFormData.businessStartDate).toEqual(threeDaysFromNow.format("YYYY-MM-DD"));
+    expect(formationFormData.businessStartDate).toEqual(threeDaysFromNow.format(defaultDateFormat));
     expect(formationFormData.addressLine1).toEqual("1234 main street");
     expect(formationFormData.addressLine2).toEqual("Suite 304");
     expect(formationFormData.addressState).toEqual({ name: "New Jersey", shortCode: "NJ" });

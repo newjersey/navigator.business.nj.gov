@@ -1,4 +1,4 @@
-import { County, Funding } from "@/lib/types/types";
+import { County, defaultMarkdownDateFormat, Funding } from "@/lib/types/types";
 import { getCurrentDate, parseDateWithFormat, UserData } from "@businessnjgovnavigator/shared";
 
 export const filterFundings = (fundings: Funding[], userData: UserData): Funding[] => {
@@ -8,7 +8,7 @@ export const filterFundings = (fundings: Funding[], userData: UserData): Funding
     }
 
     if (it.dueDate) {
-      return !parseDateWithFormat(it.dueDate, "MM/DD/YYYY").isBefore(getCurrentDate());
+      return !parseDateWithFormat(it.dueDate, defaultMarkdownDateFormat).isBefore(getCurrentDate());
     }
 
     if (userData.profileData.homeBasedBusiness && it.homeBased !== "yes" && it.homeBased !== "unknown") {

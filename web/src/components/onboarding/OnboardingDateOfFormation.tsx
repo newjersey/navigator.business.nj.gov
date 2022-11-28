@@ -3,7 +3,13 @@ import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { advancedDateLibrary, DateObject, getCurrentDate, parseDate } from "@businessnjgovnavigator/shared/";
+import {
+  advancedDateLibrary,
+  DateObject,
+  defaultDateFormat,
+  getCurrentDate,
+  parseDate,
+} from "@businessnjgovnavigator/shared/";
 import { TextFieldProps } from "@mui/material";
 import { DatePicker, DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -45,7 +51,7 @@ export const OnboardingDateOfFormation = (props: Props): ReactElement => {
     setDateValue(date);
     setProfileData({
       ...state.profileData,
-      [fieldName]: date?.isValid() ? date?.date(1).format("YYYY-MM-DD") : undefined,
+      [fieldName]: date?.isValid() ? date?.date(1).format(defaultDateFormat) : undefined,
     });
   };
 
