@@ -80,7 +80,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
                     <a
                       href={`filings/${props.operateReferences[filing.identifier].urlSlug}`}
                       data-testid={filing.identifier.toLowerCase()}
-                      className="usa-link text-secondary-darker text-secondary-darker:hover text-no-underline"
+                      className="usa-link text-secondary-darker hover:text-secondary-darker text-no-underline"
                     >
                       <Tag backgroundColor="warning-light" isHover isRadiusMd isWrappingText>
                         <span className="text-bold text-uppercase">
