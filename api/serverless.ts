@@ -49,6 +49,11 @@ const intercomHashSecret = process.env.INTERCOM_HASH_SECRET || "";
 const documentS3Bucket = `nj-bfs-user-documents-${stage}`;
 const skipSaveDocumentsToS3 = process.env.SKIP_SAVE_DOCUMENTS_TO_S3 || "";
 
+const awsCryptoKey = process.env.AWS_CRYPTO_KEY || "";
+const awsCryptoContextStage = process.env.AWS_CRYPTO_CONTEXT_STAGE || "";
+const awsCryptoContextPurpose = process.env.AWS_CRYPTO_CONTEXT_PURPOSE || "";
+const awsCryptoContextOrigin = process.env.AWS_CRYPTO_CONTEXT_ORIGIN || "";
+
 const serverlessConfiguration: AWS = {
   useDotenv: true,
   service: "businessnjgov-api",
@@ -163,6 +168,10 @@ const serverlessConfiguration: AWS = {
       STAGE: stage,
       INTERCOM_HASH_SECRET: intercomHashSecret,
       SKIP_SAVE_DOCUMENTS_TO_S3: skipSaveDocumentsToS3,
+      AWS_CRYPTO_KEY: awsCryptoKey,
+      AWS_CRYPTO_CONTEXT_STAGE: awsCryptoContextStage,
+      AWS_CRYPTO_CONTEXT_PURPOSE: awsCryptoContextPurpose,
+      AWS_CRYPTO_CONTEXT_ORIGIN: awsCryptoContextOrigin,
     } as AwsLambdaEnvironment,
     logRetentionInDays: 180,
   },

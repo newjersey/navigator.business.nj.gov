@@ -75,6 +75,7 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
       userDataToSet = await postTaxRegistrationOnboarding({
         taxId: profileData.taxId as string,
         businessName: profileData.businessName,
+        encryptedTaxId: profileData.encryptedTaxId as string,
       });
     } catch {
       setOnAPIfailed("UNKNOWN");

@@ -9,6 +9,7 @@ import { guestRouterFactory } from "src/api/guestRouter";
 import { taxFilingRouterFactory } from "src/api/taxFilingRouter";
 import { AirtableFeedbackClient } from "src/client/AirtableFeedbackClient";
 import { ApiTaxFilingClient } from "src/client/ApiTaxFilingClient";
+import { AWSEncryptionDecryptionFactory } from "src/client/AwsEncryptionDecryptionFactory";
 import { addNewsletterFactory } from "src/domain/newsletter/addNewsletterFactory";
 import { taxFilingsInterfaceFactory } from "src/domain/tax-filings/taxFilingsInterfaceFactory";
 import { updateOperatingPhase } from "../..//domain/user/updateOperatingPhase";
@@ -92,6 +93,17 @@ const FORMATION_API_BASE_URL =
 const GOV2GO_REGISTRATION_API_KEY = process.env.GOV2GO_REGISTRATION_API_KEY || "";
 const GOV2GO_REGISTRATION_BASE_URL = process.env.GOV2GO_REGISTRATION_BASE_URL || "";
 
+const AWS_CRYPTO_KEY = process.env.AWS_CRYPTO_KEY || "";
+const AWS_CRYPTO_CONTEXT_STAGE = process.env.AWS_CRYPTO_CONTEXT_STAGE || "";
+const AWS_CRYPTO_CONTEXT_PURPOSE = process.env.AWS_CRYPTO_CONTEXT_PURPOSE || "";
+const AWS_CRYPTO_CONTEXT_ORIGIN = process.env.AWS_CRYPTO_CONTEXT_ORIGIN || "";
+
+const AWSEncryptionDecryptionClient = AWSEncryptionDecryptionFactory(AWS_CRYPTO_KEY, {
+  stage: AWS_CRYPTO_CONTEXT_STAGE,
+  purpose: AWS_CRYPTO_CONTEXT_PURPOSE,
+  origin: AWS_CRYPTO_CONTEXT_ORIGIN,
+});
+
 const taxFilingClient = ApiTaxFilingClient(
   {
     baseUrl: GOV2GO_REGISTRATION_BASE_URL,
@@ -163,7 +175,13 @@ const shouldSaveDocuments = !(process.env.SKIP_SAVE_DOCUMENTS_TO_S3 === "true");
 app.use(bodyParser.json({ strict: false }));
 app.use(
   "/api",
-  userRouterFactory(userDataClient, updateLicenseStatus, updateSidebarCards, updateOperatingPhase)
+  userRouterFactory(
+    userDataClient,
+    updateLicenseStatus,
+    updateSidebarCards,
+    updateOperatingPhase,
+    AWSEncryptionDecryptionClient
+  )
 );
 app.use(
   "/api/external",
@@ -178,7 +196,10 @@ app.use("/api/guest", guestRouterFactory(businessNameClient));
 app.use("/api", licenseStatusRouterFactory(updateLicenseStatus));
 app.use("/api", selfRegRouterFactory(userDataClient, selfRegClient));
 app.use("/api", formationRouterFactory(apiFormationClient, userDataClient, { shouldSaveDocuments }));
-app.use("/api/taxFilings", taxFilingRouterFactory(userDataClient, taxFilingInterface));
+app.use(
+  "/api/taxFilings",
+  taxFilingRouterFactory(userDataClient, taxFilingInterface, AWSEncryptionDecryptionClient)
+);
 
 app.post("/api/mgmt/auth", (req, res) => {
   if (req.body.password === process.env.ADMIN_PASSWORD) {

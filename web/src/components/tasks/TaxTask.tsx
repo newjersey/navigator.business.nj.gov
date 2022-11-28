@@ -40,23 +40,16 @@ export const TaxTask = (props: Props): ReactElement => {
     }
   }, userData && updateQueue);
 
-  const setBackToEditing = ({ remove }: { remove: boolean }) => {
+  const onRemove = () => {
     if (!userData || !updateQueue) {
       return;
     }
     setShowInput(true);
-    const newTaxValue = remove ? emptyProfileData.taxId : userData.profileData.taxId;
+    const newTaxValue = emptyProfileData.taxId;
     updateQueue
       .queueTaskProgress({ [props.task.id]: "IN_PROGRESS" })
-      .queueProfileData({ taxId: newTaxValue })
+      .queueProfileData({ taxId: newTaxValue, encryptedTaxId: undefined })
       .update();
-  };
-
-  const onEdit = () => {
-    return setBackToEditing({ remove: false });
-  };
-  const onRemove = () => {
-    return setBackToEditing({ remove: true });
   };
 
   const onSave = () => {
@@ -77,9 +70,7 @@ export const TaxTask = (props: Props): ReactElement => {
       <div className="margin-left-5 margin-top-1">
         <Content>{Config.tax.descriptionText}</Content>
         {showInput && <TaxInput isAuthenticated={isAuthenticated} onSave={onSave} task={props.task} />}
-        {!showInput && (
-          <TaxDisplay onEdit={onEdit} onRemove={onRemove} taxId={userData?.profileData.taxId || ""} />
-        )}
+        {!showInput && <TaxDisplay onRemove={onRemove} taxId={userData?.profileData.taxId || ""} />}
       </div>
       <Content>{postInputContent}</Content>
       <TaskCTA link={props.task.callToActionLink} text={props.task.callToActionText} />

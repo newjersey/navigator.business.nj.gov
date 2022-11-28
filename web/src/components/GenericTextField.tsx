@@ -29,6 +29,7 @@ export interface GenericTextFieldProps {
   ariaLabel?: string;
   formInputFull?: boolean;
   className?: string;
+  allowMasking?: boolean;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any, react/display-name
@@ -44,6 +45,9 @@ export const GenericTextField = forwardRef(
 
     if (props.numericProps) {
       const regex = (value: string): string => {
+        if (props.allowMasking) {
+          return value.replace(props.numericProps?.trimLeadingZeroes ? /^0+|\D/g : /[^\d*]/g, "");
+        }
         return value.replace(props.numericProps?.trimLeadingZeroes ? /^0+|\D/g : /\D/g, "");
       };
 

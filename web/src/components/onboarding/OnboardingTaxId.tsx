@@ -2,10 +2,13 @@
 
 import { GenericTextField } from "@/components/GenericTextField";
 import { OnboardingField, OnboardingProps } from "@/components/onboarding/OnboardingField";
+import { AuthAlertContext } from "@/contexts/authAlertContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { formatTaxId } from "@/lib/domain-logic/formatTaxId";
 import { ProfileFieldErrorMap } from "@/lib/types/types";
+import { maskingCharacter } from "@businessnjgovnavigator/shared";
 import { ReactElement, useContext, useRef, useState } from "react";
 
 interface Props extends Omit<OnboardingProps, "fieldName" | "handleChange"> {
@@ -24,7 +27,7 @@ export const OnboardingTaxId = ({
 
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { Config } = useConfig();
-
+  const { isAuthenticated, setRegistrationModalIsVisible } = useContext(AuthAlertContext);
   const getFieldType = () => {
     const initialValue = state.profileData[fieldName]?.trim().length ?? 0;
     if (initialValue === 0 || initialValue === 12) {
@@ -66,6 +69,19 @@ export const OnboardingTaxId = ({
     setProfileData(profileData);
   };
 
+  const handleChangeFullTaxId = (value: string) => {
+    if (isAuthenticated === IsAuthenticated.FALSE) {
+      setRegistrationModalIsVisible(true);
+    }
+    if (value.includes(maskingCharacter)) {
+      value = "";
+    }
+    setProfileData({
+      ...state.profileData,
+      [fieldName]: value,
+    });
+  };
+
   const onValidation = (valFieldName: string, invalid: boolean) => {
     const errors = (errorMap: ErrorMapType) => {
       return { ...errorMap, [valFieldName]: invalid };
@@ -87,7 +103,8 @@ export const OnboardingTaxId = ({
         validationText={validationText}
         inputErrorBar={inputErrorBar}
         numericProps={{ minLength: 12, maxLength: 12 }}
-        handleChange={handleChangeOverride}
+        handleChange={handleChangeFullTaxId}
+        allowMasking={true}
         {...props}
       />
     );
@@ -115,6 +132,7 @@ export const OnboardingTaxId = ({
             handleChange(value, "taxId");
           }}
           onValidation={onValidation}
+          allowMasking={true}
         />
         <span className="padding-x-2 padding-bottom-2 flex-align-self-center ">/</span>
         <GenericTextField

@@ -191,6 +191,10 @@ commands:
             echo 'export AIRTABLE_FEEDBACK_TABLE=$AIRTABLE_FEEDBACK_TABLE_DEV' >> $BASH_ENV
             echo 'export AIRTABLE_ISSUES_TABLE=$AIRTABLE_ISSUES_TABLE_DEV' >> $BASH_ENV
             echo 'export AIRTABLE_USERS_TABLE=$AIRTABLE_USERS_TABLE_DEV' >> $BASH_ENV
+            echo 'export AWS_CRYPTO_KEY=$AWS_CRYPTO_KEY_DEV' >> $BASH_ENV
+            echo 'export AWS_CRYPTO_CONTEXT_STAGE=$AWS_CRYPTO_CONTEXT_STAGE_DEV' >> $BASH_ENV
+            echo 'export AWS_CRYPTO_CONTEXT_PURPOSE=$AWS_CRYPTO_CONTEXT_PURPOSE' >> $BASH_ENV
+            echo 'export AWS_CRYPTO_CONTEXT_ORIGIN=$AWS_CRYPTO_CONTEXT_ORIGIN' >> $BASH_ENV
 
   set-cypress-env-vars:
     steps:
@@ -217,6 +221,10 @@ commands:
             echo 'export CHECK_DEAD_LINKS=$CHECK_DEAD_LINKS_DEV' >> $BASH_ENV
             echo 'export ADMIN_PASSWORD=Test1!' >> $BASH_ENV
             echo 'export SKIP_SAVE_DOCUMENTS_TO_S3=true' >> $BASH_ENV
+            echo 'export AWS_CRYPTO_KEY=$AWS_CRYPTO_KEY_DEV' >> $BASH_ENV
+            echo 'export AWS_CRYPTO_CONTEXT_STAGE=$AWS_CRYPTO_CONTEXT_STAGE_DEV' >> $BASH_ENV
+            echo 'export AWS_CRYPTO_CONTEXT_PURPOSE=$AWS_CRYPTO_CONTEXT_PURPOSE' >> $BASH_ENV
+            echo 'export AWS_CRYPTO_CONTEXT_ORIGIN=$AWS_CRYPTO_CONTEXT_ORIGIN' >> $BASH_ENV
 
   set-staging-env-vars:
     steps:
@@ -253,6 +261,10 @@ commands:
             echo 'export AIRTABLE_FEEDBACK_TABLE=$AIRTABLE_FEEDBACK_TABLE_DEV' >> $BASH_ENV
             echo 'export AIRTABLE_ISSUES_TABLE=$AIRTABLE_ISSUES_TABLE_DEV' >> $BASH_ENV
             echo 'export AIRTABLE_USERS_TABLE=$AIRTABLE_USERS_TABLE_DEV' >> $BASH_ENV
+            echo 'export AWS_CRYPTO_KEY=$AWS_CRYPTO_KEY_STAGING' >> $BASH_ENV
+            echo 'export AWS_CRYPTO_CONTEXT_STAGE=$AWS_CRYPTO_CONTEXT_STAGE_STAGING' >> $BASH_ENV
+            echo 'export AWS_CRYPTO_CONTEXT_PURPOSE=$AWS_CRYPTO_CONTEXT_PURPOSE' >> $BASH_ENV
+            echo 'export AWS_CRYPTO_CONTEXT_ORIGIN=$AWS_CRYPTO_CONTEXT_ORIGIN' >> $BASH_ENV
 
   set-prod-env-vars:
     steps:
@@ -289,6 +301,10 @@ commands:
             echo 'export AIRTABLE_FEEDBACK_TABLE=$AIRTABLE_FEEDBACK_TABLE_PROD' >> $BASH_ENV
             echo 'export AIRTABLE_ISSUES_TABLE=$AIRTABLE_ISSUES_TABLE_PROD' >> $BASH_ENV
             echo 'export AIRTABLE_USERS_TABLE=$AIRTABLE_USERS_TABLE_PROD' >> $BASH_ENV
+            echo 'export AWS_CRYPTO_KEY=$AWS_CRYPTO_KEY_PROD' >> $BASH_ENV
+            echo 'export AWS_CRYPTO_CONTEXT_STAGE=$AWS_CRYPTO_CONTEXT_STAGE_PROD' >> $BASH_ENV
+            echo 'export AWS_CRYPTO_CONTEXT_PURPOSE=$AWS_CRYPTO_CONTEXT_PURPOSE' >> $BASH_ENV
+            echo 'export AWS_CRYPTO_CONTEXT_ORIGIN=$AWS_CRYPTO_CONTEXT_ORIGIN' >> $BASH_ENV
 
   set-content-env-vars:
     steps:

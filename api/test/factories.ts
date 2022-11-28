@@ -187,7 +187,8 @@ export const generateProfileData = (overrides: Partial<ProfileData>): ProfileDat
     dateOfFormation: undefined,
     entityId: randomInt(10).toString(),
     employerId: randomInt(9).toString(),
-    taxId: randomInt() % 2 ? randomInt(9).toString() : randomInt(12).toString(),
+    encryptedTaxId: "some-encrypted-value",
+    taxId: randomInt() % 2 ? `*****${randomInt(4).toString()}` : `*******${randomInt(5).toString()}`,
     notes: `some-notes-${randomInt()}`,
     ownershipTypeIds: [],
     documents: {
@@ -240,6 +241,7 @@ export const generateTaxIdAndBusinessName = (
   return {
     businessName: `some-name-${randomInt()}`,
     taxId: `${randomInt(12)}`,
+    encryptedTaxId: "some-encrypted-value",
     ...overrides,
   };
 };

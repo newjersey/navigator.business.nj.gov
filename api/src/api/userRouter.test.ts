@@ -14,7 +14,7 @@ import {
   generateUserData,
 } from "../../test/factories";
 import { determineAnnualFilingDate } from "../../test/helpers";
-import { UserDataClient } from "../domain/types";
+import { EncryptionDecryptionClient, UserDataClient } from "../domain/types";
 import { setupExpress } from "../libs/express";
 import { userRouterFactory } from "./userRouter";
 
@@ -50,6 +50,7 @@ describe("userRouter", () => {
   let stubUpdateLicenseStatus: jest.Mock;
   let stubUpdateRoadmapSidebarCards: jest.Mock;
   let stubUpdateOperatingPhase: jest.Mock;
+  let stubEncryptionDecryptionClient: jest.Mocked<EncryptionDecryptionClient>;
 
   beforeEach(async () => {
     stubUserDataClient = {
@@ -66,14 +67,18 @@ describe("userRouter", () => {
     stubUpdateOperatingPhase.mockImplementation((userData) => {
       return userData;
     });
-
+    stubEncryptionDecryptionClient = {
+      encryptValue: jest.fn(),
+      decryptValue: jest.fn(),
+    };
     app = setupExpress(false);
     app.use(
       userRouterFactory(
         stubUserDataClient,
         stubUpdateLicenseStatus,
         stubUpdateRoadmapSidebarCards,
-        stubUpdateOperatingPhase
+        stubUpdateOperatingPhase,
+        stubEncryptionDecryptionClient
       )
     );
   });
@@ -389,6 +394,63 @@ describe("userRouter", () => {
             completedFilingPayment: false,
           },
         });
+      });
+    });
+
+    describe("when user changes Tax ID", () => {
+      it("encrypts and masks the tax id before getting put into the user data client", async () => {
+        mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
+        stubEncryptionDecryptionClient.encryptValue.mockResolvedValue("my cool encrypted value");
+
+        const oldUserData = generateUserData({
+          user: generateUser({ id: "123" }),
+        });
+
+        const updatedUserData = generateUserData({
+          ...oldUserData,
+          profileData: generateProfileData({
+            ...oldUserData.profileData,
+            taxId: "123456789123",
+            encryptedTaxId: undefined,
+          }),
+        });
+
+        stubUserDataClient.get.mockResolvedValue(oldUserData);
+        stubUserDataClient.put.mockResolvedValue(updatedUserData);
+
+        await request(app).post(`/users`).send(updatedUserData).set("Authorization", "Bearer user-123-token");
+
+        expect(stubUserDataClient.put).toHaveBeenCalledWith({
+          ...updatedUserData,
+          profileData: {
+            ...updatedUserData.profileData,
+            taxId: "*******89123",
+            encryptedTaxId: "my cool encrypted value",
+          },
+        });
+      });
+
+      it("doesn't encrypt tax id if the same masked value as before is being posted", async () => {
+        mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
+        const oldUserData = generateUserData({
+          user: generateUser({ id: "123" }),
+          profileData: generateProfileData({
+            taxId: "*******89123",
+          }),
+        });
+        const updatedUserData = generateUserData({
+          ...oldUserData,
+          profileData: generateProfileData({
+            ...oldUserData.profileData,
+            taxId: "*******89123",
+          }),
+        });
+        stubUserDataClient.get.mockResolvedValue(oldUserData);
+        stubUserDataClient.put.mockResolvedValue(updatedUserData);
+
+        await request(app).post(`/users`).send(updatedUserData).set("Authorization", "Bearer user-123-token");
+
+        expect(stubEncryptionDecryptionClient.encryptValue).toHaveBeenCalledTimes(0);
       });
     });
   });
