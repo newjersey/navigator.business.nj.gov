@@ -15,7 +15,13 @@ import {
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { OperatingPhases, randomInt, TaxFiling, UserData } from "@businessnjgovnavigator/shared";
+import {
+  defaultDateFormat,
+  OperatingPhases,
+  randomInt,
+  TaxFiling,
+  UserData,
+} from "@businessnjgovnavigator/shared";
 import { getCurrentDate, parseDateWithFormat } from "@businessnjgovnavigator/shared/dateHelpers";
 import * as materialUi from "@mui/material";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
@@ -77,7 +83,7 @@ describe("<FilingsCalendar />", () => {
     const dueDate = getCurrentDate().add(2, "months");
     const annualReport = generateTaxFiling({
       identifier: "annual-report",
-      dueDate: dueDate.format("YYYY-MM-DD"),
+      dueDate: dueDate.format(defaultDateFormat),
     });
 
     const userData = generateUserData({
@@ -111,13 +117,13 @@ describe("<FilingsCalendar />", () => {
     const farDueDate = getCurrentDate().add(2, "years");
     const farReport = generateTaxFiling({
       identifier: "whatever",
-      dueDate: farDueDate.format("YYYY-MM-DD"),
+      dueDate: farDueDate.format(defaultDateFormat),
     });
     const recentDueDate = getCurrentDate().add(2, "months");
 
     const recentReport = generateTaxFiling({
       identifier: "whatever2",
-      dueDate: recentDueDate.format("YYYY-MM-DD"),
+      dueDate: recentDueDate.format(defaultDateFormat),
     });
 
     const userData = generateUserData({
@@ -154,7 +160,7 @@ describe("<FilingsCalendar />", () => {
   it("displays calendar content when there are filings inside of the year", () => {
     const annualReport = generateTaxFiling({
       identifier: "annual-report",
-      dueDate: getCurrentDate().add(2, "months").format("YYYY-MM-DD"),
+      dueDate: getCurrentDate().add(2, "months").format(defaultDateFormat),
     });
 
     const userData = generateUserData({
@@ -190,7 +196,7 @@ describe("<FilingsCalendar />", () => {
   it("displays empty calendar image without body text when there are no filings inside of the year", () => {
     const annualReport = generateTaxFiling({
       identifier: "annual-report",
-      dueDate: getCurrentDate().add(2, "years").format("YYYY-MM-DD"),
+      dueDate: getCurrentDate().add(2, "years").format(defaultDateFormat),
     });
 
     const userData = generateUserData({
@@ -266,7 +272,7 @@ describe("<FilingsCalendar />", () => {
     const dueDate = getCurrentDate().add(2, "months");
     const annualReport = generateTaxFiling({
       identifier: "annual-report",
-      dueDate: dueDate.format("YYYY-MM-DD"),
+      dueDate: dueDate.format(defaultDateFormat),
     });
 
     const userData = generateUserData({
@@ -295,7 +301,7 @@ describe("<FilingsCalendar />", () => {
     expect(screen.getByText(dueDate.format("MMMM D, YYYY"), { exact: false })).toBeInTheDocument();
     expect(
       screen.getByText(
-        `Annual Report ${parseDateWithFormat(annualReport.dueDate, "YYYY-MM-DD").format("YYYY")}`
+        `Annual Report ${parseDateWithFormat(annualReport.dueDate, defaultDateFormat).format("YYYY")}`
       )
     ).toBeInTheDocument();
   });
@@ -309,7 +315,7 @@ describe("<FilingsCalendar />", () => {
       const dueDate = getCurrentDate().add(2, "months");
       const annualReport = generateTaxFiling({
         identifier: "annual-report",
-        dueDate: dueDate.format("YYYY-MM-DD"),
+        dueDate: dueDate.format(defaultDateFormat),
       });
 
       const userData = generateUserData({
@@ -370,7 +376,7 @@ describe("<FilingsCalendar />", () => {
       const dueDate = getCurrentDate().add(2, "months");
       const annualReport = generateTaxFiling({
         identifier: "annual-report",
-        dueDate: dueDate.format("YYYY-MM-DD"),
+        dueDate: dueDate.format(defaultDateFormat),
       });
 
       const userData = generateUserData({
@@ -434,7 +440,7 @@ describe("<FilingsCalendar />", () => {
       dueDate = getCurrentDate().add(2, "months");
       annualReport = generateTaxFiling({
         identifier: "annual-report",
-        dueDate: dueDate.format("YYYY-MM-DD"),
+        dueDate: dueDate.format(defaultDateFormat),
       });
 
       userData = generateUserData({
@@ -480,7 +486,7 @@ describe("<FilingsCalendar />", () => {
       dueDate = getCurrentDate().add(2, "months");
       annualReport = generateTaxFiling({
         identifier: "annual-report",
-        dueDate: dueDate.format("YYYY-MM-DD"),
+        dueDate: dueDate.format(defaultDateFormat),
       });
 
       userData = generateUserData({

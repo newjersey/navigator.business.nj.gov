@@ -1,14 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import {
-  generateFormationDisplayContent,
-  generateFormationFormData,
-  generateFormationIncorporator,
-  generateFormationMember,
-  generateFormationSigner,
-  generateMunicipality,
-  generateUser,
-  generateUserData,
-} from "@/test/factories";
+import { generateFormationDisplayContent, generateUser, generateUserData } from "@/test/factories";
 import {
   FormationPageHelpers,
   generateFormationProfileData,
@@ -25,6 +16,12 @@ import {
   FormationIncorporator,
   FormationLegalType,
   FormationMember,
+  generateFormationFormData,
+  generateFormationIncorporator,
+  generateFormationMember,
+  generateFormationSigner,
+  generateFormationUSAddress,
+  generateMunicipality,
   ProfileData,
 } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
@@ -150,7 +147,11 @@ describe("Formation - ContactsStep", () => {
               title: "General Partner",
               signature: true,
             },
-            generateFormationIncorporator({ signature: false, title: "General Partner" }),
+            generateFormationIncorporator({
+              signature: false,
+              title: "General Partner",
+              ...generateFormationUSAddress({}),
+            }),
           ],
         },
         { legalStructureId }
@@ -322,7 +323,10 @@ describe("Formation - ContactsStep", () => {
           screen.getByText(displayContent[legalStructureId].signatureHeader.placeholder as string)
         ).toBeInTheDocument();
         page.clickAddNewSigner();
-        const signer = generateFormationIncorporator({ title: "Incorporator" });
+        const signer = generateFormationIncorporator({
+          title: "Incorporator",
+          ...generateFormationUSAddress({}),
+        });
         page.fillText("Address name", signer.name);
         page.fillText("Address line1", signer.addressLine1);
         page.fillText("Address line2", signer.addressLine2);
@@ -339,8 +343,16 @@ describe("Formation - ContactsStep", () => {
 
       it("edits incorporators", async () => {
         const incorporators = [
-          generateFormationIncorporator({ signature: true, title: "Incorporator" }),
-          generateFormationIncorporator({ signature: true, title: "Incorporator" }),
+          generateFormationIncorporator({
+            signature: true,
+            title: "Incorporator",
+            ...generateFormationUSAddress({}),
+          }),
+          generateFormationIncorporator({
+            signature: true,
+            title: "Incorporator",
+            ...generateFormationUSAddress({}),
+          }),
         ];
         const page = await getPageHelper({ legalStructureId }, { incorporators });
         const nameTd = screen.getByText(incorporators[1].name, { exact: false });
@@ -382,8 +394,16 @@ describe("Formation - ContactsStep", () => {
 
       it("deletes an additional signer", async () => {
         const incorporators = [
-          generateFormationIncorporator({ signature: true, title: "Incorporator" }),
-          generateFormationIncorporator({ signature: true, title: "Incorporator" }),
+          generateFormationIncorporator({
+            signature: true,
+            title: "Incorporator",
+            ...generateFormationUSAddress({}),
+          }),
+          generateFormationIncorporator({
+            signature: true,
+            title: "Incorporator",
+            ...generateFormationUSAddress({}),
+          }),
         ];
         const page = await getPageHelper({ legalStructureId }, { incorporators });
         const nameTd = screen.getByText(incorporators[1].name, { exact: false });
@@ -395,7 +415,11 @@ describe("Formation - ContactsStep", () => {
 
       it("does not allow more than 10 incorporators", async () => {
         const incorporators = Array(10).fill(
-          generateFormationIncorporator({ signature: true, title: "Incorporator" })
+          generateFormationIncorporator({
+            signature: true,
+            title: "Incorporator",
+            ...generateFormationUSAddress({}),
+          })
         );
         await getPageHelper({ legalStructureId }, { incorporators });
         expect(
@@ -404,7 +428,13 @@ describe("Formation - ContactsStep", () => {
       });
 
       it("fires validations when incorporators do not fill out all the fields", async () => {
-        const incorporators = [generateFormationIncorporator({ name: "", title: "Incorporator" })];
+        const incorporators = [
+          generateFormationIncorporator({
+            name: "",
+            title: "Incorporator",
+            ...generateFormationUSAddress({}),
+          }),
+        ];
         const page = await getPageHelper({ legalStructureId }, { incorporators });
         await attemptApiSubmission(page);
 
@@ -562,7 +592,11 @@ describe("Formation - ContactsStep", () => {
         const page = await getPageHelper(
           {
             legalStructureId,
-            municipality: generateMunicipality({ displayName: "Hampton Borough", name: "Hampton" }),
+            municipality: generateMunicipality({
+              displayName: "Hampton Borough",
+              name: "Hampton",
+              ...generateFormationUSAddress({}),
+            }),
           },
           {
             members: [],

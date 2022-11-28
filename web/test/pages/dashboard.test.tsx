@@ -28,6 +28,7 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
+  defaultDateFormat,
   getCurrentDate,
   OperatingPhases,
   parseDateWithFormat,
@@ -365,7 +366,7 @@ describe("dashboard page", () => {
     const dueDate = getCurrentDate().add(12, "months");
     const annualReport = generateTaxFiling({
       identifier: "annual-report",
-      dueDate: dueDate.format("YYYY-MM-DD"),
+      dueDate: dueDate.format(defaultDateFormat),
     });
     useMockUserData({
       profileData: generateProfileData({ operatingPhase: "NEEDS_TO_REGISTER_FOR_TAXES" }),
@@ -384,14 +385,14 @@ describe("dashboard page", () => {
     expect(screen.getByText(dueDate.format("MMMM D, YYYY"), { exact: false })).toBeInTheDocument();
     expect(
       screen.getByText(
-        `Annual Report ${parseDateWithFormat(annualReport.dueDate, "YYYY-MM-DD").format("YYYY")}`
+        `Annual Report ${parseDateWithFormat(annualReport.dueDate, defaultDateFormat).format("YYYY")}`
       )
     ).toBeInTheDocument();
   });
 
   it("does not display filings calendar as list when taxfiling is not populated", () => {
     const currentDate = getCurrentDate();
-    const dateOfFormation = currentDate.format("YYYY-MM-DD");
+    const dateOfFormation = currentDate.format(defaultDateFormat);
 
     useMockUserData({
       profileData: generateProfileData({ dateOfFormation: dateOfFormation }),
@@ -413,7 +414,7 @@ describe("dashboard page", () => {
     const dueDate = getCurrentDate().add(12, "months");
     const annualReport = generateTaxFiling({
       identifier: "annual-report",
-      dueDate: dueDate.format("YYYY-MM-DD"),
+      dueDate: dueDate.format(defaultDateFormat),
     });
     useMockUserData({
       profileData: generateProfileData({ dateOfFormation: undefined }),

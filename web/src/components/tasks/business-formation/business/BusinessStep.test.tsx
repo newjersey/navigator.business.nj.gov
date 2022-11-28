@@ -1,9 +1,5 @@
-import {
-  generateFormationDisplayContent,
-  generateFormationFormData,
-  generateMunicipality,
-  generateUserData,
-} from "@/test/factories";
+import { defaultDisplayDateFormat } from "@/lib/types/types";
+import { generateFormationDisplayContent, generateUserData } from "@/test/factories";
 import { markdownToText } from "@/test/helpers";
 import {
   FormationPageHelpers,
@@ -15,8 +11,11 @@ import { mockPush } from "@/test/mock/mockRouter";
 import { currentUserData } from "@/test/mock/withStatefulUserData";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import {
+  defaultDateFormat,
   FormationFormData,
   FormationLegalType,
+  generateFormationFormData,
+  generateMunicipality,
   getCurrentDate,
   getCurrentDateFormatted,
   Municipality,
@@ -123,7 +122,7 @@ describe("Formation - BusinessStep", () => {
       },
       {
         businessSuffix: "LTD LIABILITY CO",
-        businessStartDate: getCurrentDateFormatted("YYYY-MM-DD"),
+        businessStartDate: getCurrentDateFormatted(defaultDateFormat),
         addressLine1: "123 main street",
         addressLine2: "suite 102",
         addressState: { name: "New Jersey", shortCode: "NJ" },
@@ -134,7 +133,7 @@ describe("Formation - BusinessStep", () => {
 
     expect(screen.getByText("LTD LIABILITY CO")).toBeInTheDocument();
     expect(page.getInputElementByLabel("Business start date").value).toBe(
-      getCurrentDateFormatted("MM/DD/YYYY")
+      getCurrentDateFormatted(defaultDisplayDateFormat)
     );
     expect(page.getInputElementByLabel("Address line1").value).toBe("123 main street");
     expect(page.getInputElementByLabel("Address line2").value).toBe("suite 102");
@@ -338,14 +337,16 @@ describe("Formation - BusinessStep", () => {
       expect(screen.getByLabelText("Business start date")).toBeInTheDocument();
       await page.submitBusinessStep();
       expect(currentUserData().formationData.formationFormData.businessStartDate).toEqual(
-        getCurrentDateFormatted("YYYY-MM-DD")
+        getCurrentDateFormatted(defaultDateFormat)
       );
     });
 
     it("resets date on initial load", async () => {
-      const yesterday = getCurrentDate().subtract(1, "day").format("YYYY-MM-DD");
+      const yesterday = getCurrentDate().subtract(1, "day").format(defaultDateFormat);
       await getPageHelper({}, { businessStartDate: yesterday });
-      expect(screen.getByLabelText("Business start date")).toHaveValue(getCurrentDateFormatted("MM/DD/YYYY"));
+      expect(screen.getByLabelText("Business start date")).toHaveValue(
+        getCurrentDateFormatted(defaultDisplayDateFormat)
+      );
     });
 
     it("validates date", async () => {

@@ -1,16 +1,10 @@
 import {
   BusinessPersona,
+  castPublicFilingLegalTypeToFormationType,
   FormationLegalType,
   PublicFilingLegalType,
   publicFilingLegalTypes,
 } from "@businessnjgovnavigator/shared";
-
-export const castPublicFilingLegalTypeToFormationType = (
-  legalStructureId: PublicFilingLegalType,
-  persona: BusinessPersona | undefined
-): FormationLegalType => {
-  return `${persona == "FOREIGN" ? "foreign-" : ""}${legalStructureId}` as FormationLegalType;
-};
 
 export const allowFormation = (
   legalStructureId: string | undefined,

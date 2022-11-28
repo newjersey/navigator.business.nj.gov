@@ -12,13 +12,15 @@ import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import * as api from "@/lib/api-client/apiClient";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { allowFormation, castPublicFilingLegalTypeToFormationType } from "@/lib/domain-logic/allowFormation";
+import { allowFormation } from "@/lib/domain-logic/allowFormation";
 import { checkQueryValue, QUERIES } from "@/lib/domain-logic/routes";
 import { splitFullName } from "@/lib/domain-logic/splitFullName";
 import { FormationDisplayContentMap, NameAvailability, Task } from "@/lib/types/types";
 import { getModifiedTaskContent, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import {
+  castPublicFilingLegalTypeToFormationType,
   createEmptyFormationFormData,
+  defaultDateFormat,
   defaultFormationLegalType,
   FormationFields,
   FormationFormData,
@@ -68,8 +70,8 @@ export const BusinessFormation = (props: Props): ReactElement => {
   };
 
   const getDate = (date?: string): string => {
-    return !date || parseDateWithFormat(date, "YYYY-MM-DD").isBefore(getCurrentDate())
-      ? getCurrentDateFormatted("YYYY-MM-DD")
+    return !date || parseDateWithFormat(date, defaultDateFormat).isBefore(getCurrentDate())
+      ? getCurrentDateFormatted(defaultDateFormat)
       : date;
   };
 

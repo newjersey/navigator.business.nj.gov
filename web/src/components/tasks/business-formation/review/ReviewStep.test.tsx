@@ -1,12 +1,13 @@
-import {
-  generateFormationDisplayContent,
-  generateFormationFormData,
-  generateUserData,
-} from "@/test/factories";
+import { generateFormationDisplayContent, generateUserData } from "@/test/factories";
 import { markdownToText, withMarkup } from "@/test/helpers";
 import { generateFormationProfileData, preparePage, useSetupInitialMocks } from "@/test/helpers-formation";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { FormationFormData, FormationLegalType, ProfileData } from "@businessnjgovnavigator/shared";
+import {
+  FormationFormData,
+  FormationLegalType,
+  generateFormationFormData,
+  ProfileData,
+} from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { fireEvent, screen, within } from "@testing-library/react";
 

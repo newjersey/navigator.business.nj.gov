@@ -12,6 +12,7 @@ import {
   generateTaxFilingData,
   generateUserData,
 } from "@/test/factories";
+import { defaultDateFormat } from "@businessnjgovnavigator/shared/index";
 import { createTheme, ThemeProvider } from "@mui/material";
 import dayjs from "dayjs";
 
@@ -36,8 +37,8 @@ const DashboardCalendarPreview = (props: PreviewProps) => {
     }),
     taxFilingData: generateTaxFilingData({
       filings: [
-        generateTaxFiling({ identifier: "1", dueDate: dayjs().format("YYYY-MM-DD") }),
-        generateTaxFiling({ identifier: "2", dueDate: dayjs().add(1, "month").format("YYYY-MM-DD") }),
+        generateTaxFiling({ identifier: "1", dueDate: dayjs().format(defaultDateFormat) }),
+        generateTaxFiling({ identifier: "2", dueDate: dayjs().add(1, "month").format(defaultDateFormat) }),
       ],
     }),
   });

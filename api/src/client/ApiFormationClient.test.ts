@@ -1,15 +1,20 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { getCurrentDateISOString, parseDateWithFormat } from "@shared/dateHelpers";
-import { randomInt } from "@shared/intHelpers";
-import axios from "axios";
+import { formationApiDateFormat } from "@shared/formationData";
 import {
-  generateFormationData,
   generateFormationFormData,
   generateFormationIncorporator,
   generateFormationMember,
   generateFormationNJAddress,
   generateFormationSigner,
   generateFormationUSAddress,
+} from "@shared/test";
+
+import { defaultDateFormat } from "@shared/defaultConstants";
+import { randomInt } from "@shared/intHelpers";
+import axios from "axios";
+import {
+  generateFormationData,
   generateFormationUserData,
   generateProfileData,
   generateUserData,
@@ -152,8 +157,8 @@ describe("ApiFormationClient", () => {
               BusinessPurpose: formationFormData.businessPurpose,
               EffectiveFilingDate: parseDateWithFormat(
                 formationFormData.businessStartDate,
-                "YYYY-MM-DD"
-              ).format("MM/DD/YYYY"),
+                defaultDateFormat
+              ).format(formationApiDateFormat),
               MainAddress: {
                 Address1: formationFormData.addressLine1,
                 Address2: formationFormData.addressLine2,
@@ -256,7 +261,7 @@ describe("ApiFormationClient", () => {
               }),
             ],
           },
-          { foreign: true, legalStructureId: "limited-liability-company" }
+          { legalStructureId: "foreign-limited-liability-company" }
         );
 
         const userData = generateFormationUserData(
@@ -300,8 +305,8 @@ describe("ApiFormationClient", () => {
               BusinessPurpose: formationFormData.businessPurpose,
               EffectiveFilingDate: parseDateWithFormat(
                 formationFormData.businessStartDate,
-                "YYYY-MM-DD"
-              ).format("MM/DD/YYYY"),
+                defaultDateFormat
+              ).format(formationApiDateFormat),
               ForeignDateOfFormation: "10/20/2022",
               ForeignStateOfFormation: "Massachusetts",
               MainAddress: {
@@ -432,8 +437,8 @@ describe("ApiFormationClient", () => {
               BusinessPurpose: formationFormData.businessPurpose,
               EffectiveFilingDate: parseDateWithFormat(
                 formationFormData.businessStartDate,
-                "YYYY-MM-DD"
-              ).format("MM/DD/YYYY"),
+                defaultDateFormat
+              ).format(formationApiDateFormat),
               MainAddress: {
                 Address1: formationFormData.addressLine1,
                 Address2: formationFormData.addressLine2,
@@ -554,7 +559,7 @@ describe("ApiFormationClient", () => {
             signers,
           },
 
-          { legalStructureId, foreign: true }
+          { legalStructureId: `foreign-${legalStructureId}` }
         );
 
         const userData = generateFormationUserData(
@@ -601,8 +606,8 @@ describe("ApiFormationClient", () => {
               BusinessPurpose: formationFormData.businessPurpose,
               EffectiveFilingDate: parseDateWithFormat(
                 formationFormData.businessStartDate,
-                "YYYY-MM-DD"
-              ).format("MM/DD/YYYY"),
+                defaultDateFormat
+              ).format(formationApiDateFormat),
               ForeignDateOfFormation: "10/20/2022",
               ForeignStateOfFormation: "Massachusetts",
               MainAddress: {
@@ -736,8 +741,8 @@ describe("ApiFormationClient", () => {
               BusinessPurpose: formationFormData.businessPurpose,
               EffectiveFilingDate: parseDateWithFormat(
                 formationFormData.businessStartDate,
-                "YYYY-MM-DD"
-              ).format("MM/DD/YYYY"),
+                defaultDateFormat
+              ).format(formationApiDateFormat),
               MainAddress: {
                 Address1: formationFormData.addressLine1,
                 Address2: formationFormData.addressLine2,
@@ -813,8 +818,7 @@ describe("ApiFormationClient", () => {
               }),
             ],
           },
-
-          { foreign: true, legalStructureId: "limited-liability-partnership" }
+          { legalStructureId: "foreign-limited-liability-partnership" }
         );
 
         const userData = generateUserData({
@@ -860,8 +864,8 @@ describe("ApiFormationClient", () => {
               BusinessPurpose: formationFormData.businessPurpose,
               EffectiveFilingDate: parseDateWithFormat(
                 formationFormData.businessStartDate,
-                "YYYY-MM-DD"
-              ).format("MM/DD/YYYY"),
+                defaultDateFormat
+              ).format(formationApiDateFormat),
               ForeignDateOfFormation: "10/20/2022",
               ForeignStateOfFormation: "Massachusetts",
               MainAddress: {
@@ -995,8 +999,8 @@ describe("ApiFormationClient", () => {
               BusinessPurpose: formationFormData.businessPurpose,
               EffectiveFilingDate: parseDateWithFormat(
                 formationFormData.businessStartDate,
-                "YYYY-MM-DD"
-              ).format("MM/DD/YYYY"),
+                defaultDateFormat
+              ).format(formationApiDateFormat),
               MainAddress: {
                 Address1: formationFormData.addressLine1,
                 Address2: formationFormData.addressLine2,

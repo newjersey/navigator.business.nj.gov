@@ -5,7 +5,7 @@ import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { createProfileFieldErrorMap } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
 import Onboarding from "@/pages/onboarding";
-import { generateMunicipality, generateProfileData, generateUser, generateUserData } from "@/test/factories";
+import { generateProfileData, generateUser, generateUserData } from "@/test/factories";
 import { withAuth, withRoadmap } from "@/test/helpers";
 import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
@@ -16,7 +16,12 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import { createPageHelpers, renderPage } from "@/test/pages/onboarding/helpers-onboarding";
-import { createEmptyProfileData, getCurrentDate } from "@businessnjgovnavigator/shared/";
+import {
+  createEmptyProfileData,
+  defaultDateFormat,
+  generateMunicipality,
+  getCurrentDate,
+} from "@businessnjgovnavigator/shared/";
 import { render, screen, waitFor } from "@testing-library/react";
 
 jest.mock("next/router", () => {
@@ -362,7 +367,7 @@ describe("onboarding - shared", () => {
       legalStructureId: "c-corporation",
       businessName: "Cool Computers",
       industryId: "generic",
-      dateOfFormation: date.format("YYYY-MM-DD"),
+      dateOfFormation: date.format(defaultDateFormat),
       homeBasedBusiness: undefined,
       municipality: newark,
       liquorLicense: false,

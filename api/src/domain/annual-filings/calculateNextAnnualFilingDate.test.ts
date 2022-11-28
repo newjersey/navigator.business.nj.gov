@@ -1,4 +1,5 @@
 import * as getCurrentDateModule from "@shared/dateHelpers";
+import { defaultDateFormat } from "@shared/defaultConstants";
 import dayjs from "dayjs";
 import { calculateNextAnnualFilingDate } from "./calculateNextAnnualFilingDate";
 
@@ -15,7 +16,7 @@ const currentDateMock = (getCurrentDateModule as jest.Mocked<typeof getCurrentDa
 describe("calculateNextAnnualFilingDate", () => {
   describe("when today is October 5, 2021", () => {
     beforeEach(() => {
-      currentDateMock.mockReturnValue(dayjs("2021-10-05", "YYYY-MM-DD"));
+      currentDateMock.mockReturnValue(dayjs("2021-10-05", defaultDateFormat));
     });
 
     it("finds the next-year date for an earlier-this year date", () => {
@@ -57,7 +58,7 @@ describe("calculateNextAnnualFilingDate", () => {
 
   describe("when today is October 31, 2021", () => {
     beforeEach(() => {
-      currentDateMock.mockReturnValue(dayjs("2021-10-31", "YYYY-MM-DD"));
+      currentDateMock.mockReturnValue(dayjs("2021-10-31", defaultDateFormat));
     });
 
     it("finds the next-year date for a date from this month this year", () => {
@@ -71,7 +72,7 @@ describe("calculateNextAnnualFilingDate", () => {
 
   describe("when today is November 1, 2021", () => {
     beforeEach(() => {
-      currentDateMock.mockReturnValue(dayjs("2021-11-01", "YYYY-MM-DD"));
+      currentDateMock.mockReturnValue(dayjs("2021-11-01", defaultDateFormat));
     });
 
     it("finds the next-year date for a date from this month this year", () => {
