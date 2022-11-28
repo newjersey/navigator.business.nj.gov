@@ -3,14 +3,13 @@ import * as fetchMunicipality from "@/lib/async-content-fetchers/fetchMunicipali
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import * as roadmapBuilderModule from "@/lib/roadmap/roadmapBuilder";
 import {
-  generateMunicipality,
   generateMunicipalityDetail,
   generateProfileData,
   generateRoadmap,
   generateTask,
 } from "@/test/factories";
 import { getLastCalledWith } from "@/test/helpers";
-import { Industries } from "@businessnjgovnavigator/shared/";
+import { generateMunicipality, Industries } from "@businessnjgovnavigator/shared/";
 import {
   BusinessPersona,
   createEmptyProfileData,

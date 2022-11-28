@@ -16,5 +16,5 @@ export type TaxFilingLookUpRequest = {
 
 export type TaxFiling = {
   readonly identifier: string;
-  readonly dueDate: string;
+  readonly dueDate: string; // YYYY-MM-DD
 };

@@ -3,7 +3,8 @@ import { ConfigContext } from "@/contexts/configContext";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
-import { generateMunicipality, generateProfileData, generateUserData } from "@/test/factories";
+import { generateProfileData, generateUserData } from "@/test/factories";
+import { generateMunicipality } from "@businessnjgovnavigator/shared";
 
 const DeferredLocationPreview = (props: PreviewProps) => {
   const { config, setConfig } = usePreviewConfig(props);

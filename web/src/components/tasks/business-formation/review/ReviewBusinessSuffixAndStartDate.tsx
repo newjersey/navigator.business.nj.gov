@@ -28,6 +28,7 @@ export const ReviewBusinessSuffixAndStartDate = (): ReactElement => {
           defaultDisplayDateFormat
         )}
       />
+
       {state.formationFormData.businessTotalStock.length > 0 && (
         <ReviewLineItem
           label={Config.businessFormationDefaults.reviewBusinessTotalStockLabel}

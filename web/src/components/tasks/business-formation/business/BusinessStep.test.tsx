@@ -1,10 +1,5 @@
 import { defaultDisplayDateFormat } from "@/lib/types/types";
-import {
-  generateFormationDisplayContent,
-  generateFormationFormData,
-  generateMunicipality,
-  generateUserData,
-} from "@/test/factories";
+import { generateFormationDisplayContent, generateUserData } from "@/test/factories";
 import { markdownToText } from "@/test/helpers";
 import {
   FormationPageHelpers,
@@ -19,6 +14,8 @@ import {
   defaultDateFormat,
   FormationFormData,
   FormationLegalType,
+  generateFormationFormData,
+  generateMunicipality,
   getCurrentDate,
   getCurrentDateFormatted,
   Municipality,

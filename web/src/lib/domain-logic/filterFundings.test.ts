@@ -1,10 +1,6 @@
 import { filterFundings } from "@/lib/domain-logic/filterFundings";
-import {
-  generateFunding,
-  generateMunicipality,
-  generateProfileData,
-  generateUserData,
-} from "@/test/factories";
+import { generateFunding, generateProfileData, generateUserData } from "@/test/factories";
+import { generateMunicipality } from "@businessnjgovnavigator/shared/test";
 
 describe("filterFundings", () => {
   it("shows home-based-business yes or unknown when user home-based-business is true", () => {

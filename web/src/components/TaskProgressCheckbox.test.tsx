@@ -13,8 +13,8 @@ import {
   userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
+import { defaultDateFormat } from "@businessnjgovnavigator/shared";
 import { getCurrentDate } from "@businessnjgovnavigator/shared/dateHelpers";
-import { defaultDateFormat } from "@businessnjgovnavigator/shared/defaultConstants";
 import { formationTaskId, taxTaskId } from "@businessnjgovnavigator/shared/domain-logic/taskIds";
 import { randomInt } from "@businessnjgovnavigator/shared/intHelpers";
 import { TaskProgress, UserData } from "@businessnjgovnavigator/shared/userData";
