@@ -1,17 +1,20 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { getCurrentDateISOString, parseDateWithFormat } from "@shared/dateHelpers";
-import { defaultDateFormat } from "@shared/defaultConstants";
 import { formationApiDateFormat } from "@shared/formationData";
-import { randomInt } from "@shared/intHelpers";
-import axios from "axios";
 import {
-  generateFormationData,
   generateFormationFormData,
   generateFormationIncorporator,
   generateFormationMember,
   generateFormationNJAddress,
   generateFormationSigner,
   generateFormationUSAddress,
+} from "@shared/test";
+
+import { defaultDateFormat } from "@shared/defaultConstants";
+import { randomInt } from "@shared/intHelpers";
+import axios from "axios";
+import {
+  generateFormationData,
   generateFormationUserData,
   generateProfileData,
   generateUserData,
@@ -258,7 +261,7 @@ describe("ApiFormationClient", () => {
               }),
             ],
           },
-          { foreign: true, legalStructureId: "limited-liability-company" }
+          { legalStructureId: "foreign-limited-liability-company" }
         );
 
         const userData = generateFormationUserData(
@@ -556,7 +559,7 @@ describe("ApiFormationClient", () => {
             signers,
           },
 
-          { legalStructureId, foreign: true }
+          { legalStructureId: `foreign-${legalStructureId}` }
         );
 
         const userData = generateFormationUserData(
@@ -815,8 +818,7 @@ describe("ApiFormationClient", () => {
               }),
             ],
           },
-
-          { foreign: true, legalStructureId: "limited-liability-partnership" }
+          { legalStructureId: "foreign-limited-liability-partnership" }
         );
 
         const userData = generateUserData({

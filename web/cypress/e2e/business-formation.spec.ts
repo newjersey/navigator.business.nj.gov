@@ -1,5 +1,10 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
-import { FormationFormData, LookupIndustryById, randomInt } from "@businessnjgovnavigator/shared/";
+import {
+  defaultDateFormat,
+  FormationFormData,
+  LookupIndustryById,
+  randomInt,
+} from "@businessnjgovnavigator/shared/";
 import {
   AdditionalFormation,
   completeNewBusinessOnboarding,
@@ -21,7 +26,7 @@ describe("Business Formation [feature] [all] [group2]", () => {
     const industry = LookupIndustryById("food-truck");
     const legalStructureId = "limited-liability-company";
     const businessNameSearch = "My Cool Business";
-    const businessStartDate = dayjs().add(2, "months").format(formationApiDateFormat);
+    const businessStartDate = dayjs().add(2, "months").format(defaultDateFormat);
     const businessSuffix = "LIMITED LIABILITY CO";
     const addressLine1 = `some-business-address-1-${randomInt()}`;
     const addressLine2 = `some-business-address-2-${randomInt()}`;

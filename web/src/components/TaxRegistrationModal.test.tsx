@@ -3,12 +3,7 @@ import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import * as buildUserRoadmap from "@/lib/roadmap/buildUserRoadmap";
 import * as analyticsHelpers from "@/lib/utils/analytics-helpers";
 import { getFlow } from "@/lib/utils/helpers";
-import {
-  generateMunicipality,
-  generateProfileData,
-  generateRoadmap,
-  generateUserData,
-} from "@/test/factories";
+import { generateProfileData, generateRoadmap, generateUserData } from "@/test/factories";
 import { fillText, markdownToText, selectLocationByText, withRoadmap } from "@/test/helpers";
 import {
   currentUserData,
@@ -18,6 +13,7 @@ import {
 } from "@/test/mock/withStatefulUserData";
 import { LegalStructures } from "@businessnjgovnavigator/shared/legalStructure";
 import { LookupOwnershipTypeById } from "@businessnjgovnavigator/shared/ownership";
+import { generateMunicipality } from "@businessnjgovnavigator/shared/test";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { TaxRegistrationModal } from "./TaxRegistrationModal";

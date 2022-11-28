@@ -12,6 +12,7 @@ exports[`formationData createEmptyFormationFormData returns the correct object 1
     "name": "New Jersey",
     "shortCode": "NJ",
   },
+  "addressType": "NJ",
   "addressZipCode": "",
   "agentEmail": "",
   "agentName": "",

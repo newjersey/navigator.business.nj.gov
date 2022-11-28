@@ -1,10 +1,18 @@
 import { CountriesShortCodes } from "./countries";
 import { Municipality } from "./municipality";
+import { BusinessPersona } from "./profileData";
 import { StateNames, StateObject } from "./states";
 
 export const formationApiDateFormat = "MM/DD/YYYY";
 
 export const defaultFormationLegalType: PublicFilingLegalType = "limited-liability-company";
+
+export const castPublicFilingLegalTypeToFormationType = (
+  legalStructureId: PublicFilingLegalType,
+  persona: BusinessPersona | undefined
+): FormationLegalType => {
+  return `${persona == "FOREIGN" ? "foreign-" : ""}${legalStructureId}` as FormationLegalType;
+};
 
 export type SignerTitle =
   | "Authorized Representative"
@@ -61,6 +69,7 @@ export interface FormationData {
   readonly completedFilingPayment: boolean;
 }
 
+export type FormationAddressType = "NJ" | "US" | "INTL";
 export interface FormationAddress {
   readonly addressLine1: string;
   readonly addressLine2: string;
@@ -70,6 +79,7 @@ export interface FormationAddress {
   readonly addressProvince?: string;
   readonly addressZipCode: string;
   readonly addressCountry: CountriesShortCodes;
+  readonly addressType: FormationAddressType;
 }
 
 export interface FormationSigner {
@@ -140,6 +150,7 @@ export type FormationTextField = Exclude<
   | "businessSuffix"
   | "addressMunicipality"
   | "addressCountry"
+  | "addressType"
   | "addressState"
   | "businessStartDate"
   | "agentNumberOrManual"
@@ -175,6 +186,7 @@ export const createEmptyFormationAddress = (): FormationAddress => {
     addressZipCode: "",
     addressProvince: undefined,
     addressCountry: "US",
+    addressType: "US",
   };
 };
 
@@ -206,6 +218,7 @@ export const createEmptyFormationFormData = (): FormationFormData => {
   return {
     ...createEmptyFormationAddress(),
     addressState: { name: "New Jersey", shortCode: "NJ" },
+    addressType: "NJ",
     businessName: "",
     businessSuffix: undefined,
     businessTotalStock: "",

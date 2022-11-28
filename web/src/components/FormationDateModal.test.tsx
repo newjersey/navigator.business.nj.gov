@@ -3,12 +3,7 @@ import { getMergedConfig } from "@/contexts/configContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import * as buildUserRoadmap from "@/lib/roadmap/buildUserRoadmap";
 import * as analyticsHelpers from "@/lib/utils/analytics-helpers";
-import {
-  generateMunicipality,
-  generateProfileData,
-  generateRoadmap,
-  generateUserData,
-} from "@/test/factories";
+import { generateProfileData, generateRoadmap, generateUserData } from "@/test/factories";
 import { selectDate, selectLocationByText, withRoadmap } from "@/test/helpers";
 import {
   currentUserData,
@@ -16,8 +11,8 @@ import {
   triggerQueueUpdate,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
+import { defaultDateFormat, generateMunicipality } from "@businessnjgovnavigator/shared";
 import { getCurrentDate } from "@businessnjgovnavigator/shared/dateHelpers";
-import { defaultDateFormat } from "@businessnjgovnavigator/shared/defaultConstants";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 

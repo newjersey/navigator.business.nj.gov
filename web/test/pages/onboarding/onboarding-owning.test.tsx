@@ -1,13 +1,7 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { getFlow, templateEval } from "@/lib/utils/helpers";
-import {
-  generateMunicipality,
-  generateProfileData,
-  generateTaxFilingData,
-  generateUser,
-  generateUserData,
-} from "@/test/factories";
+import { generateProfileData, generateTaxFilingData, generateUser, generateUserData } from "@/test/factories";
 import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { currentUserData, setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
@@ -19,6 +13,7 @@ import {
 import {
   createEmptyUserData,
   defaultDateFormat,
+  generateMunicipality,
   getCurrentDate,
   ProfileData,
 } from "@businessnjgovnavigator/shared/";

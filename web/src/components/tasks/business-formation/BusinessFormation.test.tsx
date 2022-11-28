@@ -8,7 +8,6 @@ import {
   generateFormationDisplayContent,
   generateFormationSubmitResponse,
   generateGetFilingResponse,
-  generateMunicipality,
   generateProfileData,
   generateTask,
   generateUserData,
@@ -22,6 +21,7 @@ import {
   FormationIncorporator,
   FormationLegalType,
   FormationMember,
+  generateMunicipality,
   getCurrentDate,
   publicFilingLegalTypes,
   UserData,
@@ -313,6 +313,7 @@ describe("<BusinessFormation />", () => {
       addressState: { shortCode: "DC", name: "District of Columbia" },
       addressZipCode: "20500",
       addressCountry: "US",
+      addressType: "US",
     };
     expect(
       screen.getByText(displayContent[legalStructureId].members.placeholder as string)
@@ -372,6 +373,7 @@ describe("<BusinessFormation />", () => {
         addressState: member.addressState,
         addressZipCode: member.addressZipCode,
         addressCountry: member.addressCountry,
+        addressType: "US",
       },
     ]);
     expect(formationFormData.signers).toEqual([
@@ -549,6 +551,7 @@ describe("<BusinessFormation />", () => {
       addressCountry: "US",
       title: "General Partner",
       signature: false,
+      addressType: "US",
     };
 
     expect(
@@ -640,6 +643,7 @@ describe("<BusinessFormation />", () => {
       addressState: { shortCode: "DC", name: "District of Columbia" },
       addressZipCode: "20500",
       addressCountry: "US",
+      addressType: "US",
     };
 
     await page.fillAndSubmitBusinessNameStep("Pizza Joint");
