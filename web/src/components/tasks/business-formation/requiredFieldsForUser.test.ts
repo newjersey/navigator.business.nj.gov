@@ -1,6 +1,7 @@
 import { requiredFieldsForUser } from "@/components/tasks/business-formation/requiredFieldsForUser";
-import { generateFormationFormData, randomLegalStructure } from "@/test/factories";
+import { randomLegalStructure } from "@/test/factories";
 import { FormationFields, FormationLegalType } from "@businessnjgovnavigator/shared/formationData";
+import { generateFormationFormData } from "@businessnjgovnavigator/shared/test";
 
 describe("requiredFieldsForUser", () => {
   const requiredFieldsForAllLegalStructures: FormationFields[] = [

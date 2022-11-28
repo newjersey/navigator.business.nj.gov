@@ -1,9 +1,4 @@
-import {
-  generateFormationDisplayContent,
-  generateFormationFormData,
-  generateUser,
-  generateUserData,
-} from "@/test/factories";
+import { generateFormationDisplayContent, generateUser, generateUserData } from "@/test/factories";
 import {
   FormationPageHelpers,
   generateFormationProfileData,
@@ -15,6 +10,7 @@ import {
   BusinessUser,
   FormationFormData,
   FormationLegalType,
+  generateFormationFormData,
   ProfileData,
 } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";

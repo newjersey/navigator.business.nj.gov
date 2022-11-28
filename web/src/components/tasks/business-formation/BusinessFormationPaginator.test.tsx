@@ -9,10 +9,8 @@ import * as analyticsHelpers from "@/lib/utils/analytics-helpers";
 import {
   generateEmptyFormationData,
   generateFormationDisplayContent,
-  generateFormationFormData,
   generateFormationSubmitError,
   generateFormationSubmitResponse,
-  generateMunicipality,
   generateRoadmap,
   generateTask,
   generateUserData,
@@ -28,6 +26,7 @@ import {
 import { mockPush } from "@/test/mock/mockRouter";
 import { currentUserData, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
+import { generateFormationFormData, generateMunicipality } from "@businessnjgovnavigator/shared/test";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import * as materialUi from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material";

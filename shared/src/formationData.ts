@@ -1,10 +1,18 @@
 import { CountriesShortCodes } from "./countries";
 import { Municipality } from "./municipality";
+import { BusinessPersona } from "./profileData";
 import { StateNames, StateObject } from "./states";
 
 export const formationApiDateFormat = "MM/DD/YYYY";
 
 export const defaultFormationLegalType: PublicFilingLegalType = "limited-liability-company";
+
+export const castPublicFilingLegalTypeToFormationType = (
+  legalStructureId: PublicFilingLegalType,
+  persona: BusinessPersona | undefined
+): FormationLegalType => {
+  return `${persona == "FOREIGN" ? "foreign-" : ""}${legalStructureId}` as FormationLegalType;
+};
 
 export type SignerTitle =
   | "Authorized Representative"

@@ -4,12 +4,7 @@ import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import * as buildUserRoadmap from "@/lib/roadmap/buildUserRoadmap";
 import analytics from "@/lib/utils/analytics";
 import * as analyticsHelpers from "@/lib/utils/analytics-helpers";
-import {
-  generateMunicipality,
-  generateProfileData,
-  generateRoadmap,
-  generateUserData,
-} from "@/test/factories";
+import { generateProfileData, generateRoadmap, generateUserData } from "@/test/factories";
 import { selectLocationByText, withRoadmap } from "@/test/helpers";
 import {
   currentUserData,
@@ -17,6 +12,7 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import { Municipality } from "@businessnjgovnavigator/shared/municipality";
+import { generateMunicipality } from "@businessnjgovnavigator/shared/test";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
 
