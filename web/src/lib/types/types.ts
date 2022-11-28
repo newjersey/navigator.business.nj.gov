@@ -175,6 +175,9 @@ export type RoadmapDisplayContent = {
   sidebarDisplayContent: Record<string, SidebarCardContent>;
 };
 
+export const defaultDisplayDateFormat = "MM/DD/YYYY";
+export const defaultMarkdownDateFormat = "MM/DD/YYYY";
+
 export type Funding = {
   id: string;
   filename: string;

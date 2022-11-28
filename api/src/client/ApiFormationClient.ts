@@ -1,8 +1,10 @@
 import { CountriesShortCodes } from "@shared/countries";
 import { parseDateWithFormat } from "@shared/dateHelpers";
+import { defaultDateFormat } from "@shared/defaultConstants";
 import {
   BusinessSuffix,
   ForeignGoodStandingFileObject,
+  formationApiDateFormat,
   FormationLegalType,
   FormationSubmitError,
   FormationSubmitResponse,
@@ -240,12 +242,15 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
           PracticesLaw: isForeignCorp ? false : undefined,
           ForeignStateOfFormation: formationFormData.foreignStateOfFormation,
           ForeignDateOfFormation: formationFormData.foreignDateOfFormation
-            ? parseDateWithFormat(formationFormData.foreignDateOfFormation, "YYYY-MM-DD").format("MM/DD/YYYY")
+            ? parseDateWithFormat(formationFormData.foreignDateOfFormation, defaultDateFormat).format(
+                formationApiDateFormat
+              )
             : undefined,
           BusinessPurpose: formationFormData.businessPurpose || undefined,
-          EffectiveFilingDate: parseDateWithFormat(formationFormData.businessStartDate, "YYYY-MM-DD").format(
-            "MM/DD/YYYY"
-          ),
+          EffectiveFilingDate: parseDateWithFormat(
+            formationFormData.businessStartDate,
+            defaultDateFormat
+          ).format(formationApiDateFormat),
           MainAddress: {
             Address1: formationFormData.addressLine1,
             Address2: formationFormData.addressLine2,

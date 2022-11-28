@@ -19,6 +19,7 @@ import { FormationDisplayContentMap, NameAvailability, Task } from "@/lib/types/
 import { getModifiedTaskContent, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import {
   createEmptyFormationFormData,
+  defaultDateFormat,
   defaultFormationLegalType,
   FormationFields,
   FormationFormData,
@@ -68,8 +69,8 @@ export const BusinessFormation = (props: Props): ReactElement => {
   };
 
   const getDate = (date?: string): string => {
-    return !date || parseDateWithFormat(date, "YYYY-MM-DD").isBefore(getCurrentDate())
-      ? getCurrentDateFormatted("YYYY-MM-DD")
+    return !date || parseDateWithFormat(date, defaultDateFormat).isBefore(getCurrentDate())
+      ? getCurrentDateFormatted(defaultDateFormat)
       : date;
   };
 

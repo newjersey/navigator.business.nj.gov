@@ -13,6 +13,7 @@ import { MediaQueries } from "@/lib/PageSizes";
 import { OperateReference } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import {
+  defaultDateFormat,
   getCurrentDate,
   LookupOperatingPhaseById,
   parseDateWithFormat,
@@ -58,8 +59,8 @@ export const FilingsCalendar = (props: Props): ReactElement => {
 
     const thisMonthFilings = sortedFilteredFilingsWithinAYear.filter((it) => {
       return (
-        parseDateWithFormat(it.dueDate, "YYYY-MM-DD").month() === date.month() &&
-        parseDateWithFormat(it.dueDate, "YYYY-MM-DD").year() === date.year()
+        parseDateWithFormat(it.dueDate, defaultDateFormat).month() === date.month() &&
+        parseDateWithFormat(it.dueDate, defaultDateFormat).year() === date.year()
       );
     });
 
@@ -85,7 +86,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
                       <Tag backgroundColor="warning-light" isHover isRadiusMd isWrappingText>
                         <span className="text-bold text-uppercase">
                           {Config.dashboardDefaults.calendarFilingDueDateLabel}{" "}
-                          {parseDateWithFormat(filing.dueDate, "YYYY-MM-DD").format("M/D")}
+                          {parseDateWithFormat(filing.dueDate, defaultDateFormat).format("M/D")}
                         </span>
                         {" - "}
                         <span className="text-no-uppercase text-underline">
@@ -150,7 +151,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
                 <div className="width-05 bg-primary minw-05" />
                 <div className="margin-left-205">
                   <div className="text-bold">
-                    {parseDateWithFormat(filing.dueDate, "YYYY-MM-DD").format("MMMM D, YYYY")}
+                    {parseDateWithFormat(filing.dueDate, defaultDateFormat).format("MMMM D, YYYY")}
                   </div>
                   <div>
                     <Link href={`filings/${props.operateReferences[filing.identifier].urlSlug}`} passHref>
@@ -161,7 +162,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
                         }}
                       >
                         {props.operateReferences[filing.identifier].name}{" "}
-                        {parseDateWithFormat(filing.dueDate, "YYYY-MM-DD").format("YYYY")}
+                        {parseDateWithFormat(filing.dueDate, defaultDateFormat).format("YYYY")}
                       </a>
                     </Link>
                   </div>

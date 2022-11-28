@@ -35,6 +35,7 @@ import {
 import {
   BusinessPersona,
   createEmptyUserData,
+  defaultDateFormat,
   einTaskId,
   formationTaskId,
   getCurrentDate,
@@ -55,7 +56,7 @@ import { fireEvent, render, screen, waitFor, within } from "@testing-library/rea
 const date = getCurrentDate().subtract(1, "month").date(1);
 const Config = getMergedConfig();
 
-const dateOfFormation = date.format("YYYY-MM-DD");
+const dateOfFormation = date.format(defaultDateFormat);
 const mockApi = api as jest.Mocked<typeof api>;
 
 function setupMockAnalytics(): typeof analytics {

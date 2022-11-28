@@ -10,6 +10,7 @@ import {
   generateNameAvailability,
 } from "@/test/factories";
 import { getCurrentDate, getCurrentDateFormatted } from "@businessnjgovnavigator/shared/dateHelpers";
+import { defaultDateFormat } from "@businessnjgovnavigator/shared/defaultConstants";
 import { FormationFields } from "@businessnjgovnavigator/shared/formationData";
 
 const Config = getMergedConfig();
@@ -96,28 +97,28 @@ describe("getErrorStateForField", () => {
 
     it("has error in the past", () => {
       const formData = generateFormationFormData({
-        businessStartDate: getCurrentDate().subtract(1, "day").format("YYYY-MM-DD"),
+        businessStartDate: getCurrentDate().subtract(1, "day").format(defaultDateFormat),
       });
       expect(getErrorStateForField("businessStartDate", formData, undefined).hasError).toEqual(true);
     });
 
     it("has no error if today", () => {
       const formData = generateFormationFormData({
-        businessStartDate: getCurrentDateFormatted("YYYY-MM-DD"),
+        businessStartDate: getCurrentDateFormatted(defaultDateFormat),
       });
       expect(getErrorStateForField("businessStartDate", formData, undefined).hasError).toEqual(false);
     });
 
     it("has no error if in the future", () => {
       const formData = generateFormationFormData({
-        businessStartDate: getCurrentDate().add(1, "day").format("YYYY-MM-DD"),
+        businessStartDate: getCurrentDate().add(1, "day").format(defaultDateFormat),
       });
       expect(getErrorStateForField("businessStartDate", formData, undefined).hasError).toEqual(false);
     });
 
     it("inserts label from config", () => {
       const formData = generateFormationFormData({
-        businessStartDate: getCurrentDate().add(1, "day").format("YYYY-MM-DD"),
+        businessStartDate: getCurrentDate().add(1, "day").format(defaultDateFormat),
       });
       expect(getErrorStateForField("businessStartDate", formData, undefined).label).toEqual(
         Config.businessFormationDefaults.requiredFieldsBulletPointLabel.businessStartDate

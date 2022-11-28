@@ -14,6 +14,7 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import { getCurrentDate } from "@businessnjgovnavigator/shared/dateHelpers";
+import { defaultDateFormat } from "@businessnjgovnavigator/shared/defaultConstants";
 import { formationTaskId, taxTaskId } from "@businessnjgovnavigator/shared/domain-logic/taskIds";
 import { randomInt } from "@businessnjgovnavigator/shared/intHelpers";
 import { TaskProgress, UserData } from "@businessnjgovnavigator/shared/userData";
@@ -279,7 +280,7 @@ describe("<TaskProgressCheckbox />", () => {
       selectDate(date);
       fireEvent.click(screen.getByText(Config.formationDateModal.saveButtonText));
       await waitFor(() => {
-        return expect(currentUserData().profileData.dateOfFormation).toEqual(date.format("YYYY-MM-DD"));
+        return expect(currentUserData().profileData.dateOfFormation).toEqual(date.format(defaultDateFormat));
       });
       expect(currentUserData().taskProgress[id]).toEqual("COMPLETED");
       expect(mockPush).toHaveBeenCalledWith({
@@ -300,7 +301,7 @@ describe("<TaskProgressCheckbox />", () => {
       selectDate(date);
       fireEvent.click(screen.getByText(Config.formationDateModal.saveButtonText));
       await waitFor(() => {
-        return expect(currentUserData().profileData.dateOfFormation).toEqual(date.format("YYYY-MM-DD"));
+        return expect(currentUserData().profileData.dateOfFormation).toEqual(date.format(defaultDateFormat));
       });
 
       fireEvent.click(screen.getByTestId("change-task-progress-checkbox"));
@@ -331,13 +332,13 @@ describe("<TaskProgressCheckbox />", () => {
       selectDate(date);
       fireEvent.click(screen.getByText(Config.formationDateModal.saveButtonText));
       await waitFor(() => {
-        return expect(currentUserData().profileData.dateOfFormation).toEqual(date.format("YYYY-MM-DD"));
+        return expect(currentUserData().profileData.dateOfFormation).toEqual(date.format(defaultDateFormat));
       });
 
       fireEvent.click(screen.getByTestId("change-task-progress-checkbox"));
       fireEvent.click(screen.getAllByText(Config.formationDateModal.areYouSureModalCancelButtonText)[0]);
       expect(currentUserData().taskProgress[id]).toEqual("COMPLETED");
-      expect(currentUserData().profileData.dateOfFormation).toEqual(date.format("YYYY-MM-DD"));
+      expect(currentUserData().profileData.dateOfFormation).toEqual(date.format(defaultDateFormat));
     });
   });
 
