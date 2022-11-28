@@ -3,6 +3,8 @@ import { NavBar } from "@/components/navbar/NavBar";
 import { Hero } from "@/components/njwds/Hero";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { SupportExploreSignUpChatCards } from "@/components/SupportExploreSignUpChatCards";
+import { AuthContext } from "@/contexts/authContext";
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { checkQueryValue, QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import { MediaQueries } from "@/lib/PageSizes";
@@ -14,10 +16,11 @@ import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { ABExperience, decideABExperience } from "@businessnjgovnavigator/shared/";
 import { useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router";
-import { ReactElement, useEffect, useRef, useState } from "react";
+import { ReactElement, useContext, useEffect, useRef, useState } from "react";
 
 const Home = (): ReactElement => {
   const { userData, error } = useUserData();
+  const { state } = useContext(AuthContext);
   const router = useRouter();
   const isDesktopAndUp = useMediaQuery(MediaQueries.desktopAndUp);
   const sectionHowItWorks = useRef(null);
@@ -62,14 +65,21 @@ const Home = (): ReactElement => {
   }
 
   useEffect(() => {
-    if (userData?.formProgress === "COMPLETED") {
-      router.replace(ROUTES.dashboard);
-    } else if (userData?.formProgress === "UNSTARTED") {
-      router.replace(ROUTES.onboarding);
-    } else if (userData === undefined && error != undefined) {
-      router.replace(`${ROUTES.dashboard}?error=true`);
+    const landingPageAlternateUrl = process.env.ALTERNATE_LANDING_PAGE_URL || ROUTES.landing;
+    const alternateLandingPageEnabled = process.env.FEATURE_LANDING_PAGE_REDIRECT === "true";
+
+    if (state.isAuthenticated === IsAuthenticated.TRUE) {
+      if (userData?.formProgress === "COMPLETED") {
+        router.replace(ROUTES.dashboard);
+      } else if (userData?.formProgress === "UNSTARTED") {
+        router.replace(ROUTES.onboarding);
+      } else if (userData === undefined && error != undefined) {
+        router.replace(`${ROUTES.dashboard}?error=true`);
+      }
+    } else if (state.isAuthenticated === IsAuthenticated.FALSE && alternateLandingPageEnabled) {
+      router.replace(landingPageAlternateUrl);
     }
-  }, [userData, error, router]);
+  }, [userData, error, router, state.isAuthenticated]);
 
   useEffect(() => {
     if (!router.isReady || !router.query[QUERIES.signUp]) {
