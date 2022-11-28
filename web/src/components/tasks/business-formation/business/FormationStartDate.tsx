@@ -5,6 +5,7 @@ import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import {
   advancedDateLibrary,
   DateObject,
+  defaultDateFormat,
   getCurrentDate,
   parseDateWithFormat,
 } from "@businessnjgovnavigator/shared/";
@@ -42,11 +43,11 @@ export const FormationStartDate = (): ReactElement => {
           <Picker
             minDate={getCurrentDate()}
             maxDate={getCurrentDate().add(100, "years")}
-            value={parseDateWithFormat(state.formationFormData.businessStartDate, "YYYY-MM-DD")}
+            value={parseDateWithFormat(state.formationFormData.businessStartDate, defaultDateFormat)}
             inputFormat={"MM/DD/YYYY"}
             onChange={(newValue: DateObject | null): void => {
               if (newValue) {
-                handleChange(newValue.format("YYYY-MM-DD"));
+                handleChange(newValue.format(defaultDateFormat));
               }
               if (newValue === null) {
                 handleChange("");

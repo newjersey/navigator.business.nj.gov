@@ -1,6 +1,8 @@
 import { ReviewLineItem } from "@/components/tasks/business-formation/review/ReviewLineItem";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
+import { defaultDisplayDateFormat } from "@/lib/types/types";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
+import { defaultDateFormat } from "@businessnjgovnavigator/shared";
 import { parseDateWithFormat } from "@businessnjgovnavigator/shared/dateHelpers";
 import { ReactElement, useContext } from "react";
 
@@ -22,8 +24,8 @@ export const ReviewBusinessSuffixAndStartDate = (): ReactElement => {
       />
       <ReviewLineItem
         label={Config.businessFormationDefaults.reviewStepBusinessStartDateLabel}
-        value={parseDateWithFormat(state.formationFormData.businessStartDate, "YYYY-MM-DD").format(
-          "MM/DD/YYYY"
+        value={parseDateWithFormat(state.formationFormData.businessStartDate, defaultDateFormat).format(
+          defaultDisplayDateFormat
         )}
       />
       {state.formationFormData.businessTotalStock.length > 0 && (

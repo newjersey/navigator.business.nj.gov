@@ -16,7 +16,7 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import { createPageHelpers, renderPage } from "@/test/pages/onboarding/helpers-onboarding";
-import { createEmptyProfileData, getCurrentDate } from "@businessnjgovnavigator/shared/";
+import { createEmptyProfileData, defaultDateFormat, getCurrentDate } from "@businessnjgovnavigator/shared/";
 import { render, screen, waitFor } from "@testing-library/react";
 
 jest.mock("next/router", () => {
@@ -362,7 +362,7 @@ describe("onboarding - shared", () => {
       legalStructureId: "c-corporation",
       businessName: "Cool Computers",
       industryId: "generic",
-      dateOfFormation: date.format("YYYY-MM-DD"),
+      dateOfFormation: date.format(defaultDateFormat),
       homeBasedBusiness: undefined,
       municipality: newark,
       liquorLicense: false,

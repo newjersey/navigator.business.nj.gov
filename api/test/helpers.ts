@@ -1,4 +1,5 @@
 import { getCurrentDate, parseDate } from "@shared/dateHelpers";
+import { defaultDateFormat } from "@shared/defaultConstants";
 import { createHmac } from "node:crypto";
 
 export const determineAnnualFilingDate = (dateOfFormation: string) => {
@@ -9,7 +10,7 @@ export const determineAnnualFilingDate = (dateOfFormation: string) => {
     year = year + 1;
   }
   const nextMonth = dateOfFormationDate.month() + 2;
-  return parseDate(`${year}-${nextMonth}-01`).add(-1, "day").format("YYYY-MM-DD");
+  return parseDate(`${year}-${nextMonth}-01`).add(-1, "day").format(defaultDateFormat);
 };
 
 export const generateHashedKey = (key: string) => {

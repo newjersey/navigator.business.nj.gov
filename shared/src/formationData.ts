@@ -2,6 +2,8 @@ import { CountriesShortCodes } from "./countries";
 import { Municipality } from "./municipality";
 import { StateNames, StateObject } from "./states";
 
+export const formationApiDateFormat = "MM/DD/YYYY";
+
 export const defaultFormationLegalType: PublicFilingLegalType = "limited-liability-company";
 
 export type SignerTitle =

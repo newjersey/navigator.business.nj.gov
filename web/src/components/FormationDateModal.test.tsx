@@ -17,6 +17,7 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import { getCurrentDate } from "@businessnjgovnavigator/shared/dateHelpers";
+import { defaultDateFormat } from "@businessnjgovnavigator/shared/defaultConstants";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
@@ -79,7 +80,7 @@ describe("<FormationDateModal />", () => {
     selectDate(date);
     fireEvent.click(screen.getByText(Config.formationDateModal.saveButtonText));
     triggerQueueUpdate();
-    expect(currentUserData().profileData.dateOfFormation).toEqual(date.format("YYYY-MM-DD"));
+    expect(currentUserData().profileData.dateOfFormation).toEqual(date.format(defaultDateFormat));
   });
 
   it("allows a date in the future", () => {
@@ -88,7 +89,7 @@ describe("<FormationDateModal />", () => {
     selectDate(date);
     fireEvent.click(screen.getByText(Config.formationDateModal.saveButtonText));
     triggerQueueUpdate();
-    expect(currentUserData().profileData.dateOfFormation).toEqual(date.format("YYYY-MM-DD"));
+    expect(currentUserData().profileData.dateOfFormation).toEqual(date.format(defaultDateFormat));
   });
 
   it("shows error when user saves without entering date", () => {
@@ -142,7 +143,7 @@ describe("<FormationDateModal />", () => {
     const userData = generateUserData({
       profileData: generateProfileData({
         municipality: municipality,
-        dateOfFormation: getCurrentDate().format("YYYY-MM-DD"),
+        dateOfFormation: getCurrentDate().format(defaultDateFormat),
       }),
     });
 

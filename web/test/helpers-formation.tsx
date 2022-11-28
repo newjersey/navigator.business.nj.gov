@@ -4,6 +4,7 @@ import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import * as api from "@/lib/api-client/apiClient";
 import * as buildUserRoadmap from "@/lib/roadmap/buildUserRoadmap";
 import {
+  defaultDisplayDateFormat,
   FormationDisplayContentMap,
   FormationSignedAddress,
   NameAvailability,
@@ -349,7 +350,7 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
   };
 
   const selectDate = (value: DateObject) => {
-    fillText("Business start date", value.format("MM/DD/YYYY"));
+    fillText("Business start date", value.format(defaultDisplayDateFormat));
     fireEvent.blur(screen.getByLabelText("Business start date"));
   };
 

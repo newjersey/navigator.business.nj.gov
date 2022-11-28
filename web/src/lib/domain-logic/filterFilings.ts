@@ -1,8 +1,15 @@
-import { getCurrentDate, parseDateWithFormat, TaxFiling } from "@businessnjgovnavigator/shared";
+import {
+  defaultDateFormat,
+  getCurrentDate,
+  parseDateWithFormat,
+  TaxFiling,
+} from "@businessnjgovnavigator/shared";
 
 export const sortFilingsEarliestToLatest = (filings: TaxFiling[]): TaxFiling[] => {
   return filings.sort((a, b) => {
-    return parseDateWithFormat(a.dueDate, "YYYY-MM-DD").isBefore(parseDateWithFormat(b.dueDate, "YYYY-MM-DD"))
+    return parseDateWithFormat(a.dueDate, defaultDateFormat).isBefore(
+      parseDateWithFormat(b.dueDate, defaultDateFormat)
+    )
       ? -1
       : 1;
   });
@@ -10,7 +17,7 @@ export const sortFilingsEarliestToLatest = (filings: TaxFiling[]): TaxFiling[] =
 
 export const deadlinesWithinAYear = (filings: TaxFiling[]): TaxFiling[] => {
   return filings.filter((it) => {
-    return parseDateWithFormat(it.dueDate, "YYYY-MM-DD").diff(getCurrentDate(), "month") <= 11;
+    return parseDateWithFormat(it.dueDate, defaultDateFormat).diff(getCurrentDate(), "month") <= 11;
   });
 };
 

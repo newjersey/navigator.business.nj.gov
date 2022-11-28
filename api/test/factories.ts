@@ -8,6 +8,7 @@ import {
 } from "@shared/businessUser";
 import { arrayOfCountriesShortCodes, CountriesShortCodes } from "@shared/countries";
 import { getCurrentDate, getCurrentDateFormatted, getCurrentDateISOString } from "@shared/dateHelpers";
+import { defaultDateFormat } from "@shared/defaultConstants";
 import { UserFeedbackRequest, UserIssueRequest } from "@shared/feedbackRequest";
 import {
   AllBusinessSuffixes,
@@ -15,10 +16,12 @@ import {
   BusinessSignerTypeMap,
   BusinessSuffix,
   BusinessSuffixMap,
+  corpLegalStructures,
   createEmptyFormationFormData,
   FormationAddress,
   FormationData,
   FormationFormData,
+  FormationIncorporator,
   FormationLegalType,
   FormationMember,
   FormationSigner,
@@ -41,13 +44,10 @@ import {
 import { Municipality } from "@shared/municipality";
 import { IndustrySpecificData, ProfileData } from "@shared/profileData";
 import { arrayOfSectors as sectors, SectorType } from "@shared/sector";
+import { arrayOfStateObjects } from "@shared/states";
 import { TaxFiling, TaxFilingData, TaxFilingLookUpRequest } from "@shared/taxFiling";
 import { Preferences, UserData } from "@shared/userData";
-
-import { FormationIncorporator } from "../../shared/lib/shared/src/formationData";
-import { corpLegalStructures } from "../../shared/src/formationData";
-import { arrayOfStateObjects } from "../../shared/src/states";
-import { SelfRegResponse, TaxFilingResult } from "../src/domain/types";
+import { SelfRegResponse, TaxFilingResult } from "src/domain/types";
 import { getRandomDateInBetween, randomElementFromArray } from "./helpers";
 
 export const generateUser = (overrides: Partial<BusinessUser>): BusinessUser => {
@@ -150,7 +150,7 @@ export const generateTaxFilingData = (overrides: Partial<TaxFilingData>): TaxFil
 export const generateTaxFiling = (overrides: Partial<TaxFiling>): TaxFiling => {
   return {
     identifier: `some-identifier-${randomInt()}`,
-    dueDate: getCurrentDateFormatted("YYYY-MM-DD"),
+    dueDate: getCurrentDateFormatted(defaultDateFormat),
     ...overrides,
   };
 };
@@ -395,7 +395,7 @@ export const generateFormationFormData = (
   return {
     businessName: `some-business-name-${randomInt()}`,
     businessSuffix: randomBusinessSuffix(legalStructureId),
-    businessStartDate: getCurrentDate().add(1, "days").format("YYYY-MM-DD"),
+    businessStartDate: getCurrentDate().add(1, "days").format(defaultDateFormat),
     ...businessAddress,
     businessTotalStock: isCorp ? randomInt().toString() : "",
     businessPurpose: `some-purpose-${randomInt()}`,
@@ -438,7 +438,7 @@ export const generateFormationFormData = (
     makeDistributionTerms: `some-makeDistributionTerms-text-${randomInt()}`,
     foreignStateOfFormation: options?.foreign ? randomElementFromArray(arrayOfStateObjects).name : undefined,
     foreignDateOfFormation: options?.foreign
-      ? getCurrentDate().add(1, "days").format("YYYY-MM-DD")
+      ? getCurrentDate().add(1, "days").format(defaultDateFormat)
       : undefined,
     ...overrides,
   } as FormationFormData;
