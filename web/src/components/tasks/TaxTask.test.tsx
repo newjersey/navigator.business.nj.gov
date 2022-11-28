@@ -76,7 +76,7 @@ describe("<TaxTask />", () => {
       expect(screen.getByText(Config.tax.saveButtonText)).toBeInTheDocument();
     });
 
-    it("displays the Tax ID field with an existing 9 digit tax Id and updates the progress to IN_PROGRESS", async () => {
+    it("displays the Tax ID field with an existing 9 digit Tax ID and updates the progress to IN_PROGRESS", async () => {
       initialUserData = generateUserData({
         profileData: generateProfileData({ taxId: "123456789" }),
         taskProgress: { [taskId]: "COMPLETED" },
@@ -112,18 +112,6 @@ describe("<TaxTask />", () => {
       expect(userDataWasNotUpdated()).toBe(true);
     });
 
-    it("displays tax id with success message on save", async () => {
-      renderPage();
-      fireEvent.change(screen.getByPlaceholderText(Config.tax.placeholderText), {
-        target: { value: "123456789123" },
-      });
-      fireEvent.click(screen.getByText(Config.tax.saveButtonText));
-      await waitFor(() => {
-        expect(screen.getByText(Config.tax.editText)).toBeInTheDocument();
-      });
-      expect(screen.queryByText(Config.tax.placeholderText)).not.toBeInTheDocument();
-    });
-
     it("sets task status to COMPLETED on save", async () => {
       renderPage();
       fireEvent.change(screen.getByPlaceholderText(Config.tax.placeholderText), {
@@ -136,7 +124,7 @@ describe("<TaxTask />", () => {
     });
   });
 
-  describe("displaying tax id", () => {
+  describe("displaying Tax ID", () => {
     let initialUserData: UserData;
 
     const renderPage = () => {
@@ -152,27 +140,17 @@ describe("<TaxTask />", () => {
 
     beforeEach(() => {
       initialUserData = generateUserData({
-        profileData: generateProfileData({ taxId: "123456789123" }),
+        profileData: generateProfileData({ taxId: "*******89123", encryptedTaxId: "some-encrypted-value" }),
         taskProgress: { [taskId]: "COMPLETED" },
       });
     });
 
-    it("displays tax id when it exists in data and is 12 digits in length", () => {
+    it("displays Tax ID and success message when it exists in data and is 12 digits in length", () => {
       renderPage();
       expect(screen.queryByText(Config.tax.placeholderText)).not.toBeInTheDocument();
       expect(
-        screen.getByText(templateEval(Config.tax.successText, { taxID: "123456789123" }))
+        screen.getByText(templateEval(Config.tax.successText, { taxID: "*******89123" }))
       ).toBeInTheDocument();
-    });
-
-    it("navigates back to input on edit button click", () => {
-      renderPage();
-      fireEvent.click(screen.getByText(Config.tax.editText));
-      expect(screen.getByText(Config.tax.saveButtonText)).toBeInTheDocument();
-      expect((screen.getByPlaceholderText(Config.tax.placeholderText) as HTMLInputElement).value).toEqual(
-        "123456789123"
-      );
-      expect(screen.queryByText(Config.tax.editText)).not.toBeInTheDocument();
     });
 
     it("navigates back to empty input on remove button click", () => {
@@ -181,13 +159,13 @@ describe("<TaxTask />", () => {
       expect(screen.getByText(Config.tax.saveButtonText)).toBeInTheDocument();
       expect((screen.getByPlaceholderText(Config.tax.placeholderText) as HTMLInputElement).value).toEqual("");
       expect(screen.queryByText(Config.tax.removeText)).not.toBeInTheDocument();
-      expect(currentUserData().profileData.taxId).toEqual(undefined);
     });
 
-    it("sets task status to in-progress on edit button", () => {
+    it("empties both tax id and encrypted tax id field on remove button click", () => {
       renderPage();
-      fireEvent.click(screen.getByText(Config.tax.editText));
-      expect(currentUserData().taskProgress[taskId]).toEqual("IN_PROGRESS");
+      fireEvent.click(screen.getByText(Config.tax.removeText));
+      expect(currentUserData().profileData.taxId).toEqual(undefined);
+      expect(currentUserData().profileData.encryptedTaxId).toEqual(undefined);
     });
   });
 

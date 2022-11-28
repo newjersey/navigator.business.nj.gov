@@ -24,6 +24,18 @@ module.exports = {
     },
     {
       from: {},
+      to: { path: "@aws-crypto/client-node" },
+    },
+    {
+      from: {},
+      to: { path: "@aws-sdk/util-base64-node" },
+    },
+    {
+      from: {},
+      to: { path: "util" },
+    },
+    {
+      from: {},
       to: { path: "simple-oauth2" },
     },
     {

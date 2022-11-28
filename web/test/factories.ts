@@ -168,6 +168,7 @@ export const generateProfileData = (
     entityId: randomInt(10).toString(),
     employerId: randomInt(9).toString(),
     taxId: randomInt() % 2 ? randomInt(9).toString() : randomInt(12).toString(),
+    encryptedTaxId: undefined,
     notes: `some-notes-${randomInt()}`,
     ownershipTypeIds: [],
     documents: {
@@ -333,6 +334,7 @@ export const generateTaxIdAndBusinessName = (
   return {
     businessName: `some-name-${randomInt()}`,
     taxId: `${randomInt(12)}`,
+    encryptedTaxId: "random-encrypted-value",
     ...overrides,
   };
 };

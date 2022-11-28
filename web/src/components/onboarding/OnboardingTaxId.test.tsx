@@ -2,7 +2,7 @@ import { getMergedConfig } from "@/contexts/configContext";
 import { createProfileFieldErrorMap, ProfileFieldErrorMap } from "@/lib/types/types";
 import { generateProfileData } from "@/test/factories";
 import { currentProfileData, WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
-import { ProfileData, randomInt } from "@businessnjgovnavigator/shared";
+import { ProfileData } from "@businessnjgovnavigator/shared";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { ProfileFields } from "../../lib/types/types";
 import { getFlow } from "../../lib/utils/helpers";
@@ -52,7 +52,7 @@ describe("<OnboardingTaxId />", () => {
     renderComponent(
       {
         ...profileData,
-        taxId: randomInt(9).toString(),
+        taxId: "*****6789",
       },
       errorProps
     );
@@ -63,7 +63,7 @@ describe("<OnboardingTaxId />", () => {
     renderComponent(
       {
         ...profileData,
-        taxId: randomInt(12).toString(),
+        taxId: "*******89123",
       },
       errorProps
     );
@@ -86,11 +86,11 @@ describe("<OnboardingTaxId />", () => {
       renderComponent(
         {
           ...profileData,
-          taxId: "123456789000",
+          taxId: "*******89000",
         },
         errorProps
       );
-      expect((screen.getByLabelText("Tax id") as HTMLInputElement).value).toEqual("123-456-789/000");
+      expect((screen.getByLabelText("Tax id") as HTMLInputElement).value).toEqual("***-***-*89/000");
     });
 
     it("successfully saves to profileData", () => {
@@ -145,6 +145,20 @@ describe("<OnboardingTaxId />", () => {
       fireEvent.blur(screen.getByLabelText("Tax id"));
       expect(screen.queryByLabelText("Tax id location")).not.toBeInTheDocument();
     });
+
+    it("clears the full field if user edits the tax id field with * still present", () => {
+      renderComponent(
+        {
+          ...profileData,
+          taxId: "",
+        },
+        errorProps
+      );
+      fireEvent.click(screen.getByLabelText("Tax id"));
+      fireEvent.change(screen.getByLabelText("Tax id"), { target: { value: "******123456" } });
+      fireEvent.blur(screen.getByLabelText("Tax id"));
+      expect((screen.getByLabelText("Tax id") as HTMLInputElement).value).toEqual("");
+    });
   });
 
   describe("Split TaxId Field", () => {
@@ -152,11 +166,11 @@ describe("<OnboardingTaxId />", () => {
       renderComponent(
         {
           ...profileData,
-          taxId: "12345678912",
+          taxId: "*******8912",
         },
         errorProps
       );
-      expect((screen.getByLabelText("Tax id") as HTMLInputElement).value).toEqual("123-456-789");
+      expect((screen.getByLabelText("Tax id") as HTMLInputElement).value).toEqual("***-***-*89");
       expect((screen.getByLabelText("Tax id location") as HTMLInputElement).value).toEqual("12");
     });
 
@@ -294,6 +308,20 @@ describe("<OnboardingTaxId />", () => {
       });
       fireEvent.blur(screen.getByLabelText("Tax id location"));
       expect(currentProfileData().taxId).toEqual("123456789123");
+    });
+
+    it("clears the field if user edits the tax id field with * still present", () => {
+      renderComponent(
+        {
+          ...profileData,
+          taxId: "",
+        },
+        errorProps
+      );
+      fireEvent.click(screen.getByLabelText("Tax id"));
+      fireEvent.change(screen.getByLabelText("Tax id"), { target: { value: "*****6789" } });
+      fireEvent.blur(screen.getByLabelText("Tax id"));
+      expect((screen.getByLabelText("Tax id") as HTMLInputElement).value).toEqual("");
     });
   });
 });

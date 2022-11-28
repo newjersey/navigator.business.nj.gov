@@ -41,6 +41,11 @@ export interface TaxFilingInterface {
   onboarding: (props: { userData: UserData; taxId: string; businessName: string }) => Promise<UserData>;
 }
 
+export interface EncryptionDecryptionClient {
+  encryptValue: (valueToBeEncrypted: string) => Promise<string>;
+  decryptValue: (valueToBeDecrypted: string) => Promise<string>;
+}
+
 export type AddNewsletter = (userData: UserData) => Promise<UserData>;
 export type AddToUserTesting = (userData: UserData) => Promise<UserData>;
 
