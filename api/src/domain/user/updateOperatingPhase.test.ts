@@ -1,15 +1,27 @@
+/* eslint-disable unicorn/consistent-function-scoping */
+
 import { formationTaskId, taxTaskId } from "@shared/domain-logic/taskIds";
+import { TaskProgress } from "@shared/userData";
 import { generatePreferences, generateProfileData, generateUserData } from "../../../test/factories";
 import { updateOperatingPhase } from "./updateOperatingPhase";
 
 describe("updateOperatingPhase", () => {
   describe("OWNING", () => {
-    it("updates the operatingPhase to UP_AND_RUNNING if it is not", () => {
+    it("updates a GUEST_MODE to UP_AND_RUNNING_OWNING if it is not", () => {
       const userData = generateUserData({
         profileData: generateProfileData({
           businessPersona: "OWNING",
           operatingPhase: "GUEST_MODE",
-          legalStructureId: "limited-partnership",
+        }),
+      });
+      expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("UP_AND_RUNNING_OWNING");
+    });
+
+    it("updates a GUEST_MODE_OWNING to UP_AND_RUNNING_OWNING if it is not", () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          businessPersona: "OWNING",
+          operatingPhase: "GUEST_MODE_OWNING",
         }),
       });
       expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("UP_AND_RUNNING_OWNING");
@@ -17,7 +29,7 @@ describe("updateOperatingPhase", () => {
   });
 
   describe("GUEST_MODE", () => {
-    it("updates the phase to NEEDS_TO_FORM from GUEST_MODE for public filing companies", () => {
+    it("updates the phase to NEEDS_TO_FORM from GUEST_MODE for PublicFiling", () => {
       const userData = generateUserData({
         profileData: generateProfileData({
           businessPersona: "STARTING",
@@ -28,7 +40,7 @@ describe("updateOperatingPhase", () => {
       expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("NEEDS_TO_FORM");
     });
 
-    it("updates the phase to NEEDS_TO_REGISTER_FOR_TAXES from GUEST_MODE for nonpublic filing companies", () => {
+    it("updates the phase to NEEDS_TO_REGISTER_FOR_TAXES from GUEST_MODE for TradeName", () => {
       const userData = generateUserData({
         profileData: generateProfileData({
           businessPersona: "STARTING",
@@ -41,82 +53,87 @@ describe("updateOperatingPhase", () => {
   });
 
   describe("NEEDS_TO_FORM", () => {
-    it("updates status to NEEDS_TO_REGISTER_FOR_TAXES when formation task is completed and legal structure requires public filing", () => {
-      const taskId = formationTaskId;
+    it("updates status to NEEDS_TO_REGISTER_FOR_TAXES when formation task is completed and PublicFiling legal structure", () => {
       const userData = generateUserData({
         profileData: generateProfileData({
           businessPersona: "STARTING",
           operatingPhase: "NEEDS_TO_FORM",
           legalStructureId: "limited-liability-company",
         }),
-        taskProgress: { [taskId]: "COMPLETED" },
+        taskProgress: { [formationTaskId]: "COMPLETED" },
       });
       expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("NEEDS_TO_REGISTER_FOR_TAXES");
     });
 
-    it("updates status to FORMED_AND_REGISTERED when formation task is completed and legal structure requires public filing and tax task is complete", () => {
-      const taskId = formationTaskId;
-      const taxesTaskId = taxTaskId;
+    it("updates status to FORMED_AND_REGISTERED when formation task is completed and PublicFiling legal structure and tax task is complete", () => {
       const userData = generateUserData({
         profileData: generateProfileData({
           businessPersona: "STARTING",
           operatingPhase: "NEEDS_TO_FORM",
           legalStructureId: "limited-liability-company",
         }),
-        taskProgress: { [taskId]: "COMPLETED", [taxesTaskId]: "COMPLETED" },
+        taskProgress: { [formationTaskId]: "COMPLETED", [taxTaskId]: "COMPLETED" },
       });
       expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("FORMED_AND_REGISTERED");
     });
 
-    it("updates status to NEEDS_TO_REGISTER_FOR_TAXES when formation task is not completed and legal structure does not require public filing", () => {
-      const taskId = formationTaskId;
+    it("updates status to NEEDS_TO_REGISTER_FOR_TAXES when formation task is not completed and TradeName legal structure", () => {
       const userData = generateUserData({
         profileData: generateProfileData({
           businessPersona: "STARTING",
           operatingPhase: "NEEDS_TO_FORM",
           legalStructureId: "general-partnership",
         }),
-        taskProgress: { [taskId]: "IN_PROGRESS" },
+        taskProgress: { [formationTaskId]: "IN_PROGRESS" },
       });
       expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("NEEDS_TO_REGISTER_FOR_TAXES");
     });
   });
 
   describe("NEEDS_TO_REGISTER_FOR_TAXES", () => {
-    it("updates status to FORMED_AND_REGISTERED when tax task is completed", () => {
-      const taxesTaskId = taxTaskId;
+    it("updates status to FORMED_AND_REGISTERED when tax task and formation task is completed", () => {
       const userData = generateUserData({
         profileData: generateProfileData({
           businessPersona: "STARTING",
           operatingPhase: "NEEDS_TO_REGISTER_FOR_TAXES",
         }),
-        taskProgress: { [taxesTaskId]: "COMPLETED" },
+        taskProgress: { [taxTaskId]: "COMPLETED", [formationTaskId]: "COMPLETED" },
       });
       expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("FORMED_AND_REGISTERED");
     });
 
     it("updates status to NEEDS_TO_FORM when formation task is not completed and legal structure requires public filing", () => {
-      const taskId = formationTaskId;
       const userData = generateUserData({
         profileData: generateProfileData({
           businessPersona: "STARTING",
           operatingPhase: "NEEDS_TO_REGISTER_FOR_TAXES",
           legalStructureId: "limited-liability-company",
         }),
-        taskProgress: { [taskId]: "IN_PROGRESS" },
+        taskProgress: { [formationTaskId]: "IN_PROGRESS" },
+      });
+      expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("NEEDS_TO_FORM");
+    });
+
+    it("updates status to NEEDS_TO_FORM when formation task has no status and legal structure requires public filing", () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          businessPersona: "STARTING",
+          operatingPhase: "NEEDS_TO_REGISTER_FOR_TAXES",
+          legalStructureId: "limited-liability-company",
+        }),
+        taskProgress: { [taxTaskId]: "COMPLETED" },
       });
       expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("NEEDS_TO_FORM");
     });
 
     it("does not update status from NEEDS_TO_REGISTER_FOR_TAXES when formation task is not completed and legal structure does not require public filing", () => {
-      const taskId = formationTaskId;
       const userData = generateUserData({
         profileData: generateProfileData({
           businessPersona: "STARTING",
           operatingPhase: "NEEDS_TO_REGISTER_FOR_TAXES",
           legalStructureId: "general-partnership",
         }),
-        taskProgress: { [taskId]: "IN_PROGRESS" },
+        taskProgress: { [formationTaskId]: "IN_PROGRESS" },
       });
       expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("NEEDS_TO_REGISTER_FOR_TAXES");
     });
@@ -124,103 +141,104 @@ describe("updateOperatingPhase", () => {
 
   describe("FORMED_AND_REGISTERED", () => {
     it("updates status back to NEEDS_TO_REGISTER_FOR_TAXES if tax task is not completed", () => {
-      const taskId = formationTaskId;
-      const taxesTaskId = taxTaskId;
-
       const userData = generateUserData({
         profileData: generateProfileData({
           businessPersona: "STARTING",
           operatingPhase: "FORMED_AND_REGISTERED",
         }),
-        taskProgress: { [taskId]: "COMPLETED", [taxesTaskId]: "IN_PROGRESS" },
+        taskProgress: { [formationTaskId]: "COMPLETED", [taxTaskId]: "IN_PROGRESS" },
       });
       expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("NEEDS_TO_REGISTER_FOR_TAXES");
     });
 
     it("updates status back to NEEDS_TO_FORM if tax task and formation task is not completed", () => {
-      const taskId = formationTaskId;
-      const taxesTaskId = taxTaskId;
-
       const userData = generateUserData({
         profileData: generateProfileData({
           businessPersona: "STARTING",
           operatingPhase: "FORMED_AND_REGISTERED",
           legalStructureId: "limited-liability-company",
         }),
-        taskProgress: { [taskId]: "IN_PROGRESS", [taxesTaskId]: "IN_PROGRESS" },
+        taskProgress: { [formationTaskId]: "IN_PROGRESS", [taxTaskId]: "IN_PROGRESS" },
       });
       expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("NEEDS_TO_FORM");
     });
 
     it("updates status back to NEEDS_TO_FORM if tax task is completed and formation task is not completed", () => {
-      const taskId = formationTaskId;
-      const taxesTaskId = taxTaskId;
-
       const userData = generateUserData({
         profileData: generateProfileData({
           businessPersona: "STARTING",
           operatingPhase: "FORMED_AND_REGISTERED",
           legalStructureId: "limited-liability-company",
         }),
-        taskProgress: { [taskId]: "IN_PROGRESS", [taxesTaskId]: "COMPLETED" },
+        taskProgress: { [formationTaskId]: "IN_PROGRESS", [taxTaskId]: "COMPLETED" },
       });
       expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("NEEDS_TO_FORM");
     });
   });
 
   describe("UP_AND_RUNNING", () => {
-    it("updates status back to NEEDS_TO_FORM and isHideableRoadmapOpen to false when formation task is not completed, tax task is completed and legal structure requires public filing", () => {
-      const taskId = formationTaskId;
-      const taxesTaskId = taxTaskId;
+    describe("public filing legal structure", () => {
+      const getUserData = (taskProgress: Record<string, TaskProgress>) => {
+        return generateUserData({
+          profileData: generateProfileData({
+            businessPersona: "STARTING",
+            operatingPhase: "UP_AND_RUNNING",
+            legalStructureId: "limited-liability-company",
+          }),
+          taskProgress: taskProgress,
+          preferences: generatePreferences({ isHideableRoadmapOpen: true }),
+        });
+      };
 
-      const userData = generateUserData({
-        profileData: generateProfileData({
-          businessPersona: "STARTING",
-          operatingPhase: "UP_AND_RUNNING",
-          legalStructureId: "limited-liability-company",
-        }),
-        taskProgress: { [taskId]: "IN_PROGRESS", [taxesTaskId]: "COMPLETED" },
-        preferences: generatePreferences({ isHideableRoadmapOpen: true }),
+      describe("when tax complete, formation incomplete", () => {
+        it("sets back to NEEDS_TO_FORM (and sets hideableRoadmap to false)", () => {
+          const userData = getUserData({ [formationTaskId]: "IN_PROGRESS", [taxTaskId]: "COMPLETED" });
+          expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("NEEDS_TO_FORM");
+          expect(updateOperatingPhase(userData).preferences.isHideableRoadmapOpen).toBe(false);
+        });
       });
 
-      expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("NEEDS_TO_FORM");
-      expect(updateOperatingPhase(userData).preferences.isHideableRoadmapOpen).toBeFalsy();
+      describe("when tax incomplete, formation incomplete", () => {
+        it("sets back to NEEDS_TO_FORM (and sets hideableRoadmap to false)", () => {
+          const userData = getUserData({ [formationTaskId]: "IN_PROGRESS", [taxTaskId]: "IN_PROGRESS" });
+          expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("NEEDS_TO_FORM");
+          expect(updateOperatingPhase(userData).preferences.isHideableRoadmapOpen).toBe(false);
+        });
+      });
+
+      describe("when tax incomplete, formation complete", () => {
+        it("sets back to NEEDS_TO_REGISTER_FOR_TAXES (and sets hideableRoadmap to false)", () => {
+          const userData = getUserData({ [formationTaskId]: "COMPLETED", [taxTaskId]: "IN_PROGRESS" });
+          expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe(
+            "NEEDS_TO_REGISTER_FOR_TAXES"
+          );
+          expect(updateOperatingPhase(userData).preferences.isHideableRoadmapOpen).toBe(false);
+        });
+      });
     });
 
-    it("updates status back to NEEDS_TO_FORM and isHideableRoadmapOpen to false when formation task is not completed, tax task is not completed and legal structure requires public filing", () => {
-      const taskId = formationTaskId;
-      const taxesTaskId = taxTaskId;
+    describe("trade name legal structure", () => {
+      const getUserData = (taskProgress: Record<string, TaskProgress>) => {
+        return generateUserData({
+          profileData: generateProfileData({
+            businessPersona: "STARTING",
+            operatingPhase: "UP_AND_RUNNING",
+            legalStructureId: "general-partnership",
+          }),
+          taskProgress: taskProgress,
+          preferences: generatePreferences({ isHideableRoadmapOpen: true }),
+        });
+      };
 
-      const userData = generateUserData({
-        profileData: generateProfileData({
-          businessPersona: "STARTING",
-          operatingPhase: "UP_AND_RUNNING",
-          legalStructureId: "limited-liability-company",
-        }),
-        taskProgress: { [taskId]: "IN_PROGRESS", [taxesTaskId]: "IN_PROGRESS" },
-        preferences: generatePreferences({ isHideableRoadmapOpen: true }),
+      describe("when tax incomplete", () => {
+        it("sets back to NEEDS_TO_REGISTER_FOR_TAXES (and sets hideableRoadmap to false)", () => {
+          const userData = getUserData({ [taxTaskId]: "IN_PROGRESS" });
+          expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe(
+            "NEEDS_TO_REGISTER_FOR_TAXES"
+          );
+          expect(updateOperatingPhase(userData).preferences.isHideableRoadmapOpen).toBe(false);
+        });
       });
-
-      expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("NEEDS_TO_FORM");
-      expect(updateOperatingPhase(userData).preferences.isHideableRoadmapOpen).toBeFalsy();
-    });
-
-    it("updates status back to NEEDS_TO_FORM and isHideableRoadmapOpen to false when tax task is not completed, formation task is completed and legal structure requires public filing", () => {
-      const taskId = formationTaskId;
-      const taxesTaskId = taxTaskId;
-
-      const userData = generateUserData({
-        profileData: generateProfileData({
-          businessPersona: "STARTING",
-          operatingPhase: "UP_AND_RUNNING",
-          legalStructureId: "limited-liability-company",
-        }),
-        taskProgress: { [taskId]: "COMPLETED", [taxesTaskId]: "IN_PROGRESS" },
-        preferences: generatePreferences({ isHideableRoadmapOpen: true }),
-      });
-
-      expect(updateOperatingPhase(userData).profileData.operatingPhase).toBe("NEEDS_TO_REGISTER_FOR_TAXES");
-      expect(updateOperatingPhase(userData).preferences.isHideableRoadmapOpen).toBeFalsy();
     });
   });
 });
