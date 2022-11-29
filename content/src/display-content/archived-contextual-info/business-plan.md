@@ -18,7 +18,7 @@ Describe your business, the specific product or service that you will offer and 
 Demonstrate why your business model is relevant and timely. This section should ideally include information about industry trends, your target customers and their demographics, and your competitors in the region. This information will not only be essential to help you think about how to differentiate your product, but also where and who to market to, and different locations where your business might be most successful.
 
 **Organization and Management**
-Focus on the ownership, legal structure and human resources side of your business. Use this area to introduce your team and the skills and expertise that they bring to the table. It can be helpful to provide an organizational chart to show the roles and responsibilities of you and your team, and a plan on when and how to hire additional staff if needed.
+Focus on the ownership, business structure and human resources side of your business. Use this area to introduce your team and the skills and expertise that they bring to the table. It can be helpful to provide an organizational chart to show the roles and responsibilities of you and your team, and a plan on when and how to hire additional staff if needed.
 
 **Marketing and Sales**
 Provide a plan of action to market and sell your product or service to the target customers that you identified in the Market Analysis. Identify the different strategies that you can use to build and grow your business over time.

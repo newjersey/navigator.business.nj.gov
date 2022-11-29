@@ -2,7 +2,7 @@
   "profileDefaults": {
     "FOREIGN": {
       "legalStructureId": {
-        "errorTextRequired": "Please select a legal structure.",
+        "errorTextRequired": "Please select a business structure.",
         "optionContent": {
           "general-partnership": "",
           "c-corporation": "",

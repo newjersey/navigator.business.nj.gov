@@ -68,7 +68,7 @@ export const OnboardingLegalStructureDropdown = (props: Props): ReactElement => 
             onChange={handleLegalStructure}
             name="legal-structure"
             inputProps={{
-              "aria-label": "Legal structure",
+              "aria-label": "Business structure",
               "data-testid": "legal-structure",
             }}
             renderValue={renderValue}

@@ -26,9 +26,9 @@
         "description": ""
       },
       "legalStructureId": {
-        "placeholder": "Select a legal structure for your Navigator profile.",
+        "placeholder": "Select a business structure for your Navigator profile.",
         "header": "",
-        "description": "What is your legal structure? `Learn about legal structures|legal-structure-learn-more`"
+        "description": "What is your business structure? `Learn about business structures|business-structure-learn-more`"
       },
       "industryId": {
         "placeholder": "Select an industry",

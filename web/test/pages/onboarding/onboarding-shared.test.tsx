@@ -228,7 +228,7 @@ describe("onboarding - shared", () => {
       screen.getByText(templateEval(Config.onboardingDefaults.stepXTemplate, { currentPage: "1" }))
     ).toBeInTheDocument();
     page.chooseRadio("business-persona-owning");
-    page.selectByValue("Legal structure", "c-corporation");
+    page.selectByValue("Business structure", "c-corporation");
     await page.visitStep(2);
     expect(currentUserData().profileData).toEqual({
       ...initialUserData.profileData,
@@ -258,7 +258,7 @@ describe("onboarding - shared", () => {
     const { page } = renderPage({ municipalities: [newark], userData: initialUserData });
 
     page.chooseRadio("business-persona-owning");
-    page.selectByValue("Legal structure", "sole-proprietorship");
+    page.selectByValue("Business structure", "sole-proprietorship");
     await page.visitStep(2);
     page.fillText("Business name", "Cool Computers");
     page.selectByValue("Sector", "clean-energy");
@@ -299,7 +299,7 @@ describe("onboarding - shared", () => {
     const { page } = renderPage({ municipalities: [newark], userData: initialUserData });
 
     page.chooseRadio("business-persona-owning");
-    page.selectByValue("Legal structure", "c-corporation");
+    page.selectByValue("Business structure", "c-corporation");
     await page.visitStep(2);
     page.selectDate("Date of formation", date);
     page.fillText("Entity id", "1234567890");
@@ -344,7 +344,7 @@ describe("onboarding - shared", () => {
     const { page } = renderPage({ municipalities: [newark], userData: initialUserData });
 
     page.chooseRadio("business-persona-owning");
-    page.selectByValue("Legal structure", "c-corporation");
+    page.selectByValue("Business structure", "c-corporation");
     await page.visitStep(2);
     page.selectDate("Date of formation", date);
     page.fillText("Entity id", "1234567890");

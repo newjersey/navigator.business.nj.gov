@@ -8,14 +8,14 @@ required: true
 issuingAgency: New Jersey Department of Treasury's Division of Revenue and Enterprise Services
 ---
 
-You must register your business name and form your `legal structure|legal-structure-learn-more` with the State.
+You must register your business name and form your `business structure|business-structure-learn-more` with the State.
 
 ---
 
 ### Application Requirements
 
 - Available business name
-- Legal structure
+- Business structure
 - `NAICS code|naics` (optional)
 - `EIN|ein` (optional)
 - Business description

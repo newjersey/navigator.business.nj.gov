@@ -26,7 +26,8 @@ id: part-200-t
 callToActionLink: https://www1.state.nj.us/TYTR_BusinessFilings/jsp/common/Login.jsp?taxcode=43
 callToActionText: File and Pay
 ---
-This is a tax on businesses that have elected a form of partnership (i.e. limited liability partnership) as their legal structure. Income and gains derived from a partnership are taxed whether or not they are actually distributed among the partners.
+
+This is a tax on businesses that have elected a form of partnership (i.e. limited liability partnership) as their business structure. Income and gains derived from a partnership are taxed whether or not they are actually distributed among the partners.
 
 This form provides an extension of up to five months to file form NJ-1065.
 
