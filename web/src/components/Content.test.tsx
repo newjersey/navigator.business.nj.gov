@@ -49,4 +49,14 @@ describe("<Content />", () => {
       expect(mockSigninHelper.onSelfRegister).toHaveBeenCalled();
     });
   });
+
+  describe("infoAlert", () => {
+    it("renders info alert with header", () => {
+      const mdString = ":::infoAlert{header='Header Text'}\n" + "body text\n" + ":::";
+
+      render(<Content>{mdString}</Content>);
+      expect(screen.getByText("Header Text")).toBeInTheDocument();
+      expect(screen.getByText("body text")).toBeInTheDocument();
+    });
+  });
 });

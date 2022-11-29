@@ -1,4 +1,5 @@
 import ContextEditor from "@/lib/cms/editors/context-info";
+import AlertEditor from "@/lib/cms/editors/infoAlert";
 import { NoSpaceControl } from "@/lib/cms/fields/nospacefield";
 import { SlugControl } from "@/lib/cms/fields/slugfield";
 import CannabisEligibilityModalPreview from "@/lib/cms/previews/CannabisEligibilityModalPreview";
@@ -40,7 +41,6 @@ const Loading = () => {
     </div>
   );
 };
-
 const CMS = dynamic(
   // @ts-expect-error: No type definition available
   () => {
@@ -54,6 +54,8 @@ const CMS = dynamic(
       CMS.registerWidget("nospace", NoSpaceControl);
       // @ts-expect-error: No type definition available
       CMS.registerEditorComponent(ContextEditor);
+      // @ts-expect-error: No type definition available
+      CMS.registerEditorComponent(AlertEditor);
 
       registerPreview(CMS, "tasks", TaskPreview);
       registerPreview(CMS, "funding-opportunities", FundingsPreview);

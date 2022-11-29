@@ -8,6 +8,7 @@ import { TaskCheckbox } from "@/components/tasks/TaskCheckbox";
 import analytics from "@/lib/utils/analytics";
 import { FormControlLabel } from "@mui/material";
 import { CSSProperties, ReactElement } from "react";
+import { Alert } from "./njwds-extended/Alert";
 
 interface ContentProps {
   children: string;
@@ -38,6 +39,13 @@ export const Content = (props: ContentProps): ReactElement => {
       return <hr className="margin-y-3" />;
     },
     blockquote: GreenBox,
+    infoAlert: (props: any) => {
+      return (
+        <Alert variant="info" heading={props.header}>
+          {props.children}
+        </Alert>
+      );
+    },
     table: OutlineBox,
     li: ListOrCheckbox,
     thead: Unformatted,

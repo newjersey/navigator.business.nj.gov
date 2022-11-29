@@ -206,7 +206,18 @@ module.exports = {
       from: {},
       to: { path: "rehype-raw" },
     },
-
+    {
+      from: {},
+      to: { path: "unist-util-visit" },
+    },
+    {
+      from: {},
+      to: { path: "remark-directive" },
+    },
+    {
+      from: {},
+      to: { path: "@types" },
+    },
     {
       from: {},
       to: { path: "rehype-rewrite" },
