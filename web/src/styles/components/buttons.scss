@@ -127,9 +127,10 @@
   border: 0.125rem solid $secondary-lighter;
   border-radius: 0.625rem;
   cursor: pointer;
-
-  &:hover,
-  :active {
+  &:hover {
+    box-shadow: 0.25rem 0.25rem 0.5rem $secondary-lighter;
+  }
+  &:active {
     background-color: $secondary-lighter;
   }
 
@@ -150,7 +151,7 @@
   border: 0.125rem solid $base-lighter;
   &:hover {
     background-color: $white;
-    box-shadow: 0.25rem 0.25rem 0.5rem;
+    box-shadow: 0.25rem 0.25rem 0.5rem $base-lighter;
   }
   &:active {
     background-color: $base-lightest;
