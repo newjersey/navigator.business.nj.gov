@@ -38,12 +38,12 @@ export const Hero = (): ReactElement => {
         <div className="desktop:grid-container-widescreen desktop:padding-x-7 width-100">
           <div className="grid-row">
             <div
-              className={`desktop:grid-col-5 padding-top-3 padding-bottom-2 desktop:padding-bottom-10  ${
+              className={`desktop:grid-col-5 padding-top-3 padding-bottom-2 desktop:padding-bottom-6 ${
                 isDesktopAndUp ? "text-left" : "text-center padding-x-2"
               }`}
             >
               <h1
-                className={`text-primary-darker h1-styling-large desktop:margin-top-7 margin-bottom-3 desktop:margin-bottom-4`}
+                className={`text-primary-darker h1-styling-large desktop:margin-top-7 margin-bottom-3 desktop:margin-bottom-2`}
               >
                 {landingPageConfig.heroCallOutFirstLineText}
                 <br />
