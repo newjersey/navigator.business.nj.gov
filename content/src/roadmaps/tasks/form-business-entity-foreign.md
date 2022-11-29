@@ -9,7 +9,7 @@ required: true
 issuingAgency: New Jersey Department of Treasury's Division of Revenue and Enterprise Services
 ---
 
-You must register your business name and `authorize|certificate-formation` your `legal structure|legal-structure-learn-more` with the State.
+You must register your business name and `authorize|certificate-formation` your `business structure|business-structure-learn-more` with the State.
 
 ---
 
@@ -32,7 +32,7 @@ You must register your business name and `authorize|certificate-formation` your 
   ${endIndentationSection}
 
 - Business designator (as registered in foreign location)
-- Legal structure
+- Business structure
 - `NAICS code|naics` (optional)
 - `EIN|ein` (optional)
 - State of Incorporation

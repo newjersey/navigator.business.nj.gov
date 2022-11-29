@@ -44,7 +44,7 @@ export const OnboardingLegalStructure = (): ReactElement => {
       <div className="form-input-wide margin-top-3">
         <FormControl variant="outlined" fullWidth>
           <RadioGroup
-            aria-label="Legal structure"
+            aria-label="Business structure"
             name="legal-structure"
             value={state.profileData.legalStructureId || ""}
             onChange={handleLegalStructure}

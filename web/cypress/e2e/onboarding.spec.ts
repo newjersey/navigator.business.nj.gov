@@ -21,7 +21,7 @@ describe("Onboarding [feature] [all] [group2]", () => {
     onOnboardingPage.clickNext();
 
     cy.url().should("include", "onboarding?page=3");
-    cy.get('[data-testid="legal-structure-learn-more"]').click({ force: true });
+    cy.get('[data-testid="business-structure-learn-more"]').click({ force: true });
     cy.get('[data-testid="info-panel"]').should("exist");
     cy.get('[aria-label="close panel"]').click({ force: true });
     cy.get('[data-testid="info-panel"]').should("not.exist");

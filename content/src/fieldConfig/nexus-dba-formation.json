@@ -1,7 +1,7 @@
 {
   "nexusFormationTask": {
     "warningText": "To view this task, you must first complete [Check if Your Business Name is Available in New Jersey](/tasks/search-business-name-nexus)",
-    "descriptionShownWithWarning": "You must register your business name and `authorize|certificate-formation` your `legal structure|legal-structure-learn-more` with the State.",
+    "descriptionShownWithWarning": "You must register your business name and `authorize|certificate-formation` your `business structure|business-structure-learn-more` with the State.",
     "dbaCtaModalHeader": "Before You Start",
     "dbaCtaModalBody": "This link will take you to a PDF.\n\nOnly pages 23 and 24 are relevant to your formation. Complete those pages and send them to Treasury, the address is on the top left of page 23.",
     "dbaCtaModalContinueButtonText": "Authorize My Business",

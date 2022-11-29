@@ -114,7 +114,7 @@ describe("Dashboard [feature] [all] [group2]", () => {
         cy.get('input[aria-label="Business name"]').clear().type("Applebee's");
         cy.get('[aria-label="Industry"]').click({ force: true });
         cy.contains("Restaurant").click({ force: true });
-        cy.get('[aria-label="Legal structure"]').click({ force: true });
+        cy.get('[aria-label="Business structure"]').click({ force: true });
         cy.get('[data-value="limited-liability-company"]').click({ force: true });
         cy.get('[aria-label="Location"]').click({ force: true });
         cy.contains("Allendale").click({ force: true });

@@ -95,9 +95,9 @@ describe("onboarding - owning a business", () => {
 
     it("displays the legal structure dropdown after radio selected", () => {
       const { page } = renderPage({});
-      expect(screen.queryByLabelText("Legal structure")).not.toBeInTheDocument();
+      expect(screen.queryByLabelText("Business structure")).not.toBeInTheDocument();
       page.chooseRadio("business-persona-owning");
-      expect(screen.getByLabelText("Legal structure")).toBeInTheDocument();
+      expect(screen.getByLabelText("Business structure")).toBeInTheDocument();
     });
   });
 
@@ -313,7 +313,7 @@ describe("onboarding - owning a business", () => {
     const { page } = renderPage({ municipalities: [newark] });
 
     page.chooseRadio("business-persona-owning");
-    page.selectByValue("Legal structure", "c-corporation");
+    page.selectByValue("Business structure", "c-corporation");
     expect(screen.getByTestId("step-1")).toBeInTheDocument();
 
     await page.visitStep(2);
@@ -338,7 +338,7 @@ describe("onboarding - owning a business", () => {
     const newark = generateMunicipality({ displayName: "Newark" });
     const { page } = renderPage({ municipalities: [newark] });
     page.chooseRadio("business-persona-owning");
-    page.selectByValue("Legal structure", "c-corporation");
+    page.selectByValue("Business structure", "c-corporation");
     const page1 = within(screen.getByTestId("page-1-form"));
     expect(page1.getByText(Config.onboardingDefaults.nextButtonText)).toBeInTheDocument();
     expect(page1.queryByText(Config.onboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
@@ -374,7 +374,7 @@ describe("onboarding - owning a business", () => {
     const newark = generateMunicipality({ displayName: "Newark" });
     const { page } = renderPage({ municipalities: [newark] });
     page.chooseRadio("business-persona-owning");
-    page.selectByValue("Legal structure", "sole-proprietorship");
+    page.selectByValue("Business structure", "sole-proprietorship");
     const page1 = within(screen.getByTestId("page-1-form"));
     expect(page1.getByText(Config.onboardingDefaults.nextButtonText)).toBeInTheDocument();
     expect(page1.queryByText(Config.onboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
@@ -406,7 +406,7 @@ describe("onboarding - owning a business", () => {
     const { page } = renderPage({ userData: initialUserData, municipalities: [newark] });
 
     page.chooseRadio("business-persona-owning");
-    page.selectByValue("Legal structure", "c-corporation");
+    page.selectByValue("Business structure", "c-corporation");
     await page.visitStep(2);
     expect(currentUserData().profileData.businessPersona).toEqual("OWNING");
     page.selectDate("Date of formation", date);

@@ -375,7 +375,7 @@ describe("profile", () => {
       fillText("Business name", "Cool Computers");
       selectByText("Location", newark.displayName);
       selectByValue("Industry", "e-commerce");
-      selectByValue("Legal structure", "c-corporation");
+      selectByValue("Business structure", "c-corporation");
       chooseRadio("home-based-business-radio-true");
 
       chooseTab("numbers");
