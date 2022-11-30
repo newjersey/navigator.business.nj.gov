@@ -32,12 +32,14 @@
     "endOfLine": "auto"
   },
   "dependencies": {
+    "@aws-crypto/client-node": "3.1.1",
     "@aws-sdk/client-cloudwatch-logs": "3.216.0",
     "@aws-sdk/client-dynamodb": "3.216.0",
     "@aws-sdk/client-s3": "3.216.0",
     "@aws-sdk/lib-dynamodb": "3.216.0",
     "@aws-sdk/smithy-client": "3.215.0",
     "@aws-sdk/types": "3.215.0",
+    "@aws-sdk/util-base64-node": "3.209.0",
     "@aws-sdk/util-dynamodb": "3.216.0",
     "@businessnjgovnavigator/shared": "*",
     "@serverless/typescript": "3.25.0",

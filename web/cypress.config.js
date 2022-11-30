@@ -7,6 +7,7 @@ export default defineConfig({
   projectId: "o9nvo8",
   defaultCommandTimeout: 20000,
   viewportWidth: 1025,
+  numTestsKeptInMemory: 10,
   lighthouse: {
     thresholds: {
       performance: 0,

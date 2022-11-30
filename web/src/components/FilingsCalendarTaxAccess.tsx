@@ -53,6 +53,7 @@ export const FilingsCalendarTaxAccess = (): ReactElement => {
         const updatedUserData = await postTaxRegistrationLookup({
           businessName: userData.taxFilingData.businessName as string,
           taxId: userData.profileData.taxId as string,
+          encryptedTaxId: userData.profileData.encryptedTaxId as string,
         });
         update(updatedUserData);
       }

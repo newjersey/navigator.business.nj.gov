@@ -40,6 +40,7 @@ export const getCompletedFiling = (): Promise<UserData> => {
 export const postTaxRegistrationOnboarding = (props: {
   businessName: string;
   taxId: string;
+  encryptedTaxId: string;
 }): Promise<UserData> => {
   return post(`/taxFilings/onboarding`, props);
 };
@@ -47,6 +48,7 @@ export const postTaxRegistrationOnboarding = (props: {
 export const postTaxRegistrationLookup = (props: {
   businessName: string;
   taxId: string;
+  encryptedTaxId: string;
 }): Promise<UserData> => {
   return post(`/taxFilings/lookup`, props);
 };

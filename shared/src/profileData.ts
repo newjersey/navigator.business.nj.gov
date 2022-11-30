@@ -69,6 +69,7 @@ export interface ProfileData extends IndustrySpecificData {
   readonly entityId: string | undefined;
   readonly employerId: string | undefined;
   readonly taxId: string | undefined;
+  readonly encryptedTaxId: string | undefined;
   readonly notes: string;
   readonly documents: ProfileDocuments;
   readonly ownershipTypeIds: string[];
@@ -93,6 +94,7 @@ export const emptyProfileData: ProfileData = {
   entityId: undefined,
   employerId: undefined,
   taxId: undefined,
+  encryptedTaxId: undefined,
   notes: "",
   documents: { certifiedDoc: "", formationDoc: "", standingDoc: "" },
   ownershipTypeIds: [],
@@ -117,3 +119,5 @@ export type CarServiceType = "STANDARD" | "HIGH_CAPACITY" | "BOTH" | undefined;
 export const businessPersonas = ["STARTING", "OWNING", "FOREIGN"] as const;
 export type BusinessPersona = typeof businessPersonas[number] | undefined;
 export type ForeignBusinessType = "REMOTE_WORKER" | "REMOTE_SELLER" | "NEXUS" | "NONE" | undefined;
+
+export const maskingCharacter = "*";

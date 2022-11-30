@@ -2,7 +2,7 @@
 import { Express } from "express";
 import request from "supertest";
 import { generateTaxFilingData, generateTaxIdAndBusinessName, generateUserData } from "../../test/factories";
-import { TaxFilingInterface, UserDataClient } from "../domain/types";
+import { EncryptionDecryptionClient, TaxFilingInterface, UserDataClient } from "../domain/types";
 import { setupExpress } from "../libs/express";
 import { taxFilingRouterFactory } from "./taxFilingRouter";
 import { getSignedInUserId } from "./userRouter";
@@ -19,6 +19,7 @@ describe("taxFilingRouter", () => {
 
   let stubUserDataClient: jest.Mocked<UserDataClient>;
   let apiTaxFilingClient: jest.Mocked<TaxFilingInterface>;
+  let stubEncryptionDecryptionClient: jest.Mocked<EncryptionDecryptionClient>;
   const userData = generateUserData({ taxFilingData: generateTaxFilingData({ state: "PENDING" }) });
   const responseUserData = { ...userData, taxFilingData: generateTaxFilingData({ state: "SUCCESS" }) };
 
@@ -36,12 +37,17 @@ describe("taxFilingRouter", () => {
       lookup: jest.fn(),
       onboarding: jest.fn(),
     };
+
+    stubEncryptionDecryptionClient = {
+      encryptValue: jest.fn(),
+      decryptValue: jest.fn(),
+    };
     stubUserDataClient.get.mockResolvedValue(userData);
     stubUserDataClient.put.mockImplementation((userData) => {
       return Promise.resolve(userData);
     });
     app = setupExpress(false);
-    app.use(taxFilingRouterFactory(stubUserDataClient, apiTaxFilingClient));
+    app.use(taxFilingRouterFactory(stubUserDataClient, apiTaxFilingClient, stubEncryptionDecryptionClient));
   });
 
   afterAll(async () => {
@@ -52,11 +58,53 @@ describe("taxFilingRouter", () => {
 
   describe("/lookup", () => {
     it("returns userData", async () => {
-      const taxIdAndBusinessName = generateTaxIdAndBusinessName({});
+      const taxIdAndBusinessName = generateTaxIdAndBusinessName({
+        businessName: "my-cool-business",
+        taxId: "123456789000",
+      });
       apiTaxFilingClient.lookup.mockResolvedValue(responseUserData);
       const response = await request(app).post(`/lookup`).send(taxIdAndBusinessName);
       expect(response.body).toEqual(responseUserData);
-      expect(apiTaxFilingClient.lookup).toHaveBeenCalledWith({ userData, ...taxIdAndBusinessName });
+      expect(stubUserDataClient.put).toHaveBeenCalledWith(responseUserData);
+      expect(stubUserDataClient.get).toHaveBeenCalledWith("some-id");
+      expect(response.status).toEqual(200);
+    });
+
+    it("uses the values in taxId field if it is plaintext and encrypted field is empty", async () => {
+      const taxIdAndBusinessName = generateTaxIdAndBusinessName({
+        businessName: "my-cool-business",
+        taxId: "123456789000",
+        encryptedTaxId: undefined,
+      });
+      apiTaxFilingClient.lookup.mockResolvedValue(responseUserData);
+      const response = await request(app).post(`/lookup`).send(taxIdAndBusinessName);
+      expect(response.body).toEqual(responseUserData);
+      expect(apiTaxFilingClient.lookup).toHaveBeenCalledWith({
+        userData,
+        taxId: "123456789000",
+        businessName: "my-cool-business",
+      });
+      expect(stubUserDataClient.put).toHaveBeenCalledWith(responseUserData);
+      expect(stubUserDataClient.get).toHaveBeenCalledWith("some-id");
+      expect(response.status).toEqual(200);
+    });
+
+    it("decrypts the taxId field using the encryptedTaxId field if it is masked", async () => {
+      const taxIdAndBusinessName = generateTaxIdAndBusinessName({
+        businessName: "my-cool-business",
+        taxId: "*****89000",
+        encryptedTaxId: "some-encrypted-value",
+      });
+      apiTaxFilingClient.lookup.mockResolvedValue(responseUserData);
+      stubEncryptionDecryptionClient.decryptValue.mockResolvedValue("123456789000");
+      const response = await request(app).post(`/lookup`).send(taxIdAndBusinessName);
+      expect(response.body).toEqual(responseUserData);
+      expect(stubEncryptionDecryptionClient.decryptValue).toHaveBeenCalledWith("some-encrypted-value");
+      expect(apiTaxFilingClient.lookup).toHaveBeenCalledWith({
+        userData,
+        taxId: "123456789000",
+        businessName: "my-cool-business",
+      });
       expect(stubUserDataClient.put).toHaveBeenCalledWith(responseUserData);
       expect(stubUserDataClient.get).toHaveBeenCalledWith("some-id");
       expect(response.status).toEqual(200);
@@ -93,10 +141,45 @@ describe("taxFilingRouter", () => {
       const taxIdAndBusinessName = generateTaxIdAndBusinessName({});
       apiTaxFilingClient.onboarding.mockResolvedValue(responseUserData);
       const response = await request(app).post(`/onboarding`).send(taxIdAndBusinessName);
+      expect(stubUserDataClient.put).toHaveBeenCalledWith(responseUserData);
+      expect(stubUserDataClient.get).toHaveBeenCalledWith("some-id");
+      expect(response.status).toEqual(200);
+    });
+
+    it("uses the values in taxId field if it is plaintext and encrypted field is empty", async () => {
+      const taxIdAndBusinessName = generateTaxIdAndBusinessName({
+        businessName: "my-cool-business",
+        taxId: "123456789000",
+        encryptedTaxId: undefined,
+      });
+      apiTaxFilingClient.onboarding.mockResolvedValue(responseUserData);
+      const response = await request(app).post(`/onboarding`).send(taxIdAndBusinessName);
+      expect(response.body).toEqual(responseUserData);
       expect(apiTaxFilingClient.onboarding).toHaveBeenCalledWith({
         userData,
         ...taxIdAndBusinessName,
       });
+      expect(stubUserDataClient.put).toHaveBeenCalledWith(responseUserData);
+      expect(stubUserDataClient.get).toHaveBeenCalledWith("some-id");
+      expect(response.status).toEqual(200);
+    });
+
+    it("decrypts the taxId field using the encryptedTaxId field if it is masked", async () => {
+      const taxIdAndBusinessName = generateTaxIdAndBusinessName({
+        businessName: "my-cool-business",
+        taxId: "*****89000",
+        encryptedTaxId: "some-encrypted-value",
+      });
+      stubEncryptionDecryptionClient.decryptValue.mockResolvedValue("123456789000");
+      apiTaxFilingClient.onboarding.mockResolvedValue(responseUserData);
+      const response = await request(app).post(`/onboarding`).send(taxIdAndBusinessName);
+      expect(response.body).toEqual(responseUserData);
+      expect(apiTaxFilingClient.onboarding).toHaveBeenCalledWith({
+        userData,
+        taxId: "123456789000",
+        businessName: "my-cool-business",
+      });
+      expect(stubEncryptionDecryptionClient.decryptValue).toHaveBeenCalledWith("some-encrypted-value");
       expect(stubUserDataClient.put).toHaveBeenCalledWith(responseUserData);
       expect(stubUserDataClient.get).toHaveBeenCalledWith("some-id");
       expect(response.status).toEqual(200);

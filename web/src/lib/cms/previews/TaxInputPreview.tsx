@@ -26,7 +26,7 @@ const TaxInputPreview = (props: PreviewProps) => {
         <hr className="margin-y-6" />
 
         <Content>{config.tax.descriptionText}</Content>
-        <TaxDisplay onEdit={() => {}} onRemove={() => {}} taxId="123456789" />
+        <TaxDisplay onRemove={() => {}} taxId="123456789" />
       </div>
     </ConfigContext.Provider>
   );

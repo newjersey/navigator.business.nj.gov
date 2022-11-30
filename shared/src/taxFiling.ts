@@ -12,6 +12,7 @@ export type TaxFilingData = {
 export type TaxFilingLookUpRequest = {
   readonly businessName: string;
   readonly taxId: string;
+  readonly encryptedTaxId: string;
 };
 
 export type TaxFiling = {

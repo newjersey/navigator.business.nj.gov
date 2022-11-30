@@ -176,6 +176,28 @@ describe("<FilingsCalendarTaxAccess />", () => {
     expect((screen.queryByLabelText("Tax id") as HTMLInputElement)?.value).toEqual("123-456-789/123");
   });
 
+  it("calls the postRegistrationLookup method with the encrypted tax id", async () => {
+    renderFilingsCalendarTaxAccess({
+      ...userDataWithExternalFormation,
+      taxFilingData: generateTaxFilingData({
+        registeredISO: getCurrentDateISOString(),
+        businessName: userDataWithExternalFormation.profileData.businessName,
+      }),
+      profileData: {
+        ...userDataWithExternalFormation.profileData,
+        encryptedTaxId: "some-encrypted-value",
+        taxId: "*******89000",
+      },
+    });
+    await waitFor(() => {
+      return expect(mockApi.postTaxRegistrationLookup).toHaveBeenCalledWith({
+        encryptedTaxId: "some-encrypted-value",
+        taxId: "*******89000",
+        businessName: userDataWithExternalFormation.profileData.businessName,
+      });
+    });
+  });
+
   it("makes businessName un-editable if they have completed formation with us", () => {
     renderFilingsCalendarTaxAccess({
       ...userDataWithExternalFormation,
