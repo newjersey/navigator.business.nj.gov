@@ -9,7 +9,7 @@ export const ROUTES = {
   unsupported: "/unsupported",
 };
 
-interface QUERY_PARAMS_VALUES {
+export interface QUERY_PARAMS_VALUES {
   page: number;
   deferredQuestionAnswered: "true" | "false";
   fromFormBusinessEntity: "true" | "false";
@@ -24,7 +24,7 @@ interface QUERY_PARAMS_VALUES {
   industry: string;
   code: string;
   openTaxFilingsModal: "true";
-  flow: "starting" | "owning" | "foreign";
+  flow: "starting" | "out-of-state";
 }
 
 export enum QUERIES {

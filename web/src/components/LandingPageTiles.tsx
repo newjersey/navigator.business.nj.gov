@@ -20,6 +20,15 @@ export const LandingPageTiles = (): ReactElement => {
     });
   };
 
+  const setFlowToOutOfStateAndRouteToForeignBusinessTypeIds = () => {
+    routeWithQuery(router, {
+      path: ROUTES.onboarding,
+      queries: {
+        [QUERIES.flow]: "out-of-state",
+      },
+    });
+  };
+
   return (
     <div className={`${isMobile ? "fdc fjc fac" : "fdr"}`}>
       <LandingPageActionTile
@@ -34,6 +43,12 @@ export const LandingPageTiles = (): ReactElement => {
         tileText={Config.landingPage.landingPageTile2Text}
         dataTestId={"start-biz-tile"}
         onClick={setFlowToStartingAndRouteToIndustry}
+      />
+      <LandingPageActionTile
+        imgPath={"/img/outOfState-icon.svg"}
+        dataTestId={"out-of-state-tile"}
+        tileText={Config.landingPage.landingPageTile4Text}
+        onClick={setFlowToOutOfStateAndRouteToForeignBusinessTypeIds}
       />
       <LandingPageActionTile
         imgPath={"/img/briefcase-icon.svg"}

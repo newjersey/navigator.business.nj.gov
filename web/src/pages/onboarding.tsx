@@ -15,7 +15,7 @@ import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { hasEssentialQuestion } from "@/lib/domain-logic/essentialQuestions";
-import { QUERIES, ROUTES, routeShallowWithQuery } from "@/lib/domain-logic/routes";
+import { QUERIES, QUERY_PARAMS_VALUES, ROUTES, routeShallowWithQuery } from "@/lib/domain-logic/routes";
 import { MediaQueries } from "@/lib/PageSizes";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
@@ -54,7 +54,7 @@ import {
   ProfileData,
   UserData,
 } from "@businessnjgovnavigator/shared/";
-import { businessPersonas, emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
+import { emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { useMediaQuery } from "@mui/material";
 import { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
@@ -143,8 +143,13 @@ const OnboardingPage = (props: Props): ReactElement => {
     return !!LookupIndustryById(industryId).id;
   };
 
+  const mapFlowQueryToPersona: Record<QUERY_PARAMS_VALUES["flow"], FlowType> = {
+    starting: "STARTING",
+    "out-of-state": "FOREIGN",
+  };
+
   const flowQueryParamIsValid = (flow: string): boolean => {
-    return businessPersonas.includes(flow as FlowType);
+    return Object.keys(mapFlowQueryToPersona).includes(flow);
   };
 
   useEffect(() => {
@@ -181,14 +186,14 @@ const OnboardingPage = (props: Props): ReactElement => {
         } else {
           const queryPage = Number(router.query[QUERIES.page]);
           const queryIndustryId = router.query[QUERIES.industry] as string | undefined;
-          const queryFlow = (router.query[QUERIES.flow] as string)?.toUpperCase();
+          const queryFlow = router.query[QUERIES.flow] as string;
 
           if (industryQueryParamIsValid(queryIndustryId)) {
             await setIndustryAndRouteToPage(currentUserData, queryIndustryId);
           } else if (pageQueryParamisValid(currentUserData, queryPage)) {
             setPage({ current: queryPage, previous: queryPage - 1 });
           } else if (flowQueryParamIsValid(queryFlow)) {
-            await setBusinessPersonaAndRouteToPage(queryFlow as FlowType);
+            await setBusinessPersonaAndRouteToPage(queryFlow);
           } else {
             setPage({ current: 1, previous: 1 });
             routeToPage(1);
@@ -226,14 +231,16 @@ const OnboardingPage = (props: Props): ReactElement => {
     }
   };
 
-  const setBusinessPersonaAndRouteToPage = async (flow: FlowType): Promise<void> => {
+  const setBusinessPersonaAndRouteToPage = async (flow: string): Promise<void> => {
+    const flowType = mapFlowQueryToPersona[flow as QUERY_PARAMS_VALUES["flow"]];
+
     setProfileData((previousProfileData) => {
       return {
         ...previousProfileData,
-        businessPersona: flow,
+        businessPersona: flowType,
       };
     });
-    setCurrentFlow(flow);
+    setCurrentFlow(flowType);
     setPage({ current: 2, previous: 1 });
   };
 
