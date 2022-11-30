@@ -1,6 +1,6 @@
 import { v96UserData } from "./v96_added_date_field_to_tax_filing_data";
 
-interface v97UserData {
+export interface v97UserData {
   user: v97BusinessUser;
   profileData: v97ProfileData;
   formProgress: v97FormProgress;
