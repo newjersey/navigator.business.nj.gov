@@ -12,7 +12,11 @@ import {
   generateTask,
   generateUserData,
 } from "@/test/factories";
-import { generateFormationProfileData, preparePage, useSetupInitialMocks } from "@/test/helpers-formation";
+import {
+  generateFormationProfileData,
+  preparePage,
+  useSetupInitialMocks,
+} from "@/test/helpers/helpers-formation";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { currentUserData, userDataWasNotUpdated } from "@/test/mock/withStatefulUserData";
 import {

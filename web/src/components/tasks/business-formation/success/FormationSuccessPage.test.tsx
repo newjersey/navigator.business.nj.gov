@@ -1,7 +1,7 @@
 import { FormationSuccessPage } from "@/components/tasks/business-formation/success/FormationSuccessPage";
 import { getMergedConfig } from "@/contexts/configContext";
 import { generateFormationData, generateGetFilingResponse, generateUserData } from "@/test/factories";
-import { generateFormationProfileData } from "@/test/helpers-formation";
+import { generateFormationProfileData } from "@/test/helpers/helpers-formation";
 import { setMockDocumentsResponse, useMockDocuments } from "@/test/mock/mockUseDocuments";
 import { FormationLegalType, GetFilingResponse, ProfileData } from "@businessnjgovnavigator/shared";
 import { render, screen } from "@testing-library/react";

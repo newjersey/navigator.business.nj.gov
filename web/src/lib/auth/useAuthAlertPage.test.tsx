@@ -1,6 +1,6 @@
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useAuthAlertPage } from "@/lib/auth/useAuthAlertPage";
-import { withAuth, withAuthAlert } from "@/test/helpers";
+import { withAuth, withAuthAlert } from "@/test/helpers/helpers-renderers";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { render } from "@testing-library/react";
 

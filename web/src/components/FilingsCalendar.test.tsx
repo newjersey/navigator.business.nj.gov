@@ -1,14 +1,16 @@
+import { FilingsCalendar } from "@/components/FilingsCalendar";
 import { getMergedConfig } from "@/contexts/configContext";
 import { OperateReference } from "@/lib/types/types";
 import {
   generateOperateReference,
   generatePreferences,
+  generateProfileData,
   generateTaxFiling,
   generateTaxFilingData,
   generateUserData,
   randomLegalStructure,
 } from "@/test/factories";
-import { markdownToText, randomElementFromArray } from "@/test/helpers";
+import { markdownToText, randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import {
   currentUserData,
@@ -17,18 +19,17 @@ import {
 } from "@/test/mock/withStatefulUserData";
 import {
   defaultDateFormat,
+  getCurrentDate,
   OperatingPhases,
+  parseDateWithFormat,
   randomInt,
   TaxFiling,
   UserData,
 } from "@businessnjgovnavigator/shared";
-import { getCurrentDate, parseDateWithFormat } from "@businessnjgovnavigator/shared/dateHelpers";
 import * as materialUi from "@mui/material";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import { fireEvent, render, screen } from "@testing-library/react";
 import dayjs from "dayjs";
-import { generateProfileData } from "../../test/factories";
-import { FilingsCalendar } from "./FilingsCalendar";
 
 function mockMaterialUI(): typeof materialUi {
   return {

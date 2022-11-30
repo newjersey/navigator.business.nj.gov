@@ -1,7 +1,7 @@
 import { TaskCheckbox } from "@/components/tasks/TaskCheckbox";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { generateUserData } from "@/test/factories";
-import { withAuthAlert } from "@/test/helpers";
+import { withAuthAlert } from "@/test/helpers/helpers-renderers";
 import {
   currentUserData,
   setupStatefulUserDataContext,

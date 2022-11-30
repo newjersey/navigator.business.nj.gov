@@ -7,7 +7,7 @@ import {
   generateSidebarCardContent,
   generateUserData,
 } from "@/test/factories";
-import { selectDropdownByValue } from "@/test/helpers";
+import { selectDropdownByValue } from "@/test/helpers/helpers-testing-library-selectors";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import {
   currentUserData,

@@ -4,7 +4,7 @@ import {
   generateFormationProfileData,
   preparePage,
   useSetupInitialMocks,
-} from "@/test/helpers-formation";
+} from "@/test/helpers/helpers-formation";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import {
   BusinessUser,

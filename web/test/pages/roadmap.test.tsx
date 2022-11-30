@@ -1,7 +1,7 @@
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import RoadmapPage from "@/pages/roadmap";
-import { withAuth } from "@/test/helpers";
+import { withAuth } from "@/test/helpers/helpers-renderers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { render } from "@testing-library/react";
 
@@ -9,7 +9,7 @@ jest.mock("next/router", () => {
   return { useRouter: jest.fn() };
 });
 
-describe("dashboard", () => {
+describe("roadmap", () => {
   beforeEach(() => {
     jest.resetAllMocks();
     useMockRouter({});

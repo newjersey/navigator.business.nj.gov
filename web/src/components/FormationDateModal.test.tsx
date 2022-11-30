@@ -4,16 +4,20 @@ import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import * as buildUserRoadmap from "@/lib/roadmap/buildUserRoadmap";
 import * as analyticsHelpers from "@/lib/utils/analytics-helpers";
 import { generateProfileData, generateRoadmap, generateUserData } from "@/test/factories";
-import { selectDate, selectLocationByText, withRoadmap } from "@/test/helpers";
+import { withRoadmap } from "@/test/helpers/helpers-renderers";
+import { selectDate, selectLocationByText } from "@/test/helpers/helpers-testing-library-selectors";
 import {
   currentUserData,
   setupStatefulUserDataContext,
   triggerQueueUpdate,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { defaultDateFormat, generateMunicipality } from "@businessnjgovnavigator/shared";
-import { getCurrentDate } from "@businessnjgovnavigator/shared/dateHelpers";
-import { UserData } from "@businessnjgovnavigator/shared/userData";
+import {
+  defaultDateFormat,
+  generateMunicipality,
+  getCurrentDate,
+  UserData,
+} from "@businessnjgovnavigator/shared";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useRoadmap", () => {

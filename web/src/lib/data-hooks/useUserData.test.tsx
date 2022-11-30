@@ -3,7 +3,7 @@ import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useUserData, UseUserDataResponse } from "@/lib/data-hooks/useUserData";
 import { UserDataStorageFactory } from "@/lib/storage/UserDataStorage";
 import { generateUser, generateUserData } from "@/test/factories";
-import { withAuth, withUserDataError } from "@/test/helpers";
+import { withAuth, withUserDataError } from "@/test/helpers/helpers-renderers";
 import { generateUseUserDataResponse } from "@/test/mock/mockUseUserData";
 import { BusinessUser } from "@businessnjgovnavigator/shared/";
 import { act, render } from "@testing-library/react";

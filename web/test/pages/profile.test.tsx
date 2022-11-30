@@ -20,7 +20,8 @@ import {
   randomIndustry,
   randomNonHomeBasedIndustry,
 } from "@/test/factories";
-import { markdownToText, randomElementFromArray, withAuthAlert, withRoadmap } from "@/test/helpers";
+import { withAuthAlert, withRoadmap } from "@/test/helpers/helpers-renderers";
+import { markdownToText, randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { setMockDocumentsResponse, useMockDocuments } from "@/test/mock/mockUseDocuments";

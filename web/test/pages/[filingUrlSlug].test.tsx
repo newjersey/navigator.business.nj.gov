@@ -2,7 +2,7 @@ import { getMergedConfig } from "@/contexts/configContext";
 import { Filing, taxFilingMethod } from "@/lib/types/types";
 import FilingPage from "@/pages/filings/[filingUrlSlug]";
 import { generateProfileData, generateTaxFiling, generateTaxFilingData } from "@/test/factories";
-import { randomElementFromArray } from "@/test/helpers";
+import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
 import { defaultDateFormat, getCurrentDate, randomInt } from "@businessnjgovnavigator/shared";
 import { createTheme, ThemeProvider } from "@mui/material";

@@ -1,3 +1,4 @@
+import { SidebarCardsContainer } from "@/components/dashboard/SidebarCardsContainer";
 import { getMergedConfig } from "@/contexts/configContext";
 import { Certification, Funding, SidebarCardContent } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
@@ -10,7 +11,7 @@ import {
   generateUserData,
   getProfileDataForUnfilteredOpportunities,
 } from "@/test/factories";
-import { markdownToText } from "@/test/helpers";
+import { markdownToText } from "@/test/helpers/helpers-utilities";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { useMockProfileData, useMockUserData } from "@/test/mock/mockUseUserData";
 import {
@@ -21,7 +22,7 @@ import {
 import { UserData } from "@businessnjgovnavigator/shared";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
-import { SidebarCardsContainer } from "./SidebarCardsContainer";
+
 jest.mock("@/lib/data-hooks/useUserData", () => {
   return { useUserData: jest.fn() };
 });

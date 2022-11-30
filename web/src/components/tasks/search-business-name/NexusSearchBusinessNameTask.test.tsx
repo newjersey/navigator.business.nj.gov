@@ -1,13 +1,14 @@
 import { NexusSearchBusinessNameTask } from "@/components/tasks/search-business-name/NexusSearchBusinessNameTask";
 import { getMergedConfig } from "@/contexts/configContext";
 import { generateProfileData, generateTask, generateUserData } from "@/test/factories";
-import { markdownToText, withRoadmap } from "@/test/helpers";
+import { withRoadmap } from "@/test/helpers/helpers-renderers";
+import { markdownToText } from "@/test/helpers/helpers-utilities";
 import {
   dbaInputField,
   fillText,
   mockSearchReturnValue,
   searchAndGetValue,
-} from "@/test/helpersSearchBusinessName";
+} from "@/test/helpers/helpersSearchBusinessName";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
 import {

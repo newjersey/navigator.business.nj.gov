@@ -8,7 +8,7 @@ import {
   searchAndGetValue,
   searchAndReject,
   searchButton,
-} from "@/test/helpersSearchBusinessName";
+} from "@/test/helpers/helpersSearchBusinessName";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { useMockProfileData, useMockUserData } from "@/test/mock/mockUseUserData";
 import { fireEvent, render, screen } from "@testing-library/react";

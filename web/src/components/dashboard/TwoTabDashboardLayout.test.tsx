@@ -1,3 +1,4 @@
+import TwoTabDashboardLayout from "@/components/dashboard/TwoTabDashboardLayout";
 import { getMergedConfig } from "@/contexts/configContext";
 import { Certification, Funding } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
@@ -7,11 +8,10 @@ import {
   generatePreferences,
   getProfileDataForUnfilteredOpportunities,
 } from "@/test/factories";
-import { randomElementFromArray } from "@/test/helpers";
+import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
 import { OperatingPhases } from "@businessnjgovnavigator/shared/operatingPhase";
 import { fireEvent, render, screen } from "@testing-library/react";
-import TwoTabDashboardLayout from "./TwoTabDashboardLayout";
 
 jest.mock("@/lib/data-hooks/useUserData", () => {
   return { useUserData: jest.fn() };

@@ -5,7 +5,7 @@ import NaicsCodes from "@/lib/static/records/naics2022.json";
 import { NaicsCodeObject, Task } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
 import { generateProfileData, generateTask, generateUserData } from "@/test/factories";
-import { withAuthAlert } from "@/test/helpers";
+import { withAuthAlert } from "@/test/helpers/helpers-renderers";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import {
   currentUserData,

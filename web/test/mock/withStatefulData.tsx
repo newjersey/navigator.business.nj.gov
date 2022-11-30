@@ -5,7 +5,7 @@ import { UpdateQueueContext } from "@/contexts/updateQueueContext";
 import { UpdateQueue } from "@/lib/types/types";
 import { UpdateQueueFactory } from "@/lib/UpdateQueue";
 import { isUserData } from "@/lib/utils/helpers";
-import { getLastCalledWith, getNumberOfMockCalls } from "@/test/helpers";
+import { getLastCalledWith, getNumberOfMockCalls } from "@/test/helpers/helpers-utilities";
 import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { createContext, ReactElement, ReactNode, useEffect, useState } from "react";

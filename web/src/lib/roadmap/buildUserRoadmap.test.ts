@@ -8,7 +8,7 @@ import {
   generateRoadmap,
   generateTask,
 } from "@/test/factories";
-import { getLastCalledWith } from "@/test/helpers";
+import { getLastCalledWith } from "@/test/helpers/helpers-utilities";
 import { generateMunicipality, Industries } from "@businessnjgovnavigator/shared/";
 import {
   BusinessPersona,

@@ -4,7 +4,7 @@ import { getMergedConfig } from "@/contexts/configContext";
 import * as buildUserRoadmap from "@/lib/roadmap/buildUserRoadmap";
 import * as analyticsHelpers from "@/lib/utils/analytics-helpers";
 import { generateProfileData, generateRoadmap, generateUserData } from "@/test/factories";
-import { withRoadmap } from "@/test/helpers";
+import { withRoadmap } from "@/test/helpers/helpers-renderers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import {
   currentUserData,

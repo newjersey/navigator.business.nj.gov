@@ -1,4 +1,5 @@
 import { NavBar } from "@/components/navbar/NavBar";
+import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { ROUTES } from "@/lib/domain-logic/routes";
@@ -9,17 +10,18 @@ import {
   generateUser,
   generateUserData,
 } from "@/test/factories";
-import { withAuth } from "@/test/helpers";
+import { withAuth } from "@/test/helpers/helpers-renderers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { useMockUserData, useUndefinedUserData } from "@/test/mock/mockUseUserData";
 import { setupStatefulUserDataContext, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import * as materialUi from "@mui/material";
 import { useMediaQuery } from "@mui/material";
 import { fireEvent, render, screen, waitFor, waitForElementToBeRemoved } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { ReactNode } from "react";
+
+const Config = getMergedConfig();
 
 function mockMaterialUI(): typeof materialUi {
   return {

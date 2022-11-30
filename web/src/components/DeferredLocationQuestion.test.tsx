@@ -5,7 +5,8 @@ import * as buildUserRoadmap from "@/lib/roadmap/buildUserRoadmap";
 import analytics from "@/lib/utils/analytics";
 import * as analyticsHelpers from "@/lib/utils/analytics-helpers";
 import { generateProfileData, generateRoadmap, generateUserData } from "@/test/factories";
-import { selectLocationByText, withRoadmap } from "@/test/helpers";
+import { withRoadmap } from "@/test/helpers/helpers-renderers";
+import { selectLocationByText } from "@/test/helpers/helpers-testing-library-selectors";
 import {
   currentUserData,
   setupStatefulUserDataContext,

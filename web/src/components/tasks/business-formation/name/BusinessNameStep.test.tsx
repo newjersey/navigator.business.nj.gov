@@ -4,7 +4,7 @@ import {
   generateFormationProfileData,
   preparePage,
   useSetupInitialMocks,
-} from "@/test/helpers-formation";
+} from "@/test/helpers/helpers-formation";
 import { createEmptyFormationFormData } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { screen } from "@testing-library/react";
