@@ -22,7 +22,7 @@ import {
   TaskLink,
 } from "@/lib/types/types";
 import { getSectionNames } from "@/lib/utils/helpers";
-import { randomElementFromArray } from "@/test/helpers";
+import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import {
   AllBusinessSuffixes,
   allFormationLegalTypes,

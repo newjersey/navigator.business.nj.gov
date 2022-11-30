@@ -1,22 +1,22 @@
+import { TaxRegistrationModal } from "@/components/TaxRegistrationModal";
 import { getMergedConfig } from "@/contexts/configContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import * as buildUserRoadmap from "@/lib/roadmap/buildUserRoadmap";
 import * as analyticsHelpers from "@/lib/utils/analytics-helpers";
 import { getFlow } from "@/lib/utils/helpers";
 import { generateProfileData, generateRoadmap, generateUserData } from "@/test/factories";
-import { fillText, markdownToText, selectLocationByText, withRoadmap } from "@/test/helpers";
+import { withRoadmap } from "@/test/helpers/helpers-renderers";
+import { fillText, selectLocationByText } from "@/test/helpers/helpers-testing-library-selectors";
+import { markdownToText } from "@/test/helpers/helpers-utilities";
 import {
   currentUserData,
   setupStatefulUserDataContext,
   triggerQueueUpdate,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { LegalStructures } from "@businessnjgovnavigator/shared/legalStructure";
-import { LookupOwnershipTypeById } from "@businessnjgovnavigator/shared/ownership";
+import { LegalStructures, LookupOwnershipTypeById, UserData } from "@businessnjgovnavigator/shared";
 import { generateMunicipality } from "@businessnjgovnavigator/shared/test";
-import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
-import { TaxRegistrationModal } from "./TaxRegistrationModal";
 
 const Config = getMergedConfig();
 jest.mock("@/lib/data-hooks/useRoadmap", () => {

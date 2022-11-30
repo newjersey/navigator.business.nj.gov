@@ -2,7 +2,7 @@ import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import Home from "@/pages/index";
 import { generateProfileData, generateUser } from "@/test/factories";
-import { withAuth } from "@/test/helpers";
+import { withAuth } from "@/test/helpers/helpers-renderers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { setMockUserDataResponse, useMockUserData } from "@/test/mock/mockUseUserData";
 import { render } from "@testing-library/react";

@@ -18,7 +18,8 @@ import {
   randomHomeBasedIndustry,
   randomNonHomeBasedIndustry,
 } from "@/test/factories";
-import { randomElementFromArray, withAuthAlert } from "@/test/helpers";
+import { withAuthAlert } from "@/test/helpers/helpers-renderers";
+import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { setMockUserDataResponse, useMockProfileData, useMockUserData } from "@/test/mock/mockUseUserData";

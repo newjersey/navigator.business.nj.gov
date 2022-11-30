@@ -6,7 +6,7 @@ import { createProfileFieldErrorMap } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
 import Onboarding from "@/pages/onboarding";
 import { generateProfileData, generateUser, generateUserData } from "@/test/factories";
-import { withAuth, withRoadmap } from "@/test/helpers";
+import { withAuth, withRoadmap } from "@/test/helpers/helpers-renderers";
 import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import {

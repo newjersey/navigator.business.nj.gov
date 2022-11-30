@@ -7,7 +7,8 @@ import { noneOfTheAbovePriorityId, priorityTypesObj } from "@/lib/domain-logic/c
 import { Task } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
 import { generateTask, generateTaskLink, generateUserData } from "@/test/factories";
-import { randomElementFromArray, withAuthAlert } from "@/test/helpers";
+import { withAuthAlert } from "@/test/helpers/helpers-renderers";
+import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import { useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
 import {
   currentUserData,

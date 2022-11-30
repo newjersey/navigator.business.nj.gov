@@ -115,7 +115,7 @@ const DashboardPage = (props: Props): ReactElement => {
   useMountEffectWhenDefined(() => {
     (async () => {
       if (isDesktopAndUp && userData?.preferences.phaseNewlyChanged) {
-        if (!updateQueue) {
+        if (!updateQueue || userData?.formProgress !== "COMPLETED") {
           return;
         }
         await updateQueue.queuePreferences({ phaseNewlyChanged: false }).update();

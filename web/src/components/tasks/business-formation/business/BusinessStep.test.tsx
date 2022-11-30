@@ -1,12 +1,12 @@
 import { defaultDisplayDateFormat } from "@/lib/types/types";
 import { generateFormationDisplayContent, generateUserData } from "@/test/factories";
-import { markdownToText } from "@/test/helpers";
 import {
   FormationPageHelpers,
   generateFormationProfileData,
   preparePage,
   useSetupInitialMocks,
-} from "@/test/helpers-formation";
+} from "@/test/helpers/helpers-formation";
+import { markdownToText } from "@/test/helpers/helpers-utilities";
 import { mockPush } from "@/test/mock/mockRouter";
 import { currentUserData } from "@/test/mock/withStatefulUserData";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";

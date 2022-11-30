@@ -1,12 +1,15 @@
 import { SignUpSnackbar } from "@/components/auth/SignUpSnackbar";
+import { getMergedConfig } from "@/contexts/configContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import { markdownToText, withAuthAlert } from "@/test/helpers";
+import { withAuthAlert } from "@/test/helpers/helpers-renderers";
+import { markdownToText } from "@/test/helpers/helpers-utilities";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import * as materialUi from "@mui/material";
 import { useMediaQuery } from "@mui/material";
 import { fireEvent, render, screen } from "@testing-library/react";
+
+const Config = getMergedConfig();
 
 jest.mock("@/lib/api-client/apiClient", () => {
   return { postSelfReg: jest.fn() };

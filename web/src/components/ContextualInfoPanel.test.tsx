@@ -1,5 +1,5 @@
 import { ContextualInfoPanel } from "@/components/ContextualInfoPanel";
-import { withContextualInfo } from "@/test/helpers";
+import { withContextualInfo } from "@/test/helpers/helpers-renderers";
 import { render, screen } from "@testing-library/react";
 
 describe("<ContextualInfoPanel />", () => {

@@ -6,7 +6,7 @@ import {
   preparePage,
   setDesktopScreen,
   useSetupInitialMocks,
-} from "@/test/helpers-formation";
+} from "@/test/helpers/helpers-formation";
 import { currentUserData } from "@/test/mock/withStatefulUserData";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import {

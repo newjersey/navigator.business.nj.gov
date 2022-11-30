@@ -4,7 +4,7 @@ import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import Onboarding from "@/pages/onboarding";
 import { generateProfileData, generateUser, generateUserData, randomLegalStructure } from "@/test/factories";
-import { withAuth } from "@/test/helpers";
+import { withAuth } from "@/test/helpers/helpers-renderers";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { currentUserData, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import {

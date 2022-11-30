@@ -1,6 +1,6 @@
 import { SearchBusinessNameTask } from "@/components/tasks/search-business-name/SearchBusinessNameTask";
 import { generateProfileData, generateTask, generateUserData } from "@/test/factories";
-import { fillText, searchAndGetValue } from "@/test/helpersSearchBusinessName";
+import { fillText, searchAndGetValue } from "@/test/helpers/helpersSearchBusinessName";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
 import {

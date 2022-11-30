@@ -4,7 +4,8 @@ import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { generateProfileData, generateUserData } from "@/test/factories";
-import { selectDate, withAuthAlert } from "@/test/helpers";
+import { withAuthAlert } from "@/test/helpers/helpers-renderers";
+import { selectDate } from "@/test/helpers/helpers-testing-library-selectors";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import {
@@ -13,11 +14,15 @@ import {
   userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { defaultDateFormat } from "@businessnjgovnavigator/shared";
-import { getCurrentDate } from "@businessnjgovnavigator/shared/dateHelpers";
-import { formationTaskId, taxTaskId } from "@businessnjgovnavigator/shared/domain-logic/taskIds";
-import { randomInt } from "@businessnjgovnavigator/shared/intHelpers";
-import { TaskProgress, UserData } from "@businessnjgovnavigator/shared/userData";
+import {
+  defaultDateFormat,
+  formationTaskId,
+  getCurrentDate,
+  randomInt,
+  TaskProgress,
+  taxTaskId,
+  UserData,
+} from "@businessnjgovnavigator/shared";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 

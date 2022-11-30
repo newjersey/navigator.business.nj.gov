@@ -1,13 +1,16 @@
 import { SignUpModal } from "@/components/auth/SignUpModal";
+import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import * as session from "@/lib/auth/sessionHelper";
 import { generateUser, generateUserData } from "@/test/factories";
-import { markdownToText, withAuthAlert } from "@/test/helpers";
+import { withAuthAlert } from "@/test/helpers/helpers-renderers";
+import { markdownToText } from "@/test/helpers/helpers-utilities";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+
+const Config = getMergedConfig();
 
 jest.mock("@/lib/api-client/apiClient", () => {
   return { postSelfReg: jest.fn() };

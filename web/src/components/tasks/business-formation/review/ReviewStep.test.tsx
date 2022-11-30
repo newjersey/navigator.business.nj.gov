@@ -1,6 +1,11 @@
 import { generateFormationDisplayContent, generateUserData } from "@/test/factories";
-import { markdownToText, withMarkup } from "@/test/helpers";
-import { generateFormationProfileData, preparePage, useSetupInitialMocks } from "@/test/helpers-formation";
+import {
+  generateFormationProfileData,
+  preparePage,
+  useSetupInitialMocks,
+} from "@/test/helpers/helpers-formation";
+import { withMarkup } from "@/test/helpers/helpers-testing-library-selectors";
+import { markdownToText } from "@/test/helpers/helpers-utilities";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import {
   FormationFormData,

@@ -1,5 +1,6 @@
 import { BusinessFormation } from "@/components/tasks/business-formation/BusinessFormation";
 import { LookupStepIndexByName } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
+import { getMergedConfig } from "@/contexts/configContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import * as buildUserRoadmap from "@/lib/roadmap/buildUserRoadmap";
@@ -15,22 +16,23 @@ import {
   generateTask,
   generateUserData,
 } from "@/test/factories";
-import { withAuthAlert, withRoadmap } from "@/test/helpers";
 import {
   createFormationPageHelpers,
   generateFormationProfileData,
   mockApiResponse,
   preparePage,
   useSetupInitialMocks,
-} from "@/test/helpers-formation";
+} from "@/test/helpers/helpers-formation";
+import { withAuthAlert, withRoadmap } from "@/test/helpers/helpers-renderers";
 import { mockPush } from "@/test/mock/mockRouter";
 import { currentUserData, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { generateFormationFormData, generateMunicipality } from "@businessnjgovnavigator/shared/test";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import * as materialUi from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+
+const Config = getMergedConfig();
 
 function mockMaterialUI(): typeof materialUi {
   return {

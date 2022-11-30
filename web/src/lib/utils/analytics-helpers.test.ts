@@ -1,5 +1,5 @@
 import { generateProfileData } from "@/test/factories";
-import { randomElementFromArray } from "@/test/helpers";
+import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import { Industries } from "@businessnjgovnavigator/shared/";
 import analytics from "./analytics";
 import { sendOnboardingOnSubmitEvents } from "./analytics-helpers";

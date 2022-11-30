@@ -2,7 +2,7 @@ import { getMergedConfig } from "@/contexts/configContext";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { templateEval } from "@/lib/utils/helpers";
 import { generateProfileData, generateUserData } from "@/test/factories";
-import { markdownToText } from "@/test/helpers";
+import { markdownToText } from "@/test/helpers/helpers-utilities";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import {
   currentUserData,
