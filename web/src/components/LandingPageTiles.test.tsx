@@ -22,4 +22,12 @@ describe("<LandingPageTiles />", () => {
 
     expect(mockPush).toHaveBeenCalledWith({ pathname: "/onboarding", query: { flow: "starting" } });
   });
+
+  it("auto-selects businessPersona and routes user to industry selection when the out-of-state business button is clicked", async () => {
+    render(<LandingPageTiles />);
+
+    fireEvent.click(screen.getByText(Config.landingPage.landingPageTile4Text));
+
+    expect(mockPush).toHaveBeenCalledWith({ pathname: "/onboarding", query: { flow: "out-of-state" } });
+  });
 });
