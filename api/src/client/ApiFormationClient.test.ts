@@ -1138,17 +1138,6 @@ describe("ApiFormationClient", () => {
       expect(postBody.Formation.BusinessInformation.BusinessPurpose).toBeUndefined();
     });
 
-    it("does not send AdditionalLimitedLiabilityCompany if provisions is empty", async () => {
-      const stubResponse = generateApiResponse({});
-      mockAxios.post.mockResolvedValue({ data: stubResponse });
-
-      const userData = generateFormationUserData({}, {}, { provisions: [] });
-
-      await client.form(userData, "some-url");
-      const postBody: ApiSubmission = mockAxios.post.mock.calls[0][1] as ApiSubmission;
-      expect(postBody.Formation.AdditionalLimitedLiabilityCompany).toBeUndefined();
-    });
-
     it("responds with success, token, and redirect url", async () => {
       const stubResponse = generateApiResponse({ Success: true });
       mockAxios.post.mockResolvedValue({ data: stubResponse });
