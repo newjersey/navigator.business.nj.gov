@@ -241,4 +241,46 @@ describe("updateOperatingPhase", () => {
       });
     });
   });
+
+  it("sets phaseNewlyChanged in preferences if phase has changed", () => {
+    const userData = generateUserData({
+      profileData: generateProfileData({
+        businessPersona: "STARTING",
+        operatingPhase: "GUEST_MODE",
+        legalStructureId: "limited-partnership",
+      }),
+      preferences: generatePreferences({ phaseNewlyChanged: false }),
+    });
+    const updatedData = updateOperatingPhase(userData);
+    expect(updatedData.profileData.operatingPhase).toBe("NEEDS_TO_FORM");
+    expect(updatedData.preferences.phaseNewlyChanged).toBe(true);
+  });
+
+  it("keeps existing value of phaseNewlyChanged if phase did not changed", () => {
+    const userData1 = generateUserData({
+      profileData: generateProfileData({
+        businessPersona: "STARTING",
+        operatingPhase: "NEEDS_TO_REGISTER_FOR_TAXES",
+        legalStructureId: "general-partnership",
+      }),
+      taskProgress: { [formationTaskId]: "IN_PROGRESS" },
+      preferences: generatePreferences({ phaseNewlyChanged: false }),
+    });
+    const updatedData1 = updateOperatingPhase(userData1);
+    expect(updatedData1.profileData.operatingPhase).toBe("NEEDS_TO_REGISTER_FOR_TAXES");
+    expect(updatedData1.preferences.phaseNewlyChanged).toBe(false);
+
+    const userData2 = generateUserData({
+      profileData: generateProfileData({
+        businessPersona: "STARTING",
+        operatingPhase: "NEEDS_TO_REGISTER_FOR_TAXES",
+        legalStructureId: "general-partnership",
+      }),
+      taskProgress: { [formationTaskId]: "IN_PROGRESS" },
+      preferences: generatePreferences({ phaseNewlyChanged: true }),
+    });
+    const updatedData2 = updateOperatingPhase(userData2);
+    expect(updatedData2.profileData.operatingPhase).toBe("NEEDS_TO_REGISTER_FOR_TAXES");
+    expect(updatedData2.preferences.phaseNewlyChanged).toBe(true);
+  });
 });

@@ -33,6 +33,7 @@ export const createEmptyUserData = (user: BusinessUser): UserData => {
       returnToLink: "",
       isCalendarFullView: true,
       isHideableRoadmapOpen: false,
+      phaseNewlyChanged: true,
     },
     taxFilingData: {
       state: undefined,
@@ -61,6 +62,7 @@ export interface Preferences {
   returnToLink: string;
   isCalendarFullView: boolean;
   isHideableRoadmapOpen: boolean;
+  phaseNewlyChanged: boolean;
 }
 
 export type FormProgress = "UNSTARTED" | "COMPLETED";

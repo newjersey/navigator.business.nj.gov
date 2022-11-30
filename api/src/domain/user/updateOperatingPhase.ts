@@ -31,6 +31,7 @@ export const updateOperatingPhase: UpdateOperatingPhase = (userData: UserData): 
     preferences: {
       ...userData.preferences,
       isHideableRoadmapOpen: updatedIsHideableRoadmapOpen,
+      phaseNewlyChanged: phaseHasChanged || userData.preferences.phaseNewlyChanged,
     },
   };
 };
