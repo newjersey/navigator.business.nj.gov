@@ -239,11 +239,22 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
   };
 
   const selectHomeBased = (value: boolean) => {
+    cy.intercept({
+      method: "POST",
+      url: "/local/api/users",
+    }).as("updateOnMount");
+
+    cy.intercept({
+      method: "GET",
+      url: "/local/api/users/**",
+    }).as("getAfterUpdateOnMount");
+
+    cy.wait("@updateOnMount");
+    cy.wait("@getAfterUpdateOnMount");
+
     onDashboardPage.getHomeBased().should("exist");
     onDashboardPage.selectHomeBased(value);
     clickDeferredSaveButton();
-    cy.wait(1000);
-
     onDashboardPage.getHomeBased().should("not.exist");
   };
 
