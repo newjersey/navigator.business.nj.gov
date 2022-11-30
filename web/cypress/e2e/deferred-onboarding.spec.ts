@@ -10,6 +10,7 @@ import {
   randomHomeBasedIndustry,
   randomNonHomeBasedIndustry,
   randomPublicFilingLegalStructure,
+  waitForUserDataMountUpdate,
 } from "../support/helpers";
 import { onDashboardPage } from "../support/page_objects/dashboardPage";
 import { onProfilePage } from "../support/page_objects/profilePage";
@@ -239,19 +240,7 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
   };
 
   const selectHomeBased = (value: boolean) => {
-    cy.intercept({
-      method: "POST",
-      url: "/local/api/users",
-    }).as("updateOnMount");
-
-    cy.intercept({
-      method: "GET",
-      url: "/local/api/users/**",
-    }).as("getAfterUpdateOnMount");
-
-    cy.wait("@updateOnMount");
-    cy.wait("@getAfterUpdateOnMount");
-
+    waitForUserDataMountUpdate();
     onDashboardPage.getHomeBased().should("exist");
     onDashboardPage.selectHomeBased(value);
     clickDeferredSaveButton();
