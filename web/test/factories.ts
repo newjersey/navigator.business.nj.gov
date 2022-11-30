@@ -242,7 +242,7 @@ export const generatePreferences = (overrides: Partial<Preferences>): Preference
     returnToLink: "",
     isCalendarFullView: !(randomInt() % 2),
     isHideableRoadmapOpen: !(randomInt() % 2),
-    phaseNewlyChanged: !(randomInt() % 2),
+    phaseNewlyChanged: false,
     ...overrides,
   };
 };
