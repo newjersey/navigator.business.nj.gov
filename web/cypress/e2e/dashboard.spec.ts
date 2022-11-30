@@ -8,6 +8,7 @@ import {
   clickDeferredSaveButton,
   completeExistingBusinessOnboarding,
   completeNewBusinessOnboarding,
+  waitForUserDataMountUpdate,
 } from "../support/helpers";
 
 const sizes = ["iphone-5", [1024, 768]];
@@ -75,6 +76,8 @@ describe("Dashboard [feature] [all] [group2]", () => {
           industry,
           legalStructureId,
         });
+
+        waitForUserDataMountUpdate();
 
         // answer deferred question to get local-requirements task
         onDashboardPage.getHomeBased().should("exist");
