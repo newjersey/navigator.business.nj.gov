@@ -417,7 +417,7 @@ describe("onboarding - shared", () => {
     });
   });
 
-  describe("when query parameter sets onboarding flow to starting", () => {
+  describe("when query parameter sets onboarding flow", () => {
     it("routes user to step 2 when query parameter exists and value is starting", async () => {
       useMockRouter({ isReady: true, query: { flow: "starting" } });
       const { page } = renderPage({});
@@ -427,6 +427,19 @@ describe("onboarding - shared", () => {
       await page.visitStep(3);
 
       expect(currentUserData().profileData.businessPersona).toEqual("STARTING");
+    });
+
+    it("routes user to step 2 when query parameter exists and value is out-of-state", async () => {
+      useMockRouter({ isReady: true, query: { flow: "out-of-state" } });
+      const { page } = renderPage({});
+
+      expect(screen.getByTestId("step-2")).toBeInTheDocument();
+      const { transactionsInNJ } = Config.profileDefaults.FOREIGN.foreignBusinessTypeIds.optionContent;
+
+      page.checkByLabelText(transactionsInNJ);
+
+      await page.visitStep(3);
+      expect(currentUserData().profileData.businessPersona).toEqual("FOREIGN");
     });
   });
 });

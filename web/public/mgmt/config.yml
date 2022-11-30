@@ -2968,7 +2968,8 @@ collections:
               - { label: Card 3 - Button Text, name: card3Button, widget: string }
               - { label: Landing Page - Tile 1 Text, name: landingPageTile1Text, widget: string }
               - { label: Landing Page - Tile 2 Text, name: landingPageTile2Text, widget: string }
-              - { label: Landing Page - Tile 3 Text, name: landingPageTile5Text, widget: string }
+              - { label: Landing Page - Tile 4 Text, name: landingPageTile4Text, widget: string }
+              - { label: Landing Page - Tile 5 Text, name: landingPageTile5Text, widget: string }
           - label: Landing Page Experience B
             name: landingPageExperienceB
             collapsed: true
