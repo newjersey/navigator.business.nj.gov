@@ -25,6 +25,7 @@ import { setMockUserDataResponse, useMockProfileData, useMockUserData } from "@/
 import {
   currentUserData,
   setupStatefulUserDataContext,
+  userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
@@ -601,5 +602,54 @@ describe("dashboard page", () => {
     const chooseHomeBasedValue = (value: "true" | "false") => {
       fireEvent.click(screen.getByTestId(`home-based-business-radio-${value}`));
     };
+  });
+
+  describe("phase newly changed indicator", () => {
+    it("immediately sets phaseNewlyChanged to false when in desktop mode", async () => {
+      setDesktopScreen(true);
+      renderStatefulPage(generateUserData({ preferences: generatePreferences({ phaseNewlyChanged: true }) }));
+      await waitFor(() => {
+        return expect(currentUserData().preferences.phaseNewlyChanged).toBe(false);
+      });
+    });
+
+    it("does not update userData when phaseNewlyChanged is false in desktop mode", async () => {
+      setDesktopScreen(true);
+      renderStatefulPage(
+        generateUserData({ preferences: generatePreferences({ phaseNewlyChanged: false }) })
+      );
+      expect(userDataWasNotUpdated()).toBe(true);
+    });
+
+    it("sets phaseNewlyChanged to false on mobile when visiting For You tab", async () => {
+      setDesktopScreen(false);
+      renderStatefulPage(generateUserData({ preferences: generatePreferences({ phaseNewlyChanged: true }) }));
+
+      expect(userDataWasNotUpdated()).toBe(true);
+
+      fireEvent.click(screen.getByTestId("for-you-tab"));
+      expect(screen.getByText(Config.dashboardDefaults.sidebarHeading)).toBeInTheDocument();
+      await waitFor(() => {
+        return expect(currentUserData().preferences.phaseNewlyChanged).toBe(false);
+      });
+    });
+
+    it("shows indicator next to For You tab when phaseNewlyChanged is true on mobile", async () => {
+      setDesktopScreen(false);
+      renderStatefulPage(generateUserData({ preferences: generatePreferences({ phaseNewlyChanged: true }) }));
+
+      expect(screen.getByTestId("for-you-indicator")).toBeInTheDocument();
+
+      fireEvent.click(screen.getByTestId("for-you-tab"));
+      await waitFor(() => {
+        return expect(screen.queryByTestId("for-you-indicator")).not.toBeInTheDocument();
+      });
+    });
+
+    it("shows no indicator on desktop", () => {
+      setDesktopScreen(true);
+      renderStatefulPage(generateUserData({ preferences: generatePreferences({ phaseNewlyChanged: true }) }));
+      expect(screen.queryByTestId("for-you-indicator")).not.toBeInTheDocument();
+    });
   });
 });

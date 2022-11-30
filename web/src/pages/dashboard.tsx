@@ -44,7 +44,7 @@ interface Props {
 
 const DashboardPage = (props: Props): ReactElement => {
   useAuthAlertPage();
-  const { userData } = useUserData();
+  const { userData, updateQueue } = useUserData();
   const router = useRouter();
   const { roadmap } = useRoadmap();
   const { Config } = useConfig();
@@ -111,6 +111,17 @@ const DashboardPage = (props: Props): ReactElement => {
       }
     })();
   }, userData);
+
+  useMountEffectWhenDefined(() => {
+    (async () => {
+      if (isDesktopAndUp && userData?.preferences.phaseNewlyChanged) {
+        if (!updateQueue) {
+          return;
+        }
+        await updateQueue.queuePreferences({ phaseNewlyChanged: false }).update();
+      }
+    })();
+  }, updateQueue);
 
   const displayHomedBaseBusinessQuestion = (): boolean => {
     if (!userData) {
