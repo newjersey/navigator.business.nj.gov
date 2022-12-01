@@ -74,6 +74,7 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
             legalStructureId: randomPublicFilingLegalStructure(),
           });
 
+          waitForUserDataMountUpdate();
           selectHomeBased(false);
         });
 
@@ -240,14 +241,16 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
   };
 
   const selectHomeBased = (value: boolean) => {
-    waitForUserDataMountUpdate();
     onDashboardPage.getHomeBased().should("exist");
     onDashboardPage.selectHomeBased(value);
     clickDeferredSaveButton();
     onDashboardPage.getHomeBased().should("not.exist");
+    cy.url().should("contain", "deferred");
+    cy.url().should("not.contain", "deferred");
   };
 
   const showsAndAnswersHomeBasedBusinessQuestionOnDashboard = () => {
+    waitForUserDataMountUpdate();
     selectHomeBased(true);
 
     onDashboardPage.clickEditProfileLink();
