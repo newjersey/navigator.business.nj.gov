@@ -37,28 +37,28 @@ export const Hero = (): ReactElement => {
       <div className="hero-gradient-bg margin-top-205 desktop:margin-top-0">
         <div className="desktop:grid-container-widescreen desktop:padding-x-7 width-100">
           <div className="grid-row">
-            <div
-              className={`desktop:grid-col-5 padding-top-3 padding-bottom-2 desktop:padding-bottom-6 ${
-                isDesktopAndUp ? "text-left" : "text-center padding-x-2"
-              }`}
-            >
-              <h1
-                className={`text-primary-darker h1-styling-large desktop:margin-top-7 margin-bottom-3 desktop:margin-bottom-2`}
+            <div className="grid-row margin-left-1">
+              <div
+                className={`desktop:grid-col-7 padding-top-3 padding-bottom-2 desktop:padding-bottom-1 ${
+                  isDesktopAndUp ? "text-left" : "text-center padding-x-2"
+                }`}
               >
-                {landingPageConfig.heroCallOutFirstLineText}
-                <br />
-                {landingPageConfig.heroCallOutSecondLineText}
-              </h1>
-              <div className="text-base-darkest font-sans-lg margin-bottom-3 desktop:margin-bottom-3">
-                {landingPageConfig.heroSupportingText}
+                <h1
+                  className={`text-primary-darker h1-styling desktop:margin-top-7 margin-bottom-3 desktop:margin-bottom-2`}
+                >
+                  {landingPageConfig.heroCallOutFirstLineText}
+                </h1>
+                <div className="text-base-darkest font-sans-lg margin-bottom-3 desktop:margin-bottom-3">
+                  {landingPageConfig.heroSupportingText}
+                </div>
+              </div>
+
+              <div className="desktop:grid-col-5 order-first desktop:order-last padding-left-10">
+                <img className="width-100" src="/img/Hero-img-climb.svg" alt="Hero People Climbing" />
               </div>
             </div>
-
-            <div className="desktop:grid-col-7 order-first desktop:order-last margin-auto">
-              <img className="width-100" src="/img/Hero-img-climb.svg" alt="Hero People Climbing" />
-            </div>
+            <LandingPageTiles />
           </div>
-          <LandingPageTiles />
         </div>
       </div>
       <div className={`${isDesktopAndUp ? "hero-gradient-bg-bottom" : "bg-success-lighter"}`}>
