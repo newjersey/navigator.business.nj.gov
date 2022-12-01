@@ -92,6 +92,10 @@
   flex-direction: column-reverse;
 }
 
+.tal {
+  text-align: left;
+}
+
 .mobile-lg\:flex-row {
   @media (min-width: 30em) {
     flex-direction: row !important;
