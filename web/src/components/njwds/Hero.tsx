@@ -36,9 +36,9 @@ export const Hero = (): ReactElement => {
     <section aria-label="Introduction">
       <div className="hero-gradient-bg margin-top-205 desktop:margin-top-0">
         <div className="desktop:grid-container-widescreen desktop:padding-x-7 width-100">
-          <div className="grid-row">
+          <div className="grid-row margin-left-1">
             <div
-              className={`desktop:grid-col-5 padding-top-3 padding-bottom-2 desktop:padding-bottom-6 ${
+              className={`desktop:grid-col-7 padding-top-3 padding-bottom-2 desktop:padding-bottom-1 ${
                 isDesktopAndUp ? "text-left" : "text-center padding-x-2"
               }`}
             >
@@ -47,14 +47,13 @@ export const Hero = (): ReactElement => {
               >
                 {landingPageConfig.heroCallOutFirstLineText}
                 <br />
-                {landingPageConfig.heroCallOutSecondLineText}
               </h1>
               <div className="text-base-darkest font-sans-lg margin-bottom-3 desktop:margin-bottom-3">
                 {landingPageConfig.heroSupportingText}
               </div>
             </div>
 
-            <div className="desktop:grid-col-7 order-first desktop:order-last margin-auto">
+            <div className="desktop:grid-col-5 order-first desktop:order-last padding-left-10">
               <img className="width-100" src="/img/Hero-img-climb.svg" alt="Hero People Climbing" />
             </div>
           </div>
