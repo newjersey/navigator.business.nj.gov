@@ -120,6 +120,11 @@ const serverlessConfiguration: AWS = {
           },
           {
             Effect: "Allow",
+            Action: ["kms:GenerateDataKey", "kms:Encrypt", "kms:Decrypt"],
+            Resource: awsCryptoKey,
+          },
+          {
+            Effect: "Allow",
             Action: ["s3:PutObject", "s3:ListBucket", "s3:GetObject"],
             Resource: `arn:aws:s3:::${documentS3Bucket}/*`,
           },
