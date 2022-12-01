@@ -120,7 +120,8 @@
     "NJDHS",
     "NJBAC",
     "LGBTQ",
-    "Snackbars"
+    "Snackbars",
+    "NJDOT"
   ],
   "ignorePaths": ["node_modules/**", "out/**", "web/out/**", "package.json"]
 }
