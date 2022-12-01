@@ -233,6 +233,7 @@ export type OpportunityAgency =
   | "NJEDA"
   | "NJDOL"
   | "NJDEP"
+  | "NJDOT"
   | "NJ Department of Treasury"
   | "NJ Board of Public Utilities"
   | "New Jersey Business Action Center";

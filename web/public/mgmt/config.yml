@@ -220,7 +220,8 @@ collections:
         name: "agency"
         widget: "select"
         multiple: true
-        options: ["NJEDA", "NJDOL", "NJDEP", "NJ Department of Treasury", "NJ Board of Public Utilities"]
+        options:
+          ["NJEDA", "NJDOL", "NJDOT", "NJDEP", "NJ Department of Treasury", "NJ Board of Public Utilities"]
         required: false
       - label: "Applicable Ownership Types"
         name: applicableOwnershipTypes
@@ -255,7 +256,8 @@ collections:
         name: "agency"
         widget: "select"
         multiple: true
-        options: ["NJEDA", "NJDOL", "NJDEP", "NJ Department of Treasury", "NJ Board of Public Utilities"]
+        options:
+          ["NJEDA", "NJDOL", "NJDOT", "NJDEP", "NJ Department of Treasury", "NJ Board of Public Utilities"]
         required: false
       - label: "Applicable Ownership Types"
         name: applicableOwnershipTypes
@@ -343,6 +345,7 @@ collections:
           [
             "NJEDA",
             "NJDOL",
+            "NJDOT",
             "NJDEP",
             "NJ Department of Treasury",
             "NJ Board of Public Utilities",
@@ -487,7 +490,8 @@ collections:
         name: "agency"
         widget: "select"
         multiple: true
-        options: ["NJEDA", "NJDOL", "NJDEP", "NJ Department of Treasury", "NJ Board of Public Utilities"]
+        options:
+          ["NJEDA", "NJDOL", "NJDEP", "NJDOT", "NJ Department of Treasury", "NJ Board of Public Utilities"]
         required: false
       - { label: "Agency Contact", name: "agencyContact", widget: "string", required: false }
       - label: "Business Stage"
