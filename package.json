@@ -110,7 +110,7 @@
     "@mui/system": "5.10.15",
     "@next/bundle-analyzer": "12.1.6",
     "@next/eslint-plugin-next": "12.1.6",
-    "@semantic-release/changelog": "6.0.1",
+    "@semantic-release/changelog": "6.0.2",
     "@semantic-release/git": "10.0.1",
     "@serverless/typescript": "3.25.0",
     "@storybook/addon-a11y": "6.5.13",
