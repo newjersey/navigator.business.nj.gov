@@ -25,9 +25,9 @@ export const OnboardingLocationInNewJersey = (): ReactElement => {
             aria-label="Location in New Jersey"
             name="location-in-new-jersey"
             value={
-              state.profileData.nexusLocationInNewJersey !== undefined
-                ? state.profileData.nexusLocationInNewJersey
-                : null
+              state.profileData.nexusLocationInNewJersey === undefined
+                ? null
+                : state.profileData.nexusLocationInNewJersey
             }
             onChange={handleSelection}
             row

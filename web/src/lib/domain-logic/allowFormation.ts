@@ -19,14 +19,14 @@ export const allowFormation = (
   };
 
   if (publicFilingLegalTypes.includes(legalStructureId as PublicFilingLegalType)) {
-    if (persona != "FOREIGN") {
-      return true;
-    } else {
+    if (persona == "FOREIGN") {
       return (
         featureFlagMap[
           castPublicFilingLegalTypeToFormationType(legalStructureId as PublicFilingLegalType, persona)
         ] ?? true
       );
+    } else {
+      return true;
     }
   } else {
     return false;

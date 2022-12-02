@@ -28,14 +28,14 @@ export const MainBusiness = (): ReactElement => {
         } grid-row tablet:grid-gap-1`}
       >
         <div
-          className={`${!isTabletAndUp ? "input-error-bar" : ""} ${
+          className={`${isTabletAndUp ? "" : "input-error-bar"} ${
             doesFieldHaveError("businessSuffix") ? `error` : ""
           } tablet:grid-col-6`}
         >
           <SuffixDropdown />
         </div>
         <div
-          className={`${!isTabletAndUp ? "input-error-bar" : ""} ${
+          className={`${isTabletAndUp ? "" : "input-error-bar"} ${
             doesFieldHaveError("businessStartDate") ? `error` : ""
           } tablet:grid-col-6`}
         >
@@ -92,7 +92,7 @@ export const MainBusiness = (): ReactElement => {
         } input-error-bar grid-gap-1 grid-row margin-top-2`}
       >
         <div
-          className={`${!isTabletAndUp ? "input-error-bar" : ""} ${
+          className={`${isTabletAndUp ? "" : "input-error-bar"} ${
             doesFieldHaveError("addressMunicipality") ? "error" : ""
           } grid-col-12 tablet:grid-col-6 padding-left-0`}
         >
@@ -100,7 +100,7 @@ export const MainBusiness = (): ReactElement => {
           <FormationMunicipality />
         </div>
         <div
-          className={`${!isTabletAndUp ? "input-error-bar" : ""} ${
+          className={`${isTabletAndUp ? "" : "input-error-bar"} ${
             doSomeFieldsHaveError(["addressState", "addressZipCode"]) ? `error` : ""
           } form-input grid-col-5 tablet:grid-col-2`}
         >

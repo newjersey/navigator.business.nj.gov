@@ -143,10 +143,10 @@ const ProfilePage = (props: Props): ReactElement => {
     if (businessPersona === "STARTING") {
       analytics.event.profile_back_to_roadmap.click.view_roadmap();
     }
-    if (!deepEqual(profileData, userData.profileData)) {
-      setEscapeModal(true);
-    } else {
+    if (deepEqual(profileData, userData.profileData)) {
       redirect(undefined, router.replace);
+    } else {
+      setEscapeModal(true);
     }
   };
 

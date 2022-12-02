@@ -138,9 +138,7 @@ const DashboardPage = (props: Props): ReactElement => {
       <UserDataErrorAlert />
       <Header />
       <div className="margin-top-3">
-        {!roadmap ? (
-          <LoadingIndicator />
-        ) : (
+        {roadmap ? (
           <>
             <div className="margin-bottom-4">
               {displayHomedBaseBusinessQuestion() && (
@@ -175,6 +173,8 @@ const DashboardPage = (props: Props): ReactElement => {
               <HideableTasks />
             )}
           </>
+        ) : (
+          <LoadingIndicator />
         )}
       </div>
     </div>

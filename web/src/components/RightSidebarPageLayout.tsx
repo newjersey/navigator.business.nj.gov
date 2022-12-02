@@ -24,7 +24,7 @@ export const RightSidebarPageLayout = ({
           </div>
           <div
             className={`desktop:grid-col-5 usa-prose border-cool-lighter padding-top-6 bg-cool-extra-light padding-bottom-15 ${
-              !isDesktopAndUp ? "padding-x-2 border-top border-base-light" : "border-left-2px padding-left-5"
+              isDesktopAndUp ? "border-left-2px padding-left-5" : "padding-x-2 border-top border-base-light"
             }`}
           >
             {sidebarContent}

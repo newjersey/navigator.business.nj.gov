@@ -47,12 +47,12 @@ const Home = (): ReactElement => {
     let landingPageExperience: ABExperience;
     const storedExperience = abStorage.getExperience();
 
-    if (storedExperience !== undefined) {
-      landingPageExperience = storedExperience;
-    } else {
+    if (storedExperience === undefined) {
       const experience = decideABExperience();
       abStorage.setExperience(experience);
       landingPageExperience = experience;
+    } else {
+      landingPageExperience = storedExperience;
     }
 
     setABExperienceDimension(landingPageExperience);

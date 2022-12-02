@@ -15,7 +15,7 @@ export interface v67UserData {
 }
 
 export const migrate_v66_to_v67 = (v66Data: v66UserData): v67UserData => {
-  const graduationCard = v66Data.profileData.businessPersona !== "FOREIGN" ? ["graduation"] : [];
+  const graduationCard = v66Data.profileData.businessPersona === "FOREIGN" ? [] : ["graduation"];
 
   return {
     ...v66Data,
