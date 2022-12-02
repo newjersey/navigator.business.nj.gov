@@ -39,9 +39,17 @@ sector:
   - other-services
 publishStageArchive: ""
 ---
-The primary purpose of the NJ Department of Transportation's DBE/SS Program is to provide training, technical assistance, and other services to minority, disadvantaged, and women owned businesses enterprises to help increase their activity in our contracting program, and to facilitate the firms' development into viable, self-sufficient organizations capable of competing for and performing work on highway and highway related projects.
+The DBE/SS Program provides training and technical assistance to minority, disadvantaged, and women-owned businesses to increase their activity in the NJDOT contracting program and to assist them in competing for and performing work on highway and highway related projects.
 
----
+- - -
+
 ### Eligibility
-Preference is given to New Jersey based small and disadvantaged businesses certified under the Federal DBE Program.  However, Emerging Small Business Enterprises (ESBEs) and Small Business Enterprises (SBEs) who are based in New Jersey and are seeking certification as a DBE are also eligible and encouraged to apply to participate in the training program.  
 
+* Preference is given to New Jersey-based small and disadvantaged businesses certified under the [Federal Disadvantaged Business Enterprise (DBE) Program](https://www.transportation.gov/civil-rights/disadvantaged-business-enterprise)
+* Emerging Small Business Enterprises (ESBEs) and Small Business Enterprises (SBEs) based in New Jersey and are actively seeking certification as a DBE also qualify
+
+> **Benefits**
+>
+> * Intensive, instructor-led instruction in a number of business and technical topics
+> * Participating businesses complete a needs assessment and receive customized, one-on-one coaching and technical assistance tailored to their business needs
+> * Provided opportunities to expand professional networks and establish relationships with NJDOT's prime contractors through various programs and events
