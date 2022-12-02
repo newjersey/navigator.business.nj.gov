@@ -16,7 +16,7 @@ export const MiniRoadmapTask = (props: Props): ReactElement => {
   const taskProgress = (userData?.taskProgress && userData.taskProgress[props.task.id]) || "NOT_STARTED";
 
   return (
-    <Link href={`/tasks/${props.task.urlSlug}`} passHref>
+    <Link href={`/tasks/${props.task.urlSlug}`} passHref legacyBehavior>
       <button
         className={`usa-button--unstyled padding-y-1 padding-left-1 padding-right-4 cursor-pointer hover:bg-base-lightest line-height-body-2 fdr fac font-body-3xs text-base-darkest ${
           props.active ? "bg-base-lightest bg-chevron text-primary-dark text-bold" : ""

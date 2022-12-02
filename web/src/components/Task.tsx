@@ -43,17 +43,16 @@ export const Task = (props: Props): ReactElement => {
           </span>
         )}
         <div>
-          <Link href={`/tasks/${props.task.urlSlug}`} passHref>
-            <a
-              onClick={() => {
-                return analytics.event.roadmap_task_title.click.go_to_task();
-              }}
-              href={`/tasks/${props.task.urlSlug}`}
-              className={`usa-link margin-right-105 ${props.task.required ? "text-bold" : ""}`}
-              data-task={props.task.id}
-            >
-              {props.task.name}
-            </a>
+          <Link
+            href={`/tasks/${props.task.urlSlug}`}
+            passHref
+            onClick={() => {
+              return analytics.event.roadmap_task_title.click.go_to_task();
+            }}
+            className={`usa-link margin-right-105 ${props.task.required ? "text-bold" : ""}`}
+            data-task={props.task.id}
+          >
+            {props.task.name}
           </Link>
 
           {isTabletAndUp && renderRequiredLabel()}
