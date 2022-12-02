@@ -4091,7 +4091,7 @@ __metadata:
     "@mui/x-date-pickers": 5.0.8
     "@next/bundle-analyzer": 12.1.6
     "@next/eslint-plugin-next": 12.1.6
-    "@semantic-release/changelog": 6.0.1
+    "@semantic-release/changelog": 6.0.2
     "@semantic-release/git": 10.0.1
     "@serverless/typescript": 3.25.0
     "@storybook/addon-a11y": 6.5.13
@@ -7382,17 +7382,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@semantic-release/changelog@npm:6.0.1":
-  version: 6.0.1
-  resolution: "@semantic-release/changelog@npm:6.0.1"
+"@semantic-release/changelog@npm:6.0.2":
+  version: 6.0.2
+  resolution: "@semantic-release/changelog@npm:6.0.2"
   dependencies:
     "@semantic-release/error": ^3.0.0
     aggregate-error: ^3.0.0
-    fs-extra: ^9.0.0
+    fs-extra: ^11.0.0
     lodash: ^4.17.4
   peerDependencies:
     semantic-release: ">=18.0.0"
-  checksum: a7c999f20297f229ebb32dc65f56c3aee237d941b478a1c75f5e904382c66fc4054bf3da93b1f5382e0b689147a825665500332f70807bfed952d312d2f501ac
+  checksum: e116a1ac2528c960743ae952f0b2510713a18a9df1d7ea61dc0092380eb26c5e79c5b0b699f7c9cc71f5f27b49ccd736c46319363a737528454568b000016752
   languageName: node
   linkType: hard
 
