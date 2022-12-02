@@ -158,15 +158,15 @@ const getLegalStructureAddOns = (profileData: ProfileData): string[] => {
   const addOns = [];
   if (allowFormation(profileData.legalStructureId, profileData.businessPersona)) {
     addOns.push("formation");
-  } else if (profileData.businessPersona != "FOREIGN") {
+  } else if (profileData.businessPersona == "FOREIGN") {
     if (LookupLegalStructureById(profileData.legalStructureId).requiresPublicFiling) {
-      addOns.push("public-record-filing");
+      addOns.push("public-record-filing-foreign");
     } else if (LookupLegalStructureById(profileData.legalStructureId).hasTradeName) {
       addOns.push("trade-name");
     }
   } else {
     if (LookupLegalStructureById(profileData.legalStructureId).requiresPublicFiling) {
-      addOns.push("public-record-filing-foreign");
+      addOns.push("public-record-filing");
     } else if (LookupLegalStructureById(profileData.legalStructureId).hasTradeName) {
       addOns.push("trade-name");
     }

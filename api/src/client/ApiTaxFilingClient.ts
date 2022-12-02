@@ -132,7 +132,7 @@ export const ApiTaxFilingClient = (config: ApiConfig, logger: LogWriterType): Ta
         `TaxFiling Onboarding - NICUSA - Id:${logId} - Response received: ${JSON.stringify(response.data)}`
       );
       const apiResponse = response.data as ApiTaxFilingOnboardingResponse;
-      return apiResponse.StatusCode != 200 ? { state: "API_ERROR" } : { state: "SUCCESS" };
+      return apiResponse.StatusCode == 200 ? { state: "SUCCESS" } : { state: "API_ERROR" };
     } catch (error) {
       const axiosError = error as AxiosError;
       const apiResponse = axiosError.response?.data as ApiTaxFilingOnboardingResponse;

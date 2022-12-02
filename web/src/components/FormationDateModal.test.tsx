@@ -55,7 +55,7 @@ describe("<FormationDateModal />", () => {
       ...userData,
       profileData: {
         ...userData.profileData,
-        municipality: userData.profileData.municipality !== undefined ? municipality : undefined,
+        municipality: userData.profileData.municipality === undefined ? undefined : municipality,
       },
     };
 

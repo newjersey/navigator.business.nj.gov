@@ -110,7 +110,7 @@ export const LicenseStatusReceipt = (props: Props): ReactElement => {
   };
 
   const receiptItem = (item: LicenseStatusItem, index: number): ReactElement => {
-    const border = index !== 0 ? "border-top-1px border-base-light" : "";
+    const border = index === 0 ? "" : "border-top-1px border-base-light";
 
     return (
       <div className="padding-x-3 fdr fac width-100" data-testid={`item-${item.status}`} key={index}>

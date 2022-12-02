@@ -46,12 +46,12 @@ export const BusinessFormationTextBox = (props: Props): ReactElement => {
       <div className="flex flex-column mobile-lg:flex-row mobile-lg:flex-align-center margin-bottom-2">
         <div role="heading" aria-level={2} className="h3-styling margin-bottom-0">
           {props.title}{" "}
-          {!props.required ? (
+          {props.required ? (
+            <></>
+          ) : (
             <span className="text-normal font-body-lg">
               {props.optionalLabel ?? Config.businessFormationDefaults.optionalLabel}
             </span>
-          ) : (
-            <></>
           )}
         </div>
         <div className="mobile-lg:margin-left-auto flex mobile-lg:flex-justify-center">
@@ -92,7 +92,9 @@ export const BusinessFormationTextBox = (props: Props): ReactElement => {
                   }}
                 />
               </div>
-              {!props.required ? (
+              {props.required ? (
+                <></>
+              ) : (
                 <div className="grid-col-auto margin-x-2 margin-top-3 display-flex flex-column flex-justify-center">
                   <Button
                     style="tertiary"
@@ -109,8 +111,6 @@ export const BusinessFormationTextBox = (props: Props): ReactElement => {
                     </Icon>
                   </Button>
                 </div>
-              ) : (
-                <></>
               )}
             </div>
             <div className="text-base-dark margin-top-1 margin-bottom-2">
