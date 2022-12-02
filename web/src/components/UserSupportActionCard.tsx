@@ -31,7 +31,7 @@ export const UserSupportActionCard = (props: Props): ReactElement => {
           <div>{props.supportingText}</div>
         </div>
         <div>
-          <Link href={props.buttonLink} passHref>
+          <Link href={props.buttonLink} passHref legacyBehavior>
             <button
               className={`usa-button usa-button margin-right-0 btn-${props.buttonStyleProp} ${
                 props.intercom ? "intercom-button" : ""

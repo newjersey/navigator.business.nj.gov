@@ -77,23 +77,21 @@ export const FilingsCalendar = (props: Props): ReactElement => {
             .map((filing) => {
               return (
                 <div key={filing.identifier} className="line-height-1 margin-bottom-1" data-testid="filing">
-                  <Link href={`filings/${props.operateReferences[filing.identifier].urlSlug}`}>
-                    <a
-                      href={`filings/${props.operateReferences[filing.identifier].urlSlug}`}
-                      data-testid={filing.identifier.toLowerCase()}
-                      className="usa-link text-secondary-darker hover:text-secondary-darker text-no-underline"
-                    >
-                      <Tag backgroundColor="warning-light" isHover isRadiusMd isWrappingText>
-                        <span className="text-bold text-uppercase">
-                          {Config.dashboardDefaults.calendarFilingDueDateLabel}{" "}
-                          {parseDateWithFormat(filing.dueDate, defaultDateFormat).format("M/D")}
-                        </span>
-                        {" - "}
-                        <span className="text-no-uppercase text-underline">
-                          {props.operateReferences[filing.identifier].name}
-                        </span>
-                      </Tag>
-                    </a>
+                  <Link
+                    href={`filings/${props.operateReferences[filing.identifier].urlSlug}`}
+                    data-testid={filing.identifier.toLowerCase()}
+                    className="usa-link text-secondary-darker hover:text-secondary-darker text-no-underline"
+                  >
+                    <Tag backgroundColor="warning-light" isHover isRadiusMd isWrappingText>
+                      <span className="text-bold text-uppercase">
+                        {Config.dashboardDefaults.calendarFilingDueDateLabel}{" "}
+                        {parseDateWithFormat(filing.dueDate, defaultDateFormat).format("M/D")}
+                      </span>
+                      {" - "}
+                      <span className="text-no-uppercase text-underline">
+                        {props.operateReferences[filing.identifier].name}
+                      </span>
+                    </Tag>
                   </Link>
                 </div>
               );
@@ -154,16 +152,15 @@ export const FilingsCalendar = (props: Props): ReactElement => {
                     {parseDateWithFormat(filing.dueDate, defaultDateFormat).format("MMMM D, YYYY")}
                   </div>
                   <div>
-                    <Link href={`filings/${props.operateReferences[filing.identifier].urlSlug}`} passHref>
-                      <a
-                        href={`filings/${props.operateReferences[filing.identifier].urlSlug}`}
-                        onClick={() => {
-                          analytics.event.calendar_date.click.go_to_date_detail_screen();
-                        }}
-                      >
-                        {props.operateReferences[filing.identifier].name}{" "}
-                        {parseDateWithFormat(filing.dueDate, defaultDateFormat).format("YYYY")}
-                      </a>
+                    <Link
+                      href={`filings/${props.operateReferences[filing.identifier].urlSlug}`}
+                      passHref
+                      onClick={() => {
+                        analytics.event.calendar_date.click.go_to_date_detail_screen();
+                      }}
+                    >
+                      {props.operateReferences[filing.identifier].name}{" "}
+                      {parseDateWithFormat(filing.dueDate, defaultDateFormat).format("YYYY")}
                     </Link>
                   </div>
                 </div>

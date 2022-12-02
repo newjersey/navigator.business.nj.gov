@@ -26,7 +26,7 @@ export const NavSidebarUserSettings = (): ReactElement => {
     return (
       <>
         <div className="margin-bottom-2">
-          <Link href={ROUTES.profile} passHref>
+          <Link href={ROUTES.profile} passHref legacyBehavior>
             <Button
               style="tertiary"
               onClick={() => {
@@ -68,7 +68,7 @@ export const NavSidebarUserSettings = (): ReactElement => {
           </Button>
         </div>
         <div className="margin-bottom-2">
-          <Link href={ROUTES.profile} passHref>
+          <Link href={ROUTES.profile} passHref legacyBehavior>
             <Button
               style="tertiary"
               onClick={() => {
