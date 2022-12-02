@@ -239,9 +239,6 @@ describe("Formation - BillingStep", () => {
       expect(screen.getAllByRole("alert")[0]).toHaveTextContent(
         Config.businessFormationDefaults.requiredFieldsBulletPointLabel.paymentType
       );
-      expect(screen.getByTestId("payment-alert")).toHaveTextContent(
-        Config.businessFormationDefaults.paymentTypeErrorText
-      );
     });
   });
 
