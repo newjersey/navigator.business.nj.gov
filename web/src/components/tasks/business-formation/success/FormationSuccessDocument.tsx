@@ -23,9 +23,7 @@ export const FormationSuccessDocument = (props: Props): ReactElement => {
 
   return (
     <div className="flex-half-tablet">
-      {!props.downloadLink ? (
-        contents
-      ) : (
+      {props.downloadLink ? (
         <a
           data-testid={props.label}
           className="no-link-style text-base-darkest"
@@ -35,6 +33,8 @@ export const FormationSuccessDocument = (props: Props): ReactElement => {
         >
           {contents}
         </a>
+      ) : (
+        contents
       )}
     </div>
   );

@@ -11,8 +11,9 @@ import { ReactElement, useContext } from "react";
 export const Members = (): ReactElement => {
   const { state, setFormationFormData } = useContext(BusinessFormationContext);
   const isCorp = corpLegalStructures.includes(state.legalStructureId);
-  const defaultAddress = !isCorp
-    ? {
+  const defaultAddress = isCorp
+    ? undefined
+    : {
         name:
           state.formationFormData.members?.length === 0
             ? `${state.formationFormData.contactFirstName.trim()} ${state.formationFormData.contactLastName.trim()}`
@@ -23,8 +24,7 @@ export const Members = (): ReactElement => {
         addressLine2: state.formationFormData.addressLine2,
         addressState: state.formationFormData.addressState,
         addressZipCode: state.formationFormData.addressZipCode,
-      }
-    : undefined;
+      };
 
   const displayContent = isCorp
     ? {

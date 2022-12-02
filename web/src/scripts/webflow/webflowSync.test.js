@@ -255,7 +255,7 @@ describe("webflow syncing", () => {
     loadAllFundings.mockReturnValue(fundingMd);
     fs.readFileSync.mockImplementation((e) => {
       const original = jest.requireActual("fs");
-      return !e.includes("sectors.json") ? original.readFileSync(e) : JSON.stringify({ arrayOfSectors });
+      return e.includes("sectors.json") ? JSON.stringify({ arrayOfSectors }) : original.readFileSync(e);
     });
     axios.mockImplementation((request) => {
       if (request.url.includes("61c21253f7640b5f5ce829a4") && request.method == "get") {

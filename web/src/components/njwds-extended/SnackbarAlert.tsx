@@ -21,7 +21,7 @@ export const SnackbarAlert = (props: Props): ReactElement => {
       anchorOrigin={{ vertical: "top", horizontal: "center" }}
       open={props.isOpen}
       onClose={props.close}
-      autoHideDuration={props.autoHideDuration !== null ? 5000 : null}
+      autoHideDuration={props.autoHideDuration === null ? null : 5000}
       disableWindowBlurListener={true}
       ClickAwayListenerProps={{ mouseEvent: false, touchEvent: false }}
       {...props.snackBarProps}

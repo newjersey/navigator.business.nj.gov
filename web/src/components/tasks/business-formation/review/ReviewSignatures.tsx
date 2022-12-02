@@ -29,7 +29,7 @@ export const ReviewSignatures = (): ReactElement => {
       )}
       {state.formationFormData.signers?.map((signer, index) => {
         return (
-          <div key={`${signer}-${index}`} className={index !== 0 ? "margin-top-2" : ""}>
+          <div key={`${signer}-${index}`} className={index === 0 ? "" : "margin-top-2"}>
             <ReviewLineItem
               label={
                 isCorp
@@ -44,7 +44,7 @@ export const ReviewSignatures = (): ReactElement => {
       })}
       {state.formationFormData.incorporators?.map((signer, index) => {
         return (
-          <div key={`${signer}-${index}`} className={index !== 0 ? "margin-top-2" : ""}>
+          <div key={`${signer}-${index}`} className={index === 0 ? "" : "margin-top-2"}>
             <ReviewLineItem
               label={Config.businessFormationDefaults.reviewStepIncorporatorAddressLabel}
               value={getStringifiedAddress(

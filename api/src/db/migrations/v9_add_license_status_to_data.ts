@@ -11,15 +11,15 @@ export interface v9UserData {
 }
 
 export const migrate_v8_to_v9 = (v8Data: v8UserData): v9UserData => {
-  const licenseData: v9LicenseData | undefined = !v8Data.licenseSearchData
-    ? undefined
-    : {
+  const licenseData: v9LicenseData | undefined = v8Data.licenseSearchData
+    ? {
         nameAndAddress: v8Data.licenseSearchData.nameAndAddress,
         completedSearch: v8Data.licenseSearchData.completedSearch,
         lastCheckedStatus: parseDate(0).toISOString(),
         status: "UNKNOWN",
         items: [],
-      };
+      }
+    : undefined;
 
   return {
     ...v8Data,
