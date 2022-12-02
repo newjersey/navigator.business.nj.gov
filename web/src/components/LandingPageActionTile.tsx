@@ -5,10 +5,29 @@ import { ReactElement } from "react";
 interface Props {
   imgPath: string;
   tileText: string;
+  tileText2?: string;
   isPrimary?: boolean;
   dataTestId: string;
   onClick: () => void;
 }
+
+const setTileText = (props: Props, isMobile: boolean) => {
+  if (isMobile && props.isPrimary) {
+    return (
+      <div>
+        {props.tileText} {props.tileText2}
+      </div>
+    );
+  } else if (props.isPrimary) {
+    return (
+      <div>
+        {props.tileText} <br /> {props.tileText2}
+      </div>
+    );
+  } else {
+    return <div>{props.tileText}</div>;
+  }
+};
 
 export const LandingPageActionTile = (props: Props): ReactElement => {
   const isMobile = useMediaQuery(MediaQueries.isMobile);
@@ -22,7 +41,7 @@ export const LandingPageActionTile = (props: Props): ReactElement => {
       onClick={props.onClick}
     >
       <img src={props.imgPath} alt="" />
-      {props.tileText}
+      {setTileText(props, isMobile)}
     </button>
   );
 };

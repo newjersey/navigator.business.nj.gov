@@ -2,6 +2,7 @@ import { LandingPageActionTile } from "@/components/LandingPageActionTile";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { QUERIES, ROUTES, routeWithQuery } from "@/lib/domain-logic/routes";
 import { MediaQueries } from "@/lib/PageSizes";
+import analytics from "@/lib/utils/analytics";
 import { useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router";
 import { ReactElement } from "react";
@@ -10,6 +11,11 @@ export const LandingPageTiles = (): ReactElement => {
   const router = useRouter();
   const isMobile = useMediaQuery(MediaQueries.isMobile);
   const { Config } = useConfig();
+
+  const routeToOnboarding = () => {
+    router.push(ROUTES.onboarding);
+    analytics.event.landing_page_hero_get_started.click.go_to_onboarding();
+  };
 
   const setFlowToStartingAndRouteToIndustry = () => {
     routeWithQuery(router, {
@@ -33,9 +39,10 @@ export const LandingPageTiles = (): ReactElement => {
     <div className={`${isMobile ? "fdc fjc fac" : "fdr"}`}>
       <LandingPageActionTile
         imgPath={"/img/getStarted-icon.svg"}
-        tileText={Config.landingPage.landingPageTile1Text}
+        tileText={Config.landingPage.landingPageTile1Line1Text}
+        tileText2={Config.landingPage.landingPageTile1Line2Text}
         dataTestId={"get-started-tile"}
-        onClick={setFlowToStartingAndRouteToIndustry}
+        onClick={routeToOnboarding}
         isPrimary
       />
       <LandingPageActionTile
