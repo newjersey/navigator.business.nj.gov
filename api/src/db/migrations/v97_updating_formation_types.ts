@@ -40,17 +40,17 @@ export const migrate_v96_to_v97 = (v96Data: v96UserData): v97UserData => {
         foreignGoodStandingFile: undefined,
         foreignStateOfFormation: undefined,
         agentOfficeAddressMunicipality: undefined,
-        signers: !["s-corporation", "c-corporation", "limited-partnership"].includes(
+        signers: ["s-corporation", "c-corporation", "limited-partnership"].includes(
           props.profileData.legalStructureId ?? ""
         )
-          ? signers.map((signer) => {
+          ? undefined
+          : signers.map((signer) => {
               return {
                 name: signer.name,
                 signature: signer.signature,
                 title: v97businessSignerTypeMap[props.profileData.legalStructureId ?? ""][0],
               };
-            })
-          : undefined,
+            }),
         incorporators: ["s-corporation", "c-corporation", "limited-partnership"].includes(
           props.profileData.legalStructureId ?? ""
         )

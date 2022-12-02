@@ -13,9 +13,9 @@ export const selfRegRouterFactory = (
     const userData = req.body as UserData;
 
     try {
-      const selfRegResponse = await (!userData.user.myNJUserKey
-        ? selfRegClient.grant(userData.user)
-        : selfRegClient.resume(userData.user.myNJUserKey));
+      const selfRegResponse = await (userData.user.myNJUserKey
+        ? selfRegClient.resume(userData.user.myNJUserKey)
+        : selfRegClient.grant(userData.user));
       const updatedUserData = await updateMyNJKey(userData, selfRegResponse.myNJUserKey);
       res.json({ authRedirectURL: selfRegResponse.authRedirectURL, userData: updatedUserData });
     } catch (error) {

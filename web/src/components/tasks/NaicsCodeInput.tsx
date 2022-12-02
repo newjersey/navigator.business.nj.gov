@@ -110,10 +110,10 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
   const handleChange = (value: string): void => {
     setNaicsCode(value);
     if (value.length === LENGTH) {
-      if (!getCode(value)) {
-        setIsInvalid("invalid");
-      } else {
+      if (getCode(value)) {
         setIsInvalid(undefined);
+      } else {
+        setIsInvalid("invalid");
       }
     } else {
       setIsInvalid(undefined);

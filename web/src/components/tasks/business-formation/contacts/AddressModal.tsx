@@ -73,13 +73,13 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
   );
 
   useEffect(() => {
-    if (props.index !== undefined) {
-      setAddressData({ ...props.addressData[props.index] });
-      setAddressErrorMap(createAddressErrorMap(false));
-    } else {
+    if (props.index === undefined) {
       setAddressData(props.createEmptyAddress());
       setUseDefaultAddress(false);
       setAddressErrorMap(createAddressErrorMap());
+    } else {
+      setAddressData({ ...props.addressData[props.index] });
+      setAddressErrorMap(createAddressErrorMap(false));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.open]);
