@@ -64,7 +64,7 @@
     "fast-deep-equal": "3.1.3",
     "focus-trap-react": "10.0.1",
     "gray-matter": "4.0.3",
-    "helmet": "6.0.0",
+    "helmet": "6.0.1",
     "js-yaml": "4.1.0",
     "jsonwebtoken": "8.5.1",
     "lodash": "4.17.21",
@@ -99,7 +99,7 @@
   },
   "devDependencies": {
     "@aws-sdk/types": "3.215.0",
-    "@babel/core": "7.20.2",
+    "@babel/core": "7.20.5",
     "@businessnjgovnavigator/shared": "*",
     "@commitlint/cli": "17.3.0",
     "@commitlint/config-conventional": "17.3.0",
