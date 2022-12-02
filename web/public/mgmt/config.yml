@@ -2970,7 +2970,8 @@ collections:
               - { label: Card 3 - Header Line 3, name: card3HeaderLine2, widget: string }
               - { label: Card 3 - Supporting Text, name: card3SupportingText, widget: text }
               - { label: Card 3 - Button Text, name: card3Button, widget: string }
-              - { label: Landing Page - Tile 1 Text, name: landingPageTile1Text, widget: string }
+              - { label: Landing Page - Tile 1 Line 1 Text, name: landingPageTile1Line1Text, widget: string }
+              - { label: Landing Page - Tile 1 Line 2 Text, name: landingPageTile1Line2Text, widget: string }
               - { label: Landing Page - Tile 2 Text, name: landingPageTile2Text, widget: string }
               - { label: Landing Page - Tile 4 Text, name: landingPageTile4Text, widget: string }
               - { label: Landing Page - Tile 5 Text, name: landingPageTile5Text, widget: string }
