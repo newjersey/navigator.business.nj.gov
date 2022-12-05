@@ -1,18 +1,22 @@
 ---
 filename: nj-brownfields-assistance
-urlSlug: nj-brownfields-assistance
 name: NJ Brownfields Assistance Center @ NJIT
+urlSlug: nj-brownfields-assistance
 id: nj-brownfields-assistance-center-njit
-callToActionLink: www.njit.edu/njbrownfields
+openDate: ""
+dueDate: ""
+descriptionMd: The NJ Brownfields Assistance Center provides free guidance,
+  tools, and resources to New Jersey county and municipal governments interested
+  in redeveloping and reclaiming brownfield sites.
+callToActionLink: https://www.njit.edu/njbrownfields/
 callToActionText: Learn More
 fundingType: technical assistance
+programFrequency: ongoing
+status: rolling application
 programPurpose: In State
 agency:
   - NJEDA
 agencyContact: ""
-publishStageArchive: ""
-status: rolling application
-programFrequency: ongoing
 businessStage: both
 employeesRequired: n/a
 homeBased: no
@@ -21,9 +25,7 @@ preferenceForOpportunityZone: ""
 county:
   - All
 sector: []
-openDate: ""
-dueDate: ""
-descriptionMd: The NJ Brownfields Assistance Center provides free guidance, tools, and resources to New Jersey county and municipal governments interested in redeveloping and reclaiming brownfield sites.
+publishStageArchive: ""
 ---
 
 The NJ Brownfields Assistance Center provides free guidance, tools, and resources to New Jersey county and municipal governments interested in redeveloping and reclaiming brownfield sites.
