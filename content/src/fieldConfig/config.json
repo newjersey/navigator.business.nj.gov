@@ -280,7 +280,6 @@
     "addressModalZipCodeLabel": "**Zip Code**",
     "reviewStepBusinessSuffixLabel": "`**Business Designator:**|business-designator`",
     "addressModalBackButtonText": "Cancel",
-    "paymentTypeErrorMessage": "Select a payment method.",
     "reviewStepContactFirstName": "First Name",
     "provisionsAddAnotherButtonText": "Add a Provision"
   },

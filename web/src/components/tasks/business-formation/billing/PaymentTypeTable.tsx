@@ -106,7 +106,7 @@ export const PaymentTypeTable = (): ReactElement => {
                 htmlFor="creditCardRadio"
                 className={
                   hasError
-                    ? "text-error"
+                    ? "text-error-dark"
                     : state.formationFormData.paymentType === "CC"
                     ? "text-success-dark text-bold"
                     : ""
@@ -140,7 +140,7 @@ export const PaymentTypeTable = (): ReactElement => {
                 htmlFor="paymentTypeACHRadio"
                 className={
                   doesFieldHaveError(FIELD)
-                    ? "text-error"
+                    ? "text-error-dark"
                     : state.formationFormData.paymentType === "ACH"
                     ? "text-success-dark text-bold"
                     : ""

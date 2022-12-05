@@ -1,5 +1,4 @@
 import { Content } from "@/components/Content";
-import { Alert } from "@/components/njwds-extended/Alert";
 import { FormationChooseDocuments } from "@/components/tasks/business-formation/billing/FormationChooseDocuments";
 import { FormationChooseNotifications } from "@/components/tasks/business-formation/billing/FormationChooseNotifications";
 import { PaymentTypeTable } from "@/components/tasks/business-formation/billing/PaymentTypeTable";
@@ -66,11 +65,6 @@ export const BillingStep = (): ReactElement => {
       </div>
       <hr className="margin-bottom-2" />
       <Content>{state.displayContent.services.contentMd}</Content>
-      {doesFieldHaveError("paymentType") && (
-        <Alert dataTestid="payment-alert" variant="error">
-          {Config.businessFormationDefaults.paymentTypeErrorMessage}
-        </Alert>
-      )}
       <FormationChooseDocuments />
 
       <PaymentTypeTable />

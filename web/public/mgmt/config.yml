@@ -2168,11 +2168,6 @@ collections:
                   name: paymentTypeTableTotalCostLabel,
                   widget: string,
                 }
-              - {
-                  label: Payment Type - Error Text when Missing,
-                  name: paymentTypeErrorMessage,
-                  widget: string,
-                }
               - { label: Previous Button Text, name: previousButtonText, widget: string }
               - { label: ProvisionsTitle, name: provisionsTitle, widget: string }
               - { label: ProvisionsOptionalLabel, name: provisionsOptionalLabel, widget: string }
