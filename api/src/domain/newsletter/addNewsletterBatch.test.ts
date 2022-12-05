@@ -21,6 +21,7 @@ describe("addNewsletterBatch", () => {
     stubUserDataQlClient = {
       getNeedNewsletterUsers: jest.fn(),
       getNeedToAddToUserTestingUsers: jest.fn(),
+      getNeedTaxIdEncryptionUsers: jest.fn(),
       search: jest.fn(),
     };
     addNewsletter = addNewsletterFactory(stubNewsletterClient);

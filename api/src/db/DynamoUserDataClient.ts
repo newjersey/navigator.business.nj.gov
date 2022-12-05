@@ -61,10 +61,16 @@ export const DynamoQlUserDataClient = (db: DynamoDBClient, tableName: string): U
     return search(statement);
   };
 
+  const getNeedTaxIdEncryptionUsers = () => {
+    const statement = `SELECT data FROM "${tableName}" WHERE data["profileData"].encryptedTaxId IS MISSING AND data["profileData"].taxId IS NOT MISSING`;
+    return search(statement);
+  };
+
   return {
     search,
     getNeedNewsletterUsers,
     getNeedToAddToUserTestingUsers,
+    getNeedTaxIdEncryptionUsers,
   };
 };
 
