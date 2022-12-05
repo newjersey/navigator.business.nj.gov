@@ -1,18 +1,25 @@
 ---
 filename: New Jersey’s Clean Energy Program – Combined Heat & Power - Fuel Cells
-urlSlug: njcep-chpfc
 name: New Jersey’s Clean Energy Program – Combined Heat & Power - Fuel Cells
+urlSlug: njcep-chpfc
 id: njcep-chpfc
-callToActionLink: "www.NJCleanEnergy.com/CHP "
+openDate: ""
+dueDate: ""
+descriptionMd: The Combined Heat and Power - Fuel Cells (CHP-FC) program aims to
+  enhance energy efficiency through on-site power generation with recovery and
+  productive use of waste heat, and to reduce existing and new demands to the
+  electric power grid. The program plans to do this by providing generous
+  financial incentives for Combined Heat & Power (CHP) and Fuel Cell (FC)
+  installations.
+callToActionLink: "https://www.NJCleanEnergy.com/CHP "
 callToActionText: Learn more
 fundingType: grant
+programFrequency: ongoing
+status: rolling application
 programPurpose: In State
 agency:
   - NJ Board of Public Utilities
 agencyContact: CHP@NJCleanEnergy.com
-publishStageArchive: ""
-status: rolling application
-programFrequency: ongoing
 businessStage: both
 employeesRequired: n/a
 homeBased: no
@@ -25,9 +32,7 @@ sector:
   - construction
   - real-estate
   - other-services
-openDate: ""
-dueDate: ""
-descriptionMd: The Combined Heat and Power - Fuel Cells (CHP-FC) program aims to enhance energy efficiency through on-site power generation with recovery and productive use of waste heat, and to reduce existing and new demands to the electric power grid. The program plans to do this by providing generous financial incentives for Combined Heat & Power (CHP) and Fuel Cell (FC) installations.
+publishStageArchive: ""
 ---
 
 The Combined Heat and Power - Fuel Cells (CHP-FC) program aims to enhance energy efficiency through on-site power generation with recovery and productive use of waste heat, and to reduce existing and new demands to the electric power grid. The program plans to do this by providing generous financial incentives for Combined Heat & Power (CHP) and Fuel Cell (FC) installations.
