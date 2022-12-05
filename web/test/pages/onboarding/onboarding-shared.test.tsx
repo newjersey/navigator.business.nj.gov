@@ -434,7 +434,7 @@ describe("onboarding - shared", () => {
       const { page } = renderPage({});
 
       expect(screen.getByTestId("step-2")).toBeInTheDocument();
-      const { transactionsInNJ } = Config.profileDefaults.FOREIGN.foreignBusinessTypeIds.optionContent;
+      const { transactionsInNJ } = Config.profileDefaults.fields.foreignBusinessTypeIds.default.optionContent;
 
       page.checkByLabelText(transactionsInNJ);
 

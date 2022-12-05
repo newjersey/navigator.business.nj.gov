@@ -275,7 +275,9 @@ describe("<FilingsCalendarTaxAccess />", () => {
     fireEvent.click(screen.getByTestId("get-tax-access"));
     fireEvent.click(screen.getByTestId("modal-button-primary"));
     expect(screen.getByRole("alert")).toHaveTextContent(Config.taxCalendar.ModalErrorHeader);
-    expect(screen.getByText(Config.profileDefaults[flow].businessName.errorTextRequired)).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.profileDefaults.fields.businessName.default.errorTextRequired)
+    ).toBeInTheDocument();
     expect(mockApi.postTaxRegistrationOnboarding).not.toHaveBeenCalled();
   });
 
@@ -292,7 +294,9 @@ describe("<FilingsCalendarTaxAccess />", () => {
     fireEvent.change(screen.getByLabelText("Business name"), { target: { value: "" } });
     fireEvent.blur(screen.getByLabelText("Business name"));
     expect(screen.queryByRole("alert")).not.toBeInTheDocument();
-    expect(screen.getByText(Config.profileDefaults[flow].businessName.errorTextRequired)).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.profileDefaults.fields.businessName.default.errorTextRequired)
+    ).toBeInTheDocument();
   });
 
   it("displays error when the taxId field is empty on blur", () => {
@@ -308,7 +312,9 @@ describe("<FilingsCalendarTaxAccess />", () => {
     fireEvent.change(screen.getByLabelText("Tax id"), { target: { value: "" } });
     fireEvent.blur(screen.getByLabelText("Tax id"));
     expect(screen.queryByRole("alert")).not.toBeInTheDocument();
-    expect(screen.getByText(Config.profileDefaults[flow].taxId.errorTextRequired)).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.profileDefaults.fields.taxId.default.errorTextRequired)
+    ).toBeInTheDocument();
   });
 
   it("displays in-line error and alert when taxId field is invalid and save button is clicked", () => {
@@ -326,9 +332,11 @@ describe("<FilingsCalendarTaxAccess />", () => {
     expect(screen.getByRole("alert")).toHaveTextContent(Config.taxCalendar.ModalTaxErrorName);
     expect(screen.getByRole("alert")).not.toHaveTextContent(Config.taxCalendar.ModalBusinessFieldErrorName);
     expect(
-      screen.queryByText(Config.profileDefaults[flow].businessName.errorTextRequired)
+      screen.queryByText(Config.profileDefaults.fields.businessName.default.errorTextRequired)
     ).not.toBeInTheDocument();
-    expect(screen.getByText(Config.profileDefaults[flow].taxId.errorTextRequired)).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.profileDefaults.fields.taxId.default.errorTextRequired)
+    ).toBeInTheDocument();
     expect(mockApi.postTaxRegistrationOnboarding).not.toHaveBeenCalled();
   });
 
@@ -342,8 +350,12 @@ describe("<FilingsCalendarTaxAccess />", () => {
     expect(screen.getByRole("alert")).toHaveTextContent(Config.taxCalendar.ModalErrorHeader);
     expect(screen.getByRole("alert")).toHaveTextContent(Config.taxCalendar.ModalBusinessFieldErrorName);
     expect(screen.getByRole("alert")).not.toHaveTextContent(Config.taxCalendar.ModalTaxErrorName);
-    expect(screen.getByText(Config.profileDefaults[flow].businessName.errorTextRequired)).toBeInTheDocument();
-    expect(screen.queryByText(Config.profileDefaults[flow].taxId.errorTextRequired)).not.toBeInTheDocument();
+    expect(
+      screen.getByText(Config.profileDefaults.fields.businessName.default.errorTextRequired)
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByText(Config.profileDefaults.fields.taxId.default.errorTextRequired)
+    ).not.toBeInTheDocument();
     expect(mockApi.postTaxRegistrationOnboarding).not.toHaveBeenCalled();
   });
 
@@ -357,8 +369,12 @@ describe("<FilingsCalendarTaxAccess />", () => {
     expect(screen.getByRole("alert")).toHaveTextContent(Config.taxCalendar.ModalErrorHeader);
     expect(screen.getByRole("alert")).toHaveTextContent(Config.taxCalendar.ModalBusinessFieldErrorName);
     expect(screen.getByRole("alert")).toHaveTextContent(Config.taxCalendar.ModalTaxErrorName);
-    expect(screen.getByText(Config.profileDefaults[flow].businessName.errorTextRequired)).toBeInTheDocument();
-    expect(screen.getByText(Config.profileDefaults[flow].taxId.errorTextRequired)).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.profileDefaults.fields.businessName.default.errorTextRequired)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.profileDefaults.fields.taxId.default.errorTextRequired)
+    ).toBeInTheDocument();
     expect(mockApi.postTaxRegistrationOnboarding).not.toHaveBeenCalled();
   });
 

@@ -2,7 +2,7 @@ import { Content } from "@/components/Content";
 import { OnboardingIndustry } from "@/components/onboarding/OnboardingIndustry";
 import { getMergedConfig } from "@/contexts/configContext";
 import { EssentialQuestions } from "@/lib/domain-logic/essentialQuestions";
-import { createProfileFieldErrorMap, FlowType } from "@/lib/types/types";
+import { createProfileFieldErrorMap } from "@/lib/types/types";
 import { capitalizeFirstLetter, kebabSnakeSentenceToCamelCase } from "@/lib/utils/helpers";
 import {
   randomFilteredIndustry,
@@ -91,11 +91,11 @@ describe("<OnboardingIndustry />", () => {
 
       businessPersonas.map((persona) => {
         const choices = industrySpecificDataChoices[el.fieldName];
-        const flowConfig = Config.profileDefaults[persona as FlowType];
-        const fieldContent = flowConfig[
+        const flowConfig = Config.profileDefaults.fields;
+        const fieldContent = Config.profileDefaults.fields[
           el.contentFieldName ?? (el.fieldName as keyof typeof flowConfig)
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        ] as any;
+        ].default as any;
 
         const chooseRadioWithContent = (choice: string) => {
           fireEvent.click(

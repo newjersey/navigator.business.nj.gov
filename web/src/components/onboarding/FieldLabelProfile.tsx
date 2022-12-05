@@ -1,8 +1,7 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { Content } from "@/components/Content";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { ProfileContentField } from "@/lib/types/types";
 import { useContext } from "react";
 
@@ -15,14 +14,20 @@ export const FieldLabelProfile = (props: Props) => {
   const { Config } = useConfig();
   const { state } = useContext(ProfileDataContext);
 
-  const unboldedHeader = (Config.profileDefaults[state.flow][props.fieldName] as any).headerNotBolded;
-  const description = (Config.profileDefaults[state.flow][props.fieldName] as any).description;
-  const altDescription = (Config.profileDefaults[state.flow][props.fieldName] as any).altDescription;
+  const contentFromConfig = getProfileConfig({
+    config: Config,
+    persona: state.flow,
+    fieldName: props.fieldName,
+  });
+
+  const unboldedHeader = contentFromConfig.headerNotBolded;
+  const description = contentFromConfig.description;
+  const altDescription = contentFromConfig.altDescription;
 
   return (
     <>
       <div role="heading" aria-level={3} className="h3-styling margin-bottom-2">
-        {(Config.profileDefaults[state.flow][props.fieldName] as any).header}
+        {contentFromConfig.header}
         {unboldedHeader && (
           <>
             {" "}
@@ -30,7 +35,8 @@ export const FieldLabelProfile = (props: Props) => {
           </>
         )}
       </div>
-      {description && <Content>{props.isAltDescriptionDisplayed ? altDescription : description}</Content>}
+      {props.isAltDescriptionDisplayed && altDescription && <Content>{altDescription}</Content>}
+      {!props.isAltDescriptionDisplayed && description && <Content>{description}</Content>}
     </>
   );
 };

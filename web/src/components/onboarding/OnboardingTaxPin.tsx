@@ -1,6 +1,8 @@
 import { OnboardingNumericField } from "@/components/onboarding/OnboardingNumericField";
+import { ConfigType } from "@/contexts/configContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import { ReactElement, ReactNode, useContext } from "react";
 
@@ -16,6 +18,12 @@ export const OnboardingTaxPin = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const { state } = useContext(ProfileDataContext);
 
+  const contentFromConfig: ConfigType["profileDefaults"]["fields"]["taxPin"]["default"] = getProfileConfig({
+    config: Config,
+    persona: state.flow,
+    fieldName: fieldName,
+  });
+
   return (
     <>
       <OnboardingNumericField
@@ -24,7 +32,7 @@ export const OnboardingTaxPin = (props: Props): ReactElement => {
         fieldName={fieldName}
         maxLength={4}
         minLength={4}
-        validationText={Config.profileDefaults[state.flow].taxPin.errorTextRequired}
+        validationText={contentFromConfig.errorTextRequired}
         handleChange={props.handleChangeOverride}
       />
       {props.children}

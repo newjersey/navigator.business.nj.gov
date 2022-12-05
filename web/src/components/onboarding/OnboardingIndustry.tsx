@@ -2,9 +2,11 @@ import { FieldLabelProfile } from "@/components/onboarding/FieldLabelProfile";
 import { IndustryDropdown } from "@/components/onboarding/IndustryDropdown";
 import { OnboardingEmploymentAgency } from "@/components/onboarding/OnboardingEmploymentAgency";
 import { OnboardingHomeContractor } from "@/components/onboarding/OnboardingHomeContractor";
+import { ConfigType } from "@/contexts/configContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { EssentialQuestions } from "@/lib/domain-logic/essentialQuestions";
+import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { ProfileContentField, ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import { IndustrySpecificData, industrySpecificDataChoices } from "@businessnjgovnavigator/shared";
 import { FocusEvent, ReactElement, useContext } from "react";
@@ -18,6 +20,14 @@ interface Props {
 export const OnboardingIndustry = (props: Props): ReactElement => {
   const { state } = useContext(ProfileDataContext);
   const { Config } = useConfig();
+  const fieldName = "industryId";
+
+  const contentFromConfig: ConfigType["profileDefaults"]["fields"]["industryId"]["default"] =
+    getProfileConfig({
+      config: Config,
+      persona: state.flow,
+      fieldName: fieldName,
+    });
 
   const onValidation = (event: FocusEvent<HTMLInputElement>): void => {
     const valid = event.target.value.length > 0;
@@ -27,8 +37,6 @@ export const OnboardingIndustry = (props: Props): ReactElement => {
   const handleChange = (): void => {
     return props.onValidation(fieldName, false);
   };
-
-  const fieldName = "industryId";
 
   const getEssentialQuestions = (industryId: string | undefined) => {
     return EssentialQuestions.filter((i) => {
@@ -51,7 +59,7 @@ export const OnboardingIndustry = (props: Props): ReactElement => {
       <IndustryDropdown
         error={props.fieldStates[fieldName].invalid}
         validationLabel="Error"
-        validationText={Config.profileDefaults[state.flow].industryId.errorTextRequired}
+        validationText={contentFromConfig.errorTextRequired}
         handleChange={handleChange}
         onValidation={onValidation}
       />

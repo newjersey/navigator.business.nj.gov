@@ -1,7 +1,7 @@
 import { Content } from "@/components/Content";
 import { CannabisApplyForLicenseTask } from "@/components/tasks/cannabis/CannabisApplyForLicenseTask";
 import { ConfigContext } from "@/contexts/configContext";
-import { getMetadataFromSlug, PreviewProps } from "@/lib/cms/helpers/previewHelpers";
+import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { generateProfileData, generateTask, generateUserData } from "@/test/factories";
@@ -10,7 +10,7 @@ const CannabisLicensePreview = (props: PreviewProps) => {
   const { config, setConfig } = usePreviewConfig(props);
   const ref = usePreviewRef(props);
 
-  const { tab } = getMetadataFromSlug(props.entry.toJS().slug);
+  const [, tab] = props.entry.toJS().slug.split("-");
   const isAnnual = props.entry.toJS().slug.includes("Annual");
   const isConditional = props.entry.toJS().slug.includes("Conditional");
 

@@ -1,11 +1,20 @@
+import { ConfigType } from "@/contexts/configContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import React, { ReactElement, useContext } from "react";
 
 export const OnboardingLocationInNewJersey = (): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { Config } = useConfig();
+
+  const contentFromConfig: ConfigType["profileDefaults"]["fields"]["nexusLocationInNewJersey"]["default"] =
+    getProfileConfig({
+      config: Config,
+      persona: state.flow,
+      fieldName: "nexusLocationInNewJersey",
+    });
 
   const handleSelection = (event: React.ChangeEvent<{ name?: string; value: unknown }>) => {
     let hasLocationInNJ;
@@ -38,7 +47,7 @@ export const OnboardingLocationInNewJersey = (): ReactElement => {
               data-testid="location-in-new-jersey-true"
               value={true}
               control={<Radio color="primary" />}
-              label={Config.profileDefaults[state.flow].nexusLocationInNewJersey.radioButtonYesText}
+              label={contentFromConfig.radioButtonYesText}
             />
             <FormControlLabel
               style={{ marginRight: "3rem" }}
@@ -46,7 +55,7 @@ export const OnboardingLocationInNewJersey = (): ReactElement => {
               data-testid="location-in-new-jersey-false"
               value={false}
               control={<Radio color="primary" />}
-              label={Config.profileDefaults[state.flow].nexusLocationInNewJersey.radioButtonNoText}
+              label={contentFromConfig.radioButtonNoText}
             />
           </RadioGroup>
         </FormControl>

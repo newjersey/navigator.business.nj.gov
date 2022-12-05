@@ -1,16 +1,26 @@
 import { Content } from "@/components/Content";
 import { FieldLabelProfile } from "@/components/onboarding/FieldLabelProfile";
+import { ConfigType } from "@/contexts/configContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
+import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { lookupNaicsCode } from "@/lib/domain-logic/lookupNaicsCode";
-import { getFlow, getTaskFromRoadmap } from "@/lib/utils/helpers";
+import { getTaskFromRoadmap } from "@/lib/utils/helpers";
 import { ReactElement, useContext, useMemo } from "react";
 
 export const ProfileNaicsCode = (): ReactElement => {
   const { state } = useContext(ProfileDataContext);
   const { Config } = useConfig();
   const { roadmap } = useRoadmap();
+
+  const contentFromConfig: ConfigType["profileDefaults"]["fields"]["naicsCode"]["default"] = getProfileConfig(
+    {
+      config: Config,
+      persona: state.flow,
+      fieldName: "naicsCode",
+    }
+  );
 
   const naicsTaskUrl = useMemo(() => {
     const urlSlug = getTaskFromRoadmap(roadmap, "determine-naics-code")?.urlSlug ?? "";
@@ -22,9 +32,7 @@ export const ProfileNaicsCode = (): ReactElement => {
       <div className="flex flex-row">
         <FieldLabelProfile fieldName="naicsCode" />
         <a className="margin-left-2" href={naicsTaskUrl}>
-          {state.profileData.naicsCode
-            ? Config.profileDefaults[getFlow(state.profileData)].naicsCode.editText
-            : Config.profileDefaults[getFlow(state.profileData)].naicsCode.addText}
+          {state.profileData.naicsCode ? contentFromConfig.editText : contentFromConfig.addText}
         </a>
       </div>
       {state.profileData.naicsCode && (
@@ -38,7 +46,7 @@ export const ProfileNaicsCode = (): ReactElement => {
       )}
       {!state.profileData.naicsCode && (
         <div data-testid="not-entered">
-          <Content>{Config.profileDefaults[getFlow(state.profileData)].naicsCode.notEnteredText}</Content>
+          <Content>{contentFromConfig.notEnteredText}</Content>
         </div>
       )}
     </>

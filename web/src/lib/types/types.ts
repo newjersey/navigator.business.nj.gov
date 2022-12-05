@@ -16,7 +16,6 @@ import { emptyBusinessUser } from "@businessnjgovnavigator/shared/businessUser";
 import { BusinessPersona, emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { TaxFilingData } from "@businessnjgovnavigator/shared/taxFiling";
 import { SectionType, TaskProgress } from "@businessnjgovnavigator/shared/userData";
-import { merge } from "lodash";
 
 // returns all keys in an object of a type
 // e.g. KeysOfType<Task, boolean> will give all keys in the Task that have boolean types
@@ -135,11 +134,7 @@ export type FormationFieldErrorState = {
   label: string;
 };
 
-const profileFieldsFromConfig = merge(
-  getMergedConfig().profileDefaults["STARTING"],
-  getMergedConfig().profileDefaults["OWNING"],
-  getMergedConfig().profileDefaults["FOREIGN"]
-);
+export const profileFieldsFromConfig = getMergedConfig().profileDefaults.fields;
 
 export type IndustrySpecificDataAddOnFields = "interstateLogistics" | "interstateMoving";
 
