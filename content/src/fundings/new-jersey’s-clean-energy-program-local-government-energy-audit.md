@@ -1,18 +1,27 @@
 ---
 filename: New Jersey’s Clean Energy Program - Local Government Energy Audit
-urlSlug: njcep-lgea
 name: New Jersey’s Clean Energy Program - Local Government Energy Audit
+urlSlug: njcep-lgea
 id: njcep-lgea
-callToActionLink: www.NJCleanEnergy.com/LGEA
+openDate: ""
+dueDate: ""
+descriptionMd: The Local Government Energy Audit (LGEA) program provides an
+  energy audit at no cost for eligible facilities owned by municipalities,
+  school districts, 501(c)(3) non-profits, and other local and state government
+  entities (applicants). The goal of the energy audit is to provide applicants
+  with information on how their facilities use energy, identify energy
+  conservation measures that can reduce energy, put applicants in a position to
+  implement these measures, and guide applicants towards financial incentives
+  offered by utilities and state.
+callToActionLink: https://www.NJCleanEnergy.com/LGEA
 callToActionText: Learn more
 fundingType: technical assistance
+programFrequency: ongoing
+status: rolling application
 programPurpose: In State
 agency:
   - NJ Board of Public Utilities
 agencyContact: LGEA@NJCleanEnergy.com
-publishStageArchive: Do Not Publish
-status: rolling application
-programFrequency: ongoing
 businessStage: both
 employeesRequired: n/a
 homeBased: no
@@ -21,9 +30,7 @@ preferenceForOpportunityZone: no
 county:
   - All
 sector: []
-openDate: ""
-dueDate: ""
-descriptionMd: The Local Government Energy Audit (LGEA) program provides an energy audit at no cost for eligible facilities owned by municipalities, school districts, 501(c)(3) non-profits, and other local and state government entities (applicants). The goal of the energy audit is to provide applicants with information on how their facilities use energy, identify energy conservation measures that can reduce energy, put applicants in a position to implement these measures, and guide applicants towards financial incentives offered by utilities and state.
+publishStageArchive: Do Not Publish
 ---
 
 The Local Government Energy Audit (LGEA) program provides an energy audit at no cost for eligible facilities owned by municipalities, school districts, 501(c)(3) non-profits, and other local and state government entities (applicants). The goal of the energy audit is to provide applicants with information on how their facilities use energy, identify energy conservation measures that can reduce energy, put applicants in a position to implement these measures, and guide applicants towards financial incentives offered by utilities and state.
