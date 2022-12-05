@@ -1,8 +1,7 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { Content } from "@/components/Content";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { ProfileContentField } from "@/lib/types/types";
 import { useContext } from "react";
 
@@ -11,12 +10,18 @@ interface Props {
   isAltDescriptionDisplayed?: boolean;
 }
 
-export const FieldLabelDeferred = (props: Props) => {
+export const FieldLabelDescriptionOnly = (props: Props) => {
   const { Config } = useConfig();
   const { state } = useContext(ProfileDataContext);
 
-  const description = (Config.profileDefaults[state.flow][props.fieldName] as any).description;
-  const altDescription = (Config.profileDefaults[state.flow][props.fieldName] as any).altDescription;
+  const contentFromConfig = getProfileConfig({
+    config: Config,
+    persona: state.flow,
+    fieldName: props.fieldName,
+  });
+
+  const description = contentFromConfig.description;
+  const altDescription = contentFromConfig.altDescription;
 
   return (
     <>

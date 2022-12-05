@@ -1,11 +1,13 @@
 import { MenuOptionSelected } from "@/components/MenuOptionSelected";
 import { MenuOptionUnselected } from "@/components/MenuOptionUnselected";
+import { ConfigType } from "@/contexts/configContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import {
   getIsApplicableToFunctionByFieldName,
   getResetIndustrySpecificData,
 } from "@/lib/domain-logic/essentialQuestions";
+import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
 import { splitAndBoldSearchText, templateEval } from "@/lib/utils/helpers";
 import {
@@ -32,6 +34,13 @@ export const IndustryDropdown = (props: Props): ReactElement => {
   const [searchText, setSearchText] = useState<string>("");
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { Config } = useConfig();
+
+  const contentFromConfig: ConfigType["profileDefaults"]["fields"]["industryId"]["default"] =
+    getProfileConfig({
+      config: Config,
+      persona: state.flow,
+      fieldName: "industryId",
+    });
 
   const IndustriesOrdered: Industry[] = orderBy(
     Industries,
@@ -109,9 +118,7 @@ export const IndustryDropdown = (props: Props): ReactElement => {
             {searchText.length > 0 && (
               <div className="padding-2" data-testid="search-affirmation">
                 <Content>
-                  {templateEval(Config.profileDefaults[state.flow].industryId.searchAffirmation, {
-                    searchText: searchText,
-                  })}
+                  {templateEval(contentFromConfig.searchAffirmation, { searchText: searchText })}
                 </Content>
               </div>
             )}
@@ -160,7 +167,7 @@ export const IndustryDropdown = (props: Props): ReactElement => {
             onChange={handleSearchBoxChange}
             onSubmit={props.onValidation}
             variant="outlined"
-            placeholder={Config.profileDefaults[state.flow].industryId.placeholder}
+            placeholder={contentFromConfig.placeholder}
             error={props.error}
             helperText={props.error ? props.validationText ?? " " : " "}
           />

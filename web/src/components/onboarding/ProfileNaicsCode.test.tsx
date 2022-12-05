@@ -35,6 +35,8 @@ const renderComponent = (profileData: Partial<ProfileData>) => {
 };
 
 describe("<ProfileNaicsCode />", () => {
+  const configForField = Config.profileDefaults.fields.naicsCode.default;
+
   beforeEach(() => {
     jest.resetAllMocks();
     useMockRoadmap({});
@@ -43,10 +45,7 @@ describe("<ProfileNaicsCode />", () => {
   it("routes to naics code URL", () => {
     useMockRoadmapTask({ id: "determine-naics-code", urlSlug: "some-naics-url" });
     renderComponent({});
-    expect(screen.getByText(Config.profileDefaults.STARTING.naicsCode.editText)).toHaveAttribute(
-      "href",
-      "/tasks/some-naics-url"
-    );
+    expect(screen.getByText(configForField.editText)).toHaveAttribute("href", "/tasks/some-naics-url");
   });
 
   it("displays NAICS code when exists", () => {
@@ -57,8 +56,8 @@ describe("<ProfileNaicsCode />", () => {
 
   it("Display Edit when there is naics code", () => {
     renderComponent({ naicsCode: "624410" });
-    expect(screen.getByText(Config.profileDefaults.STARTING.naicsCode.editText)).toBeInTheDocument();
-    expect(screen.queryByText(Config.profileDefaults.STARTING.naicsCode.addText)).not.toBeInTheDocument();
+    expect(screen.getByText(configForField.editText)).toBeInTheDocument();
+    expect(screen.queryByText(configForField.addText)).not.toBeInTheDocument();
   });
 
   it("displays Not Entered text when user has no NAICS code", () => {
@@ -68,7 +67,7 @@ describe("<ProfileNaicsCode />", () => {
 
   it("Displays Add text when naics code field is empty", () => {
     renderComponent({ naicsCode: "" });
-    expect(screen.getByText(Config.profileDefaults.STARTING.naicsCode.addText)).toBeInTheDocument();
-    expect(screen.queryByText(Config.profileDefaults.STARTING.naicsCode.editText)).not.toBeInTheDocument();
+    expect(screen.getByText(configForField.addText)).toBeInTheDocument();
+    expect(screen.queryByText(configForField.editText)).not.toBeInTheDocument();
   });
 });

@@ -198,12 +198,13 @@ export const OnboardingStatusLookup = (
 };
 
 export const OnboardingErrorLookup: Record<ProfileError, string> = {
-  REQUIRED_LEGAL: getMergedConfig().profileDefaults["STARTING"].legalStructureId.errorTextRequired,
-  REQUIRED_EXISTING_BUSINESS: getMergedConfig().profileDefaults.businessPersona.errorTextRequired,
+  REQUIRED_LEGAL: getMergedConfig().profileDefaults.fields.legalStructureId.default.errorTextRequired,
+  REQUIRED_EXISTING_BUSINESS:
+    getMergedConfig().profileDefaults.fields.businessPersona.default.errorTextRequired,
   REQUIRED_FOREIGN_BUSINESS_TYPE:
-    getMergedConfig().profileDefaults["FOREIGN"].foreignBusinessTypeIds.errorTextRequired,
+    getMergedConfig().profileDefaults.fields.foreignBusinessTypeIds.default.errorTextRequired,
   REQUIRED_NEXUS_LOCATION_IN_NJ:
-    getMergedConfig().profileDefaults["FOREIGN"].nexusLocationInNewJersey.errorTextRequired,
+    getMergedConfig().profileDefaults.fields.nexusLocationInNewJersey.default.errorTextRequired,
 };
 
 export const getUserNameOrEmail = (userData: UserData | undefined): string => {

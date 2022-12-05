@@ -3,7 +3,6 @@ import { getMergedConfig } from "@/contexts/configContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { Certification, Funding, OperateReference, SidebarCardContent } from "@/lib/types/types";
-import { getFlow } from "@/lib/utils/helpers";
 import DashboardPage from "@/pages/dashboard";
 import {
   generateBusinessPersona,
@@ -494,10 +493,10 @@ describe("dashboard page", () => {
 
       renderDashboardPage({});
       expect(
-        screen.getByText(Config.profileDefaults[getFlow(userData)].homeBasedBusiness.description)
+        screen.getByText(Config.profileDefaults.fields.homeBasedBusiness.default.description)
       ).toBeInTheDocument();
       expect(
-        screen.queryByText(Config.profileDefaults[getFlow(userData)].homeBasedBusiness.altDescription)
+        screen.queryByText(Config.profileDefaults.fields.homeBasedBusiness.default.altDescription)
       ).not.toBeInTheDocument();
     });
 
@@ -511,10 +510,10 @@ describe("dashboard page", () => {
       useMockUserData(userData);
       renderDashboardPage({});
       expect(
-        screen.queryByText(Config.profileDefaults[getFlow(userData)].homeBasedBusiness.description)
+        screen.queryByText(Config.profileDefaults.fields.homeBasedBusiness.default.description)
       ).not.toBeInTheDocument();
       expect(
-        screen.queryByText(Config.profileDefaults[getFlow(userData)].homeBasedBusiness.altDescription)
+        screen.queryByText(Config.profileDefaults.fields.homeBasedBusiness.default.altDescription)
       ).not.toBeInTheDocument();
     });
 
@@ -528,10 +527,10 @@ describe("dashboard page", () => {
       useMockUserData(userData);
       renderDashboardPage({});
       expect(
-        screen.queryByText(Config.profileDefaults[getFlow(userData)].homeBasedBusiness.description)
+        screen.queryByText(Config.profileDefaults.fields.homeBasedBusiness.default.description)
       ).not.toBeInTheDocument();
       expect(
-        screen.queryByText(Config.profileDefaults[getFlow(userData)].homeBasedBusiness.altDescription)
+        screen.queryByText(Config.profileDefaults.fields.homeBasedBusiness.default.altDescription)
       ).not.toBeInTheDocument();
     });
 
@@ -551,10 +550,10 @@ describe("dashboard page", () => {
 
       renderDashboardPage({});
       expect(
-        screen.queryByText(Config.profileDefaults[getFlow(userData)].homeBasedBusiness.description)
+        screen.queryByText(Config.profileDefaults.fields.homeBasedBusiness.default.description)
       ).not.toBeInTheDocument();
       expect(
-        screen.getByText(Config.profileDefaults[getFlow(userData)].homeBasedBusiness.altDescription)
+        screen.getByText(Config.profileDefaults.fields.homeBasedBusiness.default.altDescription)
       ).toBeInTheDocument();
     });
 
@@ -572,7 +571,7 @@ describe("dashboard page", () => {
 
       await waitFor(() => {
         return expect(
-          screen.queryByText(Config.profileDefaults[getFlow(userData)].homeBasedBusiness.description)
+          screen.queryByText(Config.profileDefaults.fields.homeBasedBusiness.default.description)
         ).not.toBeInTheDocument();
       });
       expect(currentUserData().profileData.homeBasedBusiness).toEqual(true);

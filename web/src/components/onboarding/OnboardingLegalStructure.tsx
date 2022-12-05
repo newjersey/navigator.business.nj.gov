@@ -1,8 +1,8 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { Content } from "@/components/Content";
+import { ConfigType } from "@/contexts/configContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { LegalStructure, LegalStructures, LookupLegalStructureById } from "@businessnjgovnavigator/shared/";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import { orderBy } from "lodash";
@@ -11,6 +11,13 @@ import React, { ReactElement, useContext } from "react";
 export const OnboardingLegalStructure = (): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { Config } = useConfig();
+
+  const contentFromConfig: ConfigType["profileDefaults"]["fields"]["legalStructureId"]["default"] =
+    getProfileConfig({
+      config: Config,
+      persona: state.flow,
+      fieldName: "legalStructureId",
+    });
 
   const LegalStructuresOrdered: LegalStructure[] = orderBy(
     LegalStructures,
@@ -28,7 +35,7 @@ export const OnboardingLegalStructure = (): ReactElement => {
 
   const makeLabel = (legalStructureId: string): ReactElement => {
     const supportingText =
-      (Config.profileDefaults[state.flow].legalStructureId.optionContent as any)[legalStructureId] ?? "";
+      (contentFromConfig.optionContent as Record<string, string>)[legalStructureId] ?? "";
     return (
       <div className="margin-bottom-2 margin-top-1" data-value={legalStructureId}>
         <div className={supportingText === "" ? "" : "text-bold"}>

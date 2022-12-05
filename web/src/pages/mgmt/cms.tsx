@@ -22,11 +22,8 @@ import NaicsLookupPreview from "@/lib/cms/previews/NaicsLookupPreview";
 import NexusDbaFormationPreview from "@/lib/cms/previews/NexusDbaFormationPreview";
 import NexusNameSearchPreview from "@/lib/cms/previews/NexusNameSearchPreview";
 import PageNotFoundPreview from "@/lib/cms/previews/PageNotFoundPreview";
-import ProfilePreviewDocuments from "@/lib/cms/previews/ProfileDocumentsPreview";
-import ProfilePreviewIndustrySpecific from "@/lib/cms/previews/ProfileIndustrySpecificPreview";
+import ProfileFieldsPreview from "@/lib/cms/previews/ProfileFieldsPreview";
 import ProfilePreviewMisc from "@/lib/cms/previews/ProfileMiscPreview";
-import ProfilePreviewOnboarding from "@/lib/cms/previews/ProfileOnboardingPreview";
-import ProfilePreview from "@/lib/cms/previews/ProfilePreview";
 import RoadmapSidebarCardPreview from "@/lib/cms/previews/SidebarCardPreview";
 import TaskPreview from "@/lib/cms/previews/TaskPreview";
 import TaxInputPreview from "@/lib/cms/previews/TaxInputPreview";
@@ -72,22 +69,7 @@ const CMS = dynamic(
       registerPreview(CMS, "roadmap-sidebar-card", RoadmapSidebarCardPreview);
 
       // ----- Profile -----
-      registerPreview(CMS, "profile-info-poppy", ProfilePreview);
-      registerPreview(CMS, "profile-info-oscar", ProfilePreview);
-      registerPreview(CMS, "profile-info-dakota", ProfilePreview);
-      registerPreview(CMS, "profile-numbers-poppy", ProfilePreview);
-      registerPreview(CMS, "profile-numbers-oscar", ProfilePreview);
-      registerPreview(CMS, "profile-numbers-dakota", ProfilePreview);
-      registerPreview(CMS, "profile-documents-oscar", ProfilePreviewDocuments);
-      registerPreview(CMS, "profile-documents-poppy", ProfilePreviewDocuments);
-      registerPreview(CMS, "profile-notes-poppy", ProfilePreview);
-      registerPreview(CMS, "profile-notes-oscar", ProfilePreview);
-      registerPreview(CMS, "profile-notes-dakota", ProfilePreview);
-      registerPreview(CMS, "profile-industries-poppy", ProfilePreviewIndustrySpecific);
-      registerPreview(CMS, "profile-industries-oscar", ProfilePreviewIndustrySpecific);
-      registerPreview(CMS, "profile-industries-dakota", ProfilePreviewIndustrySpecific);
-      registerPreview(CMS, "profile-onboarding-poppy", ProfilePreviewOnboarding);
-      registerPreview(CMS, "profile-onboarding-dakota", ProfilePreviewOnboarding);
+      registerPreview(CMS, "profile-fields", ProfileFieldsPreview);
       registerPreview(CMS, "profile-misc", ProfilePreviewMisc);
 
       registerPreview(CMS, "cannabisPriority-task", TaskPreview);

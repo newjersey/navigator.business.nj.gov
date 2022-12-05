@@ -1,6 +1,6 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
-import { getFlow, templateEval } from "@/lib/utils/helpers";
+import { templateEval } from "@/lib/utils/helpers";
 import { generateProfileData, generateTaxFilingData, generateUser, generateUserData } from "@/test/factories";
 import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
@@ -177,7 +177,7 @@ describe("onboarding - owning a business", () => {
       });
       expect(screen.queryByTestId("step-4")).not.toBeInTheDocument();
       expect(
-        screen.getByText(Config.profileDefaults[getFlow(userData)].businessName.errorTextRequired)
+        screen.getByText(Config.profileDefaults.fields.businessName.default.errorTextRequired)
       ).toBeInTheDocument();
       expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
     });
@@ -191,7 +191,7 @@ describe("onboarding - owning a business", () => {
 
       await waitFor(() => {
         expect(
-          screen.queryByText(Config.profileDefaults[getFlow(userData)].businessName.errorTextRequired)
+          screen.queryByText(Config.profileDefaults.fields.businessName.default.errorTextRequired)
         ).not.toBeInTheDocument();
       });
       expect(screen.queryByTestId("snackbar-alert-ERROR")).not.toBeInTheDocument();
@@ -210,7 +210,7 @@ describe("onboarding - owning a business", () => {
       });
       expect(screen.queryByTestId("step-4")).not.toBeInTheDocument();
       expect(
-        screen.getByText(Config.profileDefaults[getFlow(userData)].sectorId.errorTextRequired)
+        screen.getByText(Config.profileDefaults.fields.sectorId.default.errorTextRequired)
       ).toBeInTheDocument();
       expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
     });
@@ -224,7 +224,7 @@ describe("onboarding - owning a business", () => {
 
       await waitFor(() => {
         expect(
-          screen.queryByText(Config.profileDefaults[getFlow(userData)].sectorId.errorTextRequired)
+          screen.queryByText(Config.profileDefaults.fields.sectorId.default.errorTextRequired)
         ).not.toBeInTheDocument();
       });
       expect(screen.queryByTestId("snackbar-alert-ERROR")).not.toBeInTheDocument();
@@ -245,7 +245,7 @@ describe("onboarding - owning a business", () => {
         expect(screen.getByTestId("step-4")).toBeInTheDocument();
       });
       expect(
-        screen.getByText(Config.profileDefaults[getFlow(userData)].municipality.errorTextRequired)
+        screen.getByText(Config.profileDefaults.fields.municipality.default.errorTextRequired)
       ).toBeInTheDocument();
       expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
     });
@@ -259,7 +259,7 @@ describe("onboarding - owning a business", () => {
       await page.visitStep(5);
       await waitFor(() => {
         expect(
-          screen.queryByText(Config.profileDefaults[getFlow(userData)].municipality.errorTextRequired)
+          screen.queryByText(Config.profileDefaults.fields.municipality.default.errorTextRequired)
         ).not.toBeInTheDocument();
       });
       expect(screen.queryByTestId("snackbar-alert-ERROR")).not.toBeInTheDocument();
@@ -280,7 +280,7 @@ describe("onboarding - owning a business", () => {
       });
 
       await waitFor(() => {
-        screen.getByText(Config.profileDefaults[getFlow(userData)].existingEmployees.errorTextRequired);
+        screen.getByText(Config.profileDefaults.fields.existingEmployees.default.errorTextRequired);
       });
       expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
     });
@@ -300,7 +300,7 @@ describe("onboarding - owning a business", () => {
 
       await waitFor(() => {
         expect(
-          screen.queryByText(Config.profileDefaults[getFlow(userData)].existingEmployees.errorTextRequired)
+          screen.queryByText(Config.profileDefaults.fields.existingEmployees.default.errorTextRequired)
         ).not.toBeInTheDocument();
       });
       expect(screen.queryByTestId("snackbar-alert-ERROR")).not.toBeInTheDocument();

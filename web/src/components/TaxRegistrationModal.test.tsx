@@ -3,7 +3,6 @@ import { getMergedConfig } from "@/contexts/configContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import * as buildUserRoadmap from "@/lib/roadmap/buildUserRoadmap";
 import * as analyticsHelpers from "@/lib/utils/analytics-helpers";
-import { getFlow } from "@/lib/utils/helpers";
 import { generateProfileData, generateRoadmap, generateUserData } from "@/test/factories";
 import { withRoadmap } from "@/test/helpers/helpers-renderers";
 import { fillText, selectLocationByText } from "@/test/helpers/helpers-testing-library-selectors";
@@ -107,16 +106,16 @@ describe("<TaxRegistrationModal>", () => {
       renderComponent(userData);
 
       expect(
-        screen.queryByText(markdownToText(Config.profileDefaults.STARTING.businessName.header))
+        screen.queryByText(markdownToText(Config.profileDefaults.fields.businessName.default.header))
       ).not.toBeInTheDocument();
       expect(
-        screen.queryByText(markdownToText(Config.profileDefaults.STARTING.taxId.header))
+        screen.queryByText(markdownToText(Config.profileDefaults.fields.taxId.default.header))
       ).not.toBeInTheDocument();
       expect(
-        screen.getByText(markdownToText(Config.profileDefaults.STARTING.existingEmployees.header))
+        screen.getByText(markdownToText(Config.profileDefaults.fields.existingEmployees.default.header))
       ).toBeInTheDocument();
       expect(
-        screen.getByText(markdownToText(Config.profileDefaults.STARTING.ownershipTypeIds.header))
+        screen.getByText(markdownToText(Config.profileDefaults.fields.ownershipTypeIds.default.header))
       ).toBeInTheDocument();
     });
 
@@ -170,12 +169,12 @@ describe("<TaxRegistrationModal>", () => {
       renderComponent(userData);
 
       expect(
-        screen.queryByText(Config.profileDefaults.STARTING.existingEmployees.errorTextRequired)
+        screen.queryByText(Config.profileDefaults.fields.existingEmployees.default.errorTextRequired)
       ).not.toBeInTheDocument();
 
       fireEvent.click(screen.getByText(Config.taxRegistrationModal.saveButtonText));
       expect(
-        screen.getByText(Config.profileDefaults.STARTING.existingEmployees.errorTextRequired)
+        screen.getByText(Config.profileDefaults.fields.existingEmployees.default.errorTextRequired)
       ).toBeInTheDocument();
     });
 
@@ -190,7 +189,7 @@ describe("<TaxRegistrationModal>", () => {
       renderComponent(userData);
 
       expect(
-        screen.getByText(markdownToText(Config.profileDefaults.STARTING.municipality.header))
+        screen.getByText(markdownToText(Config.profileDefaults.fields.municipality.default.header))
       ).toBeInTheDocument();
 
       selectLocationByText(municipality.displayName);
@@ -210,7 +209,7 @@ describe("<TaxRegistrationModal>", () => {
       renderComponent(userData);
 
       expect(
-        screen.queryByText(markdownToText(Config.profileDefaults.STARTING.municipality.header))
+        screen.queryByText(markdownToText(Config.profileDefaults.fields.municipality.default.header))
       ).not.toBeInTheDocument();
     });
 
@@ -229,12 +228,12 @@ describe("<TaxRegistrationModal>", () => {
       fillText("Existing employees", "5");
 
       expect(
-        screen.queryByText(Config.profileDefaults.STARTING.municipality.errorTextRequired)
+        screen.queryByText(Config.profileDefaults.fields.municipality.default.errorTextRequired)
       ).not.toBeInTheDocument();
 
       fireEvent.click(screen.getByText(Config.taxRegistrationModal.saveButtonText));
       expect(
-        screen.getByText(Config.profileDefaults.STARTING.municipality.errorTextRequired)
+        screen.getByText(Config.profileDefaults.fields.municipality.default.errorTextRequired)
       ).toBeInTheDocument();
     });
   });
@@ -251,16 +250,16 @@ describe("<TaxRegistrationModal>", () => {
       renderComponent(userData);
 
       expect(
-        screen.getByText(markdownToText(Config.profileDefaults.STARTING.businessName.header))
+        screen.getByText(markdownToText(Config.profileDefaults.fields.businessName.default.header))
       ).toBeInTheDocument();
       expect(
-        screen.getByText(markdownToText(Config.profileDefaults.STARTING.taxId.header))
+        screen.getByText(markdownToText(Config.profileDefaults.fields.taxId.default.header))
       ).toBeInTheDocument();
       expect(
-        screen.getByText(markdownToText(Config.profileDefaults.STARTING.existingEmployees.header))
+        screen.getByText(markdownToText(Config.profileDefaults.fields.existingEmployees.default.header))
       ).toBeInTheDocument();
       expect(
-        screen.getByText(markdownToText(Config.profileDefaults.STARTING.ownershipTypeIds.header))
+        screen.getByText(markdownToText(Config.profileDefaults.fields.ownershipTypeIds.default.header))
       ).toBeInTheDocument();
     });
 
@@ -275,7 +274,7 @@ describe("<TaxRegistrationModal>", () => {
       renderComponent(userData);
 
       expect(
-        screen.queryByText(markdownToText(Config.profileDefaults.STARTING.businessName.header))
+        screen.queryByText(markdownToText(Config.profileDefaults.fields.businessName.default.header))
       ).not.toBeInTheDocument();
     });
 
@@ -310,7 +309,7 @@ describe("<TaxRegistrationModal>", () => {
         renderComponent(userData);
 
         expect(
-          screen.queryByText(Config.profileDefaults.STARTING.existingEmployees.errorTextRequired)
+          screen.queryByText(Config.profileDefaults.fields.existingEmployees.default.errorTextRequired)
         ).not.toBeInTheDocument();
 
         fillText("Business name", "my cool coffeeshop");
@@ -318,7 +317,7 @@ describe("<TaxRegistrationModal>", () => {
 
         fireEvent.click(screen.getByText(Config.taxRegistrationModal.saveButtonText));
         expect(
-          screen.getByText(Config.profileDefaults.STARTING.existingEmployees.errorTextRequired)
+          screen.getByText(Config.profileDefaults.fields.existingEmployees.default.errorTextRequired)
         ).toBeInTheDocument();
       });
 
@@ -326,21 +325,23 @@ describe("<TaxRegistrationModal>", () => {
         renderComponent(userData);
 
         expect(
-          screen.queryByText(Config.profileDefaults.STARTING.taxId.errorTextRequired)
+          screen.queryByText(Config.profileDefaults.fields.taxId.default.errorTextRequired)
         ).not.toBeInTheDocument();
 
         fillText("Business name", "my cool coffeeshop");
         fillText("Existing employees", "5");
 
         fireEvent.click(screen.getByText(Config.taxRegistrationModal.saveButtonText));
-        expect(screen.getByText(Config.profileDefaults.STARTING.taxId.errorTextRequired)).toBeInTheDocument();
+        expect(
+          screen.getByText(Config.profileDefaults.fields.taxId.default.errorTextRequired)
+        ).toBeInTheDocument();
       });
 
       it("shows error for businessName field when not selected", () => {
         renderComponent(userData);
 
         expect(
-          screen.queryByText(Config.profileDefaults.STARTING.businessName.errorTextRequired)
+          screen.queryByText(Config.profileDefaults.fields.businessName.default.errorTextRequired)
         ).not.toBeInTheDocument();
 
         fillText("Existing employees", "5");
@@ -348,7 +349,7 @@ describe("<TaxRegistrationModal>", () => {
 
         fireEvent.click(screen.getByText(Config.taxRegistrationModal.saveButtonText));
         expect(
-          screen.getByText(Config.profileDefaults.STARTING.businessName.errorTextRequired)
+          screen.getByText(Config.profileDefaults.fields.businessName.default.errorTextRequired)
         ).toBeInTheDocument();
       });
     });
@@ -408,7 +409,7 @@ describe("<TaxRegistrationModal>", () => {
         fireEvent.click(screen.getByTestId("modal-button-primary"));
         expect(modalOnClose).not.toHaveBeenCalled();
         expect(
-          screen.getByText(Config.profileDefaults[getFlow(userData.profileData)].taxId.errorTextRequired)
+          screen.getByText(Config.profileDefaults.fields.taxId.default.errorTextRequired)
         ).toBeInTheDocument();
       });
 

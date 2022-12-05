@@ -3,10 +3,12 @@
 import { GenericTextField } from "@/components/GenericTextField";
 import { OnboardingField, OnboardingProps } from "@/components/onboarding/OnboardingField";
 import { AuthAlertContext } from "@/contexts/authAlertContext";
+import { ConfigType } from "@/contexts/configContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { formatTaxId } from "@/lib/domain-logic/formatTaxId";
+import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { ProfileFieldErrorMap } from "@/lib/types/types";
 import { maskingCharacter } from "@businessnjgovnavigator/shared";
 import { ReactElement, useContext, useRef, useState } from "react";
@@ -44,6 +46,12 @@ export const OnboardingTaxId = ({
   const [locationValue, setLocationValue] = useState(state.profileData[fieldName]?.trim().slice(9, 12) ?? "");
   const [taxIdValue, setTaxIdValue] = useState(state.profileData[fieldName]?.trim().slice(0, 9) ?? "");
   const [errorMap, setErrorMap] = useState<ErrorMapType>({ taxId: false, taxIdLocation: false });
+
+  const contentFromConfig: ConfigType["profileDefaults"]["fields"]["taxId"]["default"] = getProfileConfig({
+    config: Config,
+    persona: state.flow,
+    fieldName: "taxId",
+  });
 
   const handleChange = (value: string, type: "taxId" | "taxIdLocation") => {
     let resolvedValue = "".concat(...taxIdValue, ...locationValue);
@@ -125,9 +133,7 @@ export const OnboardingTaxId = ({
           visualFilter={formatTaxId}
           {...props}
           numericProps={{ minLength: 9, maxLength: 9 }}
-          validationText={
-            validationText ?? (Config.profileDefaults[state.flow][fieldName] as any).errorTextRequired ?? ""
-          }
+          validationText={validationText ?? contentFromConfig.errorTextRequired ?? ""}
           handleChange={(value) => {
             handleChange(value, "taxId");
           }}

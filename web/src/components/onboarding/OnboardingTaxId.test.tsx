@@ -1,11 +1,9 @@
 import { getMergedConfig } from "@/contexts/configContext";
-import { createProfileFieldErrorMap, ProfileFieldErrorMap } from "@/lib/types/types";
+import { createProfileFieldErrorMap, ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import { generateProfileData } from "@/test/factories";
 import { currentProfileData, WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
 import { ProfileData } from "@businessnjgovnavigator/shared";
 import { fireEvent, render, screen } from "@testing-library/react";
-import { ProfileFields } from "../../lib/types/types";
-import { getFlow } from "../../lib/utils/helpers";
 import { OnboardingTaxId } from "./OnboardingTaxId";
 
 jest.mock("@/lib/data-hooks/useRoadmap", () => {
@@ -34,6 +32,7 @@ const renderComponent = (profileData: ProfileData, errorProps: ErrorProps, field
 describe("<OnboardingTaxId />", () => {
   let profileData: ProfileData;
   let errorProps: ErrorProps;
+  const configForField = Config.profileDefaults.fields.taxId.default;
 
   beforeEach(() => {
     jest.resetAllMocks();
@@ -107,9 +106,7 @@ describe("<OnboardingTaxId />", () => {
       });
       fireEvent.blur(screen.getByLabelText("Tax id"));
       expect(currentProfileData().taxId).toEqual("123456789000");
-      expect(
-        screen.queryByText(Config.profileDefaults[getFlow(profileData)].taxId.errorTextRequired)
-      ).not.toBeInTheDocument();
+      expect(screen.queryByText(configForField.errorTextRequired)).not.toBeInTheDocument();
     });
 
     it("fires validation for less than 12 characters", () => {
@@ -125,9 +122,7 @@ describe("<OnboardingTaxId />", () => {
         target: { value: "1234" },
       });
       fireEvent.blur(screen.getByLabelText("Tax id"));
-      expect(
-        screen.getByText(Config.profileDefaults[getFlow(profileData)].taxId.errorTextRequired)
-      ).toBeInTheDocument();
+      expect(screen.getByText(configForField.errorTextRequired)).toBeInTheDocument();
     });
 
     it("retains initial field type", () => {
@@ -187,9 +182,7 @@ describe("<OnboardingTaxId />", () => {
         target: { value: "123456789" },
       });
       fireEvent.blur(screen.getByLabelText("Tax id"));
-      expect(
-        screen.queryByText(Config.profileDefaults[getFlow(profileData)].taxId.errorTextRequired)
-      ).not.toBeInTheDocument();
+      expect(screen.queryByText(configForField.errorTextRequired)).not.toBeInTheDocument();
     });
 
     it("fires validation on blur of Tax id", () => {
@@ -205,9 +198,7 @@ describe("<OnboardingTaxId />", () => {
         target: { value: "123456" },
       });
       fireEvent.blur(screen.getByLabelText("Tax id"));
-      expect(
-        screen.getByText(Config.profileDefaults[getFlow(profileData)].taxId.errorTextRequired)
-      ).toBeInTheDocument();
+      expect(screen.getByText(configForField.errorTextRequired)).toBeInTheDocument();
     });
 
     it("fires validation on blur of Tax id location", () => {
@@ -223,9 +214,7 @@ describe("<OnboardingTaxId />", () => {
         target: { value: "12" },
       });
       fireEvent.blur(screen.getByLabelText("Tax id location"));
-      expect(
-        screen.getByText(Config.profileDefaults[getFlow(profileData)].taxId.errorTextRequired)
-      ).toBeInTheDocument();
+      expect(screen.getByText(configForField.errorTextRequired)).toBeInTheDocument();
     });
 
     it("fires validation on blur of empty Tax id location", () => {
@@ -239,9 +228,7 @@ describe("<OnboardingTaxId />", () => {
       );
       fireEvent.click(screen.getByLabelText("Tax id location"));
       fireEvent.blur(screen.getByLabelText("Tax id location"));
-      expect(
-        screen.getByText(Config.profileDefaults[getFlow(profileData)].taxId.errorTextRequired)
-      ).toBeInTheDocument();
+      expect(screen.getByText(configForField.errorTextRequired)).toBeInTheDocument();
     });
 
     it("shifts focus from Tax id to Tax id location fields", () => {
@@ -257,9 +244,7 @@ describe("<OnboardingTaxId />", () => {
         target: { value: "123456789" },
       });
       expect(screen.getByLabelText("Tax id location")).toHaveFocus();
-      expect(
-        screen.queryByText(Config.profileDefaults[getFlow(profileData)].taxId.errorTextRequired)
-      ).not.toBeInTheDocument();
+      expect(screen.queryByText(configForField.errorTextRequired)).not.toBeInTheDocument();
     });
 
     it("does not shift focus back from Tax id location to Tax id field", () => {
@@ -284,9 +269,7 @@ describe("<OnboardingTaxId />", () => {
         target: { value: "" },
       });
       expect(screen.getByLabelText("Tax id location")).toHaveFocus();
-      expect(
-        screen.queryByText(Config.profileDefaults[getFlow(profileData)].taxId.errorTextRequired)
-      ).not.toBeInTheDocument();
+      expect(screen.queryByText(configForField.errorTextRequired)).not.toBeInTheDocument();
     });
 
     it("updates profileData", () => {

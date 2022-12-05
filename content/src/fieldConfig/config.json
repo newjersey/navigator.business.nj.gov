@@ -590,7 +590,14 @@
     "escapeModalHeader": "Are you sure you want to continue?",
     "saveButtonText": "Save",
     "escapeModalReturn": "Continue without saving.",
-    "successTextHeader": "Profile Updated"
+    "successTextHeader": "Profile Updated",
+    "profileTabInfoTitle": "Business Information",
+    "profileTabRefTitle": "Reference Numbers",
+    "profileTabDocsTitle": "Reference Documents",
+    "profileTabNoteTitle": "Notes",
+    "formationDocFileTitle": "Official Formation Document",
+    "standingDocFileTitle": "Certificate of Good Standing",
+    "certificationDocFileTitle": "Certified Copy of Formation"
   },
   "unsupportedNavigatorUserPage": {
     "title": "Chat with a New Jersey Business Representative",

@@ -1,7 +1,9 @@
 import { MenuOptionSelected } from "@/components/MenuOptionSelected";
 import { MenuOptionUnselected } from "@/components/MenuOptionUnselected";
+import { ConfigType } from "@/contexts/configContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { LegalStructure, LegalStructures, LookupLegalStructureById } from "@businessnjgovnavigator/shared/";
 import { FormControl, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import { orderBy } from "lodash";
@@ -14,6 +16,13 @@ interface Props {
 export const OnboardingLegalStructureDropdown = (props: Props): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { Config } = useConfig();
+
+  const contentFromConfig: ConfigType["profileDefaults"]["fields"]["legalStructureId"]["default"] =
+    getProfileConfig({
+      config: Config,
+      persona: state.flow,
+      fieldName: "legalStructureId",
+    });
 
   const LegalStructuresOrdered: LegalStructure[] = orderBy(
     LegalStructures,
@@ -49,9 +58,7 @@ export const OnboardingLegalStructureDropdown = (props: Props): ReactElement => 
 
   const renderValue = (value: unknown): ReactNode => {
     if (value === "") {
-      return (
-        <span className="text-base">{Config.profileDefaults[state.flow].legalStructureId.placeholder}</span>
-      );
+      return <span className="text-base">{contentFromConfig.placeholder}</span>;
     }
 
     return <>{LookupLegalStructureById(value as string).name}</>;

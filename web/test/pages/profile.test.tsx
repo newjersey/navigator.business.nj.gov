@@ -5,7 +5,7 @@ import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { ProfileTabs } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
-import { getFlow, templateEval } from "@/lib/utils/helpers";
+import { templateEval } from "@/lib/utils/helpers";
 import Profile from "@/pages/profile";
 import {
   allLegalStructuresOfType,
@@ -33,7 +33,6 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
-  BusinessPersona,
   createEmptyUserData,
   defaultDateFormat,
   einTaskId,
@@ -526,7 +525,7 @@ describe("profile", () => {
                   operatingPhase: operatingPhase,
                 });
                 removeLocationAndSave();
-                expectLocationNotSavedAndError("STARTING");
+                expectLocationNotSavedAndError();
               });
             }
           }
@@ -545,7 +544,7 @@ describe("profile", () => {
                   operatingPhase: operatingPhase,
                 });
                 removeLocationAndSave();
-                expectLocationNotSavedAndError("STARTING");
+                expectLocationNotSavedAndError();
               });
             }
           }
@@ -621,7 +620,7 @@ describe("profile", () => {
             return expect(userDataWasNotUpdated()).toEqual(true);
           });
           expect(
-            screen.getByText(Config.profileDefaults[getFlow(userData.profileData)].taxId.errorTextRequired)
+            screen.getByText(Config.profileDefaults.fields.taxId.default.errorTextRequired)
           ).toBeInTheDocument();
           expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
         });
@@ -887,7 +886,7 @@ describe("profile", () => {
 
         await waitFor(() => {
           expect(
-            screen.getByText(Config.profileDefaults.STARTING.existingEmployees.errorTextRequired)
+            screen.getByText(Config.profileDefaults.fields.existingEmployees.default.errorTextRequired)
           ).toBeInTheDocument();
         });
       });
@@ -920,7 +919,7 @@ describe("profile", () => {
       fireEvent.blur(screen.queryByLabelText("Sector") as HTMLElement);
       await waitFor(() => {
         expect(
-          screen.getByText(Config.profileDefaults[getFlow(userData)].sectorId.errorTextRequired)
+          screen.getByText(Config.profileDefaults.fields.sectorId.default.errorTextRequired)
         ).toBeInTheDocument();
       });
       selectByValue("Industry", newIndustry);
@@ -957,7 +956,7 @@ describe("profile", () => {
       clickSave();
       await waitFor(() => {
         expect(
-          screen.getByText(Config.profileDefaults[getFlow(userData)].sectorId.errorTextRequired)
+          screen.getByText(Config.profileDefaults.fields.sectorId.default.errorTextRequired)
         ).toBeInTheDocument();
       });
       expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
@@ -1148,14 +1147,14 @@ describe("profile", () => {
       fillText("Tax pin", "");
       fireEvent.blur(screen.getByLabelText("Tax pin"));
       expect(
-        screen.queryByText(Config.profileDefaults[getFlow(userData)].taxPin.errorTextRequired)
+        screen.queryByText(Config.profileDefaults.fields.taxPin.default.errorTextRequired)
       ).not.toBeInTheDocument();
 
       fillText("Tax pin", "123");
       fireEvent.blur(screen.getByLabelText("Tax pin"));
       await waitFor(() => {
         expect(
-          screen.getByText(Config.profileDefaults[getFlow(userData)].taxPin.errorTextRequired)
+          screen.getByText(Config.profileDefaults.fields.taxPin.default.errorTextRequired)
         ).toBeInTheDocument();
       });
 
@@ -1163,7 +1162,7 @@ describe("profile", () => {
       fireEvent.blur(screen.getByLabelText("Tax pin"));
       await waitFor(() => {
         expect(
-          screen.queryByText(Config.profileDefaults[getFlow(userData)].taxPin.errorTextRequired)
+          screen.queryByText(Config.profileDefaults.fields.taxPin.default.errorTextRequired)
         ).not.toBeInTheDocument();
       });
     });
@@ -1201,7 +1200,7 @@ describe("profile", () => {
       clickSave();
       await waitFor(() => {
         expect(
-          screen.getByText(Config.profileDefaults[getFlow(userData)].sectorId.errorTextRequired)
+          screen.getByText(Config.profileDefaults.fields.sectorId.default.errorTextRequired)
         ).toBeInTheDocument();
       });
       expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
@@ -1297,7 +1296,7 @@ describe("profile", () => {
                   operatingPhase: operatingPhase,
                 });
                 removeLocationAndSave();
-                expectLocationNotSavedAndError("OWNING");
+                expectLocationNotSavedAndError();
               });
             }
           }
@@ -1334,7 +1333,7 @@ describe("profile", () => {
     it("defaults to numbers tab", () => {
       renderPage({ userData: userData });
       expect(
-        screen.getByText(markdownToText(Config.profileDefaults.FOREIGN.taxId.header))
+        screen.getByText(markdownToText(Config.profileDefaults.fields.taxId.default.header))
       ).toBeInTheDocument();
     });
 
@@ -1354,17 +1353,19 @@ describe("profile", () => {
         renderPage({ userData: nexusForeignBusinessProfile({}) });
         expect(screen.getByTestId("info")).toBeInTheDocument();
         expect(
-          screen.getByText(markdownToText(Config.profileDefaults.FOREIGN.industryId.header))
+          screen.getByText(markdownToText(Config.profileDefaults.fields.industryId.default.header))
         ).toBeInTheDocument();
         expect(
-          screen.getByText(markdownToText(Config.profileDefaults.FOREIGN.legalStructureId.header))
+          screen.getByText(
+            markdownToText(Config.profileDefaults.fields.legalStructureId.overrides.FOREIGN.header)
+          )
         ).toBeInTheDocument();
       });
 
       it("displays the out of state business name field", () => {
         renderPage({ userData: nexusForeignBusinessProfile({}) });
         expect(
-          screen.getByText(Config.profileDefaults.nexusBusinessName.outOfStateNameHeader)
+          screen.getByText(Config.profileDefaults.fields.nexusBusinessName.default.outOfStateNameHeader)
         ).toBeInTheDocument();
       });
 
@@ -1381,7 +1382,7 @@ describe("profile", () => {
         });
 
         expect(
-          screen.getByText(Config.profileDefaults.nexusBusinessName.emptyBusinessPlaceHolder)
+          screen.getByText(Config.profileDefaults.fields.nexusBusinessName.default.emptyBusinessPlaceHolder)
         ).toBeInTheDocument();
       });
 
@@ -1389,10 +1390,10 @@ describe("profile", () => {
         renderPage({ userData: nexusForeignBusinessProfile({ legalStructureId: "sole-proprietorship" }) });
 
         expect(
-          screen.queryByText(Config.profileDefaults.nexusBusinessName.outOfStateNameHeader)
+          screen.queryByText(Config.profileDefaults.fields.nexusBusinessName.default.outOfStateNameHeader)
         ).not.toBeInTheDocument();
         expect(
-          screen.queryByText(Config.profileDefaults.FOREIGN.nexusDbaName.header)
+          screen.queryByText(Config.profileDefaults.fields.nexusDbaName.default.header)
         ).not.toBeInTheDocument();
       });
 
@@ -1410,7 +1411,7 @@ describe("profile", () => {
         });
         expect(screen.getByText("Test Business")).toBeInTheDocument();
         expect(
-          screen.getByText(markdownToText(Config.profileDefaults.FOREIGN.nexusDbaName.header))
+          screen.getByText(markdownToText(Config.profileDefaults.fields.nexusDbaName.default.header))
         ).toBeInTheDocument();
       });
 
@@ -1423,7 +1424,7 @@ describe("profile", () => {
         });
         expect(screen.getByText("Test Business")).toBeInTheDocument();
         expect(
-          screen.queryByText(Config.profileDefaults.FOREIGN.nexusDbaName.header)
+          screen.queryByText(Config.profileDefaults.fields.nexusDbaName.default.header)
         ).not.toBeInTheDocument();
       });
 
@@ -1509,7 +1510,7 @@ describe("profile", () => {
                     operatingPhase: operatingPhase,
                   });
                   removeLocationAndSave();
-                  expectLocationNotSavedAndError("FOREIGN");
+                  expectLocationNotSavedAndError();
                 });
               }
             }
@@ -1528,7 +1529,7 @@ describe("profile", () => {
                     operatingPhase: operatingPhase,
                   });
                   removeLocationAndSave();
-                  expectLocationNotSavedAndError("FOREIGN");
+                  expectLocationNotSavedAndError();
                 });
               }
             }
@@ -1601,10 +1602,10 @@ describe("profile", () => {
     renderPage({ userData });
 
     expect(
-      screen.queryByText(Config.profileDefaults[getFlow(userData)].homeBasedBusiness.description)
+      screen.queryByText(Config.profileDefaults.fields.homeBasedBusiness.default.description)
     ).not.toBeInTheDocument();
     expect(
-      screen.queryByText(Config.profileDefaults[getFlow(userData)].homeBasedBusiness.altDescription)
+      screen.queryByText(Config.profileDefaults.fields.homeBasedBusiness.default.altDescription)
     ).not.toBeInTheDocument();
   });
 
@@ -1624,10 +1625,10 @@ describe("profile", () => {
     renderPage({ userData });
 
     expect(
-      screen.getByText(Config.profileDefaults[getFlow(userData)].homeBasedBusiness.description)
+      screen.getByText(Config.profileDefaults.fields.homeBasedBusiness.default.description)
     ).toBeInTheDocument();
     expect(
-      screen.queryByText(Config.profileDefaults[getFlow(userData)].homeBasedBusiness.altDescription)
+      screen.queryByText(Config.profileDefaults.fields.homeBasedBusiness.default.altDescription)
     ).not.toBeInTheDocument();
   });
 
@@ -1646,10 +1647,10 @@ describe("profile", () => {
     renderPage({ userData });
 
     expect(
-      screen.queryByText(Config.profileDefaults[getFlow(userData)].homeBasedBusiness.description)
+      screen.queryByText(Config.profileDefaults.fields.homeBasedBusiness.default.description)
     ).not.toBeInTheDocument();
     expect(
-      screen.getByText(Config.profileDefaults[getFlow(userData)].homeBasedBusiness.altDescription)
+      screen.getByText(Config.profileDefaults.fields.homeBasedBusiness.default.altDescription)
     ).toBeInTheDocument();
   });
 
@@ -1777,7 +1778,7 @@ describe("profile", () => {
       renderPage({ userData });
       chooseTab("documents");
       expect(
-        screen.getByText(Config.profileDefaults[getFlow(userData)].documents.placeholder.split("[")[0], {
+        screen.getByText(Config.profileDefaults.fields.documents.default.placeholder.split("[")[0], {
           exact: false,
         })
       ).toBeInTheDocument();
@@ -1955,10 +1956,10 @@ describe("profile", () => {
     });
   };
 
-  const expectLocationNotSavedAndError = (persona: Exclude<BusinessPersona, undefined>) => {
+  const expectLocationNotSavedAndError = () => {
     expect(userDataWasNotUpdated()).toBe(true);
     expect(
-      screen.getByText(Config.profileDefaults[persona].municipality.errorTextRequired)
+      screen.getByText(Config.profileDefaults.fields.municipality.default.errorTextRequired)
     ).toBeInTheDocument();
     expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
   };

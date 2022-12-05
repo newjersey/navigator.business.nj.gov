@@ -7,7 +7,7 @@ import { FilingsCalendar } from "@/components/FilingsCalendar";
 import { Header } from "@/components/Header";
 import { LoadingIndicator } from "@/components/LoadingIndicator";
 import { NavBar } from "@/components/navbar/NavBar";
-import { FieldLabelDeferred } from "@/components/onboarding/FieldLabelDeferred";
+import { FieldLabelDescriptionOnly } from "@/components/onboarding/FieldLabelDescriptionOnly";
 import { OnboardingHomeBasedBusiness } from "@/components/onboarding/OnboardingHomeBasedBusiness";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { RightSidebarPageLayout } from "@/components/RightSidebarPageLayout";
@@ -144,7 +144,7 @@ const DashboardPage = (props: Props): ReactElement => {
               {displayHomedBaseBusinessQuestion() && (
                 <DeferredOnboardingQuestion
                   label={
-                    <FieldLabelDeferred
+                    <FieldLabelDescriptionOnly
                       fieldName="homeBasedBusiness"
                       isAltDescriptionDisplayed={
                         LookupOperatingPhaseById(userData?.profileData.operatingPhase)

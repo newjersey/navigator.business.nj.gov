@@ -130,11 +130,11 @@ describe("<FormationDateModal />", () => {
   it("shows error when user saves without entering location", () => {
     renderComponent(generateUserData({ profileData: generateProfileData({ municipality: undefined }) }));
     expect(
-      screen.queryByText(Config.profileDefaults.STARTING.municipality.errorTextRequired)
+      screen.queryByText(Config.profileDefaults.fields.municipality.default.errorTextRequired)
     ).not.toBeInTheDocument();
     fireEvent.click(screen.getByText(Config.formationDateModal.saveButtonText));
     expect(
-      screen.getByText(Config.profileDefaults.STARTING.municipality.errorTextRequired)
+      screen.getByText(Config.profileDefaults.fields.municipality.default.errorTextRequired)
     ).toBeInTheDocument();
   });
 

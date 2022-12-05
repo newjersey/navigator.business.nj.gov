@@ -1,3 +1,4 @@
+import { FieldLabelDescriptionOnly } from "@/components/onboarding/FieldLabelDescriptionOnly";
 import { FieldLabelOnboarding } from "@/components/onboarding/FieldLabelOnboarding";
 import { OnboardingBusinessName } from "@/components/onboarding/OnboardingBusinessName";
 import { OnboardingBusinessPersona } from "@/components/onboarding/OnboardingBusinessPersona";
@@ -47,7 +48,7 @@ export const getOnboardingFlows = (
             <>
               <OnboardingBusinessPersona />
               <div className="padding-top-3">
-                <FieldLabelOnboarding fieldName="legalStructureId" />
+                <FieldLabelDescriptionOnly fieldName="legalStructureId" />
                 <OnboardingLegalStructureDropdown />
               </div>
             </>
@@ -116,7 +117,9 @@ export const getOnboardingFlows = (
               <OnboardingExistingEmployees onValidation={onValidation} fieldStates={fieldStates} />
               <div className="margin-top-205" />
               <FieldLabelOnboarding fieldName="municipality" />
-              <OnboardingMunicipality onValidation={onValidation} fieldStates={fieldStates} />
+              <div className="margin-top-2">
+                <OnboardingMunicipality onValidation={onValidation} fieldStates={fieldStates} />
+              </div>
               <div className="margin-top-205" />
               <FieldLabelOnboarding fieldName="ownershipTypeIds" />
               <OnboardingOwnership />
@@ -281,14 +284,6 @@ export const getOnboardingFlows = (
             <>
               <FieldLabelOnboarding fieldName="nexusLocationInNewJersey" />
               <OnboardingLocationInNewJersey />
-              {/*<div className="margin-top-3">*/}
-              {/*  {profileData.nexusLocationInNewJersey && (*/}
-              {/*    <>*/}
-              {/*      <FieldLabelOnboarding fieldName="municipality" />*/}
-              {/*      <OnboardingMunicipality onValidation={onValidation} fieldStates={fieldStates} />*/}
-              {/*    </>*/}
-              {/*  )}*/}
-              {/*</div>*/}
             </>
           ),
           getErrorMap: () => {

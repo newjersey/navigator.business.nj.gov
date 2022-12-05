@@ -60,7 +60,9 @@ describe("<SectorModal />", () => {
     renderSectorModal(onContinue);
     submitSectorModal();
     expect(onContinue).not.toHaveBeenCalled();
-    expect(screen.getByText(Config.profileDefaults.OWNING.sectorId.errorTextRequired)).toBeInTheDocument();
+    expect(
+      screen.getByText(Config.profileDefaults.fields.sectorId.default.errorTextRequired)
+    ).toBeInTheDocument();
   });
 
   it("calls onContinue prop on successful submit", () => {
