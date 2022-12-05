@@ -1,8 +1,7 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { GenericTextField, GenericTextFieldProps } from "@/components/GenericTextField";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { IndustrySpecificDataAddOnFields, ProfileContentField, ProfileFields } from "@/lib/types/types";
 import { TextFieldProps } from "@mui/material";
 import { ReactElement, useContext } from "react";
@@ -22,6 +21,12 @@ export const OnboardingField = ({
   const { state, setProfileData } = useContext(ProfileDataContext);
 
   const { Config } = useConfig();
+
+  const contentFromConfig = getProfileConfig({
+    config: Config,
+    persona: state.flow,
+    fieldName: fieldName,
+  });
 
   const onValidation = (fieldName: string, invalid: boolean): void => {
     props.onValidation && props.onValidation(fieldName as ProfileFields, invalid);
@@ -45,14 +50,8 @@ export const OnboardingField = ({
         value={state.profileData[fieldName] as string | undefined}
         fieldName={fieldName as string}
         {...props}
-        placeholder={
-          props.placeholder ?? (Config.profileDefaults[state.flow][fieldName] as any).placeholder ?? ""
-        }
-        validationText={
-          props.validationText ??
-          (Config.profileDefaults[state.flow][fieldName] as any).errorTextRequired ??
-          ""
-        }
+        placeholder={props.placeholder ?? contentFromConfig.placeholder ?? ""}
+        validationText={props.validationText ?? contentFromConfig.errorTextRequired ?? ""}
         handleChange={handleChange}
         onValidation={onValidation}
       />

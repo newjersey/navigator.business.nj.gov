@@ -16,6 +16,13 @@ const ProfilePreviewMisc = (props: PreviewProps) => {
   const [modalOpen, setModalOpen] = useState(false);
 
   const emptyUserData = createEmptyUserData(generateUser({}));
+  const userData = {
+    ...emptyUserData,
+    profileData: {
+      ...emptyUserData.profileData,
+      legalStructureId: "limited-liability-company",
+    },
+  };
 
   return (
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
@@ -52,9 +59,9 @@ const ProfilePreviewMisc = (props: PreviewProps) => {
         <h2 className="margin-bottom-4">Misc Buttons & Labels:</h2>
         <Profile
           municipalities={[]}
-          CMS_ONLY_tab="notes"
+          CMS_ONLY_tab="documents"
           CMS_ONLY_businessPersona="STARTING"
-          CMS_ONLY_fakeUserData={emptyUserData}
+          CMS_ONLY_fakeUserData={userData}
         />
       </div>
     </ConfigContext.Provider>

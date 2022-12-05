@@ -1,6 +1,8 @@
 import { Content } from "@/components/Content";
+import { ConfigType } from "@/contexts/configContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { BusinessPersona } from "@businessnjgovnavigator/shared/";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import React, { ReactElement, useContext } from "react";
@@ -16,12 +18,19 @@ export const OnboardingBusinessPersona = (): ReactElement => {
     });
   };
 
+  const contentFromConfig: ConfigType["profileDefaults"]["fields"]["businessPersona"]["default"] =
+    getProfileConfig({
+      config: Config,
+      persona: state.flow,
+      fieldName: "businessPersona",
+    });
+
   return (
     <>
       <div role="heading" aria-level={2} className="h3-styling margin-bottom-2">
-        {Config.profileDefaults.businessPersona.header}
+        {contentFromConfig.header}
       </div>
-      <Content>{Config.profileDefaults.businessPersona.description}</Content>
+      <Content>{contentFromConfig.description}</Content>
       <FormControl fullWidth>
         <RadioGroup
           aria-label="Business Persona"
@@ -36,7 +45,7 @@ export const OnboardingBusinessPersona = (): ReactElement => {
             data-testid="business-persona-starting"
             value="STARTING"
             control={<Radio color="primary" sx={{ paddingTop: "0px" }} />}
-            label={Config.profileDefaults.businessPersona.radioButtonStartingText}
+            label={contentFromConfig.radioButtonStartingText}
           />
           <FormControlLabel
             aria-label="Business Status - Owning"
@@ -45,7 +54,7 @@ export const OnboardingBusinessPersona = (): ReactElement => {
             data-testid="business-persona-owning"
             value="OWNING"
             control={<Radio color="primary" sx={{ paddingTop: "0px" }} />}
-            label={Config.profileDefaults.businessPersona.radioButtonOwningText}
+            label={contentFromConfig.radioButtonOwningText}
           />
           <FormControlLabel
             aria-label="Business Status - Foreign"
@@ -54,7 +63,7 @@ export const OnboardingBusinessPersona = (): ReactElement => {
             data-testid="business-persona-foreign"
             value="FOREIGN"
             control={<Radio color="primary" sx={{ paddingTop: "0px" }} />}
-            label={Config.profileDefaults.businessPersona.radioButtonForeignText}
+            label={contentFromConfig.radioButtonForeignText}
           />
         </RadioGroup>
       </FormControl>

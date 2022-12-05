@@ -1,7 +1,9 @@
 import { MunicipalityDropdown } from "@/components/onboarding/MunicipalityDropdown";
+import { ConfigType } from "@/contexts/configContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { isMunicipalityRequired } from "@/lib/domain-logic/isMunicipalityRequired";
 import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import { Municipality } from "@businessnjgovnavigator/shared/";
@@ -17,6 +19,14 @@ export const OnboardingMunicipality = (props: Props): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { municipalities } = useContext(MunicipalitiesContext);
   const { Config } = useConfig();
+  const fieldName = "municipality";
+
+  const contentFromConfig: ConfigType["profileDefaults"]["fields"]["municipality"]["default"] =
+    getProfileConfig({
+      config: Config,
+      persona: state.flow,
+      fieldName: fieldName,
+    });
 
   const onValidation = (event: FocusEvent<HTMLInputElement>): void => {
     if (
@@ -35,8 +45,6 @@ export const OnboardingMunicipality = (props: Props): ReactElement => {
   const handleChange = (): void => {
     return props.onValidation(fieldName, false);
   };
-
-  const fieldName = "municipality";
 
   const onSelect = (value: Municipality | undefined): void => {
     setProfileData({
@@ -57,8 +65,8 @@ export const OnboardingMunicipality = (props: Props): ReactElement => {
         handleChange={handleChange}
         value={state.profileData.municipality}
         onSelect={onSelect}
-        placeholderText={Config.profileDefaults[state.flow].municipality.placeholder ?? ""}
-        helperText={Config.profileDefaults[state.flow].municipality.errorTextRequired ?? " "}
+        placeholderText={contentFromConfig.placeholder ?? ""}
+        helperText={contentFromConfig.errorTextRequired ?? " "}
         hideErrorLabel={props.hideErrorLabel}
       />
     </div>

@@ -1,28 +1,34 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { Content } from "@/components/Content";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { ProfileContentField } from "@/lib/types/types";
+import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
+import { FlowType, ProfileContentField } from "@/lib/types/types";
 import { useContext } from "react";
 
 interface Props {
   fieldName: ProfileContentField;
   isAltDescriptionDisplayed?: boolean;
+  CMS_ONLY_flow?: FlowType;
 }
 
 export const FieldLabelOnboarding = (props: Props) => {
   const { Config } = useConfig();
   const { state } = useContext(ProfileDataContext);
 
-  const unboldedHeader = (Config.profileDefaults[state.flow][props.fieldName] as any).headerNotBolded;
-  const description = (Config.profileDefaults[state.flow][props.fieldName] as any).description;
-  const altDescription = (Config.profileDefaults[state.flow][props.fieldName] as any).altDescription;
+  const contentFromConfig = getProfileConfig({
+    config: Config,
+    persona: props.CMS_ONLY_flow ?? state.flow,
+    fieldName: props.fieldName,
+  });
+
+  const unboldedHeader = contentFromConfig.headerNotBolded;
+  const description = contentFromConfig.description;
+  const altDescription = contentFromConfig.altDescription;
 
   return (
     <>
       <div role="heading" aria-level={2} className="h3-styling margin-bottom-2">
-        {(Config.profileDefaults[state.flow][props.fieldName] as any).header}
+        {contentFromConfig.header}
         {unboldedHeader && (
           <>
             {" "}

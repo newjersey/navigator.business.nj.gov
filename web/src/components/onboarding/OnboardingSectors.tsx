@@ -1,7 +1,9 @@
 import { MenuOptionSelected } from "@/components/MenuOptionSelected";
 import { MenuOptionUnselected } from "@/components/MenuOptionUnselected";
+import { ConfigType } from "@/contexts/configContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import { arrayOfSectors as sectors, LookupSectorTypeById, SectorType } from "@businessnjgovnavigator/shared/";
 import { Autocomplete, TextField } from "@mui/material";
@@ -17,6 +19,12 @@ export const OnboardingSectors = (props: Props): ReactElement => {
   const [searchText, setSearchText] = useState<string>("");
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { Config } = useConfig();
+
+  const contentFromConfig: ConfigType["profileDefaults"]["fields"]["sectorId"]["default"] = getProfileConfig({
+    config: Config,
+    persona: state.flow,
+    fieldName: "sectorId",
+  });
 
   const SectorsOrdered: SectorType[] = orderBy(sectors, (SectorType: SectorType) => {
     return SectorType.name;
@@ -87,13 +95,9 @@ export const OnboardingSectors = (props: Props): ReactElement => {
                 value={searchText}
                 onChange={handleChange}
                 variant="outlined"
-                placeholder={Config.profileDefaults[state.flow].sectorId.placeholder}
+                placeholder={contentFromConfig.placeholder}
                 error={props.fieldStates.sectorId.invalid}
-                helperText={
-                  props.fieldStates.sectorId.invalid
-                    ? Config.profileDefaults[state.flow].sectorId.errorTextRequired
-                    : " "
-                }
+                helperText={props.fieldStates.sectorId.invalid ? contentFromConfig.errorTextRequired : " "}
               />
             );
           }}

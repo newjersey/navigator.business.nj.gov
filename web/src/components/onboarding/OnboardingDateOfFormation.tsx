@@ -1,6 +1,8 @@
 import { GenericTextField } from "@/components/GenericTextField";
+import { ConfigType } from "@/contexts/configContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import {
@@ -33,8 +35,14 @@ export const OnboardingDateOfFormation = (props: Props): ReactElement => {
   const [dateValue, setDateValue] = React.useState<DateObject | null>(null);
   const [dateError, setDateError] = React.useState<boolean>(false);
 
-  const errorText =
-    props.errorTextOverride || Config.profileDefaults[state.flow].dateOfFormation.errorTextRequired;
+  const contentFromConfig: ConfigType["profileDefaults"]["fields"]["dateOfFormation"]["default"] =
+    getProfileConfig({
+      config: Config,
+      persona: state.flow,
+      fieldName: fieldName,
+    });
+
+  const errorText = props.errorTextOverride || contentFromConfig.errorTextRequired;
 
   useMountEffectWhenDefined(() => {
     setDateValue(parseDate(state.profileData.dateOfFormation));

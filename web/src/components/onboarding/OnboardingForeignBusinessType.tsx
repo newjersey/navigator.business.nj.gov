@@ -1,8 +1,10 @@
 import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
+import { ConfigType } from "@/contexts/configContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { determineForeignBusinessType } from "@/lib/domain-logic/determineForeignBusinessType";
+import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { Checkbox, FormControl, FormControlLabel } from "@mui/material";
 import { ChangeEvent, ReactElement, useContext } from "react";
 
@@ -17,6 +19,13 @@ const allForeignBusinessTypeIdsOrdered = [
 export const OnboardingForeignBusinessType = (): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { Config } = useConfig();
+
+  const contentFromConfig: ConfigType["profileDefaults"]["fields"]["foreignBusinessTypeIds"]["default"] =
+    getProfileConfig({
+      config: Config,
+      persona: state.flow,
+      fieldName: "foreignBusinessTypeIds",
+    });
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     let ids = state.profileData.foreignBusinessTypeIds;
@@ -63,18 +72,7 @@ export const OnboardingForeignBusinessType = (): ReactElement => {
                     />
                   </div>
                 }
-                label={
-                  <Content>
-                    {
-                      (
-                        Config.profileDefaults.FOREIGN.foreignBusinessTypeIds.optionContent as Record<
-                          string,
-                          string
-                        >
-                      )[id]
-                    }
-                  </Content>
-                }
+                label={<Content>{(contentFromConfig.optionContent as Record<string, string>)[id]}</Content>}
               />
             );
           })}
@@ -85,7 +83,7 @@ export const OnboardingForeignBusinessType = (): ReactElement => {
         state.profileData.foreignBusinessType !== "NONE" && (
           <Alert variant="info">
             <Content key={state.profileData.foreignBusinessType}>
-              {Config.profileDefaults.FOREIGN.foreignBusinessTypeIds[state.profileData.foreignBusinessType]}
+              {contentFromConfig[state.profileData.foreignBusinessType]}
             </Content>
           </Alert>
         )}

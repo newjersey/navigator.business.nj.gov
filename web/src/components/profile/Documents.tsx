@@ -1,8 +1,10 @@
 import { Content } from "@/components/Content";
+import { ConfigType } from "@/contexts/configContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useDocuments } from "@/lib/data-hooks/useDocuments";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { UserData } from "@businessnjgovnavigator/shared";
 import { ReactElement, useContext, useMemo } from "react";
 
@@ -15,6 +17,14 @@ export const Documents = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const { documents } = useDocuments();
   const { state } = useContext(ProfileDataContext);
+
+  const contentFromConfig: ConfigType["profileDefaults"]["fields"]["documents"]["default"] = getProfileConfig(
+    {
+      config: Config,
+      persona: state.flow,
+      fieldName: "documents",
+    }
+  );
 
   const userData = props.CMS_ONLY_fakeUserData ?? userDataFromHook.userData;
 
@@ -62,7 +72,7 @@ export const Documents = (props: Props): ReactElement => {
           )}
         </ol>
       ) : (
-        <Content>{Config.profileDefaults[state.flow].documents.placeholder}</Content>
+        <Content>{contentFromConfig.placeholder}</Content>
       )}
     </div>
   );

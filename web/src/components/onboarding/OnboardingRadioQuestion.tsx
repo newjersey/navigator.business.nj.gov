@@ -1,16 +1,17 @@
 import { Content } from "@/components/Content";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { ProfileContentField } from "@/lib/types/types";
-import { ProfileData } from "@businessnjgovnavigator/shared";
-import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
-import React, { ReactElement, useContext } from "react";
+import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
+import { ProfileContentField, profileFieldsFromConfig } from "@/lib/types/types";
 import {
   camelCaseToKebabCase,
   camelCaseToSentence,
   capitalizeFirstLetter,
   kebabSnakeSentenceToCamelCase,
-} from "../../lib/utils/helpers";
+} from "@/lib/utils/helpers";
+import { ProfileData } from "@businessnjgovnavigator/shared";
+import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
+import React, { ReactElement, useContext } from "react";
 
 type ProfileDataTypes = ProfileData[keyof ProfileData];
 
@@ -26,6 +27,13 @@ type Props<T> = {
 export const OnboardingRadioQuestion = <T extends ProfileDataTypes>(props: Props<T>): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { Config } = useConfig();
+  const fieldName = props.contentFieldName ?? props.fieldName;
+
+  const contentFromConfig = getProfileConfig({
+    config: Config,
+    persona: state.flow,
+    fieldName: fieldName as keyof typeof profileFieldsFromConfig,
+  });
 
   const handleChange = (event: React.ChangeEvent<{ name?: string; value: unknown }>) => {
     const value = props.choices.find((val) => {
@@ -65,10 +73,7 @@ export const OnboardingRadioQuestion = <T extends ProfileDataTypes>(props: Props
                     <Content>
                       {props.labels
                         ? props.labels[val.toString()]
-                        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                          (Config.profileDefaults[state.flow] as any)[
-                            props.contentFieldName ?? props.fieldName
-                          ][
+                        : contentFromConfig[
                             `radioButton${capitalizeFirstLetter(
                               kebabSnakeSentenceToCamelCase(val.toString())
                             )}Text`
