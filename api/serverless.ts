@@ -107,6 +107,7 @@ const serverlessConfiguration: AWS = {
               "dynamodb:PutItem",
               "dynamodb:UpdateItem",
               "dynamodb:DeleteItem",
+              "dynamodb:PartiQLSelect",
             ],
             Resource: [
               `arn:aws:dynamodb:${region}:*:table/${usersTable}`,
