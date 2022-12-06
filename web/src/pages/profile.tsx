@@ -37,6 +37,7 @@ import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { isEntityIdApplicable } from "@/lib/domain-logic/isEntityIdApplicable";
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
 import { checkQueryValue, QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
@@ -474,14 +475,18 @@ const ProfilePage = (props: Props): ReactElement => {
           </>
         )}
         <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
-        <FieldLabelProfile fieldName="entityId" />
-        <OnboardingEntityId
-          onValidation={onValidation}
-          fieldStates={fieldStates}
-          disabled={userData?.formationData?.getFilingResponse?.success}
-          handleChangeOverride={showRegistrationModalForGuest()}
-        />
-        <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
+        {isEntityIdApplicable(userData?.profileData.legalStructureId) && (
+          <>
+            <FieldLabelProfile fieldName="entityId" />
+            <OnboardingEntityId
+              onValidation={onValidation}
+              fieldStates={fieldStates}
+              disabled={userData?.formationData?.getFilingResponse?.success}
+              handleChangeOverride={showRegistrationModalForGuest()}
+            />
+            <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
+          </>
+        )}
         <FieldLabelProfile fieldName="employerId" />
         <OnboardingEmployerId
           onValidation={onValidation}

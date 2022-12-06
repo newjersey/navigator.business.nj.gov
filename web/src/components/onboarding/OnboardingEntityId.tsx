@@ -1,8 +1,6 @@
 import { OnboardingNumericField } from "@/components/onboarding/OnboardingNumericField";
-import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { isEntityIdApplicable } from "@/lib/domain-logic/isEntityIdApplicable";
 import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
-import { ReactElement, ReactNode, useContext } from "react";
+import { ReactElement, ReactNode } from "react";
 
 interface Props {
   onValidation: (field: ProfileFields, invalid: boolean) => void;
@@ -13,15 +11,7 @@ interface Props {
 }
 
 export const OnboardingEntityId = (props: Props): ReactElement => {
-  const { state } = useContext(ProfileDataContext);
   const fieldName = "entityId";
-
-  if (
-    state.profileData.businessPersona === "STARTING" &&
-    !isEntityIdApplicable(state.profileData.legalStructureId)
-  ) {
-    return <></>;
-  }
 
   return (
     <>
