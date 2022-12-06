@@ -1,7 +1,6 @@
 import { decideABExperience } from "@shared/businessUser";
 import { getCurrentDate, parseDate } from "@shared/dateHelpers";
 import { createEmptyFormationFormData } from "@shared/formationData";
-import { maskingCharacter } from "@shared/profileData";
 import { createEmptyUserData, UserData } from "@shared/userData";
 import { Request, Response, Router } from "express";
 import jwt from "jsonwebtoken";
@@ -14,7 +13,7 @@ import {
   UpdateSidebarCards,
   UserDataClient,
 } from "../domain/types";
-import { maskTaxId } from "../domain/user/maskTaxId";
+import { encryptTaxIdFactory } from "../domain/user/encryptTaxIdFactory";
 
 const getTokenFromHeader = (req: Request): string => {
   if (req.headers.authorization && req.headers.authorization.split(" ")[0] === "Bearer") {
@@ -87,6 +86,7 @@ export const userRouterFactory = (
   encryptionDecryptionClient: EncryptionDecryptionClient
 ): Router => {
   const router = Router();
+  const encryptTaxId = encryptTaxIdFactory(encryptionDecryptionClient);
 
   router.get("/users/:userId", (req, res) => {
     const signedInUserId = getSignedInUserId(req);
@@ -136,7 +136,7 @@ export const userRouterFactory = (
     userData = getAnnualFilings(userData);
     userData = updateOperatingPhase(userData);
     userData = updateRoadmapSidebarCards(userData);
-    userData = await handleTaxId(userData);
+    userData = await encryptTaxId(userData);
 
     userDataClient
       .put(userData)
@@ -147,22 +147,6 @@ export const userRouterFactory = (
         res.status(500).json({ error });
       });
   });
-
-  const handleTaxId = async (userData: UserData): Promise<UserData> => {
-    if (!userData.profileData.taxId || userData.profileData.taxId?.includes(maskingCharacter)) {
-      return userData;
-    }
-    const taxId = userData.profileData.taxId as string;
-    const newUserData = {
-      ...userData,
-      profileData: {
-        ...userData.profileData,
-        encryptedTaxId: await encryptionDecryptionClient.encryptValue(taxId),
-        taxId: maskTaxId(taxId),
-      },
-    };
-    return newUserData;
-  };
 
   const industryHasChanged = async (userData: UserData): Promise<boolean> => {
     try {

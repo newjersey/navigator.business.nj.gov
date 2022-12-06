@@ -19,6 +19,7 @@ describe("addToUserTestingBatch", () => {
       findByEmail: jest.fn(),
     };
     stubUserDataQlClient = {
+      getNeedTaxIdEncryptionUsers: jest.fn(),
       getNeedNewsletterUsers: jest.fn(),
       getNeedToAddToUserTestingUsers: jest.fn(),
       search: jest.fn(),

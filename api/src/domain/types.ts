@@ -16,6 +16,7 @@ export interface UserDataQlClient {
   search: (statement: string) => Promise<UserData[]>;
   getNeedNewsletterUsers: () => Promise<UserData[]>;
   getNeedToAddToUserTestingUsers: () => Promise<UserData[]>;
+  getNeedTaxIdEncryptionUsers: () => Promise<UserData[]>;
 }
 
 export interface BusinessNameClient {
@@ -45,6 +46,8 @@ export interface EncryptionDecryptionClient {
   encryptValue: (valueToBeEncrypted: string) => Promise<string>;
   decryptValue: (valueToBeDecrypted: string) => Promise<string>;
 }
+
+export type EncryptTaxId = (userData: UserData) => Promise<UserData>;
 
 export type AddNewsletter = (userData: UserData) => Promise<UserData>;
 export type AddToUserTesting = (userData: UserData) => Promise<UserData>;
