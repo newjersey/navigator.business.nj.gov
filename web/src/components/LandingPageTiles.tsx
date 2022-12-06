@@ -17,21 +17,10 @@ export const LandingPageTiles = (): ReactElement => {
     analytics.event.landing_page_hero_get_started.click.go_to_onboarding();
   };
 
-  const setFlowToStartingAndRouteToIndustry = () => {
+  const setFlowAndRouteUser = (flow: "starting" | "out-of-state") => {
     routeWithQuery(router, {
       path: ROUTES.onboarding,
-      queries: {
-        [QUERIES.flow]: "starting",
-      },
-    });
-  };
-
-  const setFlowToOutOfStateAndRouteToForeignBusinessTypeIds = () => {
-    routeWithQuery(router, {
-      path: ROUTES.onboarding,
-      queries: {
-        [QUERIES.flow]: "out-of-state",
-      },
+      queries: { [QUERIES.flow]: flow },
     });
   };
 
@@ -49,19 +38,25 @@ export const LandingPageTiles = (): ReactElement => {
         imgPath={"/img/startBusiness-icon.svg"}
         tileText={Config.landingPage.landingPageTile2Text}
         dataTestId={"start-biz-tile"}
-        onClick={setFlowToStartingAndRouteToIndustry}
+        onClick={() => {
+          return setFlowAndRouteUser("starting");
+        }}
       />
       <LandingPageActionTile
         imgPath={"/img/outOfState-icon.svg"}
         dataTestId={"out-of-state-tile"}
         tileText={Config.landingPage.landingPageTile4Text}
-        onClick={setFlowToOutOfStateAndRouteToForeignBusinessTypeIds}
+        onClick={() => {
+          return setFlowAndRouteUser("out-of-state");
+        }}
       />
       <LandingPageActionTile
         imgPath={"/img/briefcase-icon.svg"}
         dataTestId={"register-biz-tile"}
         tileText={Config.landingPage.landingPageTile5Text}
-        onClick={setFlowToStartingAndRouteToIndustry}
+        onClick={() => {
+          return setFlowAndRouteUser("starting");
+        }}
       />
     </div>
   );
