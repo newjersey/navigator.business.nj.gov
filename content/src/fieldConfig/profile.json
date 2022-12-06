@@ -219,6 +219,14 @@
           "description": "Use this space to add any information for quick reference."
         }
       },
+      "responsibleOwnerName": {
+        "default": {
+          "placeholder": "Type Your Responsible Owner Name",
+          "header": "Responsible Owner Name",
+          "errorTextRequired": "Please enter your responsible owner name.",
+          "description": "Enter your Last Name, First Name and Middle Initial. The name must match exactly the name listed on your tax confirmation email."
+        }
+      },
       "cannabisLicenseType": {
         "default": {
           "header": "Cannabis License",

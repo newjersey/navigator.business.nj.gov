@@ -161,6 +161,7 @@ export const generateProfileData = (
     ...generateIndustrySpecificData({}, industry),
     businessPersona: persona,
     businessName: `some-business-name-${randomInt()}`,
+    responsibleOwnerName: `some-responsible-owner-name-${randomInt()}`,
     industryId: industry.id,
     legalStructureId: randomLegalStructure().id,
     municipality: generateMunicipality({}),

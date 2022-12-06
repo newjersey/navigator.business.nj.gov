@@ -14,6 +14,7 @@ import { OnboardingMunicipality } from "@/components/onboarding/OnboardingMunici
 import { OnboardingNotes } from "@/components/onboarding/OnboardingNotes";
 import { OnboardingOwnership } from "@/components/onboarding/OnboardingOwnership";
 import { OnboardingRadioQuestion } from "@/components/onboarding/OnboardingRadioQuestion";
+import { OnboardingResponsibleOwnerName } from "@/components/onboarding/OnboardingResponsibleOwnerName";
 import { OnboardingSectors } from "@/components/onboarding/OnboardingSectors";
 import { OnboardingTaxPin } from "@/components/onboarding/OnboardingTaxPin";
 import { ProfileNaicsCode } from "@/components/onboarding/ProfileNaicsCode";
@@ -162,6 +163,10 @@ const ProfileFieldsPreview = (props: PreviewProps) => {
         <hr className="margin-y-4" />
         <FieldLabelOnboarding fieldName="notes" />
         <OnboardingNotes />
+
+        <hr className="margin-y-4" />
+        <FieldLabelOnboarding fieldName="responsibleOwnerName" />
+        <OnboardingResponsibleOwnerName />
 
         {EssentialQuestions.map((props) => {
           return (
