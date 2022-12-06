@@ -1,13 +1,19 @@
 import { Content } from "@/components/Content";
 import { FieldLabelModal } from "@/components/onboarding/FieldLabelModal";
 import { OnboardingBusinessName } from "@/components/onboarding/OnboardingBusinessName";
+import { OnboardingResponsibleOwnerName } from "@/components/onboarding/OnboardingResponsibleOwnerName";
 import { OnboardingTaxId } from "@/components/onboarding/OnboardingTaxId";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { postTaxRegistrationOnboarding } from "@/lib/api-client/apiClient";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { createEmptyProfileData, ProfileData, UserData } from "@businessnjgovnavigator/shared";
+import {
+  createEmptyProfileData,
+  LookupLegalStructureById,
+  ProfileData,
+  UserData,
+} from "@businessnjgovnavigator/shared";
 import { Backdrop, CircularProgress } from "@mui/material";
 import { ReactElement, useState } from "react";
 import { useUserData } from "../lib/data-hooks/useUserData";
@@ -25,11 +31,12 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
   const { userData, update } = useUserData();
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
 
-  const fields: ProfileFields[] = ["businessName", "taxId"];
+  const fields: ProfileFields[] = ["businessName", "taxId", "responsibleOwnerName"];
 
   const errorMessages: Partial<Record<ProfileFields, string>> = {
-    businessName: Config.taxCalendar.ModalBusinessFieldErrorName,
-    taxId: Config.taxCalendar.ModalTaxErrorName,
+    businessName: Config.taxCalendar.modalBusinessFieldErrorName,
+    responsibleOwnerName: Config.taxCalendar.modalResponsibleOwnerFieldErrorName,
+    taxId: Config.taxCalendar.modalTaxFieldErrorName,
   };
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -39,9 +46,20 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
   const [apiFailed, setOnAPIfailed] = useState<undefined | "FAILED" | "UNKNOWN">(undefined);
   const [onSubmitClicked, setOnSubmitClicked] = useState<boolean>(false);
 
-  const getErrors = () => {
+  const isPublicFiling = LookupLegalStructureById(
+    userData?.profileData.legalStructureId
+  ).requiresPublicFiling;
+
+  const getErrors = (): Partial<ProfileFieldErrorMap> => {
     return {
-      businessName: { invalid: profileData.businessName.trim().length === 0 },
+      businessName: {
+        invalid: shouldShowBusinessNameField() ? profileData.businessName.trim().length === 0 : false,
+      },
+      responsibleOwnerName: {
+        invalid: shouldShowResponsibleOwnerField()
+          ? profileData.responsibleOwnerName.trim().length === 0
+          : false,
+      },
       taxId: { invalid: profileData.taxId?.trim().length != 12 ?? true },
     };
   };
@@ -54,6 +72,14 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
 
   const onValidation = (field: ProfileFields, invalid: boolean) => {
     setFieldStates({ ...fieldStates, [field]: { ...fieldStates[field], invalid } });
+  };
+
+  const getTaxIdDescription = (): string => {
+    if (isPublicFiling) {
+      return Config.taxCalendar.modalTaxIdMarkdown;
+    } else {
+      return `${Config.taxCalendar.modalTaxIdMarkdown}\n\n${Config.taxCalendar.taxIdDisclaimerMd}`;
+    }
   };
 
   const onSubmit = async () => {
@@ -69,12 +95,18 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
       analytics.event.tax_calendar_modal.submit.tax_calendar_modal_validation_error();
       return;
     }
+
     setIsLoading(true);
     let userDataToSet: UserData;
+
     try {
+      const businessNameToSubmitToTaxApi = isPublicFiling
+        ? profileData.businessName
+        : profileData.responsibleOwnerName;
+
       userDataToSet = await postTaxRegistrationOnboarding({
         taxId: profileData.taxId as string,
-        businessName: profileData.businessName,
+        businessName: businessNameToSubmitToTaxApi,
         encryptedTaxId: profileData.encryptedTaxId as string,
       });
     } catch {
@@ -82,12 +114,18 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
       setIsLoading(false);
       return;
     }
+
     userDataToSet = {
       ...userDataToSet,
-      profileData: { ...userDataToSet.profileData, taxId: profileData.taxId },
+      profileData: {
+        ...userDataToSet.profileData,
+        taxId: profileData.taxId,
+        responsibleOwnerName: profileData.responsibleOwnerName,
+      },
     };
 
     await update(userDataToSet);
+
     if (userDataToSet.taxFilingData.state == "SUCCESS") {
       setIsLoading(false);
       analytics.event.tax_calendar_modal.submit.tax_deadlines_added_to_calendar();
@@ -129,7 +167,7 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
     }
   }, userData);
 
-  const onClose = () => {
+  const onClose = (): void => {
     if (!userData) {
       return;
     }
@@ -138,6 +176,14 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
     setOnAPIfailed(undefined);
     setOnSubmitClicked(false);
     setFieldStates(createProfileFieldErrorMap());
+  };
+
+  const shouldShowBusinessNameField = (): boolean => {
+    return LookupLegalStructureById(userData?.profileData.legalStructureId).requiresPublicFiling;
+  };
+
+  const shouldShowResponsibleOwnerField = (): boolean => {
+    return LookupLegalStructureById(userData?.profileData.legalStructureId).hasTradeName;
   };
 
   return (
@@ -158,14 +204,14 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
       <ModalTwoButton
         isOpen={props.isOpen}
         close={onClose}
-        title={Config.taxCalendar.ModalHeader}
-        primaryButtonText={Config.taxCalendar.ModalNextButton}
+        title={Config.taxCalendar.modalHeader}
+        primaryButtonText={Config.taxCalendar.modalNextButton}
         primaryButtonOnClick={onSubmit}
-        secondaryButtonText={Config.taxCalendar.ModalPreviousButton}
+        secondaryButtonText={Config.taxCalendar.modalCancelButton}
       >
         {hasErrors() && onSubmitClicked && !apiFailed && (
           <Alert variant={"error"}>
-            {Config.taxCalendar.ModalErrorHeader}
+            {Config.taxCalendar.modalErrorHeader}
             <ul>
               {fields.map((i) => {
                 if (fieldStates[i].invalid && errorMessages[i]) {
@@ -175,45 +221,70 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
             </ul>
           </Alert>
         )}
+
         {apiFailed && (
           <Alert variant={"error"}>
             {" "}
             <Content>
               {apiFailed == "FAILED"
-                ? Config.taxCalendar.FailedErrorMessageMarkdown
-                : Config.taxCalendar.FailedUnknownMarkdown}
+                ? Config.taxCalendar.failedErrorMessageMarkdown
+                : Config.taxCalendar.failedUnknownMarkdown}
             </Content>
           </Alert>
         )}
+
         <div className="margin-bottom-4">
-          <Content>{Config.taxCalendar.ModalBody}</Content>
+          <Content>{Config.taxCalendar.modalBody}</Content>
         </div>
+
+        {shouldShowBusinessNameField() && (
+          <>
+            <FieldLabelModal
+              fieldName="businessName"
+              overrides={{
+                header: Config.taxCalendar.modalBusinessFieldHeader,
+                description: Config.taxCalendar.modalBusinessFieldMarkdown,
+              }}
+            />
+            <OnboardingBusinessName
+              inputErrorBar
+              onValidation={onValidation}
+              fieldStates={fieldStates}
+              validationText={
+                apiFailed == "FAILED" ? Config.taxCalendar.failedBusinessFieldHelper : undefined
+              }
+              disabled={userData?.formationData.completedFilingPayment}
+            />
+          </>
+        )}
+
+        {shouldShowResponsibleOwnerField() && (
+          <>
+            <FieldLabelModal fieldName="responsibleOwnerName" />
+            <OnboardingResponsibleOwnerName
+              inputErrorBar
+              onValidation={onValidation}
+              fieldStates={fieldStates}
+              validationText={
+                apiFailed == "FAILED" ? Config.taxCalendar.failedResponsibleOwnerFieldHelper : undefined
+              }
+              disabled={userData?.formationData.completedFilingPayment}
+            />
+          </>
+        )}
+
         <FieldLabelModal
-          fieldName="businessName"
+          fieldName="taxId"
           overrides={{
-            header: Config.taxCalendar.ModalBusinessFieldHeader,
-            description: Config.taxCalendar.ModalBusinessFieldMarkdown,
-          }}
-        />
-        <OnboardingBusinessName
-          inputErrorBar
-          onValidation={onValidation}
-          fieldStates={fieldStates}
-          validationText={apiFailed == "FAILED" ? Config.taxCalendar.FailedBusinessFieldHelper : undefined}
-          disabled={userData?.formationData.completedFilingPayment}
-        />
-        <FieldLabelModal
-          fieldName="businessName"
-          overrides={{
-            header: Config.taxCalendar.ModalTaxIdHeader,
-            description: Config.taxCalendar.ModalTaxIdMarkdown,
+            header: Config.taxCalendar.modalTaxIdHeader,
+            description: getTaxIdDescription(),
           }}
         />
         <OnboardingTaxId
           onValidation={onValidation}
           inputErrorBar
           fieldStates={fieldStates}
-          validationText={apiFailed == "FAILED" ? Config.taxCalendar.FailedTaxIdHelper : undefined}
+          validationText={apiFailed == "FAILED" ? Config.taxCalendar.failedTaxIdHelper : undefined}
           required
         />
       </ModalTwoButton>

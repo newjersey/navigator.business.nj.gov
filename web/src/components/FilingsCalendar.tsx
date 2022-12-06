@@ -1,8 +1,5 @@
 import { ArrowTooltip } from "@/components/ArrowTooltip";
-import {
-  FilingsCalendarTaxAccess,
-  shouldRenderFilingsCalendarTaxAccess,
-} from "@/components/FilingsCalendarTaxAccess";
+import { FilingsCalendarTaxAccess } from "@/components/FilingsCalendarTaxAccess";
 import { Tag } from "@/components/njwds-extended/Tag";
 import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -48,6 +45,13 @@ export const FilingsCalendar = (props: Props): ReactElement => {
   const editOnClick = () => {
     analytics.event.roadmap_profile_edit_button.click.go_to_profile_screen();
     router.push(ROUTES.profile);
+  };
+
+  const shouldRenderFilingsCalendarTaxAccess = (userData?: UserData): boolean => {
+    if (!userData) {
+      return false;
+    }
+    return LookupOperatingPhaseById(userData.profileData.operatingPhase).displayTaxAccessButton;
   };
 
   const getMonth = (num: number): ReactElement => {

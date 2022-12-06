@@ -1,3 +1,4 @@
+import { Content } from "@/components/Content";
 import { FilingsCalendarTaxAccess } from "@/components/FilingsCalendarTaxAccess";
 import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
@@ -20,14 +21,15 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
-  BusinessPersona,
+  createEmptyFormationFormData,
+  FormationData,
   FormationLegalType,
   getCurrentDateISOString,
   OperatingPhases,
-  randomInt,
   UserData,
 } from "@businessnjgovnavigator/shared";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { renderToStaticMarkup } from "react-dom/server";
 
 jest.mock("@/lib/data-hooks/useUserData", () => {
   return { useUserData: jest.fn() };
@@ -70,594 +72,745 @@ const renderUnauthenticatedFilingsCalendarTaxAccess = (initialUserData?: UserDat
 };
 
 describe("<FilingsCalendarTaxAccess />", () => {
-  let userDataWithExternalFormation: UserData;
-  let flow: Exclude<BusinessPersona, undefined>;
-
   beforeEach(() => {
     jest.resetAllMocks();
     setRegistrationModalIsVisible = jest.fn();
-    const legalStructure = randomLegalStructure({ requiresPublicFiling: true });
-
-    mockApi.postTaxRegistrationOnboarding.mockImplementation(() => {
-      return Promise.resolve({
-        ...userDataWithExternalFormation,
-        taxFilingData: generateTaxFilingData({
-          state: "SUCCESS",
-          registeredISO: getCurrentDateISOString(),
-          businessName: userDataWithExternalFormation.profileData.businessName,
-        }),
-      });
-    });
-    userDataWithExternalFormation = generateUserData({
-      profileData: generateProfileData({
-        legalStructureId: legalStructure.id,
-        operatingPhase: randomElementFromArray(
-          OperatingPhases.filter((obj) => {
-            return obj.displayTaxAccessButton === true;
-          })
-        ).id,
-      }),
-      formationData: generateFormationData(
-        { completedFilingPayment: false },
-        legalStructure.id as FormationLegalType
-      ),
-    });
-    flow = userDataWithExternalFormation.profileData.businessPersona ?? flow;
     setupStatefulUserDataContext();
     useMockRouter({});
   });
 
-  it("opens Gov2Go modal when on button click", () => {
-    renderFilingsCalendarTaxAccess(userDataWithExternalFormation);
-    fireEvent.click(screen.getByTestId("get-tax-access"));
-    expect(screen.getByTestId("modal-content")).toBeInTheDocument();
-  });
+  const generateTaxFilingUserData = (params: {
+    publicFiling: boolean;
+    formedInNavigator?: boolean;
+    businessName?: string;
+    responsibleOwnerName?: string;
+    taxId?: string;
+  }): UserData => {
+    const legalStructureId = randomLegalStructure({ requiresPublicFiling: params.publicFiling }).id;
 
-  it("opens the sign up modal when button is clicked in up and running guest mode for non sp/gp instead of tax modal", async () => {
-    const userData = generateUserData({
-      profileData: generateProfileData({
-        legalStructureId: randomLegalStructure({ requiresPublicFiling: true }).id,
-        operatingPhase: "GUEST_MODE_OWNING",
-      }),
-    });
+    let formationData: FormationData = {
+      formationFormData: createEmptyFormationFormData(),
+      formationResponse: undefined,
+      getFilingResponse: undefined,
+      completedFilingPayment: false,
+    };
 
-    renderUnauthenticatedFilingsCalendarTaxAccess(userData);
-    expect(screen.getByTestId("get-tax-access")).toBeInTheDocument();
-    fireEvent.click(screen.getByTestId("get-tax-access"));
-    expect(screen.queryByTestId("modal-content")).not.toBeInTheDocument();
-    await waitFor(() => {
-      return expect(setRegistrationModalIsVisible).toHaveBeenCalledWith(true);
-    });
-  });
-
-  it("updates userData with return link when the button is clicked in up and running guest mode", async () => {
-    const userData = generateUserData({
-      profileData: generateProfileData({
-        legalStructureId: randomLegalStructure({ requiresPublicFiling: true }).id,
-        operatingPhase: "GUEST_MODE_OWNING",
-      }),
-    });
-    renderUnauthenticatedFilingsCalendarTaxAccess(userData);
-    expect(screen.getByTestId("get-tax-access")).toBeInTheDocument();
-    fireEvent.click(screen.getByTestId("get-tax-access"));
-    await waitFor(() => {
-      return expect(currentUserData().preferences.returnToLink).toEqual(
-        `${ROUTES.dashboard}?${QUERIES.openTaxFilingsModal}=true`
+    if (params.publicFiling) {
+      formationData = generateFormationData(
+        { completedFilingPayment: !!params.formedInNavigator },
+        legalStructureId as FormationLegalType
       );
-    });
-  });
+    }
 
-  it("opens tax modal if the query parameter openTaxFilingsModal is true and shallow reloads", async () => {
-    const userData = generateUserData({
+    return generateUserData({
       profileData: generateProfileData({
-        legalStructureId: randomLegalStructure({ requiresPublicFiling: true }).id,
-        operatingPhase: "GUEST_MODE_OWNING",
+        legalStructureId: legalStructureId,
+        operatingPhase: randomElementFromArray(
+          OperatingPhases.filter((obj) => {
+            return obj.displayTaxAccessButton;
+          })
+        ).id,
+        taxId: params.taxId ? `*${params.taxId.slice(1)}` : "",
+        encryptedTaxId: params.taxId ? `encrypted-${params.taxId}` : "",
+        businessName: params.businessName || "",
+        responsibleOwnerName: params.responsibleOwnerName || "",
       }),
-    });
-    useMockRouter({ query: { openTaxFilingsModal: "true" }, isReady: true });
-    renderFilingsCalendarTaxAccess(userData);
-    await screen.findByTestId("modal-content");
-    expect(mockPush).toHaveBeenCalledWith({ pathname: ROUTES.dashboard }, undefined, { shallow: true });
-  });
-
-  it("pre-populates fields with userData values", () => {
-    renderFilingsCalendarTaxAccess({
-      ...userDataWithExternalFormation,
-      profileData: {
-        ...userDataWithExternalFormation.profileData,
-        taxId: "123456789123",
-        businessName: "MrFakesHotDogBonanza",
-      },
-    });
-    fireEvent.click(screen.getByTestId("get-tax-access"));
-    expect((screen.queryByLabelText("Business name") as HTMLInputElement)?.value).toEqual(
-      "MrFakesHotDogBonanza"
-    );
-    expect((screen.queryByLabelText("Tax id") as HTMLInputElement)?.value).toEqual("123-456-789/123");
-  });
-
-  it("calls the postRegistrationLookup method with the encrypted tax id", async () => {
-    renderFilingsCalendarTaxAccess({
-      ...userDataWithExternalFormation,
-      taxFilingData: generateTaxFilingData({
-        registeredISO: getCurrentDateISOString(),
-        businessName: userDataWithExternalFormation.profileData.businessName,
-      }),
-      profileData: {
-        ...userDataWithExternalFormation.profileData,
-        encryptedTaxId: "some-encrypted-value",
-        taxId: "*******89000",
-      },
-    });
-    await waitFor(() => {
-      return expect(mockApi.postTaxRegistrationLookup).toHaveBeenCalledWith({
-        encryptedTaxId: "some-encrypted-value",
-        taxId: "*******89000",
-        businessName: userDataWithExternalFormation.profileData.businessName,
-      });
-    });
-  });
-
-  it("makes businessName un-editable if they have completed formation with us", () => {
-    renderFilingsCalendarTaxAccess({
-      ...userDataWithExternalFormation,
-      profileData: {
-        ...userDataWithExternalFormation.profileData,
-        taxId: "123456789123",
-        businessName: "MrFakesHotDogBonanza",
-      },
-      formationData: { ...userDataWithExternalFormation.formationData, completedFilingPayment: true },
-    });
-    fireEvent.click(screen.getByTestId("get-tax-access"));
-    expect((screen.queryByLabelText("Business name") as HTMLInputElement)?.disabled).toEqual(true);
-  });
-
-  it("displays alert on success", async () => {
-    renderFilingsCalendarTaxAccess({
-      ...userDataWithExternalFormation,
-      profileData: {
-        ...userDataWithExternalFormation.profileData,
-        taxId: "123456789123",
-        businessName: "MrFakesHotDogBonanza",
-      },
+      formationData: formationData,
       taxFilingData: generateTaxFilingData({ state: undefined }),
     });
-    fireEvent.click(screen.getByTestId("get-tax-access"));
-    fireEvent.click(screen.getByTestId("modal-button-primary"));
-    await waitFor(() => {
-      return expect(currentUserData().taxFilingData.state).toEqual("SUCCESS");
+  };
+
+  describe("guest mode / query param behavior", () => {
+    it("opens the sign up modal when button is clicked in up and running guest mode", async () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          operatingPhase: "GUEST_MODE_OWNING",
+        }),
+      });
+
+      renderUnauthenticatedFilingsCalendarTaxAccess(userData);
+      openModal();
+      expect(screen.queryByTestId("modal-content")).not.toBeInTheDocument();
+      await waitFor(() => {
+        return expect(setRegistrationModalIsVisible).toHaveBeenCalledWith(true);
+      });
     });
-    await screen.findByTestId("tax-success");
-    expect(screen.getByText(Config.taxCalendar.SnackbarSuccessHeader)).toBeInTheDocument();
+
+    it("updates userData with return link when the button is clicked in up and running guest mode", async () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          operatingPhase: "GUEST_MODE_OWNING",
+        }),
+      });
+      renderUnauthenticatedFilingsCalendarTaxAccess(userData);
+      openModal();
+      await waitFor(() => {
+        return expect(currentUserData().preferences.returnToLink).toEqual(
+          `${ROUTES.dashboard}?${QUERIES.openTaxFilingsModal}=true`
+        );
+      });
+    });
+
+    it("opens tax modal if the query parameter openTaxFilingsModal is true and shallow reloads", async () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          operatingPhase: "GUEST_MODE_OWNING",
+        }),
+      });
+      useMockRouter({ query: { openTaxFilingsModal: "true" }, isReady: true });
+      renderFilingsCalendarTaxAccess(userData);
+      await screen.findByTestId("modal-content");
+      expect(mockPush).toHaveBeenCalledWith({ pathname: ROUTES.dashboard }, undefined, { shallow: true });
+    });
   });
 
-  it("updates taxId but not BusinessName on submit", async () => {
-    renderFilingsCalendarTaxAccess({
-      ...userDataWithExternalFormation,
-      profileData: {
-        ...userDataWithExternalFormation.profileData,
+  describe("when PublicFiling", () => {
+    const userDataWithPrefilledFields = generateTaxFilingUserData({
+      publicFiling: true,
+      taxId: "123456789123",
+      businessName: "MrFakesHotDogBonanza",
+    });
+
+    const userDataMissingTaxId = generateTaxFilingUserData({
+      publicFiling: true,
+      taxId: "",
+      businessName: "MrFakesHotDogBonanza",
+    });
+
+    const userDataMissingBusinessName = generateTaxFilingUserData({
+      publicFiling: true,
+      taxId: "123456789123",
+      businessName: "",
+    });
+
+    const taxIdDisplayFormat = "*23-456-789/123";
+
+    sharedTestsWhenAllFieldsPrefilled(userDataWithPrefilledFields);
+
+    it("pre-populates fields with userData values", () => {
+      renderFilingsCalendarTaxAccess(userDataWithPrefilledFields);
+      openModal();
+      expect((screen.queryByLabelText("Business name") as HTMLInputElement)?.value).toEqual(
+        "MrFakesHotDogBonanza"
+      );
+      expect((screen.queryByLabelText("Tax id") as HTMLInputElement)?.value).toEqual(taxIdDisplayFormat);
+    });
+
+    it("does not show disclaimer text for TaxId", () => {
+      renderFilingsCalendarTaxAccess(userDataWithPrefilledFields);
+      openModal();
+
+      expect(screen.getByTestId("modal-body")).toContainHTML(
+        renderToStaticMarkup(Content({ children: Config.taxCalendar.modalTaxIdMarkdown }))
+      );
+    });
+
+    it("makes businessName un-editable if they have completed formation with us", () => {
+      const userDataWithNavigatorFormation = generateTaxFilingUserData({
+        publicFiling: true,
+        formedInNavigator: true,
         taxId: "123456789123",
         businessName: "MrFakesHotDogBonanza",
-      },
-    });
-    mockApi.postTaxRegistrationOnboarding.mockResolvedValue({
-      ...userDataWithExternalFormation,
-      taxFilingData: generateTaxFilingData({
-        state: "FAILED",
-        businessName: userDataWithExternalFormation.profileData.businessName,
-      }),
-    });
-    fireEvent.click(screen.getByTestId("get-tax-access"));
-    fireEvent.change(screen.getByLabelText("Business name"), {
-      target: { value: "zoom" },
-    });
-    fireEvent.change(screen.getByLabelText("Tax id"), {
-      target: { value: "123456789000" },
-    });
-    fireEvent.click(screen.getByTestId("modal-button-primary"));
-    await waitFor(() => {
-      return expect(currentUserData().profileData.businessName).not.toEqual("zoom");
-    });
-    await waitFor(() => {
-      return expect(currentUserData().profileData.taxId).toEqual("123456789000");
-    });
-  });
-
-  it("displays in-line error and alert when businessName field is empty and save button is clicked", () => {
-    renderFilingsCalendarTaxAccess({
-      ...userDataWithExternalFormation,
-      profileData: {
-        ...userDataWithExternalFormation.profileData,
-        taxId: randomInt(12).toString(),
-        businessName: "",
-      },
-    });
-    fireEvent.click(screen.getByTestId("get-tax-access"));
-    fireEvent.click(screen.getByTestId("modal-button-primary"));
-    expect(screen.getByRole("alert")).toHaveTextContent(Config.taxCalendar.ModalErrorHeader);
-    expect(
-      screen.getByText(Config.profileDefaults.fields.businessName.default.errorTextRequired)
-    ).toBeInTheDocument();
-    expect(mockApi.postTaxRegistrationOnboarding).not.toHaveBeenCalled();
-  });
-
-  it("displays error when the businessName field is empty on blur", () => {
-    renderFilingsCalendarTaxAccess({
-      ...userDataWithExternalFormation,
-      profileData: {
-        ...userDataWithExternalFormation.profileData,
-        taxId: randomInt(12).toString(),
-        businessName: "MrFakesHotDogBonanza",
-      },
-    });
-    fireEvent.click(screen.getByTestId("get-tax-access"));
-    fireEvent.change(screen.getByLabelText("Business name"), { target: { value: "" } });
-    fireEvent.blur(screen.getByLabelText("Business name"));
-    expect(screen.queryByRole("alert")).not.toBeInTheDocument();
-    expect(
-      screen.getByText(Config.profileDefaults.fields.businessName.default.errorTextRequired)
-    ).toBeInTheDocument();
-  });
-
-  it("displays error when the taxId field is empty on blur", () => {
-    renderFilingsCalendarTaxAccess({
-      ...userDataWithExternalFormation,
-      profileData: {
-        ...userDataWithExternalFormation.profileData,
-        taxId: randomInt(12).toString(),
-        businessName: "MrFakesHotDogBonanza",
-      },
-    });
-    fireEvent.click(screen.getByTestId("get-tax-access"));
-    fireEvent.change(screen.getByLabelText("Tax id"), { target: { value: "" } });
-    fireEvent.blur(screen.getByLabelText("Tax id"));
-    expect(screen.queryByRole("alert")).not.toBeInTheDocument();
-    expect(
-      screen.getByText(Config.profileDefaults.fields.taxId.default.errorTextRequired)
-    ).toBeInTheDocument();
-  });
-
-  it("displays in-line error and alert when taxId field is invalid and save button is clicked", () => {
-    renderFilingsCalendarTaxAccess({
-      ...userDataWithExternalFormation,
-      profileData: {
-        ...userDataWithExternalFormation.profileData,
-        taxId: "",
-        businessName: "MrFakesHotDogBonanza",
-      },
-    });
-    fireEvent.click(screen.getByTestId("get-tax-access"));
-    fireEvent.click(screen.getByTestId("modal-button-primary"));
-    expect(screen.getByRole("alert")).toHaveTextContent(Config.taxCalendar.ModalErrorHeader);
-    expect(screen.getByRole("alert")).toHaveTextContent(Config.taxCalendar.ModalTaxErrorName);
-    expect(screen.getByRole("alert")).not.toHaveTextContent(Config.taxCalendar.ModalBusinessFieldErrorName);
-    expect(
-      screen.queryByText(Config.profileDefaults.fields.businessName.default.errorTextRequired)
-    ).not.toBeInTheDocument();
-    expect(
-      screen.getByText(Config.profileDefaults.fields.taxId.default.errorTextRequired)
-    ).toBeInTheDocument();
-    expect(mockApi.postTaxRegistrationOnboarding).not.toHaveBeenCalled();
-  });
-
-  it("displays in-line error and alert when businessName field is invalid and save button is clicked", () => {
-    renderFilingsCalendarTaxAccess({
-      ...userDataWithExternalFormation,
-      profileData: { ...userDataWithExternalFormation.profileData, taxId: "123456789123", businessName: "" },
-    });
-    fireEvent.click(screen.getByTestId("get-tax-access"));
-    fireEvent.click(screen.getByTestId("modal-button-primary"));
-    expect(screen.getByRole("alert")).toHaveTextContent(Config.taxCalendar.ModalErrorHeader);
-    expect(screen.getByRole("alert")).toHaveTextContent(Config.taxCalendar.ModalBusinessFieldErrorName);
-    expect(screen.getByRole("alert")).not.toHaveTextContent(Config.taxCalendar.ModalTaxErrorName);
-    expect(
-      screen.getByText(Config.profileDefaults.fields.businessName.default.errorTextRequired)
-    ).toBeInTheDocument();
-    expect(
-      screen.queryByText(Config.profileDefaults.fields.taxId.default.errorTextRequired)
-    ).not.toBeInTheDocument();
-    expect(mockApi.postTaxRegistrationOnboarding).not.toHaveBeenCalled();
-  });
-
-  it("displays in-line error and alert when businessName field and taxId field is invalid and save button is clicked", () => {
-    renderFilingsCalendarTaxAccess({
-      ...userDataWithExternalFormation,
-      profileData: { ...userDataWithExternalFormation.profileData, taxId: "123", businessName: "" },
-    });
-    fireEvent.click(screen.getByTestId("get-tax-access"));
-    fireEvent.click(screen.getByTestId("modal-button-primary"));
-    expect(screen.getByRole("alert")).toHaveTextContent(Config.taxCalendar.ModalErrorHeader);
-    expect(screen.getByRole("alert")).toHaveTextContent(Config.taxCalendar.ModalBusinessFieldErrorName);
-    expect(screen.getByRole("alert")).toHaveTextContent(Config.taxCalendar.ModalTaxErrorName);
-    expect(
-      screen.getByText(Config.profileDefaults.fields.businessName.default.errorTextRequired)
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(Config.profileDefaults.fields.taxId.default.errorTextRequired)
-    ).toBeInTheDocument();
-    expect(mockApi.postTaxRegistrationOnboarding).not.toHaveBeenCalled();
-  });
-
-  describe("on api failed state response", () => {
-    it("displays different in-line errors and alert with full taxId field", async () => {
-      renderFilingsCalendarTaxAccess({
-        ...userDataWithExternalFormation,
-        profileData: {
-          ...userDataWithExternalFormation.profileData,
-          taxId: "123456789123",
-          businessName: "MrFakesHotDogBonanza",
-        },
-        taxFilingData: generateTaxFilingData({ state: undefined }),
       });
+      renderFilingsCalendarTaxAccess(userDataWithNavigatorFormation);
+      openModal();
+      expect((screen.queryByLabelText("Business name") as HTMLInputElement)?.disabled).toEqual(true);
+    });
+
+    it("updates taxId but not BusinessName on submit", async () => {
+      renderFilingsCalendarTaxAccess(userDataWithPrefilledFields);
+      mockApi.postTaxRegistrationOnboarding.mockResolvedValue({
+        ...userDataWithPrefilledFields,
+        taxFilingData: generateTaxFilingData({
+          state: "FAILED",
+          businessName: userDataWithPrefilledFields.profileData.businessName,
+        }),
+      });
+      openModal();
+      fireEvent.change(screen.getByLabelText("Business name"), {
+        target: { value: "zoom" },
+      });
+      fireEvent.change(screen.getByLabelText("Tax id"), {
+        target: { value: "999888777666" },
+      });
+      clickSave();
+      await waitFor(() => {
+        return expect(currentUserData().profileData.businessName).not.toEqual("zoom");
+      });
+      await waitFor(() => {
+        return expect(currentUserData().profileData.taxId).toEqual("999888777666");
+      });
+    });
+
+    it("displays in-line error and alert when businessName field is empty and save button is clicked", () => {
+      renderFilingsCalendarTaxAccess(userDataMissingBusinessName);
+      openModal();
+      clickSave();
+      expect(screen.getByRole("alert")).toHaveTextContent(Config.taxCalendar.modalErrorHeader);
+      expect(screen.getByRole("alert")).toHaveTextContent(Config.taxCalendar.modalBusinessFieldErrorName);
+      expect(screen.getByRole("alert")).not.toHaveTextContent(Config.taxCalendar.modalTaxFieldErrorName);
+      expect(screen.getByRole("alert")).not.toHaveTextContent(
+        Config.taxCalendar.modalResponsibleOwnerFieldErrorName
+      );
+      expect(
+        screen.getByText(Config.profileDefaults.fields.businessName.default.errorTextRequired)
+      ).toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.profileDefaults.fields.taxId.default.errorTextRequired)
+      ).not.toBeInTheDocument();
+      expect(mockApi.postTaxRegistrationOnboarding).not.toHaveBeenCalled();
+    });
+
+    it("displays in-line error and alert when taxId field is empty and save button is clicked", () => {
+      renderFilingsCalendarTaxAccess(userDataMissingTaxId);
+      openModal();
+      clickSave();
+      expect(screen.getByRole("alert")).toHaveTextContent(Config.taxCalendar.modalErrorHeader);
+      expect(screen.getByRole("alert")).toHaveTextContent(Config.taxCalendar.modalTaxFieldErrorName);
+      expect(screen.getByRole("alert")).not.toHaveTextContent(Config.taxCalendar.modalBusinessFieldErrorName);
+      expect(screen.getByRole("alert")).not.toHaveTextContent(
+        Config.taxCalendar.modalResponsibleOwnerFieldErrorName
+      );
+      expect(
+        screen.queryByText(Config.profileDefaults.fields.businessName.default.errorTextRequired)
+      ).not.toBeInTheDocument();
+      expect(
+        screen.getByText(Config.profileDefaults.fields.taxId.default.errorTextRequired)
+      ).toBeInTheDocument();
+      expect(mockApi.postTaxRegistrationOnboarding).not.toHaveBeenCalled();
+    });
+
+    it("displays in-line error and alert when businessName field and taxId field is invalid and save button is clicked", () => {
+      const userDataMissingBoth = generateTaxFilingUserData({
+        publicFiling: true,
+        taxId: "123",
+        businessName: "",
+      });
+
+      renderFilingsCalendarTaxAccess(userDataMissingBoth);
+      openModal();
+      clickSave();
+      expect(screen.getByRole("alert")).toHaveTextContent(Config.taxCalendar.modalErrorHeader);
+      expect(screen.getByRole("alert")).toHaveTextContent(Config.taxCalendar.modalBusinessFieldErrorName);
+      expect(screen.getByRole("alert")).toHaveTextContent(Config.taxCalendar.modalTaxFieldErrorName);
+      expect(screen.getByRole("alert")).not.toHaveTextContent(
+        Config.taxCalendar.modalResponsibleOwnerFieldErrorName
+      );
+      expect(
+        screen.getByText(Config.profileDefaults.fields.businessName.default.errorTextRequired)
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.profileDefaults.fields.taxId.default.errorTextRequired)
+      ).toBeInTheDocument();
+      expect(mockApi.postTaxRegistrationOnboarding).not.toHaveBeenCalled();
+    });
+
+    it("displays inline errors when api failed", async () => {
+      renderFilingsCalendarTaxAccess(userDataWithPrefilledFields);
       mockApi.postTaxRegistrationOnboarding.mockImplementation(() => {
         return Promise.resolve({
-          ...userDataWithExternalFormation,
-          taxFilingData: generateTaxFilingData({
-            state: "FAILED",
-            businessName: userDataWithExternalFormation.profileData.businessName,
-          }),
+          ...userDataWithPrefilledFields,
+          taxFilingData: generateTaxFilingData({ state: "FAILED" }),
         });
       });
-
-      fireEvent.click(screen.getByTestId("get-tax-access"));
-      fireEvent.click(screen.getByTestId("modal-button-primary"));
+      openModal();
+      clickSave();
       await screen.findByRole("alert");
       expect(screen.getByRole("alert")).toHaveTextContent(
-        markdownToText(Config.taxCalendar.FailedErrorMessageMarkdown)
+        markdownToText(Config.taxCalendar.failedErrorMessageMarkdown)
       );
-      expect(screen.getByText(Config.taxCalendar.FailedBusinessFieldHelper)).toBeInTheDocument();
-      expect(screen.getByText(Config.taxCalendar.FailedTaxIdHelper)).toBeInTheDocument();
-      expect(currentUserData().taxFilingData.state).toEqual("FAILED");
+      expect(screen.getByText(Config.taxCalendar.failedTaxIdHelper)).toBeInTheDocument();
+      expect(screen.getByText(Config.taxCalendar.failedBusinessFieldHelper)).toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.taxCalendar.failedResponsibleOwnerFieldHelper)
+      ).not.toBeInTheDocument();
     });
 
-    it("displays different in-line errors and alert with split taxId field", async () => {
-      renderFilingsCalendarTaxAccess({
-        ...userDataWithExternalFormation,
-        profileData: {
-          ...userDataWithExternalFormation.profileData,
-          taxId: "123456789",
-          businessName: "MrFakesHotDogBonanza",
-        },
-      });
+    it("displays error when the businessName field is empty on blur", () => {
+      renderFilingsCalendarTaxAccess(userDataWithPrefilledFields);
+      openModal();
+      fireEvent.change(screen.getByLabelText("Business name"), { target: { value: "" } });
+      fireEvent.blur(screen.getByLabelText("Business name"));
+      expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+      expect(
+        screen.getByText(Config.profileDefaults.fields.businessName.default.errorTextRequired)
+      ).toBeInTheDocument();
+    });
+
+    it("submits taxId and businessName to api", async () => {
       mockApi.postTaxRegistrationOnboarding.mockResolvedValue({
-        ...userDataWithExternalFormation,
-        taxFilingData: generateTaxFilingData({
-          state: "FAILED",
-          businessName: userDataWithExternalFormation.profileData.businessName,
-        }),
-      });
-      fireEvent.click(screen.getByTestId("get-tax-access"));
-      fireEvent.click(screen.getByLabelText("Tax id location"));
-      fireEvent.change(screen.getByLabelText("Tax id location"), { target: { value: "123" } });
-      fireEvent.click(screen.getByTestId("modal-button-primary"));
-      await screen.findByRole("alert");
-      expect(screen.getByRole("alert")).toHaveTextContent(
-        markdownToText(Config.taxCalendar.FailedErrorMessageMarkdown)
-      );
-      expect(screen.getByText(Config.taxCalendar.FailedBusinessFieldHelper)).toBeInTheDocument();
-      expect(screen.getByText(Config.taxCalendar.FailedTaxIdHelper)).toBeInTheDocument();
-    });
-
-    it("displays different alert with unknown request failure", async () => {
-      renderFilingsCalendarTaxAccess({
-        ...userDataWithExternalFormation,
-        profileData: {
-          ...userDataWithExternalFormation.profileData,
-          taxId: "123456789123",
-          businessName: "MrFakesHotDogBonanza",
-        },
-      });
-      mockApi.postTaxRegistrationOnboarding.mockReturnValue(Promise.reject(500));
-      fireEvent.click(screen.getByTestId("get-tax-access"));
-      fireEvent.click(screen.getByTestId("modal-button-primary"));
-      await screen.findByRole("alert");
-      expect(screen.getByRole("alert")).toHaveTextContent(
-        markdownToText(Config.taxCalendar.FailedUnknownMarkdown)
-      );
-      expect(screen.queryByText(Config.taxCalendar.FailedBusinessFieldHelper)).not.toBeInTheDocument();
-      expect(screen.queryByText(Config.taxCalendar.FailedTaxIdHelper)).not.toBeInTheDocument();
-    });
-
-    it("displays different alert with unknown api error", async () => {
-      renderFilingsCalendarTaxAccess({
-        ...userDataWithExternalFormation,
-        profileData: {
-          ...userDataWithExternalFormation.profileData,
-          taxId: "123456789123",
-          businessName: "MrFakesHotDogBonanza",
-        },
-      });
-      mockApi.postTaxRegistrationOnboarding.mockResolvedValue({
-        ...userDataWithExternalFormation,
-        taxFilingData: generateTaxFilingData({
-          state: "API_ERROR",
-          businessName: userDataWithExternalFormation.profileData.businessName,
-        }),
-      });
-      fireEvent.click(screen.getByTestId("get-tax-access"));
-      fireEvent.click(screen.getByTestId("modal-button-primary"));
-      await screen.findByRole("alert");
-      expect(screen.getByRole("alert")).toHaveTextContent(
-        markdownToText(Config.taxCalendar.FailedUnknownMarkdown)
-      );
-      expect(screen.queryByText(Config.taxCalendar.FailedBusinessFieldHelper)).not.toBeInTheDocument();
-      expect(screen.queryByText(Config.taxCalendar.FailedTaxIdHelper)).not.toBeInTheDocument();
-    });
-  });
-
-  describe("different taxFiling states and update behavior", () => {
-    it("does not do taxFiling lookup on page load if not registered", async () => {
-      renderFilingsCalendarTaxAccess({
-        ...userDataWithExternalFormation,
-        taxFilingData: generateTaxFilingData({
-          registeredISO: undefined,
-          businessName: userDataWithExternalFormation.profileData.businessName,
-        }),
-      });
-      expect(mockApi.postTaxRegistrationLookup).not.toHaveBeenCalled();
-    });
-
-    it("does taxFiling lookup on page load if registered", async () => {
-      renderFilingsCalendarTaxAccess({
-        ...userDataWithExternalFormation,
-        taxFilingData: generateTaxFilingData({
-          registeredISO: getCurrentDateISOString(),
-          businessName: userDataWithExternalFormation.profileData.businessName,
-        }),
-      });
-      expect(mockApi.postTaxRegistrationLookup).toHaveBeenCalled();
-      await waitFor(() => {
-        return expect(userDataUpdatedNTimes()).toEqual(1);
-      });
-    });
-
-    it("shows button component when state is FAILED and unregistered", async () => {
-      renderFilingsCalendarTaxAccess({
-        ...userDataWithExternalFormation,
-        taxFilingData: generateTaxFilingData({
-          state: "FAILED",
-          registeredISO: undefined,
-          businessName: userDataWithExternalFormation.profileData.businessName,
-        }),
-      });
-      expect(mockApi.postTaxRegistrationLookup).not.toHaveBeenCalled();
-      expect(screen.queryByTestId("pending-container")).not.toBeInTheDocument();
-      expect(screen.getByTestId("button-container")).toBeInTheDocument();
-    });
-
-    it("shows button component when state is undefined and unregistered", async () => {
-      renderFilingsCalendarTaxAccess({
-        ...userDataWithExternalFormation,
-        taxFilingData: generateTaxFilingData({
-          state: undefined,
-          registeredISO: undefined,
-          businessName: userDataWithExternalFormation.profileData.businessName,
-        }),
-      });
-      expect(mockApi.postTaxRegistrationLookup).not.toHaveBeenCalled();
-      expect(screen.queryByTestId("pending-container")).not.toBeInTheDocument();
-      expect(screen.getByTestId("button-container")).toBeInTheDocument();
-    });
-
-    it("hides pending and button components when state is SUCCESS", async () => {
-      mockApi.postTaxRegistrationLookup.mockImplementation(() => {
-        return Promise.resolve({
-          ...userDataWithExternalFormation,
-          taxFilingData: generateTaxFilingData({
-            registeredISO: getCurrentDateISOString(),
-            state: "SUCCESS",
-            businessName: userDataWithExternalFormation.profileData.businessName,
-          }),
-        });
-      });
-      renderFilingsCalendarTaxAccess({
-        ...userDataWithExternalFormation,
-        taxFilingData: generateTaxFilingData({
-          registeredISO: getCurrentDateISOString(),
-          state: "PENDING",
-          businessName: userDataWithExternalFormation.profileData.businessName,
-        }),
-      });
-      expect(mockApi.postTaxRegistrationLookup).toHaveBeenCalled();
-      await waitFor(() => {
-        return expect(userDataUpdatedNTimes()).toEqual(1);
-      });
-      await waitFor(() => {
-        return expect(currentUserData().taxFilingData.state).toEqual("SUCCESS");
-      });
-      expect(screen.queryByTestId("pending-container")).not.toBeInTheDocument();
-      expect(screen.queryByTestId("button-container")).not.toBeInTheDocument();
-    });
-
-    it("hides pending and button components when state is API_ERROR but registered", async () => {
-      mockApi.postTaxRegistrationLookup.mockImplementation(() => {
-        return Promise.resolve({
-          ...userDataWithExternalFormation,
-          taxFilingData: generateTaxFilingData({
-            registeredISO: getCurrentDateISOString(),
-            state: "API_ERROR",
-            businessName: userDataWithExternalFormation.profileData.businessName,
-          }),
-        });
-      });
-      renderFilingsCalendarTaxAccess({
-        ...userDataWithExternalFormation,
-        taxFilingData: generateTaxFilingData({
-          registeredISO: getCurrentDateISOString(),
-          state: "PENDING",
-          businessName: userDataWithExternalFormation.profileData.businessName,
-        }),
-      });
-      expect(mockApi.postTaxRegistrationLookup).toHaveBeenCalled();
-      await waitFor(() => {
-        return expect(userDataUpdatedNTimes()).toEqual(1);
-      });
-      await waitFor(() => {
-        return expect(currentUserData().taxFilingData.state).toEqual("API_ERROR");
-      });
-      expect(screen.queryByTestId("pending-container")).not.toBeInTheDocument();
-      expect(screen.queryByTestId("button-container")).not.toBeInTheDocument();
-    });
-
-    it("shows registration followup component when state is SUCCESS but it's before the Saturday after registration", async () => {
-      const userData = {
-        ...userDataWithExternalFormation,
+        ...userDataWithPrefilledFields,
         taxFilingData: generateTaxFilingData({
           state: "SUCCESS",
           registeredISO: getCurrentDateISOString(),
-          businessName: userDataWithExternalFormation.profileData.businessName,
-        }),
-      };
-      mockApi.postTaxRegistrationLookup.mockImplementation(() => {
-        return Promise.resolve(userData);
-      });
-      renderFilingsCalendarTaxAccess({
-        ...userDataWithExternalFormation,
-        taxFilingData: generateTaxFilingData({
-          state: "PENDING",
-          registeredISO: getCurrentDateISOString(),
-          businessName: userDataWithExternalFormation.profileData.businessName,
         }),
       });
+      renderFilingsCalendarTaxAccess(userDataWithPrefilledFields);
+      openModal();
+      clickSave();
       await waitFor(() => {
-        return expect(userDataUpdatedNTimes()).toEqual(1);
+        return expect(currentUserData().taxFilingData.state).toEqual("SUCCESS");
       });
-      expect(screen.queryByTestId("get-tax-access")).not.toBeInTheDocument();
-      expect(screen.queryByTestId("pending-container")).not.toBeInTheDocument();
-      expect(screen.queryByTestId("button-container")).not.toBeInTheDocument();
-      expect(screen.getByTestId("alert-content-container")).toBeInTheDocument();
+      expect(mockApi.postTaxRegistrationOnboarding).toHaveBeenCalledWith({
+        taxId: userDataWithPrefilledFields.profileData.taxId,
+        businessName: userDataWithPrefilledFields.profileData.businessName,
+        encryptedTaxId: userDataWithPrefilledFields.profileData.encryptedTaxId,
+      });
+    });
+  });
+
+  describe("when TradeName", () => {
+    const userDataWithPrefilledFields = generateTaxFilingUserData({
+      publicFiling: false,
+      taxId: "123456789123",
+      responsibleOwnerName: "FirstName LastName",
     });
 
-    it("shows pending component when state is PENDING", async () => {
-      mockApi.postTaxRegistrationLookup.mockImplementation(() => {
+    const userDataMissingTaxId = generateTaxFilingUserData({
+      publicFiling: false,
+      taxId: "",
+      responsibleOwnerName: "FirstName LastName",
+    });
+
+    const userDataMissingResponsibleOwnerName = generateTaxFilingUserData({
+      publicFiling: false,
+      taxId: "123456789123",
+      responsibleOwnerName: "",
+    });
+
+    const taxIdDisplayFormat = "*23-456-789/123";
+
+    sharedTestsWhenAllFieldsPrefilled(userDataWithPrefilledFields);
+
+    it("pre-populates fields with userData values", () => {
+      renderFilingsCalendarTaxAccess(userDataWithPrefilledFields);
+      openModal();
+      expect((screen.queryByLabelText("Responsible owner name") as HTMLInputElement)?.value).toEqual(
+        "FirstName LastName"
+      );
+      expect((screen.queryByLabelText("Tax id") as HTMLInputElement)?.value).toEqual(taxIdDisplayFormat);
+    });
+
+    it("shows disclaimer text for TaxId", () => {
+      renderFilingsCalendarTaxAccess(userDataWithPrefilledFields);
+      openModal();
+
+      expect(screen.getByTestId("modal-body")).toContainHTML(
+        renderToStaticMarkup(
+          Content({
+            children: `${Config.taxCalendar.modalTaxIdMarkdown}\n\n${Config.taxCalendar.taxIdDisclaimerMd}`,
+          })
+        )
+      );
+    });
+
+    it("updates taxId and responsibleOwnerName on submit", async () => {
+      mockApi.postTaxRegistrationOnboarding.mockResolvedValue({
+        ...userDataWithPrefilledFields,
+        taxFilingData: generateTaxFilingData({
+          state: "SUCCESS",
+        }),
+      });
+
+      renderFilingsCalendarTaxAccess(userDataWithPrefilledFields);
+
+      openModal();
+      fireEvent.change(screen.getByLabelText("Responsible owner name"), {
+        target: { value: "zoom" },
+      });
+      fireEvent.change(screen.getByLabelText("Tax id"), {
+        target: { value: "123456789000" },
+      });
+      clickSave();
+      await waitFor(() => {
+        return expect(currentUserData().profileData.responsibleOwnerName).toEqual("zoom");
+      });
+      await waitFor(() => {
+        return expect(currentUserData().profileData.taxId).toEqual("123456789000");
+      });
+    });
+
+    it("displays in-line error and alert when responsibleOwnerName field is empty and save button is clicked", () => {
+      renderFilingsCalendarTaxAccess(userDataMissingResponsibleOwnerName);
+      openModal();
+      clickSave();
+
+      expect(screen.getByRole("alert")).toHaveTextContent(Config.taxCalendar.modalErrorHeader);
+      expect(screen.getByRole("alert")).toHaveTextContent(
+        Config.taxCalendar.modalResponsibleOwnerFieldErrorName
+      );
+      expect(screen.getByRole("alert")).not.toHaveTextContent(Config.taxCalendar.modalTaxFieldErrorName);
+      expect(screen.getByRole("alert")).not.toHaveTextContent(Config.taxCalendar.modalBusinessFieldErrorName);
+
+      expect(
+        screen.getByText(Config.profileDefaults.fields.responsibleOwnerName.default.errorTextRequired)
+      ).toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.profileDefaults.fields.taxId.default.errorTextRequired)
+      ).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.profileDefaults.fields.businessName.default.errorTextRequired)
+      ).not.toBeInTheDocument();
+
+      expect(mockApi.postTaxRegistrationOnboarding).not.toHaveBeenCalled();
+    });
+
+    it("displays in-line error and alert when taxId field is empty and save button is clicked", () => {
+      renderFilingsCalendarTaxAccess(userDataMissingTaxId);
+      openModal();
+      clickSave();
+      expect(screen.getByRole("alert")).toHaveTextContent(Config.taxCalendar.modalErrorHeader);
+      expect(screen.getByRole("alert")).toHaveTextContent(Config.taxCalendar.modalTaxFieldErrorName);
+      expect(screen.getByRole("alert")).not.toHaveTextContent(Config.taxCalendar.modalBusinessFieldErrorName);
+      expect(screen.getByRole("alert")).not.toHaveTextContent(
+        Config.taxCalendar.modalResponsibleOwnerFieldErrorName
+      );
+      expect(
+        screen.queryByText(Config.profileDefaults.fields.businessName.default.errorTextRequired)
+      ).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.profileDefaults.fields.responsibleOwnerName.default.errorTextRequired)
+      ).not.toBeInTheDocument();
+      expect(
+        screen.getByText(Config.profileDefaults.fields.taxId.default.errorTextRequired)
+      ).toBeInTheDocument();
+      expect(mockApi.postTaxRegistrationOnboarding).not.toHaveBeenCalled();
+    });
+
+    it("displays in-line error and alert when responsibleOwnerName field and taxId field is invalid and save button is clicked", () => {
+      const userDataMissingBoth = generateTaxFilingUserData({
+        publicFiling: false,
+        taxId: "",
+        responsibleOwnerName: "",
+      });
+
+      renderFilingsCalendarTaxAccess(userDataMissingBoth);
+      openModal();
+      clickSave();
+      expect(screen.getByRole("alert")).toHaveTextContent(Config.taxCalendar.modalErrorHeader);
+      expect(screen.getByRole("alert")).toHaveTextContent(
+        Config.taxCalendar.modalResponsibleOwnerFieldErrorName
+      );
+      expect(screen.getByRole("alert")).toHaveTextContent(Config.taxCalendar.modalTaxFieldErrorName);
+      expect(screen.getByRole("alert")).not.toHaveTextContent(Config.taxCalendar.modalBusinessFieldErrorName);
+
+      expect(
+        screen.getByText(Config.profileDefaults.fields.responsibleOwnerName.default.errorTextRequired)
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.profileDefaults.fields.taxId.default.errorTextRequired)
+      ).toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.profileDefaults.fields.businessName.default.errorTextRequired)
+      ).not.toBeInTheDocument();
+
+      expect(mockApi.postTaxRegistrationOnboarding).not.toHaveBeenCalled();
+    });
+
+    it("displays error when the responsibleOwnerName field is empty on blur", () => {
+      renderFilingsCalendarTaxAccess(userDataWithPrefilledFields);
+      openModal();
+      fireEvent.change(screen.getByLabelText("Responsible owner name"), { target: { value: "" } });
+      fireEvent.blur(screen.getByLabelText("Responsible owner name"));
+      expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+      expect(
+        screen.getByText(Config.profileDefaults.fields.responsibleOwnerName.default.errorTextRequired)
+      ).toBeInTheDocument();
+    });
+
+    it("displays alert & inline errors when api failed", async () => {
+      renderFilingsCalendarTaxAccess(userDataWithPrefilledFields);
+      mockApi.postTaxRegistrationOnboarding.mockImplementation(() => {
         return Promise.resolve({
-          ...userDataWithExternalFormation,
+          ...userDataWithPrefilledFields,
+          taxFilingData: generateTaxFilingData({ state: "FAILED" }),
+        });
+      });
+      openModal();
+      clickSave();
+      await screen.findByRole("alert");
+
+      expect(screen.getByRole("alert")).toHaveTextContent(
+        markdownToText(Config.taxCalendar.failedErrorMessageMarkdown)
+      );
+      expect(screen.getByText(Config.taxCalendar.failedTaxIdHelper)).toBeInTheDocument();
+      expect(screen.getByText(Config.taxCalendar.failedResponsibleOwnerFieldHelper)).toBeInTheDocument();
+      expect(screen.queryByText(Config.taxCalendar.failedBusinessFieldHelper)).not.toBeInTheDocument();
+    });
+
+    it("submits taxId and responsibleOwnerName to api", async () => {
+      mockApi.postTaxRegistrationOnboarding.mockResolvedValue({
+        ...userDataWithPrefilledFields,
+        taxFilingData: generateTaxFilingData({
+          state: "SUCCESS",
+          registeredISO: getCurrentDateISOString(),
+        }),
+      });
+
+      renderFilingsCalendarTaxAccess(userDataWithPrefilledFields);
+      openModal();
+      clickSave();
+      await waitFor(() => {
+        return expect(currentUserData().taxFilingData.state).toEqual("SUCCESS");
+      });
+      expect(mockApi.postTaxRegistrationOnboarding).toHaveBeenCalledWith({
+        taxId: userDataWithPrefilledFields.profileData.taxId,
+        businessName: userDataWithPrefilledFields.profileData.responsibleOwnerName,
+        encryptedTaxId: userDataWithPrefilledFields.profileData.encryptedTaxId,
+      });
+    });
+  });
+
+  function sharedTestsWhenAllFieldsPrefilled(userData: UserData) {
+    const pendingStateUserData = {
+      ...userData,
+      taxFilingData: generateTaxFilingData({
+        registeredISO: getCurrentDateISOString(),
+        state: "PENDING",
+      }),
+    };
+
+    it("opens tax access modal when on button click", () => {
+      renderFilingsCalendarTaxAccess(userData);
+      fireEvent.click(screen.getByTestId("get-tax-access"));
+      expect(screen.getByTestId("modal-content")).toBeInTheDocument();
+    });
+
+    it("displays error when the taxId field is empty on blur", () => {
+      renderFilingsCalendarTaxAccess(userData);
+      openModal();
+      fireEvent.change(screen.getByLabelText("Tax id"), { target: { value: "" } });
+      fireEvent.blur(screen.getByLabelText("Tax id"));
+      expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+      expect(
+        screen.getByText(Config.profileDefaults.fields.taxId.default.errorTextRequired)
+      ).toBeInTheDocument();
+    });
+
+    it("displays alert on success", async () => {
+      mockApi.postTaxRegistrationOnboarding.mockResolvedValue({
+        ...userData,
+        taxFilingData: generateTaxFilingData({
+          state: "SUCCESS",
+          registeredISO: getCurrentDateISOString(),
+        }),
+      });
+
+      renderFilingsCalendarTaxAccess(userData);
+      openModal();
+      clickSave();
+      await waitFor(() => {
+        return expect(currentUserData().taxFilingData.state).toEqual("SUCCESS");
+      });
+      await screen.findByTestId("tax-success");
+      expect(screen.getByText(Config.taxCalendar.snackbarSuccessHeader)).toBeInTheDocument();
+    });
+
+    it("succeeds with 9-digit split-field tax id", async () => {
+      renderFilingsCalendarTaxAccess({
+        ...userData,
+        profileData: {
+          ...userData.profileData,
+          taxId: "123456789",
+        },
+      });
+
+      mockApi.postTaxRegistrationOnboarding.mockResolvedValue({
+        ...userData,
+        taxFilingData: generateTaxFilingData({
+          state: "SUCCESS",
+          registeredISO: getCurrentDateISOString(),
+        }),
+      });
+
+      openModal();
+      fireEvent.click(screen.getByLabelText("Tax id location"));
+      fireEvent.change(screen.getByLabelText("Tax id location"), { target: { value: "123" } });
+      clickSave();
+      await waitFor(() => {
+        return expect(currentUserData().taxFilingData.state).toEqual("SUCCESS");
+      });
+      await screen.findByTestId("tax-success");
+      expect(screen.getByText(Config.taxCalendar.snackbarSuccessHeader)).toBeInTheDocument();
+    });
+
+    describe("on api failed state response", () => {
+      it("displays unknown-error alert with unknown api error", async () => {
+        renderFilingsCalendarTaxAccess(userData);
+        mockApi.postTaxRegistrationOnboarding.mockResolvedValue({
+          ...userData,
           taxFilingData: generateTaxFilingData({
-            state: "PENDING",
-            registeredISO: getCurrentDateISOString(),
-            businessName: userDataWithExternalFormation.profileData.businessName,
+            state: "API_ERROR",
           }),
+        });
+        openModal();
+        clickSave();
+        await screen.findByRole("alert");
+        expect(screen.getByRole("alert")).toHaveTextContent(
+          markdownToText(Config.taxCalendar.failedUnknownMarkdown)
+        );
+        expect(screen.queryByText(Config.taxCalendar.failedBusinessFieldHelper)).not.toBeInTheDocument();
+        expect(
+          screen.queryByText(Config.taxCalendar.failedResponsibleOwnerFieldHelper)
+        ).not.toBeInTheDocument();
+        expect(screen.queryByText(Config.taxCalendar.failedTaxIdHelper)).not.toBeInTheDocument();
+      });
+
+      it("displays unknown-error alert with api 500 request failure", async () => {
+        renderFilingsCalendarTaxAccess(userData);
+        mockApi.postTaxRegistrationOnboarding.mockReturnValue(Promise.reject(500));
+        openModal();
+        clickSave();
+        await screen.findByRole("alert");
+        expect(screen.getByRole("alert")).toHaveTextContent(
+          markdownToText(Config.taxCalendar.failedUnknownMarkdown)
+        );
+        expect(screen.queryByText(Config.taxCalendar.failedBusinessFieldHelper)).not.toBeInTheDocument();
+        expect(
+          screen.queryByText(Config.taxCalendar.failedResponsibleOwnerFieldHelper)
+        ).not.toBeInTheDocument();
+        expect(screen.queryByText(Config.taxCalendar.failedTaxIdHelper)).not.toBeInTheDocument();
+      });
+    });
+
+    describe("different taxFiling states and update behavior", () => {
+      it("does not do taxFiling lookup on page load if not registered", async () => {
+        renderFilingsCalendarTaxAccess({
+          ...userData,
+          taxFilingData: generateTaxFilingData({
+            registeredISO: undefined,
+          }),
+        });
+        expect(mockApi.postTaxRegistrationLookup).not.toHaveBeenCalled();
+      });
+
+      it("does taxFiling lookup on page load if registered", async () => {
+        mockApi.postTaxRegistrationLookup.mockResolvedValue(userData);
+        renderFilingsCalendarTaxAccess({
+          ...userData,
+          taxFilingData: generateTaxFilingData({
+            registeredISO: getCurrentDateISOString(),
+          }),
+        });
+        expect(mockApi.postTaxRegistrationLookup).toHaveBeenCalled();
+        await waitFor(() => {
+          return expect(userDataUpdatedNTimes()).toEqual(1);
         });
       });
 
-      renderFilingsCalendarTaxAccess({
-        ...userDataWithExternalFormation,
-        taxFilingData: generateTaxFilingData({
-          state: "API_ERROR",
-          registeredISO: getCurrentDateISOString(),
-          businessName: userDataWithExternalFormation.profileData.businessName,
-        }),
+      it("shows button component when state is FAILED and unregistered", async () => {
+        renderFilingsCalendarTaxAccess({
+          ...userData,
+          taxFilingData: generateTaxFilingData({
+            state: "FAILED",
+            registeredISO: undefined,
+          }),
+        });
+        expect(mockApi.postTaxRegistrationLookup).not.toHaveBeenCalled();
+        expect(screen.queryByTestId("pending-container")).not.toBeInTheDocument();
+        expect(screen.getByTestId("button-container")).toBeInTheDocument();
       });
-      expect(mockApi.postTaxRegistrationLookup).toHaveBeenCalled();
-      await waitFor(() => {
-        return expect(userDataUpdatedNTimes()).toEqual(1);
+
+      it("shows button component when state is undefined and unregistered", async () => {
+        renderFilingsCalendarTaxAccess({
+          ...userData,
+          taxFilingData: generateTaxFilingData({
+            state: undefined,
+            registeredISO: undefined,
+          }),
+        });
+        expect(mockApi.postTaxRegistrationLookup).not.toHaveBeenCalled();
+        expect(screen.queryByTestId("pending-container")).not.toBeInTheDocument();
+        expect(screen.getByTestId("button-container")).toBeInTheDocument();
       });
-      await waitFor(() => {
-        return expect(currentUserData().taxFilingData.state).toEqual("PENDING");
+
+      it("hides pending and button components when state is SUCCESS", async () => {
+        mockApi.postTaxRegistrationLookup.mockResolvedValue({
+          ...pendingStateUserData,
+          taxFilingData: generateTaxFilingData({
+            registeredISO: getCurrentDateISOString(),
+            state: "SUCCESS",
+          }),
+        });
+
+        renderFilingsCalendarTaxAccess(pendingStateUserData);
+
+        expect(mockApi.postTaxRegistrationLookup).toHaveBeenCalled();
+        await waitFor(() => {
+          return expect(userDataUpdatedNTimes()).toEqual(1);
+        });
+        await waitFor(() => {
+          return expect(currentUserData().taxFilingData.state).toEqual("SUCCESS");
+        });
+        expect(screen.queryByTestId("pending-container")).not.toBeInTheDocument();
+        expect(screen.queryByTestId("button-container")).not.toBeInTheDocument();
       });
-      expect(screen.getByTestId("pending-container")).toBeInTheDocument();
-      expect(screen.queryByTestId("button-container")).not.toBeInTheDocument();
-      expect(screen.queryByTestId("alert-content-container")).not.toBeInTheDocument();
+
+      it("hides pending and button components when state is API_ERROR but registered", async () => {
+        mockApi.postTaxRegistrationLookup.mockResolvedValue({
+          ...pendingStateUserData,
+          taxFilingData: generateTaxFilingData({
+            registeredISO: getCurrentDateISOString(),
+            state: "API_ERROR",
+          }),
+        });
+
+        renderFilingsCalendarTaxAccess(pendingStateUserData);
+
+        expect(mockApi.postTaxRegistrationLookup).toHaveBeenCalled();
+        await waitFor(() => {
+          return expect(userDataUpdatedNTimes()).toEqual(1);
+        });
+        await waitFor(() => {
+          return expect(currentUserData().taxFilingData.state).toEqual("API_ERROR");
+        });
+        expect(screen.queryByTestId("pending-container")).not.toBeInTheDocument();
+        expect(screen.queryByTestId("button-container")).not.toBeInTheDocument();
+      });
+
+      it("shows registration followup component when state is SUCCESS but it's before the Saturday after registration", async () => {
+        mockApi.postTaxRegistrationLookup.mockResolvedValue({
+          ...pendingStateUserData,
+          taxFilingData: generateTaxFilingData({
+            state: "SUCCESS",
+            registeredISO: getCurrentDateISOString(),
+          }),
+        });
+
+        renderFilingsCalendarTaxAccess(pendingStateUserData);
+
+        await waitFor(() => {
+          return expect(userDataUpdatedNTimes()).toEqual(1);
+        });
+        expect(screen.queryByTestId("get-tax-access")).not.toBeInTheDocument();
+        expect(screen.queryByTestId("pending-container")).not.toBeInTheDocument();
+        expect(screen.queryByTestId("button-container")).not.toBeInTheDocument();
+        expect(screen.getByTestId("alert-content-container")).toBeInTheDocument();
+      });
+
+      it("shows pending component when state is PENDING", async () => {
+        mockApi.postTaxRegistrationLookup.mockResolvedValue(pendingStateUserData);
+        renderFilingsCalendarTaxAccess(pendingStateUserData);
+
+        expect(mockApi.postTaxRegistrationLookup).toHaveBeenCalled();
+        await waitFor(() => {
+          return expect(userDataUpdatedNTimes()).toEqual(1);
+        });
+        await waitFor(() => {
+          return expect(currentUserData().taxFilingData.state).toEqual("PENDING");
+        });
+        expect(screen.getByTestId("pending-container")).toBeInTheDocument();
+        expect(screen.queryByTestId("button-container")).not.toBeInTheDocument();
+        expect(screen.queryByTestId("alert-content-container")).not.toBeInTheDocument();
+      });
     });
-  });
+  }
+
+  const openModal = () => {
+    fireEvent.click(screen.getByTestId("get-tax-access"));
+  };
+
+  const clickSave = () => {
+    fireEvent.click(screen.getByTestId("modal-button-primary"));
+  };
 });

@@ -62,6 +62,7 @@ export const emptyIndustrySpecificData: IndustrySpecificData = {
 export interface ProfileData extends IndustrySpecificData {
   readonly businessPersona: BusinessPersona;
   readonly businessName: string;
+  readonly responsibleOwnerName: string;
   readonly industryId: string | undefined;
   readonly legalStructureId: string | undefined;
   readonly municipality: Municipality | undefined;
@@ -87,6 +88,7 @@ export interface ProfileData extends IndustrySpecificData {
 export const emptyProfileData: ProfileData = {
   businessPersona: undefined,
   businessName: "",
+  responsibleOwnerName: "",
   industryId: undefined,
   legalStructureId: undefined,
   municipality: undefined,

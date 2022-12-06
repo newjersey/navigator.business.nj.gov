@@ -72,7 +72,7 @@
     "unicorn/no-array-method-this-argument": "off",
     "unicorn/prefer-ternary": "off",
     "unicorn/switch-case-braces": "off",
-    "curly": "error",
+    "curly": "warn",
     "arrow-body-style": ["warn", "always"]
   },
   "overrides": [

@@ -39,7 +39,9 @@ export const ModalZeroButton = (props: Props) => {
         )}
       </DialogTitle>
       <DialogContent sx={{ padding: 0 }} dividers>
-        <div className="padding-x-4 margin-bottom-4 margin-top-2">{props.children}</div>
+        <div className="padding-x-4 margin-bottom-4 margin-top-2" data-testid="modal-body">
+          {props.children}
+        </div>
         {props.unpaddedChildren && <>{props.unpaddedChildren}</>}
       </DialogContent>
     </Dialog>
