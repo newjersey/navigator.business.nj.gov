@@ -561,6 +561,9 @@ describe("profile", () => {
       });
       renderPage({ userData });
       chooseTab("numbers");
+      expect(
+        screen.queryByText(Config.profileDefaults.fields.entityId.default.header)
+      ).not.toBeInTheDocument();
       expect(screen.queryByLabelText("Entity id")).not.toBeInTheDocument();
     });
 
