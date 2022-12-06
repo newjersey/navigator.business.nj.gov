@@ -1,7 +1,7 @@
 ---
 filename: Disadvantaged Business Enterprise Supportive Services Program (DBE/SSP)
 name: Disadvantaged Business Enterprise Supportive Services Program (DBE/SSP)
-urlSlug: disadvantaged-business-enterprise-support-services
+urlSlug: dbe-ssp
 id: disadvantaged-business-enterprise-support-services
 openDate: ""
 dueDate: ""
