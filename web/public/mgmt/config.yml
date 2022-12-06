@@ -2676,63 +2676,50 @@ collections:
             widget: object
             summary: "{{taxCalendar}}"
             fields:
-              - { label: Tax Calendar Access Body, name: AccessBody, widget: markdown }
-              - { label: Tax Calendar Pending Body, name: PendingCopyMarkdown, widget: markdown }
+              - { label: Access Body, name: accessBody, widget: markdown }
+              - { label: Pending Body, name: pendingCopyMarkdown, widget: markdown }
               - {
-                  label: Tax Calendar Registration Follow Up Body,
-                  name: RegistrationFollowUpCopyMarkdown,
+                  label: Registration Follow Up Body,
+                  name: registrationFollowUpCopyMarkdown,
                   widget: markdown,
                 }
-              - { label: Tax Calendar Access Open Modal Button, name: AccessButton, widget: text }
-              - { label: Tax Calendar Modal Previous Button, name: ModalPreviousButton, widget: text }
-              - { label: Tax Calendar Modal Next Button, name: ModalNextButton, widget: text }
-              - { label: Tax Calendar Modal Header, name: ModalHeader, widget: text }
-              - { label: Tax Calendar Modal Error Header, name: ModalErrorHeader, widget: text }
-              - { label: Tax Calendar Modal Body Text, name: ModalBody, widget: markdown }
+              - { label: Access Open Modal Button, name: accessButton, widget: text }
+              - { label: Modal Cancel Button, name: modalCancelButton, widget: text }
+              - { label: Modal Next Button, name: modalNextButton, widget: text }
+              - { label: Modal Header, name: modalHeader, widget: text }
+              - { label: Modal Error Header, name: modalErrorHeader, widget: text }
+              - { label: Modal Body Text, name: modalBody, widget: markdown }
+              - { label: BusinessName Field Header, name: modalBusinessFieldHeader, widget: markdown }
               - {
-                  label: Tax Calendar Modal BusinessName Field Header,
-                  name: ModalBusinessFieldHeader,
-                  widget: markdown,
+                  label: BusinessName Field Error Alert Text,
+                  name: modalBusinessFieldErrorName,
+                  widget: text,
                 }
+              - { label: BusinessName Field Text, name: modalBusinessFieldMarkdown, widget: markdown }
+              - { label: TaxId Field Error Alert Text, name: modalTaxFieldErrorName, widget: text }
               - {
-                  label: Tax Calendar Modal BusinessName Field Error Alert Text,
-                  name: ModalBusinessFieldErrorName,
+                  label: Responsible Owner Field Error Alert Text,
+                  name: modalResponsibleOwnerFieldErrorName,
+                  widget: text,
+                }
+              - { label: TaxId Field Header, name: modalTaxIdHeader, widget: markdown }
+              - { label: TaxId Field Text, name: modalTaxIdMarkdown, widget: markdown }
+              - { label: Failed Alert Text, name: failedErrorMessageMarkdown, widget: markdown }
+              - { label: Unknown Failure Alert Text, name: failedUnknownMarkdown, widget: markdown }
+              - { label: BusinessName API Failed Helper Text, name: failedBusinessFieldHelper, widget: text }
+              - { label: TaxId API Failed Helper Text, name: failedTaxIdHelper, widget: text }
+              - {
+                  label: ResponsibleOwner API Failed Helper Text,
+                  name: failedResponsibleOwnerFieldHelper,
                   widget: text,
                 }
               - {
-                  label: Tax Calendar Modal BusinessName Field Text,
-                  name: ModalBusinessFieldMarkdown,
-                  widget: markdown,
-                }
-              - {
-                  label: Tax Calendar Modal TaxId Field Error Alert Text,
-                  name: ModalTaxErrorName,
+                  label: Tax ID Disclaimer for TradeName Legal Structures,
+                  name: taxIdDisclaimerMd,
                   widget: text,
                 }
-              - { label: Tax Calendar Modal TaxId Field Header, name: ModalTaxIdHeader, widget: markdown }
-              - { label: Tax Calendar Modal TaxId Field Text, name: ModalTaxIdMarkdown, widget: markdown }
-              - {
-                  label: Tax Calendar Modal Failed Alert Text,
-                  name: FailedErrorMessageMarkdown,
-                  widget: markdown,
-                }
-              - {
-                  label: Tax Calendar Modal Unknown Failure Alert Text,
-                  name: FailedUnknownMarkdown,
-                  widget: markdown,
-                }
-              - {
-                  label: Tax Calendar Modal BusinessName API Failed Helper Text,
-                  name: FailedBusinessFieldHelper,
-                  widget: text,
-                }
-              - {
-                  label: Tax Calendar Modal TaxId API Failed Helper Text,
-                  name: FailedTaxIdHelper,
-                  widget: text,
-                }
-              - { label: Tax Calendar Success Alert Header, name: SnackbarSuccessHeader, widget: text }
-              - { label: Tax Calendar Success Alert Body, name: SnackbarSuccessBody, widget: text }
+              - { label: Success Alert Header, name: snackbarSuccessHeader, widget: text }
+              - { label: Success Alert Body, name: snackbarSuccessBody, widget: text }
 
           - label: Feedback Modal
             name: feedbackModal
@@ -3757,6 +3744,20 @@ collections:
                         fields:
                           - { label: "Header", name: "header", widget: "string" }
                           - { label: "Placeholder", name: "placeholder", widget: "string" }
+                          - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Responsible Owner Name
+                    name: responsibleOwnerName
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - label: Default
+                        name: "default"
+                        collapsed: false
+                        widget: object
+                        fields:
+                          - { label: "Header", name: "header", widget: "string" }
+                          - { label: "Placeholder", name: "placeholder", widget: "string" }
+                          - { label: "Error Text", name: "errorText", widget: "string" }
                           - { label: "Description", name: "description", widget: "markdown" }
                   - label: Cannabis License
                     name: cannabisLicenseType

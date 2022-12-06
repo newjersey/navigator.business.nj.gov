@@ -312,7 +312,7 @@ describe("<FilingsCalendar />", () => {
       setTabletScreen(Boolean(randomInt() % 2));
     });
 
-    it("displays button on filings calendar", () => {
+    it("displays button on filings calendar for PublicFiling", () => {
       const dueDate = getCurrentDate().add(2, "months");
       const annualReport = generateTaxFiling({
         identifier: "annual-report",
@@ -344,7 +344,7 @@ describe("<FilingsCalendar />", () => {
       expect(screen.getByTestId("get-tax-access")).toBeInTheDocument();
     });
 
-    it("hides button on filings calendar when sp/gp", () => {
+    it("displays button on filings calendar for TradeName", () => {
       const whateverReport = generateTaxFiling({
         identifier: "whatever-report",
       });
@@ -370,7 +370,7 @@ describe("<FilingsCalendar />", () => {
 
       renderFilingsCalendar(operateReferences, userData);
 
-      expect(screen.queryByTestId("get-tax-access")).not.toBeInTheDocument();
+      expect(screen.getByTestId("get-tax-access")).toBeInTheDocument();
     });
 
     it("hides button on filings calendar when displayTaxAccessButton is false", () => {
@@ -405,7 +405,7 @@ describe("<FilingsCalendar />", () => {
       expect(screen.queryByTestId("get-tax-access")).not.toBeInTheDocument();
     });
 
-    it("displays button on filings calendar in up and running guest mode for non sp/gp", () => {
+    it("displays button on filings calendar in up and running guest mode for PublicFiling", () => {
       const userData = generateUserData({
         profileData: generateProfileData({
           legalStructureId: randomLegalStructure({ requiresPublicFiling: true }).id,
@@ -416,7 +416,7 @@ describe("<FilingsCalendar />", () => {
       expect(screen.getByTestId("get-tax-access")).toBeInTheDocument();
     });
 
-    it("doesn't display button on filings calendar in up and running guest mode for sp/gp", () => {
+    it("display buttons on filings calendar in up and running guest mode for TradeName", () => {
       const userData = generateUserData({
         profileData: generateProfileData({
           legalStructureId: randomLegalStructure({ requiresPublicFiling: false }).id,
@@ -425,7 +425,7 @@ describe("<FilingsCalendar />", () => {
         taxFilingData: generateTaxFilingData({ filings: [generateTaxFiling({})] }),
       });
       renderFilingsCalendar({}, userData);
-      expect(screen.queryByTestId("get-tax-access")).not.toBeInTheDocument();
+      expect(screen.getByTestId("get-tax-access")).toBeInTheDocument();
     });
   });
 

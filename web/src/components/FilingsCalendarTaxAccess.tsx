@@ -7,27 +7,13 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { checkQueryValue, QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
-import {
-  LookupLegalStructureById,
-  LookupOperatingPhaseById,
-  UserData,
-} from "@businessnjgovnavigator/shared/";
 import { getCurrentDate, parseDate } from "@businessnjgovnavigator/shared/index";
 import { useRouter } from "next/router";
 
+import { TaxFilingLookupModal } from "@/components/TaxFilingLookupModal";
+import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { ReactElement, useContext, useEffect, useRef, useState } from "react";
-import { useMountEffectWhenDefined } from "../lib/utils/helpers";
 import { Button } from "./njwds-extended/Button";
-import { TaxFilingLookupModal } from "./TaxFilingLookupModal";
-
-export const shouldRenderFilingsCalendarTaxAccess = (userData?: UserData) => {
-  return (
-    userData &&
-    LookupOperatingPhaseById(userData.profileData.operatingPhase).displayTaxAccessButton &&
-    LookupLegalStructureById(userData.profileData.legalStructureId).requiresPublicFiling &&
-    process.env.FEATURE_BUSINESS_FLC == "true"
-  );
-};
 
 const isBeforeTheFollowingSaturday = (registeredISO: string | undefined) => {
   const sundayAfterRegisteredDate = parseDate(registeredISO).day(7);
@@ -74,7 +60,7 @@ export const FilingsCalendarTaxAccess = (): ReactElement => {
     if (!userData) {
       return;
     }
-    if (registrationModalIsVisible === false && prevModalIsVisible.current === true) {
+    if (!registrationModalIsVisible && prevModalIsVisible.current === true) {
       update({ ...userData, preferences: { ...userData.preferences, returnToLink: "" } });
     }
     prevModalIsVisible.current = registrationModalIsVisible;
@@ -107,7 +93,7 @@ export const FilingsCalendarTaxAccess = (): ReactElement => {
         return (
           <div className="tax-calendar-upper-widget-container" data-testid="pending-container">
             <div className="margin-bottom-2 tablet:margin-bottom-0 margin-right-2">
-              <Content>{Config.taxCalendar.PendingCopyMarkdown}</Content>
+              <Content>{Config.taxCalendar.pendingCopyMarkdown}</Content>
             </div>
           </div>
         );
@@ -115,10 +101,12 @@ export const FilingsCalendarTaxAccess = (): ReactElement => {
         return (
           <div className="tax-calendar-upper-widget-container" data-testid="alert-content-container">
             <div className="margin-bottom-2 tablet:margin-bottom-0 margin-right-2">
-              <Content>{Config.taxCalendar.RegistrationFollowUpCopyMarkdown}</Content>
+              <Content>{Config.taxCalendar.registrationFollowUpCopyMarkdown}</Content>
             </div>
           </div>
         );
+      } else {
+        return <></>;
       }
     } else {
       return (
@@ -128,17 +116,16 @@ export const FilingsCalendarTaxAccess = (): ReactElement => {
             close={() => {
               return setShowTaxModal(false);
             }}
-            onSuccess={async () => {
+            onSuccess={() => {
               setShowTaxModal(false);
-              await new Promise((resolve) => {
-                return setTimeout(resolve, 500);
-              });
-              setShowAlert(true);
+              setTimeout(() => {
+                setShowAlert(true);
+              }, 500);
             }}
           />
           <div className="tax-calendar-upper-widget-container grid-row" data-testid="button-container">
             <div className="margin-bottom-2 tablet:margin-bottom-0 margin-right-2 mobile-lg:grid-col-6 grid-col-12">
-              <Content>{Config.taxCalendar.AccessBody}</Content>
+              <Content>{Config.taxCalendar.accessBody}</Content>
             </div>
             <Button
               dataTestid="get-tax-access"
@@ -146,14 +133,14 @@ export const FilingsCalendarTaxAccess = (): ReactElement => {
               noRightMargin
               onClick={openRegisterOrTaxModal}
             >
-              {Config.taxCalendar.AccessButton}
+              {Config.taxCalendar.accessButton}
             </Button>
           </div>
         </>
       );
     }
-    return <></>;
   };
+
   return (
     <>
       <SnackbarAlert
@@ -162,10 +149,10 @@ export const FilingsCalendarTaxAccess = (): ReactElement => {
         close={() => {
           return setShowAlert(false);
         }}
-        heading={Config.taxCalendar.SnackbarSuccessHeader}
+        heading={Config.taxCalendar.snackbarSuccessHeader}
         dataTestid={"tax-success"}
       >
-        <Content>{Config.taxCalendar.SnackbarSuccessBody}</Content>
+        <Content>{Config.taxCalendar.snackbarSuccessBody}</Content>
       </SnackbarAlert>
       {getWidgetComponent()}
     </>
