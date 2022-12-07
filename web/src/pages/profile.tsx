@@ -31,7 +31,6 @@ import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { AuthAlertContext } from "@/contexts/authAlertContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { RoadmapContext } from "@/contexts/roadmapContext";
 import { postGetAnnualFilings } from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -40,7 +39,6 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { isEntityIdApplicable } from "@/lib/domain-logic/isEntityIdApplicable";
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
 import { checkQueryValue, QUERIES, ROUTES } from "@/lib/domain-logic/routes";
-import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import {
   createProfileFieldErrorMap,
@@ -50,13 +48,7 @@ import {
   ProfileTabs,
 } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
-import { setAnalyticsDimensions } from "@/lib/utils/analytics-helpers";
-import {
-  getFlow,
-  getSectionCompletion,
-  getTaskFromRoadmap,
-  useMountEffectWhenDefined,
-} from "@/lib/utils/helpers";
+import { getFlow, getTaskFromRoadmap, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { BusinessPersona, ForeignBusinessType, formationTaskId } from "@businessnjgovnavigator/shared";
 import {
   createEmptyProfileData,
@@ -91,8 +83,7 @@ const defaultTabForPersona: Record<string, ProfileTabs> = {
 };
 
 const ProfilePage = (props: Props): ReactElement => {
-  const { setRoadmap } = useContext(RoadmapContext);
-  const { roadmap, updateSectionCompletion } = useRoadmap();
+  const { roadmap } = useRoadmap();
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
   const router = useRouter();
   const [alert, setAlert] = useState<OnboardingStatus | undefined>(undefined);
@@ -193,9 +184,6 @@ const ProfilePage = (props: Props): ReactElement => {
     }
 
     setIsLoading(true);
-    setAnalyticsDimensions(profileData);
-    const newRoadmap = await buildUserRoadmap(profileData);
-    setRoadmap(newRoadmap);
 
     if (profileData.employerId && profileData.employerId.length > 0) {
       taskProgress[einTaskId] = "COMPLETED";
@@ -211,7 +199,6 @@ const ProfilePage = (props: Props): ReactElement => {
       taxFilingData,
     };
 
-    updateSectionCompletion(getSectionCompletion(newRoadmap, newUserData));
     newUserData = await postGetAnnualFilings(newUserData);
     update(newUserData).then(async () => {
       setIsLoading(false);

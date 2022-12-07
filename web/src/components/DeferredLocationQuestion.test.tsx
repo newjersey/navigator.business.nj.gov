@@ -1,9 +1,7 @@
 import { DeferredLocationQuestion } from "@/components/DeferredLocationQuestion";
 import { getMergedConfig } from "@/contexts/configContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
-import * as buildUserRoadmap from "@/lib/roadmap/buildUserRoadmap";
 import analytics from "@/lib/utils/analytics";
-import * as analyticsHelpers from "@/lib/utils/analytics-helpers";
 import { generateProfileData, generateRoadmap, generateUserData } from "@/test/factories";
 import { withRoadmap } from "@/test/helpers/helpers-renderers";
 import { selectLocationByText } from "@/test/helpers/helpers-testing-library-selectors";
@@ -15,7 +13,7 @@ import {
 import { Municipality } from "@businessnjgovnavigator/shared/municipality";
 import { generateMunicipality } from "@businessnjgovnavigator/shared/test";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
-import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 
 function setupMockAnalytics(): typeof analytics {
   return {
@@ -35,22 +33,14 @@ const Config = getMergedConfig();
 jest.mock("@/lib/data-hooks/useUserData", () => {
   return { useUserData: jest.fn() };
 });
-jest.mock("@/lib/utils/analytics-helpers", () => {
-  return { setAnalyticsDimensions: jest.fn() };
-});
 jest.mock("@/lib/data-hooks/useRoadmap", () => {
   return { useRoadmap: jest.fn() };
-});
-jest.mock("@/lib/roadmap/buildUserRoadmap", () => {
-  return { buildUserRoadmap: jest.fn() };
 });
 jest.mock("@/lib/utils/analytics", () => {
   return setupMockAnalytics();
 });
 
 const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
-const mockBuildUserRoadmap = buildUserRoadmap as jest.Mocked<typeof buildUserRoadmap>;
-const mockAnalyticsHelpers = analyticsHelpers as jest.Mocked<typeof analyticsHelpers>;
 
 describe("<DeferredLocationQuestion />", () => {
   let setRoadmap: jest.Mock;
@@ -59,7 +49,6 @@ describe("<DeferredLocationQuestion />", () => {
     jest.resetAllMocks();
     setupStatefulUserDataContext();
     setRoadmap = jest.fn();
-    mockBuildUserRoadmap.buildUserRoadmap.mockResolvedValue(generateRoadmap({}));
   });
 
   const renderComponent = ({
@@ -115,10 +104,8 @@ describe("<DeferredLocationQuestion />", () => {
       });
 
       selectLocationByText("Newark");
-      // eslint-disable-next-line testing-library/no-unnecessary-act
-      await act(() => {
-        fireEvent.click(screen.getByText(Config.deferredLocation.deferredOnboardingSaveButtonText));
-      });
+      fireEvent.click(screen.getByText(Config.deferredLocation.deferredOnboardingSaveButtonText));
+      await screen.findByTestId("city-success-banner");
     };
 
     it("saves municipality to profile", async () => {
@@ -128,7 +115,6 @@ describe("<DeferredLocationQuestion />", () => {
 
     it("shows inner content and banner on save", async () => {
       await selectNewarkAndSave();
-      await screen.findByTestId("city-success-banner");
       expect(screen.queryByText(Config.deferredLocation.header)).not.toBeInTheDocument();
       expect(screen.getByText("inner-content")).toBeInTheDocument();
     });
@@ -161,25 +147,6 @@ describe("<DeferredLocationQuestion />", () => {
       expect(screen.getByText(Config.deferredLocation.header)).toBeInTheDocument();
       expect(screen.queryByTestId("city-success-banner")).not.toBeInTheDocument();
       expect(screen.queryByText("inner-content")).not.toBeInTheDocument();
-    });
-
-    it("updates the roadmap and analytics when municipality is removed", async () => {
-      const returnedRoadmap = generateRoadmap({});
-      mockBuildUserRoadmap.buildUserRoadmap.mockResolvedValue(returnedRoadmap);
-
-      await selectNewarkAndSave();
-      fireEvent.click(screen.getByText(Config.deferredLocation.removeText));
-
-      const newProfileData = {
-        ...userData.profileData,
-        municipality: undefined,
-      };
-
-      await waitFor(() => {
-        return expect(mockBuildUserRoadmap.buildUserRoadmap).toHaveBeenCalledWith(newProfileData);
-      });
-      expect(setRoadmap).toHaveBeenCalledWith(returnedRoadmap);
-      expect(mockAnalyticsHelpers.setAnalyticsDimensions).toHaveBeenCalledWith(newProfileData);
     });
 
     it("sends analytics when municipality entered for first time", async () => {

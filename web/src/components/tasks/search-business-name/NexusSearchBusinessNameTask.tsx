@@ -4,15 +4,13 @@ import { NexusAvailable } from "@/components/tasks/search-business-name/NexusAva
 import { NexusUnavailable } from "@/components/tasks/search-business-name/NexusUnavailable";
 import { SearchBusinessNameForm } from "@/components/tasks/search-business-name/SearchBusinessNameForm";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
-import { RoadmapContext } from "@/contexts/roadmapContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import { NameAvailability, Task } from "@/lib/types/types";
 import { getModifiedTaskContent } from "@/lib/utils/helpers";
 import { emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
-import { ReactElement, useContext } from "react";
+import { ReactElement } from "react";
 
 interface Props {
   task: Task;
@@ -20,7 +18,6 @@ interface Props {
 
 export const NexusSearchBusinessNameTask = (props: Props): ReactElement => {
   const { roadmap } = useRoadmap();
-  const { setRoadmap } = useContext(RoadmapContext);
   const { userData, update } = useUserData();
   const { Config } = useConfig();
 
@@ -54,8 +51,6 @@ export const NexusSearchBusinessNameTask = (props: Props): ReactElement => {
     }
 
     if (newUserData) {
-      const newRoadmap = await buildUserRoadmap(newUserData.profileData);
-      setRoadmap(newRoadmap);
       return update(newUserData);
     }
 

@@ -1,7 +1,6 @@
 import { NexusSearchBusinessNameTask } from "@/components/tasks/search-business-name/NexusSearchBusinessNameTask";
 import { getMergedConfig } from "@/contexts/configContext";
 import { generateProfileData, generateTask, generateUserData } from "@/test/factories";
-import { withRoadmap } from "@/test/helpers/helpers-renderers";
 import { markdownToText } from "@/test/helpers/helpers-utilities";
 import {
   dbaInputField,
@@ -25,9 +24,6 @@ jest.mock("@/lib/data-hooks/useUserData", () => {
 });
 jest.mock("@/lib/data-hooks/useRoadmap", () => {
   return { useRoadmap: jest.fn() };
-});
-jest.mock("@/lib/roadmap/buildUserRoadmap", () => {
-  return { buildUserRoadmap: jest.fn() };
 });
 jest.mock("@/lib/api-client/apiClient", () => {
   return { searchBusinessName: jest.fn() };
@@ -56,27 +52,6 @@ describe("<NexusSearchBusinessNameTask />", () => {
       </WithStatefulUserData>
     );
   };
-
-  it("builds and sets roadmap when searching business name", async () => {
-    const mockSetRoadmap = jest.fn();
-
-    render(
-      withRoadmap(
-        <WithStatefulUserData initialUserData={initialUserData}>
-          <NexusSearchBusinessNameTask task={generateTask({})} />
-        </WithStatefulUserData>,
-        undefined,
-        undefined,
-        mockSetRoadmap
-      )
-    );
-
-    fillText("My Cool Business");
-    await searchAndGetValue({ status: "UNAVAILABLE" });
-    await waitFor(() => {
-      return expect(mockSetRoadmap).toHaveBeenCalledTimes(1);
-    });
-  });
 
   it("lets you click to search again when unavailable", async () => {
     renderTask();

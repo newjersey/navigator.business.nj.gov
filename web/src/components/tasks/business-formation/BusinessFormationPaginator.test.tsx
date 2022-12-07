@@ -3,33 +3,28 @@ import { LookupStepIndexByName } from "@/components/tasks/business-formation/Bus
 import { getMergedConfig } from "@/contexts/configContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import * as buildUserRoadmap from "@/lib/roadmap/buildUserRoadmap";
 import { FormationDisplayContentMap } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
-import * as analyticsHelpers from "@/lib/utils/analytics-helpers";
 import {
   generateEmptyFormationData,
   generateFormationDisplayContent,
   generateFormationSubmitError,
   generateFormationSubmitResponse,
-  generateRoadmap,
   generateTask,
   generateUserData,
 } from "@/test/factories";
 import {
-  createFormationPageHelpers,
   generateFormationProfileData,
   mockApiResponse,
   preparePage,
   useSetupInitialMocks,
 } from "@/test/helpers/helpers-formation";
-import { withAuthAlert, withRoadmap } from "@/test/helpers/helpers-renderers";
+import { withAuthAlert } from "@/test/helpers/helpers-renderers";
 import { mockPush } from "@/test/mock/mockRouter";
 import { currentUserData, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import { generateFormationFormData, generateMunicipality } from "@businessnjgovnavigator/shared/test";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import * as materialUi from "@mui/material";
-import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 const Config = getMergedConfig();
@@ -75,37 +70,25 @@ jest.mock("@/lib/api-client/apiClient", () => {
     searchBusinessName: jest.fn(),
   };
 });
-
-jest.mock("@/lib/roadmap/buildUserRoadmap", () => {
-  return { buildUserRoadmap: jest.fn() };
-});
-jest.mock("@/lib/utils/analytics-helpers", () => {
-  return { setAnalyticsDimensions: jest.fn() };
-});
 jest.mock("@/lib/utils/analytics", () => {
   return setupMockAnalytics();
 });
 
-const mockBuildUserRoadmap = buildUserRoadmap as jest.Mocked<typeof buildUserRoadmap>;
-const mockAnalyticsHelpers = analyticsHelpers as jest.Mocked<typeof analyticsHelpers>;
 const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
 
 describe("<BusinessFormationPaginator />", () => {
   let initialUserData: UserData;
   let displayContent: FormationDisplayContentMap;
-  let setRoadmap: jest.Mock;
 
   beforeEach(() => {
     jest.resetAllMocks();
     useSetupInitialMocks();
 
-    setRoadmap = jest.fn();
     const legalStructureId = "limited-liability-company";
     const profileData = generateFormationProfileData({ legalStructureId });
     const formationData = generateEmptyFormationData();
     displayContent = generateFormationDisplayContent({});
     initialUserData = generateUserData({ profileData, formationData });
-    mockBuildUserRoadmap.buildUserRoadmap.mockResolvedValue(generateRoadmap({}));
   });
 
   describe("button text", () => {
@@ -307,61 +290,6 @@ describe("<BusinessFormationPaginator />", () => {
           expect(currentUserData().formationData.formationFormData.addressMunicipality?.displayName).toEqual(
             "New Town"
           );
-        });
-
-        it("builds and sets roadmap and updates analytics with new municipality", async () => {
-          const newTownMuncipality = generateMunicipality({ displayName: "New Town" });
-          const newarkMuncipality = generateMunicipality({ displayName: "Newark" });
-          const userDataWithMunicipality = {
-            ...initialUserData,
-            profileData: {
-              ...initialUserData.profileData,
-              municipality: newarkMuncipality,
-            },
-          };
-
-          const returnedRoadmap = generateRoadmap({});
-          mockBuildUserRoadmap.buildUserRoadmap.mockResolvedValue(returnedRoadmap);
-
-          render(
-            withRoadmap(
-              <MunicipalitiesContext.Provider
-                value={{ municipalities: [newTownMuncipality, newarkMuncipality] }}
-              >
-                <WithStatefulUserData initialUserData={userDataWithMunicipality}>
-                  <ThemeProvider theme={createTheme()}>
-                    <BusinessFormation task={generateTask({})} displayContent={displayContent} />
-                  </ThemeProvider>
-                </WithStatefulUserData>
-              </MunicipalitiesContext.Provider>,
-              generateRoadmap({}),
-              undefined,
-              setRoadmap
-            )
-          );
-
-          const page = createFormationPageHelpers();
-          await page.stepperClickToBusinessStep();
-
-          page.selectByText("Address municipality", "New Town");
-
-          switchStepFunction();
-          await waitFor(() => {
-            expect(currentUserData().profileData.municipality?.displayName).toEqual("New Town");
-          });
-
-          const newProfileData = {
-            ...userDataWithMunicipality.profileData,
-            municipality: newTownMuncipality,
-          };
-
-          await waitFor(() => {
-            return expect(mockBuildUserRoadmap.buildUserRoadmap).toHaveBeenCalledWith(newProfileData);
-          });
-          await waitFor(() => {
-            return expect(setRoadmap).toHaveBeenCalledWith(returnedRoadmap);
-          });
-          expect(mockAnalyticsHelpers.setAnalyticsDimensions).toHaveBeenCalledWith(newProfileData);
         });
 
         it("send analytics when municipality entered for first time", async () => {

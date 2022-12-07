@@ -51,9 +51,6 @@ jest.mock("@/lib/api-client/apiClient", () => {
     searchBusinessName: jest.fn(),
   };
 });
-jest.mock("@/lib/roadmap/buildUserRoadmap", () => {
-  return { buildUserRoadmap: jest.fn() };
-});
 
 describe("Formation - BusinessStep", () => {
   beforeEach(() => {
