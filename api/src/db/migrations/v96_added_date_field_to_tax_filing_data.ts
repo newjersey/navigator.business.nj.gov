@@ -383,7 +383,7 @@ export const allFormationLegalTypes = [
 
 export const v96generateFormationFormData = (
   overrides: Partial<v96FormationFormData>,
-  legalStructureId: string
+  legalStructureId?: string
 ): v96FormationFormData => {
   const isCorp = legalStructureId ? ["s-corporation", "c-corporation"].includes(legalStructureId) : false;
 
@@ -510,7 +510,7 @@ export const v96TaxFilingDataGenerator = (overrides: Partial<v96TaxFilingData>):
 
 export const v96FormationData = (
   overrides: Partial<v96FormationData>,
-  legalStructureId: string
+  legalStructureId?: string
 ): v96FormationData => {
   return {
     formationFormData: v96generateFormationFormData({}, legalStructureId),

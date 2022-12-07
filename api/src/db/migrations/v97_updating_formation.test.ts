@@ -14,6 +14,32 @@ describe("migrate_v96_to_v97", () => {
     jest.resetAllMocks();
   });
 
+  describe(`migrates a user with a tradeName Legal Structure`, () => {
+    const v96 = v96UserDataGenerator({
+      profileData: v96generatorProfileData({ legalStructureId: "sole-proprietorship" }),
+      formationData: v96FormationData(
+        {
+          formationFormData: v96generateFormationFormData(
+            { members: [v96generateFormationAddress({ addressState: "Maine" })] },
+            "sole-proprietorship"
+          ),
+        },
+        "sole-proprietorship"
+      ),
+    });
+    migrate_v96_to_v97(v96);
+  });
+
+  describe(`migrates a user with an undefined Legal Structure`, () => {
+    const v96 = v96UserDataGenerator({
+      profileData: v96generatorProfileData({ legalStructureId: undefined }),
+      formationData: v96FormationData({
+        formationFormData: v96generateFormationFormData({}),
+      }),
+    });
+    migrate_v96_to_v97(v96);
+  });
+
   allFormationLegalTypes.map((legalStructureId) => {
     return describe(`the generic field updates to formationFormData for ${legalStructureId}`, () => {
       const v96 = v96UserDataGenerator({
