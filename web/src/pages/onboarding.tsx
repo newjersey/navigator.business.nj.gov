@@ -10,14 +10,12 @@ import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { AuthContext } from "@/contexts/authContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { RoadmapContext } from "@/contexts/roadmapContext";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { hasEssentialQuestion } from "@/lib/domain-logic/essentialQuestions";
 import { QUERIES, QUERY_PARAMS_VALUES, ROUTES, routeShallowWithQuery } from "@/lib/domain-logic/routes";
 import { MediaQueries } from "@/lib/PageSizes";
-import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import { ABStorageFactory } from "@/lib/storage/ABStorage";
 import {
@@ -36,7 +34,6 @@ import {
 } from "@/lib/utils/analytics-helpers";
 import {
   getFlow,
-  getSectionCompletion,
   OnboardingErrorLookup,
   OnboardingStatusLookup,
   scrollToTop,
@@ -77,7 +74,6 @@ interface Props {
 }
 
 const OnboardingPage = (props: Props): ReactElement => {
-  const { setRoadmap, setSectionCompletion } = useContext(RoadmapContext);
   const { state } = useContext(AuthContext);
 
   const router = useRouter();
@@ -318,10 +314,6 @@ const OnboardingPage = (props: Props): ReactElement => {
     setAnalyticsDimensions(newProfileData);
     setAlert(undefined);
     setError(undefined);
-
-    const newRoadmap = await buildUserRoadmap(profileData);
-    setRoadmap(newRoadmap);
-    setSectionCompletion(getSectionCompletion(newRoadmap, currentUserData));
 
     if (profileData.foreignBusinessType === "NONE") {
       await router.push(ROUTES.unsupported);

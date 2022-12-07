@@ -1,10 +1,7 @@
 import { FormationDateModal } from "@/components/FormationDateModal";
 import { getMergedConfig } from "@/contexts/configContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
-import * as buildUserRoadmap from "@/lib/roadmap/buildUserRoadmap";
-import * as analyticsHelpers from "@/lib/utils/analytics-helpers";
-import { generateProfileData, generateRoadmap, generateUserData } from "@/test/factories";
-import { withRoadmap } from "@/test/helpers/helpers-renderers";
+import { generateProfileData, generateUserData } from "@/test/factories";
 import { selectDate, selectLocationByText } from "@/test/helpers/helpers-testing-library-selectors";
 import {
   currentUserData,
@@ -18,7 +15,7 @@ import {
   getCurrentDate,
   UserData,
 } from "@businessnjgovnavigator/shared";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useRoadmap", () => {
   return { useRoadmap: jest.fn() };
@@ -26,26 +23,14 @@ jest.mock("@/lib/data-hooks/useRoadmap", () => {
 jest.mock("@/lib/data-hooks/useUserData", () => {
   return { useUserData: jest.fn() };
 });
-jest.mock("@/lib/utils/analytics-helpers", () => {
-  return { setAnalyticsDimensions: jest.fn() };
-});
-jest.mock("@/lib/roadmap/buildUserRoadmap", () => {
-  return { buildUserRoadmap: jest.fn() };
-});
 const Config = getMergedConfig();
 
-const mockBuildUserRoadmap = buildUserRoadmap as jest.Mocked<typeof buildUserRoadmap>;
-const mockAnalyticsHelpers = analyticsHelpers as jest.Mocked<typeof analyticsHelpers>;
-
 describe("<FormationDateModal />", () => {
-  let setRoadmap: jest.Mock;
   const municipality = generateMunicipality({});
 
   beforeEach(() => {
     jest.resetAllMocks();
     setupStatefulUserDataContext();
-    setRoadmap = jest.fn();
-    mockBuildUserRoadmap.buildUserRoadmap.mockResolvedValue(generateRoadmap({}));
   });
 
   const renderComponent = (initialUserData?: UserData) => {
@@ -60,16 +45,11 @@ describe("<FormationDateModal />", () => {
     };
 
     render(
-      withRoadmap(
-        <MunicipalitiesContext.Provider value={{ municipalities: [municipality] }}>
-          <WithStatefulUserData initialUserData={userDataWithMunicipality}>
-            <FormationDateModal isOpen={true} close={() => {}} onSave={() => {}} />
-          </WithStatefulUserData>
-        </MunicipalitiesContext.Provider>,
-        generateRoadmap({}),
-        undefined,
-        setRoadmap
-      )
+      <MunicipalitiesContext.Provider value={{ municipalities: [municipality] }}>
+        <WithStatefulUserData initialUserData={userDataWithMunicipality}>
+          <FormationDateModal isOpen={true} close={() => {}} onSave={() => {}} />
+        </WithStatefulUserData>
+      </MunicipalitiesContext.Provider>
     );
   };
 
@@ -136,29 +116,5 @@ describe("<FormationDateModal />", () => {
     expect(
       screen.getByText(Config.profileDefaults.fields.municipality.default.errorTextRequired)
     ).toBeInTheDocument();
-  });
-
-  it("builds roadmap and sets analytics on save", async () => {
-    const userData = generateUserData({
-      profileData: generateProfileData({
-        municipality: municipality,
-        dateOfFormation: getCurrentDate().format(defaultDateFormat),
-      }),
-    });
-
-    renderComponent(userData);
-
-    const returnedRoadmap = generateRoadmap({});
-    mockBuildUserRoadmap.buildUserRoadmap.mockResolvedValue(returnedRoadmap);
-
-    fireEvent.click(screen.getByText(Config.formationDateModal.saveButtonText));
-    triggerQueueUpdate();
-    await waitFor(() => {
-      return expect(mockBuildUserRoadmap.buildUserRoadmap).toHaveBeenCalledWith(userData.profileData);
-    });
-    await waitFor(() => {
-      return expect(setRoadmap).toHaveBeenCalledWith(returnedRoadmap);
-    });
-    expect(mockAnalyticsHelpers.setAnalyticsDimensions).toHaveBeenCalledWith(userData.profileData);
   });
 });

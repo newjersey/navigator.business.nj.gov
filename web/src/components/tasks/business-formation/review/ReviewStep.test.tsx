@@ -36,9 +36,6 @@ jest.mock("@/lib/data-hooks/useDocuments");
 jest.mock("next/router", () => {
   return { useRouter: jest.fn() };
 });
-jest.mock("@/lib/roadmap/buildUserRoadmap", () => {
-  return { buildUserRoadmap: jest.fn() };
-});
 jest.mock("@/lib/api-client/apiClient", () => {
   return {
     postBusinessFormation: jest.fn(),

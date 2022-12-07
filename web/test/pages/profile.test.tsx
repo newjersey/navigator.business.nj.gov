@@ -20,7 +20,7 @@ import {
   randomIndustry,
   randomNonHomeBasedIndustry,
 } from "@/test/factories";
-import { withAuthAlert, withRoadmap } from "@/test/helpers/helpers-renderers";
+import { withAuthAlert } from "@/test/helpers/helpers-renderers";
 import { markdownToText, randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
@@ -79,9 +79,6 @@ jest.mock("next/router", () => {
 jest.mock("@/lib/data-hooks/useDocuments");
 jest.mock("@/lib/data-hooks/useUserData", () => {
   return { useUserData: jest.fn() };
-});
-jest.mock("@/lib/roadmap/buildUserRoadmap", () => {
-  return { buildUserRoadmap: jest.fn() };
 });
 jest.mock("@/lib/api-client/apiClient", () => {
   return { postGetAnnualFilings: jest.fn() };
@@ -805,29 +802,6 @@ describe("profile", () => {
       expect(getNotesValue()).toEqual("whats appppppp");
     });
 
-    it("builds and sets roadmap on save", async () => {
-      const profileData = generateProfileData({});
-      const mockSetRoadmap = jest.fn();
-
-      render(
-        withRoadmap(
-          <WithStatefulUserData initialUserData={generateUserData({ profileData: profileData })}>
-            <Profile municipalities={[]} />
-          </WithStatefulUserData>,
-          undefined,
-          undefined,
-          mockSetRoadmap
-        )
-      );
-      clickSave();
-      await waitFor(() => {
-        return expect(currentUserData()).not.toBeFalsy();
-      });
-      await waitFor(() => {
-        return expect(mockSetRoadmap).toHaveBeenCalledTimes(1);
-      });
-    });
-
     it("returns user to dashboard from un-saved changes modal", async () => {
       const initialUserData = generateUserData({
         profileData: generateProfileData({ businessPersona: "STARTING" }),
@@ -1219,27 +1193,6 @@ describe("profile", () => {
       await waitFor(() => {
         return expect(mockRouter.mockPush).toHaveBeenCalledWith(ROUTES.dashboard);
       });
-    });
-
-    it("builds and sets roadmap on save", async () => {
-      const profileData = generateProfileData({ businessPersona: "OWNING" });
-      const mockSetRoadmap = jest.fn();
-
-      render(
-        withRoadmap(
-          <WithStatefulUserData initialUserData={generateUserData({ profileData: profileData })}>
-            <Profile municipalities={[]} />
-          </WithStatefulUserData>,
-          undefined,
-          undefined,
-          mockSetRoadmap
-        )
-      );
-      clickSave();
-      await waitFor(() => {
-        expect(currentUserData()).not.toBeUndefined();
-      });
-      expect(mockSetRoadmap).toHaveBeenCalledTimes(1);
     });
 
     it("returns user to dashboard from un-saved changes modal", async () => {

@@ -1,13 +1,10 @@
 import { Button } from "@/components/njwds-extended/Button";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { RoadmapContext } from "@/contexts/roadmapContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
-import { setAnalyticsDimensions } from "@/lib/utils/analytics-helpers";
 import { getFlow } from "@/lib/utils/helpers";
 import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
-import { ReactNode, useContext, useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 
 interface Props {
   children: ReactNode;
@@ -20,7 +17,6 @@ export const DeferredOnboardingQuestion = (props: Props) => {
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
   const { userData, updateQueue } = useUserData();
   const { Config } = useConfig();
-  const { setRoadmap } = useContext(RoadmapContext);
 
   useEffect(() => {
     if (!userData) {
@@ -40,9 +36,6 @@ export const DeferredOnboardingQuestion = (props: Props) => {
 
     await updateQueue.queueProfileData(profileData).update();
 
-    setAnalyticsDimensions(profileData);
-    const newRoadmap = await buildUserRoadmap(profileData);
-    setRoadmap(newRoadmap);
     props.onSave();
   };
 

@@ -4,25 +4,22 @@ import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { createProfileFieldErrorMap } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
-import Onboarding from "@/pages/onboarding";
 import { generateProfileData, generateUser, generateUserData } from "@/test/factories";
-import { withAuth, withRoadmap } from "@/test/helpers/helpers-renderers";
 import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import {
   currentUserData,
   getLastCalledWithConfig,
   setupStatefulUserDataContext,
-  WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { createPageHelpers, renderPage } from "@/test/pages/onboarding/helpers-onboarding";
+import { renderPage } from "@/test/pages/onboarding/helpers-onboarding";
 import {
   createEmptyProfileData,
   defaultDateFormat,
   generateMunicipality,
   getCurrentDate,
 } from "@businessnjgovnavigator/shared/";
-import { render, screen, waitFor } from "@testing-library/react";
+import { screen, waitFor } from "@testing-library/react";
 
 jest.mock("next/router", () => {
   return { useRouter: jest.fn() };
@@ -32,9 +29,6 @@ jest.mock("@/lib/data-hooks/useUserData", () => {
 });
 jest.mock("@/lib/data-hooks/useRoadmap", () => {
   return { useRoadmap: jest.fn() };
-});
-jest.mock("@/lib/roadmap/buildUserRoadmap", () => {
-  return { buildUserRoadmap: jest.fn() };
 });
 jest.mock("@/lib/api-client/apiClient", () => {
   return {
@@ -113,45 +107,6 @@ describe("onboarding - shared", () => {
     useMockRouter({ isReady: true, query: { industry: "something-nonexistent" } });
     renderPage({});
     expect(screen.getByTestId("step-1")).toBeInTheDocument();
-  });
-
-  it("builds and sets roadmap after each step", async () => {
-    const profileData = generateProfileData({ businessPersona: "STARTING" });
-    const mockSetRoadmap = jest.fn();
-    const user = generateUser({});
-    const userData = generateUserData({ profileData: profileData, user });
-    render(
-      withRoadmap(
-        withAuth(
-          <WithStatefulUserData initialUserData={userData}>
-            <Onboarding municipalities={[]} />
-          </WithStatefulUserData>,
-          { user: user, isAuthenticated: IsAuthenticated.TRUE }
-        ),
-        undefined,
-        undefined,
-        mockSetRoadmap
-      )
-    );
-
-    const page = createPageHelpers();
-
-    const numberOfPages = getOnboardingFlows(
-      userData.profileData,
-      userData.user,
-      () => {},
-      createProfileFieldErrorMap()
-    ).STARTING.pages.length;
-
-    for (let pageNumber = 2; pageNumber < numberOfPages; pageNumber += 1) {
-      await page.visitStep(pageNumber);
-      expect(mockSetRoadmap).toHaveBeenCalledTimes(pageNumber - 1);
-    }
-
-    page.clickNext();
-    await waitFor(() => {
-      return expect(mockSetRoadmap).toHaveBeenCalledTimes(numberOfPages - 1);
-    });
   });
 
   it("generates a new empty userData object during guest checkout", async () => {

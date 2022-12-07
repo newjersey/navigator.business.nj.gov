@@ -4,15 +4,12 @@ import { FieldLabelModal } from "@/components/onboarding/FieldLabelModal";
 import { OnboardingDateOfFormation } from "@/components/onboarding/OnboardingDateOfFormation";
 import { OnboardingMunicipality } from "@/components/onboarding/OnboardingMunicipality";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { RoadmapContext } from "@/contexts/roadmapContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import { createProfileFieldErrorMap, ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
-import { setAnalyticsDimensions } from "@/lib/utils/analytics-helpers";
 import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared";
-import { ReactElement, useContext, useEffect, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 
 interface Props {
   isOpen: boolean;
@@ -25,7 +22,6 @@ export const FormationDateModal = (props: Props): ReactElement => {
   const { userData, updateQueue } = useUserData();
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
   const [fieldStates, setFieldStates] = useState<ProfileFieldErrorMap>(createProfileFieldErrorMap());
-  const { setRoadmap } = useContext(RoadmapContext);
 
   useEffect(() => {
     if (!userData) {
@@ -52,10 +48,6 @@ export const FormationDateModal = (props: Props): ReactElement => {
     }
     analytics.event.formation_date_modal.submit.formation_status_set_to_complete();
     updateQueue.queueProfileData(profileData);
-
-    const newRoadmap = await buildUserRoadmap(profileData);
-    setRoadmap(newRoadmap);
-    setAnalyticsDimensions(profileData);
 
     props.onSave({ redirectOnSuccess: true });
   };
