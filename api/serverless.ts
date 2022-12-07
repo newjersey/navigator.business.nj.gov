@@ -2,6 +2,7 @@ import type { AWS, AwsLambdaEnvironment } from "@serverless/typescript";
 import "dotenv/config";
 import { env } from "node:process";
 import dynamoDbSchema from "./dynamodb-schema.json";
+import encryptTaxId from "./src/functions/encryptTaxId";
 import express from "./src/functions/express";
 import githubOauth2 from "./src/functions/githubOauth2";
 import updateExternalStatus from "./src/functions/updateExternalStatus";
@@ -206,7 +207,19 @@ serverlessConfiguration.functions = {
         }
       : undefined
   ),
-  govDelivery: updateExternalStatus(
+  externalStatus: updateExternalStatus(
+    env.CI
+      ? {
+          securityGroupIds: ["${self:custom.config.infrastructure.SECURITY_GROUP}"],
+          subnetIds: [
+            "${self:custom.config.infrastructure.SUBNET_01}",
+            "${self:custom.config.infrastructure.SUBNET_02}",
+          ],
+        }
+      : undefined
+  ),
+
+  encryptTaxId: encryptTaxId(
     env.CI
       ? {
           securityGroupIds: ["${self:custom.config.infrastructure.SECURITY_GROUP}"],
