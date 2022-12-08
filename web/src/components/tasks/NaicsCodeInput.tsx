@@ -1,18 +1,16 @@
 import { Content, ExternalLink } from "@/components/Content";
 import { GenericTextField } from "@/components/GenericTextField";
 import { Button } from "@/components/njwds-extended/Button";
-import { RoadmapContext } from "@/contexts/roadmapContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import NaicsCodes from "@/lib/static/records/naics2022.json";
 import { NaicsCodeObject, Task } from "@/lib/types/types";
 import { templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { LookupIndustryById, UserData } from "@businessnjgovnavigator/shared";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
-import React, { ReactElement, useContext, useMemo, useState } from "react";
+import React, { ReactElement, useMemo, useState } from "react";
 
 interface Props {
   onSave: () => void;
@@ -24,7 +22,6 @@ interface Props {
 
 export const NaicsCodeInput = (props: Props): ReactElement => {
   const { Config } = useConfig();
-  const { setRoadmap } = useContext(RoadmapContext);
   type NaicsErrorTypes = "length" | "invalid";
   const errorMessages: Record<NaicsErrorTypes, string> = {
     invalid: Config.determineNaicsCode.invalidValidationErrorText,
@@ -99,8 +96,6 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
       .then(async () => {
         setIsLoading(false);
         props.onSave();
-        const newRoadmap = await buildUserRoadmap(updateQueue.current().profileData);
-        setRoadmap(newRoadmap);
       })
       .catch(() => {
         setIsLoading(false);

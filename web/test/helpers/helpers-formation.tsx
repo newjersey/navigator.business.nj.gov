@@ -2,7 +2,6 @@ import { BusinessFormation } from "@/components/tasks/business-formation/Busines
 import { LookupStepIndexByName } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import * as api from "@/lib/api-client/apiClient";
-import * as buildUserRoadmap from "@/lib/roadmap/buildUserRoadmap";
 import {
   defaultDisplayDateFormat,
   FormationDisplayContentMap,
@@ -14,7 +13,6 @@ import {
   generateFormationData,
   generateNameAvailability,
   generateProfileData,
-  generateRoadmap,
   generateTask,
   generateUserData,
   randomPublicFilingLegalType,
@@ -52,14 +50,12 @@ export const generateFormationProfileData = (data: Partial<ProfileData>): Profil
 };
 
 export const useSetupInitialMocks = () => {
-  const mockBuildUserRoadmap = buildUserRoadmap as jest.Mocked<typeof buildUserRoadmap>;
   useMockRoadmap({});
   useMockRouter({});
   setupStatefulUserDataContext();
   useMockDocuments({});
   mockApiResponse();
   setDesktopScreen(true);
-  mockBuildUserRoadmap.buildUserRoadmap.mockResolvedValue(generateRoadmap({}));
 };
 
 export const preparePage = (

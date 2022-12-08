@@ -1,8 +1,9 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
+import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import { generateProfileData, generateUser, generateUserData } from "@/test/factories";
 import * as mockRouter from "@/test/mock/mockRouter";
-import { useMockRouter } from "@/test/mock/mockRouter";
+import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { currentUserData, setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
 import {
   mockSuccessfulApiSignups,
@@ -27,9 +28,6 @@ jest.mock("@/lib/data-hooks/useUserData", () => {
 });
 jest.mock("@/lib/data-hooks/useRoadmap", () => {
   return { useRoadmap: jest.fn() };
-});
-jest.mock("@/lib/roadmap/buildUserRoadmap", () => {
-  return { buildUserRoadmap: jest.fn() };
 });
 jest.mock("@/lib/api-client/apiClient", () => {
   return {
@@ -227,11 +225,17 @@ describe("onboarding - starting a business", () => {
         email: "email@example.com",
       },
     };
+
     await waitFor(() => {
-      expect(mockApi.postNewsletter).toHaveBeenCalledWith({
-        ...expectedUserData,
-        user: { ...expectedUserData.user, externalStatus: {} },
+      expect(mockPush).toHaveBeenCalledWith({
+        pathname: ROUTES.dashboard,
+        query: { [QUERIES.fromOnboarding]: "true" },
       });
+    });
+
+    expect(mockApi.postNewsletter).toHaveBeenCalledWith({
+      ...expectedUserData,
+      user: { ...expectedUserData.user, externalStatus: {} },
     });
     expect(mockApi.postUserTesting).toHaveBeenCalledWith({
       ...expectedUserData,

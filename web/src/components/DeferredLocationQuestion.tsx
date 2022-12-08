@@ -3,16 +3,13 @@ import { DeferredOnboardingQuestion } from "@/components/DeferredOnboardingQuest
 import { Alert } from "@/components/njwds-extended/Alert";
 import { Button } from "@/components/njwds-extended/Button";
 import { OnboardingMunicipality } from "@/components/onboarding/OnboardingMunicipality";
-import { RoadmapContext } from "@/contexts/roadmapContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import { createProfileFieldErrorMap } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
-import { setAnalyticsDimensions } from "@/lib/utils/analytics-helpers";
 import { templateEval } from "@/lib/utils/helpers";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
-import { ReactElement, ReactNode, useContext, useState } from "react";
+import { ReactElement, ReactNode, useState } from "react";
 
 interface Props {
   innerContent: string;
@@ -30,7 +27,6 @@ export const DeferredLocationQuestion = (props: Props): ReactElement => {
     props.CMS_ONLY_showSuccessBanner ?? false
   );
   const [showEditLocation, setShowEditLocation] = useState<boolean>(false);
-  const { setRoadmap } = useContext(RoadmapContext);
 
   const label = (
     <>
@@ -48,17 +44,10 @@ export const DeferredLocationQuestion = (props: Props): ReactElement => {
   };
 
   const onRemoveLocation = async () => {
-    if (!updateQueue || !userData) {
+    if (!updateQueue) {
       return;
     }
-
-    const newProfileData = { ...userData.profileData, municipality: undefined };
-
-    await updateQueue.queueProfileData(newProfileData).update();
-
-    setAnalyticsDimensions(newProfileData);
-    const newRoadmap = await buildUserRoadmap(newProfileData);
-    setRoadmap(newRoadmap);
+    await updateQueue.queueProfileData({ municipality: undefined }).update();
   };
 
   const successBanner = (): ReactNode => {
@@ -102,13 +91,7 @@ export const DeferredLocationQuestion = (props: Props): ReactElement => {
   return (
     <div className="bg-base-extra-light margin-top-2" data-testid="deferred-location-task">
       {shouldShowQuestion ? (
-        <DeferredOnboardingQuestion
-          label={label}
-          onSave={() => {
-            return onSaveNewLocation();
-          }}
-          removeStyling
-        >
+        <DeferredOnboardingQuestion label={label} onSave={onSaveNewLocation} removeStyling>
           <OnboardingMunicipality
             onValidation={() => {}}
             fieldStates={createProfileFieldErrorMap()}

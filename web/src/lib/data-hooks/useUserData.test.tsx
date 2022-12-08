@@ -1,12 +1,15 @@
+import { RoadmapContext } from "@/contexts/roadmapContext";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useUserData, UseUserDataResponse } from "@/lib/data-hooks/useUserData";
+import * as buildUserRoadmap from "@/lib/roadmap/buildUserRoadmap";
 import { UserDataStorageFactory } from "@/lib/storage/UserDataStorage";
-import { generateUser, generateUserData } from "@/test/factories";
+import * as analyticsHelpers from "@/lib/utils/analytics-helpers";
+import { generateRoadmap, generateUser, generateUserData } from "@/test/factories";
 import { withAuth, withUserDataError } from "@/test/helpers/helpers-renderers";
 import { generateUseUserDataResponse } from "@/test/mock/mockUseUserData";
 import { BusinessUser } from "@businessnjgovnavigator/shared/";
-import { act, render } from "@testing-library/react";
+import { act, render, waitFor } from "@testing-library/react";
 import { SWRConfig } from "swr";
 
 jest.mock("@/lib/api-client/apiClient", () => {
@@ -15,6 +18,14 @@ jest.mock("@/lib/api-client/apiClient", () => {
     postUserData: jest.fn(),
   };
 });
+jest.mock("@/lib/roadmap/buildUserRoadmap", () => {
+  return { buildUserRoadmap: jest.fn() };
+});
+jest.mock("@/lib/utils/analytics-helpers", () => {
+  return { setAnalyticsDimensions: jest.fn() };
+});
+const mockBuildUserRoadmap = buildUserRoadmap as jest.Mocked<typeof buildUserRoadmap>;
+const mockAnalyticsHelpers = analyticsHelpers as jest.Mocked<typeof analyticsHelpers>;
 const mockApi = api as jest.Mocked<typeof api>;
 
 const userDataStorage = UserDataStorageFactory();
@@ -23,11 +34,13 @@ const mockDispatch = jest.fn();
 
 describe("useUserData", () => {
   let mockSetError: jest.Mock;
+  let mockSetRoadmap: jest.Mock;
 
   beforeEach(() => {
     userDataStorage.clear();
     jest.resetAllMocks();
     mockSetError = jest.fn();
+    mockSetRoadmap = jest.fn();
   });
 
   const setupHook = (
@@ -35,14 +48,23 @@ describe("useUserData", () => {
     isAuthenticated?: IsAuthenticated
   ): UseUserDataResponse => {
     const returnVal = generateUseUserDataResponse({});
+
     function TestComponent() {
       Object.assign(returnVal, useUserData());
       return null;
     }
+
     render(
       withUserDataError(
         withAuth(
-          <>
+          <RoadmapContext.Provider
+            value={{
+              roadmap: generateRoadmap({}),
+              sectionCompletion: undefined,
+              setRoadmap: mockSetRoadmap,
+              setSectionCompletion: jest.fn(),
+            }}
+          >
             <SWRConfig
               value={{
                 provider: () => {
@@ -52,7 +74,7 @@ describe("useUserData", () => {
             >
               <TestComponent />
             </SWRConfig>
-          </>,
+          </RoadmapContext.Provider>,
           { user: currentUser, dispatch: mockDispatch, isAuthenticated }
         ),
         undefined,
@@ -104,6 +126,39 @@ describe("useUserData", () => {
         return update(newUserData);
       });
       expect(mockApi.postUserData).toHaveBeenCalledWith(newUserData);
+    });
+
+    it("builds and sets roadmap when profile data changed", async () => {
+      const returnedRoadmap = generateRoadmap({});
+      mockBuildUserRoadmap.buildUserRoadmap.mockResolvedValue(returnedRoadmap);
+
+      const currentUser = generateUser({});
+      mockApi.postUserData.mockResolvedValue(generateUserData({}));
+
+      const { update } = setupHook(currentUser);
+
+      const newUserData = generateUserData({});
+      await act(() => {
+        return update(newUserData);
+      });
+
+      const newProfileData = {
+        ...newUserData.profileData,
+        businessName: "some new name",
+      };
+
+      await act(() => {
+        return update({
+          ...newUserData,
+          profileData: newProfileData,
+        });
+      });
+
+      await waitFor(() => {
+        return expect(mockBuildUserRoadmap.buildUserRoadmap).toHaveBeenCalledWith(newProfileData);
+      });
+      expect(mockSetRoadmap).toHaveBeenCalledWith(returnedRoadmap);
+      expect(mockAnalyticsHelpers.setAnalyticsDimensions).toHaveBeenCalledWith(newProfileData);
     });
 
     it("updates data from api when calling refresh", async () => {

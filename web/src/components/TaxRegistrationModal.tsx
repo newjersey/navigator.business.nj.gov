@@ -3,19 +3,16 @@ import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { FieldLabelModal } from "@/components/onboarding/FieldLabelModal";
 import { OnboardingMunicipality } from "@/components/onboarding/OnboardingMunicipality";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { RoadmapContext } from "@/contexts/roadmapContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import { createProfileFieldErrorMap, ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
-import { setAnalyticsDimensions } from "@/lib/utils/analytics-helpers";
 import {
   createEmptyProfileData,
   LookupLegalStructureById,
   ProfileData,
 } from "@businessnjgovnavigator/shared";
-import { ReactElement, useContext, useEffect, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { OnboardingBusinessName } from "./onboarding/OnboardingBusinessName";
 import { OnboardingExistingEmployees } from "./onboarding/OnboardingExistingEmployees";
 import { OnboardingOwnership } from "./onboarding/OnboardingOwnership";
@@ -32,7 +29,6 @@ export const TaxRegistrationModal = (props: Props): ReactElement => {
   const { userData, updateQueue } = useUserData();
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
   const [fieldStates, setFieldStates] = useState<ProfileFieldErrorMap>(createProfileFieldErrorMap());
-  const { setRoadmap } = useContext(RoadmapContext);
 
   useEffect(() => {
     if (!userData) {
@@ -82,10 +78,6 @@ export const TaxRegistrationModal = (props: Props): ReactElement => {
 
     updateQueue.queueProfileData(profileData).queueTaxFilingData(taxFilingData);
     analytics.event.tax_registration_modal.submit.tax_registration_status_set_to_complete();
-
-    const newRoadmap = await buildUserRoadmap(profileData);
-    setRoadmap(newRoadmap);
-    setAnalyticsDimensions(profileData);
 
     props.onSave({ redirectOnSuccess: true });
     props.close();

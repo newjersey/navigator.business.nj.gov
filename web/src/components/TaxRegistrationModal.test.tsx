@@ -1,10 +1,7 @@
 import { TaxRegistrationModal } from "@/components/TaxRegistrationModal";
 import { getMergedConfig } from "@/contexts/configContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
-import * as buildUserRoadmap from "@/lib/roadmap/buildUserRoadmap";
-import * as analyticsHelpers from "@/lib/utils/analytics-helpers";
-import { generateProfileData, generateRoadmap, generateUserData } from "@/test/factories";
-import { withRoadmap } from "@/test/helpers/helpers-renderers";
+import { generateProfileData, generateUserData } from "@/test/factories";
 import { fillText, selectLocationByText } from "@/test/helpers/helpers-testing-library-selectors";
 import { markdownToText } from "@/test/helpers/helpers-utilities";
 import {
@@ -15,7 +12,7 @@ import {
 } from "@/test/mock/withStatefulUserData";
 import { LegalStructures, LookupOwnershipTypeById, UserData } from "@businessnjgovnavigator/shared";
 import { generateMunicipality } from "@businessnjgovnavigator/shared/test";
-import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
+import { fireEvent, render, screen, within } from "@testing-library/react";
 
 const Config = getMergedConfig();
 jest.mock("@/lib/data-hooks/useRoadmap", () => {
@@ -24,27 +21,15 @@ jest.mock("@/lib/data-hooks/useRoadmap", () => {
 jest.mock("@/lib/data-hooks/useUserData", () => {
   return { useUserData: jest.fn() };
 });
-jest.mock("@/lib/utils/analytics-helpers", () => {
-  return { setAnalyticsDimensions: jest.fn() };
-});
-jest.mock("@/lib/roadmap/buildUserRoadmap", () => {
-  return { buildUserRoadmap: jest.fn() };
-});
-
-const mockBuildUserRoadmap = buildUserRoadmap as jest.Mocked<typeof buildUserRoadmap>;
-const mockAnalyticsHelpers = analyticsHelpers as jest.Mocked<typeof analyticsHelpers>;
 
 describe("<TaxRegistrationModal>", () => {
-  let setRoadmap: jest.Mock;
   let modalOnClose: jest.Mock;
   const municipality = generateMunicipality({});
 
   beforeEach(() => {
     jest.resetAllMocks();
     setupStatefulUserDataContext();
-    setRoadmap = jest.fn();
     modalOnClose = jest.fn();
-    mockBuildUserRoadmap.buildUserRoadmap.mockResolvedValue(generateRoadmap({}));
   });
 
   const renderComponent = (initialUserData?: UserData) => {
@@ -59,41 +44,13 @@ describe("<TaxRegistrationModal>", () => {
     };
 
     render(
-      withRoadmap(
-        <MunicipalitiesContext.Provider value={{ municipalities: [municipality] }}>
-          <WithStatefulUserData initialUserData={userDataWithMunicipality}>
-            <TaxRegistrationModal isOpen={true} close={modalOnClose} onSave={() => {}} />
-          </WithStatefulUserData>
-        </MunicipalitiesContext.Provider>,
-        generateRoadmap({}),
-        undefined,
-        setRoadmap
-      )
+      <MunicipalitiesContext.Provider value={{ municipalities: [municipality] }}>
+        <WithStatefulUserData initialUserData={userDataWithMunicipality}>
+          <TaxRegistrationModal isOpen={true} close={modalOnClose} onSave={() => {}} />
+        </WithStatefulUserData>
+      </MunicipalitiesContext.Provider>
     );
   };
-
-  it("builds roadmap and sets analytics on save", async () => {
-    const userData = generateUserData({
-      profileData: generateProfileData({
-        municipality: municipality,
-        taxId: "123456789012",
-      }),
-    });
-    renderComponent(userData);
-
-    const returnedRoadmap = generateRoadmap({});
-    mockBuildUserRoadmap.buildUserRoadmap.mockResolvedValue(returnedRoadmap);
-
-    fireEvent.click(screen.getByText(Config.taxRegistrationModal.saveButtonText));
-    triggerQueueUpdate();
-    await waitFor(() => {
-      return expect(mockBuildUserRoadmap.buildUserRoadmap).toHaveBeenCalledWith(userData.profileData);
-    });
-    await waitFor(() => {
-      return expect(setRoadmap).toHaveBeenCalledWith(returnedRoadmap);
-    });
-    expect(mockAnalyticsHelpers.setAnalyticsDimensions).toHaveBeenCalledWith(userData.profileData);
-  });
 
   describe("when trade name legal structure", () => {
     it("does not show businessName nor taxId field", () => {

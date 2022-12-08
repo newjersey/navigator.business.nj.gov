@@ -1,11 +1,15 @@
 import { AuthContext } from "@/contexts/authContext";
+import { RoadmapContext } from "@/contexts/roadmapContext";
 import { UpdateQueueContext } from "@/contexts/updateQueueContext";
 import { UserDataErrorContext } from "@/contexts/userDataErrorContext";
 import * as api from "@/lib/api-client/apiClient";
 import { postUserData } from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
+import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import { UpdateQueue, UserDataError } from "@/lib/types/types";
 import { UpdateQueueFactory } from "@/lib/UpdateQueue";
+import { setAnalyticsDimensions } from "@/lib/utils/analytics-helpers";
+import { getSectionCompletion } from "@/lib/utils/helpers";
 import { UserData } from "@businessnjgovnavigator/shared/";
 import { useContext, useEffect } from "react";
 import useSWR from "swr";
@@ -14,6 +18,7 @@ export const useUserData = (): UseUserDataResponse => {
   const { state, dispatch } = useContext(AuthContext);
   const { updateQueue, setUpdateQueue } = useContext(UpdateQueueContext);
   const { userDataError, setUserDataError } = useContext(UserDataErrorContext);
+  const { setRoadmap, setSectionCompletion } = useContext(RoadmapContext);
   const { data, error, mutate } = useSWR<UserData | undefined>(state.user?.id || null, api.getUserData, {
     isPaused: () => {
       return state.isAuthenticated != IsAuthenticated.TRUE;
@@ -54,14 +59,32 @@ export const useUserData = (): UseUserDataResponse => {
     }
   }, [userDataError, dataExists, error, setUserDataError, state.isAuthenticated]);
 
+  const profileDataHasChanged = (oldUserData: UserData | undefined, newUserData: UserData): boolean => {
+    return JSON.stringify(oldUserData?.profileData) !== JSON.stringify(newUserData.profileData);
+  };
+
+  const onProfileDataChange = async (newUserData: UserData) => {
+    setAnalyticsDimensions(newUserData.profileData);
+    const newRoadmap = await buildUserRoadmap(newUserData.profileData);
+    setRoadmap(newRoadmap);
+    setSectionCompletion(getSectionCompletion(newRoadmap, newUserData));
+  };
+
   const update = async (newUserData: UserData | undefined, config?: { local?: boolean }): Promise<void> => {
     if (newUserData) {
       mutate(newUserData, false);
       if (config?.local || state.isAuthenticated != IsAuthenticated.TRUE) {
+        if (profileDataHasChanged(data, newUserData)) {
+          onProfileDataChange(newUserData);
+        }
         return;
       }
       return postUserData(newUserData)
         .then((response: UserData) => {
+          if (profileDataHasChanged(data, newUserData)) {
+            onProfileDataChange(newUserData);
+          }
+
           setUserDataError(undefined);
           mutate(response, false);
           setUpdateQueue(new UpdateQueueFactory(response, update));
