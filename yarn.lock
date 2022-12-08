@@ -4454,10 +4454,10 @@ __metadata:
     "@businessnjgovnavigator/shared": "*"
     "@jest/types": 29.3.1
     "@serverless/typescript": 3.25.0
-    "@types/cors": 2.8.12
+    "@types/cors": 2.8.13
     "@types/dedent": 0.7.0
     "@types/express": 4.17.14
-    "@types/jest": 29.2.3
+    "@types/jest": 29.2.4
     "@types/jsonwebtoken": 8.5.9
     "@types/lodash": 4.14.191
     "@types/node": 16.18.4
@@ -4592,11 +4592,11 @@ __metadata:
     "@testing-library/react": 13.4.0
     "@testing-library/user-event": 14.4.3
     "@types/broken-link-checker": 0.7.1
-    "@types/cors": 2.8.12
+    "@types/cors": 2.8.13
     "@types/cypress-dotenv": 2.0.0
     "@types/dedent": 0.7.0
     "@types/express": 4.17.14
-    "@types/jest": 29.2.3
+    "@types/jest": 29.2.4
     "@types/js-yaml": 4.0.5
     "@types/jsonwebtoken": 8.5.9
     "@types/lodash": 4.14.191
@@ -4663,7 +4663,7 @@ __metadata:
     js-yaml: 4.1.0
     jsonwebtoken: 8.5.1
     kill-port: 1.6.1
-    lint-staged: 13.0.4
+    lint-staged: 13.1.0
     lodash: 4.17.21
     markdown-truncate: 1.0.4
     napa: 3.0.0
@@ -4730,7 +4730,7 @@ __metadata:
   dependencies:
     "@businessnjgovnavigator/content": "*"
     "@jest/types": 29.3.1
-    "@types/jest": 29.2.3
+    "@types/jest": 29.2.4
     "@types/node": 16.18.4
     "@types/uuid": 9.0.0
     "@typescript-eslint/eslint-plugin": 5.45.0
@@ -4803,7 +4803,7 @@ __metadata:
     "@testing-library/user-event": 14.4.3
     "@types/broken-link-checker": 0.7.1
     "@types/cypress-dotenv": 2.0.0
-    "@types/jest": 29.2.3
+    "@types/jest": 29.2.4
     "@types/js-yaml": 4.0.5
     "@types/lodash": 4.14.191
     "@types/mdast": 3.0.10
@@ -9865,10 +9865,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/cors@npm:2.8.12":
-  version: 2.8.12
-  resolution: "@types/cors@npm:2.8.12"
-  checksum: 8c45f112c7d1d2d831b4b266f2e6ed33a1887a35dcbfe2a18b28370751fababb7cd045e745ef84a523c33a25932678097bf79afaa367c6cb3fa0daa7a6438257
+"@types/cors@npm:2.8.13":
+  version: 2.8.13
+  resolution: "@types/cors@npm:2.8.13"
+  dependencies:
+    "@types/node": "*"
+  checksum: 7ef197ea19d2e5bf1313b8416baa6f3fd6dd887fd70191da1f804f557395357dafd8bc8bed0ac60686923406489262a7c8a525b55748f7b2b8afa686700de907
   languageName: node
   linkType: hard
 
@@ -10064,13 +10066,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jest@npm:*, @types/jest@npm:29.2.3":
-  version: 29.2.3
-  resolution: "@types/jest@npm:29.2.3"
+"@types/jest@npm:*, @types/jest@npm:29.2.4":
+  version: 29.2.4
+  resolution: "@types/jest@npm:29.2.4"
   dependencies:
     expect: ^29.0.0
     pretty-format: ^29.0.0
-  checksum: 55370906711b600a05b9e497c22aa74d80d8adcdbe4ac2f1bc9311f6f6ca0dd192862b6f38df6ac0d45e92396bcd796e377b1d8058c10bdfd584aeee580c3ce1
+  checksum: 9deb4756fe1b438d41ff1aae7d6c216c9e49e5fe60f539f8edb6698ffeb530ff7b25d37e223439b03602ca3a7397c9c2e53e1a39c7bd616353472fce0cc04107
   languageName: node
   linkType: hard
 
@@ -23374,9 +23376,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lint-staged@npm:13.0.4":
-  version: 13.0.4
-  resolution: "lint-staged@npm:13.0.4"
+"lint-staged@npm:13.1.0":
+  version: 13.1.0
+  resolution: "lint-staged@npm:13.1.0"
   dependencies:
     cli-truncate: ^3.1.0
     colorette: ^2.0.19
@@ -23393,7 +23395,7 @@ __metadata:
     yaml: ^2.1.3
   bin:
     lint-staged: bin/lint-staged.js
-  checksum: 4676172df5dc734a7f409ad786a72d39bd2239de8b2e5eb1d99eaa751479f60f7b4ef85c8508698855b51b125a512f395ac6a3c7d2d57de8e8221e0aaaab6f4f
+  checksum: adf20c4ca9285c4a93b06598b970d71b04cfe58a1a4c9006f753b83e02c1c622d1866c32a4f1e7e29a98091c501eac3345f7678af247b4f97d5be88b3d8727c1
   languageName: node
   linkType: hard
 

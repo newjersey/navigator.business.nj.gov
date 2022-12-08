@@ -19,72 +19,80 @@ export const migrate_v96_to_v97 = (v96Data: v96UserData): v97UserData => {
     formationData: { formationFormData, ...remainingFormation },
     ...props
   } = v96Data;
-  const {
-    members,
-    signers,
-    businessAddressCity,
-    businessAddressLine1,
-    businessAddressLine2,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    businessAddressState,
-    businessAddressZipCode,
-    ...newFormationFormData
-  } = formationFormData;
+
+  let updatedFormationFormData = createEmptyFormationFormData();
+
+  if (allFormationLegalTypes.includes(props.profileData.legalStructureId ?? "")) {
+    const {
+      members,
+      signers,
+      businessAddressCity,
+      businessAddressLine1,
+      businessAddressLine2,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      businessAddressState,
+      businessAddressZipCode,
+      ...newFormationFormData
+    } = formationFormData;
+
+    updatedFormationFormData = {
+      ...newFormationFormData,
+      foreignDateOfFormation: undefined,
+      foreignGoodStandingFile: undefined,
+      foreignStateOfFormation: undefined,
+      agentOfficeAddressMunicipality: undefined,
+      signers: ["s-corporation", "c-corporation", "limited-partnership"].includes(
+        props.profileData.legalStructureId ?? ""
+      )
+        ? undefined
+        : signers.map((signer) => {
+            return {
+              name: signer.name,
+              signature: signer.signature,
+              title: v97businessSignerTypeMap[props.profileData.legalStructureId ?? ""][0],
+            };
+          }),
+      incorporators: ["s-corporation", "c-corporation", "limited-partnership"].includes(
+        props.profileData.legalStructureId ?? ""
+      )
+        ? signers.map((signer) => {
+            return {
+              ...signer,
+              addressState: arrayOfStateObjects.find((state) => {
+                return state.name == signer.addressState;
+              }),
+              addressCountry: "US",
+              title: v97businessSignerTypeMap[props.profileData.legalStructureId ?? ""][0],
+            };
+          })
+        : undefined,
+      members: ["limited-partnership", "limited-liability-partnership"].includes(
+        props.profileData.legalStructureId ?? ""
+      )
+        ? undefined
+        : members.map((member) => {
+            return {
+              ...member,
+              addressState: arrayOfStateObjects.find((state) => {
+                return state.name == member.addressState;
+              }),
+              addressCountry: "US",
+            };
+          }),
+      addressLine1: businessAddressLine1,
+      addressLine2: businessAddressLine2,
+      addressZipCode: businessAddressZipCode,
+      addressState: { name: "New Jersey", shortCode: "NJ" },
+      addressCountry: "US",
+      addressMunicipality: businessAddressCity,
+    };
+  }
+
   return {
     ...props,
     formationData: {
       ...remainingFormation,
-      formationFormData: {
-        ...newFormationFormData,
-        foreignDateOfFormation: undefined,
-        foreignGoodStandingFile: undefined,
-        foreignStateOfFormation: undefined,
-        agentOfficeAddressMunicipality: undefined,
-        signers: ["s-corporation", "c-corporation", "limited-partnership"].includes(
-          props.profileData.legalStructureId ?? ""
-        )
-          ? undefined
-          : signers.map((signer) => {
-              return {
-                name: signer.name,
-                signature: signer.signature,
-                title: v97businessSignerTypeMap[props.profileData.legalStructureId ?? ""][0],
-              };
-            }),
-        incorporators: ["s-corporation", "c-corporation", "limited-partnership"].includes(
-          props.profileData.legalStructureId ?? ""
-        )
-          ? signers.map((signer) => {
-              return {
-                ...signer,
-                addressState: arrayOfStateObjects.find((state) => {
-                  return state.name == signer.addressState;
-                }),
-                addressCountry: "US",
-                title: v97businessSignerTypeMap[props.profileData.legalStructureId ?? ""][0],
-              };
-            })
-          : undefined,
-        members: ["limited-partnership", "limited-liability-partnership"].includes(
-          props.profileData.legalStructureId ?? ""
-        )
-          ? undefined
-          : members.map((member) => {
-              return {
-                ...member,
-                addressState: arrayOfStateObjects.find((state) => {
-                  return state.name == member.addressState;
-                }),
-                addressCountry: "US",
-              };
-            }),
-        addressLine1: businessAddressLine1,
-        addressLine2: businessAddressLine2,
-        addressZipCode: businessAddressZipCode,
-        addressState: { name: "New Jersey", shortCode: "NJ" },
-        addressCountry: "US",
-        addressMunicipality: businessAddressCity,
-      },
+      formationFormData: updatedFormationFormData,
     },
     version: 97,
   };
@@ -569,6 +577,60 @@ export const allFormationLegalTypes = [
   "c-corporation",
   "s-corporation",
 ];
+
+export const createEmptyFormationFormData = (): v97FormationFormData => {
+  return {
+    addressLine1: "",
+    addressLine2: "",
+    addressCity: undefined,
+    addressMunicipality: undefined,
+    addressZipCode: "",
+    addressProvince: undefined,
+    addressCountry: "US",
+    addressState: { name: "New Jersey", shortCode: "NJ" },
+    businessName: "",
+    businessSuffix: undefined,
+    businessTotalStock: "",
+    businessStartDate: "",
+    businessPurpose: "",
+    withdrawals: "",
+    dissolution: "",
+    combinedInvestment: "",
+    canCreateLimitedPartner: undefined,
+    createLimitedPartnerTerms: "",
+    canGetDistribution: undefined,
+    getDistributionTerms: "",
+    canMakeDistribution: undefined,
+    makeDistributionTerms: "",
+    provisions: undefined,
+    agentNumberOrManual: "NUMBER",
+    agentNumber: "",
+    agentName: "",
+    agentEmail: "",
+    agentOfficeAddressLine1: "",
+    agentOfficeAddressLine2: "",
+    agentOfficeAddressMunicipality: undefined,
+    agentOfficeAddressCity: undefined,
+    agentOfficeAddressZipCode: "",
+    agentUseAccountInfo: false,
+    agentUseBusinessAddress: false,
+    members: undefined,
+    signers: undefined,
+    incorporators: undefined,
+    paymentType: undefined,
+    annualReportNotification: true,
+    corpWatchNotification: true,
+    officialFormationDocument: true,
+    certificateOfStanding: false,
+    certifiedCopyOfFormationDocument: false,
+    contactFirstName: "",
+    contactLastName: "",
+    contactPhoneNumber: "",
+    foreignDateOfFormation: undefined,
+    foreignStateOfFormation: undefined,
+    foreignGoodStandingFile: undefined,
+  };
+};
 
 export const v97generateFormationFormData = (
   overrides: Partial<v97FormationFormData>,
