@@ -7,9 +7,7 @@ import { useMockRoadmap, useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
 import { ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { render, screen } from "@testing-library/react";
 
-jest.mock("@/lib/data-hooks/useRoadmap", () => {
-  return { useRoadmap: jest.fn() };
-});
+jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 const Config = getMergedConfig();
 
 const renderComponent = (profileData: Partial<ProfileData>) => {

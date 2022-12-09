@@ -16,16 +16,11 @@ import {
   ProfileData,
 } from "@businessnjgovnavigator/shared/profileData";
 
-jest.mock("@/lib/roadmap/roadmapBuilder", () => {
-  return { buildRoadmap: jest.fn() };
-});
+jest.mock("@/lib/roadmap/roadmapBuilder", () => ({ buildRoadmap: jest.fn() }));
+jest.mock("@/lib/async-content-fetchers/fetchMunicipalities", () => ({
+  fetchMunicipalityById: jest.fn(),
+}));
 const mockRoadmapBuilder = (roadmapBuilderModule as jest.Mocked<typeof roadmapBuilderModule>).buildRoadmap;
-
-jest.mock("@/lib/async-content-fetchers/fetchMunicipalities", () => {
-  return {
-    fetchMunicipalityById: jest.fn(),
-  };
-});
 const mockFetchMunicipality = (fetchMunicipality as jest.Mocked<typeof fetchMunicipality>)
   .fetchMunicipalityById;
 

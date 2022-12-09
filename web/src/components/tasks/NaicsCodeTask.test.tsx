@@ -16,15 +16,10 @@ import {
 import { LookupIndustryById, UserData } from "@businessnjgovnavigator/shared";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
-jest.mock("@/lib/roadmap/buildUserRoadmap", () => {
-  return { buildUserRoadmap: jest.fn() };
-});
-jest.mock("@/lib/data-hooks/useUserData", () => {
-  return { useUserData: jest.fn() };
-});
-jest.mock("@/lib/data-hooks/useRoadmap", () => {
-  return { useRoadmap: jest.fn() };
-});
+jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
+jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
+jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
+
 jest.mock("@/lib/static/records/naics2022.json", () => {
   const industryId = "auto-body-repair";
   // eslint-disable-next-line @typescript-eslint/no-var-requires

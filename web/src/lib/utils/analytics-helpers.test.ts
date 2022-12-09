@@ -16,10 +16,7 @@ function setupMockAnalytics(): typeof analytics {
   };
 }
 
-jest.mock("@/lib/utils/analytics", () => {
-  return setupMockAnalytics();
-});
-
+jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
 const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
 
 const liquorLicenseApplicableIndustries = Industries.filter((industry) => {

@@ -27,8 +27,6 @@ describe("getProfileConfig", () => {
 
   const mergedConfigForTest: ConfigType = merge(Config, testConfig);
 
-  console.log(Config.profileDefaults);
-
   it("gets default value when no persona passed", () => {
     const result = getProfileConfig({
       config: mergedConfigForTest,

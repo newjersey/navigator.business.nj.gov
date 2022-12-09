@@ -5,15 +5,9 @@ import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
 import { render, screen } from "@testing-library/react";
 
-jest.mock("@/lib/data-hooks/useRoadmap", () => {
-  return { useRoadmap: jest.fn() };
-});
-jest.mock("@/lib/data-hooks/useUserData", () => {
-  return { useUserData: jest.fn() };
-});
-jest.mock("next/router", () => {
-  return { useRouter: jest.fn() };
-});
+jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
+jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
+jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 
 describe("<SidebarCard />", () => {
   beforeEach(() => {

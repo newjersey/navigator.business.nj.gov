@@ -31,23 +31,13 @@ function mockMaterialUI(): typeof materialUi {
 
 const Config = getMergedConfig();
 
-jest.mock("@mui/material", () => {
-  return mockMaterialUI();
-});
-jest.mock("next/router", () => {
-  return { useRouter: jest.fn() };
-});
-jest.mock("@/lib/data-hooks/useUserData", () => {
-  return { useUserData: jest.fn() };
-});
-jest.mock("@/lib/data-hooks/useRoadmap", () => {
-  return { useRoadmap: jest.fn() };
-});
+jest.mock("@mui/material", () => mockMaterialUI());
+jest.mock("next/router", () => ({ useRouter: jest.fn() }));
+jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
+jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 
 const setLargeScreen = (): void => {
-  (useMediaQuery as jest.Mock).mockImplementation(() => {
-    return true;
-  });
+  (useMediaQuery as jest.Mock).mockImplementation(() => true);
 };
 
 const renderPage = (task: Task, initialUserData?: UserData) => {

@@ -3,11 +3,7 @@ import * as FetchContextualInfoModule from "@/lib/async-content-fetchers/fetchCo
 import { withContextualInfo } from "@/test/helpers/helpers-renderers";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
-jest.mock("@/lib/async-content-fetchers/fetchContextualInfo", () => {
-  return {
-    fetchContextualInfo: jest.fn(),
-  };
-});
+jest.mock("@/lib/async-content-fetchers/fetchContextualInfo", () => ({ fetchContextualInfo: jest.fn() }));
 const mockFetchContextualInfo = (FetchContextualInfoModule as jest.Mocked<typeof FetchContextualInfoModule>)
   .fetchContextualInfo;
 

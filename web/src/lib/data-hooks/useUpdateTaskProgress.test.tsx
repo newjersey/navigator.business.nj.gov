@@ -14,12 +14,8 @@ import { TaskProgress, UserData } from "@businessnjgovnavigator/shared/userData"
 import { act, render } from "@testing-library/react";
 import { ReactNode } from "react";
 
-jest.mock("@/lib/data-hooks/useUserData", () => {
-  return { useUserData: jest.fn() };
-});
-jest.mock("@/lib/data-hooks/useRoadmap", () => {
-  return { useRoadmap: jest.fn() };
-});
+jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
+jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 
 describe("useUpdateTaskProgress", () => {
   beforeEach(() => {

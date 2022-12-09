@@ -13,9 +13,7 @@ import { useMockUserData } from "@/test/mock/mockUseUserData";
 import { OperatingPhases } from "@businessnjgovnavigator/shared/operatingPhase";
 import { fireEvent, render, screen } from "@testing-library/react";
 
-jest.mock("@/lib/data-hooks/useUserData", () => {
-  return { useUserData: jest.fn() };
-});
+jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 
 const Config = getMergedConfig();
 

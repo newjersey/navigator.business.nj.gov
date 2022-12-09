@@ -6,9 +6,7 @@ import { ProfileData } from "@businessnjgovnavigator/shared";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { OnboardingTaxId } from "./OnboardingTaxId";
 
-jest.mock("@/lib/data-hooks/useRoadmap", () => {
-  return { useRoadmap: jest.fn() };
-});
+jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 const Config = getMergedConfig();
 
 type ErrorProps = {

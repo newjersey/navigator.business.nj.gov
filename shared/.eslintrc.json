@@ -26,9 +26,7 @@
           "camelCase": true
         }
       }
-    ],
-    "curly": "error",
-    "arrow-body-style": ["warn", "always"]
+    ]
   },
   "overrides": [
     {

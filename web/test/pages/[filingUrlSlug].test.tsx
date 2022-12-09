@@ -8,9 +8,7 @@ import { defaultDateFormat, getCurrentDate, randomInt } from "@businessnjgovnavi
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen } from "@testing-library/react";
 
-jest.mock("@/lib/data-hooks/useUserData", () => {
-  return { useUserData: jest.fn() };
-});
+jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 const Config = getMergedConfig();
 
 describe("filing page", () => {

@@ -18,25 +18,15 @@ import { ProfileData } from "@businessnjgovnavigator/shared/";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { act, screen, waitFor } from "@testing-library/react";
 
-jest.mock("next/router", () => {
-  return { useRouter: jest.fn() };
-});
-jest.mock("@/lib/data-hooks/useUserData", () => {
-  return { useUserData: jest.fn() };
-});
-jest.mock("@/lib/data-hooks/useRoadmap", () => {
-  return { useRoadmap: jest.fn() };
-});
-jest.mock("@/lib/roadmap/buildUserRoadmap", () => {
-  return { buildUserRoadmap: jest.fn() };
-});
-jest.mock("@/lib/api-client/apiClient", () => {
-  return {
-    postNewsletter: jest.fn(),
-    postUserTesting: jest.fn(),
-    postGetAnnualFilings: jest.fn(),
-  };
-});
+jest.mock("next/router", () => ({ useRouter: jest.fn() }));
+jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
+jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
+jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
+jest.mock("@/lib/api-client/apiClient", () => ({
+  postNewsletter: jest.fn(),
+  postUserTesting: jest.fn(),
+  postGetAnnualFilings: jest.fn(),
+}));
 
 const Config = getMergedConfig();
 const { employeesInNJ, transactionsInNJ, revenueInNJ, operationsInNJ, none } =

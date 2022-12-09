@@ -12,18 +12,10 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 const Config = getMergedConfig();
 
-jest.mock("@/lib/api-client/apiClient", () => {
-  return { postSelfReg: jest.fn() };
-});
-jest.mock("@/lib/data-hooks/useUserData", () => {
-  return { useUserData: jest.fn() };
-});
-jest.mock("next/router", () => {
-  return { useRouter: jest.fn() };
-});
-jest.mock("@/lib/auth/sessionHelper", () => {
-  return { triggerSignIn: jest.fn() };
-});
+jest.mock("@/lib/api-client/apiClient", () => ({ postSelfReg: jest.fn() }));
+jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
+jest.mock("next/router", () => ({ useRouter: jest.fn() }));
+jest.mock("@/lib/auth/sessionHelper", () => ({ triggerSignIn: jest.fn() }));
 
 const mockApi = api as jest.Mocked<typeof api>;
 const mockSession = session as jest.Mocked<typeof session>;
