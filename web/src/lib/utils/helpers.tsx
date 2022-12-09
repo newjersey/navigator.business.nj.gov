@@ -20,8 +20,6 @@ import {
 } from "@businessnjgovnavigator/shared";
 import { ReactElement, useEffect, useRef } from "react";
 
-const Config = getMergedConfig();
-
 export const useMountEffect = (fun: () => void): void => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   return useEffect(fun, []);
@@ -206,28 +204,6 @@ export const validateEmail = (email: string): boolean => {
   return !!/^(([^\s"(),.:;<>@[\\\]]+(\.[^\s"(),.:;<>@[\\\]]+)*)|(".+"))@((\[(?:\d{1,3}\.){3}\d{1,3}])|(([\dA-Za-z-]+\.)+[A-Za-z]{2,}))$/.test(
     String(email).toLowerCase()
   );
-};
-
-export const validateFullName = (name: string | undefined): { isValid: boolean; errorMessage: string } => {
-  if (!name || name.length === 0) {
-    return { isValid: false, errorMessage: Config.selfRegistration.errorTextFullName };
-  }
-  if (name.length > 50) {
-    return { isValid: false, errorMessage: Config.selfRegistration.errorTextFullNameLength };
-  }
-  const startsWithLetterRegex = /^[A-Za-z]/;
-  if (!startsWithLetterRegex.test(name)) {
-    return { isValid: false, errorMessage: Config.selfRegistration.errorTextFullNameStartWithLetter };
-  }
-  const allowedCharactersRegex = /^[\w ',.-]*$/;
-  if (!allowedCharactersRegex.test(name)) {
-    return { isValid: false, errorMessage: Config.selfRegistration.errorTextFullNameSpecialCharacter };
-  }
-
-  return {
-    isValid: true,
-    errorMessage: "",
-  };
 };
 
 export const getUrlSlugs = (roadmap: Roadmap | undefined): string[] => {

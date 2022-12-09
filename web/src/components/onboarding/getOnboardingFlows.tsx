@@ -14,8 +14,9 @@ import { OnboardingMunicipality } from "@/components/onboarding/OnboardingMunici
 import { OnboardingNameAndEmail } from "@/components/onboarding/OnboardingNameAndEmail";
 import { OnboardingOwnership } from "@/components/onboarding/OnboardingOwnership";
 import { OnboardingSectors } from "@/components/onboarding/OnboardingSectors";
+import { isFullNameValid } from "@/lib/domain-logic/isFullNameValid";
 import { FlowType, ProfileError, ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
-import { validateEmail, validateFullName } from "@/lib/utils/helpers";
+import { validateEmail } from "@/lib/utils/helpers";
 import { BusinessUser, ProfileData } from "@businessnjgovnavigator/shared/";
 import { ReactNode } from "react";
 
@@ -144,7 +145,7 @@ export const getOnboardingFlows = (
               inline: [
                 {
                   name: "name",
-                  valid: validateFullName(businessUser.name).isValid && !fieldStates.name.invalid,
+                  valid: isFullNameValid(businessUser.name) && !fieldStates.name.invalid,
                 },
                 {
                   name: "email",
