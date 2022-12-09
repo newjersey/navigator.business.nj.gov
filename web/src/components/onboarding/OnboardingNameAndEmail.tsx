@@ -1,8 +1,13 @@
 import { GenericTextField } from "@/components/GenericTextField";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import {
+  FullNameErrorVariant,
+  getFullNameErrorVariant,
+  isFullNameValid,
+} from "@/lib/domain-logic/isFullNameValid";
 import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
-import { validateEmail, validateFullName } from "@/lib/utils/helpers";
+import { validateEmail } from "@/lib/utils/helpers";
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import { ReactElement, useContext, useState } from "react";
 
@@ -16,6 +21,14 @@ export const OnboardingNameAndEmail = (props: Props): ReactElement => {
   const [email, setEmail] = useState<string>(state.user?.email || "");
   const [confirmEmail, setConfirmEmail] = useState<string | undefined>(state.user?.email || undefined);
   const { Config } = useConfig();
+
+  const FullNameErrorMessageLookup: Record<FullNameErrorVariant, string> = {
+    MISSING: Config.selfRegistration.errorTextFullName,
+    TOO_LONG: Config.selfRegistration.errorTextFullNameLength,
+    MUST_START_WITH_LETTER: Config.selfRegistration.errorTextFullNameStartWithLetter,
+    CONTAINS_ILLEGAL_CHAR: Config.selfRegistration.errorTextFullNameSpecialCharacter,
+    NO_ERROR: "",
+  };
 
   const updateEmailState = (value: string) => {
     state.user && setUser({ ...state.user, email: value });
@@ -59,13 +72,11 @@ export const OnboardingNameAndEmail = (props: Props): ReactElement => {
           fieldName={"name"}
           error={props.fieldStates["name"].invalid}
           onValidation={onValidation}
-          validationText={validateFullName(state.user?.name).errorMessage || " "}
+          validationText={FullNameErrorMessageLookup[getFullNameErrorVariant(state.user?.name)]}
           required={true}
           placeholder={Config.selfRegistration.nameFieldPlaceholder}
           handleChange={handleName}
-          additionalValidation={(value) => {
-            return validateFullName(value).isValid;
-          }}
+          additionalValidation={isFullNameValid}
         />
       </div>
       <div className="margin-top-2">
