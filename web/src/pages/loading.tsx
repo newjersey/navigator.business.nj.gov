@@ -10,6 +10,7 @@ import { onGuestSignIn } from "@/lib/auth/signinHelper";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
+import analytics from "@/lib/utils/analytics";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { onboardingCompleted } from "@businessnjgovnavigator/shared/domain-logic/onboarding";
 import { useRouter } from "next/router";
@@ -35,6 +36,7 @@ const LoadingPage = (): ReactElement => {
       });
     } else if (router.asPath.includes(signInSamlError)) {
       setShowLoginErrorModal(true);
+      analytics.event.landing_page.arrive.get_unlinked_myNJ_account_modal();
     } else {
       triggerSignIn();
     }
