@@ -1,5 +1,4 @@
 import { Content } from "@/components/Content";
-import { Alert } from "@/components/njwds-extended/Alert";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -12,7 +11,7 @@ import { ReactElement, useContext } from "react";
 export const PartnershipRights = (): ReactElement => {
   const { state, setFormationFormData, setFieldInteracted } = useContext(BusinessFormationContext);
   const { Config } = useConfig();
-  const { doesFieldHaveError, doSomeFieldsHaveError } = useFormationErrors();
+  const { doesFieldHaveError } = useFormationErrors();
 
   const getTextField = (fieldName: FormationTextField) => {
     return (
@@ -107,9 +106,6 @@ export const PartnershipRights = (): ReactElement => {
           {Config.businessFormationDefaults.partnershipRightsTitle}
         </div>
       </div>
-      {doSomeFieldsHaveError(["canCreateLimitedPartner", "canMakeDistribution", "canGetDistribution"]) && (
-        <Alert variant="error">{Config.businessFormationDefaults.partnershipRightsRadioErrorText}</Alert>
-      )}
       {getRadio("canCreateLimitedPartner", Config.businessFormationDefaults.partnershipRightsCanAssignRights)}
       {state.formationFormData.canCreateLimitedPartner && getTextField("createLimitedPartnerTerms")}
       {getRadio(
