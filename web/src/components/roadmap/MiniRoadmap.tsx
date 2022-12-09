@@ -2,8 +2,9 @@ import { SectionAccordion } from "@/components/dashboard/SectionAccordion";
 import { MiniRoadmapStep } from "@/components/roadmap/MiniRoadmapStep";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { isStepCompleted } from "@/lib/domain-logic/isStepCompleted";
 import analytics from "@/lib/utils/analytics";
-import { getSectionNames, isStepCompleted } from "@/lib/utils/helpers";
+import { getSectionNames } from "@/lib/utils/helpers";
 import { ReactElement, useCallback } from "react";
 
 interface Props {

@@ -157,21 +157,6 @@ export const scrollToTopOfElement = (
   }, 100);
 };
 
-export const isStepCompleted = (
-  roadmap: Roadmap | undefined,
-  step: Step,
-  userData: UserData | undefined
-): boolean => {
-  if (!roadmap) {
-    return false;
-  }
-  return roadmap.tasks.every((currentTask) => {
-    return (
-      currentTask.stepNumber == step.stepNumber && userData?.taskProgress[currentTask.id] !== "COMPLETED"
-    );
-  });
-};
-
 interface AlertProps {
   variant: "success" | "warning" | "error";
   body: string;

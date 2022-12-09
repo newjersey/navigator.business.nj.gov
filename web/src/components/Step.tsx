@@ -2,8 +2,8 @@ import { VerticalStepIndicator } from "@/components/njwds-extended/VerticalStepI
 import { Task } from "@/components/Task";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { isStepCompleted } from "@/lib/domain-logic/isStepCompleted";
 import * as types from "@/lib/types/types";
-import { isStepCompleted } from "@/lib/utils/helpers";
 import { ReactElement } from "react";
 
 interface Props {
