@@ -192,14 +192,18 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
                 return setToNextStatus();
               }
         }
-        className={
-          `cursor-pointer border-2px radius-md margin-right-105 padding-0 ` +
-          `display-flex flex-row flex-justify-center flex-align-center ` +
-          `${styles.border} ${styles.bg} ${styles.textColor}`
-        }
-        style={{ width: "22px", height: "22px" }}
+        className={`cursor-pointer margin-neg-105 padding-105 usa-button--unstyled`}
       >
-        <Icon>{getIcon()}</Icon>
+        <span
+          className={
+            `border-2px radius-md ` +
+            `display-flex flex-row flex-justify-center flex-align-center ` +
+            `${styles.border} ${styles.bg} ${styles.textColor}`
+          }
+          style={{ width: "22px", height: "22px" }}
+        >
+          <Icon>{getIcon()}</Icon>
+        </span>
       </button>
     );
   };
@@ -216,7 +220,7 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
         <>{Checkbox()}</>
       )}
 
-      <>{TaskProgressTagLookup[currentTaskProgress]}</>
+      <span className="margin-left-105">{TaskProgressTagLookup[currentTaskProgress]}</span>
 
       <SnackbarAlert
         variant="success"
