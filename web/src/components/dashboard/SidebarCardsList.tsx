@@ -109,7 +109,7 @@ export const SidebarCardsList = (props: Props): ReactElement => {
 
   return (
     <>
-      <h2>{Config.dashboardDefaults.sidebarHeading}</h2>
+      <h2 className="h1-styling margin-top-0">{Config.dashboardDefaults.sidebarHeading}</h2>
       <hr
         className="desktop:margin-right-1 margin-top-2 margin-bottom-3 bg-cool-lighter"
         aria-hidden={true}

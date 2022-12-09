@@ -246,7 +246,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
     <div className="calendar-container">
       <div className="flex flex-align-end flex-justify" data-testid="filings-calendar">
         <div className="flex flex-align-end">
-          <h2 className="margin-bottom-0">{Config.dashboardDefaults.calendarHeader}</h2>
+          <h2 className="margin-bottom-0 text-medium">{Config.dashboardDefaults.calendarHeader}</h2>
           <div className="margin-top-05">
             <ArrowTooltip title={Config.dashboardDefaults.calendarTooltip}>
               <div
