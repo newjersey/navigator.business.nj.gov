@@ -181,27 +181,34 @@ export const FilingsCalendar = (props: Props): ReactElement => {
 
   const renderCalendar = (): ReactElement => {
     const type = LookupOperatingPhaseById(userData?.profileData.operatingPhase).displayCalendarType;
-    if (type === "LIST") {
-      return renderCalendarAsList();
-    }
+    if (type === "LIST") return renderCalendarAsList();
     if (type === "FULL") {
-      if (isLargeScreen && userData?.preferences.isCalendarFullView) {
-        return renderCalendarAsGrid();
-      }
+      if (isLargeScreen && userData?.preferences.isCalendarFullView) return renderCalendarAsGrid();
       return renderCalendarAsList();
     }
     return <></>;
   };
 
   const renderToggleButton = (): ReactElement => {
-    if (!userData) {
-      return <></>;
-    }
-    if (
+    const displayToggleButton =
       sortedFilteredFilingsWithinAYear.length > 0 &&
-      LookupOperatingPhaseById(userData?.profileData.operatingPhase).displayCalendarToggleButton
-    ) {
-      return userData.preferences.isCalendarFullView ? (
+      LookupOperatingPhaseById(userData?.profileData.operatingPhase).displayCalendarToggleButton &&
+      isLargeScreen;
+
+    const handleCalendarOnClick = () => {
+      if (!userData) return;
+
+      update({
+        ...userData,
+        preferences: {
+          ...userData.preferences,
+          isCalendarFullView: !userData.preferences.isCalendarFullView,
+        },
+      });
+    };
+
+    if (displayToggleButton) {
+      return userData?.preferences.isCalendarFullView ? (
         <Button
           style="light"
           noRightMargin
@@ -211,7 +218,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
           <Icon className="usa-icon--size-3 margin-right-05">list</Icon>
           {Config.dashboardDefaults.calendarListViewButton}
         </Button>
-      ) : isLargeScreen ? (
+      ) : (
         <Button
           style="light"
           noRightMargin
@@ -221,25 +228,10 @@ export const FilingsCalendar = (props: Props): ReactElement => {
           <Icon className="usa-icon--size-3 margin-right-05">grid_view</Icon>
           {Config.dashboardDefaults.calendarGridViewButton}
         </Button>
-      ) : (
-        <></>
       );
-    } else {
-      return <></>;
     }
-  };
 
-  const handleCalendarOnClick = () => {
-    if (!userData) {
-      return;
-    }
-    update({
-      ...userData,
-      preferences: {
-        ...userData.preferences,
-        isCalendarFullView: !userData.preferences.isCalendarFullView,
-      },
-    });
+    return <></>;
   };
 
   return (
