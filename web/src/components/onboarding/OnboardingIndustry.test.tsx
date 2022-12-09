@@ -3,7 +3,7 @@ import { OnboardingIndustry } from "@/components/onboarding/OnboardingIndustry";
 import { getMergedConfig } from "@/contexts/configContext";
 import { EssentialQuestions } from "@/lib/domain-logic/essentialQuestions";
 import { createProfileFieldErrorMap } from "@/lib/types/types";
-import { capitalizeFirstLetter, kebabSnakeSentenceToCamelCase } from "@/lib/utils/helpers";
+import { capitalizeFirstLetter, kebabSnakeSentenceToCamelCase } from "@/lib/utils/cases-helpers";
 import {
   randomFilteredIndustry,
   randomHomeBasedIndustry,

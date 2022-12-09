@@ -3,7 +3,7 @@ import { BusinessFormationTextField } from "@/components/tasks/business-formatio
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
-import { camelCaseToSentence } from "@/lib/utils/helpers";
+import { camelCaseToSentence } from "@/lib/utils/cases-helpers";
 import { FormationFields, FormationTextField } from "@businessnjgovnavigator/shared";
 import { FormControl, FormControlLabel, FormHelperText, Radio, RadioGroup } from "@mui/material";
 import { ReactElement, useContext } from "react";

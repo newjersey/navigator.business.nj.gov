@@ -8,7 +8,7 @@ import {
   camelCaseToSentence,
   capitalizeFirstLetter,
   kebabSnakeSentenceToCamelCase,
-} from "@/lib/utils/helpers";
+} from "@/lib/utils/cases-helpers";
 import { ProfileData } from "@businessnjgovnavigator/shared";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import React, { ReactElement, useContext } from "react";

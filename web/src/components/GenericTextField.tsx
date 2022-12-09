@@ -1,4 +1,4 @@
-import { camelCaseToSentence } from "@/lib/utils/helpers";
+import { camelCaseToSentence } from "@/lib/utils/cases-helpers";
 import { TextField, TextFieldProps } from "@mui/material";
 import { ChangeEvent, FocusEvent, forwardRef, ReactElement, RefObject } from "react";
 

@@ -9,7 +9,8 @@ import {
 } from "@/lib/domain-logic/essentialQuestions";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
-import { splitAndBoldSearchText, templateEval } from "@/lib/utils/helpers";
+import { templateEval } from "@/lib/utils/helpers";
+import { splitAndBoldSearchText } from "@/lib/utils/splitAndBoldSearchText";
 import {
   CannabisLicenseType,
   Industries,

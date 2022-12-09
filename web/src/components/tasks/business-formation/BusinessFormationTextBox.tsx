@@ -4,7 +4,7 @@ import { Icon } from "@/components/njwds/Icon";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
-import { camelCaseToSentence } from "@/lib/utils/helpers";
+import { camelCaseToSentence } from "@/lib/utils/cases-helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { FormationTextField } from "@businessnjgovnavigator/shared/formationData";
 import { ReactElement, useContext, useState } from "react";

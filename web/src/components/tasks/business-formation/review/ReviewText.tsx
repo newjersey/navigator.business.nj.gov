@@ -3,7 +3,8 @@ import { Button } from "@/components/njwds-extended/Button";
 import { LookupStepIndexByName } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { FormationStepNames } from "@/lib/types/types";
-import { camelCaseToKebabCase, scrollToTop, setHeaderRole } from "@/lib/utils/helpers";
+import { camelCaseToKebabCase } from "@/lib/utils/cases-helpers";
+import { scrollToTop, setHeaderRole } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { FormationTextField } from "@businessnjgovnavigator/shared/formationData";
 import { useContext } from "react";
@@ -16,7 +17,7 @@ interface Props {
 export const ReviewText = (props: Props) => {
   const { state, setStepIndex } = useContext(BusinessFormationContext);
   const headerLevelTwo = setHeaderRole(2, "h3-styling");
-  const snakeCaseFieldName = camelCaseToKebabCase(props.fieldName);
+  const kebabCaseFieldName = camelCaseToKebabCase(props.fieldName);
   return (
     <>
       <div className="flex space-between">
@@ -31,13 +32,13 @@ export const ReviewText = (props: Props) => {
               scrollToTop();
             }}
             underline
-            dataTestid={`edit-${snakeCaseFieldName}`}
+            dataTestid={`edit-${kebabCaseFieldName}`}
           >
             {Config.businessFormationDefaults.editButtonText}
           </Button>
         </div>
       </div>
-      <div className="display-block tablet:display-flex" data-testid={snakeCaseFieldName}>
+      <div className="display-block tablet:display-flex" data-testid={kebabCaseFieldName}>
         <div>
           {state.formationFormData[props.fieldName] || (
             <i>{Config.businessFormationDefaults.reviewStepNotEnteredText}</i>
