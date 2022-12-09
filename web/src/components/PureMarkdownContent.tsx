@@ -15,6 +15,7 @@ interface Props {
 
 export const PureMarkdownContent = (props: Props): ReactElement => {
   const markdown = unified()
+    .use(customRemoveNonUnicodePlugin)
     .use(remarkParse)
     .use(remarkGfm)
     .use(remarkDirective)
@@ -42,6 +43,20 @@ function customRemarkPlugin():
             header: node.attributes.header,
           };
         }
+      } else {
+        return;
+      }
+    });
+  };
+}
+
+function customRemoveNonUnicodePlugin():
+  | void
+  | import("unified").Transformer<import("mdast").Root, import("mdast").Root> {
+  return (tree: any) => {
+    visit(tree, (node) => {
+      if (node.value) {
+        node.value = node.value.replace(/[^\u0020-\u007E]+[+0-29U]/g, "");
       } else {
         return;
       }
