@@ -95,6 +95,13 @@ export default {
         },
       },
     },
+    landing_page: {
+      arrive: {
+        get_unlinked_myNJ_account_modal: () => {
+          sendEvent("landing_page", "arrive", "get_unlinked_myNJ_account_modal");
+        },
+      },
+    },
     guest_snackbar: {
       click: {
         go_to_myNJ_registration: () => {

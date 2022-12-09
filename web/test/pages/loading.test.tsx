@@ -3,6 +3,7 @@ import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import * as sessionHelper from "@/lib/auth/sessionHelper";
 import * as signinHelper from "@/lib/auth/signinHelper";
 import { ROUTES } from "@/lib/domain-logic/routes";
+import analytics from "@/lib/utils/analytics";
 import LoadingPage, { signInSamlError } from "@/pages/loading";
 import { generatePreferences, generateProfileData, generateUserData } from "@/test/factories";
 import { withAuth } from "@/test/helpers/helpers-renderers";
@@ -20,6 +21,20 @@ import {
 } from "@/test/mock/withStatefulUserData";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
+function setupMockAnalytics(): typeof analytics {
+  return {
+    ...jest.requireActual("@/lib/utils/analytics").default,
+    event: {
+      ...jest.requireActual("@/lib/utils/analytics").default.event,
+      landing_page: {
+        arrive: {
+          get_unlinked_myNJ_account_modal: jest.fn(),
+        },
+      },
+    },
+  };
+}
+
 jest.mock("next/router", () => {
   return { useRouter: jest.fn() };
 });
@@ -35,6 +50,11 @@ jest.mock("@/lib/auth/sessionHelper", () => {
 jest.mock("@/lib/auth/signinHelper", () => {
   return { onGuestSignIn: jest.fn() };
 });
+jest.mock("@/lib/utils/analytics", () => {
+  return setupMockAnalytics();
+});
+
+const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
 const mockSessionHelper = sessionHelper as jest.Mocked<typeof sessionHelper>;
 const mockSigninHelper = signinHelper as jest.Mocked<typeof signinHelper>;
 
@@ -98,6 +118,8 @@ describe("loading page", () => {
     render(withAuth(<LoadingPage />, { isAuthenticated: IsAuthenticated.FALSE }));
     expect(mockSessionHelper.triggerSignIn).not.toHaveBeenCalled();
     expect(screen.getByText(Config.selfRegistration.loginErrorModalTitle)).toBeInTheDocument();
+    expect(mockAnalytics.event.landing_page.arrive.get_unlinked_myNJ_account_modal).toHaveBeenCalled();
+
     fireEvent.click(screen.getByText(Config.selfRegistration.loginErrorModalContinueButton));
     await waitFor(() => {
       return expect(mockSigninHelper.onGuestSignIn).toHaveBeenCalled();
