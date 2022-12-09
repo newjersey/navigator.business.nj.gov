@@ -2,7 +2,7 @@ import { Content } from "@/components/Content";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { camelCaseToSentence } from "@/lib/utils/helpers";
+import { camelCaseToSentence } from "@/lib/utils/cases-helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { BusinessSuffix, BusinessSuffixMap, FormationLegalType } from "@businessnjgovnavigator/shared/";
 import { FormControl, FormHelperText, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";

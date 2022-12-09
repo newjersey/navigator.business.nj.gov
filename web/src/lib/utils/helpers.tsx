@@ -291,35 +291,6 @@ export const getPhoneNumberFormat = (phoneNumber: string) => {
   return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6, 10)}`;
 };
 
-export const capitalizeFirstLetter = (text: string): string => {
-  return text.charAt(0).toUpperCase() + text.slice(1);
-};
-
-export const camelCaseToSentence = (text: string): string => {
-  const spacedCase = text
-    .split(/(?=[A-Z])/)
-    .join(" ")
-    .toLowerCase();
-  return capitalizeFirstLetter(spacedCase);
-};
-
-export const kebabSnakeSentenceToCamelCase = (text: string): string => {
-  return text
-    .toLowerCase()
-    .split(/[\s_-]/gm)
-    .map((cased, index) => {
-      return index == 0 ? cased : capitalizeFirstLetter(cased);
-    })
-    .join("");
-};
-
-export const camelCaseToKebabCase = (text: string): string => {
-  return text
-    .split(/(?=[A-Z])/)
-    .join("-")
-    .toLowerCase();
-};
-
 const sectionsToTasksMap = (roadmap: Roadmap | undefined): Record<SectionType, Task[]> | undefined => {
   return roadmap?.steps.reduce((accumulator, currentStep: Step) => {
     const currentStepTasks = roadmap.tasks.filter((task) => {
@@ -340,23 +311,6 @@ const stepInRoadmap = (roadmap: Roadmap | undefined, taskId: string): Step | und
   return roadmap?.steps.find((step) => {
     return step.stepNumber === taskAtHand.stepNumber;
   });
-};
-export const splitAndBoldSearchText = (displayText: string, searchText: string): ReactElement => {
-  const index = displayText.toLowerCase().indexOf(searchText.toLowerCase());
-  if (index >= 0) {
-    const prefixText = displayText.slice(0, Math.max(0, index));
-    const toBold = displayText.slice(index, index + searchText.length);
-    const afterText = displayText.slice(index + searchText.length);
-    return (
-      <span style={{ whiteSpace: "pre-wrap" }}>
-        {prefixText}
-        <span className="text-bold">{toBold}</span>
-        {afterText}
-      </span>
-    );
-  } else {
-    return <>{displayText}</>;
-  }
 };
 
 export const getDollarValue = (currVal: string | number): string => {
