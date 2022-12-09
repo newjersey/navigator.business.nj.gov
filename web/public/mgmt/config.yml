@@ -2254,11 +2254,6 @@ collections:
                   widget: string,
                 }
               - {
-                  label: Partnership Rights - Error Text when Missing,
-                  name: partnershipRightsRadioErrorText,
-                  widget: string,
-                }
-              - {
                   label: Registered Agent - Email Label,
                   name: registeredAgentEmailLabel,
                   widget: string,
