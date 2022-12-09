@@ -93,7 +93,7 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
       return <></>;
     }
     return (
-      <div data-testid={`error-alert-${error}`} className="text-orange">
+      <div data-testid={`error-alert-${error}`} className="text-error-dark">
         {SearchBusinessNameErrorLookup[error]}
       </div>
     );
