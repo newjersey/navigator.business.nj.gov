@@ -2,14 +2,9 @@ import fs from "fs";
 import { loadRoadmapDisplayContent, loadTasksDisplayContent } from "./loadDisplayContent";
 
 jest.mock("fs");
-
-jest.mock("process", () => {
-  return {
-    cwd: () => {
-      return "/test";
-    },
-  };
-});
+jest.mock("process", () => ({
+  cwd: () => "/test",
+}));
 
 describe("loadDisplayContent", () => {
   let mockedFs: jest.Mocked<typeof fs>;

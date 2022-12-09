@@ -29,18 +29,11 @@ function setupMockAnalytics(): typeof analytics {
   };
 }
 
-const Config = getMergedConfig();
-jest.mock("@/lib/data-hooks/useUserData", () => {
-  return { useUserData: jest.fn() };
-});
-jest.mock("@/lib/data-hooks/useRoadmap", () => {
-  return { useRoadmap: jest.fn() };
-});
-jest.mock("@/lib/utils/analytics", () => {
-  return setupMockAnalytics();
-});
-
+jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
+jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
+jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
 const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
+const Config = getMergedConfig();
 
 describe("<DeferredLocationQuestion />", () => {
   let setRoadmap: jest.Mock;

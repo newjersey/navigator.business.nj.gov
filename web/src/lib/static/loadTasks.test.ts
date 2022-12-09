@@ -2,14 +2,9 @@ import fs from "fs";
 import { loadAllTaskUrlSlugs, loadTaskByUrlSlug } from "./loadTasks";
 
 jest.mock("fs");
-
-jest.mock("process", () => {
-  return {
-    cwd: () => {
-      return "/test";
-    },
-  };
-});
+jest.mock("process", () => ({
+  cwd: () => "/test",
+}));
 
 describe("loadTasks", () => {
   let mockedFs: jest.Mocked<typeof fs>;

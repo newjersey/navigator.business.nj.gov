@@ -15,12 +15,8 @@ import {
 import { SectionType, UserData } from "@businessnjgovnavigator/shared/";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 
-jest.mock("@/lib/data-hooks/useUserData", () => {
-  return { useUserData: jest.fn() };
-});
-jest.mock("@/lib/data-hooks/useRoadmap", () => {
-  return { useRoadmap: jest.fn() };
-});
+jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
+jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 
 describe("<SectionAccordion />", () => {
   beforeEach(() => {

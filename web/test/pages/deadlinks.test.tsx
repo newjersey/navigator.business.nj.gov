@@ -3,9 +3,7 @@ import DeadLinksPage from "@/pages/mgmt/deadlinks";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { Options } from "broken-link-checker";
 
-jest.mock("@/lib/api-client/apiClient", () => {
-  return { post: jest.fn() };
-});
+jest.mock("@/lib/api-client/apiClient", () => ({ post: jest.fn() }));
 const mockApi = api as jest.Mocked<typeof api>;
 
 jest.mock("broken-link-checker", () => {

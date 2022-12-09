@@ -31,9 +31,7 @@
     "unicorn/numeric-separators-style": "off",
     "unicorn/prefer-module": "off",
     "unicorn/no-array-reduce": "off",
-    "unicorn/switch-case-braces": "off",
-    "curly": "error",
-    "arrow-body-style": ["warn", "always"]
+    "unicorn/switch-case-braces": "off"
   },
   "overrides": [
     {

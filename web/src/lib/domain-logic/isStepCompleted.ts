@@ -11,10 +11,6 @@ export const isStepCompleted = (
   }
 
   return roadmap.tasks
-    .filter((it) => {
-      return it.stepNumber === step.stepNumber;
-    })
-    .every((it) => {
-      return userData?.taskProgress[it.id] === "COMPLETED";
-    });
+    .filter((it) => it.stepNumber === step.stepNumber)
+    .every((it) => userData?.taskProgress[it.id] === "COMPLETED");
 };

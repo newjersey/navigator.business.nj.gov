@@ -11,30 +11,22 @@ const userDataStorage = {
   delete: jest.fn(),
 };
 
-jest.mock("@/lib/storage/UserDataStorage", () => {
-  return {
-    UserDataStorageFactory: jest.fn(() => {
-      return userDataStorage;
-    }),
-  };
-});
+jest.mock("@/lib/storage/UserDataStorage", () => ({
+  UserDataStorageFactory: jest.fn(() => userDataStorage),
+}));
 
-jest.mock("./sessionHelper", () => {
-  return {
-    getCurrentUser: jest.fn(),
-    triggerSignOut: jest.fn().mockResolvedValue({}),
-  };
-});
+jest.mock("./sessionHelper", () => ({
+  getCurrentUser: jest.fn(),
+  triggerSignOut: jest.fn().mockResolvedValue({}),
+}));
 
 const mockSession = session as jest.Mocked<typeof session>;
 
-jest.mock("@/lib/api-client/apiClient", () => {
-  return {
-    getUserData: jest.fn(),
-    postUserData: jest.fn(),
-    postSelfReg: jest.fn(),
-  };
-});
+jest.mock("@/lib/api-client/apiClient", () => ({
+  getUserData: jest.fn(),
+  postUserData: jest.fn(),
+  postSelfReg: jest.fn(),
+}));
 const mockApi = api as jest.Mocked<typeof api>;
 
 describe("SigninHelper", () => {

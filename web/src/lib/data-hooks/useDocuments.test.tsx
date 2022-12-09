@@ -7,17 +7,10 @@ import { act, render, waitFor } from "@testing-library/react";
 
 const mockGetSignedS3Link = (sessionHelper as jest.Mocked<typeof sessionHelper>).getSignedS3Link;
 
-jest.mock("@/lib/auth/sessionHelper", () => {
-  return {
-    getSignedS3Link: jest.fn((url) => {
-      return `${url}`;
-    }),
-  };
-});
-
-jest.mock("@/lib/data-hooks/useUserData", () => {
-  return { useUserData: jest.fn() };
-});
+jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
+jest.mock("@/lib/auth/sessionHelper", () => ({
+  getSignedS3Link: jest.fn((url) => `${url}`),
+}));
 
 describe("useDocuments", () => {
   beforeEach(() => {

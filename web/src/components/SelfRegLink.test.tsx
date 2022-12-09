@@ -17,18 +17,10 @@ function setupMockAnalytics(): typeof analytics {
   };
 }
 
-jest.mock("next/router", () => {
-  return { useRouter: jest.fn() };
-});
-jest.mock("@/lib/auth/signinHelper", () => {
-  return { onSelfRegister: jest.fn() };
-});
-jest.mock("@/lib/utils/analytics", () => {
-  return setupMockAnalytics();
-});
-jest.mock("@/lib/data-hooks/useUserData", () => {
-  return { useUserData: jest.fn() };
-});
+jest.mock("next/router", () => ({ useRouter: jest.fn() }));
+jest.mock("@/lib/auth/signinHelper", () => ({ onSelfRegister: jest.fn() }));
+jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
+jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 
 const mockSigninHelper = signinHelper as jest.Mocked<typeof signinHelper>;
 const mockAnalytics = analytics as jest.Mocked<typeof analytics>;

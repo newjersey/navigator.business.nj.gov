@@ -8,15 +8,9 @@ import { useMockProfileData } from "@/test/mock/mockUseUserData";
 import { formationTaskId } from "@businessnjgovnavigator/shared";
 import { fireEvent, render, screen } from "@testing-library/react";
 
-jest.mock("@/lib/data-hooks/useUserData", () => {
-  return { useUserData: jest.fn() };
-});
-jest.mock("@/lib/data-hooks/useRoadmap", () => {
-  return { useRoadmap: jest.fn() };
-});
-jest.mock("@/lib/async-content-fetchers/fetchTaskByFilename", () => {
-  return { fetchTaskByFilename: jest.fn() };
-});
+jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
+jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
+jest.mock("@/lib/async-content-fetchers/fetchTaskByFilename", () => ({ fetchTaskByFilename: jest.fn() }));
 const mockFetchTaskByFilename = (taskFetcher as jest.Mocked<typeof taskFetcher>).fetchTaskByFilename;
 
 const Config = getMergedConfig();

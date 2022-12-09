@@ -35,24 +35,12 @@ function setupMockAnalytics(): typeof analytics {
   };
 }
 
-jest.mock("next/router", () => {
-  return { useRouter: jest.fn() };
-});
-jest.mock("@/lib/data-hooks/useUserData", () => {
-  return { useUserData: jest.fn() };
-});
-jest.mock("@/lib/data-hooks/useRoadmap", () => {
-  return { useRoadmap: jest.fn() };
-});
-jest.mock("@/lib/auth/sessionHelper", () => {
-  return { triggerSignIn: jest.fn() };
-});
-jest.mock("@/lib/auth/signinHelper", () => {
-  return { onGuestSignIn: jest.fn() };
-});
-jest.mock("@/lib/utils/analytics", () => {
-  return setupMockAnalytics();
-});
+jest.mock("next/router", () => ({ useRouter: jest.fn() }));
+jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
+jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
+jest.mock("@/lib/auth/sessionHelper", () => ({ triggerSignIn: jest.fn() }));
+jest.mock("@/lib/auth/signinHelper", () => ({ onGuestSignIn: jest.fn() }));
+jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
 
 const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
 const mockSessionHelper = sessionHelper as jest.Mocked<typeof sessionHelper>;

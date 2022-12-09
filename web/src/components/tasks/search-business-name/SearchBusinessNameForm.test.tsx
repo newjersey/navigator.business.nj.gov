@@ -14,17 +14,11 @@ import { useMockProfileData, useMockUserData } from "@/test/mock/mockUseUserData
 import { fireEvent, render, screen } from "@testing-library/react";
 import { ReactElement } from "react";
 
-jest.mock("@/lib/data-hooks/useUserData", () => {
-  return { useUserData: jest.fn() };
-});
-jest.mock("@/lib/data-hooks/useRoadmap", () => {
-  return { useRoadmap: jest.fn() };
-});
-jest.mock("@/lib/api-client/apiClient", () => {
-  return {
-    searchBusinessName: jest.fn(),
-  };
-});
+jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
+jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
+jest.mock("@/lib/api-client/apiClient", () => ({
+  searchBusinessName: jest.fn(),
+}));
 const mockApi = api as jest.Mocked<typeof api>;
 
 const Config = getMergedConfig();

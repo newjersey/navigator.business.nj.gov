@@ -3,9 +3,7 @@ import { useMockUserData } from "@/test/mock/mockUseUserData";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { fireEvent, render, screen } from "@testing-library/react";
 
-jest.mock("@/lib/data-hooks/useUserData", () => {
-  return { useUserData: jest.fn() };
-});
+jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 
 describe("<BetaBar />", () => {
   beforeEach(() => {

@@ -3,9 +3,7 @@ import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { LandingPageTiles } from "./LandingPageTiles";
 
-jest.mock("next/router", () => {
-  return { useRouter: jest.fn() };
-});
+jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 
 const Config = getMergedConfig();
 

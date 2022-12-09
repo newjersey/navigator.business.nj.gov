@@ -12,18 +12,12 @@ import { BusinessUser } from "@businessnjgovnavigator/shared/";
 import { act, render, waitFor } from "@testing-library/react";
 import { SWRConfig } from "swr";
 
-jest.mock("@/lib/api-client/apiClient", () => {
-  return {
-    getUserData: jest.fn(),
-    postUserData: jest.fn(),
-  };
-});
-jest.mock("@/lib/roadmap/buildUserRoadmap", () => {
-  return { buildUserRoadmap: jest.fn() };
-});
-jest.mock("@/lib/utils/analytics-helpers", () => {
-  return { setAnalyticsDimensions: jest.fn() };
-});
+jest.mock("@/lib/utils/analytics-helpers", () => ({ setAnalyticsDimensions: jest.fn() }));
+jest.mock("@/lib/roadmap/buildUserRoadmap", () => ({ buildUserRoadmap: jest.fn() }));
+jest.mock("@/lib/api-client/apiClient", () => ({
+  getUserData: jest.fn(),
+  postUserData: jest.fn(),
+}));
 const mockBuildUserRoadmap = buildUserRoadmap as jest.Mocked<typeof buildUserRoadmap>;
 const mockAnalyticsHelpers = analyticsHelpers as jest.Mocked<typeof analyticsHelpers>;
 const mockApi = api as jest.Mocked<typeof api>;

@@ -21,23 +21,15 @@ import {
 } from "@businessnjgovnavigator/shared/";
 import { screen, waitFor } from "@testing-library/react";
 
-jest.mock("next/router", () => {
-  return { useRouter: jest.fn() };
-});
-jest.mock("@/lib/data-hooks/useUserData", () => {
-  return { useUserData: jest.fn() };
-});
-jest.mock("@/lib/data-hooks/useRoadmap", () => {
-  return { useRoadmap: jest.fn() };
-});
-jest.mock("@/lib/api-client/apiClient", () => {
-  return {
-    postSelfReg: jest.fn(),
-    postNewsletter: jest.fn(),
-    postUserTesting: jest.fn(),
-    postGetAnnualFilings: jest.fn(),
-  };
-});
+jest.mock("next/router", () => ({ useRouter: jest.fn() }));
+jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
+jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
+jest.mock("@/lib/api-client/apiClient", () => ({
+  postSelfReg: jest.fn(),
+  postNewsletter: jest.fn(),
+  postUserTesting: jest.fn(),
+  postGetAnnualFilings: jest.fn(),
+}));
 
 const mockApi = api as jest.Mocked<typeof api>;
 const date = getCurrentDate().subtract(1, "month").date(1);
