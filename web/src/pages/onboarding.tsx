@@ -23,6 +23,7 @@ import {
   createProfileFieldErrorMap,
   FlowType,
   OnboardingStatus,
+  Page,
   ProfileError,
   ProfileFieldErrorMap,
   ProfileFields,
@@ -33,13 +34,22 @@ import {
   setAnalyticsDimensions,
   setRegistrationDimension,
 } from "@/lib/utils/analytics-helpers";
-import { getFlow, OnboardingStatusLookup, scrollToTop, templateEval } from "@/lib/utils/helpers";
+import { getFlow, OnboardingStatusLookup, scrollToTop } from "@/lib/utils/helpers";
+import {
+  evalHeaderStepsTemplate,
+  flowQueryParamIsValid,
+  getAnimation,
+  getTimeout,
+  industryQueryParamIsValid,
+  mapFlowQueryToPersona,
+  pageQueryParamisValid,
+} from "@/lib/utils/onboardingPageHelpers";
 import {
   BusinessUser,
   createEmptyProfileData,
   createEmptyUser,
   createEmptyUserData,
-  LookupIndustryById,
+  LookupLegalStructureById,
   Municipality,
   ProfileData,
   UserData,
@@ -70,7 +80,7 @@ const OnboardingPage = (props: Props): ReactElement => {
   const { state } = useContext(AuthContext);
 
   const router = useRouter();
-  const [page, setPage] = useState<{ current: number; previous: number }>({ current: 1, previous: 1 });
+  const [page, setPage] = useState<Page>({ current: 1, previous: 1 });
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
   const [user, setUser] = useState<BusinessUser>(createEmptyUser(ABStorageFactory().getExperience()));
   const [error, setError] = useState<ProfileError | undefined>(undefined);
@@ -114,11 +124,27 @@ const OnboardingPage = (props: Props): ReactElement => {
       };
     };
 
-    if (profileData.businessPersona === "FOREIGN" && profileData.foreignBusinessType !== "NEXUS") {
-      removePageFromFlow("industry-page", "FOREIGN");
-      removePageFromFlow("legal-structure-page", "FOREIGN");
-      removePageFromFlow("municipality-page", "FOREIGN");
-    }
+    const removeDateAndEntityIdForPublicFilingPages = () => {
+      if (profileData.legalStructureId) {
+        const requiresPublicFiling = LookupLegalStructureById(
+          profileData.legalStructureId
+        ).requiresPublicFiling;
+        if (!requiresPublicFiling) {
+          removePageFromFlow("date-and-entity-id-for-public-filing", "OWNING");
+        }
+      }
+    };
+
+    const removeNexusSpecificPages = () => {
+      if (profileData.businessPersona === "FOREIGN" && profileData.foreignBusinessType !== "NEXUS") {
+        removePageFromFlow("industry-page", "FOREIGN");
+        removePageFromFlow("legal-structure-page", "FOREIGN");
+        removePageFromFlow("municipality-page", "FOREIGN");
+      }
+    };
+
+    removeDateAndEntityIdForPublicFilingPages();
+    removeNexusSpecificPages();
 
     return onboardingFlows;
   }, [profileData, user, fieldStates]);
@@ -129,20 +155,6 @@ const OnboardingPage = (props: Props): ReactElement => {
     },
     [router]
   );
-
-  const industryQueryParamIsValid = (industryId: string | undefined): boolean => {
-    return !!LookupIndustryById(industryId).id;
-  };
-
-  const mapFlowQueryToPersona: Record<QUERY_PARAMS_VALUES["flow"], FlowType> = {
-    starting: "STARTING",
-    "out-of-state": "FOREIGN",
-    "up-and-running": "OWNING",
-  };
-
-  const flowQueryParamIsValid = (flow: string): boolean => {
-    return Object.keys(mapFlowQueryToPersona).includes(flow);
-  };
 
   useEffect(() => {
     setCurrentFlow(getFlow(profileData));
@@ -182,7 +194,7 @@ const OnboardingPage = (props: Props): ReactElement => {
 
           if (industryQueryParamIsValid(queryIndustryId)) {
             await setIndustryAndRouteToPage(currentUserData, queryIndustryId);
-          } else if (pageQueryParamisValid(currentUserData, queryPage)) {
+          } else if (pageQueryParamisValid(onboardingFlows, currentUserData, queryPage)) {
             setPage({ current: queryPage, previous: queryPage - 1 });
           } else if (flowQueryParamIsValid(queryFlow)) {
             await setBusinessPersonaAndRouteToPage(queryFlow);
@@ -197,14 +209,6 @@ const OnboardingPage = (props: Props): ReactElement => {
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.isReady, state.user, state.isAuthenticated]);
-
-  const pageQueryParamisValid = (userData: UserData, page: number): boolean => {
-    const hasAnsweredBusinessPersona = userData?.profileData.businessPersona !== undefined;
-    const flow = getFlow(userData);
-    const requestedPageIsInRange = page <= onboardingFlows[flow].pages.length && page > 0;
-
-    return hasAnsweredBusinessPersona && requestedPageIsInRange;
-  };
 
   const setIndustryAndRouteToPage = async (
     userData: UserData,
@@ -403,42 +407,17 @@ const OnboardingPage = (props: Props): ReactElement => {
     }
   };
 
-  const evalHeaderStepsTemplate = (): string => {
-    if (page.current === 1) {
-      return templateEval(Config.onboardingDefaults.stepXTemplate, {
-        currentPage: page.current.toString(),
-      });
-    } else if (page.current === 2 && profileData.businessPersona === "FOREIGN") {
-      return templateEval(Config.onboardingDefaults.stepXTemplate, {
-        currentPage: page.current.toString(),
-      });
-    } else {
-      return templateEval(Config.onboardingDefaults.stepXofYTemplate, {
-        currentPage: page.current.toString(),
-        totalPages: onboardingFlows[currentFlow].pages.length.toString(),
-      });
-    }
-  };
-
   const header = () => {
     return (
       <div className="margin-y-2 desktop:margin-y-0 desktop:padding-bottom-1">
         <h1 ref={headerRef}>
           {Config.onboardingDefaults.pageTitle}{" "}
           <span className="text-light" data-testid={`step-${page.current.toString()}`}>
-            {evalHeaderStepsTemplate()}
+            {evalHeaderStepsTemplate(onboardingFlows, currentFlow, profileData, page)}
           </span>
         </h1>
       </div>
     );
-  };
-
-  const getAnimation = (): string => {
-    return page.previous < page.current ? "slide" : "slide-back";
-  };
-
-  const getTimeout = (slidePage: number): number => {
-    return slidePage === page.previous ? 100 : 300;
   };
 
   return (
@@ -459,7 +438,8 @@ const OnboardingPage = (props: Props): ReactElement => {
         <NextSeo
           title={`Business.NJ.gov Navigator - ${
             Config.onboardingDefaults.pageTitle
-          } ${evalHeaderStepsTemplate()} `}
+          } ${evalHeaderStepsTemplate(onboardingFlows, currentFlow, profileData, page)}
+          } `}
         />
         <PageSkeleton>
           <NavBar />
@@ -504,8 +484,8 @@ const OnboardingPage = (props: Props): ReactElement => {
                     key={index}
                     in={page.current === index + 1}
                     unmountOnExit
-                    timeout={getTimeout(index + 1)}
-                    classNames={`width-100 ${getAnimation()}`}
+                    timeout={getTimeout(page, index + 1)}
+                    classNames={`width-100 ${getAnimation(page)}`}
                   >
                     <SingleColumnContainer isSmallerWidth>
                       <form

@@ -447,3 +447,4 @@ export type TaskWithoutLinks = {
   issuingAgency?: string;
   formName?: string;
 };
+export type Page = { current: number; previous: number };
