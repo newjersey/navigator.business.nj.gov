@@ -1,22 +1,22 @@
 ---
-urlSlug: form-business-entity
-name: Form Your Business Entity
+urlSlug: authorize-business-entity
+name: Authorize Your Business Entity
 id: form-business-entity
 callToActionLink: https://www.njportal.com/DOR/BusinessFormation/CompanyInformation/BusinessName
-callToActionText: Form My Business
+callToActionText: Authorize My Business
 required: true
 issuingAgency: New Jersey Department of Treasury's Division of Revenue and Enterprise Services
 ---
 
-You must register your business name and form your `business structure|business-structure-learn-more` with the State.
+You must register your business name and authorize your `business structure|business-structure-learn-more` with the State.
 
 ---
 
 ### Application Requirements
 
-- Available business name
+- Business name (same name as in your home state)
 - Business structure
-- [NAICS code](/tasks/determine-naics-code) (optional): ${naicsCode}
+- [NAICS code](/tasks/determine-naics-code) (optional) ${naicsCode}
 - `EIN|ein` (optional)
 - Business description
 - Business address (this may be a home address if you are a home-based business)
@@ -26,6 +26,6 @@ You must register your business name and form your `business structure|business-
 > **Once completed, you will have:**
 >
 > - `Entity ID|entity-id`
-> - `Certificate of Formation|certificate-formation`, Incorporation or >Authorization as applicable
-> - `Certified copy|certified-copy` of Certificate of Formation, Incorporation or Authorization (optional with additional fee)
+> - `Certificate of Authorization|certificate-formation`
+> - `Certified copy|certified-copy` of Certificate of Authorization (optional with additional fee)
 > - `Certificate of Good Standing|good-standing` (optional with additional fee)

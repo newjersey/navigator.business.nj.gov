@@ -49,8 +49,8 @@
     "canBeHomeBased": true,
     "canBeReseller": false
   },
-  "isEnabled": false,
-  "additionalSearchTerms": "background check, private investigator, PI",
+  "isEnabled": true,
+  "additionalSearchTerms": "background check, private investigator, PI, private detective",
   "id": "detective",
   "description": "Provides investigative services"
 }

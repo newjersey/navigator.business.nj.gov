@@ -1,18 +1,25 @@
 ---
 filename: research-with-nj
-urlSlug: research-with-nj
 name: Research with NJ
+urlSlug: research-with-nj
 id: research-with-nj
-callToActionLink: www.researchwithnj.com
+openDate: ""
+dueDate: ""
+descriptionMd: Research with NJ is a free online portal that showcases New
+  Jersey’s experts in science, technology, engineering, and mathematics (STEM).
+  It provides local, national, and international commercial enterprises, ranging
+  from entrepreneurs and start-ups to global businesses, with insight into
+  groundbreaking research taking place within the state’s network of research
+  universities.
+callToActionLink: https://www.researchwithnj.com
 callToActionText: Learn More
 fundingType: technical assistance
+programFrequency: ongoing
+status: rolling application
 programPurpose: Both
 agency:
   - NJEDA
 agencyContact: ""
-publishStageArchive: ""
-status: rolling application
-programFrequency: ongoing
 businessStage: both
 employeesRequired: n/a
 homeBased: unknown
@@ -28,9 +35,7 @@ sector:
   - manufacturing
   - clean-energy
   - transportation-and-warehousing
-openDate: ""
-dueDate: ""
-descriptionMd: Research with NJ is a free online portal that showcases New Jersey’s experts in science, technology, engineering, and mathematics (STEM). It provides local, national, and international commercial enterprises, ranging from entrepreneurs and start-ups to global businesses, with insight into groundbreaking research taking place within the state’s network of research universities.
+publishStageArchive: ""
 ---
 
 Research with NJ is a free online portal that showcases New Jersey’s experts in science, technology, engineering, and mathematics (STEM). It provides local, national, and international commercial enterprises, ranging from entrepreneurs and start-ups to global businesses, with insight into groundbreaking research taking place within the state’s network of research universities.
