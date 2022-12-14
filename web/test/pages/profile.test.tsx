@@ -41,6 +41,7 @@ import {
   getCurrentDate,
   LegalStructures,
   LookupIndustryById,
+  LookupLegalStructureById,
   LookupOwnershipTypeById,
   LookupSectorTypeById,
   Municipality,
@@ -51,6 +52,7 @@ import {
   randomInt,
   UserData,
 } from "@businessnjgovnavigator/shared";
+import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 
 const date = getCurrentDate().subtract(1, "month").date(1);
@@ -112,13 +114,16 @@ describe("profile", () => {
         : generateMunicipality({ displayName: "GenericTown" });
     render(
       withAuthAlert(
-        <WithStatefulUserData
-          initialUserData={
-            userData || generateUserData({ profileData: generateProfileData({ municipality: genericTown }) })
-          }
-        >
-          <Profile municipalities={municipalities ? [genericTown, ...municipalities] : [genericTown]} />
-        </WithStatefulUserData>,
+        <ThemeProvider theme={createTheme()}>
+          <WithStatefulUserData
+            initialUserData={
+              userData ||
+              generateUserData({ profileData: generateProfileData({ municipality: genericTown }) })
+            }
+          >
+            <Profile municipalities={municipalities ? [genericTown, ...municipalities] : [genericTown]} />
+          </WithStatefulUserData>
+        </ThemeProvider>,
         isAuthenticated ?? IsAuthenticated.TRUE,
         { registrationModalIsVisible: false, setRegistrationModalIsVisible }
       )
@@ -219,40 +224,73 @@ describe("profile", () => {
       });
     });
 
-    describe("disables fields when formation getFiling success", () => {
+    describe("locks fields when formation getFiling success", () => {
       const legalStructure = "limited-liability-company";
-      const userData = {
-        userData: generateUserData({
-          formationData: generateFormationData({
-            getFilingResponse: generateGetFilingResponse({
-              success: true,
-            }),
-          }),
-          profileData: generateProfileData({
-            dateOfFormation: "2020-01-01",
-            businessPersona: "STARTING",
-            legalStructureId: legalStructure,
-            entityId: "some-id",
-            businessName: "some-name",
+      const municipality = generateMunicipality({
+        displayName: "some-cool-town",
+      });
+      const userData = generateUserData({
+        formationData: generateFormationData({
+          getFilingResponse: generateGetFilingResponse({
+            success: true,
           }),
         }),
-      };
-
-      it("disables businessName", () => {
-        renderPage(userData);
-        expect(screen.getByLabelText("Business name")).toBeDisabled();
+        profileData: generateProfileData({
+          dateOfFormation: "2020-01-02",
+          businessPersona: "STARTING",
+          legalStructureId: legalStructure,
+          entityId: "some-id",
+          businessName: "some-name",
+          municipality: municipality,
+        }),
       });
 
-      it("disables entityID", () => {
-        renderPage(userData);
-        chooseTab("numbers");
-        expect(screen.getByLabelText("Entity id")).toBeDisabled();
+      it("locks businessName", () => {
+        renderPage({ userData });
+        expect(
+          screen.getByText(Config.profileDefaults.fields.businessName.default.header)
+        ).toBeInTheDocument();
+        expect(
+          screen.queryByText(Config.profileDefaults.fields.businessName.default.description)
+        ).not.toBeInTheDocument();
+        expect(screen.getByText("some-name")).toBeInTheDocument();
+        expect(screen.queryByLabelText("Business name")).not.toBeInTheDocument();
       });
 
-      it("disables dateOfFormation", () => {
-        renderPage(userData);
+      it("locks entityID", () => {
+        renderPage({ userData });
         chooseTab("numbers");
-        expect(screen.getByLabelText("Date of formation")).toBeDisabled();
+        expect(screen.getByText(Config.profileDefaults.fields.entityId.default.header)).toBeInTheDocument();
+        expect(
+          screen.queryByText(Config.profileDefaults.fields.entityId.default.description)
+        ).not.toBeInTheDocument();
+        expect(screen.getByText("some-id")).toBeInTheDocument();
+        expect(screen.queryByLabelText("Entity id")).not.toBeInTheDocument();
+      });
+
+      it("locks dateOfFormation", () => {
+        renderPage({ userData });
+        chooseTab("numbers");
+        expect(
+          screen.getByText(Config.profileDefaults.fields.dateOfFormation.default.header)
+        ).toBeInTheDocument();
+        expect(
+          screen.queryByText(Config.profileDefaults.fields.dateOfFormation.default.description)
+        ).not.toBeInTheDocument();
+        expect(screen.getByText("01/2020")).toBeInTheDocument();
+        expect(screen.queryByLabelText("Date of formation")).not.toBeInTheDocument();
+      });
+
+      it("locks legalStructure", () => {
+        renderPage({ userData });
+        expect(
+          screen.getByText(Config.profileDefaults.fields.legalStructureId.default.header)
+        ).toBeInTheDocument();
+        expect(
+          screen.queryByText(Config.profileDefaults.fields.legalStructureId.default.description)
+        ).not.toBeInTheDocument();
+        expect(screen.getByText(LookupLegalStructureById(legalStructure).name)).toBeInTheDocument();
+        expect(screen.queryByLabelText("Legal structure")).not.toBeInTheDocument();
       });
     });
 
@@ -1485,20 +1523,6 @@ describe("profile", () => {
     });
   });
 
-  it("disables legal structure field if formation getFiling success", () => {
-    const userData = generateUserData({
-      profileData: generateProfileData({ businessPersona: "STARTING" }),
-      formationData: generateFormationData({
-        getFilingResponse: generateGetFilingResponse({
-          success: true,
-        }),
-      }),
-    });
-
-    renderPage({ userData });
-    expect((screen.queryByTestId("legal-structure") as HTMLInputElement)?.disabled).toEqual(true);
-  });
-
   it("shows the home-based question if applicable to industry", () => {
     renderPage({
       userData: generateUserData({
@@ -1667,7 +1691,7 @@ describe("profile", () => {
         expect(screen.getByTestId("profileContent-documents")).toBeInTheDocument();
       });
 
-      it("disables document section if user's legal structure does not require public filing", () => {
+      it("removes document section if user's legal structure does not require public filing", () => {
         const userData = generateUserData({
           profileData: generateProfileData({
             businessPersona: "STARTING",
@@ -1695,7 +1719,7 @@ describe("profile", () => {
         expect(screen.getByTestId("profileContent-documents")).toBeInTheDocument();
       });
 
-      it("disables document section if user has not completed business formation", () => {
+      it("removes document section if user has not completed business formation", () => {
         const userData = generateUserData({
           formationData: generateFormationData({
             getFilingResponse: generateGetFilingResponse({ success: false }),

@@ -4,6 +4,7 @@ import { Button } from "@/components/njwds-extended/Button";
 import { SidebarPageLayout } from "@/components/njwds-extended/SidebarPageLayout";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { FieldLabelProfile } from "@/components/onboarding/FieldLabelProfile";
+import { LockedProfileField } from "@/components/onboarding/LockedProfileField";
 import { OnboardingBusinessName } from "@/components/onboarding/OnboardingBusinessName";
 import { OnboardingDateOfFormation } from "@/components/onboarding/OnboardingDateOfFormation";
 import { OnboardingEmployerId } from "@/components/onboarding/OnboardingEmployerId";
@@ -59,6 +60,7 @@ import {
   ProfileData,
   UserData,
 } from "@businessnjgovnavigator/shared/";
+import dayjs from "dayjs";
 import deepEqual from "fast-deep-equal/es6/react";
 import { cloneDeep } from "lodash";
 import { GetStaticPropsResult } from "next";
@@ -263,6 +265,8 @@ const ProfilePage = (props: Props): ReactElement => {
     return isHomeBasedBusinessApplicable(profileData.industryId);
   };
 
+  const shouldLockFormationFields = userData?.formationData.getFilingResponse?.success;
+
   const nexusBusinessElements: Record<ProfileTabs, ReactNode> = {
     info: (
       <>
@@ -287,9 +291,17 @@ const ProfilePage = (props: Props): ReactElement => {
         )}
         <FieldLabelProfile fieldName="industryId" />
         <OnboardingIndustry onValidation={onValidation} fieldStates={fieldStates} />
-        <div className="margin-top-3" aria-hidden={true} />
-        <FieldLabelProfile fieldName="legalStructureId" />
-        <OnboardingLegalStructureDropdown disabled={userData?.formationData.getFilingResponse?.success} />
+
+        {shouldLockFormationFields ? (
+          <LockedProfileField fieldName="legalStructureId" />
+        ) : (
+          <>
+            <div className="margin-top-3" aria-hidden={true} />
+            <FieldLabelProfile fieldName="legalStructureId" />
+            <OnboardingLegalStructureDropdown />
+          </>
+        )}
+
         <div className="margin-top-3" aria-hidden={true} />
         <FieldLabelProfile fieldName="nexusLocationInNewJersey" />
         <OnboardingLocationInNewJersey />
@@ -394,8 +406,14 @@ const ProfilePage = (props: Props): ReactElement => {
           {Config.profileDefaults.profileTabInfoTitle}
         </h2>
 
-        <FieldLabelProfile fieldName="businessName" />
-        <OnboardingBusinessName disabled={userData?.formationData.getFilingResponse?.success} />
+        {shouldLockFormationFields ? (
+          <LockedProfileField fieldName="businessName" />
+        ) : (
+          <>
+            <FieldLabelProfile fieldName="businessName" />
+            <OnboardingBusinessName />
+          </>
+        )}
 
         <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
 
@@ -410,8 +428,17 @@ const ProfilePage = (props: Props): ReactElement => {
 
         <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
 
-        <FieldLabelProfile fieldName="legalStructureId" />
-        <OnboardingLegalStructureDropdown disabled={userData?.formationData.getFilingResponse?.success} />
+        {shouldLockFormationFields ? (
+          <LockedProfileField
+            fieldName="legalStructureId"
+            valueFormatter={(id) => LookupLegalStructureById(id).name}
+          />
+        ) : (
+          <>
+            <FieldLabelProfile fieldName="legalStructureId" />
+            <OnboardingLegalStructureDropdown />
+          </>
+        )}
 
         <hr className="margin-top-6 margin-bottom-2" aria-hidden={true} />
 
@@ -451,26 +478,41 @@ const ProfilePage = (props: Props): ReactElement => {
         {userData?.profileData.dateOfFormation && (
           <>
             <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
-            <FieldLabelProfile fieldName="dateOfFormation" />
-            <OnboardingDateOfFormation
-              onValidation={onValidation}
-              fieldStates={fieldStates}
-              disabled={userData?.formationData.getFilingResponse?.success}
-              futureAllowed={true}
-              required
-            />
+
+            {shouldLockFormationFields ? (
+              <LockedProfileField
+                fieldName="dateOfFormation"
+                valueFormatter={(date: string) => dayjs(date).format("MM/YYYY")}
+              />
+            ) : (
+              <>
+                <FieldLabelProfile fieldName="dateOfFormation" />
+                <OnboardingDateOfFormation
+                  onValidation={onValidation}
+                  fieldStates={fieldStates}
+                  futureAllowed={true}
+                  required
+                />
+              </>
+            )}
           </>
         )}
         <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
         {isEntityIdApplicable(userData?.profileData.legalStructureId) && (
           <>
-            <FieldLabelProfile fieldName="entityId" />
-            <OnboardingEntityId
-              onValidation={onValidation}
-              fieldStates={fieldStates}
-              disabled={userData?.formationData?.getFilingResponse?.success}
-              handleChangeOverride={showRegistrationModalForGuest()}
-            />
+            {shouldLockFormationFields ? (
+              <LockedProfileField fieldName="entityId" />
+            ) : (
+              <>
+                <FieldLabelProfile fieldName="entityId" />
+                <OnboardingEntityId
+                  onValidation={onValidation}
+                  fieldStates={fieldStates}
+                  handleChangeOverride={showRegistrationModalForGuest()}
+                />
+              </>
+            )}
+
             <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
           </>
         )}

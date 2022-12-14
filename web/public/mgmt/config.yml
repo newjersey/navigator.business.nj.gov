@@ -3983,6 +3983,7 @@ collections:
                   name: certificationDocFileTitle,
                   widget: string,
                 }
+              - { label: Locked Field Tooltip Text, name: lockedFieldTooltipText, widget: string }
 
   - name: "post-onboarding-content"
     label: "Post Onboarding Content"
