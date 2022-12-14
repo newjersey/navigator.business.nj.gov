@@ -89,6 +89,36 @@ describe("taxFilingRouter", () => {
       expect(response.status).toEqual(200);
     });
 
+    it("uses the values in taxId field if it is plaintext and encrypted field is populated", async () => {
+      const taxIdAndBusinessName = generateTaxIdAndBusinessName({
+        businessName: "my-cool-business",
+        taxId: "123456789000",
+        encryptedTaxId: "some-encrypted-value",
+      });
+      apiTaxFilingClient.lookup.mockResolvedValue(responseUserData);
+      const response = await request(app).post(`/lookup`).send(taxIdAndBusinessName);
+      expect(response.body).toEqual(responseUserData);
+      expect(apiTaxFilingClient.lookup).toHaveBeenCalledWith({
+        userData,
+        taxId: "123456789000",
+        businessName: "my-cool-business",
+      });
+      expect(stubUserDataClient.put).toHaveBeenCalledWith(responseUserData);
+      expect(stubUserDataClient.get).toHaveBeenCalledWith("some-id");
+      expect(response.status).toEqual(200);
+    });
+
+    it("returns 500 error if taxId is masked and there is no encryptedTaxId", async () => {
+      const taxIdAndBusinessName = generateTaxIdAndBusinessName({
+        businessName: "my-cool-business",
+        taxId: "*****89000",
+        encryptedTaxId: undefined,
+      });
+      apiTaxFilingClient.lookup.mockResolvedValue(responseUserData);
+      const response = await request(app).post(`/lookup`).send(taxIdAndBusinessName);
+      expect(response.status).toEqual(500);
+    });
+
     it("decrypts the taxId field using the encryptedTaxId field if it is masked", async () => {
       const taxIdAndBusinessName = generateTaxIdAndBusinessName({
         businessName: "my-cool-business",
