@@ -598,7 +598,7 @@
     "formationDocFileTitle": "Official Formation Document",
     "standingDocFileTitle": "Certificate of Good Standing",
     "certificationDocFileTitle": "Certified Copy of Formation",
-    "lockedFieldTooltipText": "This information was submitted when you formed your business and cannot be changed."
+    "lockedFieldTooltipText": "This information cannot be changed because it was submitted to the NJ Department of Treasury."
   },
   "unsupportedNavigatorUserPage": {
     "title": "Chat with a New Jersey Business Representative",

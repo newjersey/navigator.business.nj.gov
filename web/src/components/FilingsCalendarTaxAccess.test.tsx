@@ -6,6 +6,7 @@ import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import {
   generateFormationData,
+  generateGetFilingResponse,
   generateProfileData,
   generateTaxFilingData,
   generateUserData,
@@ -29,6 +30,7 @@ import {
   OperatingPhases,
   UserData,
 } from "@businessnjgovnavigator/shared";
+import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { renderToStaticMarkup } from "react-dom/server";
 
@@ -46,9 +48,11 @@ let setRegistrationModalIsVisible: jest.Mock;
 
 const renderFilingsCalendarTaxAccess = (initialUserData?: UserData) => {
   render(
-    <WithStatefulUserData initialUserData={initialUserData}>
-      <FilingsCalendarTaxAccess />
-    </WithStatefulUserData>
+    <ThemeProvider theme={createTheme()}>
+      <WithStatefulUserData initialUserData={initialUserData}>
+        <FilingsCalendarTaxAccess />
+      </WithStatefulUserData>
+    </ThemeProvider>
   );
 };
 
@@ -90,7 +94,10 @@ describe("<FilingsCalendarTaxAccess />", () => {
 
     if (params.publicFiling) {
       formationData = generateFormationData(
-        { completedFilingPayment: !!params.formedInNavigator },
+        {
+          completedFilingPayment: !!params.formedInNavigator,
+          getFilingResponse: generateGetFilingResponse({ success: params.formedInNavigator }),
+        },
         legalStructureId as FormationLegalType
       );
     }
@@ -198,7 +205,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
       );
     });
 
-    it("makes businessName un-editable if they have completed formation with us", () => {
+    it("locks businessName if they have completed formation with us", () => {
       const userDataWithNavigatorFormation = generateTaxFilingUserData({
         publicFiling: true,
         formedInNavigator: true,
@@ -207,7 +214,13 @@ describe("<FilingsCalendarTaxAccess />", () => {
       });
       renderFilingsCalendarTaxAccess(userDataWithNavigatorFormation);
       openModal();
-      expect((screen.queryByLabelText("Business name") as HTMLInputElement)?.disabled).toEqual(true);
+
+      expect(screen.getByText(Config.profileDefaults.fields.businessName.default.header)).toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.profileDefaults.fields.businessName.default.description)
+      ).not.toBeInTheDocument();
+      expect(screen.getByText("MrFakesHotDogBonanza")).toBeInTheDocument();
+      expect(screen.queryByLabelText("Business name")).not.toBeInTheDocument();
     });
 
     it("updates taxId but not BusinessName on submit", async () => {
