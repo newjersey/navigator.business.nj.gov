@@ -30,32 +30,32 @@
     },
     {
       "step": 3,
-      "weight": 10,
+      "weight": 2,
       "task": "cannabis-bank-account"
     },
     {
-      "weight": 15,
+      "step": 3,
+      "weight": 3,
+      "task": "get-insurance"
+    },
+    {
+      "step": 3,
+      "weight": 5,
+      "task": "zoning-cannabis"
+    },
+    {
+      "step": 3,
+      "weight": 6,
+      "task": "cannabis-sign-lease"
+    },
+    {
+      "weight": 7,
       "step": 3,
       "task": "cannabis-site-requirements"
     },
     {
       "step": 3,
-      "weight": 20,
-      "task": "get-insurance"
-    },
-    {
-      "step": 3,
-      "weight": 25,
-      "task": "cannabis-sign-lease"
-    },
-    {
-      "step": 3,
-      "weight": 30,
-      "task": "zoning-cannabis"
-    },
-    {
-      "step": 3,
-      "weight": 35,
+      "weight": 8,
       "task": "building-permit"
     },
     {
