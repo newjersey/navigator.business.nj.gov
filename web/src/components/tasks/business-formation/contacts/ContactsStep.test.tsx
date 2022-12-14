@@ -182,7 +182,7 @@ describe("Formation - ContactsStep", () => {
       expect(page.getInputElementByLabel("Address name").value).toBe("");
       expect(page.getInputElementByLabel("Address line1").value).toBe("123 Address");
       expect(page.getInputElementByLabel("Address line2").value).toBe("business suite 201");
-      expect(page.getInputElementByLabel("Address city").value).toBe("Hampton Borough");
+      expect(page.getInputElementByLabel("Address city").value).toBe("Hampton");
       expect(page.getInputElementByLabel("Address state").value).toBe("NJ");
       expect(page.getInputElementByLabel("Address zip code").value).toBe("07601");
       page.fillText("Address name", "The Dude");
@@ -602,9 +602,47 @@ describe("Formation - ContactsStep", () => {
         expect(page.getInputElementByLabel("Address name").value).toBe("John Smith");
         expect(page.getInputElementByLabel("Address line1").value).toBe("123 Address");
         expect(page.getInputElementByLabel("Address line2").value).toBe("business suite 201");
-        expect(page.getInputElementByLabel("Address city").value).toBe("Hampton Borough");
+        expect(page.getInputElementByLabel("Address city").value).toBe("Hampton");
         expect(page.getInputElementByLabel("Address state").value).toBe("NJ");
         expect(page.getInputElementByLabel("Address zip code").value).toBe("07601");
+      });
+
+      it("saves and displays municipality name, not displayName", async () => {
+        const page = await getPageHelper(
+          {
+            legalStructureId,
+            municipality: generateMunicipality({
+              displayName: "Hampton Borough",
+              name: "Hampton",
+              ...generateFormationUSAddress({}),
+            }),
+          },
+          {
+            members: [],
+            contactFirstName: "John",
+            contactLastName: "Smith",
+            addressLine1: "123 Address",
+            addressLine2: "business suite 201",
+            addressCountry: "US",
+            addressState: { shortCode: "NJ", name: "New Jersey" },
+            addressZipCode: "07601",
+          }
+        );
+        await page.openAddressModal("members");
+
+        page.selectCheckbox(Config.businessFormationDefaults.membersCheckboxText);
+        expect(page.getInputElementByLabel("Address city").value).toBe("Hampton");
+
+        page.clickAddressSubmit();
+        await waitFor(() => {
+          expect(
+            screen.getByText(Config.businessFormationDefaults.membersSuccessTextBody, { exact: false })
+          ).toBeInTheDocument();
+        });
+        await page.submitContactsStep();
+        const newMembers = currentUserData().formationData.formationFormData.members!;
+        expect(newMembers.length).toEqual(1);
+        expect(newMembers[0].addressCity).toEqual("Hampton");
       });
 
       it("adds members using business data using checkbox without name", async () => {
@@ -630,7 +668,7 @@ describe("Formation - ContactsStep", () => {
         expect(page.getInputElementByLabel("Address name").value).toBe("");
         expect(page.getInputElementByLabel("Address line1").value).toBe("123 Address");
         expect(page.getInputElementByLabel("Address line2").value).toBe("business suite 201");
-        expect(page.getInputElementByLabel("Address city").value).toBe("Hampton Borough");
+        expect(page.getInputElementByLabel("Address city").value).toBe("Hampton");
         expect(page.getInputElementByLabel("Address state").value).toBe("NJ");
         expect(page.getInputElementByLabel("Address zip code").value).toBe("07601");
       });

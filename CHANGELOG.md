@@ -1,3 +1,10 @@
+## [5.9.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.9.0...v5.9.1) (2022-12-14)
+
+
+### Bug Fixes
+
+* [[#184035288](https://github.com/newjersey/navigator.business.nj.gov/issues/184035288)] send town name (not display name) for members in formation ([3e1ff9b](https://github.com/newjersey/navigator.business.nj.gov/commit/3e1ff9bdac8c70b8ff50d85332391a95cb2337a2))
+
 # [5.9.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.8.0...v5.9.0) (2022-12-12)
 
 

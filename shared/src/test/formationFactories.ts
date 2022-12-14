@@ -61,7 +61,7 @@ export const generateFormationNJAddress = (overrides: Partial<FormationAddress>)
   return {
     addressLine1: `some-address-1-${randomInt()}`,
     addressLine2: `some-address-2-${randomInt()}`,
-    addressMunicipality: generateMunicipality({ displayName: "Newark", name: "Newark" }),
+    addressMunicipality: generateMunicipality({ displayName: "Newark Display Name", name: "Newark" }),
     addressCity: undefined,
     addressProvince: undefined,
     addressCountry: "US",

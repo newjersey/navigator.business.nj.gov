@@ -72,7 +72,7 @@ export const ContactsStep = (): ReactElement => {
               "limited-partnership" === state.legalStructureId
                 ? {
                     addressCity:
-                      state.formationFormData.addressMunicipality?.displayName ??
+                      state.formationFormData.addressMunicipality?.name ??
                       state.formationFormData.addressCity,
                     addressLine1: state.formationFormData.addressLine1,
                     addressLine2: state.formationFormData.addressLine2,
