@@ -6,11 +6,16 @@ import { getSignedInUserId } from "./userRouter";
 const getTaxId = async (
   encryptionDecryptionClient: EncryptionDecryptionClient,
   taxId: string,
-  encryptedTaxId: string
+  encryptedTaxId: string | undefined
 ) => {
-  return encryptedTaxId === undefined && taxId.includes(maskingCharacter) === false
-    ? taxId
-    : await encryptionDecryptionClient.decryptValue(encryptedTaxId);
+  if (taxId.includes(maskingCharacter)) {
+    if (encryptedTaxId) {
+      return await encryptionDecryptionClient.decryptValue(encryptedTaxId);
+    }
+    throw new Error("No valid taxId");
+  } else {
+    return taxId;
+  }
 };
 
 export const taxFilingRouterFactory = (
@@ -23,8 +28,8 @@ export const taxFilingRouterFactory = (
   router.post("/lookup", async (req, res) => {
     const userId = getSignedInUserId(req);
     const { encryptedTaxId, taxId, businessName } = req.body;
-    const plainTextTaxId = await getTaxId(encryptionDecryptionClient, taxId, encryptedTaxId);
     try {
+      const plainTextTaxId = await getTaxId(encryptionDecryptionClient, taxId, encryptedTaxId);
       let userData = await userDataClient.get(userId);
       userData = await taxFilingInterface.lookup({ userData, taxId: plainTextTaxId, businessName });
       userData = await userDataClient.put(userData);
@@ -37,8 +42,8 @@ export const taxFilingRouterFactory = (
   router.post("/onboarding", async (req, res) => {
     const userId = getSignedInUserId(req);
     const { encryptedTaxId, taxId, businessName } = req.body;
-    const plainTextTaxId = await getTaxId(encryptionDecryptionClient, taxId, encryptedTaxId);
     try {
+      const plainTextTaxId = await getTaxId(encryptionDecryptionClient, taxId, encryptedTaxId);
       let userData = await userDataClient.get(userId);
       userData = await taxFilingInterface.onboarding({ userData, taxId: plainTextTaxId, businessName });
       userData = await userDataClient.put(userData);
