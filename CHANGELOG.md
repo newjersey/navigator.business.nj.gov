@@ -1,3 +1,10 @@
+## [5.9.2](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.9.1...v5.9.2) (2022-12-14)
+
+
+### Bug Fixes
+
+* bug when adding new taxId field to tax access modal ([be5ed51](https://github.com/newjersey/navigator.business.nj.gov/commit/be5ed51cb6fefde7f580dacee0683af320113611))
+
 ## [5.9.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.9.0...v5.9.1) (2022-12-14)
 
 
