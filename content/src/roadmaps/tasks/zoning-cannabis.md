@@ -1,7 +1,7 @@
 ---
 urlSlug: zoning-cannabis
 filename: zoning-cannabis
-name: Obtain Zoning Approval and Resolution
+name: Obtain Zoning Approval and Resolution of Support
 id: zoning-cannabis
 callToActionLink: ""
 callToActionText: ""
