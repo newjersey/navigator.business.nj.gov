@@ -18,6 +18,7 @@ import {
   currentUserData,
   setupStatefulUserDataContext,
   userDataUpdatedNTimes,
+  userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
@@ -232,12 +233,18 @@ describe("<FilingsCalendarTaxAccess />", () => {
       await waitFor(() => {
         return expect(currentUserData().profileData.taxId).toEqual("999888777666");
       });
+      await waitFor(() => {
+        return expect(currentUserData().profileData.encryptedTaxId).toEqual(undefined);
+      });
     });
 
-    it("displays in-line error and alert when businessName field is empty and save button is clicked", () => {
+    it("displays in-line error and alert when businessName field is empty and save button is clicked", async () => {
       renderFilingsCalendarTaxAccess(userDataMissingBusinessName);
       openModal();
       clickSave();
+      await waitFor(() => {
+        return expect(userDataWasNotUpdated()).toEqual(true);
+      });
       expect(screen.getByRole("alert")).toHaveTextContent(Config.taxCalendar.modalErrorHeader);
       expect(screen.getByRole("alert")).toHaveTextContent(Config.taxCalendar.modalBusinessFieldErrorName);
       expect(screen.getByRole("alert")).not.toHaveTextContent(Config.taxCalendar.modalTaxFieldErrorName);
@@ -253,10 +260,13 @@ describe("<FilingsCalendarTaxAccess />", () => {
       expect(mockApi.postTaxRegistrationOnboarding).not.toHaveBeenCalled();
     });
 
-    it("displays in-line error and alert when taxId field is empty and save button is clicked", () => {
+    it("displays in-line error and alert when taxId field is empty and save button is clicked", async () => {
       renderFilingsCalendarTaxAccess(userDataMissingTaxId);
       openModal();
       clickSave();
+      await waitFor(() => {
+        return expect(userDataWasNotUpdated()).toEqual(true);
+      });
       expect(screen.getByRole("alert")).toHaveTextContent(Config.taxCalendar.modalErrorHeader);
       expect(screen.getByRole("alert")).toHaveTextContent(Config.taxCalendar.modalTaxFieldErrorName);
       expect(screen.getByRole("alert")).not.toHaveTextContent(Config.taxCalendar.modalBusinessFieldErrorName);
@@ -272,7 +282,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
       expect(mockApi.postTaxRegistrationOnboarding).not.toHaveBeenCalled();
     });
 
-    it("displays in-line error and alert when businessName field and taxId field is invalid and save button is clicked", () => {
+    it("displays in-line error and alert when businessName field and taxId field is invalid and save button is clicked", async () => {
       const userDataMissingBoth = generateTaxFilingUserData({
         publicFiling: true,
         taxId: "123",
@@ -282,6 +292,9 @@ describe("<FilingsCalendarTaxAccess />", () => {
       renderFilingsCalendarTaxAccess(userDataMissingBoth);
       openModal();
       clickSave();
+      await waitFor(() => {
+        return expect(userDataWasNotUpdated()).toEqual(true);
+      });
       expect(screen.getByRole("alert")).toHaveTextContent(Config.taxCalendar.modalErrorHeader);
       expect(screen.getByRole("alert")).toHaveTextContent(Config.taxCalendar.modalBusinessFieldErrorName);
       expect(screen.getByRole("alert")).toHaveTextContent(Config.taxCalendar.modalTaxFieldErrorName);
@@ -307,6 +320,9 @@ describe("<FilingsCalendarTaxAccess />", () => {
       });
       openModal();
       clickSave();
+      await waitFor(() => {
+        return expect(currentUserData().taxFilingData.state).toEqual("FAILED");
+      });
       await screen.findByRole("alert");
       expect(screen.getByRole("alert")).toHaveTextContent(
         markdownToText(Config.taxCalendar.failedErrorMessageMarkdown)

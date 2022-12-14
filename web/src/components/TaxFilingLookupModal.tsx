@@ -99,6 +99,9 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
     setIsLoading(true);
     let userDataToSet: UserData;
 
+    const encryptedTaxId =
+      profileData.taxId == userData.profileData.taxId ? profileData.encryptedTaxId : undefined;
+
     try {
       const businessNameToSubmitToTaxApi = isPublicFiling
         ? profileData.businessName
@@ -107,7 +110,7 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
       userDataToSet = await postTaxRegistrationOnboarding({
         taxId: profileData.taxId as string,
         businessName: businessNameToSubmitToTaxApi,
-        encryptedTaxId: profileData.encryptedTaxId as string,
+        encryptedTaxId: encryptedTaxId as string,
       });
     } catch {
       setOnAPIfailed("UNKNOWN");
@@ -120,6 +123,7 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
       profileData: {
         ...userDataToSet.profileData,
         taxId: profileData.taxId,
+        encryptedTaxId: encryptedTaxId,
         responsibleOwnerName: profileData.responsibleOwnerName,
       },
     };
