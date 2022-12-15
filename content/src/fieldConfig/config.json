@@ -580,7 +580,6 @@
     "linkTwoText": "Terms & Privacy Policy"
   },
   "profileDefaults": {
-    "lockedFieldTooltipText": "This information was submitted when you formed your business and cannot be changed.",
     "errorTextHeader": "Error",
     "backButtonText": "Cancel",
     "pageTitle": "### Business Profile",
@@ -598,7 +597,8 @@
     "escapeModalReturn": "Continue without saving.",
     "successTextHeader": "Profile Updated",
     "certificationDocFileTitle": "Certified Copy of Formation",
-    "profileTabInfoTitle": "Business Information"
+    "profileTabInfoTitle": "Business Information",
+    "lockedFieldTooltipText": "This information cannot be changed because it was submitted to the NJ Department of Treasury."
   },
   "unsupportedNavigatorUserPage": {
     "title": "Chat with a New Jersey Business Representative",
