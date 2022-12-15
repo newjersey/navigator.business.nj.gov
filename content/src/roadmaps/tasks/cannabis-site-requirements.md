@@ -6,7 +6,7 @@ id: cannabis-site-requirements
 callToActionLink: ""
 callToActionText: ""
 ---
-Speak to your local government to determine specific requirements for your site and business. Your site must also comply with regulations from the New Jersey Cannabis Regulatory Commission (NJCRC)
+Speak to your local government to determine specific requirements for your site and business. 
 
 Prior to opening, your business site will need to be inspected and approved locally and by NJCRC to ensure customer and employee safety. 
 
