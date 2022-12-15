@@ -6,7 +6,9 @@ id: cannabis-site-requirements
 callToActionLink: ""
 callToActionText: ""
 ---
-Speak to your local government to determine specific requirements for your site and business. Prior to opening, your business site will need to be inspected and approved to ensure customer and employee safety.
+Speak to your local government to determine specific requirements for your site and business. 
+
+Prior to opening, your business site will need to be inspected and approved locally and by the New Jersey Cannabis Regulatory Commission (NJCRC) to ensure customer and employee safety. 
 
 ---
 ### Safety Permits
@@ -19,5 +21,5 @@ Speak to your local government to determine specific requirements for your site 
 >**Once completed, you will know:**
 >
 >- The permits your local government requires
->- The process for meeting your local government's requirements
+>- The process for meeting requirements from your local government and NJCRC
 >- The time it takes to receive any permits or licenses
