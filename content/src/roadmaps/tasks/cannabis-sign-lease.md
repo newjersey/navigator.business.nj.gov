@@ -7,7 +7,10 @@ callToActionLink: ""
 callToActionText: ""
 ---
 
-It's important that you and your attorney review your lease thoroughly to confirm that you're in agreement with all the clauses. Signing your lease under your registered business name may protect you from liabilities and costs associated with your new commercial or industrial location.
+It's important that you and your attorney review your lease (or letter of intent to lease) thoroughly to confirm that you're in agreement with all the clauses. Beware of any language that requires you to surrender any of your business ownership or equity to a landlord as a condition of leasing your space. 
+
+Signing your lease under your registered business name may protect you from liabilities and costs associated with your new commercial or industrial location.  
+
 
 ---
 
