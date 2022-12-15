@@ -18,10 +18,10 @@ Signing your lease under your registered business name may protect you from liab
 
 - **FDIC-backed mortgage:** Cannabis is not legal at a federal level. For this reason, properties with federally insured mortgages cannot be used for cannabis businesses
 
-* **Lease Start Date:** Identify a start date for your lease that considers potential delays due to renovations, industry licenses, or other activities that are out of your control
+* **Lease Start Date:** Identify a start date for your lease that considers potential delays due to renovations, industry licenses, or other activities that are out of your control like getting local government approvals
 * **Lease length:** Determine your ideal lease length by analyzing a few `lease considerations|lease-considerations`
 * **Tenant Improvements:** Identify the entity responsible and write out expectations for `tenant improvements|tenant-improvements` in your lease
 
 > **Once completed, you will have:**
 >
-> - A signed lease for your business site
+> - A signed lease or letter of intent to lease for your business site
