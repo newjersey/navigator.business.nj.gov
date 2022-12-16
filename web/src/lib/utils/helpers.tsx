@@ -18,7 +18,7 @@ import {
   SectionType,
   UserData,
 } from "@businessnjgovnavigator/shared";
-import { ReactElement, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 
 export const useMountEffect = (fun: () => void): void => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -307,18 +307,6 @@ export const getFlow = (data: UserData | ProfileData): FlowType => {
 export function isUserData(data: UserData | ProfileData): data is UserData {
   return (data as UserData).user !== undefined;
 }
-
-export const makeButtonIcon = (svgFilename: string, size = "20px"): ReactElement => {
-  return (
-    <img
-      className="margin-right-05 margin-left-neg-1"
-      width={size}
-      height={size}
-      src={`/img/${svgFilename}.svg`}
-      alt=""
-    />
-  );
-};
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const flattenObject = (obj: any) => {
