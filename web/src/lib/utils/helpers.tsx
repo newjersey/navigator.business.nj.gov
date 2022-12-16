@@ -215,21 +215,6 @@ export const getUrlSlugs = (roadmap: Roadmap | undefined): string[] => {
   });
 };
 
-export const setHeaderRole = (
-  ariaLevel: number,
-  classProperties?: string
-): (({ children }: { children: string[] }) => ReactElement) => {
-  const createElement = ({ children }: { children: string[] }): ReactElement => {
-    return (
-      <div role="heading" aria-level={ariaLevel} className={classProperties ?? ""}>
-        {children}
-      </div>
-    );
-  };
-
-  return createElement;
-};
-
 export const getSectionNames = (roadmap: Roadmap | undefined): SectionType[] => {
   if (!roadmap) {
     return [];

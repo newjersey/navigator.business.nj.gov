@@ -1,10 +1,9 @@
-import { Content } from "@/components/Content";
 import { Button } from "@/components/njwds-extended/Button";
 import { LookupStepIndexByName } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { FormationStepNames } from "@/lib/types/types";
 import { camelCaseToKebabCase } from "@/lib/utils/cases-helpers";
-import { scrollToTop, setHeaderRole } from "@/lib/utils/helpers";
+import { scrollToTop } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { FormationTextField } from "@businessnjgovnavigator/shared/formationData";
 import { useContext } from "react";
@@ -16,13 +15,12 @@ interface Props {
 }
 export const ReviewText = (props: Props) => {
   const { state, setStepIndex } = useContext(BusinessFormationContext);
-  const headerLevelTwo = setHeaderRole(2, "h3-styling");
   const kebabCaseFieldName = camelCaseToKebabCase(props.fieldName);
   return (
     <>
       <div className="flex space-between">
         <div className="maxw-mobile-lg margin-bottom-2">
-          <Content overrides={{ h3: headerLevelTwo }}>{props.header}</Content>
+          <h2 className="h3-styling">{props.header}</h2>
         </div>
         <div className="margin-left-2">
           <Button

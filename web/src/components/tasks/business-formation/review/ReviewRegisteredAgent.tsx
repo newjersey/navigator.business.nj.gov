@@ -2,22 +2,19 @@ import { Content } from "@/components/Content";
 import { Button } from "@/components/njwds-extended/Button";
 import { LookupStepIndexByName } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
-import { getStringifiedAddress, scrollToTop, setHeaderRole } from "@/lib/utils/helpers";
+import { getStringifiedAddress, scrollToTop } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { ReactElement, useContext } from "react";
 
 export const ReviewRegisteredAgent = (): ReactElement => {
   const { state, setStepIndex } = useContext(BusinessFormationContext);
-  const headerLevelTwo = setHeaderRole(2, "h3-styling");
   const italicNotEnteredText = `*${Config.businessFormationDefaults.reviewStepNotEnteredText}*`;
 
   return (
     <>
       <div className="flex space-between">
         <div className="maxw-mobile-lg margin-bottom-2">
-          <Content overrides={{ h3: headerLevelTwo }}>
-            {Config.businessFormationDefaults.reviewStepRegisteredAgentHeader}
-          </Content>
+          <h2 className="h3-styling">{Config.businessFormationDefaults.reviewStepRegisteredAgentHeader}</h2>
         </div>
         <div className="margin-left-2">
           <Button
