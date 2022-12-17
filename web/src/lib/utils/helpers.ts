@@ -126,7 +126,7 @@ export const getModifiedTaskBooleanUndefined = (
   return task[field] || undefined;
 };
 
-export const rswitch = <T,>(param: string, cases: { default: T; [k: string]: T }): T => {
+export const rswitch = <T>(param: string, cases: { default: T; [k: string]: T }): T => {
   return cases[param] ?? cases.default;
 };
 
