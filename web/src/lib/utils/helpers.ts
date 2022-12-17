@@ -263,14 +263,6 @@ const stepInRoadmap = (roadmap: Roadmap | undefined, taskId: string): Step | und
   });
 };
 
-export const zipCodeRange = (value: string) => {
-  const parsedValue = Number.parseInt(value);
-  if (typeof parsedValue !== "number") {
-    return false;
-  }
-  return parsedValue >= 7001 && parsedValue <= 8999;
-};
-
 export const getFlow = (data: UserData | ProfileData): FlowType => {
   const persona: BusinessPersona = isUserData(data) ? data.profileData.businessPersona : data.businessPersona;
 

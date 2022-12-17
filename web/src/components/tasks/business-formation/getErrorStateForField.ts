@@ -1,6 +1,7 @@
 import { getMergedConfig } from "@/contexts/configContext";
+import { isZipCodeNj } from "@/lib/domain-logic/isZipCodeNj";
 import { FormationFieldErrorState, NameAvailability } from "@/lib/types/types";
-import { validateEmail, zipCodeRange } from "@/lib/utils/helpers";
+import { validateEmail } from "@/lib/utils/helpers";
 import {
   FormationFields,
   FormationFormData,
@@ -129,7 +130,7 @@ export const getErrorStateForField = (
 
   if (field === "addressZipCode" || field === "agentOfficeAddressZipCode") {
     const exists = !!formationFormData[field];
-    const inRange = zipCodeRange(formationFormData[field]);
+    const inRange = isZipCodeNj(formationFormData[field]);
     const isValid = exists && inRange;
     return { ...errorState, hasError: !isValid };
   }
