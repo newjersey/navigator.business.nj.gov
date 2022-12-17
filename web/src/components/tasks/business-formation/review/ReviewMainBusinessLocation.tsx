@@ -2,7 +2,7 @@ import { ReviewLineItem } from "@/components/tasks/business-formation/review/Rev
 import { ReviewSectionHeader } from "@/components/tasks/business-formation/review/ReviewSectionHeader";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { getStringifiedAddress } from "@/lib/utils/helpers";
+import { getStringifiedAddress } from "@/lib/utils/formatters";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { ReactElement, useContext } from "react";
 

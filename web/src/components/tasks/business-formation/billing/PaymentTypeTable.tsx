@@ -1,7 +1,7 @@
 import { Content } from "@/components/Content";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
-import { getDollarValue } from "@/lib/utils/helpers";
+import { getDollarValue } from "@/lib/utils/formatters";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { PaymentType } from "@businessnjgovnavigator/shared/";
 import { FormHelperText, Radio } from "@mui/material";

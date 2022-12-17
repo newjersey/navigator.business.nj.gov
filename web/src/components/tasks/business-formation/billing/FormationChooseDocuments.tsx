@@ -1,6 +1,6 @@
 import { Content } from "@/components/Content";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
-import { getDollarValue } from "@/lib/utils/helpers";
+import { getDollarValue } from "@/lib/utils/formatters";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { Checkbox } from "@mui/material";
 import { ReactElement, useContext, useEffect, useState } from "react";
