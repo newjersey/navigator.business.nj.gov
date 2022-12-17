@@ -13,13 +13,13 @@ export const ReviewMainBusinessLocation = (): ReactElement => {
   const italicNotEnteredText = `*${Config.businessFormationDefaults.reviewStepNotEnteredText}*`;
 
   const getAddressDisplay = (): string => {
-    return getStringifiedAddress(
-      state.formationFormData.addressLine1 || italicNotEnteredText,
-      userData?.profileData.municipality?.displayName || italicNotEnteredText,
-      state.formationFormData.addressState?.name || italicNotEnteredText,
-      state.formationFormData.addressZipCode || italicNotEnteredText,
-      state.formationFormData.addressLine2
-    );
+    return getStringifiedAddress({
+      addressLine1: state.formationFormData.addressLine1 || italicNotEnteredText,
+      city: userData?.profileData.municipality?.displayName || italicNotEnteredText,
+      state: state.formationFormData.addressState?.name || italicNotEnteredText,
+      zipcode: state.formationFormData.addressZipCode || italicNotEnteredText,
+      addressLine2: state.formationFormData.addressLine2,
+    });
   };
 
   return (

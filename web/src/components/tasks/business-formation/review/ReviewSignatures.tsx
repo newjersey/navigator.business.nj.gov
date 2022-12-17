@@ -47,13 +47,13 @@ export const ReviewSignatures = (): ReactElement => {
           <div key={`${signer}-${index}`} className={index === 0 ? "" : "margin-top-2"}>
             <ReviewLineItem
               label={Config.businessFormationDefaults.reviewStepIncorporatorAddressLabel}
-              value={getStringifiedAddress(
-                signer.addressLine1,
-                signer.addressCity ?? "",
-                signer.addressState?.name ?? "",
-                signer.addressZipCode,
-                signer.addressLine2
-              )}
+              value={getStringifiedAddress({
+                addressLine1: signer.addressLine1,
+                city: signer.addressCity ?? "",
+                state: signer.addressState?.name ?? "",
+                zipcode: signer.addressZipCode,
+                addressLine2: signer.addressLine2,
+              })}
             />
           </div>
         );

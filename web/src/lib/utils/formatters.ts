@@ -5,12 +5,18 @@ export const getDollarValue = (currVal: string | number): string => {
   return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(value);
 };
 
-export const getStringifiedAddress = (
-  addressLine1: string,
-  city: string,
-  state: string,
-  zipcode: string,
-  addressLine2?: string
-) => {
+export const getStringifiedAddress = ({
+  addressLine1,
+  city,
+  state,
+  zipcode,
+  addressLine2,
+}: {
+  addressLine1: string;
+  city: string;
+  state: string;
+  zipcode: string;
+  addressLine2?: string;
+}) => {
   return `${addressLine1}, ${addressLine2 ? `${addressLine2}, ` : ""}${city}, ${state}, ${zipcode}`;
 };

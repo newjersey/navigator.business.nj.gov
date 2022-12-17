@@ -21,15 +21,26 @@ describe("formatters", () => {
 
   describe("getStringifiedAddress", () => {
     it("turns address into oneline string", () => {
-      expect(getStringifiedAddress("1600 Pennsylvania Ave", "Washington", "DC", "00000")).toEqual(
-        "1600 Pennsylvania Ave, Washington, DC, 00000"
-      );
+      expect(
+        getStringifiedAddress({
+          addressLine1: "1600 Pennsylvania Ave",
+          city: "Washington",
+          state: "DC",
+          zipcode: "00000",
+        })
+      ).toEqual("1600 Pennsylvania Ave, Washington, DC, 00000");
     });
 
     it("turns address into oneline string including line2", () => {
-      expect(getStringifiedAddress("1600 Pennsylvania Ave", "Washington", "DC", "00000", "Apt 1")).toEqual(
-        "1600 Pennsylvania Ave, Apt 1, Washington, DC, 00000"
-      );
+      expect(
+        getStringifiedAddress({
+          addressLine1: "1600 Pennsylvania Ave",
+          addressLine2: "Apt 1",
+          city: "Washington",
+          state: "DC",
+          zipcode: "00000",
+        })
+      ).toEqual("1600 Pennsylvania Ave, Apt 1, Washington, DC, 00000");
     });
   });
 });
