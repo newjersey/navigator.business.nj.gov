@@ -1,7 +1,7 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { Task } from "@/lib/types/types";
-import { getDollarValue } from "@/lib/utils/helpers";
+import { getDollarValue } from "@/lib/utils/formatters";
 import {
   generateEmptyFormationData,
   generateFormationData,

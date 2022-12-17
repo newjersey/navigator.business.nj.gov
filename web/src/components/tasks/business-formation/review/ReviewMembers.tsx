@@ -1,7 +1,7 @@
 import { ReviewLineItem } from "@/components/tasks/business-formation/review/ReviewLineItem";
 import { ReviewSectionHeader } from "@/components/tasks/business-formation/review/ReviewSectionHeader";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { getStringifiedAddress } from "@/lib/utils/helpers";
+import { getStringifiedAddress } from "@/lib/utils/formatters";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { corpLegalStructures, FormationLegalType } from "@businessnjgovnavigator/shared/";
 import { ReactElement } from "react";

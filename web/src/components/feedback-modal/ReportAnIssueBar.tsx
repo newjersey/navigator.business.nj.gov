@@ -1,7 +1,7 @@
+import { ButtonIcon } from "@/components/ButtonIcon";
 import { FeedbackModal } from "@/components/feedback-modal/FeedbackModal";
 import { Button } from "@/components/njwds-extended/Button";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { makeButtonIcon } from "@/lib/utils/helpers";
 import { ReactElement, useState } from "react";
 
 export const ReportAnIssueBar = (): ReactElement => {
@@ -20,7 +20,7 @@ export const ReportAnIssueBar = (): ReactElement => {
         }}
       >
         <div className="text-base-darkest flex flex-align-center flex-justify-center">
-          {makeButtonIcon("bug-error-dark")}
+          <ButtonIcon svgFilename="bug-error-dark" />
           <span className="text-left text-bold underline">
             {Config.reportAnIssueBar.reportAnIssueBarText}
           </span>

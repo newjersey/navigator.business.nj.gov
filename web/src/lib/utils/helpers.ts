@@ -3,7 +3,6 @@ import {
   FlowType,
   KeysOfType,
   OnboardingStatus,
-  ProfileError,
   Roadmap,
   SectionCompletion,
   Step,
@@ -18,7 +17,7 @@ import {
   SectionType,
   UserData,
 } from "@businessnjgovnavigator/shared";
-import { ReactElement, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 
 export const useMountEffect = (fun: () => void): void => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -126,7 +125,7 @@ export const getModifiedTaskBooleanUndefined = (
   return task[field] || undefined;
 };
 
-export const rswitch = <T,>(param: string, cases: { default: T; [k: string]: T }): T => {
+export const rswitch = <T>(param: string, cases: { default: T; [k: string]: T }): T => {
   return cases[param] ?? cases.default;
 };
 
@@ -180,16 +179,6 @@ export const OnboardingStatusLookup = (
   };
 };
 
-export const OnboardingErrorLookup: Record<ProfileError, string> = {
-  REQUIRED_LEGAL: getMergedConfig().profileDefaults.fields.legalStructureId.default.errorTextRequired,
-  REQUIRED_EXISTING_BUSINESS:
-    getMergedConfig().profileDefaults.fields.businessPersona.default.errorTextRequired,
-  REQUIRED_FOREIGN_BUSINESS_TYPE:
-    getMergedConfig().profileDefaults.fields.foreignBusinessTypeIds.default.errorTextRequired,
-  REQUIRED_NEXUS_LOCATION_IN_NJ:
-    getMergedConfig().profileDefaults.fields.nexusLocationInNewJersey.default.errorTextRequired,
-};
-
 export const getUserNameOrEmail = (userData: UserData | undefined): string => {
   if (userData?.user.name) {
     return userData.user.name;
@@ -213,21 +202,6 @@ export const getUrlSlugs = (roadmap: Roadmap | undefined): string[] => {
   return roadmap.tasks.map((task) => {
     return task.urlSlug;
   });
-};
-
-export const setHeaderRole = (
-  ariaLevel: number,
-  classProperties?: string
-): (({ children }: { children: string[] }) => ReactElement) => {
-  const createElement = ({ children }: { children: string[] }): ReactElement => {
-    return (
-      <div role="heading" aria-level={ariaLevel} className={classProperties ?? ""}>
-        {children}
-      </div>
-    );
-  };
-
-  return createElement;
 };
 
 export const getSectionNames = (roadmap: Roadmap | undefined): SectionType[] => {
@@ -289,30 +263,6 @@ const stepInRoadmap = (roadmap: Roadmap | undefined, taskId: string): Step | und
   });
 };
 
-export const getDollarValue = (currVal: string | number): string => {
-  return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(
-    Number.parseFloat(currVal.toString())
-  );
-};
-
-export const zipCodeRange = (value: string) => {
-  const parsedValue = Number.parseInt(value);
-  if (typeof parsedValue !== "number") {
-    return false;
-  }
-  return parsedValue >= 7001 && parsedValue <= 8999;
-};
-
-export const getStringifiedAddress = (
-  addressLine1: string,
-  city: string,
-  state: string,
-  zipcode: string,
-  addressLine2?: string
-) => {
-  return `${addressLine1}, ${addressLine2 ? `${addressLine2}, ` : ""}${city}, ${state}, ${zipcode}`;
-};
-
 export const getFlow = (data: UserData | ProfileData): FlowType => {
   const persona: BusinessPersona = isUserData(data) ? data.profileData.businessPersona : data.businessPersona;
 
@@ -322,18 +272,6 @@ export const getFlow = (data: UserData | ProfileData): FlowType => {
 export function isUserData(data: UserData | ProfileData): data is UserData {
   return (data as UserData).user !== undefined;
 }
-
-export const makeButtonIcon = (svgFilename: string, size = "20px"): ReactElement => {
-  return (
-    <img
-      className="margin-right-05 margin-left-neg-1"
-      width={size}
-      height={size}
-      src={`/img/${svgFilename}.svg`}
-      alt=""
-    />
-  );
-};
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const flattenObject = (obj: any) => {

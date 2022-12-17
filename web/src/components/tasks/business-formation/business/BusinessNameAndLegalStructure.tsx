@@ -5,7 +5,7 @@ import { LookupStepIndexByName } from "@/components/tasks/business-formation/Bus
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
-import { scrollToTop, setHeaderRole } from "@/lib/utils/helpers";
+import { scrollToTop } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { FormationLegalType, LookupLegalStructureById } from "@businessnjgovnavigator/shared/";
 import { useRouter } from "next/router";
@@ -31,8 +31,6 @@ export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): 
     setLegalStructureWarningIsOpen(true);
   };
 
-  const headerLevelTwo = setHeaderRole(2, "h3-styling");
-
   const legalStructure = LookupLegalStructureById(userData?.profileData.legalStructureId);
   const legalStructureName = (
     {
@@ -52,9 +50,9 @@ export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): 
     <>
       <div className="flex space-between margin-bottom-2 flex-align-center">
         <div className="maxw-mobile-lg ">
-          <Content overrides={{ h3: headerLevelTwo }}>
+          <h2 className="h3-styling">
             {Config.businessFormationDefaults.businessNameAndLegalStructureHeader}
-          </Content>
+          </h2>
         </div>
         <div className="margin-left-2">
           {isReviewStep && (

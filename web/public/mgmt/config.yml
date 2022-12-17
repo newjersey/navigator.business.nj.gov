@@ -1814,7 +1814,6 @@ collections:
                   label: Business Name & Legal Structure Header,
                   name: businessNameAndLegalStructureHeader,
                   widget: string,
-                  hint: This field supports Markdown,
                 }
               - {
                   label: Business Total Stock Header,
@@ -2330,7 +2329,6 @@ collections:
                   name: reviewStepBillingContactHeader,
                   widget: string,
                 }
-
               - {
                   label: Review Step - Billing Services Header,
                   name: reviewStepBillingServicesHeader,
@@ -2380,7 +2378,6 @@ collections:
                   label: Review Step - Business Purpose Header,
                   name: reviewStepBusinessPurposeHeader,
                   widget: string,
-                  hint: This field supports Markdown,
                 }
               - {
                   label: Review Step - Business Total Stock Label,
@@ -2400,23 +2397,12 @@ collections:
                   widget: string,
                   hint: This field supports Markdown,
                 }
-              - {
-                  label: Review Step - Dissolution Label,
-                  name: reviewStepDissolutionHeader,
-                  widget: string,
-                  hint: This field supports Markdown,
-                }
-              - {
-                  label: Review Step - Withdrawals Label,
-                  name: reviewStepWithdrawalsHeader,
-                  widget: string,
-                  hint: This field supports Markdown,
-                }
+              - { label: Review Step - Dissolution Label, name: reviewStepDissolutionHeader, widget: string }
+              - { label: Review Step - Withdrawals Label, name: reviewStepWithdrawalsHeader, widget: string }
               - {
                   label: Review Step - Combined Investment Label,
                   name: reviewStepCombinedInvestmentHeader,
                   widget: string,
-                  hint: This field supports Markdown,
                 }
               - {
                   label: Review Step - Partnership - LimitedPartner - Yes Text,
@@ -2466,30 +2452,15 @@ collections:
                   widget: string,
                   hint: This field supports Markdown,
                 }
-              - {
-                  label: Review Step - Location Header,
-                  name: reviewStepLocationHeader,
-                  widget: string,
-                  hint: This field supports Markdown,
-                }
-              - {
-                  label: Review Step - Members Header,
-                  name: reviewStepMembersHeader,
-                  widget: string,
-                  hint: This field supports Markdown,
-                }
+              - { label: Review Step - Location Header, name: reviewStepLocationHeader, widget: string }
+              - { label: Review Step - Members Header, name: reviewStepMembersHeader, widget: string }
               - {
                   label: Review Step - Member Name Label,
                   name: reviewStepMemberNameLabel,
                   widget: string,
                   hint: This field supports Markdown,
                 }
-              - {
-                  label: Review Step - Directors Header,
-                  name: reviewStepDirectorsHeader,
-                  widget: string,
-                  hint: This field supports Markdown,
-                }
+              - { label: Review Step - Directors Header, name: reviewStepDirectorsHeader, widget: string }
               - {
                   label: Review Step - Director Name Label,
                   name: reviewStepDirectorNameLabel,
@@ -2502,18 +2473,8 @@ collections:
                   widget: string,
                   hint: This field supports Markdown,
                 }
-              - {
-                  label: Review Step - Partnership Header,
-                  name: reviewStepPartnershipHeader,
-                  widget: string,
-                  hint: This field supports Markdown,
-                }
-              - {
-                  label: Review Step - Provisions Header,
-                  name: reviewStepProvisionsHeader,
-                  widget: string,
-                  hint: This field supports Markdown,
-                }
+              - { label: Review Step - Partnership Header, name: reviewStepPartnershipHeader, widget: string }
+              - { label: Review Step - Provisions Header, name: reviewStepProvisionsHeader, widget: string }
               - {
                   label: Review Step - Provisions Subheader,
                   name: reviewStepProvisionsSubheader,
@@ -2523,7 +2484,6 @@ collections:
                   label: Review Step - Registered Agent Header,
                   name: reviewStepRegisteredAgentHeader,
                   widget: string,
-                  hint: This field supports Markdown,
                 }
               - {
                   label: Review Step - Registered Agent Name Label,
@@ -2537,17 +2497,11 @@ collections:
                   widget: string,
                   hint: This field supports Markdown,
                 }
-              - {
-                  label: Review Step - Signatures Header,
-                  name: reviewStepSignaturesHeader,
-                  widget: string,
-                  hint: This field supports Markdown,
-                }
+              - { label: Review Step - Signatures Header, name: reviewStepSignaturesHeader, widget: string }
               - {
                   label: Review Step - Signers (Incorporators) Header,
                   name: reviewStepIncorporatorsHeader,
                   widget: string,
-                  hint: This field supports Markdown,
                 }
               - {
                   label: Review Step - Signer Name Label,

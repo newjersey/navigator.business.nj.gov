@@ -1,10 +1,10 @@
+import { ButtonIcon } from "@/components/ButtonIcon";
 import { Content } from "@/components/Content";
 import { ModalZeroButton } from "@/components/ModalZeroButton";
 import { Button } from "@/components/njwds-extended/Button";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { FeedbackRequestModalNames } from "@/lib/types/types";
-import { makeButtonIcon } from "@/lib/utils/helpers";
 import { LookupOperatingPhaseById } from "@businessnjgovnavigator/shared/operatingPhase";
 import { ReactElement } from "react";
 
@@ -44,7 +44,7 @@ export const SelectFeedbackModal = ({ onClose, isOpen, setCurrentFeedback }: Pro
           onClick={onClose}
           intercomButton
         >
-          {makeButtonIcon("help-circle")}
+          <ButtonIcon svgFilename="help-circle" />
           <span className="text-left">{Config.feedbackModal.feedbackModalIntercomButtonText}</span>
         </Button>
 
@@ -58,7 +58,7 @@ export const SelectFeedbackModal = ({ onClose, isOpen, setCurrentFeedback }: Pro
               rel="noreferrer"
             >
               <Button className="width-100" style="narrow-accent-cool-lightest" align="start">
-                {makeButtonIcon("chat-processing")}
+                <ButtonIcon svgFilename="chat-processing" />
                 <span className="text-left">{Config.feedbackModal.feedbackModalShareFeedbackButtonText}</span>
               </Button>
             </a>
@@ -71,7 +71,7 @@ export const SelectFeedbackModal = ({ onClose, isOpen, setCurrentFeedback }: Pro
                 return setCurrentFeedback("Report Issue");
               }}
             >
-              {makeButtonIcon("bug")}
+              <ButtonIcon svgFilename="bug" />
               <span className="text-left">{Config.feedbackModal.feedbackModalReportIssueButtonText}</span>
             </Button>
 
@@ -83,7 +83,7 @@ export const SelectFeedbackModal = ({ onClose, isOpen, setCurrentFeedback }: Pro
                 return setCurrentFeedback("Feature Request");
               }}
             >
-              {makeButtonIcon("lightbulb-on")}
+              <ButtonIcon svgFilename="lightbulb-on" />
               <span className="text-left">{Config.feedbackModal.feedbackModalFeatureRequestButtonText}</span>
             </Button>
           </>

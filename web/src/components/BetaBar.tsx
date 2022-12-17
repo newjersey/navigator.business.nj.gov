@@ -1,6 +1,6 @@
+import { ButtonIcon } from "@/components/ButtonIcon";
 import { FeedbackModal } from "@/components/feedback-modal/FeedbackModal";
 import { Button } from "@/components/njwds-extended/Button";
-import { makeButtonIcon } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { ReactElement, useState } from "react";
 
@@ -22,7 +22,7 @@ export const BetaBar = (): ReactElement => {
         }}
         widthAutoOnMobile
       >
-        {makeButtonIcon("lightbulb-on-warning-light", "16px")}
+        <ButtonIcon svgFilename="lightbulb-on-warning-light" sizePx="16px" />
         {Config.betaBar.betaModalButtonText}
       </Button>
 
