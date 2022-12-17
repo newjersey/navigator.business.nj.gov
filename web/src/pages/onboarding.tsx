@@ -12,6 +12,7 @@ import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { hasEssentialQuestion } from "@/lib/domain-logic/essentialQuestions";
 import { QUERIES, QUERY_PARAMS_VALUES, ROUTES, routeShallowWithQuery } from "@/lib/domain-logic/routes";
@@ -32,14 +33,7 @@ import {
   setAnalyticsDimensions,
   setRegistrationDimension,
 } from "@/lib/utils/analytics-helpers";
-import {
-  getFlow,
-  OnboardingErrorLookup,
-  OnboardingStatusLookup,
-  scrollToTop,
-  templateEval,
-} from "@/lib/utils/helpers";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
+import { getFlow, OnboardingStatusLookup, scrollToTop, templateEval } from "@/lib/utils/helpers";
 import {
   BusinessUser,
   createEmptyProfileData,
@@ -88,6 +82,15 @@ const OnboardingPage = (props: Props): ReactElement => {
   const [fieldStates, setFieldStates] = useState<ProfileFieldErrorMap>(createProfileFieldErrorMap());
   const [currentFlow, setCurrentFlow] = useState<FlowType>("STARTING");
   const hasHandledRouting = useRef<boolean>(false);
+  const { Config } = useConfig();
+
+  const configFields = Config.profileDefaults.fields;
+  const OnboardingErrorLookup: Record<ProfileError, string> = {
+    REQUIRED_LEGAL: configFields.legalStructureId.default.errorTextRequired,
+    REQUIRED_EXISTING_BUSINESS: configFields.businessPersona.default.errorTextRequired,
+    REQUIRED_FOREIGN_BUSINESS_TYPE: configFields.foreignBusinessTypeIds.default.errorTextRequired,
+    REQUIRED_NEXUS_LOCATION_IN_NJ: configFields.nexusLocationInNewJersey.default.errorTextRequired,
+  };
 
   const onValidation = (field: ProfileFields, invalid: boolean): void => {
     setFieldStates((prevFieldStates) => {
