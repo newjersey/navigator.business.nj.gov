@@ -3850,7 +3850,7 @@ __metadata:
     "@types/jest": 29.2.4
     "@types/jsonwebtoken": 8.5.9
     "@types/lodash": 4.14.191
-    "@types/node": 16.18.9
+    "@types/node": 16.18.10
     "@types/simple-oauth2": 4.1.1
     "@types/supertest": 2.0.12
     "@types/webpack-node-externals": 2.5.3
@@ -3909,7 +3909,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@businessnjgovnavigator/content@workspace:content"
   dependencies:
-    "@types/node": 16.18.9
+    "@types/node": 16.18.10
     cross-env: 7.0.3
     cspell: 6.17.0
     prettier: 2.8.1
@@ -3991,7 +3991,7 @@ __metadata:
     "@types/jsonwebtoken": 8.5.9
     "@types/lodash": 4.14.191
     "@types/mdast": 3.0.10
-    "@types/node": 16.18.9
+    "@types/node": 16.18.10
     "@types/react": 18.0.26
     "@types/react-dom": 18.0.9
     "@types/react-swipeable-views": 0.13.1
@@ -4121,7 +4121,7 @@ __metadata:
     "@businessnjgovnavigator/content": "*"
     "@jest/types": 29.3.1
     "@types/jest": 29.2.4
-    "@types/node": 16.18.9
+    "@types/node": 16.18.10
     "@types/uuid": 9.0.0
     "@typescript-eslint/eslint-plugin": 5.46.1
     "@typescript-eslint/parser": 5.46.1
@@ -4197,7 +4197,7 @@ __metadata:
     "@types/js-yaml": 4.0.5
     "@types/lodash": 4.14.191
     "@types/mdast": 3.0.10
-    "@types/node": 16.18.9
+    "@types/node": 16.18.10
     "@types/react": 18.0.26
     "@types/react-dom": 18.0.9
     "@types/react-swipeable-views": 0.13.1
@@ -9591,10 +9591,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:16.18.9, @types/node@npm:^14.0.10 || ^16.0.0, @types/node@npm:^14.14.20 || ^16.0.0":
-  version: 16.18.9
-  resolution: "@types/node@npm:16.18.9"
-  checksum: 7dc9cb417869592b2ad64233d06cd3eda63b8ae31d72a0811e4f5ac5a2ef01feb4d4c91159481e506c7a56951981359e75069c7fae6f0de90fc0c3c8b69a36cd
+"@types/node@npm:16.18.10, @types/node@npm:^14.0.10 || ^16.0.0, @types/node@npm:^14.14.20 || ^16.0.0":
+  version: 16.18.10
+  resolution: "@types/node@npm:16.18.10"
+  checksum: 1b138616923e9a1c6d3806edf75714b605d2ec689357cdc675bc73816c508ff11b3c68df054b02a496c76654d8ed53add2e90816af39423431c73aa6eec06f29
   languageName: node
   linkType: hard
 
