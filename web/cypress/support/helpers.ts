@@ -919,7 +919,7 @@ export const generateFormationNJAddress = (overrides: Partial<FormationAddress>)
     addressProvince: undefined,
     addressCountry: "US",
     addressState: { shortCode: "NJ", name: "New Jersey" },
-    addressZipCode: randomIntFromInterval("07001", "08999").toString(),
+    addressZipCode: `0${randomIntFromInterval("07001", "08999").toString()}`,
     ...overrides,
   };
 };
