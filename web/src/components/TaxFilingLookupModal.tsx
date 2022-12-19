@@ -73,6 +73,37 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
     });
   };
 
+  const responsibleOwnerOrBusinessName = () => {
+    return LookupLegalStructureById(profileData.legalStructureId).requiresPublicFiling
+      ? Config.taxCalendar.modalBusinessFieldErrorName
+      : Config.taxCalendar.modalResponsibleOwnerFieldErrorName;
+  };
+
+  const errorAlert = (): ReactElement => {
+    if (userData?.taxFilingData.errorField == "Business Name" && apiFailed == "FAILED") {
+      return (
+        <>
+          {Config.taxCalendar.failedErrorMessageHeader}
+          <ul>
+            <li>{responsibleOwnerOrBusinessName()}</li>
+          </ul>
+        </>
+      );
+    } else if (apiFailed == "FAILED") {
+      return (
+        <>
+          {Config.taxCalendar.failedErrorMessageHeader}
+          <ul>
+            <li>{Config.taxCalendar.modalTaxFieldErrorName}</li>
+            <li>{responsibleOwnerOrBusinessName()}</li>
+          </ul>
+        </>
+      );
+    } else {
+      return <Content>{Config.taxCalendar.failedUnknownMarkdown}</Content>;
+    }
+  };
+
   const onValidation = (field: ProfileFields, invalid: boolean) => {
     setFieldStates({ ...fieldStates, [field]: { ...fieldStates[field], invalid } });
   };
@@ -229,16 +260,7 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
           </Alert>
         )}
 
-        {apiFailed && (
-          <Alert variant={"error"}>
-            {" "}
-            <Content>
-              {apiFailed == "FAILED"
-                ? Config.taxCalendar.failedErrorMessageMarkdown
-                : Config.taxCalendar.failedUnknownMarkdown}
-            </Content>
-          </Alert>
-        )}
+        {apiFailed && <Alert variant={"error"}> {errorAlert()}</Alert>}
 
         <div className="margin-bottom-4">
           <Content>{Config.taxCalendar.modalBody}</Content>
