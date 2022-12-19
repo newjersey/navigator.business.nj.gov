@@ -337,10 +337,28 @@ describe("<FilingsCalendarTaxAccess />", () => {
         return expect(currentUserData().taxFilingData.state).toEqual("FAILED");
       });
       await screen.findByRole("alert");
-      expect(screen.getByRole("alert")).toHaveTextContent(
-        markdownToText(Config.taxCalendar.failedErrorMessageMarkdown)
-      );
+      expect(screen.getByRole("alert")).toHaveTextContent(Config.taxCalendar.failedErrorMessageHeader);
+      expect(screen.getByRole("alert")).toHaveTextContent(Config.taxCalendar.modalBusinessFieldErrorName);
       expect(screen.getByText(Config.taxCalendar.failedTaxIdHelper)).toBeInTheDocument();
+      expect(screen.getByText(Config.taxCalendar.failedBusinessFieldHelper)).toBeInTheDocument();
+      expect(
+        screen.queryByText(Config.taxCalendar.failedResponsibleOwnerFieldHelper)
+      ).not.toBeInTheDocument();
+    });
+
+    it("states business name specific field error in alert if api fails", async () => {
+      renderFilingsCalendarTaxAccess(userDataWithPrefilledFields);
+      mockApi.postTaxRegistrationOnboarding.mockImplementation(() => {
+        return Promise.resolve({
+          ...userDataWithPrefilledFields,
+          taxFilingData: generateTaxFilingData({ state: "FAILED", errorField: "Business Name" }),
+        });
+      });
+      openModal();
+      clickSave();
+      await screen.findByRole("alert");
+      expect(screen.getByRole("alert")).toHaveTextContent(Config.taxCalendar.failedErrorMessageHeader);
+      expect(screen.getByRole("alert")).toHaveTextContent(Config.taxCalendar.modalBusinessFieldErrorName);
       expect(screen.getByText(Config.taxCalendar.failedBusinessFieldHelper)).toBeInTheDocument();
       expect(
         screen.queryByText(Config.taxCalendar.failedResponsibleOwnerFieldHelper)
@@ -552,9 +570,32 @@ describe("<FilingsCalendarTaxAccess />", () => {
       await screen.findByRole("alert");
 
       expect(screen.getByRole("alert")).toHaveTextContent(
-        markdownToText(Config.taxCalendar.failedErrorMessageMarkdown)
+        markdownToText(Config.taxCalendar.failedErrorMessageHeader)
       );
+      expect(screen.getByRole("alert")).toHaveTextContent(
+        Config.taxCalendar.modalResponsibleOwnerFieldErrorName
+      );
+      expect(screen.getByRole("alert")).toHaveTextContent(Config.taxCalendar.modalTaxFieldErrorName);
       expect(screen.getByText(Config.taxCalendar.failedTaxIdHelper)).toBeInTheDocument();
+      expect(screen.getByText(Config.taxCalendar.failedResponsibleOwnerFieldHelper)).toBeInTheDocument();
+      expect(screen.queryByText(Config.taxCalendar.failedBusinessFieldHelper)).not.toBeInTheDocument();
+    });
+
+    it("states responsible owner name specific field error in alert if api fails", async () => {
+      renderFilingsCalendarTaxAccess(userDataWithPrefilledFields);
+      mockApi.postTaxRegistrationOnboarding.mockImplementation(() => {
+        return Promise.resolve({
+          ...userDataWithPrefilledFields,
+          taxFilingData: generateTaxFilingData({ state: "FAILED", errorField: "Business Name" }),
+        });
+      });
+      openModal();
+      clickSave();
+      await screen.findByRole("alert");
+      expect(screen.getByRole("alert")).toHaveTextContent(Config.taxCalendar.failedErrorMessageHeader);
+      expect(screen.getByRole("alert")).toHaveTextContent(
+        Config.taxCalendar.modalResponsibleOwnerFieldErrorName
+      );
       expect(screen.getByText(Config.taxCalendar.failedResponsibleOwnerFieldHelper)).toBeInTheDocument();
       expect(screen.queryByText(Config.taxCalendar.failedBusinessFieldHelper)).not.toBeInTheDocument();
     });
