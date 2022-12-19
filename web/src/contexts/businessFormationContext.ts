@@ -21,6 +21,7 @@ interface BusinessFormationState {
   interactedFields: FormationFields[];
   businessNameAvailability: NameAvailability | undefined;
   hasBusinessNameBeenSearched: boolean;
+  hasSetStateFirstTime: boolean;
 }
 
 interface BusinessFormationContextType {
@@ -44,6 +45,7 @@ export const BusinessFormationContext = createContext<BusinessFormationContextTy
     interactedFields: [],
     businessNameAvailability: undefined,
     hasBusinessNameBeenSearched: false,
+    hasSetStateFirstTime: false,
   },
   setFormationFormData: () => {},
   setStepIndex: () => {},

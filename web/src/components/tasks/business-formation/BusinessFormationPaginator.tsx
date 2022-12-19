@@ -1,3 +1,4 @@
+import { AutosaveSpinner } from "@/components/AutosaveSpinner";
 import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { Button } from "@/components/njwds-extended/Button";
@@ -108,18 +109,31 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
       return;
     }
 
-    const filteredUserData = getFilteredUserData();
-    const userDataWithProfileChanges = updateChangesInProfileData(filteredUserData);
-    update(userDataWithProfileChanges);
+    const savedUserData = saveFormData({ shouldFilter: true });
 
-    onStepChangeAnalytics(filteredUserData?.formationData.formationFormData, stepIndex, config.moveType);
+    onStepChangeAnalytics(savedUserData?.formationData.formationFormData, stepIndex, config.moveType);
     moveToStep(stepIndex);
   };
 
-  const updateChangesInProfileData = (userData: UserData | undefined): UserData | undefined => {
-    if (!userData) {
-      return;
+  const saveFormData = ({ shouldFilter }: { shouldFilter: boolean }): UserData | undefined => {
+    if (!userData) return;
+    let formationFormDataToSave = { ...state.formationFormData };
+    if (shouldFilter) {
+      formationFormDataToSave = filterEmptyFormData(state.formationFormData);
     }
+    const userDataWithProfileChanges = updateChangesInProfileData({
+      ...userData,
+      formationData: {
+        ...userData.formationData,
+        formationFormData: formationFormDataToSave,
+      },
+    });
+    update(userDataWithProfileChanges);
+    return userDataWithProfileChanges;
+  };
+
+  const updateChangesInProfileData = (userData: UserData | undefined): UserData | undefined => {
+    if (!userData) return;
     let userDataWithChanges = { ...userData };
 
     if (isStep("Business")) {
@@ -153,25 +167,21 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
     return userDataWithChanges;
   };
 
-  const getFilteredUserData = (): UserData | undefined => {
-    if (!userData) {
-      return;
-    }
-
-    let formationFormDataToSubmit = { ...state.formationFormData };
+  const filterEmptyFormData = (formationFormData: FormationFormData): FormationFormData => {
+    let formationFormDataToSubmit = { ...formationFormData };
 
     if (isStep("Business")) {
-      const filteredProvisions = state.formationFormData.provisions?.filter((it) => {
+      const filteredProvisions = formationFormData.provisions?.filter((it) => {
         return it !== "";
       });
       formationFormDataToSubmit = { ...formationFormDataToSubmit, provisions: filteredProvisions };
     }
 
     if (isStep("Contacts")) {
-      const filteredSigners = state.formationFormData.signers?.filter((it) => {
+      const filteredSigners = formationFormData.signers?.filter((it) => {
         return !!it;
       });
-      const filteredIncorporators = state.formationFormData.incorporators?.filter((it) => {
+      const filteredIncorporators = formationFormData.incorporators?.filter((it) => {
         return !!it;
       });
 
@@ -183,13 +193,7 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
     }
 
     setFormationFormData(formationFormDataToSubmit);
-    return {
-      ...userData,
-      formationData: {
-        ...userData.formationData,
-        formationFormData: { ...formationFormDataToSubmit },
-      },
-    };
+    return formationFormDataToSubmit;
   };
 
   const onStepChangeAnalytics = (
@@ -266,10 +270,14 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
   };
 
   const submitToApi = async () => {
-    const filteredUserData = getFilteredUserData();
-    if (!filteredUserData) {
-      return;
-    }
+    if (!userData) return;
+    const filteredUserData = {
+      ...userData,
+      formationData: {
+        ...userData.formationData,
+        formationFormData: filterEmptyFormData(state.formationFormData),
+      },
+    };
 
     setIsLoading(true);
 
@@ -316,27 +324,49 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
     }
   };
 
+  const hasFormDataChanged = (): boolean => {
+    if (!userData || !state.hasSetStateFirstTime) return false;
+    return (
+      JSON.stringify(userData.formationData.formationFormData) !== JSON.stringify(state.formationFormData)
+    );
+  };
+
   const displayButtons = () => {
     return (
       <div className="margin-top-2">
-        <div className="flex flex-justify-end bg-base-lightest margin-x-neg-4 padding-3 margin-top-3 margin-bottom-neg-4">
-          {shouldDisplayPreviousButton() && (
-            <Button style="secondary" widthAutoOnMobile onClick={onPreviousButtonClick}>
-              {Config.businessFormationDefaults.previousButtonText}
+        <div className="flex fdc mobile-lg:flex-row fac bg-base-lightest margin-x-neg-4 padding-3 margin-top-3 margin-bottom-neg-4">
+          <div className="flex fac margin-bottom-2 mobile-lg:margin-bottom-0">
+            <AutosaveSpinner
+              saveEveryXSeconds={1}
+              secondsBetweenSpinAnimations={60}
+              spinForXSeconds={2.5}
+              hasDataChanged={hasFormDataChanged()}
+              saveDataFunction={() => saveFormData({ shouldFilter: false })}
+            />
+          </div>
+          <div className="flex flex-column-reverse mobile-lg:flex-row mobile-lg:margin-left-auto width-100">
+            {shouldDisplayPreviousButton() && (
+              <Button
+                className="margin-top-1 mobile-lg:margin-top-0 mobile-lg:margin-right-1 mobile-lg:margin-left-auto"
+                style="secondary"
+                onClick={onPreviousButtonClick}
+              >
+                {Config.businessFormationDefaults.previousButtonText}
+              </Button>
+            )}
+            <Button
+              className={shouldDisplayPreviousButton() ? "" : "mobile-lg:margin-left-auto"}
+              style="primary"
+              onClick={() => {
+                return onMoveToStep(state.stepIndex + 1, { moveType: "NEXT_BUTTON" });
+              }}
+              noRightMargin
+              loading={isLoading}
+              dataTestid="next-button"
+            >
+              {getNextButtonText()}
             </Button>
-          )}
-          <Button
-            style="primary"
-            onClick={() => {
-              return onMoveToStep(state.stepIndex + 1, { moveType: "NEXT_BUTTON" });
-            }}
-            widthAutoOnMobile
-            noRightMargin
-            loading={isLoading}
-            dataTestid="next-button"
-          >
-            {getNextButtonText()}
-          </Button>
+          </div>
         </div>
       </div>
     );

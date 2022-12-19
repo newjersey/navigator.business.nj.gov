@@ -3,7 +3,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { NameAvailability, SearchBusinessNameError } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { FocusEvent, FormEvent, useState } from "react";
+import { FormEvent, useState } from "react";
 
 export const useBusinessNameSearch = ({
   isBusinessFormation,
@@ -20,7 +20,7 @@ export const useBusinessNameSearch = ({
   nameAvailability: NameAvailability | undefined;
   updateButtonClicked: boolean;
   updateCurrentName: (value: string) => void;
-  onBlurNameField: (event: FocusEvent<HTMLInputElement>) => void;
+  onBlurNameField: (value: string) => void;
   searchBusinessName: (
     event?: FormEvent<HTMLFormElement>
   ) => Promise<{ nameAvailability: NameAvailability; submittedName: string }>;
@@ -49,8 +49,8 @@ export const useBusinessNameSearch = ({
     setNameAvailability(undefined);
   };
 
-  const onBlurNameField = (event: FocusEvent<HTMLInputElement>): void => {
-    setIsNameFieldEmpty(event.target.value.length === 0);
+  const onBlurNameField = (value: string): void => {
+    setIsNameFieldEmpty(value.length === 0);
   };
 
   const resetSearch = () => {

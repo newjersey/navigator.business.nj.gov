@@ -610,5 +610,9 @@
     "newJerseyDateBodyText": "ET",
     "guestModeToProfileButtonText": "Guest Account",
     "genericToProfileButtonText": "Business Profile"
+  },
+  "autosaveDefaults": {
+    "savingText": "Saving",
+    "savedText": "Saved 1 minute ago"
   }
 }

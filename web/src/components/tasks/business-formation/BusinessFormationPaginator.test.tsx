@@ -14,6 +14,7 @@ import {
   generateUserData,
 } from "@/test/factories";
 import {
+  FormationPageHelpers,
   generateFormationProfileData,
   mockApiResponse,
   preparePage,
@@ -21,11 +22,15 @@ import {
 } from "@/test/helpers/helpers-formation";
 import { withAuthAlert } from "@/test/helpers/helpers-renderers";
 import { mockPush } from "@/test/mock/mockRouter";
-import { currentUserData, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
+import {
+  currentUserData,
+  userDataUpdatedNTimes,
+  WithStatefulUserData,
+} from "@/test/mock/withStatefulUserData";
 import { generateFormationFormData, generateMunicipality } from "@businessnjgovnavigator/shared/test";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import * as materialUi from "@mui/material";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 const Config = getMergedConfig();
 
@@ -653,5 +658,121 @@ describe("<BusinessFormationPaginator />", () => {
         });
       });
     });
+  });
+
+  describe("autosave", () => {
+    beforeEach(() => {
+      jest.useFakeTimers();
+    });
+
+    afterEach(() => {
+      jest.useRealTimers();
+    });
+
+    it("autosaves every second if a field has changed", async () => {
+      const page = preparePage(initialUserData, displayContent);
+      act(() => {
+        jest.advanceTimersByTime(1000);
+      });
+      page.fillText("Search business name", "Pizza Joint");
+      await waitFor(() =>
+        expect(currentUserData().formationData.formationFormData.businessName).toEqual("Pizza Joint")
+      );
+    });
+
+    it("does not autosave if fields have not changed", () => {
+      preparePage(initialUserData, displayContent);
+      expect(userDataUpdatedNTimes()).toEqual(1);
+      act(() => {
+        jest.advanceTimersByTime(1000);
+      });
+      expect(userDataUpdatedNTimes()).toEqual(1);
+    });
+
+    it("does not filter user data when autosaving, only when switching steps", async () => {
+      const page = preparePage(initialUserData, displayContent);
+      await page.stepperClickToBusinessStep();
+
+      act(() => {
+        jest.advanceTimersByTime(1000);
+      });
+
+      fireEvent.click(screen.getByText(Config.businessFormationDefaults.provisionsAddButtonText));
+
+      await waitFor(() => expect(currentUserData().formationData.formationFormData.provisions).toEqual([""]));
+      await page.stepperClickToContactsStep();
+      await page.stepperClickToBusinessStep();
+      expect(currentUserData().formationData.formationFormData.provisions).toEqual([]);
+    });
+
+    it("does not autosave if a field has changed but less than 1 second has passed", () => {
+      const page = preparePage(initialUserData, displayContent);
+      expect(userDataUpdatedNTimes()).toEqual(1);
+      makeChangeToForm(page);
+      act(() => {
+        jest.advanceTimersByTime(900);
+      });
+      expect(userDataUpdatedNTimes()).toEqual(1);
+    });
+
+    it("displays the saving spinner every 1 min, for 2.5 seconds at a time", async () => {
+      const page = preparePage(initialUserData, displayContent);
+      expect(screen.queryByText(Config.autosaveDefaults.savingText)).not.toBeInTheDocument();
+      expect(screen.queryByText(Config.autosaveDefaults.savedText)).not.toBeInTheDocument();
+
+      act(() => {
+        jest.advanceTimersByTime(1000);
+      });
+      makeChangeToForm(page);
+      await waitFor(() =>
+        expect(currentUserData().formationData.formationFormData.businessName).toEqual("Pizza Joint")
+      );
+
+      expect(screen.queryByText(Config.autosaveDefaults.savingText)).not.toBeInTheDocument();
+      expect(screen.queryByText(Config.autosaveDefaults.savedText)).not.toBeInTheDocument();
+
+      act(() => {
+        jest.advanceTimersByTime(59000);
+      });
+
+      expect(screen.getByText(Config.autosaveDefaults.savingText)).toBeInTheDocument();
+      expect(screen.queryByText(Config.autosaveDefaults.savedText)).not.toBeInTheDocument();
+
+      act(() => {
+        jest.advanceTimersByTime(2500);
+      });
+
+      expect(screen.queryByText(Config.autosaveDefaults.savingText)).not.toBeInTheDocument();
+      expect(screen.getByText(Config.autosaveDefaults.savedText)).toBeInTheDocument();
+    });
+
+    it("does not display the saving spinner if no saves occurred in that 1 min", async () => {
+      const page = preparePage(initialUserData, displayContent);
+
+      act(() => {
+        jest.advanceTimersByTime(1000);
+      });
+      makeChangeToForm(page);
+      act(() => {
+        jest.advanceTimersByTime(59000);
+      });
+      act(() => {
+        jest.advanceTimersByTime(2500);
+      });
+
+      expect(screen.queryByText(Config.autosaveDefaults.savingText)).not.toBeInTheDocument();
+      expect(screen.getByText(Config.autosaveDefaults.savedText)).toBeInTheDocument();
+
+      act(() => {
+        jest.runOnlyPendingTimers();
+      });
+
+      expect(screen.queryByText(Config.autosaveDefaults.savingText)).not.toBeInTheDocument();
+      expect(screen.queryByText(Config.autosaveDefaults.savedText)).not.toBeInTheDocument();
+    });
+
+    const makeChangeToForm = (page: FormationPageHelpers) => {
+      page.fillText("Search business name", "Pizza Joint");
+    };
   });
 });

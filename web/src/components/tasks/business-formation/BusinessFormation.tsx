@@ -51,6 +51,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
   const [showResponseAlert, setShowResponseAlert] = useState<boolean>(false);
   const [isLoadingGetFiling, setIsLoadingGetFiling] = useState<boolean>(false);
   const [hasBeenSubmitted, setHasBeenSubmitted] = useState<boolean>(false);
+  const [hasSetStateFirstTime, setHasSetStateFirstTime] = useState<boolean>(false);
   const [businessNameAvailability, _setBusinessNameAvailability] = useState<NameAvailability | undefined>(
     undefined
   );
@@ -79,6 +80,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
     if (!userData) {
       return;
     }
+
     const splitName = splitFullName(userData.user.name);
     setFormationFormData({
       ...userData.formationData.formationFormData,
@@ -89,6 +91,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
       contactFirstName: userData.formationData.formationFormData.contactFirstName || splitName.firstName,
       contactLastName: userData.formationData.formationFormData.contactLastName || splitName.lastName,
     });
+    setHasSetStateFirstTime(true);
   }, userData);
 
   useEffect(() => {
@@ -226,6 +229,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
           hasBeenSubmitted,
           businessNameAvailability,
           hasBusinessNameBeenSearched,
+          hasSetStateFirstTime,
         },
         setFormationFormData,
         setStepIndex,
