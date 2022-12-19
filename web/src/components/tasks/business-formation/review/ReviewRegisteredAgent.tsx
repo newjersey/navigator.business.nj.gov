@@ -70,12 +70,13 @@ export const ReviewRegisteredAgent = (): ReactElement => {
               <Content>{Config.businessFormationDefaults.reviewStepAddressLabel}</Content>
             </div>
             <Content>
-              {getStringifiedAddress(
-                state.formationFormData.agentOfficeAddressLine1 || italicNotEnteredText,
-                state.formationFormData.agentOfficeAddressMunicipality?.name || italicNotEnteredText,
-                state.formationFormData.agentOfficeAddressZipCode || italicNotEnteredText,
-                state.formationFormData.agentOfficeAddressLine2
-              )}
+              {getStringifiedAddress({
+                addressLine1: state.formationFormData.agentOfficeAddressLine1 || italicNotEnteredText,
+                city: state.formationFormData.agentOfficeAddressMunicipality?.name || italicNotEnteredText,
+                zipcode: state.formationFormData.agentOfficeAddressZipCode || italicNotEnteredText,
+                state: "NJ",
+                addressLine2: state.formationFormData.agentOfficeAddressLine2,
+              })}
             </Content>
           </div>
         </div>

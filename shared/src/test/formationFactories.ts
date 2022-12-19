@@ -66,7 +66,7 @@ export const generateFormationNJAddress = (overrides: Partial<FormationAddress>)
     addressProvince: undefined,
     addressCountry: "US",
     addressState: { shortCode: "NJ", name: "New Jersey" },
-    addressZipCode: randomIntFromInterval("07001", "08999").toString(),
+    addressZipCode: `0${randomIntFromInterval("07001", "08999")}`,
     ...overrides,
   };
 };
@@ -141,7 +141,7 @@ export const generateFormationFormData = (
     agentOfficeAddressLine2: `some-agent-office-address-2-${randomInt()}`,
     agentOfficeAddressCity: `some-agent-office-address-city-${randomInt()}`,
     agentOfficeAddressMunicipality: generateMunicipality({}),
-    agentOfficeAddressZipCode: randomIntFromInterval("07001", "08999").toString(),
+    agentOfficeAddressZipCode: `0${randomIntFromInterval("07001", "08999").toString()}`,
     agentUseAccountInfo: !!(randomInt() % 2),
     agentUseBusinessAddress: !!(randomInt() % 2),
     members: isForeign ? undefined : [generateFormationMember({})],

@@ -39,13 +39,13 @@ export const ReviewMembers = (): ReactElement => {
             {isCorp && (
               <ReviewLineItem
                 label={Config.businessFormationDefaults.reviewStepDirectorAddressLabel}
-                value={getStringifiedAddress(
-                  member.addressLine1,
-                  member.addressCity ?? "",
-                  member.addressState?.name ?? "",
-                  member.addressZipCode,
-                  member.addressLine2
-                )}
+                value={getStringifiedAddress({
+                  addressLine1: member.addressLine1,
+                  city: member.addressCity ?? "",
+                  state: member.addressState?.name ?? "",
+                  zipcode: member.addressZipCode,
+                  addressLine2: member.addressLine2,
+                })}
               />
             )}
           </div>
