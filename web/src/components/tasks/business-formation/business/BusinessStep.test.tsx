@@ -202,7 +202,7 @@ describe("Formation - BusinessStep", () => {
   });
 
   describe("provisions", () => {
-    it("keeps provisions closed by default", async () => {
+    it("keeps provisions closed by default when page loads", async () => {
       await getPageHelper({}, { provisions: [] });
       expect(screen.getByText(Config.businessFormationDefaults.provisionsTitle)).toBeInTheDocument();
       expect(screen.getByText(Config.businessFormationDefaults.provisionsAddButtonText)).toBeInTheDocument();

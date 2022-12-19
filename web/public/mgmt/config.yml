@@ -3203,6 +3203,14 @@ collections:
             fields:
               - { label: Title, name: title, widget: string }
               - { label: Subtitle, name: subtitle, widget: markdown }
+          - label: Autosave
+            name: autosaveDefaults
+            collapsed: true
+            widget: object
+            summary: "{{autosaveDefaults}}"
+            fields:
+              - { label: Saving Text, name: savingText, widget: string }
+              - { label: Saved Text, name: savedText, widget: string }
 
   - name: "profile-onboarding"
     label: "Profile Page"
