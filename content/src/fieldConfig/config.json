@@ -399,7 +399,7 @@
     "modalTaxIdMarkdown": "Enter the 12-digit number below (xxx-xxx-xxx/xxx). \n\n(You can find your NJ Tax ID listed as your 'NJ Taxpayer ID' in your email confirmation: 'Confirmation of New Jersey Business Registration.' If you registered before 10/6/22 your confirmation may say \"Filer ID\")",
     "failedBusinessFieldHelper": "Enter your correct business name",
     "failedResponsibleOwnerFieldHelper": "Enter the responsible owner listed in your tax confirmation email.",
-    "failedErrorMessageMarkdown": "Review your NJ Tax ID and/or business name for a match with the information in your Business Registration Certificate. If you need assistance, you can chat with one of our business advocates.",
+    "failedErrorMessageHeader": "The following fields are incorrect or missing information:",
     "snackbarSuccessHeader": "Tax Calendar Added!",
     "modalBody": "To access your tax records, we need to verify your information and get you access to New Jersey Department of Treasury's `Gov2Go|gov2go` platform.",
     "modalNextButton": "Save",

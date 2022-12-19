@@ -2653,7 +2653,7 @@ collections:
                 }
               - { label: TaxId Field Header, name: modalTaxIdHeader, widget: markdown }
               - { label: TaxId Field Text, name: modalTaxIdMarkdown, widget: markdown }
-              - { label: Failed Alert Text, name: failedErrorMessageMarkdown, widget: markdown }
+              - { label: Failed Alert Text, name: failedErrorMessageHeader, widget: text }
               - { label: Unknown Failure Alert Text, name: failedUnknownMarkdown, widget: markdown }
               - { label: BusinessName API Failed Helper Text, name: failedBusinessFieldHelper, widget: text }
               - { label: TaxId API Failed Helper Text, name: failedTaxIdHelper, widget: text }
