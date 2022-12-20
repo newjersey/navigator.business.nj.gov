@@ -362,8 +362,11 @@
     "landingPageTile1Line1Text": "Get",
     "landingPageTile1Line2Text": "Started",
     "landingPageTile2Text": "I'm starting a business",
+    "landingPageTile3Text": "I'm running an NJ business",
     "landingPageTile4Text": "I'm an out-of-state business",
-    "landingPageTile5Text": "How do I register my business?"
+    "landingPageTile5Text": "How do I register my business?",
+    "landingPageTile6Text": "Where do I pay my taxes?",
+    "landingPageTile7Text": "What funding am I eligible for?"
   },
   "feedbackModal": {
     "feedbackModalFeatureRequestButtonText": "Request new capabilities",

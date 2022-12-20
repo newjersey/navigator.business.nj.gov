@@ -145,6 +145,7 @@ const OnboardingPage = (props: Props): ReactElement => {
   const mapFlowQueryToPersona: Record<QUERY_PARAMS_VALUES["flow"], FlowType> = {
     starting: "STARTING",
     "out-of-state": "FOREIGN",
+    "up-and-running": "OWNING",
   };
 
   const flowQueryParamIsValid = (flow: string): boolean => {
@@ -240,7 +241,11 @@ const OnboardingPage = (props: Props): ReactElement => {
       };
     });
     setCurrentFlow(flowType);
-    setPage({ current: 2, previous: 1 });
+    if (flowType === "OWNING") {
+      setPage({ current: 1, previous: 1 });
+    } else {
+      setPage({ current: 2, previous: 1 });
+    }
   };
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>): Promise<void> => {

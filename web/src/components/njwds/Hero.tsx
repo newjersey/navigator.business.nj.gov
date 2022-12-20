@@ -57,8 +57,8 @@ export const Hero = (): ReactElement => {
               <img className="width-100" src="/img/Hero-img-climb.svg" alt="Hero People Climbing" />
             </div>
           </div>
-          <LandingPageTiles />
         </div>
+        <LandingPageTiles />
       </div>
       <div className={`${isDesktopAndUp ? "hero-gradient-bg-bottom" : "bg-success-lighter"}`}>
         <div className="desktop:grid-container-widescreen desktop:padding-x-7 width-100">
