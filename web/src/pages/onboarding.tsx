@@ -266,9 +266,14 @@ const OnboardingPage = (props: Props): ReactElement => {
         errorMap?.inline.some((error) => {
           return !error.valid;
         }),
+      snackbar:
+        errorMap?.snackbar &&
+        errorMap?.snackbar.some((error) => {
+          return !error.valid;
+        }),
     };
 
-    if (hasErrors.banner || hasErrors.inline) {
+    if (hasErrors.banner || hasErrors.inline || hasErrors.snackbar) {
       if (hasErrors.banner && errorMap?.banner) {
         setError(
           errorMap.banner.find((bannerError) => {
@@ -277,13 +282,15 @@ const OnboardingPage = (props: Props): ReactElement => {
         );
       }
       if (hasErrors.inline && errorMap?.inline) {
-        setAlert("ERROR");
         onValidation(
           errorMap.inline.find((error) => {
             return !error.valid;
           })?.name as ProfileFields,
           true
         );
+      }
+      if (hasErrors.snackbar && errorMap?.snackbar) {
+        setAlert("ERROR");
       }
       headerRef.current?.focus();
       scrollToTop();

@@ -33,6 +33,7 @@ export type OnboardingFlow = {
 export type ErrorFieldMap = {
   inline?: { name: ProfileFields; valid: boolean }[];
   banner?: { name: ProfileError; valid: boolean }[];
+  snackbar?: { name: ProfileFields; valid: boolean }[];
 };
 
 export const getOnboardingFlows = (
@@ -86,6 +87,13 @@ export const getOnboardingFlows = (
                   valid: !fieldStates.dateOfFormation.invalid,
                 },
               ],
+              snackbar: [
+                { name: "entityId", valid: !fieldStates.entityId.invalid },
+                {
+                  name: "dateOfFormation",
+                  valid: !fieldStates.dateOfFormation.invalid,
+                },
+              ],
             };
           },
         },
@@ -102,6 +110,13 @@ export const getOnboardingFlows = (
           getErrorMap: () => {
             return {
               inline: [
+                { name: "businessName", valid: !!profileData.businessName },
+                {
+                  name: "sectorId",
+                  valid: !!profileData.sectorId,
+                },
+              ],
+              snackbar: [
                 { name: "businessName", valid: !!profileData.businessName },
                 {
                   name: "sectorId",
@@ -135,6 +150,13 @@ export const getOnboardingFlows = (
                 },
                 { name: "municipality", valid: !!profileData.municipality },
               ],
+              snackbar: [
+                {
+                  name: "existingEmployees",
+                  valid: !!profileData.existingEmployees,
+                },
+                { name: "municipality", valid: !!profileData.municipality },
+              ],
             };
           },
         },
@@ -143,6 +165,19 @@ export const getOnboardingFlows = (
           getErrorMap: () => {
             return {
               inline: [
+                {
+                  name: "name",
+                  valid: isFullNameValid(businessUser.name) && !fieldStates.name.invalid,
+                },
+                {
+                  name: "email",
+                  valid:
+                    businessUser.email.length > 0 &&
+                    !fieldStates.email.invalid &&
+                    validateEmail(businessUser.email),
+                },
+              ],
+              snackbar: [
                 {
                   name: "name",
                   valid: isFullNameValid(businessUser.name) && !fieldStates.name.invalid,
@@ -183,6 +218,7 @@ export const getOnboardingFlows = (
           getErrorMap: () => {
             return {
               inline: [{ name: "industryId", valid: profileData.industryId !== undefined }],
+              snackbar: [{ name: "industryId", valid: profileData.industryId !== undefined }],
             };
           },
         },
@@ -204,6 +240,19 @@ export const getOnboardingFlows = (
           getErrorMap: () => {
             return {
               inline: [
+                {
+                  name: "name",
+                  valid: !!businessUser.name && businessUser.name.length > 0 && !fieldStates.name.invalid,
+                },
+                {
+                  name: "email",
+                  valid:
+                    businessUser.email.length > 0 &&
+                    !fieldStates.email.invalid &&
+                    validateEmail(businessUser.email),
+                },
+              ],
+              snackbar: [
                 {
                   name: "name",
                   valid: !!businessUser.name && businessUser.name.length > 0 && !fieldStates.name.invalid,
@@ -262,6 +311,7 @@ export const getOnboardingFlows = (
           getErrorMap: () => {
             return {
               inline: [{ name: "industryId", valid: profileData.industryId !== undefined }],
+              snackbar: [{ name: "industryId", valid: profileData.industryId !== undefined }],
             };
           },
         },
@@ -303,6 +353,19 @@ export const getOnboardingFlows = (
           getErrorMap: () => {
             return {
               inline: [
+                {
+                  name: "name",
+                  valid: !!businessUser.name && businessUser.name.length > 0 && !fieldStates.name.invalid,
+                },
+                {
+                  name: "email",
+                  valid:
+                    businessUser.email.length > 0 &&
+                    !fieldStates.email.invalid &&
+                    validateEmail(businessUser.email),
+                },
+              ],
+              snackbar: [
                 {
                   name: "name",
                   valid: !!businessUser.name && businessUser.name.length > 0 && !fieldStates.name.invalid,
