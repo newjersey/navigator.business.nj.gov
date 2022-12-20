@@ -1,7 +1,7 @@
+import { LandingPageTiles } from "@/components/LandingPageTiles";
 import { getMergedConfig } from "@/contexts/configContext";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { fireEvent, render, screen } from "@testing-library/react";
-import { LandingPageTiles } from "./LandingPageTiles";
 
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 
@@ -13,7 +13,7 @@ describe("<LandingPageTiles />", () => {
     useMockRouter({});
   });
 
-  it("auto-selects businessPersona and routes user to industry selection when the starting a business button is clicked", async () => {
+  it("routes user to industry selection when the starting a business button is clicked", async () => {
     render(<LandingPageTiles />);
 
     fireEvent.click(screen.getByText(Config.landingPage.landingPageTile2Text));
@@ -21,11 +21,19 @@ describe("<LandingPageTiles />", () => {
     expect(mockPush).toHaveBeenCalledWith({ pathname: "/onboarding", query: { flow: "starting" } });
   });
 
-  it("auto-selects businessPersona and routes user to industry selection when the out-of-state business button is clicked", async () => {
+  it("routes user to out-of-state business section when the out-of-state business button is clicked", async () => {
     render(<LandingPageTiles />);
 
     fireEvent.click(screen.getByText(Config.landingPage.landingPageTile4Text));
 
     expect(mockPush).toHaveBeenCalledWith({ pathname: "/onboarding", query: { flow: "out-of-state" } });
+  });
+
+  it("routes user to business status section when the running a business button is clicked", async () => {
+    render(<LandingPageTiles />);
+
+    fireEvent.click(screen.getByText(Config.landingPage.landingPageTile3Text));
+
+    expect(mockPush).toHaveBeenCalledWith({ pathname: "/onboarding", query: { flow: "up-and-running" } });
   });
 });

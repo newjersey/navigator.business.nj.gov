@@ -2903,8 +2903,11 @@ collections:
               - { label: Landing Page - Tile 1 Line 1 Text, name: landingPageTile1Line1Text, widget: string }
               - { label: Landing Page - Tile 1 Line 2 Text, name: landingPageTile1Line2Text, widget: string }
               - { label: Landing Page - Tile 2 Text, name: landingPageTile2Text, widget: string }
+              - { label: Landing Page - Tile 3 Text, name: landingPageTile3Text, widget: string }
               - { label: Landing Page - Tile 4 Text, name: landingPageTile4Text, widget: string }
               - { label: Landing Page - Tile 5 Text, name: landingPageTile5Text, widget: string }
+              - { label: Landing Page - Tile 6 Text, name: landingPageTile6Text, widget: string }
+              - { label: Landing Page - Tile 7 Text, name: landingPageTile7Text, widget: string }
           - label: Landing Page Experience B
             name: landingPageExperienceB
             collapsed: true

@@ -115,9 +115,44 @@
   }
 }
 
+.slider-button {
+  position: absolute;
+  top: 50%;
+  display: block;
+  width: 4.375rem;
+  height: 9.375rem;
+  padding: 0;
+  transform: translate(0, -50%);
+  cursor: pointer;
+  color: $secondary;
+  border: none;
+  background-color: $white;
+  opacity: 90%;
+
+  &.next {
+    margin-right: 0.625rem;
+    right: 0;
+  }
+
+  &.prev {
+    margin-left: 0.625rem;
+    left: 0;
+    z-index: 30;
+  }
+}
+
+.usa-icon {
+  &.nextIcon,
+  &.prevIcon {
+    width: 4.375rem;
+    height: 5rem;
+  }
+}
+
 .landing-page-tile {
   display: flex;
   align-items: center;
+  text-align: left;
   padding: 0.5rem 1rem;
   gap: 1rem;
   font-weight: bold;
@@ -136,6 +171,7 @@
 
   @media (min-width: $sm) {
     flex-direction: column;
+    text-align: center;
     padding: 1.25rem;
     gap: 1.125rem;
     width: 12.5rem;
