@@ -32,20 +32,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-amplify/auth@npm:5.0.5":
-  version: 5.0.5
-  resolution: "@aws-amplify/auth@npm:5.0.5"
+"@aws-amplify/auth@npm:5.1.1":
+  version: 5.1.1
+  resolution: "@aws-amplify/auth@npm:5.1.1"
   dependencies:
-    "@aws-amplify/core": 5.0.5
-    amazon-cognito-identity-js: 6.0.1
+    "@aws-amplify/core": 5.0.7
+    amazon-cognito-identity-js: 6.1.1
     tslib: ^1.8.0
-  checksum: 39b250a026355119679215a0e991ff4097c995373c72098269d109972f175f9a829a694218ade3509240b7226fe6d5e1e05d758ae7a8056d3a78b86c901c837a
+  checksum: f549f908ff89d1fc80bb127276622f3d61618b239bb65cba9e6b4b9632551d22b21cddab9657e48f6f8e407710138bcb637e4fb898d46ded5cf04728c5db67a8
   languageName: node
   linkType: hard
 
-"@aws-amplify/core@npm:5.0.5":
-  version: 5.0.5
-  resolution: "@aws-amplify/core@npm:5.0.5"
+"@aws-amplify/core@npm:5.0.7":
+  version: 5.0.7
+  resolution: "@aws-amplify/core@npm:5.0.7"
   dependencies:
     "@aws-crypto/sha256-js": 1.2.2
     "@aws-sdk/client-cloudwatch-logs": 3.6.1
@@ -56,7 +56,7 @@ __metadata:
     tslib: ^1.8.0
     universal-cookie: ^4.0.4
     zen-observable-ts: 0.8.19
-  checksum: 0e4a9e2788b53b92bcd41e9a8efd45c74873d77cf01c630914df07076fba0b4bb69a5177fa97e6367ce18c4ed08220da7a8ef0f3dd146a12252ea8139dbaaa1a
+  checksum: dd109029ac302f7176783525492bd8ac076fe25af1d888299794d9daf1af199428a30536d7add911cbe585546bd43cee86e46ec08f4760d29d85ca323c3fa911
   languageName: node
   linkType: hard
 
@@ -3850,7 +3850,7 @@ __metadata:
     "@types/jest": 29.2.4
     "@types/jsonwebtoken": 8.5.9
     "@types/lodash": 4.14.191
-    "@types/node": 16.18.9
+    "@types/node": 16.18.10
     "@types/simple-oauth2": 4.1.1
     "@types/supertest": 2.0.12
     "@types/webpack-node-externals": 2.5.3
@@ -3866,9 +3866,9 @@ __metadata:
     dayjs: 1.11.7
     dedent: 0.7.0
     dependency-cruiser: 12.1.0
-    eslint: 8.29.0
+    eslint: 8.30.0
     eslint-config-prettier: 8.5.0
-    eslint-plugin-jest: 27.1.6
+    eslint-plugin-jest: 27.1.7
     eslint-plugin-jest-formatting: 3.1.0
     eslint-plugin-unicorn: 45.0.2
     express: 4.18.2
@@ -3909,7 +3909,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@businessnjgovnavigator/content@workspace:content"
   dependencies:
-    "@types/node": 16.18.9
+    "@types/node": 16.18.10
     cross-env: 7.0.3
     cspell: 6.17.0
     prettier: 2.8.1
@@ -3921,8 +3921,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@businessnjgovnavigator/root@workspace:."
   dependencies:
-    "@aws-amplify/auth": 5.0.5
-    "@aws-amplify/core": 5.0.5
+    "@aws-amplify/auth": 5.1.1
+    "@aws-amplify/core": 5.0.7
     "@aws-crypto/client-node": 3.1.1
     "@aws-crypto/sha256-browser": 2.0.2
     "@aws-sdk/client-cloudwatch-logs": 3.229.0
@@ -3991,7 +3991,7 @@ __metadata:
     "@types/jsonwebtoken": 8.5.9
     "@types/lodash": 4.14.191
     "@types/mdast": 3.0.10
-    "@types/node": 16.18.9
+    "@types/node": 16.18.10
     "@types/react": 18.0.26
     "@types/react-dom": 18.0.9
     "@types/react-swipeable-views": 0.13.1
@@ -4027,11 +4027,11 @@ __metadata:
     dedent: 0.7.0
     dependency-cruiser: 12.1.0
     dotenv: 16.0.3
-    eslint: 8.29.0
-    eslint-config-next: 13.0.6
+    eslint: 8.30.0
+    eslint-config-next: 13.0.7
     eslint-config-prettier: 8.5.0
     eslint-plugin-cypress: 2.12.1
-    eslint-plugin-jest: 27.1.6
+    eslint-plugin-jest: 27.1.7
     eslint-plugin-jest-dom: 4.0.3
     eslint-plugin-jest-formatting: 3.1.0
     eslint-plugin-jsx-a11y: 6.6.1
@@ -4079,7 +4079,7 @@ __metadata:
     remove-markdown: 0.5.0
     require-from-string: 2.0.2
     rimraf: 3.0.2
-    sass: 1.56.2
+    sass: 1.57.0
     sass-loader: 13.2.0
     semantic-release: 19.0.5
     serverless: 3.25.1
@@ -4121,15 +4121,15 @@ __metadata:
     "@businessnjgovnavigator/content": "*"
     "@jest/types": 29.3.1
     "@types/jest": 29.2.4
-    "@types/node": 16.18.9
+    "@types/node": 16.18.10
     "@types/uuid": 9.0.0
     "@typescript-eslint/eslint-plugin": 5.46.1
     "@typescript-eslint/parser": 5.46.1
     cross-env: 7.0.3
     dayjs: 1.11.7
-    eslint: 8.29.0
+    eslint: 8.30.0
     eslint-config-prettier: 8.5.0
-    eslint-plugin-jest: 27.1.6
+    eslint-plugin-jest: 27.1.7
     eslint-plugin-jest-formatting: 3.1.0
     eslint-plugin-unicorn: 45.0.2
     jest: 29.3.1
@@ -4148,8 +4148,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@businessnjgovnavigator/web@workspace:web"
   dependencies:
-    "@aws-amplify/auth": 5.0.5
-    "@aws-amplify/core": 5.0.5
+    "@aws-amplify/auth": 5.1.1
+    "@aws-amplify/core": 5.0.7
     "@aws-crypto/sha256-browser": 2.0.2
     "@aws-sdk/protocol-http": 3.226.0
     "@aws-sdk/s3-request-presigner": 3.229.0
@@ -4197,7 +4197,7 @@ __metadata:
     "@types/js-yaml": 4.0.5
     "@types/lodash": 4.14.191
     "@types/mdast": 3.0.10
-    "@types/node": 16.18.9
+    "@types/node": 16.18.10
     "@types/react": 18.0.26
     "@types/react-dom": 18.0.9
     "@types/react-swipeable-views": 0.13.1
@@ -4223,11 +4223,11 @@ __metadata:
     dayjs: 1.11.7
     dependency-cruiser: 12.1.0
     dotenv: 16.0.3
-    eslint: 8.29.0
-    eslint-config-next: 13.0.6
+    eslint: 8.30.0
+    eslint-config-next: 13.0.7
     eslint-config-prettier: 8.5.0
     eslint-plugin-cypress: 2.12.1
-    eslint-plugin-jest: 27.1.6
+    eslint-plugin-jest: 27.1.7
     eslint-plugin-jest-formatting: 3.1.0
     eslint-plugin-jsx-a11y: 6.6.1
     eslint-plugin-react: 7.31.11
@@ -4266,7 +4266,7 @@ __metadata:
     remove-markdown: 0.5.0
     require-from-string: 2.0.2
     rimraf: 3.0.2
-    sass: 1.56.2
+    sass: 1.57.0
     sass-loader: 13.2.0
     storybook-addon-pseudo-states: 1.15.2
     style-loader: 3.3.1
@@ -5401,20 +5401,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@eslint/eslintrc@npm:^1.3.3":
-  version: 1.3.3
-  resolution: "@eslint/eslintrc@npm:1.3.3"
+"@eslint/eslintrc@npm:^1.4.0":
+  version: 1.4.0
+  resolution: "@eslint/eslintrc@npm:1.4.0"
   dependencies:
     ajv: ^6.12.4
     debug: ^4.3.2
     espree: ^9.4.0
-    globals: ^13.15.0
+    globals: ^13.19.0
     ignore: ^5.2.0
     import-fresh: ^3.2.1
     js-yaml: ^4.1.0
     minimatch: ^3.1.2
     strip-json-comments: ^3.1.1
-  checksum: f03e9d6727efd3e0719da2051ea80c0c73d20e28c171121527dbb868cd34232ca9c1d0525a66e517a404afea26624b1e47895b6a92474678418c2f50c9566694
+  checksum: 73e39c833deafde8d8706e6fa9b52b6d99927c094ead8e405ea4174e8197ec24aac9ba88ae38cc8ad32eaccf07b9c7fc5dc70761d1fba6da41a928691447305f
   languageName: node
   linkType: hard
 
@@ -5782,14 +5782,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@humanwhocodes/config-array@npm:^0.11.6":
-  version: 0.11.7
-  resolution: "@humanwhocodes/config-array@npm:0.11.7"
+"@humanwhocodes/config-array@npm:^0.11.8":
+  version: 0.11.8
+  resolution: "@humanwhocodes/config-array@npm:0.11.8"
   dependencies:
     "@humanwhocodes/object-schema": ^1.2.1
     debug: ^4.1.1
     minimatch: ^3.0.5
-  checksum: cf506dc45d9488af7fbf108ea6ac2151ba1a25e6d2b94b9b4fc36d2c1e4099b89ff560296dbfa13947e44604d4ca4a90d97a4fb167370bf8dd01a6ca2b6d83ac
+  checksum: 0fd6b3c54f1674ce0a224df09b9c2f9846d20b9e54fabae1281ecfc04f2e6ad69bf19e1d6af6a28f88e8aa3990168b6cb9e1ef755868c3256a630605ec2cb1d3
   languageName: node
   linkType: hard
 
@@ -6642,12 +6642,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/eslint-plugin-next@npm:13.0.6":
-  version: 13.0.6
-  resolution: "@next/eslint-plugin-next@npm:13.0.6"
+"@next/eslint-plugin-next@npm:13.0.7":
+  version: 13.0.7
+  resolution: "@next/eslint-plugin-next@npm:13.0.7"
   dependencies:
     glob: 7.1.7
-  checksum: 0f6964513af4fd6051974e6c1542d2660ac9cc0e89c4774e793ede0e3e3f8e158826bf9ae06aa29741c4c4a22bed7ddf3db265ee21a8593ba7d53f39014764f0
+  checksum: 16b911e322d8a1f65cb7d4e734d77bab94eb1d746325f3605aec8916de6c30678b83cc3f496a6fbe1ded74347a91fbca83aab458ca60e7e0b5fb56b3a5cdfb08
   languageName: node
   linkType: hard
 
@@ -9591,10 +9591,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:16.18.9, @types/node@npm:^14.0.10 || ^16.0.0, @types/node@npm:^14.14.20 || ^16.0.0":
-  version: 16.18.9
-  resolution: "@types/node@npm:16.18.9"
-  checksum: 7dc9cb417869592b2ad64233d06cd3eda63b8ae31d72a0811e4f5ac5a2ef01feb4d4c91159481e506c7a56951981359e75069c7fae6f0de90fc0c3c8b69a36cd
+"@types/node@npm:16.18.10, @types/node@npm:^14.0.10 || ^16.0.0, @types/node@npm:^14.14.20 || ^16.0.0":
+  version: 16.18.10
+  resolution: "@types/node@npm:16.18.10"
+  checksum: 1b138616923e9a1c6d3806edf75714b605d2ec689357cdc675bc73816c508ff11b3c68df054b02a496c76654d8ed53add2e90816af39423431c73aa6eec06f29
   languageName: node
   linkType: hard
 
@@ -10842,16 +10842,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"amazon-cognito-identity-js@npm:6.0.1":
-  version: 6.0.1
-  resolution: "amazon-cognito-identity-js@npm:6.0.1"
+"amazon-cognito-identity-js@npm:6.1.1":
+  version: 6.1.1
+  resolution: "amazon-cognito-identity-js@npm:6.1.1"
   dependencies:
     "@aws-crypto/sha256-js": 1.2.2
     buffer: 4.9.2
     fast-base64-decode: ^1.0.0
     isomorphic-unfetch: ^3.0.0
     js-cookie: ^2.2.1
-  checksum: 08c2d30901041e4220422a272873a3c254e10ac86d48eee0988eac00081ad897adb0e1d788ce72b94d3ffe76ff196a2749b763baaf7f1d3389f81701707330ab
+  checksum: 0d2814bfed287593bea10f5cb719faed4eb88f93c65f8e7d59a44d930d5489f25c0126ce5e68f20c1ce4f72b3db5cb506d000fdb86753d367469b80bb92f912d
   languageName: node
   linkType: hard
 
@@ -16340,11 +16340,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-config-next@npm:13.0.6":
-  version: 13.0.6
-  resolution: "eslint-config-next@npm:13.0.6"
+"eslint-config-next@npm:13.0.7":
+  version: 13.0.7
+  resolution: "eslint-config-next@npm:13.0.7"
   dependencies:
-    "@next/eslint-plugin-next": 13.0.6
+    "@next/eslint-plugin-next": 13.0.7
     "@rushstack/eslint-patch": ^1.1.3
     "@typescript-eslint/parser": ^5.42.0
     eslint-import-resolver-node: ^0.3.6
@@ -16359,7 +16359,7 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 3d12c5f0cc3a8aeb9d56ca151de3a8a4157cee9a7223ee4ca96f331f8b72974f1c7a9eed441d6df22f5b2c8488a7d5f00435127960a747b5509aa95bbbe5e4fa
+  checksum: 127143c08d4ad4c842f31c380a7f8f6ee6f5cda0bff71b64884127b497dfc0cd1f5b8690391347f9722432f4754f7e213ce7bbb4c7d48fe2beb2f9a9398dc526
   languageName: node
   linkType: hard
 
@@ -16470,9 +16470,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-jest@npm:27.1.6":
-  version: 27.1.6
-  resolution: "eslint-plugin-jest@npm:27.1.6"
+"eslint-plugin-jest@npm:27.1.7":
+  version: 27.1.7
+  resolution: "eslint-plugin-jest@npm:27.1.7"
   dependencies:
     "@typescript-eslint/utils": ^5.10.0
   peerDependencies:
@@ -16483,7 +16483,7 @@ __metadata:
       optional: true
     jest:
       optional: true
-  checksum: 5b1640b5d575f0d5e27da8ef8cb3110a29f94ebd50ae51edc5ea34c1054f5dcf305416865b2919ac424bc02c4569848bbe7fd2c86e7e1aff23e77f1ff9ef7dfd
+  checksum: 1173e60450d8fa7a913d654e80e26176cc64c35f287d680d6fe4187a53974fd8c6883749924c8ea2a9328e295cba4d1be0b3047492653270e9341da1a3fec580
   languageName: node
   linkType: hard
 
@@ -16636,12 +16636,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:8.29.0":
-  version: 8.29.0
-  resolution: "eslint@npm:8.29.0"
+"eslint@npm:8.30.0":
+  version: 8.30.0
+  resolution: "eslint@npm:8.30.0"
   dependencies:
-    "@eslint/eslintrc": ^1.3.3
-    "@humanwhocodes/config-array": ^0.11.6
+    "@eslint/eslintrc": ^1.4.0
+    "@humanwhocodes/config-array": ^0.11.8
     "@humanwhocodes/module-importer": ^1.0.1
     "@nodelib/fs.walk": ^1.2.8
     ajv: ^6.10.0
@@ -16660,7 +16660,7 @@ __metadata:
     file-entry-cache: ^6.0.1
     find-up: ^5.0.0
     glob-parent: ^6.0.2
-    globals: ^13.15.0
+    globals: ^13.19.0
     grapheme-splitter: ^1.0.4
     ignore: ^5.2.0
     import-fresh: ^3.0.0
@@ -16681,7 +16681,7 @@ __metadata:
     text-table: ^0.2.0
   bin:
     eslint: bin/eslint.js
-  checksum: e05204b05907b82d910983995cb946e0ba62ca514eb2b6791c43f623333b143564a2eee0139909d31c10935c21877d815b1f76dd674a59cb91c471064325c4ab
+  checksum: b7525bb465b342665c3b8bab7e114d514ef1bc4e79f211c919863f9c71767e7412ec82383a22614a92d159783f91101018817000f7c61ce69a5e7015280cafaf
   languageName: node
   linkType: hard
 
@@ -18513,12 +18513,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"globals@npm:^13.15.0":
-  version: 13.18.0
-  resolution: "globals@npm:13.18.0"
+"globals@npm:^13.19.0":
+  version: 13.19.0
+  resolution: "globals@npm:13.19.0"
   dependencies:
     type-fest: ^0.20.2
-  checksum: 9fdaa74cfd5d4ac91319662f512c29b11d1d2deb9c8a20d3998097671deba83d195f20730b2345887de3ddab958a6fa68952feed9ae836ee4594a82ace62fdb4
+  checksum: a000dbd00bcf28f0941d8a29c3522b1c3b8e4bfe4e60e262c477a550c3cbbe8dbe2925a6905f037acd40f9a93c039242e1f7079c76b0fd184bc41dcc3b5c8e2e
   languageName: node
   linkType: hard
 
@@ -30632,16 +30632,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass@npm:1.56.2":
-  version: 1.56.2
-  resolution: "sass@npm:1.56.2"
+"sass@npm:1.57.0":
+  version: 1.57.0
+  resolution: "sass@npm:1.57.0"
   dependencies:
     chokidar: ">=3.0.0 <4.0.0"
     immutable: ^4.0.0
     source-map-js: ">=0.6.2 <2.0.0"
   bin:
     sass: sass.js
-  checksum: 7b1f524d04bc42df3bac6dc5201ff7475635b7df9a1390430ed5bd58b6a73ea1ae58b83ccea8da293cb77b85b4c848faf5f2779ca4b91b9303948c251d0ddca4
+  checksum: fb6358b9541dc7a5bc23dbbae85223e99fbadc1f4ae911e7c32c6e22fd7b617e20a0e8cd1213f23c97c621b067bfb0b9ca45e65d6ce4ca5fea5949f41bd428ed
   languageName: node
   linkType: hard
 

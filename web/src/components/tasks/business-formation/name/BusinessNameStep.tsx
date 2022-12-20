@@ -7,10 +7,10 @@ import { useBusinessNameSearch } from "@/lib/data-hooks/useBusinessNameSearch";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { SearchBusinessNameError } from "@/lib/types/types";
-import { templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import { templateEval } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { FormControl, TextField } from "@mui/material";
-import { FocusEvent, FormEvent, ReactElement, useContext, useEffect } from "react";
+import { FocusEvent, FormEvent, ReactElement, useContext, useEffect, useRef } from "react";
 
 const SearchBusinessNameErrorLookup: Record<SearchBusinessNameError, string> = {
   BAD_INPUT: Config.searchBusinessNameTask.errorTextBadInput,
@@ -33,13 +33,22 @@ export const BusinessNameStep = (): ReactElement => {
     searchBusinessName,
   } = useBusinessNameSearch({ isBusinessFormation: true, isDba: false });
   const { doesFieldHaveError } = useFormationErrors();
+  const mountEffectOccurred = useRef<boolean>(false);
 
-  useMountEffectWhenDefined(() => {
-    if (!userData) {
-      return;
-    }
-    updateCurrentName(state.formationFormData.businessName || userData.profileData.businessName);
-  }, userData);
+  useEffect(() => {
+    if (!userData || !state.hasSetStateFirstTime || mountEffectOccurred.current) return;
+    const nameToSet = state.formationFormData.businessName || userData.profileData.businessName;
+    updateCurrentName(nameToSet);
+    setFormationFormData((prev) => ({ ...prev, businessName: nameToSet }));
+    mountEffectOccurred.current = true;
+  }, [
+    userData,
+    state.hasSetStateFirstTime,
+    mountEffectOccurred,
+    state.formationFormData,
+    updateCurrentName,
+    setFormationFormData,
+  ]);
 
   useEffect(() => {
     setBusinessNameAvailability(nameAvailability);
@@ -92,7 +101,7 @@ export const BusinessNameStep = (): ReactElement => {
                 onBlur={(event: FocusEvent<HTMLInputElement>) => {
                   setNameInFormationData();
                   setFieldInteracted(FIELD_NAME);
-                  onBlurNameField(event);
+                  onBlurNameField(event.target.value);
                 }}
               />
             </div>

@@ -93,9 +93,7 @@ export const EinInput = (props: Props): ReactElement => {
             loading={isLoading}
             typeSubmit
           >
-            <span className="padding-x-3" style={{ whiteSpace: "nowrap" }}>
-              {saveButtonText}
-            </span>
+            <span className="padding-x-3 no-wrap">{saveButtonText}</span>
           </Button>
         </FormControl>
       </div>

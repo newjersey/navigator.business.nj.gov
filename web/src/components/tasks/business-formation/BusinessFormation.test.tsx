@@ -18,7 +18,7 @@ import {
   useSetupInitialMocks,
 } from "@/test/helpers/helpers-formation";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
-import { currentUserData, userDataWasNotUpdated } from "@/test/mock/withStatefulUserData";
+import { currentUserData } from "@/test/mock/withStatefulUserData";
 import {
   defaultDateFormat,
   FormationData,
@@ -148,7 +148,7 @@ describe("<BusinessFormation />", () => {
       });
 
       expect(screen.getByTestId("review-step")).toBeInTheDocument();
-      expect(userDataWasNotUpdated()).toEqual(true);
+      expect(currentUserData().formationData.completedFilingPayment).toEqual(false);
       expect(mockPush).toHaveBeenCalledWith({ pathname: `/tasks/${task.urlSlug}` }, undefined, {
         shallow: true,
       });

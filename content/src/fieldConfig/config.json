@@ -609,6 +609,10 @@
     "defaultHeaderText": "Hello, ${name}",
     "newJerseyDateBodyText": "ET",
     "guestModeToProfileButtonText": "Guest Account",
-    "genericToProfileButtonText": "Complete Your Profile"
+    "genericToProfileButtonText": "Business Profile"
+  },
+  "autosaveDefaults": {
+    "savingText": "Saving",
+    "savedText": "Saved 1 minute ago"
   }
 }
