@@ -151,15 +151,15 @@ describe("<TaxTask />", () => {
 
     it("navigates back to empty input on remove button click", () => {
       renderPage();
-      fireEvent.click(screen.getByText(Config.tax.removeText));
+      fireEvent.click(screen.getByText(Config.taskDefaults.removeText));
       expect(screen.getByText(Config.tax.saveButtonText)).toBeInTheDocument();
       expect((screen.getByPlaceholderText(Config.tax.placeholderText) as HTMLInputElement).value).toEqual("");
-      expect(screen.queryByText(Config.tax.removeText)).not.toBeInTheDocument();
+      expect(screen.queryByText(Config.taskDefaults.removeText)).not.toBeInTheDocument();
     });
 
     it("empties both tax id and encrypted tax id field on remove button click", () => {
       renderPage();
-      fireEvent.click(screen.getByText(Config.tax.removeText));
+      fireEvent.click(screen.getByText(Config.taskDefaults.removeText));
       expect(currentUserData().profileData.taxId).toEqual(undefined);
       expect(currentUserData().profileData.encryptedTaxId).toEqual(undefined);
     });

@@ -542,7 +542,9 @@
     "previousTaskButtonText": "Previous Task",
     "formNameText": "Form",
     "defaultCallToActionText": "Start Application",
-    "unlockedByPlural": "Before starting this task, we recommend you take a look at:"
+    "unlockedByPlural": "Before starting this task, we recommend you take a look at:",
+    "editText": "Edit",
+    "removeText": "Remove"
   },
   "searchBusinessNameTask": {
     "placeholderText": "Type potential business name",

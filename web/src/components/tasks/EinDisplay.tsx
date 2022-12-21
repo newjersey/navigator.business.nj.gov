@@ -22,11 +22,11 @@ export const EinDisplay = (props: Props): ReactElement => {
           <Content>{templateEval(Config.ein.successText, { ein: displayAsEin(props.employerId) })}</Content>
         </div>
         <Button style="tertiary" underline onClick={props.onEdit}>
-          {Config.ein.editText}
+          {Config.taskDefaults.editText}
         </Button>
         <span className="margin-x-105">|</span>
         <Button style="tertiary" underline onClick={props.onRemove}>
-          {Config.ein.removeText}
+          {Config.taskDefaults.removeText}
         </Button>
       </div>
     </Alert>
