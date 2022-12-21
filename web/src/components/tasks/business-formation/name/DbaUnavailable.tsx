@@ -8,7 +8,7 @@ import { ReactElement } from "react";
 export const DbaUnavailable = (props: UnavailableProps): ReactElement => {
   const { Config } = useConfig();
   return (
-    <div data-testid="unavailable-text margin-bottom-2">
+    <div data-testid="unavailable-text" className="margin-bottom-2">
       <Alert variant="error">
         <Content>
           {templateEval(Config.nexusNameSearch.dbaUnavailableText, { name: props.submittedName })}

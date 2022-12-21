@@ -1,5 +1,5 @@
 {
-  "nexusFormationTask": {
+  "DbaFormationTask": {
     "warningText": "To view this task, you must first complete [Check if Your Business Name is Available in New Jersey](/tasks/search-business-name-nexus)",
     "descriptionShownWithWarning": "You must register your business name and `authorize|certificate-formation` your `business structure|business-structure-learn-more` with the State.",
     "dbaCtaModalHeader": "Before You Start",

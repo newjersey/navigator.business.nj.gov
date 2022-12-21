@@ -1,5 +1,10 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { generateFormationDisplayContent, generateUser, generateUserData } from "@/test/factories";
+import {
+  generateFormationDbaContent,
+  generateFormationDisplayContent,
+  generateUser,
+  generateUserData,
+} from "@/test/factories";
 import {
   FormationPageHelpers,
   generateFormationProfileData,
@@ -46,7 +51,10 @@ jest.mock("@/lib/api-client/apiClient", () => ({
 }));
 
 describe("Formation - ContactsStep", () => {
-  const displayContent = generateFormationDisplayContent({});
+  const displayContent = {
+    formationDisplayContent: generateFormationDisplayContent({}),
+    formationDbaContent: generateFormationDbaContent({}),
+  };
 
   beforeEach(() => {
     jest.resetAllMocks();
@@ -151,7 +159,9 @@ describe("Formation - ContactsStep", () => {
       expect(screen.getByTestId("addresses-incorporators")).toBeInTheDocument();
 
       expect(
-        screen.queryByText(displayContent[legalStructureId].members.placeholder as string)
+        screen.queryByText(
+          displayContent.formationDisplayContent[legalStructureId].members.placeholder as string
+        )
       ).not.toBeInTheDocument();
       expect(screen.getByText("Donald Whatever")).toBeInTheDocument();
       expect(screen.getByText("160 Something Ave NW", { exact: false })).toBeInTheDocument();
@@ -229,7 +239,9 @@ describe("Formation - ContactsStep", () => {
 
       expect(screen.getByTestId("addresses-members")).toBeInTheDocument();
       expect(
-        screen.queryByText(displayContent[legalStructureId].members.placeholder as string)
+        screen.queryByText(
+          displayContent.formationDisplayContent[legalStructureId].members.placeholder as string
+        )
       ).not.toBeInTheDocument();
       expect(screen.getByText(members[0].name)).toBeInTheDocument();
       expect(screen.getByText(members[0].addressLine1, { exact: false })).toBeInTheDocument();
@@ -240,7 +252,9 @@ describe("Formation - ContactsStep", () => {
 
       expect(screen.getByTestId("addresses-incorporators")).toBeInTheDocument();
       expect(
-        screen.queryByText(displayContent[legalStructureId].members.placeholder as string)
+        screen.queryByText(
+          displayContent.formationDisplayContent[legalStructureId].members.placeholder as string
+        )
       ).not.toBeInTheDocument();
       expect(screen.getByText(incorporators[0].name)).toBeInTheDocument();
       expect(screen.getByText(incorporators[0].addressLine1, { exact: false })).toBeInTheDocument();
@@ -307,7 +321,9 @@ describe("Formation - ContactsStep", () => {
       it("adds incorporator", async () => {
         const page = await getPageHelper({ legalStructureId }, { incorporators: [] });
         expect(
-          screen.getByText(displayContent[legalStructureId].signatureHeader.placeholder as string)
+          screen.getByText(
+            displayContent.formationDisplayContent[legalStructureId].signatureHeader.placeholder as string
+          )
         ).toBeInTheDocument();
         page.clickAddNewSigner();
         const signer = generateFormationIncorporator({
@@ -497,7 +513,9 @@ describe("Formation - ContactsStep", () => {
 
       expect(screen.getByTestId("addresses-members")).toBeInTheDocument();
       expect(
-        screen.queryByText(displayContent[legalStructureId].members.placeholder as string)
+        screen.queryByText(
+          displayContent.formationDisplayContent[legalStructureId].members.placeholder as string
+        )
       ).not.toBeInTheDocument();
       expect(screen.getByText(members[0].name)).toBeInTheDocument();
       expect(screen.getByText(members[0].addressLine1, { exact: false })).toBeInTheDocument();
@@ -844,7 +862,9 @@ describe("Formation - ContactsStep", () => {
       it("adds additional signer", async () => {
         const page = await getPageHelper({ legalStructureId }, { signers: [] });
         expect(
-          screen.getByText(displayContent[legalStructureId].signatureHeader.placeholder as string)
+          screen.getByText(
+            displayContent.formationDisplayContent[legalStructureId].signatureHeader.placeholder as string
+          )
         ).toBeInTheDocument();
         page.clickAddNewSigner();
         page.fillText("Signer 0", "Red Skull");

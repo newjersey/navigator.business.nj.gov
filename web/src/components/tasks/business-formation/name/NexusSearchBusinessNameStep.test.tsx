@@ -1,6 +1,7 @@
-import { NexusSearchBusinessNameTask } from "@/components/tasks/search-business-name/NexusSearchBusinessNameTask";
+import { NexusSearchBusinessNameStep } from "@/components/tasks/business-formation/name/NexusSearchBusinessNameStep";
 import { getMergedConfig } from "@/contexts/configContext";
-import { generateProfileData, generateTask, generateUserData } from "@/test/factories";
+import analytics from "@/lib/utils/analytics";
+import { generateFormationData, generateProfileData, generateUserData } from "@/test/factories";
 import { markdownToText } from "@/test/helpers/helpers-utilities";
 import {
   dbaInputField,
@@ -16,17 +17,40 @@ import {
   userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
+import { createEmptyFormationFormData } from "@businessnjgovnavigator/shared/index";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({ searchBusinessName: jest.fn() }));
+jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
 
 const Config = getMergedConfig();
 
-describe("<NexusSearchBusinessNameTask />", () => {
+function setupMockAnalytics(): typeof analytics {
+  return {
+    ...jest.requireActual("@/lib/utils/analytics").default,
+    event: {
+      ...jest.requireActual("@/lib/utils/analytics").default.event,
+      business_formation_search_existing_name_again: {
+        click: {
+          refresh_name_search_field: jest.fn(),
+        },
+      },
+      business_formation_dba_name_search_field: {
+        appears: {
+          dba_name_search_field_appears: jest.fn(),
+        },
+      },
+    },
+  };
+}
+const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
+
+describe("<NexusSearchBusinessNameStep />", () => {
   const initialUserData = generateUserData({
+    formationData: generateFormationData({ formationFormData: createEmptyFormationFormData() }),
     profileData: generateProfileData({
       businessName: "",
       nexusDbaName: undefined,
@@ -42,7 +66,7 @@ describe("<NexusSearchBusinessNameTask />", () => {
   const renderTask = (userData?: UserData) => {
     render(
       <WithStatefulUserData initialUserData={userData || initialUserData}>
-        <NexusSearchBusinessNameTask task={generateTask({})} />
+        <NexusSearchBusinessNameStep />
       </WithStatefulUserData>
     );
   };
@@ -53,6 +77,9 @@ describe("<NexusSearchBusinessNameTask />", () => {
     await searchAndGetValue({ status: "UNAVAILABLE" });
     expect(screen.queryByLabelText("Search business name")).not.toBeInTheDocument();
     fireEvent.click(screen.getByText(Config.nexusNameSearch.searchAgainButtonText));
+    expect(
+      mockAnalytics.event.business_formation_search_existing_name_again.click.refresh_name_search_field
+    ).toHaveBeenCalled();
     expect(screen.getByLabelText("Search business name")).toBeInTheDocument();
   });
 
@@ -67,6 +94,17 @@ describe("<NexusSearchBusinessNameTask />", () => {
 
     expect(currentUserData().profileData.nexusDbaName).toBeUndefined();
     expect(currentUserData().profileData.businessName).toEqual("My Cool Business");
+  });
+
+  it("sets businessName in formationFormData on submit", async () => {
+    renderTask();
+    fillText("some unavailable name");
+    await searchAndGetValue({ status: "UNAVAILABLE" });
+
+    fireEvent.click(screen.getByText(Config.nexusNameSearch.searchAgainButtonText));
+    fillText("My Cool Business");
+    await searchAndGetValue({ status: "AVAILABLE" });
+    expect(currentUserData().formationData.formationFormData.businessName).toEqual("My Cool Business");
   });
 
   it("sets DBA name in profile to empty when unavailable", async () => {
@@ -91,6 +129,9 @@ describe("<NexusSearchBusinessNameTask />", () => {
     expect(screen.getByText(markdownToText(Config.nexusNameSearch.dbaNameHeader))).toBeInTheDocument();
     expect(screen.getByPlaceholderText(Config.nexusNameSearch.dbaNameSearchPlaceholder)).toBeInTheDocument();
     expect(screen.getByText(Config.nexusNameSearch.dbaNameSearchSubmitButton)).toBeInTheDocument();
+    expect(
+      mockAnalytics.event.business_formation_dba_name_search_field.appears.dba_name_search_field_appears
+    ).toHaveBeenCalled();
   });
 
   it("shows DBA search immediately if it is not undefined in profile", async () => {

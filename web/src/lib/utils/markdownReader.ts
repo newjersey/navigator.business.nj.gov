@@ -11,7 +11,9 @@ import {
   FundingPublishStatus,
   FundingStatus,
   FundingType,
+  MarkdownResult,
   OpportunityAgency,
+  TaskWithoutLinks,
   TaxAgency,
   TaxFilingMethod,
 } from "@/lib/types/types";
@@ -149,22 +151,4 @@ type CertificationGrayMatter = {
   applicableOwnershipTypes: string[];
   isSbe: boolean;
   descriptionMd: string;
-};
-
-export type MarkdownResult = {
-  content: string;
-  grayMatter: unknown;
-};
-
-export type TaskWithoutLinks = {
-  id: string;
-  name: string;
-  urlSlug: string;
-  callToActionLink: string;
-  callToActionText: string;
-  postOnboardingQuestion: string;
-  contentMd: string;
-  required?: boolean;
-  issuingAgency?: string;
-  formName?: string;
 };

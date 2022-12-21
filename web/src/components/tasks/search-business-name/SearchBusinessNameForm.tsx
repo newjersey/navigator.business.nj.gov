@@ -26,7 +26,10 @@ interface Props {
   unavailable: (props: UnavailableProps) => ReactElement;
   available: (props: AvailableProps) => ReactElement;
   config: SearchBusinessNameFormConfig;
+  className?: string;
+  isBusinessFormation?: boolean;
   hideTextFieldWhenUnavailable?: boolean;
+  onChange?: (nameAvailability: NameAvailability | undefined) => void;
   onSubmit?: (
     submittedName: string,
     nameAvailability: NameAvailability,
@@ -47,10 +50,18 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
     searchBusinessName,
     updateNameOnProfile,
     resetSearch,
-  } = useBusinessNameSearch({ isBusinessFormation: false, isDba: props.isDba || false });
+  } = useBusinessNameSearch({
+    isBusinessFormation: !!props.isBusinessFormation,
+    isDba: props.isDba || false,
+  });
 
   const didInitialSearch = useRef<boolean>(false);
   const { userData } = useUserData();
+
+  useEffect(() => {
+    props.onChange && props.onChange(nameAvailability);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [nameAvailability]);
 
   const Unavailable = props.unavailable;
   const Available = props.available;
@@ -142,7 +153,7 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
             onSubmit={(event) => {
               return doSearch(event, { isInitialSubmit: false });
             }}
-            className={`usa-prose grid-container padding-0`}
+            className={`usa-prose grid-container padding-0 ${props.className}`}
           >
             <div className="grid-row grid-gap-1">
               <div className="tablet:grid-col-8">

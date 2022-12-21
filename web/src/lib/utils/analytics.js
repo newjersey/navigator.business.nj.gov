@@ -459,6 +459,64 @@ export default {
         },
       },
     },
+    business_formation_search_existing_name_again: {
+      click: {
+        refresh_name_search_field: () => {
+          sendEvent("business_formation_search_existing_name_again", "click", "refresh_name_search_field");
+        },
+      },
+    },
+    business_formation_dba_name_search_field: {
+      appears: {
+        dba_name_search_field_appears: () => {
+          sendEvent("business_formation_dba_name_search_field", "appears", "dba_name_search_field_appears");
+        },
+      },
+    },
+    business_formation_dba_resolution_tab: {
+      click: {
+        arrive_on_business_formation_dba_resolution_step: () => {
+          sendEvent(
+            "business_formation_dba_resolution_tab",
+            "click",
+            "arrive_on_business_formation_dba_resolution_step"
+          );
+        },
+      },
+    },
+    business_formation_dba_authorization_tab: {
+      click: {
+        arrive_on_business_formation_dba_authorization_step: () => {
+          sendEvent(
+            "business_formation_dba_authorization_tab",
+            "click",
+            "arrive_on_business_formation_dba_authorization_step"
+          );
+        },
+      },
+    },
+    business_formation_dba_resolution_step_continue_button: {
+      click: {
+        arrive_on_business_formation_dba_resolution_step: () => {
+          sendEvent(
+            "business_formation_dba_resolution_step_continue_button",
+            "click",
+            "arrive_on_business_formation_dba_resolution_step"
+          );
+        },
+      },
+    },
+    business_formation_dba_authorization_step_continue_button: {
+      click: {
+        arrive_on_business_formation_dba_authorization_step: () => {
+          sendEvent(
+            "business_formation_dba_authorization_step_continue_button",
+            "click",
+            "arrive_on_business_formation_dba_authorization_step"
+          );
+        },
+      },
+    },
     business_formation_business_name_edit: {
       click: {
         go_to_name_search_step: () => {

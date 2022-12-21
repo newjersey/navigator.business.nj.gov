@@ -1,5 +1,7 @@
 import {
+  createEmptyDbaDisplayContent,
   createEmptyFormationDisplayContent,
+  FormationDbaContent,
   FormationDisplayContent,
   NameAvailability,
 } from "@/lib/types/types";
@@ -18,6 +20,7 @@ interface BusinessFormationState {
   displayContent: FormationDisplayContent;
   showResponseAlert: boolean;
   hasBeenSubmitted: boolean;
+  dbaContent: FormationDbaContent;
   interactedFields: FormationFields[];
   businessNameAvailability: NameAvailability | undefined;
   hasBusinessNameBeenSearched: boolean;
@@ -27,7 +30,7 @@ interface BusinessFormationState {
 interface BusinessFormationContextType {
   state: BusinessFormationState;
   setFormationFormData: React.Dispatch<React.SetStateAction<FormationFormData>>;
-  setStepIndex: (value: number) => void;
+  setStepIndex: React.Dispatch<React.SetStateAction<number>>;
   setShowResponseAlert: React.Dispatch<React.SetStateAction<boolean>>;
   setFieldInteracted: (field: FormationFields, config?: { setToUninteracted: boolean }) => void;
   setHasBeenSubmitted: (hasBeenSubmitted: boolean) => void;
@@ -40,6 +43,7 @@ export const BusinessFormationContext = createContext<BusinessFormationContextTy
     legalStructureId: "limited-liability-company",
     formationFormData: createEmptyFormationFormData(),
     displayContent: createEmptyFormationDisplayContent()["limited-liability-company"],
+    dbaContent: createEmptyDbaDisplayContent(),
     showResponseAlert: false,
     hasBeenSubmitted: false,
     interactedFields: [],

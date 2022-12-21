@@ -11,7 +11,6 @@ import {
 } from "@/test/factories";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { useMockRoadmap, useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
-import { useMockUserData } from "@/test/mock/mockUseUserData";
 import {
   currentUserData,
   setupStatefulUserDataContext,
@@ -21,7 +20,6 @@ import { formationTaskId, UserData } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { useMediaQuery } from "@mui/material";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
-
 function mockMaterialUI(): typeof materialUi {
   return {
     ...jest.requireActual("@mui/material"),
@@ -164,12 +162,6 @@ describe("task page", () => {
 
     expect(screen.queryByText(`${Config.taskDefaults.issuingAgencyText}:`)).not.toBeInTheDocument();
     expect(screen.queryByText(`${Config.taskDefaults.formNameText}:`)).not.toBeInTheDocument();
-  });
-
-  it("loads Search Business Names task screen for search-available-names", () => {
-    renderPage(generateTask({ id: "search-business-name" }));
-    const searchInputField = screen.getByLabelText("Search business name") as HTMLInputElement;
-    expect(searchInputField).toBeInTheDocument();
   });
 
   it("loads License task screen for apply-for-shop-license", () => {
@@ -386,9 +378,8 @@ describe("task page", () => {
         ],
       });
 
-      useMockUserData(generateUserData({ taskProgress: { "do-this-first": "COMPLETED" } }));
       useMockRoadmapWithTask(task);
-      renderPage(task);
+      renderPage(task, generateUserData({ taskProgress: { "do-this-first": "COMPLETED" } }));
 
       expect(
         screen.queryByText(Config.taskDefaults.unlockedByPlural, { exact: false })
@@ -427,65 +418,6 @@ describe("task page", () => {
     );
 
     expect(screen.queryByTestId("nextAndPreviousButtons")).not.toBeInTheDocument();
-  });
-
-  it("renders form-business-entity from roadmap if user is STARTING", () => {
-    const formTask = generateTask({
-      filename: "form-business-entity",
-      urlSlug: "form-business-entity",
-      id: "form-business-entity",
-      name: "this is the form task",
-    });
-
-    const nexusTask = generateTask({
-      filename: "form-business-entity-foreign",
-      urlSlug: "form-business-entity",
-      id: "form-business-entity",
-      name: "this is the nexus task",
-    });
-
-    useMockUserData({
-      profileData: generateProfileData({
-        businessPersona: "STARTING",
-        legalStructureId: "limited-liability-company",
-      }),
-    });
-    useMockRoadmapTask(formTask);
-    renderPage(nexusTask);
-
-    expect(screen.getAllByText("this is the form task").length).toBeGreaterThan(0);
-    expect(screen.queryByText("this is the nexus task")).not.toBeInTheDocument();
-    expect(screen.getByText(Config.businessFormationDefaults.nameCheckFieldLabel)).toBeInTheDocument();
-  });
-
-  it("renders form-business-entity task as nexus from roadmap if user is FOREIGN", () => {
-    const formTask = generateTask({
-      filename: "form-business-entity",
-      urlSlug: "form-business-entity",
-      id: "form-business-entity",
-      name: "this is the form task",
-    });
-
-    const nexusTask = generateTask({
-      filename: "form-business-entity-foreign",
-      urlSlug: "form-business-entity",
-      id: "form-business-entity",
-      name: "this is the nexus task",
-    });
-
-    useMockUserData({
-      profileData: generateProfileData({
-        businessPersona: "FOREIGN",
-        businessName: undefined,
-        nexusDbaName: undefined,
-      }),
-    });
-    useMockRoadmapTask(nexusTask);
-    renderPage(formTask);
-
-    expect(screen.getAllByText("this is the nexus task").length).toBeGreaterThan(0);
-    expect(screen.queryByText("this is the form task")).not.toBeInTheDocument();
-    expect(screen.getByText(Config.nexusFormationTask.descriptionShownWithWarning)).toBeInTheDocument();
   });
 
   describe("deferred location question", () => {

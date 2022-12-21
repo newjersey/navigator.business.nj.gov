@@ -53,13 +53,21 @@ describe("loadDisplayContent", () => {
   });
 
   describe("loadTasksDisplayContent", () => {
-    it("returns task display content from markdown", () => {
+    it("returns formationDisplayContent from markdown", () => {
       const introParagraph = "### I am a header\n\nI am a description";
       mockedFs.readFileSync.mockReturnValue(introParagraph);
       expect(
         loadTasksDisplayContent().formationDisplayContent["limited-liability-partnership"].introParagraph
           .contentMd
       ).toEqual("### I am a header\n\nI am a description");
+    });
+
+    it("returns formationDbaContent from markdown", () => {
+      const introParagraph = "### I am a header\n\nI am a description";
+      mockedFs.readFileSync.mockReturnValue(introParagraph);
+      expect(loadTasksDisplayContent().formationDbaContent.Authorize.contentMd).toEqual(
+        "### I am a header\n\nI am a description"
+      );
     });
   });
 

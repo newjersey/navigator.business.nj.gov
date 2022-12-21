@@ -13,9 +13,6 @@ import { CannabisPriorityStatusTask } from "@/components/tasks/cannabis/Cannabis
 import { EinTask } from "@/components/tasks/EinTask";
 import { LicenseTask } from "@/components/tasks/LicenseTask";
 import { NaicsCodeTask } from "@/components/tasks/NaicsCodeTask";
-import { NexusFormationTask } from "@/components/tasks/NexusFormationTask";
-import { NexusSearchBusinessNameTask } from "@/components/tasks/search-business-name/NexusSearchBusinessNameTask";
-import { SearchBusinessNameTask } from "@/components/tasks/search-business-name/SearchBusinessNameTask";
 import { TaxTask } from "@/components/tasks/TaxTask";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import { TaskSidebarPageLayout } from "@/components/TaskSidebarPageLayout";
@@ -121,17 +118,7 @@ const TaskPage = (props: Props): ReactElement => {
     if (!taskInRoadmap) {
       return <></>;
     }
-
-    if (userData?.profileData.businessPersona === "FOREIGN") {
-      return <NexusFormationTask task={taskInRoadmap} />;
-    } else {
-      return (
-        <BusinessFormation
-          task={taskInRoadmap}
-          displayContent={props.displayContent.formationDisplayContent}
-        />
-      );
-    }
+    return <BusinessFormation task={taskInRoadmap} displayContent={props.displayContent} />;
   };
 
   return (
@@ -141,8 +128,6 @@ const TaskPage = (props: Props): ReactElement => {
         <NavBar task={props.task} showSidebar={true} />
         <TaskSidebarPageLayout task={props.task} belowBoxComponent={renderNextAndPreviousButtons()}>
           {rswitch(props.task.id, {
-            "search-business-name": <SearchBusinessNameTask task={props.task} />,
-            "search-business-name-nexus": <NexusSearchBusinessNameTask task={props.task} />,
             "apply-for-shop-license": <LicenseTask task={props.task} />,
             "register-consumer-affairs": <LicenseTask task={props.task} />,
             "pharmacy-license": <LicenseTask task={props.task} />,
