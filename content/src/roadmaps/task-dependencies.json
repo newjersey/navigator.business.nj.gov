@@ -3,22 +3,13 @@
     {
       "name": "register-for-ein",
       "dependencies": [
-        "search-business-name",
         "form-business-entity-llc"
       ]
     },
     {
       "name": "form-business-entity",
       "dependencies": [
-        "search-business-name",
         "register-for-ein"
-      ]
-    },
-    {
-      "name": "form-business-entity-foreign",
-      "dependencies": [
-        "search-business-name-nexus",
-        "dba-resolution-foreign"
       ]
     },
     {
@@ -146,7 +137,6 @@
     {
       "name": "form-business-entity-foreign",
       "dependencies": [
-        "dba-resolution-foreign",
         "certificate-good-standing-foreign"
       ]
     },

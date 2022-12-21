@@ -1,5 +1,9 @@
 import { defaultDisplayDateFormat } from "@/lib/types/types";
-import { generateFormationDisplayContent, generateUserData } from "@/test/factories";
+import {
+  generateFormationDbaContent,
+  generateFormationDisplayContent,
+  generateUserData,
+} from "@/test/factories";
 import {
   FormationPageHelpers,
   generateFormationProfileData,
@@ -64,7 +68,10 @@ describe("Formation - BusinessStep", () => {
     };
     const page = preparePage(
       generateUserData({ profileData, formationData }),
-      generateFormationDisplayContent({}),
+      {
+        formationDisplayContent: generateFormationDisplayContent({}),
+        formationDbaContent: generateFormationDbaContent({}),
+      },
       municipalities
     );
     await page.stepperClickToBusinessStep();

@@ -2,11 +2,6 @@
   "roadmapSteps": [
     {
       "step": 2,
-      "weight": 19,
-      "task": "search-business-name-nexus"
-    },
-    {
-      "step": 2,
       "weight": 21,
       "task": "form-business-entity-foreign"
     }

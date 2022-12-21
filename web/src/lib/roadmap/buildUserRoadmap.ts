@@ -1,5 +1,4 @@
 import { fetchMunicipalityById } from "@/lib/async-content-fetchers/fetchMunicipalities";
-import { allowFormation } from "@/lib/domain-logic/allowFormation";
 import { getIsApplicableToFunctionByFieldName } from "@/lib/domain-logic/essentialQuestions";
 import { getNaicsDisplayMd } from "@/lib/domain-logic/getNaicsDisplayMd";
 import { buildRoadmap } from "@/lib/roadmap/roadmapBuilder";
@@ -60,9 +59,6 @@ const getForeignAddOns = (profileData: ProfileData): string[] => {
 
   if (profileData.foreignBusinessType === "NEXUS") {
     addOns.push("foreign-nexus");
-    if (profileData.nexusDbaName !== undefined) {
-      addOns.push("foreign-nexus-dba-name");
-    }
   }
 
   return addOns;
@@ -156,13 +152,17 @@ const getLegalStructureAddOns = (profileData: ProfileData): string[] => {
     return [];
   }
   const addOns = [];
-  if (allowFormation(profileData.legalStructureId, profileData.businessPersona)) {
-    addOns.push("formation");
-  } else if (profileData.businessPersona == "FOREIGN") {
+  if (profileData.businessPersona == "FOREIGN") {
     if (LookupLegalStructureById(profileData.legalStructureId).requiresPublicFiling) {
       addOns.push("public-record-filing-foreign");
     } else if (LookupLegalStructureById(profileData.legalStructureId).hasTradeName) {
       addOns.push("trade-name");
+    }
+    if (
+      profileData.legalStructureId === "s-corporation" ||
+      profileData.legalStructureId === "c-corporation"
+    ) {
+      addOns.push("scorp-ccorp-foreign");
     }
   } else {
     if (LookupLegalStructureById(profileData.legalStructureId).requiresPublicFiling) {
@@ -170,12 +170,6 @@ const getLegalStructureAddOns = (profileData: ProfileData): string[] => {
     } else if (LookupLegalStructureById(profileData.legalStructureId).hasTradeName) {
       addOns.push("trade-name");
     }
-  }
-  if (
-    profileData.businessPersona == "FOREIGN" &&
-    (profileData.legalStructureId === "s-corporation" || profileData.legalStructureId === "c-corporation")
-  ) {
-    addOns.push("scorp-ccorp-foreign");
   }
   return addOns;
 };

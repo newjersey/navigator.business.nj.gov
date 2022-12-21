@@ -22,6 +22,7 @@ jest.mock("@/lib/api-client/apiClient", () => ({
 const mockApi = api as jest.Mocked<typeof api>;
 
 const Config = getMergedConfig();
+const onChange = jest.fn();
 
 describe("<SearchBusinessNameForm />", () => {
   beforeEach(() => {
@@ -44,6 +45,7 @@ describe("<SearchBusinessNameForm />", () => {
       <SearchBusinessNameForm
         available={FakeAvailable}
         unavailable={FakeUnavailable}
+        onChange={onChange}
         config={{
           searchButtonText: Config.searchBusinessNameTask.searchButtonText,
           searchButtonTestId: "search-availability",
@@ -80,6 +82,24 @@ describe("<SearchBusinessNameForm />", () => {
     expect(availableTextExists()).toBe(true);
     expect(unavailableTextExists()).toBe(false);
     expect(designatorTextExists()).toBe(false);
+    expect(onChange).toHaveBeenLastCalledWith(
+      expect.objectContaining({
+        status: "AVAILABLE",
+      })
+    );
+  });
+
+  it("updates onChange with undefined when new values are typed into the field", async () => {
+    renderForm();
+    fillText("Pizza Joint");
+    await searchAndGetValue({ status: "AVAILABLE" });
+    expect(onChange).toHaveBeenLastCalledWith(
+      expect.objectContaining({
+        status: "AVAILABLE",
+      })
+    );
+    fillText("Pizza Place");
+    expect(onChange).toHaveBeenLastCalledWith(undefined);
   });
 
   it("shows unavailable component if name is not available", async () => {

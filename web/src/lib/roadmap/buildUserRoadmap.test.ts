@@ -10,11 +10,7 @@ import {
 } from "@/test/factories";
 import { getLastCalledWith } from "@/test/helpers/helpers-utilities";
 import { generateMunicipality, Industries } from "@businessnjgovnavigator/shared/";
-import {
-  BusinessPersona,
-  createEmptyProfileData,
-  ProfileData,
-} from "@businessnjgovnavigator/shared/profileData";
+import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
 
 jest.mock("@/lib/roadmap/roadmapBuilder", () => ({ buildRoadmap: jest.fn() }));
 jest.mock("@/lib/async-content-fetchers/fetchMunicipalities", () => ({
@@ -80,7 +76,15 @@ describe("buildUserRoadmap", () => {
       expect(lastCalledWith.industryId).toEqual("cannabis");
     });
 
-    it("adds trade-name add-ons for nexus legal structures", async () => {
+    it("adds public-record-filing-foreign add-ons for nexus public filing legal structures", async () => {
+      const baseProfileData = createEmptyNexusProfile({ industryId: "cannabis" });
+
+      await buildUserRoadmap({ ...baseProfileData, legalStructureId: "limited-liability-company" });
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("public-record-filing-foreign");
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("trade-name");
+    });
+
+    it("adds trade-name add-ons for nexus trade name legal structures", async () => {
       const baseProfileData = createEmptyNexusProfile({ industryId: "cannabis" });
 
       await buildUserRoadmap({ ...baseProfileData, legalStructureId: "general-partnership" });
@@ -117,20 +121,6 @@ describe("buildUserRoadmap", () => {
 
       await buildUserRoadmap(createEmptyNexusProfile({ legalStructureId: "c-corporation" }));
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("scorp-ccorp-foreign");
-    });
-
-    it("adds DBA add-on if user profile DBA name is not undefined", async () => {
-      const profileData = createEmptyNexusProfile({ nexusDbaName: "" });
-      await buildUserRoadmap(profileData);
-      const lastCalledWith = getLastCalledWith(mockRoadmapBuilder)[0];
-      expect(lastCalledWith.addOns).toContain("foreign-nexus-dba-name");
-    });
-
-    it("does not add DBA add-on if user profile DBA name is undefined", async () => {
-      const profileData = createEmptyNexusProfile({ nexusDbaName: undefined });
-      await buildUserRoadmap(profileData);
-      const lastCalledWith = getLastCalledWith(mockRoadmapBuilder)[0];
-      expect(lastCalledWith.addOns).not.toContain("foreign-nexus-dba-name");
     });
   });
 
@@ -211,130 +201,22 @@ describe("buildUserRoadmap", () => {
   });
 
   describe("legal structure", () => {
-    describe("formation tasks", () => {
-      (["STARTING", "FOREIGN"] as BusinessPersona[]).map((persona) => {
-        const publicRecordTaskId = `public-record-filing${persona == "FOREIGN" ? "-foreign" : ""}`;
-
-        it(`adds formation for llc legal type as ${persona}`, async () => {
-          await buildUserRoadmap(
-            generateProfileData({ legalStructureId: "limited-liability-company", businessPersona: persona })
-          );
-          expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain(publicRecordTaskId);
-          expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("trade-name");
-          expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("formation");
-        });
-
-        it(`adds formation for llp legal type as ${persona}`, async () => {
-          await buildUserRoadmap(
-            generateProfileData({
-              legalStructureId: "limited-liability-partnership",
-              businessPersona: persona,
-            })
-          );
-          expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain(publicRecordTaskId);
-          expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("trade-name");
-          expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("formation");
-        });
-
-        it(`adds formation for lp legal type as ${persona}`, async () => {
-          await buildUserRoadmap(
-            generateProfileData({ legalStructureId: "limited-partnership", businessPersona: persona })
-          );
-          expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain(publicRecordTaskId);
-          expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("trade-name");
-          expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("formation");
-        });
-
-        it(`adds formation for ccorp legal type as ${persona}`, async () => {
-          await buildUserRoadmap(
-            generateProfileData({ legalStructureId: "c-corporation", businessPersona: persona })
-          );
-          expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain(publicRecordTaskId);
-          expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("trade-name");
-          expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("formation");
-        });
-
-        it(`adds formation for scorp legal type as ${persona}`, async () => {
-          await buildUserRoadmap(
-            generateProfileData({ legalStructureId: "s-corporation", businessPersona: persona })
-          );
-          expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain(publicRecordTaskId);
-          expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("trade-name");
-          expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("formation");
-        });
-      });
-
-      describe("feature flaged structures", () => {
-        it("does not add formation for foreign llc legal type when feature flag is disabled", async () => {
-          const originalValue = process.env.FEATURE_BUSINESS_FLC;
-          process.env.FEATURE_BUSINESS_FLC = "false";
-          await buildUserRoadmap(
-            generateStartingProfile({
-              legalStructureId: "limited-liability-company",
-              businessPersona: "FOREIGN",
-            })
-          );
-          expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("public-record-filing-foreign");
-          expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("trade-name");
-          expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("formation");
-          process.env.FEATURE_BUSINESS_FLC = originalValue;
-        });
-
-        it("does not add formation for foreign llp legal type when feature flag is disabled", async () => {
-          const originalValue = process.env.FEATURE_BUSINESS_FLLP;
-          process.env.FEATURE_BUSINESS_FLLP = "false";
-          await buildUserRoadmap(
-            generateStartingProfile({
-              legalStructureId: "limited-liability-partnership",
-              businessPersona: "FOREIGN",
-            })
-          );
-          expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("public-record-filing-foreign");
-          expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("trade-name");
-          expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("formation");
-          process.env.FEATURE_BUSINESS_FLLP = originalValue;
-        });
-
-        it("does not add formation for foreign lp legal type when feature flag is disabled", async () => {
-          const originalValue = process.env.FEATURE_BUSINESS_FLP;
-
-          process.env.FEATURE_BUSINESS_FLP = "false";
-          await buildUserRoadmap(
-            generateStartingProfile({ legalStructureId: "limited-partnership", businessPersona: "FOREIGN" })
-          );
-          expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("public-record-filing-foreign");
-          expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("trade-name");
-          expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("formation");
-          process.env.FEATURE_BUSINESS_FLP = originalValue;
-        });
-
-        it("does not add formation for foreign ccorp legal type when feature flag is disabled", async () => {
-          const originalValue = process.env.FEATURE_BUSINESS_FCORP;
-
-          process.env.FEATURE_BUSINESS_FCORP = "false";
-          await buildUserRoadmap(
-            generateStartingProfile({ legalStructureId: "s-corporation", businessPersona: "FOREIGN" })
-          );
-          expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("public-record-filing-foreign");
-          expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("trade-name");
-          expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("formation");
-          process.env.FEATURE_BUSINESS_FCORP = originalValue;
-        });
-      });
+    it(`adds public-record-filing for public-filing legal structure`, async () => {
+      await buildUserRoadmap(generateProfileData({ legalStructureId: "limited-liability-company" }));
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("public-record-filing");
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("trade-name");
     });
 
     it("adds trade-name for general partnership legal structure", async () => {
       await buildUserRoadmap(generateStartingProfile({ legalStructureId: "general-partnership" }));
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("trade-name");
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("public-record-filing");
-      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("formation");
     });
 
     it("adds trade-name for sole proprietorship legal structure", async () => {
       await buildUserRoadmap(generateStartingProfile({ legalStructureId: "sole-proprietorship" }));
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("trade-name");
       expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("public-record-filing");
-      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("formation");
     });
 
     it("adds tax registration tasks for S-Corp legal structures", async () => {

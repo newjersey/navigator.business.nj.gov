@@ -1,9 +1,11 @@
 import {
+  FormationDbaContent,
   FormationDisplayContent,
   FormationDisplayContentMap,
   RoadmapDisplayContent,
   SidebarCardContent,
   TasksDisplayContent,
+  TaskWithoutLinks,
 } from "@/lib/types/types";
 import { getMarkdown } from "@/lib/utils/markdownReader";
 import {
@@ -130,21 +132,62 @@ const getFormationFields = (
   }, {} as FormationDisplayContent);
 };
 
-export const loadTasksDisplayContent = (): TasksDisplayContent => {
-  const defaultFormationDisplayContent = getFormationFields(defaultFormationLegalType);
+const getDbaTasks = (): FormationDbaContent => {
+  const getPath = (filename: string): string => {
+    return path.join(displayContentDir, "business-formation", "nexus", filename);
+  };
 
-  const formationDisplayContent = allFormationLegalTypes
+  const loadFile = (filename: string): string => {
+    return fs.readFileSync(getPath(filename), "utf8");
+  };
+
+  const getTask = (filename: string): TaskWithoutLinks => {
+    const markdown = getMarkdown(loadFile(filename));
+    return {
+      contentMd: markdown.content,
+      ...(markdown.grayMatter as Record<string, string>),
+    } as TaskWithoutLinks;
+  };
+
+  return {
+    DbaResolution: getTask("dba-resolution-foreign.md"),
+    Authorize: getTask("authorize-business-entity.md"),
+    Formation: getTask("form-business-entity.md"),
+  };
+};
+
+export const getFormationDisplayContentDefaults = (
+  defaultDisplayContent: FormationDisplayContent,
+  defaultForeignDisplayContent: FormationDisplayContent
+): FormationDisplayContentMap =>
+  allFormationLegalTypes
     .filter((val) => {
       return val != defaultFormationLegalType;
     })
-    .reduce((accumulator: FormationDisplayContentMap, legalId: FormationLegalType) => {
-      accumulator[legalId] = getFormationFields(legalId, defaultFormationDisplayContent);
-      return accumulator;
-    }, {} as FormationDisplayContentMap);
-  formationDisplayContent[defaultFormationLegalType] = defaultFormationDisplayContent;
+    .reduce(
+      (accumulator: FormationDisplayContentMap, legalId: FormationLegalType) => {
+        accumulator[legalId] = getFormationFields(
+          legalId,
+          legalId.includes("foreign-") ? defaultForeignDisplayContent : defaultDisplayContent
+        );
+        return accumulator;
+      },
+      { [defaultFormationLegalType]: defaultDisplayContent } as FormationDisplayContentMap
+    );
+
+export const loadTasksDisplayContent = (): TasksDisplayContent => {
+  const defaultFormationDisplayContent = getFormationFields(defaultFormationLegalType);
+  const defaultForeignFormationDisplayContent = getFormationFields(
+    `foreign-${defaultFormationLegalType}`,
+    defaultFormationDisplayContent
+  );
 
   return {
-    formationDisplayContent,
+    formationDisplayContent: getFormationDisplayContentDefaults(
+      defaultFormationDisplayContent,
+      defaultForeignFormationDisplayContent
+    ),
+    formationDbaContent: getDbaTasks(),
   };
 };
 

@@ -3,10 +3,11 @@ import { LookupStepIndexByName } from "@/components/tasks/business-formation/Bus
 import { getMergedConfig } from "@/contexts/configContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import { FormationDisplayContentMap } from "@/lib/types/types";
+import { TasksDisplayContent } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import {
   generateEmptyFormationData,
+  generateFormationDbaContent,
   generateFormationDisplayContent,
   generateFormationSubmitError,
   generateFormationSubmitResponse,
@@ -71,7 +72,7 @@ const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
 
 describe("<BusinessFormationPaginator />", () => {
   let initialUserData: UserData;
-  let displayContent: FormationDisplayContentMap;
+  let displayContent: TasksDisplayContent;
 
   beforeEach(() => {
     jest.resetAllMocks();
@@ -80,7 +81,10 @@ describe("<BusinessFormationPaginator />", () => {
     const legalStructureId = "limited-liability-company";
     const profileData = generateFormationProfileData({ legalStructureId });
     const formationData = generateEmptyFormationData();
-    displayContent = generateFormationDisplayContent({});
+    displayContent = {
+      formationDisplayContent: generateFormationDisplayContent({}),
+      formationDbaContent: generateFormationDbaContent({}),
+    };
     initialUserData = generateUserData({ profileData, formationData });
   });
 

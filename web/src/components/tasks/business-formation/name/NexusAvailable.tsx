@@ -5,14 +5,13 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { templateEval } from "@/lib/utils/helpers";
 import { ReactElement } from "react";
 
-export const DbaAvailable = (props: AvailableProps): ReactElement => {
+export const NexusAvailable = (props: AvailableProps): ReactElement => {
   const { Config } = useConfig();
+
   return (
-    <div data-testid="available-text margin-bottom-2">
+    <div data-testid="available-text" className="margin-bottom-2">
       <Alert variant="success">
-        <Content>
-          {templateEval(Config.nexusNameSearch.dbaAvailableText, { name: props.submittedName })}
-        </Content>
+        <Content>{templateEval(Config.nexusNameSearch.availableText, { name: props.submittedName })}</Content>
       </Alert>
     </div>
   );

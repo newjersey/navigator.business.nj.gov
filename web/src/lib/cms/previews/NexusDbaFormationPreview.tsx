@@ -1,11 +1,10 @@
 import { Content } from "@/components/Content";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
-import { NexusFormationTask } from "@/components/tasks/NexusFormationTask";
+import { Authorization } from "@/components/tasks/business-formation/dba/Authorization";
 import { ConfigContext } from "@/contexts/configContext";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
-import { generateProfileData, generateTask, generateUserData } from "@/test/factories";
 import { useState } from "react";
 
 const NexusDbaFormationPreview = (props: PreviewProps) => {
@@ -14,20 +13,10 @@ const NexusDbaFormationPreview = (props: PreviewProps) => {
 
   const [modalOpen, setModalOpen] = useState(false);
 
-  const noNameSearchUserData = generateUserData({
-    profileData: generateProfileData({
-      businessName: "",
-      nexusDbaName: undefined,
-    }),
-  });
-
   return (
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
       <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
-        <NexusFormationTask
-          task={generateTask({ name: "Name is controlled by Task Metadata" })}
-          CMS_ONLY_fakeUserData={noNameSearchUserData}
-        />
+        <Authorization />
 
         <hr className="margin-y-4" />
 
@@ -47,14 +36,14 @@ const NexusDbaFormationPreview = (props: PreviewProps) => {
           close={() => {
             return setModalOpen(false);
           }}
-          title={config.nexusFormationTask.dbaCtaModalHeader}
-          primaryButtonText={config.nexusFormationTask.dbaCtaModalContinueButtonText}
+          title={config.DbaFormationTask.dbaCtaModalHeader}
+          primaryButtonText={config.DbaFormationTask.dbaCtaModalContinueButtonText}
           primaryButtonOnClick={() => {
             return setModalOpen(false);
           }}
-          secondaryButtonText={config.nexusFormationTask.dbaCtaModalCancelButtonText}
+          secondaryButtonText={config.DbaFormationTask.dbaCtaModalCancelButtonText}
         >
-          <Content>{config.nexusFormationTask.dbaCtaModalBody}</Content>
+          <Content>{config.DbaFormationTask.dbaCtaModalBody}</Content>
         </ModalTwoButton>
       </div>
     </ConfigContext.Provider>

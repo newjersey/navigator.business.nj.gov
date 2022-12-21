@@ -1,4 +1,8 @@
-import { generateFormationDisplayContent, generateUserData } from "@/test/factories";
+import {
+  generateFormationDbaContent,
+  generateFormationDisplayContent,
+  generateUserData,
+} from "@/test/factories";
 import {
   FormationPageHelpers,
   generateFormationProfileData,
@@ -42,7 +46,10 @@ describe("Formation - BusinessNameStep", () => {
       getFilingResponse: undefined,
       completedFilingPayment: false,
     };
-    return preparePage(generateUserData({ profileData, formationData }), generateFormationDisplayContent({}));
+    return preparePage(generateUserData({ profileData, formationData }), {
+      formationDisplayContent: generateFormationDisplayContent({}),
+      formationDbaContent: generateFormationDbaContent({}),
+    });
   };
 
   it("pre-fills the text field with the business name from profile", () => {
