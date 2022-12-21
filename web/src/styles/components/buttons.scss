@@ -130,12 +130,10 @@
   opacity: 90%;
 
   &.next {
-    margin-right: 0.625rem;
     right: 0;
   }
 
   &.prev {
-    margin-left: 0.625rem;
     left: 0;
     z-index: 30;
   }
@@ -146,6 +144,12 @@
   &.prevIcon {
     width: 4.375rem;
     height: 5rem;
+    &:hover {
+      background-color: $secondary-dark;
+    }
+    &:active {
+      background-color: $secondary-dark;
+    }
   }
 }
 
