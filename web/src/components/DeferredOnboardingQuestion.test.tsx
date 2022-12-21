@@ -1,7 +1,7 @@
 import { DeferredOnboardingQuestion } from "@/components/DeferredOnboardingQuestion";
 import { OnboardingHomeBasedBusiness } from "@/components/onboarding/OnboardingHomeBasedBusiness";
 import { getMergedConfig } from "@/contexts/configContext";
-import { generateUserData } from "@/test/factories";
+import { generateProfileData, generateUserData } from "@/test/factories";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import {
   currentUserData,
@@ -9,6 +9,7 @@ import {
   userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
+import { emptyIndustrySpecificData } from "@businessnjgovnavigator/shared/profileData";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
@@ -27,7 +28,11 @@ describe("<DeferredOnboardingQuestion />", () => {
 
   const renderComponent = ({ userData, onSave }: { userData?: UserData; onSave?: () => void }) => {
     render(
-      <WithStatefulUserData initialUserData={userData || generateUserData({})}>
+      <WithStatefulUserData
+        initialUserData={
+          userData || generateUserData({ profileData: generateProfileData({ ...emptyIndustrySpecificData }) })
+        }
+      >
         <DeferredOnboardingQuestion label="" onSave={onSave || jest.fn()}>
           <OnboardingHomeBasedBusiness />
         </DeferredOnboardingQuestion>

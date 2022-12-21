@@ -17,7 +17,6 @@ import {
   generateUser,
   generateUserData,
   randomHomeBasedIndustry,
-  randomIndustry,
   randomNonHomeBasedIndustry,
 } from "@/test/factories";
 import { withAuthAlert } from "@/test/helpers/helpers-renderers";
@@ -36,6 +35,7 @@ import {
   createEmptyUserData,
   defaultDateFormat,
   einTaskId,
+  emptyIndustrySpecificData,
   formationTaskId,
   generateMunicipality,
   getCurrentDate,
@@ -54,6 +54,7 @@ import {
 } from "@businessnjgovnavigator/shared";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
+import { industriesWithOutEssentialQuestion } from "./onboarding/helpers-onboarding";
 
 const date = getCurrentDate().subtract(1, "month").date(1);
 const Config = getMergedConfig();
@@ -910,12 +911,14 @@ describe("profile", () => {
     });
 
     it("saves userData when sector dropdown is removed from DOM", async () => {
-      const newIndustry = randomIndustry(false).id;
+      const newIndustry = randomElementFromArray(industriesWithOutEssentialQuestion).id;
+
       const userData = generateUserData({
         profileData: generateProfileData({
           businessPersona: "STARTING",
           industryId: "generic",
           sectorId: undefined,
+          ...emptyIndustrySpecificData,
         }),
       });
       renderPage({
@@ -941,7 +944,6 @@ describe("profile", () => {
         profileData: {
           ...userData.profileData,
           industryId: newIndustry,
-          cannabisLicenseType: newIndustry == "cannabis" ? "CONDITIONAL" : undefined,
           sectorId: LookupIndustryById(newIndustry).defaultSectorId,
         },
       });
