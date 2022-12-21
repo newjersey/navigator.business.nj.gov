@@ -36,6 +36,13 @@ export const hasEssentialQuestion = (industryId: string | undefined): boolean =>
   return essentialQuestionResults.includes(true);
 };
 
+export const getEssentialQuestion = (industryId: string | undefined) => {
+  const industry = LookupIndustryById(industryId);
+  return EssentialQuestions.find((essentialQuestionFunction) => {
+    return essentialQuestionFunction.isQuestionApplicableToIndustry(industry);
+  });
+};
+
 interface EssentialQuestionObject {
   fieldName: keyof IndustrySpecificData;
   contentFieldName?: ProfileContentField;
