@@ -132,18 +132,18 @@ export const generateIndustrySpecificData = (
   overrides: Partial<IndustrySpecificData>
 ): IndustrySpecificData => {
   return {
-    liquorLicense: randomElementFromArray([true, false]),
-    requiresCpa: randomElementFromArray([true, false]),
-    homeBasedBusiness: randomElementFromArray([true, false]),
+    liquorLicense: !(randomInt() % 2),
+    requiresCpa: !(randomInt() % 2),
+    homeBasedBusiness: !(randomInt() % 2),
     cannabisLicenseType: randomElementFromArray(["CONDITIONAL", "ANNUAL"]),
-    cannabisMicrobusiness: randomElementFromArray([true, false]),
-    constructionRenovationPlan: randomElementFromArray([true, false]),
-    providesStaffingService: randomElementFromArray([true, false]),
-    certifiedInteriorDesigner: randomElementFromArray([true, false]),
-    realEstateAppraisalManagement: randomElementFromArray([true, false]),
+    cannabisMicrobusiness: !(randomInt() % 2),
+    constructionRenovationPlan: !(randomInt() % 2),
+    providesStaffingService: !(randomInt() % 2),
+    certifiedInteriorDesigner: !(randomInt() % 2),
+    realEstateAppraisalManagement: !(randomInt() % 2),
     carService: randomElementFromArray(["STANDARD", "HIGH_CAPACITY", "BOTH"]),
-    interstateTransport: randomElementFromArray([true, false]),
-    isChildcareForSixOrMore: randomElementFromArray([true, false]),
+    interstateTransport: !(randomInt() % 2),
+    isChildcareForSixOrMore: !(randomInt() % 2),
     ...overrides,
   };
 };

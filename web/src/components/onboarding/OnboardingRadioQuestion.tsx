@@ -2,7 +2,7 @@ import { Content } from "@/components/Content";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
-import { ProfileContentField, profileFieldsFromConfig } from "@/lib/types/types";
+import { ProfileContentField, ProfileFields, profileFieldsFromConfig } from "@/lib/types/types";
 import {
   camelCaseToKebabCase,
   camelCaseToSentence,
@@ -22,6 +22,7 @@ type Props<T> = {
   choices: Exclude<T, undefined>[];
   labels?: Record<string, string>;
   onChange?: (value: T) => void;
+  onValidation?: (field: ProfileFields, invalid: boolean) => void;
 };
 
 export const OnboardingRadioQuestion = <T extends ProfileDataTypes>(props: Props<T>): ReactElement => {
@@ -45,6 +46,7 @@ export const OnboardingRadioQuestion = <T extends ProfileDataTypes>(props: Props
       [props.fieldName]: value,
     });
     props.onChange && props.onChange(value);
+    props.onValidation && props.onValidation(props.fieldName, false);
   };
 
   return (

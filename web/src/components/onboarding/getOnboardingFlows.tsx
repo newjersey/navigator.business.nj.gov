@@ -14,6 +14,7 @@ import { OnboardingMunicipality } from "@/components/onboarding/OnboardingMunici
 import { OnboardingNameAndEmail } from "@/components/onboarding/OnboardingNameAndEmail";
 import { OnboardingOwnership } from "@/components/onboarding/OnboardingOwnership";
 import { OnboardingSectors } from "@/components/onboarding/OnboardingSectors";
+import { EssentialQuestionObject, getEssentialQuestion } from "@/lib/domain-logic/essentialQuestions";
 import { isFullNameValid } from "@/lib/domain-logic/isFullNameValid";
 import { FlowType, ProfileError, ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import { validateEmail } from "@/lib/utils/helpers";
@@ -42,6 +43,29 @@ export const getOnboardingFlows = (
   onValidation: (field: ProfileFields, invalid: boolean) => void,
   fieldStates: ProfileFieldErrorMap
 ): Record<FlowType, OnboardingFlow> => {
+  const inlineEssentialQuestion = getEssentialQuestion(profileData.industryId)
+    ? [
+        {
+          name: getEssentialQuestion(profileData.industryId)?.fieldName as ProfileFields,
+          valid:
+            profileData[
+              (getEssentialQuestion(profileData.industryId) as EssentialQuestionObject).fieldName
+            ] !== undefined,
+        },
+      ]
+    : [];
+  const snackbarEssentialQuestion = getEssentialQuestion(profileData.industryId)
+    ? [
+        {
+          name: "REQUIRED_ESSENTIAL_QUESTION" as ProfileError,
+          valid:
+            profileData[
+              (getEssentialQuestion(profileData.industryId) as EssentialQuestionObject).fieldName
+            ] !== undefined,
+        },
+      ]
+    : [];
+
   return {
     OWNING: {
       pages: [
@@ -217,8 +241,12 @@ export const getOnboardingFlows = (
           ),
           getErrorMap: () => {
             return {
-              inline: [{ name: "industryId", valid: profileData.industryId !== undefined }],
+              inline: [
+                { name: "industryId", valid: profileData.industryId !== undefined },
+                ...inlineEssentialQuestion,
+              ],
               snackbar: [{ name: "industryId", valid: profileData.industryId !== undefined }],
+              banner: [...snackbarEssentialQuestion],
             };
           },
         },
@@ -310,8 +338,12 @@ export const getOnboardingFlows = (
           ),
           getErrorMap: () => {
             return {
-              inline: [{ name: "industryId", valid: profileData.industryId !== undefined }],
+              inline: [
+                { name: "industryId", valid: profileData.industryId !== undefined },
+                ...inlineEssentialQuestion,
+              ],
               snackbar: [{ name: "industryId", valid: profileData.industryId !== undefined }],
+              banner: [...snackbarEssentialQuestion],
             };
           },
         },

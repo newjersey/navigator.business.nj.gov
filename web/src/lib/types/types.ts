@@ -24,6 +24,7 @@ export type KeysOfType<T, V> = { [K in keyof T]-?: T[K] extends V ? K : never }[
 export type UserDataError = "NO_DATA" | "CACHED_ONLY" | "UPDATE_FAILED";
 
 export type ProfileError =
+  | "REQUIRED_ESSENTIAL_QUESTION"
   | "REQUIRED_LEGAL"
   | "REQUIRED_EXISTING_BUSINESS"
   | "REQUIRED_FOREIGN_BUSINESS_TYPE"

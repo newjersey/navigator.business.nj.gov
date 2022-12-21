@@ -86,6 +86,7 @@ const OnboardingPage = (props: Props): ReactElement => {
 
   const configFields = Config.profileDefaults.fields;
   const OnboardingErrorLookup: Record<ProfileError, string> = {
+    REQUIRED_ESSENTIAL_QUESTION: Config.profileDefaults.essentialQuestionAlertText,
     REQUIRED_LEGAL: configFields.legalStructureId.default.errorTextRequired,
     REQUIRED_EXISTING_BUSINESS: configFields.businessPersona.default.errorTextRequired,
     REQUIRED_FOREIGN_BUSINESS_TYPE: configFields.foreignBusinessTypeIds.default.errorTextRequired,

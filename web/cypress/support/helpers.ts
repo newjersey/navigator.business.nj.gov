@@ -6,6 +6,8 @@ import {
   arrayOfSectors,
   arrayOfStateObjects as states,
   BusinessSignerTypeMap,
+  carServiceOptions,
+  CarServiceType,
   FormationAddress,
   FormationFormData,
   FormationLegalType,
@@ -114,6 +116,8 @@ interface StartingOnboardingData {
   certifiedInteriorDesigner: boolean | undefined;
   realEstateAppraisalManagement: boolean | undefined;
   interstateTransport: boolean | undefined;
+  carService: CarServiceType | undefined;
+  isChildcareForSixOrMore: boolean | undefined;
 }
 
 interface ExistingOnboardingData {
@@ -142,6 +146,8 @@ export const completeNewBusinessOnboarding = ({
   certifiedInteriorDesigner = undefined,
   realEstateAppraisalManagement = undefined,
   interstateTransport = undefined,
+  carService = undefined,
+  isChildcareForSixOrMore = undefined,
   fullName = `Michael Smith ${randomInt()}`,
   email = `MichaelSmith${randomInt()}@gmail.com`,
   isNewsletterChecked = false,
@@ -149,6 +155,18 @@ export const completeNewBusinessOnboarding = ({
 }: Partial<StartingOnboardingData> & Partial<Registration>): void => {
   if (industry === undefined) {
     industry = randomElementFromArray(Industries.filter((x) => x.isEnabled) as Industry[]) as Industry;
+  }
+
+  if (carService === undefined) {
+    carService = industry.industryOnboardingQuestions.isCarServiceApplicable
+      ? randomElementFromArray([...carServiceOptions])
+      : undefined;
+  }
+
+  if (isChildcareForSixOrMore === undefined) {
+    isChildcareForSixOrMore = industry.industryOnboardingQuestions.isChildcareForSixOrMore
+      ? Boolean(randomInt() % 2)
+      : undefined;
   }
 
   if (liquorLicenseQuestion === undefined) {
@@ -257,6 +275,26 @@ export const completeNewBusinessOnboarding = ({
     onOnboardingPage.selectInterstateTransport(interstateTransport);
     onOnboardingPage.getInterstateTransport(interstateTransport).should("be.checked");
     onOnboardingPage.getInterstateTransport(!interstateTransport).should("not.be.checked");
+  }
+
+  if (carService === undefined) {
+    onOnboardingPage.getCarService().should("not.exist");
+  } else {
+    onOnboardingPage.selectCarService(carService);
+    onOnboardingPage.getCarService(carService).should("be.checked");
+
+    const otherValues = carServiceOptions.filter((value) => value !== carService);
+    otherValues.forEach((value) => {
+      onOnboardingPage.getCarService(value).should("not.be.checked");
+    });
+  }
+
+  if (isChildcareForSixOrMore === undefined) {
+    onOnboardingPage.getChildcare().should("not.exist");
+  } else {
+    onOnboardingPage.selectChildcare(isChildcareForSixOrMore);
+    onOnboardingPage.getChildcare(isChildcareForSixOrMore).should("be.checked");
+    onOnboardingPage.getChildcare(!isChildcareForSixOrMore).should("not.be.checked");
   }
 
   onOnboardingPage.clickNext();
