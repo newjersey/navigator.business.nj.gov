@@ -301,7 +301,7 @@ describe("<NaicsCodeTask />", () => {
 
     it("navigates back to input and sets on edit button click", () => {
       renderPage();
-      fireEvent.click(screen.getByText(Config.determineNaicsCode.editText));
+      fireEvent.click(screen.getByText(Config.taskDefaults.editText));
       expect(screen.getByText(Config.determineNaicsCode.findCodeHeader)).toBeInTheDocument();
       expect(
         (screen.getByPlaceholderText(Config.determineNaicsCode.inputPlaceholder) as HTMLInputElement).value
@@ -311,7 +311,7 @@ describe("<NaicsCodeTask />", () => {
 
     it("navigates back to empty input on remove button click", () => {
       renderPage();
-      fireEvent.click(screen.getByText(Config.determineNaicsCode.removeText));
+      fireEvent.click(screen.getByText(Config.taskDefaults.removeText));
       expect(screen.getByText(Config.determineNaicsCode.findCodeHeader)).toBeInTheDocument();
       fireEvent.click(screen.getByTestId(`naics-radio-input`));
       expect(
@@ -323,13 +323,13 @@ describe("<NaicsCodeTask />", () => {
 
     it("sets task status to in-progress on edit button", () => {
       renderPage();
-      fireEvent.click(screen.getByText(Config.determineNaicsCode.editText));
+      fireEvent.click(screen.getByText(Config.taskDefaults.editText));
       expect(currentUserData().taskProgress[taskId]).toEqual("IN_PROGRESS");
     });
 
     it("sets task status to in-progress on remove button", () => {
       renderPage();
-      fireEvent.click(screen.getByText(Config.determineNaicsCode.removeText));
+      fireEvent.click(screen.getByText(Config.taskDefaults.removeText));
       expect(currentUserData().taskProgress[taskId]).toEqual("IN_PROGRESS");
     });
   });

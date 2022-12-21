@@ -1300,8 +1300,6 @@ collections:
                   widget: string,
                   hint: This field supports Markdown,
                 }
-              - { label: Edit EIN Button Text, name: editText, widget: string }
-              - { label: Remove EIN Button Text, name: removeText, widget: string }
   - name: "tax-task"
     label: "Tasks - Tax ID"
     delete: false
@@ -1344,8 +1342,6 @@ collections:
                   widget: string,
                   hint: This field supports Markdown,
                 }
-              - { label: Edit Tax ID Button Text, name: editText, widget: string }
-              - { label: Remove Tax ID Button Text, name: removeText, widget: string }
   - name: "naics-code"
     label: "Tasks - NAICS Code"
     delete: false
@@ -1420,8 +1416,6 @@ collections:
                   widget: text,
                   hint: This field supports Markdown,
                 }
-              - { label: Edit Text, name: editText, widget: string }
-              - { label: Remove Text, name: removeText, widget: string }
               - {
                   label: Placeholder Text (in Tasks) When NAICS Missing,
                   name: missingNAICSCodePlaceholder,
@@ -3131,6 +3125,8 @@ collections:
               - { label: Required Label Text, name: requiredLabelText, widget: string }
               - { label: Issuing Agency Label, name: issuingAgencyText, widget: string }
               - { label: Form Label, name: formNameText, widget: string }
+              - { label: Edit Text, name: editText, widget: string }
+              - { label: Remove Text, name: removeText, widget: string }
           - label: Task - Business Name Search
             name: searchBusinessNameTask
             collapsed: true

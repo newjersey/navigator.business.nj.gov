@@ -21,7 +21,7 @@ export const TaxDisplay = (props: Props): ReactElement => {
         </div>
         <span className="margin-x-105">|</span>
         <Button style="tertiary" underline onClick={props.onRemove}>
-          {Config.tax.removeText}
+          {Config.taskDefaults.removeText}
         </Button>
       </div>
     </Alert>
