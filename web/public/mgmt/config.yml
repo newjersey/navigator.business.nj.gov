@@ -3929,13 +3929,13 @@ collections:
                           - { label: "Radio Button No Text", name: "radioButtonFalseText", widget: "string" }
                           - { label: "Description", name: "description", widget: "markdown" }
 
-      - label: "Profile Page Misc"
+      - label: "Profile / Onboarding Page Misc"
         name: "profile-misc"
         file: "content/src/fieldConfig/config.json"
         editor:
           preview: true
         fields:
-          - label: Profile Defaults
+          - label: Profile / Onboarding Defaults
             name: profileDefaults
             collapsed: false
             widget: object
@@ -3949,6 +3949,12 @@ collections:
               - { label: Success Alert - Body, name: successTextBody, widget: string }
               - { label: Error Alert - Header, name: errorTextHeader, widget: string }
               - { label: Error Alert - Body, name: errorTextBody, widget: string }
+              - { label: Essential Question Alert - Body, name: essentialQuestionAlertText, widget: string }
+              - {
+                  label: Essential Question Inline Error Text,
+                  name: essentialQuestionInlineText,
+                  widget: string,
+                }
               - { label: Page Title, name: pageTitle, widget: string }
               - { label: Save Button Text, name: saveButtonText, widget: string }
               - { label: Back Button Text, name: backButtonText, widget: string }

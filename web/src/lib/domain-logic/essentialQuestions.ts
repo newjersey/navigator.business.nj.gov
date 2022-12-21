@@ -43,7 +43,7 @@ export const getEssentialQuestion = (industryId: string | undefined) => {
   });
 };
 
-interface EssentialQuestionObject {
+export interface EssentialQuestionObject {
   fieldName: keyof IndustrySpecificData;
   contentFieldName?: ProfileContentField;
   ariaLabel?: string;

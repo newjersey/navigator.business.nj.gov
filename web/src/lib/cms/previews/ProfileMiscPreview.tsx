@@ -1,3 +1,4 @@
+import { Alert } from "@/components/njwds-extended/Alert";
 import { EscapeModal } from "@/components/profile/EscapeModal";
 import { ProfileSnackbarAlert } from "@/components/profile/ProfileSnackbarAlert";
 import { ConfigContext } from "@/contexts/configContext";
@@ -54,6 +55,14 @@ const ProfilePreviewMisc = (props: PreviewProps) => {
 
         <h2>Error Alert</h2>
         <ProfileSnackbarAlert alert="ERROR" close={() => {}} />
+        <hr className="margin-y-4" />
+
+        <h2>Essential Question Alert Banner</h2>
+        <Alert variant="error">{config.profileDefaults.essentialQuestionAlertText}</Alert>
+
+        <hr className="margin-y-4" />
+        <h2>Essential Question Inline Error Text</h2>
+        {config.profileDefaults.essentialQuestionInlineText}
         <hr className="margin-y-4" />
 
         <h2 className="margin-bottom-4">Misc Buttons & Labels:</h2>

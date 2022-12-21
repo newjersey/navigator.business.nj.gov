@@ -1,4 +1,4 @@
-import { LookupIndustryById, LookupSectorTypeById } from "@businessnjgovnavigator/shared/";
+import { CarServiceType, LookupIndustryById, LookupSectorTypeById } from "@businessnjgovnavigator/shared/";
 import { random } from "lodash";
 
 export class OnboardingPage {
@@ -38,6 +38,16 @@ export class OnboardingPage {
 
   getInterstateTransport(radio?: boolean) {
     return cy.get(`input[name="interstate-transport"]${radio === undefined ? "" : `[value="${radio}"]`}`);
+  }
+
+  getCarService(radio?: CarServiceType) {
+    return cy.get(`input[name="car-service"]${radio === undefined ? "" : `[value="${radio}"]`}`);
+  }
+
+  getChildcare(radio?: boolean) {
+    return cy.get(
+      `input[name="is-childcare-for-six-or-more"]${radio === undefined ? "" : `[value="${radio}"]`}`
+    );
   }
 
   getIndustryDropdown() {
@@ -122,6 +132,14 @@ export class OnboardingPage {
 
   selectInterstateTransport(radio: boolean) {
     this.getInterstateTransport(radio).check();
+  }
+
+  selectChildcare(radio: boolean) {
+    this.getChildcare(radio).check();
+  }
+
+  selectCarService(radio: CarServiceType) {
+    this.getCarService(radio).check();
   }
 
   selectIndustry(industry: string) {
