@@ -69,9 +69,32 @@ export type FormationDisplayContent = {
   };
 };
 
+export const createEmptyTaskWithoutLinks = (): TaskWithoutLinks => {
+  return {
+    id: "",
+    name: "",
+    urlSlug: "",
+    callToActionLink: "",
+    callToActionText: "",
+    contentMd: "",
+    postOnboardingQuestion: "",
+    required: undefined,
+    issuingAgency: undefined,
+    formName: undefined,
+  };
+};
+
+export const createEmptyDbaDisplayContent = (): FormationDbaContent => {
+  return {
+    Authorize: createEmptyTaskWithoutLinks(),
+    DbaResolution: createEmptyTaskWithoutLinks(),
+    Formation: createEmptyTaskWithoutLinks(),
+  };
+};
 export const createEmptyTaskDisplayContent = (): TasksDisplayContent => {
   return {
     formationDisplayContent: createEmptyFormationDisplayContent(),
+    formationDbaContent: createEmptyDbaDisplayContent(),
   };
 };
 
@@ -127,6 +150,7 @@ export const createEmptyFormationDisplayContent = (): FormationDisplayContentMap
 export type OnboardingStatus = "SUCCESS" | "ERROR";
 
 export type FormationStepNames = "Name" | "Business" | "Contacts" | "Billing" | "Review";
+export type DbaStepNames = "Business Name" | "DBA Resolution" | "Authorize Business";
 
 export type FormationFieldErrorState = {
   field: FormationFields;
@@ -312,8 +336,14 @@ export type FormationDisplayContentMap = Record<FormationLegalType, FormationDis
 
 export interface FormationSignedAddress extends FormationMember, Partial<Omit<FormationSigner, "name">> {}
 
+export type FormationDbaContent = {
+  DbaResolution: TaskWithoutLinks;
+  Authorize: TaskWithoutLinks;
+  Formation: TaskWithoutLinks;
+};
 export type TasksDisplayContent = {
   formationDisplayContent: FormationDisplayContentMap;
+  formationDbaContent: FormationDbaContent;
 };
 
 export interface Roadmap {
@@ -481,3 +511,21 @@ export interface UpdateQueue {
   update: () => Promise<void>;
   current: () => UserData;
 }
+
+export type MarkdownResult = {
+  content: string;
+  grayMatter: unknown;
+};
+
+export type TaskWithoutLinks = {
+  id: string;
+  name: string;
+  urlSlug: string;
+  callToActionLink: string;
+  callToActionText: string;
+  postOnboardingQuestion: string;
+  contentMd: string;
+  required?: boolean;
+  issuingAgency?: string;
+  formName?: string;
+};

@@ -1,4 +1,8 @@
-import { generateFormationDisplayContent, generateUserData } from "@/test/factories";
+import {
+  generateFormationDbaContent,
+  generateFormationDisplayContent,
+  generateUserData,
+} from "@/test/factories";
 import {
   generateFormationProfileData,
   preparePage,
@@ -58,7 +62,10 @@ describe("Formation - ReviewStep", () => {
         profileData,
         formationData,
       }),
-      generateFormationDisplayContent({})
+      {
+        formationDisplayContent: generateFormationDisplayContent({}),
+        formationDbaContent: generateFormationDbaContent({}),
+      }
     );
 
     await page.stepperClickToReviewStep();

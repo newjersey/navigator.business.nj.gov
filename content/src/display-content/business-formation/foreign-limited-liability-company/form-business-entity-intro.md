@@ -1,9 +1,7 @@
 ---
-urlSlug: search-business-name-nexus
-name: Check if Your Business Name is Available in New Jersey
-id: search-business-name-nexus
-callToActionLink: ""
-callToActionText: ""
+slug: form-business-entity-intro
+name: Check if Your Business Name is Available in New Jersey and Authorize your Business
+id: form-business-entity
 required: true
 ---
 

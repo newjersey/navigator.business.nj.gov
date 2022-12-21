@@ -2,11 +2,12 @@
 import { Button } from "@/components/njwds-extended/Button";
 import analytics from "@/lib/utils/analytics";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { ReactElement } from "react";
+import { ReactElement, ReactNode } from "react";
 
 interface Props {
   link: string;
   text?: string;
+  children?: ReactNode;
   onClick?: () => void;
 }
 
@@ -18,6 +19,7 @@ export const TaskCTA = (props: Props): ReactElement => {
   if (props.onClick) {
     return (
       <div className="flex flex-justify-end bg-base-lightest margin-x-neg-4 padding-3 margin-top-3 margin-bottom-neg-4">
+        {props.children}
         <Button
           style="primary"
           noRightMargin
@@ -36,6 +38,7 @@ export const TaskCTA = (props: Props): ReactElement => {
 
   return (
     <div className="flex flex-justify-end bg-base-lightest margin-x-neg-4 padding-3 margin-top-3 margin-bottom-neg-4">
+      {props.children}
       <a href={props.link} target="_blank" rel="noreferrer noopener">
         <Button
           style="primary"

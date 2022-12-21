@@ -21,6 +21,27 @@ collections:
     fields:
       - { name: "" }
 
+  - name: "business-formation-dba-tasks"
+    label: "Biz Form - DBA Tasks"
+    folder: "content/src/display-content/business-formation/nexus"
+    summary: "{{filename}} - {{name}}"
+    identifier_field: "{{filename}}"
+    slug: "{{fields.filename}}"
+    delete: true
+    sortable_fields: ["id", "name", "{{urlSlug}}", "industryId"]
+    create: true
+    editor:
+      preview: true
+    fields:
+      - { label: "Content", name: "body", widget: "markdown" }
+      - { label: "Url Slug", name: "urlSlug", widget: "nospace" }
+      - { label: "Filename", name: "filename", widget: "nospace", required: false }
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Id", name: "id", widget: "nospace" }
+      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
+      - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
+      - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
+
   - name: "business-formation-c-corp"
     label: "Biz Form - Corporation"
     folder: "content/src/display-content/business-formation/c-corporation"
@@ -1462,6 +1483,7 @@ collections:
               - { label: DBA Name Search Placeholder, name: dbaNameSearchPlaceholder, widget: string }
               - { label: DBA Name Search Label, name: dbaNameSearchLabel, widget: string }
               - { label: DBA Name Search Submit Button, name: dbaNameSearchSubmitButton, widget: string }
+              - { label: Next Button Text, name: nexusNextButton, widget: string }
               - { label: DBA Available Text, name: dbaAvailableText, widget: markdown }
               - { label: DBA Unavailable Text, name: dbaUnavailableText, widget: markdown }
       - label: "DBA Formation - Task Metadata"
@@ -1497,7 +1519,7 @@ collections:
           preview: true
         fields:
           - label: DBA Formation
-            name: nexusFormationTask
+            name: DbaFormationTask
             collapsed: false
             widget: object
             fields:

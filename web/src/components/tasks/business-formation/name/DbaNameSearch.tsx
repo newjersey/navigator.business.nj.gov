@@ -1,20 +1,29 @@
 import { Content } from "@/components/Content";
-import { DbaAvailable } from "@/components/tasks/search-business-name/DbaAvailable";
-import { DbaUnavailable } from "@/components/tasks/search-business-name/DbaUnavailable";
+import { DbaAvailable } from "@/components/tasks/business-formation/name/DbaAvailable";
+import { DbaUnavailable } from "@/components/tasks/business-formation/name/DbaUnavailable";
 import { SearchBusinessNameForm } from "@/components/tasks/search-business-name/SearchBusinessNameForm";
+import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { NameAvailability } from "@/lib/types/types";
-import { ReactElement } from "react";
+import analytics from "@/lib/utils/analytics";
+import { useMountEffect } from "@/lib/utils/helpers";
+import { ReactElement, useContext } from "react";
 
 export const DbaNameSearch = (): ReactElement => {
   const { Config } = useConfig();
   const { userData, update } = useUserData();
+  const { setBusinessNameAvailability } = useContext(BusinessFormationContext);
+
+  useMountEffect(() => {
+    analytics.event.business_formation_dba_name_search_field.appears.dba_name_search_field_appears();
+  });
 
   const onSubmit = async (submittedName: string, nameAvailability: NameAvailability): Promise<void> => {
     if (!nameAvailability || !userData) {
       return;
     }
+    setBusinessNameAvailability(nameAvailability);
     if (nameAvailability.status === "AVAILABLE") {
       await update({
         ...userData,
@@ -32,7 +41,9 @@ export const DbaNameSearch = (): ReactElement => {
       <SearchBusinessNameForm
         unavailable={DbaUnavailable}
         available={DbaAvailable}
-        isDba={true}
+        onChange={setBusinessNameAvailability}
+        isBusinessFormation
+        isDba
         config={{
           searchButtonText: Config.nexusNameSearch.dbaNameSearchSubmitButton,
           searchButtonTestId: "search-dba-availability",

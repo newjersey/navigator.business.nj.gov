@@ -1,5 +1,5 @@
-import { Task, TaskDependencies, TaskLink } from "@/lib/types/types";
-import { convertTaskMd, TaskWithoutLinks } from "@/lib/utils/markdownReader";
+import { Task, TaskDependencies, TaskLink, TaskWithoutLinks } from "@/lib/types/types";
+import { convertTaskMd } from "@/lib/utils/markdownReader";
 import fs from "fs";
 import path from "path";
 import { getFileNameByUrlSlug, loadUrlSlugByFilename } from "./helpers";
@@ -29,7 +29,7 @@ export const loadTaskByUrlSlug = (urlSlug: string): Task => {
   return loadTaskByFileName(matchingFileName);
 };
 
-const loadTaskByFileName = (fileName: string): Task => {
+export const loadTaskByFileName = (fileName: string): Task => {
   const fullPath = path.join(roadmapsDir, "tasks", `${fileName}`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
 

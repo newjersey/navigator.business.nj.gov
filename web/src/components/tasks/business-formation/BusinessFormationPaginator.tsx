@@ -3,6 +3,7 @@ import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { Button } from "@/components/njwds-extended/Button";
 import { HorizontalStepper } from "@/components/njwds-extended/HorizontalStepper";
+import { BusinessFormationSteps } from "@/components/tasks/business-formation/BusinessFormationSteps";
 import {
   BusinessFormationStepsConfiguration,
   LookupNameByStepIndex,
@@ -27,13 +28,9 @@ import { FormationFormData, FormationLegalType } from "@businessnjgovnavigator/s
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router";
-import { ReactElement, ReactNode, useContext, useEffect, useRef, useState } from "react";
+import { ReactElement, useContext, useEffect, useRef, useState } from "react";
 
-interface Props {
-  children: ReactNode;
-}
-
-export const BusinessFormationPaginator = (props: Props): ReactElement => {
+export const BusinessFormationPaginator = (): ReactElement => {
   const { userData, update } = useUserData();
   const { state, setStepIndex, setHasBeenSubmitted, setFormationFormData, setFieldInteracted } =
     useContext(BusinessFormationContext);
@@ -483,7 +480,7 @@ export const BusinessFormationPaginator = (props: Props): ReactElement => {
         />
       </div>
       <div data-testid="formation-form" className="fg1 flex flex-column space-between">
-        {props.children}
+        {BusinessFormationSteps[state.stepIndex].component}
         {displayButtons()}
       </div>
     </>

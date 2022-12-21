@@ -2,8 +2,6 @@ import { Content } from "@/components/Content";
 import { LoadingIndicator } from "@/components/LoadingIndicator";
 import { TaskCTA } from "@/components/TaskCTA";
 import { TaskHeader } from "@/components/TaskHeader";
-import { BusinessFormationPaginator } from "@/components/tasks/business-formation/BusinessFormationPaginator";
-import { BusinessFormationSteps } from "@/components/tasks/business-formation/BusinessFormationSteps";
 import { LookupStepIndexByName } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
 import { FormationInterimSuccessPage } from "@/components/tasks/business-formation/FormationInterimSuccessPage";
 import { FormationSuccessPage } from "@/components/tasks/business-formation/success/FormationSuccessPage";
@@ -15,8 +13,10 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { allowFormation } from "@/lib/domain-logic/allowFormation";
 import { checkQueryValue, QUERIES } from "@/lib/domain-logic/routes";
 import { splitFullName } from "@/lib/domain-logic/splitFullName";
-import { FormationDisplayContentMap, NameAvailability, Task } from "@/lib/types/types";
+import { NameAvailability, Task, TasksDisplayContent } from "@/lib/types/types";
 import { getModifiedTaskContent, useMountEffectWhenDefined } from "@/lib/utils/helpers";
+
+import { BusinessFormationPaginator } from "@/components/tasks/business-formation/BusinessFormationPaginator";
 import {
   castPublicFilingLegalTypeToFormationType,
   createEmptyFormationFormData,
@@ -32,10 +32,11 @@ import { parseDateWithFormat } from "@businessnjgovnavigator/shared/dateHelpers"
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { useRouter } from "next/router";
 import { ReactElement, useEffect, useMemo, useRef, useState } from "react";
+import { NexusFormationFlow } from "./NexusFormationFlow";
 
 interface Props {
   task: Task;
-  displayContent: FormationDisplayContentMap;
+  displayContent: TasksDisplayContent;
 }
 
 export const BusinessFormation = (props: Props): ReactElement => {
@@ -165,7 +166,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
     });
   };
 
-  if (!isValidLegalStructure) {
+  if (!isValidLegalStructure && userData?.profileData.businessPersona != "FOREIGN") {
     return (
       <div className="flex flex-column space-between minh-38">
         <div>
@@ -215,6 +216,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
       </div>
     );
   }
+  const isForeign = userData?.profileData.businessPersona == "FOREIGN";
 
   return (
     <BusinessFormationContext.Provider
@@ -223,7 +225,8 @@ export const BusinessFormation = (props: Props): ReactElement => {
           stepIndex: stepIndex,
           legalStructureId: legalStructureId,
           formationFormData: formationFormData,
-          displayContent: props.displayContent[legalStructureId],
+          displayContent: props.displayContent.formationDisplayContent[legalStructureId],
+          dbaContent: props.displayContent.formationDbaContent,
           showResponseAlert: showResponseAlert,
           interactedFields,
           hasBeenSubmitted,
@@ -240,18 +243,22 @@ export const BusinessFormation = (props: Props): ReactElement => {
       }}
     >
       <div className="flex flex-column  minh-38">
-        <div>
-          <TaskHeader task={props.task} />
-          {stepIndex === 0 && (
-            <>
-              <UnlockedBy task={props.task} dataTestid="dependency-alert" />
-              <div className="margin-bottom-2">
-                <Content>{props.displayContent[legalStructureId].introParagraph.contentMd}</Content>
-              </div>
-            </>
-          )}
-        </div>
-        <BusinessFormationPaginator>{BusinessFormationSteps[stepIndex].component}</BusinessFormationPaginator>
+        <>
+          <div>
+            <TaskHeader task={props.task} />
+            {stepIndex === 0 && (
+              <>
+                <UnlockedBy task={props.task} dataTestid="dependency-alert" />
+                <div className="margin-bottom-2">
+                  <Content>
+                    {props.displayContent.formationDisplayContent[legalStructureId].introParagraph.contentMd}
+                  </Content>
+                </div>
+              </>
+            )}
+          </div>
+          {isForeign ? <NexusFormationFlow /> : <BusinessFormationPaginator />}
+        </>
       </div>
     </BusinessFormationContext.Provider>
   );

@@ -2,6 +2,7 @@ import {
   AllCounties,
   Certification,
   County,
+  FormationDbaContent,
   FormationDisplayContent,
   FormationDisplayContentMap,
   Funding,
@@ -20,6 +21,7 @@ import {
   Step,
   Task,
   TaskLink,
+  TaskWithoutLinks,
 } from "@/lib/types/types";
 import { getSectionNames } from "@/lib/utils/helpers";
 import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
@@ -301,6 +303,22 @@ export const generateTask = (overrides: Partial<Task>): Task => {
   };
 };
 
+export const generateTaskWithoutLinks = (overrides: Partial<TaskWithoutLinks>): TaskWithoutLinks => {
+  return {
+    id: `some-id-${randomInt()}`,
+    name: `some-name-${randomInt()}`,
+    urlSlug: `some-urlSlug-${randomInt()}`,
+    callToActionLink: `some-link-${randomInt()}`,
+    callToActionText: `some-call-to-action-${randomInt()}`,
+    contentMd: `some-content-md-${randomInt()}`,
+    postOnboardingQuestion: `some-post-onboarding-${randomInt()}`,
+    required: Math.random() < 0.5,
+    issuingAgency: `some-agency-${randomInt()}`,
+    formName: `some-form-${randomInt()}`,
+    ...overrides,
+  };
+};
+
 export const generateTaskLink = (overrides: Partial<TaskLink>): TaskLink => {
   return {
     name: `some-name-${randomInt()}`,
@@ -366,6 +384,17 @@ export const generateLicenseData = (overrides: Partial<LicenseData>): LicenseDat
     ...overrides,
   };
 };
+
+export const generateFormationDbaContent = (
+  overrides: Partial<FormationDbaContent>
+): FormationDbaContent => ({
+  Authorize: generateTaskWithoutLinks({
+    contentMd: "start ${beginIndentationSection} middle ${endIndentationSection} after",
+  }),
+  DbaResolution: generateTaskWithoutLinks({}),
+  Formation: generateTaskWithoutLinks({}),
+  ...overrides,
+});
 
 export const generateFormationDisplayContent = (
   overrides: Partial<Record<FormationLegalType, Partial<FormationDisplayContent>>>

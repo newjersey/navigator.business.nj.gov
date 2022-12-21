@@ -1,13 +1,15 @@
 import { BusinessFormation } from "@/components/tasks/business-formation/BusinessFormation";
 import { LookupStepIndexByName } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
+import { LookupNexusStepIndexByName } from "@/components/tasks/business-formation/NexusFormationStepsConfiguration";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import * as api from "@/lib/api-client/apiClient";
+import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import {
   defaultDisplayDateFormat,
-  FormationDisplayContentMap,
   FormationSignedAddress,
   NameAvailability,
   Task,
+  TasksDisplayContent,
 } from "@/lib/types/types";
 import {
   generateFormationData,
@@ -17,6 +19,7 @@ import {
   generateUserData,
   randomPublicFilingLegalType,
 } from "@/test/factories";
+import { withAuthAlert } from "@/test/helpers/helpers-renderers";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockDocuments } from "@/test/mock/mockUseDocuments";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
@@ -60,9 +63,11 @@ export const useSetupInitialMocks = () => {
 
 export const preparePage = (
   userData: Partial<UserData>,
-  displayContent: FormationDisplayContentMap,
+  displayContent: TasksDisplayContent,
   municipalities?: Municipality[],
-  task?: Task
+  task?: Task,
+  isAuthenticated?: IsAuthenticated,
+  setRegistrationModalIsVisible?: (value: boolean) => void
 ): FormationPageHelpers => {
   const profileData = generateFormationProfileData({ ...userData.profileData });
   const initialUserData = generateUserData({
@@ -84,13 +89,20 @@ export const preparePage = (
       initialUserData.formationData.formationFormData.agentOfficeAddressMunicipality
     );
   render(
-    <MunicipalitiesContext.Provider value={{ municipalities: internalMunicipalities }}>
-      <WithStatefulUserData initialUserData={initialUserData}>
-        <ThemeProvider theme={createTheme()}>
-          <BusinessFormation task={task ?? generateTask({})} displayContent={displayContent} />
-        </ThemeProvider>
-      </WithStatefulUserData>
-    </MunicipalitiesContext.Provider>
+    withAuthAlert(
+      <MunicipalitiesContext.Provider value={{ municipalities: internalMunicipalities }}>
+        <WithStatefulUserData initialUserData={initialUserData}>
+          <ThemeProvider theme={createTheme()}>
+            <BusinessFormation task={task ?? generateTask({})} displayContent={displayContent} />
+          </ThemeProvider>
+        </WithStatefulUserData>
+      </MunicipalitiesContext.Provider>,
+      isAuthenticated ?? IsAuthenticated.TRUE,
+      {
+        registrationModalIsVisible: false,
+        setRegistrationModalIsVisible: setRegistrationModalIsVisible ?? jest.fn(),
+      }
+    )
   );
   return createFormationPageHelpers();
 };
@@ -124,11 +136,12 @@ export type FormationPageHelpers = {
   submitBillingStep: () => Promise<void>;
   submitReviewStep: () => Promise<void>;
   stepperClickToBusinessNameStep: () => Promise<void>;
+  stepperClickToNexusBusinessNameStep: () => Promise<void>;
   stepperClickToBusinessStep: () => Promise<void>;
   stepperClickToContactsStep: () => Promise<void>;
   stepperClickToBillingStep: () => Promise<void>;
   stepperClickToReviewStep: () => Promise<void>;
-  getStepStateInStepper: (index: number) => string;
+  getStepStateInStepper: (index: number | undefined) => string;
   searchBusinessName: (nameAvailability: Partial<NameAvailability>) => Promise<void>;
   searchBusinessNameAndGetError: (errorCode?: number) => Promise<void>;
   chooseRadio: (value: string) => void;
@@ -163,6 +176,13 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
 
     await waitFor(() => {
       expect(screen.queryByTestId("business-step")).toBeInTheDocument();
+    });
+  };
+
+  const stepperClickToNexusBusinessNameStep = async (): Promise<void> => {
+    fireEvent.click(screen.getByTestId(`stepper-${LookupNexusStepIndexByName("Business Name")}`));
+    await waitFor(() => {
+      expect(screen.queryByTestId("nexus-name-step")).toBeInTheDocument();
     });
   };
 
@@ -201,7 +221,7 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     });
   };
 
-  const getStepStateInStepper = (index: number): string => {
+  const getStepStateInStepper = (index: number | undefined): string => {
     return screen.getByTestId(`stepper-${index}`).dataset.state || "";
   };
 
@@ -368,6 +388,7 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     searchBusinessName,
     searchBusinessNameAndGetError,
     chooseRadio,
+    stepperClickToNexusBusinessNameStep,
     getInputElementByLabel,
     selectByText,
     selectCheckbox,
