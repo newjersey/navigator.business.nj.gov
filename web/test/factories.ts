@@ -72,7 +72,7 @@ import {
   TaxFilingLookUpRequest,
   UserData,
 } from "@businessnjgovnavigator/shared";
-import { BusinessPersona } from "@businessnjgovnavigator/shared/profileData";
+import { BusinessPersona, emptyIndustrySpecificData } from "@businessnjgovnavigator/shared/profileData";
 
 export const generateSectionType = (): SectionType => {
   const num = randomInt();
@@ -129,26 +129,32 @@ export const generateTaxFiling = (overrides: Partial<TaxFiling>): TaxFiling => {
 };
 
 export const generateIndustrySpecificData = (
-  overrides: Partial<IndustrySpecificData>,
-  industry?: Industry,
-  canHavePermanentLocation?: boolean
+  overrides: Partial<IndustrySpecificData>
 ): IndustrySpecificData => {
-  const _industry = industry ?? randomIndustry(canHavePermanentLocation);
   return {
-    liquorLicense: false,
-    requiresCpa: false,
-    homeBasedBusiness: false,
-    cannabisLicenseType: undefined,
-    cannabisMicrobusiness: undefined,
-    constructionRenovationPlan: undefined,
-    providesStaffingService: false,
-    certifiedInteriorDesigner: !!_industry.industryOnboardingQuestions.isCertifiedInteriorDesignerApplicable,
-    realEstateAppraisalManagement: false,
-    carService: undefined,
-    interstateTransport: false,
-    isChildcareForSixOrMore: undefined,
+    liquorLicense: randomElementFromArray([true, false]),
+    requiresCpa: randomElementFromArray([true, false]),
+    homeBasedBusiness: randomElementFromArray([true, false]),
+    cannabisLicenseType: randomElementFromArray(["CONDITIONAL", "ANNUAL"]),
+    cannabisMicrobusiness: randomElementFromArray([true, false]),
+    constructionRenovationPlan: randomElementFromArray([true, false]),
+    providesStaffingService: randomElementFromArray([true, false]),
+    certifiedInteriorDesigner: randomElementFromArray([true, false]),
+    realEstateAppraisalManagement: randomElementFromArray([true, false]),
+    carService: randomElementFromArray(["STANDARD", "HIGH_CAPACITY", "BOTH"]),
+    interstateTransport: randomElementFromArray([true, false]),
+    isChildcareForSixOrMore: randomElementFromArray([true, false]),
     ...overrides,
   };
+};
+
+export const generateUndefinedIndustrySpecificData = () => {
+  const result = {} as Record<string, undefined>;
+
+  for (const key of Object.keys(emptyIndustrySpecificData)) {
+    result[key] = undefined;
+  }
+  return result;
 };
 
 export const generateProfileData = (
@@ -160,7 +166,7 @@ export const generateProfileData = (
   const industry = randomIndustry(canHavePermanentLocation);
 
   return {
-    ...generateIndustrySpecificData({}, industry),
+    ...generateIndustrySpecificData({}),
     businessPersona: persona,
     businessName: `some-business-name-${randomInt()}`,
     responsibleOwnerName: `some-responsible-owner-name-${randomInt()}`,

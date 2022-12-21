@@ -3,7 +3,13 @@ import { getMergedConfig } from "@/contexts/configContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { priorityTypesObj } from "@/lib/domain-logic/cannabisPriorityTypes";
 import { Task } from "@/lib/types/types";
-import { generateTask, generateTaskLink, generateUserData } from "@/test/factories";
+import {
+  generateProfileData,
+  generateTask,
+  generateTaskLink,
+  generateUndefinedIndustrySpecificData,
+  generateUserData,
+} from "@/test/factories";
 import { withAuthAlert } from "@/test/helpers/helpers-renderers";
 import { useMockRoadmap, useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
 import {
@@ -60,7 +66,9 @@ describe("<CannabisApplyForLicenseTask />", () => {
   });
 
   it("save microbusiness selection to userData", () => {
-    const initialUserData = generateUserData({});
+    const initialUserData = generateUserData({
+      profileData: generateProfileData({ ...generateUndefinedIndustrySpecificData() }),
+    });
     renderPage(generateTask({}), initialUserData);
     fireEvent.click(screen.getByTestId("microbusiness-radio-true"));
     expect(currentUserData().profileData.cannabisMicrobusiness).toEqual(true);

@@ -7,6 +7,7 @@ import {
   generateProfileData,
   generateRoadmap,
   generateTask,
+  generateUndefinedIndustrySpecificData,
 } from "@/test/factories";
 import { getLastCalledWith } from "@/test/helpers/helpers-utilities";
 import { generateMunicipality, Industries } from "@businessnjgovnavigator/shared/";
@@ -25,6 +26,7 @@ const Config = getMergedConfig();
 const generateStartingProfile = (overrides: Partial<ProfileData>): ProfileData => {
   return generateProfileData({
     businessPersona: "STARTING",
+    ...generateUndefinedIndustrySpecificData(),
     ...overrides,
   });
 };
@@ -34,6 +36,7 @@ const createEmptyNexusProfile = (overrides: Partial<ProfileData>): ProfileData =
     ...createEmptyProfileData(),
     businessPersona: "FOREIGN",
     foreignBusinessType: "NEXUS",
+    ...generateUndefinedIndustrySpecificData(),
     ...overrides,
   };
 };
