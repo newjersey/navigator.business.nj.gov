@@ -5,6 +5,7 @@ import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { createProfileFieldErrorMap } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
 import { generateProfileData, generateUser, generateUserData } from "@/test/factories";
+import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import {
@@ -12,7 +13,11 @@ import {
   getLastCalledWithConfig,
   setupStatefulUserDataContext,
 } from "@/test/mock/withStatefulUserData";
-import { renderPage } from "@/test/pages/onboarding/helpers-onboarding";
+import {
+  industriesWithEssentialQuestion,
+  industriesWithOutEssentialQuestion,
+  renderPage,
+} from "@/test/pages/onboarding/helpers-onboarding";
 import {
   createEmptyProfileData,
   defaultDateFormat,
@@ -84,15 +89,31 @@ describe("onboarding - shared", () => {
     expect(screen.getByTestId("step-1")).toBeInTheDocument();
   });
 
-  it("routes to the second page with industry set when using industry query string", async () => {
-    useMockRouter({ isReady: true, query: { industry: "cannabis" } });
+  it("routes to the third page when industry without essential question is set by using industry query string", async () => {
+    const industry = randomElementFromArray(industriesWithOutEssentialQuestion).id;
+    useMockRouter({ isReady: true, query: { industry } });
+    const { page } = renderPage({});
+    expect(screen.getByTestId("step-3")).toBeInTheDocument();
+    page.chooseRadio("general-partnership");
+    await page.visitStep(4);
+
+    await waitFor(() => {
+      expect(currentUserData().profileData.businessPersona).toEqual("STARTING");
+    });
+    expect(currentUserData().profileData.industryId).toEqual(industry);
+  });
+
+  it("routes to the second page when industry with essential question is set by using industry query string", async () => {
+    const industry = randomElementFromArray(industriesWithEssentialQuestion).id;
+    useMockRouter({ isReady: true, query: { industry } });
     const { page } = renderPage({});
     expect(screen.getByTestId("step-2")).toBeInTheDocument();
+    page.chooseEssentialQuestionRadio(industry, 0);
     await page.visitStep(3);
     await waitFor(() => {
       expect(currentUserData().profileData.businessPersona).toEqual("STARTING");
     });
-    expect(currentUserData().profileData.industryId).toEqual("cannabis");
+    expect(currentUserData().profileData.industryId).toEqual(industry);
   });
 
   it("routes to the first page when using industry query string is invalid", async () => {

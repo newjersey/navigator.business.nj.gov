@@ -1,7 +1,13 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
+import {
+  EssentialQuestionObject,
+  getEssentialQuestion,
+  hasEssentialQuestion,
+} from "@/lib/domain-logic/essentialQuestions";
 import { ROUTES } from "@/lib/domain-logic/routes";
+import { camelCaseToKebabCase } from "@/lib/utils/cases-helpers";
 import Onboarding from "@/pages/onboarding";
 import { generateProfileData, generateUser, generateUserData, randomLegalStructure } from "@/test/factories";
 import { withAuth } from "@/test/helpers/helpers-renderers";
@@ -16,6 +22,11 @@ import {
   Municipality,
   UserData,
 } from "@businessnjgovnavigator/shared/";
+import { Industries } from "@businessnjgovnavigator/shared/industry";
+import {
+  IndustrySpecificData,
+  industrySpecificDataChoices,
+} from "@businessnjgovnavigator/shared/profileData";
 import { createTheme, ThemeProvider } from "@mui/material";
 import {
   act,
@@ -82,6 +93,7 @@ export type PageHelpers = {
   getEmailValue: () => string;
   getConfirmEmailValue: () => string;
   visitStep: (step: number) => Promise<void>;
+  chooseEssentialQuestionRadio: (industryId: string, indexOfDataChoice: number) => void;
 };
 
 export const createPageHelpers = (): PageHelpers => {
@@ -186,6 +198,17 @@ export const createPageHelpers = (): PageHelpers => {
     fireEvent.click(screen.getByLabelText(label));
   };
 
+  const chooseEssentialQuestionRadio = (industryId: string, indexOfIndustrySpecificDataChoices: number) => {
+    const fieldName = (getEssentialQuestion(industryId) as EssentialQuestionObject)
+      .fieldName as keyof IndustrySpecificData;
+
+    const value = industrySpecificDataChoices[fieldName][indexOfIndustrySpecificDataChoices];
+
+    fireEvent.click(
+      screen.getByTestId(`${camelCaseToKebabCase(fieldName)}-radio-${value.toString().toLowerCase()}`)
+    );
+  };
+
   return {
     fillText,
     selectByValue,
@@ -208,6 +231,7 @@ export const createPageHelpers = (): PageHelpers => {
     getConfirmEmailValue,
     visitStep,
     checkByLabelText,
+    chooseEssentialQuestionRadio,
   };
 };
 
@@ -453,3 +477,11 @@ export const mockSuccessfulApiSignups = (): void => {
     });
   });
 };
+
+export const industriesWithEssentialQuestion = Industries.filter((industry) => {
+  return hasEssentialQuestion(industry.id) === true;
+});
+
+export const industriesWithOutEssentialQuestion = Industries.filter((industry) => {
+  return hasEssentialQuestion(industry.id) === false;
+});
