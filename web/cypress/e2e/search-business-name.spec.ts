@@ -19,7 +19,7 @@ describe("search business name [feature] [all] [group2]", () => {
     });
 
     // search name
-    cy.get('[data-task="form-business-entity-foreign"]').click();
+    cy.get('[data-task="form-business-entity"]').click();
     cy.get('input[aria-label="Search business name"]').type(businessName);
     cy.get('button[data-testid="search-availability"]').click();
 
