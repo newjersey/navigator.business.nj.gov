@@ -1,5 +1,6 @@
-import { getCurrentDate } from "@shared/dateHelpers";
+import { getCurrentDate, parseDate } from "@shared/dateHelpers";
 import { createEmptyFormationFormData } from "@shared/formationData";
+import dayjs from "dayjs";
 import { Express } from "express";
 import jwt from "jsonwebtoken";
 import request from "supertest";
@@ -13,7 +14,7 @@ import {
   generateUser,
   generateUserData,
 } from "../../test/factories";
-import { determineAnnualFilingDate } from "../../test/helpers";
+import { determineAnnualFilingDate, getLastCalledWith } from "../../test/helpers";
 import { EncryptionDecryptionClient, UserDataClient } from "../domain/types";
 import { setupExpress } from "../libs/express";
 import { userRouterFactory } from "./userRouter";
@@ -171,7 +172,7 @@ describe("userRouter", () => {
       it("does not update license if licenseData lastCheckedDate is within the last hour", async () => {
         const userData = generateUserData({
           licenseData: generateLicenseData({
-            lastCheckedStatus: getCurrentDate().subtract(1, "hour").add(1, "minute").toISOString(),
+            lastUpdatedISO: getCurrentDate().subtract(1, "hour").add(1, "minute").toISOString(),
           }),
         });
         stubUserDataClient.get.mockResolvedValue(userData);
@@ -186,7 +187,7 @@ describe("userRouter", () => {
             industryId: "home-contractor",
           }),
           licenseData: generateLicenseData({
-            lastCheckedStatus: getCurrentDate().subtract(1, "hour").subtract(1, "minute").toISOString(),
+            lastUpdatedISO: getCurrentDate().subtract(1, "hour").subtract(1, "minute").toISOString(),
           }),
         });
         stubUserDataClient.get.mockResolvedValue(userData);
@@ -220,6 +221,22 @@ describe("userRouter", () => {
       expect(response.body).toEqual(userData);
     });
 
+    it("sets current time as lastUpdatedISO", async () => {
+      mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
+      const dateOneDayAgo = dayjs().subtract(1, "day").toISOString();
+      const userData = generateUserData({ lastUpdatedISO: dateOneDayAgo, user: generateUser({ id: "123" }) });
+      stubUserDataClient.put.mockResolvedValue(userData);
+
+      await request(app).post(`/users`).send(userData).set("Authorization", "Bearer user-123-token");
+
+      expect(
+        parseDate(getLastCalledWith(stubUserDataClient.put)[0].lastUpdatedISO).isSame(
+          getCurrentDate(),
+          "minute"
+        )
+      ).toEqual(true);
+    });
+
     it("calculates new annual filing date and updates it for dateOfFormation", async () => {
       mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
       const postedUserData = generateUserData({
@@ -239,13 +256,10 @@ describe("userRouter", () => {
 
       await request(app).post(`/users`).send(postedUserData).set("Authorization", "Bearer user-123-token");
 
-      expect(stubUserDataClient.put).toHaveBeenCalledWith({
-        ...postedUserData,
-        taxFilingData: {
-          ...postedUserData.taxFilingData,
-          filings: [{ identifier: "ANNUAL_FILING", dueDate: determineAnnualFilingDate("2021-03-01") }],
-        },
-      });
+      const taxFilingsPut = getLastCalledWith(stubUserDataClient.put)[0].taxFilingData.filings;
+      expect(taxFilingsPut).toEqual([
+        { identifier: "ANNUAL_FILING", dueDate: determineAnnualFilingDate("2021-03-01") },
+      ]);
     });
 
     it("clears taskChecklistItems if industry has changed", async () => {
@@ -270,10 +284,8 @@ describe("userRouter", () => {
         .send(newIndustryUserData)
         .set("Authorization", "Bearer user-123-token");
 
-      expect(stubUserDataClient.put).toHaveBeenCalledWith({
-        ...newIndustryUserData,
-        taskItemChecklist: {},
-      });
+      const taskItemChecklistPut = getLastCalledWith(stubUserDataClient.put)[0].taskItemChecklist;
+      expect(taskItemChecklistPut).toEqual({});
     });
 
     it("does not clear taskChecklistItems if industry has not changed", async () => {
@@ -292,7 +304,8 @@ describe("userRouter", () => {
         .send(newIndustryUserData)
         .set("Authorization", "Bearer user-123-token");
 
-      expect(stubUserDataClient.put).toHaveBeenCalledWith(newIndustryUserData);
+      const taskItemChecklistPut = getLastCalledWith(stubUserDataClient.put)[0].taskItemChecklist;
+      expect(taskItemChecklistPut).toEqual({ "some-id": true });
     });
 
     it("returns a 403 when user JWT does not match user ID", async () => {
@@ -324,17 +337,18 @@ describe("userRouter", () => {
     });
 
     describe("legal structure changes", () => {
-      it("does not change the legal structure if formation is completed", async () => {
+      it("does not allow changing the legal structure if formation is completed", async () => {
         mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
         const formationData = generateFormationData({});
-        const updatedFormationData = {
+        const completedFormationData = {
           ...formationData,
           getFilingResponse: generateGetFilingResponse({ success: true }),
         };
+
         const newLegalStructureUserData = generateUserData({
           user: generateUser({ id: "123" }),
           profileData: generateProfileData({ legalStructureId: "c-corporation" }),
-          formationData: updatedFormationData,
+          formationData: completedFormationData,
         });
 
         const existingProfileData = {
@@ -346,19 +360,21 @@ describe("userRouter", () => {
         };
 
         stubUserDataClient.get.mockResolvedValue(existingProfileData);
-        stubUserDataClient.put.mockResolvedValue(newLegalStructureUserData);
+        stubUserDataClient.put.mockResolvedValue(existingProfileData);
 
         await request(app)
           .post(`/users`)
           .send(newLegalStructureUserData)
           .set("Authorization", "Bearer user-123-token");
 
-        expect(stubUserDataClient.put).toHaveBeenCalledWith({
-          ...existingProfileData,
-        });
+        const formationDataPut = getLastCalledWith(stubUserDataClient.put)[0].formationData;
+        const legalStructurePut = getLastCalledWith(stubUserDataClient.put)[0].profileData.legalStructureId;
+
+        expect(legalStructurePut).toEqual("limited-liability-company");
+        expect(formationDataPut).toEqual(completedFormationData);
       });
 
-      it("changes the legal structure if formation is not completed", async () => {
+      it("allows changing the legal structure (and clears formationData) if formation is not completed", async () => {
         mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
 
         const existingUserData = generateUserData({
@@ -387,15 +403,15 @@ describe("userRouter", () => {
           .send(newUserData)
           .set("Authorization", "Bearer user-123-token");
 
-        expect(response.body.profileData.legalStructureId).toBe("c-corporation");
-        expect(stubUserDataClient.put).toHaveBeenCalledWith({
-          ...newUserData,
-          formationData: {
-            formationFormData: createEmptyFormationFormData(),
-            formationResponse: undefined,
-            getFilingResponse: undefined,
-            completedFilingPayment: false,
-          },
+        expect(response.body.profileData.legalStructureId).toEqual("c-corporation");
+        const formationDataPut = getLastCalledWith(stubUserDataClient.put)[0].formationData;
+        const legalStructurePut = getLastCalledWith(stubUserDataClient.put)[0].profileData.legalStructureId;
+        expect(legalStructurePut).toEqual("c-corporation");
+        expect(formationDataPut).toEqual({
+          formationFormData: createEmptyFormationFormData(),
+          formationResponse: undefined,
+          getFilingResponse: undefined,
+          completedFilingPayment: false,
         });
       });
     });
@@ -423,13 +439,11 @@ describe("userRouter", () => {
 
         await request(app).post(`/users`).send(updatedUserData).set("Authorization", "Bearer user-123-token");
 
-        expect(stubUserDataClient.put).toHaveBeenCalledWith({
-          ...updatedUserData,
-          profileData: {
-            ...updatedUserData.profileData,
-            taxId: "*******89123",
-            encryptedTaxId: "my cool encrypted value",
-          },
+        const profileDataPut = getLastCalledWith(stubUserDataClient.put)[0].profileData;
+        expect(profileDataPut).toEqual({
+          ...updatedUserData.profileData,
+          taxId: "*******89123",
+          encryptedTaxId: "my cool encrypted value",
         });
       });
 

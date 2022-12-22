@@ -37,7 +37,7 @@ describe("updateLicenseStatus", () => {
         industryId: "home-contractor",
       }),
       licenseData: generateLicenseData({
-        lastCheckedStatus: getCurrentDate().subtract(1, "hour").subtract(1, "minute").toISOString(),
+        lastUpdatedISO: getCurrentDate().subtract(1, "hour").subtract(1, "minute").toISOString(),
       }),
     });
     stubUserDataClient.get.mockResolvedValue(userData);
@@ -73,7 +73,7 @@ describe("updateLicenseStatus", () => {
     expect(resultUserData.licenseData?.nameAndAddress).toEqual(nameAndAddress);
     expect(resultUserData.licenseData?.completedSearch).toEqual(true);
     expect(
-      parseDate(resultUserData.licenseData?.lastCheckedStatus as string).isSame(getCurrentDate(), "minute")
+      parseDate(resultUserData.licenseData?.lastUpdatedISO as string).isSame(getCurrentDate(), "minute")
     ).toEqual(true);
     expect(resultUserData.licenseData?.status).toEqual("ACTIVE");
     expect(resultUserData.licenseData?.items).toEqual(checklistItems);
@@ -88,7 +88,7 @@ describe("updateLicenseStatus", () => {
     expect(resultUserData.licenseData?.nameAndAddress).toEqual(nameAndAddress);
     expect(resultUserData.licenseData?.completedSearch).toEqual(false);
     expect(
-      parseDate(resultUserData.licenseData?.lastCheckedStatus as string).isSame(getCurrentDate(), "minute")
+      parseDate(resultUserData.licenseData?.lastUpdatedISO as string).isSame(getCurrentDate(), "minute")
     ).toEqual(true);
     expect(resultUserData.licenseData?.status).toEqual("UNKNOWN");
     expect(resultUserData.licenseData?.items).toEqual([]);

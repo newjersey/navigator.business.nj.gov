@@ -1,5 +1,6 @@
 export type TaxFilingState = "SUCCESS" | "FAILED" | "UNREGISTERED" | "PENDING" | "API_ERROR";
 export type TaxFilingErrorFields = "Business Name" | "Taxpayer ID";
+
 export type TaxFilingData = {
   readonly state?: TaxFilingState;
   readonly businessName?: string;

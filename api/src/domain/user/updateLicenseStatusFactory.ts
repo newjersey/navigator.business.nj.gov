@@ -29,7 +29,7 @@ export const updateLicenseStatusFactory = (
       licenseData: {
         nameAndAddress: args.nameAndAddress,
         completedSearch: args.completed,
-        lastCheckedStatus: getCurrentDateISOString(),
+        lastUpdatedISO: getCurrentDateISOString(),
         status: args.licenseStatus,
         items: args.items,
       },
