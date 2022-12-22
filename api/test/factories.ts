@@ -39,7 +39,7 @@ import { IndustrySpecificData, ProfileData } from "@shared/profileData";
 import { arrayOfSectors as sectors, SectorType } from "@shared/sector";
 import { TaxFiling, TaxFilingData, TaxFilingLookUpRequest } from "@shared/taxFiling";
 import { generateFormationFormData } from "@shared/test";
-import { Preferences, UserData } from "@shared/userData";
+import { CURRENT_VERSION, Preferences, UserData } from "@shared/userData";
 import { SelfRegResponse, TaxFilingResult } from "src/domain/types";
 import { getRandomDateInBetween, randomElementFromArray } from "./helpers";
 
@@ -113,6 +113,7 @@ export const generateUserData = (overrides: Partial<UserData>): UserData => {
       };
 
   return {
+    version: CURRENT_VERSION,
     user: generateUser({}),
     formProgress: "UNSTARTED",
     taskProgress: profileData.employerId ? { "register-for-ein": "COMPLETED" } : {},

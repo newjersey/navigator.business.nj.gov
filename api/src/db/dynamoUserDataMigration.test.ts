@@ -8,6 +8,22 @@ import { DynamoDBDocumentClient, GetCommand, PutCommand } from "@aws-sdk/lib-dyn
 import { UserDataClient } from "../domain/types";
 import { dynamoDbTranslateConfig, DynamoUserDataClient } from "./DynamoUserDataClient";
 
+import * as sharedUserData from "@shared/userData";
+
+function setupMockSharedUserData(): typeof sharedUserData {
+  return {
+    ...jest.requireActual("@shared/userData").default,
+    CURRENT_VERSION: 2,
+  };
+}
+
+jest.mock("@shared/userData", () => setupMockSharedUserData());
+jest.mock("./migrations/migrations", () => {
+  return {
+    Migrations: [migrate_v0_to_v1, migrate_v1_to_v2],
+  };
+});
+
 // references jest-dynalite-config values
 const dbConfig = {
   tableName: "users-table-test",
@@ -22,13 +38,6 @@ const makeParams = (data: any) => {
     },
   };
 };
-
-jest.mock("./migrations/migrations", () => {
-  return {
-    Migrations: [migrate_v0_to_v1, migrate_v1_to_v2],
-    CURRENT_VERSION: 2,
-  };
-});
 
 describe("DynamoUserDataClient Migrations", () => {
   const config = {
@@ -46,15 +55,27 @@ describe("DynamoUserDataClient Migrations", () => {
     await insertOldData();
   });
 
-  it("migrates and saves data from initial state without version", async () => {
+  it("migrates and saves data from initial state", async () => {
+    // before migration
+    expect(await getDbItem("v0-id")).toEqual({
+      user: {
+        id: "v0-id",
+      },
+      v0Field: "some-v0-value",
+      version: 0,
+    });
+
+    // get does a migration
     expect(await dynamoUserDataClient.get("v0-id")).toEqual({
       user: {
         id: "v0-id",
       },
       v0FieldRenamed: "some-v0-value",
       newV2Field: "",
+      version: 2,
     });
 
+    // now db field is migrated
     expect(await getDbItem("v0-id")).toEqual({
       user: {
         id: "v0-id",
@@ -65,16 +86,36 @@ describe("DynamoUserDataClient Migrations", () => {
     });
   });
 
-  it("migrates data from v1 state without version", async () => {
+  it("migrates data from v1 state on get", async () => {
+    expect(await getDbItem("v1-id")).toEqual({
+      user: {
+        id: "v1-id",
+      },
+      v0FieldRenamed: "some-v1-data",
+      version: 1,
+    });
+
     expect(await dynamoUserDataClient.get("v1-id")).toEqual({
       user: {
         id: "v1-id",
       },
       v0FieldRenamed: "some-v1-data",
       newV2Field: "",
+      version: 2,
+    });
+  });
+
+  it("migrates data on put", async () => {
+    const v1Data = await getDbItem("v1-id");
+    expect(v1Data).toEqual({
+      user: {
+        id: "v1-id",
+      },
+      v0FieldRenamed: "some-v1-data",
+      version: 1,
     });
 
-    expect(await getDbItem("v1-id")).toEqual({
+    expect(await dynamoUserDataClient.put(v1Data)).toEqual({
       user: {
         id: "v1-id",
       },
@@ -91,6 +132,7 @@ describe("DynamoUserDataClient Migrations", () => {
       },
       v0FieldRenamed: "some-v2-data",
       newV2Field: "some-value",
+      version: 2,
     });
   });
 
@@ -165,6 +207,7 @@ const v0Data = {
     id: "v0-id",
   },
   v0Field: "some-v0-value",
+  version: 0,
 };
 
 const v1Data = {

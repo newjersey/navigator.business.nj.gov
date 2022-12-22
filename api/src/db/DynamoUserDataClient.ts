@@ -9,9 +9,9 @@ import {
 } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient, GetCommand, PutCommand } from "@aws-sdk/lib-dynamodb";
 import { unmarshall } from "@aws-sdk/util-dynamodb";
-import { UserData } from "@shared/userData";
+import { CURRENT_VERSION, UserData } from "@shared/userData";
 import { UserDataClient, UserDataQlClient } from "../domain/types";
-import { CURRENT_VERSION, MigrationFunction, Migrations } from "./migrations/migrations";
+import { MigrationFunction, Migrations } from "./migrations/migrations";
 
 const marshallOptions = {
   // Whether to automatically convert empty strings, blobs, and sets to `null`.
@@ -30,12 +30,12 @@ const unmarshallOptions = {
 export const dynamoDbTranslateConfig = { marshallOptions, unmarshallOptions };
 
 const migrateUserData = (data: any): any => {
-  const dataVersion = data.version || 0;
+  const dataVersion = data.version ?? CURRENT_VERSION;
   const migrationsToRun = Migrations.slice(dataVersion);
   const migratedData = migrationsToRun.reduce((prevData: any, migration: MigrationFunction) => {
     return migration(prevData);
   }, data);
-  return migratedData;
+  return { ...migratedData, version: CURRENT_VERSION };
 };
 
 export const DynamoQlUserDataClient = (db: DynamoDBClient, tableName: string): UserDataQlClient => {
@@ -43,8 +43,7 @@ export const DynamoQlUserDataClient = (db: DynamoDBClient, tableName: string): U
     const { Items = [] } = await db.send(new ExecuteStatementCommand({ Statement: statement }));
     const get = (object: any): UserData => {
       const data = unmarshall(object).data;
-      const { version, ...userData } = migrateUserData(data);
-      return userData;
+      return migrateUserData(data);
     };
     return Items.map((i) => {
       return get(i);
@@ -78,8 +77,7 @@ export const DynamoUserDataClient = (db: DynamoDBDocumentClient, tableName: stri
   const doMigration = async (data: any): Promise<UserData> => {
     const migratedData = migrateUserData(data);
     await put(migratedData);
-    const { version, ...userData } = migratedData;
-    return userData;
+    return migratedData;
   };
 
   const findByEmail = (email: string): Promise<UserData | undefined> => {
@@ -127,22 +125,20 @@ export const DynamoUserDataClient = (db: DynamoDBDocumentClient, tableName: stri
   };
 
   const put = (userData: UserData): Promise<UserData> => {
+    const migratedData = migrateUserData(userData);
     const params = {
       TableName: tableName,
       Item: {
-        userId: userData.user.id,
-        email: userData.user.email,
-        data: {
-          ...userData,
-          version: CURRENT_VERSION,
-        },
+        userId: migratedData.user.id,
+        email: migratedData.user.email,
+        data: migratedData,
       },
     };
 
     return db
       .send(new PutCommand(params))
       .then(() => {
-        return userData;
+        return migratedData;
       })
       .catch((error) => {
         throw error;
