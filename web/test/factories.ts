@@ -34,7 +34,7 @@ import {
   BusinessSuffix,
   BusinessSuffixMap,
   BusinessUser,
-  createEmptyFormationFormData,
+  createEmptyFormationFormData, CURRENT_VERSION,
   defaultDateFormat,
   defaultFormationLegalType,
   FormationData,
@@ -94,6 +94,7 @@ export const generateUser = (overrides: Partial<BusinessUser>): BusinessUser => 
 
 export const generateUserData = (overrides: Partial<UserData>): UserData => {
   return {
+    version: CURRENT_VERSION,
     user: generateUser({}),
     profileData: generateProfileData({}),
     formProgress: "COMPLETED",

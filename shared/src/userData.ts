@@ -14,10 +14,14 @@ export interface UserData {
   readonly preferences: Preferences;
   readonly taxFilingData: TaxFilingData;
   readonly formationData: FormationData;
+  readonly version: number;
 }
+
+export const CURRENT_VERSION = 99;
 
 export const createEmptyUserData = (user: BusinessUser): UserData => {
   return {
+    version: CURRENT_VERSION,
     user: user,
     profileData: createEmptyProfileData(),
     formProgress: "UNSTARTED",

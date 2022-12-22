@@ -203,5 +203,3 @@ export const Migrations: MigrationFunction[] = [
   migrate_v97_to_v98,
   migrate_v98_to_v99,
 ];
-
-export const CURRENT_VERSION = Migrations.length;
