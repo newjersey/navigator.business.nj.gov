@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { getCurrentDateISOString, parseDateWithFormat } from "@shared/dateHelpers";
+import { getCurrentDate, getCurrentDateISOString, parseDate, parseDateWithFormat } from "@shared/dateHelpers";
 import { formationApiDateFormat } from "@shared/formationData";
 import {
   generateFormationFormData,
@@ -1144,13 +1144,16 @@ describe("ApiFormationClient", () => {
 
       const userData = generateFormationUserData({}, {}, {});
 
-      expect(await client.form(userData, "some-url")).toEqual({
+      const response = await client.form(userData, "some-url");
+      expect(response).toEqual({
         success: stubResponse.Success,
         token: stubResponse.PayUrl.PortalPayId,
         formationId: stubResponse.Id,
         redirect: stubResponse.PayUrl.RedirectToUrl,
         errors: [],
+        lastUpdatedISO: expect.anything(),
       });
+      expect(parseDate(response.lastUpdatedISO).isSame(getCurrentDate(), "minute")).toBe(true);
     });
 
     it("responds with error messages when failure", async () => {
@@ -1160,7 +1163,8 @@ describe("ApiFormationClient", () => {
 
       const userData = generateFormationUserData({}, {}, {});
 
-      expect(await client.form(userData, "some-url")).toEqual({
+      const response = await client.form(userData, "some-url");
+      expect(response).toEqual({
         success: false,
         token: undefined,
         redirect: undefined,
@@ -1168,7 +1172,9 @@ describe("ApiFormationClient", () => {
           { field: "Payer Email", message: stubError1.ErrorMessage, type: "FIELD" },
           { field: "Registered Agent", message: stubError2.ErrorMessage, type: "FIELD" },
         ],
+        lastUpdatedISO: expect.anything(),
       });
+      expect(parseDate(response.lastUpdatedISO).isSame(getCurrentDate(), "minute")).toBe(true);
     });
 
     it("responds with generic response error when un-parseable failure", async () => {
@@ -1178,24 +1184,30 @@ describe("ApiFormationClient", () => {
 
       const userData = generateFormationUserData({}, {}, {});
 
-      expect(await client.form(userData, "some-url")).toEqual({
+      const response = await client.form(userData, "some-url");
+      expect(response).toEqual({
         success: false,
         token: undefined,
         redirect: undefined,
         errors: [{ field: "", message: "Response Error", type: "RESPONSE" }],
+        lastUpdatedISO: expect.anything(),
       });
+      expect(parseDate(response.lastUpdatedISO).isSame(getCurrentDate(), "minute")).toBe(true);
     });
 
     it("responds with generic error message when connection error", async () => {
       mockAxios.post.mockRejectedValue({});
       const userData = generateFormationUserData({}, {}, {});
 
-      expect(await client.form(userData, "some-url")).toEqual({
+      const response = await client.form(userData, "some-url");
+      expect(response).toEqual({
         success: false,
         token: undefined,
         redirect: undefined,
         errors: [{ field: "", message: "Unknown Error", type: "UNKNOWN" }],
+        lastUpdatedISO: expect.anything(),
       });
+      expect(parseDate(response.lastUpdatedISO).isSame(getCurrentDate(), "minute")).toBe(true);
     });
   });
 

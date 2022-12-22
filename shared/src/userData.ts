@@ -15,9 +15,10 @@ export interface UserData {
   readonly taxFilingData: TaxFilingData;
   readonly formationData: FormationData;
   readonly version: number;
+  readonly lastUpdatedISO: string | undefined;
 }
 
-export const CURRENT_VERSION = 99;
+export const CURRENT_VERSION = 100;
 
 export const createEmptyUserData = (user: BusinessUser): UserData => {
   return {
@@ -28,6 +29,7 @@ export const createEmptyUserData = (user: BusinessUser): UserData => {
     taskProgress: {},
     taskItemChecklist: {},
     licenseData: undefined,
+    lastUpdatedISO: undefined,
     preferences: {
       roadmapOpenSections: ["PLAN", "START"],
       roadmapOpenSteps: [],

@@ -27,7 +27,7 @@ export type LicenseStatus =
 export interface LicenseData {
   nameAndAddress: NameAndAddress;
   completedSearch: boolean;
-  lastCheckedStatus: string;
+  lastUpdatedISO: string;
   status: LicenseStatus;
   items: LicenseStatusItem[];
 }

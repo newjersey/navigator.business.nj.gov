@@ -114,6 +114,7 @@ export const generateUserData = (overrides: Partial<UserData>): UserData => {
 
   return {
     version: CURRENT_VERSION,
+    lastUpdatedISO: getCurrentDateISOString(),
     user: generateUser({}),
     formProgress: "UNSTARTED",
     taskProgress: profileData.employerId ? { "register-for-ein": "COMPLETED" } : {},
@@ -286,7 +287,7 @@ export const generateLicenseData = (overrides: Partial<LicenseData>): LicenseDat
     completedSearch: true,
     items: [generateLicenseStatusItem({})],
     status: "PENDING",
-    lastCheckedStatus: getCurrentDateISOString(),
+    lastUpdatedISO: getCurrentDateISOString(),
     ...overrides,
   };
 };
@@ -414,6 +415,7 @@ export const generateFormationSubmitResponse = (
     formationId: `some-id-${randomInt()}`,
     redirect: `some-redirect-${randomInt()}`,
     errors: [],
+    lastUpdatedISO: getCurrentDateISOString(),
     ...overrides,
   };
 };
