@@ -120,7 +120,7 @@
   top: 50%;
   display: block;
   width: 4.375rem;
-  height: 9.375rem;
+  height: 11.375rem;
   padding: 0;
   transform: translate(0, -50%);
   cursor: pointer;
@@ -145,10 +145,10 @@
     width: 4.375rem;
     height: 5rem;
     &:hover {
-      background-color: $secondary-dark;
+      color: $secondary-dark;
     }
     &:active {
-      background-color: $secondary-dark;
+      color: $secondary-dark;
     }
   }
 }
