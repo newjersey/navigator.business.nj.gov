@@ -1,4 +1,4 @@
-import { AddNewsletter, UserDataClient, UserDataQlClient } from "../types";
+import { AddNewsletter, UserDataClient } from "../types";
 
 type AddNewsletterBatchResponse = {
   success: number;
@@ -8,10 +8,9 @@ type AddNewsletterBatchResponse = {
 
 export const addNewsletterBatch = async (
   addNewsletter: AddNewsletter,
-  userDataClient: UserDataClient,
-  userDataQlClient: UserDataQlClient
+  userDataClient: UserDataClient
 ): Promise<AddNewsletterBatchResponse> => {
-  const results = await userDataQlClient.getNeedNewsletterUsers();
+  const results = await userDataClient.getNeedNewsletterUsers();
   let success = 0;
   let failed = 0;
   const promises: Promise<void>[] = [];

@@ -1,4 +1,4 @@
-import { EncryptTaxId, UserDataClient, UserDataQlClient } from "../types";
+import { EncryptTaxId, UserDataClient } from "../types";
 
 type EncryptTaxIdBatchResponse = {
   success: number;
@@ -8,10 +8,9 @@ type EncryptTaxIdBatchResponse = {
 
 export const encryptTaxIdBatch = async (
   encryptTaxId: EncryptTaxId,
-  userDataClient: UserDataClient,
-  userDataQlClient: UserDataQlClient
+  userDataClient: UserDataClient
 ): Promise<EncryptTaxIdBatchResponse> => {
-  const results = await userDataQlClient.getNeedTaxIdEncryptionUsers();
+  const results = await userDataClient.getNeedTaxIdEncryptionUsers();
   let success = 0;
   let failed = 0;
   const promises: Promise<void>[] = [];

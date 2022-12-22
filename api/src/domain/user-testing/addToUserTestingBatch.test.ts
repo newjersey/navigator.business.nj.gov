@@ -1,6 +1,6 @@
 import { UserData } from "@shared/userData";
 import { generateUser, generateUserData } from "../../../test/factories";
-import { AddToUserTesting, UserDataClient, UserDataQlClient, UserTestingClient } from "../types";
+import { AddToUserTesting, UserDataClient, UserTestingClient } from "../types";
 import { addToUserTestingBatch } from "./addToUserTestingBatch";
 import { addToUserTestingFactory } from "./addToUserTestingFactory";
 
@@ -8,7 +8,6 @@ describe("addToUserTestingBatch", () => {
   let stubUserTestingClient: jest.Mocked<UserTestingClient>;
   let addToUserTesting: AddToUserTesting;
   let stubUserDataClient: jest.Mocked<UserDataClient>;
-  let stubUserDataQlClient: jest.Mocked<UserDataQlClient>;
 
   beforeEach(async () => {
     jest.resetAllMocks();
@@ -17,12 +16,9 @@ describe("addToUserTestingBatch", () => {
       get: jest.fn(),
       put: jest.fn(),
       findByEmail: jest.fn(),
-    };
-    stubUserDataQlClient = {
       getNeedTaxIdEncryptionUsers: jest.fn(),
       getNeedNewsletterUsers: jest.fn(),
       getNeedToAddToUserTestingUsers: jest.fn(),
-      search: jest.fn(),
     };
     addToUserTesting = addToUserTestingFactory(stubUserTestingClient);
   });
@@ -33,12 +29,12 @@ describe("addToUserTestingBatch", () => {
     });
     stubUserTestingClient.add.mockResolvedValue({ success: true, status: "SUCCESS" });
 
-    stubUserDataQlClient.getNeedToAddToUserTestingUsers.mockResolvedValue([
+    stubUserDataClient.getNeedToAddToUserTestingUsers.mockResolvedValue([
       generateUserData({ user: generateUser({ externalStatus: {} }) }),
       generateUserData({ user: generateUser({ externalStatus: {} }) }),
     ]);
 
-    const results = await addToUserTestingBatch(addToUserTesting, stubUserDataClient, stubUserDataQlClient);
+    const results = await addToUserTestingBatch(addToUserTesting, stubUserDataClient);
     expect(results).toEqual({ total: 2, success: 2, failed: 0 });
   });
 
@@ -50,12 +46,12 @@ describe("addToUserTestingBatch", () => {
       .mockResolvedValueOnce({ success: false, status: "RESPONSE_ERROR" })
       .mockResolvedValueOnce({ success: true, status: "SUCCESS" });
 
-    stubUserDataQlClient.getNeedToAddToUserTestingUsers.mockResolvedValue([
+    stubUserDataClient.getNeedToAddToUserTestingUsers.mockResolvedValue([
       generateUserData({ user: generateUser({ externalStatus: {} }) }),
       generateUserData({ user: generateUser({ externalStatus: {} }) }),
     ]);
 
-    const results = await addToUserTestingBatch(addToUserTesting, stubUserDataClient, stubUserDataQlClient);
+    const results = await addToUserTestingBatch(addToUserTesting, stubUserDataClient);
     expect(results).toEqual({ total: 2, success: 1, failed: 1 });
   });
 
@@ -67,12 +63,12 @@ describe("addToUserTestingBatch", () => {
       .mockRejectedValueOnce({})
       .mockResolvedValueOnce({ success: true, status: "SUCCESS" });
 
-    stubUserDataQlClient.getNeedToAddToUserTestingUsers.mockResolvedValue([
+    stubUserDataClient.getNeedToAddToUserTestingUsers.mockResolvedValue([
       generateUserData({ user: generateUser({ externalStatus: {} }) }),
       generateUserData({ user: generateUser({ externalStatus: {} }) }),
     ]);
 
-    const results = await addToUserTestingBatch(addToUserTesting, stubUserDataClient, stubUserDataQlClient);
+    const results = await addToUserTestingBatch(addToUserTesting, stubUserDataClient);
     expect(results).toEqual({ total: 2, success: 1, failed: 1 });
   });
 });

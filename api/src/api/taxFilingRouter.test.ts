@@ -31,6 +31,9 @@ describe("taxFilingRouter", () => {
       get: jest.fn(),
       findByEmail: jest.fn(),
       put: jest.fn(),
+      getNeedNewsletterUsers: jest.fn(),
+      getNeedToAddToUserTestingUsers: jest.fn(),
+      getNeedTaxIdEncryptionUsers: jest.fn(),
     };
 
     apiTaxFilingClient = {

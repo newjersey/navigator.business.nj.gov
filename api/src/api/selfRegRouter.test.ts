@@ -18,6 +18,9 @@ describe("selfRegRouter", () => {
       get: jest.fn(),
       put: jest.fn(),
       findByEmail: jest.fn(),
+      getNeedNewsletterUsers: jest.fn(),
+      getNeedToAddToUserTestingUsers: jest.fn(),
+      getNeedTaxIdEncryptionUsers: jest.fn(),
     };
 
     stubSelfRegClient = {
