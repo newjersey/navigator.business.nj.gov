@@ -1,4 +1,4 @@
-import { AddToUserTesting, UserDataClient, UserDataQlClient } from "../types";
+import { AddToUserTesting, UserDataClient } from "../types";
 
 type AddToUserTestingBatchResponse = {
   success: number;
@@ -8,10 +8,9 @@ type AddToUserTestingBatchResponse = {
 
 export const addToUserTestingBatch = async (
   addToUserTesting: AddToUserTesting,
-  userDataClient: UserDataClient,
-  userDataQlClient: UserDataQlClient
+  userDataClient: UserDataClient
 ): Promise<AddToUserTestingBatchResponse> => {
-  const results = await userDataQlClient.getNeedToAddToUserTestingUsers();
+  const results = await userDataClient.getNeedToAddToUserTestingUsers();
   let success = 0;
   let failed = 0;
   const promises: Promise<void>[] = [];

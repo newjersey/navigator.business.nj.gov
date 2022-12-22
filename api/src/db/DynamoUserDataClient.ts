@@ -1,16 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import {
-  DynamoDBClient,
-  ExecuteStatementCommand,
-  QueryCommand,
-  QueryCommandInput,
-} from "@aws-sdk/client-dynamodb";
+import { ExecuteStatementCommand, QueryCommand, QueryCommandInput } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient, GetCommand, PutCommand } from "@aws-sdk/lib-dynamodb";
 import { unmarshall } from "@aws-sdk/util-dynamodb";
 import { CURRENT_VERSION, UserData } from "@shared/userData";
-import { UserDataClient, UserDataQlClient } from "../domain/types";
+import { UserDataClient } from "../domain/types";
 import { MigrationFunction, Migrations } from "./migrations/migrations";
 
 const marshallOptions = {
@@ -36,41 +31,6 @@ const migrateUserData = (data: any): any => {
     return migration(prevData);
   }, data);
   return { ...migratedData, version: CURRENT_VERSION };
-};
-
-export const DynamoQlUserDataClient = (db: DynamoDBClient, tableName: string): UserDataQlClient => {
-  const search = async (statement: string): Promise<UserData[]> => {
-    const { Items = [] } = await db.send(new ExecuteStatementCommand({ Statement: statement }));
-    const get = (object: any): UserData => {
-      const data = unmarshall(object).data;
-      return migrateUserData(data);
-    };
-    return Items.map((i) => {
-      return get(i);
-    });
-  };
-
-  const getNeedNewsletterUsers = () => {
-    const statement = `SELECT data FROM "${tableName}" WHERE data["user"].receiveNewsletter = true and (data["user"].externalStatus.newsletter is missing or data["user"].externalStatus.newsletter.success = false)`;
-    return search(statement);
-  };
-
-  const getNeedToAddToUserTestingUsers = () => {
-    const statement = `SELECT data FROM "${tableName}" WHERE data["user"].userTesting = true and (data["user"].externalStatus.userTesting is missing or data["user"].externalStatus.userTesting.success = false)`;
-    return search(statement);
-  };
-
-  const getNeedTaxIdEncryptionUsers = () => {
-    const statement = `SELECT data FROM "${tableName}" WHERE data["profileData"].encryptedTaxId IS MISSING AND data["profileData"].taxId IS NOT MISSING`;
-    return search(statement);
-  };
-
-  return {
-    search,
-    getNeedNewsletterUsers,
-    getNeedToAddToUserTestingUsers,
-    getNeedTaxIdEncryptionUsers,
-  };
 };
 
 export const DynamoUserDataClient = (db: DynamoDBDocumentClient, tableName: string): UserDataClient => {
@@ -145,9 +105,37 @@ export const DynamoUserDataClient = (db: DynamoDBDocumentClient, tableName: stri
       });
   };
 
+  const getNeedNewsletterUsers = () => {
+    const statement = `SELECT data FROM "${tableName}" WHERE data["user"].receiveNewsletter = true and (data["user"].externalStatus.newsletter is missing or data["user"].externalStatus.newsletter.success = false)`;
+    return search(statement);
+  };
+
+  const getNeedToAddToUserTestingUsers = () => {
+    const statement = `SELECT data FROM "${tableName}" WHERE data["user"].userTesting = true and (data["user"].externalStatus.userTesting is missing or data["user"].externalStatus.userTesting.success = false)`;
+    return search(statement);
+  };
+
+  const getNeedTaxIdEncryptionUsers = () => {
+    const statement = `SELECT data FROM "${tableName}" WHERE data["profileData"].encryptedTaxId IS MISSING AND data["profileData"].taxId IS NOT MISSING`;
+    return search(statement);
+  };
+
+  const search = async (statement: string): Promise<UserData[]> => {
+    const { Items = [] } = await db.send(new ExecuteStatementCommand({ Statement: statement }));
+    return await Promise.all(
+      Items.map(async (object: any): Promise<UserData> => {
+        const data = unmarshall(object).data;
+        return await doMigration(data);
+      })
+    );
+  };
+
   return {
     get,
     put,
     findByEmail,
+    getNeedNewsletterUsers,
+    getNeedToAddToUserTestingUsers,
+    getNeedTaxIdEncryptionUsers,
   };
 };

@@ -10,10 +10,6 @@ export interface UserDataClient {
   get: (userId: string) => Promise<UserData>;
   findByEmail: (email: string) => Promise<UserData | undefined>;
   put: (userData: UserData) => Promise<UserData>;
-}
-
-export interface UserDataQlClient {
-  search: (statement: string) => Promise<UserData[]>;
   getNeedNewsletterUsers: () => Promise<UserData[]>;
   getNeedToAddToUserTestingUsers: () => Promise<UserData[]>;
   getNeedTaxIdEncryptionUsers: () => Promise<UserData[]>;

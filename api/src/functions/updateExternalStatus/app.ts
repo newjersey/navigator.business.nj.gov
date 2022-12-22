@@ -2,11 +2,7 @@ import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 import { LogWriter } from "@libs/logWriter";
 import { GovDeliveryNewsletterClient } from "src/client/GovDeliveryNewsletterClient";
-import {
-  dynamoDbTranslateConfig,
-  DynamoQlUserDataClient,
-  DynamoUserDataClient,
-} from "src/db/DynamoUserDataClient";
+import { dynamoDbTranslateConfig, DynamoUserDataClient } from "src/db/DynamoUserDataClient";
 import { addNewsletterBatch } from "src/domain/newsletter/addNewsletterBatch";
 import { addNewsletterFactory } from "src/domain/newsletter/addNewsletterFactory";
 import { AirtableUserTestingClient } from "../../client/AirtableUserTestingClient";
@@ -20,26 +16,30 @@ export default async function handler() {
   const STAGE = process.env.STAGE || "local";
 
   const DYNAMO_OFFLINE_PORT = process.env.DYNAMO_PORT || 8000;
-  let dynamoDb: DynamoDBClient;
-  let dynamoDbDocument: DynamoDBDocumentClient;
+  let dynamoDb: DynamoDBDocumentClient;
   if (IS_OFFLINE) {
     let dynamoDbEndpoint = "localhost";
     if (IS_DOCKER) {
       dynamoDbEndpoint = "dynamodb-local";
     }
-    const endpoint = {
-      region: "localhost",
-      endpoint: `http://${dynamoDbEndpoint}:${DYNAMO_OFFLINE_PORT}`,
-    };
-    dynamoDb = new DynamoDBClient(endpoint);
-    dynamoDbDocument = DynamoDBDocumentClient.from(dynamoDb, dynamoDbTranslateConfig);
+    dynamoDb = DynamoDBDocumentClient.from(
+      new DynamoDBClient({
+        region: "localhost",
+        endpoint: `http://${dynamoDbEndpoint}:${DYNAMO_OFFLINE_PORT}`,
+      }),
+      dynamoDbTranslateConfig
+    );
   } else {
-    dynamoDb = new DynamoDBClient({ region: "us-east-1" });
-    dynamoDbDocument = DynamoDBDocumentClient.from(dynamoDb, dynamoDbTranslateConfig);
+    dynamoDb = DynamoDBDocumentClient.from(
+      new DynamoDBClient({
+        region: "us-east-1",
+      }),
+      dynamoDbTranslateConfig
+    );
   }
+
+  const dbClient = DynamoUserDataClient(dynamoDb, USERS_TABLE);
   const logger = LogWriter(`NavigatorWebService/${STAGE}`, "ApiLogs");
-  const dbClient = DynamoUserDataClient(dynamoDbDocument, USERS_TABLE);
-  const qlClient = DynamoQlUserDataClient(dynamoDb, USERS_TABLE);
 
   const GOV_DELIVERY_BASE_URL =
     process.env.GOV_DELIVERY_BASE_URL ||
@@ -77,6 +77,6 @@ export default async function handler() {
   const addNewsletter = addNewsletterFactory(newsletterGovDeliveryClient);
   const addToAirtableUserTesting = addToUserTestingFactory(airtableUserTestingClient);
 
-  await addNewsletterBatch(addNewsletter, dbClient, qlClient);
-  await addToUserTestingBatch(addToAirtableUserTesting, dbClient, qlClient);
+  await addNewsletterBatch(addNewsletter, dbClient);
+  await addToUserTestingBatch(addToAirtableUserTesting, dbClient);
 }
