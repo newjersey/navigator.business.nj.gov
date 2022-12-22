@@ -18,4 +18,14 @@ global.console.error = (message) => {
   throw message;
 };
 
+window.matchMedia =
+  window.matchMedia ||
+  function () {
+    return {
+      matches: false,
+      addListener: function () {},
+      removeListener: function () {},
+    };
+  };
+
 jest.setTimeout(10000);

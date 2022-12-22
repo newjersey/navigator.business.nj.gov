@@ -338,18 +338,13 @@
     "section4SecondIconText": "Your Business Guide",
     "section2CallToActionText": "Get Started",
     "section3CallToActionText": "Find Funding",
-    "landingPageTile2Text": "I'm starting a business",
     "card1ButtonLink": "https://business.nj.gov/",
-    "landingPageTile1Line1Text": "Get",
     "section2SupportingText": "See the forms and licenses specific to starting your business and avoiding fines. Be prepared to tell us your business structure, industry, and business location.",
     "card3HeaderLine1": "Chat with a New Jersey",
-    "landingPageTile4Text": "I'm an out-of-state business",
     "card3HeaderLine2": "Representative",
-    "landingPageTile5Text": "How do I register my business?",
     "card2ButtonLink": "https://business.nj.gov/newsletter-signup",
     "section3SupportingText": "Identify funding programs and certifications across State agencies that fit your business.",
     "card2HeaderLine1": "Sign Up for Our",
-    "landingPageTile1Line2Text": "Started",
     "card1HeaderLine1": "Explore",
     "card2HeaderLine2": "Newsletter",
     "card1HeaderLine2": "Business.NJ.gov",
@@ -363,7 +358,15 @@
     "heroCallOutFirstLineText": "Your Business, Your Way",
     "section4ThirdIconText": "NJ Government Services",
     "section5SecondHeaderText": "Funding & Certifications",
-    "section6Header": "Looking for More Support?"
+    "section6Header": "Looking for More Support?",
+    "landingPageTile1Line1Text": "Get",
+    "landingPageTile1Line2Text": "Started",
+    "landingPageTile2Text": "I'm starting a business",
+    "landingPageTile3Text": "I'm running an NJ business",
+    "landingPageTile4Text": "I'm an out-of-state business",
+    "landingPageTile5Text": "How do I register my business?",
+    "landingPageTile6Text": "Where do I pay my taxes?",
+    "landingPageTile7Text": "What funding am I eligible for?"
   },
   "feedbackModal": {
     "feedbackModalFeatureRequestButtonText": "Request new capabilities",
@@ -539,7 +542,9 @@
     "previousTaskButtonText": "Previous Task",
     "formNameText": "Form",
     "defaultCallToActionText": "Start Application",
-    "unlockedByPlural": "Before starting this task, we recommend you take a look at:"
+    "unlockedByPlural": "Before starting this task, we recommend you take a look at:",
+    "editText": "Edit",
+    "removeText": "Remove"
   },
   "searchBusinessNameTask": {
     "placeholderText": "Type potential business name",

@@ -97,7 +97,7 @@ describe("<EinTask />", () => {
       });
       fireEvent.click(screen.getByText(Config.ein.saveButtonText));
       await waitFor(() => {
-        expect(screen.getByText(Config.ein.editText)).toBeInTheDocument();
+        expect(screen.getByText(Config.taskDefaults.editText)).toBeInTheDocument();
       });
       expect(screen.queryByText(Config.ein.placeholderText)).not.toBeInTheDocument();
     });
@@ -143,32 +143,32 @@ describe("<EinTask />", () => {
 
     it("navigates back to input on edit button click", () => {
       renderPage();
-      fireEvent.click(screen.getByText(Config.ein.editText));
+      fireEvent.click(screen.getByText(Config.taskDefaults.editText));
       expect(screen.getByText(Config.ein.saveButtonText)).toBeInTheDocument();
       expect((screen.getByPlaceholderText(Config.ein.placeholderText) as HTMLInputElement).value).toEqual(
         "12-3456789"
       );
-      expect(screen.queryByText(Config.ein.editText)).not.toBeInTheDocument();
+      expect(screen.queryByText(Config.taskDefaults.editText)).not.toBeInTheDocument();
     });
 
     it("navigates back to empty input on remove button click", () => {
       renderPage();
-      fireEvent.click(screen.getByText(Config.ein.removeText));
+      fireEvent.click(screen.getByText(Config.taskDefaults.removeText));
       expect(screen.getByText(Config.ein.saveButtonText)).toBeInTheDocument();
       expect((screen.getByPlaceholderText(Config.ein.placeholderText) as HTMLInputElement).value).toEqual("");
-      expect(screen.queryByText(Config.ein.removeText)).not.toBeInTheDocument();
+      expect(screen.queryByText(Config.taskDefaults.removeText)).not.toBeInTheDocument();
       expect(currentUserData().profileData.employerId).toEqual(undefined);
     });
 
     it("sets task status to in-progress on edit button", () => {
       renderPage();
-      fireEvent.click(screen.getByText(Config.ein.editText));
+      fireEvent.click(screen.getByText(Config.taskDefaults.editText));
       expect(currentUserData().taskProgress[taskId]).toEqual("IN_PROGRESS");
     });
 
     it("sets task status to in-progress on remove button", () => {
       renderPage();
-      fireEvent.click(screen.getByText(Config.ein.removeText));
+      fireEvent.click(screen.getByText(Config.taskDefaults.removeText));
       expect(currentUserData().taskProgress[taskId]).toEqual("IN_PROGRESS");
     });
   });

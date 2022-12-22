@@ -24,7 +24,7 @@ export interface QUERY_PARAMS_VALUES {
   industry: string;
   code: string;
   openTaxFilingsModal: "true";
-  flow: "starting" | "out-of-state";
+  flow: "starting" | "out-of-state" | "up-and-running";
 }
 
 export enum QUERIES {

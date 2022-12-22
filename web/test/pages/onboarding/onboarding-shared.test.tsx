@@ -388,5 +388,17 @@ describe("onboarding - shared", () => {
       await page.visitStep(3);
       expect(currentUserData().profileData.businessPersona).toEqual("FOREIGN");
     });
+
+    it("routes user to step 1 with up-and-running business selected when up-and-running query parameter exists", async () => {
+      useMockRouter({ isReady: true, query: { flow: "up-and-running" } });
+      const { page } = renderPage({});
+
+      expect(screen.getByTestId("step-1")).toBeInTheDocument();
+
+      expect(screen.getByLabelText("Business structure")).toBeInTheDocument();
+      page.selectByValue("Business structure", "c-corporation");
+      await page.visitStep(2);
+      expect(currentUserData().profileData.businessPersona).toEqual("OWNING");
+    });
   });
 });

@@ -28,11 +28,11 @@ export const NaicsCodeDisplay = (props: Props): ReactElement => {
           {lookupNaicsCode(props.code)?.SixDigitDescription}
         </span>
         <Button style="tertiary" underline onClick={props.onEdit}>
-          {Config.determineNaicsCode.editText}
+          {Config.taskDefaults.editText}
         </Button>
         <span className="margin-x-105">|</span>
         <Button style="tertiary" underline onClick={props.onRemove}>
-          {Config.determineNaicsCode.removeText}
+          {Config.taskDefaults.removeText}
         </Button>
       </div>
     </>
