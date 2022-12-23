@@ -28,7 +28,7 @@ Your detective agency must be licensed prior to offering services to the public.
 * Names, addresses, phone numbers, email addresses, and signatures of five people unrelated to each of the applicants that can provide character references   
 * Pay any associated fees  
 
-**Note:** The application must be notarized. Once it's approved you'll be required to send in your `Certificate of Formation.|certificate-formation`
+**Note:** The application must be notarized. Once it's approved you'll be required to send in your `Certificate of Formation.|certificate-formation` 
 
 > **Once completed, you will have:**
 >
