@@ -10,6 +10,10 @@ export const getCurrentDate = (): Dayjs => {
   return dayjs();
 };
 
+export const getJanOfCurrentYear = (): Dayjs => {
+  return dayjs().month(0);
+};
+
 export const getCurrentDateInNewJersey = (): Dayjs => {
   dayjs.extend(utc);
   dayjs.extend(timezone);
