@@ -434,10 +434,19 @@ describe("<FilingsCalendarTaxAccess />", () => {
       renderFilingsCalendarTaxAccess(userDataWithPrefilledFields);
       openModal();
 
+      expect(screen.getByText(Config.taxCalendar.modalHeader)).toBeInTheDocument();
+
       expect(screen.getByTestId("modal-body")).toContainHTML(
         renderToStaticMarkup(
           Content({
-            children: `${Config.taxCalendar.modalTaxIdMarkdown}\n\n${Config.taxCalendar.taxIdDisclaimerMd}`,
+            children: Config.taxCalendar.modalTaxIdMarkdown,
+          })
+        )
+      );
+      expect(screen.getByTestId("modal-body")).toContainHTML(
+        renderToStaticMarkup(
+          Content({
+            children: Config.taxCalendar.taxIdDisclaimerMd,
           })
         )
       );

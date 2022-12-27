@@ -16,6 +16,7 @@ import { OnboardingOwnership } from "@/components/onboarding/OnboardingOwnership
 import { OnboardingRadioQuestion } from "@/components/onboarding/OnboardingRadioQuestion";
 import { OnboardingResponsibleOwnerName } from "@/components/onboarding/OnboardingResponsibleOwnerName";
 import { OnboardingSectors } from "@/components/onboarding/OnboardingSectors";
+import { OnboardingTaxId } from "@/components/onboarding/OnboardingTaxId";
 import { OnboardingTaxPin } from "@/components/onboarding/OnboardingTaxPin";
 import { ProfileNaicsCode } from "@/components/onboarding/ProfileNaicsCode";
 import { ProfileNexusBusinessNameField } from "@/components/onboarding/ProfileNexusBusinessNameField";
@@ -136,6 +137,10 @@ const ProfileFieldsPreview = (props: PreviewProps) => {
         <hr className="margin-y-4" />
         <FieldLabelOnboarding fieldName="nexusDbaName" />
         <ProfileNexusDBANameField />
+
+        <hr className="margin-y-4" />
+        <FieldLabelOnboarding fieldName="taxId" />
+        <OnboardingTaxId fieldStates={fieldStates} />
 
         <hr className="margin-y-4" />
         <FieldLabelOnboarding fieldName="entityId" />

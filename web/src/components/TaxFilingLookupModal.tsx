@@ -108,14 +108,6 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
     setFieldStates({ ...fieldStates, [field]: { ...fieldStates[field], invalid } });
   };
 
-  const getTaxIdDescription = (): string => {
-    if (isPublicFiling) {
-      return Config.taxCalendar.modalTaxIdMarkdown;
-    } else {
-      return `${Config.taxCalendar.modalTaxIdMarkdown}\n\n${Config.taxCalendar.taxIdDisclaimerMd}`;
-    }
-  };
-
   const onSubmit = async () => {
     if (!userData) {
       return;
@@ -310,7 +302,8 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
           fieldName="taxId"
           overrides={{
             header: Config.taxCalendar.modalTaxIdHeader,
-            description: getTaxIdDescription(),
+            description: Config.taxCalendar.modalTaxIdMarkdown,
+            postDescription: isPublicFiling ? undefined : Config.taxCalendar.taxIdDisclaimerMd,
           }}
         />
         <OnboardingTaxId
