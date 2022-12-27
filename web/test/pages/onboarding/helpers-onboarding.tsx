@@ -479,9 +479,9 @@ export const mockSuccessfulApiSignups = (): void => {
 };
 
 export const industriesWithEssentialQuestion = Industries.filter((industry) => {
-  return hasEssentialQuestion(industry.id) === true;
+  return hasEssentialQuestion(industry.id) === true && industry.isEnabled;
 });
 
 export const industriesWithOutEssentialQuestion = Industries.filter((industry) => {
-  return hasEssentialQuestion(industry.id) === false;
+  return hasEssentialQuestion(industry.id) === false && industry.isEnabled;
 });
