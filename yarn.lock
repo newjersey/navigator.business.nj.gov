@@ -4142,7 +4142,7 @@ __metadata:
     "@mui/material": 5.11.1
     "@mui/styles": 5.11.1
     "@mui/system": 5.11.1
-    "@mui/x-date-pickers": 5.0.11
+    "@mui/x-date-pickers": 5.0.12
     "@next/bundle-analyzer": 12.1.6
     "@next/eslint-plugin-next": 12.1.6
     "@semantic-release/changelog": 6.0.2
@@ -4360,7 +4360,7 @@ __metadata:
     "@mui/material": 5.11.1
     "@mui/styles": 5.11.1
     "@mui/system": 5.11.1
-    "@mui/x-date-pickers": 5.0.11
+    "@mui/x-date-pickers": 5.0.12
     "@next/bundle-analyzer": 12.1.6
     "@next/eslint-plugin-next": 12.1.6
     "@storybook/addon-actions": 6.5.15
@@ -6785,9 +6785,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mui/x-date-pickers@npm:5.0.11":
-  version: 5.0.11
-  resolution: "@mui/x-date-pickers@npm:5.0.11"
+"@mui/x-date-pickers@npm:5.0.12":
+  version: 5.0.12
+  resolution: "@mui/x-date-pickers@npm:5.0.12"
   dependencies:
     "@babel/runtime": ^7.18.9
     "@date-io/core": ^2.15.0
@@ -6825,7 +6825,7 @@ __metadata:
       optional: true
     moment:
       optional: true
-  checksum: 425c3f0ccbf0e6d3711b5ddf19bb8f0abcb1dd961af32064ce139e7a0211e52b68888456fb082295082560e0f05605f3e371914ec2da0d4f6b045aac783efa0c
+  checksum: b02bf2dbde4c474ac45f4028ee2f7e02582dbc421563e16f24ff02029c8f6995ab8f3a346d14926e251b776fd824deb917ac0b7bff3bf3c3efd6268cb2de88e4
   languageName: node
   linkType: hard
 

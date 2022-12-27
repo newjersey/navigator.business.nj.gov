@@ -48,7 +48,7 @@
     "@mui/lab": "5.0.0-alpha.113",
     "@mui/material": "5.11.1",
     "@mui/styles": "5.11.1",
-    "@mui/x-date-pickers": "5.0.11",
+    "@mui/x-date-pickers": "5.0.12",
     "@storybook/addon-outline": "6.5.15",
     "@types/mdast": "3.0.10",
     "@types/ua-parser-js": "0.7.36",
