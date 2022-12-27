@@ -99,36 +99,6 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
     })();
   }, [currentName, userData, props.isDba, doSearch]);
 
-  const showBadInputError = (): ReactElement => {
-    if (error !== "BAD_INPUT") {
-      return <></>;
-    }
-    return (
-      <div data-testid={`error-alert-${error}`} className="text-error-dark">
-        {SearchBusinessNameErrorLookup[error]}
-      </div>
-    );
-  };
-
-  const showErrorAlert = (): ReactElement => {
-    if (!error || error === "BAD_INPUT") {
-      return <></>;
-    }
-    return (
-      <Alert dataTestid={`error-alert-${error}`} variant="error">
-        {SearchBusinessNameErrorLookup[error]}
-      </Alert>
-    );
-  };
-
-  const showDesignator = (): ReactElement => {
-    return (
-      <div data-testid="designator-text">
-        <p className="font-body-2xs text-red">{Config.searchBusinessNameTask.designatorText}</p>
-      </div>
-    );
-  };
-
   const shouldShowTextField = (): boolean => {
     if (props.hideTextFieldWhenUnavailable) {
       return nameAvailability?.status !== "UNAVAILABLE";
@@ -139,9 +109,13 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
 
   return (
     <>
-      {showErrorAlert()}
+      {error === "SEARCH_FAILED" && (
+        <Alert dataTestid={`error-alert-${error}`} variant="error">
+          {SearchBusinessNameErrorLookup[error]}
+        </Alert>
+      )}
       {shouldShowTextField() && (
-        <>
+        <div className={error === "BAD_INPUT" ? "input-error-bar error" : ""}>
           {props.config.inputLabel && (
             <div className="margin-top-2">
               <label className="text-bold" htmlFor="name-input">
@@ -188,10 +162,14 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
               </div>
             </div>
           </form>
-        </>
+          {error === "BAD_INPUT" && (
+            <div data-testid={`error-alert-${error}`} className="text-error-dark">
+              {SearchBusinessNameErrorLookup[error]}
+            </div>
+          )}
+        </div>
       )}
       <div className="margin-top-2">
-        {showBadInputError()}
         {nameAvailability?.status === "AVAILABLE" && (
           <Available
             submittedName={submittedName}
@@ -199,7 +177,11 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
             updateNameOnProfile={updateNameOnProfile}
           />
         )}
-        {nameAvailability?.status === "DESIGNATOR" && showDesignator()}
+        {nameAvailability?.status === "DESIGNATOR" && (
+          <div data-testid="designator-text">
+            <p className="font-body-2xs text-red">{Config.searchBusinessNameTask.designatorText}</p>
+          </div>
+        )}
         {nameAvailability?.status === "UNAVAILABLE" && (
           <Unavailable
             resetSearch={resetSearch}
