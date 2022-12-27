@@ -2,6 +2,7 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
+import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { ProfileTabs } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
@@ -949,6 +950,7 @@ describe("profile", () => {
           ...userData.profileData,
           industryId: newIndustry,
           sectorId: LookupIndustryById(newIndustry).defaultSectorId,
+          homeBasedBusiness: isHomeBasedBusinessApplicable(newIndustry) ? undefined : false,
         },
       });
     });
