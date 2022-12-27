@@ -9,6 +9,7 @@ interface FieldOverrides {
   header?: string;
   description?: string;
   headerNotBolded?: string;
+  postDescription?: string;
 }
 
 interface Props {
@@ -29,6 +30,7 @@ export const FieldLabelModal = (props: Props) => {
   const header = props.overrides?.header || contentFromConfig.header;
   const description = props.overrides?.description || contentFromConfig.description;
   const unboldedHeader = props.overrides?.headerNotBolded || contentFromConfig.headerNotBolded;
+  const postDescription = props.overrides?.postDescription;
 
   return (
     <>
@@ -44,6 +46,13 @@ export const FieldLabelModal = (props: Props) => {
         </strong>
       </div>
       {description && <Content>{description}</Content>}
+
+      {postDescription && (
+        <>
+          <br />
+          <Content>{postDescription}</Content>
+        </>
+      )}
     </>
   );
 };
