@@ -20,6 +20,7 @@ import {
 import {
   defaultDateFormat,
   getCurrentDate,
+  getJanOfCurrentYear,
   OperatingPhases,
   parseDateWithFormat,
   randomInt,
@@ -81,7 +82,7 @@ describe("<FilingsCalendar />", () => {
   });
 
   it("displays filings calendar with annual report date", () => {
-    const dueDate = getCurrentDate().add(2, "months");
+    const dueDate = getJanOfCurrentYear().add(2, "months");
     const annualReport = generateTaxFiling({
       identifier: "annual-report",
       dueDate: dueDate.format(defaultDateFormat),
