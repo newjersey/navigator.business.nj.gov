@@ -9,7 +9,9 @@ export const splitAndBoldSearchText = (displayText: string, searchText: string):
     return (
       <span style={{ whiteSpace: "pre-wrap" }}>
         {prefixText}
-        <span className="text-bold">{toBold}</span>
+        <span className="text-bold" data-testid="span-bold">
+          {toBold}
+        </span>
         {afterText}
       </span>
     );

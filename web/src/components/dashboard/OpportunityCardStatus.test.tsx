@@ -2,26 +2,6 @@ import { OpportunityCardStatus } from "@/components/dashboard/OpportunityCardSta
 import { render } from "@testing-library/react";
 
 describe("OpportunityCard", () => {
-  it("matches the layout", () => {
-    const view = render(<OpportunityCardStatus />).baseElement;
-    expect(view).toMatchSnapshot();
-  });
-
-  it("matches the layout with a due date", () => {
-    const view = render(<OpportunityCardStatus dueDate="09/01/2030" />).baseElement;
-    expect(view).toMatchSnapshot();
-  });
-
-  it("matches the layout when status is first come first serve", () => {
-    const view = render(<OpportunityCardStatus status="first come, first serve" />).baseElement;
-    expect(view).toMatchSnapshot();
-  });
-
-  it("matches the layout when status is rolling application", () => {
-    const view = render(<OpportunityCardStatus status="rolling application" />).baseElement;
-    expect(view).toMatchSnapshot();
-  });
-
   it("renders with due date correctly", () => {
     const view = render(<OpportunityCardStatus dueDate="09/01/2030" />).baseElement;
     expect(view).toHaveTextContent("Due:");
