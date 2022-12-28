@@ -9,7 +9,7 @@ export type BgColors =
   | "accent-cooler-lightest"
   | "accent-cool-light"
   | "info-light"
-  | "warning-light";
+  | "warning-extra-light";
 
 interface Props {
   backgroundColor: BgColors;
@@ -48,8 +48,8 @@ export const Tag = (props: Props): ReactElement => {
     case "info-light":
       styling = "bg-white text-base-darkest bg-info-light";
       break;
-    case "warning-light":
-      styling = "bg-warning-light text-base-dark";
+    case "warning-extra-light":
+      styling = "bg-warning-extra-light text-base-dark";
       break;
     case "accent-cooler-lightest":
       styling = "bg-accent-cooler-lightest text-base-darkest border border-accent-cooler-light";
@@ -57,8 +57,8 @@ export const Tag = (props: Props): ReactElement => {
   }
 
   switch (props.isHover) {
-    case props.backgroundColor === "warning-light":
-      hoverStyling = "bg-warning-extra-light-on-hover";
+    case props.backgroundColor === "warning-extra-light":
+      hoverStyling = "bg-warning-light-on-hover";
       break;
   }
 
