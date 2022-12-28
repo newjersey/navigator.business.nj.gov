@@ -54,7 +54,7 @@ export const OnboardingMunicipality = (props: Props): ReactElement => {
   };
 
   return (
-    <div className="form-input">
+    <div className="form-input margin-top-2">
       <MunicipalityDropdown
         municipalities={municipalities}
         ariaLabel="Location"
