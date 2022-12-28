@@ -59,10 +59,10 @@ PrimaryLightest.args = {
   backgroundColor: "primary-lightest",
 };
 
-export const WarningLight = Template.bind({});
-WarningLight.args = {
+export const WarningExtraLight = Template.bind({});
+WarningExtraLight.args = {
   ...defaultArgs,
-  backgroundColor: "warning-light",
+  backgroundColor: "warning-extra-light",
 };
 
 export const White = Template.bind({});
