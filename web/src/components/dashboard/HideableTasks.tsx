@@ -2,7 +2,9 @@ import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { MediaQueries } from "@/lib/PageSizes";
 import { templateEval } from "@/lib/utils/helpers";
+import { useMediaQuery } from "@mui/material";
 import { ReactElement } from "react";
 import { Button } from "../njwds-extended/Button";
 import { Roadmap } from "./Roadmap";
@@ -11,6 +13,7 @@ export const HideableTasks = (): ReactElement => {
   const { userData, update } = useUserData();
   const { roadmap } = useRoadmap();
   const { Config } = useConfig();
+  const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
 
   const handleToggleClick = () => {
     if (!userData) {
@@ -34,10 +37,10 @@ export const HideableTasks = (): ReactElement => {
 
   return (
     <div className="margin-top-7" data-testid="hideableTasks">
-      <div className="flex flex-align-center margin-bottom-205">
+      <div className={`${isTabletAndUp ? "flex flex-align-center" : ""} margin-bottom-205`}>
         <h2 className="margin-bottom-0 text-medium">{Config.dashboardDefaults.upAndRunningTaskHeader}</h2>
-        <div className="mla">
-          <Button style="narrow-light" onClick={handleToggleClick}>
+        <div className={`mla ${isTabletAndUp ? "" : "margin-top-2"}`}>
+          <Button style="narrow-light" onClick={handleToggleClick} widthAutoOnMobile>
             <div className="fdr fac">
               <Icon>{userData?.preferences.isHideableRoadmapOpen ? "visibility_off" : "visibility"}</Icon>
               <span className="margin-left-05 line-height-sans-2">
