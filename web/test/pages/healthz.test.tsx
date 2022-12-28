@@ -1,9 +1,9 @@
 import HealthCheck from "@/pages/healthz";
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 
 describe("HealthzPage", () => {
   it("renders correctly", () => {
-    const view = render(<HealthCheck />).baseElement;
-    expect(view).toMatchSnapshot();
+    render(<HealthCheck />);
+    expect(screen.getByText("Application is healthy")).toBeInTheDocument();
   });
 });

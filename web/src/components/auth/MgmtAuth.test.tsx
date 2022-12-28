@@ -22,12 +22,6 @@ describe("<MgmtAuth />", () => {
     isAuthed = value;
   };
 
-  it("matches the snapshot", () => {
-    expect(
-      render(<MgmtAuth password={password} setPassword={setPassword} setIsAuthed={setIsAuthed} />).baseElement
-    ).toMatchSnapshot();
-  });
-
   it("sets the password field on change", async () => {
     mockApi.post.mockReturnValue(Promise.resolve());
 
