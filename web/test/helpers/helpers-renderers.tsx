@@ -76,23 +76,23 @@ export const withUserDataError = (
   );
 };
 
-export const withRoadmap = (
-  subject: ReactElement,
-  roadmap: Roadmap | undefined,
-  sectionCompletion: SectionCompletion | undefined,
-  setRoadmap?: (roadmap: Roadmap | undefined) => void,
-  setSectionCompletion?: (sectionCompletion: SectionCompletion | undefined) => void
-): ReactElement => {
+export const withRoadmap = (params: {
+  component: ReactElement;
+  initialRoadmap: Roadmap | undefined;
+  sectionCompletion?: SectionCompletion | undefined;
+  mockSetRoadmapFunction?: (roadmap: Roadmap | undefined) => void;
+  setSectionCompletion?: (sectionCompletion: SectionCompletion | undefined) => void;
+}): ReactElement => {
   return (
     <RoadmapContext.Provider
       value={{
-        roadmap,
-        sectionCompletion,
-        setRoadmap: setRoadmap || jest.fn(),
-        setSectionCompletion: setSectionCompletion || jest.fn(),
+        roadmap: params.initialRoadmap,
+        sectionCompletion: params.sectionCompletion,
+        setRoadmap: params.mockSetRoadmapFunction || jest.fn(),
+        setSectionCompletion: params.setSectionCompletion || jest.fn(),
       }}
     >
-      {subject}
+      {params.component}
     </RoadmapContext.Provider>
   );
 };

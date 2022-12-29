@@ -54,16 +54,17 @@ describe("<DeferredLocationQuestion />", () => {
     municipalities?: Municipality[];
   }) => {
     render(
-      withRoadmap(
-        <MunicipalitiesContext.Provider value={{ municipalities: municipalities ?? [] }}>
-          <WithStatefulUserData initialUserData={initialUserData ?? generateUserData({})}>
-            <DeferredLocationQuestion innerContent={innerContent ?? ""} />
-          </WithStatefulUserData>
-        </MunicipalitiesContext.Provider>,
-        generateRoadmap({}),
-        undefined,
-        setRoadmap
-      )
+      withRoadmap({
+        component: (
+          <MunicipalitiesContext.Provider value={{ municipalities: municipalities ?? [] }}>
+            <WithStatefulUserData initialUserData={initialUserData ?? generateUserData({})}>
+              <DeferredLocationQuestion innerContent={innerContent ?? ""} />
+            </WithStatefulUserData>
+          </MunicipalitiesContext.Provider>
+        ),
+        initialRoadmap: generateRoadmap({}),
+        mockSetRoadmapFunction: setRoadmap,
+      })
     );
   };
 
