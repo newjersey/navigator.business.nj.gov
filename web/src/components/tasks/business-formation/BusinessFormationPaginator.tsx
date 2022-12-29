@@ -330,8 +330,8 @@ export const BusinessFormationPaginator = (): ReactElement => {
 
   const displayButtons = () => {
     return (
-      <div className="margin-top-2">
-        <div className="flex fdc mobile-lg:flex-row fac bg-base-lightest margin-x-neg-4 padding-3 margin-top-3 margin-bottom-neg-4">
+      <div className="margin-top-2 ">
+        <div className="flex fdc mobile-lg:flex-row fac bg-base-lightest margin-x-neg-4 padding-3 margin-top-3 margin-bottom-neg-4 radius-bottom-lg">
           <div className="flex fac margin-bottom-2 mobile-lg:margin-bottom-0">
             <AutosaveSpinner
               saveEveryXSeconds={1}

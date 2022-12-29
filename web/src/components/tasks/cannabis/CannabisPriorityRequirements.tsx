@@ -210,7 +210,7 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
       </div>
       <div
         style={{ marginTop: "auto" }}
-        className="flex flex-justify-end bg-base-lightest margin-x-neg-4 padding-3 margin-bottom-neg-4 flex-column mobile-lg:flex-row"
+        className="flex flex-justify-end bg-base-lightest margin-x-neg-4 padding-3 margin-bottom-neg-4 flex-column mobile-lg:flex-row radius-bottom-lg"
       >
         <Button
           className="mobile-lg:margin-bottom-0 margin-bottom-1"
