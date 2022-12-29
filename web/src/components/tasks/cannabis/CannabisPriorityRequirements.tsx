@@ -129,12 +129,17 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
         {displayMWPriorityType && (
           <>
             <hr />
-            <Accordion elevation={0} defaultExpanded={true} sx={{ "&:before": { display: "none" } }}>
+            <Accordion
+              elevation={0}
+              defaultExpanded={true}
+              sx={{ "&:before": { display: "none" } }}
+              className="margin-top-2"
+            >
               <AccordionSummary
                 expandIcon={<Icon className="usa-icon--size-5 margin-x-1">expand_more</Icon>}
                 aria-controls={`${Config.cannabisPriorityStatus.minorityOrWomenHeaderText}-content`}
               >
-                <h3 className="margin-y-4">{Config.cannabisPriorityStatus.minorityOrWomenHeaderText}</h3>
+                <h3 className="margin-y-3">{Config.cannabisPriorityStatus.minorityOrWomenHeaderText}</h3>
               </AccordionSummary>
               <AccordionDetails>
                 <Content>{Config.cannabisPriorityStatus.minorityWomenOwnedRequirements}</Content>
@@ -145,12 +150,17 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
         {displayVeteranPriorityType && (
           <>
             <hr />
-            <Accordion elevation={0} defaultExpanded={true} sx={{ "&:before": { display: "none" } }}>
+            <Accordion
+              elevation={0}
+              defaultExpanded={true}
+              sx={{ "&:before": { display: "none" } }}
+              className="margin-top-2"
+            >
               <AccordionSummary
                 expandIcon={<Icon className="usa-icon--size-5 margin-x-1">expand_more</Icon>}
                 aria-controls={`${Config.cannabisPriorityStatus.veteranHeaderText}-content`}
               >
-                <h3 className="margin-y-4">{Config.cannabisPriorityStatus.veteranHeaderText}</h3>
+                <h3 className="margin-y-3">{Config.cannabisPriorityStatus.veteranHeaderText}</h3>
               </AccordionSummary>
               <AccordionDetails>
                 <Content>{Config.cannabisPriorityStatus.veteranOwnedRequirements}</Content>
@@ -161,12 +171,17 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
         {displaySocialEquityPriorityType && (
           <>
             <hr />
-            <Accordion elevation={0} defaultExpanded={true} sx={{ "&:before": { display: "none" } }}>
+            <Accordion
+              elevation={0}
+              defaultExpanded={true}
+              sx={{ "&:before": { display: "none" } }}
+              className="margin-top-2"
+            >
               <AccordionSummary
                 expandIcon={<Icon className="usa-icon--size-5 margin-x-1">expand_more</Icon>}
                 aria-controls={`${Config.cannabisPriorityStatus.socialEquityHeaderText}-content`}
               >
-                <h3 className="margin-y-4">{Config.cannabisPriorityStatus.socialEquityHeaderText}</h3>
+                <h3 className="margin-y-3">{Config.cannabisPriorityStatus.socialEquityHeaderText}</h3>
               </AccordionSummary>
               <AccordionDetails>
                 <Content>{Config.cannabisPriorityStatus.socialEquityRequirements}</Content>
@@ -177,11 +192,16 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
         {displayImpactZonePriorityType && (
           <>
             <hr />
-            <Accordion elevation={0} expanded={true} sx={{ "&:before": { display: "none" } }}>
+            <Accordion
+              elevation={0}
+              expanded={true}
+              sx={{ "&:before": { display: "none" } }}
+              className="margin-top-2"
+            >
               <AccordionSummary
                 aria-controls={`${Config.cannabisPriorityStatus.impactZoneHeaderText}-content`}
               >
-                <h3 className="margin-y-4">{Config.cannabisPriorityStatus.impactZoneHeaderText}</h3>
+                <h3 className="margin-y-3">{Config.cannabisPriorityStatus.impactZoneHeaderText}</h3>
               </AccordionSummary>
               <AccordionDetails>
                 <Content>{Config.cannabisPriorityStatus.impactZoneText}</Content>
@@ -192,7 +212,7 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
         {displayNoPriorityType && <div>{Config.cannabisPriorityStatus.noPriorityStatusText}</div>}
         {(displayMWPriorityType || displayVeteranPriorityType || displaySocialEquityPriorityType) && (
           <>
-            <hr className="margin-y-3" />
+            <hr />
             <div className="green-box text-normal padding-2 margin-top-2 bg-success-lighter radius-lg">
               <div className="text-bold">{Config.cannabisPriorityStatus.greenBoxBoldedText}</div>
               <ul>
