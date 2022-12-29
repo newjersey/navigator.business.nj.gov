@@ -23,7 +23,7 @@ import {
   TaskLink,
   TaskWithoutLinks,
 } from "@/lib/types/types";
-import { getSectionNames } from "@/lib/utils/helpers";
+import { getSectionNames } from "@/lib/utils/roadmap-helpers";
 import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import {
   AllBusinessSuffixes,

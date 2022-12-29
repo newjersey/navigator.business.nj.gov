@@ -4,7 +4,7 @@ import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { isStepCompleted } from "@/lib/domain-logic/isStepCompleted";
 import analytics from "@/lib/utils/analytics";
-import { getSectionNames } from "@/lib/utils/helpers";
+import { getSectionNames } from "@/lib/utils/roadmap-helpers";
 import { ReactElement, useCallback } from "react";
 
 interface Props {

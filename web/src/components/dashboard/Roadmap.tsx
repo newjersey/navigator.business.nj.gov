@@ -1,6 +1,6 @@
 import { SectionAccordion } from "@/components/dashboard/SectionAccordion";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
-import { getSectionNames } from "@/lib/utils/helpers";
+import { getSectionNames } from "@/lib/utils/roadmap-helpers";
 import { ReactElement } from "react";
 import { Step } from "../Step";
 
