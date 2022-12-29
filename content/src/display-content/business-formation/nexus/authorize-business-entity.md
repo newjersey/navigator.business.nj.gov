@@ -23,9 +23,13 @@ You must register your business name and `authorize|certificate-formation` your 
 
   **Example**: The Deli Incorporated, a Delaware business determined that its name was already taken in this state. The business found that the name The Delicious Inc. was available in New Jersey. When registering, the foreign business will indicate its exact formation name followed by the business name to be used in New Jersey as follows:
 
-  ~greenCheckmark~ **Correct**: A. B. C. Incorporated dba C B A Inc.
+  :::icon{ type="green checkmark" }
+  **Correct**: A. B. C. Incorporated dba C B A Inc.
+  :::
 
-  ~redXMark~ **Incorrect:** ABC Inc. dba C B A Inc.
+  :::icon{ type="red x mark" }
+  **Incorrect:** ABC Inc. dba C B A Inc.
+  :::
 
   The incorrect version illustrates that the formation name does not match exactly as a result of spacing of letters, punctuation and abbreviation of a word. As a result, filing using the incorrect formation name would be rejected and authorization to do business in New Jersey delayed.
 

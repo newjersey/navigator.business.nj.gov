@@ -34,7 +34,12 @@ export default {
             .split("=")[1]
             .slice(1, -1);
 
-    const body = openCurlyIndex < 0 ? string.slice(11, -3) : string.slice(closedCurlyIndex + 1, -3).trim();
+    const hasHeader = openCurlyIndex >= 0;
+    const startLength = ":::infoAlert".length;
+    const endLength = ":::".length;
+    const body = hasHeader
+      ? string.slice(closedCurlyIndex + 1, -1 * endLength).trim()
+      : string.slice(startLength, -1 * endLength);
 
     return {
       header: headerValue,

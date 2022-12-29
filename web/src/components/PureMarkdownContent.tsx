@@ -42,6 +42,13 @@ function customRemarkPlugin():
             header: node.attributes.header,
           };
         }
+        if (node.name === "icon") {
+          const data = node.data || (node.data = {});
+          data.hName = "icon";
+          data.hProperties = {
+            type: node.attributes.type,
+          };
+        }
       } else {
         return;
       }

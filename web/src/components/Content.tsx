@@ -5,6 +5,7 @@ import { Icon } from "@/components/njwds/Icon";
 import { PureMarkdownContent } from "@/components/PureMarkdownContent";
 import { SelfRegLink } from "@/components/SelfRegLink";
 import { TaskCheckbox } from "@/components/tasks/TaskCheckbox";
+import { InlineIconType } from "@/lib/cms/types";
 import analytics from "@/lib/utils/analytics";
 import { FormControlLabel } from "@mui/material";
 import { CSSProperties, ReactElement } from "react";
@@ -46,6 +47,7 @@ export const Content = (props: ContentProps): ReactElement => {
         </Alert>
       );
     },
+    icon: InlineIcon,
     table: OutlineBox,
     li: ListOrCheckbox,
     thead: Unformatted,
@@ -158,4 +160,24 @@ const ListOrCheckbox = (props: any): ReactElement => {
     );
   }
   return <li>{props.children ?? ""}</li>;
+};
+
+const InlineIcon = (props: any): ReactElement => {
+  const getIconByType = (): ReactElement => {
+    switch (props.type as InlineIconType) {
+      case "green checkmark":
+        return <Icon className="inline-icon text-green">check_circle</Icon>;
+      case "red x mark":
+        return <Icon className="inline-icon text-red">cancel</Icon>;
+      default:
+        return <></>;
+    }
+  };
+
+  return (
+    <div className="margin-top-2">
+      {getIconByType()}
+      <div className="display-inline-block margin-left-1">{props.children}</div>
+    </div>
+  );
 };
