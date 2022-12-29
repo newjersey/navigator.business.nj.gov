@@ -419,7 +419,7 @@ const OnboardingPage = (props: Props): ReactElement => {
 
   const header = () => {
     return (
-      <div className="margin-y-2 desktop:margin-y-0 desktop:padding-bottom-4">
+      <div className="margin-y-2 desktop:margin-y-0 desktop:padding-bottom-1">
         <h1 ref={headerRef}>
           {Config.onboardingDefaults.pageTitle}{" "}
           <span className="text-light" data-testid={`step-${page.current.toString()}`}>
