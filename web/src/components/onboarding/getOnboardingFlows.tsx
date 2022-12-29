@@ -14,6 +14,7 @@ import { OnboardingMunicipality } from "@/components/onboarding/OnboardingMunici
 import { OnboardingNameAndEmail } from "@/components/onboarding/OnboardingNameAndEmail";
 import { OnboardingOwnership } from "@/components/onboarding/OnboardingOwnership";
 import { OnboardingSectors } from "@/components/onboarding/OnboardingSectors";
+import { EssentialQuestionObject, getEssentialQuestion } from "@/lib/domain-logic/essentialQuestions";
 import { isFullNameValid } from "@/lib/domain-logic/isFullNameValid";
 import { FlowType, ProfileError, ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import { validateEmail } from "@/lib/utils/helpers";
@@ -33,6 +34,7 @@ export type OnboardingFlow = {
 export type ErrorFieldMap = {
   inline?: { name: ProfileFields; valid: boolean }[];
   banner?: { name: ProfileError; valid: boolean }[];
+  snackbar?: { name: ProfileFields; valid: boolean }[];
 };
 
 export const getOnboardingFlows = (
@@ -41,6 +43,29 @@ export const getOnboardingFlows = (
   onValidation: (field: ProfileFields, invalid: boolean) => void,
   fieldStates: ProfileFieldErrorMap
 ): Record<FlowType, OnboardingFlow> => {
+  const inlineEssentialQuestion = getEssentialQuestion(profileData.industryId)
+    ? [
+        {
+          name: getEssentialQuestion(profileData.industryId)?.fieldName as ProfileFields,
+          valid:
+            profileData[
+              (getEssentialQuestion(profileData.industryId) as EssentialQuestionObject).fieldName
+            ] !== undefined,
+        },
+      ]
+    : [];
+  const snackbarEssentialQuestion = getEssentialQuestion(profileData.industryId)
+    ? [
+        {
+          name: "REQUIRED_ESSENTIAL_QUESTION" as ProfileError,
+          valid:
+            profileData[
+              (getEssentialQuestion(profileData.industryId) as EssentialQuestionObject).fieldName
+            ] !== undefined,
+        },
+      ]
+    : [];
+
   return {
     OWNING: {
       pages: [
@@ -86,6 +111,13 @@ export const getOnboardingFlows = (
                   valid: !fieldStates.dateOfFormation.invalid,
                 },
               ],
+              snackbar: [
+                { name: "entityId", valid: !fieldStates.entityId.invalid },
+                {
+                  name: "dateOfFormation",
+                  valid: !fieldStates.dateOfFormation.invalid,
+                },
+              ],
             };
           },
         },
@@ -102,6 +134,13 @@ export const getOnboardingFlows = (
           getErrorMap: () => {
             return {
               inline: [
+                { name: "businessName", valid: !!profileData.businessName },
+                {
+                  name: "sectorId",
+                  valid: !!profileData.sectorId,
+                },
+              ],
+              snackbar: [
                 { name: "businessName", valid: !!profileData.businessName },
                 {
                   name: "sectorId",
@@ -135,6 +174,13 @@ export const getOnboardingFlows = (
                 },
                 { name: "municipality", valid: !!profileData.municipality },
               ],
+              snackbar: [
+                {
+                  name: "existingEmployees",
+                  valid: !!profileData.existingEmployees,
+                },
+                { name: "municipality", valid: !!profileData.municipality },
+              ],
             };
           },
         },
@@ -143,6 +189,19 @@ export const getOnboardingFlows = (
           getErrorMap: () => {
             return {
               inline: [
+                {
+                  name: "name",
+                  valid: isFullNameValid(businessUser.name) && !fieldStates.name.invalid,
+                },
+                {
+                  name: "email",
+                  valid:
+                    businessUser.email.length > 0 &&
+                    !fieldStates.email.invalid &&
+                    validateEmail(businessUser.email),
+                },
+              ],
+              snackbar: [
                 {
                   name: "name",
                   valid: isFullNameValid(businessUser.name) && !fieldStates.name.invalid,
@@ -182,7 +241,12 @@ export const getOnboardingFlows = (
           ),
           getErrorMap: () => {
             return {
-              inline: [{ name: "industryId", valid: profileData.industryId !== undefined }],
+              inline: [
+                { name: "industryId", valid: profileData.industryId !== undefined },
+                ...inlineEssentialQuestion,
+              ],
+              snackbar: [{ name: "industryId", valid: profileData.industryId !== undefined }],
+              banner: [...snackbarEssentialQuestion],
             };
           },
         },
@@ -204,6 +268,19 @@ export const getOnboardingFlows = (
           getErrorMap: () => {
             return {
               inline: [
+                {
+                  name: "name",
+                  valid: !!businessUser.name && businessUser.name.length > 0 && !fieldStates.name.invalid,
+                },
+                {
+                  name: "email",
+                  valid:
+                    businessUser.email.length > 0 &&
+                    !fieldStates.email.invalid &&
+                    validateEmail(businessUser.email),
+                },
+              ],
+              snackbar: [
                 {
                   name: "name",
                   valid: !!businessUser.name && businessUser.name.length > 0 && !fieldStates.name.invalid,
@@ -261,7 +338,12 @@ export const getOnboardingFlows = (
           ),
           getErrorMap: () => {
             return {
-              inline: [{ name: "industryId", valid: profileData.industryId !== undefined }],
+              inline: [
+                { name: "industryId", valid: profileData.industryId !== undefined },
+                ...inlineEssentialQuestion,
+              ],
+              snackbar: [{ name: "industryId", valid: profileData.industryId !== undefined }],
+              banner: [...snackbarEssentialQuestion],
             };
           },
         },
@@ -303,6 +385,19 @@ export const getOnboardingFlows = (
           getErrorMap: () => {
             return {
               inline: [
+                {
+                  name: "name",
+                  valid: !!businessUser.name && businessUser.name.length > 0 && !fieldStates.name.invalid,
+                },
+                {
+                  name: "email",
+                  valid:
+                    businessUser.email.length > 0 &&
+                    !fieldStates.email.invalid &&
+                    validateEmail(businessUser.email),
+                },
+              ],
+              snackbar: [
                 {
                   name: "name",
                   valid: !!businessUser.name && businessUser.name.length > 0 && !fieldStates.name.invalid,

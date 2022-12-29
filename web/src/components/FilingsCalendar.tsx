@@ -12,6 +12,7 @@ import analytics from "@/lib/utils/analytics";
 import {
   defaultDateFormat,
   getCurrentDate,
+  getJanOfCurrentYear,
   LookupOperatingPhaseById,
   parseDateWithFormat,
   TaxFiling,
@@ -55,7 +56,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
   };
 
   const getMonth = (num: number): ReactElement => {
-    const date = getCurrentDate().add(num, "months");
+    const date = getJanOfCurrentYear().add(num, "months");
     let textColor = "text-base-dark";
     if (getCurrentDate().month() === date.month()) {
       textColor = "text-green";
@@ -70,7 +71,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
 
     return (
       <div data-testid={date.format("MMM YYYY")}>
-        <div className={`${textColor} padding-bottom-1`}>
+        <div className={`${textColor} padding-bottom-1`} aria-hidden="true">
           <span className="text-bold">{date.format("MMM")}</span> <span>{date.format("YYYY")}</span>
         </div>
         <div>
@@ -87,7 +88,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
                       data-testid={filing.identifier.toLowerCase()}
                       className="usa-link text-secondary-darker hover:text-secondary-darker text-no-underline"
                     >
-                      <Tag backgroundColor="warning-light" isHover isRadiusMd isWrappingText>
+                      <Tag backgroundColor="warning-extra-light" isHover isRadiusMd isWrappingText>
                         <span className="text-bold text-uppercase">
                           {Config.dashboardDefaults.calendarFilingDueDateLabel}{" "}
                           {parseDateWithFormat(filing.dueDate, defaultDateFormat).format("M/D")}
@@ -110,7 +111,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
   const renderCalendarAsGrid = (): ReactElement => {
     const monthIndices = [...Array(12).keys()];
 
-    const monthsPerRow = 4;
+    const monthsPerRow = 3;
 
     const rowIndices = monthIndices.filter((num) => {
       return num % monthsPerRow === 0;

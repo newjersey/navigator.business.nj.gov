@@ -147,7 +147,7 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
         } else {
           return {
             border: "border-accent-cool-dark",
-            bg: "",
+            bg: "bg-white",
             textColor: "text-accent-cool-dark",
           };
         }

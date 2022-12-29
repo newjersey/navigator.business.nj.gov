@@ -41,14 +41,28 @@ export const OnboardingIndustry = (props: Props): ReactElement => {
   const getEssentialQuestions = (industryId: string | undefined) => {
     return EssentialQuestions.filter((i) => {
       return i.isQuestionApplicableToIndustryId(industryId);
-    }).map((props) => {
+    }).map((obj) => {
       return (
-        <div className="margin-top-4" data-testid={`industry-specific-${industryId}`} key={industryId}>
-          <FieldLabelProfile fieldName={props.contentFieldName ?? (props.fieldName as ProfileContentField)} />
+        <div
+          className={`${
+            props.fieldStates[obj.fieldName].invalid
+              ? `input-error-bar error margin-top-2`
+              : "input-error-bar"
+          } margin-top-4`}
+          data-testid={`industry-specific-${industryId}`}
+          key={industryId}
+        >
+          <FieldLabelProfile fieldName={obj.contentFieldName ?? (obj.fieldName as ProfileContentField)} />
           <OnboardingRadioQuestion<IndustrySpecificData[keyof IndustrySpecificData]>
-            {...props}
-            choices={industrySpecificDataChoices[props.fieldName]}
+            {...obj}
+            choices={industrySpecificDataChoices[obj.fieldName]}
+            onValidation={props.onValidation}
           />
+          {props.fieldStates[obj.fieldName].invalid && (
+            <div className="text-error-dark text-bold margin-top-05">
+              {Config.profileDefaults.essentialQuestionInlineText}
+            </div>
+          )}
         </div>
       );
     });

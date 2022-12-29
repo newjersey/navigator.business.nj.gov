@@ -37,6 +37,7 @@ import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { EssentialQuestionObject, getEssentialQuestion } from "@/lib/domain-logic/essentialQuestions";
 import { isEntityIdApplicable } from "@/lib/domain-logic/isEntityIdApplicable";
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
 import { checkQueryValue, QUERIES, ROUTES } from "@/lib/domain-logic/routes";
@@ -174,6 +175,15 @@ const ProfilePage = (props: Props): ReactElement => {
         fieldStatesCopy["taxId"] = { invalid: true };
       }
       taxFilingData = { ...taxFilingData, state: undefined, registeredISO: undefined, filings: [] };
+    }
+
+    if (getEssentialQuestion(profileData.industryId)) {
+      const fieldName = (getEssentialQuestion(profileData.industryId) as EssentialQuestionObject).fieldName;
+
+      onValidation(fieldName, profileData[fieldName] === undefined);
+      fieldStatesCopy[fieldName] = {
+        invalid: profileData[fieldName] === undefined,
+      };
     }
 
     if (

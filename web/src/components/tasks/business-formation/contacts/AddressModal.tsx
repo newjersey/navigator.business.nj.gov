@@ -2,9 +2,10 @@ import { Content } from "@/components/Content";
 import { GenericTextField } from "@/components/GenericTextField";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { StateDropdown } from "@/components/StateDropdown";
+import { MediaQueries } from "@/lib/PageSizes";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { FormationIncorporator, FormationMember, StateObject } from "@businessnjgovnavigator/shared";
-import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
+import { Checkbox, FormControlLabel, FormGroup, useMediaQuery } from "@mui/material";
 import { ReactElement, useEffect, useState } from "react";
 
 interface DisplayContent {
@@ -34,6 +35,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
   type FieldStatus = {
     invalid: boolean | undefined;
   };
+  const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
 
   const requiredFields = [
     "addressName",
@@ -184,39 +186,43 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
           <div className={"padding-top-2"} />
         )}
         <div data-testid={`${props.fieldName}-address-modal`}>
-          <Content>{Config.businessFormationDefaults.addressModalNameLabel}</Content>
-          <GenericTextField
-            value={addressData.name}
-            placeholder={Config.businessFormationDefaults.addressModalNamePlaceholder}
-            handleChange={(value: string) => {
-              return setAddressData((prevAddressData) => {
-                return { ...prevAddressData, name: value };
-              });
-            }}
-            error={addressErrorMap["addressName"].invalid}
-            onValidation={onValidation}
-            validationText={Config.businessFormationDefaults.nameErrorText}
-            fieldName="addressName"
-            required={true}
-            autoComplete="name"
-          />
-          <Content>{Config.businessFormationDefaults.addressModalAddressLine1Label}</Content>
-          <GenericTextField
-            fieldName="addressLine1"
-            value={addressData.addressLine1}
-            placeholder={Config.businessFormationDefaults.addressModalAddressLine1Placeholder}
-            handleChange={(value: string) => {
-              return setAddressData((prevAddressData) => {
-                return { ...prevAddressData, addressLine1: value };
-              });
-            }}
-            error={addressErrorMap["addressLine1"].invalid}
-            onValidation={onValidation}
-            autoComplete="address-line1"
-            validationText={Config.businessFormationDefaults.addressErrorText}
-            disabled={shouldBeDisabled("addressLine1")}
-            required={true}
-          />
+          <div className={addressErrorMap["addressName"].invalid ? "input-error-bar error" : ""}>
+            <Content>{Config.businessFormationDefaults.addressModalNameLabel}</Content>
+            <GenericTextField
+              value={addressData.name}
+              placeholder={Config.businessFormationDefaults.addressModalNamePlaceholder}
+              handleChange={(value: string) => {
+                return setAddressData((prevAddressData) => {
+                  return { ...prevAddressData, name: value };
+                });
+              }}
+              error={addressErrorMap["addressName"].invalid}
+              onValidation={onValidation}
+              validationText={Config.businessFormationDefaults.nameErrorText}
+              fieldName="addressName"
+              required={true}
+              autoComplete="name"
+            />
+          </div>
+          <div className={addressErrorMap["addressLine1"].invalid ? "input-error-bar error" : ""}>
+            <Content>{Config.businessFormationDefaults.addressModalAddressLine1Label}</Content>
+            <GenericTextField
+              fieldName="addressLine1"
+              value={addressData.addressLine1}
+              placeholder={Config.businessFormationDefaults.addressModalAddressLine1Placeholder}
+              handleChange={(value: string) => {
+                return setAddressData((prevAddressData) => {
+                  return { ...prevAddressData, addressLine1: value };
+                });
+              }}
+              error={addressErrorMap["addressLine1"].invalid}
+              onValidation={onValidation}
+              autoComplete="address-line1"
+              validationText={Config.businessFormationDefaults.addressErrorText}
+              disabled={shouldBeDisabled("addressLine1")}
+              required={true}
+            />
+          </div>
           <Content
             style={{ display: "inline" }}
             overrides={{
@@ -242,44 +248,63 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
           />
           <div className="grid-row grid-gap-2 margin-top-2">
             <div className="grid-col-12 tablet:grid-col-6">
-              <Content>{Config.businessFormationDefaults.addressModalCityLabel}</Content>
-              <GenericTextField
-                fieldName="addressCity"
-                autoComplete="address-level2"
-                value={addressData.addressCity}
-                disabled={shouldBeDisabled("addressCity")}
-                required={true}
-                placeholder={Config.businessFormationDefaults.addressModalCityPlaceholder}
-                handleChange={(value: string) => {
-                  return setAddressData((prevAddressData) => {
-                    return { ...prevAddressData, addressCity: value };
-                  });
-                }}
-                error={addressErrorMap["addressCity"].invalid}
-                onValidation={onValidation}
-                validationText={Config.businessFormationDefaults.addressModalCityErrorText}
-              />
+              <div
+                className={
+                  addressErrorMap["addressCity"].invalid ||
+                  (isTabletAndUp && addressErrorMap["addressState"].invalid) ||
+                  (isTabletAndUp && addressErrorMap["addressZipCode"].invalid)
+                    ? "input-error-bar error"
+                    : ""
+                }
+              >
+                <Content>{Config.businessFormationDefaults.addressModalCityLabel}</Content>
+                <GenericTextField
+                  fieldName="addressCity"
+                  autoComplete="address-level2"
+                  value={addressData.addressCity}
+                  disabled={shouldBeDisabled("addressCity")}
+                  required={true}
+                  placeholder={Config.businessFormationDefaults.addressModalCityPlaceholder}
+                  handleChange={(value: string) => {
+                    return setAddressData((prevAddressData) => {
+                      return { ...prevAddressData, addressCity: value };
+                    });
+                  }}
+                  error={addressErrorMap["addressCity"].invalid}
+                  onValidation={onValidation}
+                  validationText={Config.businessFormationDefaults.addressModalCityErrorText}
+                />
+              </div>
             </div>
             <div className="grid-col-6 tablet:grid-col-3">
-              <div className="margin-bottom-2">
-                <Content>{Config.businessFormationDefaults.addressModalStateLabel}</Content>
+              <div
+                className={
+                  (!isTabletAndUp && addressErrorMap["addressState"].invalid) ||
+                  (!isTabletAndUp && addressErrorMap["addressZipCode"].invalid)
+                    ? "input-error-bar error"
+                    : ""
+                }
+              >
+                <div className="margin-bottom-2">
+                  <Content>{Config.businessFormationDefaults.addressModalStateLabel}</Content>
+                </div>
+                <StateDropdown
+                  fieldName="addressState"
+                  value={addressData.addressState?.name ?? ""}
+                  placeholder={Config.businessFormationDefaults.addressModalStatePlaceholder}
+                  validationText={Config.businessFormationDefaults.addressStateErrorText}
+                  onSelect={(value: StateObject | undefined) => {
+                    return setAddressData((prevAddressData) => {
+                      return { ...prevAddressData, addressState: value };
+                    });
+                  }}
+                  error={addressErrorMap["addressState"].invalid}
+                  autoComplete="address-level1"
+                  disabled={shouldBeDisabled("addressState")}
+                  onValidation={onValidation}
+                  required={true}
+                />
               </div>
-              <StateDropdown
-                fieldName="addressState"
-                value={addressData.addressState?.name ?? ""}
-                placeholder={Config.businessFormationDefaults.addressModalStatePlaceholder}
-                validationText={Config.businessFormationDefaults.addressStateErrorText}
-                onSelect={(value: StateObject | undefined) => {
-                  return setAddressData((prevAddressData) => {
-                    return { ...prevAddressData, addressState: value };
-                  });
-                }}
-                error={addressErrorMap["addressState"].invalid}
-                autoComplete="address-level1"
-                disabled={shouldBeDisabled("addressState")}
-                onValidation={onValidation}
-                required={true}
-              />
             </div>
             <div className="grid-col-6 tablet:grid-col-3">
               <Content>{Config.businessFormationDefaults.addressModalZipCodeLabel}</Content>

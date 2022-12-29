@@ -2,6 +2,7 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
+import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { ProfileTabs } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
@@ -14,10 +15,10 @@ import {
   generateProfileData,
   generateTaxFiling,
   generateTaxFilingData,
+  generateUndefinedIndustrySpecificData,
   generateUser,
   generateUserData,
   randomHomeBasedIndustry,
-  randomIndustry,
   randomNonHomeBasedIndustry,
 } from "@/test/factories";
 import { withAuthAlert } from "@/test/helpers/helpers-renderers";
@@ -36,6 +37,7 @@ import {
   createEmptyUserData,
   defaultDateFormat,
   einTaskId,
+  emptyIndustrySpecificData,
   formationTaskId,
   generateMunicipality,
   getCurrentDate,
@@ -54,6 +56,10 @@ import {
 } from "@businessnjgovnavigator/shared";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
+import {
+  industriesWithEssentialQuestion,
+  industriesWithOutEssentialQuestion,
+} from "./onboarding/helpers-onboarding";
 
 const date = getCurrentDate().subtract(1, "month").date(1);
 const Config = getMergedConfig();
@@ -910,12 +916,14 @@ describe("profile", () => {
     });
 
     it("saves userData when sector dropdown is removed from DOM", async () => {
-      const newIndustry = randomIndustry(false).id;
+      const newIndustry = randomElementFromArray(industriesWithOutEssentialQuestion).id;
+
       const userData = generateUserData({
         profileData: generateProfileData({
           businessPersona: "STARTING",
           industryId: "generic",
           sectorId: undefined,
+          ...emptyIndustrySpecificData,
         }),
       });
       renderPage({
@@ -941,8 +949,8 @@ describe("profile", () => {
         profileData: {
           ...userData.profileData,
           industryId: newIndustry,
-          cannabisLicenseType: newIndustry == "cannabis" ? "CONDITIONAL" : undefined,
           sectorId: LookupIndustryById(newIndustry).defaultSectorId,
+          homeBasedBusiness: isHomeBasedBusinessApplicable(newIndustry) ? undefined : false,
         },
       });
     });
@@ -1675,6 +1683,43 @@ describe("profile", () => {
     expect(
       mockAnalytics.event.profile_location_question.submit.location_entered_for_first_time
     ).not.toHaveBeenCalled();
+  });
+
+  describe("Essential Question", () => {
+    industriesWithEssentialQuestion.map((industry) => {
+      it(`prevents Starting user from saving when ${industry.id} is selected as industry, but essential question is not answered`, async () => {
+        const userData = generateUserData({
+          formProgress: "UNSTARTED",
+          profileData: generateProfileData({
+            businessPersona: "STARTING",
+            industryId: industry.id,
+            ...generateUndefinedIndustrySpecificData(),
+          }),
+        });
+        renderPage({ userData });
+        clickSave();
+        await waitFor(() => {
+          expect(screen.getByText(Config.profileDefaults.essentialQuestionInlineText)).toBeInTheDocument();
+        });
+      });
+
+      it(`prevents Foreign Nexus user from saving when ${industry.id} is selected as industry, but essential question is not answered`, async () => {
+        const userData = generateUserData({
+          formProgress: "UNSTARTED",
+          profileData: generateProfileData({
+            businessPersona: "FOREIGN",
+            foreignBusinessType: "NEXUS",
+            industryId: industry.id,
+            ...generateUndefinedIndustrySpecificData(),
+          }),
+        });
+        renderPage({ userData });
+        clickSave();
+        await waitFor(() => {
+          expect(screen.getByText(Config.profileDefaults.essentialQuestionInlineText)).toBeInTheDocument();
+        });
+      });
+    });
   });
 
   describe("Document Section", () => {
