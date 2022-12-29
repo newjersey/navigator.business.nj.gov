@@ -1,5 +1,5 @@
 import { decideABExperience } from "@shared/businessUser";
-import { getCurrentDate, parseDate } from "@shared/dateHelpers";
+import { getCurrentDate, getCurrentDateISOString, parseDate } from "@shared/dateHelpers";
 import { createEmptyFormationFormData } from "@shared/formationData";
 import { createEmptyUserData, UserData } from "@shared/userData";
 import { Request, Response, Router } from "express";
@@ -54,7 +54,7 @@ const shouldCheckLicense = (userData: UserData): boolean => {
   return (
     userData.licenseData !== undefined &&
     industryHasALicenseType(userData.profileData.industryId) &&
-    hasBeenMoreThanOneHour(userData.licenseData.lastCheckedStatus)
+    hasBeenMoreThanOneHour(userData.licenseData.lastUpdatedISO)
   );
 };
 
@@ -137,6 +137,7 @@ export const userRouterFactory = (
     userData = updateOperatingPhase(userData);
     userData = updateRoadmapSidebarCards(userData);
     userData = await encryptTaxId(userData);
+    userData = setLastUpdatedISO(userData);
 
     userDataClient
       .put(userData)
@@ -214,4 +215,11 @@ export const userRouterFactory = (
   };
 
   return router;
+};
+
+const setLastUpdatedISO = (userData: UserData): UserData => {
+  return {
+    ...userData,
+    lastUpdatedISO: getCurrentDateISOString(),
+  };
 };

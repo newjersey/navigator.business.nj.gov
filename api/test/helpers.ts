@@ -28,3 +28,8 @@ export const getRandomDateInBetween = (start: string, end: string) => {
   const endDate = Date.parse(end);
   return new Date(Math.floor(Math.random() * (endDate - startDate + 1) + startDate));
 };
+
+export const getLastCalledWith = <T, R>(fn: jest.MockInstance<T, R[]>): R[] => {
+  const lastIndex = fn.mock.calls.length - 1;
+  return fn.mock.calls[lastIndex];
+};

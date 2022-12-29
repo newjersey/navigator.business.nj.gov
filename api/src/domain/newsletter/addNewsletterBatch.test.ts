@@ -1,6 +1,6 @@
 import { UserData } from "@shared/userData";
 import { generateUser, generateUserData } from "../../../test/factories";
-import { AddNewsletter, NewsletterClient, UserDataClient, UserDataQlClient } from "../types";
+import { AddNewsletter, NewsletterClient, UserDataClient } from "../types";
 import { addNewsletterBatch } from "./addNewsletterBatch";
 import { addNewsletterFactory } from "./addNewsletterFactory";
 
@@ -8,7 +8,6 @@ describe("addNewsletterBatch", () => {
   let stubNewsletterClient: jest.Mocked<NewsletterClient>;
   let addNewsletter: AddNewsletter;
   let stubUserDataClient: jest.Mocked<UserDataClient>;
-  let stubUserDataQlClient: jest.Mocked<UserDataQlClient>;
 
   beforeEach(async () => {
     jest.resetAllMocks();
@@ -17,12 +16,9 @@ describe("addNewsletterBatch", () => {
       get: jest.fn(),
       put: jest.fn(),
       findByEmail: jest.fn(),
-    };
-    stubUserDataQlClient = {
       getNeedNewsletterUsers: jest.fn(),
       getNeedToAddToUserTestingUsers: jest.fn(),
       getNeedTaxIdEncryptionUsers: jest.fn(),
-      search: jest.fn(),
     };
     addNewsletter = addNewsletterFactory(stubNewsletterClient);
   });
@@ -33,12 +29,12 @@ describe("addNewsletterBatch", () => {
     });
     stubNewsletterClient.add.mockResolvedValue({ success: true, status: "SUCCESS" });
 
-    stubUserDataQlClient.getNeedNewsletterUsers.mockResolvedValue([
+    stubUserDataClient.getNeedNewsletterUsers.mockResolvedValue([
       generateUserData({ user: generateUser({ externalStatus: {} }) }),
       generateUserData({ user: generateUser({ externalStatus: {} }) }),
     ]);
 
-    const results = await addNewsletterBatch(addNewsletter, stubUserDataClient, stubUserDataQlClient);
+    const results = await addNewsletterBatch(addNewsletter, stubUserDataClient);
     expect(results).toEqual({ total: 2, success: 2, failed: 0 });
   });
 
@@ -50,12 +46,12 @@ describe("addNewsletterBatch", () => {
       .mockResolvedValueOnce({ success: false, status: "EMAIL_ERROR" })
       .mockResolvedValueOnce({ success: true, status: "SUCCESS" });
 
-    stubUserDataQlClient.getNeedNewsletterUsers.mockResolvedValue([
+    stubUserDataClient.getNeedNewsletterUsers.mockResolvedValue([
       generateUserData({ user: generateUser({ externalStatus: {} }) }),
       generateUserData({ user: generateUser({ externalStatus: {} }) }),
     ]);
 
-    const results = await addNewsletterBatch(addNewsletter, stubUserDataClient, stubUserDataQlClient);
+    const results = await addNewsletterBatch(addNewsletter, stubUserDataClient);
     expect(results).toEqual({ total: 2, success: 1, failed: 1 });
   });
 
@@ -67,12 +63,12 @@ describe("addNewsletterBatch", () => {
       .mockRejectedValueOnce({})
       .mockResolvedValueOnce({ success: true, status: "SUCCESS" });
 
-    stubUserDataQlClient.getNeedNewsletterUsers.mockResolvedValue([
+    stubUserDataClient.getNeedNewsletterUsers.mockResolvedValue([
       generateUserData({ user: generateUser({ externalStatus: {} }) }),
       generateUserData({ user: generateUser({ externalStatus: {} }) }),
     ]);
 
-    const results = await addNewsletterBatch(addNewsletter, stubUserDataClient, stubUserDataQlClient);
+    const results = await addNewsletterBatch(addNewsletter, stubUserDataClient);
     expect(results).toEqual({ total: 2, success: 1, failed: 1 });
   });
 });

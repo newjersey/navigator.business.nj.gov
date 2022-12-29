@@ -1,6 +1,6 @@
 import { UserData } from "@shared/userData";
 import { generateProfileData, generateUserData } from "../../../test/factories";
-import { EncryptionDecryptionClient, EncryptTaxId, UserDataClient, UserDataQlClient } from "../types";
+import { EncryptionDecryptionClient, EncryptTaxId, UserDataClient } from "../types";
 import { encryptTaxIdBatch } from "./encryptTaxIdBatch";
 import { encryptTaxIdFactory } from "./encryptTaxIdFactory";
 
@@ -8,7 +8,6 @@ describe("encryptTaxIdBatch", () => {
   let stubEncryptionDecryptionClient: jest.Mocked<EncryptionDecryptionClient>;
   let encryptTaxId: EncryptTaxId;
   let stubUserDataClient: jest.Mocked<UserDataClient>;
-  let stubUserDataQlClient: jest.Mocked<UserDataQlClient>;
 
   beforeEach(async () => {
     jest.resetAllMocks();
@@ -17,12 +16,9 @@ describe("encryptTaxIdBatch", () => {
       get: jest.fn(),
       put: jest.fn(),
       findByEmail: jest.fn(),
-    };
-    stubUserDataQlClient = {
       getNeedNewsletterUsers: jest.fn(),
       getNeedToAddToUserTestingUsers: jest.fn(),
       getNeedTaxIdEncryptionUsers: jest.fn(),
-      search: jest.fn(),
     };
     encryptTaxId = encryptTaxIdFactory(stubEncryptionDecryptionClient);
   });
@@ -33,7 +29,7 @@ describe("encryptTaxIdBatch", () => {
     });
     stubEncryptionDecryptionClient.encryptValue.mockResolvedValue("some-encrypted-value");
 
-    stubUserDataQlClient.getNeedTaxIdEncryptionUsers.mockResolvedValue([
+    stubUserDataClient.getNeedTaxIdEncryptionUsers.mockResolvedValue([
       generateUserData({
         profileData: generateProfileData({ taxId: "123456789000", encryptedTaxId: undefined }),
       }),
@@ -42,7 +38,7 @@ describe("encryptTaxIdBatch", () => {
       }),
     ]);
 
-    const results = await encryptTaxIdBatch(encryptTaxId, stubUserDataClient, stubUserDataQlClient);
+    const results = await encryptTaxIdBatch(encryptTaxId, stubUserDataClient);
     expect(results).toEqual({ total: 2, success: 2, failed: 0 });
   });
 
@@ -54,7 +50,7 @@ describe("encryptTaxIdBatch", () => {
       .mockResolvedValueOnce("some-encrypted-value")
       .mockRejectedValueOnce({});
 
-    stubUserDataQlClient.getNeedTaxIdEncryptionUsers.mockResolvedValue([
+    stubUserDataClient.getNeedTaxIdEncryptionUsers.mockResolvedValue([
       generateUserData({
         profileData: generateProfileData({ taxId: "123456789000", encryptedTaxId: undefined }),
       }),
@@ -63,7 +59,7 @@ describe("encryptTaxIdBatch", () => {
       }),
     ]);
 
-    const results = await encryptTaxIdBatch(encryptTaxId, stubUserDataClient, stubUserDataQlClient);
+    const results = await encryptTaxIdBatch(encryptTaxId, stubUserDataClient);
     expect(results).toEqual({ total: 2, success: 1, failed: 1 });
   });
 });

@@ -1,5 +1,5 @@
 import { CountriesShortCodes } from "@shared/countries";
-import { parseDateWithFormat } from "@shared/dateHelpers";
+import { getCurrentDateISOString, parseDateWithFormat } from "@shared/dateHelpers";
 import { defaultDateFormat } from "@shared/defaultConstants";
 import {
   BusinessSuffix,
@@ -48,6 +48,7 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
             formationId: successResponse.Id,
             redirect: successResponse.PayUrl.RedirectToUrl,
             errors: [],
+            lastUpdatedISO: getCurrentDateISOString(),
           };
         } else {
           let errors = [] as FormationSubmitError[];
@@ -71,6 +72,7 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
             formationId: undefined,
             token: undefined,
             redirect: undefined,
+            lastUpdatedISO: getCurrentDateISOString(),
             errors,
           };
         }
@@ -85,6 +87,7 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
           formationId: undefined,
           redirect: undefined,
           errors: [{ field: "", message: "Unknown Error", type: "UNKNOWN" }],
+          lastUpdatedISO: getCurrentDateISOString(),
         };
       });
   };

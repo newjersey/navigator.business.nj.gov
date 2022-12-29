@@ -348,6 +348,7 @@ export type FormationSubmitResponse = {
   formationId: string | undefined;
   redirect: string | undefined;
   errors: FormationSubmitError[];
+  lastUpdatedISO: string | undefined;
 };
 
 export type FormationSubmitError = {

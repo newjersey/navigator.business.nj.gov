@@ -35,6 +35,7 @@ import {
   BusinessSuffixMap,
   BusinessUser,
   createEmptyFormationFormData,
+  CURRENT_VERSION,
   defaultDateFormat,
   defaultFormationLegalType,
   FormationData,
@@ -94,6 +95,7 @@ export const generateUser = (overrides: Partial<BusinessUser>): BusinessUser => 
 
 export const generateUserData = (overrides: Partial<UserData>): UserData => {
   return {
+    version: CURRENT_VERSION,
     user: generateUser({}),
     profileData: generateProfileData({}),
     formProgress: "COMPLETED",
@@ -103,6 +105,7 @@ export const generateUserData = (overrides: Partial<UserData>): UserData => {
     preferences: generatePreferences({}),
     taxFilingData: generateTaxFilingData({}),
     formationData: generateFormationData({}),
+    lastUpdatedISO: getCurrentDateISOString(),
     ...overrides,
   };
 };
@@ -386,7 +389,7 @@ export const generateLicenseData = (overrides: Partial<LicenseData>): LicenseDat
     completedSearch: false,
     items: [generateLicenseStatusItem({})],
     status: "PENDING",
-    lastCheckedStatus: getCurrentDateISOString(),
+    lastUpdatedISO: getCurrentDateISOString(),
     ...overrides,
   };
 };
@@ -506,6 +509,7 @@ export const generateFormationSubmitResponse = (
     formationId: `some-id-${randomInt()}`,
     redirect: `some-redirect-${randomInt()}`,
     errors: [],
+    lastUpdatedISO: getCurrentDateISOString(),
     ...overrides,
   };
 };

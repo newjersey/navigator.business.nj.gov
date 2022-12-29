@@ -14,16 +14,22 @@ export interface UserData {
   readonly preferences: Preferences;
   readonly taxFilingData: TaxFilingData;
   readonly formationData: FormationData;
+  readonly version: number;
+  readonly lastUpdatedISO: string | undefined;
 }
+
+export const CURRENT_VERSION = 100;
 
 export const createEmptyUserData = (user: BusinessUser): UserData => {
   return {
+    version: CURRENT_VERSION,
     user: user,
     profileData: createEmptyProfileData(),
     formProgress: "UNSTARTED",
     taskProgress: {},
     taskItemChecklist: {},
     licenseData: undefined,
+    lastUpdatedISO: undefined,
     preferences: {
       roadmapOpenSections: ["PLAN", "START"],
       roadmapOpenSteps: [],
