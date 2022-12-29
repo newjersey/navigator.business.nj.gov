@@ -6,18 +6,6 @@ interface SectionPosition {
   nextSection: SectionType | undefined;
 }
 
-export const getSectionNames = (roadmap: Roadmap | undefined): SectionType[] => {
-  if (!roadmap) {
-    return [];
-  }
-  const { steps } = roadmap;
-  const sections: SectionType[] = [];
-  for (const step of steps) {
-    sections.push(step.section);
-  }
-  return [...new Set(sections)];
-};
-
 export const getSectionPositions = (
   sectionCompletion: SectionCompletion,
   roadmap: Roadmap,

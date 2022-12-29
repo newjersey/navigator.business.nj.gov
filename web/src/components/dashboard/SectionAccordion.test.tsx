@@ -79,7 +79,7 @@ describe("<SectionAccordion />", () => {
 
   it("checks completed section logo given section status", () => {
     const roadmap = generateRoadmap({ steps: [generateStep({ section: "PLAN" })] });
-    const sectionCompletion = generateSectionCompletion(roadmap, { PLAN: true });
+    const sectionCompletion = generateSectionCompletion({ PLAN: true });
     useMockRoadmap(roadmap, sectionCompletion);
     statefulRender("PLAN", generateUserData({}));
     expect(screen.getByTestId("completed-plan-section-img")).toBeVisible();

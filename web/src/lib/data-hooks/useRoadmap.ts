@@ -4,15 +4,29 @@ import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import { Roadmap, SectionCompletion } from "@/lib/types/types";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { getSectionCompletion } from "@/lib/utils/roadmap-helpers";
-import { useContext } from "react";
+import { SectionType } from "@businessnjgovnavigator/shared/userData";
+import { useContext, useMemo } from "react";
 
 export const useRoadmap = (): {
   roadmap: Roadmap | undefined;
   sectionCompletion: SectionCompletion | undefined;
   updateSectionCompletion: (sectionCompletion?: SectionCompletion) => SectionCompletion;
+  sectionNamesInRoadmap: SectionType[];
 } => {
   const { roadmap, sectionCompletion, setRoadmap, setSectionCompletion } = useContext(RoadmapContext);
   const { userData } = useUserData();
+
+  const sectionNamesInRoadmap = useMemo(() => {
+    if (!roadmap) {
+      return [];
+    }
+    const { steps } = roadmap;
+    const sections: SectionType[] = [];
+    for (const step of steps) {
+      sections.push(step.section);
+    }
+    return [...new Set(sections)];
+  }, [roadmap]);
 
   useMountEffectWhenDefined(() => {
     if (!roadmap) {
@@ -34,5 +48,5 @@ export const useRoadmap = (): {
     return _roadmapStatus;
   };
 
-  return { roadmap, sectionCompletion, updateSectionCompletion };
+  return { roadmap, sectionCompletion, updateSectionCompletion, sectionNamesInRoadmap };
 };

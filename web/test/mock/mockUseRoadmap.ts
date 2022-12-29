@@ -1,6 +1,7 @@
 import * as useRoadmapModule from "@/lib/data-hooks/useRoadmap";
 import { Roadmap, SectionCompletion, Task } from "@/lib/types/types";
 import { generateRoadmap, generateSectionCompletion, generateStep, generateTask } from "@/test/factories";
+import { sectionNames } from "@businessnjgovnavigator/shared/userData";
 
 const mockUseRoadmap = (useRoadmapModule as jest.Mocked<typeof useRoadmapModule>).useRoadmap;
 
@@ -9,7 +10,7 @@ export const useMockRoadmap = (
   statusOverrides = {} as Partial<SectionCompletion>
 ): void => {
   const roadmap = generateRoadmap(overrides);
-  const sectionCompletion = generateSectionCompletion(roadmap, statusOverrides);
+  const sectionCompletion = generateSectionCompletion(statusOverrides);
   setMockRoadmapResponse(roadmap, sectionCompletion);
 };
 
@@ -18,9 +19,14 @@ export const setMockRoadmapResponse = (
   sectionCompletion?: SectionCompletion
 ): void => {
   const updateSectionCompletion = (sectionCompletion?: SectionCompletion): SectionCompletion => {
-    return sectionCompletion ?? generateSectionCompletion(roadmap as Roadmap, {});
+    return sectionCompletion ?? generateSectionCompletion({});
   };
-  mockUseRoadmap.mockReturnValue({ roadmap, sectionCompletion, updateSectionCompletion });
+  mockUseRoadmap.mockReturnValue({
+    roadmap,
+    sectionCompletion,
+    updateSectionCompletion,
+    sectionNamesInRoadmap: [...sectionNames],
+  });
 };
 
 export const useMockRoadmapTask = (overrides: Partial<Task>): void => {
