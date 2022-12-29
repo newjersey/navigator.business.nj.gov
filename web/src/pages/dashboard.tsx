@@ -162,7 +162,7 @@ const DashboardPage = (props: Props): ReactElement => {
             </div>
             {LookupOperatingPhaseById(userData?.profileData.operatingPhase).displayRoadmapTasks && (
               <>
-                <hr />
+                <hr className="margin-bottom-3" />
                 <Roadmap />
               </>
             )}
