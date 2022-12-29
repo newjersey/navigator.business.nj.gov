@@ -18,7 +18,7 @@ export const TaskCTA = (props: Props): ReactElement => {
 
   if (props.onClick) {
     return (
-      <div className="flex flex-justify-end bg-base-lightest margin-x-neg-4 padding-3 margin-top-3 margin-bottom-neg-4">
+      <div className="flex flex-justify-end bg-base-lightest margin-x-neg-4 padding-3 margin-top-3 margin-bottom-neg-4 radius-bottom-lg">
         {props.children}
         <Button
           style="primary"
@@ -37,7 +37,7 @@ export const TaskCTA = (props: Props): ReactElement => {
   }
 
   return (
-    <div className="flex flex-justify-end bg-base-lightest margin-x-neg-4 padding-3 margin-top-3 margin-bottom-neg-4">
+    <div className="flex flex-justify-end bg-base-lightest margin-x-neg-4 padding-3 margin-top-3 margin-bottom-neg-4 radius-bottom-lg">
       {props.children}
       <a href={props.link} target="_blank" rel="noreferrer noopener">
         <Button

@@ -87,6 +87,7 @@ export const ButtonDropdown = (props: Props): ReactElement => {
         role={undefined}
         transition
         disablePortal={true}
+        placement="bottom-end"
       >
         {({ TransitionProps, placement }) => {
           return (

@@ -78,16 +78,15 @@ export const FilingElement = (props: {
             {props.filing.taxRates && (
               <>
                 <span className="flex" data-testid="tax-rates">
-                  <Icon className="usa-icon--size-3 minw-3 margin-1 text-green margin-right-2">
+                  <Icon className="usa-icon--size-3 minw-3 margin-left-1 text-green margin-right-2">
                     attach_money
                   </Icon>
-                  <Content className="margin-top-1">{`**${Config.filingDefaults.taxRateTitle}** &nbsp;&nbsp;${props.filing.taxRates}`}</Content>
+                  <Content className="">{`**${Config.filingDefaults.taxRateTitle}** &nbsp;&nbsp;${props.filing.taxRates}`}</Content>
                 </span>
-                <br />
               </>
             )}
             {props.filing.filingMethod && (
-              <span className="flex flex-row" data-testid="filing-method">
+              <span className="flex flex-row margin-top-05" data-testid="filing-method">
                 <img
                   className="usa-icon--size-3 minw-3 margin-1 margin-right-2"
                   src={`/img/file-document-outline.svg`}
@@ -104,22 +103,19 @@ export const FilingElement = (props: {
                       <Content data-testid="filing-details">{props.filing.filingDetails}</Content>
                     </>
                   )}
-
-                  <br />
                 </span>
               </span>
             )}
             {props.filing.frequency && (
               <>
-                <span className="flex">
+                <span className="flex margin-top-05">
                   <Icon className="usa-icon--size-3 minw-3 margin-1 text-green margin-right-2">event</Icon>
                   <Content className="margin-top-1">{`**${Config.filingDefaults.filingFrequency}** &nbsp;&nbsp;${props.filing.frequency}`}</Content>
                 </span>
-                <br />
               </>
             )}
             {props.filing.agency == "New Jersey Division of Taxation" && (
-              <span className="flex" data-testid="late-filing">
+              <span className="flex margin-top-05" data-testid="late-filing">
                 <Icon className="usa-icon--size-3 minw-3 margin-1 text-green margin-right-2">cancel</Icon>
                 <Content className="margin-top-1">{`**${Config.filingDefaults.lateFilingsTitle}** &nbsp;&nbsp;${Config.filingDefaults.lateFilingsMarkdown}`}</Content>
               </span>

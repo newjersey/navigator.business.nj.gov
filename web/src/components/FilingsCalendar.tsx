@@ -82,24 +82,24 @@ export const FilingsCalendar = (props: Props): ReactElement => {
             .map((filing) => {
               return (
                 <div key={filing.identifier} className="line-height-1 margin-bottom-1" data-testid="filing">
-                  <Link href={`filings/${props.operateReferences[filing.identifier].urlSlug}`}>
-                    <a
-                      href={`filings/${props.operateReferences[filing.identifier].urlSlug}`}
-                      data-testid={filing.identifier.toLowerCase()}
-                      className="usa-link text-secondary-darker hover:text-secondary-darker text-no-underline"
-                    >
-                      <Tag backgroundColor="warning-extra-light" isHover isRadiusMd isWrappingText>
-                        <span className="text-bold text-uppercase">
+                  <Tag backgroundColor="warning-extra-light" isHover isRadiusMd isWrappingText>
+                    <Link href={`filings/${props.operateReferences[filing.identifier].urlSlug}`}>
+                      <a
+                        href={`filings/${props.operateReferences[filing.identifier].urlSlug}`}
+                        data-testid={filing.identifier.toLowerCase()}
+                        className="usa-link text-secondary-darker hover:text-secondary-darker text-no-underline"
+                      >
+                        <span className="text-bold text-uppercase text-base-dark">
                           {Config.dashboardDefaults.calendarFilingDueDateLabel}{" "}
                           {parseDateWithFormat(filing.dueDate, defaultDateFormat).format("M/D")}
                         </span>
                         {" - "}
-                        <span className="text-no-uppercase text-underline">
+                        <span className="text-no-uppercase text-underline text-base-dark">
                           {props.operateReferences[filing.identifier].name}
                         </span>
-                      </Tag>
-                    </a>
-                  </Link>
+                      </a>
+                    </Link>
+                  </Tag>
                 </div>
               );
             })}

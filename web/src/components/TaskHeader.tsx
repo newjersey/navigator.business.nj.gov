@@ -59,7 +59,7 @@ export const TaskHeader = (props: Props): ReactElement => {
   return (
     <>
       <div
-        className={`${getBgColorClass()} margin-x-neg-4 margin-top-neg-4 padding-x-4 padding-bottom-2 padding-top-4 margin-bottom-2`}
+        className={`${getBgColorClass()} margin-x-neg-4 margin-top-neg-4 padding-x-4 padding-bottom-2 padding-top-4 margin-bottom-2 radius-top-lg`}
       >
         <div
           className="flex flex-align-center flex-wrap margin-top-0 margin-bottom-2"

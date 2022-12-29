@@ -31,15 +31,22 @@ export const CannabisApplicationRequirementsTab = (props: Props): ReactElement =
       <div className="margin-bottom-4">
         <Content>{Config.cannabisApplyForLicense.applicationPageHelperText}</Content>
         <h2 className="margin-top-2 text-normal">{Config.cannabisApplyForLicense.applicationNeedsHeader}</h2>
-        <hr className="margin-y-3" />
+        <hr />
         {(props.CMS_ONLY_isAnnual || props.task.id === "annual-license-cannabis") && (
-          <div className="margin-top-2">
-            <Accordion elevation={0} defaultExpanded={true}>
+          <>
+            <Accordion
+              elevation={0}
+              defaultExpanded={true}
+              sx={{ "&:before": { display: "none" } }}
+              className="margin-top-2"
+            >
               <AccordionSummary
                 aria-controls={`${Config.cannabisApplyForLicense.generalApplicationNeeds}-content`}
                 expandIcon={<Icon className="usa-icon--size-5 margin-x-1">expand_more</Icon>}
               >
-                <h3 className="text-normal">{Config.cannabisApplyForLicense.generalApplicationNeeds}</h3>
+                <h3 className="text-normal margin-y-3">
+                  {Config.cannabisApplyForLicense.generalApplicationNeeds}
+                </h3>
               </AccordionSummary>
               <AccordionDetails>
                 <div data-testid="annualGeneralRequirements">
@@ -47,16 +54,23 @@ export const CannabisApplicationRequirementsTab = (props: Props): ReactElement =
                 </div>
               </AccordionDetails>
             </Accordion>
-          </div>
+          </>
         )}
         {(props.CMS_ONLY_isConditional || props.task.id === "conditional-permit-cannabis") && (
-          <div className="margin-top-2">
-            <Accordion elevation={0} defaultExpanded={true}>
+          <>
+            <Accordion
+              elevation={0}
+              expanded={true}
+              sx={{ "&:before": { display: "none" } }}
+              className="margin-top-2"
+            >
               <AccordionSummary
                 aria-controls={`${Config.cannabisApplyForLicense.generalApplicationNeeds}-content`}
                 expandIcon={<Icon className="usa-icon--size-5 margin-x-1">expand_more</Icon>}
               >
-                <h3 className="text-normal">{Config.cannabisApplyForLicense.generalApplicationNeeds}</h3>
+                <h3 className="text-normal margin-y-3">
+                  {Config.cannabisApplyForLicense.generalApplicationNeeds}
+                </h3>
               </AccordionSummary>
               <AccordionDetails>
                 <div data-testid="conditionalGeneralRequirements">
@@ -64,17 +78,22 @@ export const CannabisApplicationRequirementsTab = (props: Props): ReactElement =
                 </div>
               </AccordionDetails>
             </Accordion>
-          </div>
+          </>
         )}
         {(props.CMS_ONLY_isAnnual || userData?.profileData.cannabisMicrobusiness) && (
-          <div className="margin-top-2">
-            <hr className="margin-y-3" />
-            <Accordion elevation={0} defaultExpanded={props.CMS_ONLY_isAnnual ? true : false}>
+          <>
+            <hr />
+            <Accordion
+              elevation={0}
+              defaultExpanded={props.CMS_ONLY_isAnnual ? true : false}
+              sx={{ "&:before": { display: "none" } }}
+              className="margin-top-2"
+            >
               <AccordionSummary
                 aria-controls={`${Config.cannabisApplyForLicense.microbusinessApplicationNeeds}-content`}
                 expandIcon={<Icon className="usa-icon--size-5 margin-x-1">expand_more</Icon>}
               >
-                <h3 className="text-normal">
+                <h3 className="text-normal margin-y-3">
                   {Config.cannabisApplyForLicense.microbusinessApplicationNeeds}
                 </h3>
               </AccordionSummary>
@@ -84,17 +103,22 @@ export const CannabisApplicationRequirementsTab = (props: Props): ReactElement =
                 </div>
               </AccordionDetails>
             </Accordion>
-          </div>
+          </>
         )}
         {hasPriorityStatus && (
-          <div className="margin-top-2">
-            <hr className="margin-y-3" />
-            <Accordion elevation={0} defaultExpanded={props.CMS_ONLY_isAnnual ? true : false}>
+          <>
+            <hr />
+            <Accordion
+              elevation={0}
+              defaultExpanded={props.CMS_ONLY_isAnnual ? true : false}
+              sx={{ "&:before": { display: "none" } }}
+              className="margin-top-2"
+            >
               <AccordionSummary
                 aria-controls={`${Config.cannabisApplyForLicense.priorityStatusApplicationNeeds}-content`}
                 expandIcon={<Icon className="usa-icon--size-5 margin-x-1">expand_more</Icon>}
               >
-                <h3 className="text-normal">
+                <h3 className="text-normal margin-y-3">
                   {Config.cannabisApplyForLicense.priorityStatusApplicationNeeds}
                 </h3>
               </AccordionSummary>
@@ -116,9 +140,9 @@ export const CannabisApplicationRequirementsTab = (props: Props): ReactElement =
                 )}
               </AccordionDetails>
             </Accordion>
-          </div>
+          </>
         )}
-        <hr className="margin-top-3 margin-bottom-4" />
+        <hr className="margin-bottom-4" />
         {(props.CMS_ONLY_isConditional || props.task.id === "conditional-permit-cannabis") && (
           <Content>{Config.cannabisApplyForLicense.conditionalBottomOfTask}</Content>
         )}
@@ -129,7 +153,7 @@ export const CannabisApplicationRequirementsTab = (props: Props): ReactElement =
 
       <div
         style={{ marginTop: "auto" }}
-        className="flex flex-justify-end bg-base-lightest margin-x-neg-4 padding-3 margin-top-3 margin-bottom-neg-4 flex-column mobile-lg:flex-row"
+        className="flex flex-justify-end bg-base-lightest margin-x-neg-4 padding-3 margin-top-3 margin-bottom-neg-4 flex-column mobile-lg:flex-row radius-bottom-lg"
       >
         <Button style="secondary" dataTestid="backButton" onClick={props.onBack}>
           {Config.cannabisPriorityStatus.backButtonText}

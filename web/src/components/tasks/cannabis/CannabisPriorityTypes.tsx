@@ -161,7 +161,7 @@ export const CannabisPriorityTypes = (props: Props): ReactElement => {
       {displayNextTabButton && (
         <div
           style={{ marginTop: "auto" }}
-          className="flex flex-justify-end bg-base-lightest margin-x-neg-4 padding-3 margin-top-3 margin-bottom-neg-4"
+          className="flex flex-justify-end bg-base-lightest margin-x-neg-4 padding-3 margin-top-3 margin-bottom-neg-4 radius-bottom-lg"
         >
           <Button style="primary" noRightMargin dataTestid="nextTabButton" onClick={props.onNextTab}>
             {Config.cannabisPriorityStatus.nextButtonText}
