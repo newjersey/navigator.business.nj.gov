@@ -1,6 +1,7 @@
+import { createTheme } from "@mui/material";
 import { red } from "@mui/material/colors";
 
-export default {
+export default createTheme({
   typography: {
     fontFamily: [
       "Public Sans Web",
@@ -110,6 +111,14 @@ export default {
     MuiAutocomplete: {
       styleOverrides: {
         inputRoot: { padding: "5px 9px" },
+        option: {
+          "&:nth-of-type(even)": {
+            backgroundColor: "#F9FBFB",
+          },
+          "&:nth-of-type(odd)": {
+            backgroundColor: "#FFFFFF",
+          },
+        },
       },
     },
     MuiOutlinedInput: {
@@ -132,4 +141,4 @@ export default {
       },
     },
   },
-};
+});

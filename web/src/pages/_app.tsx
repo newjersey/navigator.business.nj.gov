@@ -8,7 +8,7 @@ import { Roadmap, SectionCompletion, UpdateQueue, UserDataError } from "@/lib/ty
 import analytics from "@/lib/utils/analytics";
 import { useMountEffect } from "@/lib/utils/helpers";
 import { Hub, HubCapsule } from "@aws-amplify/core";
-import { createTheme, StyledEngineProvider, Theme, ThemeProvider } from "@mui/material";
+import { StyledEngineProvider, ThemeProvider } from "@mui/material";
 import { DefaultSeo } from "next-seo";
 import { AppProps } from "next/app";
 import { useRouter } from "next/router";
@@ -27,21 +27,14 @@ import { AuthAlertContext } from "@/contexts/authAlertContext";
 import { ContextualInfo, ContextualInfoContext } from "@/contexts/contextualInfoContext";
 import { UserDataErrorContext } from "@/contexts/userDataErrorContext";
 import { AuthContext, initialState } from "@/contexts/authContext";
-import muiTheme from "@/lib/muiTheme";
+import MuiTheme from "@/lib/muiTheme";
 import { UpdateQueueContext } from "@/contexts/updateQueueContext";
-
-declare module "@mui/styles/defaultTheme" {
-  // eslint-disable-next-line @typescript-eslint/no-empty-interface
-  interface DefaultTheme extends Theme {}
-}
 
 AuthContext.displayName = "Authentication";
 RoadmapContext.displayName = "Roadmap";
 AuthAlertContext.displayName = "Authentication Snackbar";
 ContextualInfoContext.displayName = "Contextual Info";
 UserDataErrorContext.displayName = "User Data Error";
-
-const theme = createTheme(muiTheme);
 
 const App = ({ Component, pageProps }: AppProps): ReactElement => {
   const [state, dispatch] = useReducer<AuthReducer>(authReducer, initialState);
@@ -153,7 +146,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
       <DefaultSeo {...SEO} />
       <SWRConfig value={{ provider: UserDataStorageFactory }}>
         <StyledEngineProvider injectFirst>
-          <ThemeProvider theme={theme}>
+          <ThemeProvider theme={MuiTheme}>
             <AuthContext.Provider value={{ state, dispatch }}>
               <UpdateQueueContext.Provider value={{ updateQueue, setUpdateQueue }}>
                 <UserDataErrorContext.Provider value={{ userDataError, setUserDataError }}>
