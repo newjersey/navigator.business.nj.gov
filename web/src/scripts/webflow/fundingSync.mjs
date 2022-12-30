@@ -356,7 +356,7 @@ if (
 ) {
   await (async () => {
     await syncFundings();
-    process.exit(1);
+    process.exit(0);
   })();
 } else if (
   process.argv.some((i) => {
@@ -365,7 +365,7 @@ if (
 ) {
   await (async () => {
     console.info(await getUnUsedFundings());
-    process.exit(1);
+    process.exit(0);
   })();
 } else if (
   process.argv.some((i) => {
@@ -374,7 +374,7 @@ if (
 ) {
   await (async () => {
     console.info(await getNewFundings());
-    process.exit(1);
+    process.exit(0);
   })();
 } else if (
   process.argv.some((i) => {
@@ -384,7 +384,7 @@ if (
   await (async () => {
     await syncSectors();
     await syncFundings();
-    process.exit(1);
+    process.exit(0);
   })();
 } else {
   console.log("Expected at least one argument! Use one of the following: ");
@@ -392,6 +392,7 @@ if (
   console.log("--full = Syncs sectors and fundings");
   console.log("--previewUnused = Preview Fundings to Delete");
   console.log("--previewCreate = Preview Fundings to Create");
+  process.exit(1);
 }
 export {
   getNewFundings,

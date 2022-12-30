@@ -618,6 +618,20 @@ jobs:
       - set-dev-env-vars
       - docker-setup-navigator-builder-image
 
+  sync-fundings:
+    docker:
+      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder
+        aws_auth:
+          aws_access_key_id: $AWS_ACCESS_KEY_ID_DEV
+          aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_DEV
+    steps:
+      - bootstrap-code
+      - run:
+          name: Node Funding Sync
+          command: |
+            echo 'export WEBFLOW_API_TOKEN=$WEBFLOW_API_TOKEN' >> $BASH_ENV
+            yarn workspace @businessnjgovnavigator/web webflow:sync
+
 workflows:
   release-pipeline:
     jobs:
@@ -652,6 +666,14 @@ workflows:
           requires:
             - prepare-release
 
+  webflow-sync:
+    jobs:
+      - sync-fundings:
+          filters:
+            branches:
+              only:
+                - /^webflow-sync-.*/
+
   build-and-test:
     jobs:
       - docker-build-builder-image:
@@ -670,6 +692,7 @@ workflows:
                 - /^release-.*/
                 - /^staging-.*/
                 - /^cms/.*/
+                - /^webflow-sync-.*/
           requires:
             - docker-build-builder-image
       - build:
@@ -682,6 +705,7 @@ workflows:
                 - /^release-.*/
                 - /^staging-.*/
                 - /^cms/.*/
+                - /^webflow-sync-.*/
       - lint-and-test:
           filters:
             branches:
@@ -689,6 +713,7 @@ workflows:
                 - /^release-.*/
                 - /^staging-.*/
                 - /^cms/.*/
+                - /^webflow-sync-.*/
           requires:
             - build
       - integration-tests:
@@ -701,6 +726,7 @@ workflows:
                 - /^release-.*/
                 - /^staging-.*/
                 - /^cms/.*/
+                - /^webflow-sync-.*/
           requires:
             - build
       - integration-tests:
@@ -713,6 +739,7 @@ workflows:
                 - /^release-.*/
                 - /^staging-.*/
                 - /^cms/.*/
+                - /^webflow-sync-.*/
           requires:
             - build
       - integration-tests:
@@ -725,6 +752,7 @@ workflows:
                 - /^release-.*/
                 - /^staging-.*/
                 - /^cms/.*/
+                - /^webflow-sync-.*/
           requires:
             - build
       - integration-tests:
@@ -737,6 +765,7 @@ workflows:
                 - /^release-.*/
                 - /^staging-.*/
                 - /^cms/.*/
+                - /^webflow-sync-.*/
           requires:
             - build
       - integration-tests:
@@ -749,6 +778,7 @@ workflows:
                 - /^release-.*/
                 - /^staging-.*/
                 - /^cms/.*/
+                - /^webflow-sync-.*/
           requires:
             - build
       - integration-tests:

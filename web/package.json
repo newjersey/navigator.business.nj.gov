@@ -30,7 +30,8 @@
     "test": "cross-env-shell DEBUG_PRINT_LIMIT=50000 jest",
     "test:ci": "cross-env-shell DEBUG_PRINT_LIMIT=50000 jest --reporters=jest-junit --outputFile=../coverage/test_results/web-jest.xml --runInBand --logHeapUsage --collectCoverage=true --coverageDirectory=../coverage/web/",
     "typecheck": "tsc --noemit",
-    "typecheck:cypress": "tsc --noemit --project cypress/tsconfig.json"
+    "typecheck:cypress": "tsc --noemit --project cypress/tsconfig.json",
+    "webflow:sync": "node ./src/scripts/webflow/fundingSync.mjs --sync"
   },
   "prettier": {
     "printWidth": 110,
