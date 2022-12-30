@@ -50,7 +50,8 @@ import {
   ProfileTabs,
 } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
-import { getFlow, getTaskFromRoadmap, useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import { getFlow, useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import { getTaskFromRoadmap } from "@/lib/utils/roadmap-helpers";
 import { BusinessPersona, ForeignBusinessType, formationTaskId } from "@businessnjgovnavigator/shared";
 import {
   createEmptyProfileData,

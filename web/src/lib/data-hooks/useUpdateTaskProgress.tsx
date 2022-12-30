@@ -1,7 +1,7 @@
 import { CongratulatoryModal } from "@/components/CongratulatoryModal";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { getSectionCompletion, getSectionPositions } from "@/lib/utils/helpers";
+import { getSectionCompletion, getSectionPositions } from "@/lib/utils/roadmap-helpers";
 import { SectionType, TaskProgress } from "@businessnjgovnavigator/shared";
 import { ReactNode, useState } from "react";
 

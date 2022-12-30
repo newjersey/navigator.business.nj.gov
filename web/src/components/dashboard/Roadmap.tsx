@@ -1,15 +1,14 @@
 import { SectionAccordion } from "@/components/dashboard/SectionAccordion";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
-import { getSectionNames } from "@/lib/utils/helpers";
 import { ReactElement } from "react";
 import { Step } from "../Step";
 
 export const Roadmap = (): ReactElement => {
-  const { roadmap } = useRoadmap();
+  const { roadmap, sectionNamesInRoadmap } = useRoadmap();
 
   return (
     <>
-      {getSectionNames(roadmap).map((section) => {
+      {sectionNamesInRoadmap.map((section) => {
         return (
           <SectionAccordion key={section} sectionType={section}>
             {roadmap &&

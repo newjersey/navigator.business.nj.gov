@@ -7,7 +7,7 @@ import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { Task } from "@/lib/types/types";
-import { getModifiedTaskContent } from "@/lib/utils/helpers";
+import { getModifiedTaskContent } from "@/lib/utils/roadmap-helpers";
 import { ReactElement } from "react";
 
 interface Props {

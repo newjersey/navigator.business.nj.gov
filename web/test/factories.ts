@@ -23,7 +23,6 @@ import {
   TaskLink,
   TaskWithoutLinks,
 } from "@/lib/types/types";
-import { getSectionNames } from "@/lib/utils/helpers";
 import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import {
   AllBusinessSuffixes,
@@ -66,6 +65,7 @@ import {
   PublicFilingLegalType,
   publicFilingLegalTypes,
   randomInt,
+  sectionNames,
   SectionType,
   SectorType,
   TaxFiling,
@@ -267,11 +267,7 @@ export const generateRoadmap = (overrides: Partial<Roadmap>): Roadmap => {
   };
 };
 
-export const generateSectionCompletion = (
-  roadmap: Partial<Roadmap>,
-  overrides: Partial<SectionCompletion>
-): SectionCompletion => {
-  const sectionNames = getSectionNames(roadmap as Roadmap);
+export const generateSectionCompletion = (overrides: Partial<SectionCompletion>): SectionCompletion => {
   return {
     ...sectionNames.reduce((accumulator, currentValue: SectionType) => {
       accumulator[currentValue] = false;

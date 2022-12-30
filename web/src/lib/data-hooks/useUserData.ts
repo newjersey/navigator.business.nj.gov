@@ -9,7 +9,7 @@ import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import { UpdateQueue, UserDataError } from "@/lib/types/types";
 import { UpdateQueueFactory } from "@/lib/UpdateQueue";
 import { setAnalyticsDimensions } from "@/lib/utils/analytics-helpers";
-import { getSectionCompletion } from "@/lib/utils/helpers";
+import { getSectionCompletion } from "@/lib/utils/roadmap-helpers";
 import { UserData } from "@businessnjgovnavigator/shared/";
 import { useContext, useEffect } from "react";
 import useSWR from "swr";

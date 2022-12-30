@@ -6,7 +6,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { lookupNaicsCode } from "@/lib/domain-logic/lookupNaicsCode";
-import { getTaskFromRoadmap } from "@/lib/utils/helpers";
+import { getTaskFromRoadmap } from "@/lib/utils/roadmap-helpers";
 import { ReactElement, useContext, useMemo } from "react";
 
 export const ProfileNaicsCode = (): ReactElement => {

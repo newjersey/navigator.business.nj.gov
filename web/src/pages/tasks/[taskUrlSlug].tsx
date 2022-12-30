@@ -25,13 +25,8 @@ import { loadTasksDisplayContent } from "@/lib/static/loadDisplayContent";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import { loadAllTaskUrlSlugs, loadTaskByUrlSlug, TaskUrlSlugParam } from "@/lib/static/loadTasks";
 import { Task, TasksDisplayContent } from "@/lib/types/types";
-import {
-  getModifiedTaskContent,
-  getTaskFromRoadmap,
-  getUrlSlugs,
-  rswitch,
-  templateEval,
-} from "@/lib/utils/helpers";
+import { rswitch, templateEval } from "@/lib/utils/helpers";
+import { getModifiedTaskContent, getTaskFromRoadmap, getUrlSlugs } from "@/lib/utils/roadmap-helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { formationTaskId, Municipality } from "@businessnjgovnavigator/shared/";
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";

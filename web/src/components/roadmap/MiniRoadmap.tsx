@@ -4,7 +4,6 @@ import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { isStepCompleted } from "@/lib/domain-logic/isStepCompleted";
 import analytics from "@/lib/utils/analytics";
-import { getSectionNames } from "@/lib/utils/helpers";
 import { ReactElement, useCallback } from "react";
 
 interface Props {
@@ -13,7 +12,7 @@ interface Props {
 }
 
 export const MiniRoadmap = (props: Props): ReactElement => {
-  const { roadmap } = useRoadmap();
+  const { roadmap, sectionNamesInRoadmap } = useRoadmap();
   const { userData, update } = useUserData();
   const onToggleStep = useCallback(
     async (stepNumber: number, setOpen: boolean, click: boolean): Promise<void> => {
@@ -53,7 +52,7 @@ export const MiniRoadmap = (props: Props): ReactElement => {
 
   return (
     <>
-      {getSectionNames(roadmap).map((section) => {
+      {sectionNamesInRoadmap.map((section) => {
         return (
           <SectionAccordion key={section} sectionType={section} mini={true}>
             {roadmap?.steps

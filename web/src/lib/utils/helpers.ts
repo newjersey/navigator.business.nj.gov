@@ -1,20 +1,10 @@
 import { ConfigType, getMergedConfig } from "@/contexts/configContext";
-import {
-  FlowType,
-  KeysOfType,
-  OnboardingStatus,
-  Roadmap,
-  SectionCompletion,
-  Step,
-  Task,
-} from "@/lib/types/types";
+import { FlowType, OnboardingStatus } from "@/lib/types/types";
 import {
   BusinessPersona,
   Municipality,
   MunicipalityDetail,
   ProfileData,
-  sectionNames,
-  SectionType,
   UserData,
 } from "@businessnjgovnavigator/shared";
 import { useEffect, useRef } from "react";
@@ -57,72 +47,6 @@ export const templateEval = (template: string, args: Record<string, string>): st
     newTemplate = newTemplate.replace(new RegExp(pattern, "g"), args[key]);
   }
   return newTemplate;
-};
-
-export const getTaskFromRoadmap = (roadmap: Roadmap | undefined, taskId: string): Task | undefined => {
-  return roadmap?.tasks.find((task) => {
-    return task.id === taskId;
-  });
-};
-
-export const getSectionCompletion = (
-  roadmap: Roadmap | undefined,
-  userData: UserData | undefined
-): SectionCompletion => {
-  if (!roadmap || !userData) {
-    return {} as SectionCompletion;
-  }
-  const taskMap = sectionsToTasksMap(roadmap) as Record<SectionType, Task[]>;
-  return sectionNames.reduce((accumulator, currentValue: SectionType) => {
-    accumulator[currentValue] =
-      taskMap[currentValue]?.every((task: Task) => {
-        return userData.taskProgress[task.id] === "COMPLETED";
-      }) ?? false;
-    return accumulator;
-  }, {} as SectionCompletion);
-};
-
-interface SectionPosition {
-  currentSection: SectionType;
-  nextSection: SectionType | undefined;
-}
-
-export const getSectionPositions = (
-  sectionCompletion: SectionCompletion,
-  roadmap: Roadmap,
-  taskId: string
-): SectionPosition => {
-  const currentSection = stepInRoadmap(roadmap, taskId)?.section as SectionType;
-  const nextSection = sectionNames
-    .slice(sectionNames.indexOf(currentSection))
-    .find((currentValue: SectionType) => {
-      return !sectionCompletion[currentValue];
-    });
-  return { currentSection, nextSection };
-};
-
-export const getModifiedTaskContent = (
-  roadmap: Roadmap | undefined,
-  task: Task,
-  field: KeysOfType<Task, string>
-): string => {
-  const taskInRoadmap = getTaskFromRoadmap(roadmap, task.id);
-  if (taskInRoadmap && taskInRoadmap[field] !== task[field]) {
-    return taskInRoadmap[field] || "";
-  }
-  return task[field] || "";
-};
-
-export const getModifiedTaskBooleanUndefined = (
-  roadmap: Roadmap | undefined,
-  task: Task,
-  field: KeysOfType<Task, boolean | undefined>
-): boolean | undefined => {
-  const taskInRoadmap = getTaskFromRoadmap(roadmap, task.id);
-  if (taskInRoadmap && taskInRoadmap[field] !== task[field]) {
-    return taskInRoadmap[field] || undefined;
-  }
-  return task[field] || undefined;
 };
 
 export const rswitch = <T>(param: string, cases: { default: T; [k: string]: T }): T => {
@@ -195,38 +119,6 @@ export const validateEmail = (email: string): boolean => {
   );
 };
 
-export const getUrlSlugs = (roadmap: Roadmap | undefined): string[] => {
-  if (!roadmap) {
-    return [];
-  }
-  return roadmap.tasks.map((task) => {
-    return task.urlSlug;
-  });
-};
-
-export const getSectionNames = (roadmap: Roadmap | undefined): SectionType[] => {
-  if (!roadmap) {
-    return [];
-  }
-  const { steps } = roadmap;
-  const sections: SectionType[] = [];
-  for (const step of steps) {
-    sections.push(step.section);
-  }
-  return [...new Set(sections)];
-};
-
-export const createRoadmapSections = (
-  roadmapSections: SectionType[],
-  userData: UserData | undefined,
-  getSection: (sectionName: SectionType, openStatus: boolean | undefined) => JSX.Element
-): JSX.Element[] => {
-  return roadmapSections.map((sectionName) => {
-    const openStatus = userData?.preferences.roadmapOpenSections.includes(sectionName);
-    return getSection(sectionName, openStatus);
-  });
-};
-
 export const getPhoneNumberFormat = (phoneNumber: string) => {
   const length = phoneNumber.length;
   if (length === 0) {
@@ -239,28 +131,6 @@ export const getPhoneNumberFormat = (phoneNumber: string) => {
     return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3)}`;
   }
   return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6, 10)}`;
-};
-
-const sectionsToTasksMap = (roadmap: Roadmap | undefined): Record<SectionType, Task[]> | undefined => {
-  return roadmap?.steps.reduce((accumulator, currentStep: Step) => {
-    const currentStepTasks = roadmap.tasks.filter((task) => {
-      return task.stepNumber === currentStep.stepNumber;
-    });
-    accumulator[currentStep.section] = [...(accumulator[currentStep.section] || []), ...currentStepTasks];
-    return accumulator;
-  }, {} as Record<SectionType, Task[]>);
-};
-
-const stepInRoadmap = (roadmap: Roadmap | undefined, taskId: string): Step | undefined => {
-  const taskAtHand = roadmap?.tasks.find((task) => {
-    return task.id === taskId;
-  });
-  if (!taskAtHand) {
-    return;
-  }
-  return roadmap?.steps.find((step) => {
-    return step.stepNumber === taskAtHand.stepNumber;
-  });
 };
 
 export const getFlow = (data: UserData | ProfileData): FlowType => {
