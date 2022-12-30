@@ -178,14 +178,6 @@ export const IndustryDropdown = (props: Props): ReactElement => {
       openOnFocus
       clearOnEscape
       autoHighlight
-      ListboxProps={{
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        sx: {
-          "& li:nth-of-type(even)": { backgroundColor: "#F9FBFB" },
-          "& li:nth-of-type(odd)": { backgroundColor: "#FFFFFF" },
-        },
-      }}
     />
   );
 };
