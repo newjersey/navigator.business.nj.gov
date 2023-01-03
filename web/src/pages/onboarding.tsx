@@ -119,7 +119,7 @@ const OnboardingPage = (props: Props): ReactElement => {
         profileData.legalStructureId
       ).requiresPublicFiling;
       if (!requiresPublicFiling) {
-        removePageFromFlow("date-and-entity-id-for-public-filing", "OWNING");
+        removePageFromFlow("date-for-public-filing", "OWNING");
       }
     }
 

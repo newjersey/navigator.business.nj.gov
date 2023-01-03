@@ -3,7 +3,6 @@ import { FieldLabelOnboarding } from "@/components/onboarding/FieldLabelOnboardi
 import { OnboardingBusinessName } from "@/components/onboarding/OnboardingBusinessName";
 import { OnboardingBusinessPersona } from "@/components/onboarding/OnboardingBusinessPersona";
 import { OnboardingDateOfFormation } from "@/components/onboarding/OnboardingDateOfFormation";
-import { OnboardingEntityId } from "@/components/onboarding/OnboardingEntityId";
 import { OnboardingExistingEmployees } from "@/components/onboarding/OnboardingExistingEmployees";
 import { OnboardingForeignBusinessType } from "@/components/onboarding/OnboardingForeignBusinessType";
 import { OnboardingIndustry } from "@/components/onboarding/OnboardingIndustry";
@@ -89,7 +88,7 @@ export const getOnboardingFlows = (
           },
         },
         {
-          name: "date-and-entity-id-for-public-filing",
+          name: "date-for-public-filing",
           component: (
             <>
               <FieldLabelOnboarding fieldName="dateOfFormation" />
@@ -98,21 +97,17 @@ export const getOnboardingFlows = (
                 fieldStates={fieldStates}
                 futureAllowed={false}
               />
-              <FieldLabelOnboarding fieldName="entityId" />
-              <OnboardingEntityId onValidation={onValidation} fieldStates={fieldStates} />
             </>
           ),
           getErrorMap: () => {
             return {
               inline: [
-                { name: "entityId", valid: !fieldStates.entityId.invalid },
                 {
                   name: "dateOfFormation",
                   valid: !fieldStates.dateOfFormation.invalid,
                 },
               ],
               snackbar: [
-                { name: "entityId", valid: !fieldStates.entityId.invalid },
                 {
                   name: "dateOfFormation",
                   valid: !fieldStates.dateOfFormation.invalid,

@@ -81,7 +81,6 @@ export type PageHelpers = {
   clickNext: () => void;
   clickBack: () => void;
   getDateOfFormationValue: () => string;
-  getEntityIdValue: () => string;
   getBusinessNameValue: () => string;
   getLegalStructureValue: () => string;
   getSectorIDValue: () => string;
@@ -130,10 +129,6 @@ export const createPageHelpers = (): PageHelpers => {
 
   const clickBack = (): void => {
     fireEvent.click(screen.getAllByTestId("back")[0]);
-  };
-
-  const getEntityIdValue = (): string => {
-    return (screen.queryByLabelText("Entity id") as HTMLInputElement)?.value;
   };
 
   const getDateOfFormationValue = (): string => {
@@ -217,7 +212,6 @@ export const createPageHelpers = (): PageHelpers => {
     chooseRadio,
     clickNext,
     clickBack,
-    getEntityIdValue,
     getDateOfFormationValue,
     getBusinessNameValue,
     getLegalStructureValue,

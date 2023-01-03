@@ -17,7 +17,7 @@ import {
   getCurrentDate,
   ProfileData,
 } from "@businessnjgovnavigator/shared/";
-import { act, fireEvent, screen, waitFor, within } from "@testing-library/react";
+import { act, screen, waitFor, within } from "@testing-library/react";
 
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -92,7 +92,7 @@ describe("onboarding - owning a business", () => {
   });
 
   describe("page 2", () => {
-    it("skips date-of-formation & entity-id page if legal structure  does not require Public Filing", () => {
+    it("skips date-of-formation page if legal structure  does not require Public Filing", () => {
       const userData = generateTestUserData({
         businessPersona: "OWNING",
         legalStructureId: "sole-proprietorship",
@@ -100,7 +100,6 @@ describe("onboarding - owning a business", () => {
       useMockRouter({ isReady: true, query: { page: "2" } });
       renderPage({ userData });
       expect(screen.queryByLabelText("Date of formation")).not.toBeInTheDocument();
-      expect(screen.queryByLabelText("Entity id")).not.toBeInTheDocument();
       expect(screen.getByLabelText("Business name")).toBeInTheDocument();
 
       expect(
@@ -108,49 +107,6 @@ describe("onboarding - owning a business", () => {
           templateEval(Config.onboardingDefaults.stepXofYTemplate, { currentPage: "2", totalPages: "4" })
         )
       ).toBeInTheDocument();
-    });
-
-    it("prevents user from moving past Step 2 if your entity id is invalid", async () => {
-      const userData = generateCCorpTestUserData({});
-      useMockRouter({ isReady: true, query: { page: "2" } });
-      const { page } = renderPage({ userData });
-
-      page.selectDate("Date of formation", date);
-      page.fillText("Entity id", "123");
-      fireEvent.blur(screen.getByLabelText("Entity id"));
-      act(() => {
-        return page.clickNext();
-      });
-
-      await waitFor(() => {
-        expect(screen.getByTestId("step-2")).toBeInTheDocument();
-      });
-      expect(screen.queryByTestId("step-3")).not.toBeInTheDocument();
-      expect(
-        screen.getByText(
-          templateEval(Config.onboardingDefaults.errorTextMinimumNumericField, { length: "10" })
-        )
-      ).toBeInTheDocument();
-      expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
-    });
-
-    it("allows user to move past Step 2 if your entity id is valid", async () => {
-      const userData = generateCCorpTestUserData({});
-      useMockRouter({ isReady: true, query: { page: "2" } });
-      const { page } = renderPage({ userData });
-      page.fillText("Entity id", "1234567890");
-      await page.visitStep(3);
-
-      await waitFor(() => {
-        expect(
-          screen.queryByText(
-            templateEval(Config.onboardingDefaults.errorTextMinimumNumericField, { length: "10" })
-          )
-        ).not.toBeInTheDocument();
-      });
-      expect(screen.getByTestId("step-3")).toBeInTheDocument();
-      expect(screen.queryByTestId("step-2")).not.toBeInTheDocument();
-      expect(screen.queryByTestId("snackbar-alert-ERROR")).not.toBeInTheDocument();
     });
   });
 
@@ -308,7 +264,6 @@ describe("onboarding - owning a business", () => {
 
     await page.visitStep(2);
     page.selectDate("Date of formation", date);
-    page.fillText("Entity id", "1234567890");
     expect(mockRouter.mockPush).toHaveBeenCalledWith({ query: { page: 2 } }, undefined, { shallow: true });
     expect(screen.getByTestId("step-2")).toBeInTheDocument();
 
@@ -400,10 +355,8 @@ describe("onboarding - owning a business", () => {
     await page.visitStep(2);
     expect(currentUserData().profileData.businessPersona).toEqual("OWNING");
     page.selectDate("Date of formation", date);
-    page.fillText("Entity id", "1234567890");
     await page.visitStep(3);
     expect(currentUserData().profileData.dateOfFormation).toEqual(dateOfFormation);
-    expect(currentUserData().profileData.entityId).toEqual("1234567890");
     page.fillText("Business name", "Cool Computers");
     page.selectByValue("Sector", "clean-energy");
     await page.visitStep(4);
@@ -423,7 +376,6 @@ describe("onboarding - owning a business", () => {
         legalStructureId: "c-corporation",
         dateOfFormation,
         municipality: newark,
-        entityId: "1234567890",
         ownershipTypeIds: ["veteran-owned", "disabled-veteran"],
         existingEmployees: "1234567",
         sectorId: "clean-energy",
@@ -442,7 +394,6 @@ describe("onboarding - owning a business", () => {
       profileData: generateProfileData({
         businessPersona: "OWNING",
         legalStructureId: "c-corporation",
-        entityId: "0123456789",
         dateOfFormation,
         businessName: "Applebees",
         municipality: generateMunicipality({
@@ -457,7 +408,6 @@ describe("onboarding - owning a business", () => {
 
     expect(page.getLegalStructureValue()).toEqual("c-corporation");
     await page.visitStep(2);
-    expect(page.getEntityIdValue()).toEqual("0123456789");
     expect(page.getDateOfFormationValue()).toEqual(date.format("MM/YYYY"));
     await page.visitStep(3);
     expect(page.getBusinessNameValue()).toEqual("Applebees");
