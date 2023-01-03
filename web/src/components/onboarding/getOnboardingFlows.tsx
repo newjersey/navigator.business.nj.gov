@@ -1,6 +1,5 @@
 import { FieldLabelDescriptionOnly } from "@/components/onboarding/FieldLabelDescriptionOnly";
 import { FieldLabelOnboarding } from "@/components/onboarding/FieldLabelOnboarding";
-import { OnboardingBusinessName } from "@/components/onboarding/OnboardingBusinessName";
 import { OnboardingBusinessPersona } from "@/components/onboarding/OnboardingBusinessPersona";
 import { OnboardingDateOfFormation } from "@/components/onboarding/OnboardingDateOfFormation";
 import { OnboardingExistingEmployees } from "@/components/onboarding/OnboardingExistingEmployees";
@@ -119,9 +118,6 @@ export const getOnboardingFlows = (
         {
           component: (
             <>
-              <FieldLabelOnboarding fieldName="businessName" />
-              <OnboardingBusinessName onValidation={onValidation} fieldStates={fieldStates} />
-              <div className="margin-top-205" />
               <FieldLabelOnboarding fieldName="sectorId" />
               <OnboardingSectors onValidation={onValidation} fieldStates={fieldStates} />
             </>
@@ -129,14 +125,12 @@ export const getOnboardingFlows = (
           getErrorMap: () => {
             return {
               inline: [
-                { name: "businessName", valid: !!profileData.businessName },
                 {
                   name: "sectorId",
                   valid: !!profileData.sectorId,
                 },
               ],
               snackbar: [
-                { name: "businessName", valid: !!profileData.businessName },
                 {
                   name: "sectorId",
                   valid: !!profileData.sectorId,

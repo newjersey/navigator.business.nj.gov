@@ -81,7 +81,6 @@ export type PageHelpers = {
   clickNext: () => void;
   clickBack: () => void;
   getDateOfFormationValue: () => string;
-  getBusinessNameValue: () => string;
   getLegalStructureValue: () => string;
   getSectorIDValue: () => string;
   getIndustryValue: () => string;
@@ -133,10 +132,6 @@ export const createPageHelpers = (): PageHelpers => {
 
   const getDateOfFormationValue = (): string => {
     return (screen.queryByLabelText("Date of formation") as HTMLInputElement)?.value;
-  };
-
-  const getBusinessNameValue = (): string => {
-    return (screen.queryByLabelText("Business name") as HTMLInputElement)?.value;
   };
 
   const getSectorIDValue = (): string => {
@@ -213,7 +208,6 @@ export const createPageHelpers = (): PageHelpers => {
     clickNext,
     clickBack,
     getDateOfFormationValue,
-    getBusinessNameValue,
     getLegalStructureValue,
     getIndustryValue,
     getRadioGroup,
