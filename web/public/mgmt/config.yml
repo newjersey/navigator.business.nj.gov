@@ -1397,12 +1397,6 @@ collections:
                   widget: text,
                   hint: This field supports Markdown,
                 }
-              - {
-                  label: siccode.com Link,
-                  name: sicCodeLink,
-                  widget: string,
-                  hint: This field supports Markdown,
-                }
               - { label: naics.com Link, name: naicsLink, widget: string, hint: This field supports Markdown }
               - { label: Input Label, name: inputLabel, widget: string, hint: This field supports Markdown }
               - { label: Input Placeholder, name: inputPlaceholder, widget: string }
