@@ -27,7 +27,9 @@ Any commercial vehicle crossing state lines must register with the US Department
 
 :::infoAlert 
   
+  
  The form can only be signed by an authorized official, like the owner, a partner, or an authorized representative.
+
 
 :::
 
