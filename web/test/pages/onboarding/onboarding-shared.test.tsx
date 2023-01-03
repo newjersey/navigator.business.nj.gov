@@ -201,8 +201,6 @@ describe("onboarding - shared", () => {
     expect(currentUserData().profileData).toEqual({
       ...initialUserData.profileData,
       businessPersona: "OWNING",
-      entityId: undefined,
-      businessName: "",
       industryId: "generic",
       homeBasedBusiness: undefined,
       legalStructureId: "c-corporation",
@@ -228,7 +226,6 @@ describe("onboarding - shared", () => {
     page.chooseRadio("business-persona-owning");
     page.selectByValue("Business structure", "sole-proprietorship");
     await page.visitStep(2);
-    page.fillText("Business name", "Cool Computers");
     page.selectByValue("Sector", "clean-energy");
     await page.visitStep(3);
     page.selectByText("Location", "Newark");
@@ -242,8 +239,6 @@ describe("onboarding - shared", () => {
     expect(currentUserData().profileData).toEqual({
       ...initialUserData.profileData,
       businessPersona: "STARTING",
-      entityId: undefined,
-      businessName: "Cool Computers",
       industryId: undefined,
       homeBasedBusiness: undefined,
       dateOfFormation: undefined,
@@ -270,9 +265,7 @@ describe("onboarding - shared", () => {
     page.selectByValue("Business structure", "c-corporation");
     await page.visitStep(2);
     page.selectDate("Date of formation", date);
-    page.fillText("Entity id", "1234567890");
     await page.visitStep(3);
-    page.fillText("Business name", "Cool Computers");
     page.selectByValue("Sector", "clean-energy");
     await page.visitStep(4);
     page.selectByText("Location", "Newark");
@@ -287,8 +280,6 @@ describe("onboarding - shared", () => {
     expect(currentUserData().profileData).toEqual({
       ...initialUserData.profileData,
       businessPersona: "STARTING",
-      entityId: undefined,
-      businessName: "Cool Computers",
       industryId: undefined,
       homeBasedBusiness: undefined,
       dateOfFormation: undefined,
@@ -315,9 +306,7 @@ describe("onboarding - shared", () => {
     page.selectByValue("Business structure", "c-corporation");
     await page.visitStep(2);
     page.selectDate("Date of formation", date);
-    page.fillText("Entity id", "1234567890");
     await page.visitStep(3);
-    page.fillText("Business name", "Cool Computers");
     page.selectByValue("Sector", "clean-energy");
     await page.visitStep(4);
     page.selectByText("Location", "Newark");
@@ -331,9 +320,7 @@ describe("onboarding - shared", () => {
     expect(currentUserData().profileData).toEqual({
       ...initialUserData.profileData,
       businessPersona: "OWNING",
-      entityId: "1234567890",
       legalStructureId: "c-corporation",
-      businessName: "Cool Computers",
       industryId: "generic",
       dateOfFormation: date.format(defaultDateFormat),
       homeBasedBusiness: undefined,
