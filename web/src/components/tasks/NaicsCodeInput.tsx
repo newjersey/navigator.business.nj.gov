@@ -200,9 +200,6 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
           <Content>{Config.determineNaicsCode.findCodeBodyText}</Content>
           <ul>
             <li>
-              <Content>{Config.determineNaicsCode.sicCodeLink}</Content>
-            </li>
-            <li>
               <Content>{Config.determineNaicsCode.naicsLink}</Content>
             </li>
           </ul>
