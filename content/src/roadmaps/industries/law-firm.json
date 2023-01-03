@@ -13,7 +13,7 @@
     },
     {
       "step": 1,
-      "weight": 10,
+      "weight": 5,
       "task": "determine-naics-code"
     },
     {
@@ -38,7 +38,7 @@
     },
     {
       "step": 1,
-      "weight": 5,
+      "weight": 6,
       "task": "state-bar-attorney"
     }
   ],

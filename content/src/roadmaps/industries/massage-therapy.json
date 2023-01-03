@@ -5,12 +5,12 @@
   "roadmapSteps": [
     {
       "step": 1,
-      "weight": 10,
+      "weight": 1,
       "task": "business-plan"
     },
     {
       "step": 1,
-      "weight": 30,
+      "weight": 5,
       "task": "determine-naics-code"
     },
     {
