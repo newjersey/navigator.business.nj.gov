@@ -6,8 +6,8 @@
       "task": "evaluate-your-location"
     },
     {
-      "step": 1,
-      "weight": 4,
+      "step": 3,
+      "weight": 59,
       "task": "check-site-requirements"
     },
     {
