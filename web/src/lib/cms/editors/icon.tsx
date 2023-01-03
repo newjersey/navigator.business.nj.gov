@@ -43,11 +43,11 @@ export default {
   },
   // Function to create a text block from an instance of this component
   toBlock: (obj: { type: string; body: string }) => {
-    return `:::icon{ type="${obj.type}" } \n ${obj.body}\n:::`;
+    return `:::icon{ type="${obj.type}" } \n ${obj.body.trim()}\n:::`;
   },
 
   toPreview: (obj: { type: string; body: string }) => {
-    return `:::icon{ type="${obj.type}" } \n ${obj.body}\n:::`;
+    return `:::icon{ type="${obj.type}" } \n ${obj.body.trim()}\n:::`;
   },
 };
 1;
