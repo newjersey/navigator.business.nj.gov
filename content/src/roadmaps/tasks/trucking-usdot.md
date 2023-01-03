@@ -26,10 +26,10 @@ Any commercial vehicle crossing state lines must register with the US Department
 * A `process agent|process-agent` , already filed with Federal Motor Carrier Safety Administration (FMCSA)
 
 :::infoAlert 
+  
  The form can only be signed by an authorized official, like the owner, a partner, or an authorized representative.
+
 :::
-
-
 
 > **Once approved, you will have:**
 >
