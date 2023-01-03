@@ -94,8 +94,8 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
         <>
           {Config.taxCalendar.failedErrorMessageHeader}
           <ul>
-            <li>{Config.taxCalendar.modalTaxFieldErrorName}</li>
             <li>{responsibleOwnerOrBusinessName()}</li>
+            <li>{Config.taxCalendar.modalTaxFieldErrorName}</li>
           </ul>
         </>
       );
@@ -264,21 +264,27 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
               <LockedProfileField fieldName="businessName" />
             ) : (
               <>
-                <FieldLabelModal
-                  fieldName="businessName"
-                  overrides={{
-                    header: Config.taxCalendar.modalBusinessFieldHeader,
-                    description: Config.taxCalendar.modalBusinessFieldMarkdown,
-                  }}
-                />
-                <OnboardingBusinessName
-                  inputErrorBar
-                  onValidation={onValidation}
-                  fieldStates={fieldStates}
-                  validationText={
-                    apiFailed == "FAILED" ? Config.taxCalendar.failedBusinessFieldHelper : undefined
-                  }
-                />
+                <div
+                  className={`${
+                    fieldStates && fieldStates?.businessName?.invalid ? "input-error-bar error" : ""
+                  }`}
+                >
+                  <FieldLabelModal
+                    fieldName="businessName"
+                    overrides={{
+                      header: Config.taxCalendar.modalBusinessFieldHeader,
+                      description: Config.taxCalendar.modalBusinessFieldMarkdown,
+                    }}
+                  />
+                  <OnboardingBusinessName
+                    inputErrorBar={true}
+                    onValidation={onValidation}
+                    fieldStates={fieldStates}
+                    validationText={
+                      apiFailed == "FAILED" ? Config.taxCalendar.failedBusinessFieldHelper : undefined
+                    }
+                  />
+                </div>
               </>
             )}
           </>
@@ -286,33 +292,41 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
 
         {shouldShowResponsibleOwnerField() && (
           <>
-            <FieldLabelModal fieldName="responsibleOwnerName" />
-            <OnboardingResponsibleOwnerName
-              inputErrorBar
-              onValidation={onValidation}
-              fieldStates={fieldStates}
-              validationText={
-                apiFailed == "FAILED" ? Config.taxCalendar.failedResponsibleOwnerFieldHelper : undefined
-              }
-            />
+            <div
+              className={`${
+                fieldStates && fieldStates?.responsibleOwnerName?.invalid ? "input-error-bar error" : ""
+              }`}
+            >
+              <FieldLabelModal fieldName="responsibleOwnerName" />
+              <OnboardingResponsibleOwnerName
+                inputErrorBar
+                onValidation={onValidation}
+                fieldStates={fieldStates}
+                validationText={
+                  apiFailed == "FAILED" ? Config.taxCalendar.failedResponsibleOwnerFieldHelper : undefined
+                }
+              />
+            </div>
           </>
         )}
 
-        <FieldLabelModal
-          fieldName="taxId"
-          overrides={{
-            header: Config.taxCalendar.modalTaxIdHeader,
-            description: Config.taxCalendar.modalTaxIdMarkdown,
-            postDescription: isPublicFiling ? undefined : Config.taxCalendar.taxIdDisclaimerMd,
-          }}
-        />
-        <OnboardingTaxId
-          onValidation={onValidation}
-          inputErrorBar
-          fieldStates={fieldStates}
-          validationText={apiFailed == "FAILED" ? Config.taxCalendar.failedTaxIdHelper : undefined}
-          required
-        />
+        <div className={`${fieldStates && fieldStates?.taxId?.invalid ? "input-error-bar error" : ""}`}>
+          <FieldLabelModal
+            fieldName="taxId"
+            overrides={{
+              header: Config.taxCalendar.modalTaxIdHeader,
+              description: Config.taxCalendar.modalTaxIdMarkdown,
+              postDescription: isPublicFiling ? undefined : Config.taxCalendar.taxIdDisclaimerMd,
+            }}
+          />
+          <OnboardingTaxId
+            onValidation={onValidation}
+            inputErrorBar
+            fieldStates={fieldStates}
+            validationText={apiFailed == "FAILED" ? Config.taxCalendar.failedTaxIdHelper : undefined}
+            required
+          />
+        </div>
       </ModalTwoButton>
     </ProfileDataContext.Provider>
   );
