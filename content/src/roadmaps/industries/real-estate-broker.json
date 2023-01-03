@@ -12,12 +12,12 @@
     },
     {
       "step": 1,
-      "weight": 5,
+      "weight": 6,
       "task": "license-broker"
     },
     {
       "step": 1,
-      "weight": 10,
+      "weight": 5,
       "task": "determine-naics-code"
     },
     {

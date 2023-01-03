@@ -10,12 +10,7 @@
     },
     {
       "step": 1,
-      "weight": 2,
-      "task": "logistics-site-evaluation"
-    },
-    {
-      "step": 1,
-      "weight": 30,
+      "weight": 5,
       "task": "determine-naics-code"
     },
     {

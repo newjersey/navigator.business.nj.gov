@@ -2,12 +2,12 @@
   "roadmapSteps": [
     {
       "step": 1,
-      "weight": 2,
+      "weight": 3,
       "task": "evaluate-your-location"
     },
     {
-      "step": 1,
-      "weight": 3,
+      "step": 3,
+      "weight": 59,
       "task": "check-site-requirements"
     },
     {

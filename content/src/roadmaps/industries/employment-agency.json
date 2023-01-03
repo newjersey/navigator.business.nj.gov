@@ -15,12 +15,12 @@
     },
     {
       "step": 1,
-      "weight": 10,
+      "weight": 6,
       "task": "understand-license-requirements-employment-agency"
     },
     {
       "step": 1,
-      "weight": 30,
+      "weight": 5,
       "task": "determine-naics-code"
     },
     {

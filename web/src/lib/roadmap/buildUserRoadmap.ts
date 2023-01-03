@@ -128,8 +128,13 @@ const getIndustryBasedAddOns = (profileData: ProfileData, industryId: string | u
       }
     }
   }
+
   if (isInterstateTransportApplicable(industryId) && profileData.interstateTransport) {
     addOns.push("interstate-transport");
+  }
+
+  if (profileData.industryId === "logistics") {
+    addOns.push("logistics-modification");
   }
 
   if (getIsApplicableToFunctionByFieldName("isChildcareForSixOrMore")(industryId)) {

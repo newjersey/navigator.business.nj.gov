@@ -13,12 +13,12 @@
     },
     {
       "step": 1,
-      "weight": 30,
+      "weight": 5,
       "task": "determine-naics-code"
     },
     {
       "step": 1,
-      "weight": 100,
+      "weight": 6,
       "task": "pharmacy-prepare"
     },
     {
