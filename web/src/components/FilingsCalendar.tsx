@@ -55,6 +55,11 @@ export const FilingsCalendar = (props: Props): ReactElement => {
     return LookupOperatingPhaseById(userData.profileData.operatingPhase).displayTaxAccessButton;
   };
 
+  const isCalendarMonthLessThanCurrentMonth = (month: number) => {
+    const date = getJanOfCurrentYear().add(month, "months");
+    return date.month() < getCurrentDate().month();
+  };
+
   const getMonth = (num: number): ReactElement => {
     const date = getJanOfCurrentYear().add(num, "months");
     let textColor = "text-base-dark";
@@ -75,34 +80,34 @@ export const FilingsCalendar = (props: Props): ReactElement => {
           <span className="text-bold">{date.format("MMM")}</span> <span>{date.format("YYYY")}</span>
         </div>
         <div>
-          {thisMonthFilings
-            .filter((filing) => {
-              return props.operateReferences[filing.identifier];
-            })
-            .map((filing) => {
-              return (
-                <div key={filing.identifier} className="line-height-1 margin-bottom-1" data-testid="filing">
-                  <Tag backgroundColor="warning-extra-light" isHover isRadiusMd isWrappingText>
-                    <Link href={`filings/${props.operateReferences[filing.identifier].urlSlug}`}>
-                      <a
-                        href={`filings/${props.operateReferences[filing.identifier].urlSlug}`}
-                        data-testid={filing.identifier.toLowerCase()}
-                        className="usa-link text-secondary-darker hover:text-secondary-darker text-no-underline"
-                      >
-                        <span className="text-bold text-uppercase text-base-dark">
-                          {Config.dashboardDefaults.calendarFilingDueDateLabel}{" "}
-                          {parseDateWithFormat(filing.dueDate, defaultDateFormat).format("M/D")}
-                        </span>
-                        {" - "}
-                        <span className="text-no-uppercase text-underline text-base-dark">
-                          {props.operateReferences[filing.identifier].name}
-                        </span>
-                      </a>
-                    </Link>
-                  </Tag>
-                </div>
-              );
-            })}
+          {!isCalendarMonthLessThanCurrentMonth(num) &&
+            thisMonthFilings
+              .filter((filing) => {
+                return props.operateReferences[filing.identifier];
+              })
+              .map((filing) => {
+                return (
+                  <div key={filing.identifier} className="line-height-1 margin-bottom-1" data-testid="filing">
+                    <Tag backgroundColor="warning-extra-light" isHover isRadiusMd isWrappingText>
+                      <Link href={`filings/${props.operateReferences[filing.identifier].urlSlug}`}>
+                        <a
+                          href={`filings/${props.operateReferences[filing.identifier].urlSlug}`}
+                          data-testid={filing.identifier.toLowerCase()}
+                          className="usa-link text-secondary-darker hover:text-secondary-darker text-no-underline"
+                        >
+                          <span className="text-bold text-uppercase text-base-dark">
+                            {Config.dashboardDefaults.calendarFilingDueDateLabel}{" "}
+                            {parseDateWithFormat(filing.dueDate, defaultDateFormat).format("M/D")}
+                          </span>{" "}
+                          <span className="text-no-uppercase text-underline text-base-dark">
+                            {props.operateReferences[filing.identifier].name}
+                          </span>
+                        </a>
+                      </Link>
+                    </Tag>
+                  </div>
+                );
+              })}
         </div>
       </div>
     );
@@ -126,7 +131,14 @@ export const FilingsCalendar = (props: Props): ReactElement => {
               <tr key={rowIndex}>
                 {monthIndicesForRow.map((month) => {
                   return (
-                    <td key={month} className="td-gray-border">
+                    <td
+                      key={month}
+                      className={
+                        isCalendarMonthLessThanCurrentMonth(month)
+                          ? "td-gray-border bg-base-extra-light"
+                          : "td-gray-border"
+                      }
+                    >
                       {getMonth(month)}
                     </td>
                   );
