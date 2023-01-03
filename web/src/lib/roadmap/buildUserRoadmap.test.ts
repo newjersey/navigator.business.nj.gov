@@ -596,6 +596,11 @@ describe("buildUserRoadmap", () => {
     });
 
     describe("if industry is logistics", () => {
+      it("adds logistics modification add-on", () => {
+        buildUserRoadmap(generateStartingProfile({ industryId: "logistics" }));
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("logistics-modification");
+      });
+
       it("adds interstateTransport add-on if true", () => {
         buildUserRoadmap(generateStartingProfile({ interstateTransport: true, industryId: "logistics" }));
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("interstate-transport");
