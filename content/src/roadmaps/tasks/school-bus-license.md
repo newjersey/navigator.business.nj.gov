@@ -13,7 +13,7 @@ Employers must do a background check on all potential drivers. Only drivers with
 School bus drivers need a Commercial Driver’s License (CDL) with a Passenger (P) and School Bus (S) endorsement before they can legally drive a school bus. The licensing process has two parts: knowledge and skills tests.
 
 :::infoAlert 
- P and S endorsements are only added to a CDL upon request and require that you take a separate, additional knowledge and skills test. 
+ P and S endorsements are only added to a CDL upon request and require that you take an additional knowledge and skills test. 
 :::
 
 
