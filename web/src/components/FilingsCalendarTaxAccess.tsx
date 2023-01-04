@@ -124,7 +124,7 @@ export const FilingsCalendarTaxAccess = (): ReactElement => {
             }}
           />
           <div className="tax-calendar-upper-widget-container grid-row" data-testid="button-container">
-            <div className="margin-bottom-0 margin-right-2 mobile-lg:grid-col-6 grid-col-12">
+            <div className="margin-bottom-2 mobile-lg:margin-bottom-0 margin-right-1 mobile-lg:grid-col-6 grid-col-12">
               <Content>{Config.taxCalendar.accessBody}</Content>
             </div>
             <Button
