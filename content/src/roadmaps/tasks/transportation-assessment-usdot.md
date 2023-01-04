@@ -19,7 +19,9 @@ You may be required to get a USDoT number for your commercial vehicle if you are
 * Names and Titles of the company officers
 * A `process agent|process-agent` , already filed with Federal Motor Carrier Safety Administration (FMCSA)
 
-**Note:** The form can only be signed by an authorized official, like the owner, a partner, or an authorized representative.
+:::infoAlert 
+ The form can only be signed by an authorized official, like the owner, a partner, or an authorized representative.
+:::
 
 > **Once completed, you will have:**
 >
