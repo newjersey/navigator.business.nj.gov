@@ -122,7 +122,6 @@ interface StartingOnboardingData {
 
 interface ExistingOnboardingData {
   businessFormationDate?: string;
-  entityId?: string;
   businessName?: string;
   sectorId?: string;
   legalStructureId?: string;
@@ -328,15 +327,11 @@ export const completeNewBusinessOnboarding = ({
 
 export const completeExistingBusinessOnboarding = ({
   businessFormationDate = "04/2021",
-  entityId = randomInt(10).toString(),
-  businessName = `Generic Business Name ${randomInt()}`,
   sectorId = randomElementFromArray(arrayOfSectors).id,
   numberOfEmployees = randomInt(1).toString(),
   townDisplayName = "Atlantic",
   ownershipDataValues = ["woman-owned", "veteran-owned"],
-  legalStructureId = businessFormationDate || entityId || randomInt() % 2
-    ? "limited-partnership"
-    : "sole-proprietorship",
+  legalStructureId = businessFormationDate || randomInt() % 2 ? "limited-partnership" : "sole-proprietorship",
   fullName = `Michael Smith ${randomInt()}`,
   email = `MichaelSmith${randomInt()}@gmail.com`,
   isNewsletterChecked = false,
@@ -371,17 +366,11 @@ export const completeExistingBusinessOnboarding = ({
         .invoke("prop", "value")
         .should("contain", businessFormationDate);
     }
-    if (entityId) {
-      onOnboardingPage.typeEntityId(entityId);
-      onOnboardingPage.getEntityId().invoke("prop", "value").should("contain", entityId);
-    }
     onOnboardingPage.clickNext();
 
     pageIndex += 1;
     cy.url().should("include", `onboarding?page=${pageIndex}`);
   }
-  onOnboardingPage.typeBusinessName(businessName);
-  onOnboardingPage.getBusinessName().invoke("prop", "value").should("contain", businessName);
   onOnboardingPage.selectIndustrySector(sectorId);
   onOnboardingPage
     .getIndustrySectorDropdown()
@@ -629,8 +618,6 @@ export const checkNewBusinessProfilePage = ({
 
 export const checkExistingBusinessProfilePage = ({
   businessFormationDate,
-  entityId,
-  businessName,
   sectorId,
   numberOfEmployees,
   townDisplayName,
@@ -647,7 +634,6 @@ export const checkExistingBusinessProfilePage = ({
 
   cy.wait(1000);
 
-  onProfilePage.getBusinessName().invoke("prop", "value").should("contain", businessName);
   onProfilePage
     .getIndustrySectorDropdown()
     .invoke("prop", "value")
@@ -668,10 +654,6 @@ export const checkExistingBusinessProfilePage = ({
 
   const employerIdWithMatch = employerId.match("^[0-9]$") ? employerId.match("^[0-9]$") : "";
   onProfilePage.getEmployerId().invoke("prop", "value").should("contain", employerIdWithMatch);
-
-  if (entityId) {
-    onProfilePage.getEntityId().invoke("prop", "value").should("contain", entityId);
-  }
 
   onProfilePage
     .getBusinessFormationDatePicker()
