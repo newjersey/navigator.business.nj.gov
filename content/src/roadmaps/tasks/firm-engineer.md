@@ -36,4 +36,4 @@ Engineering firms must obtain a certificate of authorization from the State Boar
 
 > **Once approved, you will have:**
 >
-> * You will receive a Certificate of Authorization number
+> * A Certificate of Authorization with an authorization number for your firm
