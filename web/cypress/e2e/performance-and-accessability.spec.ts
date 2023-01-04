@@ -132,7 +132,6 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
         onOnboardingPage.clickNext();
 
         cy.url().should("include", "onboarding?page=2");
-        onOnboardingPage.typeBusinessName("Beesapple's");
         onOnboardingPage.selectIndustrySector("clean-energy");
 
         cy.lighthouse(undefined, lighthouseDesktopConfig);
@@ -149,7 +148,6 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
         onOnboardingPage.clickNext();
 
         cy.url().should("include", "onboarding?page=2");
-        onOnboardingPage.typeBusinessName("Beesapple's");
         onOnboardingPage.selectIndustrySector("clean-energy");
         onOnboardingPage.clickNext();
 
@@ -172,7 +170,6 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
         onOnboardingPage.clickNext();
 
         cy.url().should("include", "onboarding?page=2");
-        onOnboardingPage.typeBusinessName("Beesapple's");
         onOnboardingPage.selectIndustrySector("clean-energy");
         onOnboardingPage.clickNext();
 
