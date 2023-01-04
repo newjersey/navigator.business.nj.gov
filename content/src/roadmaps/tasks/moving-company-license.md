@@ -38,8 +38,6 @@ You must apply for a Public Mover License before you can legally offer services 
 >
 > * A Moving Company License sent to you in the mail  
 
-
-
 :::infoAlert 
  Your license must always be displayed at your business location.
 :::
