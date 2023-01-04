@@ -8,7 +8,8 @@ callToActionText: Apply for Your License
 required: true
 issuingAgency: New Jersey Motor Vehicle Commission
 ---
-Employers must do a background check on all potential drivers. Only drivers with clean records can legally drive a school bus.\
+Employers must do a background check on all potential drivers. Only drivers with clean records can legally drive a school bus.
+
 School bus drivers need a Commercial Driver’s License (CDL) with a Passenger (P) and School Bus (S) endorsement before they can legally drive a school bus. The licensing process has two parts: knowledge and skills tests.
 
 :::infoAlert 
