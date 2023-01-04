@@ -72,7 +72,7 @@ export type TaxIdentifierToIdsRecord = Record<string, string[]>;
 
 export type TaxFilingOnboardingResponse = {
   state: TaxFilingState;
-  errorField?: "Business Name" | "Taxpayer ID";
+  errorField?: "businessName" | "formFailure";
 };
 export interface TaxFilingLookupResponse {
   state: TaxFilingState;
