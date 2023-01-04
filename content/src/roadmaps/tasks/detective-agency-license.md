@@ -32,8 +32,6 @@ Your detective agency must be licensed prior to offering services to the public.
  The application must be notarized. Once it's approved you'll be required to send in your Certificate of Formation
 :::
 
-
-
 > **Once completed, you will have:**
 >
 > * A Private Detective Agency License mailed to you
