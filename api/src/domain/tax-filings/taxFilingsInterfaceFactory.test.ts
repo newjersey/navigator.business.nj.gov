@@ -287,7 +287,7 @@ describe("TaxFilingsInterfaceFactory", () => {
           } as TaxFilingLookupResponse);
           taxFilingClient.onboarding.mockResolvedValue({
             state: "FAILED",
-            errorField: "Business Name",
+            errorField: "businessName",
           } as TaxFilingOnboardingResponse);
           expect(await taxFilingInterface.onboarding({ userData, ...taxIdBusinessName })).toEqual({
             ...userData,
@@ -295,7 +295,7 @@ describe("TaxFilingsInterfaceFactory", () => {
               ...userData.taxFilingData,
               state: "FAILED",
               registeredISO: undefined,
-              errorField: "Business Name",
+              errorField: "businessName",
               businessName: taxIdBusinessName.businessName,
               lastUpdatedISO: currentDate.toISOString(),
             },

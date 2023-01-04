@@ -351,7 +351,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
       mockApi.postTaxRegistrationOnboarding.mockImplementation(() => {
         return Promise.resolve({
           ...userDataWithPrefilledFields,
-          taxFilingData: generateTaxFilingData({ state: "FAILED", errorField: "Business Name" }),
+          taxFilingData: generateTaxFilingData({ state: "FAILED", errorField: "businessName" }),
         });
       });
       openModal();
@@ -595,7 +595,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
       mockApi.postTaxRegistrationOnboarding.mockImplementation(() => {
         return Promise.resolve({
           ...userDataWithPrefilledFields,
-          taxFilingData: generateTaxFilingData({ state: "FAILED", errorField: "Business Name" }),
+          taxFilingData: generateTaxFilingData({ state: "FAILED", errorField: "businessName" }),
         });
       });
       openModal();

@@ -80,7 +80,7 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
   };
 
   const errorAlert = (): ReactElement => {
-    if (userData?.taxFilingData.errorField == "Business Name" && apiFailed == "FAILED") {
+    if (userData?.taxFilingData.errorField == "businessName" && apiFailed == "FAILED") {
       return (
         <>
           {Config.taxCalendar.failedErrorMessageHeader}
