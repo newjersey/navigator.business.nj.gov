@@ -23,8 +23,6 @@ All NJ private detective agencies are required to send in employee registrations
  You only need to mail the notification letter and the fingerprint receipt. The Employee Statement form must be kept as part of your business records and is not mailed with your registration.
 :::
 
-
-
 > **Once completed, you will have:**
 >
 > * A registration confirmation for each of your employees
