@@ -2,7 +2,6 @@
 
 import {
   arrayOfSectors,
-  Industries,
   Industry,
   LegalStructure,
   LegalStructures,
@@ -15,7 +14,6 @@ import {
   completeForeignBusinessOnboarding,
   completeNewBusinessOnboarding,
   homeBasedIndustries,
-  legalStructureWithTradeName,
   liquorLicenseIndustries,
   randomElementFromArray,
   randomHomeBasedIndustry,
@@ -142,45 +140,10 @@ describe("Profile [feature] [all] [group1]", () => {
         liquorLicenseQuestion: !liquorLicenseQuestion,
       });
     });
-
-    it("onboards random industry with legal structure that enables entity id field, then updates the field in profile", () => {
-      const industry = randomElementFromArray(
-        Industries.filter((x) => {
-          return x.isEnabled;
-        }) as Industry[]
-      );
-      const legalStructureId = randomElementFromArray(legalStructureWithTradeName as LegalStructure[]).id;
-      const liquorLicenseQuestion = industry.industryOnboardingQuestions.isLiquorLicenseApplicable
-        ? Boolean(randomInt() % 2)
-        : undefined;
-      const updatedEntityId = randomInt(10).toString();
-      const requiresCpa = industry.industryOnboardingQuestions.isCpaRequiredApplicable
-        ? Boolean(randomInt() % 2)
-        : undefined;
-
-      completeNewBusinessOnboarding({
-        industry,
-        legalStructureId,
-        liquorLicenseQuestion,
-        requiresCpa,
-      });
-
-      checkNewBusinessProfilePage({
-        industry,
-        legalStructureId,
-        liquorLicenseQuestion,
-      });
-
-      updateNewBusinessProfilePage({
-        entityId: updatedEntityId,
-      });
-    });
   });
 
   it("onboards existing business and updates profile data", () => {
     const businessFormationDate = "04/2021";
-    const entityId = randomInt(10).toString();
-    const businessName = `Generic Business Name ${randomInt()}`;
     const sectorId = randomElementFromArray(arrayOfSectors).id;
     const numberOfEmployees = randomInt(1).toString();
     const townDisplayName = "Atlantic";
@@ -188,8 +151,6 @@ describe("Profile [feature] [all] [group1]", () => {
 
     completeExistingBusinessOnboarding({
       businessFormationDate,
-      entityId,
-      businessName,
       sectorId,
       numberOfEmployees,
       townDisplayName,
@@ -198,8 +159,6 @@ describe("Profile [feature] [all] [group1]", () => {
 
     checkExistingBusinessProfilePage({
       businessFormationDate,
-      entityId,
-      businessName,
       sectorId,
       numberOfEmployees,
       townDisplayName,
