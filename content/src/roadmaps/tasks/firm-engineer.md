@@ -19,7 +19,7 @@ Engineering firms must obtain a certificate of authorization from the State Boar
 
 ### Application Requirements
 
-* Certified copy of your `Certificate of Formation or Incorporation|certificate-formation` , if applicable
+* Certified copy of your `Certificate of Formation or Incorporation,|certificate-formation` if applicable
 * Business name
 * Business addresses (and the address of any satellite office)
 * Name and license number of the `Engineer-in-Charge|engineer-in-charge` of the principal office
