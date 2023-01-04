@@ -118,7 +118,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
     });
 
     return (
-      <table data-testid="filings-calendar-as-table">
+      <table className="filingsCalendarTable" data-testid="filings-calendar-as-table">
         <tbody>
           {rowIndices.map((rowIndex) => {
             const monthIndicesForRow = monthIndices.slice(rowIndex, rowIndex + monthsPerRow);
