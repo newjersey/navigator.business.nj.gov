@@ -19,7 +19,7 @@ All NJ private detective agencies are required to mail in employee registrations
 * Pay any associated fees  
 
 :::infoAlert 
-You must also complete, sign, and notarize an [Employee Statement form](https://www.nj.gov/njsp/private-detective/pdf/pd-agency-statement.pdf) for all of your employees. These forms must be kept with your business records. 
+You must also complete, sign, and notarize an [Employee Statement form](https://www.nj.gov/njsp/private-detective/pdf/pd-agency-statement.pdf) for all of your employees. The form must be kept with your business records. 
 :::
 
 > **Once completed, you will have:**
