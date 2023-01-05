@@ -2,7 +2,6 @@ import { FieldLabelDescriptionOnly } from "@/components/onboarding/FieldLabelDes
 import { FieldLabelOnboarding } from "@/components/onboarding/FieldLabelOnboarding";
 import { OnboardingBusinessPersona } from "@/components/onboarding/OnboardingBusinessPersona";
 import { OnboardingDateOfFormation } from "@/components/onboarding/OnboardingDateOfFormation";
-import { OnboardingExistingEmployees } from "@/components/onboarding/OnboardingExistingEmployees";
 import { OnboardingForeignBusinessType } from "@/components/onboarding/OnboardingForeignBusinessType";
 import { OnboardingIndustry } from "@/components/onboarding/OnboardingIndustry";
 import { OnboardingLegalStructure } from "@/components/onboarding/OnboardingLegalStructure";
@@ -142,9 +141,6 @@ export const getOnboardingFlows = (
         {
           component: (
             <>
-              <FieldLabelOnboarding fieldName="existingEmployees" />
-              <OnboardingExistingEmployees onValidation={onValidation} fieldStates={fieldStates} />
-              <div className="margin-top-205" />
               <FieldLabelOnboarding fieldName="municipality" />
               <div className="margin-top-2">
                 <OnboardingMunicipality onValidation={onValidation} fieldStates={fieldStates} />
@@ -156,20 +152,8 @@ export const getOnboardingFlows = (
           ),
           getErrorMap: () => {
             return {
-              inline: [
-                {
-                  name: "existingEmployees",
-                  valid: !!profileData.existingEmployees,
-                },
-                { name: "municipality", valid: !!profileData.municipality },
-              ],
-              snackbar: [
-                {
-                  name: "existingEmployees",
-                  valid: !!profileData.existingEmployees,
-                },
-                { name: "municipality", valid: !!profileData.municipality },
-              ],
+              inline: [{ name: "municipality", valid: !!profileData.municipality }],
+              snackbar: [{ name: "municipality", valid: !!profileData.municipality }],
             };
           },
         },

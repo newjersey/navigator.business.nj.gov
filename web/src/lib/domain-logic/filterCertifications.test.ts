@@ -82,6 +82,15 @@ describe("filterCertifications", () => {
     expect(results).toEqual(expect.arrayContaining([cert1]));
   });
 
+  it("returns filtered certification when number of employees is not answered", () => {
+    const userData = defaultProfileData({ existingEmployees: undefined });
+
+    const cert1 = generateCertification({ isSbe: true, applicableOwnershipTypes: [] });
+    const results = filterCertifications([cert1], userData);
+    expect(results.length).toEqual(1);
+    expect(results).toEqual(expect.arrayContaining([cert1]));
+  });
+
   it("returns empty filtered certifications when number of employees is greater than or equal to 120", () => {
     const userData = defaultProfileData({});
 
