@@ -4,7 +4,7 @@ filename: detective-employees
 name: Register Your Employees with NJ State Police
 id: detective-employees
 callToActionLink: ""
-callToActionText: See Instructions
+callToActionText: ""
 required: true
 issuingAgency: New Jersey State Police Private Detective Unit
 ---
