@@ -152,7 +152,6 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
         onOnboardingPage.clickNext();
 
         cy.url().should("include", "onboarding?page=3");
-        onOnboardingPage.typeNumberOfEmployees("5");
         onOnboardingPage.selectLocation("Absecon");
         onOnboardingPage.selectOwnership(["women-owned"]);
 
@@ -174,7 +173,6 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
         onOnboardingPage.clickNext();
 
         cy.url().should("include", "onboarding?page=3");
-        onOnboardingPage.typeNumberOfEmployees("5");
         onOnboardingPage.selectLocation("Absecon");
         onOnboardingPage.selectOwnership(["women-owned"]);
         onOnboardingPage.clickNext();

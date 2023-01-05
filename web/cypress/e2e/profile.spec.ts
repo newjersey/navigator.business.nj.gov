@@ -145,14 +145,12 @@ describe("Profile [feature] [all] [group1]", () => {
   it("onboards existing business and updates profile data", () => {
     const businessFormationDate = "04/2021";
     const sectorId = randomElementFromArray(arrayOfSectors).id;
-    const numberOfEmployees = randomInt(1).toString();
     const townDisplayName = "Atlantic";
     const ownershipDataValues = ["woman-owned", "veteran-owned"];
 
     completeExistingBusinessOnboarding({
       businessFormationDate,
       sectorId,
-      numberOfEmployees,
       townDisplayName,
       ownershipDataValues,
     });
@@ -160,7 +158,6 @@ describe("Profile [feature] [all] [group1]", () => {
     checkExistingBusinessProfilePage({
       businessFormationDate,
       sectorId,
-      numberOfEmployees,
       townDisplayName,
       ownershipDataValues,
     });
