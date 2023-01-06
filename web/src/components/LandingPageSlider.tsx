@@ -112,9 +112,9 @@ export const LandingPageSlider = (): ReactElement => {
         />
         <LandingPageActionTile
           className={"landing-page-slide"}
-          imgPath={"/img/startBusiness-icon.svg"}
+          imgPath={"/img/briefcase-icon.svg"}
+          dataTestId={"register-biz-tile"}
           tileText={Config.landingPage.landingPageTile2Text}
-          dataTestId={"start-biz-tile"}
           onClick={() => {
             return setFlowAndRouteUser("starting");
           }}
@@ -122,9 +122,9 @@ export const LandingPageSlider = (): ReactElement => {
         />
         <LandingPageActionTile
           className={"landing-page-slide"}
-          imgPath={"/img/runBusiness-icon.svg"}
+          imgPath={"/img/payTaxes-icon.svg"}
+          dataTestId={"pay-taxes-tile"}
           tileText={Config.landingPage.landingPageTile3Text}
-          dataTestId={"run-biz-tile"}
           onClick={() => {
             return setFlowAndRouteUser("up-and-running");
           }}
@@ -142,29 +142,29 @@ export const LandingPageSlider = (): ReactElement => {
         />
         <LandingPageActionTile
           className={"landing-page-slide"}
-          imgPath={"/img/briefcase-icon.svg"}
-          dataTestId={"register-biz-tile"}
+          imgPath={"/img/eligibleFunding-icon.svg"}
+          dataTestId={"eligible-funding-tile"}
           tileText={Config.landingPage.landingPageTile5Text}
           onClick={() => {
-            return setFlowAndRouteUser("starting");
+            return setFlowAndRouteUser("up-and-running");
           }}
           isActive={activeTile === 4}
         />
         <LandingPageActionTile
           className={"landing-page-slide"}
-          imgPath={"/img/payTaxes-icon.svg"}
-          dataTestId={"pay-taxes-tile"}
+          imgPath={"/img/startBusiness-icon.svg"}
           tileText={Config.landingPage.landingPageTile6Text}
+          dataTestId={"start-biz-tile"}
           onClick={() => {
-            return setFlowAndRouteUser("up-and-running");
+            return setFlowAndRouteUser("starting");
           }}
           isActive={activeTile === 5}
         />
         <LandingPageActionTile
           className={"landing-page-slide"}
-          imgPath={"/img/eligibleFunding-icon.svg"}
-          dataTestId={"eligible-funding-tile"}
+          imgPath={"/img/runBusiness-icon.svg"}
           tileText={Config.landingPage.landingPageTile7Text}
+          dataTestId={"run-biz-tile"}
           onClick={() => {
             return setFlowAndRouteUser("up-and-running");
           }}
