@@ -1,3 +1,10 @@
+## [5.9.3](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.9.2...v5.9.3) (2023-01-06)
+
+
+### Bug Fixes
+
+* circleci update for new gh token ([cfe5930](https://github.com/newjersey/navigator.business.nj.gov/commit/cfe593074be2266f4c1bcc0141ff398af4ae9f30))
+
 ## [5.9.2](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.9.1...v5.9.2) (2022-12-14)
 
 
