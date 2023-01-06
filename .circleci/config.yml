@@ -411,6 +411,7 @@ commands:
           name: Create PR to main
           command: |
             git status
+            gh repo set-default
             gh pr create --fill --base main --head $CIRCLE_BRANCH
 
   build-and-push-custom-node-image:
