@@ -11,6 +11,7 @@ export interface OperatingPhase {
   readonly displayAltHomeBasedBusinessDescription: boolean;
   readonly municipalityRequiredForTradeName: boolean;
   readonly municipalityRequiredForPublicFiling: boolean;
+  readonly businessNameRequired: boolean;
   readonly feedbackFormToDisplay: "STARTING" | "OWNING" | "";
 }
 
@@ -41,6 +42,7 @@ export const LookupOperatingPhaseById = (id: OperatingPhaseId | undefined): Oper
       displayAltHomeBasedBusinessDescription: false,
       municipalityRequiredForTradeName: true,
       municipalityRequiredForPublicFiling: true,
+      businessNameRequired: false,
       feedbackFormToDisplay: "",
     }
   );
@@ -60,6 +62,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displayAltHomeBasedBusinessDescription: true,
     municipalityRequiredForTradeName: false,
     municipalityRequiredForPublicFiling: false,
+    businessNameRequired: false,
     feedbackFormToDisplay: "STARTING",
   },
   {
@@ -75,6 +78,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displayAltHomeBasedBusinessDescription: true,
     municipalityRequiredForTradeName: true,
     municipalityRequiredForPublicFiling: true,
+    businessNameRequired: false,
     feedbackFormToDisplay: "OWNING",
   },
   {
@@ -90,6 +94,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displayAltHomeBasedBusinessDescription: true,
     municipalityRequiredForTradeName: true,
     municipalityRequiredForPublicFiling: true,
+    businessNameRequired: true,
     feedbackFormToDisplay: "STARTING",
   },
   {
@@ -105,6 +110,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displayAltHomeBasedBusinessDescription: true,
     municipalityRequiredForTradeName: false, // situation never occurs
     municipalityRequiredForPublicFiling: false,
+    businessNameRequired: false,
     feedbackFormToDisplay: "STARTING",
   },
   {
@@ -120,6 +126,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displayAltHomeBasedBusinessDescription: true,
     municipalityRequiredForTradeName: false,
     municipalityRequiredForPublicFiling: true,
+    businessNameRequired: false,
     feedbackFormToDisplay: "STARTING",
   },
   {
@@ -135,6 +142,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displayAltHomeBasedBusinessDescription: false,
     municipalityRequiredForTradeName: true,
     municipalityRequiredForPublicFiling: true,
+    businessNameRequired: true,
     feedbackFormToDisplay: "OWNING",
   },
   {
@@ -150,6 +158,7 @@ export const OperatingPhases: OperatingPhase[] = [
     displayAltHomeBasedBusinessDescription: false,
     municipalityRequiredForTradeName: true,
     municipalityRequiredForPublicFiling: true,
+    businessNameRequired: false,
     feedbackFormToDisplay: "OWNING",
   },
 ];

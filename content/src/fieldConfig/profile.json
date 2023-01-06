@@ -15,7 +15,7 @@
         "default": {
           "header": "Business Name",
           "placeholder": "Type Your Business Name",
-          "errorTextRequired": "Enter the name shown in your tax confirmation email.",
+          "errorTextRequired": "Please enter your business name.",
           "description": "What will you name your business?"
         },
         "overrides": {
@@ -164,7 +164,7 @@
           "header": "New Jersey Tax ID",
           "placeholder": "Enter New Jersey Tax ID number",
           "description": "What is your `New Jersey Tax ID?|tax-id`",
-          "errorTextRequired": "Enter the 12-digit Tax ID shown in your tax confirmation email."
+          "errorTextRequired": "Enter a 12-digit NJ Tax ID"
         }
       },
       "entityId": {
@@ -223,7 +223,7 @@
         "default": {
           "placeholder": "Type Your Responsible Owner Name",
           "header": "Responsible Owner Name",
-          "errorTextRequired": "Enter the responsible owner listed in your tax confirmation email.",
+          "errorTextRequired": "Please enter your responsible owner name.",
           "description": "Enter your Last Name, First Name and Middle Initial. The name must match exactly the name listed on your tax confirmation email."
         }
       },

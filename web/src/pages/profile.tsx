@@ -252,10 +252,13 @@ const ProfilePage = (props: Props): ReactElement => {
     }
   };
 
+  const isBusinessNameRequired = (): boolean => {
+    if (!userData) return false;
+    return LookupOperatingPhaseById(userData.profileData.operatingPhase).businessNameRequired;
+  };
+
   const shouldShowNexusBusinessNameElements = (): boolean => {
-    if (!userData) {
-      return false;
-    }
+    if (!userData) return false;
     return LookupLegalStructureById(userData.profileData.legalStructureId).requiresPublicFiling;
   };
 
@@ -422,7 +425,10 @@ const ProfilePage = (props: Props): ReactElement => {
         ) : (
           <>
             <FieldLabelProfile fieldName="businessName" />
-            <OnboardingBusinessName />
+            <OnboardingBusinessName
+              onValidation={isBusinessNameRequired() ? onValidation : undefined}
+              fieldStates={fieldStates}
+            />
           </>
         )}
 
@@ -567,7 +573,7 @@ const ProfilePage = (props: Props): ReactElement => {
         </h2>
         <div className="margin-top-4">
           <FieldLabelProfile fieldName="businessName" />
-          <OnboardingBusinessName onValidation={onValidation} fieldStates={fieldStates} />
+          <OnboardingBusinessName fieldStates={fieldStates} />
         </div>
         {(props.CMS_ONLY_fakeUserData || true) && (
           <div className="margin-top-4">
