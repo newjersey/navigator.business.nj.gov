@@ -1877,11 +1877,6 @@ collections:
                   widget: string,
                 }
               - { label: Business Address - City Label, name: addressCityLabel, widget: string }
-              - {
-                  label: Business Address - Municipality Label,
-                  name: addressMunicipalityLabel,
-                  widget: string,
-                }
               - { label: Business Address - City - Placeholder, name: addressCityPlaceholder, widget: string }
               - {
                   label: Business Address - State Label,

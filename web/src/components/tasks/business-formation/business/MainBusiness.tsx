@@ -104,7 +104,7 @@ export const MainBusiness = (): ReactElement => {
             doSomeFieldsHaveError(["addressState", "addressZipCode"]) ? `error` : ""
           } form-input grid-col-5 tablet:grid-col-2`}
         >
-          <Content>{Config.businessFormationDefaults.addressMunicipalityLabel}</Content>
+          <Content>{Config.businessFormationDefaults.addressStateLabel}</Content>
           <StateDropdown
             fieldName="addressState"
             value={"New Jersey"}
