@@ -15,6 +15,10 @@
     {
       "id": "disabled-veteran",
       "name": "a disabled veteran"
+    },
+    {
+      "id": "none",
+      "name": "none of the above"
     }
   ]
 }

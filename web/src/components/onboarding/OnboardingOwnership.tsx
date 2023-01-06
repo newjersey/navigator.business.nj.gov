@@ -13,6 +13,7 @@ import { ReactElement, useContext } from "react";
 export const OnboardingOwnership = (): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { Config } = useConfig();
+  const NONE_OF_THE_ABOVE = "none";
 
   const contentFromConfig: ConfigType["profileDefaults"]["fields"]["ownershipTypeIds"]["default"] =
     getProfileConfig({
@@ -22,10 +23,18 @@ export const OnboardingOwnership = (): ReactElement => {
     });
 
   const handleChange = (event: SelectChangeEvent<string[]>) => {
-    const value = typeof event.target.value === "string" ? event.target.value.split(",") : event.target.value;
+    let values: string[] =
+      typeof event.target.value === "string" ? event.target.value.split(",") : event.target.value;
+    const justSelectedValue = values[values.length - 1];
+    if (justSelectedValue === NONE_OF_THE_ABOVE) {
+      values = [NONE_OF_THE_ABOVE];
+    } else {
+      values = values.filter((it) => it !== NONE_OF_THE_ABOVE);
+    }
+
     setProfileData({
       ...state.profileData,
-      ownershipTypeIds: value,
+      ownershipTypeIds: values,
     });
   };
 

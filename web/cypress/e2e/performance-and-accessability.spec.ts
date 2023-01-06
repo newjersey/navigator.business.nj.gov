@@ -153,7 +153,6 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
 
         cy.url().should("include", "onboarding?page=3");
         onOnboardingPage.selectLocation("Absecon");
-        onOnboardingPage.selectOwnership(["women-owned"]);
 
         cy.lighthouse(undefined, lighthouseDesktopConfig);
         cy.pa11y(defaultPa11yThresholds);
@@ -174,7 +173,6 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
 
         cy.url().should("include", "onboarding?page=3");
         onOnboardingPage.selectLocation("Absecon");
-        onOnboardingPage.selectOwnership(["women-owned"]);
         onOnboardingPage.clickNext();
 
         cy.url().should("include", "onboarding?page=4");
