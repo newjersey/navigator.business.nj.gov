@@ -177,48 +177,6 @@ describe("onboarding - owning a business", () => {
       });
       expect(screen.queryByTestId("snackbar-alert-ERROR")).not.toBeInTheDocument();
     });
-
-    it("prevents user from moving after Step 4 if you have not entered number of employees", async () => {
-      const userData = generateCCorpTestUserData({ existingEmployees: undefined, municipality: undefined });
-      useMockRouter({ isReady: true, query: { page: "4" } });
-      const newark = generateMunicipality({ displayName: "Newark" });
-      const { page } = renderPage({
-        municipalities: [newark],
-        userData,
-      });
-      expect(screen.getByTestId("step-4")).toBeInTheDocument();
-      page.selectByText("Location", "Newark");
-      act(() => {
-        return page.clickNext();
-      });
-
-      await waitFor(() => {
-        screen.getByText(Config.profileDefaults.fields.existingEmployees.default.errorTextRequired);
-      });
-      expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
-    });
-
-    it("allows user to move past Step 4 if you have entered number of employees", async () => {
-      const userData = generateCCorpTestUserData({ existingEmployees: undefined, municipality: undefined });
-      useMockRouter({ isReady: true, query: { page: "4" } });
-      const newark = generateMunicipality({ displayName: "Newark" });
-      const { page } = renderPage({
-        municipalities: [newark],
-        userData,
-      });
-      expect(screen.getByTestId("step-4")).toBeInTheDocument();
-      page.fillText("Existing employees", "123");
-      page.selectByText("Location", "Newark");
-      await page.visitStep(5);
-
-      await waitFor(() => {
-        expect(
-          screen.queryByText(Config.profileDefaults.fields.existingEmployees.default.errorTextRequired)
-        ).not.toBeInTheDocument();
-      });
-      expect(screen.queryByTestId("snackbar-alert-ERROR")).not.toBeInTheDocument();
-      expect(screen.queryByTestId("step-4")).not.toBeInTheDocument();
-    });
   });
 
   it("changes url pathname every time a user goes to a different page", async () => {
@@ -270,7 +228,6 @@ describe("onboarding - owning a business", () => {
     const page4 = within(screen.getByTestId("page-4-form"));
     expect(page4.getByText(Config.onboardingDefaults.nextButtonText)).toBeInTheDocument();
     expect(page4.queryByText(Config.onboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
-    page.fillText("Existing employees", "1234567");
     page.selectByText("Location", "Newark");
     page.selectByValue("Ownership", "veteran-owned");
     page.selectByValue("Ownership", "disabled-veteran");
@@ -299,7 +256,6 @@ describe("onboarding - owning a business", () => {
     const page3 = within(screen.getByTestId("page-3-form"));
     expect(page3.getByText(Config.onboardingDefaults.nextButtonText)).toBeInTheDocument();
     expect(page3.queryByText(Config.onboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
-    page.fillText("Existing employees", "1234567");
     page.selectByText("Location", "Newark");
     page.selectByValue("Ownership", "veteran-owned");
     page.selectByValue("Ownership", "disabled-veteran");
@@ -323,7 +279,6 @@ describe("onboarding - owning a business", () => {
     expect(currentUserData().profileData.dateOfFormation).toEqual(dateOfFormation);
     page.selectByValue("Sector", "clean-energy");
     await page.visitStep(4);
-    page.fillText("Existing employees", "1234567");
     page.selectByText("Location", "Newark");
     page.selectByValue("Ownership", "veteran-owned");
     page.selectByValue("Ownership", "disabled-veteran");
@@ -339,7 +294,6 @@ describe("onboarding - owning a business", () => {
         dateOfFormation,
         municipality: newark,
         ownershipTypeIds: ["veteran-owned", "disabled-veteran"],
-        existingEmployees: "1234567",
         sectorId: "clean-energy",
         industryId: "generic",
         operatingPhase: "GUEST_MODE_OWNING",

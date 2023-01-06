@@ -260,6 +260,24 @@ describe("filterFundings", () => {
     expect(result).toEqual(expect.arrayContaining([funding1, funding2]));
   });
 
+  it("displays all fundings when # employees is not answered", () => {
+    const userData = generateUserData({
+      profileData: generateProfileData({
+        homeBasedBusiness: false,
+        municipality: undefined,
+        existingEmployees: undefined,
+        sectorId: undefined,
+      }),
+    });
+    const funding1 = generateFunding({ employeesRequired: "n/a", status: "rolling application" });
+    const funding2 = generateFunding({ employeesRequired: "yes", status: "rolling application" });
+    const fundings = [funding1, funding2];
+
+    const result = filterFundings(fundings, userData);
+    expect(result.length).toEqual(2);
+    expect(result).toEqual(expect.arrayContaining([funding1, funding2]));
+  });
+
   it("shows fundings where user sector is in specified sectors list", () => {
     const userData = generateUserData({
       profileData: generateProfileData({

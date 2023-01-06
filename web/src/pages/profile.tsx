@@ -577,7 +577,7 @@ const ProfilePage = (props: Props): ReactElement => {
         )}
         <div className="margin-top-4">
           <FieldLabelProfile fieldName="existingEmployees" />
-          <OnboardingExistingEmployees onValidation={onValidation} fieldStates={fieldStates} />
+          <OnboardingExistingEmployees onValidation={() => {}} fieldStates={fieldStates} />
         </div>
         <div className="margin-top-4">
           <FieldLabelProfile fieldName="municipality" />
