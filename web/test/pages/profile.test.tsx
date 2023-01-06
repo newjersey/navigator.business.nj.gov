@@ -30,6 +30,7 @@ import { useMockRoadmap, useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
 import {
   currentUserData,
   setupStatefulUserDataContext,
+  userDataUpdatedNTimes,
   userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
@@ -973,6 +974,53 @@ describe("profile", () => {
         ).toBeInTheDocument();
       });
       expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
+    });
+
+    describe("business name required", () => {
+      const required: OperatingPhaseId[] = ["FORMED_AND_REGISTERED", "UP_AND_RUNNING"];
+      const notRequired: OperatingPhaseId[] = ["GUEST_MODE", "NEEDS_TO_FORM", "NEEDS_TO_REGISTER_FOR_TAXES"];
+
+      for (const phase of required) {
+        it(`prevents user from saving if business name in ${phase} phase`, async () => {
+          const userData = generateUserData({
+            profileData: generateProfileData({
+              businessPersona: "STARTING",
+              operatingPhase: phase,
+              businessName: "",
+            }),
+          });
+          renderPage({ userData: userData });
+          fireEvent.blur(screen.getByLabelText("Business name") as HTMLElement);
+
+          clickSave();
+          await waitFor(() => {
+            expect(
+              screen.getByText(Config.profileDefaults.fields.businessName.default.errorTextRequired)
+            ).toBeInTheDocument();
+          });
+          expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
+        });
+      }
+
+      for (const phase of notRequired) {
+        it(`allows user to save with empty business name in ${phase} phase`, async () => {
+          const userData = generateUserData({
+            profileData: generateProfileData({
+              businessPersona: "STARTING",
+              operatingPhase: phase,
+              businessName: "",
+            }),
+          });
+          renderPage({ userData: userData });
+          fireEvent.blur(screen.getByLabelText("Business name") as HTMLElement);
+
+          clickSave();
+          await waitFor(() => {
+            expect(userDataUpdatedNTimes()).toEqual(1);
+          });
+          expect(screen.queryByTestId("snackbar-alert-ERROR")).not.toBeInTheDocument();
+        });
+      }
     });
   });
 

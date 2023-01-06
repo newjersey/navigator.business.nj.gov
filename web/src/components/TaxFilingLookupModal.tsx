@@ -280,9 +280,7 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
                     inputErrorBar={true}
                     onValidation={onValidation}
                     fieldStates={fieldStates}
-                    validationText={
-                      apiFailed == "FAILED" ? Config.taxCalendar.failedBusinessFieldHelper : undefined
-                    }
+                    validationText={Config.taxCalendar.failedBusinessFieldHelper}
                   />
                 </div>
               </>
@@ -302,9 +300,7 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
                 inputErrorBar
                 onValidation={onValidation}
                 fieldStates={fieldStates}
-                validationText={
-                  apiFailed == "FAILED" ? Config.taxCalendar.failedResponsibleOwnerFieldHelper : undefined
-                }
+                validationText={Config.taxCalendar.failedResponsibleOwnerFieldHelper}
               />
             </div>
           </>
@@ -323,7 +319,7 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
             onValidation={onValidation}
             inputErrorBar
             fieldStates={fieldStates}
-            validationText={apiFailed == "FAILED" ? Config.taxCalendar.failedTaxIdHelper : undefined}
+            validationText={Config.taxCalendar.failedTaxIdHelper}
             required
           />
         </div>
