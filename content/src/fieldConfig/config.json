@@ -46,7 +46,6 @@
     "legalStructureWarningModalCancelButtonText": "Cancel",
     "businessStartDateLabel": "`**Effective Date**|effective-date`",
     "membersModalTitle": "Add New Member",
-    "addressMunicipalityLabel": "City",
     "membersSuccessTextHeader": "Member Added",
     "missingFieldsOnSubmitModalText": "Review the information in the fields below for errors or omissions:",
     "suffixErrorText": "Select a business designator.",
