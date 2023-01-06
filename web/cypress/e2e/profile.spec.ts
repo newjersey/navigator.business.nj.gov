@@ -146,20 +146,17 @@ describe("Profile [feature] [all] [group1]", () => {
     const businessFormationDate = "04/2021";
     const sectorId = randomElementFromArray(arrayOfSectors).id;
     const townDisplayName = "Atlantic";
-    const ownershipDataValues = ["woman-owned", "veteran-owned"];
 
     completeExistingBusinessOnboarding({
       businessFormationDate,
       sectorId,
       townDisplayName,
-      ownershipDataValues,
     });
 
     checkExistingBusinessProfilePage({
       businessFormationDate,
       sectorId,
       townDisplayName,
-      ownershipDataValues,
     });
 
     const updatedBusinessFormationDate = "03/2020";

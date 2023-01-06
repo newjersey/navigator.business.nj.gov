@@ -9,7 +9,6 @@ import { OnboardingLegalStructureDropdown } from "@/components/onboarding/Onboar
 import { OnboardingLocationInNewJersey } from "@/components/onboarding/OnboardingLocationInNewJersey";
 import { OnboardingMunicipality } from "@/components/onboarding/OnboardingMunicipality";
 import { OnboardingNameAndEmail } from "@/components/onboarding/OnboardingNameAndEmail";
-import { OnboardingOwnership } from "@/components/onboarding/OnboardingOwnership";
 import { OnboardingSectors } from "@/components/onboarding/OnboardingSectors";
 import { EssentialQuestionObject, getEssentialQuestion } from "@/lib/domain-logic/essentialQuestions";
 import { isFullNameValid } from "@/lib/domain-logic/isFullNameValid";
@@ -145,9 +144,6 @@ export const getOnboardingFlows = (
               <div className="margin-top-2">
                 <OnboardingMunicipality onValidation={onValidation} fieldStates={fieldStates} />
               </div>
-              <div className="margin-top-205" />
-              <FieldLabelOnboarding fieldName="ownershipTypeIds" />
-              <OnboardingOwnership />
             </>
           ),
           getErrorMap: () => {
