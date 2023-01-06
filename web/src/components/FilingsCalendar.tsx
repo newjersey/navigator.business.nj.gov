@@ -4,7 +4,7 @@ import { Tag } from "@/components/njwds-extended/Tag";
 import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { sortFilterFilingsWithinAYear } from "@/lib/domain-logic/filterFilings";
+import { sortFilterFilingsCurrentAndFutureMonths } from "@/lib/domain-logic/filterFilings";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { MediaQueries } from "@/lib/PageSizes";
 import { OperateReference } from "@/lib/types/types";
@@ -39,8 +39,8 @@ export const FilingsCalendar = (props: Props): ReactElement => {
 
   const isLargeScreen = useMediaQuery(MediaQueries.tabletAndUp);
 
-  const sortedFilteredFilingsWithinAYear: TaxFiling[] = userData?.taxFilingData.filings
-    ? sortFilterFilingsWithinAYear(userData.taxFilingData.filings)
+  const sortedFilteredFilingsCurrentAndFutureMonths: TaxFiling[] = userData?.taxFilingData.filings
+    ? sortFilterFilingsCurrentAndFutureMonths(userData.taxFilingData.filings)
     : [];
 
   const editOnClick = () => {
@@ -67,7 +67,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
       textColor = "text-green";
     }
 
-    const thisMonthFilings = sortedFilteredFilingsWithinAYear.filter((it) => {
+    const thisMonthFilings = sortedFilteredFilingsCurrentAndFutureMonths.filter((it) => {
       return (
         parseDateWithFormat(it.dueDate, defaultDateFormat).month() === date.month() &&
         parseDateWithFormat(it.dueDate, defaultDateFormat).year() === date.year()
@@ -152,13 +152,13 @@ export const FilingsCalendar = (props: Props): ReactElement => {
   };
 
   const renderCalendarAsList = (): ReactElement => {
-    if (sortedFilteredFilingsWithinAYear.length === 0) {
+    if (sortedFilteredFilingsCurrentAndFutureMonths.length === 0) {
       return <></>;
     }
 
     return (
       <div data-testid="filings-calendar-as-list">
-        {sortedFilteredFilingsWithinAYear
+        {sortedFilteredFilingsCurrentAndFutureMonths
           .filter((filing) => {
             return props.operateReferences[filing.identifier];
           })
@@ -204,7 +204,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
 
   const renderToggleButton = (): ReactElement => {
     const displayToggleButton =
-      sortedFilteredFilingsWithinAYear.length > 0 &&
+      sortedFilteredFilingsCurrentAndFutureMonths.length > 0 &&
       LookupOperatingPhaseById(userData?.profileData.operatingPhase).displayCalendarToggleButton &&
       isLargeScreen;
 
@@ -267,7 +267,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
       </div>
       <hr className="bg-base-lighter margin-top-2 margin-bottom-4" aria-hidden={true} />
       {shouldRenderFilingsCalendarTaxAccess(userData) && <FilingsCalendarTaxAccess />}
-      {sortedFilteredFilingsWithinAYear.length > 0 ? (
+      {sortedFilteredFilingsCurrentAndFutureMonths.length > 0 ? (
         <>
           {renderCalendar()}
           <div className="margin-top-2">
