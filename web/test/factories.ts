@@ -208,7 +208,7 @@ export const getProfileDataForUnfilteredOpportunities = () => {
     municipality: undefined,
     existingEmployees: "1",
     sectorId: undefined,
-    ownershipTypeIds: ["veteran-owned", "disabled-veteran", "minority-owned", "woman-owned"],
+    ownershipTypeIds: [],
   });
 };
 
