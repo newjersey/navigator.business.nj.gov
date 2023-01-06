@@ -264,12 +264,8 @@ describe("<FilingsCalendarTaxAccess />", () => {
       expect(screen.getByRole("alert")).not.toHaveTextContent(
         Config.taxCalendar.modalResponsibleOwnerFieldErrorName
       );
-      expect(
-        screen.getByText(Config.profileDefaults.fields.businessName.default.errorTextRequired)
-      ).toBeInTheDocument();
-      expect(
-        screen.queryByText(Config.profileDefaults.fields.taxId.default.errorTextRequired)
-      ).not.toBeInTheDocument();
+      expect(screen.getByText(Config.taxCalendar.failedBusinessFieldHelper)).toBeInTheDocument();
+      expect(screen.queryByText(Config.taxCalendar.failedTaxIdHelper)).not.toBeInTheDocument();
       expect(mockApi.postTaxRegistrationOnboarding).not.toHaveBeenCalled();
     });
 
@@ -286,12 +282,8 @@ describe("<FilingsCalendarTaxAccess />", () => {
       expect(screen.getByRole("alert")).not.toHaveTextContent(
         Config.taxCalendar.modalResponsibleOwnerFieldErrorName
       );
-      expect(
-        screen.queryByText(Config.profileDefaults.fields.businessName.default.errorTextRequired)
-      ).not.toBeInTheDocument();
-      expect(
-        screen.getByText(Config.profileDefaults.fields.taxId.default.errorTextRequired)
-      ).toBeInTheDocument();
+      expect(screen.queryByText(Config.taxCalendar.failedBusinessFieldHelper)).not.toBeInTheDocument();
+      expect(screen.getByText(Config.taxCalendar.failedTaxIdHelper)).toBeInTheDocument();
       expect(mockApi.postTaxRegistrationOnboarding).not.toHaveBeenCalled();
     });
 
@@ -314,12 +306,8 @@ describe("<FilingsCalendarTaxAccess />", () => {
       expect(screen.getByRole("alert")).not.toHaveTextContent(
         Config.taxCalendar.modalResponsibleOwnerFieldErrorName
       );
-      expect(
-        screen.getByText(Config.profileDefaults.fields.businessName.default.errorTextRequired)
-      ).toBeInTheDocument();
-      expect(
-        screen.getByText(Config.profileDefaults.fields.taxId.default.errorTextRequired)
-      ).toBeInTheDocument();
+      expect(screen.getByText(Config.taxCalendar.failedBusinessFieldHelper)).toBeInTheDocument();
+      expect(screen.getByText(Config.taxCalendar.failedTaxIdHelper)).toBeInTheDocument();
       expect(mockApi.postTaxRegistrationOnboarding).not.toHaveBeenCalled();
     });
 
@@ -371,9 +359,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
       fireEvent.change(screen.getByLabelText("Business name"), { target: { value: "" } });
       fireEvent.blur(screen.getByLabelText("Business name"));
       expect(screen.queryByRole("alert")).not.toBeInTheDocument();
-      expect(
-        screen.getByText(Config.profileDefaults.fields.businessName.default.errorTextRequired)
-      ).toBeInTheDocument();
+      expect(screen.getByText(Config.taxCalendar.failedBusinessFieldHelper)).toBeInTheDocument();
     });
 
     it("submits taxId and businessName to api", async () => {
@@ -490,15 +476,9 @@ describe("<FilingsCalendarTaxAccess />", () => {
       expect(screen.getByRole("alert")).not.toHaveTextContent(Config.taxCalendar.modalTaxFieldErrorName);
       expect(screen.getByRole("alert")).not.toHaveTextContent(Config.taxCalendar.modalBusinessFieldErrorName);
 
-      expect(
-        screen.getByText(Config.profileDefaults.fields.responsibleOwnerName.default.errorTextRequired)
-      ).toBeInTheDocument();
-      expect(
-        screen.queryByText(Config.profileDefaults.fields.taxId.default.errorTextRequired)
-      ).not.toBeInTheDocument();
-      expect(
-        screen.queryByText(Config.profileDefaults.fields.businessName.default.errorTextRequired)
-      ).not.toBeInTheDocument();
+      expect(screen.getByText(Config.taxCalendar.failedResponsibleOwnerFieldHelper)).toBeInTheDocument();
+      expect(screen.queryByText(Config.taxCalendar.failedTaxIdHelper)).not.toBeInTheDocument();
+      expect(screen.queryByText(Config.taxCalendar.failedBusinessFieldHelper)).not.toBeInTheDocument();
 
       expect(mockApi.postTaxRegistrationOnboarding).not.toHaveBeenCalled();
     });
@@ -513,15 +493,11 @@ describe("<FilingsCalendarTaxAccess />", () => {
       expect(screen.getByRole("alert")).not.toHaveTextContent(
         Config.taxCalendar.modalResponsibleOwnerFieldErrorName
       );
+      expect(screen.queryByText(Config.taxCalendar.failedBusinessFieldHelper)).not.toBeInTheDocument();
       expect(
-        screen.queryByText(Config.profileDefaults.fields.businessName.default.errorTextRequired)
+        screen.queryByText(Config.taxCalendar.failedResponsibleOwnerFieldHelper)
       ).not.toBeInTheDocument();
-      expect(
-        screen.queryByText(Config.profileDefaults.fields.responsibleOwnerName.default.errorTextRequired)
-      ).not.toBeInTheDocument();
-      expect(
-        screen.getByText(Config.profileDefaults.fields.taxId.default.errorTextRequired)
-      ).toBeInTheDocument();
+      expect(screen.getByText(Config.taxCalendar.failedTaxIdHelper)).toBeInTheDocument();
       expect(mockApi.postTaxRegistrationOnboarding).not.toHaveBeenCalled();
     });
 
@@ -542,15 +518,9 @@ describe("<FilingsCalendarTaxAccess />", () => {
       expect(screen.getByRole("alert")).toHaveTextContent(Config.taxCalendar.modalTaxFieldErrorName);
       expect(screen.getByRole("alert")).not.toHaveTextContent(Config.taxCalendar.modalBusinessFieldErrorName);
 
-      expect(
-        screen.getByText(Config.profileDefaults.fields.responsibleOwnerName.default.errorTextRequired)
-      ).toBeInTheDocument();
-      expect(
-        screen.getByText(Config.profileDefaults.fields.taxId.default.errorTextRequired)
-      ).toBeInTheDocument();
-      expect(
-        screen.queryByText(Config.profileDefaults.fields.businessName.default.errorTextRequired)
-      ).not.toBeInTheDocument();
+      expect(screen.getByText(Config.taxCalendar.failedResponsibleOwnerFieldHelper)).toBeInTheDocument();
+      expect(screen.getByText(Config.taxCalendar.failedTaxIdHelper)).toBeInTheDocument();
+      expect(screen.queryByText(Config.taxCalendar.failedBusinessFieldHelper)).not.toBeInTheDocument();
 
       expect(mockApi.postTaxRegistrationOnboarding).not.toHaveBeenCalled();
     });
@@ -561,9 +531,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
       fireEvent.change(screen.getByLabelText("Responsible owner name"), { target: { value: "" } });
       fireEvent.blur(screen.getByLabelText("Responsible owner name"));
       expect(screen.queryByRole("alert")).not.toBeInTheDocument();
-      expect(
-        screen.getByText(Config.profileDefaults.fields.responsibleOwnerName.default.errorTextRequired)
-      ).toBeInTheDocument();
+      expect(screen.getByText(Config.taxCalendar.failedResponsibleOwnerFieldHelper)).toBeInTheDocument();
     });
 
     it("displays alert & inline errors when api failed", async () => {
@@ -653,9 +621,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
       fireEvent.change(screen.getByLabelText("Tax id"), { target: { value: "" } });
       fireEvent.blur(screen.getByLabelText("Tax id"));
       expect(screen.queryByRole("alert")).not.toBeInTheDocument();
-      expect(
-        screen.getByText(Config.profileDefaults.fields.taxId.default.errorTextRequired)
-      ).toBeInTheDocument();
+      expect(screen.getByText(Config.taxCalendar.failedTaxIdHelper)).toBeInTheDocument();
     });
 
     it("displays alert on success", async () => {

@@ -91,16 +91,10 @@ export const GenericTextField = forwardRef(
 
     const validation = (currentValue: string): void => {
       const value = valueFilter ? valueFilter(currentValue) : currentValue;
-      const invalid = additionalValidation ? !additionalValidation(value) : false;
+      const invalidAdditional = additionalValidation ? !additionalValidation(value) : false;
       const invalidRequired = props.required ? !value.trim() : false;
-      props.onValidation &&
-        props.onValidation(
-          props.fieldName,
-          [invalidRequired, invalid].some((i) => {
-            return !!i;
-          }),
-          currentValue
-        );
+      const isFieldInvalid = invalidAdditional || invalidRequired;
+      props.onValidation && props.onValidation(props.fieldName, isFieldInvalid, currentValue);
     };
 
     const onValidation = (event: FocusEvent<HTMLInputElement>): void => {
