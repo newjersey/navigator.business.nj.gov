@@ -59,8 +59,8 @@ describe("filterCertifications", () => {
     expect(results).toEqual(expect.arrayContaining([cert1, cert3, cert4, cert5, cert6]));
   });
 
-  it("returns filtered certifications empty ownership types", () => {
-    const userData = defaultProfileData({});
+  it("returns filtered certifications for none ownership types", () => {
+    const userData = defaultProfileData({ ownershipTypeIds: ["none"] });
 
     const cert1 = generateCertification({ applicableOwnershipTypes: ["veteran-owned"] });
     const cert2 = generateCertification({ applicableOwnershipTypes: ["minority-owned"] });
@@ -71,6 +71,20 @@ describe("filterCertifications", () => {
     const results = filterCertifications([cert1, cert2, cert3, cert4, cert5], userData);
     expect(results.length).toEqual(1);
     expect(results).toEqual(expect.arrayContaining([cert5]));
+  });
+
+  it("returns all certifications for empty ownership types", () => {
+    const userData = defaultProfileData({ ownershipTypeIds: [] });
+
+    const cert1 = generateCertification({ applicableOwnershipTypes: ["veteran-owned"] });
+    const cert2 = generateCertification({ applicableOwnershipTypes: ["minority-owned"] });
+    const cert3 = generateCertification({ applicableOwnershipTypes: ["disabled-veteran"] });
+    const cert4 = generateCertification({ applicableOwnershipTypes: ["disabled-veteran", "veteran-owned"] });
+    const cert5 = generateCertification({ applicableOwnershipTypes: [] });
+
+    const results = filterCertifications([cert1, cert2, cert3, cert4, cert5], userData);
+    expect(results.length).toEqual(5);
+    expect(results).toEqual(expect.arrayContaining([cert1, cert2, cert3, cert4, cert5]));
   });
 
   it("returns filtered certification when number of employees is less than 120", () => {

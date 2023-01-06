@@ -329,7 +329,6 @@ export const completeExistingBusinessOnboarding = ({
   businessFormationDate = "04/2021",
   sectorId = randomElementFromArray(arrayOfSectors).id,
   townDisplayName = "Atlantic",
-  ownershipDataValues = ["woman-owned", "veteran-owned"],
   legalStructureId = businessFormationDate || randomInt() % 2 ? "limited-partnership" : "sole-proprietorship",
   fullName = `Michael Smith ${randomInt()}`,
   email = `MichaelSmith${randomInt()}@gmail.com`,
@@ -384,12 +383,6 @@ export const completeExistingBusinessOnboarding = ({
 
   onOnboardingPage.selectLocation(townDisplayName);
   onOnboardingPage.getLocationDropdown().invoke("prop", "value").should("contain", townDisplayName);
-  if (!!ownershipDataValues && ownershipDataValues.length) {
-    onOnboardingPage.selectOwnership(ownershipDataValues);
-    ownershipDataValues.forEach((dataValue) => {
-      onOnboardingPage.getOwnershipDropdown().invoke("prop", "value").should("contain", dataValue);
-    });
-  }
   onOnboardingPage.clickNext();
 
   pageIndex += 1;

@@ -210,7 +210,6 @@ describe("onboarding - shared", () => {
       employerId: undefined,
       taxId: undefined,
       notes: "",
-      ownershipTypeIds: [],
       operatingPhase: "GUEST_MODE_OWNING",
     });
   });
@@ -229,7 +228,6 @@ describe("onboarding - shared", () => {
     page.selectByValue("Sector", "clean-energy");
     await page.visitStep(3);
     page.selectByText("Location", "Newark");
-    page.selectByValue("Ownership", "veteran-owned");
 
     page.clickBack();
     page.clickBack();
@@ -249,7 +247,6 @@ describe("onboarding - shared", () => {
       employerId: undefined,
       taxId: undefined,
       notes: "",
-      ownershipTypeIds: [],
     });
   });
 
@@ -269,7 +266,6 @@ describe("onboarding - shared", () => {
     page.selectByValue("Sector", "clean-energy");
     await page.visitStep(4);
     page.selectByText("Location", "Newark");
-    page.selectByValue("Ownership", "veteran-owned");
 
     page.clickBack();
     page.clickBack();
@@ -290,7 +286,6 @@ describe("onboarding - shared", () => {
       employerId: undefined,
       taxId: undefined,
       notes: "",
-      ownershipTypeIds: [],
     });
   });
 
@@ -310,7 +305,6 @@ describe("onboarding - shared", () => {
     page.selectByValue("Sector", "clean-energy");
     await page.visitStep(4);
     page.selectByText("Location", "Newark");
-    page.selectByValue("Ownership", "veteran-owned");
 
     page.clickBack();
     page.clickBack();
@@ -330,7 +324,6 @@ describe("onboarding - shared", () => {
       employerId: undefined,
       taxId: undefined,
       notes: "",
-      ownershipTypeIds: ["veteran-owned"],
       sectorId: "clean-energy",
       operatingPhase: "GUEST_MODE_OWNING",
     });
