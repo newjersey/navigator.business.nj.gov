@@ -3,7 +3,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { withDesign } from "storybook-addon-designs";
 
 export default {
-  title: "Molecules/Alerts/Snackbars",
+  title: "WIP/Alerts/Snackbars",
   component: SnackbarAlert,
   decorators: [withDesign],
   parameters: {

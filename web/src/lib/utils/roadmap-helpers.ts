@@ -1,5 +1,5 @@
 import { KeysOfType, Roadmap, SectionCompletion, Step, Task } from "@/lib/types/types";
-import { sectionNames, SectionType, UserData } from "@businessnjgovnavigator/shared/userData";
+import { sectionNames, SectionType, UserData } from "@businessnjgovnavigator/shared/";
 
 interface SectionPosition {
   currentSection: SectionType;

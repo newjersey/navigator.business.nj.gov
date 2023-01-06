@@ -19,10 +19,10 @@ import {
   createEmptyUser,
   createEmptyUserData,
   DateObject,
+  Industries,
   Municipality,
   UserData,
 } from "@businessnjgovnavigator/shared/";
-import { Industries } from "@businessnjgovnavigator/shared/industry";
 import {
   IndustrySpecificData,
   industrySpecificDataChoices,

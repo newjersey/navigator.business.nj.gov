@@ -1,5 +1,5 @@
-require("../src/styles/main.scss");
 require("njwds/dist/css/styles.css");
+require("../src/styles/main.scss");
 const { createTheme, ThemeProvider } = require("@mui/material");
 const muiTheme = require("../src/lib/muiTheme");
 
