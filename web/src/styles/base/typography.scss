@@ -1,4 +1,15 @@
-.usa-prose > .h1,
+.h1-styling-large {
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin: 0rem 0rem 1rem 0rem;
+  font-weight: 700;
+  font-size: 3rem !important;
+  line-height: 120% !important;
+  letter-spacing: -0.4px;
+  text-transform: none;
+}
+
+.usa-prose > h1,
 .usa-prose > .h1-styling,
 .h1-styling,
 h1 {
@@ -8,21 +19,12 @@ h1 {
   font-weight: 700;
   font-size: 2rem !important;
   line-height: 120% !important;
+  letter-spacing: -0.4px;
   color: $base-darkest;
-  letter-spacing: -0.4px;
+  text-transform: none;
 }
 
-.h1-styling-large {
-  margin-block-start: 0;
-  margin-block-end: 0;
-  margin: 0rem 0rem 1rem 0rem;
-  font-weight: 700;
-  font-size: 3rem !important;
-  line-height: 120% !important;
-  letter-spacing: -0.4px;
-}
-
-.usa-prose > .h2,
+.usa-prose > h2,
 .usa-prose > .h2-styling,
 .h2-styling,
 h2 {
@@ -33,22 +35,24 @@ h2 {
   font-size: 1.75rem !important;
   line-height: 120% !important;
   color: $base-darkest;
+  text-transform: none;
 }
 
-.usa-prose > .h3,
+.usa-prose > h3,
 .usa-prose > .h3-styling,
 .h3-styling,
 h3 {
   margin-block-start: 0;
   margin-block-end: 0;
   margin: 0rem 0rem 1rem 0rem;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 1.375rem !important;
   line-height: 120% !important;
   color: $base-darkest;
+  text-transform: none;
 }
 
-.usa-prose > .h4,
+.usa-prose > h4,
 .usa-prose > .h4-styling,
 .h4-styling,
 h4 {
@@ -56,9 +60,10 @@ h4 {
   margin-block-end: 0;
   margin: 0rem 0rem 1rem 0rem;
   font-weight: 700;
-  font-size: 1rem !important;
-  line-height: 132% !important;
+  font-size: 1.125rem !important;
+  line-height: 140% !important;
   color: $base-darkest;
+  text-transform: none;
 }
 
 .usa-prose > h5 + *,
@@ -66,7 +71,7 @@ h4 {
   margin-top: 0 !important;
 }
 
-.usa-prose > .h5,
+.usa-prose > h5,
 .usa-prose > .h5-styling,
 .h5-styling,
 h5 {
@@ -76,11 +81,12 @@ h5 {
   font-weight: 700;
   font-size: 0.875rem !important;
   line-height: 132% !important;
-  color: $base-dark;
+  color: $base-darkest;
   display: inline;
+  text-transform: none;
 }
 
-.usa-prose > .h6,
+.usa-prose > h6,
 .usa-prose > .h6-styling,
 .h6-styling,
 h6 {
@@ -90,8 +96,9 @@ h6 {
   font-weight: 400;
   font-size: 0.875rem !important;
   line-height: 132% !important;
-  color: $base-dark;
+  color: $base-darkest;
   display: inline;
+  text-transform: none;
 }
 
 li,
@@ -161,6 +168,14 @@ div {
 
 .text-medium {
   font-weight: 500;
+}
+
+.font-weight-inherit {
+  font-weight: inherit;
+}
+
+.font-size-inherit {
+  font-size: inherit;
 }
 
 .weight-inherit {

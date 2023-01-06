@@ -1,9 +1,9 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { withDesign } from "storybook-addon-designs";
-import { Button } from "../src/components/njwds-extended/Button";
+import { Button } from "../../src/components/njwds-extended/Button";
 
 export default {
-  title: "Components/Button",
+  title: "WIP/Button",
   component: Button,
   decorators: [withDesign],
   parameters: {

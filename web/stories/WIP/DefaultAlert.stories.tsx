@@ -1,9 +1,9 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { withDesign } from "storybook-addon-designs";
-import { Alert } from "../../../src/components/njwds-extended/Alert";
+import { Alert } from "../../src/components/njwds-extended/Alert";
 
 export default {
-  title: "Molecules/Alerts/DefaultAlerts",
+  title: "WIP/Alerts/DefaultAlerts",
   component: Alert,
   decorators: [withDesign, (story) => <div className="border width-tablet">{story()}</div>],
   parameters: {
