@@ -360,12 +360,12 @@
     "section6Header": "Looking for More Support?",
     "landingPageTile1Line1Text": "Get",
     "landingPageTile1Line2Text": "Started",
-    "landingPageTile2Text": "I'm starting a business",
-    "landingPageTile3Text": "I'm running an NJ business",
+    "landingPageTile2Text": "Get my registration guide",
+    "landingPageTile3Text": "File and pay my taxes",
     "landingPageTile4Text": "I'm an out-of-state business",
-    "landingPageTile5Text": "How do I register my business?",
-    "landingPageTile6Text": "Where do I pay my taxes?",
-    "landingPageTile7Text": "What funding am I eligible for?"
+    "landingPageTile5Text": "What funding am I eligible for?",
+    "landingPageTile6Text": "I'm starting a NJ business",
+    "landingPageTile7Text": "I'm running a NJ business"
   },
   "feedbackModal": {
     "feedbackModalFeatureRequestButtonText": "Request new capabilities",
