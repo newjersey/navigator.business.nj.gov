@@ -354,7 +354,7 @@ describe("dashboard page", () => {
   });
 
   it("displays filings calendar as list when taxfiling is populated and operatingPhase has ListCalendar", () => {
-    const dueDate = getCurrentDate().add(12, "months");
+    const dueDate = getCurrentDate();
     const annualReport = generateTaxFiling({
       identifier: "annual-report",
       dueDate: dueDate.format(defaultDateFormat),

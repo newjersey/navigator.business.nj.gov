@@ -7,6 +7,7 @@ import { useMockUserData } from "@/test/mock/mockUseUserData";
 import { defaultDateFormat, getCurrentDate, randomInt } from "@businessnjgovnavigator/shared";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen } from "@testing-library/react";
+import dayjs from "dayjs";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 const Config = getMergedConfig();
@@ -47,12 +48,17 @@ describe("filing page", () => {
   };
 
   it("shows the basic filing details and correct due date", () => {
+    const dueDate = dayjs(new Date(getCurrentDate().year(), 4, 30));
+
     useMockUserData({
       profileData: generateProfileData({ entityId: "1234567890" }),
       taxFilingData: generateTaxFilingData({
         filings: [
           generateTaxFiling({}),
-          generateTaxFiling({ identifier: "filing-identifier-1", dueDate: "2022-04-30" }),
+          generateTaxFiling({
+            identifier: "filing-identifier-1",
+            dueDate: dueDate.format(defaultDateFormat),
+          }),
         ],
       }),
     });
@@ -79,7 +85,7 @@ describe("filing page", () => {
     expect(screen.getByText("cta-text-1")).toBeInTheDocument();
     expect(screen.getByText("content-1")).toBeInTheDocument();
     expect(screen.getByText("filing-identifier-1")).toBeInTheDocument();
-    expect(screen.getByTestId("due-date")).toHaveTextContent("APRIL 30, 2022");
+    expect(screen.getByText(dueDate.format("MMMM D, YYYY"), { exact: false })).toBeInTheDocument();
     expect(screen.queryByTestId("filing-method")).not.toBeInTheDocument();
     expect(screen.queryByTestId("filing-details")).not.toBeInTheDocument();
     expect(screen.queryByTestId("extension")).not.toBeInTheDocument();
@@ -90,10 +96,12 @@ describe("filing page", () => {
   });
 
   it("shows correct date for a filing id with spaces in it", () => {
+    const dueDate = dayjs(new Date(getCurrentDate().year(), 4, 30));
+
     useMockUserData({
       profileData: generateProfileData({ entityId: "1234567890" }),
       taxFilingData: generateTaxFilingData({
-        filings: [generateTaxFiling({ identifier: "filing id", dueDate: "2022-04-30" })],
+        filings: [generateTaxFiling({ identifier: "filing id", dueDate: dueDate.format(defaultDateFormat) })],
       }),
     });
 
@@ -101,7 +109,7 @@ describe("filing page", () => {
     renderFilingPage(filing);
 
     expect(screen.getByText("filing id")).toBeInTheDocument();
-    expect(screen.getByTestId("due-date")).toHaveTextContent("APRIL 30, 2022");
+    expect(screen.getByText(dueDate.format("MMMM D, YYYY"), { exact: false })).toBeInTheDocument();
   });
 
   it("shows the full filing details and correct due date", () => {

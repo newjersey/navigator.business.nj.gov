@@ -502,16 +502,8 @@ describe("<FilingsCalendar />", () => {
       });
 
       const operateReferences: Record<string, OperateReference> = {
-        past: {
-          name: "Past Report",
-          urlSlug: "past-report-url",
-          urlPath: "past_report-url-path",
-        },
-        future: {
-          name: "Future Report",
-          urlSlug: "future-report-url",
-          urlPath: "future_report-url-path",
-        },
+        past: generateOperateReference({}),
+        future: generateOperateReference({}),
       };
 
       renderFilingsCalendar(operateReferences, userData);
