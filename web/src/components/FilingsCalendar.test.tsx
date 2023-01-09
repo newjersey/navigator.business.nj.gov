@@ -476,6 +476,43 @@ describe("<FilingsCalendar />", () => {
         screen.queryByText(Config.dashboardDefaults.calendarGridViewButton, { exact: false })
       ).not.toBeInTheDocument();
     });
+
+    it("doesn't display past months in list view", () => {
+      const pastDueDate = getCurrentDate().subtract(1, "months");
+      const pastReport = generateTaxFiling({
+        identifier: "past",
+        dueDate: pastDueDate.format(defaultDateFormat),
+      });
+
+      const futureDueDate = getCurrentDate().add(2, "months");
+      const futureReport = generateTaxFiling({
+        identifier: "future",
+        dueDate: futureDueDate.format(defaultDateFormat),
+      });
+
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          operatingPhase: randomElementFromArray(
+            OperatingPhases.filter((obj) => {
+              return obj.displayCalendarType === "LIST" || obj.displayCalendarType === "FULL";
+            })
+          ).id,
+        }),
+        taxFilingData: generateTaxFilingData({ filings: [pastReport, futureReport] }),
+      });
+
+      const operateReferences: Record<string, OperateReference> = {
+        past: generateOperateReference({}),
+        future: generateOperateReference({}),
+      };
+
+      renderFilingsCalendar(operateReferences, userData);
+
+      expect(
+        screen.queryByText(pastDueDate.format("MMMM D, YYYY"), { exact: false })
+      ).not.toBeInTheDocument();
+      expect(screen.getByText(futureDueDate.format("MMMM D, YYYY"), { exact: false })).toBeInTheDocument();
+    });
   });
 
   describe("calendar list and grid views", () => {

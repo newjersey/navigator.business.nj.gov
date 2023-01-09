@@ -15,12 +15,16 @@ export const sortFilingsEarliestToLatest = (filings: TaxFiling[]): TaxFiling[] =
   });
 };
 
-export const deadlinesWithinAYear = (filings: TaxFiling[]): TaxFiling[] => {
+export const upcomingDeadlinesWithinAYear = (filings: TaxFiling[]): TaxFiling[] => {
   return filings.filter((it) => {
-    return parseDateWithFormat(it.dueDate, defaultDateFormat).diff(getCurrentDate(), "month") <= 11;
+    const date = parseDateWithFormat(it.dueDate, defaultDateFormat);
+    return (
+      date.isSame(getCurrentDate(), "year") &&
+      (date.isSame(getCurrentDate(), "month") || date.isAfter(getCurrentDate(), "month"))
+    );
   });
 };
 
 export const sortFilterFilingsWithinAYear = (filings: TaxFiling[]): TaxFiling[] => {
-  return sortFilingsEarliestToLatest(deadlinesWithinAYear(filings));
+  return sortFilingsEarliestToLatest(upcomingDeadlinesWithinAYear(filings));
 };
