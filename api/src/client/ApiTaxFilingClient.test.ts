@@ -104,7 +104,7 @@ const generateErroredApiTaxFilingOnboardingResponse = (
         ? [
             {
               Error: `some-error-content-${randomInt()}`,
-              Field: randomInt() % 2 === 0 ? "Taxpayer ID" : "Business Name",
+              Field: randomInt() % 2 === 0 ? "formFailure" : "businessName",
             },
           ]
         : [],

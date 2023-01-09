@@ -1,7 +1,7 @@
 import { withDesign } from "storybook-addon-designs";
 
 export default {
-  title: "Atoms/Colors",
+  title: "WIP/Colors",
   decorators: [withDesign],
   parameters: {
     design: {

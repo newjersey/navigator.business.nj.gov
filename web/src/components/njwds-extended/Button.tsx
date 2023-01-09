@@ -64,7 +64,7 @@ export const Button = (props: Props): ReactElement => {
       break;
 
     case "tertiary":
-      style = "usa-button usa-button--unstyled width-auto";
+      style = "usa-button usa-button--unstyled width-auto font-weight-inherit font-size-inherit";
       break;
     case "narrow-light":
       style =

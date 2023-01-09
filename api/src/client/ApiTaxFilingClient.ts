@@ -131,7 +131,15 @@ export const ApiTaxFilingClient = (config: ApiConfig, logger: LogWriterType): Ta
       logger.LogInfo(
         `TaxFiling Onboarding - NICUSA - Id:${logId} - Response received: ${JSON.stringify(response.data)}`
       );
-      const apiResponse = response.data as ApiTaxFilingOnboardingResponse;
+
+      let apiResponse = response.data;
+      if (!apiResponse.errorField) {
+        apiResponse = { ...apiResponse, errorField: undefined } as ApiTaxFilingOnboardingResponse;
+      } else if (apiResponse.errorField == "Business Name") {
+        apiResponse = { ...apiResponse, errorField: "businessName" } as ApiTaxFilingOnboardingResponse;
+      } else if (apiResponse.errorField == "Taxpayer Id") {
+        apiResponse = { ...apiResponse, errorField: "formFailure" } as ApiTaxFilingOnboardingResponse;
+      }
       return apiResponse.StatusCode == 200 ? { state: "SUCCESS" } : { state: "API_ERROR" };
     } catch (error) {
       const axiosError = error as AxiosError;
@@ -183,7 +191,7 @@ export type ApiTaxFilingLookupResponse = {
 
 export type ApiTaxFilingOnboardingResponse = {
   ApiKey: string | null;
-  Errors: { Error: string; Field: "Business Name" | "Taxpayer ID" }[];
+  Errors: { Error: string; Field: "businessName" | "formFailure" }[];
   Notice: string | null;
   StatusCode: 500 | 400 | 200;
 };

@@ -1,9 +1,9 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { withDesign } from "storybook-addon-designs";
-import { Tag } from "../../../src/components/njwds-extended/Tag";
+import { Tag } from "../../src/components/njwds-extended/Tag";
 
 export default {
-  title: "Molecules/Tag",
+  title: "WIP/Tag",
   component: Tag,
   decorators: [withDesign],
   parameters: {
