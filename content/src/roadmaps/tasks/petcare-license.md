@@ -1,9 +1,9 @@
 ---
 urlSlug: petcare-license
 filename: petcare-license
-name: Obtain a License from Your Local Government
+name: Obtain a License from Your Local Government, if Required
 id: petcare-license
-required: true
+required: false
 ---
 `Animal facilities|animal-facilities` need to apply for license(s) with their local government annually. Your facility may need multiple licenses depending on the services you provide.
 
