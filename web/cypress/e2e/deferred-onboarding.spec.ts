@@ -140,12 +140,6 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
     //
     // });
     //
-    describe("onboarded as OWNING", () => {
-      it("answers location question as part of onboarding", () => {
-        completeExistingBusinessOnboarding({ townDisplayName: "Allendale" });
-        expectLocationQuestionIsCompletedInProfile("Allendale");
-      });
-    });
   });
 
   describe("home-based business", () => {

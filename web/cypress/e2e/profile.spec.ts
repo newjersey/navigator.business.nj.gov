@@ -145,18 +145,15 @@ describe("Profile [feature] [all] [group1]", () => {
   it("onboards existing business and updates profile data", () => {
     const businessFormationDate = "04/2021";
     const sectorId = randomElementFromArray(arrayOfSectors).id;
-    const townDisplayName = "Atlantic";
 
     completeExistingBusinessOnboarding({
       businessFormationDate,
       sectorId,
-      townDisplayName,
     });
 
     checkExistingBusinessProfilePage({
       businessFormationDate,
       sectorId,
-      townDisplayName,
     });
 
     const updatedBusinessFormationDate = "03/2020";
@@ -164,7 +161,6 @@ describe("Profile [feature] [all] [group1]", () => {
     const updatedBusinessName = `Generic Business Name ${randomInt()}`;
     const updatedSectorId = randomElementFromArray(arrayOfSectors).id;
     const updatedNumberOfEmployees = randomInt(1).toString();
-    const updatedTownDisplayName = "Bass River";
     const updatedOwnershipDataValues = ["disabled-veteran"];
     const employerId = randomInt(10).toString();
     const taxId = randomInt(12).toString();
@@ -177,7 +173,6 @@ describe("Profile [feature] [all] [group1]", () => {
       businessName: updatedBusinessName,
       sectorId: updatedSectorId,
       numberOfEmployees: updatedNumberOfEmployees,
-      townDisplayName: updatedTownDisplayName,
       homeBasedQuestion: Boolean(randomInt() % 2),
       ownershipDataValues: updatedOwnershipDataValues,
       employerId,

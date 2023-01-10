@@ -78,7 +78,7 @@ describe("onboarding - owning a business", () => {
       renderPage({ userData });
       expect(
         screen.getByText(
-          templateEval(Config.onboardingDefaults.stepXofYTemplate, { currentPage: "2", totalPages: "4" })
+          templateEval(Config.onboardingDefaults.stepXofYTemplate, { currentPage: "2", totalPages: "3" })
         )
       ).toBeInTheDocument();
     });
@@ -104,7 +104,7 @@ describe("onboarding - owning a business", () => {
 
       expect(
         screen.getByText(
-          templateEval(Config.onboardingDefaults.stepXofYTemplate, { currentPage: "2", totalPages: "4" })
+          templateEval(Config.onboardingDefaults.stepXofYTemplate, { currentPage: "2", totalPages: "3" })
         )
       ).toBeInTheDocument();
     });
@@ -145,40 +145,6 @@ describe("onboarding - owning a business", () => {
     });
   });
 
-  describe("page 4", () => {
-    it("prevents user from moving after Step 4 if you have not selected a location", async () => {
-      const userData = generateCCorpTestUserData({ municipality: undefined });
-      useMockRouter({ isReady: true, query: { page: "4" } });
-      const newark = generateMunicipality({ displayName: "Newark" });
-      const { page } = renderPage({ municipalities: [newark], userData });
-      act(() => {
-        return page.clickNext();
-      });
-      await waitFor(() => {
-        expect(screen.getByTestId("step-4")).toBeInTheDocument();
-      });
-      expect(
-        screen.getByText(Config.profileDefaults.fields.municipality.default.errorTextRequired)
-      ).toBeInTheDocument();
-      expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
-    });
-
-    it("allows user to move past Step 4 if you have selected a location", async () => {
-      const userData = generateCCorpTestUserData({ municipality: undefined });
-      useMockRouter({ isReady: true, query: { page: "4" } });
-      const newark = generateMunicipality({ displayName: "Newark" });
-      const { page } = renderPage({ municipalities: [newark], userData });
-      page.selectByText("Location", "Newark");
-      await page.visitStep(5);
-      await waitFor(() => {
-        expect(
-          screen.queryByText(Config.profileDefaults.fields.municipality.default.errorTextRequired)
-        ).not.toBeInTheDocument();
-      });
-      expect(screen.queryByTestId("snackbar-alert-ERROR")).not.toBeInTheDocument();
-    });
-  });
-
   it("changes url pathname every time a user goes to a different page", async () => {
     const newark = generateMunicipality({ displayName: "Newark" });
     const { page } = renderPage({ municipalities: [newark] });
@@ -198,7 +164,7 @@ describe("onboarding - owning a business", () => {
     expect(screen.getByTestId("step-3")).toBeInTheDocument();
 
     await page.visitStep(4);
-    page.selectByText("Location", "Newark");
+
     expect(mockRouter.mockPush).toHaveBeenCalledWith({ query: { page: 4 } }, undefined, { shallow: true });
     expect(screen.getByTestId("step-4")).toBeInTheDocument();
   });
@@ -226,13 +192,8 @@ describe("onboarding - owning a business", () => {
 
     await page.visitStep(4);
     const page4 = within(screen.getByTestId("page-4-form"));
-    expect(page4.getByText(Config.onboardingDefaults.nextButtonText)).toBeInTheDocument();
-    expect(page4.queryByText(Config.onboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
-    page.selectByText("Location", "Newark");
-    await page.visitStep(5);
-    const page5 = within(screen.getByTestId("page-5-form"));
-    expect(page5.queryByText(Config.onboardingDefaults.nextButtonText)).not.toBeInTheDocument();
-    expect(page5.getByText(Config.onboardingDefaults.finalNextButtonText)).toBeInTheDocument();
+    expect(page4.queryByText(Config.onboardingDefaults.nextButtonText)).not.toBeInTheDocument();
+    expect(page4.getByText(Config.onboardingDefaults.finalNextButtonText)).toBeInTheDocument();
   });
 
   it("shows correct next-button text on each page if legal structure  does not require Public Filing", async () => {
@@ -252,19 +213,13 @@ describe("onboarding - owning a business", () => {
 
     await page.visitStep(3);
     const page3 = within(screen.getByTestId("page-3-form"));
-    expect(page3.getByText(Config.onboardingDefaults.nextButtonText)).toBeInTheDocument();
-    expect(page3.queryByText(Config.onboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
-    page.selectByText("Location", "Newark");
-    await page.visitStep(4);
-    const page4 = within(screen.getByTestId("page-4-form"));
-    expect(page4.queryByText(Config.onboardingDefaults.nextButtonText)).not.toBeInTheDocument();
-    expect(page4.getByText(Config.onboardingDefaults.finalNextButtonText)).toBeInTheDocument();
+    expect(page3.queryByText(Config.onboardingDefaults.nextButtonText)).not.toBeInTheDocument();
+    expect(page3.getByText(Config.onboardingDefaults.finalNextButtonText)).toBeInTheDocument();
   });
 
   it("updates the user data after each form page", async () => {
     const initialUserData = createEmptyUserData(generateUser({}));
-    const newark = generateMunicipality({ displayName: "Newark" });
-    const { page } = renderPage({ userData: initialUserData, municipalities: [newark] });
+    const { page } = renderPage({ userData: initialUserData });
 
     page.chooseRadio("business-persona-owning");
     page.selectByValue("Business structure", "c-corporation");
@@ -275,8 +230,6 @@ describe("onboarding - owning a business", () => {
     expect(currentUserData().profileData.dateOfFormation).toEqual(dateOfFormation);
     page.selectByValue("Sector", "clean-energy");
     await page.visitStep(4);
-    page.selectByText("Location", "Newark");
-    await page.visitStep(5);
     expect(currentUserData()).toEqual({
       ...initialUserData,
       formProgress: "UNSTARTED",
@@ -286,7 +239,6 @@ describe("onboarding - owning a business", () => {
         homeBasedBusiness: undefined,
         legalStructureId: "c-corporation",
         dateOfFormation,
-        municipality: newark,
         sectorId: "clean-energy",
         industryId: "generic",
         operatingPhase: "GUEST_MODE_OWNING",
@@ -304,9 +256,6 @@ describe("onboarding - owning a business", () => {
         businessPersona: "OWNING",
         legalStructureId: "c-corporation",
         dateOfFormation,
-        municipality: generateMunicipality({
-          displayName: "Newark",
-        }),
         sectorId: "clean-energy",
       }),
     });
@@ -319,8 +268,6 @@ describe("onboarding - owning a business", () => {
     expect(page.getDateOfFormationValue()).toEqual(date.format("MM/YYYY"));
     await page.visitStep(3);
     expect(page.getSectorIDValue()).toEqual("Clean Energy");
-    await page.visitStep(4);
-    expect(page.getMunicipalityValue()).toEqual("Newark");
   });
 
   it("updates tax filing data on save", async () => {
@@ -340,7 +287,6 @@ describe("onboarding - owning a business", () => {
     await page.visitStep(2);
     await page.visitStep(3);
     await page.visitStep(4);
-    await page.visitStep(5);
     page.clickNext();
 
     await waitFor(() => {
@@ -352,10 +298,10 @@ describe("onboarding - owning a business", () => {
   });
 
   describe("validates self-reg step for legal structures that require public filing", () => {
-    runSelfRegPageTests({ businessPersona: "OWNING", requiresPublicFiling: true, selfRegPage: "5" });
+    runSelfRegPageTests({ businessPersona: "OWNING", requiresPublicFiling: true, selfRegPage: "4" });
   });
 
   describe("validates self-reg step for legal structures that do not require public filing", () => {
-    runSelfRegPageTests({ businessPersona: "OWNING", requiresPublicFiling: false, selfRegPage: "4" });
+    runSelfRegPageTests({ businessPersona: "OWNING", requiresPublicFiling: false, selfRegPage: "3" });
   });
 });

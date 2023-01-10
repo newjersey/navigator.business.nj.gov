@@ -152,30 +152,6 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
         onOnboardingPage.clickNext();
 
         cy.url().should("include", "onboarding?page=3");
-        onOnboardingPage.selectLocation("Absecon");
-
-        cy.lighthouse(undefined, lighthouseDesktopConfig);
-        cy.pa11y(defaultPa11yThresholds);
-      });
-    });
-
-    describe("Step 4", () => {
-      it("should pass the audits", () => {
-        cy.url().should("include", "onboarding?page=1");
-
-        onOnboardingPage.selectBusinessPersona("OWNING");
-        onOnboardingPage.selectLegalStructureDropDown("General Partnership");
-        onOnboardingPage.clickNext();
-
-        cy.url().should("include", "onboarding?page=2");
-        onOnboardingPage.selectIndustrySector("clean-energy");
-        onOnboardingPage.clickNext();
-
-        cy.url().should("include", "onboarding?page=3");
-        onOnboardingPage.selectLocation("Absecon");
-        onOnboardingPage.clickNext();
-
-        cy.url().should("include", "onboarding?page=4");
         onOnboardingPage.typeFullName("Michael Smith");
         onOnboardingPage.typeEmail("MichaelSmith@gmail.com");
         onOnboardingPage.typeConfirmEmail("MichaelSmith@gmail.com");
