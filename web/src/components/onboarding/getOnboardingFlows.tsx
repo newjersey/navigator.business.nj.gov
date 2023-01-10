@@ -7,7 +7,6 @@ import { OnboardingIndustry } from "@/components/onboarding/OnboardingIndustry";
 import { OnboardingLegalStructure } from "@/components/onboarding/OnboardingLegalStructure";
 import { OnboardingLegalStructureDropdown } from "@/components/onboarding/OnboardingLegalStructureDropDown";
 import { OnboardingLocationInNewJersey } from "@/components/onboarding/OnboardingLocationInNewJersey";
-import { OnboardingMunicipality } from "@/components/onboarding/OnboardingMunicipality";
 import { OnboardingNameAndEmail } from "@/components/onboarding/OnboardingNameAndEmail";
 import { OnboardingSectors } from "@/components/onboarding/OnboardingSectors";
 import { EssentialQuestionObject, getEssentialQuestion } from "@/lib/domain-logic/essentialQuestions";
@@ -134,22 +133,6 @@ export const getOnboardingFlows = (
                   valid: !!profileData.sectorId,
                 },
               ],
-            };
-          },
-        },
-        {
-          component: (
-            <>
-              <FieldLabelOnboarding fieldName="municipality" />
-              <div className="margin-top-2">
-                <OnboardingMunicipality onValidation={onValidation} fieldStates={fieldStates} />
-              </div>
-            </>
-          ),
-          getErrorMap: () => {
-            return {
-              inline: [{ name: "municipality", valid: !!profileData.municipality }],
-              snackbar: [{ name: "municipality", valid: !!profileData.municipality }],
             };
           },
         },

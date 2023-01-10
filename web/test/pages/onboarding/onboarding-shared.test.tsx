@@ -18,12 +18,7 @@ import {
   industriesWithOutEssentialQuestion,
   renderPage,
 } from "@/test/pages/onboarding/helpers-onboarding";
-import {
-  createEmptyProfileData,
-  defaultDateFormat,
-  generateMunicipality,
-  getCurrentDate,
-} from "@businessnjgovnavigator/shared/";
+import { createEmptyProfileData, defaultDateFormat, getCurrentDate } from "@businessnjgovnavigator/shared/";
 import { screen, waitFor } from "@testing-library/react";
 
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));
@@ -215,19 +210,17 @@ describe("onboarding - shared", () => {
   });
 
   it("resets non-shared information when switching from owning flow to starting flow with non-filing legal structure", async () => {
-    const newark = generateMunicipality({ displayName: "Newark" });
     const initialUserData = generateUserData({
       formProgress: "UNSTARTED",
       profileData: createEmptyProfileData(),
     });
-    const { page } = renderPage({ municipalities: [newark], userData: initialUserData });
+    const { page } = renderPage({ userData: initialUserData });
 
     page.chooseRadio("business-persona-owning");
     page.selectByValue("Business structure", "sole-proprietorship");
     await page.visitStep(2);
     page.selectByValue("Sector", "clean-energy");
     await page.visitStep(3);
-    page.selectByText("Location", "Newark");
 
     page.clickBack();
     page.clickBack();
@@ -241,7 +234,6 @@ describe("onboarding - shared", () => {
       homeBasedBusiness: undefined,
       dateOfFormation: undefined,
       legalStructureId: "sole-proprietorship",
-      municipality: newark,
       liquorLicense: false,
       constructionRenovationPlan: undefined,
       employerId: undefined,
@@ -251,12 +243,11 @@ describe("onboarding - shared", () => {
   });
 
   it("resets non-shared information when switching from owning flow to starting flow", async () => {
-    const newark = generateMunicipality({ displayName: "Newark" });
     const initialUserData = generateUserData({
       formProgress: "UNSTARTED",
       profileData: createEmptyProfileData(),
     });
-    const { page } = renderPage({ municipalities: [newark], userData: initialUserData });
+    const { page } = renderPage({ userData: initialUserData });
 
     page.chooseRadio("business-persona-owning");
     page.selectByValue("Business structure", "c-corporation");
@@ -264,15 +255,11 @@ describe("onboarding - shared", () => {
     page.selectDate("Date of formation", date);
     await page.visitStep(3);
     page.selectByValue("Sector", "clean-energy");
-    await page.visitStep(4);
-    page.selectByText("Location", "Newark");
-
     page.clickBack();
     page.clickBack();
-    page.clickBack();
-
     page.chooseRadio("business-persona-starting");
     await page.visitStep(2);
+
     expect(currentUserData().profileData).toEqual({
       ...initialUserData.profileData,
       businessPersona: "STARTING",
@@ -280,7 +267,6 @@ describe("onboarding - shared", () => {
       homeBasedBusiness: undefined,
       dateOfFormation: undefined,
       legalStructureId: "c-corporation",
-      municipality: newark,
       liquorLicense: false,
       constructionRenovationPlan: undefined,
       employerId: undefined,
@@ -290,12 +276,11 @@ describe("onboarding - shared", () => {
   });
 
   it("does not reset information when re-visiting page 1 but not switching the answer", async () => {
-    const newark = generateMunicipality({ displayName: "Newark" });
     const initialUserData = generateUserData({
       formProgress: "UNSTARTED",
       profileData: createEmptyProfileData(),
     });
-    const { page } = renderPage({ municipalities: [newark], userData: initialUserData });
+    const { page } = renderPage({ userData: initialUserData });
 
     page.chooseRadio("business-persona-owning");
     page.selectByValue("Business structure", "c-corporation");
@@ -304,7 +289,6 @@ describe("onboarding - shared", () => {
     await page.visitStep(3);
     page.selectByValue("Sector", "clean-energy");
     await page.visitStep(4);
-    page.selectByText("Location", "Newark");
 
     page.clickBack();
     page.clickBack();
@@ -318,7 +302,6 @@ describe("onboarding - shared", () => {
       industryId: "generic",
       dateOfFormation: date.format(defaultDateFormat),
       homeBasedBusiness: undefined,
-      municipality: newark,
       liquorLicense: false,
       constructionRenovationPlan: undefined,
       employerId: undefined,
