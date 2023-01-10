@@ -13,10 +13,10 @@ Check with your local government for specific license application requirements a
 
 ### Common Types of Licenses
 
-* **Kennels:** Board, breed or sell dogs. Partial boarding (doggy daycares) are also considered kennels   
-* **Pounds:** House dogs captured by animal control  
-* **Shelters:** House animals surrendered by their owners  
-* **Pet Shops:** Display animals for sale but are not part of a kennel
+* **Kennel:** Board, breed or sell dogs. Partial boarding (doggy daycares) are also considered kennels   
+* **Pound:** House dogs captured by animal control  
+* **Shelter:** House animals surrendered by their owners  
+* **Pet Shop:** Display animals for sale but are not part of a kennel
 
 
 >**Once completed, you will have:**  
