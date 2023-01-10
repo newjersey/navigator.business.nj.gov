@@ -1,0 +1,46 @@
+{
+  "naicsCodes": "812910",
+  "defaultSectorId": "other-services",
+  "canHavePermanentLocation": true,
+  "roadmapSteps": [
+    {
+      "step": 1,
+      "weight": 1,
+      "task": "business-plan"
+    },
+    {
+      "step": 1,
+      "weight": 5,
+      "task": "determine-naics-code"
+    },
+    {
+      "step": 2,
+      "weight": 20,
+      "task": "register-for-ein"
+    },
+    {
+      "step": 2,
+      "weight": 25,
+      "task": "register-for-taxes"
+    },
+    {
+      "step": 3,
+      "weight": 10,
+      "task": "bank-account"
+    },
+    {
+      "step": 3,
+      "weight": 15,
+      "task": "get-insurance"
+    }
+  ],
+  "name": "Pet Care",
+  "industryOnboardingQuestions": {
+    "canBeHomeBased": true,
+    "canBeReseller": true
+  },
+  "isEnabled": false,
+  "additionalSearchTerms": "dog walker, dog groomer, pet groomer, doggy daycare, kennel, boarding, shelter, pound",
+  "id": "petcare",
+  "description": "Provides care, training, grooming, or boarding services to domestic animals."
+}
