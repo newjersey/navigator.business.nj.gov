@@ -5,7 +5,7 @@ name: Obtain a License from Your Local Government
 id: petcare-license
 required: true
 ---
-Animal Facilties need to apply for a license with their local government every year. You’ll need a license for every type animal facility service you will provide. 
+`Animal Facilities|animal-facilities` need to apply for a license with their local government every year. You’ll need a license for every type of animal facility service you will provide. 
 
 Check with your local government for specific license application requirements and to schedule a site inspection prior to your application.   
 
