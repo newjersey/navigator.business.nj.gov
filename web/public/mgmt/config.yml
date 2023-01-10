@@ -1971,9 +1971,7 @@ collections:
                 }
               - { label: Edit Button Text, name: editButtonText, widget: string }
               - { label: Error - Address City, name: addressCityErrorText, widget: string }
-              - { label: Error - Address City, name: addressMunicipalityErrorText, widget: string }
               - { label: Error - Address State, name: addressStateErrorText, widget: string }
-              - { label: Error - Address State (Modal), name: addressModalCityErrorText, widget: string }
               - { label: Error - Address Zip Code, name: addressModalZipCodeErrorText, widget: string }
               - { label: Error - Address, name: addressErrorText, widget: string }
               - {

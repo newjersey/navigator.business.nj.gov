@@ -772,7 +772,7 @@ describe("Formation - ContactsStep", () => {
           screen.getByText(Config.businessFormationDefaults.addressErrorText, { exact: false })
         ).toBeInTheDocument();
         expect(
-          screen.getByText(Config.businessFormationDefaults.addressModalCityErrorText, { exact: false })
+          screen.getByText(Config.businessFormationDefaults.addressCityErrorText, { exact: false })
         ).toBeInTheDocument();
         expect(
           screen.getByText(Config.businessFormationDefaults.addressStateErrorText, { exact: false })

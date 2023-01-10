@@ -272,7 +272,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
                   }}
                   error={addressErrorMap["addressCity"].invalid}
                   onValidation={onValidation}
-                  validationText={Config.businessFormationDefaults.addressModalCityErrorText}
+                  validationText={Config.businessFormationDefaults.addressCityErrorText}
                 />
               </div>
             </div>
