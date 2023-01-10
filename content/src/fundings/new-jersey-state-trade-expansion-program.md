@@ -29,23 +29,20 @@ county:
 sector: []
 publishStageArchive: ""
 ---
-Through the SBA, the New Jersey Business Action Center received funding for the NJ STEP to provide financial awards on a first come, first served competitive basis, to domestic New Jersey eligible small businesses that are new to export, as well as those businesses who currently sell their goods and services to other countries.
+The New Jersey Business Action Center's (NJBAC) State Trade Expansion Program (NJSTEP) provides financial awards to domestic small businesses that are new to export and those who currently sell their goods and services to other countries.
 
----
+- - -
+
 ### Eligibility
-* Small business as defined by the Small Business Administration
+
+* Small business as defined by the [Small Business Administration](https://www.sba.gov/size-standards/index.html)
 * In business for at least one year as of the date of the application
-* NJ tax compliant
 * Manufacturing goods or producing services that contain at least 51% U.S. content
-* Registered with NJ START and have a DUNS number
+* Registered with NJ START and have a [DUNS number](https://www.dnb.com/duns.html)
 
 > **Benefits**
 >
->Eligible businesses for the New Jersey State Trade Expansion Program will be considered to receive financial awards to partially offset export promotion costs such as the following:
-Website and e-commerce fees to attract international buyers
-Design of international marketing media
-Participation in international trade missions
-Participation in international and U.S. trade events
-Participation in Department of Commerce organized trade missions
-Fees for services provided by the U.S. Commercial Service (USCS)
-What is the range of funding being offered?	$15,000-$25,000 per company per grant cycle
+> * $15,000-$25,000 per company per grant cycle
+>* Website and e-commerce fees to attract international buyers, along with designs for international marketing media
+> * Participation in international trade missions, international  and U.S. trade events, and Department of Commerce organized trade missions
+> * Fees for services provided by the U.S. Commercial Service (USCS)
