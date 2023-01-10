@@ -328,7 +328,6 @@ export const completeNewBusinessOnboarding = ({
 export const completeExistingBusinessOnboarding = ({
   businessFormationDate = "04/2021",
   sectorId = randomElementFromArray(arrayOfSectors).id,
-  townDisplayName = "Atlantic",
   legalStructureId = businessFormationDate || randomInt() % 2 ? "limited-partnership" : "sole-proprietorship",
   fullName = `Michael Smith ${randomInt()}`,
   email = `MichaelSmith${randomInt()}@gmail.com`,
@@ -376,13 +375,6 @@ export const completeExistingBusinessOnboarding = ({
     .then((value) => {
       expect(value).to.contain(LookupSectorTypeById(sectorId).name);
     });
-  onOnboardingPage.clickNext();
-
-  pageIndex += 1;
-  cy.url().should("include", `onboarding?page=${pageIndex}`);
-
-  onOnboardingPage.selectLocation(townDisplayName);
-  onOnboardingPage.getLocationDropdown().invoke("prop", "value").should("contain", townDisplayName);
   onOnboardingPage.clickNext();
 
   pageIndex += 1;
@@ -633,7 +625,9 @@ export const checkExistingBusinessProfilePage = ({
   if (numberOfEmployees !== undefined) {
     onProfilePage.getNumberOfEmployees().invoke("prop", "value").should("contain", numberOfEmployees);
   }
-  onProfilePage.getLocationDropdown().invoke("prop", "value").should("contain", townDisplayName);
+  if (townDisplayName !== undefined) {
+    onProfilePage.getLocationDropdown().invoke("prop", "value").should("contain", townDisplayName);
+  }
   if (homeBasedQuestion !== undefined) {
     onProfilePage.getHomeBased(homeBasedQuestion).should("be.checked");
     onProfilePage.getHomeBased(!homeBasedQuestion).should("not.be.checked");

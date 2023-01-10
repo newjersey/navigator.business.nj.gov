@@ -42,7 +42,6 @@ import {
   formationTaskId,
   generateMunicipality,
   getCurrentDate,
-  LegalStructures,
   LookupIndustryById,
   LookupLegalStructureById,
   LookupOwnershipTypeById,
@@ -1304,44 +1303,6 @@ describe("profile", () => {
         }),
       });
       expect(screen.getByTestId("info")).toBeInTheDocument();
-    });
-
-    describe("location", () => {
-      const renderWithLegalStructureAndPhase = (params: {
-        legalStructureId: string;
-        operatingPhase: OperatingPhaseId;
-      }) => {
-        const newark = generateMunicipality({ displayName: "Newark" });
-        const userData = generateUserData({
-          profileData: generateProfileData({
-            legalStructureId: params.legalStructureId,
-            operatingPhase: params.operatingPhase,
-            businessPersona: "OWNING",
-          }),
-        });
-        renderPage({ municipalities: [newark], userData });
-      };
-
-      describe("when location is required (always)", () => {
-        describe("any legal structure and operating Phase is any OWNING phase", () => {
-          const allLegalStructures = LegalStructures.map((it) => {
-            return it.id;
-          });
-          const operatingPhases: OperatingPhaseId[] = ["GUEST_MODE_OWNING", "UP_AND_RUNNING_OWNING"];
-          for (const legalStructure of allLegalStructures) {
-            for (const operatingPhase of operatingPhases) {
-              it(`prevents saving with empty location for ${legalStructure} in ${operatingPhase}`, async () => {
-                renderWithLegalStructureAndPhase({
-                  legalStructureId: legalStructure,
-                  operatingPhase: operatingPhase,
-                });
-                removeLocationAndSave();
-                expectLocationNotSavedAndError();
-              });
-            }
-          }
-        });
-      });
     });
   });
 

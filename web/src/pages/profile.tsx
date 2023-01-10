@@ -587,7 +587,7 @@ const ProfilePage = (props: Props): ReactElement => {
         </div>
         <div className="margin-top-4">
           <FieldLabelProfile fieldName="municipality" />
-          <OnboardingMunicipality onValidation={onValidation} fieldStates={fieldStates} />
+          <OnboardingMunicipality onValidation={() => {}} fieldStates={fieldStates} />
         </div>
         {displayHomedBaseBusinessQuestion() && (
           <div className="margin-top-3">
