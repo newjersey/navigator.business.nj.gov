@@ -33,18 +33,16 @@ Through the SBA, the New Jersey Business Action Center received funding for the 
 
 ---
 ### Eligibility
-For NJ STEP consideration, your business must be:
+* Registered in, and domestic to, New Jersey
+* Small as defined by the SBA
+* In business for at least one year as of the date of the application
+* NJ tax compliant
+* Manufacturing goods or producing services that contain at least 51% U.S. content
+* Registered with NJ START and have a DUNS number
 
-Registered in, and domestic to, New Jersey
-Small as defined by the SBA
-In business for at least one year as of the date of the application
-NJ tax compliant
-Manufacturing goods or producing services that contain at least 51% U.S. content
-Registered with NJ START and have a DUNS number
-
->### Benefit
+> **Benefits**
+>
 >Eligible businesses for the New Jersey State Trade Expansion Program will be considered to receive financial awards to partially offset export promotion costs such as the following:
-
 Website and e-commerce fees to attract international buyers
 Design of international marketing media
 Participation in international trade missions
