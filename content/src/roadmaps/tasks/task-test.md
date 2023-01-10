@@ -9,24 +9,31 @@ required: true
 issuingAgency: This is where the issuing agency goes
 formName: this is where you put the form name/number
 ---
-The task definition goes here.  
+The task definition goes here.\
 A few sentences with the most important information is enough.
 
----
+- - -
+
 ### Eligibility Criteria
-- If related to an individual, age, licensing, education, work experience, etc would be listed here
-- If related to a business, specific permits, licensing, etc. would go here
+
+* If related to an individual, age, licensing, education, work experience, etc would be listed here
+* If related to a business, specific permits, licensing, etc. would go here
 
 ### Application Requirements
-- Identify terms in the application process that need clarification or definition
-- List documentation needed to complete the application (college transcripts, credit report, certificate of good standing, etc.)
-- List information needed (EIN number, account number, insurance policy numbers, etc.)
-- End this list with: "pay any associated fees"
 
-**Note:** Add contextual information to any terms that need it. 
+* Identify terms in the application process that need clarification or definition
+* List documentation needed to complete the application (college transcripts, credit report, certificate of good standing, etc.)
+* List information needed (EIN number, account number, insurance policy numbers, etc.)
+* End this list with: "pay any associated fees"
 
->**Once completed, you will have:**
->- List the specific thing they will receive upon completion (permit, license, certificate, registration number, etc.)
+:::infoAlert 
+ t﻿his is how any "notes" are displayed.
+:::
 
->**What if I don't complete this task?**
->- Sometimes there are clear repercussions (fines, delays, penalties, etc.) Add them here. 
+> **Once completed, you will have:**
+>
+> * List the specific thing they will receive upon completion (permit, license, certificate, registration number, etc.)
+>
+> **What if I don't complete this task?**
+>
+> * Sometimes there are clear repercussions (fines, delays, penalties, etc.) Add them here.
