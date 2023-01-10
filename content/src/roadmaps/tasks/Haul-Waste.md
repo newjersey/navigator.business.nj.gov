@@ -11,7 +11,8 @@ Waste facilities will **only** allow registered vehicles or items to discard was
 
 If you collect or haul waste for other companies, you will need to be a [commercial waste hauler](https://www.wastedecals.nj.gov/swt2.html), which is a more time-intensive process.
 
---- 
+-﻿-- 
+
 ### Registration Requirements
 - An affidavit or a notarized application
 - Motor Vehicle registration indicating that the vehicle is registered as Commercial
