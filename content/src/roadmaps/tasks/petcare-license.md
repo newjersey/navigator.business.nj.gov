@@ -9,7 +9,7 @@ required: true
 
 Check with your local government for specific license application requirements and to schedule a site inspection prior to your application. For additional details, see the NJ Department of Health [general guidelines](https://www.nj.gov/health/vph/documents/guidelines_for_municipal_licensure_of_animal_facilities.pdf) 
 
--﻿--
+---
 
 ### Common Types of Licenses
 
