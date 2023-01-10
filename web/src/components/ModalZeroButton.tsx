@@ -1,6 +1,7 @@
 import { Icon } from "@/components/njwds/Icon";
+import { ContextualInfoContext } from "@/contexts/contextualInfoContext";
 import { Breakpoint, Dialog, DialogContent, DialogTitle, IconButton } from "@mui/material";
-import { ReactNode } from "react";
+import { ReactNode, useContext } from "react";
 
 interface Props {
   isOpen: boolean;
@@ -13,6 +14,7 @@ interface Props {
 }
 
 export const ModalZeroButton = (props: Props) => {
+  const { contextualInfo } = useContext(ContextualInfoContext);
   return (
     <Dialog
       fullWidth={false}
@@ -20,6 +22,7 @@ export const ModalZeroButton = (props: Props) => {
       open={props.isOpen}
       onClose={props.close}
       aria-labelledby="modal"
+      disableEnforceFocus={contextualInfo.isVisible}
     >
       <DialogTitle id="modal" className="display-flex flex-row flex-align-center margin-top-1 break-word">
         <div className="h2-styling padding-x-1 margin-bottom-0">{props.title}</div>
