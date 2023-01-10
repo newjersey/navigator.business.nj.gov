@@ -33,8 +33,7 @@ Through the SBA, the New Jersey Business Action Center received funding for the 
 
 ---
 ### Eligibility
-* Registered in, and domestic to, New Jersey
-* Small as defined by the SBA
+* Small business as defined by the Small Business Administration
 * In business for at least one year as of the date of the application
 * NJ tax compliant
 * Manufacturing goods or producing services that contain at least 51% U.S. content
