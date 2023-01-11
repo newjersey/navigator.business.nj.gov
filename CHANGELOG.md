@@ -1,3 +1,10 @@
+## [5.10.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.10.0...v5.10.1) (2023-01-11)
+
+
+### Bug Fixes
+
+* production re-deploy ([6fc8c9e](https://github.com/newjersey/navigator.business.nj.gov/commit/6fc8c9e1f4eacc5ab63cb4c7af1801057c4ed7c9))
+
 # [5.10.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.9.2...v5.10.0) (2023-01-10)
 
 
