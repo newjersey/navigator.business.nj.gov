@@ -2666,11 +2666,6 @@ collections:
                   name: failedResponsibleOwnerFieldHelper,
                   widget: text,
                 }
-              - {
-                  label: Tax ID Disclaimer for TradeName Legal Structures,
-                  name: taxIdDisclaimerMd,
-                  widget: text,
-                }
               - { label: Success Alert Header, name: snackbarSuccessHeader, widget: text }
               - { label: Success Alert Body, name: snackbarSuccessBody, widget: text }
 
@@ -3608,6 +3603,11 @@ collections:
                               label: "Error Text (when not entered)",
                               name: "errorTextRequired",
                               widget: "string",
+                            }
+                          - {
+                              label: Tax ID Disclaimer for TradeName Legal Structures,
+                              name: disclaimerMd,
+                              widget: text,
                             }
                   - label: Entity ID
                     name: entityId

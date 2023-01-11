@@ -409,7 +409,6 @@
     "accessButton": "Get Access",
     "failedTaxIdHelper": "Enter the 12-digit Tax ID shown in your tax confirmation email",
     "modalTaxFieldErrorName": "New Jersey Tax ID",
-    "taxIdDisclaimerMd": "**Disclaimer:** Your Tax ID will be used to identify the taxes you owe and is required information if you'd like to access your tax calendar.",
     "modalCancelButton": "Cancel",
     "modalBusinessFieldHeader": "#### Business Name",
     "modalHeader": "See Your Tax Due Dates",
