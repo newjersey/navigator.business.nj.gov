@@ -123,7 +123,9 @@
     "LGBTQ",
     "Snackbars",
     "NJDOT",
-    "NJCRC"
+    "NJCRC",
+    "petcare",
+    "daycares"
   ],
   "ignorePaths": ["node_modules/**", "out/**", "web/out/**", "package.json"]
 }
