@@ -12,6 +12,8 @@ All staff working in your Detective Agency must be registered before they can be
 
 All NJ private detective agencies are required to mail in employee registrations to the NJ State Police Private Detective Unit within 48 hours of fingerprinting new employees. You can read their [﻿instructions](https://www.nj.gov/njsp/private-detective/pdf/Employee_Registration_Instructions.pdf) for more details.
 
+---
+
 ### Application Requirements 
 
 * Notification letter on the company’s letterhead indicating the agency license number, the employee’s full name, date of birth, social security number, position, and date of hire
