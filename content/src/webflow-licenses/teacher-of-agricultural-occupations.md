@@ -1,0 +1,13 @@
+---
+id: "teacher-of-agricultural-occupations"
+webflowId: "5f772937e0229428f1eaa5c4"
+urlSlug: "teacher-of-agricultural-occupations"
+name: "Teacher of Agricultural Occupations"
+callToActionLink: "http://nj.gov/education/license/certandend.htm"
+callToActionText: ""
+issuingAgency: "Department of Education"
+issuingDivision: "Division of Licensing, Office of Teacher Certification and Academic Credentials"
+divisionPhone: "(609) 292-2070"
+industryId: "Teacher of Agriculture Occupations"
+licenseCertificationClassification: "LICENSE"
+---

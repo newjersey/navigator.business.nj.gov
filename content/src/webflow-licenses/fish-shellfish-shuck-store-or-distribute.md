@@ -1,0 +1,13 @@
+---
+id: "fish-shellfish-shuck-store-or-distribute"
+webflowId: "5f7729402f04da7d4258b5f0"
+urlSlug: "fish-shellfish-shuck-store-or-distribute"
+name: "Fish (Shellfish), Shuck, Store or Distribute"
+callToActionLink: "http://nj.gov/health/ceohs/food-drug-safety/"
+callToActionText: ""
+issuingAgency: "Department of Health"
+issuingDivision: "Environmental and Occupational Health Services"
+divisionPhone: "(609) 292-7837"
+industryId: "Fish Store"
+licenseCertificationClassification: "LICENSE"
+---

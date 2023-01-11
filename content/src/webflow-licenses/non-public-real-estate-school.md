@@ -1,0 +1,13 @@
+---
+id: "non-public-real-estate-school"
+webflowId: "5f77292a5ef8c1c035019ec0"
+urlSlug: "non-public-real-estate-school"
+name: "Non-Public Real Estate School"
+callToActionLink: "http://state.nj.us/dobi/division_rec/licensing/reclic_menu.htm"
+callToActionText: ""
+issuingAgency: "Department of Banking and Insurance"
+issuingDivision: "Real Estate Commission"
+divisionPhone: "(609) 292-7272"
+industryId: "Real Estate School"
+licenseCertificationClassification: "LICENSE"
+---

@@ -1,0 +1,13 @@
+---
+id: "home-for-the-aged"
+webflowId: "5f772942c8aaf5cca3c9b52f"
+urlSlug: "home-for-the-aged"
+name: "Home For The Aged"
+callToActionLink: "http://state.nj.us/health/healthfacilities/certification-licensing/index.shtml"
+callToActionText: ""
+issuingAgency: "Department of Health"
+issuingDivision: "Services Division of Long Term Care Systems"
+divisionPhone: "(609) 292-8773"
+industryId: "Home for the Aged"
+licenseCertificationClassification: "CERTIFICATE OF NEED"
+---

@@ -1,0 +1,13 @@
+---
+id: "delivery-service-van-or-car"
+webflowId: "5f772957240061aec97834bc"
+urlSlug: "delivery-service-van-or-car"
+name: "Delivery Service (Van or Car)"
+callToActionLink: "http://nj.gov/mvc/vehicles/reginitial.htm"
+callToActionText: ""
+issuingAgency: "Department of Transportation"
+issuingDivision: "Motor Vehicles Commission"
+divisionPhone: "(609) 292-6500"
+industryId: "Delivery Service"
+licenseCertificationClassification: "COMMERCIAL LICENSE PLATE"
+---

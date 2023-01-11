@@ -1,0 +1,13 @@
+---
+id: "plants-buy-out-of-state-to-seed-in-nj"
+webflowId: "5f7728e42edc678a57b4a6fd"
+urlSlug: "plants-buy-out-of-state-to-seed-in-nj"
+name: "Plants (Buy Out of State to Seed in NJ)"
+callToActionLink: "http://nj.gov/agriculture/divisions/pi/serv/exports.html"
+callToActionText: ""
+issuingAgency: "Department of Agriculture"
+issuingDivision: "Division of Plant Industry"
+divisionPhone: "(609) 406-6939"
+industryId: "Plants"
+licenseCertificationClassification: "CERTIFICATE"
+---

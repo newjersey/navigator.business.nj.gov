@@ -1,0 +1,13 @@
+---
+id: "cable-operator"
+webflowId: "5f7728e8e8bf505df2317897"
+urlSlug: "cable-operator"
+name: "Cable Operator"
+callToActionLink: "http://state.nj.us/bpu/about/divisions/cable/"
+callToActionText: ""
+issuingAgency: "Board of Public Utilities"
+issuingDivision: "State Franchising Authority, Office of Cable TV"
+divisionPhone: "(973) 648-2670"
+industryId: "Cable Operator"
+licenseCertificationClassification: "LICENSE"
+---

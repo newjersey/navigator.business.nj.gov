@@ -105,6 +105,7 @@ type FilingGrayMatter = {
 
 type TaskGrayMatter = {
   id: string;
+  webflowId?: string;
   name: string;
   urlSlug: string;
   callToActionLink: string;
@@ -112,8 +113,12 @@ type TaskGrayMatter = {
   postOnboardingQuestion: string;
   required?: boolean;
   issuingAgency?: string;
+  issuingDivision?: string;
+  divisionPhone?: string;
   formName?: string;
   requiresLocation?: boolean;
+  industryId?: string;
+  licenseCertificationClassification?: string;
 };
 
 type FundingGrayMatter = {
