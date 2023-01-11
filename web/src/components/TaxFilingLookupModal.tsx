@@ -312,7 +312,9 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
             overrides={{
               header: Config.taxCalendar.modalTaxIdHeader,
               description: Config.taxCalendar.modalTaxIdMarkdown,
-              postDescription: isPublicFiling ? undefined : Config.taxCalendar.taxIdDisclaimerMd,
+              postDescription: isPublicFiling
+                ? undefined
+                : Config.profileDefaults.fields.taxId.default.disclaimerMd,
             }}
           />
           <OnboardingTaxId

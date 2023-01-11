@@ -179,7 +179,7 @@ export const generateProfileData = (
     dateOfFormation: getCurrentDateFormatted(defaultDateFormat),
     entityId: randomInt(10).toString(),
     employerId: randomInt(9).toString(),
-    taxId: randomInt() % 2 ? randomInt(9).toString() : randomInt(12).toString(),
+    taxId: randomInt(12).toString(),
     encryptedTaxId: undefined,
     notes: `some-notes-${randomInt()}`,
     ownershipTypeIds: [],
@@ -766,4 +766,12 @@ export const generateBusinessPersona = (): Exclude<BusinessPersona, undefined> =
   const all = ["STARTING", "OWNING", "FOREIGN"];
   const randomIndex = Math.floor(Math.random() * all.length);
   return all[randomIndex] as Exclude<BusinessPersona, undefined>;
+};
+
+export const randomPublicFilingLegalStructure = (): string => {
+  return randomElementFromArray(LegalStructures.filter((x) => x.requiresPublicFiling)).id;
+};
+
+export const randomTradeNameLegalStructure = (): string => {
+  return randomElementFromArray(LegalStructures.filter((x) => x.hasTradeName)).id;
 };

@@ -164,7 +164,8 @@
           "header": "New Jersey Tax ID",
           "placeholder": "Enter New Jersey Tax ID number",
           "description": "What is your `New Jersey Tax ID?|tax-id`",
-          "errorTextRequired": "Enter a 12-digit NJ Tax ID"
+          "errorTextRequired": "Enter a 12-digit Tax ID",
+          "disclaimerMd": "**Disclaimer:** Your Tax ID will be used to identify the taxes you owe and is required information if you'd like to access your tax calendar."
         }
       },
       "entityId": {

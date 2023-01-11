@@ -7,6 +7,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { Task } from "@/lib/types/types";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
 import { emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { ReactElement, useContext, useState } from "react";
 import { TaskCTA } from "../TaskCTA";
@@ -62,6 +63,11 @@ export const TaxTask = (props: Props): ReactElement => {
 
   const preInputContent = props.task.contentMd.split("${taxInputComponent}")[0];
   const postInputContent = props.task.contentMd.split("${taxInputComponent}")[1];
+
+  const hasTradeNameLegalStructure = (): boolean => {
+    return LookupLegalStructureById(userData?.profileData.legalStructureId).hasTradeName;
+  };
+
   return (
     <div className="minh-38">
       <TaskHeader task={props.task} />
@@ -69,6 +75,13 @@ export const TaxTask = (props: Props): ReactElement => {
       <Content>{preInputContent}</Content>
       <div className="margin-left-5 margin-top-1">
         <Content>{Config.tax.descriptionText}</Content>
+        {hasTradeNameLegalStructure() && (
+          <div data-testid="tax-disclaimer">
+            <Content className="margin-top-2">
+              {Config.profileDefaults.fields.taxId.default.disclaimerMd}
+            </Content>
+          </div>
+        )}
         {showInput && <TaxInput isAuthenticated={isAuthenticated} onSave={onSave} task={props.task} />}
         {!showInput && <TaxDisplay onRemove={onRemove} taxId={userData?.profileData.taxId || ""} />}
       </div>

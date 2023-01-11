@@ -3,8 +3,15 @@ import { getMergedConfig } from "@/contexts/configContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { Task } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
-import { generateProfileData, generateTask, generateUserData } from "@/test/factories";
+import {
+  generateProfileData,
+  generateTask,
+  generateUserData,
+  randomPublicFilingLegalStructure,
+  randomTradeNameLegalStructure,
+} from "@/test/factories";
 import { withAuthAlert } from "@/test/helpers/helpers-renderers";
+import { markdownToText } from "@/test/helpers/helpers-utilities";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import {
   currentUserData,
@@ -202,6 +209,40 @@ describe("<TaxTask />", () => {
       await waitFor(() => {
         return expect(setRegistrationModalIsVisible).toHaveBeenCalledWith(true);
       });
+    });
+  });
+
+  describe("tax id disclaimer", () => {
+    const renderComponent = (initialUserData?: UserData) => {
+      render(
+        <WithStatefulUserData initialUserData={initialUserData ?? generateUserData({})}>
+          <TaxTask task={task} />
+        </WithStatefulUserData>
+      );
+    };
+
+    it("shows disclaimer for trade name legal structure", () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          legalStructureId: randomTradeNameLegalStructure(),
+        }),
+      });
+      renderComponent(userData);
+
+      expect(screen.getByTestId("tax-disclaimer")).toHaveTextContent(
+        markdownToText(Config.profileDefaults.fields.taxId.default.disclaimerMd)
+      );
+    });
+
+    it("does not show disclaimer for public filing legal structure", () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          legalStructureId: randomPublicFilingLegalStructure(),
+        }),
+      });
+      renderComponent(userData);
+
+      expect(screen.queryByTestId("tax-disclaimer")).not.toBeInTheDocument();
     });
   });
 });

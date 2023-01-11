@@ -432,7 +432,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
       expect(screen.getByTestId("modal-body")).toContainHTML(
         renderToStaticMarkup(
           Content({
-            children: Config.taxCalendar.taxIdDisclaimerMd,
+            children: Config.profileDefaults.fields.taxId.default.disclaimerMd,
           })
         )
       );
