@@ -1,3 +1,26 @@
+# [5.11.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.10.1...v5.11.0) (2023-01-11)
+
+
+### Bug Fixes
+
+* updating Contextual Information animal-facilities ([#5039](https://github.com/newjersey/navigator.business.nj.gov/issues/5039)) ([82d6563](https://github.com/newjersey/navigator.business.nj.gov/commit/82d65633a1d1edf6be6c17ab509d094a5327e83b))
+* updating Roadmaps - Industries petcare ([#5052](https://github.com/newjersey/navigator.business.nj.gov/issues/5052)) ([fb9d292](https://github.com/newjersey/navigator.business.nj.gov/commit/fb9d292dde2c01c01769b4622316496453e4b3b9))
+* updating Tasks - All detective-employees ([#5045](https://github.com/newjersey/navigator.business.nj.gov/issues/5045)) ([6b44655](https://github.com/newjersey/navigator.business.nj.gov/commit/6b4465510d320460a3bb7b0aaa15cb566cb25cf5))
+* updating Tasks - All petcare-license ([#5036](https://github.com/newjersey/navigator.business.nj.gov/issues/5036)) ([0ae8747](https://github.com/newjersey/navigator.business.nj.gov/commit/0ae87473cff00112807b543ca4729dbb9b138a53))
+* updating Tasks - All petcare-license ([#5037](https://github.com/newjersey/navigator.business.nj.gov/issues/5037)) ([b22c8e7](https://github.com/newjersey/navigator.business.nj.gov/commit/b22c8e7ca6e7022ab15d1d1fea6fd161c9616b91))
+* updating Tasks - All petcare-license ([#5040](https://github.com/newjersey/navigator.business.nj.gov/issues/5040)) ([80bcf87](https://github.com/newjersey/navigator.business.nj.gov/commit/80bcf876c1454acc84ad33d9d7fddddd79e41a57))
+* updating Tasks - All petcare-license ([#5043](https://github.com/newjersey/navigator.business.nj.gov/issues/5043)) ([21eee19](https://github.com/newjersey/navigator.business.nj.gov/commit/21eee19f56cd73e45e5fd5692028f914c30dfb34))
+* updating Tasks - All petcare-license ([#5044](https://github.com/newjersey/navigator.business.nj.gov/issues/5044)) ([9720113](https://github.com/newjersey/navigator.business.nj.gov/commit/9720113f90daf0b8dfcde74ffc6d3d0ae69ada0c))
+* updating Tasks - All petcare-license ([#5047](https://github.com/newjersey/navigator.business.nj.gov/issues/5047)) ([b68d7b9](https://github.com/newjersey/navigator.business.nj.gov/commit/b68d7b9cf77b8d76f0bc94f8bdf5bffeaf0b60dc))
+* updating Tasks - All petcare-license ([#5048](https://github.com/newjersey/navigator.business.nj.gov/issues/5048)) ([b7d723f](https://github.com/newjersey/navigator.business.nj.gov/commit/b7d723f3b7d7591b0342bb77015ed5e13a02d597))
+* updating Tasks - All petcare-license ([#5050](https://github.com/newjersey/navigator.business.nj.gov/issues/5050)) ([26eba0a](https://github.com/newjersey/navigator.business.nj.gov/commit/26eba0a31593e4fc1b1a11de5941584af39c5fa9))
+* updating Tasks - All petcare-license ([#5051](https://github.com/newjersey/navigator.business.nj.gov/issues/5051)) ([c48cc59](https://github.com/newjersey/navigator.business.nj.gov/commit/c48cc591eeefc0a11a49ee6be761988389b300e0))
+
+
+### Features
+
+* [[#184016531](https://github.com/newjersey/navigator.business.nj.gov/issues/184016531)] remove location question from oscar onboarding ([21bee91](https://github.com/newjersey/navigator.business.nj.gov/commit/21bee912d211b7cb0f97e5b2d9d2ca872fc38c39))
+
 ## [5.10.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.10.0...v5.10.1) (2023-01-11)
 
 
