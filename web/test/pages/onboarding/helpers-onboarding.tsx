@@ -225,11 +225,9 @@ export const createPageHelpers = (): PageHelpers => {
 
 export const runSelfRegPageTests = ({
   businessPersona,
-  requiresPublicFiling,
   selfRegPage,
 }: {
   businessPersona: BusinessPersona;
-  requiresPublicFiling?: boolean;
   selfRegPage: string;
 }) => {
   const user = createEmptyUser();
@@ -238,7 +236,7 @@ export const runSelfRegPageTests = ({
     formProgress: "UNSTARTED",
     profileData: generateProfileData({
       businessPersona,
-      legalStructureId: randomLegalStructure({ requiresPublicFiling: requiresPublicFiling })?.id,
+      legalStructureId: randomLegalStructure().id,
     }),
   });
 
