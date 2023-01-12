@@ -8,7 +8,7 @@ callToActionText: Apply for Your Permit
 required: true
 issuingAgency: New Jersey Department of Health
 ---
-You need a cottage food operator permit before your business can operate legally. See the [application instructions](https://www.nj.gov/health/forms/cfo-1instr.pdf) and the [Department of Health code for cottage industries](https://www.nj.gov/health/ceohs/phfpp/retailfood/cottagefood.shtml#5) for additional details.
+You need a cottage food operator permit before your business can operate legally. See the [application instructions](https://www.nj.gov/health/forms/cfo-1instr.pdf) and the [Department of Health code for cottage industries](https://www.nj.gov/health/ceohs/phfpp/retailfood/cottagefood.shtml#5) for important information on allowed ingredients, allergens, and labeling requirements. 
 
 ---
  
