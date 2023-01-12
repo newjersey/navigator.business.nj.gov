@@ -41,7 +41,7 @@
   ],
   "name": "Home Baker",
   "industryOnboardingQuestions": {
-    "canBeHomeBased": true,
+    "canBeHomeBased": false,
     "canBeReseller": true
   },
   "isEnabled": false,
