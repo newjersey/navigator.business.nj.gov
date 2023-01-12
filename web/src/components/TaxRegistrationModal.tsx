@@ -56,7 +56,7 @@ export const TaxRegistrationModal = (props: Props): ReactElement => {
         invalid: !profileData.existingEmployees,
       },
       taxId: {
-        invalid: profileData.taxId?.length !== 12 && showTaxIdField(),
+        invalid: profileData.taxId?.length !== 12,
       },
       municipality: {
         invalid: !profileData.municipality && showMunicipalityField(),
@@ -90,15 +90,15 @@ export const TaxRegistrationModal = (props: Props): ReactElement => {
     );
   };
 
-  const showTaxIdField = (): boolean => {
-    return LookupLegalStructureById(userData?.profileData.legalStructureId).requiresPublicFiling;
-  };
-
   const showMunicipalityField = (): boolean => {
     if (!userData) {
       return false;
     }
     return userData.profileData.municipality === undefined;
+  };
+
+  const hasTradeNameLegalStructure = (): boolean => {
+    return LookupLegalStructureById(userData?.profileData.legalStructureId).hasTradeName;
   };
 
   return (
@@ -131,12 +131,17 @@ export const TaxRegistrationModal = (props: Props): ReactElement => {
             <OnboardingBusinessName onValidation={onValidation} fieldStates={fieldStates} required />
           </>
         )}
-        {showTaxIdField() && (
-          <>
-            <FieldLabelModal fieldName="taxId" />
-            <OnboardingTaxId onValidation={onValidation} fieldStates={fieldStates} required />
-          </>
-        )}
+        <>
+          <FieldLabelModal fieldName="taxId" />
+          {hasTradeNameLegalStructure() && (
+            <div data-testid="tax-disclaimer">
+              <Content className="margin-top-2">
+                {Config.profileDefaults.fields.taxId.default.disclaimerMd}
+              </Content>
+            </div>
+          )}
+          <OnboardingTaxId onValidation={onValidation} fieldStates={fieldStates} required />
+        </>
 
         <FieldLabelModal fieldName="ownershipTypeIds" />
         <OnboardingOwnership />

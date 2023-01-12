@@ -20,6 +20,8 @@ import {
   generateUserData,
   randomHomeBasedIndustry,
   randomNonHomeBasedIndustry,
+  randomPublicFilingLegalStructure,
+  randomTradeNameLegalStructure,
 } from "@/test/factories";
 import { withAuthAlert } from "@/test/helpers/helpers-renderers";
 import { markdownToText, randomElementFromArray } from "@/test/helpers/helpers-utilities";
@@ -1727,6 +1729,87 @@ describe("profile", () => {
         await waitFor(() => {
           expect(screen.getByText(Config.profileDefaults.essentialQuestionInlineText)).toBeInTheDocument();
         });
+      });
+    });
+  });
+
+  describe("Numbers Section", () => {
+    describe("tax id disclaimer", () => {
+      it("shows disclaimer for trade name legal structure for NEXUS businessPersona", () => {
+        const userData = generateUserData({
+          profileData: generateProfileData({
+            legalStructureId: randomTradeNameLegalStructure(),
+            businessPersona: "FOREIGN",
+            foreignBusinessType: "NEXUS",
+          }),
+        });
+
+        renderPage({ userData });
+        chooseTab("numbers");
+
+        expect(screen.getByTestId("tax-disclaimer")).toHaveTextContent(
+          markdownToText(Config.profileDefaults.fields.taxId.default.disclaimerMd)
+        );
+      });
+
+      it("shows disclaimer for trade name legal structure for FOREIGN businessPersona", () => {
+        const userData = generateUserData({
+          profileData: generateProfileData({
+            legalStructureId: randomTradeNameLegalStructure(),
+            businessPersona: "FOREIGN",
+          }),
+        });
+
+        renderPage({ userData });
+        chooseTab("numbers");
+
+        expect(screen.getByTestId("tax-disclaimer")).toHaveTextContent(
+          markdownToText(Config.profileDefaults.fields.taxId.default.disclaimerMd)
+        );
+      });
+
+      it("shows disclaimer for trade name legal structure for STARTING businessPersona", () => {
+        const userData = generateUserData({
+          profileData: generateProfileData({
+            legalStructureId: randomTradeNameLegalStructure(),
+            businessPersona: "STARTING",
+          }),
+        });
+
+        renderPage({ userData });
+        chooseTab("numbers");
+
+        expect(screen.getByTestId("tax-disclaimer")).toHaveTextContent(
+          markdownToText(Config.profileDefaults.fields.taxId.default.disclaimerMd)
+        );
+      });
+
+      it("shows disclaimer for trade name legal structure for OWNING businessPersona", () => {
+        const userData = generateUserData({
+          profileData: generateProfileData({
+            legalStructureId: randomTradeNameLegalStructure(),
+            businessPersona: "OWNING",
+          }),
+        });
+
+        renderPage({ userData });
+        chooseTab("numbers");
+
+        expect(screen.getByTestId("tax-disclaimer")).toHaveTextContent(
+          markdownToText(Config.profileDefaults.fields.taxId.default.disclaimerMd)
+        );
+      });
+
+      it("does not show disclaimer for public filing legal structure", () => {
+        const userData = generateUserData({
+          profileData: generateProfileData({
+            legalStructureId: randomPublicFilingLegalStructure(),
+          }),
+        });
+        renderPage({ userData });
+        chooseTab("numbers");
+
+        expect(screen.queryByTestId("tax-disclaimer")).not.toBeInTheDocument();
       });
     });
   });

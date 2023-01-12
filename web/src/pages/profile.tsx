@@ -1,3 +1,4 @@
+import { Content } from "@/components/Content";
 import { LoadingIndicator } from "@/components/LoadingIndicator";
 import { NavBar } from "@/components/navbar/NavBar";
 import { Button } from "@/components/njwds-extended/Button";
@@ -281,6 +282,10 @@ const ProfilePage = (props: Props): ReactElement => {
 
   const shouldLockFormationFields = userData?.formationData.getFilingResponse?.success;
 
+  const hasTradeNameLegalStructure = (): boolean => {
+    return LookupLegalStructureById(userData?.profileData.legalStructureId).hasTradeName === true;
+  };
+
   const nexusBusinessElements: Record<ProfileTabs, ReactNode> = {
     info: (
       <>
@@ -354,6 +359,13 @@ const ProfilePage = (props: Props): ReactElement => {
         </h2>
         <div className="margin-top-4">
           <FieldLabelProfile fieldName="taxId" />
+          {hasTradeNameLegalStructure() && (
+            <div data-testid="tax-disclaimer">
+              <Content className="margin-top-2">
+                {Config.profileDefaults.fields.taxId.default.disclaimerMd}
+              </Content>
+            </div>
+          )}
           <OnboardingTaxId
             onValidation={onValidation}
             fieldStates={fieldStates}
@@ -383,6 +395,13 @@ const ProfilePage = (props: Props): ReactElement => {
         </h2>
         <div className="margin-top-4">
           <FieldLabelProfile fieldName="taxId" />
+          {hasTradeNameLegalStructure() && (
+            <div data-testid="tax-disclaimer">
+              <Content className="margin-top-2">
+                {Config.profileDefaults.fields.taxId.default.disclaimerMd}
+              </Content>
+            </div>
+          )}
           <OnboardingTaxId
             onValidation={onValidation}
             fieldStates={fieldStates}
@@ -541,6 +560,13 @@ const ProfilePage = (props: Props): ReactElement => {
         />
         <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
         <FieldLabelProfile fieldName="taxId" />
+        {hasTradeNameLegalStructure() && (
+          <div data-testid="tax-disclaimer">
+            <Content className="margin-top-2">
+              {Config.profileDefaults.fields.taxId.default.disclaimerMd}
+            </Content>
+          </div>
+        )}
         <OnboardingTaxId
           onValidation={onValidation}
           fieldStates={fieldStates}
@@ -636,6 +662,13 @@ const ProfilePage = (props: Props): ReactElement => {
         </div>
         <div className="margin-top-4">
           <FieldLabelProfile fieldName="taxId" />
+          {hasTradeNameLegalStructure() && (
+            <div data-testid="tax-disclaimer">
+              <Content className="margin-top-2">
+                {Config.profileDefaults.fields.taxId.default.disclaimerMd}
+              </Content>
+            </div>
+          )}
           <OnboardingTaxId
             onValidation={onValidation}
             fieldStates={fieldStates}

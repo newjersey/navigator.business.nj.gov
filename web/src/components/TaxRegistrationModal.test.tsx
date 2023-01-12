@@ -49,7 +49,7 @@ describe("<TaxRegistrationModal>", () => {
   };
 
   describe("when trade name legal structure", () => {
-    it("does not show businessName nor taxId field", () => {
+    it("does not show businessName", () => {
       const userData = generateUserData({
         profileData: generateProfileData({
           legalStructureId: randomTradeNameLegalStructure(),
@@ -62,8 +62,8 @@ describe("<TaxRegistrationModal>", () => {
         screen.queryByText(markdownToText(Config.profileDefaults.fields.businessName.default.header))
       ).not.toBeInTheDocument();
       expect(
-        screen.queryByText(markdownToText(Config.profileDefaults.fields.taxId.default.header))
-      ).not.toBeInTheDocument();
+        screen.getByText(markdownToText(Config.profileDefaults.fields.taxId.default.header))
+      ).toBeInTheDocument();
       expect(
         screen.getByText(markdownToText(Config.profileDefaults.fields.existingEmployees.default.header))
       ).toBeInTheDocument();
@@ -72,11 +72,12 @@ describe("<TaxRegistrationModal>", () => {
       ).toBeInTheDocument();
     });
 
-    it("fills and saves the Ownership and Employees field", () => {
+    it("fills and saves the Ownership, Tax id, and Employees fields", () => {
       const userData = generateUserData({
         profileData: generateProfileData({
           legalStructureId: randomTradeNameLegalStructure(),
           ownershipTypeIds: [],
+          taxId: "",
           existingEmployees: undefined,
         }),
       });
@@ -84,11 +85,13 @@ describe("<TaxRegistrationModal>", () => {
       renderComponent(userData);
 
       fillText("Existing employees", "5");
+      fillText("Tax id", "777777777771");
       selectOwnershipByValue("disabled-veteran");
 
       fireEvent.click(screen.getByText(Config.taxRegistrationModal.saveButtonText));
       triggerQueueUpdate();
       expect(currentUserData().profileData.existingEmployees).toEqual("5");
+      expect(currentUserData().profileData.taxId).toEqual("777777777771");
       expect(currentUserData().profileData.ownershipTypeIds).toEqual(["disabled-veteran"]);
     });
 
@@ -188,6 +191,20 @@ describe("<TaxRegistrationModal>", () => {
       expect(
         screen.getByText(Config.profileDefaults.fields.municipality.default.errorTextRequired)
       ).toBeInTheDocument();
+    });
+
+    it("shows disclaimer for tax id input field", () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          legalStructureId: randomTradeNameLegalStructure(),
+        }),
+      });
+
+      renderComponent(userData);
+
+      expect(screen.getByTestId("tax-disclaimer")).toHaveTextContent(
+        markdownToText(Config.profileDefaults.fields.taxId.default.disclaimerMd)
+      );
     });
   });
 
@@ -397,6 +414,17 @@ describe("<TaxRegistrationModal>", () => {
         expect(screen.queryByLabelText("Business name")).not.toBeInTheDocument();
         expect(screen.queryByLabelText("Ownership")).toHaveTextContent(`${woman}`);
         expect((screen.getByLabelText("Existing employees") as HTMLInputElement).value).toEqual("3");
+      });
+
+      it("does not show disclaimer for tax id input field", () => {
+        const userData = generateUserData({
+          profileData: generateProfileData({
+            legalStructureId: randomPublicFilingLegalStructure(),
+          }),
+        });
+        renderComponent(userData);
+
+        expect(screen.queryByTestId("tax-disclaimer")).not.toBeInTheDocument();
       });
     });
   });
