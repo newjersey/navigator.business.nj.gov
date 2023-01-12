@@ -326,9 +326,8 @@ export const completeNewBusinessOnboarding = ({
 };
 
 export const completeExistingBusinessOnboarding = ({
-  businessFormationDate = "04/2021",
   sectorId = randomElementFromArray(arrayOfSectors).id,
-  legalStructureId = businessFormationDate || randomInt() % 2 ? "limited-partnership" : "sole-proprietorship",
+  legalStructureId = randomInt() % 2 ? "limited-partnership" : "sole-proprietorship",
   fullName = `Michael Smith ${randomInt()}`,
   email = `MichaelSmith${randomInt()}@gmail.com`,
   isNewsletterChecked = false,
@@ -355,19 +354,6 @@ export const completeExistingBusinessOnboarding = ({
   pageIndex += 1;
   cy.url().should("include", `onboarding?page=${pageIndex}`);
 
-  if (companyType.requiresPublicFiling) {
-    if (businessFormationDate) {
-      onOnboardingPage.typeBusinessFormationDate(businessFormationDate);
-      onOnboardingPage
-        .getBusinessFormationDatePicker()
-        .invoke("prop", "value")
-        .should("contain", businessFormationDate);
-    }
-    onOnboardingPage.clickNext();
-
-    pageIndex += 1;
-    cy.url().should("include", `onboarding?page=${pageIndex}`);
-  }
   onOnboardingPage.selectIndustrySector(sectorId);
   onOnboardingPage
     .getIndustrySectorDropdown()
@@ -599,7 +585,7 @@ export const checkNewBusinessProfilePage = ({
 };
 
 export const checkExistingBusinessProfilePage = ({
-  businessFormationDate,
+  businessFormationDate = "",
   sectorId,
   numberOfEmployees,
   townDisplayName,

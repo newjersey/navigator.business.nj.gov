@@ -143,18 +143,11 @@ describe("Profile [feature] [all] [group1]", () => {
   });
 
   it("onboards existing business and updates profile data", () => {
-    const businessFormationDate = "04/2021";
     const sectorId = randomElementFromArray(arrayOfSectors).id;
 
-    completeExistingBusinessOnboarding({
-      businessFormationDate,
-      sectorId,
-    });
+    completeExistingBusinessOnboarding({ sectorId });
 
-    checkExistingBusinessProfilePage({
-      businessFormationDate,
-      sectorId,
-    });
+    checkExistingBusinessProfilePage({ sectorId });
 
     const updatedBusinessFormationDate = "03/2020";
     const updatedEntityId = randomInt(10).toString();

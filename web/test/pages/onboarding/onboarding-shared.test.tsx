@@ -18,7 +18,7 @@ import {
   industriesWithOutEssentialQuestion,
   renderPage,
 } from "@/test/pages/onboarding/helpers-onboarding";
-import { createEmptyProfileData, defaultDateFormat, getCurrentDate } from "@businessnjgovnavigator/shared/";
+import { createEmptyProfileData } from "@businessnjgovnavigator/shared/";
 import { screen, waitFor } from "@testing-library/react";
 
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));
@@ -32,7 +32,6 @@ jest.mock("@/lib/api-client/apiClient", () => ({
 }));
 
 const mockApi = api as jest.Mocked<typeof api>;
-const date = getCurrentDate().subtract(1, "month").date(1);
 const Config = getMergedConfig();
 
 describe("onboarding - shared", () => {
@@ -252,9 +251,8 @@ describe("onboarding - shared", () => {
     page.chooseRadio("business-persona-owning");
     page.selectByValue("Business structure", "c-corporation");
     await page.visitStep(2);
-    page.selectDate("Date of formation", date);
-    await page.visitStep(3);
     page.selectByValue("Sector", "clean-energy");
+    await page.visitStep(3);
     page.clickBack();
     page.clickBack();
     page.chooseRadio("business-persona-starting");
@@ -265,7 +263,6 @@ describe("onboarding - shared", () => {
       businessPersona: "STARTING",
       industryId: undefined,
       homeBasedBusiness: undefined,
-      dateOfFormation: undefined,
       legalStructureId: "c-corporation",
       liquorLicense: false,
       constructionRenovationPlan: undefined,
@@ -285,12 +282,9 @@ describe("onboarding - shared", () => {
     page.chooseRadio("business-persona-owning");
     page.selectByValue("Business structure", "c-corporation");
     await page.visitStep(2);
-    page.selectDate("Date of formation", date);
-    await page.visitStep(3);
     page.selectByValue("Sector", "clean-energy");
-    await page.visitStep(4);
+    await page.visitStep(3);
 
-    page.clickBack();
     page.clickBack();
     page.clickBack();
 
@@ -300,7 +294,6 @@ describe("onboarding - shared", () => {
       businessPersona: "OWNING",
       legalStructureId: "c-corporation",
       industryId: "generic",
-      dateOfFormation: date.format(defaultDateFormat),
       homeBasedBusiness: undefined,
       liquorLicense: false,
       constructionRenovationPlan: undefined,

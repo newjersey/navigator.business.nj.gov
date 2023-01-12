@@ -1,7 +1,6 @@
 import { FieldLabelDescriptionOnly } from "@/components/onboarding/FieldLabelDescriptionOnly";
 import { FieldLabelOnboarding } from "@/components/onboarding/FieldLabelOnboarding";
 import { OnboardingBusinessPersona } from "@/components/onboarding/OnboardingBusinessPersona";
-import { OnboardingDateOfFormation } from "@/components/onboarding/OnboardingDateOfFormation";
 import { OnboardingForeignBusinessType } from "@/components/onboarding/OnboardingForeignBusinessType";
 import { OnboardingIndustry } from "@/components/onboarding/OnboardingIndustry";
 import { OnboardingLegalStructure } from "@/components/onboarding/OnboardingLegalStructure";
@@ -79,35 +78,6 @@ export const getOnboardingFlows = (
               banner: [
                 { name: "REQUIRED_EXISTING_BUSINESS", valid: profileData.businessPersona !== undefined },
                 { name: "REQUIRED_LEGAL", valid: profileData.legalStructureId !== undefined },
-              ],
-            };
-          },
-        },
-        {
-          name: "date-for-public-filing",
-          component: (
-            <>
-              <FieldLabelOnboarding fieldName="dateOfFormation" />
-              <OnboardingDateOfFormation
-                onValidation={onValidation}
-                fieldStates={fieldStates}
-                futureAllowed={false}
-              />
-            </>
-          ),
-          getErrorMap: () => {
-            return {
-              inline: [
-                {
-                  name: "dateOfFormation",
-                  valid: !fieldStates.dateOfFormation.invalid,
-                },
-              ],
-              snackbar: [
-                {
-                  name: "dateOfFormation",
-                  valid: !fieldStates.dateOfFormation.invalid,
-                },
               ],
             };
           },
