@@ -1421,32 +1421,6 @@ collections:
     delete: false
     create: false
     files:
-      - label: "Nexus Name Search - Task Metadata"
-        name: "nexus-name-search-task"
-        file: "content/src/roadmaps/tasks/search-business-name-nexus.md"
-        identifier_field: "{{fields.slug}}"
-        slug: "{{fields.slug}}"
-        editor:
-          preview: true
-        fields:
-          - { label: "Content", name: "body", widget: "markdown" }
-          - { label: "Url Slug", name: "urlSlug", widget: "nospace" }
-          - { label: "Filename", name: "filename", widget: "nospace", required: false }
-          - { label: "Name", name: "name", widget: "string" }
-          - { label: "Id", name: "id", widget: "nospace" }
-          - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
-          - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
-          - label: Industry
-            name: industryId
-            widget: "relation"
-            collection: "roadmaps"
-            search_fields: ["{{id}}"]
-            value_field: "{{id}}"
-            display_fields: ["{{id}}"]
-            required: false
-          - { label: "Required", name: "required", widget: "boolean", required: false }
-          - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
-          - { label: "Form Name", name: "formName", widget: "string", required: false }
       - label: "Name Search"
         name: nexus-name-search
         file: content/src/fieldConfig/nexus-name-search.json

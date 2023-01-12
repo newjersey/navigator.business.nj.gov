@@ -2,6 +2,7 @@ import { ConfigType } from "@/contexts/configContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
+import { formationTaskId } from "@businessnjgovnavigator/shared/index";
 import { ReactElement, useContext } from "react";
 
 export const ProfileNexusBusinessNameField = (): ReactElement => {
@@ -20,7 +21,7 @@ export const ProfileNexusBusinessNameField = (): ReactElement => {
       <div>
         <div className="flex">
           <h3 className="margin-right-105">{contentFromConfig.outOfStateNameHeader}</h3>
-          <a href="/tasks/search-business-name-nexus">{contentFromConfig.addButton}</a>
+          <a href={`/tasks/${formationTaskId}`}>{contentFromConfig.addButton}</a>
         </div>
         <div className="italic">
           <i>{contentFromConfig.emptyBusinessPlaceHolder}</i>
@@ -34,7 +35,7 @@ export const ProfileNexusBusinessNameField = (): ReactElement => {
       <div>
         <div className="flex">
           <h3 className="margin-right-105">{contentFromConfig.outOfStateNameHeader}</h3>
-          <a href="/tasks/search-business-name-nexus">{contentFromConfig.editButton}</a>
+          <a href={`/tasks/${formationTaskId}`}>{contentFromConfig.editButton}</a>
         </div>
         <div>{state?.profileData.businessName}</div>
       </div>
