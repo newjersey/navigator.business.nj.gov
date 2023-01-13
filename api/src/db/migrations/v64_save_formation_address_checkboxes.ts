@@ -160,13 +160,13 @@ interface v64UserTestingResponse {
   status: v64UserTestingStatus;
 }
 
-type v64NewsletterStatus = typeof newsletterStatusList[number];
+type v64NewsletterStatus = (typeof newsletterStatusList)[number];
 
 const externalStatusList = ["SUCCESS", "IN_PROGRESS", "CONNECTION_ERROR"] as const;
 
 const userTestingStatusList = [...externalStatusList] as const;
 
-type v64UserTestingStatus = typeof userTestingStatusList[number];
+type v64UserTestingStatus = (typeof userTestingStatusList)[number];
 
 const newsletterStatusList = [
   ...externalStatusList,
@@ -267,7 +267,7 @@ export const corpBusinessSuffix = [
 
 const AllBusinessSuffixes = [...llcBusinessSuffix, ...llpBusinessSuffix, ...corpBusinessSuffix] as const;
 
-type v64BusinessSuffix = typeof AllBusinessSuffixes[number];
+type v64BusinessSuffix = (typeof AllBusinessSuffixes)[number];
 
 type v64FormationSubmitResponse = {
   success: boolean;

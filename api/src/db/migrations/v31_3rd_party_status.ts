@@ -21,7 +21,7 @@ export const newsletterStatusList = [
   "QUESTION_WARNING",
 ] as const;
 
-export type v31NewsletterStatus = typeof newsletterStatusList[number];
+export type v31NewsletterStatus = (typeof newsletterStatusList)[number];
 
 export interface v31NewsletterResponse {
   success: boolean;

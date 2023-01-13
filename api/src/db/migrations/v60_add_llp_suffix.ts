@@ -159,13 +159,13 @@ interface v60UserTestingResponse {
   status: v60UserTestingStatus;
 }
 
-type v60NewsletterStatus = typeof newsletterStatusList[number];
+type v60NewsletterStatus = (typeof newsletterStatusList)[number];
 
 const externalStatusList = ["SUCCESS", "IN_PROGRESS", "CONNECTION_ERROR"] as const;
 
 const userTestingStatusList = [...externalStatusList] as const;
 
-type v60UserTestingStatus = typeof userTestingStatusList[number];
+type v60UserTestingStatus = (typeof userTestingStatusList)[number];
 
 const newsletterStatusList = [
   ...externalStatusList,
@@ -254,7 +254,7 @@ const llpBusinessSuffix = [
 
 const AllBusinessSuffixes = [...llcBusinessSuffix, ...llpBusinessSuffix] as const;
 
-type v60BusinessSuffix = typeof AllBusinessSuffixes[number];
+type v60BusinessSuffix = (typeof AllBusinessSuffixes)[number];
 
 type v60FormationSubmitResponse = {
   success: boolean;
