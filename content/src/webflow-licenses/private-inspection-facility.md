@@ -1,0 +1,13 @@
+---
+id: "private-inspection-facility"
+webflowId: "5f7729585ef8c11c86019ec4"
+urlSlug: "private-inspection-facility"
+name: "Private Inspection Facility"
+callToActionLink: "http://state.nj.us/mvc/inspection/inspecthow.htm"
+callToActionText: ""
+issuingAgency: "Department of Transportation"
+issuingDivision: "Motor Vehicle Commission, Business Licensing Unit"
+divisionPhone: "(609) 292-6500  5093 or 5094"
+industryId: "Inspection Facility"
+licenseCertificationClassification: "LICENSE"
+---

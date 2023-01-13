@@ -1,0 +1,13 @@
+---
+id: "pig-dealer-broker"
+webflowId: "5f7728e3e10dec67d3024f0f"
+urlSlug: "pig-dealer-broker"
+name: "Pig Dealer & Broker"
+callToActionLink: "http://nj.gov/agriculture/divisions/ah/"
+callToActionText: ""
+issuingAgency: "Department of Agriculture"
+issuingDivision: "Division of Animal Health All Applications"
+divisionPhone: "(609) 633-2954"
+industryId: "Pig Dealer"
+licenseCertificationClassification: "LICENSE"
+---

@@ -1,0 +1,13 @@
+---
+id: "aerial-pesticide-applicator"
+webflowId: "5f7728f9a67e4a0c885c0f33"
+urlSlug: "aerial-pesticide-applicator"
+name: "Aerial Pesticide Applicator"
+callToActionLink: "http://nj.gov/dep/enforcement/pcp/pcp-FAQs.htm#license12"
+callToActionText: ""
+issuingAgency: "Department of Environmental Protection"
+issuingDivision: "Environmental Safety, Health and Analytical Programs, Bureau of Pesticide Operations"
+divisionPhone: "(609) 984-6507"
+industryId: "Aerial Pesticide"
+licenseCertificationClassification: "CERTIFICATION AND/OR LICENSE"
+---

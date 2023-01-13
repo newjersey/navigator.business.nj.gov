@@ -1,0 +1,13 @@
+---
+id: "residences-for-disabled"
+webflowId: "5f77294c5adcc8cf56b64a7e"
+urlSlug: "residences-for-disabled"
+name: "Residences For Disabled"
+callToActionLink: "http://nj.gov/humanservices/ool/programs/"
+callToActionText: ""
+issuingAgency: "Department of Human Services"
+issuingDivision: "Division of Development Disabilities, Office of Licensing and Inspection"
+divisionPhone: "(609) 984-5321"
+industryId: "Community Residence"
+licenseCertificationClassification: "LICENSE TO OPERATE"
+---

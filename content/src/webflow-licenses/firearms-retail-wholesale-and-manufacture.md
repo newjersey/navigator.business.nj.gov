@@ -1,0 +1,13 @@
+---
+id: "firearms-retail-wholesale-and-manufacture"
+webflowId: "5f7729604ad0ae6bffa54a58"
+urlSlug: "firearms-retail-wholesale-and-manufacture"
+name: "Firearms (Retail, Wholesale and Manufacture)"
+callToActionLink: "http://njsp.org/index.shtml"
+callToActionText: ""
+issuingAgency: "Department of Law and Public Safety"
+issuingDivision: "Division of State Police"
+divisionPhone: "(609) 882-2000"
+industryId: "Firearms"
+licenseCertificationClassification: "LICENSE"
+---

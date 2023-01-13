@@ -1,0 +1,13 @@
+---
+id: "coastal-wetlands"
+webflowId: "5f7728fb24006107aa7834b8"
+urlSlug: "coastal-wetlands"
+name: "Coastal Wetlands"
+callToActionLink: "http://nj.gov/dep/wrm/"
+callToActionText: ""
+issuingAgency: "Department of Environmental Protection"
+issuingDivision: "Coastal Wetlands Permits Section"
+divisionPhone: "(609) 292-0060"
+industryId: "Coastal Wetlands"
+licenseCertificationClassification: "PERMIT"
+---

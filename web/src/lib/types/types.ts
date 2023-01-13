@@ -381,6 +381,14 @@ export interface Task {
   issuingAgency?: string;
   formName?: string;
   requiresLocation?: boolean;
+  industryId?: string;
+}
+
+export interface LicenseTask extends Task {
+  licenseCertificationClassification: string;
+  issuingDivision: string;
+  divisionPhone: string;
+  webflowId: string;
 }
 
 export interface TaskLink {

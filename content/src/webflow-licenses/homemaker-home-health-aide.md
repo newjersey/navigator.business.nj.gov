@@ -1,0 +1,13 @@
+---
+id: "homemaker-home-health-aide"
+webflowId: "5f772993e022940ff4eaa5d0"
+urlSlug: "homemaker-home-health-aide"
+name: "Home Health Aide"
+callToActionLink: "http://njconsumeraffairs.gov/hhh/Pages/applications.aspx"
+callToActionText: ""
+issuingAgency: "Division of Consumer Affairs"
+issuingDivision: "NJ Board of Nursing"
+divisionPhone: "(973) 504-6430"
+industryId: "Home Health Aide"
+licenseCertificationClassification: "LICENSE"
+---

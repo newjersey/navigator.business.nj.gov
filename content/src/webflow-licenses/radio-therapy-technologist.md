@@ -1,0 +1,13 @@
+---
+id: "radio-therapy-technologist"
+webflowId: "5f77291be02294838beaa5ad"
+urlSlug: "radio-therapy-technologist"
+name: "Radio Therapy Technologist"
+callToActionLink: "http://state.nj.us/dep/rpp/tec/diagrt.htm"
+callToActionText: ""
+issuingAgency: "Department of Environmental Protection"
+issuingDivision: "Bureau of Radiologic Heath"
+divisionPhone: "(609) 984-5890"
+industryId: "Radio Therapy Technologist"
+licenseCertificationClassification: "LICENSE"
+---

@@ -10,22 +10,44 @@ if (process.env.WEBFLOW_API_TOKEN == undefined) {
   throw new Error("No Webflow API Token in Env");
 }
 
+const siteId = "5e31b06cb76b830809358a75";
+
 // eslint-disable-next-line no-undef
 const headers = { Authorization: `Bearer ${process.env.WEBFLOW_API_TOKEN}` };
 
 const getAllItems = async (id) => {
-  return axios({
-    method: "get",
-    url: `https://api.webflow.com/collections/${id}/items`,
-    headers,
-    responseType: "json",
-  });
+  let responseItems = [];
+  let totalToFetch = 1;
+
+  while (responseItems.length < totalToFetch) {
+    const data = (
+      await axios({
+        method: "get",
+        url: `https://api.webflow.com/collections/${id}/items?offset=${responseItems.length}`,
+        headers,
+        responseType: "json",
+      })
+    ).data;
+    responseItems = [...responseItems, ...data.items];
+    totalToFetch = data.total;
+  }
+
+  return responseItems;
 };
 
 const getCollection = async (id) => {
   return axios({
     method: "get",
     url: `https://api.webflow.com/collections/${id}`,
+    headers,
+    responseType: "json",
+  });
+};
+
+const getAllCollections = async () => {
+  return axios({
+    method: "get",
+    url: `https://api.webflow.com/sites/${siteId}/collections`,
     headers,
     responseType: "json",
   });
@@ -70,4 +92,4 @@ const deleteItem = (item, collectionId, unPublish = false) => {
   });
 };
 
-export { deleteItem, modifyItem, createItem, getAllItems, getCollection };
+export { deleteItem, modifyItem, createItem, getAllItems, getCollection, getAllCollections };

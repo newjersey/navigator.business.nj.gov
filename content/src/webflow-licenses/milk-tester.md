@@ -1,0 +1,13 @@
+---
+id: "milk-tester"
+webflowId: "5f7728e2b0544f03af366145"
+urlSlug: "milk-tester"
+name: "Milk Tester"
+callToActionLink: "http://nj.gov/agriculture/divisions/md/prog/dairy.html"
+callToActionText: ""
+issuingAgency: "Department of Agriculture"
+issuingDivision: "Division of Dairy and Commodity Regulation"
+divisionPhone: "(609) 292-5646"
+industryId: "Milk Tester"
+licenseCertificationClassification: "LICENSE"
+---

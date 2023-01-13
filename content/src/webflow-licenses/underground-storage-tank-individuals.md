@@ -1,0 +1,13 @@
+---
+id: "underground-storage-tank-individuals"
+webflowId: "5f7729212f04da35ff58b5eb"
+urlSlug: "underground-storage-tank-individuals"
+name: "Underground Storage Tank Individuals"
+callToActionLink: "http://nj.gov/dep/rules/nj_env_law.html"
+callToActionText: ""
+issuingAgency: "Department of Environmental Protection"
+issuingDivision: "Land Use Management Water Supply, Allocations Well Permitting and Regulation"
+divisionPhone: "(609) 984-6831"
+industryId: "Underground Storage Tank"
+licenseCertificationClassification: "CERTIFICATION"
+---

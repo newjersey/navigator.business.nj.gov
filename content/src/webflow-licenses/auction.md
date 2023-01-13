@@ -1,0 +1,13 @@
+---
+id: "auction"
+webflowId: "5f7728db2400617eff7834b5"
+urlSlug: "auction"
+name: "Auction"
+callToActionLink: "http://njssa.com/"
+callToActionText: ""
+issuingAgency: "New Jersey State Society of Auctioneers"
+issuingDivision: "undefined"
+divisionPhone: "(908) 789-9999"
+industryId: "Auction"
+licenseCertificationClassification: "INFORMATION"
+---

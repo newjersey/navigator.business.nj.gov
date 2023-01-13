@@ -1,0 +1,13 @@
+---
+id: "boat-snack"
+webflowId: "5f7728fb8150be5747f3be1d"
+urlSlug: "boat-snack"
+name: "Boat, Snack"
+callToActionLink: "http://nj.gov/dep/landuse/tl_main.html"
+callToActionText: ""
+issuingAgency: "Department of Environmental Protection"
+issuingDivision: "Tidelands Management Program"
+divisionPhone: "(609) 292-2573"
+industryId: "Boat"
+licenseCertificationClassification: "CERTIFICATE"
+---

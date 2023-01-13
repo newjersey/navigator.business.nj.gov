@@ -1,0 +1,13 @@
+---
+id: "home-tutoring"
+webflowId: "5f772931dd6a4921d89b6061"
+urlSlug: "home-tutoring"
+name: "Home Tutoring"
+callToActionLink: "https://nj.gov/education/license/teacher/"
+callToActionText: ""
+issuingAgency: "Department of Education"
+issuingDivision: "Division of Licensing, Office of Teacher Certification and Academic Credentials"
+divisionPhone: "(609) 292-2070"
+industryId: "Home Tutoring"
+licenseCertificationClassification: "LICENSE"
+---

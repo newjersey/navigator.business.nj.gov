@@ -1,0 +1,13 @@
+---
+id: "pesticide-dealer-restricted-use-pesticides"
+webflowId: "5f7729120b0d00076af25207"
+urlSlug: "pesticide-dealer-restricted-use-pesticides"
+name: "Pesticide Dealer (Restricted Use Pesticides)"
+callToActionLink: "http://nj.gov/dep/enforcement/pcp/bpo.htm"
+callToActionText: ""
+issuingAgency: "Department of Environmental Protection"
+issuingDivision: "Environmental Safety, Health and Analytical Program, Bureau of Pesticide Operations"
+divisionPhone: "(609) 984-6507"
+industryId: "Pesticide Dealer"
+licenseCertificationClassification: "LICENSE"
+---

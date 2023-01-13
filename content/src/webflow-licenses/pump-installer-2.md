@@ -1,0 +1,13 @@
+---
+id: "pump-installer-2"
+webflowId: "5f77291a2f04dadd4858b5e9"
+urlSlug: "pump-installer-2"
+name: "Pump Installer"
+callToActionLink: "http://state.nj.us/dep/watersupply/g_boards_le.html"
+callToActionText: ""
+issuingAgency: "Department of Environmental Protection"
+issuingDivision: "General Services and Licensing Unit"
+divisionPhone: "(609) 777-1013"
+industryId: "Pump Installer"
+licenseCertificationClassification: "LICENSE"
+---
