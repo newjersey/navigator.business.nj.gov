@@ -119,7 +119,7 @@ export const createEmptyProfileData = (): ProfileData => {
 export type CannabisLicenseType = "CONDITIONAL" | "ANNUAL" | undefined;
 export type CarServiceType = "STANDARD" | "HIGH_CAPACITY" | "BOTH" | undefined;
 export const businessPersonas = ["STARTING", "OWNING", "FOREIGN"] as const;
-export type BusinessPersona = typeof businessPersonas[number] | undefined;
+export type BusinessPersona = (typeof businessPersonas)[number] | undefined;
 export type ForeignBusinessType = "REMOTE_WORKER" | "REMOTE_SELLER" | "NEXUS" | "NONE" | undefined;
 
 export const maskingCharacter = "*";

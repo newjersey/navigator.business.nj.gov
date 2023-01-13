@@ -174,7 +174,7 @@ type v93LicenseStatus =
   | "WITHDRAWN";
 
 const v93SectionNames = ["PLAN", "START"] as const;
-type v93SectionType = typeof v93SectionNames[number];
+type v93SectionType = (typeof v93SectionNames)[number];
 
 type v93ExternalStatus = {
   newsletter?: v93NewsletterResponse;
@@ -191,13 +191,13 @@ interface v93UserTestingResponse {
   status: v93UserTestingStatus;
 }
 
-type v93NewsletterStatus = typeof newsletterStatusList[number];
+type v93NewsletterStatus = (typeof newsletterStatusList)[number];
 
 const externalStatusList = ["SUCCESS", "IN_PROGRESS", "CONNECTION_ERROR"] as const;
 
 const userTestingStatusList = [...externalStatusList] as const;
 
-type v93UserTestingStatus = typeof userTestingStatusList[number];
+type v93UserTestingStatus = (typeof userTestingStatusList)[number];
 
 const newsletterStatusList = [
   ...externalStatusList,
@@ -299,7 +299,7 @@ export const corpBusinessSuffix = [
 
 const AllBusinessSuffixes = [...llcBusinessSuffix, ...llpBusinessSuffix, ...corpBusinessSuffix] as const;
 
-type v93BusinessSuffix = typeof AllBusinessSuffixes[number];
+type v93BusinessSuffix = (typeof AllBusinessSuffixes)[number];
 
 type v93FormationSubmitResponse = {
   success: boolean;

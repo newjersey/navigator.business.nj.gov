@@ -6,7 +6,7 @@ export const registrationStatusList = [
   "RESPONSE_ERROR",
   "DUPLICATE_ERROR",
 ] as const;
-export type RegistrationStatus = typeof registrationStatusList[number];
+export type RegistrationStatus = (typeof registrationStatusList)[number];
 
 export type ABExperience = "ExperienceA" | "ExperienceB";
 
@@ -61,13 +61,13 @@ export interface UserTestingResponse {
   status: UserTestingStatus;
 }
 
-export type NewsletterStatus = typeof newsletterStatusList[number];
+export type NewsletterStatus = (typeof newsletterStatusList)[number];
 
 export const externalStatusList = ["SUCCESS", "IN_PROGRESS", "RESPONSE_ERROR", "CONNECTION_ERROR"] as const;
 
 export const userTestingStatusList = [...externalStatusList] as const;
 
-export type UserTestingStatus = typeof userTestingStatusList[number];
+export type UserTestingStatus = (typeof userTestingStatusList)[number];
 
 export const newsletterStatusList = [
   ...externalStatusList,

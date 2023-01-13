@@ -114,8 +114,8 @@ export const arrayOfStateShortCodes = [
   "WY",
 ] as const;
 
-export type StateNames = typeof arrayOfStateNames[number];
-export type StateShortCodes = typeof arrayOfStateShortCodes[number];
+export type StateNames = (typeof arrayOfStateNames)[number];
+export type StateShortCodes = (typeof arrayOfStateShortCodes)[number];
 
 export type StateObject = {
   shortCode: StateShortCodes;

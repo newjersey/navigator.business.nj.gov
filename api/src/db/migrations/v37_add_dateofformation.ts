@@ -131,13 +131,13 @@ interface v37UserTestingResponse {
   status: v37UserTestingStatus;
 }
 
-type v37NewsletterStatus = typeof newsletterStatusList[number];
+type v37NewsletterStatus = (typeof newsletterStatusList)[number];
 
 const externalStatusList = ["SUCCESS", "IN_PROGRESS", "CONNECTION_ERROR"] as const;
 
 const userTestingStatusList = [...externalStatusList] as const;
 
-type v37UserTestingStatus = typeof userTestingStatusList[number];
+type v37UserTestingStatus = (typeof userTestingStatusList)[number];
 
 const newsletterStatusList = [
   ...externalStatusList,
