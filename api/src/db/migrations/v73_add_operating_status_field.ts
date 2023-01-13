@@ -192,13 +192,13 @@ interface v73UserTestingResponse {
   status: v73UserTestingStatus;
 }
 
-type v73NewsletterStatus = typeof newsletterStatusList[number];
+type v73NewsletterStatus = (typeof newsletterStatusList)[number];
 
 const externalStatusList = ["SUCCESS", "IN_PROGRESS", "CONNECTION_ERROR"] as const;
 
 const userTestingStatusList = [...externalStatusList] as const;
 
-type v73UserTestingStatus = typeof userTestingStatusList[number];
+type v73UserTestingStatus = (typeof userTestingStatusList)[number];
 
 const newsletterStatusList = [
   ...externalStatusList,
@@ -299,7 +299,7 @@ export const corpBusinessSuffix = [
 
 const AllBusinessSuffixes = [...llcBusinessSuffix, ...llpBusinessSuffix, ...corpBusinessSuffix] as const;
 
-type v73BusinessSuffix = typeof AllBusinessSuffixes[number];
+type v73BusinessSuffix = (typeof AllBusinessSuffixes)[number];
 
 type v73FormationSubmitResponse = {
   success: boolean;

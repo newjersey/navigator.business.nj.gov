@@ -32,7 +32,7 @@ export const publicFilingLegalTypes = [
   "s-corporation",
 ] as const;
 
-export type PublicFilingLegalType = typeof publicFilingLegalTypes[number];
+export type PublicFilingLegalType = (typeof publicFilingLegalTypes)[number];
 
 export const allFormationLegalTypes = [
   "limited-liability-partnership",
@@ -47,7 +47,7 @@ export const allFormationLegalTypes = [
   "foreign-s-corporation",
 ] as const;
 
-export type FormationLegalType = typeof allFormationLegalTypes[number];
+export type FormationLegalType = (typeof allFormationLegalTypes)[number];
 
 export const BusinessSignerTypeMap: Record<FormationLegalType, SignerTitle[]> = {
   "limited-liability-company": ["Authorized Representative"],
@@ -271,7 +271,7 @@ export const llcBusinessSuffix = [
   "LIMITED LIABILITY COMPANY",
 ] as const;
 
-export type LlcBusinessSuffix = typeof llcBusinessSuffix[number];
+export type LlcBusinessSuffix = (typeof llcBusinessSuffix)[number];
 
 export const llpBusinessSuffix = [
   "LIMITED LIABILITY PARTNERSHIP",
@@ -299,13 +299,13 @@ export const corpBusinessSuffix = [
 
 export const foreignCorpBusinessSuffix = [...corpBusinessSuffix, "P.C.", "P.A."] as const;
 
-export type CorpBusinessSuffix = typeof corpBusinessSuffix[number];
+export type CorpBusinessSuffix = (typeof corpBusinessSuffix)[number];
 
-export type ForeignCorpBusinessSuffix = typeof foreignCorpBusinessSuffix[number];
+export type ForeignCorpBusinessSuffix = (typeof foreignCorpBusinessSuffix)[number];
 
-export type LlpBusinessSuffix = typeof llpBusinessSuffix[number];
+export type LlpBusinessSuffix = (typeof llpBusinessSuffix)[number];
 
-export type LpBusinessSuffix = typeof lpBusinessSuffix[number];
+export type LpBusinessSuffix = (typeof lpBusinessSuffix)[number];
 
 export const AllBusinessSuffixes = [
   ...llcBusinessSuffix,
@@ -314,7 +314,7 @@ export const AllBusinessSuffixes = [
   ...corpBusinessSuffix,
 ] as const;
 
-export type BusinessSuffix = typeof AllBusinessSuffixes[number];
+export type BusinessSuffix = (typeof AllBusinessSuffixes)[number];
 
 export const BusinessSuffixMap: Record<
   FormationLegalType,

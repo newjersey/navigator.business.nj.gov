@@ -45,7 +45,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
     "addressZipCode",
   ] as const;
 
-  type ErrorFields = typeof requiredFields[number];
+  type ErrorFields = (typeof requiredFields)[number];
   type AddressErrorMap = Record<ErrorFields, FieldStatus>;
 
   const createAddressErrorMap = (invalid?: boolean): AddressErrorMap => {

@@ -250,7 +250,7 @@ export const arrayOfCountriesShortCodes = [
   "AX",
 ] as const;
 
-export type CountriesShortCodes = typeof arrayOfCountriesShortCodes[number];
+export type CountriesShortCodes = (typeof arrayOfCountriesShortCodes)[number];
 
 export type CountriesObject = {
   shortCode: CountriesShortCodes;

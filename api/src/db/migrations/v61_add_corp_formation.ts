@@ -169,13 +169,13 @@ interface v61UserTestingResponse {
   status: v61UserTestingStatus;
 }
 
-type v61NewsletterStatus = typeof newsletterStatusList[number];
+type v61NewsletterStatus = (typeof newsletterStatusList)[number];
 
 const externalStatusList = ["SUCCESS", "IN_PROGRESS", "CONNECTION_ERROR"] as const;
 
 const userTestingStatusList = [...externalStatusList] as const;
 
-type v61UserTestingStatus = typeof userTestingStatusList[number];
+type v61UserTestingStatus = (typeof userTestingStatusList)[number];
 
 const newsletterStatusList = [
   ...externalStatusList,
@@ -286,7 +286,7 @@ export const createEmptyFormationAddress = (): v61FormationAddress => {
 
 const AllBusinessSuffixes = [...llcBusinessSuffix, ...llpBusinessSuffix, ...corpBusinessSuffix] as const;
 
-type v61BusinessSuffix = typeof AllBusinessSuffixes[number];
+type v61BusinessSuffix = (typeof AllBusinessSuffixes)[number];
 
 type v61FormationSubmitResponse = {
   success: boolean;

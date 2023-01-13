@@ -25,13 +25,13 @@ export interface v32UserTestingResponse {
   status: v32UserTestingStatus;
 }
 
-export type v32NewsletterStatus = typeof newsletterStatusList[number];
+export type v32NewsletterStatus = (typeof newsletterStatusList)[number];
 
 export const externalStatusList = ["SUCCESS", "IN_PROGRESS", "CONNECTION_ERROR"] as const;
 
 export const userTestingStatusList = [...externalStatusList] as const;
 
-export type v32UserTestingStatus = typeof userTestingStatusList[number];
+export type v32UserTestingStatus = (typeof userTestingStatusList)[number];
 
 export const newsletterStatusList = [
   ...externalStatusList,
