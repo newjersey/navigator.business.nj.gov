@@ -64,7 +64,7 @@ export const OnboardingRadioQuestion = <T extends ProfileDataTypes>(props: Props
               return (
                 <FormControlLabel
                   key={val.toString()}
-                  style={{ marginTop: ".75rem", alignItems: "flex-start", marginRight: "3rem" }}
+                  style={{ marginTop: ".75rem", alignItems: "flex-start", marginRight: "2.5rem" }}
                   labelPlacement="end"
                   data-testid={`${camelCaseToKebabCase(props.fieldName)}-radio-${val
                     .toString()

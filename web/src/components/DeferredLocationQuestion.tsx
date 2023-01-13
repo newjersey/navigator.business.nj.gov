@@ -91,7 +91,7 @@ export const DeferredLocationQuestion = (props: Props): ReactElement => {
   return (
     <div className="bg-base-extra-light margin-top-2" data-testid="deferred-location-task">
       {shouldShowQuestion ? (
-        <DeferredOnboardingQuestion label={label} onSave={onSaveNewLocation} removeStyling>
+        <DeferredOnboardingQuestion label={label} onSave={onSaveNewLocation} isTaskPage>
           <OnboardingMunicipality
             onValidation={() => {}}
             fieldStates={createProfileFieldErrorMap()}
