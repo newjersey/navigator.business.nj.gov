@@ -31,7 +31,10 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const { userData, update } = useUserData();
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
-
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [fieldStates, setFieldStates] = useState<ProfileFieldErrorMap>(createProfileFieldErrorMap());
+  const [apiFailed, setOnAPIfailed] = useState<undefined | "FAILED" | "UNKNOWN">(undefined);
+  const [onSubmitClicked, setOnSubmitClicked] = useState<boolean>(false);
   const fields: ProfileFields[] = ["businessName", "taxId", "responsibleOwnerName"];
 
   const errorMessages: Partial<Record<ProfileFields, string>> = {
@@ -40,17 +43,9 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
     taxId: Config.taxCalendar.modalTaxFieldErrorName,
   };
 
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-
-  const [fieldStates, setFieldStates] = useState<ProfileFieldErrorMap>(createProfileFieldErrorMap());
-
-  const [apiFailed, setOnAPIfailed] = useState<undefined | "FAILED" | "UNKNOWN">(undefined);
-  const [onSubmitClicked, setOnSubmitClicked] = useState<boolean>(false);
-
   const isPublicFiling = LookupLegalStructureById(
     userData?.profileData.legalStructureId
   ).requiresPublicFiling;
-
   const shouldLockFormationFields = userData?.formationData.getFilingResponse?.success;
 
   const getErrors = (): Partial<ProfileFieldErrorMap> => {
@@ -74,7 +69,7 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
   };
 
   const responsibleOwnerOrBusinessName = () => {
-    return LookupLegalStructureById(profileData.legalStructureId).requiresPublicFiling
+    return isPublicFiling
       ? Config.taxCalendar.modalBusinessFieldErrorName
       : Config.taxCalendar.modalResponsibleOwnerFieldErrorName;
   };
@@ -209,11 +204,11 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
   };
 
   const shouldShowBusinessNameField = (): boolean => {
-    return LookupLegalStructureById(userData?.profileData.legalStructureId).requiresPublicFiling;
+    return isPublicFiling;
   };
 
   const shouldShowResponsibleOwnerField = (): boolean => {
-    return LookupLegalStructureById(userData?.profileData.legalStructureId).hasTradeName;
+    return !isPublicFiling;
   };
 
   return (

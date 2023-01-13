@@ -119,7 +119,7 @@ export const validateEmail = (email: string): boolean => {
   );
 };
 
-export const getPhoneNumberFormat = (phoneNumber: string) => {
+export const getPhoneNumberFormat = (phoneNumber: string): string => {
   const length = phoneNumber.length;
   if (length === 0) {
     return phoneNumber;
