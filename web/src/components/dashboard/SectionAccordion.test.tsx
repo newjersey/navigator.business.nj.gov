@@ -1,12 +1,6 @@
 import { SectionAccordion } from "@/components/dashboard/SectionAccordion";
-import {
-  generatePreferences,
-  generateRoadmap,
-  generateSectionCompletion,
-  generateStep,
-  generateUserData,
-} from "@/test/factories";
-import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
+import { generatePreferences, generateRoadmap, generateStep, generateUserData } from "@/test/factories";
+import { setMockRoadmapResponse, useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import {
   currentUserData,
   setupStatefulUserDataContext,
@@ -77,10 +71,9 @@ describe("<SectionAccordion />", () => {
     );
   });
 
-  it("checks completed section logo given section status", () => {
+  it("shows completed section logo for a completed section", () => {
     const roadmap = generateRoadmap({ steps: [generateStep({ section: "PLAN" })] });
-    const sectionCompletion = generateSectionCompletion({ PLAN: true });
-    useMockRoadmap(roadmap, sectionCompletion);
+    setMockRoadmapResponse(roadmap, jest.fn().mockReturnValue(true));
     statefulRender("PLAN", generateUserData({}));
     expect(screen.getByTestId("completed-plan-section-img")).toBeVisible();
   });
