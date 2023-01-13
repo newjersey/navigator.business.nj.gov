@@ -4,10 +4,12 @@ import { Button } from "@/components/njwds-extended/Button";
 import { LookupStepIndexByName } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { MediaQueries } from "@/lib/PageSizes";
 import analytics from "@/lib/utils/analytics";
 import { scrollToTop } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { FormationLegalType, LookupLegalStructureById } from "@businessnjgovnavigator/shared/";
+import { useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router";
 import { ReactElement, useContext, useState } from "react";
 
@@ -20,6 +22,7 @@ export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): 
   const { setStepIndex } = useContext(BusinessFormationContext);
   const { userData } = useUserData();
   const router = useRouter();
+  const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
 
   const editLegalStructure = () => {
     analytics.event.business_formation_legal_structure_modal.submit.go_to_profile_screen();
@@ -72,7 +75,11 @@ export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): 
         </div>
       </div>
 
-      <div className="min-height-575rem bg-base-lightest margin-bottom-1 display-block tablet:display-flex tablet:flex-row">
+      <div
+        className={`min-height-575rem bg-base-lightest margin-bottom-1 ${
+          isTabletAndUp ? "display-flex" : "display-block flex-row"
+        }`}
+      >
         <div className="padding-205 flex-half">
           <Content>{Config.businessFormationDefaults.reviewStepBusinessNameLabel}</Content>
           <span className="text-accent-cool-darker">
