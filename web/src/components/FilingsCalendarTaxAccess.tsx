@@ -1,7 +1,7 @@
 import { Content } from "@/components/Content";
 import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
 import { AuthAlertContext } from "@/contexts/authAlertContext";
-import { postTaxRegistrationLookup } from "@/lib/api-client/apiClient";
+import { postTaxFilingsLookup } from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -36,7 +36,7 @@ export const FilingsCalendarTaxAccess = (): ReactElement => {
     }
     (async () => {
       if (userData.taxFilingData.registeredISO) {
-        const updatedUserData = await postTaxRegistrationLookup({
+        const updatedUserData = await postTaxFilingsLookup({
           businessName: userData.taxFilingData.businessName as string,
           taxId: userData.profileData.taxId as string,
           encryptedTaxId: userData.profileData.encryptedTaxId as string,

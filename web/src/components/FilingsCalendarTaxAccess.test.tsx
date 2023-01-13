@@ -37,8 +37,8 @@ import { renderToStaticMarkup } from "react-dom/server";
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/api-client/apiClient", () => ({
-  postTaxRegistrationOnboarding: jest.fn(),
-  postTaxRegistrationLookup: jest.fn(),
+  postTaxFilingsOnboarding: jest.fn(),
+  postTaxFilingsLookup: jest.fn(),
 }));
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 const mockApi = api as jest.Mocked<typeof api>;
@@ -225,7 +225,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
 
     it("updates taxId but not BusinessName on submit", async () => {
       renderFilingsCalendarTaxAccess(userDataWithPrefilledFields);
-      mockApi.postTaxRegistrationOnboarding.mockResolvedValue({
+      mockApi.postTaxFilingsOnboarding.mockResolvedValue({
         ...userDataWithPrefilledFields,
         taxFilingData: generateTaxFilingData({
           state: "FAILED",
@@ -266,7 +266,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
       );
       expect(screen.getByText(Config.taxCalendar.failedBusinessFieldHelper)).toBeInTheDocument();
       expect(screen.queryByText(Config.taxCalendar.failedTaxIdHelper)).not.toBeInTheDocument();
-      expect(mockApi.postTaxRegistrationOnboarding).not.toHaveBeenCalled();
+      expect(mockApi.postTaxFilingsOnboarding).not.toHaveBeenCalled();
     });
 
     it("displays in-line error and alert when taxId field is empty and save button is clicked", async () => {
@@ -284,7 +284,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
       );
       expect(screen.queryByText(Config.taxCalendar.failedBusinessFieldHelper)).not.toBeInTheDocument();
       expect(screen.getByText(Config.taxCalendar.failedTaxIdHelper)).toBeInTheDocument();
-      expect(mockApi.postTaxRegistrationOnboarding).not.toHaveBeenCalled();
+      expect(mockApi.postTaxFilingsOnboarding).not.toHaveBeenCalled();
     });
 
     it("displays in-line error and alert when businessName field and taxId field is invalid and save button is clicked", async () => {
@@ -308,12 +308,12 @@ describe("<FilingsCalendarTaxAccess />", () => {
       );
       expect(screen.getByText(Config.taxCalendar.failedBusinessFieldHelper)).toBeInTheDocument();
       expect(screen.getByText(Config.taxCalendar.failedTaxIdHelper)).toBeInTheDocument();
-      expect(mockApi.postTaxRegistrationOnboarding).not.toHaveBeenCalled();
+      expect(mockApi.postTaxFilingsOnboarding).not.toHaveBeenCalled();
     });
 
     it("displays inline errors when api failed", async () => {
       renderFilingsCalendarTaxAccess(userDataWithPrefilledFields);
-      mockApi.postTaxRegistrationOnboarding.mockImplementation(() => {
+      mockApi.postTaxFilingsOnboarding.mockImplementation(() => {
         return Promise.resolve({
           ...userDataWithPrefilledFields,
           taxFilingData: generateTaxFilingData({ state: "FAILED" }),
@@ -336,7 +336,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
 
     it("states business name specific field error in alert if api fails", async () => {
       renderFilingsCalendarTaxAccess(userDataWithPrefilledFields);
-      mockApi.postTaxRegistrationOnboarding.mockImplementation(() => {
+      mockApi.postTaxFilingsOnboarding.mockImplementation(() => {
         return Promise.resolve({
           ...userDataWithPrefilledFields,
           taxFilingData: generateTaxFilingData({ state: "FAILED", errorField: "businessName" }),
@@ -363,7 +363,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
     });
 
     it("submits taxId and businessName to api", async () => {
-      mockApi.postTaxRegistrationOnboarding.mockResolvedValue({
+      mockApi.postTaxFilingsOnboarding.mockResolvedValue({
         ...userDataWithPrefilledFields,
         taxFilingData: generateTaxFilingData({
           state: "SUCCESS",
@@ -376,7 +376,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
       await waitFor(() => {
         return expect(currentUserData().taxFilingData.state).toEqual("SUCCESS");
       });
-      expect(mockApi.postTaxRegistrationOnboarding).toHaveBeenCalledWith({
+      expect(mockApi.postTaxFilingsOnboarding).toHaveBeenCalledWith({
         taxId: userDataWithPrefilledFields.profileData.taxId,
         businessName: userDataWithPrefilledFields.profileData.businessName,
         encryptedTaxId: userDataWithPrefilledFields.profileData.encryptedTaxId,
@@ -439,7 +439,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
     });
 
     it("updates taxId and responsibleOwnerName on submit", async () => {
-      mockApi.postTaxRegistrationOnboarding.mockResolvedValue({
+      mockApi.postTaxFilingsOnboarding.mockResolvedValue({
         ...userDataWithPrefilledFields,
         taxFilingData: generateTaxFilingData({
           state: "SUCCESS",
@@ -480,7 +480,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
       expect(screen.queryByText(Config.taxCalendar.failedTaxIdHelper)).not.toBeInTheDocument();
       expect(screen.queryByText(Config.taxCalendar.failedBusinessFieldHelper)).not.toBeInTheDocument();
 
-      expect(mockApi.postTaxRegistrationOnboarding).not.toHaveBeenCalled();
+      expect(mockApi.postTaxFilingsOnboarding).not.toHaveBeenCalled();
     });
 
     it("displays in-line error and alert when taxId field is empty and save button is clicked", () => {
@@ -498,7 +498,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
         screen.queryByText(Config.taxCalendar.failedResponsibleOwnerFieldHelper)
       ).not.toBeInTheDocument();
       expect(screen.getByText(Config.taxCalendar.failedTaxIdHelper)).toBeInTheDocument();
-      expect(mockApi.postTaxRegistrationOnboarding).not.toHaveBeenCalled();
+      expect(mockApi.postTaxFilingsOnboarding).not.toHaveBeenCalled();
     });
 
     it("displays in-line error and alert when responsibleOwnerName field and taxId field is invalid and save button is clicked", () => {
@@ -522,7 +522,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
       expect(screen.getByText(Config.taxCalendar.failedTaxIdHelper)).toBeInTheDocument();
       expect(screen.queryByText(Config.taxCalendar.failedBusinessFieldHelper)).not.toBeInTheDocument();
 
-      expect(mockApi.postTaxRegistrationOnboarding).not.toHaveBeenCalled();
+      expect(mockApi.postTaxFilingsOnboarding).not.toHaveBeenCalled();
     });
 
     it("displays error when the responsibleOwnerName field is empty on blur", () => {
@@ -536,7 +536,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
 
     it("displays alert & inline errors when api failed", async () => {
       renderFilingsCalendarTaxAccess(userDataWithPrefilledFields);
-      mockApi.postTaxRegistrationOnboarding.mockImplementation(() => {
+      mockApi.postTaxFilingsOnboarding.mockImplementation(() => {
         return Promise.resolve({
           ...userDataWithPrefilledFields,
           taxFilingData: generateTaxFilingData({ state: "FAILED" }),
@@ -560,7 +560,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
 
     it("states responsible owner name specific field error in alert if api fails", async () => {
       renderFilingsCalendarTaxAccess(userDataWithPrefilledFields);
-      mockApi.postTaxRegistrationOnboarding.mockImplementation(() => {
+      mockApi.postTaxFilingsOnboarding.mockImplementation(() => {
         return Promise.resolve({
           ...userDataWithPrefilledFields,
           taxFilingData: generateTaxFilingData({ state: "FAILED", errorField: "businessName" }),
@@ -578,7 +578,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
     });
 
     it("submits taxId and responsibleOwnerName to api", async () => {
-      mockApi.postTaxRegistrationOnboarding.mockResolvedValue({
+      mockApi.postTaxFilingsOnboarding.mockResolvedValue({
         ...userDataWithPrefilledFields,
         taxFilingData: generateTaxFilingData({
           state: "SUCCESS",
@@ -592,7 +592,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
       await waitFor(() => {
         return expect(currentUserData().taxFilingData.state).toEqual("SUCCESS");
       });
-      expect(mockApi.postTaxRegistrationOnboarding).toHaveBeenCalledWith({
+      expect(mockApi.postTaxFilingsOnboarding).toHaveBeenCalledWith({
         taxId: userDataWithPrefilledFields.profileData.taxId,
         businessName: userDataWithPrefilledFields.profileData.responsibleOwnerName,
         encryptedTaxId: userDataWithPrefilledFields.profileData.encryptedTaxId,
@@ -625,7 +625,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
     });
 
     it("displays alert on success", async () => {
-      mockApi.postTaxRegistrationOnboarding.mockResolvedValue({
+      mockApi.postTaxFilingsOnboarding.mockResolvedValue({
         ...userData,
         taxFilingData: generateTaxFilingData({
           state: "SUCCESS",
@@ -652,7 +652,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
         },
       });
 
-      mockApi.postTaxRegistrationOnboarding.mockResolvedValue({
+      mockApi.postTaxFilingsOnboarding.mockResolvedValue({
         ...userData,
         taxFilingData: generateTaxFilingData({
           state: "SUCCESS",
@@ -674,7 +674,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
     describe("on api failed state response", () => {
       it("displays unknown-error alert with unknown api error", async () => {
         renderFilingsCalendarTaxAccess(userData);
-        mockApi.postTaxRegistrationOnboarding.mockResolvedValue({
+        mockApi.postTaxFilingsOnboarding.mockResolvedValue({
           ...userData,
           taxFilingData: generateTaxFilingData({
             state: "API_ERROR",
@@ -695,7 +695,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
 
       it("displays unknown-error alert with api 500 request failure", async () => {
         renderFilingsCalendarTaxAccess(userData);
-        mockApi.postTaxRegistrationOnboarding.mockReturnValue(Promise.reject(500));
+        mockApi.postTaxFilingsOnboarding.mockReturnValue(Promise.reject(500));
         openModal();
         clickSave();
         await screen.findByRole("alert");
@@ -718,18 +718,18 @@ describe("<FilingsCalendarTaxAccess />", () => {
             registeredISO: undefined,
           }),
         });
-        expect(mockApi.postTaxRegistrationLookup).not.toHaveBeenCalled();
+        expect(mockApi.postTaxFilingsLookup).not.toHaveBeenCalled();
       });
 
       it("does taxFiling lookup on page load if registered", async () => {
-        mockApi.postTaxRegistrationLookup.mockResolvedValue(userData);
+        mockApi.postTaxFilingsLookup.mockResolvedValue(userData);
         renderFilingsCalendarTaxAccess({
           ...userData,
           taxFilingData: generateTaxFilingData({
             registeredISO: getCurrentDateISOString(),
           }),
         });
-        expect(mockApi.postTaxRegistrationLookup).toHaveBeenCalled();
+        expect(mockApi.postTaxFilingsLookup).toHaveBeenCalled();
         await waitFor(() => {
           return expect(userDataUpdatedNTimes()).toEqual(1);
         });
@@ -743,7 +743,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
             registeredISO: undefined,
           }),
         });
-        expect(mockApi.postTaxRegistrationLookup).not.toHaveBeenCalled();
+        expect(mockApi.postTaxFilingsLookup).not.toHaveBeenCalled();
         expect(screen.queryByTestId("pending-container")).not.toBeInTheDocument();
         expect(screen.getByTestId("button-container")).toBeInTheDocument();
       });
@@ -756,13 +756,13 @@ describe("<FilingsCalendarTaxAccess />", () => {
             registeredISO: undefined,
           }),
         });
-        expect(mockApi.postTaxRegistrationLookup).not.toHaveBeenCalled();
+        expect(mockApi.postTaxFilingsLookup).not.toHaveBeenCalled();
         expect(screen.queryByTestId("pending-container")).not.toBeInTheDocument();
         expect(screen.getByTestId("button-container")).toBeInTheDocument();
       });
 
       it("hides pending and button components when state is SUCCESS", async () => {
-        mockApi.postTaxRegistrationLookup.mockResolvedValue({
+        mockApi.postTaxFilingsLookup.mockResolvedValue({
           ...pendingStateUserData,
           taxFilingData: generateTaxFilingData({
             registeredISO: getCurrentDateISOString(),
@@ -772,7 +772,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
 
         renderFilingsCalendarTaxAccess(pendingStateUserData);
 
-        expect(mockApi.postTaxRegistrationLookup).toHaveBeenCalled();
+        expect(mockApi.postTaxFilingsLookup).toHaveBeenCalled();
         await waitFor(() => {
           return expect(userDataUpdatedNTimes()).toEqual(1);
         });
@@ -784,7 +784,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
       });
 
       it("hides pending and button components when state is API_ERROR but registered", async () => {
-        mockApi.postTaxRegistrationLookup.mockResolvedValue({
+        mockApi.postTaxFilingsLookup.mockResolvedValue({
           ...pendingStateUserData,
           taxFilingData: generateTaxFilingData({
             registeredISO: getCurrentDateISOString(),
@@ -794,7 +794,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
 
         renderFilingsCalendarTaxAccess(pendingStateUserData);
 
-        expect(mockApi.postTaxRegistrationLookup).toHaveBeenCalled();
+        expect(mockApi.postTaxFilingsLookup).toHaveBeenCalled();
         await waitFor(() => {
           return expect(userDataUpdatedNTimes()).toEqual(1);
         });
@@ -806,7 +806,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
       });
 
       it("shows registration followup component when state is SUCCESS but it's before the Saturday after registration", async () => {
-        mockApi.postTaxRegistrationLookup.mockResolvedValue({
+        mockApi.postTaxFilingsLookup.mockResolvedValue({
           ...pendingStateUserData,
           taxFilingData: generateTaxFilingData({
             state: "SUCCESS",
@@ -826,10 +826,10 @@ describe("<FilingsCalendarTaxAccess />", () => {
       });
 
       it("shows pending component when state is PENDING", async () => {
-        mockApi.postTaxRegistrationLookup.mockResolvedValue(pendingStateUserData);
+        mockApi.postTaxFilingsLookup.mockResolvedValue(pendingStateUserData);
         renderFilingsCalendarTaxAccess(pendingStateUserData);
 
-        expect(mockApi.postTaxRegistrationLookup).toHaveBeenCalled();
+        expect(mockApi.postTaxFilingsLookup).toHaveBeenCalled();
         await waitFor(() => {
           return expect(userDataUpdatedNTimes()).toEqual(1);
         });

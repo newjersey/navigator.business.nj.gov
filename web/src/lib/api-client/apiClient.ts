@@ -37,7 +37,7 @@ export const getCompletedFiling = (): Promise<UserData> => {
   return get(`/completed-filing`);
 };
 
-export const postTaxRegistrationOnboarding = (props: {
+export const postTaxFilingsOnboarding = (props: {
   businessName: string;
   taxId: string;
   encryptedTaxId: string;
@@ -45,7 +45,7 @@ export const postTaxRegistrationOnboarding = (props: {
   return post(`/taxFilings/onboarding`, props);
 };
 
-export const postTaxRegistrationLookup = (props: {
+export const postTaxFilingsLookup = (props: {
   businessName: string;
   taxId: string;
   encryptedTaxId: string;

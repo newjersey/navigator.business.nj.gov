@@ -12,8 +12,8 @@ import {
   postFeedback,
   postIssue,
   postNewsletter,
-  postTaxRegistrationLookup,
-  postTaxRegistrationOnboarding,
+  postTaxFilingsLookup,
+  postTaxFilingsOnboarding,
   postUserData,
 } from "./apiClient";
 
@@ -67,7 +67,7 @@ describe("apiClient", () => {
   it("posts taxFilings onboarding request", async () => {
     mockAxios.post.mockResolvedValue({ data: {} });
     const taxIdAndBusinessName = generateTaxIdAndBusinessName({});
-    await postTaxRegistrationOnboarding(taxIdAndBusinessName);
+    await postTaxFilingsOnboarding(taxIdAndBusinessName);
     expect(mockAxios.post).toHaveBeenCalledWith("/api/taxFilings/onboarding", taxIdAndBusinessName, {
       headers: { Authorization: "Bearer some-token" },
     });
@@ -76,7 +76,7 @@ describe("apiClient", () => {
   it("posts taxFilings lookup request", async () => {
     mockAxios.post.mockResolvedValue({ data: {} });
     const taxIdAndBusinessName = generateTaxIdAndBusinessName({});
-    await postTaxRegistrationLookup(taxIdAndBusinessName);
+    await postTaxFilingsLookup(taxIdAndBusinessName);
     expect(mockAxios.post).toHaveBeenCalledWith("/api/taxFilings/lookup", taxIdAndBusinessName, {
       headers: { Authorization: "Bearer some-token" },
     });
