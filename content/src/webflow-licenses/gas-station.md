@@ -1,0 +1,13 @@
+---
+id: "gas-station"
+webflowId: "5f77296a71c49efb25913b83"
+urlSlug: "gas-station"
+name: "Gas Station"
+callToActionLink: "https://www.state.nj.us/treasury/taxation/prntmf.shtml"
+callToActionText: ""
+issuingAgency: "Department of Treasury"
+issuingDivision: "Division of Revenue, Business Tax Registration"
+divisionPhone: "(609) 292-9292"
+industryId: "Gas Station"
+licenseCertificationClassification: "LICENSE"
+---

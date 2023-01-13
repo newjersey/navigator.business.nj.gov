@@ -1,0 +1,13 @@
+---
+id: "elevator-inspector-ucc"
+webflowId: "5f772988a195c80a3815b18a"
+urlSlug: "elevator-inspector-ucc"
+name: "Elevator Inspector (UCC)"
+callToActionLink: "http://nj.gov/dca/divisions/codes/offices/licensing_cont_ed.html"
+callToActionText: ""
+issuingAgency: "Department of Community Affairs"
+issuingDivision: "Bureau of Code Services, Licensing Unit"
+divisionPhone: "(609) 984-7834"
+industryId: "Elevator Inspector"
+licenseCertificationClassification: "LICENSE"
+---

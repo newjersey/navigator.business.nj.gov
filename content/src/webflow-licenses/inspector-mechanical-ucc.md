@@ -1,0 +1,13 @@
+---
+id: "inspector-mechanical-ucc"
+webflowId: "5f772996d2749af8c79cf7e0"
+urlSlug: "inspector-mechanical-ucc"
+name: "Inspector-Mechanical (UCC)"
+callToActionLink: "http://nj.gov/dca/divisions/codes/offices/licensing_cont_ed.html"
+callToActionText: ""
+issuingAgency: "Department of Community Affairs"
+issuingDivision: "Bureau of Code Services, Licensing Unit"
+divisionPhone: "(609) 984-7834"
+industryId: "Mechanical Inspector"
+licenseCertificationClassification: "LICENSE"
+---

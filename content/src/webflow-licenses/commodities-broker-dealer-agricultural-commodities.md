@@ -1,0 +1,13 @@
+---
+id: "commodities-broker-dealer-agricultural-commodities"
+webflowId: "5f7728e18150be052bf3be1b"
+urlSlug: "commodities-broker-dealer-agricultural-commodities"
+name: "Commodities Broker & Dealer (Agricultural Commodities)"
+callToActionLink: "https://www.nj.gov/agriculture/divisions/md/prog/licensing.html"
+callToActionText: ""
+issuingAgency: "Department of Agriculture"
+issuingDivision: "Marketing and Development Bureau"
+divisionPhone: "(609) 292-5576"
+industryId: "Commodities Broker"
+licenseCertificationClassification: "LICENSE & BOND"
+---

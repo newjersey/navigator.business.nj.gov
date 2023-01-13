@@ -91,8 +91,7 @@ const fundingStatusMap = [
 const fundingCollectionId = "6112e6b88aa567fdbc725ffc";
 
 const getCurrentFundings = async () => {
-  const itemResponse = await getAllItems(fundingCollectionId);
-  return itemResponse.data.items;
+  return await getAllItems(fundingCollectionId);
 };
 
 const contentMdToObject = (content) => {

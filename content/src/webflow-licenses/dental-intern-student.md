@@ -1,0 +1,13 @@
+---
+id: "dental-intern-student"
+webflowId: "5f772984f17efbe0d9eefb3e"
+urlSlug: "dental-intern-student"
+name: "Dental Intern/Student"
+callToActionLink: "http://njconsumeraffairs.gov/den/Pages/default.aspx"
+callToActionText: ""
+issuingAgency: "Division of Consumer Affairs"
+issuingDivision: "State Board of Dentistry"
+divisionPhone: "(973) 504-6405"
+industryId: "Dental Intern"
+licenseCertificationClassification: "LICENSE"
+---

@@ -1,0 +1,13 @@
+---
+id: "alarms-security"
+webflowId: "5f7729705ef8c193ba019ec6"
+urlSlug: "alarms-security"
+name: "Alarms for Security"
+callToActionLink: "http://njconsumeraffairs.gov/elec/Pages/applications.aspx"
+callToActionText: ""
+issuingAgency: "Division of Consumer Affairs"
+issuingDivision: "Board of Examiners of Electrical Contractors, Fire Alarm, Burglar Alarm and Locksmith Advisory Committee"
+divisionPhone: "(973) 504-6245"
+industryId: "Security Alarms"
+licenseCertificationClassification: "LICENSE"
+---

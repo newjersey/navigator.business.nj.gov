@@ -1,0 +1,13 @@
+---
+id: "black-seal"
+webflowId: "5f77294f8e9f8735f86859bc"
+urlSlug: "black-seal"
+name: "Black Seal"
+callToActionLink: "https://nj.gov/labor/lsse/content/bbpvc.html"
+callToActionText: ""
+issuingAgency: "Department of Labor and Workforce Development"
+issuingDivision: "Office of Boiler and Pressure Vessel Compliance"
+divisionPhone: "(609) 292-2345"
+industryId: "Black Seal"
+licenseCertificationClassification: "LICENSE"
+---

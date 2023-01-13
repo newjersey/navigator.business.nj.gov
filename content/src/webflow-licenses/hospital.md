@@ -1,0 +1,13 @@
+---
+id: "hospital"
+webflowId: "5f772942f278ccc751b0ce20"
+urlSlug: "hospital"
+name: "Hospital"
+callToActionLink: "http://nj.gov/health/healthfacilities/certificate-need/"
+callToActionText: ""
+issuingAgency: "Department of Health"
+issuingDivision: "Division of Health Facilities Evaluation and Licensing, Certificate of Need and Health Care Facility Licensure"
+divisionPhone: "(609) 292-5960"
+industryId: "Hospital"
+licenseCertificationClassification: "LICENSE"
+---
