@@ -54,9 +54,7 @@ describe("useUserData", () => {
           <RoadmapContext.Provider
             value={{
               roadmap: generateRoadmap({}),
-              sectionCompletion: undefined,
               setRoadmap: mockSetRoadmap,
-              setSectionCompletion: jest.fn(),
             }}
           >
             <SWRConfig

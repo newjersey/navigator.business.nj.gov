@@ -5,7 +5,7 @@ import { ContextualInfoPanel } from "@/components/ContextualInfoPanel";
 import { AuthReducer, authReducer } from "@/lib/auth/AuthContext";
 import { getCurrentUser } from "@/lib/auth/sessionHelper";
 import { onGuestSignIn, onSignIn } from "@/lib/auth/signinHelper";
-import { Roadmap, SectionCompletion, UpdateQueue, UserDataError } from "@/lib/types/types";
+import { Roadmap, UpdateQueue, UserDataError } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffect } from "@/lib/utils/helpers";
 import { Hub, HubCapsule } from "@aws-amplify/core";
@@ -51,7 +51,6 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
 
   const [authSnackbar, setAuthSnackbar] = useState<boolean>(false);
   const [authModal, setAuthModal] = useState<boolean>(false);
-  const [sectionCompletion, setSectionCompletion] = useState<SectionCompletion | undefined>(undefined);
   const [contextualInfo, setContextualInfo] = useState<ContextualInfo>({
     isVisible: false,
     header: "",
@@ -151,9 +150,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
               <UpdateQueueContext.Provider value={{ updateQueue, setUpdateQueue }}>
                 <UserDataErrorContext.Provider value={{ userDataError, setUserDataError }}>
                   <ContextualInfoContext.Provider value={{ contextualInfo, setContextualInfo }}>
-                    <RoadmapContext.Provider
-                      value={{ roadmap, setRoadmap, sectionCompletion, setSectionCompletion }}
-                    >
+                    <RoadmapContext.Provider value={{ roadmap, setRoadmap }}>
                       <AuthAlertContext.Provider
                         value={{
                           isAuthenticated: state.isAuthenticated,

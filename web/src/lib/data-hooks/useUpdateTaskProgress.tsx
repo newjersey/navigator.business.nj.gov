@@ -10,12 +10,12 @@ export const useUpdateTaskProgress = (): {
   congratulatoryModal: ReactNode;
 } => {
   const [nextSection, setNextSection] = useState<SectionType | undefined>(undefined);
-  const { roadmap, sectionCompletion, updateSectionCompletion } = useRoadmap();
+  const { roadmap, isSectionCompleted } = useRoadmap();
   const { userData, updateQueue } = useUserData();
   const [congratulatoryModalIsOpen, setCongratulatoryModalIsOpen] = useState<boolean>(false);
 
   const queueUpdateTaskProgress = (taskId: string, newValue: TaskProgress): void => {
-    if (!sectionCompletion || !roadmap || !updateQueue || !userData) {
+    if (!roadmap || !updateQueue || !userData) {
       return;
     }
 
@@ -25,7 +25,7 @@ export const useUpdateTaskProgress = (): {
     const { currentSection, nextSection } = getSectionPositions(updatedSectionCompletion, roadmap, taskId);
 
     const sectionStatusHasChanged =
-      updatedSectionCompletion[currentSection] !== sectionCompletion[currentSection];
+      updatedSectionCompletion[currentSection] !== isSectionCompleted(currentSection);
     const sectionExists = updatedSectionCompletion[currentSection];
 
     if (sectionStatusHasChanged && sectionExists) {
@@ -37,8 +37,6 @@ export const useUpdateTaskProgress = (): {
         }),
       });
     }
-
-    updateSectionCompletion(updatedSectionCompletion);
   };
 
   const handleModalClose = (): void => {
