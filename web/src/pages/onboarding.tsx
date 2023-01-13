@@ -40,7 +40,6 @@ import {
   createEmptyUser,
   createEmptyUserData,
   LookupIndustryById,
-  LookupLegalStructureById,
   Municipality,
   ProfileData,
   UserData,
@@ -113,15 +112,6 @@ const OnboardingPage = (props: Props): ReactElement => {
         },
       };
     };
-
-    if (profileData.legalStructureId) {
-      const requiresPublicFiling = LookupLegalStructureById(
-        profileData.legalStructureId
-      ).requiresPublicFiling;
-      if (!requiresPublicFiling) {
-        removePageFromFlow("date-for-public-filing", "OWNING");
-      }
-    }
 
     if (profileData.businessPersona === "FOREIGN" && profileData.foreignBusinessType !== "NEXUS") {
       removePageFromFlow("industry-page", "FOREIGN");

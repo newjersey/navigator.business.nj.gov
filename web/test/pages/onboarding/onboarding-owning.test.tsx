@@ -10,13 +10,7 @@ import {
   renderPage,
   runSelfRegPageTests,
 } from "@/test/pages/onboarding/helpers-onboarding";
-import {
-  createEmptyUserData,
-  defaultDateFormat,
-  generateMunicipality,
-  getCurrentDate,
-  ProfileData,
-} from "@businessnjgovnavigator/shared/";
+import { createEmptyUserData, generateMunicipality, ProfileData } from "@businessnjgovnavigator/shared/";
 import { act, screen, waitFor, within } from "@testing-library/react";
 
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));
@@ -33,8 +27,6 @@ const mockApi = api as jest.Mocked<typeof api>;
 
 const Config = getMergedConfig();
 
-const date = getCurrentDate().subtract(1, "month").date(1);
-const dateOfFormation = date.format(defaultDateFormat);
 const generateTestUserData = (overrides: Partial<ProfileData>) => {
   return generateUserData({
     profileData: generateProfileData({
@@ -92,48 +84,29 @@ describe("onboarding - owning a business", () => {
   });
 
   describe("page 2", () => {
-    it("skips date-of-formation page if legal structure  does not require Public Filing", () => {
-      const userData = generateTestUserData({
-        businessPersona: "OWNING",
-        legalStructureId: "sole-proprietorship",
-      });
-      useMockRouter({ isReady: true, query: { page: "2" } });
-      renderPage({ userData });
-      expect(screen.queryByLabelText("Date of formation")).not.toBeInTheDocument();
-      expect(screen.getByLabelText("Sector")).toBeInTheDocument();
-
-      expect(
-        screen.getByText(
-          templateEval(Config.onboardingDefaults.stepXofYTemplate, { currentPage: "2", totalPages: "3" })
-        )
-      ).toBeInTheDocument();
-    });
-  });
-
-  describe("page 3", () => {
-    it("prevents user from moving after Step 3 if you have not entered a sector", async () => {
+    it("prevents user from moving after Step 2 if you have not entered a sector", async () => {
       const userData = generateCCorpTestUserData({ sectorId: undefined });
-      useMockRouter({ isReady: true, query: { page: "3" } });
+      useMockRouter({ isReady: true, query: { page: "2" } });
       const { page } = renderPage({ userData });
       act(() => {
         return page.clickNext();
       });
       await waitFor(() => {
-        expect(screen.getByTestId("step-3")).toBeInTheDocument();
+        expect(screen.getByTestId("step-2")).toBeInTheDocument();
       });
-      expect(screen.queryByTestId("step-4")).not.toBeInTheDocument();
+      expect(screen.queryByTestId("step-3")).not.toBeInTheDocument();
       expect(
         screen.getByText(Config.profileDefaults.fields.sectorId.default.errorTextRequired)
       ).toBeInTheDocument();
       expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
     });
 
-    it("allows user to move past Step 3 if you have entered a sector", async () => {
+    it("allows user to move past Step 2 if you have entered a sector", async () => {
       const userData = generateCCorpTestUserData({ sectorId: undefined });
-      useMockRouter({ isReady: true, query: { page: "3" } });
+      useMockRouter({ isReady: true, query: { page: "2" } });
       const { page } = renderPage({ userData });
       page.selectByValue("Sector", "clean-energy");
-      await page.visitStep(4);
+      await page.visitStep(3);
 
       await waitFor(() => {
         expect(
@@ -141,7 +114,7 @@ describe("onboarding - owning a business", () => {
         ).not.toBeInTheDocument();
       });
       expect(screen.queryByTestId("snackbar-alert-ERROR")).not.toBeInTheDocument();
-      expect(screen.queryByTestId("step-3")).not.toBeInTheDocument();
+      expect(screen.queryByTestId("step-2")).not.toBeInTheDocument();
     });
   });
 
@@ -154,49 +127,17 @@ describe("onboarding - owning a business", () => {
     expect(screen.getByTestId("step-1")).toBeInTheDocument();
 
     await page.visitStep(2);
-    page.selectDate("Date of formation", date);
+    page.selectByValue("Sector", "clean-energy");
     expect(mockRouter.mockPush).toHaveBeenCalledWith({ query: { page: 2 } }, undefined, { shallow: true });
     expect(screen.getByTestId("step-2")).toBeInTheDocument();
 
     await page.visitStep(3);
-    page.selectByValue("Sector", "clean-energy");
+
     expect(mockRouter.mockPush).toHaveBeenCalledWith({ query: { page: 3 } }, undefined, { shallow: true });
     expect(screen.getByTestId("step-3")).toBeInTheDocument();
-
-    await page.visitStep(4);
-
-    expect(mockRouter.mockPush).toHaveBeenCalledWith({ query: { page: 4 } }, undefined, { shallow: true });
-    expect(screen.getByTestId("step-4")).toBeInTheDocument();
   });
 
-  it("shows correct next-button text on each page if user requires legal filings", async () => {
-    const newark = generateMunicipality({ displayName: "Newark" });
-    const { page } = renderPage({ municipalities: [newark] });
-    page.chooseRadio("business-persona-owning");
-    page.selectByValue("Business structure", "c-corporation");
-    const page1 = within(screen.getByTestId("page-1-form"));
-    expect(page1.getByText(Config.onboardingDefaults.nextButtonText)).toBeInTheDocument();
-    expect(page1.queryByText(Config.onboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
-
-    await page.visitStep(2);
-    page.selectDate("Date of formation", date);
-    const page2 = within(screen.getByTestId("page-2-form"));
-    expect(page2.getByText(Config.onboardingDefaults.nextButtonText)).toBeInTheDocument();
-    expect(page2.queryByText(Config.onboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
-
-    await page.visitStep(3);
-    page.selectByValue("Sector", "clean-energy");
-    const page3 = within(screen.getByTestId("page-3-form"));
-    expect(page3.getByText(Config.onboardingDefaults.nextButtonText)).toBeInTheDocument();
-    expect(page3.queryByText(Config.onboardingDefaults.finalNextButtonText)).not.toBeInTheDocument();
-
-    await page.visitStep(4);
-    const page4 = within(screen.getByTestId("page-4-form"));
-    expect(page4.queryByText(Config.onboardingDefaults.nextButtonText)).not.toBeInTheDocument();
-    expect(page4.getByText(Config.onboardingDefaults.finalNextButtonText)).toBeInTheDocument();
-  });
-
-  it("shows correct next-button text on each page if legal structure  does not require Public Filing", async () => {
+  it("shows correct next-button text on each page", async () => {
     const newark = generateMunicipality({ displayName: "Newark" });
     const { page } = renderPage({ municipalities: [newark] });
     page.chooseRadio("business-persona-owning");
@@ -225,11 +166,8 @@ describe("onboarding - owning a business", () => {
     page.selectByValue("Business structure", "c-corporation");
     await page.visitStep(2);
     expect(currentUserData().profileData.businessPersona).toEqual("OWNING");
-    page.selectDate("Date of formation", date);
-    await page.visitStep(3);
-    expect(currentUserData().profileData.dateOfFormation).toEqual(dateOfFormation);
     page.selectByValue("Sector", "clean-energy");
-    await page.visitStep(4);
+    await page.visitStep(3);
     expect(currentUserData()).toEqual({
       ...initialUserData,
       formProgress: "UNSTARTED",
@@ -238,7 +176,6 @@ describe("onboarding - owning a business", () => {
         businessPersona: "OWNING",
         homeBasedBusiness: undefined,
         legalStructureId: "c-corporation",
-        dateOfFormation,
         sectorId: "clean-energy",
         industryId: "generic",
         operatingPhase: "GUEST_MODE_OWNING",
@@ -255,7 +192,6 @@ describe("onboarding - owning a business", () => {
       profileData: generateProfileData({
         businessPersona: "OWNING",
         legalStructureId: "c-corporation",
-        dateOfFormation,
         sectorId: "clean-energy",
       }),
     });
@@ -265,8 +201,6 @@ describe("onboarding - owning a business", () => {
 
     expect(page.getLegalStructureValue()).toEqual("c-corporation");
     await page.visitStep(2);
-    expect(page.getDateOfFormationValue()).toEqual(date.format("MM/YYYY"));
-    await page.visitStep(3);
     expect(page.getSectorIDValue()).toEqual("Clean Energy");
   });
 
@@ -286,7 +220,6 @@ describe("onboarding - owning a business", () => {
     expect(page.getRadioButton("Business Status - Owning")).toBeChecked();
     await page.visitStep(2);
     await page.visitStep(3);
-    await page.visitStep(4);
     page.clickNext();
 
     await waitFor(() => {
@@ -297,11 +230,7 @@ describe("onboarding - owning a business", () => {
     });
   });
 
-  describe("validates self-reg step for legal structures that require public filing", () => {
-    runSelfRegPageTests({ businessPersona: "OWNING", requiresPublicFiling: true, selfRegPage: "4" });
-  });
-
-  describe("validates self-reg step for legal structures that do not require public filing", () => {
-    runSelfRegPageTests({ businessPersona: "OWNING", requiresPublicFiling: false, selfRegPage: "3" });
+  describe("validates self-reg step", () => {
+    runSelfRegPageTests({ businessPersona: "OWNING", selfRegPage: "3" });
   });
 });
