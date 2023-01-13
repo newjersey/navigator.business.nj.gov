@@ -103,11 +103,6 @@ export const NavBarDesktop = (): ReactElement => {
   const AuthenticatedMenu = () => {
     return (
       <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-        <MenuItem onClick={handleProfileClick}>
-          <Button style="tertiary" textBold smallText>
-            {Config.navigationDefaults.myNJAccountText}
-          </Button>
-        </MenuItem>
         <MenuItem
           onClick={() => {
             analytics.event.account_menu_my_profile.click.go_to_profile_screen();
@@ -116,6 +111,11 @@ export const NavBarDesktop = (): ReactElement => {
         >
           <Button style="tertiary" textBold smallText dataTestid="profile-link">
             {Config.navigationDefaults.profileLinkText}
+          </Button>
+        </MenuItem>{" "}
+        <MenuItem onClick={handleProfileClick}>
+          <Button style="tertiary" textBold smallText>
+            {Config.navigationDefaults.myNJAccountText}
           </Button>
         </MenuItem>
         <MenuItem onClick={handleLogoutClick}>
