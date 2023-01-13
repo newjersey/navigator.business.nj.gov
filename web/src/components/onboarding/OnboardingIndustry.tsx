@@ -2,6 +2,7 @@ import { FieldLabelProfile } from "@/components/onboarding/FieldLabelProfile";
 import { IndustryDropdown } from "@/components/onboarding/IndustryDropdown";
 import { OnboardingEmploymentAgency } from "@/components/onboarding/OnboardingEmploymentAgency";
 import { OnboardingHomeContractor } from "@/components/onboarding/OnboardingHomeContractor";
+import { OnboardingRadioQuestion } from "@/components/onboarding/OnboardingRadioQuestion";
 import { ConfigType } from "@/contexts/configContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -10,7 +11,6 @@ import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { ProfileContentField, ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import { IndustrySpecificData, industrySpecificDataChoices } from "@businessnjgovnavigator/shared";
 import { FocusEvent, ReactElement, useContext } from "react";
-import { OnboardingRadioQuestion } from "./OnboardingRadioQuestion";
 
 interface Props {
   onValidation: (field: ProfileFields, invalid: boolean) => void;

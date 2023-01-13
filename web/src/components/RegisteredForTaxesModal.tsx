@@ -1,7 +1,11 @@
 import { Content } from "@/components/Content";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { FieldLabelModal } from "@/components/onboarding/FieldLabelModal";
+import { OnboardingBusinessName } from "@/components/onboarding/OnboardingBusinessName";
+import { OnboardingExistingEmployees } from "@/components/onboarding/OnboardingExistingEmployees";
 import { OnboardingMunicipality } from "@/components/onboarding/OnboardingMunicipality";
+import { OnboardingOwnership } from "@/components/onboarding/OnboardingOwnership";
+import { OnboardingTaxId } from "@/components/onboarding/OnboardingTaxId";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -13,10 +17,6 @@ import {
   ProfileData,
 } from "@businessnjgovnavigator/shared";
 import { ReactElement, useEffect, useState } from "react";
-import { OnboardingBusinessName } from "./onboarding/OnboardingBusinessName";
-import { OnboardingExistingEmployees } from "./onboarding/OnboardingExistingEmployees";
-import { OnboardingOwnership } from "./onboarding/OnboardingOwnership";
-import { OnboardingTaxId } from "./onboarding/OnboardingTaxId";
 
 interface Props {
   isOpen: boolean;

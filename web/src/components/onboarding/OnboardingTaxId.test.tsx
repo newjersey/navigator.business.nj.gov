@@ -1,10 +1,10 @@
+import { OnboardingTaxId } from "@/components/onboarding/OnboardingTaxId";
 import { getMergedConfig } from "@/contexts/configContext";
 import { createProfileFieldErrorMap, ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import { generateProfileData } from "@/test/factories";
 import { currentProfileData, WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
 import { ProfileData } from "@businessnjgovnavigator/shared";
 import { fireEvent, render, screen } from "@testing-library/react";
-import { OnboardingTaxId } from "./OnboardingTaxId";
 
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 const Config = getMergedConfig();

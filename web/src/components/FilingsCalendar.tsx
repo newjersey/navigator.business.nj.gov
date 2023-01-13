@@ -1,5 +1,7 @@
 import { ArrowTooltip } from "@/components/ArrowTooltip";
+import { Content } from "@/components/Content";
 import { FilingsCalendarTaxAccess } from "@/components/FilingsCalendarTaxAccess";
+import { Button } from "@/components/njwds-extended/Button";
 import { Tag } from "@/components/njwds-extended/Tag";
 import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -22,8 +24,6 @@ import { useMediaQuery } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { ReactElement } from "react";
-import { Content } from "./Content";
-import { Button } from "./njwds-extended/Button";
 
 interface Props {
   operateReferences: Record<string, OperateReference>;

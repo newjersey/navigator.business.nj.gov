@@ -1,3 +1,4 @@
+import { SidebarCardRegisteredForTaxesNudge } from "@/components/dashboard/SidebarCardRegisteredForTaxesNudge";
 import { getMergedConfig } from "@/contexts/configContext";
 import * as buildUserRoadmap from "@/lib/roadmap/buildUserRoadmap";
 import { SidebarCardContent } from "@/lib/types/types";
@@ -6,6 +7,7 @@ import {
   generateProfileData,
   generateRoadmap,
   generateSidebarCardContent,
+  generateTaxFiling,
   generateTaxFilingData,
   generateUserData,
 } from "@/test/factories";
@@ -20,8 +22,6 @@ import { getCurrentDateISOString } from "@businessnjgovnavigator/shared/dateHelp
 import { taxTaskId } from "@businessnjgovnavigator/shared/index";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
-import { generateTaxFiling } from "../../../test/factories";
-import { SidebarCardRegisteredForTaxesNudge } from "./SidebarCardRegisteredForTaxesNudge";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));

@@ -1,3 +1,5 @@
+import { Roadmap } from "@/components/dashboard/Roadmap";
+import { Button } from "@/components/njwds-extended/Button";
 import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
@@ -6,8 +8,6 @@ import { MediaQueries } from "@/lib/PageSizes";
 import { templateEval } from "@/lib/utils/helpers";
 import { useMediaQuery } from "@mui/material";
 import { ReactElement } from "react";
-import { Button } from "../njwds-extended/Button";
-import { Roadmap } from "./Roadmap";
 
 export const HideableTasks = (): ReactElement => {
   const { userData, update } = useUserData();

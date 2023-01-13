@@ -37,6 +37,10 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
+  industriesWithEssentialQuestion,
+  industriesWithOutEssentialQuestion,
+} from "@/test/pages/onboarding/helpers-onboarding";
+import {
   createEmptyUserData,
   defaultDateFormat,
   einTaskId,
@@ -58,10 +62,6 @@ import {
 } from "@businessnjgovnavigator/shared";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
-import {
-  industriesWithEssentialQuestion,
-  industriesWithOutEssentialQuestion,
-} from "./onboarding/helpers-onboarding";
 
 const date = getCurrentDate().subtract(1, "month").date(1);
 const Config = getMergedConfig();

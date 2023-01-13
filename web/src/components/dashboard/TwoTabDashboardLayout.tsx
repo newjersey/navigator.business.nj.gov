@@ -1,3 +1,4 @@
+import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { filterCertifications } from "@/lib/domain-logic/filterCertifications";
@@ -12,7 +13,6 @@ import { TabContext, TabList, TabPanel } from "@mui/lab/";
 import Tab from "@mui/material/Tab";
 import * as React from "react";
 import { ReactElement, ReactNode, useEffect } from "react";
-import { SingleColumnContainer } from "../njwds/SingleColumnContainer";
 
 interface Props {
   firstTab: ReactElement;

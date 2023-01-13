@@ -1,3 +1,5 @@
+import { SidebarCardGeneric } from "@/components/dashboard/SidebarCardGeneric";
+import { RegisteredForTaxesModal } from "@/components/RegisteredForTaxesModal";
 import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { SidebarCardContent } from "@/lib/types/types";
@@ -5,8 +7,6 @@ import analytics from "@/lib/utils/analytics";
 import { taxTaskId } from "@businessnjgovnavigator/shared";
 import { useRouter } from "next/router";
 import { ReactElement, useState } from "react";
-import { RegisteredForTaxesModal } from "../RegisteredForTaxesModal";
-import { SidebarCardGeneric } from "./SidebarCardGeneric";
 
 type Props = {
   card: SidebarCardContent;

@@ -3,6 +3,7 @@ import { Content } from "@/components/Content";
 import { FormationDateModal } from "@/components/FormationDateModal";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
+import { Icon } from "@/components/njwds/Icon";
 import { RegisteredForTaxesModal } from "@/components/RegisteredForTaxesModal";
 import { TaskProgressTagLookup } from "@/components/TaskProgressTagLookup";
 import { AuthAlertContext } from "@/contexts/authAlertContext";
@@ -17,7 +18,6 @@ import { emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { TaskProgress } from "@businessnjgovnavigator/shared/userData";
 import { useRouter } from "next/router";
 import { ReactElement, useContext, useState } from "react";
-import { Icon } from "./njwds/Icon";
 
 interface Props {
   taskId: string;

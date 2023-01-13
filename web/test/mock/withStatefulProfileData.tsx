@@ -1,8 +1,8 @@
+import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { getFlow } from "@/lib/utils/helpers";
 import { statefulDataHelpers } from "@/test/mock/withStatefulData";
 import { createEmptyUser, ProfileData } from "@businessnjgovnavigator/shared/";
 import { ReactElement, ReactNode, useState } from "react";
-import { ProfileDataContext } from "../../src/contexts/profileDataContext";
 
 const updateSpy = jest.fn();
 

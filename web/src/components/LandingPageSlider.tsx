@@ -3,10 +3,10 @@ import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { QUERIES, ROUTES, routeWithQuery } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
+import { useMountEffect } from "@/lib/utils/helpers";
 import { useRouter } from "next/router";
 import { ReactElement, useRef, useState } from "react";
 import Slider, { CustomArrowProps } from "react-slick";
-import { useMountEffect } from "../lib/utils/helpers";
 
 function NextArrow(props: CustomArrowProps) {
   return (

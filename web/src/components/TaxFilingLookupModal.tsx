@@ -1,4 +1,6 @@
 import { Content } from "@/components/Content";
+import { ModalTwoButton } from "@/components/ModalTwoButton";
+import { Alert } from "@/components/njwds-extended/Alert";
 import { FieldLabelModal } from "@/components/onboarding/FieldLabelModal";
 import { LockedProfileField } from "@/components/onboarding/LockedProfileField";
 import { OnboardingBusinessName } from "@/components/onboarding/OnboardingBusinessName";
@@ -7,6 +9,8 @@ import { OnboardingTaxId } from "@/components/onboarding/OnboardingTaxId";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { postTaxFilingsOnboarding } from "@/lib/api-client/apiClient";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useUserData } from "@/lib/data-hooks/useUserData";
+import { createProfileFieldErrorMap, ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import {
@@ -17,10 +21,6 @@ import {
 } from "@businessnjgovnavigator/shared";
 import { Backdrop, CircularProgress } from "@mui/material";
 import { ReactElement, useState } from "react";
-import { useUserData } from "../lib/data-hooks/useUserData";
-import { createProfileFieldErrorMap, ProfileFieldErrorMap, ProfileFields } from "../lib/types/types";
-import { ModalTwoButton } from "./ModalTwoButton";
-import { Alert } from "./njwds-extended/Alert";
 
 interface Props {
   isOpen: boolean;

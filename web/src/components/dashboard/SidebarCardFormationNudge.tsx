@@ -1,3 +1,5 @@
+import { SidebarCardGeneric } from "@/components/dashboard/SidebarCardGeneric";
+import { FormationDateModal } from "@/components/FormationDateModal";
 import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { QUERIES, routeShallowWithQuery } from "@/lib/domain-logic/routes";
@@ -6,8 +8,6 @@ import analytics from "@/lib/utils/analytics";
 import { formationTaskId } from "@businessnjgovnavigator/shared/";
 import { useRouter } from "next/router";
 import { ReactElement, useState } from "react";
-import { FormationDateModal } from "../FormationDateModal";
-import { SidebarCardGeneric } from "./SidebarCardGeneric";
 
 type Props = {
   card: SidebarCardContent;
