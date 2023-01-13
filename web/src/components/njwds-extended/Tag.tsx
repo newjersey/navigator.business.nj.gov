@@ -65,7 +65,7 @@ export const Tag = (props: Props): ReactElement => {
   const defaultStyle =
     "flex flex-align-center flex-justify usa-tag font-sans-2xs width-full width-auto line-height-sans-2 padding-y-2px";
   const textWrap = props.isWrappingText ? "text-wrap display-block" : "text-no-wrap";
-  const fixedWidth = props.isFixedWidth ? "tag-fixed-width display-inline-block" : "";
+  const fixedWidth = props.isFixedWidth ? "tag-fixed-width" : "";
   const disableUppercase = props.isLowerCase ? "text-no-uppercase" : "";
   const radius = props.isRadiusMd ? "radius-md" : "";
 
