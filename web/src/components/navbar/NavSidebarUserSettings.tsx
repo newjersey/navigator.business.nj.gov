@@ -56,18 +56,6 @@ export const NavSidebarUserSettings = (): ReactElement => {
     return (
       <>
         <div className="margin-bottom-2">
-          <Button
-            style="tertiary"
-            onClick={(event) => {
-              event.preventDefault();
-              analytics.event.account_menu_myNJ_account.click.go_to_myNJ_home();
-              window.open(process.env.MYNJ_PROFILE_LINK || "", "_ blank");
-            }}
-          >
-            <span className="text-base">{Config.navigationDefaults.myNJAccountText}</span>
-          </Button>
-        </div>
-        <div className="margin-bottom-2">
           <Link href={ROUTES.profile} passHref>
             <Button
               style="tertiary"
@@ -78,6 +66,18 @@ export const NavSidebarUserSettings = (): ReactElement => {
               <span className="text-base">{Config.navigationDefaults.profileLinkText}</span>
             </Button>
           </Link>
+        </div>
+        <div className="margin-bottom-2">
+          <Button
+            style="tertiary"
+            onClick={(event) => {
+              event.preventDefault();
+              analytics.event.account_menu_myNJ_account.click.go_to_myNJ_home();
+              window.open(process.env.MYNJ_PROFILE_LINK || "", "_ blank");
+            }}
+          >
+            <span className="text-base">{Config.navigationDefaults.myNJAccountText}</span>
+          </Button>
         </div>
       </>
     );

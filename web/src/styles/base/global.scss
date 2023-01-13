@@ -142,7 +142,7 @@ ol {
 
 .dashboard-opportunities-list {
   @media all and (min-width: $lg) {
-    max-height: 925px;
+    max-height: calc(100vh - 27rem);
     overflow: auto;
   }
 }

@@ -2,14 +2,17 @@ import { Content } from "@/components/Content";
 import { Button } from "@/components/njwds-extended/Button";
 import { LookupStepIndexByName } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
+import { MediaQueries } from "@/lib/PageSizes";
 import { getStringifiedAddress } from "@/lib/utils/formatters";
 import { scrollToTop } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
+import { useMediaQuery } from "@mui/material";
 import { ReactElement, useContext } from "react";
 
 export const ReviewRegisteredAgent = (): ReactElement => {
   const { state, setStepIndex } = useContext(BusinessFormationContext);
   const italicNotEnteredText = `*${Config.businessFormationDefaults.reviewStepNotEnteredText}*`;
+  const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
 
   return (
     <>
@@ -32,7 +35,7 @@ export const ReviewRegisteredAgent = (): ReactElement => {
         </div>
       </div>
       {state.formationFormData.agentNumberOrManual === "NUMBER" && (
-        <div className="display-block tablet:display-flex" data-testid="agent-number">
+        <div className={isTabletAndUp ? "display-flex" : "display-block"} data-testid="agent-number">
           <div className="text-bold width-11rem">
             <Content>{Config.businessFormationDefaults.reviewStepRegisteredAgentNumberLabel}</Content>
           </div>
@@ -45,7 +48,7 @@ export const ReviewRegisteredAgent = (): ReactElement => {
       )}
       {state.formationFormData.agentNumberOrManual === "MANUAL_ENTRY" && (
         <div data-testid="agent-manual-entry">
-          <div className="display-block tablet:display-flex">
+          <div className={isTabletAndUp ? "display-flex" : "display-block"}>
             <div className="text-bold width-11rem">
               <Content>{Config.businessFormationDefaults.reviewStepRegisteredAgentNameLabel}</Content>
             </div>
@@ -55,7 +58,7 @@ export const ReviewRegisteredAgent = (): ReactElement => {
               )}
             </div>
           </div>
-          <div className="display-block tablet:display-flex margin-top-1">
+          <div className={`${isTabletAndUp ? "display-flex" : "display-block"} margin-top-1`}>
             <div className="text-bold width-11rem">
               <Content>{Config.businessFormationDefaults.reviewStepEmailLabel}</Content>
             </div>
@@ -65,7 +68,7 @@ export const ReviewRegisteredAgent = (): ReactElement => {
               )}
             </div>
           </div>
-          <div className="display-block tablet:display-flex margin-top-1">
+          <div className={`${isTabletAndUp ? "display-flex" : "display-block"} margin-top-1`}>
             <div className="text-bold width-11rem">
               <Content>{Config.businessFormationDefaults.reviewStepAddressLabel}</Content>
             </div>

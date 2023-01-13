@@ -10,7 +10,7 @@ interface Props {
   children: ReactNode;
   label: ReactNode;
   onSave: () => void;
-  removeStyling?: boolean;
+  isTaskPage?: boolean;
 }
 
 export const DeferredOnboardingQuestion = (props: Props) => {
@@ -39,6 +39,45 @@ export const DeferredOnboardingQuestion = (props: Props) => {
     props.onSave();
   };
 
+  const onTaskPage = (
+    <div className="padding-3">
+      {props.label}
+      <div className="display-flex mobile-lg:flex-row flex-column mobile-lg:flex-align-center">
+        <div className="width-100 margin-right-1 form-input">{props.children}</div>
+        <Button
+          style="secondary"
+          className="margin-top-2"
+          onClick={onSave}
+          dataTestid="deferred-question-save"
+        >
+          {Config.deferredLocation.deferredOnboardingSaveButtonText}
+        </Button>
+      </div>
+    </div>
+  );
+
+  const onDashboard = (
+    <div className="radius-md border-primary-light border-1px padding-3">
+      <div className="display-flex mobile-lg:flex-row flex-column mobile-lg:flex-justify">
+        <div>
+          <div>{props.label}</div>
+          <div className="width-100 margin-right-1 form-input">{props.children}</div>
+        </div>
+        <div className="flex flex-align-center">
+          <Button
+            style="secondary"
+            className="mobile-lg:margin-top-0 margin-top-2"
+            onClick={onSave}
+            dataTestid="deferred-question-save"
+            noRightMargin
+          >
+            {Config.deferredLocation.deferredOnboardingSaveButtonText}
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <ProfileDataContext.Provider
       value={{
@@ -51,20 +90,7 @@ export const DeferredOnboardingQuestion = (props: Props) => {
         onBack: () => {},
       }}
     >
-      <div className={`${props.removeStyling ? "" : "radius-md border-primary-light border-1px"} padding-3`}>
-        {props.label}
-        <div className="display-flex mobile-lg:flex-row flex-column mobile-lg:flex-align-center margin-top-2">
-          <div className="width-100 margin-right-1 form-input">{props.children}</div>
-          <Button
-            style="secondary"
-            className="mobile-lg:margin-top-0 margin-top-2"
-            onClick={onSave}
-            dataTestid="deferred-question-save"
-          >
-            {Config.deferredLocation.deferredOnboardingSaveButtonText}
-          </Button>
-        </div>
-      </div>
+      {props.isTaskPage ? onTaskPage : onDashboard}
     </ProfileDataContext.Provider>
   );
 };
