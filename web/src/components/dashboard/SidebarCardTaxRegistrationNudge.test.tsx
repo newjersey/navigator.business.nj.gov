@@ -21,7 +21,7 @@ import { taxTaskId } from "@businessnjgovnavigator/shared/index";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { generateTaxFiling } from "../../../test/factories";
-import { SidebarCardTaxRegistrationNudge } from "./SidebarCardTaxRegistrationNudge";
+import { SidebarCardRegisteredForTaxesNudge } from "./SidebarCardRegisteredForTaxesNudge";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));
@@ -37,34 +37,34 @@ describe("<SidebarCardTaxRegistrationNudge />", () => {
   const renderWithUserData = (userData: Partial<UserData>) => {
     render(
       <WithStatefulUserData initialUserData={generateUserData(userData)}>
-        <SidebarCardTaxRegistrationNudge card={card} />
+        <SidebarCardRegisteredForTaxesNudge card={card} />
       </WithStatefulUserData>
     );
   };
 
-  describe("when clicking tax registration button", () => {
+  describe("when clicking registered for taxes button", () => {
     beforeEach(() => {
       jest.resetAllMocks();
       useMockRouter({});
       setupStatefulUserDataContext();
-      card = generateSidebarCardContent({ id: "tax-registration-nudge" });
+      card = generateSidebarCardContent({ id: "registered-for-taxes-nudge" });
       mockBuildUserRoadmap.buildUserRoadmap.mockResolvedValue(generateRoadmap({}));
     });
 
-    it("opens the modal when the user clicks the tax registration nudge", () => {
+    it("opens the modal when the user clicks the registered for taxes nudge", () => {
       renderWithUserData({
         profileData: generateProfileData({
           businessPersona: "STARTING",
         }),
-        preferences: generatePreferences({ visibleSidebarCards: ["tax-registration-nudge"] }),
+        preferences: generatePreferences({ visibleSidebarCards: ["registered-for-taxes-nudge"] }),
       });
 
-      fireEvent.click(screen.getByTestId("cta-tax-registration-nudge"));
+      fireEvent.click(screen.getByTestId("cta-registered-for-taxes-nudge"));
 
-      expect(screen.getByText(Config.taxRegistrationModal.title)).toBeInTheDocument();
+      expect(screen.getByText(Config.registeredForTaxesModal.title)).toBeInTheDocument();
     });
 
-    it("saves tax information and updates the user data to COMPLETED tax registration task", async () => {
+    it("saves tax information and updates the user data to COMPLETED registered for taxes task", async () => {
       const initialUserData = generateUserData({
         profileData: generateProfileData({
           businessName: "",
@@ -79,9 +79,9 @@ describe("<SidebarCardTaxRegistrationNudge />", () => {
       });
       renderWithUserData(initialUserData);
 
-      fireEvent.click(screen.getByTestId("cta-tax-registration-nudge"));
+      fireEvent.click(screen.getByTestId("cta-registered-for-taxes-nudge"));
 
-      expect(screen.getByText(Config.taxRegistrationModal.title)).toBeInTheDocument();
+      expect(screen.getByText(Config.registeredForTaxesModal.title)).toBeInTheDocument();
 
       const businessNameInput = screen.getByLabelText("Business name");
       fireEvent.change(businessNameInput, { target: { value: "NJ Services" } });
@@ -123,7 +123,7 @@ describe("<SidebarCardTaxRegistrationNudge />", () => {
         return expect(currentUserData()).toEqual(updatedUserData);
       });
       await waitFor(() => {
-        return expect(screen.queryByText(Config.taxRegistrationModal.title)).not.toBeInTheDocument();
+        return expect(screen.queryByText(Config.registeredForTaxesModal.title)).not.toBeInTheDocument();
       });
       expect(mockPush).toHaveBeenCalledWith("/dashboard");
     });
@@ -132,14 +132,14 @@ describe("<SidebarCardTaxRegistrationNudge />", () => {
       const initialUserData = generateUserData({});
       renderWithUserData(initialUserData);
 
-      fireEvent.click(screen.getByTestId("cta-tax-registration-nudge"));
+      fireEvent.click(screen.getByTestId("cta-registered-for-taxes-nudge"));
 
-      expect(screen.getByText(Config.taxRegistrationModal.title)).toBeInTheDocument();
+      expect(screen.getByText(Config.registeredForTaxesModal.title)).toBeInTheDocument();
 
       fireEvent.click(screen.getByTestId("modal-button-secondary"));
 
       await waitFor(() => {
-        return expect(screen.queryByText(Config.taxRegistrationModal.title)).not.toBeInTheDocument();
+        return expect(screen.queryByText(Config.registeredForTaxesModal.title)).not.toBeInTheDocument();
       });
 
       expect(userDataWasNotUpdated()).toEqual(true);

@@ -416,7 +416,7 @@
     "failedUnknownMarkdown": "There was a problem with your verification process, please try again later.",
     "modalBusinessFieldMarkdown": "Your business name must match exactly with the name listed on your `Business Registration Certificate|business-reg-certificate` or your tax registration confirmation email."
   },
-  "taxRegistrationModal": {
+  "registeredForTaxesModal": {
     "title": "You're All Done with Tax Registration!",
     "subtitle": "Now we can see what certifications you're eligible for, tell us your...",
     "saveButtonText": "Save",

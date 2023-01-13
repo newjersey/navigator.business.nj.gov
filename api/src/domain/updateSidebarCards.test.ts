@@ -77,7 +77,7 @@ describe("updateRoadmapSidebarCards", () => {
   });
 
   describe("tax registration nudge", () => {
-    it("adds tax-registration-nudge when operatingPhase is NEEDS_TO_REGISTER_FOR_TAXES", () => {
+    it("adds registered-for-taxes-nudge when operatingPhase is NEEDS_TO_REGISTER_FOR_TAXES", () => {
       const userData = generateUserData({
         profileData: generateProfileData({
           operatingPhase: "NEEDS_TO_REGISTER_FOR_TAXES",
@@ -85,19 +85,19 @@ describe("updateRoadmapSidebarCards", () => {
         preferences: generatePreferences({ visibleSidebarCards: [] }),
       });
       expect(updateSidebarCards(userData).preferences.visibleSidebarCards).toContain(
-        "tax-registration-nudge"
+        "registered-for-taxes-nudge"
       );
     });
 
-    it("removes tax-registration-nudge when operatingPhase is FORMED_AND_REGISTERED", () => {
+    it("removes registered-for-taxes-nudge when operatingPhase is FORMED_AND_REGISTERED", () => {
       const userData = generateUserData({
         profileData: generateProfileData({
           operatingPhase: "FORMED_AND_REGISTERED",
         }),
-        preferences: generatePreferences({ visibleSidebarCards: ["tax-registration-nudge"] }),
+        preferences: generatePreferences({ visibleSidebarCards: ["registered-for-taxes-nudge"] }),
       });
       expect(updateSidebarCards(userData).preferences.visibleSidebarCards).not.toContain(
-        "tax-registration-nudge"
+        "registered-for-taxes-nudge"
       );
     });
   });

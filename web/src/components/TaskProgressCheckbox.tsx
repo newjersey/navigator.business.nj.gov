@@ -3,8 +3,8 @@ import { Content } from "@/components/Content";
 import { FormationDateModal } from "@/components/FormationDateModal";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
+import { RegisteredForTaxesModal } from "@/components/RegisteredForTaxesModal";
 import { TaskProgressTagLookup } from "@/components/TaskProgressTagLookup";
-import { TaxRegistrationModal } from "@/components/TaxRegistrationModal";
 import { AuthAlertContext } from "@/contexts/authAlertContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -24,7 +24,7 @@ interface Props {
   disabledTooltipText: string | undefined;
 }
 
-type ModalTypes = "formation" | "formation-unset" | "tax-registration" | "tax-registration-unset";
+type ModalTypes = "formation" | "formation-unset" | "registered-for-taxes" | "registered-for-taxes-unset";
 
 export const TaskProgressCheckbox = (props: Props): ReactElement => {
   const { userData, updateQueue } = useUserData();
@@ -76,12 +76,12 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
 
     if (isTaxTask(props.taskId)) {
       if (nextStatus === "COMPLETED" && currentOpenModal === undefined) {
-        setCurrentOpenModal("tax-registration");
+        setCurrentOpenModal("registered-for-taxes");
         analytics.event.task_status_checkbox.click_completed.show_tax_registration_date_modal();
         return;
       }
       if (currentTaskProgress === "COMPLETED" && currentOpenModal === undefined) {
-        setCurrentOpenModal("tax-registration-unset");
+        setCurrentOpenModal("registered-for-taxes-unset");
         return;
       }
     }
@@ -242,8 +242,8 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
         }}
       />
 
-      <TaxRegistrationModal
-        isOpen={currentOpenModal === "tax-registration"}
+      <RegisteredForTaxesModal
+        isOpen={currentOpenModal === "registered-for-taxes"}
         close={() => {
           return setCurrentOpenModal(undefined);
         }}
@@ -253,18 +253,18 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
       />
 
       <ModalTwoButton
-        isOpen={currentOpenModal === "tax-registration-unset"}
+        isOpen={currentOpenModal === "registered-for-taxes-unset"}
         close={() => {
           return setCurrentOpenModal(undefined);
         }}
-        title={Config.taxRegistrationModal.areYouSureTaxTitle}
-        primaryButtonText={Config.taxRegistrationModal.areYouSureTaxContinueButton}
+        title={Config.registeredForTaxesModal.areYouSureTaxTitle}
+        primaryButtonText={Config.registeredForTaxesModal.areYouSureTaxContinueButton}
         primaryButtonOnClick={() => {
           return setToNextStatus();
         }}
-        secondaryButtonText={Config.taxRegistrationModal.areYouSureTaxCancelButton}
+        secondaryButtonText={Config.registeredForTaxesModal.areYouSureTaxCancelButton}
       >
-        <Content>{Config.taxRegistrationModal.areYouSureTaxBody}</Content>
+        <Content>{Config.registeredForTaxesModal.areYouSureTaxBody}</Content>
       </ModalTwoButton>
 
       <ModalTwoButton

@@ -1,5 +1,5 @@
 ---
-id: tax-registration-nudge
+id: registered-for-taxes-nudge
 header: Access Certification Opportunities
 imgPath: /img/nudge-icon.svg
 ctaText: "I'm Registered for Taxes"
