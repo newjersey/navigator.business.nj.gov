@@ -132,7 +132,7 @@ describe("<TaskProgressCheckbox />", () => {
       });
       renderTaskCheckbox(taxTaskId, userData);
       await selectCompleted();
-      expect(screen.getByText(Config.taxRegistrationModal.title)).toBeInTheDocument();
+      expect(screen.getByText(Config.registeredForTaxesModal.title)).toBeInTheDocument();
     });
 
     it("doesn't update the task status when closed", async () => {
@@ -142,7 +142,7 @@ describe("<TaskProgressCheckbox />", () => {
       renderTaskCheckbox(taxTaskId, userData);
       fireEvent.click(screen.getByTestId("change-task-progress-checkbox"));
 
-      fireEvent.click(screen.getByText(Config.taxRegistrationModal.cancelButtonText));
+      fireEvent.click(screen.getByText(Config.registeredForTaxesModal.cancelButtonText));
       expect(screen.getByText(Config.taskProgress.IN_PROGRESS)).toBeInTheDocument();
       expect(screen.queryByText(Config.taskProgress.COMPLETED)).not.toBeInTheDocument();
       expect(userDataWasNotUpdated()).toBe(true);
@@ -156,7 +156,7 @@ describe("<TaskProgressCheckbox />", () => {
       renderTaskCheckbox(taxTaskId, userData);
       await selectCompleted();
 
-      fireEvent.click(screen.getByText(Config.taxRegistrationModal.saveButtonText));
+      fireEvent.click(screen.getByText(Config.registeredForTaxesModal.saveButtonText));
       await screen.findByText(Config.taskProgress.COMPLETED);
       expect(currentUserData().taskProgress[taxTaskId]).toEqual("COMPLETED");
     });
@@ -170,7 +170,7 @@ describe("<TaskProgressCheckbox />", () => {
       renderTaskCheckbox(taxTaskId, userData);
       await selectCompleted();
 
-      fireEvent.click(screen.getByText(Config.taxRegistrationModal.saveButtonText));
+      fireEvent.click(screen.getByText(Config.registeredForTaxesModal.saveButtonText));
       await waitFor(() => {
         expect(mockPush).toHaveBeenCalledWith({
           pathname: ROUTES.dashboard,
@@ -186,7 +186,7 @@ describe("<TaskProgressCheckbox />", () => {
 
       renderTaskCheckbox(taxTaskId, userData);
       fireEvent.click(screen.getByTestId("change-task-progress-checkbox"));
-      expect(screen.getByText(Config.taxRegistrationModal.areYouSureTaxBody)).toBeInTheDocument();
+      expect(screen.getByText(Config.registeredForTaxesModal.areYouSureTaxBody)).toBeInTheDocument();
     });
 
     it("updates the task progress if the user continues in the warning modal", async () => {
@@ -197,7 +197,7 @@ describe("<TaskProgressCheckbox />", () => {
       renderTaskCheckbox(taxTaskId, userData);
       fireEvent.click(screen.getByTestId("change-task-progress-checkbox"));
 
-      fireEvent.click(screen.getByText(Config.taxRegistrationModal.areYouSureTaxContinueButton));
+      fireEvent.click(screen.getByText(Config.registeredForTaxesModal.areYouSureTaxContinueButton));
       await screen.findByText(Config.taskProgress.NOT_STARTED);
       expect(currentUserData().taskProgress[taxTaskId]).toEqual("NOT_STARTED");
     });
@@ -211,7 +211,7 @@ describe("<TaskProgressCheckbox />", () => {
 
       renderTaskCheckbox(taxTaskId, userData);
       fireEvent.click(screen.getByTestId("change-task-progress-checkbox"));
-      fireEvent.click(screen.getByText(Config.taxRegistrationModal.areYouSureTaxCancelButton));
+      fireEvent.click(screen.getByText(Config.registeredForTaxesModal.areYouSureTaxCancelButton));
       expect(screen.getByText(Config.taskProgress.COMPLETED)).toBeInTheDocument();
       expect(userDataWasNotUpdated()).toBe(true);
     });

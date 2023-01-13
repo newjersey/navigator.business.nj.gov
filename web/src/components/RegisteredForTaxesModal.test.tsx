@@ -1,4 +1,4 @@
-import { TaxRegistrationModal } from "@/components/TaxRegistrationModal";
+import { RegisteredForTaxesModal } from "@/components/RegisteredForTaxesModal";
 import { getMergedConfig } from "@/contexts/configContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { generateProfileData, generateUserData } from "@/test/factories";
@@ -18,7 +18,7 @@ const Config = getMergedConfig();
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 
-describe("<TaxRegistrationModal>", () => {
+describe("<RegisteredForTaxesModal />", () => {
   let modalOnClose: jest.Mock;
   const municipality = generateMunicipality({});
 
@@ -42,7 +42,7 @@ describe("<TaxRegistrationModal>", () => {
     render(
       <MunicipalitiesContext.Provider value={{ municipalities: [municipality] }}>
         <WithStatefulUserData initialUserData={userDataWithMunicipality}>
-          <TaxRegistrationModal isOpen={true} close={modalOnClose} onSave={() => {}} />
+          <RegisteredForTaxesModal isOpen={true} close={modalOnClose} onSave={() => {}} />
         </WithStatefulUserData>
       </MunicipalitiesContext.Provider>
     );
@@ -88,7 +88,7 @@ describe("<TaxRegistrationModal>", () => {
       fillText("Tax id", "777777777771");
       selectOwnershipByValue("disabled-veteran");
 
-      fireEvent.click(screen.getByText(Config.taxRegistrationModal.saveButtonText));
+      fireEvent.click(screen.getByText(Config.registeredForTaxesModal.saveButtonText));
       triggerQueueUpdate();
       expect(currentUserData().profileData.existingEmployees).toEqual("5");
       expect(currentUserData().profileData.taxId).toEqual("777777777771");
@@ -108,7 +108,7 @@ describe("<TaxRegistrationModal>", () => {
 
       fillText("Existing employees", "5");
 
-      fireEvent.click(screen.getByText(Config.taxRegistrationModal.saveButtonText));
+      fireEvent.click(screen.getByText(Config.registeredForTaxesModal.saveButtonText));
       triggerQueueUpdate();
       expect(currentUserData().profileData.ownershipTypeIds).toEqual([]);
     });
@@ -128,7 +128,7 @@ describe("<TaxRegistrationModal>", () => {
         screen.queryByText(Config.profileDefaults.fields.existingEmployees.default.errorTextRequired)
       ).not.toBeInTheDocument();
 
-      fireEvent.click(screen.getByText(Config.taxRegistrationModal.saveButtonText));
+      fireEvent.click(screen.getByText(Config.registeredForTaxesModal.saveButtonText));
       expect(
         screen.getByText(Config.profileDefaults.fields.existingEmployees.default.errorTextRequired)
       ).toBeInTheDocument();
@@ -149,7 +149,7 @@ describe("<TaxRegistrationModal>", () => {
       ).toBeInTheDocument();
 
       selectLocationByText(municipality.displayName);
-      fireEvent.click(screen.getByText(Config.taxRegistrationModal.saveButtonText));
+      fireEvent.click(screen.getByText(Config.registeredForTaxesModal.saveButtonText));
       triggerQueueUpdate();
       expect(currentUserData().profileData.municipality).toEqual(municipality);
     });
@@ -187,7 +187,7 @@ describe("<TaxRegistrationModal>", () => {
         screen.queryByText(Config.profileDefaults.fields.municipality.default.errorTextRequired)
       ).not.toBeInTheDocument();
 
-      fireEvent.click(screen.getByText(Config.taxRegistrationModal.saveButtonText));
+      fireEvent.click(screen.getByText(Config.registeredForTaxesModal.saveButtonText));
       expect(
         screen.getByText(Config.profileDefaults.fields.municipality.default.errorTextRequired)
       ).toBeInTheDocument();
@@ -270,7 +270,7 @@ describe("<TaxRegistrationModal>", () => {
         fillText("Business name", "my cool coffeeshop");
         fillText("Tax id", "123456789012");
 
-        fireEvent.click(screen.getByText(Config.taxRegistrationModal.saveButtonText));
+        fireEvent.click(screen.getByText(Config.registeredForTaxesModal.saveButtonText));
         triggerQueueUpdate();
         expect(currentUserData().profileData.ownershipTypeIds).toEqual([]);
       });
@@ -285,7 +285,7 @@ describe("<TaxRegistrationModal>", () => {
         fillText("Business name", "my cool coffeeshop");
         fillText("Tax id", "123456789012");
 
-        fireEvent.click(screen.getByText(Config.taxRegistrationModal.saveButtonText));
+        fireEvent.click(screen.getByText(Config.registeredForTaxesModal.saveButtonText));
         expect(
           screen.getByText(Config.profileDefaults.fields.existingEmployees.default.errorTextRequired)
         ).toBeInTheDocument();
@@ -301,7 +301,7 @@ describe("<TaxRegistrationModal>", () => {
         fillText("Business name", "my cool coffeeshop");
         fillText("Existing employees", "5");
 
-        fireEvent.click(screen.getByText(Config.taxRegistrationModal.saveButtonText));
+        fireEvent.click(screen.getByText(Config.registeredForTaxesModal.saveButtonText));
         expect(
           screen.getByText(Config.profileDefaults.fields.taxId.default.errorTextRequired)
         ).toBeInTheDocument();
@@ -317,7 +317,7 @@ describe("<TaxRegistrationModal>", () => {
         fillText("Existing employees", "5");
         fillText("Tax id", "123456789012");
 
-        fireEvent.click(screen.getByText(Config.taxRegistrationModal.saveButtonText));
+        fireEvent.click(screen.getByText(Config.registeredForTaxesModal.saveButtonText));
         expect(
           screen.getByText(Config.profileDefaults.fields.businessName.default.errorTextRequired)
         ).toBeInTheDocument();
@@ -342,7 +342,7 @@ describe("<TaxRegistrationModal>", () => {
       fillText("Business name", "my cool coffeeshop");
       fillText("Tax id", "123456789012");
 
-      fireEvent.click(screen.getByText(Config.taxRegistrationModal.saveButtonText));
+      fireEvent.click(screen.getByText(Config.registeredForTaxesModal.saveButtonText));
       triggerQueueUpdate();
       expect(currentUserData().profileData.existingEmployees).toEqual("5");
       expect(currentUserData().profileData.ownershipTypeIds).toEqual(["disabled-veteran"]);

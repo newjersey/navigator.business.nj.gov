@@ -24,7 +24,7 @@ interface Props {
   onSave: ({ redirectOnSuccess }: { redirectOnSuccess: boolean }) => void;
 }
 
-export const TaxRegistrationModal = (props: Props): ReactElement => {
+export const RegisteredForTaxesModal = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const { userData, updateQueue } = useUserData();
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
@@ -116,14 +116,14 @@ export const TaxRegistrationModal = (props: Props): ReactElement => {
       <ModalTwoButton
         isOpen={props.isOpen}
         close={props.close}
-        title={Config.taxRegistrationModal.title}
+        title={Config.registeredForTaxesModal.title}
         maxWidth={"md"}
-        primaryButtonText={Config.taxRegistrationModal.saveButtonText}
+        primaryButtonText={Config.registeredForTaxesModal.saveButtonText}
         primaryButtonOnClick={onSubmit}
-        secondaryButtonText={Config.taxRegistrationModal.cancelButtonText}
+        secondaryButtonText={Config.registeredForTaxesModal.cancelButtonText}
       >
         <div className="margin-bottom-3">
-          <Content>{Config.taxRegistrationModal.subtitle}</Content>
+          <Content>{Config.registeredForTaxesModal.subtitle}</Content>
         </div>
         {showBusinessField() && (
           <>

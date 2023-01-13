@@ -2863,10 +2863,10 @@ collections:
                   widget: text,
                 }
           - label: Tax Task - Tax Registration Modal
-            name: taxRegistrationModal
+            name: registeredForTaxesModal
             collapsed: true
             widget: object
-            summary: "{{taxRegistrationModal}}"
+            summary: "{{registeredForTaxesModal}}"
             fields:
               - { label: Title, name: title, widget: string }
               - { label: Subtitle, name: subtitle, widget: markdown }

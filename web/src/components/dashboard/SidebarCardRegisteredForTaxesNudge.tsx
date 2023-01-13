@@ -5,14 +5,14 @@ import analytics from "@/lib/utils/analytics";
 import { taxTaskId } from "@businessnjgovnavigator/shared";
 import { useRouter } from "next/router";
 import { ReactElement, useState } from "react";
-import { TaxRegistrationModal } from "../TaxRegistrationModal";
+import { RegisteredForTaxesModal } from "../RegisteredForTaxesModal";
 import { SidebarCardGeneric } from "./SidebarCardGeneric";
 
 type Props = {
   card: SidebarCardContent;
 };
 
-export const SidebarCardTaxRegistrationNudge = (props: Props): ReactElement => {
+export const SidebarCardRegisteredForTaxesNudge = (props: Props): ReactElement => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const { updateQueue } = useUserData();
   const { queueUpdateTaskProgress } = useUpdateTaskProgress();
@@ -35,7 +35,7 @@ export const SidebarCardTaxRegistrationNudge = (props: Props): ReactElement => {
 
   return (
     <>
-      <TaxRegistrationModal
+      <RegisteredForTaxesModal
         isOpen={modalOpen}
         close={() => {
           return setModalOpen(false);

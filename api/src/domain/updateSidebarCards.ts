@@ -31,9 +31,10 @@ export const updateSidebarCards: UpdateSidebarCards = (userData: UserData): User
   }
 
   if (operatingPhase === "NEEDS_TO_REGISTER_FOR_TAXES") {
-    showCard("tax-registration-nudge");
+    showCard("registered-for-taxes-nudge");
   } else {
-    hideCard("tax-registration-nudge");
+    hideCard("registered-for-taxes-nudge");
+    hideCard("registered-for-taxes-nudge");
   }
 
   if (operatingPhase === "FORMED_AND_REGISTERED") {
