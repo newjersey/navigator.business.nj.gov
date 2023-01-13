@@ -9,7 +9,6 @@ import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import { UpdateQueue, UserDataError } from "@/lib/types/types";
 import { UpdateQueueFactory } from "@/lib/UpdateQueue";
 import { setAnalyticsDimensions } from "@/lib/utils/analytics-helpers";
-import { getSectionCompletion } from "@/lib/utils/roadmap-helpers";
 import { UserData } from "@businessnjgovnavigator/shared/";
 import { useContext, useEffect } from "react";
 import useSWR from "swr";
@@ -18,7 +17,7 @@ export const useUserData = (): UseUserDataResponse => {
   const { state, dispatch } = useContext(AuthContext);
   const { updateQueue, setUpdateQueue } = useContext(UpdateQueueContext);
   const { userDataError, setUserDataError } = useContext(UserDataErrorContext);
-  const { setRoadmap, setSectionCompletion } = useContext(RoadmapContext);
+  const { setRoadmap } = useContext(RoadmapContext);
   const { data, error, mutate } = useSWR<UserData | undefined>(state.user?.id || null, api.getUserData, {
     isPaused: () => {
       return state.isAuthenticated != IsAuthenticated.TRUE;
@@ -67,7 +66,6 @@ export const useUserData = (): UseUserDataResponse => {
     setAnalyticsDimensions(newUserData.profileData);
     const newRoadmap = await buildUserRoadmap(newUserData.profileData);
     setRoadmap(newRoadmap);
-    setSectionCompletion(getSectionCompletion(newRoadmap, newUserData));
   };
 
   const update = async (newUserData: UserData | undefined, config?: { local?: boolean }): Promise<void> => {

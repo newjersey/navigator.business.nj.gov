@@ -4,7 +4,7 @@ import { ContextualInfo, ContextualInfoContext } from "@/contexts/contextualInfo
 import { RoadmapContext } from "@/contexts/roadmapContext";
 import { UserDataErrorContext } from "@/contexts/userDataErrorContext";
 import { AuthAction, AuthState, IsAuthenticated } from "@/lib/auth/AuthContext";
-import { Roadmap, SectionCompletion, UserDataError } from "@/lib/types/types";
+import { Roadmap, UserDataError } from "@/lib/types/types";
 import { BusinessUser, RegistrationStatus } from "@businessnjgovnavigator/shared/";
 import { Dispatch, ReactElement, SetStateAction } from "react";
 
@@ -79,17 +79,13 @@ export const withUserDataError = (
 export const withRoadmap = (params: {
   component: ReactElement;
   initialRoadmap: Roadmap | undefined;
-  sectionCompletion?: SectionCompletion | undefined;
   mockSetRoadmapFunction?: (roadmap: Roadmap | undefined) => void;
-  setSectionCompletion?: (sectionCompletion: SectionCompletion | undefined) => void;
 }): ReactElement => {
   return (
     <RoadmapContext.Provider
       value={{
         roadmap: params.initialRoadmap,
-        sectionCompletion: params.sectionCompletion,
         setRoadmap: params.mockSetRoadmapFunction || jest.fn(),
-        setSectionCompletion: params.setSectionCompletion || jest.fn(),
       }}
     >
       {params.component}
