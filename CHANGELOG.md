@@ -1,3 +1,10 @@
+## [5.11.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.11.0...v5.11.1) (2023-01-12)
+
+
+### Bug Fixes
+
+* updating business-name-search-nexus links ([4abdf12](https://github.com/newjersey/navigator.business.nj.gov/commit/4abdf121bf71cd08560ee1316da4a2593e7dda9b))
+
 # [5.11.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.10.1...v5.11.0) (2023-01-11)
 
 
