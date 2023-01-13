@@ -5,7 +5,7 @@ import { OnboardingBusinessName } from "@/components/onboarding/OnboardingBusine
 import { OnboardingResponsibleOwnerName } from "@/components/onboarding/OnboardingResponsibleOwnerName";
 import { OnboardingTaxId } from "@/components/onboarding/OnboardingTaxId";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { postTaxRegistrationOnboarding } from "@/lib/api-client/apiClient";
+import { postTaxFilingsOnboarding } from "@/lib/api-client/apiClient";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
@@ -133,7 +133,7 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
         ? profileData.businessName
         : profileData.responsibleOwnerName;
 
-      userDataToSet = await postTaxRegistrationOnboarding({
+      userDataToSet = await postTaxFilingsOnboarding({
         taxId: profileData.taxId as string,
         businessName: businessNameToSubmitToTaxApi,
         encryptedTaxId: encryptedTaxId as string,
