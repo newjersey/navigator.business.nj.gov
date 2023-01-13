@@ -1,8 +1,8 @@
+import { UserSupportActionCard } from "@/components/UserSupportActionCard";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { MediaQueries } from "@/lib/PageSizes";
 import { useMediaQuery } from "@mui/material";
 import { ReactElement } from "react";
-import { UserSupportActionCard } from "./UserSupportActionCard";
 
 export const SupportExploreSignUpChatCards = (): ReactElement => {
   const { Config } = useConfig();

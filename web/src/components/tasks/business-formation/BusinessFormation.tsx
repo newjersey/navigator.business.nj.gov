@@ -18,6 +18,7 @@ import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { getModifiedTaskContent } from "@/lib/utils/roadmap-helpers";
 
 import { BusinessFormationPaginator } from "@/components/tasks/business-formation/BusinessFormationPaginator";
+import { NexusFormationFlow } from "@/components/tasks/business-formation/NexusFormationFlow";
 import {
   castPublicFilingLegalTypeToFormationType,
   createEmptyFormationFormData,
@@ -33,7 +34,6 @@ import { parseDateWithFormat } from "@businessnjgovnavigator/shared/dateHelpers"
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { useRouter } from "next/router";
 import { ReactElement, useEffect, useMemo, useRef, useState } from "react";
-import { NexusFormationFlow } from "./NexusFormationFlow";
 
 interface Props {
   task: Task;

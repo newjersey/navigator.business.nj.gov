@@ -10,10 +10,10 @@ import analytics from "@/lib/utils/analytics";
 import { getCurrentDate, parseDate } from "@businessnjgovnavigator/shared/index";
 import { useRouter } from "next/router";
 
+import { Button } from "@/components/njwds-extended/Button";
 import { TaxFilingLookupModal } from "@/components/TaxFilingLookupModal";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { ReactElement, useContext, useEffect, useRef, useState } from "react";
-import { Button } from "./njwds-extended/Button";
 
 const isBeforeTheFollowingSaturday = (registeredISO: string | undefined) => {
   const sundayAfterRegisteredDate = parseDate(registeredISO).day(7);

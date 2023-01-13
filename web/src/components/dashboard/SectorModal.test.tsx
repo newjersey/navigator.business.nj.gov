@@ -1,9 +1,9 @@
+import { SectorModal } from "@/components/dashboard/SectorModal";
 import { getMergedConfig } from "@/contexts/configContext";
 import { generateProfileData, generateUserData } from "@/test/factories";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
 import { createPageHelpers } from "@/test/pages/onboarding/helpers-onboarding";
 import { fireEvent, render, screen } from "@testing-library/react";
-import { SectorModal } from "./SectorModal";
 
 const submitSectorModal = (): void => {
   fireEvent.click(screen.getByText(Config.dashboardDefaults.sectorModalSaveButton));

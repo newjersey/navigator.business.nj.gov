@@ -1,4 +1,5 @@
 import { Content } from "@/components/Content";
+import { OpportunityCardStatus } from "@/components/dashboard/OpportunityCardStatus";
 import { Button } from "@/components/njwds-extended/Button";
 import { Tag } from "@/components/njwds-extended/Tag";
 import { Icon } from "@/components/njwds/Icon";
@@ -9,7 +10,6 @@ import { Opportunity } from "@/lib/types/types";
 // @ts-ignore
 import truncateMarkdown from "markdown-truncate";
 import { ReactElement } from "react";
-import { OpportunityCardStatus } from "./OpportunityCardStatus";
 
 interface Props {
   opportunity: Opportunity;

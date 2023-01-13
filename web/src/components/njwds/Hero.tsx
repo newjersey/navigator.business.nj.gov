@@ -1,3 +1,4 @@
+import { LandingPageTiles } from "@/components/LandingPageTiles";
 import { Button } from "@/components/njwds-extended/Button";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { MediaQueries } from "@/lib/PageSizes";
@@ -7,7 +8,6 @@ import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router";
 import { ReactElement } from "react";
-import { LandingPageTiles } from "../LandingPageTiles";
 
 export const Hero = (): ReactElement => {
   const isDesktopAndUp = useMediaQuery(MediaQueries.desktopAndUp);

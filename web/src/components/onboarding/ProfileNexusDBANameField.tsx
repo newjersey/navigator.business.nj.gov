@@ -1,7 +1,7 @@
 /* eslint-disable unicorn/filename-case */
 
+import { OnboardingField } from "@/components/onboarding/OnboardingField";
 import { ReactElement } from "react";
-import { OnboardingField } from "./OnboardingField";
 
 export const ProfileNexusDBANameField = (): ReactElement => {
   return <OnboardingField fieldName={"nexusDbaName"} />;

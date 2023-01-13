@@ -1,5 +1,8 @@
 import { Content } from "@/components/Content";
+import { TaskCTA } from "@/components/TaskCTA";
 import { TaskHeader } from "@/components/TaskHeader";
+import { TaxDisplay } from "@/components/tasks/TaxDisplay";
+import { TaxInput } from "@/components/tasks/TaxInput";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
 import { AuthAlertContext } from "@/contexts/authAlertContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
@@ -10,9 +13,6 @@ import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
 import { emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { ReactElement, useContext, useState } from "react";
-import { TaskCTA } from "../TaskCTA";
-import { TaxDisplay } from "./TaxDisplay";
-import { TaxInput } from "./TaxInput";
 
 interface Props {
   task: Task;

@@ -1,10 +1,10 @@
+import { SidebarCardFormationNudge } from "@/components/dashboard/SidebarCardFormationNudge";
 import { SidebarCardFundingNudge } from "@/components/dashboard/SidebarCardFundingNudge";
 import { SidebarCardGeneric } from "@/components/dashboard/SidebarCardGeneric";
+import { SidebarCardRegisteredForTaxesNudge } from "@/components/dashboard/SidebarCardRegisteredForTaxesNudge";
 import { SidebarCardTaskProgress } from "@/components/dashboard/SidebarCardTaskProgress";
 import { SidebarCardContent } from "@/lib/types/types";
 import { rswitch } from "@/lib/utils/helpers";
-import { SidebarCardFormationNudge } from "./SidebarCardFormationNudge";
-import { SidebarCardRegisteredForTaxesNudge } from "./SidebarCardRegisteredForTaxesNudge";
 
 type Props = {
   card: SidebarCardContent;

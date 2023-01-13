@@ -1,3 +1,4 @@
+import { Content } from "@/components/Content";
 import { MenuOptionSelected } from "@/components/MenuOptionSelected";
 import { MenuOptionUnselected } from "@/components/MenuOptionUnselected";
 import { ConfigType } from "@/contexts/configContext";
@@ -21,7 +22,6 @@ import {
 import { Autocomplete, createFilterOptions, FilterOptionsState, TextField } from "@mui/material";
 import { orderBy } from "lodash";
 import { ChangeEvent, FocusEvent, ReactElement, useContext, useState } from "react";
-import { Content } from "../Content";
 
 interface Props {
   handleChange?: () => void;

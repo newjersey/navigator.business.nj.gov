@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { ContextualInfoLink } from "@/components/ContextualInfoLink";
+import { Alert } from "@/components/njwds-extended/Alert";
 import { Icon } from "@/components/njwds/Icon";
 import { PureMarkdownContent } from "@/components/PureMarkdownContent";
 import { SelfRegLink } from "@/components/SelfRegLink";
@@ -9,7 +10,6 @@ import { InlineIconType } from "@/lib/cms/types";
 import analytics from "@/lib/utils/analytics";
 import { FormControlLabel } from "@mui/material";
 import { CSSProperties, ReactElement } from "react";
-import { Alert } from "./njwds-extended/Alert";
 
 interface ContentProps {
   children: string;

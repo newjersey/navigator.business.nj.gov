@@ -1,5 +1,10 @@
 import { TasksDisplayContent } from "@/lib/types/types";
-import { generateFormationDisplayContent, generateUser, generateUserData } from "@/test/factories";
+import {
+  generateFormationDbaContent,
+  generateFormationDisplayContent,
+  generateUser,
+  generateUserData,
+} from "@/test/factories";
 import {
   FormationPageHelpers,
   generateFormationProfileData,
@@ -16,7 +21,6 @@ import {
 } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { fireEvent, screen } from "@testing-library/react";
-import { generateFormationDbaContent } from "../../../../../test/factories";
 
 function mockMaterialUI(): typeof materialUi {
   return {
