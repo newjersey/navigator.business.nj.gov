@@ -1,100 +1,126 @@
-import { GenericTextField } from "@/components/GenericTextField";
 import { Button } from "@/components/njwds-extended/Button";
+import { OnboardingTaxId } from "@/components/onboarding/OnboardingTaxId";
+import { AuthAlertContext } from "@/contexts/authAlertContext";
+import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { Task } from "@/lib/types/types";
-import { templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import { createProfileFieldErrorMap, ProfileFieldErrorMap, ProfileFields, Task } from "@/lib/types/types";
+import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { FormControl } from "@mui/material";
-import { ReactElement, useState } from "react";
+import { ReactElement, useContext, useEffect, useState } from "react";
 
 interface Props {
   task: Task;
-  isAuthenticated: IsAuthenticated;
-  onSave: () => void;
 }
 
 export const TaxInput = (props: Props): ReactElement => {
-  const LENGTH = 12;
-  const { Config } = useConfig();
-  const [isInvalid, setIsInvalid] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [taxId, setTaxId] = useState<string>("");
   const { userData, updateQueue } = useUserData();
-  const { queueUpdateTaskProgress } = useUpdateTaskProgress();
+  const { isAuthenticated } = useContext(AuthAlertContext);
+  const { Config } = useConfig();
+  const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
+  const [fieldStates, setFieldStates] = useState<ProfileFieldErrorMap>(createProfileFieldErrorMap());
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  let saveButtonText = Config.tax.saveButtonText;
-  if (props.isAuthenticated === IsAuthenticated.FALSE) {
-    saveButtonText = `Register & ${saveButtonText}`;
-  }
+  const saveButtonText =
+    isAuthenticated === IsAuthenticated.FALSE
+      ? `Register & ${Config.tax.saveButtonText}`
+      : Config.tax.saveButtonText;
 
-  useMountEffectWhenDefined(() => {
+  useEffect(() => {
     if (!userData) {
       return;
     }
-    setTaxId(userData.profileData.taxId || "");
-  }, userData);
+    setProfileData(userData.profileData);
+  }, [userData]);
 
-  const handleChange = (value: string): void => {
-    setTaxId(value);
-  };
+  useMountEffectWhenDefined(() => {
+    if (!userData || !updateQueue) {
+      return;
+    }
+    if (isAuthenticated === IsAuthenticated.FALSE) {
+      return;
+    }
+    if (
+      userData.profileData.taxId &&
+      userData.profileData.taxId?.length > 0 &&
+      userData.profileData.taxId?.length < 12
+    ) {
+      updateQueue.queueTaskProgress({ [props.task.id]: "IN_PROGRESS" }).update();
+    }
+  }, userData && updateQueue);
 
-  const save = async (): Promise<void> => {
-    if (!updateQueue) {
+  const onSubmit = async () => {
+    if (!userData || !updateQueue) {
+      return;
+    }
+    const errorMap = {
+      ...fieldStates,
+      taxId: {
+        invalid: profileData.taxId?.length != 12,
+      },
+    };
+    setFieldStates(errorMap);
+    if (
+      Object.keys(errorMap).some((k) => {
+        return errorMap[k as ProfileFields].invalid;
+      })
+    ) {
       return;
     }
 
-    if (taxId.length !== LENGTH) {
-      setIsInvalid(true);
-      return;
-    }
-
-    setIsInvalid(false);
     setIsLoading(true);
 
-    queueUpdateTaskProgress(props.task.id, "COMPLETED");
+    let { taxFilingData } = userData;
+    if (userData.profileData.taxId !== profileData.taxId) {
+      taxFilingData = { ...taxFilingData, state: undefined, registeredISO: undefined, filings: [] };
+    }
+
     updateQueue
-      .queueProfileData({ taxId })
+      .queueProfileData(profileData)
+      .queueTaxFilingData(taxFilingData)
+      .queueTaskProgress({ [props.task.id]: "COMPLETED" })
       .update()
-      .then(async () => {
-        setIsLoading(false);
-        props.onSave();
-      })
-      .catch(() => {
+      .then(() => {
         setIsLoading(false);
       });
   };
 
+  const onValidation = (field: ProfileFields, invalid: boolean) => {
+    setFieldStates((prevFieldStates) => {
+      return { ...prevFieldStates, [field]: { invalid } };
+    });
+  };
+
   return (
-    <div>
-      <div className="flex flex-row width-100">
-        <GenericTextField
-          className="width-100"
-          fieldName="taxId"
-          error={isInvalid}
-          validationText={templateEval(Config.onboardingDefaults.errorTextMinimumNumericField, {
-            length: LENGTH.toString(),
-          })}
-          numericProps={{ minLength: LENGTH, maxLength: LENGTH }}
-          placeholder={Config.tax.placeholderText}
-          handleChange={handleChange}
-          value={taxId}
-          formInputFull
-          ariaLabel="Save your NJ Tax ID"
-        />
-        <FormControl margin="dense">
-          <Button
-            className="margin-top-1 margin-left-1"
-            style="secondary"
-            onClick={save}
-            loading={isLoading}
-            typeSubmit
-          >
-            <span className="padding-x-3 no-wrap">{saveButtonText}</span>
-          </Button>
-        </FormControl>
-      </div>
-    </div>
+    <>
+      <ProfileDataContext.Provider
+        value={{
+          state: {
+            profileData: profileData,
+            flow: "STARTING",
+          },
+          setProfileData,
+          setUser: () => {},
+          onBack: () => {},
+        }}
+      >
+        <div className="flex flex-row space-between">
+          <OnboardingTaxId onValidation={onValidation} fieldStates={fieldStates} forTaxTask />
+          <FormControl margin="dense">
+            <Button
+              className="margin-top-1 margin-left-1"
+              style="secondary"
+              onClick={onSubmit}
+              loading={isLoading}
+              typeSubmit
+            >
+              <span className="padding-x-3 no-wrap">{saveButtonText}</span>
+            </Button>
+          </FormControl>
+        </div>
+      </ProfileDataContext.Provider>
+    </>
   );
 };

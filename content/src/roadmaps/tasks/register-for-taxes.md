@@ -32,7 +32,7 @@ It's time to register your business for State taxes. Doing so will tell the Stat
 ### Next Steps
 
 1. [Register for State Taxes](https://www.njportal.com/DOR/BusinessRegistration)
-2. **Save your NJ Tax ID**
+2. **Save your New Jersey Tax ID (xxx-xxx-xxx/xxx)**
 
 ${taxInputComponent}
 

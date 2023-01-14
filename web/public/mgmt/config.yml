@@ -1365,12 +1365,6 @@ collections:
               - { label: Description Text, name: descriptionText, widget: markdown }
               - { label: Input Placeholder Text, name: placeholderText, widget: string }
               - { label: Save Button Text, name: saveButtonText, widget: string }
-              - {
-                  label: Success Message Text,
-                  name: successText,
-                  widget: string,
-                  hint: This field supports Markdown,
-                }
   - name: "naics-code"
     label: "Tasks - NAICS Code"
     delete: false
