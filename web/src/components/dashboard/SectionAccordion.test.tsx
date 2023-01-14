@@ -73,7 +73,7 @@ describe("<SectionAccordion />", () => {
 
   it("shows completed section logo for a completed section", () => {
     const roadmap = generateRoadmap({ steps: [generateStep({ section: "PLAN" })] });
-    setMockRoadmapResponse(roadmap, jest.fn().mockReturnValue(true));
+    setMockRoadmapResponse({ roadmap, isSectionCompletedFn: jest.fn().mockReturnValue(true) });
     statefulRender("PLAN", generateUserData({}));
     expect(screen.getByTestId("completed-plan-section-img")).toBeVisible();
   });

@@ -3,8 +3,14 @@
 import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { UpdateQueue } from "@/lib/types/types";
-import { generatePreferences, generateStep, generateTask, generateUserData } from "@/test/factories";
-import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
+import {
+  generatePreferences,
+  generateRoadmap,
+  generateStep,
+  generateTask,
+  generateUserData,
+} from "@/test/factories";
+import { setMockRoadmapResponse, useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import {
   currentUserData,
   setupStatefulUserDataContext,
@@ -76,14 +82,12 @@ describe("useUpdateTaskProgress", () => {
     const planTask = generateTask({ id: planTaskId, stepNumber: 1 });
     const startTask = generateTask({ id: startTaskId, stepNumber: 2 });
 
-    beforeEach(() => {
-      useMockRoadmap({
-        steps: [
-          generateStep({ stepNumber: 1, section: "PLAN" }),
-          generateStep({ stepNumber: 2, section: "START" }),
-        ],
-        tasks: [planTask, startTask],
-      });
+    const roadmap = generateRoadmap({
+      steps: [
+        generateStep({ stepNumber: 1, section: "PLAN" }),
+        generateStep({ stepNumber: 2, section: "START" }),
+      ],
+      tasks: [planTask, startTask],
     });
 
     it("closes all roadmap sections when all sections complete", async () => {
@@ -93,6 +97,15 @@ describe("useUpdateTaskProgress", () => {
           [startTaskId]: "NOT_STARTED",
         },
         preferences: generatePreferences({ roadmapOpenSections: ["START"] }),
+      });
+
+      setMockRoadmapResponse({
+        roadmap,
+        isSectionCompletedFn: jest
+          .fn()
+          .mockReturnValueOnce(false) // was section prev completed
+          .mockReturnValueOnce(true), // is section now completed
+        currentAndNextSection: () => ({ current: "START", next: undefined }),
       });
 
       const { queueUpdateTaskProgress, updateQueue } = setupHook(userData);
@@ -118,6 +131,15 @@ describe("useUpdateTaskProgress", () => {
           [startTaskId]: "NOT_STARTED",
         },
         preferences: generatePreferences({ roadmapOpenSections: ["PLAN", "START"] }),
+      });
+
+      setMockRoadmapResponse({
+        roadmap,
+        isSectionCompletedFn: jest
+          .fn()
+          .mockReturnValueOnce(false) // was section prev completed
+          .mockReturnValueOnce(true), // is section now completed
+        currentAndNextSection: () => ({ current: "PLAN", next: "START" }),
       });
 
       const { queueUpdateTaskProgress, updateQueue } = setupHook(userData);

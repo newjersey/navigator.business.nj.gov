@@ -1,7 +1,6 @@
 import { CongratulatoryModal } from "@/components/CongratulatoryModal";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { getSectionCompletion, getSectionPositions } from "@/lib/utils/roadmap-helpers";
 import { SectionType, TaskProgress } from "@businessnjgovnavigator/shared";
 import { ReactNode, useState } from "react";
 
@@ -10,7 +9,7 @@ export const useUpdateTaskProgress = (): {
   congratulatoryModal: ReactNode;
 } => {
   const [nextSection, setNextSection] = useState<SectionType | undefined>(undefined);
-  const { roadmap, isSectionCompleted } = useRoadmap();
+  const { roadmap, isSectionCompleted, currentAndNextSection } = useRoadmap();
   const { userData, updateQueue } = useUserData();
   const [congratulatoryModalIsOpen, setCongratulatoryModalIsOpen] = useState<boolean>(false);
 
@@ -20,20 +19,16 @@ export const useUpdateTaskProgress = (): {
     }
 
     updateQueue.queueTaskProgress({ [taskId]: newValue });
+    const { current, next } = currentAndNextSection(taskId);
+    const wasSectionPreviouslyCompleted = isSectionCompleted(current);
+    const isSectionNowCompleted = isSectionCompleted(current, updateQueue.current().taskProgress);
 
-    const updatedSectionCompletion = getSectionCompletion(roadmap, updateQueue.current());
-    const { currentSection, nextSection } = getSectionPositions(updatedSectionCompletion, roadmap, taskId);
-
-    const sectionStatusHasChanged =
-      updatedSectionCompletion[currentSection] !== isSectionCompleted(currentSection);
-    const sectionExists = updatedSectionCompletion[currentSection];
-
-    if (sectionStatusHasChanged && sectionExists) {
-      setNextSection(nextSection);
+    if (!wasSectionPreviouslyCompleted && isSectionNowCompleted) {
+      setNextSection(next);
       setCongratulatoryModalIsOpen(true);
       updateQueue.queuePreferences({
         roadmapOpenSections: userData.preferences.roadmapOpenSections.filter((section) => {
-          return section !== currentSection;
+          return section !== current;
         }),
       });
     }

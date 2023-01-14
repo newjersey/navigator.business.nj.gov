@@ -352,12 +352,6 @@ export interface Roadmap {
   tasks: Task[];
 }
 
-export interface RoadmapStatus {
-  sectionCompletion: SectionCompletion;
-}
-
-export type SectionCompletion = Record<SectionType, boolean>;
-
 export interface Step {
   stepNumber: number;
   name: string;
@@ -409,7 +403,7 @@ export const taxFilingMethod = [
   "online-required",
   "online-or-phone",
 ] as const;
-export type TaxFilingMethod = (typeof taxFilingMethod)[number];
+export type TaxFilingMethod = typeof taxFilingMethod[number];
 
 export type TaxAgency =
   | "New Jersey Division of Taxation"

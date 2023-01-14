@@ -3,13 +3,14 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { buildUserRoadmap } from "@/lib/roadmap/buildUserRoadmap";
 import { Roadmap, Task } from "@/lib/types/types";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { SectionType } from "@businessnjgovnavigator/shared/userData";
+import { sectionNames, SectionType, TaskProgress } from "@businessnjgovnavigator/shared/userData";
 import { useContext, useMemo } from "react";
 
 export type UseRoadmapReturnValue = {
   roadmap: Roadmap | undefined;
   sectionNamesInRoadmap: SectionType[];
-  isSectionCompleted: (section: SectionType) => boolean;
+  isSectionCompleted: (section: SectionType, taskProgressOverride?: Record<string, TaskProgress>) => boolean;
+  currentAndNextSection: (taskId: string) => { current: SectionType; next: SectionType | undefined };
 };
 
 export const useRoadmap = (): UseRoadmapReturnValue => {
@@ -50,12 +51,48 @@ export const useRoadmap = (): UseRoadmapReturnValue => {
     });
   };
 
-  const isSectionCompleted = (section: SectionType): boolean => {
-    if (!userData) return false;
-    return tasksInSection(section).every((task) => {
-      return userData.taskProgress[task.id] === "COMPLETED";
+  const sectionOfTask = (taskId: string): SectionType | undefined => {
+    const taskAtHand = roadmap?.tasks.find((task) => {
+      return task.id === taskId;
+    });
+    if (!taskAtHand) {
+      return;
+    }
+    const step = roadmap?.steps.find((step) => {
+      return step.stepNumber === taskAtHand.stepNumber;
+    });
+    return step?.section;
+  };
+
+  const nextUncompletedSection = (currentSection: SectionType): SectionType | undefined => {
+    return sectionNames.slice(sectionNames.indexOf(currentSection) + 1).find((section: SectionType) => {
+      return !isSectionCompleted(section);
     });
   };
 
-  return { roadmap, sectionNamesInRoadmap, isSectionCompleted };
+  const currentAndNextSection = (
+    taskId: string
+  ): {
+    current: SectionType;
+    next: SectionType | undefined;
+  } => {
+    const current = sectionOfTask(taskId) as SectionType;
+    return {
+      current,
+      next: nextUncompletedSection(current),
+    };
+  };
+
+  const isSectionCompleted = (
+    section: SectionType,
+    taskProgressOverride?: Record<string, TaskProgress>
+  ): boolean => {
+    if (!userData) return false;
+    return tasksInSection(section).every((task) => {
+      const status = taskProgressOverride ? taskProgressOverride[task.id] : userData.taskProgress[task.id];
+      return status === "COMPLETED";
+    });
+  };
+
+  return { roadmap, sectionNamesInRoadmap, isSectionCompleted, currentAndNextSection };
 };
