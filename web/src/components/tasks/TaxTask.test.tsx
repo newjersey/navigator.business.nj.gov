@@ -79,13 +79,12 @@ describe("<TaxTask />", () => {
       expect(screen.getByText(Config.tax.saveButtonText)).toBeInTheDocument();
     });
 
-    it("displays the Tax ID field with an existing 9 digit Tax ID and updates the progress to IN_PROGRESS", async () => {
+    it("updates the progress of the task to IN_PROGRESS if there is a pre-existing 9 digit tax id", async () => {
       initialUserData = generateUserData({
         profileData: generateProfileData({ taxId: "123456789" }),
         taskProgress: { [taskId]: "COMPLETED" },
       });
       renderPage();
-      expect(screen.getByLabelText("Save your NJ Tax ID")).toBeInTheDocument();
       await waitFor(() => {
         expect(currentUserData().taskProgress[taskId]).toEqual("IN_PROGRESS");
       });
@@ -93,7 +92,7 @@ describe("<TaxTask />", () => {
 
     it("enters and saves Tax ID", async () => {
       renderPage();
-      fireEvent.change(screen.getByPlaceholderText(Config.tax.placeholderText), {
+      fireEvent.change(screen.getByPlaceholderText(Config.profileDefaults.fields.taxId.default.placeholder), {
         target: { value: "123456789123" },
       });
       fireEvent.click(screen.getByText(Config.tax.saveButtonText));
@@ -104,10 +103,13 @@ describe("<TaxTask />", () => {
 
     it("shows error on length validation failure", () => {
       renderPage();
-      const expectedErrorMessage = templateEval(Config.onboardingDefaults.errorTextMinimumNumericField, {
-        length: "12",
-      });
-      fireEvent.change(screen.getByPlaceholderText(Config.tax.placeholderText), {
+      const expectedErrorMessage = templateEval(
+        Config.profileDefaults.fields.taxId.default.errorTextRequired,
+        {
+          length: "12",
+        }
+      );
+      fireEvent.change(screen.getByPlaceholderText(Config.profileDefaults.fields.taxId.default.placeholder), {
         target: { value: "123123123" },
       });
       fireEvent.click(screen.getByText(Config.tax.saveButtonText));
@@ -117,7 +119,7 @@ describe("<TaxTask />", () => {
 
     it("sets task status to COMPLETED on save", async () => {
       renderPage();
-      fireEvent.change(screen.getByPlaceholderText(Config.tax.placeholderText), {
+      fireEvent.change(screen.getByPlaceholderText(Config.profileDefaults.fields.taxId.default.placeholder), {
         target: { value: "123456789123" },
       });
       fireEvent.click(screen.getByText(Config.tax.saveButtonText));
@@ -151,24 +153,7 @@ describe("<TaxTask />", () => {
     it("displays Tax ID and success message when it exists in data and is 12 digits in length", () => {
       renderPage();
       expect(screen.queryByText(Config.tax.placeholderText)).not.toBeInTheDocument();
-      expect(
-        screen.getByText(templateEval(Config.tax.successText, { taxID: "*******89123" }))
-      ).toBeInTheDocument();
-    });
-
-    it("navigates back to empty input on remove button click", () => {
-      renderPage();
-      fireEvent.click(screen.getByText(Config.taskDefaults.removeText));
-      expect(screen.getByText(Config.tax.saveButtonText)).toBeInTheDocument();
-      expect((screen.getByPlaceholderText(Config.tax.placeholderText) as HTMLInputElement).value).toEqual("");
-      expect(screen.queryByText(Config.taskDefaults.removeText)).not.toBeInTheDocument();
-    });
-
-    it("empties both tax id and encrypted tax id field on remove button click", () => {
-      renderPage();
-      fireEvent.click(screen.getByText(Config.taskDefaults.removeText));
-      expect(currentUserData().profileData.taxId).toEqual(undefined);
-      expect(currentUserData().profileData.encryptedTaxId).toEqual(undefined);
+      expect((screen.getByLabelText("Tax id") as HTMLInputElement).value).toEqual("***-***-*89/123");
     });
   });
 
@@ -202,7 +187,7 @@ describe("<TaxTask />", () => {
 
     it("opens registration modal on save button click", async () => {
       renderPage();
-      fireEvent.change(screen.getByPlaceholderText(Config.tax.placeholderText), {
+      fireEvent.change(screen.getByPlaceholderText(Config.profileDefaults.fields.taxId.default.placeholder), {
         target: { value: "123456789123" },
       });
       fireEvent.click(screen.getByText(`Register & ${Config.tax.saveButtonText}`));
