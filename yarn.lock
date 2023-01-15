@@ -441,9 +441,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-sdk/client-cloudwatch-logs@npm:3.245.0":
-  version: 3.245.0
-  resolution: "@aws-sdk/client-cloudwatch-logs@npm:3.245.0"
+"@aws-sdk/client-cloudwatch-logs@npm:3.250.0":
+  version: 3.250.0
+  resolution: "@aws-sdk/client-cloudwatch-logs@npm:3.250.0"
   dependencies:
     "@aws-crypto/sha256-browser": 2.0.0
     "@aws-crypto/sha256-js": 2.0.0
@@ -481,7 +481,7 @@ __metadata:
     "@aws-sdk/util-utf8-browser": 3.188.0
     "@aws-sdk/util-utf8-node": 3.208.0
     tslib: ^2.3.1
-  checksum: 472d9fb64791d507b814d5a5453b9ff14aa53c43c31217ef0ee8ccf0204adccd85c5166c4bb6d22e220cdc3955ec8fe54de446dbc35e464a727d39fdcd73d7ee
+  checksum: b756d17dc3a2e43b43bc35f9d7e05324cfe78cf4f9f1621f0cd75631d965e0230302586de924947b3410d2cb0f7f8a3e50f414cccda70c7f77813605d48933de
   languageName: node
   linkType: hard
 
@@ -3825,7 +3825,7 @@ __metadata:
   resolution: "@businessnjgovnavigator/api@workspace:api"
   dependencies:
     "@aws-crypto/client-node": 3.1.1
-    "@aws-sdk/client-cloudwatch-logs": 3.245.0
+    "@aws-sdk/client-cloudwatch-logs": 3.250.0
     "@aws-sdk/client-dynamodb": 3.245.0
     "@aws-sdk/client-s3": 3.245.0
     "@aws-sdk/lib-dynamodb": 3.245.0
@@ -3917,7 +3917,7 @@ __metadata:
     "@aws-amplify/core": 5.0.9
     "@aws-crypto/client-node": 3.1.1
     "@aws-crypto/sha256-browser": 2.0.2
-    "@aws-sdk/client-cloudwatch-logs": 3.245.0
+    "@aws-sdk/client-cloudwatch-logs": 3.250.0
     "@aws-sdk/client-dynamodb": 3.245.0
     "@aws-sdk/client-s3": 3.245.0
     "@aws-sdk/lib-dynamodb": 3.245.0
