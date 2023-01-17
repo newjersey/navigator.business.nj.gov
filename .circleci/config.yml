@@ -205,7 +205,7 @@ commands:
             echo 'export USE_FAKE_SELF_REG=true' >> $BASH_ENV
             echo 'export REDIRECT_URL=http://localhost:3000/' >> $BASH_ENV
             echo 'export COGNITO_WEB_CLIENT_ID=$COGNITO_WEB_CLIENT_ID_DEV' >> $BASH_ENV
-            echo 'export FEATURE_BUSINESS_FLLP=false' >> $BASH_ENV
+            echo 'export FEATURE_BUSINESS_FLLP=true' >> $BASH_ENV
             echo 'export FEATURE_BUSINESS_FLP=false' >> $BASH_ENV
             echo 'export FEATURE_BUSINESS_FLC=true' >> $BASH_ENV
             echo 'export FEATURE_BUSINESS_FCORP=false' >> $BASH_ENV
