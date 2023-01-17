@@ -2607,6 +2607,12 @@ collections:
                   hint: This field supports Markdown,
                 }
               - {
+                  label: Review Step - Signer Title Label,
+                  name: reviewStepSignerTitleLabel,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
                   label: Review Step - Signer (Incorporator) Label,
                   name: reviewStepIncorporatorNameLabel,
                   widget: string,
