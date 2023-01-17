@@ -6,7 +6,7 @@ import { Checkbox } from "@mui/material";
 import { ReactElement, useContext, useEffect, useState } from "react";
 
 export const FormationChooseDocuments = (): ReactElement => {
-  const { state, setFormationFormData, setFieldInteracted } = useContext(BusinessFormationContext);
+  const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
   const [totalCost, setTotalCost] = useState<number>(state.displayContent.officialFormationDocument.cost);
 
   useEffect(() => {
@@ -25,7 +25,7 @@ export const FormationChooseDocuments = (): ReactElement => {
   ]);
 
   const handleCertificateOfStandingClick = () => {
-    setFieldInteracted("certificateOfStanding");
+    setFieldsInteracted(["certificateOfStanding"]);
     setFormationFormData((previousFormationData) => {
       return {
         ...previousFormationData,
@@ -35,7 +35,7 @@ export const FormationChooseDocuments = (): ReactElement => {
   };
 
   const handleCertifiedFormationDocumentClick = () => {
-    setFieldInteracted("certifiedCopyOfFormationDocument");
+    setFieldsInteracted(["certifiedCopyOfFormationDocument"]);
     setFormationFormData((previousFormationData) => {
       return {
         ...previousFormationData,

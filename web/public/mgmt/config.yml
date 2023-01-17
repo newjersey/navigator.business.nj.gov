@@ -1858,8 +1858,24 @@ collections:
                   hint: This field supports Markdown,
                 }
               - {
+                  label: Business Address - Address Province Label,
+                  name: addressProvinceLabel,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
                   label: Business Address - Address Line 1 Placeholder,
                   name: addressAddressLine1Placeholder,
+                  widget: string,
+                }
+              - {
+                  label: Business Address - Address Province Placeholder,
+                  name: addressProvincePlaceholder,
+                  widget: string,
+                }
+              - {
+                  label: Business Address - Address Country Placeholder,
+                  name: addressCountryLabel,
                   widget: string,
                 }
               - {
@@ -1874,6 +1890,11 @@ collections:
                   widget: string,
                 }
               - { label: Business Address - City Label, name: addressCityLabel, widget: string }
+              - {
+                  label: Business Address - Municipality Label,
+                  name: addressMunicipalityLabel,
+                  widget: string,
+                }
               - { label: Business Address - City - Placeholder, name: addressCityPlaceholder, widget: string }
               - {
                   label: Business Address - State Label,
@@ -1889,8 +1910,19 @@ collections:
                   hint: This field supports Markdown,
                 }
               - {
+                  label: Business Address - Internationally Postal code Label,
+                  name: addressZipCodeIntlDakotaLabel,
+                  widget: string,
+                  hint: This field supports Markdown,
+                }
+              - {
                   label: Business Address - Zip Code Placeholder,
                   name: addressZipCodePlaceholder,
+                  widget: string,
+                }
+              - {
+                  label: Business Address - Internationally Postal code Placeholder,
+                  name: addressZipCodeIntlDakotaPlaceholder,
                   widget: string,
                 }
               - {
@@ -1906,6 +1938,7 @@ collections:
                   hint: This field supports Markdown,
                 }
               - { label: Business Suffix Placeholder, name: businessSuffixPlaceholder, widget: string }
+              - { label: Business Signer Title Placeholder, name: signerTitlePlaceholder, widget: string }
               - { label: Business Purpose Title, name: businessPurposeTitle, widget: string }
               - {
                   label: Business Purpose Body Text,
@@ -1914,11 +1947,27 @@ collections:
                   hint: This field supports Markdown,
                 }
               - {
+                  label: Business Foreign State of Formation label,
+                  name: foreignStateOfFormationLabel,
+                  widget: string,
+                }
+              - {
+                  label: Business Foreign State of Formation placeholder,
+                  name: foreignStateOfFormationPlaceholder,
+                  widget: string,
+                }
+              - {
+                  label: Business Foreign Date of Formation label,
+                  name: foreignDateOfFormationLabel,
+                  widget: string,
+                }
+              - {
                   label: Business Purpose Add Button Text,
                   name: businessPurposeAddButtonText,
                   widget: string,
                 }
               - { label: Business Purpose Label, name: businessPurposeLabel, widget: string }
+              - { label: Business Signer Type Label, name: signerTypeLabel, widget: string }
               - {
                   label: Business Purpose Placeholder Text,
                   name: businessPurposePlaceholderText,
@@ -1969,6 +2018,14 @@ collections:
               - { label: Edit Button Text, name: editButtonText, widget: string }
               - { label: Error - Address City, name: addressCityErrorText, widget: string }
               - { label: Error - Address State, name: addressStateErrorText, widget: string }
+              - {
+                  label: Error - Foreign State of Formation,
+                  name: foreignStateOfFormationErrorText,
+                  widget: string,
+                }
+              - { label: Error - Foreign Country, name: addressCountryErrorText, widget: string }
+
+              - { label: Error - Address State (Modal), name: addressModalCityErrorText, widget: string }
               - { label: Error - Address Zip Code, name: addressModalZipCodeErrorText, widget: string }
               - { label: Error - Address, name: addressErrorText, widget: string }
               - {
@@ -1990,7 +2047,19 @@ collections:
               - { label: Error - Agent Name, name: agentNameErrorText, widget: string }
               - { label: Error - Agent Number, name: agentNumberErrorText, widget: string }
               - { label: Error - Business Address Line 1, name: addressLine1ErrorText, widget: string }
-              - { label: Error - Business Address Zip Code, name: addressZipCodeErrorText, widget: string }
+              - { label: Error - Business Address Province, name: addressProvinceErrorText, widget: string }
+              - { label: Error - Business Address NJ Zip Code, name: addressZipCodeErrorText, widget: string }
+              - {
+                  label: Error - Business Address US Zip Code,
+                  name: addressZipCodeUsDakotaErrorText,
+                  widget: string,
+                }
+              - {
+                  label: Error - Business Address INTL Zip Code,
+                  name: addressZipCodeIntlDakotaErrorText,
+                  widget: string,
+                }
+
               - { label: Error - Business Name Not Set, name: notSetBusinessNameErrorText, widget: string }
               - { label: Error - Contact First Name, name: contactFirstNameErrorText, widget: string }
               - { label: Error - Contact Last Name, name: contactLastNameErrorText, widget: string }
@@ -2002,15 +2071,26 @@ collections:
                 }
               - { label: Error - Name, name: nameErrorText, widget: string }
               - { label: Error - Signer, name: signerErrorText, widget: string }
-              - { label: Error - Start Date, name: startDateErrorText, widget: string }
+              - { label: Error - Signer Type, name: signerTypeError, widget: string }
+              - {
+                  label: Error - Foreign Date of Formation Error,
+                  name: foreignDateOfFormationErrorText,
+                  widget: string,
+                }
+              - { label: Error - Today Date, name: startTodayDateErrorText, widget: string }
+              - { label: Error - Must be Future Date, name: startFutureDateErrorText, widget: string }
+              - { label: Error - Greater than 30 days Date, name: start30DateErrorText, widget: string }
+              - { label: Error - Greater than 90 days Date, name: start90DateErrorText, widget: string }
               - { label: Error - Submit Heading, name: submitErrorHeading, widget: string }
               - { label: Error - Suffix, name: suffixErrorText, widget: string }
               - { label: Initial Next Button Text, name: initialNextButtonText, widget: string }
+              - { label: Initial Next Nexus Button Text, name: initialNextNexusButtonText, widget: string }
               - { label: LLC Label, name: llcText, widget: string }
               - { label: LLP Label, name: llpText, widget: string }
               - { label: LP Label, name: lpText, widget: string }
               - { label: S-Corp Label, name: sCorpText, widget: string }
               - { label: C-Corp Label, name: cCorpText, widget: string }
+              - { label: Foreign Preface Label, name: foreignLegalPrefaceText, widget: string }
               - {
                   label: Legal Structure Warning Modal Header,
                   name: legalStructureWarningModalHeader,
@@ -2079,6 +2159,7 @@ collections:
                   widget: string,
                   hint: This field supports Markdown,
                 }
+
               - { label: Address Modal - Name Placeholder, name: addressModalNamePlaceholder, widget: string }
               - {
                   label: Address Modal - Address Line 1 Label,
@@ -2118,6 +2199,11 @@ collections:
               - {
                   label: Address Modal - State Placeholder,
                   name: addressModalStatePlaceholder,
+                  widget: string,
+                }
+              - {
+                  label: Address Modal - Country Placeholder,
+                  name: addressCountryPlaceholder,
                   widget: string,
                 }
               - {
@@ -2341,6 +2427,16 @@ collections:
                   widget: string,
                 }
               - {
+                  label: Review Step - State of Incorporation,
+                  name: reviewStepForeignStateOfIncorporation,
+                  widget: string,
+                }
+              - {
+                  label: Review Step - Foreign State of Incorporation,
+                  name: reviewStepForeignDateOfIncorporation,
+                  widget: string,
+                }
+              - {
                   label: Review Step - Billing Contact Last Name,
                   name: reviewStepContactLastName,
                   widget: string,
@@ -2548,6 +2644,8 @@ collections:
               - { label: Signer - Error Text Name Missing, name: signerNameErrorText, widget: string }
               - { label: Signer - Error Text At Least 1 Needed, name: signerMinimumErrorText, widget: string }
               - { label: Signer - Error Text Checkbox Missing, name: signerCheckboxErrorText, widget: string }
+              - { label: Signer - Error Text Signer Type Missing, name: signerTypeErrorText, widget: string }
+
               - { label: Submit Button Text, name: submitButtonText, widget: string }
               - { label: Update your Profile text, name: updateYourProfileLinkText, widget: string }
               - label: Required Fields Labels (for error alert box)

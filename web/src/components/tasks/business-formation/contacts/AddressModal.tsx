@@ -299,7 +299,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
                     });
                   }}
                   error={addressErrorMap["addressState"].invalid}
-                  autoComplete="address-level1"
+                  autoComplete
                   disabled={shouldBeDisabled("addressState")}
                   onValidation={onValidation}
                   required={true}

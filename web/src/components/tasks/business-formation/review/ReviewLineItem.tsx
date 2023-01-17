@@ -6,6 +6,7 @@ import { ReactElement } from "react";
 interface Props {
   label: string;
   value: string;
+  dataTestId?: string;
   marginOverride?: string;
 }
 
@@ -17,6 +18,7 @@ export const ReviewLineItem = (props: Props): ReactElement => {
       className={`${isTabletAndUp ? "display-flex" : "display-block"} ${
         props.marginOverride || "margin-top-1"
       }`}
+      data-testid={props.dataTestId}
     >
       <div className="text-bold width-11rem">
         <Content>{props.label}</Content>

@@ -878,6 +878,7 @@ export const generateFormationUSAddress = (overrides: Partial<FormationAddress>)
     ),
     addressCountry: "US",
     addressZipCode: randomInt(5).toString(),
+    businessLocationType: "US",
     addressMunicipality: undefined,
     addressProvince: undefined,
     ...overrides,
@@ -889,6 +890,7 @@ export const generateFormationForeignAddress = (overrides: Partial<FormationAddr
     addressLine1: `some-address-1-${randomInt()}`,
     addressLine2: `some-address-2-${randomInt()}`,
     addressCity: `some-address-city-${randomInt()}`,
+    businessLocationType: "INTL",
     addressState: undefined,
     addressMunicipality: undefined,
     addressCountry: randomElementFromArray(
@@ -910,6 +912,7 @@ export const generateFormationNJAddress = (overrides: Partial<FormationAddress>)
     addressCity: undefined,
     addressProvince: undefined,
     addressCountry: "US",
+    businessLocationType: "NJ",
     addressState: { shortCode: "NJ", name: "New Jersey" },
     addressZipCode: `0${randomIntFromInterval("07001", "08999").toString()}`,
     ...overrides,

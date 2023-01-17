@@ -14,7 +14,12 @@ describe("dateHelpers", () => {
   describe("parseDateWithFormat", () => {
     it("correctly parses the date", () => {
       const value = parseDateWithFormat("01-02-2010", "MM-DD-YYYY");
-      expect(value).toStrictEqual(dayjs("2010-01-02"));
+      expect(value.toJSON()).toStrictEqual(dayjs("2010-01-02").toJSON());
+    });
+
+    it("evaluates as an invalid date", () => {
+      const value = parseDateWithFormat("23321", "MM-DD-YYYY");
+      expect(value.isValid()).toEqual(false);
     });
   });
 

@@ -11,7 +11,7 @@ export const castPublicFilingLegalTypeToFormationType = (
   legalStructureId: PublicFilingLegalType,
   persona: BusinessPersona | undefined
 ): FormationLegalType => {
-  return `${persona == "FOREIGN" ? "foreign-" : ""}${legalStructureId}` as FormationLegalType;
+  return `${persona == "FOREIGN" ? foreignLegalTypePrefix : ""}${legalStructureId}` as FormationLegalType;
 };
 
 export type SignerTitle =
@@ -22,7 +22,8 @@ export type SignerTitle =
   | "President"
   | "Vice-President"
   | "Chairman of the Board"
-  | "CEO";
+  | "CEO"
+  | "";
 
 export const publicFilingLegalTypes = [
   "limited-liability-partnership",
@@ -49,6 +50,7 @@ export const allFormationLegalTypes = [
 
 export type FormationLegalType = (typeof allFormationLegalTypes)[number];
 
+export const foreignLegalTypePrefix = "foreign-";
 export const BusinessSignerTypeMap: Record<FormationLegalType, SignerTitle[]> = {
   "limited-liability-company": ["Authorized Representative"],
   "limited-liability-partnership": ["Authorized Partner"],
@@ -69,6 +71,7 @@ export interface FormationData {
   readonly completedFilingPayment: boolean;
 }
 
+export type FormationBusinessLocationType = "US" | "INTL" | "NJ";
 export interface FormationAddress {
   readonly addressLine1: string;
   readonly addressLine2: string;
@@ -77,7 +80,8 @@ export interface FormationAddress {
   readonly addressMunicipality?: Municipality;
   readonly addressProvince?: string;
   readonly addressZipCode: string;
-  readonly addressCountry: CountriesShortCodes;
+  readonly addressCountry: CountriesShortCodes | undefined;
+  readonly businessLocationType: FormationBusinessLocationType | undefined;
 }
 
 export interface FormationSigner {
@@ -98,6 +102,7 @@ export type ForeignGoodStandingFileObject = {
 };
 
 export interface FormationFormData extends FormationAddress {
+  readonly legalType: FormationLegalType;
   readonly businessName: string;
   readonly businessSuffix: BusinessSuffix | undefined;
   readonly businessTotalStock: string;
@@ -182,15 +187,16 @@ export const createEmptyFormationAddress = (): FormationAddress => {
     addressState: undefined,
     addressZipCode: "",
     addressProvince: undefined,
-    addressCountry: "US",
+    addressCountry: undefined,
+    businessLocationType: undefined,
   };
 };
 
-export const createEmptyFormationSigner = (legalStructureId: FormationLegalType): FormationSigner => {
+export const createEmptyFormationSigner = (): FormationSigner => {
   return {
     name: "",
     signature: false,
-    title: BusinessSignerTypeMap[legalStructureId][0],
+    title: "",
   };
 };
 
@@ -198,22 +204,22 @@ export const createEmptyFormationMember = (): FormationMember => {
   return {
     name: "",
     ...createEmptyFormationAddress(),
+    addressCountry: "US",
+    businessLocationType: "US",
   };
 };
 
-export const createEmptyFormationIncorporator = (
-  legalStructureId: FormationLegalType
-): FormationIncorporator => {
+export const createEmptyFormationIncorporator = (): FormationIncorporator => {
   return {
-    ...createEmptyFormationSigner(legalStructureId),
-    ...createEmptyFormationAddress(),
+    ...createEmptyFormationSigner(),
+    ...createEmptyFormationMember(),
   };
 };
 
 export const createEmptyFormationFormData = (): FormationFormData => {
   return {
     ...createEmptyFormationAddress(),
-    addressState: { name: "New Jersey", shortCode: "NJ" },
+    legalType: defaultFormationLegalType,
     businessName: "",
     businessSuffix: undefined,
     businessTotalStock: "",
@@ -312,6 +318,7 @@ export const AllBusinessSuffixes = [
   ...llpBusinessSuffix,
   ...lpBusinessSuffix,
   ...corpBusinessSuffix,
+  ...foreignCorpBusinessSuffix,
 ] as const;
 
 export type BusinessSuffix = (typeof AllBusinessSuffixes)[number];

@@ -3,38 +3,56 @@ import { Content } from "@/components/Content";
 import { GenericTextField } from "@/components/GenericTextField";
 import { Button } from "@/components/njwds-extended/Button";
 import { Icon } from "@/components/njwds/Icon";
+import {
+  createSignedEmptyFormationObject,
+  needsSignerTypeFunc,
+} from "@/components/tasks/business-formation/contacts/helpers";
 import { ValidatedCheckbox } from "@/components/ValidatedCheckbox";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { MediaQueries } from "@/lib/PageSizes";
 import { useMountEffect } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { createEmptyFormationSigner, FormationFields, FormationSigner } from "@businessnjgovnavigator/shared";
-import { useMediaQuery } from "@mui/material";
-import React, { ChangeEvent, ReactElement, useContext } from "react";
+import {
+  BusinessSignerTypeMap,
+  createEmptyFormationSigner,
+  FormationSigner,
+  SignerTitle,
+} from "@businessnjgovnavigator/shared";
+import { FormHelperText, MenuItem, Select, useMediaQuery } from "@mui/material";
+import { ChangeEvent, ReactElement, useContext, useMemo } from "react";
 
 export const Signatures = (): ReactElement => {
   const FIELD_NAME = "signers";
-  const { state, setFormationFormData, setFieldInteracted } = useContext(BusinessFormationContext);
+  const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
   const { doesFieldHaveError } = useFormationErrors();
 
+  const needsSignerType = useMemo(
+    () => needsSignerTypeFunc(state.formationFormData.legalType),
+    [state.formationFormData.legalType]
+  );
+
   useMountEffect(() => {
-    state.formationFormData.signers ??
-      setFormationFormData((previousFormationData) => {
-        return {
-          ...previousFormationData,
-          signers: [createEmptyFormationSigner(state.legalStructureId)],
-        };
-      });
+    state.formationFormData.signers && state.formationFormData.signers.length > 0
+      ? null
+      : setFormationFormData((previousFormationData) => {
+          return {
+            ...previousFormationData,
+            signers: [
+              createSignedEmptyFormationObject(previousFormationData.legalType, createEmptyFormationSigner),
+            ],
+          };
+        });
   });
+
   const addSignerField = () => {
     setFormationFormData((previousFormationData) => {
       return {
         ...previousFormationData,
         signers: [
           ...(state.formationFormData.signers ?? []),
-          createEmptyFormationSigner(state.legalStructureId),
+          createSignedEmptyFormationObject(previousFormationData.legalType, createEmptyFormationSigner),
         ],
       };
     });
@@ -44,6 +62,20 @@ export const Signatures = (): ReactElement => {
     const signers = [...(state.formationFormData.signers ?? [])];
     signers.splice(index, 1);
 
+    setFormationFormData((previousFormationData) => {
+      return {
+        ...previousFormationData,
+        signers,
+      };
+    });
+  };
+
+  const handleTypeChange = (value: SignerTitle, index: number): void => {
+    const signers = [...(state.formationFormData.signers ?? [])];
+    signers[index] = {
+      ...signers[index],
+      title: value,
+    };
     setFormationFormData((previousFormationData) => {
       return {
         ...previousFormationData,
@@ -80,21 +112,19 @@ export const Signatures = (): ReactElement => {
     });
   };
 
-  const renderSignatureColumn = ({
-    onChange,
-    checked,
-    fieldName,
-    index,
-  }: {
-    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-    checked: boolean;
-    fieldName: FormationFields;
-    index?: number;
-  }) => {
+  const renderSignatureColumn = ({ index }: { index: number }) => {
+    if (!state.formationFormData.signers) {
+      return;
+    }
+    const checked = state.formationFormData.signers[index].signature;
     return (
-      <div className="grid-col-auto width-6 display-flex flex-column flex-align-center flex-justify-center">
+      <div
+        className={`grid-col-auto width-6 display-flex flex-column flex-align-center ${
+          index == 0 ? "flex-justify-center" : "tablet:flex-justify-start margin-top-4 tablet:margin-top-0"
+        }`}
+      >
         <label
-          htmlFor={index ? `signature-checkbox-${fieldName}-${index}` : `signature-checkbox-${fieldName}`}
+          htmlFor={index ? `signature-checkbox-signers-${index}` : `signature-checkbox-signers`}
           className="text-bold"
           style={{ display: "none" }}
         >
@@ -102,10 +132,12 @@ export const Signatures = (): ReactElement => {
         </label>
         <div style={{ height: "56px" }} className="display-flex flex-column flex-justify-center">
           <ValidatedCheckbox
-            id={index ? `signature-checkbox-${fieldName}-${index}` : `signature-checkbox-${fieldName}`}
-            onChange={onChange}
+            id={index ? `signature-checkbox-signers-${index}` : `signature-checkbox-signers`}
+            onChange={(event) => {
+              return handleSignerCheckbox(event, index);
+            }}
             checked={checked}
-            error={doesFieldHaveError(fieldName) && checked}
+            error={doesFieldHaveError(FIELD_NAME) && !checked}
           />
         </div>
       </div>
@@ -136,50 +168,144 @@ export const Signatures = (): ReactElement => {
 
   const hasError = doesFieldHaveError(FIELD_NAME);
 
+  const getTypeField = (index: number) => {
+    if (!state.formationFormData.signers) return;
+    return (
+      <>
+        {!isTabletAndUp && (
+          <Content className={"margin-bottom-1"}>{Config.businessFormationDefaults.signerTypeLabel}</Content>
+        )}
+
+        <Select
+          fullWidth
+          error={hasError && !state.formationFormData.signers[index]?.title}
+          displayEmpty
+          value={state.formationFormData.signers[index]?.title ?? ""}
+          onChange={(event) => {
+            handleTypeChange(event.target.value as SignerTitle, index);
+          }}
+          inputProps={{
+            "aria-label": `Signer title ${index}`,
+            "data-testid": `signer-title-${index}`,
+          }}
+          renderValue={(selected) => {
+            if (!selected) {
+              return (
+                <span className="text-base">{Config.businessFormationDefaults.signerTitlePlaceholder}</span>
+              );
+            }
+
+            return selected;
+          }}
+        >
+          {BusinessSignerTypeMap[state.formationFormData.legalType].map((title) => {
+            return (
+              <MenuItem key={title} value={title} data-testid={title}>
+                {title}
+              </MenuItem>
+            );
+          })}
+        </Select>
+        {hasError && state.formationFormData!.signers[index].title == undefined && (
+          <FormHelperText className={"text-error-dark"}>
+            {Config.businessFormationDefaults.signerTypeError}
+          </FormHelperText>
+        )}
+      </>
+    );
+  };
+
+  const getSignatureField = (index: number) => {
+    if (!state.formationFormData.signers) {
+      return;
+    }
+    return (
+      <>
+        {isTabletAndUp || index == 0 ? (
+          <></>
+        ) : (
+          <Content className="margin-bottom-1">{Config.businessFormationDefaults.signerLabel}</Content>
+        )}
+        <GenericTextField
+          noValidationMargin
+          value={state.formationFormData.signers[index].name}
+          placeholder={Config.businessFormationDefaults.signerPlaceholder}
+          handleChange={(value: string) => {
+            return handleSignerChange(value, index);
+          }}
+          error={hasError && state.formationFormData.signers[index].name.length === 0}
+          onValidation={() => {
+            setFieldsInteracted([FIELD_NAME]);
+          }}
+          validationText={
+            index > 0
+              ? Config.businessFormationDefaults.additionalSignatureNameErrorText
+              : Config.businessFormationDefaults.signerErrorText
+          }
+          fieldName="signer"
+          className={`margin-top-0`}
+          ariaLabel={`Signer ${index}`}
+          required={true}
+          formInputFull
+        />
+      </>
+    );
+  };
+
+  const getRowErrors = (it: FormationSigner) => {
+    const needsTypeField = BusinessSignerTypeMap[state.formationFormData.legalType].length > 1;
+    const error = it.name.length === 0 || !it.signature;
+    if (needsTypeField) {
+      return (error || !it.title) && hasError;
+    } else {
+      return error && hasError;
+    }
+  };
+
   return (
     <>
-      <div className="margin-bottom-2">
+      <div className="grid-col">
         <Content>{state.displayContent.signatureHeader.contentMd}</Content>
-        {hasError ? <></> : <br />}
-        <div className="grid-row flex-align-center">
-          <div className={`grid-col input-error-bar ${hasError ? "error" : ""}`}>
+        <div className={`grid-row margin-y-2 flex-align-start`}>
+          <div className={`grid-col`}>
             <div className="fdr space-between">
               <Content>{Config.businessFormationDefaults.signerLabel}</Content>
+              {isTabletAndUp && needsSignerType && (
+                <Content>{Config.businessFormationDefaults.signerTypeLabel}</Content>
+              )}
               <Content>{`${Config.businessFormationDefaults.signatureColumnLabel}*`}</Content>
             </div>
             {!state.formationFormData.signers || state.formationFormData.signers?.length === 0 ? (
-              <div className="padding-2">
-                <hr />
-                <Content>{state.displayContent.signatureHeader.placeholder ?? ""}</Content>
-                <hr />
-              </div>
+              <></>
             ) : (
-              <div className="grid-row flex-align-center" data-testid={`signers-0`}>
+              <div
+                className={`grid-row flex-align-start  input-error-bar ${
+                  (
+                    state.formationFormData.signers && state.formationFormData.signers.length > 0
+                      ? getRowErrors(state.formationFormData.signers[0])
+                      : false
+                  )
+                    ? "error"
+                    : ""
+                }`}
+                data-testid={`signers-0`}
+              >
                 <div className="grid-col">
-                  <GenericTextField
-                    value={state.formationFormData.signers[0].name}
-                    placeholder={Config.businessFormationDefaults.signerPlaceholder}
-                    handleChange={(value: string) => {
-                      return handleSignerChange(value, 0);
-                    }}
-                    error={hasError && !!state.formationFormData.signers[0].name}
-                    onValidation={() => {
-                      setFieldInteracted(FIELD_NAME);
-                    }}
-                    validationText={Config.businessFormationDefaults.signerErrorText}
-                    fieldName="signer"
-                    ariaLabel={`Signer 0`}
-                    required={true}
-                    formInputFull
-                  />
+                  <div className="grid-row margin-top-1">
+                    <div className={`grid-col-12 ${needsSignerType ? "tablet:grid-col-6" : ""}`}>
+                      {getSignatureField(0)}
+                    </div>
+                    {needsSignerType && (
+                      <div className="grid-col-12 tablet:grid-col-5 tablet:margin-left-1 margin-top-1 tablet:margin-top-0">
+                        {" "}
+                        {getTypeField(0)}
+                      </div>
+                    )}
+                  </div>
                 </div>
-                <div style={{ marginBottom: "19px" }}>
+                <div style={{ marginBottom: "1em" }}>
                   {renderSignatureColumn({
-                    onChange: (event) => {
-                      return handleSignerCheckbox(event, 0);
-                    },
-                    checked: state.formationFormData.signers[0]?.signature,
-                    fieldName: "signers",
+                    index: 0,
                   })}
                 </div>
               </div>
@@ -191,50 +317,53 @@ export const Signatures = (): ReactElement => {
         {(state.formationFormData.signers ?? []).slice(1).map((it: FormationSigner, _index: number) => {
           const index = _index + 1;
           return (
-            <div className="margin-bottom-3" key={index}>
-              <div className="grid-row margin-bottom-1 fas" data-testid={`signers-${index}`}>
+            <div key={`signature-${index}`}>
+              {isTabletAndUp ? <></> : <hr className="margin-top-2" />}
+              <div className={`grid-row margin-bottom-2 input-error-bar ${getRowErrors(it) ? "error" : ""}`}>
                 <div className="grid-col">
-                  <GenericTextField
-                    noValidationMargin={true}
-                    value={it.name}
-                    placeholder={Config.businessFormationDefaults.signerPlaceholder ?? ""}
-                    handleChange={(value: string) => {
-                      return handleSignerChange(value, index);
-                    }}
-                    error={hasError && it.name.length === 0}
-                    validationText={Config.businessFormationDefaults.additionalSignatureNameErrorText}
-                    fieldName="signers"
-                    ariaLabel={`Signer ${index}`}
-                    formInputFull
-                  />
+                  <div className="grid-row margin-bottom-1" data-testid={`signers-${index}`}>
+                    <div className="grid-col flex-align-self-center margin-top-1">
+                      <div className="grid-row">
+                        <div
+                          className={`grid-col-12 ${
+                            needsSignerType ? "tablet:grid-col-6" : ""
+                          } margin-bottom-1 tablet:margin-bottom-0`}
+                        >
+                          {getSignatureField(index)}
+                        </div>
+                        {needsSignerType && (
+                          <div className="grid-col-12 tablet:grid-col-5 tablet:margin-left-1">
+                            {getTypeField(index)}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
+                    {renderSignatureColumn({
+                      index: index,
+                    })}
+                    {isTabletAndUp &&
+                      renderDeleteColumn({
+                        visible: true,
+                        onClick: () => {
+                          return removeSigner(index);
+                        },
+                      })}
+                  </div>
+                  {!isTabletAndUp && (
+                    <Button
+                      style="tertiary"
+                      className="margin-y-1"
+                      underline
+                      onClick={() => {
+                        return removeSigner(index);
+                      }}
+                    >
+                      {Config.businessFormationDefaults.signatureDeleteMobileText}
+                    </Button>
+                  )}
                 </div>
-                {renderSignatureColumn({
-                  onChange: (event) => {
-                    return handleSignerCheckbox(event, index);
-                  },
-                  checked: it.signature,
-                  fieldName: "signers",
-                  index: index,
-                })}
-                {isTabletAndUp &&
-                  renderDeleteColumn({
-                    visible: true,
-                    onClick: () => {
-                      return removeSigner(index);
-                    },
-                  })}
               </div>
-              {isTabletAndUp && (
-                <Button
-                  style="tertiary"
-                  underline
-                  onClick={() => {
-                    return removeSigner(index);
-                  }}
-                >
-                  {Config.businessFormationDefaults.signatureDeleteMobileText}
-                </Button>
-              )}
             </div>
           );
         })}

@@ -8,7 +8,7 @@ import { MediaQueries } from "@/lib/PageSizes";
 import analytics from "@/lib/utils/analytics";
 import { scrollToTop } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { FormationLegalType, LookupLegalStructureById } from "@businessnjgovnavigator/shared/";
+import { PublicFilingLegalType } from "@businessnjgovnavigator/shared/";
 import { useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router";
 import { ReactElement, useContext, useState } from "react";
@@ -19,7 +19,7 @@ interface Props {
 
 export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): ReactElement => {
   const [legalStructureWarningIsOpen, setLegalStructureWarningIsOpen] = useState<boolean>(false);
-  const { setStepIndex } = useContext(BusinessFormationContext);
+  const { state, setStepIndex } = useContext(BusinessFormationContext);
   const { userData } = useUserData();
   const router = useRouter();
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
@@ -34,16 +34,22 @@ export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): 
     setLegalStructureWarningIsOpen(true);
   };
 
-  const legalStructure = LookupLegalStructureById(userData?.profileData.legalStructureId);
-  const legalStructureName = (
-    {
-      "limited-liability-company": Config.businessFormationDefaults.llcText,
-      "limited-liability-partnership": Config.businessFormationDefaults.llpText,
-      "limited-partnership": Config.businessFormationDefaults.lpText,
-      "c-corporation": Config.businessFormationDefaults.cCorpText,
-      "s-corporation": Config.businessFormationDefaults.sCorpText,
-    } as Record<FormationLegalType, string>
-  )[legalStructure.id as FormationLegalType];
+  const legalStructureName = () =>
+    `${
+      userData?.profileData.businessPersona == "FOREIGN"
+        ? `${Config.businessFormationDefaults.foreignLegalPrefaceText} `
+        : ""
+    }${
+      (
+        {
+          "limited-liability-company": Config.businessFormationDefaults.llcText,
+          "limited-liability-partnership": Config.businessFormationDefaults.llpText,
+          "limited-partnership": Config.businessFormationDefaults.lpText,
+          "c-corporation": Config.businessFormationDefaults.cCorpText,
+          "s-corporation": Config.businessFormationDefaults.sCorpText,
+        } as Record<PublicFilingLegalType, string>
+      )[userData?.profileData.legalStructureId as PublicFilingLegalType]
+    }`;
 
   if (!userData) {
     return <></>;
@@ -83,9 +89,9 @@ export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): 
         <div className="padding-205 flex-half">
           <Content>{Config.businessFormationDefaults.reviewStepBusinessNameLabel}</Content>
           <span className="text-accent-cool-darker">
-            {userData.formationData.formationFormData.businessName ||
-              Config.businessFormationDefaults.notSetBusinessNameText}
-          </span>{" "}
+            {state.formationFormData.businessName || Config.businessFormationDefaults.notSetBusinessNameText}{" "}
+            {""}
+          </span>
           {!isReviewStep && (
             <Button
               style="tertiary"
@@ -105,7 +111,8 @@ export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): 
           data-testid="legal-structure"
         >
           <Content>{Config.businessFormationDefaults.reviewStepLegalStructureLabel}</Content>
-          <span>{legalStructureName}</span>{" "}
+          <span>{legalStructureName()}</span>
+          <span> </span>
           {!isReviewStep && (
             <Button
               style="tertiary"

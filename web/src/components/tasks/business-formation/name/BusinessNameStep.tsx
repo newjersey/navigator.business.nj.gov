@@ -19,7 +19,7 @@ const SearchBusinessNameErrorLookup: Record<SearchBusinessNameError, string> = {
 
 export const BusinessNameStep = (): ReactElement => {
   const FIELD_NAME = "businessName";
-  const { state, setFormationFormData, setFieldInteracted, setBusinessNameAvailability } =
+  const { state, setFormationFormData, setFieldsInteracted, setBusinessNameAvailability } =
     useContext(BusinessFormationContext);
   const { userData } = useUserData();
   const {
@@ -66,7 +66,7 @@ export const BusinessNameStep = (): ReactElement => {
   const doSearch = (event: FormEvent<HTMLFormElement>): void => {
     searchBusinessName(event).catch(() => {});
     setNameInFormationData();
-    setFieldInteracted(FIELD_NAME);
+    setFieldsInteracted([FIELD_NAME]);
   };
 
   const hasError = doesFieldHaveError(FIELD_NAME) && state.hasBusinessNameBeenSearched && !isLoading;
@@ -80,7 +80,7 @@ export const BusinessNameStep = (): ReactElement => {
           <div className="grid-row grid-gap-2">
             <div className="tablet:grid-col-8">
               <TextField
-                autoComplete="off"
+                autoComplete="no"
                 className="fg1 width-100"
                 margin="dense"
                 value={currentName}
@@ -100,7 +100,7 @@ export const BusinessNameStep = (): ReactElement => {
                 }
                 onBlur={(event: FocusEvent<HTMLInputElement>) => {
                   setNameInFormationData();
-                  setFieldInteracted(FIELD_NAME);
+                  setFieldsInteracted([FIELD_NAME]);
                   onBlurNameField(event.target.value);
                 }}
               />

@@ -13,7 +13,7 @@ import { Checkbox, FormControl, FormControlLabel, Radio, RadioGroup } from "@mui
 import React, { ReactElement, useContext, useEffect } from "react";
 
 export const RegisteredAgent = (): ReactElement => {
-  const { state, setFormationFormData, setFieldInteracted } = useContext(BusinessFormationContext);
+  const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
   const { municipalities } = useContext(MunicipalitiesContext);
   const { userData } = useUserData();
   const { doesFieldHaveError } = useFormationErrors();
@@ -48,14 +48,19 @@ export const RegisteredAgent = (): ReactElement => {
   );
 
   const resetAgentFieldsInteraction = (): void => {
-    setFieldInteracted("agentNumberOrManual", { setToUninteracted: true });
-    setFieldInteracted("agentNumber", { setToUninteracted: true });
-    setFieldInteracted("agentName", { setToUninteracted: true });
-    setFieldInteracted("agentEmail", { setToUninteracted: true });
-    setFieldInteracted("agentOfficeAddressLine1", { setToUninteracted: true });
-    setFieldInteracted("agentOfficeAddressLine2", { setToUninteracted: true });
-    setFieldInteracted("agentOfficeAddressMunicipality", { setToUninteracted: true });
-    setFieldInteracted("agentOfficeAddressZipCode", { setToUninteracted: true });
+    setFieldsInteracted(
+      [
+        "agentNumberOrManual",
+        "agentNumber",
+        "agentName",
+        "agentEmail",
+        "agentOfficeAddressLine1",
+        "agentOfficeAddressLine2",
+        "agentOfficeAddressMunicipality",
+        "agentOfficeAddressZipCode",
+      ],
+      { setToUninteracted: true }
+    );
   };
 
   const handleRadioSelection = (event: React.ChangeEvent<{ name?: string; value: unknown }>) => {
@@ -77,8 +82,8 @@ export const RegisteredAgent = (): ReactElement => {
         agentEmail: userData?.user.email ?? "",
         agentUseAccountInfo: checked,
       });
-      setFieldInteracted("agentName");
-      setFieldInteracted("agentEmail");
+
+      setFieldsInteracted(["agentName", "agentEmail"]);
     } else {
       setFormationFormData({
         ...state.formationFormData,
@@ -107,10 +112,12 @@ export const RegisteredAgent = (): ReactElement => {
         agentOfficeAddressZipCode: state.formationFormData.addressZipCode,
         agentUseBusinessAddress: checked,
       });
-      setFieldInteracted("agentOfficeAddressLine1");
-      setFieldInteracted("agentOfficeAddressLine2");
-      setFieldInteracted("agentOfficeAddressMunicipality");
-      setFieldInteracted("agentOfficeAddressZipCode");
+      setFieldsInteracted([
+        "agentOfficeAddressLine1",
+        "agentOfficeAddressLine2",
+        "agentOfficeAddressMunicipality",
+        "agentOfficeAddressZipCode",
+      ]);
     } else {
       setFormationFormData({
         ...state.formationFormData,
@@ -205,18 +212,20 @@ export const RegisteredAgent = (): ReactElement => {
                   />
                 </div>
               </div>
-              <div className="margin-bottom-1">
-                <FormControlLabel
-                  label={Config.businessFormationDefaults.sameAgentAddressAsBusiness}
-                  control={
-                    <Checkbox
-                      checked={state.formationFormData.agentUseBusinessAddress}
-                      onChange={toggleUseBusinessAddress}
-                      id="same-agent-address-as-business-checkbox"
-                    />
-                  }
-                />
-              </div>
+              {state.formationFormData.businessLocationType == "NJ" && (
+                <div className="margin-bottom-1">
+                  <FormControlLabel
+                    label={Config.businessFormationDefaults.sameAgentAddressAsBusiness}
+                    control={
+                      <Checkbox
+                        checked={state.formationFormData.agentUseBusinessAddress}
+                        onChange={toggleUseBusinessAddress}
+                        id="same-agent-address-as-business-checkbox"
+                      />
+                    }
+                  />
+                </div>
+              )}
               <BusinessFormationTextField
                 label={Config.businessFormationDefaults.registeredAgentAddressLine1Label}
                 placeholder={Config.businessFormationDefaults.registeredAgentAddressLine1Placeholder}
@@ -265,7 +274,6 @@ export const RegisteredAgent = (): ReactElement => {
                     value={"New Jersey"}
                     placeholder={Config.businessFormationDefaults.addressModalStatePlaceholder}
                     validationText={Config.businessFormationDefaults.addressStateErrorText}
-                    autoComplete="address-level1"
                     disabled={true}
                     onSelect={() => {}}
                     className={"margin-top-2"}

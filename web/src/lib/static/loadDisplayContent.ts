@@ -11,6 +11,7 @@ import { getMarkdown } from "@/lib/utils/markdownReader";
 import {
   allFormationLegalTypes,
   defaultFormationLegalType,
+  foreignLegalTypePrefix,
   FormationLegalType,
 } from "@businessnjgovnavigator/shared/";
 import fs from "fs";
@@ -168,7 +169,7 @@ export const getFormationDisplayContentDefaults = (
       (accumulator: FormationDisplayContentMap, legalId: FormationLegalType) => {
         accumulator[legalId] = getFormationFields(
           legalId,
-          legalId.includes("foreign-") ? defaultForeignDisplayContent : defaultDisplayContent
+          legalId.includes(foreignLegalTypePrefix) ? defaultForeignDisplayContent : defaultDisplayContent
         );
         return accumulator;
       },

@@ -464,7 +464,7 @@ export const generateStateItem = () => {
 
 export const generateFormationData = (
   overrides: Partial<FormationData>,
-  legalStructureId = randomLegalStructure().id as FormationLegalType
+  legalStructureId?: FormationLegalType
 ): FormationData => {
   return {
     formationFormData: generateFormationFormData({}, { legalStructureId }),

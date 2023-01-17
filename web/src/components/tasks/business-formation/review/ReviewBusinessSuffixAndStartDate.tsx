@@ -28,7 +28,27 @@ export const ReviewBusinessSuffixAndStartDate = (): ReactElement => {
           defaultDisplayDateFormat
         )}
       />
-
+      {state.formationFormData.businessLocationType != "NJ" && (
+        <>
+          <ReviewLineItem
+            dataTestId="foreign-state-of-formation"
+            label={Config.businessFormationDefaults.reviewStepForeignStateOfIncorporation}
+            value={state.formationFormData.foreignStateOfFormation ?? italicNotEnteredText}
+          />
+          <ReviewLineItem
+            dataTestId="foreign-date-of-formation"
+            label={Config.businessFormationDefaults.reviewStepForeignDateOfIncorporation}
+            value={
+              state.formationFormData.foreignDateOfFormation
+                ? parseDateWithFormat(
+                    state.formationFormData.foreignDateOfFormation,
+                    defaultDateFormat
+                  ).format(defaultDisplayDateFormat)
+                : italicNotEnteredText
+            }
+          />
+        </>
+      )}
       {state.formationFormData.businessTotalStock.length > 0 && (
         <ReviewLineItem
           label={Config.businessFormationDefaults.reviewBusinessTotalStockLabel}

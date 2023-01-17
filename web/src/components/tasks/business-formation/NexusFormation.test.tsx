@@ -75,7 +75,6 @@ jest.mock("@/lib/api-client/apiClient", () => ({
 
 const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
 
-const clickNext = () => fireEvent.click(screen.getByText(Config.nexusNameSearch.nexusNextButton));
 const clickBack = () =>
   fireEvent.click(screen.getByText(Config.businessFormationDefaults.previousButtonText));
 
@@ -132,6 +131,8 @@ describe("<NexusFormationFlow />", () => {
 
   describe("when in DBA flow", () => {
     let page: FormationPageHelpers;
+    const clickNext = () =>
+      fireEvent.click(screen.getByText(Config.businessFormationDefaults.initialNextNexusButtonText));
 
     beforeEach(async () => {
       page = preparePage(initialUserData, displayContent);
@@ -238,6 +239,8 @@ describe("<NexusFormationFlow />", () => {
 
   describe("when in formation flow", () => {
     let page: FormationPageHelpers;
+    const clickNext = () =>
+      fireEvent.click(screen.getByText(Config.businessFormationDefaults.initialNextNexusButtonText));
 
     describe("when feature flag is set", () => {
       describe("business name step", () => {

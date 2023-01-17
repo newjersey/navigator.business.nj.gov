@@ -1,12 +1,12 @@
 import { Alert } from "@/components/njwds-extended/Alert";
 import { Addresses } from "@/components/tasks/business-formation/contacts/Addresses";
+import { createSignedEmptyFormationObject } from "@/components/tasks/business-formation/contacts/helpers";
 import { Members } from "@/components/tasks/business-formation/contacts/Members";
 import { RegisteredAgent } from "@/components/tasks/business-formation/contacts/RegisteredAgent";
 import { Signatures } from "@/components/tasks/business-formation/contacts/Signatures";
 import { getErrorStateForField } from "@/components/tasks/business-formation/getErrorStateForField";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
-import { useUserData } from "@/lib/data-hooks/useUserData";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import {
   corpLegalStructures,
@@ -17,13 +17,13 @@ import {
 import { ReactElement, useContext } from "react";
 
 export const ContactsStep = (): ReactElement => {
-  const { userData } = useUserData();
   const { state, setFormationFormData } = useContext(BusinessFormationContext);
   const { doesFieldHaveError } = useFormationErrors();
 
   const shouldShowMembers = (): boolean => {
-    return [...corpLegalStructures, "limited-liability-company"].includes(
-      userData?.profileData.legalStructureId ?? ""
+    return (
+      [...corpLegalStructures, "limited-liability-company"].includes(state.formationFormData.legalType) &&
+      state.formationFormData.businessLocationType == "NJ"
     );
   };
 
@@ -53,10 +53,13 @@ export const ContactsStep = (): ReactElement => {
             {getErrorStateForField("incorporators", state.formationFormData, undefined).label}
           </Alert>
         )}
-        {incorporationLegalStructures.includes(state.legalStructureId) ? (
+        {incorporationLegalStructures.includes(state.formationFormData.legalType) ? (
           <Addresses<FormationIncorporator>
             createEmptyAddress={() => {
-              return createEmptyFormationIncorporator(state.legalStructureId);
+              return createSignedEmptyFormationObject(
+                state.formationFormData.legalType,
+                createEmptyFormationIncorporator
+              );
             }}
             fieldName={"incorporators"}
             addressData={state.formationFormData.incorporators ?? []}
@@ -69,7 +72,7 @@ export const ContactsStep = (): ReactElement => {
               });
             }}
             defaultAddress={
-              "limited-partnership" === state.legalStructureId
+              "limited-partnership" === state.formationFormData.legalType
                 ? {
                     addressCity:
                       state.formationFormData.addressMunicipality?.name ??
