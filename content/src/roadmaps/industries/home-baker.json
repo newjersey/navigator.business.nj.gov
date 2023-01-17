@@ -44,7 +44,7 @@
     "canBeHomeBased": false,
     "canBeReseller": true
   },
-  "isEnabled": false,
+  "isEnabled": true,
   "additionalSearchTerms": "cottage foods",
   "id": "home-baker",
   "description": "Sells baked goods prepared at the baker’s home."
