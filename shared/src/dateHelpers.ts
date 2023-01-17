@@ -1,5 +1,6 @@
 import dayjs, { Dayjs } from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
+import customParseFormat from "dayjs/plugin/customParseFormat";
 import timezone from "dayjs/plugin/timezone";
 import utc from "dayjs/plugin/utc";
 import { LicenseEntity } from "./license";
@@ -32,8 +33,9 @@ export const parseDate = (date: string | number | undefined): Dayjs => {
   return dayjs(date);
 };
 
-export const parseDateWithFormat = (date: string, format: string): Dayjs => {
-  return dayjs(date, format);
+export const parseDateWithFormat = (date: string, format: string, strict?: boolean): Dayjs => {
+  dayjs.extend(customParseFormat);
+  return dayjs(date, format, strict);
 };
 
 export const getLicenseDate = (entity: LicenseEntity): dayjs.Dayjs => {

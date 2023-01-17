@@ -1,8 +1,4 @@
-import {
-  generateFormationDbaContent,
-  generateFormationDisplayContent,
-  generateUserData,
-} from "@/test/factories";
+import { generateFormationDbaContent, generateFormationDisplayContent } from "@/test/factories";
 import {
   generateFormationProfileData,
   preparePage,
@@ -12,11 +8,18 @@ import { withMarkup } from "@/test/helpers/helpers-testing-library-selectors";
 import { markdownToText } from "@/test/helpers/helpers-utilities";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import {
+  arrayOfCountriesObjects,
+  castPublicFilingLegalTypeToFormationType,
+  defaultDateFormat,
   FormationFormData,
-  FormationLegalType,
   generateFormationFormData,
+  generateFormationSigner,
+  generateMunicipality,
   ProfileData,
+  PublicFilingLegalType,
+  randomInt,
 } from "@businessnjgovnavigator/shared";
+import { getCurrentDate } from "@businessnjgovnavigator/shared/dateHelpers";
 import * as materialUi from "@mui/material";
 import { fireEvent, screen, within } from "@testing-library/react";
 
@@ -49,30 +52,39 @@ describe("Formation - ReviewStep", () => {
     formationFormData: Partial<FormationFormData>
   ) => {
     const profileData = generateFormationProfileData(initialProfileData);
+    const isForeign = profileData.businessPersona == "FOREIGN";
     const formationData = {
       formationFormData: generateFormationFormData(formationFormData, {
-        legalStructureId: profileData.legalStructureId as FormationLegalType,
+        legalStructureId: castPublicFilingLegalTypeToFormationType(
+          profileData.legalStructureId as PublicFilingLegalType,
+          profileData.businessPersona
+        ),
       }),
       formationResponse: undefined,
       getFilingResponse: undefined,
       completedFilingPayment: false,
     };
     const page = preparePage(
-      generateUserData({
+      {
         profileData,
         formationData,
-      }),
+      },
       {
         formationDisplayContent: generateFormationDisplayContent({}),
         formationDbaContent: generateFormationDbaContent({}),
       }
     );
 
+    if (isForeign) {
+      await page.fillAndSubmitNexusBusinessNameStep(formationFormData.businessName);
+    }
     await page.stepperClickToReviewStep();
   };
 
   it("displays business name entered in step 1 as part of business designator line", async () => {
-    const initialProfileData = { businessName: "name in profile" };
+    const initialProfileData: Partial<ProfileData> = {
+      businessName: "name in profile",
+    };
     const formationFormData = { businessName: "name entered in step 1" };
     await renderStep(initialProfileData, formationFormData);
     const designatorSection = within(screen.getByTestId("review-suffix-and-start-date"));
@@ -139,9 +151,99 @@ describe("Formation - ReviewStep", () => {
     expect(screen.getByText("some cool purpose")).toBeInTheDocument();
   });
 
-  it("does not display business purpose within review step when purpose does not exist", async () => {
-    await renderStep({}, { businessPurpose: "" });
-    expect(screen.queryByTestId("business-purpose")).not.toBeInTheDocument();
+  it("displays foreign date of formation within review step", async () => {
+    await renderStep(
+      { businessPersona: "FOREIGN" },
+      { businessStartDate: getCurrentDate().format(defaultDateFormat), foreignDateOfFormation: "2021-01-01" }
+    );
+    expect(screen.getByTestId("foreign-date-of-formation")).toBeInTheDocument();
+    expect(screen.getByText("01/01/2021")).toBeInTheDocument();
+  });
+
+  it("does not display foreign date of formation within review step when non-foreign", async () => {
+    await renderStep({ businessPersona: "STARTING" }, {});
+    expect(screen.queryByTestId("foreign-date-of-formation")).not.toBeInTheDocument();
+  });
+
+  it("display foreign state of formation within review step", async () => {
+    await renderStep(
+      { businessPersona: "FOREIGN" },
+      { addressState: { name: "Alabama", shortCode: "AL" }, foreignStateOfFormation: "Virgin Islands" }
+    );
+    expect(screen.getByTestId("foreign-state-of-formation")).toBeInTheDocument();
+    expect(screen.getByText("Virgin Islands")).toBeInTheDocument();
+  });
+
+  it("does not display foreign state of formation within review step when non-foreign", async () => {
+    await renderStep({ businessPersona: "STARTING" }, {});
+    expect(screen.queryByTestId("foreign-state-of-formation")).not.toBeInTheDocument();
+  });
+
+  it("does not display members section within review step when foreign", async () => {
+    await renderStep({ businessPersona: "FOREIGN" }, {});
+    expect(screen.queryByTestId("edit-members-step")).not.toBeInTheDocument();
+  });
+
+  it("does not include country in address when non-intl", async () => {
+    await renderStep({ businessPersona: "FOREIGN" }, { addressCountry: "US", businessLocationType: "US" });
+    expect(
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      screen.queryByText(arrayOfCountriesObjects.find((cu) => cu.shortCode == "US")!.name, { exact: false })
+    ).not.toBeInTheDocument();
+  });
+
+  it("include country in address when intl", async () => {
+    await renderStep({ businessPersona: "FOREIGN" }, { addressCountry: "US", businessLocationType: "INTL" });
+    expect(
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      screen.getByText(arrayOfCountriesObjects.find((cu) => cu.shortCode == "US")!.name, { exact: false })
+    ).toBeInTheDocument();
+  });
+
+  it("displays state name in address when non-intl", async () => {
+    await renderStep(
+      { businessPersona: "FOREIGN" },
+      {
+        addressState: { name: "Alabama", shortCode: "AL" },
+        businessLocationType: "US",
+        foreignStateOfFormation: "Alaska",
+      }
+    );
+    expect(screen.getByText("Alabama", { exact: false })).toBeInTheDocument();
+  });
+
+  it("displays province name in address when intl", async () => {
+    await renderStep(
+      { businessPersona: "FOREIGN" },
+      { addressProvince: "Random place whatever", businessLocationType: "INTL" }
+    );
+    expect(screen.getByText("Random place whatever", { exact: false })).toBeInTheDocument();
+  });
+
+  it("displays city name in address when non-nj", async () => {
+    await renderStep(
+      { businessPersona: "FOREIGN" },
+      {
+        addressCity: "Roflcopterville",
+        businessLocationType: randomInt() % 2 ? "INTL" : "US",
+      }
+    );
+    expect(screen.getByText("Roflcopterville", { exact: false })).toBeInTheDocument();
+  });
+
+  it("displays Municipality name in address when NJ", async () => {
+    await renderStep(
+      {
+        businessPersona: "STARTING",
+        municipality: generateMunicipality({
+          displayName: "Some city",
+        }),
+      },
+      {
+        businessLocationType: "NJ",
+      }
+    );
+    expect(screen.getByText("Some city", { exact: false })).toBeInTheDocument();
   });
 
   it("displays provisions on review step", async () => {
@@ -177,6 +279,34 @@ describe("Formation - ReviewStep", () => {
     expect(
       screen.getByText(markdownToText(Config.businessFormationDefaults.reviewStepSignaturesHeader))
     ).toBeInTheDocument();
+  });
+
+  it("does not displays signer titles when domestic", async () => {
+    await renderStep(
+      { businessPersona: "STARTING", legalStructureId: "limited-liability-company" },
+      { signers: [generateFormationSigner({ name: "The Dude", title: "Authorized Partner" })] }
+    );
+    expect(
+      screen.queryByText(markdownToText(Config.businessFormationDefaults.reviewStepSignerTitleLabel), {
+        exact: false,
+      })
+    ).not.toBeInTheDocument();
+
+    expect(screen.queryByText("Authorized Partner", { exact: false })).not.toBeInTheDocument();
+  });
+
+  it("displays signer titles when foreign", async () => {
+    await renderStep(
+      { businessPersona: "FOREIGN", legalStructureId: "limited-liability-company" },
+      { signers: [generateFormationSigner({ name: "The Dude", title: "Authorized Partner" })] }
+    );
+    expect(
+      screen.getByText(markdownToText(Config.businessFormationDefaults.reviewStepSignerTitleLabel), {
+        exact: false,
+      })
+    ).toBeInTheDocument();
+
+    expect(screen.getByText("Authorized Partner", { exact: false })).toBeInTheDocument();
   });
 
   describe("when lp", () => {

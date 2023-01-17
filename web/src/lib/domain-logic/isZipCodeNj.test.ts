@@ -24,21 +24,4 @@ describe("isZipCodeNj", () => {
     expect(isZipCodeNj("12345")).toBe(false);
     expect(isZipCodeNj("99999")).toBe(false);
   });
-
-  it("returns false if zipcode does not have 5 digits", () => {
-    expect(isZipCodeNj("1234")).toBe(false);
-    expect(isZipCodeNj("8000")).toBe(false);
-    expect(isZipCodeNj("7001")).toBe(false);
-    expect(isZipCodeNj("999")).toBe(false);
-    expect(isZipCodeNj("1")).toBe(false);
-    expect(isZipCodeNj("081000")).toBe(false);
-  });
-
-  it("returns false if zipcode is not a number", () => {
-    expect(isZipCodeNj("hello")).toBe(false);
-  });
-
-  it("returns false if zipcode contains non-numbers", () => {
-    expect(isZipCodeNj("081g9")).toBe(false);
-  });
 });

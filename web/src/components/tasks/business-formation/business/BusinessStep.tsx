@@ -12,7 +12,7 @@ export const BusinessStep = (): ReactElement => {
   return (
     <div data-testid="business-step">
       <MainBusiness />
-      {state.legalStructureId == "limited-partnership" ? (
+      {state.formationFormData.legalType == "limited-partnership" ? (
         <>
           <hr className="margin-bottom-2 margin-top-0" aria-hidden={true} />
           <BusinessFormationTextBox
@@ -58,8 +58,15 @@ export const BusinessStep = (): ReactElement => {
         title={Config.businessFormationDefaults.businessPurposeTitle}
         contentMd={Config.businessFormationDefaults.businessPurposeBodyText}
       />
-      <hr className="margin-bottom-2 margin-top-0" aria-hidden={true} />
-      <Provisions />
+      {state.formationFormData.businessLocationType != "NJ" &&
+      state.formationFormData.legalType != "foreign-limited-partnership" ? (
+        <></>
+      ) : (
+        <>
+          <hr className="margin-bottom-2 margin-top-0" aria-hidden={true} />
+          <Provisions />
+        </>
+      )}
     </div>
   );
 };

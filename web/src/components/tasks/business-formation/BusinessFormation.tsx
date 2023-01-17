@@ -17,6 +17,7 @@ import { NameAvailability, Task, TasksDisplayContent } from "@/lib/types/types";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { getModifiedTaskContent } from "@/lib/utils/roadmap-helpers";
 
+import { isBusinessStartDateValid } from "@/components/tasks/business-formation/business/BusinessDateValidators";
 import { BusinessFormationPaginator } from "@/components/tasks/business-formation/BusinessFormationPaginator";
 import { NexusFormationFlow } from "@/components/tasks/business-formation/NexusFormationFlow";
 import {
@@ -24,14 +25,14 @@ import {
   createEmptyFormationFormData,
   defaultDateFormat,
   defaultFormationLegalType,
+  foreignLegalTypePrefix,
   FormationFields,
   FormationFormData,
-  getCurrentDate,
+  FormationLegalType,
   getCurrentDateFormatted,
   PublicFilingLegalType,
+  UserData,
 } from "@businessnjgovnavigator/shared/";
-import { parseDateWithFormat } from "@businessnjgovnavigator/shared/dateHelpers";
-import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { useRouter } from "next/router";
 import { ReactElement, useEffect, useMemo, useRef, useState } from "react";
 
@@ -60,9 +61,18 @@ export const BusinessFormation = (props: Props): ReactElement => {
   const [hasBusinessNameBeenSearched, setHasBusinessNameBeenSearched] = useState<boolean>(false);
   const getCompletedFilingApiCallOccurred = useRef<boolean>(false);
 
-  const isValidLegalStructure = allowFormation(
-    userData?.profileData.legalStructureId,
-    userData?.profileData.businessPersona
+  const legalStructureId: FormationLegalType = useMemo(() => {
+    return castPublicFilingLegalTypeToFormationType(
+      (userData?.profileData.legalStructureId ?? defaultFormationLegalType) as PublicFilingLegalType,
+      userData?.profileData.businessPersona
+    );
+  }, [userData?.profileData.businessPersona, userData?.profileData.legalStructureId]);
+
+  const isForeign = useMemo(() => legalStructureId.includes(foreignLegalTypePrefix), [legalStructureId]);
+
+  const isValidLegalStructure = useMemo(
+    () => allowFormation(userData?.profileData.legalStructureId, userData?.profileData.businessPersona),
+    [userData?.profileData.legalStructureId, userData?.profileData.businessPersona]
   );
 
   const setBusinessNameAvailability = (nameAvailability: NameAvailability | undefined) => {
@@ -72,8 +82,8 @@ export const BusinessFormation = (props: Props): ReactElement => {
     }
   };
 
-  const getDate = (date?: string): string => {
-    return !date || parseDateWithFormat(date, defaultDateFormat).isBefore(getCurrentDate())
+  const getBusinessStartDate = (date: string | undefined, legalType: FormationLegalType): string => {
+    return !date || !isBusinessStartDateValid(date, legalType)
       ? getCurrentDateFormatted(defaultDateFormat)
       : date;
   };
@@ -88,10 +98,17 @@ export const BusinessFormation = (props: Props): ReactElement => {
       ...userData.formationData.formationFormData,
       businessName:
         userData.formationData.formationFormData.businessName ?? userData.profileData.businessName,
-      businessStartDate: getDate(userData.formationData.formationFormData.businessStartDate),
+      businessStartDate: getBusinessStartDate(
+        userData.formationData.formationFormData.businessStartDate,
+        legalStructureId
+      ),
       addressMunicipality: userData.profileData.municipality,
+      legalType: legalStructureId,
       contactFirstName: userData.formationData.formationFormData.contactFirstName || splitName.firstName,
       contactLastName: userData.formationData.formationFormData.contactLastName || splitName.lastName,
+      businessLocationType: isForeign
+        ? userData.formationData.formationFormData.businessLocationType ?? "US"
+        : "NJ",
     });
     setHasSetStateFirstTime(true);
   }, userData);
@@ -148,22 +165,15 @@ export const BusinessFormation = (props: Props): ReactElement => {
     })();
   }, [router.isReady, update, router, props.task.urlSlug, userData]);
 
-  const legalStructureId = useMemo(() => {
-    return castPublicFilingLegalTypeToFormationType(
-      (userData?.profileData.legalStructureId ?? defaultFormationLegalType) as PublicFilingLegalType,
-      userData?.profileData.businessPersona
-    );
-  }, [userData?.profileData.businessPersona, userData?.profileData.legalStructureId]);
-
-  const setFieldInteracted = (field: FormationFields, config?: { setToUninteracted: boolean }) => {
+  const setFieldsInteracted = (fields: FormationFields[], config?: { setToUninteracted: boolean }) => {
     setInteractedFields((prevState) => {
       const prevStateFieldRemoved = prevState.filter((it) => {
-        return it !== field;
+        return !fields.includes(it);
       });
       if (config?.setToUninteracted) {
         return [...prevStateFieldRemoved];
       }
-      return [...prevStateFieldRemoved, field];
+      return [...prevStateFieldRemoved, ...fields];
     });
   };
 
@@ -217,14 +227,12 @@ export const BusinessFormation = (props: Props): ReactElement => {
       </div>
     );
   }
-  const isForeign = userData?.profileData.businessPersona == "FOREIGN";
 
   return (
     <BusinessFormationContext.Provider
       value={{
         state: {
           stepIndex: stepIndex,
-          legalStructureId: legalStructureId,
           formationFormData: formationFormData,
           displayContent: props.displayContent.formationDisplayContent[legalStructureId],
           dbaContent: props.displayContent.formationDbaContent,
@@ -238,7 +246,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
         setFormationFormData,
         setStepIndex,
         setShowResponseAlert,
-        setFieldInteracted,
+        setFieldsInteracted,
         setHasBeenSubmitted,
         setBusinessNameAvailability,
       }}

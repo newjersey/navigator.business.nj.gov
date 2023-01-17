@@ -14,8 +14,10 @@ interface Props {
   error?: boolean;
   validationText?: string;
   className?: string;
+  excludeNJ?: boolean;
+  useFullName?: boolean;
   validationLabel?: string;
-  autoComplete?: string;
+  autoComplete?: boolean;
   disabled?: boolean;
   required?: boolean;
 }
@@ -51,24 +53,31 @@ export const StateDropdown = (props: Props): ReactElement => {
     matchFrom: "start",
     trim: true,
     stringify: (option: StateObject) => {
-      return option.shortCode;
+      return props.useFullName ? option.name : option.shortCode;
     },
   });
 
+  const filteredStates = () =>
+    props.excludeNJ
+      ? states.filter((stateObject) => {
+          return stateObject.shortCode != "NJ";
+        })
+      : states;
+
   const getState = (value: string | undefined): StateObject | undefined => {
-    return states.find((state: StateObject) => {
+    return filteredStates().find((state: StateObject) => {
       return state.name == value || state.shortCode == value?.toUpperCase();
     });
   };
 
   return (
     <Autocomplete
-      options={states}
+      options={filteredStates()}
       className={props.className ?? ""}
       value={getState(props.value) || null}
       filterOptions={filterOptions}
       getOptionLabel={(option: StateObject) => {
-        return option.shortCode;
+        return props.useFullName ? option.name : option.shortCode;
       }}
       isOptionEqualToValue={(option: StateObject, value: StateObject) => {
         return option.shortCode === value.shortCode || option.name === value.name;
@@ -82,13 +91,15 @@ export const StateDropdown = (props: Props): ReactElement => {
       onInputChange={handleInputChange}
       onBlur={onValidation}
       onSubmit={onValidation}
-      renderOption={(props, option, { selected }) => {
+      renderOption={(_props, option, { selected }) => {
         return (
-          <li {...props}>
+          <li {..._props}>
             {selected ? (
-              <MenuOptionSelected>{option.shortCode}</MenuOptionSelected>
+              <MenuOptionSelected>{props.useFullName ? option.name : option.shortCode}</MenuOptionSelected>
             ) : (
-              <MenuOptionUnselected>{option.shortCode}</MenuOptionUnselected>
+              <MenuOptionUnselected>
+                {props.useFullName ? option.name : option.shortCode}
+              </MenuOptionUnselected>
             )}
           </li>
         );
@@ -106,7 +117,7 @@ export const StateDropdown = (props: Props): ReactElement => {
               ...params.inputProps,
             }}
             onSubmit={onValidation}
-            autoComplete={props.autoComplete}
+            autoComplete={props.autoComplete ? "address-level1" : "no"}
             variant="outlined"
             placeholder={props.placeholder}
             onClick={() => {

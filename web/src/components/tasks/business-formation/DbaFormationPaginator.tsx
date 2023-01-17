@@ -111,7 +111,7 @@ export const DbaFormationPaginator = (): ReactElement => {
       if (isAuthenticated === IsAuthenticated.FALSE && isNotDba) {
         return `Register & ${Config.businessFormationDefaults.initialNextButtonText}`;
       } else {
-        return Config.nexusNameSearch.nexusNextButton;
+        return Config.businessFormationDefaults.initialNextNexusButtonText;
       }
     };
 

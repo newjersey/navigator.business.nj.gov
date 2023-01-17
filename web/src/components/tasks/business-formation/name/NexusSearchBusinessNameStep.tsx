@@ -10,7 +10,7 @@ import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { ReactElement, useContext } from "react";
 
 export const NexusSearchBusinessNameStep = (): ReactElement => {
-  const { setBusinessNameAvailability, setFormationFormData, setFieldInteracted } =
+  const { setBusinessNameAvailability, setFormationFormData, setFieldsInteracted } =
     useContext(BusinessFormationContext);
   const { userData, update } = useUserData();
   const { Config } = useConfig();
@@ -24,7 +24,7 @@ export const NexusSearchBusinessNameStep = (): ReactElement => {
     if (!nameAvailability || !userData || isInitialSubmit) {
       return;
     }
-    setFieldInteracted(FIELD_NAME);
+    setFieldsInteracted([FIELD_NAME]);
     setBusinessNameAvailability(nameAvailability);
     let newUserData: UserData | undefined;
     if (nameAvailability.status === "AVAILABLE") {

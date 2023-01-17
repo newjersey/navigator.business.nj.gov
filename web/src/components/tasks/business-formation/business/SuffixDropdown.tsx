@@ -1,17 +1,15 @@
 import { Content } from "@/components/Content";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
-import { useUserData } from "@/lib/data-hooks/useUserData";
 import { camelCaseToSentence } from "@/lib/utils/cases-helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { BusinessSuffix, BusinessSuffixMap, FormationLegalType } from "@businessnjgovnavigator/shared/";
+import { BusinessSuffix, BusinessSuffixMap } from "@businessnjgovnavigator/shared/";
 import { FormControl, FormHelperText, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import { ReactElement, useContext } from "react";
 
 export const SuffixDropdown = (): ReactElement => {
   const FIELD = "businessSuffix";
-  const { state, setFormationFormData, setFieldInteracted } = useContext(BusinessFormationContext);
-  const { userData } = useUserData();
+  const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
   const { doesFieldHaveError } = useFormationErrors();
 
   const handleChange = (event: SelectChangeEvent<string>) => {
@@ -34,14 +32,14 @@ export const SuffixDropdown = (): ReactElement => {
             {camelCaseToSentence("businessSuffix")}
           </InputLabel>
           <Select
-            autoComplete="off"
+            autoComplete="no"
             labelId="business-suffix-label"
             id="business-suffix"
             displayEmpty
             value={state.formationFormData.businessSuffix || ""}
             onChange={handleChange}
             onBlur={() => {
-              setFieldInteracted(FIELD);
+              setFieldsInteracted([FIELD]);
             }}
             inputProps={{ "data-testid": "business-suffix" }}
             renderValue={(selected) => {
@@ -56,7 +54,7 @@ export const SuffixDropdown = (): ReactElement => {
               return selected;
             }}
           >
-            {BusinessSuffixMap[userData?.profileData.legalStructureId as FormationLegalType].map((suffix) => {
+            {BusinessSuffixMap[state.formationFormData.legalType].map((suffix) => {
               return (
                 <MenuItem key={suffix} value={suffix} data-testid={suffix}>
                   {suffix}

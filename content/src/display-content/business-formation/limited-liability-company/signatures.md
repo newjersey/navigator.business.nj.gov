@@ -1,5 +1,4 @@
 ---
-placeholder: No Signers have been added
 ---
 
 ### Signers

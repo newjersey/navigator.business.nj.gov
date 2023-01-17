@@ -38,7 +38,7 @@ import { Municipality } from "@shared/municipality";
 import { IndustrySpecificData, ProfileData } from "@shared/profileData";
 import { arrayOfSectors as sectors, SectorType } from "@shared/sector";
 import { TaxFiling, TaxFilingData, TaxFilingLookUpRequest } from "@shared/taxFiling";
-import { generateFormationFormData } from "@shared/test";
+import { generateFormationFormData, randomPublicFilingLegalType } from "@shared/test";
 import { CURRENT_VERSION, Preferences, UserData } from "@shared/userData";
 import { SelfRegResponse, TaxFilingResult } from "src/domain/types";
 import { getRandomDateInBetween, randomElementFromArray } from "./helpers";
@@ -82,19 +82,22 @@ export const generateFormationUserData = (
   formationData: Partial<FormationData>,
   formationFormData: Partial<FormationFormData>
 ): UserData => {
-  const legalStructureId = randomFormationLegalType();
-  const _profileData = generateProfileData({ legalStructureId, ...profileData });
+  const _profileData = generateProfileData({
+    legalStructureId: randomPublicFilingLegalType(),
+    ...profileData,
+  });
+  const legalStructureId = castPublicFilingLegalTypeToFormationType(
+    _profileData.legalStructureId as PublicFilingLegalType,
+    _profileData.businessPersona
+  );
   const _formationData = generateFormationData(
     {
       formationFormData: generateFormationFormData(formationFormData, {
-        legalStructureId: castPublicFilingLegalTypeToFormationType(
-          _profileData.legalStructureId as PublicFilingLegalType,
-          _profileData.businessPersona
-        ),
+        legalStructureId,
       }),
       ...formationData,
     },
-    _profileData.legalStructureId as FormationLegalType
+    legalStructureId
   );
   return generateUserData({ formationData: _formationData, profileData: _profileData });
 };

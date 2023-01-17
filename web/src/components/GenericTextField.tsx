@@ -42,7 +42,6 @@ export const GenericTextField = forwardRef(
     let valueFilter = props.valueFilter;
     let additionalValidation = props.additionalValidation;
     let fieldOptions = props.fieldOptions;
-
     if (props.numericProps) {
       const regex = (value: string): string => {
         if (props.allowMasking) {
@@ -138,7 +137,7 @@ export const GenericTextField = forwardRef(
           error={props.error}
           helperText={helperText}
           variant="outlined"
-          autoComplete={props.autoComplete ?? "off"}
+          autoComplete={props.autoComplete ?? "no"}
           placeholder={props.placeholder ?? ""}
           disabled={props.disabled}
           {...fieldOptions}

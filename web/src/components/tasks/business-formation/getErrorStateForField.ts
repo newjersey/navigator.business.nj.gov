@@ -1,13 +1,14 @@
+import {
+  isBusinessStartDateValid,
+  isDateValid,
+} from "@/components/tasks/business-formation/business/BusinessDateValidators";
 import { getMergedConfig } from "@/contexts/configContext";
+import { isZipCodeIntl } from "@/lib/domain-logic/isZipCodeIntl";
 import { isZipCodeNj } from "@/lib/domain-logic/isZipCodeNj";
+import { isZipCodeUs } from "@/lib/domain-logic/isZipCodeUs";
 import { FormationFieldErrorState, NameAvailability } from "@/lib/types/types";
 import { validateEmail } from "@/lib/utils/helpers";
-import {
-  FormationFields,
-  FormationFormData,
-  getCurrentDate,
-  parseDate,
-} from "@businessnjgovnavigator/shared";
+import { FormationFields, FormationFormData } from "@businessnjgovnavigator/shared";
 
 export const getErrorStateForField = (
   field: FormationFields,
@@ -24,7 +25,6 @@ export const getErrorStateForField = (
 
   const hasErrorIfEmpty: FormationFields[] = [
     "businessSuffix",
-    "addressMunicipality",
     "addressLine1",
     "contactFirstName",
     "contactLastName",
@@ -49,6 +49,24 @@ export const getErrorStateForField = (
     "canMakeDistribution",
   ];
 
+  switch (formationFormData.businessLocationType) {
+    case "US":
+      hasErrorIfUndefined.push("addressState");
+      hasErrorIfEmpty.push("addressCity");
+      break;
+    case "INTL":
+      hasErrorIfEmpty.push("addressProvince");
+      hasErrorIfEmpty.push("addressCity");
+      hasErrorIfUndefined.push("addressCountry");
+      break;
+    case "NJ":
+      hasErrorIfUndefined.push("addressMunicipality");
+  }
+
+  if (formationFormData.businessLocationType != "NJ") {
+    hasErrorIfUndefined.push("foreignStateOfFormation");
+  }
+
   if (hasErrorIfEmpty.includes(field)) {
     return { ...errorState, hasError: !formationFormData[field] };
   }
@@ -72,7 +90,18 @@ export const getErrorStateForField = (
     return { ...errorState, label, hasError: !isValid };
   }
 
-  if (field === "businessStartDate" && !isStartDateValid(formationFormData.businessStartDate)) {
+  if (
+    field === "businessStartDate" &&
+    !isBusinessStartDateValid(formationFormData.businessStartDate, formationFormData.legalType)
+  ) {
+    return { ...errorState, hasError: true };
+  }
+
+  if (
+    field === "foreignDateOfFormation" &&
+    formationFormData.businessLocationType != "NJ" &&
+    !isDateValid(formationFormData.foreignDateOfFormation)
+  ) {
     return { ...errorState, hasError: true };
   }
 
@@ -81,10 +110,14 @@ export const getErrorStateForField = (
     const someSignersMissingName = formationFormData[newField]?.some((signer) => {
       return !signer.name.trim();
     });
+
     const someSignersMissingCheckbox = formationFormData[newField]?.some((signer) => {
       return !signer.signature;
     });
 
+    const someSignersMissingTitle = formationFormData[newField]?.some((signer) => {
+      return !signer.title;
+    });
     if (!formationFormData[newField] || formationFormData[newField]?.length === 0) {
       return {
         ...errorState,
@@ -93,6 +126,12 @@ export const getErrorStateForField = (
       };
     } else if (someSignersMissingName) {
       return { ...errorState, hasError: true, label: Config.businessFormationDefaults.signerNameErrorText };
+    } else if (someSignersMissingTitle) {
+      return {
+        ...errorState,
+        hasError: true,
+        label: Config.businessFormationDefaults.signerTypeErrorText,
+      };
     } else if (someSignersMissingCheckbox) {
       return {
         ...errorState,
@@ -128,9 +167,26 @@ export const getErrorStateForField = (
     }
   }
 
-  if (field === "addressZipCode" || field === "agentOfficeAddressZipCode") {
+  if (field === "agentOfficeAddressZipCode") {
     const exists = !!formationFormData[field];
     const inRange = isZipCodeNj(formationFormData[field]);
+    const isValid = exists && inRange;
+    return { ...errorState, hasError: !isValid };
+  }
+
+  if (field === "addressZipCode") {
+    const exists = !!formationFormData[field];
+    let inRange = false;
+    switch (formationFormData.businessLocationType) {
+      case "US":
+        inRange = isZipCodeUs(formationFormData[field]);
+        break;
+      case "INTL":
+        inRange = isZipCodeIntl(formationFormData[field]);
+        break;
+      case "NJ":
+        inRange = isZipCodeNj(formationFormData[field]);
+    }
     const isValid = exists && inRange;
     return { ...errorState, hasError: !isValid };
   }
@@ -142,11 +198,4 @@ export const getErrorStateForField = (
   }
 
   return { ...errorState, hasError: false };
-};
-
-const isStartDateValid = (value: string): boolean => {
-  if (!value) {
-    return false;
-  }
-  return parseDate(value).isValid() && parseDate(value).isAfter(getCurrentDate().subtract(1, "day"), "day");
 };

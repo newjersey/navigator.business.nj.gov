@@ -9,13 +9,11 @@ import { ReactElement, useContext } from "react";
 export const ReviewSignatures = (): ReactElement => {
   const { state } = useContext(BusinessFormationContext);
   const italicNotEnteredText = `*${Config.businessFormationDefaults.reviewStepNotEnteredText}*`;
-  const isCorp = corpLegalStructures.includes(state.legalStructureId);
+  const isCorp = corpLegalStructures.includes(state.formationFormData.legalType);
 
   const getHeader = () => {
     if (isCorp) {
       return Config.businessFormationDefaults.reviewStepIncorporatorsHeader;
-    } else if (state.legalStructureId == "limited-partnership") {
-      return Config.businessFormationDefaults.reviewStepSignaturesHeader;
     } else {
       return Config.businessFormationDefaults.reviewStepSignaturesHeader;
     }
@@ -36,9 +34,18 @@ export const ReviewSignatures = (): ReactElement => {
                   ? Config.businessFormationDefaults.reviewStepIncorporatorNameLabel
                   : Config.businessFormationDefaults.reviewStepSignerNameLabel
               }
-              value={signer.name || italicNotEnteredText}
+              value={signer.name ?? italicNotEnteredText}
               marginOverride={index === 0 ? "margin-top-0" : "margin-top-2"}
             />
+            {state.formationFormData.businessLocationType == "NJ" ? (
+              <></>
+            ) : (
+              <ReviewLineItem
+                label={Config.businessFormationDefaults.reviewStepSignerTitleLabel}
+                value={signer.title ?? italicNotEnteredText}
+                marginOverride={"margin-top-0"}
+              />
+            )}
           </div>
         );
       })}

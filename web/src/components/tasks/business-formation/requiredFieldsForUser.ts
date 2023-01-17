@@ -1,4 +1,3 @@
-import { FormationLegalType } from "@businessnjgovnavigator/shared";
 import {
   corpLegalStructures,
   FormationFields,
@@ -6,15 +5,11 @@ import {
   incorporationLegalStructures,
 } from "@businessnjgovnavigator/shared/formationData";
 
-export const requiredFieldsForUser = (
-  legalStructureId: FormationLegalType,
-  formationFormData: FormationFormData
-): FormationFields[] => {
+export const requiredFieldsForUser = (formationFormData: FormationFormData): FormationFields[] => {
   let requiredFields: FormationFields[] = [
     "businessName",
     "businessSuffix",
     "businessStartDate",
-    "addressMunicipality",
     "addressLine1",
     "addressZipCode",
     "paymentType",
@@ -22,6 +17,23 @@ export const requiredFieldsForUser = (
     "contactLastName",
     "contactPhoneNumber",
   ];
+
+  const foreignRequired: FormationFields[] = [
+    "addressCity",
+    "foreignDateOfFormation",
+    "foreignStateOfFormation",
+  ];
+
+  switch (formationFormData.businessLocationType) {
+    case "US":
+      requiredFields = [...requiredFields, ...foreignRequired, "addressState"];
+      break;
+    case "INTL":
+      requiredFields = [...requiredFields, ...foreignRequired, "addressProvince", "addressCountry"];
+      break;
+    case "NJ":
+      requiredFields.push("addressMunicipality");
+  }
 
   if (formationFormData.agentNumberOrManual === "NUMBER") {
     requiredFields = [...requiredFields, "agentNumber"];
@@ -37,17 +49,18 @@ export const requiredFieldsForUser = (
       "agentOfficeAddressZipCode",
     ];
   }
-  if (incorporationLegalStructures.includes(legalStructureId)) {
+
+  if (incorporationLegalStructures.includes(formationFormData.legalType)) {
     requiredFields.push("incorporators");
   } else {
     requiredFields.push("signers");
   }
 
-  if (corpLegalStructures.includes(legalStructureId)) {
+  if (corpLegalStructures.includes(formationFormData.legalType)) {
     requiredFields = [...requiredFields, "businessTotalStock", "members"];
   }
 
-  if (legalStructureId === "limited-partnership") {
+  if (formationFormData.legalType === "limited-partnership") {
     requiredFields = [
       ...requiredFields,
       "withdrawals",

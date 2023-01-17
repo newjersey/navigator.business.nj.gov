@@ -9,7 +9,7 @@ import { FormControl, FormControlLabel, FormHelperText, Radio, RadioGroup } from
 import { ReactElement, useContext } from "react";
 
 export const PartnershipRights = (): ReactElement => {
-  const { state, setFormationFormData, setFieldInteracted } = useContext(BusinessFormationContext);
+  const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
   const { Config } = useConfig();
   const { doesFieldHaveError } = useFormationErrors();
 
@@ -62,7 +62,7 @@ export const PartnershipRights = (): ReactElement => {
                 ...state.formationFormData,
                 [fieldName]: JSON.parse(e.target.value),
               });
-              setFieldInteracted(fieldName);
+              setFieldsInteracted([fieldName]);
             }}
             row
           >
