@@ -20,7 +20,7 @@
     "@types/node": "16.18.11",
     "cross-env": "7.0.3",
     "cspell": "6.18.1",
-    "prettier": "2.8.2",
+    "prettier": "2.8.3",
     "rimraf": "3.0.2"
   }
 }
