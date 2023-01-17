@@ -403,7 +403,7 @@ export const taxFilingMethod = [
   "online-required",
   "online-or-phone",
 ] as const;
-export type TaxFilingMethod = typeof taxFilingMethod[number];
+export type TaxFilingMethod = (typeof taxFilingMethod)[number];
 
 export type TaxAgency =
   | "New Jersey Division of Taxation"
