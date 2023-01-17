@@ -3,15 +3,12 @@
 exports[`formationData createEmptyFormationFormData returns the correct object 1`] = `
 {
   "addressCity": undefined,
-  "addressCountry": "US",
+  "addressCountry": undefined,
   "addressLine1": "",
   "addressLine2": "",
   "addressMunicipality": undefined,
   "addressProvince": undefined,
-  "addressState": {
-    "name": "New Jersey",
-    "shortCode": "NJ",
-  },
+  "addressState": undefined,
   "addressZipCode": "",
   "agentEmail": "",
   "agentName": "",
@@ -25,6 +22,7 @@ exports[`formationData createEmptyFormationFormData returns the correct object 1
   "agentUseAccountInfo": false,
   "agentUseBusinessAddress": false,
   "annualReportNotification": true,
+  "businessLocationType": undefined,
   "businessName": "",
   "businessPurpose": "",
   "businessStartDate": "",
@@ -47,6 +45,7 @@ exports[`formationData createEmptyFormationFormData returns the correct object 1
   "foreignStateOfFormation": undefined,
   "getDistributionTerms": "",
   "incorporators": undefined,
+  "legalType": "limited-liability-company",
   "makeDistributionTerms": "",
   "members": undefined,
   "officialFormationDocument": true,

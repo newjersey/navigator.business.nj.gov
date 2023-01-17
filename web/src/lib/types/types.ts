@@ -380,6 +380,7 @@ export interface Task {
   required?: boolean;
   issuingAgency?: string;
   formName?: string;
+  hidden?: true;
   requiresLocation?: boolean;
   industryId?: string;
 }

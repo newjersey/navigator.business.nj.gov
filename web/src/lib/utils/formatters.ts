@@ -10,6 +10,7 @@ export const getStringifiedAddress = ({
   city,
   state,
   zipcode,
+  country,
   addressLine2,
 }: {
   addressLine1: string;
@@ -17,6 +18,9 @@ export const getStringifiedAddress = ({
   state: string;
   zipcode: string;
   addressLine2?: string;
+  country?: string;
 }) => {
-  return `${addressLine1}, ${addressLine2 ? `${addressLine2}, ` : ""}${city}, ${state}, ${zipcode}`;
+  return `${addressLine1}, ${addressLine2 ? `${addressLine2}, ` : ""}${city}, ${state}, ${zipcode}${
+    country ? `, ${country}` : ""
+  }`;
 };

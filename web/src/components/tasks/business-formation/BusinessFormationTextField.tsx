@@ -7,23 +7,21 @@ import { ReactElement, useContext } from "react";
 
 export interface Props extends Omit<GenericTextFieldProps, "value" | "fieldName"> {
   fieldName: FormationTextField;
-  label: string;
+  label?: string;
   inlineErrorStyling?: boolean;
 }
 
 export const BusinessFormationTextField = ({ className, ...props }: Props): ReactElement => {
-  const { state, setFormationFormData, setFieldInteracted } = useContext(BusinessFormationContext);
+  const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
   const { doesFieldHaveError } = useFormationErrors();
 
   const handleChange = (value: string): void => {
     props.handleChange && props.handleChange(value);
-    const formationFormData = { ...state.formationFormData };
-    formationFormData[props.fieldName] = value;
-    setFormationFormData({ ...formationFormData });
+    setFormationFormData((formationFormData) => ({ ...formationFormData, [props.fieldName]: value }));
   };
 
   const onValidation = () => {
-    setFieldInteracted(props.fieldName);
+    setFieldsInteracted([props.fieldName]);
   };
 
   const error = props.error ?? doesFieldHaveError(props.fieldName);
@@ -33,7 +31,7 @@ export const BusinessFormationTextField = ({ className, ...props }: Props): Reac
         props.inlineErrorStyling ? "" : "input-error-bar"
       }`}
     >
-      <Content>{props.label}</Content>
+      {props.label && <Content>{props.label}</Content>}
       <GenericTextField
         value={state.formationFormData[props.fieldName]}
         placeholder={props.placeholder}

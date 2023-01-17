@@ -281,7 +281,6 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
                 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                 City: formationFormData.agentOfficeAddressMunicipality!.name,
                 State: "New Jersey",
-                Province: undefined,
                 Zipcode: formationFormData.agentOfficeAddressZipCode,
                 Country: "US",
               }
@@ -298,9 +297,8 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
                     Address2: member.addressLine2,
                     City: member.addressMunicipality?.name ?? member.addressCity ?? "",
                     State: member.addressState?.name,
-                    Province: member.addressProvince,
                     Zipcode: member.addressZipCode,
-                    Country: member.addressCountry,
+                    Country: "US",
                   },
                 };
               })
@@ -312,9 +310,8 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
                     Address2: member.addressLine2,
                     City: member.addressMunicipality?.name ?? member.addressCity ?? "",
                     State: member.addressState?.name,
-                    Province: member.addressProvince,
                     Zipcode: member.addressZipCode,
-                    Country: member.addressCountry,
+                    Country: "US",
                   },
                 };
               }),
@@ -327,9 +324,8 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
                   Address2: signer.addressLine2,
                   City: signer.addressMunicipality?.name ?? signer.addressCity ?? "",
                   State: signer.addressState?.name,
-                  Province: signer.addressProvince,
                   Zipcode: signer.addressZipCode,
-                  Country: signer.addressCountry,
+                  Country: "US",
                 },
               };
             })
@@ -473,9 +469,9 @@ type ApiLocation = {
   Address2: string; // max 35 char
   City: string; // 30 char max, Can not be left blank, if any other address field has data
   State: StateNames | undefined; // required if country = US. Must be full state name. Ex: Alabama
-  Province: string | undefined;
+  Province?: string;
   Zipcode: string; // max 5 if country=US, 11 otherwise
-  Country: CountriesShortCodes; //alpha-2 iban code
+  Country: CountriesShortCodes | undefined; //alpha-2 iban code
 };
 
 type BusinessType =

@@ -21,6 +21,7 @@ import {
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { currentUserData } from "@/test/mock/withStatefulUserData";
 import {
+  castPublicFilingLegalTypeToFormationType,
   defaultDateFormat,
   FormationData,
   FormationIncorporator,
@@ -278,7 +279,7 @@ describe("<BusinessFormation />", () => {
 
     page.selectByText("Business suffix", "LLC");
     const threeDaysFromNow = getCurrentDate().add(3, "days");
-    page.selectDate(threeDaysFromNow);
+    page.selectDate(threeDaysFromNow, "Business start date");
     page.fillText("Address line1", "1234 main street");
     page.fillText("Address line2", "Suite 304");
     page.fillText("Address zip code", "08001");
@@ -305,6 +306,7 @@ describe("<BusinessFormation />", () => {
       addressState: { shortCode: "DC", name: "District of Columbia" },
       addressZipCode: "20500",
       addressCountry: "US",
+      businessLocationType: "US",
     };
     expect(
       screen.getByText(displayContent.formationDisplayContent[legalStructureId].members.placeholder as string)
@@ -364,11 +366,124 @@ describe("<BusinessFormation />", () => {
         addressState: member.addressState,
         addressZipCode: member.addressZipCode,
         addressCountry: member.addressCountry,
+        businessLocationType: member.businessLocationType,
+        addressMunicipality: undefined,
+        addressProvince: undefined,
       },
     ]);
     expect(formationFormData.signers).toEqual([
       {
         title: "Authorized Representative",
+        name: "Elrond",
+        signature: true,
+      },
+    ]);
+    expect(formationFormData.contactFirstName).toEqual("John");
+    expect(formationFormData.contactLastName).toEqual("Smith");
+    expect(formationFormData.contactPhoneNumber).toEqual("1234567890");
+    expect(formationFormData.paymentType).toEqual("CC");
+    expect(formationFormData.officialFormationDocument).toEqual(true);
+    expect(formationFormData.certificateOfStanding).toEqual(true);
+    expect(formationFormData.certifiedCopyOfFormationDocument).toEqual(true);
+    expect(formationFormData.annualReportNotification).toEqual(true);
+    expect(formationFormData.corpWatchNotification).toEqual(false);
+  }, 60000);
+
+  it("fills multi-step form, submits, and updates userData when FLC", async () => {
+    const _legalStructureId = "limited-liability-company";
+    const profileData = generateFormationProfileData({
+      businessPersona: "FOREIGN",
+      legalStructureId: _legalStructureId,
+    });
+    const legalStructureId = castPublicFilingLegalTypeToFormationType(
+      _legalStructureId,
+      profileData.businessPersona
+    );
+
+    const formationData = generateEmptyFormationData();
+    const page = preparePage({ profileData, formationData }, displayContent, [
+      generateMunicipality({ displayName: "Newark", name: "Newark" }),
+    ]);
+
+    await page.fillAndSubmitNexusBusinessNameStep("Pizza Joint");
+
+    page.selectByText("Business suffix", "LLC");
+    const threeDaysFromNow = getCurrentDate().add(3, "days");
+    page.selectDate(threeDaysFromNow, "Foreign date of formation");
+    page.fillText("Foreign state of formation", "MA");
+
+    page.fillText("Address line1", "1234 main street");
+    page.fillText("Address line2", "Suite 304");
+    page.fillText("Address zip code", "01752");
+    page.fillText("Address state", "Massachusetts");
+    page.fillText("Address city", "Marlborough");
+
+    fireEvent.click(screen.getByText(Config.businessFormationDefaults.businessPurposeAddButtonText));
+    page.fillText("Business purpose", "to take over the world");
+
+    await page.submitBusinessStep();
+
+    page.chooseRadio("registered-agent-manual");
+    page.fillText("Agent name", "Hugo Weaving");
+    page.fillText("Agent email", "name@example.com");
+    page.fillText("Agent office address line1", "400 Pennsylvania Ave");
+    page.fillText("Agent office address line2", "Suite 101");
+    page.selectByText("Agent office address municipality", "Newark");
+    page.fillText("Agent office address zip code", "08002");
+
+    page.fillText("Signer 0", "Elrond");
+    page.selectByText("Signer title 0", "General Partner");
+    page.checkSignerBox(0, "signers");
+
+    await page.submitContactsStep();
+
+    page.fillText("Contact first name", "John");
+    page.fillText("Contact last name", "Smith");
+    page.fillText("Contact phone number", "123A45a678 90");
+    fireEvent.click(screen.getByLabelText("Credit card"));
+    page.selectCheckbox(Config.businessFormationDefaults.optInCorpWatchText);
+    page.selectCheckbox(
+      `${displayContent.formationDisplayContent[legalStructureId].certificateOfStanding.contentMd} ${displayContent.formationDisplayContent[legalStructureId].certificateOfStanding.optionalLabel}`
+    );
+    page.selectCheckbox(
+      `${displayContent.formationDisplayContent[legalStructureId].certifiedCopyOfFormationDocument.contentMd} ${displayContent.formationDisplayContent[legalStructureId].certifiedCopyOfFormationDocument.optionalLabel}`
+    );
+
+    const expectedTotalCost =
+      displayContent.formationDisplayContent[legalStructureId].certificateOfStanding.cost +
+      displayContent.formationDisplayContent[legalStructureId].certifiedCopyOfFormationDocument.cost +
+      displayContent.formationDisplayContent[legalStructureId].officialFormationDocument.cost;
+
+    expect(screen.getByText(getDollarValue(expectedTotalCost))).toBeInTheDocument();
+    await page.submitBillingStep();
+    await page.submitReviewStep();
+
+    const formationFormData = currentUserData().formationData.formationFormData;
+    console.log(formationFormData);
+    await waitFor(() => {
+      expect(formationFormData.businessName).toEqual("Pizza Joint");
+    });
+    expect(formationFormData.businessSuffix).toEqual("LLC");
+    expect(formationFormData.businessStartDate).toEqual(getCurrentDate().format(defaultDateFormat));
+    expect(formationFormData.foreignDateOfFormation).toEqual(threeDaysFromNow.format(defaultDateFormat));
+    expect(formationFormData.addressLine1).toEqual("1234 main street");
+    expect(formationFormData.addressLine2).toEqual("Suite 304");
+    expect(formationFormData.addressState).toEqual({ name: "Massachusetts", shortCode: "MA" });
+    expect(formationFormData.addressZipCode).toEqual("01752");
+    expect(formationFormData.agentNumberOrManual).toEqual("MANUAL_ENTRY");
+    expect(formationFormData.agentNumber).toEqual("");
+    expect(formationFormData.agentName).toEqual("Hugo Weaving");
+    expect(formationFormData.agentEmail).toEqual("name@example.com");
+    expect(formationFormData.agentOfficeAddressLine1).toEqual("400 Pennsylvania Ave");
+    expect(formationFormData.agentOfficeAddressLine2).toEqual("Suite 101");
+    expect(formationFormData.agentOfficeAddressMunicipality?.displayName).toEqual("Newark");
+    expect(formationFormData.agentOfficeAddressZipCode).toEqual("08002");
+    expect(formationFormData.businessPurpose).toEqual("to take over the world");
+    expect(formationFormData.members).toEqual(undefined);
+    expect(formationFormData.provisions).toEqual(undefined);
+    expect(formationFormData.signers).toEqual([
+      {
+        title: "General Partner",
         name: "Elrond",
         signature: true,
       },
@@ -396,7 +511,7 @@ describe("<BusinessFormation />", () => {
 
     page.selectByText("Business suffix", "LLP");
     const threeDaysFromNow = getCurrentDate().add(3, "days");
-    page.selectDate(threeDaysFromNow);
+    page.selectDate(threeDaysFromNow, "Business start date");
     page.fillText("Address line1", "1234 main street");
     page.fillText("Address line2", "Suite 304");
     page.fillText("Address zip code", "08001");
@@ -503,7 +618,7 @@ describe("<BusinessFormation />", () => {
 
     page.selectByText("Business suffix", "LP");
     const threeDaysFromNow = getCurrentDate().add(3, "days");
-    page.selectDate(threeDaysFromNow);
+    page.selectDate(threeDaysFromNow, "Business start date");
     page.fillText("Address line1", "1234 main street");
     page.fillText("Address line2", "Suite 304");
     page.fillText("Address zip code", "08001");
@@ -544,6 +659,7 @@ describe("<BusinessFormation />", () => {
       addressZipCode: "20500",
       addressCountry: "US",
       title: "General Partner",
+      businessLocationType: "US",
       signature: false,
     };
 
@@ -638,6 +754,7 @@ describe("<BusinessFormation />", () => {
       addressState: { shortCode: "DC", name: "District of Columbia" },
       addressZipCode: "20500",
       addressCountry: "US",
+      businessLocationType: "US",
     };
 
     await page.fillAndSubmitBusinessNameStep("Pizza Joint");
@@ -645,7 +762,7 @@ describe("<BusinessFormation />", () => {
     page.selectByText("Business suffix", "CORPORATION");
     page.fillText("Business total stock", "123");
     const threeDaysFromNow = getCurrentDate().add(3, "days");
-    page.selectDate(threeDaysFromNow);
+    page.selectDate(threeDaysFromNow, "Business start date");
     page.fillText("Address line1", "1234 main street");
     page.fillText("Address line2", "Suite 304");
     page.fillText("Address zip code", "08001");

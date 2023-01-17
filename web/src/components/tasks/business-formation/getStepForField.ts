@@ -8,9 +8,15 @@ export const getStepForField = (field: FormationFields): FormationStepNames => {
 
     case "businessSuffix":
     case "businessStartDate":
+    case "foreignDateOfFormation":
     case "addressMunicipality":
     case "addressLine1":
     case "addressZipCode":
+    case "addressCity":
+    case "addressProvince":
+    case "foreignStateOfFormation":
+    case "addressCountry":
+    case "addressState":
     case "businessTotalStock":
     case "withdrawals":
     case "combinedInvestment":

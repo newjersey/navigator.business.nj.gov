@@ -21,7 +21,7 @@ class BusinessFormationPage {
     return cy.get('[data-testid="business-suffix"]');
   }
   getBusinessStartDate() {
-    return cy.get('[data-testid="date-textfield"]');
+    return cy.get('[data-testid="date-businessStartDate"]');
   }
   getBusinessPurpose() {
     return cy.get('textarea[name="businessPurpose"]');
@@ -138,7 +138,7 @@ class BusinessFormationPage {
     this.getBusinessNameSearch().clear().type(businessName).blur();
   }
   typeBusinessStartDate(monthYearString: string) {
-    cy.chooseDatePicker('[data-testid="date-textfield"]', monthYearString);
+    cy.chooseDatePicker('[data-testid="date-businessStartDate"]', monthYearString);
   }
   typeBusinessPurpose(purpose: string) {
     this.getBusinessPurpose().clear().type(purpose).blur();

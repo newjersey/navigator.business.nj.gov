@@ -20,10 +20,10 @@ export const ReviewStep = (): ReactElement => {
   const { state } = useContext(BusinessFormationContext);
   const { Config } = useConfig();
 
-  const isLP = state.legalStructureId == "limited-partnership";
-  const hasProvisions = state.formationFormData.provisions?.length ?? 0 > 0;
+  const isLP = state.formationFormData.legalType == "limited-partnership";
+  const hasProvisions = (state.formationFormData.provisions?.length ?? 0) > 0;
   const hasPurpose = !!state.formationFormData.businessPurpose;
-  const hasMembers = state.formationFormData.members?.length ?? 0 > 0;
+  const hasMembers = (state.formationFormData.members?.length ?? 0) > 0;
 
   return (
     <>

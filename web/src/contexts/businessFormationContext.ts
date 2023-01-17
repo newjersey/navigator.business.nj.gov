@@ -9,14 +9,12 @@ import {
   createEmptyFormationFormData,
   FormationFields,
   FormationFormData,
-  FormationLegalType,
 } from "@businessnjgovnavigator/shared/";
 import { createContext } from "react";
 
 interface BusinessFormationState {
   stepIndex: number;
   formationFormData: FormationFormData;
-  legalStructureId: FormationLegalType;
   displayContent: FormationDisplayContent;
   showResponseAlert: boolean;
   hasBeenSubmitted: boolean;
@@ -32,7 +30,7 @@ interface BusinessFormationContextType {
   setFormationFormData: React.Dispatch<React.SetStateAction<FormationFormData>>;
   setStepIndex: React.Dispatch<React.SetStateAction<number>>;
   setShowResponseAlert: React.Dispatch<React.SetStateAction<boolean>>;
-  setFieldInteracted: (field: FormationFields, config?: { setToUninteracted: boolean }) => void;
+  setFieldsInteracted: (fields: FormationFields[], config?: { setToUninteracted: boolean }) => void;
   setHasBeenSubmitted: (hasBeenSubmitted: boolean) => void;
   setBusinessNameAvailability: (nameAvailability: NameAvailability | undefined) => void;
 }
@@ -40,8 +38,7 @@ interface BusinessFormationContextType {
 export const BusinessFormationContext = createContext<BusinessFormationContextType>({
   state: {
     stepIndex: 0,
-    legalStructureId: "limited-liability-company",
-    formationFormData: createEmptyFormationFormData(),
+    formationFormData: { ...createEmptyFormationFormData(), legalType: "limited-liability-company" },
     displayContent: createEmptyFormationDisplayContent()["limited-liability-company"],
     dbaContent: createEmptyDbaDisplayContent(),
     showResponseAlert: false,
@@ -54,7 +51,7 @@ export const BusinessFormationContext = createContext<BusinessFormationContextTy
   setFormationFormData: () => {},
   setStepIndex: () => {},
   setShowResponseAlert: () => {},
-  setFieldInteracted: () => {},
+  setFieldsInteracted: () => {},
   setHasBeenSubmitted: () => {},
   setBusinessNameAvailability: () => {},
 });

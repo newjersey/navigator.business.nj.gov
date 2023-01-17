@@ -24,15 +24,14 @@ import { MediaQueries } from "@/lib/PageSizes";
 import { FormationStepNames } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { scrollToTopOfElement, useMountEffect } from "@/lib/utils/helpers";
-import { FormationFormData, FormationLegalType } from "@businessnjgovnavigator/shared/formationData";
-import { UserData } from "@businessnjgovnavigator/shared/userData";
+import { FormationFormData, UserData } from "@businessnjgovnavigator/shared";
 import { useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router";
 import { ReactElement, useContext, useEffect, useRef, useState } from "react";
 
 export const BusinessFormationPaginator = (): ReactElement => {
   const { userData, update } = useUserData();
-  const { state, setStepIndex, setHasBeenSubmitted, setFormationFormData, setFieldInteracted } =
+  const { state, setStepIndex, setHasBeenSubmitted, setFormationFormData, setFieldsInteracted } =
     useContext(BusinessFormationContext);
   const { isAuthenticated, setRegistrationModalIsVisible } = useContext(AuthAlertContext);
   const { Config } = useConfig();
@@ -296,13 +295,8 @@ export const BusinessFormationPaginator = (): ReactElement => {
   };
 
   const resetInteractedFields = (userData: UserData): void => {
-    const requiredFields = requiredFieldsForUser(
-      userData.profileData.legalStructureId as FormationLegalType,
-      userData.formationData.formationFormData
-    );
-    for (const field of requiredFields) {
-      setFieldInteracted(field, { setToUninteracted: true });
-    }
+    const requiredFields = requiredFieldsForUser(userData.formationData.formationFormData);
+    setFieldsInteracted(requiredFields, { setToUninteracted: true });
   };
 
   const shouldDisplayPreviousButton = (): boolean => {

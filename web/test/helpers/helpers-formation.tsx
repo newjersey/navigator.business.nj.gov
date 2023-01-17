@@ -26,13 +26,16 @@ import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { setupStatefulUserDataContext, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import {
+  castPublicFilingLegalTypeToFormationType,
+  createEmptyFormationFormData,
   DateObject,
-  FormationLegalType,
   FormationSubmitResponse,
   generateFormationIncorporator,
   generateMunicipality,
   Municipality,
   ProfileData,
+  PublicFilingLegalType,
+  publicFilingLegalTypes,
   randomInt,
   UserData,
 } from "@businessnjgovnavigator/shared";
@@ -48,6 +51,7 @@ export function flushPromises() {
 export const generateFormationProfileData = (data: Partial<ProfileData>): ProfileData => {
   return generateProfileData({
     legalStructureId: randomPublicFilingLegalType(),
+    businessPersona: "STARTING",
     ...data,
   });
 };
@@ -70,13 +74,22 @@ export const preparePage = (
   setRegistrationModalIsVisible?: (value: boolean) => void
 ): FormationPageHelpers => {
   const profileData = generateFormationProfileData({ ...userData.profileData });
+  const isValid = publicFilingLegalTypes.includes(profileData.legalStructureId as PublicFilingLegalType);
   const initialUserData = generateUserData({
     ...userData,
     profileData,
-    formationData: generateFormationData(
-      { ...userData.formationData },
-      profileData.legalStructureId as FormationLegalType
-    ),
+    formationData: isValid
+      ? generateFormationData(
+          { ...userData.formationData },
+          castPublicFilingLegalTypeToFormationType(
+            profileData.legalStructureId as PublicFilingLegalType,
+            profileData.businessPersona
+          )
+        )
+      : generateFormationData({
+          ...userData.formationData,
+          formationFormData: createEmptyFormationFormData(),
+        }),
   });
   const internalMunicipalities = [
     profileData?.municipality ?? generateMunicipality({ displayName: "GenericTown" }),
@@ -131,6 +144,8 @@ export type FormationPageHelpers = {
   fillAndSubmitBusinessNameStep: (businessName?: string) => Promise<void>;
   completeRequiredBillingFields: () => void;
   submitBusinessNameStep: () => Promise<void>;
+  submitNexusBusinessNameStep: () => Promise<void>;
+  fillAndSubmitNexusBusinessNameStep: (businessName?: string) => Promise<void>;
   submitBusinessStep: (completed?: boolean) => Promise<void>;
   submitContactsStep: (completed?: boolean) => Promise<void>;
   submitBillingStep: () => Promise<void>;
@@ -146,6 +161,7 @@ export type FormationPageHelpers = {
   searchBusinessNameAndGetError: (errorCode?: number) => Promise<void>;
   chooseRadio: (value: string) => void;
   getInputElementByLabel: (label: string) => HTMLInputElement;
+  getInputElementByTestId: (testId: string) => HTMLInputElement;
   selectByText: (label: string, value: string) => void;
   selectCheckbox: (label: string) => void;
   clickAddNewSigner: () => void;
@@ -156,7 +172,7 @@ export type FormationPageHelpers = {
   fillAddressModal: (overrides: Partial<FormationSignedAddress>) => Promise<void>;
   fillAndSubmitAddressModal: (overrides: Partial<FormationSignedAddress>, fieldName: string) => Promise<void>;
   clickSubmit: () => Promise<void>;
-  selectDate: (value: DateObject) => void;
+  selectDate: (value: DateObject, fieldType: "Business start date" | "Foreign date of formation") => void;
 };
 
 export const createFormationPageHelpers = (): FormationPageHelpers => {
@@ -177,6 +193,20 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     await waitFor(() => {
       expect(screen.queryByTestId("business-step")).toBeInTheDocument();
     });
+  };
+
+  const submitNexusBusinessNameStep = async (): Promise<void> => {
+    await searchBusinessName({ status: "AVAILABLE" });
+
+    fireEvent.click(screen.getByText(Config.businessFormationDefaults.initialNextNexusButtonText));
+
+    await waitFor(() => {
+      expect(screen.queryByTestId("business-step")).toBeInTheDocument();
+    });
+  };
+  const fillAndSubmitNexusBusinessNameStep = async (businessName = "Default Test Name"): Promise<void> => {
+    fillText("Search business name", businessName);
+    await submitNexusBusinessNameStep();
   };
 
   const stepperClickToNexusBusinessNameStep = async (): Promise<void> => {
@@ -295,6 +325,10 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     return screen.getByLabelText(label) as HTMLInputElement;
   };
 
+  const getInputElementByTestId = (testId: string): HTMLInputElement => {
+    return screen.getByTestId(testId) as HTMLInputElement;
+  };
+
   const selectByText = (label: string, value: string) => {
     fireEvent.mouseDown(screen.getByLabelText(label));
     const listbox = within(screen.getByRole("listbox"));
@@ -365,9 +399,9 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     });
   };
 
-  const selectDate = (value: DateObject) => {
-    fillText("Business start date", value.format(defaultDisplayDateFormat));
-    fireEvent.blur(screen.getByLabelText("Business start date"));
+  const selectDate = (value: DateObject, fieldType: "Business start date" | "Foreign date of formation") => {
+    fillText(fieldType, value.format(defaultDisplayDateFormat));
+    fireEvent.blur(screen.getByLabelText(fieldType));
   };
 
   const completeRequiredBillingFields = () => {
@@ -383,6 +417,8 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     submitBusinessNameStep,
     submitBusinessStep,
     submitContactsStep,
+    submitNexusBusinessNameStep,
+    fillAndSubmitNexusBusinessNameStep,
     submitBillingStep,
     submitReviewStep,
     searchBusinessName,
@@ -402,6 +438,7 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     clickSubmit,
     selectDate,
     stepperClickToBusinessNameStep,
+    getInputElementByTestId,
     stepperClickToBusinessStep,
     stepperClickToContactsStep,
     stepperClickToBillingStep,

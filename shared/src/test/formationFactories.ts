@@ -3,12 +3,12 @@ import { arrayOfCountriesObjects as countries } from "../countries";
 import { getCurrentDate } from "../dateHelpers";
 import { defaultDateFormat } from "../defaultConstants";
 import {
-  AllBusinessSuffixes,
   allFormationLegalTypes,
   BusinessSignerTypeMap,
   BusinessSuffix,
   BusinessSuffixMap,
   corpLegalStructures,
+  foreignLegalTypePrefix,
   FormationAddress,
   FormationFormData,
   FormationIncorporator,
@@ -16,6 +16,8 @@ import {
   FormationMember,
   FormationSigner,
   incorporationLegalStructures,
+  PublicFilingLegalType,
+  publicFilingLegalTypes,
 } from "../formationData";
 import { randomInt, randomIntFromInterval } from "../intHelpers";
 import { arrayOfStateObjects as states } from "../states";
@@ -32,6 +34,7 @@ export const generateFormationUSAddress = (overrides: Partial<FormationAddress>)
       })
     ),
     addressCountry: "US",
+    businessLocationType: "US",
     addressZipCode: randomInt(5).toString(),
     addressMunicipality: undefined,
     addressProvince: undefined,
@@ -46,6 +49,7 @@ export const generateFormationForeignAddress = (overrides: Partial<FormationAddr
     addressCity: `some-address-city-${randomInt()}`,
     addressState: undefined,
     addressMunicipality: undefined,
+    businessLocationType: "INTL",
     addressCountry: randomElementFromArray(
       countries.filter((item) => {
         return item.shortCode != "US";
@@ -63,6 +67,7 @@ export const generateFormationNJAddress = (overrides: Partial<FormationAddress>)
     addressLine2: `some-address-2-${randomInt()}`,
     addressMunicipality: generateMunicipality({ displayName: "Newark Display Name", name: "Newark" }),
     addressCity: undefined,
+    businessLocationType: "NJ",
     addressProvince: undefined,
     addressCountry: "US",
     addressState: { shortCode: "NJ", name: "New Jersey" },
@@ -82,30 +87,43 @@ export const generateFormationMember = (overrides: Partial<FormationMember>): Fo
 export const randomFormationLegalType = () => {
   return randomElementFromArray(allFormationLegalTypes as unknown as FormationLegalType[]);
 };
-export const generateFormationSigner = (overrides: Partial<FormationSigner>): FormationSigner => {
+
+export const randomPublicFilingLegalType = (filter?: (legalType: PublicFilingLegalType) => boolean) => {
+  return randomElementFromArray(
+    (publicFilingLegalTypes as unknown as PublicFilingLegalType[]).filter((value) =>
+      filter ? filter(value) : true
+    )
+  );
+};
+
+export const generateFormationSigner = (
+  overrides: Partial<FormationSigner>,
+  legalStructureId?: FormationLegalType
+): FormationSigner => {
   return {
     name: `some-signer-name-${randomInt()}`,
     signature: false,
-    title: randomElementFromArray(BusinessSignerTypeMap[randomFormationLegalType()]),
+    title: randomElementFromArray(BusinessSignerTypeMap[legalStructureId ?? randomFormationLegalType()]),
     ...overrides,
   };
 };
 
-export const randomBusinessSuffix = (legalStructureId?: FormationLegalType): BusinessSuffix => {
-  const legalSuffix = legalStructureId ? BusinessSuffixMap[legalStructureId] : undefined;
-  const suffixes = legalSuffix ?? AllBusinessSuffixes;
-  return randomElementFromArray(suffixes as BusinessSuffix[]);
+export const randomBusinessSuffix = (legalStructureId: FormationLegalType): BusinessSuffix => {
+  try {
+    return randomElementFromArray(BusinessSuffixMap[legalStructureId]);
+  } catch (error) {
+    console.log(legalStructureId);
+    throw error;
+  }
 };
 
 export const generateFormationIncorporator = (
-  overrides: Partial<FormationIncorporator>
+  overrides: Partial<FormationIncorporator>,
+  legalStructureId?: FormationLegalType
 ): FormationIncorporator => {
   return {
+    ...generateFormationSigner({}, legalStructureId),
     name: `some-incorporator-name-${randomInt()}`,
-    signature: false,
-    title: randomElementFromArray(
-      BusinessSignerTypeMap[randomElementFromArray(incorporationLegalStructures)]
-    ),
     ...generateFormationUSAddress({}),
     ...overrides,
   };
@@ -118,7 +136,7 @@ export const generateFormationFormData = (
   }
 ): FormationFormData => {
   const legalStructureId = options?.legalStructureId ?? randomFormationLegalType();
-  const isForeign = legalStructureId.includes("foreign-");
+  const isForeign = legalStructureId.includes(foreignLegalTypePrefix);
   const isCorp = corpLegalStructures.includes(legalStructureId);
   const usesIncorporation = incorporationLegalStructures.includes(legalStructureId);
   let businessAddress = generateFormationNJAddress({});
@@ -127,6 +145,7 @@ export const generateFormationFormData = (
   }
   return {
     ...businessAddress,
+    legalType: legalStructureId,
     businessName: `some-business-name-${randomInt()}`,
     businessSuffix: randomBusinessSuffix(legalStructureId),
     businessStartDate: getCurrentDate().add(1, "days").format(defaultDateFormat),
@@ -147,11 +166,14 @@ export const generateFormationFormData = (
     members: isForeign ? undefined : [generateFormationMember({})],
     signers: usesIncorporation
       ? undefined
-      : [generateFormationSigner({ signature: true }), generateFormationSigner({ signature: true })],
+      : [
+          generateFormationSigner({ signature: true }, legalStructureId),
+          generateFormationSigner({ signature: true }, legalStructureId),
+        ],
     incorporators: usesIncorporation
       ? [
-          generateFormationIncorporator({ signature: true }),
-          generateFormationIncorporator({ signature: true }),
+          generateFormationIncorporator({ signature: true }, legalStructureId),
+          generateFormationIncorporator({ signature: true }, legalStructureId),
         ]
       : undefined,
     paymentType: randomInt() % 2 ? "ACH" : "CC",

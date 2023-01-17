@@ -10,7 +10,7 @@ import { ReactElement, useContext } from "react";
 
 export const Members = (): ReactElement => {
   const { state, setFormationFormData } = useContext(BusinessFormationContext);
-  const isCorp = corpLegalStructures.includes(state.legalStructureId);
+  const isCorp = corpLegalStructures.includes(state.formationFormData.legalType);
   const defaultAddress = isCorp
     ? undefined
     : {
