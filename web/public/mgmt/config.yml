@@ -938,6 +938,7 @@ collections:
         required: false
       - { label: "Required", name: "required", widget: "boolean", required: false }
       - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
+      - { label: "Form Name", name: "formName", widget: "string", required: false }
 
   - name: "webflow-licenses"
     label: "Webflow Licenses"
