@@ -41,7 +41,11 @@ describe("<TaxTask />", () => {
   });
 
   it("replaces ${taxInputComponent} with taxInput component", () => {
-    render(<TaxTask task={task} />);
+    render(
+      <WithStatefulUserData initialUserData={generateUserData({})}>
+        <TaxTask task={task} />
+      </WithStatefulUserData>
+    );
     expect(screen.getByText("some content here")).toBeInTheDocument();
     expect(screen.getByText("more content")).toBeInTheDocument();
     expect(screen.queryByText("${taxInputComponent}")).not.toBeInTheDocument();
@@ -49,7 +53,11 @@ describe("<TaxTask />", () => {
   });
 
   it("renders CTA button", () => {
-    render(<TaxTask task={task} />);
+    render(
+      <WithStatefulUserData initialUserData={generateUserData({})}>
+        <TaxTask task={task} />
+      </WithStatefulUserData>
+    );
     expect(screen.getByText(ctaText)).toBeInTheDocument();
   });
 

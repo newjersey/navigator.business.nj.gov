@@ -6,6 +6,7 @@ import { OnboardingExistingEmployees } from "@/components/onboarding/OnboardingE
 import { OnboardingMunicipality } from "@/components/onboarding/OnboardingMunicipality";
 import { OnboardingOwnership } from "@/components/onboarding/OnboardingOwnership";
 import { OnboardingTaxId } from "@/components/onboarding/OnboardingTaxId";
+import { TaxDisclaimer } from "@/components/TaxDisclaimer";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -97,10 +98,6 @@ export const RegisteredForTaxesModal = (props: Props): ReactElement => {
     return userData.profileData.municipality === undefined;
   };
 
-  const hasTradeNameLegalStructure = (): boolean => {
-    return LookupLegalStructureById(userData?.profileData.legalStructureId).hasTradeName;
-  };
-
   return (
     <ProfileDataContext.Provider
       value={{
@@ -133,13 +130,7 @@ export const RegisteredForTaxesModal = (props: Props): ReactElement => {
         )}
         <>
           <FieldLabelModal fieldName="taxId" />
-          {hasTradeNameLegalStructure() && (
-            <div data-testid="tax-disclaimer">
-              <Content className="margin-top-2">
-                {Config.profileDefaults.fields.taxId.default.disclaimerMd}
-              </Content>
-            </div>
-          )}
+          <TaxDisclaimer legalStructureId={userData?.profileData.legalStructureId} />
           <OnboardingTaxId onValidation={onValidation} fieldStates={fieldStates} required />
         </>
 
