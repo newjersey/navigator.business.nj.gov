@@ -47,6 +47,7 @@ ol {
 .disabled-overlay {
   opacity: 0.4;
   cursor: not-allowed;
+
   .cursor-wrapper {
     pointer-events: none;
   }
@@ -118,6 +119,7 @@ ol {
   .icon-green-bg-color-hover {
     background-color: $primary-dark;
   }
+
   .text-green-color-hover {
     color: $primary-dark;
   }
@@ -183,6 +185,7 @@ ol {
 .usa-link,
 .usa-prose > a {
   color: $primary !important;
+
   @media all and (max-width: $sm) {
     word-wrap: anywhere !important;
   }
@@ -212,6 +215,7 @@ ol {
   .form-input {
     max-width: 30rem;
   }
+
   .display-block {
     display: block;
   }
@@ -221,6 +225,7 @@ ol {
   .form-input {
     max-width: 37.5rem;
   }
+
   .form-input-wide {
     max-width: 43.75rem;
   }
@@ -253,16 +258,19 @@ ol {
     margin: -9px 0 0 -9px;
     left: 13px;
   }
+
   &.up::before {
     transform: rotate(-45deg);
     margin: -10px 0 0 -9px;
     top: 14px;
   }
+
   &.down::before {
     transform: rotate(135deg);
     margin: -23px 0 0 -9px;
     top: 100%;
   }
+
   &.right::before {
     transform: rotate(45deg);
     margin: -9px 0 0 -20px;
@@ -356,4 +364,8 @@ ol {
 
 .no-wrap {
   white-space: nowrap;
+}
+
+.max-width-38rem {
+  max-width: 38rem;
 }

@@ -16,6 +16,7 @@ import { ReactElement, useContext, useRef, useState } from "react";
 interface Props extends Omit<OnboardingProps, "fieldName" | "handleChange"> {
   fieldStates: ProfileFieldErrorMap;
   handleChangeOverride?: (value: string) => void;
+  forTaxTask?: boolean;
 }
 export const OnboardingTaxId = ({
   handleChangeOverride,
@@ -113,6 +114,7 @@ export const OnboardingTaxId = ({
         numericProps={{ minLength: 12, maxLength: 12 }}
         handleChange={handleChangeFullTaxId}
         allowMasking={true}
+        className={props.forTaxTask ? "width-100" : ""}
         {...props}
       />
     );
@@ -120,12 +122,16 @@ export const OnboardingTaxId = ({
 
   return (
     <div className={`${className} ${inputErrorBar ? "input-error-bar" : ""} ${error ? "error" : ""}`}>
-      <div className="flex flex-row">
+      <div className="flex flex-row ">
         <GenericTextField
           ref={taxIdBoxRef}
           value={taxIdValue}
           fieldOptions={{
-            sx: { textAlign: "center", textAlignLast: "center", maxWidth: "9em" },
+            sx: {
+              textAlign: "center",
+              textAlignLast: "center",
+              maxWidth: props.forTaxTask ? "27rem" : "9em",
+            },
             FormHelperTextProps: { sx: { whiteSpace: "nowrap" } },
           }}
           fieldName={fieldName as string}
