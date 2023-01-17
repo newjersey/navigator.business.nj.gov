@@ -12,7 +12,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
 import analytics from "@/lib/utils/analytics";
-import { scrollToTopOfElement } from "@/lib/utils/helpers";
+import { scrollToTopOfElement, useMountEffect } from "@/lib/utils/helpers";
 import { FormationFormData } from "@businessnjgovnavigator/shared/formationData";
 import { emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { useMediaQuery } from "@mui/material";
@@ -38,6 +38,10 @@ export const DbaFormationPaginator = (): ReactElement => {
       };
     })
   );
+
+  useMountEffect(() => {
+    isMounted.current = true;
+  });
 
   useEffect(() => {
     if (isMounted.current) {
