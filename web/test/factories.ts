@@ -16,7 +16,6 @@ import {
   OperateReference,
   Opportunity,
   Roadmap,
-  SectionCompletion,
   SidebarCardContent,
   Step,
   Task,
@@ -65,7 +64,6 @@ import {
   PublicFilingLegalType,
   publicFilingLegalTypes,
   randomInt,
-  sectionNames,
   SectionType,
   SectorType,
   TaxFiling,
@@ -263,16 +261,6 @@ export const generateRoadmap = (overrides: Partial<Roadmap>): Roadmap => {
   return {
     steps: [generateStep({})],
     tasks: [generateTask({})],
-    ...overrides,
-  };
-};
-
-export const generateSectionCompletion = (overrides: Partial<SectionCompletion>): SectionCompletion => {
-  return {
-    ...sectionNames.reduce((accumulator, currentValue: SectionType) => {
-      accumulator[currentValue] = false;
-      return accumulator;
-    }, {} as SectionCompletion),
     ...overrides,
   };
 };

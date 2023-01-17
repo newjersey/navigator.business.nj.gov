@@ -352,12 +352,6 @@ export interface Roadmap {
   tasks: Task[];
 }
 
-export interface RoadmapStatus {
-  sectionCompletion: SectionCompletion;
-}
-
-export type SectionCompletion = Record<SectionType, boolean>;
-
 export interface Step {
   stepNumber: number;
   name: string;
