@@ -93,6 +93,9 @@ export const FormationDate = (props: Props): ReactElement => {
                   variant="outlined"
                   fullWidth
                   error={doesFieldHaveError(props.fieldName)}
+                  onBlur={() => {
+                    setFieldsInteracted([props.fieldName]);
+                  }}
                   helperText={
                     doesFieldHaveError(props.fieldName) ? contentProps[props.fieldName].helperText : " "
                   }
