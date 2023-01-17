@@ -281,12 +281,32 @@ describe("Formation - ReviewStep", () => {
     ).toBeInTheDocument();
   });
 
-  it("displays signer types when foreign", async () => {
+  it("does not displays signer titles when domestic", async () => {
     await renderStep(
-      { businessPersona: "FOREIGN" },
+      { businessPersona: "STARTING", legalStructureId: "limited-liability-company" },
       { signers: [generateFormationSigner({ name: "The Dude", title: "Authorized Partner" })] }
     );
-    expect(screen.getByText("The Dude - Authorized Partner")).toBeInTheDocument();
+    expect(
+      screen.queryByText(markdownToText(Config.businessFormationDefaults.reviewStepSignerTitleLabel), {
+        exact: false,
+      })
+    ).not.toBeInTheDocument();
+
+    expect(screen.queryByText("Authorized Partner", { exact: false })).not.toBeInTheDocument();
+  });
+
+  it("displays signer titles when foreign", async () => {
+    await renderStep(
+      { businessPersona: "FOREIGN", legalStructureId: "limited-liability-company" },
+      { signers: [generateFormationSigner({ name: "The Dude", title: "Authorized Partner" })] }
+    );
+    expect(
+      screen.getByText(markdownToText(Config.businessFormationDefaults.reviewStepSignerTitleLabel), {
+        exact: false,
+      })
+    ).toBeInTheDocument();
+
+    expect(screen.getByText("Authorized Partner", { exact: false })).toBeInTheDocument();
   });
 
   describe("when lp", () => {
