@@ -431,6 +431,12 @@ describe("<BusinessFormation />", () => {
     page.selectByText("Agent office address municipality", "Newark");
     page.fillText("Agent office address zip code", "08002");
 
+    expect(
+      screen.queryByText(
+        displayContent.formationDisplayContent[legalStructureId].members.placeholder as string
+      )
+    ).not.toBeInTheDocument();
+
     page.fillText("Signer 0", "Elrond");
     page.selectByText("Signer title 0", "General Partner");
     page.checkSignerBox(0, "signers");
@@ -591,6 +597,132 @@ describe("<BusinessFormation />", () => {
       },
       {
         title: "Authorized Partner",
+        name: "Gandalf",
+        signature: true,
+      },
+    ]);
+    expect(formationFormData.contactFirstName).toEqual("John");
+    expect(formationFormData.contactLastName).toEqual("Smith");
+    expect(formationFormData.contactPhoneNumber).toEqual("1234567890");
+    expect(formationFormData.paymentType).toEqual("CC");
+    expect(formationFormData.officialFormationDocument).toEqual(true);
+    expect(formationFormData.certificateOfStanding).toEqual(true);
+    expect(formationFormData.certifiedCopyOfFormationDocument).toEqual(true);
+    expect(formationFormData.annualReportNotification).toEqual(true);
+    expect(formationFormData.corpWatchNotification).toEqual(false);
+  }, 60000);
+
+  it("fills multi-step form, submits, and updates userData when FLLP", async () => {
+    const _legalStructureId = "limited-liability-partnership";
+    const profileData = generateFormationProfileData({
+      businessPersona: "FOREIGN",
+      legalStructureId: _legalStructureId,
+    });
+    const legalStructureId = castPublicFilingLegalTypeToFormationType(
+      _legalStructureId,
+      profileData.businessPersona
+    );
+    const formationData = generateEmptyFormationData();
+    const page = preparePage({ profileData, formationData }, displayContent, [
+      generateMunicipality({ displayName: "Newark", name: "Newark" }),
+    ]);
+
+    await page.fillAndSubmitNexusBusinessNameStep("Pizza Joint");
+
+    page.selectByText("Business suffix", "LLP");
+
+    const threeDaysFromNow = getCurrentDate().add(3, "days");
+    const oneHundredAndThirtyDaysFromNow = getCurrentDate().add(3, "days");
+
+    page.selectDate(threeDaysFromNow, "Foreign date of formation");
+    page.fillText("Foreign state of formation", "MA");
+    page.selectDate(oneHundredAndThirtyDaysFromNow, "Business start date");
+    fireEvent.click(screen.getByTestId("address-radio-intl"));
+    page.fillText("Address line1", "1234 main street");
+    page.fillText("Address line2", "Suite 304");
+    page.fillText("Address zip code", "0800231");
+    page.fillText("Address country", "Canada");
+    page.fillText("Address province", "Quebec");
+    fireEvent.click(screen.getByText(Config.businessFormationDefaults.businessPurposeAddButtonText));
+    page.fillText("Business purpose", "to take over the world");
+
+    await page.submitBusinessStep();
+
+    page.chooseRadio("registered-agent-manual");
+    page.fillText("Agent name", "Hugo Weaving");
+    page.fillText("Agent email", "name@example.com");
+    page.fillText("Agent office address line1", "400 Pennsylvania Ave");
+    page.fillText("Agent office address line2", "Suite 101");
+    page.selectByText("Agent office address municipality", "Newark");
+    page.fillText("Agent office address zip code", "08002");
+
+    expect(
+      screen.queryByText(
+        displayContent.formationDisplayContent[legalStructureId].members.placeholder as string
+      )
+    ).not.toBeInTheDocument();
+
+    page.fillText("Signer 0", "Elrond");
+    page.selectByText("Signer title 0", "General Partner");
+    page.checkSignerBox(0, "signers");
+    page.clickAddNewSigner();
+    page.fillText("Signer 1", "Gandalf");
+    page.selectByText("Signer title 1", "Authorized Representative");
+    page.checkSignerBox(1, "signers");
+
+    await page.submitContactsStep();
+
+    page.fillText("Contact first name", "John");
+    page.fillText("Contact last name", "Smith");
+    page.fillText("Contact phone number", "123A45a678 90");
+    fireEvent.click(screen.getByLabelText("Credit card"));
+    page.selectCheckbox(Config.businessFormationDefaults.optInCorpWatchText);
+    page.selectCheckbox(
+      `${displayContent.formationDisplayContent[legalStructureId].certificateOfStanding.contentMd} ${displayContent.formationDisplayContent[legalStructureId].certificateOfStanding.optionalLabel}`
+    );
+    page.selectCheckbox(
+      `${displayContent.formationDisplayContent[legalStructureId].certifiedCopyOfFormationDocument.contentMd} ${displayContent.formationDisplayContent[legalStructureId].certifiedCopyOfFormationDocument.optionalLabel}`
+    );
+
+    const expectedTotalCost =
+      displayContent.formationDisplayContent[legalStructureId].certificateOfStanding.cost +
+      displayContent.formationDisplayContent[legalStructureId].certifiedCopyOfFormationDocument.cost +
+      displayContent.formationDisplayContent[legalStructureId].officialFormationDocument.cost;
+
+    expect(screen.getByText(getDollarValue(expectedTotalCost))).toBeInTheDocument();
+    await page.submitBillingStep();
+    await page.submitReviewStep();
+
+    const formationFormData = currentUserData().formationData.formationFormData;
+    await waitFor(() => {
+      expect(formationFormData.businessName).toEqual("Pizza Joint");
+    });
+    expect(formationFormData.businessSuffix).toEqual("LLP");
+    expect(formationFormData.businessStartDate).toEqual(threeDaysFromNow.format(defaultDateFormat));
+    expect(formationFormData.addressLine1).toEqual("1234 main street");
+    expect(formationFormData.addressLine2).toEqual("Suite 304");
+    expect(formationFormData.addressCountry).toEqual("CA");
+    expect(formationFormData.addressZipCode).toEqual("0800231");
+    expect(formationFormData.addressProvince).toEqual("Quebec");
+    expect(formationFormData.agentNumberOrManual).toEqual("MANUAL_ENTRY");
+    expect(formationFormData.agentNumber).toEqual("");
+    expect(formationFormData.agentName).toEqual("Hugo Weaving");
+    expect(formationFormData.agentEmail).toEqual("name@example.com");
+    expect(formationFormData.agentOfficeAddressLine1).toEqual("400 Pennsylvania Ave");
+    expect(formationFormData.agentOfficeAddressLine2).toEqual("Suite 101");
+    expect(formationFormData.agentOfficeAddressMunicipality?.name).toEqual("Newark");
+    expect(formationFormData.agentOfficeAddressZipCode).toEqual("08002");
+    expect(formationFormData.businessPurpose).toEqual("to take over the world");
+    expect(formationFormData.members).toEqual(undefined);
+    expect(formationFormData.provisions).toEqual(undefined);
+    expect(formationFormData.signers).toEqual([
+      {
+        title: "General Partner",
+        name: "Elrond",
+        signature: true,
+      },
+      {
+        title: "Authorized Representative",
         name: "Gandalf",
         signature: true,
       },
