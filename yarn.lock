@@ -3857,7 +3857,7 @@ __metadata:
     cross-env: 7.0.3
     dayjs: 1.11.7
     dedent: 0.7.0
-    dependency-cruiser: 12.4.0
+    dependency-cruiser: 12.5.0
     eslint: 8.32.0
     eslint-config-prettier: 8.6.0
     eslint-plugin-jest: 27.2.1
@@ -4018,7 +4018,7 @@ __metadata:
     cypress-wait-until: 1.7.2
     dayjs: 1.11.7
     dedent: 0.7.0
-    dependency-cruiser: 12.4.0
+    dependency-cruiser: 12.5.0
     dotenv: 16.0.3
     eslint: 8.32.0
     eslint-config-next: 13.1.2
@@ -4217,7 +4217,7 @@ __metadata:
     cypress-dotenv: 2.0.0
     cypress-wait-until: 1.7.2
     dayjs: 1.11.7
-    dependency-cruiser: 12.4.0
+    dependency-cruiser: 12.5.0
     dotenv: 16.0.3
     eslint: 8.32.0
     eslint-config-next: 13.1.2
@@ -13771,17 +13771,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"commander@npm:10.0.0":
+  version: 10.0.0
+  resolution: "commander@npm:10.0.0"
+  checksum: 9f6495651f878213005ac744dd87a85fa3d9f2b8b90d1c19d0866d666bda7f735adfd7c2f10dfff345782e2f80ea258f98bb4efcef58e4e502f25f883940acfd
+  languageName: node
+  linkType: hard
+
 "commander@npm:9.4.1":
   version: 9.4.1
   resolution: "commander@npm:9.4.1"
   checksum: bfb18e325a5bdf772763c2213d5c7d9e77144d944124e988bcd8e5e65fb6d45d5d4e86b09155d0f2556c9a59c31e428720e57968bcd050b2306e910a0bf3cf13
-  languageName: node
-  linkType: hard
-
-"commander@npm:9.5.0, commander@npm:^9.4.1":
-  version: 9.5.0
-  resolution: "commander@npm:9.5.0"
-  checksum: c7a3e27aa59e913b54a1bafd366b88650bc41d6651f0cbe258d4ff09d43d6a7394232a4dadd0bf518b3e696fdf595db1028a0d82c785b88bd61f8a440cecfade
   languageName: node
   linkType: hard
 
@@ -13817,6 +13817,13 @@ __metadata:
   version: 8.3.0
   resolution: "commander@npm:8.3.0"
   checksum: 0f82321821fc27b83bd409510bb9deeebcfa799ff0bf5d102128b500b7af22872c0c92cb6a0ebc5a4cf19c6b550fba9cedfa7329d18c6442a625f851377bacf0
+  languageName: node
+  linkType: hard
+
+"commander@npm:^9.4.1":
+  version: 9.5.0
+  resolution: "commander@npm:9.5.0"
+  checksum: c7a3e27aa59e913b54a1bafd366b88650bc41d6651f0cbe258d4ff09d43d6a7394232a4dadd0bf518b3e696fdf595db1028a0d82c785b88bd61f8a440cecfade
   languageName: node
   linkType: hard
 
@@ -15323,9 +15330,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dependency-cruiser@npm:12.4.0":
-  version: 12.4.0
-  resolution: "dependency-cruiser@npm:12.4.0"
+"dependency-cruiser@npm:12.5.0":
+  version: 12.5.0
+  resolution: "dependency-cruiser@npm:12.5.0"
   dependencies:
     acorn: 8.8.1
     acorn-jsx: 5.3.2
@@ -15334,7 +15341,7 @@ __metadata:
     acorn-walk: 8.2.0
     ajv: 8.12.0
     chalk: ^4.1.2
-    commander: 9.5.0
+    commander: 10.0.0
     enhanced-resolve: 5.12.0
     figures: ^3.2.0
     get-stream: ^6.0.1
@@ -15362,7 +15369,7 @@ __metadata:
     depcruise-wrap-stream-in-html: bin/wrap-stream-in-html.js
     dependency-cruise: bin/dependency-cruise.js
     dependency-cruiser: bin/dependency-cruise.js
-  checksum: 0c276dbdc5aa65a286f2ca6483a4b3e4736027533dfc1a74e639bb815de9d25f20a973a1945c306155d2e221d6b5987bd8d9a19f1f26cdddd52c6722ee4a2d57
+  checksum: 719871e06305df00f713df1ebfa39637237d701b263a270f09eec04421a785a197d3f8c1aafc905f1464fde70adc35d09fe10e6d3ae258cab505c0fd523db353
   languageName: node
   linkType: hard
 
