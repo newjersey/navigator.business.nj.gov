@@ -3,10 +3,10 @@ import { TaskCTA } from "@/components/TaskCTA";
 import { TaskHeader } from "@/components/TaskHeader";
 import { TaxInput } from "@/components/tasks/TaxInput";
 import { UnlockedBy } from "@/components/tasks/UnlockedBy";
+import { TaxDisclaimer } from "@/components/TaxDisclaimer";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { Task } from "@/lib/types/types";
-import { LookupLegalStructureById } from "@businessnjgovnavigator/shared/legalStructure";
 import { ReactElement } from "react";
 
 interface Props {
@@ -20,10 +20,6 @@ export const TaxTask = (props: Props): ReactElement => {
   const preInputContent = props.task.contentMd.split("${taxInputComponent}")[0];
   const postInputContent = props.task.contentMd.split("${taxInputComponent}")[1];
 
-  const hasTradeNameLegalStructure = (): boolean => {
-    return LookupLegalStructureById(userData?.profileData.legalStructureId).hasTradeName;
-  };
-
   return (
     <div className="minh-38">
       <TaskHeader task={props.task} />
@@ -33,13 +29,7 @@ export const TaxTask = (props: Props): ReactElement => {
         <div className="max-width-38rem">
           <Content>{Config.tax.descriptionText}</Content>
         </div>
-        {hasTradeNameLegalStructure() && (
-          <div data-testid="tax-disclaimer">
-            <Content className="margin-top-2">
-              {Config.profileDefaults.fields.taxId.default.disclaimerMd}
-            </Content>
-          </div>
-        )}
+        <TaxDisclaimer legalStructureId={userData?.profileData.legalStructureId} />
         <TaxInput task={props.task} />
       </div>
       <Content>{postInputContent}</Content>
