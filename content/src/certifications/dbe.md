@@ -6,8 +6,8 @@ descriptionMd: A Disadvantaged Business Enterprise (DBE) certification may
 urlSlug: dbe
 name: Obtain a Disadvantaged Business Enterprise
 id: dbe
-callToActionLink: Apply for My DBE Certification
-callToActionText: https://www.state.nj.us/transportation/business/civilrights/pdf/DBE.pdf
+callToActionLink: https://www.state.nj.us/transportation/business/civilrights/dbe.shtm#policy
+callToActionText: Apply for My DBE Certification
 agency:
   - NJDOT
 isSbe: true
