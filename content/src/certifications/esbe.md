@@ -18,19 +18,10 @@ Emerging Small Business Enterprise (ESBE) certification facilitates competition 
 
 ### Eligibility Criteria
 
-A business that has its principal place of business in the State of New Jersey, and at least 51% of the business is owned and controlled by a minority AND/OR women.
+1. Must be a small business, according to SBA size standards; and
+2. Be 51% owned and controlled by one or more economically disadvantaged individuals whose personal net worth does not exceed $1.32 million.
 
-### Application Needs
-
-- The names and addresses of the owner, partners, or shareholders, as applicable, and their representative shares of ownership
-- The names and addresses of the officers of the business
-- The names and addresses of members of the board of directors (c-corps only)
-- The number of shares of stock issued and outstanding (c-corps only)
-- The articles of incorporation, bylaws, partnership agreements, or joint venture agreements (as applicable)
-- Organizational charts
-- An applicant's certificate of birth, or motor vehicle driver's license, passport, or other acceptable form of identification
-- An affidavit, signed by the individual seeking certification, certifying that the applicant is a minority business or women's business
 
 > **After you complete this, you will have:**
 >
-> - A Minority/Women-owned Business Enterprise certificate
+> - An Emerging Small Business Enterprise certificate
