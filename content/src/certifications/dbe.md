@@ -10,6 +10,9 @@ callToActionLink: https://www.state.nj.us/transportation/business/civilrights/db
 callToActionText: Apply for My DBE Certification
 agency:
   - NJDOT
+applicableOwnershipTypes:
+  - minority-owned
+  - woman-owned
 isSbe: true
 ---
 
