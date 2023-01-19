@@ -289,7 +289,7 @@ collections:
         search_fields: ["arrayOfOwnershipTypes.*.name"]
         value_field: "arrayOfOwnershipTypes.*.id"
         display_fields: ["arrayOfOwnershipTypes.*.name"]
-      - { label: "For a small business", name: "isSbe", widget: boolean, default: false }
+      - { label: "is SBE (show if fewer than 120 employees)", name: "isSbe", widget: boolean, default: false }
 
   - name: "funding-label"
     label: "🟨 FUNDING OPPS"
