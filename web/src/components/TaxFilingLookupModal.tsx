@@ -2,7 +2,6 @@ import { Content } from "@/components/Content";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { FieldLabelModal } from "@/components/onboarding/FieldLabelModal";
-import { LockedProfileField } from "@/components/onboarding/LockedProfileField";
 import { OnboardingBusinessName } from "@/components/onboarding/OnboardingBusinessName";
 import { OnboardingResponsibleOwnerName } from "@/components/onboarding/OnboardingResponsibleOwnerName";
 import { OnboardingTaxId } from "@/components/onboarding/OnboardingTaxId";
@@ -46,7 +45,6 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
   const isPublicFiling = LookupLegalStructureById(
     userData?.profileData.legalStructureId
   ).requiresPublicFiling;
-  const shouldLockFormationFields = userData?.formationData.getFilingResponse?.success;
 
   const getErrors = (): Partial<ProfileFieldErrorMap> => {
     return {
@@ -255,31 +253,27 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
 
         {shouldShowBusinessNameField() && (
           <>
-            {shouldLockFormationFields ? (
-              <LockedProfileField fieldName="businessName" />
-            ) : (
-              <>
-                <div
-                  className={`${
-                    fieldStates && fieldStates?.businessName?.invalid ? "input-error-bar error" : ""
-                  }`}
-                >
-                  <FieldLabelModal
-                    fieldName="businessName"
-                    overrides={{
-                      header: Config.taxCalendar.modalBusinessFieldHeader,
-                      description: Config.taxCalendar.modalBusinessFieldMarkdown,
-                    }}
-                  />
-                  <OnboardingBusinessName
-                    inputErrorBar={true}
-                    onValidation={onValidation}
-                    fieldStates={fieldStates}
-                    validationText={Config.taxCalendar.failedBusinessFieldHelper}
-                  />
-                </div>
-              </>
-            )}
+            <>
+              <div
+                className={`${
+                  fieldStates && fieldStates?.businessName?.invalid ? "input-error-bar error" : ""
+                }`}
+              >
+                <FieldLabelModal
+                  fieldName="businessName"
+                  overrides={{
+                    header: Config.taxCalendar.modalBusinessFieldHeader,
+                    description: Config.taxCalendar.modalBusinessFieldMarkdown,
+                  }}
+                />
+                <OnboardingBusinessName
+                  inputErrorBar={true}
+                  onValidation={onValidation}
+                  fieldStates={fieldStates}
+                  validationText={Config.taxCalendar.failedBusinessFieldHelper}
+                />
+              </div>
+            </>
           </>
         )}
 
