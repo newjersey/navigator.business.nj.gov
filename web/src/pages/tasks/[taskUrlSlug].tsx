@@ -191,7 +191,7 @@ export const TaskElement = (props: { task: Task; children?: ReactNode | ReactNod
           <>
             <Content>{beforeQuestion}</Content>
             {getPostOnboardingQuestion(props.task)}
-            <Content>{afterQuestion}</Content>
+            {afterQuestion && <Content>{afterQuestion}</Content>}
           </>
         )}
 
