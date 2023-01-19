@@ -205,22 +205,19 @@ describe("<FilingsCalendarTaxAccess />", () => {
       );
     });
 
-    it("locks businessName if they have completed formation with us", () => {
+    it("does not lock businessName even if they have completed formation with us", () => {
       const userDataWithNavigatorFormation = generateTaxFilingUserData({
         publicFiling: true,
         formedInNavigator: true,
         taxId: "123456789123",
         businessName: "MrFakesHotDogBonanza",
       });
+
       renderFilingsCalendarTaxAccess(userDataWithNavigatorFormation);
       openModal();
 
       expect(screen.getByText(Config.profileDefaults.fields.businessName.default.header)).toBeInTheDocument();
-      expect(
-        screen.queryByText(Config.profileDefaults.fields.businessName.default.description)
-      ).not.toBeInTheDocument();
-      expect(screen.getByText("MrFakesHotDogBonanza")).toBeInTheDocument();
-      expect(screen.queryByLabelText("Business name")).not.toBeInTheDocument();
+      fireEvent.change(screen.getByTestId("businessName"), { target: { value: "MrFakesHotDogBonanza" } });
     });
 
     it("updates taxId but not BusinessName on submit", async () => {
