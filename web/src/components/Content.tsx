@@ -7,6 +7,7 @@ import { PureMarkdownContent } from "@/components/PureMarkdownContent";
 import { SelfRegLink } from "@/components/SelfRegLink";
 import { TaskCheckbox } from "@/components/tasks/TaskCheckbox";
 import { InlineIconType } from "@/lib/cms/types";
+import { useContentModifiedByUserData } from "@/lib/data-hooks/useContentModifiedByUserData";
 import analytics from "@/lib/utils/analytics";
 import { FormControlLabel } from "@mui/material";
 import { CSSProperties, ReactElement } from "react";
@@ -21,6 +22,8 @@ interface ContentProps {
 }
 
 export const Content = (props: ContentProps): ReactElement => {
+  const updatedContent = useContentModifiedByUserData(props.children);
+
   const isTest = process.env.NODE_ENV === "test";
 
   const components = {
@@ -63,7 +66,7 @@ export const Content = (props: ContentProps): ReactElement => {
 
   return (
     <div className={`usa-prose ${props.className ?? ""}`} style={props.style}>
-      <PureMarkdownContent components={components}>{props.children}</PureMarkdownContent>
+      <PureMarkdownContent components={components}>{updatedContent}</PureMarkdownContent>
     </div>
   );
 };

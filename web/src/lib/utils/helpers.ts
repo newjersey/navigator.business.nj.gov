@@ -49,6 +49,15 @@ export const templateEval = (template: string, args: Record<string, string>): st
   return newTemplate;
 };
 
+export const templateEvalWithExtraSpaceRemoval = (template: string, args: Record<string, string>): string => {
+  let newTemplate = template;
+  for (const key of Object.keys(args)) {
+    const pattern = `\\\${${key}} `;
+    newTemplate = newTemplate.replace(new RegExp(pattern, "g"), args[key]);
+  }
+  return newTemplate;
+};
+
 export const rswitch = <T>(param: string, cases: { default: T; [k: string]: T }): T => {
   return cases[param] ?? cases.default;
 };

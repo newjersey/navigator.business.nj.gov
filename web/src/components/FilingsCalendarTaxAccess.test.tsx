@@ -1,4 +1,3 @@
-import { Content } from "@/components/Content";
 import { FilingsCalendarTaxAccess } from "@/components/FilingsCalendarTaxAccess";
 import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
@@ -15,6 +14,7 @@ import {
 import { withAuthAlert } from "@/test/helpers/helpers-renderers";
 import { markdownToText, randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
+import { useMockUserData } from "@/test/mock/mockUseUserData";
 import {
   currentUserData,
   setupStatefulUserDataContext,
@@ -31,8 +31,7 @@ import {
   UserData,
 } from "@businessnjgovnavigator/shared";
 import { createTheme, ThemeProvider } from "@mui/material";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
-import { renderToStaticMarkup } from "react-dom/server";
+import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
@@ -71,6 +70,7 @@ const renderUnauthenticatedFilingsCalendarTaxAccess = (initialUserData?: UserDat
 describe("<FilingsCalendarTaxAccess />", () => {
   beforeEach(() => {
     jest.resetAllMocks();
+    useMockUserData({});
     setRegistrationModalIsVisible = jest.fn();
     setupStatefulUserDataContext();
     useMockRouter({});
@@ -200,9 +200,9 @@ describe("<FilingsCalendarTaxAccess />", () => {
       renderFilingsCalendarTaxAccess(userDataWithPrefilledFields);
       openModal();
 
-      expect(screen.getByTestId("modal-body")).toContainHTML(
-        renderToStaticMarkup(Content({ children: Config.taxCalendar.modalTaxIdMarkdown }))
-      );
+      const taxInput = screen.getByTestId("taxIdInput");
+      expect(within(taxInput).getByTestId("description")).toBeInTheDocument();
+      expect(within(taxInput).queryByTestId("postDescription")).not.toBeInTheDocument();
     });
 
     it("does not lock businessName even if they have completed formation with us", () => {
@@ -419,20 +419,9 @@ describe("<FilingsCalendarTaxAccess />", () => {
 
       expect(screen.getByText(Config.taxCalendar.modalHeader)).toBeInTheDocument();
 
-      expect(screen.getByTestId("modal-body")).toContainHTML(
-        renderToStaticMarkup(
-          Content({
-            children: Config.taxCalendar.modalTaxIdMarkdown,
-          })
-        )
-      );
-      expect(screen.getByTestId("modal-body")).toContainHTML(
-        renderToStaticMarkup(
-          Content({
-            children: Config.profileDefaults.fields.taxId.default.disclaimerMd,
-          })
-        )
-      );
+      const taxInput = screen.getByTestId("taxIdInput");
+      expect(within(taxInput).getByTestId("description")).toBeInTheDocument();
+      expect(within(taxInput).getByTestId("postDescription")).toBeInTheDocument();
     });
 
     it("updates taxId and responsibleOwnerName on submit", async () => {

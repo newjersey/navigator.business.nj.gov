@@ -1,7 +1,8 @@
 import { Content } from "@/components/Content";
 import * as signinHelper from "@/lib/auth/signinHelper";
 import { useMockRouter } from "@/test/mock/mockRouter";
-import { useMockUserData } from "@/test/mock/mockUseUserData";
+import { useMockProfileData, useMockUserData } from "@/test/mock/mockUseUserData";
+import { randomInt } from "@businessnjgovnavigator/shared/index";
 import { fireEvent, render, screen } from "@testing-library/react";
 
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));
@@ -51,6 +52,29 @@ describe("<Content />", () => {
       render(<Content>{mdString}</Content>);
       expect(screen.getByText("Header Text")).toBeInTheDocument();
       expect(screen.getByText("body text")).toBeInTheDocument();
+    });
+  });
+
+  describe("out-of-state designator", () => {
+    it("renders out of state designation when businessPersona is Foreign", () => {
+      const mdString = "You have a ${oos} business";
+      const config = "out-of-state";
+      useMockProfileData({
+        businessPersona: "FOREIGN",
+      });
+
+      render(<Content>{mdString}</Content>);
+      expect(screen.getByText(`You have a ${config} business`)).toBeInTheDocument();
+    });
+
+    it("does not render out of state designation when businessPersona is not Foreign", () => {
+      const mdString = "You have a ${oos} business";
+      useMockProfileData({
+        businessPersona: randomInt() % 2 ? "STARTING" : "OWNING",
+      });
+
+      render(<Content>{mdString}</Content>);
+      expect(screen.getByText(`You have a business`)).toBeInTheDocument();
     });
   });
 });

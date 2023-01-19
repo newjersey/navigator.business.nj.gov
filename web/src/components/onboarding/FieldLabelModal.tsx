@@ -45,12 +45,18 @@ export const FieldLabelModal = (props: Props) => {
           )}
         </strong>
       </div>
-      {description && <Content>{description}</Content>}
+      {description && (
+        <div data-testid="description">
+          <Content>{description}</Content>
+        </div>
+      )}
 
       {postDescription && (
         <>
           <br />
-          <Content>{postDescription}</Content>
+          <div data-testid="postDescription">
+            <Content>{postDescription}</Content>
+          </div>
         </>
       )}
     </>

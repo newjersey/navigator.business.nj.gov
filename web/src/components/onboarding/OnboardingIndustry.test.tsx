@@ -11,6 +11,7 @@ import {
   randomNegativeFilteredIndustry,
   randomNonHomeBasedIndustry,
 } from "@/test/factories";
+import { useMockUserData } from "@/test/mock/mockUseUserData";
 import { currentProfileData, WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
 import {
   createEmptyProfileData,
@@ -22,8 +23,14 @@ import { fireEvent, render, screen, within } from "@testing-library/react";
 import { renderToStaticMarkup } from "react-dom/server";
 
 const Config = getMergedConfig();
+jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 
 describe("<OnboardingIndustry />", () => {
+  beforeEach(() => {
+    jest.resetAllMocks();
+    useMockUserData({});
+  });
+
   const renderComponent = (profileData?: ProfileData) => {
     render(
       <WithStatefulProfileData initialData={profileData || createEmptyProfileData()}>
