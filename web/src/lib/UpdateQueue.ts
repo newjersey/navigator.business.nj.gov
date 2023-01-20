@@ -10,11 +10,11 @@ import {
 
 export class UpdateQueueFactory implements UpdateQueue {
   private internalQueue: UserData;
-  private updateFuntion: (userData: UserData | undefined) => Promise<void>;
+  private updateFunction: (userData: UserData | undefined) => Promise<void>;
 
   constructor(userData: UserData, update: (userData: UserData | undefined) => Promise<void>) {
     this.internalQueue = userData;
-    this.updateFuntion = update;
+    this.updateFunction = update;
   }
 
   queue(userData: Partial<UserData>): UpdateQueue {
@@ -81,7 +81,7 @@ export class UpdateQueueFactory implements UpdateQueue {
   }
 
   update(): Promise<void> {
-    return this.updateFuntion(this.internalQueue);
+    return this.updateFunction(this.internalQueue);
   }
 
   current(): UserData {
