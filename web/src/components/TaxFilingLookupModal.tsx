@@ -296,16 +296,18 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
         )}
 
         <div className={`${fieldStates && fieldStates?.taxId?.invalid ? "input-error-bar error" : ""}`}>
-          <FieldLabelModal
-            fieldName="taxId"
-            overrides={{
-              header: Config.taxCalendar.modalTaxIdHeader,
-              description: Config.taxCalendar.modalTaxIdMarkdown,
-              postDescription: isPublicFiling
-                ? undefined
-                : Config.profileDefaults.fields.taxId.default.disclaimerMd,
-            }}
-          />
+          <div data-testid="taxIdInput">
+            <FieldLabelModal
+              fieldName="taxId"
+              overrides={{
+                header: Config.taxCalendar.modalTaxIdHeader,
+                description: Config.taxCalendar.modalTaxIdMarkdown,
+                postDescription: isPublicFiling
+                  ? undefined
+                  : Config.profileDefaults.fields.taxId.default.disclaimerMd,
+              }}
+            />
+          </div>
           <OnboardingTaxId
             onValidation={onValidation}
             inputErrorBar

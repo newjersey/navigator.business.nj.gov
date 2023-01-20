@@ -71,6 +71,7 @@ export const useUserData = (): UseUserDataResponse => {
   const update = async (newUserData: UserData | undefined, config?: { local?: boolean }): Promise<void> => {
     if (newUserData) {
       mutate(newUserData, false);
+      setUpdateQueue(new UpdateQueueFactory(newUserData, update));
       if (config?.local || state.isAuthenticated != IsAuthenticated.TRUE) {
         if (profileDataHasChanged(data, newUserData)) {
           onProfileDataChange(newUserData);
