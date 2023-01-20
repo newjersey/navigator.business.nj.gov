@@ -1,5 +1,6 @@
 import { FilingsCalendar } from "@/components/FilingsCalendar";
 import { getMergedConfig } from "@/contexts/configContext";
+import * as api from "@/lib/api-client/apiClient";
 import { OperateReference } from "@/lib/types/types";
 import {
   generateOperateReference,
@@ -51,13 +52,19 @@ jest.mock("@/lib/data-hooks/useRoadmap", () => {
 jest.mock("next/router", () => {
   return { useRouter: jest.fn() };
 });
-
+jest.mock("@/lib/api-client/apiClient", () => ({
+  postTaxFilingsOnboarding: jest.fn(),
+  postTaxFilingsLookup: jest.fn(),
+}));
 const Config = getMergedConfig();
+const mockApi = api as jest.Mocked<typeof api>;
 
 const renderFilingsCalendar = (
   operateReferences: Record<string, OperateReference>,
   initialUserData?: UserData
 ) => {
+  mockApi.postTaxFilingsLookup.mockResolvedValue(initialUserData ?? generateUserData({}));
+  mockApi.postTaxFilingsOnboarding.mockResolvedValue(initialUserData ?? generateUserData({}));
   render(
     <ThemeProvider theme={createTheme()}>
       <WithStatefulUserData initialUserData={initialUserData}>
@@ -96,7 +103,7 @@ describe("<FilingsCalendar />", () => {
           })
         ).id,
       }),
-      taxFilingData: generateTaxFilingData({ filings: [annualReport] }),
+      taxFilingData: generateTaxFilingData({ filings: [annualReport], state: "SUCCESS" }),
       preferences: generatePreferences({ isCalendarFullView: true }),
     });
 
@@ -221,7 +228,7 @@ describe("<FilingsCalendar />", () => {
           })
         ).id,
       }),
-      taxFilingData: generateTaxFilingData({ filings: [annualReport] }),
+      taxFilingData: generateTaxFilingData({ filings: [annualReport], state: "SUCCESS" }),
       preferences: generatePreferences({ isCalendarFullView: true }),
     });
 
@@ -234,6 +241,7 @@ describe("<FilingsCalendar />", () => {
     };
 
     renderFilingsCalendar(operateReferences, userData);
+
     expect(
       screen.getByText(Config.dashboardDefaults.calendarListViewButton, { exact: false })
     ).toBeInTheDocument();
@@ -594,6 +602,11 @@ describe("<FilingsCalendar />", () => {
     });
 
     it("displays calendar list view when button is clicked", () => {
+      userData = {
+        ...userData,
+        taxFilingData: { ...userData.taxFilingData, state: "SUCCESS" },
+      };
+
       renderFilingsCalendar(operateReferences, userData);
 
       expect(screen.getByTestId("filings-calendar-as-table")).toBeInTheDocument();
@@ -604,6 +617,11 @@ describe("<FilingsCalendar />", () => {
     });
 
     it("displays calendar grid view when button is clicked", () => {
+      userData = {
+        ...userData,
+        taxFilingData: { ...userData.taxFilingData, state: "SUCCESS" },
+      };
+
       renderFilingsCalendar(operateReferences, userData);
 
       fireEvent.click(screen.getByText(Config.dashboardDefaults.calendarListViewButton, { exact: false }));

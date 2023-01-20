@@ -1,5 +1,6 @@
 import { UserData } from "@shared/userData";
 import {
+  generatePreferences,
   generateTaxFiling,
   generateTaxFilingData,
   generateTaxIdAndBusinessName,
@@ -194,6 +195,10 @@ describe("TaxFilingsInterfaceFactory", () => {
         });
         expect(await taxFilingInterface.onboarding({ userData, ...taxIdBusinessName })).toEqual({
           ...userData,
+          preferences: generatePreferences({
+            ...userData.preferences,
+            isCalendarFullView: true,
+          }),
           taxFilingData: {
             ...userData.taxFilingData,
             state: "FAILED",
@@ -212,10 +217,11 @@ describe("TaxFilingsInterfaceFactory", () => {
             registeredISO: undefined,
           }),
         });
-        taxFilingClient.onboarding.mockResolvedValue({
-          state: "PENDING",
-          errorField: "businessName",
+        taxFilingClient.lookup.mockResolvedValue({
+          state: "UNREGISTERED",
+          filings: [],
         });
+        taxFilingClient.onboarding.mockResolvedValue({ state: "SUCCESS" });
         expect(await taxFilingInterface.onboarding({ userData, ...taxIdBusinessName })).toEqual({
           ...userData,
           taxFilingData: {
@@ -223,9 +229,68 @@ describe("TaxFilingsInterfaceFactory", () => {
             state: "PENDING",
             registeredISO: currentDate.toISOString(),
             lastUpdatedISO: currentDate.toISOString(),
-            errorField: "businessName",
-            businessName: taxIdBusinessName.businessName,
           },
+        });
+      });
+
+      describe("returns onboarding response", () => {
+        it("passes through the API_ERROR response", async () => {
+          const userData = generateUserData({
+            taxFilingData: generateTaxFilingData({
+              state: undefined,
+              lastUpdatedISO: undefined,
+              registeredISO: undefined,
+
+              filings: [generateTaxFiling({})],
+            }),
+          });
+          taxFilingClient.lookup.mockResolvedValue({
+            state: "UNREGISTERED",
+            filings: [],
+          });
+          taxFilingClient.onboarding.mockResolvedValue({
+            state: "API_ERROR",
+          });
+          expect(await taxFilingInterface.onboarding({ userData, ...taxIdBusinessName })).toEqual({
+            ...userData,
+            taxFilingData: {
+              ...userData.taxFilingData,
+              state: "API_ERROR",
+              registeredISO: undefined,
+              businessName: taxIdBusinessName.businessName,
+              lastUpdatedISO: currentDate.toISOString(),
+            },
+          });
+        });
+
+        it("passes through the FAILED response", async () => {
+          const userData = generateUserData({
+            taxFilingData: generateTaxFilingData({
+              state: undefined,
+              lastUpdatedISO: undefined,
+              registeredISO: undefined,
+              filings: [generateTaxFiling({})],
+            }),
+          });
+          taxFilingClient.lookup.mockResolvedValue({
+            state: "UNREGISTERED",
+            filings: [],
+          });
+          taxFilingClient.onboarding.mockResolvedValue({
+            state: "FAILED",
+            errorField: "businessName",
+          });
+          expect(await taxFilingInterface.onboarding({ userData, ...taxIdBusinessName })).toEqual({
+            ...userData,
+            taxFilingData: {
+              ...userData.taxFilingData,
+              state: "FAILED",
+              registeredISO: undefined,
+              errorField: "businessName",
+              businessName: taxIdBusinessName.businessName,
+              lastUpdatedISO: currentDate.toISOString(),
+            },
+          });
         });
       });
     });
