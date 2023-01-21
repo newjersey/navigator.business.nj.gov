@@ -164,7 +164,7 @@
     "prettier-plugin-organize-imports": "3.2.2",
     "raw-loader": "4.0.2",
     "require-from-string": "2.0.2",
-    "rimraf": "3.0.2",
+    "rimraf": "4.1.1",
     "sass": "1.57.1",
     "sass-loader": "13.2.0",
     "storybook-addon-pseudo-states": "1.15.2",
