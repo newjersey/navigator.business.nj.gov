@@ -4252,7 +4252,7 @@ __metadata:
     react-transition-group: 4.4.5
     rehype-format: 4.0.1
     rehype-raw: 6.1.1
-    rehype-react: 7.1.1
+    rehype-react: 7.1.2
     rehype-rewrite: 3.0.6
     rehype-stringify: 9.0.3
     remark-directive: 2.0.1
@@ -4442,7 +4442,7 @@ __metadata:
     react-transition-group: 4.4.5
     rehype-format: 4.0.1
     rehype-raw: 6.1.1
-    rehype-react: 7.1.1
+    rehype-react: 7.1.2
     rehype-rewrite: 3.0.6
     rehype-stringify: 9.0.3
     remark-directive: 2.0.1
@@ -30130,9 +30130,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rehype-react@npm:7.1.1":
-  version: 7.1.1
-  resolution: "rehype-react@npm:7.1.1"
+"rehype-react@npm:7.1.2":
+  version: 7.1.2
+  resolution: "rehype-react@npm:7.1.2"
   dependencies:
     "@mapbox/hast-util-table-cell-style": ^0.2.0
     "@types/hast": ^2.0.0
@@ -30141,7 +30141,7 @@ __metadata:
     unified: ^10.0.0
   peerDependencies:
     "@types/react": ">=17"
-  checksum: 218b5e13776c6c0f5b430fe4c57de391f8417789b570c751f00b7c88da94ef08f7f869695189646ebc683155b02e55ac20c8e4148d4f2cbbcc39d0b05a66dca6
+  checksum: f3516a90e031663a7066ded72d57ba9a5d4ae87c55d0264a755c03913b5851e1087535e46a6d9f1bb2a19b5d1b2de320164e44aad1dfc45f9e3d4864f33e6e65
   languageName: node
   linkType: hard
 
