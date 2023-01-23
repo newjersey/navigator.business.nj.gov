@@ -129,10 +129,11 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
 
         onOnboardingPage.selectBusinessPersona("OWNING");
         onOnboardingPage.selectLegalStructureDropDown("General Partnership");
+        onOnboardingPage.selectIndustrySector("clean-energy");
+
         onOnboardingPage.clickNext();
 
         cy.url().should("include", "onboarding?page=2");
-        onOnboardingPage.selectIndustrySector("clean-energy");
 
         cy.lighthouse(undefined, lighthouseDesktopConfig);
         cy.pa11y(defaultPa11yThresholds);
@@ -145,13 +146,10 @@ describe("Performance and Accessability - Onboarding [all] [group1]", () => {
 
         onOnboardingPage.selectBusinessPersona("OWNING");
         onOnboardingPage.selectLegalStructureDropDown("General Partnership");
-        onOnboardingPage.clickNext();
-
-        cy.url().should("include", "onboarding?page=2");
         onOnboardingPage.selectIndustrySector("clean-energy");
         onOnboardingPage.clickNext();
 
-        cy.url().should("include", "onboarding?page=3");
+        cy.url().should("include", "onboarding?page=2");
         onOnboardingPage.typeFullName("Michael Smith");
         onOnboardingPage.typeEmail("MichaelSmith@gmail.com");
         onOnboardingPage.typeConfirmEmail("MichaelSmith@gmail.com");

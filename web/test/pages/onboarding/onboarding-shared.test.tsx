@@ -198,6 +198,7 @@ describe("onboarding - shared", () => {
       industryId: "generic",
       homeBasedBusiness: undefined,
       legalStructureId: "c-corporation",
+      sectorId: "retail-trade-and-ecommerce",
       municipality: undefined,
       liquorLicense: false,
       constructionRenovationPlan: undefined,
@@ -217,11 +218,9 @@ describe("onboarding - shared", () => {
 
     page.chooseRadio("business-persona-owning");
     page.selectByValue("Business structure", "sole-proprietorship");
-    await page.visitStep(2);
     page.selectByValue("Sector", "clean-energy");
-    await page.visitStep(3);
+    await page.visitStep(2);
 
-    page.clickBack();
     page.clickBack();
 
     page.chooseRadio("business-persona-starting");
@@ -233,6 +232,7 @@ describe("onboarding - shared", () => {
       homeBasedBusiness: undefined,
       dateOfFormation: undefined,
       legalStructureId: "sole-proprietorship",
+      sectorId: "clean-energy",
       liquorLicense: false,
       constructionRenovationPlan: undefined,
       employerId: undefined,
@@ -250,10 +250,8 @@ describe("onboarding - shared", () => {
 
     page.chooseRadio("business-persona-owning");
     page.selectByValue("Business structure", "c-corporation");
-    await page.visitStep(2);
     page.selectByValue("Sector", "clean-energy");
-    await page.visitStep(3);
-    page.clickBack();
+    await page.visitStep(2);
     page.clickBack();
     page.chooseRadio("business-persona-starting");
     await page.visitStep(2);
@@ -264,6 +262,7 @@ describe("onboarding - shared", () => {
       industryId: undefined,
       homeBasedBusiness: undefined,
       legalStructureId: "c-corporation",
+      sectorId: "clean-energy",
       liquorLicense: false,
       constructionRenovationPlan: undefined,
       employerId: undefined,
@@ -281,11 +280,9 @@ describe("onboarding - shared", () => {
 
     page.chooseRadio("business-persona-owning");
     page.selectByValue("Business structure", "c-corporation");
-    await page.visitStep(2);
     page.selectByValue("Sector", "clean-energy");
-    await page.visitStep(3);
+    await page.visitStep(2);
 
-    page.clickBack();
     page.clickBack();
 
     await page.visitStep(2);
@@ -374,6 +371,7 @@ describe("onboarding - shared", () => {
 
       expect(screen.getByLabelText("Business structure")).toBeInTheDocument();
       page.selectByValue("Business structure", "c-corporation");
+      page.selectByValue("Sector", "clean-energy");
       await page.visitStep(2);
       expect(currentUserData().profileData.businessPersona).toEqual("OWNING");
     });

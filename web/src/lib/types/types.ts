@@ -28,7 +28,8 @@ export type ProfileError =
   | "REQUIRED_LEGAL"
   | "REQUIRED_EXISTING_BUSINESS"
   | "REQUIRED_FOREIGN_BUSINESS_TYPE"
-  | "REQUIRED_NEXUS_LOCATION_IN_NJ";
+  | "REQUIRED_NEXUS_LOCATION_IN_NJ"
+  | "REQUIRED_REVIEW_INFO_BELOW";
 
 export type FlowType = Exclude<BusinessPersona, undefined>;
 
