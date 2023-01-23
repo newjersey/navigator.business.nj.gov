@@ -32,6 +32,11 @@
       "step": 3,
       "weight": 15,
       "task": "get-insurance"
+    },
+    {
+      "step": 3,
+      "weight": 16,
+      "task": "transportation-entity-id"
     }
   ],
   "name": "Car Rental",
