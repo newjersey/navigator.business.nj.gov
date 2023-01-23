@@ -51,7 +51,7 @@
         },
         "overrides": {
           "OWNING": {
-            "description": "What is your business structure? `Learn about business structures|business-structure-learn-more`"
+            "description": "What is your `business structure|business-structure-learn-more`?"
           },
           "FOREIGN": {
             "header": "Business Structure of Your Existing Business",
@@ -87,9 +87,9 @@
       "sectorId": {
         "default": {
           "header": "Industry Sector",
-          "placeholder": "Select a sector",
-          "description": "Which sector best describes your business?",
-          "errorTextRequired": "Please select a sector."
+          "placeholder": "Select an industry sector",
+          "description": "Which industry sector best describes your business?",
+          "errorTextRequired": "Please select an industry sector."
         }
       },
       "ownershipTypeIds": {

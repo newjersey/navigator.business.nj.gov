@@ -90,6 +90,7 @@ const OnboardingPage = (props: Props): ReactElement => {
     REQUIRED_EXISTING_BUSINESS: configFields.businessPersona.default.errorTextRequired,
     REQUIRED_FOREIGN_BUSINESS_TYPE: configFields.foreignBusinessTypeIds.default.errorTextRequired,
     REQUIRED_NEXUS_LOCATION_IN_NJ: configFields.nexusLocationInNewJersey.default.errorTextRequired,
+    REQUIRED_REVIEW_INFO_BELOW: Config.profileDefaults.errorTextBody,
   };
 
   const onValidation = (field: ProfileFields, invalid: boolean): void => {
@@ -272,14 +273,13 @@ const OnboardingPage = (props: Props): ReactElement => {
           })?.name
         );
       }
+
       if (hasErrors.inline && errorMap?.inline) {
-        onValidation(
-          errorMap.inline.find((error) => {
-            return !error.valid;
-          })?.name as ProfileFields,
-          true
-        );
+        for (const inlineObject of errorMap.inline) {
+          onValidation(inlineObject.name, !inlineObject.valid);
+        }
       }
+
       if (hasErrors.snackbar && errorMap?.snackbar) {
         setAlert("ERROR");
       }
@@ -309,6 +309,7 @@ const OnboardingPage = (props: Props): ReactElement => {
         realEstateAppraisalManagement: profileData.realEstateAppraisalManagement,
         operatingPhase: profileData.businessPersona === "OWNING" ? "GUEST_MODE_OWNING" : "GUEST_MODE",
         interstateTransport: profileData.interstateTransport,
+        sectorId: profileData.sectorId,
       };
 
       setProfileData(newProfileData);

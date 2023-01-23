@@ -349,11 +349,6 @@ export const completeExistingBusinessOnboarding = ({
     .invoke("prop", "value")
     .should("contain", legalStructureId);
 
-  onOnboardingPage.clickNext();
-
-  pageIndex += 1;
-  cy.url().should("include", `onboarding?page=${pageIndex}`);
-
   onOnboardingPage.selectIndustrySector(sectorId);
   onOnboardingPage
     .getIndustrySectorDropdown()

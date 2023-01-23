@@ -4,13 +4,16 @@ import { ConfigType } from "@/contexts/configContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
+import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import { LegalStructure, LegalStructures, LookupLegalStructureById } from "@businessnjgovnavigator/shared/";
-import { FormControl, MenuItem, Select, SelectChangeEvent } from "@mui/material";
+import { FormControl, FormHelperText, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import { orderBy } from "lodash";
 import { ReactElement, ReactNode, useContext } from "react";
 
 interface Props {
   disabled?: boolean;
+  onValidation?: (field: ProfileFields, invalid: boolean) => void;
+  fieldStates?: ProfileFieldErrorMap;
 }
 
 export const OnboardingLegalStructureDropdown = (props: Props): ReactElement => {
@@ -37,6 +40,9 @@ export const OnboardingLegalStructureDropdown = (props: Props): ReactElement => 
         ...state.profileData,
         legalStructureId: event.target.value,
       });
+      if (props.onValidation) {
+        props.onValidation("legalStructureId", false);
+      }
     }
   };
 
@@ -67,7 +73,7 @@ export const OnboardingLegalStructureDropdown = (props: Props): ReactElement => 
   return (
     <>
       <div className="form-input margin-top-2">
-        <FormControl variant="outlined" fullWidth>
+        <FormControl variant="outlined" fullWidth error={props.fieldStates?.legalStructureId.invalid}>
           <Select
             fullWidth
             displayEmpty
@@ -90,6 +96,10 @@ export const OnboardingLegalStructureDropdown = (props: Props): ReactElement => 
             })}
           </Select>
         </FormControl>
+        <FormHelperText className={"text-error-dark"}>
+          {props.fieldStates?.legalStructureId.invalid &&
+            Config.profileDefaults.fields.legalStructureId.default.errorTextRequired}
+        </FormHelperText>
       </div>
     </>
   );
