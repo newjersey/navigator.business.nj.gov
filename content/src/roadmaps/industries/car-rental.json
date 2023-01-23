@@ -1,0 +1,46 @@
+{
+  "naicsCodes": "532111",
+  "defaultSectorId": "other-services",
+  "canHavePermanentLocation": true,
+  "roadmapSteps": [
+    {
+      "step": 1,
+      "weight": 1,
+      "task": "business-plan"
+    },
+    {
+      "step": 1,
+      "weight": 5,
+      "task": "determine-naics-code"
+    },
+    {
+      "step": 2,
+      "weight": 20,
+      "task": "register-for-ein"
+    },
+    {
+      "step": 2,
+      "weight": 25,
+      "task": "register-for-taxes"
+    },
+    {
+      "step": 3,
+      "weight": 10,
+      "task": "bank-account"
+    },
+    {
+      "step": 3,
+      "weight": 15,
+      "task": "get-insurance"
+    }
+  ],
+  "name": "Car Rental",
+  "industryOnboardingQuestions": {
+    "canBeHomeBased": false,
+    "canBeReseller": false
+  },
+  "isEnabled": false,
+  "additionalSearchTerms": "vehicle rental",
+  "id": "car-rental",
+  "description": "Leases vehicles to customers for less than 90 days."
+}
