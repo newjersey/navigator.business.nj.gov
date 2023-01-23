@@ -162,17 +162,27 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
     }
 
     if (userDataToSet.taxFilingData.state == "FAILED") {
-      setFieldStates((previousState) => {
-        return {
-          ...fields.reduce(
-            (reducer, value) => {
-              reducer[value] = { ...reducer[value], invalid: true };
-              return reducer;
-            },
-            { ...previousState }
-          ),
-        };
-      });
+      if (userDataToSet.taxFilingData.errorField == "businessName" && isPublicFiling) {
+        setFieldStates((prev) => {
+          return { ...prev, businessName: { invalid: true } };
+        });
+      } else if (userDataToSet.taxFilingData.errorField == "businessName" && !isPublicFiling) {
+        setFieldStates((prev) => {
+          return { ...prev, responsibleOwnerName: { invalid: true } };
+        });
+      } else {
+        setFieldStates((previousState) => {
+          return {
+            ...fields.reduce(
+              (reducer, value) => {
+                reducer[value] = { ...reducer[value], invalid: true };
+                return reducer;
+              },
+              { ...previousState }
+            ),
+          };
+        });
+      }
       setOnAPIfailed("FAILED");
       analytics.event.tax_calendar_modal.submit.tax_calendar_business_does_not_exist();
       setIsLoading(false);
