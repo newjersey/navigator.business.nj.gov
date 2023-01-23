@@ -90,6 +90,17 @@ describe("<TaxTask />", () => {
       });
     });
 
+    it("renders the split field if there is a pre-existing 9 digit tax id", async () => {
+      initialUserData = generateUserData({
+        profileData: generateProfileData({ taxId: "123456789" }),
+        taskProgress: { [taskId]: "COMPLETED" },
+      });
+      renderPage();
+      await waitFor(() => {
+        expect(screen.getByLabelText("Tax id location")).toBeInTheDocument();
+      });
+    });
+
     it("enters and saves Tax ID", async () => {
       renderPage();
       fireEvent.change(screen.getByPlaceholderText(Config.profileDefaults.fields.taxId.default.placeholder), {
