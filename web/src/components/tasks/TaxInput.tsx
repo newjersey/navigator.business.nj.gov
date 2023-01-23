@@ -19,7 +19,9 @@ export const TaxInput = (props: Props): ReactElement => {
   const { userData, updateQueue } = useUserData();
   const { isAuthenticated } = useContext(AuthAlertContext);
   const { Config } = useConfig();
-  const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
+  const [profileData, setProfileData] = useState<ProfileData>(
+    userData?.profileData ?? createEmptyProfileData()
+  );
   const [fieldStates, setFieldStates] = useState<ProfileFieldErrorMap>(createProfileFieldErrorMap());
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
