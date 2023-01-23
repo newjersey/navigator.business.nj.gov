@@ -168,7 +168,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-crypto/ie11-detection@npm:^2.0.0, @aws-crypto/ie11-detection@npm:^2.0.2":
+"@aws-crypto/ie11-detection@npm:^2.0.0":
   version: 2.0.2
   resolution: "@aws-crypto/ie11-detection@npm:2.0.2"
   dependencies:
@@ -308,22 +308,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-crypto/sha256-browser@npm:2.0.2":
-  version: 2.0.2
-  resolution: "@aws-crypto/sha256-browser@npm:2.0.2"
-  dependencies:
-    "@aws-crypto/ie11-detection": ^2.0.2
-    "@aws-crypto/sha256-js": ^2.0.2
-    "@aws-crypto/supports-web-crypto": ^2.0.2
-    "@aws-crypto/util": ^2.0.2
-    "@aws-sdk/types": ^3.110.0
-    "@aws-sdk/util-locate-window": ^3.0.0
-    "@aws-sdk/util-utf8-browser": ^3.0.0
-    tslib: ^1.11.1
-  checksum: 81c442af06a57bcd947a8529f9fbc0caa487dff60ed46bf46f36356b6f630741db31d42b0f5518dbfd5e7b40d1de8bf647835e522ab8c59c8f3db7973a0946ec
-  languageName: node
-  linkType: hard
-
 "@aws-crypto/sha256-browser@npm:3.0.0":
   version: 3.0.0
   resolution: "@aws-crypto/sha256-browser@npm:3.0.0"
@@ -388,7 +372,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-crypto/sha256-js@npm:^2.0.0, @aws-crypto/sha256-js@npm:^2.0.2":
+"@aws-crypto/sha256-js@npm:^2.0.0":
   version: 2.0.2
   resolution: "@aws-crypto/sha256-js@npm:2.0.2"
   dependencies:
@@ -408,7 +392,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-crypto/supports-web-crypto@npm:^2.0.0, @aws-crypto/supports-web-crypto@npm:^2.0.2":
+"@aws-crypto/supports-web-crypto@npm:^2.0.0":
   version: 2.0.2
   resolution: "@aws-crypto/supports-web-crypto@npm:2.0.2"
   dependencies:
@@ -4633,7 +4617,7 @@ __metadata:
     "@aws-amplify/auth": 5.1.5
     "@aws-amplify/core": 5.0.11
     "@aws-crypto/client-node": 3.1.1
-    "@aws-crypto/sha256-browser": 2.0.2
+    "@aws-crypto/sha256-browser": 3.0.0
     "@aws-sdk/client-cloudwatch-logs": 3.254.0
     "@aws-sdk/client-dynamodb": 3.254.0
     "@aws-sdk/client-s3": 3.254.0
@@ -4862,7 +4846,7 @@ __metadata:
   dependencies:
     "@aws-amplify/auth": 5.1.5
     "@aws-amplify/core": 5.0.11
-    "@aws-crypto/sha256-browser": 2.0.2
+    "@aws-crypto/sha256-browser": 3.0.0
     "@aws-sdk/protocol-http": 3.254.0
     "@aws-sdk/s3-request-presigner": 3.254.0
     "@aws-sdk/url-parser": 3.254.0
