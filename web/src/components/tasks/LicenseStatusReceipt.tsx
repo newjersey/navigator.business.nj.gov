@@ -31,7 +31,7 @@ const pendingPermitTheme: PermitTheme = {
 
 const activePermitTheme: PermitTheme = {
   gradient: "gradient-green",
-  bgColor: "bg-success-lighter",
+  bgColor: "bg-success-extra-light",
   textColor: "text-success",
   borderColor: "border-success",
   iconColor: "text-success",

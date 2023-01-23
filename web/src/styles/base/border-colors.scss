@@ -1,44 +1,109 @@
+.border-base-extra-light {
+  border-color: $base-extra-light !important;
+}
+.border-base-lighter {
+  border-color: $base-lighter !important;
+}
+.border-right-base {
+  border-right-color: $base !important;
+}
+
+.border-primary-extra-light {
+  border-color: $primary-extra-light !important;
+}
+.border-primary-lightest {
+  border-color: $primary-lightest !important;
+}
 .border-primary,
 .hover\:border-primary:hover {
   border-color: $primary !important;
 }
-
-.border-primary-disabled {
-  border-color: $primary-disabled !important;
+.border-primary-more-light {
+  border-color: $primary-more-light !important;
 }
-
 .border-primary-light {
   border-color: $primary-light !important;
-}
-
-.border-cool-lighter {
-  border-color: $cool-lighter !important;
-}
-
-.border-success {
-  border-color: $success !important;
-}
-
-.border-accent-cooler-light {
-  border-color: $accent-cooler-light !important;
 }
 
 .border-secondary-light {
   border-color: $secondary-light !important;
 }
 
-.border-right-base {
-  border-right-color: $base !important;
+.border-accent-cool-lightest {
+  border-color: $accent-cool-lightest !important;
+}
+.border-accent-cool-darkest {
+  border-color: $accent-cool-darkest !important;
+}
+.border-accent-cool-more-dark {
+  border-color: $accent-cool-more-dark !important;
 }
 
-.border-base-lighter {
-  border-color: $base-lighter !important;
+.border-accent-warm-extra-light {
+  border-color: $accent-warm-extra-light !important;
 }
 
+.border-success-extra-light {
+  border-color: $success-extra-light !important;
+}
+.border-success {
+  border-color: $success !important;
+}
+
+.border-info-extra-light {
+  border-color: $info-extra-light !important;
+}
+.border-info-darkest {
+  border-color: $info-darkest !important;
+}
+
+.border-warning-extra-light {
+  border-color: $warning-extra-light !important;
+}
+
+.border-error-extra-light {
+  border-color: $error-extra-light !important;
+}
+
+.border-cool-extra-light {
+  border-color: $cool-extra-light !important;
+}
+.border-cool-lighter {
+  border-color: $cool-lighter !important;
+}
+
+.border-accent-cooler-lightest {
+  border-color: $accent-cooler-lightest !important;
+}
 .border-accent-cooler-light {
   border-color: $accent-cooler-light !important;
 }
-
+.border-accent-cooler-dark {
+  border-color: $accent-cooler-dark !important;
+}
+.border-accent-cooler-darker {
+  border-color: $accent-cooler-darker !important;
+}
+.border-accent-cooler-light {
+  border-color: $accent-cooler-light !important;
+}
 .border-accent-cooler {
   border-color: $accent-cooler !important;
+}
+
+.border-accent-extra-hot-light {
+  border-color: $accent-extra-hot-light !important;
+}
+.border-accent-hot {
+  border-color: $accent-hot !important;
+}
+
+.border-accent-semi-cool-lightest {
+  border-color: $accent-semi-cool-lightest !important;
+}
+.border-accent-semi-cool-light {
+  border-color: $accent-semi-cool-light !important;
+}
+.border-accent-semi-cool {
+  border-color: $accent-semi-cool !important;
 }

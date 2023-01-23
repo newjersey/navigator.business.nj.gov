@@ -46,8 +46,8 @@
   background-color: $error-darker !important;
 }
 
-.bg-success-lighter {
-  background-color: $success-lighter !important;
+.bg-success-extra-light {
+  background-color: $success-extra-light !important;
 }
 
 .bg-success-light {
@@ -122,8 +122,8 @@
   background-color: $primary-lightest !important;
 }
 
-.bg-primary-disabled {
-  background-color: $primary-disabled !important;
+.bg-primary-more-light {
+  background-color: $primary-more-light !important;
 }
 
 .bg-accent-cool-lightest {
@@ -168,4 +168,24 @@
 
 .bg-warning-light-on-hover:hover {
   background-color: $warning-light !important;
+}
+
+.bg-accent-warm-extra-light {
+  background-color: $accent-warm-extra-light !important;
+}
+
+.bg-accent-extra-hot-light {
+  background-color: $accent-extra-hot-light !important;
+}
+.bg-accent-hot {
+  background-color: $accent-hot !important;
+}
+.bg-accent-semi-cool-lightest {
+  background-color: $accent-semi-cool-lightest !important;
+}
+.bg-accent-semi-cool-light {
+  background-color: $accent-semi-cool-light !important;
+}
+.bg-accent-semi-cool {
+  background-color: $accent-semi-cool !important;
 }
