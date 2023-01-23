@@ -37,6 +37,11 @@
       "step": 3,
       "weight": 16,
       "task": "transportation-entity-id"
+    },
+    {
+      "step": 3,
+      "weight": 18,
+      "task": "car-rental-vehicle-registration"
     }
   ],
   "name": "Car Rental",
