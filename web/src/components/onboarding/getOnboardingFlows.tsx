@@ -69,7 +69,11 @@ export const getOnboardingFlows = (
               <OnboardingBusinessPersona />
               <div className="padding-top-3">
                 <FieldLabelDescriptionOnly fieldName="legalStructureId" />
-                <OnboardingLegalStructureDropdown />
+                <OnboardingLegalStructureDropdown onValidation={onValidation} fieldStates={fieldStates} />
+              </div>
+              <div className="padding-top-3">
+                <FieldLabelDescriptionOnly fieldName="sectorId" />
+                <OnboardingSectors onValidation={onValidation} fieldStates={fieldStates} />
               </div>
             </>
           ),
@@ -77,27 +81,16 @@ export const getOnboardingFlows = (
             return {
               banner: [
                 { name: "REQUIRED_EXISTING_BUSINESS", valid: profileData.businessPersona !== undefined },
-                { name: "REQUIRED_LEGAL", valid: profileData.legalStructureId !== undefined },
-              ],
-            };
-          },
-        },
-        {
-          component: (
-            <>
-              <FieldLabelOnboarding fieldName="sectorId" />
-              <OnboardingSectors onValidation={onValidation} fieldStates={fieldStates} />
-            </>
-          ),
-          getErrorMap: () => {
-            return {
-              inline: [
                 {
-                  name: "sectorId",
-                  valid: !!profileData.sectorId,
+                  name: "REQUIRED_REVIEW_INFO_BELOW",
+                  valid: profileData.legalStructureId !== undefined && profileData.sectorId !== undefined,
                 },
               ],
-              snackbar: [
+              inline: [
+                {
+                  name: "legalStructureId",
+                  valid: !!profileData.legalStructureId,
+                },
                 {
                   name: "sectorId",
                   valid: !!profileData.sectorId,
