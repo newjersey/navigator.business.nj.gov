@@ -154,8 +154,8 @@ export const TaskProgressCheckbox = (props: Props): ReactElement => {
       case "COMPLETED":
         if (isDisabled) {
           return {
-            border: "border-primary-disabled",
-            bg: "bg-primary-disabled",
+            border: "border-primary-more-light",
+            bg: "bg-primary-more-light",
             textColor: "text-white",
           };
         } else {

@@ -60,7 +60,7 @@ export const Hero = (): ReactElement => {
         </div>
         <LandingPageTiles />
       </div>
-      <div className={`${isDesktopAndUp ? "hero-gradient-bg-bottom" : "bg-success-lighter"}`}>
+      <div className={`${isDesktopAndUp ? "hero-gradient-bg-bottom" : "bg-success-extra-light"}`}>
         <div className="desktop:grid-container-widescreen desktop:padding-x-7 width-100">
           <div className="grid-row">
             <div className="desktop:grid-col-5">
