@@ -390,52 +390,75 @@ export const generateFormationDbaContent = (
 });
 
 export const generateFormationDisplayContent = (
+  overrides: Partial<FormationDisplayContent>,
+  legalStructureId: FormationLegalType = defaultFormationLegalType
+): FormationDisplayContent => {
+  return {
+    introParagraph: {
+      contentMd: `some-intro-content-${legalStructureId}-${randomInt()}`,
+    },
+    foreignStateOfFormationHeader: {
+      contentMd: `some-header-content-${legalStructureId}-${randomInt()}`,
+      errorText: `some-errorText-content-${legalStructureId}-${randomInt()}`,
+      placeholder: `some-placeholder-content-${legalStructureId}-${randomInt()}`,
+      reviewHeader: `some-reviewHeader-content-${legalStructureId}-${randomInt()}`,
+      requireFieldText: `some-requireFieldText-content-${legalStructureId}-${randomInt()}`,
+    },
+    foreignDateOfFormationHeader: {
+      contentMd: `some-header-content-${legalStructureId}-${randomInt()}`,
+      errorText: `some-errorText-content-${legalStructureId}-${randomInt()}`,
+      reviewHeader: `some-reviewHeader-content-${legalStructureId}-${randomInt()}`,
+      placeholder: `some-placeholder-content-${legalStructureId}-${randomInt()}`,
+      requireFieldText: `some-requireFieldText-content-${legalStructureId}-${randomInt()}`,
+    },
+    businessNameCheck: {
+      contentMd: `some-business-name-check-${legalStructureId}--content-${randomInt()}`,
+    },
+    agentNumberOrManual: {
+      contentMd: `some-agent-number-or-manual-${legalStructureId}--content-${randomInt()}`,
+      radioButtonNumberText: `some-agent-number-or-manual-radio-number-${legalStructureId}--text-${randomInt()}`,
+      radioButtonManualText: `some-agent-number-or-manual-radio-manual-${legalStructureId}--text-${randomInt()}`,
+    },
+    members: {
+      contentMd: `some-members-${legalStructureId}--content-${randomInt()}`,
+      placeholder: `some-members-${legalStructureId}--placeholder-${randomInt()}`,
+    },
+    signatureHeader: {
+      contentMd: `some-signer-${legalStructureId}--content- ${randomInt()}`,
+      placeholder: `some-signer-${legalStructureId}--placeholder- ${randomInt()}`,
+    },
+    services: {
+      contentMd: `some-payment-${legalStructureId}--type-content-${randomInt()}`,
+    },
+    notification: {
+      contentMd: `some-${legalStructureId}--notification-${randomInt()}`,
+    },
+    officialFormationDocument: {
+      contentMd: `some-official-formation-document-${legalStructureId}--content-${randomInt()}`,
+      cost: randomInt(),
+    },
+    certificateOfStanding: {
+      contentMd: `some-certificate-of-standing-${legalStructureId}--content-${randomInt()}`,
+      cost: randomInt(),
+      optionalLabel: `some-certificate-of-standing-optional-${legalStructureId}--label-${randomInt()}`,
+    },
+    certifiedCopyOfFormationDocument: {
+      contentMd: `some-certified-copy-of-formation-document-${legalStructureId}--content-${randomInt()}`,
+      cost: randomInt(),
+      optionalLabel: `some-certified-copy-of-formation-document-optional-${legalStructureId}--label-${randomInt()}`,
+    },
+    ...overrides,
+  };
+};
+
+export const generateFormationDisplayContentMap = (
   overrides: Partial<Record<FormationLegalType, Partial<FormationDisplayContent>>>
 ): FormationDisplayContentMap => {
   return allFormationLegalTypes.reduce((accumulator, curr) => {
-    accumulator[curr] = {
-      introParagraph: {
-        contentMd: `some-intro-content-${curr}-${randomInt()}`,
-      },
-      businessNameCheck: {
-        contentMd: `some-business-name-check-${curr}--content-${randomInt()}`,
-      },
-      agentNumberOrManual: {
-        contentMd: `some-agent-number-or-manual-${curr}--content-${randomInt()}`,
-        radioButtonNumberText: `some-agent-number-or-manual-radio-number-${curr}--text-${randomInt()}`,
-        radioButtonManualText: `some-agent-number-or-manual-radio-manual-${curr}--text-${randomInt()}`,
-      },
-      members: {
-        contentMd: `some-members-${curr}--content-${randomInt()}`,
-        placeholder: `some-members-${curr}--placeholder-${randomInt()}`,
-      },
-      signatureHeader: {
-        contentMd: `some-signer-${curr}--content- ${randomInt()}`,
-        placeholder: `some-signer-${curr}--placeholder- ${randomInt()}`,
-      },
-      services: {
-        contentMd: `some-payment-${curr}--type-content-${randomInt()}`,
-      },
-      notification: {
-        contentMd: `some-${curr}--notification-${randomInt()}`,
-      },
-      officialFormationDocument: {
-        contentMd: `some-official-formation-document-${curr}--content-${randomInt()}`,
-        cost: randomInt(),
-      },
-      certificateOfStanding: {
-        contentMd: `some-certificate-of-standing-${curr}--content-${randomInt()}`,
-        cost: randomInt(),
-        optionalLabel: `some-certificate-of-standing-optional-${curr}--label-${randomInt()}`,
-      },
-      certifiedCopyOfFormationDocument: {
-        contentMd: `some-certified-copy-of-formation-document-${curr}--content-${randomInt()}`,
-        cost: randomInt(),
-        optionalLabel: `some-certified-copy-of-formation-document-optional-${curr}--label-${randomInt()}`,
-      },
-      ...overrides[defaultFormationLegalType],
-      ...overrides[curr],
-    };
+    accumulator[curr] = generateFormationDisplayContent(
+      { ...overrides[defaultFormationLegalType], ...overrides[curr] },
+      curr as FormationLegalType
+    );
     return accumulator;
   }, {} as FormationDisplayContentMap);
 };

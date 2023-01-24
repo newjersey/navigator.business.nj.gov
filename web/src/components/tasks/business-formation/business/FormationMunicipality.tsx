@@ -27,8 +27,8 @@ export const FormationMunicipality = (): ReactElement => {
         validationLabel="Error"
         value={state.formationFormData.addressMunicipality}
         onSelect={onSelect}
-        placeholderText={Config.businessFormationDefaults.addressCityPlaceholder}
-        helperText={Config.businessFormationDefaults.addressCityErrorText}
+        placeholderText={Config.businessFormationDefaults.addressMunicipalityPlaceholder}
+        helperText={Config.businessFormationDefaults.addressMunicipalityErrorText}
       />
     </div>
   );

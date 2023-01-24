@@ -1,4 +1,8 @@
-import { generateFormationDbaContent, generateFormationDisplayContent, generateUser } from "@/test/factories";
+import {
+  generateFormationDbaContent,
+  generateFormationDisplayContentMap,
+  generateUser,
+} from "@/test/factories";
 import {
   FormationPageHelpers,
   generateFormationProfileData,
@@ -14,7 +18,7 @@ import {
 } from "@businessnjgovnavigator/shared";
 
 export const displayContent = {
-  formationDisplayContent: generateFormationDisplayContent({}),
+  formationDisplayContentMap: generateFormationDisplayContentMap({}),
   formationDbaContent: generateFormationDbaContent({}),
 };
 

@@ -84,7 +84,7 @@ export const MainBusinessIntl = (): ReactElement => {
         required={true}
         fieldName={"addressZipCode"}
         validationText={Config.businessFormationDefaults.addressZipCodeIntlDakotaErrorText}
-        className=" grid-col-6"
+        className={`${isTabletAndUp ? "grid-col-6" : "grid-col-12"}`}
       />
     </MainBusinessAddressContainer>
   );

@@ -41,6 +41,20 @@ export type FormationDisplayContent = {
     radioButtonNumberText: string;
     radioButtonManualText: string;
   };
+  foreignStateOfFormationHeader: {
+    contentMd: string;
+    errorText: string;
+    reviewHeader: string;
+    requireFieldText: string;
+    placeholder: string;
+  };
+  foreignDateOfFormationHeader: {
+    contentMd: string;
+    errorText: string;
+    reviewHeader: string;
+    placeholder: string;
+    requireFieldText: string;
+  };
   members: {
     contentMd: string;
     placeholder?: string;
@@ -93,60 +107,79 @@ export const createEmptyDbaDisplayContent = (): FormationDbaContent => {
     Formation: createEmptyTaskWithoutLinks(),
   };
 };
+
 export const createEmptyTaskDisplayContent = (): TasksDisplayContent => {
   return {
-    formationDisplayContent: createEmptyFormationDisplayContent(),
+    formationDisplayContentMap: createEmptyFormationDisplayContentMap(),
     formationDbaContent: createEmptyDbaDisplayContent(),
   };
 };
 
 export type AllPaymentTypes = { type: PaymentType; displayText: string }[];
 
-export const createEmptyFormationDisplayContent = (): FormationDisplayContentMap => {
+export const createEmptyFormationDisplayContentMap = (): FormationDisplayContentMap => {
   return allFormationLegalTypes.reduce((accumulator, curr) => {
-    accumulator[curr] = {
-      introParagraph: {
-        contentMd: "",
-      },
-      businessNameCheck: {
-        contentMd: "",
-      },
-      agentNumberOrManual: {
-        contentMd: "",
-        radioButtonNumberText: "",
-        radioButtonManualText: "",
-      },
-      members: {
-        contentMd: "",
-        placeholder: "",
-      },
-      signatureHeader: {
-        contentMd: "",
-        placeholder: "",
-      },
-      services: {
-        contentMd: "",
-      },
-      notification: {
-        contentMd: "",
-      },
-      officialFormationDocument: {
-        contentMd: "",
-        cost: 0,
-      },
-      certificateOfStanding: {
-        contentMd: "",
-        cost: 0,
-        optionalLabel: "",
-      },
-      certifiedCopyOfFormationDocument: {
-        contentMd: "",
-        cost: 0,
-        optionalLabel: "",
-      },
-    };
+    accumulator[curr] = createEmptyFormationDisplayContent();
     return accumulator;
   }, {} as FormationDisplayContentMap);
+};
+
+export const createEmptyFormationDisplayContent = (): FormationDisplayContent => {
+  return {
+    introParagraph: {
+      contentMd: "",
+    },
+    businessNameCheck: {
+      contentMd: "",
+    },
+    foreignStateOfFormationHeader: {
+      contentMd: "",
+      errorText: "",
+      placeholder: "",
+      reviewHeader: "",
+      requireFieldText: "",
+    },
+    foreignDateOfFormationHeader: {
+      contentMd: "",
+      errorText: "",
+      placeholder: "",
+      reviewHeader: "",
+      requireFieldText: "",
+    },
+    agentNumberOrManual: {
+      contentMd: "",
+      radioButtonNumberText: "",
+      radioButtonManualText: "",
+    },
+    members: {
+      contentMd: "",
+      placeholder: "",
+    },
+    signatureHeader: {
+      contentMd: "",
+      placeholder: "",
+    },
+    services: {
+      contentMd: "",
+    },
+    notification: {
+      contentMd: "",
+    },
+    officialFormationDocument: {
+      contentMd: "",
+      cost: 0,
+    },
+    certificateOfStanding: {
+      contentMd: "",
+      cost: 0,
+      optionalLabel: "",
+    },
+    certifiedCopyOfFormationDocument: {
+      contentMd: "",
+      cost: 0,
+      optionalLabel: "",
+    },
+  };
 };
 
 export type OnboardingStatus = "SUCCESS" | "ERROR";
@@ -344,7 +377,7 @@ export type FormationDbaContent = {
   Formation: TaskWithoutLinks;
 };
 export type TasksDisplayContent = {
-  formationDisplayContent: FormationDisplayContentMap;
+  formationDisplayContentMap: FormationDisplayContentMap;
   formationDbaContent: FormationDbaContent;
 };
 

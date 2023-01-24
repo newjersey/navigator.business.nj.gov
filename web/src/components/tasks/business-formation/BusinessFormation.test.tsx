@@ -6,7 +6,7 @@ import {
   generateEmptyFormationData,
   generateFormationData,
   generateFormationDbaContent,
-  generateFormationDisplayContent,
+  generateFormationDisplayContentMap,
   generateFormationSubmitResponse,
   generateGetFilingResponse,
   generateProfileData,
@@ -59,7 +59,7 @@ const mockApi = api as jest.Mocked<typeof api>;
 
 describe("<BusinessFormation />", () => {
   const displayContent = {
-    formationDisplayContent: generateFormationDisplayContent({}),
+    formationDisplayContentMap: generateFormationDisplayContentMap({}),
     formationDbaContent: generateFormationDbaContent({}),
   };
 
@@ -84,10 +84,10 @@ describe("<BusinessFormation />", () => {
       },
       {
         ...displayContent,
-        formationDisplayContent: {
-          ...displayContent.formationDisplayContent,
+        formationDisplayContentMap: {
+          ...displayContent.formationDisplayContentMap,
           "foreign-limited-liability-company": {
-            ...displayContent.formationDisplayContent["foreign-limited-liability-company"],
+            ...displayContent.formationDisplayContentMap["foreign-limited-liability-company"],
             introParagraph: { contentMd: "roflcopter" },
           },
         },
@@ -309,7 +309,9 @@ describe("<BusinessFormation />", () => {
       businessLocationType: "US",
     };
     expect(
-      screen.getByText(displayContent.formationDisplayContent[legalStructureId].members.placeholder as string)
+      screen.getByText(
+        displayContent.formationDisplayContentMap[legalStructureId].members.placeholder as string
+      )
     ).toBeInTheDocument();
 
     await page.fillAndSubmitAddressModal(member, "members");
@@ -323,16 +325,16 @@ describe("<BusinessFormation />", () => {
     fireEvent.click(screen.getByLabelText("Credit card"));
     page.selectCheckbox(Config.businessFormationDefaults.optInCorpWatchText);
     page.selectCheckbox(
-      `${displayContent.formationDisplayContent[legalStructureId].certificateOfStanding.contentMd} ${displayContent.formationDisplayContent[legalStructureId].certificateOfStanding.optionalLabel}`
+      `${displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.contentMd} ${displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.optionalLabel}`
     );
     page.selectCheckbox(
-      `${displayContent.formationDisplayContent[legalStructureId].certifiedCopyOfFormationDocument.contentMd} ${displayContent.formationDisplayContent[legalStructureId].certifiedCopyOfFormationDocument.optionalLabel}`
+      `${displayContent.formationDisplayContentMap[legalStructureId].certifiedCopyOfFormationDocument.contentMd} ${displayContent.formationDisplayContentMap[legalStructureId].certifiedCopyOfFormationDocument.optionalLabel}`
     );
 
     const expectedTotalCost =
-      displayContent.formationDisplayContent[legalStructureId].certificateOfStanding.cost +
-      displayContent.formationDisplayContent[legalStructureId].certifiedCopyOfFormationDocument.cost +
-      displayContent.formationDisplayContent[legalStructureId].officialFormationDocument.cost;
+      displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.cost +
+      displayContent.formationDisplayContentMap[legalStructureId].certifiedCopyOfFormationDocument.cost +
+      displayContent.formationDisplayContentMap[legalStructureId].officialFormationDocument.cost;
 
     expect(screen.getByText(getDollarValue(expectedTotalCost))).toBeInTheDocument();
     await page.submitBillingStep();
@@ -433,7 +435,7 @@ describe("<BusinessFormation />", () => {
 
     expect(
       screen.queryByText(
-        displayContent.formationDisplayContent[legalStructureId].members.placeholder as string
+        displayContent.formationDisplayContentMap[legalStructureId].members.placeholder as string
       )
     ).not.toBeInTheDocument();
 
@@ -449,16 +451,16 @@ describe("<BusinessFormation />", () => {
     fireEvent.click(screen.getByLabelText("Credit card"));
     page.selectCheckbox(Config.businessFormationDefaults.optInCorpWatchText);
     page.selectCheckbox(
-      `${displayContent.formationDisplayContent[legalStructureId].certificateOfStanding.contentMd} ${displayContent.formationDisplayContent[legalStructureId].certificateOfStanding.optionalLabel}`
+      `${displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.contentMd} ${displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.optionalLabel}`
     );
     page.selectCheckbox(
-      `${displayContent.formationDisplayContent[legalStructureId].certifiedCopyOfFormationDocument.contentMd} ${displayContent.formationDisplayContent[legalStructureId].certifiedCopyOfFormationDocument.optionalLabel}`
+      `${displayContent.formationDisplayContentMap[legalStructureId].certifiedCopyOfFormationDocument.contentMd} ${displayContent.formationDisplayContentMap[legalStructureId].certifiedCopyOfFormationDocument.optionalLabel}`
     );
 
     const expectedTotalCost =
-      displayContent.formationDisplayContent[legalStructureId].certificateOfStanding.cost +
-      displayContent.formationDisplayContent[legalStructureId].certifiedCopyOfFormationDocument.cost +
-      displayContent.formationDisplayContent[legalStructureId].officialFormationDocument.cost;
+      displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.cost +
+      displayContent.formationDisplayContentMap[legalStructureId].certifiedCopyOfFormationDocument.cost +
+      displayContent.formationDisplayContentMap[legalStructureId].officialFormationDocument.cost;
 
     expect(screen.getByText(getDollarValue(expectedTotalCost))).toBeInTheDocument();
     await page.submitBillingStep();
@@ -537,7 +539,7 @@ describe("<BusinessFormation />", () => {
 
     expect(
       screen.queryByText(
-        displayContent.formationDisplayContent[legalStructureId].members.placeholder as string
+        displayContent.formationDisplayContentMap[legalStructureId].members.placeholder as string
       )
     ).not.toBeInTheDocument();
 
@@ -555,16 +557,16 @@ describe("<BusinessFormation />", () => {
     fireEvent.click(screen.getByLabelText("Credit card"));
     page.selectCheckbox(Config.businessFormationDefaults.optInCorpWatchText);
     page.selectCheckbox(
-      `${displayContent.formationDisplayContent[legalStructureId].certificateOfStanding.contentMd} ${displayContent.formationDisplayContent[legalStructureId].certificateOfStanding.optionalLabel}`
+      `${displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.contentMd} ${displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.optionalLabel}`
     );
     page.selectCheckbox(
-      `${displayContent.formationDisplayContent[legalStructureId].certifiedCopyOfFormationDocument.contentMd} ${displayContent.formationDisplayContent[legalStructureId].certifiedCopyOfFormationDocument.optionalLabel}`
+      `${displayContent.formationDisplayContentMap[legalStructureId].certifiedCopyOfFormationDocument.contentMd} ${displayContent.formationDisplayContentMap[legalStructureId].certifiedCopyOfFormationDocument.optionalLabel}`
     );
 
     const expectedTotalCost =
-      displayContent.formationDisplayContent[legalStructureId].certificateOfStanding.cost +
-      displayContent.formationDisplayContent[legalStructureId].certifiedCopyOfFormationDocument.cost +
-      displayContent.formationDisplayContent[legalStructureId].officialFormationDocument.cost;
+      displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.cost +
+      displayContent.formationDisplayContentMap[legalStructureId].certifiedCopyOfFormationDocument.cost +
+      displayContent.formationDisplayContentMap[legalStructureId].officialFormationDocument.cost;
 
     expect(screen.getByText(getDollarValue(expectedTotalCost))).toBeInTheDocument();
     await page.submitBillingStep();
@@ -658,7 +660,7 @@ describe("<BusinessFormation />", () => {
 
     expect(
       screen.queryByText(
-        displayContent.formationDisplayContent[legalStructureId].members.placeholder as string
+        displayContent.formationDisplayContentMap[legalStructureId].members.placeholder as string
       )
     ).not.toBeInTheDocument();
 
@@ -678,16 +680,16 @@ describe("<BusinessFormation />", () => {
     fireEvent.click(screen.getByLabelText("Credit card"));
     page.selectCheckbox(Config.businessFormationDefaults.optInCorpWatchText);
     page.selectCheckbox(
-      `${displayContent.formationDisplayContent[legalStructureId].certificateOfStanding.contentMd} ${displayContent.formationDisplayContent[legalStructureId].certificateOfStanding.optionalLabel}`
+      `${displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.contentMd} ${displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.optionalLabel}`
     );
     page.selectCheckbox(
-      `${displayContent.formationDisplayContent[legalStructureId].certifiedCopyOfFormationDocument.contentMd} ${displayContent.formationDisplayContent[legalStructureId].certifiedCopyOfFormationDocument.optionalLabel}`
+      `${displayContent.formationDisplayContentMap[legalStructureId].certifiedCopyOfFormationDocument.contentMd} ${displayContent.formationDisplayContentMap[legalStructureId].certifiedCopyOfFormationDocument.optionalLabel}`
     );
 
     const expectedTotalCost =
-      displayContent.formationDisplayContent[legalStructureId].certificateOfStanding.cost +
-      displayContent.formationDisplayContent[legalStructureId].certifiedCopyOfFormationDocument.cost +
-      displayContent.formationDisplayContent[legalStructureId].officialFormationDocument.cost;
+      displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.cost +
+      displayContent.formationDisplayContentMap[legalStructureId].certifiedCopyOfFormationDocument.cost +
+      displayContent.formationDisplayContentMap[legalStructureId].officialFormationDocument.cost;
 
     expect(screen.getByText(getDollarValue(expectedTotalCost))).toBeInTheDocument();
     await page.submitBillingStep();
@@ -778,7 +780,7 @@ describe("<BusinessFormation />", () => {
 
     expect(
       screen.queryByText(
-        displayContent.formationDisplayContent[legalStructureId].members.placeholder as string
+        displayContent.formationDisplayContentMap[legalStructureId].members.placeholder as string
       )
     ).not.toBeInTheDocument();
 
@@ -797,7 +799,7 @@ describe("<BusinessFormation />", () => {
 
     expect(
       screen.getByText(
-        displayContent.formationDisplayContent[legalStructureId].signatureHeader.placeholder as string
+        displayContent.formationDisplayContentMap[legalStructureId].signatureHeader.placeholder as string
       )
     ).toBeInTheDocument();
     await page.fillAndSubmitAddressModal(incorporators, "incorporators");
@@ -810,16 +812,16 @@ describe("<BusinessFormation />", () => {
     fireEvent.click(screen.getByLabelText("Credit card"));
     page.selectCheckbox(Config.businessFormationDefaults.optInCorpWatchText);
     page.selectCheckbox(
-      `${displayContent.formationDisplayContent[legalStructureId].certificateOfStanding.contentMd} ${displayContent.formationDisplayContent[legalStructureId].certificateOfStanding.optionalLabel}`
+      `${displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.contentMd} ${displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.optionalLabel}`
     );
     page.selectCheckbox(
-      `${displayContent.formationDisplayContent[legalStructureId].certifiedCopyOfFormationDocument.contentMd} ${displayContent.formationDisplayContent[legalStructureId].certifiedCopyOfFormationDocument.optionalLabel}`
+      `${displayContent.formationDisplayContentMap[legalStructureId].certifiedCopyOfFormationDocument.contentMd} ${displayContent.formationDisplayContentMap[legalStructureId].certifiedCopyOfFormationDocument.optionalLabel}`
     );
 
     const expectedTotalCost =
-      displayContent.formationDisplayContent[legalStructureId].certificateOfStanding.cost +
-      displayContent.formationDisplayContent[legalStructureId].certifiedCopyOfFormationDocument.cost +
-      displayContent.formationDisplayContent[legalStructureId].officialFormationDocument.cost;
+      displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.cost +
+      displayContent.formationDisplayContentMap[legalStructureId].certifiedCopyOfFormationDocument.cost +
+      displayContent.formationDisplayContentMap[legalStructureId].officialFormationDocument.cost;
 
     expect(screen.getByText(getDollarValue(expectedTotalCost))).toBeInTheDocument();
     await page.submitBillingStep();
@@ -913,13 +915,15 @@ describe("<BusinessFormation />", () => {
     page.fillText("Agent office address zip code", "08002");
 
     expect(
-      screen.getByText(displayContent.formationDisplayContent[legalStructureId].members.placeholder as string)
+      screen.getByText(
+        displayContent.formationDisplayContentMap[legalStructureId].members.placeholder as string
+      )
     ).toBeInTheDocument();
     await page.fillAndSubmitAddressModal(member, "members");
 
     expect(
       screen.getByText(
-        displayContent.formationDisplayContent[legalStructureId].signatureHeader.placeholder as string
+        displayContent.formationDisplayContentMap[legalStructureId].signatureHeader.placeholder as string
       )
     ).toBeInTheDocument();
     await page.fillAndSubmitAddressModal(member, "incorporators");
@@ -933,16 +937,16 @@ describe("<BusinessFormation />", () => {
     fireEvent.click(screen.getByLabelText("Credit card"));
     page.selectCheckbox(Config.businessFormationDefaults.optInCorpWatchText);
     page.selectCheckbox(
-      `${displayContent.formationDisplayContent[legalStructureId].certificateOfStanding.contentMd} ${displayContent.formationDisplayContent[legalStructureId].certificateOfStanding.optionalLabel}`
+      `${displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.contentMd} ${displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.optionalLabel}`
     );
     page.selectCheckbox(
-      `${displayContent.formationDisplayContent[legalStructureId].certifiedCopyOfFormationDocument.contentMd} ${displayContent.formationDisplayContent[legalStructureId].certifiedCopyOfFormationDocument.optionalLabel}`
+      `${displayContent.formationDisplayContentMap[legalStructureId].certifiedCopyOfFormationDocument.contentMd} ${displayContent.formationDisplayContentMap[legalStructureId].certifiedCopyOfFormationDocument.optionalLabel}`
     );
 
     const expectedTotalCost =
-      displayContent.formationDisplayContent[legalStructureId].certificateOfStanding.cost +
-      displayContent.formationDisplayContent[legalStructureId].certifiedCopyOfFormationDocument.cost +
-      displayContent.formationDisplayContent[legalStructureId].officialFormationDocument.cost;
+      displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.cost +
+      displayContent.formationDisplayContentMap[legalStructureId].certifiedCopyOfFormationDocument.cost +
+      displayContent.formationDisplayContentMap[legalStructureId].officialFormationDocument.cost;
 
     expect(screen.getByText(getDollarValue(expectedTotalCost))).toBeInTheDocument();
     await page.submitBillingStep();
@@ -995,7 +999,7 @@ describe("<BusinessFormation />", () => {
     expect(
       screen.getByText(
         `${
-          displayContent.formationDisplayContent[profileData.legalStructureId as FormationLegalType]
+          displayContent.formationDisplayContentMap[profileData.legalStructureId as FormationLegalType]
             .agentNumberOrManual.contentMd
         }`
       )
@@ -1003,7 +1007,7 @@ describe("<BusinessFormation />", () => {
     expect(
       screen.queryByText(
         `${
-          displayContent.formationDisplayContent[
+          displayContent.formationDisplayContentMap[
             publicFilingLegalTypes.find((id: FormationLegalType) => {
               return id != profileData.legalStructureId;
             }) as FormationLegalType

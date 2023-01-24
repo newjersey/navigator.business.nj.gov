@@ -1,6 +1,6 @@
 import {
   generateFormationDbaContent,
-  generateFormationDisplayContent,
+  generateFormationDisplayContentMap,
   generateUserData,
 } from "@/test/factories";
 import {
@@ -47,7 +47,7 @@ describe("Formation - BusinessNameStep", () => {
       completedFilingPayment: false,
     };
     return preparePage(generateUserData({ profileData, formationData }), {
-      formationDisplayContent: generateFormationDisplayContent({}),
+      formationDisplayContentMap: generateFormationDisplayContentMap({}),
       formationDbaContent: generateFormationDbaContent({}),
     });
   };

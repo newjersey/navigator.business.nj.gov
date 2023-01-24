@@ -1,4 +1,4 @@
-import { generateFormationDbaContent, generateFormationDisplayContent } from "@/test/factories";
+import { generateFormationDbaContent, generateFormationDisplayContentMap } from "@/test/factories";
 import {
   generateFormationProfileData,
   preparePage,
@@ -70,7 +70,7 @@ describe("Formation - ReviewStep", () => {
         formationData,
       },
       {
-        formationDisplayContent: generateFormationDisplayContent({}),
+        formationDisplayContentMap: generateFormationDisplayContentMap({}),
         formationDbaContent: generateFormationDbaContent({}),
       }
     );

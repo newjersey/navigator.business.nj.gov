@@ -39,7 +39,7 @@ export const BusinessFormationContext = createContext<BusinessFormationContextTy
   state: {
     stepIndex: 0,
     formationFormData: { ...createEmptyFormationFormData(), legalType: "limited-liability-company" },
-    displayContent: createEmptyFormationDisplayContent()["limited-liability-company"],
+    displayContent: createEmptyFormationDisplayContent(),
     dbaContent: createEmptyDbaDisplayContent(),
     showResponseAlert: false,
     hasBeenSubmitted: false,

@@ -102,6 +102,37 @@ collections:
       - { label: "Optional Label", name: "optionalLabel", widget: "string", required: false }
       - { label: "Bolded Heading", name: "headingBolded", widget: "string", required: false }
       - { label: "Sub Heading", name: "headingNotBolded", widget: "string", required: false }
+  - name: "business-formation-foreign-llc"
+    label: "Biz Form - FLC"
+    folder: "content/src/display-content/business-formation/foreign-limited-liability-company"
+    summary: "{{filename}}"
+    identifier_field: "{{fields.slug}}"
+    slug: "{{fields.slug}}"
+    delete: false
+    create: true
+    editor:
+      preview: true
+    fields:
+      - { label: "Content", name: "body", widget: "markdown" }
+      - { label: "Filename", name: "slug", widget: "slug", required: false }
+      - {
+          label: "Radio Button Number Text",
+          name: "radioButtonNumberText",
+          widget: "string",
+          required: false,
+        }
+      - {
+          label: "Radio Button Manual Text",
+          name: "radioButtonManualText",
+          widget: "string",
+          required: false,
+        }
+      - { label: "Placeholder", name: "placeholder", widget: "string", required: false }
+      - { label: "Error Text", name: "errorText", widget: "string", required: false }
+      - { label: "cost", name: "cost", widget: "string", required: false }
+      - { label: "Optional Label", name: "optionalLabel", widget: "string", required: false }
+      - { label: "Bolded Heading", name: "headingBolded", widget: "string", required: false }
+      - { label: "Sub Heading", name: "headingNotBolded", widget: "string", required: false }
   - name: "business-formation-llp"
     label: "Biz Form - LLP"
     folder: "content/src/display-content/business-formation/limited-liability-partnership"
@@ -128,6 +159,39 @@ collections:
           required: false,
         }
       - { label: "Placeholder", name: "placeholder", widget: "string", required: false }
+      - { label: "cost", name: "cost", widget: "string", required: false }
+      - { label: "Optional Label", name: "optionalLabel", widget: "string", required: false }
+      - { label: "Bolded Heading", name: "headingBolded", widget: "string", required: false }
+      - { label: "Sub Heading", name: "headingNotBolded", widget: "string", required: false }
+  - name: "business-formation-foreign-llP"
+    label: "Biz Form - FLLP"
+    folder: "content/src/display-content/business-formation/foreign-limited-liability-partnership"
+    summary: "{{filename}}"
+    identifier_field: "{{fields.slug}}"
+    slug: "{{fields.slug}}"
+    delete: false
+    create: true
+    editor:
+      preview: true
+    fields:
+      - { label: "Content", name: "body", widget: "markdown" }
+      - { label: "Filename", name: "slug", widget: "slug", required: false }
+      - {
+          label: "Radio Button Number Text",
+          name: "radioButtonNumberText",
+          widget: "string",
+          required: false,
+        }
+      - {
+          label: "Radio Button Manual Text",
+          name: "radioButtonManualText",
+          widget: "string",
+          required: false,
+        }
+      - { label: "Placeholder", name: "placeholder", widget: "string", required: false }
+      - { label: "Error Text", name: "errorText", widget: "string", required: false }
+      - { label: "Review Page Header", name: "reviewHeader", widget: "string", required: false }
+      - { label: "Required Field Error Text", name: "requireFieldText", widget: "string", required: false }
       - { label: "cost", name: "cost", widget: "string", required: false }
       - { label: "Optional Label", name: "optionalLabel", widget: "string", required: false }
       - { label: "Bolded Heading", name: "headingBolded", widget: "string", required: false }
@@ -1898,6 +1962,11 @@ collections:
                 }
               - { label: Business Address - City - Placeholder, name: addressCityPlaceholder, widget: string }
               - {
+                  label: Business Address - Municipality - Placeholder,
+                  name: addressMunicipalityPlaceholder,
+                  widget: string,
+                }
+              - {
                   label: Business Address - State Label,
                   name: addressStateLabel,
                   widget: string,
@@ -1946,21 +2015,6 @@ collections:
                   name: businessPurposeBodyText,
                   widget: text,
                   hint: This field supports Markdown,
-                }
-              - {
-                  label: Business Foreign State of Formation label,
-                  name: foreignStateOfFormationLabel,
-                  widget: string,
-                }
-              - {
-                  label: Business Foreign State of Formation placeholder,
-                  name: foreignStateOfFormationPlaceholder,
-                  widget: string,
-                }
-              - {
-                  label: Business Foreign Date of Formation label,
-                  name: foreignDateOfFormationLabel,
-                  widget: string,
                 }
               - {
                   label: Business Purpose Add Button Text,
@@ -2018,12 +2072,8 @@ collections:
                 }
               - { label: Edit Button Text, name: editButtonText, widget: string }
               - { label: Error - Address City, name: addressCityErrorText, widget: string }
+              - { label: Error - Address Municipality, name: addressMunicipalityErrorText, widget: string }
               - { label: Error - Address State, name: addressStateErrorText, widget: string }
-              - {
-                  label: Error - Foreign State of Formation,
-                  name: foreignStateOfFormationErrorText,
-                  widget: string,
-                }
               - { label: Error - Foreign Country, name: addressCountryErrorText, widget: string }
 
               - { label: Error - Address Zip Code, name: addressModalZipCodeErrorText, widget: string }
@@ -2067,11 +2117,6 @@ collections:
               - { label: Error - Name, name: nameErrorText, widget: string }
               - { label: Error - Signer, name: signerErrorText, widget: string }
               - { label: Error - Signer Type, name: signerTypeError, widget: string }
-              - {
-                  label: Error - Foreign Date of Formation Error,
-                  name: foreignDateOfFormationErrorText,
-                  widget: string,
-                }
               - { label: Error - Today Date, name: startTodayDateErrorText, widget: string }
               - { label: Error - Must be Future Date, name: startFutureDateErrorText, widget: string }
               - { label: Error - Greater than 30 days Date, name: start30DateErrorText, widget: string }
@@ -2419,16 +2464,6 @@ collections:
               - {
                   label: Review Step - Billing Contact First Name,
                   name: reviewStepContactFirstName,
-                  widget: string,
-                }
-              - {
-                  label: Review Step - State of Incorporation,
-                  name: reviewStepForeignStateOfIncorporation,
-                  widget: string,
-                }
-              - {
-                  label: Review Step - Foreign State of Incorporation,
-                  name: reviewStepForeignDateOfIncorporation,
                   widget: string,
                 }
               - {

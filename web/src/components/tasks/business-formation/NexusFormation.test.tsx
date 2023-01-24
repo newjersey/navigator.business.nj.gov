@@ -8,7 +8,7 @@ import analytics from "@/lib/utils/analytics";
 import {
   generateEmptyFormationData,
   generateFormationDbaContent,
-  generateFormationDisplayContent,
+  generateFormationDisplayContentMap,
   generateUserData,
 } from "@/test/factories";
 import {
@@ -95,7 +95,7 @@ describe("<NexusFormationFlow />", () => {
     });
     const formationData = generateEmptyFormationData();
     displayContent = {
-      formationDisplayContent: generateFormationDisplayContent({}),
+      formationDisplayContentMap: generateFormationDisplayContentMap({}),
       formationDbaContent: generateFormationDbaContent({}),
     };
     initialUserData = generateUserData({ profileData, formationData });
@@ -104,10 +104,10 @@ describe("<NexusFormationFlow />", () => {
   it("renders the foreign displayContent", async () => {
     preparePage(initialUserData, {
       ...displayContent,
-      formationDisplayContent: {
-        ...displayContent.formationDisplayContent,
+      formationDisplayContentMap: {
+        ...displayContent.formationDisplayContentMap,
         "foreign-limited-liability-company": {
-          ...displayContent.formationDisplayContent["foreign-limited-liability-company"],
+          ...displayContent.formationDisplayContentMap["foreign-limited-liability-company"],
           introParagraph: { contentMd: "roflcopter" },
         },
       },

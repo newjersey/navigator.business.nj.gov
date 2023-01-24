@@ -234,7 +234,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
         state: {
           stepIndex: stepIndex,
           formationFormData: formationFormData,
-          displayContent: props.displayContent.formationDisplayContent[legalStructureId],
+          displayContent: props.displayContent.formationDisplayContentMap[legalStructureId],
           dbaContent: props.displayContent.formationDbaContent,
           showResponseAlert: showResponseAlert,
           interactedFields,
@@ -260,7 +260,10 @@ export const BusinessFormation = (props: Props): ReactElement => {
                 <UnlockedBy task={props.task} dataTestid="dependency-alert" />
                 <div className="margin-bottom-2">
                   <Content>
-                    {props.displayContent.formationDisplayContent[legalStructureId].introParagraph.contentMd}
+                    {
+                      props.displayContent.formationDisplayContentMap[legalStructureId].introParagraph
+                        .contentMd
+                    }
                   </Content>
                 </div>
               </>
