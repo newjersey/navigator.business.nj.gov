@@ -64,9 +64,7 @@ export const SignUpModal = (): ReactElement => {
             position: "absolute",
             right: 10,
             top: 12,
-            color: (theme) => {
-              return theme.palette.grey[500];
-            },
+            color: "#757575",
           }}
         >
           <Icon className="usa-icon--size-4">close</Icon>
