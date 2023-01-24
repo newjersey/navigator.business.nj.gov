@@ -2026,14 +2026,8 @@ collections:
                 }
               - { label: Error - Foreign Country, name: addressCountryErrorText, widget: string }
 
-              - { label: Error - Address State (Modal), name: addressModalCityErrorText, widget: string }
               - { label: Error - Address Zip Code, name: addressModalZipCodeErrorText, widget: string }
               - { label: Error - Address, name: addressErrorText, widget: string }
-              - {
-                  label: Error - Agent Address City,
-                  name: agentOfficeAddressMunicipalityErrorText,
-                  widget: string,
-                }
               - {
                   label: Error - Agent Address Line 1,
                   name: agentOfficeAddressLine1ErrorText,
@@ -3769,7 +3763,7 @@ collections:
                         widget: object
                         fields:
                           - { label: "Header", name: "header", widget: "string" }
-                          - { label: "Error Text", name: "errorText", widget: "string" }
+                          - { label: "Error Text", name: "errorTextRequired", widget: "string" }
                           - { label: "Description", name: "description", widget: "markdown" }
                   - label: Tax PIN
                     name: taxPin
@@ -3783,7 +3777,7 @@ collections:
                         fields:
                           - { label: "Header", name: "header", widget: "string" }
                           - { label: "Placeholder", name: "placeholder", widget: "string" }
-                          - { label: "Error Text", name: "errorText", widget: "string" }
+                          - { label: "Error Text", name: "errorTextRequired", widget: "string" }
                           - { label: "Description", name: "description", widget: "markdown" }
                   - label: Documents
                     name: documents
@@ -3822,7 +3816,7 @@ collections:
                         fields:
                           - { label: "Header", name: "header", widget: "string" }
                           - { label: "Placeholder", name: "placeholder", widget: "string" }
-                          - { label: "Error Text", name: "errorText", widget: "string" }
+                          - { label: "Error Text", name: "errorTextRequired", widget: "string" }
                           - { label: "Description", name: "description", widget: "markdown" }
                   - label: Cannabis License
                     name: cannabisLicenseType

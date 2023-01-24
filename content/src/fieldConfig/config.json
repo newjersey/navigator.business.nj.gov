@@ -67,7 +67,6 @@
     "creditCardPaymentCostExtra": "2",
     "registeredAgentNameLabel": "**Registered Agent Name**",
     "membersModalNextButtonText": "Add Member",
-    "agentOfficeAddressMunicipalityErrorText": "Enter the city for your agent's office.",
     "signatureColumnLabel": "**Sign**",
     "reviewStepLocationHeader": "Location",
     "paymentTypeTableLabel": "Select Payment Type",
