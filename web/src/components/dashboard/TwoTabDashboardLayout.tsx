@@ -50,7 +50,7 @@ export default function TwoTabDashboardLayout({ firstTab, secondTab, certificati
     },
     "& .Mui-selected": {
       style: {
-        color: "white",
+        color: "#FFFFFF",
       },
     },
     minHeight: "auto",

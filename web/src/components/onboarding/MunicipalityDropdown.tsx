@@ -97,7 +97,7 @@ export const MunicipalityDropdown = (props: Props): ReactElement => {
             helperText={getHelperText()}
             sx={{
               "& .MuiInputBase-root": {
-                backgroundColor: "white",
+                backgroundColor: "#FFFFFF",
               },
             }}
           />

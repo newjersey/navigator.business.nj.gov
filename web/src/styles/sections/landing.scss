@@ -18,18 +18,18 @@
 
 .hero-gradient-bg {
   background-image: none !important;
-  background: linear-gradient($white, $white, $success-lighter) !important;
+  background: linear-gradient($white, $white, $success-extra-light) !important;
 }
 
 .hero-gradient-bg-bottom {
   padding-bottom: 100px;
-  background: $success-lighter url(/img/Bg-wavy-white@2x.png) bottom center no-repeat;
+  background: $success-extra-light url(/img/Bg-wavy-white@2x.png) bottom center no-repeat;
   background-size: 100%;
   height: auto;
 }
 
 .hero-gradient-bg-bottom-mobile {
-  background: $success-lighter url(/img/Bg-wavy-white@2x.png) bottom center no-repeat;
+  background: $success-extra-light url(/img/Bg-wavy-white@2x.png) bottom center no-repeat;
   background-size: 200%;
 }
 

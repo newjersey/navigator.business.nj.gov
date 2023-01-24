@@ -1,3 +1,5 @@
+$utilities-use-important: true;
+
 $xs: 30em; //mobile-lg + up (480px)
 $sm: 40em; //tablet + up (640px)
 $md: 50em; //big tablet (800px)
@@ -11,13 +13,10 @@ $base: #757575;
 $base-dark: #5c5c5c;
 $base-darkest: #1b1b1b;
 
-$cool-extra-light: #f9fbfb;
-$cool-lighter: #ddeded;
-
-$primary-disabled: #bfd89a;
 $primary-extra-light: #f2f7eb;
 $primary-lightest: #d9e9bf;
 $primary-lighter: #c5ee93;
+$primary-more-light: #bfd89a;
 $primary-light: #7fb135;
 $primary-vivid: #6a7d00;
 $primary: #4b7600;
@@ -40,19 +39,15 @@ $accent-cool-darker: #2c608a;
 $accent-cool-darkest: #38536f;
 $accent-cool-more-dark: #2e4153;
 
+$accent-warm-extra-light: #fff4dc;
 $accent-warm-lighter: #ffe396;
 $accent-warm-light: #e5a000;
 $accent-warm: #936f38;
 $accent-warm-dark: #7a591a;
 $accent-warm-darker: #5c410a;
 
-$accent-cooler-lightest: #ece6f2;
-$accent-cooler-light: #c1add3;
-$accent-cooler: #835aa6;
-$accent-cooler-dark: #64477c;
-$accent-cooler-darker: #4f3b60;
-
-$success-lighter: #ecf3ec;
+$success-extra-light: #ecf3ec;
+$success-lighter: #c9e8c9;
 $success-light: #70e17b;
 $success: #00a91c;
 $success-dark: #4d8055;
@@ -74,9 +69,24 @@ $warning-darker: #936f38;
 $error-extra-light: #f4e3db;
 $error-light: #f39268;
 $error: #d54309;
-$error-dark: #b51d09;
+$error-dark: #b51d09; // Default Error Color
 $error-darker: #6f3331;
 
-$disabled: $base;
 $white: #ffffff;
-$utilities-use-important: true;
+$disabled: $base;
+
+$cool-extra-light: #f9fbfb;
+$cool-lighter: #ddeded;
+
+$accent-cooler-lightest: #ece6f2;
+$accent-cooler-light: #c1add3;
+$accent-cooler: #835da4;
+$accent-cooler-dark: #5c3f74;
+$accent-cooler-darker: #422d53;
+
+$accent-extra-hot-light: #fae8e0;
+$accent-hot: #be4e1e;
+
+$accent-semi-cool-lightest: #effffb;
+$accent-semi-cool-light: #e9fffb;
+$accent-semi-cool: #009f7f;
