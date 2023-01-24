@@ -1,5 +1,4 @@
 import { createTheme } from "@mui/material";
-import { red } from "@mui/material/colors";
 
 export default createTheme({
   typography: {
@@ -27,8 +26,13 @@ export default createTheme({
     secondary: {
       light: "#73b3e7",
       main: "#2378c3",
-      dark: "#162e51",
+      dark: "#0050d8",
       contrastText: "#f0f0f0",
+    },
+    error: {
+      light: "#d54309",
+      main: "#b51d09",
+      dark: "#6f3331",
     },
   },
   components: {
@@ -63,9 +67,6 @@ export default createTheme({
           fontWeight: 800,
           marginLeft: 2,
           fontSize: 16,
-          "&.Mui-error": {
-            color: "#b50909",
-          },
         },
       },
     },
@@ -73,21 +74,10 @@ export default createTheme({
       variants: [
         {
           props: {
-            color: "error" as
-              | "error"
-              | "default"
-              | "info"
-              | "primary"
-              | "success"
-              | "warning"
-              | "secondary"
-              | undefined,
+            color: "error",
           },
           style: {
-            color: red[800],
-            "&.Mui-checked": {
-              color: red[600],
-            },
+            color: "#b51d09",
             ".MuiSvgIcon-root": {
               boxShadow: "inset 0 0 0 3px #B51D0926, 0 0 0 2px #B51D0926",
               borderRadius: "50%",
@@ -126,9 +116,6 @@ export default createTheme({
         root: {
           "&.Mui-disabled": {
             backgroundColor: "#f0f0f0",
-          },
-          "&.Mui-error .MuiOutlinedInput-notchedOutline": {
-            borderColor: "#b50909",
           },
           input: {
             padding: "12.5px 12px",
