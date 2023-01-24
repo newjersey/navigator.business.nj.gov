@@ -32,9 +32,7 @@ export const ModalZeroButton = (props: Props) => {
             className="margin-left-auto"
             onClick={props.close}
             sx={{
-              color: (theme) => {
-                return theme.palette.grey[500];
-              },
+              color: "#757575",
             }}
           >
             <Icon className="usa-icon--size-4">close</Icon>

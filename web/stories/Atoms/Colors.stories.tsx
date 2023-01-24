@@ -12,7 +12,7 @@ export default {
 };
 
 const renderColor = (variable: string, hexcode: string, bg?: boolean) => (
-  <div className="">
+  <div className="margin-right-1">
     <div
       className={`margin-bottom-2 height-10 width-15 bg-${variable} text-base-darkest text-bold margin-right-6 ${
         variable === "white" ? "border" : ""

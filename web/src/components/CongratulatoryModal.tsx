@@ -44,9 +44,7 @@ export const CongratulatoryModal = (props: Props): ReactElement => {
             position: "absolute",
             right: 8,
             top: 8,
-            color: (theme) => {
-              return theme.palette.grey[500];
-            },
+            color: "#757575",
           }}
         >
           <Icon className="usa-icon--size-4">close</Icon>
