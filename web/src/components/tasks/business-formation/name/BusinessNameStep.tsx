@@ -95,7 +95,12 @@ export const BusinessNameStep = (): ReactElement => {
                 error={hasError}
                 helperText={
                   hasError
-                    ? getErrorStateForField("businessName", state.formationFormData, nameAvailability).label
+                    ? getErrorStateForField(
+                        "businessName",
+                        state.formationFormData,
+                        nameAvailability,
+                        state.displayContent
+                      ).label
                     : undefined
                 }
                 onBlur={(event: FocusEvent<HTMLInputElement>) => {

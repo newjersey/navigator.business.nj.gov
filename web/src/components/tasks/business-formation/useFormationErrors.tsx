@@ -20,10 +20,15 @@ export const useFormationErrors = () => {
     return requiredFields.reduce((acc, field) => {
       return {
         ...acc,
-        [field]: getErrorStateForField(field, state.formationFormData, state.businessNameAvailability),
+        [field]: getErrorStateForField(
+          field,
+          state.formationFormData,
+          state.businessNameAvailability,
+          state.displayContent
+        ),
       };
     }, {} as Record<FormationFields, FormationFieldErrorState>);
-  }, [state.formationFormData, state.businessNameAvailability, requiredFields]);
+  }, [requiredFields, state.formationFormData, state.businessNameAvailability, state.displayContent]);
 
   const getApiFieldErrorState = (field: FormationFields): FormationFieldErrorState | undefined => {
     if (
@@ -125,7 +130,12 @@ export const useFormationErrors = () => {
     return requiredFieldsForStep(step).every((field) => {
       const errorState =
         errorStates[field] ||
-        getErrorStateForField(field, state.formationFormData, state.businessNameAvailability);
+        getErrorStateForField(
+          field,
+          state.formationFormData,
+          state.businessNameAvailability,
+          state.displayContent
+        );
       return !errorState.hasError;
     });
   };

@@ -108,7 +108,7 @@ describe("Formation - ContactsStep", () => {
 
       expect(
         screen.queryByText(
-          displayContent.formationDisplayContent[legalStructureId].members.placeholder as string
+          displayContent.formationDisplayContentMap[legalStructureId].members.placeholder as string
         )
       ).not.toBeInTheDocument();
       expect(screen.getByText("Donald Whatever")).toBeInTheDocument();
@@ -164,7 +164,7 @@ describe("Formation - ContactsStep", () => {
       expect(screen.getByTestId("addresses-members")).toBeInTheDocument();
       expect(
         screen.queryByText(
-          displayContent.formationDisplayContent[legalStructureId].members.placeholder as string
+          displayContent.formationDisplayContentMap[legalStructureId].members.placeholder as string
         )
       ).not.toBeInTheDocument();
       expect(screen.getByText(members[0].name)).toBeInTheDocument();
@@ -177,7 +177,7 @@ describe("Formation - ContactsStep", () => {
       expect(screen.getByTestId("addresses-incorporators")).toBeInTheDocument();
       expect(
         screen.queryByText(
-          displayContent.formationDisplayContent[legalStructureId].members.placeholder as string
+          displayContent.formationDisplayContentMap[legalStructureId].members.placeholder as string
         )
       ).not.toBeInTheDocument();
       expect(screen.getByText(incorporators[0].name)).toBeInTheDocument();
@@ -235,7 +235,7 @@ describe("Formation - ContactsStep", () => {
       expect(screen.getByTestId("addresses-members")).toBeInTheDocument();
       expect(
         screen.queryByText(
-          displayContent.formationDisplayContent[legalStructureId].members.placeholder as string
+          displayContent.formationDisplayContentMap[legalStructureId].members.placeholder as string
         )
       ).not.toBeInTheDocument();
       expect(screen.getByText(members[0].name)).toBeInTheDocument();

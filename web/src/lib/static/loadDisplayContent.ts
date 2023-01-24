@@ -1,4 +1,5 @@
 import {
+  createEmptyFormationDisplayContent,
   FormationDbaContent,
   FormationDisplayContent,
   FormationDisplayContentMap,
@@ -96,6 +97,12 @@ const getFormationFields = (
     return getTextFieldContent(`signatures.md`, type);
   };
 
+  const foreignDateOfFormationHeader = (type: FormationLegalType) => {
+    return getTextFieldContent(`date-of-formation.md`, type);
+  };
+  const foreignStateOfFormationHeader = (type: FormationLegalType) => {
+    return getTextFieldContent(`state-of-formation.md`, type);
+  };
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const fieldFunctions: Record<keyof FormationDisplayContent, (type: FormationLegalType) => any> = {
     introParagraph,
@@ -108,6 +115,8 @@ const getFormationFields = (
     agentNumberOrManual,
     members,
     signatureHeader,
+    foreignDateOfFormationHeader,
+    foreignStateOfFormationHeader,
   };
 
   return Object.keys(fieldFunctions).reduce((content, name) => {
@@ -130,7 +139,7 @@ const getFormationFields = (
       }
       return content;
     }
-  }, {} as FormationDisplayContent);
+  }, createEmptyFormationDisplayContent());
 };
 
 const getDbaTasks = (): FormationDbaContent => {
@@ -157,7 +166,7 @@ const getDbaTasks = (): FormationDbaContent => {
   };
 };
 
-export const getFormationDisplayContentDefaults = (
+export const getFormationDisplayContentMapDefaults = (
   defaultDisplayContent: FormationDisplayContent,
   defaultForeignDisplayContent: FormationDisplayContent
 ): FormationDisplayContentMap =>
@@ -177,16 +186,16 @@ export const getFormationDisplayContentDefaults = (
     );
 
 export const loadTasksDisplayContent = (): TasksDisplayContent => {
-  const defaultFormationDisplayContent = getFormationFields(defaultFormationLegalType);
-  const defaultForeignFormationDisplayContent = getFormationFields(
+  const defaultFormationDisplayContentMap = getFormationFields(defaultFormationLegalType);
+  const defaultForeignFormationDisplayContentMap = getFormationFields(
     `foreign-${defaultFormationLegalType}`,
-    defaultFormationDisplayContent
+    defaultFormationDisplayContentMap
   );
 
   return {
-    formationDisplayContent: getFormationDisplayContentDefaults(
-      defaultFormationDisplayContent,
-      defaultForeignFormationDisplayContent
+    formationDisplayContentMap: getFormationDisplayContentMapDefaults(
+      defaultFormationDisplayContentMap,
+      defaultForeignFormationDisplayContentMap
     ),
     formationDbaContent: getDbaTasks(),
   };

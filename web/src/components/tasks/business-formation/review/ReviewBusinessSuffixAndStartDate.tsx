@@ -32,12 +32,12 @@ export const ReviewBusinessSuffixAndStartDate = (): ReactElement => {
         <>
           <ReviewLineItem
             dataTestId="foreign-state-of-formation"
-            label={Config.businessFormationDefaults.reviewStepForeignStateOfIncorporation}
+            label={state.displayContent.foreignStateOfFormationHeader.reviewHeader}
             value={state.formationFormData.foreignStateOfFormation ?? italicNotEnteredText}
           />
           <ReviewLineItem
             dataTestId="foreign-date-of-formation"
-            label={Config.businessFormationDefaults.reviewStepForeignDateOfIncorporation}
+            label={state.displayContent.foreignDateOfFormationHeader.reviewHeader}
             value={
               state.formationFormData.foreignDateOfFormation
                 ? parseDateWithFormat(

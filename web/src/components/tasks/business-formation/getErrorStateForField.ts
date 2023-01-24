@@ -6,14 +6,15 @@ import { getMergedConfig } from "@/contexts/configContext";
 import { isZipCodeIntl } from "@/lib/domain-logic/isZipCodeIntl";
 import { isZipCodeNj } from "@/lib/domain-logic/isZipCodeNj";
 import { isZipCodeUs } from "@/lib/domain-logic/isZipCodeUs";
-import { FormationFieldErrorState, NameAvailability } from "@/lib/types/types";
+import { FormationDisplayContent, FormationFieldErrorState, NameAvailability } from "@/lib/types/types";
 import { validateEmail } from "@/lib/utils/helpers";
 import { FormationFields, FormationFormData } from "@businessnjgovnavigator/shared";
 
 export const getErrorStateForField = (
   field: FormationFields,
   formationFormData: FormationFormData,
-  businessNameAvailability: NameAvailability | undefined
+  businessNameAvailability: NameAvailability | undefined,
+  displayContent: FormationDisplayContent
 ): FormationFieldErrorState => {
   const Config = getMergedConfig();
 
@@ -63,8 +64,12 @@ export const getErrorStateForField = (
       hasErrorIfUndefined.push("addressMunicipality");
   }
 
-  if (formationFormData.businessLocationType != "NJ") {
-    hasErrorIfUndefined.push("foreignStateOfFormation");
+  if (formationFormData.businessLocationType != "NJ" && field == "foreignStateOfFormation") {
+    return {
+      ...errorState,
+      hasError: formationFormData.foreignStateOfFormation === undefined,
+      label: displayContent.foreignStateOfFormationHeader.requireFieldText,
+    };
   }
 
   if (hasErrorIfEmpty.includes(field)) {
@@ -102,7 +107,11 @@ export const getErrorStateForField = (
     formationFormData.businessLocationType != "NJ" &&
     !isDateValid(formationFormData.foreignDateOfFormation)
   ) {
-    return { ...errorState, hasError: true };
+    return {
+      ...errorState,
+      hasError: true,
+      label: displayContent.foreignDateOfFormationHeader.requireFieldText,
+    };
   }
 
   if (["signers", "incorporators"].includes(field)) {

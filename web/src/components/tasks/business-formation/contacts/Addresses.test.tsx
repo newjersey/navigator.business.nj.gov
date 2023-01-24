@@ -45,7 +45,8 @@ describe("Formation - Addressed Signer Field", () => {
           const page = await getPageHelper({ legalStructureId }, { incorporators: [] });
           expect(
             screen.getByText(
-              displayContent.formationDisplayContent[legalStructureId].signatureHeader.placeholder as string
+              displayContent.formationDisplayContentMap[legalStructureId].signatureHeader
+                .placeholder as string
             )
           ).toBeInTheDocument();
           page.clickAddNewSigner();

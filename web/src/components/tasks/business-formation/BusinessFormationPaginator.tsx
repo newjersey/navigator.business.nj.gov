@@ -54,6 +54,7 @@ export const BusinessFormationPaginator = (): ReactElement => {
 
   useMountEffect(() => {
     isMounted.current = true;
+    scrollToTopOfElement(stepperRef.current, { isDesktop });
     analytics.event.business_formation_name_step.arrive.arrive_on_business_formation_name_step();
   });
 
@@ -443,8 +444,8 @@ export const BusinessFormationPaginator = (): ReactElement => {
                 fieldError.field
               ];
               return (
-                <li key={label}>
-                  {label}
+                <li key={label ?? fieldError.label}>
+                  {label ?? fieldError.label}
                   {getApiErrorMessage(fieldError.field) && (
                     <ul>
                       <li>{getApiErrorMessage(fieldError.field)}</li>

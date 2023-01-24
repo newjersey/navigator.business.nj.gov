@@ -53,11 +53,11 @@ describe("loadDisplayContent", () => {
   });
 
   describe("loadTasksDisplayContent", () => {
-    it("returns formationDisplayContent from markdown", () => {
+    it("returns formationDisplayContentMap from markdown", () => {
       const introParagraph = "### I am a header\n\nI am a description";
       mockedFs.readFileSync.mockReturnValue(introParagraph);
       expect(
-        loadTasksDisplayContent().formationDisplayContent["limited-liability-partnership"].introParagraph
+        loadTasksDisplayContent().formationDisplayContentMap["limited-liability-partnership"].introParagraph
           .contentMd
       ).toEqual("### I am a header\n\nI am a description");
     });
