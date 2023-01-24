@@ -35,10 +35,11 @@ export const FormationDate = (props: Props): ReactElement => {
         helperText: getBusinessStartDateHelperText(state.formationFormData.legalType),
       },
       foreignDateOfFormation: {
-        label: Config.businessFormationDefaults.foreignDateOfFormationLabel,
-        helperText: Config.businessFormationDefaults.foreignDateOfFormationErrorText,
+        label: state.displayContent.foreignDateOfFormationHeader.contentMd,
+        helperText: state.displayContent.foreignDateOfFormationHeader.errorText,
       },
     }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [state.formationFormData.legalType]
   );
 

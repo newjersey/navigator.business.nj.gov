@@ -1,7 +1,7 @@
 import { TasksDisplayContent } from "@/lib/types/types";
 import {
   generateFormationDbaContent,
-  generateFormationDisplayContent,
+  generateFormationDisplayContentMap,
   generateUser,
   generateUserData,
 } from "@/test/factories";
@@ -58,7 +58,7 @@ describe("Formation - BillingStep", () => {
     },
   };
   const displayContent: TasksDisplayContent = {
-    formationDisplayContent: generateFormationDisplayContent({
+    formationDisplayContentMap: generateFormationDisplayContentMap({
       "limited-liability-company": defaultContent,
     }),
     formationDbaContent: generateFormationDbaContent({}),

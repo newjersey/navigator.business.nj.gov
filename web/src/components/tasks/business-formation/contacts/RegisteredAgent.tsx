@@ -262,7 +262,7 @@ export const RegisteredAgent = (): ReactElement => {
                       placeholderText={
                         Config.businessFormationDefaults.registeredAgentMunicipalityPlaceholder
                       }
-                      helperText={Config.businessFormationDefaults.addressCityErrorText}
+                      helperText={Config.businessFormationDefaults.addressMunicipalityErrorText}
                     />
                   </div>
                 </div>

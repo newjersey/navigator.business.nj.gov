@@ -130,7 +130,10 @@ export const Signatures = (): ReactElement => {
         >
           {Config.businessFormationDefaults.signatureColumnLabel}*
         </label>
-        <div style={{ height: "56px" }} className="display-flex flex-column flex-justify-center">
+        <div
+          style={{ height: `${index == 0 ? "44px" : "60px"}` }}
+          className="display-flex flex-column flex-justify-center"
+        >
           <ValidatedCheckbox
             id={index ? `signature-checkbox-signers-${index}` : `signature-checkbox-signers`}
             onChange={(event) => {
@@ -268,13 +271,6 @@ export const Signatures = (): ReactElement => {
         <Content>{state.displayContent.signatureHeader.contentMd}</Content>
         <div className={`grid-row margin-y-2 flex-align-start`}>
           <div className={`grid-col`}>
-            <div className="fdr space-between">
-              <Content>{Config.businessFormationDefaults.signerLabel}</Content>
-              {isTabletAndUp && needsSignerType && (
-                <Content>{Config.businessFormationDefaults.signerTypeLabel}</Content>
-              )}
-              <Content>{`${Config.businessFormationDefaults.signatureColumnLabel}*`}</Content>
-            </div>
             {!state.formationFormData.signers || state.formationFormData.signers?.length === 0 ? (
               <></>
             ) : (
@@ -293,17 +289,21 @@ export const Signatures = (): ReactElement => {
                 <div className="grid-col">
                   <div className="grid-row margin-top-1">
                     <div className={`grid-col-12 ${needsSignerType ? "tablet:grid-col-6" : ""}`}>
+                      <Content>{Config.businessFormationDefaults.signerLabel}</Content>
                       {getSignatureField(0)}
                     </div>
                     {needsSignerType && (
                       <div className="grid-col-12 tablet:grid-col-5 tablet:margin-left-1 margin-top-1 tablet:margin-top-0">
-                        {" "}
+                        {isTabletAndUp && (
+                          <Content>{Config.businessFormationDefaults.signerTypeLabel}</Content>
+                        )}
                         {getTypeField(0)}
                       </div>
                     )}
                   </div>
                 </div>
-                <div style={{ marginBottom: "1em" }}>
+                <div className="margin-top-1" style={{ marginBottom: "1em" }}>
+                  <Content>{`${Config.businessFormationDefaults.signatureColumnLabel}*`}</Content>
                   {renderSignatureColumn({
                     index: 0,
                   })}

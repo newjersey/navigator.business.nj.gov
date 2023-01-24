@@ -1,7 +1,7 @@
 import { defaultDisplayDateFormat } from "@/lib/types/types";
 import {
   generateFormationDbaContent,
-  generateFormationDisplayContent,
+  generateFormationDisplayContentMap,
   generateUserData,
 } from "@/test/factories";
 import {
@@ -49,7 +49,16 @@ jest.mock("@/lib/api-client/apiClient", () => ({
 }));
 
 describe("Formation - BusinessStep", () => {
+  let displayContent = {
+    formationDisplayContentMap: generateFormationDisplayContentMap({}),
+    formationDbaContent: generateFormationDbaContent({}),
+  };
+
   beforeEach(() => {
+    displayContent = {
+      formationDisplayContentMap: generateFormationDisplayContentMap({}),
+      formationDbaContent: generateFormationDbaContent({}),
+    };
     jest.resetAllMocks();
     useSetupInitialMocks();
   });
@@ -74,10 +83,7 @@ describe("Formation - BusinessStep", () => {
     };
     const page = preparePage(
       generateUserData({ profileData, formationData }),
-      {
-        formationDisplayContent: generateFormationDisplayContent({}),
-        formationDbaContent: generateFormationDbaContent({}),
-      },
+      displayContent,
       municipalities
     );
     if (isForeign) {
@@ -396,9 +402,21 @@ describe("Formation - BusinessStep", () => {
   describe("Foreign state of formation", () => {
     it("saves data to formationData", async () => {
       const page = await getPageHelper(
-        { businessPersona: "FOREIGN" },
+        { businessPersona: "FOREIGN", legalStructureId: "limited-liability-company" },
         { foreignStateOfFormation: undefined }
       );
+      expect(
+        screen.getByText(
+          displayContent.formationDisplayContentMap["foreign-limited-liability-company"]
+            .foreignStateOfFormationHeader.contentMd
+        )
+      ).toBeInTheDocument();
+      expect(
+        screen.getByPlaceholderText(
+          displayContent.formationDisplayContentMap["foreign-limited-liability-company"]
+            .foreignStateOfFormationHeader.placeholder
+        )
+      ).toBeInTheDocument();
       page.fillText("Foreign state of formation", "Virgin Islands");
       await page.submitBusinessStep(true);
       expect(currentUserData().formationData.formationFormData.foreignStateOfFormation).toEqual(
@@ -408,12 +426,15 @@ describe("Formation - BusinessStep", () => {
 
     it("displays error on field validation", async () => {
       const page = await getPageHelper(
-        { businessPersona: "FOREIGN" },
+        { businessPersona: "FOREIGN", legalStructureId: "limited-liability-company" },
         { foreignStateOfFormation: undefined }
       );
       page.fillText("Foreign state of formation", "test");
       expect(
-        screen.getByText(Config.businessFormationDefaults.foreignStateOfFormationErrorText)
+        screen.getByText(
+          displayContent.formationDisplayContentMap["foreign-limited-liability-company"]
+            .foreignStateOfFormationHeader.errorText
+        )
       ).toBeInTheDocument();
     });
   });
@@ -649,15 +670,30 @@ describe("Formation - BusinessStep", () => {
     const fieldLabel = "Foreign date of formation";
 
     it("shows error when there is an invalid date", async () => {
-      const page = await getPageHelper({ businessPersona: "FOREIGN" }, { foreignDateOfFormation: undefined });
+      const page = await getPageHelper(
+        { businessPersona: "FOREIGN", legalStructureId: "limited-liability-company" },
+        { foreignDateOfFormation: undefined }
+      );
       page.fillText(fieldLabel, "12/23");
       expect(
-        screen.getByText(Config.businessFormationDefaults.foreignDateOfFormationErrorText)
+        screen.getByText(
+          displayContent.formationDisplayContentMap["foreign-limited-liability-company"]
+            .foreignDateOfFormationHeader.errorText
+        )
       ).toBeInTheDocument();
     });
 
     it("saves an inputted date", async () => {
-      const page = await getPageHelper({ businessPersona: "FOREIGN" }, { foreignDateOfFormation: undefined });
+      const page = await getPageHelper(
+        { businessPersona: "FOREIGN", legalStructureId: "limited-liability-company" },
+        { foreignDateOfFormation: undefined }
+      );
+      expect(
+        screen.getByText(
+          displayContent.formationDisplayContentMap["foreign-limited-liability-company"]
+            .foreignDateOfFormationHeader.contentMd
+        )
+      ).toBeInTheDocument();
       page.selectDate(getCurrentDate(), fieldLabel);
       await page.submitBusinessStep();
       expect(currentUserData().formationData.formationFormData.foreignDateOfFormation).toEqual(
@@ -851,15 +887,16 @@ describe("Formation - BusinessStep", () => {
 
     it("displays City (Main Address) from profile data", async () => {
       await getPageHelper(
-        { municipality: generateMunicipality({ displayName: "Newark", name: "Newark" }) },
+        {
+          municipality: generateMunicipality({ displayName: "Newark", name: "Newark" }),
+          businessPersona: "STARTING",
+        },
         {}
       );
       expect((screen.getByLabelText("Address municipality") as HTMLInputElement).value).toEqual("Newark");
 
       expect(
-        screen.queryByText(Config.businessFormationDefaults.addressCityPlaceholder, {
-          exact: false,
-        })
+        screen.queryByPlaceholderText(Config.businessFormationDefaults.addressCityPlaceholder)
       ).not.toBeInTheDocument();
     });
   });
@@ -989,22 +1026,39 @@ describe("Formation - BusinessStep", () => {
     });
 
     it("Foreign date of formation", async () => {
-      const page = await getPageHelper({ businessPersona: "FOREIGN" }, { foreignDateOfFormation: undefined });
+      const page = await getPageHelper(
+        { businessPersona: "FOREIGN", legalStructureId: "limited-liability-company" },
+        { foreignDateOfFormation: undefined }
+      );
       await attemptApiSubmission(page);
       expect(screen.getByRole("alert")).toHaveTextContent(
-        Config.businessFormationDefaults.requiredFieldsBulletPointLabel.foreignDateOfFormation
+        displayContent.formationDisplayContentMap["foreign-limited-liability-company"]
+          .foreignDateOfFormationHeader.requireFieldText
       );
+      expect(
+        screen.getByText(
+          displayContent.formationDisplayContentMap["foreign-limited-liability-company"]
+            .foreignDateOfFormationHeader.errorText
+        )
+      ).toBeInTheDocument();
     });
 
     it("Foreign state of formation", async () => {
       const page = await getPageHelper(
-        { businessPersona: "FOREIGN" },
+        { businessPersona: "FOREIGN", legalStructureId: "limited-liability-company" },
         { foreignStateOfFormation: undefined }
       );
       await attemptApiSubmission(page);
       expect(screen.getByRole("alert")).toHaveTextContent(
-        Config.businessFormationDefaults.requiredFieldsBulletPointLabel.foreignStateOfFormation
+        displayContent.formationDisplayContentMap["foreign-limited-liability-company"]
+          .foreignStateOfFormationHeader.requireFieldText
       );
+      expect(
+        screen.getByText(
+          displayContent.formationDisplayContentMap["foreign-limited-liability-company"]
+            .foreignStateOfFormationHeader.errorText
+        )
+      ).toBeInTheDocument();
     });
 
     it("Address line1", async () => {

@@ -1,5 +1,4 @@
 import { Content } from "@/components/Content";
-import { Alert } from "@/components/njwds-extended/Alert";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { ReactElement, ReactNode } from "react";
@@ -28,9 +27,6 @@ export const MainBusinessAddressContainer = (props: { children: ReactNode }): Re
         className="margin-bottom-2"
       />
       {props.children}
-      <Alert variant="info" className="margin-bottom-5">
-        <Content>{Config.businessFormationDefaults.businessLocationInfoAlertMarkdown}</Content>
-      </Alert>
     </>
   );
 };
