@@ -4,6 +4,7 @@ import {
   parseDateWithFormat,
   TaxFiling,
 } from "@businessnjgovnavigator/shared";
+import { getJanOfCurrentYear } from "@businessnjgovnavigator/shared/index";
 
 export const sortFilingsEarliestToLatest = (filings: TaxFiling[]): TaxFiling[] => {
   return filings.sort((a, b) => {
@@ -27,4 +28,9 @@ export const upcomingDeadlinesWithinAYear = (filings: TaxFiling[]): TaxFiling[] 
 
 export const sortFilterFilingsWithinAYear = (filings: TaxFiling[]): TaxFiling[] => {
   return sortFilingsEarliestToLatest(upcomingDeadlinesWithinAYear(filings));
+};
+
+export const isCalendarMonthLessThanCurrentMonth = (month: number) => {
+  const date = getJanOfCurrentYear().add(month, "months");
+  return date.month() < getCurrentDate().month();
 };

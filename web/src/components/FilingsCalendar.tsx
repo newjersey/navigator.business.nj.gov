@@ -1,8 +1,8 @@
 import { ArrowTooltip } from "@/components/ArrowTooltip";
 import { Content } from "@/components/Content";
-import { FilingsCalendarTaxAccess } from "@/components/FilingsCalendarTaxAccess";
+import { FilingsCalendarGrid } from "@/components/filings-calendar/FilingsCalendarGrid";
+import { FilingsCalendarTaxAccess } from "@/components/filings-calendar/FilingsCalendarTaxAccess";
 import { Button } from "@/components/njwds-extended/Button";
-import { Tag } from "@/components/njwds-extended/Tag";
 import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -14,8 +14,6 @@ import analytics from "@/lib/utils/analytics";
 import { groupBy } from "@/lib/utils/helpers";
 import {
   defaultDateFormat,
-  getCurrentDate,
-  getJanOfCurrentYear,
   LookupOperatingPhaseById,
   parseDateWithFormat,
   TaxFiling,
@@ -54,102 +52,6 @@ export const FilingsCalendar = (props: Props): ReactElement => {
       return false;
     }
     return LookupOperatingPhaseById(userData.profileData.operatingPhase).displayTaxAccessButton;
-  };
-
-  const isCalendarMonthLessThanCurrentMonth = (month: number) => {
-    const date = getJanOfCurrentYear().add(month, "months");
-    return date.month() < getCurrentDate().month();
-  };
-
-  const getMonth = (num: number): ReactElement => {
-    const date = getJanOfCurrentYear().add(num, "months");
-    let textColor = "text-base-dark";
-    if (getCurrentDate().month() === date.month()) {
-      textColor = "text-green";
-    }
-
-    const thisMonthFilings = sortedFilteredFilingsWithinAYear.filter((it) => {
-      return (
-        parseDateWithFormat(it.dueDate, defaultDateFormat).month() === date.month() &&
-        parseDateWithFormat(it.dueDate, defaultDateFormat).year() === date.year()
-      );
-    });
-
-    return (
-      <div data-testid={date.format("MMM YYYY")}>
-        <div className={`${textColor} padding-bottom-1`} aria-hidden="true">
-          <span className="text-bold">{date.format("MMM")}</span> <span>{date.format("YYYY")}</span>
-        </div>
-        <div>
-          {!isCalendarMonthLessThanCurrentMonth(num) &&
-            thisMonthFilings
-              .filter((filing) => {
-                return props.operateReferences[filing.identifier];
-              })
-              .map((filing) => {
-                return (
-                  <div key={filing.identifier} className="line-height-1 margin-bottom-1" data-testid="filing">
-                    <Tag backgroundColor="warning-extra-light" isHover isRadiusMd isWrappingText>
-                      <Link href={`filings/${props.operateReferences[filing.identifier].urlSlug}`}>
-                        <a
-                          href={`filings/${props.operateReferences[filing.identifier].urlSlug}`}
-                          data-testid={filing.identifier.toLowerCase()}
-                          className="usa-link text-secondary-darker hover:text-secondary-darker text-no-underline"
-                        >
-                          <span className="text-bold text-uppercase text-base-dark">
-                            {Config.dashboardDefaults.calendarFilingDueDateLabel}{" "}
-                            {parseDateWithFormat(filing.dueDate, defaultDateFormat).format("M/D")}
-                          </span>{" "}
-                          <span className="text-no-uppercase text-underline text-base-dark">
-                            {props.operateReferences[filing.identifier].name}
-                          </span>
-                        </a>
-                      </Link>
-                    </Tag>
-                  </div>
-                );
-              })}
-        </div>
-      </div>
-    );
-  };
-
-  const renderCalendarAsGrid = (): ReactElement => {
-    const monthIndices = [...Array(12).keys()];
-
-    const monthsPerRow = 3;
-
-    const rowIndices = monthIndices.filter((num) => {
-      return num % monthsPerRow === 0;
-    });
-
-    return (
-      <table className="filingsCalendarTable" data-testid="filings-calendar-as-table">
-        <tbody>
-          {rowIndices.map((rowIndex) => {
-            const monthIndicesForRow = monthIndices.slice(rowIndex, rowIndex + monthsPerRow);
-            return (
-              <tr key={rowIndex}>
-                {monthIndicesForRow.map((month) => {
-                  return (
-                    <td
-                      key={month}
-                      className={
-                        isCalendarMonthLessThanCurrentMonth(month)
-                          ? "td-gray-border bg-base-extra-light"
-                          : "td-gray-border"
-                      }
-                    >
-                      {getMonth(month)}
-                    </td>
-                  );
-                })}
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    );
   };
 
   const renderCalendarAsList = (): ReactElement => {
@@ -203,7 +105,8 @@ export const FilingsCalendar = (props: Props): ReactElement => {
     const type = LookupOperatingPhaseById(userData?.profileData.operatingPhase).displayCalendarType;
     if (type === "LIST") return renderCalendarAsList();
     if (type === "FULL") {
-      if (isLargeScreen && userData?.preferences.isCalendarFullView) return renderCalendarAsGrid();
+      if (isLargeScreen && userData?.preferences.isCalendarFullView)
+        return <FilingsCalendarGrid operateReferences={props.operateReferences} userData={userData} />;
       return renderCalendarAsList();
     }
     return <></>;
