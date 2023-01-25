@@ -1,4 +1,4 @@
-import { FilingsCalendarTaxAccess } from "@/components/FilingsCalendarTaxAccess";
+import { FilingsCalendarTaxAccess } from "@/components/filings-calendar/FilingsCalendarTaxAccess";
 import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
