@@ -5,14 +5,11 @@ import { BusinessFormationTextField } from "@/components/tasks/business-formatio
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
-import { MediaQueries } from "@/lib/PageSizes";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { useMediaQuery } from "@mui/material";
 import { ReactElement, useContext } from "react";
 
 export const MainBusinessUs = (): ReactElement => {
   const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
-  const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
   const { doSomeFieldsHaveError, doesFieldHaveError } = useFormationErrors();
 
   return (
@@ -23,12 +20,11 @@ export const MainBusinessUs = (): ReactElement => {
         className="grid-gap-1 grid-row margin-top-2"
       >
         <BusinessFormationTextField
-          errorBarType="ALWAYS"
+          errorBarType="MOBILE-ONLY"
           label={Config.businessFormationDefaults.addressCityLabel}
           placeholder={Config.businessFormationDefaults.addressCityPlaceholder}
           fieldName="addressCity"
           required={true}
-          inlineErrorStyling={isTabletAndUp}
           className={"margin-bottom-2 grid-col-12 tablet:grid-col-6"}
           noValidationMargin={true}
           validationText={Config.businessFormationDefaults.addressCityErrorText}

@@ -9,7 +9,6 @@ import { ReactElement, useContext } from "react";
 export interface Props extends Omit<GenericTextFieldProps, "value" | "fieldName" | "error"> {
   fieldName: FormationTextField;
   label?: string;
-  inlineErrorStyling?: boolean;
   errorBarType: "ALWAYS" | "MOBILE-ONLY" | "DESKTOP-ONLY" | "NEVER";
 }
 

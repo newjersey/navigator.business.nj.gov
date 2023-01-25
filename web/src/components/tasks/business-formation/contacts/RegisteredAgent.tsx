@@ -310,7 +310,6 @@ export const RegisteredAgent = (): ReactElement => {
                     label={Config.businessFormationDefaults.registeredAgentZipCodeLabel}
                     placeholder={Config.businessFormationDefaults.registeredAgentZipCodePlaceholder}
                     validationText={Config.businessFormationDefaults.agentOfficeAddressZipCodeErrorText}
-                    inlineErrorStyling={true}
                     required={true}
                     disabled={shouldBeDisabled("agentOfficeAddressZipCode", "ADDRESS")}
                   />
