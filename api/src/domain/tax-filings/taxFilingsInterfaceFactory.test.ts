@@ -5,12 +5,7 @@ import {
   generateTaxIdAndBusinessName,
   generateUserData,
 } from "../../../test/factories";
-import {
-  TaxFilingClient,
-  TaxFilingInterface,
-  TaxFilingLookupResponse,
-  TaxFilingOnboardingResponse,
-} from "../types";
+import { TaxFilingClient, TaxFilingInterface } from "../types";
 import { taxFilingsInterfaceFactory } from "./taxFilingsInterfaceFactory";
 
 describe("TaxFilingsInterfaceFactory", () => {
@@ -54,7 +49,7 @@ describe("TaxFilingsInterfaceFactory", () => {
         taxFilingClient.lookup.mockResolvedValue({
           state: "FAILED",
           filings: [],
-        } as TaxFilingLookupResponse);
+        });
         expect(await taxFilingInterface.lookup({ userData, ...taxIdBusinessName })).toEqual({
           ...userData,
           taxFilingData: {
@@ -70,7 +65,7 @@ describe("TaxFilingsInterfaceFactory", () => {
         taxFilingClient.lookup.mockResolvedValue({
           state: "PENDING",
           filings: [],
-        } as TaxFilingLookupResponse);
+        });
         expect(await taxFilingInterface.lookup({ userData, ...taxIdBusinessName })).toEqual({
           ...userData,
           taxFilingData: {
@@ -86,7 +81,7 @@ describe("TaxFilingsInterfaceFactory", () => {
         taxFilingClient.lookup.mockResolvedValue({
           state: "API_ERROR",
           filings: [],
-        } as TaxFilingLookupResponse);
+        });
         expect(await taxFilingInterface.lookup({ userData, ...taxIdBusinessName })).toEqual({
           ...userData,
           taxFilingData: {
@@ -111,7 +106,7 @@ describe("TaxFilingsInterfaceFactory", () => {
       taxFilingClient.lookup.mockResolvedValue({
         state: "SUCCESS",
         filings: [filingData],
-      } as TaxFilingLookupResponse);
+      });
       expect(await taxFilingInterface.lookup({ userData, ...taxIdBusinessName })).toEqual({
         ...userData,
         taxFilingData: {
@@ -126,7 +121,7 @@ describe("TaxFilingsInterfaceFactory", () => {
   });
 
   describe("onboarding", () => {
-    describe("only does a lookup", () => {
+    describe("only does a lookup when onboarding is successful", () => {
       let userData: UserData;
 
       beforeEach(() => {
@@ -140,166 +135,97 @@ describe("TaxFilingsInterfaceFactory", () => {
         });
       });
 
-      it("returns lookup response when lookup returns API_ERROR", async () => {
-        taxFilingClient.lookup.mockResolvedValue({
-          state: "API_ERROR",
-          filings: [],
-        } as TaxFilingLookupResponse);
-        expect(await taxFilingInterface.onboarding({ userData, ...taxIdBusinessName })).toEqual({
-          ...userData,
-          taxFilingData: {
-            ...userData.taxFilingData,
-            state: "API_ERROR",
-            registeredISO: undefined,
-            businessName: taxIdBusinessName.businessName,
-            lastUpdatedISO: currentDate.toISOString(),
-          },
-        });
-        expect(taxFilingClient.onboarding).not.toHaveBeenCalled();
-      });
-
-      it("returns lookup response when lookup returns FAILED", async () => {
-        taxFilingClient.lookup.mockResolvedValue({
-          state: "FAILED",
-          filings: [],
-        } as TaxFilingLookupResponse);
-        expect(await taxFilingInterface.onboarding({ userData, ...taxIdBusinessName })).toEqual({
-          ...userData,
-          taxFilingData: {
-            ...userData.taxFilingData,
-            state: "FAILED",
-            registeredISO: undefined,
-            businessName: taxIdBusinessName.businessName,
-            lastUpdatedISO: currentDate.toISOString(),
-          },
-        });
-        expect(taxFilingClient.onboarding).not.toHaveBeenCalled();
-      });
-
-      it("returns lookup response when lookup returns PENDING", async () => {
-        taxFilingClient.lookup.mockResolvedValue({
-          state: "PENDING",
-          filings: [],
-        } as TaxFilingLookupResponse);
-        expect(await taxFilingInterface.onboarding({ userData, ...taxIdBusinessName })).toEqual({
-          ...userData,
-          taxFilingData: {
-            ...userData.taxFilingData,
-            state: "PENDING",
-            lastUpdatedISO: currentDate.toISOString(),
-            businessName: taxIdBusinessName.businessName,
-            registeredISO: currentDate.toISOString(),
-          },
-        });
-        expect(taxFilingClient.onboarding).not.toHaveBeenCalled();
-      });
-
-      it("returns lookup response when lookup returns SUCCESS", async () => {
+      it("returns lookup response when onboarding returns SUCCESS", async () => {
         const filingData = generateTaxFiling({});
+        taxFilingClient.onboarding.mockResolvedValue({
+          state: "SUCCESS",
+        });
         taxFilingClient.lookup.mockResolvedValue({
           state: "SUCCESS",
           filings: [filingData],
-        } as TaxFilingLookupResponse);
+        });
         expect(await taxFilingInterface.onboarding({ userData, ...taxIdBusinessName })).toEqual({
           ...userData,
           taxFilingData: {
             ...userData.taxFilingData,
             state: "SUCCESS",
             businessName: taxIdBusinessName.businessName,
-            registeredISO: currentDate.toISOString(),
             filings: [filingData],
             lastUpdatedISO: currentDate.toISOString(),
           },
         });
-        expect(taxFilingClient.onboarding).not.toHaveBeenCalled();
       });
     });
 
-    describe("returns onboarding data when lookup returns UNREGISTERED", () => {
-      it("returns pending when onboarding is successful", async () => {
+    describe("returns onboarding response", () => {
+      it("returns the API_ERROR response", async () => {
         const userData = generateUserData({
           taxFilingData: generateTaxFilingData({
             state: undefined,
             lastUpdatedISO: undefined,
             registeredISO: undefined,
-            filings: [generateTaxFiling({})],
           }),
         });
-        taxFilingClient.lookup.mockResolvedValue({
-          state: "UNREGISTERED",
-          filings: [],
-        } as TaxFilingLookupResponse);
-        taxFilingClient.onboarding.mockResolvedValue({ state: "SUCCESS" } as TaxFilingOnboardingResponse);
+        taxFilingClient.onboarding.mockResolvedValue({
+          state: "API_ERROR",
+        });
+        expect(await taxFilingInterface.onboarding({ userData, ...taxIdBusinessName })).toEqual({
+          ...userData,
+          taxFilingData: {
+            ...userData.taxFilingData,
+            state: "API_ERROR",
+            registeredISO: undefined,
+            businessName: taxIdBusinessName.businessName,
+          },
+        });
+      });
+
+      it("returns the FAILED response", async () => {
+        const userData = generateUserData({
+          taxFilingData: generateTaxFilingData({
+            state: undefined,
+            lastUpdatedISO: undefined,
+            registeredISO: undefined,
+          }),
+        });
+        taxFilingClient.onboarding.mockResolvedValue({
+          state: "FAILED",
+          errorField: "businessName",
+        });
+        expect(await taxFilingInterface.onboarding({ userData, ...taxIdBusinessName })).toEqual({
+          ...userData,
+          taxFilingData: {
+            ...userData.taxFilingData,
+            state: "FAILED",
+            registeredISO: undefined,
+            errorField: "businessName",
+            businessName: taxIdBusinessName.businessName,
+          },
+        });
+      });
+
+      it("returns the PENDING response", async () => {
+        const userData = generateUserData({
+          taxFilingData: generateTaxFilingData({
+            state: undefined,
+            lastUpdatedISO: undefined,
+            registeredISO: undefined,
+          }),
+        });
+        taxFilingClient.onboarding.mockResolvedValue({
+          state: "PENDING",
+          errorField: "businessName",
+        });
         expect(await taxFilingInterface.onboarding({ userData, ...taxIdBusinessName })).toEqual({
           ...userData,
           taxFilingData: {
             ...userData.taxFilingData,
             state: "PENDING",
             registeredISO: currentDate.toISOString(),
-            businessName: taxIdBusinessName.businessName,
             lastUpdatedISO: currentDate.toISOString(),
-          },
-        });
-      });
-
-      describe("returns onboarding response", () => {
-        it("passes through the API_ERROR response", async () => {
-          const userData = generateUserData({
-            taxFilingData: generateTaxFilingData({
-              state: undefined,
-              lastUpdatedISO: undefined,
-              registeredISO: undefined,
-
-              filings: [generateTaxFiling({})],
-            }),
-          });
-          taxFilingClient.lookup.mockResolvedValue({
-            state: "UNREGISTERED",
-            filings: [],
-          } as TaxFilingLookupResponse);
-          taxFilingClient.onboarding.mockResolvedValue({
-            state: "API_ERROR",
-          } as TaxFilingOnboardingResponse);
-          expect(await taxFilingInterface.onboarding({ userData, ...taxIdBusinessName })).toEqual({
-            ...userData,
-            taxFilingData: {
-              ...userData.taxFilingData,
-              state: "API_ERROR",
-              registeredISO: undefined,
-              businessName: taxIdBusinessName.businessName,
-              lastUpdatedISO: currentDate.toISOString(),
-            },
-          });
-        });
-
-        it("passes through the FAILED response", async () => {
-          const userData = generateUserData({
-            taxFilingData: generateTaxFilingData({
-              state: undefined,
-              lastUpdatedISO: undefined,
-              registeredISO: undefined,
-              filings: [generateTaxFiling({})],
-            }),
-          });
-          taxFilingClient.lookup.mockResolvedValue({
-            state: "UNREGISTERED",
-            filings: [],
-          } as TaxFilingLookupResponse);
-          taxFilingClient.onboarding.mockResolvedValue({
-            state: "FAILED",
             errorField: "businessName",
-          } as TaxFilingOnboardingResponse);
-          expect(await taxFilingInterface.onboarding({ userData, ...taxIdBusinessName })).toEqual({
-            ...userData,
-            taxFilingData: {
-              ...userData.taxFilingData,
-              state: "FAILED",
-              registeredISO: undefined,
-              errorField: "businessName",
-              businessName: taxIdBusinessName.businessName,
-              lastUpdatedISO: currentDate.toISOString(),
-            },
-          });
+            businessName: taxIdBusinessName.businessName,
+          },
         });
       });
     });

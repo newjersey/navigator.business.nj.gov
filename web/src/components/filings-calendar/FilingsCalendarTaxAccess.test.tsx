@@ -348,6 +348,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
       expect(
         screen.queryByText(Config.taxCalendar.failedResponsibleOwnerFieldHelper)
       ).not.toBeInTheDocument();
+      expect(screen.queryByText(Config.taxCalendar.failedTaxIdHelper)).not.toBeInTheDocument();
     });
 
     it("displays error when the businessName field is empty on blur", () => {

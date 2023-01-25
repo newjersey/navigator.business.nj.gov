@@ -23,36 +23,56 @@ export const taxFilingsInterfaceFactory = (apiTaxFilingClient: TaxFilingClient):
   };
 
   const onboarding = async (request: taxFilingInterfaceRequest): Promise<UserData> => {
-    const userData = await lookup(request);
-    if (userData.taxFilingData.state === "UNREGISTERED") {
-      const response = await apiTaxFilingClient.onboarding(
-        request.taxId,
-        userData.user.email,
-        request.businessName
-      );
-      const registered = ["SUCCESS", "PENDING"].includes(response.state);
-      return {
-        ...userData,
-        taxFilingData: {
-          ...userData.taxFilingData,
-          businessName: request.businessName,
-          lastUpdatedISO: new Date(Date.now()).toISOString(),
-          registeredISO: registered ? new Date(Date.now()).toISOString() : undefined,
-          errorField: response.errorField,
-          state: response.state == "SUCCESS" ? "PENDING" : response.state,
-        },
-      };
-    } else {
-      const registered = ["SUCCESS", "PENDING"].includes(userData.taxFilingData.state ?? "");
-      return {
-        ...userData,
-        taxFilingData: {
-          ...userData.taxFilingData,
-          registeredISO:
-            userData.taxFilingData.registeredISO ??
-            (registered ? new Date(Date.now()).toISOString() : undefined),
-        },
-      };
+    const response = await apiTaxFilingClient.onboarding(
+      request.taxId,
+      request.userData.user.email,
+      request.businessName
+    );
+
+    switch (response.state) {
+      case "PENDING": {
+        return {
+          ...request.userData,
+          taxFilingData: {
+            ...request.userData.taxFilingData,
+            lastUpdatedISO: new Date(Date.now()).toISOString(),
+            registeredISO: new Date(Date.now()).toISOString(),
+            errorField: response.errorField,
+            state: response.state,
+            businessName: request.businessName,
+          },
+        };
+      }
+      case "SUCCESS": {
+        return await lookup(request);
+      }
+
+      case "API_ERROR":
+      case "FAILED": {
+        return {
+          ...request.userData,
+          taxFilingData: {
+            ...request.userData.taxFilingData,
+            registeredISO: undefined,
+            state: response.state,
+            errorField: response.errorField,
+            businessName: request.businessName,
+          },
+        };
+      }
+
+      default: {
+        return {
+          ...request.userData,
+          taxFilingData: {
+            ...request.userData.taxFilingData,
+            registeredISO: undefined,
+            state: response.state,
+            errorField: response.errorField,
+            businessName: request.businessName,
+          },
+        };
+      }
     }
   };
 

@@ -132,20 +132,20 @@ export const ApiTaxFilingClient = (config: ApiConfig, logger: LogWriterType): Ta
         `TaxFiling Onboarding - NICUSA - Id:${logId} - Response received: ${JSON.stringify(response.data)}`
       );
 
-      let apiResponse = response.data;
-      if (!apiResponse.errorField) {
-        apiResponse = { ...apiResponse, errorField: undefined } as ApiTaxFilingOnboardingResponse;
-      } else if (apiResponse.errorField == "Business Name") {
-        apiResponse = { ...apiResponse, errorField: "businessName" } as ApiTaxFilingOnboardingResponse;
-      } else if (apiResponse.errorField == "Taxpayer Id") {
-        apiResponse = { ...apiResponse, errorField: "formFailure" } as ApiTaxFilingOnboardingResponse;
-      }
+      const apiResponse = response.data as ApiTaxFilingOnboardingResponse;
+
       return apiResponse.StatusCode == 200 ? { state: "SUCCESS" } : { state: "API_ERROR" };
     } catch (error) {
       const axiosError = error as AxiosError;
       const apiResponse = axiosError.response?.data as ApiTaxFilingOnboardingResponse;
       if (axiosError.response?.status === 400) {
-        return { state: "FAILED", errorField: apiResponse.Errors[0]?.Field };
+        if (apiResponse.Errors[0]?.Field === "Business Name") {
+          return { state: "FAILED", errorField: "businessName" };
+        } else if (apiResponse.Errors[0]?.Field === "Taxpayer ID") {
+          return { state: "FAILED", errorField: "formFailure" };
+        } else {
+          return { state: "FAILED", errorField: undefined };
+        }
       }
       logger.LogError(
         `TaxFiling Onboarding - NICUSA - Id:${logId} - Unknown error received: ${JSON.stringify(error)}`
@@ -191,7 +191,7 @@ export type ApiTaxFilingLookupResponse = {
 
 export type ApiTaxFilingOnboardingResponse = {
   ApiKey: string | null;
-  Errors: { Error: string; Field: "businessName" | "formFailure" }[];
+  Errors: { Error: string; Field: "Business Name" | "Taxpayer ID" }[];
   Notice: string | null;
   StatusCode: 500 | 400 | 200;
 };

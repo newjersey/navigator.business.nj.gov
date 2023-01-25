@@ -104,7 +104,7 @@ const generateErroredApiTaxFilingOnboardingResponse = (
         ? [
             {
               Error: `some-error-content-${randomInt()}`,
-              Field: randomInt() % 2 === 0 ? "formFailure" : "businessName",
+              Field: randomInt() % 2 === 0 ? "Taxpayer ID" : "Business Name",
             },
           ]
         : [],
@@ -269,15 +269,36 @@ describe("ApiTaxFilingClient", () => {
       expect(response).toEqual({ state: "SUCCESS" });
     });
 
-    it("returns failed state on api lookup error", async () => {
-      const stubResponse = generateErroredApiTaxFilingOnboardingResponse({}, 400);
+    it("returns failed state on api lookup error with errorField as formFailure when api return Taxpayer ID", async () => {
+      const stubResponse = generateErroredApiTaxFilingOnboardingResponse(
+        {
+          Errors: [{ Error: "some-error-string", Field: "Taxpayer ID" }],
+        },
+        400
+      );
       mockAxios.post.mockRejectedValue({ response: { data: stubResponse, status: 400 } });
       const response = await client.onboarding(
         taxIdAndBusinessNameAndEmail.taxId,
         taxIdAndBusinessNameAndEmail.email,
         taxIdAndBusinessNameAndEmail.businessName
       );
-      expect(response).toEqual({ state: "FAILED", errorField: stubResponse.Errors[0].Field });
+      expect(response).toEqual({ state: "FAILED", errorField: "formFailure" });
+    });
+
+    it("returns failed state on api lookup error with errorField as businessName when api return Business Name", async () => {
+      const stubResponse = generateErroredApiTaxFilingOnboardingResponse(
+        {
+          Errors: [{ Error: "some-error-string", Field: "Business Name" }],
+        },
+        400
+      );
+      mockAxios.post.mockRejectedValue({ response: { data: stubResponse, status: 400 } });
+      const response = await client.onboarding(
+        taxIdAndBusinessNameAndEmail.taxId,
+        taxIdAndBusinessNameAndEmail.email,
+        taxIdAndBusinessNameAndEmail.businessName
+      );
+      expect(response).toEqual({ state: "FAILED", errorField: "businessName" });
     });
 
     it("returns failed state on api unknown statusCode", async () => {
