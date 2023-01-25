@@ -14,6 +14,14 @@ export const useMountEffect = (fun: () => void): void => {
   return useEffect(fun, []);
 };
 
+export const groupBy = <T>(array: T[], predicate: (value: T, index: number, array: T[]) => string): T[][] =>
+  Object.values(
+    array.reduce((acc, value, index, array) => {
+      (acc[predicate(value, index, array)] ||= []).push(value);
+      return acc;
+    }, {} as { [key: string]: T[] })
+  );
+
 export const useOnWindowResize = (fun: () => void): void => {
   return useEffect(() => {
     window.addEventListener("resize", fun);

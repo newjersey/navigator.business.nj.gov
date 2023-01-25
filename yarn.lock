@@ -168,7 +168,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-crypto/ie11-detection@npm:^2.0.0, @aws-crypto/ie11-detection@npm:^2.0.2":
+"@aws-crypto/ie11-detection@npm:^2.0.0":
   version: 2.0.2
   resolution: "@aws-crypto/ie11-detection@npm:2.0.2"
   dependencies:
@@ -308,22 +308,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-crypto/sha256-browser@npm:2.0.2":
-  version: 2.0.2
-  resolution: "@aws-crypto/sha256-browser@npm:2.0.2"
-  dependencies:
-    "@aws-crypto/ie11-detection": ^2.0.2
-    "@aws-crypto/sha256-js": ^2.0.2
-    "@aws-crypto/supports-web-crypto": ^2.0.2
-    "@aws-crypto/util": ^2.0.2
-    "@aws-sdk/types": ^3.110.0
-    "@aws-sdk/util-locate-window": ^3.0.0
-    "@aws-sdk/util-utf8-browser": ^3.0.0
-    tslib: ^1.11.1
-  checksum: 81c442af06a57bcd947a8529f9fbc0caa487dff60ed46bf46f36356b6f630741db31d42b0f5518dbfd5e7b40d1de8bf647835e522ab8c59c8f3db7973a0946ec
-  languageName: node
-  linkType: hard
-
 "@aws-crypto/sha256-browser@npm:3.0.0":
   version: 3.0.0
   resolution: "@aws-crypto/sha256-browser@npm:3.0.0"
@@ -388,7 +372,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-crypto/sha256-js@npm:^2.0.0, @aws-crypto/sha256-js@npm:^2.0.2":
+"@aws-crypto/sha256-js@npm:^2.0.0":
   version: 2.0.2
   resolution: "@aws-crypto/sha256-js@npm:2.0.2"
   dependencies:
@@ -408,7 +392,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-crypto/supports-web-crypto@npm:^2.0.0, @aws-crypto/supports-web-crypto@npm:^2.0.2":
+"@aws-crypto/supports-web-crypto@npm:^2.0.0":
   version: 2.0.2
   resolution: "@aws-crypto/supports-web-crypto@npm:2.0.2"
   dependencies:
@@ -4589,7 +4573,7 @@ __metadata:
     lodash: 4.17.21
     prettier: 2.8.3
     prettier-plugin-organize-imports: 3.2.2
-    rimraf: 3.0.2
+    rimraf: 4.1.1
     serverless: 3.26.0
     serverless-dynamodb-local: 0.2.40
     serverless-http: 3.1.1
@@ -4622,7 +4606,7 @@ __metadata:
     cross-env: 7.0.3
     cspell: 6.19.2
     prettier: 2.8.3
-    rimraf: 3.0.2
+    rimraf: 4.1.1
   languageName: unknown
   linkType: soft
 
@@ -4633,7 +4617,7 @@ __metadata:
     "@aws-amplify/auth": 5.1.5
     "@aws-amplify/core": 5.0.11
     "@aws-crypto/client-node": 3.1.1
-    "@aws-crypto/sha256-browser": 2.0.2
+    "@aws-crypto/sha256-browser": 3.0.0
     "@aws-sdk/client-cloudwatch-logs": 3.254.0
     "@aws-sdk/client-dynamodb": 3.254.0
     "@aws-sdk/client-s3": 3.254.0
@@ -4789,7 +4773,7 @@ __metadata:
     remark-rehype: 10.1.0
     remove-markdown: 0.5.0
     require-from-string: 2.0.2
-    rimraf: 3.0.2
+    rimraf: 4.1.1
     sass: 1.57.1
     sass-loader: 13.2.0
     semantic-release: 20.0.2
@@ -4847,7 +4831,7 @@ __metadata:
     jest: 29.3.1
     jest-junit: 15.0.0
     prettier: 2.8.3
-    rimraf: 3.0.2
+    rimraf: 4.1.1
     ts-jest: 29.0.5
     ts-node: 10.9.1
     tsconfig-paths: 4.1.2
@@ -4862,7 +4846,7 @@ __metadata:
   dependencies:
     "@aws-amplify/auth": 5.1.5
     "@aws-amplify/core": 5.0.11
-    "@aws-crypto/sha256-browser": 2.0.2
+    "@aws-crypto/sha256-browser": 3.0.0
     "@aws-sdk/protocol-http": 3.254.0
     "@aws-sdk/s3-request-presigner": 3.254.0
     "@aws-sdk/url-parser": 3.254.0
@@ -4979,7 +4963,7 @@ __metadata:
     remark-rehype: 10.1.0
     remove-markdown: 0.5.0
     require-from-string: 2.0.2
-    rimraf: 3.0.2
+    rimraf: 4.1.1
     sass: 1.57.1
     sass-loader: 13.2.0
     slick-carousel: ^1.8.1
@@ -31285,6 +31269,15 @@ __metadata:
   bin:
     rimraf: bin.js
   checksum: 87f4164e396f0171b0a3386cc1877a817f572148ee13a7e113b238e48e8a9f2f31d009a92ec38a591ff1567d9662c6b67fd8818a2dbbaed74bc26a87a2a4a9a0
+  languageName: node
+  linkType: hard
+
+"rimraf@npm:4.1.1":
+  version: 4.1.1
+  resolution: "rimraf@npm:4.1.1"
+  bin:
+    rimraf: dist/cjs/src/bin.js
+  checksum: f52d46f59c1a532b3d0f73cb5228ff8f7df4ee87b9df95cf655788ea186c935b5c6ab4c45b66f8de5ed1e3690f58ff83f9a5b0ba1ae2e76a9bf36415f37732f7
   languageName: node
   linkType: hard
 

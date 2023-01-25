@@ -29,7 +29,7 @@ import {
 } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, within } from "@testing-library/react";
 import dayjs from "dayjs";
 
 function mockMaterialUI(): typeof materialUi {
@@ -157,6 +157,54 @@ describe("<FilingsCalendar />", () => {
     expect(screen.getByTestId("filings-calendar-as-list")).toBeInTheDocument();
     expect(screen.queryByText(farDueDate.format("MMMM D, YYYY"), { exact: false })).not.toBeInTheDocument();
     expect(screen.getByText(recentDueDate.format("MMMM D, YYYY"), { exact: false })).toBeInTheDocument();
+  });
+
+  it("displays filings nested within a date in list view", () => {
+    const recentDueDate = getCurrentDate().add(2, "months");
+
+    const farReport = generateTaxFiling({
+      identifier: "whatever",
+      dueDate: recentDueDate.format(defaultDateFormat),
+    });
+
+    const recentReport = generateTaxFiling({
+      identifier: "whatever2",
+      dueDate: recentDueDate.format(defaultDateFormat),
+    });
+
+    const userData = generateUserData({
+      profileData: generateProfileData({
+        operatingPhase: randomElementFromArray(
+          OperatingPhases.filter((obj) => {
+            return obj.displayCalendarType === "LIST";
+          })
+        ).id,
+      }),
+      taxFilingData: generateTaxFilingData({ filings: [farReport, recentReport] }),
+      preferences: generatePreferences({ isCalendarFullView: false }),
+    });
+
+    const operateReferences: Record<string, OperateReference> = {
+      whatever: {
+        name: "Whatever Report",
+        urlSlug: "whatever-url",
+        urlPath: "whatever-url-path",
+      },
+      whatever2: {
+        name: "Whatever2 Report",
+        urlSlug: "whatever2-url",
+        urlPath: "whatever2-url-path",
+      },
+    };
+
+    renderFilingsCalendar(operateReferences, userData);
+    expect(screen.getByTestId("filings-calendar-as-list")).toBeInTheDocument();
+    const dateElement = within(
+      // eslint-disable-next-line testing-library/no-node-access
+      screen.getByText(recentDueDate.format("MMMM D, YYYY"), { exact: false }).parentElement as HTMLElement
+    );
+    expect(dateElement.getByText(operateReferences["whatever"].name, { exact: false })).toBeInTheDocument();
+    expect(dateElement.getByText(operateReferences["whatever2"].name, { exact: false })).toBeInTheDocument();
   });
 
   it("displays calendar content when there are filings inside of the year", () => {

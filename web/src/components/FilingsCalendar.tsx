@@ -11,6 +11,7 @@ import { ROUTES } from "@/lib/domain-logic/routes";
 import { MediaQueries } from "@/lib/PageSizes";
 import { OperateReference } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
+import { groupBy } from "@/lib/utils/helpers";
 import {
   defaultDateFormat,
   getCurrentDate,
@@ -158,19 +159,24 @@ export const FilingsCalendar = (props: Props): ReactElement => {
 
     return (
       <div data-testid="filings-calendar-as-list">
-        {sortedFilteredFilingsWithinAYear
-          .filter((filing) => {
+        {groupBy(
+          sortedFilteredFilingsWithinAYear.filter((filing) => {
             return props.operateReferences[filing.identifier];
-          })
-          .map((filing) => {
-            return (
-              <div className="flex margin-bottom-2 minh-6" key={`${filing.identifier}-${filing.dueDate}`}>
-                <div className="width-05 bg-primary minw-05" />
-                <div className="margin-left-205">
-                  <div className="text-bold">
-                    {parseDateWithFormat(filing.dueDate, defaultDateFormat).format("MMMM D, YYYY")}
-                  </div>
-                  <div>
+          }),
+          (value) => value.dueDate
+        ).map((filings) => {
+          return (
+            <div className="flex margin-bottom-2 minh-6" key={filings[0].dueDate}>
+              <div className="width-05 bg-primary minw-05" />
+              <div className="margin-left-205">
+                <div className="text-bold">
+                  {parseDateWithFormat(filings[0].dueDate, defaultDateFormat).format("MMMM D, YYYY")}
+                </div>
+                {filings.map((filing, index) => (
+                  <div
+                    key={`${filing.identifier}-${filing.dueDate}`}
+                    className={`margin-bottom-05 ${index == 0 ? "margin-top-05" : ""}`}
+                  >
                     <Link href={`filings/${props.operateReferences[filing.identifier].urlSlug}`} passHref>
                       <a
                         href={`filings/${props.operateReferences[filing.identifier].urlSlug}`}
@@ -183,10 +189,11 @@ export const FilingsCalendar = (props: Props): ReactElement => {
                       </a>
                     </Link>
                   </div>
-                </div>
+                ))}
               </div>
-            );
-          })}{" "}
+            </div>
+          );
+        })}
         <hr />
       </div>
     );
