@@ -11,6 +11,8 @@
     "upAndRunningTaskHeader": "My Registration Tasks",
     "showTaskText": "Show",
     "hideTaskText": "Hide",
-    "hiddenTasksText": "${count} Hidden Tasks"
+    "hiddenTasksText": "${count} Hidden Tasks",
+    "viewMoreFilingsButton": "View more",
+    "viewLessFilingsButton": "View less"
   }
 }

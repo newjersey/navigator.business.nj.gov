@@ -47,14 +47,14 @@ export const FilingsCalendarTaxAccess = (): ReactElement => {
   }, userData);
 
   useEffect(() => {
-    if (!router.isReady) {
+    if (!router || !router.isReady) {
       return;
     }
     if (checkQueryValue(router, QUERIES.openTaxFilingsModal, "true")) {
       router.replace({ pathname: ROUTES.dashboard }, undefined, { shallow: true });
       setShowTaxModal(true);
     }
-  }, [router, router.isReady]);
+  }, [router]);
 
   useEffect(() => {
     if (!userData) {
