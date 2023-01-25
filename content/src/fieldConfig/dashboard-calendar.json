@@ -13,6 +13,7 @@
     "hideTaskText": "Hide",
     "hiddenTasksText": "${count} Hidden Tasks",
     "viewMoreFilingsButton": "View more",
-    "viewLessFilingsButton": "View less"
+    "viewLessFilingsButton": "View less",
+    "calendarListViewMoreButton": "View More"
   }
 }

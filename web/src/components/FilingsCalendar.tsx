@@ -22,7 +22,7 @@ import {
 import { useMediaQuery } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { ReactElement } from "react";
+import { ReactElement, useState } from "react";
 
 interface Props {
   operateReferences: Record<string, OperateReference>;
@@ -35,6 +35,9 @@ export const FilingsCalendar = (props: Props): ReactElement => {
   const update = userDataFromHook.update;
   const userData = props.CMS_ONLY_fakeUserData ?? userDataFromHook.userData;
   const router = useRouter();
+  const listViewMoreIncrement = 5;
+  const [numberOfVisibleCalendarEntries, setNumberOfVisibleCalendarEntries] =
+    useState<number>(listViewMoreIncrement);
 
   const isLargeScreen = useMediaQuery(MediaQueries.tabletAndUp);
 
@@ -59,16 +62,24 @@ export const FilingsCalendar = (props: Props): ReactElement => {
       return <></>;
     }
 
+    const filingsGroupedByDate = groupBy(
+      sortedFilteredFilingsWithinAYear.filter((filing) => {
+        return props.operateReferences[filing.identifier];
+      }),
+      (value) => value.dueDate
+    );
+
+    const visibleFilings = filingsGroupedByDate.slice(0, numberOfVisibleCalendarEntries);
+
     return (
       <div data-testid="filings-calendar-as-list">
-        {groupBy(
-          sortedFilteredFilingsWithinAYear.filter((filing) => {
-            return props.operateReferences[filing.identifier];
-          }),
-          (value) => value.dueDate
-        ).map((filings) => {
+        {visibleFilings.map((filings) => {
           return (
-            <div className="flex margin-bottom-2 minh-6" key={filings[0].dueDate}>
+            <div
+              className="flex margin-bottom-2 minh-6"
+              key={filings[0].dueDate}
+              data-testid="calendar-list-entry"
+            >
               <div className="width-05 bg-primary minw-05" />
               <div className="margin-left-205">
                 <div className="text-bold">
@@ -96,6 +107,16 @@ export const FilingsCalendar = (props: Props): ReactElement => {
             </div>
           );
         })}
+
+        {filingsGroupedByDate.length > numberOfVisibleCalendarEntries && (
+          <Button
+            style={"tertiary"}
+            underline={true}
+            onClick={() => setNumberOfVisibleCalendarEntries((previous) => previous + listViewMoreIncrement)}
+          >
+            {Config.dashboardDefaults.calendarListViewMoreButton}
+          </Button>
+        )}
         <hr />
       </div>
     );
