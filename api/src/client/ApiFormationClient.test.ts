@@ -146,7 +146,7 @@ describe("ApiFormationClient", () => {
             Gov2GoCorpWatch: formationFormData.corpWatchNotification,
             ShortGoodStanding: formationFormData.certificateOfStanding,
             Certified: formationFormData.certifiedCopyOfFormationDocument,
-            PayerEmail: "",
+            PayerEmail: userData.user.email,
             SelectPaymentType: formationFormData.paymentType,
             BusinessInformation: {
               CompanyOrigin: "Domestic",
@@ -279,14 +279,11 @@ describe("ApiFormationClient", () => {
           FailureReturnUrl: "navigator.com/form-business?completeFiling=false",
           Payer: {
             CompanyName: formationFormData.businessName,
-            Address1: formationFormData.addressLine1,
-            Address2: formationFormData.addressLine2,
-            City: formationFormData.addressCity,
-            StateAbbreviation:
-              formationFormData.addressCountry == "US"
-                ? formationFormData.addressState?.shortCode
-                : undefined,
-            ZipCode: formationFormData.addressZipCode,
+            Address1: "",
+            Address2: "",
+            City: "",
+            StateAbbreviation: undefined,
+            ZipCode: "",
             Email: userData.user.email,
           },
           Formation: {
@@ -294,7 +291,7 @@ describe("ApiFormationClient", () => {
             Gov2GoCorpWatch: formationFormData.corpWatchNotification,
             ShortGoodStanding: formationFormData.certificateOfStanding,
             Certified: formationFormData.certifiedCopyOfFormationDocument,
-            PayerEmail: "",
+            PayerEmail: userData.user.email,
             SelectPaymentType: formationFormData.paymentType,
             BusinessInformation: {
               CompanyOrigin: "Foreign",
@@ -425,7 +422,7 @@ describe("ApiFormationClient", () => {
             Gov2GoCorpWatch: formationFormData.corpWatchNotification,
             ShortGoodStanding: formationFormData.certificateOfStanding,
             Certified: formationFormData.certifiedCopyOfFormationDocument,
-            PayerEmail: "",
+            PayerEmail: userData.user.email,
             SelectPaymentType: formationFormData.paymentType,
             BusinessInformation: {
               CompanyOrigin: "Domestic",
@@ -577,14 +574,11 @@ describe("ApiFormationClient", () => {
           FailureReturnUrl: "hostname.com/form-business?completeFiling=false",
           Payer: {
             CompanyName: formationFormData.businessName,
-            Address1: formationFormData.addressLine1,
-            Address2: formationFormData.addressLine2,
-            City: formationFormData.addressCity,
-            StateAbbreviation:
-              formationFormData.addressCountry == "US"
-                ? formationFormData.addressState?.shortCode
-                : undefined,
-            ZipCode: formationFormData.addressZipCode,
+            Address1: "",
+            Address2: "",
+            City: "",
+            StateAbbreviation: undefined,
+            ZipCode: "",
             Email: userData.user.email,
           },
           Formation: {
@@ -592,7 +586,7 @@ describe("ApiFormationClient", () => {
             Gov2GoCorpWatch: formationFormData.corpWatchNotification,
             ShortGoodStanding: formationFormData.certificateOfStanding,
             Certified: formationFormData.certifiedCopyOfFormationDocument,
-            PayerEmail: "",
+            PayerEmail: userData.user.email,
             SelectPaymentType: formationFormData.paymentType,
 
             BusinessInformation: {
@@ -730,7 +724,7 @@ describe("ApiFormationClient", () => {
             Gov2GoCorpWatch: formationFormData.corpWatchNotification,
             ShortGoodStanding: formationFormData.certificateOfStanding,
             Certified: formationFormData.certifiedCopyOfFormationDocument,
-            PayerEmail: "",
+            PayerEmail: userData.user.email,
             SelectPaymentType: formationFormData.paymentType,
             BusinessInformation: {
               CompanyOrigin: "Domestic",
@@ -838,14 +832,11 @@ describe("ApiFormationClient", () => {
           FailureReturnUrl: "hostname.com/form-business?completeFiling=false",
           Payer: {
             CompanyName: formationFormData.businessName,
-            Address1: formationFormData.addressLine1,
-            Address2: formationFormData.addressLine2,
-            City: formationFormData.addressCity,
-            StateAbbreviation:
-              formationFormData.addressCountry == "US"
-                ? formationFormData.addressState?.shortCode
-                : undefined,
-            ZipCode: formationFormData.addressZipCode,
+            Address1: "",
+            Address2: "",
+            City: "",
+            StateAbbreviation: undefined,
+            ZipCode: "",
             Email: userData.user.email,
           },
           Formation: {
@@ -853,7 +844,7 @@ describe("ApiFormationClient", () => {
             Gov2GoCorpWatch: formationFormData.corpWatchNotification,
             ShortGoodStanding: formationFormData.certificateOfStanding,
             Certified: formationFormData.certifiedCopyOfFormationDocument,
-            PayerEmail: "",
+            PayerEmail: userData.user.email,
             SelectPaymentType: formationFormData.paymentType,
             BusinessInformation: {
               CompanyOrigin: "Foreign",
@@ -988,7 +979,7 @@ describe("ApiFormationClient", () => {
             Gov2GoCorpWatch: formationFormData.corpWatchNotification,
             ShortGoodStanding: formationFormData.certificateOfStanding,
             Certified: formationFormData.certifiedCopyOfFormationDocument,
-            PayerEmail: "",
+            PayerEmail: userData.user.email,
             SelectPaymentType: formationFormData.paymentType,
             BusinessInformation: {
               CompanyOrigin: "Domestic",
