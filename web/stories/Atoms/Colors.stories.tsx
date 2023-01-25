@@ -11,7 +11,7 @@ export default {
   },
 };
 
-const renderColor = (variable: string, hexcode: string, bg?: boolean) => (
+const renderColor = (variable: string, hexcode: string) => (
   <div className="margin-right-1">
     <div
       className={`margin-bottom-2 height-10 width-15 bg-${variable} text-base-darkest text-bold margin-right-6 ${
@@ -19,17 +19,8 @@ const renderColor = (variable: string, hexcode: string, bg?: boolean) => (
       }`}
     />
     <div className="text-wrap">{variable}</div>
-    {bg ? (
-      <span className="bg-base-light padding-1">
-        <span className={`border border-${variable} margin-right-1 padding-x-1`}> </span>
-        <span className={`text-${variable}`}>Text</span>{" "}
-      </span>
-    ) : (
-      <>
-        <span className={`border border-${variable} margin-right-1 padding-x-1`}> </span>
-        <span className={`text-${variable}`}>Text</span>
-      </>
-    )}
+    <span className={`border border-${variable} margin-right-1 padding-x-1`}> </span>
+    <span className={`text-${variable}`}>Text</span>
     <div className="text-uppercase">{hexcode}</div>
   </div>
 );
@@ -149,7 +140,7 @@ const error = (
 const shades = (
   <div className="flex flex-row margin-top-4">
     <div className="h1-styling margin-right-4 width-card-lg">Shades</div>
-    {renderColor("white", "#ffffff", true)}
+    {renderColor("white", "#ffffff")}
     {renderColor("disabled", "#757575")}
   </div>
 );
@@ -184,8 +175,8 @@ const accentHot = (
 const accentSemiCool = (
   <div className="flex flex-row margin-top-4">
     <div className="h1-styling margin-right-4 width-card-lg">Accent Hot</div>
-    {renderColor("accent-semi-cool-lightest", "#effffb")}
-    {renderColor("accent-semi-cool-light", "#e9fffb")}
+    {renderColor("accent-semi-cool-extra-light", "#effffb")}
+    {renderColor("accent-semi-cool-lightest", "#defff8")}
     {renderColor("accent-semi-cool", "#009f7f")}
   </div>
 );
