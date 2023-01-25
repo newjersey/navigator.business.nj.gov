@@ -174,7 +174,7 @@ const accentHot = (
 
 const accentSemiCool = (
   <div className="flex flex-row margin-top-4">
-    <div className="h1-styling margin-right-4 width-card-lg">Accent Hot</div>
+    <div className="h1-styling margin-right-4 width-card-lg">Accent Semi Cool</div>
     {renderColor("accent-semi-cool-extra-light", "#effffb")}
     {renderColor("accent-semi-cool-lightest", "#defff8")}
     {renderColor("accent-semi-cool", "#009f7f")}
