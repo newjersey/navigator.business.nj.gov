@@ -222,11 +222,13 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
       ForeignGoodStandingFile: isForeignCorp ? formationFormData.foreignGoodStandingFile : undefined,
       Payer: {
         CompanyName: formationFormData.businessName,
-        Address1: formationFormData.addressLine1,
-        Address2: formationFormData.addressLine2,
-        City: formationFormData.addressMunicipality?.name ?? formationFormData.addressCity ?? "",
-        StateAbbreviation: formationFormData.addressState?.shortCode,
-        ZipCode: formationFormData.addressZipCode,
+        Address1: isForeign ? "" : formationFormData.addressLine1,
+        Address2: isForeign ? "" : formationFormData.addressLine2,
+        City: isForeign
+          ? ""
+          : formationFormData.addressMunicipality?.name ?? formationFormData.addressCity ?? "",
+        StateAbbreviation: isForeign ? undefined : formationFormData.addressState?.shortCode,
+        ZipCode: isForeign ? "" : formationFormData.addressZipCode,
         Email: userData.user.email,
       },
       Formation: {
@@ -234,7 +236,7 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
         Gov2GoCorpWatch: formationFormData.corpWatchNotification,
         ShortGoodStanding: formationFormData.certificateOfStanding,
         Certified: formationFormData.certifiedCopyOfFormationDocument,
-        PayerEmail: "",
+        PayerEmail: userData.user.email,
         SelectPaymentType: formationFormData.paymentType as Exclude<PaymentType, undefined>,
         BusinessInformation: {
           CompanyOrigin: isForeign ? "Foreign" : "Domestic",
