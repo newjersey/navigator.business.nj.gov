@@ -4,12 +4,12 @@ filename: car-rental-vehicle-registration
 name: Register Your Fleet with NJ Motor Vehicle Commission
 id: car-rental-vehicle-registration
 callToActionLink: https://www.nj.gov/mvc/vehicles/reginitial.htm
-callToActionText: Register Your Fleet
+callToActionText: Make an Appointment
 required: true
 issuingAgency: New Jersey Motor Vehicle Commission
 formName: BA-49
 ---
-Your commercial vehicles need to be registered under your company name before you can legally rent them to customers.
+Your commercial vehicles need to be registered under your company name before you can legally rent them to customers. 
 
 ---
 ### Application Requirements
