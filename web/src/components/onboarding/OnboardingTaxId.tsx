@@ -22,7 +22,6 @@ export const OnboardingTaxId = ({
   handleChangeOverride,
   className,
   fieldStates,
-  inputErrorBar,
   validationText,
   ...props
 }: Props): ReactElement => {
@@ -110,7 +109,6 @@ export const OnboardingTaxId = ({
         fieldName={fieldName}
         visualFilter={formatTaxId}
         validationText={validationText}
-        inputErrorBar={inputErrorBar}
         numericProps={{ minLength: 12, maxLength: 12 }}
         handleChange={handleChangeFullTaxId}
         allowMasking={true}
@@ -121,7 +119,7 @@ export const OnboardingTaxId = ({
   }
 
   return (
-    <div className={`${className} ${inputErrorBar ? "input-error-bar" : ""} ${error ? "error" : ""}`}>
+    <div className={className}>
       <div className="flex flex-row ">
         <GenericTextField
           ref={taxIdBoxRef}

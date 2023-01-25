@@ -12,12 +12,7 @@ export interface OnboardingProps extends Omit<GenericTextFieldProps, "value" | "
   fieldOptions?: TextFieldProps;
 }
 
-export const OnboardingField = ({
-  fieldName,
-  inputErrorBar,
-  className,
-  ...props
-}: OnboardingProps): ReactElement => {
+export const OnboardingField = ({ fieldName, className, ...props }: OnboardingProps): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
 
   const { Config } = useConfig();
@@ -45,7 +40,7 @@ export const OnboardingField = ({
   };
 
   return (
-    <div className={`${className} ${inputErrorBar ? "input-error-bar" : ""} ${props.error ? "error" : ""}`}>
+    <div className={className}>
       <GenericTextField
         value={state.profileData[fieldName] as string | undefined}
         fieldName={fieldName as string}
