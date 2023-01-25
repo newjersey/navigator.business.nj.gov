@@ -649,4 +649,66 @@ describe("<FilingsCalendar />", () => {
       expect(screen.queryByText(Config.dashboardDefaults.calendarGridViewButton)).not.toBeInTheDocument();
     });
   });
+
+  describe("calendar list view, view more functionality", () => {
+    const renderCalendarWithEntries = (numberOfCalendarEntries: number) => {
+      let dueDate: dayjs.Dayjs;
+      let annualReport: TaxFiling;
+      const operateReferences: Record<string, OperateReference> = {};
+      const filings: TaxFiling[] = [];
+
+      for (let i = 0; i < numberOfCalendarEntries; i++) {
+        dueDate = getCurrentDate().add(2, "months").add(i, "day");
+        annualReport = generateTaxFiling({
+          identifier: `annual-report-${i}`,
+          dueDate: dueDate.format(defaultDateFormat),
+        });
+        filings.push(annualReport);
+        operateReferences[`annual-report-${i}`] = generateOperateReference({});
+      }
+
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          operatingPhase: randomElementFromArray(
+            OperatingPhases.filter((obj) => {
+              return obj.displayCalendarType === "FULL" && obj.displayCalendarToggleButton;
+            })
+          ).id,
+        }),
+        taxFilingData: generateTaxFilingData({ filings: filings }),
+        preferences: generatePreferences({ isCalendarFullView: false }),
+      });
+
+      renderFilingsCalendar(operateReferences, userData);
+    };
+
+    it("does not show the view more button if 5 or fewer events are in the calendar", () => {
+      renderCalendarWithEntries(5);
+      expect(screen.getAllByTestId("calendar-list-entry")).toHaveLength(5);
+      expect(screen.queryByText(Config.dashboardDefaults.calendarListViewMoreButton)).not.toBeInTheDocument();
+    });
+
+    it("shows the view more button if more than 5 events are in the calendar", () => {
+      renderCalendarWithEntries(6);
+      expect(screen.getAllByTestId("calendar-list-entry")).toHaveLength(5);
+      expect(screen.getByText(Config.dashboardDefaults.calendarListViewMoreButton)).toBeInTheDocument();
+    });
+
+    it("shows 5 more events when the view more button is clicked", () => {
+      renderCalendarWithEntries(12);
+      expect(screen.getAllByTestId("calendar-list-entry")).toHaveLength(5);
+      fireEvent.click(screen.getByText(Config.dashboardDefaults.calendarListViewMoreButton));
+      expect(screen.getAllByTestId("calendar-list-entry")).toHaveLength(10);
+      fireEvent.click(screen.getByText(Config.dashboardDefaults.calendarListViewMoreButton));
+      expect(screen.getAllByTestId("calendar-list-entry")).toHaveLength(12);
+    });
+
+    it("does not shows the view more button when we have no more entries to show", () => {
+      renderCalendarWithEntries(6);
+      expect(screen.getAllByTestId("calendar-list-entry")).toHaveLength(5);
+      fireEvent.click(screen.getByText(Config.dashboardDefaults.calendarListViewMoreButton));
+      expect(screen.getAllByTestId("calendar-list-entry")).toHaveLength(6);
+      expect(screen.queryByText(Config.dashboardDefaults.calendarListViewMoreButton)).not.toBeInTheDocument();
+    });
+  });
 });
