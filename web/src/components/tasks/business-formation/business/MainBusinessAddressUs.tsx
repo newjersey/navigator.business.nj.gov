@@ -2,6 +2,7 @@ import { Content } from "@/components/Content";
 import { StateDropdown } from "@/components/StateDropdown";
 import { MainBusinessAddressContainer } from "@/components/tasks/business-formation/business/MainBusinessAddressContainer";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
+import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { MediaQueries } from "@/lib/PageSizes";
@@ -16,14 +17,13 @@ export const MainBusinessUs = (): ReactElement => {
 
   return (
     <MainBusinessAddressContainer>
-      <div
-        className={`${
-          isTabletAndUp && doSomeFieldsHaveError(["addressState", "addressZipCode", "addressCity"])
-            ? `error`
-            : ""
-        } input-error-bar grid-gap-1 grid-row margin-top-2`}
+      <WithErrorBar
+        hasError={doSomeFieldsHaveError(["addressState", "addressZipCode", "addressCity"])}
+        type="DESKTOP-ONLY"
+        className="grid-gap-1 grid-row margin-top-2"
       >
         <BusinessFormationTextField
+          errorBarType="ALWAYS"
           label={Config.businessFormationDefaults.addressCityLabel}
           placeholder={Config.businessFormationDefaults.addressCityPlaceholder}
           fieldName="addressCity"
@@ -35,10 +35,10 @@ export const MainBusinessUs = (): ReactElement => {
           formInputFull
         />
         <>
-          <div
-            className={`${isTabletAndUp ? "" : "input-error-bar"} ${
-              doSomeFieldsHaveError(["addressState", "addressZipCode"]) ? `error` : ""
-            } form-input grid-col-5 tablet:grid-col-2`}
+          <WithErrorBar
+            hasError={doSomeFieldsHaveError(["addressState", "addressZipCode"])}
+            type="MOBILE-ONLY"
+            className="form-input grid-col-5 tablet:grid-col-2"
           >
             <Content>{Config.businessFormationDefaults.addressStateLabel}</Content>
             <StateDropdown
@@ -61,21 +61,20 @@ export const MainBusinessUs = (): ReactElement => {
               }}
               className={"margin-top-2"}
             />
-          </div>
+          </WithErrorBar>
+
           <BusinessFormationTextField
             label={Config.businessFormationDefaults.addressZipCodeLabel}
             placeholder={Config.businessFormationDefaults.addressZipCodePlaceholder}
-            numericProps={{
-              maxLength: 5,
-            }}
+            numericProps={{ maxLength: 5 }}
             required={true}
-            inlineErrorStyling={true}
+            errorBarType="NEVER"
             fieldName={"addressZipCode"}
             validationText={Config.businessFormationDefaults.addressZipCodeUsDakotaErrorText}
             className="form-input grid-col-7 tablet:grid-col-4"
           />
         </>
-      </div>
+      </WithErrorBar>
     </MainBusinessAddressContainer>
   );
 };

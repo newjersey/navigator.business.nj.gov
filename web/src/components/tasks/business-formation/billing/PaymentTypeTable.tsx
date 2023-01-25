@@ -1,4 +1,5 @@
 import { Content } from "@/components/Content";
+import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { getDollarValue } from "@/lib/utils/formatters";
@@ -64,7 +65,7 @@ export const PaymentTypeTable = (): ReactElement => {
   const hasError = doesFieldHaveError(FIELD);
 
   return (
-    <div className={`${hasError ? "error" : ""} input-error-bar`}>
+    <WithErrorBar hasError={hasError} type="ALWAYS">
       <table className="business-formation-table business-formation-payment">
         <thead>
           <tr>
@@ -174,6 +175,6 @@ export const PaymentTypeTable = (): ReactElement => {
           </tr>
         </tfoot>
       </table>
-    </div>
+    </WithErrorBar>
   );
 };

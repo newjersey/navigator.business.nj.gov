@@ -3,35 +3,32 @@ import { FormationChooseDocuments } from "@/components/tasks/business-formation/
 import { FormationChooseNotifications } from "@/components/tasks/business-formation/billing/FormationChooseNotifications";
 import { PaymentTypeTable } from "@/components/tasks/business-formation/billing/PaymentTypeTable";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
+import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
-import { MediaQueries } from "@/lib/PageSizes";
 import { getPhoneNumberFormat } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { useMediaQuery } from "@mui/material";
 import { ReactElement, useContext } from "react";
 
 export const BillingStep = (): ReactElement => {
   const { state } = useContext(BusinessFormationContext);
-  const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
-  const { doSomeFieldsHaveError, doesFieldHaveError } = useFormationErrors();
+  const { doSomeFieldsHaveError } = useFormationErrors();
 
   return (
     <div data-testid="billing-step">
       <Content>{Config.businessFormationDefaults.contactInformationHeader}</Content>
-      <div
-        className={`grid-row grid-gap-2 margin-top-2 ${isTabletAndUp ? "input-error-bar" : ""} ${
-          doSomeFieldsHaveError(["contactFirstName", "contactLastName"]) ? "error" : ""
-        }`}
+      <WithErrorBar
+        hasError={doSomeFieldsHaveError(["contactFirstName", "contactLastName"])}
+        type="DESKTOP-ONLY"
+        className="grid-row grid-gap-2 margin-top-2"
       >
         <div className="form-input tablet:grid-col-6">
           <BusinessFormationTextField
             label={Config.businessFormationDefaults.contactFirstNameLabel}
             placeholder={Config.businessFormationDefaults.contactFirstNamePlaceholder}
             fieldName="contactFirstName"
+            errorBarType="MOBILE-ONLY"
             required={true}
-            inlineErrorStyling={isTabletAndUp}
-            error={doesFieldHaveError("contactFirstName")}
             validationText={Config.businessFormationDefaults.contactFirstNameErrorText}
           />
         </div>
@@ -40,13 +37,12 @@ export const BillingStep = (): ReactElement => {
             label={Config.businessFormationDefaults.contactLastNameLabel}
             placeholder={Config.businessFormationDefaults.contactLastNamePlaceholder}
             fieldName="contactLastName"
-            inlineErrorStyling={isTabletAndUp}
+            errorBarType="MOBILE-ONLY"
             required={true}
-            error={doesFieldHaveError("contactLastName")}
             validationText={Config.businessFormationDefaults.contactLastNameErrorText}
           />
         </div>
-      </div>
+      </WithErrorBar>
       <div className="grid-row">
         <div className="tablet:grid-col-6">
           <div className="form-input">
@@ -54,6 +50,7 @@ export const BillingStep = (): ReactElement => {
               validationText={Config.businessFormationDefaults.contactPhoneNumberErrorText}
               label={Config.businessFormationDefaults.contactPhoneNumberLabel}
               placeholder={Config.businessFormationDefaults.contactPhoneNumberPlaceholder}
+              errorBarType="ALWAYS"
               fieldName={"contactPhoneNumber"}
               numericProps={{
                 maxLength: 10,

@@ -5,17 +5,15 @@ import { MainBusinessAddressNj } from "@/components/tasks/business-formation/bus
 import { MainBusinessForeignAddressFlow } from "@/components/tasks/business-formation/business/MainBusinessForeignAddressFlow";
 import { SuffixDropdown } from "@/components/tasks/business-formation/business/SuffixDropdown";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
+import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
-import { MediaQueries } from "@/lib/PageSizes";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { corpLegalStructures } from "@businessnjgovnavigator/shared/";
-import { useMediaQuery } from "@mui/material";
 import { ReactElement, useContext, useMemo } from "react";
 
 export const MainBusiness = (): ReactElement => {
   const { state } = useContext(BusinessFormationContext);
-  const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
   const { doSomeFieldsHaveError, doesFieldHaveError } = useFormationErrors();
   const isForeign = useMemo(
     () => state.formationFormData.businessLocationType != "NJ",
@@ -25,51 +23,52 @@ export const MainBusiness = (): ReactElement => {
   return (
     <>
       <BusinessNameAndLegalStructure />
-      <div
-        className={`${isTabletAndUp ? "input-error-bar" : ""} ${
-          doSomeFieldsHaveError(["businessSuffix", "businessStartDate"]) ? `error` : ""
-        } grid-row tablet:grid-gap-1`}
+      <WithErrorBar
+        hasError={doSomeFieldsHaveError(["businessSuffix", "businessStartDate"])}
+        type="DESKTOP-ONLY"
+        className="grid-row tablet:grid-gap-1"
       >
-        <div
-          className={`${isTabletAndUp ? "" : "input-error-bar"} ${
-            doesFieldHaveError("businessSuffix") ? `error` : ""
-          } tablet:grid-col-6`}
+        <WithErrorBar
+          hasError={doesFieldHaveError("businessSuffix")}
+          type="MOBILE-ONLY"
+          className="tablet:grid-col-6"
         >
           <SuffixDropdown />
-        </div>
-        <div
-          className={`${isTabletAndUp ? "" : "input-error-bar"} ${
-            doesFieldHaveError("businessStartDate") ? `error` : ""
-          } tablet:grid-col-6`}
+        </WithErrorBar>
+        <WithErrorBar
+          hasError={doesFieldHaveError("businessSuffix")}
+          type="MOBILE-ONLY"
+          className="tablet:grid-col-6"
         >
           <FormationDate fieldName="businessStartDate" />
-        </div>
-      </div>
+        </WithErrorBar>
+      </WithErrorBar>
       {isForeign && (
-        <div
-          className={`${isTabletAndUp ? "input-error-bar" : ""} ${
-            doSomeFieldsHaveError(["foreignStateOfFormation", "foreignDateOfFormation"]) ? `error` : ""
-          } grid-row tablet:grid-gap-1`}
+        <WithErrorBar
+          hasError={doSomeFieldsHaveError(["foreignStateOfFormation", "foreignDateOfFormation"])}
+          type="DESKTOP-ONLY"
+          className="grid-row tablet:grid-gap-1"
         >
-          <div
-            className={`${isTabletAndUp ? "" : "input-error-bar"} ${
-              doesFieldHaveError("foreignStateOfFormation") ? `error` : ""
-            } tablet:grid-col-6`}
+          <WithErrorBar
+            hasError={doesFieldHaveError("foreignStateOfFormation")}
+            type="MOBILE-ONLY"
+            className="tablet:grid-col-6"
           >
             <ForeignStateOfFormation />
-          </div>
-          <div
-            className={`${isTabletAndUp ? "" : "input-error-bar"} ${
-              doesFieldHaveError("foreignDateOfFormation") ? `error` : ""
-            } tablet:grid-col-6`}
+          </WithErrorBar>
+          <WithErrorBar
+            hasError={doesFieldHaveError("foreignDateOfFormation")}
+            type="MOBILE-ONLY"
+            className="tablet:grid-col-6"
           >
             <FormationDate fieldName="foreignDateOfFormation" />
-          </div>
-        </div>
+          </WithErrorBar>
+        </WithErrorBar>
       )}
       {corpLegalStructures.includes(state.formationFormData.legalType) && (
         <div className="grid-row">
           <BusinessFormationTextField
+            errorBarType="ALWAYS"
             label={Config.businessFormationDefaults.businessTotalStockLabel}
             placeholder={Config.businessFormationDefaults.businessTotalStockPlaceholder}
             numericProps={{

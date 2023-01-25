@@ -2,6 +2,7 @@ import { Content } from "@/components/Content";
 import { MunicipalityDropdown } from "@/components/onboarding/MunicipalityDropdown";
 import { StateDropdown } from "@/components/StateDropdown";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
+import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
@@ -16,7 +17,7 @@ export const RegisteredAgent = (): ReactElement => {
   const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
   const { municipalities } = useContext(MunicipalitiesContext);
   const { userData } = useUserData();
-  const { doesFieldHaveError } = useFormationErrors();
+  const { doesFieldHaveError, doSomeFieldsHaveError } = useFormationErrors();
   useEffect(
     function setAgentCheckboxFalseWhenAddressChanged() {
       const {
@@ -169,6 +170,7 @@ export const RegisteredAgent = (): ReactElement => {
                 required={true}
                 validationText={Config.businessFormationDefaults.agentNumberErrorText}
                 formInputFull
+                errorBarType="ALWAYS"
               />
             </div>
           )}
@@ -187,12 +189,17 @@ export const RegisteredAgent = (): ReactElement => {
                   }
                 />
               </div>
-              <div className="grid-row grid-gap-2">
+              <WithErrorBar
+                hasError={doSomeFieldsHaveError(["agentName", "agentEmail"])}
+                type="DESKTOP-ONLY"
+                className="grid-row grid-gap-2"
+              >
                 <div className="tablet:grid-col-6">
                   <BusinessFormationTextField
                     label={Config.businessFormationDefaults.registeredAgentNameLabel}
                     placeholder={Config.businessFormationDefaults.registeredAgentNamePlaceholder}
                     required={true}
+                    errorBarType="MOBILE-ONLY"
                     validationText={Config.businessFormationDefaults.agentNameErrorText}
                     fieldName="agentName"
                     disabled={shouldBeDisabled("agentName", "ACCOUNT")}
@@ -204,14 +211,14 @@ export const RegisteredAgent = (): ReactElement => {
                     label={Config.businessFormationDefaults.registeredAgentEmailLabel}
                     placeholder={Config.businessFormationDefaults.registeredAgentEmailPlaceholder}
                     fieldName="agentEmail"
-                    inlineErrorStyling={true}
+                    errorBarType="MOBILE-ONLY"
                     required={true}
                     validationText={Config.businessFormationDefaults.agentEmailErrorText}
                     disabled={shouldBeDisabled("agentEmail", "ACCOUNT")}
                     formInputFull
                   />
                 </div>
-              </div>
+              </WithErrorBar>
               {state.formationFormData.businessLocationType == "NJ" && (
                 <div className="margin-bottom-1">
                   <FormControlLabel
@@ -234,6 +241,7 @@ export const RegisteredAgent = (): ReactElement => {
                 validationText={Config.businessFormationDefaults.agentOfficeAddressLine1ErrorText}
                 disabled={shouldBeDisabled("agentOfficeAddressLine1", "ADDRESS")}
                 formInputFull
+                errorBarType="ALWAYS"
               />
               <BusinessFormationTextField
                 label={Config.businessFormationDefaults.registeredAgentAddressLine2Label}
@@ -241,46 +249,62 @@ export const RegisteredAgent = (): ReactElement => {
                 fieldName="agentOfficeAddressLine2"
                 disabled={state.formationFormData.agentUseBusinessAddress}
                 formInputFull
+                errorBarType="NEVER"
               />
-              <div className="grid-row grid-gap-2 margin-top-2">
+              <WithErrorBar
+                type="DESKTOP-ONLY"
+                hasError={doSomeFieldsHaveError([
+                  "agentOfficeAddressMunicipality",
+                  "agentOfficeAddressZipCode",
+                ])}
+                className="grid-row grid-gap-2 margin-top-2"
+              >
                 <div className="grid-col-12 tablet:grid-col-6">
-                  <Content>{Config.businessFormationDefaults.registeredAgentMunicipalityLabel}</Content>
-                  <div className="margin-top-2">
-                    <MunicipalityDropdown
-                      municipalities={municipalities}
-                      fieldName={"agentOfficeAddressMunicipality"}
-                      error={doesFieldHaveError("agentOfficeAddressMunicipality")}
-                      disabled={shouldBeDisabled("agentOfficeAddressMunicipality", "ADDRESS")}
-                      validationLabel="Error"
-                      value={state.formationFormData.agentOfficeAddressMunicipality}
-                      onSelect={(value: Municipality | undefined) => {
-                        return setFormationFormData({
-                          ...state.formationFormData,
-                          agentOfficeAddressMunicipality: value,
-                        });
-                      }}
-                      placeholderText={
-                        Config.businessFormationDefaults.registeredAgentMunicipalityPlaceholder
-                      }
-                      helperText={Config.businessFormationDefaults.addressMunicipalityErrorText}
-                    />
-                  </div>
+                  <WithErrorBar
+                    hasError={doesFieldHaveError("agentOfficeAddressMunicipality")}
+                    type="MOBILE-ONLY"
+                  >
+                    <Content>{Config.businessFormationDefaults.registeredAgentMunicipalityLabel}</Content>
+                    <div className="margin-top-2">
+                      <MunicipalityDropdown
+                        municipalities={municipalities}
+                        fieldName={"agentOfficeAddressMunicipality"}
+                        error={doesFieldHaveError("agentOfficeAddressMunicipality")}
+                        disabled={shouldBeDisabled("agentOfficeAddressMunicipality", "ADDRESS")}
+                        validationLabel="Error"
+                        value={state.formationFormData.agentOfficeAddressMunicipality}
+                        onSelect={(value: Municipality | undefined) => {
+                          return setFormationFormData({
+                            ...state.formationFormData,
+                            agentOfficeAddressMunicipality: value,
+                          });
+                        }}
+                        placeholderText={
+                          Config.businessFormationDefaults.registeredAgentMunicipalityPlaceholder
+                        }
+                        helperText={Config.businessFormationDefaults.addressMunicipalityErrorText}
+                      />
+                    </div>
+                  </WithErrorBar>
                 </div>
 
                 <div className="grid-col-5 tablet:grid-col-2">
-                  <Content>{Config.businessFormationDefaults.addressStateLabel}</Content>
-                  <StateDropdown
-                    fieldName="agentOfficeAddressState"
-                    value={"New Jersey"}
-                    placeholder={Config.businessFormationDefaults.addressModalStatePlaceholder}
-                    validationText={Config.businessFormationDefaults.addressStateErrorText}
-                    disabled={true}
-                    onSelect={() => {}}
-                    className={"margin-top-2"}
-                  />
+                  <WithErrorBar hasError={doesFieldHaveError("agentOfficeAddressZipCode")} type="MOBILE-ONLY">
+                    <Content>{Config.businessFormationDefaults.addressStateLabel}</Content>
+                    <StateDropdown
+                      fieldName="agentOfficeAddressState"
+                      value={"New Jersey"}
+                      placeholder={Config.businessFormationDefaults.addressModalStatePlaceholder}
+                      validationText={Config.businessFormationDefaults.addressStateErrorText}
+                      disabled={true}
+                      onSelect={() => {}}
+                      className={"margin-top-2"}
+                    />
+                  </WithErrorBar>
                 </div>
                 <div className="grid-col-7 tablet:grid-col-4">
                   <BusinessFormationTextField
+                    errorBarType="NEVER"
                     numericProps={{ maxLength: 5 }}
                     fieldName="agentOfficeAddressZipCode"
                     label={Config.businessFormationDefaults.registeredAgentZipCodeLabel}
@@ -291,7 +315,7 @@ export const RegisteredAgent = (): ReactElement => {
                     disabled={shouldBeDisabled("agentOfficeAddressZipCode", "ADDRESS")}
                   />
                 </div>
-              </div>
+              </WithErrorBar>
             </div>
           )}
         </div>
