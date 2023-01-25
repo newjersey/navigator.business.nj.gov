@@ -1732,6 +1732,8 @@ collections:
               - { label: Show Task Button Text, name: showTaskText, widget: string }
               - { label: Hide Task Button Text, name: hideTaskText, widget: string }
               - { label: Number of Hidden Tasks Text, name: hiddenTasksText, widget: string }
+              - { label: Show Additional Filings Button Text, name: viewMoreFilingsButton, widget: string }
+              - { label: Hide Additional Filings Button Text, name: viewLessFilingsButton, widget: string }
       - label: "Dashboard Modals"
         name: "dashboard-config-modals"
         file: "content/src/fieldConfig/dashboard-modals.json"

@@ -39,6 +39,8 @@ const DashboardCalendarPreview = (props: PreviewProps) => {
       filings: [
         generateTaxFiling({ identifier: "1", dueDate: dayjs().format(defaultDateFormat) }),
         generateTaxFiling({ identifier: "2", dueDate: dayjs().add(1, "month").format(defaultDateFormat) }),
+        generateTaxFiling({ identifier: "3", dueDate: dayjs().format(defaultDateFormat) }),
+        generateTaxFiling({ identifier: "4", dueDate: dayjs().format(defaultDateFormat) }),
       ],
     }),
   });
@@ -60,6 +62,8 @@ const DashboardCalendarPreview = (props: PreviewProps) => {
   const operateReferences = {
     "1": generateOperateReference({ name: "Tax 1" }),
     "2": generateOperateReference({ name: "Tax 2" }),
+    "3": generateOperateReference({ name: "Tax 3" }),
+    "4": generateOperateReference({ name: "Tax 4" }),
   };
 
   return (
