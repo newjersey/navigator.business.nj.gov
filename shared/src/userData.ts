@@ -37,7 +37,7 @@ export const createEmptyUserData = (user: BusinessUser): UserData => {
       hiddenFundingIds: [],
       visibleSidebarCards: ["welcome"],
       returnToLink: "",
-      isCalendarFullView: true,
+      isCalendarFullView: false,
       isHideableRoadmapOpen: false,
       phaseNewlyChanged: true,
     },
