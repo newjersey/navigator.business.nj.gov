@@ -5,6 +5,7 @@ import { FieldLabelModal } from "@/components/onboarding/FieldLabelModal";
 import { OnboardingBusinessName } from "@/components/onboarding/OnboardingBusinessName";
 import { OnboardingResponsibleOwnerName } from "@/components/onboarding/OnboardingResponsibleOwnerName";
 import { OnboardingTaxId } from "@/components/onboarding/OnboardingTaxId";
+import { WithErrorBar } from "@/components/WithErrorBar";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { postTaxFilingsOnboarding } from "@/lib/api-client/apiClient";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -262,50 +263,34 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
         </div>
 
         {shouldShowBusinessNameField() && (
-          <>
-            <>
-              <div
-                className={`${
-                  fieldStates && fieldStates?.businessName?.invalid ? "input-error-bar error" : ""
-                }`}
-              >
-                <FieldLabelModal
-                  fieldName="businessName"
-                  overrides={{
-                    header: Config.taxCalendar.modalBusinessFieldHeader,
-                    description: Config.taxCalendar.modalBusinessFieldMarkdown,
-                  }}
-                />
-                <OnboardingBusinessName
-                  inputErrorBar={true}
-                  onValidation={onValidation}
-                  fieldStates={fieldStates}
-                  validationText={Config.taxCalendar.failedBusinessFieldHelper}
-                />
-              </div>
-            </>
-          </>
+          <WithErrorBar hasError={!!fieldStates?.businessName?.invalid} type="ALWAYS">
+            <FieldLabelModal
+              fieldName="businessName"
+              overrides={{
+                header: Config.taxCalendar.modalBusinessFieldHeader,
+                description: Config.taxCalendar.modalBusinessFieldMarkdown,
+              }}
+            />
+            <OnboardingBusinessName
+              onValidation={onValidation}
+              fieldStates={fieldStates}
+              validationText={Config.taxCalendar.failedBusinessFieldHelper}
+            />
+          </WithErrorBar>
         )}
 
         {shouldShowResponsibleOwnerField() && (
-          <>
-            <div
-              className={`${
-                fieldStates && fieldStates?.responsibleOwnerName?.invalid ? "input-error-bar error" : ""
-              }`}
-            >
-              <FieldLabelModal fieldName="responsibleOwnerName" />
-              <OnboardingResponsibleOwnerName
-                inputErrorBar
-                onValidation={onValidation}
-                fieldStates={fieldStates}
-                validationText={Config.taxCalendar.failedResponsibleOwnerFieldHelper}
-              />
-            </div>
-          </>
+          <WithErrorBar hasError={!!fieldStates?.responsibleOwnerName?.invalid} type="ALWAYS">
+            <FieldLabelModal fieldName="responsibleOwnerName" />
+            <OnboardingResponsibleOwnerName
+              onValidation={onValidation}
+              fieldStates={fieldStates}
+              validationText={Config.taxCalendar.failedResponsibleOwnerFieldHelper}
+            />
+          </WithErrorBar>
         )}
 
-        <div className={`${fieldStates && fieldStates?.taxId?.invalid ? "input-error-bar error" : ""}`}>
+        <WithErrorBar hasError={!!fieldStates?.responsibleOwnerName?.invalid} type="ALWAYS">
           <div data-testid="taxIdInput">
             <FieldLabelModal
               fieldName="taxId"
@@ -320,12 +305,11 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
           </div>
           <OnboardingTaxId
             onValidation={onValidation}
-            inputErrorBar
             fieldStates={fieldStates}
             validationText={Config.taxCalendar.failedTaxIdHelper}
             required
           />
-        </div>
+        </WithErrorBar>
       </ModalTwoButton>
     </ProfileDataContext.Provider>
   );

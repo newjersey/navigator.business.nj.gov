@@ -2,6 +2,7 @@ import { Alert } from "@/components/njwds-extended/Alert";
 import { Button } from "@/components/njwds-extended/Button";
 import { AvailableProps } from "@/components/tasks/search-business-name/AvailableProps";
 import { UnavailableProps } from "@/components/tasks/search-business-name/UnavailableProps";
+import { WithErrorBar } from "@/components/WithErrorBar";
 import { useBusinessNameSearch } from "@/lib/data-hooks/useBusinessNameSearch";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { NameAvailability } from "@/lib/types/types";
@@ -115,7 +116,7 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
         </Alert>
       )}
       {shouldShowTextField() && (
-        <div className={error === "BAD_INPUT" ? "input-error-bar error" : ""}>
+        <WithErrorBar hasError={error === "BAD_INPUT"} type="ALWAYS">
           {props.config.inputLabel && (
             <div className="margin-top-2">
               <label className="text-bold" htmlFor="name-input">
@@ -167,7 +168,7 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
               {SearchBusinessNameErrorLookup[error]}
             </div>
           )}
-        </div>
+        </WithErrorBar>
       )}
       <div className="margin-top-2">
         {nameAvailability?.status === "AVAILABLE" && (

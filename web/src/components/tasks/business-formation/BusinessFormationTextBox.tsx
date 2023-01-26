@@ -2,6 +2,7 @@ import { Content } from "@/components/Content";
 import { Button } from "@/components/njwds-extended/Button";
 import { Icon } from "@/components/njwds/Icon";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
+import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { camelCaseToSentence } from "@/lib/utils/cases-helpers";
@@ -62,23 +63,19 @@ export const BusinessFormationTextBox = (props: Props): ReactElement => {
           )}
         </div>
       </div>
-      {isExpanded ? (
-        <div
-          className={`${props.className ?? ""} ${
-            doesFieldHaveError(props.fieldName) ? "error" : ""
-          } input-error-bar`}
-        >
+      {isExpanded && (
+        <WithErrorBar hasError={doesFieldHaveError(props.fieldName)} type="ALWAYS">
           <Content className="margin-bottom-2">{props.contentMd}</Content>
           <div style={{ maxWidth: "41em" }}>
             <div className="grid-row">
               <div className="grid-col">
                 <BusinessFormationTextField
+                  errorBarType="NEVER"
                   placeholder={props.placeholderText}
                   fieldName={props.fieldName}
                   label={props.inputLabel ?? ""}
                   validationText={Config.businessFormationDefaults.genericErrorText}
                   required={props.required}
-                  inlineErrorStyling={true}
                   fieldOptions={{
                     multiline: true,
                     rows: 3,
@@ -118,9 +115,7 @@ export const BusinessFormationTextBox = (props: Props): ReactElement => {
               {Config.businessFormationDefaults.charactersLabel}
             </div>
           </div>
-        </div>
-      ) : (
-        <></>
+        </WithErrorBar>
       )}
     </>
   );

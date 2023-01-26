@@ -3,6 +3,7 @@ import { IndustryDropdown } from "@/components/onboarding/IndustryDropdown";
 import { OnboardingEmploymentAgency } from "@/components/onboarding/OnboardingEmploymentAgency";
 import { OnboardingHomeContractor } from "@/components/onboarding/OnboardingHomeContractor";
 import { OnboardingRadioQuestion } from "@/components/onboarding/OnboardingRadioQuestion";
+import { WithErrorBar } from "@/components/WithErrorBar";
 import { ConfigType } from "@/contexts/configContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -43,26 +44,24 @@ export const OnboardingIndustry = (props: Props): ReactElement => {
       return i.isQuestionApplicableToIndustryId(industryId);
     }).map((obj) => {
       return (
-        <div
-          className={`${
-            props.fieldStates[obj.fieldName].invalid
-              ? `input-error-bar error margin-top-2`
-              : "input-error-bar"
-          } margin-top-4`}
-          data-testid={`industry-specific-${industryId}`}
-          key={industryId}
-        >
-          <FieldLabelProfile fieldName={obj.contentFieldName ?? (obj.fieldName as ProfileContentField)} />
-          <OnboardingRadioQuestion<IndustrySpecificData[keyof IndustrySpecificData]>
-            {...obj}
-            choices={industrySpecificDataChoices[obj.fieldName]}
-            onValidation={props.onValidation}
-          />
-          {props.fieldStates[obj.fieldName].invalid && (
-            <div className="text-error-dark text-bold margin-top-05">
-              {Config.profileDefaults.essentialQuestionInlineText}
-            </div>
-          )}
+        <div data-testid={`industry-specific-${industryId}`} key={industryId}>
+          <WithErrorBar
+            hasError={props.fieldStates[obj.fieldName].invalid}
+            type="ALWAYS"
+            className="margin-top-4"
+          >
+            <FieldLabelProfile fieldName={obj.contentFieldName ?? (obj.fieldName as ProfileContentField)} />
+            <OnboardingRadioQuestion<IndustrySpecificData[keyof IndustrySpecificData]>
+              {...obj}
+              choices={industrySpecificDataChoices[obj.fieldName]}
+              onValidation={props.onValidation}
+            />
+            {props.fieldStates[obj.fieldName].invalid && (
+              <div className="text-error-dark text-bold margin-top-05">
+                {Config.profileDefaults.essentialQuestionInlineText}
+              </div>
+            )}
+          </WithErrorBar>
         </div>
       );
     });

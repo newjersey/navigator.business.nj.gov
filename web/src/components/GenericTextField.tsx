@@ -17,7 +17,6 @@ export interface GenericTextFieldProps {
   disabled?: boolean;
   placeholder?: string;
   value?: string | number;
-  inputErrorBar?: boolean;
   autoComplete?: string;
   required?: boolean;
   numericProps?: {
@@ -123,9 +122,7 @@ export const GenericTextField = forwardRef(
       <div
         className={`${props.formInputWide ? "form-input-wide" : ""} ${
           !props.formInputFull && !props.formInputWide ? "form-input" : ""
-        } margin-top-2 ${props.className ?? ""} ${props.error ? "error" : ""} ${
-          props.inputErrorBar ? "input-error-bar" : ""
-        }`}
+        } margin-top-2 ${props.className ?? ""} ${props.error ? "error" : ""}`}
       >
         <TextField
           value={value ?? ""}

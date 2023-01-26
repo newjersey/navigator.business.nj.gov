@@ -1,5 +1,6 @@
 import { Content } from "@/components/Content";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
+import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
@@ -22,6 +23,7 @@ export const PartnershipRights = (): ReactElement => {
               placeholder={Config.businessFormationDefaults.partnershipRightsTermsPlaceholder}
               fieldName={fieldName}
               required={true}
+              errorBarType="ALWAYS"
               validationText={Config.businessFormationDefaults.genericErrorText}
               label={Config.businessFormationDefaults.partnershipRightsTermsLabel}
               formInputFull
@@ -50,9 +52,9 @@ export const PartnershipRights = (): ReactElement => {
   const getRadio = (fieldName: FormationFields, title: string) => {
     const hasError = doesFieldHaveError(fieldName);
     return (
-      <div className={hasError ? `input-error-bar error margin-top-2` : "input-error-bar"}>
+      <WithErrorBar className="margin-top-2" hasError={hasError} type="ALWAYS">
         <Content>{title}</Content>
-        <FormControl error={hasError} className={hasError ? `input-error-bar` : ""}>
+        <FormControl error={hasError}>
           <RadioGroup
             aria-label={camelCaseToSentence(fieldName)}
             name={camelCaseToSentence(fieldName)}
@@ -95,7 +97,7 @@ export const PartnershipRights = (): ReactElement => {
           </RadioGroup>
           <FormHelperText>{hasError ? Config.businessFormationDefaults.genericErrorText : ""}</FormHelperText>
         </FormControl>
-      </div>
+      </WithErrorBar>
     );
   };
 
