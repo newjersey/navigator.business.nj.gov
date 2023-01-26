@@ -279,6 +279,7 @@ export const RegisteredAgent = (): ReactElement => {
                             agentOfficeAddressMunicipality: value,
                           });
                         }}
+                        onValidation={() => setFieldsInteracted(["agentOfficeAddressMunicipality"])}
                         placeholderText={
                           Config.businessFormationDefaults.registeredAgentMunicipalityPlaceholder
                         }

@@ -12,6 +12,7 @@ import {
   generateFormationIncorporator,
   generateFormationMember,
   generateFormationSigner,
+  generateMunicipality,
   getCurrentDate,
   getCurrentDateFormatted,
 } from "@businessnjgovnavigator/shared";
@@ -421,6 +422,26 @@ describe("getErrorStateForField", () => {
     });
   });
 
+  describe("agentOfficeAddressMunicipality", () => {
+    it("has error if undefined", () => {
+      const formData = generateFormationFormData({ agentOfficeAddressMunicipality: undefined });
+      expect(
+        getErrorStateForField("agentOfficeAddressMunicipality", formData, undefined, displayContent).hasError
+      ).toEqual(true);
+    });
+
+    it("inserts label from config", () => {
+      const formData = generateFormationFormData({
+        agentOfficeAddressMunicipality: generateMunicipality({}),
+      });
+      expect(
+        getErrorStateForField("agentOfficeAddressMunicipality", formData, undefined, displayContent).label
+      ).toEqual(
+        Config.businessFormationDefaults.requiredFieldsBulletPointLabel.agentOfficeAddressMunicipality
+      );
+    });
+  });
+
   describe(`incorporator and signer fields`, () => {
     (["signers", "incorporators"] as ("signers" | "incorporators")[]).map((field) => {
       const generator = field == "signers" ? generateFormationSigner : generateFormationIncorporator;
@@ -667,7 +688,6 @@ describe("getErrorStateForField", () => {
       "agentNumber",
       "agentName",
       "agentOfficeAddressLine1",
-      "agentOfficeAddressMunicipality",
       "businessTotalStock",
       "withdrawals",
       "combinedInvestment",
