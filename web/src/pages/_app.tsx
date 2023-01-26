@@ -17,7 +17,7 @@ import Script from "next/script";
 import { ReactElement, useEffect, useReducer, useState } from "react";
 import SEO from "../../next-seo.config";
 import { SWRConfig } from "swr";
-import { RegistrationStatus } from "@businessnjgovnavigator/shared";
+import { OperatingPhaseId, RegistrationStatus } from "@businessnjgovnavigator/shared";
 import { SignUpSnackbar } from "@/components/auth/SignUpSnackbar";
 import { SignUpModal } from "@/components/auth/SignUpModal";
 import { SelfRegSnackbar } from "@/components/auth/SelfRegSnackbar";
@@ -29,6 +29,8 @@ import { UserDataErrorContext } from "@/contexts/userDataErrorContext";
 import { AuthContext, initialState } from "@/contexts/authContext";
 import MuiTheme from "@/lib/muiTheme";
 import { UpdateQueueContext } from "@/contexts/updateQueueContext";
+import { IntercomContext } from "@/contexts/intercomContext";
+import { IntercomScript } from "@/components/tasks/IntercomScript";
 
 AuthContext.displayName = "Authentication";
 RoadmapContext.displayName = "Roadmap";
@@ -59,6 +61,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
   const [userDataError, setUserDataError] = useState<UserDataError | undefined>(undefined);
   const router = useRouter();
   const GOOGLE_ANALYTICS_ID = process.env.GOOGLE_ANALYTICS_ID || "";
+  const [operatingPhaseId, setOperatingPhaseId] = useState<OperatingPhaseId | undefined>(undefined);
 
   const listener = (data: HubCapsule): void => {
     switch (data.payload.event) {
@@ -133,49 +136,43 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
       <Script src="/js/uswds-init.js" />
       <Script src="/intercom/settings.js" />
       <Script src="/intercom/init.js" />
-      {state.user?.myNJUserKey && (
-        <Script
-          src="/intercom/identity.js"
-          data-user-id={state.user?.myNJUserKey}
-          data-user-hash={state.user?.intercomHash}
-          data-user-name={state.user?.name}
-          data-user-email={state.user?.email}
-        />
-      )}
+      <IntercomScript user={state.user} operatingPhaseId={operatingPhaseId} />
       <DefaultSeo {...SEO} />
-      <SWRConfig value={{ provider: UserDataStorageFactory }}>
-        <StyledEngineProvider injectFirst>
-          <ThemeProvider theme={MuiTheme}>
-            <AuthContext.Provider value={{ state, dispatch }}>
-              <UpdateQueueContext.Provider value={{ updateQueue, setUpdateQueue }}>
-                <UserDataErrorContext.Provider value={{ userDataError, setUserDataError }}>
-                  <ContextualInfoContext.Provider value={{ contextualInfo, setContextualInfo }}>
-                    <RoadmapContext.Provider value={{ roadmap, setRoadmap }}>
-                      <AuthAlertContext.Provider
-                        value={{
-                          isAuthenticated: state.isAuthenticated,
-                          registrationAlertIsVisible: authSnackbar,
-                          registrationModalIsVisible: authModal,
-                          registrationAlertStatus,
-                          setRegistrationAlertStatus,
-                          setRegistrationAlertIsVisible: setAuthSnackbar,
-                          setRegistrationModalIsVisible: setAuthModal,
-                        }}
-                      >
-                        <ContextualInfoPanel />
-                        <Component {...pageProps} />
-                        <SignUpSnackbar />
-                        <SignUpModal />
-                        <SelfRegSnackbar />
-                      </AuthAlertContext.Provider>
-                    </RoadmapContext.Provider>
-                  </ContextualInfoContext.Provider>
-                </UserDataErrorContext.Provider>
-              </UpdateQueueContext.Provider>
-            </AuthContext.Provider>
-          </ThemeProvider>
-        </StyledEngineProvider>
-      </SWRConfig>
+      <IntercomContext.Provider value={{ setOperatingPhaseId }}>
+        <SWRConfig value={{ provider: UserDataStorageFactory }}>
+          <StyledEngineProvider injectFirst>
+            <ThemeProvider theme={MuiTheme}>
+              <AuthContext.Provider value={{ state, dispatch }}>
+                <UpdateQueueContext.Provider value={{ updateQueue, setUpdateQueue }}>
+                  <UserDataErrorContext.Provider value={{ userDataError, setUserDataError }}>
+                    <ContextualInfoContext.Provider value={{ contextualInfo, setContextualInfo }}>
+                      <RoadmapContext.Provider value={{ roadmap, setRoadmap }}>
+                        <AuthAlertContext.Provider
+                          value={{
+                            isAuthenticated: state.isAuthenticated,
+                            registrationAlertIsVisible: authSnackbar,
+                            registrationModalIsVisible: authModal,
+                            registrationAlertStatus,
+                            setRegistrationAlertStatus,
+                            setRegistrationAlertIsVisible: setAuthSnackbar,
+                            setRegistrationModalIsVisible: setAuthModal,
+                          }}
+                        >
+                          <ContextualInfoPanel />
+                          <Component {...pageProps} />
+                          <SignUpSnackbar />
+                          <SignUpModal />
+                          <SelfRegSnackbar />
+                        </AuthAlertContext.Provider>
+                      </RoadmapContext.Provider>
+                    </ContextualInfoContext.Provider>
+                  </UserDataErrorContext.Provider>
+                </UpdateQueueContext.Provider>
+              </AuthContext.Provider>
+            </ThemeProvider>
+          </StyledEngineProvider>
+        </SWRConfig>
+      </IntercomContext.Provider>
     </>
   );
 };

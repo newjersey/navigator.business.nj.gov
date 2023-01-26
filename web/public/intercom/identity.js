@@ -18,6 +18,11 @@ if (typeof userEmail === "undefined") {
   userEmail = undefined;
 }
 
+var userOperatingPhase = document.currentScript.getAttribute("data-user-operating-phase");
+if (typeof userOperatingPhase === "undefined") {
+  userOperatingPhase = undefined;
+}
+
 window.intercomSettings = {
   app_id: "ozxx8n5h",
   custom_launcher_selector: ".intercom-button",
@@ -25,6 +30,7 @@ window.intercomSettings = {
   user_hash: userHash,
   name: userName,
   email: userEmail,
+  operatingPhase: userOperatingPhase,
 };
 
 // re-init
