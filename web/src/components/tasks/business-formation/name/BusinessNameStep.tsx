@@ -2,6 +2,7 @@ import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { Button } from "@/components/njwds-extended/Button";
 import { getErrorStateForField } from "@/components/tasks/business-formation/getErrorStateForField";
+import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useBusinessNameSearch } from "@/lib/data-hooks/useBusinessNameSearch";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
@@ -75,7 +76,7 @@ export const BusinessNameStep = (): ReactElement => {
     <div data-testid="business-name-step">
       <form onSubmit={doSearch} className="usa-prose grid-container padding-0">
         <Content>{state.displayContent.businessNameCheck.contentMd}</Content>
-        <div className={`${hasError ? "error" : ""} input-error-bar`}>
+        <WithErrorBar hasError={hasError} type="ALWAYS">
           <div className="text-bold margin-top-1">{Config.businessFormationDefaults.nameCheckFieldLabel}</div>
           <div className="grid-row grid-gap-2">
             <div className="tablet:grid-col-8">
@@ -125,7 +126,7 @@ export const BusinessNameStep = (): ReactElement => {
               </FormControl>
             </div>
           </div>
-        </div>
+        </WithErrorBar>
       </form>
       {error != null && (
         <Alert variant="error" dataTestid={`error-alert-${error}`}>

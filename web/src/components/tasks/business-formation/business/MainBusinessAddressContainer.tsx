@@ -15,13 +15,14 @@ export const MainBusinessAddressContainer = (props: { children: ReactNode }): Re
         fieldName="addressLine1"
         required={true}
         className={"margin-bottom-2"}
-        noValidationMargin={true}
+        errorBarType="ALWAYS"
         validationText={Config.businessFormationDefaults.addressLine1ErrorText}
         formInputFull
       />
       <BusinessFormationTextField
         label={Config.businessFormationDefaults.addressAddressLine2Label}
         placeholder={Config.businessFormationDefaults.addressAddressLine2Placeholder}
+        errorBarType="ALWAYS"
         fieldName="addressLine2"
         formInputFull
         className="margin-bottom-2"

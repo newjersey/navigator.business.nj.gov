@@ -7,7 +7,7 @@ import { Municipality } from "@businessnjgovnavigator/shared/";
 import { ReactElement, useContext } from "react";
 
 export const FormationMunicipality = (): ReactElement => {
-  const { state, setFormationFormData } = useContext(BusinessFormationContext);
+  const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
   const { municipalities } = useContext(MunicipalitiesContext);
   const { Config } = useConfig();
   const { doesFieldHaveError } = useFormationErrors();
@@ -21,6 +21,7 @@ export const FormationMunicipality = (): ReactElement => {
   return (
     <div className="margin-top-2">
       <MunicipalityDropdown
+        onValidation={() => setFieldsInteracted(["addressMunicipality"])}
         municipalities={municipalities}
         fieldName={"addressMunicipality"}
         error={doesFieldHaveError("addressMunicipality")}

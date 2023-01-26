@@ -2,10 +2,10 @@ import { Content } from "@/components/Content";
 import { GenericTextField } from "@/components/GenericTextField";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { StateDropdown } from "@/components/StateDropdown";
-import { MediaQueries } from "@/lib/PageSizes";
+import { WithErrorBar } from "@/components/WithErrorBar";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { FormationIncorporator, FormationMember, StateObject } from "@businessnjgovnavigator/shared";
-import { Checkbox, FormControlLabel, FormGroup, useMediaQuery } from "@mui/material";
+import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import { ReactElement, useEffect, useState } from "react";
 
 interface DisplayContent {
@@ -35,7 +35,6 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
   type FieldStatus = {
     invalid: boolean | undefined;
   };
-  const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
 
   const requiredFields = [
     "addressName",
@@ -186,7 +185,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
           <div className={"padding-top-2"} />
         )}
         <div data-testid={`${props.fieldName}-address-modal`}>
-          <div className={addressErrorMap["addressName"].invalid ? "input-error-bar error" : ""}>
+          <WithErrorBar hasError={!!addressErrorMap["addressName"].invalid} type="ALWAYS">
             <Content>{Config.businessFormationDefaults.addressModalNameLabel}</Content>
             <GenericTextField
               value={addressData.name}
@@ -203,8 +202,8 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
               required={true}
               autoComplete="name"
             />
-          </div>
-          <div className={addressErrorMap["addressLine1"].invalid ? "input-error-bar error" : ""}>
+          </WithErrorBar>
+          <WithErrorBar hasError={!!addressErrorMap["addressLine1"].invalid} type="ALWAYS">
             <Content>{Config.businessFormationDefaults.addressModalAddressLine1Label}</Content>
             <GenericTextField
               fieldName="addressLine1"
@@ -222,7 +221,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
               disabled={shouldBeDisabled("addressLine1")}
               required={true}
             />
-          </div>
+          </WithErrorBar>
           <Content
             style={{ display: "inline" }}
             overrides={{
@@ -248,42 +247,41 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
           />
           <div className="grid-row grid-gap-2 margin-top-2">
             <div className="grid-col-12 tablet:grid-col-6">
-              <div
-                className={
-                  addressErrorMap["addressCity"].invalid ||
-                  (isTabletAndUp && addressErrorMap["addressState"].invalid) ||
-                  (isTabletAndUp && addressErrorMap["addressZipCode"].invalid)
-                    ? "input-error-bar error"
-                    : ""
+              <WithErrorBar
+                hasError={
+                  !!addressErrorMap["addressCity"].invalid ||
+                  !!addressErrorMap["addressState"].invalid ||
+                  !!addressErrorMap["addressZipCode"].invalid
                 }
+                type="DESKTOP-ONLY"
               >
-                <Content>{Config.businessFormationDefaults.addressModalCityLabel}</Content>
-                <GenericTextField
-                  fieldName="addressCity"
-                  autoComplete="address-level2"
-                  value={addressData.addressCity}
-                  disabled={shouldBeDisabled("addressCity")}
-                  required={true}
-                  placeholder={Config.businessFormationDefaults.addressModalCityPlaceholder}
-                  handleChange={(value: string) => {
-                    return setAddressData((prevAddressData) => {
-                      return { ...prevAddressData, addressCity: value };
-                    });
-                  }}
-                  error={addressErrorMap["addressCity"].invalid}
-                  onValidation={onValidation}
-                  validationText={Config.businessFormationDefaults.addressCityErrorText}
-                />
-              </div>
+                <WithErrorBar hasError={!!addressErrorMap["addressCity"].invalid} type="MOBILE-ONLY">
+                  <Content>{Config.businessFormationDefaults.addressModalCityLabel}</Content>
+                  <GenericTextField
+                    fieldName="addressCity"
+                    autoComplete="address-level2"
+                    value={addressData.addressCity}
+                    disabled={shouldBeDisabled("addressCity")}
+                    required={true}
+                    placeholder={Config.businessFormationDefaults.addressModalCityPlaceholder}
+                    handleChange={(value: string) => {
+                      return setAddressData((prevAddressData) => {
+                        return { ...prevAddressData, addressCity: value };
+                      });
+                    }}
+                    error={addressErrorMap["addressCity"].invalid}
+                    onValidation={onValidation}
+                    validationText={Config.businessFormationDefaults.addressCityErrorText}
+                  />
+                </WithErrorBar>
+              </WithErrorBar>
             </div>
             <div className="grid-col-6 tablet:grid-col-3">
-              <div
-                className={
-                  (!isTabletAndUp && addressErrorMap["addressState"].invalid) ||
-                  (!isTabletAndUp && addressErrorMap["addressZipCode"].invalid)
-                    ? "input-error-bar error"
-                    : ""
+              <WithErrorBar
+                hasError={
+                  !!addressErrorMap["addressState"].invalid || !!addressErrorMap["addressZipCode"].invalid
                 }
+                type="MOBILE-ONLY"
               >
                 <div className="margin-bottom-2">
                   <Content>{Config.businessFormationDefaults.addressModalStateLabel}</Content>
@@ -304,7 +302,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
                   onValidation={onValidation}
                   required={true}
                 />
-              </div>
+              </WithErrorBar>
             </div>
             <div className="grid-col-6 tablet:grid-col-3">
               <Content>{Config.businessFormationDefaults.addressModalZipCodeLabel}</Content>

@@ -8,6 +8,7 @@ import {
   needsSignerTypeFunc,
 } from "@/components/tasks/business-formation/contacts/helpers";
 import { ValidatedCheckbox } from "@/components/ValidatedCheckbox";
+import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { MediaQueries } from "@/lib/PageSizes";
@@ -265,27 +266,22 @@ export const Signatures = (): ReactElement => {
     }
   };
 
+  const signaturesHasError =
+    state.formationFormData.signers && state.formationFormData.signers.length > 0
+      ? getRowErrors(state.formationFormData.signers[0])
+      : false;
+
+  const atLeastOneSignerExists =
+    state.formationFormData.signers && state.formationFormData.signers?.length > 0;
+
   return (
     <>
       <div className="grid-col">
         <Content>{state.displayContent.signatureHeader.contentMd}</Content>
         <div className={`grid-row margin-y-2 flex-align-start`}>
-          <div className={`grid-col`}>
-            {!state.formationFormData.signers || state.formationFormData.signers?.length === 0 ? (
-              <></>
-            ) : (
-              <div
-                className={`grid-row flex-align-start  input-error-bar ${
-                  (
-                    state.formationFormData.signers && state.formationFormData.signers.length > 0
-                      ? getRowErrors(state.formationFormData.signers[0])
-                      : false
-                  )
-                    ? "error"
-                    : ""
-                }`}
-                data-testid={`signers-0`}
-              >
+          <div className={`grid-col`} data-testid="signers-0">
+            {atLeastOneSignerExists && (
+              <WithErrorBar hasError={signaturesHasError} type="ALWAYS" className="grid-row flex-align-start">
                 <div className="grid-col">
                   <div className="grid-row margin-top-1">
                     <div className={`grid-col-12 ${needsSignerType ? "tablet:grid-col-6" : ""}`}>
@@ -308,7 +304,7 @@ export const Signatures = (): ReactElement => {
                     index: 0,
                   })}
                 </div>
-              </div>
+              </WithErrorBar>
             )}
           </div>
           {isTabletAndUp && renderDeleteColumn({ visible: false })}
@@ -319,7 +315,7 @@ export const Signatures = (): ReactElement => {
           return (
             <div key={`signature-${index}`}>
               {isTabletAndUp ? <></> : <hr className="margin-top-2" />}
-              <div className={`grid-row margin-bottom-2 input-error-bar ${getRowErrors(it) ? "error" : ""}`}>
+              <WithErrorBar hasError={getRowErrors(it)} type="ALWAYS" className="grid-row margin-bottom-2">
                 <div className="grid-col">
                   <div className="grid-row margin-bottom-1" data-testid={`signers-${index}`}>
                     <div className="grid-col flex-align-self-center margin-top-1">
@@ -363,7 +359,7 @@ export const Signatures = (): ReactElement => {
                     </Button>
                   )}
                 </div>
-              </div>
+              </WithErrorBar>
             </div>
           );
         })}

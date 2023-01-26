@@ -4,6 +4,7 @@ import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
 import { Icon } from "@/components/njwds/Icon";
 import { AddressModal } from "@/components/tasks/business-formation/contacts/AddressModal";
 import { ValidatedCheckbox } from "@/components/ValidatedCheckbox";
+import { WithErrorBar } from "@/components/WithErrorBar";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { MediaQueries } from "@/lib/PageSizes";
 import styles from "@/styles/sections/members.module.scss";
@@ -283,9 +284,9 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
           {props.displayContent.contentMd}
         </Content>
         <div>
-          <div className={`${doesFieldHaveError(props.fieldName) ? "error" : ""} input-error-bar`}>
+          <WithErrorBar hasError={doesFieldHaveError(props.fieldName)} type="ALWAYS">
             {isTabletAndUp ? renderDesktopTable : renderMobileTable}
-          </div>
+          </WithErrorBar>
 
           {props.addressData.length <= 9 && (
             <Button
