@@ -12,6 +12,10 @@ export const taxFilingsInterfaceFactory = (apiTaxFilingClient: TaxFilingClient):
     const { state, filings } = await apiTaxFilingClient.lookup(request.taxId, request.businessName);
     return {
       ...request.userData,
+      preferences: {
+        ...request.userData.preferences,
+        isCalendarFullView: state === "SUCCESS" ? true : request.userData.preferences.isCalendarFullView,
+      },
       taxFilingData: {
         ...request.userData.taxFilingData,
         businessName: request.businessName,
