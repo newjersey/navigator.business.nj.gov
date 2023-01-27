@@ -6,7 +6,6 @@ import { generateFormationDisplayContentMap, generateNameAvailability } from "@/
 import {
   defaultDateFormat,
   FormationFields,
-  FormationFormData,
   FormationLegalType,
   generateFormationFormData,
   generateFormationIncorporator,
@@ -101,31 +100,15 @@ describe("getErrorStateForField", () => {
   });
 
   describe("foreignDateOfFormation", () => {
-    it("has no error if domestic business", () => {
-      const formData = generateFormationFormData({
-        foreignDateOfFormation: undefined,
-        businessLocationType: "NJ",
-      });
-      expect(
-        getErrorStateForField("foreignDateOfFormation", formData, undefined, displayContent).hasError
-      ).toEqual(false);
-    });
-
     it("has error if empty", () => {
-      const formData = generateFormationFormData({
-        foreignDateOfFormation: undefined,
-        businessLocationType: "US",
-      });
+      const formData = generateFormationFormData({ foreignDateOfFormation: undefined });
       expect(
         getErrorStateForField("foreignDateOfFormation", formData, undefined, displayContent).hasError
       ).toEqual(true);
     });
 
     it("has error if invalid date", () => {
-      const formData = generateFormationFormData({
-        foreignDateOfFormation: "1234567",
-        businessLocationType: "US",
-      });
+      const formData = generateFormationFormData({ foreignDateOfFormation: "1234567" });
       expect(
         getErrorStateForField("foreignDateOfFormation", formData, undefined, displayContent).hasError
       ).toEqual(true);
@@ -134,7 +117,6 @@ describe("getErrorStateForField", () => {
     it("has no error in the past", () => {
       const formData = generateFormationFormData({
         foreignDateOfFormation: getCurrentDate().subtract(1, "day").format(defaultDateFormat),
-        businessLocationType: "US",
       });
       expect(
         getErrorStateForField("foreignDateOfFormation", formData, undefined, displayContent).hasError
@@ -144,7 +126,6 @@ describe("getErrorStateForField", () => {
     it("has no error if today", () => {
       const formData = generateFormationFormData({
         foreignDateOfFormation: getCurrentDateFormatted(defaultDateFormat),
-        businessLocationType: "US",
       });
       expect(
         getErrorStateForField("foreignDateOfFormation", formData, undefined, displayContent).hasError
@@ -154,7 +135,6 @@ describe("getErrorStateForField", () => {
     it("has no error if in the future", () => {
       const formData = generateFormationFormData({
         foreignDateOfFormation: getCurrentDate().add(1, "day").format(defaultDateFormat),
-        businessLocationType: "US",
       });
       expect(
         getErrorStateForField("foreignDateOfFormation", formData, undefined, displayContent).hasError
@@ -162,10 +142,7 @@ describe("getErrorStateForField", () => {
     });
 
     it("inserts label from displayContent", () => {
-      const formData = generateFormationFormData({
-        foreignDateOfFormation: "1234567",
-        businessLocationType: "US",
-      });
+      const formData = generateFormationFormData({ foreignDateOfFormation: "1234567" });
       expect(
         getErrorStateForField("foreignDateOfFormation", formData, undefined, displayContent).label
       ).toEqual(displayContent.foreignDateOfFormationHeader.requireFieldText);
@@ -622,32 +599,31 @@ describe("getErrorStateForField", () => {
       "canCreateLimitedPartner",
       "canGetDistribution",
       "canMakeDistribution",
+      "addressMunicipality",
+      "addressCountry",
+      "addressState",
     ];
 
-    const runTests = (
-      hasErrorIfUndefined: FormationFields[],
-      overrides: Partial<FormationFormData>,
-      expectedLabel?: string
-    ) => {
+    const runTests = (hasErrorIfUndefined: FormationFields[], expectedLabel?: string) => {
       for (const field of hasErrorIfUndefined) {
         describe(`${field}`, () => {
           it("has error if undefined", () => {
-            const formData = generateFormationFormData({ ...overrides, [field]: undefined });
+            const formData = generateFormationFormData({ [field]: undefined });
             expect(getErrorStateForField(field, formData, undefined, displayContent).hasError).toEqual(true);
           });
 
           it("has no error if false", () => {
-            const formData = generateFormationFormData({ ...overrides, [field]: false });
+            const formData = generateFormationFormData({ [field]: false });
             expect(getErrorStateForField(field, formData, undefined, displayContent).hasError).toEqual(false);
           });
 
           it("has no error if value", () => {
-            const formData = generateFormationFormData({ ...overrides, [field]: "some-value" });
+            const formData = generateFormationFormData({ [field]: "some-value" });
             expect(getErrorStateForField(field, formData, undefined, displayContent).hasError).toEqual(false);
           });
 
           it("inserts label from config", () => {
-            const formData = generateFormationFormData({ ...overrides, [field]: undefined });
+            const formData = generateFormationFormData({ [field]: undefined });
             const label =
               expectedLabel ??
               (Config.businessFormationDefaults.requiredFieldsBulletPointLabel as any)[field];
@@ -660,22 +636,10 @@ describe("getErrorStateForField", () => {
       }
     };
 
-    runTests(hasErrorIfUndefined, {});
-    runTests(["addressMunicipality"], { businessLocationType: "NJ" });
-    runTests(["addressCountry"], { businessLocationType: "INTL" });
+    runTests(hasErrorIfUndefined);
 
-    runTests(
-      ["foreignStateOfFormation"],
-      { businessLocationType: "INTL" },
-      displayContent.foreignStateOfFormationHeader.requireFieldText
-    );
-    runTests(
-      ["foreignStateOfFormation"],
-      { businessLocationType: "US" },
-      displayContent.foreignStateOfFormationHeader.requireFieldText
-    );
-
-    runTests(["addressState"], { businessLocationType: "US" });
+    runTests(["foreignStateOfFormation"], displayContent.foreignStateOfFormationHeader.requireFieldText);
+    runTests(["foreignStateOfFormation"], displayContent.foreignStateOfFormationHeader.requireFieldText);
   });
 
   describe("fields that have error when empty or false", () => {
@@ -696,28 +660,30 @@ describe("getErrorStateForField", () => {
       "getDistributionTerms",
       "makeDistributionTerms",
       "paymentType",
+      "addressProvince",
+      "addressCity",
     ];
 
-    const runTests = (hasErrorIfEmpty: FormationFields[], overrides: Partial<FormationFormData>) => {
+    const runTests = (hasErrorIfEmpty: FormationFields[]) => {
       for (const field of hasErrorIfEmpty) {
         describe(`${field}`, () => {
           it("has error if empty", () => {
-            const formData = generateFormationFormData({ ...overrides, [field]: "" });
+            const formData = generateFormationFormData({ [field]: "" });
             expect(getErrorStateForField(field, formData, undefined, displayContent).hasError).toEqual(true);
           });
 
           it("has error if undefined", () => {
-            const formData = generateFormationFormData({ ...overrides, [field]: undefined });
+            const formData = generateFormationFormData({ [field]: undefined });
             expect(getErrorStateForField(field, formData, undefined, displayContent).hasError).toEqual(true);
           });
 
           it("has no error if value", () => {
-            const formData = generateFormationFormData({ ...overrides, [field]: "some-value" });
+            const formData = generateFormationFormData({ [field]: "some-value" });
             expect(getErrorStateForField(field, formData, undefined, displayContent).hasError).toEqual(false);
           });
 
           it("inserts label from config", () => {
-            const formData = generateFormationFormData({ ...overrides, [field]: "some-value" });
+            const formData = generateFormationFormData({ [field]: "some-value" });
             const expectedLabel = (Config.businessFormationDefaults.requiredFieldsBulletPointLabel as any)[
               field
             ];
@@ -731,8 +697,7 @@ describe("getErrorStateForField", () => {
         });
       }
     };
-    runTests(hasErrorIfEmpty, {});
-    runTests(["addressProvince", "addressCity"], { businessLocationType: "INTL" });
-    runTests(["addressCity"], { businessLocationType: "US" });
+
+    runTests(hasErrorIfEmpty);
   });
 });
