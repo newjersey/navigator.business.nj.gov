@@ -4,6 +4,7 @@ import { Task } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import Link from "next/link";
 import { ReactElement } from "react";
+import { Button } from "../njwds-extended/Button";
 
 interface Props {
   task: Task;
@@ -16,24 +17,32 @@ export const MiniRoadmapTask = (props: Props): ReactElement => {
   const taskProgress = (userData?.taskProgress && userData.taskProgress[props.task.id]) || "NOT_STARTED";
 
   return (
-    <Link href={`/tasks/${props.task.urlSlug}`} passHref>
-      <button
-        className={`usa-button--unstyled padding-y-1 padding-left-1 padding-right-4 cursor-pointer hover:bg-base-lightest line-height-body-2 fdr fac font-body-3xs text-base-darkest ${
-          props.active ? "bg-base-lightest bg-chevron text-primary-dark text-bold" : ""
-        }`}
-        data-task={props.task.id}
-        onClick={() => {
-          analytics.event.task_mini_roadmap_task.click.go_to_task();
-          props.onTaskClick && props.onTaskClick();
-        }}
-      >
-        {taskProgress === "COMPLETED" ? (
-          <Icon className="margin-right-1 font-body-md checked-task">check_circle</Icon>
-        ) : (
-          <div className={`substep-unchecked margin-right-1 ${props.active ? "active" : ""}`} />
-        )}
-        <span className="margin-right-05">{props.task.name}</span>
-      </button>
+    <Link href={`/tasks/${props.task.urlSlug}`}>
+      <div>
+        <Button
+          style="tertiary"
+          onClick={() => {
+            analytics.event.task_mini_roadmap_task.click.go_to_task();
+            props.onTaskClick && props.onTaskClick();
+          }}
+        >
+          <div
+            className={`fdr fac padding-y-1 padding-left-1 padding-right-4 text-primary hover:bg-base-lightest ${
+              props.active
+                ? "bg-base-lightest bg-chevron text-primary-dark text-bold h5-styling"
+                : "h6-styling"
+            }`}
+            data-task={props.task.id}
+          >
+            {taskProgress === "COMPLETED" ? (
+              <Icon className="margin-right-1 checked-task">check_circle</Icon>
+            ) : (
+              <div className={`substep-unchecked margin-right-1 ${props.active ? "active" : ""}`} />
+            )}
+            <span className="margin-right-05">{props.task.name}</span>
+          </div>
+        </Button>
+      </div>
     </Link>
   );
 };
