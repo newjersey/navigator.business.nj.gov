@@ -147,7 +147,10 @@ describe("ApiTaxFilingClient", () => {
         ],
       };
 
-      await client.lookup(taxIdAndBusinessNameAndEmail.taxId, taxIdAndBusinessNameAndEmail.businessName);
+      await client.lookup({
+        taxId: taxIdAndBusinessNameAndEmail.taxId,
+        businessName: taxIdAndBusinessNameAndEmail.businessName,
+      });
       expect(mockAxios.post).toHaveBeenCalledWith(`${config.baseUrl}/lookup`, postBody);
     });
 
@@ -160,10 +163,10 @@ describe("ApiTaxFilingClient", () => {
       ];
       const stubResponse = generateSuccessfulApiTaxFilingLookupResponse({ Results });
       mockAxios.post.mockResolvedValue({ data: stubResponse });
-      const response = await client.lookup(
-        taxIdAndBusinessNameAndEmail.taxId,
-        taxIdAndBusinessNameAndEmail.businessName
-      );
+      const response = await client.lookup({
+        taxId: taxIdAndBusinessNameAndEmail.taxId,
+        businessName: taxIdAndBusinessNameAndEmail.businessName,
+      });
       expect(response).toEqual({
         state: "SUCCESS",
         filings: [{ identifier: "test-id", dueDate: dateToShortISO(Results[0].Values[0]) }],
@@ -173,10 +176,10 @@ describe("ApiTaxFilingClient", () => {
     it("returns only taxFiling state on failure", async () => {
       const stubResponse = generateErroredApiTaxFilingLookupResponse({}, "FAILED");
       mockAxios.post.mockRejectedValue({ response: { data: stubResponse, status: 400 } });
-      const response = await client.lookup(
-        taxIdAndBusinessNameAndEmail.taxId,
-        taxIdAndBusinessNameAndEmail.businessName
-      );
+      const response = await client.lookup({
+        taxId: taxIdAndBusinessNameAndEmail.taxId,
+        businessName: taxIdAndBusinessNameAndEmail.businessName,
+      });
       expect(response).toEqual({
         state: "FAILED",
         filings: [],
@@ -186,10 +189,10 @@ describe("ApiTaxFilingClient", () => {
     it("returns only taxFiling state on pending", async () => {
       const stubResponse = generateErroredApiTaxFilingLookupResponse({}, "PENDING");
       mockAxios.post.mockRejectedValue({ response: { data: stubResponse, status: 400 } });
-      const response = await client.lookup(
-        taxIdAndBusinessNameAndEmail.taxId,
-        taxIdAndBusinessNameAndEmail.businessName
-      );
+      const response = await client.lookup({
+        taxId: taxIdAndBusinessNameAndEmail.taxId,
+        businessName: taxIdAndBusinessNameAndEmail.businessName,
+      });
       expect(response).toEqual({
         state: "PENDING",
         filings: [],
@@ -199,10 +202,10 @@ describe("ApiTaxFilingClient", () => {
     it("returns only taxFiling state on unregistered", async () => {
       const stubResponse = generateErroredApiTaxFilingLookupResponse({}, "UNREGISTERED");
       mockAxios.post.mockRejectedValue({ response: { data: stubResponse, status: 400 } });
-      const response = await client.lookup(
-        taxIdAndBusinessNameAndEmail.taxId,
-        taxIdAndBusinessNameAndEmail.businessName
-      );
+      const response = await client.lookup({
+        taxId: taxIdAndBusinessNameAndEmail.taxId,
+        businessName: taxIdAndBusinessNameAndEmail.businessName,
+      });
       expect(response).toEqual({
         state: "UNREGISTERED",
         filings: [],
@@ -211,10 +214,10 @@ describe("ApiTaxFilingClient", () => {
 
     it("returns only taxFiling state on api failure", async () => {
       mockAxios.post.mockRejectedValue({});
-      const response = await client.lookup(
-        taxIdAndBusinessNameAndEmail.taxId,
-        taxIdAndBusinessNameAndEmail.businessName
-      );
+      const response = await client.lookup({
+        taxId: taxIdAndBusinessNameAndEmail.taxId,
+        businessName: taxIdAndBusinessNameAndEmail.businessName,
+      });
       expect(response).toEqual({
         state: "API_ERROR",
         filings: [],
@@ -250,22 +253,22 @@ describe("ApiTaxFilingClient", () => {
         ],
       };
 
-      await client.onboarding(
-        taxIdAndBusinessNameAndEmail.taxId,
-        taxIdAndBusinessNameAndEmail.email,
-        taxIdAndBusinessNameAndEmail.businessName
-      );
+      await client.onboarding({
+        taxId: taxIdAndBusinessNameAndEmail.taxId,
+        email: taxIdAndBusinessNameAndEmail.email,
+        businessName: taxIdAndBusinessNameAndEmail.businessName,
+      });
       expect(mockAxios.post).toHaveBeenCalledWith(`${config.baseUrl}/onboard`, postBody);
     });
 
     it("returns success state on api success", async () => {
       const stubResponse = generateSuccessfulApiTaxFilingOnboardingResponse({});
       mockAxios.post.mockResolvedValue({ data: stubResponse });
-      const response = await client.onboarding(
-        taxIdAndBusinessNameAndEmail.taxId,
-        taxIdAndBusinessNameAndEmail.email,
-        taxIdAndBusinessNameAndEmail.businessName
-      );
+      const response = await client.onboarding({
+        taxId: taxIdAndBusinessNameAndEmail.taxId,
+        email: taxIdAndBusinessNameAndEmail.email,
+        businessName: taxIdAndBusinessNameAndEmail.businessName,
+      });
       expect(response).toEqual({ state: "SUCCESS" });
     });
 
@@ -277,11 +280,11 @@ describe("ApiTaxFilingClient", () => {
         400
       );
       mockAxios.post.mockRejectedValue({ response: { data: stubResponse, status: 400 } });
-      const response = await client.onboarding(
-        taxIdAndBusinessNameAndEmail.taxId,
-        taxIdAndBusinessNameAndEmail.email,
-        taxIdAndBusinessNameAndEmail.businessName
-      );
+      const response = await client.onboarding({
+        taxId: taxIdAndBusinessNameAndEmail.taxId,
+        email: taxIdAndBusinessNameAndEmail.email,
+        businessName: taxIdAndBusinessNameAndEmail.businessName,
+      });
       expect(response).toEqual({ state: "FAILED", errorField: "formFailure" });
     });
 
@@ -293,33 +296,33 @@ describe("ApiTaxFilingClient", () => {
         400
       );
       mockAxios.post.mockRejectedValue({ response: { data: stubResponse, status: 400 } });
-      const response = await client.onboarding(
-        taxIdAndBusinessNameAndEmail.taxId,
-        taxIdAndBusinessNameAndEmail.email,
-        taxIdAndBusinessNameAndEmail.businessName
-      );
+      const response = await client.onboarding({
+        taxId: taxIdAndBusinessNameAndEmail.taxId,
+        email: taxIdAndBusinessNameAndEmail.email,
+        businessName: taxIdAndBusinessNameAndEmail.businessName,
+      });
       expect(response).toEqual({ state: "FAILED", errorField: "businessName" });
     });
 
     it("returns failed state on api unknown statusCode", async () => {
       const stubResponse = generateErroredApiTaxFilingOnboardingResponse({}, 204);
       mockAxios.post.mockResolvedValue({ data: stubResponse });
-      const response = await client.onboarding(
-        taxIdAndBusinessNameAndEmail.taxId,
-        taxIdAndBusinessNameAndEmail.email,
-        taxIdAndBusinessNameAndEmail.businessName
-      );
+      const response = await client.onboarding({
+        taxId: taxIdAndBusinessNameAndEmail.taxId,
+        email: taxIdAndBusinessNameAndEmail.email,
+        businessName: taxIdAndBusinessNameAndEmail.businessName,
+      });
       expect(response).toEqual({ state: "API_ERROR" });
     });
 
     it("returns error state on api lookup failure", async () => {
       const stubResponse = generateErroredApiTaxFilingOnboardingResponse({}, 500);
       mockAxios.post.mockRejectedValue({ response: { data: stubResponse, status: 500 } });
-      const response = await client.onboarding(
-        taxIdAndBusinessNameAndEmail.taxId,
-        taxIdAndBusinessNameAndEmail.email,
-        taxIdAndBusinessNameAndEmail.businessName
-      );
+      const response = await client.onboarding({
+        taxId: taxIdAndBusinessNameAndEmail.taxId,
+        email: taxIdAndBusinessNameAndEmail.email,
+        businessName: taxIdAndBusinessNameAndEmail.businessName,
+      });
       expect(response).toEqual({ state: "API_ERROR" });
     });
   });

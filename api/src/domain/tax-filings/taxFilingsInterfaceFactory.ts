@@ -9,7 +9,10 @@ type taxFilingInterfaceRequest = {
 
 export const taxFilingsInterfaceFactory = (apiTaxFilingClient: TaxFilingClient): TaxFilingInterface => {
   const lookup = async (request: taxFilingInterfaceRequest): Promise<UserData> => {
-    const { state, filings } = await apiTaxFilingClient.lookup(request.taxId, request.businessName);
+    const { state, filings } = await apiTaxFilingClient.lookup({
+      taxId: request.taxId,
+      businessName: request.businessName,
+    });
     return {
       ...request.userData,
       preferences: {
@@ -27,11 +30,11 @@ export const taxFilingsInterfaceFactory = (apiTaxFilingClient: TaxFilingClient):
   };
 
   const onboarding = async (request: taxFilingInterfaceRequest): Promise<UserData> => {
-    const response = await apiTaxFilingClient.onboarding(
-      request.taxId,
-      request.userData.user.email,
-      request.businessName
-    );
+    const response = await apiTaxFilingClient.onboarding({
+      taxId: request.taxId,
+      email: request.userData.user.email,
+      businessName: request.businessName,
+    });
 
     switch (response.state) {
       case "PENDING": {
