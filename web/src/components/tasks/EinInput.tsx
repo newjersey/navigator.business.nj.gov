@@ -4,10 +4,11 @@ import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { MediaQueries } from "@/lib/PageSizes";
 import { Task } from "@/lib/types/types";
 import { displayAsEin } from "@/lib/utils/displayAsEin";
 import { templateEval, useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { FormControl } from "@mui/material";
+import { FormControl, useMediaQuery } from "@mui/material";
 import { ReactElement, useState } from "react";
 
 interface Props {
@@ -24,6 +25,7 @@ export const EinInput = (props: Props): ReactElement => {
   const [employerId, setEmployerId] = useState<string>("");
   const { userData, updateQueue } = useUserData();
   const { queueUpdateTaskProgress } = useUpdateTaskProgress();
+  const isMobileLg = useMediaQuery(MediaQueries.isXSMobile);
 
   let saveButtonText = Config.ein.saveButtonText;
   if (props.isAuthenticated === IsAuthenticated.FALSE) {
@@ -69,7 +71,7 @@ export const EinInput = (props: Props): ReactElement => {
 
   return (
     <div>
-      <div className="flex flex-row width-100">
+      <div className="display-flex flex-column mobile-lg:flex-row">
         <GenericTextField
           className="width-100"
           fieldName="employerId"
@@ -85,9 +87,9 @@ export const EinInput = (props: Props): ReactElement => {
           formInputFull
           ariaLabel="Save your EIN"
         />
-        <FormControl margin="dense">
+        <FormControl margin={isMobileLg ? "none" : "dense"}>
           <Button
-            className="margin-top-1 margin-left-1"
+            className="mobile-lg:margin-left-1 mobile-lg:margin-top-1"
             style="secondary"
             onClick={save}
             loading={isLoading}
