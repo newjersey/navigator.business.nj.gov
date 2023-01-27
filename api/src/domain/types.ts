@@ -29,8 +29,12 @@ export interface FormationClient {
 }
 
 export interface TaxFilingClient {
-  lookup: (taxId: string, businessName: string) => Promise<TaxFilingLookupResponse>;
-  onboarding: (taxId: string, email: string, businessName: string) => Promise<TaxFilingOnboardingResponse>;
+  lookup: (props: { taxId: string; businessName: string }) => Promise<TaxFilingLookupResponse>;
+  onboarding: (props: {
+    taxId: string;
+    email: string;
+    businessName: string;
+  }) => Promise<TaxFilingOnboardingResponse>;
 }
 
 export interface TaxFilingInterface {

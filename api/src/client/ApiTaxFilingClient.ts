@@ -22,18 +22,18 @@ export const ApiTaxFilingClient = (config: ApiConfig, logger: LogWriterType): Ta
     "cr-1orcnr-12": ["cr-1orcnr-1"],
   };
 
-  const lookup = async (taxId: string, businessName: string): Promise<TaxFilingLookupResponse> => {
+  const lookup = async (props: { taxId: string; businessName: string }): Promise<TaxFilingLookupResponse> => {
     const postBody: ApiTaxFilingLookupRequest = {
       ApiKey: config.apiKey,
       ServiceName: "Search",
       Data: [
         {
           Name: "taxpayer-id",
-          Value: taxId,
+          Value: props.taxId,
         },
         {
           Name: "tax-business-name",
-          Value: businessName,
+          Value: props.businessName,
         },
       ],
     };
@@ -92,14 +92,14 @@ export const ApiTaxFilingClient = (config: ApiConfig, logger: LogWriterType): Ta
     }
   };
 
-  const onboarding = async (
-    taxId: string,
-    email: string,
-    businessName: string
-  ): Promise<TaxFilingOnboardingResponse> => {
+  const onboarding = async (props: {
+    taxId: string;
+    email: string;
+    businessName: string;
+  }): Promise<TaxFilingOnboardingResponse> => {
     const postBody: ApiTaxFilingOnboardingRequest = {
       ApiKey: config.apiKey,
-      Email: email,
+      Email: props.email,
       Items: [
         {
           Data: [
@@ -109,11 +109,11 @@ export const ApiTaxFilingClient = (config: ApiConfig, logger: LogWriterType): Ta
             },
             {
               SchemaFieldSlug: "taxpayer-id",
-              Value: taxId,
+              Value: props.taxId,
             },
             {
               SchemaFieldSlug: "tax-business-name",
-              Value: businessName,
+              Value: props.businessName,
             },
           ],
         },
