@@ -8,7 +8,7 @@ callToActionText: Apply for Your Business Permit
 required: true
 issuingAgency: New Jersey Division of Consumer Affairs Board of Electrical Contractors
 ---
-You need to apply for a business permit before you can legally offer electrical contracting services.
+Your business needs a permit before you can legally offer electrical contracting services. 
 
 The board reviews business applications on a monthly basis. Your application must be received 10 days prior to the meeting date to be reviewed on the current month. [See the meeting schedule](https://www.njconsumeraffairs.gov/elec/Pages/meetings.aspx) to help you plan the timing of your application.
 
