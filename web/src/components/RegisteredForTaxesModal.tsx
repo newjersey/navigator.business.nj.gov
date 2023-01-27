@@ -7,6 +7,7 @@ import { OnboardingMunicipality } from "@/components/onboarding/OnboardingMunici
 import { OnboardingOwnership } from "@/components/onboarding/OnboardingOwnership";
 import { OnboardingTaxId } from "@/components/onboarding/OnboardingTaxId";
 import { TaxDisclaimer } from "@/components/TaxDisclaimer";
+import { WithErrorBar } from "@/components/WithErrorBar";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -65,7 +66,7 @@ export const RegisteredForTaxesModal = (props: Props): ReactElement => {
     };
     setFieldStates(errorMap);
     if (
-      Object.keys(errorMap).some((k) => {
+      Object.keys(errorMap as ProfileFieldErrorMap).some((k) => {
         return errorMap[k as ProfileFields].invalid;
       })
     ) {
@@ -123,30 +124,32 @@ export const RegisteredForTaxesModal = (props: Props): ReactElement => {
           <Content>{Config.registeredForTaxesModal.subtitle}</Content>
         </div>
         {showBusinessField() && (
-          <>
+          <WithErrorBar hasError={fieldStates.businessName.invalid} type="ALWAYS">
             <FieldLabelModal fieldName="businessName" />
             <OnboardingBusinessName onValidation={onValidation} fieldStates={fieldStates} required />
-          </>
+          </WithErrorBar>
         )}
-        <>
+
+        <WithErrorBar hasError={fieldStates.taxId.invalid} type="ALWAYS">
           <FieldLabelModal fieldName="taxId" />
           <TaxDisclaimer legalStructureId={userData?.profileData.legalStructureId} />
           <OnboardingTaxId onValidation={onValidation} fieldStates={fieldStates} required />
-        </>
+        </WithErrorBar>
 
         <FieldLabelModal fieldName="ownershipTypeIds" />
         <OnboardingOwnership />
 
         <div className="margin-top-3" aria-hidden={true} />
-
-        <FieldLabelModal fieldName="existingEmployees" />
-        <OnboardingExistingEmployees onValidation={onValidation} fieldStates={fieldStates} />
+        <WithErrorBar hasError={fieldStates.existingEmployees.invalid} type="ALWAYS">
+          <FieldLabelModal fieldName="existingEmployees" />
+          <OnboardingExistingEmployees onValidation={onValidation} fieldStates={fieldStates} />
+        </WithErrorBar>
 
         {showMunicipalityField() && (
-          <>
+          <WithErrorBar hasError={fieldStates.municipality.invalid} type="ALWAYS">
             <FieldLabelModal fieldName="municipality" />
             <OnboardingMunicipality onValidation={onValidation} fieldStates={fieldStates} />
-          </>
+          </WithErrorBar>
         )}
       </ModalTwoButton>
     </ProfileDataContext.Provider>
