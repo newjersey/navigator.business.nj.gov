@@ -113,6 +113,7 @@ export const OnboardingTaxId = ({
         handleChange={handleChangeFullTaxId}
         allowMasking={true}
         className={props.forTaxTask ? "width-100" : ""}
+        formInputFull={props.formInputFull ? true : false}
         {...props}
       />
     );

@@ -5,10 +5,11 @@ import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { MediaQueries } from "@/lib/PageSizes";
 import { createProfileFieldErrorMap, ProfileFieldErrorMap, ProfileFields, Task } from "@/lib/types/types";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
-import { FormControl } from "@mui/material";
+import { FormControl, useMediaQuery } from "@mui/material";
 import { ReactElement, useContext, useEffect, useState } from "react";
 
 interface Props {
@@ -24,6 +25,7 @@ export const TaxInput = (props: Props): ReactElement => {
   );
   const [fieldStates, setFieldStates] = useState<ProfileFieldErrorMap>(createProfileFieldErrorMap());
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const isMobileLg = useMediaQuery(MediaQueries.isXSMobile);
 
   const saveButtonText =
     isAuthenticated === IsAuthenticated.FALSE
@@ -108,11 +110,11 @@ export const TaxInput = (props: Props): ReactElement => {
           onBack: () => {},
         }}
       >
-        <div className="flex flex-row space-between">
-          <OnboardingTaxId onValidation={onValidation} fieldStates={fieldStates} forTaxTask />
-          <FormControl margin="dense">
+        <div className="flex flex-column mobile-lg:flex-row ">
+          <OnboardingTaxId onValidation={onValidation} fieldStates={fieldStates} forTaxTask formInputFull />
+          <FormControl margin={isMobileLg ? "none" : "dense"}>
             <Button
-              className="margin-top-1 margin-left-1"
+              className="mobile-lg:margin-left-1 mobile-lg:margin-top-1"
               style="secondary"
               onClick={onSubmit}
               loading={isLoading}
