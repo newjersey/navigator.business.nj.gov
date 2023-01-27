@@ -7,10 +7,11 @@ import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useBusinessNameSearch } from "@/lib/data-hooks/useBusinessNameSearch";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { MediaQueries } from "@/lib/PageSizes";
 import { SearchBusinessNameError } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { FormControl, TextField } from "@mui/material";
+import { FormControl, TextField, useMediaQuery } from "@mui/material";
 import { FocusEvent, FormEvent, ReactElement, useContext, useEffect, useRef } from "react";
 
 const SearchBusinessNameErrorLookup: Record<SearchBusinessNameError, string> = {
@@ -35,6 +36,7 @@ export const BusinessNameStep = (): ReactElement => {
   } = useBusinessNameSearch({ isBusinessFormation: true, isDba: false });
   const { doesFieldHaveError } = useFormationErrors();
   const mountEffectOccurred = useRef<boolean>(false);
+  const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
 
   useEffect(() => {
     if (!userData || !state.hasSetStateFirstTime || mountEffectOccurred.current) return;
@@ -76,55 +78,56 @@ export const BusinessNameStep = (): ReactElement => {
     <div data-testid="business-name-step">
       <form onSubmit={doSearch} className="usa-prose grid-container padding-0">
         <Content>{state.displayContent.businessNameCheck.contentMd}</Content>
-        <WithErrorBar hasError={hasError} type="ALWAYS">
+        <WithErrorBar hasError={hasError} type="DESKTOP-ONLY">
           <div className="text-bold margin-top-1">{Config.businessFormationDefaults.nameCheckFieldLabel}</div>
-          <div className="grid-row grid-gap-2">
-            <div className="tablet:grid-col-8">
-              <TextField
-                autoComplete="no"
-                className="fg1 width-100"
-                margin="dense"
-                value={currentName}
-                onChange={(event) => {
-                  return updateCurrentName(event.target.value);
-                }}
-                variant="outlined"
-                placeholder={Config.businessFormationDefaults.nameCheckPlaceholderText}
-                inputProps={{
-                  "aria-label": "Search business name",
-                }}
-                error={hasError}
-                helperText={
-                  hasError
-                    ? getErrorStateForField(
-                        "businessName",
-                        state.formationFormData,
-                        nameAvailability,
-                        state.displayContent
-                      ).label
-                    : undefined
-                }
-                onBlur={(event: FocusEvent<HTMLInputElement>) => {
-                  setNameInFormationData();
-                  setFieldsInteracted([FIELD_NAME]);
-                  onBlurNameField(event.target.value);
-                }}
-              />
+          <div className={isTabletAndUp ? "grid-row grid-gap-2" : "display-flex flex-column"}>
+            <div className={isTabletAndUp ? "grid-col-8" : ""}>
+              <WithErrorBar hasError={hasError} type="MOBILE-ONLY">
+                <TextField
+                  autoComplete="no"
+                  className="fg1 width-100"
+                  margin="dense"
+                  value={currentName}
+                  onChange={(event) => {
+                    return updateCurrentName(event.target.value);
+                  }}
+                  variant="outlined"
+                  placeholder={Config.businessFormationDefaults.nameCheckPlaceholderText}
+                  inputProps={{
+                    "aria-label": "Search business name",
+                  }}
+                  error={hasError}
+                  helperText={
+                    hasError
+                      ? getErrorStateForField(
+                          "businessName",
+                          state.formationFormData,
+                          nameAvailability,
+                          state.displayContent
+                        ).label
+                      : undefined
+                  }
+                  onBlur={(event: FocusEvent<HTMLInputElement>) => {
+                    setNameInFormationData();
+                    setFieldsInteracted([FIELD_NAME]);
+                    onBlurNameField(event.target.value);
+                  }}
+                />{" "}
+              </WithErrorBar>
             </div>
-            <div className="flex flex-justify-end tablet:flex-auto tablet:flex-justify tablet:grid-col-4">
-              <FormControl margin="dense">
-                <Button
-                  style="secondary"
-                  onClick={() => {}}
-                  loading={isLoading}
-                  typeSubmit
-                  noRightMargin
-                  dataTestid="business-name-search-submit"
-                >
-                  {Config.searchBusinessNameTask.searchButtonText}
-                </Button>
-              </FormControl>
-            </div>
+            <FormControl margin="dense">
+              <Button
+                style="secondary"
+                onClick={() => {}}
+                loading={isLoading}
+                typeSubmit
+                noRightMargin
+                dataTestid="business-name-search-submit"
+                widthAutoOnMobile
+              >
+                {Config.searchBusinessNameTask.searchButtonText}
+              </Button>
+            </FormControl>
           </div>
         </WithErrorBar>
       </form>
