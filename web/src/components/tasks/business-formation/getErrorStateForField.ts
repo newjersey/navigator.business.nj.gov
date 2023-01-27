@@ -42,29 +42,21 @@ export const getErrorStateForField = (
     "getDistributionTerms",
     "makeDistributionTerms",
     "paymentType",
+    "addressCity",
+    "addressProvince",
   ];
 
   const hasErrorIfUndefined: FormationFields[] = [
     "canCreateLimitedPartner",
     "canGetDistribution",
     "canMakeDistribution",
+    "addressState",
+    "addressCountry",
+    "addressMunicipality",
+    "foreignStateOfFormation",
   ];
 
-  switch (formationFormData.businessLocationType) {
-    case "US":
-      hasErrorIfUndefined.push("addressState");
-      hasErrorIfEmpty.push("addressCity");
-      break;
-    case "INTL":
-      hasErrorIfEmpty.push("addressProvince");
-      hasErrorIfEmpty.push("addressCity");
-      hasErrorIfUndefined.push("addressCountry");
-      break;
-    case "NJ":
-      hasErrorIfUndefined.push("addressMunicipality");
-  }
-
-  if (formationFormData.businessLocationType != "NJ" && field == "foreignStateOfFormation") {
+  if (field == "foreignStateOfFormation") {
     return {
       ...errorState,
       hasError: formationFormData.foreignStateOfFormation === undefined,
@@ -95,21 +87,17 @@ export const getErrorStateForField = (
     return { ...errorState, label, hasError: !isValid };
   }
 
-  if (
-    field === "businessStartDate" &&
-    !isBusinessStartDateValid(formationFormData.businessStartDate, formationFormData.legalType)
-  ) {
-    return { ...errorState, hasError: true };
-  }
-
-  if (
-    field === "foreignDateOfFormation" &&
-    formationFormData.businessLocationType != "NJ" &&
-    !isDateValid(formationFormData.foreignDateOfFormation)
-  ) {
+  if (field === "businessStartDate") {
     return {
       ...errorState,
-      hasError: true,
+      hasError: !isBusinessStartDateValid(formationFormData.businessStartDate, formationFormData.legalType),
+    };
+  }
+
+  if (field === "foreignDateOfFormation") {
+    return {
+      ...errorState,
+      hasError: !isDateValid(formationFormData.foreignDateOfFormation),
       label: displayContent.foreignDateOfFormationHeader.requireFieldText,
     };
   }
