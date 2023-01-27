@@ -16,8 +16,8 @@ Business applications are reviewed on a monthly basis. Your application must be 
 
 ### Application Requirements
  
-*  `Certificate of formation|certificate-formation` 
--﻿ Business address
+*  `Certificate of formation|certificate-formation`  
+*  Business address
 *  `Surety bond|surety-bond` for $1000
 * Certificate of general liability insurance for a minimum of $300,000
 * Licensed electrician name and signature
