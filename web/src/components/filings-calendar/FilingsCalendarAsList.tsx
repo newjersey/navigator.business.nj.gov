@@ -1,0 +1,91 @@
+import { Button } from "@/components/njwds-extended/Button";
+import { useConfig } from "@/lib/data-hooks/useConfig";
+import { sortFilterFilingsWithinAYear } from "@/lib/domain-logic/filterFilings";
+import { OperateReference } from "@/lib/types/types";
+import analytics from "@/lib/utils/analytics";
+import { groupBy } from "@/lib/utils/helpers";
+import { parseDateWithFormat } from "@businessnjgovnavigator/shared/dateHelpers";
+import { defaultDateFormat } from "@businessnjgovnavigator/shared/defaultConstants";
+import { TaxFiling } from "@businessnjgovnavigator/shared/taxFiling";
+import { UserData } from "@businessnjgovnavigator/shared/userData";
+import Link from "next/link";
+import { ReactElement, useState } from "react";
+
+const LIST_VIEW_MORE_INCREMENT = 5;
+
+interface Props {
+  userData: UserData;
+  operateReferences: Record<string, OperateReference>;
+}
+
+export const FilingsCalendarAsList = (props: Props): ReactElement => {
+  const { Config } = useConfig();
+  const [numberOfVisibleCalendarEntries, setNumberOfVisibleCalendarEntries] =
+    useState<number>(LIST_VIEW_MORE_INCREMENT);
+  const sortedFilteredFilingsWithinAYear: TaxFiling[] = props.userData?.taxFilingData.filings
+    ? sortFilterFilingsWithinAYear(props.userData.taxFilingData.filings)
+    : [];
+
+  if (sortedFilteredFilingsWithinAYear.length === 0) {
+    return <></>;
+  }
+
+  const filingsGroupedByDate = groupBy(
+    sortedFilteredFilingsWithinAYear.filter((filing) => {
+      return props.operateReferences[filing.identifier];
+    }),
+    (value) => value.dueDate
+  );
+
+  const visibleFilings = filingsGroupedByDate.slice(0, numberOfVisibleCalendarEntries);
+
+  return (
+    <div data-testid="filings-calendar-as-list">
+      {visibleFilings.map((filings) => {
+        return (
+          <div
+            className="flex margin-bottom-2 minh-6"
+            key={filings[0].dueDate}
+            data-testid="calendar-list-entry"
+          >
+            <div className="width-05 bg-primary minw-05" />
+            <div className="margin-left-205">
+              <div className="text-bold">
+                {parseDateWithFormat(filings[0].dueDate, defaultDateFormat).format("MMMM D, YYYY")}
+              </div>
+              {filings.map((filing, index) => (
+                <div
+                  key={`${filing.identifier}-${filing.dueDate}`}
+                  className={`margin-bottom-05 ${index == 0 ? "margin-top-05" : ""}`}
+                >
+                  <Link href={`filings/${props.operateReferences[filing.identifier].urlSlug}`} passHref>
+                    <a
+                      href={`filings/${props.operateReferences[filing.identifier].urlSlug}`}
+                      onClick={() => {
+                        analytics.event.calendar_date.click.go_to_date_detail_screen();
+                      }}
+                    >
+                      {props.operateReferences[filing.identifier].name}{" "}
+                      {parseDateWithFormat(filing.dueDate, defaultDateFormat).format("YYYY")}
+                    </a>
+                  </Link>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+      })}
+
+      {filingsGroupedByDate.length > numberOfVisibleCalendarEntries && (
+        <Button
+          style={"tertiary"}
+          underline={true}
+          onClick={() => setNumberOfVisibleCalendarEntries((previous) => previous + LIST_VIEW_MORE_INCREMENT)}
+        >
+          {Config.dashboardDefaults.calendarListViewMoreButton}
+        </Button>
+      )}
+      <hr />
+    </div>
+  );
+};

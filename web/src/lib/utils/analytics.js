@@ -746,6 +746,14 @@ export default {
       },
     },
 
+    tax_calendar_feedback_button: {
+      click: {
+        show_feedback_modal: () => {
+          return sendEvent("tax_calendar_feedback_button", "click", "show_feedback_modal");
+        },
+      },
+    },
+
     tax_calendar_banner_button: {
       click: {
         show_tax_calendar_modal: () => {

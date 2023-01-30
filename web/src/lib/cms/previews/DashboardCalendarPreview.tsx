@@ -1,5 +1,5 @@
 import { HideableTasks } from "@/components/dashboard/HideableTasks";
-import { FilingsCalendar } from "@/components/FilingsCalendar";
+import { FilingsCalendar } from "@/components/filings-calendar/FilingsCalendar";
 import { ConfigContext } from "@/contexts/configContext";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";

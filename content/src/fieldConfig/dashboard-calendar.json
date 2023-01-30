@@ -14,6 +14,7 @@
     "hiddenTasksText": "${count} Hidden Tasks",
     "viewMoreFilingsButton": "View more",
     "viewLessFilingsButton": "View less",
-    "calendarListViewMoreButton": "View More"
+    "calendarListViewMoreButton": "View More",
+    "calendarFeedbackButtonText": "Share feedback on the calendar."
   }
 }
