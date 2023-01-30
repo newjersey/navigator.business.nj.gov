@@ -4529,7 +4529,7 @@ __metadata:
     "@aws-sdk/util-dynamodb": 3.259.0
     "@businessnjgovnavigator/shared": "*"
     "@jest/types": 29.4.1
-    "@serverless/typescript": 3.25.0
+    "@serverless/typescript": 3.27.0
     "@types/cors": 2.8.13
     "@types/dedent": 0.7.0
     "@types/express": 4.17.16
@@ -4643,7 +4643,7 @@ __metadata:
     "@next/eslint-plugin-next": 12.1.6
     "@semantic-release/changelog": 6.0.2
     "@semantic-release/git": 10.0.1
-    "@serverless/typescript": 3.25.0
+    "@serverless/typescript": 3.27.0
     "@storybook/addon-a11y": 6.5.16
     "@storybook/addon-actions": 6.5.16
     "@storybook/addon-docs": 6.5.16
@@ -8199,10 +8199,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@serverless/typescript@npm:3.25.0":
-  version: 3.25.0
-  resolution: "@serverless/typescript@npm:3.25.0"
-  checksum: 0a471f4afec80251bf12b220e30a0103c5538cdb6090e3514e764d402639d39b0ebe9709969b4b5ad032d63f2f8a64ea94b4a76347087d6265e55a8e7804e642
+"@serverless/typescript@npm:3.27.0":
+  version: 3.27.0
+  resolution: "@serverless/typescript@npm:3.27.0"
+  checksum: c198f7b8d256567b3bf08d665dc76b1ae8050404d9fa3901f94e307318dce81745103fea02b48c1fd65c9a7c7c823c3cf7cd066bf2ac0b273f98cd9c82155b35
   languageName: node
   linkType: hard
 
