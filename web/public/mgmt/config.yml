@@ -1739,6 +1739,8 @@ collections:
                   name: calendarListViewMoreButton,
                   widget: string,
                 }
+              - { label: Calendar Feedback Button Text, name: calendarFeedbackButtonText, widget: string }
+
       - label: "Dashboard Modals"
         name: "dashboard-config-modals"
         file: "content/src/fieldConfig/dashboard-modals.json"

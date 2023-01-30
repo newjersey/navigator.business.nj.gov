@@ -1,6 +1,7 @@
-import { FilingsCalendar } from "@/components/FilingsCalendar";
+import { FilingsCalendar } from "@/components/filings-calendar/FilingsCalendar";
 import { getMergedConfig } from "@/contexts/configContext";
 import { OperateReference } from "@/lib/types/types";
+import analytics from "@/lib/utils/analytics";
 import {
   generateOperateReference,
   generatePreferences,
@@ -26,7 +27,7 @@ import {
   randomInt,
   TaxFiling,
   UserData,
-} from "@businessnjgovnavigator/shared";
+} from "@businessnjgovnavigator/shared/index";
 import * as materialUi from "@mui/material";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import { fireEvent, render, screen, within } from "@testing-library/react";
@@ -36,6 +37,20 @@ function mockMaterialUI(): typeof materialUi {
   return {
     ...jest.requireActual("@mui/material"),
     useMediaQuery: jest.fn(),
+  };
+}
+
+function setupMockAnalytics(): typeof analytics {
+  return {
+    ...jest.requireActual("@/lib/utils/analytics").default,
+    event: {
+      ...jest.requireActual("@/lib/utils/analytics").default.event,
+      tax_calendar_feedback_button: {
+        click: {
+          show_feedback_modal: jest.fn(),
+        },
+      },
+    },
   };
 }
 
@@ -51,7 +66,9 @@ jest.mock("@/lib/data-hooks/useRoadmap", () => {
 jest.mock("next/router", () => {
   return { useRouter: jest.fn() };
 });
+jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
 
+const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
 const Config = getMergedConfig();
 
 const renderFilingsCalendar = (
@@ -354,6 +371,36 @@ describe("<FilingsCalendar />", () => {
         `Annual Report ${parseDateWithFormat(annualReport.dueDate, defaultDateFormat).format("YYYY")}`
       )
     ).toBeInTheDocument();
+  });
+
+  it("sends analytics when feedback modal link is clicked and opens feedback modal", () => {
+    const annualReport = generateTaxFiling({
+      identifier: "annual-report",
+      dueDate: getJanOfCurrentYear().format(defaultDateFormat),
+    });
+
+    const userData = generateUserData({
+      profileData: generateProfileData({
+        operatingPhase: randomElementFromArray(
+          OperatingPhases.filter((obj) => {
+            return obj.displayCalendarType === "FULL";
+          })
+        ).id,
+      }),
+      taxFilingData: generateTaxFilingData({ filings: [annualReport] }),
+    });
+
+    const operateReferences: Record<string, OperateReference> = {
+      "annual-report": {
+        name: "Annual Report",
+        urlSlug: "annual-report-url",
+        urlPath: "annual_report-url-path",
+      },
+    };
+    renderFilingsCalendar(operateReferences, userData);
+    fireEvent.click(screen.getByText(Config.dashboardDefaults.calendarFeedbackButtonText));
+    expect(mockAnalytics.event.tax_calendar_feedback_button.click.show_feedback_modal).toHaveBeenCalled();
+    expect(screen.getByText(Config.feedbackModal.feedbackModalTitle)).toBeInTheDocument();
   });
 
   describe("tax calendar access button", () => {
