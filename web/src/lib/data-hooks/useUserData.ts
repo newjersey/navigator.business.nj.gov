@@ -1,4 +1,5 @@
 import { AuthContext } from "@/contexts/authContext";
+import { IntercomContext } from "@/contexts/intercomContext";
 import { RoadmapContext } from "@/contexts/roadmapContext";
 import { UpdateQueueContext } from "@/contexts/updateQueueContext";
 import { UserDataErrorContext } from "@/contexts/userDataErrorContext";
@@ -24,6 +25,11 @@ export const useUserData = (): UseUserDataResponse => {
     },
   });
   const dataExists = !!data;
+  const { setOperatingPhaseId } = useContext(IntercomContext);
+
+  useEffect(() => {
+    setOperatingPhaseId(data?.profileData.operatingPhase);
+  }, [setOperatingPhaseId, data?.profileData.operatingPhase]);
 
   useEffect(() => {
     if (updateQueue === undefined && data) {
