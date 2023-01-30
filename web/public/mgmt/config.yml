@@ -2161,6 +2161,7 @@ collections:
                   widget: string,
                 }
               - { label: Error Text - Generic, name: genericErrorText, widget: string }
+              - { label: Maximum Length Error Text, name: maximumLengthErrorText, widget: string }
               - {
                   label: Error Text - Incomplete Steps Header,
                   name: incompleteStepsOnSubmitText,

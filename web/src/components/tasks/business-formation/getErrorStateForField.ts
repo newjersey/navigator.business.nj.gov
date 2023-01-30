@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import {
   isBusinessStartDateValid,
   isDateValid,
@@ -7,7 +9,7 @@ import { isZipCodeIntl } from "@/lib/domain-logic/isZipCodeIntl";
 import { isZipCodeNj } from "@/lib/domain-logic/isZipCodeNj";
 import { isZipCodeUs } from "@/lib/domain-logic/isZipCodeUs";
 import { FormationDisplayContent, FormationFieldErrorState, NameAvailability } from "@/lib/types/types";
-import { validateEmail } from "@/lib/utils/helpers";
+import { templateEval, validateEmail } from "@/lib/utils/helpers";
 import { FormationFields, FormationFormData } from "@businessnjgovnavigator/shared";
 
 export const getErrorStateForField = (
@@ -20,19 +22,33 @@ export const getErrorStateForField = (
 
   const errorState = {
     field: field,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     label: (Config.businessFormationDefaults.requiredFieldsBulletPointLabel as any)[field],
+  };
+
+  const fieldWithMaxLength = (params: {
+    required: boolean;
+    maxLen: number;
+    labelKeyWhenMissing: string;
+  }): FormationFieldErrorState => {
+    const exists = !!formationFormData[field];
+    const isTooLong = (formationFormData[field] as string)?.length > params.maxLen;
+    let label = errorState.label;
+    const isValid = params.required ? exists && !isTooLong : !isTooLong;
+    if (params.required && !exists) {
+      label = (Config.businessFormationDefaults as any)[params.labelKeyWhenMissing];
+    } else if (isTooLong) {
+      label = templateEval(Config.businessFormationDefaults.maximumLengthErrorText, {
+        field: (Config.businessFormationDefaults.requiredFieldsBulletPointLabel as any)[field],
+        maxLen: params.maxLen.toString(),
+      });
+    }
+    return { ...errorState, label, hasError: !isValid };
   };
 
   const hasErrorIfEmpty: FormationFields[] = [
     "businessSuffix",
-    "addressLine1",
-    "contactFirstName",
-    "contactLastName",
     "contactPhoneNumber",
     "agentNumber",
-    "agentName",
-    "agentOfficeAddressLine1",
     "agentOfficeAddressMunicipality",
     "businessTotalStock",
     "withdrawals",
@@ -42,7 +58,6 @@ export const getErrorStateForField = (
     "getDistributionTerms",
     "makeDistributionTerms",
     "paymentType",
-    "addressCity",
     "addressProvince",
   ];
 
@@ -52,7 +67,6 @@ export const getErrorStateForField = (
     "canMakeDistribution",
     "addressState",
     "addressCountry",
-    "addressMunicipality",
     "foreignStateOfFormation",
   ];
 
@@ -188,10 +202,92 @@ export const getErrorStateForField = (
     return { ...errorState, hasError: !isValid };
   }
 
+  if (field === "addressLine1") {
+    return fieldWithMaxLength({
+      required: true,
+      maxLen: 35,
+      labelKeyWhenMissing: "addressLine1ErrorText",
+    });
+  }
+
+  if (field === "agentOfficeAddressLine1") {
+    return fieldWithMaxLength({
+      required: true,
+      maxLen: 35,
+      labelKeyWhenMissing: "agentOfficeAddressLine1ErrorText",
+    });
+  }
+
+  if (field === "addressMunicipality") {
+    return fieldWithMaxLength({
+      required: true,
+      maxLen: 30,
+      labelKeyWhenMissing: "addressCityErrorText",
+    });
+  }
+
+  if (field === "addressCity") {
+    return fieldWithMaxLength({
+      required: true,
+      maxLen: 30,
+      labelKeyWhenMissing: "addressCityErrorText",
+    });
+  }
+
+  if (field === "agentName") {
+    return fieldWithMaxLength({
+      required: true,
+      maxLen: 50,
+      labelKeyWhenMissing: "agentNameErrorText",
+    });
+  }
+
+  if (field === "contactFirstName") {
+    return fieldWithMaxLength({
+      required: true,
+      maxLen: 50,
+      labelKeyWhenMissing: "contactFirstNameErrorText",
+    });
+  }
+
+  if (field === "contactLastName") {
+    return fieldWithMaxLength({
+      required: true,
+      maxLen: 50,
+      labelKeyWhenMissing: "contactLastNameErrorText",
+    });
+  }
+
+  if (field === "addressLine2") {
+    return fieldWithMaxLength({
+      required: false,
+      maxLen: 35,
+      labelKeyWhenMissing: "",
+    });
+  }
+
+  if (field === "agentOfficeAddressLine2") {
+    return fieldWithMaxLength({
+      required: false,
+      maxLen: 35,
+      labelKeyWhenMissing: "",
+    });
+  }
+
   if (field === "agentEmail") {
-    const exists = !!formationFormData.agentEmail;
-    const isValid = validateEmail(formationFormData.agentEmail);
-    return { ...errorState, hasError: !(exists && isValid) };
+    const emailIsValid = validateEmail(formationFormData.agentEmail);
+    if (!emailIsValid) {
+      return {
+        ...errorState,
+        hasError: !emailIsValid,
+        label: Config.businessFormationDefaults.agentEmailErrorText,
+      };
+    }
+    return fieldWithMaxLength({
+      required: true,
+      maxLen: 50,
+      labelKeyWhenMissing: "agentEmailErrorText",
+    });
   }
 
   return { ...errorState, hasError: false };

@@ -12,7 +12,7 @@ import { ReactElement, useContext } from "react";
 
 export const BillingStep = (): ReactElement => {
   const { state } = useContext(BusinessFormationContext);
-  const { doSomeFieldsHaveError } = useFormationErrors();
+  const { doSomeFieldsHaveError, getFieldErrorLabel } = useFormationErrors();
 
   return (
     <div data-testid="billing-step">
@@ -29,7 +29,7 @@ export const BillingStep = (): ReactElement => {
             fieldName="contactFirstName"
             errorBarType="MOBILE-ONLY"
             required={true}
-            validationText={Config.businessFormationDefaults.contactFirstNameErrorText}
+            validationText={getFieldErrorLabel("contactFirstName")}
           />
         </div>
         <div className="form-input tablet:grid-col-6">
@@ -39,7 +39,7 @@ export const BillingStep = (): ReactElement => {
             fieldName="contactLastName"
             errorBarType="MOBILE-ONLY"
             required={true}
-            validationText={Config.businessFormationDefaults.contactLastNameErrorText}
+            validationText={getFieldErrorLabel("contactLastName")}
           />
         </div>
       </WithErrorBar>

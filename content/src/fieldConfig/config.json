@@ -84,6 +84,7 @@
     "signerCheckboxErrorText": "Sign by clicking the checkbox(s) below.",
     "reviewStepBusinessStartDateLabel": "`**NJ Business Effective Date:**|effective-date`",
     "foreignLegalPrefaceText": "Foreign",
+    "signerTypeErrorText": "Select the signer titles below.",
     "businessLocationInfoAlertMarkdown": "**Can't find your city?** Unincorporated places are not listed here. Search for [your official jurisdiction](https://www.nj.gov/nj/gov/county/localities.html) (type in your community's name into the local name field).",
     "startTodayDateErrorText": "The business formation start date must be today and in format MM/DD/YYYY.",
     "addNewSignerButtonText": "Add New Signer",
@@ -157,7 +158,6 @@
     "signatureAidText": "By checking this box I confirm that I'm an authorized signer.",
     "lpText": "LP",
     "paymentTypeTableTotalCostLabel": "Total",
-    "signerTypeErrorText": "Select the signer titles below.",
     "signerMinimumErrorText": "Enter at least 1 signer's name.",
     "reviewStepPartnershipNoLimitedPartnerBody": "**No**, the limited partners cannot assign other partners limited partner rights.",
     "dissolutionTitle": "Dissolution",
@@ -261,14 +261,17 @@
     "requiredFieldsBulletPointLabel": {
       "paymentType": "Payment Type",
       "contactLastName": "Last Name",
-      "addressCountry": "Country",
       "canMakeDistribution": "Partnership Rights",
-      "addressProvince": "Province",
       "dissolution": "Dissolution",
       "signers": "Signer",
       "addressLine1": "Address Line 1",
+      "addressLine2": "Address Line 2",
+      "addressProvince": "Province",
+      "addressCountry": "Country",
+      "addressState": "State",
       "canGetDistribution": "Partnership Rights",
       "agentOfficeAddressLine1": "Address Line 1",
+      "agentOfficeAddressLine2": "Address Line 2",
       "incorporators": "Signer",
       "businessName": "Business Name",
       "getDistributionTerms": "Partnership Rights",
@@ -288,7 +291,6 @@
       "addressZipCode": "Zip Code",
       "contactFirstName": "First Name",
       "agentOfficeAddressZipCode": "Zip Code",
-      "addressState": "State",
       "createLimitedPartnerTerms": "Partnership Rights",
       "withdrawals": "Withdrawals",
       "addressCity": "City"
@@ -302,7 +304,8 @@
     "reviewStepBusinessSuffixLabel": "`**Business Designator:**|business-designator`",
     "addressModalBackButtonText": "Cancel",
     "reviewStepContactFirstName": "First Name",
-    "provisionsAddAnotherButtonText": "Add a Provision"
+    "provisionsAddAnotherButtonText": "Add a Provision",
+    "maximumLengthErrorText": "${field} must be ${maxLen} characters or fewer."
   },
   "selfRegistration": {
     "errorTextGeneric": "Something went wrong, please try again later.",
