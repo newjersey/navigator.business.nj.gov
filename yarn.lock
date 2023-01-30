@@ -4529,7 +4529,7 @@ __metadata:
     "@aws-sdk/util-dynamodb": 3.259.0
     "@businessnjgovnavigator/shared": "*"
     "@jest/types": 29.4.1
-    "@serverless/typescript": 3.25.0
+    "@serverless/typescript": 3.27.0
     "@types/cors": 2.8.13
     "@types/dedent": 0.7.0
     "@types/express": 4.17.16
@@ -4638,12 +4638,12 @@ __metadata:
     "@mui/material": 5.11.6
     "@mui/styles": 5.11.2
     "@mui/system": 5.11.5
-    "@mui/x-date-pickers": 5.0.15
+    "@mui/x-date-pickers": 5.0.16
     "@next/bundle-analyzer": 12.1.6
     "@next/eslint-plugin-next": 12.1.6
     "@semantic-release/changelog": 6.0.2
     "@semantic-release/git": 10.0.1
-    "@serverless/typescript": 3.25.0
+    "@serverless/typescript": 3.27.0
     "@storybook/addon-a11y": 6.5.16
     "@storybook/addon-actions": 6.5.16
     "@storybook/addon-docs": 6.5.16
@@ -4856,7 +4856,7 @@ __metadata:
     "@mui/material": 5.11.6
     "@mui/styles": 5.11.2
     "@mui/system": 5.11.5
-    "@mui/x-date-pickers": 5.0.15
+    "@mui/x-date-pickers": 5.0.16
     "@next/bundle-analyzer": 12.1.6
     "@next/eslint-plugin-next": 12.1.6
     "@storybook/addon-actions": 6.5.16
@@ -7281,9 +7281,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mui/x-date-pickers@npm:5.0.15":
-  version: 5.0.15
-  resolution: "@mui/x-date-pickers@npm:5.0.15"
+"@mui/x-date-pickers@npm:5.0.16":
+  version: 5.0.16
+  resolution: "@mui/x-date-pickers@npm:5.0.16"
   dependencies:
     "@babel/runtime": ^7.18.9
     "@date-io/core": ^2.15.0
@@ -7321,7 +7321,7 @@ __metadata:
       optional: true
     moment:
       optional: true
-  checksum: 87f24245604a2b86bad9527a5a46422da546e517265d817f0e623e508775bb0586db63b4bd830797fee5b8c10c777bf1f4691a9d8a378cebbace6c1af34de23b
+  checksum: 91cbb10b4a085b9b683e1062ce4c12cf5a5b6e574c33824dce54df4790a1d26a924d3944d5d772089387fc3792f0bd7037e8f04a8d4f20c1c0bebc01d9ab60ac
   languageName: node
   linkType: hard
 
@@ -8199,10 +8199,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@serverless/typescript@npm:3.25.0":
-  version: 3.25.0
-  resolution: "@serverless/typescript@npm:3.25.0"
-  checksum: 0a471f4afec80251bf12b220e30a0103c5538cdb6090e3514e764d402639d39b0ebe9709969b4b5ad032d63f2f8a64ea94b4a76347087d6265e55a8e7804e642
+"@serverless/typescript@npm:3.27.0":
+  version: 3.27.0
+  resolution: "@serverless/typescript@npm:3.27.0"
+  checksum: c198f7b8d256567b3bf08d665dc76b1ae8050404d9fa3901f94e307318dce81745103fea02b48c1fd65c9a7c7c823c3cf7cd066bf2ac0b273f98cd9c82155b35
   languageName: node
   linkType: hard
 
