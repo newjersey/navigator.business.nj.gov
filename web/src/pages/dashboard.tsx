@@ -3,7 +3,7 @@ import { Roadmap } from "@/components/dashboard/Roadmap";
 import { SidebarCardsContainer } from "@/components/dashboard/SidebarCardsContainer";
 import TwoTabDashboardLayout from "@/components/dashboard/TwoTabDashboardLayout";
 import { DeferredOnboardingQuestion } from "@/components/DeferredOnboardingQuestion";
-import { FilingsCalendar } from "@/components/FilingsCalendar";
+import { FilingsCalendar } from "@/components/filings-calendar/FilingsCalendar";
 import { Header } from "@/components/Header";
 import { LoadingIndicator } from "@/components/LoadingIndicator";
 import { NavBar } from "@/components/navbar/NavBar";

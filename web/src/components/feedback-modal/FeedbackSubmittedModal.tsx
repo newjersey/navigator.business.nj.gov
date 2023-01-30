@@ -1,13 +1,12 @@
 import { Content } from "@/components/Content";
 import { ModalOneButton } from "@/components/ModalOneButton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { FeedbackRequestModalNames } from "@/lib/types/types";
 import { ReactElement } from "react";
 
 type Props = {
   onClose: () => void;
   isOpen: boolean;
-  setCurrentFeedback: (str: FeedbackRequestModalNames) => void;
+  setCurrentFeedback: () => void;
 };
 
 export const FeedbackSubmittedModal = ({ onClose, isOpen, setCurrentFeedback }: Props): ReactElement => {
@@ -20,9 +19,7 @@ export const FeedbackSubmittedModal = ({ onClose, isOpen, setCurrentFeedback }: 
       close={onClose}
       title={Config.feedbackModal.successfulSubmissionModalHeadingText}
       primaryButtonText={Config.feedbackModal.successfulSubmissionModalButtonText}
-      primaryButtonOnClick={() => {
-        setCurrentFeedback("Select Feedback");
-      }}
+      primaryButtonOnClick={setCurrentFeedback}
     >
       <div className="width-mobile-lg">
         <Content>{Config.feedbackModal.successfulSubmissionModalBodyText}</Content>

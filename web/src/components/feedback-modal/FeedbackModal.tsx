@@ -40,7 +40,9 @@ export const FeedbackModal = ({ handleClose, isOpen, isReportAnIssueBar }: Props
         <FeedbackSubmittedModal
           isOpen={isOpen}
           onClose={handleClose}
-          setCurrentFeedback={setCurrentFeedback}
+          setCurrentFeedback={() => {
+            setCurrentFeedback("Select Feedback");
+          }}
         />
       )}
       {currentFeedback === "Report Issue" && (
