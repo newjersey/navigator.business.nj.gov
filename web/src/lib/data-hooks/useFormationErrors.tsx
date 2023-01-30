@@ -106,6 +106,10 @@ export const useFormationErrors = () => {
     }
   };
 
+  const getFieldErrorLabel = (field: FormationFields): string => {
+    return overrideErrorStateForApiErrors(errorStates[field]).label;
+  };
+
   const doSomeFieldsHaveError = (fields: FormationFields[]): boolean => {
     return fields
       .filter((field) => {
@@ -155,5 +159,6 @@ export const useFormationErrors = () => {
     doesStepHaveError,
     isStepCompleted,
     getApiErrorMessage,
+    getFieldErrorLabel,
   };
 };
