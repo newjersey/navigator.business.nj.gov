@@ -1,18 +1,22 @@
 ---
 filename: small-business-improvement
-urlSlug: small-business-improvement
 name: Small Business Improvement Grant
+urlSlug: small-business-improvement
 id: small-business-improvement-grant
+openDate: ""
+dueDate: ""
+descriptionMd: The Small Business Improvement Grant offers reimbursement for
+  costs associated with completed building improvements or purchased new
+  furniture, fixtures and equipment made since March 9th, 2020.
 callToActionLink: https://www.njeda.com/small-business-improvement-grant/
 callToActionText: Learn more
 fundingType: grant
+programFrequency: ongoing
+status: first come, first serve
 programPurpose: In State
 agency:
   - NJEDA
 agencyContact: ""
-publishStageArchive: null
-status: opening soon
-programFrequency: ongoing
 businessStage: operating
 employeesRequired: n/a
 homeBased: no
@@ -21,9 +25,7 @@ preferenceForOpportunityZone: yes
 county:
   - All
 sector: []
-openDate: ""
-dueDate: ""
-descriptionMd: The Small Business Improvement Grant offers reimbursement for costs associated with completed building improvements or purchased new furniture, fixtures and equipment made since March 9th, 2020.
+publishStageArchive: null
 ---
 
 The Small Business Improvement Grant offers reimbursement for costs associated with completed building improvements or purchased new furniture, fixtures and equipment made since March 9th, 2020.
