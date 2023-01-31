@@ -109,14 +109,14 @@ export const PaymentTypeTable = (): ReactElement => {
                   hasError
                     ? "text-error-dark"
                     : state.formationFormData.paymentType === "CC"
-                    ? "text-success-dark text-bold"
+                    ? "text-primary-dark text-bold"
                     : ""
                 }
               >
                 <Content>{Config.businessFormationDefaults.creditCardPaymentTypeLabel}</Content>
               </label>
             </td>
-            <td className={state.formationFormData.paymentType === "CC" ? "text-success-dark text-bold" : ""}>
+            <td className={state.formationFormData.paymentType === "CC" ? "text-primary-dark text-bold" : ""}>
               {getDollarValue(creditCardCost)}
             </td>
           </tr>
@@ -143,7 +143,7 @@ export const PaymentTypeTable = (): ReactElement => {
                   doesFieldHaveError(FIELD)
                     ? "text-error-dark"
                     : state.formationFormData.paymentType === "ACH"
-                    ? "text-success-dark text-bold"
+                    ? "text-primary-dark text-bold"
                     : ""
                 }
               >
@@ -151,7 +151,7 @@ export const PaymentTypeTable = (): ReactElement => {
               </label>
             </td>
             <td
-              className={state.formationFormData.paymentType === "ACH" ? "text-success-dark text-bold" : ""}
+              className={state.formationFormData.paymentType === "ACH" ? "text-primary-dark text-bold" : ""}
             >
               {getDollarValue(achCost)}
             </td>

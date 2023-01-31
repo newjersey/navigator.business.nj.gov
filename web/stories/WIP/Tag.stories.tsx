@@ -47,10 +47,10 @@ BaseLighter.args = {
   backgroundColor: "base-lighter",
 };
 
-export const InfoLight = Template.bind({});
-InfoLight.args = {
+export const AccentWarmExtraLight = Template.bind({});
+AccentWarmExtraLight.args = {
   ...defaultArgs,
-  backgroundColor: "info-light",
+  backgroundColor: "accent-warm-extra-light",
 };
 
 export const PrimaryLightest = Template.bind({});
@@ -59,10 +59,10 @@ PrimaryLightest.args = {
   backgroundColor: "primary-lightest",
 };
 
-export const WarningExtraLight = Template.bind({});
-WarningExtraLight.args = {
+export const AccentSemiCoolLightest = Template.bind({});
+AccentSemiCoolLightest.args = {
   ...defaultArgs,
-  backgroundColor: "warning-extra-light",
+  backgroundColor: "accent-semi-cool-lightest",
 };
 
 export const White = Template.bind({});

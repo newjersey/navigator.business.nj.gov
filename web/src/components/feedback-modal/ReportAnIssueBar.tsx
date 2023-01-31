@@ -10,7 +10,7 @@ export const ReportAnIssueBar = (): ReactElement => {
 
   return (
     <div
-      className="bg-warning-extra-light height-5 flex flex-align-center flex-justify-center"
+      className="bg-accent-warm-extra-light height-5 flex flex-align-center flex-justify-center"
       data-testid="reportAnIssueBar"
     >
       <Button

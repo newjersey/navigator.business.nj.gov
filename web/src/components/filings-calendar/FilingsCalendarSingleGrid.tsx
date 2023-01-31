@@ -50,7 +50,7 @@ export const FilingsCalendarSingleGrid = (props: Props) => {
       .map((filing) => {
         return (
           <div key={filing.identifier} className="line-height-1 margin-bottom-1" data-testid="filing">
-            <Tag backgroundColor="warning-extra-light" isHover isRadiusMd isWrappingText>
+            <Tag backgroundColor="accent-warm-extra-light" isHover isRadiusMd isWrappingText>
               <Link href={`filings/${props.operateReferences[filing.identifier].urlSlug}`}>
                 <a
                   href={`filings/${props.operateReferences[filing.identifier].urlSlug}`}

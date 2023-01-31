@@ -50,7 +50,7 @@ export const TaskHeader = (props: Props): ReactElement => {
       case "NOT_STARTED":
         return "bg-base-extra-light";
       case "IN_PROGRESS":
-        return "bg-info-extra-light";
+        return "bg-accent-cool-lightest";
       case "COMPLETED":
         return "bg-primary-extra-light";
     }
