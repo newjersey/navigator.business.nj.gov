@@ -13,11 +13,21 @@ export const taxFilingsInterfaceFactory = (apiTaxFilingClient: TaxFilingClient):
       taxId: request.taxId,
       businessName: request.businessName,
     });
+
+    const shouldSwitchToCalendarGridView = (): boolean => {
+      const maxFilingsInListView = 5;
+      const prevFilingsCountBelowMax = request.userData.taxFilingData.filings.length <= maxFilingsInListView;
+      const newFilingsAboveMax = filings.length > maxFilingsInListView;
+      return state === "SUCCESS" && prevFilingsCountBelowMax && newFilingsAboveMax;
+    };
+
     return {
       ...request.userData,
       preferences: {
         ...request.userData.preferences,
-        isCalendarFullView: state === "SUCCESS" ? true : request.userData.preferences.isCalendarFullView,
+        isCalendarFullView: shouldSwitchToCalendarGridView()
+          ? true
+          : request.userData.preferences.isCalendarFullView,
       },
       taxFilingData: {
         ...request.userData.taxFilingData,

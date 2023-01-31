@@ -31,7 +31,8 @@
     "unicorn/numeric-separators-style": "off",
     "unicorn/prefer-module": "off",
     "unicorn/no-array-reduce": "off",
-    "unicorn/switch-case-braces": "off"
+    "unicorn/switch-case-braces": "off",
+    "unicorn/new-for-builtins": "off"
   },
   "overrides": [
     {
