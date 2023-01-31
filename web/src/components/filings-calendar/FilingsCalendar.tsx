@@ -48,8 +48,6 @@ export const FilingsCalendar = (props: Props): ReactElement => {
     return LookupOperatingPhaseById(userData.profileData.operatingPhase).displayTaxAccessButton;
   };
 
-  // const renderCalendarAsList = (): ReactElement =>
-
   const renderCalendar = (): ReactElement => {
     const type = LookupOperatingPhaseById(userData?.profileData.operatingPhase).displayCalendarType;
     if (type === "LIST")
