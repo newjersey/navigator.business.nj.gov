@@ -1,10 +1,15 @@
 import { UserData } from "@shared/userData";
+import dayjs from "dayjs";
 import { TaxFilingClient, TaxFilingInterface } from "../types";
 
 type taxFilingInterfaceRequest = {
   userData: UserData;
   taxId: string;
   businessName: string;
+};
+
+const isThisYear = (dueDate: string): boolean => {
+  return dayjs(dueDate).isSame(dayjs(), "year");
 };
 
 export const taxFilingsInterfaceFactory = (apiTaxFilingClient: TaxFilingClient): TaxFilingInterface => {
@@ -15,9 +20,14 @@ export const taxFilingsInterfaceFactory = (apiTaxFilingClient: TaxFilingClient):
     });
 
     const shouldSwitchToCalendarGridView = (): boolean => {
-      const maxFilingsInListView = 5;
-      const prevFilingsCountBelowMax = request.userData.taxFilingData.filings.length <= maxFilingsInListView;
-      const newFilingsAboveMax = filings.length > maxFilingsInListView;
+      const maxFilingsInCurrentYearListView = 5;
+      const prevFilingsThisYear = request.userData.taxFilingData.filings.filter((it) =>
+        isThisYear(it.dueDate)
+      );
+      const prevFilingsCountBelowMax = prevFilingsThisYear.length <= maxFilingsInCurrentYearListView;
+
+      const newFilingsThisYear = filings.filter((it) => isThisYear(it.dueDate));
+      const newFilingsAboveMax = newFilingsThisYear.length > maxFilingsInCurrentYearListView;
       return state === "SUCCESS" && prevFilingsCountBelowMax && newFilingsAboveMax;
     };
 

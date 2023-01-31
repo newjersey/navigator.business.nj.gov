@@ -1,4 +1,4 @@
-import { TaxFilingState } from "@shared/taxFiling";
+import { TaxFiling, TaxFilingState } from "@shared/taxFiling";
 import { UserData } from "@shared/userData";
 import {
   generatePreferences,
@@ -71,9 +71,12 @@ describe("TaxFilingsInterfaceFactory", () => {
         });
       });
 
-      it("sets isCalendarFullView preference to true if filings length was 5 or fewer and is now more than 5", async () => {
-        const userData = setupInitialUserDataWithCal({ numFilings: 5, isCalendarFullView: false });
-        mockTaxFilingLookup({ numFilings: 6, state: "SUCCESS" });
+      it("sets isCalendarFullView preference to true if filings in current year was 5 or fewer and is now more than 5", async () => {
+        const userData = setupInitialUserDataWithCal({
+          numFilingsInCurrentYear: 5,
+          isCalendarFullView: false,
+        });
+        mockTaxFilingLookup({ numFilingsInCurrentYear: 6, state: "SUCCESS" });
         const resultingUserData = await taxFilingInterface.lookup({ userData, ...taxIdBusinessName });
         expect(resultingUserData.preferences.isCalendarFullView).toEqual(true);
       });
@@ -82,22 +85,35 @@ describe("TaxFilingsInterfaceFactory", () => {
         const prevIsCalendarFullView: boolean[] = [true, false];
 
         for (const prevCalendarView of prevIsCalendarFullView) {
-          it(`${prevCalendarView} when filings length was more than 5 and remains more than 5`, async () => {
+          it(`${prevCalendarView} when filings in current year was more than 5 and remains more than 5`, async () => {
             const userData = setupInitialUserDataWithCal({
-              numFilings: 6,
+              numFilingsInCurrentYear: 6,
               isCalendarFullView: prevCalendarView,
             });
-            mockTaxFilingLookup({ numFilings: 6, state: "SUCCESS" });
+            mockTaxFilingLookup({ numFilingsInCurrentYear: 6, state: "SUCCESS" });
             const resultingUserData = await taxFilingInterface.lookup({ userData, ...taxIdBusinessName });
             expect(resultingUserData.preferences.isCalendarFullView).toEqual(prevCalendarView);
           });
 
-          it(`${prevCalendarView} when filings length was 5 or fewer and remains fewer than 5`, async () => {
+          it(`${prevCalendarView} when filings length in current year 5 or fewer and remains fewer than 5`, async () => {
             const userData = setupInitialUserDataWithCal({
-              numFilings: 5,
+              numFilingsInCurrentYear: 5,
               isCalendarFullView: prevCalendarView,
             });
-            mockTaxFilingLookup({ numFilings: 5, state: "SUCCESS" });
+            mockTaxFilingLookup({ numFilingsInCurrentYear: 5, state: "SUCCESS" });
+            const resultingUserData = await taxFilingInterface.lookup({ userData, ...taxIdBusinessName });
+            expect(resultingUserData.preferences.isCalendarFullView).toEqual(prevCalendarView);
+          });
+
+          it(`${prevCalendarView} when filings are more than 5 but not this year`, async () => {
+            const userData = setupInitialUserDataWithCal({
+              numFilingsInCurrentYear: 0,
+              isCalendarFullView: prevCalendarView,
+            });
+            taxFilingClient.lookup.mockResolvedValue({
+              state: "SUCCESS",
+              filings: createFilings({ numFilingsInCurrentYear: 0, numFilingsInNextYear: 6 }),
+            });
             const resultingUserData = await taxFilingInterface.lookup({ userData, ...taxIdBusinessName });
             expect(resultingUserData.preferences.isCalendarFullView).toEqual(prevCalendarView);
           });
@@ -135,15 +151,21 @@ describe("TaxFilingsInterfaceFactory", () => {
         });
 
         it(`keeps false value of isCalendarFullView when state is ${state}`, async () => {
-          const userData = setupInitialUserDataWithCal({ numFilings: 0, isCalendarFullView: false });
-          mockTaxFilingLookup({ numFilings: 0, state });
+          const userData = setupInitialUserDataWithCal({
+            numFilingsInCurrentYear: 0,
+            isCalendarFullView: false,
+          });
+          mockTaxFilingLookup({ numFilingsInCurrentYear: 0, state });
           const resultingUserData = await taxFilingInterface.lookup({ userData, ...taxIdBusinessName });
           expect(resultingUserData.preferences.isCalendarFullView).toEqual(false);
         });
 
         it(`keeps true value of isCalendarFullView when state is ${state}`, async () => {
-          const userData = setupInitialUserDataWithCal({ numFilings: 0, isCalendarFullView: true });
-          mockTaxFilingLookup({ numFilings: 0, state });
+          const userData = setupInitialUserDataWithCal({
+            numFilingsInCurrentYear: 0,
+            isCalendarFullView: true,
+          });
+          mockTaxFilingLookup({ numFilingsInCurrentYear: 0, state });
           const resultingUserData = await taxFilingInterface.lookup({ userData, ...taxIdBusinessName });
           expect(resultingUserData.preferences.isCalendarFullView).toEqual(true);
         });
@@ -153,24 +175,40 @@ describe("TaxFilingsInterfaceFactory", () => {
     /* eslint-disable unicorn/consistent-function-scoping */
     function setupInitialUserDataWithCal(params: {
       isCalendarFullView: boolean;
-      numFilings: number;
+      numFilingsInCurrentYear: number;
     }): UserData {
       return generateUserData({
         preferences: generatePreferences({
           isCalendarFullView: params.isCalendarFullView,
         }),
         taxFilingData: generateTaxFilingData({
-          filings: Array(params.numFilings).fill(generateTaxFiling({})),
+          filings: createFilings(params),
         }),
       });
     }
 
     /* eslint-disable unicorn/consistent-function-scoping */
-    function mockTaxFilingLookup(params: { state: TaxFilingState; numFilings: number }): void {
+    function mockTaxFilingLookup(params: { state: TaxFilingState; numFilingsInCurrentYear: number }): void {
       taxFilingClient.lookup.mockResolvedValue({
         state: params.state,
-        filings: Array(params.numFilings).fill(generateTaxFiling({})),
+        filings: createFilings(params),
       });
+    }
+
+    /* eslint-disable unicorn/consistent-function-scoping */
+    function createFilings(params: {
+      numFilingsInCurrentYear: number;
+      numFilingsInNextYear?: number;
+    }): TaxFiling[] {
+      const thisYear = currentDate.getFullYear();
+      const nextYear = currentDate.getFullYear() + 1;
+      const filingsInCurrentYear = Array(params.numFilingsInCurrentYear).fill(
+        generateTaxFiling({ dueDate: `${thisYear}-12-31` })
+      );
+      const filingsInNextYear = Array(params.numFilingsInNextYear ?? 5).fill(
+        generateTaxFiling({ dueDate: `${nextYear}-12-31` })
+      );
+      return [...filingsInCurrentYear, ...filingsInNextYear];
     }
   });
 
