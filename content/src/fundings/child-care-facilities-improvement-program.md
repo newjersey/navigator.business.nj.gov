@@ -16,7 +16,7 @@ callToActionLink: https://www.njeda.com/child-care-improvement-program/
 callToActionText: Learn more
 fundingType: grant
 programFrequency: pilot
-status: opening soon
+status: rolling application
 programPurpose: Out of State
 agency:
   - NJEDA
