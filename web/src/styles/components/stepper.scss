@@ -108,7 +108,7 @@
   }
 
   .usa-step-indicator__segment--current .usa-step-indicator__segment-label {
-    color: $info-darker;
+    color: $accent-cool-darker;
   }
 
   .usa-step-indicator__segment--complete .usa-step-indicator__segment-label {
@@ -155,7 +155,7 @@
   }
 
   .usa-step-indicator__segment--current::before {
-    background-color: $info-darker !important;
+    background-color: $accent-cool-darker !important;
   }
 
   .usa-step-indicator__segment--complete::before {

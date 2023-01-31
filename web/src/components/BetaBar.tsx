@@ -9,7 +9,7 @@ export const BetaBar = (): ReactElement => {
 
   return (
     <div
-      className="display-flex flex-justify-center flex-align-center bg-warning-extra-light font-sans-xs minh-3 margin-auto width-full padding-y-1"
+      className="display-flex flex-justify-center flex-align-center bg-accent-warm-extra-light font-sans-xs minh-3 margin-auto width-full padding-y-1"
       data-testid="beta-bar"
     >
       <span className="margin-left-1 margin-right-1">{Config.betaBar.betaMainText}</span>

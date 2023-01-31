@@ -213,7 +213,7 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
         {(displayMWPriorityType || displayVeteranPriorityType || displaySocialEquityPriorityType) && (
           <>
             <hr />
-            <div className="green-box text-normal padding-2 margin-top-2 bg-success-extra-light radius-lg">
+            <div className="green-box text-normal padding-2 margin-top-2 bg-primary-extra-light radius-lg">
               <div className="text-bold">{Config.cannabisPriorityStatus.greenBoxBoldedText}</div>
               <ul>
                 {displayMWPriorityType && (
