@@ -1,14 +1,110 @@
 {
   "profileDefaults": {
     "fields": {
-      "businessPersona": {
+      "carService": {
         "default": {
-          "header": "Business Status",
-          "radioButtonStartingText": "Starting a New Jersey-based business",
-          "radioButtonOwningText": "A New Jersey business already up and running",
-          "radioButtonForeignText": "An out-of-state business",
-          "errorTextRequired": "Please select whether you have an existing business.",
-          "description": "Are you:"
+          "header": "Car Service",
+          "radioButtonStandardText": "I will only have standard-size vehicles (taxis, limos, etc.)",
+          "radioButtonHighCapacityText": "I will only have high-capacity vehicles (15+ passenger vehicles)",
+          "radioButtonBothText": "I will have both standard and high-capacity vehicles",
+          "description": "What type of vehicles will you have?"
+        }
+      },
+      "notes": {
+        "default": {
+          "header": "Notes",
+          "placeholder": "Enter notes",
+          "description": "Use this space to add any information for quick reference."
+        }
+      },
+      "providesStaffingService": {
+        "default": {
+          "header": "Staffing Services",
+          "radioButtonTrueText": "Yes",
+          "radioButtonFalseText": "No",
+          "description": "Will you provide staffing services?"
+        }
+      },
+      "sectorId": {
+        "default": {
+          "header": "Industry Sector",
+          "placeholder": "Select an industry sector",
+          "description": "Which industry sector best describes your business?",
+          "errorTextRequired": "Please select an industry sector."
+        }
+      },
+      "certifiedInteriorDesigner": {
+        "default": {
+          "header": "Certified Interior Designer",
+          "radioButtonTrueText": "Yes",
+          "radioButtonFalseText": "No",
+          "description": "Will you market as a certified interior designer?"
+        }
+      },
+      "interstateMoving": {
+        "default": {
+          "header": "Moving Goods Across State Lines",
+          "radioButtonTrueText": "Yes",
+          "radioButtonFalseText": "No",
+          "description": "Do you plan to move goods across state lines?"
+        }
+      },
+      "taxId": {
+        "default": {
+          "header": "New Jersey Tax ID",
+          "placeholder": "Enter New Jersey Tax ID number",
+          "description": "What is your `New Jersey Tax ID?|tax-id`",
+          "errorTextRequired": "Enter a 12-digit Tax ID",
+          "disclaimerMd": "**Disclaimer:** Your Tax ID will be used to identify the taxes you owe and is required information if you'd like to access your tax calendar."
+        }
+      },
+      "requiresCpa": {
+        "default": {
+          "header": "Public Accounting Services",
+          "radioButtonTrueText": "Yes",
+          "radioButtonFalseText": "No",
+          "description": "Will you provide Certified Public Accounting Services?"
+        }
+      },
+      "responsibleOwnerName": {
+        "default": {
+          "placeholder": "Type Your Responsible Owner Name",
+          "header": "Responsible Owner Name",
+          "errorTextRequired": "Please enter your responsible owner name.",
+          "description": "Enter your Last Name, First Name and Middle Initial. The name must match exactly the name listed on your tax confirmation email."
+        }
+      },
+      "nexusBusinessName": {
+        "default": {
+          "editButton": "Edit",
+          "addButton": "Add",
+          "outOfStateNameHeader": "Out-of-State Business Name",
+          "emptyBusinessPlaceHolder": "Not Entered"
+        }
+      },
+      "foreignBusinessTypeIds": {
+        "default": {
+          "header": "Out-of-State Businesses",
+          "description": "Which of the following are **true** about your business? **Select all that apply.**",
+          "errorTextRequired": "Please make a selection",
+          "optionContent": {
+            "operationsInNJ": "Part of my `business operations|nexus-business` takes place in New Jersey",
+            "employeesInNJ": "I have employees who live in New Jersey",
+            "transactionsInNJ": "I have more than 200 separate taxable transactions in New Jersey in the current or prior calendar year",
+            "revenueInNJ": "My taxable transactions in New Jersey exceeded $100,000 in the last calendar year",
+            "none": "None of the above"
+          },
+          "REMOTE_WORKER": "It sounds like you have `Remote Workers|remote-worker` .",
+          "REMOTE_SELLER": "It sounds like you're a `Remote Seller|remote-seller` .",
+          "NEXUS": "It sounds like you’re a `Nexus Business|nexus-business` ."
+        }
+      },
+      "taxPin": {
+        "default": {
+          "header": "Tax PIN",
+          "placeholder": "Enter Tax PIN number",
+          "description": "What is your `Tax PIN|tax-pin`?",
+          "errorTextRequired": "Tax PIN must be 4 digits."
         }
       },
       "businessName": {
@@ -24,13 +120,85 @@
           }
         }
       },
-      "industryId": {
+      "dateOfFormation": {
         "default": {
-          "header": "Industry",
-          "placeholder": "Select an industry",
-          "description": "Which industry best describes your business?",
-          "errorTextRequired": "Industry is a required field.",
-          "searchAffirmation": "_\"**${searchText}**\" falls under the industries below:_"
+          "header": "Effective Date",
+          "description": "When did you form your business? Find your `effective date|effective-date` on your `Certificate of Formation|certificate-formation`.",
+          "errorTextRequired": "Your formation should be formatted as MM/YYYY. (This information will help us inform your annual reporting due date.)"
+        }
+      },
+      "businessPersona": {
+        "default": {
+          "header": "Business Status",
+          "radioButtonStartingText": "Starting a New Jersey-based business",
+          "radioButtonOwningText": "A New Jersey business already up and running",
+          "radioButtonForeignText": "An out-of-state business",
+          "errorTextRequired": "Please select whether you have an existing business.",
+          "description": "Are you:"
+        }
+      },
+      "ownershipTypeIds": {
+        "default": {
+          "header": "Business Ownership",
+          "placeholder": "Select Ownership",
+          "description": "At least 51% of my business is owned by (select all that apply):",
+          "headerNotBolded": ""
+        },
+        "overrides": {
+          "OWNING": {
+            "header": "Ownership",
+            "headerNotBolded": "(Optional)"
+          }
+        }
+      },
+      "nexusDbaName": {
+        "default": {
+          "header": "Doing Business As (DBA) New Jersey Business Name"
+        }
+      },
+      "employmentAgency": {
+        "default": {
+          "header": "",
+          "description": "Learn about other `employment and personnel industries|employment-agency-types`."
+        }
+      },
+      "cannabisLicenseType": {
+        "default": {
+          "header": "Cannabis License",
+          "description": "Which type of license do you plan to get?\n\nLearn more about the `Conditional & Conversion License|cannabis-conditional-license` or the `Annual License|cannabis-annual-license`.",
+          "radioButtonAnnualText": "Annual",
+          "radioButtonConditionalText": "Conditional"
+        }
+      },
+      "naicsCode": {
+        "default": {
+          "header": "NAICS Code",
+          "editText": "Edit",
+          "addText": "Add",
+          "notEnteredText": "*Not entered*"
+        }
+      },
+      "isChildcareForSixOrMore": {
+        "default": {
+          "header": "Childcare Services",
+          "radioButtonTrueText": "Yes",
+          "radioButtonFalseText": "No",
+          "description": "Do you provide childcare services for 6 or more children in a dedicated space?"
+        }
+      },
+      "homeContractor": {
+        "default": {
+          "header": "",
+          "description": "`Learn what activities qualify as a Home Improvement Contractor|home-contractors-activities`"
+        }
+      },
+      "homeBasedBusiness": {
+        "default": {
+          "header": "Home-based business",
+          "radioButtonTrueText": "Yes",
+          "radioButtonFalseText": "No",
+          "description": "Are you a `home-based business|home-based-business`?",
+          "altDescription": "Do you plan to be a `home-based business|home-based-business`?"
         }
       },
       "legalStructureId": {
@@ -40,13 +208,13 @@
           "description": "Your business’ `business structure|business-structure-learn-more` can have a large impact on taxes, financing, liability, and closure of your business. We strongly suggest doing research on the best business structure for your business.  \nSelect a business structure for your Navigator profile below. Making a selection will not form your business, it will help us create your personalized guide. You can change your intended business structure anytime before formally filing it with the NJ Department of Treasury.",
           "errorTextRequired": "Please select a business structure.",
           "optionContent": {
-            "general-partnership": "In a general partnership two or more people share ownership of a single business and are jointly responsible for its assets and liabilities. [Learn more](https://business.nj.gov/pages/general-partnership)",
-            "c-corporation": "A traditional Corporation (C Corp) is more complex than other business types and is generally suggested for larger, established companies with multiple employees. [Learn more](https://business.nj.gov/pages/c-corporation-c-corp)",
-            "limited-liability-company": "An LLC is one of the most common business structures. In an LLC, there can be one or multiple owners, and they are not personally liable for company debts. [Learn more](https://business.nj.gov/pages/limited-liability-company-llc)",
-            "limited-liability-partnership": "Limited Liability Partnerships have general partners who own and operate the business, and limited partners who invest in the business, both types of partners have limited liability. [Learn more](https://business.nj.gov/pages/llp-lp)",
-            "limited-partnership": "Limited Partnerships have general partners who own and operate the business, and limited partners who invest in the business but have limited liability and oversight. [Learn more](https://business.nj.gov/pages/llp-lp)",
-            "s-corporation": "A Corporation with an S Corporation Tax Designation (S Corp) is similar to a C Corporation except that the business is not taxed separately from the owners. S Corps are also very similar to Limited Liability Companies (LLCs), but with more limitations. You may elect S Corp status separately after you form and register for tax and employer purposes. [Learn more](https://business.nj.gov/pages/s-corporation-s-corp)",
-            "sole-proprietorship": "In a sole proprietorship you alone own the company and are responsible for its assets and liabilities. [Learn more](https://business.nj.gov/pages/sole-proprietorship)"
+            "general-partnership": "In a general partnership two or more people share ownership of a single business and are jointly responsible for its assets and liabilities. [Learn more about general partnership](https://business.nj.gov/pages/general-partnership) ",
+            "c-corporation": "A traditional Corporation (C Corp) is more complex than other business types and is generally suggested for larger, established companies with multiple employees. [Learn more about corporation](https://business.nj.gov/pages/c-corporation-c-corp) ",
+            "limited-liability-company": "An LLC is one of the most common business structures. In an LLC, there can be one or multiple owners, and they are not personally liable for company debts. [Learn more about LLC](https://business.nj.gov/pages/limited-liability-company-llc)",
+            "limited-liability-partnership": "Limited Liability Partnerships have general partners who own and operate the business, and limited partners who invest in the business, both types of partners have limited liability. [Learn more about LLP](https://business.nj.gov/pages/llp-lp) ",
+            "limited-partnership": "Limited Partnerships have general partners who own and operate the business, and limited partners who invest in the business but have limited liability and oversight. [Learn more about LP](https://business.nj.gov/pages/llp-lp) ",
+            "s-corporation": "A Corporation with an S Corporation Tax Designation (S Corp) is similar to a C Corporation except that the business is not taxed separately from the owners. S Corps are also very similar to Limited Liability Companies (LLCs), but with more limitations. You may elect S Corp status separately after you form and register for tax and employer purposes. [Learn more about corporation with an S designation](https://business.nj.gov/pages/s-corporation-s-corp) ",
+            "sole-proprietorship": "In a sole proprietorship you alone own the company and are responsible for its assets and liabilities. [Learn more about sole proprietorship](https://business.nj.gov/pages/sole-proprietorship) "
           }
         },
         "overrides": {
@@ -68,42 +236,36 @@
           }
         }
       },
-      "municipality": {
+      "employerId": {
         "default": {
-          "header": "Location",
-          "placeholder": "Type in the name of your town (i.e Newark, Jersey City, etc)",
-          "description": "Where in New Jersey will your first location be? \n\n**\\*Note:** Unincorporated communities are not listed here. You can find your official jurisdiction by [doing a search](https://www.nj.gov/nj/gov/county/localities.html) (you will type in your community into the local name field).*",
-          "errorTextRequired": "Please select a location."
-        },
-        "overrides": {
-          "OWNING": {
-            "description": "Where in New Jersey is your business located? (What if I have a `foreign business?|foreign-business` )"
-          },
-          "FOREIGN": {
-            "description": "Where in New Jersey will your primary business activities be?"
-          }
+          "header": "Employer Identification Number",
+          "placeholder": "Enter Employer ID Number",
+          "headerNotBolded": "(EIN)",
+          "description": "What is your `EIN|ein`?"
         }
       },
-      "sectorId": {
+      "nexusLocationInNewJersey": {
         "default": {
-          "header": "Industry Sector",
-          "placeholder": "Select an industry sector",
-          "description": "Which industry sector best describes your business?",
-          "errorTextRequired": "Please select an industry sector."
+          "header": "Will you own or lease commercial or manufacturing space in New Jersey?",
+          "description": "",
+          "errorTextRequired": "Please select whether you will have a New Jersey location",
+          "radioButtonYesText": "Yes, I will own or lease space in New Jersey",
+          "radioButtonNoText": "No, I will not own or lease space in New Jersey"
         }
       },
-      "ownershipTypeIds": {
+      "documents": {
         "default": {
-          "header": "Business Ownership",
-          "placeholder": "Select Ownership",
-          "description": "At least 51% of my business is owned by (select all that apply):",
-          "headerNotBolded": ""
-        },
-        "overrides": {
-          "OWNING": {
-            "header": "Ownership",
-            "headerNotBolded": "(Optional)"
-          }
+          "header": "Reference Documents",
+          "placeholder": "If you are an LLC, Corporation, or LLP, we will automatically add your formation documents once you [Form Your Business](/tasks/form-business-entity) on our site."
+        }
+      },
+      "industryId": {
+        "default": {
+          "header": "Industry",
+          "placeholder": "Select an industry",
+          "description": "Which industry best describes your ${oos} business? ",
+          "errorTextRequired": "Industry is a required field.",
+          "searchAffirmation": "_\"**${searchText}**\" falls under the industries below:_"
         }
       },
       "existingEmployees": {
@@ -120,157 +282,20 @@
           }
         }
       },
-      "foreignBusinessTypeIds": {
+      "municipality": {
         "default": {
-          "header": "Out-of-State Businesses",
-          "description": "Which of the following are **true** about your business? **Select all that apply.**",
-          "errorTextRequired": "Please make a selection",
-          "optionContent": {
-            "operationsInNJ": "Part of my `business operations|nexus-business` takes place in New Jersey",
-            "employeesInNJ": "I have employees who live in New Jersey",
-            "transactionsInNJ": "I have more than 200 separate taxable transactions in New Jersey in the current or prior calendar year",
-            "revenueInNJ": "My taxable transactions in New Jersey exceeded $100,000 in the last calendar year",
-            "none": "None of the above"
+          "header": "Location",
+          "placeholder": "Type in the name of your town (i.e Newark, Jersey City, etc)",
+          "description": "Where in New Jersey will your first location be? \n\n**\\*Note:** Unincorporated communities are not listed here. You can find your official jurisdiction by [doing a search](https://www.nj.gov/nj/gov/county/localities.html) (you will type in your community into the local name field).*",
+          "errorTextRequired": "Please select a location."
+        },
+        "overrides": {
+          "OWNING": {
+            "description": "Where in New Jersey is your business located? (What if I have a `foreign business?|foreign-business` )"
           },
-          "REMOTE_WORKER": "It sounds like you have `Remote Workers|remote-worker` .",
-          "REMOTE_SELLER": "It sounds like you're a `Remote Seller|remote-seller` .",
-          "NEXUS": "It sounds like you’re a `Nexus Business|nexus-business` ."
-        }
-      },
-      "nexusLocationInNewJersey": {
-        "default": {
-          "header": "Will you own or lease commercial or manufacturing space in New Jersey?",
-          "description": "",
-          "errorTextRequired": "Please select whether you will have a New Jersey location",
-          "radioButtonYesText": "Yes, I will own or lease space in New Jersey",
-          "radioButtonNoText": "No, I will not own or lease space in New Jersey"
-        }
-      },
-      "nexusBusinessName": {
-        "default": {
-          "editButton": "Edit",
-          "addButton": "Add",
-          "outOfStateNameHeader": "Out-of-State Business Name",
-          "emptyBusinessPlaceHolder": "Not Entered"
-        }
-      },
-      "nexusDbaName": {
-        "default": {
-          "header": "Doing Business As (DBA) New Jersey Business Name"
-        }
-      },
-      "taxId": {
-        "default": {
-          "header": "New Jersey Tax ID",
-          "placeholder": "Enter New Jersey Tax ID number",
-          "description": "What is your `New Jersey Tax ID?|tax-id`",
-          "errorTextRequired": "Enter a 12-digit Tax ID",
-          "disclaimerMd": "**Disclaimer:** Your Tax ID will be used to identify the taxes you owe and is required information if you'd like to access your tax calendar."
-        }
-      },
-      "entityId": {
-        "default": {
-          "header": "Entity ID",
-          "headerNotBolded": "(If You Have One)",
-          "placeholder": "Enter Entity ID",
-          "description": "If your business has a 10-digit New Jersey Entity ID, enter it here. If you aren't sure if you have one or what it is, don't worry! You can leave this blank for now. (You can also get help finding your `Entity ID|entity-id`.)"
-        }
-      },
-      "employerId": {
-        "default": {
-          "header": "Employer Identification Number",
-          "placeholder": "Enter Employer ID Number",
-          "headerNotBolded": "(EIN)",
-          "description": "What is your `EIN|ein`?"
-        }
-      },
-      "naicsCode": {
-        "default": {
-          "header": "NAICS Code",
-          "editText": "Edit",
-          "addText": "Add",
-          "notEnteredText": "*Not entered*"
-        }
-      },
-      "dateOfFormation": {
-        "default": {
-          "header": "Effective Date",
-          "description": "When did you form your business? Find your `effective date|effective-date` on your `Certificate of Formation|certificate-formation`.",
-          "errorTextRequired": "Your formation should be formatted as MM/YYYY. (This information will help us inform your annual reporting due date.)"
-        }
-      },
-      "taxPin": {
-        "default": {
-          "header": "Tax PIN",
-          "placeholder": "Enter Tax PIN number",
-          "description": "What is your `Tax PIN|tax-pin`?",
-          "errorTextRequired": "Tax PIN must be 4 digits."
-        }
-      },
-      "documents": {
-        "default": {
-          "header": "Reference Documents",
-          "placeholder": "If you are an LLC, Corporation, or LLP, we will automatically add your formation documents once you [Form Your Business](/tasks/form-business-entity) on our site."
-        }
-      },
-      "notes": {
-        "default": {
-          "header": "Notes",
-          "placeholder": "Enter notes",
-          "description": "Use this space to add any information for quick reference."
-        }
-      },
-      "responsibleOwnerName": {
-        "default": {
-          "placeholder": "Type Your Responsible Owner Name",
-          "header": "Responsible Owner Name",
-          "errorTextRequired": "Please enter your responsible owner name.",
-          "description": "Enter your Last Name, First Name and Middle Initial. The name must match exactly the name listed on your tax confirmation email."
-        }
-      },
-      "cannabisLicenseType": {
-        "default": {
-          "header": "Cannabis License",
-          "description": "Which type of license do you plan to get?\n\nLearn more about the `Conditional & Conversion License|cannabis-conditional-license` or the `Annual License|cannabis-annual-license`.",
-          "radioButtonAnnualText": "Annual",
-          "radioButtonConditionalText": "Conditional"
-        }
-      },
-      "certifiedInteriorDesigner": {
-        "default": {
-          "header": "Certified Interior Designer",
-          "radioButtonTrueText": "Yes",
-          "radioButtonFalseText": "No",
-          "description": "Will you market as a certified interior designer?"
-        }
-      },
-      "requiresCpa": {
-        "default": {
-          "header": "Public Accounting Services",
-          "radioButtonTrueText": "Yes",
-          "radioButtonFalseText": "No",
-          "description": "Will you provide Certified Public Accounting Services?"
-        }
-      },
-      "employmentAgency": {
-        "default": {
-          "header": "",
-          "description": "Learn about other `employment and personnel industries|employment-agency-types`."
-        }
-      },
-      "homeBasedBusiness": {
-        "default": {
-          "header": "Home-based business",
-          "radioButtonTrueText": "Yes",
-          "radioButtonFalseText": "No",
-          "description": "Are you a `home-based business|home-based-business`?",
-          "altDescription": "Do you plan to be a `home-based business|home-based-business`?"
-        }
-      },
-      "homeContractor": {
-        "default": {
-          "header": "",
-          "description": "`Learn what activities qualify as a Home Improvement Contractor|home-contractors-activities`"
+          "FOREIGN": {
+            "description": "Where in New Jersey will your primary business activities be?"
+          }
         }
       },
       "liquorLicense": {
@@ -281,37 +306,12 @@
           "description": "Do you plan to serve liquor, including beer or wine?"
         }
       },
-      "realEstateAppraisalManagement": {
+      "entityId": {
         "default": {
-          "header": "Appraisal Management",
-          "radioButtonTrueText": "Yes",
-          "radioButtonFalseText": "No",
-          "description": "Are you looking to start an appraisal management company?"
-        }
-      },
-      "carService": {
-        "default": {
-          "header": "Car Service",
-          "radioButtonStandardText": "I will only have standard-size vehicles (taxis, limos, etc.)",
-          "radioButtonHighCapacityText": "I will only have high-capacity vehicles (15+ passenger vehicles)",
-          "radioButtonBothText": "I will have both standard and high-capacity vehicles",
-          "description": "What type of vehicles will you have?"
-        }
-      },
-      "providesStaffingService": {
-        "default": {
-          "header": "Staffing Services",
-          "radioButtonTrueText": "Yes",
-          "radioButtonFalseText": "No",
-          "description": "Will you provide staffing services?"
-        }
-      },
-      "interstateMoving": {
-        "default": {
-          "header": "Moving Goods Across State Lines",
-          "radioButtonTrueText": "Yes",
-          "radioButtonFalseText": "No",
-          "description": "Do you plan to move goods across state lines?"
+          "header": "Entity ID",
+          "headerNotBolded": "(If You Have One)",
+          "placeholder": "Enter Entity ID",
+          "description": "If your business has a 10-digit New Jersey Entity ID, enter it here. If you aren't sure if you have one or what it is, don't worry! You can leave this blank for now. (You can also get help finding your `Entity ID|entity-id`.)"
         }
       },
       "interstateLogistics": {
@@ -322,12 +322,12 @@
           "description": "Will you be driving your commercial vehicle across state lines?"
         }
       },
-      "isChildcareForSixOrMore": {
+      "realEstateAppraisalManagement": {
         "default": {
-          "header": "Childcare Services",
+          "header": "Appraisal Management",
           "radioButtonTrueText": "Yes",
           "radioButtonFalseText": "No",
-          "description": "Do you provide childcare services for 6 or more children in a dedicated space?"
+          "description": "Are you looking to start an appraisal management company?"
         }
       }
     }
