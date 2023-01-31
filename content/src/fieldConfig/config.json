@@ -565,7 +565,7 @@
     "nameHasBeenUpdatedText": "Your business name has been updated.",
     "similarUnavailableNamesText": "Here are similar business names that are already taken:",
     "availableText": "It looks like \"${name}\" might be available, but you should do an official name check using the button below.",
-    "errorTextBadInput": "Sorry, that isn't a valid company name. Try being more specific.",
+    "errorTextBadInput": "Sorry, that isn't a valid company name. Try a more specific name.",
     "errorTextSearchFailed": "Sorry, something went wrong. Please try again later.",
     "unavailableText": "Sorry, \"${name}\" isn't available. Try another name."
   },
