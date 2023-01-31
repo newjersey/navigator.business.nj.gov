@@ -67,8 +67,53 @@ describe("TaxFilingsInterfaceFactory", () => {
             businessName: taxIdBusinessName.businessName,
             filings: [filingData],
             lastUpdatedISO: currentDate.toISOString(),
+            registeredISO: currentDate.toISOString(),
           },
         });
+      });
+
+      it("removes errors if lookup succeeds", async () => {
+        const userData = generateUserData({
+          taxFilingData: generateTaxFilingData({
+            errorField: "formFailure",
+          }),
+        });
+        taxFilingClient.lookup.mockResolvedValue({
+          state: "SUCCESS",
+          filings: [],
+        });
+
+        const response = await taxFilingInterface.lookup({ userData, ...taxIdBusinessName });
+        expect(response.taxFilingData.errorField).toEqual(undefined);
+      });
+
+      it("sets registeredISO if it is undefined", async () => {
+        const userData = generateUserData({
+          taxFilingData: generateTaxFilingData({
+            registeredISO: undefined,
+          }),
+        });
+        taxFilingClient.lookup.mockResolvedValue({
+          state: "SUCCESS",
+          filings: [],
+        });
+
+        const response = await taxFilingInterface.lookup({ userData, ...taxIdBusinessName });
+        expect(response.taxFilingData.registeredISO).toEqual(currentDate.toISOString());
+      });
+
+      it("keeps existing registeredISO if it is defined", async () => {
+        const registeredISO = new Date("2023-01-01").toISOString();
+        const userData = generateUserData({
+          taxFilingData: generateTaxFilingData({ registeredISO }),
+        });
+        taxFilingClient.lookup.mockResolvedValue({
+          state: "SUCCESS",
+          filings: [],
+        });
+
+        const response = await taxFilingInterface.lookup({ userData, ...taxIdBusinessName });
+        expect(response.taxFilingData.registeredISO).toEqual(registeredISO);
       });
 
       it("sets isCalendarFullView preference to true if filings in current year was 5 or fewer and is now more than 5", async () => {
@@ -244,6 +289,7 @@ describe("TaxFilingsInterfaceFactory", () => {
             businessName: taxIdBusinessName.businessName,
             filings: [filingData],
             lastUpdatedISO: currentDate.toISOString(),
+            registeredISO: currentDate.toISOString(),
           },
         });
       });
