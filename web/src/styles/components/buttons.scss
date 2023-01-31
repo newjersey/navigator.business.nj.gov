@@ -85,19 +85,9 @@
   }
 }
 
-.btn-info {
-  background-color: $info !important;
-  &:hover {
-    background-color: $info-darker !important;
-  }
-  &:active {
-    background-color: $info-darkest !important;
-  }
-}
-
 .btn-accent-cool-lightest {
   background-color: $accent-cool-lightest !important;
-  color: $info-darkest !important;
+  color: $base-darkest !important;
   &:hover {
     background-color: $accent-cool-lighter !important;
   }

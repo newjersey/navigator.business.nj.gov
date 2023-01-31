@@ -62,11 +62,11 @@ export const FormationChooseDocuments = (): ReactElement => {
               </div>
             </td>
             <td>
-              <label htmlFor="officialFormationDocument" className={"text-success-dark text-bold"}>
+              <label htmlFor="officialFormationDocument" className={"text-primary-dark text-bold"}>
                 <Content>{state.displayContent.officialFormationDocument.contentMd}</Content>
               </label>
             </td>
-            <td className={"text-success-dark text-bold"}>
+            <td className={"text-primary-dark text-bold"}>
               {getDollarValue(state.displayContent.officialFormationDocument.cost)}
             </td>
           </tr>
@@ -84,7 +84,7 @@ export const FormationChooseDocuments = (): ReactElement => {
               <label htmlFor="certificateOfStanding" className="display-inline-flex fww">
                 <Content
                   className={
-                    state.formationFormData.certificateOfStanding ? "text-success-dark text-bold" : ""
+                    state.formationFormData.certificateOfStanding ? "text-primary-dark text-bold" : ""
                   }
                 >
                   {state.displayContent.certificateOfStanding.contentMd}
@@ -93,7 +93,7 @@ export const FormationChooseDocuments = (): ReactElement => {
               </label>
             </td>
             <td
-              className={state.formationFormData.certificateOfStanding ? "text-success-dark text-bold" : ""}
+              className={state.formationFormData.certificateOfStanding ? "text-primary-dark text-bold" : ""}
             >
               {getDollarValue(state.displayContent.certificateOfStanding.cost)}
             </td>
@@ -113,7 +113,7 @@ export const FormationChooseDocuments = (): ReactElement => {
                 <Content
                   className={
                     state.formationFormData.certifiedCopyOfFormationDocument
-                      ? "text-success-dark text-bold"
+                      ? "text-primary-dark text-bold"
                       : ""
                   }
                 >
@@ -124,7 +124,7 @@ export const FormationChooseDocuments = (): ReactElement => {
             </td>
             <td
               className={
-                state.formationFormData.certifiedCopyOfFormationDocument ? "text-success-dark text-bold" : ""
+                state.formationFormData.certifiedCopyOfFormationDocument ? "text-primary-dark text-bold" : ""
               }
             >
               {getDollarValue(state.displayContent.certifiedCopyOfFormationDocument.cost)}

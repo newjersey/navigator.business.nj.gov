@@ -130,7 +130,7 @@ const OutlineBox = (props: any): ReactElement => {
 
 export const GreenBox = (props: any): ReactElement => {
   return (
-    <div className="green-box text-normal padding-2 margin-top-2 bg-success-extra-light radius-lg">
+    <div className="green-box text-normal padding-2 margin-top-2 bg-primary-extra-light radius-lg">
       {props.children}
     </div>
   );
