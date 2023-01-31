@@ -31,6 +31,7 @@ export const taxFilingsInterfaceFactory = (apiTaxFilingClient: TaxFilingClient):
       return state === "SUCCESS" && prevFilingsCountBelowMax && newFilingsAboveMax;
     };
 
+    const now = new Date(Date.now()).toISOString();
     return {
       ...request.userData,
       preferences: {
@@ -42,9 +43,11 @@ export const taxFilingsInterfaceFactory = (apiTaxFilingClient: TaxFilingClient):
       taxFilingData: {
         ...request.userData.taxFilingData,
         businessName: request.businessName,
-        lastUpdatedISO: new Date(Date.now()).toISOString(),
-        state,
-        filings: state == "SUCCESS" ? filings : request.userData.taxFilingData.filings,
+        lastUpdatedISO: now,
+        registeredISO: state === "SUCCESS" ? request.userData.taxFilingData.registeredISO ?? now : undefined,
+        errorField: state === "SUCCESS" ? undefined : request.userData.taxFilingData.errorField,
+        state: state,
+        filings: state === "SUCCESS" ? filings : request.userData.taxFilingData.filings,
       },
     };
   };
@@ -70,6 +73,7 @@ export const taxFilingsInterfaceFactory = (apiTaxFilingClient: TaxFilingClient):
           },
         };
       }
+
       case "SUCCESS": {
         return await lookup(request);
       }
