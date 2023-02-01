@@ -83,10 +83,7 @@ export const FormationDateModal = (props: Props): ReactElement => {
         <div className="margin-bottom-3">
           <Content>{Config.formationDateModal.description}</Content>
         </div>
-        <WithErrorBar
-          hasError={!profileData.dateOfFormation || fieldStates.dateOfFormation.invalid}
-          type="ALWAYS"
-        >
+        <WithErrorBar hasError={fieldStates.dateOfFormation.invalid} type="ALWAYS">
           <FieldLabelModal
             fieldName="dateOfFormation"
             overrides={{
@@ -105,10 +102,7 @@ export const FormationDateModal = (props: Props): ReactElement => {
           />
         </WithErrorBar>
         {shouldShowMunicipalityQuestion() && (
-          <WithErrorBar
-            hasError={!profileData.municipality || fieldStates.municipality.invalid}
-            type="ALWAYS"
-          >
+          <WithErrorBar hasError={fieldStates.municipality.invalid} type="ALWAYS">
             <FieldLabelModal fieldName="municipality" />
             <OnboardingMunicipality onValidation={onValidation} fieldStates={fieldStates} />
           </WithErrorBar>
