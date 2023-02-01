@@ -1,11 +1,24 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import { OperateReference } from "@/lib/types/types";
 import { generateTaxFiling, generateTaxFilingData, generateUserData } from "@/test/factories";
+import * as shared from "@businessnjgovnavigator/shared";
 import { defaultDateFormat, getJanOfCurrentYear } from "@businessnjgovnavigator/shared";
 import { fireEvent, render, screen } from "@testing-library/react";
+import dayjs from "dayjs";
 import { FilingsCalendarSingleGrid } from "./FilingsCalendarSingleGrid";
 
 const Config = getMergedConfig();
+
+function mockShared(): typeof shared {
+  return {
+    ...jest.requireActual("@businessnjgovnavigator/shared"),
+    getCurrentDate: () => {
+      return dayjs("2023-01-31");
+    },
+  };
+}
+
+jest.mock("@businessnjgovnavigator/shared", () => mockShared());
 
 const taxFilingOne = generateTaxFiling({
   identifier: "tax-filing-one",
@@ -42,8 +55,9 @@ const operateReferences: Record<string, OperateReference> = {
 
 describe("<FilingsCalendarSingleGrid />", () => {
   it("renders a single tax filing tax filings", () => {
+    const taxFilingData = generateTaxFilingData({ filings: [taxFilingOne] });
     const userData = generateUserData({
-      taxFilingData: generateTaxFilingData({ filings: [taxFilingOne] }),
+      taxFilingData: taxFilingData,
     });
     render(<FilingsCalendarSingleGrid userData={userData} operateReferences={operateReferences} num={0} />);
 
