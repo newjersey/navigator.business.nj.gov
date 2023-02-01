@@ -1,6 +1,6 @@
 ---
-slug: impactzonebusiness-cannabis
 header: Impact Zone Businesses
+slug: impactzonebusiness-cannabis
 ---
 
 Impact Zones are municipalities that have been given this designation based on past criminal marijuana charges and higher concentrations of law enforcement activity, unemployment, and population.
@@ -11,4 +11,4 @@ An Impact Zone Business meets one of the following criteria:
 - Owned by people from an Impact Zone
 - Employing residents of Impact Zones
 
-**[Find out which municipalities are an Impact Zone](https://www.nj.gov/cannabis/businesses/priority-applications/impact-zones.shtml).**
+[Find out which municipalities are an Impact Zone.](https://www.nj.gov/cannabis/businesses/priority-applications/impact-zones.shtml)
