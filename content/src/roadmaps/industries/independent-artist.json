@@ -33,7 +33,7 @@
       "task": "get-insurance"
     }
   ],
-  "name": "Independent Artists",
+  "name": "Entertainment",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
     "canBeReseller": true,
@@ -47,7 +47,7 @@
     "isProvidesStaffingServicesApplicable": false
   },
   "isEnabled": true,
-  "additionalSearchTerms": "independent artist, independent writer, independent performer",
+  "additionalSearchTerms": "independent artist, writer, performer, content creators, multi media, media streaming, social networks, band, singer",
   "id": "independent-artist",
-  "description": "Unaffiliated artists such as writers, performers, and other creators"
+  "description": "Independent artists such as musicians, performers, and other creators."
 }

@@ -1,5 +1,5 @@
 {
-  "naicsCodes": "812910",
+  "naicsCodes": "532111",
   "defaultSectorId": "other-services",
   "canHavePermanentLocation": true,
   "roadmapSteps": [
@@ -35,17 +35,22 @@
     },
     {
       "step": 3,
-      "weight": 20,
-      "task": "petcare-license"
+      "weight": 16,
+      "task": "transportation-entity-id"
+    },
+    {
+      "step": 3,
+      "weight": 18,
+      "task": "car-rental-vehicle-registration"
     }
   ],
-  "name": "Pet Care",
+  "name": "Car Rental",
   "industryOnboardingQuestions": {
-    "canBeHomeBased": true,
-    "canBeReseller": true
+    "canBeHomeBased": false,
+    "canBeReseller": false
   },
-  "isEnabled": true,
-  "additionalSearchTerms": "dog walker, dog groomer, pet groomer, doggy daycare, kennel, boarding, shelter, pound",
-  "id": "petcare",
-  "description": "Provides care, training, grooming, or boarding services to domestic animals."
+  "isEnabled": false,
+  "additionalSearchTerms": "vehicle rental",
+  "id": "car-rental",
+  "description": "Leases vehicles to customers for less than 90 days."
 }
