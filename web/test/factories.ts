@@ -124,7 +124,7 @@ export const generateTaxFilingData = (overrides: Partial<TaxFilingData>): TaxFil
 export const generateTaxFiling = (overrides: Partial<TaxFiling>): TaxFiling => {
   return {
     identifier: `some-identifier-${randomInt()}`,
-    dueDate: getCurrentDate().add(randomInt(), "month").format(defaultDateFormat),
+    dueDate: getCurrentDate().format(defaultDateFormat),
     ...overrides,
   };
 };
