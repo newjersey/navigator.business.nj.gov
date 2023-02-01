@@ -107,6 +107,15 @@ export const SidebarCardsList = (props: Props): ReactElement => {
     );
   };
 
+  const scrollbar =
+    props.displayCertifications && props.displayFundings
+      ? "dashboard-opportunities-list fundingsLinkAndHiddenAccordion"
+      : props.displayCertifications
+      ? "dashboard-opportunities-list hiddenAccordion"
+      : props.displayFundings
+      ? "dashboard-opportunities-list fundingsLink"
+      : "dashboard-opportunities-list";
+
   return (
     <>
       <h2 className="h1-styling margin-top-0">{Config.dashboardDefaults.sidebarHeading}</h2>
@@ -115,7 +124,7 @@ export const SidebarCardsList = (props: Props): ReactElement => {
         aria-hidden={true}
       />
 
-      <div className="dashboard-opportunities-list desktop:margin-right-1">
+      <div className={`${scrollbar} desktop:margin-right-1`}>
         <>
           {props.topCards.map((card) => {
             return <SidebarCard card={card} key={card.id} />;
