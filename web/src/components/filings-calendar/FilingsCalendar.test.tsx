@@ -376,7 +376,7 @@ describe("<FilingsCalendar />", () => {
   it("sends analytics when feedback modal link is clicked and opens feedback modal", () => {
     const annualReport = generateTaxFiling({
       identifier: "annual-report",
-      dueDate: getJanOfCurrentYear().format(defaultDateFormat),
+      dueDate: getCurrentDate().format(defaultDateFormat),
     });
 
     const userData = generateUserData({
