@@ -199,6 +199,12 @@
       "dependencies": [
         "moving-company-insurance"
       ]
+    },
+    {
+      "name": "electrical-business-license",
+      "dependencies": [
+        "get-insurance"
+      ]
     }
   ]
 }
