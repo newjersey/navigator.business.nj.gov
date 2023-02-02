@@ -2,7 +2,7 @@
 header: Reserved Words
 slug: reserved-words
 ---
-N﻿ew Jersey Department of Revenue and Enterprise Services has a list of reserved words that cannot be used to describe your business purpose: 
+The N﻿ew Jersey Department of Revenue and Enterprise Services has a list of reserved words that cannot be used to describe your business purpose: 
 
 - Altius  
 - Bank
