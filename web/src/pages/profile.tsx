@@ -133,7 +133,7 @@ const ProfilePage = (props: Props): ReactElement => {
     });
   };
 
-  const onBack = () => {
+  const onBack = async () => {
     if (!userData) {
       return;
     }
@@ -141,7 +141,7 @@ const ProfilePage = (props: Props): ReactElement => {
       analytics.event.profile_back_to_roadmap.click.view_roadmap();
     }
     if (deepEqual(profileData, userData.profileData)) {
-      redirect(undefined, router.replace);
+      await redirect(undefined, router.replace);
     } else {
       setEscapeModal(true);
     }
@@ -217,7 +217,7 @@ const ProfilePage = (props: Props): ReactElement => {
     update(newUserData).then(async () => {
       setIsLoading(false);
       setAlert("SUCCESS");
-      redirect({ success: true });
+      await redirect({ success: true });
     });
   };
 
@@ -229,10 +229,10 @@ const ProfilePage = (props: Props): ReactElement => {
       analytics.event.profile_formation_date.submit.formation_date_changed();
     }
 
-    const muncipalityEnteredForFirstTime =
+    const municipalityEnteredForFirstTime =
       prevProfileData.municipality === undefined && newProfileData.municipality !== undefined;
 
-    if (muncipalityEnteredForFirstTime) {
+    if (municipalityEnteredForFirstTime) {
       analytics.event.profile_location_question.submit.location_entered_for_first_time();
     }
   };
