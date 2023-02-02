@@ -135,7 +135,13 @@
     "Nonpoint",
     "Balloonport",
     "Balloonsport",
-    "Postsecondary"
+    "Postsecondary",
+    "Altius",
+    "Citius",
+    "Con-Con",
+    "E-Com",
+    "Fortius",
+    "USPS"
   ],
   "ignorePaths": ["node_modules/**", "out/**", "web/out/**", "package.json"]
 }
