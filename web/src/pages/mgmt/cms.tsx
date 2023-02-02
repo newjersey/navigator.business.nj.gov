@@ -149,6 +149,21 @@ const Admin = () => {
     }, 3600000);
   });
 
+  useMountEffect(() => {
+    return setInterval(() => {
+      printFieldWithErrorToConsole();
+    }, 1000 * 30);
+  });
+
+  const printFieldWithErrorToConsole = () => {
+    const errorMessages = document.querySelectorAll(".css-9guxbf-ControlErrorsList");
+    if (errorMessages.length > 0) {
+      for (const element of errorMessages) {
+        console.log(`%c ${element.textContent}`, "background: #111; color: tomato; font-size: 16px;");
+      }
+    }
+  };
+
   return (
     <>
       <CMS />
