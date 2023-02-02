@@ -614,14 +614,16 @@ const ProfilePage = (props: Props): ReactElement => {
         <h2 className="padding-bottom-3" style={{ fontWeight: 300 }}>
           {Config.profileDefaults.profileTabRefTitle}
         </h2>
-        <div className="margin-top-4">
-          <FieldLabelProfile fieldName="dateOfFormation" />
-          <OnboardingDateOfFormation
-            onValidation={onValidation}
-            fieldStates={fieldStates}
-            futureAllowed={false}
-          />
-        </div>
+        {!LookupLegalStructureById(userData?.profileData.legalStructureId).hasTradeName && (
+          <>
+            <FieldLabelProfile fieldName="dateOfFormation" />
+            <OnboardingDateOfFormation
+              onValidation={onValidation}
+              fieldStates={fieldStates}
+              futureAllowed={false}
+            />
+          </>
+        )}
         <div className="margin-top-4">
           <FieldLabelProfile fieldName="entityId" />
           <OnboardingEntityId
