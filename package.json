@@ -1,6 +1,6 @@
 {
   "name": "@businessnjgovnavigator/root",
-  "version": "5.11.2",
+  "version": "5.12.0",
   "description": "This is the development repository for the work-in-progress business navigator from the New Jersey Office of Innovation. For info on the existing [Business.NJ.gov](https://business.nj.gov) site, please see the [bottom of this document](https://github.com/newjersey/navigator.business.nj.gov#businessnjgov)",
   "main": "index.js",
   "private": true,
@@ -203,7 +203,7 @@
     "rimraf": "4.1.2",
     "sass": "1.57.1",
     "sass-loader": "13.2.0",
-    "semantic-release": "20.1.0",
+    "semantic-release": "19.0.5",
     "serverless": "3.27.0",
     "serverless-dynamodb-local": "0.2.40",
     "serverless-offline-ssm": "6.2.0",
