@@ -19,6 +19,7 @@ import {
   generateUser,
   generateUserData,
   randomHomeBasedIndustry,
+  randomLegalStructure,
   randomNonHomeBasedIndustry,
   randomPublicFilingLegalStructure,
   randomTradeNameLegalStructure,
@@ -1305,6 +1306,34 @@ describe("profile", () => {
         }),
       });
       expect(screen.getByTestId("info")).toBeInTheDocument();
+    });
+
+    it("display date of formation input for non trade name businesses", () => {
+      const initialUserData = generateUserData({
+        profileData: generateProfileData({
+          businessPersona: "OWNING",
+          legalStructureId: randomLegalStructure({ requiresPublicFiling: true }).id,
+        }),
+      });
+      const newark = generateMunicipality({ displayName: "Newark" });
+      renderPage({ userData: initialUserData, municipalities: [newark] });
+      chooseTab("numbers");
+
+      expect(screen.getByLabelText("Date of formation")).toBeInTheDocument();
+    });
+
+    it("does not display date of formation input for trade name businesses", () => {
+      const initialUserData = generateUserData({
+        profileData: generateProfileData({
+          businessPersona: "OWNING",
+          legalStructureId: randomLegalStructure({ requiresPublicFiling: false }).id,
+        }),
+      });
+      const newark = generateMunicipality({ displayName: "Newark" });
+      renderPage({ userData: initialUserData, municipalities: [newark] });
+      chooseTab("numbers");
+
+      expect(screen.queryByLabelText("Date of formation")).not.toBeInTheDocument();
     });
   });
 
