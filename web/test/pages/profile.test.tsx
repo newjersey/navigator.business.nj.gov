@@ -1126,6 +1126,7 @@ describe("profile", () => {
           businessName: "Applebees",
           entityId: "1234567890",
           employerId: "123456789",
+          legalStructureId: randomLegalStructure({ requiresPublicFiling: true }).id,
           dateOfFormation,
           taxId: "123456790",
           notes: "whats appppppp",

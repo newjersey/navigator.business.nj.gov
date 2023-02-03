@@ -1,4 +1,4 @@
-import { Button } from "@/components/njwds-extended/Button";
+import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { OnboardingTaxId } from "@/components/onboarding/OnboardingTaxId";
 import { AuthAlertContext } from "@/contexts/authAlertContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
@@ -113,15 +113,16 @@ export const TaxInput = (props: Props): ReactElement => {
         <div className="flex flex-column mobile-lg:flex-row ">
           <OnboardingTaxId onValidation={onValidation} fieldStates={fieldStates} forTaxTask formInputFull />
           <FormControl margin={isMobileLg ? "none" : "dense"}>
-            <Button
-              className="mobile-lg:margin-left-1 mobile-lg:margin-top-1"
-              style="secondary"
-              onClick={onSubmit}
-              loading={isLoading}
-              typeSubmit
-            >
-              <span className="padding-x-3 no-wrap">{saveButtonText}</span>
-            </Button>
+            <div className="mobile-lg:margin-left-1 mobile-lg:margin-top-1">
+              <SecondaryButton
+                isColor="primary"
+                onClick={onSubmit}
+                isLoading={isLoading}
+                isSubmitButton={true}
+              >
+                <span className="padding-x-3 no-wrap">{saveButtonText}</span>
+              </SecondaryButton>
+            </div>
           </FormControl>
         </div>
       </ProfileDataContext.Provider>

@@ -1,5 +1,5 @@
 import { Alert } from "@/components/njwds-extended/Alert";
-import { Button } from "@/components/njwds-extended/Button";
+import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { PureMarkdownContent } from "@/components/PureMarkdownContent";
 import { DbaNameSearch } from "@/components/tasks/business-formation/name/DbaNameSearch";
 import { UnavailableProps } from "@/components/tasks/search-business-name/UnavailableProps";
@@ -30,9 +30,14 @@ export const NexusUnavailable = (props: UnavailableProps): ReactElement => {
       <div data-testid="unavailable-text">
         <Alert variant="error">
           <PureMarkdownContent components={inlineParagraphComponent}>{textBeforeButton}</PureMarkdownContent>{" "}
-          <Button style="tertiary" onClick={onClick} className="display-inline" dataTestid="search-again">
+          <UnStyledButton
+            style="tertiary"
+            onClick={onClick}
+            className="display-inline"
+            dataTestid="search-again"
+          >
             {Config.nexusNameSearch.searchAgainButtonText}
-          </Button>
+          </UnStyledButton>
           <PureMarkdownContent components={inlineParagraphComponent}>{textAfterButton}</PureMarkdownContent>
         </Alert>
       </div>

@@ -1,5 +1,5 @@
 import { Alert } from "@/components/njwds-extended/Alert";
-import { Button } from "@/components/njwds-extended/Button";
+import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { AvailableProps } from "@/components/tasks/search-business-name/AvailableProps";
 import { UnavailableProps } from "@/components/tasks/search-business-name/UnavailableProps";
 import { WithErrorBar } from "@/components/WithErrorBar";
@@ -149,16 +149,16 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
               </div>
               <div className="tablet:grid-col-4">
                 <FormControl margin="dense" className="">
-                  <Button
-                    style="secondary"
+                  <SecondaryButton
+                    isColor="primary"
                     onClick={() => {}}
-                    loading={isLoading}
-                    typeSubmit
-                    dataTestid={props.config.searchButtonTestId}
-                    noRightMargin
+                    isLoading={isLoading}
+                    isSubmitButton={true}
+                    dataTestId={props.config.searchButtonTestId}
+                    isRightMarginRemoved={true}
                   >
                     {props.config.searchButtonText}
-                  </Button>
+                  </SecondaryButton>
                 </FormControl>
               </div>
             </div>

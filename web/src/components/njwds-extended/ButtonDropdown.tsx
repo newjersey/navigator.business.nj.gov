@@ -1,4 +1,4 @@
-import { Button } from "@/components/njwds-extended/Button";
+import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { Icon } from "@/components/njwds/Icon";
 import { ClickAwayListener, Grow, MenuItem, MenuList, Paper, Popper } from "@mui/material";
 import React, { ReactElement, ReactNode, useEffect, useRef, useState } from "react";
@@ -52,9 +52,9 @@ export const ButtonDropdown = (props: Props): ReactElement => {
         {props.dropdownOptions.map((option, i) => {
           return (
             <MenuItem onClick={option.onClick} key={i}>
-              <Button style="tertiary" textBold smallText>
+              <UnStyledButton style="tertiary" textBold smallText>
                 {option.text}
-              </Button>
+              </UnStyledButton>
             </MenuItem>
           );
         })}

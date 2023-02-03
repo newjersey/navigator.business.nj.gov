@@ -1,6 +1,6 @@
 import { ButtonIcon } from "@/components/ButtonIcon";
 import { FeedbackModal } from "@/components/feedback-modal/FeedbackModal";
-import { Button } from "@/components/njwds-extended/Button";
+import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ReactElement, useState } from "react";
 
@@ -13,7 +13,7 @@ export const ReportAnIssueBar = (): ReactElement => {
       className="bg-accent-warm-extra-light height-5 flex flex-align-center flex-justify-center"
       data-testid="reportAnIssueBar"
     >
-      <Button
+      <UnStyledButton
         style="tertiary"
         onClick={() => {
           setShowModal(true);
@@ -25,7 +25,7 @@ export const ReportAnIssueBar = (): ReactElement => {
             {Config.reportAnIssueBar.reportAnIssueBarText}
           </span>
         </div>
-      </Button>
+      </UnStyledButton>
 
       <FeedbackModal
         isOpen={showModal}

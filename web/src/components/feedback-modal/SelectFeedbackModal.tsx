@@ -1,7 +1,7 @@
 import { ButtonIcon } from "@/components/ButtonIcon";
 import { Content } from "@/components/Content";
 import { ModalZeroButton } from "@/components/ModalZeroButton";
-import { Button } from "@/components/njwds-extended/Button";
+import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { FeedbackRequestModalNames } from "@/lib/types/types";
@@ -37,16 +37,17 @@ export const SelectFeedbackModal = ({ onClose, isOpen, setCurrentFeedback }: Pro
     >
       <Content className="margin-bottom-2">{Config.feedbackModal.feedbackModalBodyText}</Content>
       <div className="display-flex flex-column">
-        <Button
-          className="width-100"
-          style="narrow-accent-cool-lightest"
-          align="start"
+        <PrimaryButton
+          isColor="accent-cool-lightest"
+          isFullWidthOnDesktop={true}
+          isTextAlignedLeft={true}
           onClick={onClose}
           intercomButton
+          isUnBolded={true}
         >
           <ButtonIcon svgFilename="help-circle" />
           <span className="text-left">{Config.feedbackModal.feedbackModalIntercomButtonText}</span>
-        </Button>
+        </PrimaryButton>
 
         {userData?.formProgress === "COMPLETED" && (
           <>
@@ -57,35 +58,47 @@ export const SelectFeedbackModal = ({ onClose, isOpen, setCurrentFeedback }: Pro
               target="_blank"
               rel="noreferrer"
             >
-              <Button className="width-100" style="narrow-accent-cool-lightest" align="start">
+              <PrimaryButton
+                isColor="accent-cool-lightest"
+                isFullWidthOnDesktop={true}
+                isTextAlignedLeft={true}
+                isUnBolded={true}
+              >
                 <ButtonIcon svgFilename="chat-processing" />
                 <span className="text-left">{Config.feedbackModal.feedbackModalShareFeedbackButtonText}</span>
-              </Button>
+              </PrimaryButton>
             </a>
+            <div className="margin-top-1">
+              <PrimaryButton
+                isColor="accent-cool-lightest"
+                isFullWidthOnDesktop={true}
+                isTextAlignedLeft={true}
+                isUnBolded={true}
+                onClick={() => {
+                  return setCurrentFeedback("Report Issue");
+                }}
+              >
+                <ButtonIcon svgFilename="bug" />
+                <span className="text-left">{Config.feedbackModal.feedbackModalReportIssueButtonText}</span>
+              </PrimaryButton>
+            </div>
 
-            <Button
-              className="width-100 margin-top-1"
-              style="narrow-accent-cool-lightest"
-              align="start"
-              onClick={() => {
-                return setCurrentFeedback("Report Issue");
-              }}
-            >
-              <ButtonIcon svgFilename="bug" />
-              <span className="text-left">{Config.feedbackModal.feedbackModalReportIssueButtonText}</span>
-            </Button>
-
-            <Button
-              className="width-100 margin-top-1"
-              style="narrow-accent-cool-lightest"
-              align="start"
-              onClick={() => {
-                return setCurrentFeedback("Feature Request");
-              }}
-            >
-              <ButtonIcon svgFilename="lightbulb-on" />
-              <span className="text-left">{Config.feedbackModal.feedbackModalFeatureRequestButtonText}</span>
-            </Button>
+            <div className="margin-top-1">
+              <PrimaryButton
+                isColor="accent-cool-lightest"
+                isFullWidthOnDesktop={true}
+                isTextAlignedLeft={true}
+                isUnBolded={true}
+                onClick={() => {
+                  return setCurrentFeedback("Feature Request");
+                }}
+              >
+                <ButtonIcon svgFilename="lightbulb-on" />
+                <span className="text-left">
+                  {Config.feedbackModal.feedbackModalFeatureRequestButtonText}
+                </span>
+              </PrimaryButton>
+            </div>
           </>
         )}
       </div>

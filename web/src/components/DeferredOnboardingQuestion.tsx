@@ -1,4 +1,4 @@
-import { Button } from "@/components/njwds-extended/Button";
+import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -43,15 +43,10 @@ export const DeferredOnboardingQuestion = (props: Props) => {
     <div className="padding-3">
       {props.label}
       <div className="display-flex mobile-lg:flex-row flex-column mobile-lg:flex-align-center">
-        <div className="width-100 margin-right-1 form-input">{props.children}</div>
-        <Button
-          style="secondary"
-          className="margin-top-2"
-          onClick={onSave}
-          dataTestid="deferred-question-save"
-        >
+        <div className="width-100 margin-right-1 form-input margin-bottom-2">{props.children}</div>
+        <SecondaryButton isColor="primary" onClick={onSave} dataTestId="deferred-question-save">
           {Config.deferredLocation.deferredOnboardingSaveButtonText}
-        </Button>
+        </SecondaryButton>
       </div>
     </div>
   );
@@ -64,15 +59,16 @@ export const DeferredOnboardingQuestion = (props: Props) => {
           <div className="width-100 margin-right-1 form-input">{props.children}</div>
         </div>
         <div className="flex flex-align-center">
-          <Button
-            style="secondary"
-            className="mobile-lg:margin-top-0 margin-top-2"
-            onClick={onSave}
-            dataTestid="deferred-question-save"
-            noRightMargin
-          >
-            {Config.deferredLocation.deferredOnboardingSaveButtonText}
-          </Button>
+          <div className="mobile-lg:margin-top-0 margin-top-2">
+            <SecondaryButton
+              isColor="primary"
+              onClick={onSave}
+              dataTestId="deferred-question-save"
+              isRightMarginRemoved={true}
+            >
+              {Config.deferredLocation.deferredOnboardingSaveButtonText}
+            </SecondaryButton>
+          </div>
         </div>
       </div>
     </div>

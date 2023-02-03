@@ -1,5 +1,5 @@
 import { NavigatorLogo } from "@/components/navbar/NavigatorLogo";
-import { Button } from "@/components/njwds-extended/Button";
+import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { Icon } from "@/components/njwds/Icon";
 import { AuthAlertContext } from "@/contexts/authAlertContext";
 import { AuthContext } from "@/contexts/authContext";
@@ -92,9 +92,9 @@ export const NavBarDesktop = (): ReactElement => {
             router.push(ROUTES.profile);
           }}
         >
-          <Button style="tertiary" textBold smallText>
+          <UnStyledButton style="tertiary" textBold smallText>
             {Config.navigationDefaults.profileLinkText}
-          </Button>
+          </UnStyledButton>
         </MenuItem>
       </MenuList>
     );
@@ -109,19 +109,19 @@ export const NavBarDesktop = (): ReactElement => {
             router.push(ROUTES.profile);
           }}
         >
-          <Button style="tertiary" textBold smallText dataTestid="profile-link">
+          <UnStyledButton style="tertiary" textBold smallText dataTestid="profile-link">
             {Config.navigationDefaults.profileLinkText}
-          </Button>
+          </UnStyledButton>
         </MenuItem>{" "}
         <MenuItem onClick={handleProfileClick}>
-          <Button style="tertiary" textBold smallText>
+          <UnStyledButton style="tertiary" textBold smallText>
             {Config.navigationDefaults.myNJAccountText}
-          </Button>
+          </UnStyledButton>
         </MenuItem>
         <MenuItem onClick={handleLogoutClick}>
-          <Button style="tertiary" textBold smallText>
+          <UnStyledButton style="tertiary" textBold smallText>
             {Config.navigationDefaults.logoutButton}
-          </Button>
+          </UnStyledButton>
         </MenuItem>
       </MenuList>
     );
@@ -136,7 +136,7 @@ export const NavBarDesktop = (): ReactElement => {
               <div className="flex">
                 {!currentlyOnboarding() && (
                   <div data-testid="registration-button" className="margin-left-4">
-                    <Button
+                    <UnStyledButton
                       style="tertiary"
                       onClick={() => {
                         analytics.event.guest_menu.click.go_to_myNJ_registration();
@@ -144,11 +144,11 @@ export const NavBarDesktop = (): ReactElement => {
                       }}
                     >
                       {Config.navigationDefaults.navBarGuestRegistrationText}
-                    </Button>
+                    </UnStyledButton>
                   </div>
                 )}
                 <div data-testid="login-button" className="margin-right-4 margin-left-4">
-                  <Button
+                  <UnStyledButton
                     style="tertiary"
                     onClick={() => {
                       analytics.event.guest_menu.click.go_to_myNJ_registration();
@@ -156,7 +156,7 @@ export const NavBarDesktop = (): ReactElement => {
                     }}
                   >
                     {Config.navigationDefaults.logInButton}
-                  </Button>
+                  </UnStyledButton>
                 </div>
                 <div className="margin-right-4 text-base">|</div>
               </div>

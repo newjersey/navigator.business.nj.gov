@@ -1,5 +1,5 @@
 import { GenericTextField } from "@/components/GenericTextField";
-import { Button } from "@/components/njwds-extended/Button";
+import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
@@ -88,15 +88,11 @@ export const EinInput = (props: Props): ReactElement => {
           ariaLabel="Save your EIN"
         />
         <FormControl margin={isMobileLg ? "none" : "dense"}>
-          <Button
-            className="mobile-lg:margin-left-1 mobile-lg:margin-top-1"
-            style="secondary"
-            onClick={save}
-            loading={isLoading}
-            typeSubmit
-          >
-            <span className="padding-x-3 no-wrap">{saveButtonText}</span>
-          </Button>
+          <div className="mobile-lg:margin-left-1 mobile-lg:margin-top-1">
+            <SecondaryButton isColor="primary" onClick={save} isLoading={isLoading} isSubmitButton={true}>
+              <span className="padding-x-3 no-wrap">{saveButtonText}</span>
+            </SecondaryButton>
+          </div>
         </FormControl>
       </div>
     </div>

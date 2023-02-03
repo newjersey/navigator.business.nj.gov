@@ -1,4 +1,4 @@
-import { Button } from "@/components/njwds-extended/Button";
+import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { useContext } from "react";
@@ -24,9 +24,9 @@ export const DevOnlySkipOnboardingButton = (props: Props) => {
 
   if (state.page === 1 && process.env.NODE_ENV === "development") {
     return (
-      <Button style="secondary" onClick={devOnlySkipOnboarding}>
+      <SecondaryButton isColor="primary" onClick={devOnlySkipOnboarding}>
         skip
-      </Button>
+      </SecondaryButton>
     );
   } else {
     return <></>;

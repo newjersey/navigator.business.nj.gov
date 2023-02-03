@@ -1,5 +1,5 @@
 import { Content } from "@/components/Content";
-import { Button } from "@/components/njwds-extended/Button";
+import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { Icon } from "@/components/njwds/Icon";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
 import { WithErrorBar } from "@/components/WithErrorBar";
@@ -57,9 +57,13 @@ export const BusinessFormationTextBox = (props: Props): ReactElement => {
         </div>
         <div className="mobile-lg:margin-left-auto flex mobile-lg:flex-justify-center">
           {!isExpanded && (
-            <Button style="tertiary" onClick={handleAddButtonClick} dataTestid={`show-${props.fieldName}`}>
+            <UnStyledButton
+              style="tertiary"
+              onClick={handleAddButtonClick}
+              dataTestid={`show-${props.fieldName}`}
+            >
               {props.addButtonText}
-            </Button>
+            </UnStyledButton>
           )}
         </div>
       </div>
@@ -93,7 +97,7 @@ export const BusinessFormationTextBox = (props: Props): ReactElement => {
                 <></>
               ) : (
                 <div className="grid-col-auto margin-x-2 margin-top-3 display-flex flex-column flex-justify-center">
-                  <Button
+                  <UnStyledButton
                     style="tertiary"
                     onClick={() => {
                       return removeEntry();
@@ -106,7 +110,7 @@ export const BusinessFormationTextBox = (props: Props): ReactElement => {
                     >
                       delete
                     </Icon>
-                  </Button>
+                  </UnStyledButton>
                 </div>
               )}
             </div>

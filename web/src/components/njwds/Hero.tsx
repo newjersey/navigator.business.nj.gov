@@ -1,5 +1,5 @@
 import { LandingPageTiles } from "@/components/LandingPageTiles";
-import { Button } from "@/components/njwds-extended/Button";
+import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { MediaQueries } from "@/lib/PageSizes";
 import { ABStorageFactory } from "@/lib/storage/ABStorage";
@@ -85,9 +85,15 @@ export const Hero = (): ReactElement => {
                 <div className="font-sans-lg line-height-120 text-base-dark margin-bottom-4 desktop:margin-bottom-3">
                   {landingPageConfig.section2SupportingText}
                 </div>
-                <Button style="primary-big" onClick={section2CTAOnClick} widthAutoOnMobile noRightMargin>
+                <PrimaryButton
+                  isColor="primary"
+                  onClick={section2CTAOnClick}
+                  isNotFullWidthOnMobile={true}
+                  isRightMarginRemoved={true}
+                  isLargeButton={true}
+                >
                   {landingPageConfig.section2CallToActionText}
-                </Button>
+                </PrimaryButton>
               </div>
             </div>
           </div>
@@ -115,14 +121,15 @@ export const Hero = (): ReactElement => {
               <div className="font-sans-lg line-height-120 text-base-dark margin-bottom-4 desktop:margin-bottom-3">
                 {landingPageConfig.section3SupportingText}
               </div>
-              <Button
-                style="accent-cool-darker-big"
+              <PrimaryButton
+                isColor="accent-cool-darker"
                 onClick={section3CTAOnClick}
-                widthAutoOnMobile
-                noRightMargin
+                isNotFullWidthOnMobile={true}
+                isRightMarginRemoved={true}
+                isLargeButton={true}
               >
                 {landingPageConfig.section3CallToActionText}
-              </Button>
+              </PrimaryButton>
             </div>
           </div>
           <div className="desktop:grid-col-5 order-first desktop:order-last">

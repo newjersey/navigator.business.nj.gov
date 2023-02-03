@@ -1,5 +1,6 @@
 import { Content } from "@/components/Content";
-import { Button } from "@/components/njwds-extended/Button";
+import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
+import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -155,18 +156,18 @@ export const CannabisApplicationRequirementsTab = (props: Props): ReactElement =
         style={{ marginTop: "auto" }}
         className="flex flex-justify-end bg-base-lightest margin-x-neg-4 padding-3 margin-top-3 margin-bottom-neg-4 flex-column mobile-lg:flex-row radius-bottom-lg"
       >
-        <Button style="secondary" dataTestid="backButton" onClick={props.onBack}>
+        <SecondaryButton isColor="primary" dataTestId="backButton" onClick={props.onBack}>
           {Config.cannabisPriorityStatus.backButtonText}
-        </Button>
+        </SecondaryButton>
         <a
           className="mobile-lg:margin-top-0 margin-top-1"
           href={props.task.callToActionLink}
           target="_blank"
           rel="noreferrer noopener"
         >
-          <Button style="primary" dataTestid="certificationButton" noRightMargin>
+          <PrimaryButton isColor="primary" dataTestId="certificationButton" isRightMarginRemoved>
             {props.task.callToActionText}
-          </Button>
+          </PrimaryButton>
         </a>
       </div>
     </div>

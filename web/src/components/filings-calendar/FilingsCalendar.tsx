@@ -4,7 +4,7 @@ import { FeedbackModal } from "@/components/feedback-modal/FeedbackModal";
 import { FilingsCalendarAsList } from "@/components/filings-calendar/FilingsCalendarAsList";
 import { FilingsCalendarGrid } from "@/components/filings-calendar/FilingsCalendarGrid";
 import { FilingsCalendarTaxAccess } from "@/components/filings-calendar/FilingsCalendarTaxAccess";
-import { Button } from "@/components/njwds-extended/Button";
+import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -84,7 +84,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
 
     if (displayToggleButton) {
       return userData?.preferences.isCalendarFullView ? (
-        <Button
+        <UnStyledButton
           style="light"
           noRightMargin
           className="font-body-2xs padding-y-05 padding-x-1"
@@ -92,9 +92,9 @@ export const FilingsCalendar = (props: Props): ReactElement => {
         >
           <Icon className="usa-icon--size-3 margin-right-05">list</Icon>
           {Config.dashboardDefaults.calendarListViewButton}
-        </Button>
+        </UnStyledButton>
       ) : (
-        <Button
+        <UnStyledButton
           style="light"
           noRightMargin
           className="font-body-2xs padding-y-05 padding-x-1"
@@ -102,7 +102,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
         >
           <Icon className="usa-icon--size-3 margin-right-05">grid_view</Icon>
           {Config.dashboardDefaults.calendarGridViewButton}
-        </Button>
+        </UnStyledButton>
       );
     }
 
@@ -136,7 +136,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
             <div className="margin-top-2">
               <div className="h6-styling">
                 <span className="text-base-dark">{Config.dashboardDefaults.calendarLegalText}</span>{" "}
-                <Button
+                <UnStyledButton
                   style="tertiary"
                   onClick={() => {
                     analytics.event.tax_calendar_feedback_button.click.show_feedback_modal();
@@ -144,7 +144,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
                   }}
                 >
                   <span>{Config.dashboardDefaults.calendarFeedbackButtonText}</span>
-                </Button>
+                </UnStyledButton>
               </div>
             </div>
           </>

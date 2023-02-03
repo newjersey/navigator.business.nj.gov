@@ -1,6 +1,6 @@
 import { ButtonIcon } from "@/components/ButtonIcon";
 import { FeedbackModal } from "@/components/feedback-modal/FeedbackModal";
-import { Button } from "@/components/njwds-extended/Button";
+import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { ReactElement, useState } from "react";
 
@@ -13,18 +13,19 @@ export const BetaBar = (): ReactElement => {
       data-testid="beta-bar"
     >
       <span className="margin-left-1 margin-right-1">{Config.betaBar.betaMainText}</span>
-      <Button
-        className="padding-y-0"
-        style="secondary-blue-narrow"
-        smallText
+      <PrimaryButton
+        isColor="secondary"
+        isUnBolded={true}
+        isVerticalPaddingRemoved={true}
+        isSmallerText={true}
         onClick={() => {
           return setShowModal(true);
         }}
-        widthAutoOnMobile
+        isNotFullWidthOnMobile={true}
       >
         <ButtonIcon svgFilename="lightbulb-on-warning-light" sizePx="16px" />
         {Config.betaBar.betaModalButtonText}
-      </Button>
+      </PrimaryButton>
 
       <FeedbackModal
         isOpen={showModal}

@@ -1,4 +1,4 @@
-import { Button } from "@/components/njwds-extended/Button";
+import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { PureMarkdownContent } from "@/components/PureMarkdownContent";
 import { ContextualInfo, ContextualInfoContext } from "@/contexts/contextualInfoContext";
 import { fetchContextualInfo } from "@/lib/async-content-fetchers/fetchContextualInfo";
@@ -37,10 +37,10 @@ export const ContextualInfoLink = (props: any): ReactElement => {
   };
 
   return (
-    <Button style="tertiary" dataTestid={contextualInfoId} onClick={setContext}>
+    <UnStyledButton style="tertiary" dataTestid={contextualInfoId} onClick={setContext}>
       <span className="dashed-underline line-height-body-5">
         <PureMarkdownContent>{displayText}</PureMarkdownContent>
       </span>
-    </Button>
+    </UnStyledButton>
   );
 };
