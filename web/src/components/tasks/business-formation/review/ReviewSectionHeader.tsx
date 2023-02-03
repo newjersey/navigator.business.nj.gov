@@ -1,4 +1,4 @@
-import { Button } from "@/components/njwds-extended/Button";
+import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { LookupStepIndexByName } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { FormationStepNames } from "@/lib/types/types";
@@ -21,7 +21,7 @@ export const ReviewSectionHeader = (props: Props): ReactElement => {
         <h2 className="h3-styling">{props.header}</h2>
       </div>
       <div className="margin-left-2">
-        <Button
+        <UnStyledButton
           style="tertiary"
           onClick={() => {
             setStepIndex(LookupStepIndexByName(props.stepName));
@@ -31,7 +31,7 @@ export const ReviewSectionHeader = (props: Props): ReactElement => {
           dataTestid={`edit-${props.testId}-step`}
         >
           {Config.businessFormationDefaults.editButtonText}
-        </Button>
+        </UnStyledButton>
       </div>
     </div>
   );

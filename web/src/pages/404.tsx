@@ -1,5 +1,5 @@
 import { Content } from "@/components/Content";
-import { Button } from "@/components/njwds-extended/Button";
+import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -21,9 +21,9 @@ const PageNotFound = (): ReactElement => {
               <Content>{Config.pageNotFoundError.errorDescriptionPt1}</Content>
               <div className="tablet:display-flex">
                 <Content>{Config.pageNotFoundError.errorDescriptionPt2}</Content>
-                <Button className="margin-left-05" style="tertiary" underline intercomButton>
+                <UnStyledButton className="margin-left-05" style="tertiary" underline intercomButton>
                   <Content>{Config.pageNotFoundError.errorChatWithExpert}</Content>
-                </Button>
+                </UnStyledButton>
               </div>
             </div>
           </div>

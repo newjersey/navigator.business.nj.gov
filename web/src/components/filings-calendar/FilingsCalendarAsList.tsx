@@ -1,4 +1,4 @@
-import { Button } from "@/components/njwds-extended/Button";
+import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { sortFilterFilingsWithinAYear } from "@/lib/domain-logic/filterFilings";
 import { OperateReference } from "@/lib/types/types";
@@ -77,13 +77,13 @@ export const FilingsCalendarAsList = (props: Props): ReactElement => {
       })}
 
       {filingsGroupedByDate.length > numberOfVisibleCalendarEntries && (
-        <Button
+        <UnStyledButton
           style={"tertiary"}
           underline={true}
           onClick={() => setNumberOfVisibleCalendarEntries((previous) => previous + LIST_VIEW_MORE_INCREMENT)}
         >
           {Config.dashboardDefaults.calendarListViewMoreButton}
-        </Button>
+        </UnStyledButton>
       )}
       <hr />
     </div>

@@ -4,7 +4,7 @@ import { Task } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import Link from "next/link";
 import { ReactElement } from "react";
-import { Button } from "../njwds-extended/Button";
+import { UnStyledButton } from "../njwds-extended/UnStyledButton";
 
 interface Props {
   task: Task;
@@ -19,7 +19,7 @@ export const MiniRoadmapTask = (props: Props): ReactElement => {
   return (
     <Link href={`/tasks/${props.task.urlSlug}`}>
       <div>
-        <Button
+        <UnStyledButton
           style="tertiary"
           onClick={() => {
             analytics.event.task_mini_roadmap_task.click.go_to_task();
@@ -41,7 +41,7 @@ export const MiniRoadmapTask = (props: Props): ReactElement => {
             )}
             <span className="margin-right-05">{props.task.name}</span>
           </div>
-        </Button>
+        </UnStyledButton>
       </div>
     </Link>
   );

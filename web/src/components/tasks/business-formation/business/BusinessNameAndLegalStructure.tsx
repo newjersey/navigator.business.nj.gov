@@ -1,6 +1,6 @@
 import { Content } from "@/components/Content";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
-import { Button } from "@/components/njwds-extended/Button";
+import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { LookupStepIndexByName } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -65,7 +65,7 @@ export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): 
         </div>
         <div className="margin-left-2">
           {isReviewStep && (
-            <Button
+            <UnStyledButton
               style="tertiary"
               onClick={() => {
                 analytics.event.business_formation_business_name_edit.click.go_to_name_search_step();
@@ -76,7 +76,7 @@ export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): 
               dataTestid="edit-business-name-step"
             >
               {Config.businessFormationDefaults.editButtonText}
-            </Button>
+            </UnStyledButton>
           )}
         </div>
       </div>
@@ -93,7 +93,7 @@ export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): 
             {""}
           </span>
           {!isReviewStep && (
-            <Button
+            <UnStyledButton
               style="tertiary"
               widthAutoOnMobile
               onClick={() => {
@@ -103,7 +103,7 @@ export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): 
               dataTestid="edit-business-name"
             >
               {Config.businessFormationDefaults.editButtonText}
-            </Button>
+            </UnStyledButton>
           )}
         </div>
         <div
@@ -114,7 +114,7 @@ export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): 
           <span>{legalStructureName()}</span>
           <span> </span>
           {!isReviewStep && (
-            <Button
+            <UnStyledButton
               style="tertiary"
               widthAutoOnMobile
               onClick={showLegalStructureModal}
@@ -122,7 +122,7 @@ export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): 
               dataTestid="edit-legal-structure"
             >
               {Config.businessFormationDefaults.editButtonText}
-            </Button>
+            </UnStyledButton>
           )}
         </div>
       </div>

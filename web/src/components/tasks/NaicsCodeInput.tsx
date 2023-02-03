@@ -1,6 +1,6 @@
 import { Content, ExternalLink } from "@/components/Content";
 import { GenericTextField } from "@/components/GenericTextField";
-import { Button } from "@/components/njwds-extended/Button";
+import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
@@ -228,15 +228,10 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
       {displayInput || naicsCode != "" ? (
         <>
           <hr className="margin-y-2" />
-          <div className="flex flex-row">
-            <Button
-              style="secondary"
-              className="margin-left-auto"
-              onClick={saveNaicsCode}
-              loading={isLoading}
-            >
+          <div className="flex flex-row margin-left-auto">
+            <SecondaryButton isColor="primary" onClick={saveNaicsCode} isLoading={isLoading}>
               {saveButtonText}
-            </Button>
+            </SecondaryButton>
           </div>
         </>
       ) : (

@@ -1,18 +1,7 @@
 import { CircularProgress } from "@mui/material";
 import React, { ReactElement, useEffect, useRef, useState } from "react";
 interface Props {
-  style:
-    | "primary"
-    | "secondary"
-    | "secondary-blue"
-    | "secondary-blue-narrow"
-    | "light"
-    | "narrow-accent-cool-lightest"
-    | "tertiary"
-    | "narrow-light"
-    | "primary-big"
-    | "secondary-big"
-    | "accent-cool-darker-big";
+  style: "tertiary" | "light" | "narrow-light";
   children: React.ReactNode;
   onClick?: (() => void) | ((event: React.MouseEvent) => Promise<void>) | ((event: React.MouseEvent) => void);
   dataTestid?: string;
@@ -31,57 +20,24 @@ interface Props {
   fullWidth?: boolean;
 }
 
-export const Button = (props: Props): ReactElement => {
+export const UnStyledButton = (props: Props): ReactElement => {
   let style = "";
-  let disabledClass = "";
+  const disabledClass = "usa-button--disabled";
   const widthRef = useRef<HTMLInputElement | null>(null);
   const [width, setWidth] = useState<number>();
   const [height, setHeight] = useState<number>();
 
   switch (props.style) {
-    case "primary":
-      style = "usa-button padding-y-11px";
-      disabledClass = "usa-button--disabled";
-      break;
-    case "secondary":
-      style = "usa-button usa-button--outline padding-y-11px";
-      disabledClass = "usa-button--outline-disabled";
-      break;
-    case "secondary-blue":
-      style = "usa-button usa-button--secondary text-normal padding-y-11px";
-      disabledClass = "usa-button--secondary-disabled";
-      break;
-    case "secondary-blue-narrow":
-      style = "usa-button usa-button--secondary text-normal";
-      disabledClass = "usa-button--secondary-disabled";
-      break;
     case "light":
       style =
         "usa-button bg-transparent text-normal text-base border-1px border-base-light hide-unhide-button padding-y-11px";
       break;
-    case "narrow-accent-cool-lightest":
-      style = "usa-button btn-accent-cool-lightest text-normal padding-y-11px";
-      break;
-
     case "tertiary":
       style = "usa-button usa-button--unstyled width-auto font-weight-inherit font-size-inherit";
       break;
     case "narrow-light":
       style =
         "usa-button usa-tag bg-transparent text-normal text-base border-1px border-base-light hide-unhide-button";
-      break;
-
-    case "primary-big":
-      style = "usa-button usa-button--big padding-y-14px";
-      disabledClass = "usa-button--disabled";
-      break;
-    case "accent-cool-darker-big":
-      style = "usa-button usa-button--big btn-accent-cool-darker padding-y-14px";
-      disabledClass = "usa-button--disabled";
-      break;
-    case "secondary-big":
-      style = "usa-button usa-button--big usa-button--outline padding-y-14px";
-      disabledClass = "usa-button--outline-disabled";
       break;
   }
   const showDisabledClass = props.loading ? disabledClass : "";

@@ -1,6 +1,6 @@
 import { Content } from "@/components/Content";
-import { Button } from "@/components/njwds-extended/Button";
 import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
+import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { Icon } from "@/components/njwds/Icon";
 import { AddressModal } from "@/components/tasks/business-formation/contacts/AddressModal";
 import { ValidatedCheckbox } from "@/components/ValidatedCheckbox";
@@ -289,7 +289,7 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
           </WithErrorBar>
 
           {props.addressData.length <= 9 && (
-            <Button
+            <UnStyledButton
               style="tertiary"
               onClick={() => {
                 setEditIndex(undefined);
@@ -304,7 +304,7 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
               >
                 {props.displayContent.newButtonText}
               </span>
-            </Button>
+            </UnStyledButton>
           )}
         </div>
       </div>

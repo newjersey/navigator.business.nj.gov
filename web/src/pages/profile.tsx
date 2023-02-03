@@ -1,6 +1,7 @@
 import { LoadingIndicator } from "@/components/LoadingIndicator";
 import { NavBar } from "@/components/navbar/NavBar";
-import { Button } from "@/components/njwds-extended/Button";
+import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
+import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { SidebarPageLayout } from "@/components/njwds-extended/SidebarPageLayout";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { FieldLabelProfile } from "@/components/onboarding/FieldLabelProfile";
@@ -724,25 +725,25 @@ const ProfilePage = (props: Props): ReactElement => {
 
                         <hr className="margin-top-7 margin-bottom-2" aria-hidden={true} />
                         <div className="float-right fdr">
-                          <Button
-                            style="secondary"
+                          <SecondaryButton
+                            isColor="primary"
                             onClick={() => {
                               return onBack();
                             }}
-                            dataTestid="back"
+                            dataTestId="back"
                           >
                             {Config.profileDefaults.backButtonText}
-                          </Button>
-                          <Button
-                            style="primary"
-                            typeSubmit
+                          </SecondaryButton>
+                          <PrimaryButton
+                            isColor="primary"
+                            isSubmitButton={true}
                             onClick={() => {}}
-                            noRightMargin
-                            dataTestid="save"
-                            loading={isLoading}
+                            isRightMarginRemoved={true}
+                            dataTestId="save"
+                            isLoading={isLoading}
                           >
                             {Config.profileDefaults.saveButtonText}
-                          </Button>
+                          </PrimaryButton>
                         </div>
                       </form>
                     </>

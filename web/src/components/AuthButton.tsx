@@ -1,4 +1,4 @@
-import { Button } from "@/components/njwds-extended/Button";
+import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { AuthContext } from "@/contexts/authContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { triggerSignIn } from "@/lib/auth/sessionHelper";
@@ -18,7 +18,7 @@ export const AuthButton = (props?: Props): ReactElement => {
 
   const loginButton = () => {
     return (
-      <Button
+      <UnStyledButton
         style="tertiary"
         dataTestid="login-button"
         noRightMargin
@@ -29,13 +29,13 @@ export const AuthButton = (props?: Props): ReactElement => {
         }}
       >
         {Config.navigationDefaults.logInButton}
-      </Button>
+      </UnStyledButton>
     );
   };
 
   const logoutButton = () => {
     return (
-      <Button
+      <UnStyledButton
         style="tertiary"
         noRightMargin
         onClick={() => {
@@ -45,7 +45,7 @@ export const AuthButton = (props?: Props): ReactElement => {
         <span className={props?.landing ? "text-primary" : "text-base"}>
           {Config.navigationDefaults.logoutButton}
         </span>
-      </Button>
+      </UnStyledButton>
     );
   };
 

@@ -1,5 +1,5 @@
 import { ModalZeroButton } from "@/components/ModalZeroButton";
-import { Button } from "@/components/njwds-extended/Button";
+import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { Breakpoint } from "@mui/material";
 import { ReactNode } from "react";
 
@@ -22,9 +22,14 @@ export const ModalOneButton = (props: Props) => {
       data-testid="modal-content"
     >
       <div className="mobile-lg:margin-left-auto display-flex flex-column-reverse mobile-lg:flex-row">
-        <Button style="primary" noRightMargin loading={props.isLoading} onClick={props.primaryButtonOnClick}>
+        <PrimaryButton
+          isColor="primary"
+          isRightMarginRemoved={true}
+          isLoading={props.isLoading}
+          onClick={props.primaryButtonOnClick}
+        >
           {props.primaryButtonText}
-        </Button>
+        </PrimaryButton>
       </div>
     </div>
   );

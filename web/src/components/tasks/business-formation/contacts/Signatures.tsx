@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Content } from "@/components/Content";
 import { GenericTextField } from "@/components/GenericTextField";
-import { Button } from "@/components/njwds-extended/Button";
+import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { Icon } from "@/components/njwds/Icon";
 import {
   createSignedEmptyFormationObject,
@@ -153,7 +153,7 @@ export const Signatures = (): ReactElement => {
       <div className="grid-col-auto padding-left-1 flex-column flex-align-center flex-justify-center">
         <div style={{ height: "56px" }} className="display-flex flex-column flex-justify-center">
           {visible ? (
-            <Button
+            <UnStyledButton
               style="tertiary"
               onClick={onClick}
               className="display-flex flex-column flex-justify-center"
@@ -161,7 +161,7 @@ export const Signatures = (): ReactElement => {
               <Icon className="font-body-lg" label="delete additional signer">
                 delete
               </Icon>
-            </Button>
+            </UnStyledButton>
           ) : (
             <Icon className="font-body-lg visibility-hidden">delete</Icon>
           )}
@@ -347,7 +347,7 @@ export const Signatures = (): ReactElement => {
                       })}
                   </div>
                   {!isTabletAndUp && (
-                    <Button
+                    <UnStyledButton
                       style="tertiary"
                       className="margin-y-1"
                       underline
@@ -356,7 +356,7 @@ export const Signatures = (): ReactElement => {
                       }}
                     >
                       {Config.businessFormationDefaults.signatureDeleteMobileText}
-                    </Button>
+                    </UnStyledButton>
                   )}
                 </div>
               </WithErrorBar>
@@ -365,12 +365,12 @@ export const Signatures = (): ReactElement => {
         })}
 
         {(state.formationFormData.signers?.length ?? 0) < 10 && (
-          <Button style="tertiary" onClick={addSignerField} dataTestid="add-new-signer">
+          <UnStyledButton style="tertiary" onClick={addSignerField} dataTestid="add-new-signer">
             <Icon>add</Icon>{" "}
             <span className="text-underline" style={{ textUnderlinePosition: "under" }}>
               {Config.businessFormationDefaults.addNewSignerButtonText}
             </span>
-          </Button>
+          </UnStyledButton>
         )}
         <p className="margin-bottom-2">
           <i>* {Config.businessFormationDefaults.signatureAidText}</i>

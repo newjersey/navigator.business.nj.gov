@@ -1,4 +1,4 @@
-import { Button } from "@/components/njwds-extended/Button";
+import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { LookupStepIndexByName } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { MediaQueries } from "@/lib/PageSizes";
@@ -27,7 +27,7 @@ export const ReviewText = (props: Props) => {
           <h2 className="h3-styling">{props.header}</h2>
         </div>
         <div className="margin-left-2">
-          <Button
+          <UnStyledButton
             style="tertiary"
             onClick={() => {
               setStepIndex(LookupStepIndexByName(props.stepName));
@@ -37,7 +37,7 @@ export const ReviewText = (props: Props) => {
             dataTestid={`edit-${kebabCaseFieldName}`}
           >
             {Config.businessFormationDefaults.editButtonText}
-          </Button>
+          </UnStyledButton>
         </div>
       </div>
       <div className={`${isTabletAndUp ? "display-flex" : "display-block"}`} data-testid={kebabCaseFieldName}>

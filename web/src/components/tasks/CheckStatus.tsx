@@ -1,5 +1,5 @@
 import { Alert } from "@/components/njwds-extended/Alert";
-import { Button } from "@/components/njwds-extended/Button";
+import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { LicenseSearchError } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
@@ -173,16 +173,16 @@ export const CheckStatus = (props: Props): ReactElement => {
         </div>
         <div className="flex flex-row">
           <div className="mla margin-top-4">
-            <Button
-              style="secondary"
-              typeSubmit
-              noRightMargin
+            <SecondaryButton
+              isColor="primary"
+              isSubmitButton={true}
+              isRightMarginRemoved={true}
               onClick={() => {}}
-              loading={props.isLoading}
-              dataTestid="check-status-submit"
+              isLoading={props.isLoading}
+              dataTestId="check-status-submit"
             >
               {Config.licenseSearchTask.submitText}
-            </Button>
+            </SecondaryButton>
           </div>
         </div>
       </form>

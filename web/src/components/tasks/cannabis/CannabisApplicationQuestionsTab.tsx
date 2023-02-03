@@ -1,5 +1,5 @@
 import { Content } from "@/components/Content";
-import { Button } from "@/components/njwds-extended/Button";
+import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { MicrobusinessRadioQuestion } from "@/components/tasks/cannabis/MicrobusinessRadioQuestion";
 import { PriorityStatusCheckboxes } from "@/components/tasks/cannabis/PriorityStatusCheckboxes";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -51,14 +51,11 @@ export const CannabisApplicationQuestionsTab = (props: Props): ReactElement => {
         style={{ marginTop: "auto" }}
         className="flex flex-justify-end bg-base-lightest margin-x-neg-4 padding-3 margin-top-3 margin-bottom-neg-4 flex-column mobile-lg:flex-row radius-bottom-lg"
       >
-        <Button
-          className="mobile-lg:margin-top-0 margin-top-1"
-          style="primary"
-          noRightMargin
-          onClick={props.onNextTab}
-        >
-          {Config.cannabisApplyForLicense.viewRequirementsButton}
-        </Button>
+        <div className="mobile-lg:margin-top-0 margin-top-1">
+          <PrimaryButton isColor="primary" isRightMarginRemoved={true} onClick={props.onNextTab}>
+            {Config.cannabisApplyForLicense.viewRequirementsButton}
+          </PrimaryButton>
+        </div>
       </div>
     </div>
   );

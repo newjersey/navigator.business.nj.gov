@@ -1,5 +1,5 @@
 import { AuthButton } from "@/components/AuthButton";
-import { Button } from "@/components/njwds-extended/Button";
+import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
@@ -21,7 +21,7 @@ export const NavBarLanding = (): ReactElement => {
         <span className="margin-right-2">
           <AuthButton landing />
         </span>
-        <Button
+        <UnStyledButton
           style="tertiary"
           onClick={() => {
             analytics.event.landing_page_navbar_register.click.go_to_onboarding();
@@ -29,7 +29,7 @@ export const NavBarLanding = (): ReactElement => {
           }}
         >
           {Config.navigationDefaults.registerButton}
-        </Button>
+        </UnStyledButton>
       </div>
     </nav>
   );

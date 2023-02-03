@@ -1,6 +1,6 @@
 import { Content } from "@/components/Content";
 import { GenericTextField } from "@/components/GenericTextField";
-import { Button } from "@/components/njwds-extended/Button";
+import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { Icon } from "@/components/njwds/Icon";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
@@ -64,9 +64,9 @@ export const Provisions = (): ReactElement => {
         </div>
         <div className="mobile-lg:margin-left-auto flex mobile-lg:flex-justify-center">
           {!isExpanded && (
-            <Button style="tertiary" onClick={handleAddButtonClick} dataTestid="show-provisions">
+            <UnStyledButton style="tertiary" onClick={handleAddButtonClick} dataTestid="show-provisions">
               {Config.businessFormationDefaults.provisionsAddButtonText}
-            </Button>
+            </UnStyledButton>
           )}
         </div>
       </div>
@@ -102,7 +102,7 @@ export const Provisions = (): ReactElement => {
                 />
               </div>
               <div className="grid-col-auto margin-x-2 margin-top-3 display-flex flex-column flex-justify-center">
-                <Button
+                <UnStyledButton
                   style="tertiary"
                   onClick={() => {
                     return removeProvision(index);
@@ -112,7 +112,7 @@ export const Provisions = (): ReactElement => {
                   <Icon className="font-body-lg" label="remove provision">
                     delete
                   </Icon>
-                </Button>
+                </UnStyledButton>
               </div>
             </div>
             <div className="text-base-dark margin-top-1 margin-bottom-2">
@@ -122,7 +122,7 @@ export const Provisions = (): ReactElement => {
         );
       })}
       {isExpanded && state.formationFormData.provisions && state.formationFormData.provisions.length < 10 && (
-        <Button
+        <UnStyledButton
           onClick={handleAddAnother}
           className="margin-top-2"
           style="tertiary"
@@ -130,7 +130,7 @@ export const Provisions = (): ReactElement => {
         >
           <Icon>add</Icon>
           {Config.businessFormationDefaults.provisionsAddAnotherButtonText}
-        </Button>
+        </UnStyledButton>
       )}
     </>
   );

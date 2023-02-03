@@ -1,7 +1,8 @@
 import { Content } from "@/components/Content";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
-import { Button } from "@/components/njwds-extended/Button";
 import { HorizontalStepper } from "@/components/njwds-extended/HorizontalStepper";
+import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
+import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { TaskCTA } from "@/components/TaskCTA";
 import { DbaFormationSteps } from "@/components/tasks/business-formation/DbaFormationSteps";
 import { DbaFormationStepsConfiguration } from "@/components/tasks/business-formation/DbaFormationStepsConfiguration";
@@ -120,24 +121,24 @@ export const DbaFormationPaginator = (): ReactElement => {
     };
 
     return (
-      <Button
-        style="primary"
+      <PrimaryButton
+        isColor="primary"
         onClick={() => {
           return onMoveToStep(state.stepIndex + 1, { moveType: "NEXT_BUTTON" });
         }}
-        widthAutoOnMobile
-        noRightMargin
-        dataTestid="next-button"
+        isNotFullWidthOnMobile={true}
+        isRightMarginRemoved={true}
+        dataTestId="next-button"
       >
         {getForwardButtonText()}
-      </Button>
+      </PrimaryButton>
     );
   };
 
   const BackButton = () => (
-    <Button style="secondary" widthAutoOnMobile onClick={onPreviousButtonClick}>
+    <SecondaryButton isColor="primary" isNotFullWidthOnMobile={true} onClick={onPreviousButtonClick}>
       {Config.businessFormationDefaults.previousButtonText}
-    </Button>
+    </SecondaryButton>
   );
 
   const ButtonWrapper = (props: { children: ReactNode }) => {

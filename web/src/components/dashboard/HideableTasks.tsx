@@ -1,5 +1,5 @@
 import { Roadmap } from "@/components/dashboard/Roadmap";
-import { Button } from "@/components/njwds-extended/Button";
+import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
@@ -40,7 +40,7 @@ export const HideableTasks = (): ReactElement => {
       <div className={`${isTabletAndUp ? "flex flex-align-center" : ""} margin-bottom-205`}>
         <h2 className="margin-bottom-0 text-medium">{Config.dashboardDefaults.upAndRunningTaskHeader}</h2>
         <div className={`mla ${isTabletAndUp ? "" : "margin-top-2"}`}>
-          <Button style="narrow-light" onClick={handleToggleClick} widthAutoOnMobile>
+          <UnStyledButton style="narrow-light" onClick={handleToggleClick} widthAutoOnMobile>
             <div className="fdr fac">
               <Icon>{userData?.preferences.isHideableRoadmapOpen ? "visibility_off" : "visibility"}</Icon>
               <span className="margin-left-05 line-height-sans-2">
@@ -49,7 +49,7 @@ export const HideableTasks = (): ReactElement => {
                   : Config.dashboardDefaults.showTaskText}
               </span>
             </div>
-          </Button>
+          </UnStyledButton>
         </div>
       </div>
       <hr className="margin-bottom-3 margin-top-0" aria-hidden={true} />
