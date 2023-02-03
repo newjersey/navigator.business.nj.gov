@@ -126,7 +126,7 @@
     "partnershipRightsCanMakeDistributions": "Do general partners have the right to make distributions to any partner? (This includes a return of all or any part of the partner's contributions).",
     "legalStructureWarningModalBody": "If you change your proposed business structure in the Navigator profile, you might need to complete a different form. Don't worry, once you update your profile we'll tell you which form you need and where to complete it.",
     "reviewStepPartnershipHeader": "Partnership Rights",
-    "businessPurposeBodyText": "Describe your business' primary activities but refrain from using any `reserved words.|reserved-words` Businesses do this to make their business purpose searchable on the Public Record.",
+    "businessPurposeBodyText": "Describe your business' primary activities but refrain from using any `reserved words.|reserved-words`  This allows your business to be searchable on the Public Record.",
     "provisionsBodyText": "Outline your company's functional and financial decisions to help run the internal operations of the business. Provisions help you prevent personal legal liabilities and clarify members' rights and duties to the company to prevent misunderstandings. You can list up to 10 provisions.\n\nCorporations may include a `class of shares|shares-class` structure and details on the rights of the Board of Directors to determine the different classes.",
     "achPaymentCost": "3.50",
     "incompleteStepsOnSubmitText": "Check the steps below for missing information or errors:",
