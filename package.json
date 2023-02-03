@@ -232,7 +232,7 @@
     ]
   },
   "engines": {
-    "node": ">=18.13.0"
+    "node": ">=16.18.0"
   },
   "repository": {
     "type": "git",
