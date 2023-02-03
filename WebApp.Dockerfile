@@ -1,4 +1,4 @@
-FROM node:18.13.0-alpine AS builder
+FROM node:16.18.0-alpine AS builder
 
 WORKDIR /app
 ENV NODE_ENV=production
