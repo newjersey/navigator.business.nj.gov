@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { getPageHelper } from "@/components/tasks/business-formation/contacts/testHelpers";
 
+import { templateEval } from "@/lib/utils/helpers";
+import { generateStateItem } from "@/test/factories";
 import {
   FormationPageHelpers,
   setDesktopScreen,
@@ -171,6 +173,50 @@ describe("Formation - Members Field", () => {
               exact: false,
             })
           ).not.toBeInTheDocument();
+          page.clickAddressSubmit();
+          await waitFor(() => {
+            expect(screen.getByText(successBodyText, { exact: false })).toBeInTheDocument();
+          });
+        });
+
+        it("shows maximum length validation for address and city fields on submit", async () => {
+          const page = await getPageHelper({ legalStructureId }, {});
+          await page.openAddressModal("members");
+          await page.fillAddressModal({
+            addressLine1: Array(36).fill("A").join(""),
+            addressCity: Array(31).fill("A").join(""),
+            addressState: generateStateItem(),
+            addressZipCode: "08100",
+          });
+          page.clickAddressSubmit();
+
+          const addressLine1MaxLengthMessage = templateEval(
+            Config.businessFormationDefaults.maximumLengthErrorText,
+            {
+              field: Config.businessFormationDefaults.requiredFieldsBulletPointLabel.addressLine1,
+              maxLen: "35",
+            }
+          );
+          const addressCityMaxLengthMessage = templateEval(
+            Config.businessFormationDefaults.maximumLengthErrorText,
+            {
+              field: Config.businessFormationDefaults.requiredFieldsBulletPointLabel.addressCity,
+              maxLen: "30",
+            }
+          );
+
+          expect(screen.getByText(addressLine1MaxLengthMessage)).toBeInTheDocument();
+          expect(screen.getByText(addressCityMaxLengthMessage)).toBeInTheDocument();
+
+          await page.fillAddressModal({
+            addressLine1: Array(35).fill("A").join(""),
+            addressCity: Array(30).fill("A").join(""),
+            addressState: generateStateItem(),
+            addressZipCode: "08100",
+          });
+          expect(screen.queryByText(addressLine1MaxLengthMessage)).not.toBeInTheDocument();
+          expect(screen.queryByText(addressCityMaxLengthMessage)).not.toBeInTheDocument();
+
           page.clickAddressSubmit();
           await waitFor(() => {
             expect(screen.getByText(successBodyText, { exact: false })).toBeInTheDocument();
