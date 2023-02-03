@@ -1,6 +1,6 @@
 import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
-import { Button } from "@/components/njwds-extended/Button";
+import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { lookupNaicsCode } from "@/lib/domain-logic/lookupNaicsCode";
 import { templateEval } from "@/lib/utils/helpers";
@@ -27,13 +27,13 @@ export const NaicsCodeDisplay = (props: Props): ReactElement => {
         <span className="margin-left-05 margin-right-2">
           {lookupNaicsCode(props.code)?.SixDigitDescription}
         </span>
-        <Button style="tertiary" underline onClick={props.onEdit}>
+        <UnStyledButton style="tertiary" underline onClick={props.onEdit}>
           {Config.taskDefaults.editText}
-        </Button>
+        </UnStyledButton>
         <span className="margin-x-105">|</span>
-        <Button style="tertiary" underline onClick={props.onRemove}>
+        <UnStyledButton style="tertiary" underline onClick={props.onRemove}>
           {Config.taskDefaults.removeText}
-        </Button>
+        </UnStyledButton>
       </div>
     </>
   );

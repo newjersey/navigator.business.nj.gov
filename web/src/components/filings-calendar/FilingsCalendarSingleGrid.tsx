@@ -15,7 +15,7 @@ import {
 } from "@businessnjgovnavigator/shared";
 import Link from "next/link";
 import { useState } from "react";
-import { Button } from "../njwds-extended/Button";
+import { UnStyledButton } from "../njwds-extended/UnStyledButton";
 
 interface Props {
   userData: UserData;
@@ -90,7 +90,7 @@ export const FilingsCalendarSingleGrid = (props: Props) => {
             <>
               {renderFilings(remainingFilings)}
               <div className="flex flex-justify-center">
-                <Button
+                <UnStyledButton
                   style="tertiary"
                   underline
                   onClick={() => {
@@ -98,13 +98,13 @@ export const FilingsCalendarSingleGrid = (props: Props) => {
                   }}
                 >
                   {Config.dashboardDefaults.viewLessFilingsButton}
-                </Button>
+                </UnStyledButton>
               </div>
             </>
           )}
           {remainingFilings.length > 0 && !showExpandFilingsButton && (
             <div className="flex flex-justify-center">
-              <Button
+              <UnStyledButton
                 style="tertiary"
                 underline
                 onClick={() => {
@@ -112,7 +112,7 @@ export const FilingsCalendarSingleGrid = (props: Props) => {
                 }}
               >
                 {Config.dashboardDefaults.viewMoreFilingsButton}
-              </Button>
+              </UnStyledButton>
             </div>
           )}
         </>

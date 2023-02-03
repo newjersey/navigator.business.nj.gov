@@ -10,7 +10,7 @@ import analytics from "@/lib/utils/analytics";
 import { getCurrentDate, parseDate } from "@businessnjgovnavigator/shared/index";
 import { useRouter } from "next/router";
 
-import { Button } from "@/components/njwds-extended/Button";
+import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { TaxFilingLookupModal } from "@/components/TaxFilingLookupModal";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { ReactElement, useContext, useEffect, useRef, useState } from "react";
@@ -127,14 +127,14 @@ export const FilingsCalendarTaxAccess = (): ReactElement => {
             <div className="margin-bottom-2 mobile-lg:margin-bottom-0 margin-right-1 mobile-lg:grid-col-6 grid-col-12">
               <Content>{Config.taxCalendar.accessBody}</Content>
             </div>
-            <Button
-              dataTestid="get-tax-access"
-              style={"secondary"}
-              noRightMargin
+            <SecondaryButton
+              isColor="primary"
+              dataTestId="get-tax-access"
+              isRightMarginRemoved={true}
               onClick={openRegisterOrTaxModal}
             >
               {Config.taxCalendar.accessButton}
-            </Button>
+            </SecondaryButton>
           </div>
         </>
       );

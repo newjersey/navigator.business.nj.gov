@@ -1,6 +1,6 @@
 import { Content } from "@/components/Content";
-import { Button } from "@/components/njwds-extended/Button";
 import { HorizontalStepper } from "@/components/njwds-extended/HorizontalStepper";
+import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { TaskCTA } from "@/components/TaskCTA";
 import { BusinessFormationPaginator } from "@/components/tasks/business-formation/BusinessFormationPaginator";
 import { DbaFormationPaginator } from "@/components/tasks/business-formation/DbaFormationPaginator";
@@ -89,9 +89,13 @@ export const NexusFormationFlow = (): ReactElement => {
               link={state.dbaContent.Formation.callToActionLink}
               text={state.dbaContent.Formation.callToActionText}
             >
-              <Button style="secondary" widthAutoOnMobile onClick={onPreviousButtonClick}>
+              <SecondaryButton
+                isColor="primary"
+                isNotFullWidthOnMobile={true}
+                onClick={onPreviousButtonClick}
+              >
                 {Config.businessFormationDefaults.previousButtonText}
-              </Button>
+              </SecondaryButton>
             </TaskCTA>
           </div>
         </>

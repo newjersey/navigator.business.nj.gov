@@ -1,7 +1,7 @@
 import { Content } from "@/components/Content";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { Alert } from "@/components/njwds-extended/Alert";
-import { Button } from "@/components/njwds-extended/Button";
+import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { LookupStepIndexByName } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -41,7 +41,7 @@ export const FormationInterimSuccessPage = (props: Props): ReactElement => {
       <Content
         customComponents={{
           button: (
-            <Button
+            <UnStyledButton
               style="tertiary"
               underline
               onClick={() => {
@@ -49,7 +49,7 @@ export const FormationInterimSuccessPage = (props: Props): ReactElement => {
               }}
             >
               {Config.businessFormationDefaults.interimSuccessPageButtonText}
-            </Button>
+            </UnStyledButton>
           ),
         }}
       >

@@ -1,4 +1,5 @@
-import { Button } from "@/components/njwds-extended/Button";
+import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
+import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { scrollToTop } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
@@ -20,15 +21,15 @@ export const OnboardingButtonGroup = (props: Props): ReactElement => {
   return (
     <div className="float-right fdr margin-bottom-8">
       {(state.page || 1) > 1 && (
-        <Button style="secondary" onClick={back} dataTestid="back">
+        <SecondaryButton isColor="primary" onClick={back} dataTestId="back">
           {Config.onboardingDefaults.backButtonText}
-        </Button>
+        </SecondaryButton>
       )}
-      <Button style="primary" dataTestid="next" typeSubmit noRightMargin>
+      <PrimaryButton isColor="primary" dataTestId="next" isSubmitButton={true} isRightMarginRemoved={true}>
         {props.isFinal
           ? Config.onboardingDefaults.finalNextButtonText
           : Config.onboardingDefaults.nextButtonText}
-      </Button>
+      </PrimaryButton>
     </div>
   );
 };

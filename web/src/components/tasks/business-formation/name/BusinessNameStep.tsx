@@ -1,6 +1,6 @@
 import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
-import { Button } from "@/components/njwds-extended/Button";
+import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { getErrorStateForField } from "@/components/tasks/business-formation/getErrorStateForField";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
@@ -116,17 +116,17 @@ export const BusinessNameStep = (): ReactElement => {
               </WithErrorBar>
             </div>
             <FormControl margin="dense">
-              <Button
-                style="secondary"
+              <SecondaryButton
+                isColor="primary"
                 onClick={() => {}}
-                loading={isLoading}
-                typeSubmit
-                noRightMargin
-                dataTestid="business-name-search-submit"
-                widthAutoOnMobile
+                isLoading={isLoading}
+                isSubmitButton={true}
+                isRightMarginRemoved={true}
+                dataTestId="business-name-search-submit"
+                isNotFullWidthOnMobile={true}
               >
                 {Config.searchBusinessNameTask.searchButtonText}
-              </Button>
+              </SecondaryButton>
             </FormControl>
           </div>
         </WithErrorBar>

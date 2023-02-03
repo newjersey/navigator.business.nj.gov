@@ -1,5 +1,5 @@
 import { Content } from "@/components/Content";
-import { Button } from "@/components/njwds-extended/Button";
+import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { LookupStepIndexByName } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { MediaQueries } from "@/lib/PageSizes";
@@ -21,7 +21,7 @@ export const ReviewRegisteredAgent = (): ReactElement => {
           <h2 className="h3-styling">{Config.businessFormationDefaults.reviewStepRegisteredAgentHeader}</h2>
         </div>
         <div className="margin-left-2">
-          <Button
+          <UnStyledButton
             style="tertiary"
             onClick={() => {
               setStepIndex(LookupStepIndexByName("Contacts"));
@@ -31,7 +31,7 @@ export const ReviewRegisteredAgent = (): ReactElement => {
             dataTestid="edit-registered-agent-step"
           >
             {Config.businessFormationDefaults.editButtonText}
-          </Button>
+          </UnStyledButton>
         </div>
       </div>
       {state.formationFormData.agentNumberOrManual === "NUMBER" && (

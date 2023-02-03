@@ -1,5 +1,5 @@
 import { Content } from "@/components/Content";
-import { Button } from "@/components/njwds-extended/Button";
+import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { Icon } from "@/components/njwds/Icon";
 import { AuthAlertContext } from "@/contexts/authAlertContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
@@ -76,9 +76,9 @@ export const SignUpModal = (): ReactElement => {
       </DialogContent>
       <DialogContent dividers={false} sx={{ paddingX: 5 }}>
         <Box>
-          <Button style="primary" className="width-100" onClick={selfRegister}>
+          <PrimaryButton isColor="primary" isFullWidthOnDesktop onClick={selfRegister}>
             {Config.navigationDefaults.guestModalButtonText}
-          </Button>
+          </PrimaryButton>
         </Box>
       </DialogContent>
 

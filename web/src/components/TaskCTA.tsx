@@ -1,5 +1,5 @@
 /* eslint-disable unicorn/filename-case */
-import { Button } from "@/components/njwds-extended/Button";
+import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import analytics from "@/lib/utils/analytics";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { ReactElement, ReactNode } from "react";
@@ -20,9 +20,9 @@ export const TaskCTA = (props: Props): ReactElement => {
     return (
       <div className="flex flex-justify-end bg-base-lightest margin-x-neg-4 padding-3 margin-top-3 margin-bottom-neg-4 radius-bottom-lg">
         {props.children}
-        <Button
-          style="primary"
-          noRightMargin
+        <PrimaryButton
+          isColor="primary"
+          isRightMarginRemoved={true}
           onClick={() => {
             analytics.event.task_primary_call_to_action.click.open_external_website();
             if (props.onClick) {
@@ -31,7 +31,7 @@ export const TaskCTA = (props: Props): ReactElement => {
           }}
         >
           {props.text || Config.taskDefaults.defaultCallToActionText}
-        </Button>
+        </PrimaryButton>
       </div>
     );
   }
@@ -40,13 +40,13 @@ export const TaskCTA = (props: Props): ReactElement => {
     <div className="flex flex-justify-end bg-base-lightest margin-x-neg-4 padding-3 margin-top-3 margin-bottom-neg-4 radius-bottom-lg">
       {props.children}
       <a href={props.link} target="_blank" rel="noreferrer noopener">
-        <Button
-          style="primary"
-          noRightMargin
+        <PrimaryButton
+          isColor="primary"
+          isRightMarginRemoved={true}
           onClick={analytics.event.task_primary_call_to_action.click.open_external_website}
         >
           {props.text || Config.taskDefaults.defaultCallToActionText}
-        </Button>
+        </PrimaryButton>
       </a>
     </div>
   );

@@ -1,7 +1,7 @@
 import { Content } from "@/components/Content";
 import { DeferredLocationQuestion } from "@/components/DeferredLocationQuestion";
 import { NavBar } from "@/components/navbar/NavBar";
-import { Button } from "@/components/njwds-extended/Button";
+import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { Icon } from "@/components/njwds/Icon";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { RadioQuestion } from "@/components/post-onboarding/RadioQuestion";
@@ -83,7 +83,7 @@ const TaskPage = (props: Props): ReactElement => {
         data-testid="nextAndPreviousButtons"
       >
         {previousUrlSlug && (
-          <Button
+          <UnStyledButton
             style="tertiary"
             onClick={() => {
               return router.push(`/tasks/${previousUrlSlug}`);
@@ -91,10 +91,10 @@ const TaskPage = (props: Props): ReactElement => {
           >
             <Icon className="usa-icon--size-4">navigate_before</Icon>
             <span className="margin-left-2"> {Config.taskDefaults.previousTaskButtonText}</span>
-          </Button>
+          </UnStyledButton>
         )}
         {nextUrlSlug && (
-          <Button
+          <UnStyledButton
             style="tertiary"
             onClick={() => {
               return router.push(`/tasks/${nextUrlSlug}`);
@@ -102,7 +102,7 @@ const TaskPage = (props: Props): ReactElement => {
           >
             <span className="margin-right-2">{Config.taskDefaults.nextTaskButtonText}</span>
             <Icon className="usa-icon--size-4">navigate_next</Icon>
-          </Button>
+          </UnStyledButton>
         )}
       </div>
     );

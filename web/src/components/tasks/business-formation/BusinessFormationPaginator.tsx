@@ -1,8 +1,9 @@
 import { AutosaveSpinner } from "@/components/AutosaveSpinner";
 import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
-import { Button } from "@/components/njwds-extended/Button";
 import { HorizontalStepper } from "@/components/njwds-extended/HorizontalStepper";
+import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
+import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { BusinessFormationSteps } from "@/components/tasks/business-formation/BusinessFormationSteps";
 import {
   BusinessFormationStepsConfiguration,
@@ -338,26 +339,25 @@ export const BusinessFormationPaginator = (): ReactElement => {
           </div>
           <div className="flex flex-column-reverse mobile-lg:flex-row mobile-lg:margin-left-auto width-100">
             {shouldDisplayPreviousButton() && (
-              <Button
-                className="margin-top-1 mobile-lg:margin-top-0 mobile-lg:margin-right-1 mobile-lg:margin-left-auto"
-                style="secondary"
-                onClick={onPreviousButtonClick}
-              >
-                {Config.businessFormationDefaults.previousButtonText}
-              </Button>
+              <div className="margin-top-1 mobile-lg:margin-top-0 mobile-lg:margin-right-1 mobile-lg:margin-left-auto">
+                <SecondaryButton isColor="primary" onClick={onPreviousButtonClick}>
+                  {Config.businessFormationDefaults.previousButtonText}
+                </SecondaryButton>
+              </div>
             )}
-            <Button
-              className={shouldDisplayPreviousButton() ? "" : "mobile-lg:margin-left-auto"}
-              style="primary"
-              onClick={() => {
-                return onMoveToStep(state.stepIndex + 1, { moveType: "NEXT_BUTTON" });
-              }}
-              noRightMargin
-              loading={isLoading}
-              dataTestid="next-button"
-            >
-              {getNextButtonText()}
-            </Button>
+            <div className={shouldDisplayPreviousButton() ? "" : "mobile-lg:margin-left-auto"}>
+              <PrimaryButton
+                isColor="primary"
+                onClick={() => {
+                  return onMoveToStep(state.stepIndex + 1, { moveType: "NEXT_BUTTON" });
+                }}
+                isRightMarginRemoved={true}
+                isLoading={isLoading}
+                dataTestId="next-button"
+              >
+                {getNextButtonText()}
+              </PrimaryButton>
+            </div>
           </div>
         </div>
       </div>

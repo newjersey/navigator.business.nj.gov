@@ -1,6 +1,6 @@
 import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
-import { Button } from "@/components/njwds-extended/Button";
+import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { displayAsEin } from "@/lib/utils/displayAsEin";
 import { templateEval } from "@/lib/utils/helpers";
@@ -21,13 +21,13 @@ export const EinDisplay = (props: Props): ReactElement => {
         <div className="margin-right-1">
           <Content>{templateEval(Config.ein.successText, { ein: displayAsEin(props.employerId) })}</Content>
         </div>
-        <Button style="tertiary" underline onClick={props.onEdit}>
+        <UnStyledButton style="tertiary" underline onClick={props.onEdit}>
           {Config.taskDefaults.editText}
-        </Button>
+        </UnStyledButton>
         <span className="margin-x-105">|</span>
-        <Button style="tertiary" underline onClick={props.onRemove}>
+        <UnStyledButton style="tertiary" underline onClick={props.onRemove}>
           {Config.taskDefaults.removeText}
-        </Button>
+        </UnStyledButton>
       </div>
     </Alert>
   );

@@ -1,5 +1,5 @@
 import { AuthButton } from "@/components/AuthButton";
-import { Button } from "@/components/njwds-extended/Button";
+import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { AuthAlertContext } from "@/contexts/authAlertContext";
 import { AuthContext } from "@/contexts/authContext";
 import { onSelfRegister } from "@/lib/auth/signinHelper";
@@ -27,18 +27,18 @@ export const NavSidebarUserSettings = (): ReactElement => {
       <>
         <div className="margin-bottom-2">
           <Link href={ROUTES.profile} passHref>
-            <Button
+            <UnStyledButton
               style="tertiary"
               onClick={() => {
                 analytics.event.account_menu_my_profile.click.go_to_profile_screen();
               }}
             >
               <span className="text-base">{Config.navigationDefaults.profileLinkText}</span>
-            </Button>
+            </UnStyledButton>
           </Link>
         </div>
         <div className="margin-bottom-2">
-          <Button
+          <UnStyledButton
             style="tertiary"
             onClick={() => {
               analytics.event.guest_menu.click.go_to_myNJ_registration();
@@ -46,7 +46,7 @@ export const NavSidebarUserSettings = (): ReactElement => {
             }}
           >
             <span className="text-base">{Config.navigationDefaults.navBarGuestRegistrationText}</span>
-          </Button>
+          </UnStyledButton>
         </div>
       </>
     );
@@ -57,18 +57,18 @@ export const NavSidebarUserSettings = (): ReactElement => {
       <>
         <div className="margin-bottom-2">
           <Link href={ROUTES.profile} passHref>
-            <Button
+            <UnStyledButton
               style="tertiary"
               onClick={() => {
                 analytics.event.account_menu_my_profile.click.go_to_profile_screen();
               }}
             >
               <span className="text-base">{Config.navigationDefaults.profileLinkText}</span>
-            </Button>
+            </UnStyledButton>
           </Link>
         </div>
         <div className="margin-bottom-2">
-          <Button
+          <UnStyledButton
             style="tertiary"
             onClick={(event) => {
               event.preventDefault();
@@ -77,7 +77,7 @@ export const NavSidebarUserSettings = (): ReactElement => {
             }}
           >
             <span className="text-base">{Config.navigationDefaults.myNJAccountText}</span>
-          </Button>
+          </UnStyledButton>
         </div>
       </>
     );

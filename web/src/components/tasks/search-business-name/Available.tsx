@@ -1,4 +1,4 @@
-import { Button } from "@/components/njwds-extended/Button";
+import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { Icon } from "@/components/njwds/Icon";
 import { AvailableProps } from "@/components/tasks/search-business-name/AvailableProps";
 import { templateEval } from "@/lib/utils/helpers";
@@ -20,7 +20,7 @@ export const Available = (props: AvailableProps): ReactElement => {
         </div>
       ) : (
         <>
-          <Button
+          <UnStyledButton
             style="tertiary"
             underline
             smallText
@@ -28,7 +28,7 @@ export const Available = (props: AvailableProps): ReactElement => {
             dataTestid="update-name"
           >
             <span className="">{Config.searchBusinessNameTask.updateButtonText}</span>
-          </Button>
+          </UnStyledButton>
         </>
       )}
     </div>

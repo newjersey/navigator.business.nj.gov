@@ -1,6 +1,6 @@
 import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
-import { Button } from "@/components/njwds-extended/Button";
+import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import {
@@ -163,9 +163,14 @@ export const CannabisPriorityTypes = (props: Props): ReactElement => {
           style={{ marginTop: "auto" }}
           className="flex flex-justify-end bg-base-lightest margin-x-neg-4 padding-3 margin-top-3 margin-bottom-neg-4 radius-bottom-lg"
         >
-          <Button style="primary" noRightMargin dataTestid="nextTabButton" onClick={props.onNextTab}>
+          <PrimaryButton
+            isColor="primary"
+            isRightMarginRemoved={true}
+            dataTestId="nextTabButton"
+            onClick={props.onNextTab}
+          >
             {Config.cannabisPriorityStatus.nextButtonText}
-          </Button>
+          </PrimaryButton>
         </div>
       )}
     </div>

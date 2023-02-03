@@ -1,7 +1,7 @@
 import { Content } from "@/components/Content";
 import { DeferredOnboardingQuestion } from "@/components/DeferredOnboardingQuestion";
 import { Alert } from "@/components/njwds-extended/Alert";
-import { Button } from "@/components/njwds-extended/Button";
+import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { OnboardingMunicipality } from "@/components/onboarding/OnboardingMunicipality";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -64,7 +64,7 @@ export const DeferredLocationQuestion = (props: Props): ReactElement => {
               })}
             </Content>
           </div>
-          <Button
+          <UnStyledButton
             style="tertiary"
             underline
             onClick={() => {
@@ -72,9 +72,9 @@ export const DeferredLocationQuestion = (props: Props): ReactElement => {
             }}
           >
             {Config.deferredLocation.editText}
-          </Button>
+          </UnStyledButton>
           <span className="margin-x-105">|</span>
-          <Button
+          <UnStyledButton
             style="tertiary"
             underline
             onClick={() => {
@@ -82,7 +82,7 @@ export const DeferredLocationQuestion = (props: Props): ReactElement => {
             }}
           >
             {Config.deferredLocation.removeText}
-          </Button>
+          </UnStyledButton>
         </div>
       </Alert>
     );

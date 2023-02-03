@@ -1,5 +1,6 @@
 import { Content } from "@/components/Content";
-import { Button } from "@/components/njwds-extended/Button";
+import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
+import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { Icon } from "@/components/njwds/Icon";
 import { useSidebarCards } from "@/lib/data-hooks/useSidebarCards";
 import { SidebarCardContent } from "@/lib/types/types";
@@ -51,9 +52,9 @@ export const SidebarCardGeneric = (props: Props) => {
                 </span>
               </h3>
               {props.card.hasCloseButton && (
-                <Button style="tertiary" onClick={closeSelf} ariaLabel="Close">
+                <UnStyledButton style="tertiary" onClick={closeSelf} ariaLabel="Close">
                   <Icon className={`font-sans-xl text-${props.card.color}`}>close</Icon>
-                </Button>
+                </UnStyledButton>
               )}
             </div>
           </div>
@@ -67,15 +68,15 @@ export const SidebarCardGeneric = (props: Props) => {
           <Content>{props.bodyText}</Content>
           {props.ctaOnClick && props.card.ctaText && (
             <div className="margin-top-205 flex flex-justify-center desktop:flex-justify-end">
-              <Button
-                style="secondary"
+              <SecondaryButton
+                isColor="primary"
                 onClick={props.ctaOnClick}
-                noRightMargin
-                dataTestid={`cta-${props.card.id}`}
-                fullWidth
+                isRightMarginRemoved={true}
+                dataTestId={`cta-${props.card.id}`}
+                isFullWidthOnDesktop={true}
               >
                 {props.card.ctaText}
-              </Button>
+              </SecondaryButton>
             </div>
           )}
         </div>

@@ -1,4 +1,4 @@
-import { Button } from "@/components/njwds-extended/Button";
+import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { AuthContext } from "@/contexts/authContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { ROUTES } from "@/lib/domain-logic/routes";
@@ -48,7 +48,7 @@ export const Header = () => {
   return (
     <div className="bg-white margin-bottom-4">
       <h1 className="margin-top-0 break-word">{getHeader()}</h1>
-      <Button
+      <UnStyledButton
         style="tertiary"
         underline
         textBold
@@ -57,7 +57,7 @@ export const Header = () => {
         ariaLabel="Link To Business Profile"
       >
         {getButtonText()}
-      </Button>
+      </UnStyledButton>
       <span className="vl margin-x-105 border-right-base" />
       <span className="text-base">{getCurrentDateInNewJersey().format("MMMM DD, YYYY")}</span>{" "}
       <span className="text-base">{Config.headerDefaults.newJerseyDateBodyText}</span>
