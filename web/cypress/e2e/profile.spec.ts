@@ -1,5 +1,6 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
 
+import { randomLegalStructure } from "@/test/factories";
 import {
   arrayOfSectors,
   Industry,
@@ -144,8 +145,9 @@ describe("Profile [feature] [all] [group1]", () => {
 
   it("onboards existing business and updates profile data", () => {
     const sectorId = randomElementFromArray(arrayOfSectors).id;
+    const legalStructureId = randomLegalStructure({ requiresPublicFiling: true }).id;
 
-    completeExistingBusinessOnboarding({ sectorId });
+    completeExistingBusinessOnboarding({ sectorId, legalStructureId });
 
     checkExistingBusinessProfilePage({ sectorId });
 
