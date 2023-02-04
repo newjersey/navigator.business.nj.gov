@@ -4551,7 +4551,7 @@ __metadata:
     cross-env: 7.0.3
     dayjs: 1.11.7
     dedent: 0.7.0
-    dependency-cruiser: 12.6.0
+    dependency-cruiser: 12.7.0
     eslint: 8.32.0
     eslint-config-prettier: 8.6.0
     eslint-plugin-jest: 27.2.1
@@ -4712,7 +4712,7 @@ __metadata:
     cypress-wait-until: 1.7.2
     dayjs: 1.11.7
     dedent: 0.7.0
-    dependency-cruiser: 12.6.0
+    dependency-cruiser: 12.7.0
     dotenv: 16.0.3
     eslint: 8.32.0
     eslint-config-next: 13.1.6
@@ -4911,7 +4911,7 @@ __metadata:
     cypress-dotenv: 2.0.0
     cypress-wait-until: 1.7.2
     dayjs: 1.11.7
-    dependency-cruiser: 12.6.0
+    dependency-cruiser: 12.7.0
     dotenv: 16.0.3
     eslint: 8.32.0
     eslint-config-next: 13.1.6
@@ -11360,12 +11360,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"acorn@npm:8.8.1, acorn@npm:^8.0.4, acorn@npm:^8.1.0, acorn@npm:^8.4.1, acorn@npm:^8.5.0, acorn@npm:^8.7.0, acorn@npm:^8.7.1, acorn@npm:^8.8.0, acorn@npm:^8.8.1":
-  version: 8.8.1
-  resolution: "acorn@npm:8.8.1"
+"acorn@npm:8.8.2, acorn@npm:^8.0.4, acorn@npm:^8.1.0, acorn@npm:^8.4.1, acorn@npm:^8.5.0, acorn@npm:^8.7.0, acorn@npm:^8.7.1, acorn@npm:^8.8.0, acorn@npm:^8.8.1":
+  version: 8.8.2
+  resolution: "acorn@npm:8.8.2"
   bin:
     acorn: bin/acorn
-  checksum: 4079b67283b94935157698831967642f24a075c52ce3feaaaafe095776dfbe15d86a1b33b1e53860fc0d062ed6c83f4284a5c87c85b9ad51853a01173da6097f
+  checksum: f790b99a1bf63ef160c967e23c46feea7787e531292bb827126334612c234ed489a0dc2c7ba33156416f0ffa8d25bf2b0fdb7f35c2ba60eb3e960572bece4001
   languageName: node
   linkType: hard
 
@@ -14462,13 +14462,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"commander@npm:9.4.1":
-  version: 9.4.1
-  resolution: "commander@npm:9.4.1"
-  checksum: bfb18e325a5bdf772763c2213d5c7d9e77144d944124e988bcd8e5e65fb6d45d5d4e86b09155d0f2556c9a59c31e428720e57968bcd050b2306e910a0bf3cf13
-  languageName: node
-  linkType: hard
-
 "commander@npm:^2.19.0, commander@npm:^2.20.0, commander@npm:^2.8.1":
   version: 2.20.3
   resolution: "commander@npm:2.20.3"
@@ -16013,11 +16006,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dependency-cruiser@npm:12.6.0":
-  version: 12.6.0
-  resolution: "dependency-cruiser@npm:12.6.0"
+"dependency-cruiser@npm:12.7.0":
+  version: 12.7.0
+  resolution: "dependency-cruiser@npm:12.7.0"
   dependencies:
-    acorn: 8.8.1
+    acorn: 8.8.2
     acorn-jsx: 5.3.2
     acorn-jsx-walk: 2.0.0
     acorn-loose: 8.3.0
@@ -16043,7 +16036,7 @@ __metadata:
     semver-try-require: 6.0.0
     teamcity-service-messages: 0.1.14
     tsconfig-paths-webpack-plugin: 4.0.0
-    watskeburt: 0.9.0
+    watskeburt: 0.9.1
     wrap-ansi: ^7.0.0
   bin:
     depcruise: bin/dependency-cruise.js
@@ -16052,7 +16045,7 @@ __metadata:
     depcruise-wrap-stream-in-html: bin/wrap-stream-in-html.js
     dependency-cruise: bin/dependency-cruise.js
     dependency-cruiser: bin/dependency-cruise.js
-  checksum: cbc87c72e508fd12ca9734151aa45635c341a7f4d7471e361a000c0e387d6cbae38a2228f83605fc39f7a13323976cce4cd353a7d2fcef783e659f44627c44e5
+  checksum: 25e8bf444a37a0d087c247e67fee3f4ad0e587b6a24402b2b3582ef953d89dc48efc2a5833f99918f1102939613c71889daae2cd04a2dbad0165bd8c6986f903
   languageName: node
   linkType: hard
 
@@ -35559,14 +35552,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"watskeburt@npm:0.9.0":
-  version: 0.9.0
-  resolution: "watskeburt@npm:0.9.0"
+"watskeburt@npm:0.9.1":
+  version: 0.9.1
+  resolution: "watskeburt@npm:0.9.1"
   dependencies:
-    commander: 9.4.1
+    commander: 10.0.0
   bin:
     watskeburt: bin/cli.mjs
-  checksum: 15e90eacb0978de14a8047378d7818e4c983af9430c68fe8733193fb6e954550fe5773d1abc702cc34b4fe7921224eb8041fde21cbd6938a07cbb8e474c60f06
+  checksum: 0d27a38c66b454a11f5b430bc856ccc2fae247601f7febe8c5253bf3794b8c05ff398648e837ee42f4c85275cfccab5c5e08aa77a1506d8f911e79295a3fba93
   languageName: node
   linkType: hard
 
