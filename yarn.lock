@@ -4537,7 +4537,7 @@ __metadata:
     "@types/jsonwebtoken": 9.0.1
     "@types/lodash": 4.14.191
     "@types/node": 16.18.11
-    "@types/simple-oauth2": 4.1.1
+    "@types/simple-oauth2": 4.1.2
     "@types/supertest": 2.0.12
     "@types/webpack-node-externals": 2.5.3
     "@types/xml2js": 0.4.11
@@ -4684,7 +4684,7 @@ __metadata:
     "@types/react-swipeable-views": 0.13.1
     "@types/react-transition-group": 4.4.5
     "@types/remove-markdown": 0.3.1
-    "@types/simple-oauth2": 4.1.1
+    "@types/simple-oauth2": 4.1.2
     "@types/supertest": 2.0.12
     "@types/testing-library__jest-dom": 5.14.5
     "@types/ua-parser-js": 0.7.36
@@ -10503,10 +10503,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/simple-oauth2@npm:4.1.1":
-  version: 4.1.1
-  resolution: "@types/simple-oauth2@npm:4.1.1"
-  checksum: 6b037f80b9e941cee00307356bbbbb14be3d06f8c6d6ea3ffbe8c2f702adf2760ae56ecf0995f342a4b8efe6531d13ff7eab24f6569b6761fbf850d07a621581
+"@types/simple-oauth2@npm:4.1.2":
+  version: 4.1.2
+  resolution: "@types/simple-oauth2@npm:4.1.2"
+  checksum: e2cc5575a0a92b52784715b4397f60f13d4e5e68d0bfafe6b21db2058c275b0e14a0d705667cb1d494ca6b6fa7182bbf6db73ec55192192712a62e4846acd597
   languageName: node
   linkType: hard
 
