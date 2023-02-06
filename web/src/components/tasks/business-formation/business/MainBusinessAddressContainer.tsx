@@ -28,6 +28,7 @@ export const MainBusinessAddressContainer = (props: { children: ReactNode }): Re
         errorBarType="ALWAYS"
         fieldName="addressLine2"
         formInputFull
+        validationText={getFieldErrorLabel("addressLine2")}
         className="margin-bottom-2"
       />
       {props.children}

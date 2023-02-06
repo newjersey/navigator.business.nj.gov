@@ -247,9 +247,10 @@ export const RegisteredAgent = (): ReactElement => {
                 label={Config.businessFormationDefaults.registeredAgentAddressLine2Label}
                 placeholder={Config.businessFormationDefaults.registeredAgentAddressLine2Placeholder}
                 fieldName="agentOfficeAddressLine2"
+                validationText={getFieldErrorLabel("agentOfficeAddressLine2")}
                 disabled={state.formationFormData.agentUseBusinessAddress}
                 formInputFull
-                errorBarType="NEVER"
+                errorBarType="ALWAYS"
               />
               <WithErrorBar
                 type="DESKTOP-ONLY"
