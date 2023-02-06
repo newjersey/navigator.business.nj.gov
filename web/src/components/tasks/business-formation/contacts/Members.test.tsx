@@ -184,6 +184,7 @@ describe("Formation - Members Field", () => {
           await page.openAddressModal("members");
           await page.fillAddressModal({
             addressLine1: Array(36).fill("A").join(""),
+            addressLine2: Array(36).fill("A").join(""),
             addressCity: Array(31).fill("A").join(""),
             addressState: generateStateItem(),
             addressZipCode: "08100",
@@ -197,6 +198,13 @@ describe("Formation - Members Field", () => {
               maxLen: "35",
             }
           );
+          const addressLine2MaxLengthMessage = templateEval(
+            Config.businessFormationDefaults.maximumLengthErrorText,
+            {
+              field: Config.businessFormationDefaults.requiredFieldsBulletPointLabel.addressLine2,
+              maxLen: "35",
+            }
+          );
           const addressCityMaxLengthMessage = templateEval(
             Config.businessFormationDefaults.maximumLengthErrorText,
             {
@@ -206,15 +214,18 @@ describe("Formation - Members Field", () => {
           );
 
           expect(screen.getByText(addressLine1MaxLengthMessage)).toBeInTheDocument();
+          expect(screen.getByText(addressLine2MaxLengthMessage)).toBeInTheDocument();
           expect(screen.getByText(addressCityMaxLengthMessage)).toBeInTheDocument();
 
           await page.fillAddressModal({
             addressLine1: Array(35).fill("A").join(""),
+            addressLine2: Array(35).fill("A").join(""),
             addressCity: Array(30).fill("A").join(""),
             addressState: generateStateItem(),
             addressZipCode: "08100",
           });
           expect(screen.queryByText(addressLine1MaxLengthMessage)).not.toBeInTheDocument();
+          expect(screen.queryByText(addressLine2MaxLengthMessage)).not.toBeInTheDocument();
           expect(screen.queryByText(addressCityMaxLengthMessage)).not.toBeInTheDocument();
 
           page.clickAddressSubmit();
