@@ -41,6 +41,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
   const requiredFields = [
     "addressName",
     "addressLine1",
+    "addressLine2",
     "addressCity",
     "addressState",
     "addressZipCode",
@@ -79,6 +80,9 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
           maxLen: params.maxLen.toString(),
         });
       }
+      if (params.dataField === "addressLine2") {
+        console.log({ isValid, isTooLong, label });
+      }
       return { label, invalid: !isValid };
     };
 
@@ -89,6 +93,13 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
           maxLen: 35,
           labelWhenMissing: Config.businessFormationDefaults.addressErrorText,
           dataField: "addressLine1",
+        });
+      case "addressLine2":
+        return fieldWithMaxLength({
+          required: false,
+          maxLen: 35,
+          labelWhenMissing: "",
+          dataField: "addressLine2",
         });
       case "addressCity":
         return fieldWithMaxLength({
@@ -282,7 +293,11 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
               required={true}
             />
           </WithErrorBar>
-          <div className="margin-bottom-2">
+          <WithErrorBar
+            hasError={!!addressErrorMap["addressLine2"].invalid}
+            type="ALWAYS"
+            className="margin-bottom-2"
+          >
             <Content
               style={{ display: "inline" }}
               overrides={{
@@ -297,6 +312,9 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
             <GenericTextField
               fieldName="addressLine2"
               value={addressData.addressLine2}
+              error={addressErrorMap["addressLine2"].invalid}
+              validationText={addressErrorMap["addressLine2"].label}
+              onValidation={onValidation}
               placeholder={Config.businessFormationDefaults.addressModalAddressLine2Placeholder}
               disabled={useDefaultAddress}
               autoComplete="address-line2"
@@ -306,7 +324,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
                 });
               }}
             />
-          </div>
+          </WithErrorBar>
           <div className="grid-row grid-gap-2 margin-y-2">
             <div className="grid-col-12 tablet:grid-col-6">
               <WithErrorBar
