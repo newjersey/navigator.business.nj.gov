@@ -11,6 +11,7 @@ export const requiredFieldsForUser = (formationFormData: FormationFormData): For
     "businessSuffix",
     "businessStartDate",
     "addressLine1",
+    "addressLine2",
     "addressZipCode",
     "paymentType",
     "contactFirstName",
@@ -45,6 +46,7 @@ export const requiredFieldsForUser = (formationFormData: FormationFormData): For
       "agentName",
       "agentEmail",
       "agentOfficeAddressLine1",
+      "agentOfficeAddressLine2",
       "agentOfficeAddressMunicipality",
       "agentOfficeAddressZipCode",
     ];

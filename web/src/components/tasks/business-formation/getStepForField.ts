@@ -11,6 +11,7 @@ export const getStepForField = (field: FormationFields): FormationStepNames => {
     case "foreignDateOfFormation":
     case "addressMunicipality":
     case "addressLine1":
+    case "addressLine2":
     case "addressZipCode":
     case "addressCity":
     case "addressProvince":
@@ -33,6 +34,7 @@ export const getStepForField = (field: FormationFields): FormationStepNames => {
     case "agentName":
     case "agentEmail":
     case "agentOfficeAddressLine1":
+    case "agentOfficeAddressLine2":
     case "agentOfficeAddressMunicipality":
     case "agentOfficeAddressZipCode":
     case "members":
