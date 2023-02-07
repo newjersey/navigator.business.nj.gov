@@ -1,7 +1,7 @@
 ---
 id: task-progress
 header: You're ${percentDone} Done!
-notStartedHeader: Time to Start Your Business
+notStartedHeader: Time to Start Your ${OoS} Business
 completedHeader: Way to Go! You've Set Up Your Business!
 ctaText: ""
 weight: 2
