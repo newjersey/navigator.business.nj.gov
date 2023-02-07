@@ -3,13 +3,15 @@ import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { IndustrySpecificDataAddOnFields, ProfileContentField, ProfileFields } from "@/lib/types/types";
-import { TextFieldProps } from "@mui/material";
-import { ReactElement, useContext } from "react";
+import { OutlinedInputProps, TextFieldProps } from "@mui/material";
+import { HTMLInputTypeAttribute, ReactElement, useContext } from "react";
 
-export interface OnboardingProps extends Omit<GenericTextFieldProps, "value" | "onValidation" | "fieldName"> {
+export interface OnboardingProps extends Omit<GenericTextFieldProps, "onValidation" | "fieldName"> {
   fieldName: Exclude<ProfileContentField, IndustrySpecificDataAddOnFields>;
   onValidation?: (field: ProfileFields, invalid: boolean) => void;
   fieldOptions?: TextFieldProps;
+  inputProps?: OutlinedInputProps;
+  type?: HTMLInputTypeAttribute;
 }
 
 export const OnboardingField = ({ fieldName, className, ...props }: OnboardingProps): ReactElement => {

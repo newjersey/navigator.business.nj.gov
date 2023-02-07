@@ -1430,6 +1430,10 @@ collections:
               - { label: Description Text, name: descriptionText, widget: markdown }
               - { label: Input Placeholder Text, name: placeholderText, widget: string }
               - { label: Save Button Text, name: saveButtonText, widget: string }
+              - { label: Show Button Text, name: showButtonText, widget: string }
+              - { label: Hide Button Text, name: hideButtonText, widget: string }
+              - { label: Show Button Text Mobile, name: showButtonTextMobile, widget: string }
+              - { label: Hide Button Text Mobile, name: hideButtonTextMobile, widget: string }
   - name: "naics-code"
     label: "Tasks - NAICS Code"
     delete: false
