@@ -488,6 +488,23 @@ describe("getErrorStateForField", () => {
           );
         });
 
+        it(`has MAX-LENGTH-labelled error when some ${field} names are too long`, () => {
+          const tooLongName = Array(51).fill("A").join("");
+          const formData = generateFormationFormData({
+            [field]: [
+              generator({ name: "some-name", signature: true }),
+              generator({ name: tooLongName, signature: true }),
+            ],
+          });
+          expect(getErrorStateForField(field, formData, undefined, displayContent).hasError).toEqual(true);
+          expect(getErrorStateForField(field, formData, undefined, displayContent).label).toEqual(
+            templateEval(Config.businessFormationDefaults.maximumLengthErrorText, {
+              field: Config.businessFormationDefaults.requiredFieldsBulletPointLabel[field],
+              maxLen: "50",
+            })
+          );
+        });
+
         it(`has MINIMUM-labelled error when length of ${field} is 0`, () => {
           const formData = generateFormationFormData({ [field]: [] });
           expect(getErrorStateForField(field, formData, undefined, displayContent).hasError).toEqual(true);

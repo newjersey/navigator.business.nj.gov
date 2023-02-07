@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { getPageHelper } from "@/components/tasks/business-formation/contacts/testHelpers";
+import { templateEval } from "@/lib/utils/helpers";
 import { FormationPageHelpers, useSetupInitialMocks } from "@/test/helpers/helpers-formation";
 import { currentUserData } from "@/test/mock/withStatefulUserData";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
@@ -122,6 +123,33 @@ describe("Formation - Signatures", () => {
         expect(signerErrorText()).not.toBeInTheDocument();
       });
 
+      it("fires validations when signer name longer than 50 chars", async () => {
+        const page = await getPageHelper(
+          { legalStructureId },
+          {
+            signers: [
+              generateFormationSigner(
+                { name: Array(51).fill("A").join(","), signature: true },
+                legalStructureId
+              ),
+            ],
+          }
+        );
+        await attemptApiSubmission(page);
+        const signerErrorText = () => {
+          return screen.queryByText(
+            templateEval(Config.businessFormationDefaults.maximumLengthErrorText, {
+              field: Config.businessFormationDefaults.requiredFieldsBulletPointLabel.signers,
+              maxLen: "50",
+            }),
+            { exact: false }
+          );
+        };
+        expect(signerErrorText()).toBeInTheDocument();
+        page.fillText("Signer 0", "Elrond");
+        expect(signerErrorText()).not.toBeInTheDocument();
+      });
+
       it("fires validations when signers do not check the sign checkbox", async () => {
         const page = await getPageHelper(
           { legalStructureId },
@@ -137,6 +165,40 @@ describe("Formation - Signatures", () => {
         page.selectCheckbox(`${Config.businessFormationDefaults.signatureColumnLabel}*`);
         expect(signerCheckboxErrorText()).not.toBeInTheDocument();
         await page.submitContactsStep();
+      });
+
+      it("shows inline error message for missing primary signer", async () => {
+        const page = await getPageHelper(
+          { legalStructureId },
+          {
+            signers: [
+              generateFormationSigner({ name: "", signature: true }, legalStructureId),
+              generateFormationSigner({ name: "some name", signature: true }, legalStructureId),
+            ],
+          }
+        );
+        await attemptApiSubmission(page);
+        expect(screen.getByText(Config.businessFormationDefaults.signerErrorText)).toBeInTheDocument();
+        expect(
+          screen.queryByText(Config.businessFormationDefaults.additionalSignatureNameErrorText)
+        ).not.toBeInTheDocument();
+      });
+
+      it("shows inline error message for missing additional signer", async () => {
+        const page = await getPageHelper(
+          { legalStructureId },
+          {
+            signers: [
+              generateFormationSigner({ name: "some name", signature: true }, legalStructureId),
+              generateFormationSigner({ name: "", signature: true }, legalStructureId),
+            ],
+          }
+        );
+        await attemptApiSubmission(page);
+        expect(
+          screen.getByText(Config.businessFormationDefaults.additionalSignatureNameErrorText)
+        ).toBeInTheDocument();
+        expect(screen.queryByText(Config.businessFormationDefaults.signerErrorText)).not.toBeInTheDocument();
       });
     });
 
