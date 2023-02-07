@@ -131,9 +131,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
       });`,
         }}
       />
-
-      <Script src="/js/uswds.js" />
-      <Script src="/js/uswds-init.js" />
+      <Script src="/vendor/js/uswds.min.js" />
       <Script src="/intercom/settings.js" />
       <Script src="/intercom/init.js" />
       <IntercomScript user={state.user} operatingPhaseId={operatingPhaseId} />

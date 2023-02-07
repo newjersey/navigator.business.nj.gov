@@ -1,4 +1,5 @@
 import Document, { DocumentContext, DocumentInitialProps, Head, Html, Main, NextScript } from "next/document";
+import Script from "next/script";
 import { ReactElement } from "react";
 
 class CustomDocument extends Document {
@@ -10,7 +11,9 @@ class CustomDocument extends Document {
   render(): ReactElement {
     return (
       <Html lang="en">
-        <Head />
+        <Head>
+          <Script src="/vendor/js/uswds-init.min.js" strategy="beforeInteractive" />
+        </Head>
         <body>
           <Main />
           <NextScript />

@@ -63,6 +63,10 @@ module.exports = withBundleAnalyzer({
             from: "node_modules/njwds/dist/img",
             to: "../public/vendor/img",
           },
+          {
+            from: "node_modules/njwds/dist/js",
+            to: "../public/vendor/js",
+          },
         ],
       })
     );

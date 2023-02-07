@@ -100,8 +100,7 @@ all our pages and pre-render what it can. The export puts the final files in `./
 
 ### Styles
 
-We depend on the compiled version of [NJ Web Design Standards](https://github.com/newjersey/njwds), which is included via napa as a node_module
-and then imports these styles into our code (configured via a line in `_app.tsx`).
+We depend on the compiled version of [NJ Web Design Standards](https://github.com/newjersey/njwds), which is included via npm and then imports these styles into our code (configured via a line in `_app.tsx`).
 
 ### Environment variables
 
