@@ -1,6 +1,7 @@
 import { camelCaseToSentence } from "@/lib/utils/cases-helpers";
-import { TextField, TextFieldProps } from "@mui/material";
-import { ChangeEvent, FocusEvent, forwardRef, ReactElement, RefObject } from "react";
+import { OutlinedInputProps, TextField, TextFieldProps } from "@mui/material";
+
+import { ChangeEvent, FocusEvent, forwardRef, HTMLInputTypeAttribute, ReactElement, RefObject } from "react";
 
 export interface GenericTextFieldProps {
   fieldName: string;
@@ -29,6 +30,8 @@ export interface GenericTextFieldProps {
   formInputFull?: boolean;
   className?: string;
   allowMasking?: boolean;
+  inputProps?: OutlinedInputProps;
+  type?: HTMLInputTypeAttribute;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any, react/display-name
@@ -143,6 +146,8 @@ export const GenericTextField = forwardRef(
             ...fieldOptions?.inputProps,
             "aria-label": props.ariaLabel ?? camelCaseToSentence(props.fieldName),
           }}
+          InputProps={props.inputProps}
+          type={props.type}
         />
       </div>
     );

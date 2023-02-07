@@ -3,7 +3,7 @@ import { Express } from "express";
 import request from "supertest";
 import { EncryptionDecryptionClient } from "../domain/types";
 import { setupExpress } from "../libs/express";
-import { taxDecryptionFactory } from "./taxDecryptionRouter";
+import { taxDecryptionRouterFactory } from "./taxDecryptionRouter";
 
 describe("taxDecryptionRouter", () => {
   let app: Express;
@@ -22,7 +22,7 @@ describe("taxDecryptionRouter", () => {
     };
 
     app = setupExpress(false);
-    app.use(taxDecryptionFactory(stubEncryptionDecryptionClient));
+    app.use(taxDecryptionRouterFactory(stubEncryptionDecryptionClient));
   });
 
   afterAll(async () => {
