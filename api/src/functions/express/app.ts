@@ -16,6 +16,7 @@ import { updateOperatingPhase } from "../..//domain/user/updateOperatingPhase";
 import { formationRouterFactory } from "../../api/formationRouter";
 import { licenseStatusRouterFactory } from "../../api/licenseStatusRouter";
 import { selfRegRouterFactory } from "../../api/selfRegRouter";
+import { taxDecryptionRouterFactory } from "../../api/taxDecryptionRouter";
 import { userRouterFactory } from "../../api/userRouter";
 import { AirtableUserTestingClient } from "../../client/AirtableUserTestingClient";
 import { ApiBusinessNameClient } from "../../client/ApiBusinessNameClient";
@@ -200,6 +201,7 @@ app.use(
   "/api/taxFilings",
   taxFilingRouterFactory(userDataClient, taxFilingInterface, AWSEncryptionDecryptionClient)
 );
+app.use("/api", taxDecryptionRouterFactory(AWSEncryptionDecryptionClient));
 
 app.post("/api/mgmt/auth", (req, res) => {
   if (req.body.password === process.env.ADMIN_PASSWORD) {
