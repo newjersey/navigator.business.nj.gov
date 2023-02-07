@@ -60,8 +60,12 @@ module.exports = withBundleAnalyzer({
       new CopyPlugin({
         patterns: [
           {
-            from: "node_modules/njwds/dist/img",
+            from: "../node_modules/@newjersey/njwds/dist/img",
             to: "../public/vendor/img",
+          },
+          {
+            from: "../node_modules/@newjersey/njwds/dist/js",
+            to: "../public/vendor/js",
           },
         ],
       })

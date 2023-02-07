@@ -19,7 +19,8 @@ module.exports = {
     config.resolve.alias = {
       ...config.resolve.alias,
       "/img": path.resolve(__dirname, "../public/img"),
-      "/vendor/img": path.resolve(__dirname, "../node_modules/njwds/dist/img"),
+      "/vendor/img": "@newjersey/njwds/dist/img",
+      "/vendor/js": "@newjersey/njwds/dist/js",
       "@/components": path.resolve(__dirname, "../src/components"),
       "@/lib": path.resolve(__dirname, "../src/lib"),
       "@/contexts": path.resolve(__dirname, "../src/contexts"),

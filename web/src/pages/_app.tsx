@@ -1,5 +1,5 @@
 // organize-imports-ignore
-import "njwds/dist/css/styles.css";
+import "@newjersey/njwds/dist/css/styles.css";
 import "../styles/main.scss";
 import { ContextualInfoPanel } from "@/components/ContextualInfoPanel";
 import { AuthReducer, authReducer } from "@/lib/auth/AuthContext";
@@ -131,9 +131,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
       });`,
         }}
       />
-
-      <Script src="/js/uswds.js" />
-      <Script src="/js/uswds-init.js" />
+      <Script src="/vendor/js/uswds.min.js" />
       <Script src="/intercom/settings.js" />
       <Script src="/intercom/init.js" />
       <IntercomScript user={state.user} operatingPhaseId={operatingPhaseId} />
