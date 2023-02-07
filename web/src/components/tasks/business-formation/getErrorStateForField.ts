@@ -117,6 +117,7 @@ export const getErrorStateForField = (
 
   if (["signers", "incorporators"].includes(field)) {
     const newField = field as "signers" | "incorporators";
+    const SIGNER_NAME_MAX_LEN = 50;
     const someSignersMissingName = formationFormData[newField]?.some((signer) => {
       return !signer.name.trim();
     });
@@ -128,6 +129,11 @@ export const getErrorStateForField = (
     const someSignersMissingTitle = formationFormData[newField]?.some((signer) => {
       return !signer.title;
     });
+
+    const someSignersTooLong = formationFormData[newField]?.some((signer) => {
+      return signer.name.length > SIGNER_NAME_MAX_LEN;
+    });
+
     if (!formationFormData[newField] || formationFormData[newField]?.length === 0) {
       return {
         ...errorState,
@@ -147,6 +153,15 @@ export const getErrorStateForField = (
         ...errorState,
         hasError: true,
         label: Config.businessFormationDefaults.signerCheckboxErrorText,
+      };
+    } else if (someSignersTooLong) {
+      return {
+        ...errorState,
+        hasError: true,
+        label: templateEval(Config.businessFormationDefaults.maximumLengthErrorText, {
+          field: (Config.businessFormationDefaults.requiredFieldsBulletPointLabel as any)[field],
+          maxLen: SIGNER_NAME_MAX_LEN.toString(),
+        }),
       };
     }
   }
