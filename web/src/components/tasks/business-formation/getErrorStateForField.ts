@@ -58,7 +58,6 @@ export const getErrorStateForField = (
     "getDistributionTerms",
     "makeDistributionTerms",
     "paymentType",
-    "addressProvince",
   ];
 
   const hasErrorIfUndefined: FormationFields[] = [
@@ -231,6 +230,14 @@ export const getErrorStateForField = (
       required: true,
       maxLen: 30,
       labelKeyWhenMissing: "addressCityErrorText",
+    });
+  }
+
+  if (field === "addressProvince") {
+    return fieldWithMaxLength({
+      required: true,
+      maxLen: 30,
+      labelKeyWhenMissing: "addressProvinceErrorText",
     });
   }
 
