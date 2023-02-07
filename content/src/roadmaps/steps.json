@@ -10,14 +10,14 @@
     {
       "section": "START",
       "stepNumber": 2,
-      "name": "Register and Form Your Business",
+      "name": "Register and Form Your ${OoS} Business",
       "timeEstimate": "1–5 Days",
       "description": "Get legally recognized by the State and federal government so you can start acting on behalf of your business."
     },
     {
       "section": "START",
       "stepNumber": 3,
-      "name": "After Registering Your Business",
+      "name": "After Registering Your ${OoS} Business",
       "timeEstimate": "30–60 Days",
       "description": "Enter insurance and/or location agreements in your business’ name to protect both you and your business legally."
     },
