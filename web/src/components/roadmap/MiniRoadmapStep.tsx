@@ -1,6 +1,7 @@
 import { VerticalStepIndicator } from "@/components/njwds-extended/VerticalStepIndicator";
 import { Icon } from "@/components/njwds/Icon";
 import { MiniRoadmapTask } from "@/components/roadmap/MiniRoadmapTask";
+import { useContentModifiedByUserData } from "@/lib/data-hooks/useContentModifiedByUserData";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { Step } from "@/lib/types/types";
 import { ReactElement, useEffect, useMemo, useState } from "react";
@@ -19,6 +20,7 @@ export const MiniRoadmapStep = (props: Props): ReactElement => {
   const { roadmap } = useRoadmap();
   const [isOpen, setIsOpen] = useState<boolean>(props.isOpen ?? false);
   const stepNumber = props.step.stepNumber;
+  const stepName = useContentModifiedByUserData(props.step.name ?? "");
   const isActive = useMemo(() => {
     if (!props.activeTaskId || !roadmap?.tasks) {
       return undefined;
@@ -64,7 +66,7 @@ export const MiniRoadmapStep = (props: Props): ReactElement => {
               }`}
               data-step={stepNumber}
             >
-              {props.step.name}
+              {stepName}
             </div>
             <div className="mla fdc fac">
               <Icon className="usa-icon--size-3 text-base-darkest">

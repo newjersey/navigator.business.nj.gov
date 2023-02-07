@@ -10,7 +10,6 @@ export interface GenericButtonProps {
   isSmallerText?: boolean;
   isLoading?: boolean;
   isNotFullWidthOnMobile?: boolean;
-  // heightAutoOnMobile?: boolean;
   intercomButton?: boolean;
   isFullWidthOnDesktop?: boolean;
   isVerticalPaddingRemoved?: boolean;
@@ -28,6 +27,8 @@ export const GenericButton = (props: GenericButtonProps): ReactElement => {
   const isNotFullWidthOnMobile = props.isNotFullWidthOnMobile ? "width-auto" : "";
   const isVerticalPaddingRemoved = props.isVerticalPaddingRemoved ? "padding-y-0" : "padding-y-11px";
   const isLargeButton = props.isLargeButton ? "usa-button--big" : "";
+  const isSmallerText = props.isSmallerText ? "font-body-2xs" : "";
+  const intercomButton = props.intercomButton ? "intercom-button" : "";
 
   const widthRef = useRef<HTMLInputElement | null>(null);
   const [width, setWidth] = useState<number>();
@@ -38,11 +39,6 @@ export const GenericButton = (props: GenericButtonProps): ReactElement => {
       setHeight(widthRef.current.clientHeight);
     }
   }, [height, width, props.isLoading, widthRef]);
-
-  // const underline = props.isUnderlined ? "underline" : "";
-  const isSmallerText = props.isSmallerText ? "font-body-2xs" : "";
-  // const textBold = props.isBolded ? "text-bold" : "";
-  const intercomButton = props.intercomButton ? "intercom-button" : "";
 
   const className = [
     props.isColor,

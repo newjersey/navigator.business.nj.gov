@@ -6,7 +6,7 @@ export const useContentModifiedByUserData = (content: string) => {
   let result = content;
   if (!userData || !result) return result;
 
-  if (content.includes("{oos}")) {
+  if (content.includes("${oos}")) {
     if (userData?.profileData.businessPersona === "FOREIGN") {
       result = templateEval(content, {
         oos: "out-of-state",
@@ -17,5 +17,18 @@ export const useContentModifiedByUserData = (content: string) => {
       });
     }
   }
+
+  if (content.includes("${OoS}")) {
+    if (userData?.profileData.businessPersona === "FOREIGN") {
+      result = templateEval(content, {
+        OoS: "Out-of-State",
+      });
+    } else if (userData?.profileData.businessPersona) {
+      result = templateEvalWithExtraSpaceRemoval(content, {
+        OoS: "",
+      });
+    }
+  }
+
   return result;
 };
