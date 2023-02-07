@@ -2,6 +2,7 @@ import { Content } from "@/components/Content";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { Icon } from "@/components/njwds/Icon";
+import { useContentModifiedByUserData } from "@/lib/data-hooks/useContentModifiedByUserData";
 import { useSidebarCards } from "@/lib/data-hooks/useSidebarCards";
 import { SidebarCardContent } from "@/lib/types/types";
 import { ReactNode } from "react";
@@ -16,6 +17,7 @@ type Props = {
 
 export const SidebarCardGeneric = (props: Props) => {
   const { hideCard } = useSidebarCards();
+  const headerText = useContentModifiedByUserData(props.headerText ?? "");
 
   const closeSelf = async () => {
     await hideCard(props.card.id);
@@ -48,7 +50,7 @@ export const SidebarCardGeneric = (props: Props) => {
                   />
                 )}
                 <span className={props.card.imgPath ? "margin-top-2px padding-top-1px" : ""}>
-                  {props.headerText}
+                  {headerText}
                 </span>
               </h3>
               {props.card.hasCloseButton && (
