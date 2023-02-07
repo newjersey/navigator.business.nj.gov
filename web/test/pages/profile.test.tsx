@@ -1070,6 +1070,7 @@ describe("profile", () => {
           taxId: randomInt(9).toString(),
           businessPersona: "OWNING",
           industryId: "generic",
+          legalStructureId: randomPublicFilingLegalStructure(),
         }),
       });
       const newark = generateMunicipality({ displayName: "Newark" });
