@@ -25,7 +25,8 @@ agencyContact: LGEA@NJCleanEnergy.com
 businessStage: both
 employeesRequired: n/a
 homeBased: no
-mwvb: n/a
+mwvb:
+  - n/a
 preferenceForOpportunityZone: no
 county:
   - All

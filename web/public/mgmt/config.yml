@@ -457,6 +457,8 @@ collections:
       - label: "MWVB"
         name: "mwvb"
         widget: "select"
+        multiple: true
+        default: "n/a"
         options: ["n/a", "m/wbe", "dvob", "vob", "sbe"]
       - label: "Preference for Opportunity Zone"
         name: "preferenceForOpportunityZone"

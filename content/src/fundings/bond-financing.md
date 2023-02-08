@@ -16,7 +16,8 @@ programFrequency: ongoing
 businessStage: operating
 employeesRequired: n/a
 homeBased: no
-mwvb: n/a
+mwvb:
+  - n/a
 preferenceForOpportunityZone: ""
 county:
   - All

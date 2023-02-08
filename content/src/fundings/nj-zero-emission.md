@@ -16,7 +16,8 @@ programFrequency: pilot
 businessStage: operating
 employeesRequired: n/a
 homeBased: yes
-mwvb: n/a
+mwvb:
+  - n/a
 preferenceForOpportunityZone: ""
 county:
   - All
