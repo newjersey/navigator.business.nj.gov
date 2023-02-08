@@ -646,15 +646,6 @@ describe("getErrorStateForField", () => {
         }),
       },
       {
-        field: "addressMunicipality",
-        maxLen: 30,
-        labelWhenMissing: defaults.addressCityErrorText,
-        labelWhenTooLong: templateEval(defaults.maximumLengthErrorText, {
-          field: defaults.requiredFieldsBulletPointLabel.addressMunicipality,
-          maxLen: "30",
-        }),
-      },
-      {
         field: "addressCity",
         maxLen: 30,
         labelWhenMissing: defaults.addressCityErrorText,
@@ -798,6 +789,7 @@ describe("getErrorStateForField", () => {
       "canMakeDistribution",
       "addressCountry",
       "addressState",
+      "addressMunicipality",
     ];
 
     const runTests = (hasErrorIfUndefined: FormationFields[], expectedLabel?: string) => {

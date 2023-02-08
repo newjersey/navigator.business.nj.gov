@@ -67,6 +67,7 @@ export const getErrorStateForField = (
     "addressState",
     "addressCountry",
     "foreignStateOfFormation",
+    "addressMunicipality",
   ];
 
   if (field == "foreignStateOfFormation") {
@@ -229,14 +230,6 @@ export const getErrorStateForField = (
       required: true,
       maxLen: 35,
       labelKeyWhenMissing: "agentOfficeAddressLine1ErrorText",
-    });
-  }
-
-  if (field === "addressMunicipality") {
-    return fieldWithMaxLength({
-      required: true,
-      maxLen: 30,
-      labelKeyWhenMissing: "addressCityErrorText",
     });
   }
 
