@@ -15,9 +15,11 @@ const FeatureFlagsPage = (props: Props): ReactElement => {
   const [password, setPassword] = useState<string>("");
 
   const envVars = JSON.parse(props.envVars);
+
   const featuresWithSuffixes = Object.keys(envVars).filter((it) => {
-    return it.startsWith("FEATURE_");
+    return it.startsWith("FEATURE_") && (it.endsWith("_STAGING") || it.endsWith("_PROD"));
   });
+
   const features = [
     ...new Set(
       featuresWithSuffixes.map((it) => {
