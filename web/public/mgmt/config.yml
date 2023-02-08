@@ -1003,6 +1003,26 @@ collections:
       - { label: "Required", name: "required", widget: "boolean", required: false }
       - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
       - { label: "Form Name", name: "formName", widget: "string", required: false }
+      - {
+          label: "Industry Integration",
+          name: "industryIntegration",
+          widget: "select",
+          required: false,
+          options:
+            [
+              "NJ Department of Consumer Affairs",
+              "NJ Department of Taxation",
+              "NJ Department of Revenue and Enterprise Services",
+              "NJ Department of Community Affairs",
+            ],
+        }
+      - {
+          label: "Local Level Task",
+          name: "localLevelTask",
+          widget: "select",
+          required: false,
+          options: ["Department of Health", "County Clerk", "Municipal Clerk"],
+        }
 
   - name: "webflow-licenses"
     label: "Webflow Licenses"
