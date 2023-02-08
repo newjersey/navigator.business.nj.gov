@@ -6,6 +6,7 @@ import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
+import { formatIntlPostalCode } from "@/lib/domain-logic/formatIntlPostalCode";
 import { ReactElement, useContext } from "react";
 
 export const MainBusinessIntl = (): ReactElement => {
@@ -77,7 +78,7 @@ export const MainBusinessIntl = (): ReactElement => {
       <BusinessFormationTextField
         label={Config.formation.fields.addressZipCode.foreign.label}
         placeholder={Config.formation.fields.addressZipCode.foreign.placeholder}
-        numericProps={{ maxLength: 11 }}
+        valueFilter={formatIntlPostalCode}
         errorBarType="ALWAYS"
         required={true}
         fieldName={"addressZipCode"}

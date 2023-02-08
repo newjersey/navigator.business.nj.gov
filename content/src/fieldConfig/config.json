@@ -148,7 +148,7 @@
     "reviewStepDirectorsHeader": "Board of Directors",
     "addressModalCityLabel": "**City**",
     "reviewStepDirectorAddressLabel": "**Address:**",
-    "addressZipCodeIntlDakotaErrorText": "Enter a 5 to 11 digit Postal Code.",
+    "addressZipCodeIntlDakotaErrorText": "Enter a 1 to 11 character Postal Code.",
     "addressProvinceLabel": "**Province**",
     "llcText": "LLC",
     "documentTableSubTotalCostLabel": "Subtotal",
