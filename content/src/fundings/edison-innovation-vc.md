@@ -16,7 +16,8 @@ programFrequency: ongoing
 businessStage: early-stage
 employeesRequired: n/a
 homeBased: no
-mwvb: m/wbe
+mwvb:
+  - m/wbe
 preferenceForOpportunityZone: ""
 county:
   - All
