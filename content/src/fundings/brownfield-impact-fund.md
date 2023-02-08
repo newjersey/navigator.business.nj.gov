@@ -16,7 +16,8 @@ programFrequency: one-time
 businessStage: both
 employeesRequired: n/a
 homeBased: no
-mwvb: n/a
+mwvb:
+  - n/a
 preferenceForOpportunityZone: ""
 county:
   - All
