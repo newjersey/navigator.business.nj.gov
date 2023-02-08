@@ -607,22 +607,15 @@ describe("Formation - BusinessStep", () => {
   });
 
   describe("INTL postal code validation", () => {
-    it("displays error message when less than 5 characters are entered", async () => {
+    it("displays error message when no characters are entered", async () => {
       const page = await getPageHelper(
         { businessPersona: "FOREIGN" },
         { addressZipCode: "", businessLocationType: "INTL" }
       );
-      page.fillText("Address zip code", "2222");
-      expect(screen.getByText(Config.formation.fields.addressZipCode.foreign.errorIntl)).toBeInTheDocument();
-    });
-
-    it("displays error message when non-numeric postal code is entered", async () => {
-      const page = await getPageHelper(
-        { businessPersona: "FOREIGN" },
-        { addressZipCode: "", businessLocationType: "INTL" }
-      );
-      page.fillText("Address zip code", "AAAAA");
-      expect(screen.getByText(Config.formation.fields.addressZipCode.foreign.errorIntl)).toBeInTheDocument();
+      page.fillText("Address zip code", "");
+      expect(
+        screen.getByText(Config.businessFormationDefaults.addressZipCodeIntlDakotaErrorText)
+      ).toBeInTheDocument();
     });
 
     it("passes 11-digit postal code validation", async () => {
