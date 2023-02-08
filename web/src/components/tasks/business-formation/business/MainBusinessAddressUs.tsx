@@ -10,7 +10,7 @@ import { ReactElement, useContext } from "react";
 
 export const MainBusinessUs = (): ReactElement => {
   const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
-  const { doSomeFieldsHaveError, doesFieldHaveError } = useFormationErrors();
+  const { doSomeFieldsHaveError, doesFieldHaveError, getFieldErrorLabel } = useFormationErrors();
 
   return (
     <MainBusinessAddressContainer>
@@ -27,7 +27,7 @@ export const MainBusinessUs = (): ReactElement => {
           required={true}
           className={"margin-bottom-2 grid-col-12 tablet:grid-col-6"}
           noValidationMargin={true}
-          validationText={Config.businessFormationDefaults.addressCityErrorText}
+          validationText={getFieldErrorLabel("addressCity")}
           formInputFull
         />
         <>

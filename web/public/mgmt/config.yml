@@ -2181,6 +2181,7 @@ collections:
                   widget: string,
                 }
               - { label: Error Text - Generic, name: genericErrorText, widget: string }
+              - { label: Maximum Length Error Text, name: maximumLengthErrorText, widget: string }
               - {
                   label: Error Text - Incomplete Steps Header,
                   name: incompleteStepsOnSubmitText,
@@ -2724,6 +2725,7 @@ collections:
                   - { label: "Business Address City", name: addressCity, widget: string }
                   - { label: "Business Address Municipality", name: addressMunicipality, widget: string }
                   - { label: "Business Address Line 1", name: addressLine1, widget: string }
+                  - { label: "Business Address Line 2", name: addressLine2, widget: string }
                   - { label: "Business Address Zip Code", name: addressZipCode, widget: string }
                   - { label: "Signers", name: signers, widget: string }
                   - { label: "Payment Type", name: paymentType, widget: string }
@@ -2770,6 +2772,11 @@ collections:
                   - {
                       label: "Registered Agent Office Address Line 1",
                       name: agentOfficeAddressLine1,
+                      widget: string,
+                    }
+                  - {
+                      label: "Registered Agent Office Address Line 2",
+                      name: agentOfficeAddressLine2,
                       widget: string,
                     }
                   - {

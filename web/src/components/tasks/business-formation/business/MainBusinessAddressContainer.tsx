@@ -1,9 +1,12 @@
 import { Content } from "@/components/Content";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
+import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { ReactElement, ReactNode } from "react";
 
 export const MainBusinessAddressContainer = (props: { children: ReactNode }): ReactElement => {
+  const { getFieldErrorLabel } = useFormationErrors();
+
   return (
     <>
       <div className="margin-bottom-2">
@@ -16,7 +19,7 @@ export const MainBusinessAddressContainer = (props: { children: ReactNode }): Re
         required={true}
         className={"margin-bottom-2"}
         errorBarType="ALWAYS"
-        validationText={Config.businessFormationDefaults.addressLine1ErrorText}
+        validationText={getFieldErrorLabel("addressLine1")}
         formInputFull
       />
       <BusinessFormationTextField
@@ -25,6 +28,7 @@ export const MainBusinessAddressContainer = (props: { children: ReactNode }): Re
         errorBarType="ALWAYS"
         fieldName="addressLine2"
         formInputFull
+        validationText={getFieldErrorLabel("addressLine2")}
         className="margin-bottom-2"
       />
       {props.children}

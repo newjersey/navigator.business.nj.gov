@@ -17,7 +17,7 @@ export const RegisteredAgent = (): ReactElement => {
   const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
   const { municipalities } = useContext(MunicipalitiesContext);
   const { userData } = useUserData();
-  const { doesFieldHaveError, doSomeFieldsHaveError } = useFormationErrors();
+  const { doesFieldHaveError, getFieldErrorLabel, doSomeFieldsHaveError } = useFormationErrors();
   useEffect(
     function setAgentCheckboxFalseWhenAddressChanged() {
       const {
@@ -199,8 +199,8 @@ export const RegisteredAgent = (): ReactElement => {
                     label={Config.businessFormationDefaults.registeredAgentNameLabel}
                     placeholder={Config.businessFormationDefaults.registeredAgentNamePlaceholder}
                     required={true}
+                    validationText={getFieldErrorLabel("agentName")}
                     errorBarType="MOBILE-ONLY"
-                    validationText={Config.businessFormationDefaults.agentNameErrorText}
                     fieldName="agentName"
                     disabled={shouldBeDisabled("agentName", "ACCOUNT")}
                     formInputFull
@@ -213,7 +213,7 @@ export const RegisteredAgent = (): ReactElement => {
                     fieldName="agentEmail"
                     errorBarType="MOBILE-ONLY"
                     required={true}
-                    validationText={Config.businessFormationDefaults.agentEmailErrorText}
+                    validationText={getFieldErrorLabel("agentEmail")}
                     disabled={shouldBeDisabled("agentEmail", "ACCOUNT")}
                     formInputFull
                   />
@@ -238,7 +238,7 @@ export const RegisteredAgent = (): ReactElement => {
                 placeholder={Config.businessFormationDefaults.registeredAgentAddressLine1Placeholder}
                 fieldName="agentOfficeAddressLine1"
                 required={true}
-                validationText={Config.businessFormationDefaults.agentOfficeAddressLine1ErrorText}
+                validationText={getFieldErrorLabel("agentOfficeAddressLine1")}
                 disabled={shouldBeDisabled("agentOfficeAddressLine1", "ADDRESS")}
                 formInputFull
                 errorBarType="ALWAYS"
@@ -247,9 +247,10 @@ export const RegisteredAgent = (): ReactElement => {
                 label={Config.businessFormationDefaults.registeredAgentAddressLine2Label}
                 placeholder={Config.businessFormationDefaults.registeredAgentAddressLine2Placeholder}
                 fieldName="agentOfficeAddressLine2"
+                validationText={getFieldErrorLabel("agentOfficeAddressLine2")}
                 disabled={state.formationFormData.agentUseBusinessAddress}
                 formInputFull
-                errorBarType="NEVER"
+                errorBarType="ALWAYS"
               />
               <WithErrorBar
                 type="DESKTOP-ONLY"

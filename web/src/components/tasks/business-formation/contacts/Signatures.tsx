@@ -25,6 +25,7 @@ import { ChangeEvent, ReactElement, useContext, useMemo } from "react";
 
 export const Signatures = (): ReactElement => {
   const FIELD_NAME = "signers";
+  const SIGNER_NAME_MAX_LEN = 50;
   const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
   const { doesFieldHaveError } = useFormationErrors();
@@ -223,11 +224,19 @@ export const Signatures = (): ReactElement => {
     if (!state.formationFormData.signers) {
       return;
     }
+
+    const getInlineValidationText = (): string => {
+      if (state.formationFormData.signers && state.formationFormData.signers[index].name.length === 0) {
+        return index > 0
+          ? Config.businessFormationDefaults.additionalSignatureNameErrorText
+          : Config.businessFormationDefaults.signerErrorText;
+      }
+      return "";
+    };
+
     return (
       <>
-        {isTabletAndUp || index == 0 ? (
-          <></>
-        ) : (
+        {!isTabletAndUp && index !== 0 && (
           <Content className="margin-bottom-1">{Config.businessFormationDefaults.signerLabel}</Content>
         )}
         <GenericTextField
@@ -237,15 +246,11 @@ export const Signatures = (): ReactElement => {
           handleChange={(value: string) => {
             return handleSignerChange(value, index);
           }}
-          error={hasError && state.formationFormData.signers[index].name.length === 0}
+          error={hasError && doesRowHaveError(index)}
           onValidation={() => {
             setFieldsInteracted([FIELD_NAME]);
           }}
-          validationText={
-            index > 0
-              ? Config.businessFormationDefaults.additionalSignatureNameErrorText
-              : Config.businessFormationDefaults.signerErrorText
-          }
+          validationText={getInlineValidationText()}
           fieldName="signer"
           className={`margin-top-0`}
           ariaLabel={`Signer ${index}`}
@@ -256,20 +261,20 @@ export const Signatures = (): ReactElement => {
     );
   };
 
-  const getRowErrors = (it: FormationSigner) => {
+  const doesRowHaveError = (index: number) => {
+    if (!state.formationFormData.signers || state.formationFormData.signers.length === 0) {
+      return false;
+    }
+
+    const signer = state.formationFormData.signers[index];
     const needsTypeField = BusinessSignerTypeMap[state.formationFormData.legalType].length > 1;
-    const error = it.name.length === 0 || !it.signature;
+    const error = signer.name.length === 0 || !signer.signature || signer.name.length > SIGNER_NAME_MAX_LEN;
     if (needsTypeField) {
-      return (error || !it.title) && hasError;
+      return (error || !signer.title) && hasError;
     } else {
       return error && hasError;
     }
   };
-
-  const signaturesHasError =
-    state.formationFormData.signers && state.formationFormData.signers.length > 0
-      ? getRowErrors(state.formationFormData.signers[0])
-      : false;
 
   const atLeastOneSignerExists =
     state.formationFormData.signers && state.formationFormData.signers?.length > 0;
@@ -281,7 +286,11 @@ export const Signatures = (): ReactElement => {
         <div className={`grid-row margin-y-2 flex-align-start`}>
           <div className={`grid-col`} data-testid="signers-0">
             {atLeastOneSignerExists && (
-              <WithErrorBar hasError={signaturesHasError} type="ALWAYS" className="grid-row flex-align-start">
+              <WithErrorBar
+                hasError={doesRowHaveError(0)}
+                type="ALWAYS"
+                className="grid-row flex-align-start"
+              >
                 <div className="grid-col">
                   <div className="grid-row margin-top-1">
                     <div className={`grid-col-12 ${needsSignerType ? "tablet:grid-col-6" : ""}`}>
@@ -315,7 +324,11 @@ export const Signatures = (): ReactElement => {
           return (
             <div key={`signature-${index}`}>
               {isTabletAndUp ? <></> : <hr className="margin-top-2" />}
-              <WithErrorBar hasError={getRowErrors(it)} type="ALWAYS" className="grid-row margin-bottom-2">
+              <WithErrorBar
+                hasError={doesRowHaveError(index)}
+                type="ALWAYS"
+                className="grid-row margin-bottom-2"
+              >
                 <div className="grid-col">
                   <div className="grid-row margin-bottom-1" data-testid={`signers-${index}`}>
                     <div className="grid-col flex-align-self-center margin-top-1">

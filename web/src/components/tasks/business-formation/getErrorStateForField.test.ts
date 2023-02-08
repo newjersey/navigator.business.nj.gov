@@ -2,6 +2,7 @@
 
 import { getErrorStateForField } from "@/components/tasks/business-formation/getErrorStateForField";
 import { getMergedConfig } from "@/contexts/configContext";
+import { templateEval } from "@/lib/utils/helpers";
 import { generateFormationDisplayContentMap, generateNameAvailability } from "@/test/factories";
 import {
   defaultDateFormat,
@@ -371,31 +372,46 @@ describe("getErrorStateForField", () => {
   describe("agentEmail", () => {
     it("has error if empty", () => {
       const formData = generateFormationFormData({ agentEmail: "" });
-      expect(getErrorStateForField("agentEmail", formData, undefined, displayContent).hasError).toEqual(true);
+      const errorState = getErrorStateForField("agentEmail", formData, undefined, displayContent);
+      expect(errorState.hasError).toEqual(true);
+      expect(errorState.label).toEqual(Config.businessFormationDefaults.agentEmailErrorText);
     });
 
     it("has error if not valid email format", () => {
       const formData1 = generateFormationFormData({ agentEmail: "whatever@" });
-      expect(getErrorStateForField("agentEmail", formData1, undefined, displayContent).hasError).toEqual(
-        true
-      );
+      const errorState1 = getErrorStateForField("agentEmail", formData1, undefined, displayContent);
+      expect(errorState1.hasError).toEqual(true);
+      expect(errorState1.label).toEqual(Config.businessFormationDefaults.agentEmailErrorText);
 
       const formData2 = generateFormationFormData({ agentEmail: "whatever@thing" });
-      expect(getErrorStateForField("agentEmail", formData2, undefined, displayContent).hasError).toEqual(
-        true
-      );
+      const errorState2 = getErrorStateForField("agentEmail", formData2, undefined, displayContent);
+      expect(errorState2.hasError).toEqual(true);
+      expect(errorState2.label).toEqual(Config.businessFormationDefaults.agentEmailErrorText);
 
       const formData3 = generateFormationFormData({ agentEmail: "stuff" });
-      expect(getErrorStateForField("agentEmail", formData3, undefined, displayContent).hasError).toEqual(
-        true
+      const errorState3 = getErrorStateForField("agentEmail", formData3, undefined, displayContent);
+      expect(errorState3.hasError).toEqual(true);
+      expect(errorState3.label).toEqual(Config.businessFormationDefaults.agentEmailErrorText);
+    });
+
+    it("has error if valid-format length is greater than 50 chars", () => {
+      const longFormEntry = `${Array(43).fill("A").join("")}@aol.com`;
+      const formData = generateFormationFormData({ agentEmail: longFormEntry });
+      const errorState = getErrorStateForField("agentEmail", formData, undefined, displayContent);
+      expect(errorState.hasError).toEqual(true);
+      expect(errorState.label).toEqual(
+        templateEval(Config.businessFormationDefaults.maximumLengthErrorText, {
+          field: Config.businessFormationDefaults.requiredFieldsBulletPointLabel.agentEmail,
+          maxLen: "50",
+        })
       );
     });
 
-    it("inserts label from config", () => {
-      const formData = generateFormationFormData({ agentEmail: "example@test.com" });
-      expect(getErrorStateForField("agentEmail", formData, undefined, displayContent).label).toEqual(
-        Config.businessFormationDefaults.requiredFieldsBulletPointLabel.agentEmail
-      );
+    it("has no error if valid-format length is less than or equal to 50 chars", () => {
+      const longFormEntry = `${Array(42).fill("A").join("")}@aol.com`;
+      const formData = generateFormationFormData({ agentEmail: longFormEntry });
+      const errorState = getErrorStateForField("agentEmail", formData, undefined, displayContent);
+      expect(errorState.hasError).toEqual(false);
     });
   });
 
@@ -469,6 +485,23 @@ describe("getErrorStateForField", () => {
           expect(getErrorStateForField(field, formData, undefined, displayContent).hasError).toEqual(true);
           expect(getErrorStateForField(field, formData, undefined, displayContent).label).toEqual(
             Config.businessFormationDefaults.signerTypeErrorText
+          );
+        });
+
+        it(`has MAX-LENGTH-labelled error when some ${field} names are too long`, () => {
+          const tooLongName = Array(51).fill("A").join("");
+          const formData = generateFormationFormData({
+            [field]: [
+              generator({ name: "some-name", signature: true }),
+              generator({ name: tooLongName, signature: true }),
+            ],
+          });
+          expect(getErrorStateForField(field, formData, undefined, displayContent).hasError).toEqual(true);
+          expect(getErrorStateForField(field, formData, undefined, displayContent).label).toEqual(
+            templateEval(Config.businessFormationDefaults.maximumLengthErrorText, {
+              field: Config.businessFormationDefaults.requiredFieldsBulletPointLabel[field],
+              maxLen: "50",
+            })
           );
         });
 
@@ -594,14 +627,169 @@ describe("getErrorStateForField", () => {
     });
   });
 
+  describe("required fields with max length", () => {
+    const defaults = Config.businessFormationDefaults;
+
+    const fieldData: {
+      field: FormationFields;
+      maxLen: number;
+      labelWhenMissing: string;
+      labelWhenTooLong: string;
+    }[] = [
+      {
+        field: "addressLine1",
+        maxLen: 35,
+        labelWhenMissing: defaults.addressLine1ErrorText,
+        labelWhenTooLong: templateEval(defaults.maximumLengthErrorText, {
+          field: defaults.requiredFieldsBulletPointLabel.addressLine1,
+          maxLen: "35",
+        }),
+      },
+      {
+        field: "addressCity",
+        maxLen: 30,
+        labelWhenMissing: defaults.addressCityErrorText,
+        labelWhenTooLong: templateEval(defaults.maximumLengthErrorText, {
+          field: defaults.requiredFieldsBulletPointLabel.addressCity,
+          maxLen: "30",
+        }),
+      },
+      {
+        field: "agentName",
+        maxLen: 50,
+        labelWhenMissing: defaults.agentNameErrorText,
+        labelWhenTooLong: templateEval(defaults.maximumLengthErrorText, {
+          field: defaults.requiredFieldsBulletPointLabel.agentName,
+          maxLen: "50",
+        }),
+      },
+      {
+        field: "contactFirstName",
+        maxLen: 50,
+        labelWhenMissing: defaults.contactFirstNameErrorText,
+        labelWhenTooLong: templateEval(defaults.maximumLengthErrorText, {
+          field: defaults.requiredFieldsBulletPointLabel.contactFirstName,
+          maxLen: "50",
+        }),
+      },
+      {
+        field: "contactLastName",
+        maxLen: 50,
+        labelWhenMissing: defaults.contactLastNameErrorText,
+        labelWhenTooLong: templateEval(defaults.maximumLengthErrorText, {
+          field: defaults.requiredFieldsBulletPointLabel.contactLastName,
+          maxLen: "50",
+        }),
+      },
+      {
+        field: "agentOfficeAddressLine1",
+        maxLen: 35,
+        labelWhenMissing: defaults.agentOfficeAddressLine1ErrorText,
+        labelWhenTooLong: templateEval(defaults.maximumLengthErrorText, {
+          field: defaults.requiredFieldsBulletPointLabel.agentOfficeAddressLine1,
+          maxLen: "35",
+        }),
+      },
+    ];
+
+    for (const data of fieldData) {
+      describe(`${data.field}`, () => {
+        it("has error and label if empty", () => {
+          const formData = generateFormationFormData({ [data.field]: "" });
+          const errorState = getErrorStateForField(data.field, formData, undefined, displayContent);
+          expect(errorState.hasError).toEqual(true);
+          expect(errorState.label).toEqual(data.labelWhenMissing);
+        });
+
+        it("has error and label if undefined", () => {
+          const formData = generateFormationFormData({ [data.field]: undefined });
+          const errorState = getErrorStateForField(data.field, formData, undefined, displayContent);
+          expect(errorState.hasError).toEqual(true);
+          expect(errorState.label).toEqual(data.labelWhenMissing);
+        });
+
+        it(`has error if length is greater than ${data.maxLen} chars`, () => {
+          const longFormEntry = Array(data.maxLen + 1)
+            .fill("A")
+            .join("");
+          const formData = generateFormationFormData({ [data.field]: longFormEntry });
+          const errorState = getErrorStateForField(data.field, formData, undefined, displayContent);
+          expect(errorState.hasError).toEqual(true);
+          expect(errorState.label).toEqual(data.labelWhenTooLong);
+        });
+
+        it(`has no error if length is less than or equal to ${data.maxLen} chars`, () => {
+          const longFormEntry = Array(data.maxLen).fill("A").join("");
+          const formData = generateFormationFormData({ [data.field]: longFormEntry });
+          const errorState = getErrorStateForField(data.field, formData, undefined, displayContent);
+          expect(errorState.hasError).toEqual(false);
+        });
+      });
+    }
+  });
+
+  describe("optional fields with max length", () => {
+    const defaults = Config.businessFormationDefaults;
+
+    const fieldData: {
+      field: FormationFields;
+      maxLen: number;
+      labelWhenTooLong: string;
+    }[] = [
+      {
+        field: "addressLine2",
+        maxLen: 35,
+        labelWhenTooLong: templateEval(defaults.maximumLengthErrorText, {
+          field: defaults.requiredFieldsBulletPointLabel.addressLine2,
+          maxLen: "35",
+        }),
+      },
+      {
+        field: "agentOfficeAddressLine2",
+        maxLen: 35,
+        labelWhenTooLong: templateEval(defaults.maximumLengthErrorText, {
+          field: defaults.requiredFieldsBulletPointLabel.agentOfficeAddressLine2,
+          maxLen: "35",
+        }),
+      },
+    ];
+
+    for (const data of fieldData) {
+      describe(`${data.field}`, () => {
+        it("has no error if empty", () => {
+          const formData = generateFormationFormData({ [data.field]: "" });
+          const errorState = getErrorStateForField(data.field, formData, undefined, displayContent);
+          expect(errorState.hasError).toEqual(false);
+        });
+
+        it(`has error if length is greater than ${data.maxLen} chars`, () => {
+          const longFormEntry = Array(data.maxLen + 1)
+            .fill("A")
+            .join("");
+          const formData = generateFormationFormData({ [data.field]: longFormEntry });
+          const errorState = getErrorStateForField(data.field, formData, undefined, displayContent);
+          expect(errorState.hasError).toEqual(true);
+          expect(errorState.label).toEqual(data.labelWhenTooLong);
+        });
+
+        it(`has no error if length is less than or equal to ${data.maxLen} chars`, () => {
+          const longFormEntry = Array(data.maxLen).fill("A").join("");
+          const formData = generateFormationFormData({ [data.field]: longFormEntry });
+          const errorState = getErrorStateForField(data.field, formData, undefined, displayContent);
+          expect(errorState.hasError).toEqual(false);
+        });
+      });
+    }
+  });
+
   describe("fields that have error when undefined", () => {
     const hasErrorIfUndefined: FormationFields[] = [
       "canCreateLimitedPartner",
       "canGetDistribution",
       "canMakeDistribution",
-      "addressMunicipality",
       "addressCountry",
       "addressState",
+      "addressMunicipality",
     ];
 
     const runTests = (hasErrorIfUndefined: FormationFields[], expectedLabel?: string) => {
@@ -645,13 +833,9 @@ describe("getErrorStateForField", () => {
   describe("fields that have error when empty or false", () => {
     const hasErrorIfEmpty: FormationFields[] = [
       "businessSuffix",
-      "addressLine1",
-      "contactFirstName",
-      "contactLastName",
       "contactPhoneNumber",
       "agentNumber",
-      "agentName",
-      "agentOfficeAddressLine1",
+      "agentOfficeAddressMunicipality",
       "businessTotalStock",
       "withdrawals",
       "combinedInvestment",
@@ -661,7 +845,6 @@ describe("getErrorStateForField", () => {
       "makeDistributionTerms",
       "paymentType",
       "addressProvince",
-      "addressCity",
     ];
 
     const runTests = (hasErrorIfEmpty: FormationFields[]) => {

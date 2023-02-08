@@ -11,6 +11,7 @@ describe("requiredFieldsForUser", () => {
     "businessSuffix",
     "businessStartDate",
     "addressLine1",
+    "addressLine2",
     "addressZipCode",
     "paymentType",
     "contactFirstName",
@@ -71,6 +72,7 @@ describe("requiredFieldsForUser", () => {
         "agentName",
         "agentEmail",
         "agentOfficeAddressLine1",
+        "agentOfficeAddressLine2",
         "agentOfficeAddressMunicipality",
         "agentOfficeAddressZipCode",
       ];
