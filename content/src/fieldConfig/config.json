@@ -250,6 +250,7 @@
     "addressModalStateLabel": "**State**",
     "reviewStepPaymentType": "Payment Type",
     "nameCheckSpecialCharacterMarkDown": "\"${name}\" contains invalid special characters that cannot be used in the Business Name for online filing. If you'd like to use special characters you need to file a paper application using the form located at [treasury.](https://www.state.nj.us/treasury/revenue/pdf/2000.pdf)",
+    "nameCheckRestrictedWordMarkDown": "\"${name}\" contains the restricted word \"${word}\" that cannot be used in the Business Name for online filing. If you would like to use this restricted word, please contact us with your preferred name at [treasury.](https://www.state.nj.us/treasury/revenue/revgencode.shtml)",
     "reviewStepEmailLabel": "**Email:**",
     "contactPhoneNumberPlaceholder": "(xxx) xxx-xxxx",
     "creditCardPaymentTypeLabel": "Pay with Credit Card",

@@ -1,3 +1,4 @@
+import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { AvailableProps } from "@/components/tasks/search-business-name/AvailableProps";
@@ -5,8 +6,9 @@ import { UnavailableProps } from "@/components/tasks/search-business-name/Unavai
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { useBusinessNameSearch } from "@/lib/data-hooks/useBusinessNameSearch";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { NameAvailability } from "@/lib/types/types";
+import { templateEval } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
+import { NameAvailability } from "@businessnjgovnavigator/shared/index";
 import { FormControl, TextField } from "@mui/material";
 import { FormEvent, ReactElement, useCallback, useEffect, useRef } from "react";
 
@@ -179,10 +181,30 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
           />
         )}
         {nameAvailability?.status === "DESIGNATOR" && (
-          <div data-testid="designator-text">
-            <p className="font-body-2xs text-red">{Config.searchBusinessNameTask.designatorText}</p>
-          </div>
+          <Alert variant="error" dataTestid="designator-text">
+            <p className="font-sans-xs">{Config.searchBusinessNameTask.designatorText}</p>
+          </Alert>
         )}
+        {nameAvailability?.status === "SPECIAL_CHARACTER" && (
+          <Alert variant="error" dataTestid="special-character-text">
+            <Content className="font-sans-xs">
+              {templateEval(Config.businessFormationDefaults.nameCheckSpecialCharacterMarkDown, {
+                name: submittedName,
+              })}
+            </Content>
+          </Alert>
+        )}
+        {nameAvailability?.status === "RESTRICTED" && (
+          <Alert variant="error" dataTestid="restricted-word-text">
+            <Content className="font-sans-xs">
+              {templateEval(Config.businessFormationDefaults.nameCheckRestrictedWordMarkDown, {
+                name: submittedName,
+                word: nameAvailability.invalidWord ?? "*unknown*",
+              })}
+            </Content>
+          </Alert>
+        )}
+
         {nameAvailability?.status === "UNAVAILABLE" && (
           <Unavailable
             resetSearch={resetSearch}

@@ -1,5 +1,7 @@
+import { NameAvailability, NameAvailabilityStatus } from "@shared/businessNameSearch";
 import axios, { AxiosError, AxiosResponse } from "axios";
-import { BusinessNameClient, NameAvailability } from "../domain/types";
+import { BusinessNameClient } from "../domain/types";
+
 import { LogWriterType } from "../libs/logWriter";
 
 export const ApiBusinessNameClient = (baseUrl: string, logWriter: LogWriterType): BusinessNameClient => {
@@ -15,11 +17,15 @@ export const ApiBusinessNameClient = (baseUrl: string, logWriter: LogWriterType)
             response.statusText
           }. Data: ${JSON.stringify(response.data)}`
         );
-        let responseStatus = "";
+        let responseStatus: NameAvailabilityStatus;
+        let invalidWord;
         if (response.data.Available) {
           responseStatus = "AVAILABLE";
         } else if (response.data.Reason.indexOf("business designators") > 0) {
           responseStatus = "DESIGNATOR";
+        } else if (response.data.Reason.indexOf("restricted word") > 0) {
+          responseStatus = "RESTRICTED";
+          invalidWord = (response.data.Reason.match(new RegExp(/'(.*?)'/g)) ?? [])[0]?.replaceAll("'", "");
         } else if (response.data.Reason.indexOf("invalid special character") > 0) {
           {
             responseStatus = "SPECIAL_CHARACTER";
@@ -28,7 +34,8 @@ export const ApiBusinessNameClient = (baseUrl: string, logWriter: LogWriterType)
           responseStatus = "UNAVAILABLE";
         }
         return {
-          status: responseStatus as "AVAILABLE" | "DESIGNATOR" | "SPECIAL_CHARACTER" | "UNAVAILABLE",
+          status: responseStatus,
+          invalidWord,
           similarNames: response.data.Similars,
         };
       })

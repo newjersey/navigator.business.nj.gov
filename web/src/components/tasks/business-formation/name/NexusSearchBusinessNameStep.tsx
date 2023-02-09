@@ -4,7 +4,7 @@ import { SearchBusinessNameForm } from "@/components/tasks/search-business-name/
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { NameAvailability } from "@/lib/types/types";
+import { NameAvailability } from "@businessnjgovnavigator/shared/businessNameSearch";
 import { emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { ReactElement, useContext } from "react";

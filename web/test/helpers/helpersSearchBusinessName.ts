@@ -1,7 +1,7 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
-import { NameAvailability } from "@/lib/types/types";
 import { generateNameAvailability } from "@/test/factories";
+import { NameAvailability } from "@businessnjgovnavigator/shared/businessNameSearch";
 import { act, fireEvent, screen } from "@testing-library/react";
 
 const mockApi = api as jest.Mocked<typeof api>;

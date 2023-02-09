@@ -5,9 +5,9 @@ import { SearchBusinessNameForm } from "@/components/tasks/search-business-name/
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { NameAvailability } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffect } from "@/lib/utils/helpers";
+import { NameAvailability } from "@businessnjgovnavigator/shared/index";
 import { ReactElement, useContext } from "react";
 
 export const DbaNameSearch = (): ReactElement => {

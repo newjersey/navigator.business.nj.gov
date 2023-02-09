@@ -11,7 +11,7 @@ import {
 } from "@/test/helpers/helpersSearchBusinessName";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { useMockProfileData, useMockUserData } from "@/test/mock/mockUseUserData";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, within } from "@testing-library/react";
 import { ReactElement } from "react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -82,6 +82,8 @@ describe("<SearchBusinessNameForm />", () => {
     expect(availableTextExists()).toBe(true);
     expect(unavailableTextExists()).toBe(false);
     expect(designatorTextExists()).toBe(false);
+    expect(specialCharacterTextExists()).toBe(false);
+    expect(restrictedWordTextExists()).toBe(false);
     expect(onChange).toHaveBeenLastCalledWith(
       expect.objectContaining({
         status: "AVAILABLE",
@@ -109,6 +111,8 @@ describe("<SearchBusinessNameForm />", () => {
     expect(availableTextExists()).toBe(false);
     expect(unavailableTextExists()).toBe(true);
     expect(designatorTextExists()).toBe(false);
+    expect(specialCharacterTextExists()).toBe(false);
+    expect(restrictedWordTextExists()).toBe(false);
   });
 
   it("shows designator text if name includes the designator", async () => {
@@ -118,6 +122,33 @@ describe("<SearchBusinessNameForm />", () => {
     expect(availableTextExists()).toBe(false);
     expect(unavailableTextExists()).toBe(false);
     expect(designatorTextExists()).toBe(true);
+    expect(specialCharacterTextExists()).toBe(false);
+    expect(restrictedWordTextExists()).toBe(false);
+  });
+
+  it("shows special character text if name includes a special character", async () => {
+    renderForm();
+    fillText("Pizza Joint LLC");
+    await searchAndGetValue({ status: "SPECIAL_CHARACTER" });
+    expect(availableTextExists()).toBe(false);
+    expect(unavailableTextExists()).toBe(false);
+    expect(designatorTextExists()).toBe(false);
+    expect(specialCharacterTextExists()).toBe(true);
+    expect(restrictedWordTextExists()).toBe(false);
+  });
+
+  it("shows restricted word text if name includes a restricted word", async () => {
+    renderForm();
+    fillText("Pizza Joint LLC");
+    await searchAndGetValue({ status: "RESTRICTED", invalidWord: "JOINT" });
+    expect(availableTextExists()).toBe(false);
+    expect(unavailableTextExists()).toBe(false);
+    expect(designatorTextExists()).toBe(false);
+    expect(specialCharacterTextExists()).toBe(false);
+    expect(restrictedWordTextExists()).toBe(true);
+    expect(
+      within(screen.getByTestId("restricted-word-text")).getByText("JOINT", { exact: false })
+    ).toBeInTheDocument();
   });
 
   it("shows message if user searches empty name", async () => {
@@ -158,5 +189,11 @@ describe("<SearchBusinessNameForm />", () => {
   };
   const designatorTextExists = () => {
     return screen.queryByTestId("designator-text") !== null;
+  };
+  const specialCharacterTextExists = () => {
+    return screen.queryByTestId("special-character-text") !== null;
+  };
+  const restrictedWordTextExists = () => {
+    return screen.queryByTestId("restricted-word-text") !== null;
   };
 });

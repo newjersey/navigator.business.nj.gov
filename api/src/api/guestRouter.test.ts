@@ -1,3 +1,4 @@
+import { NameAvailability } from "@shared/businessNameSearch";
 import { Express } from "express";
 import request from "supertest";
 import {
@@ -7,7 +8,7 @@ import {
   generateUserData,
 } from "../../test/factories";
 import { determineAnnualFilingDate } from "../../test/helpers";
-import { BusinessNameClient, NameAvailability } from "../domain/types";
+import { BusinessNameClient } from "../domain/types";
 import { setupExpress } from "../libs/express";
 import { guestRouterFactory } from "./guestRouter";
 

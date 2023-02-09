@@ -1,8 +1,9 @@
 import * as api from "@/lib/api-client/apiClient";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { NameAvailability, SearchBusinessNameError } from "@/lib/types/types";
+import { SearchBusinessNameError } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import { NameAvailability } from "@businessnjgovnavigator/shared/businessNameSearch";
 import { FormEvent, useState } from "react";
 
 export const useBusinessNameSearch = ({
