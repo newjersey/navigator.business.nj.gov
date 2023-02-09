@@ -13,7 +13,7 @@ agency:
 applicableOwnershipTypes:
   - minority-owned
   - woman-owned
-isSbe: true
+isSbe: false
 ---
 A Disadvantaged Business Enterprise (DBE) certification may provide an advantage for the New Jersey Department of Transportation's (NJDOT) contracts. *Learn more about [government contracts](https://business.nj.gov/pages/government-contracting).*
 
