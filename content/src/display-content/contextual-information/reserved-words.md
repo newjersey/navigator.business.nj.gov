@@ -2,7 +2,9 @@
 header: Reserved Words
 slug: reserved-words
 ---
-The N﻿ew Jersey Department of Revenue and Enterprise Services has a list of reserved words that cannot be used to describe your business purpose: 
+The N﻿ew Jersey Department of Revenue and Enterprise Services (DORES) has a list of reserved words that cannot be used to describe your business purpose. 
+
+Some examples include:
 
 - Altius  
 - Bank
@@ -32,4 +34,4 @@ The N﻿ew Jersey Department of Revenue and Enterprise Services has a list of re
 - Urban Renewal
 - Zip Code
 
-T﻿o use any of these reserved words, you can contact DORES by [filling out an inquiry form](https://www.nj.gov/treasury/revenue/revgencode.shtml)
+T﻿o use reserved words, you can contact DORES by [filling out an inquiry form](https://www.nj.gov/treasury/revenue/revgencode.shtml)
