@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { getPageHelper } from "@/components/tasks/business-formation/contacts/testHelpers";
 
+import { getMergedConfig } from "@/contexts/configContext";
 import { templateEval } from "@/lib/utils/helpers";
 import { generateStateItem } from "@/test/factories";
 import {
@@ -9,7 +10,6 @@ import {
   useSetupInitialMocks,
 } from "@/test/helpers/helpers-formation";
 import { currentUserData } from "@/test/mock/withStatefulUserData";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import {
   FormationLegalType,
   FormationMember,
@@ -26,6 +26,8 @@ function mockMaterialUI(): typeof materialUi {
     useMediaQuery: jest.fn(),
   };
 }
+
+const Config = getMergedConfig();
 
 jest.mock("@mui/material", () => mockMaterialUI());
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -48,15 +50,9 @@ describe("Formation - Members Field", () => {
 
   describe(`shared behaviors`, () => {
     legalStructureIds.map((legalStructureId) => {
-      const nextButtonText =
-        legalStructureId == "limited-liability-company"
-          ? Config.businessFormationDefaults.membersNewButtonText
-          : Config.businessFormationDefaults.directorsNewButtonText;
-
-      const successBodyText =
-        legalStructureId == "limited-liability-company"
-          ? Config.businessFormationDefaults.membersSuccessTextBody
-          : Config.businessFormationDefaults.directorsSuccessTextBody;
+      const configField = legalStructureId == "limited-liability-company" ? "members" : "directors";
+      const nextButtonText = Config.formation.fields[configField].addButtonText;
+      const successBodyText = Config.formation.fields[configField].successSnackbarBody;
 
       describe(`for ${legalStructureId}`, () => {
         const fillForm = (page: FormationPageHelpers, member: FormationMember) => {
@@ -138,41 +134,20 @@ describe("Formation - Members Field", () => {
           await page.openAddressModal("members");
           page.clickAddressSubmit();
 
-          expect(
-            screen.getByText(Config.businessFormationDefaults.nameErrorText, { exact: false })
-          ).toBeInTheDocument();
-          expect(
-            screen.getByText(Config.businessFormationDefaults.addressErrorText, { exact: false })
-          ).toBeInTheDocument();
-          expect(
-            screen.getByText(Config.businessFormationDefaults.addressCityErrorText, { exact: false })
-          ).toBeInTheDocument();
-          expect(
-            screen.getByText(Config.businessFormationDefaults.addressStateErrorText, { exact: false })
-          ).toBeInTheDocument();
-          expect(
-            screen.getByText(Config.businessFormationDefaults.addressModalZipCodeErrorText, {
-              exact: false,
-            })
-          ).toBeInTheDocument();
+          const { name, addressLine1, addressCity, addressState, addressZipCode } =
+            Config.formation.addressModal;
+
+          expect(screen.getByText(name.error)).toBeInTheDocument();
+          expect(screen.getByText(addressLine1.error)).toBeInTheDocument();
+          expect(screen.getByText(addressCity.error)).toBeInTheDocument();
+          expect(screen.getByText(addressState.error)).toBeInTheDocument();
+          expect(screen.getByText(addressZipCode.error)).toBeInTheDocument();
           await page.fillAddressModal({});
-          expect(
-            screen.queryByText(Config.businessFormationDefaults.nameErrorText, { exact: false })
-          ).not.toBeInTheDocument();
-          expect(
-            screen.queryByText(Config.businessFormationDefaults.addressErrorText, { exact: false })
-          ).not.toBeInTheDocument();
-          expect(
-            screen.queryByText(Config.businessFormationDefaults.addressCityErrorText, { exact: false })
-          ).not.toBeInTheDocument();
-          expect(
-            screen.queryByText(Config.businessFormationDefaults.addressStateErrorText, { exact: false })
-          ).not.toBeInTheDocument();
-          expect(
-            screen.queryByText(Config.businessFormationDefaults.addressModalZipCodeErrorText, {
-              exact: false,
-            })
-          ).not.toBeInTheDocument();
+          expect(screen.queryByText(name.error)).not.toBeInTheDocument();
+          expect(screen.queryByText(addressLine1.error)).not.toBeInTheDocument();
+          expect(screen.queryByText(addressCity.error)).not.toBeInTheDocument();
+          expect(screen.queryByText(addressState.error)).not.toBeInTheDocument();
+          expect(screen.queryByText(addressZipCode.error)).not.toBeInTheDocument();
           page.clickAddressSubmit();
           await waitFor(() => {
             expect(screen.getByText(successBodyText, { exact: false })).toBeInTheDocument();
@@ -191,31 +166,15 @@ describe("Formation - Members Field", () => {
           });
           page.clickAddressSubmit();
 
-          const addressLine1MaxLengthMessage = templateEval(
-            Config.businessFormationDefaults.maximumLengthErrorText,
-            {
-              field: Config.businessFormationDefaults.requiredFieldsBulletPointLabel.addressLine1,
+          const maxLengthMessage = (modalField: keyof typeof Config.formation.addressModal): string =>
+            templateEval(Config.formation.general.maximumLengthErrorText, {
+              field: Config.formation.addressModal[modalField].fieldDisplayName,
               maxLen: "35",
-            }
-          );
-          const addressLine2MaxLengthMessage = templateEval(
-            Config.businessFormationDefaults.maximumLengthErrorText,
-            {
-              field: Config.businessFormationDefaults.requiredFieldsBulletPointLabel.addressLine2,
-              maxLen: "35",
-            }
-          );
-          const addressCityMaxLengthMessage = templateEval(
-            Config.businessFormationDefaults.maximumLengthErrorText,
-            {
-              field: Config.businessFormationDefaults.requiredFieldsBulletPointLabel.addressCity,
-              maxLen: "30",
-            }
-          );
+            });
 
-          expect(screen.getByText(addressLine1MaxLengthMessage)).toBeInTheDocument();
-          expect(screen.getByText(addressLine2MaxLengthMessage)).toBeInTheDocument();
-          expect(screen.getByText(addressCityMaxLengthMessage)).toBeInTheDocument();
+          expect(screen.getByText(maxLengthMessage("addressLine1"))).toBeInTheDocument();
+          expect(screen.getByText(maxLengthMessage("addressLine2"))).toBeInTheDocument();
+          expect(screen.getByText(maxLengthMessage("addressCity"))).toBeInTheDocument();
 
           await page.fillAddressModal({
             addressLine1: Array(35).fill("A").join(""),
@@ -224,9 +183,9 @@ describe("Formation - Members Field", () => {
             addressState: generateStateItem(),
             addressZipCode: "08100",
           });
-          expect(screen.queryByText(addressLine1MaxLengthMessage)).not.toBeInTheDocument();
-          expect(screen.queryByText(addressLine2MaxLengthMessage)).not.toBeInTheDocument();
-          expect(screen.queryByText(addressCityMaxLengthMessage)).not.toBeInTheDocument();
+          expect(screen.queryByText(maxLengthMessage("addressLine1"))).not.toBeInTheDocument();
+          expect(screen.queryByText(maxLengthMessage("addressLine2"))).not.toBeInTheDocument();
+          expect(screen.queryByText(maxLengthMessage("addressCity"))).not.toBeInTheDocument();
 
           page.clickAddressSubmit();
           await waitFor(() => {
@@ -239,10 +198,10 @@ describe("Formation - Members Field", () => {
           await page.openAddressModal("members");
 
           fillForm(page, generateFormationMember({ name: "Lincoln" }));
-          fireEvent.click(screen.getByText(Config.businessFormationDefaults.addressModalBackButtonText));
+          fireEvent.click(screen.getByText(Config.formation.general.backButtonText));
           await waitFor(() => {
             return expect(
-              screen.queryByText(Config.businessFormationDefaults.addressModalBackButtonText)
+              screen.queryByText(Config.formation.general.backButtonText)
             ).not.toBeInTheDocument();
           });
           await page.openAddressModal("members");
@@ -266,7 +225,7 @@ describe("Formation - Members Field", () => {
 
           await waitFor(() => {
             return expect(
-              screen.queryByText(Config.businessFormationDefaults.addressModalBackButtonText)
+              screen.queryByText(Config.formation.general.backButtonText)
             ).not.toBeInTheDocument();
           });
           expect(screen.queryByText(nextButtonText, { exact: false })).not.toBeInTheDocument();
@@ -286,7 +245,7 @@ describe("Formation - Members Field", () => {
     describe(`default address checkbox`, () => {
       const legalStructureId = "limited-liability-company";
 
-      it("adds members using business data using checkbox with name", async () => {
+      it("adds members using business data using checkbox with name when no members exist", async () => {
         const page = await getPageHelper(
           {
             legalStructureId,
@@ -309,8 +268,36 @@ describe("Formation - Members Field", () => {
         );
         await page.openAddressModal("members");
 
-        page.selectCheckbox(Config.businessFormationDefaults.membersCheckboxText);
+        page.selectCheckbox(Config.formation.fields.members.addressCheckboxText);
         expect(page.getInputElementByLabel("Address name").value).toBe("John Smith");
+        expect(page.getInputElementByLabel("Address line1").value).toBe("123 Address");
+        expect(page.getInputElementByLabel("Address line2").value).toBe("business suite 201");
+        expect(page.getInputElementByLabel("Address city").value).toBe("Hampton");
+        expect(page.getInputElementByLabel("Address state").value).toBe("NJ");
+        expect(page.getInputElementByLabel("Address zip code").value).toBe("07601");
+      });
+
+      it("adds members using business data using checkbox without name when some members already exist", async () => {
+        const page = await getPageHelper(
+          {
+            legalStructureId,
+            municipality: generateMunicipality({ displayName: "Hampton Borough", name: "Hampton" }),
+          },
+          {
+            members: [generateFormationMember({})],
+            contactFirstName: "John",
+            contactLastName: "Smith",
+            addressLine1: "123 Address",
+            addressLine2: "business suite 201",
+            addressCountry: "US",
+            addressState: { shortCode: "NJ", name: "New Jersey" },
+            addressZipCode: "07601",
+          }
+        );
+        await page.openAddressModal("members");
+
+        page.selectCheckbox(Config.formation.fields.members.addressCheckboxText);
+        expect(page.getInputElementByLabel("Address name").value).toBe("");
         expect(page.getInputElementByLabel("Address line1").value).toBe("123 Address");
         expect(page.getInputElementByLabel("Address line2").value).toBe("business suite 201");
         expect(page.getInputElementByLabel("Address city").value).toBe("Hampton");
@@ -341,47 +328,17 @@ describe("Formation - Members Field", () => {
         );
         await page.openAddressModal("members");
 
-        page.selectCheckbox(Config.businessFormationDefaults.membersCheckboxText);
+        page.selectCheckbox(Config.formation.fields.members.addressCheckboxText);
         expect(page.getInputElementByLabel("Address city").value).toBe("Hampton");
 
         page.clickAddressSubmit();
         await waitFor(() => {
-          expect(
-            screen.getByText(Config.businessFormationDefaults.membersSuccessTextBody, { exact: false })
-          ).toBeInTheDocument();
+          expect(screen.getByText(Config.formation.fields.members.successSnackbarBody)).toBeInTheDocument();
         });
         await page.submitContactsStep();
         const newMembers = currentUserData().formationData.formationFormData.members!;
         expect(newMembers.length).toEqual(1);
         expect(newMembers[0].addressCity).toEqual("Hampton");
-      });
-
-      it("adds members using business data using checkbox without name", async () => {
-        const page = await getPageHelper(
-          {
-            legalStructureId,
-            municipality: generateMunicipality({ displayName: "Hampton Borough", name: "Hampton" }),
-          },
-          {
-            members: [generateFormationMember({})],
-            contactFirstName: "John",
-            contactLastName: "Smith",
-            addressLine1: "123 Address",
-            addressLine2: "business suite 201",
-            addressCountry: "US",
-            addressState: { shortCode: "NJ", name: "New Jersey" },
-            addressZipCode: "07601",
-          }
-        );
-        await page.openAddressModal("members");
-
-        page.selectCheckbox(Config.businessFormationDefaults.membersCheckboxText);
-        expect(page.getInputElementByLabel("Address name").value).toBe("");
-        expect(page.getInputElementByLabel("Address line1").value).toBe("123 Address");
-        expect(page.getInputElementByLabel("Address line2").value).toBe("business suite 201");
-        expect(page.getInputElementByLabel("Address city").value).toBe("Hampton");
-        expect(page.getInputElementByLabel("Address state").value).toBe("NJ");
-        expect(page.getInputElementByLabel("Address zip code").value).toBe("07601");
       });
 
       it("only fills & disables required fields with values when checkbox checked", async () => {
@@ -399,7 +356,7 @@ describe("Formation - Members Field", () => {
         );
         await page.openAddressModal("members");
 
-        page.selectCheckbox(Config.businessFormationDefaults.membersCheckboxText);
+        page.selectCheckbox(Config.formation.fields.members.addressCheckboxText);
         expect(page.getInputElementByLabel("Address line1").value).toBe("123 Address");
         expect(page.getInputElementByLabel("Address line2").value).toBe("");
         expect(page.getInputElementByLabel("Address zip code").value).toBe("");
@@ -420,8 +377,8 @@ describe("Formation - Members Field", () => {
         );
         await page.openAddressModal("members");
 
-        page.selectCheckbox(Config.businessFormationDefaults.membersCheckboxText);
-        expect(screen.getByText(Config.businessFormationDefaults.addressErrorText)).toBeInTheDocument();
+        page.selectCheckbox(Config.formation.fields.members.addressCheckboxText);
+        expect(screen.getByText(Config.formation.addressModal.addressLine1.error)).toBeInTheDocument();
       });
 
       it("unselects checkbox when interacting with non-disabled fields", async () => {
@@ -438,13 +395,13 @@ describe("Formation - Members Field", () => {
         );
         await page.openAddressModal("members");
 
-        page.selectCheckbox(Config.businessFormationDefaults.membersCheckboxText);
+        page.selectCheckbox(Config.formation.fields.members.addressCheckboxText);
         expect(
-          page.getInputElementByLabel(Config.businessFormationDefaults.membersCheckboxText).checked
+          page.getInputElementByLabel(Config.formation.fields.members.addressCheckboxText).checked
         ).toEqual(true);
         page.fillText("Address zip code", "12345");
         expect(
-          page.getInputElementByLabel(Config.businessFormationDefaults.membersCheckboxText).checked
+          page.getInputElementByLabel(Config.formation.fields.members.addressCheckboxText).checked
         ).toEqual(false);
         expect(page.getInputElementByLabel("Address line1").disabled).toBe(false);
         expect(page.getInputElementByLabel("Address line2").disabled).toEqual(false);
@@ -459,9 +416,7 @@ describe("Formation - Members Field", () => {
     it("fires validations when directors are empty", async () => {
       const page = await getPageHelper({ legalStructureId: "s-corporation" }, { members: [] });
       await attemptApiSubmission(page);
-      expect(
-        screen.getByText(Config.businessFormationDefaults.directorsMinimumErrorText)
-      ).toBeInTheDocument();
+      expect(screen.getByText(Config.formation.fields.directors.error)).toBeInTheDocument();
     });
 
     const attemptApiSubmission = async (page: FormationPageHelpers) => {
