@@ -21,12 +21,11 @@ A Disadvantaged Business Enterprise (DBE) certification may provide an advantage
 
 ### Eligibility Criteria
 
-A DBE must either:
+A DBE must meet all of the following:
 
-1. Be a small business, according to the Small Business Administration (SBA) size standards; and
-2. Be 51% owned, and controlled by one or more socially and economically disadvantaged* individuals whose personal net worth does not exceed $1.32 million.
-
-*\*African Americans, Hispanics, Native Americans, Asian-Pacific, and Subcontinent Asian Americans, and women are presumed to be socially and economically disadvantaged.*
+1. Small business, according to the [Small Business Administration (SBA) size standards](https://www.sba.gov/size-standards/index.html)
+2. 51% owned, and controlled by one or more socially and economically disadvantaged individuals whose personal 
+3. Net worth does not exceed $1.32M
 
 ### Application Needs
 
