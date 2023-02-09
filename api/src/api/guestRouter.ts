@@ -1,7 +1,8 @@
+import { NameAvailability } from "@shared/businessNameSearch";
 import { UserData } from "@shared/userData";
 import { Router } from "express";
 import { getAnnualFilings } from "../domain/annual-filings/getAnnualFilings";
-import { BusinessNameClient, NameAvailability } from "../domain/types";
+import { BusinessNameClient } from "../domain/types";
 
 export const guestRouterFactory = (businessNameClient: BusinessNameClient): Router => {
   const router = Router();

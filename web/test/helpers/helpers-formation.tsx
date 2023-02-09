@@ -7,7 +7,6 @@ import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import {
   defaultDisplayDateFormat,
   FormationSignedAddress,
-  NameAvailability,
   Task,
   TasksDisplayContent,
 } from "@/lib/types/types";
@@ -33,6 +32,7 @@ import {
   generateFormationIncorporator,
   generateMunicipality,
   Municipality,
+  NameAvailability,
   ProfileData,
   PublicFilingLegalType,
   publicFilingLegalTypes,

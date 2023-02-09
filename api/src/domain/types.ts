@@ -1,3 +1,4 @@
+import { NameAvailability } from "@shared/businessNameSearch";
 import { BusinessUser, NewsletterResponse, UserTestingResponse } from "@shared/businessUser";
 import { UserFeedbackRequest, UserIssueRequest } from "@shared/feedbackRequest";
 import { FormationSubmitResponse, GetFilingResponse } from "@shared/formationData";
@@ -96,8 +97,3 @@ export type UpdateLicenseStatus = (userId: string, nameAndAddress: NameAndAddres
 export type UpdateOperatingPhase = (userData: UserData) => UserData;
 export type UpdateSidebarCards = (userData: UserData) => UserData;
 export type GetCertHttpsAgent = () => Promise<https.Agent>;
-
-export type NameAvailability = {
-  status: "AVAILABLE" | "DESIGNATOR" | "SPECIAL_CHARACTER" | "UNAVAILABLE";
-  similarNames: string[];
-};

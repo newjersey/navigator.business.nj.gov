@@ -11,7 +11,7 @@ import {
 } from "@/test/helpers/helpers-formation";
 import { createEmptyFormationFormData } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
-import { screen } from "@testing-library/react";
+import { screen, within } from "@testing-library/react";
 
 function mockMaterialUI(): typeof materialUi {
   return {
@@ -98,6 +98,33 @@ describe("Formation - BusinessNameStep", () => {
     await page.searchBusinessName({ status: "UNAVAILABLE" });
     expect(screen.getByTestId("unavailable-text")).toBeInTheDocument();
     expect(screen.queryByTestId("available-text")).not.toBeInTheDocument();
+  });
+
+  it("shows DESIGNATOR text if name is not available", async () => {
+    const page = getPageHelper();
+
+    page.fillText("Search business name", "Pizza Joint");
+    await page.searchBusinessName({ status: "DESIGNATOR" });
+    expect(screen.getByTestId("designator-text")).toBeInTheDocument();
+  });
+
+  it("shows SPECIAL_CHARACTER text if name is not available", async () => {
+    const page = getPageHelper();
+
+    page.fillText("Search business name", "Pizza Joint");
+    await page.searchBusinessName({ status: "SPECIAL_CHARACTER" });
+    expect(screen.getByTestId("special-character-text")).toBeInTheDocument();
+  });
+
+  it("shows RESTRICTED text if name is not available", async () => {
+    const page = getPageHelper();
+
+    page.fillText("Search business name", "Pizza Joint");
+    await page.searchBusinessName({ status: "RESTRICTED", invalidWord: "Joint" });
+    expect(screen.getByTestId("restricted-word-text")).toBeInTheDocument();
+    expect(
+      within(screen.getByTestId("restricted-word-text")).getByText("Joint", { exact: false })
+    ).toBeInTheDocument();
   });
 
   it("shows similar unavailable names when not available", async () => {

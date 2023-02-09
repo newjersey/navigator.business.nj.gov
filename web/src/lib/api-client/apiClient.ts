@@ -1,8 +1,9 @@
 import { getCurrentToken } from "@/lib/auth/sessionHelper";
-import { NameAvailability, SelfRegResponse } from "@/lib/types/types";
+import { SelfRegResponse } from "@/lib/types/types";
 import { phaseChangeAnalytics, setPhaseDimension } from "@/lib/utils/analytics-helpers";
 import {
   NameAndAddress,
+  NameAvailability,
   UserData,
   UserFeedbackRequest,
   UserIssueRequest,

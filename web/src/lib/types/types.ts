@@ -482,11 +482,6 @@ export interface SessionHelper {
   getCurrentUser: () => Promise<BusinessUser>;
 }
 
-export type NameAvailability = {
-  status: "AVAILABLE" | "DESIGNATOR" | "SPECIAL_CHARACTER" | "UNAVAILABLE";
-  similarNames: string[];
-};
-
 export type SelfRegResponse = {
   authRedirectURL: string;
   userData: UserData;

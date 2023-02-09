@@ -3,12 +3,12 @@ import {
   createEmptyFormationDisplayContent,
   FormationDbaContent,
   FormationDisplayContent,
-  NameAvailability,
 } from "@/lib/types/types";
 import {
   createEmptyFormationFormData,
   FormationFields,
   FormationFormData,
+  NameAvailability,
 } from "@businessnjgovnavigator/shared/";
 import { createContext } from "react";
 
