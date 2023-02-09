@@ -8,9 +8,9 @@ import { getMergedConfig } from "@/contexts/configContext";
 import { isZipCodeIntl } from "@/lib/domain-logic/isZipCodeIntl";
 import { isZipCodeNj } from "@/lib/domain-logic/isZipCodeNj";
 import { isZipCodeUs } from "@/lib/domain-logic/isZipCodeUs";
-import { FormationDisplayContent, FormationFieldErrorState, NameAvailability } from "@/lib/types/types";
+import { FormationDisplayContent, FormationFieldErrorState } from "@/lib/types/types";
 import { templateEval, validateEmail } from "@/lib/utils/helpers";
-import { FormationFields, FormationFormData } from "@businessnjgovnavigator/shared";
+import { FormationFields, FormationFormData, NameAvailability } from "@businessnjgovnavigator/shared";
 
 export const getErrorStateForField = (
   field: FormationFields,

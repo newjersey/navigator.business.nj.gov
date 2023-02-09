@@ -136,12 +136,12 @@ export const BusinessNameStep = (): ReactElement => {
           {SearchBusinessNameErrorLookup[error]}
         </Alert>
       )}
-      {nameAvailability != null && nameAvailability.status === "DESIGNATOR" && (
+      {nameAvailability?.status === "DESIGNATOR" && (
         <Alert variant="error" dataTestid="designator-text">
           <p className="font-sans-xs">{Config.businessFormationDefaults.nameCheckDesignatorText}</p>
         </Alert>
       )}
-      {nameAvailability != null && nameAvailability.status === "SPECIAL_CHARACTER" && (
+      {nameAvailability?.status === "SPECIAL_CHARACTER" && (
         <Alert variant="error" dataTestid="special-character-text">
           <Content className="font-sans-xs">
             {templateEval(Config.businessFormationDefaults.nameCheckSpecialCharacterMarkDown, {
@@ -150,7 +150,18 @@ export const BusinessNameStep = (): ReactElement => {
           </Content>
         </Alert>
       )}
-      {nameAvailability != null && nameAvailability.status === "UNAVAILABLE" && (
+      {nameAvailability?.status === "RESTRICTED" && (
+        <Alert variant="error" dataTestid="restricted-word-text">
+          <Content className="font-sans-xs">
+            {templateEval(Config.businessFormationDefaults.nameCheckRestrictedWordMarkDown, {
+              name: submittedName,
+              word: nameAvailability.invalidWord ?? "*unknown*",
+            })}
+          </Content>
+        </Alert>
+      )}
+
+      {nameAvailability?.status === "UNAVAILABLE" && (
         <Alert variant="error" dataTestid="unavailable-text">
           <p className="font-sans-xs">
             {templateEval(Config.businessFormationDefaults.nameCheckUnavailableText, {

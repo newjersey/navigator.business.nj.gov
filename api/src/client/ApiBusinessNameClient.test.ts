@@ -45,6 +45,21 @@ describe("ApiBusinessNameClient", () => {
     expect(mockAxios.get).toHaveBeenCalledWith("www.example.com/Available?q=name");
   });
 
+  it("returns a restricted reason in the response", async () => {
+    const mockResponse: ApiNameAvailabilityResponse = {
+      Available: false,
+      Reason: "contains the restricted word 'thingy' whatevers",
+      Similars: [],
+    };
+    mockAxios.get.mockResolvedValue({ data: mockResponse });
+    expect(await client.search("name")).toEqual({
+      status: "RESTRICTED",
+      invalidWord: "thingy",
+      similarNames: [],
+    });
+    expect(mockAxios.get).toHaveBeenCalledWith("www.example.com/Available?q=name");
+  });
+
   it("returns a special character reason in the response", async () => {
     const mockResponse: ApiNameAvailabilityResponse = {
       Available: false,

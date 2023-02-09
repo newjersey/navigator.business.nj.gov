@@ -2302,6 +2302,12 @@ collections:
                   widget: markdown,
                   hint: This field supports Markdown,
                 }
+              - {
+                  label: Name Check Restricted Word Error Text,
+                  name: nameCheckRestrictedWordMarkDown,
+                  widget: markdown,
+                  hint: This field supports Markdown,
+                }
               - { label: Name Check Available Text, name: nameCheckAvailableText, widget: text }
               - { label: Name Check Field Label, name: nameCheckFieldLabel, widget: string }
               - { label: Next Button Text, name: nextButtonText, widget: string }
