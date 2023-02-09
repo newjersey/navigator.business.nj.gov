@@ -1,6 +1,6 @@
 import { Addresses } from "@/components/tasks/business-formation/contacts/Addresses";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import {
   corpLegalStructures,
   createEmptyFormationMember,
@@ -9,6 +9,7 @@ import {
 import { ReactElement, useContext } from "react";
 
 export const Members = (): ReactElement => {
+  const { Config } = useConfig();
   const { state, setFormationFormData } = useContext(BusinessFormationContext);
   const isCorp = corpLegalStructures.includes(state.formationFormData.legalType);
   const defaultAddress = isCorp
@@ -25,22 +26,15 @@ export const Members = (): ReactElement => {
         addressZipCode: state.formationFormData.addressZipCode,
       };
 
-  const displayContent = isCorp
-    ? {
-        newButtonText: Config.businessFormationDefaults.directorsNewButtonText,
-        alertHeader: Config.businessFormationDefaults.directorsSuccessTextHeader,
-        alertBody: Config.businessFormationDefaults.directorsSuccessTextBody,
-        title: Config.businessFormationDefaults.directorsModalTitle,
-        saveButton: Config.businessFormationDefaults.directorsModalNextButtonText,
-      }
-    : {
-        newButtonText: Config.businessFormationDefaults.membersNewButtonText,
-        alertHeader: Config.businessFormationDefaults.membersSuccessTextHeader,
-        alertBody: Config.businessFormationDefaults.membersSuccessTextBody,
-        title: Config.businessFormationDefaults.membersModalTitle,
-        defaultCheckbox: Config.businessFormationDefaults.membersCheckboxText,
-        saveButton: Config.businessFormationDefaults.membersModalNextButtonText,
-      };
+  const configField = isCorp ? "directors" : "members";
+  const displayContent = {
+    newButtonText: Config.formation.fields[configField].addButtonText,
+    alertHeader: Config.formation.fields[configField].successSnackbarHeader,
+    alertBody: Config.formation.fields[configField].successSnackbarBody,
+    title: Config.formation.fields[configField].modalTitle,
+    saveButton: Config.formation.fields[configField].modalSaveButton,
+    defaultCheckbox: isCorp ? undefined : Config.formation.fields.members.addressCheckboxText,
+  };
 
   return (
     <Addresses<FormationMember>

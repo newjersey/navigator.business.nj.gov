@@ -214,7 +214,7 @@
         "reviewStepHeader": "Board of Directors",
         "reviewStepNameLabel": "**Director Name:**",
         "reviewStepAddressLabel": "**Address:**",
-        "modalHeader": "Add New Director",
+        "modalTitle": "Add New Director",
         "modalSaveButton": "Add Director",
         "addButtonText": "Add new Director"
       },
@@ -340,20 +340,21 @@
       "addressCity": {
         "fieldDisplayName": "City",
         "placeholder": "City",
-        "label": "**City**"
+        "label": "**City**",
+        "error": "Enter a city."
       },
       "addressState": {
         "fieldDisplayName": "State",
         "placeholder": "State",
-        "label": "**State**"
+        "label": "**State**",
+        "error": "Enter a state."
       },
-      "zipCode": {
+      "addressZipCode": {
         "fieldDisplayName": "Zip Code",
         "label": "**Zip Code**",
         "placeholder": "Zip COde",
         "error": "Enter a Zip Code."
-      },
-      "backButtonText": "Cancel"
+      }
     },
     "partnershipRights": {
       "header": "Partnership Rights",
@@ -397,7 +398,8 @@
       "warningModalHeader": "You Might Need a Different Form",
       "warningModalBody": "If you change your proposed business structure in the Navigator profile, you might need to complete a different form. Don't worry, once you update your profile we'll tell you which form you need and where to complete it."
     },
-    "config": {
+    "general": {
+      "backButtonText": "Cancel",
       "notSetBusinessNameText": "Not set",
       "initialNextNexusButtonText": "Continue Authorizing My Business",
       "initialNextButtonText": "Continue Forming My Business",
