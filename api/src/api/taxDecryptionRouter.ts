@@ -1,7 +1,9 @@
 import { Router } from "express";
 import { EncryptionDecryptionClient } from "../domain/types";
 
-export const taxDecryptionFactory = (encryptionDecryptionClient: EncryptionDecryptionClient): Router => {
+export const taxDecryptionRouterFactory = (
+  encryptionDecryptionClient: EncryptionDecryptionClient
+): Router => {
   const router = Router();
 
   router.post("/decrypt", async (req, res) => {
