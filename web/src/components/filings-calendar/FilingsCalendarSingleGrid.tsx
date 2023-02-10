@@ -8,7 +8,7 @@ import { OperateReference } from "@/lib/types/types";
 import {
   defaultDateFormat,
   getCurrentDate,
-  getJanOfCurrentYear,
+  getJanOfYear,
   parseDateWithFormat,
   TaxFiling,
   UserData,
@@ -20,6 +20,7 @@ import { UnStyledButton } from "../njwds-extended/UnStyledButton";
 interface Props {
   userData: UserData;
   num: number;
+  activeYear: string;
   operateReferences: Record<string, OperateReference>;
 }
 
@@ -28,10 +29,11 @@ const NUM_OF_FILINGS_ALWAYS_VIEWABLE = 2;
 export const FilingsCalendarSingleGrid = (props: Props) => {
   const { Config } = useConfig();
   const [showExpandFilingsButton, setShowExpandFilingsButton] = useState(false);
-  const date = getJanOfCurrentYear().add(props.num, "months");
+  const date = getJanOfYear(parseDateWithFormat(props.activeYear, "YYYY")).add(props.num, "months");
   const sortedFilteredFilingsWithinAYear: TaxFiling[] = props.userData?.taxFilingData.filings
-    ? sortFilterFilingsWithinAYear(props.userData.taxFilingData.filings)
+    ? sortFilterFilingsWithinAYear(props.userData.taxFilingData.filings, props.activeYear)
     : [];
+
   const thisMonthFilings = sortedFilteredFilingsWithinAYear.filter((it) => {
     return (
       parseDateWithFormat(it.dueDate, defaultDateFormat).month() === date.month() &&
@@ -41,6 +43,7 @@ export const FilingsCalendarSingleGrid = (props: Props) => {
 
   const firstTwoFilings = thisMonthFilings.slice(0, NUM_OF_FILINGS_ALWAYS_VIEWABLE);
   const remainingFilings = thisMonthFilings.slice(NUM_OF_FILINGS_ALWAYS_VIEWABLE);
+  const isOnCurrentYear = getCurrentDate().year().toString() == props.activeYear;
 
   const renderFilings = (filings: TaxFiling[]) => {
     return filings
@@ -76,14 +79,16 @@ export const FilingsCalendarSingleGrid = (props: Props) => {
     <div data-testid={date.format("MMM YYYY")}>
       <div
         className={`${
-          getCurrentDate().month() === date.month() ? "text-green" : "text-base-dark"
+          isOnCurrentYear && getCurrentDate().month() === date.month() ? "text-green" : "text-base-dark"
         } padding-bottom-1`}
         aria-hidden="true"
       >
         <span className="text-bold">{date.format("MMM")}</span> <span>{date.format("YYYY")}</span>
       </div>
 
-      {!isCalendarMonthLessThanCurrentMonth(props.num) && (
+      {isCalendarMonthLessThanCurrentMonth(props.num) && isOnCurrentYear ? (
+        <></>
+      ) : (
         <>
           {renderFilings(firstTwoFilings)}
           {remainingFilings.length > 0 && showExpandFilingsButton && (

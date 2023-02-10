@@ -1,7 +1,7 @@
 import { CircularProgress } from "@mui/material";
 import React, { ReactElement, useEffect, useRef, useState } from "react";
 export interface GenericButtonProps {
-  isColor: string;
+  className?: string;
   children?: React.ReactNode;
   onClick?: (() => void) | ((event: React.MouseEvent) => Promise<void>) | ((event: React.MouseEvent) => void);
   dataTestId?: string;
@@ -41,7 +41,7 @@ export const GenericButton = (props: GenericButtonProps): ReactElement => {
   }, [height, width, props.isLoading, widthRef]);
 
   const className = [
-    props.isColor,
+    props.className,
     isLargeButton,
     isUnBolded,
     isNotFullWidthOnMobile,

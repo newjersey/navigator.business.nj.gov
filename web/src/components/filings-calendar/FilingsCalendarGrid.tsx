@@ -1,12 +1,14 @@
 import { FilingsCalendarSingleGrid } from "@/components/filings-calendar/FilingsCalendarSingleGrid";
 import { isCalendarMonthLessThanCurrentMonth } from "@/lib/domain-logic/filterFilings";
 import { OperateReference } from "@/lib/types/types";
+import { getCurrentDate } from "@businessnjgovnavigator/shared/dateHelpers";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { ReactElement } from "react";
 
 interface Props {
   operateReferences: Record<string, OperateReference>;
   userData: UserData;
+  activeYear: string;
 }
 
 export const FilingsCalendarGrid = (props: Props): ReactElement => {
@@ -28,7 +30,8 @@ export const FilingsCalendarGrid = (props: Props): ReactElement => {
                   <td
                     key={month}
                     className={
-                      isCalendarMonthLessThanCurrentMonth(month)
+                      isCalendarMonthLessThanCurrentMonth(month) &&
+                      props.activeYear == getCurrentDate().year().toString()
                         ? "td-gray-border bg-base-extra-light"
                         : "td-gray-border"
                     }
@@ -37,6 +40,7 @@ export const FilingsCalendarGrid = (props: Props): ReactElement => {
                       num={month}
                       operateReferences={props.operateReferences}
                       userData={props.userData}
+                      activeYear={props.activeYear}
                     />
                   </td>
                 );

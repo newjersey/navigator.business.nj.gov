@@ -13,6 +13,7 @@ export type BgColors =
 
 interface Props {
   backgroundColor: BgColors;
+  className?: string;
   children: React.ReactNode;
   dataTestid?: string;
   isFixedWidth?: boolean;
@@ -69,7 +70,16 @@ export const Tag = (props: Props): ReactElement => {
   const disableUppercase = props.isLowerCase ? "text-no-uppercase" : "";
   const radius = props.isRadiusMd ? "radius-md" : "";
 
-  const className = [defaultStyle, styling, hoverStyling, textWrap, fixedWidth, disableUppercase, radius]
+  const className = [
+    defaultStyle,
+    styling,
+    hoverStyling,
+    textWrap,
+    fixedWidth,
+    disableUppercase,
+    radius,
+    props.className,
+  ]
     .map((i) => {
       return i?.trim();
     })

@@ -21,7 +21,7 @@ import {
 import {
   defaultDateFormat,
   getCurrentDate,
-  getJanOfCurrentYear,
+  getJanOfYear,
   OperatingPhases,
   parseDateWithFormat,
   randomInt,
@@ -99,7 +99,7 @@ describe("<FilingsCalendar />", () => {
   });
 
   it("displays filings calendar with annual report date", () => {
-    const dueDate = getJanOfCurrentYear().add(2, "months");
+    const dueDate = getJanOfYear().add(2, "months");
     const annualReport = generateTaxFiling({
       identifier: "annual-report",
       dueDate: dueDate.format(defaultDateFormat),
@@ -260,7 +260,7 @@ describe("<FilingsCalendar />", () => {
     ).not.toBeInTheDocument();
   });
 
-  it("displays empty calendar image without body text when there are no filings inside of the year", () => {
+  it("displays calendar content when there are filings in two years", () => {
     const annualReport = generateTaxFiling({
       identifier: "annual-report",
       dueDate: getCurrentDate().add(2, "years").format(defaultDateFormat),
@@ -270,7 +270,7 @@ describe("<FilingsCalendar />", () => {
       profileData: generateProfileData({
         operatingPhase: randomElementFromArray(
           OperatingPhases.filter((obj) => {
-            return obj.displayCalendarType === "FULL";
+            return obj.displayCalendarType === "FULL" && obj.displayCalendarToggleButton;
           })
         ).id,
       }),
@@ -287,17 +287,16 @@ describe("<FilingsCalendar />", () => {
     };
 
     renderFilingsCalendar(operateReferences, userData);
-
-    expect(screen.queryByTestId("filings-calendar-as-table")).not.toBeInTheDocument();
     expect(
-      screen.queryByText(Config.dashboardDefaults.calendarListViewButton, { exact: false })
-    ).not.toBeInTheDocument();
-    expect(
-      screen.getByText(markdownToText(Config.dashboardDefaults.emptyCalendarTitleText))
+      screen.getByText(Config.dashboardDefaults.calendarListViewButton, { exact: false })
     ).toBeInTheDocument();
+    expect(screen.getByTestId("filings-calendar-as-table")).toBeInTheDocument();
     expect(
-      screen.queryByText(markdownToText(Config.dashboardDefaults.emptyCalendarBodyText))
+      screen.queryByText(markdownToText(Config.dashboardDefaults.emptyCalendarTitleText))
     ).not.toBeInTheDocument();
+    fireEvent.click(screen.getByTestId("primary-year-selector-dropdown-button"));
+    fireEvent.click(screen.getByText(getCurrentDate().add(2, "years").year().toString()));
+    expect(screen.getByText(`Annual Report`)).toBeInTheDocument();
   });
 
   it("displays empty calendar content when there are no filings", () => {

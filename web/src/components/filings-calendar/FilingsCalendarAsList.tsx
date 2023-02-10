@@ -15,6 +15,7 @@ const LIST_VIEW_MORE_INCREMENT = 5;
 
 interface Props {
   userData: UserData;
+  activeYear: string;
   operateReferences: Record<string, OperateReference>;
 }
 
@@ -23,7 +24,7 @@ export const FilingsCalendarAsList = (props: Props): ReactElement => {
   const [numberOfVisibleCalendarEntries, setNumberOfVisibleCalendarEntries] =
     useState<number>(LIST_VIEW_MORE_INCREMENT);
   const sortedFilteredFilingsWithinAYear: TaxFiling[] = props.userData?.taxFilingData.filings
-    ? sortFilterFilingsWithinAYear(props.userData.taxFilingData.filings)
+    ? sortFilterFilingsWithinAYear(props.userData.taxFilingData.filings, props.activeYear)
     : [];
 
   if (sortedFilteredFilingsWithinAYear.length === 0) {
