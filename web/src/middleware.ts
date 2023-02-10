@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-server-import-in-page */
 
+import { NextURL } from "next/dist/server/web/next-url";
 import { NextRequest, NextResponse } from "next/server";
 
 const BASIC_AUTH_USERNAME = process.env.BASIC_AUTH_USERNAME;
@@ -19,7 +20,6 @@ export function middleware(req: NextRequest) {
   }
 
   const basicAuth = req.headers.get("authorization");
-  const url = req.nextUrl;
 
   if (basicAuth) {
     console.log("basic auth exists - validating", basicAuth);
@@ -31,8 +31,8 @@ export function middleware(req: NextRequest) {
     }
   }
 
-  console.log("sending to auth");
-  url.pathname = "/api/basicauth";
+  const newUrl = new NextURL(`${process.env.API_BASE_URL}/basicauth`);
+  console.log("sending to auth at", newUrl);
 
-  return NextResponse.rewrite(url);
+  return NextResponse.rewrite(newUrl);
 }
