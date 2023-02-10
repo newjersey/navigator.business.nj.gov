@@ -80,9 +80,6 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
           maxLen: params.maxLen.toString(),
         });
       }
-      if (params.dataField === "addressLine2") {
-        console.log({ isValid, isTooLong, label });
-      }
       return { label, invalid: !isValid };
     };
 

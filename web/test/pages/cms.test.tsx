@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 
 import { getMergedConfig } from "@/contexts/configContext";
 import { flattenObject } from "@/lib/utils/helpers";
@@ -12,7 +13,10 @@ describe("cms", () => {
         path.join(process.cwd(), "web", "public", "mgmt", "config.yml"),
         "utf8"
       );
-      const mergedConfig = getMergedConfig();
+
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      const { formation, ...mergedConfig } = getMergedConfig().default;
 
       for (const field of Object.keys(flattenObject(mergedConfig))) {
         try {

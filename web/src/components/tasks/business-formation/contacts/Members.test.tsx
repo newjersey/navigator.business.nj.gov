@@ -166,15 +166,18 @@ describe("Formation - Members Field", () => {
           });
           page.clickAddressSubmit();
 
-          const maxLengthMessage = (modalField: keyof typeof Config.formation.addressModal): string =>
+          const maxLengthMessage = (
+            modalField: keyof typeof Config.formation.addressModal,
+            len: string
+          ): string =>
             templateEval(Config.formation.general.maximumLengthErrorText, {
               field: Config.formation.addressModal[modalField].fieldDisplayName,
-              maxLen: "35",
+              maxLen: len,
             });
 
-          expect(screen.getByText(maxLengthMessage("addressLine1"))).toBeInTheDocument();
-          expect(screen.getByText(maxLengthMessage("addressLine2"))).toBeInTheDocument();
-          expect(screen.getByText(maxLengthMessage("addressCity"))).toBeInTheDocument();
+          expect(screen.getByText(maxLengthMessage("addressLine1", "35"))).toBeInTheDocument();
+          expect(screen.getByText(maxLengthMessage("addressLine2", "35"))).toBeInTheDocument();
+          expect(screen.getByText(maxLengthMessage("addressCity", "30"))).toBeInTheDocument();
 
           await page.fillAddressModal({
             addressLine1: Array(35).fill("A").join(""),
@@ -183,9 +186,9 @@ describe("Formation - Members Field", () => {
             addressState: generateStateItem(),
             addressZipCode: "08100",
           });
-          expect(screen.queryByText(maxLengthMessage("addressLine1"))).not.toBeInTheDocument();
-          expect(screen.queryByText(maxLengthMessage("addressLine2"))).not.toBeInTheDocument();
-          expect(screen.queryByText(maxLengthMessage("addressCity"))).not.toBeInTheDocument();
+          expect(screen.queryByText(maxLengthMessage("addressLine1", "35"))).not.toBeInTheDocument();
+          expect(screen.queryByText(maxLengthMessage("addressLine2", "35"))).not.toBeInTheDocument();
+          expect(screen.queryByText(maxLengthMessage("addressCity", "30"))).not.toBeInTheDocument();
 
           page.clickAddressSubmit();
           await waitFor(() => {
