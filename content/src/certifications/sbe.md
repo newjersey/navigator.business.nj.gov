@@ -16,12 +16,10 @@ isSbe: true
 
 ### Eligibility Criteria
 
-A SBE is a business:
-
-1. with its primary location is in New Jersey
-2. that has 100 or fewer full-time employees
-3. that has 51% or more of their business operations/sales in New Jersey, OR has 51% or more of the company’s full-time employees in New Jersey
-4. that meets [additional revenue limits](https://business.nj.gov/pages/sbe) based on your business activity
+* Primary location is in New Jersey
+* 100 or fewer full-time employees
+* 51% or more of their business operations/sales in New Jersey, OR has 51% or more of the company’s full-time employees in New Jersey
+* Meets [additional revenue limits](https://business.nj.gov/pages/sbe) based on your business activity
 
 ### Application Needs
 
