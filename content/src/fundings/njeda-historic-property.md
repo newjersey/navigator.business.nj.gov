@@ -14,15 +14,16 @@ callToActionLink: https://www.njeda.com/historic-property-reinvestment-program/
 callToActionText: Learn More
 fundingType: tax credit
 programFrequency: ongoing
-status: opening soon
+status: deadline
 programPurpose: In State
 agency:
-  - njeda
+  - NJEDA
 agencyContact: ""
 businessStage: both
 employeesRequired: n/a
 homeBased: unknown
-certifications: null
+mwvb:
+  - n/a
 preferenceForOpportunityZone: yes
 county:
   - All
