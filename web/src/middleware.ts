@@ -10,7 +10,11 @@ export const config = {
 };
 
 export function middleware(req: NextRequest) {
+  console.log("in middleware");
+  console.log("use basic auth value:", process.env.USE_BASIC_AUTH);
+
   if (process.env.USE_BASIC_AUTH !== "true") {
+    console.log("is not true - skipping auth");
     return;
   }
 
@@ -18,6 +22,7 @@ export function middleware(req: NextRequest) {
   const url = req.nextUrl;
 
   if (basicAuth) {
+    console.log("basic auth exists - validating", basicAuth);
     const authValue = basicAuth.split(" ")[1];
     const [user, pwd] = atob(authValue).split(":");
 
@@ -25,6 +30,8 @@ export function middleware(req: NextRequest) {
       return NextResponse.next();
     }
   }
+
+  console.log("sending to auth");
   url.pathname = "/api/basicauth";
 
   return NextResponse.rewrite(url);
