@@ -2,18 +2,19 @@ import { getMergedConfig } from "@/contexts/configContext";
 import { OperateReference } from "@/lib/types/types";
 import { generateTaxFiling, generateTaxFilingData, generateUserData } from "@/test/factories";
 import * as shared from "@businessnjgovnavigator/shared";
-import { defaultDateFormat, getJanOfCurrentYear } from "@businessnjgovnavigator/shared";
+import { defaultDateFormat, parseDateWithFormat } from "@businessnjgovnavigator/shared";
 import { fireEvent, render, screen } from "@testing-library/react";
-import dayjs from "dayjs";
 import { FilingsCalendarSingleGrid } from "./FilingsCalendarSingleGrid";
 
 const Config = getMergedConfig();
-
+const currentDate = parseDateWithFormat(`2024-02-15`, "YYYY-MM-DD");
+const year = currentDate.year().toString();
+const month: number = Number.parseInt(currentDate.month().toString());
 function mockShared(): typeof shared {
   return {
     ...jest.requireActual("@businessnjgovnavigator/shared"),
     getCurrentDate: () => {
-      return dayjs("2023-01-31");
+      return currentDate;
     },
   };
 }
@@ -22,17 +23,17 @@ jest.mock("@businessnjgovnavigator/shared", () => mockShared());
 
 const taxFilingOne = generateTaxFiling({
   identifier: "tax-filing-one",
-  dueDate: getJanOfCurrentYear().format(defaultDateFormat),
+  dueDate: currentDate.format(defaultDateFormat),
 });
 
 const taxFilingTwo = generateTaxFiling({
   identifier: "tax-filing-two",
-  dueDate: getJanOfCurrentYear().format(defaultDateFormat),
+  dueDate: currentDate.format(defaultDateFormat),
 });
 
 const taxFilingThree = generateTaxFiling({
   identifier: "tax-filing-three",
-  dueDate: getJanOfCurrentYear().format(defaultDateFormat),
+  dueDate: currentDate.format(defaultDateFormat),
 });
 
 const operateReferences: Record<string, OperateReference> = {
@@ -54,27 +55,110 @@ const operateReferences: Record<string, OperateReference> = {
 };
 
 describe("<FilingsCalendarSingleGrid />", () => {
-  it("renders a single tax filing tax filings", () => {
+  it("renders a tax filings", () => {
     const taxFilingData = generateTaxFilingData({ filings: [taxFilingOne] });
     const userData = generateUserData({
       taxFilingData: taxFilingData,
     });
-    render(<FilingsCalendarSingleGrid userData={userData} operateReferences={operateReferences} num={0} />);
-
+    render(
+      <FilingsCalendarSingleGrid
+        userData={userData}
+        operateReferences={operateReferences}
+        num={month}
+        activeYear={year}
+      />
+    );
     expect(screen.getByText("Tax Filing One")).toBeInTheDocument();
-    expect(screen.queryByText("Tax Filing Two")).not.toBeInTheDocument();
-    expect(screen.queryByText("Tax Filing Three")).not.toBeInTheDocument();
+  });
+
+  it("does not render tax filing if it's in a month that has elapsed", () => {
+    const userData = generateUserData({
+      taxFilingData: generateTaxFilingData({
+        filings: [
+          generateTaxFiling({
+            identifier: "tax-filing-old",
+            dueDate: currentDate.subtract(1, "month").format(defaultDateFormat),
+          }),
+        ],
+      }),
+    });
+    render(
+      <FilingsCalendarSingleGrid
+        userData={userData}
+        operateReferences={{
+          "tax-filing-old": {
+            name: "Tax Filing Old",
+            urlSlug: "tax-filing-old-url",
+            urlPath: "tax-filing-old-url-path",
+          },
+        }}
+        num={month - 1}
+        activeYear={year}
+      />
+    );
+    expect(screen.queryByText("Tax Filing Old")).not.toBeInTheDocument();
+  });
+
+  it("renders tax filing when on a future year in a month that has elapsed", () => {
+    const userData = generateUserData({
+      taxFilingData: generateTaxFilingData({
+        filings: [
+          generateTaxFiling({
+            identifier: "tax-filing-old",
+            dueDate: currentDate.add(1, "year").subtract(1, "month").format(defaultDateFormat),
+          }),
+        ],
+      }),
+    });
+    render(
+      <FilingsCalendarSingleGrid
+        userData={userData}
+        operateReferences={{
+          "tax-filing-old": {
+            name: "Tax Filing Old",
+            urlSlug: "tax-filing-old-url",
+            urlPath: "tax-filing-old-url-path",
+          },
+        }}
+        num={month - 1}
+        activeYear={currentDate.add(1, "year").year().toString()}
+      />
+    );
+    expect(screen.getByText("Tax Filing Old")).toBeInTheDocument();
+  });
+
+  it("does not render tax filing when on a future year", () => {
+    const taxFilingData = generateTaxFilingData({ filings: [taxFilingOne] });
+    const userData = generateUserData({
+      taxFilingData: taxFilingData,
+    });
+    render(
+      <FilingsCalendarSingleGrid
+        userData={userData}
+        operateReferences={operateReferences}
+        num={month}
+        activeYear={currentDate.add(1, "year").year().toString()}
+      />
+    );
+
+    expect(screen.queryByText("Tax Filing One")).not.toBeInTheDocument();
   });
 
   it("does not render expand collapse button when there are only two tax filings", () => {
     const userData = generateUserData({
       taxFilingData: generateTaxFilingData({ filings: [taxFilingOne, taxFilingTwo] }),
     });
-    render(<FilingsCalendarSingleGrid userData={userData} operateReferences={operateReferences} num={0} />);
+    render(
+      <FilingsCalendarSingleGrid
+        userData={userData}
+        operateReferences={operateReferences}
+        num={month}
+        activeYear={year}
+      />
+    );
 
     expect(screen.getByText("Tax Filing One")).toBeInTheDocument();
     expect(screen.getByText("Tax Filing Two")).toBeInTheDocument();
-    expect(screen.queryByText("Tax Filing Three")).not.toBeInTheDocument();
     expect(screen.queryByText(Config.dashboardDefaults.viewMoreFilingsButton)).not.toBeInTheDocument();
     expect(screen.queryByText(Config.dashboardDefaults.viewLessFilingsButton)).not.toBeInTheDocument();
   });
@@ -83,7 +167,14 @@ describe("<FilingsCalendarSingleGrid />", () => {
     const userData = generateUserData({
       taxFilingData: generateTaxFilingData({ filings: [taxFilingOne, taxFilingTwo, taxFilingThree] }),
     });
-    render(<FilingsCalendarSingleGrid userData={userData} operateReferences={operateReferences} num={0} />);
+    render(
+      <FilingsCalendarSingleGrid
+        userData={userData}
+        operateReferences={operateReferences}
+        num={month}
+        activeYear={year}
+      />
+    );
 
     expect(screen.getByText("Tax Filing One")).toBeInTheDocument();
     expect(screen.getByText("Tax Filing Two")).toBeInTheDocument();

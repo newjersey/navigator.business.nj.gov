@@ -9,5 +9,5 @@ const colors = {
 };
 
 export const SecondaryButton = (props: Props): ReactElement => {
-  return <GenericButton {...props} isColor={colors[props.isColor]} />;
+  return <GenericButton {...props} className={colors[props.isColor]} />;
 };

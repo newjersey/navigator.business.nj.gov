@@ -6,6 +6,10 @@
   background-color: $white;
 }
 
+.bg-base-lighter-hover:hover {
+  background-color: $base-light !important;
+}
+
 .bg-info-extra-light {
   background-color: $info-extra-light !important;
 }

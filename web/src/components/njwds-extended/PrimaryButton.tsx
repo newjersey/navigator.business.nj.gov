@@ -12,5 +12,5 @@ const colors = {
 };
 
 export const PrimaryButton = (props: Props): ReactElement => {
-  return <GenericButton {...props} isColor={colors[props.isColor]} />;
+  return <GenericButton {...props} className={colors[props.isColor]} />;
 };

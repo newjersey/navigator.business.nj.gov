@@ -1,16 +1,24 @@
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { Icon } from "@/components/njwds/Icon";
-import { ClickAwayListener, Grow, MenuItem, MenuList, Paper, Popper } from "@mui/material";
+import { Box, ClickAwayListener, Grow, MenuItem, MenuList, Paper, Popper } from "@mui/material";
 import React, { ReactElement, ReactNode, useEffect, useRef, useState } from "react";
 
 type ButtonDropdownOption = {
   text: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  props?: Record<string, any>;
   onClick: () => void;
 };
 
 interface Props {
   children: ReactNode;
+  name?: string;
   dropdownOptions: ButtonDropdownOption[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  wrapper?: (props: { children: ReactNode; [key: string]: any }) => ReactElement;
+  dropdownClassName?: string;
+  horizontal?: boolean;
+  hideDivider?: boolean;
 }
 
 export const ButtonDropdown = (props: Props): ReactElement => {
@@ -46,15 +54,27 @@ export const ButtonDropdown = (props: Props): ReactElement => {
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const DefaultButton = (props: { children: ReactNode; [key: string]: any }) => (
+    <UnStyledButton style="tertiary" textBold smallText {...props} />
+  );
+
+  const Wrapper = props.wrapper ?? DefaultButton;
+
   const DropdownMenu = () => {
     return (
-      <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
+      <MenuList
+        autoFocusItem={open}
+        className={`${props.horizontal ? "flex flex-row" : ""}`}
+        id="menu-list-grow"
+        onKeyDown={handleListKeyDown}
+        // eslint-disable-next-line jsx-a11y/aria-role
+        role={`${props.horizontal ? "menubar" : "menu"}`}
+      >
         {props.dropdownOptions.map((option, i) => {
           return (
-            <MenuItem onClick={option.onClick} key={i}>
-              <UnStyledButton style="tertiary" textBold smallText>
-                {option.text}
-              </UnStyledButton>
+            <MenuItem onClick={option.onClick} key={i} className={props.dropdownClassName}>
+              <Wrapper {...option.props}>{option.text}</Wrapper>
             </MenuItem>
           );
         })}
@@ -64,22 +84,29 @@ export const ButtonDropdown = (props: Props): ReactElement => {
 
   return (
     <>
-      <button
-        className="usa-button padding-y-05 padding-right-0"
+      <UnStyledButton
         onClick={toggleDropdown}
-        type="button"
+        style="tertiary"
         ref={anchorRef}
+        dataTestid={`primary${`-${props.name}`}-dropdown-button`}
       >
         <div className="display-flex flex-row height-full">
-          <div className="padding-right-2 padding-y-1 display-flex flex-justify-center width-100">
+          <div
+            className={`${
+              props.hideDivider ? "" : "padding-right-1"
+            } padding-y-1 display-flex flex-justify-center width-100`}
+          >
             <div className="flex-align-self-center">{props.children}</div>
           </div>
-          <Icon className="usa-icon--size-5 border-left-1px padding-y-1 flex-align-self-center">
-            arrow_drop_down
+          <Icon
+            className={`usa-icon--size-5 ${
+              props.hideDivider ? "" : "border-left-1px "
+            } padding-y-1 flex-align-self-center`}
+          >
+            {open ? "arrow_drop_up" : "arrow_drop_down"}
           </Icon>
         </div>
-      </button>
-
+      </UnStyledButton>
       <Popper
         open={open}
         anchorEl={anchorRef.current}
@@ -87,7 +114,7 @@ export const ButtonDropdown = (props: Props): ReactElement => {
         role={undefined}
         transition
         disablePortal={true}
-        placement="bottom-end"
+        placement={`${props.horizontal ? "bottom" : "bottom-end"}`}
       >
         {({ TransitionProps, placement }) => {
           return (
@@ -97,9 +124,11 @@ export const ButtonDropdown = (props: Props): ReactElement => {
                 transformOrigin: placement === "bottom" ? "center top" : "center bottom",
               }}
             >
-              <Paper>
-                <ClickAwayListener onClickAway={handleClose}>{DropdownMenu()}</ClickAwayListener>
-              </Paper>
+              <Box sx={{ boxShadow: 3 }}>
+                <Paper>
+                  <ClickAwayListener onClickAway={handleClose}>{DropdownMenu()}</ClickAwayListener>{" "}
+                </Paper>
+              </Box>
             </Grow>
           );
         }}

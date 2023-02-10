@@ -11,8 +11,8 @@ export const getCurrentDate = (): Dayjs => {
   return dayjs();
 };
 
-export const getJanOfCurrentYear = (): Dayjs => {
-  return dayjs().startOf("year");
+export const getJanOfYear = (date?: Dayjs): Dayjs => {
+  return (date ?? dayjs()).startOf("year");
 };
 
 export const getCurrentDateInNewJersey = (): Dayjs => {
