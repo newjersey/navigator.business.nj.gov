@@ -357,11 +357,13 @@ const ProfilePage = (props: Props): ReactElement => {
         <div className="margin-top-4">
           <FieldLabelProfile fieldName="taxId" />
           <TaxDisclaimer legalStructureId={userData?.profileData.legalStructureId} />
-          <OnboardingTaxId
-            onValidation={onValidation}
-            fieldStates={fieldStates}
-            handleChangeOverride={showRegistrationModalForGuest()}
-          />
+          <div className={"max-width-38rem"}>
+            <OnboardingTaxId
+              onValidation={onValidation}
+              fieldStates={fieldStates}
+              handleChangeOverride={showRegistrationModalForGuest()}
+            />
+          </div>
         </div>
       </>
     ),
@@ -387,11 +389,13 @@ const ProfilePage = (props: Props): ReactElement => {
         <div className="margin-top-4">
           <FieldLabelProfile fieldName="taxId" />
           <TaxDisclaimer legalStructureId={userData?.profileData.legalStructureId} />
-          <OnboardingTaxId
-            onValidation={onValidation}
-            fieldStates={fieldStates}
-            handleChangeOverride={showRegistrationModalForGuest()}
-          />
+          <div className={"max-width-38rem"}>
+            <OnboardingTaxId
+              onValidation={onValidation}
+              fieldStates={fieldStates}
+              handleChangeOverride={showRegistrationModalForGuest()}
+            />
+          </div>
         </div>
       </>
     ),
@@ -546,11 +550,13 @@ const ProfilePage = (props: Props): ReactElement => {
         <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
         <FieldLabelProfile fieldName="taxId" />
         <TaxDisclaimer legalStructureId={userData?.profileData.legalStructureId} />
-        <OnboardingTaxId
-          onValidation={onValidation}
-          fieldStates={fieldStates}
-          handleChangeOverride={showRegistrationModalForGuest()}
-        />
+        <div className={"max-width-38rem"}>
+          <OnboardingTaxId
+            onValidation={onValidation}
+            fieldStates={fieldStates}
+            handleChangeOverride={showRegistrationModalForGuest()}
+          />
+        </div>
       </>
     ),
   };
@@ -644,11 +650,13 @@ const ProfilePage = (props: Props): ReactElement => {
         <div className="margin-top-4">
           <FieldLabelProfile fieldName="taxId" />
           <TaxDisclaimer legalStructureId={userData?.profileData.legalStructureId} />
-          <OnboardingTaxId
-            onValidation={onValidation}
-            fieldStates={fieldStates}
-            handleChangeOverride={showRegistrationModalForGuest()}
-          />
+          <div className={"max-width-38rem"}>
+            <OnboardingTaxId
+              onValidation={onValidation}
+              fieldStates={fieldStates}
+              handleChangeOverride={showRegistrationModalForGuest()}
+            />
+          </div>
         </div>
         <div className="margin-top-4">
           <FieldLabelProfile fieldName="taxPin" />

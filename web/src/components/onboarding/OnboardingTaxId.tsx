@@ -201,9 +201,7 @@ export const OnboardingTaxId = ({
           type={taxIdDisplayStatus === "text-view" ? "text" : "password"}
           inputProps={{
             endAdornment: (
-              <InputAdornment position="end" className="margin-right-2">
-                {isTabletAndUp && getShowHideToggleButton()}
-              </InputAdornment>
+              <InputAdornment position="end">{isTabletAndUp && getShowHideToggleButton()}</InputAdornment>
             ),
           }}
           formInputFull={props.formInputFull ? true : false}
@@ -264,7 +262,7 @@ export const OnboardingTaxId = ({
       </div>
 
       <div
-        className={isTabletAndUp ? "margin-x-3 padding-top-3" : "flex flex-justify-center margin-bottom-3"}
+        className={isTabletAndUp ? "padding-top-3 margin-left-3" : "flex flex-justify-center margin-bottom-3"}
       >
         {getShowHideToggleButton()}
       </div>
