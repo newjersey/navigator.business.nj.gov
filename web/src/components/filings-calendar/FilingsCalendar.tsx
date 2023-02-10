@@ -146,18 +146,22 @@ export const FilingsCalendar = (props: Props): ReactElement => {
             </div>
           </div>
           <div className="flex flex-row flex-align-end flex-justify-center mobile-lg:flex-justify">
-            <ThreeYearSelector
-              className="tablet:margin-right-2"
-              activeYear={activeYear}
-              years={[
-                currentYear,
-                currentDate.add(1, "year").year().toString(),
-                currentDate.add(2, "year").year().toString(),
-              ]}
-              onChange={(year) => {
-                setActiveYear(year);
-              }}
-            />
+            {userData?.taxFilingData?.filings && userData?.taxFilingData.filings.length > 0 ? (
+              <ThreeYearSelector
+                className="tablet:margin-right-2"
+                activeYear={activeYear}
+                years={[
+                  currentYear,
+                  currentDate.add(1, "year").year().toString(),
+                  currentDate.add(2, "year").year().toString(),
+                ]}
+                onChange={(year) => {
+                  setActiveYear(year);
+                }}
+              />
+            ) : (
+              <></>
+            )}
             {renderToggleButton()}
           </div>
         </div>

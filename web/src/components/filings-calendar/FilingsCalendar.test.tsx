@@ -299,6 +299,23 @@ describe("<FilingsCalendar />", () => {
     expect(screen.getByText(`Annual Report`)).toBeInTheDocument();
   });
 
+  it("hides year selector when there are no taxFilings", () => {
+    const userData = generateUserData({
+      profileData: generateProfileData({
+        operatingPhase: randomElementFromArray(
+          OperatingPhases.filter((obj) => {
+            return obj.displayCalendarType === "FULL" && obj.displayCalendarToggleButton;
+          })
+        ).id,
+      }),
+      taxFilingData: generateTaxFilingData({ filings: [] }),
+      preferences: generatePreferences({ isCalendarFullView: true }),
+    });
+
+    renderFilingsCalendar({}, userData);
+    expect(screen.queryByTestId("primary-year-selector-dropdown-button")).not.toBeInTheDocument();
+  });
+
   it("displays empty calendar content when there are no filings", () => {
     const userData = generateUserData({
       profileData: generateProfileData({
