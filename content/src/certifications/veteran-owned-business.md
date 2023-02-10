@@ -19,7 +19,8 @@ A `Veteran|veteran` \-Owned Business (VOB) certification may not provide an adva
 
 ### Eligibility Criteria
 
-VOB is a business that has its principal place of business in the State of New Jersey, and at least 51% of the business is owned and controlled by a veteran.
+* Has its principal place of business in the State of New Jersey
+* 51% of the business is owned and controlled by a veteran
 
 ### Application Needs
 
