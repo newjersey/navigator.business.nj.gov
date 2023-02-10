@@ -124,7 +124,7 @@
         "label": "**Business Purpose**",
         "addButtonText": "Add Business Purpose",
         "reviewStepLabel": "Business Purpose",
-        "body": "Describe your business' primary activities. Businesses do this to make their business purpose searchable on the Public Record."
+        "body": "Describe your business' primary activities but refrain from using any `reserved words.|reserved-words` This allows your business to be searchable on the Public Record."
       },
       "businessStartDate": {
         "fieldDisplayName": "Effective Date",
