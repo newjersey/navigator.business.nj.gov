@@ -237,18 +237,23 @@ collections:
         editor:
           preview: true
         fields:
-          - label: Business Formation Defaults
-            name: businessFormationDefaults
+          - label: Formation
+            name: formation
             collapsed: false
             widget: object
             fields:
-              - { label: "Alert Box Text", name: "interimSuccessPageAlertText", widget: "markdown" }
-              - { label: "Body Text", name: "interimSuccessPageBodyText", widget: "markdown" }
-              - { label: "Button Text", name: "interimSuccessPageButtonText", widget: "string" }
-              - { label: "Modal Title", name: "interimSuccessPageModalTitle", widget: "string" }
-              - { label: "Modal Cancel Button", name: "interimSuccessPageModalCancel", widget: "string" }
-              - { label: "Modal Continue Button", name: "interimSuccessPageModalContinue", widget: "string" }
-              - { label: "Modal Body", name: "interimSuccessPageModalBody", widget: "markdown" }
+              - label: Interim Success Page
+                name: interimSuccessPage
+                collapsed: false
+                widget: object
+                fields:
+                  - { label: "Alert Box Text", name: "alertText", widget: "markdown" }
+                  - { label: "Body Text", name: "bodyText", widget: "markdown" }
+                  - { label: "Button Text", name: "buttonText", widget: "string" }
+                  - { label: "Modal Title", name: "modalTitle", widget: "string" }
+                  - { label: "Modal Cancel Button", name: "modalCancel", widget: "string" }
+                  - { label: "Modal Continue Button", name: "modalContinue", widget: "string" }
+                  - { label: "Modal Body", name: "modalBody", widget: "markdown" }
       - label: "Success Page"
         name: "business-formation-success-page"
         file: "content/src/fieldConfig/formation-success-page.json"

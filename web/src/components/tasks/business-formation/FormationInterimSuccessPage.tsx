@@ -36,7 +36,7 @@ export const FormationInterimSuccessPage = (props: Props): ReactElement => {
   return (
     <>
       <Alert variant="warning" dataTestid="api-error-text">
-        <Content>{Config.businessFormationDefaults.interimSuccessPageAlertText}</Content>
+        <Content>{Config.formation.interimSuccessPage.alertText}</Content>
       </Alert>
       <Content
         customComponents={{
@@ -48,12 +48,12 @@ export const FormationInterimSuccessPage = (props: Props): ReactElement => {
                 return setShowConfirmResubmitModal(true);
               }}
             >
-              {Config.businessFormationDefaults.interimSuccessPageButtonText}
+              {Config.formation.interimSuccessPage.buttonText}
             </UnStyledButton>
           ),
         }}
       >
-        {Config.businessFormationDefaults.interimSuccessPageBodyText}
+        {Config.formation.interimSuccessPage.bodyText}
       </Content>
       <img className="maxh-card-lg margin-top-6" src={`/img/signpost.svg`} alt="" />
       <ModalTwoButton
@@ -61,12 +61,12 @@ export const FormationInterimSuccessPage = (props: Props): ReactElement => {
         close={() => {
           return setShowConfirmResubmitModal(false);
         }}
-        title={Config.businessFormationDefaults.interimSuccessPageModalTitle}
-        primaryButtonText={Config.businessFormationDefaults.interimSuccessPageModalContinue}
+        title={Config.formation.interimSuccessPage.modalTitle}
+        primaryButtonText={Config.formation.interimSuccessPage.modalContinue}
         primaryButtonOnClick={resetCompletedFilingPayment}
-        secondaryButtonText={Config.businessFormationDefaults.interimSuccessPageModalCancel}
+        secondaryButtonText={Config.formation.interimSuccessPage.modalCancel}
       >
-        <Content>{Config.businessFormationDefaults.interimSuccessPageModalBody}</Content>
+        <Content>{Config.formation.interimSuccessPage.modalBody}</Content>
       </ModalTwoButton>
     </>
   );
