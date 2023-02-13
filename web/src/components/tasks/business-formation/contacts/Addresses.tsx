@@ -5,10 +5,10 @@ import { Icon } from "@/components/njwds/Icon";
 import { AddressModal } from "@/components/tasks/business-formation/contacts/AddressModal";
 import { ValidatedCheckbox } from "@/components/ValidatedCheckbox";
 import { WithErrorBar } from "@/components/WithErrorBar";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { MediaQueries } from "@/lib/PageSizes";
 import styles from "@/styles/sections/members.module.scss";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { FormationFields, FormationIncorporator, FormationMember } from "@businessnjgovnavigator/shared/";
 import { IconButton, useMediaQuery } from "@mui/material";
 import React, { ChangeEvent, ReactElement, useState } from "react";
@@ -37,6 +37,7 @@ interface Props<T> {
 export const Addresses = <T extends FormationMember | FormationIncorporator>(
   props: Props<T>
 ): ReactElement => {
+  const { Config } = useConfig();
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [editIndex, setEditIndex] = useState<number | undefined>(undefined);
   const [alert, setAlert] = useState<boolean | undefined>(undefined);
@@ -76,7 +77,7 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
           className="text-bold"
           style={{ display: "none" }}
         >
-          {Config.businessFormationDefaults.signatureColumnLabel}*
+          {Config.formation.fields.signers.signColumnLabel}*
         </label>
         <div style={{ height: "56px" }} className="display-flex flex-column flex-justify-center">
           <ValidatedCheckbox
@@ -101,7 +102,7 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
     <table className={`addresses margin-top-2 margin-bottom-3`}>
       <thead>
         <tr>
-          {Config.businessFormationDefaults.addressesTableColumn
+          {Config.formation.fields.signers.tableHeader
             .split(",")
             .filter((_, index) => {
               return props.needSignature ? true : index != 2;
@@ -207,7 +208,7 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
                         {"signature" in it ? (
                           <>
                             {" "}
-                            <Content>{`${Config.businessFormationDefaults.signatureColumnLabel}*`}</Content>
+                            <Content>{`${Config.formation.fields.signers.signColumnLabel}*`}</Content>
                             <div>
                               {renderSignatureColumn({
                                 onChange: (event) => {
@@ -310,7 +311,7 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
       </div>
       {props.needSignature ? (
         <p className="margin-bottom-2">
-          <i>* {Config.businessFormationDefaults.signatureAidText}</i>
+          <i>* {Config.formation.fields.signers.aidText}</i>
         </p>
       ) : (
         <></>
