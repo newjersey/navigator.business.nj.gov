@@ -3,11 +3,12 @@ import { GenericTextField } from "@/components/GenericTextField";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { Icon } from "@/components/njwds/Icon";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ReactElement, useContext } from "react";
 
 export const Provisions = (): ReactElement => {
   const MAX_CHARS = 3000;
+  const { Config } = useConfig();
   const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
   const isExpanded = state.formationFormData.provisions && state.formationFormData.provisions.length > 0;
 
@@ -57,31 +58,27 @@ export const Provisions = (): ReactElement => {
     <>
       <div className="flex flex-column mobile-lg:flex-row mobile-lg:flex-align-center margin-bottom-2">
         <div role="heading" aria-level={2} className="h3-styling margin-bottom-0">
-          {Config.businessFormationDefaults.provisionsTitle}{" "}
-          <span className="text-normal font-body-lg">
-            {Config.businessFormationDefaults.provisionsOptionalLabel}
-          </span>
+          {Config.formation.fields.provisions.header}{" "}
+          <span className="text-normal font-body-lg">{Config.formation.general.optionalLabel}</span>
         </div>
         <div className="mobile-lg:margin-left-auto flex mobile-lg:flex-justify-center">
           {!isExpanded && (
             <UnStyledButton style="tertiary" onClick={handleAddButtonClick} dataTestid="show-provisions">
-              {Config.businessFormationDefaults.provisionsAddButtonText}
+              {Config.formation.fields.provisions.addButtonText}
             </UnStyledButton>
           )}
         </div>
       </div>
-      {isExpanded && (
-        <Content className="margin-bottom-2">{Config.businessFormationDefaults.provisionsBodyText}</Content>
-      )}
+      {isExpanded && <Content className="margin-bottom-2">{Config.formation.fields.provisions.body}</Content>}
       {state.formationFormData.provisions?.map((provision: string, index: number) => {
         return (
           <div key={index}>
-            <Content>{Config.businessFormationDefaults.provisionsLabel}</Content>
+            <Content>{Config.formation.fields.provisions.label}</Content>
             <div className="grid-row">
               <div className="grid-col">
                 <GenericTextField
                   value={provision}
-                  placeholder={Config.businessFormationDefaults.provisionsPlaceholderText}
+                  placeholder={Config.formation.fields.provisions.placeholder}
                   handleChange={(value) => {
                     return handleProvisionChange(value, index);
                   }}
@@ -116,7 +113,7 @@ export const Provisions = (): ReactElement => {
               </div>
             </div>
             <div className="text-base-dark margin-top-1 margin-bottom-2">
-              {provision.length} / {MAX_CHARS} {Config.businessFormationDefaults.charactersLabel}
+              {provision.length} / {MAX_CHARS} {Config.formation.general.charactersLabel}
             </div>
           </div>
         );
@@ -129,7 +126,7 @@ export const Provisions = (): ReactElement => {
           dataTestid="add-new-provision"
         >
           <Icon>add</Icon>
-          {Config.businessFormationDefaults.provisionsAddAnotherButtonText}
+          {Config.formation.fields.provisions.addAnotherButtonText}
         </UnStyledButton>
       )}
     </>

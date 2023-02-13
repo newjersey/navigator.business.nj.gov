@@ -5,9 +5,9 @@ import {
   getBusinessStartDateRule,
 } from "@/components/tasks/business-formation/business/BusinessDateValidators";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { camelCaseToSentence } from "@/lib/utils/cases-helpers";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import {
   advancedDateLibrary,
   DateObject,
@@ -25,13 +25,14 @@ type Props = {
   fieldName: "businessStartDate" | "foreignDateOfFormation";
 };
 export const FormationDate = (props: Props): ReactElement => {
+  const { Config } = useConfig();
   const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
   const { doesFieldHaveError } = useFormationErrors();
 
   const contentProps = useMemo(
     () => ({
       businessStartDate: {
-        label: Config.businessFormationDefaults.businessStartDateLabel,
+        label: Config.formation.fields.businessStartDate.label,
         helperText: getBusinessStartDateHelperText(state.formationFormData.legalType),
       },
       foreignDateOfFormation: {
