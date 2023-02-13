@@ -20,12 +20,12 @@ export const PartnershipRights = (): ReactElement => {
         <div className="grid-row">
           <div className="grid-col">
             <BusinessFormationTextField
-              placeholder={Config.businessFormationDefaults.partnershipRightsTermsPlaceholder}
+              placeholder={Config.formation.partnershipRights.placeholder}
               fieldName={fieldName}
               required={true}
               errorBarType="ALWAYS"
-              validationText={Config.businessFormationDefaults.genericErrorText}
-              label={Config.businessFormationDefaults.partnershipRightsTermsLabel}
+              validationText={Config.formation.general.genericErrorText}
+              label={Config.formation.partnershipRights.label}
               formInputFull
               fieldOptions={{
                 multiline: true,
@@ -43,7 +43,7 @@ export const PartnershipRights = (): ReactElement => {
         </div>
         <div className="text-base-dark margin-top-1 margin-bottom-2">
           {(state.formationFormData[fieldName] as string)?.length ?? 0} / {400}{" "}
-          {Config.businessFormationDefaults.charactersLabel}
+          {Config.formation.general.charactersLabel}
         </div>
       </div>
     );
@@ -79,7 +79,7 @@ export const PartnershipRights = (): ReactElement => {
                   sx={{ paddingTop: "0px" }}
                 />
               }
-              label={Config.businessFormationDefaults.partnershipRightsRadioYesText}
+              label={Config.formation.partnershipRights.radioYesText}
             />
             <FormControlLabel
               style={{ marginTop: ".75rem", alignItems: "flex-start" }}
@@ -92,10 +92,10 @@ export const PartnershipRights = (): ReactElement => {
                   data-testid={`${fieldName}-false`}
                 />
               }
-              label={Config.businessFormationDefaults.partnershipRightsRadioNoText}
+              label={Config.formation.partnershipRights.radioNoText}
             />
           </RadioGroup>
-          <FormHelperText>{hasError ? Config.businessFormationDefaults.genericErrorText : ""}</FormHelperText>
+          <FormHelperText>{hasError ? Config.formation.general.genericErrorText : ""}</FormHelperText>
         </FormControl>
       </WithErrorBar>
     );
@@ -105,20 +105,17 @@ export const PartnershipRights = (): ReactElement => {
     <>
       <div className="flex flex-column mobile-lg:flex-row mobile-lg:flex-align-center margin-bottom-2">
         <div role="heading" aria-level={2} className="h3-styling margin-bottom-0">
-          {Config.businessFormationDefaults.partnershipRightsTitle}
+          {Config.formation.partnershipRights.header}
         </div>
       </div>
-      {getRadio("canCreateLimitedPartner", Config.businessFormationDefaults.partnershipRightsCanAssignRights)}
+
+      {getRadio("canCreateLimitedPartner", Config.formation.fields.canCreateLimitedPartner.body)}
       {state.formationFormData.canCreateLimitedPartner && getTextField("createLimitedPartnerTerms")}
-      {getRadio(
-        "canGetDistribution",
-        Config.businessFormationDefaults.partnershipRightsCanReceiveDistributions
-      )}
+
+      {getRadio("canGetDistribution", Config.formation.fields.canGetDistribution.body)}
       {state.formationFormData.canGetDistribution && getTextField("getDistributionTerms")}
-      {getRadio(
-        "canMakeDistribution",
-        Config.businessFormationDefaults.partnershipRightsCanMakeDistributions
-      )}
+
+      {getRadio("canMakeDistribution", Config.formation.fields.canMakeDistribution.body)}
       {state.formationFormData.canMakeDistribution && getTextField("makeDistributionTerms")}
     </>
   );
