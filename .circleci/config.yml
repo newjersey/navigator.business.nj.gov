@@ -209,9 +209,6 @@ commands:
             echo 'export AWS_CRYPTO_CONTEXT_PURPOSE=$AWS_CRYPTO_CONTEXT_PURPOSE' >> $BASH_ENV
             echo 'export AWS_CRYPTO_CONTEXT_ORIGIN=$AWS_CRYPTO_CONTEXT_ORIGIN' >> $BASH_ENV
             echo 'export ADMIN_PASSWORD=$ADMIN_PASSWORD' >> $BASH_ENV
-            echo 'export USE_BASIC_AUTH=$USE_BASIC_AUTH_DEV' >> $BASH_ENV
-            echo 'export BASIC_AUTH_USERNAME=$BASIC_AUTH_USERNAME' >> $BASH_ENV
-            echo 'export BASIC_AUTH_PASSWORD=$BASIC_AUTH_PASSWORD' >> $BASH_ENV
 
   set-cypress-env-vars:
     steps:
@@ -282,9 +279,6 @@ commands:
             echo 'export AWS_CRYPTO_CONTEXT_STAGE=$AWS_CRYPTO_CONTEXT_STAGE_STAGING' >> $BASH_ENV
             echo 'export AWS_CRYPTO_CONTEXT_PURPOSE=$AWS_CRYPTO_CONTEXT_PURPOSE' >> $BASH_ENV
             echo 'export AWS_CRYPTO_CONTEXT_ORIGIN=$AWS_CRYPTO_CONTEXT_ORIGIN' >> $BASH_ENV
-            echo 'export USE_BASIC_AUTH=$USE_BASIC_AUTH_STAGING' >> $BASH_ENV
-            echo 'export BASIC_AUTH_USERNAME=$BASIC_AUTH_USERNAME' >> $BASH_ENV
-            echo 'export BASIC_AUTH_PASSWORD=$BASIC_AUTH_PASSWORD' >> $BASH_ENV
 
   set-prod-env-vars:
     steps:
