@@ -1,3 +1,4 @@
+import { getMergedConfig } from "@/contexts/configContext";
 import { generateFormationDbaContent, generateFormationDisplayContentMap } from "@/test/factories";
 import {
   generateFormationProfileData,
@@ -6,7 +7,6 @@ import {
 } from "@/test/helpers/helpers-formation";
 import { withMarkup } from "@/test/helpers/helpers-testing-library-selectors";
 import { markdownToText } from "@/test/helpers/helpers-utilities";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import {
   arrayOfCountriesObjects,
   castPublicFilingLegalTypeToFormationType,
@@ -29,6 +29,8 @@ function mockMaterialUI(): typeof materialUi {
     useMediaQuery: jest.fn(),
   };
 }
+
+const Config = getMergedConfig();
 
 jest.mock("@mui/material", () => mockMaterialUI());
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));

@@ -1,47 +1,40 @@
 import { ReviewLineItem } from "@/components/tasks/business-formation/review/ReviewLineItem";
 import { ReviewSectionHeader } from "@/components/tasks/business-formation/review/ReviewSectionHeader";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getStringifiedAddress } from "@/lib/utils/formatters";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { corpLegalStructures } from "@businessnjgovnavigator/shared";
 import { ReactElement, useContext } from "react";
 
 export const ReviewSignatures = (): ReactElement => {
+  const { Config } = useConfig();
   const { state } = useContext(BusinessFormationContext);
-  const italicNotEnteredText = `*${Config.businessFormationDefaults.reviewStepNotEnteredText}*`;
+  const italicNotEnteredText = `*${Config.formation.general.notEntered}*`;
   const isCorp = corpLegalStructures.includes(state.formationFormData.legalType);
 
-  const getHeader = () => {
-    if (isCorp) {
-      return Config.businessFormationDefaults.reviewStepIncorporatorsHeader;
-    } else {
-      return Config.businessFormationDefaults.reviewStepSignaturesHeader;
-    }
+  const getConfig = (): { header: string; label: string } => {
+    const field = isCorp ? "incorporators" : "signers";
+    return {
+      header: Config.formation.fields[field].reviewStepHeader,
+      label: Config.formation.fields[field].reviewStepNameLabel,
+    };
   };
 
   return (
     <>
-      <ReviewSectionHeader header={getHeader()} stepName="Contacts" testId="signature" />
-      {state.formationFormData.signers?.length === 0 && (
-        <i>{Config.businessFormationDefaults.reviewStepNotEnteredText}</i>
-      )}
+      <ReviewSectionHeader header={getConfig().header} stepName="Contacts" testId="signature" />
+      {state.formationFormData.signers?.length === 0 && <i>{Config.formation.general.notEntered}</i>}
       {state.formationFormData.signers?.map((signer, index) => {
         return (
           <div key={`${signer}-${index}`} className={index === 0 ? "" : "margin-top-2"}>
             <ReviewLineItem
-              label={
-                isCorp
-                  ? Config.businessFormationDefaults.reviewStepIncorporatorNameLabel
-                  : Config.businessFormationDefaults.reviewStepSignerNameLabel
-              }
+              label={getConfig().label}
               value={signer.name ?? italicNotEnteredText}
               marginOverride={index === 0 ? "margin-top-0" : "margin-top-2"}
             />
-            {state.formationFormData.businessLocationType == "NJ" ? (
-              <></>
-            ) : (
+            {state.formationFormData.businessLocationType !== "NJ" && (
               <ReviewLineItem
-                label={Config.businessFormationDefaults.reviewStepSignerTitleLabel}
+                label={Config.formation.fields.signers.reviewStepTitleLabel}
                 value={signer.title ?? italicNotEnteredText}
                 marginOverride={"margin-top-0"}
               />
@@ -53,7 +46,7 @@ export const ReviewSignatures = (): ReactElement => {
         return (
           <div key={`${signer}-${index}`} className={index === 0 ? "" : "margin-top-2"}>
             <ReviewLineItem
-              label={Config.businessFormationDefaults.reviewStepIncorporatorAddressLabel}
+              label={Config.formation.sections.review.addressLabel}
               value={getStringifiedAddress({
                 addressLine1: signer.addressLine1,
                 city: signer.addressCity ?? "",

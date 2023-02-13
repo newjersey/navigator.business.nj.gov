@@ -1,17 +1,18 @@
 import { Content } from "@/components/Content";
 import { ReviewSectionHeader } from "@/components/tasks/business-formation/review/ReviewSectionHeader";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ReactElement, useContext } from "react";
 
 export const ReviewPartnership = () => {
+  const { Config } = useConfig();
   const { state } = useContext(BusinessFormationContext);
 
   const notEnteredText = (question: string): ReactElement => {
     return (
       <>
         <div>
-          <i>{Config.businessFormationDefaults.reviewStepNotEnteredText}</i> - {question}
+          <i>{Config.formation.general.notEntered}</i> - {question}
         </div>
       </>
     );
@@ -33,7 +34,7 @@ export const ReviewPartnership = () => {
         )}
         {config.radioData && (
           <Content className="margin-left-4">
-            {`${Config.businessFormationDefaults.reviewStepPartnershipTermTitle} ${config.termsData}`}
+            {`${Config.formation.partnershipRights.reviewStepTermsLabel} ${config.termsData}`}
           </Content>
         )}
       </>
@@ -43,7 +44,7 @@ export const ReviewPartnership = () => {
   return (
     <>
       <ReviewSectionHeader
-        header={Config.businessFormationDefaults.reviewStepPartnershipHeader}
+        header={Config.formation.partnershipRights.reviewStepHeader}
         stepName="Business"
         testId="partnership"
       />
@@ -52,27 +53,27 @@ export const ReviewPartnership = () => {
           {displayPartnershipAnswer({
             radioData: state.formationFormData.canCreateLimitedPartner,
             termsData: state.formationFormData.createLimitedPartnerTerms,
-            questionText: Config.businessFormationDefaults.partnershipRightsCanAssignRights,
-            yesBody: Config.businessFormationDefaults.reviewStepPartnershipYesLimitedPartnerBody,
-            noBody: Config.businessFormationDefaults.reviewStepPartnershipNoLimitedPartnerBody,
+            questionText: Config.formation.fields.canCreateLimitedPartner.body,
+            yesBody: Config.formation.fields.canCreateLimitedPartner.reviewStepYes,
+            noBody: Config.formation.fields.canCreateLimitedPartner.reviewStepNo,
           })}
         </div>
         <div className="margin-bottom-3">
           {displayPartnershipAnswer({
             radioData: state.formationFormData.canGetDistribution,
             termsData: state.formationFormData.getDistributionTerms,
-            questionText: Config.businessFormationDefaults.partnershipRightsCanReceiveDistributions,
-            yesBody: Config.businessFormationDefaults.reviewStepPartnershipYesCanReceiveDistributions,
-            noBody: Config.businessFormationDefaults.reviewStepPartnershipNoCanReceiveDistributions,
+            questionText: Config.formation.fields.canGetDistribution.body,
+            yesBody: Config.formation.fields.canGetDistribution.reviewStepYes,
+            noBody: Config.formation.fields.canGetDistribution.reviewStepNo,
           })}
         </div>
         <div className="margin-bottom-3">
           {displayPartnershipAnswer({
             radioData: state.formationFormData.canMakeDistribution,
             termsData: state.formationFormData.makeDistributionTerms,
-            questionText: Config.businessFormationDefaults.partnershipRightsCanMakeDistributions,
-            yesBody: Config.businessFormationDefaults.reviewStepPartnershipYesCanMakeDistributions,
-            noBody: Config.businessFormationDefaults.reviewStepPartnershipNoCanMakeDistributions,
+            questionText: Config.formation.fields.canMakeDistribution.body,
+            yesBody: Config.formation.fields.canMakeDistribution.reviewStepYes,
+            noBody: Config.formation.fields.canMakeDistribution.reviewStepNo,
           })}
         </div>
       </div>

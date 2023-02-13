@@ -1,14 +1,15 @@
 import { ReviewLineItem } from "@/components/tasks/business-formation/review/ReviewLineItem";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { defaultDisplayDateFormat } from "@/lib/types/types";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { defaultDateFormat } from "@businessnjgovnavigator/shared";
 import { parseDateWithFormat } from "@businessnjgovnavigator/shared/dateHelpers";
 import { ReactElement, useContext } from "react";
 
 export const ReviewBusinessSuffixAndStartDate = (): ReactElement => {
+  const { Config } = useConfig();
   const { state } = useContext(BusinessFormationContext);
-  const italicNotEnteredText = `*${Config.businessFormationDefaults.reviewStepNotEnteredText}*`;
+  const italicNotEnteredText = `*${Config.formation.general.notEntered}*`;
 
   const getBusinessNameDisplay = (): string => {
     const name = state.formationFormData.businessName || italicNotEnteredText;
@@ -19,11 +20,11 @@ export const ReviewBusinessSuffixAndStartDate = (): ReactElement => {
   return (
     <div className="margin-top-2" data-testid="review-suffix-and-start-date">
       <ReviewLineItem
-        label={Config.businessFormationDefaults.reviewStepBusinessSuffixLabel}
+        label={Config.formation.fields.businessSuffix.reviewStepLabel}
         value={getBusinessNameDisplay()}
       />
       <ReviewLineItem
-        label={Config.businessFormationDefaults.reviewStepBusinessStartDateLabel}
+        label={Config.formation.fields.businessStartDate.reviewStepLabel}
         value={parseDateWithFormat(state.formationFormData.businessStartDate, defaultDateFormat).format(
           defaultDisplayDateFormat
         )}
@@ -51,7 +52,7 @@ export const ReviewBusinessSuffixAndStartDate = (): ReactElement => {
       )}
       {state.formationFormData.businessTotalStock.length > 0 && (
         <ReviewLineItem
-          label={Config.businessFormationDefaults.reviewBusinessTotalStockLabel}
+          label={Config.formation.fields.businessTotalStock.reviewStepLabel}
           value={state.formationFormData.businessTotalStock}
         />
       )}

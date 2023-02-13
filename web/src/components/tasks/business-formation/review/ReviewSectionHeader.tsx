@@ -1,9 +1,9 @@
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { LookupStepIndexByName } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { FormationStepNames } from "@/lib/types/types";
 import { scrollToTop } from "@/lib/utils/helpers";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { ReactElement, useContext } from "react";
 
 interface Props {
@@ -13,6 +13,7 @@ interface Props {
 }
 
 export const ReviewSectionHeader = (props: Props): ReactElement => {
+  const { Config } = useConfig();
   const { setStepIndex } = useContext(BusinessFormationContext);
 
   return (
@@ -30,7 +31,7 @@ export const ReviewSectionHeader = (props: Props): ReactElement => {
           underline
           dataTestid={`edit-${props.testId}-step`}
         >
-          {Config.businessFormationDefaults.editButtonText}
+          {Config.formation.general.editButtonText}
         </UnStyledButton>
       </div>
     </div>

@@ -10,7 +10,6 @@
       "addressLine1": {
         "fieldDisplayName": "Address Line 1",
         "error": "Enter your business' street name and number.",
-        "reviewStepLabel": "**Address:**",
         "placeholder": "Address Line 1",
         "label": "**Address Line 1**"
       },
@@ -75,7 +74,8 @@
         "fieldDisplayName": "Registered Agent Email",
         "label": "**Registered Agent Email**",
         "placeholder": "Registered Agent Email",
-        "error": "Confirm the email matches format: name@example.com"
+        "error": "Confirm the email matches format: name@example.com",
+        "reviewStepLabel": "**Email:**"
       },
       "agentOfficeAddressLine1": {
         "fieldDisplayName": "Address Line 1",
@@ -197,7 +197,7 @@
         "error": "Enter a last name.",
         "reviewStepLabel": "Last Name"
       },
-      "contactPhone": {
+      "contactPhoneNumber": {
         "fieldDisplayName": "Phone Number",
         "reviewStepLabel": "Phone",
         "label": "**Phone Number**",
@@ -213,7 +213,6 @@
         "error": "Enter at least 1 director's name.",
         "reviewStepHeader": "Board of Directors",
         "reviewStepNameLabel": "**Director Name:**",
-        "reviewStepAddressLabel": "**Address:**",
         "modalTitle": "Add New Director",
         "modalSaveButton": "Add Director",
         "addButtonText": "Add new Director"
@@ -244,7 +243,6 @@
         "fieldDisplayName": "Signer",
         "successSnackbarHeader": "Signer Added",
         "successSnackbarBody": "A signer has been added successfully.",
-        "reviewStepAddressLabel": "**Address:**",
         "addButtonText": "Add Signer",
         "reviewStepHeader": "Signer(s)",
         "reviewStepNameLabel": "**Name:**",
@@ -267,6 +265,8 @@
         "label": "Select Payment Type",
         "error": "Select a payment method.",
         "achLabel": "Pay with E-Check",
+        "reviewStepServicesHeader": "Services",
+        "reviewStepsServicesSelected": "Services Selected",
         "reviewStepLabel": "Payment Type",
         "creditCardLabel": "Pay with Credit Card",
         "costColumnLabel": "Cost",
@@ -373,11 +373,8 @@
       "businessNameAndStructureHeader": "Business Name and Business Structure",
       "contactInfoHeader": "### Billing Contact Information",
       "review": {
+        "addressLabel": "**Address:**",
         "locationHeader": "Location",
-        "servicesHeader": "Services",
-        "servicesSelected": "Services Selected",
-        "amendmentInfo": "#### Confirm everything is accurate before submitting. \n\n If you need to make a change after submitting, you will need to file a [paper amendment.](https://www.njportal.com/DOR/BusinessAmendments/Forms/IdentifyBusiness)",
-        "notEnteredText": "Not entered",
         "billingContactHeader": "Billing Contact Information"
       }
     },
@@ -399,8 +396,9 @@
       "warningModalBody": "If you change your proposed business structure in the Navigator profile, you might need to complete a different form. Don't worry, once you update your profile we'll tell you which form you need and where to complete it."
     },
     "general": {
+      "amendmentInfo": "#### Confirm everything is accurate before submitting. \n\n If you need to make a change after submitting, you will need to file a [paper amendment.](https://www.njportal.com/DOR/BusinessAmendments/Forms/IdentifyBusiness)",
       "backButtonText": "Cancel",
-      "notSetBusinessNameText": "Not set",
+      "notEntered": "Not set",
       "initialNextNexusButtonText": "Continue Authorizing My Business",
       "initialNextButtonText": "Continue Forming My Business",
       "foreignLegalPrefaceText": "Foreign",

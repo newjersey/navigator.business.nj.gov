@@ -1,15 +1,16 @@
 import { ReviewLineItem } from "@/components/tasks/business-formation/review/ReviewLineItem";
 import { ReviewSectionHeader } from "@/components/tasks/business-formation/review/ReviewSectionHeader";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getStringifiedAddress } from "@/lib/utils/formatters";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { arrayOfCountriesObjects } from "@businessnjgovnavigator/shared/countries";
 import { ReactElement, useContext } from "react";
 
 export const ReviewMainBusinessLocation = (): ReactElement => {
+  const { Config } = useConfig();
   const { state } = useContext(BusinessFormationContext);
 
-  const italicNotEnteredText = `*${Config.businessFormationDefaults.reviewStepNotEnteredText}*`;
+  const italicNotEnteredText = `*${Config.formation.general.notEntered}*`;
 
   const getAddressDisplay = (): string => {
     const businessLocationType = state.formationFormData.businessLocationType;
@@ -37,14 +38,11 @@ export const ReviewMainBusinessLocation = (): ReactElement => {
   return (
     <>
       <ReviewSectionHeader
-        header={Config.businessFormationDefaults.reviewStepLocationHeader}
+        header={Config.formation.sections.review.locationHeader}
         stepName="Business"
         testId="location"
       />
-      <ReviewLineItem
-        label={Config.businessFormationDefaults.reviewStepAddressLabel}
-        value={getAddressDisplay()}
-      />
+      <ReviewLineItem label={Config.formation.sections.review.addressLabel} value={getAddressDisplay()} />
       <hr className="margin-y-205" />
     </>
   );
