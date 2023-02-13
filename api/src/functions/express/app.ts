@@ -221,10 +221,4 @@ app.get("/health", (_req, res) => {
   res.status(500).send("Alive");
 });
 
-app.get("/basicauth", (_req, res) => {
-  res.setHeader("WWW-authenticate", 'Basic realm="Secure Area"');
-  res.statusCode = 401;
-  res.send();
-});
-
 export const handler = serverless(app);
