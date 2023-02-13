@@ -142,10 +142,41 @@ describe("Profile [feature] [all] [group1]", () => {
     });
   });
 
-  it("onboards existing business and updates profile data", () => {
+  it("onboards existing business and updates profile data for Trade Name business", () => {
     const sectorId = randomElementFromArray(arrayOfSectors).id;
 
-    completeExistingBusinessOnboarding({ sectorId });
+    completeExistingBusinessOnboarding({ sectorId, legalStructureId: "general-partnership" });
+
+    checkExistingBusinessProfilePage({ sectorId });
+
+    const updatedEntityId = randomInt(10).toString();
+    const updatedBusinessName = `Generic Business Name ${randomInt()}`;
+    const updatedSectorId = randomElementFromArray(arrayOfSectors).id;
+    const updatedNumberOfEmployees = randomInt(1).toString();
+    const updatedOwnershipDataValues = ["disabled-veteran"];
+    const employerId = randomInt(10).toString();
+    const taxId = randomInt(12).toString();
+    const notes = `Notes ${randomInt()}`;
+    const taxPin = randomInt(4).toString();
+
+    updateExistingBusinessProfilePage({
+      entityId: updatedEntityId,
+      businessName: updatedBusinessName,
+      sectorId: updatedSectorId,
+      numberOfEmployees: updatedNumberOfEmployees,
+      homeBasedQuestion: Boolean(randomInt() % 2),
+      ownershipDataValues: updatedOwnershipDataValues,
+      employerId,
+      taxId,
+      notes,
+      taxPin,
+    });
+  });
+
+  it("onboards existing business and updates profile data for Public Filing business", () => {
+    const sectorId = randomElementFromArray(arrayOfSectors).id;
+
+    completeExistingBusinessOnboarding({ sectorId, legalStructureId: "limited-liability-company" });
 
     checkExistingBusinessProfilePage({ sectorId });
 
