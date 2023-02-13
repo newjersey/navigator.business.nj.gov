@@ -178,7 +178,7 @@ describe("Profile [feature] [all] [group1]", () => {
 
     completeExistingBusinessOnboarding({ sectorId, legalStructureId: "limited-liability-company" });
 
-    checkExistingBusinessProfilePage({ sectorId });
+    checkExistingBusinessProfilePage({ sectorId, businessFormationDate: "" });
 
     const updatedBusinessFormationDate = "03/2020";
     const updatedEntityId = randomInt(10).toString();

@@ -580,7 +580,7 @@ export const checkNewBusinessProfilePage = ({
 };
 
 export const checkExistingBusinessProfilePage = ({
-  businessFormationDate = "",
+  businessFormationDate,
   sectorId,
   numberOfEmployees,
   townDisplayName,
@@ -622,10 +622,12 @@ export const checkExistingBusinessProfilePage = ({
   const employerIdWithMatch = employerId.match("^[0-9]$") ? employerId.match("^[0-9]$") : "";
   onProfilePage.getEmployerId().invoke("prop", "value").should("contain", employerIdWithMatch);
 
-  onProfilePage
-    .getBusinessFormationDatePicker()
-    .invoke("prop", "value")
-    .should("contain", businessFormationDate);
+  if (businessFormationDate) {
+    onProfilePage
+      .getBusinessFormationDatePicker()
+      .invoke("prop", "value")
+      .should("contain", businessFormationDate);
+  }
 
   onProfilePage.getTaxId().invoke("prop", "value").should("contain", formatTaxId(taxId));
   onProfilePage.getNotes().invoke("prop", "value").should("contain", notes);
