@@ -7,12 +7,13 @@ import { SuffixDropdown } from "@/components/tasks/business-formation/business/S
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { corpLegalStructures } from "@businessnjgovnavigator/shared/";
 import { ReactElement, useContext, useMemo } from "react";
 
 export const MainBusiness = (): ReactElement => {
+  const { Config } = useConfig();
   const { state } = useContext(BusinessFormationContext);
   const { doSomeFieldsHaveError, doesFieldHaveError } = useFormationErrors();
   const isForeign = useMemo(
@@ -69,8 +70,8 @@ export const MainBusiness = (): ReactElement => {
         <div className="grid-row">
           <BusinessFormationTextField
             errorBarType="ALWAYS"
-            label={Config.businessFormationDefaults.businessTotalStockLabel}
-            placeholder={Config.businessFormationDefaults.businessTotalStockPlaceholder}
+            label={Config.formation.fields.businessTotalStock.label}
+            placeholder={Config.formation.fields.businessTotalStock.placeholder}
             numericProps={{
               minLength: 1,
               trimLeadingZeroes: true,
@@ -78,7 +79,7 @@ export const MainBusiness = (): ReactElement => {
             }}
             required={true}
             fieldName={"businessTotalStock"}
-            validationText={Config.businessFormationDefaults.businessTotalStockErrorText}
+            validationText={Config.formation.fields.businessTotalStock.error}
             className="grid-col-6"
           />
           <div className="grid-col-6" />
