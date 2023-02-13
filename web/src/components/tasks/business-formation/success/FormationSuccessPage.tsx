@@ -23,33 +23,33 @@ export const FormationSuccessPage = (props: Props): ReactElement => {
     <>
       <div className="fdc fac margin-bottom-2" data-testid="formation-success-page">
         <img src={`/img/trophy-illustration.svg`} alt="" />
-        <h2 className="margin-bottom-0">{Config.businessFormationDefaults.successPageHeader}</h2>
-        <p className="text-center">{Config.businessFormationDefaults.successPageSubheader}</p>
-        <p className="text-center">{Config.businessFormationDefaults.successPageBody}</p>
+        <h2 className="margin-bottom-0">{Config.formation.successPage.header}</h2>
+        <p className="text-center">{Config.formation.successPage.subheader}</p>
+        <p className="text-center">{Config.formation.successPage.body}</p>
       </div>
 
       <div className="fdr fww">
         <FormationSuccessDocument
-          label={Config.businessFormationDefaults.formationDocLabel}
+          label={Config.formation.successPage.formationDocLabel}
           downloadLink={documents?.formationDoc ?? "#"}
           icon="formation-icon-blue"
         />
         {props.userData.profileData.documents.standingDoc && (
           <FormationSuccessDocument
-            label={Config.businessFormationDefaults.standingDocLabel}
+            label={Config.formation.successPage.standingDocLabel}
             downloadLink={documents?.standingDoc ?? "#"}
             icon="certificate-icon"
           />
         )}
         {props.userData.profileData.documents.certifiedDoc && (
           <FormationSuccessDocument
-            label={Config.businessFormationDefaults.certifiedDocLabel}
+            label={Config.formation.successPage.certifiedDocLabel}
             downloadLink={documents?.certifiedDoc ?? "#"}
             icon="formation-icon-purple"
           />
         )}
         <FormationSuccessDocument
-          label={Config.businessFormationDefaults.entityIdLabel}
+          label={Config.formation.successPage.entityIdLabel}
           downloadLink=""
           subLabel={props.userData.formationData.getFilingResponse?.entityId}
           icon="id-icon"
@@ -57,7 +57,7 @@ export const FormationSuccessPage = (props: Props): ReactElement => {
       </div>
 
       <p className="text-center font-body-2xs">
-        {Config.businessFormationDefaults.confirmationNumberLabel}
+        {Config.formation.successPage.confirmationNumberLabel}
         <span className="margin-left-05">
           {props.userData.formationData.getFilingResponse?.confirmationNumber}
         </span>
@@ -68,7 +68,7 @@ export const FormationSuccessPage = (props: Props): ReactElement => {
             return analytics.event.business_formation_success_amendments_external_link;
           }}
         >
-          {Config.businessFormationDefaults.successPageAmendmentText}
+          {Config.formation.successPage.amendmentText}
         </Content>
       </div>
     </>

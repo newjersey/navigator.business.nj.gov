@@ -41,19 +41,19 @@ describe("Formation - <FormationSuccessPage />", () => {
       standingDoc: "testStand.pdf",
     });
     renderSuccessPage({});
-    expect(screen.getByText(Config.businessFormationDefaults.successPageHeader)).toBeInTheDocument();
-    expect(screen.getByText(Config.businessFormationDefaults.successPageSubheader)).toBeInTheDocument();
+    expect(screen.getByText(Config.formation.successPage.header)).toBeInTheDocument();
+    expect(screen.getByText(Config.formation.successPage.subheader)).toBeInTheDocument();
     expect(screen.getByText(getFilingResponse.entityId)).toBeInTheDocument();
     expect(screen.getByText(getFilingResponse.confirmationNumber)).toBeInTheDocument();
-    expect(screen.getByTestId(Config.businessFormationDefaults.formationDocLabel)).toHaveAttribute(
+    expect(screen.getByTestId(Config.formation.successPage.formationDocLabel)).toHaveAttribute(
       "href",
       "testForm.pdf"
     );
-    expect(screen.getByTestId(Config.businessFormationDefaults.standingDocLabel)).toHaveAttribute(
+    expect(screen.getByTestId(Config.formation.successPage.standingDocLabel)).toHaveAttribute(
       "href",
       "testStand.pdf"
     );
-    expect(screen.getByTestId(Config.businessFormationDefaults.certifiedDocLabel)).toHaveAttribute(
+    expect(screen.getByTestId(Config.formation.successPage.certifiedDocLabel)).toHaveAttribute(
       "href",
       "testCert.pdf"
     );
@@ -64,6 +64,6 @@ describe("Formation - <FormationSuccessPage />", () => {
       { certifiedDoc: "" },
       { documents: { certifiedDoc: "", formationDoc: "", standingDoc: "" } }
     );
-    expect(screen.queryByTestId(Config.businessFormationDefaults.certifiedDocLabel)).not.toBeInTheDocument();
+    expect(screen.queryByTestId(Config.formation.successPage.certifiedDocLabel)).not.toBeInTheDocument();
   });
 });
