@@ -7,7 +7,16 @@ export const determineForeignBusinessType = (foreignBusinessTypeIds: string[]): 
   if (foreignBusinessTypeIds.includes("none")) {
     return "NONE";
   }
-  if (foreignBusinessTypeIds.includes("operationsInNJ")) {
+  if (foreignBusinessTypeIds.includes("employeeOrContractorInNJ")) {
+    return "NEXUS";
+  }
+  if (foreignBusinessTypeIds.includes("officeInNJ")) {
+    return "NEXUS";
+  }
+  if (foreignBusinessTypeIds.includes("propertyInNJ")) {
+    return "NEXUS";
+  }
+  if (foreignBusinessTypeIds.includes("companyOperatedVehiclesInNJ")) {
     return "NEXUS";
   }
   if (foreignBusinessTypeIds.includes("employeesInNJ")) {

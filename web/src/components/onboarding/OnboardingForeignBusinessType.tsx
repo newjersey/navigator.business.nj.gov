@@ -9,7 +9,10 @@ import { Checkbox, FormControl, FormControlLabel } from "@mui/material";
 import { ChangeEvent, ReactElement, useContext } from "react";
 
 const allForeignBusinessTypeIdsOrdered = [
-  "operationsInNJ",
+  "employeeOrContractorInNJ",
+  "officeInNJ",
+  "propertyInNJ",
+  "companyOperatedVehiclesInNJ",
   "employeesInNJ",
   "transactionsInNJ",
   "revenueInNJ",

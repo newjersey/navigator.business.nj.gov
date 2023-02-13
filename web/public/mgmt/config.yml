@@ -3723,7 +3723,18 @@ collections:
                             collapsed: false
                             widget: object
                             fields:
-                              - { label: "operationsInNJ", name: "operationsInNJ", widget: "string" }
+                              - {
+                                  label: "employeeOrContractorInNJ",
+                                  name: "employeeOrContractorInNJ",
+                                  widget: "string",
+                                }
+                              - { label: "officeInNJ", name: "officeInNJ", widget: "string" }
+                              - { label: "propertyInNJ", name: "propertyInNJ", widget: "string" }
+                              - {
+                                  label: "companyOperatedVehiclesInNJ",
+                                  name: "companyOperatedVehiclesInNJ",
+                                  widget: "string",
+                                }
                               - { label: "employeesInNJ", name: "employeesInNJ", widget: "string" }
                               - { label: "transactionsInNJ", name: "transactionsInNJ", widget: "string" }
                               - { label: "revenueInNJ", name: "revenueInNJ", widget: "string" }
