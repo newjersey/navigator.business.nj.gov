@@ -141,7 +141,8 @@
     "Con-Con",
     "E-Com",
     "Fortius",
-    "USPS"
+    "USPS",
+    "healthz"
   ],
   "ignorePaths": ["node_modules/**", "out/**", "web/out/**", "package.json"]
 }
