@@ -1,11 +1,11 @@
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { LookupStepIndexByName } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { MediaQueries } from "@/lib/PageSizes";
 import { FormationStepNames } from "@/lib/types/types";
 import { camelCaseToKebabCase } from "@/lib/utils/cases-helpers";
 import { scrollToTop } from "@/lib/utils/helpers";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { FormationTextField } from "@businessnjgovnavigator/shared/formationData";
 import { useMediaQuery } from "@mui/material";
 import { useContext } from "react";
@@ -16,6 +16,7 @@ interface Props {
   stepName: FormationStepNames;
 }
 export const ReviewText = (props: Props) => {
+  const { Config } = useConfig();
   const { state, setStepIndex } = useContext(BusinessFormationContext);
   const kebabCaseFieldName = camelCaseToKebabCase(props.fieldName);
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
@@ -36,16 +37,12 @@ export const ReviewText = (props: Props) => {
             underline
             dataTestid={`edit-${kebabCaseFieldName}`}
           >
-            {Config.businessFormationDefaults.editButtonText}
+            {Config.formation.general.editButtonText}
           </UnStyledButton>
         </div>
       </div>
       <div className={`${isTabletAndUp ? "display-flex" : "display-block"}`} data-testid={kebabCaseFieldName}>
-        <div>
-          {state.formationFormData[props.fieldName] || (
-            <i>{Config.businessFormationDefaults.reviewStepNotEnteredText}</i>
-          )}
-        </div>
+        <div>{state.formationFormData[props.fieldName] || <i>{Config.formation.general.notEntered}</i>}</div>
       </div>
       <hr className="margin-y-205" />
     </>

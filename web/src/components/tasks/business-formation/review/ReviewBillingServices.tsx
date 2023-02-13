@@ -1,23 +1,24 @@
 import { ReviewLineItem } from "@/components/tasks/business-formation/review/ReviewLineItem";
 import { ReviewSectionHeader } from "@/components/tasks/business-formation/review/ReviewSectionHeader";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ReactElement, useContext } from "react";
 
 export const ReviewBillingServices = (): ReactElement => {
+  const { Config } = useConfig();
   const { state } = useContext(BusinessFormationContext);
-  const italicNotEnteredText = `*${Config.businessFormationDefaults.reviewStepNotEnteredText}*`;
+  const italicNotEnteredText = `*${Config.formation.general.notEntered}*`;
 
   const getDocumentsList = (): string => {
     const docs = [];
     if (state.formationFormData.officialFormationDocument) {
-      docs.push(Config.businessFormationDefaults.reviewStepFormationDoc);
+      docs.push(Config.formation.fields.officialFormationDocument.reviewStepLabel);
     }
     if (state.formationFormData.certificateOfStanding) {
-      docs.push(Config.businessFormationDefaults.reviewStepGoodStandingDoc);
+      docs.push(Config.formation.fields.certificateOfStanding.reviewStepLabel);
     }
     if (state.formationFormData.certifiedCopyOfFormationDocument) {
-      docs.push(Config.businessFormationDefaults.reviewStepCertifiedCopyDoc);
+      docs.push(Config.formation.fields.certifiedCopyOfFormationDocument.reviewStepLabel);
     }
     if (docs.length === 0) {
       return italicNotEnteredText;
@@ -29,9 +30,9 @@ export const ReviewBillingServices = (): ReactElement => {
   const getPaymentTypeLabel = (): string => {
     switch (state.formationFormData.paymentType) {
       case "CC":
-        return Config.businessFormationDefaults.creditCardPaymentTypeLabel;
+        return Config.formation.fields.paymentType.creditCardLabel;
       case "ACH":
-        return Config.businessFormationDefaults.achPaymentTypeLabel;
+        return Config.formation.fields.paymentType.achLabel;
       default:
         return italicNotEnteredText;
     }
@@ -40,16 +41,16 @@ export const ReviewBillingServices = (): ReactElement => {
   return (
     <>
       <ReviewSectionHeader
-        header={Config.businessFormationDefaults.reviewStepBillingServicesHeader}
+        header={Config.formation.fields.paymentType.reviewStepServicesHeader}
         stepName="Billing"
         testId="billing-services"
       />
       <ReviewLineItem
-        label={Config.businessFormationDefaults.reviewStepServices}
+        label={Config.formation.fields.paymentType.reviewStepsServicesSelected}
         value={getDocumentsList()}
       />
       <ReviewLineItem
-        label={Config.businessFormationDefaults.reviewStepPaymentType}
+        label={Config.formation.fields.paymentType.reviewStepLabel}
         value={getPaymentTypeLabel()}
       />
     </>

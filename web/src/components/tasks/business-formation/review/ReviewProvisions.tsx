@@ -1,16 +1,17 @@
 import { Content } from "@/components/Content";
 import { ReviewSectionHeader } from "@/components/tasks/business-formation/review/ReviewSectionHeader";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useContext } from "react";
 
 export const ReviewProvisions = () => {
+  const { Config } = useConfig();
   const { state } = useContext(BusinessFormationContext);
 
   return (
     <>
       <ReviewSectionHeader
-        header={Config.businessFormationDefaults.reviewStepProvisionsHeader}
+        header={Config.formation.fields.provisions.reviewStepHeader}
         stepName="Business"
         testId="provisions"
       />
@@ -19,7 +20,7 @@ export const ReviewProvisions = () => {
           return (
             <div className="margin-bottom-2" key={index}>
               <div className="text-bold margin-bottom-05">
-                {index + 1}. {Config.businessFormationDefaults.reviewStepProvisionsSubheader}
+                {index + 1}. {Config.formation.fields.provisions.reviewStepSubheader}
               </div>
               <Content>{provision}</Content>
             </div>
