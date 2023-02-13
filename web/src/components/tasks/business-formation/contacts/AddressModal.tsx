@@ -1,10 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { Content } from "@/components/Content";
 import { GenericTextField } from "@/components/GenericTextField";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { StateDropdown } from "@/components/StateDropdown";
 import { WithErrorBar } from "@/components/WithErrorBar";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { templateEval } from "@/lib/utils/helpers";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { FormationIncorporator, FormationMember, StateObject } from "@businessnjgovnavigator/shared";
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import { ReactElement, useEffect, useState } from "react";
@@ -15,7 +17,7 @@ interface DisplayContent {
   saveButton: string;
 }
 
-interface Props<T> {
+interface Props<T extends FormationMember | FormationIncorporator> {
   open: boolean;
   addressData: T[];
   displayContent: DisplayContent;
@@ -31,6 +33,7 @@ interface Props<T> {
 export const AddressModal = <T extends FormationMember | FormationIncorporator>(
   props: Props<T>
 ): ReactElement => {
+  const { Config } = useConfig();
   const [useDefaultAddress, setUseDefaultAddress] = useState<boolean>(false);
   const [addressData, setAddressData] = useState<T>(props.createEmptyAddress());
   type ErrorState = {
@@ -74,9 +77,9 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
       if (params.required && !exists) {
         label = params.labelWhenMissing;
       } else if (isTooLong) {
-        label = templateEval(Config.businessFormationDefaults.maximumLengthErrorText, {
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          field: (Config.businessFormationDefaults.requiredFieldsBulletPointLabel as any)[params.dataField],
+        label = templateEval(Config.formation.general.maximumLengthErrorText, {
+          // // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          field: (Config.formation.addressModal as any)[params.dataField].fieldDisplayName,
           maxLen: params.maxLen.toString(),
         });
       }
@@ -88,7 +91,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
         return fieldWithMaxLength({
           required: true,
           maxLen: 35,
-          labelWhenMissing: Config.businessFormationDefaults.addressErrorText,
+          labelWhenMissing: Config.formation.addressModal.addressLine1.error,
           dataField: "addressLine1",
         });
       case "addressLine2":
@@ -102,22 +105,22 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
         return fieldWithMaxLength({
           required: true,
           maxLen: 30,
-          labelWhenMissing: Config.businessFormationDefaults.addressCityErrorText,
+          labelWhenMissing: Config.formation.addressModal.addressCity.error,
           dataField: "addressCity",
         });
       case "addressName":
         return fieldWithMaxLength({
           required: true,
           maxLen: 50,
-          labelWhenMissing: Config.businessFormationDefaults.nameErrorText,
+          labelWhenMissing: Config.formation.addressModal.name.error,
           dataField: "name",
         });
       case "addressState":
-        return { invalid: !data.addressState, label: Config.businessFormationDefaults.addressStateErrorText };
+        return { invalid: !data.addressState, label: Config.formation.addressModal.addressState.error };
       case "addressZipCode":
         return {
           invalid: !data.addressZipCode || data.addressZipCode.length < 5,
-          label: Config.businessFormationDefaults.addressModalZipCodeErrorText,
+          label: Config.formation.addressModal.addressZipCode.error,
         };
       default:
         return { invalid: false, label: "" };
@@ -223,7 +226,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
       title={props.displayContent.title}
       primaryButtonText={props.displayContent.saveButton}
       primaryButtonOnClick={onSubmit}
-      secondaryButtonText={Config.businessFormationDefaults.addressModalBackButtonText}
+      secondaryButtonText={Config.formation.general.backButtonText}
     >
       <>
         {props.defaultAddress ? (
@@ -250,10 +253,10 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
             type="ALWAYS"
             className="margin-bottom-2"
           >
-            <Content>{Config.businessFormationDefaults.addressModalNameLabel}</Content>
+            <Content>{Config.formation.addressModal.name.label}</Content>
             <GenericTextField
               value={addressData.name}
-              placeholder={Config.businessFormationDefaults.addressModalNamePlaceholder}
+              placeholder={Config.formation.addressModal.name.placeholder}
               handleChange={(value: string) => {
                 return setAddressData((prevAddressData) => {
                   return { ...prevAddressData, name: value };
@@ -272,11 +275,11 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
             type="ALWAYS"
             className="margin-bottom-2"
           >
-            <Content>{Config.businessFormationDefaults.addressModalAddressLine1Label}</Content>
+            <Content>{Config.formation.addressModal.addressLine1.label}</Content>
             <GenericTextField
               fieldName="addressLine1"
               value={addressData.addressLine1}
-              placeholder={Config.businessFormationDefaults.addressModalAddressLine1Placeholder}
+              placeholder={Config.formation.addressModal.addressLine1.placeholder}
               handleChange={(value: string) => {
                 return setAddressData((prevAddressData) => {
                   return { ...prevAddressData, addressLine1: value };
@@ -303,16 +306,16 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
                 },
               }}
             >
-              {Config.businessFormationDefaults.addressModalAddressLine2Label}
+              {Config.formation.addressModal.addressLine2.label}
             </Content>{" "}
-            <div className="h6-styling">{Config.businessFormationDefaults.addressModalLine2Optional}</div>
+            <div className="h6-styling">{Config.formation.general.optionalLabel}</div>
             <GenericTextField
               fieldName="addressLine2"
               value={addressData.addressLine2}
               error={addressErrorMap["addressLine2"].invalid}
               validationText={addressErrorMap["addressLine2"].label}
               onValidation={onValidation}
-              placeholder={Config.businessFormationDefaults.addressModalAddressLine2Placeholder}
+              placeholder={Config.formation.addressModal.addressLine2.placeholder}
               disabled={useDefaultAddress}
               autoComplete="address-line2"
               handleChange={(value: string) => {
@@ -333,14 +336,14 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
                 type="DESKTOP-ONLY"
               >
                 <WithErrorBar hasError={!!addressErrorMap["addressCity"].invalid} type="MOBILE-ONLY">
-                  <Content>{Config.businessFormationDefaults.addressModalCityLabel}</Content>
+                  <Content>{Config.formation.addressModal.addressCity.label}</Content>
                   <GenericTextField
                     fieldName="addressCity"
                     autoComplete="address-level2"
                     value={addressData.addressCity}
                     disabled={shouldBeDisabled("addressCity")}
                     required={true}
-                    placeholder={Config.businessFormationDefaults.addressModalCityPlaceholder}
+                    placeholder={Config.formation.addressModal.addressCity.placeholder}
                     handleChange={(value: string) => {
                       return setAddressData((prevAddressData) => {
                         return { ...prevAddressData, addressCity: value };
@@ -361,12 +364,12 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
                 type="MOBILE-ONLY"
               >
                 <div className="margin-bottom-2">
-                  <Content>{Config.businessFormationDefaults.addressModalStateLabel}</Content>
+                  <Content>{Config.formation.addressModal.addressState.label}</Content>
                 </div>
                 <StateDropdown
                   fieldName="addressState"
                   value={addressData.addressState?.name ?? ""}
-                  placeholder={Config.businessFormationDefaults.addressModalStatePlaceholder}
+                  placeholder={Config.formation.addressModal.addressState.placeholder}
                   validationText={addressErrorMap["addressState"].label}
                   onSelect={(value: StateObject | undefined) => {
                     return setAddressData((prevAddressData) => {
@@ -382,7 +385,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
               </WithErrorBar>
             </div>
             <div className="grid-col-6 tablet:grid-col-3">
-              <Content>{Config.businessFormationDefaults.addressModalZipCodeLabel}</Content>
+              <Content>{Config.formation.addressModal.addressZipCode.label}</Content>
               <GenericTextField
                 numericProps={{
                   maxLength: 5,
@@ -400,7 +403,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
                 validationText={addressErrorMap["addressZipCode"].label}
                 onValidation={onValidation}
                 required={true}
-                placeholder={Config.businessFormationDefaults.addressModalZipCodePlaceholder}
+                placeholder={Config.formation.addressModal.addressZipCode.placeholder}
               />
             </div>
           </div>

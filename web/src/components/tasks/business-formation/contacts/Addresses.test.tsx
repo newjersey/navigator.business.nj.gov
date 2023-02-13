@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { displayContent, getPageHelper } from "@/components/tasks/business-formation/contacts/testHelpers";
+import { getMergedConfig } from "@/contexts/configContext";
 import { FormationPageHelpers, useSetupInitialMocks } from "@/test/helpers/helpers-formation";
 import { currentUserData } from "@/test/mock/withStatefulUserData";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import {
   FormationLegalType,
   generateFormationIncorporator,
@@ -18,6 +18,8 @@ function mockMaterialUI(): typeof materialUi {
     useMediaQuery: jest.fn(),
   };
 }
+
+const Config = getMergedConfig();
 
 jest.mock("@mui/material", () => mockMaterialUI());
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -112,9 +114,7 @@ describe("Formation - Addressed Signer Field", () => {
           page.clickAddressSubmit();
           await waitFor(() => {
             expect(
-              screen.getByText(Config.businessFormationDefaults.incorporatorsSuccessTextBody, {
-                exact: false,
-              })
+              screen.getByText(Config.formation.fields.incorporators.successSnackbarBody)
             ).toBeInTheDocument();
           });
           expect(screen.getByText(newName, { exact: false })).toBeInTheDocument();
@@ -166,9 +166,7 @@ describe("Formation - Addressed Signer Field", () => {
             )
           );
           await getPageHelper({ legalStructureId }, { incorporators });
-          expect(
-            screen.queryByText(Config.businessFormationDefaults.addNewSignerButtonText, { exact: false })
-          ).not.toBeInTheDocument();
+          expect(screen.queryByText(Config.formation.fields.signers.addButtonText)).not.toBeInTheDocument();
         });
 
         it("fires validations when signers do not fill out all the fields", async () => {
@@ -185,7 +183,7 @@ describe("Formation - Addressed Signer Field", () => {
           await attemptApiSubmission(page);
 
           const signerErrorText = () => {
-            return screen.queryByText(Config.businessFormationDefaults.signerNameErrorText, { exact: false });
+            return screen.queryByText(Config.formation.fields.signers.errorBannerSignerName);
           };
           expect(signerErrorText()).toBeInTheDocument();
           const nameTd = screen.getByText(incorporators[0].addressLine1, { exact: false });
@@ -201,9 +199,7 @@ describe("Formation - Addressed Signer Field", () => {
           const page = await getPageHelper({ legalStructureId }, { incorporators });
           await attemptApiSubmission(page);
           const signerCheckboxErrorText = () => {
-            return screen.queryByText(Config.businessFormationDefaults.signerCheckboxErrorText, {
-              exact: false,
-            });
+            return screen.queryByText(Config.formation.fields.signers.errorCheckbox);
           };
           expect(signerCheckboxErrorText()).toBeInTheDocument();
           page.checkSignerBox(0, "incorporators");
