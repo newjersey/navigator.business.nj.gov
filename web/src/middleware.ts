@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-server-import-in-page */
 
-import { NextURL } from "next/dist/server/web/next-url";
 import { NextRequest, NextResponse } from "next/server";
 
 const BASIC_AUTH_USERNAME = process.env.BASIC_AUTH_USERNAME;
@@ -30,7 +29,8 @@ export function middleware(req: NextRequest) {
     }
   }
 
-  const newUrl = new NextURL(`${process.env.API_BASE_URL}/basicauth`);
+  const url = req.nextUrl;
+  url.pathname = "/api/basicauth";
 
-  return NextResponse.rewrite(newUrl);
+  return NextResponse.rewrite(url);
 }
