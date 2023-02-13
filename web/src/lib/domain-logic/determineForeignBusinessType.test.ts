@@ -5,14 +5,68 @@ describe("determineForeignBusinessType", () => {
     expect(determineForeignBusinessType([])).toBeUndefined();
   });
 
-  it("returns NEXUS for operationsInNJ as highest priority", () => {
-    expect(determineForeignBusinessType(["operationsInNJ"])).toEqual("NEXUS");
+  it("returns NEXUS for employeeOrContractorInNJ as highest priority", () => {
+    expect(determineForeignBusinessType(["employeeOrContractorInNJ"])).toEqual("NEXUS");
 
-    expect(determineForeignBusinessType(["operationsInNJ", "employeesInNJ"])).toEqual("NEXUS");
-    expect(determineForeignBusinessType(["operationsInNJ", "transactionsInNJ"])).toEqual("NEXUS");
-    expect(determineForeignBusinessType(["operationsInNJ", "revenueInNJ"])).toEqual("NEXUS");
+    expect(determineForeignBusinessType(["employeeOrContractorInNJ", "employeesInNJ"])).toEqual("NEXUS");
+    expect(determineForeignBusinessType(["employeeOrContractorInNJ", "transactionsInNJ"])).toEqual("NEXUS");
+    expect(determineForeignBusinessType(["employeeOrContractorInNJ", "revenueInNJ"])).toEqual("NEXUS");
     expect(
-      determineForeignBusinessType(["operationsInNJ", "revenueInNJ", "transactionsInNJ", "employeesInNJ"])
+      determineForeignBusinessType([
+        "employeeOrContractorInNJ",
+        "revenueInNJ",
+        "transactionsInNJ",
+        "employeesInNJ",
+      ])
+    ).toEqual("NEXUS");
+  });
+
+  it("returns NEXUS for officeInNJ as highest priority", () => {
+    expect(determineForeignBusinessType(["officeInNJ"])).toEqual("NEXUS");
+
+    expect(determineForeignBusinessType(["officeInNJ", "employeesInNJ"])).toEqual("NEXUS");
+    expect(determineForeignBusinessType(["officeInNJ", "transactionsInNJ"])).toEqual("NEXUS");
+    expect(determineForeignBusinessType(["officeInNJ", "revenueInNJ"])).toEqual("NEXUS");
+    expect(
+      determineForeignBusinessType(["officeInNJ", "revenueInNJ", "transactionsInNJ", "employeesInNJ"])
+    ).toEqual("NEXUS");
+  });
+
+  it("returns NEXUS for propertyInNJ as highest priority", () => {
+    expect(determineForeignBusinessType(["propertyInNJ"])).toEqual("NEXUS");
+
+    expect(determineForeignBusinessType(["propertyInNJ", "employeesInNJ"])).toEqual("NEXUS");
+    expect(determineForeignBusinessType(["propertyInNJ", "transactionsInNJ"])).toEqual("NEXUS");
+    expect(determineForeignBusinessType(["propertyInNJ", "revenueInNJ"])).toEqual("NEXUS");
+    expect(
+      determineForeignBusinessType(["propertyInNJ", "revenueInNJ", "transactionsInNJ", "employeesInNJ"])
+    ).toEqual("NEXUS");
+  });
+
+  it("returns NEXUS for companyOperatedVehiclesInNJ as highest priority", () => {
+    expect(determineForeignBusinessType(["companyOperatedVehiclesInNJ"])).toEqual("NEXUS");
+
+    expect(determineForeignBusinessType(["companyOperatedVehiclesInNJ", "employeesInNJ"])).toEqual("NEXUS");
+    expect(determineForeignBusinessType(["companyOperatedVehiclesInNJ", "transactionsInNJ"])).toEqual(
+      "NEXUS"
+    );
+    expect(determineForeignBusinessType(["companyOperatedVehiclesInNJ", "revenueInNJ"])).toEqual("NEXUS");
+    expect(
+      determineForeignBusinessType([
+        "companyOperatedVehiclesInNJ",
+        "revenueInNJ",
+        "transactionsInNJ",
+        "employeesInNJ",
+      ])
+    ).toEqual("NEXUS");
+  });
+
+  it("returns NEXUS for officeInNJ, propertyInNJ, or companyOperatedVehiclesInNJ", () => {
+    expect(determineForeignBusinessType(["officeInNJ"])).toEqual("NEXUS");
+    expect(determineForeignBusinessType(["propertyInNJ"])).toEqual("NEXUS");
+    expect(determineForeignBusinessType(["companyOperatedVehiclesInNJ"])).toEqual("NEXUS");
+    expect(
+      determineForeignBusinessType(["officeInNJ", "propertyInNJ", "companyOperatedVehiclesInNJ"])
     ).toEqual("NEXUS");
   });
 
