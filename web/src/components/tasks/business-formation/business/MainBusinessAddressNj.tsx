@@ -6,12 +6,13 @@ import { MainBusinessAddressContainer } from "@/components/tasks/business-format
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { useMountEffect } from "@/lib/utils/helpers";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { ReactElement, useContext } from "react";
 
 export const MainBusinessAddressNj = (): ReactElement => {
+  const { Config } = useConfig();
   const { setFormationFormData } = useContext(BusinessFormationContext);
   const { doSomeFieldsHaveError, doesFieldHaveError } = useFormationErrors();
 
@@ -37,7 +38,7 @@ export const MainBusinessAddressNj = (): ReactElement => {
           type="MOBILE-ONLY"
           className="grid-col-12 tablet:grid-col-6 padding-left-0"
         >
-          <span className="text-bold">{Config.businessFormationDefaults.addressMunicipalityLabel}</span>
+          <span className="text-bold">{Config.formation.fields.addressMunicipality.label}</span>
           <FormationMunicipality />
         </WithErrorBar>
         <WithErrorBar
@@ -45,30 +46,30 @@ export const MainBusinessAddressNj = (): ReactElement => {
           type="MOBILE-ONLY"
           className=" orm-input grid-col-5 tablet:grid-col-2"
         >
-          <Content>{Config.businessFormationDefaults.addressStateLabel}</Content>
+          <Content>{Config.formation.fields.addressState.label}</Content>
           <StateDropdown
             fieldName="addressState"
             value={"New Jersey"}
-            placeholder={Config.businessFormationDefaults.addressModalStatePlaceholder}
-            validationText={Config.businessFormationDefaults.addressStateErrorText}
+            placeholder={Config.formation.fields.addressState.placeholder}
+            validationText={Config.formation.fields.addressState.error}
             disabled={true}
             onSelect={() => {}}
             className={"margin-top-2"}
           />
         </WithErrorBar>
         <BusinessFormationTextField
-          label={Config.businessFormationDefaults.addressZipCodeLabel}
-          placeholder={Config.businessFormationDefaults.addressZipCodePlaceholder}
+          label={Config.formation.fields.addressZipCode.label}
+          placeholder={Config.formation.fields.addressZipCode.placeholder}
           numericProps={{ maxLength: 5 }}
           required={true}
           errorBarType="NEVER"
           fieldName={"addressZipCode"}
-          validationText={Config.businessFormationDefaults.addressZipCodeErrorText}
+          validationText={Config.formation.fields.addressZipCode.error}
           className="form-input grid-col-7 tablet:grid-col-4"
         />
       </WithErrorBar>
       <Alert variant="info" className="margin-bottom-5">
-        <Content>{Config.businessFormationDefaults.businessLocationInfoAlertMarkdown}</Content>
+        <Content>{Config.formation.fields.addressMunicipality.infoAlert}</Content>
       </Alert>
     </MainBusinessAddressContainer>
   );

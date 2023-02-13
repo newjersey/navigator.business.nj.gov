@@ -4,11 +4,12 @@ import { MainBusinessAddressContainer } from "@/components/tasks/business-format
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { ReactElement, useContext } from "react";
 
 export const MainBusinessIntl = (): ReactElement => {
+  const { Config } = useConfig();
   const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
   const { doSomeFieldsHaveError, doesFieldHaveError, getFieldErrorLabel } = useFormationErrors();
 
@@ -21,8 +22,8 @@ export const MainBusinessIntl = (): ReactElement => {
       >
         <div className="tablet:grid-col-6 grid-col-12">
           <BusinessFormationTextField
-            label={Config.businessFormationDefaults.addressCityLabel}
-            placeholder={Config.businessFormationDefaults.addressCityPlaceholder}
+            label={Config.formation.fields.addressCity.label}
+            placeholder={Config.formation.fields.addressCity.placeholder}
             fieldName="addressCity"
             required={true}
             errorBarType="MOBILE-ONLY"
@@ -34,8 +35,8 @@ export const MainBusinessIntl = (): ReactElement => {
         <div className="tablet:grid-col-6 grid-col-12">
           <BusinessFormationTextField
             errorBarType="MOBILE-ONLY"
-            label={Config.businessFormationDefaults.addressProvinceLabel}
-            placeholder={Config.businessFormationDefaults.addressProvincePlaceholder}
+            label={Config.formation.fields.addressProvince.label}
+            placeholder={Config.formation.fields.addressProvince.placeholder}
             fieldName="addressProvince"
             required={true}
             noValidationMargin={true}
@@ -49,15 +50,15 @@ export const MainBusinessIntl = (): ReactElement => {
         className="grid-col-12"
         type="ALWAYS"
       >
-        <Content>{Config.businessFormationDefaults.addressCountryLabel}</Content>
+        <Content>{Config.formation.fields.addressCountry.label}</Content>
         <CountryDropdown
           useFullName
           excludeUS
           fieldName="addressCountry"
           value={state.formationFormData.addressCountry}
           error={doesFieldHaveError("addressCountry")}
-          placeholder={Config.businessFormationDefaults.addressCountryPlaceholder}
-          validationText={Config.businessFormationDefaults.addressCountryErrorText}
+          placeholder={Config.formation.fields.addressCountry.placeholder}
+          validationText={Config.formation.fields.addressCountry.error}
           required
           onValidation={() => setFieldsInteracted(["addressCountry"])}
           onSelect={(country) => {
@@ -74,13 +75,13 @@ export const MainBusinessIntl = (): ReactElement => {
       </WithErrorBar>
 
       <BusinessFormationTextField
-        label={Config.businessFormationDefaults.addressZipCodeIntlDakotaLabel}
-        placeholder={Config.businessFormationDefaults.addressZipCodeIntlDakotaPlaceholder}
+        label={Config.formation.fields.addressZipCode.foreign.label}
+        placeholder={Config.formation.fields.addressZipCode.foreign.placeholder}
         numericProps={{ maxLength: 11 }}
         errorBarType="ALWAYS"
         required={true}
         fieldName={"addressZipCode"}
-        validationText={Config.businessFormationDefaults.addressZipCodeIntlDakotaErrorText}
+        validationText={Config.formation.fields.addressZipCode.foreign.errorIntl}
         className="tablet:grid-col-6 grid-col-12"
       />
     </MainBusinessAddressContainer>
