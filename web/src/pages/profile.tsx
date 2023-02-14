@@ -34,7 +34,7 @@ import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { AuthAlertContext } from "@/contexts/authAlertContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { postGetAnnualFilings } from "@/lib/api-client/apiClient";
+import { decryptTaxId, postGetAnnualFilings } from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
@@ -177,7 +177,13 @@ const ProfilePage = (props: Props): ReactElement => {
         onValidation("taxId", true);
         fieldStatesCopy["taxId"] = { invalid: true };
       }
-      taxFilingData = { ...taxFilingData, state: undefined, registeredISO: undefined, filings: [] };
+      if (
+        (await decryptTaxId({
+          encryptedTaxId: userData.profileData.encryptedTaxId as string,
+        })) != profileData.taxId
+      ) {
+        taxFilingData = { ...taxFilingData, state: undefined, registeredISO: undefined, filings: [] };
+      }
     }
 
     if (getEssentialQuestion(profileData.industryId)) {

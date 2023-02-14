@@ -2,6 +2,7 @@ import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { OnboardingTaxId } from "@/components/onboarding/OnboardingTaxId";
 import { AuthAlertContext } from "@/contexts/authAlertContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
+import { decryptTaxId } from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
@@ -77,10 +78,13 @@ export const TaxInput = (props: Props): ReactElement => {
     setIsLoading(true);
 
     let { taxFilingData } = userData;
-    if (userData.profileData.taxId !== profileData.taxId) {
+    if (
+      (await decryptTaxId({
+        encryptedTaxId: userData.profileData.encryptedTaxId as string,
+      })) != profileData.taxId
+    ) {
       taxFilingData = { ...taxFilingData, state: undefined, registeredISO: undefined, filings: [] };
     }
-
     updateQueue
       .queueProfileData(profileData)
       .queueTaxFilingData(taxFilingData)
