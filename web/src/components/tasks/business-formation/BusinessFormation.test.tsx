@@ -467,7 +467,6 @@ describe("<BusinessFormation />", () => {
     await page.submitReviewStep();
 
     const formationFormData = currentUserData().formationData.formationFormData;
-    console.log(formationFormData);
     await waitFor(() => {
       expect(formationFormData.businessName).toEqual("Pizza Joint");
     });
