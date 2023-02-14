@@ -10,10 +10,10 @@ import {
 import { ValidatedCheckbox } from "@/components/ValidatedCheckbox";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { MediaQueries } from "@/lib/PageSizes";
 import { useMountEffect } from "@/lib/utils/helpers";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import {
   BusinessSignerTypeMap,
   createEmptyFormationSigner,
@@ -26,6 +26,7 @@ import { ChangeEvent, ReactElement, useContext, useMemo } from "react";
 export const Signatures = (): ReactElement => {
   const FIELD_NAME = "signers";
   const SIGNER_NAME_MAX_LEN = 50;
+  const { Config } = useConfig();
   const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
   const { doesFieldHaveError } = useFormationErrors();
@@ -130,7 +131,7 @@ export const Signatures = (): ReactElement => {
           className="text-bold"
           style={{ display: "none" }}
         >
-          {Config.businessFormationDefaults.signatureColumnLabel}*
+          {Config.formation.fields.signers.signColumnLabel}*
         </label>
         <div
           style={{ height: `${index == 0 ? "44px" : "60px"}` }}
@@ -178,7 +179,7 @@ export const Signatures = (): ReactElement => {
     return (
       <>
         {!isTabletAndUp && (
-          <Content className={"margin-bottom-1"}>{Config.businessFormationDefaults.signerTypeLabel}</Content>
+          <Content className={"margin-bottom-1"}>{Config.formation.fields.signers.titleLabel}</Content>
         )}
 
         <Select
@@ -195,9 +196,7 @@ export const Signatures = (): ReactElement => {
           }}
           renderValue={(selected) => {
             if (!selected) {
-              return (
-                <span className="text-base">{Config.businessFormationDefaults.signerTitlePlaceholder}</span>
-              );
+              return <span className="text-base">{Config.formation.fields.signers.titlePlaceholder}</span>;
             }
 
             return selected;
@@ -213,7 +212,7 @@ export const Signatures = (): ReactElement => {
         </Select>
         {hasError && state.formationFormData!.signers[index].title == undefined && (
           <FormHelperText className={"text-error-dark"}>
-            {Config.businessFormationDefaults.signerTypeError}
+            {Config.formation.fields.signers.errorInlineSignerTitle}
           </FormHelperText>
         )}
       </>
@@ -228,8 +227,8 @@ export const Signatures = (): ReactElement => {
     const getInlineValidationText = (): string => {
       if (state.formationFormData.signers && state.formationFormData.signers[index].name.length === 0) {
         return index > 0
-          ? Config.businessFormationDefaults.additionalSignatureNameErrorText
-          : Config.businessFormationDefaults.signerErrorText;
+          ? Config.formation.fields.signers.errorInlineAdditionalSignerName
+          : Config.formation.fields.signers.errorInlineFirstSignerName;
       }
       return "";
     };
@@ -237,12 +236,12 @@ export const Signatures = (): ReactElement => {
     return (
       <>
         {!isTabletAndUp && index !== 0 && (
-          <Content className="margin-bottom-1">{Config.businessFormationDefaults.signerLabel}</Content>
+          <Content className="margin-bottom-1">{Config.formation.fields.signers.nameLabel}</Content>
         )}
         <GenericTextField
           noValidationMargin
           value={state.formationFormData.signers[index].name}
-          placeholder={Config.businessFormationDefaults.signerPlaceholder}
+          placeholder={Config.formation.fields.signers.namePlaceholder}
           handleChange={(value: string) => {
             return handleSignerChange(value, index);
           }}
@@ -294,21 +293,19 @@ export const Signatures = (): ReactElement => {
                 <div className="grid-col">
                   <div className="grid-row margin-top-1">
                     <div className={`grid-col-12 ${needsSignerType ? "tablet:grid-col-6" : ""}`}>
-                      <Content>{Config.businessFormationDefaults.signerLabel}</Content>
+                      <Content>{Config.formation.fields.signers.nameLabel}</Content>
                       {getSignatureField(0)}
                     </div>
                     {needsSignerType && (
                       <div className="grid-col-12 tablet:grid-col-5 tablet:margin-left-1 margin-top-1 tablet:margin-top-0">
-                        {isTabletAndUp && (
-                          <Content>{Config.businessFormationDefaults.signerTypeLabel}</Content>
-                        )}
+                        {isTabletAndUp && <Content>{Config.formation.fields.signers.titleLabel}</Content>}
                         {getTypeField(0)}
                       </div>
                     )}
                   </div>
                 </div>
                 <div className="margin-top-1" style={{ marginBottom: "1em" }}>
-                  <Content>{`${Config.businessFormationDefaults.signatureColumnLabel}*`}</Content>
+                  <Content>{`${Config.formation.fields.signers.signColumnLabel}*`}</Content>
                   {renderSignatureColumn({
                     index: 0,
                   })}
@@ -368,7 +365,7 @@ export const Signatures = (): ReactElement => {
                         return removeSigner(index);
                       }}
                     >
-                      {Config.businessFormationDefaults.signatureDeleteMobileText}
+                      {Config.formation.fields.signers.deleteTextMobile}
                     </UnStyledButton>
                   )}
                 </div>
@@ -381,12 +378,12 @@ export const Signatures = (): ReactElement => {
           <UnStyledButton style="tertiary" onClick={addSignerField} dataTestid="add-new-signer">
             <Icon>add</Icon>{" "}
             <span className="text-underline" style={{ textUnderlinePosition: "under" }}>
-              {Config.businessFormationDefaults.addNewSignerButtonText}
+              {Config.formation.fields.signers.addButtonText}
             </span>
           </UnStyledButton>
         )}
         <p className="margin-bottom-2">
-          <i>* {Config.businessFormationDefaults.signatureAidText}</i>
+          <i>* {Config.formation.fields.signers.aidText}</i>
         </p>
       </div>
     </>

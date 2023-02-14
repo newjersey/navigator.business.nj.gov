@@ -92,7 +92,7 @@ export const NexusFormationFlow = (): ReactElement => {
                 isNotFullWidthOnMobile={true}
                 onClick={onPreviousButtonClick}
               >
-                {Config.businessFormationDefaults.previousButtonText}
+                {Config.formation.general.previousButtonText}
               </SecondaryButton>
             </TaskCTA>
           </div>

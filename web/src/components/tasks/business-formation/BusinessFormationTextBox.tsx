@@ -4,9 +4,9 @@ import { Icon } from "@/components/njwds/Icon";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { camelCaseToSentence } from "@/lib/utils/cases-helpers";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { FormationTextField } from "@businessnjgovnavigator/shared/formationData";
 import { ReactElement, useContext, useState } from "react";
 
@@ -24,6 +24,7 @@ interface Props {
 }
 
 export const BusinessFormationTextBox = (props: Props): ReactElement => {
+  const { Config } = useConfig();
   const { state, setFormationFormData } = useContext(BusinessFormationContext);
   const [isExpanded, setIsExpanded] = useState(props.required || !!state.formationFormData[props.fieldName]);
   const { doesFieldHaveError } = useFormationErrors();
@@ -51,7 +52,7 @@ export const BusinessFormationTextBox = (props: Props): ReactElement => {
             <></>
           ) : (
             <span className="text-normal font-body-lg">
-              {props.optionalLabel ?? Config.businessFormationDefaults.optionalLabel}
+              {props.optionalLabel ?? Config.formation.general.optionalLabel}
             </span>
           )}
         </div>
@@ -78,7 +79,7 @@ export const BusinessFormationTextBox = (props: Props): ReactElement => {
                   placeholder={props.placeholderText}
                   fieldName={props.fieldName}
                   label={props.inputLabel ?? ""}
-                  validationText={Config.businessFormationDefaults.genericErrorText}
+                  validationText={Config.formation.general.genericErrorText}
                   required={props.required}
                   fieldOptions={{
                     multiline: true,
@@ -116,7 +117,7 @@ export const BusinessFormationTextBox = (props: Props): ReactElement => {
             </div>
             <div className="text-base-dark margin-top-1 margin-bottom-2">
               {(state.formationFormData[props.fieldName] as string)?.length ?? 0} / {props.maxChars}{" "}
-              {Config.businessFormationDefaults.charactersLabel}
+              {Config.formation.general.charactersLabel}
             </div>
           </div>
         </WithErrorBar>

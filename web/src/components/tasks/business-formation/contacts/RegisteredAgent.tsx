@@ -5,15 +5,16 @@ import { BusinessFormationTextField } from "@/components/tasks/business-formatio
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { FormationFields } from "@businessnjgovnavigator/shared/formationData";
 import { Municipality } from "@businessnjgovnavigator/shared/index";
 import { Checkbox, FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import React, { ReactElement, useContext, useEffect } from "react";
 
 export const RegisteredAgent = (): ReactElement => {
+  const { Config } = useConfig();
   const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
   const { municipalities } = useContext(MunicipalitiesContext);
   const { userData } = useUserData();
@@ -163,12 +164,12 @@ export const RegisteredAgent = (): ReactElement => {
           {state.formationFormData.agentNumberOrManual === "NUMBER" && (
             <div data-testid="agent-number">
               <BusinessFormationTextField
-                label={Config.businessFormationDefaults.registeredAgentNumberLabel}
-                placeholder={Config.businessFormationDefaults.registeredAgentNumberPlaceholder}
+                label={Config.formation.fields.agentNumber.label}
+                placeholder={Config.formation.fields.agentNumber.placeholder}
                 numericProps={{ minLength: 4, maxLength: 7 }}
                 fieldName="agentNumber"
                 required={true}
-                validationText={Config.businessFormationDefaults.agentNumberErrorText}
+                validationText={Config.formation.fields.agentNumber.error}
                 formInputFull
                 errorBarType="ALWAYS"
               />
@@ -179,7 +180,7 @@ export const RegisteredAgent = (): ReactElement => {
             <div data-testid="agent-name">
               <div className="margin-top-3 margin-bottom-1">
                 <FormControlLabel
-                  label={Config.businessFormationDefaults.sameAgentInfoAsAccount}
+                  label={Config.formation.registeredAgent.sameContactCheckbox}
                   control={
                     <Checkbox
                       checked={state.formationFormData.agentUseAccountInfo}
@@ -196,8 +197,8 @@ export const RegisteredAgent = (): ReactElement => {
               >
                 <div className="tablet:grid-col-6">
                   <BusinessFormationTextField
-                    label={Config.businessFormationDefaults.registeredAgentNameLabel}
-                    placeholder={Config.businessFormationDefaults.registeredAgentNamePlaceholder}
+                    label={Config.formation.fields.agentName.label}
+                    placeholder={Config.formation.fields.agentName.placeholder}
                     required={true}
                     validationText={getFieldErrorLabel("agentName")}
                     errorBarType="MOBILE-ONLY"
@@ -208,8 +209,8 @@ export const RegisteredAgent = (): ReactElement => {
                 </div>
                 <div className="tablet:grid-col-6 margin-bottom-2">
                   <BusinessFormationTextField
-                    label={Config.businessFormationDefaults.registeredAgentEmailLabel}
-                    placeholder={Config.businessFormationDefaults.registeredAgentEmailPlaceholder}
+                    label={Config.formation.fields.agentEmail.label}
+                    placeholder={Config.formation.fields.agentEmail.placeholder}
                     fieldName="agentEmail"
                     errorBarType="MOBILE-ONLY"
                     required={true}
@@ -222,7 +223,7 @@ export const RegisteredAgent = (): ReactElement => {
               {state.formationFormData.businessLocationType == "NJ" && (
                 <div className="margin-bottom-1">
                   <FormControlLabel
-                    label={Config.businessFormationDefaults.sameAgentAddressAsBusiness}
+                    label={Config.formation.registeredAgent.sameAddressCheckbox}
                     control={
                       <Checkbox
                         checked={state.formationFormData.agentUseBusinessAddress}
@@ -234,8 +235,8 @@ export const RegisteredAgent = (): ReactElement => {
                 </div>
               )}
               <BusinessFormationTextField
-                label={Config.businessFormationDefaults.registeredAgentAddressLine1Label}
-                placeholder={Config.businessFormationDefaults.registeredAgentAddressLine1Placeholder}
+                label={Config.formation.fields.agentOfficeAddressLine1.label}
+                placeholder={Config.formation.fields.agentOfficeAddressLine1.placeholder}
                 fieldName="agentOfficeAddressLine1"
                 required={true}
                 validationText={getFieldErrorLabel("agentOfficeAddressLine1")}
@@ -244,8 +245,8 @@ export const RegisteredAgent = (): ReactElement => {
                 errorBarType="ALWAYS"
               />
               <BusinessFormationTextField
-                label={Config.businessFormationDefaults.registeredAgentAddressLine2Label}
-                placeholder={Config.businessFormationDefaults.registeredAgentAddressLine2Placeholder}
+                label={Config.formation.fields.agentOfficeAddressLine2.label}
+                placeholder={Config.formation.fields.agentOfficeAddressLine2.placeholder}
                 fieldName="agentOfficeAddressLine2"
                 validationText={getFieldErrorLabel("agentOfficeAddressLine2")}
                 disabled={state.formationFormData.agentUseBusinessAddress}
@@ -265,7 +266,7 @@ export const RegisteredAgent = (): ReactElement => {
                     hasError={doesFieldHaveError("agentOfficeAddressMunicipality")}
                     type="MOBILE-ONLY"
                   >
-                    <Content>{Config.businessFormationDefaults.registeredAgentMunicipalityLabel}</Content>
+                    <Content>{Config.formation.fields.agentOfficeAddressMunicipality.label}</Content>
                     <div className="margin-top-2">
                       <MunicipalityDropdown
                         municipalities={municipalities}
@@ -281,10 +282,8 @@ export const RegisteredAgent = (): ReactElement => {
                           });
                         }}
                         onValidation={() => setFieldsInteracted(["agentOfficeAddressMunicipality"])}
-                        placeholderText={
-                          Config.businessFormationDefaults.registeredAgentMunicipalityPlaceholder
-                        }
-                        helperText={Config.businessFormationDefaults.addressMunicipalityErrorText}
+                        placeholderText={Config.formation.fields.agentOfficeAddressMunicipality.placeholder}
+                        helperText={Config.formation.fields.agentOfficeAddressMunicipality.error}
                       />
                     </div>
                   </WithErrorBar>
@@ -292,12 +291,12 @@ export const RegisteredAgent = (): ReactElement => {
 
                 <div className="grid-col-5 tablet:grid-col-2">
                   <WithErrorBar hasError={doesFieldHaveError("agentOfficeAddressZipCode")} type="MOBILE-ONLY">
-                    <Content>{Config.businessFormationDefaults.addressStateLabel}</Content>
+                    <Content>{Config.formation.fields.agentOfficeAddressState.label}</Content>
                     <StateDropdown
                       fieldName="agentOfficeAddressState"
                       value={"New Jersey"}
-                      placeholder={Config.businessFormationDefaults.addressModalStatePlaceholder}
-                      validationText={Config.businessFormationDefaults.addressStateErrorText}
+                      placeholder={Config.formation.fields.agentOfficeAddressState.placeholder}
+                      validationText={Config.formation.fields.agentOfficeAddressState.error}
                       disabled={true}
                       onSelect={() => {}}
                       className={"margin-top-2"}
@@ -309,9 +308,9 @@ export const RegisteredAgent = (): ReactElement => {
                     errorBarType="NEVER"
                     numericProps={{ maxLength: 5 }}
                     fieldName="agentOfficeAddressZipCode"
-                    label={Config.businessFormationDefaults.registeredAgentZipCodeLabel}
-                    placeholder={Config.businessFormationDefaults.registeredAgentZipCodePlaceholder}
-                    validationText={Config.businessFormationDefaults.agentOfficeAddressZipCodeErrorText}
+                    label={Config.formation.fields.agentOfficeAddressZipCode.label}
+                    placeholder={Config.formation.fields.agentOfficeAddressZipCode.placeholder}
+                    validationText={Config.formation.fields.agentOfficeAddressZipCode.error}
                     required={true}
                     disabled={shouldBeDisabled("agentOfficeAddressZipCode", "ADDRESS")}
                   />

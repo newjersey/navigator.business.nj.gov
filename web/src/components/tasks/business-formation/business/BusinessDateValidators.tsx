@@ -1,4 +1,4 @@
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
+import { getMergedConfig } from "@/contexts/configContext";
 import {
   defaultDateDelimiter,
   defaultDateFormat,
@@ -7,6 +7,8 @@ import {
   parseDateWithFormat,
 } from "@businessnjgovnavigator/shared/index";
 import dayjs from "dayjs";
+
+const Config = getMergedConfig();
 
 export const isDateValid = (value?: string): boolean => {
   if (!value) return false;
@@ -78,12 +80,12 @@ export const getBusinessStartDateHelperText = (legalType: FormationLegalType): s
   const rule = getBusinessStartDateRule(legalType);
   switch (rule) {
     case "90":
-      return Config.businessFormationDefaults.start90DateErrorText;
+      return Config.formation.fields.businessStartDate.error90Days;
     case "30":
-      return Config.businessFormationDefaults.start30DateErrorText;
+      return Config.formation.fields.businessStartDate.error30Days;
     case "Future":
-      return Config.businessFormationDefaults.startFutureDateErrorText;
+      return Config.formation.fields.businessStartDate.errorFuture;
     case "Today":
-      return Config.businessFormationDefaults.startTodayDateErrorText;
+      return Config.formation.fields.businessStartDate.errorToday;
   }
 };

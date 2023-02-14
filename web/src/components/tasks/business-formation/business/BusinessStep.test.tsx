@@ -393,17 +393,9 @@ describe("Formation - BusinessStep", () => {
         { businessPersona: "FOREIGN", legalStructureId: "limited-liability-company" },
         { foreignStateOfFormation: undefined }
       );
+      expect(screen.getByText(Config.formation.fields.foreignStateOfFormation.label)).toBeInTheDocument();
       expect(
-        screen.getByText(
-          displayContent.formationDisplayContentMap["foreign-limited-liability-company"]
-            .foreignStateOfFormationHeader.contentMd
-        )
-      ).toBeInTheDocument();
-      expect(
-        screen.getByPlaceholderText(
-          displayContent.formationDisplayContentMap["foreign-limited-liability-company"]
-            .foreignStateOfFormationHeader.placeholder
-        )
+        screen.getByPlaceholderText(Config.formation.fields.foreignStateOfFormation.placeholder)
       ).toBeInTheDocument();
       page.fillText("Foreign state of formation", "Virgin Islands");
       await page.submitBusinessStep(true);
@@ -418,12 +410,7 @@ describe("Formation - BusinessStep", () => {
         { foreignStateOfFormation: undefined }
       );
       page.fillText("Foreign state of formation", "test");
-      expect(
-        screen.getByText(
-          displayContent.formationDisplayContentMap["foreign-limited-liability-company"]
-            .foreignStateOfFormationHeader.errorText
-        )
-      ).toBeInTheDocument();
+      expect(screen.getByText(Config.formation.fields.foreignStateOfFormation.error)).toBeInTheDocument();
     });
   });
 
@@ -646,12 +633,7 @@ describe("Formation - BusinessStep", () => {
         { foreignDateOfFormation: undefined }
       );
       page.fillText(fieldLabel, "12/23");
-      expect(
-        screen.getByText(
-          displayContent.formationDisplayContentMap["foreign-limited-liability-company"]
-            .foreignDateOfFormationHeader.errorText
-        )
-      ).toBeInTheDocument();
+      expect(screen.getByText(Config.formation.fields.foreignDateOfFormation.error)).toBeInTheDocument();
     });
 
     it("saves an inputted date", async () => {
@@ -659,12 +641,7 @@ describe("Formation - BusinessStep", () => {
         { businessPersona: "FOREIGN", legalStructureId: "limited-liability-company" },
         { foreignDateOfFormation: undefined }
       );
-      expect(
-        screen.getByText(
-          displayContent.formationDisplayContentMap["foreign-limited-liability-company"]
-            .foreignDateOfFormationHeader.contentMd
-        )
-      ).toBeInTheDocument();
+      expect(screen.getByText(Config.formation.fields.foreignDateOfFormation.label)).toBeInTheDocument();
       page.selectDate(getCurrentDate(), fieldLabel);
       await page.submitBusinessStep();
       expect(currentUserData().formationData.formationFormData.foreignDateOfFormation).toEqual(
@@ -887,7 +864,7 @@ describe("Formation - BusinessStep", () => {
     it("Withdrawals", async () => {
       const page = await getPageHelper({ legalStructureId: "limited-partnership" }, { withdrawals: "" });
       await attemptApiSubmission(page);
-      expect(screen.getByText(Config.businessFormationDefaults.genericErrorText)).toBeInTheDocument();
+      expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
       expect(screen.getByRole("alert")).toHaveTextContent(
         Config.formation.fields.withdrawals.fieldDisplayName
       );
@@ -918,7 +895,7 @@ describe("Formation - BusinessStep", () => {
         { canCreateLimitedPartner: undefined }
       );
       await attemptApiSubmission(page);
-      expect(screen.getByText(Config.businessFormationDefaults.genericErrorText)).toBeInTheDocument();
+      expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
       expect(screen.getAllByRole("alert")[0]).toHaveTextContent(
         Config.formation.fields.canCreateLimitedPartner.fieldDisplayName
       );
@@ -998,15 +975,9 @@ describe("Formation - BusinessStep", () => {
       );
       await attemptApiSubmission(page);
       expect(screen.getByRole("alert")).toHaveTextContent(
-        displayContent.formationDisplayContentMap["foreign-limited-liability-company"]
-          .foreignDateOfFormationHeader.requireFieldText
+        Config.formation.fields.foreignDateOfFormation.fieldDisplayName
       );
-      expect(
-        screen.getByText(
-          displayContent.formationDisplayContentMap["foreign-limited-liability-company"]
-            .foreignDateOfFormationHeader.errorText
-        )
-      ).toBeInTheDocument();
+      expect(screen.getByText(Config.formation.fields.foreignDateOfFormation.error)).toBeInTheDocument();
     });
 
     it("Foreign state of formation", async () => {
@@ -1016,15 +987,9 @@ describe("Formation - BusinessStep", () => {
       );
       await attemptApiSubmission(page);
       expect(screen.getByRole("alert")).toHaveTextContent(
-        displayContent.formationDisplayContentMap["foreign-limited-liability-company"]
-          .foreignStateOfFormationHeader.requireFieldText
+        Config.formation.fields.foreignStateOfFormation.fieldDisplayName
       );
-      expect(
-        screen.getByText(
-          displayContent.formationDisplayContentMap["foreign-limited-liability-company"]
-            .foreignStateOfFormationHeader.errorText
-        )
-      ).toBeInTheDocument();
+      expect(screen.getByText(Config.formation.fields.foreignStateOfFormation.error)).toBeInTheDocument();
     });
 
     it("Address line1", async () => {

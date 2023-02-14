@@ -1,12 +1,14 @@
 import { Content } from "@/components/Content";
 import { StateDropdown } from "@/components/StateDropdown";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { StateObject } from "@businessnjgovnavigator/shared/";
 import { ReactElement, useContext } from "react";
 
 export const ForeignStateOfFormation = (): ReactElement => {
   const FIELD = "foreignStateOfFormation";
+  const { Config } = useConfig();
   const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
   const { doesFieldHaveError } = useFormationErrors();
 
@@ -23,7 +25,7 @@ export const ForeignStateOfFormation = (): ReactElement => {
   return (
     <>
       <div className="flex margin-bottom-2">
-        <Content>{state.displayContent.foreignStateOfFormationHeader.contentMd}</Content>
+        <Content>{Config.formation.fields.foreignStateOfFormation.label}</Content>
       </div>
       <div className="margin-bottom-2">
         <StateDropdown
@@ -32,8 +34,8 @@ export const ForeignStateOfFormation = (): ReactElement => {
           excludeNJ
           onValidation={() => setFieldsInteracted([FIELD])}
           value={state.formationFormData.foreignStateOfFormation}
-          placeholder={state.displayContent.foreignStateOfFormationHeader.placeholder}
-          validationText={state.displayContent.foreignStateOfFormationHeader.errorText}
+          placeholder={Config.formation.fields.foreignStateOfFormation.placeholder}
+          validationText={Config.formation.fields.foreignStateOfFormation.error}
           required
           error={doesFieldHaveError(FIELD)}
           onSelect={handleChange}

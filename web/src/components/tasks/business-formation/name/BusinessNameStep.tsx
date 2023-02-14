@@ -5,22 +5,18 @@ import { getErrorStateForField } from "@/components/tasks/business-formation/get
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useBusinessNameSearch } from "@/lib/data-hooks/useBusinessNameSearch";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
 import { SearchBusinessNameError } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { FormControl, TextField, useMediaQuery } from "@mui/material";
 import { FocusEvent, FormEvent, ReactElement, useContext, useEffect, useRef } from "react";
 
-const SearchBusinessNameErrorLookup: Record<SearchBusinessNameError, string> = {
-  BAD_INPUT: Config.searchBusinessNameTask.errorTextBadInput,
-  SEARCH_FAILED: Config.searchBusinessNameTask.errorTextSearchFailed,
-};
-
 export const BusinessNameStep = (): ReactElement => {
   const FIELD_NAME = "businessName";
+  const { Config } = useConfig();
   const { state, setFormationFormData, setFieldsInteracted, setBusinessNameAvailability } =
     useContext(BusinessFormationContext);
   const { userData } = useUserData();
@@ -57,6 +53,11 @@ export const BusinessNameStep = (): ReactElement => {
     setBusinessNameAvailability(nameAvailability);
   }, [nameAvailability, setBusinessNameAvailability]);
 
+  const SearchBusinessNameErrorLookup: Record<SearchBusinessNameError, string> = {
+    BAD_INPUT: Config.searchBusinessNameTask.errorTextBadInput,
+    SEARCH_FAILED: Config.searchBusinessNameTask.errorTextSearchFailed,
+  };
+
   const setNameInFormationData = () => {
     setFormationFormData((previousFormationData) => {
       return {
@@ -79,7 +80,7 @@ export const BusinessNameStep = (): ReactElement => {
       <form onSubmit={doSearch} className="usa-prose grid-container padding-0">
         <Content>{state.displayContent.businessNameCheck.contentMd}</Content>
         <WithErrorBar hasError={hasError} type="DESKTOP-ONLY">
-          <div className="text-bold margin-top-1">{Config.businessFormationDefaults.nameCheckFieldLabel}</div>
+          <div className="text-bold margin-top-1">{Config.formation.fields.businessName.label}</div>
           <div className={isTabletAndUp ? "grid-row grid-gap-2" : "display-flex flex-column"}>
             <div className={isTabletAndUp ? "grid-col-8" : ""}>
               <WithErrorBar hasError={hasError} type="MOBILE-ONLY">
@@ -92,7 +93,7 @@ export const BusinessNameStep = (): ReactElement => {
                     return updateCurrentName(event.target.value);
                   }}
                   variant="outlined"
-                  placeholder={Config.businessFormationDefaults.nameCheckPlaceholderText}
+                  placeholder={Config.formation.fields.businessName.placeholder}
                   inputProps={{
                     "aria-label": "Search business name",
                   }}
@@ -138,13 +139,13 @@ export const BusinessNameStep = (): ReactElement => {
       )}
       {nameAvailability?.status === "DESIGNATOR" && (
         <Alert variant="error" dataTestid="designator-text">
-          <p className="font-sans-xs">{Config.businessFormationDefaults.nameCheckDesignatorText}</p>
+          <p className="font-sans-xs">{Config.formation.fields.businessName.alertDesignator}</p>
         </Alert>
       )}
       {nameAvailability?.status === "SPECIAL_CHARACTER" && (
         <Alert variant="error" dataTestid="special-character-text">
           <Content className="font-sans-xs">
-            {templateEval(Config.businessFormationDefaults.nameCheckSpecialCharacterMarkDown, {
+            {templateEval(Config.formation.fields.businessName.alertSpecialCharacters, {
               name: submittedName,
             })}
           </Content>
@@ -153,7 +154,7 @@ export const BusinessNameStep = (): ReactElement => {
       {nameAvailability?.status === "RESTRICTED" && (
         <Alert variant="error" dataTestid="restricted-word-text">
           <Content className="font-sans-xs">
-            {templateEval(Config.businessFormationDefaults.nameCheckRestrictedWordMarkDown, {
+            {templateEval(Config.formation.fields.businessName.alertRestrictedWord, {
               name: submittedName,
               word: nameAvailability.invalidWord ?? "*unknown*",
             })}
@@ -164,7 +165,7 @@ export const BusinessNameStep = (): ReactElement => {
       {nameAvailability?.status === "UNAVAILABLE" && (
         <Alert variant="error" dataTestid="unavailable-text">
           <p className="font-sans-xs">
-            {templateEval(Config.businessFormationDefaults.nameCheckUnavailableText, {
+            {templateEval(Config.formation.fields.businessName.alertUnavailable, {
               name: submittedName,
             })}
           </p>
@@ -189,7 +190,7 @@ export const BusinessNameStep = (): ReactElement => {
       {nameAvailability?.status === "AVAILABLE" && (
         <Alert variant="success" dataTestid="available-text">
           <span className="font-sans-xs">
-            {templateEval(Config.businessFormationDefaults.nameCheckAvailableText, {
+            {templateEval(Config.formation.fields.businessName.alertAvailable, {
               name: submittedName,
             })}
           </span>
