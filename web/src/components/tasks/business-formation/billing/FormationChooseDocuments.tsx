@@ -1,11 +1,12 @@
 import { Content } from "@/components/Content";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getDollarValue } from "@/lib/utils/formatters";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { Checkbox } from "@mui/material";
 import { ReactElement, useContext, useEffect, useState } from "react";
 
 export const FormationChooseDocuments = (): ReactElement => {
+  const { Config } = useConfig();
   const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
   const [totalCost, setTotalCost] = useState<number>(state.displayContent.officialFormationDocument.cost);
 
@@ -49,9 +50,9 @@ export const FormationChooseDocuments = (): ReactElement => {
       <table className="business-formation-table business-formation-document">
         <thead>
           <tr>
-            <th className="text-bold">{Config.businessFormationDefaults.documentTableColumn2Label}</th>
+            <th className="text-bold">{Config.formation.fields.paymentType.serviceColumnLabel}</th>
             <th></th>
-            <th className="text-bold">{Config.businessFormationDefaults.documentTableColumn3Label}</th>
+            <th className="text-bold">{Config.formation.fields.paymentType.costColumnLabel}</th>
           </tr>
         </thead>
         <tbody>
@@ -135,9 +136,7 @@ export const FormationChooseDocuments = (): ReactElement => {
           <tr>
             <td colSpan={1}>
               <div className="text-align-left">
-                <span className="text-bold">
-                  {Config.businessFormationDefaults.documentTableSubTotalCostLabel}
-                </span>{" "}
+                <span className="text-bold">{Config.formation.fields.paymentType.costSubtotalLabel}</span>{" "}
               </div>
             </td>
             <td colSpan={1}></td>

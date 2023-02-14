@@ -1,3 +1,4 @@
+import { getMergedConfig } from "@/contexts/configContext";
 import { TasksDisplayContent } from "@/lib/types/types";
 import {
   generateFormationDbaContent,
@@ -11,7 +12,6 @@ import {
   preparePage,
   useSetupInitialMocks,
 } from "@/test/helpers/helpers-formation";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import {
   BusinessUser,
   FormationFormData,
@@ -28,6 +28,8 @@ function mockMaterialUI(): typeof materialUi {
     useMediaQuery: jest.fn(),
   };
 }
+
+const Config = getMergedConfig();
 
 jest.mock("@mui/material", () => mockMaterialUI());
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -114,16 +116,16 @@ describe("Formation - BillingStep", () => {
       }
     );
 
-    expect(screen.getByText(Config.businessFormationDefaults.creditCardPaymentTypeLabel)).toBeInTheDocument();
+    expect(screen.getByText(Config.formation.fields.paymentType.creditCardLabel)).toBeInTheDocument();
     expect(page.getInputElementByLabel("Contact first name").value).toBe("John");
     expect(page.getInputElementByLabel("Contact last name").value).toBe("Smith");
     expect(page.getInputElementByLabel("Contact phone number").value).toBe("(602) 415-3214");
-    expect(page.getInputElementByLabel(Config.businessFormationDefaults.optInAnnualReportText).checked).toBe(
-      true
-    );
-    expect(page.getInputElementByLabel(Config.businessFormationDefaults.optInCorpWatchText).checked).toBe(
-      true
-    );
+    expect(
+      page.getInputElementByLabel(Config.formation.fields.annualReportNotification.checkboxText).checked
+    ).toBe(true);
+    expect(
+      page.getInputElementByLabel(Config.formation.fields.corpWatchNotification.checkboxText).checked
+    ).toBe(true);
     expect(page.getInputElementByLabel("Official formation document").checked).toBe(true);
     expect(page.getInputElementByLabel("Certificate of standing").checked).toBe(false);
     expect(page.getInputElementByLabel("Certified copy of formation document").checked).toBe(true);
@@ -155,8 +157,8 @@ describe("Formation - BillingStep", () => {
     expect(screen.getByLabelText("Total")).toHaveTextContent(
       (
         150 +
-        Number.parseFloat(Config.businessFormationDefaults.creditCardPaymentCostInitial) +
-        Number.parseFloat(Config.businessFormationDefaults.creditCardPaymentCostExtra)
+        Number.parseFloat(Config.formation.fields.paymentType.paymentCosts.creditCardInitial) +
+        Number.parseFloat(Config.formation.fields.paymentType.paymentCosts.creditCardExtra)
       ).toString()
     );
     fireEvent.click(screen.getByLabelText("E check"));
@@ -164,7 +166,7 @@ describe("Formation - BillingStep", () => {
     expect(screen.getByLabelText("Total")).toHaveTextContent(
       (
         150 +
-        Number.parseFloat(Config.businessFormationDefaults.achPaymentCost) * numberOfDocuments
+        Number.parseFloat(Config.formation.fields.paymentType.paymentCosts.ach) * numberOfDocuments
       ).toString()
     );
   });
@@ -202,38 +204,34 @@ describe("Formation - BillingStep", () => {
       const page = await getPageHelper({}, { contactFirstName: "" }, { name: "" });
       await attemptApiSubmission(page);
       expect(screen.getByRole("alert")).toHaveTextContent(
-        Config.businessFormationDefaults.requiredFieldsBulletPointLabel.contactFirstName
+        Config.formation.fields.contactFirstName.fieldDisplayName
       );
-      expect(
-        screen.getByText(Config.businessFormationDefaults.contactFirstNameErrorText)
-      ).toBeInTheDocument();
+      expect(screen.getByText(Config.formation.fields.contactFirstName.error)).toBeInTheDocument();
     });
 
     it("Contact last name", async () => {
       const page = await getPageHelper({}, { contactLastName: "" }, { name: "" });
       await attemptApiSubmission(page);
       expect(screen.getByRole("alert")).toHaveTextContent(
-        Config.businessFormationDefaults.requiredFieldsBulletPointLabel.contactLastName
+        Config.formation.fields.contactLastName.fieldDisplayName
       );
-      expect(screen.getByText(Config.businessFormationDefaults.contactLastNameErrorText)).toBeInTheDocument();
+      expect(screen.getByText(Config.formation.fields.contactLastName.error)).toBeInTheDocument();
     });
 
     it("Contact phone number", async () => {
       const page = await getPageHelper({}, { contactPhoneNumber: "" });
       await attemptApiSubmission(page);
       expect(screen.getByRole("alert")).toHaveTextContent(
-        Config.businessFormationDefaults.requiredFieldsBulletPointLabel.contactPhoneNumber
+        Config.formation.fields.contactPhoneNumber.fieldDisplayName
       );
-      expect(
-        screen.getByText(Config.businessFormationDefaults.contactPhoneNumberErrorText)
-      ).toBeInTheDocument();
+      expect(screen.getByText(Config.formation.fields.contactPhoneNumber.error)).toBeInTheDocument();
     });
 
     it("Payment type", async () => {
       const page = await getPageHelper({}, { paymentType: undefined });
       await attemptApiSubmission(page);
       expect(screen.getAllByRole("alert")[0]).toHaveTextContent(
-        Config.businessFormationDefaults.requiredFieldsBulletPointLabel.paymentType
+        Config.formation.fields.paymentType.fieldDisplayName
       );
     });
   });

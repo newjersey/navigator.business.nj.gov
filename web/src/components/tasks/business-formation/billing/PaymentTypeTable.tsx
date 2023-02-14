@@ -1,26 +1,27 @@
 import { Content } from "@/components/Content";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { getDollarValue } from "@/lib/utils/formatters";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { PaymentType } from "@businessnjgovnavigator/shared/";
 import { FormHelperText, Radio } from "@mui/material";
 import React, { ReactElement, useContext, useEffect, useState } from "react";
 
 export const PaymentTypeTable = (): ReactElement => {
   const FIELD = "paymentType";
-  const achPaymentCost = Number.parseFloat(Config.businessFormationDefaults.achPaymentCost);
-  const creditCardPaymentCostExtra = Number.parseFloat(
-    Config.businessFormationDefaults.creditCardPaymentCostExtra
+  const { Config } = useConfig();
+  const achPaymentCost = Number.parseFloat(Config.formation.fields.paymentType.paymentCosts.ach);
+  const ccPaymentCostExtra = Number.parseFloat(
+    Config.formation.fields.paymentType.paymentCosts.creditCardExtra
   );
-  const creditCardPaymentCostInitial = Number.parseFloat(
-    Config.businessFormationDefaults.creditCardPaymentCostInitial
+  const ccPaymentCostInitial = Number.parseFloat(
+    Config.formation.fields.paymentType.paymentCosts.creditCardInitial
   );
 
   const { state, setFormationFormData } = useContext(BusinessFormationContext);
   const [totalCost, setTotalCost] = useState<number>(state.displayContent.officialFormationDocument.cost);
-  const [creditCardCost, setCreditCardCost] = useState<number>(creditCardPaymentCostInitial);
+  const [creditCardCost, setCreditCardCost] = useState<number>(ccPaymentCostInitial);
   const [achCost, setAchCost] = useState<number>(achPaymentCost);
   const { doesFieldHaveError } = useFormationErrors();
 
@@ -33,7 +34,7 @@ export const PaymentTypeTable = (): ReactElement => {
       costs.push(state.displayContent.certifiedCopyOfFormationDocument.cost);
 
     const achCost = costs.length * achPaymentCost;
-    const creditCardCost = creditCardPaymentCostInitial + (costs.length - 1) * creditCardPaymentCostExtra;
+    const creditCardCost = ccPaymentCostInitial + (costs.length - 1) * ccPaymentCostExtra;
 
     state.formationFormData.paymentType === "ACH" && costs.push(achCost);
 
@@ -69,7 +70,7 @@ export const PaymentTypeTable = (): ReactElement => {
       <table className="business-formation-table business-formation-payment">
         <thead>
           <tr>
-            <th className="text-bold">{Config.businessFormationDefaults.paymentTypeTableLabel}</th>
+            <th className="text-bold">{Config.formation.fields.paymentType.label}</th>
             <th></th>
             <th></th>
           </tr>
@@ -77,7 +78,7 @@ export const PaymentTypeTable = (): ReactElement => {
             <th colSpan={3}>
               {hasError ? (
                 <FormHelperText className={"text-error-dark"}>
-                  {Config.businessFormationDefaults.paymentTypeErrorText}
+                  {Config.formation.fields.paymentType.error}
                 </FormHelperText>
               ) : (
                 " "
@@ -113,7 +114,7 @@ export const PaymentTypeTable = (): ReactElement => {
                     : ""
                 }
               >
-                <Content>{Config.businessFormationDefaults.creditCardPaymentTypeLabel}</Content>
+                <Content>{Config.formation.fields.paymentType.creditCardLabel}</Content>
               </label>
             </td>
             <td className={state.formationFormData.paymentType === "CC" ? "text-primary-dark text-bold" : ""}>
@@ -147,7 +148,7 @@ export const PaymentTypeTable = (): ReactElement => {
                     : ""
                 }
               >
-                <Content>{Config.businessFormationDefaults.achPaymentTypeLabel}</Content>
+                <Content>{Config.formation.fields.paymentType.achLabel}</Content>
               </label>
             </td>
             <td
@@ -161,9 +162,7 @@ export const PaymentTypeTable = (): ReactElement => {
           <tr>
             <td colSpan={1}>
               <div className="text-align-left">
-                <span className="text-bold r">
-                  {Config.businessFormationDefaults.paymentTypeTableTotalCostLabel}
-                </span>{" "}
+                <span className="text-bold r">{Config.formation.fields.paymentType.costTotalLabel}</span>{" "}
               </div>
             </td>
             <td colSpan={1}></td>
