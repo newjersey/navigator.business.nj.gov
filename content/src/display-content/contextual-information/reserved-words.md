@@ -2,9 +2,11 @@
 header: Reserved Words
 slug: reserved-words
 ---
-The N﻿ew Jersey Department of Revenue and Enterprise Services (DORES) does not allow certain words to be used in your business name. Words like “bank” that indicate a regulated service require direct communication with DORES in advance. You can contact DORES by [filling out an inquiry form](https://www.nj.gov/treasury/revenue/revgencode.shtml).
+The N﻿ew Jersey Department of Revenue and Enterprise Services (DORES) does not allow certain words to be used in your business name and business purpose. Words like “bank” that indicate a regulated service require permission from DORES in advance. 
 
-Examples of words not readily available include:
+You can contact DORES by [filling out an inquiry form.](https://www.nj.gov/treasury/revenue/revgencode.shtml) 
+
+Examples of words not readily available include: 
 
 * Altius  
 * Bank
