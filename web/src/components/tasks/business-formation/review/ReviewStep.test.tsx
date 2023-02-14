@@ -254,7 +254,7 @@ describe("Formation - ReviewStep", () => {
     expect(screen.getByText("provision1")).toBeInTheDocument();
     expect(screen.getByText("provision2")).toBeInTheDocument();
     expect(
-      screen.getAllByText(Config.businessFormationDefaults.reviewStepProvisionsSubheader, { exact: false })
+      screen.getAllByText(Config.formation.fields.provisions.reviewStepSubheader, { exact: false })
     ).toHaveLength(2);
   });
 
@@ -266,20 +266,20 @@ describe("Formation - ReviewStep", () => {
   it("displays different titles when legalStructure is a ForProfit Corporation", async () => {
     await renderStep({ legalStructureId: "c-corporation" }, {});
     expect(
-      screen.getByText(markdownToText(Config.businessFormationDefaults.reviewStepDirectorsHeader))
+      screen.getByText(markdownToText(Config.formation.fields.directors.reviewStepHeader))
     ).toBeInTheDocument();
     expect(
-      screen.getByText(markdownToText(Config.businessFormationDefaults.reviewStepIncorporatorsHeader))
+      screen.getByText(markdownToText(Config.formation.fields.incorporators.reviewStepHeader))
     ).toBeInTheDocument();
   });
 
   it("displays different titles when legalStructure is an llc", async () => {
     await renderStep({ legalStructureId: "limited-liability-company" }, {});
     expect(
-      screen.getByText(markdownToText(Config.businessFormationDefaults.reviewStepMembersHeader))
+      screen.getByText(markdownToText(Config.formation.fields.members.reviewStepHeader))
     ).toBeInTheDocument();
     expect(
-      screen.getByText(markdownToText(Config.businessFormationDefaults.reviewStepSignaturesHeader))
+      screen.getByText(markdownToText(Config.formation.fields.signers.reviewStepHeader))
     ).toBeInTheDocument();
   });
 
@@ -289,11 +289,8 @@ describe("Formation - ReviewStep", () => {
       { signers: [generateFormationSigner({ name: "The Dude", title: "Authorized Partner" })] }
     );
     expect(
-      screen.queryByText(markdownToText(Config.businessFormationDefaults.reviewStepSignerTitleLabel), {
-        exact: false,
-      })
+      screen.queryByText(markdownToText(Config.formation.fields.signers.reviewStepTitleLabel))
     ).not.toBeInTheDocument();
-
     expect(screen.queryByText("Authorized Partner", { exact: false })).not.toBeInTheDocument();
   });
 
@@ -303,11 +300,8 @@ describe("Formation - ReviewStep", () => {
       { signers: [generateFormationSigner({ name: "The Dude", title: "Authorized Partner" })] }
     );
     expect(
-      screen.getByText(markdownToText(Config.businessFormationDefaults.reviewStepSignerTitleLabel), {
-        exact: false,
-      })
+      screen.getByText(markdownToText(Config.formation.fields.signers.reviewStepTitleLabel))
     ).toBeInTheDocument();
-
     expect(screen.getByText("Authorized Partner", { exact: false })).toBeInTheDocument();
   });
 
@@ -321,24 +315,20 @@ describe("Formation - ReviewStep", () => {
 
     it("displays withdrawals on review step", async () => {
       await renderStep({ legalStructureId }, { withdrawals: "withdrawl stuff" });
-      expect(
-        screen.getByText(markdownToText(Config.businessFormationDefaults.reviewStepWithdrawalsHeader))
-      ).toBeInTheDocument();
+      expect(screen.getByText(Config.formation.fields.withdrawals.reviewStepLabel)).toBeInTheDocument();
       expect(screen.getByText("withdrawl stuff")).toBeInTheDocument();
     });
 
     it("displays dissolution on review step", async () => {
       await renderStep({ legalStructureId }, { dissolution: "dissolution stuff" });
-      expect(
-        screen.getByText(markdownToText(Config.businessFormationDefaults.reviewStepDissolutionHeader))
-      ).toBeInTheDocument();
+      expect(screen.getByText(Config.formation.fields.dissolution.reviewStepLabel)).toBeInTheDocument();
       expect(screen.getByText("dissolution stuff")).toBeInTheDocument();
     });
 
     it("displays combined-investment on review step", async () => {
       await renderStep({ legalStructureId }, { combinedInvestment: "combinedInvestment stuff" });
       expect(
-        screen.getByText(markdownToText(Config.businessFormationDefaults.reviewStepCombinedInvestmentHeader))
+        screen.getByText(Config.formation.fields.combinedInvestment.reviewStepLabel)
       ).toBeInTheDocument();
       expect(screen.getByText("combinedInvestment stuff")).toBeInTheDocument();
     });
@@ -356,25 +346,17 @@ describe("Formation - ReviewStep", () => {
         }
       );
       const getByMarkup = withMarkup(screen.getByText);
+      expect(screen.getByText(Config.formation.partnershipRights.reviewStepHeader)).toBeInTheDocument();
       expect(
-        screen.getByText(markdownToText(Config.businessFormationDefaults.reviewStepPartnershipHeader))
-      ).toBeInTheDocument();
-      expect(
-        getByMarkup(
-          markdownToText(Config.businessFormationDefaults.reviewStepPartnershipYesLimitedPartnerBody)
-        )
+        getByMarkup(markdownToText(Config.formation.fields.canCreateLimitedPartner.reviewStepYes))
       ).toBeInTheDocument();
       expect(screen.getByText("partnerTerms whatever")).toBeInTheDocument();
       expect(
-        getByMarkup(
-          markdownToText(Config.businessFormationDefaults.reviewStepPartnershipNoCanReceiveDistributions)
-        )
+        getByMarkup(markdownToText(Config.formation.fields.canGetDistribution.reviewStepNo))
       ).toBeInTheDocument();
       expect(screen.queryByText("get distro terms")).not.toBeInTheDocument();
       expect(
-        getByMarkup(
-          markdownToText(Config.businessFormationDefaults.reviewStepPartnershipYesCanMakeDistributions)
-        )
+        getByMarkup(markdownToText(Config.formation.fields.canMakeDistribution.reviewStepYes))
       ).toBeInTheDocument();
       expect(screen.getByText("make distro terms")).toBeInTheDocument();
     });
@@ -401,31 +383,23 @@ describe("Formation - ReviewStep", () => {
           makeDistributionTerms: "make distro terms",
         }
       );
-      expect(
-        screen.queryByText(markdownToText(Config.businessFormationDefaults.reviewStepPartnershipHeader))
-      ).not.toBeInTheDocument();
+      expect(screen.queryByText(Config.formation.partnershipRights.reviewStepHeader)).not.toBeInTheDocument();
     });
 
     it("does not display withdrawals on review step", async () => {
       await renderStep({ legalStructureId }, { withdrawals: "withdrawl stuff" });
-      expect(
-        screen.queryByText(markdownToText(Config.businessFormationDefaults.reviewStepWithdrawalsHeader))
-      ).not.toBeInTheDocument();
+      expect(screen.queryByText(Config.formation.fields.withdrawals.reviewStepLabel)).not.toBeInTheDocument();
     });
 
     it("does not display dissolution on review step", async () => {
       await renderStep({ legalStructureId }, { dissolution: "dissolution stuff" });
-      expect(
-        screen.queryByText(markdownToText(Config.businessFormationDefaults.reviewStepDissolutionHeader))
-      ).not.toBeInTheDocument();
+      expect(screen.queryByText(Config.formation.fields.dissolution.reviewStepLabel)).not.toBeInTheDocument();
     });
 
     it("does not display combined-investment on review step", async () => {
       await renderStep({ legalStructureId }, { combinedInvestment: "combinedInvestment stuff" });
       expect(
-        screen.queryByText(
-          markdownToText(Config.businessFormationDefaults.reviewStepCombinedInvestmentHeader)
-        )
+        screen.queryByText(Config.formation.fields.combinedInvestment.reviewStepLabel)
       ).not.toBeInTheDocument();
     });
   });
@@ -455,14 +429,14 @@ describe("Formation - ReviewStep", () => {
 
     it("displays services payment type for CC", async () => {
       await renderStep({}, { paymentType: "CC" });
-      expect(
-        screen.getByText(Config.businessFormationDefaults.creditCardPaymentTypeLabel)
-      ).toBeInTheDocument();
+      expect(screen.getByText(Config.formation.fields.paymentType.creditCardLabel)).toBeInTheDocument();
+      expect(screen.queryByText(Config.formation.fields.paymentType.achLabel)).not.toBeInTheDocument();
     });
 
     it("displays services payment type for ACH", async () => {
       await renderStep({}, { paymentType: "ACH" });
-      expect(screen.getByText(Config.businessFormationDefaults.achPaymentTypeLabel)).toBeInTheDocument();
+      expect(screen.getByText(Config.formation.fields.paymentType.achLabel)).toBeInTheDocument();
+      expect(screen.queryByText(Config.formation.fields.paymentType.creditCardLabel)).not.toBeInTheDocument();
     });
 
     it("displays documents as comma separated list", async () => {
@@ -474,8 +448,8 @@ describe("Formation - ReviewStep", () => {
           certificateOfStanding: false,
         }
       );
-      const formationDocLabel = Config.businessFormationDefaults.reviewStepFormationDoc;
-      const certifiedCopyLabel = Config.businessFormationDefaults.reviewStepCertifiedCopyDoc;
+      const formationDocLabel = Config.formation.fields.officialFormationDocument.reviewStepLabel;
+      const certifiedCopyLabel = Config.formation.fields.certifiedCopyOfFormationDocument.reviewStepLabel;
       expect(screen.getByText(`${formationDocLabel}, ${certifiedCopyLabel}`)).toBeInTheDocument();
     });
   });

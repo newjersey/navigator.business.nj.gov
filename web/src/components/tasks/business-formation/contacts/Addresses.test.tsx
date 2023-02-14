@@ -32,7 +32,7 @@ jest.mock("@/lib/api-client/apiClient", () => ({
   searchBusinessName: jest.fn(),
 }));
 
-describe("Formation - Addressed Signer Field", () => {
+describe("Formation - Addresses", () => {
   beforeEach(() => {
     jest.resetAllMocks();
     useSetupInitialMocks();
@@ -51,7 +51,7 @@ describe("Formation - Addressed Signer Field", () => {
                 .placeholder as string
             )
           ).toBeInTheDocument();
-          page.clickAddNewSigner();
+          page.clickAddNewIncorporator();
           const signer = generateFormationIncorporator(
             {
               ...generateFormationUSAddress({}),
@@ -199,7 +199,7 @@ describe("Formation - Addressed Signer Field", () => {
           const page = await getPageHelper({ legalStructureId }, { incorporators });
           await attemptApiSubmission(page);
           const signerCheckboxErrorText = () => {
-            return screen.queryByText(Config.formation.fields.signers.errorCheckbox);
+            return screen.queryByText(Config.formation.fields.signers.errorBannerCheckbox);
           };
           expect(signerCheckboxErrorText()).toBeInTheDocument();
           page.checkSignerBox(0, "incorporators");
@@ -225,7 +225,7 @@ describe("Formation - Addressed Signer Field", () => {
             addressZipCode: "07601",
           }
         );
-        page.clickAddNewSigner();
+        page.clickAddNewIncorporator();
         fireEvent.click(screen.getByTestId("default-checkbox"));
         expect(page.getInputElementByLabel("Address name").value).toBe("");
         expect(page.getInputElementByLabel("Address line1").value).toBe("123 Address");

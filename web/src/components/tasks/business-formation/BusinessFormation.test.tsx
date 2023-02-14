@@ -285,7 +285,7 @@ describe("<BusinessFormation />", () => {
     page.fillText("Address zip code", "08001");
     page.selectByText("Address municipality", "Newark");
 
-    fireEvent.click(screen.getByText(Config.businessFormationDefaults.businessPurposeAddButtonText));
+    fireEvent.click(screen.getByText(Config.formation.fields.businessPurpose.addButtonText));
     page.fillText("Business purpose", "to take over the world");
 
     await page.submitBusinessStep();
@@ -323,7 +323,7 @@ describe("<BusinessFormation />", () => {
     page.fillText("Contact last name", "Smith");
     page.fillText("Contact phone number", "123A45a678 90");
     fireEvent.click(screen.getByLabelText("Credit card"));
-    page.selectCheckbox(Config.businessFormationDefaults.optInCorpWatchText);
+    page.selectCheckbox(Config.formation.fields.corpWatchNotification.checkboxText);
     page.selectCheckbox(
       `${displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.contentMd} ${displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.optionalLabel}`
     );
@@ -420,7 +420,7 @@ describe("<BusinessFormation />", () => {
     page.fillText("Address state", "Massachusetts");
     page.fillText("Address city", "Marlborough");
 
-    fireEvent.click(screen.getByText(Config.businessFormationDefaults.businessPurposeAddButtonText));
+    fireEvent.click(screen.getByText(Config.formation.fields.businessPurpose.addButtonText));
     page.fillText("Business purpose", "to take over the world");
 
     await page.submitBusinessStep();
@@ -449,7 +449,7 @@ describe("<BusinessFormation />", () => {
     page.fillText("Contact last name", "Smith");
     page.fillText("Contact phone number", "123A45a678 90");
     fireEvent.click(screen.getByLabelText("Credit card"));
-    page.selectCheckbox(Config.businessFormationDefaults.optInCorpWatchText);
+    page.selectCheckbox(Config.formation.fields.corpWatchNotification.checkboxText);
     page.selectCheckbox(
       `${displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.contentMd} ${displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.optionalLabel}`
     );
@@ -523,7 +523,7 @@ describe("<BusinessFormation />", () => {
     page.fillText("Address line2", "Suite 304");
     page.fillText("Address zip code", "08001");
     page.selectByText("Address municipality", "Newark");
-    fireEvent.click(screen.getByText(Config.businessFormationDefaults.businessPurposeAddButtonText));
+    fireEvent.click(screen.getByText(Config.formation.fields.businessPurpose.addButtonText));
     page.fillText("Business purpose", "to take over the world");
 
     await page.submitBusinessStep();
@@ -554,7 +554,7 @@ describe("<BusinessFormation />", () => {
     page.fillText("Contact last name", "Smith");
     page.fillText("Contact phone number", "123A45a678 90");
     fireEvent.click(screen.getByLabelText("Credit card"));
-    page.selectCheckbox(Config.businessFormationDefaults.optInCorpWatchText);
+    page.selectCheckbox(Config.formation.fields.corpWatchNotification.checkboxText);
     page.selectCheckbox(
       `${displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.contentMd} ${displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.optionalLabel}`
     );
@@ -644,7 +644,7 @@ describe("<BusinessFormation />", () => {
     page.fillText("Address zip code", "0800231");
     page.fillText("Address country", "Canada");
     page.fillText("Address province", "Quebec");
-    fireEvent.click(screen.getByText(Config.businessFormationDefaults.businessPurposeAddButtonText));
+    fireEvent.click(screen.getByText(Config.formation.fields.businessPurpose.addButtonText));
     page.fillText("Business purpose", "to take over the world");
 
     await page.submitBusinessStep();
@@ -677,7 +677,7 @@ describe("<BusinessFormation />", () => {
     page.fillText("Contact last name", "Smith");
     page.fillText("Contact phone number", "123A45a678 90");
     fireEvent.click(screen.getByLabelText("Credit card"));
-    page.selectCheckbox(Config.businessFormationDefaults.optInCorpWatchText);
+    page.selectCheckbox(Config.formation.fields.corpWatchNotification.checkboxText);
     page.selectCheckbox(
       `${displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.contentMd} ${displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.optionalLabel}`
     );
@@ -756,7 +756,7 @@ describe("<BusinessFormation />", () => {
     page.fillText("Address line2", "Suite 304");
     page.fillText("Address zip code", "08001");
     page.selectByText("Address municipality", "Newark");
-    fireEvent.click(screen.getByText(Config.businessFormationDefaults.businessPurposeAddButtonText));
+    fireEvent.click(screen.getByText(Config.formation.fields.businessPurpose.addButtonText));
     page.fillText("Business purpose", "to take over the world");
     page.fillText("Withdrawals", "to withdrawals over the world");
     page.fillText("Combined investment", "to invest over the world");
@@ -809,7 +809,7 @@ describe("<BusinessFormation />", () => {
     page.fillText("Contact last name", "Smith");
     page.fillText("Contact phone number", "123A45a678 90");
     fireEvent.click(screen.getByLabelText("Credit card"));
-    page.selectCheckbox(Config.businessFormationDefaults.optInCorpWatchText);
+    page.selectCheckbox(Config.formation.fields.corpWatchNotification.checkboxText);
     page.selectCheckbox(
       `${displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.contentMd} ${displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.optionalLabel}`
     );
@@ -900,7 +900,7 @@ describe("<BusinessFormation />", () => {
     page.fillText("Address line2", "Suite 304");
     page.fillText("Address zip code", "08001");
     page.selectByText("Address municipality", "Newark");
-    fireEvent.click(screen.getByText(Config.businessFormationDefaults.businessPurposeAddButtonText));
+    fireEvent.click(screen.getByText(Config.formation.fields.businessPurpose.addButtonText));
     page.fillText("Business purpose", "to take over the world");
 
     await page.submitBusinessStep();
@@ -934,7 +934,7 @@ describe("<BusinessFormation />", () => {
     page.fillText("Contact last name", "Smith");
     page.fillText("Contact phone number", "123A45a678 90");
     fireEvent.click(screen.getByLabelText("Credit card"));
-    page.selectCheckbox(Config.businessFormationDefaults.optInCorpWatchText);
+    page.selectCheckbox(Config.formation.fields.corpWatchNotification.checkboxText);
     page.selectCheckbox(
       `${displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.contentMd} ${displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.optionalLabel}`
     );

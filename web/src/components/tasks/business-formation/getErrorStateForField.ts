@@ -70,7 +70,7 @@ export const getErrorStateForField = (
     return {
       ...errorState,
       hasError: formationFormData.foreignStateOfFormation === undefined,
-      label: displayContent.foreignStateOfFormationHeader.requireFieldText,
+      label: Config.formation.fields.foreignStateOfFormation.error,
     };
   }
 
@@ -108,7 +108,7 @@ export const getErrorStateForField = (
     return {
       ...errorState,
       hasError: !isDateValid(formationFormData.foreignDateOfFormation),
-      label: displayContent.foreignDateOfFormationHeader.requireFieldText,
+      label: Config.formation.fields.foreignDateOfFormation.error,
     };
   }
 

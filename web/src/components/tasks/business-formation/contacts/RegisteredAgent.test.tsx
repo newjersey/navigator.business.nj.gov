@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { getPageHelper } from "@/components/tasks/business-formation/contacts/testHelpers";
 import { FormationPageHelpers, useSetupInitialMocks } from "@/test/helpers/helpers-formation";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 
+import { getMergedConfig } from "@/contexts/configContext";
 import { generateMunicipality } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { screen, waitFor } from "@testing-library/react";
@@ -13,6 +13,8 @@ function mockMaterialUI(): typeof materialUi {
     useMediaQuery: jest.fn(),
   };
 }
+
+const Config = getMergedConfig();
 
 jest.mock("@mui/material", () => mockMaterialUI());
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -69,7 +71,7 @@ describe("Formation - Registered Agent Field", () => {
   it("hides same-business-address checkbox for foreign legal structures", async () => {
     await getPageHelper({ businessPersona: "FOREIGN" }, { agentNumberOrManual: "MANUAL_ENTRY" });
     expect(
-      screen.queryByLabelText(Config.businessFormationDefaults.sameAgentAddressAsBusiness)
+      screen.queryByLabelText(Config.formation.registeredAgent.sameAddressCheckbox)
     ).not.toBeInTheDocument();
   });
 
@@ -110,7 +112,7 @@ describe("Formation - Registered Agent Field", () => {
     expect(page.getInputElementByLabel("Agent name").disabled).toEqual(false);
     expect(page.getInputElementByLabel("Agent email").disabled).toEqual(false);
 
-    page.selectCheckbox(Config.businessFormationDefaults.sameAgentInfoAsAccount);
+    page.selectCheckbox(Config.formation.registeredAgent.sameContactCheckbox);
 
     expect(page.getInputElementByLabel("Agent name").value).toEqual("New Name");
     expect(page.getInputElementByLabel("Agent email").value).toEqual("new@example.com");
@@ -133,8 +135,8 @@ describe("Formation - Registered Agent Field", () => {
       }
     );
 
-    page.selectCheckbox(Config.businessFormationDefaults.sameAgentInfoAsAccount);
-    page.selectCheckbox(Config.businessFormationDefaults.sameAgentInfoAsAccount);
+    page.selectCheckbox(Config.formation.registeredAgent.sameContactCheckbox);
+    page.selectCheckbox(Config.formation.registeredAgent.sameContactCheckbox);
 
     expect(page.getInputElementByLabel("Agent name").value).toEqual("New Name");
     expect(page.getInputElementByLabel("Agent email").value).toEqual("new@example.com");
@@ -172,7 +174,7 @@ describe("Formation - Registered Agent Field", () => {
     expect(page.getInputElementByLabel("Agent office address municipality").disabled).toEqual(false);
     expect(page.getInputElementByLabel("Agent office address zip code").disabled).toEqual(false);
 
-    page.selectCheckbox(Config.businessFormationDefaults.sameAgentAddressAsBusiness);
+    page.selectCheckbox(Config.formation.registeredAgent.sameAddressCheckbox);
 
     expect(page.getInputElementByLabel("Agent office address line1").value).toEqual("New Add 123");
     expect(page.getInputElementByLabel("Agent office address line2").value).toEqual("New Add 456");
@@ -199,7 +201,7 @@ describe("Formation - Registered Agent Field", () => {
       }
     );
 
-    page.selectCheckbox(Config.businessFormationDefaults.sameAgentAddressAsBusiness);
+    page.selectCheckbox(Config.formation.registeredAgent.sameAddressCheckbox);
 
     expect(page.getInputElementByLabel("Agent office address line1").value).toEqual("New Add 123");
     expect(page.getInputElementByLabel("Agent office address zip code").value).toEqual("");
@@ -220,10 +222,8 @@ describe("Formation - Registered Agent Field", () => {
       }
     );
 
-    page.selectCheckbox(Config.businessFormationDefaults.sameAgentAddressAsBusiness);
-    expect(
-      screen.getByText(Config.businessFormationDefaults.agentOfficeAddressLine1ErrorText)
-    ).toBeInTheDocument();
+    page.selectCheckbox(Config.formation.registeredAgent.sameAddressCheckbox);
+    expect(screen.getByText(Config.formation.fields.agentOfficeAddressLine1.error)).toBeInTheDocument();
   });
 
   it("unselects checkbox when user interacts with non-disabled field", async () => {
@@ -237,14 +237,14 @@ describe("Formation - Registered Agent Field", () => {
       }
     );
 
-    page.selectCheckbox(Config.businessFormationDefaults.sameAgentAddressAsBusiness);
-    expect(
-      page.getInputElementByLabel(Config.businessFormationDefaults.sameAgentAddressAsBusiness).checked
-    ).toEqual(true);
+    page.selectCheckbox(Config.formation.registeredAgent.sameAddressCheckbox);
+    expect(page.getInputElementByLabel(Config.formation.registeredAgent.sameAddressCheckbox).checked).toEqual(
+      true
+    );
     page.fillText("Agent office address zip code", "12345");
-    expect(
-      page.getInputElementByLabel(Config.businessFormationDefaults.sameAgentAddressAsBusiness).checked
-    ).toEqual(false);
+    expect(page.getInputElementByLabel(Config.formation.registeredAgent.sameAddressCheckbox).checked).toEqual(
+      false
+    );
     expect(page.getInputElementByLabel("Agent office address line1").disabled).toEqual(false);
     expect(page.getInputElementByLabel("Agent office address line2").disabled).toEqual(false);
     expect(page.getInputElementByLabel("Agent office address municipality").disabled).toEqual(false);
@@ -265,12 +265,12 @@ describe("Formation - Registered Agent Field", () => {
       }
     );
 
-    page.selectCheckbox(Config.businessFormationDefaults.sameAgentAddressAsBusiness);
-    page.selectCheckbox(Config.businessFormationDefaults.sameAgentAddressAsBusiness);
+    page.selectCheckbox(Config.formation.registeredAgent.sameAddressCheckbox);
+    page.selectCheckbox(Config.formation.registeredAgent.sameAddressCheckbox);
 
-    expect(
-      page.getInputElementByLabel(Config.businessFormationDefaults.sameAgentAddressAsBusiness).checked
-    ).toEqual(false);
+    expect(page.getInputElementByLabel(Config.formation.registeredAgent.sameAddressCheckbox).checked).toEqual(
+      false
+    );
     expect(page.getInputElementByLabel("Agent office address line1").value).toEqual("New Add 123");
     expect(page.getInputElementByLabel("Agent office address line2").value).toEqual("New Add 456");
     expect(page.getInputElementByLabel("Agent office address municipality").value).toEqual("New Test City");
@@ -293,12 +293,8 @@ describe("Formation - Registered Agent Field", () => {
     page.fillText("Agent office address zip code", "22222");
 
     await attemptApiSubmission(page);
-    expect(
-      screen.getByText(Config.businessFormationDefaults.agentOfficeAddressZipCodeErrorText)
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(Config.businessFormationDefaults.missingFieldsOnSubmitModalText)
-    ).toBeInTheDocument();
+    expect(screen.getByText(Config.formation.fields.agentOfficeAddressZipCode.error)).toBeInTheDocument();
+    expect(screen.getByText(Config.formation.errorBanner.errorOnStep)).toBeInTheDocument();
   });
 
   describe("email validation", () => {
@@ -314,10 +310,8 @@ describe("Formation - Registered Agent Field", () => {
       page.fillText("Agent email", "deeb.gmail");
 
       await attemptApiSubmission(page);
-      expect(screen.getByText(Config.businessFormationDefaults.agentEmailErrorText)).toBeInTheDocument();
-      expect(
-        screen.getByText(Config.businessFormationDefaults.missingFieldsOnSubmitModalText)
-      ).toBeInTheDocument();
+      expect(screen.getByText(Config.formation.fields.agentEmail.error)).toBeInTheDocument();
+      expect(screen.getByText(Config.formation.errorBanner.errorOnStep)).toBeInTheDocument();
     });
 
     it("displays error message when email domain is missing in email input field", async () => {
@@ -332,10 +326,8 @@ describe("Formation - Registered Agent Field", () => {
       page.fillText("Agent email", "deeb@");
 
       await attemptApiSubmission(page);
-      expect(screen.getByText(Config.businessFormationDefaults.agentEmailErrorText)).toBeInTheDocument();
-      expect(
-        screen.getByText(Config.businessFormationDefaults.missingFieldsOnSubmitModalText)
-      ).toBeInTheDocument();
+      expect(screen.getByText(Config.formation.fields.agentEmail.error)).toBeInTheDocument();
+      expect(screen.getByText(Config.formation.errorBanner.errorOnStep)).toBeInTheDocument();
     });
 
     it("passes email validation", async () => {
@@ -349,9 +341,7 @@ describe("Formation - Registered Agent Field", () => {
 
       page.fillText("Agent email", "lol@deeb.gmail");
       await attemptApiSubmission(page);
-      expect(
-        screen.queryByText(Config.businessFormationDefaults.agentEmailErrorText)
-      ).not.toBeInTheDocument();
+      expect(screen.queryByText(Config.formation.fields.agentEmail.error)).not.toBeInTheDocument();
     });
   });
 
@@ -366,7 +356,7 @@ describe("Formation - Registered Agent Field", () => {
       );
       await attemptApiSubmission(page);
       expect(screen.getByRole("alert")).toHaveTextContent(
-        Config.businessFormationDefaults.requiredFieldsBulletPointLabel.agentNumber
+        Config.formation.fields.agentNumber.fieldDisplayName
       );
     });
   });
@@ -381,9 +371,7 @@ describe("Formation - Registered Agent Field", () => {
         }
       );
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(
-        Config.businessFormationDefaults.requiredFieldsBulletPointLabel.agentName
-      );
+      expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.agentName.fieldDisplayName);
     });
 
     it("agent email", async () => {
@@ -396,7 +384,7 @@ describe("Formation - Registered Agent Field", () => {
       );
       await attemptApiSubmission(page);
       expect(screen.getByRole("alert")).toHaveTextContent(
-        Config.businessFormationDefaults.requiredFieldsBulletPointLabel.agentEmail
+        Config.formation.fields.agentEmail.fieldDisplayName
       );
     });
 
@@ -410,7 +398,7 @@ describe("Formation - Registered Agent Field", () => {
       );
       await attemptApiSubmission(page);
       expect(screen.getByRole("alert")).toHaveTextContent(
-        Config.businessFormationDefaults.requiredFieldsBulletPointLabel.agentOfficeAddressLine1
+        Config.formation.fields.agentOfficeAddressLine1.fieldDisplayName
       );
     });
 
@@ -424,7 +412,7 @@ describe("Formation - Registered Agent Field", () => {
       );
       await attemptApiSubmission(page);
       expect(screen.getByRole("alert")).toHaveTextContent(
-        Config.businessFormationDefaults.requiredFieldsBulletPointLabel.agentOfficeAddressMunicipality
+        Config.formation.fields.agentOfficeAddressMunicipality.fieldDisplayName
       );
     });
 
@@ -438,7 +426,7 @@ describe("Formation - Registered Agent Field", () => {
       );
       await attemptApiSubmission(page);
       expect(screen.getByRole("alert")).toHaveTextContent(
-        Config.businessFormationDefaults.requiredFieldsBulletPointLabel.agentOfficeAddressZipCode
+        Config.formation.fields.agentOfficeAddressZipCode.fieldDisplayName
       );
     });
   });

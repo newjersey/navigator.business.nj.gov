@@ -142,11 +142,11 @@ describe("getErrorStateForField", () => {
       ).toEqual(false);
     });
 
-    it("inserts label from displayContent", () => {
+    it("inserts label from config", () => {
       const formData = generateFormationFormData({ foreignDateOfFormation: "1234567" });
       expect(
         getErrorStateForField("foreignDateOfFormation", formData, undefined, displayContent).label
-      ).toEqual(displayContent.foreignDateOfFormationHeader.requireFieldText);
+      ).toEqual(Config.formation.fields.foreignDateOfFormation.error);
     });
   });
 
@@ -818,8 +818,8 @@ describe("getErrorStateForField", () => {
 
     runTests(hasErrorIfUndefined);
 
-    runTests(["foreignStateOfFormation"], displayContent.foreignStateOfFormationHeader.requireFieldText);
-    runTests(["foreignStateOfFormation"], displayContent.foreignStateOfFormationHeader.requireFieldText);
+    runTests(["foreignStateOfFormation"], Config.formation.fields.foreignStateOfFormation.error);
+    runTests(["foreignStateOfFormation"], Config.formation.fields.foreignStateOfFormation.error);
   });
 
   describe("fields that have error when empty or false", () => {

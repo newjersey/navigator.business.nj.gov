@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { getPageHelper } from "@/components/tasks/business-formation/contacts/testHelpers";
+import { getMergedConfig } from "@/contexts/configContext";
 import { templateEval } from "@/lib/utils/helpers";
 import { FormationPageHelpers, useSetupInitialMocks } from "@/test/helpers/helpers-formation";
 import { currentUserData } from "@/test/mock/withStatefulUserData";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import {
   BusinessSignerTypeMap,
   castPublicFilingLegalTypeToFormationType,
@@ -20,6 +20,8 @@ function mockMaterialUI(): typeof materialUi {
     useMediaQuery: jest.fn(),
   };
 }
+
+const Config = getMergedConfig();
 
 jest.mock("@mui/material", () => mockMaterialUI());
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -100,13 +102,9 @@ describe("Formation - Signatures", () => {
         const signers = Array(9).fill(generateFormationSigner({}, legalStructureId));
         const page = await getPageHelper({ legalStructureId }, { signers });
 
-        expect(
-          screen.getByText(Config.businessFormationDefaults.addNewSignerButtonText, { exact: false })
-        ).toBeInTheDocument();
+        expect(screen.getByText(Config.formation.fields.signers.addButtonText)).toBeInTheDocument();
         page.clickAddNewSigner();
-        expect(
-          screen.queryByText(Config.businessFormationDefaults.addNewSignerButtonText, { exact: false })
-        ).not.toBeInTheDocument();
+        expect(screen.queryByText(Config.formation.fields.signers.addButtonText)).not.toBeInTheDocument();
       });
 
       it("fires validations when signers do not fill out the signature field", async () => {
@@ -116,7 +114,7 @@ describe("Formation - Signatures", () => {
         );
         await attemptApiSubmission(page);
         const signerErrorText = () => {
-          return screen.queryByText(Config.businessFormationDefaults.signerNameErrorText, { exact: false });
+          return screen.queryByText(Config.formation.fields.signers.errorBannerSignerName);
         };
         expect(signerErrorText()).toBeInTheDocument();
         page.fillText("Signer 0", "Elrond");
@@ -138,8 +136,8 @@ describe("Formation - Signatures", () => {
         await attemptApiSubmission(page);
         const signerErrorText = () => {
           return screen.queryByText(
-            templateEval(Config.businessFormationDefaults.maximumLengthErrorText, {
-              field: Config.businessFormationDefaults.requiredFieldsBulletPointLabel.signers,
+            templateEval(Config.formation.general.maximumLengthErrorText, {
+              field: Config.formation.fields.signers.fieldDisplayName,
               maxLen: "50",
             }),
             { exact: false }
@@ -157,12 +155,12 @@ describe("Formation - Signatures", () => {
         );
         await attemptApiSubmission(page);
         const signerCheckboxErrorText = () => {
-          return screen.queryByText(Config.businessFormationDefaults.signerCheckboxErrorText, {
+          return screen.queryByText(Config.formation.fields.signers.errorBannerCheckbox, {
             exact: false,
           });
         };
         expect(signerCheckboxErrorText()).toBeInTheDocument();
-        page.selectCheckbox(`${Config.businessFormationDefaults.signatureColumnLabel}*`);
+        page.selectCheckbox(`${Config.formation.fields.signers.signColumnLabel}*`);
         expect(signerCheckboxErrorText()).not.toBeInTheDocument();
         await page.submitContactsStep();
       });
@@ -178,9 +176,11 @@ describe("Formation - Signatures", () => {
           }
         );
         await attemptApiSubmission(page);
-        expect(screen.getByText(Config.businessFormationDefaults.signerErrorText)).toBeInTheDocument();
         expect(
-          screen.queryByText(Config.businessFormationDefaults.additionalSignatureNameErrorText)
+          screen.getByText(Config.formation.fields.signers.errorInlineFirstSignerName)
+        ).toBeInTheDocument();
+        expect(
+          screen.queryByText(Config.formation.fields.signers.errorInlineAdditionalSignerName)
         ).not.toBeInTheDocument();
       });
 
@@ -196,9 +196,11 @@ describe("Formation - Signatures", () => {
         );
         await attemptApiSubmission(page);
         expect(
-          screen.getByText(Config.businessFormationDefaults.additionalSignatureNameErrorText)
+          screen.getByText(Config.formation.fields.signers.errorInlineAdditionalSignerName)
         ).toBeInTheDocument();
-        expect(screen.queryByText(Config.businessFormationDefaults.signerErrorText)).not.toBeInTheDocument();
+        expect(
+          screen.queryByText(Config.formation.fields.signers.errorInlineFirstSignerName)
+        ).not.toBeInTheDocument();
       });
     });
 
@@ -215,15 +217,11 @@ describe("Formation - Signatures", () => {
             { signers: [generateFormationSigner({ title: undefined })] }
           );
 
-          expect(
-            screen.getByText(Config.businessFormationDefaults.signerTitlePlaceholder)
-          ).toBeInTheDocument();
+          expect(screen.getByText(Config.formation.fields.signers.titlePlaceholder)).toBeInTheDocument();
 
           await attemptApiSubmission(page);
           const signerTypeErrorText = () => {
-            return screen.queryByText(Config.businessFormationDefaults.signerTypeErrorText, {
-              exact: false,
-            });
+            return screen.queryByText(Config.formation.fields.signers.errorBannerSignerTitle);
           };
           expect(signerTypeErrorText()).toBeInTheDocument();
           page.selectByText("Signer title 0", BusinessSignerTypeMap[legalType][0]);
@@ -236,9 +234,7 @@ describe("Formation - Signatures", () => {
             { businessPersona: "FOREIGN", legalStructureId },
             { signers: undefined }
           );
-          expect(
-            screen.getByText(Config.businessFormationDefaults.signerTitlePlaceholder)
-          ).toBeInTheDocument();
+          expect(screen.getByText(Config.formation.fields.signers.titlePlaceholder)).toBeInTheDocument();
 
           const signers = [
             generateFormationSigner({ signature: true }, legalType),

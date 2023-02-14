@@ -91,33 +91,31 @@ describe("<BusinessFormationPaginator />", () => {
   describe("button text", () => {
     it("shows unique text on button on first step", () => {
       preparePage(initialUserData, displayContent);
-      expect(screen.getByText(Config.businessFormationDefaults.initialNextButtonText)).toBeInTheDocument();
-      expect(screen.queryByText(Config.businessFormationDefaults.nextButtonText)).not.toBeInTheDocument();
+      expect(screen.getByText(Config.formation.general.initialNextButtonText)).toBeInTheDocument();
+      expect(screen.queryByText(Config.formation.general.nextButtonText)).not.toBeInTheDocument();
 
-      fireEvent.click(screen.getByText(Config.businessFormationDefaults.initialNextButtonText));
-      expect(
-        screen.queryByText(Config.businessFormationDefaults.initialNextButtonText)
-      ).not.toBeInTheDocument();
-      expect(screen.getByText(Config.businessFormationDefaults.nextButtonText)).toBeInTheDocument();
+      fireEvent.click(screen.getByText(Config.formation.general.initialNextButtonText));
+      expect(screen.queryByText(Config.formation.general.initialNextButtonText)).not.toBeInTheDocument();
+      expect(screen.getByText(Config.formation.general.nextButtonText)).toBeInTheDocument();
     });
 
     it("does not show previous button on first step", () => {
       preparePage(initialUserData, displayContent);
-      expect(screen.queryByText(Config.businessFormationDefaults.nextButtonText)).not.toBeInTheDocument();
-      fireEvent.click(screen.getByText(Config.businessFormationDefaults.initialNextButtonText));
-      expect(screen.getByText(Config.businessFormationDefaults.previousButtonText)).toBeInTheDocument();
+      expect(screen.queryByText(Config.formation.general.previousButtonText)).not.toBeInTheDocument();
+      fireEvent.click(screen.getByText(Config.formation.general.initialNextButtonText));
+      expect(screen.getByText(Config.formation.general.previousButtonText)).toBeInTheDocument();
     });
 
     it("shows unique text on last step button", () => {
       const page = preparePage(initialUserData, displayContent);
       page.stepperClickToReviewStep();
-      expect(screen.getByText(Config.businessFormationDefaults.submitButtonText)).toBeInTheDocument();
-      expect(screen.queryByText(Config.businessFormationDefaults.nextButtonText)).not.toBeInTheDocument();
+      expect(screen.getByText(Config.formation.general.submitButtonText)).toBeInTheDocument();
+      expect(screen.queryByText(Config.formation.general.nextButtonText)).not.toBeInTheDocument();
     });
   });
 
   describe("when in guest mode", () => {
-    const guestModeNextButtonText = `Register & ${Config.businessFormationDefaults.initialNextButtonText}`;
+    const guestModeNextButtonText = `Register & ${Config.formation.general.initialNextButtonText}`;
     let setRegistrationModalIsVisible: jest.Mock;
 
     beforeEach(() => {
@@ -182,7 +180,7 @@ describe("<BusinessFormationPaginator />", () => {
       await page.submitBusinessStep();
       await page.submitContactsStep();
       await page.submitBillingStep();
-      fireEvent.click(screen.getByText(Config.businessFormationDefaults.previousButtonText));
+      fireEvent.click(screen.getByText(Config.formation.general.previousButtonText));
       await waitFor(() => {
         expect(screen.getByTestId("billing-step")).toBeInTheDocument();
       });
@@ -193,9 +191,9 @@ describe("<BusinessFormationPaginator />", () => {
         const page = preparePage(initialUserData, displayContent);
         await page.stepperClickToBusinessStep();
 
-        fireEvent.click(screen.getByText(Config.businessFormationDefaults.provisionsAddButtonText));
-        fireEvent.click(screen.getByText(Config.businessFormationDefaults.provisionsAddAnotherButtonText));
-        fireEvent.click(screen.getByText(Config.businessFormationDefaults.provisionsAddAnotherButtonText));
+        fireEvent.click(screen.getByText(Config.formation.fields.provisions.addButtonText));
+        fireEvent.click(screen.getByText(Config.formation.fields.provisions.addAnotherButtonText));
+        fireEvent.click(screen.getByText(Config.formation.fields.provisions.addAnotherButtonText));
         page.fillText("Provisions 2", "provision2");
         switchStepFunction();
         expect(currentUserData().formationData.formationFormData.provisions).toEqual(["provision2"]);
@@ -386,18 +384,14 @@ describe("<BusinessFormationPaginator />", () => {
         const page = preparePage(initialUserData, displayContent);
         await page.stepperClickToBusinessStep();
         page.fillText("Address zip code", "22222");
-        expect(
-          screen.getByText(Config.businessFormationDefaults.addressZipCodeErrorText)
-        ).toBeInTheDocument();
+        expect(screen.getByText(Config.formation.fields.addressZipCode.error)).toBeInTheDocument();
 
         switchStepFunction();
         expect(page.getStepStateInStepper(LookupStepIndexByName("Business"))).toEqual("INCOMPLETE");
 
         await page.stepperClickToBusinessStep();
         expect(page.getStepStateInStepper(LookupStepIndexByName("Business"))).toEqual("INCOMPLETE-ACTIVE");
-        expect(
-          screen.getByText(Config.businessFormationDefaults.addressZipCodeErrorText)
-        ).toBeInTheDocument();
+        expect(screen.getByText(Config.formation.fields.addressZipCode.error)).toBeInTheDocument();
       });
     };
 
@@ -422,9 +416,7 @@ describe("<BusinessFormationPaginator />", () => {
         page.completeRequiredBillingFields();
         await page.stepperClickToReviewStep();
 
-        expect(
-          screen.queryByText(Config.businessFormationDefaults.incompleteStepsOnSubmitText)
-        ).not.toBeInTheDocument();
+        expect(screen.queryByText(Config.formation.errorBanner.incompleteStepsError)).not.toBeInTheDocument();
         await page.clickSubmit();
 
         expect(page.getStepStateInStepper(LookupStepIndexByName("Name"))).toEqual("ERROR");
@@ -433,9 +425,7 @@ describe("<BusinessFormationPaginator />", () => {
         expect(page.getStepStateInStepper(LookupStepIndexByName("Billing"))).toEqual("COMPLETE");
         expect(page.getStepStateInStepper(LookupStepIndexByName("Review"))).toEqual("INCOMPLETE-ACTIVE");
 
-        expect(
-          screen.getByText(Config.businessFormationDefaults.incompleteStepsOnSubmitText)
-        ).toBeInTheDocument();
+        expect(screen.getByText(Config.formation.errorBanner.incompleteStepsError)).toBeInTheDocument();
       });
 
       it("shows error field states for each step with error", async () => {
@@ -446,21 +436,13 @@ describe("<BusinessFormationPaginator />", () => {
         await page.clickSubmit();
 
         await page.stepperClickToBusinessNameStep();
-        expect(
-          screen.getByText(Config.businessFormationDefaults.missingFieldsOnSubmitModalText)
-        ).toBeInTheDocument();
+        expect(screen.getByText(Config.formation.errorBanner.errorOnStep)).toBeInTheDocument();
         await page.stepperClickToBusinessStep();
-        expect(
-          screen.getByText(Config.businessFormationDefaults.missingFieldsOnSubmitModalText)
-        ).toBeInTheDocument();
+        expect(screen.getByText(Config.formation.errorBanner.errorOnStep)).toBeInTheDocument();
         await page.stepperClickToContactsStep();
-        expect(
-          screen.getByText(Config.businessFormationDefaults.missingFieldsOnSubmitModalText)
-        ).toBeInTheDocument();
+        expect(screen.getByText(Config.formation.errorBanner.errorOnStep)).toBeInTheDocument();
         await page.stepperClickToBillingStep();
-        expect(
-          screen.queryByText(Config.businessFormationDefaults.missingFieldsOnSubmitModalText)
-        ).not.toBeInTheDocument();
+        expect(screen.queryByText(Config.formation.errorBanner.errorOnStep)).not.toBeInTheDocument();
       });
 
       it("updates stepper to show error state if user changes a COMPLETE step", async () => {
@@ -472,14 +454,10 @@ describe("<BusinessFormationPaginator />", () => {
 
         await page.stepperClickToBillingStep();
 
-        expect(
-          screen.queryByText(Config.businessFormationDefaults.missingFieldsOnSubmitModalText)
-        ).not.toBeInTheDocument();
+        expect(screen.queryByText(Config.formation.errorBanner.errorOnStep)).not.toBeInTheDocument();
         page.fillText("Contact first name", "");
 
-        expect(
-          screen.getByText(Config.businessFormationDefaults.missingFieldsOnSubmitModalText)
-        ).toBeInTheDocument();
+        expect(screen.getByText(Config.formation.errorBanner.errorOnStep)).toBeInTheDocument();
         expect(page.getStepStateInStepper(LookupStepIndexByName("Billing"))).toEqual("ERROR-ACTIVE");
       });
 
@@ -489,14 +467,10 @@ describe("<BusinessFormationPaginator />", () => {
         await page.clickSubmit();
 
         await page.stepperClickToBillingStep();
-        expect(
-          screen.getByText(Config.businessFormationDefaults.missingFieldsOnSubmitModalText)
-        ).toBeInTheDocument();
+        expect(screen.getByText(Config.formation.errorBanner.errorOnStep)).toBeInTheDocument();
 
         page.completeRequiredBillingFields();
-        expect(
-          screen.queryByText(Config.businessFormationDefaults.missingFieldsOnSubmitModalText)
-        ).not.toBeInTheDocument();
+        expect(screen.queryByText(Config.formation.errorBanner.errorOnStep)).not.toBeInTheDocument();
         expect(page.getStepStateInStepper(LookupStepIndexByName("Billing"))).toEqual("COMPLETE-ACTIVE");
       });
     });
@@ -564,9 +538,7 @@ describe("<BusinessFormationPaginator />", () => {
           await page.stepperClickToReviewStep();
           await page.clickSubmit();
           expect(page.getStepStateInStepper(LookupStepIndexByName("Contacts"))).toEqual("ERROR");
-          expect(
-            screen.getByText(Config.businessFormationDefaults.incompleteStepsOnSubmitText)
-          ).toBeInTheDocument();
+          expect(screen.getByText(Config.formation.errorBanner.incompleteStepsError)).toBeInTheDocument();
         });
 
         it("shows API error message on step for error", async () => {
@@ -575,12 +547,8 @@ describe("<BusinessFormationPaginator />", () => {
           await page.stepperClickToReviewStep();
           await page.clickSubmit();
           await page.stepperClickToContactsStep();
-          expect(
-            screen.getByText(Config.businessFormationDefaults.missingFieldsOnSubmitModalText)
-          ).toBeInTheDocument();
-          expect(
-            screen.getByText(Config.businessFormationDefaults.requiredFieldsBulletPointLabel.agentNumber)
-          ).toBeInTheDocument();
+          expect(screen.getByText(Config.formation.errorBanner.errorOnStep)).toBeInTheDocument();
+          expect(screen.getByText(Config.formation.fields.agentNumber.fieldDisplayName)).toBeInTheDocument();
           expect(screen.getByText("very bad input")).toBeInTheDocument();
         });
 
@@ -592,11 +560,9 @@ describe("<BusinessFormationPaginator />", () => {
           await page.stepperClickToContactsStep();
           page.fillText("Agent number", "1234567");
 
+          expect(screen.queryByText(Config.formation.errorBanner.errorOnStep)).not.toBeInTheDocument();
           expect(
-            screen.queryByText(Config.businessFormationDefaults.missingFieldsOnSubmitModalText)
-          ).not.toBeInTheDocument();
-          expect(
-            screen.queryByText(Config.businessFormationDefaults.requiredFieldsBulletPointLabel.agentNumber)
+            screen.queryByText(Config.formation.fields.agentNumber.fieldDisplayName)
           ).not.toBeInTheDocument();
           expect(screen.queryByText("very bad input")).not.toBeInTheDocument();
           expect(page.getStepStateInStepper(LookupStepIndexByName("Contacts"))).toEqual("COMPLETE-ACTIVE");
@@ -701,7 +667,7 @@ describe("<BusinessFormationPaginator />", () => {
         jest.advanceTimersByTime(1000);
       });
 
-      fireEvent.click(screen.getByText(Config.businessFormationDefaults.provisionsAddButtonText));
+      fireEvent.click(screen.getByText(Config.formation.fields.provisions.addButtonText));
 
       await waitFor(() => expect(currentUserData().formationData.formationFormData.provisions).toEqual([""]));
       await page.stepperClickToContactsStep();
@@ -740,6 +706,7 @@ describe("<BusinessFormationPaginator />", () => {
       });
 
       expect(screen.getByText(Config.autosaveDefaults.savingText)).toBeInTheDocument();
+      expect(screen.queryByText(Config.autosaveDefaults.savedText)).not.toBeInTheDocument();
       expect(screen.queryByText(Config.autosaveDefaults.savedText)).not.toBeInTheDocument();
 
       act(() => {
