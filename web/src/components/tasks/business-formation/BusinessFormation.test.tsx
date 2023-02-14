@@ -165,7 +165,7 @@ describe("<BusinessFormation />", () => {
         preparePage({ formationData }, displayContent, undefined, task);
       });
 
-      expect(screen.getByText(Config.businessFormationDefaults.successPageHeader)).toBeInTheDocument();
+      expect(screen.getByText(Config.formation.successPage.header)).toBeInTheDocument();
     });
   });
 
@@ -247,8 +247,8 @@ describe("<BusinessFormation />", () => {
           preparePage({ formationData }, displayContent, undefined, task);
         });
 
-        fireEvent.click(screen.getByText(Config.businessFormationDefaults.interimSuccessPageButtonText));
-        fireEvent.click(screen.getByText(Config.businessFormationDefaults.interimSuccessPageModalContinue));
+        fireEvent.click(screen.getByText(Config.formation.interimSuccessPage.buttonText));
+        fireEvent.click(screen.getByText(Config.formation.interimSuccessPage.modalContinue));
 
         await screen.findByTestId("review-step");
         expect(screen.queryByText("api-error-text")).not.toBeInTheDocument();
@@ -262,7 +262,7 @@ describe("<BusinessFormation />", () => {
     const profileData = generateFormationProfileData({});
     const formationData = generateFormationData({ getFilingResponse });
     preparePage({ profileData, formationData }, displayContent);
-    expect(screen.getByText(Config.businessFormationDefaults.successPageHeader)).toBeInTheDocument();
+    expect(screen.getByText(Config.formation.successPage.header)).toBeInTheDocument();
   });
 
   it("fills multi-step form, submits, and updates userData when LLC", async () => {

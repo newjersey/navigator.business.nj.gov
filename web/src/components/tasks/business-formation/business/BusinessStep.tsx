@@ -3,10 +3,11 @@ import { PartnershipRights } from "@/components/tasks/business-formation/busines
 import { Provisions } from "@/components/tasks/business-formation/business/Provisions";
 import { BusinessFormationTextBox } from "@/components/tasks/business-formation/BusinessFormationTextBox";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ReactElement, useContext } from "react";
 
 export const BusinessStep = (): ReactElement => {
+  const { Config } = useConfig();
   const { state } = useContext(BusinessFormationContext);
 
   return (
@@ -19,18 +20,18 @@ export const BusinessStep = (): ReactElement => {
             maxChars={400}
             fieldName={"combinedInvestment"}
             required={true}
-            placeholderText={Config.businessFormationDefaults.combinedInvestmentPlaceholder}
-            title={Config.businessFormationDefaults.combinedInvestmentTitle}
-            contentMd={Config.businessFormationDefaults.combinedInvestmentBody}
+            placeholderText={Config.formation.fields.combinedInvestment.placeholder}
+            title={Config.formation.fields.combinedInvestment.header}
+            contentMd={Config.formation.fields.combinedInvestment.body}
           />
           <hr className="margin-bottom-2 margin-top-0" aria-hidden={true} />
           <BusinessFormationTextBox
             maxChars={400}
             fieldName={"withdrawals"}
             required={true}
-            placeholderText={Config.businessFormationDefaults.withdrawalsPlaceholder}
-            title={Config.businessFormationDefaults.withdrawalsTitle}
-            contentMd={Config.businessFormationDefaults.withdrawalsBody}
+            placeholderText={Config.formation.fields.withdrawals.placeholder}
+            title={Config.formation.fields.withdrawals.header}
+            contentMd={Config.formation.fields.withdrawals.body}
           />
           <hr className="margin-bottom-2 margin-top-0" aria-hidden={true} />
           <PartnershipRights />
@@ -39,9 +40,9 @@ export const BusinessStep = (): ReactElement => {
             maxChars={400}
             fieldName={"dissolution"}
             required={true}
-            placeholderText={Config.businessFormationDefaults.dissolutionPlaceholder}
-            title={Config.businessFormationDefaults.dissolutionTitle}
-            contentMd={Config.businessFormationDefaults.dissolutionBody}
+            placeholderText={Config.formation.fields.dissolution.placeholder}
+            title={Config.formation.fields.dissolution.header}
+            contentMd={Config.formation.fields.dissolution.body}
           />
         </>
       ) : (
@@ -52,11 +53,11 @@ export const BusinessStep = (): ReactElement => {
         maxChars={300}
         fieldName={"businessPurpose"}
         required={false}
-        placeholderText={Config.businessFormationDefaults.businessPurposePlaceholderText}
-        inputLabel={Config.businessFormationDefaults.businessPurposeLabel}
-        addButtonText={Config.businessFormationDefaults.businessPurposeAddButtonText}
-        title={Config.businessFormationDefaults.businessPurposeTitle}
-        contentMd={Config.businessFormationDefaults.businessPurposeBodyText}
+        placeholderText={Config.formation.fields.businessPurpose.placeholder}
+        inputLabel={Config.formation.fields.businessPurpose.label}
+        addButtonText={Config.formation.fields.businessPurpose.addButtonText}
+        title={Config.formation.fields.businessPurpose.header}
+        contentMd={Config.formation.fields.businessPurpose.body}
       />
       {state.formationFormData.businessLocationType != "NJ" &&
       state.formationFormData.legalType != "foreign-limited-partnership" ? (

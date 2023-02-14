@@ -225,19 +225,13 @@
         "reviewStepLabel": "Dissolution"
       },
       "createLimitedPartnerTerms": {
-        "fieldDisplayName": "Partnership Rights",
-        "placeholder": "List the applicable terms",
-        "label": "**List the applicable terms**"
+        "fieldDisplayName": "Partnership Rights"
       },
       "getDistributionTerms": {
-        "fieldDisplayName": "Partnership Rights",
-        "placeholder": "List the applicable terms",
-        "label": "**List the applicable terms**"
+        "fieldDisplayName": "Partnership Rights"
       },
       "makeDistributionTerms": {
-        "fieldDisplayName": "Partnership Rights",
-        "placeholder": "List the applicable terms",
-        "label": "**List the applicable terms**"
+        "fieldDisplayName": "Partnership Rights"
       },
       "incorporators": {
         "fieldDisplayName": "Signer",
@@ -358,6 +352,9 @@
     },
     "partnershipRights": {
       "header": "Partnership Rights",
+      "label": "**List the applicable terms**",
+      "placeholder": "List the applicable terms",
+      "fieldDisplayName": "Partnership Rights",
       "radioNoText": "No, they do not have the right",
       "radioYesText": "Yes, they have the right",
       "reviewStepHeader": "Partnership Rights",
@@ -384,11 +381,12 @@
       "incompleteStepsError": "Check the steps below for missing information or errors:"
     },
     "legalStructure": {
-      "llpText": "LLP",
-      "llcText": "LLC",
-      "sCorpText": "Domestic Corporation",
-      "lpText": "LP",
-      "cCorpText": "Domestic Corporation",
+      "limited-liability-company": "LLC",
+      "limited-partnership": "LP",
+      "limited-liability-partnership": "LLP",
+      "c-corporation": "Domestic Corporation",
+      "s-corporation": "Domestic Corporation",
+      "foreignPrefaceText": "Foreign",
       "reviewStepLabel": "`**Business Structure**|business-structure-learn-more`",
       "warningModalCancelButton": "Cancel",
       "warningModalContinueButton": "Continue",
@@ -401,7 +399,6 @@
       "notEntered": "Not set",
       "initialNextNexusButtonText": "Continue Authorizing My Business",
       "initialNextButtonText": "Continue Forming My Business",
-      "foreignLegalPrefaceText": "Foreign",
       "editButtonText": "Edit",
       "submitButtonText": "Submit & Pay",
       "nextButtonText": "Save & Continue",

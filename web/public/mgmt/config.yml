@@ -237,46 +237,64 @@ collections:
         editor:
           preview: true
         fields:
-          - label: Business Formation Defaults
-            name: businessFormationDefaults
+          - label: Formation
+            name: formation
             collapsed: false
             widget: object
             fields:
-              - { label: "Alert Box Text", name: "interimSuccessPageAlertText", widget: "markdown" }
-              - { label: "Body Text", name: "interimSuccessPageBodyText", widget: "markdown" }
-              - { label: "Button Text", name: "interimSuccessPageButtonText", widget: "string" }
-              - { label: "Modal Title", name: "interimSuccessPageModalTitle", widget: "string" }
-              - { label: "Modal Cancel Button", name: "interimSuccessPageModalCancel", widget: "string" }
-              - { label: "Modal Continue Button", name: "interimSuccessPageModalContinue", widget: "string" }
-              - { label: "Modal Body", name: "interimSuccessPageModalBody", widget: "markdown" }
+              - label: Interim Success Page
+                name: interimSuccessPage
+                collapsed: false
+                widget: object
+                fields:
+                  - { label: "Alert Box Text", name: "alertText", widget: "markdown" }
+                  - { label: "Body Text", name: "bodyText", widget: "markdown" }
+                  - { label: "Button Text", name: "buttonText", widget: "string" }
+                  - { label: "Modal Title", name: "modalTitle", widget: "string" }
+                  - { label: "Modal Cancel Button", name: "modalCancel", widget: "string" }
+                  - { label: "Modal Continue Button", name: "modalContinue", widget: "string" }
+                  - { label: "Modal Body", name: "modalBody", widget: "markdown" }
       - label: "Success Page"
         name: "business-formation-success-page"
         file: "content/src/fieldConfig/formation-success-page.json"
         editor:
           preview: true
         fields:
-          - label: Business Formation Defaults
-            name: businessFormationDefaults
+          - label: Formation
+            name: formation
             collapsed: false
             widget: object
             fields:
-              - { label: "Page Header", name: "successPageHeader", widget: "string" }
-              - { label: "Page Subheader", name: "successPageSubheader", widget: "markdown" }
-              - { label: "Body", name: "successPageBody", widget: "markdown" }
-              - { label: "Amendment Text", name: "successPageAmendmentText", widget: "markdown" }
-              - {
-                  label: "Certified Copy of Formation - Document Label",
-                  name: "certifiedDocLabel",
-                  widget: "string",
-                }
-              - {
-                  label: "Certificate of Good Standing - Document Label",
-                  name: "standingDocLabel",
-                  widget: "string",
-                }
-              - { label: "Official Formation - Document Label", name: "formationDocLabel", widget: "string" }
-              - { label: "Entity ID label", name: "entityIdLabel", widget: "markdown" }
-              - { label: "Confirmation Number label", name: "confirmationNumberLabel", widget: "markdown" }
+              - label: Success Page
+                name: successPage
+                collapsed: false
+                widget: object
+                fields:
+                  - { label: "Page Header", name: "header", widget: "string" }
+                  - { label: "Page Subheader", name: "subheader", widget: "markdown" }
+                  - { label: "Body", name: "body", widget: "markdown" }
+                  - { label: "Amendment Text", name: "amendmentText", widget: "markdown" }
+                  - {
+                      label: "Certified Copy of Formation - Document Label",
+                      name: "certifiedDocLabel",
+                      widget: "string",
+                    }
+                  - {
+                      label: "Certificate of Good Standing - Document Label",
+                      name: "standingDocLabel",
+                      widget: "string",
+                    }
+                  - {
+                      label: "Official Formation - Document Label",
+                      name: "formationDocLabel",
+                      widget: "string",
+                    }
+                  - { label: "Entity ID label", name: "entityIdLabel", widget: "markdown" }
+                  - {
+                      label: "Confirmation Number label",
+                      name: "confirmationNumberLabel",
+                      widget: "markdown",
+                    }
   - name: "certification-label"
     label: "🟧 CERTIFICATION OPPS"
     folder: "content/src"
