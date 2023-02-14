@@ -61,33 +61,33 @@ describe("getErrorStateForField", () => {
       );
     });
 
-    it("uses emptyFieldError as label if name is missing", () => {
+    it("uses errorInlineEmpty as label if name is missing", () => {
       const formData = generateFormationFormData({ businessName: "" });
       expect(getErrorStateForField("businessName", formData, undefined, displayContent).label).toEqual(
-        Config.businessFormationDefaults.nameCheckEmptyFieldErrorText
+        Config.formation.fields.businessName.errorInlineEmpty
       );
     });
 
-    it("uses needsToSearchError as label if name exists but availability is undefined", () => {
+    it("uses errorInlineNeedsToSearch as label if name exists but availability is undefined", () => {
       const formData = generateFormationFormData({ businessName: "some name" });
       expect(getErrorStateForField("businessName", formData, undefined, displayContent).label).toEqual(
-        Config.businessFormationDefaults.nameCheckNeedsToSearchErrorText
+        Config.formation.fields.businessName.errorInlineNeedsToSearch
       );
     });
 
-    it("uses UnavailableInlineError as label if name availability is UNAVAILABLE", () => {
+    it("uses errorInlineUnavailable as label if name availability is UNAVAILABLE", () => {
       const formData = generateFormationFormData({ businessName: "some name" });
       const availability = generateNameAvailability({ status: "UNAVAILABLE" });
       expect(getErrorStateForField("businessName", formData, availability, displayContent).label).toEqual(
-        Config.businessFormationDefaults.nameCheckUnavailableInlineErrorText
+        Config.formation.fields.businessName.errorInlineUnavailable
       );
     });
 
-    it("uses UnavailableInlineError as label if name availability is error", () => {
+    it("uses errorInlineUnavailable as label if name availability is error", () => {
       const formData = generateFormationFormData({ businessName: "some name" });
       const availability = generateNameAvailability({ status: "DESIGNATOR" });
       expect(getErrorStateForField("businessName", formData, availability, displayContent).label).toEqual(
-        Config.businessFormationDefaults.nameCheckUnavailableInlineErrorText
+        Config.formation.fields.businessName.errorInlineUnavailable
       );
     });
 
@@ -95,7 +95,7 @@ describe("getErrorStateForField", () => {
       const formData = generateFormationFormData({ businessName: "some name" });
       const availability = generateNameAvailability({ status: "AVAILABLE" });
       expect(getErrorStateForField("businessName", formData, availability, displayContent).label).toEqual(
-        Config.businessFormationDefaults.requiredFieldsBulletPointLabel.businessName
+        Config.formation.fields.businessName.fieldDisplayName
       );
     });
   });
@@ -240,7 +240,7 @@ describe("getErrorStateForField", () => {
         businessStartDate: getCurrentDate().add(1, "day").format(defaultDateFormat),
       });
       expect(getErrorStateForField("businessStartDate", formData, undefined, displayContent).label).toEqual(
-        Config.businessFormationDefaults.requiredFieldsBulletPointLabel.businessStartDate
+        Config.formation.fields.businessStartDate.fieldDisplayName
       );
     });
   });
@@ -256,7 +256,7 @@ describe("getErrorStateForField", () => {
     it("inserts label from config", () => {
       const formData = generateFormationFormData({ addressZipCode: "08100" });
       expect(getErrorStateForField("addressZipCode", formData, undefined, displayContent).label).toEqual(
-        Config.businessFormationDefaults.requiredFieldsBulletPointLabel.addressZipCode
+        Config.formation.fields.addressZipCode.fieldDisplayName
       );
     });
 
@@ -365,7 +365,7 @@ describe("getErrorStateForField", () => {
       const formData = generateFormationFormData({ agentOfficeAddressZipCode: "08100" });
       expect(
         getErrorStateForField("agentOfficeAddressZipCode", formData, undefined, displayContent).label
-      ).toEqual(Config.businessFormationDefaults.requiredFieldsBulletPointLabel.agentOfficeAddressZipCode);
+      ).toEqual(Config.formation.fields.agentOfficeAddressZipCode.fieldDisplayName);
     });
   });
 
@@ -374,24 +374,24 @@ describe("getErrorStateForField", () => {
       const formData = generateFormationFormData({ agentEmail: "" });
       const errorState = getErrorStateForField("agentEmail", formData, undefined, displayContent);
       expect(errorState.hasError).toEqual(true);
-      expect(errorState.label).toEqual(Config.businessFormationDefaults.agentEmailErrorText);
+      expect(errorState.label).toEqual(Config.formation.fields.agentEmail.error);
     });
 
     it("has error if not valid email format", () => {
       const formData1 = generateFormationFormData({ agentEmail: "whatever@" });
       const errorState1 = getErrorStateForField("agentEmail", formData1, undefined, displayContent);
       expect(errorState1.hasError).toEqual(true);
-      expect(errorState1.label).toEqual(Config.businessFormationDefaults.agentEmailErrorText);
+      expect(errorState1.label).toEqual(Config.formation.fields.agentEmail.error);
 
       const formData2 = generateFormationFormData({ agentEmail: "whatever@thing" });
       const errorState2 = getErrorStateForField("agentEmail", formData2, undefined, displayContent);
       expect(errorState2.hasError).toEqual(true);
-      expect(errorState2.label).toEqual(Config.businessFormationDefaults.agentEmailErrorText);
+      expect(errorState2.label).toEqual(Config.formation.fields.agentEmail.error);
 
       const formData3 = generateFormationFormData({ agentEmail: "stuff" });
       const errorState3 = getErrorStateForField("agentEmail", formData3, undefined, displayContent);
       expect(errorState3.hasError).toEqual(true);
-      expect(errorState3.label).toEqual(Config.businessFormationDefaults.agentEmailErrorText);
+      expect(errorState3.label).toEqual(Config.formation.fields.agentEmail.error);
     });
 
     it("has error if valid-format length is greater than 50 chars", () => {
@@ -400,8 +400,8 @@ describe("getErrorStateForField", () => {
       const errorState = getErrorStateForField("agentEmail", formData, undefined, displayContent);
       expect(errorState.hasError).toEqual(true);
       expect(errorState.label).toEqual(
-        templateEval(Config.businessFormationDefaults.maximumLengthErrorText, {
-          field: Config.businessFormationDefaults.requiredFieldsBulletPointLabel.agentEmail,
+        templateEval(Config.formation.general.maximumLengthErrorText, {
+          field: Config.formation.fields.agentEmail.fieldDisplayName,
           maxLen: "50",
         })
       );
@@ -429,9 +429,7 @@ describe("getErrorStateForField", () => {
       });
       expect(
         getErrorStateForField("agentOfficeAddressMunicipality", formData, undefined, displayContent).label
-      ).toEqual(
-        Config.businessFormationDefaults.requiredFieldsBulletPointLabel.agentOfficeAddressMunicipality
-      );
+      ).toEqual(Config.formation.fields.agentOfficeAddressMunicipality.fieldDisplayName);
     });
   });
 
@@ -448,7 +446,7 @@ describe("getErrorStateForField", () => {
           });
           expect(getErrorStateForField(field, formData, undefined, displayContent).hasError).toEqual(true);
           expect(getErrorStateForField(field, formData, undefined, displayContent).label).toEqual(
-            Config.businessFormationDefaults.signerNameErrorText
+            Config.formation.fields.signers.errorBannerSignerName
           );
         });
 
@@ -458,7 +456,7 @@ describe("getErrorStateForField", () => {
           });
           expect(getErrorStateForField(field, formData, undefined, displayContent).hasError).toEqual(true);
           expect(getErrorStateForField(field, formData, undefined, displayContent).label).toEqual(
-            Config.businessFormationDefaults.signerNameErrorText
+            Config.formation.fields.signers.errorBannerSignerName
           );
         });
 
@@ -471,7 +469,7 @@ describe("getErrorStateForField", () => {
           });
           expect(getErrorStateForField(field, formData, undefined, displayContent).hasError).toEqual(true);
           expect(getErrorStateForField(field, formData, undefined, displayContent).label).toEqual(
-            Config.businessFormationDefaults.signerCheckboxErrorText
+            Config.formation.fields.signers.errorBannerCheckbox
           );
         });
 
@@ -484,7 +482,7 @@ describe("getErrorStateForField", () => {
           });
           expect(getErrorStateForField(field, formData, undefined, displayContent).hasError).toEqual(true);
           expect(getErrorStateForField(field, formData, undefined, displayContent).label).toEqual(
-            Config.businessFormationDefaults.signerTypeErrorText
+            Config.formation.fields.signers.errorBannerSignerTitle
           );
         });
 
@@ -498,8 +496,8 @@ describe("getErrorStateForField", () => {
           });
           expect(getErrorStateForField(field, formData, undefined, displayContent).hasError).toEqual(true);
           expect(getErrorStateForField(field, formData, undefined, displayContent).label).toEqual(
-            templateEval(Config.businessFormationDefaults.maximumLengthErrorText, {
-              field: Config.businessFormationDefaults.requiredFieldsBulletPointLabel[field],
+            templateEval(Config.formation.general.maximumLengthErrorText, {
+              field: Config.formation.fields.signers.fieldDisplayName,
               maxLen: "50",
             })
           );
@@ -509,7 +507,7 @@ describe("getErrorStateForField", () => {
           const formData = generateFormationFormData({ [field]: [] });
           expect(getErrorStateForField(field, formData, undefined, displayContent).hasError).toEqual(true);
           expect(getErrorStateForField(field, formData, undefined, displayContent).label).toEqual(
-            Config.businessFormationDefaults.signerMinimumErrorText
+            Config.formation.fields.signers.errorBannerMinimum
           );
         });
 
@@ -522,7 +520,7 @@ describe("getErrorStateForField", () => {
           });
           expect(getErrorStateForField(field, formData, undefined, displayContent).hasError).toEqual(true);
           expect(getErrorStateForField(field, formData, undefined, displayContent).label).toEqual(
-            Config.businessFormationDefaults.signerNameErrorText
+            Config.formation.fields.signers.errorBannerSignerName
           );
         });
 
@@ -584,7 +582,7 @@ describe("getErrorStateForField", () => {
       const formData = generateFormationFormData({ members: [] });
       expect(getErrorStateForField("members", formData, undefined, displayContent).hasError).toEqual(true);
       expect(getErrorStateForField("members", formData, undefined, displayContent).label).toEqual(
-        Config.businessFormationDefaults.directorsMinimumErrorText
+        Config.formation.fields.directors.error
       );
     });
 
@@ -628,8 +626,6 @@ describe("getErrorStateForField", () => {
   });
 
   describe("required fields with max length", () => {
-    const defaults = Config.businessFormationDefaults;
-
     const fieldData: {
       field: FormationFields;
       maxLen: number;
@@ -639,54 +635,54 @@ describe("getErrorStateForField", () => {
       {
         field: "addressLine1",
         maxLen: 35,
-        labelWhenMissing: defaults.addressLine1ErrorText,
-        labelWhenTooLong: templateEval(defaults.maximumLengthErrorText, {
-          field: defaults.requiredFieldsBulletPointLabel.addressLine1,
+        labelWhenMissing: Config.formation.fields.addressLine1.error,
+        labelWhenTooLong: templateEval(Config.formation.general.maximumLengthErrorText, {
+          field: Config.formation.fields.addressLine1.fieldDisplayName,
           maxLen: "35",
         }),
       },
       {
         field: "addressCity",
         maxLen: 30,
-        labelWhenMissing: defaults.addressCityErrorText,
-        labelWhenTooLong: templateEval(defaults.maximumLengthErrorText, {
-          field: defaults.requiredFieldsBulletPointLabel.addressCity,
+        labelWhenMissing: Config.formation.fields.addressCity.error,
+        labelWhenTooLong: templateEval(Config.formation.general.maximumLengthErrorText, {
+          field: Config.formation.fields.addressCity.fieldDisplayName,
           maxLen: "30",
         }),
       },
       {
         field: "agentName",
         maxLen: 50,
-        labelWhenMissing: defaults.agentNameErrorText,
-        labelWhenTooLong: templateEval(defaults.maximumLengthErrorText, {
-          field: defaults.requiredFieldsBulletPointLabel.agentName,
+        labelWhenMissing: Config.formation.fields.agentName.error,
+        labelWhenTooLong: templateEval(Config.formation.general.maximumLengthErrorText, {
+          field: Config.formation.fields.agentName.fieldDisplayName,
           maxLen: "50",
         }),
       },
       {
         field: "contactFirstName",
         maxLen: 50,
-        labelWhenMissing: defaults.contactFirstNameErrorText,
-        labelWhenTooLong: templateEval(defaults.maximumLengthErrorText, {
-          field: defaults.requiredFieldsBulletPointLabel.contactFirstName,
+        labelWhenMissing: Config.formation.fields.contactFirstName.error,
+        labelWhenTooLong: templateEval(Config.formation.general.maximumLengthErrorText, {
+          field: Config.formation.fields.contactFirstName.fieldDisplayName,
           maxLen: "50",
         }),
       },
       {
         field: "contactLastName",
         maxLen: 50,
-        labelWhenMissing: defaults.contactLastNameErrorText,
-        labelWhenTooLong: templateEval(defaults.maximumLengthErrorText, {
-          field: defaults.requiredFieldsBulletPointLabel.contactLastName,
+        labelWhenMissing: Config.formation.fields.contactLastName.error,
+        labelWhenTooLong: templateEval(Config.formation.general.maximumLengthErrorText, {
+          field: Config.formation.fields.contactLastName.fieldDisplayName,
           maxLen: "50",
         }),
       },
       {
         field: "agentOfficeAddressLine1",
         maxLen: 35,
-        labelWhenMissing: defaults.agentOfficeAddressLine1ErrorText,
-        labelWhenTooLong: templateEval(defaults.maximumLengthErrorText, {
-          field: defaults.requiredFieldsBulletPointLabel.agentOfficeAddressLine1,
+        labelWhenMissing: Config.formation.fields.agentOfficeAddressLine1.error,
+        labelWhenTooLong: templateEval(Config.formation.general.maximumLengthErrorText, {
+          field: Config.formation.fields.agentOfficeAddressLine1.fieldDisplayName,
           maxLen: "35",
         }),
       },
@@ -729,8 +725,6 @@ describe("getErrorStateForField", () => {
   });
 
   describe("optional fields with max length", () => {
-    const defaults = Config.businessFormationDefaults;
-
     const fieldData: {
       field: FormationFields;
       maxLen: number;
@@ -739,16 +733,16 @@ describe("getErrorStateForField", () => {
       {
         field: "addressLine2",
         maxLen: 35,
-        labelWhenTooLong: templateEval(defaults.maximumLengthErrorText, {
-          field: defaults.requiredFieldsBulletPointLabel.addressLine2,
+        labelWhenTooLong: templateEval(Config.formation.general.maximumLengthErrorText, {
+          field: Config.formation.fields.addressLine2.fieldDisplayName,
           maxLen: "35",
         }),
       },
       {
         field: "agentOfficeAddressLine2",
         maxLen: 35,
-        labelWhenTooLong: templateEval(defaults.maximumLengthErrorText, {
-          field: defaults.requiredFieldsBulletPointLabel.agentOfficeAddressLine2,
+        labelWhenTooLong: templateEval(Config.formation.general.maximumLengthErrorText, {
+          field: Config.formation.fields.agentOfficeAddressLine2.fieldDisplayName,
           maxLen: "35",
         }),
       },
@@ -812,9 +806,7 @@ describe("getErrorStateForField", () => {
 
           it("inserts label from config", () => {
             const formData = generateFormationFormData({ [field]: undefined });
-            const label =
-              expectedLabel ??
-              (Config.businessFormationDefaults.requiredFieldsBulletPointLabel as any)[field];
+            const label = expectedLabel ?? (Config.formation.fields as any)[field].fieldDisplayName;
             if (!label) {
               throw `label missing in config for ${field}`;
             }
@@ -867,9 +859,7 @@ describe("getErrorStateForField", () => {
 
           it("inserts label from config", () => {
             const formData = generateFormationFormData({ [field]: "some-value" });
-            const expectedLabel = (Config.businessFormationDefaults.requiredFieldsBulletPointLabel as any)[
-              field
-            ];
+            const expectedLabel = (Config.formation.fields as any)[field].fieldDisplayName;
             if (!expectedLabel) {
               throw `label missing in config for ${field}`;
             }
