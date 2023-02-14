@@ -404,7 +404,7 @@
       "nextButtonText": "Save & Continue",
       "previousButtonText": "Back",
       "charactersLabel": "characters",
-      "paymentDisclaimerText": "You will be brought to a secure payment platform operated by New Jersey's partner NICUSA Inc. to process your payment.",
+      "paymentDisclaimer": "You will be brought to a secure payment platform operated by New Jersey's partner NICUSA Inc. to process your payment.",
       "optionalLabel": "(Optional)",
       "genericErrorText": "This field requires information.",
       "maximumLengthErrorText": "${field} must be ${maxLen} characters or fewer."

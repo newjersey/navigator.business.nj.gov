@@ -5,18 +5,19 @@ import { PaymentTypeTable } from "@/components/tasks/business-formation/billing/
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { getPhoneNumberFormat } from "@/lib/utils/helpers";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { ReactElement, useContext } from "react";
 
 export const BillingStep = (): ReactElement => {
+  const { Config } = useConfig();
   const { state } = useContext(BusinessFormationContext);
   const { doSomeFieldsHaveError, getFieldErrorLabel } = useFormationErrors();
 
   return (
     <div data-testid="billing-step">
-      <Content>{Config.businessFormationDefaults.contactInformationHeader}</Content>
+      <Content>{Config.formation.sections.contactInfoHeader}</Content>
       <WithErrorBar
         hasError={doSomeFieldsHaveError(["contactFirstName", "contactLastName"])}
         type="DESKTOP-ONLY"
@@ -24,8 +25,8 @@ export const BillingStep = (): ReactElement => {
       >
         <div className="form-input tablet:grid-col-6">
           <BusinessFormationTextField
-            label={Config.businessFormationDefaults.contactFirstNameLabel}
-            placeholder={Config.businessFormationDefaults.contactFirstNamePlaceholder}
+            label={Config.formation.fields.contactFirstName.label}
+            placeholder={Config.formation.fields.contactFirstName.placeholder}
             fieldName="contactFirstName"
             errorBarType="MOBILE-ONLY"
             required={true}
@@ -34,8 +35,8 @@ export const BillingStep = (): ReactElement => {
         </div>
         <div className="form-input tablet:grid-col-6">
           <BusinessFormationTextField
-            label={Config.businessFormationDefaults.contactLastNameLabel}
-            placeholder={Config.businessFormationDefaults.contactLastNamePlaceholder}
+            label={Config.formation.fields.contactLastName.label}
+            placeholder={Config.formation.fields.contactLastName.placeholder}
             fieldName="contactLastName"
             errorBarType="MOBILE-ONLY"
             required={true}
@@ -47,9 +48,9 @@ export const BillingStep = (): ReactElement => {
         <div className="tablet:grid-col-6">
           <div className="form-input">
             <BusinessFormationTextField
-              validationText={Config.businessFormationDefaults.contactPhoneNumberErrorText}
-              label={Config.businessFormationDefaults.contactPhoneNumberLabel}
-              placeholder={Config.businessFormationDefaults.contactPhoneNumberPlaceholder}
+              validationText={Config.formation.fields.contactPhoneNumber.error}
+              label={Config.formation.fields.contactPhoneNumber.label}
+              placeholder={Config.formation.fields.contactPhoneNumber.placeholder}
               errorBarType="ALWAYS"
               fieldName={"contactPhoneNumber"}
               numericProps={{
@@ -68,7 +69,7 @@ export const BillingStep = (): ReactElement => {
       <hr className="margin-top-4" />
       <FormationChooseNotifications />
       <div className="margin-top-3">
-        <Content>{Config.businessFormationDefaults.paymentDisclaimerText}</Content>
+        <Content>{Config.formation.general.paymentDisclaimer}</Content>
       </div>
     </div>
   );
