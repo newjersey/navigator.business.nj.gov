@@ -330,8 +330,8 @@ describe("getErrorStateForField", () => {
         );
       });
 
-      it("has error if less than 5 digits in length", () => {
-        const formData = generateFormationFormData({ addressZipCode: "1234", businessLocationType: "INTL" });
+      it("has error if zip code has no characters", () => {
+        const formData = generateFormationFormData({ addressZipCode: "", businessLocationType: "INTL" });
         expect(getErrorStateForField("addressZipCode", formData, undefined, displayContent).hasError).toEqual(
           true
         );
