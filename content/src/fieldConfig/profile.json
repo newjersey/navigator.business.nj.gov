@@ -88,7 +88,10 @@
           "description": "Which of the following are **true** about your business? **Select all that apply.**",
           "errorTextRequired": "Please make a selection",
           "optionContent": {
-            "operationsInNJ": "Part of my `business operations|nexus-business` takes place in New Jersey",
+            "employeeOrContractorInNJ": "I have an employee or independent contractor acting as a sales or manufacturing representative in New Jersey",
+            "officeInNJ": "I have an office in New Jersey",
+            "propertyInNJ": "I have property, including inventory housed in a 3rd party warehouse, in New Jersey",
+            "companyOperatedVehiclesInNJ": "I have company-operated vehicles making business-related stops (deliveries or pickups) in New Jersey",
             "employeesInNJ": "I have employees who live in New Jersey",
             "transactionsInNJ": "I have more than 200 separate taxable transactions in New Jersey in the current or prior calendar year",
             "revenueInNJ": "My taxable transactions in New Jersey exceeded $100,000 in the last calendar year",

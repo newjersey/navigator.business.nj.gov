@@ -443,7 +443,7 @@ export const completeForeignNexusBusinessOnboarding = ({
   pageIndex += 1;
   cy.url().should("include", `onboarding?page=${pageIndex}`);
 
-  onOnboardingPage.checkForeignBusinessType("operationsInNJ");
+  onOnboardingPage.checkForeignBusinessType("employeeOrContractorInNJ");
   onOnboardingPage.clickNext();
   cy.url().should("include", `onboarding?page=3`);
 

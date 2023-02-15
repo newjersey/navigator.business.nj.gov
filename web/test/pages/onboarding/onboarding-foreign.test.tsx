@@ -34,7 +34,7 @@ jest.mock("@/lib/api-client/apiClient", () => ({
 }));
 
 const Config = getMergedConfig();
-const { employeesInNJ, transactionsInNJ, revenueInNJ, operationsInNJ, none } =
+const { employeesInNJ, transactionsInNJ, revenueInNJ, employeeOrContractorInNJ, none } =
   Config.profileDefaults.fields.foreignBusinessTypeIds.default.optionContent;
 
 const generateTestUserData = (overrides: Partial<ProfileData>) => {
@@ -88,19 +88,19 @@ describe("onboarding - foreign business", () => {
       expect(screen.getByLabelText("Out of state business")).toBeInTheDocument();
     });
 
-    it("sets user as Nexus (and displays alert) when operationsInNJ checkbox checked", async () => {
+    it("sets user as Nexus (and displays alert) when employeeOrContractorInNJ checkbox checked", async () => {
       const { page } = renderPage({ userData });
       expect(
         screen.queryByText(Config.profileDefaults.fields.foreignBusinessTypeIds.default.NEXUS)
       ).not.toBeInTheDocument();
-      page.checkByLabelText(operationsInNJ);
+      page.checkByLabelText(employeeOrContractorInNJ);
       expect(
         screen.getByText(Config.profileDefaults.fields.foreignBusinessTypeIds.default.NEXUS)
       ).toBeInTheDocument();
 
       await page.visitStep(3);
       expect(currentUserData().profileData.foreignBusinessType).toEqual("NEXUS");
-      expect(currentUserData().profileData.foreignBusinessTypeIds).toEqual(["operationsInNJ"]);
+      expect(currentUserData().profileData.foreignBusinessTypeIds).toEqual(["employeeOrContractorInNJ"]);
     });
 
     it("sets user as Remote Workers (and displays alert) when employeesInNJ checkbox checked", async () => {
