@@ -328,13 +328,14 @@ collections:
         required: false
       - label: "Applicable Ownership Types"
         name: applicableOwnershipTypes
-        widget: relation
+        widget: "select"
         multiple: true
         required: false
-        collection: "dashboard-settings"
-        search_fields: ["arrayOfOwnershipTypes.*.name"]
-        value_field: "arrayOfOwnershipTypes.*.id"
-        display_fields: ["arrayOfOwnershipTypes.*.name"]
+        options:
+          - { label: "Women Owned", value: "woman-owned" }
+          - { label: "Minority Owned", value: "minority-owned" }
+          - { label: "Veteran Owned", value: "veteran-owned" }
+          - { label: "Disabled Veteran Owned", value: "disabled-veteran" }
       - { label: "is SBE (show if fewer than 120 employees)", name: "isSbe", widget: boolean, default: false }
 
   - name: "archived-certification-opportunities"
@@ -364,13 +365,14 @@ collections:
         required: false
       - label: "Applicable Ownership Types"
         name: applicableOwnershipTypes
-        widget: relation
+        widget: "select"
         multiple: true
         required: false
-        collection: "dashboard-settings"
-        search_fields: ["arrayOfOwnershipTypes.*.name"]
-        value_field: "arrayOfOwnershipTypes.*.id"
-        display_fields: ["arrayOfOwnershipTypes.*.name"]
+        options:
+          - { label: "Women Owned", value: "woman-owned" }
+          - { label: "Minority Owned", value: "minority-owned" }
+          - { label: "Veteran Owned", value: "veteran-owned" }
+          - { label: "Disabled Veteran Owned", value: "disabled-veteran" }
       - { label: "is SBE (show if fewer than 120 employees)", name: "isSbe", widget: boolean, default: false }
 
   - name: "funding-label"
@@ -433,7 +435,6 @@ collections:
       - label: "Status"
         name: "status"
         widget: "select"
-        required: true
         options: ["rolling application", "opening soon", "deadline", "first come, first serve", "closed"]
       - label: "In-State/Out-of-State"
         name: "programPurpose"
