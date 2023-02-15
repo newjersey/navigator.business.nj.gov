@@ -16,8 +16,9 @@ programFrequency: one-time
 businessStage: both
 employeesRequired: n/a
 homeBased: no
-mwvb:
-  - m/wbe
+certifications:
+  - woman-owned
+  - minority-owned
 preferenceForOpportunityZone: no
 county:
   - All

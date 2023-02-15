@@ -64,7 +64,7 @@ describe("<TwoTabDashboardLayout />", () => {
   describe("displays the correct count of cards within second tab", () => {
     it("only counts the nudge cards", () => {
       const operatingPhases = OperatingPhases.filter((phase) => {
-        return phase.displayFundings !== true && phase.displayCertifications !== true;
+        return !phase.displayFundings && !phase.displayCertifications;
       });
 
       useMockUserData({
@@ -88,7 +88,7 @@ describe("<TwoTabDashboardLayout />", () => {
 
     it("only counts the nudge and certification cards", () => {
       const operatingPhases = OperatingPhases.filter((phase) => {
-        return phase.displayFundings !== true && phase.displayCertifications === true;
+        return !phase.displayFundings && phase.displayCertifications;
       });
 
       useMockUserData({
@@ -113,7 +113,7 @@ describe("<TwoTabDashboardLayout />", () => {
 
     it("counts the nudge, certification, and funding cards", () => {
       const operatingPhases = OperatingPhases.filter((phase) => {
-        return phase.displayFundings === true && phase.displayCertifications === true;
+        return phase.displayFundings && phase.displayCertifications;
       });
 
       useMockUserData({
@@ -160,6 +160,16 @@ const certs = [
 ];
 
 const fundings = [
-  generateFunding({ name: "Funding 4", sector: [], status: "deadline" }),
-  generateFunding({ name: "Funding 5", sector: [], status: "first come, first serve" }),
+  generateFunding({
+    name: "Funding 4",
+    sector: [],
+    status: "deadline",
+    certifications: ["minority-owned"],
+  }),
+  generateFunding({
+    name: "Funding 5",
+    sector: [],
+    status: "first come, first serve",
+    certifications: ["disabled-veteran"],
+  }),
 ];

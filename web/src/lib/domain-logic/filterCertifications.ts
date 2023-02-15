@@ -1,7 +1,6 @@
+import { SMALL_BUSINESS_MAX_EMPLOYEE_COUNT } from "@/lib/domain-logic/smallBusinessEnterprise";
 import { Certification } from "@/lib/types/types";
 import { UserData } from "@businessnjgovnavigator/shared/";
-
-export const LARGE_BUSINESS_MIN_EMPLOYEE_COUNT = 120;
 
 export const filterCertifications = (
   certifications: Certification[],
@@ -25,7 +24,7 @@ export const filterCertifications = (
 
     if (it.isSbe) {
       const employeeCount = Number(userData.profileData.existingEmployees as string);
-      if (employeeCount >= LARGE_BUSINESS_MIN_EMPLOYEE_COUNT) {
+      if (employeeCount >= SMALL_BUSINESS_MAX_EMPLOYEE_COUNT) {
         allowedCertification = false;
       }
     }

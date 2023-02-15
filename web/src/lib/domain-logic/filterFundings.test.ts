@@ -1,4 +1,5 @@
 import { filterFundings } from "@/lib/domain-logic/filterFundings";
+import { SMALL_BUSINESS_MAX_EMPLOYEE_COUNT } from "@/lib/domain-logic/smallBusinessEnterprise";
 import { generateFunding, generateProfileData, generateUserData } from "@/test/factories";
 import { generateMunicipality } from "@businessnjgovnavigator/shared/test";
 
@@ -284,8 +285,16 @@ describe("filterFundings", () => {
           sectorId: undefined,
         }),
       });
-      const funding1 = generateFunding({ employeesRequired: "n/a", status: "rolling application" });
-      const funding2 = generateFunding({ employeesRequired: "yes", status: "rolling application" });
+      const funding1 = generateFunding({
+        employeesRequired: "n/a",
+        status: "rolling application",
+        certifications: null,
+      });
+      const funding2 = generateFunding({
+        employeesRequired: "yes",
+        status: "rolling application",
+        certifications: null,
+      });
       const fundings = [funding1, funding2];
 
       const result = filterFundings(fundings, userData);
@@ -335,5 +344,71 @@ describe("filterFundings", () => {
     const result = filterFundings(fundings, userData);
     expect(result.length).toEqual(4);
     expect(result).toEqual(expect.arrayContaining([funding1, funding2, funding3]));
+  });
+
+  describe("certifications", () => {
+    const funding1 = generateFunding({
+      certifications: ["woman-owned"],
+    });
+    const funding2 = generateFunding({ certifications: ["minority-owned"] });
+    const funding3 = generateFunding({ certifications: ["veteran-owned"] });
+    const funding4 = generateFunding({ certifications: ["disabled-veteran"] });
+    const funding5 = generateFunding({ certifications: ["small-business-enterprise"] });
+    const funding6 = generateFunding({ certifications: ["disadvantaged-business-enterprise"] });
+    const funding7 = generateFunding({ certifications: ["emerging-small-business-enterprise"] });
+
+    const listOfFundingTypes = [funding1, funding2, funding3, funding4, funding5, funding6, funding7];
+
+    it("does not return ownership types funding's when applicable ownership types do not match", () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          ownershipTypeIds: ["woman-owned", "veteran-owned"],
+          homeBasedBusiness: false,
+          sectorId: undefined,
+          existingEmployees: undefined,
+          municipality: undefined,
+        }),
+      });
+
+      const result = filterFundings(listOfFundingTypes, userData);
+      expect(result.length).toEqual(5);
+      expect(result).toEqual(expect.arrayContaining([funding1, funding3, funding5, funding6, funding7]));
+    });
+
+    it("does not return sbe funding when existing employees is greater than small business threshold", () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          ownershipTypeIds: [],
+          homeBasedBusiness: false,
+          sectorId: undefined,
+          existingEmployees: SMALL_BUSINESS_MAX_EMPLOYEE_COUNT.toString(),
+          municipality: undefined,
+        }),
+      });
+
+      const result = filterFundings(listOfFundingTypes, userData);
+      expect(result.length).toEqual(6);
+      expect(result).toEqual(
+        expect.arrayContaining([funding1, funding2, funding3, funding4, funding6, funding7])
+      );
+    });
+
+    it("returns sbe funding when existing employees is greater than small business threshold", () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          ownershipTypeIds: [],
+          homeBasedBusiness: false,
+          sectorId: undefined,
+          existingEmployees: (SMALL_BUSINESS_MAX_EMPLOYEE_COUNT - 1).toString(),
+          municipality: undefined,
+        }),
+      });
+
+      const result = filterFundings(listOfFundingTypes, userData);
+      expect(result.length).toEqual(7);
+      expect(result).toEqual(
+        expect.arrayContaining([funding1, funding2, funding3, funding4, funding5, funding6, funding7])
+      );
+    });
   });
 });

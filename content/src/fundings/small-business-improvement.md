@@ -20,8 +20,7 @@ agencyContact: ""
 businessStage: operating
 employeesRequired: n/a
 homeBased: no
-mwvb:
-  - n/a
+certifications: null
 preferenceForOpportunityZone: yes
 county:
   - All

@@ -16,8 +16,7 @@ programFrequency: reoccuring
 businessStage: operating
 employeesRequired: yes
 homeBased: no
-mwvb:
-  - n/a
+certifications: null
 preferenceForOpportunityZone: ""
 county:
   - Salem

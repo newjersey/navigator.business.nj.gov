@@ -15,7 +15,7 @@ import { allIndustryId, getCurrentSectors, syncSectors } from "./sectorSync.mjs"
 const getFundingTypeOptions = async () => {
   const itemResponse = await getCollection(fundingCollectionId);
   return itemResponse.data.fields.find((i) => {
-    return i.slug == "funding-type";
+    return i.slug === "funding-type";
   }).validations["options"];
 };
 
@@ -36,10 +36,37 @@ const fundingTypeMap = [
   { name: "Tax Exemption", slug: "tax exemption", id: "2c5989291051fa966295bd3cd6722fe6" },
 ];
 
+const getCertificationsOptions = async () => {
+  const itemResponse = await getAllItems(certificationCollectionId);
+  return itemResponse.map(({ name, slug, _id: id, ...item }) => ({ name, slug, id }));
+};
+
+const fundingCertificationsMap = [
+  { name: "Women Owned", slug: "woman-owned", id: "63efba3124109fa20ee2a419" },
+  { name: "Minority Owned", slug: "minority-owned", id: "63efba7a2481c42cb943efa0" },
+  { name: "Veteran Owned", slug: "veteran-owned", id: "63efbab568f2aece7aabf60a" },
+  { name: "Disabled Veteran Owned", slug: "disabled-veteran", id: "63efbac5a51a4e0f4e57c6e9" },
+  {
+    name: "Small Business Enterprise",
+    slug: "small-business-enterprise",
+    id: "63efbad363a8a73927b7996c",
+  },
+  {
+    name: "Disadvantaged Business Enterprise",
+    slug: "disadvantaged-business-enterprise",
+    id: "63efbae005c01736a1f89343",
+  },
+  {
+    name: "Emerging Small Business Enterprise",
+    slug: "emerging-small-business-enterprise",
+    id: "63efbaeeae8cb961785aa8e8",
+  },
+];
+
 const getAgencyOptions = async () => {
   const itemResponse = await getCollection(fundingCollectionId);
   return itemResponse.data.fields.find((i) => {
-    return i.slug == "agency";
+    return i.slug === "agency";
   }).validations["options"];
 };
 
@@ -68,7 +95,7 @@ const agencyMap = [
 const getFundingOptions = async () => {
   const itemResponse = await getCollection(fundingCollectionId);
   return itemResponse.data.fields.find((i) => {
-    return i.slug == "funding-status";
+    return i.slug === "funding-status";
   }).validations["options"];
 };
 
@@ -89,6 +116,8 @@ const fundingStatusMap = [
 ];
 
 const fundingCollectionId = "6112e6b88aa567fdbc725ffc";
+
+const certificationCollectionId = "63efba2368f2ae1b10abe579";
 
 const getCurrentFundings = async () => {
   return await getAllItems(fundingCollectionId);
@@ -131,10 +160,10 @@ const contentMdToObject = (content) => {
     return benefitRegExp.test(line);
   });
   try {
-    if (eligibilityIndex == -1) {
+    if (eligibilityIndex === -1) {
       throw new Error("Eligibility section missing");
     }
-    if (benefitIndex == -1) {
+    if (benefitIndex === -1) {
       throw new Error(`Benefits section missing `);
     }
   } catch (error) {
@@ -170,45 +199,54 @@ const validDate = (dueDate) => {
 
 const getFilteredFundings = () => {
   return loadAllFundings().filter((funding) => {
-    return validDate(funding.dueDate) && funding.publishStageArchive != "Do Not Publish";
+    return validDate(funding.dueDate) && funding.publishStageArchive !== "Do Not Publish";
   });
 };
 
 const getFundingFromMd = (i, sectors) => {
   const industryReferenceArray = i.sector.map((i) => {
     return sectors.find((v) => {
-      return v.slug == i;
+      return v.slug === i;
     })?._id;
   });
   if (
     industryReferenceArray.some((i) => {
-      return i == undefined;
+      return i === undefined;
     })
   ) {
     throw new Error("Sectors must be synced first");
   }
   const fundingType = fundingTypeMap.find((v) => {
-    return v.slug == i.fundingType;
+    return v.slug === i.fundingType;
   })?.id;
-  if (fundingType == undefined) {
+  if (fundingType === undefined) {
     throw new Error("Funding Types are mis-matched, please check with webflow");
   }
   const agency = agencyMap.find((v) => {
-    return v.slug == i.agency[0];
+    return v.slug === i.agency[0];
   })?.id;
-  if (agency == undefined) {
+  if (agency === undefined) {
     throw new Error("Agency Types are mis-matched, please check with webflow");
   }
   const status = fundingStatusMap.find((v) => {
-    return v.slug == i.status;
+    return v.slug === i.status;
   })?.id;
-  if (status == undefined) {
+  if (status === undefined) {
     throw new Error("Funding Status Types are mis-matched, please check with webflow");
   }
+
+  const certifications =
+    i.certifications?.map(
+      (cert) =>
+        fundingCertificationsMap.find((v) => {
+          return v.slug === cert;
+        })?.id
+    ) ?? [];
 
   return {
     ...contentMdToObject(i.contentMd),
     "learn-more-url": i.callToActionLink.trim(),
+    "certifications-2": certifications,
     agency,
     "application-close-date": i.dueDate ? new Date(i.dueDate).toISOString() : null,
     "start-date": i.openDate ? new Date(i.openDate).toISOString() : null,
@@ -286,7 +324,7 @@ const updateFundings = async () => {
   const modify = async (item) => {
     const funding = getFundingFromMd(
       fundings.find((i) => {
-        return i.id == item.slug;
+        return i.id === item.slug;
       }),
       sectors
     );
@@ -346,7 +384,7 @@ if (
   !process.argv.some((i) => {
     return i.includes("fundingSync");
   }) ||
-  process.env.NODE_ENV == "test"
+  process.env.NODE_ENV === "test"
 ) {
 } else if (
   process.argv.some((i) => {
@@ -394,6 +432,7 @@ if (
   process.exit(1);
 }
 export {
+  getCertificationsOptions,
   getNewFundings,
   getUnUsedFundings,
   deleteFundings,

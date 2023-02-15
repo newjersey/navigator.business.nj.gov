@@ -16,8 +16,9 @@ programFrequency: ongoing
 businessStage: early-stage
 employeesRequired: n/a
 homeBased: no
-mwvb:
-  - m/wbe
+certifications:
+  - woman-owned
+  - minority-owned
 preferenceForOpportunityZone: ""
 county:
   - All
