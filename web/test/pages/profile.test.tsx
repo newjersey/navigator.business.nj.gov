@@ -53,7 +53,6 @@ import {
   LookupLegalStructureById,
   LookupOwnershipTypeById,
   LookupSectorTypeById,
-  maskingCharacter,
   Municipality,
   OperatingPhase,
   OperatingPhaseId,
@@ -88,12 +87,10 @@ function setupMockAnalytics(): typeof analytics {
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useDocuments");
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
+jest.mock("@/lib/api-client/apiClient", () => ({ postGetAnnualFilings: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
-jest.mock("@/lib/api-client/apiClient", () => ({
-  decryptTaxId: jest.fn(),
-  postGetAnnualFilings: jest.fn(),
-}));
+
 const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
 
 describe("profile", () => {
@@ -651,7 +648,6 @@ describe("profile", () => {
         });
 
         it("will not save if tax ID changes to a different 9 digit tax Id", async () => {
-          mockApi.decryptTaxId.mockResolvedValue("666555666");
           renderPage({ userData });
           chooseTab("numbers");
           fireEvent.change(screen.getByLabelText("Tax id"), { target: { value: "666666666" } });
@@ -660,14 +656,10 @@ describe("profile", () => {
           await waitFor(() => {
             return expect(userDataWasNotUpdated()).toEqual(true);
           });
-          await waitFor(() => {
-            expect(
-              screen.getByText(Config.profileDefaults.fields.taxId.default.errorTextRequired)
-            ).toBeInTheDocument();
-          });
-          await waitFor(() => {
-            expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
-          });
+          expect(
+            screen.getByText(Config.profileDefaults.fields.taxId.default.errorTextRequired)
+          ).toBeInTheDocument();
+          expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
         });
 
         it("will save if Tax ID changes to 12 digits in length", async () => {
@@ -1173,7 +1165,6 @@ describe("profile", () => {
     });
 
     it("resets taxFiling data when taxId is changed", async () => {
-      mockApi.decryptTaxId.mockResolvedValue("123456712888");
       const userData = generateUserData({
         profileData: generateProfileData({
           businessPersona: "OWNING",
@@ -1181,8 +1172,7 @@ describe("profile", () => {
           entityId: "1234567890",
           employerId: "123456789",
           dateOfFormation,
-          taxId: `${maskingCharacter.repeat(7)}12888`,
-          encryptedTaxId: "some-encrypted-value",
+          taxId: "123456790888",
           notes: "whats appppppp",
           municipality: generateMunicipality({
             displayName: "Newark",
@@ -1198,59 +1188,17 @@ describe("profile", () => {
 
       renderPage({ userData });
       chooseTab("numbers");
-      fireEvent.click(screen.getByTestId("show-hide-toggle-taxId"));
-      await waitFor(() => {
-        expect((screen.getByLabelText("Tax id") as HTMLInputElement).type).toEqual("text");
-      });
       fillText("Tax id", "123456789123");
       clickSave();
       await waitFor(() => {
         expect(screen.getByTestId("snackbar-alert-SUCCESS")).toBeInTheDocument();
       });
+
       expect(currentUserData().taxFilingData).toEqual({
         ...userData.taxFilingData,
         state: undefined,
         filings: [],
         registeredISO: undefined,
-      });
-    });
-
-    it("does not reset taxFiling data when taxId is decrypted but not changed", async () => {
-      mockApi.decryptTaxId.mockResolvedValue("123456712888");
-      const userData = generateUserData({
-        profileData: generateProfileData({
-          businessPersona: "OWNING",
-          businessName: "Applebees",
-          entityId: "1234567890",
-          employerId: "123456789",
-          dateOfFormation,
-          taxId: `${maskingCharacter.repeat(7)}12888`,
-          encryptedTaxId: "some-encrypted-value",
-          notes: "whats appppppp",
-          municipality: generateMunicipality({
-            displayName: "Newark",
-          }),
-          ownershipTypeIds: ["veteran-owned", "woman-owned"],
-          homeBasedBusiness: false,
-          existingEmployees: "123",
-          taxPin: "6666",
-          sectorId: "clean-energy",
-        }),
-        taxFilingData: generateTaxFilingData({ state: "SUCCESS", filings: [generateTaxFiling({})] }),
-      });
-
-      renderPage({ userData });
-      chooseTab("numbers");
-      fireEvent.click(screen.getByTestId("show-hide-toggle-taxId"));
-      await waitFor(() => {
-        expect((screen.getByLabelText("Tax id") as HTMLInputElement).type).toEqual("text");
-      });
-      clickSave();
-      await waitFor(() => {
-        expect(screen.getByTestId("snackbar-alert-SUCCESS")).toBeInTheDocument();
-      });
-      expect(currentUserData().taxFilingData).toEqual({
-        ...userData.taxFilingData,
       });
     });
 
