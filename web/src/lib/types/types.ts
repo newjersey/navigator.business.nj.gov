@@ -269,7 +269,7 @@ export type Certification = {
   contentMd: string;
   descriptionMd: string;
   agency: OpportunityAgency[];
-  applicableOwnershipTypes: string[];
+  applicableOwnershipTypes: string[] | null;
   isSbe: boolean;
 };
 
