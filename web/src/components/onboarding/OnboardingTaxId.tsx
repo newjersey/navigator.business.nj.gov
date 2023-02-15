@@ -128,7 +128,6 @@ export const OnboardingTaxId = ({
   const getShowHideToggleButton = () => {
     return ShowHideToggleButton({
       status: taxIdDisplayStatus,
-      name: "taxId",
       toggle: updateTaxIdDisplay,
       showText: Config.tax.showButtonText,
       hideText: Config.tax.hideButtonText,

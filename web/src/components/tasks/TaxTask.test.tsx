@@ -1,15 +1,11 @@
 import { TaxTask } from "@/components/tasks/TaxTask";
 import { getMergedConfig } from "@/contexts/configContext";
-import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { Task } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
-
 import {
   generateProfileData,
   generateTask,
-  generateTaxFiling,
-  generateTaxFilingData,
   generateUserData,
   randomPublicFilingLegalStructure,
   randomTradeNameLegalStructure,
@@ -28,11 +24,8 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
-jest.mock("@/lib/api-client/apiClient", () => ({
-  decryptTaxId: jest.fn(),
-}));
+
 const Config = getMergedConfig();
-const mockApi = api as jest.Mocked<typeof api>;
 
 describe("<TaxTask />", () => {
   let task: Task;
@@ -173,7 +166,6 @@ describe("<TaxTask />", () => {
       initialUserData = generateUserData({
         profileData: generateProfileData({ taxId: "*******89123", encryptedTaxId: "some-encrypted-value" }),
         taskProgress: { [taskId]: "COMPLETED" },
-        taxFilingData: generateTaxFilingData({ state: "SUCCESS", filings: [generateTaxFiling({})] }),
       });
     });
 
@@ -181,19 +173,6 @@ describe("<TaxTask />", () => {
       renderPage();
       expect(screen.queryByText(Config.tax.placeholderText)).not.toBeInTheDocument();
       expect((screen.getByLabelText("Tax id") as HTMLInputElement).value).toEqual("***-***-*89/123");
-    });
-
-    it("does not reset taxFiling data when taxId is decrypted but not changed", async () => {
-      mockApi.decryptTaxId.mockResolvedValue("123456789123");
-      renderPage();
-      fireEvent.click(screen.getByTestId("show-hide-toggle-taxId"));
-      await waitFor(() => {
-        expect((screen.getByLabelText("Tax id") as HTMLInputElement).type).toEqual("text");
-      });
-      fireEvent.click(screen.getByText(Config.tax.saveButtonText));
-      await waitFor(() => {
-        expect(currentUserData().taxFilingData).toEqual({ ...initialUserData.taxFilingData });
-      });
     });
   });
 

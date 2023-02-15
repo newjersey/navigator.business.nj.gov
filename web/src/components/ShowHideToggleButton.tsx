@@ -7,7 +7,6 @@ interface Props {
   toggle: () => Promise<void>;
   hideText: string;
   showText: string;
-  name?: string;
   useOverrideText?: boolean;
   hideOverrideText?: string;
   showOverrideText?: string;
@@ -18,7 +17,6 @@ export const ShowHideToggleButton = ({
   toggle,
   hideText,
   showText,
-  name,
   useOverrideText,
   hideOverrideText,
   showOverrideText,
@@ -32,13 +30,7 @@ export const ShowHideToggleButton = ({
   };
 
   return (
-    <UnStyledButton
-      style="tertiary"
-      fullWidth
-      className={"padding-x-1"}
-      onClick={toggle}
-      dataTestid={`show-hide-toggle${name ? `-${name}` : ""}`}
-    >
+    <UnStyledButton style="tertiary" fullWidth className={"padding-x-1"} onClick={toggle}>
       <ButtonIcon svgFilename={status === "text-view" ? "hide" : "show"} />
       <span className="underline">{status === "text-view" ? hideButtonText() : showButtonText()}</span>
     </UnStyledButton>
