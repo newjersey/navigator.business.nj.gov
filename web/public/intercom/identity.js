@@ -23,11 +23,17 @@ if (typeof userOperatingPhase === "undefined") {
   userOperatingPhase = undefined;
 }
 
+var userUuid = document.currentScript.getAttribute("data-user-uuid");
+if (typeof userUuid === "undefined") {
+  userUuid = undefined;
+}
+
 window.intercomSettings = {
   app_id: "ozxx8n5h",
   custom_launcher_selector: ".intercom-button",
   user_id: userId,
   user_hash: userHash,
+  user_uuid: userUuid,
   name: userName,
   email: userEmail,
   operatingPhase: userOperatingPhase,
