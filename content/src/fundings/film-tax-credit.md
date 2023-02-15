@@ -16,8 +16,7 @@ programFrequency: reoccuring
 businessStage: operating
 employeesRequired: n/a
 homeBased: no
-mwvb:
-  - n/a
+certifications: null
 preferenceForOpportunityZone: ""
 county:
   - All

@@ -5,6 +5,7 @@ import {
   Filing,
   Funding,
   FundingBusinessStage,
+  FundingCertifications,
   FundingHomeBased,
   FundingpreferenceForOpportunityZone,
   FundingProgramFrequency,
@@ -137,7 +138,7 @@ type FundingGrayMatter = {
   businessStage: FundingBusinessStage;
   employeesRequired: string;
   homeBased: FundingHomeBased;
-  mwvb: string;
+  certifications: FundingCertifications[] | null;
   preferenceForOpportunityZone: FundingpreferenceForOpportunityZone | null;
   county: County[];
   sector: string[];

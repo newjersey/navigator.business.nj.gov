@@ -21,8 +21,9 @@ agencyContact: jean.chang@sos.nj.gov
 businessStage: operating
 employeesRequired: n/a
 homeBased: yes
-mwvb:
-  - m/wbe
+certifications:
+  - woman-owned
+  - minority-owned
 preferenceForOpportunityZone: yes
 county:
   - All

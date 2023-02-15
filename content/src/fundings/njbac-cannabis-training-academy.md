@@ -23,8 +23,7 @@ agencyContact: businessactioncenter@sos.nj.gov
 businessStage: both
 employeesRequired: n/a
 homeBased: unknown
-mwvb:
-  - n/a
+certifications: null
 preferenceForOpportunityZone: no
 county:
   - All

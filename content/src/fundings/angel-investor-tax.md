@@ -16,8 +16,9 @@ programFrequency: reoccuring
 businessStage: early-stage
 employeesRequired: yes
 homeBased: yes
-mwvb:
-  - m/wbe
+certifications:
+  - woman-owned
+  - minority-owned
 preferenceForOpportunityZone: yes
 county:
   - All

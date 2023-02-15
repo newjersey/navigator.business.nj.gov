@@ -467,12 +467,19 @@ collections:
         widget: "select"
         options: ["yes", "no", "unknown"]
         default: "unknown"
-      - label: "MWVB"
-        name: "mwvb"
+      - label: "Certification(s)"
+        name: "certifications"
         widget: "select"
         multiple: true
-        default: "n/a"
-        options: ["n/a", "m/wbe", "dvob", "vob", "sbe"]
+        required: false
+        options:
+          - { label: "Women Owned", value: "woman-owned" }
+          - { label: "Minority Owned", value: "minority-owned" }
+          - { label: "Veteran Owned", value: "veteran-owned" }
+          - { label: "Disabled Veteran Owned", value: "disabled-veteran" }
+          - { label: "Small Business Enterprise", value: "small-business-enterprise" }
+          - { label: "Disadvantaged Business Enterprise", value: "disadvantaged-business-enterprise" }
+          - { label: "Emerging Small Business Enterprise", value: "emerging-small-business-enterprise" }
       - label: "Preference for Opportunity Zone"
         name: "preferenceForOpportunityZone"
         widget: "select"
@@ -602,10 +609,19 @@ collections:
         widget: "select"
         options: ["yes", "no", "unknown"]
         default: "unknown"
-      - label: "MWVB"
-        name: "mwvb"
+      - label: "Certification(s)"
+        name: "certifications"
         widget: "select"
-        options: ["n/a", "m/wbe", "dvob", "vob", "sbe"]
+        multiple: true
+        required: false
+        options:
+          - { label: "Women Owned", value: "woman-owned" }
+          - { label: "Minority Owned", value: "minority-owned" }
+          - { label: "Veteran Owned", value: "veteran-owned" }
+          - { label: "Disabled Veteran Owned", value: "disabled-veteran" }
+          - { label: "Small Business Enterprise", value: "small-business-enterprise" }
+          - { label: "Disadvantaged Business Enterprise", value: "disadvantaged-business-enterprise" }
+          - { label: "Emerging Small Business Enterprise", value: "emerging-small-business-enterprise" }
       - label: "Preference for Opportunity Zone"
         name: "preferenceForOpportunityZone"
         widget: "select"
