@@ -461,13 +461,7 @@ collections:
         name: "businessStage"
         widget: "select"
         options: ["early-stage", "operating", "both"]
-      - {
-          label: "Employees Required",
-          name: "employeesRequired",
-          widget: "select",
-          required: true,
-          options: ["yes", "n/a"],
-        }
+      - { label: "Employees Required", name: "employeesRequired", widget: "select", options: ["yes", "n/a"] }
       - label: "Home Based"
         name: "homeBased"
         widget: "select"
@@ -488,7 +482,6 @@ collections:
         name: "county"
         widget: "select"
         multiple: true
-        min: 0
         options:
           [
             "All",
@@ -585,7 +578,6 @@ collections:
       - label: "Status"
         name: "status"
         widget: "select"
-        required: true
         options: ["rolling application", "opening soon", "deadline", "first come, first serve", "closed"]
       - label: "In-State/Out-of-State"
         name: "programPurpose"
@@ -604,13 +596,7 @@ collections:
         name: "businessStage"
         widget: "select"
         options: ["early-stage", "operating", "both"]
-      - {
-          label: "Employees Required",
-          name: "employeesRequired",
-          widget: "select",
-          required: true,
-          options: ["yes", "n/a"],
-        }
+      - { label: "Employees Required", name: "employeesRequired", widget: "select", options: ["yes", "n/a"] }
       - label: "Home Based"
         name: "homeBased"
         widget: "select"
@@ -629,7 +615,6 @@ collections:
         name: "county"
         widget: "select"
         multiple: true
-        min: 0
         options:
           [
             "All",
@@ -1864,7 +1849,6 @@ collections:
           label: "Color",
           name: "color",
           widget: "select",
-          required: true,
           options: ["primary", "accent-cool-darker", "accent-cooler"],
         }
       - {
@@ -1878,7 +1862,6 @@ collections:
           label: "Border Color",
           name: "borderColor",
           widget: "select",
-          required: true,
           options:
             [
               "accent-cooler-light",

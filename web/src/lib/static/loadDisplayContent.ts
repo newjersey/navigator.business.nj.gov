@@ -206,10 +206,10 @@ type RoadmapCardGrayMatter = {
   header: string;
   notStartedHeader: string;
   completedHeader: string;
-  imgPath: string;
+  imgPath: string | null;
   color: string;
   ctaText: string;
-  headerBackgroundColor: string;
+  headerBackgroundColor: string | null;
   borderColor: string;
   hasCloseButton: boolean;
   weight: number;

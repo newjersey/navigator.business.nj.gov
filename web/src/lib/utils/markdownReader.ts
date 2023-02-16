@@ -98,9 +98,9 @@ type FilingGrayMatter = {
   extension: boolean;
   taxRates: string;
   treasuryLink: string;
-  filingMethod: TaxFilingMethod;
+  filingMethod: TaxFilingMethod | null;
   filingDetails: string;
-  agency: TaxAgency;
+  agency: TaxAgency | null;
 };
 
 type TaskGrayMatter = {

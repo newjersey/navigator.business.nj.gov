@@ -55,7 +55,7 @@ export const FundingElement = (props: { funding: Funding }): ReactElement => {
           </div>
         </div>
         <Content>{addNaicsCodeData(props.funding.contentMd)}</Content>
-        {props.funding.agency.length > 0 ? (
+        {props.funding.agency && props.funding.agency.length > 0 ? (
           <>
             <hr className="margin-y-3" />
             <div>
