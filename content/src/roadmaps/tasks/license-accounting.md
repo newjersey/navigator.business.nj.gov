@@ -7,6 +7,7 @@ callToActionLink: https://www.njconsumeraffairs.gov/accold/Applications/Firm-Reg
 callToActionText: Register My Firm
 required: true
 issuingAgency: New Jersey Division of Consumer Affairs' Board of Accountancy
+industryIntegration: NJ Department of Consumer Affairs
 ---
 
 New accounting firms must register and obtain certification.
