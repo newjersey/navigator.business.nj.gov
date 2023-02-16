@@ -53,7 +53,7 @@
           "placeholder": "Postal Code",
           "label": "**Postal Code**",
           "errorUS": "Enter a 5 digit Zip Code.",
-          "errorIntl": "Enter a 5 to 11 digit Postal Code."
+          "errorIntl": "Enter a 1 to 11 digit Postal Code."
         }
       },
       "agentName": {
