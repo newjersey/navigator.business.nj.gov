@@ -24,7 +24,7 @@ export const filterFundings = (fundings: Funding[], userData: UserData): Funding
       return false;
     }
 
-    if (userData.profileData.sectorId && it.sector.length > 0) {
+    if (it.sector && userData.profileData.sectorId && it.sector.length > 0) {
       const sectorRegex = new RegExp(it.sector.join("|"), "i");
       if (!sectorRegex.test(userData.profileData.sectorId)) {
         return false;
