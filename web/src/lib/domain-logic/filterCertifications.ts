@@ -10,7 +10,11 @@ export const filterCertifications = (
   return certifications.filter((it) => {
     let allowedCertification = true;
 
-    if (it.applicableOwnershipTypes.length > 0 && userData.profileData.ownershipTypeIds.length > 0) {
+    if (
+      it.applicableOwnershipTypes !== null &&
+      it.applicableOwnershipTypes.length > 0 &&
+      userData.profileData.ownershipTypeIds.length > 0
+    ) {
       const ownershipType = it.applicableOwnershipTypes.some((cert) => {
         return userData.profileData.ownershipTypeIds.includes(cert);
       });

@@ -7,7 +7,7 @@ name: Get My Small Business Enterprise Certification
 id: sbe
 callToActionLink: https://www.njportal.com/DOR/SBERegistry/
 callToActionText: Apply for My SBE Certification
-applicableOwnershipTypes: []
+applicableOwnershipTypes: null
 isSbe: true
 ---
 *Having a Small Business Enterprise (SBE) certificate may give you an advantage with [government contracts](https://business.nj.gov/pages/government-contracting)*.
