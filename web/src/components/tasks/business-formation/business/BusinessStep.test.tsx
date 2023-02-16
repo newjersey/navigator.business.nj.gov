@@ -613,9 +613,7 @@ describe("Formation - BusinessStep", () => {
         { addressZipCode: "", businessLocationType: "INTL" }
       );
       page.fillText("Address zip code", "");
-      expect(
-        screen.getByText(Config.businessFormationDefaults.addressZipCodeIntlDakotaErrorText)
-      ).toBeInTheDocument();
+      expect(screen.getByText(Config.formation.fields.addressZipCode.foreign.errorIntl)).toBeInTheDocument();
     });
 
     it("passes 11-digit postal code validation", async () => {
