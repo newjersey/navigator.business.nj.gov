@@ -268,7 +268,7 @@ export type Certification = {
   callToActionText: string;
   contentMd: string;
   descriptionMd: string;
-  agency: OpportunityAgency[];
+  agency: OpportunityAgency[] | null;
   applicableOwnershipTypes: string[] | null;
   isSbe: boolean;
 };
@@ -458,9 +458,9 @@ export interface Filing {
   frequency?: string;
   extension?: boolean;
   taxRates?: string;
-  filingMethod?: TaxFilingMethod;
+  filingMethod?: TaxFilingMethod | null;
   filingDetails?: string;
-  agency?: TaxAgency;
+  agency?: TaxAgency | null;
 }
 
 export type OperateReference = {
@@ -505,10 +505,10 @@ export type SidebarCardContent = {
   header: string;
   notStartedHeader: string;
   completedHeader: string;
-  imgPath: string;
+  imgPath: string | null;
   ctaText: string;
   color: string;
-  headerBackgroundColor: string;
+  headerBackgroundColor: string | null;
   borderColor: string;
   hasCloseButton: boolean;
   weight: number;
