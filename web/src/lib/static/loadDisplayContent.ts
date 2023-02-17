@@ -97,12 +97,6 @@ const getFormationFields = (
     return getTextFieldContent(`signatures.md`, type);
   };
 
-  const foreignDateOfFormationHeader = (type: FormationLegalType) => {
-    return getTextFieldContent(`date-of-formation.md`, type);
-  };
-  const foreignStateOfFormationHeader = (type: FormationLegalType) => {
-    return getTextFieldContent(`state-of-formation.md`, type);
-  };
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const fieldFunctions: Record<keyof FormationDisplayContent, (type: FormationLegalType) => any> = {
     introParagraph,
@@ -115,8 +109,6 @@ const getFormationFields = (
     agentNumberOrManual,
     members,
     signatureHeader,
-    foreignDateOfFormationHeader,
-    foreignStateOfFormationHeader,
   };
 
   return Object.keys(fieldFunctions).reduce((content, name) => {

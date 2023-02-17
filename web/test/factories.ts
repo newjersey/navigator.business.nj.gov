@@ -399,20 +399,6 @@ export const generateFormationDisplayContent = (
     introParagraph: {
       contentMd: `some-intro-content-${legalStructureId}-${randomInt()}`,
     },
-    foreignStateOfFormationHeader: {
-      contentMd: `some-header-content-${legalStructureId}-${randomInt()}`,
-      errorText: `some-errorText-content-${legalStructureId}-${randomInt()}`,
-      placeholder: `some-placeholder-content-${legalStructureId}-${randomInt()}`,
-      reviewHeader: `some-reviewHeader-content-${legalStructureId}-${randomInt()}`,
-      requireFieldText: `some-requireFieldText-content-${legalStructureId}-${randomInt()}`,
-    },
-    foreignDateOfFormationHeader: {
-      contentMd: `some-header-content-${legalStructureId}-${randomInt()}`,
-      errorText: `some-errorText-content-${legalStructureId}-${randomInt()}`,
-      reviewHeader: `some-reviewHeader-content-${legalStructureId}-${randomInt()}`,
-      placeholder: `some-placeholder-content-${legalStructureId}-${randomInt()}`,
-      requireFieldText: `some-requireFieldText-content-${legalStructureId}-${randomInt()}`,
-    },
     businessNameCheck: {
       contentMd: `some-business-name-check-${legalStructureId}--content-${randomInt()}`,
     },
