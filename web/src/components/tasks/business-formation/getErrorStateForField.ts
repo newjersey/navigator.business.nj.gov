@@ -8,15 +8,14 @@ import { getMergedConfig } from "@/contexts/configContext";
 import { isZipCodeIntl } from "@/lib/domain-logic/isZipCodeIntl";
 import { isZipCodeNj } from "@/lib/domain-logic/isZipCodeNj";
 import { isZipCodeUs } from "@/lib/domain-logic/isZipCodeUs";
-import { FormationDisplayContent, FormationFieldErrorState } from "@/lib/types/types";
+import { FormationFieldErrorState } from "@/lib/types/types";
 import { templateEval, validateEmail } from "@/lib/utils/helpers";
 import { FormationFields, FormationFormData, NameAvailability } from "@businessnjgovnavigator/shared";
 
 export const getErrorStateForField = (
   field: FormationFields,
   formationFormData: FormationFormData,
-  businessNameAvailability: NameAvailability | undefined,
-  displayContent: FormationDisplayContent
+  businessNameAvailability: NameAvailability | undefined
 ): FormationFieldErrorState => {
   const Config = getMergedConfig();
 

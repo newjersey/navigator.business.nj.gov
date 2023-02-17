@@ -41,20 +41,6 @@ export type FormationDisplayContent = {
     radioButtonNumberText: string;
     radioButtonManualText: string;
   };
-  foreignStateOfFormationHeader: {
-    contentMd: string;
-    errorText: string;
-    reviewHeader: string;
-    requireFieldText: string;
-    placeholder: string;
-  };
-  foreignDateOfFormationHeader: {
-    contentMd: string;
-    errorText: string;
-    reviewHeader: string;
-    placeholder: string;
-    requireFieldText: string;
-  };
   members: {
     contentMd: string;
     placeholder?: string;
@@ -131,20 +117,6 @@ export const createEmptyFormationDisplayContent = (): FormationDisplayContent =>
     },
     businessNameCheck: {
       contentMd: "",
-    },
-    foreignStateOfFormationHeader: {
-      contentMd: "",
-      errorText: "",
-      placeholder: "",
-      reviewHeader: "",
-      requireFieldText: "",
-    },
-    foreignDateOfFormationHeader: {
-      contentMd: "",
-      errorText: "",
-      placeholder: "",
-      reviewHeader: "",
-      requireFieldText: "",
     },
     agentNumberOrManual: {
       contentMd: "",
