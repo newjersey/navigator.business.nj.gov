@@ -19,7 +19,7 @@
   "devDependencies": {
     "@types/node": "16.18.11",
     "cross-env": "7.0.3",
-    "cspell": "6.22.0",
+    "cspell": "6.25.0",
     "prettier": "2.8.4",
     "rimraf": "4.1.2"
   }
