@@ -421,20 +421,6 @@ export const generateFormationDisplayContent = (
     notification: {
       contentMd: `some-${legalStructureId}--notification-${randomInt()}`,
     },
-    officialFormationDocument: {
-      contentMd: `some-official-formation-document-${legalStructureId}--content-${randomInt()}`,
-      cost: randomInt(),
-    },
-    certificateOfStanding: {
-      contentMd: `some-certificate-of-standing-${legalStructureId}--content-${randomInt()}`,
-      cost: randomInt(),
-      optionalLabel: `some-certificate-of-standing-optional-${legalStructureId}--label-${randomInt()}`,
-    },
-    certifiedCopyOfFormationDocument: {
-      contentMd: `some-certified-copy-of-formation-document-${legalStructureId}--content-${randomInt()}`,
-      cost: randomInt(),
-      optionalLabel: `some-certified-copy-of-formation-document-optional-${legalStructureId}--label-${randomInt()}`,
-    },
     ...overrides,
   };
 };

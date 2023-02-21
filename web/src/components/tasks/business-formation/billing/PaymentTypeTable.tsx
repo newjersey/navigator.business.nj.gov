@@ -1,4 +1,5 @@
 import { Content } from "@/components/Content";
+import { getCost } from "@/components/tasks/business-formation/billing/getCost";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -11,6 +12,8 @@ import React, { ReactElement, useContext, useEffect, useState } from "react";
 export const PaymentTypeTable = (): ReactElement => {
   const FIELD = "paymentType";
   const { Config } = useConfig();
+  const { state, setFormationFormData } = useContext(BusinessFormationContext);
+
   const achPaymentCost = Number.parseFloat(Config.formation.fields.paymentType.paymentCosts.ach);
   const ccPaymentCostExtra = Number.parseFloat(
     Config.formation.fields.paymentType.paymentCosts.creditCardExtra
@@ -19,19 +22,19 @@ export const PaymentTypeTable = (): ReactElement => {
     Config.formation.fields.paymentType.paymentCosts.creditCardInitial
   );
 
-  const { state, setFormationFormData } = useContext(BusinessFormationContext);
-  const [totalCost, setTotalCost] = useState<number>(state.displayContent.officialFormationDocument.cost);
+  const officialFormationCost = getCost("officialFormationDocument", state.formationFormData.legalType);
+  const certifiedCopyCost = getCost("certifiedCopyOfFormationDocument", state.formationFormData.legalType);
+  const certificateStandingCost = getCost("certificateOfStanding", state.formationFormData.legalType);
+
+  const [totalCost, setTotalCost] = useState<number>(officialFormationCost);
   const [creditCardCost, setCreditCardCost] = useState<number>(ccPaymentCostInitial);
   const [achCost, setAchCost] = useState<number>(achPaymentCost);
   const { doesFieldHaveError } = useFormationErrors();
 
   useEffect(() => {
-    const costs = [state.displayContent.officialFormationDocument.cost];
-    state.formationFormData.certificateOfStanding &&
-      costs.push(state.displayContent.certificateOfStanding.cost);
-
-    state.formationFormData.certifiedCopyOfFormationDocument &&
-      costs.push(state.displayContent.certifiedCopyOfFormationDocument.cost);
+    const costs: number[] = [officialFormationCost];
+    state.formationFormData.certificateOfStanding && costs.push(certificateStandingCost);
+    state.formationFormData.certifiedCopyOfFormationDocument && costs.push(certifiedCopyCost);
 
     const achCost = costs.length * achPaymentCost;
     const creditCardCost = ccPaymentCostInitial + (costs.length - 1) * ccPaymentCostExtra;

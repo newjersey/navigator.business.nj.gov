@@ -164,8 +164,10 @@ export type FormationPageHelpers = {
   chooseRadio: (value: string) => void;
   getInputElementByLabel: (label: string) => HTMLInputElement;
   getInputElementByTestId: (testId: string) => HTMLInputElement;
+  getInputElementByParentTestId: (testId: string, params: { type: string }) => HTMLInputElement;
   selectByText: (label: string, value: string) => void;
   selectCheckbox: (label: string) => void;
+  selectCheckboxByTestId: (testId: string) => void;
   clickAddNewSigner: () => void;
   clickAddNewIncorporator: () => void;
   getSignerBox: (index: number, type: "signers" | "incorporators") => boolean;
@@ -332,6 +334,11 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     return screen.getByTestId(testId) as HTMLInputElement;
   };
 
+  const getInputElementByParentTestId = (testId: string, params: { type: string }): HTMLInputElement => {
+    // eslint-disable-next-line testing-library/no-node-access
+    return screen.getByTestId(testId).querySelector(`input[type="${params.type}"]`) as HTMLInputElement;
+  };
+
   const selectByText = (label: string, value: string) => {
     fireEvent.mouseDown(screen.getByLabelText(label));
     const listbox = within(screen.getByRole("listbox"));
@@ -340,6 +347,10 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
 
   const selectCheckbox = (label: string): void => {
     fireEvent.click(screen.getByLabelText(label));
+  };
+
+  const selectCheckboxByTestId = (testId: string): void => {
+    fireEvent.click(screen.getByTestId(testId));
   };
 
   const clickAddNewSigner = (): void => {
@@ -429,8 +440,10 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     chooseRadio,
     stepperClickToNexusBusinessNameStep,
     getInputElementByLabel,
+    getInputElementByParentTestId,
     selectByText,
     selectCheckbox,
+    selectCheckboxByTestId,
     clickAddNewSigner,
     clickAddNewIncorporator,
     checkSignerBox,
