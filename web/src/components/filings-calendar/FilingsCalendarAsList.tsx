@@ -9,7 +9,7 @@ import { defaultDateFormat } from "@businessnjgovnavigator/shared/defaultConstan
 import { TaxFiling } from "@businessnjgovnavigator/shared/taxFiling";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import Link from "next/link";
-import { ReactElement, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 
 const LIST_VIEW_MORE_INCREMENT = 5;
 
@@ -23,6 +23,11 @@ export const FilingsCalendarAsList = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const [numberOfVisibleCalendarEntries, setNumberOfVisibleCalendarEntries] =
     useState<number>(LIST_VIEW_MORE_INCREMENT);
+
+  useEffect(() => {
+    setNumberOfVisibleCalendarEntries(LIST_VIEW_MORE_INCREMENT);
+  }, [props.activeYear]);
+
   const sortedFilteredFilingsWithinAYear: TaxFiling[] = props.userData?.taxFilingData.filings
     ? sortFilterFilingsWithinAYear(props.userData.taxFilingData.filings, props.activeYear)
     : [];

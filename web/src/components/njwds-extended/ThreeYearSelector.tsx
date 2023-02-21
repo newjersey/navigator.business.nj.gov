@@ -6,8 +6,8 @@ import { ReactElement, ReactNode } from "react";
 
 const colors = {
   active: "usa-button",
-  current: "usa-button usa-button--outline bg-base-lighter-hover",
-  unselected: "usa-button text-base bg-white bg-base-lighter-hover",
+  current: "usa-button usa-button--outline bg-base-lightest-hover",
+  unselected: "usa-button text-base-light bg-white bg-base-lightest-hover",
 };
 type Props = {
   onChange: (year: string) => void;
@@ -48,7 +48,7 @@ export const ThreeYearSelector = (props: Props): ReactElement => {
         horizontal
         hideDivider
         name="year-selector"
-        dropdownClassName="padding-x-05"
+        dropdownClassName="padding-x-05 bg-transparent"
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         wrapper={(props: { children: ReactNode; className?: string; [key: string]: any }) => (
           <div
