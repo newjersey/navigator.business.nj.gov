@@ -1,4 +1,6 @@
+import { Alert } from "@/components/njwds-extended/Alert";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
+import { DisabledTaxId } from "@/components/onboarding/DisabledTaxId";
 import { OnboardingTaxId } from "@/components/onboarding/OnboardingTaxId";
 import { AuthAlertContext } from "@/contexts/authAlertContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
@@ -10,7 +12,7 @@ import { createProfileFieldErrorMap, ProfileFieldErrorMap, ProfileFields, Task }
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { useMediaQuery } from "@mui/material";
-import { ReactElement, useContext, useEffect, useState } from "react";
+import { ReactElement, ReactNode, useContext, useEffect, useState } from "react";
 
 interface Props {
   task: Task;
@@ -26,6 +28,8 @@ export const TaxInput = (props: Props): ReactElement => {
   const [fieldStates, setFieldStates] = useState<ProfileFieldErrorMap>(createProfileFieldErrorMap());
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
+  const shouldLockTaxId =
+    userData?.taxFilingData.state === "SUCCESS" || userData?.taxFilingData.state == "PENDING";
 
   const saveButtonText =
     isAuthenticated === IsAuthenticated.FALSE
@@ -97,6 +101,15 @@ export const TaxInput = (props: Props): ReactElement => {
     });
   };
 
+  const DisabledElement = (props: { children: ReactNode }): ReactElement => (
+    <div className={`flex ${isTabletAndUp ? "flex-row" : "flex-column margin-right-2"} no-wrap`}>
+      <div className={`${isTabletAndUp ? "padding-right-1" : ""}`}>{Config.tax.lockedPreText}</div>
+      <div>{props.children}</div>
+      <div className={`${isTabletAndUp ? "padding-left-1" : ""}`}>{Config.tax.lockedPostText}</div>
+      {isTabletAndUp ? <div className="margin-x-2">|</div> : <></>}
+    </div>
+  );
+
   return (
     <>
       <ProfileDataContext.Provider
@@ -110,20 +123,34 @@ export const TaxInput = (props: Props): ReactElement => {
           onBack: () => {},
         }}
       >
-        <div className={isTabletAndUp ? "flex flex-row" : "flex flex-column"}>
-          <OnboardingTaxId onValidation={onValidation} fieldStates={fieldStates} forTaxTask formInputFull />
-          <div className="tablet:margin-top-2 tablet:margin-left-2">
-            <SecondaryButton
-              isColor="primary"
-              onClick={onSubmit}
-              isLoading={isLoading}
-              isSubmitButton={true}
-              isRightMarginRemoved={true}
-              isFullWidthOnDesktop={!isTabletAndUp}
-            >
-              {saveButtonText}
-            </SecondaryButton>
-          </div>
+        <div className={"flex flex-row"}>
+          {shouldLockTaxId ? (
+            <Alert variant="success" className="width-100">
+              <DisabledTaxId template={DisabledElement} />
+            </Alert>
+          ) : (
+            <>
+              <OnboardingTaxId
+                onValidation={onValidation}
+                fieldStates={fieldStates}
+                forTaxTask
+                formInputFull
+              />
+
+              <div className="tablet:margin-top-2 tablet:margin-left-2">
+                <SecondaryButton
+                  isColor="primary"
+                  onClick={onSubmit}
+                  isLoading={isLoading}
+                  isSubmitButton={true}
+                  isRightMarginRemoved={true}
+                  isFullWidthOnDesktop={!isTabletAndUp}
+                >
+                  {saveButtonText}
+                </SecondaryButton>
+              </div>
+            </>
+          )}
         </div>
       </ProfileDataContext.Provider>
     </>

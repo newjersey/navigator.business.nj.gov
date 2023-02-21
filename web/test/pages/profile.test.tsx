@@ -13,7 +13,6 @@ import {
   generateFormationData,
   generateGetFilingResponse,
   generateProfileData,
-  generateTaxFiling,
   generateTaxFilingData,
   generateUndefinedIndustrySpecificData,
   generateUser,
@@ -42,10 +41,12 @@ import {
   industriesWithOutEssentialQuestion,
 } from "@/test/pages/onboarding/helpers-onboarding";
 import {
+  businessPersonas,
   createEmptyUserData,
   defaultDateFormat,
   einTaskId,
   emptyIndustrySpecificData,
+  ForeignBusinessType,
   formationTaskId,
   generateMunicipality,
   getCurrentDate,
@@ -1164,44 +1165,6 @@ describe("profile", () => {
       expect(getNotesValue()).toEqual("whats appppppp");
     });
 
-    it("resets taxFiling data when taxId is changed", async () => {
-      const userData = generateUserData({
-        profileData: generateProfileData({
-          businessPersona: "OWNING",
-          businessName: "Applebees",
-          entityId: "1234567890",
-          employerId: "123456789",
-          dateOfFormation,
-          taxId: "123456790888",
-          notes: "whats appppppp",
-          municipality: generateMunicipality({
-            displayName: "Newark",
-          }),
-          ownershipTypeIds: ["veteran-owned", "woman-owned"],
-          homeBasedBusiness: false,
-          existingEmployees: "123",
-          taxPin: "6666",
-          sectorId: "clean-energy",
-        }),
-        taxFilingData: generateTaxFilingData({ state: "SUCCESS", filings: [generateTaxFiling({})] }),
-      });
-
-      renderPage({ userData });
-      chooseTab("numbers");
-      fillText("Tax id", "123456789123");
-      clickSave();
-      await waitFor(() => {
-        expect(screen.getByTestId("snackbar-alert-SUCCESS")).toBeInTheDocument();
-      });
-
-      expect(currentUserData().taxFilingData).toEqual({
-        ...userData.taxFilingData,
-        state: undefined,
-        filings: [],
-        registeredISO: undefined,
-      });
-    });
-
     it("shows an error when tax pin input is not empty or is less than 4 digits", async () => {
       const userData = generateUserData({
         profileData: generateProfileData({ businessPersona: "OWNING" }),
@@ -1765,82 +1728,65 @@ describe("profile", () => {
   });
 
   describe("Numbers Section", () => {
-    describe("tax id disclaimer", () => {
-      it("shows disclaimer for trade name legal structure for NEXUS businessPersona", () => {
-        const userData = generateUserData({
-          profileData: generateProfileData({
-            legalStructureId: randomTradeNameLegalStructure(),
-            businessPersona: "FOREIGN",
-            foreignBusinessType: "NEXUS",
-          }),
+    describe("tax id", () => {
+      describe("disabled", () => {
+        businessPersonas.map((businessPersona) => {
+          it(`disables taxId for ${businessPersona} businessPersona when taxFiling Status is SUCCESS or PENDING`, () => {
+            const userData = generateUserData({
+              profileData: generateProfileData({
+                taxId: "*******89123",
+                encryptedTaxId: "some-encrypted-value",
+                businessPersona,
+              }),
+              taxFilingData: generateTaxFilingData({ state: randomInt() % 2 ? "SUCCESS" : "PENDING" }),
+            });
+
+            renderPage({ userData });
+            chooseTab("numbers");
+            expect(screen.queryByLabelText("Tax id")).not.toBeInTheDocument();
+            expect(screen.getByTestId("disabled-taxid")).toHaveTextContent("***-***-*89/123");
+            expect(screen.queryByTestId("tax-disclaimer")).not.toBeInTheDocument();
+          });
         });
-
-        renderPage({ userData });
-        chooseTab("numbers");
-
-        expect(screen.getByTestId("tax-disclaimer")).toHaveTextContent(
-          markdownToText(Config.profileDefaults.fields.taxId.default.disclaimerMd)
-        );
       });
 
-      it("shows disclaimer for trade name legal structure for FOREIGN businessPersona", () => {
-        const userData = generateUserData({
-          profileData: generateProfileData({
-            legalStructureId: randomTradeNameLegalStructure(),
-            businessPersona: "FOREIGN",
-          }),
+      describe("disclaimer", () => {
+        businessPersonas.map((businessPersona) => {
+          const foreignBusinessTypes: ForeignBusinessType[] = [undefined];
+          if (businessPersona == "FOREIGN") foreignBusinessTypes.push("NEXUS");
+          foreignBusinessTypes.map((foreignBusinessType) => {
+            it(`shows disclaimer for trade name legal structure for ${businessPersona} ${
+              foreignBusinessType ?? ""
+            } businessPersona`, () => {
+              const userData = generateUserData({
+                profileData: generateProfileData({
+                  legalStructureId: randomTradeNameLegalStructure(),
+                  businessPersona: businessPersona,
+                  foreignBusinessType,
+                }),
+              });
+
+              renderPage({ userData });
+              chooseTab("numbers");
+
+              expect(screen.getByTestId("tax-disclaimer")).toHaveTextContent(
+                markdownToText(Config.profileDefaults.fields.taxId.default.disclaimerMd)
+              );
+            });
+          });
         });
 
-        renderPage({ userData });
-        chooseTab("numbers");
+        it("does not show disclaimer for public filing legal structure", () => {
+          const userData = generateUserData({
+            profileData: generateProfileData({
+              legalStructureId: randomPublicFilingLegalStructure(),
+            }),
+          });
+          renderPage({ userData });
+          chooseTab("numbers");
 
-        expect(screen.getByTestId("tax-disclaimer")).toHaveTextContent(
-          markdownToText(Config.profileDefaults.fields.taxId.default.disclaimerMd)
-        );
-      });
-
-      it("shows disclaimer for trade name legal structure for STARTING businessPersona", () => {
-        const userData = generateUserData({
-          profileData: generateProfileData({
-            legalStructureId: randomTradeNameLegalStructure(),
-            businessPersona: "STARTING",
-          }),
+          expect(screen.queryByTestId("tax-disclaimer")).not.toBeInTheDocument();
         });
-
-        renderPage({ userData });
-        chooseTab("numbers");
-
-        expect(screen.getByTestId("tax-disclaimer")).toHaveTextContent(
-          markdownToText(Config.profileDefaults.fields.taxId.default.disclaimerMd)
-        );
-      });
-
-      it("shows disclaimer for trade name legal structure for OWNING businessPersona", () => {
-        const userData = generateUserData({
-          profileData: generateProfileData({
-            legalStructureId: randomTradeNameLegalStructure(),
-            businessPersona: "OWNING",
-          }),
-        });
-
-        renderPage({ userData });
-        chooseTab("numbers");
-
-        expect(screen.getByTestId("tax-disclaimer")).toHaveTextContent(
-          markdownToText(Config.profileDefaults.fields.taxId.default.disclaimerMd)
-        );
-      });
-
-      it("does not show disclaimer for public filing legal structure", () => {
-        const userData = generateUserData({
-          profileData: generateProfileData({
-            legalStructureId: randomPublicFilingLegalStructure(),
-          }),
-        });
-        renderPage({ userData });
-        chooseTab("numbers");
-
-        expect(screen.queryByTestId("tax-disclaimer")).not.toBeInTheDocument();
       });
     });
   });

@@ -6,6 +6,8 @@
     "showButtonText": "Show",
     "hideButtonText": "Hide",
     "showButtonTextMobile": "Show Tax ID",
-    "hideButtonTextMobile": "Hide Tax ID"
+    "hideButtonTextMobile": "Hide Tax ID",
+    "lockedPreText": "NJ Tax ID",
+    "lockedPostText": "has been saved."
   }
 }
