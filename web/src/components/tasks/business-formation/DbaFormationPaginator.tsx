@@ -15,7 +15,6 @@ import { MediaQueries } from "@/lib/PageSizes";
 import analytics from "@/lib/utils/analytics";
 import { scrollToTopOfElement, useMountEffect } from "@/lib/utils/helpers";
 import { FormationFormData } from "@businessnjgovnavigator/shared/formationData";
-import { emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { useMediaQuery } from "@mui/material";
 import { ReactElement, ReactNode, useContext, useEffect, useRef, useState } from "react";
 
@@ -62,8 +61,7 @@ export const DbaFormationPaginator = (): ReactElement => {
     moveToStep(state.stepIndex - 1);
   };
 
-  const isNotDba =
-    userData?.profileData.businessName && userData.profileData.nexusDbaName == emptyProfileData.nexusDbaName;
+  const isNotDba = userData?.profileData.businessName && !userData.profileData.needsNexusDbaName;
 
   const onMoveToStep = async (
     stepIndex: number,

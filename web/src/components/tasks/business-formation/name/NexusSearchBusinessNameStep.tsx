@@ -38,6 +38,7 @@ export const NexusSearchBusinessNameStep = (): ReactElement => {
           ...userData.profileData,
           businessName: submittedName,
           nexusDbaName: emptyProfileData.nexusDbaName,
+          needsNexusDbaName: emptyProfileData.needsNexusDbaName,
         },
       };
     } else if (nameAvailability.status === "UNAVAILABLE") {
@@ -50,7 +51,7 @@ export const NexusSearchBusinessNameStep = (): ReactElement => {
         profileData: {
           ...userData.profileData,
           businessName: submittedName,
-          nexusDbaName: "",
+          needsNexusDbaName: true,
         },
       };
     }
