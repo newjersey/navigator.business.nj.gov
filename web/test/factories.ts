@@ -194,7 +194,8 @@ export const generateProfileData = (
     foreignBusinessType: undefined,
     foreignBusinessTypeIds: [],
     nexusLocationInNewJersey: undefined,
-    nexusDbaName: undefined,
+    nexusDbaName: "",
+    needsNexusDbaName: false,
     operatingPhase: "NEEDS_TO_FORM",
     ...overrides,
   };

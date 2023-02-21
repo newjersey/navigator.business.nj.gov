@@ -53,7 +53,8 @@ describe("<NexusSearchBusinessNameStep />", () => {
     formationData: generateFormationData({ formationFormData: createEmptyFormationFormData() }),
     profileData: generateProfileData({
       businessName: "",
-      nexusDbaName: undefined,
+      nexusDbaName: "",
+      needsNexusDbaName: false,
     }),
   });
 
@@ -83,7 +84,7 @@ describe("<NexusSearchBusinessNameStep />", () => {
     expect(screen.getByLabelText("Search business name")).toBeInTheDocument();
   });
 
-  it("sets DBA name in profile as undefined when search again comes back as available", async () => {
+  it("sets nexusDbaName as empty and needsDbaName as false in profile when search again comes back as available", async () => {
     renderTask();
     fillText("some unavailable name");
     await searchAndGetValue({ status: "UNAVAILABLE" });
@@ -92,7 +93,8 @@ describe("<NexusSearchBusinessNameStep />", () => {
     fillText("My Cool Business");
     await searchAndGetValue({ status: "AVAILABLE" });
 
-    expect(currentUserData().profileData.nexusDbaName).toBeUndefined();
+    expect(currentUserData().profileData.nexusDbaName).toEqual("");
+    expect(currentUserData().profileData.needsNexusDbaName).toEqual(false);
     expect(currentUserData().profileData.businessName).toEqual("My Cool Business");
   });
 
@@ -107,11 +109,12 @@ describe("<NexusSearchBusinessNameStep />", () => {
     expect(currentUserData().formationData.formationFormData.businessName).toEqual("My Cool Business");
   });
 
-  it("sets DBA name in profile to empty when unavailable", async () => {
+  it("sets needsDbaName in profile to true when unavailable", async () => {
     renderTask();
     fillText("My Cool Business");
     await searchAndGetValue({ status: "UNAVAILABLE" });
     expect(currentUserData().profileData.nexusDbaName).toEqual("");
+    expect(currentUserData().profileData.needsNexusDbaName).toEqual(true);
     expect(currentUserData().profileData.businessName).toEqual("My Cool Business");
   });
 
@@ -134,11 +137,11 @@ describe("<NexusSearchBusinessNameStep />", () => {
     ).toHaveBeenCalled();
   });
 
-  it("shows DBA search immediately if it is not undefined in profile", async () => {
+  it("shows DBA search immediately if needsDbaName is true", async () => {
     useMockUserData({
       profileData: generateProfileData({
         businessName: "some cool name",
-        nexusDbaName: "",
+        needsNexusDbaName: true,
       }),
     });
     mockSearchReturnValue({ status: "UNAVAILABLE" });
@@ -148,11 +151,11 @@ describe("<NexusSearchBusinessNameStep />", () => {
     });
   });
 
-  it("does not show DBA search immediately if it is undefined in profile", () => {
+  it("does not show DBA search immediately if it is needsNexusDbaName is false in profile", () => {
     useMockUserData({
       profileData: generateProfileData({
         businessName: "some cool name",
-        nexusDbaName: undefined,
+        needsNexusDbaName: false,
       }),
     });
     renderTask();
@@ -164,6 +167,7 @@ describe("<NexusSearchBusinessNameStep />", () => {
       profileData: generateProfileData({
         businessName: "some cool name",
         nexusDbaName: "existing dba name",
+        needsNexusDbaName: true,
       }),
     });
     mockSearchReturnValue({ status: "UNAVAILABLE" });
