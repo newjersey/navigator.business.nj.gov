@@ -719,16 +719,17 @@ describe("<FilingsCalendar />", () => {
       let annualReport: TaxFiling;
       const operateReferences: Record<string, OperateReference> = {};
       const filings: TaxFiling[] = [];
-
-      for (let i = 0; i < numberOfCalendarEntries; i++) {
-        dueDate = getCurrentDate().add(2, "months").add(i, "day");
-        annualReport = generateTaxFiling({
-          identifier: `annual-report-${i}`,
-          dueDate: dueDate.format(defaultDateFormat),
-        });
-        filings.push(annualReport);
-        operateReferences[`annual-report-${i}`] = generateOperateReference({});
-      }
+      [getCurrentDate(), getCurrentDate().add(1, "years"), getCurrentDate().add(2, "years")].map((dates) => {
+        for (let i = 0; i < numberOfCalendarEntries; i++) {
+          dueDate = dates.add(2, "months").add(i, "day");
+          annualReport = generateTaxFiling({
+            identifier: `annual-report-${i}`,
+            dueDate: dueDate.format(defaultDateFormat),
+          });
+          filings.push(annualReport);
+          operateReferences[`annual-report-${i}`] = generateOperateReference({});
+        }
+      });
 
       const userData = generateUserData({
         profileData: generateProfileData({
@@ -772,6 +773,16 @@ describe("<FilingsCalendar />", () => {
       fireEvent.click(screen.getByText(Config.dashboardDefaults.calendarListViewMoreButton));
       expect(screen.getAllByTestId("calendar-list-entry")).toHaveLength(6);
       expect(screen.queryByText(Config.dashboardDefaults.calendarListViewMoreButton)).not.toBeInTheDocument();
+    });
+
+    it("resets view more button when year is changed", () => {
+      renderCalendarWithEntries(12);
+      expect(screen.getAllByTestId("calendar-list-entry")).toHaveLength(5);
+      fireEvent.click(screen.getByText(Config.dashboardDefaults.calendarListViewMoreButton));
+      expect(screen.getAllByTestId("calendar-list-entry")).toHaveLength(10);
+      fireEvent.click(screen.getByTestId("primary-year-selector-dropdown-button"));
+      fireEvent.click(screen.getByText(getCurrentDate().add(2, "years").year().toString()));
+      expect(screen.getAllByTestId("calendar-list-entry")).toHaveLength(5);
     });
   });
 });
