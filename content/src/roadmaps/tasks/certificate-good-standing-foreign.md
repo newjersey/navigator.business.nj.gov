@@ -3,7 +3,6 @@ urlSlug: certificate-good-standing-foreign
 filename: certificate-good-standing-foreign
 name: Obtain a Certificate of Good Standing
 id: certificate-good-standing-foreign
-required: true
 formName: ""
 ---
 

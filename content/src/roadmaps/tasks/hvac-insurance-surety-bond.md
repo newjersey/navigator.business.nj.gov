@@ -5,19 +5,19 @@ name: Get an Insurance Policy and Surety Bond
 id: hvac-insurance-surety-bond
 callToActionLink: ""
 callToActionText: ""
-required: true
 ---
+
 You must purchase a $3,000 `surety bond|surety-bond` and Certificate of Liability Insurance in the sum of $500,000 for the duration of your license.
 
 To find an insurance broker, speak to your network, a local Chamber of Commerce, or supplier. Oftentimes, the best way to find a broker is through word of mouth.
 
-- - -
+---
 
 ### Other Common Types of Business Insurance
 
-* **Workers' Compensation Insurance:** Find a `workers' comp insurance|workers-comp` plan if you have employees. The State of New Jersey requires that you obtain this insurance if you have employees or stockholders in a corporation
-* **Motor Vehicle Insurance:** If your company will own or use any vehicles, consider purchasing motor vehicle insurance
+- **Workers' Compensation Insurance:** Find a `workers' comp insurance|workers-comp` plan if you have employees. The State of New Jersey requires that you obtain this insurance if you have employees or stockholders in a corporation
+- **Motor Vehicle Insurance:** If your company will own or use any vehicles, consider purchasing motor vehicle insurance
 
 > **Once completed, you will have:**
 >
-> * A Certificate of Insurance and Surety Bond
+> - A Certificate of Insurance and Surety Bond

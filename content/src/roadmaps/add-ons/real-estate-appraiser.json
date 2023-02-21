@@ -3,7 +3,8 @@
       {
         "step": 1,
         "weight": 6,
-        "task": "appraiser-license"
+        "task": "appraiser-license",
+        "required": true
       }
     ]
   }

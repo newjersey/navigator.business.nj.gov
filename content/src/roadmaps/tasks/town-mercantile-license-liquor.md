@@ -4,7 +4,6 @@ name: Get Your Liquor and Mercantile License
 id: check-local-requirements
 callToActionLink: ${municipalityWebsite}
 callToActionText: Visit the ${municipality} Website
-required: true
 requiresLocation: true
 ---
 

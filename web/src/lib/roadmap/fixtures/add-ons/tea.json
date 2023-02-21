@@ -9,6 +9,12 @@
       "step": 2,
       "weight": 3,
       "task": "tea-task-2"
+    },
+    {
+      "step": 3,
+      "weight": 3,
+      "task": "tea-task-2-required",
+      "required": true
     }
   ],
   "modifications": []

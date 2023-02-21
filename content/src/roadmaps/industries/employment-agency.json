@@ -21,17 +21,20 @@
     {
       "step": 1,
       "weight": 5,
-      "task": "determine-naics-code"
+      "task": "determine-naics-code",
+      "required": true
     },
     {
       "step": 2,
       "weight": 20,
-      "task": "register-for-ein"
+      "task": "register-for-ein",
+      "required": true
     },
     {
       "step": 2,
       "weight": 25,
-      "task": "register-for-taxes"
+      "task": "register-for-taxes",
+      "required": true
     },
     {
       "step": 3,
@@ -46,7 +49,8 @@
     {
       "step": 4,
       "weight": 10,
-      "task": "search-licenses-employment-agency"
+      "task": "search-licenses-employment-agency",
+      "required": true
     }
   ],
   "name": "Employment Agency",

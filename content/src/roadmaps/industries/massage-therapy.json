@@ -11,17 +11,20 @@
     {
       "step": 1,
       "weight": 5,
-      "task": "determine-naics-code"
+      "task": "determine-naics-code",
+      "required": true
     },
     {
       "step": 2,
       "weight": 31,
-      "task": "register-for-ein"
+      "task": "register-for-ein",
+      "required": true
     },
     {
       "step": 2,
       "weight": 32,
-      "task": "register-for-taxes"
+      "task": "register-for-taxes",
+      "required": true
     },
     {
       "step": 3,
@@ -31,17 +34,20 @@
     {
       "step": 3,
       "weight": 30,
-      "task": "insurance-massage-therapy"
+      "task": "insurance-massage-therapy",
+      "required": true
     },
     {
       "step": 3,
       "weight": 31,
-      "task": "license-massage-therapy"
+      "task": "license-massage-therapy",
+      "required": true
     },
     {
       "step": 3,
       "weight": 32,
-      "task": "verify-license-massage-therapy"
+      "task": "verify-license-massage-therapy",
+      "required": true
     }
   ],
   "name": "Massage Therapy",

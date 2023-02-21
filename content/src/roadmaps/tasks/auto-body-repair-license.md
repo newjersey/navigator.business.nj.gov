@@ -4,7 +4,6 @@ name: Get an Auto-Body Repair License
 id: auto-body-repair-license
 callToActionLink: https://www.state.nj.us/mvcbiz/pdf/About/autobody.pdf
 callToActionText: Apply for My Auto-Body Repair License
-required: true
 issuingAgency: "New Jersey Motor Vehicle Commission "
 formName: BLC-25
 ---
@@ -23,6 +22,6 @@ Auto-body repair businesses are required to obtain a license. To apply for a lic
 - Color photographs of each officer at the shop
 - Color photographs of the facility displaying the advertised sign
 
->**Once completed, you will have:**
+> **Once completed, you will have:**
 >
->- An auto-body repair license
+> - An auto-body repair license

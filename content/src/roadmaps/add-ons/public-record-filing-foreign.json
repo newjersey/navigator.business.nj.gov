@@ -3,7 +3,8 @@
     {
       "step": 2,
       "weight": 21,
-      "task": "form-business-entity-foreign"
+      "task": "form-business-entity-foreign",
+      "required": true
     }
   ]
 }

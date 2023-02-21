@@ -39,7 +39,7 @@ describe("roadmapBuilder", () => {
       addOns: ["tea"],
     });
 
-    expect(roadmap.steps).toHaveLength(2);
+    expect(roadmap.steps).toHaveLength(3);
   });
 
   it("builds a generic roadmap with generic tasks only, and removes empty step 5", async () => {
@@ -152,6 +152,18 @@ describe("roadmapBuilder", () => {
         id: "blocking-task-1-id",
       },
     ]);
+  });
+
+  it("adds tasks from addOns with required when required is true", async () => {
+    const roadmap = await buildRoadmap({
+      industryId: undefined,
+      addOns: ["tea"],
+    });
+    const requiredTask = roadmap.tasks.find((it) => {
+      return it.required === true;
+    });
+
+    expect(requiredTask?.id).toEqual("tea-task-2-required-id");
   });
 });
 

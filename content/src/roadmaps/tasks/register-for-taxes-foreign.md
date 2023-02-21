@@ -5,7 +5,6 @@ name: Register for Tax and/or Employer Purposes
 id: register-for-taxes
 callToActionLink: https://www.njportal.com/DOR/BusinessRegistration/
 callToActionText: Register My Business for State Taxes
-required: true
 issuingAgency: New Jersey Division of Revenue and Enterprise Services
 formName: NJ-Reg
 ---

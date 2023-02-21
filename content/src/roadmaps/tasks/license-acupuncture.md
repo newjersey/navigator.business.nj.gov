@@ -5,8 +5,8 @@ name: Apply for an Acupuncturist License, if Applicable
 id: license-acupuncture
 callToActionLink: https://www.njconsumeraffairs.gov/acu/Pages/applications.aspx
 callToActionText: Apply for My License
-required: false
 ---
+
 You will need an Acupuncturist license **if you** plan to offer services as an acupuncturist.
 
 ---

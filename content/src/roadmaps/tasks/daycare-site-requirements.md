@@ -3,8 +3,8 @@ urlSlug: daycare-site-requirements
 filename: daycare-site-requirements
 name: Prepare for State and Local Site Requirements
 id: daycare-site-requirements
-required: true
 ---
+
 Your Daycare needs to be inspected and approved by your local government and the New Jersey Department of Children and Families (DCF) to verify that it's safe for customers and employees.
 
 ---

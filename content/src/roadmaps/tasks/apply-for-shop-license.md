@@ -4,12 +4,11 @@ name: Apply for a Cosmetology Shop License
 id: apply-for-shop-license
 callToActionLink: https://www.njconsumeraffairs.gov/cos/Pages/applications.aspx
 callToActionText: Apply for My Cosmetology Shop License
-required: true
 issuingAgency: New Jersey Division of Consumer Affairs Board of Cosmetology and Hairstyling
 industryIntegration: NJ Department of Consumer Affairs
 ---
 
-New shops, relocated shops, or shops that have transferred ownership are required to obtain a license. After your application is submitted and reviewed, your shop will be inspected. 
+New shops, relocated shops, or shops that have transferred ownership are required to obtain a license. After your application is submitted and reviewed, your shop will be inspected.
 
 ---
 
