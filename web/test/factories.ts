@@ -399,20 +399,6 @@ export const generateFormationDisplayContent = (
     introParagraph: {
       contentMd: `some-intro-content-${legalStructureId}-${randomInt()}`,
     },
-    foreignStateOfFormationHeader: {
-      contentMd: `some-header-content-${legalStructureId}-${randomInt()}`,
-      errorText: `some-errorText-content-${legalStructureId}-${randomInt()}`,
-      placeholder: `some-placeholder-content-${legalStructureId}-${randomInt()}`,
-      reviewHeader: `some-reviewHeader-content-${legalStructureId}-${randomInt()}`,
-      requireFieldText: `some-requireFieldText-content-${legalStructureId}-${randomInt()}`,
-    },
-    foreignDateOfFormationHeader: {
-      contentMd: `some-header-content-${legalStructureId}-${randomInt()}`,
-      errorText: `some-errorText-content-${legalStructureId}-${randomInt()}`,
-      reviewHeader: `some-reviewHeader-content-${legalStructureId}-${randomInt()}`,
-      placeholder: `some-placeholder-content-${legalStructureId}-${randomInt()}`,
-      requireFieldText: `some-requireFieldText-content-${legalStructureId}-${randomInt()}`,
-    },
     businessNameCheck: {
       contentMd: `some-business-name-check-${legalStructureId}--content-${randomInt()}`,
     },
@@ -434,20 +420,6 @@ export const generateFormationDisplayContent = (
     },
     notification: {
       contentMd: `some-${legalStructureId}--notification-${randomInt()}`,
-    },
-    officialFormationDocument: {
-      contentMd: `some-official-formation-document-${legalStructureId}--content-${randomInt()}`,
-      cost: randomInt(),
-    },
-    certificateOfStanding: {
-      contentMd: `some-certificate-of-standing-${legalStructureId}--content-${randomInt()}`,
-      cost: randomInt(),
-      optionalLabel: `some-certificate-of-standing-optional-${legalStructureId}--label-${randomInt()}`,
-    },
-    certifiedCopyOfFormationDocument: {
-      contentMd: `some-certified-copy-of-formation-document-${legalStructureId}--content-${randomInt()}`,
-      cost: randomInt(),
-      optionalLabel: `some-certified-copy-of-formation-document-optional-${legalStructureId}--label-${randomInt()}`,
     },
     ...overrides,
   };

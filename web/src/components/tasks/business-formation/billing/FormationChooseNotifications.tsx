@@ -1,10 +1,11 @@
 import { Content } from "@/components/Content";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import { ReactElement, useContext } from "react";
 
 export const FormationChooseNotifications = (): ReactElement => {
+  const { Config } = useConfig();
   const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
 
   const handleAnnualReportClick = () => {
@@ -41,7 +42,7 @@ export const FormationChooseNotifications = (): ReactElement => {
               />
             </div>
           }
-          label={<Content>{Config.businessFormationDefaults.optInAnnualReportText}</Content>}
+          label={<Content>{Config.formation.fields.annualReportNotification.checkboxText}</Content>}
         />
         <FormControlLabel
           style={{ display: "table" }}
@@ -53,7 +54,7 @@ export const FormationChooseNotifications = (): ReactElement => {
               />
             </div>
           }
-          label={<Content>{Config.businessFormationDefaults.optInCorpWatchText}</Content>}
+          label={<Content>{Config.formation.fields.corpWatchNotification.checkboxText}</Content>}
         />
       </FormGroup>
     </div>

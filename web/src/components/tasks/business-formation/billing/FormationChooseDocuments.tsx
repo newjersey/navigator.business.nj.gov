@@ -1,21 +1,29 @@
 import { Content } from "@/components/Content";
+import { getCost } from "@/components/tasks/business-formation/billing/getCost";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getDollarValue } from "@/lib/utils/formatters";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { Checkbox } from "@mui/material";
 import { ReactElement, useContext, useEffect, useState } from "react";
 
 export const FormationChooseDocuments = (): ReactElement => {
+  const { Config } = useConfig();
+
   const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
-  const [totalCost, setTotalCost] = useState<number>(state.displayContent.officialFormationDocument.cost);
+
+  const officialFormationCost = getCost("officialFormationDocument", state.formationFormData.legalType);
+  const certifiedCopyCost = getCost("certifiedCopyOfFormationDocument", state.formationFormData.legalType);
+  const certificateStandingCost = getCost("certificateOfStanding", state.formationFormData.legalType);
+
+  const [totalCost, setTotalCost] = useState<number>(officialFormationCost);
 
   useEffect(() => {
-    let minCost = state.displayContent.officialFormationDocument.cost;
+    let minCost = officialFormationCost;
     if (state.formationFormData.certificateOfStanding) {
-      minCost += state.displayContent.certificateOfStanding.cost;
+      minCost += certificateStandingCost;
     }
     if (state.formationFormData.certifiedCopyOfFormationDocument) {
-      minCost += state.displayContent.certifiedCopyOfFormationDocument.cost;
+      minCost += certifiedCopyCost;
     }
     setTotalCost(minCost);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -49,30 +57,38 @@ export const FormationChooseDocuments = (): ReactElement => {
       <table className="business-formation-table business-formation-document">
         <thead>
           <tr>
-            <th className="text-bold">{Config.businessFormationDefaults.documentTableColumn2Label}</th>
+            <th className="text-bold">{Config.formation.fields.paymentType.serviceColumnLabel}</th>
             <th></th>
-            <th className="text-bold">{Config.businessFormationDefaults.documentTableColumn3Label}</th>
+            <th className="text-bold">{Config.formation.fields.paymentType.costColumnLabel}</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>
-              <div className="business-formation-table-checkboxes">
+              <div
+                className="business-formation-table-checkboxes"
+                data-testid="officialFormationDocument-checkbox"
+              >
                 <Checkbox disabled defaultChecked id="officialFormationDocument" />
               </div>
             </td>
             <td>
-              <label htmlFor="officialFormationDocument" className={"text-primary-dark text-bold"}>
-                <Content>{state.displayContent.officialFormationDocument.contentMd}</Content>
+              <label
+                data-testid="officialFormationDocument"
+                htmlFor="officialFormationDocument"
+                className={"text-primary-dark text-bold"}
+              >
+                <Content>{Config.formation.fields.officialFormationDocument.label}</Content>
               </label>
             </td>
-            <td className={"text-primary-dark text-bold"}>
-              {getDollarValue(state.displayContent.officialFormationDocument.cost)}
-            </td>
+            <td className={"text-primary-dark text-bold"}>{getDollarValue(officialFormationCost)}</td>
           </tr>
           <tr>
             <td>
-              <div className="business-formation-table-checkboxes">
+              <div
+                className="business-formation-table-checkboxes"
+                data-testid="certificateOfStanding-checkbox"
+              >
                 <Checkbox
                   onChange={handleCertificateOfStandingClick}
                   id="certificateOfStanding"
@@ -81,26 +97,33 @@ export const FormationChooseDocuments = (): ReactElement => {
               </div>
             </td>
             <td>
-              <label htmlFor="certificateOfStanding" className="display-inline-flex fww">
+              <label
+                htmlFor="certificateOfStanding"
+                data-testid="certificateOfStanding"
+                className="display-inline-flex fww"
+              >
                 <Content
                   className={
                     state.formationFormData.certificateOfStanding ? "text-primary-dark text-bold" : ""
                   }
                 >
-                  {state.displayContent.certificateOfStanding.contentMd}
+                  {Config.formation.fields.certificateOfStanding.label}
                 </Content>
-                &nbsp;{state.displayContent.certificateOfStanding.optionalLabel}
+                &nbsp;{Config.formation.general.optionalLabel}
               </label>
             </td>
             <td
               className={state.formationFormData.certificateOfStanding ? "text-primary-dark text-bold" : ""}
             >
-              {getDollarValue(state.displayContent.certificateOfStanding.cost)}
+              {getDollarValue(certificateStandingCost)}
             </td>
           </tr>
           <tr>
             <td>
-              <div className="business-formation-table-checkboxes">
+              <div
+                className="business-formation-table-checkboxes"
+                data-testid="certifiedCopyOfFormationDocument-checkbox"
+              >
                 <Checkbox
                   onChange={handleCertifiedFormationDocumentClick}
                   id="certifiedCopyOfFormationDocument"
@@ -109,7 +132,11 @@ export const FormationChooseDocuments = (): ReactElement => {
               </div>
             </td>
             <td>
-              <label htmlFor="certifiedCopyOfFormationDocument" className="display-inline-flex fww">
+              <label
+                data-testid="certifiedCopyOfFormationDocument"
+                htmlFor="certifiedCopyOfFormationDocument"
+                className="display-inline-flex fww"
+              >
                 <Content
                   className={
                     state.formationFormData.certifiedCopyOfFormationDocument
@@ -117,9 +144,9 @@ export const FormationChooseDocuments = (): ReactElement => {
                       : ""
                   }
                 >
-                  {state.displayContent.certifiedCopyOfFormationDocument.contentMd}
+                  {Config.formation.fields.certifiedCopyOfFormationDocument.label}
                 </Content>
-                &nbsp;{state.displayContent.certifiedCopyOfFormationDocument.optionalLabel}
+                &nbsp;{Config.formation.general.optionalLabel}
               </label>
             </td>
             <td
@@ -127,7 +154,7 @@ export const FormationChooseDocuments = (): ReactElement => {
                 state.formationFormData.certifiedCopyOfFormationDocument ? "text-primary-dark text-bold" : ""
               }
             >
-              {getDollarValue(state.displayContent.certifiedCopyOfFormationDocument.cost)}
+              {getDollarValue(certifiedCopyCost)}
             </td>
           </tr>
         </tbody>
@@ -135,9 +162,7 @@ export const FormationChooseDocuments = (): ReactElement => {
           <tr>
             <td colSpan={1}>
               <div className="text-align-left">
-                <span className="text-bold">
-                  {Config.businessFormationDefaults.documentTableSubTotalCostLabel}
-                </span>{" "}
+                <span className="text-bold">{Config.formation.fields.paymentType.costSubtotalLabel}</span>{" "}
               </div>
             </td>
             <td colSpan={1}></td>

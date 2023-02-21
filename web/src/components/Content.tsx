@@ -29,7 +29,7 @@ export const Content = (props: ContentProps): ReactElement => {
   const components = {
     code: isTest
       ? (props: any) => {
-          return <>`{props.children}`</>;
+          return <>{`\`${props.children}\``}</>;
         }
       : ContextualInfoLink,
     a: Link(props.onClick),

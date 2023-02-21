@@ -16,7 +16,8 @@
       "addressLine2": {
         "fieldDisplayName": "Address Line 2",
         "placeholder": "Address Line 2",
-        "label": "**Address Line 2** (Optional)"
+        "label": "**Address Line 2** (Optional)",
+        "error": ""
       },
       "addressMunicipality": {
         "fieldDisplayName": "City",
@@ -91,10 +92,13 @@
       "agentOfficeAddressMunicipality": {
         "fieldDisplayName": "City",
         "placeholder": "Office City",
-        "label": "**City**"
+        "label": "**City**",
+        "error": "Select a city."
       },
       "agentOfficeAddressState": {
-        "label": "**State**"
+        "label": "**State**",
+        "placeholder": "State",
+        "error": "Enter a state."
       },
       "agentOfficeAddressZipCode": {
         "fieldDisplayName": "Zip Code",
@@ -111,9 +115,10 @@
         "alertAvailable": "\"${name}\" is available. This name will be registered with the State ONLY after you submit the rest of this form.",
         "alertSpecialCharacters": "\"${name}\" contains invalid special characters that cannot be used in the Business Name for online filing. If you'd like to use special characters you need to file a paper application using the form located at [treasury.](https://www.state.nj.us/treasury/revenue/pdf/2000.pdf)",
         "alertDesignator": "It looks like there's a designator in your name like LLC, LP, or CORP. Please remove it and try your search again. You can officially form your business and choose a designator once you find an available name.",
+        "alertRestrictedWord": "\"${name}\" contains the restricted word \"${word}\" that cannot be used in the Business Name for online filing. If you would like to use this restricted word, please contact us with your preferred name at [treasury.](https://www.state.nj.us/treasury/revenue/revgencode.shtml)",
         "errorInlineUnavailable": "This name is already being used. Try another business name.",
         "errorInlineEmpty": "Enter a business name to check availability.",
-        "errorNeedsToSearch": "Confirm the availability of your business name.",
+        "errorInlineNeedsToSearch": "Confirm the availability of your business name.",
         "placeholder": "Enter a business name",
         "reviewStepLabel": "**Business Name**",
         "label": "Business Name Search"
@@ -168,12 +173,29 @@
         "reviewStepYes": "**Yes**, the limited partners can assign other partners limited partner rights."
       },
       "certifiedCopyOfFormationDocument": {
+        "cost": "25",
+        "label": "`Certified Copy of Formation Document|certified-copy`",
         "reviewStepLabel": "Certified Copy of Formation Document"
       },
       "certificateOfStanding": {
-        "reviewStepLabel": "Certificate of Good Standing"
+        "label": "`Certificate of Standing|good-standing`",
+        "cost": "50",
+        "reviewStepLabel": "Certificate of Good Standing",
+        "overrides": {
+          "c-corporation": {
+            "cost": "25"
+          },
+          "s-corporation": {
+            "cost": "25"
+          },
+          "limited-partnership": {
+            "cost": "25"
+          }
+        }
       },
       "officialFormationDocument": {
+        "label": "`Official Formation Documentation|certificate-formation`",
+        "cost": "125",
         "reviewStepLabel": "Official Formation Document"
       },
       "combinedInvestment":{
@@ -223,6 +245,19 @@
         "header": "Dissolution",
         "body": "When and under what circumstances can a limited partnership and its affairs dissolve?",
         "reviewStepLabel": "Dissolution"
+      },
+      "foreignDateOfFormation": {
+        "fieldDisplayName": "Original Date of Formation",
+        "label": "**Original Date of Formation** (mm/dd/yyyy)",
+        "reviewStepLabel": "**Original Date of Formation:**",
+        "error": "The business formation date must be a valid date in format MM/DD/YYYY"
+      },
+      "foreignStateOfFormation": {
+        "fieldDisplayName": "Original State of Formation",
+        "label": "**Original State of Formation**",
+        "reviewStepLabel": "**Original State of Formation:**",
+        "placeholder": "Select a State of Formation",
+        "error": "Select a State"
       },
       "createLimitedPartnerTerms": {
         "fieldDisplayName": "Partnership Rights"
@@ -288,10 +323,10 @@
         "errorBannerSignerTitle": "Select the signer titles below.",
         "errorBannerMinimum": "Enter at least 1 signer's name.",
         "errorBannerSignerName": "One or more Signer fields are empty.",
-        "errorAdditionalSignerName": "Enter the first and last name of each signer.",
-        "errorSignerTitle": "Select a title.",
-        "errorCheckbox": "Sign by clicking the checkbox(s) below.",
-        "errorName": "Enter a signer.",
+        "errorBannerCheckbox": "Sign by clicking the checkbox(s) below.",
+        "errorInlineAdditionalSignerName": "Enter the first and last name of each signer.",
+        "errorInlineSignerTitle": "Select a title.",
+        "errorInlineFirstSignerName": "Enter a signer.",
         "titlePlaceholder": "Select Signer Title",
         "titleLabel": "**Title**",
         "tableHeader": "Name,Address,Sign*,Actions",
@@ -404,7 +439,7 @@
       "nextButtonText": "Save & Continue",
       "previousButtonText": "Back",
       "charactersLabel": "characters",
-      "paymentDisclaimerText": "You will be brought to a secure payment platform operated by New Jersey's partner NICUSA Inc. to process your payment.",
+      "paymentDisclaimer": "You will be brought to a secure payment platform operated by New Jersey's partner NICUSA Inc. to process your payment.",
       "optionalLabel": "(Optional)",
       "genericErrorText": "This field requires information.",
       "maximumLengthErrorText": "${field} must be ${maxLen} characters or fewer."

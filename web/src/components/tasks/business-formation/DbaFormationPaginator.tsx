@@ -112,9 +112,9 @@ export const DbaFormationPaginator = (): ReactElement => {
   const ForwardButton = () => {
     const getForwardButtonText = () => {
       if (isAuthenticated === IsAuthenticated.FALSE && isNotDba) {
-        return `Register & ${Config.businessFormationDefaults.initialNextButtonText}`;
+        return `Register & ${Config.formation.general.initialNextButtonText}`;
       } else {
-        return Config.businessFormationDefaults.initialNextNexusButtonText;
+        return Config.formation.general.initialNextNexusButtonText;
       }
     };
 
@@ -135,7 +135,7 @@ export const DbaFormationPaginator = (): ReactElement => {
 
   const BackButton = () => (
     <SecondaryButton isColor="primary" isNotFullWidthOnMobile={true} onClick={onPreviousButtonClick}>
-      {Config.businessFormationDefaults.previousButtonText}
+      {Config.formation.general.previousButtonText}
     </SecondaryButton>
   );
 

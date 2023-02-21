@@ -5,18 +5,13 @@ import { AvailableProps } from "@/components/tasks/search-business-name/Availabl
 import { UnavailableProps } from "@/components/tasks/search-business-name/UnavailableProps";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { useBusinessNameSearch } from "@/lib/data-hooks/useBusinessNameSearch";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { SearchBusinessNameError } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { NameAvailability } from "@businessnjgovnavigator/shared/index";
 import { FormControl, TextField } from "@mui/material";
 import { FormEvent, ReactElement, useCallback, useEffect, useRef } from "react";
-
-type SearchBusinessNameError = "BAD_INPUT" | "SEARCH_FAILED";
-const SearchBusinessNameErrorLookup: Record<SearchBusinessNameError, string> = {
-  BAD_INPUT: Config.searchBusinessNameTask.errorTextBadInput,
-  SEARCH_FAILED: Config.searchBusinessNameTask.errorTextSearchFailed,
-};
 
 type SearchBusinessNameFormConfig = {
   searchButtonText: string;
@@ -58,8 +53,14 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
     isDba: props.isDba || false,
   });
 
+  const { Config } = useConfig();
   const didInitialSearch = useRef<boolean>(false);
   const { userData } = useUserData();
+
+  const SearchBusinessNameErrorLookup: Record<SearchBusinessNameError, string> = {
+    BAD_INPUT: Config.searchBusinessNameTask.errorTextBadInput,
+    SEARCH_FAILED: Config.searchBusinessNameTask.errorTextSearchFailed,
+  };
 
   useEffect(() => {
     props.onChange && props.onChange(nameAvailability);
@@ -188,7 +189,7 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
         {nameAvailability?.status === "SPECIAL_CHARACTER" && (
           <Alert variant="error" dataTestid="special-character-text">
             <Content className="font-sans-xs">
-              {templateEval(Config.businessFormationDefaults.nameCheckSpecialCharacterMarkDown, {
+              {templateEval(Config.formation.fields.businessName.alertSpecialCharacters, {
                 name: submittedName,
               })}
             </Content>
@@ -197,7 +198,7 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
         {nameAvailability?.status === "RESTRICTED" && (
           <Alert variant="error" dataTestid="restricted-word-text">
             <Content className="font-sans-xs">
-              {templateEval(Config.businessFormationDefaults.nameCheckRestrictedWordMarkDown, {
+              {templateEval(Config.formation.fields.businessName.alertRestrictedWord, {
                 name: submittedName,
                 word: nameAvailability.invalidWord ?? "*unknown*",
               })}

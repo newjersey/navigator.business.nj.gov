@@ -75,8 +75,7 @@ jest.mock("@/lib/api-client/apiClient", () => ({
 
 const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
 
-const clickBack = () =>
-  fireEvent.click(screen.getByText(Config.businessFormationDefaults.previousButtonText));
+const clickBack = () => fireEvent.click(screen.getByText(Config.formation.general.previousButtonText));
 
 describe("<NexusFormationFlow />", () => {
   let initialUserData: UserData;
@@ -126,14 +125,15 @@ describe("<NexusFormationFlow />", () => {
     it("does not display buttons on name search initially", async () => {
       preparePage(initialUserData, displayContent);
       expect(screen.queryByText(Config.nexusNameSearch.nexusNextButton)).not.toBeInTheDocument();
-      expect(screen.queryByText(Config.businessFormationDefaults.previousButtonText)).not.toBeInTheDocument();
+      expect(screen.queryByText(Config.formation.general.previousButtonText)).not.toBeInTheDocument();
     });
   });
 
   describe("when in DBA flow", () => {
     let page: FormationPageHelpers;
-    const clickNext = () =>
-      fireEvent.click(screen.getByText(Config.businessFormationDefaults.initialNextNexusButtonText));
+    const clickNext = (): void => {
+      fireEvent.click(screen.getByText(Config.formation.general.initialNextNexusButtonText));
+    };
 
     beforeEach(async () => {
       page = preparePage(initialUserData, displayContent);
@@ -240,8 +240,9 @@ describe("<NexusFormationFlow />", () => {
 
   describe("when in formation flow", () => {
     let page: FormationPageHelpers;
-    const clickNext = () =>
-      fireEvent.click(screen.getByText(Config.businessFormationDefaults.initialNextNexusButtonText));
+    const clickNext = (): void => {
+      fireEvent.click(screen.getByText(Config.formation.general.initialNextNexusButtonText));
+    };
 
     describe("when feature flag is set", () => {
       describe("business name step", () => {
@@ -294,7 +295,7 @@ describe("<NexusFormationFlow />", () => {
       });
 
       describe("when in guest mode", () => {
-        const guestModeNextButtonText = `Register & ${Config.businessFormationDefaults.initialNextButtonText}`;
+        const guestModeNextButtonText = `Register & ${Config.formation.general.initialNextButtonText}`;
         let setRegistrationModalIsVisible: jest.Mock;
 
         beforeEach(() => {

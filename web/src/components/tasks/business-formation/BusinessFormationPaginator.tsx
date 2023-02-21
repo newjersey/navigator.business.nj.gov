@@ -307,13 +307,13 @@ export const BusinessFormationPaginator = (): ReactElement => {
 
   const getNextButtonText = (): string => {
     if (isAuthenticated === IsAuthenticated.FALSE) {
-      return `Register & ${Config.businessFormationDefaults.initialNextButtonText}`;
+      return `Register & ${Config.formation.general.initialNextButtonText}`;
     } else if (state.stepIndex === 0) {
-      return Config.businessFormationDefaults.initialNextButtonText;
+      return Config.formation.general.initialNextButtonText;
     } else if (state.stepIndex === BusinessFormationStepsConfiguration.length - 1) {
-      return Config.businessFormationDefaults.submitButtonText;
+      return Config.formation.general.submitButtonText;
     } else {
-      return Config.businessFormationDefaults.nextButtonText;
+      return Config.formation.general.nextButtonText;
     }
   };
 
@@ -341,7 +341,7 @@ export const BusinessFormationPaginator = (): ReactElement => {
             {shouldDisplayPreviousButton() && (
               <div className="margin-top-1 mobile-lg:margin-top-0 mobile-lg:margin-right-1 mobile-lg:margin-left-auto">
                 <SecondaryButton isColor="primary" onClick={onPreviousButtonClick}>
-                  {Config.businessFormationDefaults.previousButtonText}
+                  {Config.formation.general.previousButtonText}
                 </SecondaryButton>
               </div>
             )}
@@ -387,7 +387,7 @@ export const BusinessFormationPaginator = (): ReactElement => {
       }
       return (
         <Alert variant="error">
-          <div>{Config.businessFormationDefaults.submitErrorHeading}</div>
+          <div>{Config.formation.errorBanner.genericApiError}</div>
           <ul style={{ wordBreak: "break-word" }}>
             {userData.formationData.formationResponse.errors.map((it) => {
               return (
@@ -413,7 +413,7 @@ export const BusinessFormationPaginator = (): ReactElement => {
     if (isStep("Review")) {
       return (
         <Alert variant="error">
-          <div>{Config.businessFormationDefaults.incompleteStepsOnSubmitText}</div>
+          <div>{Config.formation.errorBanner.incompleteStepsError}</div>
           <ul>
             {stepsWithErrors.map((stepState) => {
               const label = stepState.name;
@@ -436,13 +436,11 @@ export const BusinessFormationPaginator = (): ReactElement => {
 
       return (
         <Alert variant="error">
-          <div>{Config.businessFormationDefaults.missingFieldsOnSubmitModalText}</div>
+          <div>{Config.formation.errorBanner.errorOnStep}</div>
           <ul>
             {dedupedFieldErrors.map((fieldError) => {
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              const label = (Config.businessFormationDefaults.requiredFieldsBulletPointLabel as any)[
-                fieldError.field
-              ];
+              const label = (Config.formation.fields as any)[fieldError.field].fieldDisplayName;
               return (
                 <li key={label ?? fieldError.label}>
                   {label ?? fieldError.label}

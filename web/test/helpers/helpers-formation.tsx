@@ -1,6 +1,7 @@
 import { BusinessFormation } from "@/components/tasks/business-formation/BusinessFormation";
 import { LookupStepIndexByName } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
 import { LookupNexusStepIndexByName } from "@/components/tasks/business-formation/NexusFormationStepsConfiguration";
+import { getMergedConfig } from "@/contexts/configContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
@@ -23,7 +24,6 @@ import { useMockRouter } from "@/test/mock/mockRouter";
 import { useMockDocuments } from "@/test/mock/mockUseDocuments";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { setupStatefulUserDataContext, WithStatefulUserData } from "@/test/mock/withStatefulUserData";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import {
   castPublicFilingLegalTypeToFormationType,
   createEmptyFormationFormData,
@@ -41,6 +41,8 @@ import {
 } from "@businessnjgovnavigator/shared";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import { act, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
+
+const Config = getMergedConfig();
 
 export function flushPromises() {
   return new Promise((resolve) => {
@@ -162,9 +164,12 @@ export type FormationPageHelpers = {
   chooseRadio: (value: string) => void;
   getInputElementByLabel: (label: string) => HTMLInputElement;
   getInputElementByTestId: (testId: string) => HTMLInputElement;
+  getInputElementByParentTestId: (testId: string, params: { type: string }) => HTMLInputElement;
   selectByText: (label: string, value: string) => void;
   selectCheckbox: (label: string) => void;
+  selectCheckboxByTestId: (testId: string) => void;
   clickAddNewSigner: () => void;
+  clickAddNewIncorporator: () => void;
   getSignerBox: (index: number, type: "signers" | "incorporators") => boolean;
   checkSignerBox: (index: number, type: "signers" | "incorporators") => void;
   clickAddressSubmit: () => void;
@@ -188,7 +193,7 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     fillText("Search business name", businessName);
     await searchBusinessName({ status: "AVAILABLE" });
 
-    fireEvent.click(screen.getByText(Config.businessFormationDefaults.initialNextButtonText));
+    fireEvent.click(screen.getByText(Config.formation.general.initialNextButtonText));
 
     await waitFor(() => {
       expect(screen.queryByTestId("business-step")).toBeInTheDocument();
@@ -198,7 +203,7 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
   const submitNexusBusinessNameStep = async (): Promise<void> => {
     await searchBusinessName({ status: "AVAILABLE" });
 
-    fireEvent.click(screen.getByText(Config.businessFormationDefaults.initialNextNexusButtonText));
+    fireEvent.click(screen.getByText(Config.formation.general.initialNextNexusButtonText));
 
     await waitFor(() => {
       expect(screen.queryByTestId("business-step")).toBeInTheDocument();
@@ -256,14 +261,14 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
   };
 
   const submitBusinessNameStep = async (): Promise<void> => {
-    fireEvent.click(screen.getByText(Config.businessFormationDefaults.initialNextButtonText));
+    fireEvent.click(screen.getByText(Config.formation.general.initialNextButtonText));
     await waitFor(() => {
       expect(screen.queryByTestId("business-step")).toBeInTheDocument();
     });
   };
 
   const submitBusinessStep = async (completed = true): Promise<void> => {
-    fireEvent.click(screen.getByText(Config.businessFormationDefaults.nextButtonText));
+    fireEvent.click(screen.getByText(Config.formation.general.nextButtonText));
 
     await (completed
       ? waitFor(() => {
@@ -275,7 +280,7 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
   };
 
   const submitContactsStep = async (completed = true): Promise<void> => {
-    fireEvent.click(screen.getByText(Config.businessFormationDefaults.nextButtonText));
+    fireEvent.click(screen.getByText(Config.formation.general.nextButtonText));
 
     if (completed) {
       await waitFor(() => {
@@ -285,7 +290,7 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
   };
 
   const submitBillingStep = async (): Promise<void> => {
-    fireEvent.click(screen.getByText(Config.businessFormationDefaults.nextButtonText));
+    fireEvent.click(screen.getByText(Config.formation.general.nextButtonText));
 
     await waitFor(() => {
       expect(screen.queryByTestId("review-step")).toBeInTheDocument();
@@ -293,7 +298,7 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
   };
 
   const submitReviewStep = async (): Promise<void> => {
-    fireEvent.click(screen.getByText(Config.businessFormationDefaults.submitButtonText));
+    fireEvent.click(screen.getByText(Config.formation.general.submitButtonText));
     await act(async () => {
       await flushPromises();
     });
@@ -329,6 +334,11 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     return screen.getByTestId(testId) as HTMLInputElement;
   };
 
+  const getInputElementByParentTestId = (testId: string, params: { type: string }): HTMLInputElement => {
+    // eslint-disable-next-line testing-library/no-node-access
+    return screen.getByTestId(testId).querySelector(`input[type="${params.type}"]`) as HTMLInputElement;
+  };
+
   const selectByText = (label: string, value: string) => {
     fireEvent.mouseDown(screen.getByLabelText(label));
     const listbox = within(screen.getByRole("listbox"));
@@ -339,26 +349,30 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     fireEvent.click(screen.getByLabelText(label));
   };
 
+  const selectCheckboxByTestId = (testId: string): void => {
+    fireEvent.click(screen.getByTestId(testId));
+  };
+
   const clickAddNewSigner = (): void => {
-    fireEvent.click(
-      screen.getByText(Config.businessFormationDefaults.addNewSignerButtonText, { exact: false })
-    );
+    fireEvent.click(screen.getByText(Config.formation.fields.signers.addButtonText));
+  };
+
+  const clickAddNewIncorporator = (): void => {
+    fireEvent.click(screen.getByText(Config.formation.fields.incorporators.addButtonText));
   };
 
   const getSignerBox = (index: number, type: "signers" | "incorporators"): boolean => {
     const additionalSigner = within(screen.getByTestId(`${type}-${index}`));
     return (
       additionalSigner.getByLabelText(
-        `${Config.businessFormationDefaults.signatureColumnLabel}*`
+        `${Config.formation.fields.signers.signColumnLabel}*`
       ) as HTMLInputElement
     ).checked;
   };
 
   const checkSignerBox = (index: number, type: "signers" | "incorporators"): void => {
     const additionalSigner = within(screen.getByTestId(`${type}-${index}`));
-    fireEvent.click(
-      additionalSigner.getByLabelText(`${Config.businessFormationDefaults.signatureColumnLabel}*`)
-    );
+    fireEvent.click(additionalSigner.getByLabelText(`${Config.formation.fields.signers.signColumnLabel}*`));
   };
 
   const clickAddressSubmit = (): void => {
@@ -393,7 +407,7 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
   };
 
   const clickSubmit = async (): Promise<void> => {
-    fireEvent.click(screen.getByText(Config.businessFormationDefaults.submitButtonText));
+    fireEvent.click(screen.getByText(Config.formation.general.submitButtonText));
     await act(async () => {
       await flushPromises();
     });
@@ -426,9 +440,12 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     chooseRadio,
     stepperClickToNexusBusinessNameStep,
     getInputElementByLabel,
+    getInputElementByParentTestId,
     selectByText,
     selectCheckbox,
+    selectCheckboxByTestId,
     clickAddNewSigner,
+    clickAddNewIncorporator,
     checkSignerBox,
     getSignerBox,
     clickAddressSubmit,

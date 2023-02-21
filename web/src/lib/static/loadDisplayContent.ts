@@ -75,15 +75,6 @@ const getFormationFields = (
   const services = (type: FormationLegalType) => {
     return getTextFieldContent(`services.md`, type);
   };
-  const officialFormationDocument = (type: FormationLegalType) => {
-    return getTextFieldContent(`doc-official-formation.md`, type);
-  };
-  const certificateOfStanding = (type: FormationLegalType) => {
-    return getTextFieldContent(`doc-certificate-of-standing.md`, type);
-  };
-  const certifiedCopyOfFormationDocument = (type: FormationLegalType) => {
-    return getTextFieldContent(`doc-certified-copy-of-formation-document.md`, type);
-  };
   const notification = (type: FormationLegalType) => {
     return getTextFieldContent(`notification.md`, type);
   };
@@ -97,26 +88,15 @@ const getFormationFields = (
     return getTextFieldContent(`signatures.md`, type);
   };
 
-  const foreignDateOfFormationHeader = (type: FormationLegalType) => {
-    return getTextFieldContent(`date-of-formation.md`, type);
-  };
-  const foreignStateOfFormationHeader = (type: FormationLegalType) => {
-    return getTextFieldContent(`state-of-formation.md`, type);
-  };
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const fieldFunctions: Record<keyof FormationDisplayContent, (type: FormationLegalType) => any> = {
     introParagraph,
     businessNameCheck,
     services,
-    officialFormationDocument,
-    certificateOfStanding,
-    certifiedCopyOfFormationDocument,
     notification,
     agentNumberOrManual,
     members,
     signatureHeader,
-    foreignDateOfFormationHeader,
-    foreignStateOfFormationHeader,
   };
 
   return Object.keys(fieldFunctions).reduce((content, name) => {

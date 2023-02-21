@@ -41,20 +41,6 @@ export type FormationDisplayContent = {
     radioButtonNumberText: string;
     radioButtonManualText: string;
   };
-  foreignStateOfFormationHeader: {
-    contentMd: string;
-    errorText: string;
-    reviewHeader: string;
-    requireFieldText: string;
-    placeholder: string;
-  };
-  foreignDateOfFormationHeader: {
-    contentMd: string;
-    errorText: string;
-    reviewHeader: string;
-    placeholder: string;
-    requireFieldText: string;
-  };
   members: {
     contentMd: string;
     placeholder?: string;
@@ -68,20 +54,6 @@ export type FormationDisplayContent = {
   };
   notification: {
     contentMd: string;
-  };
-  officialFormationDocument: {
-    contentMd: string;
-    cost: number;
-  };
-  certificateOfStanding: {
-    contentMd: string;
-    cost: number;
-    optionalLabel: string;
-  };
-  certifiedCopyOfFormationDocument: {
-    contentMd: string;
-    cost: number;
-    optionalLabel: string;
   };
 };
 
@@ -132,20 +104,6 @@ export const createEmptyFormationDisplayContent = (): FormationDisplayContent =>
     businessNameCheck: {
       contentMd: "",
     },
-    foreignStateOfFormationHeader: {
-      contentMd: "",
-      errorText: "",
-      placeholder: "",
-      reviewHeader: "",
-      requireFieldText: "",
-    },
-    foreignDateOfFormationHeader: {
-      contentMd: "",
-      errorText: "",
-      placeholder: "",
-      reviewHeader: "",
-      requireFieldText: "",
-    },
     agentNumberOrManual: {
       contentMd: "",
       radioButtonNumberText: "",
@@ -164,20 +122,6 @@ export const createEmptyFormationDisplayContent = (): FormationDisplayContent =>
     },
     notification: {
       contentMd: "",
-    },
-    officialFormationDocument: {
-      contentMd: "",
-      cost: 0,
-    },
-    certificateOfStanding: {
-      contentMd: "",
-      cost: 0,
-      optionalLabel: "",
-    },
-    certifiedCopyOfFormationDocument: {
-      contentMd: "",
-      cost: 0,
-      optionalLabel: "",
     },
   };
 };

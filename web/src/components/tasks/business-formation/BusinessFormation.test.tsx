@@ -285,7 +285,7 @@ describe("<BusinessFormation />", () => {
     page.fillText("Address zip code", "08001");
     page.selectByText("Address municipality", "Newark");
 
-    fireEvent.click(screen.getByText(Config.businessFormationDefaults.businessPurposeAddButtonText));
+    fireEvent.click(screen.getByText(Config.formation.fields.businessPurpose.addButtonText));
     page.fillText("Business purpose", "to take over the world");
 
     await page.submitBusinessStep();
@@ -323,18 +323,14 @@ describe("<BusinessFormation />", () => {
     page.fillText("Contact last name", "Smith");
     page.fillText("Contact phone number", "123A45a678 90");
     fireEvent.click(screen.getByLabelText("Credit card"));
-    page.selectCheckbox(Config.businessFormationDefaults.optInCorpWatchText);
-    page.selectCheckbox(
-      `${displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.contentMd} ${displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.optionalLabel}`
-    );
-    page.selectCheckbox(
-      `${displayContent.formationDisplayContentMap[legalStructureId].certifiedCopyOfFormationDocument.contentMd} ${displayContent.formationDisplayContentMap[legalStructureId].certifiedCopyOfFormationDocument.optionalLabel}`
-    );
+    page.selectCheckbox(Config.formation.fields.corpWatchNotification.checkboxText);
+    page.selectCheckboxByTestId("certificateOfStanding");
+    page.selectCheckboxByTestId("certifiedCopyOfFormationDocument");
 
     const expectedTotalCost =
-      displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.cost +
-      displayContent.formationDisplayContentMap[legalStructureId].certifiedCopyOfFormationDocument.cost +
-      displayContent.formationDisplayContentMap[legalStructureId].officialFormationDocument.cost;
+      Number.parseInt(Config.formation.fields.certificateOfStanding.cost) +
+      Number.parseInt(Config.formation.fields.certifiedCopyOfFormationDocument.cost) +
+      Number.parseInt(Config.formation.fields.officialFormationDocument.cost);
 
     expect(screen.getByText(getDollarValue(expectedTotalCost))).toBeInTheDocument();
     await page.submitBillingStep();
@@ -420,7 +416,7 @@ describe("<BusinessFormation />", () => {
     page.fillText("Address state", "Massachusetts");
     page.fillText("Address city", "Marlborough");
 
-    fireEvent.click(screen.getByText(Config.businessFormationDefaults.businessPurposeAddButtonText));
+    fireEvent.click(screen.getByText(Config.formation.fields.businessPurpose.addButtonText));
     page.fillText("Business purpose", "to take over the world");
 
     await page.submitBusinessStep();
@@ -449,25 +445,20 @@ describe("<BusinessFormation />", () => {
     page.fillText("Contact last name", "Smith");
     page.fillText("Contact phone number", "123A45a678 90");
     fireEvent.click(screen.getByLabelText("Credit card"));
-    page.selectCheckbox(Config.businessFormationDefaults.optInCorpWatchText);
-    page.selectCheckbox(
-      `${displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.contentMd} ${displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.optionalLabel}`
-    );
-    page.selectCheckbox(
-      `${displayContent.formationDisplayContentMap[legalStructureId].certifiedCopyOfFormationDocument.contentMd} ${displayContent.formationDisplayContentMap[legalStructureId].certifiedCopyOfFormationDocument.optionalLabel}`
-    );
+    page.selectCheckbox(Config.formation.fields.corpWatchNotification.checkboxText);
+    page.selectCheckboxByTestId("certificateOfStanding");
+    page.selectCheckboxByTestId("certifiedCopyOfFormationDocument");
 
     const expectedTotalCost =
-      displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.cost +
-      displayContent.formationDisplayContentMap[legalStructureId].certifiedCopyOfFormationDocument.cost +
-      displayContent.formationDisplayContentMap[legalStructureId].officialFormationDocument.cost;
+      Number.parseInt(Config.formation.fields.certificateOfStanding.cost) +
+      Number.parseInt(Config.formation.fields.certifiedCopyOfFormationDocument.cost) +
+      Number.parseInt(Config.formation.fields.officialFormationDocument.cost);
 
     expect(screen.getByText(getDollarValue(expectedTotalCost))).toBeInTheDocument();
     await page.submitBillingStep();
     await page.submitReviewStep();
 
     const formationFormData = currentUserData().formationData.formationFormData;
-    console.log(formationFormData);
     await waitFor(() => {
       expect(formationFormData.businessName).toEqual("Pizza Joint");
     });
@@ -524,7 +515,7 @@ describe("<BusinessFormation />", () => {
     page.fillText("Address line2", "Suite 304");
     page.fillText("Address zip code", "08001");
     page.selectByText("Address municipality", "Newark");
-    fireEvent.click(screen.getByText(Config.businessFormationDefaults.businessPurposeAddButtonText));
+    fireEvent.click(screen.getByText(Config.formation.fields.businessPurpose.addButtonText));
     page.fillText("Business purpose", "to take over the world");
 
     await page.submitBusinessStep();
@@ -555,18 +546,15 @@ describe("<BusinessFormation />", () => {
     page.fillText("Contact last name", "Smith");
     page.fillText("Contact phone number", "123A45a678 90");
     fireEvent.click(screen.getByLabelText("Credit card"));
-    page.selectCheckbox(Config.businessFormationDefaults.optInCorpWatchText);
-    page.selectCheckbox(
-      `${displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.contentMd} ${displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.optionalLabel}`
-    );
-    page.selectCheckbox(
-      `${displayContent.formationDisplayContentMap[legalStructureId].certifiedCopyOfFormationDocument.contentMd} ${displayContent.formationDisplayContentMap[legalStructureId].certifiedCopyOfFormationDocument.optionalLabel}`
-    );
+    page.selectCheckbox(Config.formation.fields.corpWatchNotification.checkboxText);
+
+    page.selectCheckboxByTestId("certificateOfStanding");
+    page.selectCheckboxByTestId("certifiedCopyOfFormationDocument");
 
     const expectedTotalCost =
-      displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.cost +
-      displayContent.formationDisplayContentMap[legalStructureId].certifiedCopyOfFormationDocument.cost +
-      displayContent.formationDisplayContentMap[legalStructureId].officialFormationDocument.cost;
+      Number.parseInt(Config.formation.fields.certificateOfStanding.cost) +
+      Number.parseInt(Config.formation.fields.certifiedCopyOfFormationDocument.cost) +
+      Number.parseInt(Config.formation.fields.officialFormationDocument.cost);
 
     expect(screen.getByText(getDollarValue(expectedTotalCost))).toBeInTheDocument();
     await page.submitBillingStep();
@@ -645,7 +633,7 @@ describe("<BusinessFormation />", () => {
     page.fillText("Address zip code", "0800231");
     page.fillText("Address country", "Canada");
     page.fillText("Address province", "Quebec");
-    fireEvent.click(screen.getByText(Config.businessFormationDefaults.businessPurposeAddButtonText));
+    fireEvent.click(screen.getByText(Config.formation.fields.businessPurpose.addButtonText));
     page.fillText("Business purpose", "to take over the world");
 
     await page.submitBusinessStep();
@@ -678,20 +666,17 @@ describe("<BusinessFormation />", () => {
     page.fillText("Contact last name", "Smith");
     page.fillText("Contact phone number", "123A45a678 90");
     fireEvent.click(screen.getByLabelText("Credit card"));
-    page.selectCheckbox(Config.businessFormationDefaults.optInCorpWatchText);
-    page.selectCheckbox(
-      `${displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.contentMd} ${displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.optionalLabel}`
-    );
-    page.selectCheckbox(
-      `${displayContent.formationDisplayContentMap[legalStructureId].certifiedCopyOfFormationDocument.contentMd} ${displayContent.formationDisplayContentMap[legalStructureId].certifiedCopyOfFormationDocument.optionalLabel}`
-    );
+    page.selectCheckbox(Config.formation.fields.corpWatchNotification.checkboxText);
+
+    page.selectCheckboxByTestId("certificateOfStanding");
+    page.selectCheckboxByTestId("certifiedCopyOfFormationDocument");
 
     const expectedTotalCost =
-      displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.cost +
-      displayContent.formationDisplayContentMap[legalStructureId].certifiedCopyOfFormationDocument.cost +
-      displayContent.formationDisplayContentMap[legalStructureId].officialFormationDocument.cost;
-
+      Number.parseInt(Config.formation.fields.certificateOfStanding.cost) +
+      Number.parseInt(Config.formation.fields.certifiedCopyOfFormationDocument.cost) +
+      Number.parseInt(Config.formation.fields.officialFormationDocument.cost);
     expect(screen.getByText(getDollarValue(expectedTotalCost))).toBeInTheDocument();
+
     await page.submitBillingStep();
     await page.submitReviewStep();
 
@@ -757,7 +742,7 @@ describe("<BusinessFormation />", () => {
     page.fillText("Address line2", "Suite 304");
     page.fillText("Address zip code", "08001");
     page.selectByText("Address municipality", "Newark");
-    fireEvent.click(screen.getByText(Config.businessFormationDefaults.businessPurposeAddButtonText));
+    fireEvent.click(screen.getByText(Config.formation.fields.businessPurpose.addButtonText));
     page.fillText("Business purpose", "to take over the world");
     page.fillText("Withdrawals", "to withdrawals over the world");
     page.fillText("Combined investment", "to invest over the world");
@@ -810,18 +795,15 @@ describe("<BusinessFormation />", () => {
     page.fillText("Contact last name", "Smith");
     page.fillText("Contact phone number", "123A45a678 90");
     fireEvent.click(screen.getByLabelText("Credit card"));
-    page.selectCheckbox(Config.businessFormationDefaults.optInCorpWatchText);
-    page.selectCheckbox(
-      `${displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.contentMd} ${displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.optionalLabel}`
-    );
-    page.selectCheckbox(
-      `${displayContent.formationDisplayContentMap[legalStructureId].certifiedCopyOfFormationDocument.contentMd} ${displayContent.formationDisplayContentMap[legalStructureId].certifiedCopyOfFormationDocument.optionalLabel}`
-    );
+    page.selectCheckbox(Config.formation.fields.corpWatchNotification.checkboxText);
+
+    page.selectCheckboxByTestId("certificateOfStanding");
+    page.selectCheckboxByTestId("certifiedCopyOfFormationDocument");
 
     const expectedTotalCost =
-      displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.cost +
-      displayContent.formationDisplayContentMap[legalStructureId].certifiedCopyOfFormationDocument.cost +
-      displayContent.formationDisplayContentMap[legalStructureId].officialFormationDocument.cost;
+      Number.parseInt(Config.formation.fields.certificateOfStanding.overrides["limited-partnership"].cost) +
+      Number.parseInt(Config.formation.fields.certifiedCopyOfFormationDocument.cost) +
+      Number.parseInt(Config.formation.fields.officialFormationDocument.cost);
 
     expect(screen.getByText(getDollarValue(expectedTotalCost))).toBeInTheDocument();
     await page.submitBillingStep();
@@ -901,7 +883,7 @@ describe("<BusinessFormation />", () => {
     page.fillText("Address line2", "Suite 304");
     page.fillText("Address zip code", "08001");
     page.selectByText("Address municipality", "Newark");
-    fireEvent.click(screen.getByText(Config.businessFormationDefaults.businessPurposeAddButtonText));
+    fireEvent.click(screen.getByText(Config.formation.fields.businessPurpose.addButtonText));
     page.fillText("Business purpose", "to take over the world");
 
     await page.submitBusinessStep();
@@ -935,20 +917,18 @@ describe("<BusinessFormation />", () => {
     page.fillText("Contact last name", "Smith");
     page.fillText("Contact phone number", "123A45a678 90");
     fireEvent.click(screen.getByLabelText("Credit card"));
-    page.selectCheckbox(Config.businessFormationDefaults.optInCorpWatchText);
-    page.selectCheckbox(
-      `${displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.contentMd} ${displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.optionalLabel}`
-    );
-    page.selectCheckbox(
-      `${displayContent.formationDisplayContentMap[legalStructureId].certifiedCopyOfFormationDocument.contentMd} ${displayContent.formationDisplayContentMap[legalStructureId].certifiedCopyOfFormationDocument.optionalLabel}`
-    );
+    page.selectCheckbox(Config.formation.fields.corpWatchNotification.checkboxText);
+
+    page.selectCheckboxByTestId("certificateOfStanding");
+    page.selectCheckboxByTestId("certifiedCopyOfFormationDocument");
 
     const expectedTotalCost =
-      displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.cost +
-      displayContent.formationDisplayContentMap[legalStructureId].certifiedCopyOfFormationDocument.cost +
-      displayContent.formationDisplayContentMap[legalStructureId].officialFormationDocument.cost;
+      Number.parseInt(Config.formation.fields.certificateOfStanding.overrides["c-corporation"].cost) +
+      Number.parseInt(Config.formation.fields.certifiedCopyOfFormationDocument.cost) +
+      Number.parseInt(Config.formation.fields.officialFormationDocument.cost);
 
     expect(screen.getByText(getDollarValue(expectedTotalCost))).toBeInTheDocument();
+
     await page.submitBillingStep();
     await page.submitReviewStep();
 

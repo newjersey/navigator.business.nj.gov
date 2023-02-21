@@ -6,8 +6,8 @@ import { RegisteredAgent } from "@/components/tasks/business-formation/contacts/
 import { Signatures } from "@/components/tasks/business-formation/contacts/Signatures";
 import { getErrorStateForField } from "@/components/tasks/business-formation/getErrorStateForField";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
-import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import {
   corpLegalStructures,
   createEmptyFormationIncorporator,
@@ -17,6 +17,7 @@ import {
 import { ReactElement, useContext } from "react";
 
 export const ContactsStep = (): ReactElement => {
+  const { Config } = useConfig();
   const { state, setFormationFormData } = useContext(BusinessFormationContext);
   const { doesFieldHaveError } = useFormationErrors();
 
@@ -36,10 +37,7 @@ export const ContactsStep = (): ReactElement => {
             <hr className="margin-top-0 margin-bottom-3" />
             {doesFieldHaveError("members") && (
               <Alert variant="error">
-                {
-                  getErrorStateForField("members", state.formationFormData, undefined, state.displayContent)
-                    .label
-                }
+                {getErrorStateForField("members", state.formationFormData, undefined).label}
               </Alert>
             )}
             <Members />
@@ -48,15 +46,12 @@ export const ContactsStep = (): ReactElement => {
         <hr className="margin-top-0 margin-bottom-3" />
         {doesFieldHaveError("signers") && (
           <Alert variant="error">
-            {getErrorStateForField("signers", state.formationFormData, undefined, state.displayContent).label}
+            {getErrorStateForField("signers", state.formationFormData, undefined).label}
           </Alert>
         )}
         {doesFieldHaveError("incorporators") && (
           <Alert variant="error">
-            {
-              getErrorStateForField("incorporators", state.formationFormData, undefined, state.displayContent)
-                .label
-            }
+            {getErrorStateForField("incorporators", state.formationFormData, undefined).label}
           </Alert>
         )}
         {incorporationLegalStructures.includes(state.formationFormData.legalType) ? (
@@ -94,11 +89,11 @@ export const ContactsStep = (): ReactElement => {
             displayContent={{
               contentMd: state.displayContent.signatureHeader.contentMd,
               placeholder: state.displayContent.signatureHeader.placeholder ?? "",
-              newButtonText: Config.businessFormationDefaults.addNewSignerButtonText,
-              alertHeader: Config.businessFormationDefaults.incorporatorsSuccessTextHeader,
-              alertBody: Config.businessFormationDefaults.incorporatorsSuccessTextBody,
-              title: Config.businessFormationDefaults.incorporatorsModalTitle,
-              saveButton: Config.businessFormationDefaults.incorporatorsModalNextButtonText,
+              newButtonText: Config.formation.fields.incorporators.addButtonText,
+              alertHeader: Config.formation.fields.incorporators.successSnackbarHeader,
+              alertBody: Config.formation.fields.incorporators.successSnackbarBody,
+              title: Config.formation.fields.incorporators.modalTitle,
+              saveButton: Config.formation.fields.incorporators.addButtonText,
             }}
           />
         ) : (
