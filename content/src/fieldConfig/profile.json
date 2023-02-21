@@ -156,7 +156,9 @@
       },
       "nexusDbaName": {
         "default": {
-          "header": "Doing Business As (DBA) New Jersey Business Name"
+          "header": "Doing Business As (DBA) New Jersey Business Name",
+          "description": "What is your DBA name?",
+          "errorTextRequired": "Please enter your DBA name."
         }
       },
       "employmentAgency": {
