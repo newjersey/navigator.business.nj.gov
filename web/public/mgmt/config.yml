@@ -3797,6 +3797,8 @@ collections:
                         widget: object
                         fields:
                           - { label: "Header", name: "header", widget: "string" }
+                          - { label: "Description", name: "description", widget: "string" }
+                          - { label: "Error Text", name: "errorTextRequired", widget: "string" }
                   - label: Tax ID
                     name: taxId
                     collapsed: true
