@@ -1,3 +1,81 @@
+# [5.13.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.12.0...v5.13.0) (2023-02-21)
+
+
+### Bug Fixes
+
+* [[#183677932](https://github.com/newjersey/navigator.business.nj.gov/issues/183677932)] tax id show/hide hover and split field width in profile ([43a11d8](https://github.com/newjersey/navigator.business.nj.gov/commit/43a11d85f54ff139ed2bf198ee667188b8301934))
+* [[#183901658](https://github.com/newjersey/navigator.business.nj.gov/issues/183901658)] calendar year selector visual treatments ([e2c2bdd](https://github.com/newjersey/navigator.business.nj.gov/commit/e2c2bddfa2318734cd504c721ee6b21655238868))
+* [[#184162422](https://github.com/newjersey/navigator.business.nj.gov/issues/184162422)] add env vars to next.config for basic auth ([e851211](https://github.com/newjersey/navigator.business.nj.gov/commit/e851211e10b5dcce759f73dac0457bbd14f1154b))
+* [[#184417845](https://github.com/newjersey/navigator.business.nj.gov/issues/184417845)] update config reference for postal code error message ([e16d3e1](https://github.com/newjersey/navigator.business.nj.gov/commit/e16d3e1d3269508ca7c3054471e3d445fad47cbf))
+* adding missing function for user_uuid field in intercom ([c4348e2](https://github.com/newjersey/navigator.business.nj.gov/commit/c4348e278ae842dc6d88153923051fb0a5ceab6f))
+* basic auth ecs breaking fix ([c09e36d](https://github.com/newjersey/navigator.business.nj.gov/commit/c09e36d9e38487d3d23894a7ad76f343bd007d3f))
+* **deps:** update aws-amplify ([90c4111](https://github.com/newjersey/navigator.business.nj.gov/commit/90c4111de85c31572e2a439d39789438470eda07))
+* **deps:** update aws-amplify ([b1f95e4](https://github.com/newjersey/navigator.business.nj.gov/commit/b1f95e4dbc8eb39ad8f1df858012cdb51842b7fe))
+* **deps:** update aws-sdk ([6dbe03f](https://github.com/newjersey/navigator.business.nj.gov/commit/6dbe03f8f39c0cebbb85bc26d0ef834205af1d4e))
+* **deps:** update aws-sdk to v3.264.0 ([cf7c71b](https://github.com/newjersey/navigator.business.nj.gov/commit/cf7c71b63a815a79123f3c9d10ac5a1e40390119))
+* **deps:** update aws-sdk to v3.266.0 ([555aa64](https://github.com/newjersey/navigator.business.nj.gov/commit/555aa64447212a7a578e39111a5890370daa7c4f))
+* **deps:** update aws-sdk to v3.266.1 ([79bfa64](https://github.com/newjersey/navigator.business.nj.gov/commit/79bfa640d88cd59ebbf99702320d7c05e12aea95))
+* **deps:** update aws-sdk to v3.271.0 ([8d837e5](https://github.com/newjersey/navigator.business.nj.gov/commit/8d837e57b05494c9b5d96cfb9bd21300d7315e78))
+* **deps:** update aws-sdk to v3.272.0 ([35d6ffa](https://github.com/newjersey/navigator.business.nj.gov/commit/35d6ffa3e3e7ca6a01a7cf8eb65addf32f69cd1a))
+* **deps:** update dependency @mui/x-date-pickers to v5.0.19 ([282bf28](https://github.com/newjersey/navigator.business.nj.gov/commit/282bf283e28837783fe6a5d8b5694c10ab8012cb))
+* **deps:** update dependency focus-trap-react to v10.1.0 ([2da512e](https://github.com/newjersey/navigator.business.nj.gov/commit/2da512ec51039ee46ea3ce554a779090125087f6))
+* **deps:** update emotion monorepo to v11.10.6 ([62d206a](https://github.com/newjersey/navigator.business.nj.gov/commit/62d206ad5e5605f5b36bf362af8141a871cf5d29))
+* **deps:** update material-ui ([b0056f7](https://github.com/newjersey/navigator.business.nj.gov/commit/b0056f747afa2fab9a5bc8d0c2843b8ad58a4012))
+* hiding year selector when calendar is empty ([608f851](https://github.com/newjersey/navigator.business.nj.gov/commit/608f851f8d6a2da7a5b7ee1bb9fa593239ae7d28))
+* link mistake in nj-trade-expansion-program funding ([8966398](https://github.com/newjersey/navigator.business.nj.gov/commit/8966398185435f424c1f6ca5adfdb6ed74c21362))
+* updating Cert Opps - Content dvob ([#5098](https://github.com/newjersey/navigator.business.nj.gov/issues/5098)) ([810238a](https://github.com/newjersey/navigator.business.nj.gov/commit/810238ad38967c37d000ed66ed4dd305d3534ddd))
+* updating Cert Opps - Content mwbe ([#5243](https://github.com/newjersey/navigator.business.nj.gov/issues/5243)) ([3663b51](https://github.com/newjersey/navigator.business.nj.gov/commit/3663b5129289443c2882965ab9bf508cdf56606b))
+* updating Cert Opps - Content sbe ([#5242](https://github.com/newjersey/navigator.business.nj.gov/issues/5242)) ([c3982a6](https://github.com/newjersey/navigator.business.nj.gov/commit/c3982a6b1c92b3bee7a1130b3779a5b0c9de55af))
+* updating Cert Opps - Content veteran-owned-business ([#5241](https://github.com/newjersey/navigator.business.nj.gov/issues/5241)) ([9ca7d5b](https://github.com/newjersey/navigator.business.nj.gov/commit/9ca7d5b29760342e970194f0518331296f91c171))
+* updating Contextual Information reserved-words ([#5238](https://github.com/newjersey/navigator.business.nj.gov/issues/5238)) ([8c3000e](https://github.com/newjersey/navigator.business.nj.gov/commit/8c3000e2815461fcbd1f71076fc329cc9cf52057))
+* updating Contextual Information reserved-words ([#5263](https://github.com/newjersey/navigator.business.nj.gov/issues/5263)) ([e072136](https://github.com/newjersey/navigator.business.nj.gov/commit/e0721369fece88e8c0553273f19ef88f39c365b2))
+* updating Contextual Information reserved-words ([#5265](https://github.com/newjersey/navigator.business.nj.gov/issues/5265)) ([755934b](https://github.com/newjersey/navigator.business.nj.gov/commit/755934b1bf096958a3d75a914f3140e8d1a7688c))
+* updating General Config config ([#5202](https://github.com/newjersey/navigator.business.nj.gov/issues/5202)) ([bcbe24f](https://github.com/newjersey/navigator.business.nj.gov/commit/bcbe24fcfec3d0b98159e02bc4653cce89cf2b1a))
+* updating Profile Page profile-fields ([#5207](https://github.com/newjersey/navigator.business.nj.gov/issues/5207)) ([e86a62e](https://github.com/newjersey/navigator.business.nj.gov/commit/e86a62ec52d9af6bae4e2aeec7ea3f35cc6194b4))
+* updating Profile Page profile-fields ([#5245](https://github.com/newjersey/navigator.business.nj.gov/issues/5245)) ([55fbbe3](https://github.com/newjersey/navigator.business.nj.gov/commit/55fbbe3855c26c85ae7843f312f2470409e75967))
+* updating Roadmaps - Settings steps ([#5208](https://github.com/newjersey/navigator.business.nj.gov/issues/5208)) ([c29f9ea](https://github.com/newjersey/navigator.business.nj.gov/commit/c29f9ea1d277a1b88dda01714857364cc45d42aa))
+* updating Roadmaps - Settings steps ([#5212](https://github.com/newjersey/navigator.business.nj.gov/issues/5212)) ([a90fc10](https://github.com/newjersey/navigator.business.nj.gov/commit/a90fc1065fad20219e4a225107d2c4fa1535ac25))
+* updating Roadmaps - Settings steps ([#5226](https://github.com/newjersey/navigator.business.nj.gov/issues/5226)) ([cb9f966](https://github.com/newjersey/navigator.business.nj.gov/commit/cb9f9660f2dd9671c6589f78bb832fae6db0b963))
+* updating Roadmaps - Settings steps ([#5228](https://github.com/newjersey/navigator.business.nj.gov/issues/5228)) ([96ec375](https://github.com/newjersey/navigator.business.nj.gov/commit/96ec375df9b00ad635b85f797ed445409974b647))
+* updating Roadmaps - Settings task-dependencies ([#5200](https://github.com/newjersey/navigator.business.nj.gov/issues/5200)) ([dd7f0d8](https://github.com/newjersey/navigator.business.nj.gov/commit/dd7f0d82abd64f1adb8800d774a4bbdf0843f83f))
+* updating Sidebar Cards Content task-progress ([#5210](https://github.com/newjersey/navigator.business.nj.gov/issues/5210)) ([d690726](https://github.com/newjersey/navigator.business.nj.gov/commit/d690726c93f4a57b0bbe26415996a4f5a374c0db))
+* updating Sidebar Cards Content task-progress ([#5211](https://github.com/newjersey/navigator.business.nj.gov/issues/5211)) ([d678e59](https://github.com/newjersey/navigator.business.nj.gov/commit/d678e59d9a8c08ac2e5e3b97ccc71d9e6786bfa5))
+* updating Sidebar Cards Content task-progress ([#5229](https://github.com/newjersey/navigator.business.nj.gov/issues/5229)) ([514c599](https://github.com/newjersey/navigator.business.nj.gov/commit/514c599065dd786c8cac74213c32b4192e7f7808))
+* updating Sidebar Cards Content welcome ([#5209](https://github.com/newjersey/navigator.business.nj.gov/issues/5209)) ([a384b74](https://github.com/newjersey/navigator.business.nj.gov/commit/a384b748f9ceaf564e16df4dfd8610d3d16a5524))
+* updating Tasks - All apply-for-shop-license ([#5271](https://github.com/newjersey/navigator.business.nj.gov/issues/5271)) ([d980914](https://github.com/newjersey/navigator.business.nj.gov/commit/d980914eb655657c125b614af9efc896124d0a6d))
+* updating Tasks - All license-accounting ([#5274](https://github.com/newjersey/navigator.business.nj.gov/issues/5274)) ([7b7ce5f](https://github.com/newjersey/navigator.business.nj.gov/commit/7b7ce5fcd37f16e301b572455a7009c14fdd93f0))
+* updating Tasks - All license-massage-therapy ([#5273](https://github.com/newjersey/navigator.business.nj.gov/issues/5273)) ([5509f8e](https://github.com/newjersey/navigator.business.nj.gov/commit/5509f8e781389378c9f71056151ea383dc8fbbfc))
+* updating Tasks - All pharmacy-license ([#5272](https://github.com/newjersey/navigator.business.nj.gov/issues/5272)) ([fe72c2d](https://github.com/newjersey/navigator.business.nj.gov/commit/fe72c2d243c39fbb2bcaa44bffa4f186c94db918))
+* updating Tasks - All register-consumer-affairs ([#5270](https://github.com/newjersey/navigator.business.nj.gov/issues/5270)) ([9049f9b](https://github.com/newjersey/navigator.business.nj.gov/commit/9049f9b99564280c97c6392d8047e1eff0df7e99))
+* upgrading to the npm installation of the njwds ([3d09e6b](https://github.com/newjersey/navigator.business.nj.gov/commit/3d09e6bc5ceabce7b51411bed0d19e9053c2e4bd))
+* yarn lock file ([e462c43](https://github.com/newjersey/navigator.business.nj.gov/commit/e462c43302b79299a7f83bbf3408a59a4e528ed7))
+
+
+### Features
+
+* [[#183448263](https://github.com/newjersey/navigator.business.nj.gov/issues/183448263)] add max length validation for address line 2 in modal ([e0eff4c](https://github.com/newjersey/navigator.business.nj.gov/commit/e0eff4cf3e14b8cc29b146179ae598e899d78951))
+* [[#183448263](https://github.com/newjersey/navigator.business.nj.gov/issues/183448263)] add max length validation for address modal ([e6eefcb](https://github.com/newjersey/navigator.business.nj.gov/commit/e6eefcb8f79a2631672cbb5a8865db9476f0e10f))
+* [[#183448263](https://github.com/newjersey/navigator.business.nj.gov/issues/183448263)] add max length validation for simple text fields ([3e82676](https://github.com/newjersey/navigator.business.nj.gov/commit/3e82676ebe68401ff7778945e713c0ca87070df9))
+* [[#183448263](https://github.com/newjersey/navigator.business.nj.gov/issues/183448263)] add validation for address2 in non-modal fields ([512741e](https://github.com/newjersey/navigator.business.nj.gov/commit/512741e3b73f287ca16e799bc12548fe0b210408))
+* [[#183448263](https://github.com/newjersey/navigator.business.nj.gov/issues/183448263)] max length validation for internation city/province ([a4b05af](https://github.com/newjersey/navigator.business.nj.gov/commit/a4b05af5feea7fb68b9d85e28ed02e4897ae62c1))
+* [[#183448263](https://github.com/newjersey/navigator.business.nj.gov/issues/183448263)] max length validation for signer name ([2e7f940](https://github.com/newjersey/navigator.business.nj.gov/commit/2e7f940bbf336c6d372c493168711eec93fe4f2a))
+* [[#183677932](https://github.com/newjersey/navigator.business.nj.gov/issues/183677932)] tax encryption v2 ([a96b763](https://github.com/newjersey/navigator.business.nj.gov/commit/a96b763e5f8f37d0d5cbea662fc02a86e2798f6c))
+* [[#183901987](https://github.com/newjersey/navigator.business.nj.gov/issues/183901987)] add add'l dakota business types for onboarding ([8462c8c](https://github.com/newjersey/navigator.business.nj.gov/commit/8462c8c8e4f93d736f7889e1f91d88d5d469bbc0))
+* [[#183959967](https://github.com/newjersey/navigator.business.nj.gov/issues/183959967)] Adding multi-select for m/wbe options in Funding Tasks ([81b0679](https://github.com/newjersey/navigator.business.nj.gov/commit/81b0679818dadaaba6ea0652c7aad8bc6a7da657))
+* [[#183959967](https://github.com/newjersey/navigator.business.nj.gov/issues/183959967)] change select to multi select for fundings in cms ([26e9679](https://github.com/newjersey/navigator.business.nj.gov/commit/26e9679a7797a016f9dc4c650f57210fa3d29f37))
+* [[#184170718](https://github.com/newjersey/navigator.business.nj.gov/issues/184170718)] lock taxId after calendar success ([4808ac7](https://github.com/newjersey/navigator.business.nj.gov/commit/4808ac7c624e674bc4aa76f8f5001c2364fc79db))
+* [[#184198507](https://github.com/newjersey/navigator.business.nj.gov/issues/184198507)] add industry and local task labels for task details ([35d1368](https://github.com/newjersey/navigator.business.nj.gov/commit/35d13689e9530fa786611ba2ebb1a2fedd1c6557))
+* [[#184371794](https://github.com/newjersey/navigator.business.nj.gov/issues/184371794)] hide formation date input in profile for trade name businesses ([f81d366](https://github.com/newjersey/navigator.business.nj.gov/commit/f81d366fe3b8e09347c3f44b5d9fc040230210ba))
+* [[#184442335](https://github.com/newjersey/navigator.business.nj.gov/issues/184442335)] Send userId to intercom ([15c9c6f](https://github.com/newjersey/navigator.business.nj.gov/commit/15c9c6f0e6763a071936faac732acec3e3d55227))
+* calendar year picker ([21d5d9c](https://github.com/newjersey/navigator.business.nj.gov/commit/21d5d9c4373efca7590dfe4ae6cad2b4c81bccaa))
+* restricted name search error mode ([1f6a6cf](https://github.com/newjersey/navigator.business.nj.gov/commit/1f6a6cfc4f8f9123379b708aac3166950dd91172))
+
+
+### Reverts
+
+* Revert "chore: roll back basic auth" ([1b3bf0c](https://github.com/newjersey/navigator.business.nj.gov/commit/1b3bf0c405bb3e023b0097205454ea651e89066b))
+* Revert "chore: upgrade node to 18.13.0" ([110005d](https://github.com/newjersey/navigator.business.nj.gov/commit/110005d5d8d409bed5a9128f1a2ae5fc7cd5a2cd))
+
 # [5.12.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.11.2...v5.12.0) (2023-02-02)
 
 

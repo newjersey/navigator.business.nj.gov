@@ -1,7 +1,5 @@
-import {
-  filterCertifications,
-  LARGE_BUSINESS_MIN_EMPLOYEE_COUNT,
-} from "@/lib/domain-logic/filterCertifications";
+import { filterCertifications } from "@/lib/domain-logic/filterCertifications";
+import { SMALL_BUSINESS_MAX_EMPLOYEE_COUNT } from "@/lib/domain-logic/smallBusinessEnterprise";
 import { generateCertification, generateProfileData, generateUserData } from "@/test/factories";
 import { ProfileData, UserData } from "@businessnjgovnavigator/shared/";
 
@@ -10,7 +8,7 @@ describe("filterCertifications", () => {
     return generateUserData({
       profileData: generateProfileData({
         ownershipTypeIds: [],
-        existingEmployees: String(LARGE_BUSINESS_MIN_EMPLOYEE_COUNT),
+        existingEmployees: String(SMALL_BUSINESS_MAX_EMPLOYEE_COUNT),
         ...overrides,
       }),
     });
@@ -88,7 +86,7 @@ describe("filterCertifications", () => {
   });
 
   it("returns filtered certification when number of employees is less than 120", () => {
-    const userData = defaultProfileData({ existingEmployees: String(LARGE_BUSINESS_MIN_EMPLOYEE_COUNT - 1) });
+    const userData = defaultProfileData({ existingEmployees: String(SMALL_BUSINESS_MAX_EMPLOYEE_COUNT - 1) });
 
     const cert1 = generateCertification({ isSbe: true, applicableOwnershipTypes: [] });
     const results = filterCertifications([cert1], userData);
@@ -117,7 +115,7 @@ describe("filterCertifications", () => {
   it("returns filtered certifications for disabled-veteran / veteran-owned combo and SBE Certification", () => {
     const userData = defaultProfileData({
       ownershipTypeIds: ["veteran-owned", "disabled-veteran"],
-      existingEmployees: String(LARGE_BUSINESS_MIN_EMPLOYEE_COUNT - 1),
+      existingEmployees: String(SMALL_BUSINESS_MAX_EMPLOYEE_COUNT - 1),
     });
 
     const cert1 = generateCertification({ applicableOwnershipTypes: ["veteran-owned"] });

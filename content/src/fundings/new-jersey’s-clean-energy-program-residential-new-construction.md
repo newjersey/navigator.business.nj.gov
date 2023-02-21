@@ -21,8 +21,7 @@ agencyContact: Outreach@NJCleanEnergy.com
 businessStage: both
 employeesRequired: n/a
 homeBased: yes
-mwvb:
-  - n/a
+certifications: null
 preferenceForOpportunityZone: no
 county:
   - All

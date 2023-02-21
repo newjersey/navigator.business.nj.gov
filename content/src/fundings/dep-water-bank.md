@@ -16,8 +16,7 @@ programFrequency: ongoing
 businessStage: both
 employeesRequired: n/a
 homeBased: yes
-mwvb:
-  - n/a
+certifications: null
 preferenceForOpportunityZone: no
 county:
   - All

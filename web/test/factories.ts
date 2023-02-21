@@ -7,6 +7,7 @@ import {
   FormationDisplayContentMap,
   Funding,
   FundingBusinessStage,
+  FundingCertifications,
   FundingHomeBased,
   FundingProgramFrequency,
   FundingStatus,
@@ -545,6 +546,20 @@ export const generateGetFilingResponse = (overrides: Partial<GetFilingResponse>)
   };
 };
 
+export const randomFundingCertification = (): FundingCertifications => {
+  const all = [
+    "woman-owned",
+    "minority-owned",
+    "veteran-owned",
+    "disabled-veteran",
+    "small-business-enterprise",
+    "disadvantaged-business-enterprise",
+    "emerging-small-business-enterprise",
+  ];
+  const randomIndex = Math.floor(Math.random() * all.length);
+  return all[randomIndex] as FundingCertifications;
+};
+
 export const generateFunding = (overrides: Partial<Funding>): Funding => {
   return {
     id: `some-id-${randomInt()}`,
@@ -565,7 +580,7 @@ export const generateFunding = (overrides: Partial<Funding>): Funding => {
     businessStage: randomFundingBusinessStage(),
     employeesRequired: ">200",
     homeBased: randomFundingHomeBased(),
-    mwvb: `some-mwvb-${randomInt()}`,
+    certifications: [randomFundingCertification()],
     preferenceForOpportunityZone: null,
     county: [randomCounty()],
     sector: [randomSector().id],

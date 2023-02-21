@@ -37,7 +37,7 @@ export const exportFundings = () => {
   const fundings = loadAllFundings();
   const writeStream = fs.createWriteStream("fundings.csv");
   writeStream.write(
-    `id,name,filename,urlSlug,callToActionLink,callToActionText,fundingType,programPurpose,agency,agencyContact,publishStageArchive,openDate,dueDate,status,programFrequency,businessStage,employeesRequired,homeBased,mwvb,preferenceForOpportunityZone,county,sector,contentMd\n`
+    `id,name,filename,urlSlug,callToActionLink,callToActionText,fundingType,programPurpose,agency,agencyContact,publishStageArchive,openDate,dueDate,status,programFrequency,businessStage,employeesRequired,homeBased,certifications,preferenceForOpportunityZone,county,sector,contentMd\n`
   );
   for (const funding of fundings) {
     writeStream.write(
@@ -49,7 +49,7 @@ export const exportFundings = () => {
         funding.dueDate
       }","${funding.status}","${funding.programFrequency}","${funding.businessStage}","${
         funding.employeesRequired
-      }","${funding.homeBased}","${funding.mwvb}","${funding.preferenceForOpportunityZone}","${
+      }","${funding.homeBased}","${funding.certifications}","${funding.preferenceForOpportunityZone}","${
         funding.county
       }","${funding.sector}","${funding.contentMd.trim()}"\n`
     );
@@ -57,7 +57,7 @@ export const exportFundings = () => {
 };
 
 // eslint-disable-next-line no-undef
-if (!process.argv.some((i) => i.includes("fundingExport")) || process.env.NODE_ENV == "test") {
+if (!process.argv.some((i) => i.includes("fundingExport")) || process.env.NODE_ENV === "test") {
   // eslint-disable-next-line no-undef
 } else if (process.argv.some((i) => i.includes("--export"))) {
   exportFundings();

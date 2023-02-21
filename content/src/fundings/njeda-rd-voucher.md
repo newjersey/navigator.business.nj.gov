@@ -16,8 +16,7 @@ programFrequency: pilot
 businessStage: early-stage
 employeesRequired: yes
 homeBased: no
-mwvb:
-  - n/a
+certifications: null
 preferenceForOpportunityZone: no
 county:
   - All

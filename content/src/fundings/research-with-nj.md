@@ -23,8 +23,7 @@ agencyContact: ""
 businessStage: both
 employeesRequired: n/a
 homeBased: unknown
-mwvb:
-  - n/a
+certifications: null
 preferenceForOpportunityZone: ""
 county:
   - All

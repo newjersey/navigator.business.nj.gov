@@ -232,6 +232,15 @@ export type RoadmapDisplayContent = {
 export const defaultDisplayDateFormat = "MM/DD/YYYY";
 export const defaultMarkdownDateFormat = "MM/DD/YYYY";
 
+export type FundingCertifications =
+  | "woman-owned"
+  | "minority-owned"
+  | "veteran-owned"
+  | "disabled-veteran"
+  | "small-business-enterprise"
+  | "disadvantaged-business-enterprise"
+  | "emerging-small-business-enterprise";
+
 export type Funding = {
   id: string;
   filename: string;
@@ -251,7 +260,7 @@ export type Funding = {
   businessStage: FundingBusinessStage;
   employeesRequired: string;
   homeBased: FundingHomeBased;
-  mwvb: string;
+  certifications: FundingCertifications[] | null;
   preferenceForOpportunityZone: FundingpreferenceForOpportunityZone | null;
   county: County[];
   sector: string[];
