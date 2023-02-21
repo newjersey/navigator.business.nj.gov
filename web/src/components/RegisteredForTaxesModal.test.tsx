@@ -206,6 +206,23 @@ describe("<RegisteredForTaxesModal />", () => {
         markdownToText(Config.profileDefaults.fields.taxId.default.disclaimerMd)
       );
     });
+
+    it("does not show the dba name field for dakota nexus", () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          legalStructureId: randomTradeNameLegalStructure(),
+          businessPersona: "FOREIGN",
+          foreignBusinessType: "NEXUS",
+          nexusDbaName: "",
+          needsNexusDbaName: true,
+        }),
+      });
+
+      renderComponent(userData);
+      expect(
+        screen.queryByText(Config.profileDefaults.fields.nexusDbaName.default.header)
+      ).not.toBeInTheDocument();
+    });
   });
 
   describe("when public filing legal structure", () => {
@@ -348,6 +365,57 @@ describe("<RegisteredForTaxesModal />", () => {
       expect(currentUserData().profileData.ownershipTypeIds).toEqual(["disabled-veteran"]);
       expect(currentUserData().profileData.businessName).toEqual("my cool coffeeshop");
       expect(currentUserData().profileData.taxId).toEqual("123456789012");
+    });
+
+    it("shows the dba name field for dakota nexus when it needs to be inputted", () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          legalStructureId: randomPublicFilingLegalStructure(),
+          foreignBusinessType: "NEXUS",
+          businessPersona: "FOREIGN",
+          nexusDbaName: "",
+          needsNexusDbaName: true,
+        }),
+      });
+
+      renderComponent(userData);
+      expect(
+        screen.getByText(markdownToText(Config.profileDefaults.fields.nexusDbaName.default.header))
+      ).toBeInTheDocument();
+    });
+
+    it("doesn't not show the dba name field for dakota nexus if nexusDbaName is not needed", () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          businessPersona: "FOREIGN",
+          legalStructureId: randomPublicFilingLegalStructure(),
+          foreignBusinessType: "NEXUS",
+          nexusDbaName: "",
+          needsNexusDbaName: false,
+        }),
+      });
+
+      renderComponent(userData);
+      expect(
+        screen.queryByText(markdownToText(Config.profileDefaults.fields.nexusDbaName.default.header))
+      ).not.toBeInTheDocument();
+    });
+
+    it("doesn't not show the dba name field for dakota nexus if nexusDbaName is populated", () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          businessPersona: "FOREIGN",
+          legalStructureId: randomPublicFilingLegalStructure(),
+          foreignBusinessType: "NEXUS",
+          nexusDbaName: "my-dba-name",
+          needsNexusDbaName: true,
+        }),
+      });
+
+      renderComponent(userData);
+      expect(
+        screen.queryByText(markdownToText(Config.profileDefaults.fields.nexusDbaName.default.header))
+      ).not.toBeInTheDocument();
     });
 
     describe("tax id", () => {

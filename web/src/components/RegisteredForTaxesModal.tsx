@@ -6,6 +6,7 @@ import { OnboardingExistingEmployees } from "@/components/onboarding/OnboardingE
 import { OnboardingMunicipality } from "@/components/onboarding/OnboardingMunicipality";
 import { OnboardingOwnership } from "@/components/onboarding/OnboardingOwnership";
 import { OnboardingTaxId } from "@/components/onboarding/OnboardingTaxId";
+import { ProfileNexusDBANameField } from "@/components/onboarding/ProfileNexusDBANameField";
 import { TaxDisclaimer } from "@/components/TaxDisclaimer";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
@@ -99,6 +100,17 @@ export const RegisteredForTaxesModal = (props: Props): ReactElement => {
     return userData.profileData.municipality === undefined;
   };
 
+  const showDBAField = (): boolean => {
+    if (!userData) {
+      return false;
+    }
+    return (
+      userData.profileData.needsNexusDbaName &&
+      userData.profileData.nexusDbaName === "" &&
+      LookupLegalStructureById(userData?.profileData.legalStructureId).requiresPublicFiling
+    );
+  };
+
   return (
     <ProfileDataContext.Provider
       value={{
@@ -123,6 +135,14 @@ export const RegisteredForTaxesModal = (props: Props): ReactElement => {
         <div className="margin-bottom-3">
           <Content>{Config.registeredForTaxesModal.subtitle}</Content>
         </div>
+        {showDBAField() && (
+          <>
+            <WithErrorBar hasError={fieldStates.nexusDbaName.invalid} type="ALWAYS">
+              <FieldLabelModal fieldName="nexusDbaName" />
+              <ProfileNexusDBANameField onValidation={onValidation} fieldStates={fieldStates} required />
+            </WithErrorBar>
+          </>
+        )}
         {showBusinessField() && (
           <WithErrorBar hasError={fieldStates.businessName.invalid} type="ALWAYS">
             <FieldLabelModal fieldName="businessName" />
