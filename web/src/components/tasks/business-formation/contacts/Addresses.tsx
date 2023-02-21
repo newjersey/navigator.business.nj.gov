@@ -14,14 +14,16 @@ import { IconButton, useMediaQuery } from "@mui/material";
 import React, { ChangeEvent, ReactElement, useState } from "react";
 
 interface DisplayContent {
-  title: string;
-  defaultCheckbox?: string;
-  saveButton: string;
-  contentMd: string;
+  header: string;
+  subheader?: string;
+  description: string;
+  modalTitle: string;
+  modalSaveButton: string;
   placeholder: string;
   newButtonText: string;
-  alertHeader: string;
-  alertBody: string;
+  snackbarHeader: string;
+  snackbarBody: string;
+  defaultCheckbox?: string;
 }
 
 interface Props<T> {
@@ -269,21 +271,17 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
             return setAlert(undefined);
           }}
           dataTestid="snackbar-alert-success"
-          heading={props.displayContent.alertHeader}
+          heading={props.displayContent.snackbarHeader}
         >
-          {props.displayContent.alertBody}
+          {props.displayContent.snackbarBody}
         </SnackbarAlert>
       )}
       <div className={`margin-bottom-3 ${styles.membersTable}`} data-testid={`addresses-${props.fieldName}`}>
-        <Content
-          overrides={{
-            h3: ({ children }: { children: string[] }): ReactElement => {
-              return <h3 style={{ display: "inline" }}>{children}</h3>;
-            },
-          }}
-        >
-          {props.displayContent.contentMd}
-        </Content>
+        <h3 style={{ display: "inline" }}>{props.displayContent.header}</h3>
+        {props.displayContent.subheader && (
+          <div className="h6-styling margin-left-1">{props.displayContent.subheader}</div>
+        )}
+        <Content className="margin-top-1">{props.displayContent.description}</Content>
         <div>
           <WithErrorBar hasError={doesFieldHaveError(props.fieldName)} type="ALWAYS">
             {isTabletAndUp ? renderDesktopTable : renderMobileTable}

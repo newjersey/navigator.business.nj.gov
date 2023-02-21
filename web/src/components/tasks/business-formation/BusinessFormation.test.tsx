@@ -308,11 +308,7 @@ describe("<BusinessFormation />", () => {
       addressCountry: "US",
       businessLocationType: "US",
     };
-    expect(
-      screen.getByText(
-        displayContent.formationDisplayContentMap[legalStructureId].members.placeholder as string
-      )
-    ).toBeInTheDocument();
+    expect(screen.getByText(Config.formation.fields.members.placeholder)).toBeInTheDocument();
 
     await page.fillAndSubmitAddressModal(member, "members");
     page.fillText("Signer 0", "Elrond");
@@ -782,11 +778,7 @@ describe("<BusinessFormation />", () => {
       signature: false,
     };
 
-    expect(
-      screen.getByText(
-        displayContent.formationDisplayContentMap[legalStructureId].signatureHeader.placeholder as string
-      )
-    ).toBeInTheDocument();
+    expect(screen.getByText(Config.formation.fields.incorporators.placeholder)).toBeInTheDocument();
     await page.fillAndSubmitAddressModal(incorporators, "incorporators");
     page.checkSignerBox(0, "incorporators");
     await page.submitContactsStep();
@@ -896,18 +888,10 @@ describe("<BusinessFormation />", () => {
     page.selectByText("Agent office address municipality", "Newark");
     page.fillText("Agent office address zip code", "08002");
 
-    expect(
-      screen.getByText(
-        displayContent.formationDisplayContentMap[legalStructureId].members.placeholder as string
-      )
-    ).toBeInTheDocument();
+    expect(screen.getByText(Config.formation.fields.directors.placeholder)).toBeInTheDocument();
     await page.fillAndSubmitAddressModal(member, "members");
 
-    expect(
-      screen.getByText(
-        displayContent.formationDisplayContentMap[legalStructureId].signatureHeader.placeholder as string
-      )
-    ).toBeInTheDocument();
+    expect(screen.getByText(Config.formation.fields.incorporators.placeholder)).toBeInTheDocument();
     await page.fillAndSubmitAddressModal(member, "incorporators");
     page.checkSignerBox(0, "incorporators");
 

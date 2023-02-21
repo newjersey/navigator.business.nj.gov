@@ -230,6 +230,9 @@
         "checkboxText": "I want to sign up for CorpWatch Alerts to notify me when any charter document filing is performed for my business."
       },
       "directors": {
+        "header": "Board of Directors",
+        "subheader": "",
+        "description": "List each `Board of Directors’|board-directors` name and address. You need at least 1 and can have up to 10 Directors listed.\n\nBoard of Directors’ names are listed on the Certificate of Formation and will have the ability to file and sign documents.",
         "successSnackbarHeader": "Director Added",
         "successSnackbarBody": "A director has been added successfully.",
         "error": "Enter at least 1 director's name.",
@@ -237,7 +240,9 @@
         "reviewStepNameLabel": "**Director Name:**",
         "modalTitle": "Add New Director",
         "modalSaveButton": "Add Director",
-        "addButtonText": "Add new Director"
+        "addButtonText": "Add new Director",
+        "fieldDisplayName": "Directors",
+        "placeholder": "No Directors have been added"
       },
       "dissolution": {
         "fieldDisplayName": "Dissolution",
@@ -275,10 +280,21 @@
         "addButtonText": "Add Signer",
         "reviewStepHeader": "Signer(s)",
         "reviewStepNameLabel": "**Name:**",
-        "modalTitle": "Add New Signer"
+        "modalTitle": "Add New Signer",
+        "placeholder": "No Signers have been added",
+        "header": "Signers",
+        "description": "List each `Incorporators'|incorporator` name and address. You can have up to 10 Incorporators listed.\n\nIncorporators are listed on the Certificate of Formation and will have the ability to file and sign documents.",
+        "overrides": {
+          "limited-partnership": {
+            "description": "List each General Partners' name and address. You can have up to 10 General Partners listed.\n\nGeneral Partners are listed on the Certificate of Formation and will have the ability to file and sign documents."
+          }
+        }
       },
       "members": {
-        "fieldDisplayName": "Directors",
+        "header": "Members",
+        "subheader": "(Complete this section if you are a multi-member LLC)",
+        "description": "List each LLC's members' name and address. You may list up to 10 members. Members can be individuals or entities and are the owners of the LLC. Members do not own the LLC's property. They may or may not manage the business and affairs.",
+        "fieldDisplayName": "Members",
         "expandText": "Expand",
         "reviewStepHeader": "Members",
         "modalTitle": "Add New Member",
@@ -287,7 +303,8 @@
         "addButtonText": "Add New Member",
         "modalSaveButton": "Add Member",
         "addressCheckboxText": "Use business address.",
-        "reviewStepNameLabel": "**Member Name:**"
+        "reviewStepNameLabel": "**Member Name:**",
+        "placeholder": "No members have been added"
       },
       "paymentType": {
         "fieldDisplayName": "Payment Type",
@@ -338,7 +355,18 @@
         "reviewStepTitleLabel": "**Signer Title:**",
         "reviewStepNameLabel": "**Signer Name:**",
         "aidText": "By checking this box I confirm that I'm an authorized signer.",
-        "deleteTextMobile": "Delete Signer"
+        "deleteTextMobile": "Delete Signer",
+        "header": "Signers",
+        "description": "Authorized Representative(s) should sign below by adding their full name. You can have up to 10 signers listed.",
+        "placeholder": "No Signers have been added",
+        "overrides": {
+          "limited-liability-partnership": {
+            "description": "Authorized Partner(s) should sign below by adding their full name. You can have up to 10 signers listed."
+          },
+          "foreign-limited-liability-company": {
+            "description": "`Authorized representative(s)|authorized-representative` or `general partner(s)|general-partner` should sign below by adding their full name. You can have up to 10 signers listed."
+          }
+        }
       },
       "withdrawals": {
         "fieldDisplayName": "Withdrawals",
