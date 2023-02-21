@@ -11,17 +11,20 @@
     {
       "step": 1,
       "weight": 5,
-      "task": "determine-naics-code"
+      "task": "determine-naics-code",
+      "required": true
     },
     {
       "step": 2,
       "weight": 20,
-      "task": "register-for-ein"
+      "task": "register-for-ein",
+      "required": true
     },
     {
       "step": 2,
       "weight": 25,
-      "task": "register-for-taxes"
+      "task": "register-for-taxes",
+      "required": true
     },
     {
       "step": 3,
@@ -31,12 +34,14 @@
     {
       "step": 3,
       "weight": 15,
-      "task": "moving-company-insurance"
+      "task": "moving-company-insurance",
+      "required": true
     },
     {
       "step": 3,
       "weight": 20,
-      "task": "moving-company-license"
+      "task": "moving-company-license",
+      "required": true
     },
     {
       "step": 3,

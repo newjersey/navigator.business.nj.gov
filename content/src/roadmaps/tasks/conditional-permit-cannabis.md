@@ -5,7 +5,6 @@ name: Apply for Your Conditional Cannabis License
 id: conditional-permit-cannabis
 callToActionLink: https://nj-crc-public.nls.egov.com/#!/nj-crc/register
 callToActionText: Apply for My Conditional Cannabis License
-required: true
 issuingAgency: Cannabis Regulatory Commission
 ---
 

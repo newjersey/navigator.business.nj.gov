@@ -8,12 +8,14 @@
     {
       "step": 3,
       "weight": 17,
-      "task": "daycare-site-requirements"
+      "task": "daycare-site-requirements",
+      "required": true
     },
     {
       "step": 3,
       "weight": 20,
-      "task": "daycare-license"
+      "task": "daycare-license",
+      "required": true
     }
   ]
 }

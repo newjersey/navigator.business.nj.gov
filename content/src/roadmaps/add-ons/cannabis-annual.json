@@ -3,7 +3,8 @@
     {
       "step": 4,
       "weight": 1,
-      "task": "annual-license-cannabis"
+      "task": "annual-license-cannabis",
+      "required": true
     }
   ]
 }

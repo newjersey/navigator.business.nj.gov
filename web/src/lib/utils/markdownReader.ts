@@ -112,7 +112,6 @@ type TaskGrayMatter = {
   callToActionLink: string;
   callToActionText: string;
   postOnboardingQuestion: string;
-  required?: boolean;
   issuingAgency?: string;
   issuingDivision?: string;
   divisionPhone?: string;

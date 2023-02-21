@@ -4,7 +4,6 @@ name: Register a Trade Name
 id: register-trade-name
 callToActionLink: ${countyClerkWebsite}
 callToActionText: Visit My County Clerk's Website
-required: false
 issuingAgency: County Clerk's Office
 requiresLocation: true
 ---

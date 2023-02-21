@@ -3,17 +3,20 @@
         {
             "step": 3,
             "weight": 15,
-            "task": "taxi-insurance"
+            "task": "taxi-insurance",
+            "required": true
         },
         {
             "step": 3,
             "weight": 20,
-            "task": "taxi-authorization-local"
+            "task": "taxi-authorization-local",
+            "required": true
         },
         {
             "step": 3,
             "weight": 25,
-            "task": "taxi-driver-certification"
+            "task": "taxi-driver-certification",
+            "required": true
         }
     ]
 }

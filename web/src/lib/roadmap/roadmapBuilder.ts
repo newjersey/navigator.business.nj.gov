@@ -107,7 +107,7 @@ const addTasksFromAddOn = (builder: RoadmapBuilder, addOns: AddOn[]): RoadmapBui
   for (const addOn of addOns) {
     builder.tasks = [
       ...builder.tasks,
-      { filename: addOn.task, weight: addOn.weight, stepNumber: addOn.step },
+      { filename: addOn.task, weight: addOn.weight, stepNumber: addOn.step, required: addOn.required },
     ];
   }
 
@@ -145,6 +145,7 @@ const convertToRoadmap = async (roadmapBuilder: RoadmapBuilder): Promise<Roadmap
         return {
           ...(await fetchTaskByFilename(task.filename)),
           stepNumber: task.stepNumber,
+          required: task.required,
         };
       })
     ),
@@ -203,6 +204,7 @@ interface TaskBuilder {
   filename: string;
   weight: number;
   stepNumber: number;
+  required: boolean;
 }
 
 interface GenericStep {
@@ -218,6 +220,7 @@ export interface AddOn {
   step: number;
   weight: number;
   task: string;
+  required: boolean;
 }
 
 export interface TaskModification {

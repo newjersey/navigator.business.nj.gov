@@ -4,13 +4,14 @@ name: "Register Your Vehicle "
 id: register-vehicle
 callToActionLink: https://www.nj.gov/mvc/vehicles/reginitial.htm
 callToActionText: Obtain or Renew Your Vehicle Registration
-required: true
 issuingAgency: New Jersey Motor Vehicle Commission
 formName: BA-49
 ---
+
 You should ensure your vehicle is properly registered as a passenger vehicle prior to offering transportation services.
 
 ---
+
 ### Application Requirements
 
 - [An appointment](https://telegov.njportal.com/njmvc/AppointmentWizard) with the NJ Motor Vehicle Commission
@@ -22,6 +23,6 @@ You should ensure your vehicle is properly registered as a passenger vehicle pri
 - Lien holder information and financing statement if the vehicle is leased or financed.
 - [Application for Certificate of Ownership](https://www.state.nj.us/mvc/pdf/vehicles/luxtaxapp.pdf), if the vehicle is registered in another state
 
->**Once completed, you will have:**
+> **Once completed, you will have:**
 >
->- A current and valid vehicle registration
+> - A current and valid vehicle registration

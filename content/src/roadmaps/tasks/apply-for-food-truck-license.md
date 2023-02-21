@@ -4,7 +4,6 @@ name: Apply for a Food Truck License
 id: apply-for-food-truck-license
 callToActionLink: https://www.nj.gov/health/lh/documents/LocalHealthDirectory.pdf
 callToActionText: Contact Your Area’s Board of Health
-required: true
 issuingAgency: ""
 ---
 
@@ -12,6 +11,6 @@ Food trucks need to be cleaned and sanitized according to the guidelines from yo
 
 ---
 
->**Once completed you will have:**
+> **Once completed you will have:**
 >
->- A Department of Health license
+> - A Department of Health license

@@ -2,7 +2,6 @@
 urlSlug: register-for-ein
 name: Get Your EIN from the IRS
 id: register-for-ein
-required: true
 issuingAgency: Internal Revenue Service
 formName: SS-4
 ---
