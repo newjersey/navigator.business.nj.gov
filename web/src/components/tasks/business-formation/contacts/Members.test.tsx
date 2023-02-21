@@ -415,17 +415,46 @@ describe("Formation - Members Field", () => {
     });
   });
 
-  describe("required members (directors) for corporations", () => {
-    it("fires validations when directors are empty", async () => {
-      const page = await getPageHelper({ legalStructureId: "s-corporation" }, { members: [] });
-      await attemptApiSubmission(page);
-      expect(screen.getByText(Config.formation.fields.directors.error)).toBeInTheDocument();
-    });
+  describe("s-corp and c-corp", () => {
+    const legalStructures = ["c-corporation", "s-corporation"];
+    for (const legalStructureId of legalStructures) {
+      it(`requires directors for ${legalStructureId}`, async () => {
+        const page = await getPageHelper({ legalStructureId }, { members: [] });
+        await attemptApiSubmission(page);
+        expect(screen.getByText(Config.formation.fields.directors.error)).toBeInTheDocument();
+      });
 
-    const attemptApiSubmission = async (page: FormationPageHelpers) => {
-      await page.stepperClickToReviewStep();
-      await page.clickSubmit();
-      await page.stepperClickToContactsStep();
-    };
+      it(`displays directors content for ${legalStructureId}`, async () => {
+        const page = await getPageHelper({ legalStructureId }, { members: [] });
+        await page.stepperClickToContactsStep();
+        expect(screen.getByText(Config.formation.fields.directors.header)).toBeInTheDocument();
+        expect(screen.queryByText(Config.formation.fields.members.header)).not.toBeInTheDocument();
+      });
+    }
   });
+
+  describe("non-corp members legal structures", () => {
+    const legalStructures = ["limited-liability-company"];
+    for (const legalStructureId of legalStructures) {
+      it(`does not require members for ${legalStructureId}`, async () => {
+        const page = await getPageHelper({ legalStructureId }, { members: [], signers: [] });
+        await attemptApiSubmission(page);
+        expect(screen.queryByText(Config.formation.fields.directors.error)).not.toBeInTheDocument();
+      });
+
+      it(`displays members content for ${legalStructureId}`, async () => {
+        const page = await getPageHelper({ legalStructureId }, { members: [] });
+        await page.stepperClickToContactsStep();
+        expect(screen.getByText(Config.formation.fields.members.header)).toBeInTheDocument();
+        expect(screen.getByText(Config.formation.fields.members.subheader)).toBeInTheDocument();
+        expect(screen.queryByText(Config.formation.fields.directors.header)).not.toBeInTheDocument();
+      });
+    }
+  });
+
+  const attemptApiSubmission = async (page: FormationPageHelpers) => {
+    await page.stepperClickToReviewStep();
+    await page.clickSubmit();
+    await page.stepperClickToContactsStep();
+  };
 });

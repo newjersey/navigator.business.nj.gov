@@ -28,6 +28,16 @@ export const ContactsStep = (): ReactElement => {
     );
   };
 
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+  const getDescription = (field: string): string => {
+    const legalType = state.formationFormData.legalType;
+    const overriddenLegalTypes = Object.keys((Config.formation.fields as any)[field].overrides ?? {});
+    if (overriddenLegalTypes.includes(legalType)) {
+      return ((Config.formation.fields as any)[field].overrides as any)[legalType].description;
+    }
+    return (Config.formation.fields as any)[field].description;
+  };
+
   return (
     <>
       <div data-testid="contacts-step">
@@ -87,13 +97,14 @@ export const ContactsStep = (): ReactElement => {
             }
             needSignature={true}
             displayContent={{
-              contentMd: state.displayContent.signatureHeader.contentMd,
-              placeholder: state.displayContent.signatureHeader.placeholder ?? "",
+              description: getDescription("incorporators"),
+              header: Config.formation.fields.incorporators.header,
+              placeholder: Config.formation.fields.incorporators.placeholder ?? "",
               newButtonText: Config.formation.fields.incorporators.addButtonText,
-              alertHeader: Config.formation.fields.incorporators.successSnackbarHeader,
-              alertBody: Config.formation.fields.incorporators.successSnackbarBody,
-              title: Config.formation.fields.incorporators.modalTitle,
-              saveButton: Config.formation.fields.incorporators.addButtonText,
+              snackbarHeader: Config.formation.fields.incorporators.successSnackbarHeader,
+              snackbarBody: Config.formation.fields.incorporators.successSnackbarBody,
+              modalTitle: Config.formation.fields.incorporators.modalTitle,
+              modalSaveButton: Config.formation.fields.incorporators.addButtonText,
             }}
           />
         ) : (

@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { displayContent, getPageHelper } from "@/components/tasks/business-formation/contacts/testHelpers";
+import { getPageHelper } from "@/components/tasks/business-formation/contacts/testHelpers";
+import { getMergedConfig } from "@/contexts/configContext";
 import { useSetupInitialMocks } from "@/test/helpers/helpers-formation";
 import {
   FormationFormData,
@@ -20,6 +21,8 @@ function mockMaterialUI(): typeof materialUi {
     useMediaQuery: jest.fn(),
   };
 }
+
+const Config = getMergedConfig();
 
 jest.mock("@mui/material", () => mockMaterialUI());
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -64,6 +67,14 @@ describe("Formation - ContactsStep", () => {
       );
 
       const page = await getPageHelper({ legalStructureId }, formationFormData);
+
+      expect(screen.getByText(Config.formation.fields.signers.header)).toBeInTheDocument();
+      expect(
+        screen.getByText(
+          Config.formation.fields.signers.overrides["limited-liability-partnership"].description
+        )
+      ).toBeInTheDocument();
+
       expect(screen.queryByTestId("addresses-members")).not.toBeInTheDocument();
       expect(page.getInputElementByLabel("Signer 0").value).toBe("signer 1");
       expect(page.getInputElementByLabel("Signer 1").value).toBe("signer 2");
@@ -106,11 +117,19 @@ describe("Formation - ContactsStep", () => {
 
       expect(screen.getByTestId("addresses-incorporators")).toBeInTheDocument();
 
+      expect(screen.getByText(Config.formation.fields.incorporators.header)).toBeInTheDocument();
       expect(
-        screen.queryByText(
-          displayContent.formationDisplayContentMap[legalStructureId].members.placeholder as string
+        screen.getByText(
+          Config.formation.fields.incorporators.overrides["limited-partnership"].description.split("\n\n")[0]
         )
-      ).not.toBeInTheDocument();
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText(
+          Config.formation.fields.incorporators.overrides["limited-partnership"].description.split("\n\n")[1]
+        )
+      ).toBeInTheDocument();
+      expect(screen.queryByText(Config.formation.fields.incorporators.placeholder)).not.toBeInTheDocument();
+
       expect(screen.getByText("Donald Whatever")).toBeInTheDocument();
       expect(screen.getByText("160 Something Ave NW", { exact: false })).toBeInTheDocument();
       expect(screen.getByText("Office of Whatever", { exact: false })).toBeInTheDocument();
@@ -151,22 +170,19 @@ describe("Formation - ContactsStep", () => {
           signature: true,
         },
       ];
-      const formationFormData = generateFormationFormData(
-        {
-          members,
-          incorporators,
-        },
-        { legalStructureId }
-      );
+      const formationFormData = generateFormationFormData({ members, incorporators }, { legalStructureId });
 
       const page = await getPageHelper({ legalStructureId }, formationFormData);
 
       expect(screen.getByTestId("addresses-members")).toBeInTheDocument();
+      expect(screen.getByText(Config.formation.fields.directors.header)).toBeInTheDocument();
       expect(
-        screen.queryByText(
-          displayContent.formationDisplayContentMap[legalStructureId].members.placeholder as string
-        )
-      ).not.toBeInTheDocument();
+        screen.getByText(Config.formation.fields.directors.description.split("\n\n")[0])
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.formation.fields.directors.description.split("\n\n")[1])
+      ).toBeInTheDocument();
+      expect(screen.queryByText(Config.formation.fields.directors.placeholder)).not.toBeInTheDocument();
       expect(screen.getByText(members[0].name)).toBeInTheDocument();
       expect(screen.getByText(members[0].addressLine1, { exact: false })).toBeInTheDocument();
       expect(screen.getByText(members[0].addressLine2, { exact: false })).toBeInTheDocument();
@@ -175,11 +191,14 @@ describe("Formation - ContactsStep", () => {
       expect(screen.getByText(members[0].addressZipCode, { exact: false })).toBeInTheDocument();
 
       expect(screen.getByTestId("addresses-incorporators")).toBeInTheDocument();
+      expect(screen.getByText(Config.formation.fields.incorporators.header)).toBeInTheDocument();
       expect(
-        screen.queryByText(
-          displayContent.formationDisplayContentMap[legalStructureId].members.placeholder as string
-        )
-      ).not.toBeInTheDocument();
+        screen.getByText(Config.formation.fields.incorporators.description.split("\n\n")[0])
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText(Config.formation.fields.incorporators.description.split("\n\n")[1])
+      ).toBeInTheDocument();
+      expect(screen.queryByText(Config.formation.fields.incorporators.placeholder)).not.toBeInTheDocument();
       expect(screen.getByText(incorporators[0].name)).toBeInTheDocument();
       expect(screen.getByText(incorporators[0].addressLine1, { exact: false })).toBeInTheDocument();
       expect(screen.getByText(incorporators[0].addressLine2, { exact: false })).toBeInTheDocument();
@@ -233,17 +252,16 @@ describe("Formation - ContactsStep", () => {
       const page = await getPageHelper({ legalStructureId }, formationFormData);
 
       expect(screen.getByTestId("addresses-members")).toBeInTheDocument();
-      expect(
-        screen.queryByText(
-          displayContent.formationDisplayContentMap[legalStructureId].members.placeholder as string
-        )
-      ).not.toBeInTheDocument();
+      expect(screen.getByText(Config.formation.fields.members.header)).toBeInTheDocument();
+      expect(screen.queryByText(Config.formation.fields.members.placeholder)).not.toBeInTheDocument();
       expect(screen.getByText(members[0].name)).toBeInTheDocument();
       expect(screen.getByText(members[0].addressLine1, { exact: false })).toBeInTheDocument();
       expect(screen.getByText(members[0].addressLine2, { exact: false })).toBeInTheDocument();
       expect(screen.getByText(members[0].addressCity as string, { exact: false })).toBeInTheDocument();
       expect(screen.getByText(members[0].addressState!.name, { exact: false })).toBeInTheDocument();
       expect(screen.getByText(members[0].addressZipCode, { exact: false })).toBeInTheDocument();
+
+      expect(screen.getByText(Config.formation.fields.signers.header)).toBeInTheDocument();
       expect(page.getInputElementByLabel("Signer 0").value).toBe("signer 1");
       expect(page.getInputElementByLabel("Signer 1").value).toBe("signer 2");
       expect(page.getInputElementByLabel("Signer 2").value).toBe("signer 3");
@@ -275,7 +293,14 @@ describe("Formation - ContactsStep", () => {
         ],
       };
       const page = await getPageHelper({ legalStructureId, businessPersona }, formationFormData);
-      // screen.debug(undefined, Infinity);
+
+      expect(screen.getByText(Config.formation.fields.signers.header)).toBeInTheDocument();
+      expect(
+        screen.getByText(
+          Config.formation.fields.signers.overrides["foreign-limited-liability-company"].description
+        )
+      ).toBeInTheDocument();
+
       expect(page.getInputElementByLabel("Signer 0").value).toBe("signer 1");
       expect(page.getInputElementByTestId("signer-title-0").value).toBe("Authorized Representative");
       expect(page.getInputElementByLabel("Signer 1").value).toBe("signer 2");

@@ -12,9 +12,9 @@ import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import { ReactElement, useEffect, useState } from "react";
 
 interface DisplayContent {
-  title: string;
+  modalTitle: string;
   defaultCheckbox?: string;
-  saveButton: string;
+  modalSaveButton: string;
 }
 
 interface Props<T extends FormationMember | FormationIncorporator> {
@@ -223,8 +223,8 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
     <ModalTwoButton
       isOpen={props.open}
       close={props.handleClose}
-      title={props.displayContent.title}
-      primaryButtonText={props.displayContent.saveButton}
+      title={props.displayContent.modalTitle}
+      primaryButtonText={props.displayContent.modalSaveButton}
       primaryButtonOnClick={onSubmit}
       secondaryButtonText={Config.formation.general.backButtonText}
     >

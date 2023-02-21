@@ -28,12 +28,16 @@ export const Members = (): ReactElement => {
 
   const configField = isCorp ? "directors" : "members";
   const displayContent = {
+    header: Config.formation.fields[configField].header,
+    subheader: Config.formation.fields[configField].subheader,
+    description: Config.formation.fields[configField].description,
     newButtonText: Config.formation.fields[configField].addButtonText,
-    alertHeader: Config.formation.fields[configField].successSnackbarHeader,
-    alertBody: Config.formation.fields[configField].successSnackbarBody,
-    title: Config.formation.fields[configField].modalTitle,
-    saveButton: Config.formation.fields[configField].modalSaveButton,
+    snackbarHeader: Config.formation.fields[configField].successSnackbarHeader,
+    snackbarBody: Config.formation.fields[configField].successSnackbarBody,
+    modalTitle: Config.formation.fields[configField].modalTitle,
+    modalSaveButton: Config.formation.fields[configField].modalSaveButton,
     defaultCheckbox: isCorp ? undefined : Config.formation.fields.members.addressCheckboxText,
+    placeholder: Config.formation.fields[configField].placeholder ?? "",
   };
 
   return (
@@ -47,11 +51,7 @@ export const Members = (): ReactElement => {
         });
       }}
       needSignature={false}
-      displayContent={{
-        contentMd: state.displayContent.members.contentMd,
-        placeholder: state.displayContent.members.placeholder ?? "",
-        ...displayContent,
-      }}
+      displayContent={displayContent}
       defaultAddress={defaultAddress}
     />
   );
