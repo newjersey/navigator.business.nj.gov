@@ -324,17 +324,13 @@ describe("<BusinessFormation />", () => {
     page.fillText("Contact phone number", "123A45a678 90");
     fireEvent.click(screen.getByLabelText("Credit card"));
     page.selectCheckbox(Config.formation.fields.corpWatchNotification.checkboxText);
-    page.selectCheckbox(
-      `${displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.contentMd} ${displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.optionalLabel}`
-    );
-    page.selectCheckbox(
-      `${displayContent.formationDisplayContentMap[legalStructureId].certifiedCopyOfFormationDocument.contentMd} ${displayContent.formationDisplayContentMap[legalStructureId].certifiedCopyOfFormationDocument.optionalLabel}`
-    );
+    page.selectCheckboxByTestId("certificateOfStanding");
+    page.selectCheckboxByTestId("certifiedCopyOfFormationDocument");
 
     const expectedTotalCost =
-      displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.cost +
-      displayContent.formationDisplayContentMap[legalStructureId].certifiedCopyOfFormationDocument.cost +
-      displayContent.formationDisplayContentMap[legalStructureId].officialFormationDocument.cost;
+      Number.parseInt(Config.formation.fields.certificateOfStanding.cost) +
+      Number.parseInt(Config.formation.fields.certifiedCopyOfFormationDocument.cost) +
+      Number.parseInt(Config.formation.fields.officialFormationDocument.cost);
 
     expect(screen.getByText(getDollarValue(expectedTotalCost))).toBeInTheDocument();
     await page.submitBillingStep();
@@ -450,17 +446,13 @@ describe("<BusinessFormation />", () => {
     page.fillText("Contact phone number", "123A45a678 90");
     fireEvent.click(screen.getByLabelText("Credit card"));
     page.selectCheckbox(Config.formation.fields.corpWatchNotification.checkboxText);
-    page.selectCheckbox(
-      `${displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.contentMd} ${displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.optionalLabel}`
-    );
-    page.selectCheckbox(
-      `${displayContent.formationDisplayContentMap[legalStructureId].certifiedCopyOfFormationDocument.contentMd} ${displayContent.formationDisplayContentMap[legalStructureId].certifiedCopyOfFormationDocument.optionalLabel}`
-    );
+    page.selectCheckboxByTestId("certificateOfStanding");
+    page.selectCheckboxByTestId("certifiedCopyOfFormationDocument");
 
     const expectedTotalCost =
-      displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.cost +
-      displayContent.formationDisplayContentMap[legalStructureId].certifiedCopyOfFormationDocument.cost +
-      displayContent.formationDisplayContentMap[legalStructureId].officialFormationDocument.cost;
+      Number.parseInt(Config.formation.fields.certificateOfStanding.cost) +
+      Number.parseInt(Config.formation.fields.certifiedCopyOfFormationDocument.cost) +
+      Number.parseInt(Config.formation.fields.officialFormationDocument.cost);
 
     expect(screen.getByText(getDollarValue(expectedTotalCost))).toBeInTheDocument();
     await page.submitBillingStep();
@@ -555,17 +547,14 @@ describe("<BusinessFormation />", () => {
     page.fillText("Contact phone number", "123A45a678 90");
     fireEvent.click(screen.getByLabelText("Credit card"));
     page.selectCheckbox(Config.formation.fields.corpWatchNotification.checkboxText);
-    page.selectCheckbox(
-      `${displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.contentMd} ${displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.optionalLabel}`
-    );
-    page.selectCheckbox(
-      `${displayContent.formationDisplayContentMap[legalStructureId].certifiedCopyOfFormationDocument.contentMd} ${displayContent.formationDisplayContentMap[legalStructureId].certifiedCopyOfFormationDocument.optionalLabel}`
-    );
+
+    page.selectCheckboxByTestId("certificateOfStanding");
+    page.selectCheckboxByTestId("certifiedCopyOfFormationDocument");
 
     const expectedTotalCost =
-      displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.cost +
-      displayContent.formationDisplayContentMap[legalStructureId].certifiedCopyOfFormationDocument.cost +
-      displayContent.formationDisplayContentMap[legalStructureId].officialFormationDocument.cost;
+      Number.parseInt(Config.formation.fields.certificateOfStanding.cost) +
+      Number.parseInt(Config.formation.fields.certifiedCopyOfFormationDocument.cost) +
+      Number.parseInt(Config.formation.fields.officialFormationDocument.cost);
 
     expect(screen.getByText(getDollarValue(expectedTotalCost))).toBeInTheDocument();
     await page.submitBillingStep();
@@ -678,19 +667,16 @@ describe("<BusinessFormation />", () => {
     page.fillText("Contact phone number", "123A45a678 90");
     fireEvent.click(screen.getByLabelText("Credit card"));
     page.selectCheckbox(Config.formation.fields.corpWatchNotification.checkboxText);
-    page.selectCheckbox(
-      `${displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.contentMd} ${displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.optionalLabel}`
-    );
-    page.selectCheckbox(
-      `${displayContent.formationDisplayContentMap[legalStructureId].certifiedCopyOfFormationDocument.contentMd} ${displayContent.formationDisplayContentMap[legalStructureId].certifiedCopyOfFormationDocument.optionalLabel}`
-    );
+
+    page.selectCheckboxByTestId("certificateOfStanding");
+    page.selectCheckboxByTestId("certifiedCopyOfFormationDocument");
 
     const expectedTotalCost =
-      displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.cost +
-      displayContent.formationDisplayContentMap[legalStructureId].certifiedCopyOfFormationDocument.cost +
-      displayContent.formationDisplayContentMap[legalStructureId].officialFormationDocument.cost;
-
+      Number.parseInt(Config.formation.fields.certificateOfStanding.cost) +
+      Number.parseInt(Config.formation.fields.certifiedCopyOfFormationDocument.cost) +
+      Number.parseInt(Config.formation.fields.officialFormationDocument.cost);
     expect(screen.getByText(getDollarValue(expectedTotalCost))).toBeInTheDocument();
+
     await page.submitBillingStep();
     await page.submitReviewStep();
 
@@ -810,17 +796,14 @@ describe("<BusinessFormation />", () => {
     page.fillText("Contact phone number", "123A45a678 90");
     fireEvent.click(screen.getByLabelText("Credit card"));
     page.selectCheckbox(Config.formation.fields.corpWatchNotification.checkboxText);
-    page.selectCheckbox(
-      `${displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.contentMd} ${displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.optionalLabel}`
-    );
-    page.selectCheckbox(
-      `${displayContent.formationDisplayContentMap[legalStructureId].certifiedCopyOfFormationDocument.contentMd} ${displayContent.formationDisplayContentMap[legalStructureId].certifiedCopyOfFormationDocument.optionalLabel}`
-    );
+
+    page.selectCheckboxByTestId("certificateOfStanding");
+    page.selectCheckboxByTestId("certifiedCopyOfFormationDocument");
 
     const expectedTotalCost =
-      displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.cost +
-      displayContent.formationDisplayContentMap[legalStructureId].certifiedCopyOfFormationDocument.cost +
-      displayContent.formationDisplayContentMap[legalStructureId].officialFormationDocument.cost;
+      Number.parseInt(Config.formation.fields.certificateOfStanding.overrides["limited-partnership"].cost) +
+      Number.parseInt(Config.formation.fields.certifiedCopyOfFormationDocument.cost) +
+      Number.parseInt(Config.formation.fields.officialFormationDocument.cost);
 
     expect(screen.getByText(getDollarValue(expectedTotalCost))).toBeInTheDocument();
     await page.submitBillingStep();
@@ -935,19 +918,17 @@ describe("<BusinessFormation />", () => {
     page.fillText("Contact phone number", "123A45a678 90");
     fireEvent.click(screen.getByLabelText("Credit card"));
     page.selectCheckbox(Config.formation.fields.corpWatchNotification.checkboxText);
-    page.selectCheckbox(
-      `${displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.contentMd} ${displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.optionalLabel}`
-    );
-    page.selectCheckbox(
-      `${displayContent.formationDisplayContentMap[legalStructureId].certifiedCopyOfFormationDocument.contentMd} ${displayContent.formationDisplayContentMap[legalStructureId].certifiedCopyOfFormationDocument.optionalLabel}`
-    );
+
+    page.selectCheckboxByTestId("certificateOfStanding");
+    page.selectCheckboxByTestId("certifiedCopyOfFormationDocument");
 
     const expectedTotalCost =
-      displayContent.formationDisplayContentMap[legalStructureId].certificateOfStanding.cost +
-      displayContent.formationDisplayContentMap[legalStructureId].certifiedCopyOfFormationDocument.cost +
-      displayContent.formationDisplayContentMap[legalStructureId].officialFormationDocument.cost;
+      Number.parseInt(Config.formation.fields.certificateOfStanding.overrides["c-corporation"].cost) +
+      Number.parseInt(Config.formation.fields.certifiedCopyOfFormationDocument.cost) +
+      Number.parseInt(Config.formation.fields.officialFormationDocument.cost);
 
     expect(screen.getByText(getDollarValue(expectedTotalCost))).toBeInTheDocument();
+
     await page.submitBillingStep();
     await page.submitReviewStep();
 

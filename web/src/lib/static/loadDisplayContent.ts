@@ -75,15 +75,6 @@ const getFormationFields = (
   const services = (type: FormationLegalType) => {
     return getTextFieldContent(`services.md`, type);
   };
-  const officialFormationDocument = (type: FormationLegalType) => {
-    return getTextFieldContent(`doc-official-formation.md`, type);
-  };
-  const certificateOfStanding = (type: FormationLegalType) => {
-    return getTextFieldContent(`doc-certificate-of-standing.md`, type);
-  };
-  const certifiedCopyOfFormationDocument = (type: FormationLegalType) => {
-    return getTextFieldContent(`doc-certified-copy-of-formation-document.md`, type);
-  };
   const notification = (type: FormationLegalType) => {
     return getTextFieldContent(`notification.md`, type);
   };
@@ -102,9 +93,6 @@ const getFormationFields = (
     introParagraph,
     businessNameCheck,
     services,
-    officialFormationDocument,
-    certificateOfStanding,
-    certifiedCopyOfFormationDocument,
     notification,
     agentNumberOrManual,
     members,

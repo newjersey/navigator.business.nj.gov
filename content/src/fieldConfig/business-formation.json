@@ -173,12 +173,29 @@
         "reviewStepYes": "**Yes**, the limited partners can assign other partners limited partner rights."
       },
       "certifiedCopyOfFormationDocument": {
+        "cost": "25",
+        "label": "`Certified Copy of Formation Document|certified-copy`",
         "reviewStepLabel": "Certified Copy of Formation Document"
       },
       "certificateOfStanding": {
-        "reviewStepLabel": "Certificate of Good Standing"
+        "label": "`Certificate of Standing|good-standing`",
+        "cost": "50",
+        "reviewStepLabel": "Certificate of Good Standing",
+        "overrides": {
+          "c-corporation": {
+            "cost": "25"
+          },
+          "s-corporation": {
+            "cost": "25"
+          },
+          "limited-partnership": {
+            "cost": "25"
+          }
+        }
       },
       "officialFormationDocument": {
+        "label": "`Official Formation Documentation|certificate-formation`",
+        "cost": "125",
         "reviewStepLabel": "Official Formation Document"
       },
       "combinedInvestment":{

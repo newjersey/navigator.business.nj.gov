@@ -393,7 +393,9 @@ describe("Formation - BusinessStep", () => {
         { businessPersona: "FOREIGN", legalStructureId: "limited-liability-company" },
         { foreignStateOfFormation: undefined }
       );
-      expect(screen.getByText(Config.formation.fields.foreignStateOfFormation.label)).toBeInTheDocument();
+      expect(
+        screen.getByText(markdownToText(Config.formation.fields.foreignStateOfFormation.label))
+      ).toBeInTheDocument();
       expect(
         screen.getByPlaceholderText(Config.formation.fields.foreignStateOfFormation.placeholder)
       ).toBeInTheDocument();
@@ -641,7 +643,6 @@ describe("Formation - BusinessStep", () => {
         { businessPersona: "FOREIGN", legalStructureId: "limited-liability-company" },
         { foreignDateOfFormation: undefined }
       );
-      expect(screen.getByText(Config.formation.fields.foreignDateOfFormation.label)).toBeInTheDocument();
       page.selectDate(getCurrentDate(), fieldLabel);
       await page.submitBusinessStep();
       expect(currentUserData().formationData.formationFormData.foreignDateOfFormation).toEqual(

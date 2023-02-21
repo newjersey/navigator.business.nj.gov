@@ -55,20 +55,6 @@ export type FormationDisplayContent = {
   notification: {
     contentMd: string;
   };
-  officialFormationDocument: {
-    contentMd: string;
-    cost: number;
-  };
-  certificateOfStanding: {
-    contentMd: string;
-    cost: number;
-    optionalLabel: string;
-  };
-  certifiedCopyOfFormationDocument: {
-    contentMd: string;
-    cost: number;
-    optionalLabel: string;
-  };
 };
 
 export const createEmptyTaskWithoutLinks = (): TaskWithoutLinks => {
@@ -136,20 +122,6 @@ export const createEmptyFormationDisplayContent = (): FormationDisplayContent =>
     },
     notification: {
       contentMd: "",
-    },
-    officialFormationDocument: {
-      contentMd: "",
-      cost: 0,
-    },
-    certificateOfStanding: {
-      contentMd: "",
-      cost: 0,
-      optionalLabel: "",
-    },
-    certifiedCopyOfFormationDocument: {
-      contentMd: "",
-      cost: 0,
-      optionalLabel: "",
     },
   };
 };
