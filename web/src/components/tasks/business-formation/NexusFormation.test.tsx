@@ -91,7 +91,8 @@ describe("<NexusFormationFlow />", () => {
       legalStructureId,
       businessPersona: "FOREIGN",
       businessName: "",
-      nexusDbaName: undefined,
+      nexusDbaName: "",
+      needsNexusDbaName: false,
     });
     const formationData = generateEmptyFormationData();
     displayContent = {

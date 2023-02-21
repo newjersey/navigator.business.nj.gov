@@ -94,7 +94,7 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
       if (props.isDba) {
         return;
       }
-      const shouldDoInitialSearch = currentName.length > 0 && userData.profileData.nexusDbaName !== undefined;
+      const shouldDoInitialSearch = currentName.length > 0 && userData.profileData.needsNexusDbaName;
       if (shouldDoInitialSearch && !didInitialSearch.current) {
         didInitialSearch.current = true;
         doSearch(undefined, { isInitialSubmit: true });

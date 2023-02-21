@@ -13,7 +13,6 @@ import { getNaicsDisplayMd } from "@/lib/domain-logic/getNaicsDisplayMd";
 import analytics from "@/lib/utils/analytics";
 import { templateEval } from "@/lib/utils/helpers";
 import { FormationFormData } from "@businessnjgovnavigator/shared/formationData";
-import { emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { ReactElement, useContext } from "react";
 
 export const NexusFormationFlow = (): ReactElement => {
@@ -35,8 +34,7 @@ export const NexusFormationFlow = (): ReactElement => {
     moveToStep(state.stepIndex - 1);
   };
 
-  const isNotDba =
-    userData?.profileData.businessName && userData.profileData.nexusDbaName == emptyProfileData.nexusDbaName;
+  const isNotDba = userData?.profileData.businessName && !userData.profileData.needsNexusDbaName;
 
   const onStepChangeAnalytics = (
     formationFormData: FormationFormData | undefined,

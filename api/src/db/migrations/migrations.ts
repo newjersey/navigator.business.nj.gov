@@ -4,6 +4,7 @@ import { migrate_v99_to_v100 } from "./v100_add_updated_timestamp";
 import { migrate_v100_to_v101 } from "./v101_change_error_field";
 import { migrate_v101_to_v102 } from "./v102_rename_tax_registration_nudge";
 import { migrate_v102_to_v103 } from "./v103_change_tax_calendar_view_default";
+import { migrate_v103_to_v104 } from "./v104_add_needs_nexus_dba_name_field";
 import { migrate_v9_to_v10 } from "./v10_add_mynjuserkey";
 import { migrate_v10_to_v11 } from "./v11_change_license_statuses";
 import { migrate_v11_to_v12 } from "./v12_remove_scorp";
@@ -210,4 +211,5 @@ export const Migrations: MigrationFunction[] = [
   migrate_v100_to_v101,
   migrate_v101_to_v102,
   migrate_v102_to_v103,
+  migrate_v103_to_v104,
 ];
