@@ -7,6 +7,7 @@ callToActionLink: https://newjersey.mylicense.com/eGov/PersonSearchResults.aspx?
 callToActionText: Get My Business License
 required: true
 issuingAgency: New Jersey Division of Consumer Affairs Board of Massage and Bodywork Therapy
+industryIntegration: NJ Department of Consumer Affairs
 ---
 If you will employ others to offer massage therapy services, you need to register your business as a massage therapy employer.
 
