@@ -1460,6 +1460,9 @@ collections:
               - { label: Hide Button Text, name: hideButtonText, widget: string }
               - { label: Show Button Text Mobile, name: showButtonTextMobile, widget: string }
               - { label: Hide Button Text Mobile, name: hideButtonTextMobile, widget: string }
+              - { label: Locked Pre-TaxId Text, name: lockedPostText, widget: string }
+              - { label: Locked Post-TaxId Text, name: lockedPreText, widget: string }
+
   - name: "naics-code"
     label: "Tasks - NAICS Code"
     delete: false

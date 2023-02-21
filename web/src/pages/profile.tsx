@@ -4,6 +4,7 @@ import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { SidebarPageLayout } from "@/components/njwds-extended/SidebarPageLayout";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
+import { DisabledTaxId } from "@/components/onboarding/DisabledTaxId";
 import { FieldLabelProfile } from "@/components/onboarding/FieldLabelProfile";
 import { LockedProfileField } from "@/components/onboarding/LockedProfileField";
 import { OnboardingBusinessName } from "@/components/onboarding/OnboardingBusinessName";
@@ -282,6 +283,8 @@ const ProfilePage = (props: Props): ReactElement => {
   };
 
   const shouldLockFormationFields = userData?.formationData.getFilingResponse?.success;
+  const shouldLockTaxId =
+    userData?.taxFilingData.state === "SUCCESS" || userData?.taxFilingData.state == "PENDING";
 
   const nexusBusinessElements: Record<ProfileTabs, ReactNode> = {
     info: (
@@ -355,14 +358,18 @@ const ProfilePage = (props: Props): ReactElement => {
           {Config.profileDefaults.profileTabRefTitle}
         </h2>
         <div className="margin-top-4">
-          <FieldLabelProfile fieldName="taxId" />
-          <TaxDisclaimer legalStructureId={userData?.profileData.legalStructureId} />
+          <FieldLabelProfile fieldName="taxId" locked={shouldLockTaxId} />
+          {!shouldLockTaxId && <TaxDisclaimer legalStructureId={userData?.profileData.legalStructureId} />}
           <div className={"max-width-38rem"}>
-            <OnboardingTaxId
-              onValidation={onValidation}
-              fieldStates={fieldStates}
-              handleChangeOverride={showRegistrationModalForGuest()}
-            />
+            {shouldLockTaxId ? (
+              <DisabledTaxId />
+            ) : (
+              <OnboardingTaxId
+                onValidation={onValidation}
+                fieldStates={fieldStates}
+                handleChangeOverride={showRegistrationModalForGuest()}
+              />
+            )}
           </div>
         </div>
       </>
@@ -387,14 +394,18 @@ const ProfilePage = (props: Props): ReactElement => {
           {Config.profileDefaults.profileTabRefTitle}
         </h2>
         <div className="margin-top-4">
-          <FieldLabelProfile fieldName="taxId" />
-          <TaxDisclaimer legalStructureId={userData?.profileData.legalStructureId} />
+          <FieldLabelProfile fieldName="taxId" locked={shouldLockTaxId} />
+          {!shouldLockTaxId && <TaxDisclaimer legalStructureId={userData?.profileData.legalStructureId} />}
           <div className={"max-width-38rem"}>
-            <OnboardingTaxId
-              onValidation={onValidation}
-              fieldStates={fieldStates}
-              handleChangeOverride={showRegistrationModalForGuest()}
-            />
+            {shouldLockTaxId ? (
+              <DisabledTaxId />
+            ) : (
+              <OnboardingTaxId
+                onValidation={onValidation}
+                fieldStates={fieldStates}
+                handleChangeOverride={showRegistrationModalForGuest()}
+              />
+            )}
           </div>
         </div>
       </>
@@ -548,14 +559,18 @@ const ProfilePage = (props: Props): ReactElement => {
           handleChangeOverride={showRegistrationModalForGuest()}
         />
         <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
-        <FieldLabelProfile fieldName="taxId" />
-        <TaxDisclaimer legalStructureId={userData?.profileData.legalStructureId} />
+        <FieldLabelProfile fieldName="taxId" locked={shouldLockTaxId} />
+        {!shouldLockTaxId && <TaxDisclaimer legalStructureId={userData?.profileData.legalStructureId} />}
         <div className={"max-width-38rem"}>
-          <OnboardingTaxId
-            onValidation={onValidation}
-            fieldStates={fieldStates}
-            handleChangeOverride={showRegistrationModalForGuest()}
-          />
+          {shouldLockTaxId ? (
+            <DisabledTaxId />
+          ) : (
+            <OnboardingTaxId
+              onValidation={onValidation}
+              fieldStates={fieldStates}
+              handleChangeOverride={showRegistrationModalForGuest()}
+            />
+          )}
         </div>
       </>
     ),
@@ -648,14 +663,18 @@ const ProfilePage = (props: Props): ReactElement => {
           />
         </div>
         <div className="margin-top-4">
-          <FieldLabelProfile fieldName="taxId" />
-          <TaxDisclaimer legalStructureId={userData?.profileData.legalStructureId} />
+          <FieldLabelProfile fieldName="taxId" locked={shouldLockTaxId} />
+          {!shouldLockTaxId && <TaxDisclaimer legalStructureId={userData?.profileData.legalStructureId} />}
           <div className={"max-width-38rem"}>
-            <OnboardingTaxId
-              onValidation={onValidation}
-              fieldStates={fieldStates}
-              handleChangeOverride={showRegistrationModalForGuest()}
-            />
+            {shouldLockTaxId ? (
+              <DisabledTaxId />
+            ) : (
+              <OnboardingTaxId
+                onValidation={onValidation}
+                fieldStates={fieldStates}
+                handleChangeOverride={showRegistrationModalForGuest()}
+              />
+            )}
           </div>
         </div>
         <div className="margin-top-4">

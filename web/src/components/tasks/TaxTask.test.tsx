@@ -6,6 +6,7 @@ import { templateEval } from "@/lib/utils/helpers";
 import {
   generateProfileData,
   generateTask,
+  generateTaxFilingData,
   generateUserData,
   randomPublicFilingLegalStructure,
   randomTradeNameLegalStructure,
@@ -19,7 +20,7 @@ import {
   userDataWasNotUpdated,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
-import { UserData } from "@businessnjgovnavigator/shared";
+import { randomInt, UserData } from "@businessnjgovnavigator/shared";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
@@ -59,6 +60,22 @@ describe("<TaxTask />", () => {
       </WithStatefulUserData>
     );
     expect(screen.getByText(ctaText)).toBeInTheDocument();
+  });
+
+  it("shows disabled taxId when taxCalendar is PENDING or SUCCESS", () => {
+    const userData = generateUserData({
+      profileData: generateProfileData({ taxId: "*******89123", encryptedTaxId: "some-encrypted-value" }),
+      taxFilingData: generateTaxFilingData({ state: randomInt() % 2 ? "SUCCESS" : "PENDING" }),
+    });
+    render(
+      <WithStatefulUserData initialUserData={userData}>
+        <TaxTask task={task} />
+      </WithStatefulUserData>
+    );
+    expect(screen.queryByLabelText("Tax id")).not.toBeInTheDocument();
+    expect(screen.getByTestId("disabled-taxid")).toHaveTextContent(Config.tax.lockedPostText);
+    expect(screen.getByTestId("disabled-taxid")).toHaveTextContent(Config.tax.lockedPreText);
+    expect(screen.getByTestId("disabled-taxid")).toHaveTextContent("***-***-*89/123");
   });
 
   describe("inputting Tax ID", () => {
