@@ -34,7 +34,8 @@
     {
       "step": 3,
       "weight": 15,
-      "task": "get-insurance"
+      "task": "get-insurance",
+      "required": true
     },
     {
       "step": 3,

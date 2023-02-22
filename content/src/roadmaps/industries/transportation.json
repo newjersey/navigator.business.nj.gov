@@ -30,6 +30,12 @@
       "step": 3,
       "weight": 10,
       "task": "bank-account"
+    },
+    {
+      "step": 3,
+      "weight": 15,
+      "task": "get-insurance",
+      "required": true
     }
   ],
   "name": "Car Service (Large Capacity Vehicles)",
