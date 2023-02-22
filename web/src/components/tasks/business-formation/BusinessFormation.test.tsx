@@ -25,11 +25,9 @@ import {
   defaultDateFormat,
   FormationData,
   FormationIncorporator,
-  FormationLegalType,
   FormationMember,
   generateMunicipality,
   getCurrentDate,
-  publicFilingLegalTypes,
   UserData,
 } from "@businessnjgovnavigator/shared";
 
@@ -389,10 +387,6 @@ describe("<BusinessFormation />", () => {
       businessPersona: "FOREIGN",
       legalStructureId: _legalStructureId,
     });
-    const legalStructureId = castPublicFilingLegalTypeToFormationType(
-      _legalStructureId,
-      profileData.businessPersona
-    );
 
     const formationData = generateEmptyFormationData();
     const page = preparePage({ profileData, formationData }, displayContent, [
@@ -425,11 +419,7 @@ describe("<BusinessFormation />", () => {
     page.selectByText("Agent office address municipality", "Newark");
     page.fillText("Agent office address zip code", "08002");
 
-    expect(
-      screen.queryByText(
-        displayContent.formationDisplayContentMap[legalStructureId].members.placeholder as string
-      )
-    ).not.toBeInTheDocument();
+    expect(screen.queryByText(Config.formation.fields.members.placeholder)).not.toBeInTheDocument();
 
     page.fillText("Signer 0", "Elrond");
     page.selectByText("Signer title 0", "General Partner");
@@ -524,11 +514,7 @@ describe("<BusinessFormation />", () => {
     page.selectByText("Agent office address municipality", "Newark");
     page.fillText("Agent office address zip code", "08002");
 
-    expect(
-      screen.queryByText(
-        displayContent.formationDisplayContentMap[legalStructureId].members.placeholder as string
-      )
-    ).not.toBeInTheDocument();
+    expect(screen.queryByText(Config.formation.fields.members.placeholder)).not.toBeInTheDocument();
 
     page.fillText("Signer 0", "Elrond");
     page.checkSignerBox(0, "signers");
@@ -642,11 +628,7 @@ describe("<BusinessFormation />", () => {
     page.selectByText("Agent office address municipality", "Newark");
     page.fillText("Agent office address zip code", "08002");
 
-    expect(
-      screen.queryByText(
-        displayContent.formationDisplayContentMap[legalStructureId].members.placeholder as string
-      )
-    ).not.toBeInTheDocument();
+    expect(screen.queryByText(Config.formation.fields.members.placeholder)).not.toBeInTheDocument();
 
     page.fillText("Signer 0", "Elrond");
     page.selectByText("Signer title 0", "General Partner");
@@ -759,11 +741,7 @@ describe("<BusinessFormation />", () => {
     page.selectByText("Agent office address municipality", "Newark");
     page.fillText("Agent office address zip code", "08002");
 
-    expect(
-      screen.queryByText(
-        displayContent.formationDisplayContentMap[legalStructureId].members.placeholder as string
-      )
-    ).not.toBeInTheDocument();
+    expect(screen.queryByText(Config.formation.fields.members.placeholder)).not.toBeInTheDocument();
 
     const incorporators: FormationIncorporator = {
       name: "Joe Biden",
@@ -954,30 +932,4 @@ describe("<BusinessFormation />", () => {
     expect(formationFormData.annualReportNotification).toEqual(true);
     expect(formationFormData.corpWatchNotification).toEqual(false);
   }, 60000);
-
-  it("loads different displayContent depending on users LegalStructureId", async () => {
-    const profileData = generateFormationProfileData({});
-    const page = preparePage({ profileData }, displayContent);
-    await page.fillAndSubmitBusinessNameStep();
-    await page.submitBusinessStep();
-    expect(
-      screen.getByText(
-        `${
-          displayContent.formationDisplayContentMap[profileData.legalStructureId as FormationLegalType]
-            .agentNumberOrManual.contentMd
-        }`
-      )
-    ).toBeInTheDocument();
-    expect(
-      screen.queryByText(
-        `${
-          displayContent.formationDisplayContentMap[
-            publicFilingLegalTypes.find((id: FormationLegalType) => {
-              return id != profileData.legalStructureId;
-            }) as FormationLegalType
-          ].agentNumberOrManual.contentMd
-        }`
-      )
-    ).not.toBeInTheDocument();
-  });
 });

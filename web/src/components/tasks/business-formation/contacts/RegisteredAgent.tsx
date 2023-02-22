@@ -130,7 +130,8 @@ export const RegisteredAgent = (): ReactElement => {
 
   return (
     <>
-      <Content>{state.displayContent.agentNumberOrManual.contentMd}</Content>
+      <h3>{Config.formation.registeredAgent.sectionHeader}</h3>
+      <Content>{Config.formation.registeredAgent.sectionDescription}</Content>
       <div id="registeredAgent">
         <div className="form-input">
           <FormControl fullWidth>
@@ -147,7 +148,7 @@ export const RegisteredAgent = (): ReactElement => {
                 data-testid="registered-agent-number"
                 value="NUMBER"
                 control={<Radio color="primary" sx={{ paddingTop: "0px" }} />}
-                label={state.displayContent.agentNumberOrManual.radioButtonNumberText}
+                label={Config.formation.registeredAgent.radioButtonNumberText}
               />
               <FormControlLabel
                 labelPlacement="end"
@@ -155,7 +156,7 @@ export const RegisteredAgent = (): ReactElement => {
                 style={{ marginTop: ".75rem", alignItems: "flex-start" }}
                 value="MANUAL_ENTRY"
                 control={<Radio color="primary" sx={{ paddingTop: "0px" }} />}
-                label={state.displayContent.agentNumberOrManual.radioButtonManualText}
+                label={Config.formation.registeredAgent.radioButtonManualText}
               />
             </RadioGroup>
           </FormControl>

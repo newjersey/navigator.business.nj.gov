@@ -4,20 +4,18 @@ import { FormationChooseNotifications } from "@/components/tasks/business-format
 import { PaymentTypeTable } from "@/components/tasks/business-formation/billing/PaymentTypeTable";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
 import { WithErrorBar } from "@/components/WithErrorBar";
-import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { getPhoneNumberFormat } from "@/lib/utils/helpers";
-import { ReactElement, useContext } from "react";
+import { ReactElement } from "react";
 
 export const BillingStep = (): ReactElement => {
   const { Config } = useConfig();
-  const { state } = useContext(BusinessFormationContext);
   const { doSomeFieldsHaveError, getFieldErrorLabel } = useFormationErrors();
 
   return (
     <div data-testid="billing-step">
-      <Content>{Config.formation.sections.contactInfoHeader}</Content>
+      <h3>{Config.formation.sections.contactInfoHeader}</h3>
       <WithErrorBar
         hasError={doSomeFieldsHaveError(["contactFirstName", "contactLastName"])}
         type="DESKTOP-ONLY"
@@ -62,7 +60,8 @@ export const BillingStep = (): ReactElement => {
         </div>
       </div>
       <hr className="margin-bottom-2" />
-      <Content>{state.displayContent.services.contentMd}</Content>
+      <h3>{Config.formation.sections.servicesHeader}</h3>
+      <Content>{Config.formation.sections.servicesDescription}</Content>
       <FormationChooseDocuments />
 
       <PaymentTypeTable />

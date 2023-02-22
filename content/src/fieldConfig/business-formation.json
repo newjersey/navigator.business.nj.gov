@@ -110,6 +110,8 @@
         "checkboxText": "I want to be reminded of any Annual Reports Filing(s), so that I never miss an Annual Report deadline."
       },
       "businessName": {
+        "header": "Check Available Business Names",
+        "description": "We’ll check to see if your desired business name is available. Once you find an available name you can use it to complete this form.\n\nWhat do you want to name your business?",
         "fieldDisplayName": "Business Name",
         "alertUnavailable": "Sorry, \"${name}\" isn't available. Try another name. You can officially form your business once you've found an available name.",
         "alertAvailable": "\"${name}\" is available. This name will be registered with the State ONLY after you submit the rest of this form.",
@@ -424,14 +426,22 @@
       "reviewStepTermsLabel": "*Applicable Terms:*"
     },
     "registeredAgent": {
+      "sectionHeader": "Registered Agent",
+      "sectionDescription": "Enter your `Registered Agent's|registered-agent` ID number. If your agent did not give you this number, you can enter their name and address.",
+      "radioButtonNumberText": "Enter Your Registered Agent ID Number",
+      "radioButtonManualText": "Manually Identify Your Registered Agent",
       "reviewStepHeader": "Registered Agent",
       "sameAddressCheckbox": "The address is the same as the business location.",
       "sameContactCheckbox": "The agent information is the same as the account holder."
     },
     "sections": {
-      "addressHeader": "### Primary Business Address",
+      "addressHeader": "Primary Business Address",
       "businessNameAndStructureHeader": "Business Name and Business Structure",
-      "contactInfoHeader": "### Billing Contact Information",
+      "contactInfoHeader": "Billing Contact Information",
+      "notificationsHeader": "Notifications",
+      "notificationsDescription": "Get free text/email notifications:",
+      "servicesHeader": "Services and Payment",
+      "servicesDescription": "Use the table below to select all the services you’d like to purchase as well as the payment type. The total amount will change based on the payment type selected.",
       "review": {
         "addressLabel": "**Address:**",
         "locationHeader": "Location",

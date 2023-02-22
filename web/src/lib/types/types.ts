@@ -35,26 +35,6 @@ export type FlowType = Exclude<BusinessPersona, undefined>;
 
 export type FormationDisplayContent = {
   introParagraph: { contentMd: string };
-  businessNameCheck: { contentMd: string };
-  agentNumberOrManual: {
-    contentMd: string;
-    radioButtonNumberText: string;
-    radioButtonManualText: string;
-  };
-  members: {
-    contentMd: string;
-    placeholder?: string;
-  };
-  signatureHeader: {
-    contentMd: string;
-    placeholder?: string;
-  };
-  services: {
-    contentMd: string;
-  };
-  notification: {
-    contentMd: string;
-  };
 };
 
 export const createEmptyTaskWithoutLinks = (): TaskWithoutLinks => {
@@ -99,28 +79,6 @@ export const createEmptyFormationDisplayContentMap = (): FormationDisplayContent
 export const createEmptyFormationDisplayContent = (): FormationDisplayContent => {
   return {
     introParagraph: {
-      contentMd: "",
-    },
-    businessNameCheck: {
-      contentMd: "",
-    },
-    agentNumberOrManual: {
-      contentMd: "",
-      radioButtonNumberText: "",
-      radioButtonManualText: "",
-    },
-    members: {
-      contentMd: "",
-      placeholder: "",
-    },
-    signatureHeader: {
-      contentMd: "",
-      placeholder: "",
-    },
-    services: {
-      contentMd: "",
-    },
-    notification: {
       contentMd: "",
     },
   };

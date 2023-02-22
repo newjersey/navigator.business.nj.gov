@@ -30,7 +30,8 @@ export const FormationChooseNotifications = (): ReactElement => {
 
   return (
     <div className="margin-top-3 margin-bottom-2">
-      <Content>{state.displayContent.notification.contentMd}</Content>{" "}
+      <h3>{Config.formation.sections.notificationsHeader}</h3>
+      <Content>{Config.formation.sections.notificationsDescription}</Content>
       <FormGroup>
         <FormControlLabel
           style={{ display: "table" }}

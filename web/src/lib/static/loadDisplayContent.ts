@@ -69,34 +69,10 @@ const getFormationFields = (
   const introParagraph = (type: FormationLegalType) => {
     return getTextFieldContent("form-business-entity-intro.md", type);
   };
-  const businessNameCheck = (type: FormationLegalType) => {
-    return getTextFieldContent("business-name-check.md", type);
-  };
-  const services = (type: FormationLegalType) => {
-    return getTextFieldContent(`services.md`, type);
-  };
-  const notification = (type: FormationLegalType) => {
-    return getTextFieldContent(`notification.md`, type);
-  };
-  const agentNumberOrManual = (type: FormationLegalType) => {
-    return getTextFieldContent(`registered-agent.md`, type);
-  };
-  const members = (type: FormationLegalType) => {
-    return getTextFieldContent(`members.md`, type);
-  };
-  const signatureHeader = (type: FormationLegalType) => {
-    return getTextFieldContent(`signatures.md`, type);
-  };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const fieldFunctions: Record<keyof FormationDisplayContent, (type: FormationLegalType) => any> = {
     introParagraph,
-    businessNameCheck,
-    services,
-    notification,
-    agentNumberOrManual,
-    members,
-    signatureHeader,
   };
 
   return Object.keys(fieldFunctions).reduce((content, name) => {

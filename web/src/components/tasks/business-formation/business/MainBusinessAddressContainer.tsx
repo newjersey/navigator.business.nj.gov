@@ -1,4 +1,3 @@
-import { Content } from "@/components/Content";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
@@ -10,9 +9,7 @@ export const MainBusinessAddressContainer = (props: { children: ReactNode }): Re
 
   return (
     <>
-      <div className="margin-bottom-2">
-        <Content>{Config.formation.sections.addressHeader}</Content>
-      </div>
+      <h3 className="margin-bottom-2">{Config.formation.sections.addressHeader}</h3>
       <BusinessFormationTextField
         label={Config.formation.fields.addressLine1.label}
         placeholder={Config.formation.fields.addressLine1.placeholder}
