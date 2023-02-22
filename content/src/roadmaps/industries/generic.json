@@ -39,6 +39,11 @@
       "step": 3,
       "weight": 15,
       "task": "get-insurance"
+    },
+    {
+      "step": 4,
+      "weight": 1,
+      "task": "search-licenses"
     }
   ],
   "name": "All Other Businesses",
