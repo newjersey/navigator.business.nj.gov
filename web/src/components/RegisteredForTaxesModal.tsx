@@ -52,6 +52,9 @@ export const RegisteredForTaxesModal = (props: Props): ReactElement => {
     }
     const errorMap = {
       ...fieldStates,
+      nexusDbaName: {
+        invalid: !profileData.nexusDbaName && showDBAField(),
+      },
       businessName: {
         invalid: !profileData.businessName && showBusinessField(),
       },
