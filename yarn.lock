@@ -4551,7 +4551,7 @@ __metadata:
     cross-env: 7.0.3
     dayjs: 1.11.7
     dedent: 0.7.0
-    dependency-cruiser: 12.7.1
+    dependency-cruiser: 12.10.0
     eslint: 8.34.0
     eslint-config-prettier: 8.6.0
     eslint-plugin-jest: 27.2.1
@@ -4713,7 +4713,7 @@ __metadata:
     cypress-wait-until: 1.7.2
     dayjs: 1.11.7
     dedent: 0.7.0
-    dependency-cruiser: 12.7.1
+    dependency-cruiser: 12.10.0
     dotenv: 16.0.3
     eslint: 8.34.0
     eslint-config-next: 13.1.6
@@ -4912,7 +4912,7 @@ __metadata:
     cypress-dotenv: 2.0.0
     cypress-wait-until: 1.7.2
     dayjs: 1.11.7
-    dependency-cruiser: 12.7.1
+    dependency-cruiser: 12.10.0
     dotenv: 16.0.3
     eslint: 8.34.0
     eslint-config-next: 13.1.6
@@ -15995,9 +15995,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dependency-cruiser@npm:12.7.1":
-  version: 12.7.1
-  resolution: "dependency-cruiser@npm:12.7.1"
+"dependency-cruiser@npm:12.10.0":
+  version: 12.10.0
+  resolution: "dependency-cruiser@npm:12.10.0"
   dependencies:
     acorn: 8.8.2
     acorn-jsx: 5.3.2
@@ -16025,7 +16025,7 @@ __metadata:
     semver-try-require: 6.0.0
     teamcity-service-messages: 0.1.14
     tsconfig-paths-webpack-plugin: 4.0.0
-    watskeburt: 0.9.1
+    watskeburt: 0.10.0
     wrap-ansi: ^7.0.0
   bin:
     depcruise: bin/dependency-cruise.js
@@ -16034,7 +16034,7 @@ __metadata:
     depcruise-wrap-stream-in-html: bin/wrap-stream-in-html.js
     dependency-cruise: bin/dependency-cruise.js
     dependency-cruiser: bin/dependency-cruise.js
-  checksum: b45102705d47ca5f4f8683e7df752cd245512f1ae87ed60f41519d5ee0a8b8a67377cc69e3d4f687b17deeb58c54e0145872f5aa37bf3b8314ad3e1bb677f342
+  checksum: 0efa17d64f6963c34b7dec1679f00dc1a8dfc3cd2fc3cf02b46748c2a380b3b98a8bf8548dc3143bb732d580cf6739cfcab263f7fc4e55e248ece46f389c0282
   languageName: node
   linkType: hard
 
@@ -35252,14 +35252,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"watskeburt@npm:0.9.1":
-  version: 0.9.1
-  resolution: "watskeburt@npm:0.9.1"
+"watskeburt@npm:0.10.0":
+  version: 0.10.0
+  resolution: "watskeburt@npm:0.10.0"
   dependencies:
     commander: 10.0.0
   bin:
     watskeburt: bin/cli.mjs
-  checksum: 0d27a38c66b454a11f5b430bc856ccc2fae247601f7febe8c5253bf3794b8c05ff398648e837ee42f4c85275cfccab5c5e08aa77a1506d8f911e79295a3fba93
+  checksum: f94260d270e49f41f98b7d02039c1fbf29d2fa50a2854a80a8df8300df15676e829401814b6ae75fa718fbd7d965f44b065727dc8042929babf92480d7ffc69f
   languageName: node
   linkType: hard
 
