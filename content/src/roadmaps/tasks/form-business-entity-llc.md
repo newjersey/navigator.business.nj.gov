@@ -4,7 +4,6 @@ name: Check Available Names and Form Your Business
 id: form-business-entity
 callToActionLink: https://www.njportal.com/DOR/BusinessFormation/CompanyInformation/BusinessName
 callToActionText: Form My Business
-required: true
 issuingAgency: New Jersey Department of Treasury's Division of Revenue and Enterprise Services
 ---
 

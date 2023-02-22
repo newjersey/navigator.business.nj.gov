@@ -3,12 +3,14 @@
       {
         "step": 1,
         "weight": 6,
-        "task": "appraiser-certification"
+        "task": "appraiser-certification",
+        "required": true
       },
       {
         "step": 3,
         "weight": 21,
-        "task": "appraiser-company-register"
+        "task": "appraiser-company-register",
+        "required": true
       }
     ]
   }

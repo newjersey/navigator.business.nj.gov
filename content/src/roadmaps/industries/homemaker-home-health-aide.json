@@ -16,17 +16,20 @@
     {
       "step": 1,
       "weight": 5,
-      "task": "determine-naics-code"
+      "task": "determine-naics-code",
+      "required": true
     },
     {
       "step": 2,
       "weight": 20,
-      "task": "register-for-ein"
+      "task": "register-for-ein",
+      "required": true
     },
     {
       "step": 2,
       "weight": 25,
-      "task": "register-for-taxes"
+      "task": "register-for-taxes",
+      "required": true
     },
     {
       "step": 3,
@@ -41,12 +44,14 @@
     {
       "step": 4,
       "weight": 20,
-      "task": "home-health-aide-license"
+      "task": "home-health-aide-license",
+      "required": true
     },
     {
       "step": 4,
       "weight": 30,
-      "task": "individual-staff-licenses-health-aide"
+      "task": "individual-staff-licenses-health-aide",
+      "required": true
     }
   ],
   "name": "Home Health Aide",
