@@ -339,6 +339,32 @@ describe("<RegisteredForTaxesModal />", () => {
           screen.getByText(Config.profileDefaults.fields.businessName.default.errorTextRequired)
         ).toBeInTheDocument();
       });
+
+      it("shows error for dba name field when not selected", () => {
+        const userData = generateUserData({
+          profileData: generateProfileData({
+            legalStructureId: randomPublicFilingLegalStructure(),
+            foreignBusinessType: "NEXUS",
+            businessPersona: "FOREIGN",
+            nexusDbaName: "",
+            needsNexusDbaName: true,
+          }),
+        });
+
+        renderComponent(userData);
+
+        expect(
+          screen.queryByText(Config.profileDefaults.fields.nexusDbaName.default.errorTextRequired)
+        ).not.toBeInTheDocument();
+
+        fillText("Existing employees", "5");
+        fillText("Tax id", "123456789012");
+
+        fireEvent.click(screen.getByText(Config.registeredForTaxesModal.saveButtonText));
+        expect(
+          screen.getByText(Config.profileDefaults.fields.nexusDbaName.default.errorTextRequired)
+        ).toBeInTheDocument();
+      });
     });
 
     it("fills and saves businessName, Ownership, existingEmployees, taxId fields", () => {

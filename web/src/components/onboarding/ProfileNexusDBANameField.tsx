@@ -16,10 +16,10 @@ export const ProfileNexusDBANameField = (props: Props): ReactElement => {
     <OnboardingField
       fieldName={"nexusDbaName"}
       error={props.fieldStates ? props.fieldStates.nexusDbaName?.invalid : false}
-      required={props.required ?? false}
       fieldOptions={{
         inputProps: { "data-testid": "nexusDBAName" },
       }}
+      {...props}
     />
   );
 };
