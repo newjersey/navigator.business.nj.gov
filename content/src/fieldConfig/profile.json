@@ -296,7 +296,7 @@
         },
         "overrides": {
           "OWNING": {
-            "description": "Where in New Jersey is your business located? (What if I have a `foreign business?|foreign-business` )"
+            "description": "Where in New Jersey is your business located?"
           },
           "FOREIGN": {
             "description": "Where in New Jersey will your primary business activities be?"
