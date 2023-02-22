@@ -1800,6 +1800,16 @@ collections:
                   widget: string,
                 }
               - { label: Calendar Feedback Button Text, name: calendarFeedbackButtonText, widget: string }
+              - {
+                  label: Calendar Empty Grid Description Markdown,
+                  name: calendarEmptyGridDescriptionMarkdown,
+                  widget: markdown,
+                }
+              - {
+                  label: Calendar Empty List Description Markdown,
+                  name: calendarEmptyListDescriptionMarkdown,
+                  widget: markdown,
+                }
 
       - label: "Dashboard Modals"
         name: "dashboard-config-modals"

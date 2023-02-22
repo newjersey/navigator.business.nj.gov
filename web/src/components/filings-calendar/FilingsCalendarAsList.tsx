@@ -1,3 +1,4 @@
+import { Content } from "@/components/Content";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { sortFilterFilingsWithinAYear } from "@/lib/domain-logic/filterFilings";
@@ -33,7 +34,16 @@ export const FilingsCalendarAsList = (props: Props): ReactElement => {
     : [];
 
   if (sortedFilteredFilingsWithinAYear.length === 0) {
-    return <></>;
+    return (
+      <>
+        <Content className="text-base margin-bottom-3">
+          {Config.dashboardDefaults.calendarEmptyListDescriptionMarkdown}
+        </Content>
+        <div className="flex flex-column space-between fac text-align-center flex-desktop:grid-col usa-prose padding-x-3">
+          <img className="padding-y-2" src={`/img/empty-trophy-illustration.png`} alt="empty calendar" />
+        </div>
+      </>
+    );
   }
 
   const filingsGroupedByDate = groupBy(

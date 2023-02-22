@@ -299,6 +299,51 @@ describe("<FilingsCalendar />", () => {
     expect(screen.getByText(`Annual Report`)).toBeInTheDocument();
   });
 
+  it("displays empty calendar content when there are filings in two years", () => {
+    const annualReport = generateTaxFiling({
+      identifier: "annual-report",
+      dueDate: getCurrentDate().add(2, "years").format(defaultDateFormat),
+    });
+
+    const userData = generateUserData({
+      profileData: generateProfileData({
+        operatingPhase: randomElementFromArray(
+          OperatingPhases.filter((obj) => {
+            return obj.displayCalendarType === "FULL" && obj.displayCalendarToggleButton;
+          })
+        ).id,
+      }),
+      taxFilingData: generateTaxFilingData({ filings: [annualReport] }),
+      preferences: generatePreferences({ isCalendarFullView: true }),
+    });
+
+    const operateReferences: Record<string, OperateReference> = {
+      "annual-report": {
+        name: "Annual Report",
+        urlSlug: "annual-report-url",
+        urlPath: "annual_report-url-path",
+      },
+    };
+
+    renderFilingsCalendar(operateReferences, userData);
+    expect(screen.getByTestId("filings-calendar")).toHaveTextContent(
+      markdownToText(Config.dashboardDefaults.calendarEmptyGridDescriptionMarkdown)
+    );
+    fireEvent.click(screen.getByText(Config.dashboardDefaults.calendarListViewButton, { exact: false }));
+    expect(screen.getByTestId("filings-calendar")).toHaveTextContent(
+      markdownToText(Config.dashboardDefaults.calendarEmptyListDescriptionMarkdown)
+    );
+    fireEvent.click(screen.getByTestId("primary-year-selector-dropdown-button"));
+    fireEvent.click(screen.getByText(getCurrentDate().add(2, "years").year().toString()));
+    expect(screen.getByTestId("filings-calendar")).not.toHaveTextContent(
+      markdownToText(Config.dashboardDefaults.calendarEmptyListDescriptionMarkdown)
+    );
+    fireEvent.click(screen.getByText(Config.dashboardDefaults.calendarGridViewButton, { exact: false }));
+    expect(screen.getByTestId("filings-calendar")).not.toHaveTextContent(
+      markdownToText(Config.dashboardDefaults.calendarEmptyGridDescriptionMarkdown)
+    );
+  });
+
   it("hides year selector when there are no taxFilings", () => {
     const userData = generateUserData({
       profileData: generateProfileData({
