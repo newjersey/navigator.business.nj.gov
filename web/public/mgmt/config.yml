@@ -797,6 +797,10 @@ collections:
             search_fields: ["{{filename}}", "name", "urlSlug"]
             value_field: "{{filename}}"
             display_fields: ["{{filename}}"]
+          - label: "Required"
+            name: "required"
+            widget: "boolean"
+            required: false
       - label: Task Overrides
         name: modifications
         widget: list
@@ -847,6 +851,10 @@ collections:
             search_fields: ["{{filename}}", "name", "urlSlug"]
             value_field: "{{filename}}"
             display_fields: ["{{filename}}"]
+          - label: "Required"
+            name: "required"
+            widget: "boolean"
+            required: false
       - label: Task Overrides
         name: modifications
         widget: list
@@ -1022,7 +1030,6 @@ collections:
         value_field: "{{id}}"
         display_fields: ["{{id}}"]
         required: false
-      - { label: "Required", name: "required", widget: "boolean", required: false }
       - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
       - { label: "Form Name", name: "formName", widget: "string", required: false }
       - {
