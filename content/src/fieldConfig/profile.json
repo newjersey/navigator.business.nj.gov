@@ -191,6 +191,14 @@
           "description": "Do you provide childcare services for 6 or more children in a dedicated space?"
         }
       },
+      "willSellPetCareItems": {
+        "default": {
+          "header": "Petcare Services",
+          "radioButtonTrueText": "Yes",
+          "radioButtonFalseText": "No",
+          "description": "Will you sell pet care items?"
+        }
+      },
       "homeContractor": {
         "default": {
           "header": "",

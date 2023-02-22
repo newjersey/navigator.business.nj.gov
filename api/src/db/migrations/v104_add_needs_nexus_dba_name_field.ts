@@ -1,3 +1,4 @@
+import { randomInt } from "@shared/intHelpers";
 import { v103UserData } from "./v103_change_tax_calendar_view_default";
 
 export interface v104UserData {
@@ -375,4 +376,236 @@ type v104GetFilingResponse = {
   formationDoc: string;
   standingDoc: string;
   certifiedDoc: string;
+};
+
+// v104 Factories
+export const generateV104User = (overrides: Partial<v104BusinessUser>): v104BusinessUser => {
+  return {
+    name: `some-name-${randomInt()}`,
+    email: `some-email-${randomInt()}@example.com`,
+    id: `some-id-${randomInt()}`,
+    receiveNewsletter: false,
+    userTesting: false,
+    externalStatus: {},
+    myNJUserKey: undefined,
+    intercomHash: undefined,
+    abExperience: "ExperienceA",
+    ...overrides,
+  };
+};
+
+export const generateV104FormationAddress = (
+  overrides: Partial<v104FormationAddress>
+): v104FormationAddress => {
+  return {
+    addressLine1: `some-members-address-1-${randomInt()}`,
+    addressLine2: `some-members-address-2-${randomInt()}`,
+    addressCity: `some-members-address-city-${randomInt()}`,
+    addressState: { shortCode: "NJ", name: "new-jersey" },
+    addressZipCode: `some-agent-office-zipcode-${randomInt()}`,
+    addressCountry: `some-county`,
+    ...overrides,
+  };
+};
+
+export const generateV104FormationMember = (overrides: Partial<v104FormationMember>): v104FormationMember => {
+  return {
+    name: `some-name`,
+    addressLine1: `some-members-address-1-${randomInt()}`,
+    addressLine2: `some-members-address-2-${randomInt()}`,
+    addressCity: `some-members-address-city-${randomInt()}`,
+    addressState: { shortCode: "123", name: "new-jersey" },
+    addressZipCode: `some-agent-office-zipcode-${randomInt()}`,
+    addressCountry: `some-county`,
+    ...overrides,
+  };
+};
+
+export const generateV104Municipality = (overrides: Partial<v104Municipality>): v104Municipality => {
+  return {
+    displayName: `some-display-name-${randomInt()}`,
+    name: `some-name-${randomInt()}`,
+    county: `some-county-${randomInt()}`,
+    id: `some-id-${randomInt()}`,
+    ...overrides,
+  };
+};
+
+export const allFormationLegalTypes = [
+  "limited-liability-partnership",
+  "limited-liability-company",
+  "limited-partnership",
+  "c-corporation",
+  "s-corporation",
+];
+
+export const generateV104FormationFormData = (
+  overrides: Partial<v104FormationFormData>,
+  legalStructureId: string
+): v104FormationFormData => {
+  const isCorp = legalStructureId ? ["s-corporation", "c-corporation"].includes(legalStructureId) : false;
+
+  return {
+    businessName: `some-business-name-${randomInt()}`,
+    businessSuffix: `some-suffix-${randomInt()}`,
+    businessStartDate: new Date(Date.now()).toISOString().split("T")[0],
+    businessAddressCity: generateV104Municipality({}),
+    businessAddressLine1: `some-address-1-${randomInt()}`,
+    businessAddressLine2: `some-address-2-${randomInt()}`,
+    businessAddressState: "NJ",
+    businessAddressZipCode: `some-zipcode-${randomInt()}`,
+    businessTotalStock: isCorp ? randomInt().toString() : "",
+    businessPurpose: `some-purpose-${randomInt()}`,
+    provisions: [`some-provision-${randomInt()}`],
+    agentNumberOrManual: randomInt() % 2 ? "NUMBER" : "MANUAL_ENTRY",
+    agentNumber: `some-agent-number-${randomInt()}`,
+    agentName: `some-agent-name-${randomInt()}`,
+    agentEmail: `some-agent-email-${randomInt()}`,
+    agentOfficeAddressLine1: `some-agent-office-address-1-${randomInt()}`,
+    agentOfficeAddressLine2: `some-agent-office-address-2-${randomInt()}`,
+    agentOfficeAddressCity: `some-agent-office-address-city-${randomInt()}`,
+    agentOfficeAddressState: "NJ",
+    agentOfficeAddressZipCode: `some-agent-office-zipcode-${randomInt()}`,
+    agentUseAccountInfo: !!(randomInt() % 2),
+    agentUseBusinessAddress: !!(randomInt() % 2),
+    signers: [{ name: "some-name", signature: "some-signature", title: "some-title" }],
+    members: legalStructureId == "limited-liability-partnership" ? [] : [generateV104FormationMember({})],
+    paymentType: randomInt() % 2 ? "ACH" : "CC",
+    annualReportNotification: !!(randomInt() % 2),
+    corpWatchNotification: !!(randomInt() % 2),
+    officialFormationDocument: !!(randomInt() % 2),
+    certificateOfStanding: !!(randomInt() % 2),
+    certifiedCopyOfFormationDocument: !!(randomInt() % 2),
+    contactFirstName: `some-contact-first-name-${randomInt()}`,
+    contactLastName: `some-contact-last-name-${randomInt()}`,
+    contactPhoneNumber: `some-contact-phone-number-${randomInt()}`,
+    withdrawals: `some-withdrawals-text-${randomInt()}`,
+    dissolution: `some-dissolution-text-${randomInt()}`,
+    combinedInvestment: `some-combinedInvestment-text-${randomInt()}`,
+    canCreateLimitedPartner: !!(randomInt() % 2),
+    createLimitedPartnerTerms: `some-createLimitedPartnerTerms-text-${randomInt()}`,
+    canGetDistribution: !!(randomInt() % 2),
+    getDistributionTerms: `some-getDistributionTerms-text-${randomInt()}`,
+    canMakeDistribution: !!(randomInt() % 2),
+    makeDistributionTerms: `some-makeDistributionTerms-text-${randomInt()}`,
+    ...overrides,
+  } as v104FormationFormData;
+};
+
+export const generateV104IndustrySpecificData = (
+  overrides: Partial<v104IndustrySpecificData>
+): v104IndustrySpecificData => {
+  return {
+    liquorLicense: false,
+    requiresCpa: false,
+    homeBasedBusiness: false,
+    cannabisLicenseType: undefined,
+    cannabisMicrobusiness: undefined,
+    constructionRenovationPlan: undefined,
+    providesStaffingService: false,
+    certifiedInteriorDesigner: false,
+    realEstateAppraisalManagement: false,
+    carService: undefined,
+    interstateTransport: false,
+    isChildcareForSixOrMore: undefined,
+    ...overrides,
+  };
+};
+
+export const generateV104ProfileData = (overrides: Partial<v104ProfileData>): v104ProfileData => {
+  const id = `some-id-${randomInt()}`;
+  const persona = randomInt() % 2 ? "STARTING" : "OWNING";
+  return {
+    ...generateV104IndustrySpecificData({}),
+    businessPersona: persona,
+    businessName: `some-business-name-${randomInt()}`,
+    industryId: "restaurant",
+    legalStructureId: "limited-liability-partnership",
+    municipality: {
+      name: `some-name-${randomInt()}`,
+      displayName: `some-display-name-${randomInt()}`,
+      county: `some-county-${randomInt()}`,
+      id: `some-id-${randomInt()}`,
+    },
+    dateOfFormation: undefined,
+    entityId: randomInt(10).toString(),
+    employerId: randomInt(9).toString(),
+    taxId: randomInt() % 2 ? randomInt(9).toString() : randomInt(12).toString(),
+    encryptedTaxId: `some-encrypted-value`,
+    notes: `some-notes-${randomInt()}`,
+    ownershipTypeIds: [],
+    documents: {
+      certifiedDoc: `${id}/certifiedDoc-${randomInt()}.pdf`,
+      formationDoc: `${id}/formationDoc-${randomInt()}.pdf`,
+      standingDoc: `${id}/standingDoc-${randomInt()}.pdf`,
+    },
+    existingEmployees: randomInt(7).toString(),
+    taxPin: randomInt(4).toString(),
+    sectorId: undefined,
+    naicsCode: randomInt(6).toString(),
+    foreignBusinessType: undefined,
+    foreignBusinessTypeIds: [],
+    nexusDbaName: "undefined",
+    needsNexusDbaName: true,
+    nexusLocationInNewJersey: undefined,
+    operatingPhase: "NEEDS_TO_FORM",
+    ...overrides,
+  };
+};
+
+export const generateV104TaxFilingData = (overrides: Partial<v104TaxFilingData>): v104TaxFilingData => {
+  return {
+    state: undefined,
+    businessName: undefined,
+    errorField: undefined,
+    lastUpdatedISO: undefined,
+    registeredISO: undefined,
+    filings: [],
+    ...overrides,
+  };
+};
+
+export const generateV104FormationData = (
+  overrides: Partial<v104FormationData>,
+  legalStructureId: string
+): v104FormationData => {
+  return {
+    formationFormData: generateV104FormationFormData({}, legalStructureId),
+    formationResponse: undefined,
+    getFilingResponse: undefined,
+    completedFilingPayment: false,
+    ...overrides,
+  };
+};
+
+export const generateV104UserData = (overrides: Partial<v104UserData>): v104UserData => {
+  const profileData = generateV104ProfileData({});
+  return {
+    version: 102,
+    user: generateV104User({}),
+    profileData: generateV104ProfileData({}),
+    formProgress: "UNSTARTED",
+    taskProgress: {},
+    taskItemChecklist: {},
+    licenseData: undefined,
+    preferences: generateV104Preferences({}),
+    lastUpdatedISO: "",
+    taxFilingData: generateV104TaxFilingData({}),
+    formationData: generateV104FormationData({}, profileData.legalStructureId ?? ""),
+    ...overrides,
+  };
+};
+
+export const generateV104Preferences = (overrides: Partial<v104Preferences>): v104Preferences => {
+  return {
+    roadmapOpenSections: ["PLAN", "START"],
+    roadmapOpenSteps: [],
+    hiddenCertificationIds: [],
+    hiddenFundingIds: [],
+    visibleSidebarCards: ["welcome"],
+    returnToLink: "",
+    isCalendarFullView: true,
+    isHideableRoadmapOpen: false,
+    ...overrides,
+  };
 };

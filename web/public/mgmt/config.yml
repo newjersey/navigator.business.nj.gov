@@ -775,6 +775,10 @@ collections:
             name: isChildcareForSixOrMore
             widget: boolean
             required: false
+          - label: Will Sell Petcare Items
+            name: willSellPetCareItems
+            widget: boolean
+            required: false
       - label: Roadmap Steps
         name: roadmapSteps
         widget: list
@@ -4124,6 +4128,20 @@ collections:
                           - { label: "Description", name: "description", widget: "markdown" }
                   - label: Childcare Services
                     name: isChildcareForSixOrMore
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - label: Default
+                        name: "default"
+                        collapsed: false
+                        widget: object
+                        fields:
+                          - { label: "Header", name: "header", widget: "string" }
+                          - { label: "Radio Button Yes Text", name: "radioButtonTrueText", widget: "string" }
+                          - { label: "Radio Button No Text", name: "radioButtonFalseText", widget: "string" }
+                          - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Will Sell Pet Care Items
+                    name: willSellPetCareItems
                     collapsed: true
                     widget: object
                     fields:
