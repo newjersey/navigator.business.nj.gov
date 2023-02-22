@@ -174,6 +174,7 @@ export const generateIndustrySpecificData = (
     carService: undefined,
     interstateTransport: false,
     isChildcareForSixOrMore: undefined,
+    willSellPetCareItems: undefined,
     ...overrides,
   };
 };

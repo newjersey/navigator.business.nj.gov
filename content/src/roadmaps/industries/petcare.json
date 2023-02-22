@@ -45,7 +45,8 @@
   "name": "Pet Care",
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
-    "canBeReseller": true
+    "canBeReseller": true,
+    "willSellPetCareItems": true
   },
   "isEnabled": true,
   "additionalSearchTerms": "dog walker, dog groomer, pet groomer, doggy daycare, kennel, boarding, shelter, pound",

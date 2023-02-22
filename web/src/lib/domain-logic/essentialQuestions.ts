@@ -115,6 +115,13 @@ export const EssentialQuestions: EssentialQuestion[] = [
   new EssentialQuestion({
     shouldBeResetWhenIndustryChanges: true,
     isQuestionApplicableToIndustry: (industry) => {
+      return !!industry.industryOnboardingQuestions.willSellPetCareItems;
+    },
+    fieldName: "willSellPetCareItems",
+  }),
+  new EssentialQuestion({
+    shouldBeResetWhenIndustryChanges: true,
+    isQuestionApplicableToIndustry: (industry) => {
       return !!industry.industryOnboardingQuestions.isCpaRequiredApplicable;
     },
     fieldName: "requiresCpa",

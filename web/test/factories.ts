@@ -146,6 +146,7 @@ export const generateIndustrySpecificData = (
     carService: randomElementFromArray(["STANDARD", "HIGH_CAPACITY", "BOTH"]),
     interstateTransport: !(randomInt() % 2),
     isChildcareForSixOrMore: !(randomInt() % 2),
+    willSellPetCareItems: !(randomInt() % 2),
     ...overrides,
   };
 };

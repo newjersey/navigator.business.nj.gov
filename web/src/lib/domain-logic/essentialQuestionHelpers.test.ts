@@ -187,6 +187,24 @@ describe("hasEssentialQuestion", () => {
     });
   });
 
+  describe("willSellPetCareItems", () => {
+    it("returns false when no industry is supplied", () => {
+      expect(getIsApplicableToFunctionByFieldName("willSellPetCareItems")(undefined)).toEqual(false);
+    });
+
+    it("returns false when industry does not have a willSellPetCareItems option", () => {
+      expect(getIsApplicableToFunctionByFieldName("willSellPetCareItems")("auto-body-repair")).toEqual(false);
+    });
+
+    it("returns false when industry does not exist", () => {
+      expect(getIsApplicableToFunctionByFieldName("willSellPetCareItems")("fake-industry")).toEqual(false);
+    });
+
+    it("returns true when industry is the pet care industry", () => {
+      expect(getIsApplicableToFunctionByFieldName("willSellPetCareItems")("petcare")).toEqual(true);
+    });
+  });
+
   describe("isChildcareForSixOrMoreApplicable", () => {
     it("returns false when there is no industry", () => {
       expect(getIsApplicableToFunctionByFieldName("isChildcareForSixOrMore")(undefined)).toEqual(false);

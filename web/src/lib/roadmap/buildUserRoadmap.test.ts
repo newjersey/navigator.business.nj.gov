@@ -625,5 +625,17 @@ describe("buildUserRoadmap", () => {
         expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("daycare");
       });
     });
+
+    describe("if industry is pet services", () => {
+      it("adds will-sell-pet-care-items add-on if petcare industry and will sell pet care items", () => {
+        buildUserRoadmap(generateStartingProfile({ willSellPetCareItems: true, industryId: "petcare" }));
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("will-sell-pet-care-items");
+      });
+
+      it("will NOT adds will-sell-pet-care-items add-on if petcare industry and will sell pet care items", () => {
+        buildUserRoadmap(generateStartingProfile({ willSellPetCareItems: false, industryId: "petcare" }));
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("will-sell-pet-care-items");
+      });
+    });
   });
 });

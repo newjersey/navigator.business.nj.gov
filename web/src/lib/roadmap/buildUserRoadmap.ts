@@ -145,6 +145,10 @@ const getIndustryBasedAddOns = (profileData: ProfileData, industryId: string | u
     }
   }
 
+  if (profileData.willSellPetCareItems) {
+    addOns.push("will-sell-pet-care-items");
+  }
+
   if (industry.industryOnboardingQuestions.canBeReseller) {
     addOns.push("reseller");
   }
