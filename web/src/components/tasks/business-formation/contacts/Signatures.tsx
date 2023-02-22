@@ -36,6 +36,16 @@ export const Signatures = (): ReactElement => {
     [state.formationFormData.legalType]
   );
 
+  const getDescription = (): string => {
+    const legalType = state.formationFormData.legalType;
+    const overriddenLegalTypes = Object.keys(Config.formation.fields.signers.overrides ?? {});
+    if (overriddenLegalTypes.includes(legalType)) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      return (Config.formation.fields.signers.overrides as any)[legalType].description;
+    }
+    return Config.formation.fields.signers.description;
+  };
+
   useMountEffect(() => {
     state.formationFormData.signers && state.formationFormData.signers.length > 0
       ? null
@@ -281,7 +291,8 @@ export const Signatures = (): ReactElement => {
   return (
     <>
       <div className="grid-col">
-        <Content>{state.displayContent.signatureHeader.contentMd}</Content>
+        <h3>{Config.formation.fields.signers.header}</h3>
+        <Content>{getDescription()}</Content>
         <div className={`grid-row margin-y-2 flex-align-start`}>
           <div className={`grid-col`} data-testid="signers-0">
             {atLeastOneSignerExists && (

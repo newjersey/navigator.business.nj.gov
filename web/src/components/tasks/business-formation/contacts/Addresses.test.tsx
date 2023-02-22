@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { displayContent, getPageHelper } from "@/components/tasks/business-formation/contacts/testHelpers";
+import { getPageHelper } from "@/components/tasks/business-formation/contacts/testHelpers";
 import { getMergedConfig } from "@/contexts/configContext";
 import { FormationPageHelpers, useSetupInitialMocks } from "@/test/helpers/helpers-formation";
 import { currentUserData } from "@/test/mock/withStatefulUserData";
@@ -45,12 +45,7 @@ describe("Formation - Addresses", () => {
       describe(`for ${legalStructureId}`, () => {
         it("adds signer", async () => {
           const page = await getPageHelper({ legalStructureId }, { incorporators: [] });
-          expect(
-            screen.getByText(
-              displayContent.formationDisplayContentMap[legalStructureId].signatureHeader
-                .placeholder as string
-            )
-          ).toBeInTheDocument();
+          expect(screen.getByText(Config.formation.fields.incorporators.header)).toBeInTheDocument();
           page.clickAddNewIncorporator();
           const signer = generateFormationIncorporator(
             {
