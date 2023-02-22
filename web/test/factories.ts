@@ -400,28 +400,6 @@ export const generateFormationDisplayContent = (
     introParagraph: {
       contentMd: `some-intro-content-${legalStructureId}-${randomInt()}`,
     },
-    businessNameCheck: {
-      contentMd: `some-business-name-check-${legalStructureId}--content-${randomInt()}`,
-    },
-    agentNumberOrManual: {
-      contentMd: `some-agent-number-or-manual-${legalStructureId}--content-${randomInt()}`,
-      radioButtonNumberText: `some-agent-number-or-manual-radio-number-${legalStructureId}--text-${randomInt()}`,
-      radioButtonManualText: `some-agent-number-or-manual-radio-manual-${legalStructureId}--text-${randomInt()}`,
-    },
-    members: {
-      contentMd: `some-members-${legalStructureId}--content-${randomInt()}`,
-      placeholder: `some-members-${legalStructureId}--placeholder-${randomInt()}`,
-    },
-    signatureHeader: {
-      contentMd: `some-signer-${legalStructureId}--content- ${randomInt()}`,
-      placeholder: `some-signer-${legalStructureId}--placeholder- ${randomInt()}`,
-    },
-    services: {
-      contentMd: `some-payment-${legalStructureId}--type-content-${randomInt()}`,
-    },
-    notification: {
-      contentMd: `some-${legalStructureId}--notification-${randomInt()}`,
-    },
     ...overrides,
   };
 };

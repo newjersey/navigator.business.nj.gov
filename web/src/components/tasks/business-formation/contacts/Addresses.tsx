@@ -279,7 +279,9 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
       <div className={`margin-bottom-3 ${styles.membersTable}`} data-testid={`addresses-${props.fieldName}`}>
         <h3 style={{ display: "inline" }}>{props.displayContent.header}</h3>
         {props.displayContent.subheader && (
-          <div className="h6-styling margin-left-1">{props.displayContent.subheader}</div>
+          <span className="margin-left-1">
+            <span className="h6-styling">{props.displayContent.subheader}</span>
+          </span>
         )}
         <Content className="margin-top-1">{props.displayContent.description}</Content>
         <div>

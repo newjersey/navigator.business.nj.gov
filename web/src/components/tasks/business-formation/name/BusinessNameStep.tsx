@@ -78,7 +78,8 @@ export const BusinessNameStep = (): ReactElement => {
   return (
     <div data-testid="business-name-step">
       <form onSubmit={doSearch} className="usa-prose grid-container padding-0">
-        <Content>{state.displayContent.businessNameCheck.contentMd}</Content>
+        <h3>{Config.formation.fields.businessName.header}</h3>
+        <Content>{Config.formation.fields.businessName.description}</Content>
         <WithErrorBar hasError={hasError} type="DESKTOP-ONLY">
           <div className="text-bold margin-top-1">{Config.formation.fields.businessName.label}</div>
           <div className={isTabletAndUp ? "grid-row grid-gap-2" : "display-flex flex-column"}>
