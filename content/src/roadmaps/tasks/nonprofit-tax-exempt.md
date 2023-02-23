@@ -27,8 +27,9 @@ See the IRS [guide on tax-exempt organizations](https://www.irs.gov/charities-no
 *  `EIN|ein` number
 
 :::infoAlert 
- The application portal displays only one of the two forms in its main page (form 1023). Form 1024 can be found using the search bar in that same main page.
+ The application to obtain exempt status displays only one of the two forms in its main page (form 1023). Form 1024 can be found using the search bar in that same main page.
 :::
 
->**Once completed, you will have:**
->- A tax exemption confirmation letter from the IRS 
+> **Once completed, you will have:**
+>
+> * A tax exemption confirmation letter from the IRS
