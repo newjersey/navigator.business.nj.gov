@@ -35,6 +35,23 @@ export const FormationDateModal = (props: Props): ReactElement => {
     setFieldStates({ ...fieldStates, [field]: { invalid } });
   };
 
+  const shouldShowMunicipalityQuestion = (): boolean => {
+    if (!userData) {
+      return false;
+    }
+    if (userData.profileData.nexusLocationInNewJersey === false) {
+      return false;
+    }
+    return userData.profileData.municipality === undefined;
+  };
+
+  const shouldValidateMunicipalityQuestion = (): boolean => {
+    if (!shouldShowMunicipalityQuestion()) {
+      return false;
+    }
+    return !profileData.municipality || fieldStates.municipality.invalid;
+  };
+
   const saveDateOfFormation = async (): Promise<void> => {
     if (!userData || !updateQueue) {
       return;
@@ -43,7 +60,7 @@ export const FormationDateModal = (props: Props): ReactElement => {
       onValidation("dateOfFormation", true);
       return;
     }
-    if (!profileData.municipality || fieldStates.municipality.invalid) {
+    if (shouldValidateMunicipalityQuestion()) {
       onValidation("municipality", true);
       return;
     }
@@ -51,13 +68,6 @@ export const FormationDateModal = (props: Props): ReactElement => {
     updateQueue.queueProfileData(profileData);
 
     props.onSave({ redirectOnSuccess: true });
-  };
-
-  const shouldShowMunicipalityQuestion = (): boolean => {
-    if (!userData) {
-      return false;
-    }
-    return userData.profileData.municipality === undefined;
   };
 
   return (
