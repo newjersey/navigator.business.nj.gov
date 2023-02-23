@@ -4635,7 +4635,7 @@ __metadata:
     "@jest/types": 29.4.2
     "@mdx-js/react": 2.3.0
     "@mui/lab": 5.0.0-alpha.120
-    "@mui/material": 5.11.9
+    "@mui/material": 5.11.10
     "@mui/styles": 5.11.9
     "@mui/system": 5.11.9
     "@mui/x-date-pickers": 5.0.19
@@ -4853,7 +4853,7 @@ __metadata:
     "@jest/types": 29.4.2
     "@mdx-js/react": 2.3.0
     "@mui/lab": 5.0.0-alpha.120
-    "@mui/material": 5.11.9
+    "@mui/material": 5.11.10
     "@mui/styles": 5.11.9
     "@mui/system": 5.11.9
     "@mui/x-date-pickers": 5.0.19
@@ -7132,9 +7132,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mui/material@npm:5.11.9":
-  version: 5.11.9
-  resolution: "@mui/material@npm:5.11.9"
+"@mui/material@npm:5.11.10":
+  version: 5.11.10
+  resolution: "@mui/material@npm:5.11.10"
   dependencies:
     "@babel/runtime": ^7.20.13
     "@mui/base": 5.0.0-alpha.118
@@ -7161,7 +7161,7 @@ __metadata:
       optional: true
     "@types/react":
       optional: true
-  checksum: a9f796549aef16dc7aaae4afc65fb0deaf920004f00c957c21fa1f09fe0a7587c3e1fbeffb239b961ca64d7727beadd434b62e530a9e44d59a909e4c95f0f1ce
+  checksum: 7d0ee8b7bc8a39146464a9a3ccc18766aff55914e7d801590b401f79c36e98b3b17aacd069e2620166024dd1020e67ad3a38da0d72e6aa0283d760a488c79501
   languageName: node
   linkType: hard
 

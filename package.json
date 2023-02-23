@@ -45,7 +45,7 @@
     "@emotion/react": "11.10.6",
     "@emotion/styled": "11.10.6",
     "@mui/lab": "5.0.0-alpha.120",
-    "@mui/material": "5.11.9",
+    "@mui/material": "5.11.10",
     "@mui/styles": "5.11.9",
     "@mui/x-date-pickers": "5.0.19",
     "@newjersey/njwds": "0.3.0",
