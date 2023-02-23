@@ -103,6 +103,34 @@ describe("<FormationDateModal />", () => {
     expect(screen.queryByLabelText("Location")).not.toBeInTheDocument();
   });
 
+  it("shows location field if user is dakota nexus with a new jersey location", () => {
+    renderComponent(
+      generateUserData({
+        profileData: generateProfileData({
+          businessPersona: "FOREIGN",
+          foreignBusinessType: "NEXUS",
+          nexusLocationInNewJersey: true,
+          municipality: undefined,
+        }),
+      })
+    );
+    expect(screen.getByText("Location")).toBeInTheDocument();
+  });
+
+  it("does not show location field if user is dakota nexus with no new jersey location", () => {
+    renderComponent(
+      generateUserData({
+        profileData: generateProfileData({
+          businessPersona: "FOREIGN",
+          foreignBusinessType: "NEXUS",
+          nexusLocationInNewJersey: false,
+          municipality: undefined,
+        }),
+      })
+    );
+    expect(screen.queryByLabelText("Location")).not.toBeInTheDocument();
+  });
+
   it("shows error when user saves without entering location", () => {
     renderComponent(generateUserData({ profileData: generateProfileData({ municipality: undefined }) }));
     expect(

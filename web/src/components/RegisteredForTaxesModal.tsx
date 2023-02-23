@@ -100,6 +100,9 @@ export const RegisteredForTaxesModal = (props: Props): ReactElement => {
     if (!userData) {
       return false;
     }
+    if (userData.profileData.nexusLocationInNewJersey === false) {
+      return false;
+    }
     return userData.profileData.municipality === undefined;
   };
 

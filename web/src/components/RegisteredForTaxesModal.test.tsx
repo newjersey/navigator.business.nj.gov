@@ -223,6 +223,36 @@ describe("<RegisteredForTaxesModal />", () => {
         screen.queryByText(Config.profileDefaults.fields.nexusDbaName.default.header)
       ).not.toBeInTheDocument();
     });
+
+    it("shows location field if user is dakota nexus with new jersey location", () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          businessPersona: "FOREIGN",
+          legalStructureId: randomTradeNameLegalStructure(),
+          foreignBusinessType: "NEXUS",
+          nexusLocationInNewJersey: true,
+          municipality: undefined,
+        }),
+      });
+
+      renderComponent(userData);
+      expect(screen.getByText("Location")).toBeInTheDocument();
+    });
+
+    it("does not show location field if user is dakota nexus with no new jersey location", () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          businessPersona: "FOREIGN",
+          legalStructureId: randomTradeNameLegalStructure(),
+          foreignBusinessType: "NEXUS",
+          nexusLocationInNewJersey: false,
+          municipality: undefined,
+        }),
+      });
+
+      renderComponent(userData);
+      expect(screen.queryByLabelText("Location")).not.toBeInTheDocument();
+    });
   });
 
   describe("when public filing legal structure", () => {
@@ -442,6 +472,36 @@ describe("<RegisteredForTaxesModal />", () => {
       expect(
         screen.queryByText(markdownToText(Config.profileDefaults.fields.nexusDbaName.default.header))
       ).not.toBeInTheDocument();
+    });
+
+    it("shows location field if user is dakota nexus with new jersey location", () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          businessPersona: "FOREIGN",
+          legalStructureId: randomPublicFilingLegalStructure(),
+          foreignBusinessType: "NEXUS",
+          nexusLocationInNewJersey: true,
+          municipality: undefined,
+        }),
+      });
+
+      renderComponent(userData);
+      expect(screen.getByText("Location")).toBeInTheDocument();
+    });
+
+    it("does not show location field if user is dakota nexus with no new jersey location", () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          businessPersona: "FOREIGN",
+          legalStructureId: randomPublicFilingLegalStructure(),
+          foreignBusinessType: "NEXUS",
+          nexusLocationInNewJersey: false,
+          municipality: undefined,
+        }),
+      });
+
+      renderComponent(userData);
+      expect(screen.queryByLabelText("Location")).not.toBeInTheDocument();
     });
 
     describe("tax id", () => {
