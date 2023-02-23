@@ -1,3 +1,20 @@
+# [5.14.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.13.0...v5.14.0) (2023-02-23)
+
+
+### Bug Fixes
+
+* [[#183716181](https://github.com/newjersey/navigator.business.nj.gov/issues/183716181)] needs to register dbaName validation ([bc9fd4a](https://github.com/newjersey/navigator.business.nj.gov/commit/bc9fd4a70168ca2a759b0c812c618173ec32ca1e))
+* updating Profile Page profile-fields ([#5306](https://github.com/newjersey/navigator.business.nj.gov/issues/5306)) ([b6e701e](https://github.com/newjersey/navigator.business.nj.gov/commit/b6e701e5b8ba963ef6732121f2d3f1c04fb2850b))
+* updating Roadmaps - Industries generic ([#5304](https://github.com/newjersey/navigator.business.nj.gov/issues/5304)) ([0644dcb](https://github.com/newjersey/navigator.business.nj.gov/commit/0644dcb5538b16b6e9d46ea7e10887987bc86165))
+* updating Tasks - All detective-agency-license ([#5299](https://github.com/newjersey/navigator.business.nj.gov/issues/5299)) ([fbb85de](https://github.com/newjersey/navigator.business.nj.gov/commit/fbb85de097c74b864940c665bd41db27221f9b5a))
+
+
+### Features
+
+* [[#183716181](https://github.com/newjersey/navigator.business.nj.gov/issues/183716181)] dakota nexus dba name in register modal ([b2bf0b6](https://github.com/newjersey/navigator.business.nj.gov/commit/b2bf0b684d5c71bdcbd6ea3355e1dcd03aba2ce0))
+* [[#183959967](https://github.com/newjersey/navigator.business.nj.gov/issues/183959967)] change select to multi select for fundings in cms ([afdea4f](https://github.com/newjersey/navigator.business.nj.gov/commit/afdea4fdcced25aa6d99d0cb521efcde53f6ceab))
+* [[#184382595](https://github.com/newjersey/navigator.business.nj.gov/issues/184382595)] add get-insurance required to electrical-contractor and transportation industries ([f8e2aad](https://github.com/newjersey/navigator.business.nj.gov/commit/f8e2aad8a4dd182c5b96d57d89698c5525dc33d3))
+
 # [5.13.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.12.0...v5.13.0) (2023-02-21)
 
 
