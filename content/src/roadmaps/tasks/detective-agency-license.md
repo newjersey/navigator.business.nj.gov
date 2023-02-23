@@ -19,7 +19,7 @@ Your detective agency must be licensed prior to offering services to the public.
 - Applicant and business associates must be US citizens
 - None of the applicants can be active law enforcement officers
 
-## Application Requirements
+### Application Requirements
 
 - Names and addresses of all the business owners
 - Two trade name options for your agency
