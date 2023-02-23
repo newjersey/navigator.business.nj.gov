@@ -186,6 +186,15 @@ describe("<BusinessFormationPaginator />", () => {
       });
     });
 
+    it("switches from error-active to error, persisting the error state on step one even after switching steps", async () => {
+      const page = preparePage(initialUserData, displayContent);
+      page.fillText("Search business name", "Pizza Joint");
+      await page.searchBusinessName({ status: "UNAVAILABLE" });
+      expect(page.getStepStateInStepper(LookupStepIndexByName("Name"))).toEqual("ERROR-ACTIVE");
+      await page.stepperClickToBusinessStep();
+      expect(page.getStepStateInStepper(LookupStepIndexByName("Name"))).toEqual("ERROR");
+    });
+
     const switchingStepTests = (switchStepFunction: () => void) => {
       it("filters out empty provisions", async () => {
         const page = preparePage(initialUserData, displayContent);
@@ -215,7 +224,7 @@ describe("<BusinessFormationPaginator />", () => {
           );
         });
 
-        it("does not save availablity state when switching back to step", async () => {
+        it("does not save availability state when switching back to step", async () => {
           const page = preparePage(initialUserData, displayContent);
           await page.stepperClickToBusinessNameStep();
           page.fillText("Search business name", "Pizza Joint");
@@ -338,11 +347,25 @@ describe("<BusinessFormationPaginator />", () => {
         });
       });
 
-      it("marks a step incomplete in the stepper when moving from it if required fields are missing", async () => {
+      it("marks billing as incomplete in the stepper when moving from it if required fields are missing", async () => {
         const page = preparePage(initialUserData, displayContent);
         await page.stepperClickToBillingStep();
         switchStepFunction();
         expect(page.getStepStateInStepper(LookupStepIndexByName("Billing"))).toEqual("INCOMPLETE");
+      });
+
+      it("marks contacts as incomplete in the stepper when moving from it if required fields are missing", async () => {
+        const page = preparePage(initialUserData, displayContent);
+        await page.stepperClickToContactsStep();
+        switchStepFunction();
+        expect(page.getStepStateInStepper(LookupStepIndexByName("Contacts"))).toEqual("INCOMPLETE");
+      });
+
+      it("marks business as incomplete in the stepper when moving from it if required fields are missing", async () => {
+        const page = preparePage(initialUserData, displayContent);
+        await page.stepperClickToBusinessStep();
+        switchStepFunction();
+        expect(page.getStepStateInStepper(LookupStepIndexByName("Business"))).toEqual("INCOMPLETE");
       });
 
       it("marks a step as complete in the stepper if all required fields completed", async () => {
@@ -364,20 +387,20 @@ describe("<BusinessFormationPaginator />", () => {
         expect(page.getStepStateInStepper(LookupStepIndexByName("Name"))).toEqual("COMPLETE");
       });
 
-      it("marks step one as incomplete if business name is unavailable", async () => {
+      it("marks step one as error if business name is unavailable", async () => {
         const page = preparePage(initialUserData, displayContent);
         page.fillText("Search business name", "Pizza Joint");
         await page.searchBusinessName({ status: "UNAVAILABLE" });
         switchStepFunction();
-        expect(page.getStepStateInStepper(LookupStepIndexByName("Name"))).toEqual("INCOMPLETE");
+        expect(page.getStepStateInStepper(LookupStepIndexByName("Name"))).toEqual("ERROR");
       });
 
-      it("marks step one as incomplete if business name search is error", async () => {
+      it("marks step one as error if business name search returns an error response status", async () => {
         const page = preparePage(initialUserData, displayContent);
         page.fillText("Search business name", "Pizza Joint LLC");
         await page.searchBusinessName({ status: "DESIGNATOR" });
         switchStepFunction();
-        expect(page.getStepStateInStepper(LookupStepIndexByName("Name"))).toEqual("INCOMPLETE");
+        expect(page.getStepStateInStepper(LookupStepIndexByName("Name"))).toEqual("ERROR");
       });
 
       it("shows existing inline errors when visiting an INCOMPLETE step with inline errors", async () => {
