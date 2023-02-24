@@ -675,6 +675,8 @@ workflows:
             - staging-deploy
       - prepare-release:
           filters:
+            tags:
+              ignore: /^env-update.*/
             branches:
               only:
                 - /^release-.*/
@@ -688,6 +690,7 @@ workflows:
                 - /^release-.*/
           requires:
             - prepare-release
+            - production-hold
 
   webflow-sync:
     jobs:
