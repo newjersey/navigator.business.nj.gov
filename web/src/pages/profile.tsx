@@ -312,7 +312,10 @@ const ProfilePage = (props: Props): ReactElement => {
         <OnboardingIndustry onValidation={onValidation} fieldStates={fieldStates} />
 
         {shouldLockFormationFields ? (
-          <LockedProfileField fieldName="legalStructureId" />
+          <LockedProfileField
+            fieldName="legalStructureId"
+            valueFormatter={(value: string) => LookupLegalStructureById(value).name}
+          />
         ) : (
           <>
             <div className="margin-top-3" aria-hidden={true} />
