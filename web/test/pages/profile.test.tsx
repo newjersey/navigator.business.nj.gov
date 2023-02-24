@@ -1727,6 +1727,29 @@ describe("profile", () => {
     });
   });
 
+  describe("Information Section", () => {
+    describe("legal structure", () => {
+      it("displays legal structure name after formationData is successful", () => {
+        const legalStructure = "limited-liability-company";
+
+        renderPage({
+          userData: generateUserData({
+            formationData: generateFormationData({
+              getFilingResponse: generateGetFilingResponse({ success: true }),
+            }),
+            profileData: generateProfileData({
+              businessPersona: "FOREIGN",
+              foreignBusinessType: "NEXUS",
+              legalStructureId: legalStructure,
+            }),
+          }),
+        });
+        expect(screen.getByText(LookupLegalStructureById(legalStructure).name)).toBeInTheDocument();
+        expect(screen.queryByText(LookupLegalStructureById(legalStructure).id)).not.toBeInTheDocument();
+      });
+    });
+  });
+
   describe("Numbers Section", () => {
     describe("tax id", () => {
       describe("disabled", () => {
