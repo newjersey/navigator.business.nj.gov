@@ -661,6 +661,8 @@ workflows:
       - deploy-staging:
           name: staging-deploy
           filters:
+            tags:
+              only: /^env-update.*/
             branches:
               only:
                 - /^release-.*/
@@ -668,6 +670,8 @@ workflows:
       - production-hold:
           type: approval
           filters:
+            tags:
+              only: /^env-update.*/
             branches:
               only:
                 - /^release-.*/
@@ -675,8 +679,6 @@ workflows:
             - staging-deploy
       - prepare-release:
           filters:
-            tags:
-              ignore: /^env-update.*/
             branches:
               only:
                 - /^release-.*/
@@ -685,6 +687,8 @@ workflows:
       - deploy-production:
           name: production-deploy
           filters:
+            tags:
+              only: /^env-update.*/
             branches:
               only:
                 - /^release-.*/
@@ -725,7 +729,9 @@ workflows:
           name: build
           filters:
             tags:
-              ignore: /^new-docker-image.*/
+              ignore:
+                - /^new-docker-image.*/
+                - /^env-update.*/
             branches:
               ignore:
                 - /^release-.*/
