@@ -705,6 +705,8 @@ workflows:
             - staging-deploy
       - prepare-release:
           filters:
+            tags:
+              ignore: /^env-update.*/
             branches:
               only:
                 - /^release-.*/
