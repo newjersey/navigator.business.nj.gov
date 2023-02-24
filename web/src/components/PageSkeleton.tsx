@@ -3,6 +3,7 @@ import { ReportAnIssueBar } from "@/components/feedback-modal/ReportAnIssueBar";
 import { InnovFooter } from "@/components/InnovFooter";
 import { LegalMessage } from "@/components/LegalMessage";
 import { Banner } from "@/components/njwds/Banner";
+import { OutageAlertBar } from "@/components/OutageAlertBar";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import React, { ReactElement } from "react";
 
@@ -25,6 +26,7 @@ export const PageSkeleton = (props: Props): ReactElement => {
           </div>
         )}
         <Banner />
+        <OutageAlertBar />
         <BetaBar />
       </section>
       <div className="fit-screen-content">{props.children}</div>
