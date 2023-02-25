@@ -4540,7 +4540,7 @@ __metadata:
     "@types/node": 16.18.12
     "@types/simple-oauth2": 4.1.2
     "@types/supertest": 2.0.12
-    "@types/webpack-node-externals": 2.5.3
+    "@types/webpack-node-externals": 3.0.0
     "@types/xml2js": 0.4.11
     "@typescript-eslint/eslint-plugin": 5.53.0
     "@typescript-eslint/parser": 5.53.0
@@ -4691,7 +4691,7 @@ __metadata:
     "@types/testing-library__jest-dom": 5.14.5
     "@types/ua-parser-js": 0.7.36
     "@types/uuid": 9.0.1
-    "@types/webpack-node-externals": 2.5.3
+    "@types/webpack-node-externals": 3.0.0
     "@types/xml2js": 0.4.11
     "@typescript-eslint/eslint-plugin": 5.53.0
     "@typescript-eslint/parser": 5.53.0
@@ -10663,13 +10663,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/webpack-node-externals@npm:2.5.3":
-  version: 2.5.3
-  resolution: "@types/webpack-node-externals@npm:2.5.3"
+"@types/webpack-node-externals@npm:3.0.0":
+  version: 3.0.0
+  resolution: "@types/webpack-node-externals@npm:3.0.0"
   dependencies:
     "@types/node": "*"
     webpack: ^5
-  checksum: 9cd0f7821d4a322479ef3264f82192ec62d582e7505b28af1d3e352be8ec98fd8432edc4184c2644caa5f75de88266edf5b45661e9be766cb6ae54b0c484636b
+  checksum: ea87e99d389708ebf144e47ba1353bac2ab524f80f022b07ce683ba451f326a6cfd62acae36f0a727823a3c198e59de70baac20cf1ea9eb5cf0980ab55f758c7
   languageName: node
   linkType: hard
 

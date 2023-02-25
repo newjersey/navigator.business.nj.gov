@@ -157,7 +157,7 @@
     "@types/supertest": "2.0.12",
     "@types/testing-library__jest-dom": "5.14.5",
     "@types/uuid": "9.0.1",
-    "@types/webpack-node-externals": "2.5.3",
+    "@types/webpack-node-externals": "3.0.0",
     "@types/xml2js": "0.4.11",
     "@typescript-eslint/eslint-plugin": "5.53.0",
     "@typescript-eslint/parser": "5.53.0",
