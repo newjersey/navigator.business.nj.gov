@@ -1,9 +1,4 @@
-import {
-  createEmptyDbaDisplayContent,
-  createEmptyFormationDisplayContent,
-  FormationDbaContent,
-  FormationDisplayContent,
-} from "@/lib/types/types";
+import { createEmptyDbaDisplayContent, FormationDbaContent } from "@/lib/types/types";
 import {
   createEmptyFormationFormData,
   FormationFields,
@@ -15,7 +10,6 @@ import { createContext } from "react";
 interface BusinessFormationState {
   stepIndex: number;
   formationFormData: FormationFormData;
-  displayContent: FormationDisplayContent;
   showResponseAlert: boolean;
   hasBeenSubmitted: boolean;
   dbaContent: FormationDbaContent;
@@ -39,7 +33,6 @@ export const BusinessFormationContext = createContext<BusinessFormationContextTy
   state: {
     stepIndex: 0,
     formationFormData: { ...createEmptyFormationFormData(), legalType: "limited-liability-company" },
-    displayContent: createEmptyFormationDisplayContent(),
     dbaContent: createEmptyDbaDisplayContent(),
     showResponseAlert: false,
     hasBeenSubmitted: false,

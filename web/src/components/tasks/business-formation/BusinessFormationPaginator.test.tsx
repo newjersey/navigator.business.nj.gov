@@ -8,7 +8,6 @@ import analytics from "@/lib/utils/analytics";
 import {
   generateEmptyFormationData,
   generateFormationDbaContent,
-  generateFormationDisplayContentMap,
   generateFormationSubmitError,
   generateFormationSubmitResponse,
   generateTask,
@@ -82,7 +81,6 @@ describe("<BusinessFormationPaginator />", () => {
     const profileData = generateFormationProfileData({ legalStructureId });
     const formationData = generateEmptyFormationData();
     displayContent = {
-      formationDisplayContentMap: generateFormationDisplayContentMap({}),
       formationDbaContent: generateFormationDbaContent({}),
     };
     initialUserData = generateUserData({ profileData, formationData });

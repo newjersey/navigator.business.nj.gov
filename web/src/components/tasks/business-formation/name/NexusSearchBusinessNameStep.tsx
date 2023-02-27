@@ -1,3 +1,4 @@
+import { Content } from "@/components/Content";
 import { NexusAvailable } from "@/components/tasks/business-formation/name/NexusAvailable";
 import { NexusUnavailable } from "@/components/tasks/business-formation/name/NexusUnavailable";
 import { SearchBusinessNameForm } from "@/components/tasks/search-business-name/SearchBusinessNameForm";
@@ -71,6 +72,8 @@ export const NexusSearchBusinessNameStep = (): ReactElement => {
 
   return (
     <div data-testid={"nexus-name-step"}>
+      <h3>{Config.formation.fields.businessName.overrides.foreign.header}</h3>
+      <Content>{Config.formation.fields.businessName.overrides.foreign.description}</Content>
       <SearchBusinessNameForm
         unavailable={NexusUnavailable}
         available={NexusAvailable}

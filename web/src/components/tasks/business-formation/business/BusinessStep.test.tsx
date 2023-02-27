@@ -1,10 +1,6 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import { defaultDisplayDateFormat } from "@/lib/types/types";
-import {
-  generateFormationDbaContent,
-  generateFormationDisplayContentMap,
-  generateUserData,
-} from "@/test/factories";
+import { generateFormationDbaContent, generateUserData } from "@/test/factories";
 import {
   FormationPageHelpers,
   generateFormationProfileData,
@@ -51,16 +47,11 @@ jest.mock("@/lib/api-client/apiClient", () => ({
 }));
 
 describe("Formation - BusinessStep", () => {
-  let displayContent = {
-    formationDisplayContentMap: generateFormationDisplayContentMap({}),
+  const displayContent = {
     formationDbaContent: generateFormationDbaContent({}),
   };
 
   beforeEach(() => {
-    displayContent = {
-      formationDisplayContentMap: generateFormationDisplayContentMap({}),
-      formationDbaContent: generateFormationDbaContent({}),
-    };
     jest.resetAllMocks();
     useSetupInitialMocks();
   });

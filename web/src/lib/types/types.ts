@@ -1,9 +1,7 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import {
-  allFormationLegalTypes,
   BusinessUser,
   FormationFields,
-  FormationLegalType,
   FormationMember,
   FormationSigner,
   IndustrySpecificData,
@@ -33,10 +31,6 @@ export type ProfileError =
 
 export type FlowType = Exclude<BusinessPersona, undefined>;
 
-export type FormationDisplayContent = {
-  introParagraph: { contentMd: string };
-};
-
 export const createEmptyTaskWithoutLinks = (): TaskWithoutLinks => {
   return {
     id: "",
@@ -62,27 +56,11 @@ export const createEmptyDbaDisplayContent = (): FormationDbaContent => {
 
 export const createEmptyTaskDisplayContent = (): TasksDisplayContent => {
   return {
-    formationDisplayContentMap: createEmptyFormationDisplayContentMap(),
     formationDbaContent: createEmptyDbaDisplayContent(),
   };
 };
 
 export type AllPaymentTypes = { type: PaymentType; displayText: string }[];
-
-export const createEmptyFormationDisplayContentMap = (): FormationDisplayContentMap => {
-  return allFormationLegalTypes.reduce((accumulator, curr) => {
-    accumulator[curr] = createEmptyFormationDisplayContent();
-    return accumulator;
-  }, {} as FormationDisplayContentMap);
-};
-
-export const createEmptyFormationDisplayContent = (): FormationDisplayContent => {
-  return {
-    introParagraph: {
-      contentMd: "",
-    },
-  };
-};
 
 export type OnboardingStatus = "SUCCESS" | "ERROR";
 
@@ -278,8 +256,6 @@ export type County =
   | "Union"
   | "Warren";
 
-export type FormationDisplayContentMap = Record<FormationLegalType, FormationDisplayContent>;
-
 export interface FormationSignedAddress extends FormationMember, Partial<Omit<FormationSigner, "name">> {}
 
 export type FormationDbaContent = {
@@ -288,7 +264,6 @@ export type FormationDbaContent = {
   Formation: TaskWithoutLinks;
 };
 export type TasksDisplayContent = {
-  formationDisplayContentMap: FormationDisplayContentMap;
   formationDbaContent: FormationDbaContent;
 };
 

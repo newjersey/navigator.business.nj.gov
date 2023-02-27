@@ -1,5 +1,5 @@
 import { getMergedConfig } from "@/contexts/configContext";
-import { generateFormationDbaContent, generateFormationDisplayContentMap } from "@/test/factories";
+import { generateFormationDbaContent } from "@/test/factories";
 import {
   generateFormationProfileData,
   preparePage,
@@ -72,7 +72,6 @@ describe("Formation - ReviewStep", () => {
         formationData,
       },
       {
-        formationDisplayContentMap: generateFormationDisplayContentMap({}),
         formationDbaContent: generateFormationDbaContent({}),
       }
     );

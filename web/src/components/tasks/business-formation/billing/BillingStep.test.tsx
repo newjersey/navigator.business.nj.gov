@@ -2,12 +2,7 @@
 
 import { getMergedConfig } from "@/contexts/configContext";
 import { TasksDisplayContent } from "@/lib/types/types";
-import {
-  generateFormationDbaContent,
-  generateFormationDisplayContentMap,
-  generateUser,
-  generateUserData,
-} from "@/test/factories";
+import { generateFormationDbaContent, generateUser, generateUserData } from "@/test/factories";
 import {
   FormationPageHelpers,
   generateFormationProfileData,
@@ -46,7 +41,6 @@ jest.mock("@/lib/api-client/apiClient", () => ({
 
 describe("Formation - BillingStep", () => {
   const displayContent: TasksDisplayContent = {
-    formationDisplayContentMap: generateFormationDisplayContentMap({}),
     formationDbaContent: generateFormationDbaContent({}),
   };
 
