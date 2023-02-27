@@ -6,7 +6,6 @@ import {
   generateEmptyFormationData,
   generateFormationData,
   generateFormationDbaContent,
-  generateFormationDisplayContentMap,
   generateFormationSubmitResponse,
   generateGetFilingResponse,
   generateProfileData,
@@ -21,7 +20,6 @@ import {
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { currentUserData } from "@/test/mock/withStatefulUserData";
 import {
-  castPublicFilingLegalTypeToFormationType,
   defaultDateFormat,
   FormationData,
   FormationIncorporator,
@@ -31,8 +29,11 @@ import {
   UserData,
 } from "@businessnjgovnavigator/shared";
 
+import { Content } from "@/components/Content";
+import { useMockUserData } from "@/test/mock/mockUseUserData";
 import * as materialUi from "@mui/material";
 import { act, fireEvent, screen, waitFor } from "@testing-library/react";
+import { renderToStaticMarkup } from "react-dom/server";
 
 function mockMaterialUI(): typeof materialUi {
   return {
@@ -57,7 +58,6 @@ const mockApi = api as jest.Mocked<typeof api>;
 
 describe("<BusinessFormation />", () => {
   const displayContent = {
-    formationDisplayContentMap: generateFormationDisplayContentMap({}),
     formationDbaContent: generateFormationDbaContent({}),
   };
 
@@ -72,7 +72,24 @@ describe("<BusinessFormation />", () => {
     expect(screen.queryByTestId("formation-form")).not.toBeInTheDocument();
   });
 
-  it("casts legalStructureId to correct formationLegalStructure and renders correct content", () => {
+  it("shows default intro content for in-state formation", () => {
+    preparePage(
+      {
+        profileData: generateProfileData({
+          legalStructureId: "limited-liability-company",
+          businessPersona: "STARTING",
+        }),
+      },
+      displayContent
+    );
+
+    useMockUserData(generateUserData({})); // necessary for renderToStaticMarkup for Content
+    expect(screen.getByTestId("formation-form")).toContainHTML(
+      renderToStaticMarkup(Content({ children: Config.formation.intro.default }))
+    );
+  });
+
+  it("shows override intro content for foreign formation", () => {
     preparePage(
       {
         profileData: generateProfileData({
@@ -80,18 +97,13 @@ describe("<BusinessFormation />", () => {
           businessPersona: "FOREIGN",
         }),
       },
-      {
-        ...displayContent,
-        formationDisplayContentMap: {
-          ...displayContent.formationDisplayContentMap,
-          "foreign-limited-liability-company": {
-            ...displayContent.formationDisplayContentMap["foreign-limited-liability-company"],
-            introParagraph: { contentMd: "roflcopter" },
-          },
-        },
-      }
+      displayContent
     );
-    expect(screen.getByText("roflcopter")).toBeInTheDocument();
+
+    useMockUserData(generateUserData({})); // necessary for renderToStaticMarkup for Content
+    expect(screen.getByTestId("formation-form")).toContainHTML(
+      renderToStaticMarkup(Content({ children: Config.formation.intro.foreign }))
+    );
   });
 
   describe("when completedFilingPayment is true and no getFilingResponse exists", () => {
@@ -590,10 +602,6 @@ describe("<BusinessFormation />", () => {
       businessPersona: "FOREIGN",
       legalStructureId: _legalStructureId,
     });
-    const legalStructureId = castPublicFilingLegalTypeToFormationType(
-      _legalStructureId,
-      profileData.businessPersona
-    );
     const formationData = generateEmptyFormationData();
     const page = preparePage({ profileData, formationData }, displayContent, [
       generateMunicipality({ displayName: "Newark", name: "Newark" }),

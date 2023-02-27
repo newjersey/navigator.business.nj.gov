@@ -472,7 +472,7 @@ export const BusinessFormationPaginator = (): ReactElement => {
           }}
         />
       </div>
-      <div data-testid="formation-form" className="fg1 flex flex-column space-between">
+      <div className="fg1 flex flex-column space-between">
         {BusinessFormationSteps[state.stepIndex].component}
         {displayButtons()}
       </div>

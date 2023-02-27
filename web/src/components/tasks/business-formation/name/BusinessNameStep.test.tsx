@@ -1,15 +1,17 @@
-import {
-  generateFormationDbaContent,
-  generateFormationDisplayContentMap,
-  generateUserData,
-} from "@/test/factories";
+import { getMergedConfig } from "@/contexts/configContext";
+import { generateEmptyFormationData, generateFormationDbaContent, generateUserData } from "@/test/factories";
 import {
   FormationPageHelpers,
   generateFormationProfileData,
   preparePage,
   useSetupInitialMocks,
 } from "@/test/helpers/helpers-formation";
-import { createEmptyFormationFormData } from "@businessnjgovnavigator/shared";
+import {
+  createEmptyFormationFormData,
+  foreignLegalTypePrefix,
+  FormationLegalType,
+  generateFormationFormData,
+} from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { screen, within } from "@testing-library/react";
 
@@ -19,6 +21,9 @@ function mockMaterialUI(): typeof materialUi {
     useMediaQuery: jest.fn(),
   };
 }
+
+const Config = getMergedConfig();
+
 jest.mock("@mui/material", () => mockMaterialUI());
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
@@ -47,7 +52,6 @@ describe("Formation - BusinessNameStep", () => {
       completedFilingPayment: false,
     };
     return preparePage(generateUserData({ profileData, formationData }), {
-      formationDisplayContentMap: generateFormationDisplayContentMap({}),
       formationDbaContent: generateFormationDbaContent({}),
     });
   };
@@ -157,5 +161,60 @@ describe("Formation - BusinessNameStep", () => {
     page.fillText("Search business name", "Anything else");
     await page.searchBusinessName({ status: "AVAILABLE", similarNames: [] });
     expect(screen.queryByTestId("error-alert-SEARCH_FAILED")).not.toBeInTheDocument();
+  });
+
+  describe("content", () => {
+    const domesticTypes: FormationLegalType[] = [
+      "limited-liability-company",
+      "limited-liability-partnership",
+      "limited-partnership",
+      "c-corporation",
+      "s-corporation",
+    ];
+    const foreignTypes: FormationLegalType[] = [
+      "foreign-limited-liability-company",
+      "foreign-limited-liability-partnership",
+    ];
+
+    for (const legalStructureId of domesticTypes) {
+      it(`uses default content for ${legalStructureId}`, () => {
+        const profileData = generateFormationProfileData({ legalStructureId, businessPersona: "STARTING" });
+        const formationData = {
+          formationFormData: generateFormationFormData({}, { legalStructureId }),
+          formationResponse: undefined,
+          getFilingResponse: undefined,
+          completedFilingPayment: false,
+        };
+
+        preparePage(generateUserData({ profileData, formationData }), {
+          formationDbaContent: generateFormationDbaContent({}),
+        });
+
+        expect(screen.getByText(Config.formation.fields.businessName.header)).toBeInTheDocument();
+        expect(
+          screen.queryByText(Config.formation.fields.businessName.overrides.foreign.header)
+        ).not.toBeInTheDocument();
+      });
+    }
+
+    for (const legalStructureId of foreignTypes) {
+      it(`uses override content for ${legalStructureId}`, () => {
+        const legalStructureWithoutPrefix = legalStructureId.replace(foreignLegalTypePrefix, "");
+        const profileData = generateFormationProfileData({
+          legalStructureId: legalStructureWithoutPrefix,
+          businessPersona: "FOREIGN",
+          businessName: "some name",
+          needsNexusDbaName: false,
+        });
+
+        preparePage(generateUserData({ profileData, formationData: generateEmptyFormationData() }), {
+          formationDbaContent: generateFormationDbaContent({}),
+        });
+        expect(
+          screen.getByText(Config.formation.fields.businessName.overrides.foreign.header)
+        ).toBeInTheDocument();
+        expect(screen.queryByText(Config.formation.fields.businessName.header)).not.toBeInTheDocument();
+      });
+    }
   });
 });

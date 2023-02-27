@@ -1,20 +1,11 @@
 import {
-  createEmptyFormationDisplayContent,
   FormationDbaContent,
-  FormationDisplayContent,
-  FormationDisplayContentMap,
   RoadmapDisplayContent,
   SidebarCardContent,
   TasksDisplayContent,
   TaskWithoutLinks,
 } from "@/lib/types/types";
 import { getMarkdown } from "@/lib/utils/markdownReader";
-import {
-  allFormationLegalTypes,
-  defaultFormationLegalType,
-  foreignLegalTypePrefix,
-  FormationLegalType,
-} from "@businessnjgovnavigator/shared/";
 import fs from "fs";
 import path from "path";
 
@@ -46,58 +37,6 @@ const loadSidebarDisplayContent = (): Record<string, SidebarCardContent> => {
   }, {} as Record<string, SidebarCardContent>);
 };
 
-const getFormationFields = (
-  legalId: FormationLegalType,
-  defaultStore?: FormationDisplayContent
-): FormationDisplayContent => {
-  const getPath = (filename: string, type?: FormationLegalType): string => {
-    return path.join(displayContentDir, "business-formation", type ?? "", filename);
-  };
-
-  const loadFile = (filename: string, type?: FormationLegalType): string => {
-    return fs.readFileSync(getPath(filename, type), "utf8");
-  };
-
-  const getTextFieldContent = (filename: string, type: FormationLegalType) => {
-    const markdown = getMarkdown(loadFile(filename, type));
-    return {
-      contentMd: markdown.content,
-      ...(markdown.grayMatter as Record<string, string>),
-    };
-  };
-
-  const introParagraph = (type: FormationLegalType) => {
-    return getTextFieldContent("form-business-entity-intro.md", type);
-  };
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const fieldFunctions: Record<keyof FormationDisplayContent, (type: FormationLegalType) => any> = {
-    introParagraph,
-  };
-
-  return Object.keys(fieldFunctions).reduce((content, name) => {
-    try {
-      return {
-        ...content,
-        [name as keyof FormationDisplayContent]:
-          fieldFunctions[name as keyof FormationDisplayContent](legalId),
-      };
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error: any) {
-      if (error.code !== "ENOENT") {
-        throw error;
-      }
-      if (defaultStore && name in defaultStore) {
-        return {
-          ...content,
-          [name as keyof FormationDisplayContent]: defaultStore[name as keyof FormationDisplayContent],
-        };
-      }
-      return content;
-    }
-  }, createEmptyFormationDisplayContent());
-};
-
 const getDbaTasks = (): FormationDbaContent => {
   const getPath = (filename: string): string => {
     return path.join(displayContentDir, "business-formation", "nexus", filename);
@@ -122,37 +61,8 @@ const getDbaTasks = (): FormationDbaContent => {
   };
 };
 
-export const getFormationDisplayContentMapDefaults = (
-  defaultDisplayContent: FormationDisplayContent,
-  defaultForeignDisplayContent: FormationDisplayContent
-): FormationDisplayContentMap =>
-  allFormationLegalTypes
-    .filter((val) => {
-      return val != defaultFormationLegalType;
-    })
-    .reduce(
-      (accumulator: FormationDisplayContentMap, legalId: FormationLegalType) => {
-        accumulator[legalId] = getFormationFields(
-          legalId,
-          legalId.includes(foreignLegalTypePrefix) ? defaultForeignDisplayContent : defaultDisplayContent
-        );
-        return accumulator;
-      },
-      { [defaultFormationLegalType]: defaultDisplayContent } as FormationDisplayContentMap
-    );
-
 export const loadTasksDisplayContent = (): TasksDisplayContent => {
-  const defaultFormationDisplayContentMap = getFormationFields(defaultFormationLegalType);
-  const defaultForeignFormationDisplayContentMap = getFormationFields(
-    `foreign-${defaultFormationLegalType}`,
-    defaultFormationDisplayContentMap
-  );
-
   return {
-    formationDisplayContentMap: getFormationDisplayContentMapDefaults(
-      defaultFormationDisplayContentMap,
-      defaultForeignFormationDisplayContentMap
-    ),
     formationDbaContent: getDbaTasks(),
   };
 };

@@ -20,6 +20,7 @@ import { getModifiedTaskContent } from "@/lib/utils/roadmap-helpers";
 import { isBusinessStartDateValid } from "@/components/tasks/business-formation/business/BusinessDateValidators";
 import { BusinessFormationPaginator } from "@/components/tasks/business-formation/BusinessFormationPaginator";
 import { NexusFormationFlow } from "@/components/tasks/business-formation/NexusFormationFlow";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import {
   castPublicFilingLegalTypeToFormationType,
   createEmptyFormationFormData,
@@ -46,6 +47,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
   const { roadmap } = useRoadmap();
   const { userData, update } = useUserData();
   const router = useRouter();
+  const { Config } = useConfig();
 
   const [formationFormData, setFormationFormData] = useState<FormationFormData>(
     createEmptyFormationFormData()
@@ -235,7 +237,6 @@ export const BusinessFormation = (props: Props): ReactElement => {
         state: {
           stepIndex: stepIndex,
           formationFormData: formationFormData,
-          displayContent: props.displayContent.formationDisplayContentMap[legalStructureId],
           dbaContent: props.displayContent.formationDbaContent,
           showResponseAlert: showResponseAlert,
           interactedFields,
@@ -252,7 +253,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
         setBusinessNameAvailability,
       }}
     >
-      <div className="flex flex-column  minh-38">
+      <div className="flex flex-column minh-38" data-testid="formation-form">
         <>
           <div>
             <TaskHeader task={props.task} />
@@ -260,12 +261,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
               <>
                 <UnlockedBy task={props.task} dataTestid="dependency-alert" />
                 <div className="margin-bottom-2">
-                  <Content>
-                    {
-                      props.displayContent.formationDisplayContentMap[legalStructureId].introParagraph
-                        .contentMd
-                    }
-                  </Content>
+                  <Content>{Config.formation.intro[isForeign ? "foreign" : "default"]}</Content>
                 </div>
               </>
             )}

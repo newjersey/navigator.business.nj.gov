@@ -3,8 +3,6 @@ import {
   Certification,
   County,
   FormationDbaContent,
-  FormationDisplayContent,
-  FormationDisplayContentMap,
   Funding,
   FundingBusinessStage,
   FundingCertifications,
@@ -35,7 +33,6 @@ import {
   createEmptyFormationFormData,
   CURRENT_VERSION,
   defaultDateFormat,
-  defaultFormationLegalType,
   FormationData,
   FormationLegalType,
   FormationSubmitError,
@@ -391,30 +388,6 @@ export const generateFormationDbaContent = (
   Formation: generateTaskWithoutLinks({}),
   ...overrides,
 });
-
-export const generateFormationDisplayContent = (
-  overrides: Partial<FormationDisplayContent>,
-  legalStructureId: FormationLegalType = defaultFormationLegalType
-): FormationDisplayContent => {
-  return {
-    introParagraph: {
-      contentMd: `some-intro-content-${legalStructureId}-${randomInt()}`,
-    },
-    ...overrides,
-  };
-};
-
-export const generateFormationDisplayContentMap = (
-  overrides: Partial<Record<FormationLegalType, Partial<FormationDisplayContent>>>
-): FormationDisplayContentMap => {
-  return allFormationLegalTypes.reduce((accumulator, curr) => {
-    accumulator[curr] = generateFormationDisplayContent(
-      { ...overrides[defaultFormationLegalType], ...overrides[curr] },
-      curr as FormationLegalType
-    );
-    return accumulator;
-  }, {} as FormationDisplayContentMap);
-};
 
 export const generateSidebarCardContent = (overrides: Partial<SidebarCardContent>): SidebarCardContent => {
   return {

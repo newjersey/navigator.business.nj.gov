@@ -5,12 +5,7 @@ import { getMergedConfig } from "@/contexts/configContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { TasksDisplayContent } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
-import {
-  generateEmptyFormationData,
-  generateFormationDbaContent,
-  generateFormationDisplayContentMap,
-  generateUserData,
-} from "@/test/factories";
+import { generateEmptyFormationData, generateFormationDbaContent, generateUserData } from "@/test/factories";
 import {
   FormationPageHelpers,
   generateFormationProfileData,
@@ -95,24 +90,9 @@ describe("<NexusFormationFlow />", () => {
     });
     const formationData = generateEmptyFormationData();
     displayContent = {
-      formationDisplayContentMap: generateFormationDisplayContentMap({}),
       formationDbaContent: generateFormationDbaContent({}),
     };
     initialUserData = generateUserData({ profileData, formationData });
-  });
-
-  it("renders the foreign displayContent", async () => {
-    preparePage(initialUserData, {
-      ...displayContent,
-      formationDisplayContentMap: {
-        ...displayContent.formationDisplayContentMap,
-        "foreign-limited-liability-company": {
-          ...displayContent.formationDisplayContentMap["foreign-limited-liability-company"],
-          introParagraph: { contentMd: "roflcopter" },
-        },
-      },
-    });
-    expect(screen.getByText("roflcopter")).toBeInTheDocument();
   });
 
   describe("name search step", () => {
@@ -350,7 +330,6 @@ describe("<NexusFormationFlow />", () => {
       });
 
       it("displays formationTask content", async () => {
-        expect(screen.queryByTestId("formation-form")).not.toBeInTheDocument();
         expect(screen.getByText("roflcopter")).toBeInTheDocument();
         expect(screen.getByText("buttonText")).toBeInTheDocument();
       });

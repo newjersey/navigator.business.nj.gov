@@ -123,7 +123,13 @@
         "errorInlineNeedsToSearch": "Confirm the availability of your business name.",
         "placeholder": "Enter a business name",
         "reviewStepLabel": "**Business Name**",
-        "label": "Business Name Search"
+        "label": "Business Name Search",
+        "overrides": {
+          "foreign": {
+            "header": "Check Availability of Your Business Name",
+            "description": "Your business name must match **exactly** with the business name registered in your state of origin, you can find this on your original `Certificate of Formation|certificate-formation`. **This search tool does not register your name with the State.**\n\nPlease check if your business name is available in New Jersey."
+          }
+        }
       },
       "businessPurpose": {
         "header": "Business Purpose",
@@ -481,6 +487,10 @@
       "optionalLabel": "(Optional)",
       "genericErrorText": "This field requires information.",
       "maximumLengthErrorText": "${field} must be ${maxLen} characters or fewer."
+    },
+    "intro": {
+      "default": "This online application will register your business name and form your `business structure|business-structure-learn-more` with the New Jersey Division of Revenue and Enterprise Services.\n\nThis form will take about 5–10 minutes to complete. You will have completed formation and obtained an `Entity ID|entity-id` immediately after payment is received.\n\nInterested in `reserving your business name temporarily|name-reservation` before registering?",
+      "foreign": "You must register your business name and form your business with the State. To do this, you first need to see if your business name is available."
     }
   }
 }
