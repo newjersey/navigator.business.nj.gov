@@ -41,7 +41,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
     label: string;
   };
 
-  const requiredFields = [
+  const validatedFields = [
     "addressName",
     "addressLine1",
     "addressLine2",
@@ -50,11 +50,11 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
     "addressZipCode",
   ] as const;
 
-  type ErrorFields = (typeof requiredFields)[number];
+  type ErrorFields = (typeof validatedFields)[number];
   type AddressErrorMap = Record<ErrorFields, ErrorState>;
 
   const createAddressErrorMap = (invalid?: boolean): AddressErrorMap => {
-    return requiredFields.reduce((prev: AddressErrorMap, curr: ErrorFields) => {
+    return validatedFields.reduce((prev: AddressErrorMap, curr: ErrorFields) => {
       return { ...prev, [curr]: { invalid, label: "" } };
     }, {} as AddressErrorMap);
   };
@@ -166,7 +166,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
       };
       setAddressData(data);
 
-      const errorMap = requiredFields.reduce((prev: AddressErrorMap, curr: ErrorFields) => {
+      const errorMap = validatedFields.reduce((prev: AddressErrorMap, curr: ErrorFields) => {
         return { ...prev, [curr]: getErrorStateForField(curr, { dataOverride: data }) };
       }, {} as AddressErrorMap);
 
@@ -190,7 +190,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
     });
     if (unValidated) {
       setAddressErrorMap(
-        requiredFields.reduce(
+        validatedFields.reduce(
           (prev: AddressErrorMap, curr: ErrorFields) => {
             return { ...prev, [curr]: getErrorStateForField(curr) };
           },

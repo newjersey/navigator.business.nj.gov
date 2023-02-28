@@ -6,7 +6,7 @@ import {
 } from "@businessnjgovnavigator/shared";
 
 describe("validatedFieldsForUser", () => {
-  const requiredFieldsForAllLegalStructures: FormationFields[] = [
+  const validatedFieldsForAllLegalStructures: FormationFields[] = [
     "businessName",
     "businessSuffix",
     "businessStartDate",
@@ -19,7 +19,7 @@ describe("validatedFieldsForUser", () => {
     "contactPhoneNumber",
   ];
 
-  const foreignRequired: FormationFields[] = [
+  const foreignValidatedFields: FormationFields[] = [
     "addressCity",
     "foreignDateOfFormation",
     "foreignStateOfFormation",
@@ -32,7 +32,7 @@ describe("validatedFieldsForUser", () => {
         { legalStructureId: "foreign-limited-liability-company" }
       );
 
-      const expected: FormationFields[] = [...foreignRequired, "addressProvince", "addressCountry"];
+      const expected: FormationFields[] = [...foreignValidatedFields, "addressProvince", "addressCountry"];
 
       expect(validatedFieldsForUser(formationFormData)).toEqual(expect.arrayContaining(expected));
     });
@@ -43,7 +43,7 @@ describe("validatedFieldsForUser", () => {
         { legalStructureId: "foreign-limited-liability-company" }
       );
 
-      const expected: FormationFields[] = [...foreignRequired, "addressState"];
+      const expected: FormationFields[] = [...foreignValidatedFields, "addressState"];
 
       expect(validatedFieldsForUser(formationFormData)).toEqual(expect.arrayContaining(expected));
     });
@@ -98,7 +98,7 @@ describe("validatedFieldsForUser", () => {
       const legalStructureId = "limited-liability-company";
       const formationFormData = generateFormationFormData({}, { legalStructureId });
 
-      const expected: FormationFields[] = [...requiredFieldsForAllLegalStructures, "signers"];
+      const expected: FormationFields[] = [...validatedFieldsForAllLegalStructures, "signers"];
 
       expect(validatedFieldsForUser(formationFormData)).toEqual(expect.arrayContaining(expected));
     });
@@ -109,7 +109,7 @@ describe("validatedFieldsForUser", () => {
       const legalStructureId = "limited-liability-partnership";
       const formationFormData = generateFormationFormData({}, { legalStructureId });
 
-      const expected: FormationFields[] = [...requiredFieldsForAllLegalStructures, "signers"];
+      const expected: FormationFields[] = [...validatedFieldsForAllLegalStructures, "signers"];
 
       expect(validatedFieldsForUser(formationFormData)).toEqual(expect.arrayContaining(expected));
     });
@@ -121,7 +121,7 @@ describe("validatedFieldsForUser", () => {
       const formationFormData = generateFormationFormData({}, { legalStructureId });
 
       const expected: FormationFields[] = [
-        ...requiredFieldsForAllLegalStructures,
+        ...validatedFieldsForAllLegalStructures,
         "businessTotalStock",
         "members",
         "incorporators",
@@ -136,7 +136,7 @@ describe("validatedFieldsForUser", () => {
       const formationFormData = generateFormationFormData({}, { legalStructureId });
 
       const expected: FormationFields[] = [
-        ...requiredFieldsForAllLegalStructures,
+        ...validatedFieldsForAllLegalStructures,
         "businessTotalStock",
         "members",
         "incorporators",
@@ -159,7 +159,7 @@ describe("validatedFieldsForUser", () => {
       );
 
       const expected: FormationFields[] = [
-        ...requiredFieldsForAllLegalStructures,
+        ...validatedFieldsForAllLegalStructures,
         "withdrawals",
         "combinedInvestment",
         "dissolution",

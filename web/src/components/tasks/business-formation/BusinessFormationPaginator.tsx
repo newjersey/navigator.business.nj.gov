@@ -297,8 +297,8 @@ export const BusinessFormationPaginator = (): ReactElement => {
   };
 
   const resetInteractedFields = (userData: UserData): void => {
-    const requiredFields = validatedFieldsForUser(userData.formationData.formationFormData);
-    setFieldsInteracted(requiredFields, { setToUninteracted: true });
+    const validatedFields = validatedFieldsForUser(userData.formationData.formationFormData);
+    setFieldsInteracted(validatedFields, { setToUninteracted: true });
   };
 
   const shouldDisplayPreviousButton = (): boolean => {
