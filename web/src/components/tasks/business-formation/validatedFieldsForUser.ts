@@ -6,7 +6,7 @@ import {
 } from "@businessnjgovnavigator/shared/formationData";
 
 export const validatedFieldsForUser = (formationFormData: FormationFormData): FormationFields[] => {
-  let requiredFields: FormationFields[] = [
+  let validatedFields: FormationFields[] = [
     "businessName",
     "businessSuffix",
     "businessStartDate",
@@ -19,7 +19,7 @@ export const validatedFieldsForUser = (formationFormData: FormationFormData): Fo
     "contactPhoneNumber",
   ];
 
-  const foreignRequired: FormationFields[] = [
+  const foreignValidatedFields: FormationFields[] = [
     "addressCity",
     "foreignDateOfFormation",
     "foreignStateOfFormation",
@@ -27,22 +27,22 @@ export const validatedFieldsForUser = (formationFormData: FormationFormData): Fo
 
   switch (formationFormData.businessLocationType) {
     case "US":
-      requiredFields = [...requiredFields, ...foreignRequired, "addressState"];
+      validatedFields = [...validatedFields, ...foreignValidatedFields, "addressState"];
       break;
     case "INTL":
-      requiredFields = [...requiredFields, ...foreignRequired, "addressProvince", "addressCountry"];
+      validatedFields = [...validatedFields, ...foreignValidatedFields, "addressProvince", "addressCountry"];
       break;
     case "NJ":
-      requiredFields.push("addressMunicipality");
+      validatedFields.push("addressMunicipality");
   }
 
   if (formationFormData.agentNumberOrManual === "NUMBER") {
-    requiredFields = [...requiredFields, "agentNumber"];
+    validatedFields = [...validatedFields, "agentNumber"];
   }
 
   if (formationFormData.agentNumberOrManual === "MANUAL_ENTRY") {
-    requiredFields = [
-      ...requiredFields,
+    validatedFields = [
+      ...validatedFields,
       "agentName",
       "agentEmail",
       "agentOfficeAddressLine1",
@@ -53,18 +53,18 @@ export const validatedFieldsForUser = (formationFormData: FormationFormData): Fo
   }
 
   if (incorporationLegalStructures.includes(formationFormData.legalType)) {
-    requiredFields.push("incorporators");
+    validatedFields.push("incorporators");
   } else {
-    requiredFields.push("signers");
+    validatedFields.push("signers");
   }
 
   if (corpLegalStructures.includes(formationFormData.legalType)) {
-    requiredFields = [...requiredFields, "businessTotalStock", "members"];
+    validatedFields = [...validatedFields, "businessTotalStock", "members"];
   }
 
   if (formationFormData.legalType === "limited-partnership") {
-    requiredFields = [
-      ...requiredFields,
+    validatedFields = [
+      ...validatedFields,
       "withdrawals",
       "combinedInvestment",
       "dissolution",
@@ -74,15 +74,15 @@ export const validatedFieldsForUser = (formationFormData: FormationFormData): Fo
     ];
 
     if (formationFormData.canCreateLimitedPartner) {
-      requiredFields.push("createLimitedPartnerTerms");
+      validatedFields.push("createLimitedPartnerTerms");
     }
     if (formationFormData.canGetDistribution) {
-      requiredFields.push("getDistributionTerms");
+      validatedFields.push("getDistributionTerms");
     }
     if (formationFormData.canMakeDistribution) {
-      requiredFields.push("makeDistributionTerms");
+      validatedFields.push("makeDistributionTerms");
     }
   }
 
-  return requiredFields;
+  return validatedFields;
 };
