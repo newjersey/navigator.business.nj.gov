@@ -124,11 +124,9 @@
         "placeholder": "Enter a business name",
         "reviewStepLabel": "**Business Name**",
         "label": "Business Name Search",
-        "overrides": {
-          "foreign": {
-            "header": "Check Availability of Your Business Name",
-            "description": "Your business name must match **exactly** with the business name registered in your state of origin, you can find this on your original `Certificate of Formation|certificate-formation`. **This search tool does not register your name with the State.**\n\nPlease check if your business name is available in New Jersey."
-          }
+        "foreign": {
+          "header": "Check Availability of Your Business Name",
+          "description": "Your business name must match **exactly** with the business name registered in your state of origin, you can find this on your original `Certificate of Formation|certificate-formation`. **This search tool does not register your name with the State.**\n\nPlease check if your business name is available in New Jersey."
         }
       },
       "businessPurpose": {
@@ -168,17 +166,31 @@
         "reviewStepYes": "**Yes**, the limited partners have the right to receive distributions from a partner. (This can  include a return of all or any part of their partner's contributions).",
         "reviewStepNo": "**No**, the limited partners do not have the right to receive distributions from a partner. (This can  include a return of all or any part of their partner's contributions)."
       },
+      "getDistributionTerms": {
+        "fieldDisplayName": "Partnership Rights"
+      },
       "canMakeDistribution": {
         "fieldDisplayName": "Partnership Rights",
         "body": "Do general partners have the right to make distributions to any partner? (This includes a return of all or any part of the partner's contributions).",
         "reviewStepNo": "**No**, general partners do not have the right to make distributions to any partner. (This includes a return of all or any part of the partner's contributions).",
         "reviewStepYes": "**Yes**, general partners have the right to make distributions to any partner. (This includes a return of all or any part of the partner's contributions)."
       },
+      "makeDistributionTerms": {
+        "fieldDisplayName": "Partnership Rights"
+      },
       "canCreateLimitedPartner": {
         "fieldDisplayName": "Partnership Rights",
         "body": "Can limited partners assign other partners limited partner rights?",
         "reviewStepNo": "**No**, the limited partners cannot assign other partners limited partner rights.",
         "reviewStepYes": "**Yes**, the limited partners can assign other partners limited partner rights."
+      },
+      "createLimitedPartnerTerms": {
+        "fieldDisplayName": "Partnership Rights"
+      },
+      "officialFormationDocument": {
+        "label": "`Official Formation Documentation|certificate-formation`",
+        "cost": "125",
+        "reviewStepLabel": "Official Formation Document"
       },
       "certifiedCopyOfFormationDocument": {
         "cost": "25",
@@ -200,11 +212,6 @@
             "cost": "25"
           }
         }
-      },
-      "officialFormationDocument": {
-        "label": "`Official Formation Documentation|certificate-formation`",
-        "cost": "125",
-        "reviewStepLabel": "Official Formation Document"
       },
       "combinedInvestment":{
         "fieldDisplayName": "Combined Investment",
@@ -271,15 +278,6 @@
         "reviewStepLabel": "**Original State of Formation:**",
         "placeholder": "Select a State of Formation",
         "error": "Select a State"
-      },
-      "createLimitedPartnerTerms": {
-        "fieldDisplayName": "Partnership Rights"
-      },
-      "getDistributionTerms": {
-        "fieldDisplayName": "Partnership Rights"
-      },
-      "makeDistributionTerms": {
-        "fieldDisplayName": "Partnership Rights"
       },
       "incorporators": {
         "fieldDisplayName": "Signer",
@@ -474,10 +472,10 @@
     },
     "general": {
       "amendmentInfo": "#### Confirm everything is accurate before submitting. \n\n If you need to make a change after submitting, you will need to file a [paper amendment.](https://www.njportal.com/DOR/BusinessAmendments/Forms/IdentifyBusiness)",
-      "backButtonText": "Cancel",
       "notEntered": "Not set",
       "initialNextNexusButtonText": "Continue Authorizing My Business",
       "initialNextButtonText": "Continue Forming My Business",
+      "backButtonText": "Cancel",
       "editButtonText": "Edit",
       "submitButtonText": "Submit & Pay",
       "nextButtonText": "Save & Continue",
