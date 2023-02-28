@@ -1,7 +1,7 @@
 import { getErrorStateForField } from "@/components/tasks/business-formation/getErrorStateForField";
 import { getApiField } from "@/components/tasks/business-formation/getFieldForApiField";
 import { getStepForField } from "@/components/tasks/business-formation/getStepForField";
-import { requiredFieldsForUser } from "@/components/tasks/business-formation/requiredFieldsForUser";
+import { validatedFieldsForUser } from "@/components/tasks/business-formation/validatedFieldsForUser";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { FormationFieldErrorState, FormationStepNames } from "@/lib/types/types";
@@ -13,7 +13,7 @@ export const useFormationErrors = () => {
   const { userData } = useUserData();
 
   const requiredFields = useMemo((): FormationFields[] => {
-    return requiredFieldsForUser(state.formationFormData);
+    return validatedFieldsForUser(state.formationFormData);
   }, [state.formationFormData]);
 
   const errorStates: Record<FormationFields, FormationFieldErrorState> = useMemo(() => {

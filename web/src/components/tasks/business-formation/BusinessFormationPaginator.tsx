@@ -13,7 +13,7 @@ import {
   getFieldByApiField,
   UNKNOWN_API_ERROR_FIELD,
 } from "@/components/tasks/business-formation/getFieldForApiField";
-import { requiredFieldsForUser } from "@/components/tasks/business-formation/requiredFieldsForUser";
+import { validatedFieldsForUser } from "@/components/tasks/business-formation/validatedFieldsForUser";
 import { AuthAlertContext } from "@/contexts/authAlertContext";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import * as api from "@/lib/api-client/apiClient";
@@ -297,7 +297,7 @@ export const BusinessFormationPaginator = (): ReactElement => {
   };
 
   const resetInteractedFields = (userData: UserData): void => {
-    const requiredFields = requiredFieldsForUser(userData.formationData.formationFormData);
+    const requiredFields = validatedFieldsForUser(userData.formationData.formationFormData);
     setFieldsInteracted(requiredFields, { setToUninteracted: true });
   };
 

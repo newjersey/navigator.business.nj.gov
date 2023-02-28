@@ -5,7 +5,7 @@ import {
   incorporationLegalStructures,
 } from "@businessnjgovnavigator/shared/formationData";
 
-export const requiredFieldsForUser = (formationFormData: FormationFormData): FormationFields[] => {
+export const validatedFieldsForUser = (formationFormData: FormationFormData): FormationFields[] => {
   let requiredFields: FormationFields[] = [
     "businessName",
     "businessSuffix",
