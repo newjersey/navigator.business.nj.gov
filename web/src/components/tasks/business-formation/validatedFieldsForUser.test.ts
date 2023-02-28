@@ -1,11 +1,11 @@
-import { requiredFieldsForUser } from "@/components/tasks/business-formation/requiredFieldsForUser";
+import { validatedFieldsForUser } from "@/components/tasks/business-formation/validatedFieldsForUser";
 import {
   FormationFields,
   generateFormationFormData,
   randomFormationLegalType,
 } from "@businessnjgovnavigator/shared";
 
-describe("requiredFieldsForUser", () => {
+describe("validatedFieldsForUser", () => {
   const requiredFieldsForAllLegalStructures: FormationFields[] = [
     "businessName",
     "businessSuffix",
@@ -34,7 +34,7 @@ describe("requiredFieldsForUser", () => {
 
       const expected: FormationFields[] = [...foreignRequired, "addressProvince", "addressCountry"];
 
-      expect(requiredFieldsForUser(formationFormData)).toEqual(expect.arrayContaining(expected));
+      expect(validatedFieldsForUser(formationFormData)).toEqual(expect.arrayContaining(expected));
     });
 
     it("requires US address fields for foreign legal structure", () => {
@@ -45,7 +45,7 @@ describe("requiredFieldsForUser", () => {
 
       const expected: FormationFields[] = [...foreignRequired, "addressState"];
 
-      expect(requiredFieldsForUser(formationFormData)).toEqual(expect.arrayContaining(expected));
+      expect(validatedFieldsForUser(formationFormData)).toEqual(expect.arrayContaining(expected));
     });
 
     it("requires NJ address fields for domestic legal structure", () => {
@@ -56,7 +56,7 @@ describe("requiredFieldsForUser", () => {
 
       const expected: FormationFields[] = ["addressMunicipality"];
 
-      expect(requiredFieldsForUser(formationFormData)).toEqual(expect.arrayContaining(expected));
+      expect(validatedFieldsForUser(formationFormData)).toEqual(expect.arrayContaining(expected));
     });
   });
 
@@ -77,7 +77,7 @@ describe("requiredFieldsForUser", () => {
         "agentOfficeAddressZipCode",
       ];
 
-      expect(requiredFieldsForUser(formationFormData)).toEqual(expect.arrayContaining(expected));
+      expect(validatedFieldsForUser(formationFormData)).toEqual(expect.arrayContaining(expected));
     });
 
     it("requires registered agent fields for NUMBER for all legal structures", () => {
@@ -89,7 +89,7 @@ describe("requiredFieldsForUser", () => {
 
       const expected: FormationFields[] = ["agentNumber"];
 
-      expect(requiredFieldsForUser(formationFormData)).toEqual(expect.arrayContaining(expected));
+      expect(validatedFieldsForUser(formationFormData)).toEqual(expect.arrayContaining(expected));
     });
   });
 
@@ -100,7 +100,7 @@ describe("requiredFieldsForUser", () => {
 
       const expected: FormationFields[] = [...requiredFieldsForAllLegalStructures, "signers"];
 
-      expect(requiredFieldsForUser(formationFormData)).toEqual(expect.arrayContaining(expected));
+      expect(validatedFieldsForUser(formationFormData)).toEqual(expect.arrayContaining(expected));
     });
   });
 
@@ -111,7 +111,7 @@ describe("requiredFieldsForUser", () => {
 
       const expected: FormationFields[] = [...requiredFieldsForAllLegalStructures, "signers"];
 
-      expect(requiredFieldsForUser(formationFormData)).toEqual(expect.arrayContaining(expected));
+      expect(validatedFieldsForUser(formationFormData)).toEqual(expect.arrayContaining(expected));
     });
   });
 
@@ -126,7 +126,7 @@ describe("requiredFieldsForUser", () => {
         "members",
         "incorporators",
       ];
-      expect(requiredFieldsForUser(formationFormData)).toEqual(expect.arrayContaining(expected));
+      expect(validatedFieldsForUser(formationFormData)).toEqual(expect.arrayContaining(expected));
     });
   });
 
@@ -141,7 +141,7 @@ describe("requiredFieldsForUser", () => {
         "members",
         "incorporators",
       ];
-      expect(requiredFieldsForUser(formationFormData)).toEqual(expect.arrayContaining(expected));
+      expect(validatedFieldsForUser(formationFormData)).toEqual(expect.arrayContaining(expected));
     });
   });
 
@@ -168,7 +168,7 @@ describe("requiredFieldsForUser", () => {
         "canMakeDistribution",
         "incorporators",
       ];
-      expect(requiredFieldsForUser(formationFormData)).toEqual(expect.arrayContaining(expected));
+      expect(validatedFieldsForUser(formationFormData)).toEqual(expect.arrayContaining(expected));
     });
 
     it("also terms fields for YES answer to canCreateLimitedPartner", () => {
@@ -182,9 +182,9 @@ describe("requiredFieldsForUser", () => {
         { legalStructureId }
       );
 
-      expect(requiredFieldsForUser(formationFormData)).toContain("createLimitedPartnerTerms");
-      expect(requiredFieldsForUser(formationFormData)).not.toContain("getDistributionTerms");
-      expect(requiredFieldsForUser(formationFormData)).not.toContain("makeDistributionTerms");
+      expect(validatedFieldsForUser(formationFormData)).toContain("createLimitedPartnerTerms");
+      expect(validatedFieldsForUser(formationFormData)).not.toContain("getDistributionTerms");
+      expect(validatedFieldsForUser(formationFormData)).not.toContain("makeDistributionTerms");
     });
 
     it("also terms fields for YES answer to canGetDistribution", () => {
@@ -197,9 +197,9 @@ describe("requiredFieldsForUser", () => {
         { legalStructureId }
       );
 
-      expect(requiredFieldsForUser(formationFormData)).toContain("createLimitedPartnerTerms");
-      expect(requiredFieldsForUser(formationFormData)).toContain("getDistributionTerms");
-      expect(requiredFieldsForUser(formationFormData)).not.toContain("makeDistributionTerms");
+      expect(validatedFieldsForUser(formationFormData)).toContain("createLimitedPartnerTerms");
+      expect(validatedFieldsForUser(formationFormData)).toContain("getDistributionTerms");
+      expect(validatedFieldsForUser(formationFormData)).not.toContain("makeDistributionTerms");
     });
 
     it("also terms fields for YES answer to canMakeDistribution", () => {
@@ -212,9 +212,9 @@ describe("requiredFieldsForUser", () => {
         { legalStructureId }
       );
 
-      expect(requiredFieldsForUser(formationFormData)).toContain("createLimitedPartnerTerms");
-      expect(requiredFieldsForUser(formationFormData)).toContain("getDistributionTerms");
-      expect(requiredFieldsForUser(formationFormData)).toContain("makeDistributionTerms");
+      expect(validatedFieldsForUser(formationFormData)).toContain("createLimitedPartnerTerms");
+      expect(validatedFieldsForUser(formationFormData)).toContain("getDistributionTerms");
+      expect(validatedFieldsForUser(formationFormData)).toContain("makeDistributionTerms");
     });
   });
 });
