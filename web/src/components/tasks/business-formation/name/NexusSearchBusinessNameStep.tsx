@@ -72,8 +72,8 @@ export const NexusSearchBusinessNameStep = (): ReactElement => {
 
   return (
     <div data-testid={"nexus-name-step"}>
-      <h3>{Config.formation.fields.businessName.overrides.foreign.header}</h3>
-      <Content>{Config.formation.fields.businessName.overrides.foreign.description}</Content>
+      <h3>{Config.formation.fields.businessName.foreign.header}</h3>
+      <Content>{Config.formation.fields.businessName.foreign.description}</Content>
       <SearchBusinessNameForm
         unavailable={NexusUnavailable}
         available={NexusAvailable}

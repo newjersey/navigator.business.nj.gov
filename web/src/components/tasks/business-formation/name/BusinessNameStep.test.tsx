@@ -192,7 +192,7 @@ describe("Formation - BusinessNameStep", () => {
 
         expect(screen.getByText(Config.formation.fields.businessName.header)).toBeInTheDocument();
         expect(
-          screen.queryByText(Config.formation.fields.businessName.overrides.foreign.header)
+          screen.queryByText(Config.formation.fields.businessName.foreign.header)
         ).not.toBeInTheDocument();
       });
     }
@@ -210,9 +210,7 @@ describe("Formation - BusinessNameStep", () => {
         preparePage(generateUserData({ profileData, formationData: generateEmptyFormationData() }), {
           formationDbaContent: generateFormationDbaContent({}),
         });
-        expect(
-          screen.getByText(Config.formation.fields.businessName.overrides.foreign.header)
-        ).toBeInTheDocument();
+        expect(screen.getByText(Config.formation.fields.businessName.foreign.header)).toBeInTheDocument();
         expect(screen.queryByText(Config.formation.fields.businessName.header)).not.toBeInTheDocument();
       });
     }

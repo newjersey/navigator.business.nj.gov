@@ -41,196 +41,839 @@ collections:
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
       - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
       - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
-
-  - name: "business-formation-c-corp"
-    label: "Biz Form - Corporation"
-    folder: "content/src/display-content/business-formation/c-corporation"
-    summary: "{{filename}}"
-    identifier_field: "{{fields.slug}}"
-    slug: "{{fields.slug}}"
-    delete: false
-    create: true
-    editor:
-      preview: true
-    fields:
-      - { label: "Content", name: "body", widget: "markdown" }
-      - { label: "Filename", name: "slug", widget: "slug", required: false }
-      - {
-          label: "Radio Button Number Text",
-          name: "radioButtonNumberText",
-          widget: "string",
-          required: false,
-        }
-      - {
-          label: "Radio Button Manual Text",
-          name: "radioButtonManualText",
-          widget: "string",
-          required: false,
-        }
-      - { label: "Placeholder", name: "placeholder", widget: "string", required: false }
-      - { label: "cost", name: "cost", widget: "string", required: false }
-      - { label: "Optional Label", name: "optionalLabel", widget: "string", required: false }
-      - { label: "Bolded Heading", name: "headingBolded", widget: "string", required: false }
-      - { label: "Sub Heading", name: "headingNotBolded", widget: "string", required: false }
-  - name: "business-formation-llc"
-    label: "Biz Form - LLC"
-    folder: "content/src/display-content/business-formation/limited-liability-company"
-    summary: "{{filename}}"
-    identifier_field: "{{fields.slug}}"
-    slug: "{{fields.slug}}"
-    delete: false
-    create: true
-    editor:
-      preview: true
-    fields:
-      - { label: "Content", name: "body", widget: "markdown" }
-      - { label: "Filename", name: "slug", widget: "slug", required: false }
-      - {
-          label: "Radio Button Number Text",
-          name: "radioButtonNumberText",
-          widget: "string",
-          required: false,
-        }
-      - {
-          label: "Radio Button Manual Text",
-          name: "radioButtonManualText",
-          widget: "string",
-          required: false,
-        }
-      - { label: "Placeholder", name: "placeholder", widget: "string", required: false }
-      - { label: "cost", name: "cost", widget: "string", required: false }
-      - { label: "Optional Label", name: "optionalLabel", widget: "string", required: false }
-      - { label: "Bolded Heading", name: "headingBolded", widget: "string", required: false }
-      - { label: "Sub Heading", name: "headingNotBolded", widget: "string", required: false }
-  - name: "business-formation-foreign-llc"
-    label: "Biz Form - FLC"
-    folder: "content/src/display-content/business-formation/foreign-limited-liability-company"
-    summary: "{{filename}}"
-    identifier_field: "{{fields.slug}}"
-    slug: "{{fields.slug}}"
-    delete: false
-    create: true
-    editor:
-      preview: true
-    fields:
-      - { label: "Content", name: "body", widget: "markdown" }
-      - { label: "Filename", name: "slug", widget: "slug", required: false }
-      - {
-          label: "Radio Button Number Text",
-          name: "radioButtonNumberText",
-          widget: "string",
-          required: false,
-        }
-      - {
-          label: "Radio Button Manual Text",
-          name: "radioButtonManualText",
-          widget: "string",
-          required: false,
-        }
-      - { label: "Placeholder", name: "placeholder", widget: "string", required: false }
-      - { label: "Error Text", name: "errorText", widget: "string", required: false }
-      - { label: "cost", name: "cost", widget: "string", required: false }
-      - { label: "Optional Label", name: "optionalLabel", widget: "string", required: false }
-      - { label: "Bolded Heading", name: "headingBolded", widget: "string", required: false }
-      - { label: "Sub Heading", name: "headingNotBolded", widget: "string", required: false }
-  - name: "business-formation-llp"
-    label: "Biz Form - LLP"
-    folder: "content/src/display-content/business-formation/limited-liability-partnership"
-    summary: "{{filename}}"
-    identifier_field: "{{fields.slug}}"
-    slug: "{{fields.slug}}"
-    delete: false
-    create: true
-    editor:
-      preview: true
-    fields:
-      - { label: "Content", name: "body", widget: "markdown" }
-      - { label: "Filename", name: "slug", widget: "slug", required: false }
-      - {
-          label: "Radio Button Number Text",
-          name: "radioButtonNumberText",
-          widget: "string",
-          required: false,
-        }
-      - {
-          label: "Radio Button Manual Text",
-          name: "radioButtonManualText",
-          widget: "string",
-          required: false,
-        }
-      - { label: "Placeholder", name: "placeholder", widget: "string", required: false }
-      - { label: "cost", name: "cost", widget: "string", required: false }
-      - { label: "Optional Label", name: "optionalLabel", widget: "string", required: false }
-      - { label: "Bolded Heading", name: "headingBolded", widget: "string", required: false }
-      - { label: "Sub Heading", name: "headingNotBolded", widget: "string", required: false }
-  - name: "business-formation-foreign-llP"
-    label: "Biz Form - FLLP"
-    folder: "content/src/display-content/business-formation/foreign-limited-liability-partnership"
-    summary: "{{filename}}"
-    identifier_field: "{{fields.slug}}"
-    slug: "{{fields.slug}}"
-    delete: false
-    create: true
-    editor:
-      preview: true
-    fields:
-      - { label: "Content", name: "body", widget: "markdown" }
-      - { label: "Filename", name: "slug", widget: "slug", required: false }
-      - {
-          label: "Radio Button Number Text",
-          name: "radioButtonNumberText",
-          widget: "string",
-          required: false,
-        }
-      - {
-          label: "Radio Button Manual Text",
-          name: "radioButtonManualText",
-          widget: "string",
-          required: false,
-        }
-      - { label: "Placeholder", name: "placeholder", widget: "string", required: false }
-      - { label: "Error Text", name: "errorText", widget: "string", required: false }
-      - { label: "Review Page Header", name: "reviewHeader", widget: "string", required: false }
-      - { label: "Required Field Error Text", name: "requireFieldText", widget: "string", required: false }
-      - { label: "cost", name: "cost", widget: "string", required: false }
-      - { label: "Optional Label", name: "optionalLabel", widget: "string", required: false }
-      - { label: "Bolded Heading", name: "headingBolded", widget: "string", required: false }
-      - { label: "Sub Heading", name: "headingNotBolded", widget: "string", required: false }
-  - name: "business-formation-s-corp"
-    label: "Biz Form - S Corp"
-    folder: "content/src/display-content/business-formation/s-corporation"
-    summary: "{{filename}}"
-    identifier_field: "{{fields.slug}}"
-    slug: "{{fields.slug}}"
-    delete: false
-    create: true
-    editor:
-      preview: true
-    fields:
-      - { label: "Content", name: "body", widget: "markdown" }
-      - { label: "Filename", name: "slug", widget: "slug", required: false }
-      - {
-          label: "Radio Button Number Text",
-          name: "radioButtonNumberText",
-          widget: "string",
-          required: false,
-        }
-      - {
-          label: "Radio Button Manual Text",
-          name: "radioButtonManualText",
-          widget: "string",
-          required: false,
-        }
-      - { label: "Placeholder", name: "placeholder", widget: "string", required: false }
-      - { label: "cost", name: "cost", widget: "string", required: false }
-      - { label: "Optional Label", name: "optionalLabel", widget: "string", required: false }
-      - { label: "Bolded Heading", name: "headingBolded", widget: "string", required: false }
-      - { label: "Sub Heading", name: "headingNotBolded", widget: "string", required: false }
   - name: "business-formation-config"
     label: "Biz Form - Config"
     delete: false
     create: false
     files:
+      - label: "Form Config"
+        name: "business-formation"
+        file: "content/src/fieldConfig/business-formation.json"
+        editor:
+          preview: false
+        fields:
+          - label: Formation
+            name: formation
+            collapsed: false
+            widget: object
+            fields:
+              - label: Form Fields
+                name: fields
+                collapsed: true
+                widget: object
+                fields:
+                  - label: Address Country
+                    name: addressCountry
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Field name", name: "fieldDisplayName", widget: "string" }
+                      - { label: "Inline error", name: "error", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - { label: "Label", name: "label", widget: "markdown" }
+                  - label: Address Line 1
+                    name: addressLine1
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Field name", name: "fieldDisplayName", widget: "string" }
+                      - { label: "Inline error", name: "error", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - { label: "Label", name: "label", widget: "markdown" }
+                  - label: Address Line 2
+                    name: addressLine2
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Field name", name: "fieldDisplayName", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - { label: "Label", name: "label", widget: "markdown" }
+                  - label: In-State (Poppy) Municipality
+                    name: addressMunicipality
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Field name", name: "fieldDisplayName", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - { label: "Inline error", name: "error", widget: "string" }
+                      - { label: "Info Alert", name: "infoAlert", widget: "markdown" }
+                      - { label: "Label", name: "label", widget: "markdown" }
+                  - label: Out-of-state (Dakota) City
+                    name: addressCity
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Field name", name: "fieldDisplayName", widget: "string" }
+                      - { label: "Inline error", name: "error", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - { label: "Label", name: "label", widget: "markdown" }
+                  - label: Address State
+                    name: addressState
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Field name", name: "fieldDisplayName", widget: "string" }
+                      - { label: "Inline error", name: "error", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - { label: "Label", name: "label", widget: "markdown" }
+                  - label: Address Province
+                    name: addressProvince
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Field name", name: "fieldDisplayName", widget: "string" }
+                      - { label: "Inline error", name: "error", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - { label: "Label", name: "label", widget: "markdown" }
+                  - label: Address Zip Code
+                    name: addressZipCode
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Field name", name: "fieldDisplayName", widget: "string" }
+                      - { label: "Inline error", name: "error", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - { label: "Label", name: "label", widget: "markdown" }
+                      - label: Foreign-business overrides
+                        name: foreign
+                        collapsed: false
+                        widget: object
+                        fields:
+                          - { label: "Inline error - US", name: "errorUS", widget: "string" }
+                          - { label: "Inline error - International", name: "errorIntl", widget: "string" }
+                          - { label: "Placeholder", name: "placeholder", widget: "string" }
+                          - { label: "Label", name: "label", widget: "markdown" }
+                  - label: Agent Name
+                    name: agentName
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Field name", name: "fieldDisplayName", widget: "string" }
+                      - { label: "Inline error", name: "error", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - { label: "Label", name: "label", widget: "markdown" }
+                      - { label: "Review Step Label", name: "reviewStepLabel", widget: "markdown" }
+                  - label: Agent Number
+                    name: agentNumber
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Field name", name: "fieldDisplayName", widget: "string" }
+                      - { label: "Inline error", name: "error", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - { label: "Label", name: "label", widget: "markdown" }
+                      - { label: "Review Step Label", name: "reviewStepLabel", widget: "markdown" }
+                  - label: Agent Email
+                    name: agentEmail
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Field name", name: "fieldDisplayName", widget: "string" }
+                      - { label: "Inline error", name: "error", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - { label: "Label", name: "label", widget: "markdown" }
+                      - { label: "Review Step Label", name: "reviewStepLabel", widget: "markdown" }
+                  - label: Agent Office Address Line 1
+                    name: agentOfficeAddressLine1
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Field name", name: "fieldDisplayName", widget: "string" }
+                      - { label: "Inline error", name: "error", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - { label: "Label", name: "label", widget: "markdown" }
+                  - label: Agent Office Address Line 2
+                    name: agentOfficeAddressLine2
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Field name", name: "fieldDisplayName", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - { label: "Label", name: "label", widget: "markdown" }
+                  - label: Agent Office Municipality
+                    name: agentOfficeAddressMunicipality
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Field name", name: "fieldDisplayName", widget: "string" }
+                      - { label: "Inline error", name: "error", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - { label: "Label", name: "label", widget: "markdown" }
+                  - label: Agent Office State
+                    name: agentOfficeAddressState
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Inline error", name: "error", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - { label: "Label", name: "label", widget: "markdown" }
+                  - label: Agent Office Zip Code
+                    name: agentOfficeAddressZipCode
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Field name", name: "fieldDisplayName", widget: "string" }
+                      - { label: "Inline error", name: "error", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - { label: "Label", name: "label", widget: "markdown" }
+                  - label: Annual Report Notification
+                    name: annualReportNotification
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Checkbox Label", name: "checkboxText", widget: "markdown" }
+                  - label: Business Name
+                    name: businessName
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "Description", name: "description", widget: "markdown" }
+                      - { label: "Field name", name: "fieldDisplayName", widget: "string" }
+                      - { label: "Alert - Name Available", name: "alertAvailable", widget: "text" }
+                      - { label: "Alert - Name Unavailable", name: "alertUnavailable", widget: "text" }
+                      - {
+                          label: "Alert - Special Characters Error",
+                          name: "alertSpecialCharacters",
+                          widget: "text",
+                        }
+                      - { label: "Alert - Designator Error", name: "alertDesignator", widget: "text" }
+                      - {
+                          label: "Alert - Restricted Word Error",
+                          name: "alertRestrictedWord",
+                          widget: "text",
+                        }
+                      - {
+                          label: "Inline error - unavailable",
+                          name: "errorInlineUnavailable",
+                          widget: "string",
+                        }
+                      - { label: "Inline error - empty", name: "errorInlineEmpty", widget: "string" }
+                      - {
+                          label: "Inline error - needs to search",
+                          name: "errorInlineNeedsToSearch",
+                          widget: "string",
+                        }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - { label: "Label", name: "label", widget: "string" }
+                      - { label: "Review Step Label", name: "reviewStepLabel", widget: "markdown" }
+                      - label: Foreign-business Overrides
+                        name: foreign
+                        collapsed: false
+                        widget: object
+                        fields:
+                          - { label: "Header", name: "header", widget: "string" }
+                          - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Business Purpose
+                    name: businessPurpose
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "Body", name: "body", widget: "markdown" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - { label: "Review Step label", name: "reviewStepLabel", widget: "string" }
+                      - { label: "Add button text", name: "addButtonText", widget: "string" }
+                      - { label: "Label", name: "label", widget: "markdown" }
+                  - label: Business Effective Date
+                    name: businessStartDate
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Field name", name: "fieldDisplayName", widget: "string" }
+                      - { label: "Inline error - future", name: "errorFuture", widget: "string" }
+                      - { label: "Inline error - today", name: "errorToday", widget: "string" }
+                      - { label: "Inline error - 30 days", name: "error30Days", widget: "string" }
+                      - { label: "Inline error - 90 days", name: "error90Days", widget: "string" }
+                      - { label: "Review Step Label", name: "reviewStepLabel", widget: "markdown" }
+                      - { label: "Label", name: "label", widget: "markdown" }
+                  - label: Business Designator
+                    name: businessSuffix
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Field name", name: "fieldDisplayName", widget: "string" }
+                      - { label: "Inline error", name: "error", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - { label: "Label", name: "label", widget: "markdown" }
+                      - { label: "Review Step Label", name: "reviewStepLabel", widget: "markdown" }
+                  - label: Business Total Stock
+                    name: businessTotalStock
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Field name", name: "fieldDisplayName", widget: "string" }
+                      - { label: "Inline error", name: "error", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - { label: "Label", name: "label", widget: "markdown" }
+                      - { label: "Review Step Label", name: "reviewStepLabel", widget: "markdown" }
+                  - label: Partnership Rights - Can Get Distribution
+                    name: canGetDistribution
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Field name", name: "fieldDisplayName", widget: "string" }
+                      - { label: "Body", name: "body", widget: "markdown" }
+                      - { label: "Body", name: "reviewStepYes", widget: "markdown" }
+                      - { label: "Body", name: "reviewStepNo", widget: "markdown" }
+                  - label: Partnership Rights - Get Distribution Terms
+                    name: getDistributionTerms
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Field name", name: "fieldDisplayName", widget: "string" }
+                  - label: Partnership Rights - Can Make Distribution
+                    name: canMakeDistribution
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Field name", name: "fieldDisplayName", widget: "string" }
+                      - { label: "Body", name: "body", widget: "markdown" }
+                      - { label: "Body", name: "reviewStepYes", widget: "markdown" }
+                      - { label: "Body", name: "reviewStepNo", widget: "markdown" }
+                  - label: Partnership Rights - Make Distribution Terms
+                    name: makeDistributionTerms
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Field name", name: "fieldDisplayName", widget: "string" }
+                  - label: Partnership Rights - Can Create Limited Partner
+                    name: canCreateLimitedPartner
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Field name", name: "fieldDisplayName", widget: "string" }
+                      - { label: "Body", name: "body", widget: "markdown" }
+                      - { label: "Body", name: "reviewStepYes", widget: "markdown" }
+                      - { label: "Body", name: "reviewStepNo", widget: "markdown" }
+                  - label: Partnership Rights - Create Limited Partner Terms
+                    name: createLimitedPartnerTerms
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Field name", name: "fieldDisplayName", widget: "string" }
+                  - label: Document - Official Formation Document
+                    name: officialFormationDocument
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Cost", name: "cost", widget: "string" }
+                      - { label: "Label", name: "label", widget: "markdown" }
+                      - { label: "Review Step Label", name: "reviewStepLabel", widget: "string" }
+                  - label: Document - Certified Copy of Formation
+                    name: certifiedCopyOfFormationDocument
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Cost", name: "cost", widget: "string" }
+                      - { label: "Label", name: "label", widget: "markdown" }
+                      - { label: "Review Step Label", name: "reviewStepLabel", widget: "string" }
+                  - label: Document - Certificate of Good Standing
+                    name: certificateOfStanding
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Cost", name: "cost", widget: "string" }
+                      - { label: "Label", name: "label", widget: "markdown" }
+                      - { label: "Review Step Label", name: "reviewStepLabel", widget: "string" }
+                      - label: Overrides
+                        name: overrides
+                        collapsed: false
+                        widget: object
+                        fields:
+                          - label: C-Corp
+                            name: "c-corporation"
+                            collapsed: false
+                            widget: object
+                            fields:
+                              - { label: "Cost", name: "cost", widget: "string" }
+                          - label: S-Corp
+                            name: "s-corporation"
+                            collapsed: false
+                            widget: object
+                            fields:
+                              - { label: "Cost", name: "cost", widget: "string" }
+                          - label: Limited Partnership (LP)
+                            name: "limited-partnership"
+                            collapsed: false
+                            widget: object
+                            fields:
+                              - { label: "Cost", name: "cost", widget: "string" }
+                  - label: Combined Investment
+                    name: combinedInvestment
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Field name", name: "fieldDisplayName", widget: "string" }
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "Body", name: "body", widget: "markdown" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - { label: "Review Step Label", name: "reviewStepLabel", widget: "string" }
+                  - label: Contact First Name
+                    name: contactFirstName
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Field name", name: "fieldDisplayName", widget: "string" }
+                      - { label: "Inline error", name: "error", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - { label: "Review Step Label", name: "reviewStepLabel", widget: "string" }
+                      - { label: "Label", name: "label", widget: "markdown" }
+                  - label: Contact Last Name
+                    name: contactLastName
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Field name", name: "fieldDisplayName", widget: "string" }
+                      - { label: "Inline error", name: "error", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - { label: "Review Step Label", name: "reviewStepLabel", widget: "string" }
+                      - { label: "Label", name: "label", widget: "markdown" }
+                  - label: Contact Phone Number
+                    name: contactPhoneNumber
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Field name", name: "fieldDisplayName", widget: "string" }
+                      - { label: "Inline error", name: "error", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - { label: "Review Step Label", name: "reviewStepLabel", widget: "string" }
+                      - { label: "Label", name: "label", widget: "markdown" }
+                  - label: Corp Watch Notification
+                    name: corpWatchNotification
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Checkbox Label", name: "checkboxText", widget: "markdown" }
+                  - label: Directors
+                    name: directors
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "Description", name: "description", widget: "markdown" }
+                      - {
+                          label: "Success snackbar - header",
+                          name: "successSnackbarHeader",
+                          widget: "string",
+                        }
+                      - { label: "Success snackbar - body", name: "successSnackbarBody", widget: "string" }
+                      - { label: "Error", name: "error", widget: "string" }
+                      - { label: "Review Step header", name: "reviewStepHeader", widget: "string" }
+                      - { label: "Review Step label", name: "reviewStepNameLabel", widget: "markdown" }
+                      - { label: "Modal title", name: "modalTitle", widget: "string" }
+                      - { label: "Modal save button", name: "modalSaveButton", widget: "string" }
+                      - { label: "Add button text", name: "addButtonText", widget: "string" }
+                      - { label: "Field name", name: "fieldDisplayName", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                  - label: Dissolution
+                    name: dissolution
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Field name", name: "fieldDisplayName", widget: "string" }
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "Body", name: "body", widget: "markdown" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - { label: "Review Step Label", name: "reviewStepLabel", widget: "string" }
+                  - label: Foreign date of formation
+                    name: foreignDateOfFormation
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Field name", name: "fieldDisplayName", widget: "string" }
+                      - { label: "Inline error", name: "error", widget: "string" }
+                      - { label: "Label", name: "label", widget: "markdown" }
+                      - { label: "Review Step Label", name: "reviewStepLabel", widget: "markdown" }
+                  - label: Foreign state of formation
+                    name: foreignStateOfFormation
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Field name", name: "fieldDisplayName", widget: "string" }
+                      - { label: "Inline error", name: "error", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - { label: "Label", name: "label", widget: "markdown" }
+                      - { label: "Review Step Label", name: "reviewStepLabel", widget: "markdown" }
+                  - label: Incorporators
+                    name: incorporators
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "Description", name: "description", widget: "markdown" }
+                      - {
+                          label: "Success snackbar - header",
+                          name: "successSnackbarHeader",
+                          widget: "string",
+                        }
+                      - { label: "Success snackbar - body", name: "successSnackbarBody", widget: "string" }
+                      - { label: "Review Step header", name: "reviewStepHeader", widget: "string" }
+                      - { label: "Review Step label", name: "reviewStepNameLabel", widget: "markdown" }
+                      - { label: "Modal title", name: "modalTitle", widget: "string" }
+                      - { label: "Add button text", name: "addButtonText", widget: "string" }
+                      - { label: "Field name", name: "fieldDisplayName", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - label: Overrides
+                        name: overrides
+                        collapsed: false
+                        widget: object
+                        fields:
+                          - label: Limited Partnership (LP)
+                            name: "limited-partnership"
+                            collapsed: false
+                            widget: object
+                            fields:
+                              - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Members
+                    name: members
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "Subheader", name: "subheader", widget: "string" }
+                      - { label: "Description", name: "description", widget: "markdown" }
+                      - {
+                          label: "Success snackbar - header",
+                          name: "successSnackbarHeader",
+                          widget: "string",
+                        }
+                      - { label: "Success snackbar - body", name: "successSnackbarBody", widget: "string" }
+                      - { label: "Review Step header", name: "reviewStepHeader", widget: "string" }
+                      - { label: "Review Step label", name: "reviewStepNameLabel", widget: "markdown" }
+                      - { label: "Modal title", name: "modalTitle", widget: "string" }
+                      - { label: "Modal save button", name: "modalSaveButton", widget: "string" }
+                      - { label: "Add button text", name: "addButtonText", widget: "string" }
+                      - { label: "Field name", name: "fieldDisplayName", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - { label: "Address checkbox label", name: "addressCheckboxText", widget: "string" }
+                      - { label: "Expand text", name: "expandText", widget: "string" }
+                  - label: Payment Type
+                    name: paymentType
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - {
+                          label: "Review Step services header",
+                          name: "reviewStepServicesHeader",
+                          widget: "string",
+                        }
+                      - {
+                          label: "Review Step services label",
+                          name: "reviewStepsServicesSelected",
+                          widget: "string",
+                        }
+                      - { label: "Review Step label", name: "reviewStepLabel", widget: "string" }
+                      - { label: "Field name", name: "fieldDisplayName", widget: "string" }
+                      - { label: "Label", name: "label", widget: "string" }
+                      - { label: "Error", name: "error", widget: "string" }
+                      - { label: "ACH label", name: "achLabel", widget: "string" }
+                      - { label: "Credit Card label", name: "creditCardLabel", widget: "string" }
+                      - { label: "Column - cost", name: "costColumnLabel", widget: "string" }
+                      - { label: "Column - service", name: "serviceColumnLabel", widget: "string" }
+                      - { label: "Cost subtotal label", name: "costSubtotalLabel", widget: "string" }
+                      - { label: "Cost total label", name: "costTotalLabel", widget: "string" }
+                      - label: Payment Costs
+                        name: paymentCosts
+                        collapsed: false
+                        widget: object
+                        fields:
+                          - { label: "Credit card initial", name: "creditCardInitial", widget: "string" }
+                          - { label: "Credit card extra", name: "creditCardExtra", widget: "string" }
+                          - { label: "ACH", name: "ach", widget: "string" }
+                  - label: Provisions
+                    name: provisions
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "Body", name: "body", widget: "markdown" }
+                      - { label: "Add button text", name: "addButtonText", widget: "string" }
+                      - { label: "Add another button text", name: "addAnotherButtonText", widget: "string" }
+                      - { label: "Review Step header", name: "reviewStepHeader", widget: "string" }
+                      - { label: "Review Step subheader", name: "reviewStepSubheader", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - { label: "label", name: "label", widget: "markdown" }
+                  - label: Signers
+                    name: signers
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Field name", name: "fieldDisplayName", widget: "string" }
+                      - {
+                          label: "Error banner - signer title",
+                          name: "errorBannerSignerTitle",
+                          widget: "string",
+                        }
+                      - {
+                          label: "Error banner - minimum number",
+                          name: "errorBannerMinimum",
+                          widget: "string",
+                        }
+                      - {
+                          label: "Error banner - signer name",
+                          name: "errorBannerSignerName",
+                          widget: "string",
+                        }
+                      - { label: "Error banner - checkbox", name: "errorBannerCheckbox", widget: "string" }
+                      - {
+                          label: "Error inline - first signer name",
+                          name: "errorInlineFirstSignerName",
+                          widget: "string",
+                        }
+                      - {
+                          label: "Error inline - additional signer name",
+                          name: "errorInlineAdditionalSignerName",
+                          widget: "string",
+                        }
+                      - {
+                          label: "Error inline - signer title",
+                          name: "errorInlineSignerTitle",
+                          widget: "string",
+                        }
+                      - { label: "Name column label", name: "nameLabel", widget: "markdown" }
+                      - { label: "Title column label", name: "titleLabel", widget: "markdown" }
+                      - { label: "Sign column label", name: "signColumnLabel", widget: "markdown" }
+                      - { label: "Title placeholder", name: "titlePlaceholder", widget: "string" }
+                      - { label: "Name placeholder", name: "namePlaceholder", widget: "string" }
+                      - { label: "Table headers", name: "tableHeader", widget: "string" }
+                      - { label: "Add button text", name: "addButtonText", widget: "markdown" }
+                      - { label: "Review step - header", name: "reviewStepHeader", widget: "string" }
+                      - {
+                          label: "Review step - title label",
+                          name: "reviewStepTitleLabel",
+                          widget: "markdown",
+                        }
+                      - { label: "Review step - name label", name: "reviewStepNameLabel", widget: "markdown" }
+                      - { label: "Signature aid text", name: "aidText", widget: "string" }
+                      - { label: "Delete text (mobile)", name: "deleteTextMobile", widget: "string" }
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "Description", name: "description", widget: "markdown" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                      - label: Overrides
+                        name: overrides
+                        collapsed: false
+                        widget: object
+                        fields:
+                          - label: Limited Liability Partnership (LLP)
+                            name: "limited-liability-partnership"
+                            collapsed: false
+                            widget: object
+                            fields:
+                              - { label: "Description", name: "description", widget: "markdown" }
+                          - label: Foreign LLC
+                            name: "foreign-limited-liability-company"
+                            collapsed: false
+                            widget: object
+                            fields:
+                              - { label: "Description", name: "description", widget: "markdown" }
+                  - label: Withdrawals
+                    name: withdrawals
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Field name", name: "fieldDisplayName", widget: "string" }
+                      - { label: "Header", name: "header", widget: "string" }
+                      - { label: "body", name: "body", widget: "markdown" }
+                      - { label: "Review step label", name: "reviewStepLabel", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+              - label: Address Modal
+                name: addressModal
+                collapsed: true
+                widget: object
+                fields:
+                  - label: Name
+                    name: name
+                    collapsed: false
+                    widget: object
+                    fields:
+                      - { label: "Field name", name: "fieldDisplayName", widget: "string" }
+                      - { label: "Label", name: "label", widget: "markdown" }
+                      - { label: "Inline error", name: "error", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                  - label: Address Line 1
+                    name: addressLine1
+                    collapsed: false
+                    widget: object
+                    fields:
+                      - { label: "Field name", name: "fieldDisplayName", widget: "string" }
+                      - { label: "Label", name: "label", widget: "markdown" }
+                      - { label: "Inline error", name: "error", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                  - label: Address Line 2
+                    name: addressLine2
+                    collapsed: false
+                    widget: object
+                    fields:
+                      - { label: "Field name", name: "fieldDisplayName", widget: "string" }
+                      - { label: "Label", name: "label", widget: "markdown" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                  - label: Address City
+                    name: addressCity
+                    collapsed: false
+                    widget: object
+                    fields:
+                      - { label: "Field name", name: "fieldDisplayName", widget: "string" }
+                      - { label: "Label", name: "label", widget: "markdown" }
+                      - { label: "Inline error", name: "error", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                  - label: Address State
+                    name: addressState
+                    collapsed: false
+                    widget: object
+                    fields:
+                      - { label: "Field name", name: "fieldDisplayName", widget: "string" }
+                      - { label: "Label", name: "label", widget: "markdown" }
+                      - { label: "Inline error", name: "error", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+                  - label: Address Zip Code
+                    name: addressZipCode
+                    collapsed: false
+                    widget: object
+                    fields:
+                      - { label: "Field name", name: "fieldDisplayName", widget: "string" }
+                      - { label: "Label", name: "label", widget: "markdown" }
+                      - { label: "Inline error", name: "error", widget: "string" }
+                      - { label: "Placeholder", name: "placeholder", widget: "string" }
+              - label: Partnership Rights
+                name: partnershipRights
+                collapsed: true
+                widget: object
+                fields:
+                  - { label: "Partnership rights header", name: "header", widget: "string" }
+                  - { label: "Terms Label", name: "label", widget: "markdown" }
+                  - { label: "Placeholder text", name: "placeholder", widget: "string" }
+                  - { label: "Error banner - field name", name: "fieldDisplayName", widget: "string" }
+                  - { label: "Radio button - No", name: "radioNoText", widget: "string" }
+                  - { label: "Radio button - Yes", name: "radioYesText", widget: "string" }
+                  - { label: "Review step - header", name: "reviewStepHeader", widget: "string" }
+                  - { label: "Review step - terms label", name: "reviewStepTermsLabel", widget: "markdown" }
+              - label: Registered Agent
+                name: registeredAgent
+                collapsed: true
+                widget: object
+                fields:
+                  - { label: "Registered agent section header", name: "sectionHeader", widget: "string" }
+                  - {
+                      label: "Registered agent section description",
+                      name: "sectionDescription",
+                      widget: "markdown",
+                    }
+                  - {
+                      label: "Radio button label - agent number",
+                      name: "radioButtonNumberText",
+                      widget: "string",
+                    }
+                  - {
+                      label: "Radio button label - agent manual entry",
+                      name: "radioButtonManualText",
+                      widget: "string",
+                    }
+                  - { label: "Review step header", name: "reviewStepHeader", widget: "string" }
+                  - {
+                      label: "Checkbox label - use business address",
+                      name: "sameAddressCheckbox",
+                      widget: "string",
+                    }
+                  - {
+                      label: "Checkbox label - use contact info",
+                      name: "sameContactCheckbox",
+                      widget: "string",
+                    }
+              - label: Sections
+                name: sections
+                collapsed: true
+                widget: object
+                fields:
+                  - { label: "Primary address section header", name: "addressHeader", widget: "string" }
+                  - {
+                      label: "Name and Legal Structure section header",
+                      name: "businessNameAndStructureHeader",
+                      widget: "string",
+                    }
+                  - { label: "Contact info section header", name: "contactInfoHeader", widget: "string" }
+                  - { label: "Notifications section header", name: "notificationsHeader", widget: "string" }
+                  - {
+                      label: "Notifications section description",
+                      name: "notificationsDescription",
+                      widget: "markdown",
+                    }
+                  - { label: "Services section header", name: "servicesHeader", widget: "string" }
+                  - { label: "Services section description", name: "servicesDescription", widget: "markdown" }
+                  - label: Review
+                    name: review
+                    collapsed: false
+                    widget: object
+                    fields:
+                      - { label: "Review step - address label", name: "addressLabel", widget: "string" }
+                      - { label: "Review step - location header", name: "locationHeader", widget: "string" }
+                      - {
+                          label: "Review step - billing contact header",
+                          name: "billingContactHeader",
+                          widget: "string",
+                        }
+              - label: Error Banner
+                name: errorBanner
+                collapsed: true
+                widget: object
+                fields:
+                  - { label: "Generic API error", name: "genericApiError", widget: "string" }
+                  - { label: "Error on individual step page", name: "errorOnStep", widget: "string" }
+                  - { label: "Error on review page", name: "incompleteStepsError", widget: "string" }
+              - label: Legal Structure
+                name: legalStructure
+                collapsed: true
+                widget: object
+                fields:
+                  - { label: "LLC", name: "limited-liability-company", widget: "string" }
+                  - { label: "LP", name: "limited-partnership", widget: "string" }
+                  - { label: "LLP", name: "limited-liability-partnership", widget: "string" }
+                  - { label: "C-Corp", name: "c-corporation", widget: "string" }
+                  - { label: "S-Corp", name: "s-corporation", widget: "string" }
+                  - { label: "Foreign preface", name: "foreignPrefaceText", widget: "string" }
+                  - { label: "Review step label", name: "reviewStepLabel", widget: "markdown" }
+                  - {
+                      label: "Warning modal - cancel button",
+                      name: "warningModalCancelButton",
+                      widget: "string",
+                    }
+                  - {
+                      label: "Warning modal - continue button",
+                      name: "warningModalContinueButton",
+                      widget: "string",
+                    }
+                  - { label: "Warning modal - header", name: "warningModalHeader", widget: "string" }
+                  - { label: "Warning modal - body", name: "warningModalBody", widget: "markdown" }
+              - label: General
+                name: general
+                collapsed: true
+                widget: object
+                fields:
+                  - { label: "Amendment Info Alert", name: "amendmentInfo", widget: "markdown" }
+                  - { label: "Not entered text - review page", name: "notEntered", widget: "string" }
+                  - {
+                      label: "Nexus - initial next button text",
+                      name: "initialNextNexusButtonText",
+                      widget: "string",
+                    }
+                  - { label: "Nexus - next button text", name: "initialNextButtonText", widget: "string" }
+                  - { label: "Cancel Button Text", name: "backButtonText", widget: "string" }
+                  - { label: "Edit Button Text", name: "editButtonText", widget: "string" }
+                  - { label: "Submit Button Text", name: "submitButtonText", widget: "string" }
+                  - { label: "Next Button Text", name: "nextButtonText", widget: "string" }
+                  - { label: "Previous Button Text", name: "previousButtonText", widget: "string" }
+                  - { label: "Characters label", name: "charactersLabel", widget: "string" }
+                  - { label: "Payment disclaimer", name: "paymentDisclaimer", widget: "text" }
+                  - { label: "Optional field label", name: "optionalLabel", widget: "string" }
+                  - { label: "Generic inline error text", name: "genericErrorText", widget: "string" }
+                  - { label: "Maximum length error text", name: "maximumLengthErrorText", widget: "string" }
+              - label: Intro Paragraph
+                name: intro
+                collapsed: true
+                widget: object
+                fields:
+                  - { label: "Default / in-state intro", name: "default", widget: "markdown" }
+                  - { label: "Foreign intro", name: "foreign", widget: "markdown" }
       - label: "Interim Success Page"
         name: "business-formation-interim-success-page"
         file: "content/src/fieldConfig/formation-interim-success-page.json"
