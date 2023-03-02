@@ -30,19 +30,21 @@ export const FieldLabelProfile = (props: Props) => {
   const showDescription = !props.locked;
   const showLockedTooltip = !!props.locked;
   const showUnboldedHeader = unboldedHeader && !props.locked;
-
+  const isHeaderInConfig = unboldedHeader || contentFromConfig.header;
   return (
     <>
       <div className="flex flex-row fac">
-        <div role="heading" aria-level={3} className="h3-styling margin-bottom-2">
-          {contentFromConfig.header}
-          {showUnboldedHeader && (
-            <>
-              {" "}
-              <span className="text-light">{unboldedHeader}</span>
-            </>
-          )}
-        </div>
+        {isHeaderInConfig && (
+          <div role="heading" aria-level={3} className="h3-styling margin-bottom-2">
+            {contentFromConfig.header}
+            {showUnboldedHeader && (
+              <>
+                {" "}
+                <span className="text-light">{unboldedHeader}</span>
+              </>
+            )}
+          </div>
+        )}
         {showLockedTooltip && (
           <ArrowTooltip title={Config.profileDefaults.lockedFieldTooltipText}>
             <div className="fdr fac margin-left-1 margin-bottom-2 font-body-lg">

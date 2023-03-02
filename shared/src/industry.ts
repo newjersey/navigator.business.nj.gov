@@ -18,6 +18,7 @@ export interface Industry {
 interface IndustryOnboardingQuestions {
   readonly isProvidesStaffingServicesApplicable?: boolean;
   readonly isCertifiedInteriorDesignerApplicable?: boolean;
+  readonly isPetCareHousingApplicable?: boolean;
   readonly isRealEstateAppraisalManagementApplicable?: boolean;
   readonly canBeReseller?: boolean;
   readonly isLiquorLicenseApplicable?: boolean;

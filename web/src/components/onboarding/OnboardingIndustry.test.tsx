@@ -104,9 +104,9 @@ describe("<OnboardingIndustry />", () => {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
         ].default as any;
 
-        const chooseRadioWithContent = (choice: string) => {
+        const chooseRadioWithContent = (div: HTMLElement, choice: string) => {
           fireEvent.click(
-            screen.getByText(
+            within(div).getByText(
               fieldContent[`radioButton${capitalizeFirstLetter(kebabSnakeSentenceToCamelCase(choice))}Text`]
             )
           );
@@ -122,10 +122,12 @@ describe("<OnboardingIndustry />", () => {
             industryId: nonValidIndustryId.id,
           };
           renderComponent(profileData);
-          expect(screen.queryByTestId(`industry-specific-${validIndustryId.id}`)).not.toBeInTheDocument();
+          expect(
+            screen.queryByTestId(`industry-specific-${validIndustryId.id}-${el.fieldName}`)
+          ).not.toBeInTheDocument();
 
           selectIndustry(validIndustryId.id);
-          expect(screen.getByTestId(`industry-specific-${validIndustryId.id}`)).toContainHTML(
+          expect(screen.getByTestId(`industry-specific-${validIndustryId.id}-${el.fieldName}`)).toContainHTML(
             renderToStaticMarkup(
               Content({
                 children: fieldContent.description,
@@ -133,11 +135,16 @@ describe("<OnboardingIndustry />", () => {
             )
           );
           choices.map((choice) => {
-            chooseRadioWithContent(choice.toString());
+            chooseRadioWithContent(
+              screen.getByTestId(`industry-specific-${validIndustryId.id}-${el.fieldName}`),
+              choice.toString()
+            );
             expect(currentProfileData()[el.fieldName]).toEqual(choice);
           });
           selectIndustry("generic");
-          expect(screen.queryByTestId(`industry-specific-${validIndustryId.id}`)).not.toBeInTheDocument();
+          expect(
+            screen.queryByTestId(`industry-specific-${validIndustryId.id}-${el.fieldName}`)
+          ).not.toBeInTheDocument();
         });
 
         it(`sets ${el.contentFieldName ?? el.fieldName} back to ${
@@ -152,7 +159,10 @@ describe("<OnboardingIndustry />", () => {
           const nonDefaultChoice = (choices as (string | boolean)[]).find((val) => {
             return val !== emptyIndustrySpecificData[el.fieldName];
           });
-          chooseRadioWithContent(nonDefaultChoice?.toString() ?? "");
+          chooseRadioWithContent(
+            screen.getByTestId(`industry-specific-${validIndustryId.id}-${el.fieldName}`),
+            nonDefaultChoice?.toString() ?? ""
+          );
           expect(currentProfileData()[el.fieldName]).toEqual(nonDefaultChoice);
           selectIndustry("generic");
           expect(currentProfileData()[el.fieldName]).toEqual(emptyIndustrySpecificData[el.fieldName]);

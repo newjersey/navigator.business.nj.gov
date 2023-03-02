@@ -23,6 +23,7 @@ export interface IndustrySpecificData {
   readonly carService: CarServiceType | undefined;
   readonly interstateTransport: boolean;
   readonly isChildcareForSixOrMore: boolean | undefined;
+  readonly petCareHousing: boolean | undefined;
   readonly willSellPetCareItems: boolean | undefined;
 }
 
@@ -43,6 +44,7 @@ export const industrySpecificDataChoices: IndustrySpecificDataChoices = {
   carService: [...carServiceOptions],
   interstateTransport: booleanChoice,
   isChildcareForSixOrMore: booleanChoice,
+  petCareHousing: booleanChoice,
   willSellPetCareItems: booleanChoice,
 };
 
@@ -59,6 +61,7 @@ export const emptyIndustrySpecificData: IndustrySpecificData = {
   carService: undefined,
   interstateTransport: false,
   isChildcareForSixOrMore: undefined,
+  petCareHousing: undefined,
   willSellPetCareItems: undefined,
 };
 

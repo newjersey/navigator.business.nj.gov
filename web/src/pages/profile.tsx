@@ -40,7 +40,7 @@ import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { EssentialQuestionObject, getEssentialQuestion } from "@/lib/domain-logic/essentialQuestions";
+import { getEssentialQuestion } from "@/lib/domain-logic/essentialQuestions";
 import { isEntityIdApplicable } from "@/lib/domain-logic/isEntityIdApplicable";
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
 import { checkQueryValue, QUERIES, ROUTES } from "@/lib/domain-logic/routes";
@@ -101,7 +101,6 @@ const ProfilePage = (props: Props): ReactElement => {
   const update = userDataFromHook.update;
   const { isAuthenticated, setRegistrationModalIsVisible } = useContext(AuthAlertContext);
   const { Config } = useConfig();
-
   const userData = props.CMS_ONLY_fakeUserData ?? userDataFromHook.userData;
   const businessPersona: BusinessPersona =
     props.CMS_ONLY_businessPersona ?? userData?.profileData.businessPersona;
@@ -181,13 +180,14 @@ const ProfilePage = (props: Props): ReactElement => {
       taxFilingData = { ...taxFilingData, state: undefined, registeredISO: undefined, filings: [] };
     }
 
-    if (getEssentialQuestion(profileData.industryId)) {
-      const fieldName = (getEssentialQuestion(profileData.industryId) as EssentialQuestionObject).fieldName;
-
-      onValidation(fieldName, profileData[fieldName] === undefined);
-      fieldStatesCopy[fieldName] = {
-        invalid: profileData[fieldName] === undefined,
-      };
+    if (getEssentialQuestion(profileData.industryId).length > 0) {
+      for (const EssentialQuestion of getEssentialQuestion(profileData.industryId)) {
+        const fieldName = EssentialQuestion.fieldName;
+        onValidation(fieldName, profileData[fieldName] === undefined);
+        fieldStatesCopy[fieldName] = {
+          invalid: profileData[fieldName] === undefined,
+        };
+      }
     }
 
     if (

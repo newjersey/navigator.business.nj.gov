@@ -14,7 +14,7 @@ import {
   userDataWasNotUpdated,
 } from "@/test/mock/withStatefulUserData";
 import {
-  industriesWithEssentialQuestion,
+  industryIdsWithEssentialQuestion,
   mockEmptyApiSignups,
   renderPage,
   runSelfRegPageTests,
@@ -300,12 +300,13 @@ describe("onboarding - foreign business", () => {
       expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
     });
 
-    industriesWithEssentialQuestion.map((industry) => {
-      it(`prevents user from moving to Step 4 when ${industry.id} is selected as industry, but essential question is not answered`, () => {
+    it.each(industryIdsWithEssentialQuestion)(
+      "prevents user from moving to Step 4 when %s is selected as industry, but essential question is not answered",
+      async (industryId) => {
         const userData = generateTestUserData({
           businessPersona: "FOREIGN",
           foreignBusinessType: "NEXUS",
-          industryId: industry.id,
+          industryId: industryId,
           ...generateUndefinedIndustrySpecificData(),
         });
         useMockRouter({ isReady: true, query: { page: "3" } });
@@ -317,30 +318,38 @@ describe("onboarding - foreign business", () => {
         expect(screen.getByTestId("step-3")).toBeInTheDocument();
         expect(screen.queryByTestId("step-4")).not.toBeInTheDocument();
         expect(screen.getByTestId("banner-alert-REQUIRED_ESSENTIAL_QUESTION")).toBeInTheDocument();
-        expect(screen.getByText(Config.profileDefaults.essentialQuestionInlineText)).toBeInTheDocument();
-      });
+        expect(
+          screen.getAllByText(Config.profileDefaults.essentialQuestionInlineText)[0]
+        ).toBeInTheDocument();
+      }
+    );
 
-      it(`allows user to move past Step 2 when you have selected an industry ${industry.id} and answered the essential question`, async () => {
+    it.each(industryIdsWithEssentialQuestion)(
+      "allows user to move past Step 2 when you have selected an industry %s and answered the essential question",
+      async (industryId) => {
         const userData = generateTestUserData({
           businessPersona: "FOREIGN",
           foreignBusinessType: "NEXUS",
-          industryId: industry.id,
+          industryId: industryId,
           ...generateUndefinedIndustrySpecificData(),
         });
         useMockRouter({ isReady: true, query: { page: "3" } });
         const { page } = renderPage({ userData });
 
-        page.chooseEssentialQuestionRadio(industry.id, 0);
+        page.chooseEssentialQuestionRadio(industryId, 0);
         await page.visitStep(4);
 
         expect(screen.queryByTestId("step-3")).not.toBeInTheDocument();
-      });
+      }
+    );
 
-      it(`removes essential question inline error when essential question radio is selected for ${industry.id} industry `, async () => {
+    it.each(industryIdsWithEssentialQuestion)(
+      "removes essential question inline error when essential question radio is selected for %s industry",
+      async (industryId) => {
         const userData = generateTestUserData({
           businessPersona: "FOREIGN",
           foreignBusinessType: "NEXUS",
-          industryId: industry.id,
+          industryId: industryId,
           ...generateUndefinedIndustrySpecificData(),
         });
         useMockRouter({ isReady: true, query: { page: "3" } });
@@ -350,13 +359,15 @@ describe("onboarding - foreign business", () => {
           page.clickNext();
         });
         expect(screen.getByTestId("step-3")).toBeInTheDocument();
-        expect(screen.getByText(Config.profileDefaults.essentialQuestionInlineText)).toBeInTheDocument();
-        page.chooseEssentialQuestionRadio(industry.id, 0);
+        expect(
+          screen.getAllByText(Config.profileDefaults.essentialQuestionInlineText)[0]
+        ).toBeInTheDocument();
+        page.chooseEssentialQuestionRadio(industryId, 0);
         expect(
           screen.queryByText(Config.profileDefaults.essentialQuestionInlineText)
         ).not.toBeInTheDocument();
-      });
-    });
+      }
+    );
   });
 
   describe("Nexus - step 4", () => {

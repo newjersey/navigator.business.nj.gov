@@ -119,6 +119,7 @@ interface StartingOnboardingData {
   carService: CarServiceType | undefined;
   isChildcareForSixOrMore: boolean | undefined;
   willSellPetCareItems: boolean | undefined;
+  petCareHousing: boolean | undefined;
 }
 
 interface ExistingOnboardingData {
@@ -149,6 +150,7 @@ export const completeNewBusinessOnboarding = ({
   carService = undefined,
   isChildcareForSixOrMore = undefined,
   willSellPetCareItems = undefined,
+  petCareHousing = undefined,
   fullName = `Michael Smith ${randomInt()}`,
   email = `MichaelSmith${randomInt()}@gmail.com`,
   isNewsletterChecked = false,
@@ -170,6 +172,11 @@ export const completeNewBusinessOnboarding = ({
       : undefined;
   }
 
+  if (petCareHousing === undefined) {
+    petCareHousing = industry.industryOnboardingQuestions.isPetCareHousingApplicable
+      ? Boolean(randomInt() % 2)
+      : undefined;
+  }
   if (willSellPetCareItems === undefined) {
     willSellPetCareItems = industry.industryOnboardingQuestions.willSellPetCareItems
       ? Boolean(randomInt() % 2)
@@ -310,6 +317,14 @@ export const completeNewBusinessOnboarding = ({
     onOnboardingPage.selectWillSellPetcareItems(willSellPetCareItems);
     onOnboardingPage.getWillSellPetcareItems(willSellPetCareItems).should("be.checked");
     onOnboardingPage.getWillSellPetcareItems(!willSellPetCareItems).should("not.be.checked");
+  }
+
+  if (petCareHousing === undefined) {
+    onOnboardingPage.getPetCareHousing().should("not.exist");
+  } else {
+    onOnboardingPage.selectPetCareHousing(petCareHousing);
+    onOnboardingPage.getPetCareHousing(petCareHousing).should("be.checked");
+    onOnboardingPage.getPetCareHousing(!petCareHousing).should("not.be.checked");
   }
 
   onOnboardingPage.clickNext();
