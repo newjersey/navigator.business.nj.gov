@@ -25,7 +25,7 @@ describe("Business Formation [feature] [all] [group2]", () => {
     const businessSuffix = "LIMITED LIABILITY CO";
     const addressLine1 = `some-business-address-1-${randomInt()}`;
     const addressLine2 = `some-business-address-2-${randomInt()}`;
-    const addressMunicipality = generateMunicipality({ displayName: "Allendale" });
+    const domesticAddressMunicipality = generateMunicipality({ displayName: "Allendale" });
     const addressZipCode = "07005";
     const businessPurpose = "My Business Purpose...";
     const provisions: FormationFormData["provisions"] = ["My Provision 1", "My Provision 2"];
@@ -67,7 +67,7 @@ describe("Business Formation [feature] [all] [group2]", () => {
     typeBusinessAddress({
       addressLine1,
       addressLine2,
-      addressMunicipality,
+      domesticAddressMunicipality,
       addressZipCode,
     });
     typeBusinessPurpose(businessPurpose);
@@ -128,7 +128,7 @@ const typeDesignatorAndStartDate = ({ businessSuffix, businessStartDate }: Parti
 const typeBusinessAddress = ({
   addressLine1,
   addressLine2,
-  addressMunicipality,
+  domesticAddressMunicipality,
   addressZipCode,
 }: Partial<FormationFormData>) => {
   if (addressLine1) {
@@ -139,12 +139,12 @@ const typeBusinessAddress = ({
     onBusinessFormationPage.typeBusinessAddressLine2(addressLine2 as string);
     onBusinessFormationPage.getBusinessAddressLine2().invoke("prop", "value").should("contain", addressLine2);
   }
-  if (addressMunicipality) {
-    onBusinessFormationPage.selectBusinessAddressMunicipality(addressMunicipality.displayName);
+  if (domesticAddressMunicipality) {
+    onBusinessFormationPage.selectBusinessAddressMunicipality(domesticAddressMunicipality.displayName);
     onBusinessFormationPage
       .getBusinessAddressMunicipality()
       .invoke("prop", "value")
-      .should("contain", addressMunicipality.displayName);
+      .should("contain", domesticAddressMunicipality.displayName);
   }
   if (addressZipCode) {
     onBusinessFormationPage.typeBusinessAddressZipCode(addressZipCode);
@@ -269,8 +269,8 @@ const addMembersToFormation = (members: FormationFormData["members"] = []) => {
     onAddressModal.typeAddressLine2(membersObj.addressLine2);
     onAddressModal.getAddressLine2().invoke("prop", "value").should("contain", membersObj.addressLine2);
 
-    onAddressModal.typeCity(membersObj.addressCity);
-    onAddressModal.getCity().invoke("prop", "value").should("contain", membersObj.addressCity);
+    onAddressModal.typeCity(membersObj.foreignAddressCity);
+    onAddressModal.getCity().invoke("prop", "value").should("contain", membersObj.foreignAddressCity);
 
     onAddressModal.selectState(membersObj.addressState ? membersObj.addressState.shortCode : "");
     onAddressModal

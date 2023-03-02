@@ -62,7 +62,7 @@ export const getErrorStateForField = (
     "addressState",
     "addressCountry",
     "foreignStateOfFormation",
-    "addressMunicipality",
+    "domesticAddressMunicipality",
   ];
 
   if (field == "foreignStateOfFormation") {
@@ -173,8 +173,8 @@ export const getErrorStateForField = (
       const allValid = formationFormData.members.every((it) => {
         return (
           it.name &&
-          it.addressCity &&
-          it.addressCity?.length > 0 &&
+          it.foreignAddressCity &&
+          it.foreignAddressCity?.length > 0 &&
           it.addressLine1 &&
           it.addressState &&
           it.addressZipCode
@@ -220,7 +220,7 @@ export const getErrorStateForField = (
     return fieldWithMaxLength({ required: true, maxLen: 35 });
   }
 
-  if (field === "addressCity") {
+  if (field === "foreignAddressCity") {
     return fieldWithMaxLength({ required: true, maxLen: 30 });
   }
 

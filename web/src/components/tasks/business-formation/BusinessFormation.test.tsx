@@ -293,7 +293,7 @@ describe("<BusinessFormation />", () => {
     page.fillText("Address line1", "1234 main street");
     page.fillText("Address line2", "Suite 304");
     page.fillText("Address zip code", "08001");
-    page.selectByText("Address municipality", "Newark");
+    page.selectByText("Domestic address municipality", "Newark");
 
     fireEvent.click(screen.getByText(Config.formation.fields.businessPurpose.addButtonText));
     page.fillText("Business purpose", "to take over the world");
@@ -312,7 +312,7 @@ describe("<BusinessFormation />", () => {
       name: "Joe Biden",
       addressLine1: "1600 Pennsylvania Ave NW",
       addressLine2: "Office of the President",
-      addressCity: "Washington",
+      foreignAddressCity: "Washington",
       addressState: { shortCode: "DC", name: "District of Columbia" },
       addressZipCode: "20500",
       addressCountry: "US",
@@ -366,12 +366,12 @@ describe("<BusinessFormation />", () => {
         name: member.name,
         addressLine1: member.addressLine1,
         addressLine2: member.addressLine2,
-        addressCity: member.addressCity,
+        foreignAddressCity: member.foreignAddressCity,
         addressState: member.addressState,
         addressZipCode: member.addressZipCode,
         addressCountry: member.addressCountry,
         businessLocationType: member.businessLocationType,
-        addressMunicipality: undefined,
+        domesticAddressMunicipality: undefined,
         addressProvince: undefined,
       },
     ]);
@@ -416,7 +416,7 @@ describe("<BusinessFormation />", () => {
     page.fillText("Address line2", "Suite 304");
     page.fillText("Address zip code", "01752");
     page.fillText("Address state", "Massachusetts");
-    page.fillText("Address city", "Marlborough");
+    page.fillText("Foreign address city", "Marlborough");
 
     fireEvent.click(screen.getByText(Config.formation.fields.businessPurpose.addButtonText));
     page.fillText("Business purpose", "to take over the world");
@@ -512,7 +512,7 @@ describe("<BusinessFormation />", () => {
     page.fillText("Address line1", "1234 main street");
     page.fillText("Address line2", "Suite 304");
     page.fillText("Address zip code", "08001");
-    page.selectByText("Address municipality", "Newark");
+    page.selectByText("Domestic address municipality", "Newark");
     fireEvent.click(screen.getByText(Config.formation.fields.businessPurpose.addButtonText));
     page.fillText("Business purpose", "to take over the world");
 
@@ -727,7 +727,7 @@ describe("<BusinessFormation />", () => {
     page.fillText("Address line1", "1234 main street");
     page.fillText("Address line2", "Suite 304");
     page.fillText("Address zip code", "08001");
-    page.selectByText("Address municipality", "Newark");
+    page.selectByText("Domestic address municipality", "Newark");
     fireEvent.click(screen.getByText(Config.formation.fields.businessPurpose.addButtonText));
     page.fillText("Business purpose", "to take over the world");
     page.fillText("Withdrawals", "to withdrawals over the world");
@@ -755,7 +755,7 @@ describe("<BusinessFormation />", () => {
       name: "Joe Biden",
       addressLine1: "1600 Pennsylvania Ave NW",
       addressLine2: "Office of the President",
-      addressCity: "Washington",
+      foreignAddressCity: "Washington",
       addressState: { shortCode: "DC", name: "District of Columbia" },
       addressZipCode: "20500",
       addressCountry: "US",
@@ -844,7 +844,7 @@ describe("<BusinessFormation />", () => {
       name: "Joe Biden",
       addressLine1: "1600 Pennsylvania Ave NW",
       addressLine2: "Office of the President",
-      addressCity: "Washington",
+      foreignAddressCity: "Washington",
       addressState: { shortCode: "DC", name: "District of Columbia" },
       addressZipCode: "20500",
       addressCountry: "US",
@@ -860,7 +860,7 @@ describe("<BusinessFormation />", () => {
     page.fillText("Address line1", "1234 main street");
     page.fillText("Address line2", "Suite 304");
     page.fillText("Address zip code", "08001");
-    page.selectByText("Address municipality", "Newark");
+    page.selectByText("Domestic address municipality", "Newark");
     fireEvent.click(screen.getByText(Config.formation.fields.businessPurpose.addButtonText));
     page.fillText("Business purpose", "to take over the world");
 

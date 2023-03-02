@@ -59,7 +59,7 @@ describe("Formation - Members Field", () => {
           page.fillText("Address name", member.name);
           page.fillText("Address line1", member.addressLine1);
           page.fillText("Address line2", member.addressLine2);
-          page.fillText("Address city", member.addressCity!);
+          page.fillText("Foreign address city", member.foreignAddressCity!);
           page.fillText("Address state", member.addressState!.shortCode);
           page.fillText("Address zip code", member.addressZipCode);
         };
@@ -80,7 +80,7 @@ describe("Formation - Members Field", () => {
           expect(nameTd).toBeInTheDocument();
           expect(
             screen.getByText(
-              `${members[1].addressLine1}, ${members[1].addressLine2}, ${members[1].addressCity}, ${members[1].addressState?.name} ${members[1].addressZipCode}`,
+              `${members[1].addressLine1}, ${members[1].addressLine2}, ${members[1].foreignAddressCity}, ${members[1].addressState?.name} ${members[1].addressZipCode}`,
               { exact: false }
             )
           ).toBeInTheDocument();
@@ -89,7 +89,9 @@ describe("Formation - Members Field", () => {
           expect(page.getInputElementByLabel("Address name").value).toBe(members[1].name);
           expect(page.getInputElementByLabel("Address line1").value).toBe(members[1].addressLine1);
           expect(page.getInputElementByLabel("Address line2").value).toBe(members[1].addressLine2);
-          expect(page.getInputElementByLabel("Address city").value).toBe(members[1].addressCity);
+          expect(page.getInputElementByLabel("Foreign address city").value).toBe(
+            members[1].foreignAddressCity
+          );
           expect(page.getInputElementByLabel("Address state").value).toBe(members[1].addressState?.shortCode);
           expect(page.getInputElementByLabel("Address zip code").value).toBe(members[1].addressZipCode);
           const newName = "Joe Biden";
@@ -134,18 +136,18 @@ describe("Formation - Members Field", () => {
           await page.openAddressModal("members");
           page.clickAddressSubmit();
 
-          const { name, addressLine1, addressCity, addressState, addressZipCode } =
+          const { name, addressLine1, foreignAddressCity, addressState, addressZipCode } =
             Config.formation.addressModal;
 
           expect(screen.getByText(name.error)).toBeInTheDocument();
           expect(screen.getByText(addressLine1.error)).toBeInTheDocument();
-          expect(screen.getByText(addressCity.error)).toBeInTheDocument();
+          expect(screen.getByText(foreignAddressCity.error)).toBeInTheDocument();
           expect(screen.getByText(addressState.error)).toBeInTheDocument();
           expect(screen.getByText(addressZipCode.error)).toBeInTheDocument();
           await page.fillAddressModal({});
           expect(screen.queryByText(name.error)).not.toBeInTheDocument();
           expect(screen.queryByText(addressLine1.error)).not.toBeInTheDocument();
-          expect(screen.queryByText(addressCity.error)).not.toBeInTheDocument();
+          expect(screen.queryByText(foreignAddressCity.error)).not.toBeInTheDocument();
           expect(screen.queryByText(addressState.error)).not.toBeInTheDocument();
           expect(screen.queryByText(addressZipCode.error)).not.toBeInTheDocument();
           page.clickAddressSubmit();
@@ -160,7 +162,7 @@ describe("Formation - Members Field", () => {
           await page.fillAddressModal({
             addressLine1: Array(36).fill("A").join(""),
             addressLine2: Array(36).fill("A").join(""),
-            addressCity: Array(31).fill("A").join(""),
+            foreignAddressCity: Array(31).fill("A").join(""),
             addressState: generateStateItem(),
             addressZipCode: "08100",
           });
@@ -177,18 +179,18 @@ describe("Formation - Members Field", () => {
 
           expect(screen.getByText(maxLengthMessage("addressLine1", "35"))).toBeInTheDocument();
           expect(screen.getByText(maxLengthMessage("addressLine2", "35"))).toBeInTheDocument();
-          expect(screen.getByText(maxLengthMessage("addressCity", "30"))).toBeInTheDocument();
+          expect(screen.getByText(maxLengthMessage("foreignAddressCity", "30"))).toBeInTheDocument();
 
           await page.fillAddressModal({
             addressLine1: Array(35).fill("A").join(""),
             addressLine2: Array(35).fill("A").join(""),
-            addressCity: Array(30).fill("A").join(""),
+            foreignAddressCity: Array(30).fill("A").join(""),
             addressState: generateStateItem(),
             addressZipCode: "08100",
           });
           expect(screen.queryByText(maxLengthMessage("addressLine1", "35"))).not.toBeInTheDocument();
           expect(screen.queryByText(maxLengthMessage("addressLine2", "35"))).not.toBeInTheDocument();
-          expect(screen.queryByText(maxLengthMessage("addressCity", "30"))).not.toBeInTheDocument();
+          expect(screen.queryByText(maxLengthMessage("foreignAddressCity", "30"))).not.toBeInTheDocument();
 
           page.clickAddressSubmit();
           await waitFor(() => {
@@ -275,7 +277,7 @@ describe("Formation - Members Field", () => {
         expect(page.getInputElementByLabel("Address name").value).toBe("John Smith");
         expect(page.getInputElementByLabel("Address line1").value).toBe("123 Address");
         expect(page.getInputElementByLabel("Address line2").value).toBe("business suite 201");
-        expect(page.getInputElementByLabel("Address city").value).toBe("Hampton");
+        expect(page.getInputElementByLabel("Foreign address city").value).toBe("Hampton");
         expect(page.getInputElementByLabel("Address state").value).toBe("NJ");
         expect(page.getInputElementByLabel("Address zip code").value).toBe("07601");
       });
@@ -303,7 +305,7 @@ describe("Formation - Members Field", () => {
         expect(page.getInputElementByLabel("Address name").value).toBe("");
         expect(page.getInputElementByLabel("Address line1").value).toBe("123 Address");
         expect(page.getInputElementByLabel("Address line2").value).toBe("business suite 201");
-        expect(page.getInputElementByLabel("Address city").value).toBe("Hampton");
+        expect(page.getInputElementByLabel("Foreign address city").value).toBe("Hampton");
         expect(page.getInputElementByLabel("Address state").value).toBe("NJ");
         expect(page.getInputElementByLabel("Address zip code").value).toBe("07601");
       });
@@ -332,7 +334,7 @@ describe("Formation - Members Field", () => {
         await page.openAddressModal("members");
 
         page.selectCheckbox(Config.formation.fields.members.addressCheckboxText);
-        expect(page.getInputElementByLabel("Address city").value).toBe("Hampton");
+        expect(page.getInputElementByLabel("Foreign address city").value).toBe("Hampton");
 
         page.clickAddressSubmit();
         await waitFor(() => {
@@ -341,7 +343,7 @@ describe("Formation - Members Field", () => {
         await page.submitContactsStep();
         const newMembers = currentUserData().formationData.formationFormData.members!;
         expect(newMembers.length).toEqual(1);
-        expect(newMembers[0].addressCity).toEqual("Hampton");
+        expect(newMembers[0].foreignAddressCity).toEqual("Hampton");
       });
 
       it("only fills & disables required fields with values when checkbox checked", async () => {
@@ -408,7 +410,7 @@ describe("Formation - Members Field", () => {
         ).toEqual(false);
         expect(page.getInputElementByLabel("Address line1").disabled).toBe(false);
         expect(page.getInputElementByLabel("Address line2").disabled).toEqual(false);
-        expect(page.getInputElementByLabel("Address city").disabled).toBe(false);
+        expect(page.getInputElementByLabel("Foreign address city").disabled).toBe(false);
         expect(page.getInputElementByLabel("Address state").disabled).toBe(false);
         expect(page.getInputElementByLabel("Address zip code").disabled).toEqual(false);
       });

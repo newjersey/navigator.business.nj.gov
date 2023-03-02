@@ -137,7 +137,7 @@ export const BusinessFormationPaginator = (): ReactElement => {
     if (isStep("Business")) {
       const muncipalityEnteredForFirstTime =
         userDataWithChanges.profileData.municipality === undefined &&
-        userDataWithChanges.formationData.formationFormData.addressMunicipality !== undefined;
+        userDataWithChanges.formationData.formationFormData.domesticAddressMunicipality !== undefined;
 
       if (muncipalityEnteredForFirstTime) {
         analytics.event.business_formation_location_question.submit.location_entered_for_first_time();
@@ -147,7 +147,7 @@ export const BusinessFormationPaginator = (): ReactElement => {
         ...userDataWithChanges,
         profileData: {
           ...userDataWithChanges.profileData,
-          municipality: userDataWithChanges.formationData.formationFormData.addressMunicipality,
+          municipality: userDataWithChanges.formationData.formationFormData.domesticAddressMunicipality,
         },
       };
     }

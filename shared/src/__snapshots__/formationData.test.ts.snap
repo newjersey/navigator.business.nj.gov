@@ -2,11 +2,9 @@
 
 exports[`formationData createEmptyFormationFormData returns the correct object 1`] = `
 {
-  "addressCity": undefined,
   "addressCountry": undefined,
   "addressLine1": "",
   "addressLine2": "",
-  "addressMunicipality": undefined,
   "addressProvince": undefined,
   "addressState": undefined,
   "addressZipCode": "",
@@ -40,6 +38,8 @@ exports[`formationData createEmptyFormationFormData returns the correct object 1
   "corpWatchNotification": true,
   "createLimitedPartnerTerms": "",
   "dissolution": "",
+  "domesticAddressMunicipality": undefined,
+  "foreignAddressCity": undefined,
   "foreignDateOfFormation": undefined,
   "foreignGoodStandingFile": undefined,
   "foreignStateOfFormation": undefined,

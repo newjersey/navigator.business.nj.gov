@@ -14,22 +14,22 @@ export const FormationMunicipality = (): ReactElement => {
 
   const onSelect = (value: Municipality | undefined): void => {
     setFormationFormData((previousFormationFormData) => {
-      return { ...previousFormationFormData, addressMunicipality: value };
+      return { ...previousFormationFormData, domesticAddressMunicipality: value };
     });
   };
 
   return (
     <div className="margin-top-2">
       <MunicipalityDropdown
-        onValidation={() => setFieldsInteracted(["addressMunicipality"])}
+        onValidation={() => setFieldsInteracted(["domesticAddressMunicipality"])}
         municipalities={municipalities}
-        fieldName={"addressMunicipality"}
-        error={doesFieldHaveError("addressMunicipality")}
+        fieldName={"domesticAddressMunicipality"}
+        error={doesFieldHaveError("domesticAddressMunicipality")}
         validationLabel="Error"
-        value={state.formationFormData.addressMunicipality}
+        value={state.formationFormData.domesticAddressMunicipality}
         onSelect={onSelect}
-        placeholderText={Config.formation.fields.addressMunicipality.placeholder}
-        helperText={Config.formation.fields.addressMunicipality.error}
+        placeholderText={Config.formation.fields.domesticAddressMunicipality.placeholder}
+        helperText={Config.formation.fields.domesticAddressMunicipality.error}
       />
     </div>
   );

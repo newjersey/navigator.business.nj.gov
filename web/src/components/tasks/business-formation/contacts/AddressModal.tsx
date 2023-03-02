@@ -45,7 +45,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
     "addressName",
     "addressLine1",
     "addressLine2",
-    "addressCity",
+    "foreignAddressCity",
     "addressState",
     "addressZipCode",
   ] as const;
@@ -101,12 +101,12 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
           labelWhenMissing: "",
           dataField: "addressLine2",
         });
-      case "addressCity":
+      case "foreignAddressCity":
         return fieldWithMaxLength({
           required: true,
           maxLen: 30,
-          labelWhenMissing: Config.formation.addressModal.addressCity.error,
-          dataField: "addressCity",
+          labelWhenMissing: Config.formation.addressModal.foreignAddressCity.error,
+          dataField: "foreignAddressCity",
         });
       case "addressName":
         return fieldWithMaxLength({
@@ -135,7 +135,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
       if (
         props.defaultAddress.addressLine1 !== addressData.addressLine1 ||
         props.defaultAddress.addressLine2 !== addressData.addressLine2 ||
-        props.defaultAddress.addressCity !== addressData.addressCity ||
+        props.defaultAddress.foreignAddressCity !== addressData.foreignAddressCity ||
         props.defaultAddress.addressState?.shortCode !== addressData.addressState?.shortCode ||
         props.defaultAddress.addressZipCode !== addressData.addressZipCode
       ) {
@@ -329,29 +329,29 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
             <div className="grid-col-12 tablet:grid-col-6">
               <WithErrorBar
                 hasError={
-                  !!addressErrorMap["addressCity"].invalid ||
+                  !!addressErrorMap["foreignAddressCity"].invalid ||
                   !!addressErrorMap["addressState"].invalid ||
                   !!addressErrorMap["addressZipCode"].invalid
                 }
                 type="DESKTOP-ONLY"
               >
-                <WithErrorBar hasError={!!addressErrorMap["addressCity"].invalid} type="MOBILE-ONLY">
-                  <Content>{Config.formation.addressModal.addressCity.label}</Content>
+                <WithErrorBar hasError={!!addressErrorMap["foreignAddressCity"].invalid} type="MOBILE-ONLY">
+                  <Content>{Config.formation.addressModal.foreignAddressCity.label}</Content>
                   <GenericTextField
-                    fieldName="addressCity"
+                    fieldName="foreignAddressCity"
                     autoComplete="address-level2"
-                    value={addressData.addressCity}
-                    disabled={shouldBeDisabled("addressCity")}
+                    value={addressData.foreignAddressCity}
+                    disabled={shouldBeDisabled("foreignAddressCity")}
                     required={true}
-                    placeholder={Config.formation.addressModal.addressCity.placeholder}
+                    placeholder={Config.formation.addressModal.foreignAddressCity.placeholder}
                     handleChange={(value: string) => {
                       return setAddressData((prevAddressData) => {
-                        return { ...prevAddressData, addressCity: value };
+                        return { ...prevAddressData, foreignAddressCity: value };
                       });
                     }}
-                    error={addressErrorMap["addressCity"].invalid}
+                    error={addressErrorMap["foreignAddressCity"].invalid}
                     onValidation={onValidation}
-                    validationText={addressErrorMap["addressCity"].label}
+                    validationText={addressErrorMap["foreignAddressCity"].label}
                   />
                 </WithErrorBar>
               </WithErrorBar>

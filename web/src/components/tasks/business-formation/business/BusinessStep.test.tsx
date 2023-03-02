@@ -97,7 +97,7 @@ describe("Formation - BusinessStep", () => {
   it("displays jurisdiction alert info box", async () => {
     await getPageHelper({}, {});
     expect(
-      screen.getByText(markdownToText(Config.formation.fields.addressMunicipality.infoAlert))
+      screen.getByText(markdownToText(Config.formation.fields.domesticAddressMunicipality.infoAlert))
     ).toBeInTheDocument();
   });
 
@@ -136,7 +136,7 @@ describe("Formation - BusinessStep", () => {
     );
     expect(page.getInputElementByLabel("Address line1").value).toBe("123 main street");
     expect(page.getInputElementByLabel("Address line2").value).toBe("suite 102");
-    expect(page.getInputElementByLabel("Address municipality").value).toBe("Newark");
+    expect(page.getInputElementByLabel("Domestic address municipality").value).toBe("Newark");
     expect(page.getInputElementByLabel("Address state").value).toBe("NJ");
     expect(page.getInputElementByLabel("Address zip code").value).toBe("07601");
     expect(page.getInputElementByLabel("Business purpose").value).toBe("some cool purpose");
@@ -158,7 +158,7 @@ describe("Formation - BusinessStep", () => {
         addressLine2: "suite 102",
         addressState: { shortCode: "DC", name: "District of Columbia" },
         addressZipCode: "20011",
-        addressCity: "Washington",
+        foreignAddressCity: "Washington",
         businessPurpose: "some cool purpose",
       }
     );
@@ -173,7 +173,7 @@ describe("Formation - BusinessStep", () => {
     expect(page.getInputElementByLabel("Foreign state of formation").value).toBe("Virgin Islands");
     expect(page.getInputElementByLabel("Address line1").value).toBe("123 main street");
     expect(page.getInputElementByLabel("Address line2").value).toBe("suite 102");
-    expect(page.getInputElementByLabel("Address city").value).toBe("Washington");
+    expect(page.getInputElementByLabel("Foreign address city").value).toBe("Washington");
     expect(page.getInputElementByLabel("Address state").value).toBe("DC");
     expect(page.getInputElementByLabel("Address zip code").value).toBe("20011");
     expect(page.getInputElementByLabel("Business purpose").value).toBe("some cool purpose");
@@ -196,7 +196,7 @@ describe("Formation - BusinessStep", () => {
         addressProvince: "Bordeaux",
         addressCountry: "FR",
         addressZipCode: "2033011",
-        addressCity: "Paris",
+        foreignAddressCity: "Paris",
         businessPurpose: "some cool purpose",
       }
     );
@@ -212,7 +212,7 @@ describe("Formation - BusinessStep", () => {
     expect(page.getInputElementByLabel("Address line1").value).toBe("123 main street");
     expect(page.getInputElementByLabel("Address line2").value).toBe("suite 102");
     expect(page.getInputElementByLabel("Address country").value).toBe("France");
-    expect(page.getInputElementByLabel("Address city").value).toBe("Paris");
+    expect(page.getInputElementByLabel("Foreign address city").value).toBe("Paris");
     expect(page.getInputElementByLabel("Address province").value).toBe("Bordeaux");
     expect(page.getInputElementByLabel("Address zip code").value).toBe("2033011");
     expect(page.getInputElementByLabel("Business purpose").value).toBe("some cool purpose");
@@ -464,18 +464,18 @@ describe("Formation - BusinessStep", () => {
     });
   });
 
-  describe("Address city", () => {
+  describe("Foreign address city", () => {
     it("saves data to formationData", async () => {
-      const page = await getPageHelper({ businessPersona: "FOREIGN" }, { addressCity: undefined });
-      page.fillText("Address city", "Quebec");
+      const page = await getPageHelper({ businessPersona: "FOREIGN" }, { foreignAddressCity: undefined });
+      page.fillText("Foreign address city", "Quebec");
       await page.submitBusinessStep(true);
-      expect(currentUserData().formationData.formationFormData.addressCity).toEqual("Quebec");
+      expect(currentUserData().formationData.formationFormData.foreignAddressCity).toEqual("Quebec");
     });
 
     it("displays error on field validation", async () => {
-      const page = await getPageHelper({ businessPersona: "FOREIGN" }, { addressCity: undefined });
-      page.fillText("Address city", "");
-      expect(screen.getByText(Config.formation.fields.addressCity.error)).toBeInTheDocument();
+      const page = await getPageHelper({ businessPersona: "FOREIGN" }, { foreignAddressCity: undefined });
+      page.fillText("Foreign address city", "");
+      expect(screen.getByText(Config.formation.fields.foreignAddressCity.error)).toBeInTheDocument();
     });
   });
 
@@ -830,10 +830,12 @@ describe("Formation - BusinessStep", () => {
         },
         {}
       );
-      expect((screen.getByLabelText("Address municipality") as HTMLInputElement).value).toEqual("Newark");
+      expect((screen.getByLabelText("Domestic address municipality") as HTMLInputElement).value).toEqual(
+        "Newark"
+      );
 
       expect(
-        screen.queryByPlaceholderText(Config.formation.fields.addressCity.placeholder)
+        screen.queryByPlaceholderText(Config.formation.fields.foreignAddressCity.placeholder)
       ).not.toBeInTheDocument();
     });
   });
@@ -1022,14 +1024,14 @@ describe("Formation - BusinessStep", () => {
       );
     });
 
-    it("Address city", async () => {
+    it("Foreign address city", async () => {
       const page = await getPageHelper(
         { businessPersona: "FOREIGN" },
-        { addressCity: undefined, businessLocationType: "INTL" }
+        { foreignAddressCity: undefined, businessLocationType: "INTL" }
       );
       await attemptApiSubmission(page);
       expect(screen.getByRole("alert")).toHaveTextContent(
-        Config.formation.fields.addressCity.fieldDisplayName
+        Config.formation.fields.foreignAddressCity.fieldDisplayName
       );
     });
 

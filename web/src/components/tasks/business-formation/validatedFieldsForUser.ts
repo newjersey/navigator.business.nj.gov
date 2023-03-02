@@ -20,7 +20,7 @@ export const validatedFieldsForUser = (formationFormData: FormationFormData): Fo
   ];
 
   const foreignValidatedFields: FormationFields[] = [
-    "addressCity",
+    "foreignAddressCity",
     "foreignDateOfFormation",
     "foreignStateOfFormation",
   ];
@@ -33,7 +33,7 @@ export const validatedFieldsForUser = (formationFormData: FormationFormData): Fo
       validatedFields = [...validatedFields, ...foreignValidatedFields, "addressProvince", "addressCountry"];
       break;
     case "NJ":
-      validatedFields.push("addressMunicipality");
+      validatedFields.push("domesticAddressMunicipality");
   }
 
   if (formationFormData.agentNumberOrManual === "NUMBER") {

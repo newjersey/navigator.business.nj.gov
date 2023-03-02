@@ -280,18 +280,20 @@ describe("<BusinessFormationPaginator />", () => {
           ]);
           await page.stepperClickToBusinessStep();
 
-          expect((screen.getByLabelText("Address municipality") as HTMLInputElement).value).toEqual("Newark");
-          page.selectByText("Address municipality", "New Town");
-          expect((screen.getByLabelText("Address municipality") as HTMLInputElement).value).toEqual(
+          expect((screen.getByLabelText("Domestic address municipality") as HTMLInputElement).value).toEqual(
+            "Newark"
+          );
+          page.selectByText("Domestic address municipality", "New Town");
+          expect((screen.getByLabelText("Domestic address municipality") as HTMLInputElement).value).toEqual(
             "New Town"
           );
           switchStepFunction();
           await waitFor(() => {
             expect(currentUserData().profileData.municipality?.displayName).toEqual("New Town");
           });
-          expect(currentUserData().formationData.formationFormData.addressMunicipality?.displayName).toEqual(
-            "New Town"
-          );
+          expect(
+            currentUserData().formationData.formationFormData.domesticAddressMunicipality?.displayName
+          ).toEqual("New Town");
         });
 
         it("send analytics when municipality entered for first time", async () => {
@@ -307,7 +309,7 @@ describe("<BusinessFormationPaginator />", () => {
 
           const page = preparePage(userDataWithMunicipality, displayContent, [newTownMuncipality]);
           await page.stepperClickToBusinessStep();
-          page.selectByText("Address municipality", "New Town");
+          page.selectByText("Domestic address municipality", "New Town");
 
           switchStepFunction();
           await waitFor(() => {
@@ -332,7 +334,7 @@ describe("<BusinessFormationPaginator />", () => {
             generateMunicipality({ displayName: "New Town" }),
           ]);
           await page.stepperClickToBusinessStep();
-          page.selectByText("Address municipality", "New Town");
+          page.selectByText("Domestic address municipality", "New Town");
 
           switchStepFunction();
           await waitFor(() => {

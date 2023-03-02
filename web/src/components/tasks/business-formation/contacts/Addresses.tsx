@@ -48,7 +48,7 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
 
   const formatAddress = (address: T) => {
     return `${address.addressLine1}, ${address.addressLine2 ? `${address.addressLine2},` : ""} ${
-      address.addressMunicipality?.displayName ?? address.addressCity
+      address.domesticAddressMunicipality?.displayName ?? address.foreignAddressCity
     }, ${address.addressState?.name} ${address.addressZipCode}`;
   };
 
@@ -202,7 +202,7 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
                       <div>{it.addressLine1}</div>
                       <div>{it.addressLine2}</div>
                       <div className="margin-bottom-2">
-                        {it.addressCity}, {it.addressState?.name} {it.addressZipCode}
+                        {it.foreignAddressCity}, {it.addressState?.name} {it.addressZipCode}
                       </div>
                     </div>
                     <div className="flex flex-row fac fjb">

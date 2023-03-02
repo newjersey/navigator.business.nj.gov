@@ -19,14 +19,14 @@
         "label": "**Address Line 2** (Optional)",
         "error": ""
       },
-      "addressMunicipality": {
+      "domesticAddressMunicipality": {
         "fieldDisplayName": "City",
         "placeholder": "Select a city",
         "label": "City",
         "error": "Select a city.",
         "infoAlert": "**Can't find your city?** Unincorporated places are not listed here. Search for [your official jurisdiction](https://www.nj.gov/nj/gov/county/localities.html) (type in your community's name into the local name field)."
       },
-      "addressCity": {
+      "foreignAddressCity": {
         "fieldDisplayName": "City",
         "placeholder": "City",
         "label": "**City**",

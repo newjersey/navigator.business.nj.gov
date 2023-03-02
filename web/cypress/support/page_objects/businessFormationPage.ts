@@ -9,7 +9,7 @@ class BusinessFormationPage {
     return cy.get('input[name="addressLine2"]');
   }
   getBusinessAddressMunicipality() {
-    return cy.get('[id="addressMunicipality"]');
+    return cy.get('[id="domesticAddressMunicipality"]');
   }
   getBusinessAddressZipCode() {
     return cy.get('input[name="addressZipCode"]');

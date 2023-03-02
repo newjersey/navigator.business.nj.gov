@@ -49,7 +49,7 @@ export const ReviewSignatures = (): ReactElement => {
               label={Config.formation.sections.review.addressLabel}
               value={getStringifiedAddress({
                 addressLine1: signer.addressLine1,
-                city: signer.addressCity ?? "",
+                city: signer.foreignAddressCity ?? "",
                 state: signer.addressState?.name ?? "",
                 zipcode: signer.addressZipCode,
                 addressLine2: signer.addressLine2,

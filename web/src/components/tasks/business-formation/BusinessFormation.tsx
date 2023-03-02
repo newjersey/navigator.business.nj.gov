@@ -105,7 +105,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
         userData.formationData.formationFormData.businessStartDate,
         legalStructureId
       ),
-      addressMunicipality: userData.profileData.municipality,
+      domesticAddressMunicipality: userData.profileData.municipality,
       legalType: legalStructureId,
       contactFirstName: userData.formationData.formationFormData.contactFirstName || splitName.firstName,
       contactLastName: userData.formationData.formationFormData.contactLastName || splitName.lastName,

@@ -226,7 +226,7 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
         Address2: isForeign ? "" : formationFormData.addressLine2,
         City: isForeign
           ? ""
-          : formationFormData.addressMunicipality?.name ?? formationFormData.addressCity ?? "",
+          : formationFormData.domesticAddressMunicipality?.name ?? formationFormData.foreignAddressCity ?? "",
         StateAbbreviation: isForeign ? undefined : formationFormData.addressState?.shortCode,
         ZipCode: isForeign ? "" : formationFormData.addressZipCode,
         Email: userData.user.email,
@@ -259,7 +259,10 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
           MainAddress: {
             Address1: formationFormData.addressLine1,
             Address2: formationFormData.addressLine2,
-            City: formationFormData.addressMunicipality?.name ?? formationFormData.addressCity ?? "",
+            City:
+              formationFormData.domesticAddressMunicipality?.name ??
+              formationFormData.foreignAddressCity ??
+              "",
             State: formationFormData.addressState?.name,
             Province: formationFormData.addressProvince,
             Zipcode: formationFormData.addressZipCode,
@@ -297,7 +300,7 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
                   Location: {
                     Address1: member.addressLine1,
                     Address2: member.addressLine2,
-                    City: member.addressMunicipality?.name ?? member.addressCity ?? "",
+                    City: member.domesticAddressMunicipality?.name ?? member.foreignAddressCity ?? "",
                     State: member.addressState?.name,
                     Zipcode: member.addressZipCode,
                     Country: "US",
@@ -310,7 +313,7 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
                   Location: {
                     Address1: member.addressLine1,
                     Address2: member.addressLine2,
-                    City: member.addressMunicipality?.name ?? member.addressCity ?? "",
+                    City: member.domesticAddressMunicipality?.name ?? member.foreignAddressCity ?? "",
                     State: member.addressState?.name,
                     Zipcode: member.addressZipCode,
                     Country: "US",
@@ -324,7 +327,7 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
                 Location: {
                   Address1: signer.addressLine1,
                   Address2: signer.addressLine2,
-                  City: signer.addressMunicipality?.name ?? signer.addressCity ?? "",
+                  City: signer.domesticAddressMunicipality?.name ?? signer.foreignAddressCity ?? "",
                   State: signer.addressState?.name,
                   Zipcode: signer.addressZipCode,
                   Country: "US",

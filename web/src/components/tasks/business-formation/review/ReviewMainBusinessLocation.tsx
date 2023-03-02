@@ -18,8 +18,8 @@ export const ReviewMainBusinessLocation = (): ReactElement => {
       addressLine1: state.formationFormData.addressLine1 || italicNotEnteredText,
       city:
         (businessLocationType == "NJ"
-          ? state.formationFormData.addressMunicipality?.displayName
-          : state.formationFormData.addressCity) || italicNotEnteredText,
+          ? state.formationFormData.domesticAddressMunicipality?.displayName
+          : state.formationFormData.foreignAddressCity) || italicNotEnteredText,
       state:
         (businessLocationType == "INTL"
           ? state.formationFormData.addressProvince

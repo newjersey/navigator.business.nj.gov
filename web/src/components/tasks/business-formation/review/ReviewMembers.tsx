@@ -38,7 +38,7 @@ export const ReviewMembers = (): ReactElement => {
                 label={Config.formation.sections.review.addressLabel}
                 value={getStringifiedAddress({
                   addressLine1: member.addressLine1,
-                  city: member.addressCity ?? "",
+                  city: member.foreignAddressCity ?? "",
                   state: member.addressState?.name ?? "",
                   zipcode: member.addressZipCode,
                   addressLine2: member.addressLine2,

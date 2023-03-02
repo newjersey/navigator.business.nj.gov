@@ -136,7 +136,7 @@ describe("ApiFormationClient", () => {
             CompanyName: formationFormData.businessName,
             Address1: formationFormData.addressLine1,
             Address2: formationFormData.addressLine2,
-            City: formationFormData.addressMunicipality?.name,
+            City: formationFormData.domesticAddressMunicipality?.name,
             StateAbbreviation: "NJ",
             ZipCode: formationFormData.addressZipCode,
             Email: userData.user.email,
@@ -162,7 +162,7 @@ describe("ApiFormationClient", () => {
               MainAddress: {
                 Address1: formationFormData.addressLine1,
                 Address2: formationFormData.addressLine2,
-                City: formationFormData.addressMunicipality?.name,
+                City: formationFormData.domesticAddressMunicipality?.name,
                 State: "New Jersey",
                 Zipcode: formationFormData.addressZipCode,
                 Country: "US",
@@ -191,7 +191,7 @@ describe("ApiFormationClient", () => {
                 Location: {
                   Address1: members[0].addressLine1,
                   Address2: members[0].addressLine2,
-                  City: members[0].addressMunicipality?.name,
+                  City: members[0].domesticAddressMunicipality?.name,
                   State: "New Jersey",
                   Zipcode: members[0].addressZipCode,
                   Country: "US",
@@ -202,7 +202,7 @@ describe("ApiFormationClient", () => {
                 Location: {
                   Address1: members[1].addressLine1,
                   Address2: members[1].addressLine2,
-                  City: members[1].addressCity,
+                  City: members[1].foreignAddressCity,
                   State: members[1].addressState?.name,
                   Zipcode: members[1].addressZipCode,
                   Country: "US",
@@ -309,7 +309,7 @@ describe("ApiFormationClient", () => {
               MainAddress: {
                 Address1: formationFormData.addressLine1,
                 Address2: formationFormData.addressLine2,
-                City: formationFormData.addressCity,
+                City: formationFormData.foreignAddressCity,
                 State:
                   formationFormData.addressCountry == "US" ? formationFormData.addressState?.name : undefined,
                 Zipcode: formationFormData.addressZipCode,
@@ -412,7 +412,7 @@ describe("ApiFormationClient", () => {
             CompanyName: formationFormData.businessName,
             Address1: formationFormData.addressLine1,
             Address2: formationFormData.addressLine2,
-            City: formationFormData.addressMunicipality?.name,
+            City: formationFormData.domesticAddressMunicipality?.name,
             StateAbbreviation: formationFormData.addressState?.shortCode,
             ZipCode: formationFormData.addressZipCode,
             Email: userData.user.email,
@@ -439,7 +439,7 @@ describe("ApiFormationClient", () => {
               MainAddress: {
                 Address1: formationFormData.addressLine1,
                 Address2: formationFormData.addressLine2,
-                City: formationFormData.addressMunicipality?.name,
+                City: formationFormData.domesticAddressMunicipality?.name,
                 State: "New Jersey",
                 Zipcode: formationFormData.addressZipCode,
                 Country: "US",
@@ -469,7 +469,7 @@ describe("ApiFormationClient", () => {
                 Location: {
                   Address1: members[0].addressLine1,
                   Address2: members[0].addressLine2,
-                  City: members[0].addressMunicipality?.name,
+                  City: members[0].domesticAddressMunicipality?.name,
                   State: "New Jersey",
                   Zipcode: members[0].addressZipCode,
                   Country: "US",
@@ -480,7 +480,7 @@ describe("ApiFormationClient", () => {
                 Location: {
                   Address1: members[1].addressLine1,
                   Address2: members[1].addressLine2,
-                  City: members[1].addressCity,
+                  City: members[1].foreignAddressCity,
                   State: members[1].addressState?.name,
                   Zipcode: members[1].addressZipCode,
                   Country: "US",
@@ -493,7 +493,7 @@ describe("ApiFormationClient", () => {
                 Location: {
                   Address1: incorporators[0].addressLine1,
                   Address2: incorporators[0].addressLine2,
-                  City: incorporators[0].addressMunicipality?.name,
+                  City: incorporators[0].domesticAddressMunicipality?.name,
                   State: "New Jersey",
                   Zipcode: incorporators[0].addressZipCode,
                   Country: "US",
@@ -504,7 +504,7 @@ describe("ApiFormationClient", () => {
                 Location: {
                   Address1: incorporators[1].addressLine1,
                   Address2: incorporators[1].addressLine2,
-                  City: incorporators[1].addressCity,
+                  City: incorporators[1].foreignAddressCity,
                   State: incorporators[1].addressState?.name,
                   Zipcode: incorporators[1].addressZipCode,
                   Country: "US",
@@ -607,7 +607,7 @@ describe("ApiFormationClient", () => {
               MainAddress: {
                 Address1: formationFormData.addressLine1,
                 Address2: formationFormData.addressLine2,
-                City: formationFormData.addressCity,
+                City: formationFormData.foreignAddressCity,
                 State:
                   formationFormData.addressCountry == "US" ? formationFormData.addressState?.name : undefined,
                 Zipcode: formationFormData.addressZipCode,
@@ -714,7 +714,7 @@ describe("ApiFormationClient", () => {
             CompanyName: formationFormData.businessName,
             Address1: formationFormData.addressLine1,
             Address2: formationFormData.addressLine2,
-            City: formationFormData.addressMunicipality?.name,
+            City: formationFormData.domesticAddressMunicipality?.name,
             StateAbbreviation: "NJ",
             ZipCode: formationFormData.addressZipCode,
             Email: userData.user.email,
@@ -740,7 +740,7 @@ describe("ApiFormationClient", () => {
               MainAddress: {
                 Address1: formationFormData.addressLine1,
                 Address2: formationFormData.addressLine2,
-                City: formationFormData.addressMunicipality?.name,
+                City: formationFormData.domesticAddressMunicipality?.name,
                 State: "New Jersey",
                 Zipcode: formationFormData.addressZipCode,
                 Country: "US",
@@ -862,7 +862,7 @@ describe("ApiFormationClient", () => {
               MainAddress: {
                 Address1: formationFormData.addressLine1,
                 Address2: formationFormData.addressLine2,
-                City: formationFormData.addressCity,
+                City: formationFormData.foreignAddressCity,
                 State:
                   formationFormData.addressCountry == "US" ? formationFormData.addressState?.name : undefined,
                 Zipcode: formationFormData.addressZipCode,
@@ -969,7 +969,7 @@ describe("ApiFormationClient", () => {
             CompanyName: formationFormData.businessName,
             Address1: formationFormData.addressLine1,
             Address2: formationFormData.addressLine2,
-            City: formationFormData.addressMunicipality?.name,
+            City: formationFormData.domesticAddressMunicipality?.name,
             StateAbbreviation: "NJ",
             ZipCode: formationFormData.addressZipCode,
             Email: userData.user.email,
@@ -995,7 +995,7 @@ describe("ApiFormationClient", () => {
               MainAddress: {
                 Address1: formationFormData.addressLine1,
                 Address2: formationFormData.addressLine2,
-                City: formationFormData.addressMunicipality?.name,
+                City: formationFormData.domesticAddressMunicipality?.name,
                 State: "New Jersey",
                 Zipcode: formationFormData.addressZipCode,
                 Country: "US",
@@ -1033,7 +1033,7 @@ describe("ApiFormationClient", () => {
                 Location: {
                   Address1: incorporators[0].addressLine1,
                   Address2: incorporators[0].addressLine2,
-                  City: incorporators[0].addressMunicipality?.name,
+                  City: incorporators[0].domesticAddressMunicipality?.name,
                   State: "New Jersey",
                   Zipcode: incorporators[0].addressZipCode,
                   Country: "US",
@@ -1044,7 +1044,7 @@ describe("ApiFormationClient", () => {
                 Location: {
                   Address1: incorporators[1].addressLine1,
                   Address2: incorporators[1].addressLine2,
-                  City: incorporators[1].addressCity,
+                  City: incorporators[1].foreignAddressCity,
                   State: incorporators[1].addressState?.name,
                   Zipcode: incorporators[1].addressZipCode,
                   Country: "US",
@@ -1055,7 +1055,7 @@ describe("ApiFormationClient", () => {
                 Location: {
                   Address1: incorporators[2].addressLine1,
                   Address2: incorporators[2].addressLine2,
-                  City: incorporators[2].addressCity,
+                  City: incorporators[2].foreignAddressCity,
                   State: incorporators[2].addressState?.name,
                   Zipcode: incorporators[2].addressZipCode,
                   Country: "US",

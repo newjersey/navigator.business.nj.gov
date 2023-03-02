@@ -85,9 +85,9 @@ export const ContactsStep = (): ReactElement => {
             defaultAddress={
               "limited-partnership" === state.formationFormData.legalType
                 ? {
-                    addressCity:
-                      state.formationFormData.addressMunicipality?.name ??
-                      state.formationFormData.addressCity,
+                    foreignAddressCity:
+                      state.formationFormData.domesticAddressMunicipality?.name ??
+                      state.formationFormData.foreignAddressCity,
                     addressLine1: state.formationFormData.addressLine1,
                     addressLine2: state.formationFormData.addressLine2,
                     addressState: state.formationFormData.addressState,

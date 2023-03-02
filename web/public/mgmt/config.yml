@@ -89,7 +89,7 @@ collections:
                       - { label: "Placeholder", name: "placeholder", widget: "string" }
                       - { label: "Label", name: "label", widget: "markdown" }
                   - label: In-State (Poppy) Municipality
-                    name: addressMunicipality
+                    name: domesticAddressMunicipality
                     collapsed: true
                     widget: object
                     fields:
@@ -99,7 +99,7 @@ collections:
                       - { label: "Info Alert", name: "infoAlert", widget: "markdown" }
                       - { label: "Label", name: "label", widget: "markdown" }
                   - label: Out-of-state (Dakota) City
-                    name: addressCity
+                    name: foreignAddressCity
                     collapsed: true
                     widget: object
                     fields:

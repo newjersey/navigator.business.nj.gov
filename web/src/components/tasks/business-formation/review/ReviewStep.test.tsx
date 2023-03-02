@@ -225,7 +225,7 @@ describe("Formation - ReviewStep", () => {
     await renderStep(
       { businessPersona: "FOREIGN" },
       {
-        addressCity: "Roflcopterville",
+        foreignAddressCity: "Roflcopterville",
         businessLocationType: randomInt() % 2 ? "INTL" : "US",
       }
     );

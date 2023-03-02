@@ -29,7 +29,7 @@ export const RegisteredAgent = (): ReactElement => {
         agentOfficeAddressMunicipality,
         addressLine1,
         addressLine2,
-        addressMunicipality,
+        domesticAddressMunicipality,
         addressZipCode,
       } = state.formationFormData;
 
@@ -37,7 +37,7 @@ export const RegisteredAgent = (): ReactElement => {
         agentUseBusinessAddress &&
         (agentOfficeAddressLine1 !== addressLine1 ||
           agentOfficeAddressLine2 !== addressLine2 ||
-          agentOfficeAddressMunicipality?.name !== addressMunicipality?.name ||
+          agentOfficeAddressMunicipality?.name !== domesticAddressMunicipality?.name ||
           agentOfficeAddressZipCode !== addressZipCode)
       ) {
         setFormationFormData({
@@ -110,7 +110,7 @@ export const RegisteredAgent = (): ReactElement => {
         ...state.formationFormData,
         agentOfficeAddressLine1: state.formationFormData.addressLine1,
         agentOfficeAddressLine2: state.formationFormData.addressLine2,
-        agentOfficeAddressMunicipality: state.formationFormData.addressMunicipality,
+        agentOfficeAddressMunicipality: state.formationFormData.domesticAddressMunicipality,
         agentOfficeAddressZipCode: state.formationFormData.addressZipCode,
         agentUseBusinessAddress: checked,
       });

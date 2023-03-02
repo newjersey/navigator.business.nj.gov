@@ -27,7 +27,7 @@ export const generateFormationUSAddress = (overrides: Partial<FormationAddress>)
   return {
     addressLine1: `some-address-1-${randomInt()}`,
     addressLine2: `some-address-2-${randomInt()}`,
-    addressCity: `some-address-city-${randomInt()}`,
+    foreignAddressCity: `some-address-city-${randomInt()}`,
     addressState: randomElementFromArray(
       states.filter((state) => {
         return state.shortCode != "NJ";
@@ -36,7 +36,7 @@ export const generateFormationUSAddress = (overrides: Partial<FormationAddress>)
     addressCountry: "US",
     businessLocationType: "US",
     addressZipCode: randomInt(5).toString(),
-    addressMunicipality: undefined,
+    domesticAddressMunicipality: undefined,
     addressProvince: undefined,
     ...overrides,
   };
@@ -46,9 +46,9 @@ export const generateFormationForeignAddress = (overrides: Partial<FormationAddr
   return {
     addressLine1: `some-address-1-${randomInt()}`,
     addressLine2: `some-address-2-${randomInt()}`,
-    addressCity: `some-address-city-${randomInt()}`,
+    foreignAddressCity: `some-address-city-${randomInt()}`,
     addressState: undefined,
-    addressMunicipality: undefined,
+    domesticAddressMunicipality: undefined,
     businessLocationType: "INTL",
     addressCountry: randomElementFromArray(
       countries.filter((item) => {
@@ -65,8 +65,8 @@ export const generateFormationNJAddress = (overrides: Partial<FormationAddress>)
   return {
     addressLine1: `some-address-1-${randomInt()}`,
     addressLine2: `some-address-2-${randomInt()}`,
-    addressMunicipality: generateMunicipality({ displayName: "Newark Display Name", name: "Newark" }),
-    addressCity: undefined,
+    domesticAddressMunicipality: generateMunicipality({ displayName: "Newark Display Name", name: "Newark" }),
+    foreignAddressCity: undefined,
     businessLocationType: "NJ",
     addressProvince: undefined,
     addressCountry: "US",

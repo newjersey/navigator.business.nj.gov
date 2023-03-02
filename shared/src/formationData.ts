@@ -75,9 +75,9 @@ export type FormationBusinessLocationType = "US" | "INTL" | "NJ";
 export interface FormationAddress {
   readonly addressLine1: string;
   readonly addressLine2: string;
-  readonly addressCity?: string;
+  readonly foreignAddressCity?: string;
   readonly addressState?: StateObject;
-  readonly addressMunicipality?: Municipality;
+  readonly domesticAddressMunicipality?: Municipality;
   readonly addressProvince?: string;
   readonly addressZipCode: string;
   readonly addressCountry: CountriesShortCodes | undefined;
@@ -151,7 +151,7 @@ export type FormationFields = keyof FormationFormData;
 export type FormationTextField = Exclude<
   keyof FormationFormData,
   | "businessSuffix"
-  | "addressMunicipality"
+  | "domesticAddressMunicipality"
   | "addressCountry"
   | "addressState"
   | "businessStartDate"
@@ -182,8 +182,8 @@ export const createEmptyFormationAddress = (): FormationAddress => {
   return {
     addressLine1: "",
     addressLine2: "",
-    addressCity: undefined,
-    addressMunicipality: undefined,
+    foreignAddressCity: undefined,
+    domesticAddressMunicipality: undefined,
     addressState: undefined,
     addressZipCode: "",
     addressProvince: undefined,

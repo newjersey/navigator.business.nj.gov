@@ -97,8 +97,8 @@ export const preparePage = (
     profileData?.municipality ?? generateMunicipality({ displayName: "GenericTown" }),
     ...(municipalities ?? []),
   ];
-  initialUserData.formationData.formationFormData.addressMunicipality &&
-    internalMunicipalities.push(initialUserData.formationData.formationFormData.addressMunicipality);
+  initialUserData.formationData.formationFormData.domesticAddressMunicipality &&
+    internalMunicipalities.push(initialUserData.formationData.formationFormData.domesticAddressMunicipality);
   initialUserData.formationData.formationFormData.agentOfficeAddressMunicipality &&
     internalMunicipalities.push(
       initialUserData.formationData.formationFormData.agentOfficeAddressMunicipality
@@ -400,7 +400,7 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     fillText("Address name", member.name);
     fillText("Address line1", member.addressLine1);
     fillText("Address line2", member.addressLine2);
-    member.addressCity && fillText("Address city", member.addressCity);
+    member.foreignAddressCity && fillText("Foreign address city", member.foreignAddressCity);
     member.addressState &&
       fillText("Address state", member.addressState[randomInt() % 2 ? "name" : "shortCode"]);
     fillText("Address zip code", member.addressZipCode);

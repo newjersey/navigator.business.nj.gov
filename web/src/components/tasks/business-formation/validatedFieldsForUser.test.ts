@@ -20,7 +20,7 @@ describe("validatedFieldsForUser", () => {
   ];
 
   const foreignValidatedFields: FormationFields[] = [
-    "addressCity",
+    "foreignAddressCity",
     "foreignDateOfFormation",
     "foreignStateOfFormation",
   ];
@@ -54,7 +54,7 @@ describe("validatedFieldsForUser", () => {
         { legalStructureId: "limited-liability-company" }
       );
 
-      const expected: FormationFields[] = ["addressMunicipality"];
+      const expected: FormationFields[] = ["domesticAddressMunicipality"];
 
       expect(validatedFieldsForUser(formationFormData)).toEqual(expect.arrayContaining(expected));
     });

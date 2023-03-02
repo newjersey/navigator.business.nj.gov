@@ -19,7 +19,9 @@ export const Members = (): ReactElement => {
           state.formationFormData.members?.length === 0
             ? `${state.formationFormData.contactFirstName.trim()} ${state.formationFormData.contactLastName.trim()}`
             : "",
-        addressCity: state.formationFormData.addressMunicipality?.name ?? state.formationFormData.addressCity,
+        foreignAddressCity:
+          state.formationFormData.domesticAddressMunicipality?.name ??
+          state.formationFormData.foreignAddressCity,
         addressLine1: state.formationFormData.addressLine1,
         addressLine2: state.formationFormData.addressLine2,
         addressState: state.formationFormData.addressState,

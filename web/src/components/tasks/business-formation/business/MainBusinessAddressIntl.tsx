@@ -17,19 +17,19 @@ export const MainBusinessIntl = (): ReactElement => {
   return (
     <MainBusinessAddressContainer>
       <WithErrorBar
-        hasError={doSomeFieldsHaveError(["addressCity", "addressProvince"])}
+        hasError={doSomeFieldsHaveError(["foreignAddressCity", "addressProvince"])}
         type="DESKTOP-ONLY"
         className="grid-row grid-gap-1 margin-top-2"
       >
         <div className="tablet:grid-col-6 grid-col-12">
           <BusinessFormationTextField
-            label={Config.formation.fields.addressCity.label}
-            placeholder={Config.formation.fields.addressCity.placeholder}
-            fieldName="addressCity"
+            label={Config.formation.fields.foreignAddressCity.label}
+            placeholder={Config.formation.fields.foreignAddressCity.placeholder}
+            fieldName="foreignAddressCity"
             required={true}
             errorBarType="MOBILE-ONLY"
             noValidationMargin={true}
-            validationText={getFieldErrorLabel("addressCity")}
+            validationText={getFieldErrorLabel("foreignAddressCity")}
             formInputFull
           />
         </div>

@@ -480,7 +480,10 @@ describe("getErrorStateForField", () => {
           it(`has error if some incorporators missing city and municipality`, () => {
             const formData = generateFormationFormData({
               incorporators: [
-                generateFormationIncorporator({ addressCity: "", addressMunicipality: undefined }),
+                generateFormationIncorporator({
+                  foreignAddressCity: "",
+                  domesticAddressMunicipality: undefined,
+                }),
               ],
             });
             expect(getErrorStateForField("incorporators", formData, undefined).hasError).toEqual(true);
@@ -532,7 +535,9 @@ describe("getErrorStateForField", () => {
 
     it("has error if some members missing city and municipality", () => {
       const formData = generateFormationFormData({
-        members: [generateFormationMember({ addressCity: "", addressMunicipality: undefined })],
+        members: [
+          generateFormationMember({ foreignAddressCity: "", domesticAddressMunicipality: undefined }),
+        ],
       });
       expect(getErrorStateForField("members", formData, undefined).hasError).toEqual(true);
     });
@@ -576,11 +581,11 @@ describe("getErrorStateForField", () => {
         }),
       },
       {
-        field: "addressCity",
+        field: "foreignAddressCity",
         maxLen: 30,
-        labelWhenMissing: Config.formation.fields.addressCity.error,
+        labelWhenMissing: Config.formation.fields.foreignAddressCity.error,
         labelWhenTooLong: templateEval(Config.formation.general.maximumLengthErrorText, {
-          field: Config.formation.fields.addressCity.fieldDisplayName,
+          field: Config.formation.fields.foreignAddressCity.fieldDisplayName,
           maxLen: "30",
         }),
       },
@@ -717,7 +722,7 @@ describe("getErrorStateForField", () => {
       "canMakeDistribution",
       "addressCountry",
       "addressState",
-      "addressMunicipality",
+      "domesticAddressMunicipality",
     ];
 
     const runTests = (hasErrorIfUndefined: FormationFields[], expectedLabel?: string) => {

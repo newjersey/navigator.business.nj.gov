@@ -29,16 +29,16 @@ export const MainBusinessAddressNj = (): ReactElement => {
   return (
     <MainBusinessAddressContainer>
       <WithErrorBar
-        hasError={doSomeFieldsHaveError(["addressState", "addressZipCode", "addressMunicipality"])}
+        hasError={doSomeFieldsHaveError(["addressState", "addressZipCode", "domesticAddressMunicipality"])}
         type="DESKTOP-ONLY"
         className="grid-gap-1 grid-row margin-top-2"
       >
         <WithErrorBar
-          hasError={doesFieldHaveError("addressMunicipality")}
+          hasError={doesFieldHaveError("domesticAddressMunicipality")}
           type="MOBILE-ONLY"
           className="grid-col-12 tablet:grid-col-6 padding-left-0"
         >
-          <span className="text-bold">{Config.formation.fields.addressMunicipality.label}</span>
+          <span className="text-bold">{Config.formation.fields.domesticAddressMunicipality.label}</span>
           <FormationMunicipality />
         </WithErrorBar>
         <WithErrorBar
@@ -69,7 +69,7 @@ export const MainBusinessAddressNj = (): ReactElement => {
         />
       </WithErrorBar>
       <Alert variant="info" className="margin-bottom-5">
-        <Content>{Config.formation.fields.addressMunicipality.infoAlert}</Content>
+        <Content>{Config.formation.fields.domesticAddressMunicipality.infoAlert}</Content>
       </Alert>
     </MainBusinessAddressContainer>
   );
