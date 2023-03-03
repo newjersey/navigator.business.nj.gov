@@ -1,11 +1,7 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import {
-  EssentialQuestionObject,
-  getEssentialQuestion,
-  hasEssentialQuestion,
-} from "@/lib/domain-logic/essentialQuestions";
+import { getEssentialQuestion, hasEssentialQuestion } from "@/lib/domain-logic/essentialQuestions";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { camelCaseToKebabCase } from "@/lib/utils/cases-helpers";
 import Onboarding from "@/pages/onboarding";
@@ -23,10 +19,7 @@ import {
   Municipality,
   UserData,
 } from "@businessnjgovnavigator/shared/";
-import {
-  IndustrySpecificData,
-  industrySpecificDataChoices,
-} from "@businessnjgovnavigator/shared/profileData";
+import { industrySpecificDataChoices } from "@businessnjgovnavigator/shared/profileData";
 import { createTheme, ThemeProvider } from "@mui/material";
 import {
   act,
@@ -143,13 +136,11 @@ export const createPageHelpers = (): PageHelpers => {
   };
 
   const getRadioGroup = (sectionAriaLabel: string): HTMLElement => {
-    const radiogroup = screen.getByRole("radiogroup", { name: sectionAriaLabel });
-    return radiogroup;
+    return screen.getByRole("radiogroup", { name: sectionAriaLabel });
   };
 
   const getRadioButton = (sectionAriaLabel: string): HTMLElement => {
-    const radio = screen.getByRole("radio", { name: sectionAriaLabel });
-    return radio;
+    return screen.getByRole("radio", { name: sectionAriaLabel });
   };
 
   const getMunicipalityValue = (): string => {
@@ -189,14 +180,17 @@ export const createPageHelpers = (): PageHelpers => {
   };
 
   const chooseEssentialQuestionRadio = (industryId: string, indexOfIndustrySpecificDataChoices: number) => {
-    const fieldName = (getEssentialQuestion(industryId) as EssentialQuestionObject)
-      .fieldName as keyof IndustrySpecificData;
+    const essentialQuestions = getEssentialQuestion(industryId);
 
-    const value = industrySpecificDataChoices[fieldName][indexOfIndustrySpecificDataChoices];
-
-    fireEvent.click(
-      screen.getByTestId(`${camelCaseToKebabCase(fieldName)}-radio-${value.toString().toLowerCase()}`)
-    );
+    for (const essentialQuestion of essentialQuestions) {
+      const value =
+        industrySpecificDataChoices[essentialQuestion.fieldName][indexOfIndustrySpecificDataChoices];
+      fireEvent.click(
+        screen.getByTestId(
+          `${camelCaseToKebabCase(essentialQuestion.fieldName)}-radio-${value.toString().toLowerCase()}`
+        )
+      );
+    }
   };
 
   return {
@@ -465,9 +459,17 @@ export const mockSuccessfulApiSignups = (): void => {
 };
 
 export const industriesWithEssentialQuestion = Industries.filter((industry) => {
-  return hasEssentialQuestion(industry.id) === true && industry.isEnabled;
+  return hasEssentialQuestion(industry.id) && industry.isEnabled;
 });
 
 export const industriesWithOutEssentialQuestion = Industries.filter((industry) => {
-  return hasEssentialQuestion(industry.id) === false && industry.isEnabled;
+  return !hasEssentialQuestion(industry.id) && industry.isEnabled;
 });
+
+export const industryIdsWithOutEssentialQuestion = industriesWithOutEssentialQuestion.map(
+  (industry) => industry.id
+);
+
+export const industryIdsWithEssentialQuestion = industriesWithEssentialQuestion.map(
+  (industry) => industry.id
+);

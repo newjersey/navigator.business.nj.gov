@@ -37,8 +37,8 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
-  industriesWithEssentialQuestion,
-  industriesWithOutEssentialQuestion,
+  industryIdsWithEssentialQuestion,
+  industryIdsWithOutEssentialQuestion,
 } from "@/test/pages/onboarding/helpers-onboarding";
 import {
   businessPersonas,
@@ -919,45 +919,48 @@ describe("profile", () => {
       expect(screen.getByLabelText("Sector")).toBeInTheDocument();
     });
 
-    it("saves userData when sector dropdown is removed from DOM", async () => {
-      const newIndustry = randomElementFromArray(industriesWithOutEssentialQuestion).id;
+    it.each(industryIdsWithOutEssentialQuestion.filter((industry) => industry !== "generic"))(
+      "saves userData when sector dropdown is removed from DOM when %s industry is selected",
+      async (industry) => {
+        const newIndustry = industry;
 
-      const userData = generateUserData({
-        profileData: generateProfileData({
-          businessPersona: "STARTING",
-          industryId: "generic",
-          sectorId: undefined,
-          ...emptyIndustrySpecificData,
-        }),
-      });
-      renderPage({
-        userData,
-      });
-      fireEvent.blur(screen.queryByLabelText("Sector") as HTMLElement);
-      await waitFor(() => {
-        expect(
-          screen.getByText(Config.profileDefaults.fields.sectorId.default.errorTextRequired)
-        ).toBeInTheDocument();
-      });
-      selectByValue("Industry", newIndustry);
-      await waitFor(() => {
-        expect(screen.queryByLabelText("Sector")).not.toBeInTheDocument();
-      });
-      clickSave();
-      await waitFor(() => {
-        expect(screen.getByTestId("snackbar-alert-SUCCESS")).toBeInTheDocument();
-      });
-      expect(currentUserData()).toEqual({
-        ...userData,
-        formProgress: "COMPLETED",
-        profileData: {
-          ...userData.profileData,
-          industryId: newIndustry,
-          sectorId: LookupIndustryById(newIndustry).defaultSectorId,
-          homeBasedBusiness: isHomeBasedBusinessApplicable(newIndustry) ? undefined : false,
-        },
-      });
-    });
+        const userData = generateUserData({
+          profileData: generateProfileData({
+            businessPersona: "STARTING",
+            industryId: "generic",
+            sectorId: undefined,
+            ...emptyIndustrySpecificData,
+          }),
+        });
+        renderPage({
+          userData,
+        });
+        fireEvent.blur(screen.queryByLabelText("Sector") as HTMLElement);
+        await waitFor(() => {
+          expect(
+            screen.getByText(Config.profileDefaults.fields.sectorId.default.errorTextRequired)
+          ).toBeInTheDocument();
+        });
+        selectByValue("Industry", newIndustry);
+        await waitFor(() => {
+          expect(screen.queryByLabelText("Sector")).not.toBeInTheDocument();
+        });
+        clickSave();
+        await waitFor(() => {
+          expect(screen.getByTestId("snackbar-alert-SUCCESS")).toBeInTheDocument();
+        });
+        expect(currentUserData()).toEqual({
+          ...userData,
+          formProgress: "COMPLETED",
+          profileData: {
+            ...userData.profileData,
+            industryId: newIndustry,
+            sectorId: LookupIndustryById(newIndustry).defaultSectorId,
+            homeBasedBusiness: isHomeBasedBusinessApplicable(newIndustry) ? undefined : false,
+          },
+        });
+      }
+    );
 
     it("prevents user from saving if sector is not selected", async () => {
       const userData = generateUserData({
@@ -1690,41 +1693,66 @@ describe("profile", () => {
     ).not.toHaveBeenCalled();
   });
 
+  it(`prevents Starting user from saving when petcare is selected as industry, but essential question is not answered`, async () => {
+    const userData = generateUserData({
+      formProgress: "UNSTARTED",
+      profileData: generateProfileData({
+        businessPersona: "STARTING",
+        industryId: "car-service",
+        ...generateUndefinedIndustrySpecificData(),
+      }),
+    });
+    renderPage({ userData });
+    clickSave();
+
+    await waitFor(() => {
+      expect(screen.getByText(Config.profileDefaults.essentialQuestionInlineText)).toBeInTheDocument();
+    });
+  });
+
   describe("Essential Question", () => {
-    industriesWithEssentialQuestion.map((industry) => {
-      it(`prevents Starting user from saving when ${industry.id} is selected as industry, but essential question is not answered`, async () => {
+    it.each(industryIdsWithEssentialQuestion)(
+      "prevents Starting user from saving when %s is selected as industry, but essential question is not answered",
+      async (industryId) => {
         const userData = generateUserData({
           formProgress: "UNSTARTED",
           profileData: generateProfileData({
             businessPersona: "STARTING",
-            industryId: industry.id,
+            industryId: industryId,
             ...generateUndefinedIndustrySpecificData(),
           }),
         });
         renderPage({ userData });
         clickSave();
         await waitFor(() => {
-          expect(screen.getByText(Config.profileDefaults.essentialQuestionInlineText)).toBeInTheDocument();
+          expect(
+            screen.getAllByText(Config.profileDefaults.essentialQuestionInlineText)[0]
+          ).toBeInTheDocument();
         });
-      });
+      }
+    );
 
-      it(`prevents Foreign Nexus user from saving when ${industry.id} is selected as industry, but essential question is not answered`, async () => {
+    it.each(industryIdsWithEssentialQuestion)(
+      "prevents Foreign Nexus user from saving when %s is selected as industry, but essential question is not answered",
+      async (industryId) => {
         const userData = generateUserData({
           formProgress: "UNSTARTED",
           profileData: generateProfileData({
             businessPersona: "FOREIGN",
             foreignBusinessType: "NEXUS",
-            industryId: industry.id,
+            industryId: industryId,
             ...generateUndefinedIndustrySpecificData(),
           }),
         });
         renderPage({ userData });
         clickSave();
         await waitFor(() => {
-          expect(screen.getByText(Config.profileDefaults.essentialQuestionInlineText)).toBeInTheDocument();
+          expect(
+            screen.getAllByText(Config.profileDefaults.essentialQuestionInlineText)[0]
+          ).toBeInTheDocument();
         });
-      });
-    });
+      }
+    );
   });
 
   describe("Information Section", () => {

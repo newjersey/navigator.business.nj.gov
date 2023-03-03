@@ -175,6 +175,7 @@ export const generateIndustrySpecificData = (
     interstateTransport: false,
     isChildcareForSixOrMore: undefined,
     willSellPetCareItems: undefined,
+    petCareHousing: undefined,
     ...overrides,
   };
 };

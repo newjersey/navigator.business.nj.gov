@@ -27,18 +27,17 @@ export const getIsApplicableToFunctionByFieldName = (
     })!.isQuestionApplicableToIndustry(LookupIndustryById(industryId));
   };
 };
-
 export const hasEssentialQuestion = (industryId: string | undefined): boolean => {
   const industry = LookupIndustryById(industryId);
-  const essentialQuestionResults = EssentialQuestions.map((essentialQuestionFunction) => {
+  const essentialQuestionResults = EssentialQuestions.filter((essentialQuestionFunction) => {
     return essentialQuestionFunction.isQuestionApplicableToIndustry(industry);
   });
-  return essentialQuestionResults.includes(true);
+  return essentialQuestionResults.length > 0;
 };
 
 export const getEssentialQuestion = (industryId: string | undefined) => {
   const industry = LookupIndustryById(industryId);
-  return EssentialQuestions.find((essentialQuestionFunction) => {
+  return EssentialQuestions.filter((essentialQuestionFunction) => {
     return essentialQuestionFunction.isQuestionApplicableToIndustry(industry);
   });
 };
@@ -79,6 +78,7 @@ export const EssentialQuestions: EssentialQuestion[] = [
     fieldName: "interstateTransport",
     contentFieldName: "interstateLogistics",
   }),
+
   new EssentialQuestion({
     shouldBeResetWhenIndustryChanges: true,
     isQuestionApplicableToIndustry: (industry) => {
@@ -111,6 +111,14 @@ export const EssentialQuestions: EssentialQuestion[] = [
       return !!industry.industryOnboardingQuestions.isChildcareForSixOrMore && industry.id === "daycare";
     },
     fieldName: "isChildcareForSixOrMore",
+  }),
+  new EssentialQuestion({
+    shouldBeResetWhenIndustryChanges: true,
+    isQuestionApplicableToIndustry: (industry) => {
+      return !!industry.industryOnboardingQuestions.isPetCareHousingApplicable;
+    },
+    fieldName: "petCareHousing",
+    contentFieldName: "petCareHousing",
   }),
   new EssentialQuestion({
     shouldBeResetWhenIndustryChanges: true,

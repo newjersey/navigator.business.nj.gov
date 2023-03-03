@@ -35,15 +35,11 @@
       "step": 3,
       "weight": 15,
       "task": "get-insurance"
-    },
-    {
-      "step": 3,
-      "weight": 20,
-      "task": "petcare-license"
     }
   ],
   "name": "Pet Care",
   "industryOnboardingQuestions": {
+    "isPetCareHousingApplicable": true,
     "canBeHomeBased": true,
     "canBeReseller": true,
     "willSellPetCareItems": true

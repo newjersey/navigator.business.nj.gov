@@ -43,12 +43,25 @@ export const OnboardingIndustry = (props: Props): ReactElement => {
     return EssentialQuestions.filter((i) => {
       return i.isQuestionApplicableToIndustryId(industryId);
     }).map((obj) => {
+      const essentialQuestionContentFromConfig = getProfileConfig({
+        config: Config,
+        persona: state.flow,
+        fieldName: (obj.contentFieldName ?? obj.fieldName) as ProfileContentField,
+      });
+
       return (
-        <div data-testid={`industry-specific-${industryId}`} key={industryId}>
+        <div
+          data-testid={`industry-specific-${industryId}-${obj.fieldName}`}
+          key={`${industryId}-${obj.fieldName}`}
+        >
           <WithErrorBar
             hasError={props.fieldStates[obj.fieldName].invalid}
             type="ALWAYS"
-            className="margin-top-4"
+            className={
+              essentialQuestionContentFromConfig.headerNotBolded || essentialQuestionContentFromConfig.header
+                ? "margin-top-4"
+                : "margin-top-2"
+            }
           >
             <FieldLabelProfile fieldName={obj.contentFieldName ?? (obj.fieldName as ProfileContentField)} />
             <OnboardingRadioQuestion<IndustrySpecificData[keyof IndustrySpecificData]>
@@ -76,7 +89,6 @@ export const OnboardingIndustry = (props: Props): ReactElement => {
         handleChange={handleChange}
         onValidation={onValidation}
       />
-
       {state.profileData.industryId === "home-contractor" && (
         <div
           className="margin-top-2"
@@ -86,7 +98,6 @@ export const OnboardingIndustry = (props: Props): ReactElement => {
           <OnboardingHomeContractor />
         </div>
       )}
-
       {state.profileData.industryId === "employment-agency" && (
         <div
           className="margin-top-2"
@@ -96,7 +107,6 @@ export const OnboardingIndustry = (props: Props): ReactElement => {
           <OnboardingEmploymentAgency />
         </div>
       )}
-
       {getEssentialQuestions(state.profileData.industryId)}
     </div>
   );
