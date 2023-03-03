@@ -4,7 +4,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { withDesign } from "storybook-addon-designs";
 
 export default {
-  title: "Molecules/SecondaryButton",
+  title: "Molecules/Button/Secondary",
   component: SecondaryButton,
   decorators: [withDesign],
   parameters: {
