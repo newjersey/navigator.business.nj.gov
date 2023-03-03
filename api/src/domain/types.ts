@@ -7,6 +7,7 @@ import { ProfileData } from "@shared/profileData";
 import { TaxFiling, TaxFilingState } from "@shared/taxFiling";
 import { UserData } from "@shared/userData";
 import * as https from "node:https";
+
 export interface UserDataClient {
   get: (userId: string) => Promise<UserData>;
   findByEmail: (email: string) => Promise<UserData | undefined>;

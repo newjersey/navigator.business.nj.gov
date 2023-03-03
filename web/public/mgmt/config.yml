@@ -3844,7 +3844,6 @@ collections:
                         collapsed: false
                         widget: object
                         fields:
-                          - { label: "Header", name: "header", widget: "string" }
                           - { label: "Radio Button Yes Text", name: "radioButtonTrueText", widget: "string" }
                           - { label: "Radio Button No Text", name: "radioButtonFalseText", widget: "string" }
                           - { label: "Description", name: "description", widget: "markdown" }

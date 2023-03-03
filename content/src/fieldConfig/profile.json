@@ -186,7 +186,6 @@
       },
       "willSellPetCareItems": {
         "default": {
-          "header": "",
           "radioButtonTrueText": "Yes",
           "radioButtonFalseText": "No",
           "description": "Will you sell pet care items?"
