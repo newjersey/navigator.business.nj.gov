@@ -1426,6 +1426,10 @@ collections:
             name: petCareHousing
             widget: boolean
             required: false
+          - label: Cannabis License
+            name: isCannabisLicenseTypeApplicable
+            widget: boolean
+            required: false
       - label: Roadmap Steps
         name: roadmapSteps
         widget: list
