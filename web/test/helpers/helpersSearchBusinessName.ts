@@ -57,8 +57,8 @@ export const dbaSearchButton = () => {
   return screen.getByText(Config.nexusNameSearch.dbaNameSearchSubmitButton);
 };
 export const inputField = () => {
-  return screen.getByPlaceholderText(Config.searchBusinessNameTask.placeholderText);
+  return screen.getByLabelText("Search business name");
 };
 export const dbaInputField = () => {
-  return screen.getByPlaceholderText(Config.nexusNameSearch.dbaNameSearchPlaceholder);
+  return screen.getByLabelText(Config.nexusNameSearch.dbaNameSearchLabel);
 };

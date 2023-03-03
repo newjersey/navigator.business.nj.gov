@@ -17,7 +17,6 @@ interface Props {
   required: boolean;
   inputLabel?: string;
   optionalLabel?: string;
-  placeholderText: string;
   addButtonText?: string;
   title: string;
   contentMd: string;
@@ -76,7 +75,6 @@ export const BusinessFormationTextBox = (props: Props): ReactElement => {
               <div className="grid-col">
                 <BusinessFormationTextField
                   errorBarType="NEVER"
-                  placeholder={props.placeholderText}
                   fieldName={props.fieldName}
                   label={props.inputLabel ?? ""}
                   validationText={Config.formation.general.genericErrorText}

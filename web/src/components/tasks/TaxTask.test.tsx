@@ -128,9 +128,7 @@ describe("<TaxTask />", () => {
 
     it("enters and saves Tax ID", async () => {
       renderPage();
-      fireEvent.change(screen.getByPlaceholderText(Config.profileDefaults.fields.taxId.default.placeholder), {
-        target: { value: "123456789123" },
-      });
+      fireEvent.change(screen.getByLabelText("Tax id"), { target: { value: "123456789123" } });
       fireEvent.click(screen.getByText(Config.tax.saveButtonText));
       await waitFor(() => {
         expect(currentUserData().profileData.taxId).toEqual("123456789123");
@@ -145,9 +143,7 @@ describe("<TaxTask />", () => {
           length: "12",
         }
       );
-      fireEvent.change(screen.getByPlaceholderText(Config.profileDefaults.fields.taxId.default.placeholder), {
-        target: { value: "123123123" },
-      });
+      fireEvent.change(screen.getByLabelText("Tax id"), { target: { value: "123123123" } });
       fireEvent.click(screen.getByText(Config.tax.saveButtonText));
       expect(screen.getByText(expectedErrorMessage)).toBeInTheDocument();
       expect(userDataWasNotUpdated()).toBe(true);
@@ -155,9 +151,7 @@ describe("<TaxTask />", () => {
 
     it("sets task status to COMPLETED on save", async () => {
       renderPage();
-      fireEvent.change(screen.getByPlaceholderText(Config.profileDefaults.fields.taxId.default.placeholder), {
-        target: { value: "123456789123" },
-      });
+      fireEvent.change(screen.getByLabelText("Tax id"), { target: { value: "123456789123" } });
       fireEvent.click(screen.getByText(Config.tax.saveButtonText));
       await waitFor(() => {
         expect(currentUserData().taskProgress[taskId]).toEqual("COMPLETED");
@@ -188,7 +182,6 @@ describe("<TaxTask />", () => {
 
     it("displays Tax ID and success message when it exists in data and is 12 digits in length", () => {
       renderPage();
-      expect(screen.queryByText(Config.tax.placeholderText)).not.toBeInTheDocument();
       expect((screen.getByLabelText("Tax id") as HTMLInputElement).value).toEqual("***-***-*89/123");
     });
   });
@@ -223,9 +216,7 @@ describe("<TaxTask />", () => {
 
     it("opens registration modal on save button click", async () => {
       renderPage();
-      fireEvent.change(screen.getByPlaceholderText(Config.profileDefaults.fields.taxId.default.placeholder), {
-        target: { value: "123456789123" },
-      });
+      fireEvent.change(screen.getByLabelText("Tax id"), { target: { value: "123456789123" } });
       fireEvent.click(screen.getByText(`Register & ${Config.tax.saveButtonText}`));
       await waitFor(() => {
         return expect(setRegistrationModalIsVisible).toHaveBeenCalledWith(true);

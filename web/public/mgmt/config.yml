@@ -69,7 +69,6 @@ collections:
                     fields:
                       - { label: "Field name", name: "fieldDisplayName", widget: "string" }
                       - { label: "Inline error", name: "error", widget: "string" }
-                      - { label: "Placeholder", name: "placeholder", widget: "string" }
                       - { label: "Label", name: "label", widget: "markdown" }
                   - label: Address Line 1
                     name: addressLine1
@@ -78,7 +77,6 @@ collections:
                     fields:
                       - { label: "Field name", name: "fieldDisplayName", widget: "string" }
                       - { label: "Inline error", name: "error", widget: "string" }
-                      - { label: "Placeholder", name: "placeholder", widget: "string" }
                       - { label: "Label", name: "label", widget: "markdown" }
                   - label: Address Line 2
                     name: addressLine2
@@ -86,7 +84,6 @@ collections:
                     widget: object
                     fields:
                       - { label: "Field name", name: "fieldDisplayName", widget: "string" }
-                      - { label: "Placeholder", name: "placeholder", widget: "string" }
                       - { label: "Label", name: "label", widget: "markdown" }
                   - label: In-State (Poppy) Municipality
                     name: addressMunicipality
@@ -94,7 +91,6 @@ collections:
                     widget: object
                     fields:
                       - { label: "Field name", name: "fieldDisplayName", widget: "string" }
-                      - { label: "Placeholder", name: "placeholder", widget: "string" }
                       - { label: "Inline error", name: "error", widget: "string" }
                       - { label: "Info Alert", name: "infoAlert", widget: "markdown" }
                       - { label: "Label", name: "label", widget: "markdown" }
@@ -105,7 +101,6 @@ collections:
                     fields:
                       - { label: "Field name", name: "fieldDisplayName", widget: "string" }
                       - { label: "Inline error", name: "error", widget: "string" }
-                      - { label: "Placeholder", name: "placeholder", widget: "string" }
                       - { label: "Label", name: "label", widget: "markdown" }
                   - label: Address State
                     name: addressState
@@ -114,7 +109,6 @@ collections:
                     fields:
                       - { label: "Field name", name: "fieldDisplayName", widget: "string" }
                       - { label: "Inline error", name: "error", widget: "string" }
-                      - { label: "Placeholder", name: "placeholder", widget: "string" }
                       - { label: "Label", name: "label", widget: "markdown" }
                   - label: Address Province
                     name: addressProvince
@@ -123,7 +117,6 @@ collections:
                     fields:
                       - { label: "Field name", name: "fieldDisplayName", widget: "string" }
                       - { label: "Inline error", name: "error", widget: "string" }
-                      - { label: "Placeholder", name: "placeholder", widget: "string" }
                       - { label: "Label", name: "label", widget: "markdown" }
                   - label: Address Zip Code
                     name: addressZipCode
@@ -132,7 +125,6 @@ collections:
                     fields:
                       - { label: "Field name", name: "fieldDisplayName", widget: "string" }
                       - { label: "Inline error", name: "error", widget: "string" }
-                      - { label: "Placeholder", name: "placeholder", widget: "string" }
                       - { label: "Label", name: "label", widget: "markdown" }
                       - label: Foreign-business overrides
                         name: foreign
@@ -141,7 +133,6 @@ collections:
                         fields:
                           - { label: "Inline error - US", name: "errorUS", widget: "string" }
                           - { label: "Inline error - International", name: "errorIntl", widget: "string" }
-                          - { label: "Placeholder", name: "placeholder", widget: "string" }
                           - { label: "Label", name: "label", widget: "markdown" }
                   - label: Agent Name
                     name: agentName
@@ -150,7 +141,6 @@ collections:
                     fields:
                       - { label: "Field name", name: "fieldDisplayName", widget: "string" }
                       - { label: "Inline error", name: "error", widget: "string" }
-                      - { label: "Placeholder", name: "placeholder", widget: "string" }
                       - { label: "Label", name: "label", widget: "markdown" }
                       - { label: "Review Step Label", name: "reviewStepLabel", widget: "markdown" }
                   - label: Agent Number
@@ -160,7 +150,6 @@ collections:
                     fields:
                       - { label: "Field name", name: "fieldDisplayName", widget: "string" }
                       - { label: "Inline error", name: "error", widget: "string" }
-                      - { label: "Placeholder", name: "placeholder", widget: "string" }
                       - { label: "Label", name: "label", widget: "markdown" }
                       - { label: "Review Step Label", name: "reviewStepLabel", widget: "markdown" }
                   - label: Agent Email
@@ -170,7 +159,6 @@ collections:
                     fields:
                       - { label: "Field name", name: "fieldDisplayName", widget: "string" }
                       - { label: "Inline error", name: "error", widget: "string" }
-                      - { label: "Placeholder", name: "placeholder", widget: "string" }
                       - { label: "Label", name: "label", widget: "markdown" }
                       - { label: "Review Step Label", name: "reviewStepLabel", widget: "markdown" }
                   - label: Agent Office Address Line 1
@@ -180,7 +168,6 @@ collections:
                     fields:
                       - { label: "Field name", name: "fieldDisplayName", widget: "string" }
                       - { label: "Inline error", name: "error", widget: "string" }
-                      - { label: "Placeholder", name: "placeholder", widget: "string" }
                       - { label: "Label", name: "label", widget: "markdown" }
                   - label: Agent Office Address Line 2
                     name: agentOfficeAddressLine2
@@ -188,7 +175,6 @@ collections:
                     widget: object
                     fields:
                       - { label: "Field name", name: "fieldDisplayName", widget: "string" }
-                      - { label: "Placeholder", name: "placeholder", widget: "string" }
                       - { label: "Label", name: "label", widget: "markdown" }
                   - label: Agent Office Municipality
                     name: agentOfficeAddressMunicipality
@@ -197,7 +183,6 @@ collections:
                     fields:
                       - { label: "Field name", name: "fieldDisplayName", widget: "string" }
                       - { label: "Inline error", name: "error", widget: "string" }
-                      - { label: "Placeholder", name: "placeholder", widget: "string" }
                       - { label: "Label", name: "label", widget: "markdown" }
                   - label: Agent Office State
                     name: agentOfficeAddressState
@@ -205,7 +190,6 @@ collections:
                     widget: object
                     fields:
                       - { label: "Inline error", name: "error", widget: "string" }
-                      - { label: "Placeholder", name: "placeholder", widget: "string" }
                       - { label: "Label", name: "label", widget: "markdown" }
                   - label: Agent Office Zip Code
                     name: agentOfficeAddressZipCode
@@ -214,7 +198,6 @@ collections:
                     fields:
                       - { label: "Field name", name: "fieldDisplayName", widget: "string" }
                       - { label: "Inline error", name: "error", widget: "string" }
-                      - { label: "Placeholder", name: "placeholder", widget: "string" }
                       - { label: "Label", name: "label", widget: "markdown" }
                   - label: Annual Report Notification
                     name: annualReportNotification
@@ -254,7 +237,6 @@ collections:
                           name: "errorInlineNeedsToSearch",
                           widget: "string",
                         }
-                      - { label: "Placeholder", name: "placeholder", widget: "string" }
                       - { label: "Label", name: "label", widget: "string" }
                       - { label: "Review Step Label", name: "reviewStepLabel", widget: "markdown" }
                       - label: Foreign-business Overrides
@@ -271,7 +253,6 @@ collections:
                     fields:
                       - { label: "Header", name: "header", widget: "string" }
                       - { label: "Body", name: "body", widget: "markdown" }
-                      - { label: "Placeholder", name: "placeholder", widget: "string" }
                       - { label: "Review Step label", name: "reviewStepLabel", widget: "string" }
                       - { label: "Add button text", name: "addButtonText", widget: "string" }
                       - { label: "Label", name: "label", widget: "markdown" }
@@ -294,7 +275,6 @@ collections:
                     fields:
                       - { label: "Field name", name: "fieldDisplayName", widget: "string" }
                       - { label: "Inline error", name: "error", widget: "string" }
-                      - { label: "Placeholder", name: "placeholder", widget: "string" }
                       - { label: "Label", name: "label", widget: "markdown" }
                       - { label: "Review Step Label", name: "reviewStepLabel", widget: "markdown" }
                   - label: Business Total Stock
@@ -304,7 +284,6 @@ collections:
                     fields:
                       - { label: "Field name", name: "fieldDisplayName", widget: "string" }
                       - { label: "Inline error", name: "error", widget: "string" }
-                      - { label: "Placeholder", name: "placeholder", widget: "string" }
                       - { label: "Label", name: "label", widget: "markdown" }
                       - { label: "Review Step Label", name: "reviewStepLabel", widget: "markdown" }
                   - label: Partnership Rights - Can Get Distribution
@@ -407,7 +386,6 @@ collections:
                       - { label: "Field name", name: "fieldDisplayName", widget: "string" }
                       - { label: "Header", name: "header", widget: "string" }
                       - { label: "Body", name: "body", widget: "markdown" }
-                      - { label: "Placeholder", name: "placeholder", widget: "string" }
                       - { label: "Review Step Label", name: "reviewStepLabel", widget: "string" }
                   - label: Contact First Name
                     name: contactFirstName
@@ -416,7 +394,6 @@ collections:
                     fields:
                       - { label: "Field name", name: "fieldDisplayName", widget: "string" }
                       - { label: "Inline error", name: "error", widget: "string" }
-                      - { label: "Placeholder", name: "placeholder", widget: "string" }
                       - { label: "Review Step Label", name: "reviewStepLabel", widget: "string" }
                       - { label: "Label", name: "label", widget: "markdown" }
                   - label: Contact Last Name
@@ -426,7 +403,6 @@ collections:
                     fields:
                       - { label: "Field name", name: "fieldDisplayName", widget: "string" }
                       - { label: "Inline error", name: "error", widget: "string" }
-                      - { label: "Placeholder", name: "placeholder", widget: "string" }
                       - { label: "Review Step Label", name: "reviewStepLabel", widget: "string" }
                       - { label: "Label", name: "label", widget: "markdown" }
                   - label: Contact Phone Number
@@ -436,7 +412,6 @@ collections:
                     fields:
                       - { label: "Field name", name: "fieldDisplayName", widget: "string" }
                       - { label: "Inline error", name: "error", widget: "string" }
-                      - { label: "Placeholder", name: "placeholder", widget: "string" }
                       - { label: "Review Step Label", name: "reviewStepLabel", widget: "string" }
                       - { label: "Label", name: "label", widget: "markdown" }
                   - label: Corp Watch Notification
@@ -474,7 +449,6 @@ collections:
                       - { label: "Field name", name: "fieldDisplayName", widget: "string" }
                       - { label: "Header", name: "header", widget: "string" }
                       - { label: "Body", name: "body", widget: "markdown" }
-                      - { label: "Placeholder", name: "placeholder", widget: "string" }
                       - { label: "Review Step Label", name: "reviewStepLabel", widget: "string" }
                   - label: Foreign date of formation
                     name: foreignDateOfFormation
@@ -492,7 +466,6 @@ collections:
                     fields:
                       - { label: "Field name", name: "fieldDisplayName", widget: "string" }
                       - { label: "Inline error", name: "error", widget: "string" }
-                      - { label: "Placeholder", name: "placeholder", widget: "string" }
                       - { label: "Label", name: "label", widget: "markdown" }
                       - { label: "Review Step Label", name: "reviewStepLabel", widget: "markdown" }
                   - label: Incorporators
@@ -592,7 +565,6 @@ collections:
                       - { label: "Add another button text", name: "addAnotherButtonText", widget: "string" }
                       - { label: "Review Step header", name: "reviewStepHeader", widget: "string" }
                       - { label: "Review Step subheader", name: "reviewStepSubheader", widget: "string" }
-                      - { label: "Placeholder", name: "placeholder", widget: "string" }
                       - { label: "label", name: "label", widget: "markdown" }
                   - label: Signers
                     name: signers
@@ -634,8 +606,6 @@ collections:
                       - { label: "Name column label", name: "nameLabel", widget: "markdown" }
                       - { label: "Title column label", name: "titleLabel", widget: "markdown" }
                       - { label: "Sign column label", name: "signColumnLabel", widget: "markdown" }
-                      - { label: "Title placeholder", name: "titlePlaceholder", widget: "string" }
-                      - { label: "Name placeholder", name: "namePlaceholder", widget: "string" }
                       - { label: "Table headers", name: "tableHeader", widget: "string" }
                       - { label: "Add button text", name: "addButtonText", widget: "markdown" }
                       - { label: "Review step - header", name: "reviewStepHeader", widget: "string" }
@@ -676,7 +646,6 @@ collections:
                       - { label: "Header", name: "header", widget: "string" }
                       - { label: "body", name: "body", widget: "markdown" }
                       - { label: "Review step label", name: "reviewStepLabel", widget: "string" }
-                      - { label: "Placeholder", name: "placeholder", widget: "string" }
               - label: Address Modal
                 name: addressModal
                 collapsed: true
@@ -690,7 +659,6 @@ collections:
                       - { label: "Field name", name: "fieldDisplayName", widget: "string" }
                       - { label: "Label", name: "label", widget: "markdown" }
                       - { label: "Inline error", name: "error", widget: "string" }
-                      - { label: "Placeholder", name: "placeholder", widget: "string" }
                   - label: Address Line 1
                     name: addressLine1
                     collapsed: false
@@ -699,7 +667,6 @@ collections:
                       - { label: "Field name", name: "fieldDisplayName", widget: "string" }
                       - { label: "Label", name: "label", widget: "markdown" }
                       - { label: "Inline error", name: "error", widget: "string" }
-                      - { label: "Placeholder", name: "placeholder", widget: "string" }
                   - label: Address Line 2
                     name: addressLine2
                     collapsed: false
@@ -707,7 +674,6 @@ collections:
                     fields:
                       - { label: "Field name", name: "fieldDisplayName", widget: "string" }
                       - { label: "Label", name: "label", widget: "markdown" }
-                      - { label: "Placeholder", name: "placeholder", widget: "string" }
                   - label: Address City
                     name: addressCity
                     collapsed: false
@@ -716,7 +682,6 @@ collections:
                       - { label: "Field name", name: "fieldDisplayName", widget: "string" }
                       - { label: "Label", name: "label", widget: "markdown" }
                       - { label: "Inline error", name: "error", widget: "string" }
-                      - { label: "Placeholder", name: "placeholder", widget: "string" }
                   - label: Address State
                     name: addressState
                     collapsed: false
@@ -725,7 +690,6 @@ collections:
                       - { label: "Field name", name: "fieldDisplayName", widget: "string" }
                       - { label: "Label", name: "label", widget: "markdown" }
                       - { label: "Inline error", name: "error", widget: "string" }
-                      - { label: "Placeholder", name: "placeholder", widget: "string" }
                   - label: Address Zip Code
                     name: addressZipCode
                     collapsed: false
@@ -734,7 +698,6 @@ collections:
                       - { label: "Field name", name: "fieldDisplayName", widget: "string" }
                       - { label: "Label", name: "label", widget: "markdown" }
                       - { label: "Inline error", name: "error", widget: "string" }
-                      - { label: "Placeholder", name: "placeholder", widget: "string" }
               - label: Partnership Rights
                 name: partnershipRights
                 collapsed: true
@@ -742,7 +705,6 @@ collections:
                 fields:
                   - { label: "Partnership rights header", name: "header", widget: "string" }
                   - { label: "Terms Label", name: "label", widget: "markdown" }
-                  - { label: "Placeholder text", name: "placeholder", widget: "string" }
                   - { label: "Error banner - field name", name: "fieldDisplayName", widget: "string" }
                   - { label: "Radio button - No", name: "radioNoText", widget: "string" }
                   - { label: "Radio button - Yes", name: "radioYesText", widget: "string" }
@@ -2086,7 +2048,6 @@ collections:
             widget: object
             fields:
               - { label: Description Text, name: descriptionText, widget: markdown }
-              - { label: Input Placeholder Text, name: placeholderText, widget: string }
               - { label: Save Button Text, name: saveButtonText, widget: string }
               - {
                   label: Success Message Text,
@@ -2128,7 +2089,6 @@ collections:
             widget: object
             fields:
               - { label: Description Text, name: descriptionText, widget: markdown }
-              - { label: Input Placeholder Text, name: placeholderText, widget: string }
               - { label: Save Button Text, name: saveButtonText, widget: string }
               - { label: Show Button Text, name: showButtonText, widget: string }
               - { label: Hide Button Text, name: hideButtonText, widget: string }
@@ -2194,7 +2154,6 @@ collections:
                 }
               - { label: naics.com Link, name: naicsLink, widget: string, hint: This field supports Markdown }
               - { label: Input Label, name: inputLabel, widget: string, hint: This field supports Markdown }
-              - { label: Input Placeholder, name: inputPlaceholder, widget: string }
               - { label: Save Button Text, name: saveButtonText, widget: string }
               - { label: Invalid Validation Error Text, name: invalidValidationErrorText, widget: string }
               - { label: Length Validation Error Text, name: lengthValidationErrorText, widget: string }
@@ -2237,7 +2196,6 @@ collections:
                   hint: This field supports Markdown,
                 }
               - { label: DBA Name Description, name: dbaNameDescription, widget: markdown }
-              - { label: DBA Name Search Placeholder, name: dbaNameSearchPlaceholder, widget: string }
               - { label: DBA Name Search Label, name: dbaNameSearchLabel, widget: string }
               - { label: DBA Name Search Submit Button, name: dbaNameSearchSubmitButton, widget: string }
               - { label: Next Button Text, name: nexusNextButton, widget: string }
@@ -2672,11 +2630,6 @@ collections:
                   widget: string,
                 }
               - {
-                  label: Feedback Modals - Generic Input Placeholder Text,
-                  name: feedbackPlaceholderText,
-                  widget: string,
-                }
-              - {
                   label: Feedback Modals - Generic Input Error Text,
                   name: feedbackInlineErrorText,
                   widget: string,
@@ -2986,11 +2939,8 @@ collections:
               - { label: Sign-up Header, name: signUpTitleText, widget: string }
               - { label: Sign-up Description, name: signUpDescriptionText, widget: string }
               - { label: Name Label, name: nameFieldLabel, widget: string }
-              - { label: Name Placeholder, name: nameFieldPlaceholder, widget: string }
               - { label: Email Label, name: emailFieldLabel, widget: string }
-              - { label: Email Placeholder, name: emailFieldPlaceholder, widget: string }
               - { label: Confirm Email Label, name: confirmEmailFieldLabel, widget: string }
-              - { label: Confirm Email Placeholder, name: confirmEmailFieldPlaceholder, widget: string }
               - { label: Submit Button Text, name: submitButtonText, widget: string }
               - { label: Close Button Text, name: closeButtonText, widget: string }
               - { label: Error - Full name is required, name: errorTextFullName, widget: string }
@@ -3076,7 +3026,6 @@ collections:
             widget: object
             summary: "{{searchBusinessNameTask}}"
             fields:
-              - { label: Placeholder Text, name: placeholderText, widget: string }
               - { label: Search Button Label, name: searchButtonText, widget: string }
               - { label: Unavailable Name Message, name: unavailableText, widget: string }
               - {
@@ -3104,15 +3053,10 @@ collections:
               - { label: Tab 2 Label, name: tab2Text, widget: string }
               - { label: Check Status Text, name: checkStatusText, widget: text }
               - { label: Business Name Label, name: businessNameLabel, widget: string }
-              - { label: Business Name Placeholder, name: businessNamePlaceholder, widget: string }
               - { label: Address 1 Label, name: address1Label, widget: string }
-              - { label: Address 1 Placeholder, name: address1Placeholder, widget: string }
               - { label: Address 2 Label, name: address2Label, widget: string }
-              - { label: Address 2 Placeholder, name: address2Placeholder, widget: string }
               - { label: Zip Code Label, name: zipCodeLabel, widget: string }
-              - { label: Zip Code Placeholder, name: zipCodePlaceholder, widget: string }
               - { label: State Label, name: stateLabel, widget: string }
-              - { label: State Placeholder, name: statePlaceholder, widget: string }
               - { label: Submit Button Text, name: submitText, widget: string }
               - { label: Error - Not Found, name: errorTextNotFound, widget: string }
               - { label: Error - Missing Required Fields, name: errorTextFieldsRequired, widget: string }
@@ -3240,7 +3184,6 @@ collections:
                         widget: object
                         fields:
                           - { label: "Header", name: "header", widget: "string" }
-                          - { label: "Placeholder", name: "placeholder", widget: "string" }
                           - {
                               label: "Error Text (Oscar Onboarding Only)",
                               name: "errorTextRequired",
@@ -3269,7 +3212,6 @@ collections:
                         widget: object
                         fields:
                           - { label: "Header", name: "header", widget: "string" }
-                          - { label: "Placeholder", name: "placeholder", widget: "string" }
                           - {
                               label: "Error Text (when not set)",
                               name: "errorTextRequired",
@@ -3288,7 +3230,6 @@ collections:
                         widget: object
                         fields:
                           - { label: "Header", name: "header", widget: "string" }
-                          - { label: "Placeholder", name: "placeholder", widget: "string" }
                           - { label: "Description", name: "description", widget: "markdown" }
                           - {
                               label: "Error Text (when not selected)",
@@ -3356,7 +3297,6 @@ collections:
                         widget: object
                         fields:
                           - { label: "Header", name: "header", widget: "string" }
-                          - { label: "Placeholder", name: "placeholder", widget: "string" }
                           - {
                               label: "Error Text (when not set)",
                               name: "errorTextRequired",
@@ -3391,7 +3331,6 @@ collections:
                         widget: object
                         fields:
                           - { label: "Header", name: "header", widget: "string" }
-                          - { label: "Placeholder", name: "placeholder", widget: "string" }
                           - {
                               label: "Error Text (when not provided)",
                               name: "errorTextRequired",
@@ -3415,7 +3354,6 @@ collections:
                               widget: "string",
                               required: false,
                             }
-                          - { label: "Placeholder", name: "placeholder", widget: "string" }
                           - { label: "Description", name: "description", widget: "markdown" }
                       - label: Overrides
                         name: "overrides"
@@ -3445,7 +3383,6 @@ collections:
                         widget: object
                         fields:
                           - { label: "Header", name: "header", widget: "string" }
-                          - { label: "Placeholder", name: "placeholder", widget: "string" }
                           - {
                               label: "Error Text (when not set)",
                               name: "errorTextRequired",
@@ -3570,7 +3507,6 @@ collections:
                         widget: object
                         fields:
                           - { label: "Header", name: "header", widget: "string" }
-                          - { label: "Placeholder", name: "placeholder", widget: "string" }
                           - { label: "Description", name: "description", widget: "markdown" }
                           - {
                               label: "Error Text (when not entered)",
@@ -3594,7 +3530,6 @@ collections:
                         fields:
                           - { label: "Header", name: "header", widget: "string" }
                           - { label: "Header (not bolded)", name: "headerNotBolded", widget: "string" }
-                          - { label: "Placeholder", name: "placeholder", widget: "string" }
                           - { label: "Description", name: "description", widget: "markdown" }
                   - label: Employer ID
                     name: employerId
@@ -3608,7 +3543,6 @@ collections:
                         fields:
                           - { label: "Header", name: "header", widget: "string" }
                           - { label: "Header (not bolded)", name: "headerNotBolded", widget: "string" }
-                          - { label: "Placeholder", name: "placeholder", widget: "string" }
                           - { label: "Description", name: "description", widget: "markdown" }
                   - label: NAICS Code
                     name: naicsCode
@@ -3653,7 +3587,6 @@ collections:
                         widget: object
                         fields:
                           - { label: "Header", name: "header", widget: "string" }
-                          - { label: "Placeholder", name: "placeholder", widget: "string" }
                           - { label: "Error Text", name: "errorTextRequired", widget: "string" }
                           - { label: "Description", name: "description", widget: "markdown" }
                   - label: Documents
@@ -3679,7 +3612,6 @@ collections:
                         widget: object
                         fields:
                           - { label: "Header", name: "header", widget: "string" }
-                          - { label: "Placeholder", name: "placeholder", widget: "string" }
                           - { label: "Description", name: "description", widget: "markdown" }
                   - label: Responsible Owner Name
                     name: responsibleOwnerName
@@ -3692,7 +3624,6 @@ collections:
                         widget: object
                         fields:
                           - { label: "Header", name: "header", widget: "string" }
-                          - { label: "Placeholder", name: "placeholder", widget: "string" }
                           - { label: "Error Text", name: "errorTextRequired", widget: "string" }
                           - { label: "Description", name: "description", widget: "markdown" }
                   - label: Cannabis License

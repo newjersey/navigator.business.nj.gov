@@ -114,7 +114,6 @@ export const RequestFeatureModal = ({ onClose, isOpen, setCurrentFeedback }: Pro
             error={errorMap.featureRequest.invalid}
             formInputFull
             fieldName="featureRequest"
-            placeholder={Config.feedbackModal.feedbackPlaceholderText}
             value={featureRequest}
             handleChange={(value: string) => {
               setFeatureRequest(value);

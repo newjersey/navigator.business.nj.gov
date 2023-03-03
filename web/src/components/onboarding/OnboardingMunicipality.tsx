@@ -65,7 +65,6 @@ export const OnboardingMunicipality = (props: Props): ReactElement => {
         handleChange={handleChange}
         value={state.profileData.municipality}
         onSelect={onSelect}
-        placeholderText={contentFromConfig.placeholder ?? ""}
         helperText={contentFromConfig.errorTextRequired ?? " "}
         hideErrorLabel={props.hideErrorLabel}
       />

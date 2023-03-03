@@ -126,7 +126,6 @@ export const ReportIssueModal = ({ onClose, isOpen, setCurrentFeedback }: Props)
             error={errorMap.issueSummary.invalid}
             formInputFull
             fieldName="issueSummary"
-            placeholder={Config.feedbackModal.feedbackPlaceholderText}
             value={issueSummary}
             handleChange={(value: string) => {
               setIssueSummary(value);
@@ -154,7 +153,6 @@ export const ReportIssueModal = ({ onClose, isOpen, setCurrentFeedback }: Props)
             error={errorMap.issueDetails.invalid}
             formInputFull
             fieldName="issueDetails"
-            placeholder={Config.feedbackModal.feedbackPlaceholderText}
             value={issueDetails}
             handleChange={(value: string) => {
               setIssueDetails(value);

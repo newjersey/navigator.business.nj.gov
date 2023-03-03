@@ -71,7 +71,6 @@ export const MainBusiness = (): ReactElement => {
           <BusinessFormationTextField
             errorBarType="ALWAYS"
             label={Config.formation.fields.businessTotalStock.label}
-            placeholder={Config.formation.fields.businessTotalStock.placeholder}
             numericProps={{
               minLength: 1,
               trimLeadingZeroes: true,

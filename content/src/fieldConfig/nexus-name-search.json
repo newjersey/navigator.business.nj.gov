@@ -8,7 +8,6 @@
     "dbaUnavailableText": "Sorry, the name **\"${name}\"** is already taken in New Jersey. Please search for another DBA name. Here are similar business names that are already taken:",
     "dbaNameHeader": "### Find a Doing Business As (DBA) Name",
     "unavailableText": "Sorry, the name **\"${name}\"** is already taken in New Jersey. You’ll have to create a Doing Business As (DBA) name, below. \n\n(If you entered the wrong name, ${searchAgainButton}).",
-    "dbaNameSearchPlaceholder": "Enter an Alternate Name",
     "dbaNameSearchLabel": "DBA Name Search",
     "nexusNextButton": "Continue"
   }

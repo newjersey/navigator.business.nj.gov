@@ -31,7 +31,6 @@ export const BusinessFormationTextField = ({ className, ...props }: Props): Reac
       {props.label && <Content>{props.label}</Content>}
       <GenericTextField
         value={state.formationFormData[props.fieldName]}
-        placeholder={props.placeholder}
         onValidation={onValidation}
         {...props}
         handleChange={handleChange}

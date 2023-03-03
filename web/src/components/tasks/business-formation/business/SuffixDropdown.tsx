@@ -45,9 +45,7 @@ export const SuffixDropdown = (): ReactElement => {
             inputProps={{ "data-testid": "business-suffix" }}
             renderValue={(selected) => {
               if (selected.length === 0) {
-                return (
-                  <span className="text-base">{Config.formation.fields.businessSuffix.placeholder}</span>
-                );
+                return <></>;
               }
 
               return selected;

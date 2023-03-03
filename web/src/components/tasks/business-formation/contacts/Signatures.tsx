@@ -206,7 +206,7 @@ export const Signatures = (): ReactElement => {
           }}
           renderValue={(selected) => {
             if (!selected) {
-              return <span className="text-base">{Config.formation.fields.signers.titlePlaceholder}</span>;
+              return <></>;
             }
 
             return selected;
@@ -251,7 +251,6 @@ export const Signatures = (): ReactElement => {
         <GenericTextField
           noValidationMargin
           value={state.formationFormData.signers[index].name}
-          placeholder={Config.formation.fields.signers.namePlaceholder}
           handleChange={(value: string) => {
             return handleSignerChange(value, index);
           }}

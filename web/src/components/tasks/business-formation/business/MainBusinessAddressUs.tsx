@@ -23,7 +23,6 @@ export const MainBusinessUs = (): ReactElement => {
         <BusinessFormationTextField
           errorBarType="MOBILE-ONLY"
           label={Config.formation.fields.addressCity.label}
-          placeholder={Config.formation.fields.addressCity.placeholder}
           fieldName="addressCity"
           required={true}
           className={"margin-bottom-2 grid-col-12 tablet:grid-col-6"}
@@ -42,7 +41,6 @@ export const MainBusinessUs = (): ReactElement => {
               fieldName="addressState"
               value={state.formationFormData.addressState?.name}
               error={doesFieldHaveError("addressState")}
-              placeholder={Config.formation.fields.addressState.placeholder}
               validationText={Config.formation.fields.addressState.error}
               required
               onValidation={() => setFieldsInteracted(["addressState"])}
@@ -61,7 +59,6 @@ export const MainBusinessUs = (): ReactElement => {
 
           <BusinessFormationTextField
             label={Config.formation.fields.addressZipCode.label}
-            placeholder={Config.formation.fields.addressZipCode.placeholder}
             numericProps={{ maxLength: 5 }}
             required={true}
             errorBarType="NEVER"

@@ -74,7 +74,6 @@ export const OnboardingNameAndEmail = (props: Props): ReactElement => {
           onValidation={onValidation}
           validationText={FullNameErrorMessageLookup[getFullNameErrorVariant(state.user?.name)]}
           required={true}
-          placeholder={Config.selfRegistration.nameFieldPlaceholder}
           handleChange={handleName}
           additionalValidation={isFullNameValid}
         />
@@ -92,7 +91,6 @@ export const OnboardingNameAndEmail = (props: Props): ReactElement => {
           additionalValidation={(value) => {
             return confirmEmail ? value == confirmEmail : true && validateEmail(value);
           }}
-          placeholder={Config.selfRegistration.emailFieldPlaceholder}
         />
       </div>
       <div className="margin-y-2">
@@ -109,7 +107,6 @@ export const OnboardingNameAndEmail = (props: Props): ReactElement => {
             return value == email && validateEmail(value);
           }}
           validationText={Config.selfRegistration.errorTextEmailsNotMatching}
-          placeholder={Config.selfRegistration.confirmEmailFieldPlaceholder}
           fieldName={"confirm-email"}
         />
       </div>

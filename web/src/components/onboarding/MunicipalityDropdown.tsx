@@ -11,7 +11,6 @@ interface Props {
   municipalities: Municipality[];
   value: Municipality | undefined;
   onSelect: (value: Municipality | undefined) => void;
-  placeholderText: string;
   helperText: string;
   disabled?: boolean;
   handleChange?: () => void;
@@ -92,7 +91,6 @@ export const MunicipalityDropdown = (props: Props): ReactElement => {
             onChange={handleChange}
             onSubmit={props.onValidation}
             variant="outlined"
-            placeholder={props.placeholderText}
             error={props.error}
             helperText={getHelperText()}
             sx={{

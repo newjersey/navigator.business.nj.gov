@@ -94,6 +94,9 @@ export const OnboardingDateOfFormation = (props: Props): ReactElement => {
                 inputProps={params.InputProps}
                 fieldOptions={{
                   ...params,
+                  inputProps: {
+                    placeholder: "",
+                  },
                   sx: { width: "50%", ...params.sx },
                   error: props.fieldStates[fieldName].invalid,
                 }}

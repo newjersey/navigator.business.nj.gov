@@ -130,7 +130,6 @@ describe("<NexusSearchBusinessNameStep />", () => {
     fillText("My Cool Business");
     await searchAndGetValue({ status: "UNAVAILABLE" });
     expect(screen.getByText(markdownToText(Config.nexusNameSearch.dbaNameHeader))).toBeInTheDocument();
-    expect(screen.getByPlaceholderText(Config.nexusNameSearch.dbaNameSearchPlaceholder)).toBeInTheDocument();
     expect(screen.getByText(Config.nexusNameSearch.dbaNameSearchSubmitButton)).toBeInTheDocument();
     expect(
       mockAnalytics.event.business_formation_dba_name_search_field.appears.dba_name_search_field_appears

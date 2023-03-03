@@ -94,7 +94,6 @@ export const BusinessNameStep = (): ReactElement => {
                     return updateCurrentName(event.target.value);
                   }}
                   variant="outlined"
-                  placeholder={Config.formation.fields.businessName.placeholder}
                   inputProps={{
                     "aria-label": "Search business name",
                   }}

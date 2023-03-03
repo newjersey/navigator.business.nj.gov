@@ -24,7 +24,6 @@ export const MainBusinessIntl = (): ReactElement => {
         <div className="tablet:grid-col-6 grid-col-12">
           <BusinessFormationTextField
             label={Config.formation.fields.addressCity.label}
-            placeholder={Config.formation.fields.addressCity.placeholder}
             fieldName="addressCity"
             required={true}
             errorBarType="MOBILE-ONLY"
@@ -37,7 +36,6 @@ export const MainBusinessIntl = (): ReactElement => {
           <BusinessFormationTextField
             errorBarType="MOBILE-ONLY"
             label={Config.formation.fields.addressProvince.label}
-            placeholder={Config.formation.fields.addressProvince.placeholder}
             fieldName="addressProvince"
             required={true}
             noValidationMargin={true}
@@ -58,7 +56,6 @@ export const MainBusinessIntl = (): ReactElement => {
           fieldName="addressCountry"
           value={state.formationFormData.addressCountry}
           error={doesFieldHaveError("addressCountry")}
-          placeholder={Config.formation.fields.addressCountry.placeholder}
           validationText={Config.formation.fields.addressCountry.error}
           required
           onValidation={() => setFieldsInteracted(["addressCountry"])}
@@ -77,7 +74,6 @@ export const MainBusinessIntl = (): ReactElement => {
 
       <BusinessFormationTextField
         label={Config.formation.fields.addressZipCode.foreign.label}
-        placeholder={Config.formation.fields.addressZipCode.foreign.placeholder}
         valueFilter={formatIntlPostalCode}
         errorBarType="ALWAYS"
         required={true}

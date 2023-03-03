@@ -95,7 +95,6 @@ export const OnboardingSectors = (props: Props): ReactElement => {
                 value={searchText}
                 onChange={handleChange}
                 variant="outlined"
-                placeholder={contentFromConfig.placeholder}
                 error={props.fieldStates.sectorId.invalid}
                 helperText={props.fieldStates.sectorId.invalid ? contentFromConfig.errorTextRequired : " "}
               />

@@ -16,7 +16,6 @@ export interface GenericTextFieldProps {
   noValidationMargin?: boolean;
   validationText?: string;
   disabled?: boolean;
-  placeholder?: string;
   value?: string | number;
   autoComplete?: string;
   required?: boolean;
@@ -138,7 +137,6 @@ export const GenericTextField = forwardRef(
           helperText={helperText}
           variant="outlined"
           autoComplete={props.autoComplete ?? "no"}
-          placeholder={props.placeholder ?? ""}
           disabled={props.disabled}
           {...fieldOptions}
           sx={{ width: 1, ...fieldOptions?.sx }}

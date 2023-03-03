@@ -3,55 +3,46 @@
     "fields": {
       "addressCountry": {
         "fieldDisplayName": "Country",
-        "placeholder": "Select a Country",
         "label": "**Country**",
         "error": "Select a country."
       },
       "addressLine1": {
         "fieldDisplayName": "Address Line 1",
         "error": "Enter your business' street name and number.",
-        "placeholder": "Address Line 1",
         "label": "**Address Line 1**"
       },
       "addressLine2": {
         "fieldDisplayName": "Address Line 2",
-        "placeholder": "Address Line 2",
         "label": "**Address Line 2** (Optional)",
         "error": ""
       },
       "addressMunicipality": {
         "fieldDisplayName": "City",
-        "placeholder": "Select a city",
         "label": "City",
         "error": "Select a city.",
         "infoAlert": "**Can't find your city?** Unincorporated places are not listed here. Search for [your official jurisdiction](https://www.nj.gov/nj/gov/county/localities.html) (type in your community's name into the local name field)."
       },
       "addressCity": {
         "fieldDisplayName": "City",
-        "placeholder": "City",
         "label": "**City**",
         "error": "Enter a city."
       },
       "addressState": {
         "fieldDisplayName": "State",
-        "placeholder": "NJ",
         "label": "**State**",
         "error": "Enter a state."
       },
       "addressProvince": {
         "fieldDisplayName": "Province",
-        "placeholder": "Province",
         "label": "**Province**",
         "error": "Enter a Province."
       },
       "addressZipCode": {
         "fieldDisplayName": "Zip Code",
-        "placeholder": "Zip Code",
         "label": "**Zip Code**",
         "error": "Enter a NJ Zip Code.",
         "reviewStepLabel": "**Email:**",
         "foreign": {
-          "placeholder": "Postal Code",
           "label": "**Postal Code**",
           "errorUS": "Enter a 5 digit Zip Code.",
           "errorIntl": "Enter a 1 to 11 digit Postal Code."
@@ -59,7 +50,6 @@
       },
       "agentName": {
         "fieldDisplayName": "Registered Agent Name",
-        "placeholder": "Registered Agent Name",
         "error": "Enter the agent's full name.",
         "label": "**Registered Agent Name**",
         "reviewStepLabel": "**Name:**"
@@ -67,42 +57,35 @@
       "agentNumber": {
         "fieldDisplayName": "Registered Agent Number",
         "error": "Enter the 4 to 7 digit Registered Agent ID number.",
-        "placeholder": "Registered Agent ID Number",
         "label": "**Registered Agent ID Number**",
         "reviewStepLabel": "**Number:**"
       },
       "agentEmail": {
         "fieldDisplayName": "Registered Agent Email",
         "label": "**Registered Agent Email**",
-        "placeholder": "Registered Agent Email",
         "error": "Confirm the email matches format: name@example.com",
         "reviewStepLabel": "**Email:**"
       },
       "agentOfficeAddressLine1": {
         "fieldDisplayName": "Address Line 1",
-        "placeholder": "Office Address Line 1",
         "label": "**Office Address Line 1**",
         "error": "Enter the agent's office street name and number."
       },
       "agentOfficeAddressLine2": {
         "fieldDisplayName": "Address Line 2",
-        "placeholder": "Office Address Line 2",
         "label": "**Office Address Line 2**"
       },
       "agentOfficeAddressMunicipality": {
         "fieldDisplayName": "City",
-        "placeholder": "Office City",
         "label": "**City**",
         "error": "Select a city."
       },
       "agentOfficeAddressState": {
         "label": "**State**",
-        "placeholder": "State",
         "error": "Enter a state."
       },
       "agentOfficeAddressZipCode": {
         "fieldDisplayName": "Zip Code",
-        "placeholder": "Office Zip Code",
         "label": "**Zip Code**",
         "error": "Enter a NJ Zip Code."
       },
@@ -121,7 +104,6 @@
         "errorInlineUnavailable": "This name is already being used. Try another business name.",
         "errorInlineEmpty": "Enter a business name to check availability.",
         "errorInlineNeedsToSearch": "Confirm the availability of your business name.",
-        "placeholder": "Enter a business name",
         "reviewStepLabel": "**Business Name**",
         "label": "Business Name Search",
         "foreign": {
@@ -131,7 +113,6 @@
       },
       "businessPurpose": {
         "header": "Business Purpose",
-        "placeholder": "Describe your business purpose",
         "label": "**Business Purpose**",
         "addButtonText": "Add Business Purpose",
         "reviewStepLabel": "Business Purpose",
@@ -148,14 +129,12 @@
       },
       "businessSuffix": {
         "fieldDisplayName": "Business Designator",
-        "placeholder": "Select Business Designator",
         "label": "`**Business Designator**|business-designator`",
         "error": "Select a business designator.",
         "reviewStepLabel": "`**Business Designator:**|business-designator`"
       },
       "businessTotalStock": {
         "fieldDisplayName": "Stock",
-        "placeholder": "Enter number of shares",
         "label": "**Stock** (Total Number of Shares)",
         "error": "Enter a minimum of 1 share.",
         "reviewStepLabel": "**Total Shares of Stock**"
@@ -217,19 +196,16 @@
         "fieldDisplayName": "Combined Investment",
         "header": "Combined Investment",
         "reviewStepLabel": "Combined Investment",
-        "body": "List the funds and the value of properties and services each of the partners have agreed to contribute.",
-        "placeholder": "Enter your combined investment"
+        "body": "List the funds and the value of properties and services each of the partners have agreed to contribute."
       },
       "contactFirstName": {
         "fieldDisplayName": "First Name",
-        "placeholder": "First Name",
         "label": "**First Name**",
         "error": "Enter a first name.",
         "reviewStepLabel": "First Name"
       },
       "contactLastName": {
         "fieldDisplayName": "Last Name",
-        "placeholder": "Last Name",
         "label": "**Last Name**",
         "error": "Enter a last name.",
         "reviewStepLabel": "Last Name"
@@ -237,8 +213,7 @@
       "contactPhoneNumber": {
         "fieldDisplayName": "Phone Number",
         "reviewStepLabel": "Phone",
-        "label": "**Phone Number**",
-        "placeholder": "(xxx) xxx-xxxx",
+        "label": "**Phone Number** (xxx) xxx-xxxx",
         "error": "Enter a 10 digit phone number."
       },
       "corpWatchNotification": {
@@ -261,7 +236,6 @@
       },
       "dissolution": {
         "fieldDisplayName": "Dissolution",
-        "placeholder": "Enter circumstances for dissolution",
         "header": "Dissolution",
         "body": "When and under what circumstances can a limited partnership and its affairs dissolve?",
         "reviewStepLabel": "Dissolution"
@@ -276,7 +250,6 @@
         "fieldDisplayName": "Original State of Formation",
         "label": "**Original State of Formation**",
         "reviewStepLabel": "**Original State of Formation:**",
-        "placeholder": "Select a State of Formation",
         "error": "Select a State"
       },
       "incorporators": {
@@ -336,7 +309,6 @@
         "body": "Outline your company's functional and financial decisions to help run the internal operations of the business. Provisions help you prevent personal legal liabilities and clarify members' rights and duties to the company to prevent misunderstandings. You can list up to 10 provisions.\n\nCorporations may include a `class of shares|shares-class` structure and details on the rights of the Board of Directors to determine the different classes.",
         "addButtonText": "Add Provisions/Articles",
         "addAnotherButtonText": "Add a Provision",
-        "placeholder": "Enter your provision or article",
         "label": "**Additional Provision/Article** (Optional)",
         "reviewStepHeader": "Additional Provisions/Articles",
         "reviewStepSubheader": "Provision/Article"
@@ -350,13 +322,11 @@
         "errorInlineAdditionalSignerName": "Enter the first and last name of each signer.",
         "errorInlineSignerTitle": "Select a title.",
         "errorInlineFirstSignerName": "Enter a signer.",
-        "titlePlaceholder": "Select Signer Title",
         "titleLabel": "**Title**",
         "tableHeader": "Name,Address,Sign*,Actions",
         "signColumnLabel": "**Sign**",
         "nameLabel": "**Signer Full Name**",
         "addButtonText": "Add New Signer",
-        "namePlaceholder": "Signer Full Name",
         "reviewStepHeader": "Signatures",
         "reviewStepTitleLabel": "**Signer Title:**",
         "reviewStepNameLabel": "**Signer Name:**",
@@ -378,51 +348,43 @@
         "fieldDisplayName": "Withdrawals",
         "header": "Withdrawals",
         "body": "If a general partner withdraws from the partnership, what are the remaining partners rights to contribute to the business?",
-        "reviewStepLabel": "Withdrawals",
-        "placeholder": "Enter withdrawals"
+        "reviewStepLabel": "Withdrawals"
       }
     },
     "addressModal": {
       "name": {
         "fieldDisplayName": "Name",
         "label": "**Full Name**",
-        "error": "Enter a name.",
-        "placeholder": "Full Name"
+        "error": "Enter a name."
       },
       "addressLine1": {
         "fieldDisplayName": "Address Line 1",
         "label": "**Address Line 1**",
-        "error": "Enter your street name and number.",
-        "placeholder": "Address Line 1"
+        "error": "Enter your street name and number."
       },
       "addressLine2": {
         "fieldDisplayName": "Address Line 2",
-        "placeholder": "Address Line 2",
         "label": "**Address Line 2**"
       },
       "addressCity": {
         "fieldDisplayName": "City",
-        "placeholder": "City",
         "label": "**City**",
         "error": "Enter a city."
       },
       "addressState": {
         "fieldDisplayName": "State",
-        "placeholder": "State",
         "label": "**State**",
         "error": "Enter a state."
       },
       "addressZipCode": {
         "fieldDisplayName": "Zip Code",
         "label": "**Zip Code**",
-        "placeholder": "Zip COde",
         "error": "Enter a Zip Code."
       }
     },
     "partnershipRights": {
       "header": "Partnership Rights",
       "label": "**List the applicable terms**",
-      "placeholder": "List the applicable terms",
       "fieldDisplayName": "Partnership Rights",
       "radioNoText": "No, they do not have the right",
       "radioYesText": "Yes, they have the right",

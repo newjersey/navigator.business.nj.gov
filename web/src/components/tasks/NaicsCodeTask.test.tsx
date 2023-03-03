@@ -101,9 +101,7 @@ describe("<NaicsCodeTask />", () => {
 
     it("hides input field by default", () => {
       renderPage();
-      expect(
-        screen.queryByPlaceholderText(Config.determineNaicsCode.inputPlaceholder)
-      ).not.toBeInTheDocument();
+      expect(screen.queryByLabelText("Save NAICS Code")).not.toBeInTheDocument();
     });
 
     it("updates task progress when radio button is pressed", async () => {
@@ -127,17 +125,15 @@ describe("<NaicsCodeTask />", () => {
     it("shows input box when radio button is clicked", () => {
       renderPage();
       fireEvent.click(screen.getByTestId(`naics-radio-input`));
-      expect(screen.getByPlaceholderText(Config.determineNaicsCode.inputPlaceholder)).toBeInTheDocument();
+      expect(screen.getByLabelText("Save NAICS Code")).toBeInTheDocument();
     });
 
     it("hides input box when NAICS code radio button is clicked", () => {
       renderPage();
       fireEvent.click(screen.getByTestId(`naics-radio-input`));
-      expect(screen.getByPlaceholderText(Config.determineNaicsCode.inputPlaceholder)).toBeInTheDocument();
+      expect(screen.getByLabelText("Save NAICS Code")).toBeInTheDocument();
       fireEvent.click(screen.getByTestId(`naics-radio-${validNaicsCode}`));
-      expect(
-        screen.queryByPlaceholderText(Config.determineNaicsCode.inputPlaceholder)
-      ).not.toBeInTheDocument();
+      expect(screen.queryByLabelText("Save NAICS Code")).not.toBeInTheDocument();
     });
 
     it("displays code with success message on save", async () => {
@@ -190,7 +186,7 @@ describe("<NaicsCodeTask />", () => {
 
     it("shows the correct save button text", async () => {
       renderPage();
-      fireEvent.change(screen.getByPlaceholderText(Config.determineNaicsCode.inputPlaceholder), {
+      fireEvent.change(screen.getByLabelText("Save NAICS Code"), {
         target: { value: "12345" },
       });
 
@@ -199,7 +195,7 @@ describe("<NaicsCodeTask />", () => {
 
     it("enters and saves NAICS code", async () => {
       renderPage();
-      fireEvent.change(screen.getByPlaceholderText(Config.determineNaicsCode.inputPlaceholder), {
+      fireEvent.change(screen.getByLabelText("Save NAICS Code"), {
         target: { value: validNaicsCode },
       });
       fireEvent.click(screen.getByText(Config.determineNaicsCode.saveButtonText));
@@ -210,7 +206,7 @@ describe("<NaicsCodeTask />", () => {
 
     it("shows error on length validation failure", () => {
       renderPage();
-      fireEvent.change(screen.getByPlaceholderText(Config.determineNaicsCode.inputPlaceholder), {
+      fireEvent.change(screen.getByLabelText("Save NAICS Code"), {
         target: { value: "12345" },
       });
       fireEvent.click(screen.getByText(Config.determineNaicsCode.saveButtonText));
@@ -220,7 +216,7 @@ describe("<NaicsCodeTask />", () => {
 
     it("shows error on invalid code failure on input", () => {
       renderPage();
-      fireEvent.change(screen.getByPlaceholderText(Config.determineNaicsCode.inputPlaceholder), {
+      fireEvent.change(screen.getByLabelText("Save NAICS Code"), {
         target: { value: "123457" },
       });
       expect(screen.getByText(Config.determineNaicsCode.invalidValidationErrorText)).toBeInTheDocument();
@@ -231,11 +227,11 @@ describe("<NaicsCodeTask />", () => {
 
     it("hides error for invalid code failure on input", () => {
       renderPage();
-      fireEvent.change(screen.getByPlaceholderText(Config.determineNaicsCode.inputPlaceholder), {
+      fireEvent.change(screen.getByLabelText("Save NAICS Code"), {
         target: { value: "123457" },
       });
       expect(screen.getByText(Config.determineNaicsCode.invalidValidationErrorText)).toBeInTheDocument();
-      fireEvent.change(screen.getByPlaceholderText(Config.determineNaicsCode.inputPlaceholder), {
+      fireEvent.change(screen.getByLabelText("Save NAICS Code"), {
         target: { value: "12345" },
       });
       expect(
@@ -245,19 +241,19 @@ describe("<NaicsCodeTask />", () => {
 
     it("displays code with success message on save", async () => {
       renderPage();
-      fireEvent.change(screen.getByPlaceholderText(Config.determineNaicsCode.inputPlaceholder), {
+      fireEvent.change(screen.getByLabelText("Save NAICS Code"), {
         target: { value: validNaicsCode },
       });
       fireEvent.click(screen.getByText(Config.determineNaicsCode.saveButtonText));
       await waitFor(() => {
         expect(screen.getByText(Config.determineNaicsCode.hasSavedCodeHeader)).toBeInTheDocument();
       });
-      expect(screen.queryByText(Config.determineNaicsCode.inputPlaceholder)).not.toBeInTheDocument();
+      expect(screen.queryByLabelText("Save NAICS Code")).not.toBeInTheDocument();
     });
 
     it("sets task status to COMPLETED on save", async () => {
       renderPage();
-      fireEvent.change(screen.getByPlaceholderText(Config.determineNaicsCode.inputPlaceholder), {
+      fireEvent.change(screen.getByLabelText("Save NAICS Code"), {
         target: { value: validNaicsCode },
       });
       fireEvent.click(screen.getByText(Config.determineNaicsCode.saveButtonText));
@@ -290,7 +286,7 @@ describe("<NaicsCodeTask />", () => {
 
     it("displays code when NAICS code exists in data", () => {
       renderPage();
-      expect(screen.queryByText(Config.determineNaicsCode.inputPlaceholder)).not.toBeInTheDocument();
+      expect(screen.queryByLabelText("Save NAICS Code")).not.toBeInTheDocument();
       expect(screen.getByText(Config.determineNaicsCode.hasSavedCodeHeader)).toBeInTheDocument();
     });
 
@@ -303,9 +299,7 @@ describe("<NaicsCodeTask />", () => {
       renderPage();
       fireEvent.click(screen.getByText(Config.taskDefaults.editText));
       expect(screen.getByText(Config.determineNaicsCode.findCodeHeader)).toBeInTheDocument();
-      expect(
-        (screen.getByPlaceholderText(Config.determineNaicsCode.inputPlaceholder) as HTMLInputElement).value
-      ).toEqual(validNaicsCode);
+      expect((screen.getByLabelText("Save NAICS Code") as HTMLInputElement).value).toEqual(validNaicsCode);
       expect(screen.queryByText(Config.determineNaicsCode.hasSavedCodeHeader)).not.toBeInTheDocument();
     });
 
@@ -314,9 +308,7 @@ describe("<NaicsCodeTask />", () => {
       fireEvent.click(screen.getByText(Config.taskDefaults.removeText));
       expect(screen.getByText(Config.determineNaicsCode.findCodeHeader)).toBeInTheDocument();
       fireEvent.click(screen.getByTestId(`naics-radio-input`));
-      expect(
-        (screen.getByPlaceholderText(Config.determineNaicsCode.inputPlaceholder) as HTMLInputElement).value
-      ).toEqual("");
+      expect((screen.getByLabelText("Save NAICS Code") as HTMLInputElement).value).toEqual("");
       expect(screen.queryByText(Config.determineNaicsCode.hasSavedCodeHeader)).not.toBeInTheDocument();
       expect(currentUserData().profileData.naicsCode).toEqual("");
     });
@@ -365,7 +357,7 @@ describe("<NaicsCodeTask />", () => {
 
     it("opens registration modal on save button click", async () => {
       renderPage();
-      fireEvent.change(screen.getByPlaceholderText(Config.determineNaicsCode.inputPlaceholder), {
+      fireEvent.change(screen.getByLabelText("Save NAICS Code"), {
         target: { value: validNaicsCode },
       });
       fireEvent.click(screen.getByText(`Register & ${Config.determineNaicsCode.saveButtonText}`));

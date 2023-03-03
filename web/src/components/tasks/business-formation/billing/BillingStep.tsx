@@ -24,7 +24,6 @@ export const BillingStep = (): ReactElement => {
         <div className="form-input tablet:grid-col-6">
           <BusinessFormationTextField
             label={Config.formation.fields.contactFirstName.label}
-            placeholder={Config.formation.fields.contactFirstName.placeholder}
             fieldName="contactFirstName"
             errorBarType="MOBILE-ONLY"
             required={true}
@@ -34,7 +33,6 @@ export const BillingStep = (): ReactElement => {
         <div className="form-input tablet:grid-col-6">
           <BusinessFormationTextField
             label={Config.formation.fields.contactLastName.label}
-            placeholder={Config.formation.fields.contactLastName.placeholder}
             fieldName="contactLastName"
             errorBarType="MOBILE-ONLY"
             required={true}
@@ -48,7 +46,6 @@ export const BillingStep = (): ReactElement => {
             <BusinessFormationTextField
               validationText={Config.formation.fields.contactPhoneNumber.error}
               label={Config.formation.fields.contactPhoneNumber.label}
-              placeholder={Config.formation.fields.contactPhoneNumber.placeholder}
               errorBarType="ALWAYS"
               fieldName={"contactPhoneNumber"}
               numericProps={{

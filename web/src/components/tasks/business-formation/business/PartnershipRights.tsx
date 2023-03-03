@@ -20,7 +20,6 @@ export const PartnershipRights = (): ReactElement => {
         <div className="grid-row">
           <div className="grid-col">
             <BusinessFormationTextField
-              placeholder={Config.formation.partnershipRights.placeholder}
               fieldName={fieldName}
               required={true}
               errorBarType="ALWAYS"

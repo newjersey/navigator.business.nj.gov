@@ -85,7 +85,6 @@ export const NexusSearchBusinessNameStep = (): ReactElement => {
         config={{
           searchButtonText: Config.searchBusinessNameTask.searchButtonText,
           searchButtonTestId: "search-availability",
-          inputPlaceholderText: Config.searchBusinessNameTask.placeholderText,
         }}
       />
     </div>

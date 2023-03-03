@@ -16,7 +16,6 @@ import { FormEvent, ReactElement, useCallback, useEffect, useRef } from "react";
 type SearchBusinessNameFormConfig = {
   searchButtonText: string;
   searchButtonTestId: string;
-  inputPlaceholderText: string;
   inputLabel?: string;
 };
 
@@ -144,7 +143,6 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
                     return updateCurrentName(event.target.value);
                   }}
                   variant="outlined"
-                  placeholder={props.config.inputPlaceholderText}
                   inputProps={{
                     "aria-label": props.config.inputLabel ?? "Search business name",
                   }}

@@ -13,7 +13,6 @@
       "notes": {
         "default": {
           "header": "Notes",
-          "placeholder": "Enter notes",
           "description": "Use this space to add any information for quick reference."
         }
       },
@@ -28,7 +27,6 @@
       "sectorId": {
         "default": {
           "header": "Industry Sector",
-          "placeholder": "Select an industry sector",
           "description": "Which industry sector best describes your business?",
           "errorTextRequired": "Please select an industry sector."
         }
@@ -52,7 +50,6 @@
       "taxId": {
         "default": {
           "header": "New Jersey Tax ID",
-          "placeholder": "Enter New Jersey Tax ID number",
           "description": "What is your `New Jersey Tax ID?|tax-id`",
           "errorTextRequired": "Enter a 12-digit Tax ID",
           "disclaimerMd": "**Disclaimer:** Your Tax ID will be used to identify the taxes you owe and is required information if you'd like to access your tax calendar."
@@ -68,7 +65,6 @@
       },
       "responsibleOwnerName": {
         "default": {
-          "placeholder": "Type Your Responsible Owner Name",
           "header": "Responsible Owner Name",
           "errorTextRequired": "Please enter your responsible owner name.",
           "description": "Enter your Last Name, First Name and Middle Initial. The name must match exactly the name listed on your tax confirmation email."
@@ -105,7 +101,6 @@
       "taxPin": {
         "default": {
           "header": "Tax PIN",
-          "placeholder": "Enter Tax PIN number",
           "description": "What is your `Tax PIN|tax-pin`?",
           "errorTextRequired": "Tax PIN must be 4 digits."
         }
@@ -113,7 +108,6 @@
       "businessName": {
         "default": {
           "header": "Business Name",
-          "placeholder": "Type Your Business Name",
           "errorTextRequired": "Please enter your business name.",
           "description": "What will you name your business?"
         },
@@ -143,7 +137,6 @@
       "ownershipTypeIds": {
         "default": {
           "header": "Business Ownership",
-          "placeholder": "Select Ownership",
           "description": "At least 51% of my business is owned by (select all that apply):",
           "headerNotBolded": ""
         },
@@ -217,7 +210,6 @@
       "legalStructureId": {
         "default": {
           "header": "Which Business Structure Will You Choose?",
-          "placeholder": "Select a business structure for your Navigator profile.",
           "description": "Your business’ `business structure|business-structure-learn-more` can have a large impact on taxes, financing, liability, and closure of your business. We strongly suggest doing research on the best business structure for your business.  \nSelect a business structure for your Navigator profile below. Making a selection will not form your business, it will help us create your personalized guide. You can change your intended business structure anytime before formally filing it with the NJ Department of Treasury.",
           "errorTextRequired": "Please select a business structure.",
           "optionContent": {
@@ -252,7 +244,6 @@
       "employerId": {
         "default": {
           "header": "Employer Identification Number",
-          "placeholder": "Enter Employer ID Number",
           "headerNotBolded": "(EIN)",
           "description": "What is your `EIN|ein`?"
         }
@@ -275,7 +266,6 @@
       "industryId": {
         "default": {
           "header": "Industry",
-          "placeholder": "Select an industry",
           "description": "Which industry best describes your ${oos} business? ",
           "errorTextRequired": "Industry is a required field.",
           "searchAffirmation": "_\"**${searchText}**\" falls under the industries below:_"
@@ -284,7 +274,6 @@
       "existingEmployees": {
         "default": {
           "header": "Current Number of NJ Employees",
-          "placeholder": "Number of NJ Employees",
           "description": "If you have no employees right now enter 0. You can change this as you add employees.",
           "errorTextRequired": "Please enter number of NJ employees or enter 0."
         },
@@ -298,7 +287,6 @@
       "municipality": {
         "default": {
           "header": "Location",
-          "placeholder": "Type in the name of your town (i.e Newark, Jersey City, etc)",
           "description": "Where in New Jersey will your first location be? \n\n**\\*Note:** Unincorporated communities are not listed here. You can find your official jurisdiction by [doing a search](https://www.nj.gov/nj/gov/county/localities.html) (you will type in your community into the local name field).*",
           "errorTextRequired": "Please select a location."
         },
@@ -323,7 +311,6 @@
         "default": {
           "header": "Entity ID",
           "headerNotBolded": "(If You Have One)",
-          "placeholder": "Enter Entity ID",
           "description": "If your business has a 10-digit New Jersey Entity ID, enter it here. If you aren't sure if you have one or what it is, don't worry! You can leave this blank for now. (You can also get help finding your `Entity ID|entity-id`.)"
         }
       },

@@ -47,7 +47,6 @@ export const DbaNameSearch = (): ReactElement => {
         config={{
           searchButtonText: Config.nexusNameSearch.dbaNameSearchSubmitButton,
           searchButtonTestId: "search-dba-availability",
-          inputPlaceholderText: Config.nexusNameSearch.dbaNameSearchPlaceholder,
           inputLabel: Config.nexusNameSearch.dbaNameSearchLabel,
         }}
         onSubmit={onSubmit}

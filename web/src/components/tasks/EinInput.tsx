@@ -80,7 +80,6 @@ export const EinInput = (props: Props): ReactElement => {
             length: LENGTH.toString(),
           })}
           numericProps={{ minLength: LENGTH, maxLength: LENGTH }}
-          placeholder={Config.ein.placeholderText}
           visualFilter={displayAsEin}
           handleChange={handleChange}
           value={employerId}

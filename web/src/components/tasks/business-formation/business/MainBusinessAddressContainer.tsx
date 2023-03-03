@@ -12,7 +12,6 @@ export const MainBusinessAddressContainer = (props: { children: ReactNode }): Re
       <h3 className="margin-bottom-2">{Config.formation.sections.addressHeader}</h3>
       <BusinessFormationTextField
         label={Config.formation.fields.addressLine1.label}
-        placeholder={Config.formation.fields.addressLine1.placeholder}
         fieldName="addressLine1"
         required={true}
         className={"margin-bottom-2"}
@@ -22,7 +21,6 @@ export const MainBusinessAddressContainer = (props: { children: ReactNode }): Re
       />
       <BusinessFormationTextField
         label={Config.formation.fields.addressLine2.label}
-        placeholder={Config.formation.fields.addressLine2.placeholder}
         errorBarType="ALWAYS"
         fieldName="addressLine2"
         formInputFull

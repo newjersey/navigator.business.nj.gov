@@ -68,7 +68,7 @@ describe("<EinTask />", () => {
 
     it("enters and saves EIN", async () => {
       renderPage();
-      fireEvent.change(screen.getByPlaceholderText(Config.ein.placeholderText), {
+      fireEvent.change(screen.getByLabelText("Save your EIN"), {
         target: { value: "123456789" },
       });
       fireEvent.click(screen.getByText(Config.ein.saveButtonText));
@@ -82,7 +82,7 @@ describe("<EinTask />", () => {
       const expectedErrorMessage = templateEval(Config.onboardingDefaults.errorTextMinimumNumericField, {
         length: "9",
       });
-      fireEvent.change(screen.getByPlaceholderText(Config.ein.placeholderText), {
+      fireEvent.change(screen.getByLabelText("Save your EIN"), {
         target: { value: "12345" },
       });
       fireEvent.click(screen.getByText(Config.ein.saveButtonText));
@@ -92,19 +92,18 @@ describe("<EinTask />", () => {
 
     it("displays code with success message on save", async () => {
       renderPage();
-      fireEvent.change(screen.getByPlaceholderText(Config.ein.placeholderText), {
+      fireEvent.change(screen.getByLabelText("Save your EIN"), {
         target: { value: "123456789" },
       });
       fireEvent.click(screen.getByText(Config.ein.saveButtonText));
       await waitFor(() => {
         expect(screen.getByText(Config.taskDefaults.editText)).toBeInTheDocument();
       });
-      expect(screen.queryByText(Config.ein.placeholderText)).not.toBeInTheDocument();
     });
 
     it("sets task status to COMPLETED on save", async () => {
       renderPage();
-      fireEvent.change(screen.getByPlaceholderText(Config.ein.placeholderText), {
+      fireEvent.change(screen.getByLabelText("Save your EIN"), {
         target: { value: "123456789" },
       });
       fireEvent.click(screen.getByText(Config.ein.saveButtonText));
@@ -137,7 +136,6 @@ describe("<EinTask />", () => {
 
     it("displays EIN when it exists in data", () => {
       renderPage();
-      expect(screen.queryByText(Config.ein.placeholderText)).not.toBeInTheDocument();
       expect(screen.getByText("12-3456789", { exact: false })).toBeInTheDocument();
     });
 
@@ -145,9 +143,7 @@ describe("<EinTask />", () => {
       renderPage();
       fireEvent.click(screen.getByText(Config.taskDefaults.editText));
       expect(screen.getByText(Config.ein.saveButtonText)).toBeInTheDocument();
-      expect((screen.getByPlaceholderText(Config.ein.placeholderText) as HTMLInputElement).value).toEqual(
-        "12-3456789"
-      );
+      expect((screen.getByLabelText("Save your EIN") as HTMLInputElement).value).toEqual("12-3456789");
       expect(screen.queryByText(Config.taskDefaults.editText)).not.toBeInTheDocument();
     });
 
@@ -155,7 +151,7 @@ describe("<EinTask />", () => {
       renderPage();
       fireEvent.click(screen.getByText(Config.taskDefaults.removeText));
       expect(screen.getByText(Config.ein.saveButtonText)).toBeInTheDocument();
-      expect((screen.getByPlaceholderText(Config.ein.placeholderText) as HTMLInputElement).value).toEqual("");
+      expect((screen.getByLabelText("Save your EIN") as HTMLInputElement).value).toEqual("");
       expect(screen.queryByText(Config.taskDefaults.removeText)).not.toBeInTheDocument();
       expect(currentUserData().profileData.employerId).toEqual(undefined);
     });
@@ -203,7 +199,7 @@ describe("<EinTask />", () => {
 
     it("opens registration modal on save button click", async () => {
       renderPage();
-      fireEvent.change(screen.getByPlaceholderText(Config.ein.placeholderText), {
+      fireEvent.change(screen.getByLabelText("Save your EIN"), {
         target: { value: "123456789" },
       });
       fireEvent.click(screen.getByText(`Register & ${Config.ein.saveButtonText}`));

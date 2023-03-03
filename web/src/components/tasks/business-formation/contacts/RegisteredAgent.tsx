@@ -166,7 +166,6 @@ export const RegisteredAgent = (): ReactElement => {
             <div data-testid="agent-number">
               <BusinessFormationTextField
                 label={Config.formation.fields.agentNumber.label}
-                placeholder={Config.formation.fields.agentNumber.placeholder}
                 numericProps={{ minLength: 4, maxLength: 7 }}
                 fieldName="agentNumber"
                 required={true}
@@ -199,7 +198,6 @@ export const RegisteredAgent = (): ReactElement => {
                 <div className="tablet:grid-col-6">
                   <BusinessFormationTextField
                     label={Config.formation.fields.agentName.label}
-                    placeholder={Config.formation.fields.agentName.placeholder}
                     required={true}
                     validationText={getFieldErrorLabel("agentName")}
                     errorBarType="MOBILE-ONLY"
@@ -211,7 +209,6 @@ export const RegisteredAgent = (): ReactElement => {
                 <div className="tablet:grid-col-6 margin-bottom-2">
                   <BusinessFormationTextField
                     label={Config.formation.fields.agentEmail.label}
-                    placeholder={Config.formation.fields.agentEmail.placeholder}
                     fieldName="agentEmail"
                     errorBarType="MOBILE-ONLY"
                     required={true}
@@ -237,7 +234,6 @@ export const RegisteredAgent = (): ReactElement => {
               )}
               <BusinessFormationTextField
                 label={Config.formation.fields.agentOfficeAddressLine1.label}
-                placeholder={Config.formation.fields.agentOfficeAddressLine1.placeholder}
                 fieldName="agentOfficeAddressLine1"
                 required={true}
                 validationText={getFieldErrorLabel("agentOfficeAddressLine1")}
@@ -247,7 +243,6 @@ export const RegisteredAgent = (): ReactElement => {
               />
               <BusinessFormationTextField
                 label={Config.formation.fields.agentOfficeAddressLine2.label}
-                placeholder={Config.formation.fields.agentOfficeAddressLine2.placeholder}
                 fieldName="agentOfficeAddressLine2"
                 validationText={getFieldErrorLabel("agentOfficeAddressLine2")}
                 disabled={state.formationFormData.agentUseBusinessAddress}
@@ -283,7 +278,6 @@ export const RegisteredAgent = (): ReactElement => {
                           });
                         }}
                         onValidation={() => setFieldsInteracted(["agentOfficeAddressMunicipality"])}
-                        placeholderText={Config.formation.fields.agentOfficeAddressMunicipality.placeholder}
                         helperText={Config.formation.fields.agentOfficeAddressMunicipality.error}
                       />
                     </div>
@@ -296,7 +290,6 @@ export const RegisteredAgent = (): ReactElement => {
                     <StateDropdown
                       fieldName="agentOfficeAddressState"
                       value={"New Jersey"}
-                      placeholder={Config.formation.fields.agentOfficeAddressState.placeholder}
                       validationText={Config.formation.fields.agentOfficeAddressState.error}
                       disabled={true}
                       onSelect={() => {}}
@@ -310,7 +303,6 @@ export const RegisteredAgent = (): ReactElement => {
                     numericProps={{ maxLength: 5 }}
                     fieldName="agentOfficeAddressZipCode"
                     label={Config.formation.fields.agentOfficeAddressZipCode.label}
-                    placeholder={Config.formation.fields.agentOfficeAddressZipCode.placeholder}
                     validationText={Config.formation.fields.agentOfficeAddressZipCode.error}
                     required={true}
                     disabled={shouldBeDisabled("agentOfficeAddressZipCode", "ADDRESS")}

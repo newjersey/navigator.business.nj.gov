@@ -12,7 +12,6 @@ describe("getProfileConfig", () => {
           default: {
             header: "header",
             description: "description",
-            placeholder: "placeholder",
             errorTextRequired: "error",
           },
           overrides: {
@@ -36,7 +35,6 @@ describe("getProfileConfig", () => {
     expect(result).toEqual({
       header: "header",
       description: "description",
-      placeholder: "placeholder",
       errorTextRequired: "error",
     });
   });
@@ -51,7 +49,6 @@ describe("getProfileConfig", () => {
     expect(result).toEqual({
       header: "header",
       description: "description",
-      placeholder: "placeholder",
       errorTextRequired: "error",
     });
   });
@@ -66,7 +63,6 @@ describe("getProfileConfig", () => {
     expect(result).toEqual({
       header: "header",
       description: "owning-description",
-      placeholder: "placeholder",
       errorTextRequired: "error",
     });
   });

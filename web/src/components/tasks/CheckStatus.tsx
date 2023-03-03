@@ -99,7 +99,6 @@ export const CheckStatus = (props: Props): ReactElement => {
             onChange={handleChange("name")}
             variant="outlined"
             fullWidth
-            placeholder={Config.licenseSearchTask.businessNamePlaceholder}
             inputProps={{
               id: "business-name",
               "data-testid": "business-name",
@@ -113,7 +112,6 @@ export const CheckStatus = (props: Props): ReactElement => {
             onChange={handleChange("addressLine1")}
             variant="outlined"
             fullWidth
-            placeholder={Config.licenseSearchTask.address1Placeholder}
             inputProps={{
               id: "address-1",
               "data-testid": "address-1",
@@ -127,7 +125,6 @@ export const CheckStatus = (props: Props): ReactElement => {
             onChange={handleChange("addressLine2")}
             variant="outlined"
             fullWidth
-            placeholder={Config.licenseSearchTask.address2Placeholder}
             inputProps={{
               id: "address-2",
               "data-testid": "address-2",
@@ -142,7 +139,6 @@ export const CheckStatus = (props: Props): ReactElement => {
               onChange={handleChange("zipCode")}
               variant="outlined"
               fullWidth
-              placeholder={Config.licenseSearchTask.zipCodePlaceholder}
               inputProps={{
                 id: "zipcode",
                 "data-testid": "zipcode",
@@ -158,7 +154,6 @@ export const CheckStatus = (props: Props): ReactElement => {
               onChange={() => {}}
               variant="outlined"
               fullWidth
-              placeholder={Config.licenseSearchTask.statePlaceholder}
               inputProps={{
                 id: "state",
                 "data-testid": "state",

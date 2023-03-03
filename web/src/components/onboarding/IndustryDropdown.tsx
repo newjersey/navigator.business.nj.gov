@@ -168,7 +168,6 @@ export const IndustryDropdown = (props: Props): ReactElement => {
             onChange={handleSearchBoxChange}
             onSubmit={props.onValidation}
             variant="outlined"
-            placeholder={contentFromConfig.placeholder}
             error={props.error}
             helperText={props.error ? props.validationText ?? " " : " "}
           />

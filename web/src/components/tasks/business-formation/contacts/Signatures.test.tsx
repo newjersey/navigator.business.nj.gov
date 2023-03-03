@@ -217,8 +217,6 @@ describe("Formation - Signatures", () => {
             { signers: [generateFormationSigner({ title: undefined })] }
           );
 
-          expect(screen.getByText(Config.formation.fields.signers.titlePlaceholder)).toBeInTheDocument();
-
           await attemptApiSubmission(page);
           const signerTypeErrorText = () => {
             return screen.queryByText(Config.formation.fields.signers.errorBannerSignerTitle);
@@ -234,8 +232,6 @@ describe("Formation - Signatures", () => {
             { businessPersona: "FOREIGN", legalStructureId },
             { signers: undefined }
           );
-          expect(screen.getByText(Config.formation.fields.signers.titlePlaceholder)).toBeInTheDocument();
-
           const signers = [
             generateFormationSigner({ signature: true }, legalType),
             generateFormationSigner({ signature: true }, legalType),

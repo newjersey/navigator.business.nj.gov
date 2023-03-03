@@ -103,6 +103,7 @@ export const FormationDate = (props: Props): ReactElement => {
                   }
                   inputProps={{
                     ...params.inputProps,
+                    placeholder: "",
                     "aria-label": camelCaseToSentence(props.fieldName),
                     "data-testid": `date-${props.fieldName}`,
                   }}

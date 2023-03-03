@@ -47,7 +47,6 @@ export const OnboardingField = ({ fieldName, className, ...props }: OnboardingPr
         value={state.profileData[fieldName] as string | undefined}
         fieldName={fieldName as string}
         {...props}
-        placeholder={props.placeholder ?? contentFromConfig.placeholder ?? ""}
         validationText={props.validationText ?? contentFromConfig.errorTextRequired ?? ""}
         handleChange={handleChange}
         onValidation={onValidation}

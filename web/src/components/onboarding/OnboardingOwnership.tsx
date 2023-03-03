@@ -1,7 +1,4 @@
-import { ConfigType } from "@/contexts/configContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { useConfig } from "@/lib/data-hooks/useConfig";
-import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import {
   arrayOfOwnershipTypes,
   LookupOwnershipTypeById,
@@ -12,15 +9,7 @@ import { ReactElement, useContext } from "react";
 
 export const OnboardingOwnership = (): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
-  const { Config } = useConfig();
   const NONE_OF_THE_ABOVE = "none";
-
-  const contentFromConfig: ConfigType["profileDefaults"]["fields"]["ownershipTypeIds"]["default"] =
-    getProfileConfig({
-      config: Config,
-      persona: state.flow,
-      fieldName: "ownershipTypeIds",
-    });
 
   const handleChange = (event: SelectChangeEvent<string[]>) => {
     let values: string[] =
@@ -49,7 +38,7 @@ export const OnboardingOwnership = (): ReactElement => {
             onChange={handleChange}
             renderValue={(selected) => {
               if (selected.length === 0) {
-                return <div className="text-base">{contentFromConfig.placeholder}</div>;
+                return <></>;
               }
 
               return selected

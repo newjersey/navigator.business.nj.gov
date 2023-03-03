@@ -9,7 +9,6 @@ interface Props {
   value: string | undefined;
   fieldName: string;
   onSelect: (value: StateObject | undefined) => void;
-  placeholder?: string;
   onValidation?: (fieldName: string, invalid: boolean) => void;
   error?: boolean;
   validationText?: string;
@@ -119,7 +118,6 @@ export const StateDropdown = (props: Props): ReactElement => {
             onSubmit={onValidation}
             autoComplete={props.autoComplete ? "address-level1" : "no"}
             variant="outlined"
-            placeholder={props.placeholder}
             onClick={() => {
               return props.disabled ? null : setOpen(true);
             }}

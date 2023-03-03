@@ -50,7 +50,6 @@ export const MainBusinessAddressNj = (): ReactElement => {
           <StateDropdown
             fieldName="addressState"
             value={"New Jersey"}
-            placeholder={Config.formation.fields.addressState.placeholder}
             validationText={Config.formation.fields.addressState.error}
             disabled={true}
             onSelect={() => {}}
@@ -59,7 +58,6 @@ export const MainBusinessAddressNj = (): ReactElement => {
         </WithErrorBar>
         <BusinessFormationTextField
           label={Config.formation.fields.addressZipCode.label}
-          placeholder={Config.formation.fields.addressZipCode.placeholder}
           numericProps={{ maxLength: 5 }}
           required={true}
           errorBarType="NEVER"

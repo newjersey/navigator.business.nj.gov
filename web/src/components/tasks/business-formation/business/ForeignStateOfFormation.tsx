@@ -34,7 +34,6 @@ export const ForeignStateOfFormation = (): ReactElement => {
           excludeNJ
           onValidation={() => setFieldsInteracted([FIELD])}
           value={state.formationFormData.foreignStateOfFormation}
-          placeholder={Config.formation.fields.foreignStateOfFormation.placeholder}
           validationText={Config.formation.fields.foreignStateOfFormation.error}
           required
           error={doesFieldHaveError(FIELD)}

@@ -209,7 +209,7 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
               fieldName="naicsCode"
               numericProps={{ maxLength: LENGTH }}
               value={naicsCode}
-              placeholder={Config.determineNaicsCode.inputPlaceholder}
+              ariaLabel="Save NAICS Code"
               fieldOptions={{
                 inputProps: { style: { backgroundColor: "white" } },
                 sx: {

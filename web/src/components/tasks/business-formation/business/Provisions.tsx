@@ -78,7 +78,6 @@ export const Provisions = (): ReactElement => {
               <div className="grid-col">
                 <GenericTextField
                   value={provision}
-                  placeholder={Config.formation.fields.provisions.placeholder}
                   handleChange={(value) => {
                     return handleProvisionChange(value, index);
                   }}

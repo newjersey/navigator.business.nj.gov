@@ -256,7 +256,6 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
             <Content>{Config.formation.addressModal.name.label}</Content>
             <GenericTextField
               value={addressData.name}
-              placeholder={Config.formation.addressModal.name.placeholder}
               handleChange={(value: string) => {
                 return setAddressData((prevAddressData) => {
                   return { ...prevAddressData, name: value };
@@ -279,7 +278,6 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
             <GenericTextField
               fieldName="addressLine1"
               value={addressData.addressLine1}
-              placeholder={Config.formation.addressModal.addressLine1.placeholder}
               handleChange={(value: string) => {
                 return setAddressData((prevAddressData) => {
                   return { ...prevAddressData, addressLine1: value };
@@ -315,7 +313,6 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
               error={addressErrorMap["addressLine2"].invalid}
               validationText={addressErrorMap["addressLine2"].label}
               onValidation={onValidation}
-              placeholder={Config.formation.addressModal.addressLine2.placeholder}
               disabled={useDefaultAddress}
               autoComplete="address-line2"
               handleChange={(value: string) => {
@@ -343,7 +340,6 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
                     value={addressData.addressCity}
                     disabled={shouldBeDisabled("addressCity")}
                     required={true}
-                    placeholder={Config.formation.addressModal.addressCity.placeholder}
                     handleChange={(value: string) => {
                       return setAddressData((prevAddressData) => {
                         return { ...prevAddressData, addressCity: value };
@@ -369,7 +365,6 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
                 <StateDropdown
                   fieldName="addressState"
                   value={addressData.addressState?.name ?? ""}
-                  placeholder={Config.formation.addressModal.addressState.placeholder}
                   validationText={addressErrorMap["addressState"].label}
                   onSelect={(value: StateObject | undefined) => {
                     return setAddressData((prevAddressData) => {
@@ -403,7 +398,6 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
                 validationText={addressErrorMap["addressZipCode"].label}
                 onValidation={onValidation}
                 required={true}
-                placeholder={Config.formation.addressModal.addressZipCode.placeholder}
               />
             </div>
           </div>

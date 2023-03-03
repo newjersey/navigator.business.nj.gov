@@ -387,9 +387,6 @@ describe("Formation - BusinessStep", () => {
       expect(
         screen.getByText(markdownToText(Config.formation.fields.foreignStateOfFormation.label))
       ).toBeInTheDocument();
-      expect(
-        screen.getByPlaceholderText(Config.formation.fields.foreignStateOfFormation.placeholder)
-      ).toBeInTheDocument();
       page.fillText("Foreign state of formation", "Virgin Islands");
       await page.submitBusinessStep(true);
       expect(currentUserData().formationData.formationFormData.foreignStateOfFormation).toEqual(
@@ -831,10 +828,6 @@ describe("Formation - BusinessStep", () => {
         {}
       );
       expect((screen.getByLabelText("Address municipality") as HTMLInputElement).value).toEqual("Newark");
-
-      expect(
-        screen.queryByPlaceholderText(Config.formation.fields.addressCity.placeholder)
-      ).not.toBeInTheDocument();
     });
   });
 
