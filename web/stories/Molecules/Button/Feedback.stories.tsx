@@ -1,9 +1,10 @@
+import { ButtonIcon } from "@/components/ButtonIcon";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { withDesign } from "storybook-addon-designs";
 
 export default {
-  title: "Molecules/PrimaryButton",
+  title: "Molecules/Button/Feedback",
   component: PrimaryButton,
   decorators: [withDesign],
   parameters: {
@@ -20,30 +21,33 @@ const Template: ComponentStory<typeof PrimaryButton> = ({ children, ...args }) =
   </div>
 );
 
-export const PrimaryColor = Template.bind({});
+export const Regular = Template.bind({});
 
-PrimaryColor.args = {
-  isColor: "primary",
-  children: "button",
-};
-
-export const SecondaryColor = Template.bind({});
-
-SecondaryColor.args = {
-  isColor: "secondary",
-  children: "button",
-};
-
-export const AccentCoolLightestColor = Template.bind({});
-
-AccentCoolLightestColor.args = {
+Regular.args = {
+  children: (
+    <>
+      <ButtonIcon svgFilename="chat-processing" />
+      <span className="text-left">Text Here</span>
+    </>
+  ),
   isColor: "accent-cool-lightest",
-  children: "button",
+  isFullWidthOnDesktop: true,
+  isTextAlignedLeft: true,
+  isUnBolded: true,
 };
 
-export const AccentCoolDarkerColor = Template.bind({});
+export const Small = Template.bind({});
 
-AccentCoolDarkerColor.args = {
-  isColor: "accent-cool-darker",
-  children: "button",
+Small.args = {
+  isColor: "secondary",
+  isUnBolded: true,
+  isSmallerText: true,
+  isNotFullWidthOnMobile: true,
+  children: (
+    <>
+      <ButtonIcon svgFilename="lightbulb-on-warning-light" sizePx="16px" />
+      <span className="text-left">Text Here</span>
+    </>
+  ),
+  isVerticalPaddingRemoved: true,
 };
