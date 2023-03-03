@@ -1422,6 +1422,10 @@ collections:
             name: willSellPetCareItems
             widget: boolean
             required: false
+          - label: Pet Care Housing
+            name: petCareHousing
+            widget: boolean
+            required: false
       - label: Roadmap Steps
         name: roadmapSteps
         widget: list
