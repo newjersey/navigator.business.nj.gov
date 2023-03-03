@@ -18,7 +18,7 @@ export interface UserData {
   readonly lastUpdatedISO: string | undefined;
 }
 
-export const CURRENT_VERSION = 105;
+export const CURRENT_VERSION = 106;
 
 export const createEmptyUserData = (user: BusinessUser): UserData => {
   return {

@@ -54,6 +54,10 @@ export class OnboardingPage {
     return cy.get(`input[name="will-sell-pet-care-items"]${radio === undefined ? "" : `[value="${radio}"]`}`);
   }
 
+  getPetCareHousing(radio?: boolean) {
+    return cy.get(`input[name="pet-care-housing"]${radio === undefined ? "" : `[value="${radio}"]`}`);
+  }
+
   getIndustryDropdown() {
     return cy.get('[data-testid="industryid"]');
   }
@@ -140,6 +144,10 @@ export class OnboardingPage {
 
   selectChildcare(radio: boolean) {
     this.getChildcare(radio).check();
+  }
+
+  selectPetCareHousing(radio: boolean) {
+    this.getPetCareHousing(radio).check();
   }
 
   selectWillSellPetcareItems(radio: boolean) {

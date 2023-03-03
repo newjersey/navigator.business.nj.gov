@@ -367,6 +367,18 @@ describe("buildUserRoadmap", () => {
       });
     });
 
+    describe("petcare license", () => {
+      it("adds petcare license add-on and modification if is true", async () => {
+        await buildUserRoadmap(generateStartingProfile({ petCareHousing: true }));
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("petcare-license");
+      });
+
+      it("does not add petcare license add-on and modification if is false", async () => {
+        await buildUserRoadmap(generateStartingProfile({ petCareHousing: false }));
+        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("petcare-license");
+      });
+    });
+
     describe("transportation", () => {
       it("adds home-based-transportation add-on if transportation and home-based", async () => {
         await buildUserRoadmap(generateStartingProfile({ homeBasedBusiness: true, industryId: "trucking" }));

@@ -193,7 +193,7 @@
       },
       "willSellPetCareItems": {
         "default": {
-          "header": "Petcare Services",
+          "header": "",
           "radioButtonTrueText": "Yes",
           "radioButtonFalseText": "No",
           "description": "Will you sell pet care items?"
@@ -333,6 +333,14 @@
           "radioButtonTrueText": "Yes",
           "radioButtonFalseText": "No",
           "description": "Will you be driving your commercial vehicle across state lines?"
+        }
+      },
+      "petCareHousing": {
+        "default": {
+          "header": "Petcare Services",
+          "radioButtonTrueText": "Yes",
+          "radioButtonFalseText": "No",
+          "description": "Will you house animals?"
         }
       },
       "realEstateAppraisalManagement": {

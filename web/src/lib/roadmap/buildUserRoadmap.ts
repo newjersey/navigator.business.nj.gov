@@ -91,6 +91,10 @@ const getIndustryBasedAddOns = (profileData: ProfileData, industryId: string | u
     addOns.push("cpa");
   }
 
+  if (profileData.petCareHousing) {
+    addOns.push("petcare-license");
+  }
+
   if (profileData.homeBasedBusiness && industry.industryOnboardingQuestions.isTransportation) {
     addOns.push("home-based-transportation");
   }

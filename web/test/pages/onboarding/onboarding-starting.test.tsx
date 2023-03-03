@@ -11,7 +11,7 @@ import * as mockRouter from "@/test/mock/mockRouter";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { currentUserData, setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
 import {
-  industriesWithEssentialQuestion,
+  industryIdsWithEssentialQuestion,
   mockSuccessfulApiSignups,
   renderPage,
   runSelfRegPageTests,
@@ -79,10 +79,11 @@ describe("onboarding - starting a business", () => {
       expect(screen.queryByTestId("snackbar-alert-ERROR")).not.toBeInTheDocument();
     });
 
-    industriesWithEssentialQuestion.map((industry) => {
-      it(`prevents user from moving to Step 3 when ${industry.id} is selected as industry, but essential question is not answered`, async () => {
+    it.each(industryIdsWithEssentialQuestion)(
+      "prevents user from moving to Step 3 when %s is selected as industry, but essential question is not answered",
+      async (industryId) => {
         const userData = generateTestUserData({
-          industryId: industry.id,
+          industryId: industryId,
           ...generateUndefinedIndustrySpecificData(),
         });
         useMockRouter({ isReady: true, query: { page: "2" } });
@@ -94,26 +95,33 @@ describe("onboarding - starting a business", () => {
         expect(screen.getByTestId("step-2")).toBeInTheDocument();
         expect(screen.queryByTestId("step-3")).not.toBeInTheDocument();
         expect(screen.getByTestId("banner-alert-REQUIRED_ESSENTIAL_QUESTION")).toBeInTheDocument();
-        expect(screen.getByText(Config.profileDefaults.essentialQuestionInlineText)).toBeInTheDocument();
-      });
+        expect(
+          screen.getAllByText(Config.profileDefaults.essentialQuestionInlineText)[0]
+        ).toBeInTheDocument();
+      }
+    );
 
-      it(`allows user to move past Step 2 when you have selected an industry ${industry.id} and answered the essential question`, async () => {
+    it.each(industryIdsWithEssentialQuestion)(
+      "allows user to move past Step 2 when you have selected an industry %s and answered the essential question",
+      async (industryId) => {
         const userData = generateTestUserData({
-          industryId: industry.id,
+          industryId: industryId,
           ...generateUndefinedIndustrySpecificData(),
         });
         useMockRouter({ isReady: true, query: { page: "2" } });
         const { page } = renderPage({ userData });
 
-        page.chooseEssentialQuestionRadio(industry.id, 0);
+        page.chooseEssentialQuestionRadio(industryId, 0);
         await page.visitStep(3);
-
         expect(screen.queryByTestId("step-2")).not.toBeInTheDocument();
-      });
+      }
+    );
 
-      it(`removes essential question inline error when essential question radio is selected for ${industry.id} industry `, async () => {
+    it.each(industryIdsWithEssentialQuestion)(
+      "removes essential question inline error when essential question radio is selected for %s industry",
+      async (industryId) => {
         const userData = generateTestUserData({
-          industryId: industry.id,
+          industryId: industryId,
           ...generateUndefinedIndustrySpecificData(),
         });
         useMockRouter({ isReady: true, query: { page: "2" } });
@@ -123,13 +131,15 @@ describe("onboarding - starting a business", () => {
           page.clickNext();
         });
         expect(screen.getByTestId("step-2")).toBeInTheDocument();
-        expect(screen.getByText(Config.profileDefaults.essentialQuestionInlineText)).toBeInTheDocument();
-        page.chooseEssentialQuestionRadio(industry.id, 0);
+        expect(
+          screen.getAllByText(Config.profileDefaults.essentialQuestionInlineText)[0]
+        ).toBeInTheDocument();
+        page.chooseEssentialQuestionRadio(industryId, 0);
         expect(
           screen.queryByText(Config.profileDefaults.essentialQuestionInlineText)
         ).not.toBeInTheDocument();
-      });
-    });
+      }
+    );
   });
 
   describe("page 3", () => {
