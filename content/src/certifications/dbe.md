@@ -26,7 +26,7 @@ A Disadvantaged Business Enterprise (DBE) certification may **provide an advanta
 A DBE must meet all of the following:
 
 1. Small business according to the [Small Business Administration (SBA) size standards](https://www.sba.gov/size-standards/index.html)
-2. 51% owned, and controlled by one or more socially and economically disadvantaged individuals
+2. 51% owned, and controlled by one or more `socially and economically disadvantaged individuals|socially-economically-disadvantaged`
 3. Authorized to do business in New Jersey and have all relevant business registrations and/or licenses
 4. Meet the DBE statutory cap (Business size standard/Gross receipts cap) currently at $28.48 million
 
