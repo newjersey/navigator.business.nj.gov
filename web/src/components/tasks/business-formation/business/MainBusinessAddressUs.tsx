@@ -44,7 +44,6 @@ export const MainBusinessUs = (): ReactElement => {
               error={doesFieldHaveError("addressState")}
               placeholder={Config.formation.fields.addressState.placeholder}
               validationText={Config.formation.fields.addressState.error}
-              excludeNJ
               required
               onValidation={() => setFieldsInteracted(["addressState"])}
               onSelect={(stateObject) => {
