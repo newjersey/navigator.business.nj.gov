@@ -75,7 +75,7 @@
     }
   ],
   "name": "Cannabis",
-  "industryOnboardingQuestions": {},
+  "industryOnboardingQuestions": { "isCannabisLicenseTypeApplicable": true },
   "modifications": [],
   "isEnabled": true,
   "additionalSearchTerms": "marijuana, ACT, cannabis business, micro license, cultivation, dispensary, grow, retail, pot, weed",

@@ -137,7 +137,7 @@ export const EssentialQuestions: EssentialQuestion[] = [
   new EssentialQuestion({
     shouldBeResetWhenIndustryChanges: false,
     isQuestionApplicableToIndustry: (industry) => {
-      return industry.id === "cannabis";
+      return !!industry.industryOnboardingQuestions.isCannabisLicenseTypeApplicable;
     },
     fieldName: "cannabisLicenseType",
   }),
