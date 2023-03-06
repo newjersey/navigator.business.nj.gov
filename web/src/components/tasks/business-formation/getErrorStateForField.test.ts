@@ -37,9 +37,9 @@ describe("getErrorStateForField", () => {
       expect(getErrorStateForField("businessName", formData, availability).hasError).toEqual(true);
     });
 
-    it("has error if availablity error", () => {
+    it("has error if availability error", () => {
       const formData = generateFormationFormData({ businessName: "some name" });
-      const availability = generateNameAvailability({ status: "DESIGNATOR" });
+      const availability = generateNameAvailability({ status: "DESIGNATOR_ERROR" });
       expect(getErrorStateForField("businessName", formData, availability).hasError).toEqual(true);
     });
 
@@ -73,7 +73,7 @@ describe("getErrorStateForField", () => {
 
     it("uses errorInlineUnavailable as label if name availability is error", () => {
       const formData = generateFormationFormData({ businessName: "some name" });
-      const availability = generateNameAvailability({ status: "DESIGNATOR" });
+      const availability = generateNameAvailability({ status: "DESIGNATOR_ERROR" });
       expect(getErrorStateForField("businessName", formData, availability).label).toEqual(
         Config.formation.fields.businessName.errorInlineUnavailable
       );

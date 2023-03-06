@@ -104,30 +104,30 @@ describe("Formation - BusinessNameStep", () => {
     expect(screen.queryByTestId("available-text")).not.toBeInTheDocument();
   });
 
-  it("shows DESIGNATOR text if name is not available", async () => {
+  it("shows DESIGNATOR error text if name is not available", async () => {
     const page = getPageHelper();
 
     page.fillText("Search business name", "Pizza Joint");
-    await page.searchBusinessName({ status: "DESIGNATOR" });
-    expect(screen.getByTestId("designator-text")).toBeInTheDocument();
+    await page.searchBusinessName({ status: "DESIGNATOR_ERROR" });
+    expect(screen.getByTestId("designator-error-text")).toBeInTheDocument();
   });
 
-  it("shows SPECIAL_CHARACTER text if name is not available", async () => {
+  it("shows SPECIAL_CHARACTER error text if name is not available", async () => {
     const page = getPageHelper();
 
     page.fillText("Search business name", "Pizza Joint");
-    await page.searchBusinessName({ status: "SPECIAL_CHARACTER" });
-    expect(screen.getByTestId("special-character-text")).toBeInTheDocument();
+    await page.searchBusinessName({ status: "SPECIAL_CHARACTER_ERROR" });
+    expect(screen.getByTestId("special-character-error-text")).toBeInTheDocument();
   });
 
-  it("shows RESTRICTED text if name is not available", async () => {
+  it("shows RESTRICTED error text if name is not available", async () => {
     const page = getPageHelper();
 
     page.fillText("Search business name", "Pizza Joint");
-    await page.searchBusinessName({ status: "RESTRICTED", invalidWord: "Joint" });
-    expect(screen.getByTestId("restricted-word-text")).toBeInTheDocument();
+    await page.searchBusinessName({ status: "RESTRICTED_ERROR", invalidWord: "Joint" });
+    expect(screen.getByTestId("restricted-word-error-text")).toBeInTheDocument();
     expect(
-      within(screen.getByTestId("restricted-word-text")).getByText("Joint", { exact: false })
+      within(screen.getByTestId("restricted-word-error-text")).getByText("Joint", { exact: false })
     ).toBeInTheDocument();
   });
 
