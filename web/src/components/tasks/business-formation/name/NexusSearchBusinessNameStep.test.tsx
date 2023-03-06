@@ -121,7 +121,7 @@ describe("<NexusSearchBusinessNameStep />", () => {
   it("does not save business name if designator error", async () => {
     renderTask();
     fillText("My Cool Business");
-    await searchAndGetValue({ status: "DESIGNATOR" });
+    await searchAndGetValue({ status: "DESIGNATOR_ERROR" });
     expect(userDataWasNotUpdated()).toEqual(true);
   });
 

@@ -179,13 +179,13 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
             updateNameOnProfile={updateNameOnProfile}
           />
         )}
-        {nameAvailability?.status === "DESIGNATOR" && (
-          <Alert variant="error" dataTestid="designator-text">
+        {nameAvailability?.status === "DESIGNATOR_ERROR" && (
+          <Alert variant="error" dataTestid="designator-error-text">
             <p className="font-sans-xs">{Config.searchBusinessNameTask.designatorText}</p>
           </Alert>
         )}
-        {nameAvailability?.status === "SPECIAL_CHARACTER" && (
-          <Alert variant="error" dataTestid="special-character-text">
+        {nameAvailability?.status === "SPECIAL_CHARACTER_ERROR" && (
+          <Alert variant="error" dataTestid="special-character-error-text">
             <Content className="font-sans-xs">
               {templateEval(Config.formation.fields.businessName.alertSpecialCharacters, {
                 name: submittedName,
@@ -193,8 +193,8 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
             </Content>
           </Alert>
         )}
-        {nameAvailability?.status === "RESTRICTED" && (
-          <Alert variant="error" dataTestid="restricted-word-text">
+        {nameAvailability?.status === "RESTRICTED_ERROR" && (
+          <Alert variant="error" dataTestid="restricted-word-error-text">
             <Content className="font-sans-xs">
               {templateEval(Config.formation.fields.businessName.alertRestrictedWord, {
                 name: submittedName,
