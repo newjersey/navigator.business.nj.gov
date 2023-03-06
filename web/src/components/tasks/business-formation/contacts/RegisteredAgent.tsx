@@ -144,19 +144,27 @@ export const RegisteredAgent = (): ReactElement => {
             >
               <FormControlLabel
                 labelPlacement="end"
-                style={{ marginTop: ".75rem", alignItems: "flex-start" }}
+                style={{ alignItems: "center" }}
                 data-testid="registered-agent-number"
                 value="NUMBER"
-                control={<Radio color="primary" sx={{ paddingTop: "0px" }} />}
-                label={Config.formation.registeredAgent.radioButtonNumberText}
+                control={<Radio color="primary" />}
+                label={
+                  <div className="padding-y-1 margin-right-3">
+                    {Config.formation.registeredAgent.radioButtonNumberText}
+                  </div>
+                }
               />
               <FormControlLabel
                 labelPlacement="end"
                 data-testid="registered-agent-manual"
-                style={{ marginTop: ".75rem", alignItems: "flex-start" }}
+                style={{ alignItems: "center" }}
                 value="MANUAL_ENTRY"
-                control={<Radio color="primary" sx={{ paddingTop: "0px" }} />}
-                label={Config.formation.registeredAgent.radioButtonManualText}
+                control={<Radio color="primary" />}
+                label={
+                  <div className="padding-y-1 margin-right-3">
+                    {Config.formation.registeredAgent.radioButtonManualText}
+                  </div>
+                }
               />
             </RadioGroup>
           </FormControl>

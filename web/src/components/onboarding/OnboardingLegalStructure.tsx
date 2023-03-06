@@ -37,7 +37,7 @@ export const OnboardingLegalStructure = (): ReactElement => {
     const supportingText =
       (contentFromConfig.optionContent as Record<string, string>)[legalStructureId] ?? "";
     return (
-      <div className="margin-bottom-2 margin-top-1" data-value={legalStructureId}>
+      <div data-value={legalStructureId}>
         <div className={supportingText === "" ? "" : "text-bold"}>
           {LookupLegalStructureById(legalStructureId).name}
         </div>
@@ -60,13 +60,13 @@ export const OnboardingLegalStructure = (): ReactElement => {
               return (
                 <FormControlLabel
                   aria-label={legalStructure.id}
-                  style={{ alignItems: "flex-start" }}
+                  style={{ alignItems: "center" }}
                   labelPlacement="end"
                   key={legalStructure.id}
                   data-testid={legalStructure.id}
                   value={legalStructure.id}
                   control={<Radio color="primary" />}
-                  label={makeLabel(legalStructure.id)}
+                  label={<div className="padding-y-1">{makeLabel(legalStructure.id)}</div>}
                 />
               );
             })}

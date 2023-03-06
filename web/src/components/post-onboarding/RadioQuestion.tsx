@@ -44,10 +44,12 @@ export const RadioQuestion = (props: Props): ReactElement => {
     <>
       {onboardingQuestion.question && (
         <>
-          <div role="heading" aria-level={2} data-testid={props.id} className="h4-styling margin-top-205">
-            {onboardingQuestion.question}
+          <div className="margin-top-205">
+            <div role="heading" aria-level={2} data-testid={props.id} className="h4-styling ">
+              {onboardingQuestion.question}
+            </div>
           </div>
-          <FormControl variant="outlined" fullWidth>
+          <FormControl fullWidth>
             <RadioGroup
               aria-label={onboardingQuestion.question}
               name={props.id}
@@ -57,20 +59,20 @@ export const RadioQuestion = (props: Props): ReactElement => {
               data-testid="post-onboarding-radio-btn"
             >
               <FormControlLabel
-                style={{ marginTop: ".75rem", alignItems: "flex-start", marginRight: "3rem" }}
+                style={{ alignItems: "center" }}
                 labelPlacement="end"
                 data-testid="post-onboarding-radio-true"
                 value={true}
-                control={<Radio color="primary" sx={{ paddingTop: "0px" }} />}
-                label={onboardingQuestion.radioYes}
+                control={<Radio color="primary" />}
+                label={<div className="padding-y-1 margin-right-3">{onboardingQuestion.radioYes}</div>}
               />
               <FormControlLabel
-                style={{ marginTop: ".75rem", alignItems: "flex-start" }}
+                style={{ alignItems: "center" }}
                 labelPlacement="end"
                 data-testid="post-onboarding-radio-false"
                 value={false}
-                control={<Radio color="primary" sx={{ paddingTop: "0px" }} />}
-                label={onboardingQuestion.radioNo}
+                control={<Radio color="primary" />}
+                label={<div className="padding-y-1 margin-right-3">{onboardingQuestion.radioNo}</div>}
               />
             </RadioGroup>
           </FormControl>

@@ -42,20 +42,20 @@ export const OnboardingLocationInNewJersey = (): ReactElement => {
             row
           >
             <FormControlLabel
-              style={{ marginRight: "3rem" }}
+              style={{ alignItems: "center" }}
               labelPlacement="end"
               data-testid="location-in-new-jersey-true"
               value={true}
               control={<Radio color="primary" />}
-              label={contentFromConfig.radioButtonYesText}
+              label={<div className="padding-y-1 margin-right-3">{contentFromConfig.radioButtonYesText}</div>}
             />
             <FormControlLabel
-              style={{ marginRight: "3rem" }}
+              style={{ alignItems: "center" }}
               labelPlacement="end"
               data-testid="location-in-new-jersey-false"
               value={false}
               control={<Radio color="primary" />}
-              label={contentFromConfig.radioButtonNoText}
+              label={<div className="padding-y-1 margin-right-3">{contentFromConfig.radioButtonNoText}</div>}
             />
           </RadioGroup>
         </FormControl>
