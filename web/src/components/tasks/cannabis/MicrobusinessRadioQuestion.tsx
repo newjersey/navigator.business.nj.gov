@@ -31,9 +31,7 @@ export const MicrobusinessRadioQuestion = (): ReactElement => {
 
   return (
     <>
-      <div className="margin-bottom-2">
-        <Content>{Config.cannabisApplyForLicense.microbusinessRadioQuestion}</Content>
-      </div>
+      <Content>{Config.cannabisApplyForLicense.microbusinessRadioQuestion}</Content>
       <FormControl variant="outlined" fullWidth>
         <RadioGroup
           aria-label={Config.cannabisApplyForLicense.microbusinessRadioQuestion}
@@ -43,20 +41,28 @@ export const MicrobusinessRadioQuestion = (): ReactElement => {
           row
         >
           <FormControlLabel
-            style={{ marginTop: ".75rem", alignItems: "flex-start", marginRight: "3rem" }}
+            style={{ alignItems: "center" }}
             labelPlacement="end"
             data-testid="microbusiness-radio-true"
             value={true}
-            control={<Radio color="primary" sx={{ paddingTop: "0px" }} />}
-            label={<Content>{Config.cannabisApplyForLicense.microbusinessRadioYes}</Content>}
+            control={<Radio color="primary" />}
+            label={
+              <div className="padding-y-1 margin-right-3">
+                <Content>{Config.cannabisApplyForLicense.microbusinessRadioYes}</Content>{" "}
+              </div>
+            }
           />
           <FormControlLabel
-            style={{ marginTop: ".75rem", alignItems: "flex-start" }}
+            style={{ alignItems: "center" }}
             labelPlacement="end"
             data-testid="microbusiness-radio-false"
             value={false}
-            control={<Radio color="primary" sx={{ paddingTop: "0px" }} />}
-            label={<Content>{Config.cannabisApplyForLicense.microbusinessRadioNo}</Content>}
+            control={<Radio color="primary" />}
+            label={
+              <div className="padding-y-1 margin-right-3">
+                <Content>{Config.cannabisApplyForLicense.microbusinessRadioNo}</Content>{" "}
+              </div>
+            }
           />
         </RadioGroup>
       </FormControl>

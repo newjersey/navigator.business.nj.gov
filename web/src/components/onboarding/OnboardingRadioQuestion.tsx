@@ -1,4 +1,3 @@
-import { Content } from "@/components/Content";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
@@ -57,22 +56,22 @@ export const OnboardingRadioQuestion = <T extends ProfileDataTypes>(props: Props
           name={camelCaseToKebabCase(props.fieldName)}
           value={state.profileData[props.fieldName]?.toString() ?? ""}
           onChange={handleChange}
-          row={props.choices.length === 2}
+          row
         >
           <>
             {props.choices.map((val) => {
               return (
                 <FormControlLabel
                   key={val.toString()}
-                  style={{ marginTop: ".75rem", alignItems: "flex-start", marginRight: "2.5rem" }}
+                  style={{ alignItems: "center" }}
                   labelPlacement="end"
                   data-testid={`${camelCaseToKebabCase(props.fieldName)}-radio-${val
                     .toString()
                     .toLowerCase()}`}
                   value={val.toString()}
-                  control={<Radio color="primary" sx={{ paddingTop: "0px" }} />}
+                  control={<Radio color="primary" />}
                   label={
-                    <Content>
+                    <div className="padding-y-1 margin-right-3">
                       {props.labels
                         ? props.labels[val.toString()]
                         : contentFromConfig[
@@ -80,7 +79,7 @@ export const OnboardingRadioQuestion = <T extends ProfileDataTypes>(props: Props
                               kebabSnakeSentenceToCamelCase(val.toString())
                             )}Text`
                           ]}
-                    </Content>
+                    </div>
                   }
                 />
               );

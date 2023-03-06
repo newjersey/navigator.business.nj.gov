@@ -68,30 +68,36 @@ export const PartnershipRights = (): ReactElement => {
             row
           >
             <FormControlLabel
-              style={{ marginTop: ".75rem", alignItems: "flex-start" }}
+              style={{ alignItems: "center" }}
               value={"true"}
               control={
                 <Radio
                   required={true}
                   data-testid={`${fieldName}-true`}
                   color={hasError ? "error" : "primary"}
-                  sx={{ paddingTop: "0px" }}
                 />
               }
-              label={Config.formation.partnershipRights.radioYesText}
+              label={
+                <div className="padding-y-1 margin-right-3">
+                  {Config.formation.partnershipRights.radioYesText}
+                </div>
+              }
             />
             <FormControlLabel
-              style={{ marginTop: ".75rem", alignItems: "flex-start" }}
+              style={{ alignItems: "center" }}
               value={"false"}
               control={
                 <Radio
                   required={true}
                   color={hasError ? "error" : "primary"}
-                  sx={{ paddingTop: "0px" }}
                   data-testid={`${fieldName}-false`}
                 />
               }
-              label={Config.formation.partnershipRights.radioNoText}
+              label={
+                <div className="padding-y-1 margin-right-3">
+                  {Config.formation.partnershipRights.radioNoText}
+                </div>
+              }
             />
           </RadioGroup>
           <FormHelperText>{hasError ? Config.formation.general.genericErrorText : ""}</FormHelperText>

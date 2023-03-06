@@ -40,30 +40,30 @@ export const OnboardingBusinessPersona = (): ReactElement => {
         >
           <FormControlLabel
             aria-label="Business Status - Starting"
-            style={{ marginTop: ".75rem", alignItems: "flex-start" }}
+            style={{ alignItems: "center" }}
             labelPlacement="end"
             data-testid="business-persona-starting"
             value="STARTING"
-            control={<Radio color="primary" sx={{ paddingTop: "0px" }} />}
-            label={contentFromConfig.radioButtonStartingText}
+            control={<Radio color="primary" />}
+            label={<div className="padding-y-1">{contentFromConfig.radioButtonStartingText}</div>}
           />
           <FormControlLabel
             aria-label="Business Status - Owning"
-            style={{ marginTop: ".75rem", alignItems: "flex-start" }}
+            style={{ alignItems: "center" }}
             labelPlacement="end"
             data-testid="business-persona-owning"
             value="OWNING"
-            control={<Radio color="primary" sx={{ paddingTop: "0px" }} />}
-            label={contentFromConfig.radioButtonOwningText}
+            control={<Radio color="primary" />}
+            label={<div className="padding-y-1">{contentFromConfig.radioButtonOwningText}</div>}
           />
           <FormControlLabel
             aria-label="Business Status - Foreign"
-            style={{ marginTop: ".75rem", alignItems: "flex-start" }}
+            style={{ alignItems: "center" }}
             labelPlacement="end"
             data-testid="business-persona-foreign"
             value="FOREIGN"
-            control={<Radio color="primary" sx={{ paddingTop: "0px" }} />}
-            label={contentFromConfig.radioButtonForeignText}
+            control={<Radio color="primary" />}
+            label={<div className="padding-y-1">{contentFromConfig.radioButtonForeignText}</div>}
           />
         </RadioGroup>
       </FormControl>

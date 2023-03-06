@@ -52,24 +52,24 @@ export const MainBusinessForeignAddressFlow = (): ReactElement => {
           key={`${state.formationFormData.businessLocationType}-key`}
           value={state.formationFormData.businessLocationType}
           onChange={(event) => onChange(event.target.value as FlowBusinessLocationType)}
-          row={true}
+          row
         >
           <>
             <FormControlLabel
-              style={{ marginTop: ".75rem", alignItems: "flex-start", marginRight: "3rem" }}
+              style={{ alignItems: "center" }}
               labelPlacement="end"
               data-testid={"address-radio-us"}
               value={"US"}
-              control={<Radio color="primary" sx={{ paddingTop: "0px" }} />}
-              label={"US address"}
+              control={<Radio color="primary" />}
+              label={<div className="padding-y-1 margin-right-3">{"US address"}</div>}
             />
             <FormControlLabel
-              style={{ marginTop: ".75rem", alignItems: "flex-start", marginRight: "3rem" }}
+              style={{ alignItems: "center" }}
               labelPlacement="end"
               data-testid={"address-radio-intl"}
               value={"INTL"}
-              control={<Radio color="primary" sx={{ paddingTop: "0px" }} />}
-              label={"International address"}
+              control={<Radio color="primary" />}
+              label={<div className="padding-y-1 margin-right-3">{"International address"}</div>}
             />
           </>
         </RadioGroup>
