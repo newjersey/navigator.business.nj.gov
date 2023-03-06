@@ -128,6 +128,20 @@ const ProfilePage = (props: Props): ReactElement => {
     }
   }, userData);
 
+  const formatDate = (date: string) => {
+    if (!date) {
+      return "";
+    }
+
+    const dateIsValid = /^\d{2}\/\d{4}$/.test(date);
+
+    if (dateIsValid) {
+      return dayjs(date).format("MM/YYY");
+    } else {
+      return date;
+    }
+  };
+
   const onValidation = (field: ProfileFields, invalid: boolean) => {
     setFieldStates((prevFieldStates) => {
       return { ...prevFieldStates, [field]: { invalid } };
@@ -519,10 +533,7 @@ const ProfilePage = (props: Props): ReactElement => {
             <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
 
             {shouldLockFormationFields ? (
-              <LockedProfileField
-                fieldName="dateOfFormation"
-                valueFormatter={(date: string) => dayjs(date).format("MM/YYYY")}
-              />
+              <LockedProfileField fieldName="dateOfFormation" valueFormatter={formatDate} />
             ) : (
               <>
                 <FieldLabelProfile fieldName="dateOfFormation" />
@@ -530,7 +541,7 @@ const ProfilePage = (props: Props): ReactElement => {
                   onValidation={onValidation}
                   fieldStates={fieldStates}
                   futureAllowed={true}
-                  required
+                  valueFormatter={formatDate}
                 />
               </>
             )}
