@@ -26,6 +26,7 @@ interface Props {
   required?: boolean;
   disabled?: boolean;
   errorTextOverride?: string;
+  valueFormatter?: ((value: string) => string) | undefined;
 }
 
 export const OnboardingDateOfFormation = (props: Props): ReactElement => {

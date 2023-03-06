@@ -278,19 +278,6 @@ describe("profile", () => {
         expect(screen.queryByLabelText("Entity id")).not.toBeInTheDocument();
       });
 
-      it("locks dateOfFormation", () => {
-        renderPage({ userData });
-        chooseTab("numbers");
-        expect(
-          screen.getByText(Config.profileDefaults.fields.dateOfFormation.default.header)
-        ).toBeInTheDocument();
-        expect(
-          screen.queryByText(Config.profileDefaults.fields.dateOfFormation.default.description)
-        ).not.toBeInTheDocument();
-        expect(screen.getByText("01/2020")).toBeInTheDocument();
-        expect(screen.queryByLabelText("Date of formation")).not.toBeInTheDocument();
-      });
-
       it("locks legalStructure", () => {
         renderPage({ userData });
         expect(
@@ -325,19 +312,21 @@ describe("profile", () => {
         expect(getDateOfFormation()).toBe("01/2020");
       });
 
-      it("does not save when formation date is empty", async () => {
+      it("allows user to delete formation date in profile", async () => {
         const initialUserData = generateUserData({
-          profileData: generateProfileData({ businessPersona: "STARTING", dateOfFormation: "2020-01-01" }),
+          profileData: generateProfileData({
+            businessPersona: "STARTING",
+            dateOfFormation: "2017-10-01",
+          }),
         });
         const newark = generateMunicipality({ displayName: "Newark" });
         renderPage({ userData: initialUserData, municipalities: [newark] });
         chooseTab("numbers");
         fillText("Date of formation", "");
-
         clickSave();
-
+        expect(getDateOfFormation()).toBe("");
         await waitFor(() => {
-          expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
+          return expect(mockRouter.mockPush).toHaveBeenCalledWith(`${ROUTES.dashboard}?success=true`);
         });
       });
     });
