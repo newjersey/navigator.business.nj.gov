@@ -134,6 +134,14 @@
           "description": "Are you:"
         }
       },
+      "petCareHousing": {
+        "default": {
+          "header": "Petcare Services",
+          "radioButtonTrueText": "Yes",
+          "radioButtonFalseText": "No",
+          "description": "Will you house animals?"
+        }
+      },
       "ownershipTypeIds": {
         "default": {
           "header": "Business Ownership",
@@ -178,10 +186,16 @@
       },
       "isChildcareForSixOrMore": {
         "default": {
-          "header": "Childcare Services",
+          "header": "Childcare Center",
           "radioButtonTrueText": "Yes",
           "radioButtonFalseText": "No",
           "description": "Do you provide childcare services for 6 or more children in a dedicated space?"
+        }
+      },
+      "homeContractor": {
+        "default": {
+          "header": "",
+          "description": "`Learn what activities qualify as a Home Improvement Contractor|home-contractors-activities`"
         }
       },
       "willSellPetCareItems": {
@@ -189,12 +203,6 @@
           "radioButtonTrueText": "Yes",
           "radioButtonFalseText": "No",
           "description": "Will you sell pet care items?"
-        }
-      },
-      "homeContractor": {
-        "default": {
-          "header": "",
-          "description": "`Learn what activities qualify as a Home Improvement Contractor|home-contractors-activities`"
         }
       },
       "homeBasedBusiness": {
@@ -319,14 +327,6 @@
           "radioButtonTrueText": "Yes",
           "radioButtonFalseText": "No",
           "description": "Will you be driving your commercial vehicle across state lines?"
-        }
-      },
-      "petCareHousing": {
-        "default": {
-          "header": "Petcare Services",
-          "radioButtonTrueText": "Yes",
-          "radioButtonFalseText": "No",
-          "description": "Will you house animals?"
         }
       },
       "realEstateAppraisalManagement": {
