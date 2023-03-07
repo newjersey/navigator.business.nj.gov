@@ -9,7 +9,7 @@
     "deploy": "sls deploy",
     "dev": "yarn wiremock --root-dir ./wiremock --port 9000 & yarn start",
     "dependency-check": "yarn depcruise --config .dependency-cruiser.js src",
-    "install-dynamo-local": "sls dynamodb install",
+    "install-dynamo-local": "./scripts/dynamodb-local.sh",
     "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint . --max-warnings 0 --fix",
     "prettier": "prettier --write . --ignore-path=./.eslintignore",
