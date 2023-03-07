@@ -42,8 +42,11 @@ export const PriorityStatusCheckboxes = (props: Props): ReactElement => {
         <FormGroup>
           <FormControl variant="outlined" fullWidth>
             <FormControlLabel
-              className="margin-y-1"
-              label={<Content>{Config.cannabisApplyForLicense.diverselyOwnedLabel}</Content>}
+              label={
+                <div className="padding-y-1">
+                  <Content>{Config.cannabisApplyForLicense.diverselyOwnedLabel}</Content>
+                </div>
+              }
               control={
                 <Checkbox
                   name="diversely-owned-checkbox"
@@ -51,40 +54,43 @@ export const PriorityStatusCheckboxes = (props: Props): ReactElement => {
                     return handleCheckbox(event, "diverselyOwned");
                   }}
                   checked={props.priorityStatusState.diverselyOwned}
-                  sx={{ alignSelf: "start", paddingTop: "1px", paddingBottom: "0px", paddingLeft: "0px" }}
                   data-testid="diversely-owned-checkbox"
                 />
               }
             />
             <FormControlLabel
-              className="margin-y-1"
-              label={<Content>{Config.cannabisApplyForLicense.impactZoneLabel}</Content>}
+              label={
+                <div className="padding-y-1">
+                  <Content>{Config.cannabisApplyForLicense.impactZoneLabel}</Content>
+                </div>
+              }
               control={
                 <Checkbox
                   onChange={(event) => {
                     return handleCheckbox(event, "impactZone");
                   }}
                   checked={props.priorityStatusState.impactZone}
-                  sx={{ alignSelf: "start", paddingTop: "1px", paddingBottom: "0px", paddingLeft: "0px" }}
                   data-testid="impact-zone-checkbox"
                 />
               }
             />
             <FormControlLabel
-              className="margin-y-1"
-              label={<Content>{Config.cannabisApplyForLicense.sbeLabel}</Content>}
+              label={
+                <div className="padding-y-1">
+                  <Content>{Config.cannabisApplyForLicense.sbeLabel}</Content>
+                </div>
+              }
               control={
                 <Checkbox
                   onChange={(event) => {
                     return handleCheckbox(event, "socialEquity");
                   }}
                   checked={props.priorityStatusState.socialEquity}
-                  sx={{ alignSelf: "start", paddingTop: "1px", paddingBottom: "0px", paddingLeft: "0px" }}
                   data-testid="sbe-checkbox"
                 />
               }
             />
-          </FormControl>{" "}
+          </FormControl>
         </FormGroup>
       </ul>
 

@@ -142,22 +142,10 @@ const ListOrCheckbox = (props: any): ReactElement => {
     const checklistItemBody = [props.children[0].split("}")[1], ...props.children.slice(1)];
 
     return (
-      <div className="margin-y-2">
+      <div>
         <FormControlLabel
-          label={<>{checklistItemBody}</>}
-          control={
-            <TaskCheckbox
-              checklistItemId={checklistItemId}
-              checkboxProps={{
-                sx: {
-                  alignSelf: "start",
-                  paddingTop: "1px",
-                  paddingBottom: "0px",
-                  paddingLeft: "0px",
-                },
-              }}
-            />
-          }
+          label={<div className="padding-y-1">{checklistItemBody}</div>}
+          control={<TaskCheckbox checklistItemId={checklistItemId} />}
         />
       </div>
     );
