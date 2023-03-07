@@ -7,7 +7,7 @@ import {
   generateUser,
   generateUserData,
 } from "../../test/factories";
-import { determineAnnualFilingDate } from "../../test/helpers";
+import { generateAnnualFilings } from "../../test/helpers";
 import { BusinessNameClient } from "../domain/types";
 import { setupExpress } from "../libs/express";
 import { guestRouterFactory } from "./guestRouter";
@@ -49,7 +49,7 @@ describe("guestRouter", () => {
         ...postedUserData,
         taxFilingData: {
           ...postedUserData.taxFilingData,
-          filings: [{ identifier: "ANNUAL_FILING", dueDate: determineAnnualFilingDate("2021-03-01") }],
+          filings: generateAnnualFilings("2021-03-01"),
         },
       });
     });

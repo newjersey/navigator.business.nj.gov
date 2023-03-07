@@ -1,6 +1,6 @@
 import { LookupLegalStructureById } from "@shared/legalStructure";
 import { UserData } from "@shared/userData";
-import { calculateNextAnnualFilingDate } from "./calculateNextAnnualFilingDate";
+import { calculateNextAnnualFilingDates } from "./calculateNextAnnualFilingDates";
 
 export const getAnnualFilings = (userData: UserData) => {
   const filings = userData.taxFilingData.filings.filter((it) => {
@@ -16,10 +16,12 @@ export const getAnnualFilings = (userData: UserData) => {
   }
 
   if (userData.profileData.dateOfFormation && requiresPublicFiling) {
-    filings.push({
-      identifier: "ANNUAL_FILING",
-      dueDate: calculateNextAnnualFilingDate(userData.profileData.dateOfFormation),
-    });
+    filings.push(
+      ...calculateNextAnnualFilingDates(userData.profileData.dateOfFormation).map((dueDate: string) => ({
+        identifier: "ANNUAL_FILING",
+        dueDate,
+      }))
+    );
   }
 
   return {
