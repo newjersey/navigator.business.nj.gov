@@ -138,12 +138,15 @@ export const CannabisPriorityTypes = (props: Props): ReactElement => {
         <ul style={{ marginTop: 0 }}>
           <div className="margin-bottom-2">
             <FormControlLabel
-              label={Config.cannabisPriorityStatus.noPriorityStatusCheckboxText}
+              label={
+                <div className="padding-y-1">
+                  {Config.cannabisPriorityStatus.noPriorityStatusCheckboxText}
+                </div>
+              }
               control={
                 <Checkbox
                   onChange={handleNoneOfTheAboveCheckboxChange}
                   checked={!!userData?.taskItemChecklist[noneOfTheAbovePriorityId]}
-                  sx={{ alignSelf: "start", paddingTop: "1px", paddingBottom: "0px", paddingLeft: "0px" }}
                   data-testid="cannabis-priority-status-none"
                 />
               }
