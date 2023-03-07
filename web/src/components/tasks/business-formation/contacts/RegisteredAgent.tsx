@@ -188,7 +188,9 @@ export const RegisteredAgent = (): ReactElement => {
             <div data-testid="agent-name">
               <div className="margin-top-3 margin-bottom-1">
                 <FormControlLabel
-                  label={Config.formation.registeredAgent.sameContactCheckbox}
+                  label={
+                    <div className="padding-y-1">{Config.formation.registeredAgent.sameContactCheckbox}</div>
+                  }
                   control={
                     <Checkbox
                       checked={state.formationFormData.agentUseAccountInfo}
@@ -229,7 +231,11 @@ export const RegisteredAgent = (): ReactElement => {
               {state.formationFormData.businessLocationType == "NJ" && (
                 <div className="margin-bottom-1">
                   <FormControlLabel
-                    label={Config.formation.registeredAgent.sameAddressCheckbox}
+                    label={
+                      <div className="padding-y-1">
+                        {Config.formation.registeredAgent.sameAddressCheckbox}
+                      </div>
+                    }
                     control={
                       <Checkbox
                         checked={state.formationFormData.agentUseBusinessAddress}

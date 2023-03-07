@@ -62,20 +62,19 @@ export const OnboardingForeignBusinessType = (): ReactElement => {
             return (
               <FormControlLabel
                 key={id}
-                style={{ alignItems: "flex-start" }}
-                className="padding-y-1"
                 control={
-                  <div style={{ display: "table-cell", width: "42px" }}>
-                    <Checkbox
-                      name="foreign-business-type"
-                      value={id}
-                      style={{ paddingTop: 0, paddingBottom: 0 }}
-                      onChange={handleChange}
-                      checked={state.profileData.foreignBusinessTypeIds.includes(id)}
-                    />
+                  <Checkbox
+                    name="foreign-business-type"
+                    value={id}
+                    onChange={handleChange}
+                    checked={state.profileData.foreignBusinessTypeIds.includes(id)}
+                  />
+                }
+                label={
+                  <div className="padding-y-1">
+                    <Content>{(contentFromConfig.optionContent as Record<string, string>)[id]}</Content>
                   </div>
                 }
-                label={<Content>{(contentFromConfig.optionContent as Record<string, string>)[id]}</Content>}
               />
             );
           })}
