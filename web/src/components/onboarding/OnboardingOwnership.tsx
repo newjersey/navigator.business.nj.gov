@@ -56,7 +56,7 @@ export const OnboardingOwnership = (): ReactElement => {
               return (
                 <MenuItem key={ownership.id} value={ownership.id} data-testid={ownership.id}>
                   <Checkbox checked={state.profileData.ownershipTypeIds.includes(ownership.id)} />
-                  <ListItemText className="text-wrap" primary={ownership.name} />
+                  <ListItemText className="text-wrap padding-y-1" primary={ownership.name} />
                 </MenuItem>
               );
             })}

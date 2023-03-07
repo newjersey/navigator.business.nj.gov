@@ -29,33 +29,35 @@ export const FormationChooseNotifications = (): ReactElement => {
   };
 
   return (
-    <div className="margin-top-3 margin-bottom-2">
+    <div className="margin-top-3">
       <h3>{Config.formation.sections.notificationsHeader}</h3>
       <Content>{Config.formation.sections.notificationsDescription}</Content>
       <FormGroup>
         <FormControlLabel
-          style={{ display: "table" }}
           control={
-            <div style={{ display: "table-cell", width: "42px" }}>
-              <Checkbox
-                onChange={handleAnnualReportClick}
-                checked={state.formationFormData.annualReportNotification}
-              />
+            <Checkbox
+              onChange={handleAnnualReportClick}
+              checked={state.formationFormData.annualReportNotification}
+            />
+          }
+          label={
+            <div className="padding-y-1">
+              <Content>{Config.formation.fields.annualReportNotification.checkboxText}</Content>
             </div>
           }
-          label={<Content>{Config.formation.fields.annualReportNotification.checkboxText}</Content>}
         />
         <FormControlLabel
-          style={{ display: "table" }}
           control={
-            <div style={{ display: "table-cell", width: "42px" }}>
-              <Checkbox
-                onChange={handleCorpWatchClick}
-                checked={state.formationFormData.corpWatchNotification}
-              />
+            <Checkbox
+              onChange={handleCorpWatchClick}
+              checked={state.formationFormData.corpWatchNotification}
+            />
+          }
+          label={
+            <div className="padding-y-1">
+              <Content>{Config.formation.fields.corpWatchNotification.checkboxText}</Content>{" "}
             </div>
           }
-          label={<Content>{Config.formation.fields.corpWatchNotification.checkboxText}</Content>}
         />
       </FormGroup>
     </div>

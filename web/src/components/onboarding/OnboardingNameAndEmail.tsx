@@ -112,33 +112,27 @@ export const OnboardingNameAndEmail = (props: Props): ReactElement => {
       </div>
       <FormGroup>
         <FormControlLabel
-          style={{ display: "table" }}
-          label={Config.selfRegistration.newsletterCheckboxLabel}
+          label={<div className="padding-y-1">{Config.selfRegistration.newsletterCheckboxLabel}</div>}
           control={
-            <div style={{ display: "table-cell", width: "42px" }}>
-              <Checkbox
-                checked={state.user?.receiveNewsletter}
-                onChange={(event) => {
-                  return handleNewsletter(event.target.checked);
-                }}
-                id="newsletterCheckbox"
-              />
-            </div>
+            <Checkbox
+              checked={state.user?.receiveNewsletter}
+              onChange={(event) => {
+                return handleNewsletter(event.target.checked);
+              }}
+              id="newsletterCheckbox"
+            />
           }
         />
         <FormControlLabel
-          style={{ display: "table" }}
-          label={Config.selfRegistration.userTestingCheckboxLabel}
+          label={<div className="padding-y-1">{Config.selfRegistration.userTestingCheckboxLabel}</div>}
           control={
-            <div style={{ display: "table-cell", width: "42px" }}>
-              <Checkbox
-                checked={state.user?.userTesting}
-                onChange={(event) => {
-                  return handleUserTesting(event.target.checked);
-                }}
-                id="contactMeCheckbox"
-              />
-            </div>
+            <Checkbox
+              checked={state.user?.userTesting}
+              onChange={(event) => {
+                return handleUserTesting(event.target.checked);
+              }}
+              id="contactMeCheckbox"
+            />
           }
         />
       </FormGroup>

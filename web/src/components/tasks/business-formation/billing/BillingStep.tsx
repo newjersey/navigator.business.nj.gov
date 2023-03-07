@@ -64,7 +64,7 @@ export const BillingStep = (): ReactElement => {
       <PaymentTypeTable />
       <hr className="margin-top-4" />
       <FormationChooseNotifications />
-      <div className="margin-top-3">
+      <div className="margin-top-1">
         <Content>{Config.formation.general.paymentDisclaimer}</Content>
       </div>
     </div>

@@ -1,5 +1,4 @@
 import { Content } from "@/components/Content";
-import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
@@ -15,7 +14,7 @@ export default {
       url: "https://www.figma.com/file/vAa8neaM0JJSmldck5vlBC/BFS-Design-System-(Sprint-33%2B)?node-id=2845%3A6061&t=jco1GPB7R1gpl8cH-1",
     },
   },
-} as ComponentMeta<typeof PrimaryButton>;
+} as ComponentMeta<typeof Radio>;
 
 const longLabel =
   "Creating a label that wraps to over multiple lines, there is padding added around the label, the button is centered aligned";
