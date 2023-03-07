@@ -4,7 +4,7 @@ import {
   generateUser,
   generateUserData,
 } from "../../../test/factories";
-import { determineAnnualFilingDate } from "../../../test/helpers";
+import { generateAnnualFilings } from "../../../test/helpers";
 import { getAnnualFilings } from "./getAnnualFilings";
 
 describe("getAnnualFilings", () => {
@@ -27,7 +27,7 @@ describe("getAnnualFilings", () => {
       ...postedUserData,
       taxFilingData: {
         ...postedUserData.taxFilingData,
-        filings: [{ identifier: "ANNUAL_FILING", dueDate: determineAnnualFilingDate("2021-03-01") }],
+        filings: generateAnnualFilings("2021-03-01"),
       },
     });
   });
@@ -51,7 +51,7 @@ describe("getAnnualFilings", () => {
       ...postedUserData,
       taxFilingData: {
         ...postedUserData.taxFilingData,
-        filings: [{ identifier: "ANNUAL_FILING", dueDate: determineAnnualFilingDate("2021-03-01") }],
+        filings: generateAnnualFilings("2021-03-01"),
       },
     });
   });
@@ -75,7 +75,7 @@ describe("getAnnualFilings", () => {
       ...postedUserData,
       taxFilingData: {
         ...postedUserData.taxFilingData,
-        filings: [{ identifier: "ANNUAL_FILING", dueDate: determineAnnualFilingDate("2021-03-31") }],
+        filings: generateAnnualFilings("2021-03-31"),
       },
     });
   });

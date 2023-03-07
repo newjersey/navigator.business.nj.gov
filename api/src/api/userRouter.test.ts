@@ -14,7 +14,7 @@ import {
   generateUser,
   generateUserData,
 } from "../../test/factories";
-import { determineAnnualFilingDate, getLastCalledWith } from "../../test/helpers";
+import { generateAnnualFilings, getLastCalledWith } from "../../test/helpers";
 import { EncryptionDecryptionClient, UserDataClient } from "../domain/types";
 import { setupExpress } from "../libs/express";
 import { userRouterFactory } from "./userRouter";
@@ -257,9 +257,7 @@ describe("userRouter", () => {
       await request(app).post(`/users`).send(postedUserData).set("Authorization", "Bearer user-123-token");
 
       const taxFilingsPut = getLastCalledWith(stubUserDataClient.put)[0].taxFilingData.filings;
-      expect(taxFilingsPut).toEqual([
-        { identifier: "ANNUAL_FILING", dueDate: determineAnnualFilingDate("2021-03-01") },
-      ]);
+      expect(taxFilingsPut).toEqual(generateAnnualFilings("2021-03-01"));
     });
 
     it("clears taskChecklistItems if industry has changed", async () => {
