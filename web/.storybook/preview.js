@@ -1,7 +1,7 @@
 require("@newjersey/njwds/dist/css/styles.css");
 require("../src/styles/main.scss");
 const { createTheme, ThemeProvider } = require("@mui/material");
-const muiTheme = require("../src/lib/muiTheme");
+import muiTheme from "../src/lib/muiTheme.ts";
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -14,4 +14,4 @@ export const parameters = {
   },
 };
 
-export const decorators = [(Story) => <ThemeProvider theme={createTheme(muiTheme)}>{Story()}</ThemeProvider>];
+export const decorators = [(Story) => <ThemeProvider theme={muiTheme}>{Story()}</ThemeProvider>];
