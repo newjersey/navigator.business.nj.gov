@@ -2,8 +2,9 @@
 header: Socially and Economically Disadvantaged Individuals
 slug: socially-economically-disadvantaged
 ---
-**A socially disadvantaged individual** is a person subjected to racial or ethnic prejudice or cultural bias. Some groups are presumed to be socially disadvantaged. For certification purposes, those persons are women and members of the following groups: 
+For certification purposes, the New Jersey Department of Transporation defines **a socially disadvantaged individual** as an indvidual who identifies as: 
 
+* Women 
 * Black/African American
 * Hispanic/Latino
 * Native American
