@@ -257,7 +257,7 @@ describe("userRouter", () => {
       await request(app).post(`/users`).send(postedUserData).set("Authorization", "Bearer user-123-token");
 
       const taxFilingsPut = getLastCalledWith(stubUserDataClient.put)[0].taxFilingData.filings;
-      expect(taxFilingsPut).toEqual(generateAnnualFilings("2021-03-01"));
+      expect(taxFilingsPut).toEqual(generateAnnualFilings(["2023-03-31", "2024-03-31", "2025-03-31"]));
     });
 
     it("clears taskChecklistItems if industry has changed", async () => {
