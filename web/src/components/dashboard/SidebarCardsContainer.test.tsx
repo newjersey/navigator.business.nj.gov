@@ -91,6 +91,23 @@ describe("<SidebarCardsContainer />", () => {
       expect(screen.getByText("WelcomeCardContent")).toBeInTheDocument();
     });
 
+    it("renders the welcome-up-and-running card in the top card section", () => {
+      const sidebarCards = {
+        "welcome-up-and-running": generateSidebarCardContent({
+          id: "welcome-up-and-running",
+          contentMd: "WelcomeUpAndRunningCardContent",
+        }),
+      };
+
+      useMockUserData({
+        preferences: generatePreferences({ visibleSidebarCards: ["welcome-up-and-running"] }),
+      });
+
+      renderPage({ sidebarCards });
+      const topCardSection = screen.getByTestId("top-cards");
+      expect(within(topCardSection).getByTestId("welcome-up-and-running")).toBeInTheDocument();
+    });
+
     it("removes successful registration card when it's closed", async () => {
       const userData = generateUserData({
         preferences: generatePreferences({

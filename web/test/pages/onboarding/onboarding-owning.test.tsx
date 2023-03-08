@@ -2,6 +2,7 @@ import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { templateEval } from "@/lib/utils/helpers";
 import {
+  generatePreferences,
   generateProfileData,
   generateTaxFilingData,
   generateUser,
@@ -263,6 +264,32 @@ describe("onboarding - owning a business", () => {
       expect(currentUserData()).toEqual({
         ...initialUserData,
         taxFilingData: { ...taxData, filings: [] },
+      });
+    });
+  });
+
+  it("removes welcome and adds welcome-up-and-running to visibleSidebarCards preferences on save", async () => {
+    const initialUserData = generateUserData({
+      profileData: generateProfileData({
+        businessPersona: "OWNING",
+        operatingPhase: "GUEST_MODE_OWNING",
+      }),
+      preferences: generatePreferences({
+        visibleSidebarCards: ["welcome"],
+      }),
+    });
+    const { page } = renderPage({ userData: initialUserData });
+    expect(page.getRadioButton("Business Status - Owning")).toBeChecked();
+    await page.visitStep(2);
+    page.clickNext();
+
+    await waitFor(() => {
+      expect(currentUserData()).toEqual({
+        ...initialUserData,
+        preferences: {
+          ...initialUserData.preferences,
+          visibleSidebarCards: ["welcome-up-and-running"],
+        },
       });
     });
   });

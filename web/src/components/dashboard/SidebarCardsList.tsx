@@ -125,11 +125,11 @@ export const SidebarCardsList = (props: Props): ReactElement => {
       />
 
       <div className={`${scrollbar} desktop:margin-right-1`}>
-        <>
+        <div data-testid="top-cards">
           {props.topCards.map((card) => {
             return <SidebarCard card={card} key={card.id} />;
           })}
-        </>
+        </div>
         <div className="desktop:padding-right-105" data-testid="visible-opportunities">
           {props.displayCertifications &&
             props.certifications.map((cert) => {

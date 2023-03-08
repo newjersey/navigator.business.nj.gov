@@ -1,3 +1,4 @@
+import { OperatingPhaseId } from "@businessnjgovnavigator/shared";
 import { formationTaskId } from "@shared/domain-logic/taskIds";
 import { generatePreferences, generateProfileData, generateUserData } from "../../test/factories";
 import { updateSidebarCards } from "./updateSidebarCards";
@@ -123,6 +124,73 @@ describe("updateRoadmapSidebarCards", () => {
       });
       expect(updateSidebarCards(userData).preferences.visibleSidebarCards).not.toContain("funding-nudge");
     });
+  });
+
+  describe("welcome card", () => {
+    it("adds the welcome-up-and-running card when operating phase is UP_AND_RUNNING_OWNING and removes the welcome card", () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          operatingPhase: "UP_AND_RUNNING_OWNING",
+          industryId: "generic",
+        }),
+        preferences: generatePreferences({ visibleSidebarCards: ["welcome"] }),
+      });
+
+      const updatedUserData = updateSidebarCards(userData);
+      expect(updatedUserData.preferences.visibleSidebarCards).toContain("welcome-up-and-running");
+      expect(updatedUserData.preferences.visibleSidebarCards).not.toContain("welcome");
+    });
+
+    it("adds the welcome-up-and-running card when operating phase is UP_AND_RUNNING and removes the welcome card", () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          operatingPhase: "UP_AND_RUNNING",
+          industryId: "generic",
+        }),
+        preferences: generatePreferences({ visibleSidebarCards: ["welcome"] }),
+      });
+
+      const updatedUserData = updateSidebarCards(userData);
+      expect(updatedUserData.preferences.visibleSidebarCards).toContain("welcome-up-and-running");
+      expect(updatedUserData.preferences.visibleSidebarCards).not.toContain("welcome");
+    });
+
+    it("removes the welcome-up-and-running card and adds the welcome card back if the user reverts from UP_AND_RUNNING", () => {
+      const revertedUserData = generateUserData({
+        profileData: generateProfileData({
+          operatingPhase: "FORMED_AND_REGISTERED",
+          industryId: "generic",
+        }),
+        preferences: generatePreferences({ visibleSidebarCards: ["welcome-up-and-running"] }),
+      });
+
+      const updatedUserData = updateSidebarCards(revertedUserData);
+      expect(updatedUserData.preferences.visibleSidebarCards).not.toContain("welcome-up-and-running");
+      expect(updatedUserData.preferences.visibleSidebarCards).toContain("welcome");
+    });
+
+    const operatingPhases: OperatingPhaseId[] = [
+      "GUEST_MODE",
+      "GUEST_MODE_OWNING",
+      "NEEDS_TO_FORM",
+      "NEEDS_TO_REGISTER_FOR_TAXES",
+      "FORMED_AND_REGISTERED",
+    ];
+    for (const operatingPhase of operatingPhases) {
+      it(`doesn't remove the generic welcome card when operating phase is ${operatingPhase}`, () => {
+        const userData = generateUserData({
+          profileData: generateProfileData({
+            operatingPhase: operatingPhase,
+            industryId: "generic",
+          }),
+          preferences: generatePreferences({ visibleSidebarCards: ["welcome"] }),
+        });
+
+        const updatedUserData = updateSidebarCards(userData);
+        expect(updatedUserData.preferences.visibleSidebarCards).toContain("welcome");
+        expect(updatedUserData.preferences.visibleSidebarCards).not.toContain("welcome-up-and-running");
+      });
+    }
   });
 
   describe("when operatingPhase is UP_AND_RUNNING", () => {
