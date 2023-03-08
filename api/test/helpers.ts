@@ -1,9 +1,8 @@
 import { TaxFiling } from "@shared/taxFiling";
 import { createHmac } from "node:crypto";
-import { calculateNextAnnualFilingDates } from "../src/domain/annual-filings/calculateNextAnnualFilingDates";
 
-export const generateAnnualFilings = (dateOfFormation: string): TaxFiling[] => {
-  return calculateNextAnnualFilingDates(dateOfFormation).map((dueDate: string) => ({
+export const generateAnnualFilings = (dueDates: string[]): TaxFiling[] => {
+  return dueDates.map((dueDate: string) => ({
     identifier: "ANNUAL_FILING",
     dueDate,
   }));

@@ -49,7 +49,7 @@ describe("guestRouter", () => {
         ...postedUserData,
         taxFilingData: {
           ...postedUserData.taxFilingData,
-          filings: generateAnnualFilings("2021-03-01"),
+          filings: generateAnnualFilings(["2023-03-31", "2024-03-31", "2025-03-31"]),
         },
       });
     });
