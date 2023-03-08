@@ -19,7 +19,7 @@ describe("calculateNextAnnualFilingDates", () => {
       currentDateMock.mockReturnValue(dayjs("2021-10-05", defaultDateFormat));
     });
 
-    it("finds the next-year date for an earlier-this year date", () => {
+    it("finds the next 3 filing dates for an earlier-this year date", () => {
       expect(calculateNextAnnualFilingDates("2021-03-01")).toEqual([
         "2022-03-31",
         "2023-03-31",
@@ -27,7 +27,7 @@ describe("calculateNextAnnualFilingDates", () => {
       ]);
     });
 
-    it("finds the next-year date for a date from last year", () => {
+    it("finds the next 3 filing dates for a date from last year", () => {
       expect(calculateNextAnnualFilingDates("2020-06-01")).toEqual([
         "2022-06-30",
         "2023-06-30",
@@ -35,7 +35,7 @@ describe("calculateNextAnnualFilingDates", () => {
       ]);
     });
 
-    it("finds the next-year date for a much older formation date", () => {
+    it("finds the next 3 filing dates for a much older formation date", () => {
       expect(calculateNextAnnualFilingDates("2001-04-01")).toEqual([
         "2022-04-30",
         "2023-04-30",
@@ -43,7 +43,7 @@ describe("calculateNextAnnualFilingDates", () => {
       ]);
     });
 
-    it("finds the this-year date for a date later this year", () => {
+    it("finds the this 3 filing dates for a date later this year", () => {
       expect(calculateNextAnnualFilingDates("2020-11-01")).toEqual([
         "2021-11-30",
         "2022-11-30",
@@ -51,7 +51,7 @@ describe("calculateNextAnnualFilingDates", () => {
       ]);
     });
 
-    it("finds the next-year date for a date from this month this year", () => {
+    it("finds the next 3 filing dates for a date from this month this year", () => {
       expect(calculateNextAnnualFilingDates("2021-10-01")).toEqual([
         "2022-10-31",
         "2023-10-31",
@@ -59,7 +59,7 @@ describe("calculateNextAnnualFilingDates", () => {
       ]);
     });
 
-    it("finds the this-year date for a date from this month last year", () => {
+    it("finds the next 3 filing dates for a date from this month last year", () => {
       expect(calculateNextAnnualFilingDates("2020-10-01")).toEqual([
         "2021-10-31",
         "2022-10-31",
@@ -67,7 +67,7 @@ describe("calculateNextAnnualFilingDates", () => {
       ]);
     });
 
-    it("finds the this-year date for a much older formation date of this month", () => {
+    it("finds the next 3 filing dates for a much older formation date of this month", () => {
       expect(calculateNextAnnualFilingDates("2001-10-01")).toEqual([
         "2021-10-31",
         "2022-10-31",
@@ -75,7 +75,7 @@ describe("calculateNextAnnualFilingDates", () => {
       ]);
     });
 
-    it("finds the future-year date for a formation date in the future", () => {
+    it("finds the future 3 filing dates for a formation date in the future", () => {
       expect(calculateNextAnnualFilingDates("2030-08-29")).toEqual([
         "2031-08-31",
         "2032-08-31",
@@ -83,7 +83,7 @@ describe("calculateNextAnnualFilingDates", () => {
       ]);
     });
 
-    it("finds the next-year date for a formation date in a later month of the same year", () => {
+    it("finds the next 3 filing dates for a formation date in a later month of the same year", () => {
       expect(calculateNextAnnualFilingDates("2021-11-01")).toEqual([
         "2022-11-30",
         "2023-11-30",
@@ -97,7 +97,7 @@ describe("calculateNextAnnualFilingDates", () => {
       currentDateMock.mockReturnValue(dayjs("2021-10-31", defaultDateFormat));
     });
 
-    it("finds the next-year date for a date from this month this year", () => {
+    it("finds the next 3 filing dates for a date from this month this year", () => {
       expect(calculateNextAnnualFilingDates("2021-10-01")).toEqual([
         "2022-10-31",
         "2023-10-31",
@@ -105,7 +105,7 @@ describe("calculateNextAnnualFilingDates", () => {
       ]);
     });
 
-    it("finds the this-year date for a date from this month last year", () => {
+    it("finds the next 3 filing dates for a date from this month last year", () => {
       expect(calculateNextAnnualFilingDates("2020-10-01")).toEqual([
         "2021-10-31",
         "2022-10-31",
@@ -119,7 +119,7 @@ describe("calculateNextAnnualFilingDates", () => {
       currentDateMock.mockReturnValue(dayjs("2021-11-01", defaultDateFormat));
     });
 
-    it("finds the next-year date for a date from this month this year", () => {
+    it("finds the next 3 filing dates for a date from this month this year", () => {
       expect(calculateNextAnnualFilingDates("2021-11-01")).toEqual([
         "2022-11-30",
         "2023-11-30",
@@ -127,7 +127,7 @@ describe("calculateNextAnnualFilingDates", () => {
       ]);
     });
 
-    it("finds the this-year date for a date from last month last year", () => {
+    it("finds the next 3 filing dates for a date from last month last year", () => {
       expect(calculateNextAnnualFilingDates("2020-10-01")).toEqual([
         "2022-10-31",
         "2023-10-31",
