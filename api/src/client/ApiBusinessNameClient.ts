@@ -22,13 +22,13 @@ export const ApiBusinessNameClient = (baseUrl: string, logWriter: LogWriterType)
         if (response.data.Available) {
           responseStatus = "AVAILABLE";
         } else if (response.data.Reason.indexOf("business designators") > 0) {
-          responseStatus = "DESIGNATOR";
+          responseStatus = "DESIGNATOR_ERROR";
         } else if (response.data.Reason.indexOf("restricted word") > 0) {
-          responseStatus = "RESTRICTED";
+          responseStatus = "RESTRICTED_ERROR";
           invalidWord = (response.data.Reason.match(new RegExp(/'(.*?)'/g)) ?? [])[0]?.replaceAll("'", "");
         } else if (response.data.Reason.indexOf("invalid special character") > 0) {
           {
-            responseStatus = "SPECIAL_CHARACTER";
+            responseStatus = "SPECIAL_CHARACTER_ERROR";
           }
         } else {
           responseStatus = "UNAVAILABLE";

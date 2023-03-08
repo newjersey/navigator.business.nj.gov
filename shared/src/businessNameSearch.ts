@@ -1,9 +1,9 @@
 export type NameAvailabilityStatus =
   | "AVAILABLE"
-  | "DESIGNATOR"
-  | "SPECIAL_CHARACTER"
+  | "DESIGNATOR_ERROR"
+  | "SPECIAL_CHARACTER_ERROR"
   | "UNAVAILABLE"
-  | "RESTRICTED";
+  | "RESTRICTED_ERROR";
 
 export type NameAvailability = {
   status: NameAvailabilityStatus;

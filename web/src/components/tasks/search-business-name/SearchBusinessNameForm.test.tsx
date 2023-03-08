@@ -80,9 +80,9 @@ describe("<SearchBusinessNameForm />", () => {
     await searchAndGetValue({ status: "AVAILABLE" });
     expect(availableTextExists()).toBe(true);
     expect(unavailableTextExists()).toBe(false);
-    expect(designatorTextExists()).toBe(false);
-    expect(specialCharacterTextExists()).toBe(false);
-    expect(restrictedWordTextExists()).toBe(false);
+    expect(designatorErrorTextExists()).toBe(false);
+    expect(specialCharacterErrorTextExists()).toBe(false);
+    expect(restrictedWordErrorTextExists()).toBe(false);
     expect(onChange).toHaveBeenLastCalledWith(
       expect.objectContaining({
         status: "AVAILABLE",
@@ -109,44 +109,44 @@ describe("<SearchBusinessNameForm />", () => {
     await searchAndGetValue({ status: "UNAVAILABLE" });
     expect(availableTextExists()).toBe(false);
     expect(unavailableTextExists()).toBe(true);
-    expect(designatorTextExists()).toBe(false);
-    expect(specialCharacterTextExists()).toBe(false);
-    expect(restrictedWordTextExists()).toBe(false);
+    expect(designatorErrorTextExists()).toBe(false);
+    expect(specialCharacterErrorTextExists()).toBe(false);
+    expect(restrictedWordErrorTextExists()).toBe(false);
   });
 
-  it("shows designator text if name includes the designator", async () => {
+  it("shows designator error text if name includes the designator", async () => {
     renderForm();
     fillText("Pizza Joint LLC");
-    await searchAndGetValue({ status: "DESIGNATOR" });
+    await searchAndGetValue({ status: "DESIGNATOR_ERROR" });
     expect(availableTextExists()).toBe(false);
     expect(unavailableTextExists()).toBe(false);
-    expect(designatorTextExists()).toBe(true);
-    expect(specialCharacterTextExists()).toBe(false);
-    expect(restrictedWordTextExists()).toBe(false);
+    expect(designatorErrorTextExists()).toBe(true);
+    expect(specialCharacterErrorTextExists()).toBe(false);
+    expect(restrictedWordErrorTextExists()).toBe(false);
   });
 
-  it("shows special character text if name includes a special character", async () => {
+  it("shows special character error text if name includes a special character", async () => {
     renderForm();
     fillText("Pizza Joint LLC");
-    await searchAndGetValue({ status: "SPECIAL_CHARACTER" });
+    await searchAndGetValue({ status: "SPECIAL_CHARACTER_ERROR" });
     expect(availableTextExists()).toBe(false);
     expect(unavailableTextExists()).toBe(false);
-    expect(designatorTextExists()).toBe(false);
-    expect(specialCharacterTextExists()).toBe(true);
-    expect(restrictedWordTextExists()).toBe(false);
+    expect(designatorErrorTextExists()).toBe(false);
+    expect(specialCharacterErrorTextExists()).toBe(true);
+    expect(restrictedWordErrorTextExists()).toBe(false);
   });
 
-  it("shows restricted word text if name includes a restricted word", async () => {
+  it("shows restricted word error text if name includes a restricted word", async () => {
     renderForm();
     fillText("Pizza Joint LLC");
-    await searchAndGetValue({ status: "RESTRICTED", invalidWord: "JOINT" });
+    await searchAndGetValue({ status: "RESTRICTED_ERROR", invalidWord: "JOINT" });
     expect(availableTextExists()).toBe(false);
     expect(unavailableTextExists()).toBe(false);
-    expect(designatorTextExists()).toBe(false);
-    expect(specialCharacterTextExists()).toBe(false);
-    expect(restrictedWordTextExists()).toBe(true);
+    expect(designatorErrorTextExists()).toBe(false);
+    expect(specialCharacterErrorTextExists()).toBe(false);
+    expect(restrictedWordErrorTextExists()).toBe(true);
     expect(
-      within(screen.getByTestId("restricted-word-text")).getByText("JOINT", { exact: false })
+      within(screen.getByTestId("restricted-word-error-text")).getByText("JOINT", { exact: false })
     ).toBeInTheDocument();
   });
 
@@ -186,13 +186,13 @@ describe("<SearchBusinessNameForm />", () => {
   const unavailableTextExists = () => {
     return screen.queryByText(unavailableText) !== null;
   };
-  const designatorTextExists = () => {
-    return screen.queryByTestId("designator-text") !== null;
+  const designatorErrorTextExists = () => {
+    return screen.queryByTestId("designator-error-text") !== null;
   };
-  const specialCharacterTextExists = () => {
-    return screen.queryByTestId("special-character-text") !== null;
+  const specialCharacterErrorTextExists = () => {
+    return screen.queryByTestId("special-character-error-text") !== null;
   };
-  const restrictedWordTextExists = () => {
-    return screen.queryByTestId("restricted-word-text") !== null;
+  const restrictedWordErrorTextExists = () => {
+    return screen.queryByTestId("restricted-word-error-text") !== null;
   };
 });

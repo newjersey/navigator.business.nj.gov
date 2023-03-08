@@ -258,7 +258,7 @@ describe("<BusinessFormationPaginator />", () => {
           const page = preparePage(initialUserData, displayContent);
           await page.stepperClickToBusinessNameStep();
           page.fillText("Search business name", "Pizza Joint LLC");
-          await page.searchBusinessName({ status: "DESIGNATOR" });
+          await page.searchBusinessName({ status: "DESIGNATOR_ERROR" });
           switchStepFunction();
           expect(currentUserData().profileData.businessName).toEqual(
             initialUserData.profileData.businessName
@@ -396,7 +396,7 @@ describe("<BusinessFormationPaginator />", () => {
       it("marks step one as error if business name search returns an error response status", async () => {
         const page = preparePage(initialUserData, displayContent);
         page.fillText("Search business name", "Pizza Joint LLC");
-        await page.searchBusinessName({ status: "DESIGNATOR" });
+        await page.searchBusinessName({ status: "DESIGNATOR_ERROR" });
         switchStepFunction();
         expect(page.getStepStateInStepper(LookupStepIndexByName("Name"))).toEqual("ERROR");
       });

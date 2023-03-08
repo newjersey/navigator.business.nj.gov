@@ -39,7 +39,7 @@ describe("ApiBusinessNameClient", () => {
     };
     mockAxios.get.mockResolvedValue({ data: mockResponse });
     expect(await client.search("name")).toEqual({
-      status: "DESIGNATOR",
+      status: "DESIGNATOR_ERROR",
       similarNames: [],
     });
     expect(mockAxios.get).toHaveBeenCalledWith("www.example.com/Available?q=name");
@@ -53,7 +53,7 @@ describe("ApiBusinessNameClient", () => {
     };
     mockAxios.get.mockResolvedValue({ data: mockResponse });
     expect(await client.search("name")).toEqual({
-      status: "RESTRICTED",
+      status: "RESTRICTED_ERROR",
       invalidWord: "thingy",
       similarNames: [],
     });
@@ -68,7 +68,7 @@ describe("ApiBusinessNameClient", () => {
     };
     mockAxios.get.mockResolvedValue({ data: mockResponse });
     expect(await client.search("name")).toEqual({
-      status: "SPECIAL_CHARACTER",
+      status: "SPECIAL_CHARACTER_ERROR",
       similarNames: [],
     });
     expect(mockAxios.get).toHaveBeenCalledWith("www.example.com/Available?q=name");
