@@ -2,9 +2,9 @@
 header: Socially and Economically Disadvantaged Individuals
 slug: socially-economically-disadvantaged
 ---
-For certification purposes, the New Jersey Department of Transporation defines **a socially disadvantaged individual** as an indvidual who identifies as: 
+For certification purposes, the New Jersey Department of Transporation defines a socially disadvantaged individual as an indvidual who self-identifies as: 
 
-* Women 
+* A women 
 * Black/African American
 * Hispanic/Latino
 * Native American
@@ -13,7 +13,7 @@ For certification purposes, the New Jersey Department of Transporation defines *
 * Pacific Islander
 * Native Hawaiian
 
-Other persons who are not members of these groups may provide evidence of social disadvantage. These applications are evaluated on a case-by-case basis, and must include all the following elements:
+Indviduals who do not identify as any of the above may provide evidence of social disadvantage. These applications are evaluated on a case-by-case basis, and must include all the following elements:
 
 * At least one, objective distinguishing feature that has contributed to social disadvantage
 * Personal experiences of substantial and chronic social disadvantage in American society
