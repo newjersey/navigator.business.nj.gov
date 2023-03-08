@@ -74,7 +74,7 @@ export const SidebarCardsContainer = (props: Props): ReactElement => {
         })
     : [];
 
-  const topCardIds = new Set(["funding-nudge"]);
+  const topCardIds = new Set(["funding-nudge", "welcome-up-and-running"]);
   const getTopCards = () => {
     return visibleCardsOrderedByWeight.filter((card) => {
       return topCardIds.has(card.id);

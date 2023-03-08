@@ -364,6 +364,18 @@ const OnboardingPage = (props: Props): ReactElement => {
             : [...newUserData.preferences.visibleSidebarCards, "task-progress"],
       };
 
+      if (newProfileData.operatingPhase === "GUEST_MODE_OWNING") {
+        newPreferencesData.visibleSidebarCards = newPreferencesData.visibleSidebarCards.filter(
+          (cardId: string) => {
+            return cardId !== "welcome";
+          }
+        );
+        newPreferencesData.visibleSidebarCards = [
+          ...newPreferencesData.visibleSidebarCards,
+          "welcome-up-and-running",
+        ];
+      }
+
       const updatedUserData = {
         ...newUserData,
         preferences: newPreferencesData,
