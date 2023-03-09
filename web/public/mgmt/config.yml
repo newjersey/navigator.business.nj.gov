@@ -782,6 +782,7 @@ collections:
                   - { label: "Generic API error", name: "genericApiError", widget: "string" }
                   - { label: "Error on individual step page", name: "errorOnStep", widget: "string" }
                   - { label: "Error on review page", name: "incompleteStepsError", widget: "string" }
+                  - { label: "API error - resubmit text", name: "apiResubmitText", widget: "string" }
               - label: Legal Structure
                 name: legalStructure
                 collapsed: true

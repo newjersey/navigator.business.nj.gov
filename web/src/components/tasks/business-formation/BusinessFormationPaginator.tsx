@@ -1,5 +1,4 @@
 import { AutosaveSpinner } from "@/components/AutosaveSpinner";
-import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { HorizontalStepper } from "@/components/njwds-extended/HorizontalStepper";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
@@ -392,16 +391,14 @@ export const BusinessFormationPaginator = (): ReactElement => {
             {userData.formationData.formationResponse.errors.map((it) => {
               return (
                 <li key={it.field}>
-                  {it.field}
-                  <ul>
-                    <li>
-                      <Content>{it.message}</Content>
-                    </li>
-                  </ul>
+                  <span>{it.field}</span>
+                  <span>{": "}</span>
+                  <span>{it.message}</span>
                 </li>
               );
             })}
           </ul>
+          <div>{Config.formation.errorBanner.apiResubmitText}</div>
         </Alert>
       );
     }
