@@ -427,7 +427,7 @@
       },
       "addressZipCode": {
         "fieldDisplayName": "Zip Code",
-        "label": "**Zip Codes**",
+        "label": "**Zip Code**",
         "error": "Enter a Zip Code."
       }
     },
