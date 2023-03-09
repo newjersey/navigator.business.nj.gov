@@ -417,7 +417,8 @@
     "errorBanner": {
       "genericApiError": "Review the information in the fields below for errors:",
       "errorOnStep": "Review the information in the fields below for errors or omissions:",
-      "incompleteStepsError": "Check the steps below for missing information or errors:"
+      "incompleteStepsError": "Check the steps below for missing information or errors:",
+      "apiResubmitText": "After you make the correction, resubmit the form."
     },
     "legalStructure": {
       "limited-liability-company": "LLC",
