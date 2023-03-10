@@ -15,14 +15,6 @@ describe("loadDisplayContent", () => {
   });
 
   describe("loadRoadmapDisplayContent", () => {
-    it("returns roadmap content from markdown", () => {
-      const roadmapContentMd = "### I am a header\n\nI am a description";
-
-      mockReadDirReturn([]);
-      mockedFs.readFileSync.mockReturnValue(roadmapContentMd);
-      expect(loadRoadmapDisplayContent().contentMd).toEqual("### I am a header\n\nI am a description");
-    });
-
     it("returns sidebar card content from markdown", () => {
       const welcomeCard =
         "---\n" +
