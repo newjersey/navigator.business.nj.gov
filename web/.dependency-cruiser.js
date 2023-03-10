@@ -364,7 +364,7 @@ module.exports = {
         "add an exception for it in your dependency-cruiser configuration. By default " +
         "this rule does not scrutinize dotfiles (e.g. .eslintrc.js), TypeScript declaration " +
         "files (.d.ts), tsconfig.json and some of the babel and webpack configs.",
-      severity: "warn",
+      severity: "error",
       from: {
         orphan: true,
         pathNot: [
@@ -382,7 +382,7 @@ module.exports = {
       comment:
         "A module depends on a node core module that has been deprecated. Find an alternative - these are " +
         "bound to exist - node doesn't deprecate lightly.",
-      severity: "warn",
+      severity: "error",
       from: {},
       to: {
         dependencyTypes: ["core"],
@@ -415,7 +415,7 @@ module.exports = {
       comment:
         "This module uses a (version of an) npm module that has been deprecated. Either upgrade to a later " +
         "version of that module, or find an alternative. Deprecated modules are a security risk.",
-      severity: "warn",
+      severity: "error",
       from: {},
       to: {
         dependencyTypes: ["deprecated"],
@@ -452,7 +452,7 @@ module.exports = {
         "Likeley this module depends on an external ('npm') package that occurs more than once " +
         "in your package.json i.e. bot as a devDependencies and in dependencies. This will cause " +
         "maintenance problems later on.",
-      severity: "warn",
+      severity: "error",
       from: {},
       to: {
         moreThanOneDependencyType: true,
@@ -514,7 +514,7 @@ module.exports = {
         "in your package.json. This makes sense if your package is e.g. a plugin, but in " +
         "other cases - maybe not so much. If the use of a peer dependency is intentional " +
         "add an exception to your dependency-cruiser configuration.",
-      severity: "warn",
+      severity: "error",
       from: {},
       to: {
         dependencyTypes: ["npm-peer"],
