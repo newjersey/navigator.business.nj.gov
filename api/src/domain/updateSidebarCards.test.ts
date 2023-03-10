@@ -1,5 +1,5 @@
-import { OperatingPhaseId } from "@businessnjgovnavigator/shared";
 import { formationTaskId } from "@shared/domain-logic/taskIds";
+import { OperatingPhaseId } from "@shared/operatingPhase";
 import { generatePreferences, generateProfileData, generateUserData } from "../../test/factories";
 import { updateSidebarCards } from "./updateSidebarCards";
 
