@@ -11,19 +11,10 @@ import path from "path";
 
 const displayContentDir = path.join(process.cwd(), "..", "content", "src", "display-content");
 
-export const loadRoadmapDisplayContent = (): RoadmapDisplayContent => {
-  const roadmapContents = fs.readFileSync(path.join(displayContentDir, "roadmap", "roadmap.md"), "utf8");
-
-  return {
-    contentMd: getMarkdown(roadmapContents).content,
-    sidebarDisplayContent: loadSidebarDisplayContent(),
-  };
-};
-
-const loadSidebarDisplayContent = (): Record<string, SidebarCardContent> => {
+export const loadRoadmapSideBarDisplayContent = (): RoadmapDisplayContent => {
   const fileNames = fs.readdirSync(path.join(displayContentDir, "roadmap-sidebar-cards"));
 
-  return fileNames.reduce((acc, cur) => {
+  const sideBarDisplayContent = fileNames.reduce((acc, cur) => {
     const fileContents: string = fs.readFileSync(
       path.join(displayContentDir, "roadmap-sidebar-cards", cur),
       "utf8"
@@ -35,6 +26,10 @@ const loadSidebarDisplayContent = (): Record<string, SidebarCardContent> => {
     };
     return { ...acc, [displayContent.id]: displayContent };
   }, {} as Record<string, SidebarCardContent>);
+
+  return {
+    sidebarDisplayContent: sideBarDisplayContent,
+  };
 };
 
 const getDbaTasks = (): FormationDbaContent => {
