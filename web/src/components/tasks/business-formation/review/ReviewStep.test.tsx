@@ -253,7 +253,7 @@ describe("Formation - ReviewStep", () => {
     expect(screen.getByText("provision1")).toBeInTheDocument();
     expect(screen.getByText("provision2")).toBeInTheDocument();
     expect(
-      screen.getAllByText(Config.formation.fields.provisions.reviewStepSubheader, { exact: false })
+      screen.getAllByText(Config.formation.fields.provisions.secondaryLabel, { exact: false })
     ).toHaveLength(2);
   });
 
@@ -274,9 +274,7 @@ describe("Formation - ReviewStep", () => {
 
   it("displays different titles when legalStructure is an llc", async () => {
     await renderStep({ legalStructureId: "limited-liability-company" }, {});
-    expect(
-      screen.getByText(markdownToText(Config.formation.fields.members.reviewStepHeader))
-    ).toBeInTheDocument();
+    expect(screen.getByText(markdownToText(Config.formation.fields.members.label))).toBeInTheDocument();
     expect(
       screen.getByText(markdownToText(Config.formation.fields.signers.reviewStepHeader))
     ).toBeInTheDocument();
@@ -287,9 +285,7 @@ describe("Formation - ReviewStep", () => {
       { businessPersona: "STARTING", legalStructureId: "limited-liability-company" },
       { signers: [generateFormationSigner({ name: "The Dude", title: "Authorized Partner" })] }
     );
-    expect(
-      screen.queryByText(markdownToText(Config.formation.fields.signers.reviewStepTitleLabel))
-    ).not.toBeInTheDocument();
+    expect(screen.queryByText(Config.formation.fields.signers.titleLabel)).not.toBeInTheDocument();
     expect(screen.queryByText("Authorized Partner", { exact: false })).not.toBeInTheDocument();
   });
 
@@ -298,9 +294,7 @@ describe("Formation - ReviewStep", () => {
       { businessPersona: "FOREIGN", legalStructureId: "limited-liability-company" },
       { signers: [generateFormationSigner({ name: "The Dude", title: "Authorized Partner" })] }
     );
-    expect(
-      screen.getByText(markdownToText(Config.formation.fields.signers.reviewStepTitleLabel))
-    ).toBeInTheDocument();
+    expect(screen.getByText(Config.formation.fields.signers.titleLabel)).toBeInTheDocument();
     expect(screen.getByText("Authorized Partner", { exact: false })).toBeInTheDocument();
   });
 
@@ -314,21 +308,19 @@ describe("Formation - ReviewStep", () => {
 
     it("displays withdrawals on review step", async () => {
       await renderStep({ legalStructureId }, { withdrawals: "withdrawl stuff" });
-      expect(screen.getByText(Config.formation.fields.withdrawals.reviewStepLabel)).toBeInTheDocument();
+      expect(screen.getByText(Config.formation.fields.withdrawals.label)).toBeInTheDocument();
       expect(screen.getByText("withdrawl stuff")).toBeInTheDocument();
     });
 
     it("displays dissolution on review step", async () => {
       await renderStep({ legalStructureId }, { dissolution: "dissolution stuff" });
-      expect(screen.getByText(Config.formation.fields.dissolution.reviewStepLabel)).toBeInTheDocument();
+      expect(screen.getByText(Config.formation.fields.dissolution.label)).toBeInTheDocument();
       expect(screen.getByText("dissolution stuff")).toBeInTheDocument();
     });
 
     it("displays combined-investment on review step", async () => {
       await renderStep({ legalStructureId }, { combinedInvestment: "combinedInvestment stuff" });
-      expect(
-        screen.getByText(Config.formation.fields.combinedInvestment.reviewStepLabel)
-      ).toBeInTheDocument();
+      expect(screen.getByText(Config.formation.fields.combinedInvestment.label)).toBeInTheDocument();
       expect(screen.getByText("combinedInvestment stuff")).toBeInTheDocument();
     });
 
@@ -345,7 +337,7 @@ describe("Formation - ReviewStep", () => {
         }
       );
       const getByMarkup = withMarkup(screen.getByText);
-      expect(screen.getByText(Config.formation.partnershipRights.reviewStepHeader)).toBeInTheDocument();
+      expect(screen.getByText(Config.formation.partnershipRights.label)).toBeInTheDocument();
       expect(
         getByMarkup(markdownToText(Config.formation.fields.canCreateLimitedPartner.reviewStepYes))
       ).toBeInTheDocument();
@@ -382,24 +374,22 @@ describe("Formation - ReviewStep", () => {
           makeDistributionTerms: "make distro terms",
         }
       );
-      expect(screen.queryByText(Config.formation.partnershipRights.reviewStepHeader)).not.toBeInTheDocument();
+      expect(screen.queryByText(Config.formation.partnershipRights.label)).not.toBeInTheDocument();
     });
 
     it("does not display withdrawals on review step", async () => {
       await renderStep({ legalStructureId }, { withdrawals: "withdrawl stuff" });
-      expect(screen.queryByText(Config.formation.fields.withdrawals.reviewStepLabel)).not.toBeInTheDocument();
+      expect(screen.queryByText(Config.formation.fields.withdrawals.label)).not.toBeInTheDocument();
     });
 
     it("does not display dissolution on review step", async () => {
       await renderStep({ legalStructureId }, { dissolution: "dissolution stuff" });
-      expect(screen.queryByText(Config.formation.fields.dissolution.reviewStepLabel)).not.toBeInTheDocument();
+      expect(screen.queryByText(Config.formation.fields.dissolution.label)).not.toBeInTheDocument();
     });
 
     it("does not display combined-investment on review step", async () => {
       await renderStep({ legalStructureId }, { combinedInvestment: "combinedInvestment stuff" });
-      expect(
-        screen.queryByText(Config.formation.fields.combinedInvestment.reviewStepLabel)
-      ).not.toBeInTheDocument();
+      expect(screen.queryByText(Config.formation.fields.combinedInvestment.label)).not.toBeInTheDocument();
     });
   });
 
@@ -447,8 +437,8 @@ describe("Formation - ReviewStep", () => {
           certificateOfStanding: false,
         }
       );
-      const formationDocLabel = Config.formation.fields.officialFormationDocument.reviewStepLabel;
-      const certifiedCopyLabel = Config.formation.fields.certifiedCopyOfFormationDocument.reviewStepLabel;
+      const formationDocLabel = Config.formation.fields.officialFormationDocument.label;
+      const certifiedCopyLabel = Config.formation.fields.certifiedCopyOfFormationDocument.label;
       expect(screen.getByText(`${formationDocLabel}, ${certifiedCopyLabel}`)).toBeInTheDocument();
     });
   });

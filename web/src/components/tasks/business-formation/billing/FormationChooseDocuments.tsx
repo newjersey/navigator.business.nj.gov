@@ -1,4 +1,4 @@
-import { Content } from "@/components/Content";
+import { ContextualInfoButton } from "@/components/ContextualInfoButton";
 import { getCost } from "@/components/tasks/business-formation/billing/getCost";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -78,7 +78,10 @@ export const FormationChooseDocuments = (): ReactElement => {
                 htmlFor="officialFormationDocument"
                 className={"text-primary-dark text-bold"}
               >
-                <Content>{Config.formation.fields.officialFormationDocument.label}</Content>
+                <ContextualInfoButton
+                  text={Config.formation.fields.officialFormationDocument.label}
+                  id={Config.formation.fields.officialFormationDocument.labelContextualInfo}
+                />
               </label>
             </td>
             <td className={"text-primary-dark text-bold"}>{getDollarValue(officialFormationCost)}</td>
@@ -102,14 +105,17 @@ export const FormationChooseDocuments = (): ReactElement => {
                 data-testid="certificateOfStanding"
                 className="display-inline-flex fww"
               >
-                <Content
+                <div
                   className={
                     state.formationFormData.certificateOfStanding ? "text-primary-dark text-bold" : ""
                   }
                 >
-                  {Config.formation.fields.certificateOfStanding.label}
-                </Content>
-                &nbsp;{Config.formation.general.optionalLabel}
+                  <ContextualInfoButton
+                    text={Config.formation.fields.certificateOfStanding.label}
+                    id={Config.formation.fields.certificateOfStanding.labelContextualInfo}
+                  />
+                </div>
+                <span className="margin-left-05">{Config.formation.general.optionalLabel}</span>
               </label>
             </td>
             <td
@@ -137,16 +143,19 @@ export const FormationChooseDocuments = (): ReactElement => {
                 htmlFor="certifiedCopyOfFormationDocument"
                 className="display-inline-flex fww"
               >
-                <Content
+                <div
                   className={
                     state.formationFormData.certifiedCopyOfFormationDocument
                       ? "text-primary-dark text-bold"
                       : ""
                   }
                 >
-                  {Config.formation.fields.certifiedCopyOfFormationDocument.label}
-                </Content>
-                &nbsp;{Config.formation.general.optionalLabel}
+                  <ContextualInfoButton
+                    text={Config.formation.fields.certifiedCopyOfFormationDocument.label}
+                    id={Config.formation.fields.certifiedCopyOfFormationDocument.labelContextualInfo}
+                  />
+                </div>
+                <span className="margin-left-05">{Config.formation.general.optionalLabel}</span>
               </label>
             </td>
             <td

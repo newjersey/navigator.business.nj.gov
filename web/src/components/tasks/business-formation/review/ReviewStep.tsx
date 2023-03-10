@@ -33,14 +33,14 @@ export const ReviewStep = (): ReactElement => {
         <ReviewMainBusinessLocation />
         {isLP && (
           <ReviewText
-            header={Config.formation.fields.combinedInvestment.reviewStepLabel}
+            header={Config.formation.fields.combinedInvestment.label}
             fieldName={"combinedInvestment"}
             stepName={"Business"}
           />
         )}
         {isLP && (
           <ReviewText
-            header={Config.formation.fields.withdrawals.reviewStepLabel}
+            header={Config.formation.fields.withdrawals.label}
             fieldName={"withdrawals"}
             stepName={"Business"}
           />
@@ -48,7 +48,7 @@ export const ReviewStep = (): ReactElement => {
         {isLP && <ReviewPartnership />}
         {isLP && (
           <ReviewText
-            header={Config.formation.fields.dissolution.reviewStepLabel}
+            header={Config.formation.fields.dissolution.label}
             fieldName={"dissolution"}
             stepName={"Business"}
           />
@@ -56,7 +56,7 @@ export const ReviewStep = (): ReactElement => {
         {hasProvisions && <ReviewProvisions />}
         {hasPurpose && (
           <ReviewText
-            header={Config.formation.fields.businessPurpose.reviewStepLabel}
+            header={Config.formation.fields.businessPurpose.label}
             fieldName={"businessPurpose"}
             stepName={"Business"}
           />

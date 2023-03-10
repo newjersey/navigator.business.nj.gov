@@ -46,7 +46,7 @@ export const MainBusinessAddressNj = (): ReactElement => {
           type="MOBILE-ONLY"
           className=" orm-input grid-col-5 tablet:grid-col-2"
         >
-          <Content>{Config.formation.fields.addressState.label}</Content>
+          <b>{Config.formation.fields.addressState.label}</b>
           <StateDropdown
             fieldName="addressState"
             value={"New Jersey"}

@@ -189,7 +189,9 @@ export const Signatures = (): ReactElement => {
     return (
       <>
         {!isTabletAndUp && (
-          <Content className={"margin-bottom-1"}>{Config.formation.fields.signers.titleLabel}</Content>
+          <div className="margin-bottom-1">
+            <b>{Config.formation.fields.signers.titleLabel}</b>
+          </div>
         )}
 
         <Select
@@ -246,7 +248,9 @@ export const Signatures = (): ReactElement => {
     return (
       <>
         {!isTabletAndUp && index !== 0 && (
-          <Content className="margin-bottom-1">{Config.formation.fields.signers.nameLabel}</Content>
+          <div className="margin-bottom-1">
+            <b>{Config.formation.fields.signers.nameLabel}</b>
+          </div>
         )}
         <GenericTextField
           noValidationMargin
@@ -290,7 +294,7 @@ export const Signatures = (): ReactElement => {
   return (
     <>
       <div className="grid-col">
-        <h3>{Config.formation.fields.signers.header}</h3>
+        <h3>{Config.formation.fields.signers.label}</h3>
         <Content>{getDescription()}</Content>
         <div className={`grid-row margin-y-2 flex-align-start`}>
           <div className={`grid-col`} data-testid="signers-0">
@@ -303,7 +307,7 @@ export const Signatures = (): ReactElement => {
                 <div className="grid-col">
                   <div className="grid-row margin-top-1">
                     <div className={`grid-col-12 ${needsSignerType ? "tablet:grid-col-6" : ""}`}>
-                      <Content>{Config.formation.fields.signers.nameLabel}</Content>
+                      <b>{Config.formation.fields.signers.nameLabel}</b>
                       {getSignatureField(0)}
                     </div>
                     {needsSignerType && (
@@ -315,7 +319,7 @@ export const Signatures = (): ReactElement => {
                   </div>
                 </div>
                 <div className="margin-top-1" style={{ marginBottom: "1em" }}>
-                  <Content>{`${Config.formation.fields.signers.signColumnLabel}*`}</Content>
+                  <b>{`${Config.formation.fields.signers.signColumnLabel}`}</b>
                   {renderSignatureColumn({
                     index: 0,
                   })}

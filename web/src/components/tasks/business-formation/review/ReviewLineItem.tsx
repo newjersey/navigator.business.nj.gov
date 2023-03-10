@@ -1,10 +1,12 @@
 import { Content } from "@/components/Content";
+import { ContextualInfoButton } from "@/components/ContextualInfoButton";
 import { MediaQueries } from "@/lib/PageSizes";
 import { useMediaQuery } from "@mui/material";
 import { ReactElement } from "react";
 
 interface Props {
   label: string;
+  labelContextualInfo?: string;
   value: string;
   dataTestId?: string;
   marginOverride?: string;
@@ -21,7 +23,11 @@ export const ReviewLineItem = (props: Props): ReactElement => {
       data-testid={props.dataTestId}
     >
       <div className="text-bold width-11rem">
-        <Content>{props.label}</Content>
+        {props.labelContextualInfo ? (
+          <ContextualInfoButton text={props.label} id={props.labelContextualInfo} />
+        ) : (
+          props.label
+        )}
       </div>
       <Content>{props.value}</Content>
     </div>

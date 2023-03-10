@@ -18,7 +18,7 @@ export const ReviewPartnership = () => {
     );
   };
 
-  const displayPartnershipAnswer = (config: {
+  const displayPartnershipAnswer = (params: {
     radioData: boolean | undefined;
     termsData: string;
     questionText: string;
@@ -27,15 +27,16 @@ export const ReviewPartnership = () => {
   }): ReactElement => {
     return (
       <>
-        {config.radioData === undefined ? (
-          notEnteredText(config.questionText)
+        {params.radioData === undefined ? (
+          notEnteredText(params.questionText)
         ) : (
-          <Content className="margin-bottom-2">{config.radioData ? config.yesBody : config.noBody}</Content>
+          <Content className="margin-bottom-2">{params.radioData ? params.yesBody : params.noBody}</Content>
         )}
-        {config.radioData && (
-          <Content className="margin-left-4">
-            {`${Config.formation.partnershipRights.reviewStepTermsLabel} ${config.termsData}`}
-          </Content>
+        {params.radioData && (
+          <div className="margin-left-4">
+            <i>{Config.formation.partnershipRights.reviewStepTermsLabel}</i>
+            <span className="margin-left-1">{params.termsData}</span>
+          </div>
         )}
       </>
     );
@@ -44,7 +45,7 @@ export const ReviewPartnership = () => {
   return (
     <>
       <ReviewSectionHeader
-        header={Config.formation.partnershipRights.reviewStepHeader}
+        header={Config.formation.partnershipRights.label}
         stepName="Business"
         testId="partnership"
       />

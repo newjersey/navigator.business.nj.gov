@@ -253,36 +253,28 @@ describe("Formation - BillingStep", () => {
     it("Contact first name", async () => {
       const page = await getPageHelper({}, { contactFirstName: "" }, { name: "" });
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(
-        Config.formation.fields.contactFirstName.fieldDisplayName
-      );
+      expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.contactFirstName.label);
       expect(screen.getByText(Config.formation.fields.contactFirstName.error)).toBeInTheDocument();
     });
 
     it("Contact last name", async () => {
       const page = await getPageHelper({}, { contactLastName: "" }, { name: "" });
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(
-        Config.formation.fields.contactLastName.fieldDisplayName
-      );
+      expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.contactLastName.label);
       expect(screen.getByText(Config.formation.fields.contactLastName.error)).toBeInTheDocument();
     });
 
     it("Contact phone number", async () => {
       const page = await getPageHelper({}, { contactPhoneNumber: "" });
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(
-        Config.formation.fields.contactPhoneNumber.fieldDisplayName
-      );
+      expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.contactPhoneNumber.label);
       expect(screen.getByText(Config.formation.fields.contactPhoneNumber.error)).toBeInTheDocument();
     });
 
     it("Payment type", async () => {
       const page = await getPageHelper({}, { paymentType: undefined });
       await attemptApiSubmission(page);
-      expect(screen.getAllByRole("alert")[0]).toHaveTextContent(
-        Config.formation.fields.paymentType.fieldDisplayName
-      );
+      expect(screen.getAllByRole("alert")[0]).toHaveTextContent(Config.formation.fields.paymentType.label);
     });
   });
 

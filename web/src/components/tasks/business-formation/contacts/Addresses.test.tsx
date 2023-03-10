@@ -45,7 +45,7 @@ describe("Formation - Addresses", () => {
       describe(`for ${legalStructureId}`, () => {
         it("adds signer", async () => {
           const page = await getPageHelper({ legalStructureId }, { incorporators: [] });
-          expect(screen.getByText(Config.formation.fields.incorporators.header)).toBeInTheDocument();
+          expect(screen.getByText(Config.formation.fields.incorporators.label)).toBeInTheDocument();
           page.clickAddNewIncorporator();
           const signer = generateFormationIncorporator(
             {

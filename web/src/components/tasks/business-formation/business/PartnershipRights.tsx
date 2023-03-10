@@ -24,7 +24,7 @@ export const PartnershipRights = (): ReactElement => {
               required={true}
               errorBarType="ALWAYS"
               validationText={Config.formation.general.genericErrorText}
-              label={Config.formation.partnershipRights.label}
+              label={Config.formation.partnershipRights.description}
               formInputFull
               fieldOptions={{
                 multiline: true,
@@ -110,7 +110,7 @@ export const PartnershipRights = (): ReactElement => {
     <>
       <div className="flex flex-column mobile-lg:flex-row mobile-lg:flex-align-center margin-bottom-2">
         <div role="heading" aria-level={2} className="h3-styling margin-bottom-0">
-          {Config.formation.partnershipRights.header}
+          {Config.formation.partnershipRights.label}
         </div>
       </div>
 
