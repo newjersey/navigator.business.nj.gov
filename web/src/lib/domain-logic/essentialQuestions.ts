@@ -108,7 +108,7 @@ export const EssentialQuestions: EssentialQuestion[] = [
   new EssentialQuestion({
     shouldBeResetWhenIndustryChanges: true,
     isQuestionApplicableToIndustry: (industry) => {
-      return !!industry.industryOnboardingQuestions.isChildcareForSixOrMore && industry.id === "daycare";
+      return !!industry.industryOnboardingQuestions.isChildcareForSixOrMore;
     },
     fieldName: "isChildcareForSixOrMore",
   }),
