@@ -20,7 +20,7 @@ export const BusinessStep = (): ReactElement => {
             maxChars={400}
             fieldName={"combinedInvestment"}
             required={true}
-            title={Config.formation.fields.combinedInvestment.header}
+            title={Config.formation.fields.combinedInvestment.label}
             contentMd={Config.formation.fields.combinedInvestment.body}
           />
           <hr className="margin-bottom-2 margin-top-0" aria-hidden={true} />
@@ -28,7 +28,7 @@ export const BusinessStep = (): ReactElement => {
             maxChars={400}
             fieldName={"withdrawals"}
             required={true}
-            title={Config.formation.fields.withdrawals.header}
+            title={Config.formation.fields.withdrawals.label}
             contentMd={Config.formation.fields.withdrawals.body}
           />
           <hr className="margin-bottom-2 margin-top-0" aria-hidden={true} />
@@ -38,7 +38,7 @@ export const BusinessStep = (): ReactElement => {
             maxChars={400}
             fieldName={"dissolution"}
             required={true}
-            title={Config.formation.fields.dissolution.header}
+            title={Config.formation.fields.dissolution.label}
             contentMd={Config.formation.fields.dissolution.body}
           />
         </>
@@ -52,7 +52,7 @@ export const BusinessStep = (): ReactElement => {
         required={false}
         inputLabel={Config.formation.fields.businessPurpose.label}
         addButtonText={Config.formation.fields.businessPurpose.addButtonText}
-        title={Config.formation.fields.businessPurpose.header}
+        title={Config.formation.fields.businessPurpose.label}
         contentMd={Config.formation.fields.businessPurpose.body}
       />
       {state.formationFormData.businessLocationType != "NJ" &&

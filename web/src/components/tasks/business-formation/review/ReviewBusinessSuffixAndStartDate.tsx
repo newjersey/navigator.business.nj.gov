@@ -20,11 +20,13 @@ export const ReviewBusinessSuffixAndStartDate = (): ReactElement => {
   return (
     <div className="margin-top-2" data-testid="review-suffix-and-start-date">
       <ReviewLineItem
-        label={Config.formation.fields.businessSuffix.reviewStepLabel}
+        label={Config.formation.fields.businessSuffix.label}
+        labelContextualInfo={Config.formation.fields.businessSuffix.labelContextualInfo}
         value={getBusinessNameDisplay()}
       />
       <ReviewLineItem
-        label={Config.formation.fields.businessStartDate.reviewStepLabel}
+        label={Config.formation.fields.businessStartDate.label}
+        labelContextualInfo={Config.formation.fields.businessStartDate.labelContextualInfo}
         value={parseDateWithFormat(state.formationFormData.businessStartDate, defaultDateFormat).format(
           defaultDisplayDateFormat
         )}
@@ -33,12 +35,12 @@ export const ReviewBusinessSuffixAndStartDate = (): ReactElement => {
         <>
           <ReviewLineItem
             dataTestId="foreign-state-of-formation"
-            label={Config.formation.fields.foreignStateOfFormation.reviewStepLabel}
+            label={Config.formation.fields.foreignStateOfFormation.label}
             value={state.formationFormData.foreignStateOfFormation ?? italicNotEnteredText}
           />
           <ReviewLineItem
             dataTestId="foreign-date-of-formation"
-            label={Config.formation.fields.foreignDateOfFormation.reviewStepLabel}
+            label={Config.formation.fields.foreignDateOfFormation.label}
             value={
               state.formationFormData.foreignDateOfFormation
                 ? parseDateWithFormat(
@@ -52,7 +54,7 @@ export const ReviewBusinessSuffixAndStartDate = (): ReactElement => {
       )}
       {state.formationFormData.businessTotalStock.length > 0 && (
         <ReviewLineItem
-          label={Config.formation.fields.businessTotalStock.reviewStepLabel}
+          label={Config.formation.fields.businessTotalStock.label}
           value={state.formationFormData.businessTotalStock}
         />
       )}

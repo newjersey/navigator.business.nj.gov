@@ -130,7 +130,7 @@ export const RegisteredAgent = (): ReactElement => {
 
   return (
     <>
-      <h3>{Config.formation.registeredAgent.sectionHeader}</h3>
+      <h3>{Config.formation.registeredAgent.label}</h3>
       <Content>{Config.formation.registeredAgent.sectionDescription}</Content>
       <div id="registeredAgent">
         <div className="form-input">

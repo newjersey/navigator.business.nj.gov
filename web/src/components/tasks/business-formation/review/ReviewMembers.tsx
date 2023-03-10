@@ -17,8 +17,8 @@ export const ReviewMembers = (): ReactElement => {
   const getConfig = (): { header: string; label: string } => {
     const field = isCorp ? "directors" : "members";
     return {
-      header: Config.formation.fields[field].reviewStepHeader,
-      label: Config.formation.fields[field].reviewStepNameLabel,
+      header: Config.formation.fields[field].label,
+      label: Config.formation.sections.review.nameLabel,
     };
   };
 

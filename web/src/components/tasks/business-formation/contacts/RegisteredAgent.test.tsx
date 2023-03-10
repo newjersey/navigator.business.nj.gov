@@ -355,9 +355,7 @@ describe("Formation - Registered Agent Field", () => {
         }
       );
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(
-        Config.formation.fields.agentNumber.fieldDisplayName
-      );
+      expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.agentNumber.label);
     });
   });
 
@@ -371,7 +369,7 @@ describe("Formation - Registered Agent Field", () => {
         }
       );
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.agentName.fieldDisplayName);
+      expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.agentName.label);
     });
 
     it("agent email", async () => {
@@ -383,9 +381,7 @@ describe("Formation - Registered Agent Field", () => {
         }
       );
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(
-        Config.formation.fields.agentEmail.fieldDisplayName
-      );
+      expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.agentEmail.label);
     });
 
     it("agent address line 1", async () => {
@@ -398,7 +394,7 @@ describe("Formation - Registered Agent Field", () => {
       );
       await attemptApiSubmission(page);
       expect(screen.getByRole("alert")).toHaveTextContent(
-        Config.formation.fields.agentOfficeAddressLine1.fieldDisplayName
+        Config.formation.fields.agentOfficeAddressLine1.label
       );
     });
 
@@ -412,7 +408,7 @@ describe("Formation - Registered Agent Field", () => {
       );
       await attemptApiSubmission(page);
       expect(screen.getByRole("alert")).toHaveTextContent(
-        Config.formation.fields.agentOfficeAddressMunicipality.fieldDisplayName
+        Config.formation.fields.agentOfficeAddressMunicipality.label
       );
     });
 
@@ -426,7 +422,7 @@ describe("Formation - Registered Agent Field", () => {
       );
       await attemptApiSubmission(page);
       expect(screen.getByRole("alert")).toHaveTextContent(
-        Config.formation.fields.agentOfficeAddressZipCode.fieldDisplayName
+        Config.formation.fields.agentOfficeAddressZipCode.label
       );
     });
   });

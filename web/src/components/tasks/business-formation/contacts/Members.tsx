@@ -28,7 +28,7 @@ export const Members = (): ReactElement => {
 
   const configField = isCorp ? "directors" : "members";
   const displayContent = {
-    header: Config.formation.fields[configField].header,
+    header: Config.formation.fields[configField].label,
     subheader: Config.formation.fields[configField].subheader,
     description: Config.formation.fields[configField].description,
     newButtonText: Config.formation.fields[configField].addButtonText,

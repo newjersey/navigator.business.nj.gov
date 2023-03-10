@@ -1,4 +1,4 @@
-import { Content } from "@/components/Content";
+import { ContextualInfoButton } from "@/components/ContextualInfoButton";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
@@ -25,7 +25,12 @@ export const SuffixDropdown = (): ReactElement => {
   return (
     <>
       <div className="flex margin-bottom-2">
-        <Content>{Config.formation.fields.businessSuffix.label}</Content>
+        <b>
+          <ContextualInfoButton
+            text={Config.formation.fields.businessSuffix.label}
+            id={Config.formation.fields.businessSuffix.labelContextualInfo}
+          />
+        </b>
       </div>
       <div className="margin-bottom-2">
         <FormControl fullWidth error={doesFieldHaveError(FIELD)}>

@@ -21,7 +21,7 @@ export const getErrorStateForField = (
 
   const errorState = {
     field: field,
-    label: (Config.formation.fields as any)[field].fieldDisplayName,
+    label: (Config.formation.fields as any)[field].label,
   };
 
   const fieldWithMaxLength = (params: { required: boolean; maxLen: number }): FormationFieldErrorState => {
@@ -33,7 +33,7 @@ export const getErrorStateForField = (
       label = (Config.formation.fields as any)[field].error;
     } else if (isTooLong) {
       label = templateEval(Config.formation.general.maximumLengthErrorText, {
-        field: (Config.formation.fields as any)[field].fieldDisplayName,
+        field: (Config.formation.fields as any)[field].label,
         maxLen: params.maxLen.toString(),
       });
     }
@@ -155,7 +155,7 @@ export const getErrorStateForField = (
         ...errorState,
         hasError: true,
         label: templateEval(Config.formation.general.maximumLengthErrorText, {
-          field: (Config.formation.fields as any)[field].fieldDisplayName,
+          field: (Config.formation.fields as any)[field].label,
           maxLen: SIGNER_NAME_MAX_LEN.toString(),
         }),
       };

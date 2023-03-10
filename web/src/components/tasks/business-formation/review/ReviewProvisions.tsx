@@ -11,7 +11,7 @@ export const ReviewProvisions = () => {
   return (
     <>
       <ReviewSectionHeader
-        header={Config.formation.fields.provisions.reviewStepHeader}
+        header={Config.formation.fields.provisions.label}
         stepName="Business"
         testId="provisions"
       />
@@ -20,7 +20,7 @@ export const ReviewProvisions = () => {
           return (
             <div className="margin-bottom-2" key={index}>
               <div className="text-bold margin-bottom-05">
-                {index + 1}. {Config.formation.fields.provisions.reviewStepSubheader}
+                {index + 1}. {Config.formation.fields.provisions.secondaryLabel}
               </div>
               <Content>{provision}</Content>
             </div>

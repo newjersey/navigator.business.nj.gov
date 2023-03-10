@@ -137,7 +137,7 @@ describe("Formation - Signatures", () => {
         const signerErrorText = () => {
           return screen.queryByText(
             templateEval(Config.formation.general.maximumLengthErrorText, {
-              field: Config.formation.fields.signers.fieldDisplayName,
+              field: Config.formation.fields.signers.label,
               maxLen: "50",
             }),
             { exact: false }

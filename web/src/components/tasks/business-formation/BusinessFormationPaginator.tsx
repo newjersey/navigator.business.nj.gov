@@ -437,10 +437,10 @@ export const BusinessFormationPaginator = (): ReactElement => {
           <ul>
             {dedupedFieldErrors.map((fieldError) => {
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              const label = (Config.formation.fields as any)[fieldError.field].fieldDisplayName;
+              const label = (Config.formation.fields as any)[fieldError.field].label;
               return (
-                <li key={label ?? fieldError.label}>
-                  {label ?? fieldError.label}
+                <li key={label}>
+                  {label}
                   {getApiErrorMessage(fieldError.field) && (
                     <ul>
                       <li>{getApiErrorMessage(fieldError.field)}</li>
