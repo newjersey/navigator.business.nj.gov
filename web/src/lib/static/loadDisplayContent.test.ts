@@ -1,5 +1,5 @@
 import fs from "fs";
-import { loadRoadmapDisplayContent, loadTasksDisplayContent } from "./loadDisplayContent";
+import { loadRoadmapSideBarDisplayContent, loadTasksDisplayContent } from "./loadDisplayContent";
 
 jest.mock("fs");
 jest.mock("process", () => ({
@@ -14,7 +14,7 @@ describe("loadDisplayContent", () => {
     mockedFs = fs as jest.Mocked<typeof fs>;
   });
 
-  describe("loadRoadmapDisplayContent", () => {
+  describe("loadRoadmapSideBarDisplayContent", () => {
     it("returns sidebar card content from markdown", () => {
       const welcomeCard =
         "---\n" +
@@ -31,7 +31,7 @@ describe("loadDisplayContent", () => {
       mockReadDirReturn(["welcome.md"]);
       mockedFs.readFileSync.mockReturnValue(welcomeCard);
 
-      expect(loadRoadmapDisplayContent().sidebarDisplayContent["welcome-id"]).toEqual({
+      expect(loadRoadmapSideBarDisplayContent().sidebarDisplayContent["welcome-id"]).toEqual({
         id: "welcome-id",
         header: "Welcome!",
         imgPath: "/img/congratulations-purple.svg",
