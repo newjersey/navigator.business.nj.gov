@@ -22,7 +22,7 @@ import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBus
 import { QUERIES, ROUTES, routeShallowWithQuery } from "@/lib/domain-logic/routes";
 import { MediaQueries } from "@/lib/PageSizes";
 import { loadAllCertifications } from "@/lib/static/loadCertifications";
-import { loadRoadmapDisplayContent } from "@/lib/static/loadDisplayContent";
+import { loadRoadmapSideBarDisplayContent } from "@/lib/static/loadDisplayContent";
 import { loadAllFundings } from "@/lib/static/loadFundings";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import { loadOperateReferences } from "@/lib/static/loadOperateReferences";
@@ -229,7 +229,7 @@ const DashboardPage = (props: Props): ReactElement => {
 export const getStaticProps = (): GetStaticPropsResult<Props> => {
   return {
     props: {
-      displayContent: loadRoadmapDisplayContent(),
+      displayContent: loadRoadmapSideBarDisplayContent(),
       operateReferences: loadOperateReferences(),
       fundings: loadAllFundings(),
       certifications: loadAllCertifications(),

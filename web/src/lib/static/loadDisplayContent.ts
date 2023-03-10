@@ -11,7 +11,7 @@ import path from "path";
 
 const displayContentDir = path.join(process.cwd(), "..", "content", "src", "display-content");
 
-export const loadRoadmapDisplayContent = (): RoadmapDisplayContent => {
+export const loadRoadmapSideBarDisplayContent = (): RoadmapDisplayContent => {
   const fileNames = fs.readdirSync(path.join(displayContentDir, "roadmap-sidebar-cards"));
 
   const sideBarDisplayContent = fileNames.reduce((acc, cur) => {
