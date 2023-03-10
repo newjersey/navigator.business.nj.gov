@@ -7,7 +7,7 @@ import {
   generateUser,
   generateUserData,
 } from "../../test/factories";
-import { determineAnnualFilingDate } from "../../test/helpers";
+import { generateAnnualFilings } from "../../test/helpers";
 import { BusinessNameClient } from "../domain/types";
 import { setupExpress } from "../libs/express";
 import { guestRouterFactory } from "./guestRouter";
@@ -30,7 +30,7 @@ describe("guestRouter", () => {
   });
 
   describe("POST annualFilings", () => {
-    it("calculates new annual filing date and updates it for dateOfFormation", async () => {
+    it("calculates 3 new annual filing dates and updates them for dateOfFormation", async () => {
       const postedUserData = generateUserData({
         user: generateUser({ id: "123" }),
         profileData: generateProfileData({
@@ -49,7 +49,7 @@ describe("guestRouter", () => {
         ...postedUserData,
         taxFilingData: {
           ...postedUserData.taxFilingData,
-          filings: [{ identifier: "ANNUAL_FILING", dueDate: determineAnnualFilingDate("2021-03-01") }],
+          filings: generateAnnualFilings(["2023-03-31", "2024-03-31", "2025-03-31"]),
         },
       });
     });

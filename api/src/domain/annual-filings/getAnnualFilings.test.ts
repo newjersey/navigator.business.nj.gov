@@ -4,11 +4,11 @@ import {
   generateUser,
   generateUserData,
 } from "../../../test/factories";
-import { determineAnnualFilingDate } from "../../../test/helpers";
+import { generateAnnualFilings } from "../../../test/helpers";
 import { getAnnualFilings } from "./getAnnualFilings";
 
 describe("getAnnualFilings", () => {
-  it("calculates new annual filing date and updates it for dateOfFormation", async () => {
+  it("calculates 3 new annual filing datea and updates them for dateOfFormation", async () => {
     const postedUserData = generateUserData({
       user: generateUser({ id: "123" }),
       profileData: generateProfileData({
@@ -27,12 +27,12 @@ describe("getAnnualFilings", () => {
       ...postedUserData,
       taxFilingData: {
         ...postedUserData.taxFilingData,
-        filings: [{ identifier: "ANNUAL_FILING", dueDate: determineAnnualFilingDate("2021-03-01") }],
+        filings: generateAnnualFilings(["2023-03-31", "2024-03-31", "2025-03-31"]),
       },
     });
   });
 
-  it("calculates new annual filing date and overrides it if needed", async () => {
+  it("calculates 3 new annual filing dates and overrides existing dates if needed", async () => {
     const postedUserData = generateUserData({
       user: generateUser({ id: "123" }),
       profileData: generateProfileData({
@@ -51,12 +51,12 @@ describe("getAnnualFilings", () => {
       ...postedUserData,
       taxFilingData: {
         ...postedUserData.taxFilingData,
-        filings: [{ identifier: "ANNUAL_FILING", dueDate: determineAnnualFilingDate("2021-03-01") }],
+        filings: generateAnnualFilings(["2023-03-31", "2024-03-31", "2025-03-31"]),
       },
     });
   });
 
-  it("calculates new annual filing date and updates it for dateOfFormation when there is no legalStructureId", async () => {
+  it("calculates 3 new annual filing dates and updates them for dateOfFormation when there is no legalStructureId", async () => {
     const postedUserData = generateUserData({
       user: generateUser({ id: "123" }),
       profileData: generateProfileData({
@@ -75,7 +75,7 @@ describe("getAnnualFilings", () => {
       ...postedUserData,
       taxFilingData: {
         ...postedUserData.taxFilingData,
-        filings: [{ identifier: "ANNUAL_FILING", dueDate: determineAnnualFilingDate("2021-03-31") }],
+        filings: generateAnnualFilings(["2023-03-31", "2024-03-31", "2025-03-31"]),
       },
     });
   });

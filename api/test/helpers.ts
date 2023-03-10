@@ -1,16 +1,11 @@
-import { getCurrentDate, parseDate } from "@shared/dateHelpers";
-import { defaultDateFormat } from "@shared/defaultConstants";
+import { TaxFiling } from "@shared/taxFiling";
 import { createHmac } from "node:crypto";
 
-export const determineAnnualFilingDate = (dateOfFormation: string) => {
-  const currentDate = getCurrentDate();
-  const dateOfFormationDate = parseDate(dateOfFormation);
-  let year = currentDate.year();
-  if (dateOfFormationDate.month() < currentDate.month()) {
-    year = year + 1;
-  }
-  const nextMonth = dateOfFormationDate.month() + 2;
-  return parseDate(`${year}-${nextMonth}-01`).add(-1, "day").format(defaultDateFormat);
+export const generateAnnualFilings = (dueDates: string[]): TaxFiling[] => {
+  return dueDates.map((dueDate: string) => ({
+    identifier: "ANNUAL_FILING",
+    dueDate,
+  }));
 };
 
 export const generateHashedKey = (key: string) => {

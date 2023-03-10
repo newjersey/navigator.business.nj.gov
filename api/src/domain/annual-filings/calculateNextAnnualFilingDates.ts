@@ -1,7 +1,7 @@
 import { getCurrentDate, parseDateWithFormat } from "@shared/dateHelpers";
 import { defaultDateFormat } from "@shared/defaultConstants";
 
-export const calculateNextAnnualFilingDate = (dateOfFormation: string): string => {
+export const calculateNextAnnualFilingDates = (dateOfFormation: string): string[] => {
   const today = getCurrentDate();
   const currentYear = today.year();
   const currentMonth = today.month();
@@ -22,5 +22,11 @@ export const calculateNextAnnualFilingDate = (dateOfFormation: string): string =
     dueDateYear = nextYear;
   }
 
-  return formationDate.year(dueDateYear).endOf("month").format(defaultDateFormat);
+  const baseFilingDate = formationDate.year(dueDateYear).endOf("month");
+
+  return [
+    baseFilingDate.format(defaultDateFormat),
+    baseFilingDate.add(1, "year").format(defaultDateFormat),
+    baseFilingDate.add(2, "year").format(defaultDateFormat),
+  ];
 };
