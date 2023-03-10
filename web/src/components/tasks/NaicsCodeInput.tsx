@@ -144,7 +144,7 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
               value={naicsCode}
               onChange={(event: React.ChangeEvent<{ name?: string; value: string }>) => {
                 setNaicsCode(event.target.value);
-                setDisplayInput(false);
+                if (displayInput) setDisplayInput(false);
                 setInProgress();
               }}
               data-testid="post-onboarding-radio-btn"
@@ -175,21 +175,22 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
                   />
                 );
               })}
+              <FormControlLabel
+                style={{ alignItems: "center" }}
+                labelPlacement="end"
+                data-testid="naics-radio-input"
+                onChange={() => {
+                  setDisplayInput(true);
+                  setNaicsCode("other");
+                  setIsInvalid(undefined);
+                  setInProgress();
+                }}
+                value="other"
+                checked={displayInput && naicsCode === "other"}
+                control={<Radio color="primary" />}
+                label={<div className="padding-y-1">{"Search for other NAICS codes"}</div>}
+              />
             </RadioGroup>
-            <FormControlLabel
-              style={{ alignItems: "center" }}
-              labelPlacement="end"
-              data-testid="naics-radio-input"
-              onChange={() => {
-                setDisplayInput(true);
-                setNaicsCode("");
-                setIsInvalid(undefined);
-                setInProgress();
-              }}
-              checked={displayInput}
-              control={<Radio color="primary" />}
-              label={<div className="padding-y-1">{"Search for other NAICS codes"} </div>}
-            />
           </FormControl>
         </>
       ) : (
