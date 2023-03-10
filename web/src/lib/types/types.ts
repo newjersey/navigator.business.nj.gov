@@ -105,7 +105,6 @@ export const createProfileFieldErrorMap = (): ProfileFieldErrorMap => {
 };
 
 export type RoadmapDisplayContent = {
-  contentMd: string;
   sidebarDisplayContent: Record<string, SidebarCardContent>;
 };
 
