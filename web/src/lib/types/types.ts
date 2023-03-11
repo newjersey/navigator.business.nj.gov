@@ -29,6 +29,8 @@ export type ProfileError =
   | "REQUIRED_NEXUS_LOCATION_IN_NJ"
   | "REQUIRED_REVIEW_INFO_BELOW";
 
+export type OnboardingErrors = ProfileError | "ALERT_BAR";
+
 export type FlowType = Exclude<BusinessPersona, undefined>;
 
 export const createEmptyTaskWithoutLinks = (): TaskWithoutLinks => {
@@ -85,8 +87,29 @@ export type ProfileContentField = Exclude<
 
 export type ProfileFields = keyof ProfileData | keyof BusinessUser;
 
-export type FieldStatus = { invalid: boolean };
-export type ProfileFieldErrorMap = Record<ProfileFields, FieldStatus>;
+export type FieldErrorType = undefined | unknown;
+
+export type FormContextFieldProps<K = FieldErrorType> = { errorTypes?: K[] };
+
+export type FieldStatus<FieldError = FieldErrorType> = {
+  invalid: boolean;
+  updated?: boolean;
+  errorTypes?: FieldError[];
+};
+
+export type ReducedFieldStates<K extends string | number | symbol, FieldError = FieldErrorType> = Record<
+  K,
+  FieldStatus<FieldError>
+>;
+
+export const createReducedFieldStates = <K extends string | number | symbol, FieldError = FieldErrorType>(
+  fields: K[]
+): ReducedFieldStates<K, FieldError> => {
+  return fields.reduce((p, c: K) => {
+    p[c] = { invalid: false };
+    return p;
+  }, {} as ReducedFieldStates<K, FieldError>);
+};
 
 const allProfileFields = Object.keys(profileFieldsFromConfig) as ProfileFields[];
 
@@ -97,12 +120,10 @@ export const profileFields: ProfileFields[] = [
   ...new Set([...allProfileFields, ...onboardingDataFields, ...businessUserDisplayFields]),
 ] as ProfileFields[];
 
-export const createProfileFieldErrorMap = (): ProfileFieldErrorMap => {
-  return profileFields.reduce((p, c: ProfileFields) => {
-    p[c] = { invalid: false };
-    return p;
-  }, {} as ProfileFieldErrorMap);
-};
+export const createProfileFieldErrorMap = <FieldError>() =>
+  createReducedFieldStates<(typeof profileFields)[number], FieldError>(profileFields);
+
+export type ProfileFieldErrorMap = ReducedFieldStates<ProfileFields>;
 
 export type RoadmapDisplayContent = {
   sidebarDisplayContent: Record<string, SidebarCardContent>;
@@ -417,7 +438,11 @@ export type FeedbackRequestModalNames =
   | "Request Submitted"
   | "Report Issue";
 
-export type ProfileTabs = "info" | "numbers" | "documents" | "notes";
+const _profileTabs = ["info", "numbers", "documents", "notes"] as const;
+
+export type ProfileTabs = (typeof _profileTabs)[number];
+
+export const profileTabs = _profileTabs as unknown as ProfileTabs[];
 
 export interface UpdateQueue {
   queue: (userData: UserData) => UpdateQueue;
