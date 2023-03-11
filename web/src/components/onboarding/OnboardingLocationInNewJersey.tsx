@@ -1,13 +1,22 @@
 import { ConfigType } from "@/contexts/configContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
+import { profileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
+import { FormContextFieldProps } from "@/lib/types/types";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import React, { ReactElement, useContext } from "react";
 
-export const OnboardingLocationInNewJersey = (): ReactElement => {
+export const OnboardingLocationInNewJersey = <T,>(props: FormContextFieldProps<T>): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { Config } = useConfig();
+
+  const { RegisterForOnSubmit, Validate, isFormFieldInValid } = useFormContextFieldHelpers(
+    "nexusLocationInNewJersey",
+    profileFormContext,
+    props.errorTypes
+  );
 
   const contentFromConfig: ConfigType["profileDefaults"]["fields"]["nexusLocationInNewJersey"]["default"] =
     getProfileConfig({
@@ -16,16 +25,17 @@ export const OnboardingLocationInNewJersey = (): ReactElement => {
       fieldName: "nexusLocationInNewJersey",
     });
 
+  RegisterForOnSubmit(() => state.profileData["nexusLocationInNewJersey"] != undefined);
   const handleSelection = (event: React.ChangeEvent<{ name?: string; value: unknown }>) => {
     let hasLocationInNJ;
     event.target.value === "true" ? (hasLocationInNJ = true) : (hasLocationInNJ = false);
+    Validate(false);
     setProfileData({
       ...state.profileData,
       nexusLocationInNewJersey: hasLocationInNJ,
       homeBasedBusiness: hasLocationInNJ ? false : state.profileData.homeBasedBusiness,
     });
   };
-
   return (
     <>
       <div data-testid="location-in-new-jersey">
@@ -46,16 +56,16 @@ export const OnboardingLocationInNewJersey = (): ReactElement => {
               labelPlacement="end"
               data-testid="location-in-new-jersey-true"
               value={true}
-              control={<Radio color="primary" />}
               label={contentFromConfig.radioButtonYesText}
+              control={<Radio color={isFormFieldInValid ? "error" : "primary"} />}
             />
             <FormControlLabel
               style={{ alignItems: "center" }}
               labelPlacement="end"
               data-testid="location-in-new-jersey-false"
               value={false}
-              control={<Radio color="primary" />}
               label={contentFromConfig.radioButtonNoText}
+              control={<Radio color={isFormFieldInValid ? "error" : "primary"} />}
             />
           </RadioGroup>
         </FormControl>

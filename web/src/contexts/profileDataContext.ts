@@ -17,7 +17,7 @@ interface ProfileDataState {
 
 interface ProfileDataContextType {
   state: ProfileDataState;
-  setProfileData: (profileData: ProfileData) => void;
+  setProfileData: React.Dispatch<React.SetStateAction<ProfileData>>;
   setUser: (user: BusinessUser) => void;
   onBack: () => void;
 }

@@ -2,10 +2,13 @@ import { Content } from "@/components/Content";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { FieldLabelModal } from "@/components/onboarding/FieldLabelModal";
 import { OnboardingSectors } from "@/components/onboarding/OnboardingSectors";
+import { FieldStateActionKind } from "@/contexts/formContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
+import { profileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { createProfileFieldErrorMap, ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
+import { createProfileFieldErrorMap } from "@/lib/types/types";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/";
 import { FormControl } from "@mui/material";
@@ -20,8 +23,13 @@ interface Props {
 export const SectorModal = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
-  const [fieldStates, setFieldStates] = useState<ProfileFieldErrorMap>(createProfileFieldErrorMap());
   const { userData } = useUserData();
+
+  const {
+    FormFuncWrapper,
+    onSubmit,
+    state: formContextState,
+  } = useFormContextHelper(createProfileFieldErrorMap());
 
   useMountEffectWhenDefined(() => {
     if (userData) {
@@ -29,68 +37,46 @@ export const SectorModal = (props: Props): ReactElement => {
     }
   }, userData);
 
-  const onValidation = (field: ProfileFields, invalid: boolean) => {
-    setFieldStates((prevFieldStates) => {
-      return { ...prevFieldStates, [field]: { invalid } };
-    });
-  };
-
   const handleClose = () => {
     props.handleClose();
-    setFieldStates(createProfileFieldErrorMap());
+    formContextState.reducer({ type: FieldStateActionKind.RESET });
   };
 
-  const onSubmit = async () => {
-    if (!userData) {
-      return;
-    }
-    const errorMap = {
-      ...fieldStates,
-      sectorId: { invalid: !profileData.sectorId },
-    };
-    setFieldStates(errorMap);
-    if (
-      Object.keys(errorMap).some((k) => {
-        return errorMap[k as ProfileFields].invalid;
-      })
-    ) {
-      return;
-    }
-
-    await props.onContinue();
-  };
+  FormFuncWrapper(() => props.onContinue());
 
   return (
-    <ProfileDataContext.Provider
-      value={{
-        state: {
-          profileData: profileData,
-          flow: "OWNING",
-        },
-        setProfileData,
-        setUser: () => {},
-        onBack: () => {},
-      }}
-    >
-      <ModalTwoButton
-        isOpen={props.open}
-        close={handleClose}
-        title={Config.dashboardDefaults.sectorModalTitle}
-        primaryButtonText={Config.dashboardDefaults.sectorModalSaveButton}
-        primaryButtonOnClick={onSubmit}
-        secondaryButtonText={Config.dashboardDefaults.sectorModalCancelButton}
-        maxWidth="md"
+    <profileFormContext.Provider value={formContextState}>
+      <ProfileDataContext.Provider
+        value={{
+          state: {
+            profileData: profileData,
+            flow: "OWNING",
+          },
+          setProfileData,
+          setUser: () => {},
+          onBack: () => {},
+        }}
       >
-        <div data-testid="sector-modal" className="padding-top-4">
-          <Content>{Config.dashboardDefaults.sectorModalBody}</Content>
-          <FormControl fullWidth={true}>
-            <div className="margin-top-2">
-              <FieldLabelModal fieldName="sectorId" />
-              <OnboardingSectors onValidation={onValidation} fieldStates={fieldStates} />
-            </div>
-          </FormControl>
-        </div>
-      </ModalTwoButton>
-    </ProfileDataContext.Provider>
+        <ModalTwoButton
+          isOpen={props.open}
+          close={handleClose}
+          title={Config.dashboardDefaults.sectorModalTitle}
+          primaryButtonText={Config.dashboardDefaults.sectorModalSaveButton}
+          primaryButtonOnClick={onSubmit}
+          secondaryButtonText={Config.dashboardDefaults.sectorModalCancelButton}
+          maxWidth="md"
+        >
+          <div data-testid="sector-modal" className="padding-top-4">
+            <Content>{Config.dashboardDefaults.sectorModalBody}</Content>
+            <FormControl fullWidth={true}>
+              <div className="margin-top-2">
+                <FieldLabelModal fieldName="sectorId" />
+                <OnboardingSectors />
+              </div>
+            </FormControl>
+          </div>
+        </ModalTwoButton>
+      </ProfileDataContext.Provider>
+    </profileFormContext.Provider>
   );
 };

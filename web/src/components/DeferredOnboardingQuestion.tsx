@@ -1,7 +1,10 @@
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
+import { profileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
+import { createProfileFieldErrorMap } from "@/lib/types/types";
 import { getFlow } from "@/lib/utils/helpers";
 import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { ReactNode, useEffect, useState } from "react";
@@ -18,6 +21,12 @@ export const DeferredOnboardingQuestion = (props: Props) => {
   const { userData, updateQueue } = useUserData();
   const { Config } = useConfig();
 
+  const {
+    FormFuncWrapper,
+    onSubmit,
+    state: formContextState,
+  } = useFormContextHelper(createProfileFieldErrorMap());
+
   useEffect(() => {
     if (!userData) {
       return;
@@ -25,7 +34,7 @@ export const DeferredOnboardingQuestion = (props: Props) => {
     setProfileData(userData.profileData);
   }, [userData]);
 
-  const onSave = async () => {
+  FormFuncWrapper(async () => {
     if (!updateQueue || !userData) {
       return;
     }
@@ -37,14 +46,14 @@ export const DeferredOnboardingQuestion = (props: Props) => {
     await updateQueue.queueProfileData(profileData).update();
 
     props.onSave();
-  };
+  });
 
   const onTaskPage = (
     <div className="padding-3">
       {props.label}
       <div className="display-flex mobile-lg:flex-row flex-column mobile-lg:flex-align-center">
         <div className="width-100 margin-right-1 form-input margin-bottom-2">{props.children}</div>
-        <SecondaryButton isColor="primary" onClick={onSave} dataTestId="deferred-question-save">
+        <SecondaryButton isColor="primary" onClick={onSubmit} dataTestId="deferred-question-save">
           {Config.deferredLocation.deferredOnboardingSaveButtonText}
         </SecondaryButton>
       </div>
@@ -62,7 +71,7 @@ export const DeferredOnboardingQuestion = (props: Props) => {
           <div className="mobile-lg:margin-top-0 margin-top-2">
             <SecondaryButton
               isColor="primary"
-              onClick={onSave}
+              onClick={onSubmit}
               dataTestId="deferred-question-save"
               isRightMarginRemoved={true}
             >
@@ -75,18 +84,20 @@ export const DeferredOnboardingQuestion = (props: Props) => {
   );
 
   return (
-    <ProfileDataContext.Provider
-      value={{
-        state: {
-          profileData: profileData,
-          flow: getFlow(profileData),
-        },
-        setUser: () => {},
-        setProfileData,
-        onBack: () => {},
-      }}
-    >
-      {props.isTaskPage ? onTaskPage : onDashboard}
-    </ProfileDataContext.Provider>
+    <profileFormContext.Provider value={formContextState}>
+      <ProfileDataContext.Provider
+        value={{
+          state: {
+            profileData: profileData,
+            flow: getFlow(profileData),
+          },
+          setUser: () => {},
+          setProfileData,
+          onBack: () => {},
+        }}
+      >
+        {props.isTaskPage ? onTaskPage : onDashboard}
+      </ProfileDataContext.Provider>
+    </profileFormContext.Provider>
   );
 };

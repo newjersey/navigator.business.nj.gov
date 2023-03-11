@@ -5,7 +5,6 @@ import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { SidebarPageLayout } from "@/components/njwds-extended/SidebarPageLayout";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
-import { DisabledTaxId } from "@/components/onboarding/DisabledTaxId";
 import { FieldLabelProfile } from "@/components/onboarding/FieldLabelProfile";
 import { LockedProfileField } from "@/components/onboarding/LockedProfileField";
 import { OnboardingBusinessName } from "@/components/onboarding/OnboardingBusinessName";
@@ -13,6 +12,7 @@ import { OnboardingDateOfFormation } from "@/components/onboarding/OnboardingDat
 import { OnboardingEmployerId } from "@/components/onboarding/OnboardingEmployerId";
 import { OnboardingEntityId } from "@/components/onboarding/OnboardingEntityId";
 import { OnboardingExistingEmployees } from "@/components/onboarding/OnboardingExistingEmployees";
+import { OnboardingForeignBusinessType } from "@/components/onboarding/OnboardingForeignBusinessType";
 import { OnboardingHomeBasedBusiness } from "@/components/onboarding/OnboardingHomeBasedBusiness";
 import { OnboardingIndustry } from "@/components/onboarding/OnboardingIndustry";
 import { OnboardingLegalStructureDropdown } from "@/components/onboarding/OnboardingLegalStructureDropDown";
@@ -21,11 +21,12 @@ import { OnboardingMunicipality } from "@/components/onboarding/OnboardingMunici
 import { OnboardingNotes } from "@/components/onboarding/OnboardingNotes";
 import { OnboardingOwnership } from "@/components/onboarding/OnboardingOwnership";
 import { OnboardingSectors } from "@/components/onboarding/OnboardingSectors";
-import { OnboardingTaxId } from "@/components/onboarding/OnboardingTaxId";
 import { OnboardingTaxPin } from "@/components/onboarding/OnboardingTaxPin";
 import { ProfileNaicsCode } from "@/components/onboarding/ProfileNaicsCode";
 import { ProfileNexusBusinessNameField } from "@/components/onboarding/ProfileNexusBusinessNameField";
 import { ProfileNexusDBANameField } from "@/components/onboarding/ProfileNexusDBANameField";
+import { DisabledTaxId } from "@/components/onboarding/taxId/DisabledTaxId";
+import { OnboardingTaxId } from "@/components/onboarding/taxId/OnboardingTaxId";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { Documents } from "@/components/profile/Documents";
 import { EscapeModal } from "@/components/profile/EscapeModal";
@@ -36,42 +37,38 @@ import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { AuthAlertContext } from "@/contexts/authAlertContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
+import { profileFormContext } from "@/contexts/profileFormContext";
 import { postGetAnnualFilings } from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { getEssentialQuestion } from "@/lib/domain-logic/essentialQuestions";
 import { isEntityIdApplicable } from "@/lib/domain-logic/isEntityIdApplicable";
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
 import { checkQueryValue, QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
-import {
-  createProfileFieldErrorMap,
-  OnboardingStatus,
-  ProfileFieldErrorMap,
-  ProfileFields,
-  ProfileTabs,
-} from "@/lib/types/types";
+import { createProfileFieldErrorMap, OnboardingStatus, profileTabs, ProfileTabs } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { getFlow, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { getTaskFromRoadmap } from "@/lib/utils/roadmap-helpers";
-import { BusinessPersona, ForeignBusinessType, formationTaskId } from "@businessnjgovnavigator/shared";
 import {
+  BusinessPersona,
   createEmptyProfileData,
   einTaskId,
+  ForeignBusinessType,
+  formationTaskId,
   LookupLegalStructureById,
   LookupOperatingPhaseById,
   Municipality,
   ProfileData,
   UserData,
-} from "@businessnjgovnavigator/shared/";
+} from "@businessnjgovnavigator/shared";
 import dayjs from "dayjs";
 import deepEqual from "fast-deep-equal/es6/react";
-import { cloneDeep } from "lodash";
 import { GetStaticPropsResult } from "next";
 import { useRouter } from "next/router";
-import { FormEvent, ReactElement, ReactNode, useContext, useState } from "react";
+import { ReactElement, ReactNode, useContext, useState } from "react";
 
 interface Props {
   municipalities: Municipality[];
@@ -84,18 +81,11 @@ interface Props {
   CMS_ONLY_showErrorAlert?: boolean; // for CMS only
 }
 
-const defaultTabForPersona: Record<string, ProfileTabs> = {
-  STARTING: "info",
-  OWNING: "info",
-  FOREIGN: "numbers",
-};
-
 const ProfilePage = (props: Props): ReactElement => {
   const { roadmap } = useRoadmap();
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
   const router = useRouter();
   const [alert, setAlert] = useState<OnboardingStatus | undefined>(undefined);
-  const [fieldStates, setFieldStates] = useState<ProfileFieldErrorMap>(createProfileFieldErrorMap());
   const [escapeModal, setEscapeModal] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isFormationDateDeletionModalOpen, setFormationDateDeletionModalOpen] = useState<boolean>(false);
@@ -105,14 +95,17 @@ const ProfilePage = (props: Props): ReactElement => {
   const { isAuthenticated, setRegistrationModalIsVisible } = useContext(AuthAlertContext);
   const { Config } = useConfig();
   const userData = props.CMS_ONLY_fakeUserData ?? userDataFromHook.userData;
-  const businessPersona: BusinessPersona =
-    props.CMS_ONLY_businessPersona ?? userData?.profileData.businessPersona;
+  const businessPersona: BusinessPersona = props.CMS_ONLY_businessPersona ?? profileData.businessPersona;
   const foreignBusinessType: ForeignBusinessType =
-    props.CMS_ONLY_foreignBusinessType ?? userData?.profileData.foreignBusinessType;
+    props.CMS_ONLY_foreignBusinessType ?? profileData.foreignBusinessType;
 
-  const defaultTab =
-    businessPersona && foreignBusinessType !== "NEXUS" ? defaultTabForPersona[businessPersona] : "info";
-  const [profileTab, setProfileTab] = useState<ProfileTabs>(props.CMS_ONLY_tab ?? defaultTab);
+  const {
+    FormFuncWrapper,
+    onSubmit,
+    tab: profileTab,
+    onTabChange: setProfileTab,
+    state: formContextState,
+  } = useFormContextHelper(createProfileFieldErrorMap(), profileTabs, props.CMS_ONLY_tab);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const redirect = (params?: { [key: string]: any }, routerType = router.push): Promise<boolean> => {
@@ -145,12 +138,6 @@ const ProfilePage = (props: Props): ReactElement => {
     }
   };
 
-  const onValidation = (field: ProfileFields, invalid: boolean) => {
-    setFieldStates((prevFieldStates) => {
-      return { ...prevFieldStates, [field]: { invalid } };
-    });
-  };
-
   const onBack = async () => {
     if (!userData) {
       return;
@@ -174,100 +161,55 @@ const ProfilePage = (props: Props): ReactElement => {
     return undefined;
   };
 
-  const onDelete = async (): Promise<void> => {
-    updateQueue?.queueTaskProgress({ [formationTaskId]: "IN_PROGRESS" });
-    await submitProfileChanges();
-  };
-
-  const onSubmit = async (event: FormEvent<HTMLFormElement>): Promise<void> => {
-    event.preventDefault();
-
-    if (
-      userData?.profileData.dateOfFormation !== profileData.dateOfFormation &&
-      profileData.dateOfFormation === undefined
-    ) {
-      if (isFormValidationError()) return;
-      setFormationDateDeletionModalOpen(true);
-    } else {
-      await submitProfileChanges();
-    }
-  };
-
-  const isFormValidationError = (): boolean => {
-    if (!userData) {
-      return true;
-    }
-    const fieldStatesCopy = cloneDeep(fieldStates);
-    if (profileData.sectorId) {
-      onValidation("sectorId", false);
-      fieldStatesCopy["sectorId"] = { invalid: false };
-    }
-    if (userData.profileData.taxId != profileData.taxId) {
-      // eslint-disable-next-line unicorn/no-lonely-if
-      if (!(profileData.taxId?.length === 0 || profileData.taxId?.length === 12)) {
-        onValidation("taxId", true);
-        fieldStatesCopy["taxId"] = { invalid: true };
+  FormFuncWrapper(
+    () => {
+      if (!updateQueue) {
+        return;
       }
-    }
 
-    if (getEssentialQuestion(profileData.industryId).length > 0) {
-      for (const EssentialQuestion of getEssentialQuestion(profileData.industryId)) {
-        const fieldName = EssentialQuestion.fieldName;
-        onValidation(fieldName, profileData[fieldName] === undefined);
-        fieldStatesCopy[fieldName] = {
-          invalid: profileData[fieldName] === undefined,
-        };
+      const dateOfFormationHasBeenDeleted =
+        updateQueue.current().profileData.dateOfFormation !== profileData.dateOfFormation &&
+        profileData.dateOfFormation === undefined;
+
+      if (dateOfFormationHasBeenDeleted) {
+        if (isFormationDateDeletionModalOpen) {
+          setFormationDateDeletionModalOpen(false);
+          updateQueue.queueTaskProgress({ [formationTaskId]: "IN_PROGRESS" });
+        } else {
+          setFormationDateDeletionModalOpen(true);
+          return;
+        }
       }
-    }
 
-    if (
-      Object.keys(fieldStatesCopy).some((k) => {
-        return fieldStatesCopy[k as ProfileFields].invalid;
-      })
-    ) {
+      analytics.event.profile_save.click.save_profile_changes();
+
+      setIsLoading(true);
+
+      sendOnSaveAnalytics(updateQueue.current().profileData, profileData);
+
+      if (profileData.employerId && profileData.employerId.length > 0) {
+        updateQueue.queueTaskProgress({ [einTaskId]: "COMPLETED" });
+      }
+
+      if (updateQueue.current().profileData.taxId != profileData.taxId) {
+        updateQueue.queueTaxFilingData({ state: undefined, registeredISO: undefined, filings: [] });
+      }
+
+      updateQueue.queueProfileData(profileData);
+
+      (async () => {
+        updateQueue.queue(await postGetAnnualFilings(updateQueue.current()));
+        updateQueue.update().then(async () => {
+          setIsLoading(false);
+          setAlert("SUCCESS");
+          await redirect({ success: true });
+        });
+      })();
+    },
+    () => {
       setAlert("ERROR");
-      return true;
     }
-    return false;
-  };
-  const submitProfileChanges = async (): Promise<void> => {
-    if (!updateQueue) {
-      return;
-    }
-    analytics.event.profile_save.click.save_profile_changes();
-    if (isFormValidationError()) return;
-    const userData = updateQueue.current();
-
-    let { taxFilingData } = userData;
-    const { taskProgress } = userData;
-
-    if (userData.profileData.taxId != profileData.taxId) {
-      taxFilingData = { ...taxFilingData, state: undefined, registeredISO: undefined, filings: [] };
-    }
-    setIsLoading(true);
-
-    if (profileData.employerId && profileData.employerId.length > 0) {
-      taskProgress[einTaskId] = "COMPLETED";
-    }
-
-    sendOnSaveAnalytics(userData.profileData, profileData);
-
-    let newUserData: UserData = {
-      ...userData,
-      profileData: profileData,
-      formProgress: "COMPLETED",
-      taskProgress,
-      taxFilingData,
-    };
-
-    newUserData = await postGetAnnualFilings(newUserData);
-    updateQueue.queue(newUserData);
-    updateQueue.update().then(async () => {
-      setIsLoading(false);
-      setAlert("SUCCESS");
-      await redirect({ success: true });
-    });
-  };
+  );
 
   const sendOnSaveAnalytics = (prevProfileData: ProfileData, newProfileData: ProfileData): void => {
     if (
@@ -344,6 +286,10 @@ const ProfilePage = (props: Props): ReactElement => {
           {" "}
           {Config.profileDefaults.profileTabInfoTitle}
         </h2>
+        <div className="padding-bottom-1">
+          <FieldLabelProfile fieldName="foreignBusinessTypeIds" />
+          <OnboardingForeignBusinessType required />
+        </div>
         {shouldShowNexusBusinessNameElements() && (
           <>
             <div className="margin-top-3" aria-hidden={true} />
@@ -359,7 +305,7 @@ const ProfilePage = (props: Props): ReactElement => {
           </>
         )}
         <FieldLabelProfile fieldName="industryId" />
-        <OnboardingIndustry onValidation={onValidation} fieldStates={fieldStates} />
+        <OnboardingIndustry />
 
         {shouldLockFormationFields ? (
           <LockedProfileField
@@ -381,7 +327,7 @@ const ProfilePage = (props: Props): ReactElement => {
           <>
             <div className="margin-top-3" aria-hidden={true} />
             <FieldLabelProfile fieldName="municipality" />
-            <OnboardingMunicipality onValidation={onValidation} fieldStates={fieldStates} />
+            <OnboardingMunicipality />
           </>
         )}
         {displayHomedBaseBusinessQuestion() && (
@@ -417,11 +363,7 @@ const ProfilePage = (props: Props): ReactElement => {
             {shouldLockTaxId ? (
               <DisabledTaxId />
             ) : (
-              <OnboardingTaxId
-                onValidation={onValidation}
-                fieldStates={fieldStates}
-                handleChangeOverride={showRegistrationModalForGuest()}
-              />
+              <OnboardingTaxId handleChangeOverride={showRegistrationModalForGuest()} />
             )}
           </div>
         </div>
@@ -430,7 +372,17 @@ const ProfilePage = (props: Props): ReactElement => {
   };
 
   const foreignBusinessElements: Record<ProfileTabs, ReactNode> = {
-    info: <></>,
+    info: (
+      <>
+        {" "}
+        <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
+        <h2 className="padding-bottom-3" style={{ fontWeight: 300 }}>
+          {Config.profileDefaults.profileTabInfoTitle}
+        </h2>
+        <FieldLabelProfile fieldName="foreignBusinessTypeIds" />
+        <OnboardingForeignBusinessType required />
+      </>
+    ),
     documents: <></>,
     notes: (
       <>
@@ -453,11 +405,7 @@ const ProfilePage = (props: Props): ReactElement => {
             {shouldLockTaxId ? (
               <DisabledTaxId />
             ) : (
-              <OnboardingTaxId
-                onValidation={onValidation}
-                fieldStates={fieldStates}
-                handleChangeOverride={showRegistrationModalForGuest()}
-              />
+              <OnboardingTaxId handleChangeOverride={showRegistrationModalForGuest()} />
             )}
           </div>
         </div>
@@ -497,21 +445,18 @@ const ProfilePage = (props: Props): ReactElement => {
         ) : (
           <>
             <FieldLabelProfile fieldName="businessName" />
-            <OnboardingBusinessName
-              onValidation={isBusinessNameRequired() ? onValidation : undefined}
-              fieldStates={fieldStates}
-            />
+            <OnboardingBusinessName required={isBusinessNameRequired()} />
           </>
         )}
 
         <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
 
         <FieldLabelProfile fieldName="industryId" />
-        <OnboardingIndustry onValidation={onValidation} fieldStates={fieldStates} />
+        <OnboardingIndustry />
         {(profileData.industryId === "generic" || props.CMS_ONLY_fakeUserData) && (
           <div className="margin-top-4 margin-bottom-2">
             <FieldLabelProfile fieldName="sectorId" />
-            <OnboardingSectors onValidation={onValidation} fieldStates={fieldStates} />
+            <OnboardingSectors />
           </div>
         )}
 
@@ -532,7 +477,7 @@ const ProfilePage = (props: Props): ReactElement => {
         <hr className="margin-top-6 margin-bottom-2" aria-hidden={true} />
 
         <FieldLabelProfile fieldName="municipality" />
-        <OnboardingMunicipality onValidation={onValidation} fieldStates={fieldStates} />
+        <OnboardingMunicipality />
 
         {displayHomedBaseBusinessQuestion() && (
           <div className="margin-top-3">
@@ -552,7 +497,7 @@ const ProfilePage = (props: Props): ReactElement => {
             <OnboardingOwnership />
             <hr className="margin-top-6 margin-bottom-2" aria-hidden={true} />
             <FieldLabelProfile fieldName="existingEmployees" />
-            <OnboardingExistingEmployees onValidation={onValidation} fieldStates={fieldStates} />
+            <OnboardingExistingEmployees required />
           </>
         )}
       </>
@@ -573,11 +518,7 @@ const ProfilePage = (props: Props): ReactElement => {
             ) : (
               <>
                 <FieldLabelProfile fieldName="dateOfFormation" />
-                <OnboardingDateOfFormation
-                  onValidation={onValidation}
-                  fieldStates={fieldStates}
-                  futureAllowed={true}
-                />
+                <OnboardingDateOfFormation futureAllowed={true} />
               </>
             )}
           </>
@@ -590,11 +531,7 @@ const ProfilePage = (props: Props): ReactElement => {
             ) : (
               <>
                 <FieldLabelProfile fieldName="entityId" />
-                <OnboardingEntityId
-                  onValidation={onValidation}
-                  fieldStates={fieldStates}
-                  handleChangeOverride={showRegistrationModalForGuest()}
-                />
+                <OnboardingEntityId handleChangeOverride={showRegistrationModalForGuest()} />
               </>
             )}
 
@@ -602,11 +539,7 @@ const ProfilePage = (props: Props): ReactElement => {
           </>
         )}
         <FieldLabelProfile fieldName="employerId" />
-        <OnboardingEmployerId
-          onValidation={onValidation}
-          fieldStates={fieldStates}
-          handleChangeOverride={showRegistrationModalForGuest()}
-        />
+        <OnboardingEmployerId handleChangeOverride={showRegistrationModalForGuest()} />
         <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
         <FieldLabelProfile fieldName="taxId" locked={shouldLockTaxId} />
         {!shouldLockTaxId && <TaxDisclaimer legalStructureId={userData?.profileData.legalStructureId} />}
@@ -614,11 +547,7 @@ const ProfilePage = (props: Props): ReactElement => {
           {shouldLockTaxId ? (
             <DisabledTaxId />
           ) : (
-            <OnboardingTaxId
-              onValidation={onValidation}
-              fieldStates={fieldStates}
-              handleChangeOverride={showRegistrationModalForGuest()}
-            />
+            <OnboardingTaxId handleChangeOverride={showRegistrationModalForGuest()} />
           )}
         </div>
       </>
@@ -648,21 +577,21 @@ const ProfilePage = (props: Props): ReactElement => {
         </h2>
         <div className="margin-top-4">
           <FieldLabelProfile fieldName="businessName" />
-          <OnboardingBusinessName fieldStates={fieldStates} />
+          <OnboardingBusinessName />
         </div>
         {(props.CMS_ONLY_fakeUserData || true) && (
           <div className="margin-top-4">
             <FieldLabelProfile fieldName="sectorId" />
-            <OnboardingSectors onValidation={onValidation} fieldStates={fieldStates} />
+            <OnboardingSectors />
           </div>
         )}
         <div className="margin-top-4">
           <FieldLabelProfile fieldName="existingEmployees" />
-          <OnboardingExistingEmployees onValidation={() => {}} fieldStates={fieldStates} />
+          <OnboardingExistingEmployees />
         </div>
         <div className="margin-top-4">
           <FieldLabelProfile fieldName="municipality" />
-          <OnboardingMunicipality onValidation={() => {}} fieldStates={fieldStates} />
+          <OnboardingMunicipality />
         </div>
         {displayHomedBaseBusinessQuestion() && (
           <div className="margin-top-3">
@@ -688,28 +617,16 @@ const ProfilePage = (props: Props): ReactElement => {
         {!LookupLegalStructureById(userData?.profileData.legalStructureId).hasTradeName && (
           <>
             <FieldLabelProfile fieldName="dateOfFormation" />
-            <OnboardingDateOfFormation
-              onValidation={onValidation}
-              fieldStates={fieldStates}
-              futureAllowed={false}
-            />
+            <OnboardingDateOfFormation futureAllowed={false} />
           </>
         )}
         <div className="margin-top-4">
           <FieldLabelProfile fieldName="entityId" />
-          <OnboardingEntityId
-            onValidation={onValidation}
-            fieldStates={fieldStates}
-            handleChangeOverride={showRegistrationModalForGuest()}
-          />
+          <OnboardingEntityId handleChangeOverride={showRegistrationModalForGuest()} />
         </div>
         <div className="margin-top-4">
           <FieldLabelProfile fieldName="employerId" />
-          <OnboardingEmployerId
-            onValidation={onValidation}
-            fieldStates={fieldStates}
-            handleChangeOverride={showRegistrationModalForGuest()}
-          />
+          <OnboardingEmployerId handleChangeOverride={showRegistrationModalForGuest()} />
         </div>
         <div className="margin-top-4">
           <FieldLabelProfile fieldName="taxId" locked={shouldLockTaxId} />
@@ -718,124 +635,118 @@ const ProfilePage = (props: Props): ReactElement => {
             {shouldLockTaxId ? (
               <DisabledTaxId />
             ) : (
-              <OnboardingTaxId
-                onValidation={onValidation}
-                fieldStates={fieldStates}
-                handleChangeOverride={showRegistrationModalForGuest()}
-              />
+              <OnboardingTaxId handleChangeOverride={showRegistrationModalForGuest()} />
             )}
           </div>
         </div>
         <div className="margin-top-4">
           <FieldLabelProfile fieldName="taxPin" />
-          <OnboardingTaxPin
-            onValidation={onValidation}
-            fieldStates={fieldStates}
-            handleChangeOverride={showRegistrationModalForGuest()}
-          />
+          <OnboardingTaxPin handleChangeOverride={showRegistrationModalForGuest()} />
         </div>
       </>
     ),
   };
 
   return (
-    <MunicipalitiesContext.Provider value={{ municipalities: props.municipalities }}>
-      <ProfileDataContext.Provider
-        value={{
-          state: {
-            profileData: profileData,
-            flow: getFlow(profileData),
-          },
-          setUser: () => {},
-          setProfileData,
-          onBack,
-        }}
-      >
-        <PageSkeleton>
-          <NavBar />
-          <main id="main">
-            <div className="usa-section padding-top-0 desktop:padding-top-3">
-              <EscapeModal
-                isOpen={escapeModal}
-                close={() => {
-                  return setEscapeModal(false);
-                }}
-                primaryButtonOnClick={() => {
-                  return redirect();
-                }}
-              />
-              <FormationDateDeletionModal
-                isOpen={isFormationDateDeletionModalOpen}
-                handleCancel={() => setFormationDateDeletionModalOpen(false)}
-                handleDelete={onDelete}
-              />
-              <SingleColumnContainer>
-                {alert && (
-                  <ProfileSnackbarAlert
-                    alert={alert}
-                    close={() => {
-                      return setAlert(undefined);
-                    }}
-                  />
-                )}
-                <UserDataErrorAlert />
-              </SingleColumnContainer>
-              <div className="margin-top-6 desktop:margin-top-0">
-                <SidebarPageLayout
-                  divider={false}
-                  outlineBox={false}
-                  stackNav={true}
-                  navChildren={
-                    <ProfileTabNav
-                      userData={userData}
-                      businessPersona={businessPersona}
-                      foreignBusinessType={foreignBusinessType}
-                      activeTab={profileTab}
-                      setProfileTab={setProfileTab}
+    <profileFormContext.Provider value={formContextState}>
+      <MunicipalitiesContext.Provider value={{ municipalities: props.municipalities }}>
+        <ProfileDataContext.Provider
+          value={{
+            state: {
+              profileData: profileData,
+              flow: getFlow(profileData),
+            },
+            setUser: () => {},
+            setProfileData,
+            onBack,
+          }}
+        >
+          <PageSkeleton>
+            <NavBar />
+            <main id="main">
+              <div className="usa-section padding-top-0 desktop:padding-top-3">
+                <EscapeModal
+                  isOpen={escapeModal}
+                  close={() => {
+                    return setEscapeModal(false);
+                  }}
+                  primaryButtonOnClick={() => {
+                    return redirect();
+                  }}
+                />
+                <FormationDateDeletionModal
+                  isOpen={isFormationDateDeletionModalOpen}
+                  handleCancel={() => setFormationDateDeletionModalOpen(false)}
+                  handleDelete={onSubmit}
+                />
+                <SingleColumnContainer>
+                  {alert && (
+                    <ProfileSnackbarAlert
+                      alert={alert}
+                      close={() => {
+                        return setAlert(undefined);
+                      }}
                     />
-                  }
-                >
-                  {userData === undefined ? (
-                    <div className="padding-top-0 desktop:padding-top-6 padding-bottom-15">
-                      <LoadingIndicator />
-                    </div>
-                  ) : (
-                    <>
-                      <form onSubmit={onSubmit} className={`usa-prose onboarding-form margin-top-2`}>
-                        {getElements()}
-
-                        <hr className="margin-top-7 margin-bottom-2" aria-hidden={true} />
-                        <div className="float-right fdr">
-                          <SecondaryButton
-                            isColor="primary"
-                            onClick={() => {
-                              return onBack();
-                            }}
-                            dataTestId="back"
-                          >
-                            {Config.profileDefaults.backButtonText}
-                          </SecondaryButton>
-                          <PrimaryButton
-                            isColor="primary"
-                            isSubmitButton={true}
-                            onClick={() => {}}
-                            isRightMarginRemoved={true}
-                            dataTestId="save"
-                            isLoading={isLoading}
-                          >
-                            {Config.profileDefaults.saveButtonText}
-                          </PrimaryButton>
-                        </div>
-                      </form>
-                    </>
                   )}
-                </SidebarPageLayout>
+                  <UserDataErrorAlert />
+                </SingleColumnContainer>
+                <div className="margin-top-6 desktop:margin-top-0">
+                  <SidebarPageLayout
+                    divider={false}
+                    outlineBox={false}
+                    stackNav={true}
+                    navChildren={
+                      <ProfileTabNav
+                        userData={userData}
+                        businessPersona={businessPersona}
+                        foreignBusinessType={foreignBusinessType}
+                        activeTab={profileTab}
+                        setProfileTab={setProfileTab}
+                      />
+                    }
+                  >
+                    {userData === undefined ? (
+                      <div className="padding-top-0 desktop:padding-top-6 padding-bottom-15">
+                        <LoadingIndicator />
+                      </div>
+                    ) : (
+                      <>
+                        <form onSubmit={onSubmit} className={`usa-prose onboarding-form margin-top-2`}>
+                          {getElements()}
+
+                          <hr className="margin-top-7 margin-bottom-2" aria-hidden={true} />
+                          <div className="float-right fdr">
+                            <SecondaryButton
+                              isColor="primary"
+                              onClick={() => {
+                                return onBack();
+                              }}
+                              dataTestId="back"
+                            >
+                              {Config.profileDefaults.backButtonText}
+                            </SecondaryButton>
+                            <PrimaryButton
+                              isColor="primary"
+                              isSubmitButton={true}
+                              onClick={() => {}}
+                              isRightMarginRemoved={true}
+                              dataTestId="save"
+                              isLoading={isLoading}
+                            >
+                              {Config.profileDefaults.saveButtonText}
+                            </PrimaryButton>
+                          </div>
+                        </form>
+                      </>
+                    )}
+                  </SidebarPageLayout>
+                </div>
               </div>
-            </div>
-          </main>
-        </PageSkeleton>
-      </ProfileDataContext.Provider>
-    </MunicipalitiesContext.Provider>
+            </main>
+          </PageSkeleton>
+        </ProfileDataContext.Provider>
+      </MunicipalitiesContext.Provider>
+    </profileFormContext.Provider>
   );
 };
 

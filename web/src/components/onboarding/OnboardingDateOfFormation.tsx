@@ -1,9 +1,10 @@
 import { GenericTextField } from "@/components/GenericTextField";
 import { ConfigType } from "@/contexts/configContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
+import { profileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
-import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import {
   advancedDateLibrary,
@@ -20,8 +21,6 @@ import React, { ReactElement, useContext } from "react";
 advancedDateLibrary();
 
 interface Props {
-  onValidation: (field: ProfileFields, invalid: boolean) => void;
-  fieldStates: ProfileFieldErrorMap;
   futureAllowed: boolean;
   required?: boolean;
   disabled?: boolean;
@@ -34,6 +33,11 @@ export const OnboardingDateOfFormation = (props: Props): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
   const [dateValue, setDateValue] = React.useState<DateObject | null>(null);
   const [dateError, setDateError] = React.useState<boolean>(false);
+
+  const { RegisterForOnSubmit, Validate, isFormFieldInValid } = useFormContextFieldHelpers(
+    fieldName,
+    profileFormContext
+  );
 
   const contentFromConfig: ConfigType["profileDefaults"]["fields"]["dateOfFormation"]["default"] =
     getProfileConfig({
@@ -48,12 +52,11 @@ export const OnboardingDateOfFormation = (props: Props): ReactElement => {
     setDateValue(parseDate(state.profileData.dateOfFormation));
   }, state.profileData.dateOfFormation);
 
-  const onValidation = (): void => {
-    return props.onValidation(
-      fieldName,
-      !((dateValue == null && !props.required) || (dateValue?.isValid() && !dateError))
-    );
-  };
+  const isValid = (): boolean =>
+    ((dateValue == null && !props.required) || (dateValue?.isValid() && !dateError)) ?? false;
+
+  RegisterForOnSubmit(isValid);
+  const onValidation = (): void => Validate(!isValid());
 
   const handleChange = (date: DateObject | null) => {
     setDateValue(date);
@@ -90,7 +93,7 @@ export const OnboardingDateOfFormation = (props: Props): ReactElement => {
                 fieldName={fieldName}
                 onValidation={onValidation}
                 validationText={errorText}
-                error={props.fieldStates[fieldName].invalid}
+                error={isFormFieldInValid}
                 inputProps={params.InputProps}
                 fieldOptions={{
                   ...params,
@@ -99,7 +102,7 @@ export const OnboardingDateOfFormation = (props: Props): ReactElement => {
                     placeholder: "",
                   },
                   sx: { width: "50%", ...params.sx },
-                  error: props.fieldStates[fieldName].invalid,
+                  error: isFormFieldInValid,
                 }}
               />
             </div>

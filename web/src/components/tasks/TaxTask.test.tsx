@@ -14,19 +14,33 @@ import {
 import { withAuthAlert } from "@/test/helpers/helpers-renderers";
 import { markdownToText } from "@/test/helpers/helpers-utilities";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
+import { WithStatefulProfileFormContext } from "@/test/mock/withStatefulProfileData";
 import {
   currentUserData,
   setupStatefulUserDataContext,
   userDataWasNotUpdated,
-  WithStatefulUserData,
+  WithStatefulUserData as _WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import { randomInt, UserData } from "@businessnjgovnavigator/shared";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { ReactElement, ReactNode } from "react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 
 const Config = getMergedConfig();
+
+const WithStatefulUserData = ({
+  children,
+  initialUserData,
+}: {
+  children: ReactNode;
+  initialUserData: UserData | undefined;
+}): ReactElement => (
+  <WithStatefulProfileFormContext>
+    <_WithStatefulUserData initialUserData={initialUserData}>{children}</_WithStatefulUserData>
+  </WithStatefulProfileFormContext>
+);
 
 describe("<TaxTask />", () => {
   let task: Task;

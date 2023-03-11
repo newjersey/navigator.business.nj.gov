@@ -1,4 +1,4 @@
-import { OnboardingFlow } from "@/components/onboarding/getOnboardingFlows";
+import { OnboardingFlow } from "@/components/onboarding/OnboardingFlows";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { LookupIndustryById } from "@businessnjgovnavigator/shared/industry";
 import { ProfileData } from "@businessnjgovnavigator/shared/profileData";

@@ -1,8 +1,7 @@
-import { getOnboardingFlows } from "@/components/onboarding/getOnboardingFlows";
+import { onboardingFlows } from "@/components/onboarding/OnboardingFlows";
 import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import { createProfileFieldErrorMap } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
 import { generateProfileData, generateUser, generateUserData } from "@/test/factories";
 import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
@@ -132,12 +131,7 @@ describe("onboarding - shared", () => {
     mockApi.postUserTesting.mockImplementation((request) => {
       return Promise.resolve(request);
     });
-    const numberOfPages = getOnboardingFlows(
-      userData.profileData,
-      userData.user,
-      () => {},
-      createProfileFieldErrorMap()
-    ).STARTING.pages.length;
+    const numberOfPages = onboardingFlows.STARTING.pages.length;
 
     for (let pageNumber = 2; pageNumber < numberOfPages; pageNumber += 1) {
       await page.visitStep(pageNumber);

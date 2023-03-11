@@ -1,7 +1,9 @@
 import { ProfileDataContext } from "@/contexts/profileDataContext";
+import { profileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
-import { ProfileContentField, ProfileFields, profileFieldsFromConfig } from "@/lib/types/types";
+import { ProfileContentField, profileFieldsFromConfig } from "@/lib/types/types";
 import {
   camelCaseToKebabCase,
   camelCaseToSentence,
@@ -19,9 +21,9 @@ type Props<T> = {
   contentFieldName?: ProfileContentField;
   ariaLabel?: string;
   choices: Exclude<T, undefined>[];
+  required?: boolean;
   labels?: Record<string, string>;
   onChange?: (value: T) => void;
-  onValidation?: (field: ProfileFields, invalid: boolean) => void;
 };
 
 export const OnboardingRadioQuestion = <T extends ProfileDataTypes>(props: Props<T>): ReactElement => {
@@ -29,11 +31,15 @@ export const OnboardingRadioQuestion = <T extends ProfileDataTypes>(props: Props
   const { Config } = useConfig();
   const fieldName = props.contentFieldName ?? props.fieldName;
 
+  const { RegisterForOnSubmit, Validate } = useFormContextFieldHelpers(props.fieldName, profileFormContext);
+
   const contentFromConfig = getProfileConfig({
     config: Config,
     persona: state.flow,
     fieldName: fieldName as keyof typeof profileFieldsFromConfig,
   });
+
+  props.required && RegisterForOnSubmit(() => state.profileData[props.fieldName] !== undefined);
 
   const handleChange = (event: React.ChangeEvent<{ name?: string; value: unknown }>) => {
     const value = props.choices.find((val) => {
@@ -45,7 +51,7 @@ export const OnboardingRadioQuestion = <T extends ProfileDataTypes>(props: Props
       [props.fieldName]: value,
     });
     props.onChange && props.onChange(value);
-    props.onValidation && props.onValidation(props.fieldName, false);
+    Validate(false);
   };
 
   return (

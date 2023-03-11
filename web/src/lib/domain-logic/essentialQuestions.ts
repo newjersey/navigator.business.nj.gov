@@ -50,7 +50,7 @@ export interface EssentialQuestionObject {
   isQuestionApplicableToIndustry: (industry: Industry) => boolean;
   shouldBeResetWhenIndustryChanges: boolean;
 }
-class EssentialQuestion implements EssentialQuestionObject {
+export class EssentialQuestion implements EssentialQuestionObject {
   fieldName!: keyof IndustrySpecificData;
   contentFieldName?: ProfileContentField;
   ariaLabel?: string;

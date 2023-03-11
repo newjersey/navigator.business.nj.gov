@@ -1,14 +1,16 @@
 import { Alert } from "@/components/njwds-extended/Alert";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
-import { DisabledTaxId } from "@/components/onboarding/DisabledTaxId";
-import { OnboardingTaxId } from "@/components/onboarding/OnboardingTaxId";
+import { DisabledTaxId } from "@/components/onboarding/taxId/DisabledTaxId";
+import { OnboardingTaxId } from "@/components/onboarding/taxId/OnboardingTaxId";
 import { AuthAlertContext } from "@/contexts/authAlertContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
+import { profileFormContext } from "@/contexts/profileFormContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
-import { createProfileFieldErrorMap, ProfileFieldErrorMap, ProfileFields, Task } from "@/lib/types/types";
+import { createProfileFieldErrorMap, Task } from "@/lib/types/types";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { useMediaQuery } from "@mui/material";
@@ -25,7 +27,14 @@ export const TaxInput = (props: Props): ReactElement => {
   const [profileData, setProfileData] = useState<ProfileData>(
     userData?.profileData ?? createEmptyProfileData()
   );
-  const [fieldStates, setFieldStates] = useState<ProfileFieldErrorMap>(createProfileFieldErrorMap());
+
+  const {
+    FormFuncWrapper,
+    onSubmit,
+    isValid,
+    state: formContextState,
+  } = useFormContextHelper(createProfileFieldErrorMap());
+
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
   const shouldLockTaxId =
@@ -59,22 +68,8 @@ export const TaxInput = (props: Props): ReactElement => {
     }
   }, userData && updateQueue);
 
-  const onSubmit = async () => {
-    if (!userData || !updateQueue) {
-      return;
-    }
-    const errorMap = {
-      ...fieldStates,
-      taxId: {
-        invalid: profileData.taxId?.length != 12,
-      },
-    };
-    setFieldStates(errorMap);
-    if (
-      Object.keys(errorMap).some((k) => {
-        return errorMap[k as ProfileFields].invalid;
-      })
-    ) {
+  FormFuncWrapper(async () => {
+    if (!userData || !updateQueue || !isValid()) {
       return;
     }
 
@@ -93,13 +88,7 @@ export const TaxInput = (props: Props): ReactElement => {
       .then(() => {
         setIsLoading(false);
       });
-  };
-
-  const onValidation = (field: ProfileFields, invalid: boolean) => {
-    setFieldStates((prevFieldStates) => {
-      return { ...prevFieldStates, [field]: { invalid } };
-    });
-  };
+  });
 
   const DisabledElement = (props: { children: ReactNode }): ReactElement => (
     <div className={`flex ${isTabletAndUp ? "flex-row" : "flex-column margin-right-2"} no-wrap`}>
@@ -111,7 +100,7 @@ export const TaxInput = (props: Props): ReactElement => {
   );
 
   return (
-    <>
+    <profileFormContext.Provider value={formContextState}>
       <ProfileDataContext.Provider
         value={{
           state: {
@@ -130,12 +119,7 @@ export const TaxInput = (props: Props): ReactElement => {
             </Alert>
           ) : (
             <>
-              <OnboardingTaxId
-                onValidation={onValidation}
-                fieldStates={fieldStates}
-                forTaxTask
-                formInputFull
-              />
+              <OnboardingTaxId formInputFull required />
 
               <div className="tablet:margin-top-2 tablet:margin-left-2">
                 <SecondaryButton
@@ -153,6 +137,6 @@ export const TaxInput = (props: Props): ReactElement => {
           )}
         </div>
       </ProfileDataContext.Provider>
-    </>
+    </profileFormContext.Provider>
   );
 };

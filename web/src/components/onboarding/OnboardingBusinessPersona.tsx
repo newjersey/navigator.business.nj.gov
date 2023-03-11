@@ -1,17 +1,28 @@
 import { Content } from "@/components/Content";
 import { ConfigType } from "@/contexts/configContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
+import { profileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
+import { FormContextFieldProps } from "@/lib/types/types";
 import { BusinessPersona } from "@businessnjgovnavigator/shared/";
 import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import React, { ReactElement, useContext } from "react";
 
-export const OnboardingBusinessPersona = (): ReactElement => {
+export const OnboardingBusinessPersona = <T,>(props: FormContextFieldProps<T>): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { Config } = useConfig();
 
+  const { RegisterForOnSubmit, Validate } = useFormContextFieldHelpers(
+    "businessPersona",
+    profileFormContext,
+    props.errorTypes
+  );
+
+  RegisterForOnSubmit(() => state.profileData.businessPersona != undefined);
   const handleSelection = (event: React.ChangeEvent<{ name?: string; value: unknown }>) => {
+    Validate(false);
     setProfileData({
       ...state.profileData,
       businessPersona: event.target.value as BusinessPersona,

@@ -16,18 +16,18 @@ import { OnboardingOwnership } from "@/components/onboarding/OnboardingOwnership
 import { OnboardingRadioQuestion } from "@/components/onboarding/OnboardingRadioQuestion";
 import { OnboardingResponsibleOwnerName } from "@/components/onboarding/OnboardingResponsibleOwnerName";
 import { OnboardingSectors } from "@/components/onboarding/OnboardingSectors";
-import { OnboardingTaxId } from "@/components/onboarding/OnboardingTaxId";
 import { OnboardingTaxPin } from "@/components/onboarding/OnboardingTaxPin";
 import { ProfileNaicsCode } from "@/components/onboarding/ProfileNaicsCode";
 import { ProfileNexusBusinessNameField } from "@/components/onboarding/ProfileNexusBusinessNameField";
 import { ProfileNexusDBANameField } from "@/components/onboarding/ProfileNexusDBANameField";
+import { OnboardingTaxId } from "@/components/onboarding/taxId/OnboardingTaxId";
 import { Documents } from "@/components/profile/Documents";
 import { ConfigContext } from "@/contexts/configContext";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { EssentialQuestions } from "@/lib/domain-logic/essentialQuestions";
-import { createProfileFieldErrorMap, ProfileContentField } from "@/lib/types/types";
+import { ProfileContentField } from "@/lib/types/types";
 import {
   IndustrySpecificData,
   industrySpecificDataChoices,
@@ -37,8 +37,6 @@ const ProfileFieldsPreview = (props: PreviewProps) => {
   const { config, setConfig } = usePreviewConfig(props);
   const ref = usePreviewRef(props);
 
-  const fieldStates = createProfileFieldErrorMap();
-
   return (
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
       <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
@@ -47,17 +45,17 @@ const ProfileFieldsPreview = (props: PreviewProps) => {
 
         <div className="margin-left-4">
           <FieldLabelOnboarding fieldName="businessName" />
-          <OnboardingBusinessName onValidation={() => {}} fieldStates={fieldStates} />
+          <OnboardingBusinessName />
 
           <div className="margin-y-2" />
 
           <FieldLabelOnboarding fieldName="businessName" CMS_ONLY_flow="OWNING" />
-          <OnboardingBusinessName onValidation={() => {}} fieldStates={fieldStates} />
+          <OnboardingBusinessName />
         </div>
         <hr className="margin-y-4" />
 
         <FieldLabelOnboarding fieldName="industryId" />
-        <OnboardingIndustry onValidation={() => {}} fieldStates={fieldStates} />
+        <OnboardingIndustry />
         <hr className="margin-y-4" />
 
         <div className="margin-left-4">
@@ -75,27 +73,27 @@ const ProfileFieldsPreview = (props: PreviewProps) => {
         <div className="margin-left-4">
           <FieldLabelOnboarding fieldName="municipality" />
           <div className="margin-top-2">
-            <OnboardingMunicipality onValidation={() => {}} fieldStates={fieldStates} />
+            <OnboardingMunicipality />
           </div>
 
           <div className="margin-y-2" />
 
           <FieldLabelOnboarding fieldName="municipality" CMS_ONLY_flow="OWNING" />
           <div className="margin-top-2">
-            <OnboardingMunicipality onValidation={() => {}} fieldStates={fieldStates} />
+            <OnboardingMunicipality />
           </div>
 
           <div className="margin-y-2" />
 
           <FieldLabelOnboarding fieldName="municipality" CMS_ONLY_flow="FOREIGN" />
           <div className="margin-top-2">
-            <OnboardingMunicipality onValidation={() => {}} fieldStates={fieldStates} />
+            <OnboardingMunicipality />
           </div>
         </div>
 
         <hr className="margin-y-4" />
         <FieldLabelOnboarding fieldName="sectorId" />
-        <OnboardingSectors onValidation={() => {}} fieldStates={fieldStates} />
+        <OnboardingSectors />
 
         <hr className="margin-y-4" />
 
@@ -113,12 +111,12 @@ const ProfileFieldsPreview = (props: PreviewProps) => {
 
         <div className="margin-left-4">
           <FieldLabelOnboarding fieldName="existingEmployees" />
-          <OnboardingExistingEmployees onValidation={() => {}} fieldStates={fieldStates} />
+          <OnboardingExistingEmployees />
 
           <div className="margin-y-2" />
 
           <FieldLabelOnboarding fieldName="existingEmployees" CMS_ONLY_flow="OWNING" />
-          <OnboardingExistingEmployees onValidation={() => {}} fieldStates={fieldStates} />
+          <OnboardingExistingEmployees />
         </div>
 
         <hr className="margin-y-4" />
@@ -140,15 +138,15 @@ const ProfileFieldsPreview = (props: PreviewProps) => {
 
         <hr className="margin-y-4" />
         <FieldLabelOnboarding fieldName="taxId" />
-        <OnboardingTaxId fieldStates={fieldStates} />
+        <OnboardingTaxId />
 
         <hr className="margin-y-4" />
         <FieldLabelOnboarding fieldName="entityId" />
-        <OnboardingEntityId onValidation={() => {}} fieldStates={fieldStates} />
+        <OnboardingEntityId />
 
         <hr className="margin-y-4" />
         <FieldLabelOnboarding fieldName="employerId" />
-        <OnboardingEmployerId onValidation={() => {}} fieldStates={fieldStates} />
+        <OnboardingEmployerId />
 
         <hr className="margin-y-4" />
         <FieldLabelOnboarding fieldName="naicsCode" />
@@ -156,11 +154,11 @@ const ProfileFieldsPreview = (props: PreviewProps) => {
 
         <hr className="margin-y-4" />
         <FieldLabelOnboarding fieldName="dateOfFormation" />
-        <OnboardingDateOfFormation futureAllowed={false} onValidation={() => {}} fieldStates={fieldStates} />
+        <OnboardingDateOfFormation futureAllowed={false} />
 
         <hr className="margin-y-4" />
         <FieldLabelOnboarding fieldName="taxPin" />
-        <OnboardingTaxPin onValidation={() => {}} fieldStates={fieldStates} />
+        <OnboardingTaxPin />
 
         <hr className="margin-y-4" />
         <Documents />

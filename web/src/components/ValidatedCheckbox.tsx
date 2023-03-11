@@ -2,18 +2,23 @@ import { Checkbox } from "@mui/material";
 import React from "react";
 
 interface Props {
-  id: string;
+  id?: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   checked: boolean;
-  error: boolean;
+  value?: unknown;
+  error?: boolean;
+  classNames?: string;
+  name?: string;
 }
 
 export const ValidatedCheckbox = (props: Props) => {
   return (
-    <div className={props.error ? "checkbox-error-backdrop" : ""}>
+    <div className={props.error ? `checkbox-error-backdrop ${props.classNames}` : props.classNames ?? ""}>
       <div className={props.error ? "checkbox-error-backdrop-layer" : ""} />
       <Checkbox
-        id={props.id}
+        id={props.id ?? props.name}
+        value={props.value}
+        name={props.name}
         onChange={props.onChange}
         checked={props.checked}
         sx={{

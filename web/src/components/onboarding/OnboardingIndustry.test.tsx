@@ -2,7 +2,6 @@ import { Content } from "@/components/Content";
 import { OnboardingIndustry } from "@/components/onboarding/OnboardingIndustry";
 import { getMergedConfig } from "@/contexts/configContext";
 import { EssentialQuestions } from "@/lib/domain-logic/essentialQuestions";
-import { createProfileFieldErrorMap } from "@/lib/types/types";
 import { capitalizeFirstLetter, kebabSnakeSentenceToCamelCase } from "@/lib/utils/cases-helpers";
 import {
   randomFilteredIndustry,
@@ -34,7 +33,7 @@ describe("<OnboardingIndustry />", () => {
   const renderComponent = (profileData?: ProfileData) => {
     render(
       <WithStatefulProfileData initialData={profileData || createEmptyProfileData()}>
-        <OnboardingIndustry onValidation={() => {}} fieldStates={createProfileFieldErrorMap()} />
+        <OnboardingIndustry />
       </WithStatefulProfileData>
     );
   };

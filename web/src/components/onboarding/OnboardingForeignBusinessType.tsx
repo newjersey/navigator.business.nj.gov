@@ -1,11 +1,15 @@
 import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
+import { ValidatedCheckbox } from "@/components/ValidatedCheckbox";
 import { ConfigType } from "@/contexts/configContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
+import { profileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { determineForeignBusinessType } from "@/lib/domain-logic/determineForeignBusinessType";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
-import { Checkbox, FormControl, FormControlLabel } from "@mui/material";
+import { FormContextFieldProps } from "@/lib/types/types";
+import { FormControl, FormControlLabel } from "@mui/material";
 import { ChangeEvent, ReactElement, useContext } from "react";
 
 const allForeignBusinessTypeIdsOrdered = [
@@ -17,11 +21,20 @@ const allForeignBusinessTypeIdsOrdered = [
   "transactionsInNJ",
   "revenueInNJ",
   "none",
-];
+] as const;
 
-export const OnboardingForeignBusinessType = (): ReactElement => {
+interface Props<T> extends FormContextFieldProps<T> {
+  required?: boolean;
+}
+export const OnboardingForeignBusinessType = <T,>(props: Props<T>): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { Config } = useConfig();
+
+  const { RegisterForOnSubmit, Validate, isFormFieldInValid } = useFormContextFieldHelpers(
+    "foreignBusinessTypeIds",
+    profileFormContext,
+    props.errorTypes
+  );
 
   const contentFromConfig: ConfigType["profileDefaults"]["fields"]["foreignBusinessTypeIds"]["default"] =
     getProfileConfig({
@@ -29,6 +42,10 @@ export const OnboardingForeignBusinessType = (): ReactElement => {
       persona: state.flow,
       fieldName: "foreignBusinessTypeIds",
     });
+
+  const isValid = (ids: string[]) => ids.length > 0;
+
+  RegisterForOnSubmit(() => isValid(state.profileData.foreignBusinessTypeIds));
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     let ids = state.profileData.foreignBusinessTypeIds;
@@ -44,11 +61,12 @@ export const OnboardingForeignBusinessType = (): ReactElement => {
             return it !== event.target.value;
           });
     }
+    isValid(ids) && Validate(false);
 
     const foreignBusinessType = determineForeignBusinessType(ids);
-
     setProfileData({
       ...state.profileData,
+      industryId: foreignBusinessType === "NEXUS" ? state.profileData.industryId : undefined,
       foreignBusinessType,
       foreignBusinessTypeIds: ids,
     });
@@ -58,22 +76,27 @@ export const OnboardingForeignBusinessType = (): ReactElement => {
     <>
       <div className="margin-top-3">
         <FormControl variant="outlined" fullWidth aria-label="Out of state business">
-          {allForeignBusinessTypeIdsOrdered.map((id: string) => {
-            return (
-              <FormControlLabel
-                key={id}
-                control={
-                  <Checkbox
-                    name="foreign-business-type"
-                    value={id}
-                    onChange={handleChange}
-                    checked={state.profileData.foreignBusinessTypeIds.includes(id)}
-                  />
-                }
-                label={<Content>{(contentFromConfig.optionContent as Record<string, string>)[id]}</Content>}
-              />
-            );
-          })}
+          {(
+            allForeignBusinessTypeIdsOrdered as unknown as (typeof allForeignBusinessTypeIdsOrdered)[number][]
+          )
+            .filter((id) => (props.required ? id !== "none" : true))
+            .map((id) => {
+              return (
+                <FormControlLabel
+                  key={id}
+                  control={
+                    <ValidatedCheckbox
+                      name="foreign-business-type"
+                      value={id}
+                      onChange={handleChange}
+                      checked={state.profileData.foreignBusinessTypeIds.includes(id)}
+                      error={props.required && isFormFieldInValid}
+                    />
+                  }
+                  label={<Content>{(contentFromConfig.optionContent as Record<string, string>)[id]}</Content>}
+                />
+              );
+            })}
         </FormControl>
       </div>
 

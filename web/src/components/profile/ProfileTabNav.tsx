@@ -19,7 +19,7 @@ export const ProfileTabNav = (props: Props): ReactElement => {
   const { Config } = useConfig();
 
   const shouldShowInfo = () => {
-    return props.businessPersona !== "FOREIGN" || props.foreignBusinessType === "NEXUS";
+    return true;
   };
 
   const shouldShowNumbers = () => {

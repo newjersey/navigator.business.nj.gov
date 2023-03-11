@@ -1,27 +1,31 @@
-import { FieldLabelProfile } from "@/components/onboarding/FieldLabelProfile";
 import { IndustryDropdown } from "@/components/onboarding/IndustryDropdown";
 import { OnboardingEmploymentAgency } from "@/components/onboarding/OnboardingEmploymentAgency";
+import { OnboardingEssentialQuestion } from "@/components/onboarding/OnboardingEssentialQuestion";
 import { OnboardingHomeContractor } from "@/components/onboarding/OnboardingHomeContractor";
-import { OnboardingRadioQuestion } from "@/components/onboarding/OnboardingRadioQuestion";
-import { WithErrorBar } from "@/components/WithErrorBar";
 import { ConfigType } from "@/contexts/configContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
+import { profileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { EssentialQuestions } from "@/lib/domain-logic/essentialQuestions";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
-import { ProfileContentField, ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
-import { IndustrySpecificData, industrySpecificDataChoices } from "@businessnjgovnavigator/shared";
-import { FocusEvent, ReactElement, useContext } from "react";
+import { FormContextFieldProps } from "@/lib/types/types";
+import { ReactElement, useContext } from "react";
 
-interface Props {
-  onValidation: (field: ProfileFields, invalid: boolean) => void;
-  fieldStates: ProfileFieldErrorMap;
+interface Props<T> extends FormContextFieldProps<T> {
+  essentialQuestionErrorTypes?: T[];
 }
-
-export const OnboardingIndustry = (props: Props): ReactElement => {
+export const OnboardingIndustry = <T,>(props: Props<T>): ReactElement => {
   const { state } = useContext(ProfileDataContext);
-  const { Config } = useConfig();
   const fieldName = "industryId";
+
+  const { RegisterForOnSubmit, Validate, isFormFieldInValid } = useFormContextFieldHelpers(
+    fieldName,
+    profileFormContext,
+    props.errorTypes
+  );
+
+  const { Config } = useConfig();
 
   const contentFromConfig: ConfigType["profileDefaults"]["fields"]["industryId"]["default"] =
     getProfileConfig({
@@ -30,64 +34,30 @@ export const OnboardingIndustry = (props: Props): ReactElement => {
       fieldName: fieldName,
     });
 
-  const onValidation = (event: FocusEvent<HTMLInputElement>): void => {
-    const valid = event.target.value.length > 0;
-    props.onValidation(fieldName, !valid);
-  };
+  const isValid = (value: string | undefined): boolean => !!value && value.length > 0;
 
-  const handleChange = (): void => {
-    return props.onValidation(fieldName, false);
-  };
+  RegisterForOnSubmit(() => isValid(state.profileData.industryId));
 
   const getEssentialQuestions = (industryId: string | undefined) => {
     return EssentialQuestions.filter((i) => {
       return i.isQuestionApplicableToIndustryId(industryId);
-    }).map((obj) => {
-      const essentialQuestionContentFromConfig = getProfileConfig({
-        config: Config,
-        persona: state.flow,
-        fieldName: (obj.contentFieldName ?? obj.fieldName) as ProfileContentField,
-      });
-
-      return (
-        <div
-          data-testid={`industry-specific-${industryId}-${obj.fieldName}`}
-          key={`${industryId}-${obj.fieldName}`}
-        >
-          <WithErrorBar
-            hasError={props.fieldStates[obj.fieldName].invalid}
-            type="ALWAYS"
-            className={
-              essentialQuestionContentFromConfig.headerNotBolded || essentialQuestionContentFromConfig.header
-                ? "margin-top-4"
-                : "margin-top-2"
-            }
-          >
-            <FieldLabelProfile fieldName={obj.contentFieldName ?? (obj.fieldName as ProfileContentField)} />
-            <OnboardingRadioQuestion<IndustrySpecificData[keyof IndustrySpecificData]>
-              {...obj}
-              choices={industrySpecificDataChoices[obj.fieldName]}
-              onValidation={props.onValidation}
-            />
-            {props.fieldStates[obj.fieldName].invalid && (
-              <div className="text-error-dark text-bold margin-top-05">
-                {Config.profileDefaults.essentialQuestionInlineText}
-              </div>
-            )}
-          </WithErrorBar>
-        </div>
-      );
-    });
+    }).map((obj) => (
+      <OnboardingEssentialQuestion<T>
+        essentialQuestion={obj}
+        key={obj.fieldName}
+        errorTypes={props.essentialQuestionErrorTypes}
+      />
+    ));
   };
 
   return (
     <div className="form-input margin-top-2">
       <IndustryDropdown
-        error={props.fieldStates[fieldName].invalid}
+        error={isFormFieldInValid}
         validationLabel="Error"
         validationText={contentFromConfig.errorTextRequired}
-        handleChange={handleChange}
-        onValidation={onValidation}
+        handleChange={(): void => Validate(false)}
+        onValidation={(event) => Validate(!isValid(event.target.value))}
       />
       {state.profileData.industryId === "home-contractor" && (
         <div

@@ -16,7 +16,7 @@ import {
   generateTaxFilingData,
   generateUndefinedIndustrySpecificData,
   generateUser,
-  generateUserData,
+  generateUserData as _generateUserData,
   randomHomeBasedIndustry,
   randomLegalStructure,
   randomNonHomeBasedIndustry,
@@ -29,6 +29,7 @@ import * as mockRouter from "@/test/mock/mockRouter";
 import { useMockRouter } from "@/test/mock/mockRouter";
 import { setMockDocumentsResponse, useMockDocuments } from "@/test/mock/mockUseDocuments";
 import { useMockRoadmap, useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
+import { WithStatefulProfileFormContext } from "@/test/mock/withStatefulProfileData";
 import {
   currentUserData,
   setupStatefulUserDataContext,
@@ -60,6 +61,7 @@ import {
   OperatingPhases,
   ProfileData,
   randomInt,
+  TaskProgress,
   UserData,
 } from "@businessnjgovnavigator/shared";
 import { createTheme, ThemeProvider } from "@mui/material";
@@ -94,6 +96,15 @@ jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
 
 const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
 
+const generateUserData = (overrides: Partial<UserData>): UserData => {
+  const profileData = generateProfileData({ ...overrides.profileData });
+  const taskProgress: Record<string, TaskProgress> =
+    profileData.employerId && profileData.employerId.length > 0
+      ? { [einTaskId]: "COMPLETED", ...overrides.taskProgress }
+      : { ...overrides.taskProgress };
+  return _generateUserData({ ...overrides, profileData, taskProgress });
+};
+
 describe("profile", () => {
   let setRegistrationModalIsVisible: jest.Mock;
 
@@ -125,14 +136,16 @@ describe("profile", () => {
     render(
       withAuthAlert(
         <ThemeProvider theme={createTheme()}>
-          <WithStatefulUserData
-            initialUserData={
-              userData ||
-              generateUserData({ profileData: generateProfileData({ municipality: genericTown }) })
-            }
-          >
-            <Profile municipalities={municipalities ? [genericTown, ...municipalities] : [genericTown]} />
-          </WithStatefulUserData>
+          <WithStatefulProfileFormContext>
+            <WithStatefulUserData
+              initialUserData={
+                userData ||
+                generateUserData({ profileData: generateProfileData({ municipality: genericTown }) })
+              }
+            >
+              <Profile municipalities={municipalities ? [genericTown, ...municipalities] : [genericTown]} />
+            </WithStatefulUserData>
+          </WithStatefulProfileFormContext>
         </ThemeProvider>,
         isAuthenticated ?? IsAuthenticated.TRUE,
         { registrationModalIsVisible: false, setRegistrationModalIsVisible }
@@ -461,7 +474,6 @@ describe("profile", () => {
       });
       expect(currentUserData()).toEqual({
         ...initialUserData,
-        formProgress: "COMPLETED",
         profileData: {
           ...initialUserData.profileData,
           businessName: "Cool Computers",
@@ -475,6 +487,7 @@ describe("profile", () => {
           employerId: "023456780",
           notes: "whats appppppp",
         },
+        taskProgress: { [einTaskId]: "COMPLETED" },
       });
     });
 
@@ -498,15 +511,11 @@ describe("profile", () => {
     });
 
     it("sets registerForEin task to complete if employerId exists", async () => {
-      const emptyData = createEmptyUserData(generateUser({}));
-      const initialUserData: UserData = {
-        ...emptyData,
-        profileData: {
-          ...emptyData.profileData,
-          businessPersona: "STARTING",
-        },
-      };
-      renderPage({ userData: initialUserData, municipalities: [] });
+      renderPage({
+        userData: generateUserData({
+          profileData: generateProfileData({ businessPersona: "STARTING", employerId: undefined }),
+        }),
+      });
       chooseTab("numbers");
       fillText("Employer id", "02-3456780");
       clickSave();
@@ -1357,19 +1366,12 @@ describe("profile", () => {
       });
     });
 
-    it("displays only the numbers and notes tabs", () => {
+    it("does not display the documents tab", () => {
       renderPage({ userData: userData });
       expect(screen.getAllByText(Config.profileDefaults.profileTabRefTitle).length).toBeGreaterThan(0);
       expect(screen.getAllByText(Config.profileDefaults.profileTabNoteTitle).length).toBeGreaterThan(0);
-      expect(screen.queryByText(Config.profileDefaults.profileTabInfoTitle)).not.toBeInTheDocument();
+      expect(screen.getAllByText(Config.profileDefaults.profileTabInfoTitle).length).toBeGreaterThan(0);
       expect(screen.queryByText(Config.profileDefaults.profileTabDocsTitle)).not.toBeInTheDocument();
-    });
-
-    it("defaults to numbers tab", () => {
-      renderPage({ userData: userData });
-      expect(
-        screen.getByText(markdownToText(Config.profileDefaults.fields.taxId.default.header))
-      ).toBeInTheDocument();
     });
 
     describe("Nexus Foreign Business", () => {
@@ -1378,6 +1380,7 @@ describe("profile", () => {
           profileData: generateProfileData({
             businessPersona: "FOREIGN",
             foreignBusinessType: "NEXUS",
+            foreignBusinessTypeIds: ["NEXUS"],
             legalStructureId: "limited-liability-company",
             ...overrides,
           }),
@@ -1475,6 +1478,7 @@ describe("profile", () => {
               operatingPhase: params.operatingPhase,
               businessPersona: "FOREIGN",
               foreignBusinessType: "NEXUS",
+              foreignBusinessTypeIds: ["NEXUS"],
               nexusLocationInNewJersey: true,
             }),
           });
@@ -1776,6 +1780,7 @@ describe("profile", () => {
             businessPersona: "FOREIGN",
             foreignBusinessType: "NEXUS",
             industryId: industryId,
+            foreignBusinessTypeIds: ["NEXUS"],
             ...generateUndefinedIndustrySpecificData(),
           }),
         });
@@ -1823,6 +1828,7 @@ describe("profile", () => {
                 taxId: "*******89123",
                 encryptedTaxId: "some-encrypted-value",
                 businessPersona,
+                foreignBusinessTypeIds: businessPersona == "FOREIGN" ? ["NONE"] : undefined,
               }),
               taxFilingData: generateTaxFilingData({ state: randomInt() % 2 ? "SUCCESS" : "PENDING" }),
             });
@@ -1848,13 +1854,13 @@ describe("profile", () => {
                 profileData: generateProfileData({
                   legalStructureId: randomTradeNameLegalStructure(),
                   businessPersona: businessPersona,
+                  nexusLocationInNewJersey: true,
                   foreignBusinessType,
+                  foreignBusinessTypeIds: ["NEXUS"],
                 }),
               });
-
               renderPage({ userData });
               chooseTab("numbers");
-
               expect(screen.getByTestId("tax-disclaimer")).toHaveTextContent(
                 markdownToText(Config.profileDefaults.fields.taxId.default.disclaimerMd)
               );

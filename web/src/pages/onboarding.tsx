@@ -3,16 +3,18 @@ import { Alert } from "@/components/njwds-extended/Alert";
 import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { DevOnlySkipOnboardingButton } from "@/components/onboarding/DevOnlySkipOnboardingButton";
-import { getOnboardingFlows } from "@/components/onboarding/getOnboardingFlows";
 import { OnboardingButtonGroup } from "@/components/onboarding/OnboardingButtonGroup";
+import { onboardingFlows as onboardingFlowObject } from "@/components/onboarding/OnboardingFlows";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { AuthContext } from "@/contexts/authContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
+import { profileFormContext } from "@/contexts/profileFormContext";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { hasEssentialQuestion } from "@/lib/domain-logic/essentialQuestions";
 import { QUERIES, QUERY_PARAMS_VALUES, ROUTES, routeShallowWithQuery } from "@/lib/domain-logic/routes";
@@ -22,11 +24,10 @@ import { ABStorageFactory } from "@/lib/storage/ABStorage";
 import {
   createProfileFieldErrorMap,
   FlowType,
+  OnboardingErrors,
   OnboardingStatus,
   Page,
   ProfileError,
-  ProfileFieldErrorMap,
-  ProfileFields,
 } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import {
@@ -60,16 +61,7 @@ import { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import {
-  FormEvent,
-  ReactElement,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import { ReactElement, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { CSSTransition } from "react-transition-group";
 
 interface Props {
@@ -88,7 +80,6 @@ const OnboardingPage = (props: Props): ReactElement => {
   const { userData, update } = useUserData();
   const isLargeScreen = useMediaQuery(MediaQueries.desktopAndUp);
   const headerRef = useRef<HTMLDivElement>(null);
-  const [fieldStates, setFieldStates] = useState<ProfileFieldErrorMap>(createProfileFieldErrorMap());
   const [currentFlow, setCurrentFlow] = useState<FlowType>("STARTING");
   const hasHandledRouting = useRef<boolean>(false);
   const { Config } = useConfig();
@@ -103,14 +94,16 @@ const OnboardingPage = (props: Props): ReactElement => {
     REQUIRED_REVIEW_INFO_BELOW: Config.profileDefaults.errorTextBody,
   };
 
-  const onValidation = (field: ProfileFields, invalid: boolean): void => {
-    setFieldStates((prevFieldStates) => {
-      return { ...prevFieldStates, [field]: { invalid } };
-    });
-  };
+  const {
+    FormFuncWrapper,
+    onSubmit,
+    isValid,
+    getErrors,
+    state: formContextState,
+  } = useFormContextHelper(createProfileFieldErrorMap<OnboardingErrors>());
 
   const onboardingFlows = useMemo(() => {
-    let onboardingFlows = getOnboardingFlows(profileData, user, onValidation, fieldStates);
+    let onboardingFlows = onboardingFlowObject;
 
     const removePageFromFlow = (pageName: string, flow: FlowType): void => {
       onboardingFlows = {
@@ -147,7 +140,7 @@ const OnboardingPage = (props: Props): ReactElement => {
     removeNexusSpecificPages();
 
     return onboardingFlows;
-  }, [profileData, user, fieldStates]);
+  }, [profileData]);
 
   const routeToPage = useCallback(
     (page: number) => {
@@ -244,154 +237,123 @@ const OnboardingPage = (props: Props): ReactElement => {
     }
   };
 
-  const onSubmit = async (event: FormEvent<HTMLFormElement>): Promise<void> => {
-    event.preventDefault();
-    scrollToTop();
-    const currentUserData = userData as UserData;
-
-    const currentPageFlow = onboardingFlows[currentFlow].pages[page.current - 1];
-    const errorMap = currentPageFlow.getErrorMap();
-    const hasErrors = {
-      banner:
-        errorMap?.banner &&
-        errorMap?.banner.some((error) => {
-          return !error.valid;
-        }),
-      inline:
-        errorMap?.inline &&
-        errorMap?.inline.some((error) => {
-          return !error.valid;
-        }),
-      snackbar:
-        errorMap?.snackbar &&
-        errorMap?.snackbar.some((error) => {
-          return !error.valid;
-        }),
-    };
-
-    if (hasErrors.banner || hasErrors.inline || hasErrors.snackbar) {
-      if (hasErrors.banner && errorMap?.banner) {
-        setError(
-          errorMap.banner.find((bannerError) => {
-            return !bannerError.valid;
-          })?.name
-        );
-      }
-
-      if (hasErrors.inline && errorMap?.inline) {
-        for (const inlineObject of errorMap.inline) {
-          onValidation(inlineObject.name, !inlineObject.valid);
-        }
-      }
-
-      if (hasErrors.snackbar && errorMap?.snackbar) {
-        setAlert("ERROR");
-      }
-      headerRef.current?.focus();
+  FormFuncWrapper(
+    async (): Promise<void> => {
       scrollToTop();
-      return;
-    }
+      const currentUserData = userData as UserData;
+      let newProfileData = profileData;
+      const hasBusinessPersonaChanged =
+        profileData.businessPersona !== currentUserData?.profileData.businessPersona;
 
-    let newProfileData = profileData;
+      if (page.current === 1 && hasBusinessPersonaChanged) {
+        newProfileData = {
+          ...emptyProfileData,
+          businessName: profileData.businessName,
+          industryId: profileData.businessPersona === "OWNING" ? "generic" : undefined,
+          homeBasedBusiness: profileData.homeBasedBusiness,
+          liquorLicense: profileData.liquorLicense,
+          municipality: profileData.municipality,
+          businessPersona: profileData.businessPersona,
+          legalStructureId: profileData.legalStructureId,
+          requiresCpa: profileData.requiresCpa,
+          providesStaffingService: profileData.providesStaffingService,
+          certifiedInteriorDesigner: profileData.certifiedInteriorDesigner,
+          realEstateAppraisalManagement: profileData.realEstateAppraisalManagement,
+          operatingPhase: profileData.businessPersona === "OWNING" ? "GUEST_MODE_OWNING" : "GUEST_MODE",
+          interstateTransport: profileData.interstateTransport,
+          sectorId: profileData.sectorId,
+        };
 
-    const hasBusinessPersonaChanged =
-      profileData.businessPersona !== currentUserData?.profileData.businessPersona;
+        setProfileData(newProfileData);
+        setCurrentFlow(getFlow(profileData));
+      }
 
-    if (page.current === 1 && hasBusinessPersonaChanged) {
-      newProfileData = {
-        ...emptyProfileData,
-        businessName: profileData.businessName,
-        industryId: profileData.businessPersona === "OWNING" ? "generic" : undefined,
-        homeBasedBusiness: profileData.homeBasedBusiness,
-        liquorLicense: profileData.liquorLicense,
-        municipality: profileData.municipality,
-        businessPersona: profileData.businessPersona,
-        legalStructureId: profileData.legalStructureId,
-        requiresCpa: profileData.requiresCpa,
-        providesStaffingService: profileData.providesStaffingService,
-        certifiedInteriorDesigner: profileData.certifiedInteriorDesigner,
-        realEstateAppraisalManagement: profileData.realEstateAppraisalManagement,
-        operatingPhase: profileData.businessPersona === "OWNING" ? "GUEST_MODE_OWNING" : "GUEST_MODE",
-        interstateTransport: profileData.interstateTransport,
-        sectorId: profileData.sectorId,
-      };
+      const currentPage = onboardingFlows[currentFlow].pages[page.current - 1];
+      sendOnboardingOnSubmitEvents(newProfileData, currentPage?.name);
+      setAnalyticsDimensions(newProfileData);
+      setAlert(undefined);
+      setError(undefined);
 
-      setProfileData(newProfileData);
-      setCurrentFlow(getFlow(profileData));
-    }
-
-    const currentPage = onboardingFlows[currentFlow].pages[page.current - 1];
-    sendOnboardingOnSubmitEvents(newProfileData, currentPage?.name);
-    setAnalyticsDimensions(newProfileData);
-    setAlert(undefined);
-    setError(undefined);
-
-    if (profileData.foreignBusinessType === "NONE") {
-      await router.push(ROUTES.unsupported);
-    } else if (page.current + 1 <= onboardingFlows[currentFlow].pages.length) {
-      update({ ...currentUserData, user, profileData: newProfileData }, { local: true }).then(() => {
-        const nextCurrentPage = page.current + 1;
-        setPage({
-          current: nextCurrentPage,
-          previous: page.current,
+      if (profileData.foreignBusinessType === "NONE") {
+        await router.push(ROUTES.unsupported);
+      } else if (page.current + 1 <= onboardingFlows[currentFlow].pages.length) {
+        update({ ...currentUserData, user, profileData: newProfileData }, { local: true }).then(() => {
+          const nextCurrentPage = page.current + 1;
+          setPage({
+            current: nextCurrentPage,
+            previous: page.current,
+          });
+          routeToPage(nextCurrentPage);
+          headerRef.current?.focus();
         });
-        routeToPage(nextCurrentPage);
+      } else {
+        setRegistrationDimension("Onboarded Guest");
+        analytics.event.onboarding_last_step.submit.finish_onboarding();
+        let newUserData: UserData = {
+          ...currentUserData,
+          user,
+          profileData: newProfileData,
+          formProgress: "COMPLETED",
+        };
+
+        if (newUserData.user.receiveNewsletter) {
+          newUserData = await api.postNewsletter(newUserData);
+        }
+
+        if (newUserData.user.userTesting) {
+          newUserData = await api.postUserTesting(newUserData);
+        }
+
+        newUserData = await api.postGetAnnualFilings(newUserData);
+
+        const newPreferencesData = {
+          ...newUserData.preferences,
+          visibleSidebarCards:
+            newProfileData.businessPersona === "OWNING"
+              ? newUserData.preferences.visibleSidebarCards.filter((cardId: string) => {
+                  return cardId !== "task-progress";
+                })
+              : [...newUserData.preferences.visibleSidebarCards, "task-progress"],
+        };
+
+        if (newProfileData.operatingPhase === "GUEST_MODE_OWNING") {
+          newPreferencesData.visibleSidebarCards = newPreferencesData.visibleSidebarCards.filter(
+            (cardId: string) => {
+              return cardId !== "welcome";
+            }
+          );
+          newPreferencesData.visibleSidebarCards = [
+            ...newPreferencesData.visibleSidebarCards,
+            "welcome-up-and-running",
+          ];
+        }
+        const updatedUserData = {
+          ...newUserData,
+          preferences: newPreferencesData,
+        };
+
+        await update(updatedUserData);
+        await router.push({
+          pathname: ROUTES.dashboard,
+          query: { [QUERIES.fromOnboarding]: "true" },
+        });
+      }
+    },
+    () => {
+      scrollToTop();
+      const errors = getErrors();
+      if (errors.length > 0 || !isValid()) {
+        if (errors.includes("ALERT_BAR")) {
+          setAlert("ERROR");
+        }
+        const banner = errors.filter((error) => error != "ALERT_BAR") as ProfileError[];
+        if (banner.length > 0) {
+          setError(banner[0]);
+        }
         headerRef.current?.focus();
-      });
-    } else {
-      setRegistrationDimension("Onboarded Guest");
-      analytics.event.onboarding_last_step.submit.finish_onboarding();
-      let newUserData: UserData = {
-        ...currentUserData,
-        user,
-        profileData: newProfileData,
-        formProgress: "COMPLETED",
-      };
-
-      if (newUserData.user.receiveNewsletter) {
-        newUserData = await api.postNewsletter(newUserData);
       }
-
-      if (newUserData.user.userTesting) {
-        newUserData = await api.postUserTesting(newUserData);
-      }
-
-      newUserData = await api.postGetAnnualFilings(newUserData);
-
-      const newPreferencesData = {
-        ...newUserData.preferences,
-        visibleSidebarCards:
-          newProfileData.businessPersona === "OWNING"
-            ? newUserData.preferences.visibleSidebarCards.filter((cardId: string) => {
-                return cardId !== "task-progress";
-              })
-            : [...newUserData.preferences.visibleSidebarCards, "task-progress"],
-      };
-
-      if (newProfileData.operatingPhase === "GUEST_MODE_OWNING") {
-        newPreferencesData.visibleSidebarCards = newPreferencesData.visibleSidebarCards.filter(
-          (cardId: string) => {
-            return cardId !== "welcome";
-          }
-        );
-        newPreferencesData.visibleSidebarCards = [
-          ...newPreferencesData.visibleSidebarCards,
-          "welcome-up-and-running",
-        ];
-      }
-
-      const updatedUserData = {
-        ...newUserData,
-        preferences: newPreferencesData,
-      };
-
-      await update(updatedUserData);
-      await router.push({
-        pathname: ROUTES.dashboard,
-        query: { [QUERIES.fromOnboarding]: "true" },
-      });
     }
-  };
+  );
 
   const onBack = () => {
     if (page.current + 1 > 0) {
@@ -422,92 +384,93 @@ const OnboardingPage = (props: Props): ReactElement => {
 
   return (
     <MunicipalitiesContext.Provider value={{ municipalities: props.municipalities }}>
-      <ProfileDataContext.Provider
-        value={{
-          state: {
-            page: page.current,
-            profileData: profileData,
-            user: user,
-            flow: currentFlow,
-          },
-          setProfileData,
-          setUser,
-          onBack,
-        }}
-      >
-        <NextSeo
-          title={`Business.NJ.gov Navigator - ${
-            Config.onboardingDefaults.pageTitle
-          } ${evalHeaderStepsTemplate(onboardingFlows, currentFlow, profileData, page)}
-          } `}
-        />
-        <PageSkeleton>
-          <NavBar />
-          <main className="usa-section padding-top-0 desktop:padding-top-8" id="main">
-            <SingleColumnContainer isSmallerWidth>
-              {header()}
-              {!isLargeScreen && <hr />}
-              {error && (
-                <Alert dataTestid={`banner-alert-${error}`} variant="error">
-                  {OnboardingErrorLookup[error]}
-                </Alert>
-              )}
-              {alert && (
-                <SnackbarAlert
-                  variant={OnboardingStatusLookup()[alert].variant}
-                  isOpen={alert !== undefined}
-                  close={() => {
-                    return setAlert(undefined);
-                  }}
-                  dataTestid={`snackbar-alert-${alert}`}
-                  heading={OnboardingStatusLookup()[alert].header}
-                >
-                  <>
-                    {OnboardingStatusLookup()[alert].body}
-                    {OnboardingStatusLookup()[alert] && (
-                      <Link href={ROUTES.dashboard}>
-                        <a href={ROUTES.dashboard} data-testid={`snackbar-link`}>
-                          {OnboardingStatusLookup()[alert].link}
-                        </a>
-                      </Link>
-                    )}
-                  </>
-                </SnackbarAlert>
-              )}
-
-              <UserDataErrorAlert />
-            </SingleColumnContainer>
-            <div className="slide-container">
-              {onboardingFlows[currentFlow].pages.map((onboardingPage, index) => {
-                return (
-                  <CSSTransition
-                    key={index}
-                    in={page.current === index + 1}
-                    unmountOnExit
-                    timeout={getTimeout(page, index + 1)}
-                    classNames={`width-100 ${getAnimation(page)}`}
+      <profileFormContext.Provider value={formContextState}>
+        <ProfileDataContext.Provider
+          value={{
+            state: {
+              page: page.current,
+              profileData: profileData,
+              user: user,
+              flow: currentFlow,
+            },
+            setProfileData,
+            setUser,
+            onBack,
+          }}
+        >
+          <NextSeo
+            title={`Business.NJ.gov Navigator - ${
+              Config.onboardingDefaults.pageTitle
+            } ${evalHeaderStepsTemplate(onboardingFlows, currentFlow, profileData, page)}`}
+          />
+          <PageSkeleton>
+            <NavBar />
+            <main className="usa-section padding-top-0 desktop:padding-top-8" id="main">
+              <SingleColumnContainer isSmallerWidth>
+                {header()}
+                {!isLargeScreen && <hr />}
+                {error && (
+                  <Alert dataTestid={`banner-alert-${error}`} variant="error">
+                    {OnboardingErrorLookup[error]}
+                  </Alert>
+                )}
+                {alert && (
+                  <SnackbarAlert
+                    variant={OnboardingStatusLookup()[alert].variant}
+                    isOpen={alert !== undefined}
+                    close={() => {
+                      return setAlert(undefined);
+                    }}
+                    dataTestid={`snackbar-alert-${alert}`}
+                    heading={OnboardingStatusLookup()[alert].header}
                   >
-                    <SingleColumnContainer isSmallerWidth>
-                      <form
-                        onSubmit={onSubmit}
-                        className={`usa-prose onboarding-form margin-top-2`}
-                        data-testid={`page-${index + 1}-form`}
-                      >
-                        {onboardingPage.component}
-                        <hr className="margin-top-6 margin-bottom-4" aria-hidden={true} />
-                        <DevOnlySkipOnboardingButton setPage={setPage} routeToPage={routeToPage} />
-                        <OnboardingButtonGroup
-                          isFinal={page.current === onboardingFlows[currentFlow].pages.length}
-                        />
-                      </form>
-                    </SingleColumnContainer>
-                  </CSSTransition>
-                );
-              })}
-            </div>
-          </main>
-        </PageSkeleton>
-      </ProfileDataContext.Provider>
+                    <>
+                      {OnboardingStatusLookup()[alert].body}
+                      {OnboardingStatusLookup()[alert] && (
+                        <Link href={ROUTES.dashboard}>
+                          <a href={ROUTES.dashboard} data-testid={`snackbar-link`}>
+                            {OnboardingStatusLookup()[alert].link}
+                          </a>
+                        </Link>
+                      )}
+                    </>
+                  </SnackbarAlert>
+                )}
+
+                <UserDataErrorAlert />
+              </SingleColumnContainer>
+              <div className="slide-container">
+                {onboardingFlows[currentFlow].pages.map((onboardingPage, index) => {
+                  return (
+                    <CSSTransition
+                      key={index}
+                      in={page.current === index + 1}
+                      unmountOnExit
+                      timeout={getTimeout(page, index + 1)}
+                      classNames={`width-100 ${getAnimation(page)}`}
+                    >
+                      <SingleColumnContainer isSmallerWidth>
+                        <form
+                          onSubmit={onSubmit}
+                          className={`usa-prose onboarding-form margin-top-2`}
+                          data-testid={`page-${index + 1}-form`}
+                        >
+                          {onboardingPage.component}
+                          <hr className="margin-top-6 margin-bottom-4" aria-hidden={true} />
+                          <DevOnlySkipOnboardingButton setPage={setPage} routeToPage={routeToPage} />
+                          <OnboardingButtonGroup
+                            isFinal={page.current === onboardingFlows[currentFlow].pages.length}
+                          />
+                        </form>
+                      </SingleColumnContainer>
+                    </CSSTransition>
+                  );
+                })}
+              </div>
+            </main>
+          </PageSkeleton>
+        </ProfileDataContext.Provider>
+      </profileFormContext.Provider>
     </MunicipalitiesContext.Provider>
   );
 };
