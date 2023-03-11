@@ -1,11 +1,25 @@
+import { FormContextType } from "@/contexts/formContext";
+import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
+import { FieldErrorType, FormContextFieldProps } from "@/lib/types/types";
 import { camelCaseToSentence } from "@/lib/utils/cases-helpers";
 import { OutlinedInputProps, TextField, TextFieldProps } from "@mui/material";
 
-import { ChangeEvent, FocusEvent, forwardRef, HTMLInputTypeAttribute, ReactElement, RefObject } from "react";
+import {
+  ChangeEvent,
+  Context,
+  FocusEvent,
+  forwardRef,
+  HTMLInputTypeAttribute,
+  ReactElement,
+  RefObject,
+  useMemo,
+} from "react";
 
-export interface GenericTextFieldProps {
+export interface GenericTextFieldProps<T = FieldErrorType> extends FormContextFieldProps<T> {
   fieldName: string;
   fieldOptions?: TextFieldProps;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  formContext?: Context<FormContextType<any>>;
   onValidation?: (fieldName: string, invalid: boolean, value?: string) => void;
   additionalValidation?: (value: string) => boolean;
   visualFilter?: (value: string) => string;
@@ -35,14 +49,26 @@ export interface GenericTextFieldProps {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any, react/display-name
 export const GenericTextField = forwardRef(
-  (
-    props: GenericTextFieldProps,
+  <T,>(
+    props: GenericTextFieldProps<T>,
     ref?: ((instance: HTMLDivElement | null) => void) | RefObject<HTMLDivElement> | null | undefined
   ): ReactElement => {
     let visualFilter = props.visualFilter;
     let valueFilter = props.valueFilter;
-    let additionalValidation = props.additionalValidation;
+    let additionalValidationIsValid = props.additionalValidation;
     let fieldOptions = props.fieldOptions;
+
+    const value = useMemo(
+      () => (visualFilter ? visualFilter(props.value?.toString() ?? "") : props.value?.toString() ?? ""),
+      [props.value, visualFilter]
+    );
+
+    const { RegisterForOnSubmit, Validate, isFormFieldInValid } = useFormContextFieldHelpers(
+      props.fieldName,
+      props.formContext,
+      props.errorTypes
+    );
+
     if (props.numericProps) {
       const regex = (value: string): string => {
         if (props.allowMasking) {
@@ -74,7 +100,7 @@ export const GenericTextField = forwardRef(
         return true;
       };
 
-      additionalValidation = (returnedValue: string): boolean => {
+      additionalValidationIsValid = (returnedValue: string): boolean => {
         return ![
           validMinimumValue(returnedValue),
           returnedValue.length <= (maxLength ?? Number.POSITIVE_INFINITY),
@@ -89,16 +115,19 @@ export const GenericTextField = forwardRef(
       };
     }
 
-    const validation = (currentValue: string): void => {
+    const isFieldInvalid = (currentValue: string): boolean => {
       const value = valueFilter ? valueFilter(currentValue) : currentValue;
-      const invalidAdditional = additionalValidation ? !additionalValidation(value) : false;
+      const invalidAdditional = additionalValidationIsValid ? !additionalValidationIsValid(value) : false;
       const invalidRequired = props.required ? !value.trim() : false;
-      const isFieldInvalid = invalidAdditional || invalidRequired;
-      props.onValidation && props.onValidation(props.fieldName, isFieldInvalid, currentValue);
+      return invalidAdditional || invalidRequired;
     };
 
+    RegisterForOnSubmit(() => !isFieldInvalid(value));
+
     const onValidation = (event: FocusEvent<HTMLInputElement>): void => {
-      validation(event.target.value);
+      const invalid = isFieldInvalid(event.target.value);
+      Validate(invalid);
+      props.onValidation && props.onValidation(props.fieldName, invalid, event.target.value);
     };
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -111,20 +140,21 @@ export const GenericTextField = forwardRef(
       }
     };
 
-    const value = visualFilter ? visualFilter(props.value?.toString() ?? "") : props.value?.toString() ?? "";
+    const error = props.error ?? isFormFieldInValid;
 
     const helperText = props.validationText
-      ? props.error
+      ? error
         ? props.validationText
         : props.noValidationMargin
         ? ""
         : " "
       : "";
+
     return (
       <div
         className={`${props.formInputWide ? "form-input-wide" : ""} ${
           !props.formInputFull && !props.formInputWide ? "form-input" : ""
-        } margin-top-2 ${props.className ?? ""} ${props.error ? "error" : ""}`}
+        } margin-top-2 ${props.className ?? ""} ${error ? "error" : ""}`}
       >
         <TextField
           value={value ?? ""}
@@ -133,7 +163,7 @@ export const GenericTextField = forwardRef(
           name={props.fieldName}
           onChange={handleChange}
           onBlur={onValidation}
-          error={props.error}
+          error={error}
           helperText={helperText}
           variant="outlined"
           autoComplete={props.autoComplete ?? "no"}
