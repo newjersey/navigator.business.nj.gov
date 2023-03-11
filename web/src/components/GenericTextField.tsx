@@ -21,7 +21,7 @@ export interface GenericTextFieldProps<T = FieldErrorType> extends FormContextFi
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   formContext?: Context<FormContextType<any>>;
   onValidation?: (fieldName: string, invalid: boolean, value?: string) => void;
-  additionalValidation?: (value: string) => boolean;
+  additionalValidationIsValid?: (value: string) => boolean;
   visualFilter?: (value: string) => string;
   valueFilter?: (value: string) => string;
   handleChange?: (value: string) => void;
@@ -55,7 +55,7 @@ export const GenericTextField = forwardRef(
   ): ReactElement => {
     let visualFilter = props.visualFilter;
     let valueFilter = props.valueFilter;
-    let additionalValidationIsValid = props.additionalValidation;
+    let additionalValidationIsValid = props.additionalValidationIsValid;
     let fieldOptions = props.fieldOptions;
 
     const value = useMemo(
@@ -104,7 +104,7 @@ export const GenericTextField = forwardRef(
         return ![
           validMinimumValue(returnedValue),
           returnedValue.length <= (maxLength ?? Number.POSITIVE_INFINITY),
-          props.additionalValidation ? props.additionalValidation(returnedValue) : true,
+          props.additionalValidationIsValid ? props.additionalValidationIsValid(returnedValue) : true,
         ].some((i) => {
           return !i;
         });

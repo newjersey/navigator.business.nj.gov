@@ -5,14 +5,16 @@ import { OnboardingBusinessName } from "@/components/onboarding/OnboardingBusine
 import { OnboardingExistingEmployees } from "@/components/onboarding/OnboardingExistingEmployees";
 import { OnboardingMunicipality } from "@/components/onboarding/OnboardingMunicipality";
 import { OnboardingOwnership } from "@/components/onboarding/OnboardingOwnership";
-import { OnboardingTaxId } from "@/components/onboarding/OnboardingTaxId";
 import { ProfileNexusDBANameField } from "@/components/onboarding/ProfileNexusDBANameField";
+import { OnboardingTaxId } from "@/components/onboarding/taxId/OnboardingTaxId";
 import { TaxDisclaimer } from "@/components/TaxDisclaimer";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
+import { profileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { createProfileFieldErrorMap, ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
+import { createProfileFieldErrorMap } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import {
   createEmptyProfileData,
@@ -31,7 +33,13 @@ export const RegisteredForTaxesModal = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const { userData, updateQueue } = useUserData();
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
-  const [fieldStates, setFieldStates] = useState<ProfileFieldErrorMap>(createProfileFieldErrorMap());
+
+  const {
+    FormFuncWrapper,
+    onSubmit,
+    isValid,
+    state: formContextState,
+  } = useFormContextHelper(createProfileFieldErrorMap());
 
   useEffect(() => {
     if (!userData) {
@@ -40,40 +48,8 @@ export const RegisteredForTaxesModal = (props: Props): ReactElement => {
     setProfileData(userData.profileData);
   }, [userData]);
 
-  const onValidation = (field: ProfileFields, invalid: boolean) => {
-    setFieldStates((prevFieldStates) => {
-      return { ...prevFieldStates, [field]: { invalid } };
-    });
-  };
-
-  const onSubmit = async () => {
-    if (!userData || !updateQueue) {
-      return;
-    }
-    const errorMap = {
-      ...fieldStates,
-      nexusDbaName: {
-        invalid: !profileData.nexusDbaName && showDBAField(),
-      },
-      businessName: {
-        invalid: !profileData.businessName && showBusinessField(),
-      },
-      existingEmployees: {
-        invalid: !profileData.existingEmployees,
-      },
-      taxId: {
-        invalid: profileData.taxId?.length !== 12,
-      },
-      municipality: {
-        invalid: !profileData.municipality && showMunicipalityField(),
-      },
-    };
-    setFieldStates(errorMap);
-    if (
-      Object.keys(errorMap as ProfileFieldErrorMap).some((k) => {
-        return errorMap[k as ProfileFields].invalid;
-      })
-    ) {
+  FormFuncWrapper(() => {
+    if (!userData || !updateQueue || !isValid()) {
       return;
     }
 
@@ -87,7 +63,7 @@ export const RegisteredForTaxesModal = (props: Props): ReactElement => {
 
     props.onSave({ redirectOnSuccess: true });
     props.close();
-  };
+  });
 
   const showBusinessField = (): boolean => {
     return (
@@ -118,66 +94,68 @@ export const RegisteredForTaxesModal = (props: Props): ReactElement => {
   };
 
   return (
-    <ProfileDataContext.Provider
-      value={{
-        state: {
-          profileData: profileData,
-          flow: "STARTING",
-        },
-        setProfileData,
-        setUser: () => {},
-        onBack: () => {},
-      }}
-    >
-      <ModalTwoButton
-        isOpen={props.isOpen}
-        close={props.close}
-        title={Config.registeredForTaxesModal.title}
-        maxWidth={"md"}
-        primaryButtonText={Config.registeredForTaxesModal.saveButtonText}
-        primaryButtonOnClick={onSubmit}
-        secondaryButtonText={Config.registeredForTaxesModal.cancelButtonText}
+    <profileFormContext.Provider value={formContextState}>
+      <ProfileDataContext.Provider
+        value={{
+          state: {
+            profileData: profileData,
+            flow: "STARTING",
+          },
+          setProfileData,
+          setUser: () => {},
+          onBack: () => {},
+        }}
       >
-        <div className="margin-bottom-3">
-          <Content>{Config.registeredForTaxesModal.subtitle}</Content>
-        </div>
-        {showDBAField() && (
-          <>
-            <WithErrorBar hasError={fieldStates.nexusDbaName.invalid} type="ALWAYS">
-              <FieldLabelModal fieldName="nexusDbaName" />
-              <ProfileNexusDBANameField onValidation={onValidation} fieldStates={fieldStates} required />
+        <ModalTwoButton
+          isOpen={props.isOpen}
+          close={props.close}
+          title={Config.registeredForTaxesModal.title}
+          maxWidth={"md"}
+          primaryButtonText={Config.registeredForTaxesModal.saveButtonText}
+          primaryButtonOnClick={onSubmit}
+          secondaryButtonText={Config.registeredForTaxesModal.cancelButtonText}
+        >
+          <div className="margin-bottom-3">
+            <Content>{Config.registeredForTaxesModal.subtitle}</Content>
+          </div>
+          {showDBAField() && (
+            <>
+              <WithErrorBar hasError={formContextState.fieldStates.nexusDbaName.invalid} type="ALWAYS">
+                <FieldLabelModal fieldName="nexusDbaName" />
+                <ProfileNexusDBANameField required />
+              </WithErrorBar>
+            </>
+          )}
+          {showBusinessField() && (
+            <WithErrorBar hasError={formContextState.fieldStates.businessName.invalid} type="ALWAYS">
+              <FieldLabelModal fieldName="businessName" />
+              <OnboardingBusinessName required />
             </WithErrorBar>
-          </>
-        )}
-        {showBusinessField() && (
-          <WithErrorBar hasError={fieldStates.businessName.invalid} type="ALWAYS">
-            <FieldLabelModal fieldName="businessName" />
-            <OnboardingBusinessName onValidation={onValidation} fieldStates={fieldStates} required />
+          )}
+
+          <WithErrorBar hasError={formContextState.fieldStates.taxId.invalid} type="ALWAYS">
+            <FieldLabelModal fieldName="taxId" />
+            <TaxDisclaimer legalStructureId={userData?.profileData.legalStructureId} />
+            <OnboardingTaxId required />
           </WithErrorBar>
-        )}
 
-        <WithErrorBar hasError={fieldStates.taxId.invalid} type="ALWAYS">
-          <FieldLabelModal fieldName="taxId" />
-          <TaxDisclaimer legalStructureId={userData?.profileData.legalStructureId} />
-          <OnboardingTaxId onValidation={onValidation} fieldStates={fieldStates} required />
-        </WithErrorBar>
+          <FieldLabelModal fieldName="ownershipTypeIds" />
+          <OnboardingOwnership />
 
-        <FieldLabelModal fieldName="ownershipTypeIds" />
-        <OnboardingOwnership />
-
-        <div className="margin-top-3" aria-hidden={true} />
-        <WithErrorBar hasError={fieldStates.existingEmployees.invalid} type="ALWAYS">
-          <FieldLabelModal fieldName="existingEmployees" />
-          <OnboardingExistingEmployees onValidation={onValidation} fieldStates={fieldStates} />
-        </WithErrorBar>
-
-        {showMunicipalityField() && (
-          <WithErrorBar hasError={fieldStates.municipality.invalid} type="ALWAYS">
-            <FieldLabelModal fieldName="municipality" />
-            <OnboardingMunicipality onValidation={onValidation} fieldStates={fieldStates} />
+          <div className="margin-top-3" aria-hidden={true} />
+          <WithErrorBar hasError={formContextState.fieldStates.existingEmployees.invalid} type="ALWAYS">
+            <FieldLabelModal fieldName="existingEmployees" />
+            <OnboardingExistingEmployees required />
           </WithErrorBar>
-        )}
-      </ModalTwoButton>
-    </ProfileDataContext.Provider>
+
+          {showMunicipalityField() && (
+            <WithErrorBar hasError={formContextState.fieldStates.municipality.invalid} type="ALWAYS">
+              <FieldLabelModal fieldName="municipality" />
+              <OnboardingMunicipality required />
+            </WithErrorBar>
+          )}
+        </ModalTwoButton>
+      </ProfileDataContext.Provider>
+    </profileFormContext.Provider>
   );
 };

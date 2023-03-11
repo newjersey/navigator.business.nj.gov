@@ -181,12 +181,12 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
                 data-testid="naics-radio-input"
                 onChange={() => {
                   setDisplayInput(true);
-                  setNaicsCode("other");
+                  setNaicsCode("");
                   setIsInvalid(undefined);
                   setInProgress();
                 }}
-                value="other"
-                checked={displayInput && naicsCode === "other"}
+                value=""
+                checked={displayInput}
                 control={<Radio color="primary" />}
                 label={"Search for other NAICS codes"}
               />

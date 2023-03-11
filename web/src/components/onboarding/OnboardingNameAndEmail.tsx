@@ -1,26 +1,31 @@
 import { GenericTextField } from "@/components/GenericTextField";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
+import { profileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import {
   FullNameErrorVariant,
   getFullNameErrorVariant,
   isFullNameValid,
 } from "@/lib/domain-logic/isFullNameValid";
-import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
+import { FormContextFieldProps } from "@/lib/types/types";
 import { validateEmail } from "@/lib/utils/helpers";
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import { ReactElement, useContext, useState } from "react";
 
-interface Props {
-  onValidation: (fieldName: ProfileFields, invalid: boolean) => void;
-  fieldStates: ProfileFieldErrorMap;
-}
-
-export const OnboardingNameAndEmail = (props: Props): ReactElement => {
+export const OnboardingNameAndEmail = <T,>(props: FormContextFieldProps<T>): ReactElement => {
   const { state, setUser } = useContext(ProfileDataContext);
   const [email, setEmail] = useState<string>(state.user?.email || "");
   const [confirmEmail, setConfirmEmail] = useState<string | undefined>(state.user?.email || undefined);
   const { Config } = useConfig();
+
+  const { Validate, isFormFieldInValid, RegisterForOnSubmit } = useFormContextFieldHelpers(
+    "email",
+    profileFormContext,
+    props.errorTypes
+  );
+
+  RegisterForOnSubmit(() => (state.user?.email ? validateEmail(state.user.email) : false));
 
   const FullNameErrorMessageLookup: Record<FullNameErrorVariant, string> = {
     MISSING: Config.selfRegistration.errorTextFullName,
@@ -58,10 +63,6 @@ export const OnboardingNameAndEmail = (props: Props): ReactElement => {
     };
   };
 
-  const onValidation = (fieldName: string, invalid: boolean): void => {
-    return props.onValidation(fieldName as ProfileFields, invalid);
-  };
-
   return (
     <div className="tablet:padding-y-2">
       <p className="padding-bottom-1">{Config.selfRegistration.signUpDescriptionText}</p>
@@ -69,13 +70,12 @@ export const OnboardingNameAndEmail = (props: Props): ReactElement => {
         <label htmlFor="name">{Config.selfRegistration.nameFieldLabel}</label>
         <GenericTextField
           value={state.user?.name}
+          formContext={profileFormContext}
           fieldName={"name"}
-          error={props.fieldStates["name"].invalid}
-          onValidation={onValidation}
           validationText={FullNameErrorMessageLookup[getFullNameErrorVariant(state.user?.name)]}
           required={true}
           handleChange={handleName}
-          additionalValidation={isFullNameValid}
+          additionalValidationIsValid={isFullNameValid}
         />
       </div>
       <div className="margin-top-2">
@@ -83,12 +83,14 @@ export const OnboardingNameAndEmail = (props: Props): ReactElement => {
         <GenericTextField
           value={email}
           fieldName={"email"}
-          error={props.fieldStates["email"].invalid}
+          error={isFormFieldInValid}
           handleChange={handleEmail()}
-          onValidation={onValidation}
+          onValidation={(_, invalid) => {
+            return Validate(invalid);
+          }}
           validationText={Config.selfRegistration.errorTextEmailsNotMatching}
           required={true}
-          additionalValidation={(value) => {
+          additionalValidationIsValid={(value) => {
             return confirmEmail ? value == confirmEmail : true && validateEmail(value);
           }}
         />
@@ -97,13 +99,13 @@ export const OnboardingNameAndEmail = (props: Props): ReactElement => {
         <label htmlFor="confirm-email">{Config.selfRegistration.confirmEmailFieldLabel}</label>
         <GenericTextField
           value={confirmEmail}
-          error={props.fieldStates["email"].invalid}
+          error={isFormFieldInValid}
           handleChange={handleEmail(true)}
           onValidation={(_, invalid) => {
-            return onValidation("email", invalid);
+            return Validate(invalid);
           }}
           required={true}
-          additionalValidation={(value) => {
+          additionalValidationIsValid={(value) => {
             return value == email && validateEmail(value);
           }}
           validationText={Config.selfRegistration.errorTextEmailsNotMatching}

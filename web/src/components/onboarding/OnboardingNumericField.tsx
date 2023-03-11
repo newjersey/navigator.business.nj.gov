@@ -8,9 +8,9 @@ interface NumericFieldProps {
   minLength?: number;
 }
 
-interface Props extends Omit<OnboardingProps, "numericProps">, NumericFieldProps {}
+interface Props<T> extends Omit<OnboardingProps<T>, "numericProps">, NumericFieldProps {}
 
-export const OnboardingNumericField = ({ minLength, maxLength, ...props }: Props): ReactElement => {
+export const OnboardingNumericField = <T,>({ minLength, maxLength, ...props }: Props<T>): ReactElement => {
   const validationText =
     minLength === undefined
       ? templateEval(Config.onboardingDefaults.errorTextMinimumNumericField, {

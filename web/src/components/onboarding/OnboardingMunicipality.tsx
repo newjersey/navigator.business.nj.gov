@@ -2,17 +2,18 @@ import { MunicipalityDropdown } from "@/components/onboarding/MunicipalityDropdo
 import { ConfigType } from "@/contexts/configContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
+import { profileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { isMunicipalityRequired } from "@/lib/domain-logic/isMunicipalityRequired";
-import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
+import { FormContextFieldProps } from "@/lib/types/types";
 import { Municipality } from "@businessnjgovnavigator/shared/";
 import { FocusEvent, ReactElement, useContext } from "react";
 
-interface Props {
-  onValidation: (field: ProfileFields, invalid: boolean) => void;
-  fieldStates: ProfileFieldErrorMap;
+interface Props extends FormContextFieldProps {
   hideErrorLabel?: boolean;
+  required?: boolean;
 }
 
 export const OnboardingMunicipality = (props: Props): ReactElement => {
@@ -21,6 +22,12 @@ export const OnboardingMunicipality = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const fieldName = "municipality";
 
+  const { RegisterForOnSubmit, Validate, isFormFieldInValid } = useFormContextFieldHelpers(
+    fieldName,
+    profileFormContext,
+    props.errorTypes
+  );
+
   const contentFromConfig: ConfigType["profileDefaults"]["fields"]["municipality"]["default"] =
     getProfileConfig({
       config: Config,
@@ -28,22 +35,32 @@ export const OnboardingMunicipality = (props: Props): ReactElement => {
       fieldName: fieldName,
     });
 
+  RegisterForOnSubmit(() =>
+    isMunicipalityRequired({
+      legalStructureId: state.profileData.legalStructureId,
+      operatingPhase: state.profileData.operatingPhase,
+    }) || props.required
+      ? state.profileData[fieldName] != undefined
+      : true
+  );
+
   const onValidation = (event: FocusEvent<HTMLInputElement>): void => {
     if (
       isMunicipalityRequired({
         legalStructureId: state.profileData.legalStructureId,
         operatingPhase: state.profileData.operatingPhase,
-      })
+      }) ||
+      props.required
     ) {
       const valid = event.target.value.length > 0;
-      props.onValidation(fieldName, !valid);
+      Validate(!valid);
     } else {
-      props.onValidation(fieldName, false);
+      Validate(false);
     }
   };
 
   const handleChange = (): void => {
-    return props.onValidation(fieldName, false);
+    return Validate(false);
   };
 
   const onSelect = (value: Municipality | undefined): void => {
@@ -60,7 +77,7 @@ export const OnboardingMunicipality = (props: Props): ReactElement => {
         ariaLabel="Location"
         onValidation={onValidation}
         fieldName={fieldName}
-        error={props.fieldStates[fieldName].invalid}
+        error={isFormFieldInValid}
         validationLabel="Error"
         handleChange={handleChange}
         value={state.profileData.municipality}

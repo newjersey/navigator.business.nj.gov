@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import { EncryptionStatus, TaxIdDisplayStatus } from "@/components/onboarding/taxId/OnboardingTaxIdHelpers";
 import { ShowHideToggleButton } from "@/components/ShowHideToggleButton";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { decryptTaxId } from "@/lib/api-client/apiClient";
@@ -26,7 +27,6 @@ export const DisabledTaxId = (props: Props): ReactElement => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.profileData.taxId]);
 
-  type EncryptionStatus = "decrypted" | "encrypted" | undefined;
   const getTaxIdEncryptionStatus = (profileData: ProfileData | undefined): EncryptionStatus => {
     if (!profileData) {
       return;
@@ -38,7 +38,7 @@ export const DisabledTaxId = (props: Props): ReactElement => {
     }
   };
 
-  const getTaxIdInitialStatus = (encryptionStatus: EncryptionStatus): "password-view" | "text-view" => {
+  const getTaxIdInitialStatus = (encryptionStatus: EncryptionStatus): TaxIdDisplayStatus => {
     if (encryptionStatus == "encrypted") {
       return "password-view";
     } else {
@@ -50,9 +50,7 @@ export const DisabledTaxId = (props: Props): ReactElement => {
 
   const [locationValue, setLocationValue] = useState(state.profileData[fieldName]?.trim().slice(9, 12) ?? "");
   const [taxIdValue, setTaxIdValue] = useState(state.profileData[fieldName]?.trim().slice(0, 9) ?? "");
-  const [taxIdDisplayStatus, setTaxIdDisplayStatus] = useState<"text-view" | "password-view">(
-    taxIdInitialDisplay()
-  );
+  const [taxIdDisplayStatus, setTaxIdDisplayStatus] = useState<TaxIdDisplayStatus>(taxIdInitialDisplay());
   const getShowHideToggleButton = () => {
     return ShowHideToggleButton({
       status: taxIdDisplayStatus,

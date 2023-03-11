@@ -1,22 +1,32 @@
 import { MenuOptionSelected } from "@/components/MenuOptionSelected";
 import { MenuOptionUnselected } from "@/components/MenuOptionUnselected";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
+import { profileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
+import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
+import { FormContextFieldProps } from "@/lib/types/types";
 import { LegalStructure, LegalStructures, LookupLegalStructureById } from "@businessnjgovnavigator/shared/";
 import { FormControl, FormHelperText, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import { orderBy } from "lodash";
 import { ReactElement, ReactNode, useContext } from "react";
 
-interface Props {
+interface Props<T> extends FormContextFieldProps<T> {
   disabled?: boolean;
-  onValidation?: (field: ProfileFields, invalid: boolean) => void;
-  fieldStates?: ProfileFieldErrorMap;
 }
 
-export const OnboardingLegalStructureDropdown = (props: Props): ReactElement => {
+export const OnboardingLegalStructureDropdown = <T,>(props: Props<T>): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { Config } = useConfig();
+
+  const { RegisterForOnSubmit, Validate, isFormFieldInValid } = useFormContextFieldHelpers(
+    "legalStructureId",
+    profileFormContext,
+    props.errorTypes
+  );
+
+  const isValid = () => state.profileData.legalStructureId != undefined;
+
+  RegisterForOnSubmit(isValid);
 
   const LegalStructuresOrdered: LegalStructure[] = orderBy(
     LegalStructures,
@@ -31,9 +41,7 @@ export const OnboardingLegalStructureDropdown = (props: Props): ReactElement => 
         ...state.profileData,
         legalStructureId: event.target.value,
       });
-      if (props.onValidation) {
-        props.onValidation("legalStructureId", false);
-      }
+      Validate(false);
     }
   };
 
@@ -64,7 +72,7 @@ export const OnboardingLegalStructureDropdown = (props: Props): ReactElement => 
   return (
     <>
       <div className="form-input margin-top-2">
-        <FormControl variant="outlined" fullWidth error={props.fieldStates?.legalStructureId.invalid}>
+        <FormControl variant="outlined" fullWidth error={isFormFieldInValid}>
           <Select
             fullWidth
             displayEmpty
@@ -88,8 +96,7 @@ export const OnboardingLegalStructureDropdown = (props: Props): ReactElement => 
           </Select>
         </FormControl>
         <FormHelperText className={"text-error-dark"}>
-          {props.fieldStates?.legalStructureId.invalid &&
-            Config.profileDefaults.fields.legalStructureId.default.errorTextRequired}
+          {isFormFieldInValid && Config.profileDefaults.fields.legalStructureId.default.errorTextRequired}
         </FormHelperText>
       </div>
     </>

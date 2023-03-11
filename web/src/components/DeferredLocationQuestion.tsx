@@ -5,7 +5,6 @@ import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { OnboardingMunicipality } from "@/components/onboarding/OnboardingMunicipality";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { createProfileFieldErrorMap } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { templateEval } from "@/lib/utils/helpers";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
@@ -92,11 +91,7 @@ export const DeferredLocationQuestion = (props: Props): ReactElement => {
     <div className="bg-base-extra-light margin-top-2" data-testid="deferred-location-task">
       {shouldShowQuestion ? (
         <DeferredOnboardingQuestion label={label} onSave={onSaveNewLocation} isTaskPage>
-          <OnboardingMunicipality
-            onValidation={() => {}}
-            fieldStates={createProfileFieldErrorMap()}
-            hideErrorLabel={true}
-          />
+          <OnboardingMunicipality hideErrorLabel={true} />
         </DeferredOnboardingQuestion>
       ) : (
         <div className="padding-3">

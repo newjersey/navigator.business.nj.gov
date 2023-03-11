@@ -1,8 +1,11 @@
 import { ProfileDataContext } from "@/contexts/profileDataContext";
+import { profileFormContext } from "@/contexts/profileFormContext";
+import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
+import { createProfileFieldErrorMap } from "@/lib/types/types";
 import { getFlow } from "@/lib/utils/helpers";
 import { statefulDataHelpers } from "@/test/mock/withStatefulData";
 import { createEmptyUser, ProfileData } from "@businessnjgovnavigator/shared/";
-import { ReactElement, ReactNode, useState } from "react";
+import { ReactElement, ReactNode, useEffect, useState } from "react";
 
 const updateSpy = jest.fn();
 
@@ -16,6 +19,11 @@ export const profileDataWasNotUpdated = helpers.dataWasNotUpdated;
 
 export const profileDataUpdatedNTimes = helpers.dataUpdatedNTimes;
 
+export const WithStatefulProfileFormContext = ({ children }: { children: ReactNode }): ReactElement => {
+  const { state: formContextState } = useFormContextHelper(createProfileFieldErrorMap());
+  return <profileFormContext.Provider value={formContextState}>{children}</profileFormContext.Provider>;
+};
+
 export const WithStatefulProfileData = ({
   children,
   initialData,
@@ -26,27 +34,27 @@ export const WithStatefulProfileData = ({
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [genericData, setGenericData] = useState<ProfileData>(initialData);
 
-  const update = (newData: ProfileData, config?: { local?: boolean }): Promise<void> => {
-    updateSpy(newData, config);
-    setGenericData(newData);
-    return Promise.resolve();
-  };
+  useEffect(() => {
+    updateSpy(genericData);
+  }, [genericData]);
 
   return (
-    <ProfileDataContext.Provider
-      value={{
-        state: {
-          page: 1,
-          user: createEmptyUser(),
-          flow: getFlow(genericData),
-          profileData: genericData,
-        },
-        onBack: jest.fn(),
-        setProfileData: update,
-        setUser: jest.fn(),
-      }}
-    >
-      {children}
-    </ProfileDataContext.Provider>
+    <WithStatefulProfileFormContext>
+      <ProfileDataContext.Provider
+        value={{
+          state: {
+            page: 1,
+            user: createEmptyUser(),
+            flow: getFlow(genericData),
+            profileData: genericData,
+          },
+          onBack: jest.fn(),
+          setProfileData: setGenericData,
+          setUser: jest.fn(),
+        }}
+      >
+        {children}
+      </ProfileDataContext.Provider>{" "}
+    </WithStatefulProfileFormContext>
   );
 };

@@ -1,4 +1,4 @@
-import { DisabledTaxId } from "@/components/onboarding/DisabledTaxId";
+import { DisabledTaxId } from "@/components/onboarding/taxId/DisabledTaxId";
 import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { generateProfileData } from "@/test/factories";

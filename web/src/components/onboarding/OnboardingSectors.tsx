@@ -2,23 +2,26 @@ import { MenuOptionSelected } from "@/components/MenuOptionSelected";
 import { MenuOptionUnselected } from "@/components/MenuOptionUnselected";
 import { ConfigType } from "@/contexts/configContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
+import { profileFormContext } from "@/contexts/profileFormContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
-import { ProfileFieldErrorMap, ProfileFields } from "@/lib/types/types";
+import { FormContextFieldProps } from "@/lib/types/types";
 import { arrayOfSectors as sectors, LookupSectorTypeById, SectorType } from "@businessnjgovnavigator/shared/";
 import { Autocomplete, TextField } from "@mui/material";
 import { orderBy } from "lodash";
 import React, { ChangeEvent, ReactElement, useContext, useState } from "react";
 
-interface Props {
-  onValidation: (field: ProfileFields, invalid: boolean) => void;
-  fieldStates: ProfileFieldErrorMap;
-}
-
-export const OnboardingSectors = (props: Props): ReactElement => {
+export const OnboardingSectors = <T,>(props: FormContextFieldProps<T>): ReactElement => {
   const [searchText, setSearchText] = useState<string>("");
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { Config } = useConfig();
+
+  const { RegisterForOnSubmit, Validate, isFormFieldInValid } = useFormContextFieldHelpers(
+    "sectorId",
+    profileFormContext,
+    props.errorTypes
+  );
 
   const contentFromConfig: ConfigType["profileDefaults"]["fields"]["sectorId"]["default"] = getProfileConfig({
     config: Config,
@@ -44,13 +47,12 @@ export const OnboardingSectors = (props: Props): ReactElement => {
     }
   };
 
-  const onValidation = (): void => {
-    let invalid = true;
-    if (state.profileData.sectorId) {
-      invalid = !LookupSectorTypeById(state.profileData.sectorId).id;
-    }
-    props.onValidation("sectorId", invalid);
-  };
+  const isValid = () =>
+    !!state.profileData.sectorId && LookupSectorTypeById(state.profileData.sectorId)?.id != undefined;
+
+  const onValidation = (): void => Validate(!isValid());
+
+  RegisterForOnSubmit(isValid);
 
   return (
     <>
@@ -95,8 +97,8 @@ export const OnboardingSectors = (props: Props): ReactElement => {
                 value={searchText}
                 onChange={handleChange}
                 variant="outlined"
-                error={props.fieldStates.sectorId.invalid}
-                helperText={props.fieldStates.sectorId.invalid ? contentFromConfig.errorTextRequired : " "}
+                error={isFormFieldInValid}
+                helperText={isFormFieldInValid ? contentFromConfig.errorTextRequired : ""}
               />
             );
           }}

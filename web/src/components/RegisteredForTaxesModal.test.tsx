@@ -349,6 +349,7 @@ describe("<RegisteredForTaxesModal />", () => {
         fillText("Existing employees", "5");
 
         fireEvent.click(screen.getByText(Config.registeredForTaxesModal.saveButtonText));
+        // screen.debug(undefined, Infinity)
         expect(
           screen.getByText(Config.profileDefaults.fields.taxId.default.errorTextRequired)
         ).toBeInTheDocument();
