@@ -1,19 +1,17 @@
 import * as api from "@/lib/api-client/apiClient";
 import { onGuestSignIn, onSelfRegister, onSignIn, onSignOut, SelfRegRouter } from "@/lib/auth/signinHelper";
 import { ROUTES } from "@/lib/domain-logic/routes";
+import * as UserDataStorage from "@/lib/storage/UserDataStorage";
 import { generateUser, generateUserData } from "@/test/factories";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { waitFor } from "@testing-library/react";
 import * as session from "./sessionHelper";
 
-const userDataStorage = {
-  getCurrentUserData: jest.fn(),
-  delete: jest.fn(),
-};
-
-jest.mock("@/lib/storage/UserDataStorage", () => ({
-  UserDataStorageFactory: jest.fn(() => userDataStorage),
-}));
+const mockGetCurrentUserData = jest.fn();
+const mockDelete = jest.fn();
+jest.mock("@/lib/storage/UserDataStorage");
+const mockUserDataStorage = UserDataStorage as jest.Mocked<typeof UserDataStorage>;
+const originalModule = jest.requireActual("@/lib/storage/UserDataStorage");
 
 jest.mock("./sessionHelper", () => ({
   getCurrentUser: jest.fn(),
@@ -37,6 +35,11 @@ describe("SigninHelper", () => {
     jest.restoreAllMocks();
     mockPush = jest.fn();
     mockDispatch = jest.fn();
+    mockUserDataStorage.UserDataStorageFactory.mockImplementation(() => ({
+      ...originalModule.UserDataStorageFactory(),
+      getCurrentUserData: mockGetCurrentUserData,
+      delete: mockDelete,
+    }));
   });
 
   describe("onSignIn", () => {
@@ -132,7 +135,7 @@ describe("SigninHelper", () => {
     it("dispatches guest user login", async () => {
       const user = generateUser({});
       const userData = generateUserData({ user });
-      const userStorageMock = userDataStorage.getCurrentUserData.mockImplementation(() => {
+      const userStorageMock = mockGetCurrentUserData.mockImplementation(() => {
         return userData;
       });
       await onGuestSignIn(mockPush, ROUTES.landing, mockDispatch);
@@ -146,7 +149,7 @@ describe("SigninHelper", () => {
     it("redirect user to onboarding if still in progress", async () => {
       const user = generateUser({});
       const userData = generateUserData({ user, formProgress: "UNSTARTED" });
-      userDataStorage.getCurrentUserData.mockImplementation(() => {
+      mockGetCurrentUserData.mockImplementation(() => {
         return userData;
       });
       mockSession.getCurrentUser.mockImplementation(() => {
@@ -157,7 +160,7 @@ describe("SigninHelper", () => {
     });
 
     it("redirect user to home if no user data is found", async () => {
-      userDataStorage.getCurrentUserData.mockImplementation(() => {
+      mockGetCurrentUserData.mockImplementation(() => {
         return undefined;
       });
       mockSession.getCurrentUser.mockImplementation(() => {
@@ -168,7 +171,7 @@ describe("SigninHelper", () => {
     });
 
     it("does not redirect user when at /onboarding", async () => {
-      userDataStorage.getCurrentUserData.mockImplementation(() => {
+      mockGetCurrentUserData.mockImplementation(() => {
         return undefined;
       });
       mockSession.getCurrentUser.mockImplementation(() => {
@@ -183,7 +186,7 @@ describe("SigninHelper", () => {
     it("dispatches a logout with undefined user", async () => {
       const user = generateUser({});
       mockSession.getCurrentUser.mockResolvedValue(user);
-      const userStorageMock = userDataStorage.delete.mockImplementation(() => {});
+      const userStorageMock = mockDelete.mockImplementation(() => {});
       await onSignOut(mockPush, mockDispatch);
       expect(mockSession.triggerSignOut).toHaveBeenCalled();
       expect(userStorageMock).toHaveBeenCalledWith(user.id);
