@@ -403,6 +403,7 @@ describe("profile", () => {
           ...emptyData.profileData,
           taxId: "",
           businessPersona: "STARTING",
+          legalStructureId: randomPublicFilingLegalStructure(),
         },
       };
       const newark = generateMunicipality({ displayName: "Newark" });

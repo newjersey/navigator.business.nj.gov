@@ -1,5 +1,4 @@
 import { formatTaxId } from "@/lib/domain-logic/formatTaxId";
-import { isEntityIdApplicable } from "@/lib/domain-logic/isEntityIdApplicable";
 import {
   allFormationLegalTypes,
   arrayOfCountriesObjects as countries,
@@ -92,10 +91,6 @@ export const industriesNotHomeBasedOrLiquorLicense = Industries.filter((industry
     industry.canHavePermanentLocation &&
     !industry.industryOnboardingQuestions.isLiquorLicenseApplicable
   );
-});
-
-export const legalStructureWithTradeName = LegalStructures.filter((legalStructure) => {
-  return !legalStructure.hasTradeName;
 });
 
 type Registration = {
@@ -599,7 +594,7 @@ export const checkNewBusinessProfilePage = ({
   onProfilePage.getEmployerId().invoke("prop", "value").should("contain", employerIdWithMatch);
   onProfilePage.getTaxId().invoke("prop", "value").should("contain", formatTaxId(taxId));
   onProfilePage.getNotes().invoke("prop", "value").should("contain", notes);
-  if (isEntityIdApplicable(companyType)) {
+  if (LookupLegalStructureById(companyType).displayEntityId) {
     onProfilePage.getEntityId().should("exist");
     onProfilePage.getEntityId().invoke("prop", "value").should("contain", entityId);
   } else {
@@ -726,7 +721,7 @@ export const updateNewBusinessProfilePage = ({
   }
 
   if (entityId) {
-    if (companyType && isEntityIdApplicable(companyType)) {
+    if (companyType && LookupLegalStructureById(companyType).displayEntityId) {
       onProfilePage.typeEntityId(entityId);
       onProfilePage.getEntityId().invoke("prop", "value").should("contain", entityId);
     } else if (!companyType) {
@@ -736,7 +731,7 @@ export const updateNewBusinessProfilePage = ({
         .find("input")
         .invoke("prop", "value")
         .then((legalStructure) => {
-          if (isEntityIdApplicable(legalStructure)) {
+          if (LookupLegalStructureById(legalStructure).displayEntityId) {
             onProfilePage.typeEntityId(entityId);
             onProfilePage.getEntityId().invoke("prop", "value").should("contain", entityId);
           }

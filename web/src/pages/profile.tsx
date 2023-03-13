@@ -41,7 +41,6 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getEssentialQuestion } from "@/lib/domain-logic/essentialQuestions";
-import { isEntityIdApplicable } from "@/lib/domain-logic/isEntityIdApplicable";
 import { isHomeBasedBusinessApplicable } from "@/lib/domain-logic/isHomeBasedBusinessApplicable";
 import { checkQueryValue, QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
@@ -262,7 +261,7 @@ const ProfilePage = (props: Props): ReactElement => {
 
   const shouldShowNexusBusinessNameElements = (): boolean => {
     if (!userData) return false;
-    return LookupLegalStructureById(userData.profileData.legalStructureId).requiresPublicFiling;
+    return LookupLegalStructureById(userData.profileData.legalStructureId).displayNexusBusinessElements;
   };
 
   const displayAltHomeBasedBusinessDescription = LookupOperatingPhaseById(
@@ -426,7 +425,8 @@ const ProfilePage = (props: Props): ReactElement => {
     documents: (
       <>
         <hr className="margin-top-4 margin-bottom-4" aria-hidden={true} />
-        {LookupLegalStructureById(userData?.profileData.legalStructureId).requiresPublicFiling && (
+        {LookupLegalStructureById(userData?.profileData.legalStructureId)
+          .displayStartingBusinessDocuments && (
           <>
             <FieldLabelProfile fieldName="documents" />
             <Documents />
@@ -537,7 +537,7 @@ const ProfilePage = (props: Props): ReactElement => {
           </>
         )}
         <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
-        {isEntityIdApplicable(userData?.profileData.legalStructureId) && (
+        {LookupLegalStructureById(userData?.profileData.legalStructureId).displayEntityId && (
           <>
             {shouldLockFormationFields ? (
               <LockedProfileField fieldName="entityId" />
@@ -639,7 +639,7 @@ const ProfilePage = (props: Props): ReactElement => {
         <h2 className="padding-bottom-3" style={{ fontWeight: 300 }}>
           {Config.profileDefaults.profileTabRefTitle}
         </h2>
-        {!LookupLegalStructureById(userData?.profileData.legalStructureId).hasTradeName && (
+        {LookupLegalStructureById(userData?.profileData.legalStructureId).displayOwningDateOfFormation && (
           <>
             <FieldLabelProfile fieldName="dateOfFormation" />
             <OnboardingDateOfFormation
