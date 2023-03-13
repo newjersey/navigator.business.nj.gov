@@ -50,7 +50,7 @@ export const FormationDate = (props: Props): ReactElement => {
       foreignDateOfFormation: {
         label: (
           <>
-            <b>Config.formation.fields.foreignDateOfFormation.labelSecondaryText</b>
+            <b>{Config.formation.fields.foreignDateOfFormation.label}</b>
             <span className="margin-left-05">
               {Config.formation.fields.foreignDateOfFormation.labelSecondaryText}
             </span>

@@ -1,3 +1,10 @@
+## [5.15.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.15.0...v5.15.1) (2023-03-13)
+
+
+### Bug Fixes
+
+* [[#184688502](https://github.com/newjersey/navigator.business.nj.gov/issues/184688502)] fix nexus formation date label ([2cc5d80](https://github.com/newjersey/navigator.business.nj.gov/commit/2cc5d80e9c34d31b17576994236308b5e3a9986b))
+
 # [5.15.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.14.1...v5.15.0) (2023-03-13)
 
 
