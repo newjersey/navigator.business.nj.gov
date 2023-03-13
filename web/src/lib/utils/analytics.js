@@ -834,6 +834,9 @@ export default {
         formation_date_changed: () => {
           sendEvent("profile_formation_date", "submit", "formation_date_changed");
         },
+        formation_date_deleted: () => {
+          sendEvent("profile_formation_date", "submit", "formation_date_deleted");
+        },
       },
     },
     onboarding_logistics_business_question: {
