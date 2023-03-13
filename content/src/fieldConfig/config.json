@@ -193,6 +193,13 @@
     "saveButtonText": "Save",
     "description": "To see your annual report due date, please provide your Business' `effective date|effective-date` (the date you formed your business) below."
   },
+  "formationDateDeletionModal": {
+    "header": "Confirm Your Changes",
+    "description": "Deleting your business `effective date|effective-date` (the date you formed your business) will remove your calendar from the Navigator.",
+    "areYouSureModalBody": "Are you sure you'd like to proceed?",
+    "cancelButtonText": "Cancel",
+    "deleteButtonText": "Delete Date"
+  }, 
   "licenseSearchTask": {
     "voluntarySurrenderPermitStatusText": "Voluntary Surrender",
     "activePermitStatusText": "Active",

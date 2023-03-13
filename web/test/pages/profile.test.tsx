@@ -312,21 +312,67 @@ describe("profile", () => {
         expect(getDateOfFormation()).toBe("01/2020");
       });
 
-      it("allows user to delete formation date in profile", async () => {
-        const initialUserData = generateUserData({
-          profileData: generateProfileData({
-            businessPersona: "STARTING",
-            dateOfFormation: "2017-10-01",
-          }),
+      describe("formation date deletion", () => {
+        it("allows user to delete formation date in profile", async () => {
+          const initialUserData = generateUserData({
+            profileData: generateProfileData({
+              businessPersona: "STARTING",
+              dateOfFormation: "2017-10-01",
+            }),
+          });
+          const newark = generateMunicipality({ displayName: "Newark" });
+          renderPage({ userData: initialUserData, municipalities: [newark] });
+          chooseTab("numbers");
+          fillText("Date of formation", "");
+          clickSave();
+          expect(getDateOfFormation()).toBe("");
         });
-        const newark = generateMunicipality({ displayName: "Newark" });
-        renderPage({ userData: initialUserData, municipalities: [newark] });
-        chooseTab("numbers");
-        fillText("Date of formation", "");
-        clickSave();
-        expect(getDateOfFormation()).toBe("");
-        await waitFor(() => {
-          return expect(mockRouter.mockPush).toHaveBeenCalledWith(`${ROUTES.dashboard}?success=true`);
+
+        it("allows user to cancel formation date deletion", () => {
+          const initialUserData = generateUserData({
+            profileData: generateProfileData({
+              businessPersona: "STARTING",
+              dateOfFormation: "2017-10-01",
+            }),
+          });
+          const newark = generateMunicipality({ displayName: "Newark" });
+
+          renderPage({ userData: initialUserData, municipalities: [newark] });
+          chooseTab("numbers");
+          fillText("Date of formation", "");
+
+          clickSave();
+
+          fireEvent.click(
+            within(screen.getByRole("dialog")).getByText(Config.formationDateDeletionModal.cancelButtonText)
+          );
+
+          expect(userDataWasNotUpdated()).toBe(true);
+        });
+
+        it("allows user to delete formation date and sets task progress to IN_PROGRESS", async () => {
+          const initialUserData = generateUserData({
+            profileData: generateProfileData({
+              businessPersona: "STARTING",
+              dateOfFormation: "2017-10-01",
+            }),
+          });
+          const newark = generateMunicipality({ displayName: "Newark" });
+
+          renderPage({ userData: initialUserData, municipalities: [newark] });
+          chooseTab("numbers");
+          fillText("Date of formation", "");
+
+          clickSave();
+
+          fireEvent.click(
+            within(screen.getByRole("dialog")).getByText(Config.formationDateDeletionModal.deleteButtonText)
+          );
+
+          await waitFor(() => {
+            expect(currentUserData().taskProgress[formationTaskId]).toEqual("IN_PROGRESS");
+          });
+          expect(currentUserData().profileData.dateOfFormation).toEqual(undefined);
         });
       });
     });

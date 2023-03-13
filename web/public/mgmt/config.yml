@@ -2757,7 +2757,17 @@ collections:
               - { label: Are-You-Sure Tax Body, name: areYouSureTaxBody, widget: markdown }
               - { label: Are-You-Sure Tax Continue Button, name: areYouSureTaxContinueButton, widget: string }
               - { label: Are-You-Sure Tax Cancel Button, name: areYouSureTaxCancelButton, widget: string }
-
+          - label: Formation Date Deletion Modal
+            name: formationDateDeletionModal
+            collapsed: true
+            widget: object
+            summary: "{{formationDateDeletionModal}}"
+            fields:
+              - { label: Header, name: header, widget: string }
+              - { label: Description, name: description, widget: markdown }
+              - { label: Are-You-Sure Modal Body, name: areYouSureModalBody, widget: markdown }
+              - { label: Cancel Button Text, name: cancelButtonText, widget: string }
+              - { label: Delete Button Text, name: deleteButtonText, widget: string }
           - label: Funding Defaults
             name: fundingDefaults
             collapsed: true

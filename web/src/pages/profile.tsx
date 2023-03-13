@@ -1,3 +1,4 @@
+import { FormationDateDeletionModal } from "@/components/FormationDateDeletionModal";
 import { LoadingIndicator } from "@/components/LoadingIndicator";
 import { NavBar } from "@/components/navbar/NavBar";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
@@ -97,8 +98,10 @@ const ProfilePage = (props: Props): ReactElement => {
   const [fieldStates, setFieldStates] = useState<ProfileFieldErrorMap>(createProfileFieldErrorMap());
   const [escapeModal, setEscapeModal] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isFormationDateDeletionModalOpen, setFormationDateDeletionModalOpen] = useState<boolean>(false);
+
   const userDataFromHook = useUserData();
-  const update = userDataFromHook.update;
+  const updateQueue = userDataFromHook.updateQueue;
   const { isAuthenticated, setRegistrationModalIsVisible } = useContext(AuthAlertContext);
   const { Config } = useConfig();
   const userData = props.CMS_ONLY_fakeUserData ?? userDataFromHook.userData;
@@ -171,27 +174,40 @@ const ProfilePage = (props: Props): ReactElement => {
     return undefined;
   };
 
+  const onDelete = async (): Promise<void> => {
+    updateQueue?.queueTaskProgress({ [formationTaskId]: "IN_PROGRESS" });
+    await submitProfileChanges();
+  };
+
   const onSubmit = async (event: FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
-    if (!userData) {
-      return;
-    }
-    analytics.event.profile_save.click.save_profile_changes();
 
+    if (
+      userData?.profileData.dateOfFormation !== profileData.dateOfFormation &&
+      profileData.dateOfFormation === undefined
+    ) {
+      if (isFormValidationError()) return;
+      setFormationDateDeletionModalOpen(true);
+    } else {
+      await submitProfileChanges();
+    }
+  };
+
+  const isFormValidationError = (): boolean => {
+    if (!userData) {
+      return true;
+    }
     const fieldStatesCopy = cloneDeep(fieldStates);
     if (profileData.sectorId) {
       onValidation("sectorId", false);
       fieldStatesCopy["sectorId"] = { invalid: false };
     }
-    const { taskProgress } = userData;
-    let { taxFilingData } = userData;
-
     if (userData.profileData.taxId != profileData.taxId) {
+      // eslint-disable-next-line unicorn/no-lonely-if
       if (!(profileData.taxId?.length === 0 || profileData.taxId?.length === 12)) {
         onValidation("taxId", true);
         fieldStatesCopy["taxId"] = { invalid: true };
       }
-      taxFilingData = { ...taxFilingData, state: undefined, registeredISO: undefined, filings: [] };
     }
 
     if (getEssentialQuestion(profileData.industryId).length > 0) {
@@ -210,9 +226,24 @@ const ProfilePage = (props: Props): ReactElement => {
       })
     ) {
       setAlert("ERROR");
+      return true;
+    }
+    return false;
+  };
+  const submitProfileChanges = async (): Promise<void> => {
+    if (!updateQueue) {
       return;
     }
+    analytics.event.profile_save.click.save_profile_changes();
+    if (isFormValidationError()) return;
+    const userData = updateQueue.current();
 
+    let { taxFilingData } = userData;
+    const { taskProgress } = userData;
+
+    if (userData.profileData.taxId != profileData.taxId) {
+      taxFilingData = { ...taxFilingData, state: undefined, registeredISO: undefined, filings: [] };
+    }
     setIsLoading(true);
 
     if (profileData.employerId && profileData.employerId.length > 0) {
@@ -230,7 +261,8 @@ const ProfilePage = (props: Props): ReactElement => {
     };
 
     newUserData = await postGetAnnualFilings(newUserData);
-    update(newUserData).then(async () => {
+    updateQueue.queue(newUserData);
+    updateQueue.update().then(async () => {
       setIsLoading(false);
       setAlert("SUCCESS");
       await redirect({ success: true });
@@ -243,6 +275,10 @@ const ProfilePage = (props: Props): ReactElement => {
       !!newProfileData.dateOfFormation
     ) {
       analytics.event.profile_formation_date.submit.formation_date_changed();
+    }
+
+    if (prevProfileData.dateOfFormation !== undefined && newProfileData.dateOfFormation === undefined) {
+      analytics.event.profile_formation_date.submit.formation_date_deleted();
     }
 
     const municipalityEnteredForFirstTime =
@@ -541,7 +577,6 @@ const ProfilePage = (props: Props): ReactElement => {
                   onValidation={onValidation}
                   fieldStates={fieldStates}
                   futureAllowed={true}
-                  valueFormatter={formatDate}
                 />
               </>
             )}
@@ -728,6 +763,11 @@ const ProfilePage = (props: Props): ReactElement => {
                 primaryButtonOnClick={() => {
                   return redirect();
                 }}
+              />
+              <FormationDateDeletionModal
+                isOpen={isFormationDateDeletionModalOpen}
+                handleCancel={() => setFormationDateDeletionModalOpen(false)}
+                handleDelete={onDelete}
               />
               <SingleColumnContainer>
                 {alert && (
