@@ -135,10 +135,6 @@ export const useFormationErrors = () => {
   };
 
   const doesStepHaveError = (step: FormationStepNames, overrides?: { hasSubmitted: boolean }): boolean => {
-    if (step === "Name") {
-      return allCurrentErrorsForStep(step, overrides).length > 0;
-    }
-
     if (overrides?.hasSubmitted ?? state.hasBeenSubmitted) {
       return allCurrentErrorsForStep(step, overrides).length > 0;
     } else {
