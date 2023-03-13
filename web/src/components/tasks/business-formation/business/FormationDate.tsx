@@ -1,4 +1,4 @@
-import { Content } from "@/components/Content";
+import { ContextualInfoButton } from "@/components/ContextualInfoButton";
 import {
   getBusinessStartDateHelperText,
   getBusinessStartDateMaxDate,
@@ -32,11 +32,30 @@ export const FormationDate = (props: Props): ReactElement => {
   const contentProps = useMemo(
     () => ({
       businessStartDate: {
-        label: Config.formation.fields.businessStartDate.label,
+        label: (
+          <>
+            <b>
+              <ContextualInfoButton
+                text={Config.formation.fields.businessStartDate.label}
+                id={Config.formation.fields.businessStartDate.labelContextualInfo}
+              />
+            </b>
+            <span className="margin-left-05">
+              {Config.formation.fields.businessStartDate.labelSecondaryText}
+            </span>
+          </>
+        ),
         helperText: getBusinessStartDateHelperText(state.formationFormData.legalType),
       },
       foreignDateOfFormation: {
-        label: Config.formation.fields.foreignDateOfFormation.label,
+        label: (
+          <>
+            <b>Config.formation.fields.foreignDateOfFormation.labelSecondaryText</b>
+            <span className="margin-left-05">
+              {Config.formation.fields.foreignDateOfFormation.labelSecondaryText}
+            </span>
+          </>
+        ),
         helperText: Config.formation.fields.foreignDateOfFormation.error,
       },
     }),
@@ -58,9 +77,7 @@ export const FormationDate = (props: Props): ReactElement => {
     process.env.NODE_ENV === "test" || process.env.CI === "true" ? DesktopDatePicker : DatePicker;
   return (
     <>
-      <div className="flex margin-bottom-2">
-        <Content key={`${props.fieldName}Md`}>{contentProps[props.fieldName].label}</Content>
-      </div>
+      <div className="flex margin-bottom-2">{contentProps[props.fieldName].label}</div>
       <div className="tablet:display-flex tablet:flex-row tablet:flex-justify">
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <Picker

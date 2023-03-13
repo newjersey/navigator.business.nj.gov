@@ -83,7 +83,7 @@ describe("getErrorStateForField", () => {
       const formData = generateFormationFormData({ businessName: "some name" });
       const availability = generateNameAvailability({ status: "AVAILABLE" });
       expect(getErrorStateForField("businessName", formData, availability).label).toEqual(
-        Config.formation.fields.businessName.fieldDisplayName
+        Config.formation.fields.businessName.label
       );
     });
   });
@@ -208,7 +208,7 @@ describe("getErrorStateForField", () => {
         businessStartDate: getCurrentDate().add(1, "day").format(defaultDateFormat),
       });
       expect(getErrorStateForField("businessStartDate", formData, undefined).label).toEqual(
-        Config.formation.fields.businessStartDate.fieldDisplayName
+        Config.formation.fields.businessStartDate.label
       );
     });
   });
@@ -222,7 +222,7 @@ describe("getErrorStateForField", () => {
     it("inserts label from config", () => {
       const formData = generateFormationFormData({ addressZipCode: "08100" });
       expect(getErrorStateForField("addressZipCode", formData, undefined).label).toEqual(
-        Config.formation.fields.addressZipCode.fieldDisplayName
+        Config.formation.fields.addressZipCode.label
       );
     });
 
@@ -306,7 +306,7 @@ describe("getErrorStateForField", () => {
     it("inserts label from config", () => {
       const formData = generateFormationFormData({ agentOfficeAddressZipCode: "08100" });
       expect(getErrorStateForField("agentOfficeAddressZipCode", formData, undefined).label).toEqual(
-        Config.formation.fields.agentOfficeAddressZipCode.fieldDisplayName
+        Config.formation.fields.agentOfficeAddressZipCode.label
       );
     });
   });
@@ -343,7 +343,7 @@ describe("getErrorStateForField", () => {
       expect(errorState.hasError).toEqual(true);
       expect(errorState.label).toEqual(
         templateEval(Config.formation.general.maximumLengthErrorText, {
-          field: Config.formation.fields.agentEmail.fieldDisplayName,
+          field: Config.formation.fields.agentEmail.label,
           maxLen: "50",
         })
       );
@@ -370,7 +370,7 @@ describe("getErrorStateForField", () => {
         agentOfficeAddressMunicipality: generateMunicipality({}),
       });
       expect(getErrorStateForField("agentOfficeAddressMunicipality", formData, undefined).label).toEqual(
-        Config.formation.fields.agentOfficeAddressMunicipality.fieldDisplayName
+        Config.formation.fields.agentOfficeAddressMunicipality.label
       );
     });
   });
@@ -439,7 +439,7 @@ describe("getErrorStateForField", () => {
           expect(getErrorStateForField(field, formData, undefined).hasError).toEqual(true);
           expect(getErrorStateForField(field, formData, undefined).label).toEqual(
             templateEval(Config.formation.general.maximumLengthErrorText, {
-              field: Config.formation.fields.signers.fieldDisplayName,
+              field: Config.formation.fields.signers.label,
               maxLen: "50",
             })
           );
@@ -571,7 +571,7 @@ describe("getErrorStateForField", () => {
         maxLen: 35,
         labelWhenMissing: Config.formation.fields.addressLine1.error,
         labelWhenTooLong: templateEval(Config.formation.general.maximumLengthErrorText, {
-          field: Config.formation.fields.addressLine1.fieldDisplayName,
+          field: Config.formation.fields.addressLine1.label,
           maxLen: "35",
         }),
       },
@@ -580,7 +580,7 @@ describe("getErrorStateForField", () => {
         maxLen: 30,
         labelWhenMissing: Config.formation.fields.addressCity.error,
         labelWhenTooLong: templateEval(Config.formation.general.maximumLengthErrorText, {
-          field: Config.formation.fields.addressCity.fieldDisplayName,
+          field: Config.formation.fields.addressCity.label,
           maxLen: "30",
         }),
       },
@@ -589,7 +589,7 @@ describe("getErrorStateForField", () => {
         maxLen: 50,
         labelWhenMissing: Config.formation.fields.agentName.error,
         labelWhenTooLong: templateEval(Config.formation.general.maximumLengthErrorText, {
-          field: Config.formation.fields.agentName.fieldDisplayName,
+          field: Config.formation.fields.agentName.label,
           maxLen: "50",
         }),
       },
@@ -598,7 +598,7 @@ describe("getErrorStateForField", () => {
         maxLen: 50,
         labelWhenMissing: Config.formation.fields.contactFirstName.error,
         labelWhenTooLong: templateEval(Config.formation.general.maximumLengthErrorText, {
-          field: Config.formation.fields.contactFirstName.fieldDisplayName,
+          field: Config.formation.fields.contactFirstName.label,
           maxLen: "50",
         }),
       },
@@ -607,7 +607,7 @@ describe("getErrorStateForField", () => {
         maxLen: 50,
         labelWhenMissing: Config.formation.fields.contactLastName.error,
         labelWhenTooLong: templateEval(Config.formation.general.maximumLengthErrorText, {
-          field: Config.formation.fields.contactLastName.fieldDisplayName,
+          field: Config.formation.fields.contactLastName.label,
           maxLen: "50",
         }),
       },
@@ -616,7 +616,7 @@ describe("getErrorStateForField", () => {
         maxLen: 35,
         labelWhenMissing: Config.formation.fields.agentOfficeAddressLine1.error,
         labelWhenTooLong: templateEval(Config.formation.general.maximumLengthErrorText, {
-          field: Config.formation.fields.agentOfficeAddressLine1.fieldDisplayName,
+          field: Config.formation.fields.agentOfficeAddressLine1.label,
           maxLen: "35",
         }),
       },
@@ -668,7 +668,7 @@ describe("getErrorStateForField", () => {
         field: "addressLine2",
         maxLen: 35,
         labelWhenTooLong: templateEval(Config.formation.general.maximumLengthErrorText, {
-          field: Config.formation.fields.addressLine2.fieldDisplayName,
+          field: Config.formation.fields.addressLine2.label,
           maxLen: "35",
         }),
       },
@@ -676,7 +676,7 @@ describe("getErrorStateForField", () => {
         field: "agentOfficeAddressLine2",
         maxLen: 35,
         labelWhenTooLong: templateEval(Config.formation.general.maximumLengthErrorText, {
-          field: Config.formation.fields.agentOfficeAddressLine2.fieldDisplayName,
+          field: Config.formation.fields.agentOfficeAddressLine2.label,
           maxLen: "35",
         }),
       },
@@ -740,7 +740,7 @@ describe("getErrorStateForField", () => {
 
           it("inserts label from config", () => {
             const formData = generateFormationFormData({ [field]: undefined });
-            const label = expectedLabel ?? (Config.formation.fields as any)[field].fieldDisplayName;
+            const label = expectedLabel ?? (Config.formation.fields as any)[field].label;
             if (!label) {
               throw `label missing in config for ${field}`;
             }
@@ -793,7 +793,7 @@ describe("getErrorStateForField", () => {
 
           it("inserts label from config", () => {
             const formData = generateFormationFormData({ [field]: "some-value" });
-            const expectedLabel = (Config.formation.fields as any)[field].fieldDisplayName;
+            const expectedLabel = (Config.formation.fields as any)[field].label;
             if (!expectedLabel) {
               throw `label missing in config for ${field}`;
             }

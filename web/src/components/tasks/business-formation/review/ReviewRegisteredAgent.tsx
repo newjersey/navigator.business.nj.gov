@@ -16,7 +16,7 @@ export const ReviewRegisteredAgent = (): ReactElement => {
     <>
       <div className="flex space-between">
         <div className="maxw-mobile-lg margin-bottom-2">
-          <h2 className="h3-styling">{Config.formation.registeredAgent.reviewStepHeader}</h2>
+          <h2 className="h3-styling">{Config.formation.registeredAgent.label}</h2>
         </div>
         <div className="margin-left-2">
           <UnStyledButton
@@ -34,8 +34,8 @@ export const ReviewRegisteredAgent = (): ReactElement => {
       </div>
       {state.formationFormData.agentNumberOrManual === "NUMBER" && (
         <ReviewLineItem
-          label={Config.formation.fields.agentNumber.reviewStepLabel}
-          value={state.formationFormData.agentNumber}
+          label={Config.formation.fields.agentNumber.label}
+          value={state.formationFormData.agentNumber || italicNotEnteredText}
           marginOverride="margin-top-0"
           dataTestId="agent-number"
         />
@@ -43,14 +43,14 @@ export const ReviewRegisteredAgent = (): ReactElement => {
       {state.formationFormData.agentNumberOrManual === "MANUAL_ENTRY" && (
         <div data-testid="agent-manual-entry">
           <ReviewLineItem
-            label={Config.formation.fields.agentName.reviewStepLabel}
-            value={state.formationFormData.agentName}
+            label={Config.formation.fields.agentName.label}
+            value={state.formationFormData.agentName || italicNotEnteredText}
             marginOverride="margin-top-0"
           />
 
           <ReviewLineItem
-            label={Config.formation.fields.agentEmail.reviewStepLabel}
-            value={state.formationFormData.agentEmail}
+            label={Config.formation.fields.agentEmail.label}
+            value={state.formationFormData.agentEmail || italicNotEnteredText}
           />
 
           <ReviewLineItem

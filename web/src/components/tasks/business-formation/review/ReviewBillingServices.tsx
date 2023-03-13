@@ -12,13 +12,13 @@ export const ReviewBillingServices = (): ReactElement => {
   const getDocumentsList = (): string => {
     const docs = [];
     if (state.formationFormData.officialFormationDocument) {
-      docs.push(Config.formation.fields.officialFormationDocument.reviewStepLabel);
+      docs.push(Config.formation.fields.officialFormationDocument.label);
     }
     if (state.formationFormData.certificateOfStanding) {
-      docs.push(Config.formation.fields.certificateOfStanding.reviewStepLabel);
+      docs.push(Config.formation.fields.certificateOfStanding.label);
     }
     if (state.formationFormData.certifiedCopyOfFormationDocument) {
-      docs.push(Config.formation.fields.certifiedCopyOfFormationDocument.reviewStepLabel);
+      docs.push(Config.formation.fields.certifiedCopyOfFormationDocument.label);
     }
     if (docs.length === 0) {
       return italicNotEnteredText;
@@ -49,10 +49,7 @@ export const ReviewBillingServices = (): ReactElement => {
         label={Config.formation.fields.paymentType.reviewStepsServicesSelected}
         value={getDocumentsList()}
       />
-      <ReviewLineItem
-        label={Config.formation.fields.paymentType.reviewStepLabel}
-        value={getPaymentTypeLabel()}
-      />
+      <ReviewLineItem label={Config.formation.fields.paymentType.label} value={getPaymentTypeLabel()} />
     </>
   );
 };

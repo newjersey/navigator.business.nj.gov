@@ -21,6 +21,7 @@ export const MainBusinessAddressContainer = (props: { children: ReactNode }): Re
       />
       <BusinessFormationTextField
         label={Config.formation.fields.addressLine2.label}
+        secondaryLabel={Config.formation.general.optionalLabel}
         errorBarType="ALWAYS"
         fieldName="addressLine2"
         formInputFull

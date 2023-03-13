@@ -242,7 +242,7 @@ describe("Formation - BusinessStep", () => {
   describe("Business purpose", () => {
     it("keeps business purpose closed by default", async () => {
       await getPageHelper({}, { businessPurpose: "" });
-      expect(screen.getByText(Config.formation.fields.businessPurpose.header)).toBeInTheDocument();
+      expect(screen.getByText(Config.formation.fields.businessPurpose.label)).toBeInTheDocument();
       expect(screen.getByText(Config.formation.fields.businessPurpose.addButtonText)).toBeInTheDocument();
       expect(screen.queryByLabelText("remove business purpose")).not.toBeInTheDocument();
       expect(screen.queryByLabelText("Business purpose")).not.toBeInTheDocument();
@@ -293,7 +293,7 @@ describe("Formation - BusinessStep", () => {
         },
         { provisions: [] }
       );
-      expect(screen.queryByText(Config.formation.fields.provisions.header)).not.toBeInTheDocument();
+      expect(screen.queryByText(Config.formation.fields.provisions.label)).not.toBeInTheDocument();
     });
 
     it("shows provisions when forming as a foreign business and the legalStructureId is foreign-limited-partnership", async () => {
@@ -304,7 +304,7 @@ describe("Formation - BusinessStep", () => {
         },
         { provisions: [] }
       );
-      expect(screen.getByText(Config.formation.fields.provisions.header)).toBeInTheDocument();
+      expect(screen.getByText(Config.formation.fields.provisions.label)).toBeInTheDocument();
       expect(screen.getByText(Config.formation.fields.provisions.addButtonText)).toBeInTheDocument();
       expect(screen.queryByLabelText("remove provision")).not.toBeInTheDocument();
       expect(screen.queryByLabelText("provision 0")).not.toBeInTheDocument();
@@ -312,7 +312,7 @@ describe("Formation - BusinessStep", () => {
 
     it("keeps provisions closed by default when page loads", async () => {
       await getPageHelper({}, { provisions: [] });
-      expect(screen.getByText(Config.formation.fields.provisions.header)).toBeInTheDocument();
+      expect(screen.getByText(Config.formation.fields.provisions.label)).toBeInTheDocument();
       expect(screen.getByText(Config.formation.fields.provisions.addButtonText)).toBeInTheDocument();
       expect(screen.queryByLabelText("remove provision")).not.toBeInTheDocument();
       expect(screen.queryByLabelText("provision 0")).not.toBeInTheDocument();
@@ -841,26 +841,20 @@ describe("Formation - BusinessStep", () => {
     it("Business suffix", async () => {
       const page = await getPageHelper({}, { businessSuffix: undefined });
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(
-        Config.formation.fields.businessSuffix.fieldDisplayName
-      );
+      expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.businessSuffix.label);
     });
 
     it("Withdrawals", async () => {
       const page = await getPageHelper({ legalStructureId: "limited-partnership" }, { withdrawals: "" });
       await attemptApiSubmission(page);
       expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
-      expect(screen.getByRole("alert")).toHaveTextContent(
-        Config.formation.fields.withdrawals.fieldDisplayName
-      );
+      expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.withdrawals.label);
     });
 
     it("Dissolution", async () => {
       const page = await getPageHelper({ legalStructureId: "limited-partnership" }, { dissolution: "" });
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(
-        Config.formation.fields.dissolution.fieldDisplayName
-      );
+      expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.dissolution.label);
     });
 
     it("Combined Investment", async () => {
@@ -869,9 +863,7 @@ describe("Formation - BusinessStep", () => {
         { combinedInvestment: "" }
       );
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(
-        Config.formation.fields.combinedInvestment.fieldDisplayName
-      );
+      expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.combinedInvestment.label);
     });
 
     it("Partnership Rights can create Limited Partner", async () => {
@@ -882,7 +874,7 @@ describe("Formation - BusinessStep", () => {
       await attemptApiSubmission(page);
       expect(screen.getByText(Config.formation.general.genericErrorText)).toBeInTheDocument();
       expect(screen.getAllByRole("alert")[0]).toHaveTextContent(
-        Config.formation.fields.canCreateLimitedPartner.fieldDisplayName
+        Config.formation.fields.canCreateLimitedPartner.label
       );
     });
 
@@ -894,7 +886,7 @@ describe("Formation - BusinessStep", () => {
       fireEvent.click(screen.getByTestId("canCreateLimitedPartner-true"));
       await attemptApiSubmission(page);
       expect(screen.getByRole("alert")).toHaveTextContent(
-        Config.formation.fields.createLimitedPartnerTerms.fieldDisplayName
+        Config.formation.fields.createLimitedPartnerTerms.label
       );
     });
 
@@ -905,7 +897,7 @@ describe("Formation - BusinessStep", () => {
       );
       await attemptApiSubmission(page);
       expect(screen.getAllByRole("alert")[0]).toHaveTextContent(
-        Config.formation.fields.canMakeDistribution.fieldDisplayName
+        Config.formation.fields.canMakeDistribution.label
       );
     });
 
@@ -917,7 +909,7 @@ describe("Formation - BusinessStep", () => {
       fireEvent.click(screen.getByTestId("canMakeDistribution-true"));
       await attemptApiSubmission(page);
       expect(screen.getByRole("alert")).toHaveTextContent(
-        Config.formation.fields.makeDistributionTerms.fieldDisplayName
+        Config.formation.fields.makeDistributionTerms.label
       );
     });
 
@@ -928,7 +920,7 @@ describe("Formation - BusinessStep", () => {
       );
       await attemptApiSubmission(page);
       expect(screen.getAllByRole("alert")[0]).toHaveTextContent(
-        Config.formation.fields.canGetDistribution.fieldDisplayName
+        Config.formation.fields.canGetDistribution.label
       );
     });
 
@@ -939,17 +931,13 @@ describe("Formation - BusinessStep", () => {
       );
       fireEvent.click(screen.getByTestId("canGetDistribution-true"));
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(
-        Config.formation.fields.getDistributionTerms.fieldDisplayName
-      );
+      expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.getDistributionTerms.label);
     });
 
     it("Total Shares", async () => {
       const page = await getPageHelper({ legalStructureId: "c-corporation" }, { businessTotalStock: "" });
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(
-        Config.formation.fields.businessTotalStock.fieldDisplayName
-      );
+      expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.businessTotalStock.label);
       expect(screen.getByText(Config.formation.fields.businessTotalStock.error)).toBeInTheDocument();
     });
 
@@ -960,7 +948,7 @@ describe("Formation - BusinessStep", () => {
       );
       await attemptApiSubmission(page);
       expect(screen.getByRole("alert")).toHaveTextContent(
-        Config.formation.fields.foreignDateOfFormation.fieldDisplayName
+        Config.formation.fields.foreignDateOfFormation.label
       );
       expect(screen.getByText(Config.formation.fields.foreignDateOfFormation.error)).toBeInTheDocument();
     });
@@ -972,7 +960,7 @@ describe("Formation - BusinessStep", () => {
       );
       await attemptApiSubmission(page);
       expect(screen.getByRole("alert")).toHaveTextContent(
-        Config.formation.fields.foreignStateOfFormation.fieldDisplayName
+        Config.formation.fields.foreignStateOfFormation.label
       );
       expect(screen.getByText(Config.formation.fields.foreignStateOfFormation.error)).toBeInTheDocument();
     });
@@ -980,17 +968,13 @@ describe("Formation - BusinessStep", () => {
     it("Address line1", async () => {
       const page = await getPageHelper({}, { addressLine1: "" });
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(
-        Config.formation.fields.addressLine1.fieldDisplayName
-      );
+      expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.addressLine1.label);
     });
 
     it("Address zip code", async () => {
       const page = await getPageHelper({}, { addressZipCode: "" });
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(
-        Config.formation.fields.addressZipCode.fieldDisplayName
-      );
+      expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.addressZipCode.label);
     });
 
     it("Address province", async () => {
@@ -999,9 +983,7 @@ describe("Formation - BusinessStep", () => {
         { addressProvince: undefined, businessLocationType: "INTL" }
       );
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(
-        Config.formation.fields.addressProvince.fieldDisplayName
-      );
+      expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.addressProvince.label);
     });
 
     it("Address country", async () => {
@@ -1010,9 +992,7 @@ describe("Formation - BusinessStep", () => {
         { addressCountry: undefined, businessLocationType: "INTL" }
       );
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(
-        Config.formation.fields.addressCountry.fieldDisplayName
-      );
+      expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.addressCountry.label);
     });
 
     it("Address city", async () => {
@@ -1021,9 +1001,7 @@ describe("Formation - BusinessStep", () => {
         { addressCity: undefined, businessLocationType: "INTL" }
       );
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(
-        Config.formation.fields.addressCity.fieldDisplayName
-      );
+      expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.addressCity.label);
     });
 
     it("Address state", async () => {
@@ -1032,9 +1010,7 @@ describe("Formation - BusinessStep", () => {
         { addressState: undefined, businessLocationType: "US" }
       );
       await attemptApiSubmission(page);
-      expect(screen.getByRole("alert")).toHaveTextContent(
-        Config.formation.fields.addressState.fieldDisplayName
-      );
+      expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.addressState.label);
     });
   });
 });

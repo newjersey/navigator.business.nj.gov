@@ -568,9 +568,9 @@ describe("<BusinessFormationPaginator />", () => {
           await page.stepperClickToReviewStep();
           await page.clickSubmit();
           await page.stepperClickToContactsStep();
-          expect(screen.getByText(Config.formation.errorBanner.errorOnStep)).toBeInTheDocument();
-          expect(screen.getByText(Config.formation.fields.agentNumber.fieldDisplayName)).toBeInTheDocument();
-          expect(screen.getByText("very bad input")).toBeInTheDocument();
+          expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.errorBanner.errorOnStep);
+          expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.agentNumber.label);
+          expect(screen.getByRole("alert")).toHaveTextContent("very bad input");
         });
 
         it("removes API error on blur when user changes field", async () => {
@@ -581,11 +581,9 @@ describe("<BusinessFormationPaginator />", () => {
           await page.stepperClickToContactsStep();
           page.fillText("Agent number", "1234567");
 
+          expect(screen.queryByRole("alert")).not.toBeInTheDocument();
           expect(screen.queryByText(Config.formation.errorBanner.errorOnStep)).not.toBeInTheDocument();
-          expect(
-            screen.queryByText(Config.formation.fields.agentNumber.fieldDisplayName)
-          ).not.toBeInTheDocument();
-          expect(screen.queryByText("very bad input")).not.toBeInTheDocument();
+
           expect(page.getStepStateInStepper(LookupStepIndexByName("Contacts"))).toEqual("COMPLETE-ACTIVE");
         });
       });

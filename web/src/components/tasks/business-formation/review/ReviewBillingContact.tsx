@@ -17,15 +17,15 @@ export const ReviewBillingContact = (): ReactElement => {
         testId="billing-contact"
       />
       <ReviewLineItem
-        label={Config.formation.fields.contactFirstName.reviewStepLabel}
+        label={Config.formation.fields.contactFirstName.label}
         value={state.formationFormData.contactFirstName || italicNotEnteredText}
       />
       <ReviewLineItem
-        label={Config.formation.fields.contactLastName.reviewStepLabel}
+        label={Config.formation.fields.contactLastName.label}
         value={state.formationFormData.contactLastName || italicNotEnteredText}
       />
       <ReviewLineItem
-        label={Config.formation.fields.contactPhoneNumber.reviewStepLabel}
+        label={Config.formation.fields.contactPhoneNumber.label}
         value={state.formationFormData.contactPhoneNumber || italicNotEnteredText}
       />
       <hr className="margin-y-205" />

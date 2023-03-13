@@ -58,7 +58,7 @@ export const Provisions = (): ReactElement => {
     <>
       <div className="flex flex-column mobile-lg:flex-row mobile-lg:flex-align-center margin-bottom-2">
         <div role="heading" aria-level={2} className="h3-styling margin-bottom-0">
-          {Config.formation.fields.provisions.header}{" "}
+          {Config.formation.fields.provisions.label}{" "}
           <span className="text-normal font-body-lg">{Config.formation.general.optionalLabel}</span>
         </div>
         <div className="mobile-lg:margin-left-auto flex mobile-lg:flex-justify-center">
@@ -73,7 +73,8 @@ export const Provisions = (): ReactElement => {
       {state.formationFormData.provisions?.map((provision: string, index: number) => {
         return (
           <div key={index}>
-            <Content>{Config.formation.fields.provisions.label}</Content>
+            <b>{Config.formation.fields.provisions.secondaryLabel}</b>
+            <span className="margin-left-05">{Config.formation.general.optionalLabel}</span>
             <div className="grid-row">
               <div className="grid-col">
                 <GenericTextField

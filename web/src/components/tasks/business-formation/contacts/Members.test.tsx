@@ -171,7 +171,7 @@ describe("Formation - Members Field", () => {
             len: string
           ): string =>
             templateEval(Config.formation.general.maximumLengthErrorText, {
-              field: Config.formation.addressModal[modalField].fieldDisplayName,
+              field: Config.formation.addressModal[modalField].label,
               maxLen: len,
             });
 
@@ -427,8 +427,8 @@ describe("Formation - Members Field", () => {
       it(`displays directors content for ${legalStructureId}`, async () => {
         const page = await getPageHelper({ legalStructureId }, { members: [] });
         await page.stepperClickToContactsStep();
-        expect(screen.getByText(Config.formation.fields.directors.header)).toBeInTheDocument();
-        expect(screen.queryByText(Config.formation.fields.members.header)).not.toBeInTheDocument();
+        expect(screen.getByText(Config.formation.fields.directors.label)).toBeInTheDocument();
+        expect(screen.queryByText(Config.formation.fields.members.label)).not.toBeInTheDocument();
       });
     }
   });
@@ -445,9 +445,9 @@ describe("Formation - Members Field", () => {
       it(`displays members content for ${legalStructureId}`, async () => {
         const page = await getPageHelper({ legalStructureId }, { members: [] });
         await page.stepperClickToContactsStep();
-        expect(screen.getByText(Config.formation.fields.members.header)).toBeInTheDocument();
+        expect(screen.getByText(Config.formation.fields.members.label)).toBeInTheDocument();
         expect(screen.getByText(Config.formation.fields.members.subheader)).toBeInTheDocument();
-        expect(screen.queryByText(Config.formation.fields.directors.header)).not.toBeInTheDocument();
+        expect(screen.queryByText(Config.formation.fields.directors.label)).not.toBeInTheDocument();
       });
     }
   });

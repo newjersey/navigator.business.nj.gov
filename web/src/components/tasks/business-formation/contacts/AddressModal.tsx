@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { Content } from "@/components/Content";
 import { GenericTextField } from "@/components/GenericTextField";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { StateDropdown } from "@/components/StateDropdown";
@@ -79,7 +78,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
       } else if (isTooLong) {
         label = templateEval(Config.formation.general.maximumLengthErrorText, {
           // // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          field: (Config.formation.addressModal as any)[params.dataField].fieldDisplayName,
+          field: (Config.formation.addressModal as any)[params.dataField].label,
           maxLen: params.maxLen.toString(),
         });
       }
@@ -257,7 +256,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
             type="ALWAYS"
             className="margin-bottom-2"
           >
-            <Content>{Config.formation.addressModal.name.label}</Content>
+            <b>{Config.formation.addressModal.name.label}</b>
             <GenericTextField
               value={addressData.name}
               handleChange={(value: string) => {
@@ -278,7 +277,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
             type="ALWAYS"
             className="margin-bottom-2"
           >
-            <Content>{Config.formation.addressModal.addressLine1.label}</Content>
+            <b>{Config.formation.addressModal.addressLine1.label}</b>
             <GenericTextField
               fieldName="addressLine1"
               value={addressData.addressLine1}
@@ -300,17 +299,8 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
             type="ALWAYS"
             className="margin-bottom-2"
           >
-            <Content
-              style={{ display: "inline" }}
-              overrides={{
-                p: ({ children }: { children: string[] }): ReactElement => {
-                  return <p style={{ display: "inline" }}>{children}</p>;
-                },
-              }}
-            >
-              {Config.formation.addressModal.addressLine2.label}
-            </Content>{" "}
-            <div className="h6-styling">{Config.formation.general.optionalLabel}</div>
+            <b>{Config.formation.addressModal.addressLine2.label}</b>
+            <span className="margin-left-1">{Config.formation.general.optionalLabel}</span>
             <GenericTextField
               fieldName="addressLine2"
               value={addressData.addressLine2}
@@ -337,7 +327,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
                 type="DESKTOP-ONLY"
               >
                 <WithErrorBar hasError={!!addressErrorMap["addressCity"].invalid} type="MOBILE-ONLY">
-                  <Content>{Config.formation.addressModal.addressCity.label}</Content>
+                  <b>{Config.formation.addressModal.addressCity.label}</b>
                   <GenericTextField
                     fieldName="addressCity"
                     autoComplete="address-level2"
@@ -364,7 +354,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
                 type="MOBILE-ONLY"
               >
                 <div className="margin-bottom-2">
-                  <Content>{Config.formation.addressModal.addressState.label}</Content>
+                  <b>{Config.formation.addressModal.addressState.label}</b>
                 </div>
                 <StateDropdown
                   fieldName="addressState"
@@ -384,7 +374,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
               </WithErrorBar>
             </div>
             <div className="grid-col-6 tablet:grid-col-3">
-              <Content>{Config.formation.addressModal.addressZipCode.label}</Content>
+              <b>{Config.formation.addressModal.addressZipCode.label}</b>
               <GenericTextField
                 numericProps={{
                   maxLength: 5,

@@ -16,7 +16,7 @@ export const ReviewSignatures = (): ReactElement => {
     const field = isCorp ? "incorporators" : "signers";
     return {
       header: Config.formation.fields[field].reviewStepHeader,
-      label: Config.formation.fields[field].reviewStepNameLabel,
+      label: Config.formation.sections.review.nameLabel,
     };
   };
 
@@ -34,7 +34,7 @@ export const ReviewSignatures = (): ReactElement => {
             />
             {state.formationFormData.businessLocationType !== "NJ" && (
               <ReviewLineItem
-                label={Config.formation.fields.signers.reviewStepTitleLabel}
+                label={Config.formation.fields.signers.titleLabel}
                 value={signer.title ?? italicNotEnteredText}
                 marginOverride={"margin-top-0"}
               />

@@ -98,7 +98,7 @@ export const ContactsStep = (): ReactElement => {
             needSignature={true}
             displayContent={{
               description: getDescription("incorporators"),
-              header: Config.formation.fields.incorporators.header,
+              header: Config.formation.fields.incorporators.label,
               placeholder: Config.formation.fields.incorporators.placeholder ?? "",
               newButtonText: Config.formation.fields.incorporators.addButtonText,
               snackbarHeader: Config.formation.fields.incorporators.successSnackbarHeader,
