@@ -1,4 +1,3 @@
-import { Content } from "@/components/Content";
 import { StateDropdown } from "@/components/StateDropdown";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -25,7 +24,7 @@ export const ForeignStateOfFormation = (): ReactElement => {
   return (
     <>
       <div className="flex margin-bottom-2">
-        <Content>{Config.formation.fields.foreignStateOfFormation.label}</Content>
+        <b>{Config.formation.fields.foreignStateOfFormation.label}</b>
       </div>
       <div className="margin-bottom-2">
         <StateDropdown
