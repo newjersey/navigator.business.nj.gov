@@ -111,6 +111,7 @@ export default createTheme({
         },
       },
     },
+    MuiFormControlLabel: { styleOverrides: { label: { padding: "8px 24px 8px 4px" } } },
     MuiOutlinedInput: {
       styleOverrides: {
         root: {

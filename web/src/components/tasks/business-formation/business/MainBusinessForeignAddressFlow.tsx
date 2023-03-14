@@ -61,7 +61,7 @@ export const MainBusinessForeignAddressFlow = (): ReactElement => {
               data-testid={"address-radio-us"}
               value={"US"}
               control={<Radio color="primary" />}
-              label={<div className="padding-y-1 margin-right-3">{"US address"}</div>}
+              label={"US address"}
             />
             <FormControlLabel
               style={{ alignItems: "center" }}
@@ -69,7 +69,7 @@ export const MainBusinessForeignAddressFlow = (): ReactElement => {
               data-testid={"address-radio-intl"}
               value={"INTL"}
               control={<Radio color="primary" />}
-              label={<div className="padding-y-1 margin-right-3">{"International address"}</div>}
+              label={"International address"}
             />
           </>
         </RadioGroup>

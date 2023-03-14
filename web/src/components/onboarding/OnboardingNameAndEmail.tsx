@@ -112,7 +112,7 @@ export const OnboardingNameAndEmail = (props: Props): ReactElement => {
       </div>
       <FormGroup>
         <FormControlLabel
-          label={<div className="padding-y-1">{Config.selfRegistration.newsletterCheckboxLabel}</div>}
+          label={Config.selfRegistration.newsletterCheckboxLabel}
           control={
             <Checkbox
               checked={state.user?.receiveNewsletter}
@@ -124,7 +124,7 @@ export const OnboardingNameAndEmail = (props: Props): ReactElement => {
           }
         />
         <FormControlLabel
-          label={<div className="padding-y-1">{Config.selfRegistration.userTestingCheckboxLabel}</div>}
+          label={Config.selfRegistration.userTestingCheckboxLabel}
           control={
             <Checkbox
               checked={state.user?.userTesting}

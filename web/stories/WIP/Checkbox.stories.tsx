@@ -17,7 +17,7 @@ export default {
 const renderCheckbox = () => (
   <FormControlLabel
     control={<Checkbox checked={false} onChange={() => {}} name="name-attribute" data-testid="testId" />}
-    label={<div className=" ">{"Single Checkbox"}</div>}
+    label={"Single Checkbox"}
   />
 );
 const SingleCheckboxStory: ComponentStory<typeof Radio> = (args) => {

@@ -144,7 +144,7 @@ const ListOrCheckbox = (props: any): ReactElement => {
     return (
       <div>
         <FormControlLabel
-          label={<div className="padding-y-1">{checklistItemBody}</div>}
+          label={checklistItemBody}
           control={<TaskCheckbox checklistItemId={checklistItemId} />}
         />
       </div>

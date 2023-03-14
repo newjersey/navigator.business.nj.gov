@@ -70,11 +70,7 @@ export const OnboardingForeignBusinessType = (): ReactElement => {
                     checked={state.profileData.foreignBusinessTypeIds.includes(id)}
                   />
                 }
-                label={
-                  <div className="padding-y-1">
-                    <Content>{(contentFromConfig.optionContent as Record<string, string>)[id]}</Content>
-                  </div>
-                }
+                label={<Content>{(contentFromConfig.optionContent as Record<string, string>)[id]}</Content>}
               />
             );
           })}

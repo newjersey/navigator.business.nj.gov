@@ -66,7 +66,7 @@ export const OnboardingLegalStructure = (): ReactElement => {
                   data-testid={legalStructure.id}
                   value={legalStructure.id}
                   control={<Radio color="primary" />}
-                  label={<div className="padding-y-1">{makeLabel(legalStructure.id)}</div>}
+                  label={makeLabel(legalStructure.id)}
                 />
               );
             })}

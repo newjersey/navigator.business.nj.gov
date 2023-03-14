@@ -71,15 +71,13 @@ export const OnboardingRadioQuestion = <T extends ProfileDataTypes>(props: Props
                   value={val.toString()}
                   control={<Radio color="primary" />}
                   label={
-                    <div className="padding-y-1 margin-right-3">
-                      {props.labels
-                        ? props.labels[val.toString()]
-                        : contentFromConfig[
-                            `radioButton${capitalizeFirstLetter(
-                              kebabSnakeSentenceToCamelCase(val.toString())
-                            )}Text`
-                          ]}
-                    </div>
+                    props.labels
+                      ? props.labels[val.toString()]
+                      : contentFromConfig[
+                          `radioButton${capitalizeFirstLetter(
+                            kebabSnakeSentenceToCamelCase(val.toString())
+                          )}Text`
+                        ]
                   }
                 />
               );

@@ -45,7 +45,7 @@ export const OnboardingBusinessPersona = (): ReactElement => {
             data-testid="business-persona-starting"
             value="STARTING"
             control={<Radio color="primary" />}
-            label={<div className="padding-y-1">{contentFromConfig.radioButtonStartingText}</div>}
+            label={contentFromConfig.radioButtonStartingText}
           />
           <FormControlLabel
             aria-label="Business Status - Owning"
@@ -54,7 +54,7 @@ export const OnboardingBusinessPersona = (): ReactElement => {
             data-testid="business-persona-owning"
             value="OWNING"
             control={<Radio color="primary" />}
-            label={<div className="padding-y-1">{contentFromConfig.radioButtonOwningText}</div>}
+            label={contentFromConfig.radioButtonOwningText}
           />
           <FormControlLabel
             aria-label="Business Status - Foreign"
@@ -63,7 +63,7 @@ export const OnboardingBusinessPersona = (): ReactElement => {
             data-testid="business-persona-foreign"
             value="FOREIGN"
             control={<Radio color="primary" />}
-            label={<div className="padding-y-1">{contentFromConfig.radioButtonForeignText}</div>}
+            label={contentFromConfig.radioButtonForeignText}
           />
         </RadioGroup>
       </FormControl>

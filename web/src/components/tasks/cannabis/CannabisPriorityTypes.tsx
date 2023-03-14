@@ -138,11 +138,7 @@ export const CannabisPriorityTypes = (props: Props): ReactElement => {
         <ul style={{ marginTop: 0 }}>
           <div className="margin-bottom-2">
             <FormControlLabel
-              label={
-                <div className="padding-y-1">
-                  {Config.cannabisPriorityStatus.noPriorityStatusCheckboxText}
-                </div>
-              }
+              label={Config.cannabisPriorityStatus.noPriorityStatusCheckboxText}
               control={
                 <Checkbox
                   onChange={handleNoneOfTheAboveCheckboxChange}
