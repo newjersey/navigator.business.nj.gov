@@ -520,6 +520,7 @@ jobs:
           at: .
       - configure
       - run:
+          name: Glob, Split, and Run Unit Tests
           command: |
             TEST=$(circleci tests glob "./{shared,web,api}/**/*.test.{j,t}{s,sx}" | circleci tests split --split-by=timings | sed "s/\[/\\\[/g" | sed "s/\]/\\\]/g" | sed "s/\[/\\\[/g" | sed "s/\]/\\\]/g")
             yarn test:ci -- $TEST
@@ -740,7 +741,6 @@ workflows:
           requires:
             - docker-build-builder-image
       - build:
-          name: build
           filters:
             tags:
               ignore:
@@ -753,6 +753,7 @@ workflows:
                 - /^cms/.*/
                 - /^webflow-sync-.*/
       - lint:
+          name: Lint
           filters:
             branches:
               ignore:
@@ -763,6 +764,7 @@ workflows:
           requires:
             - build
       - test:
+          name: Unit Tests
           filters:
             branches:
               ignore:
