@@ -39,7 +39,7 @@
   "dependencies": {
     "@aws-amplify/auth": "5.1.12",
     "@aws-amplify/core": "5.1.1",
-    "@aws-crypto/sha256-browser": "3.0.0",
+    "@aws-crypto/sha256-browser": "4.0.0",
     "@aws-sdk/protocol-http": "3.272.0",
     "@aws-sdk/s3-request-presigner": "3.279.0",
     "@aws-sdk/url-parser": "3.272.0",
