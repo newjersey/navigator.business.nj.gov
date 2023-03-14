@@ -64,7 +64,7 @@ export const RadioQuestion = (props: Props): ReactElement => {
                 data-testid="post-onboarding-radio-true"
                 value={true}
                 control={<Radio color="primary" />}
-                label={<div className="padding-y-1 margin-right-3">{onboardingQuestion.radioYes}</div>}
+                label={onboardingQuestion.radioYes}
               />
               <FormControlLabel
                 style={{ alignItems: "center" }}
@@ -72,7 +72,7 @@ export const RadioQuestion = (props: Props): ReactElement => {
                 data-testid="post-onboarding-radio-false"
                 value={false}
                 control={<Radio color="primary" />}
-                label={<div className="padding-y-1 margin-right-3">{onboardingQuestion.radioNo}</div>}
+                label={onboardingQuestion.radioNo}
               />
             </RadioGroup>
           </FormControl>

@@ -148,11 +148,7 @@ export const RegisteredAgent = (): ReactElement => {
                 data-testid="registered-agent-number"
                 value="NUMBER"
                 control={<Radio color="primary" />}
-                label={
-                  <div className="padding-y-1 margin-right-3">
-                    {Config.formation.registeredAgent.radioButtonNumberText}
-                  </div>
-                }
+                label={Config.formation.registeredAgent.radioButtonNumberText}
               />
               <FormControlLabel
                 labelPlacement="end"
@@ -160,11 +156,7 @@ export const RegisteredAgent = (): ReactElement => {
                 style={{ alignItems: "center" }}
                 value="MANUAL_ENTRY"
                 control={<Radio color="primary" />}
-                label={
-                  <div className="padding-y-1 margin-right-3">
-                    {Config.formation.registeredAgent.radioButtonManualText}
-                  </div>
-                }
+                label={Config.formation.registeredAgent.radioButtonManualText}
               />
             </RadioGroup>
           </FormControl>
@@ -188,9 +180,7 @@ export const RegisteredAgent = (): ReactElement => {
             <div data-testid="agent-name">
               <div className="margin-top-3 margin-bottom-1">
                 <FormControlLabel
-                  label={
-                    <div className="padding-y-1">{Config.formation.registeredAgent.sameContactCheckbox}</div>
-                  }
+                  label={Config.formation.registeredAgent.sameContactCheckbox}
                   control={
                     <Checkbox
                       checked={state.formationFormData.agentUseAccountInfo}
@@ -231,11 +221,7 @@ export const RegisteredAgent = (): ReactElement => {
               {state.formationFormData.businessLocationType == "NJ" && (
                 <div className="margin-bottom-1">
                   <FormControlLabel
-                    label={
-                      <div className="padding-y-1">
-                        {Config.formation.registeredAgent.sameAddressCheckbox}
-                      </div>
-                    }
+                    label={Config.formation.registeredAgent.sameAddressCheckbox}
                     control={
                       <Checkbox
                         checked={state.formationFormData.agentUseBusinessAddress}

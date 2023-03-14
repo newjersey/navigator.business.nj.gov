@@ -160,7 +160,7 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
                     value={code}
                     control={<Radio color="primary" />}
                     label={
-                      <div className="padding-y-1">
+                      <>
                         <span className="text-bold margin-right-05">{code}</span>
                         <span className="margin-right-05">- </span>
                         <ExternalLink
@@ -170,7 +170,7 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
                             return obj.SixDigitCode?.toString() == code;
                           })?.SixDigitDescription ?? ""}
                         </ExternalLink>
-                      </div>
+                      </>
                     }
                   />
                 );
@@ -188,7 +188,7 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
                 value="other"
                 checked={displayInput && naicsCode === "other"}
                 control={<Radio color="primary" />}
-                label={<div className="padding-y-1">{"Search for other NAICS codes"}</div>}
+                label={"Search for other NAICS codes"}
               />
             </RadioGroup>
           </FormControl>

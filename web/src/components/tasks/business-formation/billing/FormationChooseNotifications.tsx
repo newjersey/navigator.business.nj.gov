@@ -40,11 +40,7 @@ export const FormationChooseNotifications = (): ReactElement => {
               checked={state.formationFormData.annualReportNotification}
             />
           }
-          label={
-            <div className="padding-y-1">
-              <Content>{Config.formation.fields.annualReportNotification.checkboxText}</Content>
-            </div>
-          }
+          label={<Content>{Config.formation.fields.annualReportNotification.checkboxText}</Content>}
         />
         <FormControlLabel
           control={
@@ -53,11 +49,7 @@ export const FormationChooseNotifications = (): ReactElement => {
               checked={state.formationFormData.corpWatchNotification}
             />
           }
-          label={
-            <div className="padding-y-1">
-              <Content>{Config.formation.fields.corpWatchNotification.checkboxText}</Content>{" "}
-            </div>
-          }
+          label={<Content>{Config.formation.fields.corpWatchNotification.checkboxText}</Content>}
         />
       </FormGroup>
     </div>

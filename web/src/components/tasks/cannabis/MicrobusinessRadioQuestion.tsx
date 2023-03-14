@@ -46,11 +46,7 @@ export const MicrobusinessRadioQuestion = (): ReactElement => {
             data-testid="microbusiness-radio-true"
             value={true}
             control={<Radio color="primary" />}
-            label={
-              <div className="padding-y-1 margin-right-3">
-                <Content>{Config.cannabisApplyForLicense.microbusinessRadioYes}</Content>{" "}
-              </div>
-            }
+            label={<Content>{Config.cannabisApplyForLicense.microbusinessRadioYes}</Content>}
           />
           <FormControlLabel
             style={{ alignItems: "center" }}
@@ -58,11 +54,7 @@ export const MicrobusinessRadioQuestion = (): ReactElement => {
             data-testid="microbusiness-radio-false"
             value={false}
             control={<Radio color="primary" />}
-            label={
-              <div className="padding-y-1 margin-right-3">
-                <Content>{Config.cannabisApplyForLicense.microbusinessRadioNo}</Content>{" "}
-              </div>
-            }
+            label={<Content>{Config.cannabisApplyForLicense.microbusinessRadioNo}</Content>}
           />
         </RadioGroup>
       </FormControl>

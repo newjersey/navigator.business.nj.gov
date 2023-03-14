@@ -232,11 +232,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
           <FormGroup className="padding-y-1">
             <FormControlLabel
               data-testid={"default-checkbox"}
-              label={
-                <div className="padding-y-1">
-                  {props.displayContent.defaultCheckbox ?? "Use Default Address"}
-                </div>
-              }
+              label={props.displayContent.defaultCheckbox ?? "Use Default Address"}
               control={
                 <Checkbox
                   checked={useDefaultAddress}

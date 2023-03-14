@@ -34,11 +34,7 @@ const renderFormControlLabel = (obj: Obj) => (
     data-testid="data-test-id-attribute"
     value="Option-1"
     control={<Radio color={obj.hasError ? "error" : "primary"} />}
-    label={
-      <div className={`padding-y-1 ${obj.horizontal ? "margin-right-3" : ""}`}>
-        {obj.shortLabel ? shortLabel : longLabel}
-      </div>
-    }
+    label={obj.shortLabel ? shortLabel : longLabel}
   />
 );
 

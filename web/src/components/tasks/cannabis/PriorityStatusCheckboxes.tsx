@@ -42,11 +42,7 @@ export const PriorityStatusCheckboxes = (props: Props): ReactElement => {
         <FormGroup>
           <FormControl variant="outlined" fullWidth>
             <FormControlLabel
-              label={
-                <div className="padding-y-1">
-                  <Content>{Config.cannabisApplyForLicense.diverselyOwnedLabel}</Content>
-                </div>
-              }
+              label={<Content>{Config.cannabisApplyForLicense.diverselyOwnedLabel}</Content>}
               control={
                 <Checkbox
                   name="diversely-owned-checkbox"
@@ -59,11 +55,7 @@ export const PriorityStatusCheckboxes = (props: Props): ReactElement => {
               }
             />
             <FormControlLabel
-              label={
-                <div className="padding-y-1">
-                  <Content>{Config.cannabisApplyForLicense.impactZoneLabel}</Content>
-                </div>
-              }
+              label={<Content>{Config.cannabisApplyForLicense.impactZoneLabel}</Content>}
               control={
                 <Checkbox
                   onChange={(event) => {
@@ -75,11 +67,7 @@ export const PriorityStatusCheckboxes = (props: Props): ReactElement => {
               }
             />
             <FormControlLabel
-              label={
-                <div className="padding-y-1">
-                  <Content>{Config.cannabisApplyForLicense.sbeLabel}</Content>
-                </div>
-              }
+              label={<Content>{Config.cannabisApplyForLicense.sbeLabel}</Content>}
               control={
                 <Checkbox
                   onChange={(event) => {
