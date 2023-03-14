@@ -19,8 +19,7 @@
     "spellcheck": "yarn workspaces foreach -v run spellcheck",
     "sync:deps": "yarnw-sync-deps --fix",
     "test": "jest --projects api shared web",
-    "test:ci": "jest --reporters=jest-junit --outputFile=../coverage/test_results/all-jest.xml --runInBand --logHeapUsage --collectCoverage=true --coverageDirectory=../coverage/ --projects api shared web",
-    "test:coverage": "jest --reporters=jest-junit --outputFile=../coverage/test_results/all-jest.xml --collectCoverage=true --coverageDirectory=../coverage/ --projects api shared web",
+    "test:ci": "jest --ci --reporters=default --reporters=jest-junit --maxWorkers=2 --collectCoverage=true --coverageDirectory=../coverage/ --projects api shared web",
     "typecheck": "yarn workspaces foreach -v run typecheck",
     "verify:node": "check-node-version --node $(cat .nvmrc) --npm 8"
   },
@@ -254,9 +253,22 @@
     "printWidth": 110,
     "endOfLine": "auto"
   },
+  "jest": {
+    "coverageReporters": [
+      "json-summary",
+      "text"
+    ],
+    "reporters": [
+      "default",
+      "jest-junit"
+    ],
+    "verbose": true
+  },
   "jest-junit": {
     "outputDirectory": "./coverage/test_results",
-    "uniqueOutputName": "true"
+    "uniqueOutputName": "false",
+    "outputName": "all-jest.xml",
+    "addFileAttribute": "true"
   },
   "release": {
     "baseBranch": "main",

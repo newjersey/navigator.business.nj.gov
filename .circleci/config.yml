@@ -6,10 +6,10 @@ commands:
       - checkout
       - restore_cache:
           keys:
-            - v5-yarn-deploy-deps-{{ checksum "yarn.lock" }}
-            - v5-yarn-deps-{{ checksum "yarn.lock" }}
-            - v5-yarn-deploy-deps-
-            - v5-yarn-deps-
+            - v6-yarn-deploy-deps-{{ checksum "yarn.lock" }}
+            - v6-yarn-deps-{{ checksum "yarn.lock" }}
+            - v6-yarn-deploy-deps-
+            - v6-yarn-deps-
       - run:
           name: Install yarn packages
           command: yarn install
@@ -75,9 +75,6 @@ commands:
       - run:
           name: Run Dependency Check
           command: yarn dependency-check
-      - run:
-          name: Run Unit Tests
-          command: yarn test:ci
 
   perform-integration-tests:
     parameters:
@@ -133,7 +130,7 @@ commands:
   store-cache:
     steps:
       - save_cache:
-          key: v5-yarn-deps-{{ checksum "yarn.lock" }}
+          key: v6-yarn-deps-{{ checksum "yarn.lock" }}
           paths:
             - ./.yarn/cache
             - ~/.npm-global
@@ -142,7 +139,7 @@ commands:
   store-deploy-cache:
     steps:
       - save_cache:
-          key: v5-yarn-deploy-deps-{{ checksum "yarn.lock" }}
+          key: v6-yarn-deploy-deps-{{ checksum "yarn.lock" }}
           paths:
             - ./.yarn/cache
             - ./web/.next/cache
@@ -497,7 +494,7 @@ jobs:
           paths:
             - "*"
 
-  lint-and-test:
+  lint:
     docker:
       - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder
         aws_auth:
@@ -509,6 +506,23 @@ jobs:
           at: .
       - configure
       - code-quality
+
+  test:
+    docker:
+      - image: $AWS_ACCOUNT_ID_DEV.dkr.ecr.$AWS_REGION.amazonaws.com/navigator_builder:bfs_navigator_builder
+        aws_auth:
+          aws_access_key_id: $AWS_ACCESS_KEY_ID_DEV
+          aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_DEV
+    parallelism: 5
+    steps:
+      - set-dev-env-vars
+      - attach_workspace:
+          at: .
+      - configure
+      - run:
+          command: |
+            TEST=$(circleci tests glob "./{shared,web,api}/**/*.test.{j,t}{s,sx}" | circleci tests split --split-by=timings | sed "s/\[/\\\[/g" | sed "s/\]/\\\]/g" | sed "s/\[/\\\[/g" | sed "s/\]/\\\]/g")
+            yarn test:ci -- $TEST
       - store_test_results:
           path: coverage/test_results
       - store_artifacts:
@@ -738,7 +752,17 @@ workflows:
                 - /^staging-.*/
                 - /^cms/.*/
                 - /^webflow-sync-.*/
-      - lint-and-test:
+      - lint:
+          filters:
+            branches:
+              ignore:
+                - /^release-.*/
+                - /^staging-.*/
+                - /^cms/.*/
+                - /^webflow-sync-.*/
+          requires:
+            - build
+      - test:
           filters:
             branches:
               ignore:

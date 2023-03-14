@@ -27,7 +27,6 @@
     "start": "next start",
     "storybook": "start-storybook -p 6006",
     "test": "cross-env-shell DEBUG_PRINT_LIMIT=50000 jest",
-    "test:ci": "cross-env-shell DEBUG_PRINT_LIMIT=50000 jest --reporters=jest-junit --outputFile=../coverage/test_results/web-jest.xml --runInBand --logHeapUsage --collectCoverage=true --coverageDirectory=../coverage/web/",
     "typecheck": "tsc --noemit",
     "typecheck:cypress": "tsc --noemit --project cypress/tsconfig.json",
     "webflow:sync": "node ./src/scripts/webflow/fundingSync.mjs --sync"
@@ -176,6 +175,8 @@
   },
   "jest-junit": {
     "outputDirectory": "../coverage/test_results",
-    "uniqueOutputName": "true"
+    "outputName": "web-jest.xml",
+    "uniqueOutputName": "false",
+    "addFileAttribute": "true"
   }
 }

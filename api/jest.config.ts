@@ -2,7 +2,7 @@ import type { Config } from "@jest/types";
 
 export default async (): Promise<Config.InitialOptions> => {
   return {
-    coverageReporters: ["json-summary", "text", "lcov"],
+    coverageReporters: ["json-summary", "text"],
     ...require("jest-dynalite/jest-preset"),
     ...require("ts-jest/jest-preset"),
     moduleNameMapper: {

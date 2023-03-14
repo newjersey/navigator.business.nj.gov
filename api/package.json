@@ -21,7 +21,6 @@
     "start:wiremock": "wiremock --root-dir ./wiremock --port 9000",
     "start:wiremock:with-port": "wiremock --root-dir ./wiremock",
     "test": "jest",
-    "test:ci": "jest --reporters=jest-junit --outputFile=../coverage/test_results/api-jest.xml --runInBand --logHeapUsage --collectCoverage=true --coverageDirectory=../coverage/api/",
     "typecheck": "tsc --noemit"
   },
   "engines": {
@@ -108,6 +107,8 @@
   },
   "jest-junit": {
     "outputDirectory": "../coverage/test_results",
-    "uniqueOutputName": "true"
+    "outputName": "api-jest.xml",
+    "uniqueOutputName": "false",
+    "addFileAttribute": "true"
   }
 }

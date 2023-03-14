@@ -4,7 +4,7 @@ const esModules = ["rehype-react", "remark-gfm", "remark-parse", "remark-rehype"
 
 export default async (): Promise<Config.InitialOptions> => {
   return {
-    coverageReporters: ["json-summary", "text", "lcov"],
+    coverageReporters: ["json-summary", "text"],
     setupFilesAfterEnv: ["./setupTests.js"],
     testEnvironment: "jsdom",
     testPathIgnorePatterns: ["<rootDir>/.next/", "<rootDir>/node_modules/", "<rootDir>/cypress/"],
