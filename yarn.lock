@@ -4742,7 +4742,7 @@ __metadata:
     js-yaml: 4.1.0
     jsonwebtoken: 9.0.0
     kill-port: 1.6.1
-    lint-staged: 13.1.4
+    lint-staged: 13.2.0
     lodash: 4.17.21
     markdown-truncate: 1.0.4
     nc: "git+https://github.com/dsueltenfuss/nc.git"
@@ -23424,9 +23424,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lint-staged@npm:13.1.4":
-  version: 13.1.4
-  resolution: "lint-staged@npm:13.1.4"
+"lint-staged@npm:13.2.0":
+  version: 13.2.0
+  resolution: "lint-staged@npm:13.2.0"
   dependencies:
     chalk: 5.2.0
     cli-truncate: ^3.1.0
@@ -23440,11 +23440,10 @@ __metadata:
     object-inspect: ^1.12.3
     pidtree: ^0.6.0
     string-argv: ^0.3.1
-    supports-color: 9.3.1
     yaml: ^2.2.1
   bin:
     lint-staged: bin/lint-staged.js
-  checksum: 75729290bd78c026351b1fd39f9bcbee3744f93e6d66a0125119c59de108205872b6fb7732437dc3bd363716bf7c3585e0c1f93a3419eae87aaa2878de0225e3
+  checksum: dcaa8fbbde567eb8ac27230a18b3a22f30c278c524c0e27cf7d4110d662d5d33ed68a585a2e1b05075ef1c262e853f557a5ae046188b723603246d63e6b9f07b
   languageName: node
   linkType: hard
 
@@ -33130,13 +33129,6 @@ __metadata:
   dependencies:
     has-flag: ^3.0.0
   checksum: 005b4a7e5d78a9a703454f5b7da34336b82825747724d1f3eefea6c3956afcb33b79b31854a93cef0fc1f2449919ae952f79abbfd09a5b5b43ecd26407d3a3a1
-  languageName: node
-  linkType: hard
-
-"supports-color@npm:9.3.1":
-  version: 9.3.1
-  resolution: "supports-color@npm:9.3.1"
-  checksum: 00c4d1082a7ba0ee21cba1d4e4a466642635412e40476777b530aa5110d035e99a420cd048e1fb6811f2254c0946095fbb87a1eccf1af1d1ca45ab0a4535db93
   languageName: node
   linkType: hard
 
