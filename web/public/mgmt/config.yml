@@ -252,7 +252,7 @@ collections:
                           widget: "relation",
                           collection: "contextual-information",
                           search_fields: ["{{filename}}"],
-                          options_length: 100,
+                          options_length: 500,
                           value_field: "{{filename}}",
                           display_fields: ["{{filename}}"],
                         }
@@ -273,7 +273,7 @@ collections:
                           widget: "relation",
                           collection: "contextual-information",
                           search_fields: ["{{filename}}"],
-                          options_length: 100,
+                          options_length: 500,
                           value_field: "{{filename}}",
                           display_fields: ["{{filename}}"],
                         }
@@ -343,7 +343,7 @@ collections:
                           widget: "relation",
                           collection: "contextual-information",
                           search_fields: ["{{filename}}"],
-                          options_length: 100,
+                          options_length: 500,
                           value_field: "{{filename}}",
                           display_fields: ["{{filename}}"],
                         }
@@ -361,7 +361,7 @@ collections:
                           widget: "relation",
                           collection: "contextual-information",
                           search_fields: ["{{filename}}"],
-                          options_length: 100,
+                          options_length: 500,
                           value_field: "{{filename}}",
                           display_fields: ["{{filename}}"],
                         }
@@ -379,7 +379,7 @@ collections:
                           widget: "relation",
                           collection: "contextual-information",
                           search_fields: ["{{filename}}"],
-                          options_length: 100,
+                          options_length: 500,
                           value_field: "{{filename}}",
                           display_fields: ["{{filename}}"],
                         }
@@ -1407,6 +1407,7 @@ collections:
             search_fields: ["{{filename}}", "name", "urlSlug"]
             value_field: "{{filename}}"
             display_fields: ["{{filename}}"]
+            options_length: 500
           - label: "Required"
             name: "required"
             widget: "boolean"
@@ -1423,6 +1424,7 @@ collections:
             search_fields: ["{{filename}}", "name", "urlSlug"]
             value_field: "{{filename}}"
             display_fields: ["{{filename}}"]
+            options_length: 500
           - label: Modified Task
             name: replaceWithFilename
             widget: "relation"
@@ -1430,6 +1432,7 @@ collections:
             search_fields: ["{{filename}}", "name", "urlSlug"]
             value_field: "{{filename}}"
             display_fields: ["{{filename}}"]
+            options_length: 500
   - name: addons
     label: "Roadmaps - Add-ons"
     folder: "content/src/roadmaps/add-ons"
@@ -1461,6 +1464,7 @@ collections:
             search_fields: ["{{filename}}", "name", "urlSlug"]
             value_field: "{{filename}}"
             display_fields: ["{{filename}}"]
+            options_length: 500
           - label: "Required"
             name: "required"
             widget: "boolean"
@@ -1477,6 +1481,7 @@ collections:
             search_fields: ["{{filename}}", "name", "urlSlug"]
             value_field: "{{filename}}"
             display_fields: ["{{filename}}"]
+            options_length: 500
           - label: Modified Task
             name: replaceWithFilename
             widget: "relation"
@@ -1484,6 +1489,7 @@ collections:
             search_fields: ["{{filename}}", "name", "urlSlug"]
             value_field: "{{filename}}"
             display_fields: ["{{filename}}"]
+            options_length: 500
   - name: "roadmap-content"
     label: "Roadmaps - Display Content"
     folder: "content/src/display-content/roadmap"
@@ -1571,6 +1577,7 @@ collections:
                 search_fields: ["{{filename}}", "name", "urlSlug"]
                 value_field: "{{filename}}"
                 display_fields: ["{{filename}}"]
+                options_length: 500
               - label: Dependencies
                 name: dependencies
                 widget: "relation"
@@ -1579,6 +1586,7 @@ collections:
                 value_field: "{{filename}}"
                 display_fields: ["{{filename}}"]
                 multiple: true
+                options_length: 500
 
   - name: "tasks-label"
     label: "🟦 TASKS"
@@ -1640,6 +1648,7 @@ collections:
         value_field: "{{id}}"
         display_fields: ["{{id}}"]
         required: false
+        options_length: 500
       - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
       - { label: "Form Name", name: "formName", widget: "string", required: false }
       - {
@@ -1741,6 +1750,7 @@ collections:
             value_field: "{{id}}"
             display_fields: ["{{id}}"]
             required: false
+            options_length: 500
           - { label: "Required", name: "required", widget: "boolean", required: false }
           - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
           - { label: "Form Name", name: "formName", widget: "string", required: false }
@@ -1767,6 +1777,7 @@ collections:
             value_field: "{{id}}"
             display_fields: ["{{id}}"]
             required: false
+            options_length: 500
           - { label: "Required", name: "required", widget: "boolean", required: false }
           - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
           - { label: "Form Name", name: "formName", widget: "string", required: false }
@@ -1915,6 +1926,7 @@ collections:
             value_field: "{{id}}"
             display_fields: ["{{id}}"]
             required: false
+            options_length: 500
           - { label: "Required", name: "required", widget: "boolean", required: false }
           - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
           - { label: "Form Name", name: "formName", widget: "string", required: false }
@@ -2030,6 +2042,7 @@ collections:
             value_field: "{{id}}"
             display_fields: ["{{id}}"]
             required: false
+            options_length: 500
           - { label: "Required", name: "required", widget: "boolean", required: false }
           - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
           - { label: "Form Name", name: "formName", widget: "string", required: false }
@@ -2122,6 +2135,7 @@ collections:
             value_field: "{{id}}"
             display_fields: ["{{id}}"]
             required: false
+            options_length: 500
           - { label: "Required", name: "required", widget: "boolean", required: false }
           - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
           - { label: "Form Name", name: "formName", widget: "string", required: false }
@@ -2221,6 +2235,7 @@ collections:
             value_field: "{{id}}"
             display_fields: ["{{id}}"]
             required: false
+            options_length: 500
           - { label: "Required", name: "required", widget: "boolean", required: false }
           - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
           - { label: "Form Name", name: "formName", widget: "string", required: false }
