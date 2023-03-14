@@ -4624,9 +4624,9 @@ __metadata:
     prettier: 2.8.4
     prettier-plugin-organize-imports: 3.2.2
     rimraf: 4.4.0
-    serverless: 3.27.0
+    serverless: 3.28.1
     serverless-dynamodb-local: 0.2.40
-    serverless-http: 3.1.1
+    serverless-http: 3.2.0
     serverless-offline: 12.0.4
     serverless-offline-ssm: 6.2.0
     serverless-webpack: 5.11.0
@@ -4636,10 +4636,10 @@ __metadata:
     ts-loader: 9.4.2
     ts-node: 10.9.1
     tsconfig-paths: 4.1.2
-    tsconfig-paths-webpack-plugin: 4.0.0
+    tsconfig-paths-webpack-plugin: 4.0.1
     typescript: 4.9.5
     uuid: 9.0.0
-    webpack: 5.76.0
+    webpack: 5.76.1
     webpack-node-externals: 3.0.0
     winston: 3.8.2
     winston-cloudwatch: 6.1.1
@@ -4827,9 +4827,9 @@ __metadata:
     sass: 1.59.2
     sass-loader: 13.2.0
     semantic-release: 19.0.5
-    serverless: 3.27.0
+    serverless: 3.28.1
     serverless-dynamodb-local: 0.2.40
-    serverless-http: 3.1.1
+    serverless-http: 3.2.0
     serverless-offline: 12.0.4
     serverless-offline-ssm: 6.2.0
     serverless-webpack: 5.11.0
@@ -4844,13 +4844,13 @@ __metadata:
     ts-loader: 9.4.2
     ts-node: 10.9.1
     tsconfig-paths: 4.1.2
-    tsconfig-paths-webpack-plugin: 4.0.0
+    tsconfig-paths-webpack-plugin: 4.0.1
     typescript: 4.9.5
     ua-parser-js: 1.0.34
     unified: 10.1.2
     unist-util-visit: 4.1.2
     uuid: 9.0.0
-    webpack: 5.76.0
+    webpack: 5.76.1
     webpack-node-externals: 3.0.0
     winston: 3.8.2
     winston-cloudwatch: 6.1.1
@@ -5027,7 +5027,7 @@ __metadata:
     ua-parser-js: 1.0.34
     unified: 10.1.2
     unist-util-visit: 4.1.2
-    webpack: 5.76.0
+    webpack: 5.76.1
   languageName: unknown
   linkType: soft
 
@@ -12460,9 +12460,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"aws-sdk@npm:^2.1303.0, aws-sdk@npm:^2.650.0, aws-sdk@npm:^2.7.0":
-  version: 2.1304.0
-  resolution: "aws-sdk@npm:2.1304.0"
+"aws-sdk@npm:^2.1326.0, aws-sdk@npm:^2.650.0, aws-sdk@npm:^2.7.0":
+  version: 2.1335.0
+  resolution: "aws-sdk@npm:2.1335.0"
   dependencies:
     buffer: 4.9.2
     events: 1.1.1
@@ -12474,7 +12474,7 @@ __metadata:
     util: ^0.12.4
     uuid: 8.0.0
     xml2js: 0.4.19
-  checksum: 3087547d34516f2ade851b916dbc1a6566835216d25cf270aa533e65f9b0355746e41660b9bbfe7a5247afa941201063e232b105f108b976e42135af6dff8571
+  checksum: 4cb8c3d224d6970ef377d814ba4da06e4d7791f3d2103aa0a6ee8b9f33fc3abb3642ecae82e29857dfd0b1bbd9eb08855c1861d71568299a3a39b8ec11e78e58
   languageName: node
   linkType: hard
 
@@ -14058,10 +14058,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ci-info@npm:^3.2.0, ci-info@npm:^3.5.0, ci-info@npm:^3.6.1, ci-info@npm:^3.7.1":
-  version: 3.7.1
-  resolution: "ci-info@npm:3.7.1"
-  checksum: 72d93d5101ea1c186511277fbd8d06ae8a6e028cc2fb94361e92bf735b39c5ebd192e8d15a66ff8c4e3ed569f87c2f844e96f90e141b2de5c649f77ec34ff601
+"ci-info@npm:^3.2.0, ci-info@npm:^3.5.0, ci-info@npm:^3.6.1, ci-info@npm:^3.8.0":
+  version: 3.8.0
+  resolution: "ci-info@npm:3.8.0"
+  checksum: d0a4d3160497cae54294974a7246202244fff031b0a6ea20dd57b10ec510aa17399c41a1b0982142c105f3255aff2173e5c0dd7302ee1b2f28ba3debda375098
   languageName: node
   linkType: hard
 
@@ -27571,14 +27571,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"open@npm:^8.4.0":
-  version: 8.4.0
-  resolution: "open@npm:8.4.0"
+"open@npm:^8.4.0, open@npm:^8.4.2":
+  version: 8.4.2
+  resolution: "open@npm:8.4.2"
   dependencies:
     define-lazy-prop: ^2.0.0
     is-docker: ^2.1.1
     is-wsl: ^2.2.0
-  checksum: e9545bec64cdbf30a0c35c1bdc310344adf8428a117f7d8df3c0af0a0a24c513b304916a6d9b11db0190ff7225c2d578885080b761ed46a3d5f6f1eebb98b63c
+  checksum: 6388bfff21b40cb9bd8f913f9130d107f2ed4724ea81a8fd29798ee322b361ca31fa2cdfb491a5c31e43a3996cfe9566741238c7a741ada8d7af1cb78d85cf26
   languageName: node
   linkType: hard
 
@@ -31681,10 +31681,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"serverless-http@npm:3.1.1":
-  version: 3.1.1
-  resolution: "serverless-http@npm:3.1.1"
-  checksum: 611963ccd52a0238531bc5b4ce871a6a6544e24508a133bdb46a7273d40e991978381adea6bd6da27bf9096f3b685c5f085d89195dd8cdc315a99ede0e8e1cbb
+"serverless-http@npm:3.2.0":
+  version: 3.2.0
+  resolution: "serverless-http@npm:3.2.0"
+  checksum: aaa3b6e416ad25931bf00c3a1c31cb5f9a56c678ca8a6bc99749b90bb49ee6e8c53d7edd6bc0b587a171bb8c39c6093dc9980cb0142b8c18881533859d3b769f
   languageName: node
   linkType: hard
 
@@ -31761,9 +31761,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"serverless@npm:3.27.0":
-  version: 3.27.0
-  resolution: "serverless@npm:3.27.0"
+"serverless@npm:3.28.1":
+  version: 3.28.1
+  resolution: "serverless@npm:3.28.1"
   dependencies:
     "@serverless/dashboard-plugin": ^6.2.3
     "@serverless/platform-client": ^4.3.2
@@ -31771,12 +31771,12 @@ __metadata:
     ajv: ^8.12.0
     ajv-formats: ^2.1.1
     archiver: ^5.3.1
-    aws-sdk: ^2.1303.0
+    aws-sdk: ^2.1326.0
     bluebird: ^3.7.2
     cachedir: ^2.3.0
     chalk: ^4.1.2
     child-process-ext: ^2.1.1
-    ci-info: ^3.7.1
+    ci-info: ^3.8.0
     cli-progress-footer: ^2.3.2
     d: ^1.0.1
     dayjs: ^1.11.7
@@ -31800,10 +31800,10 @@ __metadata:
     lodash: ^4.17.21
     memoizee: ^0.4.15
     micromatch: ^4.0.5
-    node-fetch: ^2.6.8
+    node-fetch: ^2.6.9
     npm-registry-utilities: ^1.0.0
     object-hash: ^3.0.0
-    open: ^8.4.0
+    open: ^8.4.2
     path2: ^0.1.0
     process-utils: ^4.0.0
     promise-queue: ^2.2.5
@@ -31821,7 +31821,7 @@ __metadata:
   bin:
     serverless: bin/serverless.js
     sls: bin/serverless.js
-  checksum: d1bf7c44141b801cc2df3e7648bff11fae51dd7193a59cfd3f2f48d1d2be44a45f187bb29e3f6034a8e8086850480d3e6022889fd4a6515ed8cc6834d0c3fe92
+  checksum: 04315f923c79e37c83fd83e8968408286e591863304cf3678138ec3828afac15b2ed486b6b52c9ad3f48f3bd9603854d625d79efc10f33bc8e154a6afc0c5796
   languageName: node
   linkType: hard
 
@@ -34146,7 +34146,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tsconfig-paths@npm:4.1.2, tsconfig-paths@npm:^4.0.0":
+"tsconfig-paths-webpack-plugin@npm:4.0.1":
+  version: 4.0.1
+  resolution: "tsconfig-paths-webpack-plugin@npm:4.0.1"
+  dependencies:
+    chalk: ^4.1.0
+    enhanced-resolve: ^5.7.0
+    tsconfig-paths: ^4.1.2
+  checksum: a09e765c4939379fa060f78bbc906d0a7be541b9b49d3ad4744e99a2e87f28aa30d549a549196159bc5a50f420fdb1391b8eed360f47ee8ce40e15dcb800b5aa
+  languageName: node
+  linkType: hard
+
+"tsconfig-paths@npm:4.1.2, tsconfig-paths@npm:^4.0.0, tsconfig-paths@npm:^4.1.2":
   version: 4.1.2
   resolution: "tsconfig-paths@npm:4.1.2"
   dependencies:
@@ -35666,9 +35677,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"webpack@npm:5.76.0, webpack@npm:>=4.43.0 <6.0.0, webpack@npm:^5, webpack@npm:^5.9.0":
-  version: 5.76.0
-  resolution: "webpack@npm:5.76.0"
+"webpack@npm:5.76.1, webpack@npm:>=4.43.0 <6.0.0, webpack@npm:^5, webpack@npm:^5.9.0":
+  version: 5.76.1
+  resolution: "webpack@npm:5.76.1"
   dependencies:
     "@types/eslint-scope": ^3.7.3
     "@types/estree": ^0.0.51
@@ -35699,7 +35710,7 @@ __metadata:
       optional: true
   bin:
     webpack: bin/webpack.js
-  checksum: e897b3b34068222fe910d8894837cbf39f5e66b4772fe8d24dfc0090cd13e19337a3a757a97bc185be6c64d9d5a7b1ae372821b65a6079ce8c7ceba606edb409
+  checksum: b01fe0bc2dbca0e10d290ddb0bf81e807a031de48028176e2b21afd696b4d3f25ab9accdad888ef4a1f7c7f4d41f13d5bf2395b7653fdf3e5e3dafa54e56dab2
   languageName: node
   linkType: hard
 
