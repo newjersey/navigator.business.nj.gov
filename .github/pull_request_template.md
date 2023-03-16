@@ -6,11 +6,17 @@
 
 ### Ticket
 
-<!-- Link to ticket in pivotal -->
+<!-- Link to ticket in pivotal. Append ticket_id to provided URL. -->
+
+[Replace with ticket_id](https://www.pivotaltracker.com/story/show/)
 
 ### Approach
 
 <!-- Any changed dependencies, e.g. requires an install/update/migration, etc. -->
+
+### Steps to Test
+
+<!-- If this work affects a user's experience, provide steps to test these changes in-app. -->
 
 ### Notes
 
@@ -19,6 +25,7 @@
 ## Code author checklist
 
 - [ ] I have performed a self-review of my code
-- [ ] My code has adequate test coverage
+- [ ] I have created and/or updated relevant documentation, if necessary
 - [ ] I have not used any relative imports
-- [ ] I have updated the documentation, if necessary
+- [ ] I have checked for and removed instances of unused config from CMS
+- [ ] I have pruned any instances of unused code
