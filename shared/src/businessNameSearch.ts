@@ -3,7 +3,8 @@ export type NameAvailabilityStatus =
   | "DESIGNATOR_ERROR"
   | "SPECIAL_CHARACTER_ERROR"
   | "UNAVAILABLE"
-  | "RESTRICTED_ERROR";
+  | "RESTRICTED_ERROR"
+  | undefined;
 
 export type NameAvailability = {
   status: NameAvailabilityStatus;

@@ -212,6 +212,27 @@ describe("<BusinessFormationPaginator />", () => {
       });
     });
 
+    it("switches from error-active to error, persisting the error state on step one even after switching steps", async () => {
+      const page = preparePage(initialUserData, displayContent);
+      page.fillText("Search business name", "Pizza Joint");
+      await page.searchBusinessName({ status: "UNAVAILABLE" });
+      expect(page.getStepStateInStepper(LookupStepIndexByName("Name"))).toEqual("ERROR-ACTIVE");
+      await page.stepperClickToBusinessStep();
+      expect(page.getStepStateInStepper(LookupStepIndexByName("Name"))).toEqual("ERROR");
+    });
+
+    it("maintains business name search error, even after switching steps and returning", async () => {
+      const page = preparePage(initialUserData, displayContent);
+      page.fillText("Search business name", "Pizza Joint");
+      await page.searchBusinessName({ status: "UNAVAILABLE" });
+      expect(page.getStepStateInStepper(LookupStepIndexByName("Name"))).toEqual("ERROR-ACTIVE");
+      expect(screen.getByTestId("unavailable-text")).toBeInTheDocument();
+      await page.stepperClickToBusinessStep();
+      await page.stepperClickToBusinessNameStep();
+      expect(screen.getByTestId("unavailable-text")).toBeInTheDocument();
+      expect(page.getStepStateInStepper(LookupStepIndexByName("Name"))).toEqual("ERROR-ACTIVE");
+    });
+
     const switchingStepTests = (switchStepFunction: () => void) => {
       it("filters out empty provisions", async () => {
         const page = preparePage(initialUserData, displayContent);
@@ -241,7 +262,7 @@ describe("<BusinessFormationPaginator />", () => {
           );
         });
 
-        it("does not save availablity state when switching back to step", async () => {
+        it("saves availability state when switching back to step", async () => {
           const page = preparePage(initialUserData, displayContent);
           await page.stepperClickToBusinessNameStep();
           page.fillText("Search business name", "Pizza Joint");
@@ -250,7 +271,7 @@ describe("<BusinessFormationPaginator />", () => {
 
           switchStepFunction();
           await page.stepperClickToBusinessNameStep();
-          expect(screen.queryByTestId("available-text")).not.toBeInTheDocument();
+          expect(screen.getByTestId("available-text")).toBeInTheDocument();
         });
 
         it("saves name to profile when available", async () => {
@@ -391,20 +412,20 @@ describe("<BusinessFormationPaginator />", () => {
         expect(page.getStepStateInStepper(LookupStepIndexByName("Name"))).toEqual("COMPLETE");
       });
 
-      it("marks step one as incomplete if business name is unavailable", async () => {
+      it("marks step one as error if business name is unavailable", async () => {
         const page = preparePage(initialUserData, displayContent);
         page.fillText("Search business name", "Pizza Joint");
         await page.searchBusinessName({ status: "UNAVAILABLE" });
         switchStepFunction();
-        expect(page.getStepStateInStepper(LookupStepIndexByName("Name"))).toEqual("INCOMPLETE");
+        expect(page.getStepStateInStepper(LookupStepIndexByName("Name"))).toEqual("ERROR");
       });
 
-      it("marks step one as incomplete if business name search is error", async () => {
+      it("marks step one as error if business name search is error", async () => {
         const page = preparePage(initialUserData, displayContent);
         page.fillText("Search business name", "Pizza Joint LLC");
         await page.searchBusinessName({ status: "DESIGNATOR_ERROR" });
         switchStepFunction();
-        expect(page.getStepStateInStepper(LookupStepIndexByName("Name"))).toEqual("INCOMPLETE");
+        expect(page.getStepStateInStepper(LookupStepIndexByName("Name"))).toEqual("ERROR");
       });
 
       it("shows existing inline errors when visiting an INCOMPLETE step with inline errors", async () => {

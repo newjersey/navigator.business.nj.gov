@@ -16,17 +16,13 @@ const NexusNameSearchPreview = (props: PreviewProps) => {
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
       <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
         <NexusSearchBusinessNameStep />
-        <NexusAvailable
-          submittedName="some name"
-          updateButtonClicked={false}
-          updateNameOnProfile={() => {}}
-        />
+        <NexusAvailable submittedName="some name" updateButtonClicked={false} />
         <NexusUnavailable
           submittedName="some name"
           nameAvailability={{ status: "UNAVAILABLE", similarNames: [] }}
           resetSearch={() => {}}
         />
-        <DbaAvailable submittedName="some name" updateButtonClicked={false} updateNameOnProfile={() => {}} />
+        <DbaAvailable submittedName="some name" updateButtonClicked={false} />
         <DbaUnavailable
           submittedName="some name"
           nameAvailability={{ status: "UNAVAILABLE", similarNames: ["name 1", "name 2"] }}

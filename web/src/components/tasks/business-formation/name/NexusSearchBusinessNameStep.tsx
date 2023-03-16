@@ -5,17 +5,23 @@ import { SearchBusinessNameForm } from "@/components/tasks/search-business-name/
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { NameAvailability } from "@businessnjgovnavigator/shared/businessNameSearch";
+import { NameAvailability } from "@businessnjgovnavigator/shared/";
 import { emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { ReactElement, useContext } from "react";
 
 export const NexusSearchBusinessNameStep = (): ReactElement => {
-  const { setBusinessNameAvailability, setFormationFormData, setFieldsInteracted } =
-    useContext(BusinessFormationContext);
+  const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
   const { userData, update } = useUserData();
   const { Config } = useConfig();
   const FIELD_NAME = "businessName";
+
+  const setBusinessNameAvailability = (nameAvailability: NameAvailability | undefined): void => {
+    setFormationFormData({
+      ...state.formationFormData,
+      businessNameAvailability: nameAvailability ?? { status: undefined, similarNames: [] },
+    });
+  };
 
   const onSubmit = async (
     submittedName: string,
@@ -26,14 +32,17 @@ export const NexusSearchBusinessNameStep = (): ReactElement => {
       return;
     }
     setFieldsInteracted([FIELD_NAME]);
-    setBusinessNameAvailability(nameAvailability);
     let newUserData: UserData | undefined;
     if (nameAvailability.status === "AVAILABLE") {
       newUserData = {
         ...userData,
         formationData: {
           ...userData.formationData,
-          formationFormData: { ...userData.formationData.formationFormData, businessName: submittedName },
+          formationFormData: {
+            ...userData.formationData.formationFormData,
+            businessName: submittedName,
+            businessNameAvailability: nameAvailability,
+          },
         },
         profileData: {
           ...userData.profileData,
@@ -47,7 +56,11 @@ export const NexusSearchBusinessNameStep = (): ReactElement => {
         ...userData,
         formationData: {
           ...userData.formationData,
-          formationFormData: { ...userData.formationData.formationFormData, businessName: submittedName },
+          formationFormData: {
+            ...userData.formationData.formationFormData,
+            businessName: submittedName,
+            businessNameAvailability: nameAvailability,
+          },
         },
         profileData: {
           ...userData.profileData,

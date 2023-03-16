@@ -10,12 +10,11 @@ import { isZipCodeNj } from "@/lib/domain-logic/isZipCodeNj";
 import { isZipCodeUs } from "@/lib/domain-logic/isZipCodeUs";
 import { FormationFieldErrorState } from "@/lib/types/types";
 import { templateEval, validateEmail } from "@/lib/utils/helpers";
-import { FormationFields, FormationFormData, NameAvailability } from "@businessnjgovnavigator/shared";
+import { FormationFields, FormationFormData } from "@businessnjgovnavigator/shared";
 
 export const getErrorStateForField = (
   field: FormationFields,
-  formationFormData: FormationFormData,
-  businessNameAvailability: NameAvailability | undefined
+  formationFormData: FormationFormData
 ): FormationFieldErrorState => {
   const Config = getMergedConfig();
 
@@ -124,14 +123,14 @@ export const getErrorStateForField = (
 
   if (field === "businessName") {
     const exists = !!formationFormData.businessName;
-    const isAvailable = businessNameAvailability?.status === "AVAILABLE";
+    const isAvailable = formationFormData.businessNameAvailability?.status === "AVAILABLE";
     const isValid = exists && isAvailable;
     let label = errorState.label;
     if (!exists) {
       label = Config.formation.fields.businessName.errorInlineEmpty;
-    } else if (businessNameAvailability === undefined) {
+    } else if (formationFormData.businessNameAvailability.status === undefined) {
       label = Config.formation.fields.businessName.errorInlineNeedsToSearch;
-    } else if (businessNameAvailability?.status !== "AVAILABLE") {
+    } else if (formationFormData.businessNameAvailability?.status !== "AVAILABLE") {
       label = Config.formation.fields.businessName.errorInlineUnavailable;
     }
     return { ...errorState, label, hasError: !isValid };
