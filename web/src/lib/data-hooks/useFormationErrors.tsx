@@ -20,10 +20,10 @@ export const useFormationErrors = () => {
     return validatedFields.reduce((acc, field) => {
       return {
         ...acc,
-        [field]: getErrorStateForField(field, state.formationFormData, state.businessNameAvailability),
+        [field]: getErrorStateForField(field, state.formationFormData),
       };
     }, {} as Record<FormationFields, FormationFieldErrorState>);
-  }, [validatedFields, state.formationFormData, state.businessNameAvailability]);
+  }, [validatedFields, state.formationFormData]);
 
   const getApiFieldErrorState = (field: FormationFields): FormationFieldErrorState | undefined => {
     if (
@@ -127,14 +127,15 @@ export const useFormationErrors = () => {
     }
 
     return validatedFieldsForStep(step).every((field) => {
-      const errorState =
-        errorStates[field] ||
-        getErrorStateForField(field, state.formationFormData, state.businessNameAvailability);
+      const errorState = errorStates[field] || getErrorStateForField(field, state.formationFormData);
       return !errorState.hasError;
     });
   };
 
   const doesStepHaveError = (step: FormationStepNames, overrides?: { hasSubmitted: boolean }): boolean => {
+    if (step == "Name") {
+      return allCurrentErrorsForStep(step, overrides).length > 0;
+    }
     if (overrides?.hasSubmitted ?? state.hasBeenSubmitted) {
       return allCurrentErrorsForStep(step, overrides).length > 0;
     } else {

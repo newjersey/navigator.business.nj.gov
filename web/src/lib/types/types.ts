@@ -402,8 +402,6 @@ export type SelfRegRequest = {
   userTesting: boolean;
 };
 
-export type businessFormationTabsNames = "Name" | "Business" | "Contacts" | "Review" | "Billing";
-
 export type SearchBusinessNameError = "BAD_INPUT" | "SEARCH_FAILED";
 
 export type SidebarCardContent = {

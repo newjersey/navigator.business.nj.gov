@@ -31,7 +31,6 @@ import {
   FormationFormData,
   FormationLegalType,
   getCurrentDateFormatted,
-  NameAvailability,
   PublicFilingLegalType,
   UserData,
 } from "@businessnjgovnavigator/shared/";
@@ -58,10 +57,6 @@ export const BusinessFormation = (props: Props): ReactElement => {
   const [isLoadingGetFiling, setIsLoadingGetFiling] = useState<boolean>(false);
   const [hasBeenSubmitted, setHasBeenSubmitted] = useState<boolean>(false);
   const [hasSetStateFirstTime, setHasSetStateFirstTime] = useState<boolean>(false);
-  const [businessNameAvailability, _setBusinessNameAvailability] = useState<NameAvailability | undefined>(
-    undefined
-  );
-  const [hasBusinessNameBeenSearched, setHasBusinessNameBeenSearched] = useState<boolean>(false);
   const getCompletedFilingApiCallOccurred = useRef<boolean>(false);
 
   const legalStructureId: FormationLegalType = useMemo(() => {
@@ -77,13 +72,6 @@ export const BusinessFormation = (props: Props): ReactElement => {
     () => allowFormation(userData?.profileData.legalStructureId, userData?.profileData.businessPersona),
     [userData?.profileData.legalStructureId, userData?.profileData.businessPersona]
   );
-
-  const setBusinessNameAvailability = (nameAvailability: NameAvailability | undefined) => {
-    _setBusinessNameAvailability(nameAvailability);
-    if (nameAvailability !== undefined && !hasBusinessNameBeenSearched) {
-      setHasBusinessNameBeenSearched(true);
-    }
-  };
 
   const getBusinessStartDate = (date: string | undefined, legalType: FormationLegalType): string => {
     return !date || !isBusinessStartDateValid(date, legalType)
@@ -241,8 +229,6 @@ export const BusinessFormation = (props: Props): ReactElement => {
           showResponseAlert: showResponseAlert,
           interactedFields,
           hasBeenSubmitted,
-          businessNameAvailability,
-          hasBusinessNameBeenSearched,
           hasSetStateFirstTime,
         },
         setFormationFormData,
@@ -250,7 +236,6 @@ export const BusinessFormation = (props: Props): ReactElement => {
         setShowResponseAlert,
         setFieldsInteracted,
         setHasBeenSubmitted,
-        setBusinessNameAvailability,
       }}
     >
       <div className="flex flex-column minh-38" data-testid="formation-form">

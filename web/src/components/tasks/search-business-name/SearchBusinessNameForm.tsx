@@ -9,9 +9,9 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { SearchBusinessNameError } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
-import { NameAvailability } from "@businessnjgovnavigator/shared/index";
+import { NameAvailability } from "@businessnjgovnavigator/shared/";
 import { FormControl, TextField } from "@mui/material";
-import { FormEvent, ReactElement, useCallback, useEffect, useRef } from "react";
+import { FormEvent, ReactElement, useCallback, useEffect, useRef, useState } from "react";
 
 type SearchBusinessNameFormConfig = {
   searchButtonText: string;
@@ -38,14 +38,11 @@ interface Props {
 export const SearchBusinessNameForm = (props: Props): ReactElement => {
   const {
     currentName,
-    submittedName,
     isLoading,
     error,
-    nameAvailability,
     updateButtonClicked,
     updateCurrentName,
     searchBusinessName,
-    updateNameOnProfile,
     resetSearch,
   } = useBusinessNameSearch({
     isBusinessFormation: !!props.isBusinessFormation,
@@ -55,6 +52,8 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const didInitialSearch = useRef<boolean>(false);
   const { userData } = useUserData();
+  const [nameAvailability, setNameAvailability] = useState<NameAvailability | undefined>(undefined);
+  const [submittedName, setSubmittedName] = useState<string>("");
 
   const SearchBusinessNameErrorLookup: Record<SearchBusinessNameError, string> = {
     BAD_INPUT: Config.searchBusinessNameTask.errorTextBadInput,
@@ -77,6 +76,8 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
     ): Promise<void> => {
       searchBusinessName(event)
         .then(({ nameAvailability, submittedName }) => {
+          setNameAvailability(nameAvailability);
+          setSubmittedName(submittedName);
           if (onSubmit) {
             onSubmit(submittedName, nameAvailability, isInitialSubmit);
           }
@@ -140,6 +141,7 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
                   margin="dense"
                   value={currentName}
                   onChange={(event) => {
+                    setNameAvailability(undefined);
                     return updateCurrentName(event.target.value);
                   }}
                   variant="outlined"
@@ -173,11 +175,7 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
       )}
       <div className="margin-top-2">
         {nameAvailability?.status === "AVAILABLE" && (
-          <Available
-            submittedName={submittedName}
-            updateButtonClicked={updateButtonClicked}
-            updateNameOnProfile={updateNameOnProfile}
-          />
+          <Available submittedName={submittedName} updateButtonClicked={updateButtonClicked} />
         )}
         {nameAvailability?.status === "DESIGNATOR_ERROR" && (
           <Alert variant="error" dataTestid="designator-error-text">
@@ -206,7 +204,10 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
 
         {nameAvailability?.status === "UNAVAILABLE" && (
           <Unavailable
-            resetSearch={resetSearch}
+            resetSearch={() => {
+              resetSearch();
+              setNameAvailability(undefined);
+            }}
             submittedName={submittedName}
             nameAvailability={nameAvailability}
           />

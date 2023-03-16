@@ -151,7 +151,7 @@ export const BusinessFormationPaginator = (): ReactElement => {
       };
     }
 
-    if (isStep("Name") && state.businessNameAvailability?.status === "AVAILABLE") {
+    if (isStep("Name") && state.formationFormData.businessNameAvailability?.status === "AVAILABLE") {
       userDataWithChanges = {
         ...userDataWithChanges,
         profileData: {

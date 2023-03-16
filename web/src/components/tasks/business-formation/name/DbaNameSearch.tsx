@@ -7,17 +7,24 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffect } from "@/lib/utils/helpers";
-import { NameAvailability } from "@businessnjgovnavigator/shared/index";
+import { NameAvailability } from "@businessnjgovnavigator/shared/businessNameSearch";
 import { ReactElement, useContext } from "react";
 
 export const DbaNameSearch = (): ReactElement => {
   const { Config } = useConfig();
   const { userData, update } = useUserData();
-  const { setBusinessNameAvailability } = useContext(BusinessFormationContext);
+  const { state, setFormationFormData } = useContext(BusinessFormationContext);
 
   useMountEffect(() => {
     analytics.event.business_formation_dba_name_search_field.appears.dba_name_search_field_appears();
   });
+
+  const setBusinessNameAvailability = (nameAvailability: NameAvailability | undefined): void => {
+    setFormationFormData({
+      ...state.formationFormData,
+      businessNameAvailability: nameAvailability ?? { status: undefined, similarNames: [] },
+    });
+  };
 
   const onSubmit = async (submittedName: string, nameAvailability: NameAvailability): Promise<void> => {
     if (!nameAvailability || !userData) {
