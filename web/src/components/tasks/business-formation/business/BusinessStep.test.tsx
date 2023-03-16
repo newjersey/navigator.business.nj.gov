@@ -229,16 +229,6 @@ describe("Formation - BusinessStep", () => {
     expect(screen.getByTestId("business-name-step")).toBeInTheDocument();
   });
 
-  it("displays alert and highlights fields when blur with missing fields", async () => {
-    const page = await getPageHelper({}, { addressLine1: "" });
-
-    fireEvent.blur(screen.getByLabelText("Address line1"));
-
-    expect(screen.getByText(Config.formation.fields.addressLine1.error)).toBeInTheDocument();
-    page.fillText("Address line1", "1234 main street");
-    expect(screen.queryByText(Config.formation.fields.addressLine1.error)).not.toBeInTheDocument();
-  });
-
   describe("Business purpose", () => {
     it("keeps business purpose closed by default", async () => {
       await getPageHelper({}, { businessPurpose: "" });
@@ -519,27 +509,6 @@ describe("Formation - BusinessStep", () => {
       page.fillText("Business total stock", "0123");
       await page.submitBusinessStep(true);
       expect(currentUserData().formationData.formationFormData.businessTotalStock).toEqual("123");
-    });
-  });
-
-  describe("NJ zipCode validation", () => {
-    it("displays error message when non-NJ zipCode is entered in main Address", async () => {
-      const page = await getPageHelper({}, { addressZipCode: "" });
-      page.fillText("Address zip code", "22222");
-      expect(screen.getByText(Config.formation.fields.addressZipCode.error)).toBeInTheDocument();
-    });
-
-    it("displays error message when non-numeric zipCode is entered in main Address", async () => {
-      const page = await getPageHelper({}, { addressZipCode: "" });
-      page.fillText("Address zip code", "AAAAA");
-      expect(screen.getByText(Config.formation.fields.addressZipCode.error)).toBeInTheDocument();
-    });
-
-    it("passes zipCode validation in main Address", async () => {
-      const page = await getPageHelper({}, { addressZipCode: "" });
-      page.fillText("Address zip code", "07001");
-      await page.submitBusinessStep();
-      expect(currentUserData().formationData.formationFormData.addressZipCode).toEqual("07001");
     });
   });
 
@@ -966,13 +935,13 @@ describe("Formation - BusinessStep", () => {
     });
 
     it("Address line1", async () => {
-      const page = await getPageHelper({}, { addressLine1: "" });
+      const page = await getPageHelper({ businessPersona: "FOREIGN" }, { addressLine1: "" });
       await attemptApiSubmission(page);
       expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.addressLine1.label);
     });
 
     it("Address zip code", async () => {
-      const page = await getPageHelper({}, { addressZipCode: "" });
+      const page = await getPageHelper({ businessPersona: "FOREIGN" }, { addressZipCode: "" });
       await attemptApiSubmission(page);
       expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.addressZipCode.label);
     });

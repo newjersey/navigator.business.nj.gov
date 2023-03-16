@@ -341,6 +341,7 @@
     },
     "sections": {
       "addressHeader": "Primary Business Address",
+      "addressAddButtonText": "Add Primary Business Address",
       "businessNameAndStructureHeader": "Business Name and Business Structure",
       "contactInfoHeader": "Billing Contact Information",
       "notificationsHeader": "Notifications",
@@ -387,7 +388,8 @@
       "paymentDisclaimer": "You will be brought to a secure payment platform operated by New Jersey's partner NICUSA Inc. to process your payment.",
       "optionalLabel": "(Optional)",
       "genericErrorText": "This field requires information.",
-      "maximumLengthErrorText": "${field} must be ${maxLen} characters or fewer."
+      "maximumLengthErrorText": "${field} must be ${maxLen} characters or fewer.",
+      "partialAddressErrorText": "Address must be complete."
     },
     "intro": {
       "default": "This online application will register your business name and form your `business structure|business-structure-learn-more` with the New Jersey Division of Revenue and Enterprise Services.\n\nThis form will take about 5–10 minutes to complete. You will have completed formation and obtained an `Entity ID|entity-id` immediately after payment is received.\n\nInterested in `reserving your business name temporarily|name-reservation` before registering?",

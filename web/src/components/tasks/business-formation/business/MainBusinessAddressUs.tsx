@@ -1,6 +1,5 @@
 import { Content } from "@/components/Content";
 import { StateDropdown } from "@/components/StateDropdown";
-import { MainBusinessAddressContainer } from "@/components/tasks/business-formation/business/MainBusinessAddressContainer";
 import { BusinessFormationTextField } from "@/components/tasks/business-formation/BusinessFormationTextField";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
@@ -14,7 +13,28 @@ export const MainBusinessUs = (): ReactElement => {
   const { doSomeFieldsHaveError, doesFieldHaveError, getFieldErrorLabel } = useFormationErrors();
 
   return (
-    <MainBusinessAddressContainer>
+    <>
+      <h3 className="margin-bottom-2" data-testid="MainBusinesAddressContainer-Header">
+        {Config.formation.sections.addressHeader}
+      </h3>
+      <BusinessFormationTextField
+        label={Config.formation.fields.addressLine1.label}
+        fieldName="addressLine1"
+        required={true}
+        className={"margin-bottom-2"}
+        errorBarType="ALWAYS"
+        validationText={getFieldErrorLabel("addressLine1")}
+        formInputFull
+      />
+      <BusinessFormationTextField
+        label={Config.formation.fields.addressLine2.label}
+        secondaryLabel={Config.formation.general.optionalLabel}
+        errorBarType="ALWAYS"
+        fieldName="addressLine2"
+        formInputFull
+        validationText={getFieldErrorLabel("addressLine2")}
+        className="margin-bottom-2"
+      />
       <WithErrorBar
         hasError={doSomeFieldsHaveError(["addressState", "addressZipCode", "addressCity"])}
         type="DESKTOP-ONLY"
@@ -68,6 +88,6 @@ export const MainBusinessUs = (): ReactElement => {
           />
         </>
       </WithErrorBar>
-    </MainBusinessAddressContainer>
+    </>
   );
 };
