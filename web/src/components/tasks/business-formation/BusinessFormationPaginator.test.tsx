@@ -3,7 +3,7 @@ import { LookupStepIndexByName } from "@/components/tasks/business-formation/Bus
 import { getMergedConfig } from "@/contexts/configContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import { TasksDisplayContent } from "@/lib/types/types";
+import { FormationStepNames, TasksDisplayContent } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import {
   generateEmptyFormationData,
@@ -27,6 +27,8 @@ import {
   userDataUpdatedNTimes,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
+import { FormationSubmitResponse } from "@businessnjgovnavigator/shared";
+import { FormationFormData } from "@businessnjgovnavigator/shared/";
 import { generateFormationFormData, generateMunicipality } from "@businessnjgovnavigator/shared/test";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import * as materialUi from "@mui/material";
@@ -506,63 +508,327 @@ describe("<BusinessFormationPaginator />", () => {
         });
       });
 
-      describe("on known API error (registered agent)", () => {
-        beforeEach(() => {
-          filledInUserData = {
-            ...initialUserData,
-            formationData: {
-              ...initialUserData.formationData,
-              formationFormData: generateFormationFormData(
-                { agentNumberOrManual: "NUMBER", agentNumber: "1111111" },
-                { legalStructureId: "limited-liability-company" }
-              ),
-              formationResponse: generateFormationSubmitResponse({
-                success: false,
-                errors: [
-                  generateFormationSubmitError({
-                    field: "Registered Agent - Id",
-                    message: "very bad input",
-                    type: "RESPONSE",
-                  }),
-                ],
+      describe("on known API error", () => {
+        const agentNumber = [
+          "agentNumber",
+          generateFormationFormData(
+            { agentNumberOrManual: "NUMBER", agentNumber: "1111111" },
+            { legalStructureId: "limited-liability-company" }
+          ),
+          generateFormationSubmitResponse({
+            success: false,
+            errors: [
+              generateFormationSubmitError({
+                field: "Registered Agent - Id",
+                message: "very bad input",
+                type: "RESPONSE",
               }),
+            ],
+          }),
+          "Contacts",
+          "Agent number",
+          "1234567",
+        ];
+        const agentName = [
+          "agentName",
+          generateFormationFormData(
+            { agentNumberOrManual: "MANUAL_ENTRY", agentName: "1111111" },
+            { legalStructureId: "limited-liability-company" }
+          ),
+          generateFormationSubmitResponse({
+            success: false,
+            errors: [
+              generateFormationSubmitError({
+                field: "Registered Agent - Name",
+                message: "very bad input",
+                type: "RESPONSE",
+              }),
+            ],
+          }),
+          "Contacts",
+          "Agent name",
+          "new name",
+        ];
+        const agentEmail = [
+          "agentEmail",
+          generateFormationFormData(
+            { agentNumberOrManual: "MANUAL_ENTRY", agentEmail: "1111111" },
+            { legalStructureId: "limited-liability-company" }
+          ),
+          generateFormationSubmitResponse({
+            success: false,
+            errors: [
+              generateFormationSubmitError({
+                field: "Registered Agent - Email",
+                message: "very bad input",
+                type: "RESPONSE",
+              }),
+            ],
+          }),
+          "Contacts",
+          "Agent email",
+          "test@test.com",
+        ];
+        const agentOfficeAddressLine1 = [
+          "agentOfficeAddressLine1",
+          generateFormationFormData(
+            { agentNumberOrManual: "MANUAL_ENTRY", agentOfficeAddressLine1: "1111111" },
+            { legalStructureId: "limited-liability-company" }
+          ),
+          generateFormationSubmitResponse({
+            success: false,
+            errors: [
+              generateFormationSubmitError({
+                field: "Registered Agent - Street Address - Address1",
+                message: "very bad input",
+                type: "RESPONSE",
+              }),
+            ],
+          }),
+          "Contacts",
+          "Agent office address line1",
+          "22222222",
+        ];
+        const agentOfficeAddressLine2 = [
+          "agentOfficeAddressLine2",
+          generateFormationFormData(
+            { agentNumberOrManual: "MANUAL_ENTRY", agentOfficeAddressLine2: "1111111" },
+            { legalStructureId: "limited-liability-company" }
+          ),
+          generateFormationSubmitResponse({
+            success: false,
+            errors: [
+              generateFormationSubmitError({
+                field: "Registered Agent - Street Address - Address2",
+                message: "very bad input",
+                type: "RESPONSE",
+              }),
+            ],
+          }),
+          "Contacts",
+          "Agent office address line2",
+          "22222222",
+        ];
+        const agentOfficeAddressMunicipality = [
+          "agentOfficeAddressMunicipality",
+          generateFormationFormData(
+            {
+              agentNumberOrManual: "MANUAL_ENTRY",
+              agentOfficeAddressMunicipality: generateMunicipality({ displayName: "Newark" }),
             },
-          };
-        });
+            { legalStructureId: "limited-liability-company" }
+          ),
+          generateFormationSubmitResponse({
+            success: false,
+            errors: [
+              generateFormationSubmitError({
+                field: "Registered Agent - Street Address - City",
+                message: "very bad input",
+                type: "RESPONSE",
+              }),
+            ],
+          }),
+          "Contacts",
+          "Agent office address municipality",
+          "22222222", // dropdown
+        ];
+        const agentOfficeAddressZipCode = [
+          "agentOfficeAddressZipCode",
+          generateFormationFormData(
+            { agentNumberOrManual: "MANUAL_ENTRY", agentOfficeAddressZipCode: "07004" },
+            { legalStructureId: "limited-liability-company" }
+          ),
+          generateFormationSubmitResponse({
+            success: false,
+            errors: [
+              generateFormationSubmitError({
+                field: "Registered Agent - Street Address - Zipcode",
+                message: "very bad input",
+                type: "RESPONSE",
+              }),
+            ],
+          }),
+          "Contacts",
+          "Agent office address zip code",
+          "07005",
+        ];
 
-        it("shows error alert and error state on step associated with API error", async () => {
-          const page = preparePage(filledInUserData, displayContent);
-          await page.fillAndSubmitBusinessNameStep();
-          await page.stepperClickToReviewStep();
-          await page.clickSubmit();
-          expect(page.getStepStateInStepper(LookupStepIndexByName("Contacts"))).toEqual("ERROR");
-          expect(screen.getByText(Config.formation.errorBanner.incompleteStepsError)).toBeInTheDocument();
-        });
+        const contactFirstName = [
+          "contactFirstName",
+          generateFormationFormData(
+            { contactFirstName: "1111111" },
+            { legalStructureId: "limited-liability-company" }
+          ),
+          generateFormationSubmitResponse({
+            success: false,
+            errors: [
+              generateFormationSubmitError({
+                field: "Contact First Name",
+                message: "very bad input",
+                type: "RESPONSE",
+              }),
+            ],
+          }),
+          "Billing",
+          "Contact first name",
+          "22222222",
+        ];
+        const contactLastName = [
+          "contactLastName",
+          generateFormationFormData(
+            { contactLastName: "1111111" },
+            { legalStructureId: "limited-liability-company" }
+          ),
+          generateFormationSubmitResponse({
+            success: false,
+            errors: [
+              generateFormationSubmitError({
+                field: "Contact Last Name",
+                message: "very bad input",
+                type: "RESPONSE",
+              }),
+            ],
+          }),
+          "Billing",
+          "Contact last name",
+          "22222222",
+        ];
+        const contactPhoneNumber = [
+          "contactPhoneNumber",
+          generateFormationFormData(
+            { contactPhoneNumber: "4325435432" },
+            { legalStructureId: "limited-liability-company" }
+          ),
+          generateFormationSubmitResponse({
+            success: false,
+            errors: [
+              generateFormationSubmitError({
+                field: "Contact Phone Number",
+                message: "very bad input",
+                type: "RESPONSE",
+              }),
+            ],
+          }),
+          "Billing",
+          "Contact phone number",
+          "1232343452",
+        ];
 
-        it("shows API error message on step for error", async () => {
-          const page = preparePage(filledInUserData, displayContent);
-          await page.fillAndSubmitBusinessNameStep();
-          await page.stepperClickToReviewStep();
-          await page.clickSubmit();
-          await page.stepperClickToContactsStep();
-          expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.errorBanner.errorOnStep);
-          expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.fields.agentNumber.label);
-          expect(screen.getByRole("alert")).toHaveTextContent("very bad input");
-        });
+        it.each([
+          agentNumber,
+          agentName,
+          agentEmail,
+          agentOfficeAddressLine1,
+          agentOfficeAddressLine2,
+          agentOfficeAddressMunicipality,
+          agentOfficeAddressZipCode,
+          contactFirstName,
+          contactLastName,
+          contactPhoneNumber,
+        ])(
+          "shows error alert and error state on step associated with %o API error",
+          async (fieldName, formationFormData, formationResponse, formationStepName) => {
+            filledInUserData = {
+              ...initialUserData,
+              formationData: {
+                ...initialUserData.formationData,
+                formationFormData: formationFormData as FormationFormData,
+                formationResponse: formationResponse as FormationSubmitResponse,
+              },
+            };
+            const page = preparePage(filledInUserData, displayContent);
+            await page.fillAndSubmitBusinessNameStep();
+            await page.stepperClickToReviewStep();
+            await page.clickSubmit();
+            expect(
+              page.getStepStateInStepper(LookupStepIndexByName(formationStepName as FormationStepNames))
+            ).toEqual("ERROR");
+            expect(screen.getByText(Config.formation.errorBanner.incompleteStepsError)).toBeInTheDocument();
+          }
+        );
 
-        it("removes API error on blur when user changes field", async () => {
-          const page = preparePage(filledInUserData, displayContent);
-          await page.fillAndSubmitBusinessNameStep();
-          await page.stepperClickToReviewStep();
-          await page.clickSubmit();
-          await page.stepperClickToContactsStep();
-          page.fillText("Agent number", "1234567");
+        it.each([
+          agentNumber,
+          agentName,
+          agentEmail,
+          agentOfficeAddressLine1,
+          agentOfficeAddressLine2,
+          agentOfficeAddressMunicipality,
+          agentOfficeAddressZipCode,
+          contactFirstName,
+          contactLastName,
+          contactPhoneNumber,
+        ])(
+          "shows API error message on step for %o API error",
+          async (fieldName, formationFormData, formationResponse, formationStepName) => {
+            filledInUserData = {
+              ...initialUserData,
+              formationData: {
+                ...initialUserData.formationData,
+                formationFormData: formationFormData as FormationFormData,
+                formationResponse: formationResponse as FormationSubmitResponse,
+              },
+            };
+            const page = preparePage(filledInUserData, displayContent);
+            await page.fillAndSubmitBusinessNameStep();
+            await page.stepperClickToReviewStep();
+            await page.clickSubmit();
+            if (formationStepName === "Contacts") await page.stepperClickToContactsStep();
+            else if (formationStepName === "Billing") await page.stepperClickToBillingStep();
+            expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.errorBanner.errorOnStep);
+            expect(screen.getByRole("alert")).toHaveTextContent(
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              (Config.formation.fields as any)[fieldName as string].label
+            );
+            expect(screen.getByRole("alert")).toHaveTextContent("very bad input");
+          }
+        );
 
-          expect(screen.queryByRole("alert")).not.toBeInTheDocument();
-          expect(screen.queryByText(Config.formation.errorBanner.errorOnStep)).not.toBeInTheDocument();
+        it.each([
+          agentNumber,
+          agentName,
+          agentEmail,
+          agentOfficeAddressLine1,
+          agentOfficeAddressLine2,
+          agentOfficeAddressMunicipality,
+          agentOfficeAddressZipCode,
+          contactFirstName,
+          contactLastName,
+          contactPhoneNumber,
+        ])(
+          "removes %o API error on blur when user changes text field",
+          async (
+            fieldName,
+            formationFormData,
+            formationResponse,
+            formationStepName,
+            fieldLabel,
+            newInput
+          ) => {
+            filledInUserData = {
+              ...initialUserData,
+              formationData: {
+                ...initialUserData.formationData,
+                formationFormData: formationFormData as FormationFormData,
+                formationResponse: formationResponse as FormationSubmitResponse,
+              },
+            };
+            const page = preparePage(filledInUserData, displayContent);
+            await page.fillAndSubmitBusinessNameStep();
+            await page.stepperClickToReviewStep();
+            await page.clickSubmit();
+            if (formationStepName === "Contacts") await page.stepperClickToContactsStep();
+            else if (formationStepName === "Billing") await page.stepperClickToBillingStep();
+            expect(screen.getByRole("alert")).toBeInTheDocument();
+            page.fillText(fieldLabel as string, newInput as string);
+            expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+            expect(screen.queryByText(Config.formation.errorBanner.errorOnStep)).not.toBeInTheDocument();
 
-          expect(page.getStepStateInStepper(LookupStepIndexByName("Contacts"))).toEqual("COMPLETE-ACTIVE");
-        });
+            expect(
+              page.getStepStateInStepper(LookupStepIndexByName(formationStepName as FormationStepNames))
+            ).toEqual("COMPLETE-ACTIVE");
+          }
+        );
       });
 
       describe("on unknown API error (generic)", () => {
