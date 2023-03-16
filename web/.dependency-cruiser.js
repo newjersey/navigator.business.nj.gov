@@ -92,6 +92,10 @@ module.exports = {
     },
     {
       from: {},
+      to: { path: "@uswds/uswds" },
+    },
+    {
+      from: {},
       to: { path: "axios" },
     },
     {

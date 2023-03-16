@@ -48,7 +48,7 @@ export const ContactsStep = (): ReactElement => {
             {doesFieldHaveError("members") && (
               <Alert variant="error">
                 {
-                  getErrorStateForField("members", state.formationFormData, state.businessNameAvailability)
+                  getErrorStateForField({ field: "members", formationFormData: state.formationFormData })
                     .label
                 }
               </Alert>
@@ -59,13 +59,13 @@ export const ContactsStep = (): ReactElement => {
         <hr className="margin-top-0 margin-bottom-3" />
         {doesFieldHaveError("signers") && (
           <Alert variant="error">
-            {getErrorStateForField("signers", state.formationFormData, state.businessNameAvailability).label}
+            {getErrorStateForField({ field: "signers", formationFormData: state.formationFormData }).label}
           </Alert>
         )}
         {doesFieldHaveError("incorporators") && (
           <Alert variant="error">
             {
-              getErrorStateForField("incorporators", state.formationFormData, state.businessNameAvailability)
+              getErrorStateForField({ field: "incorporators", formationFormData: state.formationFormData })
                 .label
             }
           </Alert>

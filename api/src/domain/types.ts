@@ -1,7 +1,7 @@
 import { NameAvailability, NameAvailabilityResponse } from "@shared/businessNameSearch";
 import { BusinessUser, NewsletterResponse, UserTestingResponse } from "@shared/businessUser";
 import { UserFeedbackRequest, UserIssueRequest } from "@shared/feedbackRequest";
-import { FormationSubmitResponse, GetFilingResponse } from "@shared/formationData";
+import { FormationSubmitResponse, GetFilingResponse, InputFile } from "@shared/formationData";
 import { LicenseEntity, LicenseStatusResult, NameAndAddress } from "@shared/license";
 import { ProfileData } from "@shared/profileData";
 import { TaxFiling, TaxFilingLookupState, TaxFilingOnboardingState } from "@shared/taxFiling";
@@ -26,7 +26,11 @@ export interface NewsletterClient {
 }
 
 export interface FormationClient {
-  form: (userData: UserData, returnUrl: string) => Promise<FormationSubmitResponse>;
+  form: (
+    userData: UserData,
+    returnUrl: string,
+    foreignGoodStandingFile?: InputFile
+  ) => Promise<FormationSubmitResponse>;
   getCompletedFiling: (formationId: string) => Promise<GetFilingResponse>;
 }
 

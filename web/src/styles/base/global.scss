@@ -209,6 +209,10 @@ ol {
   }
 }
 
+.usa-file-input {
+  max-width: unset;
+}
+
 .usa-link:visited,
 .usa-prose > a:visited {
   color: $primary !important;

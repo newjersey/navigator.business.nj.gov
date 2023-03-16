@@ -180,6 +180,8 @@ export type FormationPageHelpers = {
   fillAndSubmitAddressModal: (overrides: Partial<FormationSignedAddress>, fieldName: string) => Promise<void>;
   clickSubmit: () => Promise<void>;
   selectDate: (value: DateObject, fieldType: "Business start date" | "Foreign date of formation") => void;
+  uploadFile: (file: File) => void;
+  completeWillPracticeLaw: (response?: boolean) => void;
 };
 
 export const createFormationPageHelpers = (): FormationPageHelpers => {
@@ -447,6 +449,22 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     fillText("Contact phone number", "1234567890");
   };
 
+  const uploadFile = async (file: File): Promise<void> => {
+    const uploader = screen.getByTestId("file-input");
+    fireEvent.change(uploader, { target: { files: [file] } });
+    await waitFor(() => {
+      expect(screen.getByTestId("file-is-read")).toBeInTheDocument();
+    });
+  };
+
+  const completeWillPracticeLaw = (response = false): void => {
+    if (response) {
+      fireEvent.click(screen.getByTestId("practice-law-yes"));
+    } else {
+      fireEvent.click(screen.getByTestId("practice-law-no"));
+    }
+  };
+
   return {
     fillText,
     fillAndSubmitBusinessNameStep,
@@ -486,5 +504,7 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     stepperClickToReviewStep,
     getStepStateInStepper,
     completeRequiredBillingFields,
+    uploadFile,
+    completeWillPracticeLaw,
   };
 };

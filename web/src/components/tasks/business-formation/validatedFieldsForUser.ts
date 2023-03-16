@@ -1,12 +1,13 @@
 import {
   corpLegalStructures,
+  FieldsForErrorHandling,
   FormationFields,
   FormationFormData,
   incorporationLegalStructures,
 } from "@businessnjgovnavigator/shared/formationData";
 
-export const validatedFieldsForUser = (formationFormData: FormationFormData): FormationFields[] => {
-  let validatedFields: FormationFields[] = [
+export const validatedFieldsForUser = (formationFormData: FormationFormData): FieldsForErrorHandling[] => {
+  let validatedFields: FieldsForErrorHandling[] = [
     "businessName",
     "businessSuffix",
     "businessStartDate",
@@ -62,6 +63,10 @@ export const validatedFieldsForUser = (formationFormData: FormationFormData): Fo
     validatedFields = [...validatedFields, "businessTotalStock", "members"];
   }
 
+  if (formationFormData.legalType === "foreign-c-corporation") {
+    validatedFields = [...validatedFields, "willPracticeLaw", "foreignGoodStandingFile"];
+  }
+
   if (formationFormData.legalType === "limited-partnership") {
     validatedFields = [
       ...validatedFields,
@@ -83,6 +88,5 @@ export const validatedFieldsForUser = (formationFormData: FormationFormData): Fo
       validatedFields.push("makeDistributionTerms");
     }
   }
-
   return validatedFields;
 };
