@@ -10,27 +10,39 @@ export type TaskUrlSlugParam = {
 };
 
 const roadmapsDir = path.join(process.cwd(), "..", "content", "src", "roadmaps");
+const tasksDirectory = path.join(roadmapsDir, "tasks");
+const licenseDirectory = path.join(roadmapsDir, "license-tasks");
 
 export const loadAllTaskUrlSlugs = (): PathParams<TaskUrlSlugParam>[] => {
-  const directory = path.join(roadmapsDir, "tasks");
-  const fileNames = fs.readdirSync(directory);
-  return fileNames.map((fileName) => {
-    return {
+  const taskFileNames = fs.readdirSync(tasksDirectory);
+  const licenseFileNames = fs.readdirSync(licenseDirectory);
+
+  return [
+    ...taskFileNames.map((fileName) => ({
       params: {
-        taskUrlSlug: loadUrlSlugByFilename(fileName, directory),
+        taskUrlSlug: loadUrlSlugByFilename(fileName, tasksDirectory),
       },
-    };
-  });
+    })),
+    ...licenseFileNames.map((fileName) => ({
+      params: {
+        taskUrlSlug: loadUrlSlugByFilename(fileName, licenseDirectory),
+      },
+    })),
+  ];
 };
 
 export const loadTaskByUrlSlug = (urlSlug: string): Task => {
-  const currPath = path.join(roadmapsDir, "tasks");
-  const matchingFileName = getFileNameByUrlSlug(currPath, urlSlug);
-  return loadTaskByFileName(matchingFileName);
+  try {
+    const fileAsTask = getFileNameByUrlSlug(tasksDirectory, urlSlug);
+    return loadTaskByFileName(fileAsTask, tasksDirectory);
+  } catch {
+    const fileAsLicense = getFileNameByUrlSlug(licenseDirectory, urlSlug);
+    return loadTaskByFileName(fileAsLicense, licenseDirectory);
+  }
 };
 
-export const loadTaskByFileName = (fileName: string): Task => {
-  const fullPath = path.join(roadmapsDir, "tasks", `${fileName}`);
+const loadTaskByFileName = (fileName: string, directory: string): Task => {
+  const fullPath = path.join(directory, `${fileName}`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
 
   const dependencies = JSON.parse(fs.readFileSync(path.join(roadmapsDir, "task-dependencies.json"), "utf8"))
@@ -54,8 +66,13 @@ export const loadTaskByFileName = (fileName: string): Task => {
 };
 
 const loadTaskLinkByFilename = (fileName: string): TaskLink => {
-  const fullPath = path.join(roadmapsDir, "tasks", `${fileName}.md`);
-  const fileContents = fs.readFileSync(fullPath, "utf8");
+  let fileContents;
+  try {
+    fileContents = fs.readFileSync(path.join(tasksDirectory, `${fileName}.md`), "utf8");
+  } catch {
+    fileContents = fs.readFileSync(path.join(licenseDirectory, `${fileName}.md`), "utf8");
+  }
+
   const taskWithoutLinks = convertTaskMd(fileContents) as TaskWithoutLinks;
 
   return {

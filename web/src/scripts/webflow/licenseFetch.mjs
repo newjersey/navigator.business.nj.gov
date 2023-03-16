@@ -1,4 +1,5 @@
 import fs from "fs";
+import { writeMarkdownString } from "../licenseLoader.mjs";
 import { getAllItems } from "./methods.mjs";
 
 const licenseCollectionId = "5e31b06cb76b830c0c358aa8";
@@ -6,11 +7,11 @@ const outDir = `${process.cwd()}/content/src/webflow-licenses`;
 
 const saveLicenses = async () => {
   const results = await getAllItems(licenseCollectionId);
-  const tasks = results.map(webflowLicenseToTask);
+  const licenses = results.map(webflowLicenseToTask);
 
-  for (const task of tasks) {
-    const file = writeMarkdownString(task);
-    fs.writeFile(`${outDir}/${task.filename}.md`, file, (err) => {
+  for (const license of licenses) {
+    const file = writeMarkdownString(license);
+    fs.writeFile(`${outDir}/${license.filename}.md`, file, (err) => {
       if (err) {
         throw err;
       }
@@ -34,26 +35,6 @@ const webflowLicenseToTask = (webflowItem) => {
     licenseCertificationClassification: webflowItem["license-certification-classification"],
     contentMd: "",
   };
-};
-
-const writeMarkdownString = (task) => {
-  return (
-    `---\n` +
-    `id: "${task.id}"\n` +
-    `webflowId: "${task.webflowId}"\n` +
-    `urlSlug: "${task.urlSlug}"\n` +
-    `name: "${task.name}"\n` +
-    `callToActionLink: "${task.callToActionLink}"\n` +
-    `callToActionText: "${task.callToActionText}"\n` +
-    `issuingAgency: "${task.issuingAgency}"\n` +
-    `issuingDivision: "${task.issuingDivision}"\n` +
-    `divisionPhone: "${task.divisionPhone}"\n` +
-    `industryId: "${task.industryId}"\n` +
-    `licenseCertificationClassification: "${task.licenseCertificationClassification}"\n` +
-    `---\n` +
-    `\n` +
-    `${task.contentMd}`
-  );
 };
 
 const main = (async () => {

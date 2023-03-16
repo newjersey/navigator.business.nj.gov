@@ -32,16 +32,30 @@ describe("loadTasks", () => {
         'callToActionLink: ""\n' +
         'callToActionText: ""\n' +
         "---\n";
+      const licenseMd1 =
+        "---\n" +
+        'id: "some-id-3"\n' +
+        'name: "Some License Task Name"\n' +
+        'urlSlug: "some-url-slug-3"\n' +
+        'callToActionLink: ""\n' +
+        'callToActionText: ""\n' +
+        "---\n";
 
-      mockedFs.readFileSync.mockReturnValueOnce(taskMd1).mockReturnValueOnce(taskMd2);
+      mockedFs.readFileSync
+        .mockReturnValueOnce(taskMd1)
+        .mockReturnValueOnce(taskMd2)
+        .mockReturnValueOnce(licenseMd1);
 
-      mockReadDirReturn(["task1.md", "task2.md"]);
+      mockReadDirReturnOnce(["task1.md", "task2.md"]);
+      mockReadDirReturnOnce(["license1.md"]);
+
       const allTaskUrlSlugs = loadAllTaskUrlSlugs();
-      expect(allTaskUrlSlugs).toHaveLength(2);
+      expect(allTaskUrlSlugs).toHaveLength(3);
       expect(allTaskUrlSlugs).toEqual(
         expect.arrayContaining([
           { params: { taskUrlSlug: "some-url-slug-1" } },
           { params: { taskUrlSlug: "some-url-slug-2" } },
+          { params: { taskUrlSlug: "some-url-slug-3" } },
         ])
       );
     });
@@ -96,7 +110,8 @@ describe("loadTasks", () => {
         ],
       });
 
-      mockReadDirReturn(["task1.md", "task2.md", "task3.md"]);
+      mockReadDirReturnOnce(["task1.md", "task2.md", "task3.md"]);
+
       mockedFs.readFileSync
         .mockReturnValueOnce(taskMd1) // read first file in list
         .mockReturnValueOnce(taskMd2) // read second file in list
@@ -118,11 +133,82 @@ describe("loadTasks", () => {
         ],
       });
     });
+
+    it("returns a license entity from url slug", () => {
+      const taskMd =
+        "---\n" +
+        'id: "some-id"\n' +
+        'name: "Some Task Name"\n' +
+        'urlSlug: "some-url-slug"\n' +
+        'callToActionLink: "www.example.com"\n' +
+        'callToActionText: ""\n' +
+        "---\n" +
+        "\n" +
+        "# I am a header1\n" +
+        "\n" +
+        "I am a text content1";
+
+      const licenseMd1 =
+        "---\n" +
+        'id: "some-id-1"\n' +
+        'name: "Some License Name1"\n' +
+        'urlSlug: "some-url-slug-1"\n' +
+        'callToActionLink: "www.example1.com"\n' +
+        'callToActionText: ""\n' +
+        "requiresLocation: true\n" +
+        "---\n" +
+        "\n" +
+        "# I am a header1\n" +
+        "\n" +
+        "I am a text content1";
+
+      const licenseMd2 =
+        "---\n" +
+        'id: "some-id-2"\n' +
+        'name: "Some License Name2"\n' +
+        'urlSlug: "some-url-slug-2"\n' +
+        'callToActionLink: "www.example2.com"\n' +
+        'callToActionText: ""\n' +
+        "requiresLocation: true\n" +
+        "---\n" +
+        "\n" +
+        "# I am a header2\n" +
+        "\n" +
+        "I am a text content2";
+
+      const dependencyFile = JSON.stringify({
+        dependencies: [{ name: "license1", dependencies: ["license2"] }],
+      });
+
+      mockReadDirReturnOnce(["task1.md"]);
+      mockReadDirReturnOnce(["license1.md", "license2.md"]);
+
+      mockedFs.readFileSync
+        .mockReturnValueOnce(taskMd) // read first file in list
+        .mockReturnValueOnce(licenseMd1) // read second file in list
+        .mockReturnValueOnce(licenseMd1) // read file once we found the match
+        .mockReturnValueOnce(dependencyFile) // read dependency file
+        .mockReturnValueOnce(licenseMd2); /// read unlocked-by task file
+
+      expect(loadTaskByUrlSlug("some-url-slug-1")).toEqual({
+        id: "some-id-1",
+        name: "Some License Name1",
+        filename: "license1",
+        urlSlug: "some-url-slug-1",
+        callToActionLink: "www.example1.com",
+        callToActionText: "",
+        requiresLocation: true,
+        contentMd: "\n# I am a header1\n\nI am a text content1",
+        unlockedBy: [
+          { name: "Some License Name2", urlSlug: "some-url-slug-2", filename: "license2", id: "some-id-2" },
+        ],
+      });
+    });
   });
 
-  const mockReadDirReturn = (value: string[]) => {
+  const mockReadDirReturnOnce = (value: string[]) => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    mockedFs.readdirSync.mockReturnValue(value);
+    mockedFs.readdirSync.mockReturnValueOnce(value);
   };
 });
