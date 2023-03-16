@@ -298,6 +298,7 @@ describe("<BusinessFormationPaginator />", () => {
 
           const page = preparePage(userDataWithMunicipality, displayContent, [newTownMuncipality]);
           await page.stepperClickToBusinessStep();
+          fireEvent.click(screen.getByText(Config.formation.sections.addressAddButtonText));
           page.selectByText("Address municipality", "New Town");
 
           switchStepFunction();

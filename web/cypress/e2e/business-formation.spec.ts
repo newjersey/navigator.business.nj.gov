@@ -12,6 +12,8 @@ import { onBusinessFormationPage } from "cypress/support/page_objects/businessFo
 import { onDashboardPage } from "cypress/support/page_objects/dashboardPage";
 import dayjs from "dayjs";
 
+// NOTE: in the api .env BUSINESS_NAME_BASE_URL and FORMATION_API_BASE_URL have to be removed for this test to use wiremock correctly
+
 describe("Business Formation [feature] [all] [group2]", () => {
   beforeEach(() => {
     cy.loginByCognitoApi();
@@ -64,6 +66,7 @@ describe("Business Formation [feature] [all] [group2]", () => {
     submitBusinessNameSearchAndContinue(businessNameSearch);
 
     typeDesignatorAndStartDate({ businessStartDate, businessSuffix });
+    openAddressSection();
     typeBusinessAddress({
       addressLine1,
       addressLine2,
@@ -123,6 +126,10 @@ const typeDesignatorAndStartDate = ({ businessSuffix, businessStartDate }: Parti
       .invoke("prop", "value")
       .should("contain", businessStartDate);
   }
+};
+
+const openAddressSection = () => {
+  cy.get('[data-testid="add-address-button"]').click();
 };
 
 const typeBusinessAddress = ({
