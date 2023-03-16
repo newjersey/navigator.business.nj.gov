@@ -918,5 +918,19 @@ export default {
         },
       },
     },
+    share_feedback: {
+      click: {
+        open_live_chat: () => {
+          sendEvent("share_feedback", "click", "open_live_chat");
+        },
+      },
+    },
+    report_something_that_is_broken: {
+      click: {
+        open_live_chat: () => {
+          sendEvent("report_something_that_is_broken", "click", "open_live_chat");
+        },
+      },
+    },
   },
 };
