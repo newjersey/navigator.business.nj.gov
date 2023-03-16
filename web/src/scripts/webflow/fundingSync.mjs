@@ -1,14 +1,7 @@
 /* eslint-disable unicorn/no-process-exit */
 /* eslint-disable no-undef */
-import rehypeFormat from "rehype-format";
-import rehypeRaw from "rehype-raw";
-import rehypeRewrite from "rehype-rewrite";
-import rehypeStringify from "rehype-stringify";
-import remarkGfm from "remark-gfm";
-import remarkParse from "remark-parse";
-import remarkRehype from "remark-rehype";
-import { unified } from "unified";
 import { loadAllFundings } from "../fundingExport.mjs";
+import { argsInclude, contentToStrings, getHtml, wait } from "./helpers.mjs";
 import { createItem, deleteItem, getAllItems, getCollection, modifyItem } from "./methods.mjs";
 import { allIndustryId, getCurrentSectors, syncSectors } from "./sectorSync.mjs";
 
@@ -124,34 +117,7 @@ const getCurrentFundings = async () => {
 };
 
 const contentMdToObject = (content) => {
-  let result = unified()
-    .use(remarkParse)
-    .use(remarkGfm)
-    .use(remarkRehype, { allowDangerousHtml: true })
-    .use(rehypeRaw)
-    .use(rehypeRewrite, {
-      selector: "code",
-      rewrite: (node) => {
-        const obj = node.children[0];
-        if (obj.value.includes("|")) {
-          node.type = "text";
-          node.value = obj.value.split("|")[0];
-          delete node.children;
-          delete node.properties;
-          delete node.tagName;
-        }
-      },
-    })
-    .use(rehypeFormat)
-    .use(rehypeStringify, { allowDangerousHtml: true })
-    .processSync(content).value;
-
-  const itemsToRemove = ["<blockquote>", "</blockquote>", "<hr>"];
-  itemsToRemove.map((i) => {
-    return (result = result.replaceAll(i, ""));
-  });
-
-  const lines = result.split("\n");
+  const lines = contentToStrings(content);
   const benefitRegExp = new RegExp(`>Benefit[s:]*?</`);
   const eligibilityIndex = lines.findIndex((line) => {
     return line.includes(">Eligibility</");
@@ -170,15 +136,7 @@ const contentMdToObject = (content) => {
     console.info(content);
     throw error;
   }
-  const getHtml = (arrayOfStrings, start, stop) => {
-    return arrayOfStrings
-      .slice(start, stop)
-      .map((i) => {
-        return i.trim();
-      })
-      .join(" ")
-      .trim();
-  };
+
   return {
     "program-overview": getHtml(lines, 0, eligibilityIndex),
     eligibility: getHtml(lines, eligibilityIndex + 1, benefitIndex),
@@ -361,12 +319,6 @@ const createNewFundings = async () => {
   );
 };
 
-const wait = (milliseconds = 10000) => {
-  return new Promise((resolve) => {
-    return setTimeout(resolve, milliseconds);
-  });
-};
-
 const syncFundings = async () => {
   console.log("deleting unused fundings");
   await deleteFundings();
@@ -380,44 +332,24 @@ const syncFundings = async () => {
 };
 
 // eslint-disable-next-line no-empty
-if (
-  !process.argv.some((i) => {
-    return i.includes("fundingSync");
-  }) ||
-  process.env.NODE_ENV === "test"
-) {
-} else if (
-  process.argv.some((i) => {
-    return i.includes("--sync");
-  })
-) {
+if (!argsInclude("fundingSync") || process.env.NODE_ENV === "test") {
+  // intentionally empty
+} else if (argsInclude("--sync")) {
   await (async () => {
     await syncFundings();
     process.exit(0);
   })();
-} else if (
-  process.argv.some((i) => {
-    return i.includes("--previewUnused");
-  })
-) {
+} else if (argsInclude("--previewUnused")) {
   await (async () => {
     console.info(await getUnUsedFundings());
     process.exit(0);
   })();
-} else if (
-  process.argv.some((i) => {
-    return i.includes("--previewCreate");
-  })
-) {
+} else if (argsInclude("--previewCreate")) {
   await (async () => {
     console.info(await getNewFundings());
     process.exit(0);
   })();
-} else if (
-  process.argv.some((i) => {
-    return i.includes("--full");
-  })
-) {
+} else if (argsInclude("--full")) {
   await (async () => {
     await syncSectors();
     await syncFundings();
