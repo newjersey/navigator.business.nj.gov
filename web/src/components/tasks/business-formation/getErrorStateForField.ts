@@ -40,6 +40,48 @@ export const getErrorStateForField = (
     return { ...errorState, label, hasError: !isValid };
   };
 
+  const fieldWithAssociatedFields = (params: {
+    associatedFields: FormationFields[];
+    label: string;
+  }): FormationFieldErrorState => {
+    const exists = !!formationFormData[field];
+    const anAssociatedFieldExists = params.associatedFields.some((it) => !!formationFormData[it]);
+
+    let label = errorState.label;
+    let isValid = true;
+
+    if (!exists && anAssociatedFieldExists) {
+      label = params.label;
+      isValid = false;
+    }
+
+    return { ...errorState, label, hasError: !isValid };
+  };
+
+  const combineErrorStates = (params: {
+    firstPriority: FormationFieldErrorState;
+    secondPriority: FormationFieldErrorState;
+  }): FormationFieldErrorState => {
+    let finalState: FormationFieldErrorState = { ...errorState, hasError: false };
+
+    if (params.secondPriority.hasError) {
+      finalState = params.secondPriority;
+    }
+
+    if (params.firstPriority.hasError) {
+      finalState = params.firstPriority;
+    }
+
+    return finalState;
+  };
+
+  const isForeignUser = () => {
+    if (formationFormData.businessLocationType === "NJ") {
+      return false;
+    }
+    return true;
+  };
+
   const hasErrorIfEmpty: FormationFields[] = [
     "businessSuffix",
     "contactPhoneNumber",
@@ -62,7 +104,6 @@ export const getErrorStateForField = (
     "addressState",
     "addressCountry",
     "foreignStateOfFormation",
-    "addressMunicipality",
   ];
 
   if (field == "foreignStateOfFormation") {
@@ -198,22 +239,54 @@ export const getErrorStateForField = (
   if (field === "addressZipCode") {
     const exists = !!formationFormData[field];
     let inRange = false;
-    switch (formationFormData.businessLocationType) {
-      case "US":
-        inRange = isZipCodeUs(formationFormData[field]);
-        break;
-      case "INTL":
-        inRange = isZipCodeIntl(formationFormData[field]);
-        break;
-      case "NJ":
-        inRange = isZipCodeNj(formationFormData[field]);
+
+    if (isForeignUser()) {
+      switch (formationFormData.businessLocationType) {
+        case "US":
+          inRange = isZipCodeUs(formationFormData[field]);
+          break;
+        case "INTL":
+          inRange = isZipCodeIntl(formationFormData[field]);
+          break;
+      }
+      const isValid = exists && inRange;
+      return { ...errorState, hasError: !isValid, label: Config.formation.fields.addressZipCode.error };
     }
-    const isValid = exists && inRange;
-    return { ...errorState, hasError: !isValid };
+
+    const partialAddressError = fieldWithAssociatedFields({
+      associatedFields: ["addressMunicipality", "addressLine1"],
+      label: Config.formation.general.partialAddressErrorText,
+    });
+
+    inRange = isZipCodeNj(formationFormData[field]);
+    const hasError = exists && !inRange;
+    const inRangeError = {
+      ...errorState,
+      hasError: hasError,
+      label: Config.formation.fields.addressZipCode.error,
+    };
+    return combineErrorStates({ firstPriority: inRangeError, secondPriority: partialAddressError });
   }
 
   if (field === "addressLine1") {
-    return fieldWithMaxLength({ required: true, maxLen: 35 });
+    if (isForeignUser()) {
+      return fieldWithMaxLength({ required: true, maxLen: 35 });
+    }
+
+    const maxLengthError = fieldWithMaxLength({ required: false, maxLen: 35 });
+    const partialAddressError = fieldWithAssociatedFields({
+      associatedFields: ["addressMunicipality", "addressZipCode"],
+      label: Config.formation.general.partialAddressErrorText,
+    });
+
+    return combineErrorStates({ firstPriority: maxLengthError, secondPriority: partialAddressError });
+  }
+
+  if (field === "addressMunicipality") {
+    return fieldWithAssociatedFields({
+      associatedFields: ["addressLine1", "addressZipCode"],
+      label: Config.formation.general.partialAddressErrorText,
+    });
   }
 
   if (field === "agentOfficeAddressLine1") {

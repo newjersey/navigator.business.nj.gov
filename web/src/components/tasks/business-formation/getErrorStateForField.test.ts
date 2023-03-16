@@ -214,75 +214,165 @@ describe("getErrorStateForField", () => {
   });
 
   describe("addressZipCode", () => {
-    it("has error if empty", () => {
-      const formData = generateFormationFormData({ addressZipCode: "" });
-      expect(getErrorStateForField("addressZipCode", formData, undefined).hasError).toEqual(true);
+    describe("foreign", () => {
+      const legalStructureId = "foreign-limited-liability-company";
+
+      it("has error if empty", () => {
+        const formData = generateFormationFormData({ addressZipCode: "" }, { legalStructureId });
+        expect(getErrorStateForField("addressZipCode", formData, undefined).hasError).toEqual(true);
+      });
+
+      it("inserts label from config", () => {
+        const formData = generateFormationFormData({ addressZipCode: "08100" }, { legalStructureId });
+        expect(getErrorStateForField("addressZipCode", formData, undefined).label).toEqual(
+          Config.formation.fields.addressZipCode.error
+        );
+      });
+
+      describe("US", () => {
+        it("has no error if outside of NJ range", () => {
+          const formData = generateFormationFormData(
+            { addressZipCode: "12345", businessLocationType: "US" },
+            { legalStructureId }
+          );
+          expect(getErrorStateForField("addressZipCode", formData, undefined).hasError).toEqual(false);
+        });
+
+        it("has error if less than 5 digits long", () => {
+          const formData = generateFormationFormData(
+            { addressZipCode: "0810", businessLocationType: "US" },
+            { legalStructureId }
+          );
+          expect(getErrorStateForField("addressZipCode", formData, undefined).hasError).toEqual(true);
+        });
+
+        it("has error if more than 5 digits long", () => {
+          const formData = generateFormationFormData(
+            { addressZipCode: "1231245", businessLocationType: "US" },
+            { legalStructureId }
+          );
+          expect(getErrorStateForField("addressZipCode", formData, undefined).hasError).toEqual(true);
+        });
+      });
+
+      describe("INTL", () => {
+        it("has no error if more than 5", () => {
+          const formData = generateFormationFormData(
+            {
+              addressZipCode: "1231245",
+              businessLocationType: "INTL",
+            },
+            { legalStructureId }
+          );
+          expect(getErrorStateForField("addressZipCode", formData, undefined).hasError).toEqual(false);
+        });
+
+        it("has no error if equal to or less than 11 digits in length", () => {
+          const formData = generateFormationFormData(
+            {
+              addressZipCode: "12345678912",
+              businessLocationType: "INTL",
+            },
+            { legalStructureId }
+          );
+          expect(getErrorStateForField("addressZipCode", formData, undefined).hasError).toEqual(false);
+        });
+
+        it("has error if greater than 11 digits in length", () => {
+          const formData = generateFormationFormData(
+            {
+              addressZipCode: "123456789124",
+              businessLocationType: "INTL",
+            },
+            { legalStructureId }
+          );
+          expect(getErrorStateForField("addressZipCode", formData, undefined).hasError).toEqual(true);
+        });
+
+        it("has error if zip code has no characters", () => {
+          const formData = generateFormationFormData(
+            { addressZipCode: "", businessLocationType: "INTL" },
+            { legalStructureId }
+          );
+          expect(getErrorStateForField("addressZipCode", formData, undefined).hasError).toEqual(true);
+        });
+      });
     });
 
-    it("inserts label from config", () => {
-      const formData = generateFormationFormData({ addressZipCode: "08100" });
-      expect(getErrorStateForField("addressZipCode", formData, undefined).label).toEqual(
-        Config.formation.fields.addressZipCode.label
-      );
-    });
+    describe("domestic", () => {
+      const legalStructureId = "limited-liability-company";
 
-    describe("NJ", () => {
       it("has error if not in range", () => {
-        const formData = generateFormationFormData({ addressZipCode: "12345", businessLocationType: "NJ" });
+        const formData = generateFormationFormData(
+          { addressZipCode: "12345", businessLocationType: "NJ" },
+          { legalStructureId }
+        );
         expect(getErrorStateForField("addressZipCode", formData, undefined).hasError).toEqual(true);
       });
 
       it("has no error if in range", () => {
-        const formData = generateFormationFormData({ addressZipCode: "08100", businessLocationType: "NJ" });
-        expect(getErrorStateForField("addressZipCode", formData, undefined).hasError).toEqual(false);
-      });
-    });
-
-    describe("US", () => {
-      it("has no error if outside of NJ range", () => {
-        const formData = generateFormationFormData({ addressZipCode: "12345", businessLocationType: "US" });
+        const formData = generateFormationFormData(
+          { addressZipCode: "08100", businessLocationType: "NJ" },
+          { legalStructureId }
+        );
         expect(getErrorStateForField("addressZipCode", formData, undefined).hasError).toEqual(false);
       });
 
-      it("has error if less than 5 digits long", () => {
-        const formData = generateFormationFormData({ addressZipCode: "0810", businessLocationType: "US" });
-        expect(getErrorStateForField("addressZipCode", formData, undefined).hasError).toEqual(true);
+      it("has partial address error when it is missing and addressLine1 exists", () => {
+        const formData = generateFormationFormData(
+          {
+            addressLine1: "some-stuff",
+            addressZipCode: "",
+          },
+          { legalStructureId }
+        );
+
+        const errorState = getErrorStateForField("addressZipCode", formData, undefined);
+        expect(errorState.hasError).toEqual(true);
+        expect(errorState.label).toEqual(Config.formation.general.partialAddressErrorText);
       });
 
-      it("has error if more than 5 digits long", () => {
-        const formData = generateFormationFormData({ addressZipCode: "1231245", businessLocationType: "US" });
-        expect(getErrorStateForField("addressZipCode", formData, undefined).hasError).toEqual(true);
-      });
-    });
+      it("has partial address error when it is missing and addressMunicipality exist", () => {
+        const formData = generateFormationFormData(
+          {
+            addressZipCode: "",
+            addressMunicipality: generateMunicipality({}),
+          },
+          { legalStructureId }
+        );
 
-    describe("INTL", () => {
-      it("has no error if more than 5", () => {
-        const formData = generateFormationFormData({
-          addressZipCode: "1231245",
-          businessLocationType: "INTL",
-        });
-        expect(getErrorStateForField("addressZipCode", formData, undefined).hasError).toEqual(false);
-      });
-
-      it("has no error if equal to or less than 11 digits in length", () => {
-        const formData = generateFormationFormData({
-          addressZipCode: "12345678912",
-          businessLocationType: "INTL",
-        });
-        expect(getErrorStateForField("addressZipCode", formData, undefined).hasError).toEqual(false);
+        const errorState = getErrorStateForField("addressZipCode", formData, undefined);
+        expect(errorState.hasError).toEqual(true);
+        expect(errorState.label).toEqual(Config.formation.general.partialAddressErrorText);
       });
 
-      it("has error if greater than 11 digits in length", () => {
-        const formData = generateFormationFormData({
-          addressZipCode: "123456789124",
-          businessLocationType: "INTL",
-        });
-        expect(getErrorStateForField("addressZipCode", formData, undefined).hasError).toEqual(true);
+      it("has partial address error when it is missing and addressMunicipality and addressLine1 both exist", () => {
+        const formData = generateFormationFormData(
+          {
+            addressLine1: "some-stuff",
+            addressMunicipality: generateMunicipality({}),
+            addressZipCode: "",
+          },
+          { legalStructureId }
+        );
+
+        const errorState = getErrorStateForField("addressZipCode", formData, undefined);
+        expect(errorState.hasError).toEqual(true);
+        expect(errorState.label).toEqual(Config.formation.general.partialAddressErrorText);
       });
 
-      it("has error if zip code has no characters", () => {
-        const formData = generateFormationFormData({ addressZipCode: "", businessLocationType: "INTL" });
-        expect(getErrorStateForField("addressZipCode", formData, undefined).hasError).toEqual(true);
+      it("has no error when it is missing and addressMunicipality and addressLine1 are also missing", () => {
+        const formData = generateFormationFormData(
+          {
+            addressLine1: "",
+            addressMunicipality: undefined,
+            addressZipCode: "",
+          },
+          { legalStructureId }
+        );
+
+        const errorState = getErrorStateForField("addressZipCode", formData, undefined);
+        expect(errorState.hasError).toEqual(false);
       });
     });
   });
@@ -559,6 +649,182 @@ describe("getErrorStateForField", () => {
     });
   });
 
+  describe("addressLine1", () => {
+    describe("when foreign", () => {
+      const legalStructureId = "foreign-limited-liability-company";
+
+      it("has error and label if empty", () => {
+        const formData = generateFormationFormData({ addressLine1: "" }, { legalStructureId });
+        const errorState = getErrorStateForField("addressLine1", formData, undefined);
+        expect(errorState.hasError).toEqual(true);
+        expect(errorState.label).toEqual(Config.formation.fields.addressLine1.error);
+      });
+
+      it("has error if length is greater than 35 chars", () => {
+        const longFormEntry = Array(36).fill("A").join("");
+        const formData = generateFormationFormData({ addressLine1: longFormEntry }, { legalStructureId });
+        const errorState = getErrorStateForField("addressLine1", formData, undefined);
+        expect(errorState.hasError).toEqual(true);
+        const expectedLabel = templateEval(Config.formation.general.maximumLengthErrorText, {
+          field: Config.formation.fields.addressLine1.label,
+          maxLen: "35",
+        });
+        expect(errorState.label).toEqual(expectedLabel);
+      });
+
+      it("has no error if length is less than or equal to 35 chars", () => {
+        const longFormEntry = Array(35).fill("A").join("");
+        const formData = generateFormationFormData({ addressLine1: longFormEntry }, { legalStructureId });
+        const errorState = getErrorStateForField("addressLine1", formData, undefined);
+        expect(errorState.hasError).toEqual(false);
+      });
+    });
+
+    describe("when domestic", () => {
+      const legalStructureId = "limited-liability-company";
+
+      it("has max length error when more than 35 characters", () => {
+        const tooLongData = Array(36).fill("A").join("");
+        const formData = generateFormationFormData({ addressLine1: tooLongData }, { legalStructureId });
+        const expectedLabel = templateEval(Config.formation.general.maximumLengthErrorText, {
+          field: Config.formation.fields.addressLine1.label,
+          maxLen: "35",
+        });
+
+        const errorState = getErrorStateForField("addressLine1", formData, undefined);
+        expect(errorState.hasError).toEqual(true);
+        expect(errorState.label).toEqual(expectedLabel);
+      });
+
+      it(`has no error if length is less than or equal to 35 chars`, () => {
+        const longFormEntry = Array(35).fill("A").join("");
+        const formData = generateFormationFormData({ addressLine1: longFormEntry }, { legalStructureId });
+        const errorState = getErrorStateForField("addressLine1", formData, undefined);
+        expect(errorState.hasError).toEqual(false);
+      });
+
+      it("has partial address error when it is missing and addressZipCode exists", () => {
+        const formData = generateFormationFormData(
+          {
+            addressLine1: "",
+            addressZipCode: "08100",
+          },
+          { legalStructureId }
+        );
+
+        const errorState = getErrorStateForField("addressLine1", formData, undefined);
+        expect(errorState.hasError).toEqual(true);
+        expect(errorState.label).toEqual(Config.formation.general.partialAddressErrorText);
+      });
+
+      it("has partial address error when it is missing and addressMunicipality exist", () => {
+        const formData = generateFormationFormData(
+          {
+            addressLine1: "",
+            addressMunicipality: generateMunicipality({}),
+          },
+          { legalStructureId }
+        );
+
+        const errorState = getErrorStateForField("addressLine1", formData, undefined);
+        expect(errorState.hasError).toEqual(true);
+        expect(errorState.label).toEqual(Config.formation.general.partialAddressErrorText);
+      });
+
+      it("has partial address error when it is missing and addressMunicipality and addressZipCode both exist", () => {
+        const formData = generateFormationFormData(
+          {
+            addressLine1: "",
+            addressMunicipality: generateMunicipality({}),
+            addressZipCode: "08100",
+          },
+          { legalStructureId }
+        );
+
+        const errorState = getErrorStateForField("addressLine1", formData, undefined);
+        expect(errorState.hasError).toEqual(true);
+        expect(errorState.label).toEqual(Config.formation.general.partialAddressErrorText);
+      });
+
+      it("has no error when it is missing and addressMunicipality and addressZipCode are also missing", () => {
+        const formData = generateFormationFormData(
+          {
+            addressLine1: "",
+            addressMunicipality: undefined,
+            addressZipCode: "",
+          },
+          { legalStructureId }
+        );
+
+        const errorState = getErrorStateForField("addressLine1", formData, undefined);
+        expect(errorState.hasError).toEqual(false);
+      });
+    });
+  });
+
+  describe("addressMunicipality", () => {
+    describe("when domestic", () => {
+      const legalStructureId = "limited-liability-company";
+
+      it("has partial address error when it is missing and addressZipCode exists", () => {
+        const formData = generateFormationFormData(
+          {
+            addressMunicipality: undefined,
+            addressZipCode: "08100",
+          },
+          { legalStructureId }
+        );
+
+        const errorState = getErrorStateForField("addressMunicipality", formData, undefined);
+        expect(errorState.hasError).toEqual(true);
+        expect(errorState.label).toEqual(Config.formation.general.partialAddressErrorText);
+      });
+
+      it("has partial address error when it is missing and addressLine1 exist", () => {
+        const formData = generateFormationFormData(
+          {
+            addressLine1: "some-stuff",
+            addressMunicipality: undefined,
+          },
+          { legalStructureId }
+        );
+
+        const errorState = getErrorStateForField("addressMunicipality", formData, undefined);
+        expect(errorState.hasError).toEqual(true);
+        expect(errorState.label).toEqual(Config.formation.general.partialAddressErrorText);
+      });
+
+      it("has partial address error when it is missing and addressLine1 and addressZipCode both exist", () => {
+        const formData = generateFormationFormData(
+          {
+            addressLine1: "some-stuff",
+            addressMunicipality: undefined,
+            addressZipCode: "08100",
+          },
+          { legalStructureId }
+        );
+
+        const errorState = getErrorStateForField("addressMunicipality", formData, undefined);
+        expect(errorState.hasError).toEqual(true);
+        expect(errorState.label).toEqual(Config.formation.general.partialAddressErrorText);
+      });
+
+      it("has no error when it is missing and addressMunicipality and addressZipCode are also missing", () => {
+        const formData = generateFormationFormData(
+          {
+            addressLine1: "",
+            addressMunicipality: undefined,
+            addressZipCode: "",
+          },
+          { legalStructureId }
+        );
+
+        const errorState = getErrorStateForField("addressMunicipality", formData, undefined);
+        expect(errorState.hasError).toEqual(false);
+      });
+    });
+  });
+
   describe("required fields with max length", () => {
     const fieldData: {
       field: FormationFields;
@@ -566,15 +832,6 @@ describe("getErrorStateForField", () => {
       labelWhenMissing: string;
       labelWhenTooLong: string;
     }[] = [
-      {
-        field: "addressLine1",
-        maxLen: 35,
-        labelWhenMissing: Config.formation.fields.addressLine1.error,
-        labelWhenTooLong: templateEval(Config.formation.general.maximumLengthErrorText, {
-          field: Config.formation.fields.addressLine1.label,
-          maxLen: "35",
-        }),
-      },
       {
         field: "addressCity",
         maxLen: 30,
@@ -717,7 +974,6 @@ describe("getErrorStateForField", () => {
       "canMakeDistribution",
       "addressCountry",
       "addressState",
-      "addressMunicipality",
     ];
 
     const runTests = (hasErrorIfUndefined: FormationFields[], expectedLabel?: string) => {
