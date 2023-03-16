@@ -23,11 +23,13 @@ import { ProfileNexusDBANameField } from "@/components/onboarding/ProfileNexusDB
 import { OnboardingTaxId } from "@/components/onboarding/taxId/OnboardingTaxId";
 import { Documents } from "@/components/profile/Documents";
 import { ConfigContext } from "@/contexts/configContext";
+import { profileFormContext } from "@/contexts/profileFormContext";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
+import { useFormContextHelper } from "@/lib/data-hooks/useFormContextHelper";
 import { EssentialQuestions } from "@/lib/domain-logic/essentialQuestions";
-import { ProfileContentField } from "@/lib/types/types";
+import { createProfileFieldErrorMap, ProfileContentField } from "@/lib/types/types";
 import {
   IndustrySpecificData,
   industrySpecificDataChoices,
@@ -37,154 +39,157 @@ const ProfileFieldsPreview = (props: PreviewProps) => {
   const { config, setConfig } = usePreviewConfig(props);
   const ref = usePreviewRef(props);
 
+  const { state: formContextState } = useFormContextHelper(createProfileFieldErrorMap());
   return (
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
-      <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
-        <OnboardingBusinessPersona />
-        <hr className="margin-y-4" />
+      <profileFormContext.Provider value={formContextState}>
+        <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
+          <OnboardingBusinessPersona />
+          <hr className="margin-y-4" />
 
-        <div className="margin-left-4">
-          <FieldLabelOnboarding fieldName="businessName" />
-          <OnboardingBusinessName />
+          <div className="margin-left-4">
+            <FieldLabelOnboarding fieldName="businessName" />
+            <OnboardingBusinessName />
 
-          <div className="margin-y-2" />
+            <div className="margin-y-2" />
 
-          <FieldLabelOnboarding fieldName="businessName" CMS_ONLY_flow="OWNING" />
-          <OnboardingBusinessName />
-        </div>
-        <hr className="margin-y-4" />
+            <FieldLabelOnboarding fieldName="businessName" CMS_ONLY_flow="OWNING" />
+            <OnboardingBusinessName />
+          </div>
+          <hr className="margin-y-4" />
 
-        <FieldLabelOnboarding fieldName="industryId" />
-        <OnboardingIndustry />
-        <hr className="margin-y-4" />
+          <FieldLabelOnboarding fieldName="industryId" />
+          <OnboardingIndustry />
+          <hr className="margin-y-4" />
 
-        <div className="margin-left-4">
-          <FieldLabelOnboarding fieldName="legalStructureId" />
-          <OnboardingLegalStructure />
+          <div className="margin-left-4">
+            <FieldLabelOnboarding fieldName="legalStructureId" />
+            <OnboardingLegalStructure />
 
-          <div className="margin-y-2" />
+            <div className="margin-y-2" />
 
-          <FieldLabelOnboarding fieldName="legalStructureId" CMS_ONLY_flow="FOREIGN" />
-          <OnboardingLegalStructure />
-        </div>
-
-        <hr className="margin-y-4" />
-
-        <div className="margin-left-4">
-          <FieldLabelOnboarding fieldName="municipality" />
-          <div className="margin-top-2">
-            <OnboardingMunicipality />
+            <FieldLabelOnboarding fieldName="legalStructureId" CMS_ONLY_flow="FOREIGN" />
+            <OnboardingLegalStructure />
           </div>
 
-          <div className="margin-y-2" />
+          <hr className="margin-y-4" />
 
-          <FieldLabelOnboarding fieldName="municipality" CMS_ONLY_flow="OWNING" />
-          <div className="margin-top-2">
-            <OnboardingMunicipality />
-          </div>
-
-          <div className="margin-y-2" />
-
-          <FieldLabelOnboarding fieldName="municipality" CMS_ONLY_flow="FOREIGN" />
-          <div className="margin-top-2">
-            <OnboardingMunicipality />
-          </div>
-        </div>
-
-        <hr className="margin-y-4" />
-        <FieldLabelOnboarding fieldName="sectorId" />
-        <OnboardingSectors />
-
-        <hr className="margin-y-4" />
-
-        <div className="margin-left-4">
-          <FieldLabelOnboarding fieldName="ownershipTypeIds" />
-          <OnboardingOwnership />
-
-          <div className="margin-y-2" />
-
-          <FieldLabelOnboarding fieldName="ownershipTypeIds" CMS_ONLY_flow="OWNING" />
-          <OnboardingOwnership />
-        </div>
-
-        <hr className="margin-y-4" />
-
-        <div className="margin-left-4">
-          <FieldLabelOnboarding fieldName="existingEmployees" />
-          <OnboardingExistingEmployees />
-
-          <div className="margin-y-2" />
-
-          <FieldLabelOnboarding fieldName="existingEmployees" CMS_ONLY_flow="OWNING" />
-          <OnboardingExistingEmployees />
-        </div>
-
-        <hr className="margin-y-4" />
-
-        <FieldLabelOnboarding fieldName="foreignBusinessTypeIds" />
-        <OnboardingForeignBusinessType />
-
-        <hr className="margin-y-4" />
-
-        <FieldLabelOnboarding fieldName="nexusLocationInNewJersey" />
-        <OnboardingLocationInNewJersey />
-
-        <hr className="margin-y-4" />
-        <ProfileNexusBusinessNameField />
-
-        <hr className="margin-y-4" />
-        <FieldLabelOnboarding fieldName="nexusDbaName" />
-        <ProfileNexusDBANameField />
-
-        <hr className="margin-y-4" />
-        <FieldLabelOnboarding fieldName="taxId" />
-        <OnboardingTaxId />
-
-        <hr className="margin-y-4" />
-        <FieldLabelOnboarding fieldName="entityId" />
-        <OnboardingEntityId />
-
-        <hr className="margin-y-4" />
-        <FieldLabelOnboarding fieldName="employerId" />
-        <OnboardingEmployerId />
-
-        <hr className="margin-y-4" />
-        <FieldLabelOnboarding fieldName="naicsCode" />
-        <ProfileNaicsCode />
-
-        <hr className="margin-y-4" />
-        <FieldLabelOnboarding fieldName="dateOfFormation" />
-        <OnboardingDateOfFormation futureAllowed={false} />
-
-        <hr className="margin-y-4" />
-        <FieldLabelOnboarding fieldName="taxPin" />
-        <OnboardingTaxPin />
-
-        <hr className="margin-y-4" />
-        <Documents />
-
-        <hr className="margin-y-4" />
-        <FieldLabelOnboarding fieldName="notes" />
-        <OnboardingNotes />
-
-        <hr className="margin-y-4" />
-        <FieldLabelOnboarding fieldName="responsibleOwnerName" />
-        <OnboardingResponsibleOwnerName />
-
-        {EssentialQuestions.map((props) => {
-          return (
-            <div className="margin-top-4" key={props.fieldName}>
-              <FieldLabelProfile
-                fieldName={props.contentFieldName ?? (props.fieldName as ProfileContentField)}
-              />
-              <OnboardingRadioQuestion<IndustrySpecificData[keyof IndustrySpecificData]>
-                {...props}
-                choices={industrySpecificDataChoices[props.fieldName]}
-              />
+          <div className="margin-left-4">
+            <FieldLabelOnboarding fieldName="municipality" />
+            <div className="margin-top-2">
+              <OnboardingMunicipality />
             </div>
-          );
-        })}
-      </div>
+
+            <div className="margin-y-2" />
+
+            <FieldLabelOnboarding fieldName="municipality" CMS_ONLY_flow="OWNING" />
+            <div className="margin-top-2">
+              <OnboardingMunicipality />
+            </div>
+
+            <div className="margin-y-2" />
+
+            <FieldLabelOnboarding fieldName="municipality" CMS_ONLY_flow="FOREIGN" />
+            <div className="margin-top-2">
+              <OnboardingMunicipality />
+            </div>
+          </div>
+
+          <hr className="margin-y-4" />
+          <FieldLabelOnboarding fieldName="sectorId" />
+          <OnboardingSectors />
+
+          <hr className="margin-y-4" />
+
+          <div className="margin-left-4">
+            <FieldLabelOnboarding fieldName="ownershipTypeIds" />
+            <OnboardingOwnership />
+
+            <div className="margin-y-2" />
+
+            <FieldLabelOnboarding fieldName="ownershipTypeIds" CMS_ONLY_flow="OWNING" />
+            <OnboardingOwnership />
+          </div>
+
+          <hr className="margin-y-4" />
+
+          <div className="margin-left-4">
+            <FieldLabelOnboarding fieldName="existingEmployees" />
+            <OnboardingExistingEmployees />
+
+            <div className="margin-y-2" />
+
+            <FieldLabelOnboarding fieldName="existingEmployees" CMS_ONLY_flow="OWNING" />
+            <OnboardingExistingEmployees />
+          </div>
+
+          <hr className="margin-y-4" />
+
+          <FieldLabelOnboarding fieldName="foreignBusinessTypeIds" />
+          <OnboardingForeignBusinessType />
+
+          <hr className="margin-y-4" />
+
+          <FieldLabelOnboarding fieldName="nexusLocationInNewJersey" />
+          <OnboardingLocationInNewJersey />
+
+          <hr className="margin-y-4" />
+          <ProfileNexusBusinessNameField />
+
+          <hr className="margin-y-4" />
+          <FieldLabelOnboarding fieldName="nexusDbaName" />
+          <ProfileNexusDBANameField />
+
+          <hr className="margin-y-4" />
+          <FieldLabelOnboarding fieldName="taxId" />
+          <OnboardingTaxId />
+
+          <hr className="margin-y-4" />
+          <FieldLabelOnboarding fieldName="entityId" />
+          <OnboardingEntityId />
+
+          <hr className="margin-y-4" />
+          <FieldLabelOnboarding fieldName="employerId" />
+          <OnboardingEmployerId />
+
+          <hr className="margin-y-4" />
+          <FieldLabelOnboarding fieldName="naicsCode" />
+          <ProfileNaicsCode />
+
+          <hr className="margin-y-4" />
+          <FieldLabelOnboarding fieldName="dateOfFormation" />
+          <OnboardingDateOfFormation futureAllowed={false} />
+
+          <hr className="margin-y-4" />
+          <FieldLabelOnboarding fieldName="taxPin" />
+          <OnboardingTaxPin />
+
+          <hr className="margin-y-4" />
+          <Documents />
+
+          <hr className="margin-y-4" />
+          <FieldLabelOnboarding fieldName="notes" />
+          <OnboardingNotes />
+
+          <hr className="margin-y-4" />
+          <FieldLabelOnboarding fieldName="responsibleOwnerName" />
+          <OnboardingResponsibleOwnerName />
+
+          {EssentialQuestions.map((props, index) => {
+            return (
+              <div className="margin-top-4" key={props.fieldName + index}>
+                <FieldLabelProfile
+                  fieldName={props.contentFieldName ?? (props.fieldName as ProfileContentField)}
+                />
+                <OnboardingRadioQuestion<IndustrySpecificData[keyof IndustrySpecificData]>
+                  {...props}
+                  choices={industrySpecificDataChoices[props.fieldName]}
+                />
+              </div>
+            );
+          })}
+        </div>
+      </profileFormContext.Provider>
     </ConfigContext.Provider>
   );
 };
