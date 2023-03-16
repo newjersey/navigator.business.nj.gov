@@ -1,12 +1,11 @@
 import { ButtonIcon } from "@/components/ButtonIcon";
-import { FeedbackModal } from "@/components/feedback-modal/FeedbackModal";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { ReactElement, useState } from "react";
+import analytics from "@/lib/utils/analytics";
+import { ReactElement } from "react";
 
 export const ReportAnIssueBar = (): ReactElement => {
   const { Config } = useConfig();
-  const [showModal, setShowModal] = useState<boolean>(false);
 
   return (
     <div
@@ -15,9 +14,8 @@ export const ReportAnIssueBar = (): ReactElement => {
     >
       <UnStyledButton
         style="tertiary"
-        onClick={() => {
-          setShowModal(true);
-        }}
+        intercomButton
+        onClick={analytics.event.report_something_that_is_broken.click.open_live_chat}
       >
         <div className="text-base-darkest flex flex-align-center flex-justify-center">
           <ButtonIcon svgFilename="bug-error-dark" />
@@ -26,14 +24,6 @@ export const ReportAnIssueBar = (): ReactElement => {
           </span>
         </div>
       </UnStyledButton>
-
-      <FeedbackModal
-        isOpen={showModal}
-        handleClose={() => {
-          return setShowModal(false);
-        }}
-        isReportAnIssueBar
-      />
     </div>
   );
 };
