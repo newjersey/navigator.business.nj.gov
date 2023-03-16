@@ -26,11 +26,12 @@ import {
   createEmptyFormationFormData,
   defaultDateFormat,
   defaultFormationLegalType,
+  FieldsForErrorHandling,
   foreignLegalTypePrefix,
-  FormationFields,
   FormationFormData,
   FormationLegalType,
   getCurrentDateFormatted,
+  InputFile,
   NameAvailability,
   PublicFilingLegalType,
   UserData,
@@ -53,7 +54,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
     createEmptyFormationFormData()
   );
   const [stepIndex, setStepIndex] = useState(0);
-  const [interactedFields, setInteractedFields] = useState<FormationFields[]>([]);
+  const [interactedFields, setInteractedFields] = useState<FieldsForErrorHandling[]>([]);
   const [showResponseAlert, setShowResponseAlert] = useState<boolean>(false);
   const [isLoadingGetFiling, setIsLoadingGetFiling] = useState<boolean>(false);
   const [hasBeenSubmitted, setHasBeenSubmitted] = useState<boolean>(false);
@@ -62,6 +63,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
   const [businessNameAvailability, setBusinessNameAvailability] = useState<NameAvailability | undefined>(
     undefined
   );
+  const [foreignGoodStandingFile, setForeignGoodStandingFile] = useState<InputFile | undefined>(undefined);
 
   const legalStructureId: FormationLegalType = useMemo(() => {
     return castPublicFilingLegalTypeToFormationType(
@@ -166,7 +168,10 @@ export const BusinessFormation = (props: Props): ReactElement => {
     })();
   }, [router.isReady, update, router, props.task.urlSlug, userData]);
 
-  const setFieldsInteracted = (fields: FormationFields[], config?: { setToUninteracted: boolean }): void => {
+  const setFieldsInteracted = (
+    fields: FieldsForErrorHandling[],
+    config?: { setToUninteracted: boolean }
+  ): void => {
     setInteractedFields((prevState) => {
       const prevStateFieldRemoved = prevState.filter((it) => {
         return !fields.includes(it);
@@ -241,6 +246,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
           interactedFields,
           hasBeenSubmitted,
           hasSetStateFirstTime,
+          foreignGoodStandingFile,
         },
         setFormationFormData,
         setBusinessNameAvailability,
@@ -248,6 +254,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
         setShowResponseAlert,
         setFieldsInteracted,
         setHasBeenSubmitted,
+        setForeignGoodStandingFile,
       }}
     >
       <div className="flex flex-column minh-38" data-testid="formation-form">

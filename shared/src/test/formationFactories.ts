@@ -224,7 +224,7 @@ export const generateFormationFormData = (
     makeDistributionTerms: `some-makeDistributionTerms-text-${randomInt()}`,
     foreignStateOfFormation: isForeign ? randomElementFromArray(states).name : undefined,
     foreignDateOfFormation: isForeign ? getCurrentDate().add(1, "days").format(defaultDateFormat) : undefined,
-    foreignGoodStandingFile: undefined,
+    willPracticeLaw: undefined,
     ...overrides,
   };
 };

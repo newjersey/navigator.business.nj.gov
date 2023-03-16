@@ -2,6 +2,7 @@ import { getCurrentToken } from "@/lib/auth/sessionHelper";
 import { SelfRegResponse } from "@/lib/types/types";
 import { phaseChangeAnalytics, setPhaseDimension } from "@/lib/utils/analytics-helpers";
 import {
+  InputFile,
   NameAndAddress,
   NameAvailability,
   UserData,
@@ -30,8 +31,12 @@ export const checkLicenseStatus = (nameAndAddress: NameAndAddress): Promise<User
   return post(`/license-status`, nameAndAddress);
 };
 
-export const postBusinessFormation = (userData: UserData, returnUrl: string): Promise<UserData> => {
-  return post(`/formation`, { userData, returnUrl });
+export const postBusinessFormation = (
+  userData: UserData,
+  returnUrl: string,
+  foreignGoodStandingFile: InputFile | undefined
+): Promise<UserData> => {
+  return post(`/formation`, { userData, returnUrl, foreignGoodStandingFile });
 };
 
 export const getCompletedFiling = (): Promise<UserData> => {

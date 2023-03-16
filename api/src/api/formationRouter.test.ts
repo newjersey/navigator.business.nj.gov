@@ -7,6 +7,7 @@ import {
   generateFormationData,
   generateFormationSubmitResponse,
   generateGetFilingResponse,
+  generateInputFile,
   generateProfileData,
   generateUserData,
 } from "../../test/factories";
@@ -76,10 +77,14 @@ describe("formationRouter", () => {
       stubFormationClient.form.mockResolvedValue(formationResponse);
 
       const userData = generateUserData({});
+      const foreignGoodStandingFile = generateInputFile({});
       const response = await request(app).post(`/formation`).send({
         userData: userData,
         returnUrl: "some-url",
+        foreignGoodStandingFile,
       });
+
+      expect(stubFormationClient.form).toHaveBeenCalledWith(userData, "some-url", foreignGoodStandingFile);
 
       expect(response.status).toEqual(200);
       expect(response.body).toEqual({

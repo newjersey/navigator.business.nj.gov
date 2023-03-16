@@ -2,21 +2,33 @@ import { LookupStepIndexByName } from "@/components/tasks/business-formation/Bus
 import { LookupDbaStepIndexByName } from "@/components/tasks/business-formation/DbaFormationStepsConfiguration";
 import { LookupNexusStepIndexByName } from "@/components/tasks/business-formation/NexusFormationStepsConfiguration";
 import { getMergedConfig } from "@/contexts/configContext";
+import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { TasksDisplayContent } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
-import { generateEmptyFormationData, generateFormationDbaContent, generateUserData } from "@/test/factories";
+import {
+  generateEmptyFormationData,
+  generateFormationDbaContent,
+  generateFormationSubmitResponse,
+  generateUserData,
+} from "@/test/factories";
 import {
   FormationPageHelpers,
   generateFormationProfileData,
+  mockApiResponse,
   preparePage,
   useSetupInitialMocks,
 } from "@/test/helpers/helpers-formation";
 import { fillText, searchAndGetValue } from "@/test/helpers/helpersSearchBusinessName";
 import { currentUserData } from "@/test/mock/withStatefulUserData";
-import { UserData } from "@businessnjgovnavigator/shared/userData";
+import {
+  defaultDateFormat,
+  generateFormationFormData,
+  getCurrentDate,
+  UserData,
+} from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
-import { fireEvent, screen } from "@testing-library/react";
+import { fireEvent, screen, waitFor } from "@testing-library/react";
 
 const Config = getMergedConfig();
 
@@ -68,10 +80,14 @@ jest.mock("@/lib/api-client/apiClient", () => ({
   searchBusinessName: jest.fn(),
 }));
 
+const mockApi = api as jest.Mocked<typeof api>;
 const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
 
 const clickBack = (): void => {
   fireEvent.click(screen.getByText(Config.formation.general.previousButtonText));
+};
+const clickNext = (): void => {
+  fireEvent.click(screen.getByText(Config.formation.general.initialNextNexusButtonText));
 };
 
 describe("<NexusFormationFlow />", () => {
@@ -97,6 +113,65 @@ describe("<NexusFormationFlow />", () => {
     initialUserData = generateUserData({ profileData, formationData });
   });
 
+  it("posts to the api with userData and foreign good standing file", async () => {
+    mockApiResponse(
+      generateFormationSubmitResponse({
+        success: true,
+        redirect: "www.example.com",
+      })
+    );
+
+    const legalStructureId = "c-corporation";
+    const profileData = generateFormationProfileData({
+      legalStructureId,
+      businessPersona: "FOREIGN",
+      businessName: "Pizza Joint",
+      nexusDbaName: "",
+      municipality: undefined,
+      needsNexusDbaName: false,
+    });
+    const formationData = generateEmptyFormationData();
+    initialUserData = generateUserData({ profileData, formationData });
+
+    const foreignUserData = generateUserData({
+      profileData,
+      formationData: {
+        ...generateEmptyFormationData(),
+        businessNameAvailability: { status: "AVAILABLE", similarNames: [], lastUpdatedTimeStamp: "" },
+        formationFormData: generateFormationFormData(
+          {
+            businessName: "Pizza Joint",
+            businessStartDate: getCurrentDate().format(defaultDateFormat),
+            willPracticeLaw: false,
+          },
+          { legalStructureId: "foreign-c-corporation" }
+        ),
+      },
+    });
+
+    const page = preparePage(foreignUserData, displayContent);
+
+    await page.searchBusinessName({ status: "AVAILABLE", similarNames: [], lastUpdatedTimeStamp: "" });
+    clickNext();
+    await page.stepperClickToBusinessStep();
+
+    const file = new File(["my cool file contents"], "cool.png", { type: "image/png" });
+    await page.uploadFile(file);
+    await page.completeWillPracticeLaw();
+    await page.stepperClickToReviewStep();
+    await page.clickSubmit();
+
+    const base64String = Buffer.from("my cool file contents", "utf8").toString("base64");
+    await waitFor(() => {
+      expect(mockApi.postBusinessFormation).toHaveBeenCalledWith(foreignUserData, "http://localhost/", {
+        fileType: "PNG",
+        sizeInBytes: file.size,
+        base64Contents: base64String,
+        filename: "cool.png",
+      });
+    });
+  });
+
   describe("name search step", () => {
     it("does not display the stepper on name search", async () => {
       preparePage(initialUserData, displayContent);
@@ -113,9 +188,6 @@ describe("<NexusFormationFlow />", () => {
 
   describe("when in DBA flow", () => {
     let page: FormationPageHelpers;
-    const clickNext = (): void => {
-      fireEvent.click(screen.getByText(Config.formation.general.initialNextNexusButtonText));
-    };
 
     beforeEach(async () => {
       page = preparePage(initialUserData, displayContent);
@@ -222,9 +294,6 @@ describe("<NexusFormationFlow />", () => {
 
   describe("when in formation flow", () => {
     let page: FormationPageHelpers;
-    const clickNext = (): void => {
-      fireEvent.click(screen.getByText(Config.formation.general.initialNextNexusButtonText));
-    };
 
     describe("when feature flag is set", () => {
       describe("business name step", () => {

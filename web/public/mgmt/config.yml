@@ -483,6 +483,17 @@ collections:
                     fields:
                       - { label: "Label", name: "label", widget: "string" }
                       - { label: "Inline error", name: "error", widget: "string" }
+                  - label: Foreign Certificate of Good Standing
+                    name: foreignGoodStandingFile
+                    collapsed: true
+                    widget: object
+                    fields:
+                      - { label: "Label", name: "label", widget: "string" }
+                      - { label: "Inline error", name: "error", widget: "string" }
+                      - { label: "Helper Text", name: "helperText", widget: "string" }
+                      - { label: "Error Message - File Size", name: "errorMessageFileSize", widget: "string" }
+                      - { label: "Error Message - File Type", name: "errorMessageFileType", widget: "string" }
+                      - { label: "Error Message - Required", name: "errorMessageRequired", widget: "string" }
                   - label: Incorporators
                     name: incorporators
                     collapsed: true

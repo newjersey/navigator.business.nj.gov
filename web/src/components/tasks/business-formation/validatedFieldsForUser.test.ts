@@ -206,4 +206,12 @@ describe("validatedFieldsForUser", () => {
       });
     });
   });
+
+  describe("foreign c-corp", () => {
+    it("requires 'practice law' and 'certificate of good standing' fields", () => {
+      const formationFormData = generateFormationFormData({}, { legalStructureId: "foreign-c-corporation" });
+      expect(validatedFieldsForUser(formationFormData)).toContain("willPracticeLaw");
+      expect(validatedFieldsForUser(formationFormData)).toContain("foreignGoodStandingFile");
+    });
+  });
 });

@@ -1,4 +1,5 @@
 import {
+  generateInputFile,
   generateNameAndAddress,
   generateTaxIdAndBusinessName,
   generateUser,
@@ -9,6 +10,7 @@ import {
   checkLicenseStatus,
   get,
   getUserData,
+  postBusinessFormation,
   postFeedback,
   postIssue,
   postNewsletter,
@@ -118,5 +120,20 @@ describe("apiClient", () => {
     mockAxios.post.mockResolvedValue({ data: true });
     expect(await postIssue(issueRequest, userData)).toEqual(true);
     expect(mockAxios.post).toHaveBeenCalledWith("/api/external/issue", { issueRequest, userData }, {});
+  });
+
+  it("posts business formation request", async () => {
+    const inputUserData = generateUserData({});
+    const responseUserData = generateUserData({});
+    const returnUrl = "/i-came-from-here.com";
+    const inputFile = generateInputFile({});
+
+    mockAxios.post.mockResolvedValue({ data: responseUserData });
+    expect(await postBusinessFormation(inputUserData, returnUrl, inputFile)).toEqual(responseUserData);
+    expect(mockAxios.post).toHaveBeenCalledWith(
+      "/api/formation",
+      { userData: inputUserData, returnUrl, foreignGoodStandingFile: inputFile },
+      { headers: { Authorization: "Bearer some-token" } }
+    );
   });
 });
