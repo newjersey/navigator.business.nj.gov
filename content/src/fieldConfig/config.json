@@ -1,4 +1,11 @@
 {
+  "formationDateDeletionModal": {
+    "header": "Confirm Your Changes",
+    "description": "Deleting your business `effective date|effective-date` (the date you formed your business) will remove your calendar from the Navigator.",
+    "areYouSureModalBody": "Are you sure you'd like to proceed?",
+    "cancelButtonText": "Cancel",
+    "deleteButtonText": "Delete Date"
+  },
   "legalMessageDefaults": {
     "legalMessageTextOne": "This information is supplied as a guide and is not a substitute for legal or professional advice. It is the responsibility of the business owner to comply with all local, county, and state regulations even if they are not listed here. For no-cost assistance with your business, use the ",
     "legalMessageLegalChat": "live chat",
@@ -193,13 +200,6 @@
     "saveButtonText": "Save",
     "description": "To see your annual report due date, please provide your Business' `effective date|effective-date` (the date you formed your business) below."
   },
-  "formationDateDeletionModal": {
-    "header": "Confirm Your Changes",
-    "description": "Deleting your business `effective date|effective-date` (the date you formed your business) will remove your calendar from the Navigator.",
-    "areYouSureModalBody": "Are you sure you'd like to proceed?",
-    "cancelButtonText": "Cancel",
-    "deleteButtonText": "Delete Date"
-  }, 
   "licenseSearchTask": {
     "voluntarySurrenderPermitStatusText": "Voluntary Surrender",
     "activePermitStatusText": "Active",
@@ -282,7 +282,7 @@
   },
   "siteWideErrorMessages": {
     "errorTextNoData": "Something went wrong and we can't access your data. Please try again later.",
-    "errorTextCachedOnly": "We're having trouble connecting; the data you're viewing is cached and it may be out-of-date.",
+    "errorTextCachedOnly": "We're having trouble connecting. The data you're viewing is cached and it may be out-of-date.",
     "errorTextUpdateFailed": "Something went wrong with your request. Please try again later."
   },
   "reportAnIssueBar": {
