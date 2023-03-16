@@ -1,12 +1,10 @@
 import { ButtonIcon } from "@/components/ButtonIcon";
-import { FeedbackModal } from "@/components/feedback-modal/FeedbackModal";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
+import analytics from "@/lib/utils/analytics";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
-import { ReactElement, useState } from "react";
+import { ReactElement } from "react";
 
 export const BetaBar = (): ReactElement => {
-  const [showModal, setShowModal] = useState<boolean>(false);
-
   return (
     <div
       className="display-flex flex-justify-center flex-align-center bg-accent-warm-extra-light font-sans-xs minh-3 margin-auto width-full padding-y-1"
@@ -18,21 +16,13 @@ export const BetaBar = (): ReactElement => {
         isUnBolded={true}
         isVerticalPaddingRemoved={true}
         isSmallerText={true}
-        onClick={() => {
-          return setShowModal(true);
-        }}
+        intercomButton
         isNotFullWidthOnMobile={true}
+        onClick={analytics.event.share_feedback.click.open_live_chat}
       >
         <ButtonIcon svgFilename="lightbulb-on-warning-light" sizePx="16px" />
         {Config.betaBar.betaModalButtonText}
       </PrimaryButton>
-
-      <FeedbackModal
-        isOpen={showModal}
-        handleClose={() => {
-          return setShowModal(false);
-        }}
-      />
     </div>
   );
 };
