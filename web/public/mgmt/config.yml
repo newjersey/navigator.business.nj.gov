@@ -2305,7 +2305,12 @@ collections:
           name: "agency",
           widget: "select",
           options:
-            ["New Jersey Division of Taxation", "Internal Revenue Service (IRS)", "NJ Department of Labor"],
+            [
+              "New Jersey Division of Taxation",
+              "Internal Revenue Service (IRS)",
+              "NJ Department of Labor",
+              "New Jersey Division of Revenue and Enterprise Services",
+            ],
           required: false,
         }
       - { label: "Form Id", name: "id", widget: "string" }

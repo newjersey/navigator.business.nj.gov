@@ -349,7 +349,8 @@ export type TaxFilingMethod = (typeof taxFilingMethod)[number];
 export type TaxAgency =
   | "New Jersey Division of Taxation"
   | "Internal Revenue Service (IRS)"
-  | "NJ Department of Labor";
+  | "NJ Department of Labor"
+  | "New Jersey Division of Revenue and Enterprise Services";
 
 export interface Filing {
   id: string;
