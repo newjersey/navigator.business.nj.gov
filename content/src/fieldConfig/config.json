@@ -149,7 +149,7 @@
     "modalBody": "To access your tax records, we need to verify your information and get you access to New Jersey Department of Treasury's `Gov2Go|gov2go` platform.",
     "modalNextButton": "Save",
     "accessButton": "Get Access",
-    "failedTaxIdHelper": "Enter the 12-digit Tax ID shown in your tax confirmation email",
+    "failedTaxIdHelper": "Enter the 12-digit Tax ID shown in your tax confirmation email.",
     "modalTaxFieldErrorName": "New Jersey Tax ID",
     "modalCancelButton": "Cancel",
     "modalBusinessFieldHeader": "#### Business Name",
