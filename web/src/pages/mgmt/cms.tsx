@@ -3,6 +3,7 @@ import IconWidgetEditor from "@/lib/cms/editors/icon";
 import AlertEditor from "@/lib/cms/editors/infoAlert";
 import { NoSpaceControl } from "@/lib/cms/fields/nospacefield";
 import { SlugControl } from "@/lib/cms/fields/slugfield";
+import { applyTheme } from "@/lib/cms/helpers/applyTheme";
 import CannabisEligibilityModalPreview from "@/lib/cms/previews/CannabisEligibilityModalPreview";
 import CannabisLicensePreview from "@/lib/cms/previews/CannabisLicensePreview";
 import CannabisPriorityStatusPreview from "@/lib/cms/previews/CannabisPriorityStatusPreview";
@@ -29,6 +30,7 @@ import RoadmapSidebarCardPreview from "@/lib/cms/previews/SidebarCardPreview";
 import TaskPreview from "@/lib/cms/previews/TaskPreview";
 import TaxInputPreview from "@/lib/cms/previews/TaxInputPreview";
 import { useMountEffect } from "@/lib/utils/helpers";
+
 import dynamic from "next/dynamic";
 
 const CMS_CONFIG = {};
@@ -139,7 +141,7 @@ const registerPreview = (
   preview: (props: any) => JSX.Element
 ) => {
   // @ts-expect-error: No type definition available
-  CMS.registerPreviewTemplate(name, preview);
+  CMS.registerPreviewTemplate(name, applyTheme(preview));
 };
 
 const Admin = () => {
