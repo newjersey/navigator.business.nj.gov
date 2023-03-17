@@ -21,7 +21,8 @@ export interface IndustrySpecificData {
   readonly cannabisMicrobusiness: boolean | undefined;
   readonly constructionRenovationPlan: boolean | undefined;
   readonly carService: CarServiceType | undefined;
-  readonly interstateTransport: boolean;
+  readonly interstateLogistics: boolean;
+  readonly interstateMoving: boolean;
   readonly isChildcareForSixOrMore: boolean | undefined;
   readonly petCareHousing: boolean | undefined;
   readonly willSellPetCareItems: boolean | undefined;
@@ -42,7 +43,8 @@ export const industrySpecificDataChoices: IndustrySpecificDataChoices = {
   cannabisMicrobusiness: booleanChoice,
   constructionRenovationPlan: booleanChoice,
   carService: [...carServiceOptions],
-  interstateTransport: booleanChoice,
+  interstateLogistics: booleanChoice,
+  interstateMoving: booleanChoice,
   isChildcareForSixOrMore: booleanChoice,
   petCareHousing: booleanChoice,
   willSellPetCareItems: booleanChoice,
@@ -59,7 +61,8 @@ export const emptyIndustrySpecificData: IndustrySpecificData = {
   certifiedInteriorDesigner: false,
   realEstateAppraisalManagement: false,
   carService: undefined,
-  interstateTransport: false,
+  interstateLogistics: false,
+  interstateMoving: false,
   isChildcareForSixOrMore: undefined,
   petCareHousing: undefined,
   willSellPetCareItems: undefined,

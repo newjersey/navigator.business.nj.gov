@@ -27,8 +27,7 @@ export const OnboardingEssentialQuestion = <T,>(props: Props<T>): ReactElement =
   const essentialQuestionContentFromConfig = getProfileConfig({
     config: Config,
     persona: state.flow,
-    fieldName: (props.essentialQuestion.contentFieldName ??
-      props.essentialQuestion.fieldName) as ProfileContentField,
+    fieldName: props.essentialQuestion.fieldName as ProfileContentField,
   });
   RegisterForOnSubmit(() => state.profileData[props.essentialQuestion.fieldName] !== undefined);
 
@@ -45,12 +44,7 @@ export const OnboardingEssentialQuestion = <T,>(props: Props<T>): ReactElement =
             : "margin-top-2"
         }
       >
-        <FieldLabelProfile
-          fieldName={
-            props.essentialQuestion.contentFieldName ??
-            (props.essentialQuestion.fieldName as ProfileContentField)
-          }
-        />
+        <FieldLabelProfile fieldName={props.essentialQuestion.fieldName as ProfileContentField} />
         <OnboardingRadioQuestion<IndustrySpecificData[keyof IndustrySpecificData]>
           {...props.essentialQuestion}
           choices={industrySpecificDataChoices[props.essentialQuestion.fieldName]}

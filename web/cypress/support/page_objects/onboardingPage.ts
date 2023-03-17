@@ -36,8 +36,12 @@ export class OnboardingPage {
     );
   }
 
-  getInterstateTransport(radio?: boolean) {
-    return cy.get(`input[name="interstate-transport"]${radio === undefined ? "" : `[value="${radio}"]`}`);
+  getInterstateLogistics(radio?: boolean) {
+    return cy.get(`input[name="interstate-logistics"]${radio === undefined ? "" : `[value="${radio}"]`}`);
+  }
+
+  getInterstateMoving(radio?: boolean) {
+    return cy.get(`input[name="interstate-moving"]${radio === undefined ? "" : `[value="${radio}"]`}`);
   }
 
   getCarService(radio?: CarServiceType) {
@@ -138,8 +142,12 @@ export class OnboardingPage {
     this.getRealEstateAppraisal(radio).check();
   }
 
-  selectInterstateTransport(radio: boolean) {
-    this.getInterstateTransport(radio).check();
+  selectInterstateLogistics(radio: boolean) {
+    this.getInterstateLogistics(radio).check();
+  }
+
+  selectInterstateMoving(radio: boolean) {
+    this.getInterstateMoving(radio).check();
   }
 
   selectChildcare(radio: boolean) {

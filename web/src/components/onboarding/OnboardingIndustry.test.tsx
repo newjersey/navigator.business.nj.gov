@@ -99,7 +99,7 @@ describe("<OnboardingIndustry />", () => {
         const choices = industrySpecificDataChoices[el.fieldName];
         const flowConfig = Config.profileDefaults.fields;
         const fieldContent = Config.profileDefaults.fields[
-          el.contentFieldName ?? (el.fieldName as keyof typeof flowConfig)
+          el.fieldName as keyof typeof flowConfig
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
         ].default as any;
 
@@ -111,11 +111,7 @@ describe("<OnboardingIndustry />", () => {
           );
         };
 
-        it(`displays ${el.contentFieldName ?? el.fieldName} for ${
-          validIndustryId.id
-        } as a ${persona} when industry is changed from a previous industry of ${
-          nonValidIndustryId.id
-        }`, () => {
+        it(`displays ${el.fieldName} for ${validIndustryId.id} as a ${persona} when industry is changed from a previous industry of ${nonValidIndustryId.id}`, () => {
           const profileData = {
             ...createEmptyProfileData(),
             industryId: nonValidIndustryId.id,
@@ -146,7 +142,7 @@ describe("<OnboardingIndustry />", () => {
           ).not.toBeInTheDocument();
         });
 
-        it(`sets ${el.contentFieldName ?? el.fieldName} back to ${
+        it(`sets ${el.fieldName} back to ${
           emptyIndustrySpecificData[el.fieldName]
         } if they select a different industry`, () => {
           const profileData = {

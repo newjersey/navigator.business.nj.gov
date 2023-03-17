@@ -25,7 +25,8 @@ interface IndustryOnboardingQuestions {
   readonly canBeHomeBased?: boolean;
   readonly isTransportation?: boolean;
   readonly isCarServiceApplicable?: boolean;
-  readonly isInterstateTransportApplicable?: boolean;
+  readonly isInterstateLogisticsApplicable?: boolean;
+  readonly isInterstateMovingApplicable?: boolean;
   readonly isChildcareForSixOrMore?: boolean;
   readonly willSellPetCareItems?: boolean;
   readonly isPetCareHousingApplicable?: boolean;
@@ -65,7 +66,8 @@ export const LookupIndustryById = (id: string | undefined): Industry => {
         isCpaRequiredApplicable: undefined,
         isTransportation: undefined,
         isCarServiceApplicable: undefined,
-        isInterstateTransportApplicable: undefined,
+        isInterstateLogisticsApplicable: undefined,
+        isInterstateMovingApplicable: undefined,
         isChildcareForSixOrMore: undefined,
         willSellPetCareItems: undefined,
         isPetCareHousingApplicable: undefined,

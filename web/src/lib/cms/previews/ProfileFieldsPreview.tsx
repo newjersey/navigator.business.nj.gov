@@ -178,9 +178,7 @@ const ProfileFieldsPreview = (props: PreviewProps) => {
           {EssentialQuestions.map((props, index) => {
             return (
               <div className="margin-top-4" key={props.fieldName + index}>
-                <FieldLabelProfile
-                  fieldName={props.contentFieldName ?? (props.fieldName as ProfileContentField)}
-                />
+                <FieldLabelProfile fieldName={props.fieldName as ProfileContentField} />
                 <OnboardingRadioQuestion<IndustrySpecificData[keyof IndustrySpecificData]>
                   {...props}
                   choices={industrySpecificDataChoices[props.fieldName]}
