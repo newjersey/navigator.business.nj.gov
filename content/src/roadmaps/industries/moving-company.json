@@ -53,7 +53,7 @@
   "industryOnboardingQuestions": {
     "canBeHomeBased": true,
     "isTransportation": true,
-    "isInterstateTransportApplicable": true
+    "isInterstateMovingApplicable": true
   },
   "isEnabled": true,
   "additionalSearchTerms": "freight, trucking, movers, box truck company, transportation, truck driving, hauling, truck haul, logistics, trucking company, ",

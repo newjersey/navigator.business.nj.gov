@@ -115,7 +115,8 @@ interface StartingOnboardingData {
   providesStaffingService: boolean | undefined;
   certifiedInteriorDesigner: boolean | undefined;
   realEstateAppraisalManagement: boolean | undefined;
-  interstateTransport: boolean | undefined;
+  interstateLogistics: boolean | undefined;
+  interstateMoving: boolean | undefined;
   carService: CarServiceType | undefined;
   isChildcareForSixOrMore: boolean | undefined;
   willSellPetCareItems: boolean | undefined;
@@ -146,7 +147,8 @@ export const completeNewBusinessOnboarding = ({
   providesStaffingService = undefined,
   certifiedInteriorDesigner = undefined,
   realEstateAppraisalManagement = undefined,
-  interstateTransport = undefined,
+  interstateLogistics = undefined,
+  interstateMoving = undefined,
   carService = undefined,
   isChildcareForSixOrMore = undefined,
   willSellPetCareItems = undefined,
@@ -214,8 +216,14 @@ export const completeNewBusinessOnboarding = ({
       : undefined;
   }
 
-  if (interstateTransport === undefined) {
-    interstateTransport = industry.industryOnboardingQuestions.isInterstateTransportApplicable
+  if (interstateLogistics === undefined) {
+    interstateLogistics = industry.industryOnboardingQuestions.isInterstateLogisticsApplicable
+      ? Boolean(randomInt() % 2)
+      : undefined;
+  }
+
+  if (interstateMoving === undefined) {
+    interstateMoving = industry.industryOnboardingQuestions.isInterstateMovingApplicable
       ? Boolean(randomInt() % 2)
       : undefined;
   }
@@ -283,12 +291,20 @@ export const completeNewBusinessOnboarding = ({
     onOnboardingPage.getRealEstateAppraisal(!realEstateAppraisalManagement).should("not.be.checked");
   }
 
-  if (interstateTransport === undefined) {
-    onOnboardingPage.getInterstateTransport().should("not.exist");
+  if (interstateLogistics === undefined) {
+    onOnboardingPage.getInterstateLogistics().should("not.exist");
   } else {
-    onOnboardingPage.selectInterstateTransport(interstateTransport);
-    onOnboardingPage.getInterstateTransport(interstateTransport).should("be.checked");
-    onOnboardingPage.getInterstateTransport(!interstateTransport).should("not.be.checked");
+    onOnboardingPage.selectInterstateLogistics(!!interstateLogistics);
+    onOnboardingPage.getInterstateLogistics(interstateLogistics).should("be.checked");
+    onOnboardingPage.getInterstateLogistics(!interstateLogistics).should("not.be.checked");
+  }
+
+  if (interstateMoving === undefined) {
+    onOnboardingPage.getInterstateMoving().should("not.exist");
+  } else {
+    onOnboardingPage.selectInterstateMoving(!!interstateMoving);
+    onOnboardingPage.getInterstateMoving(interstateMoving).should("be.checked");
+    onOnboardingPage.getInterstateMoving(!interstateMoving).should("not.be.checked");
   }
 
   if (carService === undefined) {

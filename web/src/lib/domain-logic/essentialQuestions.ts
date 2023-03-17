@@ -71,23 +71,18 @@ export const EssentialQuestions: EssentialQuestion[] = [
   new EssentialQuestion({
     shouldBeResetWhenIndustryChanges: true,
     isQuestionApplicableToIndustry: (industry) => {
-      return (
-        !!industry.industryOnboardingQuestions.isInterstateTransportApplicable && industry.id === "logistics"
-      );
+      return !!industry.industryOnboardingQuestions.isInterstateLogisticsApplicable;
     },
-    fieldName: "interstateTransport",
+    fieldName: "interstateLogistics",
     contentFieldName: "interstateLogistics",
   }),
 
   new EssentialQuestion({
     shouldBeResetWhenIndustryChanges: true,
     isQuestionApplicableToIndustry: (industry) => {
-      return (
-        !!industry.industryOnboardingQuestions.isInterstateTransportApplicable &&
-        industry.id === "moving-company"
-      );
+      return !!industry.industryOnboardingQuestions.isInterstateMovingApplicable;
     },
-    fieldName: "interstateTransport",
+    fieldName: "interstateMoving",
     contentFieldName: "interstateMoving",
     ariaLabel: "Moves Goods Across State Lines",
   }),
