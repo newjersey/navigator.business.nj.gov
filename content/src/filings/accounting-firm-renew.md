@@ -23,5 +23,5 @@ Your accounting firm registration will expire every three years.
 > **Once completed, you will have:**
 > * A renewed accounting firm registration valid for three years. It will be mailed to your business mailing address on file
 
-> **What if don't renew my registration?**\
+> **What if I don't renew my registration?**\
 > If you don't renew your registration 30 days after expiration, your license will be suspended and you won't be able to legally run your business. You will need to contact your licensing board for reinstatement procedures and associated fees.
