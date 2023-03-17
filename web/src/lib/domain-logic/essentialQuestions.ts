@@ -23,7 +23,7 @@ export const getIsApplicableToFunctionByFieldName = (
   return (industryId: string | undefined): boolean => {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     return EssentialQuestions.find((eQ) => {
-      return eQ.fieldName == fieldName || eQ.contentFieldName == fieldName;
+      return eQ.fieldName === fieldName;
     })!.isQuestionApplicableToIndustry(LookupIndustryById(industryId));
   };
 };
@@ -44,7 +44,6 @@ export const getEssentialQuestion = (industryId: string | undefined) => {
 
 export interface EssentialQuestionObject {
   fieldName: keyof IndustrySpecificData;
-  contentFieldName?: ProfileContentField;
   ariaLabel?: string;
   labels?: Record<string, string>;
   isQuestionApplicableToIndustry: (industry: Industry) => boolean;
@@ -52,7 +51,6 @@ export interface EssentialQuestionObject {
 }
 export class EssentialQuestion implements EssentialQuestionObject {
   fieldName!: keyof IndustrySpecificData;
-  contentFieldName?: ProfileContentField;
   ariaLabel?: string;
   labels?: Record<string, string>;
   isQuestionApplicableToIndustry!: (industry: Industry) => boolean;
@@ -71,24 +69,16 @@ export const EssentialQuestions: EssentialQuestion[] = [
   new EssentialQuestion({
     shouldBeResetWhenIndustryChanges: true,
     isQuestionApplicableToIndustry: (industry) => {
-      return (
-        !!industry.industryOnboardingQuestions.isInterstateTransportApplicable && industry.id === "logistics"
-      );
+      return !!industry.industryOnboardingQuestions.isInterstateLogisticsApplicable;
     },
-    fieldName: "interstateTransport",
-    contentFieldName: "interstateLogistics",
+    fieldName: "interstateLogistics",
   }),
-
   new EssentialQuestion({
     shouldBeResetWhenIndustryChanges: true,
     isQuestionApplicableToIndustry: (industry) => {
-      return (
-        !!industry.industryOnboardingQuestions.isInterstateTransportApplicable &&
-        industry.id === "moving-company"
-      );
+      return !!industry.industryOnboardingQuestions.isInterstateMovingApplicable;
     },
-    fieldName: "interstateTransport",
-    contentFieldName: "interstateMoving",
+    fieldName: "interstateMoving",
     ariaLabel: "Moves Goods Across State Lines",
   }),
   new EssentialQuestion({
@@ -118,7 +108,6 @@ export const EssentialQuestions: EssentialQuestion[] = [
       return !!industry.industryOnboardingQuestions.isPetCareHousingApplicable;
     },
     fieldName: "petCareHousing",
-    contentFieldName: "petCareHousing",
   }),
   new EssentialQuestion({
     shouldBeResetWhenIndustryChanges: true,

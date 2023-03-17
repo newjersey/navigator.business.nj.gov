@@ -125,7 +125,7 @@ export const sendOnboardingOnSubmitEvents = (newProfileData: ProfileData, pageNa
     }
 
     if (getIsApplicableToFunctionByFieldName("interstateMoving")(newProfileData.industryId)) {
-      if (newProfileData.interstateTransport) {
+      if (newProfileData.interstateMoving) {
         analytics.event.onboarding_moving_company_question.submit.yes_moving_across_state_lines();
       } else {
         analytics.event.onboarding_moving_company_question.submit.no_moving_across_state_lines();
@@ -133,7 +133,7 @@ export const sendOnboardingOnSubmitEvents = (newProfileData: ProfileData, pageNa
     }
 
     if (getIsApplicableToFunctionByFieldName("interstateLogistics")(newProfileData.industryId)) {
-      if (newProfileData.interstateTransport) {
+      if (newProfileData.interstateLogistics) {
         analytics.event.onboarding_logistics_business_question.submit.yes_moving_across_state_lines();
       } else {
         analytics.event.onboarding_logistics_business_question.submit.no_not_moving_across_state_lines();

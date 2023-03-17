@@ -585,69 +585,68 @@ describe("buildUserRoadmap", () => {
     });
   });
 
-  describe("interstateTransport", () => {
-    it("does not add interstateTransport add-on if true and industry is not applicable", () => {
-      buildUserRoadmap(generateStartingProfile({ interstateTransport: true, industryId: "generic" }));
-      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("interstate-transport");
+  describe("interstateLogistics", () => {
+    it("does not add interstateLogistics add-on if true and industry is not applicable", () => {
+      buildUserRoadmap(generateStartingProfile({ interstateLogistics: true, industryId: "generic" }));
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("interstate-logistics");
     });
 
-    describe("if industry is moving-company", () => {
-      it("adds interstateTransport add-on if true", () => {
-        buildUserRoadmap(
-          generateStartingProfile({ interstateTransport: true, industryId: "moving-company" })
-        );
-        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("interstate-transport");
-      });
-
-      it("does not add interstateTransport add-on if false", () => {
-        buildUserRoadmap(
-          generateStartingProfile({ interstateTransport: false, industryId: "moving-company" })
-        );
-        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("interstate-transport");
-      });
+    it("adds logistics modification add-on", () => {
+      buildUserRoadmap(generateStartingProfile({ industryId: "logistics" }));
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("logistics-modification");
     });
 
-    describe("if industry is logistics", () => {
-      it("adds logistics modification add-on", () => {
-        buildUserRoadmap(generateStartingProfile({ industryId: "logistics" }));
-        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("logistics-modification");
-      });
-
-      it("adds interstateTransport add-on if true", () => {
-        buildUserRoadmap(generateStartingProfile({ interstateTransport: true, industryId: "logistics" }));
-        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("interstate-transport");
-      });
-
-      it("does not add interstateTransport if false", () => {
-        buildUserRoadmap(generateStartingProfile({ interstateTransport: false, industryId: "logistics" }));
-        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("interstate-transport");
-      });
+    it("adds interstateLogistics add-on if true", () => {
+      buildUserRoadmap(generateStartingProfile({ interstateLogistics: true, industryId: "logistics" }));
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("interstate-logistics");
     });
 
-    describe("if industry is childcare services", () => {
-      it("adds daycare add-on if 6 or more children", () => {
-        buildUserRoadmap(generateStartingProfile({ isChildcareForSixOrMore: true, industryId: "daycare" }));
-        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("daycare");
-        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("family-daycare");
-      });
+    it("does not add interstateLogistics if false", () => {
+      buildUserRoadmap(generateStartingProfile({ interstateLogistics: false, industryId: "logistics" }));
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("interstate-logistics");
+    });
+  });
 
-      it("adds family daycare add-on if 5 children or less", () => {
-        buildUserRoadmap(generateStartingProfile({ isChildcareForSixOrMore: false, industryId: "daycare" }));
-        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("family-daycare");
-        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("daycare");
-      });
+  describe("interstateMoving", () => {
+    it("does not add interstateMoving add-on if true and industry is not applicable", () => {
+      buildUserRoadmap(generateStartingProfile({ interstateMoving: true, industryId: "generic" }));
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("interstate-moving");
     });
 
-    describe("if industry is pet services", () => {
-      it("adds will-sell-pet-care-items add-on if petcare industry and will sell pet care items", () => {
-        buildUserRoadmap(generateStartingProfile({ willSellPetCareItems: true, industryId: "petcare" }));
-        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("will-sell-pet-care-items");
-      });
+    it("adds interstateMoving add-on if true", () => {
+      buildUserRoadmap(generateStartingProfile({ interstateMoving: true, industryId: "moving-company" }));
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("interstate-moving");
+    });
 
-      it("will NOT adds will-sell-pet-care-items add-on if petcare industry and will sell pet care items", () => {
-        buildUserRoadmap(generateStartingProfile({ willSellPetCareItems: false, industryId: "petcare" }));
-        expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("will-sell-pet-care-items");
-      });
+    it("does not add interstateMoving add-on if false", () => {
+      buildUserRoadmap(generateStartingProfile({ interstateMoving: false, industryId: "moving-company" }));
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("interstate-moving");
+    });
+  });
+
+  describe("if industry is childcare services", () => {
+    it("adds daycare add-on if 6 or more children", () => {
+      buildUserRoadmap(generateStartingProfile({ isChildcareForSixOrMore: true, industryId: "daycare" }));
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("daycare");
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("family-daycare");
+    });
+
+    it("adds family daycare add-on if 5 children or less", () => {
+      buildUserRoadmap(generateStartingProfile({ isChildcareForSixOrMore: false, industryId: "daycare" }));
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("family-daycare");
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("daycare");
+    });
+  });
+
+  describe("if industry is pet services", () => {
+    it("adds will-sell-pet-care-items add-on if petcare industry and will sell pet care items", () => {
+      buildUserRoadmap(generateStartingProfile({ willSellPetCareItems: true, industryId: "petcare" }));
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).toContain("will-sell-pet-care-items");
+    });
+
+    it("will NOT adds will-sell-pet-care-items add-on if petcare industry and will sell pet care items", () => {
+      buildUserRoadmap(generateStartingProfile({ willSellPetCareItems: false, industryId: "petcare" }));
+      expect(getLastCalledWith(mockRoadmapBuilder)[0].addOns).not.toContain("will-sell-pet-care-items");
     });
   });
 });

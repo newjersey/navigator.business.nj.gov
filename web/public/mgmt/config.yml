@@ -1371,8 +1371,12 @@ collections:
             widget: boolean
             name: isCarServiceApplicable
             required: false
+          - label: Logistics
+            name: isInterstateLogisticsApplicable
+            widget: boolean
+            required: false
           - label: Moving Company
-            name: isInterstateTransportApplicable
+            name: isInterstateMovingApplicable
             widget: boolean
             required: false
           - label: Childcare Services
