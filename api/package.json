@@ -65,7 +65,7 @@
     "@types/cors": "2.8.13",
     "@types/dedent": "0.7.0",
     "@types/express": "4.17.17",
-    "@types/jest": "29.4.4",
+    "@types/jest": "29.5.0",
     "@types/jsonwebtoken": "9.0.1",
     "@types/lodash": "4.14.191",
     "@types/node": "16.18.16",
