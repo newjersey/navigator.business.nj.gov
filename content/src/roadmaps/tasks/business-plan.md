@@ -6,7 +6,7 @@ callToActionLink: ""
 callToActionText: ""
 ---
 
-Your business plan guides your business and helps you make decisions around operations, staffing, marketing, and financing. Learn [how to structure your business plan](https://business.nj.gov/pages/create-a-business-plan) on our website. 
+Your business plan guides your business and helps you make decisions around operations, staffing, marketing, and financing. Learn [how to structure your business plan](https://business.nj.gov/pages/create-a-business-plan). 
 
 ---
 
