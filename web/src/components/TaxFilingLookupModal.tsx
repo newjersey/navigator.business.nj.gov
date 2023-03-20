@@ -52,14 +52,25 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
     taxId: Config.taxCalendar.modalTaxFieldErrorName,
   };
 
-  const isPublicFiling = LookupLegalStructureById(
-    userData?.profileData.legalStructureId
-  ).requiresPublicFiling;
+  const displayBusinessName = (): boolean => {
+    return LookupLegalStructureById(userData?.profileData.legalStructureId).elementsToDisplay.has(
+      "businessName"
+    );
+  };
 
-  const responsibleOwnerOrBusinessName = () => {
-    return isPublicFiling
-      ? Config.taxCalendar.modalBusinessFieldErrorName
-      : Config.taxCalendar.modalResponsibleOwnerFieldErrorName;
+  const displayResponsibleOwnerName = (): boolean => {
+    return LookupLegalStructureById(userData?.profileData.legalStructureId).elementsToDisplay.has(
+      "responsibleOwnerName"
+    );
+  };
+
+  const responsibleOwnerOrBusinessNameError = () => {
+    if (displayBusinessName()) {
+      return Config.taxCalendar.modalBusinessFieldErrorName;
+    }
+    if (displayResponsibleOwnerName()) {
+      return Config.taxCalendar.modalResponsibleOwnerFieldErrorName;
+    }
   };
 
   const errorAlert = (): ReactElement => {
@@ -68,7 +79,7 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
         <>
           {Config.taxCalendar.failedErrorMessageHeader}
           <ul>
-            <li>{responsibleOwnerOrBusinessName()}</li>
+            <li>{responsibleOwnerOrBusinessNameError()}</li>
           </ul>
         </>
       );
@@ -77,7 +88,7 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
         <>
           {Config.taxCalendar.failedErrorMessageHeader}
           <ul>
-            <li>{responsibleOwnerOrBusinessName()}</li>
+            <li>{responsibleOwnerOrBusinessNameError()}</li>
             <li>{Config.taxCalendar.modalTaxFieldErrorName}</li>
           </ul>
         </>
@@ -100,9 +111,14 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
         profileData.taxId == userData.profileData.taxId ? profileData.encryptedTaxId : undefined;
 
       try {
-        const businessNameToSubmitToTaxApi = isPublicFiling
-          ? profileData.businessName
-          : profileData.responsibleOwnerName;
+        let businessNameToSubmitToTaxApi = "";
+
+        if (displayBusinessName()) {
+          businessNameToSubmitToTaxApi = profileData.businessName;
+        }
+        if (displayResponsibleOwnerName()) {
+          businessNameToSubmitToTaxApi = profileData.responsibleOwnerName;
+        }
 
         userDataToSet = await postTaxFilingsOnboarding({
           taxId: profileData.taxId as string,
@@ -140,12 +156,15 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
       }
 
       if (userDataToSet.taxFilingData.state == "FAILED") {
-        if (userDataToSet.taxFilingData.errorField == "businessName" && isPublicFiling) {
+        if (userDataToSet.taxFilingData.errorField == "businessName" && displayBusinessName()) {
           formContextState.reducer({
             type: FieldStateActionKind.VALIDATION,
             payload: { field: "businessName", invalid: true },
           });
-        } else if (userDataToSet.taxFilingData.errorField == "businessName" && !isPublicFiling) {
+        } else if (
+          userDataToSet.taxFilingData.errorField == "businessName" &&
+          displayResponsibleOwnerName()
+        ) {
           formContextState.reducer({
             type: FieldStateActionKind.VALIDATION,
             payload: { field: "responsibleOwnerName", invalid: true },
@@ -186,13 +205,6 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
     formContextState.reducer({ type: FieldStateActionKind.RESET });
   };
 
-  const shouldShowBusinessNameField = (): boolean => {
-    return isPublicFiling;
-  };
-
-  const shouldShowResponsibleOwnerField = (): boolean => {
-    return !isPublicFiling;
-  };
   return (
     <profileFormContext.Provider value={formContextState}>
       <ProfileDataContext.Provider
@@ -239,7 +251,7 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
             <Content>{Config.taxCalendar.modalBody}</Content>
           </div>
 
-          {shouldShowBusinessNameField() && (
+          {displayBusinessName() && (
             <WithErrorBar hasError={!!formContextState.fieldStates.businessName?.invalid} type="ALWAYS">
               <FieldLabelModal
                 fieldName="businessName"
@@ -255,7 +267,7 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
             </WithErrorBar>
           )}
 
-          {shouldShowResponsibleOwnerField() && (
+          {displayResponsibleOwnerName() && (
             <WithErrorBar
               hasError={!!formContextState.fieldStates.responsibleOwnerName?.invalid}
               type="ALWAYS"
@@ -275,9 +287,11 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
                 overrides={{
                   header: Config.taxCalendar.modalTaxIdHeader,
                   description: Config.taxCalendar.modalTaxIdMarkdown,
-                  postDescription: isPublicFiling
-                    ? undefined
-                    : Config.profileDefaults.fields.taxId.default.disclaimerMd,
+                  postDescription: LookupLegalStructureById(
+                    userData?.profileData.legalStructureId
+                  ).elementsToDisplay.has("taxIdDisclaimer")
+                    ? Config.profileDefaults.fields.taxId.default.disclaimerMd
+                    : undefined,
                 }}
               />
             </div>

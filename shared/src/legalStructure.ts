@@ -4,8 +4,17 @@ export interface LegalStructure {
   readonly requiresPublicFiling: boolean;
   readonly hasTradeName: boolean;
   readonly onboardingOrder: number;
+  readonly elementsToDisplay: Set<ElementsToDisplay>;
 }
-
+type ElementsToDisplay =
+  | "taxIdDisclaimer"
+  | "entityId"
+  | "responsibleOwnerName"
+  | "businessName"
+  | "nexusBusinessElements"
+  | "dbaName"
+  | "formationDocuments"
+  | "formationDate";
 export const LookupLegalStructureById = (id: string | undefined): LegalStructure => {
   return (
     LegalStructures.find((x) => {
@@ -16,6 +25,7 @@ export const LookupLegalStructureById = (id: string | undefined): LegalStructure
       requiresPublicFiling: false,
       hasTradeName: false,
       onboardingOrder: 0,
+      elementsToDisplay: new Set<ElementsToDisplay>(["entityId"]),
     }
   );
 };
@@ -25,8 +35,9 @@ export const LegalStructures: LegalStructure[] = [
     id: "sole-proprietorship",
     name: "Sole Proprietorship",
     requiresPublicFiling: false,
-    hasTradeName: true,
     onboardingOrder: 30,
+    hasTradeName: true,
+    elementsToDisplay: new Set(["taxIdDisclaimer", "responsibleOwnerName"]),
   },
   {
     id: "general-partnership",
@@ -34,6 +45,7 @@ export const LegalStructures: LegalStructure[] = [
     requiresPublicFiling: false,
     hasTradeName: true,
     onboardingOrder: 20,
+    elementsToDisplay: new Set(["taxIdDisclaimer", "responsibleOwnerName"]),
   },
   {
     id: "limited-partnership",
@@ -41,6 +53,14 @@ export const LegalStructures: LegalStructure[] = [
     requiresPublicFiling: true,
     hasTradeName: false,
     onboardingOrder: 70,
+    elementsToDisplay: new Set([
+      "businessName",
+      "nexusBusinessElements",
+      "formationDocuments",
+      "formationDate",
+      "entityId",
+      "dbaName",
+    ]),
   },
   {
     id: "limited-liability-partnership",
@@ -48,6 +68,14 @@ export const LegalStructures: LegalStructure[] = [
     requiresPublicFiling: true,
     hasTradeName: false,
     onboardingOrder: 60,
+    elementsToDisplay: new Set([
+      "businessName",
+      "nexusBusinessElements",
+      "formationDocuments",
+      "formationDate",
+      "entityId",
+      "dbaName",
+    ]),
   },
   {
     id: "limited-liability-company",
@@ -55,6 +83,14 @@ export const LegalStructures: LegalStructure[] = [
     requiresPublicFiling: true,
     hasTradeName: false,
     onboardingOrder: 10,
+    elementsToDisplay: new Set([
+      "businessName",
+      "nexusBusinessElements",
+      "formationDocuments",
+      "formationDate",
+      "entityId",
+      "dbaName",
+    ]),
   },
   {
     id: "c-corporation",
@@ -62,6 +98,14 @@ export const LegalStructures: LegalStructure[] = [
     requiresPublicFiling: true,
     hasTradeName: false,
     onboardingOrder: 40,
+    elementsToDisplay: new Set([
+      "businessName",
+      "nexusBusinessElements",
+      "formationDocuments",
+      "formationDate",
+      "entityId",
+      "dbaName",
+    ]),
   },
   {
     id: "s-corporation",
@@ -69,5 +113,13 @@ export const LegalStructures: LegalStructure[] = [
     requiresPublicFiling: true,
     hasTradeName: false,
     onboardingOrder: 50,
+    elementsToDisplay: new Set([
+      "businessName",
+      "nexusBusinessElements",
+      "formationDocuments",
+      "formationDate",
+      "entityId",
+      "dbaName",
+    ]),
   },
 ];
