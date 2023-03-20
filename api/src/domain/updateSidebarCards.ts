@@ -47,10 +47,13 @@ export const updateSidebarCards: UpdateSidebarCards = (userData: UserData): User
     hideCard("task-progress");
   }
 
-  if (operatingPhase === "UP_AND_RUNNING_OWNING" || operatingPhase === "UP_AND_RUNNING") {
+  if (
+    (operatingPhase === "UP_AND_RUNNING_OWNING" || operatingPhase === "UP_AND_RUNNING") &&
+    cards.includes("welcome")
+  ) {
     showCard("welcome-up-and-running");
     hideCard("welcome");
-  } else {
+  } else if (cards.includes("welcome-up-and-running")) {
     showCard("welcome");
     hideCard("welcome-up-and-running");
   }
