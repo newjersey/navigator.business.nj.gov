@@ -19,7 +19,7 @@
     "spellcheck": "yarn workspaces foreach -v run spellcheck",
     "sync:deps": "yarnw-sync-deps --fix",
     "test": "jest --projects api shared web",
-    "test:ci": "jest --ci --reporters=default --reporters=jest-junit --maxWorkers=2 --collectCoverage=true --coverageDirectory=../coverage/ --projects api shared web",
+    "test:ci": "jest --ci --reporters=default --reporters=jest-junit --maxWorkers=1 --collectCoverage=true --coverageDirectory=../coverage/ --projects api shared web",
     "typecheck": "yarn workspaces foreach -v run typecheck",
     "verify:node": "check-node-version --node $(cat .nvmrc) --npm 8"
   },
