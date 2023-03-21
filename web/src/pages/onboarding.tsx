@@ -97,8 +97,6 @@ const OnboardingPage = (props: Props): ReactElement => {
   const {
     FormFuncWrapper,
     onSubmit,
-    isValid,
-    getErrors,
     state: formContextState,
   } = useFormContextHelper(createProfileFieldErrorMap<OnboardingErrors>());
 
@@ -271,8 +269,6 @@ const OnboardingPage = (props: Props): ReactElement => {
       const currentPage = onboardingFlows[currentFlow].pages[page.current - 1];
       sendOnboardingOnSubmitEvents(newProfileData, currentPage?.name);
       setAnalyticsDimensions(newProfileData);
-      setAlert(undefined);
-      setError(undefined);
 
       if (profileData.foreignBusinessType === "NONE") {
         await router.push(ROUTES.unsupported);
@@ -339,10 +335,9 @@ const OnboardingPage = (props: Props): ReactElement => {
         });
       }
     },
-    () => {
-      scrollToTop();
-      const errors = getErrors();
-      if (errors.length > 0 || !isValid()) {
+    (isValid, errors) => {
+      if (errors.length > 0 && !isValid) {
+        scrollToTop();
         if (errors.includes("ALERT_BAR")) {
           setAlert("ERROR");
         }
@@ -351,6 +346,9 @@ const OnboardingPage = (props: Props): ReactElement => {
           setError(banner[0]);
         }
         headerRef.current?.focus();
+      } else {
+        setError(undefined);
+        setAlert(undefined);
       }
     }
   );

@@ -10,12 +10,11 @@ export const useFormContextHelper = <
   FieldError = Exclude<T[keyof T]["errorTypes"], undefined>[number]
 >(
   initState: T,
-  tabs?: Tab[],
   initTab?: Tab
 ): {
   FormFuncWrapper: (
     onSubmitFunc: () => void | Promise<void>,
-    onErrorFunc?: () => void | Promise<void>
+    onChangeFunc?: (isValid: boolean, errors: FieldError[], pageChange: boolean) => void | Promise<void>
   ) => void;
   onSubmit: (event?: FormEvent<HTMLFormElement>) => void;
   onTabChange: (tab: Tab) => void;
@@ -25,8 +24,7 @@ export const useFormContextHelper = <
   state: FormContextType<T>;
 } => {
   const [submitted, setSubmitted] = useState<boolean>(false);
-
-  const [tab, setTab] = useState<Tab>(initTab ?? (tabs ? tabs[0] : (0 as Tab)));
+  const [tab, setTab] = useState<Tab>(initTab ?? (0 as Tab));
   const [stagingTab, setStagingTab] = useState<Tab | undefined>(undefined);
 
   const fieldStatesReducer: FormContextReducer<T> = (prevState, action) => {
@@ -84,58 +82,75 @@ export const useFormContextHelper = <
   const [fieldStates, fieldStateDispatch] = useReducer<FormContextReducer<T>>(fieldStatesReducer, initState);
   debug && console.log(fieldStates);
 
+  const getErrors = (): FieldError[] =>
+    Object.values(fieldStates)
+      .filter((k) => (k as FieldStatus<FieldError>).invalid && (k as FieldStatus<FieldError>).updated)
+      .flatMap((k) => (k as FieldStatus<FieldError>).errorTypes ?? []);
+
   const FormFuncWrapper: (
     onSubmitFunc: () => void | Promise<void>,
-    onErrorFunc?: () => void | Promise<void>
-  ) => void = (onSubmitFunc, onErrorFunc) => {
+    onChangeFunc?: (isValid: boolean, errors: FieldError[], pageChange: boolean) => void | Promise<void>
+  ) => void = (onSubmitFunc, onChangeFunc) => {
     debug && console.log("wrapper");
+
     useEffect(() => {
       debug && console.log("submitEffect");
 
-      if (submitted || stagingTab) {
-        debug && console.log("submitwrapper");
-        const stillNeedsUpdates = Object.values(fieldStates).some(
-          (k) => (k as FieldStatus<FieldErrorType>).updated === false
-        );
-        debug && console.log(1);
-        debug && console.log(fieldStates);
-        debug && console.log(stillNeedsUpdates);
-        debug && console.log(2);
-        debug && console.log;
-        if (!stillNeedsUpdates) {
-          if (isValid()) {
-            if (submitted) {
-              debug && console.log("runs submit");
-              onSubmitFunc();
-            }
+      const stillNeedsUpdates = Object.values(fieldStates).some(
+        (k) => (k as FieldStatus<FieldErrorType>).updated === false
+      );
 
-            if (stagingTab) {
-              debug && console.log("sets tab");
-              setTab(stagingTab);
-            }
-          } else {
-            debug && console.log("error func");
-            onErrorFunc && onErrorFunc();
-          }
-          stagingTab && setStagingTab(undefined);
-          setSubmitted(false);
-        }
+      debug && console.log("submitwrapper");
+
+      debug && console.log(1);
+      debug && console.log(fieldStates);
+      debug && console.log(stillNeedsUpdates);
+      debug && console.log(2);
+
+      const valid = isValid();
+
+      if (onChangeFunc) {
+        debug && console.log("change func");
+        onChangeFunc && onChangeFunc(valid, getErrors(), submitted || stagingTab != undefined);
       }
+
+      if (!stillNeedsUpdates) {
+        if (valid) {
+          if (submitted) {
+            debug && console.log("runs submit");
+            onSubmitFunc();
+          }
+
+          if (stagingTab) {
+            debug && console.log("sets tab");
+            setTab(stagingTab);
+          }
+        }
+        setSubmitted(false);
+        stagingTab && setStagingTab(undefined);
+      }
+
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [fieldStates, submitted]);
+    }, [fieldStates, submitted, stagingTab]);
   };
 
-  const onSubmit = useCallback((event?: FormEvent<HTMLFormElement>): void => {
-    debug && console.log("submit");
-    event?.preventDefault();
-    setSubmitted(true);
-  }, []);
+  const onSubmit = useCallback(
+    (event?: FormEvent<HTMLFormElement>): void => {
+      debug && console.log("submit");
+      event?.preventDefault();
+      !submitted && setSubmitted(true);
+    },
+    [submitted]
+  );
 
-  const onTabChange = useCallback((tab: Tab): void => {
-    debug && console.log("tab");
-    debug && console.log(tab);
-    setStagingTab(tab);
-  }, []);
+  const onTabChange = useCallback(
+    (_tab: Tab): void => {
+      debug && console.log("tab");
+      debug && console.log(_tab);
+      if (JSON.stringify(_tab) !== JSON.stringify(tab)) setStagingTab(_tab);
+    },
+    [tab]
+  );
 
   const isValid = (): boolean => {
     debug && console.log("form is valid");
@@ -144,11 +159,6 @@ export const useFormContextHelper = <
     );
     return thing;
   };
-
-  const getErrors = (): FieldError[] =>
-    Object.values(fieldStates)
-      .filter((k) => (k as FieldStatus<FieldError>).invalid && (k as FieldStatus<FieldError>).updated)
-      .flatMap((k) => (k as FieldStatus<FieldError>).errorTypes ?? []);
 
   return {
     FormFuncWrapper,

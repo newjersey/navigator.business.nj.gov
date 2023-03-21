@@ -105,7 +105,7 @@ const ProfilePage = (props: Props): ReactElement => {
     tab: profileTab,
     onTabChange: setProfileTab,
     state: formContextState,
-  } = useFormContextHelper(createProfileFieldErrorMap(), profileTabs, props.CMS_ONLY_tab);
+  } = useFormContextHelper(createProfileFieldErrorMap(), props.CMS_ONLY_tab ?? profileTabs[0]);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const redirect = (params?: { [key: string]: any }, routerType = router.push): Promise<boolean> => {
@@ -206,8 +206,8 @@ const ProfilePage = (props: Props): ReactElement => {
         });
       })();
     },
-    () => {
-      setAlert("ERROR");
+    (isValid, _errors, pageChange) => {
+      !isValid && pageChange && setAlert("ERROR");
     }
   );
 
