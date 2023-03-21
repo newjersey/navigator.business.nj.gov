@@ -5,7 +5,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextFieldHelpers";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { FormContextFieldProps } from "@/lib/types/types";
-import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
+import { FormControl, FormControlLabel, FormHelperText, Radio, RadioGroup } from "@mui/material";
 import React, { ReactElement, useContext } from "react";
 
 export const OnboardingLocationInNewJersey = <T,>(props: FormContextFieldProps<T>): ReactElement => {
@@ -69,6 +69,9 @@ export const OnboardingLocationInNewJersey = <T,>(props: FormContextFieldProps<T
             />
           </RadioGroup>
         </FormControl>
+        <FormHelperText className={"text-error-dark"}>
+          {isFormFieldInValid ? contentFromConfig.errorTextRequired : ""}
+        </FormHelperText>
       </div>
     </>
   );
