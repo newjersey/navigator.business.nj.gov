@@ -21,8 +21,9 @@ RUN apt-get install -y libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-
 
 # Install Browsers.
 #Chrome
-RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
-    dpkg -i google-chrome-stable_current_amd64.deb || apt-get -f install -y 
+ARG CHROME_VERSION="110.0.5481.77"
+RUN wget https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_$CHROME_VERSION-1_amd64.deb && \
+    dpkg -i google-chrome-stable_$CHROME_VERSION-1_amd64.deb || apt-get -f install -y 
 
 
 #Edge
