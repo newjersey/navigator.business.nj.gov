@@ -328,7 +328,7 @@ describe("<BusinessFormation />", () => {
     page.fillText("Contact first name", "John");
     page.fillText("Contact last name", "Smith");
     page.fillText("Contact phone number", "123A45a678 90");
-    fireEvent.click(screen.getByLabelText("Credit card"));
+    fireEvent.click(screen.getByLabelText(Config.formation.fields.paymentType.creditCardLabel));
     page.selectCheckbox(Config.formation.fields.corpWatchNotification.checkboxText);
     page.selectCheckboxByTestId("certificateOfStanding");
     page.selectCheckboxByTestId("certifiedCopyOfFormationDocument");
@@ -442,7 +442,7 @@ describe("<BusinessFormation />", () => {
     page.fillText("Contact first name", "John");
     page.fillText("Contact last name", "Smith");
     page.fillText("Contact phone number", "123A45a678 90");
-    fireEvent.click(screen.getByLabelText("Credit card"));
+    fireEvent.click(screen.getByLabelText(Config.formation.fields.paymentType.creditCardLabel));
     page.selectCheckbox(Config.formation.fields.corpWatchNotification.checkboxText);
     page.selectCheckboxByTestId("certificateOfStanding");
     page.selectCheckboxByTestId("certifiedCopyOfFormationDocument");
@@ -539,7 +539,7 @@ describe("<BusinessFormation />", () => {
     page.fillText("Contact first name", "John");
     page.fillText("Contact last name", "Smith");
     page.fillText("Contact phone number", "123A45a678 90");
-    fireEvent.click(screen.getByLabelText("Credit card"));
+    fireEvent.click(screen.getByLabelText(Config.formation.fields.paymentType.creditCardLabel));
     page.selectCheckbox(Config.formation.fields.corpWatchNotification.checkboxText);
 
     page.selectCheckboxByTestId("certificateOfStanding");
@@ -651,7 +651,7 @@ describe("<BusinessFormation />", () => {
     page.fillText("Contact first name", "John");
     page.fillText("Contact last name", "Smith");
     page.fillText("Contact phone number", "123A45a678 90");
-    fireEvent.click(screen.getByLabelText("Credit card"));
+    fireEvent.click(screen.getByLabelText(Config.formation.fields.paymentType.creditCardLabel));
     page.selectCheckbox(Config.formation.fields.corpWatchNotification.checkboxText);
 
     page.selectCheckboxByTestId("certificateOfStanding");
@@ -772,7 +772,7 @@ describe("<BusinessFormation />", () => {
     page.fillText("Contact first name", "John");
     page.fillText("Contact last name", "Smith");
     page.fillText("Contact phone number", "123A45a678 90");
-    fireEvent.click(screen.getByLabelText("Credit card"));
+    fireEvent.click(screen.getByLabelText(Config.formation.fields.paymentType.creditCardLabel));
     page.selectCheckbox(Config.formation.fields.corpWatchNotification.checkboxText);
 
     page.selectCheckboxByTestId("certificateOfStanding");
@@ -886,7 +886,7 @@ describe("<BusinessFormation />", () => {
     page.fillText("Contact first name", "John");
     page.fillText("Contact last name", "Smith");
     page.fillText("Contact phone number", "123A45a678 90");
-    fireEvent.click(screen.getByLabelText("Credit card"));
+    fireEvent.click(screen.getByLabelText(Config.formation.fields.paymentType.creditCardLabel));
     page.selectCheckbox(Config.formation.fields.corpWatchNotification.checkboxText);
 
     page.selectCheckboxByTestId("certificateOfStanding");
