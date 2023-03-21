@@ -1,3 +1,54 @@
+# [5.16.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.15.1...v5.16.0) (2023-03-21)
+
+
+### Bug Fixes
+
+* [[#184700586](https://github.com/newjersey/navigator.business.nj.gov/issues/184700586)] increase option limit for netlify relations dropdowns ([6653e92](https://github.com/newjersey/navigator.business.nj.gov/commit/6653e92fa198ed4a87aa65f11b05400e1587b691))
+* [[#184718036](https://github.com/newjersey/navigator.business.nj.gov/issues/184718036)] welcome card now closes when the close button is hit ([84e9225](https://github.com/newjersey/navigator.business.nj.gov/commit/84e9225a3c2d01ed790f2260390e78f60f1ef930))
+* added updated inline error validations on profile dakota nexus fields ([c2b570b](https://github.com/newjersey/navigator.business.nj.gov/commit/c2b570b466e15fb119845bf17c1b88f56059ded4))
+* adding missing apt package for chrome installation ([39ee8ee](https://github.com/newjersey/navigator.business.nj.gov/commit/39ee8ee2b06b14be6d5b3260a6740a791b27e5e9))
+* cms broken from mui theme and form context ([7e12d6d](https://github.com/newjersey/navigator.business.nj.gov/commit/7e12d6dfa44b80a7743a5e9483cece0dfd71efb2))
+* **deps:** update aws-amplify ([0ecc825](https://github.com/newjersey/navigator.business.nj.gov/commit/0ecc82507bb50e94d26f4b2993e61fddaf77b701))
+* **deps:** update aws-amplify ([410772e](https://github.com/newjersey/navigator.business.nj.gov/commit/410772ee4a2452aaf04545f7ac22cd890772a111))
+* **deps:** update aws-sdk to v3.292.0 ([c7f2cb4](https://github.com/newjersey/navigator.business.nj.gov/commit/c7f2cb47f589cfbb2dd75e1e7ec92e28abefc8b8))
+* **deps:** update aws-sdk to v3.294.0 ([d3c9238](https://github.com/newjersey/navigator.business.nj.gov/commit/d3c9238f29d79f1797ceb3ec09822407ff4b8447))
+* **deps:** update dependency @aws-crypto/client-node to v3.2.0 ([0b2de4e](https://github.com/newjersey/navigator.business.nj.gov/commit/0b2de4ed57ee22b575cd6c536cb0250188b19d83))
+* **deps:** update dependency @aws-crypto/sha256-browser to v4 ([4140466](https://github.com/newjersey/navigator.business.nj.gov/commit/4140466ac1f94eedeabb7eb1afeff73a4421c918))
+* **deps:** update dependency body-parser to v1.20.2 ([b7417ba](https://github.com/newjersey/navigator.business.nj.gov/commit/b7417bad240ef0f0f9a3cba0920a64df5ada41b7))
+* **deps:** update dependency focus-trap-react to v10.1.1 ([fb31a51](https://github.com/newjersey/navigator.business.nj.gov/commit/fb31a51713c88a4fdd1769c783657941654f2c52))
+* **deps:** update dependency ua-parser-js to v1.0.34 ([9cf0ae9](https://github.com/newjersey/navigator.business.nj.gov/commit/9cf0ae9afbf64c41fe968dc3638e319af9b8f195))
+* **deps:** update material-ui ([bb466f6](https://github.com/newjersey/navigator.business.nj.gov/commit/bb466f6a849041b61eb5a674329b2a9948b51699))
+* **deps:** update material-ui ([3211baa](https://github.com/newjersey/navigator.business.nj.gov/commit/3211baa9f480d486281367cb1c51fd0ab8022d67))
+* fixing the onboarding flow after the form refactor ([c55a914](https://github.com/newjersey/navigator.business.nj.gov/commit/c55a914acbccd78dda06ac70289c3ba88891af00))
+* going back to 1 max worker in jest ci due to jest bug ([86a71b7](https://github.com/newjersey/navigator.business.nj.gov/commit/86a71b70817747023354dfc0933394527e4b05a6))
+* removed brackets from test names for CI jest bug ([18b795e](https://github.com/newjersey/navigator.business.nj.gov/commit/18b795e2c9fe1f79f31fa7bc17d858d9c7dea6c7))
+* setting chrome version to last stable build in docker image ([306862d](https://github.com/newjersey/navigator.business.nj.gov/commit/306862de903d1836e2e8080631da71c97d7b6cf6))
+* spellcheck for UCEDC ([7eddf84](https://github.com/newjersey/navigator.business.nj.gov/commit/7eddf849b50fb2344ed6f54a4eda9dafdb9e76d2))
+* updating General Config config ([#5392](https://github.com/newjersey/navigator.business.nj.gov/issues/5392)) ([d44ac47](https://github.com/newjersey/navigator.business.nj.gov/commit/d44ac470b4e287b356cecb08ab2bd54b7e85da24))
+* updating General Config config ([#5393](https://github.com/newjersey/navigator.business.nj.gov/issues/5393)) ([2dde0ad](https://github.com/newjersey/navigator.business.nj.gov/commit/2dde0adb53d531756e4ee6820b1542585e127978))
+* updating General Config config ([#5396](https://github.com/newjersey/navigator.business.nj.gov/issues/5396)) ([cd11a21](https://github.com/newjersey/navigator.business.nj.gov/commit/cd11a21b43126c20434b566dfc56247b8c814bec))
+* updating onboarding inline error for dakota nexus location radio button ([9ce48ff](https://github.com/newjersey/navigator.business.nj.gov/commit/9ce48ff2ce144e1a5e30488875eb7b8c651fff07))
+* updating Tasks - All business-plan ([#5426](https://github.com/newjersey/navigator.business.nj.gov/issues/5426)) ([a4a3686](https://github.com/newjersey/navigator.business.nj.gov/commit/a4a3686506bf6f0be3425cef31b6307e283073a0))
+* updating Tasks - All business-plan ([#5427](https://github.com/newjersey/navigator.business.nj.gov/issues/5427)) ([7017307](https://github.com/newjersey/navigator.business.nj.gov/commit/70173079e899c5b7c5414dbd23ea02cadcf47d29))
+* updating Tasks - All nonprofit-tax-exempt ([#5311](https://github.com/newjersey/navigator.business.nj.gov/issues/5311)) ([45f8b90](https://github.com/newjersey/navigator.business.nj.gov/commit/45f8b905ad863b6f514d8b0ec469008ee64a51f5))
+* updating Tasks - Cannabis Priority Status cannabisPriority-1 ([#5391](https://github.com/newjersey/navigator.business.nj.gov/issues/5391)) ([4d0ddb9](https://github.com/newjersey/navigator.business.nj.gov/commit/4d0ddb9a7460237b793619388b11afdd118d03d5))
+* updating Taxes Filings - All accounting-firm-renew ([#5400](https://github.com/newjersey/navigator.business.nj.gov/issues/5400)) ([10274de](https://github.com/newjersey/navigator.business.nj.gov/commit/10274de76c2c75df3f64c18f34e531adea4204ea))
+* updating Taxes Filings - All accounting-firm-renew ([#5405](https://github.com/newjersey/navigator.business.nj.gov/issues/5405)) ([62c591c](https://github.com/newjersey/navigator.business.nj.gov/commit/62c591c1eb8ed7589e057a75f2642a31a4a987a5))
+* updating Taxes Filings - All annual-report ([#5395](https://github.com/newjersey/navigator.business.nj.gov/issues/5395)) ([d43e0ac](https://github.com/newjersey/navigator.business.nj.gov/commit/d43e0ac748d49ce63aefa7c706d3fba978538ec3))
+* updating Taxes Filings - All annual-report ([#5397](https://github.com/newjersey/navigator.business.nj.gov/issues/5397)) ([ef74d2b](https://github.com/newjersey/navigator.business.nj.gov/commit/ef74d2b1517dbc4679ef199746c05eb6f0214c5d))
+* updating Taxes Filings - All cosmetology-shop-renew ([#5394](https://github.com/newjersey/navigator.business.nj.gov/issues/5394)) ([03bd461](https://github.com/newjersey/navigator.business.nj.gov/commit/03bd4619317af0a59a91ba3ce5e55be190ccf2f5))
+* updating Taxes Filings - All massage-license-renew ([#5399](https://github.com/newjersey/navigator.business.nj.gov/issues/5399)) ([842fd2d](https://github.com/newjersey/navigator.business.nj.gov/commit/842fd2d84759c055707f42aafb137e4411d359c6))
+* updating Taxes Filings - All pharmacy-permit-renew ([#5401](https://github.com/newjersey/navigator.business.nj.gov/issues/5401)) ([8224020](https://github.com/newjersey/navigator.business.nj.gov/commit/822402032dfa807bbaeea27340770040a4d6c1d9))
+
+
+### Features
+
+* [[#183444690](https://github.com/newjersey/navigator.business.nj.gov/issues/183444690)] add confirmation modal for profile formation date deletion ([71e5945](https://github.com/newjersey/navigator.business.nj.gov/commit/71e59455c8cbaff695d22778d2056b0e010c470e))
+* [[#183444690](https://github.com/newjersey/navigator.business.nj.gov/issues/183444690)] update profile formation date field so user can delete the date ([2ee8735](https://github.com/newjersey/navigator.business.nj.gov/commit/2ee8735e855798d6a705d6b588ce406b5ed1cc0b))
+* [[#184125110](https://github.com/newjersey/navigator.business.nj.gov/issues/184125110)] make location optional in formation for NJ ([e0e914a](https://github.com/newjersey/navigator.business.nj.gov/commit/e0e914affe26effd67bce2840f823e2436ff9847))
+* [[#184533733](https://github.com/newjersey/navigator.business.nj.gov/issues/184533733)] share feedback & report something broken prompts live chat ([558b369](https://github.com/newjersey/navigator.business.nj.gov/commit/558b36993f3045ad73cf6e12330a58a35b6c6795))
+* added new agency type to taxFilings ([2d5c52a](https://github.com/newjersey/navigator.business.nj.gov/commit/2d5c52a6aec424f927598e1c206fe37a12d05ec3))
+
 ## [5.15.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.15.0...v5.15.1) (2023-03-13)
 
 
