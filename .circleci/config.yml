@@ -533,7 +533,7 @@ jobs:
       - run:
           name: Glob, Split, and Run Unit Tests
           command: |
-            TEST=$(circleci tests glob "./{shared,web,api}/**/*.test.{j,t}{s,sx}" | circleci tests split --split-by=timings | sed "s/\[/\\\[/g" | sed "s/\]/\\\]/g" | sed "s/\[/\\\[/g" | sed "s/\]/\\\]/g")
+            TEST=$(circleci tests glob "./{shared,web,api}/**/*.test.{j,t}{s,sx}" | circleci tests split --split-by=timings)
             yarn test:ci -- $TEST
       - store_test_results:
           path: coverage/test_results
