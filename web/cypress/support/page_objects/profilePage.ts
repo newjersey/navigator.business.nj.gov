@@ -32,6 +32,10 @@ export class ProfilePage extends OnboardingPage {
     return cy.get(`textarea[name="notes"]`);
   }
 
+  getBusinessFormationDatePicker() {
+    return cy.get('input[name="dateOfFormation"]');
+  }
+
   getSaveButton() {
     return cy.get('[data-testid="save"');
   }
@@ -50,6 +54,11 @@ export class ProfilePage extends OnboardingPage {
   typeTaxId(taxId: string) {
     cy.get('[data-testid="numbers"').click({ force: true });
     this.getTaxId().type(taxId);
+  }
+
+  typeBusinessFormationDate(monthYearString: string) {
+    cy.get('[data-testid="info"').click({ force: true });
+    cy.chooseDatePicker('[name="dateOfFormation"]', monthYearString);
   }
 
   typeEmployerId(EIN: string) {

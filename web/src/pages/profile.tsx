@@ -463,6 +463,21 @@ const ProfilePage = (props: Props): ReactElement => {
           </div>
         )}
 
+        {userData?.profileData.dateOfFormation && (
+          <>
+            <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
+
+            {shouldLockFormationFields ? (
+              <LockedProfileField fieldName="dateOfFormation" valueFormatter={formatDate} />
+            ) : (
+              <>
+                <FieldLabelProfile fieldName="dateOfFormation" />
+                <OnboardingDateOfFormation futureAllowed={true} />
+              </>
+            )}
+          </>
+        )}
+
         <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
 
         {shouldLockFormationFields ? (
@@ -512,24 +527,7 @@ const ProfilePage = (props: Props): ReactElement => {
           {Config.profileDefaults.profileTabRefTitle}
         </h2>
         <ProfileNaicsCode />
-        {userData?.profileData.dateOfFormation && (
-          <>
-            <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
-
-            {shouldLockFormationFields ? (
-              <LockedProfileField fieldName="dateOfFormation" valueFormatter={formatDate} />
-            ) : (
-              <>
-                <FieldLabelProfile fieldName="dateOfFormation" />
-                <OnboardingDateOfFormation futureAllowed={true} />
-              </>
-            )}
-          </>
-        )}
         <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
-        {console.log(
-          LookupLegalStructureById(userData?.profileData.legalStructureId).elementsToDisplay.values()
-        )}
         {LookupLegalStructureById(userData?.profileData.legalStructureId).elementsToDisplay.has(
           "entityId"
         ) && (
@@ -593,6 +591,14 @@ const ProfilePage = (props: Props): ReactElement => {
             <OnboardingSectors />
           </div>
         )}
+        {LookupLegalStructureById(userData?.profileData.legalStructureId).elementsToDisplay.has(
+          "formationDate"
+        ) && (
+          <div className="margin-top-4">
+            <FieldLabelProfile fieldName="dateOfFormation" />
+            <OnboardingDateOfFormation futureAllowed={false} />
+          </div>
+        )}
         <div className="margin-top-4">
           <FieldLabelProfile fieldName="existingEmployees" />
           <OnboardingExistingEmployees />
@@ -622,14 +628,6 @@ const ProfilePage = (props: Props): ReactElement => {
         <h2 className="padding-bottom-3" style={{ fontWeight: 300 }}>
           {Config.profileDefaults.profileTabRefTitle}
         </h2>
-        {LookupLegalStructureById(userData?.profileData.legalStructureId).elementsToDisplay.has(
-          "formationDate"
-        ) && (
-          <>
-            <FieldLabelProfile fieldName="dateOfFormation" />
-            <OnboardingDateOfFormation futureAllowed={false} />
-          </>
-        )}
         <div className="margin-top-4">
           <FieldLabelProfile fieldName="entityId" />
           <OnboardingEntityId handleChangeOverride={showRegistrationModalForGuest()} />
