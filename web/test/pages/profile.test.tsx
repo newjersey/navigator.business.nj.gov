@@ -321,7 +321,6 @@ describe("profile", () => {
         });
         const newark = generateMunicipality({ displayName: "Newark" });
         renderPage({ userData: initialUserData, municipalities: [newark] });
-        chooseTab("numbers");
         expect(getDateOfFormation()).toBe("01/2020");
       });
 
@@ -335,7 +334,6 @@ describe("profile", () => {
           });
           const newark = generateMunicipality({ displayName: "Newark" });
           renderPage({ userData: initialUserData, municipalities: [newark] });
-          chooseTab("numbers");
           fillText("Date of formation", "");
           clickSave();
           expect(getDateOfFormation()).toBe("");
@@ -351,7 +349,6 @@ describe("profile", () => {
           const newark = generateMunicipality({ displayName: "Newark" });
 
           renderPage({ userData: initialUserData, municipalities: [newark] });
-          chooseTab("numbers");
           fillText("Date of formation", "");
 
           clickSave();
@@ -373,7 +370,6 @@ describe("profile", () => {
           const newark = generateMunicipality({ displayName: "Newark" });
 
           renderPage({ userData: initialUserData, municipalities: [newark] });
-          chooseTab("numbers");
           fillText("Date of formation", "");
 
           clickSave();
@@ -1126,6 +1122,7 @@ describe("profile", () => {
       renderPage({ userData: userData, municipalities: [newark] });
 
       fillText("Business name", "Cool Computers");
+      fillText("Date of formation", date.format("MM/YYYY"));
       selectByValue("Sector", "clean-energy");
       fillText("Existing employees", "123");
       selectByText("Location", newark.displayName);
@@ -1135,7 +1132,6 @@ describe("profile", () => {
       chooseTab("numbers");
       fillText("Employer id", "02-3456780");
       fillText("Entity id", "0234567890");
-      fillText("Date of formation", date.format("MM/YYYY"));
       fillText("Tax id", "023456790");
       fillText("Tax id location", "123");
       fillText("Tax pin", "6666");
@@ -1202,11 +1198,11 @@ describe("profile", () => {
       expect(screen.queryByLabelText("Ownership")).toHaveTextContent(`${veteran}, ${woman}`);
       expect(getRadioButtonFromFormControlLabel("home-based-business-radio-false")).toBeChecked();
       expect(getExistingEmployeesValue()).toEqual("123");
+      expect(getDateOfFormation()).toEqual(date.format("MM/YYYY"));
       chooseTab("numbers");
       expect(getEmployerIdValue()).toEqual("12-3456789");
       expect(getEntityIdValue()).toEqual("1234567890");
       expect(getTaxIdValue()).toEqual("123-456-790");
-      expect(getDateOfFormation()).toEqual(date.format("MM/YYYY"));
       expect(getTaxPinValue()).toEqual("6666");
       chooseTab("notes");
       expect(getNotesValue()).toEqual("whats appppppp");
@@ -1320,7 +1316,7 @@ describe("profile", () => {
       expect(screen.getByTestId("info")).toBeInTheDocument();
     });
 
-    it("display date of formation input for non trade name businesses", () => {
+    it("displays date of formation input for public filing businesses", () => {
       const initialUserData = generateUserData({
         profileData: generateProfileData({
           businessPersona: "OWNING",
@@ -1329,8 +1325,6 @@ describe("profile", () => {
       });
       const newark = generateMunicipality({ displayName: "Newark" });
       renderPage({ userData: initialUserData, municipalities: [newark] });
-      chooseTab("numbers");
-
       expect(screen.getByLabelText("Date of formation")).toBeInTheDocument();
     });
 
@@ -1343,8 +1337,6 @@ describe("profile", () => {
       });
       const newark = generateMunicipality({ displayName: "Newark" });
       renderPage({ userData: initialUserData, municipalities: [newark] });
-      chooseTab("numbers");
-
       expect(screen.queryByLabelText("Date of formation")).not.toBeInTheDocument();
     });
   });
