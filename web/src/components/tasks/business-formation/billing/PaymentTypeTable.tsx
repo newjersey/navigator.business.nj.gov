@@ -12,7 +12,7 @@ import React, { ReactElement, useContext, useEffect, useState } from "react";
 export const PaymentTypeTable = (): ReactElement => {
   const FIELD = "paymentType";
   const { Config } = useConfig();
-  const { state, setFormationFormData } = useContext(BusinessFormationContext);
+  const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
 
   const achPaymentCost = Number.parseFloat(Config.formation.fields.paymentType.paymentCosts.ach);
   const ccPaymentCostExtra = Number.parseFloat(
@@ -64,6 +64,7 @@ export const PaymentTypeTable = (): ReactElement => {
         paymentType: event.target.value as PaymentType,
       };
     });
+    setFieldsInteracted([FIELD]);
   };
 
   const hasError = doesFieldHaveError(FIELD);
@@ -98,9 +99,6 @@ export const PaymentTypeTable = (): ReactElement => {
                   color={hasError ? "error" : "primary"}
                   checked={state.formationFormData.paymentType === "CC"}
                   onChange={handleChange}
-                  inputProps={{
-                    "aria-label": "Credit card",
-                  }}
                   value="CC"
                   name="radio-buttons"
                 />
@@ -108,7 +106,7 @@ export const PaymentTypeTable = (): ReactElement => {
             </td>
             <td>
               <label
-                htmlFor="creditCardRadio"
+                htmlFor="paymentTypeCreditCardRadio"
                 className={
                   hasError
                     ? "text-error-dark"
@@ -133,9 +131,6 @@ export const PaymentTypeTable = (): ReactElement => {
                   checked={state.formationFormData.paymentType === "ACH"}
                   onChange={handleChange}
                   value="ACH"
-                  inputProps={{
-                    "aria-label": "E check",
-                  }}
                   name="radio-buttons"
                 />
               </div>

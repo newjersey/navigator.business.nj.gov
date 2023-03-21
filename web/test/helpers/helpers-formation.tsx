@@ -419,7 +419,7 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
   };
 
   const completeRequiredBillingFields = () => {
-    fireEvent.click(screen.getByLabelText("Credit card"));
+    fireEvent.click(screen.getByLabelText(Config.formation.fields.paymentType.creditCardLabel));
     fillText("Contact first name", "John");
     fillText("Contact last name", "Smith");
     fillText("Contact phone number", "1234567890");

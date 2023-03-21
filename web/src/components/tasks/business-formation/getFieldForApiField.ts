@@ -5,6 +5,16 @@ export const UNKNOWN_API_ERROR_FIELD = "UNKNOWN_API_ERROR_FIELD";
 
 const fieldToApiFieldMapping: Record<string, string> = {
   agentNumber: "Registered Agent - Id",
+  agentName: "Registered Agent - Name",
+  agentEmail: "Registered Agent - Email",
+  contactFirstName: "Contact First Name",
+  contactLastName: "Contact Last Name",
+  contactPhoneNumber: "Contact Phone Number",
+  agentOfficeAddressLine1: "Registered Agent - Street Address - Address1",
+  agentOfficeAddressLine2: "Registered Agent - Street Address - Address2",
+  agentOfficeAddressMunicipality: "Registered Agent - Street Address - City",
+  agentOfficeAddressZipCode: "Registered Agent - Street Address - Zipcode",
+  paymentType: "Select Payment Type",
 };
 
 const apiFieldToFieldMapping = invert(fieldToApiFieldMapping);

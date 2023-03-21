@@ -119,8 +119,10 @@ describe("Formation - BillingStep", () => {
         .checked
     ).toBe(true);
 
-    expect(page.getInputElementByLabel("Credit card").checked).toBe(true);
-    expect(page.getInputElementByLabel("E check").checked).toBe(false);
+    expect(page.getInputElementByLabel(Config.formation.fields.paymentType.creditCardLabel).checked).toBe(
+      true
+    );
+    expect(page.getInputElementByLabel(Config.formation.fields.paymentType.achLabel).checked).toBe(false);
   });
 
   describe("certificateOfStanding", () => {
@@ -210,11 +212,11 @@ describe("Formation - BillingStep", () => {
     expect(screen.getByLabelText(subtotalLabel)).toHaveTextContent(finalTotal.toString());
     expect(screen.getByLabelText(totalLabel)).toHaveTextContent(finalTotal.toString());
 
-    fireEvent.click(screen.getByLabelText("Credit card"));
+    fireEvent.click(screen.getByLabelText(Config.formation.fields.paymentType.creditCardLabel));
     expect(screen.getByLabelText(totalLabel)).toHaveTextContent(
       (finalTotal + ccInitialCost + ccExtraCost).toString()
     );
-    fireEvent.click(screen.getByLabelText("E check"));
+    fireEvent.click(screen.getByLabelText(Config.formation.fields.paymentType.achLabel));
     const numberOfDocuments = 2;
     expect(screen.getByLabelText(totalLabel)).toHaveTextContent(
       (finalTotal + achCost * numberOfDocuments).toString()
