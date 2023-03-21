@@ -5,11 +5,7 @@ id: pharmacy-permit-renew
 callToActionLink: https://www.njconsumeraffairs.gov/renewals/Pages/default.aspx
 callToActionText: Renew My Permit
 ---
-Your pharmacy permit will expire every year. You will receive a renewal notice in the mail at least 2 weeks prior to the start of the renewal period.  
-
-:::infoAlert 
- You will only see the option to renew online once the renewal period opens for your pharmacy permit.
-:::
+Your pharmacy permit will expire every year. 
 
 - - -
 
@@ -17,14 +13,13 @@ Your pharmacy permit will expire every year. You will receive a renewal notice i
 
 * Business name
 * Permit number 
-* Registration code from your renewal notice
+* Registration code from your renewal notice (sent to you in the mail at least two weeks prior to your expiration date)
 * Current mailing address
 * Current business address
-* Pay the associated fees for the registration renewal
+* Pay the associated fees
 
-> **Once completed, you will have:**  
->
+> **Once completed, you will have:** 
 > * A renewed pharmacy permit valid for one year. It will be mailed to your business mailing address on file
->
+
 > **What if don't renew my registration?**\
-> If you don't renew your registration after its expiration, your permit will be suspended and you won't be able to legally operate your business. You will have to contact your licensing board for reinstatement procedures and associated fees.
+> If you don't renew your registration 30 days after its expiration, your permit will be suspended and you won't be able to legally operate your business. You will have to contact your licensing board for reinstatement procedures and associated fees.
