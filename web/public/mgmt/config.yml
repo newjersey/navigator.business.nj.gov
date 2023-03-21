@@ -2471,7 +2471,6 @@ collections:
             fields:
               - { label: Calendar Header, name: calendarHeader, widget: string }
               - { label: Empty Calendar Title Text, name: emptyCalendarTitleText, widget: string }
-              - { label: Empty Calendar Body Text, name: emptyCalendarBodyText, widget: text }
               - { label: Calendar Legal Text, name: calendarLegalText, widget: string }
               - { label: Calendar List View Button, name: calendarListViewButton, widget: string }
               - { label: Calendar Grid View Button, name: calendarGridViewButton, widget: string }
@@ -2490,15 +2489,16 @@ collections:
                 }
               - { label: Calendar Feedback Button Text, name: calendarFeedbackButtonText, widget: string }
               - {
-                  label: Calendar Empty Grid Description Markdown,
+                  label: Calendar Empty Grid Description,
                   name: calendarEmptyGridDescriptionMarkdown,
                   widget: markdown,
                 }
               - {
-                  label: Calendar Empty List Description Markdown,
+                  label: Calendar Empty List Description,
                   name: calendarEmptyListDescriptionMarkdown,
                   widget: markdown,
                 }
+              - { label: Calendar Add Formation Date to Profile, name: calendarAddDateMd, widget: markdown }
 
       - label: "Dashboard Modals"
         name: "dashboard-config-modals"
