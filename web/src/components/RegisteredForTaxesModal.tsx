@@ -68,7 +68,7 @@ export const RegisteredForTaxesModal = (props: Props): ReactElement => {
   const showBusinessField = (): boolean => {
     return (
       userData?.profileData.businessName === "" &&
-      LookupLegalStructureById(userData?.profileData.legalStructureId).requiresPublicFiling
+      LookupLegalStructureById(userData?.profileData.legalStructureId).elementsToDisplay.has("businessName")
     );
   };
 
@@ -89,7 +89,7 @@ export const RegisteredForTaxesModal = (props: Props): ReactElement => {
     return (
       userData.profileData.needsNexusDbaName &&
       userData.profileData.nexusDbaName === "" &&
-      LookupLegalStructureById(userData?.profileData.legalStructureId).requiresPublicFiling
+      LookupLegalStructureById(userData?.profileData.legalStructureId).elementsToDisplay.has("dbaName")
     );
   };
 

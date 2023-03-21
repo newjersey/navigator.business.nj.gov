@@ -84,6 +84,7 @@ export const OnboardingForeignBusinessType = <T,>(props: Props<T>): ReactElement
               return (
                 <FormControlLabel
                   key={id}
+                  className="margin-x-0"
                   control={
                     <ValidatedCheckbox
                       name="foreign-business-type"
