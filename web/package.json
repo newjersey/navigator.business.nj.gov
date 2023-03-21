@@ -164,7 +164,7 @@
     "require-from-string": "2.0.2",
     "rimraf": "4.4.0",
     "sass": "1.59.3",
-    "sass-loader": "13.2.0",
+    "sass-loader": "13.2.1",
     "storybook-addon-pseudo-states": "1.15.2",
     "style-loader": "3.3.2",
     "ts-jest": "29.0.5",
