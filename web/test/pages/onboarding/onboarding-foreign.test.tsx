@@ -440,10 +440,12 @@ describe("onboarding - foreign business", () => {
       });
       expect(screen.getByTestId("step-5")).toBeInTheDocument();
       expect(screen.queryByTestId("step-6")).not.toBeInTheDocument();
-      expect(
-        screen.getByText(Config.profileDefaults.fields.nexusLocationInNewJersey.default.errorTextRequired)
-      ).toBeInTheDocument();
-      expect(screen.getByTestId("banner-alert-REQUIRED_NEXUS_LOCATION_IN_NJ")).toBeInTheDocument();
+      expect(screen.getByTestId("banner-alert-REQUIRED_NEXUS_LOCATION_IN_NJ")).toHaveTextContent(
+        Config.profileDefaults.fields.nexusLocationInNewJersey.default.errorTextRequired
+      );
+      expect(screen.getByTestId("location-in-new-jersey")).toHaveTextContent(
+        Config.profileDefaults.fields.nexusLocationInNewJersey.default.errorTextRequired
+      );
     });
   });
 
