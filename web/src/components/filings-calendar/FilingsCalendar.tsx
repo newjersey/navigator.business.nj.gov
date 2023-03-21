@@ -1,6 +1,7 @@
 import { ArrowTooltip } from "@/components/ArrowTooltip";
 import { Content } from "@/components/Content";
 import { FeedbackModal } from "@/components/feedback-modal/FeedbackModal";
+import { EmptyCalendar } from "@/components/filings-calendar/EmptyCalendar";
 import { FilingsCalendarAsList } from "@/components/filings-calendar/FilingsCalendarAsList";
 import { FilingsCalendarGrid } from "@/components/filings-calendar/FilingsCalendarGrid";
 import { FilingsCalendarTaxAccess } from "@/components/filings-calendar/FilingsCalendarTaxAccess";
@@ -9,13 +10,16 @@ import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
-import { ROUTES } from "@/lib/domain-logic/routes";
 import { MediaQueries } from "@/lib/PageSizes";
 import { OperateReference } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
-import { getCurrentDate, LookupOperatingPhaseById, UserData } from "@businessnjgovnavigator/shared/index";
+import {
+  getCurrentDate,
+  LookupLegalStructureById,
+  LookupOperatingPhaseById,
+  UserData,
+} from "@businessnjgovnavigator/shared/index";
 import { useMediaQuery } from "@mui/material";
-import { useRouter } from "next/router";
 import { ReactElement, useState } from "react";
 
 interface Props {
@@ -28,7 +32,6 @@ export const FilingsCalendar = (props: Props): ReactElement => {
   const userDataFromHook = useUserData();
   const update = userDataFromHook.update;
   const userData = props.CMS_ONLY_fakeUserData ?? userDataFromHook.userData;
-  const router = useRouter();
   const [showModal, setShowModal] = useState<boolean>(false);
 
   const currentDate = getCurrentDate();
@@ -37,16 +40,20 @@ export const FilingsCalendar = (props: Props): ReactElement => {
 
   const isLargeScreen = useMediaQuery(MediaQueries.tabletAndUp);
 
-  const editOnClick = () => {
-    analytics.event.roadmap_profile_edit_button.click.go_to_profile_screen();
-    router.push(ROUTES.profile);
-  };
-
   const shouldRenderFilingsCalendarTaxAccess = (userData?: UserData): boolean => {
     if (!userData) {
       return false;
     }
     return LookupOperatingPhaseById(userData.profileData.operatingPhase).displayTaxAccessButton;
+  };
+
+  const showFormationDatePrompt = (): boolean => {
+    if (!userData) return false;
+    return (
+      LookupLegalStructureById(userData.profileData.legalStructureId).elementsToDisplay.has(
+        "formationDate"
+      ) && !userData.profileData.dateOfFormation
+    );
   };
 
   const renderCalendar = (): ReactElement => {
@@ -167,6 +174,11 @@ export const FilingsCalendar = (props: Props): ReactElement => {
         {userData?.taxFilingData?.filings && userData?.taxFilingData.filings.length > 0 ? (
           <>
             {renderCalendar()}
+            {showFormationDatePrompt() && (
+              <div data-testid="formation-date-prompt" className="margin-top-2">
+                <Content>{Config.dashboardDefaults.calendarAddDateMd}</Content>
+              </div>
+            )}
             <div className="margin-top-2">
               <div className="h6-styling">
                 <span className="text-base-dark">{Config.dashboardDefaults.calendarLegalText}</span>{" "}
@@ -183,13 +195,14 @@ export const FilingsCalendar = (props: Props): ReactElement => {
             </div>
           </>
         ) : (
-          <div data-testid="empty-calendar" className="padding-y-0">
-            <div className="flex flex-column space-between fac text-align-center flex-desktop:grid-col usa-prose padding-y-205 padding-x-3">
-              <Content>{Config.dashboardDefaults.emptyCalendarTitleText}</Content>
-              <img className="padding-y-2" src={`/img/empty-trophy-illustration.png`} alt="empty calendar" />
-              <Content onClick={editOnClick}>{Config.dashboardDefaults.emptyCalendarBodyText}</Content>
-            </div>
-          </div>
+          <>
+            <EmptyCalendar />
+            {showFormationDatePrompt() && (
+              <div data-testid="formation-date-prompt" className="margin-top-2">
+                <Content>{Config.dashboardDefaults.calendarAddDateMd}</Content>
+              </div>
+            )}
+          </>
         )}
       </div>
       {showModal && (

@@ -9,10 +9,13 @@ import {
   generateTaxFiling,
   generateTaxFilingData,
   generateUserData,
+  publicFilingLegalStructures,
   randomLegalStructure,
+  tradeNameLegalStructures,
 } from "@/test/factories";
 import { markdownToText, randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import { useMockRouter } from "@/test/mock/mockRouter";
+import { useMockProfileData } from "@/test/mock/mockUseUserData";
 import {
   currentUserData,
   setupStatefulUserDataContext,
@@ -54,18 +57,10 @@ function setupMockAnalytics(): typeof analytics {
   };
 }
 
-jest.mock("@mui/material", () => {
-  return mockMaterialUI();
-});
-jest.mock("@/lib/data-hooks/useUserData", () => {
-  return { useUserData: jest.fn() };
-});
-jest.mock("@/lib/data-hooks/useRoadmap", () => {
-  return { useRoadmap: jest.fn() };
-});
-jest.mock("next/router", () => {
-  return { useRouter: jest.fn() };
-});
+jest.mock("@mui/material", () => mockMaterialUI());
+jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
+jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
+jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
 
 const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
@@ -391,9 +386,59 @@ describe("<FilingsCalendar />", () => {
     expect(
       screen.getByText(markdownToText(Config.dashboardDefaults.emptyCalendarTitleText))
     ).toBeInTheDocument();
-    expect(
-      screen.getByText(markdownToText(Config.dashboardDefaults.emptyCalendarBodyText))
-    ).toBeInTheDocument();
+  });
+
+  describe("formation date prompt", () => {
+    it.each(publicFilingLegalStructures)(
+      "shows formation date prompt if %s and not yet entered Formation Date",
+      (legalStructureId) => {
+        const userData = generateUserData({
+          profileData: generateProfileData({ dateOfFormation: undefined, legalStructureId }),
+          taxFilingData: generateTaxFilingData({ filings: [] }),
+        });
+        renderFilingsCalendar({}, userData);
+        expect(screen.getByTestId("formation-date-prompt")).toBeInTheDocument();
+      }
+    );
+
+    it.each(publicFilingLegalStructures)(
+      "shows formation date prompt if %s and not yet entered Formation Date even if other filings exist",
+      (legalStructureId) => {
+        const userData = generateUserData({
+          profileData: generateProfileData({ dateOfFormation: undefined, legalStructureId }),
+          taxFilingData: generateTaxFilingData({
+            filings: [generateTaxFiling({ identifier: "filing1" })],
+          }),
+        });
+        const operateReferences: Record<string, OperateReference> = {
+          filing1: generateOperateReference({}),
+        };
+        useMockProfileData({ dateOfFormation: undefined, legalStructureId });
+        renderFilingsCalendar(operateReferences, userData);
+        expect(screen.getByTestId("formation-date-prompt")).toBeInTheDocument();
+      }
+    );
+
+    it.each(publicFilingLegalStructures)(
+      "does not show formation date prompt if %s and has entered Formation Date",
+      (legalStructureId) => {
+        const userData = generateUserData({
+          profileData: generateProfileData({ dateOfFormation: "2023-01-01", legalStructureId }),
+          taxFilingData: generateTaxFilingData({ filings: [] }),
+        });
+        renderFilingsCalendar({}, userData);
+        expect(screen.queryByTestId("formation-date-prompt")).not.toBeInTheDocument();
+      }
+    );
+
+    it.each(tradeNameLegalStructures)("does not show formation date prompt if %s", (legalStructureId) => {
+      const userData = generateUserData({
+        profileData: generateProfileData({ legalStructureId }),
+        taxFilingData: generateTaxFilingData({ filings: [] }),
+      });
+      renderFilingsCalendar({}, userData);
+      expect(screen.queryByTestId("formation-date-prompt")).not.toBeInTheDocument();
+    });
   });
 
   it("displays filings calendar as list with annual report date", () => {

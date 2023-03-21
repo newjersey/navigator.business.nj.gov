@@ -727,3 +727,11 @@ export const randomPublicFilingLegalStructure = (): string => {
 export const randomTradeNameLegalStructure = (): string => {
   return randomElementFromArray(LegalStructures.filter((x) => x.hasTradeName)).id;
 };
+
+export const publicFilingLegalStructures: string[] = LegalStructures.filter(
+  (x) => x.requiresPublicFiling
+).map((it) => it.id);
+
+export const tradeNameLegalStructures: string[] = LegalStructures.filter((x) => x.hasTradeName).map(
+  (it) => it.id
+);
