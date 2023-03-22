@@ -77,11 +77,8 @@ export type FormationFieldErrorState = {
 
 export const profileFieldsFromConfig = getMergedConfig().profileDefaults.fields;
 
-export type IndustrySpecificDataAddOnFields = "interstateLogistics" | "interstateMoving";
-
 export type ProfileContentField = Exclude<
-  (keyof ProfileData | keyof IndustrySpecificData | IndustrySpecificDataAddOnFields) &
-    keyof typeof profileFieldsFromConfig,
+  (keyof ProfileData | keyof IndustrySpecificData) & keyof typeof profileFieldsFromConfig,
   "businessPersona"
 >;
 
