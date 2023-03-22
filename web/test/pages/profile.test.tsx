@@ -2009,6 +2009,109 @@ describe("profile", () => {
     });
   });
 
+  describe("profile opportunities alert", () => {
+    const ProfileConfig = Config.profileDefaults.fields;
+
+    const phasesWhereAlertTrue = OperatingPhases.filter((it) => it.displayProfileOpportunityAlert).map(
+      (it) => it.id
+    );
+    const phasesWhereAlertFalse = OperatingPhases.filter((it) => !it.displayProfileOpportunityAlert).map(
+      (it) => it.id
+    );
+
+    it.each(phasesWhereAlertTrue)("displays alert for %s", (operatingPhase) => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          operatingPhase,
+          dateOfFormation: undefined,
+        }),
+      });
+      renderPage({ userData });
+
+      expect(screen.getByTestId("opp-alert")).toBeInTheDocument();
+    });
+
+    it.each(phasesWhereAlertFalse)("does not display alert for %s", (operatingPhase) => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          operatingPhase,
+          dateOfFormation: undefined,
+        }),
+      });
+      renderPage({ userData });
+
+      expect(screen.queryByTestId("opp-alert")).not.toBeInTheDocument();
+    });
+
+    it("lists each unanswered funding/certification question", () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          operatingPhase: "UP_AND_RUNNING_OWNING",
+          dateOfFormation: undefined,
+          existingEmployees: undefined,
+          municipality: undefined,
+          homeBasedBusiness: undefined,
+          ownershipTypeIds: [],
+        }),
+      });
+      renderPage({ userData });
+
+      expect(screen.getByTestId("opp-alert")).toHaveTextContent(ProfileConfig.dateOfFormation.default.header);
+      expect(screen.getByTestId("opp-alert")).toHaveTextContent(
+        ProfileConfig.existingEmployees.overrides.OWNING.header
+      );
+      expect(screen.getByTestId("opp-alert")).toHaveTextContent(ProfileConfig.municipality.default.header);
+      expect(screen.getByTestId("opp-alert")).toHaveTextContent(
+        ProfileConfig.homeBasedBusiness.default.header
+      );
+      expect(screen.getByTestId("opp-alert")).toHaveTextContent(
+        ProfileConfig.ownershipTypeIds.overrides.OWNING.header
+      );
+    });
+
+    it("removes question from alert when it gets answered", () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          operatingPhase: "UP_AND_RUNNING_OWNING",
+          dateOfFormation: undefined,
+          existingEmployees: undefined,
+        }),
+      });
+      renderPage({ userData });
+
+      expect(screen.getByTestId("opp-alert")).toHaveTextContent(ProfileConfig.dateOfFormation.default.header);
+      expect(screen.getByTestId("opp-alert")).toHaveTextContent(
+        ProfileConfig.existingEmployees.overrides.OWNING.header
+      );
+
+      fillText("Existing employees", "12");
+
+      expect(screen.getByTestId("opp-alert")).toHaveTextContent(ProfileConfig.dateOfFormation.default.header);
+      expect(screen.getByTestId("opp-alert")).not.toHaveTextContent(
+        ProfileConfig.existingEmployees.overrides.OWNING.header
+      );
+    });
+
+    it("does not display alert if all funding/certification questions are answered", () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          operatingPhase: "UP_AND_RUNNING_OWNING",
+          dateOfFormation: "2023-03-01",
+          municipality: generateMunicipality({}),
+          homeBasedBusiness: true,
+          ownershipTypeIds: ["none"],
+          existingEmployees: undefined,
+        }),
+      });
+      renderPage({ userData });
+      expect(screen.getByTestId("opp-alert")).toHaveTextContent(
+        ProfileConfig.existingEmployees.overrides.OWNING.header
+      );
+      fillText("Existing employees", "12");
+      expect(screen.queryByTestId("opp-alert")).not.toBeInTheDocument();
+    });
+  });
+
   const fillText = (label: string, value: string) => {
     fireEvent.change(screen.getByLabelText(label), { target: { value: value } });
     fireEvent.blur(screen.getByLabelText(label));

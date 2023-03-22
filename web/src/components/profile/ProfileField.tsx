@@ -20,7 +20,7 @@ export const ProfileField = (props: Props): ReactElement => {
 
   return (
     <>
-      <div className="margin-y-4">
+      <div className="margin-y-4" id={`question-${props.fieldName}`}>
         {props.locked ? (
           <LockedProfileField fieldName={props.fieldName} valueFormatter={props.lockedValueFormatter} />
         ) : (

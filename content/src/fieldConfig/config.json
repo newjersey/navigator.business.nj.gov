@@ -337,7 +337,8 @@
     "escapeModalReturn": "Continue without saving.",
     "successTextHeader": "Profile Updated",
     "certificationDocFileTitle": "Certified Copy of Formation",
-    "profileTabInfoTitle": "Business Information"
+    "profileTabInfoTitle": "Business Information",
+    "profileCompletionAlert": "Complete the information below to customize your certifications, funding opportunities, and annual report deadline:"
   },
   "unsupportedNavigatorUserPage": {
     "title": "Chat with a New Jersey Business Representative",

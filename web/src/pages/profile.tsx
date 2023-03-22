@@ -30,6 +30,7 @@ import { PageSkeleton } from "@/components/PageSkeleton";
 import { Documents } from "@/components/profile/Documents";
 import { EscapeModal } from "@/components/profile/EscapeModal";
 import { ProfileField } from "@/components/profile/ProfileField";
+import { ProfileOpportunitiesAlert } from "@/components/profile/ProfileOpportunitiesAlert";
 import { ProfileSnackbarAlert } from "@/components/profile/ProfileSnackbarAlert";
 import { ProfileTabHeader } from "@/components/profile/ProfileTabHeader";
 import { ProfileTabNav } from "@/components/profile/ProfileTabNav";
@@ -50,7 +51,7 @@ import { checkQueryValue, QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import { loadAllMunicipalities } from "@/lib/static/loadMunicipalities";
 import { createProfileFieldErrorMap, OnboardingStatus, profileTabs, ProfileTabs } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
-import { getFlow, useMountEffectWhenDefined } from "@/lib/utils/helpers";
+import { getFlow, useMountEffectWhenDefined, useScrollToPathAnchor } from "@/lib/utils/helpers";
 import { getTaskFromRoadmap } from "@/lib/utils/roadmap-helpers";
 import {
   BusinessPersona,
@@ -117,6 +118,8 @@ const ProfilePage = (props: Props): ReactElement => {
     const urlParams = params ? `?${new URLSearchParams(params).toString()}` : "";
     return routerType(`${ROUTES.dashboard}${urlParams}`);
   };
+
+  useScrollToPathAnchor();
 
   useMountEffectWhenDefined(() => {
     if (userData) {
@@ -679,6 +682,8 @@ const ProfilePage = (props: Props): ReactElement => {
                       </div>
                     ) : (
                       <>
+                        {LookupOperatingPhaseById(profileData.operatingPhase)
+                          .displayProfileOpportunityAlert && <ProfileOpportunitiesAlert />}
                         <form onSubmit={onSubmit} className={`usa-prose onboarding-form margin-top-2`}>
                           {getElements()}
 
