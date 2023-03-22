@@ -65,6 +65,7 @@ describe("Formation - BillingStep", () => {
       formationResponse: undefined,
       getFilingResponse: undefined,
       completedFilingPayment: false,
+      businessNameAvailability: undefined,
     };
     const user = initialUser ? generateUser(initialUser) : generateUser({});
     // eslint-disable-next-line testing-library/render-result-naming-convention

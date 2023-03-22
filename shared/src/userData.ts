@@ -18,7 +18,7 @@ export interface UserData {
   readonly lastUpdatedISO: string | undefined;
 }
 
-export const CURRENT_VERSION = 107;
+export const CURRENT_VERSION = 108;
 
 export const createEmptyUserData = (user: BusinessUser): UserData => {
   return {
@@ -53,6 +53,7 @@ export const createEmptyUserData = (user: BusinessUser): UserData => {
       formationResponse: undefined,
       getFilingResponse: undefined,
       completedFilingPayment: false,
+      businessNameAvailability: undefined,
     },
   };
 };

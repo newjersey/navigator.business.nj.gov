@@ -8,6 +8,7 @@ import { migrate_v103_to_v104 } from "./v104_add_needs_nexus_dba_name_field";
 import { migrate_v104_to_v105 } from "./v105_add_pet_care_essential_question";
 import { migrate_v105_to_v106 } from "./v106_add_pet_care_housing_essential_question";
 import { migrate_v106_to_v107 } from "./v107_refactor_interstate_transport_essential_question";
+import { migrate_v107_to_v108 } from "./v108_add_business_name_search_to_formation_data";
 import { migrate_v9_to_v10 } from "./v10_add_mynjuserkey";
 import { migrate_v10_to_v11 } from "./v11_change_license_statuses";
 import { migrate_v11_to_v12 } from "./v12_remove_scorp";
@@ -218,4 +219,5 @@ export const Migrations: MigrationFunction[] = [
   migrate_v104_to_v105,
   migrate_v105_to_v106,
   migrate_v106_to_v107,
+  migrate_v107_to_v108,
 ];

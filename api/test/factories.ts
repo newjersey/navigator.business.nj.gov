@@ -110,6 +110,7 @@ export const generateUserData = (overrides: Partial<UserData>): UserData => {
     ? generateFormationData({}, profileData.legalStructureId as FormationLegalType)
     : {
         formationFormData: createEmptyFormationFormData(),
+        businessNameAvailability: undefined,
         formationResponse: undefined,
         getFilingResponse: undefined,
         completedFilingPayment: false,
@@ -363,6 +364,7 @@ export const generateFormationData = (
 ): FormationData => {
   return {
     formationFormData: generateFormationFormData({}, { legalStructureId }),
+    businessNameAvailability: undefined,
     formationResponse: undefined,
     getFilingResponse: undefined,
     completedFilingPayment: false,

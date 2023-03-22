@@ -11,16 +11,14 @@ import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { ReactElement, useContext } from "react";
 
 export const NexusSearchBusinessNameStep = (): ReactElement => {
-  const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
+  const { setFormationFormData, setFieldsInteracted, setBusinessNameAvailability } =
+    useContext(BusinessFormationContext);
   const { userData, update } = useUserData();
   const { Config } = useConfig();
   const FIELD_NAME = "businessName";
 
-  const setBusinessNameAvailability = (nameAvailability: NameAvailability | undefined): void => {
-    setFormationFormData({
-      ...state.formationFormData,
-      businessNameAvailability: nameAvailability ?? { status: undefined, similarNames: [] },
-    });
+  const _setBusinessNameAvailability = (nameAvailability: NameAvailability | undefined): void => {
+    setBusinessNameAvailability(nameAvailability);
   };
 
   const onSubmit = async (
@@ -41,8 +39,8 @@ export const NexusSearchBusinessNameStep = (): ReactElement => {
           formationFormData: {
             ...userData.formationData.formationFormData,
             businessName: submittedName,
-            businessNameAvailability: nameAvailability,
           },
+          businessNameAvailability: nameAvailability,
         },
         profileData: {
           ...userData.profileData,
@@ -59,8 +57,8 @@ export const NexusSearchBusinessNameStep = (): ReactElement => {
           formationFormData: {
             ...userData.formationData.formationFormData,
             businessName: submittedName,
-            businessNameAvailability: nameAvailability,
           },
+          businessNameAvailability: nameAvailability,
         },
         profileData: {
           ...userData.profileData,
@@ -93,7 +91,7 @@ export const NexusSearchBusinessNameStep = (): ReactElement => {
         hideTextFieldWhenUnavailable={true}
         onSubmit={onSubmit}
         isBusinessFormation={true}
-        onChange={setBusinessNameAvailability}
+        onChange={_setBusinessNameAvailability}
         className="grid-col-12"
         config={{
           searchButtonText: Config.searchBusinessNameTask.searchButtonText,

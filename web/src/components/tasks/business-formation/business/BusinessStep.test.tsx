@@ -73,6 +73,7 @@ describe("Formation - BusinessStep", () => {
       formationResponse: undefined,
       getFilingResponse: undefined,
       completedFilingPayment: false,
+      businessNameAvailability: undefined,
     };
     const page = preparePage(
       generateUserData({ profileData, formationData }),

@@ -1918,6 +1918,30 @@ describe("<BusinessFormationPaginator />", () => {
       );
     });
 
+    it("autosaves every second if business name availability has changed", async () => {
+      const userDataWithName = {
+        ...initialUserData,
+        profileData: { ...initialUserData.profileData, businessName: "old-name" },
+        formationData: {
+          ...initialUserData.formationData,
+          businessNameAvailability: undefined,
+        },
+      };
+      const page = preparePage(userDataWithName, displayContent);
+      act(() => {
+        jest.advanceTimersByTime(1000);
+      });
+      page.fillText("Search business name", "Pizza Joint");
+      act(() => {
+        jest.advanceTimersByTime(1000);
+      });
+      await page.searchBusinessName({ status: "UNAVAILABLE" });
+      expect(screen.getByTestId("unavailable-text")).toBeInTheDocument();
+      await waitFor(() => {
+        expect(currentUserData().formationData.businessNameAvailability?.status).toEqual("UNAVAILABLE");
+      });
+    });
+
     it("does not autosave if fields have not changed", () => {
       preparePage(initialUserData, displayContent);
       expect(userDataUpdatedNTimes()).toEqual(1);

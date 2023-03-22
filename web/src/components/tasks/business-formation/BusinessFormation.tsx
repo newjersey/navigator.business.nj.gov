@@ -21,6 +21,7 @@ import { isBusinessStartDateValid } from "@/components/tasks/business-formation/
 import { BusinessFormationPaginator } from "@/components/tasks/business-formation/BusinessFormationPaginator";
 import { NexusFormationFlow } from "@/components/tasks/business-formation/NexusFormationFlow";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { NameAvailability } from "@businessnjgovnavigator/shared";
 import {
   castPublicFilingLegalTypeToFormationType,
   createEmptyFormationFormData,
@@ -58,6 +59,9 @@ export const BusinessFormation = (props: Props): ReactElement => {
   const [hasBeenSubmitted, setHasBeenSubmitted] = useState<boolean>(false);
   const [hasSetStateFirstTime, setHasSetStateFirstTime] = useState<boolean>(false);
   const getCompletedFilingApiCallOccurred = useRef<boolean>(false);
+  const [businessNameAvailability, setBusinessNameAvailability] = useState<NameAvailability | undefined>(
+    undefined
+  );
 
   const legalStructureId: FormationLegalType = useMemo(() => {
     return castPublicFilingLegalTypeToFormationType(
@@ -101,6 +105,12 @@ export const BusinessFormation = (props: Props): ReactElement => {
         ? userData.formationData.formationFormData.businessLocationType ?? "US"
         : "NJ",
     });
+    if (userData.formationData.businessNameAvailability) {
+      setBusinessNameAvailability({
+        ...userData.formationData.businessNameAvailability,
+      });
+    }
+
     setHasSetStateFirstTime(true);
   }, userData);
 
@@ -225,6 +235,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
         state: {
           stepIndex: stepIndex,
           formationFormData: formationFormData,
+          businessNameAvailability: businessNameAvailability,
           dbaContent: props.displayContent.formationDbaContent,
           showResponseAlert: showResponseAlert,
           interactedFields,
@@ -232,6 +243,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
           hasSetStateFirstTime,
         },
         setFormationFormData,
+        setBusinessNameAvailability,
         setStepIndex,
         setShowResponseAlert,
         setFieldsInteracted,

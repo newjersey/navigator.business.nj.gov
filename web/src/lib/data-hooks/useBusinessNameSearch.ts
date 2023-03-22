@@ -27,7 +27,8 @@ export const useBusinessNameSearch = ({
   resetSearch: () => void;
 } => {
   const { userData } = useUserData();
-  const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
+  const { state, setFormationFormData, setFieldsInteracted, setBusinessNameAvailability } =
+    useContext(BusinessFormationContext);
   const [currentName, setCurrentName] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<SearchBusinessNameError | undefined>(undefined);
@@ -39,8 +40,8 @@ export const useBusinessNameSearch = ({
     }
     setCurrentName(isDba ? userData.profileData.nexusDbaName || "" : userData.profileData.businessName);
     if (
-      userData.formationData.formationFormData.businessNameAvailability.status !== "AVAILABLE" &&
-      userData.formationData.formationFormData.hasBusinessNameBeenSearched
+      userData.formationData.businessNameAvailability?.status !== "AVAILABLE" &&
+      userData.formationData.businessNameAvailability?.status !== undefined
     ) {
       setFieldsInteracted(["businessName"]);
     }
@@ -54,15 +55,12 @@ export const useBusinessNameSearch = ({
     setFormationFormData({
       ...state.formationFormData,
       businessName: currentName,
-      businessNameAvailability: { similarNames: [], status: undefined },
     });
+    setBusinessNameAvailability({ similarNames: [], status: undefined });
   };
 
   const resetSearch = () => {
-    setFormationFormData({
-      ...state.formationFormData,
-      businessNameAvailability: { similarNames: [], status: undefined },
-    });
+    setBusinessNameAvailability({ similarNames: [], status: undefined });
     setUpdateButtonClicked(false);
     setError(undefined);
     setCurrentName("");
@@ -76,10 +74,7 @@ export const useBusinessNameSearch = ({
     }
 
     const resetState = () => {
-      setFormationFormData({
-        ...state.formationFormData,
-        businessNameAvailability: { similarNames: [], status: undefined },
-      });
+      setBusinessNameAvailability({ similarNames: [], status: undefined });
       setUpdateButtonClicked(false);
       setError(undefined);
     };
@@ -100,10 +95,9 @@ export const useBusinessNameSearch = ({
         setIsLoading(false);
         setFormationFormData({
           ...state.formationFormData,
-          businessNameAvailability: result,
           businessName: currentName,
-          hasBusinessNameBeenSearched: true,
         });
+        setBusinessNameAvailability({ ...result });
         return { nameAvailability: result, submittedName: currentName };
       })
       .catch((api_error) => {

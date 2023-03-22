@@ -20,10 +20,10 @@ export const useFormationErrors = () => {
     return validatedFields.reduce((acc, field) => {
       return {
         ...acc,
-        [field]: getErrorStateForField(field, state.formationFormData),
+        [field]: getErrorStateForField(field, state.formationFormData, state.businessNameAvailability),
       };
     }, {} as Record<FormationFields, FormationFieldErrorState>);
-  }, [validatedFields, state.formationFormData]);
+  }, [validatedFields, state.formationFormData, state.businessNameAvailability]);
 
   const getApiFieldErrorState = (field: FormationFields): FormationFieldErrorState | undefined => {
     if (
@@ -127,7 +127,9 @@ export const useFormationErrors = () => {
     }
 
     return validatedFieldsForStep(step).every((field) => {
-      const errorState = errorStates[field] || getErrorStateForField(field, state.formationFormData);
+      const errorState =
+        errorStates[field] ||
+        getErrorStateForField(field, state.formationFormData, state.businessNameAvailability);
       return !errorState.hasError;
     });
   };

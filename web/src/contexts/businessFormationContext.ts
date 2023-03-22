@@ -3,12 +3,14 @@ import {
   createEmptyFormationFormData,
   FormationFields,
   FormationFormData,
-} from "@businessnjgovnavigator/shared/";
+  NameAvailability,
+} from "@businessnjgovnavigator/shared";
 import { createContext } from "react";
 
 interface BusinessFormationState {
   stepIndex: number;
   formationFormData: FormationFormData;
+  businessNameAvailability: NameAvailability | undefined;
   showResponseAlert: boolean;
   hasBeenSubmitted: boolean;
   dbaContent: FormationDbaContent;
@@ -23,6 +25,7 @@ interface BusinessFormationContextType {
   setShowResponseAlert: React.Dispatch<React.SetStateAction<boolean>>;
   setFieldsInteracted: (fields: FormationFields[], config?: { setToUninteracted: boolean }) => void;
   setHasBeenSubmitted: (hasBeenSubmitted: boolean) => void;
+  setBusinessNameAvailability: React.Dispatch<React.SetStateAction<NameAvailability | undefined>>;
 }
 
 export const BusinessFormationContext = createContext<BusinessFormationContextType>({
@@ -34,10 +37,12 @@ export const BusinessFormationContext = createContext<BusinessFormationContextTy
     hasBeenSubmitted: false,
     interactedFields: [],
     hasSetStateFirstTime: false,
+    businessNameAvailability: undefined,
   },
   setFormationFormData: () => {},
   setStepIndex: () => {},
   setShowResponseAlert: () => {},
   setFieldsInteracted: () => {},
   setHasBeenSubmitted: () => {},
+  setBusinessNameAvailability: () => {},
 });

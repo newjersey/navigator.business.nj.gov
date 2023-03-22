@@ -70,6 +70,7 @@ export interface FormationData {
   readonly formationResponse: FormationSubmitResponse | undefined;
   readonly getFilingResponse: GetFilingResponse | undefined;
   readonly completedFilingPayment: boolean;
+  readonly businessNameAvailability: NameAvailability | undefined;
 }
 
 export type FormationBusinessLocationType = "US" | "INTL" | "NJ";
@@ -105,11 +106,7 @@ export type ForeignGoodStandingFileObject = {
 export interface FormationFormData extends FormationAddress {
   readonly legalType: FormationLegalType;
   readonly businessName: string;
-  readonly businessNameAvailability: NameAvailability;
-
-  readonly hasBusinessNameBeenSearched: boolean;
   readonly businessSuffix: BusinessSuffix | undefined;
-
   readonly businessTotalStock: string;
   readonly businessStartDate: string; // YYYY-MM-DD
   readonly businessPurpose: string;
@@ -156,8 +153,6 @@ export type FormationFields = keyof FormationFormData;
 export type FormationTextField = Exclude<
   keyof FormationFormData,
   | "businessSuffix"
-  | "businessNameAvailability"
-  | "hasBusinessNameBeenSearched"
   | "searchBusinessNameError"
   | "submittedName"
   | "addressMunicipality"
@@ -225,20 +220,11 @@ export const createEmptyFormationIncorporator = (): FormationIncorporator => {
   };
 };
 
-export const createEmptyFormationNameAvailability = (): NameAvailability => {
-  return {
-    similarNames: [],
-    status: undefined,
-  };
-};
-
 export const createEmptyFormationFormData = (): FormationFormData => {
   return {
     ...createEmptyFormationAddress(),
     legalType: defaultFormationLegalType,
     businessName: "",
-    businessNameAvailability: createEmptyFormationNameAvailability(),
-    hasBusinessNameBeenSearched: false,
     businessSuffix: undefined,
     businessTotalStock: "",
     businessStartDate: "",
