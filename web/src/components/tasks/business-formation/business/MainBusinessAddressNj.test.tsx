@@ -49,6 +49,8 @@ const getPageHelper = async (
     formationResponse: undefined,
     getFilingResponse: undefined,
     completedFilingPayment: false,
+    businessNameSearch: undefined,
+    businessNameAvailability: undefined,
   };
 
   const userData = generateUserData({ profileData, formationData });

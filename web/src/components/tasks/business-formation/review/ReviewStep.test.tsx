@@ -65,6 +65,7 @@ describe("Formation - ReviewStep", () => {
       formationResponse: undefined,
       getFilingResponse: undefined,
       completedFilingPayment: false,
+      businessNameAvailability: undefined,
     };
     const page = preparePage(
       {

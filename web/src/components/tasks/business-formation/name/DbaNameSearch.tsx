@@ -13,17 +13,14 @@ import { ReactElement, useContext } from "react";
 export const DbaNameSearch = (): ReactElement => {
   const { Config } = useConfig();
   const { userData, update } = useUserData();
-  const { state, setFormationFormData } = useContext(BusinessFormationContext);
+  const { setBusinessNameAvailability } = useContext(BusinessFormationContext);
 
   useMountEffect(() => {
     analytics.event.business_formation_dba_name_search_field.appears.dba_name_search_field_appears();
   });
 
-  const setBusinessNameAvailability = (nameAvailability: NameAvailability | undefined): void => {
-    setFormationFormData({
-      ...state.formationFormData,
-      businessNameAvailability: nameAvailability ?? { status: undefined, similarNames: [] },
-    });
+  const _setBusinessNameAvailability = (nameAvailability: NameAvailability | undefined): void => {
+    setBusinessNameAvailability(nameAvailability);
   };
 
   const onSubmit = async (submittedName: string, nameAvailability: NameAvailability): Promise<void> => {
@@ -48,7 +45,7 @@ export const DbaNameSearch = (): ReactElement => {
       <SearchBusinessNameForm
         unavailable={DbaUnavailable}
         available={DbaAvailable}
-        onChange={setBusinessNameAvailability}
+        onChange={_setBusinessNameAvailability}
         isBusinessFormation
         isDba
         config={{

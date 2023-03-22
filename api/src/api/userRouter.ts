@@ -183,6 +183,7 @@ export const userRouterFactory = (
               getFilingResponse: undefined,
               completedFilingPayment: false,
               formationFormData: createEmptyFormationFormData(),
+              businessNameAvailability: undefined,
             },
           };
     }

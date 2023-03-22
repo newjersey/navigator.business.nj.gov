@@ -31,6 +31,7 @@ export const getPageHelper = async (
         profileData.businessPersona
       ),
     }),
+    businessNameAvailability: undefined,
     formationResponse: undefined,
     getFilingResponse: undefined,
     completedFilingPayment: false,
