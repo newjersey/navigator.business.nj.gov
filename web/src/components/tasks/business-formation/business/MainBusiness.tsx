@@ -17,7 +17,7 @@ export const MainBusiness = (): ReactElement => {
   const { state } = useContext(BusinessFormationContext);
   const { doSomeFieldsHaveError, doesFieldHaveError } = useFormationErrors();
   const isForeign = useMemo(
-    () => state.formationFormData.businessLocationType != "NJ",
+    () => state.formationFormData.businessLocationType !== "NJ",
     [state.formationFormData.businessLocationType]
   );
 

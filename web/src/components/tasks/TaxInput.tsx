@@ -38,7 +38,7 @@ export const TaxInput = (props: Props): ReactElement => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
   const shouldLockTaxId =
-    userData?.taxFilingData.state === "SUCCESS" || userData?.taxFilingData.state == "PENDING";
+    userData?.taxFilingData.state === "SUCCESS" || userData?.taxFilingData.state === "PENDING";
 
   const saveButtonText =
     isAuthenticated === IsAuthenticated.FALSE

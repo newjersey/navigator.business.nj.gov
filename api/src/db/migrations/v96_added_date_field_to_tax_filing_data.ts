@@ -414,7 +414,7 @@ export const v96generateFormationFormData = (
       v96generateFormationAddress({ signature: true }),
       v96generateFormationAddress({ signature: true }),
     ],
-    members: legalStructureId == "limited-liability-partnership" ? [] : [v96generateFormationAddress({})],
+    members: legalStructureId === "limited-liability-partnership" ? [] : [v96generateFormationAddress({})],
     paymentType: randomInt() % 2 ? "ACH" : "CC",
     annualReportNotification: !!(randomInt() % 2),
     corpWatchNotification: !!(randomInt() % 2),

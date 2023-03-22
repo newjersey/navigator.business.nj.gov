@@ -11,7 +11,7 @@ export const castPublicFilingLegalTypeToFormationType = (
   legalStructureId: PublicFilingLegalType,
   persona: BusinessPersona | undefined
 ): FormationLegalType => {
-  return `${persona == "FOREIGN" ? foreignLegalTypePrefix : ""}${legalStructureId}` as FormationLegalType;
+  return `${persona === "FOREIGN" ? foreignLegalTypePrefix : ""}${legalStructureId}` as FormationLegalType;
 };
 
 export type SignerTitle =

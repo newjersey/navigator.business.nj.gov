@@ -89,7 +89,7 @@ export const FilingsCalendarTaxAccess = (): ReactElement => {
 
   const getWidgetComponent = (): ReactElement => {
     if (userData?.taxFilingData.registeredISO) {
-      if (userData?.taxFilingData.state == "PENDING") {
+      if (userData?.taxFilingData.state === "PENDING") {
         return (
           <div className="tax-calendar-upper-widget-container" data-testid="pending-container">
             <div className="margin-bottom-2 tablet:margin-bottom-0 margin-right-2">

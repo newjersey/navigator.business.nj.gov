@@ -77,7 +77,7 @@ export const NavBarDesktop = (): ReactElement => {
   }, [open]);
 
   const isAuthenticated = useMemo(() => {
-    return state.isAuthenticated == "TRUE";
+    return state.isAuthenticated === "TRUE";
   }, [state.isAuthenticated]);
   const textColor = isAuthenticated ? "primary" : "base";
   const accountIcon = isAuthenticated ? "account_circle" : "help";

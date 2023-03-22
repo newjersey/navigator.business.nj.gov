@@ -73,7 +73,7 @@ const Home = (): ReactElement => {
         router.replace(ROUTES.dashboard);
       } else if (userData?.formProgress === "UNSTARTED") {
         router.replace(ROUTES.onboarding);
-      } else if (userData === undefined && error != undefined) {
+      } else if (userData === undefined && error !== undefined) {
         router.replace(`${ROUTES.dashboard}?error=true`);
       }
     } else if (state.isAuthenticated === IsAuthenticated.FALSE && alternateLandingPageEnabled) {

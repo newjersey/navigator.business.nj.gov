@@ -40,7 +40,7 @@ export const OnboardingMunicipality = (props: Props): ReactElement => {
       legalStructureId: state.profileData.legalStructureId,
       operatingPhase: state.profileData.operatingPhase,
     }) || props.required
-      ? state.profileData[fieldName] != undefined
+      ? state.profileData[fieldName] !== undefined
       : true
   );
 

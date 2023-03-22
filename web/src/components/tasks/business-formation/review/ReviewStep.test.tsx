@@ -54,7 +54,7 @@ describe("Formation - ReviewStep", () => {
     formationFormData: Partial<FormationFormData>
   ) => {
     const profileData = generateFormationProfileData(initialProfileData);
-    const isForeign = profileData.businessPersona == "FOREIGN";
+    const isForeign = profileData.businessPersona === "FOREIGN";
     const formationData = {
       formationFormData: generateFormationFormData(formationFormData, {
         legalStructureId: castPublicFilingLegalTypeToFormationType(
@@ -189,7 +189,7 @@ describe("Formation - ReviewStep", () => {
     await renderStep({ businessPersona: "FOREIGN" }, { addressCountry: "US", businessLocationType: "US" });
     expect(
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      screen.queryByText(arrayOfCountriesObjects.find((cu) => cu.shortCode == "US")!.name, { exact: false })
+      screen.queryByText(arrayOfCountriesObjects.find((cu) => cu.shortCode === "US")!.name, { exact: false })
     ).not.toBeInTheDocument();
   });
 
@@ -197,7 +197,7 @@ describe("Formation - ReviewStep", () => {
     await renderStep({ businessPersona: "FOREIGN" }, { addressCountry: "US", businessLocationType: "INTL" });
     expect(
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      screen.getByText(arrayOfCountriesObjects.find((cu) => cu.shortCode == "US")!.name, { exact: false })
+      screen.getByText(arrayOfCountriesObjects.find((cu) => cu.shortCode === "US")!.name, { exact: false })
     ).toBeInTheDocument();
   });
 

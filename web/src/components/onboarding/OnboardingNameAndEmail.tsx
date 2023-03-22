@@ -55,10 +55,10 @@ export const OnboardingNameAndEmail = <T,>(props: FormContextFieldProps<T>): Rea
     return (value: string) => {
       if (confirm) {
         setConfirmEmail(value);
-        email == value && email.length > 0 ? updateEmailState(email) : updateEmailState("");
+        email === value && email.length > 0 ? updateEmailState(email) : updateEmailState("");
       } else {
         setEmail(value);
-        confirmEmail == value && value.length > 0 ? updateEmailState(value) : updateEmailState("");
+        confirmEmail === value && value.length > 0 ? updateEmailState(value) : updateEmailState("");
       }
     };
   };
@@ -91,7 +91,7 @@ export const OnboardingNameAndEmail = <T,>(props: FormContextFieldProps<T>): Rea
           validationText={Config.selfRegistration.errorTextEmailsNotMatching}
           required={true}
           additionalValidationIsValid={(value) => {
-            return confirmEmail ? value == confirmEmail : true && validateEmail(value);
+            return confirmEmail ? value === confirmEmail : true && validateEmail(value);
           }}
         />
       </div>
@@ -106,7 +106,7 @@ export const OnboardingNameAndEmail = <T,>(props: FormContextFieldProps<T>): Rea
           }}
           required={true}
           additionalValidationIsValid={(value) => {
-            return value == email && validateEmail(value);
+            return value === email && validateEmail(value);
           }}
           validationText={Config.selfRegistration.errorTextEmailsNotMatching}
           fieldName={"confirm-email"}

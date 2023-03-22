@@ -180,7 +180,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
     });
   };
 
-  if (!isValidLegalStructure && userData?.profileData.businessPersona != "FOREIGN") {
+  if (!isValidLegalStructure && userData?.profileData.businessPersona !== "FOREIGN") {
     return (
       <div className="flex flex-column space-between minh-38">
         <div>

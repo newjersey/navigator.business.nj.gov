@@ -162,54 +162,61 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
 
     const businessType = BusinessTypeMap[toFormationLegalStructure];
 
-    const isCorp = businessType.shortDescription == "DP";
-    const isForeignCorp = businessType.shortDescription == "FR";
+    const isCorp = businessType.shortDescription === "DP";
+    const isForeignCorp = businessType.shortDescription === "FR";
 
     const getAdditionalProvisions = (): Provisions => {
       const additionalProvisions =
         formationFormData.provisions?.map((it: string) => {
           return { Provision: it };
         }) ?? [];
-      if (toFormationLegalStructure == "limited-partnership") {
-        return {
-          AdditionalLimitedPartnership: {
-            AggregateAmount: formationFormData.combinedInvestment,
-            LimitedCanCreateLimited: formationFormData.canCreateLimitedPartner ? "Yes" : "No",
-            LimitedCanCreateLimitedTerms: formationFormData.createLimitedPartnerTerms,
-            LimitedCanGetDistribution: formationFormData.canGetDistribution ? "Yes" : "No",
-            LimitedCanGetDistributionTerms: formationFormData.getDistributionTerms,
-            LimitedCanMakeDistribution: formationFormData.canMakeDistribution ? "Yes" : "No",
-            LimitedCanMakeDistributionTerms: formationFormData.makeDistributionTerms,
-            GeneralPartnerWithdrawal: formationFormData.withdrawals,
-            DissolutionPlan: formationFormData.dissolution,
-            AdditionalProvisions: additionalProvisions,
-          },
-        };
-      } else if (toFormationLegalStructure == "foreign-limited-partnership") {
-        return {
-          AdditionalForeignLimitedPartnership: {
-            AggregateAmount: formationFormData.combinedInvestment,
-            AdditionalProvisions: additionalProvisions,
-          },
-        };
-      } else if (toFormationLegalStructure == "limited-liability-company") {
-        return {
-          AdditionalLimitedLiabilityCompany: {
-            OtherProvisions: additionalProvisions,
-          },
-        };
-      } else if (toFormationLegalStructure == "limited-liability-partnership") {
-        return {
-          AdditionalLimitedLiabilityPartnership: {
-            OtherProvisions: additionalProvisions,
-          },
-        };
-      } else if (["c-corporation", "s-corporation"].includes(toFormationLegalStructure)) {
-        return {
-          AdditionalCCorpOrProfessionalCorp: {
-            AdditionalProvisions: additionalProvisions,
-          },
-        };
+      switch (toFormationLegalStructure) {
+        case "limited-partnership": {
+          return {
+            AdditionalLimitedPartnership: {
+              AggregateAmount: formationFormData.combinedInvestment,
+              LimitedCanCreateLimited: formationFormData.canCreateLimitedPartner ? "Yes" : "No",
+              LimitedCanCreateLimitedTerms: formationFormData.createLimitedPartnerTerms,
+              LimitedCanGetDistribution: formationFormData.canGetDistribution ? "Yes" : "No",
+              LimitedCanGetDistributionTerms: formationFormData.getDistributionTerms,
+              LimitedCanMakeDistribution: formationFormData.canMakeDistribution ? "Yes" : "No",
+              LimitedCanMakeDistributionTerms: formationFormData.makeDistributionTerms,
+              GeneralPartnerWithdrawal: formationFormData.withdrawals,
+              DissolutionPlan: formationFormData.dissolution,
+              AdditionalProvisions: additionalProvisions,
+            },
+          };
+        }
+        case "foreign-limited-partnership": {
+          return {
+            AdditionalForeignLimitedPartnership: {
+              AggregateAmount: formationFormData.combinedInvestment,
+              AdditionalProvisions: additionalProvisions,
+            },
+          };
+        }
+        case "limited-liability-company": {
+          return {
+            AdditionalLimitedLiabilityCompany: {
+              OtherProvisions: additionalProvisions,
+            },
+          };
+        }
+        case "limited-liability-partnership": {
+          return {
+            AdditionalLimitedLiabilityPartnership: {
+              OtherProvisions: additionalProvisions,
+            },
+          };
+        }
+        default:
+          if (["c-corporation", "s-corporation"].includes(toFormationLegalStructure)) {
+            return {
+              AdditionalCCorpOrProfessionalCorp: {
+                AdditionalProvisions: additionalProvisions,
+              },
+            };
+          }
       }
       return {};
     };

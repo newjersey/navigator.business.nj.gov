@@ -24,7 +24,7 @@ export const ContactsStep = (): ReactElement => {
   const shouldShowMembers = (): boolean => {
     return (
       [...corpLegalStructures, "limited-liability-company"].includes(state.formationFormData.legalType) &&
-      state.formationFormData.businessLocationType == "NJ"
+      state.formationFormData.businessLocationType === "NJ"
     );
   };
 

@@ -47,7 +47,7 @@ export const Step = (props: Props): ReactElement => {
           <ul className="usa-list usa-list--unstyled">
             {roadmap?.tasks
               .filter((task) => {
-                return task.stepNumber == props.step.stepNumber;
+                return task.stepNumber === props.step.stepNumber;
               })
               .map((task) => {
                 return <Task key={task.id} task={task} />;

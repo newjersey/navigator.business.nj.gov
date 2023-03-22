@@ -19,7 +19,7 @@ export const NavSidebarUserSettings = (): ReactElement => {
   const router = useRouter();
 
   const isAuthenticated = useMemo(() => {
-    return state.isAuthenticated == "TRUE";
+    return state.isAuthenticated === "TRUE";
   }, [state.isAuthenticated]);
 
   const UnAuthenticatedMenu = () => {

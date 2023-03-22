@@ -31,7 +31,7 @@ export const ReviewBusinessSuffixAndStartDate = (): ReactElement => {
           defaultDisplayDateFormat
         )}
       />
-      {state.formationFormData.businessLocationType != "NJ" && (
+      {state.formationFormData.businessLocationType !== "NJ" && (
         <>
           <ReviewLineItem
             dataTestId="foreign-state-of-formation"

@@ -23,7 +23,7 @@ export const getPageHelper = async (
   initialUser?: Partial<BusinessUser>
 ): Promise<FormationPageHelpers> => {
   const profileData = generateFormationProfileData(initialProfileData);
-  const isForeign = profileData.businessPersona == "FOREIGN";
+  const isForeign = profileData.businessPersona === "FOREIGN";
   const formationData = {
     formationFormData: generateFormationFormData(formationFormData, {
       legalStructureId: castPublicFilingLegalTypeToFormationType(

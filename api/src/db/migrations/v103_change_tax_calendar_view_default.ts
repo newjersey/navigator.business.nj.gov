@@ -470,7 +470,7 @@ export const generateV103FormationFormData = (
     agentUseAccountInfo: !!(randomInt() % 2),
     agentUseBusinessAddress: !!(randomInt() % 2),
     signers: [{ name: "some-name", signature: "some-signature", title: "some-title" }],
-    members: legalStructureId == "limited-liability-partnership" ? [] : [generateV103FormationMember({})],
+    members: legalStructureId === "limited-liability-partnership" ? [] : [generateV103FormationMember({})],
     paymentType: randomInt() % 2 ? "ACH" : "CC",
     annualReportNotification: !!(randomInt() % 2),
     corpWatchNotification: !!(randomInt() % 2),

@@ -94,7 +94,7 @@ const importAddOn = async (relativePath: string): Promise<IndustryRoadmap> => {
 };
 
 const orderByWeight = (taskA: TaskBuilder, taskB: TaskBuilder): number => {
-  if (taskA.stepNumber == taskB.stepNumber) {
+  if (taskA.stepNumber === taskB.stepNumber) {
     return taskA.weight > taskB.weight ? 1 : -1;
   } else if (taskA.stepNumber > taskB.stepNumber) {
     return 1;

@@ -15,7 +15,7 @@ export const MainBusinessForeignAddressFlow = (): ReactElement => {
   type FlowBusinessLocationType = Exclude<FormationBusinessLocationType, "NJ">;
 
   useMountEffect(() => {
-    if (state.formationFormData.businessLocationType == "US") {
+    if (state.formationFormData.businessLocationType === "US") {
       setFormationFormData((previousState) => {
         return {
           ...previousState,
@@ -31,7 +31,7 @@ export const MainBusinessForeignAddressFlow = (): ReactElement => {
       setToUninteracted: true,
     });
 
-    if (value == "US") {
+    if (value === "US") {
       resetAddress = { ...resetAddress, addressCountry: "US" };
     }
 
@@ -74,7 +74,7 @@ export const MainBusinessForeignAddressFlow = (): ReactElement => {
           </>
         </RadioGroup>
       </FormControl>
-      {state.formationFormData.businessLocationType == "US" ? <MainBusinessUs /> : <MainBusinessIntl />}
+      {state.formationFormData.businessLocationType === "US" ? <MainBusinessUs /> : <MainBusinessIntl />}
     </>
   );
 };

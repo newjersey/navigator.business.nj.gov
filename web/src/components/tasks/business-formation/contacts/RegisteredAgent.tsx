@@ -218,7 +218,7 @@ export const RegisteredAgent = (): ReactElement => {
                   />
                 </div>
               </WithErrorBar>
-              {state.formationFormData.businessLocationType == "NJ" && (
+              {state.formationFormData.businessLocationType === "NJ" && (
                 <div className="margin-bottom-1">
                   <FormControlLabel
                     label={Config.formation.registeredAgent.sameAddressCheckbox}

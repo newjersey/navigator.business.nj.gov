@@ -50,7 +50,7 @@ describe("Formation - Members Field", () => {
 
   describe(`shared behaviors`, () => {
     legalStructureIds.map((legalStructureId) => {
-      const configField = legalStructureId == "limited-liability-company" ? "members" : "directors";
+      const configField = legalStructureId === "limited-liability-company" ? "members" : "directors";
       const nextButtonText = Config.formation.fields[configField].addButtonText;
       const successBodyText = Config.formation.fields[configField].successSnackbarBody;
 
@@ -104,7 +104,7 @@ describe("Formation - Members Field", () => {
           expect(newMembers?.length).toEqual(2);
           expect(
             newMembers?.findIndex((member) => {
-              return member.name == newName;
+              return member.name === newName;
             })
           ).toEqual(1);
         });
@@ -124,7 +124,7 @@ describe("Formation - Members Field", () => {
           expect(newMembers?.length).toEqual(1);
           expect(
             newMembers?.find((member) => {
-              return member == members[1];
+              return member === members[1];
             })
           ).toBeFalsy();
         });

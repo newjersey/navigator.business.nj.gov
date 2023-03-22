@@ -72,7 +72,7 @@ export const FilingsCalendarAsList = (props: Props): ReactElement => {
               {filings.map((filing, index) => (
                 <div
                   key={`${filing.identifier}-${filing.dueDate}`}
-                  className={`margin-bottom-05 ${index == 0 ? "margin-top-05" : ""}`}
+                  className={`margin-bottom-05 ${index === 0 ? "margin-top-05" : ""}`}
                 >
                   <Link href={`filings/${props.operateReferences[filing.identifier].urlSlug}`} passHref>
                     <a

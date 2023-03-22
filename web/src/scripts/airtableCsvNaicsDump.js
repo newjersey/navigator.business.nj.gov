@@ -29,7 +29,7 @@ const DigitRangeToArray = (value) => {
   const values = value.split("-").map((value) => {
     return Number.parseInt(value);
   });
-  if (values.length != 2) {
+  if (values.length !== 2) {
     return;
   }
   return Array.from({ length: values[1] + 1 - values[0] }, (v, k) => {

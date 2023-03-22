@@ -62,7 +62,7 @@ describe("Formation - BusinessStep", () => {
     municipalities?: Municipality[]
   ): Promise<FormationPageHelpers> => {
     const profileData = generateFormationProfileData(initialProfileData);
-    const isForeign = initialProfileData.businessPersona == "FOREIGN";
+    const isForeign = initialProfileData.businessPersona === "FOREIGN";
     const formationData = {
       formationFormData: generateFormationFormData(formationFormData, {
         legalStructureId: castPublicFilingLegalTypeToFormationType(
@@ -279,7 +279,7 @@ describe("Formation - BusinessStep", () => {
       await getPageHelper(
         {
           businessPersona: "FOREIGN",
-          legalStructureId: randomPublicFilingLegalType((value) => value != "limited-partnership"),
+          legalStructureId: randomPublicFilingLegalType((value) => value !== "limited-partnership"),
         },
         { provisions: [] }
       );
@@ -290,7 +290,7 @@ describe("Formation - BusinessStep", () => {
       await getPageHelper(
         {
           businessPersona: "FOREIGN",
-          legalStructureId: randomPublicFilingLegalType((value) => value == "limited-partnership"),
+          legalStructureId: randomPublicFilingLegalType((value) => value === "limited-partnership"),
         },
         { provisions: [] }
       );

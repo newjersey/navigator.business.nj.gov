@@ -29,7 +29,7 @@ export const NavBarMobile = ({ scrolled, task, showSidebar, hideMiniRoadmap }: P
     return setSidebarIsOpen(false);
   };
   const isAuthenticated = useMemo(() => {
-    return state.isAuthenticated == "TRUE";
+    return state.isAuthenticated === "TRUE";
   }, [state.isAuthenticated]);
   const userName = getUserNameOrEmail(userData);
   const textColor = isAuthenticated ? "primary" : "base";

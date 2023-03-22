@@ -20,7 +20,7 @@ export const migrate_v105_to_v106 = (v105Data: v105UserData): v106UserData => {
     ...v105Data,
     profileData: {
       ...v105Data.profileData,
-      petCareHousing: v105Data.profileData.industryId == "petcare" ? true : undefined,
+      petCareHousing: v105Data.profileData.industryId === "petcare" ? true : undefined,
     },
     version: 106,
   };
@@ -456,7 +456,7 @@ export const generateV106FormationFormData = (
     agentUseAccountInfo: !!(randomInt() % 2),
     agentUseBusinessAddress: !!(randomInt() % 2),
     signers: [{ name: "some-name", signature: "some-signature", title: "some-title" }],
-    members: legalStructureId == "limited-liability-partnership" ? [] : [generateV106FormationMember({})],
+    members: legalStructureId === "limited-liability-partnership" ? [] : [generateV106FormationMember({})],
     paymentType: randomInt() % 2 ? "ACH" : "CC",
     annualReportNotification: !!(randomInt() % 2),
     corpWatchNotification: !!(randomInt() % 2),

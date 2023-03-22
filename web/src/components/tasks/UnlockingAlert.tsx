@@ -32,7 +32,7 @@ export const UnlockingAlert = (props: Props): ReactElement => {
                   <a className="usa-link" href={taskLink.urlSlug}>
                     {taskLink.name}
                   </a>
-                  {index == props.taskLinks.length - 1 ? "" : ", "}
+                  {index === props.taskLinks.length - 1 ? "" : ", "}
                 </span>
               );
             })}

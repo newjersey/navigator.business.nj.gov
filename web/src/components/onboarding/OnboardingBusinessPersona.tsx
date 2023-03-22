@@ -20,7 +20,7 @@ export const OnboardingBusinessPersona = <T,>(props: FormContextFieldProps<T>): 
     props.errorTypes
   );
 
-  RegisterForOnSubmit(() => state.profileData.businessPersona != undefined);
+  RegisterForOnSubmit(() => state.profileData.businessPersona !== undefined);
   const handleSelection = (event: React.ChangeEvent<{ name?: string; value: unknown }>) => {
     Validate(false);
     setProfileData({

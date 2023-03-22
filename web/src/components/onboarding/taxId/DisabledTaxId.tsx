@@ -39,7 +39,7 @@ export const DisabledTaxId = (props: Props): ReactElement => {
   };
 
   const getTaxIdInitialStatus = (encryptionStatus: EncryptionStatus): TaxIdDisplayStatus => {
-    if (encryptionStatus == "encrypted") {
+    if (encryptionStatus === "encrypted") {
       return "password-view";
     } else {
       return "text-view";
@@ -84,13 +84,13 @@ export const DisabledTaxId = (props: Props): ReactElement => {
     if (!state.profileData.taxId) {
       return;
     } else if (
-      taxIdDisplayStatus == "password-view" &&
+      taxIdDisplayStatus === "password-view" &&
       getTaxIdEncryptionStatus(state.profileData) === "encrypted"
     ) {
       await getDecryptedTaxId().then((decryptedTaxId) => {
         updateSplitTaxId(decryptedTaxId);
       });
-    } else if (taxIdDisplayStatus == "text-view") {
+    } else if (taxIdDisplayStatus === "text-view") {
       updateSplitTaxId(state.profileData.taxId);
     }
     toggleTaxIdDisplay();
@@ -104,7 +104,7 @@ export const DisabledTaxId = (props: Props): ReactElement => {
 
   const getSpacedValue = (value: string) => (
     <>
-      <span className={taxIdDisplayStatus == "password-view" ? "text-ls-3" : ""}>{value.slice(0, 9)}</span>
+      <span className={taxIdDisplayStatus === "password-view" ? "text-ls-3" : ""}>{value.slice(0, 9)}</span>
       <span>{value.slice(9)}</span>
     </>
   );

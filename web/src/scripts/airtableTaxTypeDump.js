@@ -50,7 +50,7 @@ const airtableToOpportunity = (airtableOpp) => {
     callToActionText: "File and Pay",
     description: airtableOpp["Description"] ?? "",
     frequency: airtableOpp["Frequncy of Filing"] ?? "",
-    extension: airtableOpp["Extension Y/N"] == "Extension",
+    extension: airtableOpp["Extension Y/N"] === "Extension",
     taxRates: airtableOpp["Tax Rates"] ?? "",
     additionalInfo: airtableOpp["Additional Info"]?.trim() ?? "",
     filingMethod: convertFilingMethod(airtableOpp["Can Be filed Online (Filing Method)"] ?? ""),

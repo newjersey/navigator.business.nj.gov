@@ -24,7 +24,7 @@ export const OnboardingLegalStructureDropdown = <T,>(props: Props<T>): ReactElem
     props.errorTypes
   );
 
-  const isValid = () => state.profileData.legalStructureId != undefined;
+  const isValid = () => state.profileData.legalStructureId !== undefined;
 
   RegisterForOnSubmit(isValid);
 

@@ -39,7 +39,7 @@ export const buildUserRoadmap = async (profileData: ProfileData): Promise<Roadma
 
   if (
     getIsApplicableToFunctionByFieldName("carService")(profileData.industryId) &&
-    profileData.carService == "BOTH"
+    profileData.carService === "BOTH"
   ) {
     roadmap = removeTask(roadmap, "taxi-insurance");
   }
@@ -170,7 +170,7 @@ const getLegalStructureAddOns = (profileData: ProfileData): string[] => {
     return [];
   }
   const addOns = [];
-  if (profileData.businessPersona == "FOREIGN") {
+  if (profileData.businessPersona === "FOREIGN") {
     if (LookupLegalStructureById(profileData.legalStructureId).requiresPublicFiling) {
       addOns.push("public-record-filing-foreign");
     } else if (LookupLegalStructureById(profileData.legalStructureId).hasTradeName) {

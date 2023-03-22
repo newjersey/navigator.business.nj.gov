@@ -100,7 +100,7 @@ const generateErroredApiTaxFilingOnboardingResponse = (
   return {
     ApiKey: `some-ApiKey-${randomInt()}`,
     Errors:
-      statusCode == 400
+      statusCode === 400
         ? [
             {
               Error: `some-error-content-${randomInt()}`,

@@ -21,7 +21,7 @@ export const useUserData = (): UseUserDataResponse => {
   const { setRoadmap } = useContext(RoadmapContext);
   const { data, error, mutate } = useSWR<UserData | undefined>(state.user?.id || null, api.getUserData, {
     isPaused: () => {
-      return state.isAuthenticated != IsAuthenticated.TRUE;
+      return state.isAuthenticated !== IsAuthenticated.TRUE;
     },
   });
   const dataExists = !!data;
@@ -39,7 +39,7 @@ export const useUserData = (): UseUserDataResponse => {
   }, []);
 
   useEffect(() => {
-    if (!data || !state.user || state.isAuthenticated != IsAuthenticated.TRUE) {
+    if (!data || !state.user || state.isAuthenticated !== IsAuthenticated.TRUE) {
       return;
     }
     dispatch({
@@ -55,7 +55,7 @@ export const useUserData = (): UseUserDataResponse => {
   }, [dataExists]);
 
   useEffect(() => {
-    if (error && dataExists && state.isAuthenticated == IsAuthenticated.TRUE) {
+    if (error && dataExists && state.isAuthenticated === IsAuthenticated.TRUE) {
       setUserDataError("CACHED_ONLY");
     } else if (error && !dataExists) {
       setUserDataError("NO_DATA");
@@ -78,7 +78,7 @@ export const useUserData = (): UseUserDataResponse => {
     if (newUserData) {
       mutate(newUserData, false);
       setUpdateQueue(new UpdateQueueFactory(newUserData, update));
-      if (config?.local || state.isAuthenticated != IsAuthenticated.TRUE) {
+      if (config?.local || state.isAuthenticated !== IsAuthenticated.TRUE) {
         if (profileDataHasChanged(data, newUserData)) {
           onProfileDataChange(newUserData);
         }

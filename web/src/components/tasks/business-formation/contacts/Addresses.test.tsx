@@ -118,7 +118,7 @@ describe("Formation - Addresses", () => {
           expect(newIncorporators?.length).toEqual(2);
           expect(
             newIncorporators?.findIndex((signer) => {
-              return signer.name == newName;
+              return signer.name === newName;
             })
           ).toEqual(1);
         });

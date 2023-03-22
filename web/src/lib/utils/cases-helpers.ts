@@ -15,7 +15,7 @@ export const kebabSnakeSentenceToCamelCase = (text: string): string => {
     .toLowerCase()
     .split(/[\s_-]/gm)
     .map((cased, index) => {
-      return index == 0 ? cased : capitalizeFirstLetter(cased);
+      return index === 0 ? cased : capitalizeFirstLetter(cased);
     })
     .join("");
 };

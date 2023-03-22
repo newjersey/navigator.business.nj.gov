@@ -48,7 +48,7 @@ export const IndustryDropdown = (props: Props): ReactElement => {
     [isIndustryIdGeneric, "name"],
     ["desc", "asc"]
   ).filter((x) => {
-    return x.isEnabled || process.env.SHOW_DISABLED_INDUSTRIES == "true";
+    return x.isEnabled || process.env.SHOW_DISABLED_INDUSTRIES === "true";
   });
 
   const onIndustryIdChange = (industryId: string | undefined) => {

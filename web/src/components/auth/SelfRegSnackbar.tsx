@@ -15,7 +15,7 @@ export const SelfRegSnackbar = (): ReactElement => {
     useContext(AuthAlertContext);
 
   useEffect(() => {
-    if (registrationAlertStatus == "IN_PROGRESS" && isAuthenticated == IsAuthenticated.TRUE) {
+    if (registrationAlertStatus === "IN_PROGRESS" && isAuthenticated === IsAuthenticated.TRUE) {
       analytics.event.roadmap_dashboard.arrive.arrive_from_myNJ_registration();
       setRegistrationAlertStatus("SUCCESS");
     }
@@ -51,7 +51,7 @@ export const SelfRegSnackbar = (): ReactElement => {
       dataTestid="reg-snackbar"
     >
       <div className="fin fac padding-y-2 padding-right-3">
-        {alertMap[registrationAlertStatus] == "success" ? (
+        {alertMap[registrationAlertStatus] === "success" ? (
           <img
             src={`/img/congratulations-green.svg`}
             alt="congratulations"
@@ -62,7 +62,7 @@ export const SelfRegSnackbar = (): ReactElement => {
           <></>
         )}
         <div>
-          {alertMap[registrationAlertStatus] == "success" ? (
+          {alertMap[registrationAlertStatus] === "success" ? (
             <Content className="padding-right-2">{Config.navigationDefaults.guestSuccessTitle}</Content>
           ) : (
             <></>

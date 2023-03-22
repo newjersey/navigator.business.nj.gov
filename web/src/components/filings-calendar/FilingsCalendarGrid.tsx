@@ -44,7 +44,7 @@ export const FilingsCalendarGrid = (props: Props): ReactElement => {
                       key={month}
                       className={
                         isCalendarMonthLessThanCurrentMonth(month) &&
-                        props.activeYear == getCurrentDate().year().toString()
+                        props.activeYear === getCurrentDate().year().toString()
                           ? "td-gray-border bg-base-extra-light"
                           : "td-gray-border"
                       }

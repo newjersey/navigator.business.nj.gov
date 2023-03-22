@@ -26,7 +26,7 @@ export const MiniRoadmapStep = (props: Props): ReactElement => {
       return undefined;
     }
     return roadmap?.tasks.some((task) => {
-      return task.id === props.activeTaskId && task.stepNumber == stepNumber;
+      return task.id === props.activeTaskId && task.stepNumber === stepNumber;
     });
   }, [props.activeTaskId, roadmap?.tasks, stepNumber]);
   useEffect(() => {
@@ -80,7 +80,7 @@ export const MiniRoadmapStep = (props: Props): ReactElement => {
         {isOpen &&
           roadmap?.tasks
             .filter((task) => {
-              return task.stepNumber == props.step.stepNumber;
+              return task.stepNumber === props.step.stepNumber;
             })
             .map((task) => {
               return (

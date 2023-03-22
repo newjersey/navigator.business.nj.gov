@@ -30,7 +30,7 @@ export const generateFormationUSAddress = (overrides: Partial<FormationAddress>)
     addressCity: `some-address-city-${randomInt()}`,
     addressState: randomElementFromArray(
       states.filter((state) => {
-        return state.shortCode != "NJ";
+        return state.shortCode !== "NJ";
       })
     ),
     addressCountry: "US",
@@ -52,7 +52,7 @@ export const generateFormationForeignAddress = (overrides: Partial<FormationAddr
     businessLocationType: "INTL",
     addressCountry: randomElementFromArray(
       countries.filter((item) => {
-        return item.shortCode != "US";
+        return item.shortCode !== "US";
       })
     ).shortCode,
     addressProvince: `some-address-province-${randomInt()}`,

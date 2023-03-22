@@ -34,7 +34,7 @@ export const ProfileTabNav = (props: Props): ReactElement => {
     if (props.userData?.formationData.getFilingResponse?.success) {
       return true;
     }
-    if (props.businessPersona == "STARTING") {
+    if (props.businessPersona === "STARTING") {
       return LookupLegalStructureById(props.userData?.profileData.legalStructureId).elementsToDisplay.has(
         "formationDocuments"
       );

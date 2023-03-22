@@ -45,7 +45,7 @@ export const useFormContextFieldHelpers = <T, FieldError = FieldErrorType>(
       debug && console.log(runValidations);
       debug && console.log(isValidFunc());
       runValidations &&
-        fieldStates[fieldName].updated != undefined &&
+        fieldStates[fieldName].updated !== undefined &&
         reducer({
           type: FieldStateActionKind.VALIDATION,
           payload: { field: fieldName, invalid: !isValidFunc(), errorTypes },

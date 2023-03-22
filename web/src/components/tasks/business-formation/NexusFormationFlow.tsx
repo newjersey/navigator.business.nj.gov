@@ -45,7 +45,7 @@ export const NexusFormationFlow = (): ReactElement => {
       return;
     }
 
-    if (moveType === "STEPPER" && nextStepIndex == 0) {
+    if (moveType === "STEPPER" && nextStepIndex === 0) {
       analytics.event.business_formation_name_tab.click.arrive_on_business_formation_name_step();
     }
   };
@@ -71,7 +71,7 @@ export const NexusFormationFlow = (): ReactElement => {
                   return {
                     name: value.name,
                     hasError: false,
-                    isComplete: index == 0,
+                    isComplete: index === 0,
                   };
                 })}
                 currentStep={state.stepIndex}

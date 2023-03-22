@@ -41,7 +41,7 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
 
   const getCode = (code: string) => {
     return (NaicsCodes as NaicsCodeObject[]).find((element) => {
-      return element?.SixDigitCode?.toString() == code;
+      return element?.SixDigitCode?.toString() === code;
     });
   };
 
@@ -167,7 +167,7 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
                           href={templateEval(Config.determineNaicsCode.naicsDescriptionURL, { code: code })}
                         >
                           {descriptions.find((obj) => {
-                            return obj.SixDigitCode?.toString() == code;
+                            return obj.SixDigitCode?.toString() === code;
                           })?.SixDigitDescription ?? ""}
                         </ExternalLink>
                       </>
@@ -217,7 +217,7 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
                   maxWidth: "350px",
                 },
               }}
-              error={isInvalid != undefined}
+              error={isInvalid !== undefined}
               handleChange={handleChange}
               validationText={errorMessages[isInvalid ?? "length"]}
             />
@@ -226,7 +226,7 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
       ) : (
         <></>
       )}
-      {displayInput || naicsCode != "" ? (
+      {displayInput || naicsCode !== "" ? (
         <>
           <hr className="margin-y-2" />
           <div className="flex flex-row margin-left-auto">

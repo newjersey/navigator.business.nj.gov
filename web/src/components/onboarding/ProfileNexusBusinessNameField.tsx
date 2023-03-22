@@ -44,7 +44,7 @@ export const ProfileNexusBusinessNameField = (): ReactElement => {
 
   return (
     <>
-      {!state?.profileData.businessName || state?.profileData.businessName == ""
+      {!state?.profileData.businessName || state?.profileData.businessName === ""
         ? renderUserEmptyBusinessName()
         : renderUserBusinessName()}
     </>

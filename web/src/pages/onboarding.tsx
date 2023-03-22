@@ -167,7 +167,7 @@ const OnboardingPage = (props: Props): ReactElement => {
         setProfileData(currentUserData.profileData);
         setUser(currentUserData.user);
         setCurrentFlow(getFlow(currentUserData));
-      } else if (state.isAuthenticated == IsAuthenticated.FALSE) {
+      } else if (state.isAuthenticated === IsAuthenticated.FALSE) {
         currentUserData = createEmptyUserData(state.user);
         setRegistrationDimension("Began Onboarding");
         await update(currentUserData);
@@ -342,7 +342,7 @@ const OnboardingPage = (props: Props): ReactElement => {
         if (errors.includes("ALERT_BAR")) {
           setAlert("ERROR");
         }
-        const banner = errors.filter((error) => error != "ALERT_BAR") as ProfileError[];
+        const banner = errors.filter((error) => error !== "ALERT_BAR") as ProfileError[];
         if (banner.length > 0) {
           setError(banner[0]);
         }

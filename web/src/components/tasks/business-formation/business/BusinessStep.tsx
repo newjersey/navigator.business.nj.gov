@@ -13,7 +13,7 @@ export const BusinessStep = (): ReactElement => {
   return (
     <div data-testid="business-step">
       <MainBusiness />
-      {state.formationFormData.legalType == "limited-partnership" ? (
+      {state.formationFormData.legalType === "limited-partnership" ? (
         <>
           <hr className="margin-bottom-2 margin-top-0" aria-hidden={true} />
           <BusinessFormationTextBox
@@ -55,8 +55,8 @@ export const BusinessStep = (): ReactElement => {
         title={Config.formation.fields.businessPurpose.label}
         contentMd={Config.formation.fields.businessPurpose.body}
       />
-      {state.formationFormData.businessLocationType != "NJ" &&
-      state.formationFormData.legalType != "foreign-limited-partnership" ? (
+      {state.formationFormData.businessLocationType !== "NJ" &&
+      state.formationFormData.legalType !== "foreign-limited-partnership" ? (
         <></>
       ) : (
         <>
