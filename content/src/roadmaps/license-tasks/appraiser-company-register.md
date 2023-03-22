@@ -1,17 +1,19 @@
 ---
-id: "appraiser-company-register"
-webflowId: "64147a42c6eb18daf545d290"
-urlSlug: "appraiser-company-register"
-name: "Register an Appraisal Management Company"
-webflowName: "Appraiser Company"
-filename: "appraiser-company-register"
-callToActionLink: "https://www.njconsumeraffairs.gov/rea/Applications/Application-for-Registration-as-an-Appraisal-Management-Company.pdf"
-callToActionText: "Register Your Company"
-issuingAgency: "New Jersey Division of Consumer Affairs Real Estate Appraiser Board"
-licenseCertificationClassification: "REGISTRATION"
+urlSlug: appraiser-company-register
+filename: appraiser-company-register
+name: Register an Appraisal Management Company
+id: appraiser-company-register
+callToActionLink: https://www.njconsumeraffairs.gov/rea/Pages/applications.aspx
+callToActionText: Register My Company
+industryId: real-estate-appraisals
+issuingAgency: New Jersey Division of Consumer Affairs Real Estate Appraiser Board
+webflowName: "Real Estate Appraisal: Management Company Registration"
+industryIntegration: NJ Department of Consumer Affairs
+webflowId: 64147a42c6eb18daf545d290
+licenseCertificationClassification: REGISTRATION
 ---
 
-Your Appraisal Management Company must be registered with the State prior to offering professional services.
+Your appraisal management company must be registered with the State prior to offering professional services.
 
 ---
 
@@ -35,4 +37,4 @@ The application must be signed and notarized.
 
 > **Once completed you will have:**
 >
-> - Registration number for your Appraisal Management Company
+> - An appraisal management company registration number 
