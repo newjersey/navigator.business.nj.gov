@@ -24,4 +24,4 @@ ${endLocationDependentSection}
 
 > **Once completed, you will have:**
 >
-> * A Mercantile License
+> * A mercantile license
