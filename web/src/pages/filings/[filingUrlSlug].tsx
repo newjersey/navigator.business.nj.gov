@@ -73,7 +73,7 @@ export const FilingElement = (props: {
         {(props.filing.taxRates ||
           props.filing.filingMethod ||
           props.filing.frequency ||
-          props.filing.agency == "New Jersey Division of Taxation") && (
+          props.filing.agency === "New Jersey Division of Taxation") && (
           <GreenBox>
             {props.filing.taxRates && (
               <>
@@ -114,7 +114,7 @@ export const FilingElement = (props: {
                 </span>
               </>
             )}
-            {props.filing.agency == "New Jersey Division of Taxation" && (
+            {props.filing.agency === "New Jersey Division of Taxation" && (
               <span className="flex margin-top-05" data-testid="late-filing">
                 <Icon className="usa-icon--size-3 minw-3 margin-1 text-green margin-right-2">cancel</Icon>
                 <Content className="margin-top-1">{`**${Config.filingDefaults.lateFilingsTitle}** &nbsp;&nbsp;${Config.filingDefaults.lateFilingsMarkdown}`}</Content>

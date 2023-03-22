@@ -107,7 +107,7 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
           {Config.formation.fields.signers.tableHeader
             .split(",")
             .filter((_, index) => {
-              return props.needSignature ? true : index != 2;
+              return props.needSignature ? true : index !== 2;
             })
             .map((value: string) => {
               return (

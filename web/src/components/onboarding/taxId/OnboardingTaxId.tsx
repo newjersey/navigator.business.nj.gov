@@ -113,7 +113,7 @@ export const OnboardingTaxId = (props: Props): ReactElement => {
     if (!userData) return true;
     if (
       !(value.length === 0 || value.length === 12) &&
-      (userData.profileData.taxId != value || props.required)
+      (userData.profileData.taxId !== value || props.required)
     ) {
       return false;
     }

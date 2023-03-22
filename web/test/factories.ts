@@ -679,7 +679,7 @@ export const randomFilteredIndustry = (
   { isEnabled = true }
 ): Industry => {
   const filteredIndustries = Industries.filter((x: Industry) => {
-    return func(x) && x.isEnabled == isEnabled;
+    return func(x) && x.isEnabled === isEnabled;
   });
   const randomIndex = Math.floor(Math.random() * filteredIndustries.length);
   return filteredIndustries[randomIndex];

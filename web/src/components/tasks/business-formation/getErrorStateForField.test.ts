@@ -467,7 +467,7 @@ describe("getErrorStateForField", () => {
 
   describe(`incorporator and signer fields`, () => {
     (["signers", "incorporators"] as ("signers" | "incorporators")[]).map((field) => {
-      const generator = field == "signers" ? generateFormationSigner : generateFormationIncorporator;
+      const generator = field === "signers" ? generateFormationSigner : generateFormationIncorporator;
       return describe(`${field}`, () => {
         it(`has NAME-labelled error when some ${field} do not have a name`, () => {
           const formData = generateFormationFormData({
@@ -566,7 +566,7 @@ describe("getErrorStateForField", () => {
           expect(getErrorStateForField(field, formData, undefined).hasError).toEqual(false);
         });
 
-        if (field == "incorporators") {
+        if (field === "incorporators") {
           it(`has error if some incorporators missing city and municipality`, () => {
             const formData = generateFormationFormData({
               incorporators: [

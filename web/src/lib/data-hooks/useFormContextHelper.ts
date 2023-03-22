@@ -111,7 +111,7 @@ export const useFormContextHelper = <
 
       if (onChangeFunc) {
         debug && console.log("change func");
-        onChangeFunc && onChangeFunc(valid, getErrors(), submitted || stagingTab != undefined);
+        onChangeFunc && onChangeFunc(valid, getErrors(), submitted || stagingTab !== undefined);
       }
 
       if (!stillNeedsUpdates) {
@@ -169,7 +169,7 @@ export const useFormContextHelper = <
     getErrors,
     state: {
       fieldStates,
-      runValidations: submitted || stagingTab != undefined,
+      runValidations: submitted || stagingTab !== undefined,
       reducer: fieldStateDispatch,
     },
   };

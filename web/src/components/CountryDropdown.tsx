@@ -59,13 +59,13 @@ export const CountryDropdown = (props: Props): ReactElement => {
   const filteredCountries = () =>
     props.excludeUS
       ? countries.filter((country) => {
-          return country.shortCode != "US";
+          return country.shortCode !== "US";
         })
       : countries;
 
   const getCountry = (value: string | undefined): CountriesObject | undefined => {
     return filteredCountries().find((country: CountriesObject) => {
-      return country.name == value || country.shortCode == value?.toUpperCase();
+      return country.name === value || country.shortCode === value?.toUpperCase();
     });
   };
 

@@ -53,7 +53,7 @@ export const OnboardingDateOfFormation = (props: Props): ReactElement => {
   }, state.profileData.dateOfFormation);
 
   const isValid = (): boolean =>
-    ((dateValue == null && !props.required) || (dateValue?.isValid() && !dateError)) ?? false;
+    ((dateValue === null && !props.required) || (dateValue?.isValid() && !dateError)) ?? false;
 
   RegisterForOnSubmit(isValid);
   const onValidation = (): void => Validate(!isValid());

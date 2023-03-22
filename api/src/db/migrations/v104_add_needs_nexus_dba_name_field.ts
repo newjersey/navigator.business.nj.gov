@@ -21,7 +21,7 @@ export const migrate_v103_to_v104 = (v103Data: v103UserData): v104UserData => {
     profileData: {
       ...v103Data.profileData,
       nexusDbaName: v103Data.profileData.nexusDbaName ?? "",
-      needsNexusDbaName: v103Data.profileData.nexusDbaName == undefined ? false : true,
+      needsNexusDbaName: v103Data.profileData.nexusDbaName === undefined ? false : true,
     },
     version: 104,
   };
@@ -469,7 +469,7 @@ export const generateV104FormationFormData = (
     agentUseAccountInfo: !!(randomInt() % 2),
     agentUseBusinessAddress: !!(randomInt() % 2),
     signers: [{ name: "some-name", signature: "some-signature", title: "some-title" }],
-    members: legalStructureId == "limited-liability-partnership" ? [] : [generateV104FormationMember({})],
+    members: legalStructureId === "limited-liability-partnership" ? [] : [generateV104FormationMember({})],
     paymentType: randomInt() % 2 ? "ACH" : "CC",
     annualReportNotification: !!(randomInt() % 2),
     corpWatchNotification: !!(randomInt() % 2),

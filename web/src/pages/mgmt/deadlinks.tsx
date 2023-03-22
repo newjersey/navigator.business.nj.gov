@@ -53,7 +53,7 @@ const DeadLinksPage = (props: Props): ReactElement => {
 
 export const getServerSideProps = async (): Promise<GetServerSidePropsResult<Props>> => {
   const buildCheckDeadPages =
-    (process.env.CHECK_DEAD_LINKS && process.env.CHECK_DEAD_LINKS == "true") || false;
+    (process.env.CHECK_DEAD_LINKS && process.env.CHECK_DEAD_LINKS === "true") || false;
   return buildCheckDeadPages
     ? {
         props: {

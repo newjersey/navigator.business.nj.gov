@@ -25,7 +25,7 @@ export const OnboardingLocationInNewJersey = <T,>(props: FormContextFieldProps<T
       fieldName: "nexusLocationInNewJersey",
     });
 
-  RegisterForOnSubmit(() => state.profileData["nexusLocationInNewJersey"] != undefined);
+  RegisterForOnSubmit(() => state.profileData["nexusLocationInNewJersey"] !== undefined);
   const handleSelection = (event: React.ChangeEvent<{ name?: string; value: unknown }>) => {
     let hasLocationInNJ;
     event.target.value === "true" ? (hasLocationInNJ = true) : (hasLocationInNJ = false);

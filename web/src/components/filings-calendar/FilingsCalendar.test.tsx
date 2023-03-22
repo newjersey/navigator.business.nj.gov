@@ -526,7 +526,7 @@ describe("<FilingsCalendar />", () => {
           legalStructureId: randomLegalStructure({ requiresPublicFiling: true }).id,
           operatingPhase: randomElementFromArray(
             OperatingPhases.filter((obj) => {
-              return obj.displayTaxAccessButton === true && obj.displayCalendarType != "NONE";
+              return obj.displayTaxAccessButton === true && obj.displayCalendarType !== "NONE";
             })
           ).id,
         }),
@@ -555,7 +555,7 @@ describe("<FilingsCalendar />", () => {
           legalStructureId: randomLegalStructure({ requiresPublicFiling: false }).id,
           operatingPhase: randomElementFromArray(
             OperatingPhases.filter((obj) => {
-              return obj.displayTaxAccessButton === true && obj.displayCalendarType != "NONE";
+              return obj.displayTaxAccessButton === true && obj.displayCalendarType !== "NONE";
             })
           ).id,
         }),
@@ -587,7 +587,7 @@ describe("<FilingsCalendar />", () => {
           legalStructureId: randomLegalStructure({ requiresPublicFiling: true }).id,
           operatingPhase: randomElementFromArray(
             OperatingPhases.filter((obj) => {
-              return obj.displayTaxAccessButton !== true && obj.displayCalendarType != "NONE";
+              return obj.displayTaxAccessButton !== true && obj.displayCalendarType !== "NONE";
             })
           ).id,
         }),

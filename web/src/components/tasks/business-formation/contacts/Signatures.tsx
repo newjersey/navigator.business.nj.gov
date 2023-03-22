@@ -133,7 +133,7 @@ export const Signatures = (): ReactElement => {
     return (
       <div
         className={`grid-col-auto width-6 display-flex flex-column flex-align-center ${
-          index == 0 ? "flex-justify-center" : "tablet:flex-justify-start margin-top-4 tablet:margin-top-0"
+          index === 0 ? "flex-justify-center" : "tablet:flex-justify-start margin-top-4 tablet:margin-top-0"
         }`}
       >
         <label
@@ -144,7 +144,7 @@ export const Signatures = (): ReactElement => {
           {Config.formation.fields.signers.signColumnLabel}*
         </label>
         <div
-          style={{ height: `${index == 0 ? "44px" : "60px"}` }}
+          style={{ height: `${index === 0 ? "44px" : "60px"}` }}
           className="display-flex flex-column flex-justify-center"
         >
           <ValidatedCheckbox
@@ -222,7 +222,7 @@ export const Signatures = (): ReactElement => {
             );
           })}
         </Select>
-        {hasError && state.formationFormData!.signers[index].title == undefined && (
+        {hasError && state.formationFormData!.signers[index].title === undefined && (
           <FormHelperText className={"text-error-dark"}>
             {Config.formation.fields.signers.errorInlineSignerTitle}
           </FormHelperText>

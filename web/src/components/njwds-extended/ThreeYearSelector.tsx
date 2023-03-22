@@ -17,8 +17,8 @@ type Props = {
 };
 export const ThreeYearSelector = (props: Props): ReactElement => {
   const getColors = (year: string): string | undefined => {
-    if (year == props.activeYear) return colors["active"];
-    if (year == getCurrentDate().year().toString()) return colors["current"];
+    if (year === props.activeYear) return colors["active"];
+    if (year === getCurrentDate().year().toString()) return colors["current"];
     return colors["unselected"];
   };
 

@@ -74,7 +74,7 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
   };
 
   const errorAlert = (): ReactElement => {
-    if (userData?.taxFilingData.errorField == "businessName" && apiFailed == "FAILED") {
+    if (userData?.taxFilingData.errorField === "businessName" && apiFailed === "FAILED") {
       return (
         <>
           {Config.taxCalendar.failedErrorMessageHeader}
@@ -83,7 +83,7 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
           </ul>
         </>
       );
-    } else if (apiFailed == "FAILED") {
+    } else if (apiFailed === "FAILED") {
       return (
         <>
           {Config.taxCalendar.failedErrorMessageHeader}
@@ -108,7 +108,7 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
       let userDataToSet: UserData;
 
       const encryptedTaxId =
-        profileData.taxId == userData.profileData.taxId ? profileData.encryptedTaxId : undefined;
+        profileData.taxId === userData.profileData.taxId ? profileData.encryptedTaxId : undefined;
 
       try {
         let businessNameToSubmitToTaxApi = "";
@@ -143,26 +143,26 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
 
       await update(userDataToSet);
 
-      if (userDataToSet.taxFilingData.state == "SUCCESS") {
+      if (userDataToSet.taxFilingData.state === "SUCCESS") {
         setIsLoading(false);
         analytics.event.tax_calendar_modal.submit.tax_deadlines_added_to_calendar();
         props.onSuccess();
       }
 
-      if (userDataToSet.taxFilingData.state == "PENDING") {
+      if (userDataToSet.taxFilingData.state === "PENDING") {
         setIsLoading(false);
         analytics.event.tax_calendar_modal.submit.business_exists_but_not_in_Gov2Go();
         props.close();
       }
 
-      if (userDataToSet.taxFilingData.state == "FAILED") {
-        if (userDataToSet.taxFilingData.errorField == "businessName" && displayBusinessName()) {
+      if (userDataToSet.taxFilingData.state === "FAILED") {
+        if (userDataToSet.taxFilingData.errorField === "businessName" && displayBusinessName()) {
           formContextState.reducer({
             type: FieldStateActionKind.VALIDATION,
             payload: { field: "businessName", invalid: true },
           });
         } else if (
-          userDataToSet.taxFilingData.errorField == "businessName" &&
+          userDataToSet.taxFilingData.errorField === "businessName" &&
           displayResponsibleOwnerName()
         ) {
           formContextState.reducer({
@@ -180,7 +180,7 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
         setIsLoading(false);
       }
 
-      if (userDataToSet.taxFilingData.state == "API_ERROR") {
+      if (userDataToSet.taxFilingData.state === "API_ERROR") {
         setOnAPIfailed("UNKNOWN");
         setIsLoading(false);
       }

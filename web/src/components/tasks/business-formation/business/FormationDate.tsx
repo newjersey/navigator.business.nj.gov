@@ -81,13 +81,13 @@ export const FormationDate = (props: Props): ReactElement => {
       <div className="tablet:display-flex tablet:flex-row tablet:flex-justify">
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <Picker
-            minDate={props.fieldName == "businessStartDate" ? getCurrentDate() : undefined}
+            minDate={props.fieldName === "businessStartDate" ? getCurrentDate() : undefined}
             disabled={
-              props.fieldName == "businessStartDate" &&
-              getBusinessStartDateRule(state.formationFormData.legalType) == "Today"
+              props.fieldName === "businessStartDate" &&
+              getBusinessStartDateRule(state.formationFormData.legalType) === "Today"
             }
             maxDate={
-              props.fieldName == "businessStartDate"
+              props.fieldName === "businessStartDate"
                 ? getBusinessStartDateMaxDate(state.formationFormData.legalType)
                 : getCurrentDate().add(100, "years")
             }

@@ -59,13 +59,13 @@ export const StateDropdown = (props: Props): ReactElement => {
   const filteredStates = () =>
     props.excludeNJ
       ? states.filter((stateObject) => {
-          return stateObject.shortCode != "NJ";
+          return stateObject.shortCode !== "NJ";
         })
       : states;
 
   const getState = (value: string | undefined): StateObject | undefined => {
     return filteredStates().find((state: StateObject) => {
-      return state.name == value || state.shortCode == value?.toUpperCase();
+      return state.name === value || state.shortCode === value?.toUpperCase();
     });
   };
 

@@ -136,7 +136,7 @@ export const generateTaxFilingData = (overrides: Partial<TaxFilingData>): TaxFil
     state: undefined,
     businessName: undefined,
     errorField:
-      overrides.state == "FAILED"
+      overrides.state === "FAILED"
         ? randomElementFromArray(["businessName", "formFailure", undefined])
         : undefined,
     lastUpdatedISO: overrides.state ? new Date(Date.now()).toISOString() : undefined,

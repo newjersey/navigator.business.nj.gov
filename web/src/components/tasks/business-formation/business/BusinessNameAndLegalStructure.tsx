@@ -37,7 +37,7 @@ export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): 
   const legalStructureName = (): string => {
     if (!userData || !userData.profileData.legalStructureId) return "";
     const preface =
-      userData?.profileData.businessPersona == "FOREIGN"
+      userData?.profileData.businessPersona === "FOREIGN"
         ? `${Config.formation.legalStructure.foreignPrefaceText} `
         : "";
 

@@ -311,11 +311,13 @@ describe("ApiFormationClient", () => {
                 Address2: formationFormData.addressLine2,
                 City: formationFormData.addressCity,
                 State:
-                  formationFormData.addressCountry == "US" ? formationFormData.addressState?.name : undefined,
+                  formationFormData.addressCountry === "US"
+                    ? formationFormData.addressState?.name
+                    : undefined,
                 Zipcode: formationFormData.addressZipCode,
                 Country: formationFormData.addressCountry,
                 Province:
-                  formationFormData.addressCountry == "US" ? undefined : formationFormData.addressProvince,
+                  formationFormData.addressCountry === "US" ? undefined : formationFormData.addressProvince,
               },
             },
             CompanyProfit: "Profit",
@@ -609,11 +611,13 @@ describe("ApiFormationClient", () => {
                 Address2: formationFormData.addressLine2,
                 City: formationFormData.addressCity,
                 State:
-                  formationFormData.addressCountry == "US" ? formationFormData.addressState?.name : undefined,
+                  formationFormData.addressCountry === "US"
+                    ? formationFormData.addressState?.name
+                    : undefined,
                 Zipcode: formationFormData.addressZipCode,
                 Country: formationFormData.addressCountry,
                 Province:
-                  formationFormData.addressCountry == "US" ? undefined : formationFormData.addressProvince,
+                  formationFormData.addressCountry === "US" ? undefined : formationFormData.addressProvince,
               },
             },
             CompanyProfit: "Profit",
@@ -864,11 +868,13 @@ describe("ApiFormationClient", () => {
                 Address2: formationFormData.addressLine2,
                 City: formationFormData.addressCity,
                 State:
-                  formationFormData.addressCountry == "US" ? formationFormData.addressState?.name : undefined,
+                  formationFormData.addressCountry === "US"
+                    ? formationFormData.addressState?.name
+                    : undefined,
                 Zipcode: formationFormData.addressZipCode,
                 Country: formationFormData.addressCountry,
                 Province:
-                  formationFormData.addressCountry == "US" ? undefined : formationFormData.addressProvince,
+                  formationFormData.addressCountry === "US" ? undefined : formationFormData.addressProvince,
               },
             },
             CompanyProfit: "Profit",

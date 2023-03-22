@@ -48,7 +48,7 @@ export const OnboardingSectors = <T,>(props: FormContextFieldProps<T>): ReactEle
   };
 
   const isValid = () =>
-    !!state.profileData.sectorId && LookupSectorTypeById(state.profileData.sectorId)?.id != undefined;
+    !!state.profileData.sectorId && LookupSectorTypeById(state.profileData.sectorId)?.id !== undefined;
 
   const onValidation = (): void => Validate(!isValid());
 

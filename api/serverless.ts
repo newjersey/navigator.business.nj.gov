@@ -7,7 +7,7 @@ import express from "./src/functions/express";
 import githubOauth2 from "./src/functions/githubOauth2";
 import updateExternalStatus from "./src/functions/updateExternalStatus";
 
-const isDocker = process.env.IS_DOCKER == "true" || false; // set in docker-compose
+const isDocker = process.env.IS_DOCKER === "true" || false; // set in docker-compose
 const stage = process.env.STAGE || "local";
 const dynamoOfflinePort = process.env.DYNAMO_PORT || 8000;
 const offlinePort = process.env.API_PORT || 5002;

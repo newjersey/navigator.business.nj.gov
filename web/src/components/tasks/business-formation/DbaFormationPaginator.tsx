@@ -34,7 +34,7 @@ export const DbaFormationPaginator = (): ReactElement => {
       return {
         name: value.name,
         hasError: false,
-        isComplete: index == 0,
+        isComplete: index === 0,
       };
     })
   );
@@ -55,7 +55,7 @@ export const DbaFormationPaginator = (): ReactElement => {
 
   const onPreviousButtonClick = (): void => {
     setStepperState((stepperState) => {
-      stepperState[1].isComplete = state.stepIndex != 2;
+      stepperState[1].isComplete = state.stepIndex !== 2;
       return stepperState;
     });
     moveToStep(state.stepIndex - 1);
@@ -69,8 +69,8 @@ export const DbaFormationPaginator = (): ReactElement => {
   ): Promise<void> => {
     onStepChangeAnalytics(userData?.formationData.formationFormData, stepIndex, config.moveType);
     if (
-      config.moveType == "NEXT_BUTTON" &&
-      stepIndex == 1 &&
+      config.moveType === "NEXT_BUTTON" &&
+      stepIndex === 1 &&
       isNotDba &&
       isAuthenticated === IsAuthenticated.FALSE
     ) {
@@ -78,7 +78,7 @@ export const DbaFormationPaginator = (): ReactElement => {
       return;
     }
     setStepperState((stepperState) => {
-      stepperState[1].isComplete = stepIndex == 2;
+      stepperState[1].isComplete = stepIndex === 2;
       return stepperState;
     });
     moveToStep(stepIndex);
@@ -93,19 +93,19 @@ export const DbaFormationPaginator = (): ReactElement => {
       return;
     }
 
-    if (moveType === "STEPPER" && nextStepIndex == 0) {
+    if (moveType === "STEPPER" && nextStepIndex === 0) {
       analytics.event.business_formation_name_tab.click.arrive_on_business_formation_name_step();
     }
-    if (moveType === "STEPPER" && nextStepIndex == 1) {
+    if (moveType === "STEPPER" && nextStepIndex === 1) {
       analytics.event.business_formation_dba_resolution_tab.click.arrive_on_business_formation_dba_resolution_step();
     }
-    if (moveType === "STEPPER" && nextStepIndex == 2) {
+    if (moveType === "STEPPER" && nextStepIndex === 2) {
       analytics.event.business_formation_dba_authorization_tab.click.arrive_on_business_formation_dba_authorization_step();
     }
-    if (moveType === "NEXT_BUTTON" && nextStepIndex == 1) {
+    if (moveType === "NEXT_BUTTON" && nextStepIndex === 1) {
       analytics.event.business_formation_dba_resolution_step_continue_button.click.arrive_on_business_formation_dba_resolution_step();
     }
-    if (moveType === "NEXT_BUTTON" && nextStepIndex == 2) {
+    if (moveType === "NEXT_BUTTON" && nextStepIndex === 2) {
       analytics.event.business_formation_dba_authorization_step_continue_button.click.arrive_on_business_formation_dba_authorization_step();
     }
   };
@@ -150,20 +150,20 @@ export const DbaFormationPaginator = (): ReactElement => {
   };
 
   const displayButtons = () => {
-    if (state.stepIndex == 0 && state.businessNameAvailability?.status == "AVAILABLE") {
+    if (state.stepIndex === 0 && state.businessNameAvailability?.status === "AVAILABLE") {
       return (
         <ButtonWrapper>
           <ForwardButton />
         </ButtonWrapper>
       );
-    } else if (state.stepIndex == 1) {
+    } else if (state.stepIndex === 1) {
       return (
         <ButtonWrapper>
           <BackButton />
           <ForwardButton />
         </ButtonWrapper>
       );
-    } else if (state.stepIndex == 2) {
+    } else if (state.stepIndex === 2) {
       return (
         <TaskCTA
           link={state.dbaContent.Authorize.callToActionLink}

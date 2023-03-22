@@ -106,7 +106,7 @@ export const getErrorStateForField = (
     "foreignStateOfFormation",
   ];
 
-  if (field == "foreignStateOfFormation") {
+  if (field === "foreignStateOfFormation") {
     return {
       ...errorState,
       hasError: formationFormData.foreignStateOfFormation === undefined,

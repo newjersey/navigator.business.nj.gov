@@ -25,12 +25,12 @@ export const SignUpModal = (): ReactElement => {
   } = useContext(AuthAlertContext);
 
   useMountEffectWhenDefined(() => {
-    if (isAuthenticated == IsAuthenticated.TRUE) {
+    if (isAuthenticated === IsAuthenticated.TRUE) {
       setRegistrationModalIsVisible(false);
     }
   }, isAuthenticated);
 
-  if (isAuthenticated == IsAuthenticated.TRUE) {
+  if (isAuthenticated === IsAuthenticated.TRUE) {
     return <></>;
   }
 

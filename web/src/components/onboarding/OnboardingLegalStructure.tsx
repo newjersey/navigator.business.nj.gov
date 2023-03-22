@@ -28,7 +28,7 @@ export const OnboardingLegalStructure = <T,>(props: FormContextFieldProps<T>): R
     props.errorTypes
   );
 
-  RegisterForOnSubmit(() => state.profileData.legalStructureId != undefined);
+  RegisterForOnSubmit(() => state.profileData.legalStructureId !== undefined);
 
   const LegalStructuresOrdered: LegalStructure[] = orderBy(
     LegalStructures,

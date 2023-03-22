@@ -59,7 +59,7 @@ export const migrate_v96_to_v97 = (v96Data: v96UserData): v97UserData => {
             return {
               ...signer,
               addressState: arrayOfStateObjects.find((state) => {
-                return state.name == signer.addressState;
+                return state.name === signer.addressState;
               }),
               addressCountry: "US",
               title: v97businessSignerTypeMap[props.profileData.legalStructureId ?? ""][0],
@@ -74,7 +74,7 @@ export const migrate_v96_to_v97 = (v96Data: v96UserData): v97UserData => {
             return {
               ...member,
               addressState: arrayOfStateObjects.find((state) => {
-                return state.name == member.addressState;
+                return state.name === member.addressState;
               }),
               addressCountry: "US",
             };
@@ -662,7 +662,7 @@ export const v97generateFormationFormData = (
     agentUseAccountInfo: !!(randomInt() % 2),
     agentUseBusinessAddress: !!(randomInt() % 2),
     signers: [{ name: "some-name", signature: "some-signature", title: "some-title" }],
-    members: legalStructureId == "limited-liability-partnership" ? [] : [v97generateFormationMember({})],
+    members: legalStructureId === "limited-liability-partnership" ? [] : [v97generateFormationMember({})],
     paymentType: randomInt() % 2 ? "ACH" : "CC",
     annualReportNotification: !!(randomInt() % 2),
     corpWatchNotification: !!(randomInt() % 2),

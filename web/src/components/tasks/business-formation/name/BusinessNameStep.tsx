@@ -127,7 +127,7 @@ export const BusinessNameStep = (): ReactElement => {
           </div>
         </WithErrorBar>
       </form>
-      {error != null && (
+      {error && (
         <Alert variant="error" dataTestid={`error-alert-${error}`}>
           {SearchBusinessNameErrorLookup[error]}
         </Alert>

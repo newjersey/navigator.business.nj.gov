@@ -1820,7 +1820,7 @@ describe("profile", () => {
                 taxId: "*******89123",
                 encryptedTaxId: "some-encrypted-value",
                 businessPersona,
-                foreignBusinessTypeIds: businessPersona == "FOREIGN" ? ["NONE"] : undefined,
+                foreignBusinessTypeIds: businessPersona === "FOREIGN" ? ["NONE"] : undefined,
               }),
               taxFilingData: generateTaxFilingData({ state: randomInt() % 2 ? "SUCCESS" : "PENDING" }),
             });
@@ -1837,7 +1837,7 @@ describe("profile", () => {
       describe("disclaimer", () => {
         businessPersonas.map((businessPersona) => {
           const foreignBusinessTypes: ForeignBusinessType[] = [undefined];
-          if (businessPersona == "FOREIGN") foreignBusinessTypes.push("NEXUS");
+          if (businessPersona === "FOREIGN") foreignBusinessTypes.push("NEXUS");
           foreignBusinessTypes.map((foreignBusinessType) => {
             it(`shows disclaimer for trade name legal structure for ${businessPersona} ${
               foreignBusinessType ?? ""

@@ -43,7 +43,7 @@ export const FilingsCalendarSingleGrid = (props: Props) => {
 
   const firstTwoFilings = thisMonthFilings.slice(0, NUM_OF_FILINGS_ALWAYS_VIEWABLE);
   const remainingFilings = thisMonthFilings.slice(NUM_OF_FILINGS_ALWAYS_VIEWABLE);
-  const isOnCurrentYear = getCurrentDate().year().toString() == props.activeYear;
+  const isOnCurrentYear = getCurrentDate().year().toString() === props.activeYear;
 
   const renderFilings = (filings: TaxFiling[]) => {
     return filings

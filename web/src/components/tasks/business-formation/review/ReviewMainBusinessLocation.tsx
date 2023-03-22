@@ -17,19 +17,19 @@ export const ReviewMainBusinessLocation = (): ReactElement => {
     return getStringifiedAddress({
       addressLine1: state.formationFormData.addressLine1 || italicNotEnteredText,
       city:
-        (businessLocationType == "NJ"
+        (businessLocationType === "NJ"
           ? state.formationFormData.addressMunicipality?.displayName
           : state.formationFormData.addressCity) || italicNotEnteredText,
       state:
-        (businessLocationType == "INTL"
+        (businessLocationType === "INTL"
           ? state.formationFormData.addressProvince
           : state.formationFormData.addressState?.name) || italicNotEnteredText,
       zipcode: state.formationFormData.addressZipCode || italicNotEnteredText,
       addressLine2: state.formationFormData.addressLine2,
       country:
-        businessLocationType == "INTL"
+        businessLocationType === "INTL"
           ? arrayOfCountriesObjects.find(
-              (country) => country.shortCode == state.formationFormData.addressCountry
+              (country) => country.shortCode === state.formationFormData.addressCountry
             )?.name ?? italicNotEnteredText
           : undefined,
     });

@@ -190,7 +190,7 @@ const ProfilePage = (props: Props): ReactElement => {
         updateQueue.queueTaskProgress({ [einTaskId]: "COMPLETED" });
       }
 
-      if (updateQueue.current().profileData.taxId != profileData.taxId) {
+      if (updateQueue.current().profileData.taxId !== profileData.taxId) {
         updateQueue.queueTaxFilingData({ state: undefined, registeredISO: undefined, filings: [] });
       }
 
@@ -277,7 +277,7 @@ const ProfilePage = (props: Props): ReactElement => {
 
   const shouldLockFormationFields = userData?.formationData.getFilingResponse?.success;
   const shouldLockTaxId =
-    userData?.taxFilingData.state === "SUCCESS" || userData?.taxFilingData.state == "PENDING";
+    userData?.taxFilingData.state === "SUCCESS" || userData?.taxFilingData.state === "PENDING";
 
   const nexusBusinessElements: Record<ProfileTabs, ReactNode> = {
     info: (

@@ -17,7 +17,7 @@ export const externalEndpointRouterFactory = (
     let userData = req.body as UserData;
     let isAnonymous;
     try {
-      isAnonymous = getSignedInUserId(req) != userData.user.id;
+      isAnonymous = getSignedInUserId(req) !== userData.user.id;
     } catch {
       isAnonymous = true;
     }
@@ -39,7 +39,7 @@ export const externalEndpointRouterFactory = (
     let userData = req.body as UserData;
     let isAnonymous;
     try {
-      isAnonymous = getSignedInUserId(req) != userData.user.id;
+      isAnonymous = getSignedInUserId(req) !== userData.user.id;
     } catch {
       isAnonymous = true;
     }
