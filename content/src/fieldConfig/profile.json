@@ -12,7 +12,7 @@
       },
       "notes": {
         "default": {
-          "header": "Notes",
+          "header": "",
           "description": "Use this space to add any information for quick reference."
         }
       },
@@ -266,7 +266,7 @@
       },
       "documents": {
         "default": {
-          "header": "Reference Documents",
+          "header": "",
           "placeholder": "If you are an LLC, Corporation, or LLP, we will automatically add your formation documents once you [Form Your Business](/tasks/form-business-entity) on our site."
         }
       },

@@ -3697,7 +3697,6 @@ collections:
                         collapsed: false
                         widget: object
                         fields:
-                          - { label: "Header", name: "header", widget: "string" }
                           - { label: "Placeholder", name: "placeholder", widget: "markdown" }
                   - label: Notes
                     name: notes
@@ -3709,7 +3708,6 @@ collections:
                         collapsed: false
                         widget: object
                         fields:
-                          - { label: "Header", name: "header", widget: "string" }
                           - { label: "Description", name: "description", widget: "markdown" }
                   - label: Responsible Owner Name
                     name: responsibleOwnerName

@@ -1900,130 +1900,112 @@ describe("profile", () => {
         expect(screen.queryByTestId("documents")).not.toBeInTheDocument();
         expect(screen.queryByTestId("profileContent-documents")).not.toBeInTheDocument();
       });
-    });
 
-    describe("if Oscar", () => {
-      it("shows document section if user has successfully completed business formation", () => {
+      it("shows placeholder text if there are no documents", () => {
         const userData = generateUserData({
           formationData: generateFormationData({
             getFilingResponse: generateGetFilingResponse({ success: true }),
           }),
           profileData: generateProfileData({
-            businessPersona: "OWNING",
+            businessPersona: "STARTING",
+            legalStructureId: "limited-liability-company",
+            documents: { certifiedDoc: "", formationDoc: "", standingDoc: "" },
           }),
         });
         renderPage({ userData });
         chooseTab("documents");
-        expect(screen.getByTestId("profileContent-documents")).toBeInTheDocument();
+        expect(
+          screen.getByText(Config.profileDefaults.fields.documents.default.placeholder.split("[")[0], {
+            exact: false,
+          })
+        ).toBeInTheDocument();
       });
 
-      it("removes document section if user has not completed business formation", () => {
+      it("shows document links", () => {
         const userData = generateUserData({
           formationData: generateFormationData({
-            getFilingResponse: generateGetFilingResponse({ success: false }),
+            getFilingResponse: generateGetFilingResponse({ success: true }),
           }),
+          profileData: generateProfileData({
+            businessPersona: "STARTING",
+            legalStructureId: "limited-liability-company",
+            documents: { certifiedDoc: "zp.zip", formationDoc: "whatever.pdf", standingDoc: "lol" },
+          }),
+        });
+        renderPage({ userData });
+        chooseTab("documents");
+        expect(screen.queryByText("test12345")).not.toBeInTheDocument();
+        expect(screen.getByText(Config.profileDefaults.formationDocFileTitle)).toBeInTheDocument();
+        expect(screen.getByText(Config.profileDefaults.certificationDocFileTitle)).toBeInTheDocument();
+        expect(screen.getByText(Config.profileDefaults.standingDocFileTitle)).toBeInTheDocument();
+      });
+
+      it("uses links from useDocuments hook", () => {
+        setMockDocumentsResponse({
+          formationDoc: "testForm.pdf",
+          certifiedDoc: "testCert.pdf",
+          standingDoc: "testStand.pdf",
+        });
+        const userData = generateUserData({
+          formationData: generateFormationData({
+            getFilingResponse: generateGetFilingResponse({ success: true }),
+          }),
+          profileData: generateProfileData({
+            businessPersona: "STARTING",
+            legalStructureId: "limited-liability-company",
+            documents: { certifiedDoc: "pz.zip", formationDoc: "whatever.pdf", standingDoc: "lol" },
+          }),
+        });
+        renderPage({
+          userData,
+        });
+        chooseTab("documents");
+
+        expect(screen.getByText(Config.profileDefaults.formationDocFileTitle)).toHaveAttribute(
+          "href",
+          "testForm.pdf"
+        );
+        expect(screen.getByText(Config.profileDefaults.standingDocFileTitle)).toHaveAttribute(
+          "href",
+          "testStand.pdf"
+        );
+        expect(screen.getByText(Config.profileDefaults.certificationDocFileTitle)).toHaveAttribute(
+          "href",
+          "testCert.pdf"
+        );
+      });
+
+      it("hides document links if they do not exist", () => {
+        const userData = generateUserData({
+          formationData: generateFormationData({
+            getFilingResponse: generateGetFilingResponse({ success: true }),
+          }),
+          profileData: generateProfileData({
+            businessPersona: "STARTING",
+            legalStructureId: "limited-liability-company",
+            documents: { certifiedDoc: "pp.zip", formationDoc: "whatever.pdf", standingDoc: "" },
+          }),
+        });
+
+        renderPage({ userData });
+        chooseTab("documents");
+
+        expect(screen.getByText(Config.profileDefaults.formationDocFileTitle)).toBeInTheDocument();
+        expect(screen.getByText(Config.profileDefaults.certificationDocFileTitle)).toBeInTheDocument();
+        expect(screen.queryByText(Config.profileDefaults.standingDocFileTitle)).not.toBeInTheDocument();
+      });
+    });
+
+    describe("if Oscar", () => {
+      it("has no document section", () => {
+        const userData = generateUserData({
           profileData: generateProfileData({
             businessPersona: "OWNING",
           }),
         });
         renderPage({ userData });
         expect(screen.queryByTestId("documents")).not.toBeInTheDocument();
-        expect(screen.queryByTestId("profileContent-documents")).not.toBeInTheDocument();
       });
-    });
-
-    it("shows placeholder text if there are no documents", () => {
-      const userData = generateUserData({
-        formationData: generateFormationData({
-          getFilingResponse: generateGetFilingResponse({ success: true }),
-        }),
-        profileData: generateProfileData({
-          businessPersona: "STARTING",
-          legalStructureId: "limited-liability-company",
-          documents: { certifiedDoc: "", formationDoc: "", standingDoc: "" },
-        }),
-      });
-      renderPage({ userData });
-      chooseTab("documents");
-      expect(
-        screen.getByText(Config.profileDefaults.fields.documents.default.placeholder.split("[")[0], {
-          exact: false,
-        })
-      ).toBeInTheDocument();
-    });
-
-    it("shows document links", () => {
-      const userData = generateUserData({
-        formationData: generateFormationData({
-          getFilingResponse: generateGetFilingResponse({ success: true }),
-        }),
-        profileData: generateProfileData({
-          businessPersona: "STARTING",
-          legalStructureId: "limited-liability-company",
-          documents: { certifiedDoc: "zp.zip", formationDoc: "whatever.pdf", standingDoc: "lol" },
-        }),
-      });
-      renderPage({ userData });
-      chooseTab("documents");
-      expect(screen.queryByText("test12345")).not.toBeInTheDocument();
-      expect(screen.getByText(Config.profileDefaults.formationDocFileTitle)).toBeInTheDocument();
-      expect(screen.getByText(Config.profileDefaults.certificationDocFileTitle)).toBeInTheDocument();
-      expect(screen.getByText(Config.profileDefaults.standingDocFileTitle)).toBeInTheDocument();
-    });
-
-    it("uses links from useDocuments hook", () => {
-      setMockDocumentsResponse({
-        formationDoc: "testForm.pdf",
-        certifiedDoc: "testCert.pdf",
-        standingDoc: "testStand.pdf",
-      });
-      const userData = generateUserData({
-        formationData: generateFormationData({
-          getFilingResponse: generateGetFilingResponse({ success: true }),
-        }),
-        profileData: generateProfileData({
-          businessPersona: "STARTING",
-          legalStructureId: "limited-liability-company",
-          documents: { certifiedDoc: "pz.zip", formationDoc: "whatever.pdf", standingDoc: "lol" },
-        }),
-      });
-      renderPage({
-        userData,
-      });
-      chooseTab("documents");
-
-      expect(screen.getByText(Config.profileDefaults.formationDocFileTitle)).toHaveAttribute(
-        "href",
-        "testForm.pdf"
-      );
-      expect(screen.getByText(Config.profileDefaults.standingDocFileTitle)).toHaveAttribute(
-        "href",
-        "testStand.pdf"
-      );
-      expect(screen.getByText(Config.profileDefaults.certificationDocFileTitle)).toHaveAttribute(
-        "href",
-        "testCert.pdf"
-      );
-    });
-
-    it("hides document links if they do not exist", () => {
-      const userData = generateUserData({
-        formationData: generateFormationData({
-          getFilingResponse: generateGetFilingResponse({ success: true }),
-        }),
-        profileData: generateProfileData({
-          businessPersona: "STARTING",
-          legalStructureId: "limited-liability-company",
-          documents: { certifiedDoc: "pp.zip", formationDoc: "whatever.pdf", standingDoc: "" },
-        }),
-      });
-
-      renderPage({ userData });
-      chooseTab("documents");
-
-      expect(screen.getByText(Config.profileDefaults.formationDocFileTitle)).toBeInTheDocument();
-      expect(screen.getByText(Config.profileDefaults.certificationDocFileTitle)).toBeInTheDocument();
-      expect(screen.queryByText(Config.profileDefaults.standingDocFileTitle)).not.toBeInTheDocument();
     });
   });
 

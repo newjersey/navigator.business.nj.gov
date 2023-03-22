@@ -1,10 +1,10 @@
 import { FieldLabelProfile } from "@/components/onboarding/FieldLabelProfile";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
-import { IndustrySpecificDataAddOnFields, ProfileContentField } from "@/lib/types/types";
+import { ProfileContentField } from "@/lib/types/types";
 import { ReactElement, useContext } from "react";
 
 export interface Props {
-  fieldName: Exclude<ProfileContentField, IndustrySpecificDataAddOnFields>;
+  fieldName: ProfileContentField;
   valueFormatter?: (value: string) => string;
 }
 

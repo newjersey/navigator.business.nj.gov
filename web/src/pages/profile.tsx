@@ -6,7 +6,6 @@ import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { SidebarPageLayout } from "@/components/njwds-extended/SidebarPageLayout";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { FieldLabelProfile } from "@/components/onboarding/FieldLabelProfile";
-import { LockedProfileField } from "@/components/onboarding/LockedProfileField";
 import { OnboardingBusinessName } from "@/components/onboarding/OnboardingBusinessName";
 import { OnboardingDateOfFormation } from "@/components/onboarding/OnboardingDateOfFormation";
 import { OnboardingEmployerId } from "@/components/onboarding/OnboardingEmployerId";
@@ -30,7 +29,9 @@ import { OnboardingTaxId } from "@/components/onboarding/taxId/OnboardingTaxId";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { Documents } from "@/components/profile/Documents";
 import { EscapeModal } from "@/components/profile/EscapeModal";
+import { ProfileField } from "@/components/profile/ProfileField";
 import { ProfileSnackbarAlert } from "@/components/profile/ProfileSnackbarAlert";
+import { ProfileTabHeader } from "@/components/profile/ProfileTabHeader";
 import { ProfileTabNav } from "@/components/profile/ProfileTabNav";
 import { TaxDisclaimer } from "@/components/TaxDisclaimer";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
@@ -282,82 +283,71 @@ const ProfilePage = (props: Props): ReactElement => {
   const nexusBusinessElements: Record<ProfileTabs, ReactNode> = {
     info: (
       <>
-        <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
-        <h2 className="padding-bottom-3" style={{ fontWeight: 300 }}>
-          {" "}
-          {Config.profileDefaults.profileTabInfoTitle}
-        </h2>
-        <div className="padding-bottom-1">
-          <FieldLabelProfile fieldName="foreignBusinessTypeIds" />
+        <ProfileTabHeader tab="info" />
+
+        <ProfileField fieldName="foreignBusinessTypeIds">
           <OnboardingForeignBusinessType required />
-        </div>
-        {shouldShowNexusBusinessNameElements() && (
-          <>
-            <div className="margin-top-3" aria-hidden={true} />
-            <ProfileNexusBusinessNameField />
-            <div className="margin-top-3" aria-hidden={true} />
-            {profileData.nexusDbaName && (
-              <>
-                <FieldLabelProfile fieldName="nexusDbaName" />
-                <ProfileNexusDBANameField />
-              </>
-            )}
-            <div className="margin-top-3" aria-hidden={true} />
-          </>
-        )}
-        <FieldLabelProfile fieldName="industryId" />
-        <OnboardingIndustry />
+        </ProfileField>
 
-        {shouldLockFormationFields ? (
-          <LockedProfileField
-            fieldName="legalStructureId"
-            valueFormatter={(value: string) => LookupLegalStructureById(value).name}
-          />
-        ) : (
-          <>
-            <div className="margin-top-3" aria-hidden={true} />
-            <FieldLabelProfile fieldName="legalStructureId" />
-            <OnboardingLegalStructureDropdown />
-          </>
-        )}
+        <ProfileField
+          fieldName="businessName"
+          isVisible={shouldShowNexusBusinessNameElements()}
+          noLabel={true}
+        >
+          <ProfileNexusBusinessNameField />
+        </ProfileField>
 
-        <div className="margin-top-3" aria-hidden={true} />
-        <FieldLabelProfile fieldName="nexusLocationInNewJersey" />
-        <OnboardingLocationInNewJersey />
-        {profileData.nexusLocationInNewJersey && (
-          <>
-            <div className="margin-top-3" aria-hidden={true} />
-            <FieldLabelProfile fieldName="municipality" />
-            <OnboardingMunicipality />
-          </>
-        )}
-        {displayHomedBaseBusinessQuestion() && (
-          <div className="margin-top-3">
-            <FieldLabelProfile
-              fieldName="homeBasedBusiness"
-              isAltDescriptionDisplayed={displayAltHomeBasedBusinessDescription}
-            />
-            <OnboardingHomeBasedBusiness />
-          </div>
-        )}
+        <ProfileField
+          fieldName="nexusDbaName"
+          isVisible={shouldShowNexusBusinessNameElements() && !!profileData.nexusDbaName}
+        >
+          <ProfileNexusDBANameField />
+        </ProfileField>
+
+        <ProfileField fieldName="industryId">
+          <OnboardingIndustry />
+        </ProfileField>
+
+        <ProfileField
+          fieldName="legalStructureId"
+          locked={shouldLockFormationFields}
+          lockedValueFormatter={(value: string) => LookupLegalStructureById(value).name}
+        >
+          <OnboardingLegalStructureDropdown />
+        </ProfileField>
+
+        <ProfileField fieldName="nexusLocationInNewJersey">
+          <OnboardingLocationInNewJersey />
+        </ProfileField>
+
+        <ProfileField fieldName="municipality" isVisible={profileData.nexusLocationInNewJersey === true}>
+          <OnboardingMunicipality />
+        </ProfileField>
+
+        <ProfileField
+          fieldName="homeBasedBusiness"
+          displayAltDescription={displayAltHomeBasedBusinessDescription}
+          isVisible={displayHomedBaseBusinessQuestion()}
+        >
+          <OnboardingHomeBasedBusiness />
+        </ProfileField>
       </>
     ),
     documents: <></>,
     notes: (
       <>
-        <hr className="margin-top-4 margin-bottom-4" aria-hidden={true} />
-        <FieldLabelProfile fieldName="notes" />
-        <OnboardingNotes handleChangeOverride={showRegistrationModalForGuest()} />
+        <ProfileTabHeader tab="notes" />
+
+        <ProfileField fieldName="notes">
+          <OnboardingNotes handleChangeOverride={showRegistrationModalForGuest()} />
+        </ProfileField>
       </>
     ),
     numbers: (
       <>
-        <hr className="margin-top-4 margin-bottom-2" />{" "}
-        <h2 className="padding-bottom-3" style={{ fontWeight: 300 }}>
-          {" "}
-          {Config.profileDefaults.profileTabRefTitle}
-        </h2>
-        <div className="margin-top-4">
+        <ProfileTabHeader tab="numbers" />
+
+        <ProfileField fieldName="taxId" noLabel={true}>
           <FieldLabelProfile fieldName="taxId" locked={shouldLockTaxId} />
           {!shouldLockTaxId && <TaxDisclaimer legalStructureId={userData?.profileData.legalStructureId} />}
           <div className={"max-width-38rem"}>
@@ -367,7 +357,7 @@ const ProfilePage = (props: Props): ReactElement => {
               <OnboardingTaxId handleChangeOverride={showRegistrationModalForGuest()} />
             )}
           </div>
-        </div>
+        </ProfileField>
       </>
     ),
   };
@@ -375,31 +365,28 @@ const ProfilePage = (props: Props): ReactElement => {
   const foreignBusinessElements: Record<ProfileTabs, ReactNode> = {
     info: (
       <>
-        {" "}
-        <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
-        <h2 className="padding-bottom-3" style={{ fontWeight: 300 }}>
-          {Config.profileDefaults.profileTabInfoTitle}
-        </h2>
-        <FieldLabelProfile fieldName="foreignBusinessTypeIds" />
-        <OnboardingForeignBusinessType required />
+        <ProfileTabHeader tab="info" />
+
+        <ProfileField fieldName="foreignBusinessTypeIds">
+          <OnboardingForeignBusinessType required />
+        </ProfileField>
       </>
     ),
     documents: <></>,
     notes: (
       <>
-        <hr className="margin-top-4 margin-bottom-4" aria-hidden={true} />
-        <FieldLabelProfile fieldName="notes" />
-        <OnboardingNotes handleChangeOverride={showRegistrationModalForGuest()} />
+        <ProfileTabHeader tab="notes" />
+
+        <ProfileField fieldName="notes">
+          <OnboardingNotes handleChangeOverride={showRegistrationModalForGuest()} />
+        </ProfileField>
       </>
     ),
     numbers: (
       <>
-        <hr className="margin-top-4 margin-bottom-2" />{" "}
-        <h2 className="padding-bottom-3" style={{ fontWeight: 300 }}>
-          {" "}
-          {Config.profileDefaults.profileTabRefTitle}
-        </h2>
-        <div className="margin-top-4">
+        <ProfileTabHeader tab="numbers" />
+
+        <ProfileField fieldName="taxId" noLabel={true}>
           <FieldLabelProfile fieldName="taxId" locked={shouldLockTaxId} />
           {!shouldLockTaxId && <TaxDisclaimer legalStructureId={userData?.profileData.legalStructureId} />}
           <div className={"max-width-38rem"}>
@@ -409,7 +396,7 @@ const ProfilePage = (props: Props): ReactElement => {
               <OnboardingTaxId handleChangeOverride={showRegistrationModalForGuest()} />
             )}
           </div>
-        </div>
+        </ProfileField>
       </>
     ),
   };
@@ -417,145 +404,129 @@ const ProfilePage = (props: Props): ReactElement => {
   const startingNewBusinessElements: Record<ProfileTabs, ReactNode> = {
     notes: (
       <>
-        <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
-        <FieldLabelProfile fieldName="notes" />
-        <OnboardingNotes handleChangeOverride={showRegistrationModalForGuest()} />
+        <ProfileTabHeader tab="notes" />
+
+        <ProfileField fieldName="notes">
+          <OnboardingNotes handleChangeOverride={showRegistrationModalForGuest()} />
+        </ProfileField>
       </>
     ),
     documents: (
       <>
-        <hr className="margin-top-4 margin-bottom-4" aria-hidden={true} />
-        {LookupLegalStructureById(userData?.profileData.legalStructureId).elementsToDisplay.has(
-          "formationDocuments"
-        ) && (
-          <>
-            <FieldLabelProfile fieldName="documents" />
-            <Documents />
-          </>
-        )}
+        <ProfileTabHeader tab="documents" />
+
+        <ProfileField
+          fieldName="documents"
+          isVisible={LookupLegalStructureById(userData?.profileData.legalStructureId).elementsToDisplay.has(
+            "formationDocuments"
+          )}
+        >
+          <Documents />
+        </ProfileField>
       </>
     ),
     info: (
       <>
-        <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
-        <h2 className="padding-bottom-3" style={{ fontWeight: 300 }}>
-          {" "}
-          {Config.profileDefaults.profileTabInfoTitle}
-        </h2>
+        <ProfileTabHeader tab="info" />
 
-        {shouldLockFormationFields ? (
-          <LockedProfileField fieldName="businessName" />
-        ) : (
-          <>
-            <FieldLabelProfile fieldName="businessName" />
-            <OnboardingBusinessName required={isBusinessNameRequired()} />
-          </>
-        )}
+        <ProfileField fieldName="businessName" locked={shouldLockFormationFields}>
+          <OnboardingBusinessName required={isBusinessNameRequired()} />
+        </ProfileField>
 
-        <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
+        <ProfileField fieldName="industryId">
+          <OnboardingIndustry />
+        </ProfileField>
 
-        <FieldLabelProfile fieldName="industryId" />
-        <OnboardingIndustry />
-        {(profileData.industryId === "generic" || props.CMS_ONLY_fakeUserData) && (
-          <div className="margin-top-4 margin-bottom-2">
-            <FieldLabelProfile fieldName="sectorId" />
-            <OnboardingSectors />
-          </div>
-        )}
+        <ProfileField
+          fieldName="sectorId"
+          isVisible={profileData.industryId === "generic" || !!props.CMS_ONLY_fakeUserData}
+        >
+          <OnboardingSectors />
+        </ProfileField>
 
-        {userData?.profileData.dateOfFormation && (
-          <>
-            <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
+        <ProfileField
+          fieldName="dateOfFormation"
+          isVisible={!!userData?.profileData.dateOfFormation}
+          locked={shouldLockFormationFields}
+          lockedValueFormatter={formatDate}
+        >
+          <OnboardingDateOfFormation futureAllowed={true} />
+        </ProfileField>
 
-            {shouldLockFormationFields ? (
-              <LockedProfileField fieldName="dateOfFormation" valueFormatter={formatDate} />
-            ) : (
-              <>
-                <FieldLabelProfile fieldName="dateOfFormation" />
-                <OnboardingDateOfFormation futureAllowed={true} />
-              </>
-            )}
-          </>
-        )}
+        <ProfileField
+          fieldName="legalStructureId"
+          locked={shouldLockFormationFields}
+          lockedValueFormatter={(id) => LookupLegalStructureById(id).name}
+        >
+          <OnboardingLegalStructureDropdown />
+        </ProfileField>
 
-        <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
+        <ProfileField fieldName="municipality">
+          <OnboardingMunicipality />
+        </ProfileField>
 
-        {shouldLockFormationFields ? (
-          <LockedProfileField
-            fieldName="legalStructureId"
-            valueFormatter={(id) => LookupLegalStructureById(id).name}
-          />
-        ) : (
-          <>
-            <FieldLabelProfile fieldName="legalStructureId" />
-            <OnboardingLegalStructureDropdown />
-          </>
-        )}
+        <ProfileField
+          fieldName="homeBasedBusiness"
+          isVisible={displayHomedBaseBusinessQuestion()}
+          displayAltDescription={displayAltHomeBasedBusinessDescription}
+        >
+          <OnboardingHomeBasedBusiness />
+        </ProfileField>
 
-        <hr className="margin-top-6 margin-bottom-2" aria-hidden={true} />
+        <ProfileField
+          fieldName="ownershipTypeIds"
+          isVisible={
+            LookupOperatingPhaseById(userData?.profileData.operatingPhase)
+              .displayCompanyDemographicProfileFields
+          }
+        >
+          <OnboardingOwnership />
+        </ProfileField>
 
-        <FieldLabelProfile fieldName="municipality" />
-        <OnboardingMunicipality />
-
-        {displayHomedBaseBusinessQuestion() && (
-          <div className="margin-top-3">
-            <FieldLabelProfile
-              fieldName="homeBasedBusiness"
-              isAltDescriptionDisplayed={displayAltHomeBasedBusinessDescription}
-            />
-            <OnboardingHomeBasedBusiness />
-          </div>
-        )}
-
-        {LookupOperatingPhaseById(userData?.profileData.operatingPhase)
-          .displayCompanyDemographicProfileFields && (
-          <>
-            <hr className="margin-top-6 margin-bottom-2" aria-hidden={true} />
-            <FieldLabelProfile fieldName="ownershipTypeIds" />
-            <OnboardingOwnership />
-            <hr className="margin-top-6 margin-bottom-2" aria-hidden={true} />
-            <FieldLabelProfile fieldName="existingEmployees" />
-            <OnboardingExistingEmployees required />
-          </>
-        )}
+        <ProfileField
+          fieldName="existingEmployees"
+          isVisible={
+            LookupOperatingPhaseById(userData?.profileData.operatingPhase)
+              .displayCompanyDemographicProfileFields
+          }
+        >
+          <OnboardingExistingEmployees required />
+        </ProfileField>
       </>
     ),
     numbers: (
       <>
-        <hr className="margin-top-4" aria-hidden={true} />
-        <h2 className="padding-bottom-3" style={{ fontWeight: 300 }}>
-          {Config.profileDefaults.profileTabRefTitle}
-        </h2>
-        <ProfileNaicsCode />
-        <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
-        {LookupLegalStructureById(userData?.profileData.legalStructureId).elementsToDisplay.has(
-          "entityId"
-        ) && (
-          <>
-            {shouldLockFormationFields ? (
-              <LockedProfileField fieldName="entityId" />
-            ) : (
-              <>
-                <FieldLabelProfile fieldName="entityId" />
-                <OnboardingEntityId handleChangeOverride={showRegistrationModalForGuest()} />
-              </>
-            )}
+        <ProfileTabHeader tab="numbers" />
 
-            <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
-          </>
-        )}
-        <FieldLabelProfile fieldName="employerId" />
-        <OnboardingEmployerId handleChangeOverride={showRegistrationModalForGuest()} />
-        <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
-        <FieldLabelProfile fieldName="taxId" locked={shouldLockTaxId} />
-        {!shouldLockTaxId && <TaxDisclaimer legalStructureId={userData?.profileData.legalStructureId} />}
-        <div className={"max-width-38rem"}>
-          {shouldLockTaxId ? (
-            <DisabledTaxId />
-          ) : (
-            <OnboardingTaxId handleChangeOverride={showRegistrationModalForGuest()} />
+        <ProfileField fieldName="naicsCode" noLabel={true}>
+          <ProfileNaicsCode />
+        </ProfileField>
+
+        <ProfileField
+          fieldName="entityId"
+          isVisible={LookupLegalStructureById(userData?.profileData.legalStructureId).elementsToDisplay.has(
+            "entityId"
           )}
-        </div>
+          locked={shouldLockFormationFields}
+        >
+          <OnboardingEntityId handleChangeOverride={showRegistrationModalForGuest()} />
+        </ProfileField>
+
+        <ProfileField fieldName="employerId">
+          <OnboardingEmployerId handleChangeOverride={showRegistrationModalForGuest()} />
+        </ProfileField>
+
+        <ProfileField fieldName="taxId" noLabel={true}>
+          <FieldLabelProfile fieldName="taxId" locked={shouldLockTaxId} />
+          {!shouldLockTaxId && <TaxDisclaimer legalStructureId={userData?.profileData.legalStructureId} />}
+          <div className="max-width-38rem">
+            {shouldLockTaxId ? (
+              <DisabledTaxId />
+            ) : (
+              <OnboardingTaxId handleChangeOverride={showRegistrationModalForGuest()} />
+            )}
+          </div>
+        </ProfileField>
       </>
     ),
   };
@@ -563,80 +534,69 @@ const ProfilePage = (props: Props): ReactElement => {
   const owningBusinessElements: Record<ProfileTabs, ReactNode> = {
     notes: (
       <>
-        <hr className="margin-top-4 margin-bottom-4" aria-hidden={true} />
-        <FieldLabelProfile fieldName="notes" />
-        <OnboardingNotes handleChangeOverride={showRegistrationModalForGuest()} />
+        <ProfileTabHeader tab="notes" />
+
+        <ProfileField fieldName="notes">
+          <OnboardingNotes handleChangeOverride={showRegistrationModalForGuest()} />
+        </ProfileField>
       </>
     ),
-    documents: (
-      <>
-        <hr className="margin-top-4 margin-bottom-4" aria-hidden={true} />
-        <FieldLabelProfile fieldName="documents" />
-        <Documents />
-      </>
-    ),
+    documents: <></>,
     info: (
       <>
-        <hr className="margin-top-4 margin-bottom-2" aria-hidden={true} />
-        <h2 className="padding-bottom-3" style={{ fontWeight: 300 }}>
-          {Config.profileDefaults.profileTabInfoTitle}
-        </h2>
-        <div className="margin-top-4">
-          <FieldLabelProfile fieldName="businessName" />
+        <ProfileTabHeader tab="info" />
+
+        <ProfileField fieldName="businessName">
           <OnboardingBusinessName />
-        </div>
-        {(props.CMS_ONLY_fakeUserData || true) && (
-          <div className="margin-top-4">
-            <FieldLabelProfile fieldName="sectorId" />
-            <OnboardingSectors />
-          </div>
-        )}
-        {LookupLegalStructureById(userData?.profileData.legalStructureId).elementsToDisplay.has(
-          "formationDate"
-        ) && (
-          <div className="margin-top-4">
-            <FieldLabelProfile fieldName="dateOfFormation" />
-            <OnboardingDateOfFormation futureAllowed={false} />
-          </div>
-        )}
-        <div className="margin-top-4">
-          <FieldLabelProfile fieldName="existingEmployees" />
+        </ProfileField>
+
+        <ProfileField fieldName="sectorId">
+          <OnboardingSectors />
+        </ProfileField>
+
+        <ProfileField
+          fieldName="dateOfFormation"
+          isVisible={LookupLegalStructureById(userData?.profileData.legalStructureId).elementsToDisplay.has(
+            "formationDate"
+          )}
+        >
+          <OnboardingDateOfFormation futureAllowed={false} />
+        </ProfileField>
+
+        <ProfileField fieldName="existingEmployees">
           <OnboardingExistingEmployees />
-        </div>
-        <div className="margin-top-4">
-          <FieldLabelProfile fieldName="municipality" />
+        </ProfileField>
+
+        <ProfileField fieldName="municipality">
           <OnboardingMunicipality />
-        </div>
-        {displayHomedBaseBusinessQuestion() && (
-          <div className="margin-top-3">
-            <FieldLabelProfile
-              fieldName="homeBasedBusiness"
-              isAltDescriptionDisplayed={displayAltHomeBasedBusinessDescription}
-            />
-            <OnboardingHomeBasedBusiness />
-          </div>
-        )}
-        <div className="margin-top-4">
-          <FieldLabelProfile fieldName="ownershipTypeIds" />
+        </ProfileField>
+
+        <ProfileField
+          fieldName="homeBasedBusiness"
+          isVisible={displayHomedBaseBusinessQuestion()}
+          displayAltDescription={displayAltHomeBasedBusinessDescription}
+        >
+          <OnboardingHomeBasedBusiness />
+        </ProfileField>
+
+        <ProfileField fieldName="ownershipTypeIds">
           <OnboardingOwnership />
-        </div>
+        </ProfileField>
       </>
     ),
     numbers: (
       <>
-        <hr className="margin-top-4 margin-bottom-2" />
-        <h2 className="padding-bottom-3" style={{ fontWeight: 300 }}>
-          {Config.profileDefaults.profileTabRefTitle}
-        </h2>
-        <div className="margin-top-4">
-          <FieldLabelProfile fieldName="entityId" />
+        <ProfileTabHeader tab="numbers" />
+
+        <ProfileField fieldName="entityId">
           <OnboardingEntityId handleChangeOverride={showRegistrationModalForGuest()} />
-        </div>
-        <div className="margin-top-4">
-          <FieldLabelProfile fieldName="employerId" />
+        </ProfileField>
+
+        <ProfileField fieldName="employerId">
           <OnboardingEmployerId handleChangeOverride={showRegistrationModalForGuest()} />
-        </div>
-        <div className="margin-top-4">
+        </ProfileField>
+
+        <ProfileField fieldName="taxId" noLabel={true}>
           <FieldLabelProfile fieldName="taxId" locked={shouldLockTaxId} />
           {!shouldLockTaxId && <TaxDisclaimer legalStructureId={userData?.profileData.legalStructureId} />}
           <div className={"max-width-38rem"}>
@@ -646,11 +606,11 @@ const ProfilePage = (props: Props): ReactElement => {
               <OnboardingTaxId handleChangeOverride={showRegistrationModalForGuest()} />
             )}
           </div>
-        </div>
-        <div className="margin-top-4">
-          <FieldLabelProfile fieldName="taxPin" />
+        </ProfileField>
+
+        <ProfileField fieldName="taxPin">
           <OnboardingTaxPin handleChangeOverride={showRegistrationModalForGuest()} />
-        </div>
+        </ProfileField>
       </>
     ),
   };
@@ -722,8 +682,7 @@ const ProfilePage = (props: Props): ReactElement => {
                         <form onSubmit={onSubmit} className={`usa-prose onboarding-form margin-top-2`}>
                           {getElements()}
 
-                          <hr className="margin-top-7 margin-bottom-2" aria-hidden={true} />
-                          <div className="float-right fdr">
+                          <div className="float-right fdr margin-top-2">
                             <SecondaryButton
                               isColor="primary"
                               onClick={() => {
