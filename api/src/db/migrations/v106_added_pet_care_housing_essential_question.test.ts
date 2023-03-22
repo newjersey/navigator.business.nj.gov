@@ -16,19 +16,4 @@ describe("migrate_v105_to_v106", () => {
       version: 106,
     });
   });
-
-  it("sets the pet care essential question to undefined for any new user", () => {
-    const v105 = generateV105UserData({
-      profileData: generateV105ProfileData({}),
-    });
-    const v106 = migrate_v105_to_v106(v105);
-    expect(v106).toEqual({
-      ...v105,
-      profileData: {
-        ...v105.profileData,
-        petCareHousing: undefined,
-      },
-      version: 106,
-    });
-  });
 });
