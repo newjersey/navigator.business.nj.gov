@@ -3985,6 +3985,7 @@ collections:
                   widget: string,
                 }
               - { label: Locked Field Tooltip Text, name: lockedFieldTooltipText, widget: string }
+              - { label: Profile Completion Alert, name: profileCompletionAlert, widget: markdown }
 
   - name: "post-onboarding-content"
     label: "Post Onboarding Content"

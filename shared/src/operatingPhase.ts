@@ -13,6 +13,7 @@ export interface OperatingPhase {
   readonly municipalityRequiredForPublicFiling: boolean;
   readonly businessNameRequired: boolean;
   readonly feedbackFormToDisplay: "STARTING" | "OWNING" | "";
+  readonly displayProfileOpportunityAlert: boolean;
 }
 
 export type OperatingPhaseId =
@@ -44,6 +45,7 @@ export const LookupOperatingPhaseById = (id: OperatingPhaseId | undefined): Oper
       municipalityRequiredForPublicFiling: true,
       businessNameRequired: false,
       feedbackFormToDisplay: "",
+      displayProfileOpportunityAlert: false,
     }
   );
 };
@@ -64,6 +66,7 @@ export const OperatingPhases: OperatingPhase[] = [
     municipalityRequiredForPublicFiling: false,
     businessNameRequired: false,
     feedbackFormToDisplay: "STARTING",
+    displayProfileOpportunityAlert: false,
   },
   {
     id: "GUEST_MODE_OWNING",
@@ -80,6 +83,7 @@ export const OperatingPhases: OperatingPhase[] = [
     municipalityRequiredForPublicFiling: false,
     businessNameRequired: false,
     feedbackFormToDisplay: "OWNING",
+    displayProfileOpportunityAlert: true,
   },
   {
     id: "FORMED_AND_REGISTERED",
@@ -96,6 +100,7 @@ export const OperatingPhases: OperatingPhase[] = [
     municipalityRequiredForPublicFiling: true,
     businessNameRequired: true,
     feedbackFormToDisplay: "STARTING",
+    displayProfileOpportunityAlert: false,
   },
   {
     id: "NEEDS_TO_FORM",
@@ -112,6 +117,7 @@ export const OperatingPhases: OperatingPhase[] = [
     municipalityRequiredForPublicFiling: false,
     businessNameRequired: false,
     feedbackFormToDisplay: "STARTING",
+    displayProfileOpportunityAlert: false,
   },
   {
     id: "NEEDS_TO_REGISTER_FOR_TAXES",
@@ -128,6 +134,7 @@ export const OperatingPhases: OperatingPhase[] = [
     municipalityRequiredForPublicFiling: true,
     businessNameRequired: false,
     feedbackFormToDisplay: "STARTING",
+    displayProfileOpportunityAlert: false,
   },
   {
     id: "UP_AND_RUNNING",
@@ -144,6 +151,7 @@ export const OperatingPhases: OperatingPhase[] = [
     municipalityRequiredForPublicFiling: true,
     businessNameRequired: true,
     feedbackFormToDisplay: "OWNING",
+    displayProfileOpportunityAlert: false,
   },
   {
     id: "UP_AND_RUNNING_OWNING",
@@ -160,5 +168,6 @@ export const OperatingPhases: OperatingPhase[] = [
     municipalityRequiredForPublicFiling: false,
     businessNameRequired: false,
     feedbackFormToDisplay: "OWNING",
+    displayProfileOpportunityAlert: true,
   },
 ];

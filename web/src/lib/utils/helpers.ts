@@ -41,6 +41,19 @@ export const useMountEffectWhenDefined = (fun: () => void, thingToBeDefined: unk
   }, [thingToBeDefined, fun]);
 };
 
+export const useScrollToPathAnchor = () => {
+  useEffect(() => {
+    const path = window.location.hash;
+    if (path && path.includes("#")) {
+      const id = path.replace("#", "");
+      const element = document.querySelector(`#${id}`);
+      if (id && element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  });
+};
+
 export const onEscape = (e: KeyboardEvent, handler: () => void): void => {
   if (e.key === "Escape") {
     e.preventDefault();
