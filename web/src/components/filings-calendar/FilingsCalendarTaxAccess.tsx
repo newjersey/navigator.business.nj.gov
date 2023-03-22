@@ -1,5 +1,7 @@
 import { Content } from "@/components/Content";
+import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
+import { TaxFilingLookupModal } from "@/components/TaxFilingLookupModal";
 import { AuthAlertContext } from "@/contexts/authAlertContext";
 import { postTaxFilingsLookup } from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
@@ -7,12 +9,9 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { checkQueryValue, QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
+import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { getCurrentDate, parseDate } from "@businessnjgovnavigator/shared/index";
 import { useRouter } from "next/router";
-
-import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
-import { TaxFilingLookupModal } from "@/components/TaxFilingLookupModal";
-import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { ReactElement, useContext, useEffect, useRef, useState } from "react";
 
 const isBeforeTheFollowingSaturday = (registeredISO: string | undefined) => {
@@ -123,18 +122,21 @@ export const FilingsCalendarTaxAccess = (): ReactElement => {
               }, 500);
             }}
           />
-          <div className="tax-calendar-upper-widget-container grid-row" data-testid="button-container">
+          <div
+            className="tax-calendar-upper-widget-container border-primary-light grid-row"
+            data-testid="button-container"
+          >
             <div className="margin-bottom-2 mobile-lg:margin-bottom-0 margin-right-1 mobile-lg:grid-col-6 grid-col-12">
               <Content>{Config.taxCalendar.accessBody}</Content>
             </div>
-            <SecondaryButton
+            <PrimaryButton
               isColor="primary"
               dataTestId="get-tax-access"
               isRightMarginRemoved={true}
               onClick={openRegisterOrTaxModal}
             >
               {Config.taxCalendar.accessButton}
-            </SecondaryButton>
+            </PrimaryButton>
           </div>
         </>
       );
