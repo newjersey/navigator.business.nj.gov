@@ -1,18 +1,21 @@
 ---
-urlSlug: town-mercantile-license
 filename: town-mercantile-license
+urlSlug: town-mercantile-license
 name: Get Your Mercantile License if Your Town Requires it
-id: check-local-requirements
-callToActionLink: ""
+webflowName: "Restaurant: Mercantile License"
+localLevelTask: Municipal Clerk
+industryId: restaurant
 callToActionText: ""
-webflowName: Mercantile License
+callToActionLink: ""
+id: check-local-requirements
 webflowId: 64147a42689e2308a6b2252a
 licenseCertificationClassification: LICENSE
 ---
+Prior to opening, you may need to get a mercantile license. 
 
-Prior to opening, you may need to get a mercantile license. Not all locations require a mercantile license, you will need to check with your local clerk's office.
+Some local governments require businesses with commercial locations to get a mercantile license. Each municipality will have its own application process for both the liquor license and the mercantile license.
 
----
+- - -
 
 ### Actions to Take
 
@@ -20,12 +23,12 @@ ${beginLocationDependentSection}
 
 **Check with your local clerk’s office**
 
-You can find your local clerk's office through the [${municipality} website](${municipalityWebsite}) or by contacting your [county clerk](${countyClerkWebsite}) at ${countyClerkPhone}.
+You can find your local municipal clerk's office through the [${municipality} website](${municipalityWebsite}) or by contacting your [county clerk](${countyClerkWebsite}) at ${countyClerkPhone}.
 
 ${endLocationDependentSection}
 
----
+- - -
 
 > **Once completed, you will have:**
 >
-> - A Mercantile License (if required by your town)
+> * A mercantile license (if required by your town)
