@@ -1,13 +1,13 @@
 ---
-id: "check-local-requirements"
-webflowId: "64147a42689e2308a6b2252a"
-urlSlug: "town-mercantile-license"
-name: "Get Your Mercantile License if Your Town Requires it"
-webflowName: "Mercantile License"
-filename: "town-mercantile-license"
-callToActionLink: "${municipalityWebsite}"
-callToActionText: "Visit the ${municipality} Website"
-licenseCertificationClassification: "LICENSE"
+urlSlug: town-mercantile-license
+filename: town-mercantile-license
+name: Get Your Mercantile License if Your Town Requires it
+id: check-local-requirements
+callToActionLink: ""
+callToActionText: ""
+webflowName: Mercantile License
+webflowId: 64147a42689e2308a6b2252a
+licenseCertificationClassification: LICENSE
 ---
 
 Prior to opening, you may need to get a mercantile license. Not all locations require a mercantile license, you will need to check with your local clerk's office.
