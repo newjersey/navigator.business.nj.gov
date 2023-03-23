@@ -3,9 +3,10 @@ import { OpportunityCard } from "@/components/dashboard/OpportunityCard";
 import { SidebarCard } from "@/components/dashboard/SidebarCard";
 import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { MediaQueries } from "@/lib/PageSizes";
 import { Certification, Funding, SidebarCardContent } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
-import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary, useMediaQuery } from "@mui/material";
 import { ReactElement, useState } from "react";
 
 interface Props {
@@ -22,6 +23,7 @@ interface Props {
 export const SidebarCardsList = (props: Props): ReactElement => {
   const [hiddenAccordionIsOpen, setHiddenAccordionIsOpen] = useState<boolean>(false);
   const { Config } = useConfig();
+  const hasForYouTab = !useMediaQuery(MediaQueries.desktopAndUp);
 
   const hiddenOpportunitiesCount = (): number => {
     if (props.displayCertifications && props.displayFundings) {
@@ -107,14 +109,21 @@ export const SidebarCardsList = (props: Props): ReactElement => {
     );
   };
 
-  const scrollbar =
-    props.displayCertifications && props.displayFundings
-      ? "dashboard-opportunities-list fundingsLinkAndHiddenAccordion"
-      : props.displayCertifications
-      ? "dashboard-opportunities-list hiddenAccordion"
-      : props.displayFundings
-      ? "dashboard-opportunities-list fundingsLink"
-      : "dashboard-opportunities-list";
+  const scrollbar = () => {
+    if (hasForYouTab) {
+      return "";
+    }
+
+    if (props.displayCertifications && props.displayFundings) {
+      return "dashboard-opportunities-list fundingsLinkAndHiddenAccordion";
+    } else if (props.displayCertifications) {
+      return "dashboard-opportunities-list hiddenAccordion";
+    } else if (props.displayFundings) {
+      return "dashboard-opportunities-list fundingsLink";
+    } else {
+      return "dashboard-opportunities-list";
+    }
+  };
 
   return (
     <>
@@ -124,7 +133,7 @@ export const SidebarCardsList = (props: Props): ReactElement => {
         aria-hidden={true}
       />
 
-      <div className={`${scrollbar} desktop:margin-right-1`}>
+      <div className={`${scrollbar()} desktop:margin-right-1`}>
         <div data-testid="top-cards">
           {props.topCards.map((card) => {
             return <SidebarCard card={card} key={card.id} />;
