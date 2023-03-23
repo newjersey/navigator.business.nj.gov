@@ -165,6 +165,20 @@ describe("updateRoadmapSidebarCards", () => {
       expect(updatedUserData.preferences.visibleSidebarCards).not.toContain("welcome");
     });
 
+    it("does not remove welcome-up-and-running card when operating phase is UP_AND_RUNNING_OWNING", () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          operatingPhase: "UP_AND_RUNNING_OWNING",
+          industryId: "generic",
+        }),
+        preferences: generatePreferences({ visibleSidebarCards: ["welcome-up-and-running"] }),
+      });
+
+      const updatedUserData = updateSidebarCards(userData);
+      expect(updatedUserData.preferences.visibleSidebarCards).toContain("welcome-up-and-running");
+      expect(updatedUserData.preferences.visibleSidebarCards).not.toContain("welcome");
+    });
+
     it("adds the welcome-up-and-running card when operating phase is UP_AND_RUNNING and removes the welcome card", () => {
       const userData = generateUserData({
         profileData: generateProfileData({
