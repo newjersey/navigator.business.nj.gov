@@ -1,6 +1,6 @@
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { Match } from "@/lib/search/typesForSearch";
-import { ReactElement, useMemo, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 
 interface Props {
   matches: Match[];
@@ -11,7 +11,11 @@ export const MatchList = (props: Props): ReactElement => {
   const COLLAPSED_LEN = 5;
 
   const [expanded, setExpanded] = useState<boolean>(false);
-  const collapsedMatches = useMemo(() => props.matches.slice(0, COLLAPSED_LEN), [props.matches]);
+  const collapsedMatches = props.matches.slice(0, COLLAPSED_LEN);
+
+  useEffect(() => {
+    setExpanded(false);
+  }, [props.matches]);
 
   if (props.matches.length === 0) {
     return <></>;
