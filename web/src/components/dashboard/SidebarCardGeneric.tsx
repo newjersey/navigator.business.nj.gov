@@ -13,15 +13,46 @@ type Props = {
   headerText: string | undefined;
   preBodyContent?: ReactNode;
   ctaOnClick?: () => void;
+  layout?: "row" | "column";
 };
 
 export const SidebarCardGeneric = (props: Props) => {
   const { hideCard } = useSidebarCards();
   const headerText = useContentModifiedByUserData(props.headerText ?? "");
 
+  const layout = props.layout ?? "column";
+
   const closeSelf = async () => {
     await hideCard(props.card.id);
   };
+
+  const ctaButton = (
+    <SecondaryButton
+      isColor="primary"
+      onClick={props.ctaOnClick}
+      isRightMarginRemoved={true}
+      dataTestId={`cta-${props.card.id}`}
+      isFullWidthOnDesktop={true}
+    >
+      {props.card.ctaText}
+    </SecondaryButton>
+  );
+
+  const stackedBodyContent = (
+    <>
+      <Content>{props.bodyText}</Content>
+      {props.ctaOnClick && props.card.ctaText && (
+        <div className="margin-top-205 flex flex-justify-center desktop:flex-justify-end">{ctaButton}</div>
+      )}
+    </>
+  );
+
+  const rowBodyContent = (
+    <div className="flex fdr fac">
+      <Content className="margin-right-1">{props.bodyText}</Content>
+      {props.ctaOnClick && props.card.ctaText && <div className="width-100">{ctaButton}</div>}
+    </div>
+  );
 
   return (
     <>
@@ -67,20 +98,7 @@ export const SidebarCardGeneric = (props: Props) => {
           }`}
         >
           {props.preBodyContent && <div className={`padding-bottom-205`}>{props.preBodyContent}</div>}
-          <Content>{props.bodyText}</Content>
-          {props.ctaOnClick && props.card.ctaText && (
-            <div className="margin-top-205 flex flex-justify-center desktop:flex-justify-end">
-              <SecondaryButton
-                isColor="primary"
-                onClick={props.ctaOnClick}
-                isRightMarginRemoved={true}
-                dataTestId={`cta-${props.card.id}`}
-                isFullWidthOnDesktop={true}
-              >
-                {props.card.ctaText}
-              </SecondaryButton>
-            </div>
-          )}
+          {layout === "row" ? rowBodyContent : stackedBodyContent}
         </div>
       </div>
     </>
