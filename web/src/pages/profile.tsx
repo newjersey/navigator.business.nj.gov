@@ -262,6 +262,13 @@ const ProfilePage = (props: Props): ReactElement => {
     );
   };
 
+  const displayOpportunityAlert = (): boolean => {
+    return (
+      profileTab === "info" &&
+      LookupOperatingPhaseById(profileData.operatingPhase).displayProfileOpportunityAlert
+    );
+  };
+
   const displayAltHomeBasedBusinessDescription = LookupOperatingPhaseById(
     userData?.profileData.operatingPhase
   ).displayAltHomeBasedBusinessDescription;
@@ -672,7 +679,10 @@ const ProfilePage = (props: Props): ReactElement => {
                         businessPersona={businessPersona}
                         foreignBusinessType={foreignBusinessType}
                         activeTab={profileTab}
-                        setProfileTab={setProfileTab}
+                        setProfileTab={(tab: ProfileTabs) => {
+                          router.replace(ROUTES.profile);
+                          setProfileTab(tab);
+                        }}
                       />
                     }
                   >
@@ -682,8 +692,7 @@ const ProfilePage = (props: Props): ReactElement => {
                       </div>
                     ) : (
                       <>
-                        {LookupOperatingPhaseById(profileData.operatingPhase)
-                          .displayProfileOpportunityAlert && <ProfileOpportunitiesAlert />}
+                        {displayOpportunityAlert() && <ProfileOpportunitiesAlert />}
                         <form onSubmit={onSubmit} className={`usa-prose onboarding-form margin-top-2`}>
                           {getElements()}
 

@@ -9,7 +9,7 @@ export const OPPORTUNITY_FIELDS: (keyof ProfileData)[] = [
 
 export const REPORT_FIELDS: (keyof ProfileData)[] = ["dateOfFormation"];
 
-export const FIELDS_FOR_PROFILE = [...OPPORTUNITY_FIELDS, ...REPORT_FIELDS];
+export const FIELDS_FOR_PROFILE = [...REPORT_FIELDS, ...OPPORTUNITY_FIELDS];
 
 export const isFieldAnswered = (field: keyof ProfileData, data: ProfileData): boolean => {
   switch (field) {
