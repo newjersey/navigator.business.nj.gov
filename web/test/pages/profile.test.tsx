@@ -2043,6 +2043,19 @@ describe("profile", () => {
       expect(screen.queryByTestId("opp-alert")).not.toBeInTheDocument();
     });
 
+    it("only displays alert on info tab", () => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          operatingPhase: "UP_AND_RUNNING_OWNING",
+          dateOfFormation: undefined,
+        }),
+      });
+      renderPage({ userData });
+      expect(screen.getByTestId("opp-alert")).toBeInTheDocument();
+      chooseTab("numbers");
+      expect(screen.queryByTestId("opp-alert")).not.toBeInTheDocument();
+    });
+
     it("lists each unanswered funding/certification question", () => {
       const userData = generateUserData({
         profileData: generateProfileData({
