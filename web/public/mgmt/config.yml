@@ -1694,54 +1694,67 @@ collections:
     editor:
       preview: true
     fields:
-      - { label: "Content", name: "body", widget: "markdown" }
-      - { label: "Url Slug", name: "urlSlug", widget: "nospace" }
       - { label: "Filename", name: "filename", widget: "nospace", required: false }
-      - { label: "Name", name: "name", widget: "string" }
-      - { label: "Id", name: "id", widget: "nospace" }
-      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
-      - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
-      - label: Industry
+      - { label: "Url Slug", name: "urlSlug", widget: "nospace" }
+      - { label: "Title (Navigator)", name: "name", widget: "string" }
+      - { label: "Title (Webflow)", name: "webflowName", widget: "string" }
+      - { label: "Content", name: "body", widget: "markdown" }
+      - {
+          label: "State Agency (Webflow & Navigator)",
+          name: "industryIntegration",
+          widget: "select",
+          required: false,
+          options:
+            [
+              "New Jersey Division of Consumer Affairs",
+              "New Jersey Department of Taxation",
+              "New Jersey Department of Revenue and Enterprise Services",
+              "New Jersey Department of Community Affairs",
+            ],
+        }
+      - {
+          label: "Local agency (Webflow & Navigator)",
+          name: "localLevelTask",
+          widget: "select",
+          required: false,
+          options: ["Local Department of Health", "County Clerk", "Municipal Clerk"],
+        }
+      - {
+          label: "Agency additional context (Webflow & Navigator)",
+          name: "issuingAgency",
+          widget: "string",
+          required: false,
+        }
+      - { label: "Form Name (Webflow & Navigator)", name: "formName", widget: "string", required: false }
+      - label: "Industry (Webflow & Navigator)"
         name: industryId
         widget: "relation"
         collection: "roadmaps"
         search_fields: ["{{id}}"]
         value_field: "{{id}}"
         display_fields: ["{{id}}"]
-        required: false
         options_length: 500
-      - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
-      - { label: "Webflow Issuing Division", name: "issuingDivision", widget: "string", required: false }
-      - { label: "Division Phone", name: "divisionPhone", widget: "string", required: false }
-      - { label: "Form Name", name: "formName", widget: "string", required: false }
-      - { label: "Webflow Name", name: "webflowName", widget: "string", required: false }
-      - { label: "Webflow Industry", name: "webflowIndustry", widget: "string", required: false }
       - {
-          label: "License Classification",
-          name: "licenseCertificationClassification",
+          label: "Call To Action Text (Webflow & Navigator)",
+          name: "callToActionText",
           widget: "string",
           required: false,
         }
       - {
-          label: "Industry Integration",
-          name: "industryIntegration",
-          widget: "select",
+          label: "Call To Action Link (Webflow & Navigator)",
+          name: "callToActionLink",
+          widget: "string",
           required: false,
-          options:
-            [
-              "NJ Department of Consumer Affairs",
-              "NJ Department of Taxation",
-              "NJ Department of Revenue and Enterprise Services",
-              "NJ Department of Community Affairs",
-            ],
         }
+      - { label: "Industry (Webflow - archive)", name: "webflowIndustry", widget: "string", required: false }
       - {
-          label: "Local Level Task",
-          name: "localLevelTask",
-          widget: "select",
+          label: "License Classification (Webflow - archive)",
+          name: "licenseCertificationClassification",
+          widget: "string",
           required: false,
-          options: ["Department of Health", "County Clerk", "Municipal Clerk"],
         }
+      - { label: "Webflow Issuing Division", name: "issuingDivision", widget: "string", required: false }
+      - { label: "Division Phone", name: "divisionPhone", widget: "string", required: false }
 
   - name: "webflow-licenses"
     label: "Webflow Licenses"
