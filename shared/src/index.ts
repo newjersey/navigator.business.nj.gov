@@ -5,6 +5,7 @@ export * from "./countries";
 export * from "./dateHelpers";
 export * from "./defaultConstants";
 export * from "./domain-logic/onboarding";
+export * from "./domain-logic/opportunityFields";
 export * from "./domain-logic/taskIds";
 export * from "./feedbackRequest";
 export * from "./formationData";

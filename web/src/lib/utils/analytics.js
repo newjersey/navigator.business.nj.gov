@@ -932,5 +932,12 @@ export default {
         },
       },
     },
+    go_to_profile_nudge: {
+      click: {
+        go_to_profile: () => {
+          sendEvent("go_to_profile_nudge", "click", "go_to_profile");
+        },
+      },
+    },
   },
 };

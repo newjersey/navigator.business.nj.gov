@@ -4,8 +4,8 @@ import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
-import { isFieldAnswered, OPPORTUNITY_FIELDS } from "@/lib/domain-logic/opportunityFields";
 import { ProfileContentField } from "@/lib/types/types";
+import { FIELDS_FOR_PROFILE, isFieldAnswered } from "@businessnjgovnavigator/shared";
 import { useRouter } from "next/router";
 import { ReactElement, useContext } from "react";
 
@@ -14,7 +14,7 @@ export const ProfileOpportunitiesAlert = (): ReactElement => {
   const { Config } = useConfig();
   const router = useRouter();
 
-  const unansweredOpportunityFields: ProfileContentField[] = OPPORTUNITY_FIELDS.filter((field) => {
+  const unansweredOpportunityFields = FIELDS_FOR_PROFILE.filter((field) => {
     return !isFieldAnswered(field, state.profileData);
   });
 
@@ -38,7 +38,7 @@ export const ProfileOpportunitiesAlert = (): ReactElement => {
         {unansweredOpportunityFields.map((field) => (
           <li key={field}>
             <UnStyledButton style="tertiary" underline onClick={() => router.replace(`#question-${field}`)}>
-              {getLabel(field)}
+              {getLabel(field as ProfileContentField)}
             </UnStyledButton>
           </li>
         ))}

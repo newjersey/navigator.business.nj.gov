@@ -1,5 +1,6 @@
 import { formationTaskId } from "@shared/domain-logic/taskIds";
 import { OperatingPhaseId } from "@shared/operatingPhase";
+import { generateMunicipality } from "@shared/test";
 import { generatePreferences, generateProfileData, generateUserData } from "../../test/factories";
 import { updateSidebarCards } from "./updateSidebarCards";
 
@@ -222,6 +223,64 @@ describe("updateRoadmapSidebarCards", () => {
         expect(updatedUserData.preferences.visibleSidebarCards).not.toContain("welcome-up-and-running");
       });
     }
+  });
+
+  describe("go-to-profile nudge", () => {
+    const poppyPhases: OperatingPhaseId[] = [
+      "GUEST_MODE",
+      "NEEDS_TO_FORM",
+      "NEEDS_TO_REGISTER_FOR_TAXES",
+      "FORMED_AND_REGISTERED",
+      "UP_AND_RUNNING",
+    ];
+
+    const oscarPhases: OperatingPhaseId[] = ["GUEST_MODE_OWNING", "UP_AND_RUNNING_OWNING"];
+
+    it.each(poppyPhases)("does not add go-to-profile nudge for %s", (operatingPhase) => {
+      const userData = generateUserData({
+        profileData: generateProfileData({
+          operatingPhase,
+          homeBasedBusiness: undefined,
+        }),
+        preferences: generatePreferences({ visibleSidebarCards: [] }),
+      });
+      const updatedUserData = updateSidebarCards(userData);
+      expect(updatedUserData.preferences.visibleSidebarCards).not.toContain("go-to-profile");
+    });
+
+    it.each(oscarPhases)(
+      "adds go-to-profile nudge for %s when at least one opportunity question unanswered",
+      (operatingPhase) => {
+        const userData = generateUserData({
+          profileData: generateProfileData({
+            operatingPhase,
+            homeBasedBusiness: undefined,
+          }),
+          preferences: generatePreferences({ visibleSidebarCards: [] }),
+        });
+        const updatedUserData = updateSidebarCards(userData);
+        expect(updatedUserData.preferences.visibleSidebarCards).toContain("go-to-profile");
+      }
+    );
+
+    it.each(oscarPhases)(
+      "removes go-to-profile nudge for %s when all opportunity questions answered",
+      (operatingPhase) => {
+        const userData = generateUserData({
+          profileData: generateProfileData({
+            operatingPhase,
+            homeBasedBusiness: true,
+            dateOfFormation: "2020-01-01",
+            municipality: generateMunicipality({}),
+            ownershipTypeIds: ["none"],
+            existingEmployees: "12",
+          }),
+          preferences: generatePreferences({ visibleSidebarCards: [] }),
+        });
+        const updatedUserData = updateSidebarCards(userData);
+        expect(updatedUserData.preferences.visibleSidebarCards).not.toContain("go-to-profile");
+      }
+    );
   });
 
   describe("when operatingPhase is UP_AND_RUNNING", () => {
