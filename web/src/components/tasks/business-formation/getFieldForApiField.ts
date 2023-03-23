@@ -15,6 +15,15 @@ const fieldToApiFieldMapping: Record<string, string> = {
   agentOfficeAddressMunicipality: "Registered Agent - Street Address - City",
   agentOfficeAddressZipCode: "Registered Agent - Street Address - Zipcode",
   paymentType: "Select Payment Type",
+  businessSuffix: "Business Information - Business Designator",
+  businessStartDate: "Business Information - Effective Filing Date",
+  addressLine1: "Business Information - Street Address - Address1",
+  addressLine2: "Business Information - Street Address - Address2",
+  addressCity: "Business Information - Street Address - City",
+  addressState: "Business Information - Street Address - State",
+  addressZipCode: "Business Information - Street Address - Zipcode",
+  addressProvince: "Business Information - Street Address - Province",
+  addressCountry: "Business Information - Street Address - Country",
 };
 
 const apiFieldToFieldMapping = invert(fieldToApiFieldMapping);
