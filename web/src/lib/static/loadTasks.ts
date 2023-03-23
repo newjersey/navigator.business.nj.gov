@@ -31,6 +31,10 @@ export const loadAllTaskUrlSlugs = (): PathParams<TaskUrlSlugParam>[] => {
   ];
 };
 
+export const loadAllTasks = (): Task[] => {
+  return loadAllTaskUrlSlugs().map((pathParam) => loadTaskByUrlSlug(pathParam.params.taskUrlSlug));
+};
+
 export const loadTaskByUrlSlug = (urlSlug: string): Task => {
   try {
     const fileAsTask = getFileNameByUrlSlug(tasksDirectory, urlSlug);
