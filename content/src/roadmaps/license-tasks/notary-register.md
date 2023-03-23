@@ -1,17 +1,19 @@
 ---
-urlSlug: notary-register
 filename: notary-register
+urlSlug: notary-register
 name: Register as a Notary
-id: notary-register
-callToActionLink: https://www.njportal.com/DOR/Notary
-callToActionText: Apply for My Notary Certificate
+webflowName: "Notary: Notary Public Registration"
+industryIntegration: New Jersey Department of Revenue and Enterprise Services
 issuingAgency: New Jersey Department of Treasury
-webflowId: "5f77296c2edc674c7cb4a708"
-webflowName: "Notary Public"
-issuingDivision: "Bureau of Corporate Records"
-divisionPhone: "(609) 292-9292"
-webflowIndustry: "Notary Public"
-licenseCertificationClassification: "FEES"
+industryId: notary-public
+callToActionText: Apply for My Notary Certificate
+callToActionLink: https://www.njportal.com/DOR/Notary
+webflowIndustry: ""
+licenseCertificationClassification: FEES
+issuingDivision: Bureau of Corporate Records
+divisionPhone: (609) 292-9292
+id: notary-register
+webflowId: 5f77296c2edc674c7cb4a708
 ---
 
 You or any staff providing notary services must be registered as a Notary Public.
