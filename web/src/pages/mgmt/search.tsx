@@ -44,6 +44,8 @@ const SearchContentPage = (props: Props): ReactElement => {
 
   const onSearchSubmit = (): void => {
     const lowercaseTerm = searchTerm.toLowerCase();
+    console.log(props.tasks.filter((it) => it.filename === "check-site-requirements-cosmetology"));
+    console.log(searchTasks(props.tasks, lowercaseTerm));
     setTaskMatches(searchTasks(props.tasks, lowercaseTerm));
     setCertMatches(searchCertifications(props.certifications, lowercaseTerm));
     setCertArchiveMatches(searchCertifications(props.archivedCertifications, lowercaseTerm));

@@ -32,7 +32,12 @@ export const loadAllTaskUrlSlugs = (): PathParams<TaskUrlSlugParam>[] => {
 };
 
 export const loadAllTasks = (): Task[] => {
-  return loadAllTaskUrlSlugs().map((pathParam) => loadTaskByUrlSlug(pathParam.params.taskUrlSlug));
+  const taskFileNames = fs.readdirSync(tasksDirectory);
+  const licenseFileNames = fs.readdirSync(licenseDirectory);
+  return [
+    ...taskFileNames.map((fileName) => loadTaskByFileName(fileName, tasksDirectory)),
+    ...licenseFileNames.map((fileName) => loadTaskByFileName(fileName, licenseDirectory)),
+  ];
 };
 
 export const loadTaskByUrlSlug = (urlSlug: string): Task => {
