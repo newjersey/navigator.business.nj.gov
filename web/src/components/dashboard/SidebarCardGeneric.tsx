@@ -4,7 +4,9 @@ import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { Icon } from "@/components/njwds/Icon";
 import { useContentModifiedByUserData } from "@/lib/data-hooks/useContentModifiedByUserData";
 import { useSidebarCards } from "@/lib/data-hooks/useSidebarCards";
+import { MediaQueries } from "@/lib/PageSizes";
 import { SidebarCardContent } from "@/lib/types/types";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import { ReactNode } from "react";
 
 type Props = {
@@ -19,6 +21,7 @@ type Props = {
 export const SidebarCardGeneric = (props: Props) => {
   const { hideCard } = useSidebarCards();
   const headerText = useContentModifiedByUserData(props.headerText ?? "");
+  const isMobile = useMediaQuery(MediaQueries.isMobile);
 
   const layout = props.layout ?? "column";
 
@@ -98,7 +101,7 @@ export const SidebarCardGeneric = (props: Props) => {
           }`}
         >
           {props.preBodyContent && <div className={`padding-bottom-205`}>{props.preBodyContent}</div>}
-          {layout === "row" ? rowBodyContent : stackedBodyContent}
+          {layout === "row" && !isMobile ? rowBodyContent : stackedBodyContent}
         </div>
       </div>
     </>
