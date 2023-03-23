@@ -6,9 +6,20 @@ import path from "path";
 import { getFileNameByUrlSlug } from "./helpers";
 
 const certificationDir = path.join(process.cwd(), "..", "content", "src", "certifications");
+const archivedCertificationDir = path.join(process.cwd(), "..", "content", "src", "archived-certifications");
 
 export type CertificationUrlSlugParam = {
   certificationUrlSlug: string;
+};
+
+export const loadAllArchivedCertifications = (): Certification[] => {
+  const fileNames = fs.readdirSync(archivedCertificationDir);
+  return fileNames.map((fileName) => {
+    const fullPath = path.join(archivedCertificationDir, `${fileName}`);
+    const fileContents = fs.readFileSync(fullPath, "utf8");
+    const fileNameWithoutMd = fileName.split(".md")[0];
+    return convertCertificationMd(fileContents, fileNameWithoutMd);
+  });
 };
 
 export const loadAllCertifications = (): Certification[] => {
