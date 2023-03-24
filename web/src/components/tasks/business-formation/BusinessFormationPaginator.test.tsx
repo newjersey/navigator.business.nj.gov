@@ -10,6 +10,7 @@ import {
   generateFormationDbaContent,
   generateFormationSubmitError,
   generateFormationSubmitResponse,
+  generateProfileData,
   generateTask,
   generateUserData,
 } from "@/test/factories";
@@ -35,6 +36,7 @@ import {
   generateFormationForeignAddress,
   generateFormationUSAddress,
   getCurrentDate,
+  ProfileData,
 } from "@businessnjgovnavigator/shared/";
 import { generateFormationFormData, generateMunicipality } from "@businessnjgovnavigator/shared/test";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
@@ -46,11 +48,12 @@ interface MockApiErrorTestData {
   formationResponse: FormationSubmitResponse;
   formationStepName: FormationStepNames;
   fieldName: string;
+  profileData?: ProfileData;
   dropDownLabel?: string;
   dropDownValue?: string;
   datePickerFieldType?: "Business start date" | "Foreign date of formation";
   newDate?: DateObject;
-  radioBtnText?: string;
+  radioBtnTestId?: string;
   fieldLabel?: string;
   newTextInput?: string;
 }
@@ -534,6 +537,32 @@ describe("<BusinessFormationPaginator />", () => {
 
       describe("on known API error", () => {
         describe("starting business persona", () => {
+          const businessTotalStock: MockApiErrorJestArray = [
+            "businessTotalStock",
+            {
+              profileData: generateProfileData({
+                legalStructureId: "c-corporation",
+              }),
+              formationFormData: generateFormationFormData(
+                { businessTotalStock: "10", businessSuffix: "CO" },
+                { legalStructureId: "c-corporation" }
+              ),
+              formationResponse: generateFormationSubmitResponse({
+                success: false,
+                errors: [
+                  generateFormationSubmitError({
+                    field: "Business Information - Total Shares",
+                    message: "very bad input",
+                    type: "RESPONSE",
+                  }),
+                ],
+              }),
+              fieldName: "businessTotalStock",
+              formationStepName: "Business",
+              fieldLabel: "Business total stock",
+              newTextInput: "23",
+            },
+          ];
           const businessSuffix: MockApiErrorJestArray = [
             "businessSuffix",
             {
@@ -834,13 +863,246 @@ describe("<BusinessFormationPaginator />", () => {
               }),
               fieldName: "paymentType",
               formationStepName: "Billing",
-              radioBtnText: "Pay with E-Check",
+              radioBtnTestId: "paymentTypeACHLabel",
+            },
+          ];
+
+          const combinedInvestment: MockApiErrorJestArray = [
+            "combinedInvestment",
+            {
+              profileData: generateProfileData({ legalStructureId: "limited-partnership" }),
+              formationFormData: generateFormationFormData(
+                { combinedInvestment: "1111111" },
+                { legalStructureId: "limited-partnership" }
+              ),
+              formationResponse: generateFormationSubmitResponse({
+                success: false,
+                errors: [
+                  generateFormationSubmitError({
+                    field: "Limited Partnership - Aggregate Amount",
+                    message: "very bad input",
+                    type: "RESPONSE",
+                  }),
+                ],
+              }),
+              formationStepName: "Business",
+              fieldName: "combinedInvestment",
+              fieldLabel: "Combined investment",
+              newTextInput: "test@test.com",
+            },
+          ];
+          const createLimitedPartnerTerms: MockApiErrorJestArray = [
+            "createLimitedPartnerTerms",
+            {
+              profileData: generateProfileData({ legalStructureId: "limited-partnership" }),
+
+              formationFormData: generateFormationFormData(
+                { createLimitedPartnerTerms: "1111111", canCreateLimitedPartner: true },
+                { legalStructureId: "limited-partnership" }
+              ),
+              formationResponse: generateFormationSubmitResponse({
+                success: false,
+                errors: [
+                  generateFormationSubmitError({
+                    field: "Limited Partnership - Limited Can Create Limited Terms",
+                    message: "very bad input",
+                    type: "RESPONSE",
+                  }),
+                ],
+              }),
+              formationStepName: "Business",
+              fieldName: "createLimitedPartnerTerms",
+              fieldLabel: "Create limited partner terms",
+              newTextInput: "test@test.com",
+            },
+          ];
+          const getDistributionTerms: MockApiErrorJestArray = [
+            "getDistributionTerms",
+            {
+              profileData: generateProfileData({ legalStructureId: "limited-partnership" }),
+
+              formationFormData: generateFormationFormData(
+                { getDistributionTerms: "1111111", canGetDistribution: true },
+                { legalStructureId: "limited-partnership" }
+              ),
+              formationResponse: generateFormationSubmitResponse({
+                success: false,
+                errors: [
+                  generateFormationSubmitError({
+                    field: "Limited Partnership - Limited Can Get Distribution Terms",
+                    message: "very bad input",
+                    type: "RESPONSE",
+                  }),
+                ],
+              }),
+              formationStepName: "Business",
+              fieldName: "getDistributionTerms",
+              fieldLabel: "Get distribution terms",
+              newTextInput: "test@test.com",
+            },
+          ];
+          const makeDistributionTerms: MockApiErrorJestArray = [
+            "makeDistributionTerms",
+            {
+              profileData: generateProfileData({ legalStructureId: "limited-partnership" }),
+
+              formationFormData: generateFormationFormData(
+                { makeDistributionTerms: "1111111", canMakeDistribution: true },
+                { legalStructureId: "limited-partnership" }
+              ),
+              formationResponse: generateFormationSubmitResponse({
+                success: false,
+                errors: [
+                  generateFormationSubmitError({
+                    field: "Limited Partnership - Limited Can Make Distribution Terms",
+                    message: "very bad input",
+                    type: "RESPONSE",
+                  }),
+                ],
+              }),
+              formationStepName: "Business",
+              fieldName: "makeDistributionTerms",
+              fieldLabel: "Make distribution terms",
+              newTextInput: "test@test.com",
+            },
+          ];
+          const withdrawals: MockApiErrorJestArray = [
+            "withdrawals",
+            {
+              profileData: generateProfileData({ legalStructureId: "limited-partnership" }),
+
+              formationFormData: generateFormationFormData(
+                { withdrawals: "1111111" },
+                { legalStructureId: "limited-partnership" }
+              ),
+              formationResponse: generateFormationSubmitResponse({
+                success: false,
+                errors: [
+                  generateFormationSubmitError({
+                    field: "Limited Partnership - General Partner Withdrawal",
+                    message: "very bad input",
+                    type: "RESPONSE",
+                  }),
+                ],
+              }),
+              formationStepName: "Business",
+              fieldName: "withdrawals",
+              fieldLabel: "Withdrawals",
+              newTextInput: "test@test.com",
+            },
+          ];
+          const dissolution: MockApiErrorJestArray = [
+            "dissolution",
+            {
+              profileData: generateProfileData({ legalStructureId: "limited-partnership" }),
+
+              formationFormData: generateFormationFormData(
+                { dissolution: "1111111" },
+                { legalStructureId: "limited-partnership" }
+              ),
+              formationResponse: generateFormationSubmitResponse({
+                success: false,
+                errors: [
+                  generateFormationSubmitError({
+                    field: "Limited Partnership - Dissolution Plan",
+                    message: "very bad input",
+                    type: "RESPONSE",
+                  }),
+                ],
+              }),
+              formationStepName: "Business",
+              fieldName: "dissolution",
+              fieldLabel: "Dissolution",
+              newTextInput: "test@test.com",
+            },
+          ];
+
+          const canCreateLimitedPartner: MockApiErrorJestArray = [
+            "canCreateLimitedPartner",
+            {
+              profileData: generateProfileData({ legalStructureId: "limited-partnership" }),
+
+              formationFormData: generateFormationFormData(
+                { canCreateLimitedPartner: false },
+                { legalStructureId: "limited-partnership" }
+              ),
+              formationResponse: generateFormationSubmitResponse({
+                success: false,
+                errors: [
+                  generateFormationSubmitError({
+                    field: "Limited Partnership - Limited Can Create Limited",
+                    message: "very bad input",
+                    type: "RESPONSE",
+                  }),
+                ],
+              }),
+              fieldName: "canCreateLimitedPartner",
+              formationStepName: "Business",
+              radioBtnTestId: "canCreateLimitedPartner-true",
+            },
+          ];
+          const canGetDistribution: MockApiErrorJestArray = [
+            "canGetDistribution",
+            {
+              profileData: generateProfileData({ legalStructureId: "limited-partnership" }),
+
+              formationFormData: generateFormationFormData(
+                { canGetDistribution: false },
+                { legalStructureId: "limited-partnership" }
+              ),
+              formationResponse: generateFormationSubmitResponse({
+                success: false,
+                errors: [
+                  generateFormationSubmitError({
+                    field: "Limited Partnership - Limited Can Get Distribution",
+                    message: "very bad input",
+                    type: "RESPONSE",
+                  }),
+                ],
+              }),
+              fieldName: "canGetDistribution",
+              formationStepName: "Business",
+              radioBtnTestId: "canGetDistribution-true",
+            },
+          ];
+          const canMakeDistribution: MockApiErrorJestArray = [
+            "canMakeDistribution",
+            {
+              profileData: generateProfileData({ legalStructureId: "limited-partnership" }),
+
+              formationFormData: generateFormationFormData(
+                { canMakeDistribution: false },
+                { legalStructureId: "limited-partnership" }
+              ),
+              formationResponse: generateFormationSubmitResponse({
+                success: false,
+                errors: [
+                  generateFormationSubmitError({
+                    field: "Limited Partnership - Limited Can Make Distribution",
+                    message: "very bad input",
+                    type: "RESPONSE",
+                  }),
+                ],
+              }),
+              fieldName: "canMakeDistribution",
+              formationStepName: "Business",
+              radioBtnTestId: "canMakeDistribution-true",
             },
           ];
 
           it.each([
             businessSuffix,
             businessStartDate,
+            businessTotalStock,
+            combinedInvestment,
+            createLimitedPartnerTerms,
+            getDistributionTerms,
+            makeDistributionTerms,
+            canCreateLimitedPartner,
+            canGetDistribution,
+            canMakeDistribution,
+            withdrawals,
+            dissolution,
             agentNumber,
             agentName,
             agentEmail,
@@ -855,10 +1117,11 @@ describe("<BusinessFormationPaginator />", () => {
           ])(
             "shows error alert and error state on step associated with %o API error",
             async (testTitle, data) => {
-              const { formationFormData, formationResponse, formationStepName } = data;
+              const { formationFormData, formationResponse, formationStepName, profileData } = data;
 
               filledInUserData = {
                 ...initialUserData,
+                profileData: profileData ? { ...profileData } : { ...initialUserData.profileData },
                 formationData: {
                   ...initialUserData.formationData,
                   formationFormData: formationFormData,
@@ -867,7 +1130,6 @@ describe("<BusinessFormationPaginator />", () => {
               };
               const page = preparePage(filledInUserData, displayContent);
               await page.fillAndSubmitBusinessNameStep();
-
               await page.stepperClickToReviewStep();
               await page.clickSubmit();
               expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual("ERROR");
@@ -878,6 +1140,16 @@ describe("<BusinessFormationPaginator />", () => {
           it.each([
             businessSuffix,
             businessStartDate,
+            businessTotalStock,
+            combinedInvestment,
+            createLimitedPartnerTerms,
+            getDistributionTerms,
+            makeDistributionTerms,
+            canCreateLimitedPartner,
+            canGetDistribution,
+            canMakeDistribution,
+            withdrawals,
+            dissolution,
             agentNumber,
             agentName,
             agentEmail,
@@ -890,9 +1162,10 @@ describe("<BusinessFormationPaginator />", () => {
             contactPhoneNumber,
             paymentType,
           ])("shows API error message on step for %o API error", async (testTitle, data) => {
-            const { formationFormData, formationResponse, formationStepName, fieldName } = data;
+            const { formationFormData, formationResponse, formationStepName, fieldName, profileData } = data;
             filledInUserData = {
               ...initialUserData,
+              profileData: profileData ? { ...profileData } : { ...initialUserData.profileData },
               formationData: {
                 ...initialUserData.formationData,
                 formationFormData,
@@ -903,7 +1176,6 @@ describe("<BusinessFormationPaginator />", () => {
             await page.fillAndSubmitBusinessNameStep();
             await page.stepperClickToReviewStep();
             await page.clickSubmit();
-
             if (formationStepName === "Business") await page.stepperClickToBusinessStep();
             if (formationStepName === "Contacts") await page.stepperClickToContactsStep();
             if (formationStepName === "Billing") await page.stepperClickToBillingStep();
@@ -917,6 +1189,13 @@ describe("<BusinessFormationPaginator />", () => {
           });
 
           it.each([
+            businessTotalStock,
+            combinedInvestment,
+            createLimitedPartnerTerms,
+            getDistributionTerms,
+            makeDistributionTerms,
+            withdrawals,
+            dissolution,
             agentNumber,
             agentName,
             agentEmail,
@@ -928,10 +1207,17 @@ describe("<BusinessFormationPaginator />", () => {
             contactLastName,
             contactPhoneNumber,
           ])("removes %o API error on blur when user changes text field", async (testTitle, data) => {
-            const { formationFormData, formationResponse, formationStepName, fieldLabel, newTextInput } =
-              data;
+            const {
+              formationFormData,
+              formationResponse,
+              formationStepName,
+              fieldLabel,
+              newTextInput,
+              profileData,
+            } = data;
             filledInUserData = {
               ...initialUserData,
+              profileData: profileData ? { ...profileData } : { ...initialUserData.profileData },
               formationData: {
                 ...initialUserData.formationData,
                 formationFormData,
@@ -954,12 +1240,14 @@ describe("<BusinessFormationPaginator />", () => {
             );
           });
 
-          it.each([paymentType])(
+          it.each([paymentType, canCreateLimitedPartner, canGetDistribution, canMakeDistribution])(
             "removes %o API error when user selects radio button",
             async (testTitle, data) => {
-              const { formationFormData, formationResponse, formationStepName, radioBtnText } = data;
+              const { formationFormData, formationResponse, formationStepName, radioBtnTestId, profileData } =
+                data;
               filledInUserData = {
                 ...initialUserData,
+                profileData: profileData ? { ...profileData } : { ...initialUserData.profileData },
                 formationData: {
                   ...initialUserData.formationData,
                   formationFormData,
@@ -970,9 +1258,11 @@ describe("<BusinessFormationPaginator />", () => {
               await page.fillAndSubmitBusinessNameStep();
               await page.stepperClickToReviewStep();
               await page.clickSubmit();
+              if (formationStepName === "Business") await page.stepperClickToBusinessStep();
+              if (formationStepName === "Contacts") await page.stepperClickToContactsStep();
               if (formationStepName === "Billing") await page.stepperClickToBillingStep();
               expect(screen.getByRole("alert")).toBeInTheDocument();
-              fireEvent.click(screen.getByText(radioBtnText as string));
+              fireEvent.click(screen.getByTestId(radioBtnTestId as string));
               expect(screen.queryByRole("alert")).not.toBeInTheDocument();
               expect(screen.queryByText(Config.formation.errorBanner.errorOnStep)).not.toBeInTheDocument();
               expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual(
@@ -1346,6 +1636,64 @@ describe("<BusinessFormationPaginator />", () => {
             },
           ];
 
+          const foreignStateOfFormation: MockApiErrorJestArray = [
+            "foreignStateOfFormation",
+            {
+              formationFormData: generateFormationFormData(
+                {
+                  ...generateFormationUSAddress({}),
+                  businessSuffix: "LLC",
+                  businessLocationType: "US",
+                  foreignStateOfFormation: undefined,
+                },
+                { legalStructureId: "foreign-limited-partnership" }
+              ),
+              formationResponse: generateFormationSubmitResponse({
+                success: false,
+                errors: [
+                  generateFormationSubmitError({
+                    field: "Business Information - Foreign State Of Formation",
+                    message: "very bad input",
+                    type: "RESPONSE",
+                  }),
+                ],
+              }),
+              formationStepName: "Business",
+              fieldName: "foreignStateOfFormation",
+              fieldLabel: "Foreign state of formation",
+              newTextInput: "California",
+            },
+          ];
+
+          const foreignDateOfFormation: MockApiErrorJestArray = [
+            "foreignDateOfFormation",
+            {
+              formationFormData: generateFormationFormData(
+                {
+                  ...generateFormationUSAddress({}),
+                  businessSuffix: "LLC",
+                  businessLocationType: "US",
+                  foreignDateOfFormation: undefined,
+                },
+                { legalStructureId: "foreign-limited-partnership" }
+              ),
+              formationResponse: generateFormationSubmitResponse({
+                success: false,
+                errors: [
+                  generateFormationSubmitError({
+                    field: "Business Information - Foreign Date Of Formation",
+                    message: "very bad input",
+                    type: "RESPONSE",
+                  }),
+                ],
+              }),
+              formationStepName: "Business",
+              fieldName: "foreignDateOfFormation",
+              fieldLabel: "Foreign date of formation",
+              newTextInput: "01/01/2020",
+            },
+          ];
+
           it.each([
             foreignUsMainAddressLine1,
             foreignUsMainAddressLine2,
@@ -1358,6 +1706,8 @@ describe("<BusinessFormationPaginator />", () => {
             foreignIntlMainAddressProvince,
             foreignIntlMainAddressZipCode,
             foreignIntlMainAddressCountry,
+            foreignStateOfFormation,
+            foreignDateOfFormation,
           ])(
             "shows error alert and error state on step associated with %o API error",
             async (testTitle, data) => {
@@ -1393,6 +1743,8 @@ describe("<BusinessFormationPaginator />", () => {
             foreignIntlMainAddressProvince,
             foreignIntlMainAddressZipCode,
             foreignIntlMainAddressCountry,
+            foreignStateOfFormation,
+            foreignDateOfFormation,
           ])("shows API error message on step for %o API error", async (testTitle, data) => {
             const { formationFormData, formationResponse, formationStepName, fieldName } = data;
             filledInUserData = {
@@ -1431,6 +1783,8 @@ describe("<BusinessFormationPaginator />", () => {
             foreignIntlMainAddressProvince,
             foreignIntlMainAddressZipCode,
             foreignIntlMainAddressCountry,
+            foreignStateOfFormation,
+            foreignDateOfFormation,
           ])("removes %o API error on blur when user changes text field", async (testTitle, data) => {
             const { formationFormData, formationResponse, formationStepName, fieldLabel, newTextInput } =
               data;
