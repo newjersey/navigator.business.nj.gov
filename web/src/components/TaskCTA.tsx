@@ -5,7 +5,7 @@ import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { ReactElement, ReactNode } from "react";
 
 interface Props {
-  link: string;
+  link?: string;
   text?: string;
   children?: ReactNode;
   onClick?: () => void;

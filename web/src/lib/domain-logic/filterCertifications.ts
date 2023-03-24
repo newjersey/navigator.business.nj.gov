@@ -10,7 +10,7 @@ export const filterCertifications = (
     let allowedCertification = true;
 
     if (
-      it.applicableOwnershipTypes !== null &&
+      !!it.applicableOwnershipTypes &&
       it.applicableOwnershipTypes.length > 0 &&
       userData.profileData.ownershipTypeIds.length > 0
     ) {
