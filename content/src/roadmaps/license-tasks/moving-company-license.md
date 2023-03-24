@@ -4,8 +4,8 @@ urlSlug: moving-company-license
 name: Apply for a Public Movers License
 webflowName: "Moving Company: Public Movers License"
 industryIntegration: New Jersey Division of Consumer Affairs
-issuingAgency: Division of Consumer Affairs Office of Consumer Protection,
-  Regulated Business Section, Public Movers and Warehousemen
+issuingAgency: New Jersey Division of Consumer Affairs,  Office of Consumer
+  Protection, Regulated Business Section, Public Movers and Warehousemen
 industryId: moving-company
 callToActionText: Apply for My Public Movers License
 callToActionLink: https://www.njconsumeraffairs.gov/pmw/Pages/applications.aspx
