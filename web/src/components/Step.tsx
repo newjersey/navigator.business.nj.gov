@@ -1,11 +1,11 @@
 import { VerticalStepIndicator } from "@/components/njwds-extended/VerticalStepIndicator";
 import { Task } from "@/components/Task";
-import { useContentModifiedByUserData } from "@/lib/data-hooks/useContentModifiedByUserData";
 import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { isStepCompleted } from "@/lib/domain-logic/isStepCompleted";
 import * as types from "@/lib/types/types";
 import { ReactElement } from "react";
+import { ModifiedContent } from "./ModifiedContent";
 
 interface Props {
   step: types.Step;
@@ -15,7 +15,6 @@ interface Props {
 export const Step = (props: Props): ReactElement => {
   const { userData } = useUserData();
   const { roadmap } = useRoadmap();
-  const stepName = useContentModifiedByUserData(props.step.name ?? "");
   return (
     <div
       className={`margin-top-3 ${props.last ? "margin-bottom-1" : "padding-bottom-105"}`}
@@ -36,7 +35,7 @@ export const Step = (props: Props): ReactElement => {
               className="text-bold margin-right-1 tablet:margin-left-4"
               data-step={props.step.stepNumber}
             >
-              {stepName}
+              <ModifiedContent>{props.step.name}</ModifiedContent>
             </span>
             <span className="text-base">({props.step.timeEstimate})</span>
           </div>
