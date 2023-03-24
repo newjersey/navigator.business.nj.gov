@@ -1,14 +1,15 @@
 ---
 urlSlug: register-consumer-affairs
-name: Obtain Your Home Improvement Contractor License
-webflowName: Home Improvement Contractor
+name: Obtain Your Home Improvement Contractor Registration
+webflowName: "Home Contractor: Home Improvement Contractor Registration"
 industryIntegration: New Jersey Division of Consumer Affairs
 issuingAgency: New Jersey Division of Consumer Affairs Home Improvement Unit
+formName: HIC-Form1-Rev
 industryId: home-contractor
-callToActionText: Obtain My Contractor License
+callToActionText: Complete My Contractor Registration
 callToActionLink: https://www.njconsumeraffairs.gov/ocp/Pages/hic.aspx
-webflowIndustry: Home Improvement Contractor
-licenseCertificationClassification: REGISTRATION
+webflowIndustry: ""
+licenseCertificationClassification: ""
 issuingDivision: Home Improvement Contractors Registration
 divisionPhone: (973) 424-8150
 id: register-consumer-affairs
