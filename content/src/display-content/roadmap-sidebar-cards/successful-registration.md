@@ -8,7 +8,7 @@ headerBackgroundColor: cool-lighter
 borderColor: secondary-light
 hasCloseButton: true
 weight: 1
-section: "below-opportunities"
+section: "above-opportunities"
 ---
 
 You can now **save your progress**, complete **forms**, check your **applications status**, **access documents**, and more!

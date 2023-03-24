@@ -3,7 +3,7 @@ id: go-to-profile
 ctaText: "Go to Profile"
 borderColor: primary-light
 hasCloseButton: false
-weight: 2
+weight: 3
 section: "above-opportunities"
 ---
 
