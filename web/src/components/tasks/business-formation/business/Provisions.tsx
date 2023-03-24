@@ -1,5 +1,6 @@
 import { Content } from "@/components/Content";
 import { GenericTextField } from "@/components/GenericTextField";
+import { ModifiedContent } from "@/components/ModifiedContent";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { Icon } from "@/components/njwds/Icon";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
@@ -73,7 +74,9 @@ export const Provisions = (): ReactElement => {
       {state.formationFormData.provisions?.map((provision: string, index: number) => {
         return (
           <div key={index}>
-            <b>{Config.formation.fields.provisions.secondaryLabel}</b>
+            <b>
+              <ModifiedContent>{Config.formation.fields.provisions.secondaryLabel}</ModifiedContent>
+            </b>
             <span className="margin-left-05">{Config.formation.general.optionalLabel}</span>
             <div className="grid-row">
               <div className="grid-col">
