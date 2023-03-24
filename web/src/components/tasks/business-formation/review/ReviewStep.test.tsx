@@ -114,7 +114,7 @@ describe("Formation - ReviewStep", () => {
 
   it("displays the business step when the edit button in the business purpose section is clicked", async () => {
     await renderStep({}, { businessPurpose: "some purpose" });
-    fireEvent.click(screen.getByTestId("edit-business-purpose"));
+    fireEvent.click(screen.getByTestId("edit-business-purpose-step"));
     expect(screen.getByTestId("business-step")).toBeInTheDocument();
   });
 

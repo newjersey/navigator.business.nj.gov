@@ -10,7 +10,8 @@ import { ReviewPartnership } from "@/components/tasks/business-formation/review/
 import { ReviewProvisions } from "@/components/tasks/business-formation/review/ReviewProvisions";
 import { ReviewRegisteredAgent } from "@/components/tasks/business-formation/review/ReviewRegisteredAgent";
 import { ReviewSignatures } from "@/components/tasks/business-formation/review/ReviewSignatures";
-import { ReviewText } from "@/components/tasks/business-formation/review/ReviewText";
+import { ReviewSection } from "@/components/tasks/business-formation/review/section/ReviewSection";
+import { ReviewText } from "@/components/tasks/business-formation/review/section/ReviewText";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import analytics from "@/lib/utils/analytics";
@@ -32,42 +33,52 @@ export const ReviewStep = (): ReactElement => {
         <ReviewBusinessSuffixAndStartDate />
         <ReviewMainBusinessLocation />
         {isLP && (
-          <ReviewText
+          <ReviewSection
+            buttonText={Config.formation.general.editButtonText}
             header={Config.formation.fields.combinedInvestment.label}
-            fieldName={"combinedInvestment"}
             stepName={"Business"}
-          />
+            testId="edit-combined-investment-step"
+          >
+            <ReviewText fieldName={"combinedInvestment"} />
+          </ReviewSection>
         )}
         {isLP && (
-          <ReviewText
+          <ReviewSection
+            buttonText={Config.formation.general.editButtonText}
             header={Config.formation.fields.withdrawals.label}
-            fieldName={"withdrawals"}
             stepName={"Business"}
-          />
+            testId="edit-withdrawls-step"
+          >
+            <ReviewText fieldName={"withdrawals"} />
+          </ReviewSection>
         )}
         {isLP && <ReviewPartnership />}
         {isLP && (
-          <ReviewText
+          <ReviewSection
+            buttonText={Config.formation.general.editButtonText}
             header={Config.formation.fields.dissolution.label}
-            fieldName={"dissolution"}
             stepName={"Business"}
-          />
+            testId="edit-dissolution-step"
+          >
+            <ReviewText fieldName={"dissolution"} />
+          </ReviewSection>
         )}
         {hasProvisions && <ReviewProvisions />}
         {hasPurpose && (
-          <ReviewText
+          <ReviewSection
+            buttonText={Config.formation.general.editButtonText}
             header={Config.formation.fields.businessPurpose.label}
-            fieldName={"businessPurpose"}
             stepName={"Business"}
-            isExpandable={true}
-          />
+            testId="edit-business-purpose-step"
+          >
+            <ReviewText fieldName={"businessPurpose"} isExpandable={true} />
+          </ReviewSection>
         )}
         <ReviewRegisteredAgent />
         {hasMembers && !isLP && <ReviewMembers />}
         <ReviewSignatures />
         <ReviewBillingContact />
         <ReviewBillingServices />
-        <hr className="margin-y-205" />
         <Alert variant="info">
           <Content
             onClick={(): void => {

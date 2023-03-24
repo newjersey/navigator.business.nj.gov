@@ -1,5 +1,5 @@
-import { ReviewLineItem } from "@/components/tasks/business-formation/review/ReviewLineItem";
-import { ReviewSectionHeader } from "@/components/tasks/business-formation/review/ReviewSectionHeader";
+import { ReviewLineItem } from "@/components/tasks/business-formation/review/section/ReviewLineItem";
+import { ReviewSection } from "@/components/tasks/business-formation/review/section/ReviewSection";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ReactElement, useContext } from "react";
@@ -39,17 +39,17 @@ export const ReviewBillingServices = (): ReactElement => {
   };
 
   return (
-    <>
-      <ReviewSectionHeader
-        header={Config.formation.fields.paymentType.reviewStepServicesHeader}
-        stepName="Billing"
-        testId="billing-services"
-      />
+    <ReviewSection
+      buttonText={Config.formation.general.editButtonText}
+      header={Config.formation.fields.paymentType.reviewStepServicesHeader}
+      stepName="Billing"
+      testId="edit-billing-services-step"
+    >
       <ReviewLineItem
         label={Config.formation.fields.paymentType.reviewStepsServicesSelected}
         value={getDocumentsList()}
       />
       <ReviewLineItem label={Config.formation.fields.paymentType.label} value={getPaymentTypeLabel()} />
-    </>
+    </ReviewSection>
   );
 };

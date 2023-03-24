@@ -1,5 +1,5 @@
-import { ReviewLineItem } from "@/components/tasks/business-formation/review/ReviewLineItem";
-import { ReviewSectionHeader } from "@/components/tasks/business-formation/review/ReviewSectionHeader";
+import { ReviewLineItem } from "@/components/tasks/business-formation/review/section/ReviewLineItem";
+import { ReviewSection } from "@/components/tasks/business-formation/review/section/ReviewSection";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getStringifiedAddress } from "@/lib/utils/formatters";
@@ -21,9 +21,13 @@ export const ReviewSignatures = (): ReactElement => {
   };
 
   return (
-    <>
-      <ReviewSectionHeader header={getConfig().header} stepName="Contacts" testId="signature" />
-      {state.formationFormData.signers?.length === 0 && <em>{Config.formation.general.notEntered}</em>}
+    <ReviewSection
+      buttonText={Config.formation.general.editButtonText}
+      header={getConfig().header}
+      stepName="Contacts"
+      testId="edit-signature-step"
+    >
+      {state.formationFormData.signers?.length === 0 && <i>{Config.formation.general.notEntered}</i>}
       {state.formationFormData.signers?.map((signer, index) => {
         return (
           <div key={`${signer}-${index}`} className={index === 0 ? "" : "margin-top-2"}>
@@ -58,8 +62,6 @@ export const ReviewSignatures = (): ReactElement => {
           </div>
         );
       })}
-
-      <hr className="margin-y-205" />
-    </>
+    </ReviewSection>
   );
 };

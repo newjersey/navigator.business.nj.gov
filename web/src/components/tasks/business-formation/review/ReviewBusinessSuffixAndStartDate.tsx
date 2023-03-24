@@ -1,4 +1,4 @@
-import { ReviewLineItem } from "@/components/tasks/business-formation/review/ReviewLineItem";
+import { ReviewLineItem } from "@/components/tasks/business-formation/review/section/ReviewLineItem";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { defaultDisplayDateFormat } from "@/lib/types/types";
