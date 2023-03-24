@@ -170,12 +170,12 @@ export type Certification = {
   filename: string;
   name: string;
   urlSlug: string;
-  callToActionLink: string;
-  callToActionText: string;
   contentMd: string;
   descriptionMd: string;
-  agency: OpportunityAgency[] | null;
-  applicableOwnershipTypes: string[] | null;
+  callToActionLink: string | undefined;
+  callToActionText: string | undefined;
+  agency: OpportunityAgency[] | null | undefined;
+  applicableOwnershipTypes: string[] | null | undefined;
   isSbe: boolean;
 };
 
