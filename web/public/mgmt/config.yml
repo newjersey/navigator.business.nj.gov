@@ -2618,6 +2618,12 @@ collections:
               "secondary-light",
             ],
         }
+      - {
+          label: "Placement in For You Column",
+          name: "section",
+          widget: "select",
+          options: ["above-opportunities", "below-opportunities"],
+        }
 
   - name: "misc-label"
     label: "🟧 MISC"

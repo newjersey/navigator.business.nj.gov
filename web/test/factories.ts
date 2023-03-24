@@ -405,6 +405,7 @@ export const generateSidebarCardContent = (overrides: Partial<SidebarCardContent
     borderColor: `some-border-color-${randomInt()}`,
     hasCloseButton: !!(randomInt() % 2),
     weight: randomInt() % 2,
+    section: randomInt() % 2 === 0 ? "above-opportunities" : "below-opportunities",
     ...overrides,
   };
 };

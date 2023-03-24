@@ -416,6 +416,7 @@ export type SidebarCardContent = {
   borderColor: string;
   hasCloseButton: boolean;
   weight: number;
+  section: "above-opportunities" | "below-opportunities";
 };
 
 export type NaicsCodeObject = {
