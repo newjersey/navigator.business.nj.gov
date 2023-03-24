@@ -1,8 +1,8 @@
 import { Content } from "@/components/Content";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { FieldLabelModal } from "@/components/onboarding/FieldLabelModal";
-import { OnboardingDateOfFormation } from "@/components/onboarding/OnboardingDateOfFormation";
-import { OnboardingMunicipality } from "@/components/onboarding/OnboardingMunicipality";
+import { ProfileDateOfFormation } from "@/components/profile/ProfileDateOfFormation";
+import { ProfileMunicipality } from "@/components/profile/ProfileMunicipality";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { profileFormContext } from "@/contexts/profileFormContext";
@@ -92,7 +92,7 @@ export const FormationDateModal = (props: Props): ReactElement => {
               }}
             />
 
-            <OnboardingDateOfFormation
+            <ProfileDateOfFormation
               required={true}
               disabled={false}
               futureAllowed={true}
@@ -102,7 +102,7 @@ export const FormationDateModal = (props: Props): ReactElement => {
           {shouldShowMunicipalityQuestion() && (
             <WithErrorBar hasError={formContextState.fieldStates.municipality.invalid} type="ALWAYS">
               <FieldLabelModal fieldName="municipality" />
-              <OnboardingMunicipality required />
+              <ProfileMunicipality required />
             </WithErrorBar>
           )}
         </ModalTwoButton>

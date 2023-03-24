@@ -10,7 +10,7 @@ interface NumericFieldProps {
 
 interface Props<T> extends Omit<OnboardingProps<T>, "numericProps">, NumericFieldProps {}
 
-export const OnboardingNumericField = <T,>({ minLength, maxLength, ...props }: Props<T>): ReactElement => {
+export const ProfileNumericField = <T,>({ minLength, maxLength, ...props }: Props<T>): ReactElement => {
   const validationText =
     minLength === undefined
       ? templateEval(Config.onboardingDefaults.errorTextMinimumNumericField, {

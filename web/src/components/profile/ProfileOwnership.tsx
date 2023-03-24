@@ -3,11 +3,11 @@ import {
   arrayOfOwnershipTypes,
   LookupOwnershipTypeById,
   OwnershipType,
-} from "@businessnjgovnavigator/shared/";
+} from "@businessnjgovnavigator/shared";
 import { Checkbox, FormControl, ListItemText, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import { ReactElement, useContext } from "react";
 
-export const OnboardingOwnership = (): ReactElement => {
+export const ProfileOwnership = (): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
   const NONE_OF_THE_ABOVE = "none";
 
