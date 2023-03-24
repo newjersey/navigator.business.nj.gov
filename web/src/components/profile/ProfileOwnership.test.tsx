@@ -1,14 +1,14 @@
-import { OnboardingOwnership } from "@/components/onboarding/OnboardingOwnership";
+import { ProfileOwnership } from "@/components/profile/ProfileOwnership";
 import { selectDropdownByValue } from "@/test/helpers/helpers-testing-library-selectors";
 import { WithStatefulProfileData } from "@/test/mock/withStatefulProfileData";
 import { createEmptyProfileData } from "@businessnjgovnavigator/shared/profileData";
 import { render, screen } from "@testing-library/react";
 
-describe("<OnboardingOwnership />", () => {
+describe("<ProfileOwnership />", () => {
   it("de-selects everything else if None Of The Above is selected", () => {
     render(
       <WithStatefulProfileData initialData={createEmptyProfileData()}>
-        <OnboardingOwnership />
+        <ProfileOwnership />
       </WithStatefulProfileData>
     );
     selectDropdownByValue("Ownership", "woman-owned");
@@ -21,7 +21,7 @@ describe("<OnboardingOwnership />", () => {
   it("de-selects None Of The Above if anything else is selected", () => {
     render(
       <WithStatefulProfileData initialData={createEmptyProfileData()}>
-        <OnboardingOwnership />
+        <ProfileOwnership />
       </WithStatefulProfileData>
     );
     selectDropdownByValue("Ownership", "none");

@@ -1,12 +1,12 @@
 import { OnboardingField, OnboardingProps } from "@/components/onboarding/OnboardingField";
 import { ReactElement } from "react";
 
-export const OnboardingResponsibleOwnerName = (props: Omit<OnboardingProps, "fieldName">): ReactElement => {
+export const ProfileBusinessName = (props: Omit<OnboardingProps, "fieldName">): ReactElement => {
   return (
     <OnboardingField
-      fieldName="responsibleOwnerName"
+      fieldName="businessName"
       fieldOptions={{
-        inputProps: { "data-testid": "responsibleOwnerName" },
+        inputProps: { "data-testid": "businessName" },
       }}
       {...props}
     />
