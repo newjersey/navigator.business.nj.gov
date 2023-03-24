@@ -24,6 +24,18 @@ const fieldToApiFieldMapping: Record<string, string> = {
   addressZipCode: "Business Information - Street Address - Zipcode",
   addressProvince: "Business Information - Street Address - Province",
   addressCountry: "Business Information - Street Address - Country",
+  foreignStateOfFormation: "Business Information - Foreign State Of Formation",
+  foreignDateOfFormation: "Business Information - Foreign Date Of Formation",
+  businessTotalStock: "Business Information - Total Shares",
+  combinedInvestment: "Limited Partnership - Aggregate Amount",
+  canCreateLimitedPartner: "Limited Partnership - Limited Can Create Limited",
+  createLimitedPartnerTerms: "Limited Partnership - Limited Can Create Limited Terms",
+  canGetDistribution: "Limited Partnership - Limited Can Get Distribution",
+  getDistributionTerms: "Limited Partnership - Limited Can Get Distribution Terms",
+  canMakeDistribution: "Limited Partnership - Limited Can Make Distribution",
+  makeDistributionTerms: "Limited Partnership - Limited Can Make Distribution Terms",
+  withdrawals: "Limited Partnership - General Partner Withdrawal",
+  dissolution: "Limited Partnership - Dissolution Plan",
 };
 
 const apiFieldToFieldMapping = invert(fieldToApiFieldMapping);

@@ -1,4 +1,3 @@
-import { Content } from "@/components/Content";
 import { getCost } from "@/components/tasks/business-formation/billing/getCost";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
@@ -115,7 +114,9 @@ export const PaymentTypeTable = (): ReactElement => {
                     : ""
                 }
               >
-                <Content>{Config.formation.fields.paymentType.creditCardLabel}</Content>
+                <div data-testid={"paymentTypeCreditCardLabel"}>
+                  {Config.formation.fields.paymentType.creditCardLabel}
+                </div>
               </label>
             </td>
             <td className={state.formationFormData.paymentType === "CC" ? "text-primary-dark text-bold" : ""}>
@@ -146,7 +147,7 @@ export const PaymentTypeTable = (): ReactElement => {
                     : ""
                 }
               >
-                <Content>{Config.formation.fields.paymentType.achLabel}</Content>
+                <div data-testid={"paymentTypeACHLabel"}>{Config.formation.fields.paymentType.achLabel}</div>
               </label>
             </td>
             <td
