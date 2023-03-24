@@ -1,4 +1,5 @@
 import { Content } from "@/components/Content";
+import { ModifiedContent } from "@/components/ModifiedContent";
 import { ReviewSectionHeader } from "@/components/tasks/business-formation/review/ReviewSectionHeader";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -34,7 +35,9 @@ export const ReviewPartnership = () => {
         )}
         {params.radioData && (
           <div className="margin-left-4">
-            <i>{Config.formation.partnershipRights.reviewStepTermsLabel}</i>
+            <i>
+              <ModifiedContent>{Config.formation.partnershipRights.reviewStepTermsLabel}</ModifiedContent>
+            </i>
             <span className="margin-left-1">{params.termsData}</span>
           </div>
         )}

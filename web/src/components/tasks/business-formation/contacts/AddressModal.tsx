@@ -2,6 +2,7 @@
 
 import { GenericTextField } from "@/components/GenericTextField";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
+import { ModifiedContent } from "@/components/ModifiedContent";
 import { StateDropdown } from "@/components/StateDropdown";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -252,7 +253,9 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
             type="ALWAYS"
             className="margin-bottom-2"
           >
-            <b>{Config.formation.addressModal.name.label}</b>
+            <b>
+              <ModifiedContent>{Config.formation.addressModal.name.label}</ModifiedContent>
+            </b>
             <GenericTextField
               value={addressData.name}
               handleChange={(value: string) => {
@@ -273,7 +276,9 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
             type="ALWAYS"
             className="margin-bottom-2"
           >
-            <b>{Config.formation.addressModal.addressLine1.label}</b>
+            <b>
+              <ModifiedContent>{Config.formation.addressModal.addressLine1.label}</ModifiedContent>
+            </b>
             <GenericTextField
               fieldName="addressLine1"
               value={addressData.addressLine1}
@@ -295,7 +300,9 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
             type="ALWAYS"
             className="margin-bottom-2"
           >
-            <b>{Config.formation.addressModal.addressLine2.label}</b>
+            <b>
+              <ModifiedContent>{Config.formation.addressModal.addressLine2.label}</ModifiedContent>
+            </b>
             <span className="margin-left-1">{Config.formation.general.optionalLabel}</span>
             <GenericTextField
               fieldName="addressLine2"
@@ -323,7 +330,9 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
                 type="DESKTOP-ONLY"
               >
                 <WithErrorBar hasError={!!addressErrorMap["addressCity"].invalid} type="MOBILE-ONLY">
-                  <b>{Config.formation.addressModal.addressCity.label}</b>
+                  <b>
+                    <ModifiedContent>{Config.formation.addressModal.addressCity.label}</ModifiedContent>
+                  </b>
                   <GenericTextField
                     fieldName="addressCity"
                     autoComplete="address-level2"
@@ -350,7 +359,9 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
                 type="MOBILE-ONLY"
               >
                 <div className="margin-bottom-2">
-                  <b>{Config.formation.addressModal.addressState.label}</b>
+                  <b>
+                    <ModifiedContent>{Config.formation.addressModal.addressState.label}</ModifiedContent>
+                  </b>
                 </div>
                 <StateDropdown
                   fieldName="addressState"
@@ -370,7 +381,9 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
               </WithErrorBar>
             </div>
             <div className="grid-col-6 tablet:grid-col-3">
-              <b>{Config.formation.addressModal.addressZipCode.label}</b>
+              <b>
+                <ModifiedContent>{Config.formation.addressModal.addressZipCode.label}</ModifiedContent>
+              </b>
               <GenericTextField
                 numericProps={{
                   maxLength: 5,
