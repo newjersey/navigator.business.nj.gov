@@ -1,7 +1,7 @@
 ---
 urlSlug: search-licenses
 name: Apply for an Employment Agency License
-webflowName: Employment Agency License
+webflowName: "Employment Agency:  Employment Agency License"
 industryIntegration: New Jersey Division of Consumer Affairs
 issuingAgency: New Jersey Division of Consumer Affairs Employment and Personnel Services
 industryId: employment-agency
