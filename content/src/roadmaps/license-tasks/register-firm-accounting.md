@@ -2,14 +2,14 @@
 filename: register-firm-accounting
 urlSlug: register-firm-accounting
 name: Apply for a Certified Public Accounting License
-webflowName: " Public Accountant License"
+webflowName: " Accounting: Certified Public Accountant License"
 industryIntegration: New Jersey Division of Consumer Affairs
 issuingAgency: New Jersey Division of Consumer Affairs Board of Accountancy
 industryId: certified-public-accountant
 callToActionText: Apply for My License
 callToActionLink: https://www.njconsumeraffairs.gov/acc/Pages/applications.aspx
 webflowIndustry: ""
-licenseCertificationClassification: LICENSE
+licenseCertificationClassification: ""
 divisionPhone: (973) 504-6380
 id: register-firm-accounting
 webflowId: 5f77296ee10dec7593024f1c
