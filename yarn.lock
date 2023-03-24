@@ -4809,7 +4809,7 @@ __metadata:
     "@types/js-yaml": 4.0.5
     "@types/jsonwebtoken": 9.0.1
     "@types/lodash": 4.14.191
-    "@types/mdast": 3.0.10
+    "@types/mdast": 3.0.11
     "@types/node": 16.18.18
     "@types/react": 18.0.28
     "@types/react-dom": 18.0.11
@@ -5018,7 +5018,7 @@ __metadata:
     "@types/jest": 29.5.0
     "@types/js-yaml": 4.0.5
     "@types/lodash": 4.14.191
-    "@types/mdast": 3.0.10
+    "@types/mdast": 3.0.11
     "@types/node": 16.18.18
     "@types/react": 18.0.28
     "@types/react-dom": 18.0.11
@@ -10399,12 +10399,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/mdast@npm:3.0.10, @types/mdast@npm:^3.0.0":
-  version: 3.0.10
-  resolution: "@types/mdast@npm:3.0.10"
+"@types/mdast@npm:3.0.11, @types/mdast@npm:^3.0.0":
+  version: 3.0.11
+  resolution: "@types/mdast@npm:3.0.11"
   dependencies:
     "@types/unist": "*"
-  checksum: 3f587bfc0a9a2403ecadc220e61031b01734fedaf82e27eb4d5ba039c0eb54db8c85681ccc070ab4df3f7ec711b736a82b990e69caa14c74bf7ac0ccf2ac7313
+  checksum: 3b04cf465535553b47a1811c247668bd6cfeb54d99a2c9dbb82ccd0f5145d271d10c3169f929701d8cd55fd569f0d2e459a50845813ba3261f1fb0395a288cea
   languageName: node
   linkType: hard
 
