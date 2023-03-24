@@ -10,8 +10,7 @@ callToActionLink: https://www.state.nj.us/transportation/business/civilrights/db
 callToActionText: Apply for My ESBE
 agency:
   - NJDOT
-applicableOwnershipTypes:
-  - woman-owned
+applicableOwnershipTypes: null
 isSbe: false
 ---
 Emerging Small Business Enterprise (ESBE) certification **facilitates competition by small businesses for New Jersey Department of Transportation's (NJDOT) contracts.** 
