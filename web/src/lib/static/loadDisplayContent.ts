@@ -74,4 +74,5 @@ type RoadmapCardGrayMatter = {
   borderColor: string;
   hasCloseButton: boolean;
   weight: number;
+  section: "above-opportunities" | "below-opportunities";
 };

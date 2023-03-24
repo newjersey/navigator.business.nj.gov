@@ -9,6 +9,7 @@ imgPath: ""
 color: accent-cool-darker
 headerBackgroundColor: white
 borderColor: accent-cool-light
+section: "below-opportunities"
 ---
 
 You have **${numberOptionalTasks}** left to complete and **${numberRequiredTasks}**.

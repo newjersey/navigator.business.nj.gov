@@ -8,6 +8,7 @@ headerBackgroundColor: accent-cool-lighter
 borderColor: info-light
 hasCloseButton: false
 weight: 1
+section: "below-opportunities"
 ---
 
 [Register for State Taxes](/tasks/register-for-taxes) to discover State certifications your business may be eligible for.

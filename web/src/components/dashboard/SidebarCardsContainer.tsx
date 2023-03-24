@@ -74,16 +74,15 @@ export const SidebarCardsContainer = (props: Props): ReactElement => {
         })
     : [];
 
-  const topCardIds = new Set(["funding-nudge", "welcome-up-and-running", "go-to-profile"]);
   const getTopCards = () => {
     return visibleCardsOrderedByWeight.filter((card) => {
-      return topCardIds.has(card.id);
+      return card.section === "above-opportunities";
     });
   };
 
   const getBottomCards = () => {
     return visibleCardsOrderedByWeight.filter((card) => {
-      return !topCardIds.has(card.id);
+      return card.section === "below-opportunities";
     });
   };
 

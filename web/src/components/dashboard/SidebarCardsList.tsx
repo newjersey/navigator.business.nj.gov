@@ -157,11 +157,11 @@ export const SidebarCardsList = (props: Props): ReactElement => {
             </div>
           )}
         </div>
-        <>
+        <div data-testid="bottom-cards">
           {props.bottomCards.map((card) => {
             return <SidebarCard card={card} key={card.id} />;
           })}
-        </>
+        </div>
       </div>
       {props.displayFundings && learnMoreAboutFundingsLink()}
       {hiddenCardsAccordion()}
