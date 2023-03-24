@@ -1,37 +1,22 @@
-import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
-import { LookupStepIndexByName } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
-import { ReviewLineItem } from "@/components/tasks/business-formation/review/ReviewLineItem";
+import { ReviewLineItem } from "@/components/tasks/business-formation/review/section/ReviewLineItem";
+import { ReviewSection } from "@/components/tasks/business-formation/review/section/ReviewSection";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getStringifiedAddress } from "@/lib/utils/formatters";
-import { scrollToTop } from "@/lib/utils/helpers";
 import { ReactElement, useContext } from "react";
 
 export const ReviewRegisteredAgent = (): ReactElement => {
   const { Config } = useConfig();
-  const { state, setStepIndex } = useContext(BusinessFormationContext);
+  const { state } = useContext(BusinessFormationContext);
   const italicNotEnteredText = `*${Config.formation.general.notEntered}*`;
 
   return (
-    <>
-      <div className="flex space-between">
-        <div className="maxw-mobile-lg margin-bottom-2">
-          <h2 className="h3-styling">{Config.formation.registeredAgent.label}</h2>
-        </div>
-        <div className="margin-left-2">
-          <UnStyledButton
-            style="tertiary"
-            onClick={(): void => {
-              setStepIndex(LookupStepIndexByName("Contacts"));
-              scrollToTop();
-            }}
-            underline
-            dataTestid="edit-registered-agent-step"
-          >
-            {Config.formation.general.editButtonText}
-          </UnStyledButton>
-        </div>
-      </div>
+    <ReviewSection
+      buttonText={Config.formation.general.editButtonText}
+      header={Config.formation.registeredAgent.label}
+      stepName="Contacts"
+      testId="edit-registered-agent-step"
+    >
       {state.formationFormData.agentNumberOrManual === "NUMBER" && (
         <ReviewLineItem
           label={Config.formation.fields.agentNumber.label}
@@ -65,8 +50,6 @@ export const ReviewRegisteredAgent = (): ReactElement => {
           />
         </div>
       )}
-
-      <hr className="margin-y-205" />
-    </>
+    </ReviewSection>
   );
 };

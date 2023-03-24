@@ -1,5 +1,5 @@
-import { ReviewLineItem } from "@/components/tasks/business-formation/review/ReviewLineItem";
-import { ReviewSectionHeader } from "@/components/tasks/business-formation/review/ReviewSectionHeader";
+import { ReviewLineItem } from "@/components/tasks/business-formation/review/section/ReviewLineItem";
+import { ReviewSection } from "@/components/tasks/business-formation/review/section/ReviewSection";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { getStringifiedAddress } from "@/lib/utils/formatters";
@@ -23,8 +23,12 @@ export const ReviewMembers = (): ReactElement => {
   };
 
   return (
-    <>
-      <ReviewSectionHeader header={getConfig().header} stepName="Contacts" testId="members" />
+    <ReviewSection
+      buttonText={Config.formation.general.editButtonText}
+      header={getConfig().header}
+      stepName="Contacts"
+      testId="edit-members-step"
+    >
       {userData?.formationData.formationFormData.members?.map((member, index) => {
         return (
           <div key={`${member.name}-${index}`}>
@@ -48,7 +52,6 @@ export const ReviewMembers = (): ReactElement => {
           </div>
         );
       })}
-      <hr className="margin-y-205" />
-    </>
+    </ReviewSection>
   );
 };

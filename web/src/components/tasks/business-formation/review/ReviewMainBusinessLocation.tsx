@@ -1,5 +1,5 @@
-import { ReviewLineItem } from "@/components/tasks/business-formation/review/ReviewLineItem";
-import { ReviewSectionHeader } from "@/components/tasks/business-formation/review/ReviewSectionHeader";
+import { ReviewLineItem } from "@/components/tasks/business-formation/review/section/ReviewLineItem";
+import { ReviewSection } from "@/components/tasks/business-formation/review/section/ReviewSection";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getStringifiedAddress } from "@/lib/utils/formatters";
@@ -36,14 +36,13 @@ export const ReviewMainBusinessLocation = (): ReactElement => {
   };
 
   return (
-    <>
-      <ReviewSectionHeader
-        header={Config.formation.sections.review.locationHeader}
-        stepName="Business"
-        testId="location"
-      />
+    <ReviewSection
+      buttonText={Config.formation.general.editButtonText}
+      header={Config.formation.sections.review.locationHeader}
+      stepName="Business"
+      testId="edit-location-step"
+    >
       <ReviewLineItem label={Config.formation.sections.review.addressLabel} value={getAddressDisplay()} />
-      <hr className="margin-y-205" />
-    </>
+    </ReviewSection>
   );
 };

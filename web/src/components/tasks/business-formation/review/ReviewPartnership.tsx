@@ -1,6 +1,6 @@
 import { Content } from "@/components/Content";
 import { ModifiedContent } from "@/components/ModifiedContent";
-import { ReviewSectionHeader } from "@/components/tasks/business-formation/review/ReviewSectionHeader";
+import { ReviewSection } from "@/components/tasks/business-formation/review/section/ReviewSection";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ReactElement, useContext } from "react";
@@ -46,12 +46,12 @@ export const ReviewPartnership = (): ReactElement => {
   };
 
   return (
-    <>
-      <ReviewSectionHeader
-        header={Config.formation.partnershipRights.label}
-        stepName="Business"
-        testId="partnership"
-      />
+    <ReviewSection
+      buttonText={Config.formation.general.editButtonText}
+      header={Config.formation.partnershipRights.label}
+      stepName="Business"
+      testId="edit-partnership-step"
+    >
       <div className="" data-testid="partnership">
         <div className="margin-bottom-3">
           {displayPartnershipAnswer({
@@ -81,7 +81,6 @@ export const ReviewPartnership = (): ReactElement => {
           })}
         </div>
       </div>
-      <hr className="margin-y-205" />
-    </>
+    </ReviewSection>
   );
 };

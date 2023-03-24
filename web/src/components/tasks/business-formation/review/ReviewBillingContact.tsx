@@ -1,5 +1,5 @@
-import { ReviewLineItem } from "@/components/tasks/business-formation/review/ReviewLineItem";
-import { ReviewSectionHeader } from "@/components/tasks/business-formation/review/ReviewSectionHeader";
+import { ReviewLineItem } from "@/components/tasks/business-formation/review/section/ReviewLineItem";
+import { ReviewSection } from "@/components/tasks/business-formation/review/section/ReviewSection";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ReactElement, useContext } from "react";
@@ -10,12 +10,12 @@ export const ReviewBillingContact = (): ReactElement => {
   const italicNotEnteredText = `*${Config.formation.general.notEntered}*`;
 
   return (
-    <>
-      <ReviewSectionHeader
-        header={Config.formation.sections.review.billingContactHeader}
-        stepName="Billing"
-        testId="billing-contact"
-      />
+    <ReviewSection
+      buttonText={Config.formation.general.editButtonText}
+      header={Config.formation.sections.review.billingContactHeader}
+      stepName="Billing"
+      testId="edit-billing-contact-step"
+    >
       <ReviewLineItem
         label={Config.formation.fields.contactFirstName.label}
         value={state.formationFormData.contactFirstName || italicNotEnteredText}
@@ -28,7 +28,6 @@ export const ReviewBillingContact = (): ReactElement => {
         label={Config.formation.fields.contactPhoneNumber.label}
         value={state.formationFormData.contactPhoneNumber || italicNotEnteredText}
       />
-      <hr className="margin-y-205" />
-    </>
+    </ReviewSection>
   );
 };
