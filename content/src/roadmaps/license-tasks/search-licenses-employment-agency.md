@@ -8,7 +8,7 @@ industryId: employment-agency
 callToActionText: Apply for an Employment Agency License
 callToActionLink: https://www.njconsumeraffairs.gov/epservices
 webflowIndustry: ""
-licenseCertificationClassification: LICENSE
+licenseCertificationClassification: ""
 issuingDivision: Regulated Business Unit
 divisionPhone: (973) 504-6370
 id: search-licenses
