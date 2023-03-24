@@ -1,4 +1,5 @@
 import { Content } from "@/components/Content";
+import { ModifiedContent } from "@/components/ModifiedContent";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { StateDropdown } from "@/components/StateDropdown";
@@ -96,7 +97,9 @@ export const MainBusinessAddressNj = (): ReactElement => {
               type="MOBILE-ONLY"
               className=" orm-input grid-col-5 tablet:grid-col-2"
             >
-              <b>{Config.formation.fields.addressState.label}</b>
+              <b>
+                <ModifiedContent>{Config.formation.fields.addressState.label}</ModifiedContent>
+              </b>
               <StateDropdown
                 fieldName="addressState"
                 value={"New Jersey"}

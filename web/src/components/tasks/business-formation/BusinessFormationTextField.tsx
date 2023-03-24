@@ -1,4 +1,5 @@
 import { GenericTextField, GenericTextFieldProps } from "@/components/GenericTextField";
+import { ModifiedContent } from "@/components/ModifiedContent";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
@@ -28,7 +29,11 @@ export const BusinessFormationTextField = ({ className, ...props }: Props): Reac
   const hasError = doesFieldHaveError(props.fieldName);
   return (
     <WithErrorBar className={className ?? ""} hasError={hasError} type={props.errorBarType}>
-      {props.label && <b>{props.label}</b>}
+      {props.label && (
+        <b>
+          <ModifiedContent>{props.label}</ModifiedContent>
+        </b>
+      )}
       {props.secondaryLabel && <span className="margin-left-1">{props.secondaryLabel}</span>}
       <GenericTextField
         value={state.formationFormData[props.fieldName]}

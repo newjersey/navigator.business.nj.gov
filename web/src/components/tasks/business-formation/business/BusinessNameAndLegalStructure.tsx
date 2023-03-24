@@ -1,5 +1,6 @@
 import { Content } from "@/components/Content";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
+import { ModifiedContent } from "@/components/ModifiedContent";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { LookupStepIndexByName } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
@@ -81,7 +82,9 @@ export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): 
       >
         <div className="padding-205 flex-half">
           <div>
-            <b>{Config.formation.fields.businessName.label}</b>
+            <b>
+              <ModifiedContent>{Config.formation.fields.businessName.label}</ModifiedContent>
+            </b>
           </div>
           <span className="text-accent-cool-darker">
             {state.formationFormData.businessName || Config.formation.general.notEntered} {""}
