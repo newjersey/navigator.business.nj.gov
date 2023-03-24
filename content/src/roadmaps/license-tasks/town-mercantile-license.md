@@ -9,11 +9,11 @@ callToActionText: ""
 callToActionLink: ""
 id: check-local-requirements
 webflowId: 64147a42689e2308a6b2252a
-licenseCertificationClassification: LICENSE
+licenseCertificationClassification: ""
 ---
 Prior to opening, you may need to get a mercantile license. 
 
-Some local governments require businesses with commercial locations to get a mercantile license. Each municipality will have its own application process for both the liquor license and the mercantile license.
+Some local governments require businesses with commercial locations to get a mercantile license. Each municipality will have its own application process for the mercantile license.
 
 - - -
 
@@ -31,4 +31,4 @@ ${endLocationDependentSection}
 
 > **Once completed, you will have:**
 >
-> * A mercantile license (if required by your town)
+> * A mercantile license
