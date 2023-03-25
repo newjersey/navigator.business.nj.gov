@@ -105,7 +105,7 @@
     "@commitlint/cli": "17.5.0",
     "@commitlint/config-conventional": "17.4.4",
     "@cypress-audit/lighthouse": "1.4.2",
-    "@cypress-audit/pa11y": "1.4.0",
+    "@cypress-audit/pa11y": "1.4.2",
     "@jest/types": "29.5.0",
     "@mdx-js/react": "2.3.0",
     "@mui/system": "5.11.14",
