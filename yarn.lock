@@ -4698,7 +4698,7 @@ __metadata:
     lodash: 4.17.21
     prettier: 2.8.6
     prettier-plugin-organize-imports: 3.2.2
-    rimraf: 4.4.0
+    rimraf: 4.4.1
     serverless: 3.28.1
     serverless-dynamodb-local: 0.2.40
     serverless-http: 3.2.0
@@ -4731,7 +4731,7 @@ __metadata:
     cross-env: 7.0.3
     cspell: 6.30.2
     prettier: 2.8.6
-    rimraf: 4.4.0
+    rimraf: 4.4.1
   languageName: unknown
   linkType: soft
 
@@ -4898,7 +4898,7 @@ __metadata:
     remark-rehype: 10.1.0
     remove-markdown: 0.5.0
     require-from-string: 2.0.2
-    rimraf: 4.4.0
+    rimraf: 4.4.1
     sass: 1.59.3
     sass-loader: 13.2.1
     semantic-release: 19.0.5
@@ -4956,7 +4956,7 @@ __metadata:
     jest: 29.5.0
     jest-junit: 15.0.0
     prettier: 2.8.6
-    rimraf: 4.4.0
+    rimraf: 4.4.1
     ts-jest: 29.0.5
     ts-node: 10.9.1
     tsconfig-paths: 4.1.2
@@ -5088,7 +5088,7 @@ __metadata:
     remark-rehype: 10.1.0
     remove-markdown: 0.5.0
     require-from-string: 2.0.2
-    rimraf: 4.4.0
+    rimraf: 4.4.1
     sass: 1.59.3
     sass-loader: 13.2.1
     slick-carousel: ^1.8.1
@@ -31120,14 +31120,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rimraf@npm:4.4.0":
-  version: 4.4.0
-  resolution: "rimraf@npm:4.4.0"
+"rimraf@npm:4.4.1":
+  version: 4.4.1
+  resolution: "rimraf@npm:4.4.1"
   dependencies:
     glob: ^9.2.0
   bin:
     rimraf: dist/cjs/src/bin.js
-  checksum: 0cedaf9d138589d1bb0ab851f05804c6d30827aa66563472b04ab76245f83537e23e7b94f1f79ea6c368c0d84a18fcde6a756fca3a44c967e08792671b3a0a6e
+  checksum: b786adc02651e2e24bbedb04bbdea80652fc9612632931ff2d9f898c5e4708fe30956186597373c568bd5230a4dc2fadfc816ccacba8a1daded3a006a6b74f1a
   languageName: node
   linkType: hard
 
