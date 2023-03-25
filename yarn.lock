@@ -4698,7 +4698,7 @@ __metadata:
     lodash: 4.17.21
     prettier: 2.8.6
     prettier-plugin-organize-imports: 3.2.2
-    rimraf: 4.4.0
+    rimraf: 4.4.1
     serverless: 3.28.1
     serverless-dynamodb-local: 0.2.40
     serverless-http: 3.2.0
@@ -4714,7 +4714,7 @@ __metadata:
     tsconfig-paths-webpack-plugin: 4.0.1
     typescript: 4.9.5
     uuid: 9.0.0
-    webpack: 5.76.2
+    webpack: 5.76.3
     webpack-node-externals: 3.0.0
     winston: 3.8.2
     winston-cloudwatch: 6.1.1
@@ -4731,7 +4731,7 @@ __metadata:
     cross-env: 7.0.3
     cspell: 6.30.2
     prettier: 2.8.6
-    rimraf: 4.4.0
+    rimraf: 4.4.1
   languageName: unknown
   linkType: soft
 
@@ -4761,7 +4761,7 @@ __metadata:
     "@commitlint/cli": 17.5.0
     "@commitlint/config-conventional": 17.4.4
     "@cypress-audit/lighthouse": 1.4.2
-    "@cypress-audit/pa11y": 1.4.0
+    "@cypress-audit/pa11y": 1.4.2
     "@emotion/react": 11.10.6
     "@emotion/styled": 11.10.6
     "@jest/types": 29.5.0
@@ -4898,7 +4898,7 @@ __metadata:
     remark-rehype: 10.1.0
     remove-markdown: 0.5.0
     require-from-string: 2.0.2
-    rimraf: 4.4.0
+    rimraf: 4.4.1
     sass: 1.59.3
     sass-loader: 13.2.1
     semantic-release: 19.0.5
@@ -4925,7 +4925,7 @@ __metadata:
     unified: 10.1.2
     unist-util-visit: 4.1.2
     uuid: 9.0.0
-    webpack: 5.76.2
+    webpack: 5.76.3
     webpack-node-externals: 3.0.0
     winston: 3.8.2
     winston-cloudwatch: 6.1.1
@@ -4956,7 +4956,7 @@ __metadata:
     jest: 29.5.0
     jest-junit: 15.0.0
     prettier: 2.8.6
-    rimraf: 4.4.0
+    rimraf: 4.4.1
     ts-jest: 29.0.5
     ts-node: 10.9.1
     tsconfig-paths: 4.1.2
@@ -4979,7 +4979,7 @@ __metadata:
     "@babel/core": 7.21.3
     "@businessnjgovnavigator/shared": "*"
     "@cypress-audit/lighthouse": 1.4.2
-    "@cypress-audit/pa11y": 1.4.0
+    "@cypress-audit/pa11y": 1.4.2
     "@emotion/react": 11.10.6
     "@emotion/styled": 11.10.6
     "@jest/types": 29.5.0
@@ -5088,7 +5088,7 @@ __metadata:
     remark-rehype: 10.1.0
     remove-markdown: 0.5.0
     require-from-string: 2.0.2
-    rimraf: 4.4.0
+    rimraf: 4.4.1
     sass: 1.59.3
     sass-loader: 13.2.1
     slick-carousel: ^1.8.1
@@ -5102,7 +5102,7 @@ __metadata:
     ua-parser-js: 1.0.34
     unified: 10.1.2
     unist-util-visit: 4.1.2
-    webpack: 5.76.2
+    webpack: 5.76.3
   languageName: unknown
   linkType: soft
 
@@ -5753,20 +5753,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cypress-audit/pa11y@npm:1.4.0":
-  version: 1.4.0
-  resolution: "@cypress-audit/pa11y@npm:1.4.0"
+"@cypress-audit/pa11y@npm:1.4.2":
+  version: 1.4.2
+  resolution: "@cypress-audit/pa11y@npm:1.4.2"
   dependencies:
-    "@cypress-audit/shared": ^1.4.0
     pa11y: ^6.2.3
-  checksum: 7d564b1c44275c16d234cac03deb250a665f2dd398a0b304fc37637b35188182a0b6e9a76f25ebe21f104ffd16fe1c9ced2b53af1101f2cec23c572830a91525
-  languageName: node
-  linkType: hard
-
-"@cypress-audit/shared@npm:^1.4.0":
-  version: 1.4.1
-  resolution: "@cypress-audit/shared@npm:1.4.1"
-  checksum: 6a501abf55a96f994669438d358083784589ae31a9e561f3d7c7e0b9f964698ae37246f5127db6caad45f76e96fa472c23e4151edb57e961caf801a4305a7241
+  checksum: 74a9c995a3e408ca8f87282f95f1258ef0977d7f7778120ea4098e0f5541ac5f6bf11605a1b3155640decc52c5709153f57bcc5751126d02365e057ec378a70f
   languageName: node
   linkType: hard
 
@@ -31128,14 +31120,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rimraf@npm:4.4.0":
-  version: 4.4.0
-  resolution: "rimraf@npm:4.4.0"
+"rimraf@npm:4.4.1":
+  version: 4.4.1
+  resolution: "rimraf@npm:4.4.1"
   dependencies:
     glob: ^9.2.0
   bin:
     rimraf: dist/cjs/src/bin.js
-  checksum: 0cedaf9d138589d1bb0ab851f05804c6d30827aa66563472b04ab76245f83537e23e7b94f1f79ea6c368c0d84a18fcde6a756fca3a44c967e08792671b3a0a6e
+  checksum: b786adc02651e2e24bbedb04bbdea80652fc9612632931ff2d9f898c5e4708fe30956186597373c568bd5230a4dc2fadfc816ccacba8a1daded3a006a6b74f1a
   languageName: node
   linkType: hard
 
@@ -35728,9 +35720,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"webpack@npm:5.76.2, webpack@npm:>=4.43.0 <6.0.0, webpack@npm:^5, webpack@npm:^5.9.0":
-  version: 5.76.2
-  resolution: "webpack@npm:5.76.2"
+"webpack@npm:5.76.3, webpack@npm:>=4.43.0 <6.0.0, webpack@npm:^5, webpack@npm:^5.9.0":
+  version: 5.76.3
+  resolution: "webpack@npm:5.76.3"
   dependencies:
     "@types/eslint-scope": ^3.7.3
     "@types/estree": ^0.0.51
@@ -35761,7 +35753,7 @@ __metadata:
       optional: true
   bin:
     webpack: bin/webpack.js
-  checksum: 86db98299a175c371031449c26077e87b33acd8f45de7f7945ed4b9b37c8ca11bc5169af9c44743efccd4d55e08042a3aa3a3bc42aff831309a0821ffbcd395e
+  checksum: 363f536b56971d056e34ab4cffa4cbc630b220e51be1a8c3adea87d9f0b51c49cfc7c3720d6614a1fd2c8c63f1ab3100db916fe8367c8bb9299327ff8c3f856d
   languageName: node
   linkType: hard
 
