@@ -4761,7 +4761,7 @@ __metadata:
     "@commitlint/cli": 17.5.0
     "@commitlint/config-conventional": 17.4.4
     "@cypress-audit/lighthouse": 1.4.2
-    "@cypress-audit/pa11y": 1.4.0
+    "@cypress-audit/pa11y": 1.4.2
     "@emotion/react": 11.10.6
     "@emotion/styled": 11.10.6
     "@jest/types": 29.5.0
@@ -4979,7 +4979,7 @@ __metadata:
     "@babel/core": 7.21.3
     "@businessnjgovnavigator/shared": "*"
     "@cypress-audit/lighthouse": 1.4.2
-    "@cypress-audit/pa11y": 1.4.0
+    "@cypress-audit/pa11y": 1.4.2
     "@emotion/react": 11.10.6
     "@emotion/styled": 11.10.6
     "@jest/types": 29.5.0
@@ -5753,20 +5753,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cypress-audit/pa11y@npm:1.4.0":
-  version: 1.4.0
-  resolution: "@cypress-audit/pa11y@npm:1.4.0"
+"@cypress-audit/pa11y@npm:1.4.2":
+  version: 1.4.2
+  resolution: "@cypress-audit/pa11y@npm:1.4.2"
   dependencies:
-    "@cypress-audit/shared": ^1.4.0
     pa11y: ^6.2.3
-  checksum: 7d564b1c44275c16d234cac03deb250a665f2dd398a0b304fc37637b35188182a0b6e9a76f25ebe21f104ffd16fe1c9ced2b53af1101f2cec23c572830a91525
-  languageName: node
-  linkType: hard
-
-"@cypress-audit/shared@npm:^1.4.0":
-  version: 1.4.1
-  resolution: "@cypress-audit/shared@npm:1.4.1"
-  checksum: 6a501abf55a96f994669438d358083784589ae31a9e561f3d7c7e0b9f964698ae37246f5127db6caad45f76e96fa472c23e4151edb57e961caf801a4305a7241
+  checksum: 74a9c995a3e408ca8f87282f95f1258ef0977d7f7778120ea4098e0f5541ac5f6bf11605a1b3155640decc52c5709153f57bcc5751126d02365e057ec378a70f
   languageName: node
   linkType: hard
 
