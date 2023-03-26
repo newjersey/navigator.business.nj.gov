@@ -44,13 +44,28 @@ export default createTheme({
     MuiAccordion: {
       defaultProps: {
         disableGutters: true,
+        elevation: 0,
+      },
+      styleOverrides: {
+        rounded: {
+          borderRadius: "0px !important",
+        },
+        root: {
+          "&:before": { display: "none" },
+        },
       },
     },
     MuiAccordionSummary: {
       styleOverrides: {
-        root: { padding: "0px" },
+        root: {
+          padding: "8px 8px 8px 0px",
+          "&:hover": {
+            backgroundColor: "#F0F0F0 !important",
+          },
+          minHeight: "40px",
+        },
         content: {
-          margin: "0px",
+          margin: "0px !important",
         },
       },
     },

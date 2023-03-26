@@ -125,14 +125,9 @@ export const FilingElement = (props: {
 
         {props.filing.additionalInfo ? (
           <>
-            <Accordion
-              data-testid="additional-info"
-              elevation={0}
-              defaultExpanded={props.preview}
-              className="margin-top-2"
-            >
+            <Accordion data-testid="additional-info" defaultExpanded={props.preview} className="margin-top-2">
               <AccordionSummary
-                expandIcon={<Icon className="usa-icon--size-5 margin-x-1">expand_more</Icon>}
+                expandIcon={<Icon className="usa-icon--size-5 margin-left-1">expand_more</Icon>}
                 aria-controls={`${Config.filingDefaults.additionalInfo
                   .toLowerCase()
                   .replaceAll(" ", "-")}-content`}
