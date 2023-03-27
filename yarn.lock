@@ -4774,7 +4774,7 @@ __metadata:
     "@newjersey/njwds": 0.3.0
     "@next/bundle-analyzer": 12.1.6
     "@next/eslint-plugin-next": 12.1.6
-    "@semantic-release/changelog": 6.0.2
+    "@semantic-release/changelog": 6.0.3
     "@semantic-release/git": 10.0.1
     "@serverless/typescript": 3.27.0
     "@storybook/addon-a11y": 6.5.16
@@ -4899,7 +4899,7 @@ __metadata:
     remove-markdown: 0.5.0
     require-from-string: 2.0.2
     rimraf: 4.4.1
-    sass: 1.59.3
+    sass: 1.60.0
     sass-loader: 13.2.1
     semantic-release: 19.0.5
     serverless: 3.28.1
@@ -5089,7 +5089,7 @@ __metadata:
     remove-markdown: 0.5.0
     require-from-string: 2.0.2
     rimraf: 4.4.1
-    sass: 1.59.3
+    sass: 1.60.0
     sass-loader: 13.2.1
     slick-carousel: ^1.8.1
     storybook-addon-pseudo-states: 1.15.5
@@ -8099,9 +8099,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@semantic-release/changelog@npm:6.0.2":
-  version: 6.0.2
-  resolution: "@semantic-release/changelog@npm:6.0.2"
+"@semantic-release/changelog@npm:6.0.3":
+  version: 6.0.3
+  resolution: "@semantic-release/changelog@npm:6.0.3"
   dependencies:
     "@semantic-release/error": ^3.0.0
     aggregate-error: ^3.0.0
@@ -8109,7 +8109,7 @@ __metadata:
     lodash: ^4.17.4
   peerDependencies:
     semantic-release: ">=18.0.0"
-  checksum: e116a1ac2528c960743ae952f0b2510713a18a9df1d7ea61dc0092380eb26c5e79c5b0b699f7c9cc71f5f27b49ccd736c46319363a737528454568b000016752
+  checksum: 63283df7aaff7b2d5c08ac322faf362fd953d4ca4f2d2a1855ca51482ff8e973e38497a4c4a35a5b6ebec8373608895ef74d41072565e5bf3766850b4a6def37
   languageName: node
   linkType: hard
 
@@ -31382,16 +31382,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass@npm:1.59.3":
-  version: 1.59.3
-  resolution: "sass@npm:1.59.3"
+"sass@npm:1.60.0":
+  version: 1.60.0
+  resolution: "sass@npm:1.60.0"
   dependencies:
     chokidar: ">=3.0.0 <4.0.0"
     immutable: ^4.0.0
     source-map-js: ">=0.6.2 <2.0.0"
   bin:
     sass: sass.js
-  checksum: 839b5282cdf7d0ba3fdbfb605277dd584a8c40fa3e3e58ad905d64cd812acfb82ff0a4072d4981673db884ee61505472ff07c5c5a8a497f16ba013b183ba6473
+  checksum: 06e163c37af466ec194cf2ed8dab616372afeb19322d356947d48ea664fc38398ae77c4d91bea9cb0ace954ce289d5518d0f8555ecc49f6bf2539a8ef52fc580
   languageName: node
   linkType: hard
 
