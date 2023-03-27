@@ -50,6 +50,7 @@
       "taxId": {
         "default": {
           "header": "New Jersey Tax ID",
+          "headerContextualInfo": "",
           "description": "What is your `New Jersey Tax ID?|tax-id`",
           "errorTextRequired": "Enter a 12-digit Tax ID",
           "disclaimerMd": "**Disclaimer:** Your Tax ID will be used to identify the taxes you owe and is required information if you'd like to access your tax calendar."
@@ -108,6 +109,7 @@
       "businessName": {
         "default": {
           "header": "Business Name",
+          "headerContextualInfo": "",
           "errorTextRequired": "Please enter your business name.",
           "description": "What will you name your business?"
         },
@@ -120,6 +122,7 @@
       "dateOfFormation": {
         "default": {
           "header": "Effective Date",
+          "headerContextualInfo": "",
           "description": "When did you form your business? Find your `effective date|effective-date` on your `Certificate of Formation|certificate-formation`.",
           "errorTextRequired": "Your formation should be formatted as MM/YYYY. (This information will help us inform your annual reporting due date.)"
         }
@@ -158,6 +161,7 @@
       "nexusDbaName": {
         "default": {
           "header": "Doing Business As (DBA) New Jersey Business Name",
+          "headerContextualInfo": "",
           "description": "What is your DBA name?",
           "errorTextRequired": "Please enter your DBA name."
         }
@@ -179,6 +183,7 @@
       "naicsCode": {
         "default": {
           "header": "NAICS Code",
+          "headerContextualInfo": "",
           "editText": "Edit",
           "addText": "Add",
           "notEnteredText": "*Not entered*"
@@ -208,6 +213,7 @@
       "homeBasedBusiness": {
         "default": {
           "header": "Home-based business",
+          "headerContextualInfo": "",
           "radioButtonTrueText": "Yes",
           "radioButtonFalseText": "No",
           "description": "Are you a `home-based business|home-based-business`?",
@@ -217,6 +223,7 @@
       "legalStructureId": {
         "default": {
           "header": "Which Business Structure Will You Choose?",
+          "headerContextualInfo": "",
           "description": "Your business’ `business structure|business-structure-learn-more` can have a large impact on taxes, financing, liability, and closure of your business. We strongly suggest doing research on the best business structure for your business.  \nSelect a business structure for your Navigator profile below. Making a selection will not form your business, it will help us create your personalized guide. You can change your intended business structure anytime before formally filing it with the NJ Department of Treasury.",
           "errorTextRequired": "Select a business structure.",
           "optionContent": {
@@ -251,6 +258,7 @@
       "employerId": {
         "default": {
           "header": "Employer Identification Number",
+          "headerContextualInfo": "",
           "headerNotBolded": "(EIN)",
           "description": "What is your `EIN|ein`?"
         }
@@ -273,6 +281,7 @@
       "industryId": {
         "default": {
           "header": "Industry",
+          "headerContextualInfo": "",
           "description": "Which industry best describes your ${oos} business? ",
           "errorTextRequired": "Select a industry.",
           "searchAffirmation": "_\"**${searchText}**\" falls under the industries below:_"
@@ -317,6 +326,7 @@
       "entityId": {
         "default": {
           "header": "Entity ID",
+          "headerContextualInfo": "entity-id",
           "headerNotBolded": "(If You Have One)",
           "description": "If your business has a 10-digit New Jersey Entity ID, enter it here. If you aren't sure if you have one or what it is, don't worry! You can leave this blank for now. (You can also get help finding your `Entity ID|entity-id`.)"
         }

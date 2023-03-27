@@ -1,7 +1,7 @@
 backend:
   name: github
   repo: newjersey/navigator.business.nj.gov
-  branch: content-repo
+  branch: create-header-styling-support-contextual-links-in-profile-for-all-users-#183913408
   base_url: https://0szgd6wmlk.execute-api.us-east-1.amazonaws.com
   auth_endpoint: /dev/api/cms/auth
   use_graphql: true
@@ -193,6 +193,17 @@ collections:
                     widget: object
                     fields:
                       - { label: "Header", name: "header", widget: "string" }
+                      - {
+                          label: "Contextual Info for Header",
+                          name: "headerContextualInfo",
+                          required: false,
+                          widget: "relation",
+                          collection: "contextual-information",
+                          search_fields: ["{{filename}}"],
+                          options_length: 500,
+                          value_field: "{{filename}}",
+                          display_fields: ["{{filename}}"],
+                        }
                       - { label: "Description", name: "description", widget: "markdown" }
                       - { label: "Label", name: "label", widget: "string" }
                       - { label: "Alert - Name Available", name: "alertAvailable", widget: "text" }
@@ -3330,6 +3341,17 @@ collections:
                         fields:
                           - { label: "Header", name: "header", widget: "string" }
                           - {
+                            label: "Contextual Info for Header",
+                            name: "headerContextualInfo",
+                            required: false,
+                            widget: "relation",
+                            collection: "contextual-information",
+                            search_fields: ["{{filename}}"],
+                            options_length: 500,
+                            value_field: "{{filename}}",
+                            display_fields: ["{{filename}}"],
+                          }
+                          - {
                               label: "Error Text (when not set)",
                               name: "errorTextRequired",
                               widget: "string",
@@ -3347,6 +3369,17 @@ collections:
                         widget: object
                         fields:
                           - { label: "Header", name: "header", widget: "string" }
+                          - {
+                            label: "Contextual Info for Header",
+                            name: "headerContextualInfo",
+                            required: false,
+                            widget: "relation",
+                            collection: "contextual-information",
+                            search_fields: ["{{filename}}"],
+                            options_length: 500,
+                            value_field: "{{filename}}",
+                            display_fields: ["{{filename}}"],
+                          }
                           - { label: "Description", name: "description", widget: "markdown" }
                           - {
                               label: "Error Text (when not selected)",
@@ -3415,6 +3448,17 @@ collections:
                         fields:
                           - { label: "Header", name: "header", widget: "string" }
                           - {
+                            label: "Contextual Info for Header",
+                            name: "headerContextualInfo",
+                            required: false,
+                            widget: "relation",
+                            collection: "contextual-information",
+                            search_fields: ["{{filename}}"],
+                            options_length: 500,
+                            value_field: "{{filename}}",
+                            display_fields: ["{{filename}}"],
+                          }
+                          - {
                               label: "Error Text (when not set)",
                               name: "errorTextRequired",
                               widget: "string",
@@ -3449,6 +3493,17 @@ collections:
                         fields:
                           - { label: "Header", name: "header", widget: "string" }
                           - {
+                            label: "Contextual Info for Header",
+                            name: "headerContextualInfo",
+                            required: false,
+                            widget: "relation",
+                            collection: "contextual-information",
+                            search_fields: ["{{filename}}"],
+                            options_length: 500,
+                            value_field: "{{filename}}",
+                            display_fields: ["{{filename}}"],
+                          }
+                          - {
                               label: "Error Text (when not provided)",
                               name: "errorTextRequired",
                               widget: "string",
@@ -3465,6 +3520,17 @@ collections:
                         widget: object
                         fields:
                           - { label: "Header", name: "header", widget: "string" }
+                          - {
+                            label: "Contextual Info for Header",
+                            name: "headerContextualInfo",
+                            required: false,
+                            widget: "relation",
+                            collection: "contextual-information",
+                            search_fields: ["{{filename}}"],
+                            options_length: 500,
+                            value_field: "{{filename}}",
+                            display_fields: ["{{filename}}"],
+                          }
                           - {
                               label: "Header Not Bolded",
                               name: "headerNotBolded",
@@ -3501,6 +3567,17 @@ collections:
                         fields:
                           - { label: "Header", name: "header", widget: "string" }
                           - {
+                            label: "Contextual Info for Header",
+                            name: "headerContextualInfo",
+                            required: false,
+                            widget: "relation",
+                            collection: "contextual-information",
+                            search_fields: ["{{filename}}"],
+                            options_length: 500,
+                            value_field: "{{filename}}",
+                            display_fields: ["{{filename}}"],
+                          }
+                          - {
                               label: "Error Text (when not set)",
                               name: "errorTextRequired",
                               widget: "string",
@@ -3529,6 +3606,17 @@ collections:
                         widget: object
                         fields:
                           - { label: "Header", name: "header", widget: "string" }
+                          - {
+                            label: "Contextual Info for Header",
+                            name: "headerContextualInfo",
+                            required: false,
+                            widget: "relation",
+                            collection: "contextual-information",
+                            search_fields: ["{{filename}}"],
+                            options_length: 500,
+                            value_field: "{{filename}}",
+                            display_fields: ["{{filename}}"],
+                          }
                           - {
                               label: "Error Text (when not selected)",
                               name: "errorTextRequired",
@@ -3571,6 +3659,17 @@ collections:
                         fields:
                           - { label: "Header", name: "header", widget: "string" }
                           - {
+                            label: "Contextual Info for Header",
+                            name: "headerContextualInfo",
+                            required: false,
+                            widget: "relation",
+                            collection: "contextual-information",
+                            search_fields: ["{{filename}}"],
+                            options_length: 500,
+                            value_field: "{{filename}}",
+                            display_fields: ["{{filename}}"],
+                          }
+                          - {
                               label: "Error Text (when not selected)",
                               name: "errorTextRequired",
                               widget: "string",
@@ -3611,6 +3710,17 @@ collections:
                         widget: object
                         fields:
                           - { label: "Header", name: "header", widget: "string" }
+                          - {
+                            label: "Contextual Info for Header",
+                            name: "headerContextualInfo",
+                            required: false,
+                            widget: "relation",
+                            collection: "contextual-information",
+                            search_fields: ["{{filename}}"],
+                            options_length: 500,
+                            value_field: "{{filename}}",
+                            display_fields: ["{{filename}}"],
+                          }
                           - { label: "Description", name: "description", widget: "string" }
                           - { label: "Error Text", name: "errorTextRequired", widget: "string" }
                   - label: Tax ID
@@ -3624,6 +3734,17 @@ collections:
                         widget: object
                         fields:
                           - { label: "Header", name: "header", widget: "string" }
+                          - {
+                            label: "Contextual Info for Header",
+                            name: "headerContextualInfo",
+                            required: false,
+                            widget: "relation",
+                            collection: "contextual-information",
+                            search_fields: ["{{filename}}"],
+                            options_length: 500,
+                            value_field: "{{filename}}",
+                            display_fields: ["{{filename}}"],
+                          }
                           - { label: "Description", name: "description", widget: "markdown" }
                           - {
                               label: "Error Text (when not entered)",
@@ -3647,6 +3768,17 @@ collections:
                         fields:
                           - { label: "Header", name: "header", widget: "string" }
                           - { label: "Header (not bolded)", name: "headerNotBolded", widget: "string" }
+                          - {
+                            label: "Contextual Info for Header",
+                            name: "headerContextualInfo",
+                            required: false,
+                            widget: "relation",
+                            collection: "contextual-information",
+                            search_fields: ["{{filename}}"],
+                            options_length: 500,
+                            value_field: "{{filename}}",
+                            display_fields: ["{{filename}}"],
+                          }
                           - { label: "Description", name: "description", widget: "markdown" }
                   - label: Employer ID
                     name: employerId
@@ -3659,6 +3791,17 @@ collections:
                         widget: object
                         fields:
                           - { label: "Header", name: "header", widget: "string" }
+                          - {
+                            label: "Contextual Info for Header",
+                            name: "headerContextualInfo",
+                            required: false,
+                            widget: "relation",
+                            collection: "contextual-information",
+                            search_fields: ["{{filename}}"],
+                            options_length: 500,
+                            value_field: "{{filename}}",
+                            display_fields: ["{{filename}}"],
+                          }
                           - { label: "Header (not bolded)", name: "headerNotBolded", widget: "string" }
                           - { label: "Description", name: "description", widget: "markdown" }
                   - label: NAICS Code
@@ -3672,6 +3815,17 @@ collections:
                         widget: object
                         fields:
                           - { label: "Header", name: "header", widget: "string" }
+                          - {
+                            label: "Contextual Info for Header",
+                            name: "headerContextualInfo",
+                            required: false,
+                            widget: "relation",
+                            collection: "contextual-information",
+                            search_fields: ["{{filename}}"],
+                            options_length: 500,
+                            value_field: "{{filename}}",
+                            display_fields: ["{{filename}}"],
+                          }
                           - { label: "Edit Text", name: "editText", widget: "string" }
                           - { label: "Add Text", name: "addText", widget: "string" }
                           - {
@@ -3691,6 +3845,17 @@ collections:
                         widget: object
                         fields:
                           - { label: "Header", name: "header", widget: "string" }
+                          - {
+                            label: "Contextual Info for Header",
+                            name: "headerContextualInfo",
+                            required: false,
+                            widget: "relation",
+                            collection: "contextual-information",
+                            search_fields: ["{{filename}}"],
+                            options_length: 500,
+                            value_field: "{{filename}}",
+                            display_fields: ["{{filename}}"],
+                          }
                           - { label: "Error Text", name: "errorTextRequired", widget: "string" }
                           - { label: "Description", name: "description", widget: "markdown" }
                   - label: Tax PIN
@@ -3704,6 +3869,17 @@ collections:
                         widget: object
                         fields:
                           - { label: "Header", name: "header", widget: "string" }
+                          - {
+                            label: "Contextual Info for Header",
+                            name: "headerContextualInfo",
+                            required: false,
+                            widget: "relation",
+                            collection: "contextual-information",
+                            search_fields: ["{{filename}}"],
+                            options_length: 500,
+                            value_field: "{{filename}}",
+                            display_fields: ["{{filename}}"],
+                          }
                           - { label: "Error Text", name: "errorTextRequired", widget: "string" }
                           - { label: "Description", name: "description", widget: "markdown" }
                   - label: Documents
@@ -3813,6 +3989,17 @@ collections:
                         widget: object
                         fields:
                           - { label: "Header", name: "header", widget: "string" }
+                          - {
+                            label: "Contextual Info for Header",
+                            name: "headerContextualInfo",
+                            required: false,
+                            widget: "relation",
+                            collection: "contextual-information",
+                            search_fields: ["{{filename}}"],
+                            options_length: 500,
+                            value_field: "{{filename}}",
+                            display_fields: ["{{filename}}"],
+                          }
                           - { label: "Radio Button Yes Text", name: "radioButtonTrueText", widget: "string" }
                           - { label: "Radio Button No Text", name: "radioButtonFalseText", widget: "string" }
                           - { label: "Description", name: "description", widget: "markdown" }
