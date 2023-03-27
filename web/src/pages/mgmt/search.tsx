@@ -5,12 +5,14 @@ import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer"
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { MatchList } from "@/components/search/MatchList";
 import { searchCertifications } from "@/lib/search/searchCertifications";
+import { searchFundings } from "@/lib/search/searchFundings";
 import { searchTasks } from "@/lib/search/searchTasks";
 import { Match } from "@/lib/search/typesForSearch";
 import { getNetlifyConfig } from "@/lib/static/admin/getNetlifyConfig";
 import { loadAllArchivedCertifications, loadAllCertifications } from "@/lib/static/loadCertifications";
+import { loadAllFundings } from "@/lib/static/loadFundings";
 import { loadAllTasks } from "@/lib/static/loadTasks";
-import { Certification, Task } from "@/lib/types/types";
+import { Certification, Funding, Task } from "@/lib/types/types";
 import { TextField } from "@mui/material";
 import { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
@@ -22,6 +24,7 @@ interface Props {
   tasks: Task[];
   certifications: Certification[];
   archivedCertifications: Certification[];
+  fundings: Funding[];
 }
 
 const SearchContentPage = (props: Props): ReactElement => {
@@ -31,6 +34,7 @@ const SearchContentPage = (props: Props): ReactElement => {
   const [taskMatches, setTaskMatches] = useState<Match[]>([]);
   const [certMatches, setCertMatches] = useState<Match[]>([]);
   const [certArchiveMatches, setCertArchiveMatches] = useState<Match[]>([]);
+  const [fundingMatches, setFundingMatches] = useState<Match[]>([]);
 
   const handleKeyPress = (event: KeyboardEvent<HTMLDivElement>, submit: () => void): void => {
     if (event.code === "Enter") {
@@ -44,18 +48,17 @@ const SearchContentPage = (props: Props): ReactElement => {
 
   const onSearchSubmit = (): void => {
     const lowercaseTerm = searchTerm.toLowerCase();
-    console.log(props.tasks.filter((it) => it.filename === "check-site-requirements-cosmetology"));
-    console.log(searchTasks(props.tasks, lowercaseTerm));
     setTaskMatches(searchTasks(props.tasks, lowercaseTerm));
     setCertMatches(searchCertifications(props.certifications, lowercaseTerm));
     setCertArchiveMatches(searchCertifications(props.archivedCertifications, lowercaseTerm));
+    setFundingMatches(searchFundings(props.fundings, lowercaseTerm));
   };
 
   const authedView = (
     <div>
       <h1>Search in CMS</h1>
       <p>
-        <i>Currently searches: Tasks, License Tasks, Certifications</i>
+        <i>Currently searches: Tasks, License Tasks, Certifications, Fundings</i>
       </p>
       <div className="margin-bottom-4 margin-top-2">
         <label htmlFor="search">Search Exact Text</label>
@@ -78,6 +81,7 @@ const SearchContentPage = (props: Props): ReactElement => {
       <MatchList matches={taskMatches} collectionLabel="Tasks - All and License Tasks" />
       <MatchList matches={certMatches} collectionLabel="Cert Opps" />
       <MatchList matches={certArchiveMatches} collectionLabel="Cert Opps - Archive" />
+      <MatchList matches={fundingMatches} collectionLabel="Funding Opps" />
     </div>
   );
 
@@ -86,7 +90,7 @@ const SearchContentPage = (props: Props): ReactElement => {
       <NextSeo noindex={true} />
       <main>
         <SingleColumnContainer>
-          <div className="margin-top-3">
+          <div className="margin-y-3">
             {isAuthed ? (
               authedView
             ) : (
@@ -107,6 +111,7 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
       tasks: loadAllTasks(),
       certifications: loadAllCertifications(),
       archivedCertifications: loadAllArchivedCertifications(),
+      fundings: loadAllFundings(),
     },
   };
 };
