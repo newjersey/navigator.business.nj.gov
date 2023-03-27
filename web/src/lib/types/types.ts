@@ -161,7 +161,7 @@ export type Funding = {
   preferenceForOpportunityZone: FundingpreferenceForOpportunityZone | null;
   county: County[];
   sector: string[];
-  programPurpose: string;
+  programPurpose: string | null | undefined;
   agencyContact: string;
 };
 

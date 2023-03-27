@@ -35,7 +35,7 @@ export const searchCertifications = (certifications: Certification[], term: stri
     }
 
     if (name.includes(term)) {
-      match.snippets.push(`Task name: ${name}`);
+      match.snippets.push(`Name: ${name}`);
     }
 
     for (const agency of agencies) {
