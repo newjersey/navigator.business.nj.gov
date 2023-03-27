@@ -202,7 +202,7 @@
     "sass": "1.60.0",
     "sass-loader": "13.2.1",
     "semantic-release": "19.0.5",
-    "serverless": "3.28.1",
+    "serverless": "3.29.0",
     "serverless-dynamodb-local": "0.2.40",
     "serverless-offline-ssm": "6.2.0",
     "serverless-webpack": "5.11.0",
