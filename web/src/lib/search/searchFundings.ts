@@ -1,3 +1,4 @@
+import { findMatchInBlock, findMatchInLabelledText, findMatchInListText } from "@/lib/search/helpers";
 import { Match } from "@/lib/search/typesForSearch";
 import { Funding } from "@/lib/types/types";
 
@@ -5,7 +6,7 @@ export const searchFundings = (fundings: Funding[], term: string) => {
   const matches: Match[] = [];
 
   for (const funding of fundings) {
-    const match: Match = {
+    let match: Match = {
       filename: funding.filename,
       snippets: [],
     };
@@ -44,28 +45,9 @@ export const searchFundings = (fundings: Funding[], term: string) => {
       { content: sectors, label: "Sector" },
     ];
 
-    for (const blockText of blockTexts) {
-      if (blockText.includes(term)) {
-        const index = blockText.indexOf(term);
-        const startIndex = index - 50 < 0 ? 0 : index - 50;
-        const endIndex = term.length + index + 50;
-        match.snippets.push(blockText.slice(startIndex, endIndex));
-      }
-    }
-
-    for (const labelledText of labelledTexts) {
-      if (labelledText.content?.includes(term)) {
-        match.snippets.push(`${labelledText.label}: ${labelledText.content}`);
-      }
-    }
-
-    for (const listText of listTexts) {
-      for (const item of listText.content) {
-        if (item?.includes(term)) {
-          match.snippets.push(`${listText.label}: ${item}`);
-        }
-      }
-    }
+    match = findMatchInBlock(blockTexts, term, match);
+    match = findMatchInLabelledText(labelledTexts, term, match);
+    match = findMatchInListText(listTexts, term, match);
 
     if (match.snippets.length > 0) {
       matches.push(match);
