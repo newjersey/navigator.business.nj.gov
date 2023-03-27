@@ -6,7 +6,7 @@ webflowName: "Real Estate Appraiser: ​Certification for a Real Estate Appraise
 industryIntegration: NJ Department of Consumer Affairs
 issuingAgency: New Jersey Division of Consumer Affairs Real Estate Appraiser Board
 industryId: real-estate-appraisals
-callToActionText: "Apply ​for My Real Estate Appraiser License "
+callToActionText: "Apply ​for My Appraiser Certification "
 callToActionLink: https://www.njconsumeraffairs.gov/rea/Pages/applications.aspx
 id: appraiser-certification
 webflowId: 64147a4354c15f3f147a8c03
