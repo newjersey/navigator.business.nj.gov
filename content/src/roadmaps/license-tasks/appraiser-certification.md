@@ -1,18 +1,18 @@
 ---
-urlSlug: appraiser-certification
 filename: appraiser-certification
+urlSlug: appraiser-certification
 name: Apply for an Appraiser Certification
-id: appraiser-certification
-callToActionLink: https://www.njconsumeraffairs.gov/rea/Pages/applications.aspx
-callToActionText: "Apply ​for My Real Estate Appraiser License "
-industryId: real-estate-appraisals
-issuingAgency: New Jersey Division of Consumer Affairs Real Estate Appraiser Board
-webflowName: "Real Estate Appraiser: ​License/Certification for a Real Estate Appraiser"
+webflowName: "Real Estate Appraiser: ​Certification for a Real Estate Appraiser"
 industryIntegration: NJ Department of Consumer Affairs
+issuingAgency: New Jersey Division of Consumer Affairs Real Estate Appraiser Board
+industryId: real-estate-appraisals
+callToActionText: "Apply ​for My Real Estate Appraiser License "
+callToActionLink: https://www.njconsumeraffairs.gov/rea/Pages/applications.aspx
+id: appraiser-certification
 webflowId: 64147a4354c15f3f147a8c03
 licenseCertificationClassification: CERTIFICATION
 ---
-If you're planning to appraise real estate you need a license/certification. You will need a certified appraiser prior to opening an `Appraisal Management Company|appraisal-management-company`.
+If you plan to appraise real estate with one to four residential units—regardless to value or complexity—you need a certification. You will need a certified or licensed appraiser prior to opening an `Appraisal Management Company|appraisal-management-company`.
 
 - - -
 
