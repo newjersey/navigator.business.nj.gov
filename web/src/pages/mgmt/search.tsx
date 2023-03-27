@@ -6,6 +6,7 @@ import { PageSkeleton } from "@/components/PageSkeleton";
 import { MatchList } from "@/components/search/MatchList";
 import { searchCertifications } from "@/lib/search/searchCertifications";
 import { searchFundings } from "@/lib/search/searchFundings";
+import { searchIndustries } from "@/lib/search/searchIndustries";
 import { searchTasks } from "@/lib/search/searchTasks";
 import { Match } from "@/lib/search/typesForSearch";
 import { getNetlifyConfig } from "@/lib/static/admin/getNetlifyConfig";
@@ -13,6 +14,7 @@ import { loadAllArchivedCertifications, loadAllCertifications } from "@/lib/stat
 import { loadAllFundings } from "@/lib/static/loadFundings";
 import { loadAllTasks } from "@/lib/static/loadTasks";
 import { Certification, Funding, Task } from "@/lib/types/types";
+import { Industries } from "@businessnjgovnavigator/shared";
 import { TextField } from "@mui/material";
 import { GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
@@ -35,6 +37,7 @@ const SearchContentPage = (props: Props): ReactElement => {
   const [certMatches, setCertMatches] = useState<Match[]>([]);
   const [certArchiveMatches, setCertArchiveMatches] = useState<Match[]>([]);
   const [fundingMatches, setFundingMatches] = useState<Match[]>([]);
+  const [industryMatches, setIndustryMatches] = useState<Match[]>([]);
 
   const handleKeyPress = (event: KeyboardEvent<HTMLDivElement>, submit: () => void): void => {
     if (event.code === "Enter") {
@@ -52,6 +55,7 @@ const SearchContentPage = (props: Props): ReactElement => {
     setCertMatches(searchCertifications(props.certifications, lowercaseTerm));
     setCertArchiveMatches(searchCertifications(props.archivedCertifications, lowercaseTerm));
     setFundingMatches(searchFundings(props.fundings, lowercaseTerm));
+    setIndustryMatches(searchIndustries(Industries, lowercaseTerm));
   };
 
   const authedView = (
@@ -82,6 +86,7 @@ const SearchContentPage = (props: Props): ReactElement => {
       <MatchList matches={certMatches} collectionLabel="Cert Opps" />
       <MatchList matches={certArchiveMatches} collectionLabel="Cert Opps - Archive" />
       <MatchList matches={fundingMatches} collectionLabel="Funding Opps" />
+      <MatchList matches={industryMatches} collectionLabel="Roadmap - Industries" />
     </div>
   );
 

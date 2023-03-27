@@ -1,3 +1,4 @@
+import { findMatchInBlock, findMatchInLabelledText, findMatchInListText } from "@/lib/search/helpers";
 import { Match } from "@/lib/search/typesForSearch";
 import { Certification } from "@/lib/types/types";
 
@@ -5,7 +6,7 @@ export const searchCertifications = (certifications: Certification[], term: stri
   const matches: Match[] = [];
 
   for (const cert of certifications) {
-    const match: Match = {
+    let match: Match = {
       filename: cert.filename,
       snippets: [],
     };
@@ -16,33 +17,17 @@ export const searchCertifications = (certifications: Certification[], term: stri
     const cta = cert.callToActionText?.toLowerCase();
     const agencies = cert.agency ? cert.agency.map((it) => it.toLowerCase()) : [];
 
-    if (content.includes(term)) {
-      const index = content.indexOf(term);
-      const startIndex = index - 50 < 0 ? 0 : index - 50;
-      const endIndex = term.length + index + 50;
-      match.snippets.push(content.slice(startIndex, endIndex));
-    }
+    const blockTexts = [content, description];
+    const labelledTexts = [
+      { content: cta, label: "CTA Text" },
+      { content: name, label: "Name" },
+    ];
 
-    if (description.includes(term)) {
-      const index = description.indexOf(term);
-      const startIndex = index - 50 < 0 ? 0 : index - 50;
-      const endIndex = term.length + index + 50;
-      match.snippets.push(description.slice(startIndex, endIndex));
-    }
+    const listTexts = [{ content: agencies, label: "Agency" }];
 
-    if (cta?.includes(term)) {
-      match.snippets.push(`CTA Text: ${cta}`);
-    }
-
-    if (name.includes(term)) {
-      match.snippets.push(`Name: ${name}`);
-    }
-
-    for (const agency of agencies) {
-      if (agency?.includes(term)) {
-        match.snippets.push(`Agency: ${agency}`);
-      }
-    }
+    match = findMatchInBlock(blockTexts, term, match);
+    match = findMatchInLabelledText(labelledTexts, term, match);
+    match = findMatchInListText(listTexts, term, match);
 
     if (match.snippets.length > 0) {
       matches.push(match);
