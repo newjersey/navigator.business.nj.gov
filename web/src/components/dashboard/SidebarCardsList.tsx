@@ -52,7 +52,6 @@ export const SidebarCardsList = (props: Props): ReactElement => {
           <hr className="desktop:margin-right-1 margin-top-3 bg-cool-lighter" aria-hidden={true} />
           <div className="desktop:margin-right-3 desktop:margin-bottom-1">
             <Accordion
-              elevation={0}
               expanded={hiddenAccordionIsOpen}
               onChange={() => {
                 return setHiddenAccordionIsOpen((prevAccordionStatus) => {
@@ -64,7 +63,7 @@ export const SidebarCardsList = (props: Props): ReactElement => {
               }}
             >
               <AccordionSummary
-                expandIcon={<Icon className="usa-icon--size-5 margin-x-1 text-normal">expand_more</Icon>}
+                expandIcon={<Icon className="usa-icon--size-5 margin-left-1">expand_more</Icon>}
                 aria-controls="hidden-opportunity-content"
                 id="hidden-opportunity-header"
                 data-testid="hidden-opportunity-header"
