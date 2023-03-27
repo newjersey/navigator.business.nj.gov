@@ -7,7 +7,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffect } from "@/lib/utils/helpers";
-import { NameAvailability } from "@businessnjgovnavigator/shared/index";
+import { NameAvailability } from "@businessnjgovnavigator/shared/businessNameSearch";
 import { ReactElement, useContext } from "react";
 
 export const DbaNameSearch = (): ReactElement => {
@@ -18,6 +18,10 @@ export const DbaNameSearch = (): ReactElement => {
   useMountEffect(() => {
     analytics.event.business_formation_dba_name_search_field.appears.dba_name_search_field_appears();
   });
+
+  const _setBusinessNameAvailability = (nameAvailability: NameAvailability | undefined): void => {
+    setBusinessNameAvailability(nameAvailability);
+  };
 
   const onSubmit = async (submittedName: string, nameAvailability: NameAvailability): Promise<void> => {
     if (!nameAvailability || !userData) {
@@ -41,7 +45,7 @@ export const DbaNameSearch = (): ReactElement => {
       <SearchBusinessNameForm
         unavailable={DbaUnavailable}
         available={DbaAvailable}
-        onChange={setBusinessNameAvailability}
+        onChange={_setBusinessNameAvailability}
         isBusinessFormation
         isDba
         config={{

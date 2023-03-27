@@ -1,3 +1,4 @@
+import { NameAvailability } from "./businessNameSearch";
 import { CountriesShortCodes } from "./countries";
 import { Municipality } from "./municipality";
 import { BusinessPersona } from "./profileData";
@@ -69,6 +70,7 @@ export interface FormationData {
   readonly formationResponse: FormationSubmitResponse | undefined;
   readonly getFilingResponse: GetFilingResponse | undefined;
   readonly completedFilingPayment: boolean;
+  readonly businessNameAvailability: NameAvailability | undefined;
 }
 
 export type FormationBusinessLocationType = "US" | "INTL" | "NJ";
@@ -151,6 +153,8 @@ export type FormationFields = keyof FormationFormData;
 export type FormationTextField = Exclude<
   keyof FormationFormData,
   | "businessSuffix"
+  | "searchBusinessNameError"
+  | "submittedName"
   | "addressMunicipality"
   | "addressCountry"
   | "addressState"

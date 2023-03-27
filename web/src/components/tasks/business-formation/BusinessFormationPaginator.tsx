@@ -123,6 +123,7 @@ export const BusinessFormationPaginator = (): ReactElement => {
       formationData: {
         ...userData.formationData,
         formationFormData: formationFormDataToSave,
+        businessNameAvailability: state.businessNameAvailability,
       },
     });
     update(userDataWithProfileChanges);
@@ -319,7 +320,9 @@ export const BusinessFormationPaginator = (): ReactElement => {
   const hasFormDataChanged = (): boolean => {
     if (!userData || !state.hasSetStateFirstTime) return false;
     return (
-      JSON.stringify(userData.formationData.formationFormData) !== JSON.stringify(state.formationFormData)
+      JSON.stringify(userData.formationData.formationFormData) !== JSON.stringify(state.formationFormData) ||
+      JSON.stringify(userData.formationData.businessNameAvailability) !==
+        JSON.stringify(state.businessNameAvailability)
     );
   };
 

@@ -17,19 +17,10 @@ import { FocusEvent, FormEvent, ReactElement, useContext, useEffect, useRef } fr
 export const BusinessNameStep = (): ReactElement => {
   const FIELD_NAME = "businessName";
   const { Config } = useConfig();
-  const { state, setFormationFormData, setFieldsInteracted, setBusinessNameAvailability } =
-    useContext(BusinessFormationContext);
+  const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
   const { userData } = useUserData();
-  const {
-    currentName,
-    submittedName,
-    isLoading,
-    error,
-    nameAvailability,
-    updateCurrentName,
-    onBlurNameField,
-    searchBusinessName,
-  } = useBusinessNameSearch({ isBusinessFormation: true, isDba: false });
+  const { currentName, isLoading, error, updateCurrentName, onBlurNameField, searchBusinessName } =
+    useBusinessNameSearch({ isBusinessFormation: true, isDba: false });
   const { doesFieldHaveError } = useFormationErrors();
   const mountEffectOccurred = useRef<boolean>(false);
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
@@ -38,6 +29,7 @@ export const BusinessNameStep = (): ReactElement => {
     if (!userData || !state.hasSetStateFirstTime || mountEffectOccurred.current) return;
     const nameToSet = state.formationFormData.businessName || userData.profileData.businessName;
     updateCurrentName(nameToSet);
+
     setFormationFormData((prev) => ({ ...prev, businessName: nameToSet }));
     mountEffectOccurred.current = true;
   }, [
@@ -49,32 +41,17 @@ export const BusinessNameStep = (): ReactElement => {
     setFormationFormData,
   ]);
 
-  useEffect(() => {
-    setBusinessNameAvailability(nameAvailability);
-  }, [nameAvailability, setBusinessNameAvailability]);
-
   const SearchBusinessNameErrorLookup: Record<SearchBusinessNameError, string> = {
     BAD_INPUT: Config.searchBusinessNameTask.errorTextBadInput,
     SEARCH_FAILED: Config.searchBusinessNameTask.errorTextSearchFailed,
   };
 
-  const setNameInFormationData = () => {
-    setFormationFormData((previousFormationData) => {
-      return {
-        ...previousFormationData,
-        businessName: currentName,
-      };
-    });
-  };
-
   const doSearch = (event: FormEvent<HTMLFormElement>): void => {
     searchBusinessName(event).catch(() => {});
-    setNameInFormationData();
     setFieldsInteracted([FIELD_NAME]);
   };
 
-  const hasError = doesFieldHaveError(FIELD_NAME) && state.hasBusinessNameBeenSearched && !isLoading;
-
+  const hasError = doesFieldHaveError(FIELD_NAME);
   return (
     <div data-testid="business-name-step">
       <form onSubmit={doSearch} className="usa-prose grid-container padding-0">
@@ -100,11 +77,14 @@ export const BusinessNameStep = (): ReactElement => {
                   error={hasError}
                   helperText={
                     hasError
-                      ? getErrorStateForField("businessName", state.formationFormData, nameAvailability).label
+                      ? getErrorStateForField(
+                          "businessName",
+                          state.formationFormData,
+                          state.businessNameAvailability
+                        ).label
                       : undefined
                   }
                   onBlur={(event: FocusEvent<HTMLInputElement>) => {
-                    setNameInFormationData();
                     setFieldsInteracted([FIELD_NAME]);
                     onBlurNameField(event.target.value);
                   }}
@@ -132,45 +112,45 @@ export const BusinessNameStep = (): ReactElement => {
           {SearchBusinessNameErrorLookup[error]}
         </Alert>
       )}
-      {nameAvailability?.status === "DESIGNATOR_ERROR" && (
+      {state.businessNameAvailability?.status === "DESIGNATOR_ERROR" && (
         <Alert variant="error" dataTestid="designator-error-text">
           <p className="font-sans-xs">{Config.formation.fields.businessName.alertDesignator}</p>
         </Alert>
       )}
-      {nameAvailability?.status === "SPECIAL_CHARACTER_ERROR" && (
+      {state.businessNameAvailability?.status === "SPECIAL_CHARACTER_ERROR" && (
         <Alert variant="error" dataTestid="special-character-error-text">
           <Content className="font-sans-xs">
             {templateEval(Config.formation.fields.businessName.alertSpecialCharacters, {
-              name: submittedName,
+              name: state.formationFormData.businessName,
             })}
           </Content>
         </Alert>
       )}
-      {nameAvailability?.status === "RESTRICTED_ERROR" && (
+      {state.businessNameAvailability?.status === "RESTRICTED_ERROR" && (
         <Alert variant="error" dataTestid="restricted-word-error-text">
           <Content className="font-sans-xs">
             {templateEval(Config.formation.fields.businessName.alertRestrictedWord, {
-              name: submittedName,
-              word: nameAvailability.invalidWord ?? "*unknown*",
+              name: state.formationFormData.businessName,
+              word: state.businessNameAvailability.invalidWord ?? "*unknown*",
             })}
           </Content>
         </Alert>
       )}
 
-      {nameAvailability?.status === "UNAVAILABLE" && (
+      {state.businessNameAvailability?.status === "UNAVAILABLE" && (
         <Alert variant="error" dataTestid="unavailable-text">
           <p className="font-sans-xs">
             {templateEval(Config.formation.fields.businessName.alertUnavailable, {
-              name: submittedName,
+              name: state.formationFormData.businessName,
             })}
           </p>
-          {nameAvailability.similarNames.length > 0 && (
+          {state.businessNameAvailability.similarNames.length > 0 && (
             <>
               <p className="font-sans-xs margin-bottom-1">
                 {Config.searchBusinessNameTask.similarUnavailableNamesText}
               </p>
               <ul className="usa-list">
-                {nameAvailability.similarNames.map((otherName) => {
+                {state.businessNameAvailability.similarNames.map((otherName) => {
                   return (
                     <li className="text-uppercase text-bold margin-y-0 font-sans-xs" key={otherName}>
                       {otherName}
@@ -182,11 +162,11 @@ export const BusinessNameStep = (): ReactElement => {
           )}
         </Alert>
       )}
-      {nameAvailability?.status === "AVAILABLE" && (
+      {state.businessNameAvailability?.status === "AVAILABLE" && (
         <Alert variant="success" dataTestid="available-text">
           <span className="font-sans-xs">
             {templateEval(Config.formation.fields.businessName.alertAvailable, {
-              name: submittedName,
+              name: state.formationFormData.businessName,
             })}
           </span>
         </Alert>

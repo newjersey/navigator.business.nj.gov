@@ -150,7 +150,7 @@ export const DbaFormationPaginator = (): ReactElement => {
   };
 
   const displayButtons = () => {
-    if (state.stepIndex === 0 && state.businessNameAvailability?.status === "AVAILABLE") {
+    if (state.stepIndex == 0 && state.businessNameAvailability?.status == "AVAILABLE") {
       return (
         <ButtonWrapper>
           <ForwardButton />

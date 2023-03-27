@@ -47,7 +47,10 @@ export const ContactsStep = (): ReactElement => {
             <hr className="margin-top-0 margin-bottom-3" />
             {doesFieldHaveError("members") && (
               <Alert variant="error">
-                {getErrorStateForField("members", state.formationFormData, undefined).label}
+                {
+                  getErrorStateForField("members", state.formationFormData, state.businessNameAvailability)
+                    .label
+                }
               </Alert>
             )}
             <Members />
@@ -56,12 +59,15 @@ export const ContactsStep = (): ReactElement => {
         <hr className="margin-top-0 margin-bottom-3" />
         {doesFieldHaveError("signers") && (
           <Alert variant="error">
-            {getErrorStateForField("signers", state.formationFormData, undefined).label}
+            {getErrorStateForField("signers", state.formationFormData, state.businessNameAvailability).label}
           </Alert>
         )}
         {doesFieldHaveError("incorporators") && (
           <Alert variant="error">
-            {getErrorStateForField("incorporators", state.formationFormData, undefined).label}
+            {
+              getErrorStateForField("incorporators", state.formationFormData, state.businessNameAvailability)
+                .label
+            }
           </Alert>
         )}
         {incorporationLegalStructures.includes(state.formationFormData.legalType) ? (

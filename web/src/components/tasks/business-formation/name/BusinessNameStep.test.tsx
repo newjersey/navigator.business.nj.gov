@@ -11,6 +11,7 @@ import {
   foreignLegalTypePrefix,
   FormationLegalType,
   generateFormationFormData,
+  NameAvailability,
 } from "@businessnjgovnavigator/shared";
 import * as materialUi from "@mui/material";
 import { screen, within } from "@testing-library/react";
@@ -41,7 +42,10 @@ describe("Formation - BusinessNameStep", () => {
     useSetupInitialMocks();
   });
 
-  const getPageHelper = (initialBusinessName?: string): FormationPageHelpers => {
+  const getPageHelper = (
+    initialBusinessName?: string,
+    businessNameAvailability?: NameAvailability
+  ): FormationPageHelpers => {
     const profileData = initialBusinessName
       ? generateFormationProfileData({ businessName: initialBusinessName })
       : generateFormationProfileData({});
@@ -50,6 +54,7 @@ describe("Formation - BusinessNameStep", () => {
       formationResponse: undefined,
       getFilingResponse: undefined,
       completedFilingPayment: false,
+      businessNameAvailability: businessNameAvailability ?? undefined,
     };
     return preparePage(generateUserData({ profileData, formationData }), {
       formationDbaContent: generateFormationDbaContent({}),
@@ -61,6 +66,11 @@ describe("Formation - BusinessNameStep", () => {
     expect((screen.getByLabelText("Search business name") as HTMLInputElement).value).toEqual(
       "My Restaurant"
     );
+  });
+
+  it("pre-fills the error state with the error from formation data", () => {
+    getPageHelper("My Restaurant", { status: "UNAVAILABLE", similarNames: [] });
+    expect(screen.getByTestId("unavailable-text")).toBeInTheDocument();
   });
 
   it("overrides the text field's initial value if user types in field", () => {
@@ -184,6 +194,7 @@ describe("Formation - BusinessNameStep", () => {
           formationResponse: undefined,
           getFilingResponse: undefined,
           completedFilingPayment: false,
+          businessNameAvailability: undefined,
         };
 
         preparePage(generateUserData({ profileData, formationData }), {

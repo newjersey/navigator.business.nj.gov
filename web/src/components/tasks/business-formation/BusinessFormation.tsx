@@ -21,6 +21,7 @@ import { isBusinessStartDateValid } from "@/components/tasks/business-formation/
 import { BusinessFormationPaginator } from "@/components/tasks/business-formation/BusinessFormationPaginator";
 import { NexusFormationFlow } from "@/components/tasks/business-formation/NexusFormationFlow";
 import { useConfig } from "@/lib/data-hooks/useConfig";
+import { NameAvailability } from "@businessnjgovnavigator/shared";
 import {
   castPublicFilingLegalTypeToFormationType,
   createEmptyFormationFormData,
@@ -31,7 +32,6 @@ import {
   FormationFormData,
   FormationLegalType,
   getCurrentDateFormatted,
-  NameAvailability,
   PublicFilingLegalType,
   UserData,
 } from "@businessnjgovnavigator/shared/";
@@ -58,11 +58,10 @@ export const BusinessFormation = (props: Props): ReactElement => {
   const [isLoadingGetFiling, setIsLoadingGetFiling] = useState<boolean>(false);
   const [hasBeenSubmitted, setHasBeenSubmitted] = useState<boolean>(false);
   const [hasSetStateFirstTime, setHasSetStateFirstTime] = useState<boolean>(false);
-  const [businessNameAvailability, _setBusinessNameAvailability] = useState<NameAvailability | undefined>(
+  const getCompletedFilingApiCallOccurred = useRef<boolean>(false);
+  const [businessNameAvailability, setBusinessNameAvailability] = useState<NameAvailability | undefined>(
     undefined
   );
-  const [hasBusinessNameBeenSearched, setHasBusinessNameBeenSearched] = useState<boolean>(false);
-  const getCompletedFilingApiCallOccurred = useRef<boolean>(false);
 
   const legalStructureId: FormationLegalType = useMemo(() => {
     return castPublicFilingLegalTypeToFormationType(
@@ -77,13 +76,6 @@ export const BusinessFormation = (props: Props): ReactElement => {
     () => allowFormation(userData?.profileData.legalStructureId, userData?.profileData.businessPersona),
     [userData?.profileData.legalStructureId, userData?.profileData.businessPersona]
   );
-
-  const setBusinessNameAvailability = (nameAvailability: NameAvailability | undefined) => {
-    _setBusinessNameAvailability(nameAvailability);
-    if (nameAvailability !== undefined && !hasBusinessNameBeenSearched) {
-      setHasBusinessNameBeenSearched(true);
-    }
-  };
 
   const getBusinessStartDate = (date: string | undefined, legalType: FormationLegalType): string => {
     return !date || !isBusinessStartDateValid(date, legalType)
@@ -113,6 +105,12 @@ export const BusinessFormation = (props: Props): ReactElement => {
         ? userData.formationData.formationFormData.businessLocationType ?? "US"
         : "NJ",
     });
+    if (userData.formationData.businessNameAvailability) {
+      setBusinessNameAvailability({
+        ...userData.formationData.businessNameAvailability,
+      });
+    }
+
     setHasSetStateFirstTime(true);
   }, userData);
 
@@ -237,20 +235,19 @@ export const BusinessFormation = (props: Props): ReactElement => {
         state: {
           stepIndex: stepIndex,
           formationFormData: formationFormData,
+          businessNameAvailability: businessNameAvailability,
           dbaContent: props.displayContent.formationDbaContent,
           showResponseAlert: showResponseAlert,
           interactedFields,
           hasBeenSubmitted,
-          businessNameAvailability,
-          hasBusinessNameBeenSearched,
           hasSetStateFirstTime,
         },
         setFormationFormData,
+        setBusinessNameAvailability,
         setStepIndex,
         setShowResponseAlert,
         setFieldsInteracted,
         setHasBeenSubmitted,
-        setBusinessNameAvailability,
       }}
     >
       <div className="flex flex-column minh-38" data-testid="formation-form">

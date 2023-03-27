@@ -420,6 +420,7 @@ export const generateFormationData = (
 ): FormationData => {
   return {
     formationFormData: generateFormationFormData({}, { legalStructureId }),
+    businessNameAvailability: undefined,
     formationResponse: undefined,
     getFilingResponse: undefined,
     completedFilingPayment: false,
@@ -433,6 +434,7 @@ export const generateEmptyFormationData = () => {
     formationResponse: undefined,
     getFilingResponse: undefined,
     completedFilingPayment: false,
+    businessNameAvailability: undefined,
   };
 };
 

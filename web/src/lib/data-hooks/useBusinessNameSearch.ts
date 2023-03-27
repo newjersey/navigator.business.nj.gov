@@ -1,10 +1,11 @@
+import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import * as api from "@/lib/api-client/apiClient";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { SearchBusinessNameError } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { NameAvailability } from "@businessnjgovnavigator/shared/businessNameSearch";
-import { FormEvent, useState } from "react";
+import { FormEvent, useContext, useState } from "react";
 
 export const useBusinessNameSearch = ({
   isBusinessFormation,
@@ -14,52 +15,55 @@ export const useBusinessNameSearch = ({
   isDba: boolean;
 }): {
   currentName: string;
-  submittedName: string;
-  isNameFieldEmpty: boolean;
   isLoading: boolean;
   error: SearchBusinessNameError | undefined;
-  nameAvailability: NameAvailability | undefined;
   updateButtonClicked: boolean;
   updateCurrentName: (value: string) => void;
   onBlurNameField: (value: string) => void;
   searchBusinessName: (
     event?: FormEvent<HTMLFormElement>
   ) => Promise<{ nameAvailability: NameAvailability; submittedName: string }>;
-  updateNameOnProfile: () => void;
   setCurrentName: (name: string) => void;
   resetSearch: () => void;
 } => {
-  const { userData, update } = useUserData();
+  const { userData } = useUserData();
+  const { state, setFormationFormData, setFieldsInteracted, setBusinessNameAvailability } =
+    useContext(BusinessFormationContext);
   const [currentName, setCurrentName] = useState<string>("");
-  const [submittedName, setSubmittedName] = useState<string>("");
-  const [nameAvailability, setNameAvailability] = useState<NameAvailability | undefined>(undefined);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<SearchBusinessNameError | undefined>(undefined);
   const [updateButtonClicked, setUpdateButtonClicked] = useState<boolean>(false);
-  const [isNameFieldEmpty, setIsNameFieldEmpty] = useState<boolean>(false);
 
   useMountEffectWhenDefined(() => {
     if (!userData) {
       return;
     }
     setCurrentName(isDba ? userData.profileData.nexusDbaName || "" : userData.profileData.businessName);
+    if (
+      userData.formationData.businessNameAvailability?.status !== "AVAILABLE" &&
+      userData.formationData.businessNameAvailability?.status !== undefined
+    ) {
+      setFieldsInteracted(["businessName"]);
+    }
   }, userData);
 
   const updateCurrentName = (value: string): void => {
     setCurrentName(value);
-    setNameAvailability(undefined);
   };
 
-  const onBlurNameField = (value: string): void => {
-    setIsNameFieldEmpty(value.length === 0);
+  const onBlurNameField = (): void => {
+    setFormationFormData({
+      ...state.formationFormData,
+      businessName: currentName,
+    });
+    setBusinessNameAvailability({ similarNames: [], status: undefined });
   };
 
   const resetSearch = () => {
-    setNameAvailability(undefined);
+    setBusinessNameAvailability({ similarNames: [], status: undefined });
     setUpdateButtonClicked(false);
     setError(undefined);
     setCurrentName("");
-    setIsNameFieldEmpty(true);
   };
 
   const searchBusinessName = async (
@@ -70,15 +74,13 @@ export const useBusinessNameSearch = ({
     }
 
     const resetState = () => {
-      setNameAvailability(undefined);
+      setBusinessNameAvailability({ similarNames: [], status: undefined });
       setUpdateButtonClicked(false);
       setError(undefined);
     };
 
     if (!currentName) {
-      if (isBusinessFormation) {
-        setIsNameFieldEmpty(true);
-      } else {
+      if (!isBusinessFormation) {
         setError("BAD_INPUT");
       }
       throw new Error("ERROR");
@@ -90,15 +92,18 @@ export const useBusinessNameSearch = ({
       .searchBusinessName(currentName)
       .then((result: NameAvailability) => {
         resetState();
-        setSubmittedName(currentName);
         setIsLoading(false);
-        setNameAvailability(result);
+        setFormationFormData({
+          ...state.formationFormData,
+          businessName: currentName,
+        });
+        setBusinessNameAvailability({ ...result });
         return { nameAvailability: result, submittedName: currentName };
       })
-      .catch((error) => {
+      .catch((api_error) => {
         resetState();
         setIsLoading(false);
-        if (error === 400) {
+        if (api_error === 400) {
           setError("BAD_INPUT");
         } else {
           setError("SEARCH_FAILED");
@@ -107,34 +112,15 @@ export const useBusinessNameSearch = ({
       });
   };
 
-  const updateNameOnProfile = (): void => {
-    if (!userData) {
-      return;
-    }
-    setUpdateButtonClicked(true);
-    const newData = isDba ? { nexusDbaName: submittedName } : { businessName: submittedName };
-    update({
-      ...userData,
-      profileData: {
-        ...userData.profileData,
-        ...newData,
-      },
-    });
-  };
-
   return {
     currentName,
-    submittedName,
-    isNameFieldEmpty,
     isLoading,
     error,
-    nameAvailability,
     updateButtonClicked,
     setCurrentName,
     updateCurrentName,
     onBlurNameField,
     searchBusinessName,
-    updateNameOnProfile,
     resetSearch,
   };
 };

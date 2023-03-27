@@ -4,18 +4,17 @@ import {
   FormationFields,
   FormationFormData,
   NameAvailability,
-} from "@businessnjgovnavigator/shared/";
+} from "@businessnjgovnavigator/shared";
 import { createContext } from "react";
 
 interface BusinessFormationState {
   stepIndex: number;
   formationFormData: FormationFormData;
+  businessNameAvailability: NameAvailability | undefined;
   showResponseAlert: boolean;
   hasBeenSubmitted: boolean;
   dbaContent: FormationDbaContent;
   interactedFields: FormationFields[];
-  businessNameAvailability: NameAvailability | undefined;
-  hasBusinessNameBeenSearched: boolean;
   hasSetStateFirstTime: boolean;
 }
 
@@ -26,7 +25,7 @@ interface BusinessFormationContextType {
   setShowResponseAlert: React.Dispatch<React.SetStateAction<boolean>>;
   setFieldsInteracted: (fields: FormationFields[], config?: { setToUninteracted: boolean }) => void;
   setHasBeenSubmitted: (hasBeenSubmitted: boolean) => void;
-  setBusinessNameAvailability: (nameAvailability: NameAvailability | undefined) => void;
+  setBusinessNameAvailability: React.Dispatch<React.SetStateAction<NameAvailability | undefined>>;
 }
 
 export const BusinessFormationContext = createContext<BusinessFormationContextType>({
@@ -37,9 +36,8 @@ export const BusinessFormationContext = createContext<BusinessFormationContextTy
     showResponseAlert: false,
     hasBeenSubmitted: false,
     interactedFields: [],
-    businessNameAvailability: undefined,
-    hasBusinessNameBeenSearched: false,
     hasSetStateFirstTime: false,
+    businessNameAvailability: undefined,
   },
   setFormationFormData: () => {},
   setStepIndex: () => {},

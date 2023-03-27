@@ -3,11 +3,11 @@
 import { getErrorStateForField } from "@/components/tasks/business-formation/getErrorStateForField";
 import { getMergedConfig } from "@/contexts/configContext";
 import { templateEval } from "@/lib/utils/helpers";
-import { generateNameAvailability } from "@/test/factories";
 import {
   defaultDateFormat,
   FormationFields,
   FormationLegalType,
+  generateBusinessNameAvailability,
   generateFormationFormData,
   generateFormationIncorporator,
   generateFormationMember,
@@ -32,21 +32,39 @@ describe("getErrorStateForField", () => {
     });
 
     it("has error if unavailable", () => {
-      const formData = generateFormationFormData({ businessName: "some name" });
-      const availability = generateNameAvailability({ status: "UNAVAILABLE" });
-      expect(getErrorStateForField("businessName", formData, availability).hasError).toEqual(true);
+      const formData = generateFormationFormData({
+        businessName: "some name",
+      });
+      const businessNameAvailability = generateBusinessNameAvailability({
+        status: "UNAVAILABLE",
+      });
+      expect(getErrorStateForField("businessName", formData, businessNameAvailability).hasError).toEqual(
+        true
+      );
     });
 
     it("has error if availability error", () => {
-      const formData = generateFormationFormData({ businessName: "some name" });
-      const availability = generateNameAvailability({ status: "DESIGNATOR_ERROR" });
-      expect(getErrorStateForField("businessName", formData, availability).hasError).toEqual(true);
+      const formData = generateFormationFormData({
+        businessName: "some name",
+      });
+      const businessNameAvailability = generateBusinessNameAvailability({
+        status: "DESIGNATOR_ERROR",
+      });
+      expect(getErrorStateForField("businessName", formData, businessNameAvailability).hasError).toEqual(
+        true
+      );
     });
 
     it("has no error if available", () => {
-      const formData = generateFormationFormData({ businessName: "some name" });
-      const availability = generateNameAvailability({ status: "AVAILABLE" });
-      expect(getErrorStateForField("businessName", formData, availability).hasError).toEqual(false);
+      const formData = generateFormationFormData({
+        businessName: "some name",
+      });
+      const businessNameAvailability = generateBusinessNameAvailability({
+        status: "AVAILABLE",
+      });
+      expect(getErrorStateForField("businessName", formData, businessNameAvailability).hasError).toEqual(
+        false
+      );
     });
 
     it("uses errorInlineEmpty as label if name is missing", () => {
@@ -64,25 +82,37 @@ describe("getErrorStateForField", () => {
     });
 
     it("uses errorInlineUnavailable as label if name availability is UNAVAILABLE", () => {
-      const formData = generateFormationFormData({ businessName: "some name" });
-      const availability = generateNameAvailability({ status: "UNAVAILABLE" });
-      expect(getErrorStateForField("businessName", formData, availability).label).toEqual(
+      const formData = generateFormationFormData({
+        businessName: "some name",
+      });
+      const businessNameAvailability = generateBusinessNameAvailability({
+        status: "UNAVAILABLE",
+      });
+      expect(getErrorStateForField("businessName", formData, businessNameAvailability).label).toEqual(
         Config.formation.fields.businessName.errorInlineUnavailable
       );
     });
 
     it("uses errorInlineUnavailable as label if name availability is error", () => {
-      const formData = generateFormationFormData({ businessName: "some name" });
-      const availability = generateNameAvailability({ status: "DESIGNATOR_ERROR" });
-      expect(getErrorStateForField("businessName", formData, availability).label).toEqual(
+      const formData = generateFormationFormData({
+        businessName: "some name",
+      });
+      const businessNameAvailability = generateBusinessNameAvailability({
+        status: "DESIGNATOR_ERROR",
+      });
+      expect(getErrorStateForField("businessName", formData, businessNameAvailability).label).toEqual(
         Config.formation.fields.businessName.errorInlineUnavailable
       );
     });
 
     it("uses field name as label if name availability is AVAILABLE", () => {
-      const formData = generateFormationFormData({ businessName: "some name" });
-      const availability = generateNameAvailability({ status: "AVAILABLE" });
-      expect(getErrorStateForField("businessName", formData, availability).label).toEqual(
+      const formData = generateFormationFormData({
+        businessName: "some name",
+      });
+      const businessNameAvailability = generateBusinessNameAvailability({
+        status: "AVAILABLE",
+      });
+      expect(getErrorStateForField("businessName", formData, businessNameAvailability).label).toEqual(
         Config.formation.fields.businessName.label
       );
     });
