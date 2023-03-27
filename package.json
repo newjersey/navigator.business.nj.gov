@@ -24,8 +24,8 @@
     "verify:node": "check-node-version --node $(cat .nvmrc) --npm 8"
   },
   "dependencies": {
-    "@aws-amplify/auth": "5.1.15",
-    "@aws-amplify/core": "5.1.4",
+    "@aws-amplify/auth": "5.2.0",
+    "@aws-amplify/core": "5.1.5",
     "@aws-crypto/client-node": "3.2.0",
     "@aws-crypto/sha256-browser": "4.0.0",
     "@aws-sdk/client-cloudwatch-logs": "3.297.0",
@@ -145,7 +145,7 @@
     "@types/js-yaml": "4.0.5",
     "@types/jsonwebtoken": "9.0.1",
     "@types/lodash": "4.14.191",
-    "@types/node": "16.18.18",
+    "@types/node": "16.18.19",
     "@types/react": "18.0.28",
     "@types/react-dom": "18.0.11",
     "@types/react-slick": "^0.23.10",

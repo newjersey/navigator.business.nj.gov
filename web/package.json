@@ -36,8 +36,8 @@
     "endOfLine": "auto"
   },
   "dependencies": {
-    "@aws-amplify/auth": "5.1.15",
-    "@aws-amplify/core": "5.1.4",
+    "@aws-amplify/auth": "5.2.0",
+    "@aws-amplify/core": "5.1.5",
     "@aws-crypto/sha256-browser": "4.0.0",
     "@aws-sdk/protocol-http": "3.296.0",
     "@aws-sdk/s3-request-presigner": "3.297.0",
@@ -120,7 +120,7 @@
     "@types/jest": "29.5.0",
     "@types/js-yaml": "4.0.5",
     "@types/lodash": "4.14.191",
-    "@types/node": "16.18.18",
+    "@types/node": "16.18.19",
     "@types/react": "18.0.28",
     "@types/react-dom": "18.0.11",
     "@types/react-slick": "^0.23.10",
