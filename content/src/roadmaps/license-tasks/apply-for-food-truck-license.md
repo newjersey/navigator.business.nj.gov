@@ -1,7 +1,7 @@
 ---
 filename: apply-for-food-truck-license
 urlSlug: apply-for-food-truck-license
-name: Apply for Your Food Truck License
+name: Apply for a Food Truck License
 webflowName: "Food Truck: License to Operate a Food Truck"
 localLevelTask: Local Department of Health
 industryId: food-truck
