@@ -5,7 +5,7 @@ interface Props {
   handleChangeOverride?: (value: string) => void;
 }
 
-export const OnboardingNotes = (props: Props): ReactElement => {
+export const ProfileNotes = (props: Props): ReactElement => {
   return (
     <OnboardingField
       fieldName={"notes"}

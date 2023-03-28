@@ -1,12 +1,12 @@
 import { Content } from "@/components/Content";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { FieldLabelModal } from "@/components/onboarding/FieldLabelModal";
-import { OnboardingBusinessName } from "@/components/onboarding/OnboardingBusinessName";
-import { OnboardingExistingEmployees } from "@/components/onboarding/OnboardingExistingEmployees";
-import { OnboardingMunicipality } from "@/components/onboarding/OnboardingMunicipality";
-import { OnboardingOwnership } from "@/components/onboarding/OnboardingOwnership";
-import { ProfileNexusDBANameField } from "@/components/onboarding/ProfileNexusDBANameField";
 import { OnboardingTaxId } from "@/components/onboarding/taxId/OnboardingTaxId";
+import { ProfileBusinessName } from "@/components/profile/ProfileBusinessName";
+import { ProfileExistingEmployees } from "@/components/profile/ProfileExistingEmployees";
+import { ProfileMunicipality } from "@/components/profile/ProfileMunicipality";
+import { ProfileNexusDBANameField } from "@/components/profile/ProfileNexusDBANameField";
+import { ProfileOwnership } from "@/components/profile/ProfileOwnership";
 import { TaxDisclaimer } from "@/components/TaxDisclaimer";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
@@ -129,7 +129,7 @@ export const RegisteredForTaxesModal = (props: Props): ReactElement => {
           {showBusinessField() && (
             <WithErrorBar hasError={formContextState.fieldStates.businessName.invalid} type="ALWAYS">
               <FieldLabelModal fieldName="businessName" />
-              <OnboardingBusinessName required />
+              <ProfileBusinessName required />
             </WithErrorBar>
           )}
 
@@ -140,18 +140,18 @@ export const RegisteredForTaxesModal = (props: Props): ReactElement => {
           </WithErrorBar>
 
           <FieldLabelModal fieldName="ownershipTypeIds" />
-          <OnboardingOwnership />
+          <ProfileOwnership />
 
           <div className="margin-top-3" aria-hidden={true} />
           <WithErrorBar hasError={formContextState.fieldStates.existingEmployees.invalid} type="ALWAYS">
             <FieldLabelModal fieldName="existingEmployees" />
-            <OnboardingExistingEmployees required />
+            <ProfileExistingEmployees required />
           </WithErrorBar>
 
           {showMunicipalityField() && (
             <WithErrorBar hasError={formContextState.fieldStates.municipality.invalid} type="ALWAYS">
               <FieldLabelModal fieldName="municipality" />
-              <OnboardingMunicipality required />
+              <ProfileMunicipality required />
             </WithErrorBar>
           )}
         </ModalTwoButton>

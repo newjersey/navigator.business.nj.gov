@@ -2,9 +2,9 @@ import { Content } from "@/components/Content";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { FieldLabelModal } from "@/components/onboarding/FieldLabelModal";
-import { OnboardingBusinessName } from "@/components/onboarding/OnboardingBusinessName";
-import { OnboardingResponsibleOwnerName } from "@/components/onboarding/OnboardingResponsibleOwnerName";
 import { OnboardingTaxId } from "@/components/onboarding/taxId/OnboardingTaxId";
+import { ProfileBusinessName } from "@/components/profile/ProfileBusinessName";
+import { ProfileResponsibleOwnerName } from "@/components/profile/ProfileResponsibleOwnerName";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { FieldStateActionKind } from "@/contexts/formContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
@@ -260,10 +260,7 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
                   description: Config.taxCalendar.modalBusinessFieldMarkdown,
                 }}
               />
-              <OnboardingBusinessName
-                validationText={Config.taxCalendar.failedBusinessFieldHelper}
-                required
-              />
+              <ProfileBusinessName validationText={Config.taxCalendar.failedBusinessFieldHelper} required />
             </WithErrorBar>
           )}
 
@@ -273,7 +270,7 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
               type="ALWAYS"
             >
               <FieldLabelModal fieldName="responsibleOwnerName" />
-              <OnboardingResponsibleOwnerName
+              <ProfileResponsibleOwnerName
                 validationText={Config.taxCalendar.failedResponsibleOwnerFieldHelper}
                 required
               />

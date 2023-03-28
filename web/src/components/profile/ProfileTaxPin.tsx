@@ -1,4 +1,4 @@
-import { OnboardingNumericField } from "@/components/onboarding/OnboardingNumericField";
+import { ProfileNumericField } from "@/components/profile/ProfileNumericField";
 import { ConfigType } from "@/contexts/configContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -7,29 +7,28 @@ import { ReactElement, ReactNode, useContext } from "react";
 
 interface Props {
   children?: ReactNode;
-  required?: boolean;
+  handleChangeOverride?: (value: string) => void;
 }
 
-export const OnboardingExistingEmployees = (props: Props): ReactElement => {
-  const fieldName = "existingEmployees";
+export const ProfileTaxPin = (props: Props): ReactElement => {
+  const fieldName = "taxPin";
   const { Config } = useConfig();
   const { state } = useContext(ProfileDataContext);
 
-  const contentFromConfig: ConfigType["profileDefaults"]["fields"]["existingEmployees"]["default"] =
-    getProfileConfig({
-      config: Config,
-      persona: state.flow,
-      fieldName: fieldName,
-    });
+  const contentFromConfig: ConfigType["profileDefaults"]["fields"]["taxPin"]["default"] = getProfileConfig({
+    config: Config,
+    persona: state.flow,
+    fieldName: fieldName,
+  });
 
   return (
     <>
-      <OnboardingNumericField
+      <ProfileNumericField
         fieldName={fieldName}
-        maxLength={7}
-        minLength={1}
+        maxLength={4}
+        minLength={4}
         validationText={contentFromConfig.errorTextRequired}
-        required={props.required}
+        handleChange={props.handleChangeOverride}
       />
       {props.children}
     </>

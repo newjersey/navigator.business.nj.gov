@@ -12,7 +12,7 @@ import {
   defaultDateFormat,
   getCurrentDate,
   parseDate,
-} from "@businessnjgovnavigator/shared/";
+} from "@businessnjgovnavigator/shared";
 import { TextFieldProps } from "@mui/material";
 import { DatePicker, DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -27,7 +27,7 @@ interface Props {
   errorTextOverride?: string;
 }
 
-export const OnboardingDateOfFormation = (props: Props): ReactElement => {
+export const ProfileDateOfFormation = (props: Props): ReactElement => {
   const fieldName = "dateOfFormation";
   const { Config } = useConfig();
   const { state, setProfileData } = useContext(ProfileDataContext);

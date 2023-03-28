@@ -1,27 +1,27 @@
 import { FieldLabelOnboarding } from "@/components/onboarding/FieldLabelOnboarding";
 import { FieldLabelProfile } from "@/components/onboarding/FieldLabelProfile";
-import { OnboardingBusinessName } from "@/components/onboarding/OnboardingBusinessName";
 import { OnboardingBusinessPersona } from "@/components/onboarding/OnboardingBusinessPersona";
-import { OnboardingDateOfFormation } from "@/components/onboarding/OnboardingDateOfFormation";
-import { OnboardingEmployerId } from "@/components/onboarding/OnboardingEmployerId";
-import { OnboardingEntityId } from "@/components/onboarding/OnboardingEntityId";
-import { OnboardingExistingEmployees } from "@/components/onboarding/OnboardingExistingEmployees";
 import { OnboardingForeignBusinessType } from "@/components/onboarding/OnboardingForeignBusinessType";
 import { OnboardingIndustry } from "@/components/onboarding/OnboardingIndustry";
 import { OnboardingLegalStructure } from "@/components/onboarding/OnboardingLegalStructure";
 import { OnboardingLocationInNewJersey } from "@/components/onboarding/OnboardingLocationInNewJersey";
-import { OnboardingMunicipality } from "@/components/onboarding/OnboardingMunicipality";
-import { OnboardingNotes } from "@/components/onboarding/OnboardingNotes";
-import { OnboardingOwnership } from "@/components/onboarding/OnboardingOwnership";
 import { OnboardingRadioQuestion } from "@/components/onboarding/OnboardingRadioQuestion";
-import { OnboardingResponsibleOwnerName } from "@/components/onboarding/OnboardingResponsibleOwnerName";
 import { OnboardingSectors } from "@/components/onboarding/OnboardingSectors";
-import { OnboardingTaxPin } from "@/components/onboarding/OnboardingTaxPin";
-import { ProfileNaicsCode } from "@/components/onboarding/ProfileNaicsCode";
-import { ProfileNexusBusinessNameField } from "@/components/onboarding/ProfileNexusBusinessNameField";
-import { ProfileNexusDBANameField } from "@/components/onboarding/ProfileNexusDBANameField";
 import { OnboardingTaxId } from "@/components/onboarding/taxId/OnboardingTaxId";
 import { Documents } from "@/components/profile/Documents";
+import { ProfileBusinessName } from "@/components/profile/ProfileBusinessName";
+import { ProfileDateOfFormation } from "@/components/profile/ProfileDateOfFormation";
+import { ProfileEmployerId } from "@/components/profile/ProfileEmployerId";
+import { ProfileEntityId } from "@/components/profile/ProfileEntityId";
+import { ProfileExistingEmployees } from "@/components/profile/ProfileExistingEmployees";
+import { ProfileMunicipality } from "@/components/profile/ProfileMunicipality";
+import { ProfileNaicsCode } from "@/components/profile/ProfileNaicsCode";
+import { ProfileNexusBusinessNameField } from "@/components/profile/ProfileNexusBusinessNameField";
+import { ProfileNexusDBANameField } from "@/components/profile/ProfileNexusDBANameField";
+import { ProfileNotes } from "@/components/profile/ProfileNotes";
+import { ProfileOwnership } from "@/components/profile/ProfileOwnership";
+import { ProfileResponsibleOwnerName } from "@/components/profile/ProfileResponsibleOwnerName";
+import { ProfileTaxPin } from "@/components/profile/ProfileTaxPin";
 import { ConfigContext } from "@/contexts/configContext";
 import { profileFormContext } from "@/contexts/profileFormContext";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
@@ -49,12 +49,12 @@ const ProfileFieldsPreview = (props: PreviewProps) => {
 
           <div className="margin-left-4">
             <FieldLabelOnboarding fieldName="businessName" />
-            <OnboardingBusinessName />
+            <ProfileBusinessName />
 
             <div className="margin-y-2" />
 
             <FieldLabelOnboarding fieldName="businessName" CMS_ONLY_flow="OWNING" />
-            <OnboardingBusinessName />
+            <ProfileBusinessName />
           </div>
           <hr className="margin-y-4" />
 
@@ -77,21 +77,21 @@ const ProfileFieldsPreview = (props: PreviewProps) => {
           <div className="margin-left-4">
             <FieldLabelOnboarding fieldName="municipality" />
             <div className="margin-top-2">
-              <OnboardingMunicipality />
+              <ProfileMunicipality />
             </div>
 
             <div className="margin-y-2" />
 
             <FieldLabelOnboarding fieldName="municipality" CMS_ONLY_flow="OWNING" />
             <div className="margin-top-2">
-              <OnboardingMunicipality />
+              <ProfileMunicipality />
             </div>
 
             <div className="margin-y-2" />
 
             <FieldLabelOnboarding fieldName="municipality" CMS_ONLY_flow="FOREIGN" />
             <div className="margin-top-2">
-              <OnboardingMunicipality />
+              <ProfileMunicipality />
             </div>
           </div>
 
@@ -103,24 +103,24 @@ const ProfileFieldsPreview = (props: PreviewProps) => {
 
           <div className="margin-left-4">
             <FieldLabelOnboarding fieldName="ownershipTypeIds" />
-            <OnboardingOwnership />
+            <ProfileOwnership />
 
             <div className="margin-y-2" />
 
             <FieldLabelOnboarding fieldName="ownershipTypeIds" CMS_ONLY_flow="OWNING" />
-            <OnboardingOwnership />
+            <ProfileOwnership />
           </div>
 
           <hr className="margin-y-4" />
 
           <div className="margin-left-4">
             <FieldLabelOnboarding fieldName="existingEmployees" />
-            <OnboardingExistingEmployees />
+            <ProfileExistingEmployees />
 
             <div className="margin-y-2" />
 
             <FieldLabelOnboarding fieldName="existingEmployees" CMS_ONLY_flow="OWNING" />
-            <OnboardingExistingEmployees />
+            <ProfileExistingEmployees />
           </div>
 
           <hr className="margin-y-4" />
@@ -146,11 +146,11 @@ const ProfileFieldsPreview = (props: PreviewProps) => {
 
           <hr className="margin-y-4" />
           <FieldLabelOnboarding fieldName="entityId" />
-          <OnboardingEntityId />
+          <ProfileEntityId />
 
           <hr className="margin-y-4" />
           <FieldLabelOnboarding fieldName="employerId" />
-          <OnboardingEmployerId />
+          <ProfileEmployerId />
 
           <hr className="margin-y-4" />
           <FieldLabelOnboarding fieldName="naicsCode" />
@@ -158,22 +158,22 @@ const ProfileFieldsPreview = (props: PreviewProps) => {
 
           <hr className="margin-y-4" />
           <FieldLabelOnboarding fieldName="dateOfFormation" />
-          <OnboardingDateOfFormation futureAllowed={false} />
+          <ProfileDateOfFormation futureAllowed={false} />
 
           <hr className="margin-y-4" />
           <FieldLabelOnboarding fieldName="taxPin" />
-          <OnboardingTaxPin />
+          <ProfileTaxPin />
 
           <hr className="margin-y-4" />
           <Documents />
 
           <hr className="margin-y-4" />
           <FieldLabelOnboarding fieldName="notes" />
-          <OnboardingNotes />
+          <ProfileNotes />
 
           <hr className="margin-y-4" />
           <FieldLabelOnboarding fieldName="responsibleOwnerName" />
-          <OnboardingResponsibleOwnerName />
+          <ProfileResponsibleOwnerName />
 
           {EssentialQuestions.map((props, index) => {
             return (

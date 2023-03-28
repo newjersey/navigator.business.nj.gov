@@ -6,34 +6,34 @@ import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { SidebarPageLayout } from "@/components/njwds-extended/SidebarPageLayout";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { FieldLabelProfile } from "@/components/onboarding/FieldLabelProfile";
-import { OnboardingBusinessName } from "@/components/onboarding/OnboardingBusinessName";
-import { OnboardingDateOfFormation } from "@/components/onboarding/OnboardingDateOfFormation";
-import { OnboardingEmployerId } from "@/components/onboarding/OnboardingEmployerId";
-import { OnboardingEntityId } from "@/components/onboarding/OnboardingEntityId";
-import { OnboardingExistingEmployees } from "@/components/onboarding/OnboardingExistingEmployees";
 import { OnboardingForeignBusinessType } from "@/components/onboarding/OnboardingForeignBusinessType";
 import { OnboardingHomeBasedBusiness } from "@/components/onboarding/OnboardingHomeBasedBusiness";
 import { OnboardingIndustry } from "@/components/onboarding/OnboardingIndustry";
 import { OnboardingLegalStructureDropdown } from "@/components/onboarding/OnboardingLegalStructureDropDown";
 import { OnboardingLocationInNewJersey } from "@/components/onboarding/OnboardingLocationInNewJersey";
-import { OnboardingMunicipality } from "@/components/onboarding/OnboardingMunicipality";
-import { OnboardingNotes } from "@/components/onboarding/OnboardingNotes";
-import { OnboardingOwnership } from "@/components/onboarding/OnboardingOwnership";
 import { OnboardingSectors } from "@/components/onboarding/OnboardingSectors";
-import { OnboardingTaxPin } from "@/components/onboarding/OnboardingTaxPin";
-import { ProfileNaicsCode } from "@/components/onboarding/ProfileNaicsCode";
-import { ProfileNexusBusinessNameField } from "@/components/onboarding/ProfileNexusBusinessNameField";
-import { ProfileNexusDBANameField } from "@/components/onboarding/ProfileNexusDBANameField";
 import { DisabledTaxId } from "@/components/onboarding/taxId/DisabledTaxId";
 import { OnboardingTaxId } from "@/components/onboarding/taxId/OnboardingTaxId";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { Documents } from "@/components/profile/Documents";
 import { EscapeModal } from "@/components/profile/EscapeModal";
+import { ProfileBusinessName } from "@/components/profile/ProfileBusinessName";
+import { ProfileDateOfFormation } from "@/components/profile/ProfileDateOfFormation";
+import { ProfileEmployerId } from "@/components/profile/ProfileEmployerId";
+import { ProfileEntityId } from "@/components/profile/ProfileEntityId";
+import { ProfileExistingEmployees } from "@/components/profile/ProfileExistingEmployees";
 import { ProfileField } from "@/components/profile/ProfileField";
+import { ProfileMunicipality } from "@/components/profile/ProfileMunicipality";
+import { ProfileNaicsCode } from "@/components/profile/ProfileNaicsCode";
+import { ProfileNexusBusinessNameField } from "@/components/profile/ProfileNexusBusinessNameField";
+import { ProfileNexusDBANameField } from "@/components/profile/ProfileNexusDBANameField";
+import { ProfileNotes } from "@/components/profile/ProfileNotes";
 import { ProfileOpportunitiesAlert } from "@/components/profile/ProfileOpportunitiesAlert";
+import { ProfileOwnership } from "@/components/profile/ProfileOwnership";
 import { ProfileSnackbarAlert } from "@/components/profile/ProfileSnackbarAlert";
 import { ProfileTabHeader } from "@/components/profile/ProfileTabHeader";
 import { ProfileTabNav } from "@/components/profile/ProfileTabNav";
+import { ProfileTaxPin } from "@/components/profile/ProfileTaxPin";
 import { TaxDisclaimer } from "@/components/TaxDisclaimer";
 import { UserDataErrorAlert } from "@/components/UserDataErrorAlert";
 import { AuthAlertContext } from "@/contexts/authAlertContext";
@@ -331,7 +331,7 @@ const ProfilePage = (props: Props): ReactElement => {
         </ProfileField>
 
         <ProfileField fieldName="municipality" isVisible={profileData.nexusLocationInNewJersey === true}>
-          <OnboardingMunicipality />
+          <ProfileMunicipality />
         </ProfileField>
 
         <ProfileField
@@ -349,7 +349,7 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileTabHeader tab="notes" />
 
         <ProfileField fieldName="notes">
-          <OnboardingNotes handleChangeOverride={showRegistrationModalForGuest()} />
+          <ProfileNotes handleChangeOverride={showRegistrationModalForGuest()} />
         </ProfileField>
       </>
     ),
@@ -388,7 +388,7 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileTabHeader tab="notes" />
 
         <ProfileField fieldName="notes">
-          <OnboardingNotes handleChangeOverride={showRegistrationModalForGuest()} />
+          <ProfileNotes handleChangeOverride={showRegistrationModalForGuest()} />
         </ProfileField>
       </>
     ),
@@ -417,7 +417,7 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileTabHeader tab="notes" />
 
         <ProfileField fieldName="notes">
-          <OnboardingNotes handleChangeOverride={showRegistrationModalForGuest()} />
+          <ProfileNotes handleChangeOverride={showRegistrationModalForGuest()} />
         </ProfileField>
       </>
     ),
@@ -440,7 +440,7 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileTabHeader tab="info" />
 
         <ProfileField fieldName="businessName" locked={shouldLockFormationFields}>
-          <OnboardingBusinessName required={isBusinessNameRequired()} />
+          <ProfileBusinessName required={isBusinessNameRequired()} />
         </ProfileField>
 
         <ProfileField fieldName="industryId">
@@ -460,7 +460,7 @@ const ProfilePage = (props: Props): ReactElement => {
           locked={shouldLockFormationFields}
           lockedValueFormatter={formatDate}
         >
-          <OnboardingDateOfFormation futureAllowed={true} />
+          <ProfileDateOfFormation futureAllowed={true} />
         </ProfileField>
 
         <ProfileField
@@ -472,7 +472,7 @@ const ProfilePage = (props: Props): ReactElement => {
         </ProfileField>
 
         <ProfileField fieldName="municipality">
-          <OnboardingMunicipality />
+          <ProfileMunicipality />
         </ProfileField>
 
         <ProfileField
@@ -490,7 +490,7 @@ const ProfilePage = (props: Props): ReactElement => {
               .displayCompanyDemographicProfileFields
           }
         >
-          <OnboardingOwnership />
+          <ProfileOwnership />
         </ProfileField>
 
         <ProfileField
@@ -500,7 +500,7 @@ const ProfilePage = (props: Props): ReactElement => {
               .displayCompanyDemographicProfileFields
           }
         >
-          <OnboardingExistingEmployees required />
+          <ProfileExistingEmployees required />
         </ProfileField>
       </>
     ),
@@ -519,11 +519,11 @@ const ProfilePage = (props: Props): ReactElement => {
           )}
           locked={shouldLockFormationFields}
         >
-          <OnboardingEntityId handleChangeOverride={showRegistrationModalForGuest()} />
+          <ProfileEntityId handleChangeOverride={showRegistrationModalForGuest()} />
         </ProfileField>
 
         <ProfileField fieldName="employerId">
-          <OnboardingEmployerId handleChangeOverride={showRegistrationModalForGuest()} />
+          <ProfileEmployerId handleChangeOverride={showRegistrationModalForGuest()} />
         </ProfileField>
 
         <ProfileField fieldName="taxId" noLabel={true}>
@@ -547,7 +547,7 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileTabHeader tab="notes" />
 
         <ProfileField fieldName="notes">
-          <OnboardingNotes handleChangeOverride={showRegistrationModalForGuest()} />
+          <ProfileNotes handleChangeOverride={showRegistrationModalForGuest()} />
         </ProfileField>
       </>
     ),
@@ -557,7 +557,7 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileTabHeader tab="info" />
 
         <ProfileField fieldName="businessName">
-          <OnboardingBusinessName />
+          <ProfileBusinessName />
         </ProfileField>
 
         <ProfileField fieldName="sectorId">
@@ -570,15 +570,15 @@ const ProfilePage = (props: Props): ReactElement => {
             "formationDate"
           )}
         >
-          <OnboardingDateOfFormation futureAllowed={false} />
+          <ProfileDateOfFormation futureAllowed={false} />
         </ProfileField>
 
         <ProfileField fieldName="existingEmployees">
-          <OnboardingExistingEmployees />
+          <ProfileExistingEmployees />
         </ProfileField>
 
         <ProfileField fieldName="municipality">
-          <OnboardingMunicipality />
+          <ProfileMunicipality />
         </ProfileField>
 
         <ProfileField
@@ -590,7 +590,7 @@ const ProfilePage = (props: Props): ReactElement => {
         </ProfileField>
 
         <ProfileField fieldName="ownershipTypeIds">
-          <OnboardingOwnership />
+          <ProfileOwnership />
         </ProfileField>
       </>
     ),
@@ -599,11 +599,11 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileTabHeader tab="numbers" />
 
         <ProfileField fieldName="entityId">
-          <OnboardingEntityId handleChangeOverride={showRegistrationModalForGuest()} />
+          <ProfileEntityId handleChangeOverride={showRegistrationModalForGuest()} />
         </ProfileField>
 
         <ProfileField fieldName="employerId">
-          <OnboardingEmployerId handleChangeOverride={showRegistrationModalForGuest()} />
+          <ProfileEmployerId handleChangeOverride={showRegistrationModalForGuest()} />
         </ProfileField>
 
         <ProfileField fieldName="taxId" noLabel={true}>
@@ -619,7 +619,7 @@ const ProfilePage = (props: Props): ReactElement => {
         </ProfileField>
 
         <ProfileField fieldName="taxPin">
-          <OnboardingTaxPin handleChangeOverride={showRegistrationModalForGuest()} />
+          <ProfileTaxPin handleChangeOverride={showRegistrationModalForGuest()} />
         </ProfileField>
       </>
     ),

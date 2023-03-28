@@ -8,7 +8,7 @@ import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextField
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { isMunicipalityRequired } from "@/lib/domain-logic/isMunicipalityRequired";
 import { FormContextFieldProps } from "@/lib/types/types";
-import { Municipality } from "@businessnjgovnavigator/shared/";
+import { Municipality } from "@businessnjgovnavigator/shared";
 import { FocusEvent, ReactElement, useContext } from "react";
 
 interface Props extends FormContextFieldProps {
@@ -16,7 +16,7 @@ interface Props extends FormContextFieldProps {
   required?: boolean;
 }
 
-export const OnboardingMunicipality = (props: Props): ReactElement => {
+export const ProfileMunicipality = (props: Props): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { municipalities } = useContext(MunicipalitiesContext);
   const { Config } = useConfig();

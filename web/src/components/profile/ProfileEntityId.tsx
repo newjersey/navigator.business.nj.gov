@@ -1,4 +1,4 @@
-import { OnboardingNumericField } from "@/components/onboarding/OnboardingNumericField";
+import { ProfileNumericField } from "@/components/profile/ProfileNumericField";
 import { ReactElement, ReactNode } from "react";
 
 interface Props {
@@ -7,12 +7,12 @@ interface Props {
   handleChangeOverride?: (value: string) => void;
 }
 
-export const OnboardingEntityId = (props: Props): ReactElement => {
+export const ProfileEntityId = (props: Props): ReactElement => {
   const fieldName = "entityId";
 
   return (
     <>
-      <OnboardingNumericField
+      <ProfileNumericField
         fieldName={fieldName}
         maxLength={10}
         disabled={props.disabled}

@@ -1,4 +1,4 @@
-import { ProfileNaicsCode } from "@/components/onboarding/ProfileNaicsCode";
+import { ProfileNaicsCode } from "@/components/profile/ProfileNaicsCode";
 import { getMergedConfig } from "@/contexts/configContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { getFlow } from "@/lib/utils/helpers";
