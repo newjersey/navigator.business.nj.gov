@@ -98,12 +98,12 @@ jest.mock("airtable", (): MockAirtableType => {
     baseIdCalledWith: "",
     tableIdCalledWith: "",
     dataCalledWith: undefined,
-    base: function MockBase(baseId: string) {
+    base: function MockBase(baseId: string): any {
       this.baseIdCalledWith = baseId;
-      return (tableId: string) => {
+      return (tableId: string): any => {
         this.tableIdCalledWith = tableId;
         // eslint-disable-next-line unicorn/consistent-function-scoping
-        const create = (newData: any, callback: (err?: any, results?: any) => void) => {
+        const create = (newData: any, callback: (err?: any, results?: any) => void): void => {
           this.dataCalledWith = newData;
           callback();
         };
@@ -111,6 +111,6 @@ jest.mock("airtable", (): MockAirtableType => {
         return { create };
       };
     },
-    configure: function MockConfigure() {},
+    configure: function MockConfigure(): any {},
   };
 });

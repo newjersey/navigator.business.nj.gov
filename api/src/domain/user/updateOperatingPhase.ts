@@ -46,7 +46,7 @@ const getNewPhase = ({
   currentPhase: OperatingPhaseId;
   isPublicFiling: boolean;
   taskProgress: Record<string, TaskProgress>;
-}) => {
+}): OperatingPhaseId => {
   const hasCompletedFormation = taskProgress[formationTaskId] === "COMPLETED";
   const hasCompletedTaxes = taskProgress[taxTaskId] === "COMPLETED";
 

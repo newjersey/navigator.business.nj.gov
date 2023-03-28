@@ -105,17 +105,17 @@ export const DynamoUserDataClient = (db: DynamoDBDocumentClient, tableName: stri
       });
   };
 
-  const getNeedNewsletterUsers = () => {
+  const getNeedNewsletterUsers = (): Promise<UserData[]> => {
     const statement = `SELECT data FROM "${tableName}" WHERE data["user"].receiveNewsletter = true and (data["user"].externalStatus.newsletter is missing or data["user"].externalStatus.newsletter.success = false)`;
     return search(statement);
   };
 
-  const getNeedToAddToUserTestingUsers = () => {
+  const getNeedToAddToUserTestingUsers = (): Promise<UserData[]> => {
     const statement = `SELECT data FROM "${tableName}" WHERE data["user"].userTesting = true and (data["user"].externalStatus.userTesting is missing or data["user"].externalStatus.userTesting.success = false)`;
     return search(statement);
   };
 
-  const getNeedTaxIdEncryptionUsers = () => {
+  const getNeedTaxIdEncryptionUsers = (): Promise<UserData[]> => {
     const statement = `SELECT data FROM "${tableName}" WHERE data["profileData"].encryptedTaxId IS MISSING AND data["profileData"].taxId IS NOT MISSING`;
     return search(statement);
   };

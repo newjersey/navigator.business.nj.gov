@@ -12,7 +12,7 @@ export interface v40UserData {
   version: number;
 }
 
-const determineOpenSteps = (value: number) => {
+const determineOpenSteps = (value: number): number => {
   switch (value) {
     case 2:
       return 1;

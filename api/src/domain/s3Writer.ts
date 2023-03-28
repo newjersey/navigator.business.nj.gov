@@ -42,7 +42,7 @@ export const getFileFromURL = async function (URI: string): Promise<AxiosRespons
   });
 };
 
-const escapeColons = (value: string) => {
+const escapeColons = (value: string): string => {
   const segments = value.split(":");
   if (segments.length === 1) {
     return value;

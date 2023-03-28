@@ -1,6 +1,6 @@
 import { convertIndustryToLicenseType, industryHasALicenseType } from "./convertIndustryToLicenseType";
 
-const t = () => {
+const testFn = (): void => {
   convertIndustryToLicenseType("restaurant");
 };
 
@@ -11,7 +11,7 @@ describe("convertIndustryToLicenseType", () => {
   });
 
   it("throws an error if the industry does not have a license type", () => {
-    expect(t).toThrow("restaurant does not have a license type");
+    expect(testFn).toThrow("restaurant does not have a license type");
   });
 });
 

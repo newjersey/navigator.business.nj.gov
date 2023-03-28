@@ -1,26 +1,36 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-export const inputManipulator = (initial: string): any => {
+type InputManipulator = {
+  value: string;
+  stripPunctuation: () => InputManipulator;
+  trimPunctuation: () => InputManipulator;
+  stripWhitespace: () => InputManipulator;
+  removeArticles: () => InputManipulator;
+  removeBusinessDesignators: () => InputManipulator;
+  makeLowerCase: () => InputManipulator;
+};
+
+export const inputManipulator = (initial: string): InputManipulator => {
   return {
     value: initial,
-    stripPunctuation: function () {
+    stripPunctuation: function (): InputManipulator {
       this.value = this.value.replace(/[!"#$%()*+,./:;<=>?@^_`{}~-]/g, "");
       return this;
     },
-    trimPunctuation: function () {
+    trimPunctuation: function (): InputManipulator {
       const startsOrEndsWithPunctuation = /^[\s!"#$%()*+,.:;<=-_`{}~]+|[\s!"#$%()*+,.:;<=-_`{}~]+$/g;
       this.value = this.value.replace(startsOrEndsWithPunctuation, "");
       return this;
     },
-    stripWhitespace: function () {
+    stripWhitespace: function (): InputManipulator {
       this.value = this.value.replace(/\s+/g, "");
       return this;
     },
-    removeArticles: function () {
+    removeArticles: function (): InputManipulator {
       this.value = removeWords(this.value, ["a", "an", "the"]);
       return this;
     },
-    removeBusinessDesignators: function () {
+    removeBusinessDesignators: function (): InputManipulator {
       this.value = removeWords(this.value, [
         "a nj nonprofit corporation",
         "limited liability company",
@@ -39,7 +49,7 @@ export const inputManipulator = (initial: string): any => {
       ]);
       return this;
     },
-    makeLowerCase: function () {
+    makeLowerCase: function (): InputManipulator {
       this.value = this.value.toLowerCase();
       return this;
     },

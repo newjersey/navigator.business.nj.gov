@@ -1,9 +1,9 @@
 import bodyParser from "body-parser";
 import cors from "cors";
-import express from "express";
+import express, { Express } from "express";
 import helmet from "helmet";
 
-export const setupExpress = (enableCors = true, enableHelmet = true) => {
+export const setupExpress = (enableCors = true, enableHelmet = true): Express => {
   const app = express();
   app.disable("x-powered-by");
   app.use(bodyParser.json());

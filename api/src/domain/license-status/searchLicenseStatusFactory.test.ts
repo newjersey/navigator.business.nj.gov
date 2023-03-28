@@ -1,9 +1,9 @@
-import { LicenseStatusResult } from "@shared/license";
+import { LicenseEntity, LicenseStatusResult } from "@shared/license";
 import { generateLicenseEntity, generateNameAndAddress } from "../../../test/factories";
 import { LicenseStatusClient, SearchLicenseStatus } from "../types";
 import { determineLicenseStatus, searchLicenseStatusFactory } from "./searchLicenseStatusFactory";
 
-const entityWithAddress = (address: string) => {
+const entityWithAddress = (address: string): LicenseEntity => {
   return generateLicenseEntity({
     checkoffStatus: "Completed",
     licenseStatus: "Active",

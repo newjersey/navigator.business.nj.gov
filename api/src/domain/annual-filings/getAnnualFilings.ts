@@ -2,7 +2,7 @@ import { LookupLegalStructureById } from "@shared/legalStructure";
 import { UserData } from "@shared/userData";
 import { calculateNextAnnualFilingDates } from "./calculateNextAnnualFilingDates";
 
-export const getAnnualFilings = (userData: UserData) => {
+export const getAnnualFilings = (userData: UserData): UserData => {
   const filings = userData.taxFilingData.filings.filter((it) => {
     return it.identifier !== "ANNUAL_FILING";
   });
