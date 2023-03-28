@@ -13,7 +13,7 @@ divisionPhone: (973) 504-6480
 id: appraiser-certification
 webflowId: 64147a4354c15f3f147a8c03
 ---
-If you plan to appraise real estate with one to four residential units—regardless to value or complexity—you need a certification. You will need a certified (or licensed) appraiser prior to opening an `Appraisal Management Company|appraisal-management-company`.
+You need a certification to appraise real estate with one to four residential units—regardless to value or complexity. You also need a certified (or licensed) appraiser prior to opening an `Appraisal Management Company|appraisal-management-company`.
 
 - - -
 
