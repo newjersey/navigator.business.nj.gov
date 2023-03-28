@@ -1,7 +1,7 @@
 ---
 filename: annual-license-cannabis
 urlSlug: annual-license-cannabis
-name: Apply for Your Annual Cannabis License
+name: Apply for an Annual Cannabis License
 webflowName: "Cannabis: Annual License"
 issuingAgency: Cannabis Regulatory Commission
 industryId: cannabis
