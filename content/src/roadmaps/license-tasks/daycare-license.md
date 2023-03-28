@@ -1,29 +1,28 @@
 ---
-urlSlug: daycare-license
 filename: daycare-license
-name: Obtain a Child Care Center License
-id: daycare-license
-callToActionLink: https://njccis.com/njccis/home
-callToActionText: Apply for My License
+urlSlug: daycare-license
+name: Apply for a Child Care Center License
+webflowName: "Child Care: License for a Child Care Center"
 issuingAgency: New Jersey Department of Children and Families
-webflowId: "5f7728f5e8bf507c5e317899"
-webflowName: "Child Care Center"
-webflowIndustry: "Child Care"
-issuingDivision: "Office of Licensing"
-divisionPhone: "(609) 826-3999"
-licenseCertificationClassification: "LICENSE"
+industryId: daycare
+callToActionText: Apply for My License
+callToActionLink: https://www.nj.gov/dcf/providers/licensing/
+webflowIndustry: Child Care
+licenseCertificationClassification: LICENSE
+issuingDivision: Office of Licensing
+divisionPhone: (609) 826-3999
+id: daycare-license
+webflowId: 5f7728f5e8bf507c5e317899
 ---
 
-You must obtain a license with the NJ Department of Children and Families prior to operating as a Daycare.
-
-The [DCF’s licensing manual](https://www.nj.gov/dcf/providers/licensing/Understanding.Licensing.Packet.pdf) provides information regarding license and operation requirements.
+You need a license to operate a child care center.
 
 ---
 
 ### Eligibility
 
-- six or more children under your care
-- Staff must be at least 18 years old
+- Have six or more children under your care
+- Have all staff be at least 18 years old
 
 ### Application Requirements
 
@@ -31,9 +30,9 @@ The [DCF’s licensing manual](https://www.nj.gov/dcf/providers/licensing/Unders
 - `Business Registration Certificate|business-reg-certificate`
 - `Certificate of Formation|certificate-formation`
 - Letter of certification from the local government indicating the building’s previous type of use
-- Water bills and water testing reports from your local government
-- Site map of your site with the location of the outdoor playing area
-- Pay any associated fees
+- Water bill and a water testing report from your local government
+- Map of your business location with the location of the outdoor playing area
+- Payment made for any associated fees
 
 ### After the Initial Application
 
@@ -42,4 +41,4 @@ The [DCF’s licensing manual](https://www.nj.gov/dcf/providers/licensing/Unders
 
 > **Once completed, you will have:**
 >
-> - A Child Care Center License mailed to you
+> - A child care center license
