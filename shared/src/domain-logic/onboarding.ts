@@ -1,5 +1,5 @@
 import { UserData } from "../userData";
 
-export const onboardingCompleted = (userData: UserData) => {
+export const onboardingCompleted = (userData: UserData): boolean => {
   return userData.formProgress === "COMPLETED";
 };

@@ -85,11 +85,13 @@ export const generateFormationMember = (overrides: Partial<FormationMember>): Fo
   };
 };
 
-export const randomFormationLegalType = () => {
+export const randomFormationLegalType = (): FormationLegalType => {
   return randomElementFromArray(allFormationLegalTypes as unknown as FormationLegalType[]);
 };
 
-export const randomPublicFilingLegalType = (filter?: (legalType: PublicFilingLegalType) => boolean) => {
+export const randomPublicFilingLegalType = (
+  filter?: (legalType: PublicFilingLegalType) => boolean
+): PublicFilingLegalType => {
   return randomElementFromArray(
     (publicFilingLegalTypes as unknown as PublicFilingLegalType[]).filter((value) =>
       filter ? filter(value) : true
