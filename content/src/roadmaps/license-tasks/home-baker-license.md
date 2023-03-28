@@ -4,6 +4,7 @@ urlSlug: home-baker-license
 name: Apply for a Cottage Food Operator Permit
 webflowName: "Home Baker: Cottage Food Operator Permit"
 issuingAgency: New Jersey Department of Health
+formName: CFO-1
 industryId: home-baker
 callToActionText: Apply for Your Permit
 callToActionLink: https://www.nj.gov/health/ceohs/phfpp/retailfood/cottagefood.shtml
