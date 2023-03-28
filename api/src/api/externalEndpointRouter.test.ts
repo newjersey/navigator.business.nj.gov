@@ -18,7 +18,8 @@ jest.mock("jsonwebtoken", () => {
 });
 const mockJwt = jwt as jest.Mocked<typeof jwt>;
 
-const cognitoPayload = ({ id }: { id: string }) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const cognitoPayload = ({ id }: { id: string }): any => {
   return {
     sub: "some-sub",
     "custom:myNJUserKey": undefined,

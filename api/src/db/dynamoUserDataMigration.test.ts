@@ -29,7 +29,7 @@ const dbConfig = {
   tableName: "users-table-test",
 };
 
-const makeParams = (data: any) => {
+const makeParams = (data: any): { TableName: string; Item: any } => {
   return {
     TableName: dbConfig.tableName,
     Item: {
@@ -158,7 +158,7 @@ describe("DynamoUserDataClient Migrations", () => {
     });
   });
 
-  const insertOldData = async () => {
+  const insertOldData = async (): Promise<void> => {
     await client.send(new PutCommand(makeParams(v0Data)));
     await client.send(new PutCommand(makeParams(v1Data)));
     await client.send(new PutCommand(makeParams(v2Data)));

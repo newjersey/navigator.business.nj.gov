@@ -1,7 +1,7 @@
 /* eslint-disable unicorn/consistent-function-scoping */
 
 import { formationTaskId, taxTaskId } from "@shared/domain-logic/taskIds";
-import { TaskProgress } from "@shared/userData";
+import { TaskProgress, UserData } from "@shared/userData";
 import { generatePreferences, generateProfileData, generateUserData } from "../../../test/factories";
 import { updateOperatingPhase } from "./updateOperatingPhase";
 
@@ -178,7 +178,7 @@ describe("updateOperatingPhase", () => {
 
   describe("UP_AND_RUNNING", () => {
     describe("public filing legal structure", () => {
-      const getUserData = (taskProgress: Record<string, TaskProgress>) => {
+      const getUserData = (taskProgress: Record<string, TaskProgress>): UserData => {
         return generateUserData({
           profileData: generateProfileData({
             businessPersona: "STARTING",
@@ -218,7 +218,7 @@ describe("updateOperatingPhase", () => {
     });
 
     describe("trade name legal structure", () => {
-      const getUserData = (taskProgress: Record<string, TaskProgress>) => {
+      const getUserData = (taskProgress: Record<string, TaskProgress>): UserData => {
         return generateUserData({
           profileData: generateProfileData({
             businessPersona: "STARTING",

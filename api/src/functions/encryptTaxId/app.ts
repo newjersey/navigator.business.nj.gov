@@ -5,7 +5,7 @@ import { dynamoDbTranslateConfig, DynamoUserDataClient } from "src/db/DynamoUser
 import { encryptTaxIdBatch } from "src/domain/user/encryptTaxIdBatch";
 import { encryptTaxIdFactory } from "src/domain/user/encryptTaxIdFactory";
 
-export default async function handler() {
+export default async function handler(): Promise<void> {
   const IS_OFFLINE = process.env.IS_OFFLINE === "true" || false; // set by serverless-offline
   const IS_DOCKER = process.env.IS_DOCKER === "true" || false; // set in docker-compose
   const USERS_TABLE = process.env.USERS_TABLE || "users-table-local";

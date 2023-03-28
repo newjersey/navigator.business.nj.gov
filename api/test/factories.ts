@@ -56,7 +56,7 @@ export const generateUser = (overrides: Partial<BusinessUser>): BusinessUser => 
   };
 };
 
-export const generateTaxFilingDates = (numberOfDates: number) => {
+export const generateTaxFilingDates = (numberOfDates: number): string[] => {
   const dateToShortISO = (date: Date): string => {
     return date.toISOString().split("T")[0];
   };

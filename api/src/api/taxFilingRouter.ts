@@ -7,7 +7,7 @@ const getTaxId = async (
   encryptionDecryptionClient: EncryptionDecryptionClient,
   taxId: string,
   encryptedTaxId: string | undefined
-) => {
+): Promise<string> => {
   if (taxId.includes(maskingCharacter)) {
     if (encryptedTaxId) {
       return await encryptionDecryptionClient.decryptValue(encryptedTaxId);

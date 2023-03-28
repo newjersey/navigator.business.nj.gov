@@ -1,6 +1,6 @@
 import { UserData } from "@shared/userData";
 import { Express } from "express";
-import request from "supertest";
+import request, { Response } from "supertest";
 import { generateSelfRegResponse, generateUser, generateUserData } from "../../test/factories";
 import { generateHashedKey } from "../../test/helpers";
 import { SelfRegClient, UserDataClient } from "../domain/types";
@@ -38,7 +38,7 @@ describe("selfRegRouter", () => {
     });
   });
 
-  const sendRequest = async (userData: UserData) => {
+  const sendRequest = async (userData: UserData): Promise<Response> => {
     return request(app).post(`/self-reg`).send(userData);
   };
 

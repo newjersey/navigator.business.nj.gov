@@ -1,7 +1,7 @@
 import { TaxFiling } from "@shared/taxFiling";
 import { TaxFilingResult, TaxIdentifierToIdsRecord } from "src/domain/types";
 
-export const slugifyTaxId = (id: string) => {
+export const slugifyTaxId = (id: string): string => {
   return id.trim().replaceAll(" ", "").replaceAll("/", "_").toLowerCase();
 };
 
@@ -42,6 +42,6 @@ export const flattenDeDupAndConvertTaxFilings = (
   return arrayOfTaxFilingArrays.flat();
 };
 
-export const dateToShortISO = (date: string) => {
+export const dateToShortISO = (date: string): string => {
   return new Date(date).toISOString().split("T")[0];
 };

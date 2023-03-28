@@ -69,13 +69,13 @@ app.get("/api/cms/callback", async (req, res) => {
 
 export const handler = serverless(app);
 
-function randomState() {
+function randomState(): string {
   return randomBytes(6).toString("hex");
 }
 
 /** Render a html response with a script to finish a client-side github authentication */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function renderResponse(status: "success" | "error", content: any) {
+function renderResponse(status: "success" | "error", content: any): string {
   return dedent`
     <!DOCTYPE html>
     <html lang="en">

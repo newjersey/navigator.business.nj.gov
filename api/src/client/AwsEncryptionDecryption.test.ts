@@ -70,21 +70,21 @@ jest.mock("@aws-crypto/client-node", (): MockAWSCryptoType => {
     optionsCalledWith: "",
     contextCalledWith: undefined,
     CommitmentPolicy: { REQUIRE_ENCRYPT_REQUIRE_DECRYPT: "REQUIRE_ENCRYPT_REQUIRE_DECRYPT" },
-    buildClient: function MockBuildClient(options: string) {
+    buildClient: function MockBuildClient(options: string): any {
       this.optionsCalledWith = options;
       // eslint-disable-next-line unicorn/consistent-function-scoping
-      const encrypt = (cmm: string, plaintext: string, op?: AWSMockContext) => {
+      const encrypt = (cmm: string, plaintext: string, op?: AWSMockContext): any => {
         this.encryptValueCalledWith = plaintext;
         this.contextCalledWith = { ...op };
-        return Promise.resolve(plaintext).then(() => {
+        return Promise.resolve(plaintext).then((): any => {
           return { result: plaintext, messeageHeader: "message-header" };
         });
       };
       // eslint-disable-next-line unicorn/consistent-function-scoping
-      const decrypt = (keyring: AWSCrypto.KeyringNode, value: string) => {
+      const decrypt = (keyring: AWSCrypto.KeyringNode, value: string): any => {
         const encoder = new TextEncoder();
         this.decryptValueCalledWith = value;
-        return Promise.resolve(value).then(() => {
+        return Promise.resolve(value).then((): any => {
           return {
             plaintext: encoder.encode("decrypted-value"),
             messageHeader: {
@@ -99,16 +99,16 @@ jest.mock("@aws-crypto/client-node", (): MockAWSCryptoType => {
       };
       return { encrypt, decrypt };
     },
-    KmsKeyringNode: function MockKeyRingNode() {},
+    KmsKeyringNode: function MockKeyRingNode(): any {},
   };
 });
 
 jest.mock("@aws-sdk/util-base64-node", (): MockAWSBase64 => {
   return {
-    fromBase64: function mockFromBase64(value: string) {
+    fromBase64: function mockFromBase64(value: string): string {
       return value;
     },
-    toBase64: function mockToBase64(value: string) {
+    toBase64: function mockToBase64(value: string): string {
       return value;
     },
   };
