@@ -2,7 +2,7 @@
 filename: architect-license
 urlSlug: architect-license
 name: Apply for an Architect License
-webflowName: "Architect: Architect License"
+webflowName: "Architecture: Architect License"
 issuingAgency: New Jersey Division of Consumer Affairs Board of Architects
 industryId: architecture
 callToActionText: Apply for My Architect License
