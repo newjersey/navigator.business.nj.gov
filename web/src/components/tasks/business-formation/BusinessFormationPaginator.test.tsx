@@ -557,6 +557,122 @@ describe("<BusinessFormationPaginator />", () => {
       });
 
       describe("on known API error", () => {
+        describe("business name", () => {
+          const businessName: MockApiErrorTestData = {
+            formationFormData: generateFormationFormData(
+              { businessName: "1111111" },
+              { legalStructureId: "limited-liability-company" }
+            ),
+            formationResponse: generateFormationSubmitResponse({
+              success: false,
+              errors: [
+                generateFormationSubmitError({
+                  field: "Business Information - Business Name",
+                  message: "very bad input",
+                  type: "RESPONSE",
+                }),
+              ],
+            }),
+            fieldName: "businessName",
+            formationStepName: "Name",
+            fieldLabel: "Search business name",
+            newTextInput: "1234567",
+          };
+
+          it("shows error alert and error state on step associated with businessName API error", async () => {
+            const { formationFormData, formationResponse, formationStepName } = businessName;
+
+            filledInUserData = {
+              ...initialUserData,
+              formationData: {
+                ...initialUserData.formationData,
+                formationFormData: formationFormData,
+              },
+            };
+
+            const filledInUserDataWithApiResponse = {
+              ...filledInUserData,
+              formationData: {
+                ...filledInUserData.formationData,
+                formationResponse,
+              },
+            };
+
+            const page = preparePage(filledInUserData, displayContent);
+            await page.fillAndSubmitBusinessNameStep();
+            expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual("COMPLETE");
+
+            await page.stepperClickToReviewStep();
+            await page.clickSubmitAndGetError(filledInUserDataWithApiResponse);
+            expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual("ERROR");
+            expect(screen.getByText(Config.formation.errorBanner.incompleteStepsError)).toBeInTheDocument();
+          });
+
+          it("shows API error message on step for businessName API error", async () => {
+            const { formationFormData, formationResponse, fieldName } = businessName;
+            filledInUserData = {
+              ...initialUserData,
+              formationData: {
+                ...initialUserData.formationData,
+                formationFormData,
+              },
+            };
+
+            const filledInUserDataWithApiResponse = {
+              ...filledInUserData,
+              formationData: {
+                ...filledInUserData.formationData,
+                formationResponse,
+              },
+            };
+            const page = preparePage(filledInUserData, displayContent);
+            await page.fillAndSubmitBusinessNameStep();
+            await page.stepperClickToReviewStep();
+            await page.clickSubmitAndGetError(filledInUserDataWithApiResponse);
+            await page.stepperClickToBusinessNameStep();
+
+            expect(screen.getByRole("alert")).toHaveTextContent(Config.formation.errorBanner.errorOnStep);
+            expect(screen.getByRole("alert")).toHaveTextContent(
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              (Config.formation.fields as any)[fieldName as string].label
+            );
+            expect(screen.getByRole("alert")).toHaveTextContent("very bad input");
+          });
+
+          it("removes businessName API error on blur when user changes text field", async () => {
+            const { formationFormData, formationResponse, formationStepName, fieldLabel, newTextInput } =
+              businessName;
+            filledInUserData = {
+              ...initialUserData,
+              formationData: {
+                ...initialUserData.formationData,
+                formationFormData,
+              },
+            };
+            const filledInUserDataWithApiResponse = {
+              ...filledInUserData,
+              formationData: {
+                ...filledInUserData.formationData,
+                formationResponse,
+              },
+            };
+            const page = preparePage(filledInUserData, displayContent);
+            await page.fillAndSubmitBusinessNameStep();
+            await page.stepperClickToReviewStep();
+            await page.clickSubmitAndGetError(filledInUserDataWithApiResponse);
+            await page.stepperClickToBusinessNameStep();
+
+            expect(screen.getByRole("alert")).toBeInTheDocument();
+            page.fillText(fieldLabel as string as string, newTextInput as string);
+            await page.searchBusinessName({ status: "AVAILABLE" });
+            expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+            expect(screen.queryByText(Config.formation.errorBanner.errorOnStep)).not.toBeInTheDocument();
+            expect(page.getStepStateInStepper(LookupStepIndexByName(formationStepName))).toEqual(
+              "COMPLETE-ACTIVE"
+            );
+          });
+        });
+
         describe("starting business persona", () => {
           const businessTotalStock: MockApiErrorJestArray = [
             "businessTotalStock",

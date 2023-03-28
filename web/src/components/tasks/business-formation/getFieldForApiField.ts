@@ -36,6 +36,7 @@ const fieldToApiFieldMapping: Record<string, string> = {
   makeDistributionTerms: "Limited Partnership - Limited Can Make Distribution Terms",
   withdrawals: "Limited Partnership - General Partner Withdrawal",
   dissolution: "Limited Partnership - Dissolution Plan",
+  businessName: "Business Information - Business Name",
 };
 
 const apiFieldToFieldMapping = invert(fieldToApiFieldMapping);
