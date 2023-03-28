@@ -8,7 +8,7 @@ export default {
   component: Accordion,
   decorators: [
     (Story) => (
-      <div className="width-mobile-lg">
+      <div className="maxw-mobile-lg">
         <Story />
       </div>
     ),
