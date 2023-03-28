@@ -152,6 +152,7 @@ export type FormationPageHelpers = {
   submitContactsStep: (completed?: boolean) => Promise<void>;
   submitBillingStep: () => Promise<void>;
   submitReviewStep: () => Promise<void>;
+  clickSubmitAndGetError: (userData: UserData) => Promise<void>;
   stepperClickToBusinessNameStep: () => Promise<void>;
   stepperClickToNexusBusinessNameStep: () => Promise<void>;
   stepperClickToBusinessStep: () => Promise<void>;
@@ -304,6 +305,15 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     });
   };
 
+  const clickSubmitAndGetError = async (userData: UserData): Promise<void> => {
+    const returnedPromise = Promise.resolve(userData);
+    mockApi.postBusinessFormation.mockReturnValue(returnedPromise);
+    fireEvent.click(screen.getByText(Config.formation.general.submitButtonText));
+    await act(async () => {
+      await returnedPromise.then();
+    });
+  };
+
   const searchBusinessName = async (nameAvailability: Partial<NameAvailability>): Promise<void> => {
     const returnedPromise = Promise.resolve(generateNameAvailability(nameAvailability));
     mockApi.searchBusinessName.mockReturnValue(returnedPromise);
@@ -453,6 +463,7 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     fillAddressModal,
     fillAndSubmitAddressModal,
     clickSubmit,
+    clickSubmitAndGetError,
     selectDate,
     stepperClickToBusinessNameStep,
     getInputElementByTestId,
