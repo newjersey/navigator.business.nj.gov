@@ -21,13 +21,13 @@ New shops, relocated shops, or shops that have transferred ownership are require
 
 ### Application Requirements
 
-* A business address
-* Scheduled an opening date
-* Received an inspection
-* A Fire Prevention Permit
-* A license numbers of all practitioners
-* A certificate of occupancy or approval
-* A floor plan
+* \[]{general-business-address} Have a business address
+* \[]{cosmo-open-date} Schedule an opening date
+* \[]{cosmo-inspection-date} Receive an inspection
+* \[]{general-fire-prevention-permit} Have a Fire Prevention Permit
+* \[]{cosmo-practitioners-license} Have license numbers of all practitioners
+* \[]{general-cert-occupancy} Have a certificate of occupancy or approval
+* \[]{cosmo-floor-plan} Have a floor plan
 
 > **Once completed, you will have:**
 >
