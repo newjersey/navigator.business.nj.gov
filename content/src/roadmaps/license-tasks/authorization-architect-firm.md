@@ -1,28 +1,31 @@
 ---
-urlSlug: authorization-firm
 filename: authorization-architect-firm
-name: Obtain a Certificate of Authorization for Your Firm
-id: authorization-architect-firm
-callToActionLink: https://www.njconsumeraffairs.gov/arch/Pages/applications.aspx
-callToActionText: Obtain My Certificate of Authorization
+urlSlug: authorization-firm
+name: Get a Certificate of Authorization for Your Firm
+webflowName: "Architecture: Certificate of Authorization for Your Firm"
 issuingAgency: New Jersey Division of Consumer Affairs Board of Architects
-webflowName: "Architect (Business)"
-licenseCertificationClassification: "LICENSE"
-webflowIndustry: "Architect"
-divisionPhone: "(973) 504-6385"
-webflowId: "5f772971eb55580500feb5a2"
+industryId: architecture
+callToActionText: Get My Certificate of Authorization
+callToActionLink: https://www.njconsumeraffairs.gov/arch/Pages/applications.aspx
+webflowIndustry: Architect
+licenseCertificationClassification: LICENSE
+divisionPhone: (973) 504-6385
+id: authorization-architect-firm
+webflowId: 5f772971eb55580500feb5a2
 ---
 
-New architecture firms must obtain a Certificate of Authorization prior to operating.
+You need a Certificate of Authorization to open an architecture firm.
 
 ---
 
 ### Eligibility Criteria
 
-- The firm must be the Sole Proprietorship of a licensed architect, or
-- A General Partnership of licensed architects, or
-- A General Partnership of closely `allied professionals|allied-professionals` including at least one licensed architect, or
-- A Corporation
+To be eligible, your firm must be one of the following business types:
+
+- Firm that is the Sole Proprietorship of a licensed architect
+- General Partnership of licensed architects
+- General Partnership of closely `allied professionals|allied-professionals` including at least one licensed architect
+- Corporation
 
 ### Application Requirements
 
@@ -33,12 +36,12 @@ New architecture firms must obtain a Certificate of Authorization prior to opera
 - Name, license number, and address of every `Responsible Charge|responsible-charge`
 - Name, address, and license number of every officer, director, manager, and stockholder in your firm
 - Number of shares issued (if the firm is a Corporation)
-- Pay any associated fees
+- Payment made for any associated fees
 
 :::infoAlert
-The application will require signatures from every officer, director, manager, and stockholder in your firm, Responsible Charge, and the CEO.
+The application requires signatures from every officer, director, manager, and stockholder in your firm, Responsible Charge, and the CEO.
 :::
 
 > **Once approved, you will have:**
 >
-> - You will receive a notice in the mail with your Certificate of Authorization number
+> - A Certificate of Authorization
