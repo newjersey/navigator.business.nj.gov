@@ -49,13 +49,9 @@ export const OnboardingLegalStructureDropdown = <T,>(props: Props<T>): ReactElem
     return (
       <div className="padding-top-1 padding-bottom-1">
         {state.profileData.legalStructureId === legalStructureId ? (
-          <MenuOptionSelected secondaryText={LookupLegalStructureById(legalStructureId).name}>
-            {LookupLegalStructureById(legalStructureId).name}
-          </MenuOptionSelected>
+          <MenuOptionSelected>{LookupLegalStructureById(legalStructureId).name}</MenuOptionSelected>
         ) : (
-          <MenuOptionUnselected secondaryText={LookupLegalStructureById(legalStructureId).name}>
-            {LookupLegalStructureById(legalStructureId).name}
-          </MenuOptionUnselected>
+          <MenuOptionUnselected>{LookupLegalStructureById(legalStructureId).name}</MenuOptionUnselected>
         )}
       </div>
     );
