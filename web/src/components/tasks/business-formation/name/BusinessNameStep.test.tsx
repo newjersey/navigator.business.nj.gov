@@ -85,6 +85,27 @@ describe("Formation - BusinessNameStep", () => {
     );
   });
 
+  it("displays the confirm availability inline error when user blurs without searching", () => {
+    const page = getPageHelper();
+    page.fillText("Search business name", "First Name");
+    page.fillAndBlurBusinessName();
+    expect(
+      screen.getByText(Config.formation.fields.businessName.errorInlineNeedsToSearch)
+    ).toBeInTheDocument();
+  });
+
+  it("displays the confirm availability inline error when user types in a new name after finding an available one", async () => {
+    const page = getPageHelper();
+
+    page.fillText("Search business name", "First Name");
+    await page.searchBusinessName({ status: "AVAILABLE" });
+    expect(screen.getByTestId("available-text")).toBeInTheDocument();
+    await page.fillAndBlurBusinessName("New Name");
+    expect(
+      screen.getByText(Config.formation.fields.businessName.errorInlineNeedsToSearch)
+    ).toBeInTheDocument();
+  });
+
   it("does not display available alert if user types in new name after finding an available one", async () => {
     const page = getPageHelper();
 

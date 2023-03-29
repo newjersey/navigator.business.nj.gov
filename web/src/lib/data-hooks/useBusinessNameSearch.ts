@@ -34,15 +34,20 @@ export const useBusinessNameSearch = ({
   const [error, setError] = useState<SearchBusinessNameError | undefined>(undefined);
   const [updateButtonClicked, setUpdateButtonClicked] = useState<boolean>(false);
 
+  const businessNameHasBeenSearched = (): boolean => {
+    return userData?.formationData.businessNameAvailability !== undefined;
+  };
+
+  const businessNameIsNotAvailable = (): boolean => {
+    return userData?.formationData.businessNameAvailability?.status !== "AVAILABLE";
+  };
+
   useMountEffectWhenDefined(() => {
     if (!userData) {
       return;
     }
     setCurrentName(isDba ? userData.profileData.nexusDbaName || "" : userData.profileData.businessName);
-    if (
-      userData.formationData.businessNameAvailability?.status !== "AVAILABLE" &&
-      userData.formationData.businessNameAvailability?.status !== undefined
-    ) {
+    if (businessNameIsNotAvailable() && businessNameHasBeenSearched()) {
       setFieldsInteracted(["businessName"]);
     }
   }, userData);
