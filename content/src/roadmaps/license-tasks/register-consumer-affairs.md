@@ -1,5 +1,6 @@
 ---
-urlSlug: register-consumer-affairs
+filename: home-improvement-contractor-license
+urlSlug: hic-license
 name: Obtain Your Home Improvement Contractor Registration
 webflowName: "Home Contractor: Home Improvement Contractor Registration"
 industryIntegration: New Jersey Division of Consumer Affairs
