@@ -1,18 +1,22 @@
 ---
 filename: nj-covest-fund
-urlSlug: nj-covest-fund
 name: NJ CoVest Fund
+urlSlug: nj-covest-fund
 id: nj-covest-fund
+openDate: ""
+dueDate: ""
+descriptionMd: The NJ CoVest Fund provides seed funding to New Jersey technology
+  and life science companies to help bridge the funding gap between product
+  development and commercialization.
 callToActionLink: https://www.njeda.com/njcovestfund/
 callToActionText: Learn more
 fundingType: loan
+programFrequency: ongoing
+status: rolling application
 programPurpose: In State
 agency:
   - NJEDA
 agencyContact: ""
-publishStageArchive: ""
-status: rolling application
-programFrequency: ongoing
 businessStage: early-stage
 employeesRequired: yes
 homeBased: no
@@ -23,9 +27,7 @@ county:
 sector:
   - technology
   - life-sciences
-openDate: ""
-dueDate: ""
-descriptionMd: The NJ CoVest Fund provides seed funding to New Jersey technology and life science companies to help bridge the funding gap between product development and commercialization.
+publishStageArchive: Do Not Publish
 ---
 
 The NJ CoVest Fund provides seed funding to New Jersey technology and life science companies to help bridge the funding gap between product development and commercialization.
