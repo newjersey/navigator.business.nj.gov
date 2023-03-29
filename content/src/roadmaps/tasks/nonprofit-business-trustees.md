@@ -9,7 +9,7 @@ issuingAgency: ""
 formName: ""
 ---
 
-Now that you've written your bylaws and defined board of trustees roles, it's time to appoint trustees to take on those roles and responsibilities. This is a critical step to ensure your organization is governed with the leadership and expertise to succeed.
+Now that you've written your bylaws and defined `board of trustees|board-trustees` roles, it's time to appoint trustees to take on those roles and responsibilities. This is a critical step to ensure your organization is governed with the leadership and expertise to succeed.
 
 At a minimum, a board of trustees typically includes a Chair, Vice Chair, and Treasurer, but it often includes more. For example, you may want to appoint board members with expertise in law, accounting, fundraising, politics, technology, communication—as well as those who understand your mission and have experience running a nonprofit.
 
