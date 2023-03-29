@@ -161,6 +161,7 @@ export type FormationPageHelpers = {
   stepperClickToReviewStep: () => Promise<void>;
   getStepStateInStepper: (index: number | undefined) => string;
   searchBusinessName: (nameAvailability: Partial<NameAvailability>) => Promise<void>;
+  fillAndBlurBusinessName: (businessName?: string) => Promise<void>;
   searchBusinessNameAndGetError: (errorCode?: number) => Promise<void>;
   chooseRadio: (value: string) => void;
   getInputElementByLabel: (label: string) => HTMLInputElement;
@@ -199,6 +200,11 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     await waitFor(() => {
       expect(screen.queryByTestId("business-step")).toBeInTheDocument();
     });
+  };
+
+  const fillAndBlurBusinessName = async (businessName = "Default Test Name"): Promise<void> => {
+    fillText("Search business name", businessName);
+    fireEvent.blur(screen.getByLabelText("Search business name"));
   };
 
   const submitNexusBusinessNameStep = async (): Promise<void> => {
@@ -438,6 +444,7 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
   return {
     fillText,
     fillAndSubmitBusinessNameStep,
+    fillAndBlurBusinessName,
     submitBusinessNameStep,
     submitBusinessStep,
     submitContactsStep,

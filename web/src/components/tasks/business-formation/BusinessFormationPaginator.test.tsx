@@ -221,7 +221,7 @@ describe("<BusinessFormationPaginator />", () => {
       expect(page.getStepStateInStepper(LookupStepIndexByName("Name"))).toEqual("ERROR");
     });
 
-    it("maintains business name search error, even after switching steps and returning", async () => {
+    it("maintains the unavailable business name search error, even after switching steps and returning", async () => {
       const page = preparePage(initialUserData, displayContent);
       page.fillText("Search business name", "Pizza Joint");
       await page.searchBusinessName({ status: "UNAVAILABLE" });
@@ -231,6 +231,19 @@ describe("<BusinessFormationPaginator />", () => {
       await page.stepperClickToBusinessNameStep();
       expect(screen.getByTestId("unavailable-text")).toBeInTheDocument();
       expect(page.getStepStateInStepper(LookupStepIndexByName("Name"))).toEqual("ERROR-ACTIVE");
+    });
+
+    it("maintains the confirm business name error, even after switching steps and returning", async () => {
+      const page = preparePage(initialUserData, displayContent);
+      await page.fillAndBlurBusinessName("Pizza Joint");
+      expect(
+        screen.getByText(Config.formation.fields.businessName.errorInlineNeedsToSearch)
+      ).toBeInTheDocument();
+      await page.stepperClickToBusinessStep();
+      await page.stepperClickToBusinessNameStep();
+      expect(
+        screen.getByText(Config.formation.fields.businessName.errorInlineNeedsToSearch)
+      ).toBeInTheDocument();
     });
 
     const switchingStepTests = (switchStepFunction: () => void) => {

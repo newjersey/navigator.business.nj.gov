@@ -129,7 +129,7 @@ export const getErrorStateForField = (
     let label = errorState.label;
     if (!exists) {
       label = Config.formation.fields.businessName.errorInlineEmpty;
-    } else if (businessNameAvailability === undefined) {
+    } else if (businessNameAvailability?.status === undefined) {
       label = Config.formation.fields.businessName.errorInlineNeedsToSearch;
     } else if (businessNameAvailability?.status !== "AVAILABLE") {
       label = Config.formation.fields.businessName.errorInlineUnavailable;
