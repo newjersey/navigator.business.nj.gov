@@ -1,7 +1,7 @@
 ---
 filename: authorization-architect-firm
 urlSlug: authorization-firm
-name: Get a Certificate of Authorization for Your Firm
+name: Apply for a Certificate of Authorization for Your Firm
 webflowName: "Architecture: Certificate of Authorization for Your Firm"
 issuingAgency: New Jersey Division of Consumer Affairs Board of Architects
 industryId: architecture
