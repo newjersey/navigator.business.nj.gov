@@ -1,19 +1,20 @@
 ---
-id: "electrical-business-license"
-webflowId: "64147a423f00fb5d34f2739e"
-urlSlug: "electrical-business-license"
-name: "Get an Electrical Contracting Business Permit"
-webflowName: "Electrical Contracting Business Permit"
-filename: "electrical-business-license"
-callToActionLink: "https://www.njconsumeraffairs.gov/elec/Applications/Application-for-an-Initial-Business-Permit.pdf"
-callToActionText: "Apply for Your Business Permit"
-issuingAgency: "New Jersey Division of Consumer Affairs Board of Electrical Contractors"
-licenseCertificationClassification: "PERMIT"
+filename: electrical-business-license
+urlSlug: electrical-business-license
+name: Get an Electrical Contracting Business Permit
+webflowName: "Electrical Contractor: Business Permit"
+issuingAgency: New Jersey Division of Consumer Affairs Board of Electrical Contractors
+industryId: electrical-contractor
+callToActionText: Apply for Your Business Permit
+callToActionLink: https://www.njconsumeraffairs.gov/elec/Applications/Application-for-an-Initial-Business-Permit.pdf
+id: electrical-business-license
+webflowId: 64147a423f00fb5d34f2739e
+licenseCertificationClassification: PERMIT
 ---
 
-Your business needs a permit before you can legally offer electrical contracting services.
+You need a business permit to operate an electrical contracting business.
 
-Business applications are reviewed on a monthly basis. Your application must be received 10 days prior to the monthly meeting date to be reviewed on the current month. [See the meeting schedule](https://www.njconsumeraffairs.gov/elec/Pages/meetings.aspx) to help you plan the timing of your application.
+Business applications are reviewed monthly. Your application must be received ten days prior to the [Board of Examiners of Electrical Contractors monthly meeting](https://www.njconsumeraffairs.gov/elec/Pages/meetings.aspx) to be reviewed during the current month. 
 
 ---
 
@@ -24,13 +25,13 @@ Business applications are reviewed on a monthly basis. Your application must be 
 - `Surety bond|surety-bond` for $1000
 - Certificate of general liability insurance for a minimum of $300,000
 - Licensed electrician name and signature
-- Name and address of all the business owners
-- Names of all the business officers and anyone who owns 10% or more of stock in the business
+- Name and address for all the business owners
+- List of all the names of business officers and anyone who owns 10% or more of stock in the business
 
 :::infoAlert
-The application will need to be notarized.
+The application needs to be notarized.
 :::
 
 > **Once completed, you will have:**
 >
-> - A business permit for your electrical contracting business
+> - An electrical contracting business permit
