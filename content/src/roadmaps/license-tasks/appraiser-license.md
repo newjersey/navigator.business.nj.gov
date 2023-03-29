@@ -2,7 +2,7 @@
 filename: appraiser-license
 urlSlug: appraiser-license
 name: Apply for an Appraiser License
-webflowName: "Real Estate Appraiser: ​License for a Real Estate Appraiser"
+webflowName: "Real Estate Appraiser: Real Estate Appraiser License"
 issuingAgency: New Jersey Division of Consumer Affairs Real Estate Appraiser Board
 industryId: real-estate-appraisals
 callToActionText: "Apply ​for My Appraiser License "
