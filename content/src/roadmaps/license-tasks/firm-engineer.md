@@ -1,7 +1,7 @@
 ---
 filename: firm-engineer
 urlSlug: firm-engineer
-name: Get a Certificate of Authorization for Your Firm
+name: Apply for a Certificate of Authorization for Your Firm
 webflowName: "Engineering: Certificate of Authorization for Your Firm"
 issuingAgency: New Jersey Division of Consumer Affairs Board of Professional
   Engineers and Land Surveyors
