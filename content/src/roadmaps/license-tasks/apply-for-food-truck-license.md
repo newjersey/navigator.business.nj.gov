@@ -5,7 +5,7 @@ name: Apply for a Food Truck License
 webflowName: "Food Truck: License to Operate a Food Truck"
 localLevelTask: Local Department of Health
 industryId: food-truck
-callToActionText: Contact Your Area’s Board of Health
+callToActionText: Contact My Area’s Board of Health
 callToActionLink: https://www.nj.gov/health/lh/documents/LocalHealthDirectory.pdf
 id: apply-for-food-truck-license
 webflowId: 64120ab148da55fdb9c3b1c4
