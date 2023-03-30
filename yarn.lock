@@ -4866,7 +4866,7 @@ __metadata:
     require-from-string: 2.0.2
     rimraf: 4.4.1
     sass: 1.60.0
-    sass-loader: 13.2.1
+    sass-loader: 13.2.2
     semantic-release: 19.0.5
     serverless: 3.29.0
     serverless-dynamodb-local: 0.2.40
@@ -5056,7 +5056,7 @@ __metadata:
     require-from-string: 2.0.2
     rimraf: 4.4.1
     sass: 1.60.0
-    sass-loader: 13.2.1
+    sass-loader: 13.2.2
     slick-carousel: ^1.8.1
     storybook-addon-pseudo-states: 1.15.5
     style-loader: 3.3.2
@@ -31324,9 +31324,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass-loader@npm:13.2.1":
-  version: 13.2.1
-  resolution: "sass-loader@npm:13.2.1"
+"sass-loader@npm:13.2.2":
+  version: 13.2.2
+  resolution: "sass-loader@npm:13.2.2"
   dependencies:
     klona: ^2.0.6
     neo-async: ^2.6.2
@@ -31345,7 +31345,7 @@ __metadata:
       optional: true
     sass-embedded:
       optional: true
-  checksum: 5823b5f19d8efefeae6935027f4d5ba29bcd64998692e3ae7ef6684ddf5ef754daf98cdea10ebb61052045486cb62e0e07cc8cc999a52872b0d4da3274ecd493
+  checksum: 0368e4eaa4e2109bb6c6b6bc7dbfb9d8e412a0ab965f98672d336e84bd103575a1551cfe98395f20335b350f2a94e67f7c816cc8e3f4ab85147a1c1221e22fd8
   languageName: node
   linkType: hard
 
