@@ -22,7 +22,7 @@ You need a certification to appraise real estate with one to four residential un
 * Be 21 years old at a minimum
 * Have a bachelor’s degree from an accredited university
 * Have an appraiser’s license
-* Complete 200 hours in an Appraiser Qualification Board-approved program
+* Complete 200 hours in an appraiser qualification board-approved program
 * Complete 1,500 hours of relevant work experience in no less than 12 months
 
 ### Application Requirements
