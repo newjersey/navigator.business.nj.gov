@@ -1,8 +1,8 @@
 ---
-filename: register-firm-accounting
-urlSlug: register-firm-accounting
-name: Apply for a Certified Public Accounting License
-webflowName: "Accountant: Certified Public Accounting License"
+filename: certified-accountant-license
+urlSlug: CPA-license
+name: Apply for a Certified Public Accountant License
+webflowName: "Accountant: Certified Public Accountant License"
 industryIntegration: New Jersey Division of Consumer Affairs
 issuingAgency: New Jersey Division of Consumer Affairs Board of Accountancy
 industryId: certified-public-accountant
@@ -14,7 +14,7 @@ divisionPhone: (973) 504-6380
 id: register-firm-accounting
 webflowId: 5f77296ee10dec7593024f1c
 ---
-You or any staff providing accounting services must be licensed as a certified public accountant.
+You or any staff providing accounting services must be licensed as a certified public accountant (CPA).
 
 - - -
 
@@ -22,8 +22,8 @@ You or any staff providing accounting services must be licensed as a certified p
 
 * At least 150 credit hours (24 semester credits in accounting courses and 24 semester credits in business courses)
 * 1 year of full-time public accounting experience under the supervision of an active CPA
-* Passing scores on the Uniform CPA Exam
+* A passing score on the Uniform CPA Exam
 
 > **Once completed, you will have:**
 >
-> * A certified public accountant license number
+> * A CPA license number
