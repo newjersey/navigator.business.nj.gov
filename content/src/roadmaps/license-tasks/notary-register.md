@@ -1,8 +1,8 @@
 ---
-filename: notary-register
-urlSlug: notary-register
+filename: notary-certificate
+urlSlug: notary-certificate
 name: Register as a Notary Public
-webflowName: "Notary Public: Notary Public Registration"
+webflowName: "Notary Public: Notary Public Certificate"
 industryIntegration: New Jersey Department of Revenue and Enterprise Services
 issuingAgency: New Jersey Department of Treasury
 industryId: notary-public
