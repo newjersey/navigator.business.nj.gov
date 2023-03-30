@@ -1,10 +1,11 @@
 ---
-urlSlug: town-mercantile-license
+urlSlug: mercantile-liquor-license
 name: Get Your Liquor and Mercantile License
 id: check-local-requirements
 callToActionLink: ""
 callToActionText: ""
 requiresLocation: true
+filename: mercantile-liquor-license
 ---
 You will need to obtain a local liquor license if your business will sell alcohol.
 
