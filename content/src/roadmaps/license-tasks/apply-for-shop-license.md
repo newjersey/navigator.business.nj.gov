@@ -24,7 +24,7 @@ New shops, relocated shops, or shops that have transferred ownership are require
 
 * \[]{general-business-address} Business address
 * \[]{cosmo-open-date} Opening date
-* \[]{general-fire-prevention-permit} Fire Prevention Permit
+* \[]{general-fire-prevention-permit} Fire prevention permit
 * \[]{cosmo-practitioners-license} License number for all practitioners 
 * \[]{general-cert-occupancy} Certificate of occupancy or approval
 * \[]{cosmo-floor-plan}  Floor plan
