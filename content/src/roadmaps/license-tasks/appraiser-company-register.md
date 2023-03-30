@@ -1,7 +1,7 @@
 ---
 filename: appraiser-company-registration
 urlSlug: appraiser-company-registration
-name: Register an Appraisal Management Company
+name: Register Your Appraisal Management Company
 webflowName: "Real Estate Appraisal: Management Company Registration"
 industryIntegration: New Jersey Division of Consumer Affairs
 issuingAgency: New Jersey Division of Consumer Affairs Real Estate Appraiser Board
@@ -28,7 +28,7 @@ To be eligible, you must meet one or more of the following criteria:
 
 * A fully completed application by the management company’s `compliance officer|compliance-officer` 
 * The name, contact information, and license number of the compliance officer
-*   The name and contact information for each `controlling person|controlling-person` 
+* The name and contact information for each `controlling person|controlling-person` 
 * A `surety bond|surety-bond` in the amount of $25,000
 * Applicable fees paid
 
