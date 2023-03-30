@@ -21,9 +21,9 @@ You or any staff providing notary services must be registered as a notary public
 
 ### Eligibility Criteria
 
-* Resident of New Jersey or regularly employed in New Jersey
-* 18 years or older
-* No convictions involving dishonesty, or a crime of first or second degree under the laws of any State or the Federal Government
+* Be a resident of New Jersey or regularly employed in New Jersey
+* Be 18 years or older
+* Have no convictions involving dishonesty, or a crime of first or second degree under the laws of any State or the Federal Government
 
 ### Application Requirements
 
