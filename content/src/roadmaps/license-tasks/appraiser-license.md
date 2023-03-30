@@ -1,7 +1,7 @@
 ---
 filename: real-estate-appraiser-license
 urlSlug: appraiser-license
-name: Apply for an Appraiser License
+name: Apply for Your Appraiser License
 webflowName: "Real Estate Appraisal: Real Estate Appraiser License"
 industryIntegration: New Jersey Division of Consumer Affairs
 issuingAgency: New Jersey Division of Consumer Affairs Real Estate Appraiser Board
