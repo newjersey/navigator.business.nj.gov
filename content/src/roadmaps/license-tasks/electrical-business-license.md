@@ -1,7 +1,7 @@
 ---
 filename: electrical-business-license
 urlSlug: electrical-business-license
-name: Apply for an Electrical Contracting Business Permit
+name: Get an Electrical Contracting Business Permit
 webflowName: "Electrical Contractor: Business Permit"
 issuingAgency: New Jersey Division of Consumer Affairs Board of Electrical Contractors
 industryId: electrical-contractor
