@@ -25,11 +25,24 @@ export const useUserData = (): UseUserDataResponse => {
     },
   });
   const dataExists = !!data;
-  const { setOperatingPhaseId } = useContext(IntercomContext);
+  const { setOperatingPhaseId, setLegalStructureId, setIndustryId, setBusinessPersona } =
+    useContext(IntercomContext);
 
   useEffect(() => {
     setOperatingPhaseId(data?.profileData.operatingPhase);
-  }, [setOperatingPhaseId, data?.profileData.operatingPhase]);
+    setLegalStructureId(data?.profileData.legalStructureId);
+    setIndustryId(data?.profileData.industryId);
+    setBusinessPersona(data?.profileData.businessPersona);
+  }, [
+    setOperatingPhaseId,
+    data?.profileData.operatingPhase,
+    setLegalStructureId,
+    data?.profileData.legalStructureId,
+    setIndustryId,
+    data?.profileData.industryId,
+    setBusinessPersona,
+    data?.profileData.businessPersona,
+  ]);
 
   useEffect(() => {
     if (updateQueue === undefined && data) {
