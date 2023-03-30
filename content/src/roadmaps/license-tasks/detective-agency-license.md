@@ -1,7 +1,7 @@
 ---
 filename: detective-agency-license
 urlSlug: detective-agency-license
-name: Apply for a Detective Agency License
+name: Obtain a Detective Agency License
 webflowName: "Detective: Agency License"
 issuingAgency: New Jersey State Police Private Detective Unit
 industryId: detective
