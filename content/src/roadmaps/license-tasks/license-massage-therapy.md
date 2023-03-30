@@ -1,7 +1,7 @@
 ---
-filename: license-massage-therapy
-urlSlug: license-massage-therapy
-name: Get Your Massage Therapy Business License
+filename: massage-therapy-license
+urlSlug: massage-therapy-license
+name: Get a Massage Therapy Business License
 webflowName: "Massage Therapy: Massage Therapy Business License"
 industryIntegration: New Jersey Division of Consumer Affairs
 issuingAgency: New Jersey Division of Consumer Affairs Board of Massage and Bodywork Therapy
@@ -21,11 +21,11 @@ If you will employ others to offer massage therapy services, you need to registe
 
 ### Application Requirements
 
-* Digital copy of Photo ID
-* Name and physical address of your business
-* Mailing address (if different from your business address)
+* A digital copy of Photo ID
+* The name and physical address of your business
+* The mailing address (if different from your business address)
 * Professional liability insurance in a minimum amount of $1M per occurrence and $3M aggregate per policy year
-* Pay any associated fees
+* Paid any associated fees
 
 > **Once completed, you will have:**
 >
