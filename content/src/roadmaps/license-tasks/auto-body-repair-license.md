@@ -1,6 +1,6 @@
 ---
 urlSlug: auto-body-repair-license
-name: Apply for an Auto-Body Repair License
+name: Get an Auto-Body Repair License
 webflowName: "Auto-Body Repair: Business License"
 issuingAgency: New Jersey Motor Vehicle Commission
 formName: BLC-25
