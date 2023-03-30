@@ -1,7 +1,7 @@
 ---
 filename: real-estate-appraiser-certification
 urlSlug: appraiser-certification
-name: Apply for an Real Estate Appraiser Certification
+name: Apply for Your Real Estate Appraiser Certification
 webflowName: "Real Estate Appraisal: Real Estate Appraiser Certification"
 industryIntegration: New Jersey Division of Consumer Affairs
 issuingAgency: New Jersey Division of Consumer Affairs Real Estate Appraiser Board
