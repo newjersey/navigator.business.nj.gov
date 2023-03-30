@@ -1,5 +1,6 @@
 ---
-urlSlug: apply-for-shop-license
+filename: cosmetology-shop-license
+urlSlug: cosmetology-shop-license
 name: Apply for a Cosmetology Shop License
 webflowName: "Cosmetology: License to Operate a New Shop, Relocate, or to
   Transfer Ownership"
@@ -21,9 +22,9 @@ New shops, relocated shops, or shops that have transferred ownership are require
 
 ### Application Requirements
 
-* \[]{general-business-address} Have a business address
-* \[]{cosmo-open-date} Schedule an opening date
-* \[]{cosmo-inspection-date} Receive an inspection
+* \[]{general-business-address} A business address
+* \[]{cosmo-open-date} An opening date
+* \[]{cosmo-inspection-date} A inspection
 * \[]{general-fire-prevention-permit} Have a Fire Prevention Permit
 * \[]{cosmo-practitioners-license} Have license numbers of all practitioners
 * \[]{general-cert-occupancy} Have a certificate of occupancy or approval
