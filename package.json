@@ -113,7 +113,7 @@
     "@next/eslint-plugin-next": "12.1.6",
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/git": "10.0.1",
-    "@serverless/typescript": "3.27.0",
+    "@serverless/typescript": "3.29.0",
     "@storybook/addon-a11y": "6.5.16",
     "@storybook/addon-actions": "6.5.16",
     "@storybook/addon-docs": "6.5.16",
