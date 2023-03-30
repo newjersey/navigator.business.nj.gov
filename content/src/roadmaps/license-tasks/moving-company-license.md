@@ -31,7 +31,7 @@ You must apply for a public movers license before you can legally offer services
 * Overnight parking address for your vehicles
 *  `Designated agent|process-agent` 
 *  `EIN|ein` or SSN if you're not required to have an EIN
-* Name and contact information for every officer, director, and anyone with an ownership interest in the company
+* Name, plus contact information, for every officer, director, and anyone with an ownership interest in the company
 * Copy of a fully executed `tariff|mover-tariff` 
 * Profit and Loss statement for the past 12 months
 *  `Certificate of Formation or Authority|certificate-formation` 
@@ -39,7 +39,7 @@ You must apply for a public movers license before you can legally offer services
 * Copy of vehicle registration or lease
 * Copy of Insurance Policy
 * Copy of all forms and brochures the company will use with customers
-* Pay any associated fees
+* Payment made for any associated application fees
 
 > **Once completed, you will have:**
 >
