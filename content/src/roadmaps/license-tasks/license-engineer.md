@@ -1,6 +1,6 @@
 ---
-filename: license-engineer
-urlSlug: license-engineer
+filename: engineer-license
+urlSlug: engineer-license
 name: Apply for an Engineer License, if Applicable
 webflowName: "Engineering: Engineer License"
 industryIntegration: New Jersey Division of Consumer Affairs
@@ -21,10 +21,9 @@ You need an engineer license if you plan to provide services as an engineer insi
 
 ### Eligibility
 
-* Bachelor’s or Master’s degree in engineering from a board-approved curriculum, or
-  Graduate from a four-year engineering technology program from a board-approved curriculum, and
-* A minimum of four years of professional work experience in engineering
-* Passing scores on the [National Council of Examiners for Engineering and Surveying (NCEES)](https://ncees.org/engineering/) exam
+* Bachelor’s or Master’s degree in engineering from a board-approved curriculum, or a Graduate degree from a four-year engineering technology program from a board-approved curriculum
+* Minimum of four years of professional work experience in engineering
+* Passing score on the [National Council of Examiners for Engineering and Surveying (NCEES)](https://ncees.org/engineering/) exam
 
 ### Application Requirements
 
