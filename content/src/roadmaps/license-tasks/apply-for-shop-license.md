@@ -1,7 +1,7 @@
 ---
 filename: cosmetology-shop-license
 urlSlug: cosmetology-shop-license
-name: Apply for a Cosmetology Shop License
+name: Apply for Your Cosmetology Shop License
 webflowName: "Cosmetology: License to Operate a New Shop, Relocate, or to
   Transfer Ownership"
 industryIntegration: NJ Department of Consumer Affairs
