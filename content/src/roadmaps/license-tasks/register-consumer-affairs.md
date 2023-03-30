@@ -22,7 +22,7 @@ All home improvement contractors (individuals and corporate entities) must regis
 
 ### Application Requirements
 
-* A certificate of insurance with a commercial general liability insurance policy with a minimum amount of $500,000 per occurrence
+* A certificate of insurance with a commercial general liability insurance policy in a minimum amount of $500,000 per occurrence
 * Paid any associated application fees
 
 > **Once completed, you will have:**
