@@ -1,7 +1,7 @@
 ---
 filename: conditional-cannabis-license
 urlSlug: conditional-cannabis-license
-name: Apply for a Conditional Cannabis License
+name: Apply for Your Conditional Cannabis License
 webflowName: "Cannabis: Conditional License"
 issuingAgency: Cannabis Regulatory Commission
 industryId: cannabis
