@@ -1,13 +1,15 @@
 ---
-urlSlug: town-mercantile-license
+urlSlug: mercantile-liquor-license
 name: Get Your Liquor and Mercantile License
 id: check-local-requirements
-callToActionLink: ${municipalityWebsite}
-callToActionText: Visit the ${municipality} Website
+callToActionLink: ""
+callToActionText: ""
 requiresLocation: true
 ---
 
-You will need to obtain a liquor license if your business will sell alcohol, but not all locations might require a mercantile license. Check with your local clerk's office to confirm that your location requires a mercantile license.
+You will need to obtain a local liquor license if your business will sell alcohol.
+
+Some local governments require businesses with commercial locations to get a mercantile license. Each municipality will have its own application process for both the liquor license and the mercantile license.
 
 ---
 
@@ -15,9 +17,7 @@ You will need to obtain a liquor license if your business will sell alcohol, but
 
 ${beginLocationDependentSection}
 
-**Check with your local clerk’s office**
-
-You can find your local clerk's office through the [${municipality} website](${municipalityWebsite}) or by contacting your [county clerk](${countyClerkWebsite}) at ${countyClerkPhone}.
+You can find your local municipal clerk’s office through the [${municipality} website](${municipalityWebsite}) or by contacting your [county clerk](${countyClerkWebsite}) at ${countyClerkPhone}.
 
 ${endLocationDependentSection}
 
