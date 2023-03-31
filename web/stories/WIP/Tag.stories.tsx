@@ -59,10 +59,10 @@ PrimaryLightest.args = {
   backgroundColor: "primary-lightest",
 };
 
-export const AccentSemiCoolLightest = Template.bind({});
-AccentSemiCoolLightest.args = {
+export const AccentSemiCoolLight = Template.bind({});
+AccentSemiCoolLight.args = {
   ...defaultArgs,
-  backgroundColor: "accent-semi-cool-lightest",
+  backgroundColor: "accent-semi-cool-light",
 };
 
 export const White = Template.bind({});
