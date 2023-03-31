@@ -1,6 +1,6 @@
 ---
-filename: license-accounting
-urlSlug: license-accounting
+filename: accounting-license
+urlSlug: accounting-license
 name: Register Your Accounting Firm
 webflowName: "Accountant: Public Accounting Firm"
 industryIntegration: New Jersey Division of Consumer Affairs
@@ -22,7 +22,7 @@ New accounting firms must register and obtain certification.
 ### Application Requirements
 
 *  A designated Resident Manager-In-Charge. This must be a certified public accountant in the firm
-* P﻿ay any associated fees
+* Applicable fees paid
 
 
 
