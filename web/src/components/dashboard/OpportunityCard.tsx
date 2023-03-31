@@ -24,7 +24,7 @@ export const OpportunityCard = (props: Props): ReactElement => {
   const { Config } = useConfig();
 
   const TYPE_TO_LABEL: Record<"funding" | "certification", ReactElement> = {
-    funding: <Tag backgroundColor="accent-semi-cool-lightest">{Config.dashboardDefaults.fundingTagText}</Tag>,
+    funding: <Tag backgroundColor="accent-semi-cool-light">{Config.dashboardDefaults.fundingTagText}</Tag>,
     certification: (
       <Tag backgroundColor="accent-cool-light">{Config.dashboardDefaults.certificationTagText}</Tag>
     ),
