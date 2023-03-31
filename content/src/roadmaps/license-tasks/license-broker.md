@@ -1,6 +1,6 @@
 ---
-filename: license-broker
-urlSlug: license-broker
+filename: broker-license
+urlSlug: broker-license
 name: Obtain Your Real Estate Broker License
 webflowName: "Real Estate Broker: Real Estate Broker License"
 issuingAgency: State of New Jersey Department of Banking and Insurance Real Estate Commission
@@ -19,17 +19,19 @@ You need a real estate broker license before you can start a real estate busines
 
 ### Eligibility Criteria
 
-* Real estate agent license
-* Minimum of three years of full-time work experience (40 hours per week) as a real estate agent under a licensed broker
-* Completion of the 150-hour prelicensure education
+* A real estate agent license
+* A high school education or equivalency
+* A minimum of three years of full-time work experience (40 hours per week) as a real estate agent under a licensed broker
+* Completed 150-hour prelicensure education
+* Completed two 30-hour courses on agency/ethics and office management
 * Passing grades on the broker license exam
 
 ### Application Requirements
 
 * A written statement from the supervising broker verifying full-time employment for the applicant for the past three years
-* Applicant ID (found in the licensure exam results form)
-* Pass a criminal background check
-* Pay any associated fees
+* An applicant ID (found in the licensure exam results form)
+* A criminal background check, and pass
+* Applicable fees paid
 
 > **Once approved, you will have:**
 >
