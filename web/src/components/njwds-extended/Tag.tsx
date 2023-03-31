@@ -8,7 +8,7 @@ export type BgColors =
   | "white"
   | "accent-cooler-lightest"
   | "accent-cool-light"
-  | "accent-semi-cool-lightest"
+  | "accent-semi-cool-light"
   | "accent-warm-extra-light";
 
 interface Props {
@@ -46,8 +46,8 @@ export const Tag = (props: Props): ReactElement => {
     case "accent-cool-light":
       styling = "bg-white text-base-darkest bg-accent-cool-light";
       break;
-    case "accent-semi-cool-lightest":
-      styling = "bg-white text-base-darkest bg-accent-semi-cool-lightest";
+    case "accent-semi-cool-light":
+      styling = "bg-white text-base-darkest bg-accent-semi-cool-light";
       break;
     case "accent-warm-extra-light":
       styling = "bg-accent-warm-extra-light text-base-dark";
