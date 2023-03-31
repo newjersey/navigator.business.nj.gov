@@ -36,30 +36,35 @@ export const FilingElement = (props: {
   return (
     <>
       <div className="minh-38">
-        <div className="bg-base-extra-light margin-x-neg-4 margin-top-neg-4 padding-top-105 margin-bottom-4">
-          <div className="margin-bottom-2 margin-x-4">
-            <h1>{props.filing.name}</h1>
-          </div>
-          <div className="display-inline-flex margin-bottom-4 margin-x-4">
-            <span className="text-bold">{Config.filingDefaults.beforeDueDateText.toUpperCase()}</span> &nbsp;{" "}
-            <span data-testid="due-date">
-              {parseDateWithFormat(props.dueDate, defaultDateFormat).format("MMMM D, YYYY").toUpperCase()}
-            </span>
-            <ArrowTooltip title={Config.filingDefaults.dueDateToolTip}>
-              <div
-                className="fdr fac margin-left-1 margin-bottom-05 font-body-lg text-green"
-                data-testid="due-date-tooltip"
-              >
-                <Icon>help_outline</Icon>
+        <div className="bg-base-extra-light margin-x-neg-4 margin-top-neg-4 radius-top-lg">
+          <div>
+            <div className="padding-y-4 margin-x-4 margin-bottom-2">
+              <div className="margin-bottom-2 ">
+                <h1>{props.filing.name}</h1>
               </div>
-            </ArrowTooltip>
-            {props.filing.extension && (
-              <div className="margin-left-4">
-                <Tag backgroundColor="accent-cooler-lightest" data-testid="extension" isLowerCase>
-                  {Config.filingDefaults.extensionTagText}
-                </Tag>
+              <div className="display-inline-flex ">
+                <span className="text-bold">{Config.filingDefaults.beforeDueDateText.toUpperCase()}</span>{" "}
+                &nbsp;{" "}
+                <span data-testid="due-date">
+                  {parseDateWithFormat(props.dueDate, defaultDateFormat).format("MMMM D, YYYY").toUpperCase()}
+                </span>
+                <ArrowTooltip title={Config.filingDefaults.dueDateToolTip}>
+                  <div
+                    className="fdr fac margin-left-1 margin-bottom-05 font-body-lg text-green"
+                    data-testid="due-date-tooltip"
+                  >
+                    <Icon>help_outline</Icon>
+                  </div>
+                </ArrowTooltip>
+                {props.filing.extension && (
+                  <div className="margin-left-4">
+                    <Tag backgroundColor="accent-cooler-lightest" data-testid="extension" isLowerCase>
+                      {Config.filingDefaults.extensionTagText}
+                    </Tag>
+                  </div>
+                )}
               </div>
-            )}
+            </div>
           </div>
         </div>
         <Content>{props.filing.contentMd}</Content>
