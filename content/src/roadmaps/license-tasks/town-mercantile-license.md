@@ -10,12 +10,14 @@ callToActionLink: ""
 id: check-local-requirements
 webflowId: 64147a42689e2308a6b2252a
 licenseCertificationClassification: ""
+requiresLocation: true
 ---
-Prior to opening, you may need to get a mercantile license. 
+
+Prior to opening, you may need to get a mercantile license.
 
 Some local governments require businesses with commercial locations to get a mercantile license. Each municipality will have its own application process for the mercantile license.
 
-- - -
+---
 
 ### Actions to Take
 
@@ -27,8 +29,8 @@ You can find your local municipal clerk's office through the [${municipality} we
 
 ${endLocationDependentSection}
 
-- - -
+---
 
 > **Once completed, you will have:**
 >
-> * A mercantile license
+> - A mercantile license
