@@ -1,7 +1,7 @@
 ---
 filename: authorization-architect-firm
 urlSlug: authorization-architect-firm
-name: Obtain a Certificate of Authorization for Your Firm
+name: Obtain Your Certificate of Authorization for Your Firm
 webflowName: "Architecture: Certificate of Authorization for Your Firm"
 industryIntegration: New Jersey Division of Consumer Affairs
 issuingAgency: New Jersey Division of Consumer Affairs, Board of Architects
@@ -33,7 +33,7 @@ To be eligible, your firm must be one of the following business types:
 * Business address (and the address of any satellite office)
 * Name and license number of the `architect-in-charge|architect-in-charge` of the principal office
 * Name and license number of the architects-in-charge of each additional office
-*   Name, license number, and address of every `responsible charge|responsible-charge` 
+* Name, license number, and address of every `responsible charge|responsible-charge` 
 * Name, address, and license number of every officer, director, manager, and stockholder in your firm
 * Number of shares issued (if the firm is a corporation)
 * Applicable fees paid
