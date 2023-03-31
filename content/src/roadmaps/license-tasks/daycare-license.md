@@ -1,7 +1,7 @@
 ---
 filename: daycare-license
 urlSlug: daycare-license
-name: Obtain a Child Care Center License
+name: Obtain Your Child Care Center License
 webflowName: "Daycare: License for a Child Care Center"
 issuingAgency: New Jersey Department of Children and Families
 industryId: daycare
