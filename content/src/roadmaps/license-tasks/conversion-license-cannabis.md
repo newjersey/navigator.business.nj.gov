@@ -1,7 +1,7 @@
 ---
 filename: conversion-cannabis-license
 urlSlug: conversion-cannabis-license
-name: Submit a Cannabis Conversion License
+name: Submit Your Cannabis Conversion License
 webflowName: "Cannabis: Conversion License"
 issuingAgency: Cannabis Regulatory Commission
 industryId: cannabis
