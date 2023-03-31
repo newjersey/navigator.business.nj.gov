@@ -2495,13 +2495,8 @@ collections:
                 }
               - { label: Calendar Feedback Button Text, name: calendarFeedbackButtonText, widget: string }
               - {
-                  label: Calendar Empty Grid Description,
-                  name: calendarEmptyGridDescriptionMarkdown,
-                  widget: markdown,
-                }
-              - {
-                  label: Calendar Empty List Description,
-                  name: calendarEmptyListDescriptionMarkdown,
+                  label: Calendar Empty Description,
+                  name: calendarEmptyDescriptionMarkdown,
                   widget: markdown,
                 }
               - { label: Calendar Add Formation Date to Profile, name: calendarAddDateMd, widget: markdown }

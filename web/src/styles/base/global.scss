@@ -2,6 +2,11 @@
   box-sizing: border-box;
 }
 
+body,
+button {
+  color: $base-darkest;
+}
+
 [data-slate-editor] {
   -webkit-user-modify: read-write !important;
 }
