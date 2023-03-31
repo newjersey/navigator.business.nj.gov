@@ -29,7 +29,7 @@ export const FilingsCalendarGrid = (props: Props): ReactElement => {
     <div>
       {sortFilterFilingsWithinAYear(props.userData.taxFilingData.filings, props.activeYear).length === 0 && (
         <Content className="text-base margin-bottom-3">
-          {Config.dashboardDefaults.calendarEmptyGridDescriptionMarkdown}
+          {Config.dashboardDefaults.calendarEmptyDescriptionMarkdown}
         </Content>
       )}
       <table className="filingsCalendarTable" data-testid="filings-calendar-as-table">

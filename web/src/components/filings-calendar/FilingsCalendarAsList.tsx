@@ -37,7 +37,7 @@ export const FilingsCalendarAsList = (props: Props): ReactElement => {
     return (
       <>
         <Content className="text-base margin-bottom-3">
-          {Config.dashboardDefaults.calendarEmptyListDescriptionMarkdown}
+          {Config.dashboardDefaults.calendarEmptyDescriptionMarkdown}
         </Content>
         <div className="flex flex-column space-between fac text-align-center flex-desktop:grid-col usa-prose padding-x-3">
           <img className="padding-y-2" src={`/img/empty-trophy-illustration.png`} alt="empty calendar" />
