@@ -27,11 +27,11 @@ You need an engineer license if you plan to provide services as an engineer insi
 
 ### Application Requirements
 
-* College transcripts must be sent directly from the college(s) to the Board
+* College transcripts sent directly from the college(s) to the Board
 * Examination records from NCEES
 * Five [professional references](https://www.njconsumeraffairs.gov/pels/Applications/Professional-Engineer-Reference-Form.pdf) from the following: three licensed engineers, one supervisor, and one other professional familiar with your work
 * Supporting documentation (like police records) if you answered ‘Yes” to any questions related to criminal background or moral character
-* Pay any associated fees
+* Applicable fees paid
 
 > **Once completed, you will have:**
 >
