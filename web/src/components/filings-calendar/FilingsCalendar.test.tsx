@@ -322,20 +322,20 @@ describe("<FilingsCalendar />", () => {
 
     renderFilingsCalendar(operateReferences, userData);
     expect(screen.getByTestId("filings-calendar")).toHaveTextContent(
-      markdownToText(Config.dashboardDefaults.calendarEmptyGridDescriptionMarkdown)
+      markdownToText(Config.dashboardDefaults.calendarEmptyDescriptionMarkdown)
     );
     fireEvent.click(screen.getByText(Config.dashboardDefaults.calendarListViewButton, { exact: false }));
     expect(screen.getByTestId("filings-calendar")).toHaveTextContent(
-      markdownToText(Config.dashboardDefaults.calendarEmptyListDescriptionMarkdown)
+      markdownToText(Config.dashboardDefaults.calendarEmptyDescriptionMarkdown)
     );
     fireEvent.click(screen.getByTestId("primary-year-selector-dropdown-button"));
     fireEvent.click(screen.getByText(getCurrentDate().add(2, "years").year().toString()));
     expect(screen.getByTestId("filings-calendar")).not.toHaveTextContent(
-      markdownToText(Config.dashboardDefaults.calendarEmptyListDescriptionMarkdown)
+      markdownToText(Config.dashboardDefaults.calendarEmptyDescriptionMarkdown)
     );
     fireEvent.click(screen.getByText(Config.dashboardDefaults.calendarGridViewButton, { exact: false }));
     expect(screen.getByTestId("filings-calendar")).not.toHaveTextContent(
-      markdownToText(Config.dashboardDefaults.calendarEmptyGridDescriptionMarkdown)
+      markdownToText(Config.dashboardDefaults.calendarEmptyDescriptionMarkdown)
     );
   });
 

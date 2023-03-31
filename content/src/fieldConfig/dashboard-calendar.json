@@ -15,8 +15,7 @@
     "viewLessFilingsButton": "View less",
     "calendarListViewMoreButton": "View More",
     "calendarFeedbackButtonText": "Share feedback on the calendar.",
-    "calendarEmptyGridDescriptionMarkdown": "You have **no events** in this calendar year.",
-    "calendarEmptyListDescriptionMarkdown": "You don't have any **events** this year, but check back later.",
+    "calendarEmptyDescriptionMarkdown": "You don't have any **events** this year, but check back later.",
     "calendarAddDateMd": "Add your `business effective date|effective-date` to [your profile](/profile#question-dateOfFormation) to see your Annual Report deadline here."
   }
 }

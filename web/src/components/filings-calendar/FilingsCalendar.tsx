@@ -184,6 +184,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
                 <span className="text-base-dark">{Config.dashboardDefaults.calendarLegalText}</span>{" "}
                 <UnStyledButton
                   style="tertiary"
+                  underline
                   onClick={() => {
                     analytics.event.tax_calendar_feedback_button.click.show_feedback_modal();
                     setShowModal(true);
