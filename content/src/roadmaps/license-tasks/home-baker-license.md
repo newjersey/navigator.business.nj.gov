@@ -12,7 +12,7 @@ id: home-baker-license
 webflowId: 6414793b7e0fbe2794b95bfe
 licenseCertificationClassification: ""
 ---
-You need a cottage food operator permit before your business can operate legally. See the [application instructions](https://www.nj.gov/health/forms/cfo-1instr.pdf) and the [Department of Health code for cottage industries](https://www.nj.gov/health/ceohs/phfpp/retailfood/cottagefood.shtml#5) for important information on allowed ingredients, allergens, and labeling requirements.
+You need a cottage food operator (home baker) permit before your business can operate legally. See the [application instructions](https://www.nj.gov/health/forms/cfo-1instr.pdf) and the [Department of Health code for cottage industries](https://www.nj.gov/health/ceohs/phfpp/retailfood/cottagefood.shtml#5) for important information on allowed ingredients, allergens, and labeling requirements.
 
 - - -
 
@@ -22,14 +22,14 @@ You need a cottage food operator permit before your business can operate legally
 
 ### Application Requirements
 
-* Business name
-* Applicant’s home address
-* Applicant’s mailing address (if different than the home address)
-* Food items(s) to be sold and any allergens that may be present (you’ll need to add every item in a separate line)
-* Microbiological analysis of water supply if the home uses well-water
-* Most recent water bill if the home is on city-water
-* Copy of the certificate of completion of a food protection management program
-* Pay any associated fees (and include confirmation number if payment is made electronically)
+* A business name
+* The applicant’s home address
+* The applicant’s mailing address (if different than the home address)
+* Food items(s) to be sold and, along with any allergens that may be present
+* Conducted microbiological analysis of water supply if the home uses well-water
+* The most recent water bill if the home is on city water
+* A copy of the certificate of completion of a food protection management program
+* Applicable fees paid (and include confirmation numbers if payments are made electronically)
 
 :::infoAlert 
  T﻿he application works best when completed online in the original PDF format.
