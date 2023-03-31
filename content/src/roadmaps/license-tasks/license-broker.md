@@ -6,7 +6,7 @@ webflowName: "Real Estate Broker: Real Estate Broker License"
 issuingAgency: State of New Jersey Department of Banking and Insurance Real Estate Commission
 industryId: real-estate-broker
 callToActionText: Submit a Real Estate Broker License Application
-callToActionLink: https://www-dobi.state.nj.us/DOBI_RELOLSRV/LicenseServices
+callToActionLink: https://www.state.nj.us/dobi/division_rec/brokeroriginalapplication.htm
 webflowIndustry: ""
 licenseCertificationClassification: ""
 divisionPhone: (609) 292-7272
