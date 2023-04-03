@@ -1,5 +1,13 @@
 import dayjs from "dayjs";
-import { getCurrentDateFormatted, getLicenseDate, parseDate, parseDateWithFormat } from "./dateHelpers";
+import {
+  getCurrentDateFormatted,
+  getDateInCurrentYear,
+  getLicenseDate,
+  isDateAfterCurrentDate,
+  parseDate,
+  parseDateWithFormat,
+} from "./dateHelpers";
+import { defaultDateFormat } from "./defaultConstants";
 import { randomInt } from "./intHelpers";
 import { LicenseEntity } from "./license";
 
@@ -71,6 +79,26 @@ describe("dateHelpers", () => {
       expect(getLicenseDate(licenceData)).toEqual(
         parseDateWithFormat(licenceData.expirationDate, "YYYYMMDD X")
       );
+    });
+  });
+
+  describe("getDateInCurrentYear", () => {
+    it("returns the provided month and day in the current year", () => {
+      const value = getDateInCurrentYear("1990-05-20");
+      const currentYear = dayjs().year();
+      expect(value.toJSON()).toStrictEqual(dayjs(`${currentYear}-05-20`).toJSON());
+    });
+  });
+
+  describe("isDateAfterCurrentDate", () => {
+    it("returns true when date is after current date", () => {
+      const value = dayjs().add(1, "day").format(defaultDateFormat);
+      expect(isDateAfterCurrentDate(value)).toBe(true);
+    });
+
+    it("returns true when date is before current date", () => {
+      const value = dayjs().subtract(1, "day").format(defaultDateFormat);
+      expect(isDateAfterCurrentDate(value)).toBe(false);
     });
   });
 });

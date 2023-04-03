@@ -1,4 +1,5 @@
 import { NameAvailability } from "@shared/businessNameSearch";
+import { getFirstAnnualFiling, getSecondAnnualFiling, getThirdAnnualFiling } from "@shared/test";
 import { Express } from "express";
 import request from "supertest";
 import {
@@ -31,10 +32,12 @@ describe("guestRouter", () => {
 
   describe("POST annualFilings", () => {
     it("calculates 3 new annual filing dates and updates them for dateOfFormation", async () => {
+      const formationDate = "2021-03-01";
+
       const postedUserData = generateUserData({
         user: generateUser({ id: "123" }),
         profileData: generateProfileData({
-          dateOfFormation: "2021-03-01",
+          dateOfFormation: formationDate,
           entityId: undefined,
           legalStructureId: "limited-liability-company",
         }),
@@ -49,7 +52,11 @@ describe("guestRouter", () => {
         ...postedUserData,
         taxFilingData: {
           ...postedUserData.taxFilingData,
-          filings: generateAnnualFilings(["2023-03-31", "2024-03-31", "2025-03-31"]),
+          filings: generateAnnualFilings([
+            getFirstAnnualFiling(formationDate),
+            getSecondAnnualFiling(formationDate),
+            getThirdAnnualFiling(formationDate),
+          ]),
         },
       });
     });
