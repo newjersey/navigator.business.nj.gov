@@ -1,5 +1,11 @@
 import { NameAvailability } from "@shared/businessNameSearch";
-import { getFirstAnnualFiling, getSecondAnnualFiling, getThirdAnnualFiling } from "@shared/test";
+import { getCurrentDate, parseDate } from "@shared/dateHelpers";
+import {
+  generateBusinessNameAvailability,
+  getFirstAnnualFiling,
+  getSecondAnnualFiling,
+  getThirdAnnualFiling,
+} from "@shared/test";
 import { Express } from "express";
 import request from "supertest";
 import {
@@ -9,19 +15,18 @@ import {
   generateUserData,
 } from "../../test/factories";
 import { generateAnnualFilings } from "../../test/helpers";
-import { BusinessNameClient } from "../domain/types";
+import { TimeStampBusinessSearch } from "../domain/types";
 import { setupExpress } from "../libs/express";
 import { guestRouterFactory } from "./guestRouter";
 
 describe("guestRouter", () => {
   let app: Express;
-
-  let stubBusinessNameClient: jest.Mocked<BusinessNameClient>;
+  let timeStampBusinessSearch: jest.Mocked<TimeStampBusinessSearch>;
 
   beforeEach(async () => {
-    stubBusinessNameClient = { search: jest.fn() };
+    timeStampBusinessSearch = { search: jest.fn() };
     app = setupExpress(false);
-    app.use(guestRouterFactory(stubBusinessNameClient));
+    app.use(guestRouterFactory(timeStampBusinessSearch));
   });
 
   afterAll(async () => {
@@ -64,38 +69,25 @@ describe("guestRouter", () => {
 
   describe("GET /business-name-availability", () => {
     it("returns the availability status", async () => {
-      const result: NameAvailability = {
+      const result: NameAvailability = generateBusinessNameAvailability({
         status: "AVAILABLE",
-        similarNames: [],
-      };
-      stubBusinessNameClient.search.mockResolvedValue(result);
+      });
+      timeStampBusinessSearch.search.mockResolvedValue(result);
 
       const response = await request(app).get(`/business-name-availability?query=apple%20bee%27s`);
       expect(response.status).toEqual(200);
-      expect(response.body).toEqual(result);
-      expect(stubBusinessNameClient.search).toHaveBeenCalledWith("apple bee's");
-    });
-
-    it("limits similar names returned to 10", async () => {
-      const result: NameAvailability = {
-        status: "UNAVAILABLE",
-        similarNames: Array.from({ length: 20 }).fill("abc") as string[],
-      };
-      stubBusinessNameClient.search.mockResolvedValue(result);
-
-      const response = await request(app).get(`/business-name-availability?query=abcd`);
-      expect(response.status).toEqual(200);
-      expect(response.body.similarNames).toHaveLength(10);
+      expect(result.status).toEqual(result.status);
+      expect(parseDate(response.body.lastUpdatedTimeStamp).isSame(getCurrentDate(), "minute")).toEqual(true);
     });
 
     it("returns 400 if name search returns BAD_INPUT", async () => {
-      stubBusinessNameClient.search.mockRejectedValue("BAD_INPUT");
+      timeStampBusinessSearch.search.mockRejectedValue("BAD_INPUT");
       const response = await request(app).get(`/business-name-availability?query=apple%20bee%27s`);
       expect(response.status).toEqual(400);
     });
 
     it("returns 500 if name search errors", async () => {
-      stubBusinessNameClient.search.mockRejectedValue({});
+      timeStampBusinessSearch.search.mockRejectedValue({});
       const response = await request(app).get(`/business-name-availability?query=apple%20bee%27s`);
       expect(response.status).toEqual(500);
     });

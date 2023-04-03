@@ -1,6 +1,6 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
-import { generateNameAvailability } from "@/test/factories";
+import { generateBusinessNameAvailability } from "@businessnjgovnavigator/shared";
 import { NameAvailability } from "@businessnjgovnavigator/shared/businessNameSearch";
 import { act, fireEvent, screen } from "@testing-library/react";
 
@@ -19,7 +19,7 @@ export const searchAndGetValue = async (
   nameAvailability: Partial<NameAvailability>,
   dba?: { dba: boolean }
 ): Promise<void> => {
-  const returnedPromise = Promise.resolve(generateNameAvailability(nameAvailability));
+  const returnedPromise = Promise.resolve(generateBusinessNameAvailability(nameAvailability));
   mockApi.searchBusinessName.mockReturnValue(returnedPromise);
   fireEvent.click(dba?.dba ? dbaSearchButton() : searchButton());
   await act(() => {
@@ -28,7 +28,7 @@ export const searchAndGetValue = async (
 };
 
 export const mockSearchReturnValue = (nameAvailability: Partial<NameAvailability>): void => {
-  const returnedPromise = Promise.resolve(generateNameAvailability(nameAvailability));
+  const returnedPromise = Promise.resolve(generateBusinessNameAvailability(nameAvailability));
   mockApi.searchBusinessName.mockReturnValue(returnedPromise);
 };
 

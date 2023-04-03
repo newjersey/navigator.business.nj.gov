@@ -10,9 +10,10 @@ import {
   createEmptyFormationFormData,
   foreignLegalTypePrefix,
   FormationLegalType,
+  generateBusinessNameAvailability,
   generateFormationFormData,
-  NameAvailability,
 } from "@businessnjgovnavigator/shared";
+import { NameAvailability } from "@businessnjgovnavigator/shared/";
 import * as materialUi from "@mui/material";
 import { screen, within } from "@testing-library/react";
 
@@ -69,7 +70,12 @@ describe("Formation - BusinessNameStep", () => {
   });
 
   it("pre-fills the error state with the error from formation data", () => {
-    getPageHelper("My Restaurant", { status: "UNAVAILABLE", similarNames: [] });
+    getPageHelper(
+      "My Restaurant",
+      generateBusinessNameAvailability({
+        status: "UNAVAILABLE",
+      })
+    );
     expect(screen.getByTestId("unavailable-text")).toBeInTheDocument();
   });
 

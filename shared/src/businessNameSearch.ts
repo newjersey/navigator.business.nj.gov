@@ -6,8 +6,12 @@ export type NameAvailabilityStatus =
   | "RESTRICTED_ERROR"
   | undefined;
 
-export type NameAvailability = {
+export interface NameAvailabilityResponse {
   status: NameAvailabilityStatus;
   similarNames: string[];
   invalidWord?: string;
-};
+}
+
+export interface NameAvailability extends NameAvailabilityResponse {
+  lastUpdatedTimeStamp: string;
+}

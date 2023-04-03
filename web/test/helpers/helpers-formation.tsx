@@ -13,7 +13,6 @@ import {
 } from "@/lib/types/types";
 import {
   generateFormationData,
-  generateNameAvailability,
   generateProfileData,
   generateTask,
   generateUserData,
@@ -29,6 +28,7 @@ import {
   createEmptyFormationFormData,
   DateObject,
   FormationSubmitResponse,
+  generateBusinessNameAvailability,
   generateFormationIncorporator,
   generateMunicipality,
   Municipality,
@@ -321,7 +321,7 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
   };
 
   const searchBusinessName = async (nameAvailability: Partial<NameAvailability>): Promise<void> => {
-    const returnedPromise = Promise.resolve(generateNameAvailability(nameAvailability));
+    const returnedPromise = Promise.resolve(generateBusinessNameAvailability(nameAvailability));
     mockApi.searchBusinessName.mockReturnValue(returnedPromise);
     fireEvent.click(screen.getByText(Config.searchBusinessNameTask.searchButtonText));
     await act(() => {
