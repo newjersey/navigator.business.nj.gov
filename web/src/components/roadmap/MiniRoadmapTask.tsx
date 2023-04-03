@@ -35,7 +35,7 @@ export const MiniRoadmapTask = (props: Props): ReactElement => {
             data-task={props.task.id}
           >
             {taskProgress === "COMPLETED" ? (
-              <Icon className="margin-right-1 checked-task usa-icon--size-3">check_circle</Icon>
+              <Icon className="margin-right-1 checked-task">check_circle</Icon>
             ) : (
               <div className={`substep-unchecked margin-right-1 ${props.active ? "active" : ""}`} />
             )}
