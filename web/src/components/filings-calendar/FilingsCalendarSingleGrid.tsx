@@ -14,7 +14,7 @@ import {
   UserData,
 } from "@businessnjgovnavigator/shared";
 import Link from "next/link";
-import { useState } from "react";
+import { ReactElement, ReactNode, useState } from "react";
 import { UnStyledButton } from "../njwds-extended/UnStyledButton";
 
 interface Props {
@@ -26,7 +26,7 @@ interface Props {
 
 const NUM_OF_FILINGS_ALWAYS_VIEWABLE = 2;
 
-export const FilingsCalendarSingleGrid = (props: Props) => {
+export const FilingsCalendarSingleGrid = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const [showExpandFilingsButton, setShowExpandFilingsButton] = useState(false);
   const date = getJanOfYear(parseDateWithFormat(props.activeYear, "YYYY")).add(props.num, "months");
@@ -45,7 +45,7 @@ export const FilingsCalendarSingleGrid = (props: Props) => {
   const remainingFilings = thisMonthFilings.slice(NUM_OF_FILINGS_ALWAYS_VIEWABLE);
   const isOnCurrentYear = getCurrentDate().year().toString() === props.activeYear;
 
-  const renderFilings = (filings: TaxFiling[]) => {
+  const renderFilings = (filings: TaxFiling[]): ReactNode => {
     return filings
       .filter((filing) => {
         return props.operateReferences[filing.identifier];
@@ -98,9 +98,7 @@ export const FilingsCalendarSingleGrid = (props: Props) => {
                 <UnStyledButton
                   style="tertiary"
                   underline
-                  onClick={() => {
-                    setShowExpandFilingsButton(!showExpandFilingsButton);
-                  }}
+                  onClick={(): void => setShowExpandFilingsButton(!showExpandFilingsButton)}
                 >
                   {Config.dashboardDefaults.viewLessFilingsButton}
                 </UnStyledButton>
@@ -112,9 +110,7 @@ export const FilingsCalendarSingleGrid = (props: Props) => {
               <UnStyledButton
                 style="tertiary"
                 underline
-                onClick={() => {
-                  setShowExpandFilingsButton(!showExpandFilingsButton);
-                }}
+                onClick={(): void => setShowExpandFilingsButton(!showExpandFilingsButton)}
               >
                 {Config.dashboardDefaults.viewMoreFilingsButton}
               </UnStyledButton>

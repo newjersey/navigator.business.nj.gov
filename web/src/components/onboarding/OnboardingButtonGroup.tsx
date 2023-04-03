@@ -12,7 +12,7 @@ interface Props {
 export const OnboardingButtonGroup = (props: Props): ReactElement => {
   const { state, onBack } = useContext(ProfileDataContext);
 
-  const back = (event: React.MouseEvent) => {
+  const back = (event: React.MouseEvent): void => {
     event.preventDefault();
     scrollToTop();
     onBack();

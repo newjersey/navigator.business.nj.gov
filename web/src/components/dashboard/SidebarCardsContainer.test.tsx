@@ -1,6 +1,6 @@
 import { SidebarCardsContainer } from "@/components/dashboard/SidebarCardsContainer";
 import { getMergedConfig } from "@/contexts/configContext";
-import { Certification, Funding, SidebarCardContent } from "@/lib/types/types";
+import { Certification, Funding, RoadmapDisplayContent, SidebarCardContent } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
 import {
   generateCertification,
@@ -35,9 +35,8 @@ describe("<SidebarCardsContainer />", () => {
     setupStatefulUserDataContext();
   });
 
-  const createDisplayContent = (sidebar?: Record<string, SidebarCardContent>) => {
+  const createDisplayContent = (sidebar?: Record<string, SidebarCardContent>): RoadmapDisplayContent => {
     return {
-      contentMd: "",
       sidebarDisplayContent: sidebar ?? {
         welcome: generateSidebarCardContent({}),
       },
@@ -48,7 +47,7 @@ describe("<SidebarCardsContainer />", () => {
     sidebarCards?: Record<string, SidebarCardContent>;
     fundings?: Funding[];
     certifications?: Certification[];
-  }) => {
+  }): void => {
     render(
       <SidebarCardsContainer
         sidebarDisplayContent={createDisplayContent(overrides.sidebarCards).sidebarDisplayContent}
@@ -65,8 +64,8 @@ describe("<SidebarCardsContainer />", () => {
       fundings?: Funding[];
       certifications?: Certification[];
     }
-  ) => {
-    return render(
+  ): void => {
+    render(
       <WithStatefulUserData initialUserData={userData}>
         <ThemeProvider theme={createTheme()}>
           <SidebarCardsContainer

@@ -7,15 +7,15 @@ import { UserData } from "@businessnjgovnavigator/shared/userData";
 
 type RegistrationProgress = "Not Started" | "Began Onboarding" | "Onboarded Guest" | "Fully Registered";
 
-export const setRegistrationDimension = (status: RegistrationProgress) => {
+export const setRegistrationDimension = (status: RegistrationProgress): void => {
   analytics.dimensions.registrationStatus(status);
 };
 
-export const setABExperienceDimension = (value: ABExperience) => {
+export const setABExperienceDimension = (value: ABExperience): void => {
   analytics.dimensions.abExperience(value);
 };
 
-export const setPhaseDimension = (value: OperatingPhaseId) => {
+export const setPhaseDimension = (value: OperatingPhaseId): void => {
   analytics.dimensions.phase(getPhaseDimension(value));
 };
 
@@ -25,7 +25,7 @@ export const phaseChangeAnalytics = ({
 }: {
   oldUserData: UserData;
   newUserData: UserData;
-}) => {
+}): void => {
   if (oldUserData.profileData.operatingPhase === newUserData.profileData.operatingPhase) {
     return;
   } else if (
@@ -57,7 +57,7 @@ export const setAnalyticsDimensions = (profileData: ProfileData): void => {
   analytics.dimensions.subPersona(getSubPersonaDimension(profileData.foreignBusinessType));
 };
 
-const getPhaseDimension = (phase: OperatingPhaseId) => {
+const getPhaseDimension = (phase: OperatingPhaseId): string => {
   switch (phase) {
     case "GUEST_MODE":
       return "Guest Mode Needs to Form";

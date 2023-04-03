@@ -5,13 +5,13 @@ import {
   OwnershipType,
 } from "@businessnjgovnavigator/shared";
 import { Checkbox, FormControl, ListItemText, MenuItem, Select, SelectChangeEvent } from "@mui/material";
-import { ReactElement, useContext } from "react";
+import { ReactElement, ReactNode, useContext } from "react";
 
 export const ProfileOwnership = (): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
   const NONE_OF_THE_ABOVE = "none";
 
-  const handleChange = (event: SelectChangeEvent<string[]>) => {
+  const handleChange = (event: SelectChangeEvent<string[]>): void => {
     let values: string[] =
       typeof event.target.value === "string" ? event.target.value.split(",") : event.target.value;
     const justSelectedValue = values[values.length - 1];
@@ -36,7 +36,7 @@ export const ProfileOwnership = (): ReactElement => {
             displayEmpty
             value={state.profileData.ownershipTypeIds}
             onChange={handleChange}
-            renderValue={(selected) => {
+            renderValue={(selected): ReactNode => {
               if (selected.length === 0) {
                 return <></>;
               }

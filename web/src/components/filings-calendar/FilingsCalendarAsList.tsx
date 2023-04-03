@@ -77,7 +77,7 @@ export const FilingsCalendarAsList = (props: Props): ReactElement => {
                   <Link href={`filings/${props.operateReferences[filing.identifier].urlSlug}`} passHref>
                     <a
                       href={`filings/${props.operateReferences[filing.identifier].urlSlug}`}
-                      onClick={() => {
+                      onClick={(): void => {
                         analytics.event.calendar_date.click.go_to_date_detail_screen();
                       }}
                     >
@@ -96,7 +96,9 @@ export const FilingsCalendarAsList = (props: Props): ReactElement => {
         <UnStyledButton
           style={"tertiary"}
           underline={true}
-          onClick={() => setNumberOfVisibleCalendarEntries((previous) => previous + LIST_VIEW_MORE_INCREMENT)}
+          onClick={(): void => {
+            setNumberOfVisibleCalendarEntries((previous) => previous + LIST_VIEW_MORE_INCREMENT);
+          }}
         >
           {Config.dashboardDefaults.calendarListViewMoreButton}
         </UnStyledButton>

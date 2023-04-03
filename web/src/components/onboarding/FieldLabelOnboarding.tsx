@@ -3,7 +3,7 @@ import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { FlowType, ProfileContentField } from "@/lib/types/types";
-import { useContext } from "react";
+import { ReactElement, useContext } from "react";
 
 interface Props {
   fieldName: ProfileContentField;
@@ -11,7 +11,7 @@ interface Props {
   CMS_ONLY_flow?: FlowType;
 }
 
-export const FieldLabelOnboarding = (props: Props) => {
+export const FieldLabelOnboarding = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const { state } = useContext(ProfileDataContext);
 

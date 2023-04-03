@@ -64,7 +64,7 @@ describe("<NexusSearchBusinessNameStep />", () => {
     useMockRoadmap({});
   });
 
-  const renderTask = (userData?: UserData) => {
+  const renderTask = (userData?: UserData): void => {
     render(
       <WithStatefulUserData initialUserData={userData || initialUserData}>
         <NexusSearchBusinessNameStep />
@@ -177,7 +177,7 @@ describe("<NexusSearchBusinessNameStep />", () => {
   });
 
   describe("on DBA search", () => {
-    const setupForDBA = async () => {
+    const setupForDBA = async (): Promise<void> => {
       renderTask();
       fillText("My Cool Business");
       await searchAndGetValue({ status: "UNAVAILABLE" });

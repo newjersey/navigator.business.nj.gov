@@ -2,7 +2,7 @@ import { findMatchInBlock, findMatchInLabelledText, findMatchInListText } from "
 import { Match } from "@/lib/search/typesForSearch";
 import { Certification } from "@/lib/types/types";
 
-export const searchCertifications = (certifications: Certification[], term: string) => {
+export const searchCertifications = (certifications: Certification[], term: string): Match[] => {
   const matches: Match[] = [];
 
   for (const cert of certifications) {

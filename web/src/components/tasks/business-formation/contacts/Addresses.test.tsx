@@ -177,7 +177,7 @@ describe("Formation - Addresses", () => {
           const page = await getPageHelper({ legalStructureId }, { incorporators });
           await attemptApiSubmission(page);
 
-          const signerErrorText = () => {
+          const signerErrorText = (): HTMLElement | null => {
             return screen.queryByText(Config.formation.fields.signers.errorBannerSignerName);
           };
           expect(signerErrorText()).toBeInTheDocument();
@@ -193,7 +193,7 @@ describe("Formation - Addresses", () => {
           const incorporators = [generateFormationIncorporator({}, legalStructureId)];
           const page = await getPageHelper({ legalStructureId }, { incorporators });
           await attemptApiSubmission(page);
-          const signerCheckboxErrorText = () => {
+          const signerCheckboxErrorText = (): HTMLElement | null => {
             return screen.queryByText(Config.formation.fields.signers.errorBannerCheckbox);
           };
           expect(signerCheckboxErrorText()).toBeInTheDocument();
@@ -233,7 +233,7 @@ describe("Formation - Addresses", () => {
     });
   });
 
-  const attemptApiSubmission = async (page: FormationPageHelpers) => {
+  const attemptApiSubmission = async (page: FormationPageHelpers): Promise<void> => {
     await page.stepperClickToReviewStep();
     await page.clickSubmit();
     await page.stepperClickToContactsStep();

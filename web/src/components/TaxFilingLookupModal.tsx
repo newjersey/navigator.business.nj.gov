@@ -64,13 +64,14 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
     );
   };
 
-  const responsibleOwnerOrBusinessNameError = () => {
+  const responsibleOwnerOrBusinessNameError = (): string => {
     if (displayBusinessName()) {
       return Config.taxCalendar.modalBusinessFieldErrorName;
     }
     if (displayResponsibleOwnerName()) {
       return Config.taxCalendar.modalResponsibleOwnerFieldErrorName;
     }
+    return "";
   };
 
   const errorAlert = (): ReactElement => {
@@ -213,9 +214,9 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
             profileData: profileData,
             flow: "OWNING",
           },
-          setUser: () => {},
           setProfileData,
-          onBack: () => {},
+          setUser: (): void => {},
+          onBack: (): void => {},
         }}
       >
         <Backdrop sx={{ zIndex: 20000 }} open={isLoading}>
@@ -226,7 +227,7 @@ export const TaxFilingLookupModal = (props: Props): ReactElement => {
           close={onClose}
           title={Config.taxCalendar.modalHeader}
           primaryButtonText={Config.taxCalendar.modalNextButton}
-          primaryButtonOnClick={() => {
+          primaryButtonOnClick={(): void => {
             onSubmit();
             setOnSubmitClicked(true);
           }}

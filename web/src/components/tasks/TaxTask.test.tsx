@@ -95,7 +95,7 @@ describe("<TaxTask />", () => {
   describe("inputting Tax ID", () => {
     let initialUserData: UserData;
 
-    const renderPage = () => {
+    const renderPage = (): void => {
       render(
         withAuthAlert(
           <WithStatefulUserData initialUserData={initialUserData}>
@@ -176,7 +176,7 @@ describe("<TaxTask />", () => {
   describe("displaying Tax ID", () => {
     let initialUserData: UserData;
 
-    const renderPage = () => {
+    const renderPage = (): void => {
       render(
         withAuthAlert(
           <WithStatefulUserData initialUserData={initialUserData}>
@@ -204,7 +204,7 @@ describe("<TaxTask />", () => {
     let initialUserData: UserData;
     const setRegistrationModalIsVisible = jest.fn();
 
-    const renderPage = () => {
+    const renderPage = (): void => {
       render(
         withAuthAlert(
           <WithStatefulUserData initialUserData={initialUserData}>
@@ -239,7 +239,7 @@ describe("<TaxTask />", () => {
   });
 
   describe("tax id disclaimer", () => {
-    const renderComponent = (initialUserData?: UserData) => {
+    const renderComponent = (initialUserData?: UserData): void => {
       render(
         <WithStatefulUserData initialUserData={initialUserData ?? generateUserData({})}>
           <TaxTask task={task} />

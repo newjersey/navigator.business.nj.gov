@@ -11,16 +11,17 @@ import { ReactElement } from "react";
 export const NexusUnavailable = (props: UnavailableProps): ReactElement => {
   const { Config } = useConfig();
 
-  const onClick = () => {
+  const onClick = (): void => {
     analytics.event.business_formation_search_existing_name_again.click.refresh_name_search_field();
     props.resetSearch();
   };
+
   const [textBeforeButton, textAfterButton] = templateEval(Config.nexusNameSearch.unavailableText, {
     name: props.submittedName,
   }).split("${searchAgainButton}");
 
   const inlineParagraphComponent = {
-    p: (props: { children: string[] }) => {
+    p: (props: { children: string[] }): ReactElement => {
       return <div className="display-inline">{props.children}</div>;
     },
   };

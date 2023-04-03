@@ -6,7 +6,7 @@ import { useSidebarCards } from "@/lib/data-hooks/useSidebarCards";
 import { MediaQueries } from "@/lib/PageSizes";
 import { SidebarCardContent } from "@/lib/types/types";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { ReactNode } from "react";
+import { ReactElement, ReactNode } from "react";
 import { ModifiedContent } from "../ModifiedContent";
 
 type Props = {
@@ -18,13 +18,13 @@ type Props = {
   layout?: "row" | "column";
 };
 
-export const SidebarCardGeneric = (props: Props) => {
+export const SidebarCardGeneric = (props: Props): ReactElement => {
   const { hideCard } = useSidebarCards();
   const isMobile = useMediaQuery(MediaQueries.isMobile);
 
   const layout = props.layout ?? "column";
 
-  const closeSelf = async () => {
+  const closeSelf = async (): Promise<void> => {
     await hideCard(props.card.id);
   };
 

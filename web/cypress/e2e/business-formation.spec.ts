@@ -105,7 +105,7 @@ describe("Business Formation [feature] [all] [group2]", () => {
   });
 });
 
-const submitBusinessNameSearchAndContinue = (name: string) => {
+const submitBusinessNameSearchAndContinue = (name: string): void => {
   cy.url().should("include", "form-business-entity");
   onBusinessFormationPage.typeBusinessNameSearch(name);
   onBusinessFormationPage.getBusinessNameSearch().invoke("prop", "value").should("contain", name);
@@ -114,7 +114,10 @@ const submitBusinessNameSearchAndContinue = (name: string) => {
   onBusinessFormationPage.clickContinueToNextTab();
 };
 
-const typeDesignatorAndStartDate = ({ businessSuffix, businessStartDate }: Partial<FormationFormData>) => {
+const typeDesignatorAndStartDate = ({
+  businessSuffix,
+  businessStartDate,
+}: Partial<FormationFormData>): void => {
   if (businessSuffix) {
     onBusinessFormationPage.selectBusinessDesignator(businessSuffix);
     onBusinessFormationPage.getBusinessDesignator().invoke("prop", "value").should("contain", businessSuffix);
@@ -128,7 +131,7 @@ const typeDesignatorAndStartDate = ({ businessSuffix, businessStartDate }: Parti
   }
 };
 
-const openAddressSection = () => {
+const openAddressSection = (): void => {
   cy.get('[data-testid="add-address-button"]').click();
 };
 
@@ -137,7 +140,7 @@ const typeBusinessAddress = ({
   addressLine2,
   addressMunicipality,
   addressZipCode,
-}: Partial<FormationFormData>) => {
+}: Partial<FormationFormData>): void => {
   if (addressLine1) {
     onBusinessFormationPage.typeBusinessAddressLine1(addressLine1 as string);
     onBusinessFormationPage.getBusinessAddressLine1().invoke("prop", "value").should("contain", addressLine1);
@@ -162,13 +165,13 @@ const typeBusinessAddress = ({
   }
 };
 
-const typeBusinessPurpose = (businessPurpose: FormationFormData["businessPurpose"]) => {
+const typeBusinessPurpose = (businessPurpose: FormationFormData["businessPurpose"]): void => {
   onBusinessFormationPage.clickAddBusinessPurpose();
   onBusinessFormationPage.typeBusinessPurpose(businessPurpose as string);
   onBusinessFormationPage.getBusinessPurpose().invoke("prop", "value").should("contain", businessPurpose);
 };
 
-const typeProvisions = (provisions: FormationFormData["provisions"]) => {
+const typeProvisions = (provisions: FormationFormData["provisions"]): void => {
   if (!provisions) {
     return;
   }
@@ -193,7 +196,7 @@ const selectAndTypeRegisteredAgent = ({
   agentOfficeAddressLine2,
   agentOfficeAddressMunicipality,
   agentOfficeAddressZipCode,
-}: Partial<AdditionalFormation>) => {
+}: Partial<AdditionalFormation>): void => {
   if (agentNumberOrManual === "NUMBER") {
     onBusinessFormationPage.getRegisteredAgentNumberRadio().check();
     onBusinessFormationPage.getRegisteredAgentNumberRadio().should("be.checked");
@@ -264,7 +267,7 @@ const selectAndTypeRegisteredAgent = ({
   }
 };
 
-const addMembersToFormation = (members: FormationFormData["members"] = []) => {
+const addMembersToFormation = (members: FormationFormData["members"] = []): void => {
   for (const membersObj of members) {
     onBusinessFormationPage.clickAddNewMembers();
     onAddressModal.typeFullName(membersObj.name);
@@ -292,7 +295,7 @@ const addMembersToFormation = (members: FormationFormData["members"] = []) => {
   }
 };
 
-const addSigners = (signers: FormationFormData["signers"] = []) => {
+const addSigners = (signers: FormationFormData["signers"] = []): void => {
   for (const [index, signer] of signers.entries()) {
     onBusinessFormationPage.typeSigner(signer.name, index);
     onBusinessFormationPage.getSigner(index).invoke("prop", "value").should("contain", signer.name);
@@ -309,7 +312,7 @@ const typeBillingContactInfo = ({
   contactFirstName,
   contactLastName,
   contactPhoneNumber,
-}: Partial<FormationFormData>) => {
+}: Partial<FormationFormData>): void => {
   if (contactFirstName) {
     onBusinessFormationPage.typeContactFirstName(contactFirstName);
     onBusinessFormationPage.getContactFirstName().invoke("prop", "value").should("contain", contactFirstName);
@@ -337,7 +340,7 @@ const selectServices = ({
   certificateOfStanding,
   certifiedCopyOfFormationDocument,
   paymentType,
-}: Partial<FormationFormData>) => {
+}: Partial<FormationFormData>): void => {
   if (certificateOfStanding) {
     onBusinessFormationPage.getCertificateOfStanding().check();
     onBusinessFormationPage.getCertificateOfStanding().should("be.checked");

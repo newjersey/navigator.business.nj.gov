@@ -68,8 +68,8 @@ export const FormationDateModal = (props: Props): ReactElement => {
             flow: "STARTING",
           },
           setProfileData,
-          setUser: () => {},
-          onBack: () => {},
+          setUser: (): void => {},
+          onBack: (): void => {},
         }}
       >
         <ModalTwoButton

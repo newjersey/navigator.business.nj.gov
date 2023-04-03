@@ -14,7 +14,7 @@ const renderButton = ({
 }: {
   status: "text-view" | "password-view";
   useOverrideText?: boolean;
-}) => {
+}): void => {
   if (useOverrideText) {
     render(
       <ShowHideToggleButton

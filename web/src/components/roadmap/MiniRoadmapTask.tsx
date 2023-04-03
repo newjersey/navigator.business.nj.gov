@@ -21,7 +21,7 @@ export const MiniRoadmapTask = (props: Props): ReactElement => {
       <div>
         <UnStyledButton
           style="tertiary"
-          onClick={() => {
+          onClick={(): void => {
             analytics.event.task_mini_roadmap_task.click.go_to_task();
             props.onTaskClick && props.onTaskClick();
           }}

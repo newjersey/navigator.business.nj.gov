@@ -67,9 +67,7 @@ export const BusinessNameStep = (): ReactElement => {
                   className="fg1 width-100"
                   margin="dense"
                   value={currentName}
-                  onChange={(event) => {
-                    return updateCurrentName(event.target.value);
-                  }}
+                  onChange={(event): void => updateCurrentName(event.target.value)}
                   variant="outlined"
                   inputProps={{
                     "aria-label": "Search business name",
@@ -84,7 +82,7 @@ export const BusinessNameStep = (): ReactElement => {
                         ).label
                       : undefined
                   }
-                  onBlur={(event: FocusEvent<HTMLInputElement>) => {
+                  onBlur={(event: FocusEvent<HTMLInputElement>): void => {
                     setFieldsInteracted([FIELD_NAME]);
                     onBlurNameField(event.target.value);
                   }}
@@ -94,7 +92,7 @@ export const BusinessNameStep = (): ReactElement => {
             <FormControl margin="dense">
               <SecondaryButton
                 isColor="primary"
-                onClick={() => {}}
+                onClick={(): void => {}}
                 isLoading={isLoading}
                 isSubmitButton={true}
                 isRightMarginRemoved={true}

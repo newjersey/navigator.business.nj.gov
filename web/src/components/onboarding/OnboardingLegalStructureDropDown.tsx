@@ -24,7 +24,7 @@ export const OnboardingLegalStructureDropdown = <T,>(props: Props<T>): ReactElem
     props.errorTypes
   );
 
-  const isValid = () => state.profileData.legalStructureId !== undefined;
+  const isValid = (): boolean => state.profileData.legalStructureId !== undefined;
 
   RegisterForOnSubmit(isValid);
 
@@ -35,7 +35,7 @@ export const OnboardingLegalStructureDropdown = <T,>(props: Props<T>): ReactElem
     }
   );
 
-  const handleLegalStructure = (event: SelectChangeEvent) => {
+  const handleLegalStructure = (event: SelectChangeEvent): void => {
     if (event.target.value) {
       setProfileData({
         ...state.profileData,

@@ -1,7 +1,7 @@
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { templateEval, templateEvalWithExtraSpaceRemoval } from "@/lib/utils/helpers";
 
-export const useContentModifiedByUserData = (content: string) => {
+export const useContentModifiedByUserData = (content: string): string => {
   const { userData } = useUserData();
   let result = content;
   if (!userData || !result) return result;

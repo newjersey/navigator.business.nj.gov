@@ -1,17 +1,12 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
-import {
-  generateProfileData,
-  generateUndefinedIndustrySpecificData,
-  generateUser,
-  generateUserData,
-} from "@/test/factories";
+import { generateProfileData, generateUser, generateUserData } from "@/test/factories";
 import * as mockRouter from "@/test/mock/mockRouter";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import { currentUserData, setupStatefulUserDataContext } from "@/test/mock/withStatefulUserData";
 import {
-  industryIdsWithEssentialQuestion,
+  industryIdsWithRequiredEssentialQuestion,
   mockSuccessfulApiSignups,
   renderPage,
   runSelfRegPageTests,
@@ -24,6 +19,7 @@ import {
   ProfileData,
   UserData,
 } from "@businessnjgovnavigator/shared/";
+import { emptyIndustrySpecificData } from "@businessnjgovnavigator/shared/profileData";
 import { act, screen, waitFor, within } from "@testing-library/react";
 
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));
@@ -38,7 +34,7 @@ jest.mock("@/lib/api-client/apiClient", () => ({
 const mockApi = api as jest.Mocked<typeof api>;
 const Config = getMergedConfig();
 
-const generateTestUserData = (overrides: Partial<ProfileData>) => {
+const generateTestUserData = (overrides: Partial<ProfileData>): UserData => {
   return generateUserData({
     profileData: generateProfileData({
       businessPersona: "STARTING",
@@ -79,12 +75,12 @@ describe("onboarding - starting a business", () => {
       expect(screen.queryByTestId("snackbar-alert-ERROR")).not.toBeInTheDocument();
     });
 
-    it.each(industryIdsWithEssentialQuestion)(
+    it.each(industryIdsWithRequiredEssentialQuestion)(
       "prevents user from moving to Step 3 when %s is selected as industry, but essential question is not answered",
       async (industryId) => {
         const userData = generateTestUserData({
           industryId: industryId,
-          ...generateUndefinedIndustrySpecificData(),
+          ...emptyIndustrySpecificData,
         });
         useMockRouter({ isReady: true, query: { page: "2" } });
         const { page } = renderPage({ userData });
@@ -101,12 +97,12 @@ describe("onboarding - starting a business", () => {
       }
     );
 
-    it.each(industryIdsWithEssentialQuestion)(
+    it.each(industryIdsWithRequiredEssentialQuestion)(
       "allows user to move past Step 2 when you have selected an industry %s and answered the essential question",
       async (industryId) => {
         const userData = generateTestUserData({
           industryId: industryId,
-          ...generateUndefinedIndustrySpecificData(),
+          ...emptyIndustrySpecificData,
         });
         useMockRouter({ isReady: true, query: { page: "2" } });
         const { page } = renderPage({ userData });
@@ -117,12 +113,12 @@ describe("onboarding - starting a business", () => {
       }
     );
 
-    it.each(industryIdsWithEssentialQuestion)(
+    it.each(industryIdsWithRequiredEssentialQuestion)(
       "removes essential question inline error when essential question radio is selected for %s industry",
       async (industryId) => {
         const userData = generateTestUserData({
           industryId: industryId,
-          ...generateUndefinedIndustrySpecificData(),
+          ...emptyIndustrySpecificData,
         });
         useMockRouter({ isReady: true, query: { page: "2" } });
         const { page } = renderPage({ userData });

@@ -19,7 +19,7 @@ export const NavBar = (props: Props): ReactElement => {
   const isLargeScreen = useMediaQuery(MediaQueries.desktopAndUp);
   const [scrolled, setScrolled] = useState(false);
 
-  const handleScroll = () => {
+  const handleScroll = (): void => {
     const offset = window.scrollY;
     if (offset > 108) {
       setScrolled(true);

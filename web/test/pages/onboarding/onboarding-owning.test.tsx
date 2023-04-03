@@ -18,6 +18,7 @@ import {
   runSelfRegPageTests,
 } from "@/test/pages/onboarding/helpers-onboarding";
 import { createEmptyUserData, generateMunicipality, ProfileData } from "@businessnjgovnavigator/shared/";
+import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { act, screen, waitFor, within } from "@testing-library/react";
 
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));
@@ -34,7 +35,7 @@ const mockApi = api as jest.Mocked<typeof api>;
 
 const Config = getMergedConfig();
 
-const generateTestUserData = (overrides: Partial<ProfileData>) => {
+const generateTestUserData = (overrides: Partial<ProfileData>): UserData => {
   return generateUserData({
     profileData: generateProfileData({
       ...overrides,
@@ -43,7 +44,7 @@ const generateTestUserData = (overrides: Partial<ProfileData>) => {
   });
 };
 
-const generateCCorpTestUserData = (overrides: Partial<ProfileData>) => {
+const generateCCorpTestUserData = (overrides: Partial<ProfileData>): UserData => {
   return generateTestUserData({
     businessPersona: "OWNING",
     legalStructureId: "c-corporation",

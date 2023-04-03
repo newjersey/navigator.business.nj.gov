@@ -2,7 +2,7 @@ import { findMatchInBlock, findMatchInLabelledText, findMatchInListText } from "
 import { Match } from "@/lib/search/typesForSearch";
 import { Funding } from "@/lib/types/types";
 
-export const searchFundings = (fundings: Funding[], term: string) => {
+export const searchFundings = (fundings: Funding[], term: string): Match[] => {
   const matches: Match[] = [];
 
   for (const funding of fundings) {

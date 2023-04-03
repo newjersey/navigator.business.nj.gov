@@ -15,7 +15,7 @@ export const HideableTasks = (): ReactElement => {
   const { Config } = useConfig();
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
 
-  const handleToggleClick = () => {
+  const handleToggleClick = (): void => {
     if (!userData) {
       return;
     }

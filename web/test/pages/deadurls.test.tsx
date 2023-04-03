@@ -15,7 +15,8 @@ jest.mock("broken-link-checker", () => {
         link?: ((result: any) => void) | undefined;
         end?: (() => void) | undefined;
       }
-    ) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ): any {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const enqueue = (pageUrl: any): any => {
         if (!handlers.link || !handlers.end) {

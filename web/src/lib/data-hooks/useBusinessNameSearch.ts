@@ -64,7 +64,7 @@ export const useBusinessNameSearch = ({
     setBusinessNameAvailability({ similarNames: [], status: undefined });
   };
 
-  const resetSearch = () => {
+  const resetSearch = (): void => {
     setBusinessNameAvailability({ similarNames: [], status: undefined });
     setUpdateButtonClicked(false);
     setError(undefined);
@@ -78,7 +78,7 @@ export const useBusinessNameSearch = ({
       event.preventDefault();
     }
 
-    const resetState = () => {
+    const resetState = (): void => {
       setBusinessNameAvailability({ similarNames: [], status: undefined });
       setUpdateButtonClicked(false);
       setError(undefined);

@@ -52,7 +52,7 @@ export const MainBusinessAddressNj = (): ReactElement => {
         <div className="mobile-lg:margin-left-auto flex mobile-lg:flex-justify-center">
           {!isExpanded && (
             <div data-testid={"add-address-button"}>
-              <UnStyledButton style="tertiary" onClick={() => setIsExpanded(true)}>
+              <UnStyledButton style="tertiary" onClick={(): void => setIsExpanded(true)}>
                 {Config.formation.sections.addressAddButtonText}
               </UnStyledButton>
             </div>
@@ -105,7 +105,7 @@ export const MainBusinessAddressNj = (): ReactElement => {
                 value={"New Jersey"}
                 validationText={Config.formation.fields.addressState.error}
                 disabled={true}
-                onSelect={() => {}}
+                onSelect={(): void => {}}
                 className={"margin-top-2"}
               />
             </WithErrorBar>

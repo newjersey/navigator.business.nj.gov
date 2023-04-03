@@ -1,6 +1,6 @@
 import { MediaQueries } from "@/lib/PageSizes";
 import { useMediaQuery } from "@mui/material";
-import { ReactNode } from "react";
+import { ReactElement, ReactNode } from "react";
 
 interface Props {
   hasError: boolean;
@@ -9,10 +9,10 @@ interface Props {
   className?: string;
 }
 
-export const WithErrorBar = (props: Props) => {
+export const WithErrorBar = (props: Props): ReactElement => {
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
 
-  const shouldShowBar = (() => {
+  const shouldShowBar = ((): boolean => {
     switch (props.type) {
       case "ALWAYS":
         return true;

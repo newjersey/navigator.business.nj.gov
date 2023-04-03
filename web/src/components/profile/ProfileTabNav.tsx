@@ -18,19 +18,19 @@ interface Props {
 export const ProfileTabNav = (props: Props): ReactElement => {
   const { Config } = useConfig();
 
-  const shouldShowInfo = () => {
+  const shouldShowInfo = (): boolean => {
     return true;
   };
 
-  const shouldShowNumbers = () => {
+  const shouldShowNumbers = (): boolean => {
     return true;
   };
 
-  const shouldShowNotes = () => {
+  const shouldShowNotes = (): boolean => {
     return true;
   };
 
-  const shouldShowDocuments = () => {
+  const shouldShowDocuments = (): boolean => {
     if (props.userData?.formationData.getFilingResponse?.success) {
       return true;
     }

@@ -40,7 +40,7 @@ describe("<SearchBusinessNameForm />", () => {
     return <div>{unavailableText}</div>;
   };
 
-  const renderForm = () => {
+  const renderForm = (): void => {
     render(
       <SearchBusinessNameForm
         available={FakeAvailable}
@@ -180,19 +180,19 @@ describe("<SearchBusinessNameForm />", () => {
     expect(screen.queryByTestId("error-alert-SEARCH_FAILED")).not.toBeInTheDocument();
   });
 
-  const availableTextExists = () => {
+  const availableTextExists = (): boolean => {
     return screen.queryByText(availableText) !== null;
   };
-  const unavailableTextExists = () => {
+  const unavailableTextExists = (): boolean => {
     return screen.queryByText(unavailableText) !== null;
   };
-  const designatorErrorTextExists = () => {
+  const designatorErrorTextExists = (): boolean => {
     return screen.queryByTestId("designator-error-text") !== null;
   };
-  const specialCharacterErrorTextExists = () => {
+  const specialCharacterErrorTextExists = (): boolean => {
     return screen.queryByTestId("special-character-error-text") !== null;
   };
-  const restrictedWordErrorTextExists = () => {
+  const restrictedWordErrorTextExists = (): boolean => {
     return screen.queryByTestId("restricted-word-error-text") !== null;
   };
 });

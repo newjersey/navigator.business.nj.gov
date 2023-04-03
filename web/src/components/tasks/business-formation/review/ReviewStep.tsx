@@ -69,8 +69,8 @@ export const ReviewStep = (): ReactElement => {
         <hr className="margin-y-205" />
         <Alert variant="info">
           <Content
-            onClick={() => {
-              return analytics.event.business_formation_review_amendments_external_link;
+            onClick={(): void => {
+              analytics.event.business_formation_review_amendments_external_link.click.go_to_Treasury_amendments_page();
             }}
           >
             {Config.formation.general.amendmentInfo}

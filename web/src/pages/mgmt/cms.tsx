@@ -31,10 +31,12 @@ import TaskPreview from "@/lib/cms/previews/TaskPreview";
 import TaxInputPreview from "@/lib/cms/previews/TaxInputPreview";
 import { useMountEffect } from "@/lib/utils/helpers";
 
+import { GetStaticPropsResult } from "next";
 import dynamic from "next/dynamic";
+import { ReactElement } from "react";
 
 const CMS_CONFIG = {};
-const Loading = () => {
+const Loading = (): ReactElement => {
   return (
     <div className="min-h-screen flex items-center justify-center">
       <p className="text-gray-500 font-semibold text-xl">Loading...</p>
@@ -121,14 +123,14 @@ const CMS = dynamic(
   { ssr: false, loading: Loading }
 );
 
-const registerAsTask = (CMS: typeof import("netlify-cms-app"), names: string[]) => {
+const registerAsTask = (CMS: typeof import("netlify-cms-app"), names: string[]): void => {
   for (const name of names) {
     // @ts-expect-error: No type definition available
     CMS.registerPreviewTemplate(name, TaskPreview);
   }
 };
 
-const registerAsCannabisLicensePreview = (CMS: typeof import("netlify-cms-app"), names: string[]) => {
+const registerAsCannabisLicensePreview = (CMS: typeof import("netlify-cms-app"), names: string[]): void => {
   for (const name of names) {
     // @ts-expect-error: No type definition available
     CMS.registerPreviewTemplate(name, CannabisLicensePreview);
@@ -140,12 +142,12 @@ const registerPreview = (
   name: string,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   preview: (props: any) => JSX.Element
-) => {
+): void => {
   // @ts-expect-error: No type definition available
   CMS.registerPreviewTemplate(name, applyTheme(preview));
 };
 
-const Admin = () => {
+const Admin = (): ReactElement => {
   useMountEffect(() => {
     return setInterval(() => {
       window.location.reload();
@@ -158,7 +160,7 @@ const Admin = () => {
     }, 1000 * 30);
   });
 
-  const printFieldWithErrorToConsole = () => {
+  const printFieldWithErrorToConsole = (): void => {
     const errorMessages = document.querySelectorAll(".css-9guxbf-ControlErrorsList");
     if (errorMessages.length > 0) {
       for (const element of errorMessages) {
@@ -174,7 +176,7 @@ const Admin = () => {
   );
 };
 
-export async function getStaticProps() {
+export function getStaticProps(): GetStaticPropsResult<{ noAuth: boolean }> {
   return {
     props: { noAuth: true },
   };

@@ -60,12 +60,12 @@ export const OnboardingSplitTaxId = ({
     fieldName: "taxId",
   });
 
-  const updateSplitTaxId = (taxId: string) => {
+  const updateSplitTaxId = (taxId: string): void => {
     setTaxIdValue(taxId.trim().slice(0, 9));
     setLocationValue(taxId.trim().slice(9, 12));
   };
 
-  const handleChange = (value: string, type: "taxId" | "taxIdLocation") => {
+  const handleChange = (value: string, type: "taxId" | "taxIdLocation"): void => {
     let resolvedValue: string;
 
     if (type === "taxId") {
@@ -103,10 +103,10 @@ export const OnboardingSplitTaxId = ({
               visualFilter={formatTaxId}
               numericProps={{ minLength: 9, maxLength: 9 }}
               validationText={validationText ?? contentFromConfig.errorTextRequired ?? ""}
-              handleChange={(value) => {
+              handleChange={(value): void => {
                 handleChange(value, "taxId");
               }}
-              onValidation={(fieldName: string, invalid: boolean) => Validate(invalid)}
+              onValidation={(fieldName: string, invalid: boolean): void => Validate(invalid)}
               disabled={props.taxIdDisplayStatus === "password-view"}
               type={props.taxIdDisplayStatus === "text-view" ? "text" : "password"}
               allowMasking={true}
@@ -124,10 +124,10 @@ export const OnboardingSplitTaxId = ({
               fieldOptions={{ sx: { textAlignLast: "center", maxWidth: "4em" } }}
               fieldName={"taxIdLocation"}
               numericProps={{ minLength: 3, maxLength: 3 }}
-              handleChange={(value) => {
+              handleChange={(value): void => {
                 handleChange(value, "taxIdLocation");
               }}
-              onValidation={(fieldName: string, invalid: boolean) => Validate(invalid)}
+              onValidation={(fieldName: string, invalid: boolean): void => Validate(invalid)}
               disabled={props.taxIdDisplayStatus === "password-view"}
               type={props.taxIdDisplayStatus === "text-view" ? "text" : "password"}
               allowMasking={true}

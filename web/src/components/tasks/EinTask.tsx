@@ -32,7 +32,7 @@ export const EinTask = (props: Props): ReactElement => {
     setShowInput(!userData.profileData.employerId);
   }, userData);
 
-  const setBackToEditing = ({ remove }: { remove: boolean }) => {
+  const setBackToEditing = ({ remove }: { remove: boolean }): void => {
     if (!userData || !updateQueue) {
       return;
     }
@@ -44,14 +44,15 @@ export const EinTask = (props: Props): ReactElement => {
       .update();
   };
 
-  const onEdit = () => {
-    return setBackToEditing({ remove: false });
-  };
-  const onRemove = () => {
-    return setBackToEditing({ remove: true });
+  const onEdit = (): void => {
+    setBackToEditing({ remove: false });
   };
 
-  const onSave = () => {
+  const onRemove = (): void => {
+    setBackToEditing({ remove: true });
+  };
+
+  const onSave = (): void => {
     if (isAuthenticated === IsAuthenticated.FALSE) {
       setRegistrationModalIsVisible(true);
       return;

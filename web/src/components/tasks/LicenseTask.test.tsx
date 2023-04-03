@@ -25,8 +25,8 @@ describe("<LicenseTask />", () => {
   const task = generateTask({});
   const initialUserData = generateUserData({ licenseData: generateLicenseData({}) });
 
-  const renderTask = () => {
-    return render(
+  const renderTask = (): void => {
+    render(
       <ThemeProvider theme={createTheme()}>
         <LicenseTask task={task} />
       </ThemeProvider>
@@ -330,7 +330,7 @@ describe("<LicenseTask />", () => {
     });
   });
 
-  const fillText = (testid: string, value: string) => {
+  const fillText = (testid: string, value: string): void => {
     fireEvent.change(screen.getByTestId(testid), { target: { value: value } });
   };
 

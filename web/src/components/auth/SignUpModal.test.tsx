@@ -29,7 +29,7 @@ describe("SignUpModal", () => {
 
   const setRegistrationModalIsVisible = jest.fn();
 
-  const setupHookWithAuth = (isAuthenticated: IsAuthenticated, registrationModalIsVisible = true) => {
+  const setupHookWithAuth = (isAuthenticated: IsAuthenticated, registrationModalIsVisible = true): void => {
     render(
       withAuthAlert(<SignUpModal />, isAuthenticated, {
         registrationModalIsVisible,

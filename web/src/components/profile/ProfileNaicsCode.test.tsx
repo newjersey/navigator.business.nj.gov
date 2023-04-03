@@ -10,7 +10,7 @@ import { render, screen } from "@testing-library/react";
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 const Config = getMergedConfig();
 
-const renderComponent = (profileData: Partial<ProfileData>) => {
+const renderComponent = (profileData: Partial<ProfileData>): void => {
   const data = generateProfileData({
     businessPersona: "STARTING",
     ...profileData,
@@ -22,9 +22,9 @@ const renderComponent = (profileData: Partial<ProfileData>) => {
           profileData: data,
           flow: getFlow(data),
         },
-        setProfileData: () => {},
-        setUser: () => {},
-        onBack: () => {},
+        setProfileData: (): void => {},
+        setUser: (): void => {},
+        onBack: (): void => {},
       }}
     >
       <ProfileNaicsCode />

@@ -43,11 +43,11 @@ export const OnboardingForeignBusinessType = <T,>(props: Props<T>): ReactElement
       fieldName: "foreignBusinessTypeIds",
     });
 
-  const isValid = (ids: string[]) => ids.length > 0;
+  const isValid = (ids: string[]): boolean => ids.length > 0;
 
   RegisterForOnSubmit(() => isValid(state.profileData.foreignBusinessTypeIds));
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     let ids = state.profileData.foreignBusinessTypeIds;
 
     if (ids.includes("none") && event.target.value !== "none") {

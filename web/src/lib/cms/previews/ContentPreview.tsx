@@ -1,8 +1,9 @@
 import { Content } from "@/components/Content";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
+import { ReactElement } from "react";
 
-const ContentPreview = (props: PreviewProps) => {
+const ContentPreview = (props: PreviewProps): ReactElement => {
   const ref = usePreviewRef(props);
 
   const { body } = JSON.parse(JSON.stringify(props.entry.getIn(["data"])));

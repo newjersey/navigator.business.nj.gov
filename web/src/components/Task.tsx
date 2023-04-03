@@ -7,7 +7,7 @@ import * as types from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { useMediaQuery } from "@mui/material";
 import Link from "next/link";
-import { ReactElement } from "react";
+import { ReactElement, ReactNode } from "react";
 
 interface Props {
   task: types.Task;
@@ -19,7 +19,7 @@ export const Task = (props: Props): ReactElement => {
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
   const taskProgress = (userData?.taskProgress && userData.taskProgress[props.task.id]) || "NOT_STARTED";
 
-  const renderRequiredLabel = () => {
+  const renderRequiredLabel = (): ReactNode => {
     if (!props.task.required) {
       return <></>;
     }
@@ -45,9 +45,7 @@ export const Task = (props: Props): ReactElement => {
         <div>
           <Link href={`/tasks/${props.task.urlSlug}`} passHref>
             <a
-              onClick={() => {
-                return analytics.event.roadmap_task_title.click.go_to_task();
-              }}
+              onClick={(): void => analytics.event.roadmap_task_title.click.go_to_task()}
               href={`/tasks/${props.task.urlSlug}`}
               className={`usa-link margin-right-105 ${props.task.required ? "text-bold" : ""}`}
               data-task={props.task.id}

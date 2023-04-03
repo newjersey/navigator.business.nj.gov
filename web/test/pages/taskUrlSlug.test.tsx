@@ -38,8 +38,8 @@ const setLargeScreen = (): void => {
   (useMediaQuery as jest.Mock).mockImplementation(() => true);
 };
 
-const renderPage = (task: Task, initialUserData?: UserData) => {
-  return render(
+const renderPage = (task: Task, initialUserData?: UserData): void => {
+  render(
     <materialUi.ThemeProvider theme={materialUi.createTheme()}>
       <WithStatefulUserData initialUserData={initialUserData}>
         <TaskPage task={task} displayContent={createEmptyTaskDisplayContent()} municipalities={[]} />

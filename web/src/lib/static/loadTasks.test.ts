@@ -3,7 +3,7 @@ import { loadAllTaskUrlSlugs, loadTaskByUrlSlug } from "./loadTasks";
 
 jest.mock("fs");
 jest.mock("process", () => ({
-  cwd: () => "/test",
+  cwd: (): string => "/test",
 }));
 
 describe("loadTasks", () => {
@@ -206,7 +206,7 @@ describe("loadTasks", () => {
     });
   });
 
-  const mockReadDirReturnOnce = (value: string[]) => {
+  const mockReadDirReturnOnce = (value: string[]): void => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     mockedFs.readdirSync.mockReturnValueOnce(value);

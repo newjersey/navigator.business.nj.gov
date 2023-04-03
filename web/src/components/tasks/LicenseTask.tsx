@@ -33,8 +33,8 @@ export const LicenseTask = (props: Props): ReactElement => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { userData, refresh } = useUserData();
 
-  const allFieldsHaveValues = (nameAndAddress: NameAndAddress) => {
-    return nameAndAddress.name && nameAndAddress.addressLine1 && nameAndAddress.zipCode;
+  const allFieldsHaveValues = (nameAndAddress: NameAndAddress): boolean => {
+    return !!(nameAndAddress.name && nameAndAddress.addressLine1 && nameAndAddress.zipCode);
   };
 
   useMountEffectWhenDefined(() => {
@@ -63,7 +63,7 @@ export const LicenseTask = (props: Props): ReactElement => {
     setTabIndex(index);
   };
 
-  const onEdit = () => {
+  const onEdit = (): void => {
     setLicenseStatusResult(undefined);
   };
 
@@ -138,7 +138,7 @@ export const LicenseTask = (props: Props): ReactElement => {
               <div className="flex flex-column margin-top-4 margin-bottom-1">
                 <a href={callToActionLink} target="_blank" rel="noreferrer noopener">
                   <button
-                    onClick={() => {
+                    onClick={(): void => {
                       analytics.event.task_primary_call_to_action.click.open_external_website();
                     }}
                     className="usa-button width-100 margin-bottom-2"
@@ -153,7 +153,7 @@ export const LicenseTask = (props: Props): ReactElement => {
                   </button>
                 </a>
                 <button
-                  onClick={() => {
+                  onClick={(): void => {
                     analytics.event.task_button_i_already_submitted.click.view_status_tab();
                     setTabIndex(STATUS_TAB_INDEX);
                   }}

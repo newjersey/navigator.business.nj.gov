@@ -7,11 +7,14 @@ import {
   generateProfileData,
   generateRoadmap,
   generateTask,
-  generateUndefinedIndustrySpecificData,
 } from "@/test/factories";
 import { getLastCalledWith } from "@/test/helpers/helpers-utilities";
 import { generateMunicipality, Industries } from "@businessnjgovnavigator/shared/";
-import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
+import {
+  createEmptyProfileData,
+  emptyIndustrySpecificData,
+  ProfileData,
+} from "@businessnjgovnavigator/shared/profileData";
 
 jest.mock("@/lib/roadmap/roadmapBuilder", () => ({ buildRoadmap: jest.fn() }));
 jest.mock("@/lib/async-content-fetchers/fetchMunicipalities", () => ({
@@ -26,7 +29,7 @@ const Config = getMergedConfig();
 const generateStartingProfile = (overrides: Partial<ProfileData>): ProfileData => {
   return generateProfileData({
     businessPersona: "STARTING",
-    ...generateUndefinedIndustrySpecificData(),
+    ...emptyIndustrySpecificData,
     ...overrides,
   });
 };
@@ -36,7 +39,7 @@ const createEmptyNexusProfile = (overrides: Partial<ProfileData>): ProfileData =
     ...createEmptyProfileData(),
     businessPersona: "FOREIGN",
     foreignBusinessType: "NEXUS",
-    ...generateUndefinedIndustrySpecificData(),
+    ...emptyIndustrySpecificData,
     ...overrides,
   };
 };

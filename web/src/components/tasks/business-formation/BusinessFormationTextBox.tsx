@@ -98,9 +98,7 @@ export const BusinessFormationTextBox = (props: Props): ReactElement => {
                 <div className="grid-col-auto margin-x-2 margin-top-3 display-flex flex-column flex-justify-center">
                   <UnStyledButton
                     style="tertiary"
-                    onClick={() => {
-                      return removeEntry();
-                    }}
+                    onClick={(): void => removeEntry()}
                     className="display-flex flex-column flex-justify-center"
                   >
                     <Icon

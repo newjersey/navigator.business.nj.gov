@@ -7,15 +7,15 @@ import { templateEval } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import { getCurrentDateInNewJersey } from "@businessnjgovnavigator/shared/";
 import { useRouter } from "next/router";
-import { useContext } from "react";
+import { ReactElement, useContext } from "react";
 
-export const Header = () => {
+export const Header = (): ReactElement => {
   const { state } = useContext(AuthContext);
 
   const { userData } = useUserData();
   const router = useRouter();
 
-  const editOnClick = () => {
+  const editOnClick = (): void => {
     analytics.event.roadmap_profile_edit_button.click.go_to_profile_screen();
     router.push(ROUTES.profile);
   };
@@ -28,7 +28,7 @@ export const Header = () => {
       : Config.headerDefaults.noUserNameHeaderText;
   };
 
-  const getButtonText = () => {
+  const getButtonText = (): string | undefined => {
     if (state.isAuthenticated === "FALSE" || state.isAuthenticated === "UNKNOWN") {
       return Config.headerDefaults.guestModeToProfileButtonText;
     }

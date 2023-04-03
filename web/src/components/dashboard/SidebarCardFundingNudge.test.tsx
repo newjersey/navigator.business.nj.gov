@@ -27,7 +27,7 @@ const Config = getMergedConfig();
 describe("<SidebarCardFundingNudge />", () => {
   let card: SidebarCardContent;
 
-  const renderWithUserData = (userData: Partial<UserData>) => {
+  const renderWithUserData = (userData: Partial<UserData>): void => {
     render(
       <WithStatefulUserData initialUserData={generateUserData(userData)}>
         <SidebarCardFundingNudge card={card} />

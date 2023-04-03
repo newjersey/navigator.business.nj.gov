@@ -4,6 +4,7 @@ import { useRoadmap } from "@/lib/data-hooks/useRoadmap";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { isStepCompleted } from "@/lib/domain-logic/isStepCompleted";
 import analytics from "@/lib/utils/analytics";
+import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { ReactElement, useCallback } from "react";
 
 interface Props {
@@ -16,7 +17,7 @@ export const MiniRoadmap = (props: Props): ReactElement => {
   const { userData, update } = useUserData();
   const onToggleStep = useCallback(
     async (stepNumber: number, setOpen: boolean, click: boolean): Promise<void> => {
-      const updateSteps = (openSteps: number[]) => {
+      const updateSteps = (openSteps: number[]): UserData | undefined => {
         return userData
           ? {
               ...userData,

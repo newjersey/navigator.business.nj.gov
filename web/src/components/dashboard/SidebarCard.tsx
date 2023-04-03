@@ -6,12 +6,13 @@ import { SidebarCardRegisteredForTaxesNudge } from "@/components/dashboard/Sideb
 import { SidebarCardTaskProgress } from "@/components/dashboard/SidebarCardTaskProgress";
 import { SidebarCardContent } from "@/lib/types/types";
 import { rswitch } from "@/lib/utils/helpers";
+import { ReactElement } from "react";
 
 type Props = {
   card: SidebarCardContent;
 };
 
-export const SidebarCard = (props: Props) => {
+export const SidebarCard = (props: Props): ReactElement => {
   return (
     <>
       {rswitch(props.card.id, {

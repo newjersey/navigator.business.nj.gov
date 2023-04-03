@@ -142,7 +142,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
       };
     };
 
-    (async function fetchCompletedFiling() {
+    (async function fetchCompletedFiling(): Promise<void> {
       if (!router.isReady || !userData) {
         return;
       }
@@ -166,7 +166,7 @@ export const BusinessFormation = (props: Props): ReactElement => {
     })();
   }, [router.isReady, update, router, props.task.urlSlug, userData]);
 
-  const setFieldsInteracted = (fields: FormationFields[], config?: { setToUninteracted: boolean }) => {
+  const setFieldsInteracted = (fields: FormationFields[], config?: { setToUninteracted: boolean }): void => {
     setInteractedFields((prevState) => {
       const prevStateFieldRemoved = prevState.filter((it) => {
         return !fields.includes(it);

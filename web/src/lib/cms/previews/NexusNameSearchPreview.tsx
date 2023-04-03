@@ -7,8 +7,9 @@ import { ConfigContext } from "@/contexts/configContext";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
+import { ReactElement } from "react";
 
-const NexusNameSearchPreview = (props: PreviewProps) => {
+const NexusNameSearchPreview = (props: PreviewProps): ReactElement => {
   const { config, setConfig } = usePreviewConfig(props);
   const ref = usePreviewRef(props);
 
@@ -20,13 +21,13 @@ const NexusNameSearchPreview = (props: PreviewProps) => {
         <NexusUnavailable
           submittedName="some name"
           nameAvailability={{ status: "UNAVAILABLE", similarNames: [] }}
-          resetSearch={() => {}}
+          resetSearch={(): void => {}}
         />
         <DbaAvailable submittedName="some name" updateButtonClicked={false} />
         <DbaUnavailable
           submittedName="some name"
           nameAvailability={{ status: "UNAVAILABLE", similarNames: ["name 1", "name 2"] }}
-          resetSearch={() => {}}
+          resetSearch={(): void => {}}
         />
       </div>
     </ConfigContext.Provider>

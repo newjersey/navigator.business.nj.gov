@@ -32,7 +32,7 @@ export const ButtonDropdown = (props: Props): ReactElement => {
     prevOpen.current = open;
   }, [open]);
 
-  const toggleDropdown = () => {
+  const toggleDropdown = (): void => {
     setOpen((prevOpen) => {
       return !prevOpen;
     });
@@ -47,7 +47,7 @@ export const ButtonDropdown = (props: Props): ReactElement => {
     setOpen(false);
   };
 
-  function handleListKeyDown(event: React.KeyboardEvent) {
+  function handleListKeyDown(event: React.KeyboardEvent): void {
     if (event.key === "Tab") {
       event.preventDefault();
       setOpen(false);
@@ -55,13 +55,13 @@ export const ButtonDropdown = (props: Props): ReactElement => {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const DefaultButton = (props: { children: ReactNode; [key: string]: any }) => (
+  const DefaultButton = (props: { children: ReactNode; [key: string]: any }): ReactElement => (
     <UnStyledButton style="tertiary" textBold smallText {...props} />
   );
 
   const Wrapper = props.wrapper ?? DefaultButton;
 
-  const DropdownMenu = () => {
+  const DropdownMenu = (): ReactElement => {
     return (
       <MenuList
         autoFocusItem={open}
@@ -116,7 +116,7 @@ export const ButtonDropdown = (props: Props): ReactElement => {
         disablePortal={true}
         placement={`${props.horizontal ? "bottom" : "bottom-end"}`}
       >
-        {({ TransitionProps, placement }) => {
+        {({ TransitionProps, placement }): JSX.Element => {
           return (
             <Grow
               {...TransitionProps}

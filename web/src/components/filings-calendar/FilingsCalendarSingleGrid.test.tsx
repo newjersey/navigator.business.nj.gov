@@ -4,6 +4,7 @@ import { generateTaxFiling, generateTaxFilingData, generateUserData } from "@/te
 import * as shared from "@businessnjgovnavigator/shared";
 import { defaultDateFormat, parseDateWithFormat } from "@businessnjgovnavigator/shared";
 import { fireEvent, render, screen } from "@testing-library/react";
+import { Dayjs } from "dayjs";
 import { FilingsCalendarSingleGrid } from "./FilingsCalendarSingleGrid";
 
 const Config = getMergedConfig();
@@ -13,9 +14,7 @@ const month: number = Number.parseInt(currentDate.month().toString());
 function mockShared(): typeof shared {
   return {
     ...jest.requireActual("@businessnjgovnavigator/shared"),
-    getCurrentDate: () => {
-      return currentDate;
-    },
+    getCurrentDate: (): Dayjs => currentDate,
   };
 }
 

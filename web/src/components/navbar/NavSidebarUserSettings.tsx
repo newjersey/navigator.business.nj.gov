@@ -9,7 +9,7 @@ import analytics from "@/lib/utils/analytics";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { ReactElement, useContext, useMemo } from "react";
+import { ReactElement, ReactNode, useContext, useMemo } from "react";
 
 export const NavSidebarUserSettings = (): ReactElement => {
   const { userData, update } = useUserData();
@@ -22,14 +22,14 @@ export const NavSidebarUserSettings = (): ReactElement => {
     return state.isAuthenticated === "TRUE";
   }, [state.isAuthenticated]);
 
-  const UnAuthenticatedMenu = () => {
+  const UnAuthenticatedMenu = (): ReactNode => {
     return (
       <>
         <div className="margin-bottom-2">
           <Link href={ROUTES.profile} passHref>
             <UnStyledButton
               style="tertiary"
-              onClick={() => {
+              onClick={(): void => {
                 analytics.event.account_menu_my_profile.click.go_to_profile_screen();
               }}
             >
@@ -40,7 +40,7 @@ export const NavSidebarUserSettings = (): ReactElement => {
         <div className="margin-bottom-2">
           <UnStyledButton
             style="tertiary"
-            onClick={() => {
+            onClick={(): void => {
               analytics.event.guest_menu.click.go_to_myNJ_registration();
               onSelfRegister(router, userData, update, setRegistrationAlertStatus);
             }}
@@ -52,14 +52,14 @@ export const NavSidebarUserSettings = (): ReactElement => {
     );
   };
 
-  const AuthenticatedMenu = () => {
+  const AuthenticatedMenu = (): ReactNode => {
     return (
       <>
         <div className="margin-bottom-2">
           <Link href={ROUTES.profile} passHref>
             <UnStyledButton
               style="tertiary"
-              onClick={() => {
+              onClick={(): void => {
                 analytics.event.account_menu_my_profile.click.go_to_profile_screen();
               }}
             >
@@ -70,7 +70,7 @@ export const NavSidebarUserSettings = (): ReactElement => {
         <div className="margin-bottom-2">
           <UnStyledButton
             style="tertiary"
-            onClick={(event) => {
+            onClick={(event): void => {
               event.preventDefault();
               analytics.event.account_menu_myNJ_account.click.go_to_myNJ_home();
               window.open(process.env.MYNJ_PROFILE_LINK || "", "_ blank");
@@ -83,7 +83,7 @@ export const NavSidebarUserSettings = (): ReactElement => {
     );
   };
 
-  const renderMenu = () => {
+  const renderMenu = (): ReactNode => {
     if (router.pathname === ROUTES.onboarding) {
       return <></>;
     } else if (isAuthenticated) {

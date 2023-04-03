@@ -139,7 +139,7 @@ export const LicenseStatusReceipt = (props: Props): ReactElement => {
               <div className="text-bold">{userData?.licenseData?.nameAndAddress.name}</div>
               <button
                 data-testid="edit-button"
-                onClick={() => {
+                onClick={(): void => {
                   analytics.event.task_status_checklist_edit_button.click.edit_address_form();
                   props.onEdit();
                 }}

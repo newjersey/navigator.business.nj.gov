@@ -32,7 +32,7 @@ export const FormationChooseDocuments = (): ReactElement => {
     state.formationFormData.certifiedCopyOfFormationDocument,
   ]);
 
-  const handleCertificateOfStandingClick = () => {
+  const handleCertificateOfStandingClick = (): void => {
     setFieldsInteracted(["certificateOfStanding"]);
     setFormationFormData((previousFormationData) => {
       return {
@@ -42,7 +42,7 @@ export const FormationChooseDocuments = (): ReactElement => {
     });
   };
 
-  const handleCertifiedFormationDocumentClick = () => {
+  const handleCertifiedFormationDocumentClick = (): void => {
     setFieldsInteracted(["certifiedCopyOfFormationDocument"]);
     setFormationFormData((previousFormationData) => {
       return {

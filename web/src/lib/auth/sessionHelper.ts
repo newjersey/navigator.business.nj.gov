@@ -81,7 +81,7 @@ export const triggerSignIn = async (): Promise<void> => {
   await Auth.federatedSignIn({ customProvider: "myNJ" });
 };
 
-export const getSignedS3Link = async (value: string, expires?: number) => {
+export const getSignedS3Link = async (value: string, expires?: number): Promise<string> => {
   const credentials = await Auth.currentUserCredentials();
   const presigner = new S3RequestPresigner({
     credentials,

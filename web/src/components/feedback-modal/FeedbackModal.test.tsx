@@ -18,10 +18,11 @@ const mockApi = api as jest.Mocked<typeof api>;
 
 const getResult = jest.fn();
 jest.mock("ua-parser-js", () => {
-  return function () {
+  return function (): { getResult: jest.Mock } {
     return { getResult };
   };
 });
+
 const originalInnerWidth = global.innerWidth;
 
 describe("<feedbackModal />", () => {
@@ -41,8 +42,10 @@ describe("<feedbackModal />", () => {
     global.innerWidth = originalInnerWidth;
   });
 
-  const renderFeedbackModal = ({ isReportAnIssueBar = false }) => {
-    render(<FeedbackModal isOpen={true} handleClose={() => {}} isReportAnIssueBar={isReportAnIssueBar} />);
+  const renderFeedbackModal = ({ isReportAnIssueBar = false }): void => {
+    render(
+      <FeedbackModal isOpen={true} handleClose={(): void => {}} isReportAnIssueBar={isReportAnIssueBar} />
+    );
   };
 
   describe("share feedback", () => {

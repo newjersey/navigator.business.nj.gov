@@ -5,7 +5,7 @@ import fs from "fs";
 jest.mock("fs");
 
 jest.mock("process", () => ({
-  cwd: () => "/test",
+  cwd: (): string => "/test",
 }));
 
 describe("loadFundings", () => {
@@ -153,7 +153,7 @@ describe("loadFundings", () => {
     });
   });
 
-  const mockReadDirReturn = (value: string[]) => {
+  const mockReadDirReturn = (value: string[]): void => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     mockedFs.readdirSync.mockReturnValue(value);

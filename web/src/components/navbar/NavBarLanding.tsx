@@ -23,7 +23,7 @@ export const NavBarLanding = (): ReactElement => {
         </span>
         <UnStyledButton
           style="tertiary"
-          onClick={() => {
+          onClick={(): void => {
             analytics.event.landing_page_navbar_register.click.go_to_onboarding();
             router.push(ROUTES.onboarding);
           }}

@@ -26,7 +26,7 @@ describe("<DeferredOnboardingQuestion />", () => {
     useMockRouter({});
   });
 
-  const renderComponent = ({ userData, onSave }: { userData?: UserData; onSave?: () => void }) => {
+  const renderComponent = ({ userData, onSave }: { userData?: UserData; onSave?: () => void }): void => {
     render(
       <WithStatefulUserData
         initialUserData={

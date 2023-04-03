@@ -20,7 +20,7 @@ export default {
   collapsed: false,
   summary: "{{fields.title}}",
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  fromBlock: (match: any) => {
+  fromBlock: (match: any): { header: string; body: string } => {
     const string = match[0];
     const openCurlyIndex = string.indexOf("{");
     const closedCurlyIndex = string.indexOf("}");
@@ -47,14 +47,14 @@ export default {
     };
   },
   // Function to create a text block from an instance of this component
-  toBlock: (obj: { header?: string; body: string }) => {
+  toBlock: (obj: { header?: string; body: string }): string => {
     if (obj.header) {
       return `:::infoAlert{ header="${obj.header}" } \n ${obj.body.trim()}\n:::`;
     }
     return `:::infoAlert \n ${obj.body.trim()}\n:::`;
   },
 
-  toPreview: (obj: { header?: string; body: string }) => {
+  toPreview: (obj: { header?: string; body: string }): string => {
     if (obj.header) {
       return `:::infoAlert{ header="${obj.header}" } \n ${obj.body.trim()}\n:::`;
     }

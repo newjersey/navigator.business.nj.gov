@@ -25,12 +25,12 @@ export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): 
   const router = useRouter();
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
 
-  const editLegalStructure = () => {
+  const editLegalStructure = (): void => {
     analytics.event.business_formation_legal_structure_modal.submit.go_to_profile_screen();
     router.push("/profile?path=businessFormation");
   };
 
-  const showLegalStructureModal = () => {
+  const showLegalStructureModal = (): void => {
     analytics.event.business_formation_legal_structure_edit.click.show_legal_structure_modal();
     setLegalStructureWarningIsOpen(true);
   };
@@ -61,7 +61,7 @@ export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): 
           {isReviewStep && (
             <UnStyledButton
               style="tertiary"
-              onClick={() => {
+              onClick={(): void => {
                 analytics.event.business_formation_business_name_edit.click.go_to_name_search_step();
                 setStepIndex(LookupStepIndexByName("Business"));
                 scrollToTop();
@@ -93,9 +93,7 @@ export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): 
             <UnStyledButton
               style="tertiary"
               widthAutoOnMobile
-              onClick={() => {
-                setStepIndex(LookupStepIndexByName("Name"));
-              }}
+              onClick={(): void => setStepIndex(LookupStepIndexByName("Name"))}
               underline
               dataTestid="edit-business-name"
             >
@@ -125,9 +123,7 @@ export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): 
       </div>
       <ModalTwoButton
         isOpen={legalStructureWarningIsOpen}
-        close={() => {
-          return setLegalStructureWarningIsOpen(false);
-        }}
+        close={(): void => setLegalStructureWarningIsOpen(false)}
         title={Config.formation.legalStructure.warningModalHeader}
         primaryButtonText={Config.formation.legalStructure.warningModalContinueButton}
         primaryButtonOnClick={editLegalStructure}

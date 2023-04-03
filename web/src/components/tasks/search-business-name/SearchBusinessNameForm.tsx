@@ -88,7 +88,7 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
   );
 
   useEffect(() => {
-    (function showBusinessNameSearchResultsIfDBANameExists() {
+    (function showBusinessNameSearchResultsIfDBANameExists(): void {
       if (!userData) {
         return;
       }
@@ -128,8 +128,8 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
             </div>
           )}
           <form
-            onSubmit={(event) => {
-              return doSearch(event, { isInitialSubmit: false });
+            onSubmit={(event): void => {
+              doSearch(event, { isInitialSubmit: false });
             }}
             className={`usa-prose grid-container padding-0 ${props.className}`}
           >
@@ -140,9 +140,9 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
                   className="fg1 width-100"
                   margin="dense"
                   value={currentName}
-                  onChange={(event) => {
+                  onChange={(event): void => {
                     setNameAvailability(undefined);
-                    return updateCurrentName(event.target.value);
+                    updateCurrentName(event.target.value);
                   }}
                   variant="outlined"
                   inputProps={{
@@ -154,7 +154,7 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
                 <FormControl margin="dense" className="">
                   <SecondaryButton
                     isColor="primary"
-                    onClick={() => {}}
+                    onClick={(): void => {}}
                     isLoading={isLoading}
                     isSubmitButton={true}
                     dataTestId={props.config.searchButtonTestId}
@@ -204,7 +204,7 @@ export const SearchBusinessNameForm = (props: Props): ReactElement => {
 
         {nameAvailability?.status === "UNAVAILABLE" && (
           <Unavailable
-            resetSearch={() => {
+            resetSearch={(): void => {
               resetSearch();
               setNameAvailability(undefined);
             }}

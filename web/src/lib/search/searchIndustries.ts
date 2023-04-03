@@ -2,7 +2,7 @@ import { findMatchInBlock, findMatchInLabelledText } from "@/lib/search/helpers"
 import { Match } from "@/lib/search/typesForSearch";
 import { Industry } from "@businessnjgovnavigator/shared/industry";
 
-export const searchIndustries = (industries: Industry[], term: string) => {
+export const searchIndustries = (industries: Industry[], term: string): Match[] => {
   const matches: Match[] = [];
 
   for (const industry of industries) {

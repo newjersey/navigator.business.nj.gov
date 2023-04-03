@@ -8,7 +8,7 @@ export const FormationChooseNotifications = (): ReactElement => {
   const { Config } = useConfig();
   const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
 
-  const handleAnnualReportClick = () => {
+  const handleAnnualReportClick = (): void => {
     setFieldsInteracted(["annualReportNotification"]);
     setFormationFormData((previousFormationData) => {
       return {
@@ -18,7 +18,7 @@ export const FormationChooseNotifications = (): ReactElement => {
     });
   };
 
-  const handleCorpWatchClick = () => {
+  const handleCorpWatchClick = (): void => {
     setFieldsInteracted(["corpWatchNotification"]);
     setFormationFormData((previousFormationData) => {
       return {

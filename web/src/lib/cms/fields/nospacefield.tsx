@@ -1,4 +1,4 @@
-import React, { Component, createRef } from "react";
+import React, { Component, createRef, ReactElement } from "react";
 
 type NoSpaceProps = {
   onChange: (e: string) => void;
@@ -29,7 +29,7 @@ class NoSpaceControl extends Component<NoSpaceProps, NoSpaceState> {
     };
   }
 
-  isValid = () => {
+  isValid = (): { error?: { message?: string } } => {
     if (this.props.value?.includes(" ")) {
       return { error: { message: "error: cannot contain whitespaces!" } };
     } else {
@@ -45,7 +45,7 @@ class NoSpaceControl extends Component<NoSpaceProps, NoSpaceState> {
   // within markdown.
   // SEE: https://github.com/netlify/netlify-cms/issues/4539
   // // SEE: https://github.com/netlify/netlify-cms/issues/3578
-  componentDidUpdate() {
+  componentDidUpdate(): void {
     if (this.el.current && this.el.current.selectionStart !== this.state._sel) {
       this.el.current.setSelectionRange(this.state._sel, this.state._sel);
     }
@@ -56,7 +56,7 @@ class NoSpaceControl extends Component<NoSpaceProps, NoSpaceState> {
     this.props.onChange(e.target.value);
   };
 
-  render() {
+  render(): ReactElement {
     const { forID, value, classNameWrapper, setActiveStyle, setInactiveStyle } = this.props;
     return (
       <input

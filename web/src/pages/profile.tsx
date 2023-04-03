@@ -127,7 +127,7 @@ const ProfilePage = (props: Props): ReactElement => {
     }
   }, userData);
 
-  const formatDate = (date: string) => {
+  const formatDate = (date: string): string => {
     if (!date) {
       return "";
     }
@@ -141,7 +141,7 @@ const ProfilePage = (props: Props): ReactElement => {
     }
   };
 
-  const onBack = async () => {
+  const onBack = async (): Promise<void> => {
     if (!userData) {
       return;
     }
@@ -200,7 +200,7 @@ const ProfilePage = (props: Props): ReactElement => {
 
       updateQueue.queueProfileData(profileData);
 
-      (async () => {
+      (async (): Promise<void> => {
         updateQueue.queue(await postGetAnnualFilings(updateQueue.current()));
         updateQueue.update().then(async () => {
           setIsLoading(false);
@@ -321,7 +321,7 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileField
           fieldName="legalStructureId"
           locked={shouldLockFormationFields}
-          lockedValueFormatter={(value: string) => LookupLegalStructureById(value).name}
+          lockedValueFormatter={(value: string): string => LookupLegalStructureById(value).name}
         >
           <OnboardingLegalStructureDropdown />
         </ProfileField>
@@ -466,7 +466,7 @@ const ProfilePage = (props: Props): ReactElement => {
         <ProfileField
           fieldName="legalStructureId"
           locked={shouldLockFormationFields}
-          lockedValueFormatter={(id) => LookupLegalStructureById(id).name}
+          lockedValueFormatter={(id): string => LookupLegalStructureById(id).name}
         >
           <OnboardingLegalStructureDropdown />
         </ProfileField>
@@ -634,7 +634,7 @@ const ProfilePage = (props: Props): ReactElement => {
               profileData: profileData,
               flow: getFlow(profileData),
             },
-            setUser: () => {},
+            setUser: (): void => {},
             setProfileData,
             onBack,
           }}
@@ -645,27 +645,18 @@ const ProfilePage = (props: Props): ReactElement => {
               <div className="usa-section padding-top-0 desktop:padding-top-3">
                 <EscapeModal
                   isOpen={escapeModal}
-                  close={() => {
-                    return setEscapeModal(false);
-                  }}
-                  primaryButtonOnClick={() => {
-                    return redirect();
+                  close={(): void => setEscapeModal(false)}
+                  primaryButtonOnClick={(): void => {
+                    redirect();
                   }}
                 />
                 <FormationDateDeletionModal
                   isOpen={isFormationDateDeletionModalOpen}
-                  handleCancel={() => setFormationDateDeletionModalOpen(false)}
+                  handleCancel={(): void => setFormationDateDeletionModalOpen(false)}
                   handleDelete={onSubmit}
                 />
                 <SingleColumnContainer>
-                  {alert && (
-                    <ProfileSnackbarAlert
-                      alert={alert}
-                      close={() => {
-                        return setAlert(undefined);
-                      }}
-                    />
-                  )}
+                  {alert && <ProfileSnackbarAlert alert={alert} close={(): void => setAlert(undefined)} />}
                   <UserDataErrorAlert />
                 </SingleColumnContainer>
                 <div className="margin-top-6 desktop:margin-top-0">
@@ -679,7 +670,7 @@ const ProfilePage = (props: Props): ReactElement => {
                         businessPersona={businessPersona}
                         foreignBusinessType={foreignBusinessType}
                         activeTab={profileTab}
-                        setProfileTab={(tab: ProfileTabs) => {
+                        setProfileTab={(tab: ProfileTabs): void => {
                           router.replace(ROUTES.profile);
                           setProfileTab(tab);
                         }}
@@ -699,9 +690,7 @@ const ProfilePage = (props: Props): ReactElement => {
                           <div className="float-right fdr margin-top-2">
                             <SecondaryButton
                               isColor="primary"
-                              onClick={() => {
-                                return onBack();
-                              }}
+                              onClick={(): Promise<void> => onBack()}
                               dataTestId="back"
                             >
                               {Config.profileDefaults.backButtonText}
@@ -709,7 +698,7 @@ const ProfilePage = (props: Props): ReactElement => {
                             <PrimaryButton
                               isColor="primary"
                               isSubmitButton={true}
-                              onClick={() => {}}
+                              onClick={(): void => {}}
                               isRightMarginRemoved={true}
                               dataTestId="save"
                               isLoading={isLoading}

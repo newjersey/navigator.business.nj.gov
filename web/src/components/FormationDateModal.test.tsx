@@ -29,7 +29,7 @@ describe("<FormationDateModal />", () => {
     setupStatefulUserDataContext();
   });
 
-  const renderComponent = (initialUserData?: UserData) => {
+  const renderComponent = (initialUserData?: UserData): void => {
     const userData = initialUserData ?? generateUserData({});
 
     const userDataWithMunicipality = {
@@ -43,7 +43,7 @@ describe("<FormationDateModal />", () => {
     render(
       <MunicipalitiesContext.Provider value={{ municipalities: [municipality] }}>
         <WithStatefulUserData initialUserData={userDataWithMunicipality}>
-          <FormationDateModal isOpen={true} close={() => {}} onSave={() => {}} />
+          <FormationDateModal isOpen={true} close={(): void => {}} onSave={(): void => {}} />
         </WithStatefulUserData>
       </MunicipalitiesContext.Provider>
     );

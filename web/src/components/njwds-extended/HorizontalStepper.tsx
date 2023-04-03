@@ -1,4 +1,5 @@
 import { MediaQueries } from "@/lib/PageSizes";
+import { StepperStep } from "@/lib/types/types";
 import { useMediaQuery } from "@mui/material";
 import { ReactElement } from "react";
 
@@ -8,7 +9,6 @@ interface Props {
   onStepClicked: (step: number) => void;
 }
 
-type StepperStep = { name: string; hasError: boolean; isComplete: boolean };
 type StepperState =
   | "ERROR"
   | "ERROR-ACTIVE"
@@ -40,7 +40,7 @@ export const HorizontalStepper = (props: Props): ReactElement => {
     }
   };
 
-  const getCSSClassColor = (index: number) => {
+  const getCSSClassColor = (index: number): string => {
     const state = determineState(index);
     switch (state) {
       case "ERROR":
@@ -116,9 +116,7 @@ export const HorizontalStepper = (props: Props): ReactElement => {
                   aria-hidden
                   data-num={getIcon(index)}
                   data-state={determineState(index)}
-                  onClick={() => {
-                    return props.onStepClicked(index);
-                  }}
+                  onClick={(): void => props.onStepClicked(index)}
                   data-testid={`stepper-${index}`}
                 >
                   <span className={`usa-step-indicator__segment-label ${getBoldClass(index)}`} aria-hidden>

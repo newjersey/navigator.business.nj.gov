@@ -20,7 +20,7 @@ describe("Formation - <FormationSuccessPage />", () => {
   const renderSuccessPage = (
     overrides: Partial<GetFilingResponse>,
     profileOverrides: Partial<ProfileData> = {}
-  ) => {
+  ): void => {
     getFilingResponse = generateGetFilingResponse({ success: true, ...overrides });
     const profileData = generateFormationProfileData(profileOverrides);
 

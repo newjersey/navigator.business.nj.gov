@@ -23,7 +23,7 @@ describe("<Header />", () => {
     useMockRouter({});
   });
 
-  const renderHeader = () => {
+  const renderHeader = (): void => {
     render(
       <ThemeProvider theme={createTheme()}>
         <Header />
@@ -31,7 +31,7 @@ describe("<Header />", () => {
     );
   };
 
-  const renderHeaderWithAuth = ({ isAuthenticated }: { isAuthenticated: IsAuthenticated }) => {
+  const renderHeaderWithAuth = ({ isAuthenticated }: { isAuthenticated: IsAuthenticated }): void => {
     render(
       withAuth(
         <ThemeProvider theme={createTheme()}>

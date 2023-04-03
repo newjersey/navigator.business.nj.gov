@@ -23,7 +23,7 @@ export const TaskCTA = (props: Props): ReactElement => {
         <PrimaryButton
           isColor="primary"
           isRightMarginRemoved={true}
-          onClick={() => {
+          onClick={(): void => {
             analytics.event.task_primary_call_to_action.click.open_external_website();
             if (props.onClick) {
               props.onClick();

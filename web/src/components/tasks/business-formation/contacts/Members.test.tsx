@@ -55,7 +55,7 @@ describe("Formation - Members Field", () => {
       const successBodyText = Config.formation.fields[configField].successSnackbarBody;
 
       describe(`for ${legalStructureId}`, () => {
-        const fillForm = (page: FormationPageHelpers, member: FormationMember) => {
+        const fillForm = (page: FormationPageHelpers, member: FormationMember): void => {
           page.fillText("Address name", member.name);
           page.fillText("Address line1", member.addressLine1);
           page.fillText("Address line2", member.addressLine2);
@@ -452,7 +452,7 @@ describe("Formation - Members Field", () => {
     }
   });
 
-  const attemptApiSubmission = async (page: FormationPageHelpers) => {
+  const attemptApiSubmission = async (page: FormationPageHelpers): Promise<void> => {
     await page.stepperClickToReviewStep();
     await page.clickSubmit();
     await page.stepperClickToContactsStep();

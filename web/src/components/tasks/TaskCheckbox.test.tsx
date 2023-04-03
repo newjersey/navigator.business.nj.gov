@@ -30,8 +30,8 @@ describe("<TaskCheckbox />", () => {
     checklistItemId: string;
     initialUserData?: UserData;
     isAuthenticated?: IsAuthenticated;
-  }) => {
-    return render(
+  }): void => {
+    render(
       withAuthAlert(
         <WithStatefulUserData initialUserData={initialUserData ?? generateUserData({})}>
           <TaskCheckbox checklistItemId={checklistItemId} />

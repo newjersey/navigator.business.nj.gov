@@ -4,8 +4,9 @@ import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { generateFormationData, generateGetFilingResponse, generateUserData } from "@/test/factories";
+import { ReactElement } from "react";
 
-const FormationSuccessPreview = (props: PreviewProps) => {
+const FormationSuccessPreview = (props: PreviewProps): ReactElement => {
   const { config, setConfig } = usePreviewConfig(props);
   const ref = usePreviewRef(props);
 

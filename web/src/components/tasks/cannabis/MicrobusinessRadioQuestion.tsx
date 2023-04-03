@@ -9,7 +9,9 @@ export const MicrobusinessRadioQuestion = (): ReactElement => {
   const { userData, update } = useUserData();
   const { Config } = useConfig();
 
-  const handleRadioChange = async (event: React.ChangeEvent<{ name?: string; value: string }>) => {
+  const handleRadioChange = async (
+    event: React.ChangeEvent<{ name?: string; value: string }>
+  ): Promise<void> => {
     if (!userData) {
       return;
     }

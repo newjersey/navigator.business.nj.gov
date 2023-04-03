@@ -46,7 +46,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
     UserDataStorageFactory().getRegistrationStatus()
   );
 
-  const setRegistrationAlertStatus = (value: RegistrationStatus | undefined) => {
+  const setRegistrationAlertStatus = (value: RegistrationStatus | undefined): void => {
     _setRegistrationAlertStatus(value);
     UserDataStorageFactory().setRegistrationStatus(value);
   };

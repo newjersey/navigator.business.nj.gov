@@ -19,7 +19,7 @@ export const FormationMunicipality = (): ReactElement => {
   return (
     <div className="margin-top-2">
       <MunicipalityDropdown
-        onValidation={() => setFieldsInteracted(["addressMunicipality"])}
+        onValidation={(): void => setFieldsInteracted(["addressMunicipality"])}
         municipalities={municipalities}
         fieldName={"addressMunicipality"}
         error={doesFieldHaveError("addressMunicipality")}

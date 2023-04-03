@@ -10,7 +10,7 @@ import { useFormContextFieldHelpers } from "@/lib/data-hooks/useFormContextField
 import { EssentialQuestions } from "@/lib/domain-logic/essentialQuestions";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { FormContextFieldProps } from "@/lib/types/types";
-import { ReactElement, useContext } from "react";
+import { ReactElement, ReactNode, useContext } from "react";
 
 interface Props<T> extends FormContextFieldProps<T> {
   essentialQuestionErrorTypes?: T[];
@@ -38,7 +38,7 @@ export const OnboardingIndustry = <T,>(props: Props<T>): ReactElement => {
 
   RegisterForOnSubmit(() => isValid(state.profileData.industryId));
 
-  const getEssentialQuestions = (industryId: string | undefined) => {
+  const getEssentialQuestions = (industryId: string | undefined): ReactNode[] => {
     return EssentialQuestions.filter((i) => {
       return i.isQuestionApplicableToIndustryId(industryId);
     }).map((obj) => (
@@ -57,7 +57,7 @@ export const OnboardingIndustry = <T,>(props: Props<T>): ReactElement => {
         validationLabel="Error"
         validationText={contentFromConfig.errorTextRequired}
         handleChange={(): void => Validate(false)}
-        onValidation={(event) => Validate(!isValid(event.target.value))}
+        onValidation={(event): void => Validate(!isValid(event.target.value))}
       />
       {state.profileData.industryId === "home-contractor" && (
         <div

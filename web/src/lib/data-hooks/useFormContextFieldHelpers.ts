@@ -17,16 +17,16 @@ export const useFormContextFieldHelpers = <T, FieldError = FieldErrorType>(
   if (!context) {
     return {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      RegisterForOnSubmit: (isValidFunc: () => boolean) => {},
+      RegisterForOnSubmit: (isValidFunc: () => boolean): void => {},
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      Validate: (invalid: boolean) => {},
+      Validate: (invalid: boolean): void => {},
       isFormFieldInValid: false,
     };
   }
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const { runValidations, fieldStates, reducer } = useContext(context);
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const RegisterForOnSubmit = (isValidFunc: () => boolean) => {
+  const RegisterForOnSubmit = (isValidFunc: () => boolean): void => {
     debug && console.log("register func");
     useMountEffect(() => {
       debug && console.log("mounted");
@@ -54,7 +54,7 @@ export const useFormContextFieldHelpers = <T, FieldError = FieldErrorType>(
     }, [runValidations]);
   };
 
-  const Validate = (invalid: boolean) => {
+  const Validate = (invalid: boolean): void => {
     debug && console.log("custom validation");
     reducer({
       type: FieldStateActionKind.VALIDATION,

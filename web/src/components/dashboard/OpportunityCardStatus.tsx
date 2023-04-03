@@ -1,11 +1,12 @@
 import { toProperCase } from "@businessnjgovnavigator/shared/";
+import { ReactElement } from "react";
 
 interface Props {
   dueDate?: string;
   status?: string;
 }
 
-export const OpportunityCardStatus = (props: Props) => {
+export const OpportunityCardStatus = (props: Props): ReactElement => {
   return (
     <>
       {props.dueDate &&

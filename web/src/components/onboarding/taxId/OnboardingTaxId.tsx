@@ -26,7 +26,7 @@ export const OnboardingTaxId = (props: Props): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { Config } = useConfig();
 
-  const getFieldType = () => {
+  const getFieldType = (): "FULL" | "SPLIT" => {
     const initialValue = state.profileData[fieldName]?.trim().length ?? 0;
     if (initialValue === 0 || initialValue === 12) {
       return "FULL";
@@ -56,7 +56,7 @@ export const OnboardingTaxId = (props: Props): ReactElement => {
     }
   }, [userData?.profileData.taxId]);
 
-  const getShowHideToggleButton = (toggleFunc?: (taxId: string) => void) => {
+  const getShowHideToggleButton = (toggleFunc?: (taxId: string) => void): ReactElement => {
     return ShowHideToggleButton({
       status: taxIdDisplayStatus,
       toggle: taxIdToggle(toggleFunc),
@@ -85,7 +85,7 @@ export const OnboardingTaxId = (props: Props): ReactElement => {
     });
   };
 
-  const toggleTaxIdDisplay = () => {
+  const toggleTaxIdDisplay = (): void => {
     taxIdDisplayStatus === "password-view"
       ? setTaxIdDisplayStatus("text-view")
       : setTaxIdDisplayStatus("password-view");

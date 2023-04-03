@@ -26,7 +26,7 @@ describe("SelfRegSnackbar", () => {
   const setupHookWithAuth = (
     isAuthenticated: IsAuthenticated,
     registrationAlertStatus: RegistrationStatus
-  ) => {
+  ): void => {
     render(
       withAuthAlert(<SelfRegSnackbar />, isAuthenticated, {
         registrationAlertStatus,

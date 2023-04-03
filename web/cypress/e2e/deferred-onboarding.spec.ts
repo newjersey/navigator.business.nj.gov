@@ -22,7 +22,7 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
 
   describe("deferred location", () => {
     describe("onboarded as STARTING - PublicFiling", () => {
-      const testLocationInThreePlaces = () => {
+      const testLocationInThreePlaces = (): void => {
         it("can provide location in Location-Dependent task", () => {
           goToMercantileTask();
           selectLocation("Allendale");
@@ -218,15 +218,15 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
     });
   });
 
-  const hasHomeBasedTasks = () => {
+  const hasHomeBasedTasks = (): void => {
     cy.get('[data-task="identify-potential-lease"]').should("not.exist");
   };
 
-  const hasNonHomeBasedTasks = () => {
+  const hasNonHomeBasedTasks = (): void => {
     cy.get('[data-task="identify-potential-lease"]').should("exist");
   };
 
-  const doesNotShowHomeBasedBusinessQuestionAtAll = () => {
+  const doesNotShowHomeBasedBusinessQuestionAtAll = (): void => {
     onDashboardPage.getHomeBased().should("not.exist");
     onDashboardPage.clickEditProfileLink();
     cy.url().should("contain", "/profile");
@@ -234,7 +234,7 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
     onProfilePage.getHomeBased().should("not.exist");
   };
 
-  const selectHomeBased = (value: boolean) => {
+  const selectHomeBased = (value: boolean): void => {
     onDashboardPage.getHomeBased().should("exist");
     onDashboardPage.selectHomeBased(value);
     clickDeferredSaveButton();
@@ -243,7 +243,7 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
     cy.url().should("not.contain", "deferred");
   };
 
-  const showsAndAnswersHomeBasedBusinessQuestionOnDashboard = () => {
+  const showsAndAnswersHomeBasedBusinessQuestionOnDashboard = (): void => {
     waitForUserDataMountUpdate();
     selectHomeBased(true);
 
@@ -256,48 +256,48 @@ describe("Deferred Onboarding [feature] [all] [group5]", () => {
     onProfilePage.getHomeBased(false).should("not.be.checked");
   };
 
-  const goToProfile = () => {
+  const goToProfile = (): void => {
     onDashboardPage.clickEditProfileLink();
     cy.url().should("contain", "/profile");
     cy.wait(1000);
   };
 
-  const expectLocationQuestionIsCompletedInProfile = (townDisplayName: string) => {
+  const expectLocationQuestionIsCompletedInProfile = (townDisplayName: string): void => {
     goToProfile();
     onProfilePage.getLocationDropdown().invoke("prop", "value").should("contain", townDisplayName);
   };
 
-  const goToMercantileTask = () => {
+  const goToMercantileTask = (): void => {
     cy.get('[data-task="check-local-requirements"]').click({ force: true });
   };
 
-  const selectLocation = (townDisplayName: string) => {
+  const selectLocation = (townDisplayName: string): void => {
     cy.get('[data-testid="municipality"]').type(townDisplayName);
     cy.get("#municipality-option-0").click({ force: true });
   };
 
-  const expectLocationSuccessBanner = (townDisplayName: string) => {
+  const expectLocationSuccessBanner = (townDisplayName: string): void => {
     cy.get(`[data-testid="city-success-banner"]`).should("contain", townDisplayName);
   };
 
-  const expectLocationSpecificContentInTask = (townDisplayName: string) => {
+  const expectLocationSpecificContentInTask = (townDisplayName: string): void => {
     cy.get('[data-testid="deferred-location-task"]').find(".usa-link").should("have.length", 2);
     cy.get('[data-testid="deferred-location-task"] .usa-link').first().should("contain", townDisplayName);
   };
 
-  const navigateBackToDashboard = () => {
-    return cy.get(`[data-testid="back-to-dashboard"]`).click();
+  const navigateBackToDashboard = (): void => {
+    cy.get(`[data-testid="back-to-dashboard"]`).click();
   };
 
-  const openFormationDateModal = () => {
+  const openFormationDateModal = (): void => {
     cy.get('[data-testid="cta-formation-nudge"]').click();
   };
 
-  const selectDate = (monthYear: string) => {
+  const selectDate = (monthYear: string): void => {
     cy.chooseDatePicker('[name="dateOfFormation"]', monthYear);
   };
 
-  const clickModalSaveButton = () => {
+  const clickModalSaveButton = (): void => {
     cy.get('[data-testid="modal-button-primary"]').click();
     cy.wait(1000);
   };

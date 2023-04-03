@@ -15,7 +15,7 @@ export const SelfRegLink = (props: Props): ReactElement => {
   const { userData, update } = useUserData();
   const { setRegistrationAlertStatus } = useContext(AuthAlertContext);
 
-  const onClick = async () => {
+  const onClick = (): void => {
     if (!userData) {
       return;
     }

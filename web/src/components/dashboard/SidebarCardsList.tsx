@@ -7,7 +7,7 @@ import { MediaQueries } from "@/lib/PageSizes";
 import { Certification, Funding, SidebarCardContent } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
 import { Accordion, AccordionDetails, AccordionSummary, useMediaQuery } from "@mui/material";
-import { ReactElement, useState } from "react";
+import { ReactElement, ReactNode, useState } from "react";
 
 interface Props {
   topCards: SidebarCardContent[];
@@ -37,7 +37,7 @@ export const SidebarCardsList = (props: Props): ReactElement => {
     }
   };
 
-  const showEmptyState = () => {
+  const showEmptyState = (): boolean => {
     return (
       props.displayCertifications &&
       props.displayFundings &&
@@ -45,7 +45,7 @@ export const SidebarCardsList = (props: Props): ReactElement => {
     );
   };
 
-  const hiddenCardsAccordion = () => {
+  const hiddenCardsAccordion = (): ReactNode => {
     if (props.displayCertifications) {
       return (
         <>
@@ -53,8 +53,8 @@ export const SidebarCardsList = (props: Props): ReactElement => {
           <div className="desktop:margin-right-3 desktop:margin-bottom-1">
             <Accordion
               expanded={hiddenAccordionIsOpen}
-              onChange={() => {
-                return setHiddenAccordionIsOpen((prevAccordionStatus) => {
+              onChange={(): void => {
+                setHiddenAccordionIsOpen((prevAccordionStatus) => {
                   return !prevAccordionStatus;
                 });
               }}
@@ -97,7 +97,7 @@ export const SidebarCardsList = (props: Props): ReactElement => {
     }
   };
 
-  const learnMoreAboutFundingsLink = () => {
+  const learnMoreAboutFundingsLink = (): ReactNode => {
     return (
       <>
         <hr className="desktop:margin-right-1 margin-top-3 bg-cool-lighter" aria-hidden={true} />
@@ -108,7 +108,7 @@ export const SidebarCardsList = (props: Props): ReactElement => {
     );
   };
 
-  const scrollbar = () => {
+  const scrollbar = (): string => {
     if (hasForYouTab) {
       return "";
     }

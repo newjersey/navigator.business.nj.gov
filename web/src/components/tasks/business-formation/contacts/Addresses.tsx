@@ -11,7 +11,7 @@ import { MediaQueries } from "@/lib/PageSizes";
 import styles from "@/styles/sections/members.module.scss";
 import { FormationFields, FormationIncorporator, FormationMember } from "@businessnjgovnavigator/shared/";
 import { IconButton, useMediaQuery } from "@mui/material";
-import React, { ChangeEvent, ReactElement, useState } from "react";
+import React, { ChangeEvent, ReactElement, ReactNode, useState } from "react";
 
 interface DisplayContent {
   header: string;
@@ -46,7 +46,7 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
   const isTabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
   const { doesFieldHaveError } = useFormationErrors();
 
-  const formatAddress = (address: T) => {
+  const formatAddress = (address: T): string => {
     return `${address.addressLine1}, ${address.addressLine2 ? `${address.addressLine2},` : ""} ${
       address.addressMunicipality?.displayName ?? address.addressCity
     }, ${address.addressState?.name} ${address.addressZipCode}`;
@@ -71,7 +71,7 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
     checked: boolean;
     fieldName: FormationFields;
     index?: number;
-  }) => {
+  }): ReactNode => {
     return (
       <div className="grid-col-auto width-6 display-flex flex-column flex-align-center flex-justify-center">
         <label
@@ -93,11 +93,8 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
     );
   };
 
-  const deleteAddress = (index: number) => {
-    return props.setData([
-      ...[...props.addressData].slice(0, index),
-      ...[...props.addressData].slice(index + 1),
-    ]);
+  const deleteAddress = (index: number): void => {
+    props.setData([...[...props.addressData].slice(0, index), ...[...props.addressData].slice(index + 1)]);
   };
 
   const renderDesktopTable = (
@@ -144,7 +141,7 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
                   <div>
                     <IconButton
                       aria-label="edit"
-                      onClick={() => {
+                      onClick={(): void => {
                         setEditIndex(index);
                         setModalOpen(true);
                       }}
@@ -157,9 +154,7 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
                   <div>
                     <IconButton
                       aria-label="delete"
-                      onClick={() => {
-                        deleteAddress(index);
-                      }}
+                      onClick={(): void => deleteAddress(index)}
                       className="usa-button usa-button--unstyled"
                     >
                       <Icon className="usa-icon--size-3">delete</Icon>
@@ -230,7 +225,7 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
                         <span className="vl border-base-light padding-y-05 padding-right-2 margin-right-2">
                           <IconButton
                             aria-label="edit"
-                            onClick={() => {
+                            onClick={(): void => {
                               setEditIndex(index);
                               setModalOpen(true);
                             }}
@@ -241,9 +236,7 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
                         </span>
                         <IconButton
                           aria-label="delete"
-                          onClick={() => {
-                            deleteAddress(index);
-                          }}
+                          onClick={(): void => deleteAddress(index)}
                           className="usa-button usa-button--unstyled width-auto"
                         >
                           <Icon className="usa-icon--size-3">delete</Icon>
@@ -266,10 +259,8 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
       {alert && (
         <SnackbarAlert
           variant="success"
-          isOpen={alert !== undefined}
-          close={() => {
-            return setAlert(undefined);
-          }}
+          isOpen={true}
+          close={(): void => setAlert(undefined)}
           dataTestid="snackbar-alert-success"
           heading={props.displayContent.snackbarHeader}
         >
@@ -292,7 +283,7 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
           {props.addressData.length <= 9 && (
             <UnStyledButton
               style="tertiary"
-              onClick={() => {
+              onClick={(): void => {
                 setEditIndex(undefined);
                 setModalOpen(true);
               }}
@@ -321,19 +312,13 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
         key={`${editIndex}-${props.fieldName}`}
         createEmptyAddress={props.createEmptyAddress}
         fieldName={props.fieldName}
-        handleClose={() => {
-          return setModalOpen(false);
-        }}
-        setData={(addressData) => {
-          return props.setData(addressData);
-        }}
+        handleClose={(): void => setModalOpen(false)}
+        setData={(addressData): void => props.setData(addressData)}
         index={editIndex}
         defaultAddress={props.defaultAddress}
         displayContent={{ ...props.displayContent }}
         addressData={props.addressData}
-        onSave={() => {
-          return setAlert(true);
-        }}
+        onSave={(): void => setAlert(true)}
       />
     </>
   );

@@ -22,12 +22,12 @@ export const Hero = (): ReactElement => {
     };
   }
 
-  const section2CTAOnClick = () => {
+  const section2CTAOnClick = (): void => {
     router.push(ROUTES.onboarding);
     analytics.event.landing_page_second_get_started.click.go_to_onboarding();
   };
 
-  const section3CTAOnClick = () => {
+  const section3CTAOnClick = (): void => {
     router.push(ROUTES.onboarding);
     analytics.event.landing_page_find_funding.click.go_to_onboarding();
   };

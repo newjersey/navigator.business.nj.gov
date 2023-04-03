@@ -36,13 +36,13 @@ export const DeferredLocationQuestion = (props: Props): ReactElement => {
 
   const shouldShowQuestion = userData?.profileData.municipality === undefined || showEditLocation;
 
-  const onSaveNewLocation = () => {
+  const onSaveNewLocation = (): void => {
     setShowSuccessBanner(true);
     setShowEditLocation(false);
     analytics.event.task_location_question.submit.location_entered_for_first_time();
   };
 
-  const onRemoveLocation = async () => {
+  const onRemoveLocation = async (): Promise<void> => {
     if (!updateQueue) {
       return;
     }
@@ -63,20 +63,14 @@ export const DeferredLocationQuestion = (props: Props): ReactElement => {
               })}
             </Content>
           </div>
-          <UnStyledButton
-            style="tertiary"
-            underline
-            onClick={() => {
-              setShowEditLocation(true);
-            }}
-          >
+          <UnStyledButton style="tertiary" underline onClick={(): void => setShowEditLocation(true)}>
             {Config.deferredLocation.editText}
           </UnStyledButton>
           <span className="margin-x-105">|</span>
           <UnStyledButton
             style="tertiary"
             underline
-            onClick={() => {
+            onClick={(): void => {
               onRemoveLocation();
             }}
           >

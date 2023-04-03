@@ -83,9 +83,7 @@ const SearchContentPage = (props: Props): ReactElement => {
           type="text"
           value={searchTerm}
           onChange={handleSearchInput}
-          onKeyPress={(event) => {
-            return handleKeyPress(event, onSearchSubmit);
-          }}
+          onKeyPress={(event): void => handleKeyPress(event, onSearchSubmit)}
           inputProps={{ id: "search" }}
         />
         <button onClick={onSearchSubmit} className="usa-button margin-top-2">
