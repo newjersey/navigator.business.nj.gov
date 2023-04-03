@@ -25,6 +25,14 @@ export const getCurrentDateFormatted = (format: string): string => {
   return dayjs().format(format);
 };
 
+export const getDateInCurrentYear = (date: string): Dayjs => {
+  return dayjs(date).year(dayjs().year());
+};
+
+export const isDateAfterCurrentDate = (date: string): boolean => {
+  return dayjs().isBefore(getDateInCurrentYear(date));
+};
+
 export const getCurrentDateISOString = (): string => {
   return dayjs().toISOString();
 };

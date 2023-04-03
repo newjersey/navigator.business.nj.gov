@@ -1,5 +1,6 @@
 import { getCurrentDate, parseDate } from "@shared/dateHelpers";
 import { createEmptyFormationFormData } from "@shared/formationData";
+import { getFirstAnnualFiling, getSecondAnnualFiling, getThirdAnnualFiling } from "@shared/test";
 import dayjs from "dayjs";
 import { Express } from "express";
 import jwt from "jsonwebtoken";
@@ -240,10 +241,12 @@ describe("userRouter", () => {
 
     it("calculates 3 new annual filing dates and updates them for dateOfFormation", async () => {
       mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
+      const formationDate = "2021-03-01";
+
       const postedUserData = generateUserData({
         user: generateUser({ id: "123" }),
         profileData: generateProfileData({
-          dateOfFormation: "2021-03-01",
+          dateOfFormation: formationDate,
           entityId: undefined,
           legalStructureId: "limited-liability-company",
         }),
@@ -258,7 +261,13 @@ describe("userRouter", () => {
       await request(app).post(`/users`).send(postedUserData).set("Authorization", "Bearer user-123-token");
 
       const taxFilingsPut = getLastCalledWith(stubUserDataClient.put)[0].taxFilingData.filings;
-      expect(taxFilingsPut).toEqual(generateAnnualFilings(["2023-03-31", "2024-03-31", "2025-03-31"]));
+      expect(taxFilingsPut).toEqual(
+        generateAnnualFilings([
+          getFirstAnnualFiling(formationDate),
+          getSecondAnnualFiling(formationDate),
+          getThirdAnnualFiling(formationDate),
+        ])
+      );
     });
 
     it("clears taskChecklistItems if industry has changed", async () => {
