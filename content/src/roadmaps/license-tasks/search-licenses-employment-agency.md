@@ -15,9 +15,13 @@ divisionPhone: (973) 504-6370
 id: search-licenses
 webflowId: 5f77298a71c49e345d913b84
 ---
-You will need to obtain an employment agency license prior to offering staffing services. 
+You need to obtain an employment agency license before offering staffing services.  Call or email Employment and Personnel Services to find out how to register.
 
 - - -
+### Application Requirements
+* Criminal disclosure statement
+* Statements from two New Jersey citizens who know the applicant
+* Applicable fees paid
 
 > **Once completed, you will have:**
 >
