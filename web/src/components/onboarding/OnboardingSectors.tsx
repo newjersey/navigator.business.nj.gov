@@ -37,7 +37,10 @@ export const OnboardingSectors = <T,>(props: FormContextFieldProps<T>): ReactEle
     setSearchText(event.target.value);
   };
 
-  const handleSectorSelect = (event: React.SyntheticEvent<Element, Event>, value: SectorType | null) => {
+  const handleSectorSelect = (
+    event: React.SyntheticEvent<Element, Event>,
+    value: SectorType | null
+  ): void => {
     if (!value) {
       setSearchText("");
       setProfileData({ ...state.profileData, sectorId: "" });
@@ -47,8 +50,9 @@ export const OnboardingSectors = <T,>(props: FormContextFieldProps<T>): ReactEle
     }
   };
 
-  const isValid = () =>
-    !!state.profileData.sectorId && LookupSectorTypeById(state.profileData.sectorId)?.id !== undefined;
+  const isValid = (): boolean => {
+    return !!state.profileData.sectorId && LookupSectorTypeById(state.profileData.sectorId)?.id !== undefined;
+  };
 
   const onValidation = (): void => Validate(!isValid());
 
@@ -60,10 +64,10 @@ export const OnboardingSectors = <T,>(props: FormContextFieldProps<T>): ReactEle
         <Autocomplete
           id="sectorId"
           options={SectorsOrdered}
-          getOptionLabel={(sector: SectorType) => {
+          getOptionLabel={(sector: SectorType): string => {
             return sector.name;
           }}
-          renderOption={(props, option, { selected }) => {
+          renderOption={(props, option, { selected }): JSX.Element => {
             return (
               <li {...props}>
                 {selected ? (
@@ -78,12 +82,12 @@ export const OnboardingSectors = <T,>(props: FormContextFieldProps<T>): ReactEle
               </li>
             );
           }}
-          isOptionEqualToValue={(option: SectorType, value: SectorType) => {
+          isOptionEqualToValue={(option: SectorType, value: SectorType): boolean => {
             return option.id === value.id;
           }}
           value={state.profileData.sectorId ? LookupSectorTypeById(state.profileData.sectorId) : null}
           onChange={handleSectorSelect}
-          renderInput={(params) => {
+          renderInput={(params): JSX.Element => {
             return (
               <TextField
                 {...params}

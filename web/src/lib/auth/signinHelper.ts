@@ -43,7 +43,7 @@ export const onSelfRegister = (
   update: UseUserDataResponse["update"],
   setRegistrationAlertStatus: AuthAlertContextType["setRegistrationAlertStatus"],
   usereturnToLink?: boolean
-) => {
+): void => {
   if (!userData) {
     return;
   }

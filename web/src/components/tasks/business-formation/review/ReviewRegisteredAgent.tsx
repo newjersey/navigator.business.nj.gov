@@ -21,7 +21,7 @@ export const ReviewRegisteredAgent = (): ReactElement => {
         <div className="margin-left-2">
           <UnStyledButton
             style="tertiary"
-            onClick={() => {
+            onClick={(): void => {
               setStepIndex(LookupStepIndexByName("Contacts"));
               scrollToTop();
             }}

@@ -93,7 +93,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
       LookupOperatingPhaseById(userData?.profileData.operatingPhase).displayCalendarToggleButton &&
       isLargeScreen;
 
-    const handleCalendarOnClick = () => {
+    const handleCalendarOnClick = (): void => {
       if (!userData) return;
 
       update({
@@ -159,9 +159,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
                   currentDate.add(1, "year").year().toString(),
                   currentDate.add(2, "year").year().toString(),
                 ]}
-                onChange={(year) => {
-                  setActiveYear(year);
-                }}
+                onChange={(year): void => setActiveYear(year)}
               />
             ) : (
               <></>
@@ -185,7 +183,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
                 <UnStyledButton
                   style="tertiary"
                   underline
-                  onClick={() => {
+                  onClick={(): void => {
                     analytics.event.tax_calendar_feedback_button.click.show_feedback_modal();
                     setShowModal(true);
                   }}
@@ -206,14 +204,7 @@ export const FilingsCalendar = (props: Props): ReactElement => {
           </>
         )}
       </div>
-      {showModal && (
-        <FeedbackModal
-          isOpen={showModal}
-          handleClose={() => {
-            return setShowModal(false);
-          }}
-        />
-      )}
+      {showModal && <FeedbackModal isOpen={showModal} handleClose={(): void => setShowModal(false)} />}
     </>
   );
 };

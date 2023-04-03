@@ -13,6 +13,7 @@ import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { onboardingCompleted } from "@businessnjgovnavigator/shared/domain-logic/onboarding";
+import { GetStaticPropsResult } from "next";
 import { useRouter } from "next/router";
 import { ReactElement, useContext, useEffect, useState } from "react";
 
@@ -58,7 +59,7 @@ const LoadingPage = (): ReactElement => {
     }
   }, userData);
 
-  const sendToOnboarding = async () => {
+  const sendToOnboarding = (): void => {
     setRedirectIsLoading(true);
     onGuestSignIn(router.push, router.pathname, dispatch).then(() => {
       return setRedirectIsLoading(false);
@@ -74,9 +75,7 @@ const LoadingPage = (): ReactElement => {
         </SingleColumnContainer>
         <ModalOneButton
           isOpen={showLoginErrorModal}
-          close={() => {
-            return setShowLoginErrorModal(false);
-          }}
+          close={(): void => setShowLoginErrorModal(false)}
           title={Config.selfRegistration.loginErrorModalTitle}
           primaryButtonText={Config.selfRegistration.loginErrorModalContinueButton}
           primaryButtonOnClick={sendToOnboarding}
@@ -90,7 +89,7 @@ const LoadingPage = (): ReactElement => {
   );
 };
 
-export async function getStaticProps() {
+export function getStaticProps(): GetStaticPropsResult<{ noAuth: boolean }> {
   return {
     props: { noAuth: true },
   };

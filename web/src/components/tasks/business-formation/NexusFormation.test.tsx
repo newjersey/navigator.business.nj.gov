@@ -70,7 +70,9 @@ jest.mock("@/lib/api-client/apiClient", () => ({
 
 const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
 
-const clickBack = () => fireEvent.click(screen.getByText(Config.formation.general.previousButtonText));
+const clickBack = (): void => {
+  fireEvent.click(screen.getByText(Config.formation.general.previousButtonText));
+};
 
 describe("<NexusFormationFlow />", () => {
   let initialUserData: UserData;

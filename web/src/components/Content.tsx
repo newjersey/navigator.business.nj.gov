@@ -28,22 +28,22 @@ export const Content = (props: ContentProps): ReactElement => {
 
   const components = {
     code: isTest
-      ? (props: any) => {
+      ? (props: any): ReactElement => {
           return <>{`\`${props.children}\``}</>;
         }
       : ContextualInfoLink,
     a: Link(props.onClick),
-    h5: (props: any) => {
+    h5: (props: any): ReactElement => {
       return <div className="h5-styling">{props.children}</div>;
     },
-    h6: (props: any) => {
+    h6: (props: any): ReactElement => {
       return <div className="h6-styling">{props.children}</div>;
     },
-    hr: () => {
+    hr: (): ReactElement => {
       return <hr className="margin-y-3" />;
     },
     blockquote: GreenBox,
-    infoAlert: (props: any) => {
+    infoAlert: (props: any): ReactElement => {
       return (
         <Alert variant="info" heading={props.header}>
           {props.children}
@@ -58,7 +58,7 @@ export const Content = (props: ContentProps): ReactElement => {
     th: Unformatted,
     td: Unformatted,
     tbody: Unformatted,
-    del: (delProps: any) => {
+    del: (delProps: any): ReactElement => {
       return props.customComponents ? props.customComponents[delProps.children] : delProps.children;
     },
     ...props.overrides,
@@ -71,7 +71,7 @@ export const Content = (props: ContentProps): ReactElement => {
   );
 };
 
-const Link = (onClick?: () => void) => {
+const Link = (onClick?: () => void): any => {
   return Object.assign(
     (props: any): ReactElement => {
       if (/^https?:\/\/(.*)/.test(props.href)) {

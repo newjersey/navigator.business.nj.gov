@@ -45,7 +45,7 @@ export const useQueryControlledAlert = (config: QueryControlledAlertConfig): Rea
     <SnackbarAlert
       variant={config.variant}
       isOpen={registrationAlertIsVisible}
-      close={() => {
+      close={(): void => {
         setRegistrationAlertIsVisible(false);
         redirect();
       }}

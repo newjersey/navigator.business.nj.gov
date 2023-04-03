@@ -2,7 +2,7 @@ import { ModalZeroButton } from "@/components/ModalZeroButton";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { Breakpoint } from "@mui/material";
-import { ReactNode } from "react";
+import { ReactElement, ReactNode } from "react";
 
 interface Props {
   isOpen: boolean;
@@ -16,7 +16,7 @@ interface Props {
   isLoading?: boolean;
 }
 
-export const ModalTwoButton = (props: Props) => {
+export const ModalTwoButton = (props: Props): ReactElement => {
   const buttonNode = (
     <div
       className="padding-x-4 padding-y-3 bg-base-lightest display-flex flex-column flex-justify-center mobile-lg:flex-row"

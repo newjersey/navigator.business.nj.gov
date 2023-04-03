@@ -45,7 +45,7 @@ const mockApi = api as jest.Mocked<typeof api>;
 const Config = getMergedConfig();
 let setRegistrationModalIsVisible: jest.Mock;
 
-const renderFilingsCalendarTaxAccess = (initialUserData?: UserData) => {
+const renderFilingsCalendarTaxAccess = (initialUserData?: UserData): void => {
   render(
     <ThemeProvider theme={createTheme()}>
       <WithStatefulUserData initialUserData={initialUserData}>
@@ -55,7 +55,7 @@ const renderFilingsCalendarTaxAccess = (initialUserData?: UserData) => {
   );
 };
 
-const renderUnauthenticatedFilingsCalendarTaxAccess = (initialUserData?: UserData) => {
+const renderUnauthenticatedFilingsCalendarTaxAccess = (initialUserData?: UserData): void => {
   render(
     withAuthAlert(
       <WithStatefulUserData initialUserData={initialUserData}>
@@ -588,7 +588,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
     });
   });
 
-  function sharedTestsWhenAllFieldsPrefilled(userData: UserData) {
+  function sharedTestsWhenAllFieldsPrefilled(userData: UserData): void {
     const pendingStateUserData = {
       ...userData,
       taxFilingData: generateTaxFilingData({
@@ -831,11 +831,11 @@ describe("<FilingsCalendarTaxAccess />", () => {
     });
   }
 
-  const openModal = () => {
+  const openModal = (): void => {
     fireEvent.click(screen.getByTestId("get-tax-access"));
   };
 
-  const clickSave = () => {
+  const clickSave = (): void => {
     fireEvent.click(screen.getByTestId("modal-button-primary"));
   };
 });

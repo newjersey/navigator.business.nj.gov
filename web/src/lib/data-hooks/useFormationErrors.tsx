@@ -8,7 +8,20 @@ import { FormationFieldErrorState, FormationStepNames } from "@/lib/types/types"
 import { FormationFields } from "@businessnjgovnavigator/shared/formationData";
 import { useContext, useMemo } from "react";
 
-export const useFormationErrors = () => {
+type FormationErrorsResponse = {
+  allCurrentErrorsForStep: (
+    step: FormationStepNames,
+    overrides?: { hasSubmitted: boolean }
+  ) => FormationFieldErrorState[];
+  doesFieldHaveError: (field: FormationFields) => boolean;
+  doSomeFieldsHaveError: (fields: FormationFields[]) => boolean;
+  doesStepHaveError: (step: FormationStepNames, overrides?: { hasSubmitted: boolean }) => boolean;
+  isStepCompleted: (step: FormationStepNames) => boolean;
+  getApiErrorMessage: (field: FormationFields) => string | undefined;
+  getFieldErrorLabel: (field: FormationFields) => string;
+};
+
+export const useFormationErrors = (): FormationErrorsResponse => {
   const { state } = useContext(BusinessFormationContext);
   const { userData } = useUserData();
 

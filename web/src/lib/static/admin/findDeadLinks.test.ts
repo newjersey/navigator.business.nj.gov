@@ -6,13 +6,7 @@ import { Options } from "broken-link-checker";
 import fs from "fs";
 
 jest.mock("fs");
-jest.mock("process", () => {
-  return {
-    cwd: () => {
-      return "/test";
-    },
-  };
-});
+jest.mock("process", () => ({ cwd: (): string => "/test" }));
 
 describe("findDeadLinks", () => {
   let mockedFs: jest.Mocked<typeof fs>;
@@ -110,7 +104,7 @@ jest.mock("broken-link-checker", () => {
         link?: ((result: any) => void) | undefined;
         end?: (() => void) | undefined;
       }
-    ) {
+    ): any {
       const enqueue = (pageUrl: any): any => {
         if (!handlers.link || !handlers.end) {
           return;

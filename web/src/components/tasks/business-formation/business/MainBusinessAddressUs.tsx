@@ -63,8 +63,8 @@ export const MainBusinessUs = (): ReactElement => {
               error={doesFieldHaveError("addressState")}
               validationText={Config.formation.fields.addressState.error}
               required
-              onValidation={() => setFieldsInteracted(["addressState"])}
-              onSelect={(stateObject) => {
+              onValidation={(): void => setFieldsInteracted(["addressState"])}
+              onSelect={(stateObject): void => {
                 setFormationFormData((previousFormationData) => {
                   return {
                     ...previousFormationData,

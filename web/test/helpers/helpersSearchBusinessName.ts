@@ -11,7 +11,7 @@ export const getSearchValue = (): string => {
   return (inputField() as HTMLInputElement)?.value;
 };
 
-export const fillText = (value: string, dba?: { dba: boolean }) => {
+export const fillText = (value: string, dba?: { dba: boolean }): void => {
   fireEvent.change(dba?.dba ? dbaInputField() : inputField(), { target: { value: value } });
 };
 
@@ -50,15 +50,15 @@ export const searchAndFail = async (dba?: { dba: boolean }): Promise<void> => {
   });
 };
 
-export const searchButton = () => {
+export const searchButton = (): HTMLElement => {
   return screen.getByText(Config.searchBusinessNameTask.searchButtonText);
 };
-export const dbaSearchButton = () => {
+export const dbaSearchButton = (): HTMLElement => {
   return screen.getByText(Config.nexusNameSearch.dbaNameSearchSubmitButton);
 };
-export const inputField = () => {
+export const inputField = (): HTMLElement => {
   return screen.getByLabelText("Search business name");
 };
-export const dbaInputField = () => {
+export const dbaInputField = (): HTMLElement => {
   return screen.getByLabelText(Config.nexusNameSearch.dbaNameSearchLabel);
 };

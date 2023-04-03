@@ -3,7 +3,7 @@ import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { ProfileContentField } from "@/lib/types/types";
-import { useContext } from "react";
+import { ReactElement, useContext } from "react";
 
 interface FieldOverrides {
   header?: string;
@@ -17,7 +17,7 @@ interface Props {
   overrides?: FieldOverrides;
 }
 
-export const FieldLabelModal = (props: Props) => {
+export const FieldLabelModal = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const { state } = useContext(ProfileDataContext);
 

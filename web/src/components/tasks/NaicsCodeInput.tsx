@@ -39,13 +39,13 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
   const displayInput = props.CMS_ONLY_displayInput ?? displayInputState;
   const updateQueue = userDataFromHook.updateQueue;
 
-  const getCode = (code: string) => {
+  const getCode = (code: string): NaicsCodeObject | undefined => {
     return (NaicsCodes as NaicsCodeObject[]).find((element) => {
       return element?.SixDigitCode?.toString() === code;
     });
   };
 
-  const getDescriptions = (codes: string[]) => {
+  const getDescriptions = (codes: string[]): NaicsCodeObject[] => {
     return (NaicsCodes as NaicsCodeObject[]).filter((element) => {
       return codes.includes(element?.SixDigitCode?.toString() ?? "");
     });
@@ -115,7 +115,7 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
     }
   };
 
-  const setInProgress = () => {
+  const setInProgress = (): void => {
     if (!updateQueue) {
       return;
     }
@@ -142,7 +142,7 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
               aria-label={"Recommended NAICS codes"}
               name={"naics-radio-group"}
               value={naicsCode}
-              onChange={(event: React.ChangeEvent<{ name?: string; value: string }>) => {
+              onChange={(event: React.ChangeEvent<{ name?: string; value: string }>): void => {
                 setNaicsCode(event.target.value);
                 if (displayInput) setDisplayInput(false);
                 setInProgress();
@@ -179,7 +179,7 @@ export const NaicsCodeInput = (props: Props): ReactElement => {
                 style={{ alignItems: "center" }}
                 labelPlacement="end"
                 data-testid="naics-radio-input"
-                onChange={() => {
+                onChange={(): void => {
                   setDisplayInput(true);
                   setNaicsCode("");
                   setIsInvalid(undefined);

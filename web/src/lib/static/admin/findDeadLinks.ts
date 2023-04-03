@@ -243,12 +243,12 @@ export const findDeadLinks = async (): Promise<Record<string, string[]>> => {
       const htmlUrlChecker = new HtmlUrlChecker(
         {},
         {
-          link: (result: any) => {
+          link: (result: any): void => {
             if (result.broken && !isTemplateLink(result.url.original)) {
               deadLinks[page].push(result.url.original);
             }
           },
-          end: () => {
+          end: (): void => {
             resolve({});
           },
         }

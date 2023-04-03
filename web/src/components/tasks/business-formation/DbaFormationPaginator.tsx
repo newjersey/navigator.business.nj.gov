@@ -88,7 +88,7 @@ export const DbaFormationPaginator = (): ReactElement => {
     formationFormData: FormationFormData | undefined,
     nextStepIndex: number,
     moveType: "NEXT_BUTTON" | "STEPPER"
-  ) => {
+  ): void => {
     if (!formationFormData) {
       return;
     }
@@ -109,8 +109,8 @@ export const DbaFormationPaginator = (): ReactElement => {
       analytics.event.business_formation_dba_authorization_step_continue_button.click.arrive_on_business_formation_dba_authorization_step();
     }
   };
-  const ForwardButton = () => {
-    const getForwardButtonText = () => {
+  const ForwardButton = (): ReactElement => {
+    const getForwardButtonText = (): string => {
       if (isAuthenticated === IsAuthenticated.FALSE && isNotDba) {
         return `Register & ${Config.formation.general.initialNextButtonText}`;
       } else {
@@ -121,8 +121,8 @@ export const DbaFormationPaginator = (): ReactElement => {
     return (
       <PrimaryButton
         isColor="primary"
-        onClick={() => {
-          return onMoveToStep(state.stepIndex + 1, { moveType: "NEXT_BUTTON" });
+        onClick={(): void => {
+          onMoveToStep(state.stepIndex + 1, { moveType: "NEXT_BUTTON" });
         }}
         isNotFullWidthOnMobile={true}
         isRightMarginRemoved={true}
@@ -133,13 +133,13 @@ export const DbaFormationPaginator = (): ReactElement => {
     );
   };
 
-  const BackButton = () => (
+  const BackButton = (): ReactElement => (
     <SecondaryButton isColor="primary" isNotFullWidthOnMobile={true} onClick={onPreviousButtonClick}>
       {Config.formation.general.previousButtonText}
     </SecondaryButton>
   );
 
-  const ButtonWrapper = (props: { children: ReactNode }) => {
+  const ButtonWrapper = (props: { children: ReactNode }): ReactElement => {
     return (
       <div className="margin-top-2">
         <div className="flex flex-justify-end bg-base-lightest margin-x-neg-4 padding-3 margin-top-3 margin-bottom-neg-4">
@@ -149,7 +149,7 @@ export const DbaFormationPaginator = (): ReactElement => {
     );
   };
 
-  const displayButtons = () => {
+  const displayButtons = (): ReactNode => {
     if (state.stepIndex == 0 && state.businessNameAvailability?.status == "AVAILABLE") {
       return (
         <ButtonWrapper>
@@ -168,9 +168,7 @@ export const DbaFormationPaginator = (): ReactElement => {
         <TaskCTA
           link={state.dbaContent.Authorize.callToActionLink}
           text={state.dbaContent.Authorize.callToActionText}
-          onClick={() => {
-            return setShowCtaModal(true);
-          }}
+          onClick={(): void => setShowCtaModal(true)}
         >
           <BackButton />
         </TaskCTA>
@@ -183,13 +181,11 @@ export const DbaFormationPaginator = (): ReactElement => {
       <div ref={stepperRef}>
         <ModalTwoButton
           isOpen={showCtaModal}
-          close={() => {
-            return setShowCtaModal(false);
-          }}
+          close={(): void => setShowCtaModal(false)}
           title={Config.DbaFormationTask.dbaCtaModalHeader}
           primaryButtonText={Config.DbaFormationTask.dbaCtaModalContinueButtonText}
-          primaryButtonOnClick={() => {
-            return window.open(state.dbaContent.Authorize.callToActionLink, "_ blank");
+          primaryButtonOnClick={(): void => {
+            window.open(state.dbaContent.Authorize.callToActionLink, "_ blank");
           }}
           secondaryButtonText={Config.DbaFormationTask.dbaCtaModalCancelButtonText}
         >
@@ -202,8 +198,8 @@ export const DbaFormationPaginator = (): ReactElement => {
             <HorizontalStepper
               steps={stepperState}
               currentStep={state.stepIndex}
-              onStepClicked={(step: number) => {
-                return onMoveToStep(step, { moveType: "STEPPER" });
+              onStepClicked={(step: number): void => {
+                onMoveToStep(step, { moveType: "STEPPER" });
               }}
             />
           </div>

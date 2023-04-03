@@ -22,12 +22,14 @@ export const NavBarMobile = ({ scrolled, task, showSidebar, hideMiniRoadmap }: P
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
   const { state } = useContext(AuthContext);
 
-  const open = () => {
-    return setSidebarIsOpen(true);
+  const open = (): void => {
+    setSidebarIsOpen(true);
   };
-  const close = () => {
-    return setSidebarIsOpen(false);
+
+  const close = (): void => {
+    setSidebarIsOpen(false);
   };
+
   const isAuthenticated = useMemo(() => {
     return state.isAuthenticated === "TRUE";
   }, [state.isAuthenticated]);
@@ -41,7 +43,7 @@ export const NavBarMobile = ({ scrolled, task, showSidebar, hideMiniRoadmap }: P
       <div
         className={`left-nav-overlay ${sidebarIsOpen ? "is-visible" : ""}`}
         aria-hidden="true"
-        onClick={() => {
+        onClick={(): void => {
           analytics.event.mobile_menu.click_outside.close_mobile_menu();
           close();
         }}
@@ -56,7 +58,7 @@ export const NavBarMobile = ({ scrolled, task, showSidebar, hideMiniRoadmap }: P
           className="left-nav-menu-button radius-0"
           data-testid="nav-menu-open"
           aria-label="open menu"
-          onClick={() => {
+          onClick={(): void => {
             analytics.event.mobile_hamburger_icon.click.open_mobile_menu();
             open();
           }}
@@ -85,7 +87,7 @@ export const NavBarMobile = ({ scrolled, task, showSidebar, hideMiniRoadmap }: P
             <button
               className="left-nav-close fac fdr fjc"
               aria-label="close menu"
-              onClick={() => {
+              onClick={(): void => {
                 analytics.event.mobile_menu_close_button.click.close_mobile_menu();
                 close();
               }}

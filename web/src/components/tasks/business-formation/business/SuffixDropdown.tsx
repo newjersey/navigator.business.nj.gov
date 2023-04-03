@@ -5,7 +5,7 @@ import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { camelCaseToSentence } from "@/lib/utils/cases-helpers";
 import { BusinessSuffix, BusinessSuffixMap } from "@businessnjgovnavigator/shared/";
 import { FormControl, FormHelperText, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";
-import { ReactElement, useContext } from "react";
+import { ReactElement, ReactNode, useContext } from "react";
 
 export const SuffixDropdown = (): ReactElement => {
   const FIELD = "businessSuffix";
@@ -13,7 +13,7 @@ export const SuffixDropdown = (): ReactElement => {
   const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
   const { doesFieldHaveError } = useFormationErrors();
 
-  const handleChange = (event: SelectChangeEvent<string>) => {
+  const handleChange = (event: SelectChangeEvent<string>): void => {
     setFormationFormData((previousFormationData) => {
       return {
         ...previousFormationData,
@@ -44,11 +44,9 @@ export const SuffixDropdown = (): ReactElement => {
             displayEmpty
             value={state.formationFormData.businessSuffix || ""}
             onChange={handleChange}
-            onBlur={() => {
-              setFieldsInteracted([FIELD]);
-            }}
+            onBlur={(): void => setFieldsInteracted([FIELD])}
             inputProps={{ "data-testid": "business-suffix" }}
-            renderValue={(selected) => {
+            renderValue={(selected): ReactNode => {
               if (selected.length === 0) {
                 return <></>;
               }

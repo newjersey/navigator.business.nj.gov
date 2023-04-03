@@ -1,4 +1,5 @@
 import * as useRoadmapModule from "@/lib/data-hooks/useRoadmap";
+import { CurrentAndNextSection } from "@/lib/data-hooks/useRoadmap";
 import { Roadmap, Task } from "@/lib/types/types";
 import { generateRoadmap, generateStep, generateTask } from "@/test/factories";
 import { sectionNames, SectionType } from "@businessnjgovnavigator/shared/userData";
@@ -19,7 +20,8 @@ export const setMockRoadmapResponse = (params: {
     roadmap: params.roadmap,
     sectionNamesInRoadmap: [...sectionNames],
     isSectionCompleted: params.isSectionCompletedFn ?? jest.fn(),
-    currentAndNextSection: params.currentAndNextSection ?? (() => ({ current: "PLAN", next: "START" })),
+    currentAndNextSection:
+      params.currentAndNextSection ?? ((): CurrentAndNextSection => ({ current: "PLAN", next: "START" })),
   });
 };
 

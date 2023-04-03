@@ -2,7 +2,13 @@ import { SignUpSnackbar } from "@/components/auth/SignUpSnackbar";
 import { getMergedConfig } from "@/contexts/configContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { ROUTES } from "@/lib/domain-logic/routes";
-import { Certification, Funding, OperateReference, SidebarCardContent } from "@/lib/types/types";
+import {
+  Certification,
+  Funding,
+  OperateReference,
+  RoadmapDisplayContent,
+  SidebarCardContent,
+} from "@/lib/types/types";
 import DashboardPage from "@/pages/dashboard";
 import {
   generateBusinessPersona,
@@ -62,9 +68,8 @@ const setDesktopScreen = (value: boolean): void => {
   });
 };
 
-const createDisplayContent = (sidebar?: Record<string, SidebarCardContent>) => {
+const createDisplayContent = (sidebar?: Record<string, SidebarCardContent>): RoadmapDisplayContent => {
   return {
-    contentMd: "",
     sidebarDisplayContent: sidebar ?? {
       welcome: generateSidebarCardContent({}),
     },
@@ -87,7 +92,7 @@ describe("dashboard page", () => {
   }: {
     sidebarDisplayContent?: Record<string, SidebarCardContent>;
     operateReferences?: Record<string, OperateReference>;
-  }) => {
+  }): void => {
     render(
       <ThemeProvider theme={createTheme()}>
         <DashboardPage
@@ -101,7 +106,7 @@ describe("dashboard page", () => {
     );
   };
 
-  const renderStatefulPage = (userData?: UserData) => {
+  const renderStatefulPage = (userData?: UserData): void => {
     setupStatefulUserDataContext();
 
     render(
@@ -137,7 +142,7 @@ describe("dashboard page", () => {
     registrationAlertIsVisible?: boolean;
     registrationAlertStatus?: RegistrationStatus;
     setRegistrationAlertIsVisible?: jest.Mock<() => void>;
-  }) => {
+  }): void => {
     setupStatefulUserDataContext();
 
     render(
@@ -589,7 +594,7 @@ describe("dashboard page", () => {
       });
     });
 
-    const chooseHomeBasedValue = (value: "true" | "false") => {
+    const chooseHomeBasedValue = (value: "true" | "false"): void => {
       fireEvent.click(screen.getByTestId(`home-based-business-radio-${value}`));
     };
   });

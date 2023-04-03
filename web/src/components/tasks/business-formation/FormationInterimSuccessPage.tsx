@@ -19,7 +19,7 @@ export const FormationInterimSuccessPage = (props: Props): ReactElement => {
   const { userData, update } = useUserData();
   const router = useRouter();
 
-  const resetCompletedFilingPayment = () => {
+  const resetCompletedFilingPayment = (): void => {
     if (!userData) {
       return;
     }
@@ -44,9 +44,7 @@ export const FormationInterimSuccessPage = (props: Props): ReactElement => {
             <UnStyledButton
               style="tertiary"
               underline
-              onClick={() => {
-                return setShowConfirmResubmitModal(true);
-              }}
+              onClick={(): void => setShowConfirmResubmitModal(true)}
             >
               {Config.formation.interimSuccessPage.buttonText}
             </UnStyledButton>
@@ -58,9 +56,7 @@ export const FormationInterimSuccessPage = (props: Props): ReactElement => {
       <img className="maxh-card-lg margin-top-6" src={`/img/signpost.svg`} alt="" />
       <ModalTwoButton
         isOpen={showConfirmResubmitModal}
-        close={() => {
-          return setShowConfirmResubmitModal(false);
-        }}
+        close={(): void => setShowConfirmResubmitModal(false)}
         title={Config.formation.interimSuccessPage.modalTitle}
         primaryButtonText={Config.formation.interimSuccessPage.modalContinue}
         primaryButtonOnClick={resetCompletedFilingPayment}

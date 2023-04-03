@@ -34,8 +34,9 @@ import {
   IndustrySpecificData,
   industrySpecificDataChoices,
 } from "@businessnjgovnavigator/shared/profileData";
+import { ReactElement } from "react";
 
-const ProfileFieldsPreview = (props: PreviewProps) => {
+const ProfileFieldsPreview = (props: PreviewProps): ReactElement => {
   const { config, setConfig } = usePreviewConfig(props);
   const ref = usePreviewRef(props);
 

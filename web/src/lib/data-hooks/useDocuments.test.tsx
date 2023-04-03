@@ -24,11 +24,11 @@ describe("useDocuments", () => {
   } => {
     const returnVal = {
       documents: undefined,
-      checkData: () => {
+      checkData: (): Promise<void> => {
         return Promise.resolve();
       },
     };
-    function TestComponent() {
+    function TestComponent(): null {
       Object.assign(returnVal, useDocuments());
       return null;
     }

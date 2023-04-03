@@ -34,7 +34,7 @@ export const SignUpModal = (): ReactElement => {
     return <></>;
   }
 
-  const selfRegister = () => {
+  const selfRegister = (): void => {
     if (userData?.preferences.returnToLink === `${ROUTES.dashboard}?${QUERIES.openTaxFilingsModal}=true`) {
       analytics.event.myNJ_prompt_modal_complete_button.click.go_to_myNJ_registration();
       onSelfRegister(router, userData, update, setRegistrationAlertStatus, true);
@@ -48,18 +48,14 @@ export const SignUpModal = (): ReactElement => {
     <Dialog
       open={registrationModalIsVisible}
       maxWidth="xs"
-      onClose={() => {
-        return setRegistrationModalIsVisible(false);
-      }}
+      onClose={(): void => setRegistrationModalIsVisible(false)}
       data-testid={"self-reg-modal"}
     >
       <DialogTitle sx={{ p: 5, paddingRight: 10 }}>
         <Content>{Config.navigationDefaults.guestModalTitle}</Content>
         <IconButton
           aria-label="close"
-          onClick={() => {
-            return setRegistrationModalIsVisible(false);
-          }}
+          onClick={(): void => setRegistrationModalIsVisible(false)}
           sx={{
             position: "absolute",
             right: 10,
@@ -93,9 +89,8 @@ export const SignUpModal = (): ReactElement => {
           }}
         >
           <Content
-            onClick={() => {
+            onClick={(): void => {
               analytics.event.guest_modal.click.go_to_myNJ_login();
-
               triggerSignIn();
             }}
           >

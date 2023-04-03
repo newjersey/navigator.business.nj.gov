@@ -1,17 +1,17 @@
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
-import { useContext } from "react";
+import { ReactElement, useContext } from "react";
 
 interface Props {
   setPage: (page: { current: number; previous: number }) => void;
   routeToPage: (page: number) => void;
 }
 
-export const DevOnlySkipOnboardingButton = (props: Props) => {
+export const DevOnlySkipOnboardingButton = (props: Props): ReactElement => {
   const { state, setProfileData } = useContext(ProfileDataContext);
 
-  const devOnlySkipOnboarding = () => {
+  const devOnlySkipOnboarding = (): void => {
     setProfileData({
       ...emptyProfileData,
       businessPersona: "STARTING",

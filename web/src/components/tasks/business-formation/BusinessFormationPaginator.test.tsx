@@ -148,7 +148,7 @@ describe("<BusinessFormationPaginator />", () => {
       setRegistrationModalIsVisible = jest.fn();
     });
 
-    const renderAsGuest = () => {
+    const renderAsGuest = (): void => {
       render(
         withAuthAlert(
           <WithStatefulUserData initialUserData={initialUserData}>
@@ -246,7 +246,7 @@ describe("<BusinessFormationPaginator />", () => {
       ).toBeInTheDocument();
     });
 
-    const switchingStepTests = (switchStepFunction: () => void) => {
+    const switchingStepTests = (switchStepFunction: () => void): void => {
       it("filters out empty provisions", async () => {
         const page = preparePage(initialUserData, displayContent);
         await page.stepperClickToBusinessStep();
@@ -2163,7 +2163,7 @@ describe("<BusinessFormationPaginator />", () => {
       expect(screen.queryByText(Config.autosaveDefaults.savedText)).not.toBeInTheDocument();
     });
 
-    const makeChangeToForm = (page: FormationPageHelpers) => {
+    const makeChangeToForm = (page: FormationPageHelpers): void => {
       page.fillText("Search business name", "Pizza Joint");
     };
   });

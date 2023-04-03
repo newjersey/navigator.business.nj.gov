@@ -17,7 +17,7 @@ describe("filing page", () => {
     jest.resetAllMocks();
   });
 
-  const renderFilingPage = (filing: Filing) => {
+  const renderFilingPage = (filing: Filing): void => {
     render(
       <ThemeProvider theme={createTheme()}>
         <FilingPage filing={filing} />

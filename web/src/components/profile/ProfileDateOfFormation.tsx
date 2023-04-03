@@ -58,7 +58,7 @@ export const ProfileDateOfFormation = (props: Props): ReactElement => {
   RegisterForOnSubmit(isValid);
   const onValidation = (): void => Validate(!isValid());
 
-  const handleChange = (date: DateObject | null) => {
+  const handleChange = (date: DateObject | null): void => {
     setDateValue(date);
     setProfileData({
       ...state.profileData,
@@ -83,10 +83,10 @@ export const ProfileDateOfFormation = (props: Props): ReactElement => {
         value={dateValue}
         onClose={onValidation}
         onChange={handleChange}
-        onError={(hasError: string | null) => {
-          return setDateError(!!hasError);
+        onError={(hasError: string | null): void => {
+          setDateError(!!hasError);
         }}
-        renderInput={(params: TextFieldProps) => {
+        renderInput={(params: TextFieldProps): JSX.Element => {
           return (
             <div>
               <GenericTextField

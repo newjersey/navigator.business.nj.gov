@@ -3,13 +3,7 @@ import { getMergedConfig } from "@/contexts/configContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { priorityTypesObj } from "@/lib/domain-logic/cannabisPriorityTypes";
 import { Task } from "@/lib/types/types";
-import {
-  generateProfileData,
-  generateTask,
-  generateTaskLink,
-  generateUndefinedIndustrySpecificData,
-  generateUserData,
-} from "@/test/factories";
+import { generateProfileData, generateTask, generateTaskLink, generateUserData } from "@/test/factories";
 import { withAuthAlert } from "@/test/helpers/helpers-renderers";
 import { useMockRoadmap, useMockRoadmapTask } from "@/test/mock/mockUseRoadmap";
 import {
@@ -26,7 +20,7 @@ const Config = getMergedConfig();
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 
-const renderPage = (task: Task, initialUserData?: UserData) => {
+const renderPage = (task: Task, initialUserData?: UserData): void => {
   render(
     withAuthAlert(
       <WithStatefulUserData initialUserData={initialUserData ?? generateUserData({})}>
@@ -67,7 +61,7 @@ describe("<CannabisApplyForLicenseTask />", () => {
 
   it("save microbusiness selection to userData", () => {
     const initialUserData = generateUserData({
-      profileData: generateProfileData({ ...generateUndefinedIndustrySpecificData() }),
+      profileData: generateProfileData({ cannabisMicrobusiness: undefined }),
     });
     renderPage(generateTask({}), initialUserData);
     fireEvent.click(screen.getByTestId("microbusiness-radio-true"));
@@ -322,13 +316,13 @@ describe("<CannabisApplyForLicenseTask />", () => {
     return screen.getByRole("checkbox", { name: name });
   };
 
-  const sbeCheckbox = () => {
+  const sbeCheckbox = (): HTMLInputElement => {
     return getInputByName(Config.cannabisApplyForLicense.sbeLabel);
   };
-  const diverselyOwnedCheckbox = () => {
+  const diverselyOwnedCheckbox = (): HTMLInputElement => {
     return getInputByName(Config.cannabisApplyForLicense.diverselyOwnedLabel);
   };
-  const impactZoneCheckbox = () => {
+  const impactZoneCheckbox = (): HTMLInputElement => {
     return getInputByName(Config.cannabisApplyForLicense.impactZoneLabel);
   };
 });

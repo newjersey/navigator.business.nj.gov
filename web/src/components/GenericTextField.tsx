@@ -83,7 +83,7 @@ export const GenericTextField = forwardRef(
 
       const maxLength = props.numericProps?.maxLength;
 
-      valueFilter = (value) => {
+      valueFilter = (value: string): string => {
         return maxLength ? regex(value).slice(0, maxLength) : regex(value);
       };
 

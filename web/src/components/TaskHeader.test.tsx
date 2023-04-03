@@ -19,8 +19,8 @@ jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 
-const renderTaskHeader = (task: Task, initialUserData?: UserData) => {
-  return render(
+const renderTaskHeader = (task: Task, initialUserData?: UserData): void => {
+  render(
     <ThemeProvider theme={createTheme()}>
       <WithStatefulUserData initialUserData={initialUserData}>
         <TaskHeader task={task} />

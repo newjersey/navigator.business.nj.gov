@@ -56,7 +56,7 @@ export const PaymentTypeTable = (): ReactElement => {
     state.formationFormData.certifiedCopyOfFormationDocument,
   ]);
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setFormationFormData((previousFormationData) => {
       return {
         ...previousFormationData,

@@ -8,14 +8,14 @@ import { camelCaseToKebabCase } from "@/lib/utils/cases-helpers";
 import { scrollToTop } from "@/lib/utils/helpers";
 import { FormationTextField } from "@businessnjgovnavigator/shared/formationData";
 import { useMediaQuery } from "@mui/material";
-import { useContext } from "react";
+import { ReactElement, useContext } from "react";
 
 interface Props {
   header: string;
   fieldName: FormationTextField;
   stepName: FormationStepNames;
 }
-export const ReviewText = (props: Props) => {
+export const ReviewText = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const { state, setStepIndex } = useContext(BusinessFormationContext);
   const kebabCaseFieldName = camelCaseToKebabCase(props.fieldName);
@@ -30,7 +30,7 @@ export const ReviewText = (props: Props) => {
         <div className="margin-left-2">
           <UnStyledButton
             style="tertiary"
-            onClick={() => {
+            onClick={(): void => {
               setStepIndex(LookupStepIndexByName(props.stepName));
               scrollToTop();
             }}

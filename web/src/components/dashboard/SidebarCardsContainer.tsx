@@ -56,11 +56,11 @@ export const SidebarCardsContainer = (props: Props): ReactElement => {
       }) as Funding[]
   );
 
-  const displayFundingCards = () => {
+  const displayFundingCards = (): boolean => {
     return LookupOperatingPhaseById(userData?.profileData.operatingPhase).displayFundings;
   };
 
-  const displayCertificationsCards = () => {
+  const displayCertificationsCards = (): boolean => {
     return LookupOperatingPhaseById(userData?.profileData.operatingPhase).displayCertifications;
   };
 
@@ -74,13 +74,13 @@ export const SidebarCardsContainer = (props: Props): ReactElement => {
         })
     : [];
 
-  const getTopCards = () => {
+  const getTopCards = (): SidebarCardContent[] => {
     return visibleCardsOrderedByWeight.filter((card) => {
       return card.section === "above-opportunities";
     });
   };
 
-  const getBottomCards = () => {
+  const getBottomCards = (): SidebarCardContent[] => {
     return visibleCardsOrderedByWeight.filter((card) => {
       return card.section === "below-opportunities";
     });

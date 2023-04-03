@@ -188,7 +188,7 @@ describe("getErrorStateForField", () => {
         legalStructureIds: FormationLegalType[],
         additionalDays: number,
         error: boolean
-      ) =>
+      ): void => {
         legalStructureIds.map((legalStructureId) =>
           describe(`for ${legalStructureId}`, () => {
             it(`has${error ? " " : " no "}error if in the future`, () => {
@@ -202,6 +202,7 @@ describe("getErrorStateForField", () => {
             });
           })
         );
+      };
 
       describe("any future date", () => {
         const legalStructureIds: FormationLegalType[] = [
@@ -1006,7 +1007,7 @@ describe("getErrorStateForField", () => {
       "addressState",
     ];
 
-    const runTests = (hasErrorIfUndefined: FormationFields[], expectedLabel?: string) => {
+    const runTests = (hasErrorIfUndefined: FormationFields[], expectedLabel?: string): void => {
       for (const field of hasErrorIfUndefined) {
         describe(`${field}`, () => {
           it("has error if undefined", () => {
@@ -1059,7 +1060,7 @@ describe("getErrorStateForField", () => {
       "addressProvince",
     ];
 
-    const runTests = (hasErrorIfEmpty: FormationFields[]) => {
+    const runTests = (hasErrorIfEmpty: FormationFields[]): void => {
       for (const field of hasErrorIfEmpty) {
         describe(`${field}`, () => {
           it("has error if empty", () => {

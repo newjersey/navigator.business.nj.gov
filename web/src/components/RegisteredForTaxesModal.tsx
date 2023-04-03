@@ -102,8 +102,8 @@ export const RegisteredForTaxesModal = (props: Props): ReactElement => {
             flow: "STARTING",
           },
           setProfileData,
-          setUser: () => {},
-          onBack: () => {},
+          setUser: (): void => {},
+          onBack: (): void => {},
         }}
       >
         <ModalTwoButton

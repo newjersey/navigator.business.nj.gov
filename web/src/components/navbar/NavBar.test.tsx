@@ -40,7 +40,7 @@ jest.mock("@/lib/api-client/apiClient", () => ({ postSelfReg: jest.fn() }));
 jest.mock(
   "next/link",
   () =>
-    ({ children }: { children: ReactNode }) =>
+    ({ children }: { children: ReactNode }): ReactNode =>
       children
 );
 
@@ -79,7 +79,7 @@ describe("<NavBar />", () => {
     });
 
     describe("desktop version", () => {
-      const renderDesktopNav = () => {
+      const renderDesktopNav = (): void => {
         setLargeScreen(true);
         render(
           withAuth(<NavBar landingPage={false} showSidebar={false} />, {
@@ -109,7 +109,7 @@ describe("<NavBar />", () => {
     });
 
     describe("mobile version", () => {
-      const renderMobileRoadmapNav = () => {
+      const renderMobileRoadmapNav = (): void => {
         setLargeScreen(false);
         render(
           withAuth(<NavBar landingPage={false} showSidebar={false} />, {
@@ -132,7 +132,7 @@ describe("<NavBar />", () => {
     });
   });
 
-  const displaysUserNameOrEmail = (renderFunc: () => void) => {
+  const displaysUserNameOrEmail = (renderFunc: () => void): void => {
     it("displays name of user if available", () => {
       useMockUserData({ user: generateUser({ name: "John Smith", email: "test@example.com" }) });
       renderFunc();
@@ -154,7 +154,7 @@ describe("<NavBar />", () => {
   };
 
   describe("authenticated desktop navbar", () => {
-    const renderDesktopNav = () => {
+    const renderDesktopNav = (): void => {
       setLargeScreen(true);
       render(
         withAuth(<NavBar landingPage={false} task={undefined} showSidebar={false} />, {
@@ -215,7 +215,7 @@ describe("<NavBar />", () => {
   });
 
   describe("guest mode desktop navbar", () => {
-    const renderDesktopNav = () => {
+    const renderDesktopNav = (): void => {
       setLargeScreen(true);
       render(
         withAuth(<NavBar landingPage={false} task={undefined} showSidebar={false} />, {
@@ -312,7 +312,7 @@ describe("<NavBar />", () => {
   });
 
   describe("mobile navbar - non-sidebar view", () => {
-    const renderMobileRoadmapNav = () => {
+    const renderMobileRoadmapNav = (): void => {
       setLargeScreen(false);
       render(
         withAuth(<NavBar landingPage={false} task={undefined} showSidebar={false} />, {
@@ -338,7 +338,7 @@ describe("<NavBar />", () => {
       useMockRoadmap({});
     });
 
-    const renderMobileTaskNav = (isAuthenticated = IsAuthenticated.TRUE) => {
+    const renderMobileTaskNav = (isAuthenticated = IsAuthenticated.TRUE): void => {
       setLargeScreen(false);
 
       render(

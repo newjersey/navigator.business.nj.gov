@@ -21,13 +21,13 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
-import { FormationStepNames } from "@/lib/types/types";
+import { FormationStepNames, StepperStep } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { scrollToTopOfElement, useMountEffect } from "@/lib/utils/helpers";
 import { FormationFormData, UserData } from "@businessnjgovnavigator/shared";
 import { useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router";
-import { ReactElement, useContext, useEffect, useRef, useState } from "react";
+import { ReactElement, ReactNode, useContext, useEffect, useRef, useState } from "react";
 
 export const BusinessFormationPaginator = (): ReactElement => {
   const { userData, update } = useUserData();
@@ -58,7 +58,9 @@ export const BusinessFormationPaginator = (): ReactElement => {
     analytics.event.business_formation_name_step.arrive.arrive_on_business_formation_name_step();
   });
 
-  const determineStepsWithErrors = (overrides?: { hasSubmitted: boolean }) => {
+  const determineStepsWithErrors = (overrides?: {
+    hasSubmitted: boolean;
+  }): { stepsWithErrors: StepperStep[]; stepStates: StepperStep[] } => {
     const stepStates = BusinessFormationStepsConfiguration.map((value) => {
       return {
         name: value.name,
@@ -198,7 +200,7 @@ export const BusinessFormationPaginator = (): ReactElement => {
     formationFormData: FormationFormData | undefined,
     nextStepIndex: number,
     moveType: "NEXT_BUTTON" | "STEPPER"
-  ) => {
+  ): void => {
     if (!formationFormData) {
       return;
     }
@@ -237,7 +239,7 @@ export const BusinessFormationPaginator = (): ReactElement => {
     }
   };
 
-  const submitToApiAnalytics = (userData: UserData) => {
+  const submitToApiAnalytics = (userData: UserData): void => {
     const { formationFormData } = userData.formationData;
 
     analytics.event.business_formation_provisions.submit.provisions_submitted_with_formation(
@@ -267,7 +269,7 @@ export const BusinessFormationPaginator = (): ReactElement => {
     }
   };
 
-  const submitToApi = async () => {
+  const submitToApi = async (): Promise<void> => {
     if (!userData) return;
     const filteredUserData = {
       ...userData,
@@ -326,7 +328,7 @@ export const BusinessFormationPaginator = (): ReactElement => {
     );
   };
 
-  const displayButtons = () => {
+  const displayButtons = (): ReactNode => {
     return (
       <div className="margin-top-2 ">
         <div className="flex fdc mobile-lg:flex-row fac bg-base-lightest margin-x-neg-4 padding-3 margin-top-3 margin-bottom-neg-4 radius-bottom-lg">
@@ -336,7 +338,9 @@ export const BusinessFormationPaginator = (): ReactElement => {
               secondsBetweenSpinAnimations={60}
               spinForXSeconds={2.5}
               hasDataChanged={hasFormDataChanged()}
-              saveDataFunction={() => saveFormData({ shouldFilter: false })}
+              saveDataFunction={(): void => {
+                saveFormData({ shouldFilter: false });
+              }}
             />
           </div>
           <div className="flex flex-column-reverse mobile-lg:flex-row mobile-lg:margin-left-auto width-100">
@@ -350,8 +354,8 @@ export const BusinessFormationPaginator = (): ReactElement => {
             <div className={shouldDisplayPreviousButton() ? "" : "mobile-lg:margin-left-auto"}>
               <PrimaryButton
                 isColor="primary"
-                onClick={() => {
-                  return onMoveToStep(state.stepIndex + 1, { moveType: "NEXT_BUTTON" });
+                onClick={(): void => {
+                  onMoveToStep(state.stepIndex + 1, { moveType: "NEXT_BUTTON" });
                 }}
                 isRightMarginRemoved={true}
                 isLoading={isLoading}
@@ -366,7 +370,7 @@ export const BusinessFormationPaginator = (): ReactElement => {
     );
   };
 
-  const hasGenericApiError = () => {
+  const hasGenericApiError = (): boolean => {
     const hasApiError =
       userData?.formationData.formationResponse !== undefined &&
       userData.formationData.formationResponse.errors.length > 0;
@@ -382,7 +386,7 @@ export const BusinessFormationPaginator = (): ReactElement => {
     return !allApiErrorsHaveMappings;
   };
 
-  const getErrorComponent = () => {
+  const getErrorComponent = (): ReactNode => {
     if (hasGenericApiError()) {
       if (!userData || !userData.formationData.formationResponse) {
         return <></>;
@@ -467,8 +471,8 @@ export const BusinessFormationPaginator = (): ReactElement => {
         <HorizontalStepper
           steps={stepStates}
           currentStep={state.stepIndex}
-          onStepClicked={(step: number) => {
-            return onMoveToStep(step, { moveType: "STEPPER" });
+          onStepClicked={(step: number): void => {
+            onMoveToStep(step, { moveType: "STEPPER" });
           }}
         />
       </div>

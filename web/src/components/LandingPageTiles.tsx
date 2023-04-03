@@ -13,12 +13,12 @@ export const LandingPageTiles = (): ReactElement => {
   const istabletAndUp = useMediaQuery(MediaQueries.tabletAndUp);
   const { Config } = useConfig();
 
-  const routeToOnboarding = () => {
+  const routeToOnboarding = (): void => {
     router.push(ROUTES.onboarding);
     analytics.event.landing_page_hero_get_started.click.go_to_onboarding();
   };
 
-  const setFlowAndRouteUser = (flow: "starting" | "out-of-state" | "up-and-running") => {
+  const setFlowAndRouteUser = (flow: "starting" | "out-of-state" | "up-and-running"): void => {
     routeWithQuery(router, {
       path: ROUTES.onboarding,
       queries: { [QUERIES.flow]: flow },
@@ -49,54 +49,42 @@ export const LandingPageTiles = (): ReactElement => {
             imgPath={"/img/startBusiness-icon.svg"}
             tileText={Config.landingPage.landingPageTile2Text}
             dataTestId={"start-biz-tile"}
-            onClick={() => {
-              return setFlowAndRouteUser("starting");
-            }}
+            onClick={(): void => setFlowAndRouteUser("starting")}
           />
           <LandingPageActionTile
             className={"landing-page-slide"}
             imgPath={"/img/runBusiness-icon.svg"}
             tileText={Config.landingPage.landingPageTile3Text}
             dataTestId={"run-biz-tile"}
-            onClick={() => {
-              return setFlowAndRouteUser("up-and-running");
-            }}
+            onClick={(): void => setFlowAndRouteUser("up-and-running")}
           />
           <LandingPageActionTile
             className={"landing-page-slide"}
             imgPath={"/img/outOfState-icon.svg"}
             dataTestId={"out-of-state-tile"}
             tileText={Config.landingPage.landingPageTile4Text}
-            onClick={() => {
-              return setFlowAndRouteUser("out-of-state");
-            }}
+            onClick={(): void => setFlowAndRouteUser("out-of-state")}
           />
           <LandingPageActionTile
             className={"landing-page-slide"}
             imgPath={"/img/briefcase-icon.svg"}
             dataTestId={"register-biz-tile"}
             tileText={Config.landingPage.landingPageTile5Text}
-            onClick={() => {
-              return setFlowAndRouteUser("starting");
-            }}
+            onClick={(): void => setFlowAndRouteUser("starting")}
           />
           <LandingPageActionTile
             className={"landing-page-slide"}
             imgPath={"/img/payTaxes-icon.svg"}
             dataTestId={"pay-taxes-tile"}
             tileText={Config.landingPage.landingPageTile6Text}
-            onClick={() => {
-              return setFlowAndRouteUser("up-and-running");
-            }}
+            onClick={(): void => setFlowAndRouteUser("up-and-running")}
           />
           <LandingPageActionTile
             className={"landing-page-slide"}
             imgPath={"/img/eligibleFunding-icon.svg"}
             dataTestId={"eligible-funding-tile"}
             tileText={Config.landingPage.landingPageTile7Text}
-            onClick={() => {
-              return setFlowAndRouteUser("up-and-running");
-            }}
+            onClick={(): void => setFlowAndRouteUser("up-and-running")}
           />
         </div>
       )}

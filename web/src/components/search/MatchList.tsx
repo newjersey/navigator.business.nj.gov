@@ -21,7 +21,7 @@ export const MatchList = (props: Props): ReactElement => {
     return <></>;
   }
 
-  const toggleExpanded = () => {
+  const toggleExpanded = (): void => {
     setExpanded((prev) => !prev);
   };
 

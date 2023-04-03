@@ -4,9 +4,9 @@ import { ConfigContext } from "@/contexts/configContext";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
-import { useState } from "react";
+import { ReactElement, useState } from "react";
 
-const CannabisEligibilityModalPreview = (props: PreviewProps) => {
+const CannabisEligibilityModalPreview = (props: PreviewProps): ReactElement => {
   const { config, setConfig } = usePreviewConfig(props);
   const ref = usePreviewRef(props);
 
@@ -15,25 +15,16 @@ const CannabisEligibilityModalPreview = (props: PreviewProps) => {
   return (
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
       <h2>Eligibility Modal</h2>
-      <button
-        className="margin-2"
-        onClick={() => {
-          return setModalOpen(true);
-        }}
-      >
+      <button className="margin-2" onClick={(): void => setModalOpen(true)}>
         Open Modal
       </button>
       <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
         <ModalTwoButton
           isOpen={modalOpen}
-          close={() => {
-            setModalOpen(false);
-          }}
+          close={(): void => setModalOpen(false)}
           title={config.cannabisEligibilityModal.eligibleModalTitle}
           primaryButtonText={config.cannabisEligibilityModal.eligibleModalContinueButton}
-          primaryButtonOnClick={() => {
-            setModalOpen(false);
-          }}
+          primaryButtonOnClick={(): void => setModalOpen(false)}
           secondaryButtonText={config.cannabisEligibilityModal.eligibleModalCancelButton}
         >
           <Content>{config.cannabisEligibilityModal.eligibleModalBody}</Content>

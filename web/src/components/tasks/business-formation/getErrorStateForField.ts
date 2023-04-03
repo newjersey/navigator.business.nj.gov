@@ -75,11 +75,8 @@ export const getErrorStateForField = (
     return finalState;
   };
 
-  const isForeignUser = () => {
-    if (formationFormData.businessLocationType === "NJ") {
-      return false;
-    }
-    return true;
+  const isForeignUser = (): boolean => {
+    return formationFormData.businessLocationType !== "NJ";
   };
 
   const hasErrorIfEmpty: FormationFields[] = [

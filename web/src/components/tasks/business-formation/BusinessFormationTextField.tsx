@@ -22,7 +22,7 @@ export const BusinessFormationTextField = ({ className, ...props }: Props): Reac
     setFormationFormData((formationFormData) => ({ ...formationFormData, [props.fieldName]: value }));
   };
 
-  const onValidation = () => {
+  const onValidation = (): void => {
     setFieldsInteracted([props.fieldName]);
   };
 

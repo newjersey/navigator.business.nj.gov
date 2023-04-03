@@ -1,4 +1,4 @@
-export const formatTaxId = (taxId: string) => {
+export const formatTaxId = (taxId: string): string => {
   const length = taxId.length;
   if (length === 0) {
     return taxId;

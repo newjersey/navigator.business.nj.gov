@@ -15,8 +15,9 @@ interface Props {
 export const CongratulatoryModal = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const router = useRouter();
-  const onClickComplete = () => {
-    return router.push(ROUTES.dashboard);
+
+  const onClickComplete = (): void => {
+    router.push(ROUTES.dashboard);
   };
 
   const publicName = props.nextSectionType ? Config.sectionHeaders[props.nextSectionType] : "";
@@ -75,12 +76,8 @@ export const CongratulatoryModal = (props: Props): ReactElement => {
                 <span
                   role={"button"}
                   tabIndex={0}
-                  onClick={() => {
-                    return onClickComplete();
-                  }}
-                  onKeyDown={() => {
-                    return onClickComplete();
-                  }}
+                  onClick={(): void => onClickComplete()}
+                  onKeyDown={(): void => onClickComplete()}
                   className="text-underline"
                   style={{
                     fontWeight: 700,

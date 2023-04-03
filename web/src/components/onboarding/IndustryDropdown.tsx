@@ -51,7 +51,7 @@ export const IndustryDropdown = (props: Props): ReactElement => {
     return x.isEnabled || process.env.SHOW_DISABLED_INDUSTRIES === "true";
   });
 
-  const onIndustryIdChange = (industryId: string | undefined) => {
+  const onIndustryIdChange = (industryId: string | undefined): void => {
     let homeBasedBusiness: boolean | undefined = undefined;
     let cannabisLicenseType = undefined;
 
@@ -85,13 +85,13 @@ export const IndustryDropdown = (props: Props): ReactElement => {
     setSearchText(event.target.value);
   };
 
-  const handleIndustry = (event: ChangeEvent<unknown>, value: Industry | null) => {
+  const handleIndustry = (event: ChangeEvent<unknown>, value: Industry | null): void => {
     props.handleChange && props.handleChange();
     onIndustryIdChange(value?.id);
     setSearchText(value ? value.name : "");
   };
 
-  const getFilterOptions = (options: Industry[], state: FilterOptionsState<Industry>) => {
+  const getFilterOptions = (options: Industry[], state: FilterOptionsState<Industry>): Industry[] => {
     const filterOptions = createFilterOptions({
       matchFrom: "any",
       stringify: (option: Industry) => {
@@ -110,10 +110,10 @@ export const IndustryDropdown = (props: Props): ReactElement => {
     <Autocomplete
       options={IndustriesOrdered}
       filterOptions={getFilterOptions}
-      groupBy={() => {
+      groupBy={(): string => {
         return "DEFAULT-GROUP";
       }}
-      renderGroup={(params) => {
+      renderGroup={(params): JSX.Element => {
         return (
           <div key={params.key}>
             {searchText.length > 0 && (
@@ -127,17 +127,17 @@ export const IndustryDropdown = (props: Props): ReactElement => {
           </div>
         );
       }}
-      getOptionLabel={(industry: Industry) => {
+      getOptionLabel={(industry: Industry): string => {
         return industry.name;
       }}
-      isOptionEqualToValue={(option: Industry, value: Industry) => {
+      isOptionEqualToValue={(option: Industry, value: Industry): boolean => {
         return option.id === value.id;
       }}
       value={state.profileData.industryId ? LookupIndustryById(state.profileData.industryId) : null}
       onChange={handleIndustry}
       onBlur={props.onValidation}
       onSubmit={props.onValidation}
-      renderOption={(props, option, { selected }) => {
+      renderOption={(props, option, { selected }): JSX.Element => {
         return (
           <li {...props}>
             {selected ? (
@@ -154,7 +154,7 @@ export const IndustryDropdown = (props: Props): ReactElement => {
           </li>
         );
       }}
-      renderInput={(params) => {
+      renderInput={(params): JSX.Element => {
         return (
           <TextField
             {...params}

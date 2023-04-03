@@ -21,7 +21,7 @@ jest.mock("axios");
 const mockAxios = axios as jest.Mocked<typeof axios>;
 
 jest.mock("@/lib/auth/sessionHelper", () => ({
-  getCurrentToken: () => "some-token",
+  getCurrentToken: (): string => "some-token",
 }));
 
 describe("apiClient", () => {

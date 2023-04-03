@@ -2,7 +2,7 @@ import { Icon } from "@/components/njwds/Icon";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { CircularProgress } from "@mui/material";
 import dayjs from "dayjs";
-import { useEffect, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 
 interface Props {
   saveEveryXSeconds: number;
@@ -12,7 +12,7 @@ interface Props {
   saveDataFunction: () => void;
 }
 
-export const AutosaveSpinner = (props: Props) => {
+export const AutosaveSpinner = (props: Props): ReactElement => {
   const [savingSpinnerClock, setSavingSpinnerClock] = useState<"HIDDEN" | "SAVING" | "SAVED">("HIDDEN");
   const [savingSpinnerState, setSavingSpinnerState] = useState<"HIDDEN" | "SAVING" | "SAVED">("HIDDEN");
   const [timestampOfLastSave, setTimestampOfLastSave] = useState<number>(0);
@@ -20,7 +20,7 @@ export const AutosaveSpinner = (props: Props) => {
   const { Config } = useConfig();
 
   useEffect(() => {
-    return (function setupSpinnerIntervalClock() {
+    return (function setupSpinnerIntervalClock(): () => void {
       let timeout: NodeJS.Timeout;
       const interval = setInterval(() => {
         setSavingSpinnerClock("SAVING");
@@ -29,7 +29,7 @@ export const AutosaveSpinner = (props: Props) => {
         }, props.spinForXSeconds * 1000);
       }, props.secondsBetweenSpinAnimations * 1000);
 
-      return () => {
+      return (): void => {
         clearInterval(interval);
         clearTimeout(timeout);
       };
@@ -38,7 +38,7 @@ export const AutosaveSpinner = (props: Props) => {
   }, []);
 
   useEffect(() => {
-    (function determineSpinnerState() {
+    (function determineSpinnerState(): void {
       if (savingSpinnerClock === "SAVING") {
         const hasSavedDuringLastInterval =
           timestampOfLastSave > 0 &&
@@ -62,7 +62,7 @@ export const AutosaveSpinner = (props: Props) => {
   }, [savingSpinnerClock]);
 
   useEffect(() => {
-    (function autoSaveOnFieldChangeWithInterval() {
+    (function autoSaveOnFieldChangeWithInterval(): void {
       const hasSaveIntervalElapsed =
         dayjs().valueOf() - timestampOfLastSave >= props.saveEveryXSeconds * 1000;
 

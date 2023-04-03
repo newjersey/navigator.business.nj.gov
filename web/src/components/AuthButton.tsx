@@ -16,14 +16,14 @@ export const AuthButton = (props?: Props): ReactElement => {
   const { state, dispatch } = useContext(AuthContext);
   const router = useRouter();
 
-  const loginButton = () => {
+  const loginButton = (): ReactElement => {
     return (
       <UnStyledButton
         style="tertiary"
         dataTestid="login-button"
         noRightMargin
         widthAutoOnMobile
-        onClick={() => {
+        onClick={(): void => {
           triggerSignIn();
           analytics.event.landing_page_navbar_log_in.click.go_to_myNJ_login();
         }}
@@ -33,13 +33,13 @@ export const AuthButton = (props?: Props): ReactElement => {
     );
   };
 
-  const logoutButton = () => {
+  const logoutButton = (): ReactElement => {
     return (
       <UnStyledButton
         style="tertiary"
         noRightMargin
-        onClick={() => {
-          return onSignOut(router.push, dispatch);
+        onClick={(): void => {
+          onSignOut(router.push, dispatch);
         }}
       >
         <span className={props?.landing ? "text-primary" : "text-base"}>

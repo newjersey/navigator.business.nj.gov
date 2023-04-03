@@ -21,14 +21,15 @@ interface Props {
   fundings: Funding[];
 }
 
-export default function TwoTabDashboardLayout({ firstTab, secondTab, certifications, fundings }: Props) {
+export default function TwoTabDashboardLayout(props: Props): ReactElement {
   const DASHBOARD_TAB = 0;
   const FOR_YOU_TAB = 1;
 
   const { userData, updateQueue } = useUserData();
   const [tabIndex, setTabIndex] = React.useState(DASHBOARD_TAB);
   const { Config } = useConfig();
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+
+  const handleChange = (event: React.SyntheticEvent, newValue: number): void => {
     setTabIndex(Number(newValue));
   };
 
@@ -72,18 +73,18 @@ export default function TwoTabDashboardLayout({ firstTab, secondTab, certificati
     minHeight: "44px",
   };
 
-  const getContentWithCardCount = () => {
+  const getContentWithCardCount = (): string => {
     let count = 0;
     if (LookupOperatingPhaseById(userData?.profileData.operatingPhase).displayCertifications) {
       count += getVisibleCertifications(
-        filterCertifications(certifications, userData as UserData),
+        filterCertifications(props.certifications, userData as UserData),
         userData as UserData
       ).length;
     }
 
     if (LookupOperatingPhaseById(userData?.profileData.operatingPhase).displayFundings) {
       count += getVisibleFundings(
-        filterFundings(fundings, userData as UserData),
+        filterFundings(props.fundings, userData as UserData),
         userData as UserData
       ).length;
     }
@@ -132,8 +133,8 @@ export default function TwoTabDashboardLayout({ firstTab, secondTab, certificati
               />
             </TabList>
           </div>
-          <TabPanel value="0">{firstTab}</TabPanel>
-          <TabPanel value="1">{secondTab}</TabPanel>
+          <TabPanel value="0">{props.firstTab}</TabPanel>
+          <TabPanel value="1">{props.secondTab}</TabPanel>
         </TabContext>
       </SingleColumnContainer>
     </div>

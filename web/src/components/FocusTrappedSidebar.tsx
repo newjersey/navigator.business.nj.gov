@@ -27,7 +27,7 @@ export const FocusTrappedSidebar = ({ children, close, isOpen, delayTime = 300 }
   }, [isOpen, delayTime, showDiv]);
 
   useMountEffect(() => {
-    const handleKeydown = (event: KeyboardEvent) => {
+    const handleKeydown = (event: KeyboardEvent): void => {
       onEscape(event, close);
     };
     window.addEventListener("keydown", handleKeydown);

@@ -41,9 +41,7 @@ export const SelfRegSnackbar = (): ReactElement => {
   return (
     <SnackbarAlert
       isOpen={!!registrationAlertStatus}
-      close={() => {
-        return setRegistrationAlertStatus(undefined);
-      }}
+      close={(): void => setRegistrationAlertStatus(undefined)}
       variant={alertMap[registrationAlertStatus]}
       noIcon={true}
       autoHideDuration={null}
@@ -69,9 +67,7 @@ export const SelfRegSnackbar = (): ReactElement => {
           )}
           <IconButton
             aria-label="close"
-            onClick={() => {
-              return setRegistrationAlertStatus(undefined);
-            }}
+            onClick={(): void => setRegistrationAlertStatus(undefined)}
             sx={{
               position: "absolute",
               right: 0,

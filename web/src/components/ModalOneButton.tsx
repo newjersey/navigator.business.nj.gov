@@ -1,7 +1,7 @@
 import { ModalZeroButton } from "@/components/ModalZeroButton";
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { Breakpoint } from "@mui/material";
-import { ReactNode } from "react";
+import { ReactElement, ReactNode } from "react";
 
 interface Props {
   isOpen: boolean;
@@ -15,7 +15,7 @@ interface Props {
   uncloseable?: boolean;
 }
 
-export const ModalOneButton = (props: Props) => {
+export const ModalOneButton = (props: Props): ReactElement => {
   const buttonNode = (
     <div
       className="padding-x-4 padding-y-3 bg-base-lightest display-flex flex-column flex-justify-center mobile-lg:flex-row"

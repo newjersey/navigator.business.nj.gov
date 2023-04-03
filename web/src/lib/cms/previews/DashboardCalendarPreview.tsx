@@ -15,8 +15,9 @@ import {
 import { defaultDateFormat } from "@businessnjgovnavigator/shared/index";
 import { createTheme, ThemeProvider } from "@mui/material";
 import dayjs from "dayjs";
+import { ReactElement } from "react";
 
-const DashboardCalendarPreview = (props: PreviewProps) => {
+const DashboardCalendarPreview = (props: PreviewProps): ReactElement => {
   const { config, setConfig } = usePreviewConfig(props);
   const ref = usePreviewRef(props);
 

@@ -28,7 +28,7 @@ describe("<RegisteredForTaxesModal />", () => {
     modalOnClose = jest.fn();
   });
 
-  const renderComponent = (initialUserData?: UserData) => {
+  const renderComponent = (initialUserData?: UserData): void => {
     const userData = initialUserData ?? generateUserData({});
 
     const userDataWithMunicipality = {
@@ -42,7 +42,7 @@ describe("<RegisteredForTaxesModal />", () => {
     render(
       <MunicipalitiesContext.Provider value={{ municipalities: [municipality] }}>
         <WithStatefulUserData initialUserData={userDataWithMunicipality}>
-          <RegisteredForTaxesModal isOpen={true} close={modalOnClose} onSave={() => {}} />
+          <RegisteredForTaxesModal isOpen={true} close={modalOnClose} onSave={(): void => {}} />
         </WithStatefulUserData>
       </MunicipalitiesContext.Provider>
     );
@@ -585,7 +585,7 @@ describe("<RegisteredForTaxesModal />", () => {
   });
 });
 
-const randomTradeNameLegalStructure = () => {
+const randomTradeNameLegalStructure = (): string => {
   const tradeNameLegalStructures = LegalStructures.filter((x) => {
     return x.hasTradeName;
   });
@@ -593,7 +593,7 @@ const randomTradeNameLegalStructure = () => {
   return tradeNameLegalStructures[randomIndex].id;
 };
 
-const randomPublicFilingLegalStructure = () => {
+const randomPublicFilingLegalStructure = (): string => {
   const nonTradeNameLegalStructures = LegalStructures.filter((x) => {
     return x.requiresPublicFiling;
   });
@@ -601,7 +601,7 @@ const randomPublicFilingLegalStructure = () => {
   return nonTradeNameLegalStructures[randomIndex].id;
 };
 
-const selectOwnershipByValue = (value: string) => {
+const selectOwnershipByValue = (value: string): void => {
   fireEvent.mouseDown(screen.getByLabelText("Ownership"));
   const listbox = within(screen.getByRole("listbox"));
   fireEvent.click(listbox.getByTestId(value));

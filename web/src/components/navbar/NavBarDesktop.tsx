@@ -61,7 +61,7 @@ export const NavBarDesktop = (): ReactElement => {
     setOpen(false);
   };
 
-  function handleListKeyDown(event: React.KeyboardEvent) {
+  function handleListKeyDown(event: React.KeyboardEvent): void {
     if (event.key === "Tab") {
       event.preventDefault();
       setOpen(false);
@@ -83,11 +83,11 @@ export const NavBarDesktop = (): ReactElement => {
   const accountIcon = isAuthenticated ? "account_circle" : "help";
   const accountString = isAuthenticated ? userName : Config.navigationDefaults.navBarGuestText;
 
-  const UnAuthenticatedMenu = () => {
+  const UnAuthenticatedMenu = (): ReactElement => {
     return (
       <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
         <MenuItem
-          onClick={() => {
+          onClick={(): void => {
             analytics.event.account_menu_my_profile.click.go_to_profile_screen();
             router.push(ROUTES.profile);
           }}
@@ -100,11 +100,11 @@ export const NavBarDesktop = (): ReactElement => {
     );
   };
 
-  const AuthenticatedMenu = () => {
+  const AuthenticatedMenu = (): ReactElement => {
     return (
       <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
         <MenuItem
-          onClick={() => {
+          onClick={(): void => {
             analytics.event.account_menu_my_profile.click.go_to_profile_screen();
             router.push(ROUTES.profile);
           }}
@@ -138,7 +138,7 @@ export const NavBarDesktop = (): ReactElement => {
                   <div data-testid="registration-button" className="margin-left-4">
                     <UnStyledButton
                       style="tertiary"
-                      onClick={() => {
+                      onClick={(): void => {
                         analytics.event.guest_menu.click.go_to_myNJ_registration();
                         onSelfRegister(router, userData, update, setRegistrationAlertStatus);
                       }}
@@ -150,7 +150,7 @@ export const NavBarDesktop = (): ReactElement => {
                 <div data-testid="login-button" className="margin-right-4 margin-left-4">
                   <UnStyledButton
                     style="tertiary"
-                    onClick={() => {
+                    onClick={(): void => {
                       analytics.event.guest_menu.click.go_to_myNJ_registration();
                       triggerSignIn();
                     }}
@@ -192,7 +192,7 @@ export const NavBarDesktop = (): ReactElement => {
             )}
 
             <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal={true}>
-              {({ TransitionProps, placement }) => {
+              {({ TransitionProps, placement }): JSX.Element => {
                 return (
                   <Grow
                     {...TransitionProps}

@@ -22,7 +22,7 @@ export const Provisions = (): ReactElement => {
     });
   };
 
-  const handleProvisionChange = (value: string, index: number) => {
+  const handleProvisionChange = (value: string, index: number): void => {
     setFieldsInteracted(["provisions"]);
     const newProvisions = [...(state.formationFormData.provisions ?? [])];
     newProvisions[index] = value;
@@ -46,7 +46,7 @@ export const Provisions = (): ReactElement => {
     });
   };
 
-  const handleAddAnother = () => {
+  const handleAddAnother = (): void => {
     setFormationFormData((previousFormationData) => {
       return {
         ...previousFormationData,
@@ -82,9 +82,7 @@ export const Provisions = (): ReactElement => {
               <div className="grid-col">
                 <GenericTextField
                   value={provision}
-                  handleChange={(value) => {
-                    return handleProvisionChange(value, index);
-                  }}
+                  handleChange={(value): void => handleProvisionChange(value, index)}
                   fieldName={`provisions ${index}`}
                   formInputFull
                   fieldOptions={{
@@ -104,9 +102,7 @@ export const Provisions = (): ReactElement => {
               <div className="grid-col-auto margin-x-2 margin-top-3 display-flex flex-column flex-justify-center">
                 <UnStyledButton
                   style="tertiary"
-                  onClick={() => {
-                    return removeProvision(index);
-                  }}
+                  onClick={(): void => removeProvision(index)}
                   className="display-flex flex-column flex-justify-center"
                 >
                   <Icon className="font-body-lg" label="remove provision">

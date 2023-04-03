@@ -4,7 +4,7 @@ import fs from "fs";
 
 jest.mock("fs");
 jest.mock("process", () => ({
-  cwd: () => "/test",
+  cwd: (): string => "/test",
 }));
 
 describe("loadOperateReferences", () => {
@@ -116,7 +116,7 @@ describe("loadOperateReferences", () => {
     expect(loadOperateReferences()).toEqual(expectedOperateReferences);
   });
 
-  const mockReadDirReturn = (value: string[]) => {
+  const mockReadDirReturn = (value: string[]): void => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     mockedFs.readdirSync.mockReturnValueOnce(value);

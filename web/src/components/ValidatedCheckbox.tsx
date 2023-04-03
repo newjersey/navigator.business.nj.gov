@@ -1,5 +1,5 @@
 import { Checkbox } from "@mui/material";
-import React from "react";
+import React, { ReactElement } from "react";
 
 interface Props {
   id?: string;
@@ -11,7 +11,7 @@ interface Props {
   name?: string;
 }
 
-export const ValidatedCheckbox = (props: Props) => {
+export const ValidatedCheckbox = (props: Props): ReactElement => {
   return (
     <div className={props.error ? `checkbox-error-backdrop ${props.classNames}` : props.classNames ?? ""}>
       <div className={props.error ? "checkbox-error-backdrop-layer" : ""} />

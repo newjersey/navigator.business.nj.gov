@@ -40,7 +40,7 @@ export const NexusFormationFlow = (): ReactElement => {
     formationFormData: FormationFormData | undefined,
     nextStepIndex: number,
     moveType: "NEXT_BUTTON" | "STEPPER"
-  ) => {
+  ): void => {
     if (!formationFormData) {
       return;
     }
@@ -75,8 +75,8 @@ export const NexusFormationFlow = (): ReactElement => {
                   };
                 })}
                 currentStep={state.stepIndex}
-                onStepClicked={(step: number) => {
-                  return onMoveToStep(step, { moveType: "STEPPER" });
+                onStepClicked={(step: number): void => {
+                  onMoveToStep(step, { moveType: "STEPPER" });
                 }}
               />
             </div>

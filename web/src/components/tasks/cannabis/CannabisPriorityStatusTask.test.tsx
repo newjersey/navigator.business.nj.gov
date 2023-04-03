@@ -24,7 +24,7 @@ jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 const Config = getMergedConfig();
 const C = Config.cannabisPriorityStatus;
 
-const renderPage = (task: Task, initialUserData?: UserData) => {
+const renderPage = (task: Task, initialUserData?: UserData): void => {
   render(
     withAuthAlert(
       <WithStatefulUserData initialUserData={initialUserData ?? generateUserData({})}>

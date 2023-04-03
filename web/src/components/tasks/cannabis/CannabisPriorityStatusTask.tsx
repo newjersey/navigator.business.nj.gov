@@ -8,14 +8,14 @@ import { useUpdateTaskProgress } from "@/lib/data-hooks/useUpdateTaskProgress";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { Task } from "@/lib/types/types";
 import { scrollToTop, useMountEffect } from "@/lib/utils/helpers";
-import { useState } from "react";
+import { ReactElement, useState } from "react";
 
 interface Props {
   task: Task;
   CMS_ONLY_tab?: string; // for CMS only
 }
 
-export const CannabisPriorityStatusTask = (props: Props) => {
+export const CannabisPriorityStatusTask = (props: Props): ReactElement => {
   const { userData, updateQueue } = useUserData();
   const [successSnackbarIsOpen, setSuccessSnackbarIsOpen] = useState(false);
   const [displayFirstTab, setDisplayFirstTab] = useState(true);
@@ -30,7 +30,7 @@ export const CannabisPriorityStatusTask = (props: Props) => {
     }
   });
 
-  const handleNextTabButtonClick = () => {
+  const handleNextTabButtonClick = (): void => {
     if (!userData || !updateQueue) {
       return;
     }
@@ -46,12 +46,12 @@ export const CannabisPriorityStatusTask = (props: Props) => {
     }
   };
 
-  const handleBackButtonClick = () => {
+  const handleBackButtonClick = (): void => {
     setDisplayFirstTab(true);
     scrollToTop();
   };
 
-  const handleCompleteTaskButtonClick = () => {
+  const handleCompleteTaskButtonClick = (): void => {
     if (!userData || !updateQueue) {
       return;
     }
@@ -66,9 +66,7 @@ export const CannabisPriorityStatusTask = (props: Props) => {
       <SnackbarAlert
         variant="success"
         isOpen={successSnackbarIsOpen}
-        close={() => {
-          return setSuccessSnackbarIsOpen(false);
-        }}
+        close={(): void => setSuccessSnackbarIsOpen(false)}
       >
         {Config.taskDefaults.taskProgressSuccessSnackbarBody}
       </SnackbarAlert>

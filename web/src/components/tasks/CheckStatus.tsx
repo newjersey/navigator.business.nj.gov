@@ -59,13 +59,15 @@ export const CheckStatus = (props: Props): ReactElement => {
     }
   }, userData);
 
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const onSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
     analytics.event.task_address_form.submit.submitted_address_form();
     props.onSubmit(formValues);
   };
 
-  const handleChange = (key: keyof NameAndAddress) => {
+  const handleChangeForKey = (
+    key: keyof NameAndAddress
+  ): ((event: ChangeEvent<HTMLInputElement>) => void) => {
     return (event: ChangeEvent<HTMLInputElement>): void => {
       setFormValues((prevValues) => {
         return {
@@ -96,7 +98,7 @@ export const CheckStatus = (props: Props): ReactElement => {
           <label htmlFor="business-name">{Config.licenseSearchTask.businessNameLabel}</label>
           <TextField
             value={formValues.name}
-            onChange={handleChange("name")}
+            onChange={handleChangeForKey("name")}
             variant="outlined"
             fullWidth
             inputProps={{
@@ -109,7 +111,7 @@ export const CheckStatus = (props: Props): ReactElement => {
           <label htmlFor="address-1">{Config.licenseSearchTask.address1Label}</label>
           <TextField
             value={formValues.addressLine1}
-            onChange={handleChange("addressLine1")}
+            onChange={handleChangeForKey("addressLine1")}
             variant="outlined"
             fullWidth
             inputProps={{
@@ -122,7 +124,7 @@ export const CheckStatus = (props: Props): ReactElement => {
           <label htmlFor="address-2">{Config.licenseSearchTask.address2Label}</label>
           <TextField
             value={formValues.addressLine2}
-            onChange={handleChange("addressLine2")}
+            onChange={handleChangeForKey("addressLine2")}
             variant="outlined"
             fullWidth
             inputProps={{
@@ -136,7 +138,7 @@ export const CheckStatus = (props: Props): ReactElement => {
             <label htmlFor="city">{Config.licenseSearchTask.zipCodeLabel}</label>
             <TextField
               value={formValues.zipCode}
-              onChange={handleChange("zipCode")}
+              onChange={handleChangeForKey("zipCode")}
               variant="outlined"
               fullWidth
               inputProps={{
@@ -151,7 +153,7 @@ export const CheckStatus = (props: Props): ReactElement => {
             <label htmlFor="state">{Config.licenseSearchTask.stateLabel}</label>
             <TextField
               value={"New Jersey"}
-              onChange={() => {}}
+              onChange={(): void => {}}
               variant="outlined"
               fullWidth
               inputProps={{
@@ -172,7 +174,7 @@ export const CheckStatus = (props: Props): ReactElement => {
               isColor="primary"
               isSubmitButton={true}
               isRightMarginRemoved={true}
-              onClick={() => {}}
+              onClick={(): void => {}}
               isLoading={props.isLoading}
               dataTestId="check-status-submit"
             >

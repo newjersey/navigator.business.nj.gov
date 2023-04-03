@@ -27,7 +27,9 @@ export const RadioQuestion = (props: Props): ReactElement => {
     });
   }, [props.id]);
 
-  const handleRadioChange = async (event: React.ChangeEvent<{ name?: string; value: string }>) => {
+  const handleRadioChange = async (
+    event: React.ChangeEvent<{ name?: string; value: string }>
+  ): Promise<void> => {
     if (!userData) {
       return;
     }

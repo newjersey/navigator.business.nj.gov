@@ -68,7 +68,7 @@ const Config = getMergedConfig();
 const renderFilingsCalendar = (
   operateReferences: Record<string, OperateReference>,
   initialUserData?: UserData
-) => {
+): void => {
   render(
     <ThemeProvider theme={createTheme()}>
       <WithStatefulUserData initialUserData={initialUserData}>
@@ -771,9 +771,7 @@ describe("<FilingsCalendar />", () => {
       userData = generateUserData({
         profileData: generateProfileData({
           operatingPhase: randomElementFromArray(
-            OperatingPhases.filter((obj) => {
-              return obj.displayCalendarToggleButton === true;
-            })
+            OperatingPhases.filter((obj) => obj.displayCalendarToggleButton)
           ).id,
         }),
         taxFilingData: generateTaxFilingData({ filings: [annualReport] }),
@@ -788,9 +786,7 @@ describe("<FilingsCalendar />", () => {
       userData = generateUserData({
         profileData: generateProfileData({
           operatingPhase: randomElementFromArray(
-            OperatingPhases.filter((obj) => {
-              return obj.displayCalendarToggleButton === false;
-            })
+            OperatingPhases.filter((obj) => !obj.displayCalendarToggleButton)
           ).id,
         }),
         taxFilingData: generateTaxFilingData({ filings: [annualReport] }),
@@ -803,7 +799,7 @@ describe("<FilingsCalendar />", () => {
   });
 
   describe("calendar list view, view more functionality", () => {
-    const renderCalendarWithEntries = (numberOfCalendarEntries: number) => {
+    const renderCalendarWithEntries = (numberOfCalendarEntries: number): void => {
       let dueDate: dayjs.Dayjs;
       let annualReport: TaxFiling;
       const operateReferences: Record<string, OperateReference> = {};

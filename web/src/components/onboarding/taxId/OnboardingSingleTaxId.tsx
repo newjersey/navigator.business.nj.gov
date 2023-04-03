@@ -26,7 +26,7 @@ export const OnboardingSingleTaxId = ({
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { isAuthenticated, setRegistrationModalIsVisible } = useContext(AuthAlertContext);
 
-  const handleChange = (value: string) => {
+  const handleChange = (value: string): void => {
     if (isAuthenticated === IsAuthenticated.FALSE) {
       setRegistrationModalIsVisible(true);
     }

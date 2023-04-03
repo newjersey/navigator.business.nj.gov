@@ -11,7 +11,7 @@ export const ForeignStateOfFormation = (): ReactElement => {
   const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
   const { doesFieldHaveError } = useFormationErrors();
 
-  const handleChange = (stateObject: StateObject | undefined) => {
+  const handleChange = (stateObject: StateObject | undefined): void => {
     setFieldsInteracted([FIELD]);
     setFormationFormData((previousFormationData) => {
       return {
@@ -31,7 +31,7 @@ export const ForeignStateOfFormation = (): ReactElement => {
           fieldName="foreignStateOfFormation"
           useFullName
           excludeNJ
-          onValidation={() => setFieldsInteracted([FIELD])}
+          onValidation={(): void => setFieldsInteracted([FIELD])}
           value={state.formationFormData.foreignStateOfFormation}
           validationText={Config.formation.fields.foreignStateOfFormation.error}
           required

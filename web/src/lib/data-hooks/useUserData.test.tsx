@@ -43,7 +43,7 @@ describe("useUserData", () => {
   ): UseUserDataResponse => {
     const returnVal = generateUseUserDataResponse({});
 
-    function TestComponent() {
+    function TestComponent(): null {
       Object.assign(returnVal, useUserData());
       return null;
     }
@@ -57,13 +57,8 @@ describe("useUserData", () => {
               setRoadmap: mockSetRoadmap,
             }}
           >
-            <SWRConfig
-              value={{
-                provider: () => {
-                  return userDataStorage;
-                },
-              }}
-            >
+            {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+            <SWRConfig value={{ provider: (): any => userDataStorage }}>
               <TestComponent />
             </SWRConfig>
           </RoadmapContext.Provider>,

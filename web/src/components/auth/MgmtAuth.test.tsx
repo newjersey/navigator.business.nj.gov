@@ -14,11 +14,11 @@ describe("<MgmtAuth />", () => {
   });
 
   let password = "";
-  const setPassword = (value: string) => {
+  const setPassword = (value: string): void => {
     password = value;
   };
   let isAuthed = false;
-  const setIsAuthed = (value: boolean) => {
+  const setIsAuthed = (value: boolean): void => {
     isAuthed = value;
   };
 

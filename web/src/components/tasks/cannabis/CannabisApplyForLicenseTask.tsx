@@ -123,9 +123,7 @@ export const CannabisApplyForLicenseTask = (props: Props): ReactElement => {
       <SnackbarAlert
         variant="success"
         isOpen={successSnackbarIsOpen}
-        close={() => {
-          return setSuccessSnackbarIsOpen(false);
-        }}
+        close={(): void => setSuccessSnackbarIsOpen(false)}
       >
         {Config.taskDefaults.taskProgressSuccessSnackbarBody}
       </SnackbarAlert>

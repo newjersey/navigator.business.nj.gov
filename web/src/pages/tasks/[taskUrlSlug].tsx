@@ -69,13 +69,13 @@ const TaskPage = (props: Props): ReactElement => {
     return <TaskElement task={task}>{<UnlockedBy task={props.task} />}</TaskElement>;
   };
 
-  const renderNextAndPreviousButtons = () => {
+  const renderNextAndPreviousButtons = (): ReactElement | undefined => {
     const isValidLegalStructure = allowFormation(
       userData?.profileData.legalStructureId,
       userData?.profileData.businessPersona
     );
     if (props.task.id === formationTaskId && isValidLegalStructure) {
-      return;
+      return undefined;
     }
     return (
       <div
@@ -85,8 +85,8 @@ const TaskPage = (props: Props): ReactElement => {
         {previousUrlSlug && (
           <UnStyledButton
             style="tertiary"
-            onClick={() => {
-              return router.push(`/tasks/${previousUrlSlug}`);
+            onClick={(): void => {
+              router.push(`/tasks/${previousUrlSlug}`);
             }}
           >
             <Icon className="usa-icon--size-4">navigate_before</Icon>
@@ -96,8 +96,8 @@ const TaskPage = (props: Props): ReactElement => {
         {nextUrlSlug && (
           <UnStyledButton
             style="tertiary"
-            onClick={() => {
-              return router.push(`/tasks/${nextUrlSlug}`);
+            onClick={(): void => {
+              router.push(`/tasks/${nextUrlSlug}`);
             }}
           >
             <span className="margin-right-2">{Config.taskDefaults.nextTaskButtonText}</span>
@@ -155,7 +155,7 @@ const getPostOnboardingQuestion = (task: Task): ReactElement => {
   });
 };
 
-export const TaskElement = (props: { task: Task; children?: ReactNode | ReactNode[] }) => {
+export const TaskElement = (props: { task: Task; children?: ReactNode | ReactNode[] }): ReactElement => {
   const hasPostOnboardingQuestion = !!props.task.postOnboardingQuestion;
   const [beforeQuestion, afterQuestion] = props.task.contentMd.split("{postOnboardingQuestion}");
 

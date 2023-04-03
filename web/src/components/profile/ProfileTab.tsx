@@ -30,9 +30,7 @@ export const ProfileTab = (props: Props): ReactElement => {
       className="cursor-pointer width-100 bg-base-lightest flex fjb fac padding-y-1 padding-right-2 padding-left-3 border-2px border-base-lighter btn-profile-hoverstate line-height-120"
       style={{ borderStyle: "none solid solid solid" }}
       data-testid={props.tab}
-      onClick={() => {
-        return props.setProfileTab(props.tab);
-      }}
+      onClick={(): void => props.setProfileTab(props.tab)}
     >
       <div className={props.activeTab === props.tab ? "selected" : ""}>{lookupName(props.tab)}</div>
       <Icon className="usa-icon--size-3 margin-x-1">navigate_next</Icon>

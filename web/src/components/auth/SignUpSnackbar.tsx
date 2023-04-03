@@ -17,7 +17,7 @@ export const SignUpSnackbar = (): ReactElement => {
     return <></>;
   }
 
-  const handleClose = async () => {
+  const handleClose = async (): Promise<void> => {
     setRegistrationAlertIsVisible(false);
     await showCard("not-registered");
   };
@@ -25,9 +25,7 @@ export const SignUpSnackbar = (): ReactElement => {
   return (
     <SnackbarAlert
       isOpen={registrationAlertIsVisible}
-      close={() => {
-        return setRegistrationAlertIsVisible(false);
-      }}
+      close={(): void => setRegistrationAlertIsVisible(false)}
       variant="info"
       noIcon={true}
       autoHideDuration={null}

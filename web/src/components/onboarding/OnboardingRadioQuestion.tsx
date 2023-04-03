@@ -41,7 +41,7 @@ export const OnboardingRadioQuestion = <T extends ProfileDataTypes>(props: Props
 
   props.required && RegisterForOnSubmit(() => state.profileData[props.fieldName] !== undefined);
 
-  const handleChange = (event: React.ChangeEvent<{ name?: string; value: unknown }>) => {
+  const handleChange = (event: React.ChangeEvent<{ name?: string; value: unknown }>): void => {
     const value = props.choices.find((val) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       return val.toString() === (event.target.value as any).toString();
