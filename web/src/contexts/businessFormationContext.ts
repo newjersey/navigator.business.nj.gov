@@ -3,8 +3,8 @@ import {
   createEmptyFormationFormData,
   FormationFields,
   FormationFormData,
-  NameAvailability,
 } from "@businessnjgovnavigator/shared";
+import { NameAvailability } from "@businessnjgovnavigator/shared/";
 import { createContext } from "react";
 
 interface BusinessFormationState {

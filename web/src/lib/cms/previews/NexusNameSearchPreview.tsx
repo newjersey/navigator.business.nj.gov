@@ -20,13 +20,21 @@ const NexusNameSearchPreview = (props: PreviewProps): ReactElement => {
         <NexusAvailable submittedName="some name" updateButtonClicked={false} />
         <NexusUnavailable
           submittedName="some name"
-          nameAvailability={{ status: "UNAVAILABLE", similarNames: [] }}
+          nameAvailability={{
+            status: "UNAVAILABLE",
+            similarNames: [],
+            lastUpdatedTimeStamp: "2023-04-03T20:08:58Z",
+          }}
           resetSearch={(): void => {}}
         />
         <DbaAvailable submittedName="some name" updateButtonClicked={false} />
         <DbaUnavailable
           submittedName="some name"
-          nameAvailability={{ status: "UNAVAILABLE", similarNames: ["name 1", "name 2"] }}
+          nameAvailability={{
+            status: "UNAVAILABLE",
+            similarNames: ["name 1", "name 2"],
+            lastUpdatedTimeStamp: "2023-04-03T20:08:58Z",
+          }}
           resetSearch={(): void => {}}
         />
       </div>

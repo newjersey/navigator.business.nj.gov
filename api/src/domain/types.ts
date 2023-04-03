@@ -1,4 +1,4 @@
-import { NameAvailability } from "@shared/businessNameSearch";
+import { NameAvailability, NameAvailabilityResponse } from "@shared/businessNameSearch";
 import { BusinessUser, NewsletterResponse, UserTestingResponse } from "@shared/businessUser";
 import { UserFeedbackRequest, UserIssueRequest } from "@shared/feedbackRequest";
 import { FormationSubmitResponse, GetFilingResponse } from "@shared/formationData";
@@ -18,7 +18,7 @@ export interface UserDataClient {
 }
 
 export interface BusinessNameClient {
-  search: (name: string) => Promise<NameAvailability>;
+  search: (name: string) => Promise<NameAvailabilityResponse>;
 }
 
 export interface NewsletterClient {
@@ -47,6 +47,10 @@ export interface TaxFilingInterface {
 export interface EncryptionDecryptionClient {
   encryptValue: (valueToBeEncrypted: string) => Promise<string>;
   decryptValue: (valueToBeDecrypted: string) => Promise<string>;
+}
+
+export interface TimeStampBusinessSearch {
+  search: (businessName: string) => Promise<NameAvailability>;
 }
 
 export type EncryptTaxId = (userData: UserData) => Promise<UserData>;

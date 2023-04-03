@@ -7,7 +7,7 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffect } from "@/lib/utils/helpers";
-import { NameAvailability } from "@businessnjgovnavigator/shared/businessNameSearch";
+import { NameAvailability } from "@businessnjgovnavigator/shared/";
 import { ReactElement, useContext } from "react";
 
 export const DbaNameSearch = (): ReactElement => {

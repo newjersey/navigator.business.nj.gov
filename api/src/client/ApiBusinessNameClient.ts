@@ -1,11 +1,11 @@
-import { NameAvailability, NameAvailabilityStatus } from "@shared/businessNameSearch";
+import { NameAvailabilityResponse, NameAvailabilityStatus } from "@shared/businessNameSearch";
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { BusinessNameClient } from "../domain/types";
 
 import { LogWriterType } from "../libs/logWriter";
 
 export const ApiBusinessNameClient = (baseUrl: string, logWriter: LogWriterType): BusinessNameClient => {
-  const search = (name: string): Promise<NameAvailability> => {
+  const search = (name: string): Promise<NameAvailabilityResponse> => {
     const url = `${baseUrl}/Available?q=${encodeURIComponent(name)}`;
     const logId = logWriter.GetId();
     logWriter.LogInfo(`Business Name Search - NICUSA - Id:${logId} - Request Sent to ${url}. Name: ${name}`);

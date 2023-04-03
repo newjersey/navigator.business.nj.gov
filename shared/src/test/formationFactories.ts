@@ -1,7 +1,7 @@
 import { randomElementFromArray } from "../arrayHelpers";
-import { NameAvailability, NameAvailabilityStatus } from "../businessNameSearch";
+import { NameAvailability, NameAvailabilityResponse, NameAvailabilityStatus } from "../businessNameSearch";
 import { arrayOfCountriesObjects as countries } from "../countries";
-import { getCurrentDate } from "../dateHelpers";
+import { getCurrentDate, getCurrentDateISOString } from "../dateHelpers";
 import { defaultDateFormat } from "../defaultConstants";
 import {
   allFormationLegalTypes,
@@ -133,17 +133,26 @@ export const generateFormationIncorporator = (
 };
 
 export const generateBusinessNameAvailability = (overrides: Partial<NameAvailability>): NameAvailability => {
+  return {
+    ...generateBusinessNameAvailabilityResponse({}),
+    lastUpdatedTimeStamp: getCurrentDateISOString(),
+    ...overrides,
+  };
+};
+
+export const generateBusinessNameAvailabilityResponse = (
+  overrides: Partial<NameAvailabilityResponse>
+): NameAvailabilityResponse => {
   const statusValues: NameAvailabilityStatus[] = [
     "AVAILABLE",
     "DESIGNATOR_ERROR",
     "SPECIAL_CHARACTER_ERROR",
     "UNAVAILABLE",
     "RESTRICTED_ERROR",
-    undefined,
   ];
   return {
-    similarNames: [`random-name-${randomInt()}`],
-    status: statusValues[randomIntFromInterval("0", "5")],
+    similarNames: [`some-name-${randomInt()}`],
+    status: randomElementFromArray(statusValues),
     ...overrides,
   };
 };

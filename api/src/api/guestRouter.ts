@@ -1,24 +1,20 @@
-import { NameAvailability } from "@shared/businessNameSearch";
 import { UserData } from "@shared/userData";
 import { Router } from "express";
 import { getAnnualFilings } from "../domain/annual-filings/getAnnualFilings";
-import { BusinessNameClient } from "../domain/types";
+import { TimeStampBusinessSearch } from "../domain/types";
 
-export const guestRouterFactory = (businessNameClient: BusinessNameClient): Router => {
+export const guestRouterFactory = (timeStampBusinessSearch: TimeStampBusinessSearch): Router => {
   const router = Router();
 
   router.post("/annualFilings", async (req, res) => {
     res.json(getAnnualFilings(req.body as UserData));
   });
 
-  router.get("/business-name-availability", (req, res) => {
-    businessNameClient
-      .search((req.query as BusinessQueryParams).query)
-      .then((result: NameAvailability) => {
-        res.json({
-          ...result,
-          similarNames: result.similarNames.slice(0, 10),
-        });
+  router.get("/business-name-availability", async (req, res) => {
+    timeStampBusinessSearch
+      .search(req.query.query as string)
+      .then((nameAvailability) => {
+        res.status(200).json(nameAvailability);
       })
       .catch((error) => {
         if (error === "BAD_INPUT") {
@@ -30,8 +26,4 @@ export const guestRouterFactory = (businessNameClient: BusinessNameClient): Rout
   });
 
   return router;
-};
-
-type BusinessQueryParams = {
-  query: string;
 };
