@@ -19,8 +19,8 @@ You need to obtain an employment agency license before offering staffing service
 
 - - -
 ### Application Requirements
-* Criminal disclosure statement
-* Statements from two New Jersey citizens who know the applicant
+* Statement regarding applicant's criminal convictions, if any
+* Character statements from two New Jersey citizens who have known the applicant for at least five years
 * Applicable fees paid
 
 > **Once completed, you will have:**
