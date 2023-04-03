@@ -34,6 +34,9 @@ export default createTheme({
       main: "#b51d09",
       dark: "#6f3331",
     },
+    text: {
+      primary: "#1b1b1b",
+    },
   },
   components: {
     MuiPaper: {
