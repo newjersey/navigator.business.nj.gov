@@ -18,7 +18,7 @@ export const userDataWasNotUpdated = helpers.dataWasNotUpdated;
 
 export const userDataUpdatedNTimes = helpers.dataUpdatedNTimes;
 
-export const triggerQueueUpdate = () => {
+export const triggerQueueUpdate = (): void => {
   fireEvent.click(screen.getByText("trigger queue update"));
 };
 

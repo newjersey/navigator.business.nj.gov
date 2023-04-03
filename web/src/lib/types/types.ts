@@ -117,7 +117,7 @@ export const profileFields: ProfileFields[] = [
   ...new Set([...allProfileFields, ...onboardingDataFields, ...businessUserDisplayFields]),
 ] as ProfileFields[];
 
-export const createProfileFieldErrorMap = <FieldError>() =>
+export const createProfileFieldErrorMap = <FieldError>(): ReducedFieldStates<ProfileFields, FieldError> =>
   createReducedFieldStates<(typeof profileFields)[number], FieldError>(profileFields);
 
 export type ProfileFieldErrorMap = ReducedFieldStates<ProfileFields>;
@@ -470,3 +470,5 @@ export type TaskWithoutLinks = {
   formName?: string;
 };
 export type Page = { current: number; previous: number };
+
+export type StepperStep = { name: string; hasError: boolean; isComplete: boolean };

@@ -17,7 +17,10 @@ export const PriorityStatusCheckboxes = (props: Props): ReactElement => {
   const { userData } = useUserData();
   const { Config } = useConfig();
 
-  const handleCheckbox = (event: React.ChangeEvent<HTMLInputElement>, type: PriorityApplicationType) => {
+  const handleCheckbox = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    type: PriorityApplicationType
+  ): void => {
     if (!userData) {
       return;
     }
@@ -28,7 +31,7 @@ export const PriorityStatusCheckboxes = (props: Props): ReactElement => {
     }
   };
 
-  const setEligibilityChecked = () => {
+  const setEligibilityChecked = (): void => {
     if (eligibleModalIsOpenWith === "") {
       return;
     }
@@ -46,9 +49,7 @@ export const PriorityStatusCheckboxes = (props: Props): ReactElement => {
               control={
                 <Checkbox
                   name="diversely-owned-checkbox"
-                  onChange={(event) => {
-                    return handleCheckbox(event, "diverselyOwned");
-                  }}
+                  onChange={(event): void => handleCheckbox(event, "diverselyOwned")}
                   checked={props.priorityStatusState.diverselyOwned}
                   data-testid="diversely-owned-checkbox"
                 />
@@ -58,9 +59,7 @@ export const PriorityStatusCheckboxes = (props: Props): ReactElement => {
               label={<Content>{Config.cannabisApplyForLicense.impactZoneLabel}</Content>}
               control={
                 <Checkbox
-                  onChange={(event) => {
-                    return handleCheckbox(event, "impactZone");
-                  }}
+                  onChange={(event): void => handleCheckbox(event, "impactZone")}
                   checked={props.priorityStatusState.impactZone}
                   data-testid="impact-zone-checkbox"
                 />
@@ -70,9 +69,7 @@ export const PriorityStatusCheckboxes = (props: Props): ReactElement => {
               label={<Content>{Config.cannabisApplyForLicense.sbeLabel}</Content>}
               control={
                 <Checkbox
-                  onChange={(event) => {
-                    return handleCheckbox(event, "socialEquity");
-                  }}
+                  onChange={(event): void => handleCheckbox(event, "socialEquity")}
                   checked={props.priorityStatusState.socialEquity}
                   data-testid="sbe-checkbox"
                 />
@@ -84,9 +81,7 @@ export const PriorityStatusCheckboxes = (props: Props): ReactElement => {
 
       <ModalTwoButton
         isOpen={eligibleModalIsOpenWith !== ""}
-        close={() => {
-          return setEligibleModalIsOpenWith("");
-        }}
+        close={(): void => setEligibleModalIsOpenWith("")}
         title={Config.cannabisEligibilityModal.eligibleModalTitle}
         primaryButtonText={Config.cannabisEligibilityModal.eligibleModalContinueButton}
         primaryButtonOnClick={setEligibilityChecked}

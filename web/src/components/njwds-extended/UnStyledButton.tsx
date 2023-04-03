@@ -51,7 +51,7 @@ export const UnStyledButton = forwardRef(
       }
     }, [height, width, props.loading, disabledClass]);
 
-    const getRightMargin = () => {
+    const getRightMargin = (): string => {
       if (props.style === "tertiary") {
         return "margin-right-0";
       }

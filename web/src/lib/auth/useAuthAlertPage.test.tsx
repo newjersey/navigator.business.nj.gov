@@ -24,7 +24,7 @@ describe("useAuthAlertPage", () => {
     isAuth: IsAuthenticated;
     registrationModalIsVisible?: boolean;
   }): void => {
-    function TestComponent() {
+    function TestComponent(): null {
       hook();
       return null;
     }

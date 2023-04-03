@@ -7,8 +7,9 @@ import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { generateTask } from "@/test/factories";
+import { ReactElement } from "react";
 
-const EinInputPreview = (props: PreviewProps) => {
+const EinInputPreview = (props: PreviewProps): ReactElement => {
   const { config, setConfig } = usePreviewConfig(props);
   const ref = usePreviewRef(props);
 
@@ -21,12 +22,12 @@ const EinInputPreview = (props: PreviewProps) => {
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
       <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
         <Content>{config.ein.descriptionText}</Content>
-        <EinInput task={task} isAuthenticated={IsAuthenticated.TRUE} onSave={() => {}} />
+        <EinInput task={task} isAuthenticated={IsAuthenticated.TRUE} onSave={(): void => {}} />
 
         <hr className="margin-y-6" />
 
         <Content>{config.ein.descriptionText}</Content>
-        <EinDisplay onEdit={() => {}} onRemove={() => {}} employerId="123456789" />
+        <EinDisplay onEdit={(): void => {}} onRemove={(): void => {}} employerId="123456789" />
       </div>
     </ConfigContext.Provider>
   );

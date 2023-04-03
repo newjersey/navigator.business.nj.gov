@@ -43,8 +43,8 @@ describe("<TaskProgressCheckbox />", () => {
     setupStatefulUserDataContext();
   });
 
-  const renderTaskCheckbox = (taskId: string, initialUserData?: UserData) => {
-    return render(
+  const renderTaskCheckbox = (taskId: string, initialUserData?: UserData): void => {
+    render(
       <MunicipalitiesContext.Provider value={{ municipalities: [] }}>
         <ThemeProvider theme={createTheme()}>
           <WithStatefulUserData initialUserData={initialUserData}>
@@ -55,7 +55,7 @@ describe("<TaskProgressCheckbox />", () => {
     );
   };
 
-  const renderTaskCheckboxWithAuthAlert = (taskId: string, initialUserData?: UserData) => {
+  const renderTaskCheckboxWithAuthAlert = (taskId: string, initialUserData?: UserData): void => {
     render(
       withAuthAlert(
         <MunicipalitiesContext.Provider value={{ municipalities: [] }}>

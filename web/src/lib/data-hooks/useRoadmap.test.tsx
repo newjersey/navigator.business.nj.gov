@@ -25,7 +25,7 @@ describe("useRoadmap", () => {
       isSectionCompleted: () => false,
       currentAndNextSection: () => ({ current: "PLAN" as SectionType, next: undefined }),
     };
-    function TestComponent() {
+    function TestComponent(): null {
       Object.assign(initialReturnVal, useRoadmap());
       return null;
     }

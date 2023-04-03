@@ -64,12 +64,13 @@ import {
   randomInt,
   SectionType,
   SectorType,
+  StateObject,
   TaxFiling,
   TaxFilingData,
   TaxFilingLookUpRequest,
   UserData,
 } from "@businessnjgovnavigator/shared";
-import { BusinessPersona, emptyIndustrySpecificData } from "@businessnjgovnavigator/shared/profileData";
+import { BusinessPersona } from "@businessnjgovnavigator/shared/profileData";
 
 export const generateSectionType = (): SectionType => {
   const num = randomInt();
@@ -150,15 +151,6 @@ export const generateIndustrySpecificData = (
   };
 };
 
-export const generateUndefinedIndustrySpecificData = () => {
-  const result = {} as Record<string, undefined>;
-
-  for (const key of Object.keys(emptyIndustrySpecificData)) {
-    result[key] = undefined;
-  }
-  return result;
-};
-
 export const generateProfileData = (
   overrides: Partial<ProfileData>,
   canHavePermanentLocation?: boolean
@@ -201,7 +193,7 @@ export const generateProfileData = (
   };
 };
 
-export const getProfileDataForUnfilteredOpportunities = () => {
+export const getProfileDataForUnfilteredOpportunities = (): ProfileData => {
   return generateProfileData({
     operatingPhase: "UP_AND_RUNNING",
     homeBasedBusiness: false,
@@ -410,7 +402,7 @@ export const generateSidebarCardContent = (overrides: Partial<SidebarCardContent
   };
 };
 
-export const generateStateItem = () => {
+export const generateStateItem = (): StateObject => {
   return randomElementFromArray(states);
 };
 
@@ -428,7 +420,7 @@ export const generateFormationData = (
   };
 };
 
-export const generateEmptyFormationData = () => {
+export const generateEmptyFormationData = (): FormationData => {
   return {
     formationFormData: createEmptyFormationFormData(),
     formationResponse: undefined,
@@ -698,21 +690,21 @@ export const randomNegativeFilteredIndustry = (func: (industry: Industry) => boo
 };
 
 export const randomIndustry = (canHavePermanentLocation = false): Industry => {
-  const filter = (x: Industry) => {
+  const filter = (x: Industry): boolean => {
     return x.canHavePermanentLocation === canHavePermanentLocation;
   };
   return randomFilteredIndustry(filter, { isEnabled: true });
 };
 
 export const randomHomeBasedIndustry = (): string => {
-  const filter = (it: Industry) => {
+  const filter = (it: Industry): boolean => {
     return !!it.industryOnboardingQuestions.canBeHomeBased;
   };
   return randomFilteredIndustry(filter, { isEnabled: true }).id;
 };
 
 export const randomNonHomeBasedIndustry = (): string => {
-  const filter = (it: Industry) => {
+  const filter = (it: Industry): boolean => {
     return !it.industryOnboardingQuestions.canBeHomeBased && it.canHavePermanentLocation;
   };
   return randomFilteredIndustry(filter, { isEnabled: true }).id;

@@ -3,8 +3,9 @@ import { usePageData } from "@/lib/cms/helpers/usePageData";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { Filing } from "@/lib/types/types";
 import { FilingElement } from "@/pages/filings/[filingUrlSlug]";
+import { ReactElement } from "react";
 
-const FilingsPreview = (props: PreviewProps) => {
+const FilingsPreview = (props: PreviewProps): ReactElement => {
   const ref = usePreviewRef(props);
   const filing = usePageData<Filing>(props);
 

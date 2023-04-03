@@ -14,7 +14,6 @@ import {
   generateGetFilingResponse,
   generateProfileData,
   generateTaxFilingData,
-  generateUndefinedIndustrySpecificData,
   generateUser,
   generateUserData as _generateUserData,
   randomHomeBasedIndustry,
@@ -38,8 +37,8 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import {
-  industryIdsWithEssentialQuestion,
   industryIdsWithOutEssentialQuestion,
+  industryIdsWithRequiredEssentialQuestion,
 } from "@/test/pages/onboarding/helpers-onboarding";
 import {
   businessPersonas,
@@ -128,7 +127,7 @@ describe("profile", () => {
     municipalities?: Municipality[];
     userData?: UserData;
     isAuthenticated?: IsAuthenticated;
-  }) => {
+  }): void => {
     const genericTown =
       userData && userData.profileData.municipality
         ? userData.profileData.municipality
@@ -198,7 +197,7 @@ describe("profile", () => {
       });
     });
 
-    function opensModalWhenEditingNonGuestModeProfileFields() {
+    function opensModalWhenEditingNonGuestModeProfileFields(): void {
       it("user is able to edit name and save", async () => {
         renderPage({ userData: initialUserData, isAuthenticated: IsAuthenticated.FALSE });
         fillText("Business name", "Cool Computers");
@@ -524,7 +523,7 @@ describe("profile", () => {
       const renderWithLegalStructureAndPhase = (params: {
         legalStructureId: string;
         operatingPhase: OperatingPhaseId;
-      }) => {
+      }): void => {
         const newark = generateMunicipality({ displayName: "Newark" });
         const userData = generateUserData({
           profileData: generateProfileData({
@@ -1462,7 +1461,7 @@ describe("profile", () => {
         const renderWithLegalStructureAndPhase = (params: {
           legalStructureId: string;
           operatingPhase: OperatingPhaseId;
-        }) => {
+        }): void => {
           const newark = generateMunicipality({ displayName: "Newark" });
           const userData = generateUserData({
             profileData: generateProfileData({
@@ -1730,7 +1729,7 @@ describe("profile", () => {
       profileData: generateProfileData({
         businessPersona: "STARTING",
         industryId: "car-service",
-        ...generateUndefinedIndustrySpecificData(),
+        ...emptyIndustrySpecificData,
       }),
     });
     renderPage({ userData });
@@ -1742,7 +1741,7 @@ describe("profile", () => {
   });
 
   describe("Essential Question", () => {
-    it.each(industryIdsWithEssentialQuestion)(
+    it.each(industryIdsWithRequiredEssentialQuestion)(
       "prevents Starting user from saving when %s is selected as industry, but essential question is not answered",
       async (industryId) => {
         const userData = generateUserData({
@@ -1750,7 +1749,7 @@ describe("profile", () => {
           profileData: generateProfileData({
             businessPersona: "STARTING",
             industryId: industryId,
-            ...generateUndefinedIndustrySpecificData(),
+            ...emptyIndustrySpecificData,
           }),
         });
         renderPage({ userData });
@@ -1763,7 +1762,7 @@ describe("profile", () => {
       }
     );
 
-    it.each(industryIdsWithEssentialQuestion)(
+    it.each(industryIdsWithRequiredEssentialQuestion)(
       "prevents Foreign Nexus user from saving when %s is selected as industry, but essential question is not answered",
       async (industryId) => {
         const userData = generateUserData({
@@ -1773,7 +1772,7 @@ describe("profile", () => {
             foreignBusinessType: "NEXUS",
             industryId: industryId,
             foreignBusinessTypeIds: ["NEXUS"],
-            ...generateUndefinedIndustrySpecificData(),
+            ...emptyIndustrySpecificData,
           }),
         });
         renderPage({ userData });
@@ -2125,18 +2124,18 @@ describe("profile", () => {
     });
   });
 
-  const fillText = (label: string, value: string) => {
+  const fillText = (label: string, value: string): void => {
     fireEvent.change(screen.getByLabelText(label), { target: { value: value } });
     fireEvent.blur(screen.getByLabelText(label));
   };
 
-  const selectByValue = (label: string, value: string) => {
+  const selectByValue = (label: string, value: string): void => {
     fireEvent.mouseDown(screen.getByLabelText(label));
     const listbox = within(screen.getByRole("listbox"));
     fireEvent.click(listbox.getByTestId(value));
   };
 
-  const selectByText = (label: string, value: string) => {
+  const selectByText = (label: string, value: string): void => {
     fireEvent.mouseDown(screen.getByLabelText(label));
     const listbox = within(screen.getByRole("listbox"));
     fireEvent.click(listbox.getByText(value));
@@ -2202,27 +2201,27 @@ describe("profile", () => {
     return within(screen.getByTestId(dataTestId) as HTMLInputElement).getByRole("radio");
   };
 
-  const chooseRadio = (value: string) => {
+  const chooseRadio = (value: string): void => {
     fireEvent.click(screen.getByTestId(value));
   };
 
-  const chooseTab = (value: ProfileTabs) => {
+  const chooseTab = (value: ProfileTabs): void => {
     fireEvent.click(screen.getByTestId(value));
   };
 
-  const removeLocationAndSave = () => {
+  const removeLocationAndSave = (): void => {
     fillText("Location", "");
     fireEvent.blur(screen.getByLabelText("Location"));
     clickSave();
   };
 
-  const expectLocationSavedAsUndefined = async () => {
+  const expectLocationSavedAsUndefined = async (): Promise<void> => {
     await waitFor(() => {
       return expect(currentUserData().profileData.municipality).toEqual(undefined);
     });
   };
 
-  const expectLocationNotSavedAndError = () => {
+  const expectLocationNotSavedAndError = (): void => {
     expect(userDataWasNotUpdated()).toBe(true);
     expect(
       screen.getByText(Config.profileDefaults.fields.municipality.default.errorTextRequired)

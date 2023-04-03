@@ -19,7 +19,7 @@ export const SidebarCardFormationNudge = (props: Props): ReactElement => {
   const { userData, updateQueue } = useUserData();
   const { queueUpdateTaskProgress } = useUpdateTaskProgress();
 
-  const updateFormationDateAndTaskProgress = async () => {
+  const updateFormationDateAndTaskProgress = async (): Promise<void> => {
     if (!userData || !updateQueue) {
       return;
     }
@@ -28,7 +28,7 @@ export const SidebarCardFormationNudge = (props: Props): ReactElement => {
     routeShallowWithQuery(router, QUERIES.fromForming, "true");
   };
 
-  const onClick = async () => {
+  const onClick = (): void => {
     if (!userData) {
       return;
     }
@@ -40,9 +40,7 @@ export const SidebarCardFormationNudge = (props: Props): ReactElement => {
     <>
       <FormationDateModal
         isOpen={modalOpen}
-        close={() => {
-          return setModalOpen(false);
-        }}
+        close={(): void => setModalOpen(false)}
         onSave={updateFormationDateAndTaskProgress}
       />
       <SidebarCardGeneric

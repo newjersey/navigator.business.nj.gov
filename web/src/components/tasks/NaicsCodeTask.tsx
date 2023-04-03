@@ -30,7 +30,7 @@ export const NaicsCodeTask = (props: Props): ReactElement => {
     setShowInput(!userData.profileData.naicsCode);
   }, userData);
 
-  const setBackToEditing = ({ remove }: { remove: boolean }) => {
+  const setBackToEditing = ({ remove }: { remove: boolean }): void => {
     if (!userData || !updateQueue) {
       return;
     }
@@ -42,14 +42,15 @@ export const NaicsCodeTask = (props: Props): ReactElement => {
       .update();
   };
 
-  const onEdit = () => {
+  const onEdit = (): void => {
     return setBackToEditing({ remove: false });
   };
-  const onRemove = () => {
+
+  const onRemove = (): void => {
     return setBackToEditing({ remove: true });
   };
 
-  const onSave = () => {
+  const onSave = (): void => {
     if (isAuthenticated === IsAuthenticated.FALSE) {
       setRegistrationModalIsVisible(true);
       return;

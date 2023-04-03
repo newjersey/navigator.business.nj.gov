@@ -5,9 +5,9 @@ import { ConfigContext } from "@/contexts/configContext";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
-import { useState } from "react";
+import { ReactElement, useState } from "react";
 
-const NexusDbaFormationPreview = (props: PreviewProps) => {
+const NexusDbaFormationPreview = (props: PreviewProps): ReactElement => {
   const { config, setConfig } = usePreviewConfig(props);
   const ref = usePreviewRef(props);
 
@@ -22,25 +22,15 @@ const NexusDbaFormationPreview = (props: PreviewProps) => {
 
         <div ref={ref} style={{ pointerEvents: "all" }}>
           <h2>CTA Modal</h2>
-          <button
-            onClick={() => {
-              return setModalOpen(true);
-            }}
-          >
-            Open CTA Modal
-          </button>
+          <button onClick={(): void => setModalOpen(true)}>Open CTA Modal</button>
         </div>
 
         <ModalTwoButton
           isOpen={modalOpen}
-          close={() => {
-            return setModalOpen(false);
-          }}
+          close={(): void => setModalOpen(false)}
           title={config.DbaFormationTask.dbaCtaModalHeader}
           primaryButtonText={config.DbaFormationTask.dbaCtaModalContinueButtonText}
-          primaryButtonOnClick={() => {
-            return setModalOpen(false);
-          }}
+          primaryButtonOnClick={(): void => setModalOpen(false)}
           secondaryButtonText={config.DbaFormationTask.dbaCtaModalCancelButtonText}
         >
           <Content>{config.DbaFormationTask.dbaCtaModalBody}</Content>

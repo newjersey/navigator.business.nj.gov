@@ -2,9 +2,9 @@ import { Content } from "@/components/Content";
 import { ReviewSectionHeader } from "@/components/tasks/business-formation/review/ReviewSectionHeader";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { useContext } from "react";
+import { ReactElement, useContext } from "react";
 
-export const ReviewProvisions = () => {
+export const ReviewProvisions = (): ReactElement => {
   const { Config } = useConfig();
   const { state } = useContext(BusinessFormationContext);
 

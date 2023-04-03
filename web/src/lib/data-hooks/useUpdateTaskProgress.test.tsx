@@ -39,11 +39,11 @@ describe("useUpdateTaskProgress", () => {
   } => {
     const returnVal = {
       congratulatoryModal: <></>,
-      queueUpdateTaskProgress: () => {},
+      queueUpdateTaskProgress: (): void => {},
     };
     const updateQueueReturnVal = { updateQueue: undefined };
 
-    function TestComponent() {
+    function TestComponent(): null {
       Object.assign(returnVal, useUpdateTaskProgress());
       Object.assign(updateQueueReturnVal, useUserData());
       return null;

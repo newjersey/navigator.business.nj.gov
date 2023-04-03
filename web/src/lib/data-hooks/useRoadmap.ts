@@ -6,11 +6,13 @@ import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { sectionNames, SectionType, TaskProgress } from "@businessnjgovnavigator/shared/userData";
 import { useContext, useMemo } from "react";
 
+export type CurrentAndNextSection = { current: SectionType; next: SectionType | undefined };
+
 export type UseRoadmapReturnValue = {
   roadmap: Roadmap | undefined;
   sectionNamesInRoadmap: SectionType[];
   isSectionCompleted: (section: SectionType, taskProgressOverride?: Record<string, TaskProgress>) => boolean;
-  currentAndNextSection: (taskId: string) => { current: SectionType; next: SectionType | undefined };
+  currentAndNextSection: (taskId: string) => CurrentAndNextSection;
 };
 
 export const useRoadmap = (): UseRoadmapReturnValue => {
@@ -35,7 +37,7 @@ export const useRoadmap = (): UseRoadmapReturnValue => {
     }
   }, userData);
 
-  const buildAndSetRoadmap = async () => {
+  const buildAndSetRoadmap = async (): Promise<void> => {
     if (userData?.formProgress === "COMPLETED") {
       const roadmap = await buildUserRoadmap(userData.profileData);
       setRoadmap(roadmap);

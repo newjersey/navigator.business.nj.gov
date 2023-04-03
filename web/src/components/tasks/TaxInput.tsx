@@ -108,8 +108,8 @@ export const TaxInput = (props: Props): ReactElement => {
             flow: "STARTING",
           },
           setProfileData,
-          setUser: () => {},
-          onBack: () => {},
+          setUser: (): void => {},
+          onBack: (): void => {},
         }}
       >
         <div className={"flex flex-row"}>

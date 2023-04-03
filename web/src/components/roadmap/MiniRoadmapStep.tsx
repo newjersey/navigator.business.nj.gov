@@ -37,7 +37,7 @@ export const MiniRoadmapStep = (props: Props): ReactElement => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isActive, stepNumber]);
 
-  const toggleOpen = () => {
+  const toggleOpen = (): void => {
     props.toggleStep(stepNumber, !isOpen, true);
     setIsOpen((prevOpen) => {
       return !prevOpen;

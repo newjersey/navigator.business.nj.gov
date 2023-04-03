@@ -68,7 +68,7 @@ export const useUserData = (): UseUserDataResponse => {
     return JSON.stringify(oldUserData?.profileData) !== JSON.stringify(newUserData.profileData);
   };
 
-  const onProfileDataChange = async (newUserData: UserData) => {
+  const onProfileDataChange = async (newUserData: UserData): Promise<void> => {
     setAnalyticsDimensions(newUserData.profileData);
     const newRoadmap = await buildUserRoadmap(newUserData.profileData);
     setRoadmap(newRoadmap);

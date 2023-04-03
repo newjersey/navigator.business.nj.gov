@@ -46,12 +46,14 @@ export const DisabledTaxId = (props: Props): ReactElement => {
     }
   };
 
-  const taxIdInitialDisplay = () => getTaxIdInitialStatus(getTaxIdEncryptionStatus(state.profileData));
+  const taxIdInitialDisplay = (): TaxIdDisplayStatus => {
+    return getTaxIdInitialStatus(getTaxIdEncryptionStatus(state.profileData));
+  };
 
   const [locationValue, setLocationValue] = useState(state.profileData[fieldName]?.trim().slice(9, 12) ?? "");
   const [taxIdValue, setTaxIdValue] = useState(state.profileData[fieldName]?.trim().slice(0, 9) ?? "");
   const [taxIdDisplayStatus, setTaxIdDisplayStatus] = useState<TaxIdDisplayStatus>(taxIdInitialDisplay());
-  const getShowHideToggleButton = () => {
+  const getShowHideToggleButton = (): ReactElement => {
     return ShowHideToggleButton({
       status: taxIdDisplayStatus,
       toggle: updateTaxIdDisplay,
@@ -63,7 +65,7 @@ export const DisabledTaxId = (props: Props): ReactElement => {
     });
   };
 
-  const updateSplitTaxId = (taxId: string) => {
+  const updateSplitTaxId = (taxId: string): void => {
     setTaxIdValue(taxId.trim().slice(0, 9));
     setLocationValue(taxId.trim().slice(9, 12));
   };
@@ -74,13 +76,13 @@ export const DisabledTaxId = (props: Props): ReactElement => {
     });
   };
 
-  const toggleTaxIdDisplay = () => {
+  const toggleTaxIdDisplay = (): void => {
     taxIdDisplayStatus === "password-view"
       ? setTaxIdDisplayStatus("text-view")
       : setTaxIdDisplayStatus("password-view");
   };
 
-  const updateTaxIdDisplay = async () => {
+  const updateTaxIdDisplay = async (): Promise<void> => {
     if (!state.profileData.taxId) {
       return;
     } else if (
@@ -102,7 +104,7 @@ export const DisabledTaxId = (props: Props): ReactElement => {
     return formatTaxId(taxIdValue + locationValue);
   }, [locationValue, taxIdValue]);
 
-  const getSpacedValue = (value: string) => (
+  const getSpacedValue = (value: string): ReactNode => (
     <>
       <span className={taxIdDisplayStatus === "password-view" ? "text-ls-3" : ""}>{value.slice(0, 9)}</span>
       <span>{value.slice(9)}</span>

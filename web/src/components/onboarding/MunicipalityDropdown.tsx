@@ -29,7 +29,7 @@ export const MunicipalityDropdown = (props: Props): ReactElement => {
     setSearchText(event.target.value);
   };
 
-  const handleMunicipality = (event: ChangeEvent<unknown>, value: Municipality | null) => {
+  const handleMunicipality = (event: ChangeEvent<unknown>, value: Municipality | null): void => {
     props.handleChange && props.handleChange();
     setSearchText(value ? value.displayName : "");
     props.onSelect(value || undefined);
@@ -54,10 +54,10 @@ export const MunicipalityDropdown = (props: Props): ReactElement => {
       options={props.municipalities}
       id={props.fieldName}
       filterOptions={filterOptions}
-      getOptionLabel={(municipality: Municipality) => {
+      getOptionLabel={(municipality: Municipality): string => {
         return municipality.displayName;
       }}
-      isOptionEqualToValue={(option: Municipality, value: Municipality) => {
+      isOptionEqualToValue={(option: Municipality, value: Municipality): boolean => {
         return option.id === value.id;
       }}
       value={props.value || null}
@@ -65,7 +65,7 @@ export const MunicipalityDropdown = (props: Props): ReactElement => {
       disabled={props.disabled}
       onBlur={props.onValidation}
       onSubmit={props.onValidation}
-      renderOption={(props, option, { selected }) => {
+      renderOption={(props, option, { selected }): JSX.Element => {
         return (
           <li {...props}>
             {selected ? (
@@ -78,7 +78,7 @@ export const MunicipalityDropdown = (props: Props): ReactElement => {
           </li>
         );
       }}
-      renderInput={(params) => {
+      renderInput={(params): JSX.Element => {
         return (
           <TextField
             {...params}

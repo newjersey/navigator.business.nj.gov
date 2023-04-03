@@ -23,7 +23,7 @@ export default {
   collapsed: false,
   summary: "{{fields.title}}",
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  fromBlock: (match: any) => {
+  fromBlock: (match: any): { type: string; body: string } => {
     const string = match[0];
     const openCurlyIndex = string.indexOf("{");
     const closedCurlyIndex = string.indexOf("}");
@@ -42,11 +42,11 @@ export default {
     return { type: typeValue, body: body };
   },
   // Function to create a text block from an instance of this component
-  toBlock: (obj: { type: string; body: string }) => {
+  toBlock: (obj: { type: string; body: string }): string => {
     return `:::icon{ type="${obj.type}" } \n ${obj.body.trim()}\n:::`;
   },
 
-  toPreview: (obj: { type: string; body: string }) => {
+  toPreview: (obj: { type: string; body: string }): string => {
     return `:::icon{ type="${obj.type}" } \n ${obj.body.trim()}\n:::`;
   },
 };

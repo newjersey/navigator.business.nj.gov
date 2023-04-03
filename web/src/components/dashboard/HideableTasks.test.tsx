@@ -19,8 +19,8 @@ describe("<HideableTasks />", () => {
     useMockRoadmap({});
   });
 
-  const renderHideableTask = (initialUserData?: UserData) => {
-    return render(
+  const renderHideableTask = (initialUserData?: UserData): void => {
+    render(
       <WithStatefulUserData initialUserData={initialUserData}>
         <HideableTasks />
       </WithStatefulUserData>

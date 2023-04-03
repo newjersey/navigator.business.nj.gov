@@ -12,7 +12,7 @@ type Props = {
 export const SidebarCardGoToProfileNudge = (props: Props): ReactElement => {
   const router = useRouter();
 
-  const onClick = () => {
+  const onClick = (): void => {
     analytics.event.go_to_profile_nudge.click.go_to_profile();
     router.push(ROUTES.profile);
   };

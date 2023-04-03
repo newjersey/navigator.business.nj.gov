@@ -74,9 +74,7 @@ export const SelectFeedbackModal = ({ onClose, isOpen, setCurrentFeedback }: Pro
                 isFullWidthOnDesktop={true}
                 isTextAlignedLeft={true}
                 isUnBolded={true}
-                onClick={() => {
-                  return setCurrentFeedback("Report Issue");
-                }}
+                onClick={(): void => setCurrentFeedback("Report Issue")}
               >
                 <ButtonIcon svgFilename="bug" />
                 <span className="text-left">{Config.feedbackModal.feedbackModalReportIssueButtonText}</span>
@@ -89,9 +87,7 @@ export const SelectFeedbackModal = ({ onClose, isOpen, setCurrentFeedback }: Pro
                 isFullWidthOnDesktop={true}
                 isTextAlignedLeft={true}
                 isUnBolded={true}
-                onClick={() => {
-                  return setCurrentFeedback("Feature Request");
-                }}
+                onClick={(): void => setCurrentFeedback("Feature Request")}
               >
                 <ButtonIcon svgFilename="lightbulb-on" />
                 <span className="text-left">

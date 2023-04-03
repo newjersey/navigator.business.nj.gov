@@ -44,7 +44,7 @@ import { act, fireEvent, render, screen, waitFor, within } from "@testing-librar
 
 const Config = getMergedConfig();
 
-export function flushPromises() {
+export function flushPromises(): Promise<void> {
   return new Promise((resolve) => {
     return process.nextTick(resolve);
   });
@@ -58,7 +58,7 @@ export const generateFormationProfileData = (data: Partial<ProfileData>): Profil
   });
 };
 
-export const useSetupInitialMocks = () => {
+export const useSetupInitialMocks = (): void => {
   useMockRoadmap({});
   useMockRouter({});
   setupStatefulUserDataContext();
@@ -122,7 +122,7 @@ export const preparePage = (
   return createFormationPageHelpers();
 };
 
-export const mockApiResponse = (response?: FormationSubmitResponse) => {
+export const mockApiResponse = (response?: FormationSubmitResponse): void => {
   const mockApi = api as jest.Mocked<typeof api>;
   mockApi.postBusinessFormation.mockImplementation((userData) => {
     return Promise.resolve({
@@ -185,7 +185,7 @@ export type FormationPageHelpers = {
 export const createFormationPageHelpers = (): FormationPageHelpers => {
   const mockApi = api as jest.Mocked<typeof api>;
 
-  const fillText = (label: string, value: string) => {
+  const fillText = (label: string, value: string): void => {
     const item = screen.getByLabelText(label);
     fireEvent.change(item, { target: { value: value } });
     fireEvent.blur(item);
@@ -355,7 +355,7 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     return screen.getByTestId(testId).querySelector(`input[type="${params.type}"]`) as HTMLInputElement;
   };
 
-  const selectByText = (label: string, value: string) => {
+  const selectByText = (label: string, value: string): void => {
     fireEvent.mouseDown(screen.getByLabelText(label));
     const listbox = within(screen.getByRole("listbox"));
     fireEvent.click(listbox.getByText(value));
@@ -402,7 +402,10 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     });
   };
 
-  const fillAndSubmitAddressModal = async (overrides: Partial<FormationSignedAddress>, fieldName: string) => {
+  const fillAndSubmitAddressModal = async (
+    overrides: Partial<FormationSignedAddress>,
+    fieldName: string
+  ): Promise<void> => {
     await openAddressModal(fieldName);
     await fillAddressModal(overrides);
     clickAddressSubmit();
@@ -429,12 +432,15 @@ export const createFormationPageHelpers = (): FormationPageHelpers => {
     });
   };
 
-  const selectDate = (value: DateObject, fieldType: "Business start date" | "Foreign date of formation") => {
+  const selectDate = (
+    value: DateObject,
+    fieldType: "Business start date" | "Foreign date of formation"
+  ): void => {
     fillText(fieldType, value.format(defaultDisplayDateFormat));
     fireEvent.blur(screen.getByLabelText(fieldType));
   };
 
-  const completeRequiredBillingFields = () => {
+  const completeRequiredBillingFields = (): void => {
     fireEvent.click(screen.getByLabelText(Config.formation.fields.paymentType.creditCardLabel));
     fillText("Contact first name", "John");
     fillText("Contact last name", "Smith");

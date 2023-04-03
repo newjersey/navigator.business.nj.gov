@@ -28,7 +28,7 @@ describe("<TwoTabDashboardLayout />", () => {
   }: {
     certificationsArray?: Certification[];
     fundingsArray?: Funding[];
-  }) => {
+  }): void => {
     render(
       <TwoTabDashboardLayout
         firstTab={<div>First Tab Content</div>}

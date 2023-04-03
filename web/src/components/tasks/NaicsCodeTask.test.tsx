@@ -59,7 +59,7 @@ describe("<NaicsCodeTask />", () => {
   describe("NAICS code radio buttons", () => {
     let initialUserData: UserData;
 
-    const renderPage = () => {
+    const renderPage = (): void => {
       render(
         withAuthAlert(
           <WithStatefulUserData initialUserData={initialUserData}>
@@ -160,7 +160,7 @@ describe("<NaicsCodeTask />", () => {
   describe("inputting NAICS code", () => {
     let initialUserData: UserData;
 
-    const renderPage = () => {
+    const renderPage = (): void => {
       render(
         withAuthAlert(
           <WithStatefulUserData initialUserData={initialUserData}>
@@ -266,7 +266,7 @@ describe("<NaicsCodeTask />", () => {
   describe("displaying NAICS code", () => {
     let initialUserData: UserData;
 
-    const renderPage = () => {
+    const renderPage = (): void => {
       render(
         withAuthAlert(
           <WithStatefulUserData initialUserData={initialUserData}>
@@ -330,7 +330,7 @@ describe("<NaicsCodeTask />", () => {
     let initialUserData: UserData;
     let setRegistrationModalIsVisible: jest.Mock;
 
-    const renderPage = () => {
+    const renderPage = (): void => {
       render(
         withAuthAlert(
           <WithStatefulUserData initialUserData={initialUserData}>

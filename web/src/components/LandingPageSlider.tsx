@@ -8,14 +8,14 @@ import { useRouter } from "next/router";
 import { ReactElement, useRef, useState } from "react";
 import Slider, { CustomArrowProps } from "react-slick";
 
-function NextArrow(props: CustomArrowProps) {
+function NextArrow(props: CustomArrowProps): ReactElement {
   return (
     <button className="slider-button next" onClick={props.onClick} aria-label="next" aria-hidden="false">
       <Icon className="nextIcon">navigate_next</Icon>
     </button>
   );
 }
-function PrevArrow(props: CustomArrowProps) {
+function PrevArrow(props: CustomArrowProps): ReactElement {
   return (
     <button className="slider-button prev" onClick={props.onClick} aria-label="previous" aria-hidden="false">
       <Icon className="prevIcon">navigate_before</Icon>
@@ -45,7 +45,7 @@ export const LandingPageSlider = (): ReactElement => {
 
   useMountEffect(() => {
     setSlideBreakPoint(getNumberOfTilesToScroll());
-    function handleResize() {
+    function handleResize(): void {
       setSlideBreakPoint(getNumberOfTilesToScroll());
     }
     window.addEventListener("resize", handleResize);
@@ -54,12 +54,12 @@ export const LandingPageSlider = (): ReactElement => {
     };
   });
 
-  const routeToOnboarding = () => {
+  const routeToOnboarding = (): void => {
     router.push(ROUTES.onboarding);
     analytics.event.landing_page_hero_get_started.click.go_to_onboarding();
   };
 
-  const setFlowAndRouteUser = (flow: "starting" | "out-of-state" | "up-and-running") => {
+  const setFlowAndRouteUser = (flow: "starting" | "out-of-state" | "up-and-running"): void => {
     routeWithQuery(router, {
       path: ROUTES.onboarding,
       queries: { [QUERIES.flow]: flow },
@@ -83,7 +83,7 @@ export const LandingPageSlider = (): ReactElement => {
           <span></span>
         </>
       ),
-    beforeChange: (previous: number, next: number) => {
+    beforeChange: (previous: number, next: number): void => {
       setActiveTile(next);
     },
     prevArrow:
@@ -115,9 +115,7 @@ export const LandingPageSlider = (): ReactElement => {
           imgPath={"/img/briefcase-icon.svg"}
           dataTestId={"register-biz-tile"}
           tileText={Config.landingPage.landingPageTile2Text}
-          onClick={() => {
-            return setFlowAndRouteUser("starting");
-          }}
+          onClick={(): void => setFlowAndRouteUser("starting")}
           isActive={activeTile === 1}
         />
         <LandingPageActionTile
@@ -125,9 +123,7 @@ export const LandingPageSlider = (): ReactElement => {
           imgPath={"/img/payTaxes-icon.svg"}
           dataTestId={"pay-taxes-tile"}
           tileText={Config.landingPage.landingPageTile3Text}
-          onClick={() => {
-            return setFlowAndRouteUser("up-and-running");
-          }}
+          onClick={(): void => setFlowAndRouteUser("up-and-running")}
           isActive={activeTile === 2}
         />
         <LandingPageActionTile
@@ -135,9 +131,7 @@ export const LandingPageSlider = (): ReactElement => {
           imgPath={"/img/outOfState-icon.svg"}
           dataTestId={"out-of-state-tile"}
           tileText={Config.landingPage.landingPageTile4Text}
-          onClick={() => {
-            return setFlowAndRouteUser("out-of-state");
-          }}
+          onClick={(): void => setFlowAndRouteUser("out-of-state")}
           isActive={activeTile === 3}
         />
         <LandingPageActionTile
@@ -145,9 +139,7 @@ export const LandingPageSlider = (): ReactElement => {
           imgPath={"/img/eligibleFunding-icon.svg"}
           dataTestId={"eligible-funding-tile"}
           tileText={Config.landingPage.landingPageTile5Text}
-          onClick={() => {
-            return setFlowAndRouteUser("up-and-running");
-          }}
+          onClick={(): void => setFlowAndRouteUser("up-and-running")}
           isActive={activeTile === 4}
         />
         <LandingPageActionTile
@@ -155,9 +147,7 @@ export const LandingPageSlider = (): ReactElement => {
           imgPath={"/img/startBusiness-icon.svg"}
           tileText={Config.landingPage.landingPageTile6Text}
           dataTestId={"start-biz-tile"}
-          onClick={() => {
-            return setFlowAndRouteUser("starting");
-          }}
+          onClick={(): void => setFlowAndRouteUser("starting")}
           isActive={activeTile === 5}
         />
         <LandingPageActionTile
@@ -165,9 +155,7 @@ export const LandingPageSlider = (): ReactElement => {
           imgPath={"/img/runBusiness-icon.svg"}
           tileText={Config.landingPage.landingPageTile7Text}
           dataTestId={"run-biz-tile"}
-          onClick={() => {
-            return setFlowAndRouteUser("up-and-running");
-          }}
+          onClick={(): void => setFlowAndRouteUser("up-and-running")}
           isActive={activeTile === 6}
         />
       </Slider>

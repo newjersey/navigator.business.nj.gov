@@ -24,7 +24,7 @@ interface Props {
 export const CountryDropdown = (props: Props): ReactElement => {
   const [open, setOpen] = useState<boolean>(false);
 
-  const handleOnChange = (event: ChangeEvent<unknown>, value: CountriesObject | null) => {
+  const handleOnChange = (event: ChangeEvent<unknown>, value: CountriesObject | null): void => {
     props.onSelect(value || undefined);
   };
 
@@ -35,7 +35,7 @@ export const CountryDropdown = (props: Props): ReactElement => {
     props.onValidation && props.onValidation(props.fieldName, invalid);
   };
 
-  const handleInputChange = (event: ChangeEvent<unknown>, value: string | null) => {
+  const handleInputChange = (event: ChangeEvent<unknown>, value: string | null): void => {
     if (value === null || value === "") {
       props.onSelect(undefined);
     } else {
@@ -56,7 +56,7 @@ export const CountryDropdown = (props: Props): ReactElement => {
     },
   });
 
-  const filteredCountries = () =>
+  const filteredCountries = (): CountriesObject[] =>
     props.excludeUS
       ? countries.filter((country) => {
           return country.shortCode !== "US";
@@ -75,22 +75,20 @@ export const CountryDropdown = (props: Props): ReactElement => {
       className={props.className ?? ""}
       value={getCountry(props.value) || null}
       filterOptions={filterOptions}
-      getOptionLabel={(option: CountriesObject) => {
+      getOptionLabel={(option: CountriesObject): string => {
         return props.useFullName ? option.name : option.shortCode;
       }}
-      isOptionEqualToValue={(option: CountriesObject, value: CountriesObject) => {
+      isOptionEqualToValue={(option: CountriesObject, value: CountriesObject): boolean => {
         return option.shortCode === value.shortCode || option.name === value.name;
       }}
       open={open}
       disabled={props.disabled}
-      onClose={() => {
-        return setOpen(false);
-      }}
+      onClose={(): void => setOpen(false)}
       onChange={handleOnChange}
       onInputChange={handleInputChange}
       onBlur={onValidation}
       onSubmit={onValidation}
-      renderOption={(_props, option, { selected }) => {
+      renderOption={(_props, option, { selected }): JSX.Element => {
         return (
           <li {..._props}>
             {selected ? (
@@ -103,7 +101,7 @@ export const CountryDropdown = (props: Props): ReactElement => {
           </li>
         );
       }}
-      renderInput={(params) => {
+      renderInput={(params): JSX.Element => {
         return (
           <TextField
             {...params}
@@ -118,8 +116,10 @@ export const CountryDropdown = (props: Props): ReactElement => {
             onSubmit={onValidation}
             autoComplete={props.autoComplete ? "country" : "no"}
             variant="outlined"
-            onClick={() => {
-              return props.disabled ? null : setOpen(true);
+            onClick={(): void => {
+              if (!props.disabled) {
+                setOpen(true);
+              }
             }}
             error={props.error}
             helperText={props.error ? props.validationText ?? " " : " "}

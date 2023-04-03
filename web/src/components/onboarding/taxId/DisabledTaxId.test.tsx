@@ -30,7 +30,7 @@ const setLargeScreen = (value: boolean): void => {
   });
 };
 
-const renderComponent = (profileData: ProfileData) => {
+const renderComponent = (profileData: ProfileData): void => {
   render(
     <WithStatefulProfileData initialData={profileData}>
       <DisabledTaxId />

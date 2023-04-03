@@ -25,7 +25,7 @@ export const MainBusinessForeignAddressFlow = (): ReactElement => {
     }
   });
 
-  const onChange = (value: FlowBusinessLocationType) => {
+  const onChange = (value: FlowBusinessLocationType): void => {
     let resetAddress = createEmptyFormationAddress();
     setFieldsInteracted(Object.keys(createEmptyFormationAddress()) as (keyof FormationAddress)[], {
       setToUninteracted: true,
@@ -51,7 +51,7 @@ export const MainBusinessForeignAddressFlow = (): ReactElement => {
           aria-label={"Foreign address type"}
           key={`${state.formationFormData.businessLocationType}-key`}
           value={state.formationFormData.businessLocationType}
-          onChange={(event) => onChange(event.target.value as FlowBusinessLocationType)}
+          onChange={(event): void => onChange(event.target.value as FlowBusinessLocationType)}
           row
         >
           <>

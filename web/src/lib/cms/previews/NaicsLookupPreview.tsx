@@ -6,8 +6,9 @@ import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { generateProfileData, generateTask, generateUserData } from "@/test/factories";
+import { ReactElement } from "react";
 
-const NaicsLookupPreview = (props: PreviewProps) => {
+const NaicsLookupPreview = (props: PreviewProps): ReactElement => {
   const { config, setConfig } = usePreviewConfig(props);
   const ref = usePreviewRef(props);
 
@@ -27,7 +28,7 @@ const NaicsLookupPreview = (props: PreviewProps) => {
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
       <div className="cms" ref={ref} style={{ margin: 40, pointerEvents: "none" }}>
         <NaicsCodeInput
-          onSave={() => {}}
+          onSave={(): void => {}}
           task={task}
           isAuthenticated={IsAuthenticated.TRUE}
           CMS_ONLY_fakeUserData={userData}
@@ -36,7 +37,7 @@ const NaicsLookupPreview = (props: PreviewProps) => {
 
         <hr className="margin-y-6" />
 
-        <NaicsCodeDisplay onEdit={() => {}} onRemove={() => {}} code={"441221"} />
+        <NaicsCodeDisplay onEdit={(): void => {}} onRemove={(): void => {}} code={"441221"} />
       </div>
     </ConfigContext.Provider>
   );

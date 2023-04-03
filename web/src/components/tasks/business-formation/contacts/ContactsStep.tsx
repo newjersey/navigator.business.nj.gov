@@ -72,7 +72,7 @@ export const ContactsStep = (): ReactElement => {
         )}
         {incorporationLegalStructures.includes(state.formationFormData.legalType) ? (
           <Addresses<FormationIncorporator>
-            createEmptyAddress={() => {
+            createEmptyAddress={(): FormationIncorporator => {
               return createSignedEmptyFormationObject(
                 state.formationFormData.legalType,
                 createEmptyFormationIncorporator
@@ -80,7 +80,7 @@ export const ContactsStep = (): ReactElement => {
             }}
             fieldName={"incorporators"}
             addressData={state.formationFormData.incorporators ?? []}
-            setData={(incorporators) => {
+            setData={(incorporators): void => {
               setFormationFormData((previousFormationData) => {
                 return {
                   ...previousFormationData,

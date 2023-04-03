@@ -1,11 +1,7 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { templateEval } from "@/lib/utils/helpers";
-import {
-  generateProfileData,
-  generateUndefinedIndustrySpecificData,
-  generateUserData,
-} from "@/test/factories";
+import { generateProfileData, generateUserData } from "@/test/factories";
 import { markdownToText } from "@/test/helpers/helpers-utilities";
 import { mockPush, useMockRouter } from "@/test/mock/mockRouter";
 import {
@@ -14,12 +10,13 @@ import {
   userDataWasNotUpdated,
 } from "@/test/mock/withStatefulUserData";
 import {
-  industryIdsWithEssentialQuestion,
+  industryIdsWithRequiredEssentialQuestion,
   mockEmptyApiSignups,
   renderPage,
   runSelfRegPageTests,
 } from "@/test/pages/onboarding/helpers-onboarding";
 import { ProfileData } from "@businessnjgovnavigator/shared/";
+import { emptyIndustrySpecificData } from "@businessnjgovnavigator/shared/profileData";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { act, screen, waitFor } from "@testing-library/react";
 
@@ -37,7 +34,7 @@ const Config = getMergedConfig();
 const { employeesInNJ, transactionsInNJ, revenueInNJ, employeeOrContractorInNJ, none } =
   Config.profileDefaults.fields.foreignBusinessTypeIds.default.optionContent;
 
-const generateTestUserData = (overrides: Partial<ProfileData>) => {
+const generateTestUserData = (overrides: Partial<ProfileData>): UserData => {
   return generateUserData({
     profileData: generateProfileData({
       ...overrides,
@@ -300,14 +297,14 @@ describe("onboarding - foreign business", () => {
       expect(screen.getByTestId("snackbar-alert-ERROR")).toBeInTheDocument();
     });
 
-    it.each(industryIdsWithEssentialQuestion)(
+    it.each(industryIdsWithRequiredEssentialQuestion)(
       "prevents user from moving to Step 4 when %s is selected as industry, but essential question is not answered",
       async (industryId) => {
         const userData = generateTestUserData({
           businessPersona: "FOREIGN",
           foreignBusinessType: "NEXUS",
           industryId: industryId,
-          ...generateUndefinedIndustrySpecificData(),
+          ...emptyIndustrySpecificData,
         });
         useMockRouter({ isReady: true, query: { page: "3" } });
         const { page } = renderPage({ userData });
@@ -324,14 +321,14 @@ describe("onboarding - foreign business", () => {
       }
     );
 
-    it.each(industryIdsWithEssentialQuestion)(
+    it.each(industryIdsWithRequiredEssentialQuestion)(
       "allows user to move past Step 2 when you have selected an industry %s and answered the essential question",
       async (industryId) => {
         const userData = generateTestUserData({
           businessPersona: "FOREIGN",
           foreignBusinessType: "NEXUS",
           industryId: industryId,
-          ...generateUndefinedIndustrySpecificData(),
+          ...emptyIndustrySpecificData,
         });
         useMockRouter({ isReady: true, query: { page: "3" } });
         const { page } = renderPage({ userData });
@@ -343,14 +340,14 @@ describe("onboarding - foreign business", () => {
       }
     );
 
-    it.each(industryIdsWithEssentialQuestion)(
+    it.each(industryIdsWithRequiredEssentialQuestion)(
       "removes essential question inline error when essential question radio is selected for %s industry",
       async (industryId) => {
         const userData = generateTestUserData({
           businessPersona: "FOREIGN",
           foreignBusinessType: "NEXUS",
           industryId: industryId,
-          ...generateUndefinedIndustrySpecificData(),
+          ...emptyIndustrySpecificData,
         });
         useMockRouter({ isReady: true, query: { page: "3" } });
         const { page } = renderPage({ userData });

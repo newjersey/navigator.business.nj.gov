@@ -113,7 +113,7 @@ describe("Formation - Signatures", () => {
           { signers: [generateFormationSigner({ name: "" }, legalStructureId)] }
         );
         await attemptApiSubmission(page);
-        const signerErrorText = () => {
+        const signerErrorText = (): HTMLElement | null => {
           return screen.queryByText(Config.formation.fields.signers.errorBannerSignerName);
         };
         expect(signerErrorText()).toBeInTheDocument();
@@ -134,7 +134,7 @@ describe("Formation - Signatures", () => {
           }
         );
         await attemptApiSubmission(page);
-        const signerErrorText = () => {
+        const signerErrorText = (): HTMLElement | null => {
           return screen.queryByText(
             templateEval(Config.formation.general.maximumLengthErrorText, {
               field: Config.formation.fields.signers.label,
@@ -154,7 +154,7 @@ describe("Formation - Signatures", () => {
           { signers: [generateFormationSigner({ signature: false }, legalStructureId)] }
         );
         await attemptApiSubmission(page);
-        const signerCheckboxErrorText = () => {
+        const signerCheckboxErrorText = (): HTMLElement | null => {
           return screen.queryByText(Config.formation.fields.signers.errorBannerCheckbox, {
             exact: false,
           });
@@ -218,7 +218,7 @@ describe("Formation - Signatures", () => {
           );
 
           await attemptApiSubmission(page);
-          const signerTypeErrorText = () => {
+          const signerTypeErrorText = (): HTMLElement | null => {
             return screen.queryByText(Config.formation.fields.signers.errorBannerSignerTitle);
           };
           expect(signerTypeErrorText()).toBeInTheDocument();
@@ -252,7 +252,7 @@ describe("Formation - Signatures", () => {
     });
   });
 
-  const attemptApiSubmission = async (page: FormationPageHelpers) => {
+  const attemptApiSubmission = async (page: FormationPageHelpers): Promise<void> => {
     await page.stepperClickToReviewStep();
     await page.clickSubmit();
     await page.stepperClickToContactsStep();

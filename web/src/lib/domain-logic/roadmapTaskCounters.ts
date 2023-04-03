@@ -45,7 +45,7 @@ const getTaskCountForStatus = ({
     task.required ? requiredTasksIds.push(task.id) : optionalTasksIds.push(task.id);
   }
 
-  const testIfCorrectStatus = (status: TaskProgress) => {
+  const testIfCorrectStatus = (status: TaskProgress): boolean => {
     return complete ? status === "COMPLETED" : status !== "COMPLETED";
   };
 

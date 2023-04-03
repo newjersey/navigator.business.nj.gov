@@ -1,5 +1,5 @@
 import { FieldErrorType, FieldStatus, ReducedFieldStates } from "@/lib/types/types";
-import { createContext, Reducer } from "react";
+import { Context, createContext, Reducer } from "react";
 
 export enum FieldStateActionKind {
   RESET = "RESET",
@@ -45,7 +45,7 @@ export interface FormContextType<T, FieldError = FieldErrorType> {
   reducer: React.Dispatch<FormContextReducerActions<ReducedFieldStates<keyof T, FieldError>, FieldError>>;
 }
 
-export const createFormContext = <T>() =>
+export const createFormContext = <T>(): Context<FormContextType<T>> =>
   createContext<FormContextType<T>>({
     fieldStates: {} as ReducedFieldStates<keyof T>,
     runValidations: false,

@@ -5,8 +5,9 @@ import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { generateProfileData, generateTask, generateUserData } from "@/test/factories";
+import { ReactElement } from "react";
 
-const CannabisLicensePreview = (props: PreviewProps) => {
+const CannabisLicensePreview = (props: PreviewProps): ReactElement => {
   const { config, setConfig } = usePreviewConfig(props);
   const ref = usePreviewRef(props);
 

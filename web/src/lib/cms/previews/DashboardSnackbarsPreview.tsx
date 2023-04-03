@@ -4,8 +4,9 @@ import { ConfigContext } from "@/contexts/configContext";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
+import { ReactElement } from "react";
 
-const DashboardSnackbarsPreview = (props: PreviewProps) => {
+const DashboardSnackbarsPreview = (props: PreviewProps): ReactElement => {
   const { config, setConfig } = usePreviewConfig(props);
   const ref = usePreviewRef(props);
 
@@ -16,7 +17,7 @@ const DashboardSnackbarsPreview = (props: PreviewProps) => {
         <SnackbarAlert
           variant="success"
           isOpen={true}
-          close={() => {}}
+          close={(): void => {}}
           heading={config.dashboardDefaults.calendarSnackbarHeading}
         >
           <Content>{config.dashboardDefaults.calendarSnackbarBody}</Content>
@@ -26,7 +27,7 @@ const DashboardSnackbarsPreview = (props: PreviewProps) => {
         <SnackbarAlert
           variant="success"
           isOpen={true}
-          close={() => {}}
+          close={(): void => {}}
           heading={config.dashboardDefaults.certificationsSnackbarHeading}
         >
           <Content>{config.dashboardDefaults.certificationsSnackbarBody}</Content>
@@ -36,7 +37,7 @@ const DashboardSnackbarsPreview = (props: PreviewProps) => {
         <SnackbarAlert
           variant="success"
           isOpen={true}
-          close={() => {}}
+          close={(): void => {}}
           heading={config.dashboardDefaults.deferredOnboardingSnackbarHeader}
         >
           <Content>{config.dashboardDefaults.deferredOnboardingSnackbarBody}</Content>
@@ -46,7 +47,7 @@ const DashboardSnackbarsPreview = (props: PreviewProps) => {
         <SnackbarAlert
           variant="success"
           isOpen={true}
-          close={() => {}}
+          close={(): void => {}}
           heading={config.dashboardDefaults.fundingSnackbarHeading}
         >
           <Content>{config.dashboardDefaults.fundingSnackbarBody}</Content>
@@ -56,7 +57,7 @@ const DashboardSnackbarsPreview = (props: PreviewProps) => {
         <SnackbarAlert
           variant="success"
           isOpen={true}
-          close={() => {}}
+          close={(): void => {}}
           heading={config.dashboardDefaults.hiddenTasksSnackbarHeading}
         >
           <Content>{config.dashboardDefaults.hiddenTasksSnackbarBody}</Content>

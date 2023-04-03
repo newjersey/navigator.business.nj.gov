@@ -105,7 +105,7 @@ const DashboardPage = (props: Props): ReactElement => {
   });
 
   useMountEffectWhenDefined(() => {
-    (async () => {
+    (async (): Promise<void> => {
       if (userData?.formProgress !== "COMPLETED") {
         await router.replace(ROUTES.onboarding);
       }
@@ -113,7 +113,7 @@ const DashboardPage = (props: Props): ReactElement => {
   }, userData);
 
   useMountEffectWhenDefined(() => {
-    (async () => {
+    (async (): Promise<void> => {
       if (isDesktopAndUp && userData?.preferences.phaseNewlyChanged) {
         if (!updateQueue || userData?.formProgress !== "COMPLETED") {
           return;
@@ -152,9 +152,7 @@ const DashboardPage = (props: Props): ReactElement => {
                       }
                     />
                   }
-                  onSave={() => {
-                    return routeShallowWithQuery(router, QUERIES.deferredQuestionAnswered, "true");
-                  }}
+                  onSave={(): void => routeShallowWithQuery(router, QUERIES.deferredQuestionAnswered, "true")}
                 >
                   <OnboardingHomeBasedBusiness />
                 </DeferredOnboardingQuestion>

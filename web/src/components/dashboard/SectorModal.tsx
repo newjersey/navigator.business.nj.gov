@@ -37,7 +37,7 @@ export const SectorModal = (props: Props): ReactElement => {
     }
   }, userData);
 
-  const handleClose = () => {
+  const handleClose = (): void => {
     props.handleClose();
     formContextState.reducer({ type: FieldStateActionKind.RESET });
   };
@@ -53,8 +53,8 @@ export const SectorModal = (props: Props): ReactElement => {
             flow: "OWNING",
           },
           setProfileData,
-          setUser: () => {},
-          onBack: () => {},
+          setUser: (): void => {},
+          onBack: (): void => {},
         }}
       >
         <ModalTwoButton

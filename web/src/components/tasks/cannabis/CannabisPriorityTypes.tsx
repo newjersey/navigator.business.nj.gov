@@ -101,7 +101,7 @@ export const CannabisPriorityTypes = (props: Props): ReactElement => {
     }
   }, [userData, Config.cannabisPriorityStatus]);
 
-  const handleNoneOfTheAboveCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleNoneOfTheAboveCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     if (!userData) {
       return;
     }

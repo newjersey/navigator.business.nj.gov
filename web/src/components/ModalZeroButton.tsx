@@ -1,7 +1,7 @@
 import { Icon } from "@/components/njwds/Icon";
 import { ContextualInfoContext } from "@/contexts/contextualInfoContext";
 import { Breakpoint, Dialog, DialogContent, DialogTitle, IconButton } from "@mui/material";
-import { ReactNode, useContext } from "react";
+import { ReactElement, ReactNode, useContext } from "react";
 
 interface Props {
   isOpen: boolean;
@@ -13,7 +13,7 @@ interface Props {
   uncloseable?: boolean;
 }
 
-export const ModalZeroButton = (props: Props) => {
+export const ModalZeroButton = (props: Props): ReactElement => {
   const { contextualInfo } = useContext(ContextualInfoContext);
   return (
     <Dialog

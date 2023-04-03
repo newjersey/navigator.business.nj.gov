@@ -52,7 +52,7 @@ export default {
   collapsed: true,
   summary: "{{fields.title}}",
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  fromBlock: (match: any) => {
+  fromBlock: (match: any): any => {
     return {
       preFormat: match[1],
       preContext: match[2],
@@ -70,7 +70,7 @@ export default {
     contextId: string;
     postContext: string;
     postFormat: string;
-  }) => {
+  }): string => {
     return `${obj.preFormat || ""}${(obj.preContext || "").trim()} \`${(obj.title || "").trim()}|${
       obj.contextId || ""
     }\` ${(obj.postContext || "").trim()}${obj.postFormat || ""}`;
@@ -83,7 +83,7 @@ export default {
     contextId: string;
     postContext: string;
     postFormat: string;
-  }) => {
+  }): string => {
     return `${(obj.preContext || "").trim()} \`${(obj.title || "").trim()}|${obj.contextId || ""}\` ${(
       obj.postContext || ""
     ).trim()}`;

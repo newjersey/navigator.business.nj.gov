@@ -19,7 +19,7 @@ export const SidebarCardRegisteredForTaxesNudge = (props: Props): ReactElement =
 
   const router = useRouter();
 
-  const updateTaxInformationAndTaskProgress = async () => {
+  const updateTaxInformationAndTaskProgress = async (): Promise<void> => {
     if (!updateQueue) {
       return;
     }
@@ -28,7 +28,7 @@ export const SidebarCardRegisteredForTaxesNudge = (props: Props): ReactElement =
     router.push("/dashboard");
   };
 
-  const onClick = () => {
+  const onClick = (): void => {
     setModalOpen(true);
     analytics.event.tax_registration_nudge_button.click.show_tax_registration_modal();
   };
@@ -37,9 +37,7 @@ export const SidebarCardRegisteredForTaxesNudge = (props: Props): ReactElement =
     <>
       <RegisteredForTaxesModal
         isOpen={modalOpen}
-        close={() => {
-          return setModalOpen(false);
-        }}
+        close={(): void => setModalOpen(false)}
         onSave={updateTaxInformationAndTaskProgress}
       />
       <SidebarCardGeneric

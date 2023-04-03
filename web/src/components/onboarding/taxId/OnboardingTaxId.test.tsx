@@ -31,7 +31,7 @@ const setLargeScreen = (value: boolean): void => {
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const renderComponent = (profileData: ProfileData, fieldProps?: any) => {
+const renderComponent = (profileData: ProfileData, fieldProps?: any): void => {
   render(
     <WithStatefulProfileData initialData={profileData}>
       <OnboardingTaxId {...fieldProps} />

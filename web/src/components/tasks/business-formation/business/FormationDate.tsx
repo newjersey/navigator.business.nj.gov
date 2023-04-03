@@ -63,7 +63,7 @@ export const FormationDate = (props: Props): ReactElement => {
     [state.formationFormData.legalType]
   );
 
-  const handleChange = (value: string) => {
+  const handleChange = (value: string): void => {
     setFieldsInteracted([props.fieldName]);
     setFormationFormData((previousFormationData) => {
       return {
@@ -105,14 +105,14 @@ export const FormationDate = (props: Props): ReactElement => {
                 handleChange("");
               }
             }}
-            renderInput={(params) => {
+            renderInput={(params): JSX.Element => {
               return (
                 <TextField
                   {...params}
                   variant="outlined"
                   fullWidth
                   error={doesFieldHaveError(props.fieldName)}
-                  onBlur={() => {
+                  onBlur={(): void => {
                     setFieldsInteracted([props.fieldName]);
                   }}
                   helperText={

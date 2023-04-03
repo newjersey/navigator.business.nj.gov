@@ -52,7 +52,7 @@ describe("Formation - ReviewStep", () => {
   const renderStep = async (
     initialProfileData: Partial<ProfileData>,
     formationFormData: Partial<FormationFormData>
-  ) => {
+  ): Promise<void> => {
     const profileData = generateFormationProfileData(initialProfileData);
     const isForeign = profileData.businessPersona === "FOREIGN";
     const formationData = {

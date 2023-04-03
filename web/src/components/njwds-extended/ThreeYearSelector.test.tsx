@@ -2,11 +2,12 @@ import { ThreeYearSelector } from "@/components/njwds-extended/ThreeYearSelector
 import * as shared from "@businessnjgovnavigator/shared";
 import { parseDateWithFormat } from "@businessnjgovnavigator/shared/dateHelpers";
 import { fireEvent, render, screen } from "@testing-library/react";
+import { Dayjs } from "dayjs";
 
 function mockShared(): typeof shared {
   return {
     ...jest.requireActual("@businessnjgovnavigator/shared"),
-    getCurrentDate: () => {
+    getCurrentDate: (): Dayjs => {
       return parseDateWithFormat(`2024-02-15`, "YYYY-MM-DD");
     },
   };

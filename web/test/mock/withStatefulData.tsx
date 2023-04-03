@@ -13,7 +13,14 @@ import { createContext, ReactElement, ReactNode, useEffect, useState } from "rea
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type GenericData = Record<string, any>;
 
-export const statefulDataHelpers = (spy: jest.Mock) => {
+export const statefulDataHelpers = (
+  spy: jest.Mock
+): {
+  getLastCalledWithConfig: () => { local?: boolean };
+  currentData: () => GenericData;
+  dataWasNotUpdated: () => boolean;
+  dataUpdatedNTimes: () => number;
+} => {
   return {
     getLastCalledWithConfig: (): { local?: boolean } => {
       return getLastCalledWith(spy)[1] as { local?: boolean };
@@ -59,8 +66,8 @@ export const WithStatefulData = (spy: jest.Mock) => {
         <StatefulDataContext.Provider value={{ genericData, update }}>
           {children}
           <button
-            onClick={() => {
-              return updateQueue?.update();
+            onClick={(): void => {
+              updateQueue?.update();
             }}
           >
             trigger queue update

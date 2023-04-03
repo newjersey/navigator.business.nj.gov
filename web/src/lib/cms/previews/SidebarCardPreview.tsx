@@ -3,8 +3,9 @@ import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePageData } from "@/lib/cms/helpers/usePageData";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
 import { SidebarCardContent } from "@/lib/types/types";
+import { ReactElement } from "react";
 
-const RoadmapSidebarCardPreview = (props: PreviewProps) => {
+const RoadmapSidebarCardPreview = (props: PreviewProps): ReactElement => {
   const ref = usePreviewRef(props);
   const card = usePageData<SidebarCardContent>(props);
 

@@ -1,6 +1,6 @@
 import { MediaQueries } from "@/lib/PageSizes";
 import { useMediaQuery } from "@mui/material";
-import { MutableRefObject, ReactElement } from "react";
+import { MutableRefObject, ReactElement, ReactNode } from "react";
 
 interface Props {
   className: string;
@@ -14,7 +14,7 @@ interface Props {
   onClick: () => void;
 }
 
-const setTileText = (props: Props, isMobile: boolean) => {
+const setTileText = (props: Props, isMobile: boolean): ReactNode => {
   if (isMobile && props.isPrimary) {
     return (
       <div>

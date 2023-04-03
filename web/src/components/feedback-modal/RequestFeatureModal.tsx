@@ -12,7 +12,7 @@ import { useRouter } from "next/router";
 import { ReactElement, useEffect, useState } from "react";
 import UAParser from "ua-parser-js";
 
-const createFeedbackModalErrorMap = () => {
+const createFeedbackModalErrorMap = (): { featureRequest: { invalid: boolean } } => {
   return {
     featureRequest: { invalid: false },
   };
@@ -41,12 +41,13 @@ export const RequestFeatureModal = ({ onClose, isOpen, setCurrentFeedback }: Pro
     }
   }, [isOpen]);
 
-  const onValidation = (fieldName: string, invalid: boolean) => {
+  const onValidation = (fieldName: string, invalid: boolean): void => {
     setErrorMap((prevErrorMap) => {
       return { ...prevErrorMap, [fieldName]: { invalid } };
     });
   };
-  const handleFeedbackRequestSubmission = () => {
+
+  const handleFeedbackRequestSubmission = (): void => {
     if (!userData) {
       return;
     }
@@ -115,7 +116,7 @@ export const RequestFeatureModal = ({ onClose, isOpen, setCurrentFeedback }: Pro
             formInputFull
             fieldName="featureRequest"
             value={featureRequest}
-            handleChange={(value: string) => {
+            handleChange={(value: string): void => {
               setFeatureRequest(value);
             }}
             fieldOptions={{

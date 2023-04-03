@@ -43,7 +43,7 @@ describe("<EinTask />", () => {
   describe("inputting EIN", () => {
     let initialUserData: UserData;
 
-    const renderPage = () => {
+    const renderPage = (): void => {
       render(
         withAuthAlert(
           <WithStatefulUserData initialUserData={initialUserData}>
@@ -116,7 +116,7 @@ describe("<EinTask />", () => {
   describe("displaying EIN", () => {
     let initialUserData: UserData;
 
-    const renderPage = () => {
+    const renderPage = (): void => {
       render(
         withAuthAlert(
           <WithStatefulUserData initialUserData={initialUserData}>
@@ -173,7 +173,7 @@ describe("<EinTask />", () => {
     let initialUserData: UserData;
     const setRegistrationModalIsVisible = jest.fn();
 
-    const renderPage = () => {
+    const renderPage = (): void => {
       render(
         withAuthAlert(
           <WithStatefulUserData initialUserData={initialUserData}>

@@ -38,7 +38,7 @@ describe("SignUpSnackbar", () => {
   });
 
   const setRegistrationAlertIsVisible = jest.fn();
-  const setupHookWithAuth = (isAuthenticated: IsAuthenticated, registrationAlertIsVisible = true) => {
+  const setupHookWithAuth = (isAuthenticated: IsAuthenticated, registrationAlertIsVisible = true): void => {
     render(
       withAuthAlert(<SignUpSnackbar />, isAuthenticated, {
         registrationAlertIsVisible,

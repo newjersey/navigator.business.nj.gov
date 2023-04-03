@@ -34,7 +34,7 @@ const Config = getMergedConfig();
 describe("<SidebarCardTaxRegistrationNudge />", () => {
   let card: SidebarCardContent;
 
-  const renderWithUserData = (userData: Partial<UserData>) => {
+  const renderWithUserData = (userData: Partial<UserData>): void => {
     render(
       <WithStatefulUserData initialUserData={generateUserData(userData)}>
         <SidebarCardRegisteredForTaxesNudge card={card} />

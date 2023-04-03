@@ -12,7 +12,7 @@ import { fireEvent, render, screen, waitFor, within } from "@testing-library/rea
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));
 
-const renderMiniRoadMap = (taskId: string) => {
+const renderMiniRoadMap = (taskId: string): void => {
   render(<MiniRoadmap activeTaskId={taskId} />);
 };
 
@@ -114,7 +114,7 @@ describe("<MiniRoadmap />", () => {
     expect(within(sectionPlan).getByText("step1")).toBeVisible();
   });
 
-  const renderStatefulMiniRoadMap = (taskId: string, userData = generateUserData({})) => {
+  const renderStatefulMiniRoadMap = (taskId: string, userData = generateUserData({})): void => {
     render(
       <WithStatefulUserData initialUserData={userData}>
         <MiniRoadmap activeTaskId={taskId} />;

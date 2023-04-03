@@ -8,7 +8,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { noneOfTheAbovePriorityId, priorityTypesObj } from "@/lib/domain-logic/cannabisPriorityTypes";
 import { useMountEffect, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
-import { ReactElement, useState } from "react";
+import { ReactElement, ReactNode, useState } from "react";
 
 interface Props {
   onBack: () => void;
@@ -60,7 +60,7 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
     setDisplayNoPriorityType(!!userData.taskItemChecklist[noneOfTheAbovePriorityId]);
   }, [userData]);
 
-  const showTaskCompleteButton = () => {
+  const showTaskCompleteButton = (): boolean => {
     if (displayNoPriorityType) {
       return true;
     }
@@ -73,11 +73,11 @@ export const CannabisPriorityRequirements = (props: Props): ReactElement => {
     );
   };
 
-  const openInNewTab = (link: string) => {
+  const openInNewTab = (link: string): void => {
     window.open(link, "_ blank");
   };
 
-  const renderCTAButtons = () => {
+  const renderCTAButtons = (): ReactNode => {
     const ctaButtons = [];
     if (displaySocialEquityPriorityType) {
       ctaButtons.push({

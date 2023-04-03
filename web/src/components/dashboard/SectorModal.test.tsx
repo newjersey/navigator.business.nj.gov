@@ -2,7 +2,7 @@ import { SectorModal } from "@/components/dashboard/SectorModal";
 import { getMergedConfig } from "@/contexts/configContext";
 import { generateProfileData, generateUserData } from "@/test/factories";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
-import { createPageHelpers } from "@/test/pages/onboarding/helpers-onboarding";
+import { createPageHelpers, PageHelpers } from "@/test/pages/onboarding/helpers-onboarding";
 import { fireEvent, render, screen } from "@testing-library/react";
 
 const submitSectorModal = (): void => {
@@ -19,8 +19,10 @@ describe("<SectorModal />", () => {
     useMockUserData({});
   });
 
-  const renderSectorModal = (onContinue?: jest.Mock) => {
-    render(<SectorModal open={true} handleClose={() => {}} onContinue={onContinue ?? (() => {})} />);
+  const renderSectorModal = (onContinue?: jest.Mock): { page: PageHelpers } => {
+    render(
+      <SectorModal open={true} handleClose={(): void => {}} onContinue={onContinue ?? ((): void => {})} />
+    );
     const page = createPageHelpers();
     return { page };
   };

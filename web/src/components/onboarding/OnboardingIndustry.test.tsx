@@ -30,7 +30,7 @@ describe("<OnboardingIndustry />", () => {
     useMockUserData({});
   });
 
-  const renderComponent = (profileData?: ProfileData) => {
+  const renderComponent = (profileData?: ProfileData): void => {
     render(
       <WithStatefulProfileData initialData={profileData || createEmptyProfileData()}>
         <OnboardingIndustry />
@@ -103,7 +103,7 @@ describe("<OnboardingIndustry />", () => {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
         ].default as any;
 
-        const chooseRadioWithContent = (div: HTMLElement, choice: string) => {
+        const chooseRadioWithContent = (div: HTMLElement, choice: string): void => {
           fireEvent.click(
             within(div).getByText(
               fieldContent[`radioButton${capitalizeFirstLetter(kebabSnakeSentenceToCamelCase(choice))}Text`]
@@ -166,7 +166,7 @@ describe("<OnboardingIndustry />", () => {
     });
   });
 
-  const selectIndustry = (value: string) => {
+  const selectIndustry = (value: string): void => {
     fireEvent.mouseDown(screen.getByLabelText("Industry"));
     const listbox = within(screen.getByRole("listbox"));
     fireEvent.click(listbox.getByTestId(value));

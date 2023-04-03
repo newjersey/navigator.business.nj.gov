@@ -12,7 +12,10 @@ import { useRouter } from "next/router";
 import { ReactElement, useEffect, useState } from "react";
 import UAParser from "ua-parser-js";
 
-const createReportIssueErrorMap = () => {
+const createReportIssueErrorMap = (): {
+  issueSummary: { invalid: boolean };
+  issueDetails: { invalid: boolean };
+} => {
   return {
     issueSummary: { invalid: false },
     issueDetails: { invalid: false },
@@ -46,13 +49,13 @@ export const ReportIssueModal = ({ onClose, isOpen, setCurrentFeedback }: Props)
     }
   }, [isOpen]);
 
-  const onValidation = (fieldName: string, invalid: boolean) => {
+  const onValidation = (fieldName: string, invalid: boolean): void => {
     setErrorMap((errorMap) => {
       return { ...errorMap, [fieldName]: { invalid } };
     });
   };
 
-  const handleReportIssueSubmission = () => {
+  const handleReportIssueSubmission = (): void => {
     if (!userData) {
       return;
     }
@@ -127,7 +130,7 @@ export const ReportIssueModal = ({ onClose, isOpen, setCurrentFeedback }: Props)
             formInputFull
             fieldName="issueSummary"
             value={issueSummary}
-            handleChange={(value: string) => {
+            handleChange={(value: string): void => {
               setIssueSummary(value);
             }}
             fieldOptions={{
@@ -154,7 +157,7 @@ export const ReportIssueModal = ({ onClose, isOpen, setCurrentFeedback }: Props)
             formInputFull
             fieldName="issueDetails"
             value={issueDetails}
-            handleChange={(value: string) => {
+            handleChange={(value: string): void => {
               setIssueDetails(value);
             }}
             fieldOptions={{

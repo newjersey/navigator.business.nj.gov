@@ -8,7 +8,7 @@ import { ReactElement, useContext } from "react";
 export const ContextualInfoPanel = (): ReactElement => {
   const { contextualInfo, setContextualInfo } = useContext(ContextualInfoContext);
 
-  const close = () => {
+  const close = (): void => {
     analytics.event.contextual_sidebar_close_button.click.close_contextual_sidebar();
     setContextualInfo((prevContextualInfo: ContextualInfo) => {
       return {

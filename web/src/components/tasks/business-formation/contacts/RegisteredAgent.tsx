@@ -65,7 +65,7 @@ export const RegisteredAgent = (): ReactElement => {
     );
   };
 
-  const handleRadioSelection = (event: React.ChangeEvent<{ name?: string; value: unknown }>) => {
+  const handleRadioSelection = (event: React.ChangeEvent<{ name?: string; value: unknown }>): void => {
     resetAgentFieldsInteraction();
     setFormationFormData((previousFormationData) => {
       return {
@@ -75,7 +75,7 @@ export const RegisteredAgent = (): ReactElement => {
     });
   };
 
-  const toggleUseAccountInfo = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const toggleUseAccountInfo = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const checked = event.target.checked;
     if (checked) {
       setFormationFormData({
@@ -103,7 +103,7 @@ export const RegisteredAgent = (): ReactElement => {
     return isCorrespondingCheckboxChecked && hasValue;
   };
 
-  const toggleUseBusinessAddress = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const toggleUseBusinessAddress = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const checked = event.target.checked;
     if (checked) {
       setFormationFormData({
@@ -271,13 +271,13 @@ export const RegisteredAgent = (): ReactElement => {
                         disabled={shouldBeDisabled("agentOfficeAddressMunicipality", "ADDRESS")}
                         validationLabel="Error"
                         value={state.formationFormData.agentOfficeAddressMunicipality}
-                        onSelect={(value: Municipality | undefined) => {
-                          return setFormationFormData({
+                        onSelect={(value: Municipality | undefined): void => {
+                          setFormationFormData({
                             ...state.formationFormData,
                             agentOfficeAddressMunicipality: value,
                           });
                         }}
-                        onValidation={() => setFieldsInteracted(["agentOfficeAddressMunicipality"])}
+                        onValidation={(): void => setFieldsInteracted(["agentOfficeAddressMunicipality"])}
                         helperText={Config.formation.fields.agentOfficeAddressMunicipality.error}
                       />
                     </div>
@@ -292,7 +292,7 @@ export const RegisteredAgent = (): ReactElement => {
                       value={"New Jersey"}
                       validationText={Config.formation.fields.agentOfficeAddressState.error}
                       disabled={true}
-                      onSelect={() => {}}
+                      onSelect={(): void => {}}
                       className={"margin-top-2"}
                     />
                   </WithErrorBar>

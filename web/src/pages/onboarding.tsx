@@ -115,7 +115,7 @@ const OnboardingPage = (props: Props): ReactElement => {
       };
     };
 
-    const removeDateAndEntityIdForPublicFilingPages = () => {
+    const removeDateAndEntityIdForPublicFilingPages = (): void => {
       if (profileData.legalStructureId) {
         const requiresPublicFiling = LookupLegalStructureById(
           profileData.legalStructureId
@@ -126,7 +126,7 @@ const OnboardingPage = (props: Props): ReactElement => {
       }
     };
 
-    const removeNexusSpecificPages = () => {
+    const removeNexusSpecificPages = (): void => {
       if (profileData.businessPersona === "FOREIGN" && profileData.foreignBusinessType !== "NEXUS") {
         removePageFromFlow("industry-page", "FOREIGN");
         removePageFromFlow("legal-structure-page", "FOREIGN");
@@ -152,7 +152,7 @@ const OnboardingPage = (props: Props): ReactElement => {
   }, [profileData]);
 
   useEffect(() => {
-    (async () => {
+    (async (): Promise<void> => {
       if (
         !router.isReady ||
         hasHandledRouting.current ||
@@ -354,7 +354,7 @@ const OnboardingPage = (props: Props): ReactElement => {
     }
   );
 
-  const onBack = () => {
+  const onBack = (): void => {
     if (page.current + 1 > 0) {
       setAlert(undefined);
       setError(undefined);
@@ -368,7 +368,7 @@ const OnboardingPage = (props: Props): ReactElement => {
     }
   };
 
-  const header = () => {
+  const header = (): ReactElement => {
     return (
       <div className="margin-y-2 desktop:margin-y-0 desktop:padding-bottom-1">
         <h1 ref={headerRef}>
@@ -416,10 +416,8 @@ const OnboardingPage = (props: Props): ReactElement => {
                 {alert && (
                   <SnackbarAlert
                     variant={OnboardingStatusLookup()[alert].variant}
-                    isOpen={alert !== undefined}
-                    close={() => {
-                      return setAlert(undefined);
-                    }}
+                    isOpen={true}
+                    close={(): void => setAlert(undefined)}
                     dataTestid={`snackbar-alert-${alert}`}
                     heading={OnboardingStatusLookup()[alert].header}
                   >

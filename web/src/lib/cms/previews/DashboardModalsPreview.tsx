@@ -4,9 +4,9 @@ import { ConfigContext } from "@/contexts/configContext";
 import { PreviewProps } from "@/lib/cms/helpers/previewHelpers";
 import { usePreviewConfig } from "@/lib/cms/helpers/usePreviewConfig";
 import { usePreviewRef } from "@/lib/cms/helpers/usePreviewRef";
-import { useState } from "react";
+import { ReactElement, useState } from "react";
 
-const DashboardModalsPreview = (props: PreviewProps) => {
+const DashboardModalsPreview = (props: PreviewProps): ReactElement => {
   const { config, setConfig } = usePreviewConfig(props);
   const ref = usePreviewRef(props);
 
@@ -15,21 +15,11 @@ const DashboardModalsPreview = (props: PreviewProps) => {
 
   return (
     <ConfigContext.Provider value={{ config, setOverrides: setConfig }}>
-      <button
-        className="margin-2"
-        onClick={() => {
-          return setCongratsModalOpen(true);
-        }}
-      >
+      <button className="margin-2" onClick={(): void => setCongratsModalOpen(true)}>
         Open Congratulatory Modal
       </button>
 
-      <button
-        className="margin-2"
-        onClick={() => {
-          return setSectorModalOpen(true);
-        }}
-      >
+      <button className="margin-2" onClick={(): void => setSectorModalOpen(true)}>
         Open Sector Modal
       </button>
 
@@ -37,17 +27,13 @@ const DashboardModalsPreview = (props: PreviewProps) => {
         <CongratulatoryModal
           nextSectionType="START"
           open={congratsModalOpen}
-          handleClose={() => {
-            return setCongratsModalOpen(false);
-          }}
+          handleClose={(): void => setCongratsModalOpen(false)}
         />
 
         <SectorModal
           open={sectorModalOpen}
-          onContinue={() => {}}
-          handleClose={() => {
-            return setSectorModalOpen(false);
-          }}
+          onContinue={(): void => {}}
+          handleClose={(): void => setSectorModalOpen(false)}
         />
       </div>
     </ConfigContext.Provider>

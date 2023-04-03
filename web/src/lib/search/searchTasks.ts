@@ -2,7 +2,7 @@ import { findMatchInBlock, findMatchInLabelledText } from "@/lib/search/helpers"
 import { Match } from "@/lib/search/typesForSearch";
 import { Task } from "@/lib/types/types";
 
-export const searchTasks = (tasks: Task[], term: string) => {
+export const searchTasks = (tasks: Task[], term: string): Match[] => {
   const matches: Match[] = [];
 
   for (const task of tasks) {

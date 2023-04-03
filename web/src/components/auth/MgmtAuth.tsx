@@ -1,6 +1,6 @@
 import * as apiClient from "@/lib/api-client/apiClient";
 import { TextField } from "@mui/material";
-import { ChangeEvent, KeyboardEvent } from "react";
+import { ChangeEvent, KeyboardEvent, ReactElement } from "react";
 
 interface Props {
   password: string;
@@ -8,7 +8,7 @@ interface Props {
   setIsAuthed: (value: boolean) => void;
 }
 
-export const MgmtAuth = (props: Props) => {
+export const MgmtAuth = (props: Props): ReactElement => {
   const { password } = props;
 
   const handleKeyPress = (event: KeyboardEvent<HTMLDivElement>): void => {

@@ -69,7 +69,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
       maxLen: number;
       labelWhenMissing: string;
       dataField: keyof T;
-    }) => {
+    }): { label: string; invalid: boolean } => {
       const exists = !!data[params.dataField];
       const isTooLong = (data[params.dataField] as string)?.length > params.maxLen;
       let label = "";
@@ -157,7 +157,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.open]);
 
-  const checkBoxCheck = (checked: boolean) => {
+  const checkBoxCheck = (checked: boolean): void => {
     setUseDefaultAddress(checked);
     if (checked) {
       const data = {
@@ -180,7 +180,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
     return isCheckboxChecked && hasValue;
   };
 
-  const onValidation = (fieldName: string) => {
+  const onValidation = (fieldName: string): void => {
     setAddressErrorMap({ ...addressErrorMap, [fieldName]: getErrorStateForField(fieldName as ErrorFields) });
   };
 
@@ -237,9 +237,7 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
               control={
                 <Checkbox
                   checked={useDefaultAddress}
-                  onChange={(event) => {
-                    return checkBoxCheck(event.target.checked);
-                  }}
+                  onChange={(event): void => checkBoxCheck(event.target.checked)}
                 />
               }
             />
@@ -258,8 +256,8 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
             </b>
             <GenericTextField
               value={addressData.name}
-              handleChange={(value: string) => {
-                return setAddressData((prevAddressData) => {
+              handleChange={(value: string): void => {
+                setAddressData((prevAddressData) => {
                   return { ...prevAddressData, name: value };
                 });
               }}
@@ -282,8 +280,8 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
             <GenericTextField
               fieldName="addressLine1"
               value={addressData.addressLine1}
-              handleChange={(value: string) => {
-                return setAddressData((prevAddressData) => {
+              handleChange={(value: string): void => {
+                setAddressData((prevAddressData) => {
                   return { ...prevAddressData, addressLine1: value };
                 });
               }}
@@ -312,8 +310,8 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
               onValidation={onValidation}
               disabled={useDefaultAddress}
               autoComplete="address-line2"
-              handleChange={(value: string) => {
-                return setAddressData((prevAddressData) => {
+              handleChange={(value: string): void => {
+                setAddressData((prevAddressData) => {
                   return { ...prevAddressData, addressLine2: value };
                 });
               }}
@@ -339,8 +337,8 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
                     value={addressData.addressCity}
                     disabled={shouldBeDisabled("addressCity")}
                     required={true}
-                    handleChange={(value: string) => {
-                      return setAddressData((prevAddressData) => {
+                    handleChange={(value: string): void => {
+                      setAddressData((prevAddressData) => {
                         return { ...prevAddressData, addressCity: value };
                       });
                     }}
@@ -367,8 +365,8 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
                   fieldName="addressState"
                   value={addressData.addressState?.name ?? ""}
                   validationText={addressErrorMap["addressState"].label}
-                  onSelect={(value: StateObject | undefined) => {
-                    return setAddressData((prevAddressData) => {
+                  onSelect={(value: StateObject | undefined): void => {
+                    setAddressData((prevAddressData) => {
                       return { ...prevAddressData, addressState: value };
                     });
                   }}
@@ -392,8 +390,8 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
                 fieldName={"addressZipCode"}
                 autoComplete="postal-code"
                 error={addressErrorMap["addressZipCode"].invalid}
-                handleChange={(value: string) => {
-                  return setAddressData((prevAddressData) => {
+                handleChange={(value: string): void => {
+                  setAddressData((prevAddressData) => {
                     return { ...prevAddressData, addressZipCode: value };
                   });
                 }}

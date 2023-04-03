@@ -3,7 +3,7 @@ import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
 import { formationTaskId } from "@businessnjgovnavigator/shared/index";
-import { ReactElement, useContext } from "react";
+import { ReactElement, ReactNode, useContext } from "react";
 
 export const ProfileNexusBusinessNameField = (): ReactElement => {
   const { Config } = useConfig();
@@ -16,7 +16,7 @@ export const ProfileNexusBusinessNameField = (): ReactElement => {
       fieldName: "nexusBusinessName",
     });
 
-  const renderUserEmptyBusinessName = () => {
+  const renderUserEmptyBusinessName = (): ReactNode => {
     return (
       <div>
         <div className="flex">
@@ -30,7 +30,7 @@ export const ProfileNexusBusinessNameField = (): ReactElement => {
     );
   };
 
-  const renderUserBusinessName = () => {
+  const renderUserBusinessName = (): ReactNode => {
     return (
       <div>
         <div className="flex">

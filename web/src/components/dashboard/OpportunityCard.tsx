@@ -43,7 +43,7 @@ export const OpportunityCard = (props: Props): ReactElement => {
     return userData.preferences[property].includes(props.opportunity.id);
   };
 
-  const hideSelf = async () => {
+  const hideSelf = async (): Promise<void> => {
     if (!userData) {
       return;
     }
@@ -57,7 +57,7 @@ export const OpportunityCard = (props: Props): ReactElement => {
     });
   };
 
-  const unhideSelf = async () => {
+  const unhideSelf = async (): Promise<void> => {
     if (!userData) {
       return;
     }
@@ -85,8 +85,8 @@ export const OpportunityCard = (props: Props): ReactElement => {
         <div className="mla">
           <UnStyledButton
             style="narrow-light"
-            onClick={() => {
-              return isHidden() ? unhideSelf() : hideSelf();
+            onClick={(): void => {
+              isHidden() ? unhideSelf() : hideSelf();
             }}
           >
             <div className="fdr fac">

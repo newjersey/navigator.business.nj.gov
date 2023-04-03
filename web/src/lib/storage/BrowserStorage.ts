@@ -27,14 +27,14 @@ export const BrowserStorageFactory = (type?: StorageType): BrowserStorage => {
     return false;
   };
 
-  const keys = () => {
+  const keys = (): string[] => {
     return [...Array(window[storageType].length)].map((_, i) => {
       return window[storageType].key(i);
     }) as string[];
   };
 
-  const clear = () => {
-    return window[storageType].clear();
+  const clear = (): void => {
+    window[storageType].clear();
   };
 
   const _delete = (key: string): void => {

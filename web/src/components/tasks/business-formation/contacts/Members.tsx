@@ -45,7 +45,7 @@ export const Members = (): ReactElement => {
       createEmptyAddress={createEmptyFormationMember}
       fieldName={"members"}
       addressData={state.formationFormData.members ?? []}
-      setData={(members) => {
+      setData={(members): void => {
         setFormationFormData((previousFormationFormData) => {
           return { ...previousFormationFormData, members };
         });

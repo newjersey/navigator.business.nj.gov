@@ -15,7 +15,7 @@ export const SidebarCardFundingNudge = (props: Props): ReactElement => {
   const router = useRouter();
   const { userData, update } = useUserData();
 
-  const updateUserToUpAndRunning = async () => {
+  const updateUserToUpAndRunning = async (): Promise<void> => {
     if (!userData) {
       return;
     }
@@ -29,7 +29,7 @@ export const SidebarCardFundingNudge = (props: Props): ReactElement => {
     routeShallowWithQuery(router, QUERIES.fromFunding, "true");
   };
 
-  const onClick = async () => {
+  const onClick = async (): Promise<void> => {
     if (!userData) {
       return;
     }
@@ -44,9 +44,7 @@ export const SidebarCardFundingNudge = (props: Props): ReactElement => {
     <>
       <SectorModal
         open={modalOpen}
-        handleClose={() => {
-          return setModalOpen(false);
-        }}
+        handleClose={(): void => setModalOpen(false)}
         onContinue={updateUserToUpAndRunning}
       />
       <SidebarCardGeneric

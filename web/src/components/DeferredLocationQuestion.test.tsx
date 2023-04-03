@@ -52,7 +52,7 @@ describe("<DeferredLocationQuestion />", () => {
     initialUserData?: UserData;
     innerContent?: string;
     municipalities?: Municipality[];
-  }) => {
+  }): void => {
     render(
       withRoadmap({
         component: (
@@ -90,7 +90,7 @@ describe("<DeferredLocationQuestion />", () => {
     const absecon = generateMunicipality({ displayName: "Absecon" });
     const userData = generateUserData({ profileData: generateProfileData({ municipality: undefined }) });
 
-    const selectNewarkAndSave = async () => {
+    const selectNewarkAndSave = async (): Promise<void> => {
       renderComponent({
         initialUserData: userData,
         innerContent: "inner-content",

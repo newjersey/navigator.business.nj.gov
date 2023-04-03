@@ -35,19 +35,19 @@ export const OnboardingNameAndEmail = <T,>(props: FormContextFieldProps<T>): Rea
     NO_ERROR: "",
   };
 
-  const updateEmailState = (value: string) => {
+  const updateEmailState = (value: string): void => {
     state.user && setUser({ ...state.user, email: value });
   };
 
-  const handleUserTesting = (value: boolean) => {
+  const handleUserTesting = (value: boolean): void => {
     state.user && setUser({ ...state.user, userTesting: value });
   };
 
-  const handleNewsletter = (value: boolean) => {
+  const handleNewsletter = (value: boolean): void => {
     state.user && setUser({ ...state.user, receiveNewsletter: value });
   };
 
-  const handleName = (value: string) => {
+  const handleName = (value: string): void => {
     state.user && setUser({ ...state.user, name: value });
   };
 
@@ -85,12 +85,10 @@ export const OnboardingNameAndEmail = <T,>(props: FormContextFieldProps<T>): Rea
           fieldName={"email"}
           error={isFormFieldInValid}
           handleChange={handleEmail()}
-          onValidation={(_, invalid) => {
-            return Validate(invalid);
-          }}
+          onValidation={(_, invalid): void => Validate(invalid)}
           validationText={Config.selfRegistration.errorTextEmailsNotMatching}
           required={true}
-          additionalValidationIsValid={(value) => {
+          additionalValidationIsValid={(value): boolean => {
             return confirmEmail ? value === confirmEmail : true && validateEmail(value);
           }}
         />
@@ -101,11 +99,9 @@ export const OnboardingNameAndEmail = <T,>(props: FormContextFieldProps<T>): Rea
           value={confirmEmail}
           error={isFormFieldInValid}
           handleChange={handleEmail(true)}
-          onValidation={(_, invalid) => {
-            return Validate(invalid);
-          }}
+          onValidation={(_, invalid): void => Validate(invalid)}
           required={true}
-          additionalValidationIsValid={(value) => {
+          additionalValidationIsValid={(value): boolean => {
             return value === email && validateEmail(value);
           }}
           validationText={Config.selfRegistration.errorTextEmailsNotMatching}
@@ -118,9 +114,7 @@ export const OnboardingNameAndEmail = <T,>(props: FormContextFieldProps<T>): Rea
           control={
             <Checkbox
               checked={state.user?.receiveNewsletter}
-              onChange={(event) => {
-                return handleNewsletter(event.target.checked);
-              }}
+              onChange={(event): void => handleNewsletter(event.target.checked)}
               id="newsletterCheckbox"
             />
           }
@@ -130,9 +124,7 @@ export const OnboardingNameAndEmail = <T,>(props: FormContextFieldProps<T>): Rea
           control={
             <Checkbox
               checked={state.user?.userTesting}
-              onChange={(event) => {
-                return handleUserTesting(event.target.checked);
-              }}
+              onChange={(event): void => handleUserTesting(event.target.checked)}
               id="contactMeCheckbox"
             />
           }

@@ -30,7 +30,7 @@ export const sortFilterFilingsWithinAYear = (filings: TaxFiling[], year: string)
   return sortFilingsEarliestToLatest(upcomingDeadlinesWithinAYear(filings, year));
 };
 
-export const isCalendarMonthLessThanCurrentMonth = (month: number) => {
+export const isCalendarMonthLessThanCurrentMonth = (month: number): boolean => {
   const date = getJanOfYear().add(month, "months");
   return date.month() < getCurrentDate().month();
 };

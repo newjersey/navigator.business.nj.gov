@@ -22,7 +22,7 @@ import {
   SignerTitle,
 } from "@businessnjgovnavigator/shared";
 import { FormHelperText, MenuItem, Select, useMediaQuery } from "@mui/material";
-import { ChangeEvent, ReactElement, useContext, useMemo } from "react";
+import { ChangeEvent, ReactElement, ReactNode, useContext, useMemo } from "react";
 
 export const Signatures = (): ReactElement => {
   const FIELD_NAME = "signers";
@@ -60,7 +60,7 @@ export const Signatures = (): ReactElement => {
         });
   });
 
-  const addSignerField = () => {
+  const addSignerField = (): void => {
     setFormationFormData((previousFormationData) => {
       return {
         ...previousFormationData,
@@ -72,7 +72,7 @@ export const Signatures = (): ReactElement => {
     });
   };
 
-  const removeSigner = (index: number) => {
+  const removeSigner = (index: number): void => {
     const signers = [...(state.formationFormData.signers ?? [])];
     signers.splice(index, 1);
 
@@ -126,7 +126,7 @@ export const Signatures = (): ReactElement => {
     });
   };
 
-  const renderSignatureColumn = ({ index }: { index: number }) => {
+  const renderSignatureColumn = ({ index }: { index: number }): ReactNode => {
     if (!state.formationFormData.signers) {
       return;
     }
@@ -150,8 +150,8 @@ export const Signatures = (): ReactElement => {
         >
           <ValidatedCheckbox
             id={index ? `signature-checkbox-signers-${index}` : `signature-checkbox-signers`}
-            onChange={(event) => {
-              return handleSignerCheckbox(event, index);
+            onChange={(event): void => {
+              handleSignerCheckbox(event, index);
             }}
             checked={checked}
             error={doesFieldHaveError(FIELD_NAME) && !checked}
@@ -161,7 +161,13 @@ export const Signatures = (): ReactElement => {
     );
   };
 
-  const renderDeleteColumn = ({ visible, onClick }: { visible: boolean; onClick?: () => void }) => {
+  const renderDeleteColumn = ({
+    visible,
+    onClick,
+  }: {
+    visible: boolean;
+    onClick?: () => void;
+  }): ReactNode => {
     return (
       <div className="grid-col-auto padding-left-1 flex-column flex-align-center flex-justify-center">
         <div style={{ height: "56px" }} className="display-flex flex-column flex-justify-center">
@@ -185,7 +191,7 @@ export const Signatures = (): ReactElement => {
 
   const hasError = doesFieldHaveError(FIELD_NAME);
 
-  const getTypeField = (index: number) => {
+  const getTypeField = (index: number): ReactNode => {
     if (!state.formationFormData.signers) return;
     return (
       <>
@@ -202,14 +208,14 @@ export const Signatures = (): ReactElement => {
           error={hasError && !state.formationFormData.signers[index]?.title}
           displayEmpty
           value={state.formationFormData.signers[index]?.title ?? ""}
-          onChange={(event) => {
+          onChange={(event): void => {
             handleTypeChange(event.target.value as SignerTitle, index);
           }}
           inputProps={{
             "aria-label": `Signer title ${index}`,
             "data-testid": `signer-title-${index}`,
           }}
-          renderValue={(selected) => {
+          renderValue={(selected): ReactNode => {
             if (!selected) {
               return <></>;
             }
@@ -234,7 +240,7 @@ export const Signatures = (): ReactElement => {
     );
   };
 
-  const getSignatureField = (index: number) => {
+  const getSignatureField = (index: number): ReactNode => {
     if (!state.formationFormData.signers) {
       return;
     }
@@ -260,11 +266,9 @@ export const Signatures = (): ReactElement => {
         <GenericTextField
           noValidationMargin
           value={state.formationFormData.signers[index].name}
-          handleChange={(value: string) => {
-            return handleSignerChange(value, index);
-          }}
+          handleChange={(value: string): void => handleSignerChange(value, index)}
           error={hasError && doesRowHaveError(index)}
-          onValidation={() => {
+          onValidation={(): void => {
             setFieldsInteracted([FIELD_NAME]);
           }}
           validationText={getInlineValidationText()}
@@ -278,7 +282,7 @@ export const Signatures = (): ReactElement => {
     );
   };
 
-  const doesRowHaveError = (index: number) => {
+  const doesRowHaveError = (index: number): boolean => {
     if (!state.formationFormData.signers || state.formationFormData.signers.length === 0) {
       return false;
     }
@@ -374,9 +378,7 @@ export const Signatures = (): ReactElement => {
                     {isTabletAndUp &&
                       renderDeleteColumn({
                         visible: true,
-                        onClick: () => {
-                          return removeSigner(index);
-                        },
+                        onClick: (): void => removeSigner(index),
                       })}
                   </div>
                   {!isTabletAndUp && (
@@ -384,9 +386,7 @@ export const Signatures = (): ReactElement => {
                       style="tertiary"
                       className="margin-y-1"
                       underline
-                      onClick={() => {
-                        return removeSigner(index);
-                      }}
+                      onClick={(): void => removeSigner(index)}
                     >
                       {Config.formation.fields.signers.deleteTextMobile}
                     </UnStyledButton>

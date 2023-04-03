@@ -41,7 +41,7 @@ export const useMountEffectWhenDefined = (fun: () => void, thingToBeDefined: unk
   }, [thingToBeDefined, fun]);
 };
 
-export const useScrollToPathAnchor = () => {
+export const useScrollToPathAnchor = (): void => {
   useEffect(() => {
     const path = window.location.hash;
     if (path && path.includes("#")) {
@@ -94,7 +94,7 @@ export const scrollToTop = (props?: { smooth?: boolean }): void => {
 export const scrollToTopOfElement = (
   element: HTMLDivElement | null,
   { isDesktop }: { isDesktop: boolean }
-) => {
+): void => {
   let y = 0;
   if (element) {
     y = window.scrollY + element.getBoundingClientRect().top;
@@ -174,7 +174,7 @@ export function isUserData(data: UserData | ProfileData): data is UserData {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const flattenObject = (obj: any) => {
+export const flattenObject = (obj: any): any => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const flattened: any = {};
 

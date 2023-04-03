@@ -1,7 +1,11 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
-import { getEssentialQuestion, hasEssentialQuestion } from "@/lib/domain-logic/essentialQuestions";
+import {
+  EssentialQuestions,
+  getEssentialQuestion,
+  hasEssentialQuestion,
+} from "@/lib/domain-logic/essentialQuestions";
 import { ROUTES } from "@/lib/domain-logic/routes";
 import { camelCaseToKebabCase } from "@/lib/utils/cases-helpers";
 import Onboarding from "@/pages/onboarding";
@@ -19,7 +23,10 @@ import {
   Municipality,
   UserData,
 } from "@businessnjgovnavigator/shared/";
-import { industrySpecificDataChoices } from "@businessnjgovnavigator/shared/profileData";
+import {
+  emptyIndustrySpecificData,
+  industrySpecificDataChoices,
+} from "@businessnjgovnavigator/shared/profileData";
 import { createTheme, ThemeProvider } from "@mui/material";
 import {
   act,
@@ -88,30 +95,30 @@ export type PageHelpers = {
 };
 
 export const createPageHelpers = (): PageHelpers => {
-  const fillText = (label: string, value: string) => {
+  const fillText = (label: string, value: string): void => {
     const item = screen.getByLabelText(label);
     fireEvent.change(item, { target: { value: value } });
     fireEvent.blur(item);
   };
 
-  const selectDate = (label: string, value: DateObject) => {
+  const selectDate = (label: string, value: DateObject): void => {
     fillText(label, value.format("MM/YYYY"));
     fireEvent.blur(screen.getByLabelText("Date of formation"));
   };
 
-  const selectByValue = (label: string, value: string) => {
+  const selectByValue = (label: string, value: string): void => {
     fireEvent.mouseDown(screen.getByLabelText(label));
     const listbox = within(screen.getByRole("listbox"));
     fireEvent.click(listbox.getByTestId(value));
   };
 
-  const selectByText = (label: string, value: string) => {
+  const selectByText = (label: string, value: string): void => {
     fireEvent.mouseDown(screen.getByLabelText(label));
     const listbox = within(screen.getByRole("listbox"));
     fireEvent.click(listbox.getByText(value));
   };
 
-  const chooseRadio = (value: string) => {
+  const chooseRadio = (value: string): void => {
     fireEvent.click(screen.getByTestId(value));
   };
 
@@ -164,7 +171,7 @@ export const createPageHelpers = (): PageHelpers => {
       ?.value;
   };
 
-  const visitStep = async (step: number) => {
+  const visitStep = async (step: number): Promise<void> => {
     act(() => {
       return clickNext();
     });
@@ -175,11 +182,14 @@ export const createPageHelpers = (): PageHelpers => {
     expect(screen.getByTestId(`step-${step}`)).toBeInTheDocument();
   };
 
-  const checkByLabelText = (label: string) => {
+  const checkByLabelText = (label: string): void => {
     fireEvent.click(screen.getByLabelText(label));
   };
 
-  const chooseEssentialQuestionRadio = (industryId: string, indexOfIndustrySpecificDataChoices: number) => {
+  const chooseEssentialQuestionRadio = (
+    industryId: string,
+    indexOfIndustrySpecificDataChoices: number
+  ): void => {
     const essentialQuestions = getEssentialQuestion(industryId);
 
     for (const essentialQuestion of essentialQuestions) {
@@ -223,7 +233,7 @@ export const runSelfRegPageTests = ({
 }: {
   businessPersona: BusinessPersona;
   selfRegPage: string;
-}) => {
+}): void => {
   const user = createEmptyUser();
   const userData = generateUserData({
     user,
@@ -472,4 +482,16 @@ export const industryIdsWithOutEssentialQuestion = industriesWithOutEssentialQue
 
 export const industryIdsWithEssentialQuestion = industriesWithEssentialQuestion.map(
   (industry) => industry.id
+);
+
+export const industryIdsWithRequiredEssentialQuestion = industryIdsWithEssentialQuestion.filter(
+  (industry) => {
+    const applicableQuestions = EssentialQuestions.filter((question) =>
+      question.isQuestionApplicableToIndustryId(industry)
+    );
+    const someQuestionsStartAsUndefined = applicableQuestions.some((question) => {
+      return emptyIndustrySpecificData[question.fieldName] === undefined;
+    });
+    return someQuestionsStartAsUndefined;
+  }
 );

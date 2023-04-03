@@ -166,7 +166,7 @@ describe("<MainBusinessAddressNj />", () => {
   });
 });
 
-const attemptApiSubmission = async (page: FormationPageHelpers) => {
+const attemptApiSubmission = async (page: FormationPageHelpers): Promise<void> => {
   await page.stepperClickToReviewStep();
   await page.clickSubmit();
   await page.stepperClickToBusinessStep();

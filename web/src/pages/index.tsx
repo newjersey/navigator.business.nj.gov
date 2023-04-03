@@ -96,7 +96,7 @@ const Home = (): ReactElement => {
     imageSrc: string,
     imageAlt: string,
     reverseOrder?: boolean
-  ) => {
+  ): ReactElement => {
     return (
       <div className={`${isDesktopAndUp ? "landing-two-column-row" : "landing-one-column-row"}`}>
         <div className="grid-row">

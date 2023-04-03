@@ -19,7 +19,7 @@ describe("<SectionAccordion />", () => {
     useMockRoadmap({});
   });
 
-  const statefulRender = (type: SectionType, userData: UserData) => {
+  const statefulRender = (type: SectionType, userData: UserData): void => {
     render(
       <WithStatefulUserData initialUserData={userData}>
         <SectionAccordion sectionType={type}>BODY CONTENT</SectionAccordion>

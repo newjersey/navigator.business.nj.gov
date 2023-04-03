@@ -31,7 +31,7 @@ export const ThreeYearSelector = (props: Props): ReactElement => {
         disableFocusRipple={props.years.indexOf(props.activeYear) === 0}
         disabled={props.years.indexOf(props.activeYear) === 0}
         disableTouchRipple={props.years.indexOf(props.activeYear) === 0}
-        onClick={() => {
+        onClick={(): void => {
           props.onChange(props.years[props.years.indexOf(props.activeYear) - 1]);
         }}
       >
@@ -50,7 +50,7 @@ export const ThreeYearSelector = (props: Props): ReactElement => {
         name="year-selector"
         dropdownClassName="padding-x-05 bg-transparent"
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        wrapper={(props: { children: ReactNode; className?: string; [key: string]: any }) => (
+        wrapper={(props: { children: ReactNode; className?: string; [key: string]: any }): JSX.Element => (
           <div
             {...props}
             className={`radius-lg font-body-2xs text-normal margin-x-05 usa-button padding-05 ${props.className}`}
@@ -66,7 +66,7 @@ export const ThreeYearSelector = (props: Props): ReactElement => {
         disableFocusRipple={props.years.indexOf(props.activeYear) === 2}
         disabled={props.years.indexOf(props.activeYear) === 2}
         disableTouchRipple={props.years.indexOf(props.activeYear) === 2}
-        onClick={() => {
+        onClick={(): void => {
           props.onChange(props.years[props.years.indexOf(props.activeYear) + 1]);
         }}
       >

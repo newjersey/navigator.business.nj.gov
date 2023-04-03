@@ -14,7 +14,7 @@ import { getCurrentDate, parseDate } from "@businessnjgovnavigator/shared/index"
 import { useRouter } from "next/router";
 import { ReactElement, useContext, useEffect, useRef, useState } from "react";
 
-const isBeforeTheFollowingSaturday = (registeredISO: string | undefined) => {
+const isBeforeTheFollowingSaturday = (registeredISO: string | undefined): boolean => {
   const sundayAfterRegisteredDate = parseDate(registeredISO).day(7);
   return getCurrentDate().isBefore(sundayAfterRegisteredDate);
 };
@@ -33,7 +33,7 @@ export const FilingsCalendarTaxAccess = (): ReactElement => {
     if (!userData) {
       return;
     }
-    (async () => {
+    (async (): Promise<void> => {
       if (userData.taxFilingData.registeredISO) {
         const updatedUserData = await postTaxFilingsLookup({
           businessName: userData.taxFilingData.businessName as string,
@@ -66,7 +66,7 @@ export const FilingsCalendarTaxAccess = (): ReactElement => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [registrationModalIsVisible]);
 
-  const openRegisterOrTaxModal = () => {
+  const openRegisterOrTaxModal = (): void => {
     if (!userData) {
       return;
     }
@@ -112,10 +112,8 @@ export const FilingsCalendarTaxAccess = (): ReactElement => {
         <>
           <TaxFilingLookupModal
             isOpen={showTaxModal}
-            close={() => {
-              return setShowTaxModal(false);
-            }}
-            onSuccess={() => {
+            close={(): void => setShowTaxModal(false)}
+            onSuccess={(): void => {
               setShowTaxModal(false);
               setTimeout(() => {
                 setShowAlert(true);
@@ -148,9 +146,7 @@ export const FilingsCalendarTaxAccess = (): ReactElement => {
       <SnackbarAlert
         variant={"success"}
         isOpen={showAlert}
-        close={() => {
-          return setShowAlert(false);
-        }}
+        close={(): void => setShowAlert(false)}
         heading={Config.taxCalendar.snackbarSuccessHeader}
         dataTestid={"tax-success"}
       >

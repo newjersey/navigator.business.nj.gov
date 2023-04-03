@@ -7,7 +7,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { createProfileFieldErrorMap } from "@/lib/types/types";
 import { getFlow } from "@/lib/utils/helpers";
 import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/profileData";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactElement, ReactNode, useEffect, useState } from "react";
 
 interface Props {
   children: ReactNode;
@@ -16,7 +16,7 @@ interface Props {
   isTaskPage?: boolean;
 }
 
-export const DeferredOnboardingQuestion = (props: Props) => {
+export const DeferredOnboardingQuestion = (props: Props): ReactElement => {
   const [profileData, setProfileData] = useState<ProfileData>(createEmptyProfileData());
   const { userData, updateQueue } = useUserData();
   const { Config } = useConfig();
@@ -91,9 +91,9 @@ export const DeferredOnboardingQuestion = (props: Props) => {
             profileData: profileData,
             flow: getFlow(profileData),
           },
-          setUser: () => {},
+          setUser: (): void => {},
           setProfileData,
-          onBack: () => {},
+          onBack: (): void => {},
         }}
       >
         {props.isTaskPage ? onTaskPage : onDashboard}

@@ -7,7 +7,7 @@ import {
 export const isMunicipalityRequired = (params: {
   legalStructureId: string | undefined;
   operatingPhase: OperatingPhaseId;
-}) => {
+}): boolean => {
   if (!params.legalStructureId) {
     return true;
   }

@@ -7,14 +7,14 @@ import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { camelCaseToSentence } from "@/lib/utils/cases-helpers";
 import { FormationFields, FormationTextField } from "@businessnjgovnavigator/shared";
 import { FormControl, FormControlLabel, FormHelperText, Radio, RadioGroup } from "@mui/material";
-import { ReactElement, useContext } from "react";
+import { ReactElement, ReactNode, useContext } from "react";
 
 export const PartnershipRights = (): ReactElement => {
   const { state, setFormationFormData, setFieldsInteracted } = useContext(BusinessFormationContext);
   const { Config } = useConfig();
   const { doesFieldHaveError } = useFormationErrors();
 
-  const getTextField = (fieldName: FormationTextField) => {
+  const getTextField = (fieldName: FormationTextField): ReactNode => {
     return (
       <div className="margin-top-1">
         <div className="grid-row">
@@ -48,7 +48,7 @@ export const PartnershipRights = (): ReactElement => {
     );
   };
 
-  const getRadio = (fieldName: FormationFields, title: string) => {
+  const getRadio = (fieldName: FormationFields, title: string): ReactNode => {
     const hasError = doesFieldHaveError(fieldName);
     return (
       <WithErrorBar className="margin-top-2" hasError={hasError} type="ALWAYS">
@@ -58,7 +58,7 @@ export const PartnershipRights = (): ReactElement => {
             aria-label={camelCaseToSentence(fieldName)}
             name={camelCaseToSentence(fieldName)}
             value={state.formationFormData[fieldName]?.toString() ?? ""}
-            onChange={(e) => {
+            onChange={(e): void => {
               setFormationFormData({
                 ...state.formationFormData,
                 [fieldName]: JSON.parse(e.target.value),
