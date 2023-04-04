@@ -319,6 +319,15 @@ const ProfilePage = (props: Props): ReactElement => {
         </ProfileField>
 
         <ProfileField
+          fieldName="dateOfFormation"
+          isVisible={!!userData?.profileData.dateOfFormation}
+          locked={shouldLockFormationFields}
+          lockedValueFormatter={formatDate}
+        >
+          <ProfileDateOfFormation futureAllowed={true} />
+        </ProfileField>
+
+        <ProfileField
           fieldName="legalStructureId"
           locked={shouldLockFormationFields}
           lockedValueFormatter={(value: string): string => LookupLegalStructureById(value).name}
