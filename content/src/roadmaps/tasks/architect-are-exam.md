@@ -3,7 +3,7 @@ urlSlug: architect-are-exam
 filename: architect-are-exam
 name: Take the Architect’s Registration Exam (ARE)
 id: architect-are-exam
-callToActionLink: https://newjersey.mylicense.com/eGov/Login.aspx
+callToActionLink: https://www.njconsumeraffairs.gov/arch/Pages/applications.aspx
 callToActionText: Apply for the ARE
 issuingAgency: New Jersey Division of Consumer Affairs Board of Architects
 ---
@@ -14,11 +14,11 @@ You can only practice as an architect once you passed the Architect’s Registra
 
 ### Eligibility Criteria
 
-- An approved Architect License application
+- An approved architect license application
 
 ### Application Requirements
 
-- Pay any associated fees
+- Applicable fees paid
 
 > **Once completed, you will have:**
 >
