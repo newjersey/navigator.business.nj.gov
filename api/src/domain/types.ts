@@ -4,7 +4,7 @@ import { UserFeedbackRequest, UserIssueRequest } from "@shared/feedbackRequest";
 import { FormationSubmitResponse, GetFilingResponse } from "@shared/formationData";
 import { LicenseEntity, LicenseStatusResult, NameAndAddress } from "@shared/license";
 import { ProfileData } from "@shared/profileData";
-import { TaxFiling, TaxFilingState } from "@shared/taxFiling";
+import { TaxFiling, TaxFilingLookupState, TaxFilingOnboardingState } from "@shared/taxFiling";
 import { UserData } from "@shared/userData";
 import * as https from "node:https";
 
@@ -77,11 +77,11 @@ export type TaxFilingResult = { Content: string; Id: string; Values: string[] };
 export type TaxIdentifierToIdsRecord = Record<string, string[]>;
 
 export type TaxFilingOnboardingResponse = {
-  state: TaxFilingState;
+  state: TaxFilingOnboardingState;
   errorField?: "businessName" | "formFailure";
 };
 export interface TaxFilingLookupResponse {
-  state: TaxFilingState;
+  state: TaxFilingLookupState;
   filings: TaxFiling[];
 }
 export type SelfRegResponse = {

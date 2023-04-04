@@ -60,39 +60,11 @@ export const taxFilingsInterfaceFactory = (apiTaxFilingClient: TaxFilingClient):
     });
 
     switch (response.state) {
-      case "PENDING": {
-        return {
-          ...request.userData,
-          taxFilingData: {
-            ...request.userData.taxFilingData,
-            lastUpdatedISO: new Date(Date.now()).toISOString(),
-            registeredISO: new Date(Date.now()).toISOString(),
-            errorField: response.errorField,
-            state: response.state,
-            businessName: request.businessName,
-          },
-        };
-      }
-
       case "SUCCESS": {
         return await lookup(request);
       }
-
       case "API_ERROR":
       case "FAILED": {
-        return {
-          ...request.userData,
-          taxFilingData: {
-            ...request.userData.taxFilingData,
-            registeredISO: undefined,
-            state: response.state,
-            errorField: response.errorField,
-            businessName: request.businessName,
-          },
-        };
-      }
-
-      default: {
         return {
           ...request.userData,
           taxFilingData: {
