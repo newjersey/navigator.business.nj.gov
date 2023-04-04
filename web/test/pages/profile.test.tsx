@@ -47,9 +47,11 @@ import {
   einTaskId,
   emptyIndustrySpecificData,
   ForeignBusinessType,
+  FormationData,
   formationTaskId,
   generateMunicipality,
   getCurrentDate,
+  getCurrentDateFormatted,
   LookupIndustryById,
   LookupLegalStructureById,
   LookupOwnershipTypeById,
@@ -1366,14 +1368,23 @@ describe("profile", () => {
     });
 
     describe("Nexus Foreign Business", () => {
-      const nexusForeignBusinessProfile = (overrides: Partial<ProfileData>): UserData => {
+      const nexusForeignBusinessProfile = ({
+        profileDataOverrides,
+        formationDataOverrides,
+      }: {
+        profileDataOverrides?: Partial<ProfileData>;
+        formationDataOverrides?: Partial<FormationData>;
+      }): UserData => {
         return generateUserData({
           profileData: generateProfileData({
             businessPersona: "FOREIGN",
             foreignBusinessType: "NEXUS",
             foreignBusinessTypeIds: ["NEXUS"],
             legalStructureId: "limited-liability-company",
-            ...overrides,
+            ...profileDataOverrides,
+          }),
+          formationData: generateFormationData({
+            ...formationDataOverrides,
           }),
         });
       };
@@ -1416,7 +1427,11 @@ describe("profile", () => {
       });
 
       it("does not display out-of-state business name when SP/GP", () => {
-        renderPage({ userData: nexusForeignBusinessProfile({ legalStructureId: "sole-proprietorship" }) });
+        renderPage({
+          userData: nexusForeignBusinessProfile({
+            profileDataOverrides: { legalStructureId: "sole-proprietorship" },
+          }),
+        });
 
         expect(
           screen.queryByText(Config.profileDefaults.fields.nexusBusinessName.default.outOfStateNameHeader)
@@ -1427,15 +1442,19 @@ describe("profile", () => {
       });
 
       it("displays the user's business name if they have one", () => {
-        renderPage({ userData: nexusForeignBusinessProfile({ businessName: "Test Business" }) });
+        renderPage({
+          userData: nexusForeignBusinessProfile({ profileDataOverrides: { businessName: "Test Business" } }),
+        });
         expect(screen.getByText("Test Business")).toBeInTheDocument();
       });
 
       it("displays the user's dba name if they have one", () => {
         renderPage({
           userData: nexusForeignBusinessProfile({
-            businessName: "Test Business",
-            nexusDbaName: "DBA Name",
+            profileDataOverrides: {
+              businessName: "Test Business",
+              nexusDbaName: "DBA Name",
+            },
           }),
         });
         expect(screen.getByText("Test Business")).toBeInTheDocument();
@@ -1447,8 +1466,10 @@ describe("profile", () => {
       it("doesn't display the user's dba name if they don't have one", () => {
         renderPage({
           userData: nexusForeignBusinessProfile({
-            businessName: "Test Business",
-            nexusDbaName: "",
+            profileDataOverrides: {
+              businessName: "Test Business",
+              nexusDbaName: "",
+            },
           }),
         });
         expect(screen.getByText("Test Business")).toBeInTheDocument();
@@ -1564,6 +1585,64 @@ describe("profile", () => {
               }
             }
           });
+        });
+      });
+
+      describe("ProfileDateOfFormation", () => {
+        it("displays the date of formation input field when date of formation has been submitted", () => {
+          renderPage({
+            userData: nexusForeignBusinessProfile({
+              profileDataOverrides: {
+                dateOfFormation: getCurrentDateFormatted(defaultDateFormat),
+              },
+            }),
+          });
+          expect(
+            screen.getByText(Config.profileDefaults.fields.dateOfFormation.default.header)
+          ).toBeInTheDocument();
+        });
+
+        it("updates the date of formation to a future date", () => {
+          renderPage({
+            userData: nexusForeignBusinessProfile({
+              profileDataOverrides: {
+                dateOfFormation: getCurrentDateFormatted(defaultDateFormat),
+              },
+            }),
+          });
+
+          fireEvent.change(screen.getByLabelText("Date of formation"), { target: { value: "09/2025" } });
+          fireEvent.blur(screen.getByLabelText("Date of formation"));
+          expect(
+            screen.queryByText(Config.profileDefaults.fields.dateOfFormation.default.errorTextRequired)
+          ).not.toBeInTheDocument();
+        });
+
+        it("does not display the date of formation input field when date of formation has not been submitted", () => {
+          renderPage({
+            userData: nexusForeignBusinessProfile({
+              profileDataOverrides: {
+                dateOfFormation: undefined,
+              },
+            }),
+          });
+          expect(
+            screen.queryByText(Config.profileDefaults.fields.dateOfFormation.default.header)
+          ).not.toBeInTheDocument();
+        });
+
+        it("locks the date of formation input field when the business has successfully formed", () => {
+          renderPage({
+            userData: nexusForeignBusinessProfile({
+              profileDataOverrides: {
+                dateOfFormation: getCurrentDateFormatted(defaultDateFormat),
+              },
+              formationDataOverrides: {
+                getFilingResponse: generateGetFilingResponse({ success: true }),
+              },
+            }),
+          });
+          expect(screen.queryByLabelText("Date of formation")).not.toBeInTheDocument();
         });
       });
     });
