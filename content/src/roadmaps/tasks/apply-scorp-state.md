@@ -24,4 +24,4 @@ Filing for an `S corporation|s-corp` designation at the state level is a process
 
 > **What if I don't complete this form?**
 >
-> If you do not file for an S corp designation with the State but choose to pay taxes under this structure, you could be liable for fees associated with improperly filing taxes.
+> If you do not file for an S corp designation with the state but choose to pay taxes under this structure, you could be liable for fees associated with improperly filing taxes.
