@@ -1,5 +1,6 @@
 import { ArrowTooltip } from "@/components/ArrowTooltip";
 import { Content } from "@/components/Content";
+import { ContextualInfoButton } from "@/components/ContextualInfoButton";
 import { Icon } from "@/components/njwds/Icon";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -11,6 +12,7 @@ interface Props {
   fieldName: ProfileContentField;
   isAltDescriptionDisplayed?: boolean;
   locked?: boolean;
+  hideHeader?: boolean;
 }
 
 export const FieldLabelProfile = (props: Props): ReactElement => {
@@ -27,16 +29,26 @@ export const FieldLabelProfile = (props: Props): ReactElement => {
   const description = contentFromConfig.description;
   const altDescription = contentFromConfig.altDescription;
 
+  const showHeader = !props.hideHeader;
+
   const showDescription = !props.locked;
   const showLockedTooltip = !!props.locked;
   const showUnboldedHeader = unboldedHeader && !props.locked;
   const isHeaderInConfig = unboldedHeader || contentFromConfig.header;
+
   return (
     <>
       <div className="flex flex-row fac">
-        {isHeaderInConfig && (
+        {isHeaderInConfig && showHeader && (
           <div role="heading" aria-level={3} className="h3-styling margin-bottom-2">
-            {contentFromConfig.header}
+            {contentFromConfig.headerContextualInfo ? (
+              <ContextualInfoButton
+                text={contentFromConfig.header}
+                id={contentFromConfig.headerContextualInfo}
+              />
+            ) : (
+              contentFromConfig.header
+            )}
             {showUnboldedHeader && (
               <>
                 {" "}

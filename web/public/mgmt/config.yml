@@ -3286,11 +3286,38 @@ collections:
                         fields:
                           - { label: "Header", name: "header", widget: "string" }
                           - {
+                              label: "Contextual Info for Header",
+                              name: "headerContextualInfo",
+                              required: false,
+                              widget: "relation",
+                              collection: "contextual-information",
+                              search_fields: ["{{filename}}"],
+                              options_length: 500,
+                              value_field: "{{filename}}",
+                              display_fields: ["{{filename}}"],
+                            }
+                          - {
                               label: "Error Text (Oscar Onboarding Only)",
                               name: "errorTextRequired",
                               widget: "string",
                             }
-                          - { label: "Description", name: "description", widget: "markdown" }
+                          - { label: "Description", name: "description", widget: "markdown", required: false }
+                      - label: Onboarding Specific
+                        name: "onboarding"
+                        collapsed: false
+                        widget: object
+                        fields:
+                          - label: Default
+                            name: "default"
+                            collapsed: false
+                            widget: object
+                            fields:
+                              - {
+                                  label: "Description",
+                                  name: "description",
+                                  widget: "markdown",
+                                  required: false,
+                                }
                       - label: Overrides
                         name: "overrides"
                         collapsed: true
@@ -3314,12 +3341,39 @@ collections:
                         fields:
                           - { label: "Header", name: "header", widget: "string" }
                           - {
+                              label: "Contextual Info for Header",
+                              name: "headerContextualInfo",
+                              required: false,
+                              widget: "relation",
+                              collection: "contextual-information",
+                              search_fields: ["{{filename}}"],
+                              options_length: 500,
+                              value_field: "{{filename}}",
+                              display_fields: ["{{filename}}"],
+                            }
+                          - {
                               label: "Error Text (when not set)",
                               name: "errorTextRequired",
                               widget: "string",
                             }
-                          - { label: "Description", name: "description", widget: "markdown" }
+                          - { label: "Description", name: "description", widget: "markdown", required: false }
                           - { label: "Search Affirmation", name: "searchAffirmation", widget: "markdown" }
+                      - label: Onboarding Specific
+                        name: "onboarding"
+                        collapsed: false
+                        widget: object
+                        fields:
+                          - label: Default
+                            name: "default"
+                            collapsed: false
+                            widget: object
+                            fields:
+                              - {
+                                  label: "Description",
+                                  name: "description",
+                                  widget: "markdown",
+                                  required: false,
+                                }
                   - label: Legal Structure
                     name: legalStructureId
                     collapsed: true
@@ -3331,7 +3385,18 @@ collections:
                         widget: object
                         fields:
                           - { label: "Header", name: "header", widget: "string" }
-                          - { label: "Description", name: "description", widget: "markdown" }
+                          - {
+                              label: "Contextual Info for Header",
+                              name: "headerContextualInfo",
+                              required: false,
+                              widget: "relation",
+                              collection: "contextual-information",
+                              search_fields: ["{{filename}}"],
+                              options_length: 500,
+                              value_field: "{{filename}}",
+                              display_fields: ["{{filename}}"],
+                            }
+                          - { label: "Description", name: "description", widget: "markdown", required: false }
                           - {
                               label: "Error Text (when not selected)",
                               name: "errorTextRequired",
@@ -3369,24 +3434,40 @@ collections:
                                   name: "limited-partnership",
                                   widget: "markdown",
                                 }
-                      - label: Overrides
-                        name: "overrides"
-                        collapsed: true
+                      - label: Onboarding Specific
+                        name: "onboarding"
+                        collapsed: false
                         widget: object
                         fields:
-                          - label: OWNING
-                            name: "OWNING"
+                          - label: Default
+                            name: "default"
+                            collapsed: false
+                            widget: object
+                            fields:
+                              - {
+                                  label: "Description",
+                                  name: "description",
+                                  widget: "markdown",
+                                  required: false,
+                                }
+                          - label: Overrides
+                            name: "overrides"
                             collapsed: true
                             widget: object
                             fields:
-                              - { label: "Description", name: "description", widget: "markdown" }
-                          - label: FOREIGN
-                            name: "FOREIGN"
-                            collapsed: true
-                            widget: object
-                            fields:
-                              - { label: "Header", name: "header", widget: "string" }
-                              - { label: "Description", name: "description", widget: "markdown" }
+                              - label: OWNING
+                                name: "OWNING"
+                                collapsed: true
+                                widget: object
+                                fields:
+                                  - { label: "Description", name: "description", widget: "markdown" }
+                              - label: FOREIGN
+                                name: "FOREIGN"
+                                collapsed: true
+                                widget: object
+                                fields:
+                                  - { label: "Header", name: "header", widget: "string" }
+                                  - { label: "Description", name: "description", widget: "markdown" }
                   - label: Municipality
                     name: "municipality"
                     collapsed: true
@@ -3399,11 +3480,22 @@ collections:
                         fields:
                           - { label: "Header", name: "header", widget: "string" }
                           - {
+                              label: "Contextual Info for Header",
+                              name: "headerContextualInfo",
+                              required: false,
+                              widget: "relation",
+                              collection: "contextual-information",
+                              search_fields: ["{{filename}}"],
+                              options_length: 500,
+                              value_field: "{{filename}}",
+                              display_fields: ["{{filename}}"],
+                            }
+                          - {
                               label: "Error Text (when not set)",
                               name: "errorTextRequired",
                               widget: "string",
                             }
-                          - { label: "Description", name: "description", widget: "markdown" }
+                          - { label: "Description", name: "description", widget: "markdown", required: false }
                       - label: Overrides
                         name: "overrides"
                         collapsed: true
@@ -3433,11 +3525,50 @@ collections:
                         fields:
                           - { label: "Header", name: "header", widget: "string" }
                           - {
+                              label: "Contextual Info for Header",
+                              name: "headerContextualInfo",
+                              required: false,
+                              widget: "relation",
+                              collection: "contextual-information",
+                              search_fields: ["{{filename}}"],
+                              options_length: 500,
+                              value_field: "{{filename}}",
+                              display_fields: ["{{filename}}"],
+                            }
+                          - {
                               label: "Error Text (when not provided)",
                               name: "errorTextRequired",
                               widget: "string",
                             }
-                          - { label: "Description", name: "description", widget: "markdown" }
+                          - { label: "Description", name: "description", widget: "markdown", required: false }
+                      - label: Onboarding Specific
+                        name: "onboarding"
+                        collapsed: false
+                        widget: object
+                        fields:
+                          - label: Default
+                            name: "default"
+                            collapsed: false
+                            widget: object
+                            fields:
+                              - {
+                                  label: "Description",
+                                  name: "description",
+                                  widget: "markdown",
+                                  required: false,
+                                }
+                          - label: Overrides for Onboarding
+                            name: "overrides"
+                            collapsed: true
+                            widget: object
+                            fields:
+                              - label: OWNING
+                                name: "OWNING"
+                                collapsed: true
+                                widget: object
+                                fields:
+                                  - { label: "Description", name: "description", widget: "string" }
+
                   - label: Business Ownership
                     name: "ownershipTypeIds"
                     collapsed: true
@@ -3450,12 +3581,23 @@ collections:
                         fields:
                           - { label: "Header", name: "header", widget: "string" }
                           - {
+                              label: "Contextual Info for Header",
+                              name: "headerContextualInfo",
+                              required: false,
+                              widget: "relation",
+                              collection: "contextual-information",
+                              search_fields: ["{{filename}}"],
+                              options_length: 500,
+                              value_field: "{{filename}}",
+                              display_fields: ["{{filename}}"],
+                            }
+                          - {
                               label: "Header Not Bolded",
                               name: "headerNotBolded",
                               widget: "string",
                               required: false,
                             }
-                          - { label: "Description", name: "description", widget: "markdown" }
+                          - { label: "Description", name: "description", widget: "markdown", required: false }
                       - label: Overrides
                         name: "overrides"
                         collapsed: true
@@ -3485,11 +3627,22 @@ collections:
                         fields:
                           - { label: "Header", name: "header", widget: "string" }
                           - {
+                              label: "Contextual Info for Header",
+                              name: "headerContextualInfo",
+                              required: false,
+                              widget: "relation",
+                              collection: "contextual-information",
+                              search_fields: ["{{filename}}"],
+                              options_length: 500,
+                              value_field: "{{filename}}",
+                              display_fields: ["{{filename}}"],
+                            }
+                          - {
                               label: "Error Text (when not set)",
                               name: "errorTextRequired",
                               widget: "string",
                             }
-                          - { label: "Description", name: "description", widget: "markdown" }
+                          - { label: "Description", name: "description", widget: "markdown", required: false }
                       - label: Overrides
                         name: "overrides"
                         collapsed: true
@@ -3514,11 +3667,22 @@ collections:
                         fields:
                           - { label: "Header", name: "header", widget: "string" }
                           - {
+                              label: "Contextual Info for Header",
+                              name: "headerContextualInfo",
+                              required: false,
+                              widget: "relation",
+                              collection: "contextual-information",
+                              search_fields: ["{{filename}}"],
+                              options_length: 500,
+                              value_field: "{{filename}}",
+                              display_fields: ["{{filename}}"],
+                            }
+                          - {
                               label: "Error Text (when not selected)",
                               name: "errorTextRequired",
                               widget: "string",
                             }
-                          - { label: "Description", name: "description", widget: "markdown" }
+                          - { label: "Description", name: "description", widget: "markdown", required: false }
                           - label: Option Content
                             name: optionContent
                             collapsed: false
@@ -3554,6 +3718,17 @@ collections:
                         widget: object
                         fields:
                           - { label: "Header", name: "header", widget: "string" }
+                          - {
+                              label: "Contextual Info for Header",
+                              name: "headerContextualInfo",
+                              required: false,
+                              widget: "relation",
+                              collection: "contextual-information",
+                              search_fields: ["{{filename}}"],
+                              options_length: 500,
+                              value_field: "{{filename}}",
+                              display_fields: ["{{filename}}"],
+                            }
                           - {
                               label: "Error Text (when not selected)",
                               name: "errorTextRequired",
@@ -3595,7 +3770,18 @@ collections:
                         widget: object
                         fields:
                           - { label: "Header", name: "header", widget: "string" }
-                          - { label: "Description", name: "description", widget: "string" }
+                          - {
+                              label: "Contextual Info for Header",
+                              name: "headerContextualInfo",
+                              required: false,
+                              widget: "relation",
+                              collection: "contextual-information",
+                              search_fields: ["{{filename}}"],
+                              options_length: 500,
+                              value_field: "{{filename}}",
+                              display_fields: ["{{filename}}"],
+                            }
+                          - { label: "Description", name: "description", widget: "string", required: false }
                           - { label: "Error Text", name: "errorTextRequired", widget: "string" }
                   - label: Tax ID
                     name: taxId
@@ -3608,7 +3794,18 @@ collections:
                         widget: object
                         fields:
                           - { label: "Header", name: "header", widget: "string" }
-                          - { label: "Description", name: "description", widget: "markdown" }
+                          - {
+                              label: "Contextual Info for Header",
+                              name: "headerContextualInfo",
+                              required: false,
+                              widget: "relation",
+                              collection: "contextual-information",
+                              search_fields: ["{{filename}}"],
+                              options_length: 500,
+                              value_field: "{{filename}}",
+                              display_fields: ["{{filename}}"],
+                            }
+                          - { label: "Description", name: "description", widget: "markdown", required: false }
                           - {
                               label: "Error Text (when not entered)",
                               name: "errorTextRequired",
@@ -3630,8 +3827,24 @@ collections:
                         widget: object
                         fields:
                           - { label: "Header", name: "header", widget: "string" }
-                          - { label: "Header (not bolded)", name: "headerNotBolded", widget: "string" }
-                          - { label: "Description", name: "description", widget: "markdown" }
+                          - {
+                              label: "Header (not bolded)",
+                              name: "headerNotBolded",
+                              widget: "string",
+                              required: false,
+                            }
+                          - {
+                              label: "Contextual Info for Header",
+                              name: "headerContextualInfo",
+                              required: false,
+                              widget: "relation",
+                              collection: "contextual-information",
+                              search_fields: ["{{filename}}"],
+                              options_length: 500,
+                              value_field: "{{filename}}",
+                              display_fields: ["{{filename}}"],
+                            }
+                          - { label: "Description", name: "description", widget: "markdown", required: false }
                   - label: Employer ID
                     name: employerId
                     collapsed: true
@@ -3643,8 +3856,24 @@ collections:
                         widget: object
                         fields:
                           - { label: "Header", name: "header", widget: "string" }
-                          - { label: "Header (not bolded)", name: "headerNotBolded", widget: "string" }
-                          - { label: "Description", name: "description", widget: "markdown" }
+                          - {
+                              label: "Contextual Info for Header",
+                              name: "headerContextualInfo",
+                              required: false,
+                              widget: "relation",
+                              collection: "contextual-information",
+                              search_fields: ["{{filename}}"],
+                              options_length: 500,
+                              value_field: "{{filename}}",
+                              display_fields: ["{{filename}}"],
+                            }
+                          - {
+                              label: "Header (not bolded)",
+                              name: "headerNotBolded",
+                              widget: "string",
+                              required: false,
+                            }
+                          - { label: "Description", name: "description", widget: "markdown", required: false }
                   - label: NAICS Code
                     name: naicsCode
                     collapsed: true
@@ -3656,6 +3885,17 @@ collections:
                         widget: object
                         fields:
                           - { label: "Header", name: "header", widget: "string" }
+                          - {
+                              label: "Contextual Info for Header",
+                              name: "headerContextualInfo",
+                              required: false,
+                              widget: "relation",
+                              collection: "contextual-information",
+                              search_fields: ["{{filename}}"],
+                              options_length: 500,
+                              value_field: "{{filename}}",
+                              display_fields: ["{{filename}}"],
+                            }
                           - { label: "Edit Text", name: "editText", widget: "string" }
                           - { label: "Add Text", name: "addText", widget: "string" }
                           - {
@@ -3675,8 +3915,19 @@ collections:
                         widget: object
                         fields:
                           - { label: "Header", name: "header", widget: "string" }
+                          - {
+                              label: "Contextual Info for Header",
+                              name: "headerContextualInfo",
+                              required: false,
+                              widget: "relation",
+                              collection: "contextual-information",
+                              search_fields: ["{{filename}}"],
+                              options_length: 500,
+                              value_field: "{{filename}}",
+                              display_fields: ["{{filename}}"],
+                            }
                           - { label: "Error Text", name: "errorTextRequired", widget: "string" }
-                          - { label: "Description", name: "description", widget: "markdown" }
+                          - { label: "Description", name: "description", widget: "markdown", required: false }
                   - label: Tax PIN
                     name: taxPin
                     collapsed: true
@@ -3688,8 +3939,19 @@ collections:
                         widget: object
                         fields:
                           - { label: "Header", name: "header", widget: "string" }
+                          - {
+                              label: "Contextual Info for Header",
+                              name: "headerContextualInfo",
+                              required: false,
+                              widget: "relation",
+                              collection: "contextual-information",
+                              search_fields: ["{{filename}}"],
+                              options_length: 500,
+                              value_field: "{{filename}}",
+                              display_fields: ["{{filename}}"],
+                            }
                           - { label: "Error Text", name: "errorTextRequired", widget: "string" }
-                          - { label: "Description", name: "description", widget: "markdown" }
+                          - { label: "Description", name: "description", widget: "markdown", required: false }
                   - label: Documents
                     name: documents
                     collapsed: true
@@ -3797,9 +4059,20 @@ collections:
                         widget: object
                         fields:
                           - { label: "Header", name: "header", widget: "string" }
+                          - {
+                              label: "Contextual Info for Header",
+                              name: "headerContextualInfo",
+                              required: false,
+                              widget: "relation",
+                              collection: "contextual-information",
+                              search_fields: ["{{filename}}"],
+                              options_length: 500,
+                              value_field: "{{filename}}",
+                              display_fields: ["{{filename}}"],
+                            }
                           - { label: "Radio Button Yes Text", name: "radioButtonTrueText", widget: "string" }
                           - { label: "Radio Button No Text", name: "radioButtonFalseText", widget: "string" }
-                          - { label: "Description", name: "description", widget: "markdown" }
+                          - { label: "Description", name: "description", widget: "markdown", required: false }
                           - { label: "Alt Description", name: "altDescription", widget: "markdown" }
                   - label: Home Contractor
                     name: homeContractor
