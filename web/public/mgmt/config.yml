@@ -1668,6 +1668,15 @@ collections:
           required: false,
           options: ["Department of Health", "County Clerk", "Municipal Clerk"],
         }
+      - label: "Type (Webflow)"
+        name: "webflowType"
+        widget: "select"
+        required: false
+        options:
+          - { label: "business license", value: "business-license" }
+          - { label: "individual license", value: "individual-license" }
+          - { label: "school/course", value: "school-course" }
+          - { label: "object or vehicle", value: "object-vehicle" }
 
   - name: "license-tasks"
     label: "License Tasks (Navigator with Webflow mappings)"
@@ -1744,6 +1753,15 @@ collections:
         }
       - { label: "Webflow Issuing Division", name: "issuingDivision", widget: "string", required: false }
       - { label: "Division Phone", name: "divisionPhone", widget: "string", required: false }
+      - label: "Type (Webflow)"
+        name: "webflowType"
+        widget: "select"
+        required: false
+        options:
+          - { label: "business license", value: "business-license" }
+          - { label: "individual license", value: "individual-license" }
+          - { label: "school/course", value: "school-course" }
+          - { label: "object or vehicle", value: "object-vehicle" }
 
   - name: "webflow-licenses"
     label: "Webflow Licenses"
