@@ -11,6 +11,7 @@ interface Props {
   isVisible?: boolean;
   displayAltDescription?: boolean;
   noLabel?: boolean;
+  hideHeader?: boolean;
 }
 
 export const ProfileField = (props: Props): ReactElement => {
@@ -29,6 +30,7 @@ export const ProfileField = (props: Props): ReactElement => {
               <FieldLabelProfile
                 fieldName={props.fieldName}
                 isAltDescriptionDisplayed={props.displayAltDescription}
+                hideHeader={props.hideHeader}
               />
             )}
             {props.children}

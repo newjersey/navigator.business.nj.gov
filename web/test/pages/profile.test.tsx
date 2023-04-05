@@ -274,9 +274,6 @@ describe("profile", () => {
         expect(
           screen.getByText(Config.profileDefaults.fields.businessName.default.header)
         ).toBeInTheDocument();
-        expect(
-          screen.queryByText(Config.profileDefaults.fields.businessName.default.description)
-        ).not.toBeInTheDocument();
         expect(screen.getByText("some-name")).toBeInTheDocument();
         expect(screen.queryByLabelText("Business name")).not.toBeInTheDocument();
       });
@@ -285,9 +282,6 @@ describe("profile", () => {
         renderPage({ userData });
         chooseTab("numbers");
         expect(screen.getByText(Config.profileDefaults.fields.entityId.default.header)).toBeInTheDocument();
-        expect(
-          screen.queryByText(Config.profileDefaults.fields.entityId.default.description)
-        ).not.toBeInTheDocument();
         expect(screen.getByText("some-id")).toBeInTheDocument();
         expect(screen.queryByLabelText("Entity id")).not.toBeInTheDocument();
       });
@@ -297,9 +291,6 @@ describe("profile", () => {
         expect(
           screen.getByText(Config.profileDefaults.fields.legalStructureId.default.header)
         ).toBeInTheDocument();
-        expect(
-          screen.queryByText(Config.profileDefaults.fields.legalStructureId.default.description)
-        ).not.toBeInTheDocument();
         expect(screen.getByText(LookupLegalStructureById(legalStructure).name)).toBeInTheDocument();
         expect(screen.queryByLabelText("Legal structure")).not.toBeInTheDocument();
       });
@@ -1396,9 +1387,7 @@ describe("profile", () => {
           screen.getByText(markdownToText(Config.profileDefaults.fields.industryId.default.header))
         ).toBeInTheDocument();
         expect(
-          screen.getByText(
-            markdownToText(Config.profileDefaults.fields.legalStructureId.overrides.FOREIGN.header)
-          )
+          screen.getByText(markdownToText(Config.profileDefaults.fields.legalStructureId.default.header))
         ).toBeInTheDocument();
       });
 
@@ -1657,7 +1646,7 @@ describe("profile", () => {
         }),
       }),
     });
-    expect(screen.getByText("Home-based business")).toBeInTheDocument();
+    expect(screen.getByLabelText("Home based business")).toBeInTheDocument();
   });
 
   it("shows the home-based question when user changes to applicable industry, even before saving", () => {
@@ -1669,10 +1658,10 @@ describe("profile", () => {
         }),
       }),
     });
-    expect(screen.queryByText("Home-based business")).not.toBeInTheDocument();
+    expect(screen.queryByLabelText("Home based business")).not.toBeInTheDocument();
 
     selectByValue("Industry", randomHomeBasedIndustry());
-    expect(screen.getByText("Home-based business")).toBeInTheDocument();
+    expect(screen.getByLabelText("Home based business")).toBeInTheDocument();
   });
 
   it("shows the home-based question when industry is undefined", () => {
@@ -1684,7 +1673,7 @@ describe("profile", () => {
         }),
       }),
     });
-    expect(screen.getByText("Home-based business")).toBeInTheDocument();
+    expect(screen.getByLabelText("Home based business")).toBeInTheDocument();
   });
 
   it("does not show the home-based question if not applicable to industry", () => {

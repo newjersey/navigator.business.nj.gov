@@ -5,7 +5,7 @@ import { profileFieldsFromConfig } from "@/lib/types/types";
 import { BusinessPersona } from "@businessnjgovnavigator/shared/profileData";
 import { merge } from "lodash";
 
-type ProfileFieldContent = {
+type FieldContent = {
   default: any;
   overrides?: {
     STARTING?: any;
@@ -14,24 +14,33 @@ type ProfileFieldContent = {
   };
 };
 
+interface ProfileFieldContent extends FieldContent {
+  onboarding: FieldContent;
+}
+
 export const getProfileConfig = (props: {
   config: ConfigType;
   fieldName: keyof typeof profileFieldsFromConfig;
+  onboarding?: boolean;
   persona?: BusinessPersona;
 }): any => {
   const configForField: ProfileFieldContent = (props.config.profileDefaults as any)["fields"][
     props.fieldName
   ];
 
-  if (!props.persona) {
-    return configForField.default;
+  let mergedConfig = configForField.default;
+
+  if (props.persona && configForField.overrides) {
+    mergedConfig = merge(mergedConfig, configForField.overrides[props.persona]);
   }
 
-  const overridesForPersona = configForField.overrides ? configForField.overrides[props.persona] : undefined;
+  if (props.onboarding && configForField.onboarding?.default) {
+    mergedConfig = merge(mergedConfig, configForField.onboarding?.default);
 
-  if (overridesForPersona !== undefined) {
-    return merge(configForField.default, overridesForPersona);
+    if (props.persona && configForField.onboarding?.overrides) {
+      mergedConfig = merge(mergedConfig, configForField.onboarding.overrides[props.persona]);
+    }
   }
 
-  return configForField.default;
+  return mergedConfig;
 };
