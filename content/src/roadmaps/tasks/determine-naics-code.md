@@ -1,6 +1,6 @@
 ---
 urlSlug: determine-naics-code
-filename: determine-naics-code
+filename: naics-code
 name: Determine Your NAICS Code
 id: determine-naics-code
 ---
