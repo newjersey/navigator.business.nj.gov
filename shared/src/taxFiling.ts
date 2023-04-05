@@ -1,4 +1,6 @@
-export type TaxFilingState = "SUCCESS" | "FAILED" | "UNREGISTERED" | "PENDING" | "API_ERROR";
+export type TaxFilingLookupState = "SUCCESS" | "FAILED" | "API_ERROR" | "PENDING" | "UNREGISTERED";
+export type TaxFilingOnboardingState = "SUCCESS" | "FAILED" | "API_ERROR";
+export type TaxFilingState = TaxFilingLookupState | TaxFilingOnboardingState;
 export type TaxFilingErrorFields = "businessName" | "formFailure";
 export type TaxFilingData = {
   readonly state?: TaxFilingState;
