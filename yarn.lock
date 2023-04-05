@@ -4649,7 +4649,7 @@ __metadata:
     cross-env: 7.0.3
     dayjs: 1.11.7
     dedent: 0.7.0
-    dependency-cruiser: 12.11.0
+    dependency-cruiser: 12.11.1
     eslint: 8.36.0
     eslint-config-prettier: 8.8.0
     eslint-plugin-jest: 27.2.1
@@ -4811,7 +4811,7 @@ __metadata:
     cypress-wait-until: 1.7.2
     dayjs: 1.11.7
     dedent: 0.7.0
-    dependency-cruiser: 12.11.0
+    dependency-cruiser: 12.11.1
     dotenv: 16.0.3
     eslint: 8.36.0
     eslint-config-next: 13.2.4
@@ -5010,7 +5010,7 @@ __metadata:
     cypress-dotenv: 2.0.0
     cypress-wait-until: 1.7.2
     dayjs: 1.11.7
-    dependency-cruiser: 12.11.0
+    dependency-cruiser: 12.11.1
     dotenv: 16.0.3
     eslint: 8.36.0
     eslint-config-next: 13.2.4
@@ -16144,9 +16144,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dependency-cruiser@npm:12.11.0":
-  version: 12.11.0
-  resolution: "dependency-cruiser@npm:12.11.0"
+"dependency-cruiser@npm:12.11.1":
+  version: 12.11.1
+  resolution: "dependency-cruiser@npm:12.11.1"
   dependencies:
     acorn: 8.8.2
     acorn-jsx: 5.3.2
@@ -16163,7 +16163,7 @@ __metadata:
     handlebars: 4.7.7
     ignore: 5.2.4
     indent-string: ^4.0.0
-    interpret: ^3.1.0
+    interpret: ^3.1.1
     is-installed-globally: 0.4.0
     json5: 2.2.3
     lodash: 4.17.21
@@ -16171,7 +16171,7 @@ __metadata:
     rechoir: ^0.8.0
     safe-regex: 2.1.1
     semver: ^7.3.7
-    semver-try-require: 6.1.0
+    semver-try-require: 6.2.0
     teamcity-service-messages: 0.1.14
     tsconfig-paths-webpack-plugin: 4.0.1
     watskeburt: 0.10.1
@@ -16183,7 +16183,7 @@ __metadata:
     depcruise-wrap-stream-in-html: bin/wrap-stream-in-html.js
     dependency-cruise: bin/dependency-cruise.js
     dependency-cruiser: bin/dependency-cruise.js
-  checksum: d8ad9f2260f55ca2247f9f9c40a5d65cbec8148331d2c06754b78b4c51d7b627289454139d6308876006f9f548b6d50831b2178b6a285df6bedbf95b0aac6a49
+  checksum: ec2af84046d0709f41ba781c7e94b3b62536beedf9bd862884efe7d65e2b3b2b9267d5a896b7630e90f7d7be0c0e7997061aa9bf5076760b1e8c890013d08af4
   languageName: node
   linkType: hard
 
@@ -20833,7 +20833,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"interpret@npm:^3.1.0":
+"interpret@npm:^3.1.1":
   version: 3.1.1
   resolution: "interpret@npm:3.1.1"
   checksum: 35cebcf48c7351130437596d9ab8c8fe131ce4038da4561e6d665f25640e0034702a031cf7e3a5cea60ac7ac548bf17465e0571ede126f3d3a6933152171ac82
@@ -31573,12 +31573,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semver-try-require@npm:6.1.0":
-  version: 6.1.0
-  resolution: "semver-try-require@npm:6.1.0"
+"semver-try-require@npm:6.2.0":
+  version: 6.2.0
+  resolution: "semver-try-require@npm:6.2.0"
   dependencies:
     semver: ^7.3.8
-  checksum: 772d6ce325a6f9e43024cdd87c5d442c6b21371124a2071e5aaa4df370ed4b865d9fd66ba4b6c16f18f3c2d2f2a8a37cc57981cb0c4aad32fa0d90ef8c7e0e57
+  checksum: bba9caeb382fb9314620e38a897e54c900a94fd7e768e53835fa60c03d6891b1c349adb9322e8fb6bb4842e8b6a6a71905deb0a7afd8f66aa4112a0ab1bd94b5
   languageName: node
   linkType: hard
 
