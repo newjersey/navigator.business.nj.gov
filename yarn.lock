@@ -4633,7 +4633,7 @@ __metadata:
     "@types/express": 4.17.17
     "@types/jest": 29.5.0
     "@types/jsonwebtoken": 9.0.1
-    "@types/lodash": 4.14.191
+    "@types/lodash": 4.14.192
     "@types/node": 16.18.23
     "@types/simple-oauth2": 5.0.4
     "@types/supertest": 2.0.12
@@ -4774,10 +4774,10 @@ __metadata:
     "@types/jest": 29.5.0
     "@types/js-yaml": 4.0.5
     "@types/jsonwebtoken": 9.0.1
-    "@types/lodash": 4.14.191
+    "@types/lodash": 4.14.192
     "@types/mdast": 3.0.11
     "@types/node": 16.18.23
-    "@types/react": 18.0.30
+    "@types/react": 18.0.31
     "@types/react-dom": 18.0.11
     "@types/react-slick": ^0.23.10
     "@types/react-swipeable-views": 0.13.1
@@ -4983,10 +4983,10 @@ __metadata:
     "@types/cypress-dotenv": 2.0.0
     "@types/jest": 29.5.0
     "@types/js-yaml": 4.0.5
-    "@types/lodash": 4.14.191
+    "@types/lodash": 4.14.192
     "@types/mdast": 3.0.11
     "@types/node": 16.18.23
-    "@types/react": 18.0.30
+    "@types/react": 18.0.31
     "@types/react-dom": 18.0.11
     "@types/react-slick": ^0.23.10
     "@types/react-swipeable-views": 0.13.1
@@ -10366,10 +10366,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/lodash@npm:4.14.191, @types/lodash@npm:^4.14.123, @types/lodash@npm:^4.14.167":
-  version: 4.14.191
-  resolution: "@types/lodash@npm:4.14.191"
-  checksum: ba0d5434e10690869f32d5ea49095250157cae502f10d57de0a723fd72229ce6c6a4979576f0f13e0aa9fbe3ce2457bfb9fa7d4ec3d6daba56730a51906d1491
+"@types/lodash@npm:4.14.192, @types/lodash@npm:^4.14.123, @types/lodash@npm:^4.14.167":
+  version: 4.14.192
+  resolution: "@types/lodash@npm:4.14.192"
+  checksum: 31e1f0543a04158d2c429c45efd7c77882736630d0652f82eb337d6159ec0c249c5d175c0af731537b53271e665ff8d76f43221d75d03646d31cb4bd6f0056b1
   languageName: node
   linkType: hard
 
@@ -10582,14 +10582,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:18.0.30, @types/react@npm:>=16":
-  version: 18.0.30
-  resolution: "@types/react@npm:18.0.30"
+"@types/react@npm:*, @types/react@npm:18.0.31, @types/react@npm:>=16":
+  version: 18.0.31
+  resolution: "@types/react@npm:18.0.31"
   dependencies:
     "@types/prop-types": "*"
     "@types/scheduler": "*"
     csstype: ^3.0.2
-  checksum: 3ca13fd10a1ee92826e37cd8c2fe563bff65d4bdb3ff53f632bc46c8fba2e94e24247b4b77ce957677a54e592299782e1235f7a3dfcfea327cb3213ddc98e968
+  checksum: 6befbd5587e266905b50fd6bbd7c1cacd557bddf99e6a9862ca2f1d06df3dca71b9d485a37d010479730f021aab93b852d417c714de5efc2f41be0ff4c09b4db
   languageName: node
   linkType: hard
 
