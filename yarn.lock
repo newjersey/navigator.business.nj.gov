@@ -32,20 +32,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-amplify/auth@npm:5.2.0":
-  version: 5.2.0
-  resolution: "@aws-amplify/auth@npm:5.2.0"
+"@aws-amplify/auth@npm:5.2.1":
+  version: 5.2.1
+  resolution: "@aws-amplify/auth@npm:5.2.1"
   dependencies:
-    "@aws-amplify/core": 5.1.5
+    "@aws-amplify/core": 5.1.6
     amazon-cognito-identity-js: 6.2.0
     tslib: ^1.8.0
-  checksum: c79e2cf45ab44091d3cd2eade0b4e9d210dbf6ad8394b3ba96635746d51a95dee4b815cb4e7540a8fc7d56376375b57c6f9dc30f9dda2f1ee8f51fd92f742029
+  checksum: 644a1d383a53301dbadc5557d51b20eda0bc27abffc718eacaa3e936c52a65e18eef5acfcd0f8710686a4753cf001d1d0200b2ea566bf4c3a491fd11fb446351
   languageName: node
   linkType: hard
 
-"@aws-amplify/core@npm:5.1.5":
-  version: 5.1.5
-  resolution: "@aws-amplify/core@npm:5.1.5"
+"@aws-amplify/core@npm:5.1.6":
+  version: 5.1.6
+  resolution: "@aws-amplify/core@npm:5.1.6"
   dependencies:
     "@aws-crypto/sha256-js": 1.2.2
     "@aws-sdk/client-cloudwatch-logs": 3.6.1
@@ -56,7 +56,7 @@ __metadata:
     tslib: ^1.8.0
     universal-cookie: ^4.0.4
     zen-observable-ts: 0.8.19
-  checksum: f10f455529d8b8cc64110998c6b6f09c4d432ffd42bf4e9308e88448aae361516f2179f934702d70bf6d6c2cda239aae053ff08e390804aed559cd5d7be8cbd5
+  checksum: 516624e968a64b051b688fd80caf4f6785cc2992675c29e5135d693402b4dcdd94a40bd00d0465f32ca409c0df81b6e6996d8bd321ce02f68f332a5d70dcac9f
   languageName: node
   linkType: hard
 
@@ -4705,8 +4705,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@businessnjgovnavigator/root@workspace:."
   dependencies:
-    "@aws-amplify/auth": 5.2.0
-    "@aws-amplify/core": 5.1.5
+    "@aws-amplify/auth": 5.2.1
+    "@aws-amplify/core": 5.1.6
     "@aws-crypto/client-node": 3.2.0
     "@aws-crypto/sha256-browser": 4.0.0
     "@aws-sdk/client-cloudwatch-logs": 3.303.0
@@ -4935,8 +4935,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@businessnjgovnavigator/web@workspace:web"
   dependencies:
-    "@aws-amplify/auth": 5.2.0
-    "@aws-amplify/core": 5.1.5
+    "@aws-amplify/auth": 5.2.1
+    "@aws-amplify/core": 5.1.6
     "@aws-crypto/sha256-browser": 4.0.0
     "@aws-sdk/protocol-http": 3.303.0
     "@aws-sdk/s3-request-presigner": 3.304.0
