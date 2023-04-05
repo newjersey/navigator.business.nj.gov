@@ -1,16 +1,12 @@
 {
   "naicsCodes": "621399",
   "defaultSectorId": "other-services",
-  "industryOnboardingQuestions": {
-    "canBeHomeBased": true,
-    "canBeReseller": true
-  },
   "canHavePermanentLocation": true,
   "roadmapSteps": [
     {
       "step": 1,
       "weight": 1,
-      "task": "business-plan"
+      "task": "determine-naics-code"
     },
     {
       "step": 1,
@@ -47,6 +43,10 @@
     }
   ],
   "name": "Acupuncture",
+  "industryOnboardingQuestions": {
+    "canBeHomeBased": true,
+    "canBeReseller": true
+  },
   "isEnabled": true,
   "additionalSearchTerms": "acupuncturist, spa, alternative medicine",
   "id": "acupuncture",
