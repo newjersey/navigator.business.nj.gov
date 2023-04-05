@@ -1,4 +1,5 @@
 import { Content } from "@/components/Content";
+import { ContextualInfoButton } from "@/components/ContextualInfoButton";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getProfileConfig } from "@/lib/domain-logic/getProfileConfig";
@@ -19,6 +20,7 @@ export const FieldLabelOnboarding = (props: Props): ReactElement => {
     config: Config,
     persona: props.CMS_ONLY_flow ?? state.flow,
     fieldName: props.fieldName,
+    onboarding: true,
   });
 
   const unboldedHeader = contentFromConfig.headerNotBolded;
@@ -28,7 +30,11 @@ export const FieldLabelOnboarding = (props: Props): ReactElement => {
   return (
     <>
       <div role="heading" aria-level={2} className="h3-styling margin-bottom-2">
-        {contentFromConfig.header}
+        {contentFromConfig.headerContextualInfo ? (
+          <ContextualInfoButton text={contentFromConfig.header} id={contentFromConfig.headerContextualInfo} />
+        ) : (
+          contentFromConfig.header
+        )}
         {unboldedHeader && (
           <>
             {" "}
