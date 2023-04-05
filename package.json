@@ -146,7 +146,7 @@
     "@types/jsonwebtoken": "9.0.1",
     "@types/lodash": "4.14.192",
     "@types/node": "16.18.23",
-    "@types/react": "18.0.31",
+    "@types/react": "18.0.32",
     "@types/react-dom": "18.0.11",
     "@types/react-slick": "^0.23.10",
     "@types/react-swipeable-views": "0.13.1",
@@ -171,7 +171,7 @@
     "cypress": "12.9.0",
     "cypress-dotenv": "2.0.0",
     "cypress-wait-until": "1.7.2",
-    "dependency-cruiser": "12.11.0",
+    "dependency-cruiser": "12.11.1",
     "dotenv": "16.0.3",
     "eslint": "8.36.0",
     "eslint-config-next": "13.2.4",
@@ -201,7 +201,7 @@
     "rimraf": "4.4.1",
     "sass": "1.60.0",
     "sass-loader": "13.2.2",
-    "semantic-release": "19.0.5",
+    "semantic-release": "21.0.1",
     "serverless": "3.29.0",
     "serverless-dynamodb-local": "0.2.40",
     "serverless-offline-ssm": "6.2.0",
@@ -309,6 +309,6 @@
     "glob-parent": "6.0.2",
     "tar": "6.1.13",
     "ansi-regex": "5.0.1",
-    "trim-newlines": "4.1.1"
+    "trim-newlines": "5.0.0"
   }
 }
