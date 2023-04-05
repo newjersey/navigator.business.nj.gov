@@ -1,6 +1,6 @@
 ---
-urlSlug: certificate-vending-machine
-filename: certificate-vending-machine
+urlSlug: vending-machine-certificate
+filename: vending-machine-certificate
 name: Obtain a Health Certificate, if Applicable
 id: certificate-vending-machine
 ---
