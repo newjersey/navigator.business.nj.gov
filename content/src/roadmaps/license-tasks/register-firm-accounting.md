@@ -4,15 +4,16 @@ urlSlug: CPA-license
 name: Apply for a Certified Public Accountant License
 webflowName: "Accountant: Certified Public Accountant License"
 industryIntegration: New Jersey Division of Consumer Affairs
-issuingAgency: New Jersey Division of Consumer Affairs Board of Accountancy
 industryId: certified-public-accountant
-callToActionText: Apply for My License
 callToActionLink: https://www.njconsumeraffairs.gov/acc/Pages/applications.aspx
 webflowIndustry: ""
-licenseCertificationClassification: ""
 divisionPhone: (973) 504-6380
 id: register-firm-accounting
+issuingAgency: New Jersey Division of Consumer Affairs Board of Accountancy
+callToActionText: Apply for My License
+webflowType: individual-license
 webflowId: 5f77296ee10dec7593024f1c
+licenseCertificationClassification: ""
 ---
 You or any staff providing accounting services must be licensed as a certified public accountant (CPA).
 
