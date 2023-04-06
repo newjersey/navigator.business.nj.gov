@@ -17,7 +17,7 @@ import Script from "next/script";
 import { ReactElement, useEffect, useReducer, useState } from "react";
 import SEO from "../../next-seo.config";
 import { SWRConfig } from "swr";
-import { OperatingPhaseId, RegistrationStatus } from "@businessnjgovnavigator/shared";
+import { BusinessPersona, OperatingPhaseId, RegistrationStatus } from "@businessnjgovnavigator/shared";
 import { SignUpSnackbar } from "@/components/auth/SignUpSnackbar";
 import { SignUpModal } from "@/components/auth/SignUpModal";
 import { SelfRegSnackbar } from "@/components/auth/SelfRegSnackbar";
@@ -30,7 +30,7 @@ import { AuthContext, initialState } from "@/contexts/authContext";
 import MuiTheme from "@/lib/muiTheme";
 import { UpdateQueueContext } from "@/contexts/updateQueueContext";
 import { IntercomContext } from "@/contexts/intercomContext";
-import { IntercomScript } from "@/components/tasks/IntercomScript";
+import { IntercomScript } from "@/components/IntercomScript";
 
 AuthContext.displayName = "Authentication";
 RoadmapContext.displayName = "Roadmap";
@@ -62,6 +62,9 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
   const router = useRouter();
   const GOOGLE_ANALYTICS_ID = process.env.GOOGLE_ANALYTICS_ID || "";
   const [operatingPhaseId, setOperatingPhaseId] = useState<OperatingPhaseId | undefined>(undefined);
+  const [legalStructureId, setLegalStructureId] = useState<string | undefined>(undefined);
+  const [industryId, setIndustryId] = useState<string | undefined>(undefined);
+  const [businessPersona, setBusinessPersona] = useState<BusinessPersona | undefined>(undefined);
 
   const listener = (data: HubCapsule): void => {
     switch (data.payload.event) {
@@ -134,9 +137,17 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
       <Script src="/vendor/js/uswds.min.js" />
       <Script src="/intercom/settings.js" />
       <Script src="/intercom/init.js" />
-      <IntercomScript user={state.user} operatingPhaseId={operatingPhaseId} />
+      <IntercomScript
+        user={state.user}
+        operatingPhaseId={operatingPhaseId}
+        legalStructureId={legalStructureId}
+        industryId={industryId}
+        businessPersona={businessPersona}
+      />
       <DefaultSeo {...SEO} />
-      <IntercomContext.Provider value={{ setOperatingPhaseId }}>
+      <IntercomContext.Provider
+        value={{ setOperatingPhaseId, setLegalStructureId, setIndustryId, setBusinessPersona }}
+      >
         <SWRConfig value={{ provider: UserDataStorageFactory }}>
           <StyledEngineProvider injectFirst>
             <ThemeProvider theme={MuiTheme}>
