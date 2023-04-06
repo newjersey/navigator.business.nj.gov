@@ -1416,7 +1416,7 @@ collections:
             collection: "tasks"
             search_fields: ["{{filename}}", "name", "urlSlug"]
             value_field: "{{filename}}"
-            display_fields: ["{{name}}"]
+            display_fields: ["{{filename}}"]
             options_length: 500
           - label: "Required"
             name: "required"
@@ -1730,7 +1730,7 @@ collections:
         collection: "roadmaps"
         search_fields: ["{{id}}"]
         value_field: "{{id}}"
-        display_fields: ["{{id}}"]
+        display_fields: ["{{name}}"]
         options_length: 500
       - {
           label: "Call To Action Text (Webflow & Navigator)",
