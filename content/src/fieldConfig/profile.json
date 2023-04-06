@@ -112,8 +112,8 @@
       "taxPin": {
         "default": {
           "header": "Tax PIN",
-          "headerContextualInfo": "",
-          "description": "What is your `Tax PIN|tax-pin`?",
+          "headerContextualInfo": "tax-pin",
+          "description": "",
           "errorTextRequired": "Tax PIN must be 4 digits."
         }
       },
