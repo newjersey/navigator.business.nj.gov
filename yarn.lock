@@ -4676,11 +4676,11 @@ __metadata:
     ts-jest: 29.1.0
     ts-loader: 9.4.2
     ts-node: 10.9.1
-    tsconfig-paths: 4.1.2
+    tsconfig-paths: 4.2.0
     tsconfig-paths-webpack-plugin: 4.0.1
     typescript: 4.9.5
     uuid: 9.0.0
-    webpack: 5.76.3
+    webpack: 5.77.0
     webpack-node-externals: 3.0.0
     winston: 3.8.2
     winston-cloudwatch: 6.1.1
@@ -4884,14 +4884,14 @@ __metadata:
     ts-jest: 29.1.0
     ts-loader: 9.4.2
     ts-node: 10.9.1
-    tsconfig-paths: 4.1.2
+    tsconfig-paths: 4.2.0
     tsconfig-paths-webpack-plugin: 4.0.1
     typescript: 4.9.5
     ua-parser-js: 1.0.35
     unified: 10.1.2
     unist-util-visit: 4.1.2
     uuid: 9.0.0
-    webpack: 5.76.3
+    webpack: 5.77.0
     webpack-node-externals: 3.0.0
     winston: 3.8.2
     winston-cloudwatch: 6.1.1
@@ -4925,7 +4925,7 @@ __metadata:
     rimraf: 4.4.1
     ts-jest: 29.1.0
     ts-node: 10.9.1
-    tsconfig-paths: 4.1.2
+    tsconfig-paths: 4.2.0
     typescript: 4.9.5
     uuid: 9.0.0
   languageName: unknown
@@ -5068,7 +5068,7 @@ __metadata:
     ua-parser-js: 1.0.35
     unified: 10.1.2
     unist-util-visit: 4.1.2
-    webpack: 5.76.3
+    webpack: 5.77.0
   languageName: unknown
   linkType: soft
 
@@ -34477,14 +34477,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tsconfig-paths@npm:4.1.2, tsconfig-paths@npm:^4.1.2":
-  version: 4.1.2
-  resolution: "tsconfig-paths@npm:4.1.2"
+"tsconfig-paths@npm:4.2.0, tsconfig-paths@npm:^4.1.2":
+  version: 4.2.0
+  resolution: "tsconfig-paths@npm:4.2.0"
   dependencies:
     json5: ^2.2.2
     minimist: ^1.2.6
     strip-bom: ^3.0.0
-  checksum: 3d9151ecea139594e25618717de15769ab9f38f8e6d510ac16e592b23e7f7105ea13cec5694c3de7e132c98277b775e18edd1651964164ee6d75737c408494cc
+  checksum: 28c5f7bbbcabc9dabd4117e8fdc61483f6872a1c6b02a4b1c4d68c5b79d06896c3cc9547610c4c3ba64658531caa2de13ead1ea1bf321c7b53e969c4752b98c7
   languageName: node
   linkType: hard
 
@@ -36047,9 +36047,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"webpack@npm:5.76.3, webpack@npm:>=4.43.0 <6.0.0, webpack@npm:^5, webpack@npm:^5.9.0":
-  version: 5.76.3
-  resolution: "webpack@npm:5.76.3"
+"webpack@npm:5.77.0, webpack@npm:>=4.43.0 <6.0.0, webpack@npm:^5, webpack@npm:^5.9.0":
+  version: 5.77.0
+  resolution: "webpack@npm:5.77.0"
   dependencies:
     "@types/eslint-scope": ^3.7.3
     "@types/estree": ^0.0.51
@@ -36080,7 +36080,7 @@ __metadata:
       optional: true
   bin:
     webpack: bin/webpack.js
-  checksum: 363f536b56971d056e34ab4cffa4cbc630b220e51be1a8c3adea87d9f0b51c49cfc7c3720d6614a1fd2c8c63f1ab3100db916fe8367c8bb9299327ff8c3f856d
+  checksum: 21341bb72cbbf61dfb3af91eabe9290a6c05139f268eff3c419e5339deb6c79f2f36de55d9abf017d3ccbad290a535c02325001b2816acc393f3c022e67ac17c
   languageName: node
   linkType: hard
 
