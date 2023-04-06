@@ -1416,7 +1416,7 @@ collections:
             collection: "tasks"
             search_fields: ["{{filename}}", "name", "urlSlug"]
             value_field: "{{filename}}"
-            display_fields: ["{{filename}}"]
+            display_fields: ["{{name}}"]
             options_length: 500
           - label: "Required"
             name: "required"
