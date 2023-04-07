@@ -148,7 +148,7 @@ export const useFormationErrors = (): FormationErrorsResponse => {
   };
 
   const doesStepHaveError = (step: FormationStepNames, overrides?: { hasSubmitted: boolean }): boolean => {
-    if (step == "Name") {
+    if (step === "Name") {
       return allCurrentErrorsForStep(step, overrides).length > 0;
     }
     if (overrides?.hasSubmitted ?? state.hasBeenSubmitted) {

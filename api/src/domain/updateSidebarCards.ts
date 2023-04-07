@@ -48,7 +48,7 @@ export const updateSidebarCards: UpdateSidebarCards = (userData: UserData): User
     hideCard("task-progress");
   }
 
-  if (operatingPhase == "UP_AND_RUNNING_OWNING" || operatingPhase === "GUEST_MODE_OWNING") {
+  if (operatingPhase === "UP_AND_RUNNING_OWNING" || operatingPhase === "GUEST_MODE_OWNING") {
     const isEveryOpportunityFieldAnswered = OPPORTUNITY_FIELDS.every((field) => {
       return isFieldAnswered(field, userData.profileData);
     });
