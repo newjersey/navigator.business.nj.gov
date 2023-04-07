@@ -750,9 +750,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-sdk/client-s3@npm:3.304.0":
-  version: 3.304.0
-  resolution: "@aws-sdk/client-s3@npm:3.304.0"
+"@aws-sdk/client-s3@npm:3.305.0":
+  version: 3.305.0
+  resolution: "@aws-sdk/client-s3@npm:3.305.0"
   dependencies:
     "@aws-crypto/sha1-browser": 3.0.0
     "@aws-crypto/sha256-browser": 3.0.0
@@ -808,7 +808,7 @@ __metadata:
     "@aws-sdk/xml-builder": 3.303.0
     fast-xml-parser: 4.1.2
     tslib: ^2.5.0
-  checksum: 8dda05a26366a551131b4f3414c393a3edb6f44a14addcb2537de1ce5f87ecac3084f239965002bd9340955a84e111bef8576fa19eb25039d29fbea251731440
+  checksum: 5d622bf9824eb3e54337e2ba3edf4b559f2de0f4e9fcf565e88ece12762f762a8e42d4ffca701b02f953e94534aa939c0b35c061f14ad0182323d5a5c1f1c653
   languageName: node
   linkType: hard
 
@@ -2236,9 +2236,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-sdk/s3-request-presigner@npm:3.304.0":
-  version: 3.304.0
-  resolution: "@aws-sdk/s3-request-presigner@npm:3.304.0"
+"@aws-sdk/s3-request-presigner@npm:3.305.0":
+  version: 3.305.0
+  resolution: "@aws-sdk/s3-request-presigner@npm:3.305.0"
   dependencies:
     "@aws-sdk/middleware-endpoint": 3.303.0
     "@aws-sdk/protocol-http": 3.303.0
@@ -2247,7 +2247,7 @@ __metadata:
     "@aws-sdk/types": 3.303.0
     "@aws-sdk/util-format-url": 3.303.0
     tslib: ^2.5.0
-  checksum: 076858ed56ad758edc84ba584cd2e13db266e5c28aea3a799884c020b1e12ca1b975de37756298be9b0384de267885fb433f25db5d3c722346fe512dad15dae8
+  checksum: a74997606ce0d74164abbb11557ef3b4d54b576b655f966054221591d5508158f8b399e32e8b43b29c9fad5c1e2c83db5dc8bd7f25fb8a2e1840777730fbc272
   languageName: node
   linkType: hard
 
@@ -4619,7 +4619,7 @@ __metadata:
     "@aws-crypto/client-node": 3.2.0
     "@aws-sdk/client-cloudwatch-logs": 3.303.0
     "@aws-sdk/client-dynamodb": 3.303.0
-    "@aws-sdk/client-s3": 3.304.0
+    "@aws-sdk/client-s3": 3.305.0
     "@aws-sdk/lib-dynamodb": 3.303.0
     "@aws-sdk/smithy-client": 3.303.0
     "@aws-sdk/types": 3.303.0
@@ -4711,10 +4711,10 @@ __metadata:
     "@aws-crypto/sha256-browser": 4.0.0
     "@aws-sdk/client-cloudwatch-logs": 3.303.0
     "@aws-sdk/client-dynamodb": 3.303.0
-    "@aws-sdk/client-s3": 3.304.0
+    "@aws-sdk/client-s3": 3.305.0
     "@aws-sdk/lib-dynamodb": 3.303.0
     "@aws-sdk/protocol-http": 3.303.0
-    "@aws-sdk/s3-request-presigner": 3.304.0
+    "@aws-sdk/s3-request-presigner": 3.305.0
     "@aws-sdk/smithy-client": 3.303.0
     "@aws-sdk/types": 3.303.0
     "@aws-sdk/url-parser": 3.303.0
@@ -4777,7 +4777,7 @@ __metadata:
     "@types/lodash": 4.14.192
     "@types/mdast": 3.0.11
     "@types/node": 16.18.23
-    "@types/react": 18.0.32
+    "@types/react": 18.0.33
     "@types/react-dom": 18.0.11
     "@types/react-slick": ^0.23.10
     "@types/react-swipeable-views": 0.13.1
@@ -4939,7 +4939,7 @@ __metadata:
     "@aws-amplify/core": 5.1.6
     "@aws-crypto/sha256-browser": 4.0.0
     "@aws-sdk/protocol-http": 3.303.0
-    "@aws-sdk/s3-request-presigner": 3.304.0
+    "@aws-sdk/s3-request-presigner": 3.305.0
     "@aws-sdk/url-parser": 3.303.0
     "@aws-sdk/util-format-url": 3.303.0
     "@babel/core": 7.21.4
@@ -4986,7 +4986,7 @@ __metadata:
     "@types/lodash": 4.14.192
     "@types/mdast": 3.0.11
     "@types/node": 16.18.23
-    "@types/react": 18.0.32
+    "@types/react": 18.0.33
     "@types/react-dom": 18.0.11
     "@types/react-slick": ^0.23.10
     "@types/react-swipeable-views": 0.13.1
@@ -10619,14 +10619,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:18.0.32, @types/react@npm:>=16":
-  version: 18.0.32
-  resolution: "@types/react@npm:18.0.32"
+"@types/react@npm:*, @types/react@npm:18.0.33, @types/react@npm:>=16":
+  version: 18.0.33
+  resolution: "@types/react@npm:18.0.33"
   dependencies:
     "@types/prop-types": "*"
     "@types/scheduler": "*"
     csstype: ^3.0.2
-  checksum: c8dbce83c455e520e75f3649988f46100e3a3c0bf7241281ea5bd9067a0368290f0d7c6102e12e6ec9d649134b29a3ef4c421f376ec5aa06ed78cbdd8c144b4c
+  checksum: 4fbd2b2b6a26378bdfde121081a6406ec2d39e4ba87ea5f6897ab7bb2198713165e6fd703ad4ed7ba1d4f23ef54a4c9f108f3105c7ed8e136411ee6bdebc5669
   languageName: node
   linkType: hard
 
