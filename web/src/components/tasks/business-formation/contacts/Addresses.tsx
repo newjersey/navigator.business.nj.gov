@@ -302,7 +302,7 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
       </div>
       {props.needSignature ? (
         <p className="margin-bottom-2">
-          <i>* {Config.formation.fields.signers.aidText}</i>
+          <em>* {Config.formation.fields.signers.aidText}</em>
         </p>
       ) : (
         <></>

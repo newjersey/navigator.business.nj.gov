@@ -251,9 +251,9 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
             type="ALWAYS"
             className="margin-bottom-2"
           >
-            <b>
+            <strong>
               <ModifiedContent>{Config.formation.addressModal.name.label}</ModifiedContent>
-            </b>
+            </strong>
             <GenericTextField
               value={addressData.name}
               handleChange={(value: string): void => {
@@ -274,9 +274,9 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
             type="ALWAYS"
             className="margin-bottom-2"
           >
-            <b>
+            <strong>
               <ModifiedContent>{Config.formation.addressModal.addressLine1.label}</ModifiedContent>
-            </b>
+            </strong>
             <GenericTextField
               fieldName="addressLine1"
               value={addressData.addressLine1}
@@ -298,9 +298,9 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
             type="ALWAYS"
             className="margin-bottom-2"
           >
-            <b>
+            <strong>
               <ModifiedContent>{Config.formation.addressModal.addressLine2.label}</ModifiedContent>
-            </b>
+            </strong>
             <span className="margin-left-1">{Config.formation.general.optionalLabel}</span>
             <GenericTextField
               fieldName="addressLine2"
@@ -328,9 +328,9 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
                 type="DESKTOP-ONLY"
               >
                 <WithErrorBar hasError={!!addressErrorMap["addressCity"].invalid} type="MOBILE-ONLY">
-                  <b>
+                  <strong>
                     <ModifiedContent>{Config.formation.addressModal.addressCity.label}</ModifiedContent>
-                  </b>
+                  </strong>
                   <GenericTextField
                     fieldName="addressCity"
                     autoComplete="address-level2"
@@ -357,9 +357,9 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
                 type="MOBILE-ONLY"
               >
                 <div className="margin-bottom-2">
-                  <b>
+                  <strong>
                     <ModifiedContent>{Config.formation.addressModal.addressState.label}</ModifiedContent>
-                  </b>
+                  </strong>
                 </div>
                 <StateDropdown
                   fieldName="addressState"
@@ -379,9 +379,9 @@ export const AddressModal = <T extends FormationMember | FormationIncorporator>(
               </WithErrorBar>
             </div>
             <div className="grid-col-6 tablet:grid-col-3">
-              <b>
+              <strong>
                 <ModifiedContent>{Config.formation.addressModal.addressZipCode.label}</ModifiedContent>
-              </b>
+              </strong>
               <GenericTextField
                 numericProps={{
                   maxLength: 5,

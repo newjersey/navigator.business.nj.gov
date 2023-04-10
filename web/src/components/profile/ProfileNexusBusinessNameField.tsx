@@ -24,7 +24,7 @@ export const ProfileNexusBusinessNameField = (): ReactElement => {
           <a href={`/tasks/${formationTaskId}`}>{contentFromConfig.addButton}</a>
         </div>
         <div className="italic">
-          <i>{contentFromConfig.emptyBusinessPlaceHolder}</i>
+          <em>{contentFromConfig.emptyBusinessPlaceHolder}</em>
         </div>
       </div>
     );

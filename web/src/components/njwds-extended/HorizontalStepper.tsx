@@ -129,7 +129,7 @@ export const HorizontalStepper = (props: Props): ReactElement => {
         </div>
       </div>
       <div className={isTabletAndUp ? "visually-hidden-centered" : "margin-top-05 margin-bottom-2"}>
-        <b>{`Step ${props.currentStep + 1} of ${props.steps.length}:`}</b>
+        <strong>{`Step ${props.currentStep + 1} of ${props.steps.length}:`}</strong>
         {` ${props.steps[props.currentStep].name}`}
       </div>
     </>

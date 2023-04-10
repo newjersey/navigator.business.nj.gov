@@ -197,9 +197,9 @@ export const Signatures = (): ReactElement => {
       <>
         {!isTabletAndUp && (
           <div className="margin-bottom-1">
-            <b>
+            <strong>
               <ModifiedContent>{Config.formation.fields.signers.titleLabel}</ModifiedContent>
-            </b>
+            </strong>
           </div>
         )}
 
@@ -258,9 +258,9 @@ export const Signatures = (): ReactElement => {
       <>
         {!isTabletAndUp && index !== 0 && (
           <div className="margin-bottom-1">
-            <b>
+            <strong>
               <ModifiedContent>{Config.formation.fields.signers.nameLabel}</ModifiedContent>
-            </b>
+            </strong>
           </div>
         )}
         <GenericTextField
@@ -316,9 +316,9 @@ export const Signatures = (): ReactElement => {
                 <div className="grid-col">
                   <div className="grid-row margin-top-1">
                     <div className={`grid-col-12 ${needsSignerType ? "tablet:grid-col-6" : ""}`}>
-                      <b>
+                      <strong>
                         <ModifiedContent>{Config.formation.fields.signers.nameLabel}</ModifiedContent>
-                      </b>
+                      </strong>
                       {getSignatureField(0)}
                     </div>
                     {needsSignerType && (
@@ -330,9 +330,9 @@ export const Signatures = (): ReactElement => {
                   </div>
                 </div>
                 <div className="margin-top-1" style={{ marginBottom: "1em" }}>
-                  <b>
+                  <strong>
                     <ModifiedContent>{`${Config.formation.fields.signers.signColumnLabel}`}</ModifiedContent>
-                  </b>
+                  </strong>
                   {renderSignatureColumn({
                     index: 0,
                   })}
@@ -406,7 +406,7 @@ export const Signatures = (): ReactElement => {
           </UnStyledButton>
         )}
         <p className="margin-bottom-2">
-          <i>* {Config.formation.fields.signers.aidText}</i>
+          <em>* {Config.formation.fields.signers.aidText}</em>
         </p>
       </div>
     </>

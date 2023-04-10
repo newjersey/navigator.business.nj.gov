@@ -34,12 +34,12 @@ export const FormationDate = (props: Props): ReactElement => {
       businessStartDate: {
         label: (
           <>
-            <b>
+            <strong>
               <ContextualInfoButton
                 text={Config.formation.fields.businessStartDate.label}
                 id={Config.formation.fields.businessStartDate.labelContextualInfo}
               />
-            </b>
+            </strong>
             <span className="margin-left-05">
               {Config.formation.fields.businessStartDate.labelSecondaryText}
             </span>
@@ -50,7 +50,7 @@ export const FormationDate = (props: Props): ReactElement => {
       foreignDateOfFormation: {
         label: (
           <>
-            <b>{Config.formation.fields.foreignDateOfFormation.label}</b>
+            <strong>{Config.formation.fields.foreignDateOfFormation.label}</strong>
             <span className="margin-left-05">
               {Config.formation.fields.foreignDateOfFormation.labelSecondaryText}
             </span>

@@ -25,12 +25,12 @@ export const SuffixDropdown = (): ReactElement => {
   return (
     <>
       <div className="flex margin-bottom-2">
-        <b>
+        <strong>
           <ContextualInfoButton
             text={Config.formation.fields.businessSuffix.label}
             id={Config.formation.fields.businessSuffix.labelContextualInfo}
           />
-        </b>
+        </strong>
       </div>
       <div className="margin-bottom-2">
         <FormControl fullWidth error={doesFieldHaveError(FIELD)}>
