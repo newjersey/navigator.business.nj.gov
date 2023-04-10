@@ -59,6 +59,7 @@ export const ReviewStep = (): ReactElement => {
             header={Config.formation.fields.businessPurpose.label}
             fieldName={"businessPurpose"}
             stepName={"Business"}
+            isExpandable={true}
           />
         )}
         <ReviewRegisteredAgent />

@@ -1,3 +1,4 @@
+import { ExpandCollapseString } from "@/components/ExpandCollapseString";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { LookupStepIndexByName } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
@@ -14,6 +15,7 @@ interface Props {
   header: string;
   fieldName: FormationTextField;
   stepName: FormationStepNames;
+  isExpandable?: boolean;
 }
 export const ReviewText = (props: Props): ReactElement => {
   const { Config } = useConfig();
@@ -41,11 +43,24 @@ export const ReviewText = (props: Props): ReactElement => {
           </UnStyledButton>
         </div>
       </div>
-      <div className={`${isTabletAndUp ? "display-flex" : "display-block"}`} data-testid={kebabCaseFieldName}>
-        <div>
-          {state.formationFormData[props.fieldName] || <em>{Config.formation.general.notEntered}</em>}
+      {props.isExpandable && state.formationFormData[props.fieldName] ? (
+        <ExpandCollapseString
+          text={state.formationFormData[props.fieldName] as string}
+          dataTestId={kebabCaseFieldName}
+          viewMoreText={Config.formation.general.viewMoreButtonText}
+          viewLessText={Config.formation.general.viewLessButtonText}
+          lines={2}
+        />
+      ) : (
+        <div
+          className={`${isTabletAndUp ? "display-flex" : "display-block"}`}
+          data-testid={kebabCaseFieldName}
+        >
+          <div>
+            {state.formationFormData[props.fieldName] || <em>{Config.formation.general.notEntered}</em>}
+          </div>
         </div>
-      </div>
+      )}
       <hr className="margin-y-205" />
     </>
   );
