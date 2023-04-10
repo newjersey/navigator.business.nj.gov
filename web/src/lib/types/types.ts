@@ -323,6 +323,22 @@ export interface LicenseTask extends Task {
   webflowId: string;
 }
 
+export interface WebflowLicense {
+  id: string;
+  webflowId: string;
+  filename: string;
+  urlSlug: string;
+  name: string;
+  callToActionLink: string;
+  callToActionText: string;
+  issuingAgency?: string;
+  issuingDivision: string;
+  divisionPhone: string;
+  licenseCertificationClassification: string;
+  industryId?: string;
+  contentMd: string;
+}
+
 export interface TaskLink {
   name: string;
   id: string;
