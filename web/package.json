@@ -66,6 +66,7 @@
     "next": "12.2.5",
     "next-seo": "6.0.0",
     "react": "18.2.0",
+    "react-clamp-lines": "3.0.3",
     "react-dom": "18.2.0",
     "react-slick": "^0.29.0",
     "react-transition-group": "4.4.5",

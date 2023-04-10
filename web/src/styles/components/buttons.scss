@@ -190,3 +190,12 @@
     background-color: $base-lightest;
   }
 }
+
+.clamp-lines__button {
+  @extend .usa-button !optional;
+  @extend .usa-button--unstyled;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  text-decoration: underline !important;
+}

@@ -4850,6 +4850,7 @@ __metadata:
     prettier-plugin-organize-imports: 3.2.2
     raw-loader: 4.0.2
     react: 18.2.0
+    react-clamp-lines: 3.0.3
     react-dom: 18.2.0
     react-slick: ^0.29.0
     react-transition-group: 4.4.5
@@ -5040,6 +5041,7 @@ __metadata:
     prettier-plugin-organize-imports: 3.2.2
     raw-loader: 4.0.2
     react: 18.2.0
+    react-clamp-lines: 3.0.3
     react-dom: 18.2.0
     react-slick: ^0.29.0
     react-transition-group: 4.4.5
@@ -29491,6 +29493,17 @@ __metadata:
   peerDependencies:
     react: ^16.3.0 || ^17.0.0
   checksum: 56e6a96a2fbb88376f28cfcc98a3e1db1271b3d4c04ac550b6d65f273462828983b124c8108821074fd283ce88042a7591938c781322f8465ab5a7a126981e10
+  languageName: node
+  linkType: hard
+
+"react-clamp-lines@npm:3.0.3":
+  version: 3.0.3
+  resolution: "react-clamp-lines@npm:3.0.3"
+  dependencies:
+    prop-types: ^15.7.2
+  peerDependencies:
+    react: ^15 || ^16 || ^17 || ^18
+  checksum: ff84d666c8b7b02ecfdaaee9f3c08feba4e691762dd7691013b8aba37d7bbfb6847493d05ee55cee8487461fba81e6566a8c68323a4fa599f8ce5c531646e091
   languageName: node
   linkType: hard
 

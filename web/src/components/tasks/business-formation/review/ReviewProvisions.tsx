@@ -1,4 +1,4 @@
-import { Content } from "@/components/Content";
+import { ExpandCollapseString } from "@/components/ExpandCollapseString";
 import { ReviewSectionHeader } from "@/components/tasks/business-formation/review/ReviewSectionHeader";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -22,7 +22,12 @@ export const ReviewProvisions = (): ReactElement => {
               <div className="text-bold margin-bottom-05">
                 {index + 1}. {Config.formation.fields.provisions.secondaryLabel}
               </div>
-              <Content>{provision}</Content>
+              <ExpandCollapseString
+                text={provision}
+                viewMoreText={Config.formation.general.viewMoreButtonText}
+                viewLessText={Config.formation.general.viewLessButtonText}
+                lines={2}
+              />
             </div>
           );
         })}

@@ -159,7 +159,7 @@
         "labelContextualInfo": "certificate-formation",
         "cost": "125"
       },
-      "combinedInvestment":{
+      "combinedInvestment": {
         "label": "Combined Investment",
         "body": "List the funds and the value of properties and services each of the partners have agreed to contribute."
       },
@@ -389,7 +389,9 @@
       "optionalLabel": "(Optional)",
       "genericErrorText": "This field requires information.",
       "maximumLengthErrorText": "${field} must be ${maxLen} characters or fewer.",
-      "partialAddressErrorText": "Address must be complete."
+      "partialAddressErrorText": "Address must be complete.",
+      "viewMoreButtonText": "View more",
+      "viewLessButtonText": "View less"
     },
     "intro": {
       "default": "This online application will register your business name and form your `business structure|business-structure-learn-more` with the New Jersey Division of Revenue and Enterprise Services.\n\nThis form will take about 5–10 minutes to complete. You will have completed formation and obtained an `Entity ID|entity-id` immediately after payment is received.\n\nInterested in `reserving your business name temporarily|name-reservation` before registering?",

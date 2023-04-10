@@ -828,6 +828,8 @@ collections:
                       name: "partialAddressErrorText",
                       widget: "string",
                     }
+                  - { label: "View more button text", name: "viewMoreButtonText", widget: "string" }
+                  - { label: "View less button text", name: "viewLessButtonText", widget: "string" }
               - label: Intro Paragraph
                 name: intro
                 collapsed: true
