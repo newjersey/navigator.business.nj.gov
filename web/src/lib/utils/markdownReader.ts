@@ -17,6 +17,7 @@ import {
   TaskWithoutLinks,
   TaxAgency,
   TaxFilingMethod,
+  WebflowLicense,
 } from "@/lib/types/types";
 import matter from "gray-matter";
 
@@ -72,6 +73,17 @@ export const convertCertificationMd = (mdContents: string, filename: string): Ce
     filename: filename,
     ...grayMatter,
     descriptionMd: grayMatter.descriptionMd ?? "",
+  };
+};
+
+export const convertWebflowLicenseMd = (mdContents: string, filename: string): WebflowLicense => {
+  const matterResult = matter(mdContents);
+  const grayMatter = matterResult.data as WebflowLicenseGrayMatter;
+
+  return {
+    contentMd: matterResult.content,
+    filename: filename,
+    ...grayMatter,
   };
 };
 
@@ -156,4 +168,18 @@ type CertificationGrayMatter = {
   applicableOwnershipTypes: string[];
   isSbe: boolean;
   descriptionMd: string;
+};
+
+type WebflowLicenseGrayMatter = {
+  id: string;
+  webflowId: string;
+  urlSlug: string;
+  name: string;
+  callToActionLink: string;
+  callToActionText: string;
+  issuingAgency?: string;
+  issuingDivision: string;
+  divisionPhone: string;
+  licenseCertificationClassification: string;
+  industryId?: string;
 };

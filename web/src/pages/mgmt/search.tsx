@@ -9,12 +9,14 @@ import { searchFundings } from "@/lib/search/searchFundings";
 import { searchIndustries } from "@/lib/search/searchIndustries";
 import { searchSteps } from "@/lib/search/searchSteps";
 import { searchTasks } from "@/lib/search/searchTasks";
+import { searchWebflowLicenses } from "@/lib/search/searchWebflowLicenses";
 import { Match } from "@/lib/search/typesForSearch";
 import { getNetlifyConfig } from "@/lib/static/admin/getNetlifyConfig";
 import { loadAllArchivedCertifications, loadAllCertifications } from "@/lib/static/loadCertifications";
 import { loadAllFundings } from "@/lib/static/loadFundings";
 import { loadAllTasks } from "@/lib/static/loadTasks";
-import { Certification, Funding, Step, Task } from "@/lib/types/types";
+import { loadAllWebflowLicenses } from "@/lib/static/loadWebflowLicenses";
+import { Certification, Funding, Step, Task, WebflowLicense } from "@/lib/types/types";
 import ForeignSteps from "@businessnjgovnavigator/content/roadmaps/steps-foreign.json";
 import Steps from "@businessnjgovnavigator/content/roadmaps/steps.json";
 import { Industries } from "@businessnjgovnavigator/shared";
@@ -30,6 +32,7 @@ interface Props {
   certifications: Certification[];
   archivedCertifications: Certification[];
   fundings: Funding[];
+  webflowLicenses: WebflowLicense[];
 }
 
 const SearchContentPage = (props: Props): ReactElement => {
@@ -42,6 +45,7 @@ const SearchContentPage = (props: Props): ReactElement => {
   const [fundingMatches, setFundingMatches] = useState<Match[]>([]);
   const [industryMatches, setIndustryMatches] = useState<Match[]>([]);
   const [stepsMatches, setStepsMatches] = useState<Match[]>([]);
+  const [webflowLicenseMatches, setWebflowLicenseMatches] = useState<Match[]>([]);
 
   const handleKeyPress = (event: KeyboardEvent<HTMLDivElement>, submit: () => void): void => {
     if (event.code === "Enter") {
@@ -66,6 +70,8 @@ const SearchContentPage = (props: Props): ReactElement => {
       filename: "Steps - Dakota",
     });
     setStepsMatches([...defaultStepsMatches, ...foreignStepsMatches]);
+
+    setWebflowLicenseMatches(searchWebflowLicenses(props.webflowLicenses, lowercaseTerm));
   };
 
   const authedView = (
@@ -96,6 +102,7 @@ const SearchContentPage = (props: Props): ReactElement => {
       <MatchList matches={fundingMatches} collectionLabel="Funding Opps" />
       <MatchList matches={industryMatches} collectionLabel="Roadmap - Industries" />
       <MatchList matches={stepsMatches} collectionLabel="Roadmap - Settings" />
+      <MatchList matches={webflowLicenseMatches} collectionLabel="Webflow Licenses" />
     </div>
   );
 
@@ -126,6 +133,7 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
       certifications: loadAllCertifications(),
       archivedCertifications: loadAllArchivedCertifications(),
       fundings: loadAllFundings(),
+      webflowLicenses: loadAllWebflowLicenses(),
     },
   };
 };
