@@ -1,6 +1,11 @@
 import { getCurrentDate, parseDate } from "@shared/dateHelpers";
 import { createEmptyFormationFormData } from "@shared/formationData";
-import { getFirstAnnualFiling, getSecondAnnualFiling, getThirdAnnualFiling } from "@shared/test";
+import {
+  generateBusinessNameAvailability,
+  getFirstAnnualFiling,
+  getSecondAnnualFiling,
+  getThirdAnnualFiling,
+} from "@shared/test";
 import dayjs from "dayjs";
 import { Express } from "express";
 import jwt from "jsonwebtoken";
@@ -16,7 +21,7 @@ import {
   generateUserData,
 } from "../../test/factories";
 import { generateAnnualFilings, getLastCalledWith } from "../../test/helpers";
-import { EncryptionDecryptionClient, UserDataClient } from "../domain/types";
+import { EncryptionDecryptionClient, TimeStampBusinessSearch, UserDataClient } from "../domain/types";
 import { setupExpress } from "../libs/express";
 import { userRouterFactory } from "./userRouter";
 
@@ -54,6 +59,7 @@ describe("userRouter", () => {
   let stubUpdateRoadmapSidebarCards: jest.Mock;
   let stubUpdateOperatingPhase: jest.Mock;
   let stubEncryptionDecryptionClient: jest.Mocked<EncryptionDecryptionClient>;
+  let stubTimeStampBusinessSearch: jest.Mocked<TimeStampBusinessSearch>;
 
   beforeEach(async () => {
     stubUserDataClient = {
@@ -77,6 +83,9 @@ describe("userRouter", () => {
       encryptValue: jest.fn(),
       decryptValue: jest.fn(),
     };
+    stubTimeStampBusinessSearch = {
+      search: jest.fn(),
+    };
     app = setupExpress(false);
     app.use(
       userRouterFactory(
@@ -84,7 +93,8 @@ describe("userRouter", () => {
         stubUpdateLicenseStatus,
         stubUpdateRoadmapSidebarCards,
         stubUpdateOperatingPhase,
-        stubEncryptionDecryptionClient
+        stubEncryptionDecryptionClient,
+        stubTimeStampBusinessSearch
       )
     );
   });
@@ -199,6 +209,79 @@ describe("userRouter", () => {
         const result = await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
         expect(stubUpdateLicenseStatus).toHaveBeenCalled();
         expect(result.body).toEqual(userData);
+      });
+    });
+
+    describe("updating business name search status", () => {
+      beforeEach(async () => {
+        mockJwt.decode.mockReturnValue(cognitoPayload({ id: "123" }));
+      });
+
+      it("does not update business name search if businessNameAvailability is undefined", async () => {
+        const userData = generateUserData({
+          formationData: generateFormationData({ businessNameAvailability: undefined }),
+        });
+        stubUserDataClient.get.mockResolvedValue(userData);
+
+        await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
+        expect(stubTimeStampBusinessSearch.search).not.toHaveBeenCalled();
+      });
+
+      it("does not update businessNameAvailability if it's lastUpdatedTimeStamp is within the last hour", async () => {
+        const userData = generateUserData({
+          formationData: generateFormationData({
+            businessNameAvailability: generateBusinessNameAvailability({
+              status: "AVAILABLE",
+              lastUpdatedTimeStamp: getCurrentDate().subtract(1, "hour").add(1, "minute").toISOString(),
+            }),
+          }),
+        });
+        stubUserDataClient.get.mockResolvedValue(userData);
+
+        await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
+        expect(stubTimeStampBusinessSearch.search).not.toHaveBeenCalled();
+      });
+
+      it("updates user in the background if businessNameAvailability lastUpdatedTimeStamp is older than last hour", async () => {
+        const userData = generateUserData({
+          formationData: generateFormationData({
+            businessNameAvailability: generateBusinessNameAvailability({
+              status: "AVAILABLE",
+              lastUpdatedTimeStamp: getCurrentDate().subtract(1, "hour").subtract(1, "minute").toISOString(),
+            }),
+          }),
+        });
+        stubUserDataClient.get.mockResolvedValue(userData);
+        stubTimeStampBusinessSearch.search.mockResolvedValue(
+          generateBusinessNameAvailability({
+            status: "UNAVAILABLE",
+            similarNames: ["random-name"],
+          })
+        );
+
+        const result = await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
+        expect(stubTimeStampBusinessSearch.search).toHaveBeenCalled();
+        expect(result.body.formationData.businessNameAvailability.status).toEqual("UNAVAILABLE");
+        expect(
+          parseDate(result.body.formationData.lastUpdatedTimeStamp).isSame(getCurrentDate(), "minute")
+        ).toEqual(true);
+      });
+
+      it("does not update userData if the business name search fails and continues with other updates", async () => {
+        const userData = generateUserData({
+          formationData: generateFormationData({
+            businessNameAvailability: generateBusinessNameAvailability({
+              status: "AVAILABLE",
+              lastUpdatedTimeStamp: getCurrentDate().subtract(1, "hour").subtract(1, "minute").toISOString(),
+            }),
+          }),
+        });
+        stubUserDataClient.get.mockResolvedValue(userData);
+        stubTimeStampBusinessSearch.search.mockRejectedValue({});
+
+        await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
+        expect(stubTimeStampBusinessSearch.search).toHaveBeenCalledWith(userData.profileData.businessName);
+        expect(stubUpdateOperatingPhase).toHaveBeenCalledWith(userData);
       });
     });
   });

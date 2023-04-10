@@ -8,6 +8,7 @@ import { getAnnualFilings } from "../domain/annual-filings/getAnnualFilings";
 import { industryHasALicenseType } from "../domain/license-status/convertIndustryToLicenseType";
 import {
   EncryptionDecryptionClient,
+  TimeStampBusinessSearch,
   UpdateLicenseStatus,
   UpdateOperatingPhase,
   UpdateSidebarCards,
@@ -58,6 +59,17 @@ const shouldCheckLicense = (userData: UserData): boolean => {
   );
 };
 
+const shouldUpdateBusinessNameSearch = (userData: UserData): boolean => {
+  if (!userData.formationData.businessNameAvailability?.lastUpdatedTimeStamp) {
+    return false;
+  }
+  return (
+    userData.profileData.businessName !== undefined &&
+    userData.formationData.businessNameAvailability !== undefined &&
+    hasBeenMoreThanOneHour(userData.formationData.businessNameAvailability.lastUpdatedTimeStamp)
+  );
+};
+
 export const getSignedInUser = (req: Request): CognitoJWTPayload => {
   return jwt.decode(getTokenFromHeader(req)) as CognitoJWTPayload;
 };
@@ -83,7 +95,8 @@ export const userRouterFactory = (
   updateLicenseStatus: UpdateLicenseStatus,
   updateRoadmapSidebarCards: UpdateSidebarCards,
   updateOperatingPhase: UpdateOperatingPhase,
-  encryptionDecryptionClient: EncryptionDecryptionClient
+  encryptionDecryptionClient: EncryptionDecryptionClient,
+  timeStampBusinessSearch: TimeStampBusinessSearch
 ): Router => {
   const router = Router();
   const encryptTaxId = encryptTaxIdFactory(encryptionDecryptionClient);
@@ -101,7 +114,8 @@ export const userRouterFactory = (
         if (userData.licenseData && shouldCheckLicense(userData)) {
           await updateLicenseStatus(userData.user.id, userData.licenseData.nameAndAddress);
         }
-        const updatedOperatingPhaseData = updateOperatingPhase(userData);
+        const updatedBusinessNameSearchData = await updateBusinessNameSearchIfNeeded(userData);
+        const updatedOperatingPhaseData = updateOperatingPhase(updatedBusinessNameSearchData);
         const updatedUserData = updateRoadmapSidebarCards(updatedOperatingPhaseData);
         await userDataClient.put(updatedUserData);
         res.json(updatedUserData);
@@ -213,6 +227,29 @@ export const userRouterFactory = (
       .catch((error) => {
         res.status(500).json({ error });
       });
+  };
+
+  const updateBusinessNameSearchIfNeeded = async (userData: UserData): Promise<UserData> => {
+    if (!shouldUpdateBusinessNameSearch(userData)) {
+      return userData;
+    }
+    try {
+      const response = await timeStampBusinessSearch.search(userData.profileData.businessName);
+      return {
+        ...userData,
+        formationData: {
+          ...userData.formationData,
+          businessNameAvailability: {
+            status: response.status,
+            similarNames: response.similarNames ?? [],
+            lastUpdatedTimeStamp: response.lastUpdatedTimeStamp,
+            invalidWord: response.invalidWord,
+          },
+        },
+      };
+    } catch {
+      return userData;
+    }
   };
 
   return router;

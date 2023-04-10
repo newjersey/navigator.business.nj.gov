@@ -53,7 +53,6 @@ import {
   LicenseStatusResult,
   MunicipalityDetail,
   NameAndAddress,
-  NameAvailability,
   OperatingPhaseId,
   OperatingPhases,
   OwnershipType,
@@ -312,14 +311,6 @@ export const generateTaskLink = (overrides: Partial<TaskLink>): TaskLink => {
     id: `some-id-${randomInt()}`,
     urlSlug: `some-urlSlug-${randomInt()}`,
     filename: `some-filename-${randomInt()}`,
-    ...overrides,
-  };
-};
-
-export const generateNameAvailability = (overrides: Partial<NameAvailability>): NameAvailability => {
-  return {
-    status: "UNAVAILABLE",
-    similarNames: [`some-name-${randomInt()}`],
     ...overrides,
   };
 };

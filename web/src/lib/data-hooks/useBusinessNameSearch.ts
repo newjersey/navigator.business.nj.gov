@@ -4,7 +4,7 @@ import { useUserData } from "@/lib/data-hooks/useUserData";
 import { SearchBusinessNameError } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
-import { NameAvailability } from "@businessnjgovnavigator/shared/businessNameSearch";
+import { NameAvailability } from "@businessnjgovnavigator/shared/";
 import { FormEvent, useContext, useState } from "react";
 
 export const useBusinessNameSearch = ({
@@ -61,11 +61,11 @@ export const useBusinessNameSearch = ({
       ...state.formationFormData,
       businessName: currentName,
     });
-    setBusinessNameAvailability({ similarNames: [], status: undefined });
+    setBusinessNameAvailability({ similarNames: [], status: undefined, lastUpdatedTimeStamp: "" });
   };
 
   const resetSearch = (): void => {
-    setBusinessNameAvailability({ similarNames: [], status: undefined });
+    setBusinessNameAvailability({ similarNames: [], status: undefined, lastUpdatedTimeStamp: "" });
     setUpdateButtonClicked(false);
     setError(undefined);
     setCurrentName("");
@@ -79,7 +79,7 @@ export const useBusinessNameSearch = ({
     }
 
     const resetState = (): void => {
-      setBusinessNameAvailability({ similarNames: [], status: undefined });
+      setBusinessNameAvailability({ similarNames: [], status: undefined, lastUpdatedTimeStamp: "" });
       setUpdateButtonClicked(false);
       setError(undefined);
     };

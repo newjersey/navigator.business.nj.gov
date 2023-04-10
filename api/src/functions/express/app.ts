@@ -29,6 +29,7 @@ import { dynamoDbTranslateConfig, DynamoUserDataClient } from "../../db/DynamoUs
 import { searchLicenseStatusFactory } from "../../domain/license-status/searchLicenseStatusFactory";
 import { updateSidebarCards } from "../../domain/updateSidebarCards";
 import { addToUserTestingFactory } from "../../domain/user-testing/addToUserTestingFactory";
+import { timeStampBusinessSearch } from "../../domain/user/timeStampBusinessSearch";
 import { updateLicenseStatusFactory } from "../../domain/user/updateLicenseStatusFactory";
 
 const app = setupExpress();
@@ -151,6 +152,7 @@ const addGovDeliveryNewsletter = addNewsletterFactory(govDeliveryNewsletterClien
 const addToAirtableUserTesting = addToUserTestingFactory(airtableUserTestingClient);
 const searchLicenseStatus = searchLicenseStatusFactory(licenseStatusClient);
 const updateLicenseStatus = updateLicenseStatusFactory(userDataClient, searchLicenseStatus);
+const timeStampToBusinessSearch = timeStampBusinessSearch(businessNameClient);
 
 const myNJSelfRegClient = MyNJSelfRegClientFactory(
   {
@@ -181,7 +183,8 @@ app.use(
     updateLicenseStatus,
     updateSidebarCards,
     updateOperatingPhase,
-    AWSEncryptionDecryptionClient
+    AWSEncryptionDecryptionClient,
+    timeStampToBusinessSearch
   )
 );
 app.use(
@@ -193,7 +196,7 @@ app.use(
     airtableFeedbackClient
   )
 );
-app.use("/api/guest", guestRouterFactory(businessNameClient));
+app.use("/api/guest", guestRouterFactory(timeStampToBusinessSearch));
 app.use("/api", licenseStatusRouterFactory(updateLicenseStatus));
 app.use("/api", selfRegRouterFactory(userDataClient, selfRegClient));
 app.use("/api", formationRouterFactory(apiFormationClient, userDataClient, { shouldSaveDocuments }));

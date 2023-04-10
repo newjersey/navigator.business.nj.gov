@@ -21,7 +21,6 @@ import { isBusinessStartDateValid } from "@/components/tasks/business-formation/
 import { BusinessFormationPaginator } from "@/components/tasks/business-formation/BusinessFormationPaginator";
 import { NexusFormationFlow } from "@/components/tasks/business-formation/NexusFormationFlow";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { NameAvailability } from "@businessnjgovnavigator/shared";
 import {
   castPublicFilingLegalTypeToFormationType,
   createEmptyFormationFormData,
@@ -32,6 +31,7 @@ import {
   FormationFormData,
   FormationLegalType,
   getCurrentDateFormatted,
+  NameAvailability,
   PublicFilingLegalType,
   UserData,
 } from "@businessnjgovnavigator/shared/";
