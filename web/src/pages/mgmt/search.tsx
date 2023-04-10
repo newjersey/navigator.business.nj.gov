@@ -72,7 +72,7 @@ const SearchContentPage = (props: Props): ReactElement => {
     <div>
       <h1>Search in CMS</h1>
       <p>
-        <i>Currently searches: Tasks, License Tasks, Certifications, Fundings, Industries, Roadmap Steps</i>
+        <em>Currently searches: Tasks, License Tasks, Certifications, Fundings, Industries, Roadmap Steps</em>
       </p>
       <div className="margin-bottom-4 margin-top-2">
         <label htmlFor="search">Search Exact Text</label>
