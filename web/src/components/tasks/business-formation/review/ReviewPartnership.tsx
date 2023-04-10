@@ -13,7 +13,7 @@ export const ReviewPartnership = (): ReactElement => {
     return (
       <>
         <div>
-          <i>{Config.formation.general.notEntered}</i> - {question}
+          <em>{Config.formation.general.notEntered}</em> - {question}
         </div>
       </>
     );
@@ -35,9 +35,9 @@ export const ReviewPartnership = (): ReactElement => {
         )}
         {params.radioData && (
           <div className="margin-left-4">
-            <i>
+            <em>
               <ModifiedContent>{Config.formation.partnershipRights.reviewStepTermsLabel}</ModifiedContent>
-            </i>
+            </em>
             <span className="margin-left-1">{params.termsData}</span>
           </div>
         )}

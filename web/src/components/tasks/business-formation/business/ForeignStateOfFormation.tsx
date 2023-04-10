@@ -24,7 +24,7 @@ export const ForeignStateOfFormation = (): ReactElement => {
   return (
     <>
       <div className="flex margin-bottom-2">
-        <b>{Config.formation.fields.foreignStateOfFormation.label}</b>
+        <strong>{Config.formation.fields.foreignStateOfFormation.label}</strong>
       </div>
       <div className="margin-bottom-2">
         <StateDropdown

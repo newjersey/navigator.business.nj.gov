@@ -82,9 +82,9 @@ export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): 
       >
         <div className="padding-205 flex-half">
           <div>
-            <b>
+            <strong>
               <ModifiedContent>{Config.formation.fields.businessName.label}</ModifiedContent>
-            </b>
+            </strong>
           </div>
           <span className="text-accent-cool-darker">
             {state.formationFormData.businessName || Config.formation.general.notEntered} {""}

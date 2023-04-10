@@ -74,9 +74,9 @@ export const Provisions = (): ReactElement => {
       {state.formationFormData.provisions?.map((provision: string, index: number) => {
         return (
           <div key={index}>
-            <b>
+            <strong>
               <ModifiedContent>{Config.formation.fields.provisions.secondaryLabel}</ModifiedContent>
-            </b>
+            </strong>
             <span className="margin-left-05">{Config.formation.general.optionalLabel}</span>
             <div className="grid-row">
               <div className="grid-col">

@@ -30,9 +30,9 @@ export const BusinessFormationTextField = ({ className, ...props }: Props): Reac
   return (
     <WithErrorBar className={className ?? ""} hasError={hasError} type={props.errorBarType}>
       {props.label && (
-        <b>
+        <strong>
           <ModifiedContent>{props.label}</ModifiedContent>
-        </b>
+        </strong>
       )}
       {props.secondaryLabel && <span className="margin-left-1">{props.secondaryLabel}</span>}
       <GenericTextField

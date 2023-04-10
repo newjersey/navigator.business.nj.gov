@@ -42,7 +42,9 @@ export const ReviewText = (props: Props): ReactElement => {
         </div>
       </div>
       <div className={`${isTabletAndUp ? "display-flex" : "display-block"}`} data-testid={kebabCaseFieldName}>
-        <div>{state.formationFormData[props.fieldName] || <i>{Config.formation.general.notEntered}</i>}</div>
+        <div>
+          {state.formationFormData[props.fieldName] || <em>{Config.formation.general.notEntered}</em>}
+        </div>
       </div>
       <hr className="margin-y-205" />
     </>

@@ -23,7 +23,7 @@ export const ReviewSignatures = (): ReactElement => {
   return (
     <>
       <ReviewSectionHeader header={getConfig().header} stepName="Contacts" testId="signature" />
-      {state.formationFormData.signers?.length === 0 && <i>{Config.formation.general.notEntered}</i>}
+      {state.formationFormData.signers?.length === 0 && <em>{Config.formation.general.notEntered}</em>}
       {state.formationFormData.signers?.map((signer, index) => {
         return (
           <div key={`${signer}-${index}`} className={index === 0 ? "" : "margin-top-2"}>

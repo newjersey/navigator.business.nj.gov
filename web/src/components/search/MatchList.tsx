@@ -29,7 +29,7 @@ export const MatchList = (props: Props): ReactElement => {
     <div className="margin-top-3">
       <span className="font-body-lg">Collection:&nbsp;</span>
       <span className="font-body-lg">
-        <b>{props.collectionLabel}</b>
+        <strong>{props.collectionLabel}</strong>
       </span>
       <ul>
         {(expanded ? props.matches : collapsedMatches).map((match) => (
