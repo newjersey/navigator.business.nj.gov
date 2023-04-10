@@ -24,8 +24,8 @@
     "verify:node": "check-node-version --node $(cat .nvmrc) --npm 8"
   },
   "dependencies": {
-    "@aws-amplify/auth": "5.2.2",
-    "@aws-amplify/core": "5.1.7",
+    "@aws-amplify/auth": "5.2.3",
+    "@aws-amplify/core": "5.1.8",
     "@aws-crypto/client-node": "3.2.0",
     "@aws-crypto/sha256-browser": "4.0.0",
     "@aws-sdk/client-cloudwatch-logs": "3.306.0",
@@ -202,7 +202,7 @@
     "sass": "1.60.0",
     "sass-loader": "13.2.2",
     "semantic-release": "21.0.1",
-    "serverless": "3.30.0",
+    "serverless": "3.30.1",
     "serverless-dynamodb-local": "0.2.40",
     "serverless-offline-ssm": "6.2.0",
     "serverless-webpack": "5.11.0",
