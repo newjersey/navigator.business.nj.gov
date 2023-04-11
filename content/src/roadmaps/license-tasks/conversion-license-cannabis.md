@@ -1,17 +1,18 @@
 ---
-id: "conversion-license-cannabis"
-webflowId: "640b852c9a5e4f6a4de2ae45"
-urlSlug: "conversion-license"
-name: "Submit Your Cannabis Conversion License"
-webflowName: "Cannabis Conversion License"
-filename: "conversion-license-cannabis"
-callToActionLink: "https://nj-crc-public.nls.egov.com/#!/signin"
-callToActionText: "Apply for My Conversion License"
-issuingAgency: "Cannabis Regulatory Commission"
-licenseCertificationClassification: "LICENSE"
+filename: conversion-license-cannabis
+urlSlug: conversion-license
+name: Submit Your Cannabis Conversion License
+webflowName: "Cannabis: Conversion License"
+industryId: cannabis
+callToActionLink: https://nj-crc-public.nls.egov.com/#!/signin
+id: conversion-license-cannabis
+issuingAgency: Cannabis Regulatory Commission
+callToActionText: Apply for My Conversion License
+webflowId: 640b852c9a5e4f6a4de2ae45
+licenseCertificationClassification: LICENSE
 ---
 
-You cannot legally run your business until your conversion license is approved. It may take ~90 days for your application to be reviewed.
+If you have a Conditional License, you will need to obtain a Conversion License. A Conditional License limits the activities your business can do. It may take ~90 days for your application to be reviewed.
 
 ---
 
