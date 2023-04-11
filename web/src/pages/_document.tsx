@@ -7,7 +7,6 @@ class CustomDocument extends Document {
     const initialProps = await Document.getInitialProps(ctx);
     return { ...initialProps };
   }
-
   render(): ReactElement {
     return (
       <Html lang="en">
@@ -15,6 +14,15 @@ class CustomDocument extends Document {
           <Script src="/vendor/js/uswds-init.min.js" strategy="beforeInteractive" />
         </Head>
         <body>
+          <noscript>
+            <iframe
+              title="Google Tag Manager"
+              src={`https://www.googletagmanager.com/ns.html?id=${process.env.GOOGLE_TAG_MANAGER_ID || ""}`}
+              height="0"
+              width="0"
+              style={{ display: "none", visibility: "hidden" }}
+            />
+          </noscript>
           <Main />
           <NextScript />
         </body>

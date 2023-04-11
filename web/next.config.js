@@ -11,6 +11,7 @@ module.exports = withBundleAnalyzer({
     AUTH_DOMAIN: process.env.AUTH_DOMAIN,
     REDIRECT_URL: process.env.REDIRECT_URL,
     GOOGLE_ANALYTICS_ID: process.env.GOOGLE_ANALYTICS_ID,
+    GOOGLE_TAG_MANAGER_ID: process.env.GOOGLE_TAG_MANAGER_ID,
     FEATURE_BUSINESS_FLP: process.env.FEATURE_BUSINESS_FLP ?? "false",
     FEATURE_BUSINESS_FLLP: process.env.FEATURE_BUSINESS_FLLP ?? "false",
     FEATURE_BUSINESS_FCORP: process.env.FEATURE_BUSINESS_FCORP ?? "false",
