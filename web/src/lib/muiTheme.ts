@@ -104,7 +104,29 @@ export default createTheme({
         },
       ],
     },
-
+    MuiCheckbox: {
+      styleOverrides: {
+        root: {
+          "&.Mui-disabled": {
+            color: "#adadad",
+          },
+        },
+      },
+      variants: [
+        {
+          props: {
+            color: "error",
+          },
+          style: {
+            color: "#b51d09",
+            ".MuiSvgIcon-root": {
+              boxShadow: "inset 0 0 0 4px #B51D0926",
+              borderRadius: "10%",
+            },
+          },
+        },
+      ],
+    },
     MuiInputBase: {
       styleOverrides: {
         root: { marginTop: "0px" },
@@ -129,7 +151,16 @@ export default createTheme({
         },
       },
     },
-    MuiFormControlLabel: { styleOverrides: { label: { padding: "8px 24px 8px 4px" } } },
+    MuiFormControlLabel: {
+      styleOverrides: {
+        label: {
+          padding: "8px 24px 8px 4px",
+          "&.Mui-disabled": {
+            color: "inherit",
+          },
+        },
+      },
+    },
     MuiOutlinedInput: {
       styleOverrides: {
         root: {
