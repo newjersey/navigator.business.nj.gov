@@ -208,6 +208,23 @@ describe("userRouter", () => {
 
         const result = await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
         expect(stubUpdateLicenseStatus).toHaveBeenCalled();
+        expect(result.body).toEqual(updatedUserData);
+      });
+
+      it("moves on in the flow if license check fails", async () => {
+        const userData = generateUserData({
+          profileData: generateProfileData({
+            industryId: "home-contractor",
+          }),
+          licenseData: generateLicenseData({
+            lastUpdatedISO: getCurrentDate().subtract(1, "hour").subtract(1, "minute").toISOString(),
+          }),
+        });
+        stubUserDataClient.get.mockResolvedValue(userData);
+        stubUpdateLicenseStatus.mockRejectedValue({});
+
+        const result = await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
+        expect(stubUpdateOperatingPhase).toHaveBeenCalledWith(userData);
         expect(result.body).toEqual(userData);
       });
     });
