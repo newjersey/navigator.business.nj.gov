@@ -1,11 +1,10 @@
 import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { withDesign } from "storybook-addon-designs";
 
 export default {
   title: "Molecules/Button/PrimaryLarge",
   component: PrimaryButton,
-  decorators: [withDesign],
+  decorators: [(Story) => <div className="width-mobile">{Story()}</div>],
   parameters: {
     design: {
       type: "figma",
@@ -15,9 +14,7 @@ export default {
 } as ComponentMeta<typeof PrimaryButton>;
 
 const Template: ComponentStory<typeof PrimaryButton> = ({ children, ...args }) => (
-  <div className="width-mobile">
-    <PrimaryButton {...args}>{children}</PrimaryButton>
-  </div>
+  <PrimaryButton {...args}>{children}</PrimaryButton>
 );
 
 export const PrimaryColor = Template.bind({});

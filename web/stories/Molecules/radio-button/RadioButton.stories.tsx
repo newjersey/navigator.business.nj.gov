@@ -90,15 +90,166 @@ const SingleRadioWithError: ComponentStory<typeof Radio> = (args) => {
 };
 export const SingleRadioWithErrorButton = SingleRadioWithError.bind({});
 
-const MultipleRadio: ComponentStory<typeof Radio> = () => renderRadioButtonGroup({ hasError: false });
+const MultipleRadio: ComponentStory<typeof Radio> = () => (
+  <WithErrorBar hasError={false} type="ALWAYS">
+    <Content>Header content goes here</Content>
+    <FormControl fullWidth>
+      <RadioGroup
+        aria-label="aria-label-attribute"
+        name="name-attribute"
+        value={""}
+        onChange={() => {}}
+        row={false}
+      >
+        <FormControlLabel
+          aria-label="aria-label-attribute"
+          style={{ alignItems: "center" }}
+          labelPlacement="end"
+          data-testid="data-test-id-attribute"
+          value="Option-1"
+          control={<Radio color={"primary"} />}
+          label={longLabel}
+        />
+        <FormControlLabel
+          aria-label="aria-label-attribute"
+          style={{ alignItems: "center" }}
+          labelPlacement="end"
+          data-testid="data-test-id-attribute"
+          value="Option-1"
+          control={<Radio color={"primary"} />}
+          label={longLabel}
+        />
+        <FormControlLabel
+          aria-label="aria-label-attribute"
+          style={{ alignItems: "center" }}
+          labelPlacement="end"
+          data-testid="data-test-id-attribute"
+          value="Option-1"
+          control={<Radio color={"primary"} />}
+          label={longLabel}
+        />
+        <FormControlLabel
+          aria-label="aria-label-attribute"
+          style={{ alignItems: "center" }}
+          labelPlacement="end"
+          data-testid="data-test-id-attribute"
+          value="Option-1"
+          control={<Radio color={"primary"} />}
+          label={longLabel}
+        />
+      </RadioGroup>
+    </FormControl>
+  </WithErrorBar>
+);
 
 export const MultipleRadioButton = MultipleRadio.bind({});
 
-const MultipleRadioWithError: ComponentStory<typeof Radio> = () => renderRadioButtonGroup({ hasError: true });
+const MultipleRadioWithError: ComponentStory<typeof Radio> = () => (
+  <WithErrorBar hasError={true} type="ALWAYS">
+    <Content>Header content goes here</Content>
+    <FormControl fullWidth>
+      <RadioGroup
+        aria-label="aria-label-attribute"
+        name="name-attribute"
+        value={""}
+        onChange={() => {}}
+        row={false}
+      >
+        <FormControlLabel
+          aria-label="aria-label-attribute"
+          style={{ alignItems: "center" }}
+          labelPlacement="end"
+          data-testid="data-test-id-attribute"
+          value="Option-1"
+          control={<Radio color={"error"} />}
+          label={longLabel}
+        />
+        <FormControlLabel
+          aria-label="aria-label-attribute"
+          style={{ alignItems: "center" }}
+          labelPlacement="end"
+          data-testid="data-test-id-attribute"
+          value="Option-1"
+          control={<Radio color={"error"} />}
+          label={longLabel}
+        />
+        <FormControlLabel
+          aria-label="aria-label-attribute"
+          style={{ alignItems: "center" }}
+          labelPlacement="end"
+          data-testid="data-test-id-attribute"
+          value="Option-1"
+          control={<Radio color={"error"} />}
+          label={longLabel}
+        />
+        <FormControlLabel
+          aria-label="aria-label-attribute"
+          style={{ alignItems: "center" }}
+          labelPlacement="end"
+          data-testid="data-test-id-attribute"
+          value="Option-1"
+          control={<Radio color={"error"} />}
+          label={longLabel}
+        />
+      </RadioGroup>
+    </FormControl>
+    <div className="text-error-dark text-bold">Error Text</div>
+  </WithErrorBar>
+);
 
 export const MultipleRadioButtonWithError = MultipleRadioWithError.bind({});
 
-const MultipleHorizontalRadio: ComponentStory<typeof Radio> = () =>
-  renderRadioButtonGroup({ hasError: true, horizontal: true, shortLabel: true });
+const MultipleHorizontalRadio: ComponentStory<typeof Radio> = () => (
+  <WithErrorBar hasError={true} type="ALWAYS">
+    <Content>Header content goes here</Content>
+    <FormControl fullWidth>
+      <RadioGroup
+        aria-label="aria-label-attribute"
+        name="name-attribute"
+        value={""}
+        onChange={() => {}}
+        row={true}
+      >
+        <FormControlLabel
+          aria-label="aria-label-attribute"
+          style={{ alignItems: "center" }}
+          labelPlacement="end"
+          data-testid="data-test-id-attribute"
+          value="Option-1"
+          control={<Radio color={"error"} />}
+          label={shortLabel}
+        />
+        <FormControlLabel
+          aria-label="aria-label-attribute"
+          style={{ alignItems: "center" }}
+          labelPlacement="end"
+          data-testid="data-test-id-attribute"
+          value="Option-1"
+          control={<Radio color={"error"} />}
+          label={shortLabel}
+        />
+        <FormControlLabel
+          aria-label="aria-label-attribute"
+          style={{ alignItems: "center" }}
+          labelPlacement="end"
+          data-testid="data-test-id-attribute"
+          value="Option-1"
+          control={<Radio color={"error"} />}
+          label={shortLabel}
+        />
+        <FormControlLabel
+          aria-label="aria-label-attribute"
+          style={{ alignItems: "center" }}
+          labelPlacement="end"
+          data-testid="data-test-id-attribute"
+          value="Option-1"
+          control={<Radio color={"error"} />}
+          label={shortLabel}
+        />
+      </RadioGroup>
+    </FormControl>
+    <div className="text-error-dark text-bold">Error Text</div>
+  </WithErrorBar>
+);
 
 export const MultipleHorizontalRadioButton = MultipleHorizontalRadio.bind({});
