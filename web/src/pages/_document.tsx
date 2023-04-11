@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/iframe-has-title */
+import { GTM_ID } from "@/lib/utils/analytics";
 import Document, { DocumentContext, DocumentInitialProps, Head, Html, Main, NextScript } from "next/document";
 import Script from "next/script";
 import { ReactElement } from "react";
@@ -17,7 +19,7 @@ class CustomDocument extends Document {
           <noscript>
             <iframe
               title="Google Tag Manager"
-              src={`https://www.googletagmanager.com/ns.html?id=${process.env.GOOGLE_TAG_MANAGER_ID || ""}`}
+              src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
               height="0"
               width="0"
               style={{ display: "none", visibility: "hidden" }}

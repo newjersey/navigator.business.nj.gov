@@ -16,7 +16,7 @@ export const ContextualInfoButton = (props: Props): ReactElement => {
 
   const setContext = async (event: React.MouseEvent): Promise<void> => {
     event.preventDefault();
-    analytics.event.contextual_link.click.view_sidebar();
+    analytics.event.contextual_link.click.view_sidebar(props.id, props.text);
 
     if (cachedContent) {
       setContextualInfo({

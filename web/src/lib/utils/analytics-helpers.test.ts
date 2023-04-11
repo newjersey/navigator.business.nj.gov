@@ -1,23 +1,12 @@
+import analytics from "@/lib/utils/analytics";
 import { generateProfileData } from "@/test/factories";
 import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import { Industries } from "@businessnjgovnavigator/shared/";
-import analytics from "./analytics";
 import { sendOnboardingOnSubmitEvents } from "./analytics-helpers";
 
-function setupMockAnalytics(): typeof analytics {
-  return {
-    ...jest.requireActual("@/lib/utils/analytics").default,
-    event: {
-      ...jest.requireActual("@/lib/utils/analytics").default.event,
-      onboarding_liquor_question: {
-        submit: { yes_require_liquor_license: jest.fn(), no_dont_require_liquor_license: jest.fn() },
-      },
-    },
-  };
-}
+jest.mock("@/lib/utils/analytics");
 
-jest.mock("@/lib/utils/analytics", () => setupMockAnalytics());
-const mockAnalytics = analytics as jest.Mocked<typeof analytics>;
+const mockAnalytic = analytics as jest.Mocked<typeof analytics>;
 
 const liquorLicenseApplicableIndustries = Industries.filter((industry) => {
   return industry.industryOnboardingQuestions.isLiquorLicenseApplicable === true;
@@ -36,9 +25,14 @@ describe("analytics-helpers", () => {
           liquorLicense: true,
         });
         sendOnboardingOnSubmitEvents(userData, "industry-page");
-        expect(
-          mockAnalytics.event.onboarding_liquor_question.submit.yes_require_liquor_license
-        ).toHaveBeenCalledTimes(1);
+        expect(mockAnalytic.eventRunner.track).toHaveBeenCalledTimes(1);
+        expect(mockAnalytic.eventRunner.track).toHaveBeenCalledWith({
+          event: "form_submits",
+          form_name: "industry_essential_questions",
+          questions: {
+            require_liquor_license: "yes",
+          },
+        });
       });
 
       it("fires no_dont_require_liquor_license event", () => {
@@ -47,9 +41,14 @@ describe("analytics-helpers", () => {
           liquorLicense: false,
         });
         sendOnboardingOnSubmitEvents(userData, "industry-page");
-        expect(
-          mockAnalytics.event.onboarding_liquor_question.submit.no_dont_require_liquor_license
-        ).toHaveBeenCalledTimes(1);
+        expect(mockAnalytic.eventRunner.track).toHaveBeenCalledTimes(1);
+        expect(mockAnalytic.eventRunner.track).toHaveBeenCalledWith({
+          event: "form_submits",
+          form_name: "industry_essential_questions",
+          questions: {
+            require_liquor_license: "no",
+          },
+        });
       });
 
       it("does not fire analytics when page is not the industry-page", () => {
@@ -58,12 +57,7 @@ describe("analytics-helpers", () => {
           liquorLicense: false,
         });
         sendOnboardingOnSubmitEvents(userData);
-        expect(
-          mockAnalytics.event.onboarding_liquor_question.submit.no_dont_require_liquor_license
-        ).not.toHaveBeenCalled();
-        expect(
-          mockAnalytics.event.onboarding_liquor_question.submit.yes_require_liquor_license
-        ).not.toHaveBeenCalled();
+        expect(mockAnalytic.eventRunner.track).toHaveBeenCalledTimes(0);
       });
     });
   });

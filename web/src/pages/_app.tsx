@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/next-script-for-ga */
 // organize-imports-ignore
 import "@newjersey/njwds/dist/css/styles.css";
 import "../styles/main.scss";
@@ -7,7 +8,8 @@ import { getCurrentUser } from "@/lib/auth/sessionHelper";
 import { onGuestSignIn, onSignIn } from "@/lib/auth/signinHelper";
 import { Roadmap, UpdateQueue, UserDataError } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
-import { useMountEffect } from "@/lib/utils/helpers";
+import { GTM_ID } from "@/lib/utils/analytics";
+import { useMountEffect, useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { Hub, HubCapsule } from "@aws-amplify/core";
 import { StyledEngineProvider, ThemeProvider } from "@mui/material";
 import { DefaultSeo } from "next-seo";
@@ -31,7 +33,7 @@ import MuiTheme from "@/lib/muiTheme";
 import { UpdateQueueContext } from "@/contexts/updateQueueContext";
 import { IntercomContext } from "@/contexts/intercomContext";
 import { IntercomScript } from "@/components/IntercomScript";
-
+import { setOnLoadDimensions } from "@/lib/utils/analytics-helpers";
 AuthContext.displayName = "Authentication";
 RoadmapContext.displayName = "Roadmap";
 AuthAlertContext.displayName = "Authentication Snackbar";
@@ -60,18 +62,22 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
   });
   const [userDataError, setUserDataError] = useState<UserDataError | undefined>(undefined);
   const router = useRouter();
-  const GOOGLE_ANALYTICS_ID = process.env.GOOGLE_ANALYTICS_ID || "";
-  const GOOGLE_TAG_MANAGER_ID = process.env.GOOGLE_TAG_MANAGER_ID || "";
-
   const [operatingPhaseId, setOperatingPhaseId] = useState<OperatingPhaseId | undefined>(undefined);
   const [legalStructureId, setLegalStructureId] = useState<string | undefined>(undefined);
   const [industryId, setIndustryId] = useState<string | undefined>(undefined);
   const [businessPersona, setBusinessPersona] = useState<BusinessPersona | undefined>(undefined);
 
+  useEffect(() => {
+    router.events.on("routeChangeComplete", analytics.pageview);
+    return () => {
+      router.events.off("routeChangeComplete", analytics.pageview);
+    };
+  }, [router.events]);
+
   const listener = (data: HubCapsule): void => {
     switch (data.payload.event) {
       case "signIn":
-        onSignIn(router.push, dispatch);
+        onSignIn(dispatch);
         break;
       case "signUp":
         break;
@@ -92,6 +98,11 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
 
   Hub.listen("auth", listener);
 
+  useMountEffectWhenDefined(() => {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    setOnLoadDimensions(updateQueue!.current());
+  }, updateQueue?.current);
+
   useMountEffect(() => {
     if (!pageProps.noAuth) {
       getCurrentUser()
@@ -107,46 +118,19 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
     }
   });
 
-  useEffect(() => {
-    analytics.pageview(router.asPath);
-  }, [router.asPath]);
-
   return (
     <>
-      <script async src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ANALYTICS_ID}`} />
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `window.dataLayer = window.dataLayer || []; 
-      function gtag(){window.dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', '${GOOGLE_ANALYTICS_ID}', { 
-        'send_page_view': false,
-        'custom_map': {
-          'dimension1': 'Industry',
-          'dimension2': 'Municipality',
-          'dimension3': 'Legal Structure',
-          'dimension5': 'Home-Based Business',
-          'dimension6': 'Persona',
-          'dimension7': 'Registration Process',
-          'dimension8': 'AB Experience',
-          'dimension9': 'Six Digit NAICS Code',
-          'dimension11': 'Phase',
-          'dimension12': 'Sub-Persona',
-        }
-      });`,
-        }}
-      />
       <Script id="google-tag-manager">
         {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','gtmDataLayer','${GOOGLE_TAG_MANAGER_ID}');`}
+})(window,document,'script','dataLayer','${GTM_ID}');`}
       </Script>
       <script
         dangerouslySetInnerHTML={{
-          __html: `window.gtmDataLayer = window.gtmDataLayer || []; 
-          function gtm(layer){window.gtmDataLayer.push(layer);};      `,
+          __html: `window.dataLayer = window.dataLayer || []; 
+          function gtm(layer){window.dataLayer.push(layer);};      `,
         }}
       />
       <Script src="/vendor/js/uswds.min.js" />
