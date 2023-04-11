@@ -57,7 +57,7 @@
     "uuid": "9.0.0",
     "winston": "3.8.2",
     "winston-cloudwatch": "6.1.1",
-    "xml2js": "0.4.23"
+    "xml2js": "0.5.0"
   },
   "devDependencies": {
     "@businessnjgovnavigator/shared": "*",
