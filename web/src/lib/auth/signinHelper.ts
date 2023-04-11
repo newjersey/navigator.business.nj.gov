@@ -8,7 +8,9 @@ import analytics from "@/lib/utils/analytics";
 import {
   setABExperienceDimension,
   setAnalyticsDimensions,
+  setOnLoadDimensions,
   setRegistrationDimension,
+  setUserId,
 } from "@/lib/utils/analytics-helpers";
 import { createEmptyUser, UserData } from "@businessnjgovnavigator/shared/";
 import { Dispatch } from "react";
@@ -16,10 +18,7 @@ import { AuthAction } from "./AuthContext";
 import * as session from "./sessionHelper";
 import { triggerSignOut } from "./sessionHelper";
 
-export const onSignIn = async (
-  push: (url: string) => Promise<boolean>,
-  dispatch: Dispatch<AuthAction>
-): Promise<void> => {
+export const onSignIn = async (dispatch: Dispatch<AuthAction>): Promise<void> => {
   const user = await session.getCurrentUser();
   dispatch({
     type: "LOGIN",
@@ -27,9 +26,8 @@ export const onSignIn = async (
   });
 
   const userData = await api.getUserData(user.id);
-  setAnalyticsDimensions(userData.profileData);
   setRegistrationDimension("Fully Registered");
-  setABExperienceDimension(userData.user.abExperience);
+  setOnLoadDimensions(userData);
 };
 
 export type SelfRegRouter = {
@@ -90,9 +88,10 @@ export const onGuestSignIn = async (
     type: "LOGIN_GUEST",
     user: user,
   });
-  setABExperienceDimension(user.abExperience);
+  setABExperienceDimension(user.abExperience, true);
+  setUserId(user.id, true);
   if (userData) {
-    setAnalyticsDimensions(userData.profileData);
+    setAnalyticsDimensions(userData.profileData, true);
     if (userData.formProgress === "UNSTARTED") {
       setRegistrationDimension("Began Onboarding");
       push(ROUTES.onboarding);

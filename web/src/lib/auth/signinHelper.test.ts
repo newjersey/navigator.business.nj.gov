@@ -48,7 +48,7 @@ describe("SigninHelper", () => {
 
       const user = generateUser({});
       mockSession.getCurrentUser.mockResolvedValue(user);
-      await onSignIn(mockPush, mockDispatch);
+      await onSignIn(mockDispatch);
 
       expect(mockDispatch).toHaveBeenCalledWith({
         type: "LOGIN",

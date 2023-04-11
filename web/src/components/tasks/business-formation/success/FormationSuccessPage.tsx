@@ -64,9 +64,10 @@ export const FormationSuccessPage = (props: Props): ReactElement => {
       </p>
       <div className="text-center">
         <Content
-          onClick={(): void => {
-            analytics.event.business_formation_success_amendments_external_link.click.go_to_Treasury_amendments_page();
-          }}
+          onClick={
+            analytics.event.business_formation_success_amendments_external_link.click
+              .go_to_Treasury_amendments_page
+          }
         >
           {Config.formation.successPage.amendmentText}
         </Content>

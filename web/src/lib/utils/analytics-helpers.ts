@@ -1,22 +1,49 @@
-import { getIsApplicableToFunctionByFieldName } from "@/lib/domain-logic/essentialQuestions";
-import analytics from "@/lib/utils/analytics";
+import { getEssentialQuestion } from "@/lib/domain-logic/essentialQuestions";
+import analytics, { DimensionQueueFactory, Questions } from "@/lib/utils/analytics";
+import { camelCaseToSnakeCase } from "@/lib/utils/cases-helpers";
 import { ABExperience, ProfileData } from "@businessnjgovnavigator/shared/";
-import { OperatingPhaseId } from "@businessnjgovnavigator/shared/operatingPhase";
-import { BusinessPersona, ForeignBusinessType } from "@businessnjgovnavigator/shared/profileData";
+import { LookupOperatingPhaseById, OperatingPhaseId } from "@businessnjgovnavigator/shared/operatingPhase";
+import {
+  BusinessPersona,
+  ForeignBusinessType,
+  IndustrySpecificData,
+} from "@businessnjgovnavigator/shared/profileData";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 
 type RegistrationProgress = "Not Started" | "Began Onboarding" | "Onboarded Guest" | "Fully Registered";
 
-export const setRegistrationDimension = (status: RegistrationProgress): void => {
-  analytics.dimensions.registrationStatus(status);
+export const setOnLoadDimensions = (userData: UserData): void => {
+  setAnalyticsDimensions(userData.profileData, true);
+  setUserId(userData.user.id, true);
+  setABExperienceDimension(userData.user.abExperience);
 };
 
-export const setABExperienceDimension = (value: ABExperience): void => {
-  analytics.dimensions.abExperience(value);
+export const setRegistrationDimension = (
+  status: RegistrationProgress,
+  queue = false
+): DimensionQueueFactory => {
+  const updateQueue = analytics.dimensions.registrationStatus(status);
+  !queue && updateQueue.update();
+  return updateQueue;
 };
 
-export const setPhaseDimension = (value: OperatingPhaseId): void => {
-  analytics.dimensions.phase(getPhaseDimension(value));
+export const setABExperienceDimension = (value: ABExperience, queue = false): DimensionQueueFactory => {
+  const updateQueue = analytics.dimensions.abExperience(value);
+  !queue && updateQueue.update();
+  return updateQueue;
+};
+
+export const setPhaseDimension = (value: OperatingPhaseId, queue = false): DimensionQueueFactory => {
+  const phase = LookupOperatingPhaseById(value);
+  const updateQueue = analytics.dimensions.phase(getPhaseDimension(value), phase.displayCalendarType);
+  !queue && updateQueue.update();
+  return updateQueue;
+};
+
+export const setUserId = (user_id: string, queue = false): DimensionQueueFactory => {
+  const updateQueue = analytics.dimensions.userId(user_id);
+  !queue && updateQueue.update();
+  return updateQueue;
 };
 
 export const phaseChangeAnalytics = ({
@@ -46,15 +73,16 @@ export const phaseChangeAnalytics = ({
   }
 };
 
-export const setAnalyticsDimensions = (profileData: ProfileData): void => {
+export const setAnalyticsDimensions = (profileData: ProfileData, queue = false): void => {
   analytics.dimensions.industry(profileData.industryId);
   analytics.dimensions.municipality(profileData.municipality?.displayName);
   analytics.dimensions.legalStructure(profileData.legalStructureId);
-  analytics.dimensions.homeBasedBusiness(profileData.homeBasedBusiness ? "true" : "false");
+  analytics.dimensions.homeBasedBusiness(profileData.homeBasedBusiness);
   analytics.dimensions.persona(getPersonaDimension(profileData.businessPersona));
   analytics.dimensions.naicsCode(profileData.naicsCode);
-  analytics.dimensions.phase(getPhaseDimension(profileData.operatingPhase));
+  setPhaseDimension(profileData.operatingPhase, true);
   analytics.dimensions.subPersona(getSubPersonaDimension(profileData.foreignBusinessType));
+  !queue && analytics.dimensions.update();
 };
 
 const getPhaseDimension = (phase: OperatingPhaseId): string => {
@@ -105,72 +133,65 @@ const getSubPersonaDimension = (type: ForeignBusinessType): string => {
       return "";
   }
 };
+const sendEssentialQuestionEvents = (newProfileData: ProfileData): void => {
+  const questions = getEssentialQuestion(newProfileData.industryId);
+  const questionResponseMap: Partial<Record<keyof IndustrySpecificData, keyof Questions>> = {
+    cannabisLicenseType: "cannabis_license_type",
+    liquorLicense: "require_liquor_license",
+    carService: "car_service_size",
+    providesStaffingService: "staffing_services",
+    interstateMoving: "moving_across_state_lines",
+    certifiedInteriorDesigner: "certifiedInteriorDesigner",
+    interstateLogistics: "interstate_logistics",
+    isChildcareForSixOrMore: "childcare_for_six_or_more",
+    requiresCpa: "offer_public_accounting",
+    realEstateAppraisalManagement: "real_estate_appraisal",
+    petCareHousing: "pet_care_housing",
+    willSellPetCareItems: "pet_care_sell_items",
+  };
+
+  let eventQuestions: Partial<Questions> = {};
+
+  questions.map((question) => {
+    let questionName = questionResponseMap[question.fieldName];
+    if (newProfileData[question.fieldName] === undefined) {
+      return;
+    }
+    if (questionName === undefined) {
+      questionName = camelCaseToSnakeCase(question.fieldName);
+    }
+    if (typeof newProfileData[question.fieldName] === "boolean") {
+      eventQuestions = {
+        ...eventQuestions,
+        [questionName]: newProfileData[question.fieldName] ? "yes" : "no",
+      };
+    } else if (question.fieldName === "cannabisLicenseType") {
+      eventQuestions = {
+        ...eventQuestions,
+        [questionName]: newProfileData[question.fieldName] === "CONDITIONAL" ? "conditional" : "annual",
+      };
+    } else if (question.fieldName === "carService") {
+      eventQuestions = {
+        ...eventQuestions,
+        [questionName]:
+          newProfileData[question.fieldName] === "STANDARD"
+            ? "taxi_size"
+            : newProfileData[question.fieldName] === "HIGH_CAPACITY"
+            ? "large_size"
+            : "both_sizes",
+      };
+    }
+  });
+
+  analytics.eventRunner.track({
+    event: "form_submits",
+    form_name: "industry_essential_questions",
+    questions: eventQuestions,
+  });
+};
 
 export const sendOnboardingOnSubmitEvents = (newProfileData: ProfileData, pageName?: string): void => {
-  if (pageName === "industry-page") {
-    if (getIsApplicableToFunctionByFieldName("cannabisLicenseType")(newProfileData.industryId)) {
-      if (newProfileData.cannabisLicenseType === "CONDITIONAL") {
-        analytics.event.onboarding_cannabis_question.submit.conditional_cannabis_license();
-      } else if (newProfileData.cannabisLicenseType === "ANNUAL") {
-        analytics.event.onboarding_cannabis_question.submit.annual_cannabis_license();
-      }
-    }
-
-    if (getIsApplicableToFunctionByFieldName("requiresCpa")(newProfileData.industryId)) {
-      if (newProfileData.requiresCpa) {
-        analytics.event.onboarding_cpa_question.submit.yes_i_offer_public_accounting();
-      } else {
-        analytics.event.onboarding_cpa_question.submit.no_i_dont_offer_public_accounting();
-      }
-    }
-
-    if (getIsApplicableToFunctionByFieldName("interstateMoving")(newProfileData.industryId)) {
-      if (newProfileData.interstateMoving) {
-        analytics.event.onboarding_moving_company_question.submit.yes_moving_across_state_lines();
-      } else {
-        analytics.event.onboarding_moving_company_question.submit.no_moving_across_state_lines();
-      }
-    }
-
-    if (getIsApplicableToFunctionByFieldName("interstateLogistics")(newProfileData.industryId)) {
-      if (newProfileData.interstateLogistics) {
-        analytics.event.onboarding_logistics_business_question.submit.yes_moving_across_state_lines();
-      } else {
-        analytics.event.onboarding_logistics_business_question.submit.no_not_moving_across_state_lines();
-      }
-    }
-
-    if (getIsApplicableToFunctionByFieldName("carService")(newProfileData.industryId)) {
-      switch (newProfileData.carService) {
-        case "STANDARD": {
-          analytics.event.onboarding_car_service_question.submit.taxi_size();
-          break;
-        }
-        case "HIGH_CAPACITY": {
-          analytics.event.onboarding_car_service_question.submit.large_size();
-          break;
-        }
-        case "BOTH": {
-          analytics.event.onboarding_car_service_question.submit.both_sizes();
-          break;
-        }
-      }
-    }
-
-    if (getIsApplicableToFunctionByFieldName("isChildcareForSixOrMore")(newProfileData.industryId)) {
-      if (newProfileData.isChildcareForSixOrMore) {
-        analytics.event.onboarding_childcare_business_question.submit.yes_more_than_6_children();
-      } else {
-        analytics.event.onboarding_childcare_business_question.submit.no_5_or_fewer_children();
-      }
-    }
-
-    if (getIsApplicableToFunctionByFieldName("liquorLicense")(newProfileData.industryId)) {
-      if (newProfileData.liquorLicense) {
-        analytics.event.onboarding_liquor_question.submit.yes_require_liquor_license();
-      } else {
-        analytics.event.onboarding_liquor_question.submit.no_dont_require_liquor_license();
-      }
-    }
+  if (pageName === "industry-page" && newProfileData.industryId) {
+    sendEssentialQuestionEvents(newProfileData);
   }
 };

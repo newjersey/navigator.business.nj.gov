@@ -14,9 +14,12 @@ global.TextDecoder = TextDecoder;
 global.console.warn = (message) => {
   throw message;
 };
+
 global.console.error = (message) => {
   throw message;
 };
+
+window.gtm = jest.fn();
 
 window.matchMedia =
   window.matchMedia ||

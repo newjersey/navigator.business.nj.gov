@@ -10,6 +10,10 @@ export const camelCaseToSentence = (text: string): string => {
   return capitalizeFirstLetter(spacedCase);
 };
 
+export const camelCaseToSnakeCase = (text: string): string => {
+  return camelCaseToSentence(text).split(" ").join("_");
+};
+
 export const kebabSnakeSentenceToCamelCase = (text: string): string => {
   return text
     .toLowerCase()

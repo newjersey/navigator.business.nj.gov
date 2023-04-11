@@ -215,15 +215,8 @@ const ProfilePage = (props: Props): ReactElement => {
   );
 
   const sendOnSaveAnalytics = (prevProfileData: ProfileData, newProfileData: ProfileData): void => {
-    if (
-      prevProfileData.dateOfFormation !== newProfileData.dateOfFormation &&
-      !!newProfileData.dateOfFormation
-    ) {
+    if (prevProfileData.dateOfFormation !== newProfileData.dateOfFormation) {
       analytics.event.profile_formation_date.submit.formation_date_changed();
-    }
-
-    if (prevProfileData.dateOfFormation !== undefined && newProfileData.dateOfFormation === undefined) {
-      analytics.event.profile_formation_date.submit.formation_date_deleted();
     }
 
     const municipalityEnteredForFirstTime =
@@ -683,7 +676,6 @@ const ProfilePage = (props: Props): ReactElement => {
                         foreignBusinessType={foreignBusinessType}
                         activeTab={profileTab}
                         setProfileTab={(tab: ProfileTabs): void => {
-                          router.replace(ROUTES.profile);
                           setProfileTab(tab);
                         }}
                       />

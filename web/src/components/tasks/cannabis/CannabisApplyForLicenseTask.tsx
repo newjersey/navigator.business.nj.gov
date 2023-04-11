@@ -85,12 +85,13 @@ export const CannabisApplyForLicenseTask = (props: Props): ReactElement => {
   };
 
   const onBack = (): void => {
+    analytics.event.cannabis_license_form.click.view_requirements("questions");
     setDisplayFirstTab(true);
     scrollToTop();
   };
 
   const sendNextTabButtonAnalytics = (): void => {
-    analytics.event.cannabis_license_form.click.view_requirements();
+    analytics.event.cannabis_license_form.click.view_requirements("requirements");
     if (priorityStatusState.impactZone) {
       analytics.event.cannabis_license_form_priority_status_impact_checkbox.submit.impact_zone_business();
     }
