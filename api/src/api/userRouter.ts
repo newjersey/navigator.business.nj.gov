@@ -111,10 +111,8 @@ export const userRouterFactory = (
     userDataClient
       .get(req.params.userId)
       .then(async (userData: UserData) => {
-        if (userData.licenseData && shouldCheckLicense(userData)) {
-          await updateLicenseStatus(userData.user.id, userData.licenseData.nameAndAddress);
-        }
-        const updatedBusinessNameSearchData = await updateBusinessNameSearchIfNeeded(userData);
+        const updatedLicenseCheckData = await updateLicenseStatusIfNeeded(userData);
+        const updatedBusinessNameSearchData = await updateBusinessNameSearchIfNeeded(updatedLicenseCheckData);
         const updatedOperatingPhaseData = updateOperatingPhase(updatedBusinessNameSearchData);
         const updatedUserData = updateRoadmapSidebarCards(updatedOperatingPhaseData);
         await userDataClient.put(updatedUserData);
@@ -247,6 +245,18 @@ export const userRouterFactory = (
           },
         },
       };
+    } catch {
+      return userData;
+    }
+  };
+
+  const updateLicenseStatusIfNeeded = async (userData: UserData): Promise<UserData> => {
+    if (!userData.licenseData || !shouldCheckLicense(userData)) {
+      return userData;
+    }
+
+    try {
+      return await updateLicenseStatus(userData.user.id, userData.licenseData.nameAndAddress);
     } catch {
       return userData;
     }
