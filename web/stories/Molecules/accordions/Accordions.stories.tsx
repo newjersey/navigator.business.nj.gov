@@ -6,13 +6,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 export default {
   title: "Molecules/Accordion",
   component: Accordion,
-  decorators: [
-    (Story) => (
-      <div className="maxw-mobile-lg">
-        <Story />
-      </div>
-    ),
-  ],
+  decorators: [(Story) => <div className="maxw-mobile-lg">{Story()}</div>],
   parameters: {
     design: {
       type: "figma",
@@ -20,121 +14,116 @@ export default {
     },
   },
 } as ComponentMeta<typeof Accordion>;
-const renderLargeAccordion = () => (
-  <Accordion onChange={() => {}} square={false} className="">
-    <AccordionSummary
-      aria-controls=""
-      expandIcon={<Icon className={"usa-icon--size-5 margin-left-1"}>expand_more</Icon>}
-    >
-      <div className="flex flex-align-center">
-        <img src="/img/section-complete.svg" className="margin-right-1" alt="" />
-        <div className="h3-styling margin-0-override">Accordion Summary Text</div>
-      </div>
-    </AccordionSummary>
-    <AccordionDetails>
-      <Content>
-        {
-          "Accordion details go here, additional styling like padding or headers can be added to both the Accordion Summary and Accordion Details sections"
-        }
-      </Content>
-    </AccordionDetails>
-  </Accordion>
-);
-
-const renderSmallAccordion = () => (
-  <Accordion onChange={() => {}} square={false} className="">
-    <AccordionSummary
-      aria-controls=""
-      expandIcon={<Icon className={"usa-icon--size-3 text-base-darkest"}>expand_more</Icon>}
-    >
-      <div className="flex flex-align-center">
-        <img src="/img/section-complete.svg" className="margin-right-105 height-205" alt="" />
-        <div>Accordion Summary Text</div>
-      </div>
-    </AccordionSummary>
-    <AccordionDetails>
-      <Content>
-        {
-          "Accordion details go here, additional styling like padding or headers can be added to both the Accordion Summary and Accordion Details sections"
-        }
-      </Content>
-    </AccordionDetails>
-  </Accordion>
-);
-
-const renderMultipleAccordions = () => (
-  <>
-    <Accordion onChange={() => {}} square={false} className="">
-      <AccordionSummary
-        aria-controls=""
-        expandIcon={<Icon className={"usa-icon--size-3 text-base-darkest"}>expand_more</Icon>}
-      >
-        <div className="flex flex-align-center">
-          <img src="/img/section-complete.svg" className="margin-right-105 height-205" alt="" />
-          <div>Accordion Summary Text</div>
-        </div>
-      </AccordionSummary>
-      <AccordionDetails>
-        <Content>
-          {
-            "Accordion details go here, additional styling like padding or headers can be added to both the Accordion Summary and Accordion Details sections"
-          }
-        </Content>
-      </AccordionDetails>
-    </Accordion>
-    <hr />
-    <Accordion onChange={() => {}} square={false} className="">
-      <AccordionSummary
-        aria-controls=""
-        expandIcon={<Icon className={"usa-icon--size-3 text-base-darkest"}>expand_more</Icon>}
-      >
-        <div className="flex flex-align-center">
-          <img src="/img/section-complete.svg" className="margin-right-105 height-205" alt="" />
-          <div>Accordion Summary Text</div>
-        </div>
-      </AccordionSummary>
-      <AccordionDetails>
-        <Content>
-          {
-            "Accordion details go here, additional styling like padding or headers can be added to both the Accordion Summary and Accordion Details sections"
-          }
-        </Content>
-      </AccordionDetails>
-    </Accordion>
-    <hr />
-    <Accordion onChange={() => {}} square={false} className="">
-      <AccordionSummary
-        aria-controls=""
-        expandIcon={<Icon className={"usa-icon--size-3 text-base-darkest"}>expand_more</Icon>}
-      >
-        <div className="flex flex-align-center">
-          <img src="/img/section-complete.svg" className="margin-right-105 height-205" alt="" />
-          <div>Accordion Summary Text</div>
-        </div>
-      </AccordionSummary>
-      <AccordionDetails>
-        <Content>
-          {
-            "Accordion details go here, additional styling like padding or headers can be added to both the Accordion Summary and Accordion Details sections"
-          }
-        </Content>
-      </AccordionDetails>
-    </Accordion>
-    <hr />
-  </>
-);
 
 const LargeAccordionTemplate: ComponentStory<typeof Accordion> = () => {
-  return renderLargeAccordion();
+  return (
+    <Accordion onChange={() => {}}>
+      <AccordionSummary
+        aria-controls=""
+        expandIcon={<Icon className={"usa-icon--size-5 margin-left-1"}>expand_more</Icon>}
+      >
+        <div className="flex flex-align-center">
+          <img src="/img/section-complete.svg" className="margin-right-1" alt="" />
+          <div className="h3-styling margin-0-override">Accordion Summary Text</div>
+        </div>
+      </AccordionSummary>
+      <AccordionDetails>
+        <Content>
+          {
+            "Accordion details go here, additional styling like padding or headers can be added to both the Accordion Summary and Accordion Details sections"
+          }
+        </Content>
+      </AccordionDetails>
+    </Accordion>
+  );
 };
 export const LargeAccordion = LargeAccordionTemplate.bind({});
 
 const SmallAccordionTemplate: ComponentStory<typeof Accordion> = () => {
-  return renderSmallAccordion();
+  return (
+    <Accordion onChange={() => {}}>
+      <AccordionSummary
+        aria-controls=""
+        expandIcon={<Icon className={"usa-icon--size-3 text-base-darkest"}>expand_more</Icon>}
+      >
+        <div className="flex flex-align-center">
+          <img src="/img/section-complete.svg" className="margin-right-105 height-205" alt="" />
+          <div>Accordion Summary Text</div>
+        </div>
+      </AccordionSummary>
+      <AccordionDetails>
+        <Content>
+          {
+            "Accordion details go here, additional styling like padding or headers can be added to both the Accordion Summary and Accordion Details sections"
+          }
+        </Content>
+      </AccordionDetails>
+    </Accordion>
+  );
 };
 export const SmallAccordion = SmallAccordionTemplate.bind({});
 
 const MultipleAccordionsTemplate: ComponentStory<typeof Accordion> = () => {
-  return renderMultipleAccordions();
+  return (
+    <>
+      <Accordion onChange={() => {}} square={false} className="">
+        <AccordionSummary
+          aria-controls=""
+          expandIcon={<Icon className={"usa-icon--size-3 text-base-darkest"}>expand_more</Icon>}
+        >
+          <div className="flex flex-align-center">
+            <img src="/img/section-complete.svg" className="margin-right-105 height-205" alt="" />
+            <div>Accordion Summary Text</div>
+          </div>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Content>
+            {
+              "Accordion details go here, additional styling like padding or headers can be added to both the Accordion Summary and Accordion Details sections"
+            }
+          </Content>
+        </AccordionDetails>
+      </Accordion>
+      <hr />
+      <Accordion onChange={() => {}} square={false} className="">
+        <AccordionSummary
+          aria-controls=""
+          expandIcon={<Icon className={"usa-icon--size-3 text-base-darkest"}>expand_more</Icon>}
+        >
+          <div className="flex flex-align-center">
+            <img src="/img/section-complete.svg" className="margin-right-105 height-205" alt="" />
+            <div>Accordion Summary Text</div>
+          </div>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Content>
+            {
+              "Accordion details go here, additional styling like padding or headers can be added to both the Accordion Summary and Accordion Details sections"
+            }
+          </Content>
+        </AccordionDetails>
+      </Accordion>
+      <hr />
+      <Accordion onChange={() => {}} square={false} className="">
+        <AccordionSummary
+          aria-controls=""
+          expandIcon={<Icon className={"usa-icon--size-3 text-base-darkest"}>expand_more</Icon>}
+        >
+          <div className="flex flex-align-center">
+            <img src="/img/section-complete.svg" className="margin-right-105 height-205" alt="" />
+            <div>Accordion Summary Text</div>
+          </div>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Content>
+            {
+              "Accordion details go here, additional styling like padding or headers can be added to both the Accordion Summary and Accordion Details sections"
+            }
+          </Content>
+        </AccordionDetails>
+      </Accordion>
+      <hr />
+    </>
+  );
 };
 export const MultipleAccordions = MultipleAccordionsTemplate.bind({});
