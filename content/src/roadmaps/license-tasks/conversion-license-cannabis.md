@@ -11,7 +11,8 @@ callToActionText: Apply for My Conversion License
 webflowId: 640b852c9a5e4f6a4de2ae45
 licenseCertificationClassification: LICENSE
 ---
-If you have a Conditional License, you will need to obtain a Conversion License. A Conditional License limits the activites your business can do. It may take ~90 days for your application to be reviewed.
+
+If you have a Conditional License, you will need to obtain a Conversion License. A Conditional License limits the activities your business can do. It may take ~90 days for your application to be reviewed.
 
 ---
 
