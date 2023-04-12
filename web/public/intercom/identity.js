@@ -1,44 +1,44 @@
-let userId = document.currentScript.getAttribute("data-user-id");
+var userId = document.currentScript.getAttribute("data-user-id");
 if (typeof userId === "undefined") {
   userId = undefined;
 }
 
-let userHash = document.currentScript.getAttribute("data-user-hash");
+var userHash = document.currentScript.getAttribute("data-user-hash");
 if (typeof userHash === "undefined") {
   userHash = undefined;
 }
 
-let userName = document.currentScript.getAttribute("data-user-name");
+var userName = document.currentScript.getAttribute("data-user-name");
 if (typeof userName === "undefined") {
   userName = undefined;
 }
 
-let userEmail = document.currentScript.getAttribute("data-user-email");
+var userEmail = document.currentScript.getAttribute("data-user-email");
 if (typeof userEmail === "undefined") {
   userEmail = undefined;
 }
 
-let userOperatingPhase = document.currentScript.getAttribute("data-user-operating-phase");
+var userOperatingPhase = document.currentScript.getAttribute("data-user-operating-phase");
 if (typeof userOperatingPhase === "undefined") {
   userOperatingPhase = undefined;
 }
 
-let userUuid = document.currentScript.getAttribute("data-user-uuid");
+var userUuid = document.currentScript.getAttribute("data-user-uuid");
 if (typeof userUuid === "undefined") {
   userUuid = undefined;
 }
 
-let userLegalStructure = document.currentScript.getAttribute("legal-structure");
+var userLegalStructure = document.currentScript.getAttribute("legal-structure");
 if (typeof userLegalStructure === "undefined") {
   userLegalStructure = undefined;
 }
 
-let userIndustry = document.currentScript.getAttribute("industry");
+var userIndustry = document.currentScript.getAttribute("industry");
 if (typeof userIndustry === "undefined") {
   userIndustry = undefined;
 }
 
-let userBusinessPersona = document.currentScript.getAttribute("businessPersona");
+var userBusinessPersona = document.currentScript.getAttribute("businessPersona");
 if (typeof userBusinessPersona === "undefined") {
   userBusinessPersona = undefined;
 }
@@ -59,14 +59,14 @@ window.intercomSettings = {
 
 // re-init
 (function () {
-  let w = window;
-  let ic = w.Intercom;
+  var w = window;
+  var ic = w.Intercom;
   if (typeof ic === "function") {
     ic("reattach_activator");
     ic("update", w.intercomSettings);
   } else {
-    let d = document;
-    let i = function () {
+    var d = document;
+    var i = function () {
       i.c(arguments);
     };
     i.q = [];
@@ -74,12 +74,12 @@ window.intercomSettings = {
       i.q.push(args);
     };
     w.Intercom = i;
-    let l = function () {
-      let s = d.createElement("script");
+    var l = function () {
+      var s = d.createElement("script");
       s.type = "text/javascript";
       s.async = true;
       s.src = "https://widget.intercom.io/widget/ozxx8n5h";
-      let x = d.getElementsByTagName("script")[0];
+      var x = d.getElementsByTagName("script")[0];
       x.parentNode.insertBefore(s, x);
     };
     if (w.attachEvent) {
