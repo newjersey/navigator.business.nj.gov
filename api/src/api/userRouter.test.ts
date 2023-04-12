@@ -208,7 +208,7 @@ describe("userRouter", () => {
 
         const result = await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
         expect(stubUpdateLicenseStatus).toHaveBeenCalled();
-        expect(result.body).toEqual(updatedUserData);
+        expect(result.body).toEqual(userData);
       });
 
       it("moves on in the flow if license check fails", async () => {
@@ -221,7 +221,7 @@ describe("userRouter", () => {
           }),
         });
         stubUserDataClient.get.mockResolvedValue(userData);
-        stubUpdateLicenseStatus.mockRejectedValue({});
+        stubUpdateLicenseStatus.mockRejectedValue("license failure");
 
         const result = await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
         expect(stubUpdateOperatingPhase).toHaveBeenCalledWith(userData);

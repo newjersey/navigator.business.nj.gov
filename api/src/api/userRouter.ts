@@ -111,8 +111,9 @@ export const userRouterFactory = (
     userDataClient
       .get(req.params.userId)
       .then(async (userData: UserData) => {
-        const updatedLicenseCheckData = await updateLicenseStatusIfNeeded(userData);
-        const updatedBusinessNameSearchData = await updateBusinessNameSearchIfNeeded(updatedLicenseCheckData);
+        updateAndSaveLicenseStatusIfNeeded(userData);
+
+        const updatedBusinessNameSearchData = await updateBusinessNameSearchIfNeeded(userData);
         const updatedOperatingPhaseData = updateOperatingPhase(updatedBusinessNameSearchData);
         const updatedUserData = updateRoadmapSidebarCards(updatedOperatingPhaseData);
         await userDataClient.put(updatedUserData);
@@ -250,16 +251,18 @@ export const userRouterFactory = (
     }
   };
 
-  const updateLicenseStatusIfNeeded = async (userData: UserData): Promise<UserData> => {
+  const updateAndSaveLicenseStatusIfNeeded = (userData: UserData): void => {
     if (!userData.licenseData || !shouldCheckLicense(userData)) {
-      return userData;
+      return;
     }
 
-    try {
-      return await updateLicenseStatus(userData.user.id, userData.licenseData.nameAndAddress);
-    } catch {
-      return userData;
-    }
+    updateLicenseStatus(userData.user.id, userData.licenseData.nameAndAddress)
+      .then(() => {
+        return;
+      })
+      .catch(() => {
+        return;
+      });
   };
 
   return router;
