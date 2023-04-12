@@ -29,3 +29,4 @@
 - [ ] I have not used any relative imports
 - [ ] I have checked for and removed instances of unused config from CMS
 - [ ] I have pruned any instances of unused code
+- [ ] I have not added any markdown to labels, titles and button text in config
