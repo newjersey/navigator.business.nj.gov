@@ -1,3 +1,10 @@
+## [5.17.1](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.17.0...v5.17.1) (2023-04-12)
+
+
+### Bug Fixes
+
+* remove await licenseCheck and check in background only ([c5e57a1](https://github.com/newjersey/navigator.business.nj.gov/commit/c5e57a1345811fe041c998efb3bdff12d5e7d67f))
+
 # [5.17.0](https://github.com/newjersey/navigator.business.nj.gov/compare/v5.16.0...v5.17.0) (2023-04-11)
 
 
