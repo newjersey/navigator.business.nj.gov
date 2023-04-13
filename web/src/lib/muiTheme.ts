@@ -89,6 +89,11 @@ export default createTheme({
       },
     },
     MuiRadio: {
+      styleOverrides: {
+        root: {
+          marginRight: "4px",
+        },
+      },
       variants: [
         {
           props: {
@@ -107,6 +112,7 @@ export default createTheme({
     MuiCheckbox: {
       styleOverrides: {
         root: {
+          marginRight: "4px",
           "&.Mui-disabled": {
             color: "#adadad",
           },
@@ -154,7 +160,7 @@ export default createTheme({
     MuiFormControlLabel: {
       styleOverrides: {
         label: {
-          padding: "8px 24px 8px 4px",
+          padding: "8px 24px 8px 0px",
           "&.Mui-disabled": {
             color: "inherit",
           },
