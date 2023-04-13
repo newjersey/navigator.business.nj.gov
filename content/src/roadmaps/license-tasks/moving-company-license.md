@@ -4,18 +4,18 @@ urlSlug: moving-company-license
 name: Apply for a Public Movers License
 webflowName: "Moving Company: Public Movers License"
 industryIntegration: New Jersey Division of Consumer Affairs
-issuingAgency: New Jersey Division of Consumer Affairs,  Office of Consumer
-  Protection, Regulated Business Section, Public Movers and Warehousemen
 industryId: moving-company
-callToActionText: Apply for My Public Movers License
 callToActionLink: https://www.njconsumeraffairs.gov/pmw/Pages/applications.aspx
 webflowIndustry: ""
-licenseCertificationClassification: ""
 divisionPhone: (973) 504-6512
 id: moving-company-license
+issuingAgency: New Jersey Division of Consumer Affairs,  Office of Consumer
+  Protection, Regulated Business Section, Public Movers and Warehousemen
+callToActionText: Apply for My Public Movers License
 webflowId: 640b84670945bdf4cfd63f2c
+licenseCertificationClassification: ""
 ---
-You must apply for a public movers license before you can legally offer services to the public.
+If you transport household goods or special commodities by motor vehicle for compensation within New Jersey you need a public movers license. 
 
 - - -
 
