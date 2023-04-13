@@ -4,16 +4,16 @@ urlSlug: notary-certificate
 name: Register as a Notary Public
 webflowName: "Notary Public: Notary Public Certificate"
 industryIntegration: New Jersey Department of Revenue and Enterprise Services
-issuingAgency: New Jersey Department of Treasury
 industryId: notary-public
-callToActionText: Apply for My Notary Public Certificate
 callToActionLink: https://www.njportal.com/DOR/Notary
 webflowIndustry: ""
-licenseCertificationClassification: ""
 issuingDivision: Bureau of Corporate Records
 divisionPhone: (609) 292-9292
 id: notary-register
+issuingAgency: New Jersey Department of Treasury
+callToActionText: Apply for My Notary Public Certificate
 webflowId: 5f77296c2edc674c7cb4a708
+licenseCertificationClassification: ""
 ---
 You or any staff providing notary services must be registered as a notary public.
 
@@ -33,11 +33,11 @@ You or any staff providing notary services must be registered as a notary public
 >
 > * A notary public commission certificate
 > * An oath qualification certificate
->
+
 > **After Receiving Your Notary Public Commission Certificate:**
 >
 > Within three months, take your notary public commission certificate and oath qualification certificate to the office of the county clerk where you reside (for non‐residents, where you are employed in New Jersey) to swear to the Oath of Office.
 >
-> **Required for Advertisements:**
+ **Required for Advertisements:**
 >
-> A notary public who is not licensed as an attorney-at-law must provide a statement in any advertisements stating that they're not an attorney licensed to practice law and cannot offer legal advice.
+ A notary public who is not licensed as an attorney-at-law must provide a statement in any advertisements stating that they're not an attorney licensed to practice law and cannot offer legal advice.
