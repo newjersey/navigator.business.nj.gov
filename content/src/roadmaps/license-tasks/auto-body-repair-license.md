@@ -2,16 +2,17 @@
 urlSlug: auto-body-repair-license
 name: Get Your Auto-Body Repair License
 webflowName: "Auto-Body Repair: Business License"
-issuingAgency: New Jersey Motor Vehicle Commission
 formName: BLC-25
 industryId: auto-body-repair
-callToActionText: Apply for My Auto-Body Repair License
 callToActionLink: https://www.state.nj.us/mvcbiz/BusinessServices/AutoBodyRepair.htm
 webflowIndustry: Auto Body
-licenseCertificationClassification: LICENSE
 divisionPhone: (609) 292-6500
 id: auto-body-repair-license
+issuingAgency: New Jersey Motor Vehicle Commission
+callToActionText: Apply for My Auto-Body Repair License
+webflowType: business-license
 webflowId: 5f7729541a08097ccbbb2ecb
+licenseCertificationClassification: LICENSE
 ---
 You need a license to open an auto-body repair business.
 
