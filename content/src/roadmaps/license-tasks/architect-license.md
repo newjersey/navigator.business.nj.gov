@@ -4,15 +4,16 @@ urlSlug: architect-license
 name: Apply for Your Architect License
 webflowName: "Architecture: Architect License"
 industryIntegration: New Jersey Division of Consumer Affairs
-issuingAgency: New Jersey Division of Consumer Affairs Board of Architects
 industryId: architecture
-callToActionText: Apply for My Architect License
 callToActionLink: https://www.njconsumeraffairs.gov/arch/Pages/applications.aspx
 webflowIndustry: Architect
-licenseCertificationClassification: LICENSE
 divisionPhone: (973) 504-6385
 id: architect-license
+issuingAgency: New Jersey Division of Consumer Affairs Board of Architects
+callToActionText: Apply for My Architect License
+webflowType: individual-license
 webflowId: 5f772971b0544fd3d536617b
+licenseCertificationClassification: LICENSE
 ---
 You need an architect license before offering professional services as an individual or opening an architect firm. 
 
