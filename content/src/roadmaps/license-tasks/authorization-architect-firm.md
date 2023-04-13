@@ -4,15 +4,16 @@ urlSlug: authorization-architect-firm
 name: Obtain a Certificate of Authorization for Your Firm
 webflowName: "Architecture: Certificate of Authorization for Your Firm"
 industryIntegration: New Jersey Division of Consumer Affairs
-issuingAgency: New Jersey Division of Consumer Affairs, Board of Architects
 industryId: architecture
-callToActionText: Apply for My Certificate of Authorization
 callToActionLink: https://www.njconsumeraffairs.gov/arch/Pages/applications.aspx
 webflowIndustry: Architect
-licenseCertificationClassification: LICENSE
 divisionPhone: (973) 504-6385
 id: authorization-architect-firm
+issuingAgency: New Jersey Division of Consumer Affairs, Board of Architects
+callToActionText: Apply for My Certificate of Authorization
+webflowType: business-license
 webflowId: 5f772971eb55580500feb5a2
+licenseCertificationClassification: LICENSE
 ---
 You need a certificate of authorization to open an architecture firm.
 
