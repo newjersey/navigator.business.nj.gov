@@ -3348,7 +3348,12 @@ collections:
                             collapsed: true
                             widget: object
                             fields:
-                              - { label: "Description", name: "description", widget: "markdown" }
+                              - {
+                                  label: "Description",
+                                  name: "description",
+                                  widget: "markdown",
+                                  required: false,
+                                }
                   - label: Industry
                     name: industryId
                     collapsed: true
