@@ -41,44 +41,41 @@ export const PriorityStatusCheckboxes = (props: Props): ReactElement => {
 
   return (
     <>
-      <ul>
-        <FormGroup>
-          <FormControl variant="outlined" fullWidth>
-            <FormControlLabel
-              label={<Content>{Config.cannabisApplyForLicense.diverselyOwnedLabel}</Content>}
-              control={
-                <Checkbox
-                  name="diversely-owned-checkbox"
-                  onChange={(event): void => handleCheckbox(event, "diverselyOwned")}
-                  checked={props.priorityStatusState.diverselyOwned}
-                  data-testid="diversely-owned-checkbox"
-                />
-              }
-            />
-            <FormControlLabel
-              label={<Content>{Config.cannabisApplyForLicense.impactZoneLabel}</Content>}
-              control={
-                <Checkbox
-                  onChange={(event): void => handleCheckbox(event, "impactZone")}
-                  checked={props.priorityStatusState.impactZone}
-                  data-testid="impact-zone-checkbox"
-                />
-              }
-            />
-            <FormControlLabel
-              label={<Content>{Config.cannabisApplyForLicense.sbeLabel}</Content>}
-              control={
-                <Checkbox
-                  onChange={(event): void => handleCheckbox(event, "socialEquity")}
-                  checked={props.priorityStatusState.socialEquity}
-                  data-testid="sbe-checkbox"
-                />
-              }
-            />
-          </FormControl>
-        </FormGroup>
-      </ul>
-
+      <FormGroup>
+        <FormControl variant="outlined" fullWidth>
+          <FormControlLabel
+            label={<Content>{Config.cannabisApplyForLicense.diverselyOwnedLabel}</Content>}
+            control={
+              <Checkbox
+                name="diversely-owned-checkbox"
+                onChange={(event): void => handleCheckbox(event, "diverselyOwned")}
+                checked={props.priorityStatusState.diverselyOwned}
+                data-testid="diversely-owned-checkbox"
+              />
+            }
+          />
+          <FormControlLabel
+            label={<Content>{Config.cannabisApplyForLicense.impactZoneLabel}</Content>}
+            control={
+              <Checkbox
+                onChange={(event): void => handleCheckbox(event, "impactZone")}
+                checked={props.priorityStatusState.impactZone}
+                data-testid="impact-zone-checkbox"
+              />
+            }
+          />
+          <FormControlLabel
+            label={<Content>{Config.cannabisApplyForLicense.sbeLabel}</Content>}
+            control={
+              <Checkbox
+                onChange={(event): void => handleCheckbox(event, "socialEquity")}
+                checked={props.priorityStatusState.socialEquity}
+                data-testid="sbe-checkbox"
+              />
+            }
+          />
+        </FormControl>
+      </FormGroup>
       <ModalTwoButton
         isOpen={eligibleModalIsOpenWith !== ""}
         close={(): void => setEligibleModalIsOpenWith("")}

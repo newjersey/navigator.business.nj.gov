@@ -91,17 +91,15 @@ export const PaymentTypeTable = (): ReactElement => {
         </thead>
         <tbody>
           <tr>
-            <td>
-              <div className="business-formation-table-checkboxes">
-                <Radio
-                  id="paymentTypeCreditCardRadio"
-                  color={hasError ? "error" : "primary"}
-                  checked={state.formationFormData.paymentType === "CC"}
-                  onChange={handleChange}
-                  value="CC"
-                  name="radio-buttons"
-                />
-              </div>
+            <td className={"padding-1"}>
+              <Radio
+                id="paymentTypeCreditCardRadio"
+                color={hasError ? "error" : "primary"}
+                checked={state.formationFormData.paymentType === "CC"}
+                onChange={handleChange}
+                value="CC"
+                name="radio-buttons"
+              />
             </td>
             <td>
               <label
@@ -124,17 +122,15 @@ export const PaymentTypeTable = (): ReactElement => {
             </td>
           </tr>
           <tr>
-            <td>
-              <div className="business-formation-table-checkboxes">
-                <Radio
-                  id="paymentTypeACHRadio"
-                  color={hasError ? "error" : "primary"}
-                  checked={state.formationFormData.paymentType === "ACH"}
-                  onChange={handleChange}
-                  value="ACH"
-                  name="radio-buttons"
-                />
-              </div>
+            <td className={"padding-1"}>
+              <Radio
+                id="paymentTypeACHRadio"
+                color={hasError ? "error" : "primary"}
+                checked={state.formationFormData.paymentType === "ACH"}
+                onChange={handleChange}
+                value="ACH"
+                name="radio-buttons"
+              />
             </td>
             <td>
               <label
