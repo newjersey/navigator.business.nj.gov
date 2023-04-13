@@ -4,16 +4,17 @@ urlSlug: massage-therapy-license
 name: Get a Massage Therapy Business License
 webflowName: "Massage Therapy: Massage Therapy Business License"
 industryIntegration: New Jersey Division of Consumer Affairs
-issuingAgency: New Jersey Division of Consumer Affairs Board of Massage and Bodywork Therapy
 industryId: massage-therapy
-callToActionText: Get My Massage Therapy Business License
 callToActionLink: https://www.njconsumeraffairs.gov/mbt/Pages/business.aspx
 webflowIndustry: ""
-licenseCertificationClassification: ""
 issuingDivision: New Jersey Board of Massage and Bodywork Therapy
 divisionPhone: (973) 504-6520
 id: license-massage-therapy
+issuingAgency: New Jersey Division of Consumer Affairs Board of Massage and Bodywork Therapy
+callToActionText: Get My Massage Therapy Business License
+webflowType: business-license
 webflowId: 5f77299ae10dec7f6a025080
+licenseCertificationClassification: ""
 ---
 If you will employ others to offer massage therapy services, you need to register your business as a massage therapy employer.
 
