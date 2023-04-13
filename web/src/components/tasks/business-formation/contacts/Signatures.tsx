@@ -8,7 +8,6 @@ import {
   createSignedEmptyFormationObject,
   needsSignerTypeFunc,
 } from "@/components/tasks/business-formation/contacts/helpers";
-import { ValidatedCheckbox } from "@/components/ValidatedCheckbox";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -21,7 +20,7 @@ import {
   FormationSigner,
   SignerTitle,
 } from "@businessnjgovnavigator/shared";
-import { FormHelperText, MenuItem, Select, useMediaQuery } from "@mui/material";
+import { Checkbox, FormHelperText, MenuItem, Select, useMediaQuery } from "@mui/material";
 import { ChangeEvent, ReactElement, ReactNode, useContext, useMemo } from "react";
 
 export const Signatures = (): ReactElement => {
@@ -148,13 +147,13 @@ export const Signatures = (): ReactElement => {
           style={{ height: `${index === 0 ? "44px" : "60px"}` }}
           className="display-flex flex-column flex-justify-center"
         >
-          <ValidatedCheckbox
+          <Checkbox
             id={index ? `signature-checkbox-signers-${index}` : `signature-checkbox-signers`}
             onChange={(event): void => {
               handleSignerCheckbox(event, index);
             }}
             checked={checked}
-            error={doesFieldHaveError(FIELD_NAME) && !checked}
+            {...(doesFieldHaveError(FIELD_NAME) && !checked ? { color: "error" } : {})}
           />
         </div>
       </div>

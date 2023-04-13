@@ -3,14 +3,13 @@ import { SnackbarAlert } from "@/components/njwds-extended/SnackbarAlert";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { Icon } from "@/components/njwds/Icon";
 import { AddressModal } from "@/components/tasks/business-formation/contacts/AddressModal";
-import { ValidatedCheckbox } from "@/components/ValidatedCheckbox";
 import { WithErrorBar } from "@/components/WithErrorBar";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { MediaQueries } from "@/lib/PageSizes";
 import styles from "@/styles/sections/members.module.scss";
 import { FormationFields, FormationIncorporator, FormationMember } from "@businessnjgovnavigator/shared/";
-import { IconButton, useMediaQuery } from "@mui/material";
+import { Checkbox, IconButton, useMediaQuery } from "@mui/material";
 import React, { ChangeEvent, ReactElement, ReactNode, useState } from "react";
 
 interface DisplayContent {
@@ -82,11 +81,11 @@ export const Addresses = <T extends FormationMember | FormationIncorporator>(
           {Config.formation.fields.signers.signColumnLabel}*
         </label>
         <div style={{ height: "56px" }} className="display-flex flex-column flex-justify-center">
-          <ValidatedCheckbox
+          <Checkbox
             id={index ? `signature-checkbox-${fieldName}-${index}` : `signature-checkbox-${fieldName}`}
             onChange={onChange}
             checked={checked}
-            error={doesFieldHaveError(fieldName) && !checked}
+            {...(doesFieldHaveError(fieldName) && !checked ? { color: "error" } : {})}
           />
         </div>
       </div>
