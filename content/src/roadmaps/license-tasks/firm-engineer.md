@@ -1,39 +1,41 @@
 ---
-id: "firm-engineer"
-webflowId: "64147a423aee8d06a610be81"
-urlSlug: "firm-engineer"
-name: "Obtain a Certificate of Authorization for Your Firm"
-webflowName: "Engineer (Business)"
-filename: "firm-engineer"
-callToActionLink: "https://www.njconsumeraffairs.gov/pels/Applications/Certificate-of-Authorization-Application.pdf"
-callToActionText: "Apply for My Certificate of Authorization"
-issuingAgency: "New Jersey Division of Consumer Affairs Board of Professional Engineers and Land Surveyors"
-licenseCertificationClassification: "undefined"
+filename: firm-engineer
+urlSlug: firm-engineer
+name: Obtain a Certificate of Authorization for Your Firm
+webflowName: "Engineering: Certificate of Authorization for Your Firm"
+issuingAgency: New Jersey Division of Consumer Affairs Board of Professional
+  Engineers and Land Surveyors
+industryId: engineering
+callToActionText: Apply for My Certificate of Authorization
+callToActionLink: https://www.njconsumeraffairs.gov/pels/Pages/applications.aspx
+licenseCertificationClassification: undefined
+divisionPhone: 973-504-6460
+id: firm-engineer
+webflowId: 64147a423aee8d06a610be81
 ---
+You need a certificate of authorization to operate an engineering firm.
 
-Engineering firms must obtain a certificate of authorization from the State Board prior to operating.
-
----
+- - -
 
 ### Eligibility Criteria
 
-- The firm must have a licensed engineer as a `Responsible Charge|responsible-charge`
+- Must have a licensed engineer as a `responsible charge|responsible-charge` 
 
 ### Application Requirements
 
-- Certified copy of your `Certificate of Formation or Incorporation,|certificate-formation` if applicable
-- Business name
-- Business addresses (and the address of any satellite office)
-- Name and license number of the `Engineer-in-Charge|engineer-in-charge` of the principal office
-- Name and license number of the Engineers-in-Charge of each additional office
-- Name, address, and license number of every officer, director, manager, and stockholder in your firm
-- Number of shares issued (if the firm is a Corporation)
-- Pay any fees associated with the application
+* A certified copy of your `certificate of formation or incorporation|certificate-formation` , if applicable
+* A business name
+* A business addresses (and the address of any satellite office)
+* The name and license number of the `engineer-in-charge|engineer-in-charge` of the principal office
+* The name  and license number of the engineers-in-charge of each additional office
+* The name, address, and license number of every officer, director, manager, and stockholder in your firm
+* The number of shares issued (if the firm is a corporation)
+* Applicable fees paid
 
-:::infoAlert
-The application will need to be notarized.
+:::infoAlert 
+ The application must be notarized.
 :::
 
 > **Once approved, you will have:**
 >
-> - A Certificate of Authorization with an authorization number for your firm
+> * A certificate of authorization with an authorization number for your firm
