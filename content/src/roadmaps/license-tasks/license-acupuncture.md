@@ -1,34 +1,36 @@
 ---
-urlSlug: license-acupuncture
-filename: license-acupuncture
+filename: acupuncture-license
+urlSlug: acupuncture-license
 name: Apply for an Acupuncturist License, if Applicable
-id: license-acupuncture
+webflowName: "Acupuncture: Acupuncturist License"
+industryIntegration: New Jersey Division of Consumer Affairs
+industryId: acupuncture
 callToActionLink: https://www.njconsumeraffairs.gov/acu/Pages/applications.aspx
+webflowIndustry: ""
+divisionPhone: (973) 273-8092
+id: license-acupuncture
+issuingAgency: Division of Consumer Affairs Board of Acupuncture
 callToActionText: Apply for My License
-webflowId: "5f77296edd6a49eae99b6067"
-webflowName: "Acupuncturist"
-issuingAgency: "Division of Consumer Affairs Board of Acupuncture"
-divisionPhone: "(973) 273-8092"
-webflowIndustry: "Acupuncture"
-licenseCertificationClassification: "LICENSE"
+webflowType: individual-license
+webflowId: 5f77296edd6a49eae99b6067
+licenseCertificationClassification: ""
 ---
+You need an acupuncturist license to offer services as an acupuncturist.
 
-You will need an Acupuncturist license **if you** plan to offer services as an acupuncturist.
-
----
+- - -
 
 ### Eligibility Criteria
 
-- At least 21 years old
-- Bachelor's degree from an acupuncture program
+* Be at least 21 years old
+* Have a bachelor's degree from an acupuncture program
 
 ### Application Requirements
 
-- College transcripts sent directly to the board
-- Passing scores on the English version of the `NCCAOM examination|nccaom`
-- Passing scores on the Board-administered Acupuncture Safety and Jurisprudence examination in English
-- Pay any associated fees
+* College transcripts sent directly to the board
+* Passing scores on the English version of the `NCCAOM examination|nccaom` 
+* Passing scores on the Board-administered Acupuncture Safety and Jurisprudence examination in English
+* Applicable fees paid
 
 > **Once completed, you will have:**
 >
-> - An acupuncturist license number
+> * An acupuncturist license number
