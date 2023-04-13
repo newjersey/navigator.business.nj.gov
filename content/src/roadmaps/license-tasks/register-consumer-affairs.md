@@ -4,19 +4,20 @@ urlSlug: hic-license
 name: Obtain a Home Improvement Contractor Registration
 webflowName: "Home Contractor: Home Improvement Contractor Registration"
 industryIntegration: New Jersey Division of Consumer Affairs
-issuingAgency: New Jersey Division of Consumer Affairs Home Improvement Unit
 formName: HIC-Form1-Rev
 industryId: home-contractor
-callToActionText: Complete My Contractor Registration
 callToActionLink: https://www.njconsumeraffairs.gov/ocp/Pages/hic.aspx
 webflowIndustry: ""
-licenseCertificationClassification: ""
 issuingDivision: Home Improvement Contractors Registration
 divisionPhone: (973) 424-8150
 id: register-consumer-affairs
+issuingAgency: New Jersey Division of Consumer Affairs Home Improvement Unit
+callToActionText: Complete My Contractor Registration
+webflowType: individual-license
 webflowId: 5f7729927fe89d43ed054794
+licenseCertificationClassification: ""
 ---
-All home improvement contractors (individuals and corporate entities) must register and commit to following regulations and guidelines defined in the [Contractor's Registration Act](https://www.njconsumeraffairs.gov/hic/Applications/Home-Improvement-Contractor-Application-for-Initial-Registration.pdf).
+Home improvement contractors are individuals and companies involved in repairing, renovating, modernizing, installing, replacing, improving, restoring, painting, constructing, remodeling, moving, or demolishing residential or noncommercial properties. If you or your business is involved in any of the activities mentioned above you must register as a Home Improvement Contractor.
 
 - - -
 
@@ -31,6 +32,6 @@ All home improvement contractors (individuals and corporate entities) must regis
 > * An official paper registration received by mail (also known as a registration card)
 >
 
-> **What if I don't complete this form?**
+> **What if I don't complete this registration?**
 >
 > Unregistered contractors who sell or make home improvements may be subject to civil penalties and possibly criminal penalties.
