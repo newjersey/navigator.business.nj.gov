@@ -64,11 +64,8 @@ export const FormationChooseDocuments = (): ReactElement => {
         </thead>
         <tbody>
           <tr>
-            <td>
-              <div
-                className="business-formation-table-checkboxes"
-                data-testid="officialFormationDocument-checkbox"
-              >
+            <td className={"padding-1"}>
+              <div data-testid="officialFormationDocument-checkbox">
                 <Checkbox disabled defaultChecked id="officialFormationDocument" />
               </div>
             </td>
@@ -87,11 +84,8 @@ export const FormationChooseDocuments = (): ReactElement => {
             <td className={"text-primary-dark text-bold"}>{getDollarValue(officialFormationCost)}</td>
           </tr>
           <tr>
-            <td>
-              <div
-                className="business-formation-table-checkboxes"
-                data-testid="certificateOfStanding-checkbox"
-              >
+            <td className={"padding-1"}>
+              <div data-testid="certificateOfStanding-checkbox">
                 <Checkbox
                   onChange={handleCertificateOfStandingClick}
                   id="certificateOfStanding"
@@ -125,11 +119,8 @@ export const FormationChooseDocuments = (): ReactElement => {
             </td>
           </tr>
           <tr>
-            <td>
-              <div
-                className="business-formation-table-checkboxes"
-                data-testid="certifiedCopyOfFormationDocument-checkbox"
-              >
+            <td className={"padding-1"}>
+              <div data-testid="certifiedCopyOfFormationDocument-checkbox">
                 <Checkbox
                   onChange={handleCertifiedFormationDocumentClick}
                   id="certifiedCopyOfFormationDocument"
