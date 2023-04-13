@@ -4,16 +4,17 @@ urlSlug: electrical-business-license
 name: Get Your Electrical Contracting Business Permit
 webflowName: "Electrical Contractor: Business Permit"
 industryIntegration: New Jersey Division of Consumer Affairs
-issuingAgency: New Jersey Division of Consumer Affairs Board of Electrical Contractors
 industryId: electrical-contractor
-callToActionText: Apply for My Business Permit
 callToActionLink: https://www.njconsumeraffairs.gov/elec/Pages/applications.aspx
-licenseCertificationClassification: PERMIT
 divisionPhone: 973-504-6410
 id: electrical-business-license
+issuingAgency: New Jersey Division of Consumer Affairs Board of Electrical Contractors
+callToActionText: Apply for My Business Permit
+webflowType: business-license
 webflowId: 64147a423f00fb5d34f2739e
+licenseCertificationClassification: PERMIT
 ---
-You need a business permit to operate an electrical contracting business.
+You need a permit to operate an electrical contracting business.
 
 Business applications are reviewed monthly. Your application must be received ten days prior to the [Board of Examiners of Electrical Contractors monthly meeting](https://www.njconsumeraffairs.gov/elec/Pages/meetings.aspx) to be reviewed during the current month. 
 
