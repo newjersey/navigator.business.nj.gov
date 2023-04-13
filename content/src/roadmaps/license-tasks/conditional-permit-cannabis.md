@@ -1,14 +1,18 @@
 ---
-id: "conditional-permit-cannabis"
-webflowId: "6414793bde13b38246c4dfb3"
-urlSlug: "conditional-permit-cannabis"
-name: "Apply for Your Conditional Cannabis License"
-webflowName: "Cannabis Conditional License"
-filename: "conditional-permit-cannabis"
-callToActionLink: "https://nj-crc-public.nls.egov.com/#!/nj-crc/register"
-callToActionText: "Apply for My Conditional Cannabis License"
-issuingAgency: "Cannabis Regulatory Commission"
-licenseCertificationClassification: "LICENSE"
+filename: conditional-cannabis-license
+urlSlug: conditional-cannabis-license
+name: Apply for Your Conditional Cannabis License
+webflowName: "Cannabis: Conditional License"
+industryId: cannabis
+callToActionLink: https://www.nj.gov/cannabis/businesses/
+id: conditional-permit-cannabis
+issuingAgency: Cannabis Regulatory Commission
+callToActionText: Apply for My Conditional Cannabis License
+webflowId: 6414793bde13b38246c4dfb3
+licenseCertificationClassification: LICENSE
 ---
+To start your cannabis application prior to opening a site, you may apply for a conditional license that gives you 120 days to find a location, get municipal approval, and apply for a convesion license (which will give your business approval to operate).
+
+- - -
 
 This task intentionally left blank. Text here will not be displayed.
