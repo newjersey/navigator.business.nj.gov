@@ -4,17 +4,18 @@ urlSlug: appraiser-license
 name: Apply for Your Appraiser License
 webflowName: "Real Estate Appraisal: Real Estate Appraiser License"
 industryIntegration: New Jersey Division of Consumer Affairs
-issuingAgency: New Jersey Division of Consumer Affairs Real Estate Appraiser Board
 industryId: real-estate-appraisals
-callToActionText: "Apply ​for My Appraiser License "
 callToActionLink: https://www.njconsumeraffairs.gov/rea/Pages/applications.aspx
 webflowIndustry: Real Estate Appraiser
-licenseCertificationClassification: LICENSE
 divisionPhone: (973) 504-6480
 id: appraiser-license
+issuingAgency: New Jersey Division of Consumer Affairs Real Estate Appraiser Board
+callToActionText: "Apply ​for My Appraiser License "
+webflowType: business-license
 webflowId: 640b8467b7c8237f0cdd1541
+licenseCertificationClassification: LICENSE
 ---
-You need a real estate appraiser license (or certification) if you open an `appraisal management company|appraisal-management-company` and plan to appraise real estate that includes either: A) non-complex one to four residential units having a transaction value less than $1 million, or B) complex one to four residential units (such as those with atypical ownership or market conditions) having a transaction value less than $250,000.
+You need a real estate appraiser license if you open an `appraisal management company|appraisal-management-company` and plan to appraise real estate that includes either: A) non-complex one to four residential units having a transaction value less than $1 million, or B) complex one to four residential units (such as those with atypical ownership or market conditions) having a transaction value less than $250,000.
 
 - - -
 
