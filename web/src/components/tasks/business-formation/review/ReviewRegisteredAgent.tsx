@@ -1,5 +1,5 @@
 import { ReviewLineItem } from "@/components/tasks/business-formation/review/section/ReviewLineItem";
-import { ReviewSection } from "@/components/tasks/business-formation/review/section/ReviewSection";
+import { ReviewSubSection } from "@/components/tasks/business-formation/review/section/ReviewSubSection";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getStringifiedAddress } from "@/lib/utils/formatters";
@@ -11,12 +11,7 @@ export const ReviewRegisteredAgent = (): ReactElement => {
   const italicNotEnteredText = `*${Config.formation.general.notEntered}*`;
 
   return (
-    <ReviewSection
-      buttonText={Config.formation.general.editButtonText}
-      header={Config.formation.registeredAgent.label}
-      stepName="Contacts"
-      testId="edit-registered-agent-step"
-    >
+    <ReviewSubSection header={Config.formation.registeredAgent.label} marginOverride="margin-top-0">
       {state.formationFormData.agentNumberOrManual === "NUMBER" && (
         <ReviewLineItem
           label={Config.formation.fields.agentNumber.label}
@@ -50,6 +45,6 @@ export const ReviewRegisteredAgent = (): ReactElement => {
           />
         </div>
       )}
-    </ReviewSection>
+    </ReviewSubSection>
   );
 };

@@ -1,23 +1,25 @@
 import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { BusinessNameAndLegalStructure } from "@/components/tasks/business-formation/business/BusinessNameAndLegalStructure";
+import { BusinessFormationStepsConfiguration } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
 import { ReviewBillingContact } from "@/components/tasks/business-formation/review/ReviewBillingContact";
 import { ReviewBillingServices } from "@/components/tasks/business-formation/review/ReviewBillingServices";
 import { ReviewBusinessSuffixAndStartDate } from "@/components/tasks/business-formation/review/ReviewBusinessSuffixAndStartDate";
+import { ReviewForeignCertificate } from "@/components/tasks/business-formation/review/ReviewForeignCertificate";
 import { ReviewMainBusinessLocation } from "@/components/tasks/business-formation/review/ReviewMainBusinessLocation";
 import { ReviewMembers } from "@/components/tasks/business-formation/review/ReviewMembers";
 import { ReviewPartnership } from "@/components/tasks/business-formation/review/ReviewPartnership";
 import { ReviewProvisions } from "@/components/tasks/business-formation/review/ReviewProvisions";
 import { ReviewRegisteredAgent } from "@/components/tasks/business-formation/review/ReviewRegisteredAgent";
 import { ReviewSignatures } from "@/components/tasks/business-formation/review/ReviewSignatures";
+import { ReviewWillPracticeLaw } from "@/components/tasks/business-formation/review/ReviewWillPracticeLaw";
 import { ReviewSection } from "@/components/tasks/business-formation/review/section/ReviewSection";
+import { ReviewSubSection } from "@/components/tasks/business-formation/review/section/ReviewSubSection";
 import { ReviewText } from "@/components/tasks/business-formation/review/section/ReviewText";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import analytics from "@/lib/utils/analytics";
 import { ReactElement, useContext } from "react";
-import { ReviewForeignCertificate } from "./ReviewForeignCertificate";
-import { ReviewWillPracticeLaw } from "./ReviewWillPracticeLaw";
 
 export const ReviewStep = (): ReactElement => {
   const { state } = useContext(BusinessFormationContext);
@@ -32,62 +34,59 @@ export const ReviewStep = (): ReactElement => {
   return (
     <>
       <div data-testid="review-step">
-        <BusinessNameAndLegalStructure isReviewStep />
-        <ReviewBusinessSuffixAndStartDate />
-        {isForeignCCorp && (
-          <>
-            <ReviewWillPracticeLaw willPracticeLaw={state.formationFormData.willPracticeLaw} />
-            <ReviewForeignCertificate foreignGoodStandingFile={state.foreignGoodStandingFile} />
-          </>
-        )}
-        <ReviewMainBusinessLocation />
-        {isLP && (
-          <ReviewSection
-            buttonText={Config.formation.general.editButtonText}
-            header={Config.formation.fields.combinedInvestment.label}
-            stepName={"Business"}
-            testId="edit-combined-investment-step"
-          >
-            <ReviewText fieldName={"combinedInvestment"} />
-          </ReviewSection>
-        )}
-        {isLP && (
-          <ReviewSection
-            buttonText={Config.formation.general.editButtonText}
-            header={Config.formation.fields.withdrawals.label}
-            stepName={"Business"}
-            testId="edit-withdrawls-step"
-          >
-            <ReviewText fieldName={"withdrawals"} />
-          </ReviewSection>
-        )}
-        {isLP && <ReviewPartnership />}
-        {isLP && (
-          <ReviewSection
-            buttonText={Config.formation.general.editButtonText}
-            header={Config.formation.fields.dissolution.label}
-            stepName={"Business"}
-            testId="edit-dissolution-step"
-          >
-            <ReviewText fieldName={"dissolution"} />
-          </ReviewSection>
-        )}
-        {hasProvisions && <ReviewProvisions />}
-        {hasPurpose && (
-          <ReviewSection
-            buttonText={Config.formation.general.editButtonText}
-            header={Config.formation.fields.businessPurpose.label}
-            stepName={"Business"}
-            testId="edit-business-purpose-step"
-          >
-            <ReviewText fieldName={"businessPurpose"} isExpandable={true} />
-          </ReviewSection>
-        )}
-        <ReviewRegisteredAgent />
-        {hasMembers && !isLP && <ReviewMembers />}
-        <ReviewSignatures />
-        <ReviewBillingContact />
-        <ReviewBillingServices />
+        <ReviewSection
+          header={BusinessFormationStepsConfiguration[1].name}
+          stepName={"Business"}
+          testId="edit-business-name-step"
+        >
+          <BusinessNameAndLegalStructure isReviewStep />
+          <ReviewBusinessSuffixAndStartDate />
+          {isForeignCCorp && (
+            <>
+              <ReviewWillPracticeLaw willPracticeLaw={state.formationFormData.willPracticeLaw} />
+              <ReviewForeignCertificate foreignGoodStandingFile={state.foreignGoodStandingFile} />
+            </>
+          )}
+          <ReviewMainBusinessLocation />
+
+          {isLP && (
+            <>
+              <ReviewSubSection header={Config.formation.fields.combinedInvestment.label}>
+                <ReviewText fieldName={"combinedInvestment"} />
+              </ReviewSubSection>
+              <ReviewSubSection header={Config.formation.fields.withdrawals.label}>
+                <ReviewText fieldName={"withdrawals"} />
+              </ReviewSubSection>
+              <ReviewPartnership />
+              <ReviewSubSection header={Config.formation.fields.dissolution.label}>
+                <ReviewText fieldName={"dissolution"} />
+              </ReviewSubSection>
+            </>
+          )}
+          {hasProvisions && <ReviewProvisions />}
+          {hasPurpose && (
+            <ReviewSubSection header={Config.formation.fields.businessPurpose.label}>
+              <ReviewText fieldName={"businessPurpose"} isExpandable={true} />
+            </ReviewSubSection>
+          )}
+        </ReviewSection>
+        <ReviewSection
+          header={BusinessFormationStepsConfiguration[2].name}
+          stepName={"Contacts"}
+          testId="edit-contacts-step"
+        >
+          <ReviewRegisteredAgent />
+          {hasMembers && !isLP && <ReviewMembers />}
+          <ReviewSignatures />
+        </ReviewSection>
+        <ReviewSection
+          header={BusinessFormationStepsConfiguration[3].name}
+          stepName={"Billing"}
+          testId="edit-billing-step"
+        >
+          <ReviewBillingContact />
+          <ReviewBillingServices />
+        </ReviewSection>
         <Alert variant="info">
           <Content
             onClick={(): void => {

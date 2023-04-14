@@ -1,6 +1,6 @@
+import { ReviewSubSection } from "@/components/tasks/business-formation/review/section/ReviewSubSection";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ReactElement } from "rehype-react/lib";
-import { ReviewSection } from "./section/ReviewSection";
 
 interface Props {
   willPracticeLaw: boolean | undefined;
@@ -17,13 +17,8 @@ export const ReviewWillPracticeLaw = (props: Props): ReactElement => {
     }
   };
   return (
-    <ReviewSection
-      buttonText={Config.formation.general.editButtonText}
-      header={Config.formation.fields.willPracticeLaw.label}
-      stepName="Business"
-      testId="edit-will-practice-law-step"
-    >
+    <ReviewSubSection header={Config.formation.fields.willPracticeLaw.label} marginOverride="margin-top-0">
       {displayResponse()}
-    </ReviewSection>
+    </ReviewSubSection>
   );
 };

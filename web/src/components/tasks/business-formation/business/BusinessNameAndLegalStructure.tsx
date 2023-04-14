@@ -1,4 +1,5 @@
 import { Content } from "@/components/Content";
+import { ContextualInfoButton } from "@/components/ContextualInfoButton";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
 import { ModifiedContent } from "@/components/ModifiedContent";
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
@@ -8,7 +9,6 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { MediaQueries } from "@/lib/PageSizes";
 import analytics from "@/lib/utils/analytics";
-import { scrollToTop } from "@/lib/utils/helpers";
 import { useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router";
 import { ReactElement, useContext, useState } from "react";
@@ -51,27 +51,22 @@ export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): 
     return <></>;
   }
 
+  const legalStructureContextualInfo = (): ReactElement => {
+    const label = Config.formation.legalStructure.label;
+    const contextualInfo = Config.formation.legalStructure.contextualInfo;
+    return <ContextualInfoButton text={isReviewStep ? `${label}:` : label} id={contextualInfo} />;
+  };
+
+  const businessName = (): string => {
+    const label = Config.formation.fields.businessName.label;
+    return isReviewStep ? `${label}:` : label;
+  };
+
   return (
     <>
       <div className="flex space-between margin-bottom-2 flex-align-center">
         <div className="maxw-mobile-lg ">
           <h2 className="h3-styling">{Config.formation.sections.businessNameAndStructureHeader}</h2>
-        </div>
-        <div className="margin-left-2">
-          {isReviewStep && (
-            <UnStyledButton
-              style="tertiary"
-              onClick={(): void => {
-                analytics.event.business_formation_business_name_edit.click.go_to_name_search_step();
-                setStepIndex(LookupStepIndexByName("Business"));
-                scrollToTop();
-              }}
-              underline
-              dataTestid="edit-business-name-step"
-            >
-              {Config.formation.general.editButtonText}
-            </UnStyledButton>
-          )}
         </div>
       </div>
 
@@ -83,7 +78,7 @@ export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): 
         <div className="padding-205 flex-half">
           <div>
             <strong>
-              <ModifiedContent>{Config.formation.fields.businessName.label}</ModifiedContent>
+              <ModifiedContent>{businessName()}</ModifiedContent>
             </strong>
           </div>
           <span className="text-accent-cool-darker">
@@ -105,8 +100,10 @@ export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): 
           className="padding-bottom-205 padding-x-205 tablet:padding-205 flex-half"
           data-testid="legal-structure"
         >
-          <Content>{Config.formation.legalStructure.reviewStepLabel}</Content>
-          <span>{legalStructureName()}</span>
+          <div className={"fdc"}>
+            <strong className={"margin-bottom-05"}>{legalStructureContextualInfo()}</strong>
+            <span>{legalStructureName()}</span>
+          </div>
           <span> </span>
           {!isReviewStep && (
             <UnStyledButton

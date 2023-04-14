@@ -100,33 +100,9 @@ describe("Formation - ReviewStep", () => {
     expect(screen.getByTestId("business-step")).toBeInTheDocument();
   });
 
-  it("displays the business step when the edit button in the location section is clicked", async () => {
+  it("displays the contacts step when the edit button in the contacts section is clicked", async () => {
     await renderStep({}, {});
-    fireEvent.click(screen.getByTestId("edit-location-step"));
-    expect(screen.getByTestId("business-step")).toBeInTheDocument();
-  });
-
-  it("displays the contacts step when the edit button in the registered agent section is clicked", async () => {
-    await renderStep({}, {});
-    fireEvent.click(screen.getByTestId("edit-registered-agent-step"));
-    expect(screen.getByTestId("contacts-step")).toBeInTheDocument();
-  });
-
-  it("displays the business step when the edit button in the business purpose section is clicked", async () => {
-    await renderStep({}, { businessPurpose: "some purpose" });
-    fireEvent.click(screen.getByTestId("edit-business-purpose-step"));
-    expect(screen.getByTestId("business-step")).toBeInTheDocument();
-  });
-
-  it("displays the business step when the edit button in the provisions section is clicked", async () => {
-    await renderStep({}, { provisions: ["some provision"] });
-    fireEvent.click(screen.getByTestId("edit-provisions-step"));
-    expect(screen.getByTestId("business-step")).toBeInTheDocument();
-  });
-
-  it("displays the contacts step when the edit button in the signatures section is clicked", async () => {
-    await renderStep({}, {});
-    fireEvent.click(screen.getByTestId("edit-signature-step"));
+    fireEvent.click(screen.getByTestId("edit-contacts-step"));
     expect(screen.getByTestId("contacts-step")).toBeInTheDocument();
   });
 
@@ -144,7 +120,7 @@ describe("Formation - ReviewStep", () => {
 
   it("does not display members section within review step when members do not exist", async () => {
     await renderStep({ legalStructureId: "limited-liability-company" }, { members: [] });
-    expect(screen.queryByTestId("edit-members-step")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("members-step")).not.toBeInTheDocument();
   });
 
   it("displays business purpose on review step", async () => {
@@ -183,7 +159,7 @@ describe("Formation - ReviewStep", () => {
 
   it("does not display members section within review step when foreign", async () => {
     await renderStep({ businessPersona: "FOREIGN" }, {});
-    expect(screen.queryByTestId("edit-members-step")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("members-step")).not.toBeInTheDocument();
   });
 
   it("does not include country in address when non-intl", async () => {
@@ -295,7 +271,7 @@ describe("Formation - ReviewStep", () => {
       { businessPersona: "FOREIGN", legalStructureId: "limited-liability-company" },
       { signers: [generateFormationSigner({ name: "The Dude", title: "Authorized Partner" })] }
     );
-    expect(screen.getByText(Config.formation.fields.signers.titleLabel)).toBeInTheDocument();
+    expect(screen.getByText(`${Config.formation.fields.signers.titleLabel}:`)).toBeInTheDocument();
     expect(screen.getByText("Authorized Partner", { exact: false })).toBeInTheDocument();
   });
 
@@ -304,13 +280,13 @@ describe("Formation - ReviewStep", () => {
 
     it("does not display the members section", async () => {
       await renderStep({ legalStructureId }, {});
-      expect(screen.queryByTestId("edit-members-step")).not.toBeInTheDocument();
+      expect(screen.queryByTestId("members-step")).not.toBeInTheDocument();
     });
 
     it("displays withdrawals on review step", async () => {
-      await renderStep({ legalStructureId }, { withdrawals: "withdrawl stuff" });
+      await renderStep({ legalStructureId }, { withdrawals: "withdrawal stuff" });
       expect(screen.getByText(Config.formation.fields.withdrawals.label)).toBeInTheDocument();
-      expect(screen.getByText("withdrawl stuff")).toBeInTheDocument();
+      expect(screen.getByText("withdrawal stuff")).toBeInTheDocument();
     });
 
     it("displays dissolution on review step", async () => {
@@ -357,12 +333,6 @@ describe("Formation - ReviewStep", () => {
   describe("when llc", () => {
     const legalStructureId = "limited-liability-company";
 
-    it("displays the contacts step when the edit button in the members section is clicked", async () => {
-      await renderStep({ legalStructureId }, {});
-      fireEvent.click(screen.getByTestId("edit-members-step"));
-      expect(screen.getByTestId("contacts-step")).toBeInTheDocument();
-    });
-
     it("does not display partnership rights on review step", async () => {
       await renderStep(
         { legalStructureId },
@@ -394,27 +364,21 @@ describe("Formation - ReviewStep", () => {
     });
   });
 
-  describe("billing step", () => {
-    it("displays the billing step when the edit button in the billing contact section is clicked", async () => {
+  describe("billing section", () => {
+    it("displays the billing step when the edit button in the billing section is clicked", async () => {
       await renderStep({}, {});
-      fireEvent.click(screen.getByTestId("edit-billing-contact-step"));
-      expect(screen.getByTestId("billing-step")).toBeInTheDocument();
-    });
-
-    it("displays the billing step when the edit button in the billing services section is clicked", async () => {
-      await renderStep({}, {});
-      fireEvent.click(screen.getByTestId("edit-billing-services-step"));
+      fireEvent.click(screen.getByTestId("edit-billing-step"));
       expect(screen.getByTestId("billing-step")).toBeInTheDocument();
     });
 
     it("displays contact information", async () => {
       await renderStep(
         {},
-        { contactFirstName: "Namey", contactLastName: "McNameFace", contactPhoneNumber: "123-456-7890" }
+        { contactFirstName: "Namey", contactLastName: "McNameFace", contactPhoneNumber: "1234567890" }
       );
       expect(screen.getByText("Namey")).toBeInTheDocument();
       expect(screen.getByText("McNameFace")).toBeInTheDocument();
-      expect(screen.getByText("123-456-7890")).toBeInTheDocument();
+      expect(screen.getByText("(123) 456-7890")).toBeInTheDocument();
     });
 
     it("displays services payment type for CC", async () => {
@@ -441,6 +405,15 @@ describe("Formation - ReviewStep", () => {
       const formationDocLabel = Config.formation.fields.officialFormationDocument.label;
       const certifiedCopyLabel = Config.formation.fields.certifiedCopyOfFormationDocument.label;
       expect(screen.getByText(`${formationDocLabel}, ${certifiedCopyLabel}`)).toBeInTheDocument();
+    });
+
+    it("displays Not set for phone number when there is no phone number", async () => {
+      await renderStep(
+        {},
+        { contactFirstName: "Namey", contactLastName: "McNameFace", contactPhoneNumber: "" }
+      );
+      const phoneNumberField = within(screen.getByTestId("contact-phone-number-field"));
+      expect(phoneNumberField.getByText("Not set")).toBeInTheDocument();
     });
   });
 });
