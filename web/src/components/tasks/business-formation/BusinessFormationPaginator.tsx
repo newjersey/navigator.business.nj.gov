@@ -281,7 +281,11 @@ export const BusinessFormationPaginator = (): ReactElement => {
 
     setIsLoading(true);
 
-    const newUserData = await api.postBusinessFormation(filteredUserData, window.location.href);
+    const newUserData = await api.postBusinessFormation(
+      filteredUserData,
+      window.location.href,
+      state.foreignGoodStandingFile
+    );
     update(newUserData);
     submitToApiAnalytics(newUserData);
     resetInteractedFields(newUserData);

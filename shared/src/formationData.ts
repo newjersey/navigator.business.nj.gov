@@ -98,11 +98,6 @@ export interface FormationMember extends FormationAddress {
   readonly name: string;
 }
 
-export type ForeignGoodStandingFileObject = {
-  Extension: "PDF" | "PNG";
-  Content: string; // Binary contents converted to base64 string 4,000,000 string limit (3mb)
-};
-
 export interface FormationFormData extends FormationAddress {
   readonly legalType: FormationLegalType;
   readonly businessName: string;
@@ -145,10 +140,11 @@ export interface FormationFormData extends FormationAddress {
   readonly contactPhoneNumber: string;
   readonly foreignStateOfFormation: StateNames | undefined;
   readonly foreignDateOfFormation: string | undefined; // YYYY-MM-DD
-  readonly foreignGoodStandingFile: ForeignGoodStandingFileObject | undefined;
+  readonly willPracticeLaw: boolean | undefined;
 }
 
 export type FormationFields = keyof FormationFormData;
+export type FieldsForErrorHandling = keyof FormationFormData | "foreignGoodStandingFile";
 
 export type FormationTextField = Exclude<
   keyof FormationFormData,
@@ -180,6 +176,7 @@ export type FormationTextField = Exclude<
   | "foreignDateOfFormation"
   | "foreignStateOfFormation"
   | "foreignGoodStandingFile"
+  | "willPracticeLaw"
 >;
 
 export const createEmptyFormationAddress = (): FormationAddress => {
@@ -264,7 +261,7 @@ export const createEmptyFormationFormData = (): FormationFormData => {
     contactPhoneNumber: "",
     foreignDateOfFormation: undefined,
     foreignStateOfFormation: undefined,
-    foreignGoodStandingFile: undefined,
+    willPracticeLaw: undefined,
   };
 };
 
@@ -352,6 +349,15 @@ export const incorporationLegalStructures: FormationLegalType[] = [
   ...corpLegalStructures,
   "limited-partnership",
 ];
+
+export type AcceptedFileType = "PDF" | "PNG";
+
+export type InputFile = {
+  base64Contents: string;
+  fileType: AcceptedFileType;
+  sizeInBytes: number;
+  filename: string;
+};
 
 export type FormationSubmitResponse = {
   success: boolean;

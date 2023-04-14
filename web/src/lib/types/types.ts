@@ -1,7 +1,7 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import {
   BusinessUser,
-  FormationFields,
+  FieldsForErrorHandling,
   FormationMember,
   FormationSigner,
   IndustrySpecificData,
@@ -70,7 +70,7 @@ export type FormationStepNames = "Name" | "Business" | "Contacts" | "Billing" | 
 export type DbaStepNames = "Business Name" | "DBA Resolution" | "Authorize Business";
 
 export type FormationFieldErrorState = {
-  field: FormationFields;
+  field: FieldsForErrorHandling;
   hasError: boolean;
   label: string;
 };

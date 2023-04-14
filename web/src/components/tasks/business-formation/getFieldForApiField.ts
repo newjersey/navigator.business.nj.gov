@@ -1,4 +1,4 @@
-import { FormationFields } from "@businessnjgovnavigator/shared/formationData";
+import { FieldsForErrorHandling } from "@businessnjgovnavigator/shared/formationData";
 import { invert } from "lodash";
 
 export const UNKNOWN_API_ERROR_FIELD = "UNKNOWN_API_ERROR_FIELD";
@@ -37,11 +37,13 @@ const fieldToApiFieldMapping: Record<string, string> = {
   withdrawals: "Limited Partnership - General Partner Withdrawal",
   dissolution: "Limited Partnership - Dissolution Plan",
   businessName: "Business Information - Business Name",
+  willPracticeLaw: "Business Information - Will Practice Law",
+  foreignGoodStandingFile: "Business Information - Foreign Certificate of Good Standing",
 };
 
 const apiFieldToFieldMapping = invert(fieldToApiFieldMapping);
 
-export const getApiField = (field: FormationFields): string => {
+export const getApiField = (field: FieldsForErrorHandling): string => {
   return fieldToApiFieldMapping[field] || UNKNOWN_API_ERROR_FIELD;
 };
 

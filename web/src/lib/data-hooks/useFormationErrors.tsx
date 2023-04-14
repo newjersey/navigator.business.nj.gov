@@ -5,7 +5,7 @@ import { validatedFieldsForUser } from "@/components/tasks/business-formation/va
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useUserData } from "@/lib/data-hooks/useUserData";
 import { FormationFieldErrorState, FormationStepNames } from "@/lib/types/types";
-import { FormationFields } from "@businessnjgovnavigator/shared/formationData";
+import { FieldsForErrorHandling, FormationFields } from "@businessnjgovnavigator/shared/formationData";
 import { useContext, useMemo } from "react";
 
 type FormationErrorsResponse = {
@@ -13,11 +13,11 @@ type FormationErrorsResponse = {
     step: FormationStepNames,
     overrides?: { hasSubmitted: boolean }
   ) => FormationFieldErrorState[];
-  doesFieldHaveError: (field: FormationFields) => boolean;
+  doesFieldHaveError: (field: FieldsForErrorHandling) => boolean;
   doSomeFieldsHaveError: (fields: FormationFields[]) => boolean;
   doesStepHaveError: (step: FormationStepNames, overrides?: { hasSubmitted: boolean }) => boolean;
   isStepCompleted: (step: FormationStepNames) => boolean;
-  getApiErrorMessage: (field: FormationFields) => string | undefined;
+  getApiErrorMessage: (field: FieldsForErrorHandling) => string | undefined;
   getFieldErrorLabel: (field: FormationFields) => string;
 };
 
@@ -25,20 +25,30 @@ export const useFormationErrors = (): FormationErrorsResponse => {
   const { state } = useContext(BusinessFormationContext);
   const { userData } = useUserData();
 
-  const validatedFields = useMemo((): FormationFields[] => {
+  const validatedFields = useMemo((): FieldsForErrorHandling[] => {
     return validatedFieldsForUser(state.formationFormData);
   }, [state.formationFormData]);
 
-  const errorStates: Record<FormationFields, FormationFieldErrorState> = useMemo(() => {
+  const errorStates: Record<FieldsForErrorHandling, FormationFieldErrorState> = useMemo(() => {
     return validatedFields.reduce((acc, field) => {
       return {
         ...acc,
-        [field]: getErrorStateForField(field, state.formationFormData, state.businessNameAvailability),
+        [field]: getErrorStateForField({
+          field,
+          formationFormData: state.formationFormData,
+          businessNameAvailability: state.businessNameAvailability,
+          foreignGoodStandingFile: state.foreignGoodStandingFile,
+        }),
       };
-    }, {} as Record<FormationFields, FormationFieldErrorState>);
-  }, [validatedFields, state.formationFormData, state.businessNameAvailability]);
+    }, {} as Record<FieldsForErrorHandling, FormationFieldErrorState>);
+  }, [
+    validatedFields,
+    state.formationFormData,
+    state.businessNameAvailability,
+    state.foreignGoodStandingFile,
+  ]);
 
-  const getApiFieldErrorState = (field: FormationFields): FormationFieldErrorState | undefined => {
+  const getApiFieldErrorState = (field: FieldsForErrorHandling): FormationFieldErrorState | undefined => {
     if (
       !userData?.formationData.formationResponse ||
       userData.formationData.formationResponse.errors.length === 0
@@ -70,7 +80,7 @@ export const useFormationErrors = (): FormationErrorsResponse => {
     return getApiFieldErrorState(fieldErrorState.field) ?? fieldErrorState;
   };
 
-  const getApiErrorMessage = (field: FormationFields): string | undefined => {
+  const getApiErrorMessage = (field: FieldsForErrorHandling): string | undefined => {
     return getApiFieldErrorState(field)?.label;
   };
 
@@ -101,7 +111,7 @@ export const useFormationErrors = (): FormationErrorsResponse => {
     }
   };
 
-  const doesFieldHaveError = (field: FormationFields): boolean => {
+  const doesFieldHaveError = (field: FieldsForErrorHandling): boolean => {
     if (!validatedFields.includes(field)) {
       return false;
     }
@@ -128,7 +138,7 @@ export const useFormationErrors = (): FormationErrorsResponse => {
       });
   };
 
-  const validatedFieldsForStep = (step: FormationStepNames): FormationFields[] => {
+  const validatedFieldsForStep = (step: FormationStepNames): FieldsForErrorHandling[] => {
     return validatedFields.filter((field) => {
       return getStepForField(field) === step;
     });
@@ -142,7 +152,12 @@ export const useFormationErrors = (): FormationErrorsResponse => {
     return validatedFieldsForStep(step).every((field) => {
       const errorState =
         errorStates[field] ||
-        getErrorStateForField(field, state.formationFormData, state.businessNameAvailability);
+        getErrorStateForField({
+          field,
+          formationFormData: state.formationFormData,
+          businessNameAvailability: state.businessNameAvailability,
+          foreignGoodStandingFile: state.foreignGoodStandingFile,
+        });
       return !errorState.hasError;
     });
   };

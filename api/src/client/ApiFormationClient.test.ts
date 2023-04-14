@@ -16,6 +16,7 @@ import axios from "axios";
 import {
   generateFormationData,
   generateFormationUserData,
+  generateInputFile,
   generateProfileData,
   generateUserData,
 } from "../../test/factories";
@@ -567,13 +568,19 @@ describe("ApiFormationClient", () => {
           formationFormData
         );
 
-        await client.form(userData, "hostname.com/form-business");
+        const foreignGoodStandingFile = generateInputFile({});
+
+        await client.form(userData, "hostname.com/form-business", foreignGoodStandingFile);
 
         expect(mockAxios.post).toHaveBeenCalledWith("example.com/formation/PrepareFiling", {
           Account: "12345",
           Key: "abcdef",
           ReturnUrl: "hostname.com/form-business?completeFiling=true",
           FailureReturnUrl: "hostname.com/form-business?completeFiling=false",
+          ForeignGoodStandingFile: {
+            Extension: foreignGoodStandingFile.fileType,
+            Content: foreignGoodStandingFile.base64Contents,
+          },
           Payer: {
             CompanyName: formationFormData.businessName,
             Address1: "",
@@ -593,7 +600,6 @@ describe("ApiFormationClient", () => {
 
             BusinessInformation: {
               CompanyOrigin: "Foreign",
-              PracticesLaw: false,
               Business: "ForeignForProfitCorporation",
               BusinessName: formationFormData.businessName,
               BusinessDesignator: formationFormData.businessSuffix,
@@ -663,6 +669,92 @@ describe("ApiFormationClient", () => {
             ContactLastName: formationFormData.contactLastName,
             ContactPhoneNumber: formationFormData.contactPhoneNumber,
           },
+        });
+      });
+
+      describe("getPracticesLaw", () => {
+        let stubResponse: ApiResponse;
+
+        beforeEach(() => {
+          jest.resetAllMocks();
+          stubResponse = generateApiResponse({});
+          mockAxios.post.mockResolvedValue({ data: stubResponse });
+        });
+
+        it("PracticesLaw is undefined if not provided", async () => {
+          const legalStructureId = "c-corporation";
+          const formationFormData = generateFormationFormData(
+            {},
+            { legalStructureId: `foreign-${legalStructureId}` }
+          );
+
+          const userData = generateFormationUserData(
+            { legalStructureId, businessPersona: "FOREIGN" },
+            {},
+            formationFormData
+          );
+
+          await client.form(userData, "hostname.com/form-business");
+
+          const payload = mockAxios.post.mock.calls[0][1] as ApiSubmission;
+          expect(payload.Formation.BusinessInformation.PracticesLaw).toBe(undefined);
+        });
+
+        it("PracticesLaw is 'Yes' if willPracticeLaw is true", async () => {
+          const legalStructureId = "c-corporation";
+          const formationFormData = generateFormationFormData(
+            { willPracticeLaw: true },
+            { legalStructureId: `foreign-${legalStructureId}` }
+          );
+
+          const userData = generateFormationUserData(
+            { legalStructureId, businessPersona: "FOREIGN" },
+            {},
+            formationFormData
+          );
+
+          await client.form(userData, "hostname.com/form-business");
+
+          const payload = mockAxios.post.mock.calls[0][1] as ApiSubmission;
+          expect(payload.Formation.BusinessInformation.PracticesLaw).toBe("Yes");
+        });
+
+        it("PracticesLaw is 'No' if willPracticeLaw is false", async () => {
+          const legalStructureId = "c-corporation";
+          const formationFormData = generateFormationFormData(
+            { willPracticeLaw: false },
+            { legalStructureId: `foreign-${legalStructureId}` }
+          );
+
+          const userData = generateFormationUserData(
+            { legalStructureId, businessPersona: "FOREIGN" },
+            {},
+            formationFormData
+          );
+
+          await client.form(userData, "hostname.com/form-business");
+
+          const payload = mockAxios.post.mock.calls[0][1] as ApiSubmission;
+          expect(payload.Formation.BusinessInformation.PracticesLaw).toBe("No");
+        });
+
+        it("PracticesLaw is undefined if not foreign c-corp", async () => {
+          const legalStructureId = "s-corporation";
+          const formationFormData = generateFormationFormData(
+            { willPracticeLaw: true },
+            { legalStructureId: `${legalStructureId}` }
+          );
+
+          const userData = generateFormationUserData(
+            { legalStructureId, businessPersona: "OWNING" },
+            {},
+            formationFormData
+          );
+
+          await client.form(userData, "hostname.com/form-business");
+
+          const payload = mockAxios.post.mock.calls[0][1] as ApiSubmission;
+          expect(payload.Formation.BusinessInformation.PracticesLaw).toBe(undefined);
         });
       });
     });

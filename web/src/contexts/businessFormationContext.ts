@@ -1,10 +1,11 @@
 import { createEmptyDbaDisplayContent, FormationDbaContent } from "@/lib/types/types";
 import {
   createEmptyFormationFormData,
-  FormationFields,
+  FieldsForErrorHandling,
   FormationFormData,
+  InputFile,
+  NameAvailability,
 } from "@businessnjgovnavigator/shared";
-import { NameAvailability } from "@businessnjgovnavigator/shared/";
 import { createContext } from "react";
 
 interface BusinessFormationState {
@@ -14,8 +15,9 @@ interface BusinessFormationState {
   showResponseAlert: boolean;
   hasBeenSubmitted: boolean;
   dbaContent: FormationDbaContent;
-  interactedFields: FormationFields[];
+  interactedFields: FieldsForErrorHandling[];
   hasSetStateFirstTime: boolean;
+  foreignGoodStandingFile: InputFile | undefined;
 }
 
 interface BusinessFormationContextType {
@@ -23,9 +25,10 @@ interface BusinessFormationContextType {
   setFormationFormData: React.Dispatch<React.SetStateAction<FormationFormData>>;
   setStepIndex: React.Dispatch<React.SetStateAction<number>>;
   setShowResponseAlert: React.Dispatch<React.SetStateAction<boolean>>;
-  setFieldsInteracted: (fields: FormationFields[], config?: { setToUninteracted: boolean }) => void;
+  setFieldsInteracted: (fields: FieldsForErrorHandling[], config?: { setToUninteracted: boolean }) => void;
   setHasBeenSubmitted: (hasBeenSubmitted: boolean) => void;
   setBusinessNameAvailability: React.Dispatch<React.SetStateAction<NameAvailability | undefined>>;
+  setForeignGoodStandingFile: (file: InputFile | undefined) => void;
 }
 
 export const BusinessFormationContext = createContext<BusinessFormationContextType>({
@@ -36,6 +39,7 @@ export const BusinessFormationContext = createContext<BusinessFormationContextTy
     showResponseAlert: false,
     hasBeenSubmitted: false,
     interactedFields: [],
+    foreignGoodStandingFile: undefined,
     hasSetStateFirstTime: false,
     businessNameAvailability: undefined,
   },
@@ -45,4 +49,5 @@ export const BusinessFormationContext = createContext<BusinessFormationContextTy
   setFieldsInteracted: () => {},
   setHasBeenSubmitted: () => {},
   setBusinessNameAvailability: () => {},
+  setForeignGoodStandingFile: () => {},
 });

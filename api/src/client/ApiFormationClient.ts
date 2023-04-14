@@ -3,12 +3,12 @@ import { getCurrentDateISOString, parseDateWithFormat } from "@shared/dateHelper
 import { defaultDateFormat } from "@shared/defaultConstants";
 import {
   BusinessSuffix,
-  ForeignGoodStandingFileObject,
   formationApiDateFormat,
   FormationLegalType,
   FormationSubmitError,
   FormationSubmitResponse,
   GetFilingResponse,
+  InputFile,
   PaymentType,
   SignerTitle,
 } from "@shared/formationData";
@@ -27,8 +27,12 @@ type ApiConfig = {
 
 export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): FormationClient => {
   const logId = logger.GetId();
-  const form = (userData: UserData, returnUrl: string): Promise<FormationSubmitResponse> => {
-    const postBody = makePostBody(userData, returnUrl, config);
+  const form = (
+    userData: UserData,
+    returnUrl: string,
+    foreignGoodStandingFile: InputFile | undefined
+  ): Promise<FormationSubmitResponse> => {
+    const postBody = makePostBody(userData, returnUrl, config, foreignGoodStandingFile);
     logger.LogInfo(
       `Formation - NICUSA - Id:${logId} - Request Sent to ${
         config.baseUrl
@@ -148,7 +152,12 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
       });
   };
 
-  const makePostBody = (userData: UserData, returnUrl: string, config: ApiConfig): ApiSubmission => {
+  const makePostBody = (
+    userData: UserData,
+    returnUrl: string,
+    config: ApiConfig,
+    foreignGoodStandingFile: InputFile | undefined
+  ): ApiSubmission => {
     const formationFormData = userData.formationData.formationFormData;
 
     const isManual = formationFormData.agentNumberOrManual === "MANUAL_ENTRY";
@@ -221,12 +230,24 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
       return {};
     };
 
+    const getPracticesLaw = (): "Yes" | "No" | undefined => {
+      if (isForeignCorp && formationFormData.willPracticeLaw !== undefined) {
+        return formationFormData.willPracticeLaw ? "Yes" : "No";
+      }
+      return undefined;
+    };
+
     return {
       Account: config.account,
       Key: config.key,
       ReturnUrl: `${returnUrl}?completeFiling=true`,
       FailureReturnUrl: `${returnUrl}?completeFiling=false`,
-      ForeignGoodStandingFile: isForeignCorp ? formationFormData.foreignGoodStandingFile : undefined,
+      ForeignGoodStandingFile: foreignGoodStandingFile
+        ? {
+            Extension: foreignGoodStandingFile.fileType,
+            Content: foreignGoodStandingFile.base64Contents,
+          }
+        : undefined,
       Payer: {
         CompanyName: formationFormData.businessName,
         Address1: isForeign ? "" : formationFormData.addressLine1,
@@ -251,7 +272,7 @@ export const ApiFormationClient = (config: ApiConfig, logger: LogWriterType): Fo
           BusinessName: formationFormData.businessName,
           BusinessDesignator: formationFormData.businessSuffix as Exclude<BusinessSuffix, undefined>,
           Naic: naicsCode,
-          PracticesLaw: isForeignCorp ? false : undefined,
+          PracticesLaw: getPracticesLaw(),
           ForeignStateOfFormation: formationFormData.foreignStateOfFormation,
           ForeignDateOfFormation: formationFormData.foreignDateOfFormation
             ? parseDateWithFormat(formationFormData.foreignDateOfFormation, defaultDateFormat).format(
@@ -413,7 +434,7 @@ interface Formation extends Provisions {
     Business: BusinessType; //Business Type (DomesticLimitedLiabilityCompany)
     BusinessName: string; //The requested business name, must be available and not contain any restricted words. Name plus designator length must be less than 100 characters in length.
     BusinessDesignator: BusinessSuffix; //The designator - LLC. L.L.C etc
-    PracticesLaw: boolean | undefined;
+    PracticesLaw: "Yes" | "No" | undefined;
     Naic: string; // If supplied must be 6 digits
     BusinessPurpose: string | undefined; // Max 300 chars
     EffectiveFilingDate: string; // date mm/dd/yyyy
@@ -461,7 +482,10 @@ export interface ApiSubmission {
     Email?: string;
   };
   Formation: Formation;
-  ForeignGoodStandingFile?: ForeignGoodStandingFileObject;
+  ForeignGoodStandingFile?: {
+    Extension: string;
+    Content: string;
+  };
 }
 
 type MembersObjects = {

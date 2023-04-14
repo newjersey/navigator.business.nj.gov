@@ -11,6 +11,8 @@ import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
 import { corpLegalStructures } from "@businessnjgovnavigator/shared/";
 import { ReactElement, useContext, useMemo } from "react";
+import { ForeignCertificate } from "./ForeignCertificate";
+import { PracticesLaw } from "./PracticesLaw";
 
 export const MainBusiness = (): ReactElement => {
   const { Config } = useConfig();
@@ -45,26 +47,38 @@ export const MainBusiness = (): ReactElement => {
         </WithErrorBar>
       </WithErrorBar>
       {isForeign && (
-        <WithErrorBar
-          hasError={doSomeFieldsHaveError(["foreignStateOfFormation", "foreignDateOfFormation"])}
-          type="DESKTOP-ONLY"
-          className="grid-row tablet:grid-gap-1"
-        >
+        <>
           <WithErrorBar
-            hasError={doesFieldHaveError("foreignStateOfFormation")}
-            type="MOBILE-ONLY"
-            className="tablet:grid-col-6"
+            hasError={doSomeFieldsHaveError(["foreignStateOfFormation", "foreignDateOfFormation"])}
+            type="DESKTOP-ONLY"
+            className="grid-row tablet:grid-gap-1"
           >
-            <ForeignStateOfFormation />
+            <WithErrorBar
+              hasError={doesFieldHaveError("foreignStateOfFormation")}
+              type="MOBILE-ONLY"
+              className="tablet:grid-col-6"
+            >
+              <ForeignStateOfFormation />
+            </WithErrorBar>
+            <WithErrorBar
+              hasError={doesFieldHaveError("foreignDateOfFormation")}
+              type="MOBILE-ONLY"
+              className="tablet:grid-col-6"
+            >
+              <FormationDate fieldName="foreignDateOfFormation" />
+            </WithErrorBar>
           </WithErrorBar>
-          <WithErrorBar
-            hasError={doesFieldHaveError("foreignDateOfFormation")}
-            type="MOBILE-ONLY"
-            className="tablet:grid-col-6"
-          >
-            <FormationDate fieldName="foreignDateOfFormation" />
-          </WithErrorBar>
-        </WithErrorBar>
+          {state.formationFormData.legalType === "foreign-c-corporation" && (
+            <>
+              <WithErrorBar hasError={doesFieldHaveError("willPracticeLaw")} type="ALWAYS">
+                <PracticesLaw hasError={doesFieldHaveError("willPracticeLaw")} />
+              </WithErrorBar>
+              <WithErrorBar hasError={doesFieldHaveError("foreignGoodStandingFile")} type="ALWAYS">
+                <ForeignCertificate hasError={doesFieldHaveError("foreignGoodStandingFile")} />
+              </WithErrorBar>
+            </>
+          )}
+        </>
       )}
       {corpLegalStructures.includes(state.formationFormData.legalType) && (
         <div className="grid-row">

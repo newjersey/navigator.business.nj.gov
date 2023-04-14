@@ -21,6 +21,7 @@ import {
   FormationLegalType,
   FormationSubmitResponse,
   GetFilingResponse,
+  InputFile,
   PublicFilingLegalType,
   publicFilingLegalTypes,
 } from "@shared/formationData";
@@ -153,6 +154,16 @@ export const generateTaxFiling = (overrides: Partial<TaxFiling>): TaxFiling => {
   return {
     identifier: `some-identifier-${randomInt()}`,
     dueDate: getCurrentDateFormatted(defaultDateFormat),
+    ...overrides,
+  };
+};
+
+export const generateInputFile = (overrides: Partial<InputFile>): InputFile => {
+  return {
+    base64Contents: `some-base-64-contents-${randomInt()}`,
+    fileType: randomElementFromArray(["PNG", "PDF"]),
+    sizeInBytes: randomInt(),
+    filename: `some-filename-${randomInt()}`,
     ...overrides,
   };
 };

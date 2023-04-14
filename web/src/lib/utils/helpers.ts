@@ -149,6 +149,13 @@ export const validateEmail = (email: string): boolean => {
   );
 };
 
+export const flipObject = <T extends string | number | symbol>(obj: Record<string, T>): Record<T, string> => {
+  return Object.keys(obj).reduce((acc, key) => {
+    acc[obj[key]] = key;
+    return acc;
+  }, {} as Record<T, string>);
+};
+
 export const getPhoneNumberFormat = (phoneNumber: string): string => {
   const length = phoneNumber.length;
   if (length === 0) {

@@ -46,6 +46,7 @@ import {
   Industries,
   Industry,
   IndustrySpecificData,
+  InputFile,
   LegalStructure,
   LegalStructures,
   LicenseData,
@@ -455,6 +456,16 @@ export const generateGetFilingResponse = (overrides: Partial<GetFilingResponse>)
     formationDoc: `some-formation-doc-${randomInt()}`,
     standingDoc: `some-standing-doc-${randomInt()}`,
     certifiedDoc: `some-certified-doc-${randomInt()}`,
+    ...overrides,
+  };
+};
+
+export const generateInputFile = (overrides: Partial<InputFile>): InputFile => {
+  return {
+    base64Contents: `some-base-64-contents-${randomInt()}`,
+    fileType: randomElementFromArray(["PNG", "PDF"]),
+    sizeInBytes: randomInt(),
+    filename: `some-filename-${randomInt()}`,
     ...overrides,
   };
 };

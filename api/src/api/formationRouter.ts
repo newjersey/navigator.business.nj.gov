@@ -14,10 +14,10 @@ export const formationRouterFactory = (
   const router = Router();
 
   router.post("/formation", async (req, res) => {
-    const { userData, returnUrl } = req.body;
+    const { userData, returnUrl, foreignGoodStandingFile } = req.body;
 
     formationClient
-      .form(userData, returnUrl)
+      .form(userData, returnUrl, foreignGoodStandingFile)
       .then(async (formationResponse: FormationSubmitResponse) => {
         const userDataWithResponse = {
           ...userData,

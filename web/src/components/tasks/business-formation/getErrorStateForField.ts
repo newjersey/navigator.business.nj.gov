@@ -10,19 +10,36 @@ import { isZipCodeNj } from "@/lib/domain-logic/isZipCodeNj";
 import { isZipCodeUs } from "@/lib/domain-logic/isZipCodeUs";
 import { FormationFieldErrorState } from "@/lib/types/types";
 import { templateEval, validateEmail } from "@/lib/utils/helpers";
-import { FormationFields, FormationFormData, NameAvailability } from "@businessnjgovnavigator/shared";
+import {
+  FieldsForErrorHandling,
+  FormationFields,
+  FormationFormData,
+  InputFile,
+  NameAvailability,
+} from "@businessnjgovnavigator/shared";
 
-export const getErrorStateForField = (
-  field: FormationFields,
-  formationFormData: FormationFormData,
-  businessNameAvailability: NameAvailability | undefined
-): FormationFieldErrorState => {
+export const getErrorStateForField = (inputParams: {
+  field: FieldsForErrorHandling;
+  formationFormData: FormationFormData;
+  businessNameAvailability?: NameAvailability | undefined;
+  foreignGoodStandingFile?: InputFile | undefined;
+}): FormationFieldErrorState => {
   const Config = getMergedConfig();
+  const { field, formationFormData, businessNameAvailability, foreignGoodStandingFile } = inputParams;
 
   const errorState = {
     field: field,
     label: (Config.formation.fields as any)[field].label,
   };
+
+  // foreignGoodStandingFile must be first in order to prevent type errors
+  if (field === "foreignGoodStandingFile") {
+    return {
+      ...errorState,
+      label: Config.formation.fields.foreignGoodStandingFile.errorMessageRequired,
+      hasError: !foreignGoodStandingFile,
+    };
+  }
 
   const fieldWithMaxLength = (params: { required: boolean; maxLen: number }): FormationFieldErrorState => {
     const exists = !!formationFormData[field];
@@ -101,6 +118,7 @@ export const getErrorStateForField = (
     "addressState",
     "addressCountry",
     "foreignStateOfFormation",
+    "willPracticeLaw",
   ];
 
   if (field === "foreignStateOfFormation") {
