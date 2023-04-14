@@ -39,7 +39,9 @@ export const DeferredLocationQuestion = (props: Props): ReactElement => {
   const onSaveNewLocation = (): void => {
     setShowSuccessBanner(true);
     setShowEditLocation(false);
-    analytics.event.task_location_question.submit.location_entered_for_first_time();
+    userData?.profileData.municipality === undefined &&
+      updateQueue?.current().profileData.municipality !== undefined &&
+      analytics.event.task_location_question.submit.location_entered_for_first_time();
   };
 
   const onRemoveLocation = async (): Promise<void> => {

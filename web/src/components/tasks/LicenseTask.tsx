@@ -139,7 +139,11 @@ export const LicenseTask = (props: Props): ReactElement => {
                 <a href={callToActionLink} target="_blank" rel="noreferrer noopener">
                   <button
                     onClick={(): void => {
-                      analytics.event.task_primary_call_to_action.click.open_external_website();
+                      analytics.event.task_primary_call_to_action.click.open_external_website(
+                        Config.licenseSearchTask.primaryCTAFirstLineText,
+                        callToActionLink,
+                        "start_application"
+                      );
                     }}
                     className="usa-button width-100 margin-bottom-2"
                     data-testid="cta-primary"
@@ -154,7 +158,10 @@ export const LicenseTask = (props: Props): ReactElement => {
                 </a>
                 <button
                   onClick={(): void => {
-                    analytics.event.task_button_i_already_submitted.click.view_status_tab();
+                    analytics.event.task_button_i_already_submitted.click.view_status_tab(
+                      "check_status",
+                      "start_application"
+                    );
                     setTabIndex(STATUS_TAB_INDEX);
                   }}
                   className="usa-button usa-button--outline width-100"

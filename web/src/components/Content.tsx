@@ -17,7 +17,7 @@ interface ContentProps {
   className?: string;
   style?: CSSProperties;
   overrides?: { [key: string]: { ({ children }: { children: string[] }): ReactElement } };
-  onClick?: () => void;
+  onClick?: (url?: string) => void;
   customComponents?: Record<string, ReactElement>;
 }
 
@@ -71,12 +71,12 @@ export const Content = (props: ContentProps): ReactElement => {
   );
 };
 
-const Link = (onClick?: () => void): any => {
+const Link = (onClick?: (url?: string) => void): any => {
   return Object.assign(
     (props: any): ReactElement => {
       if (/^https?:\/\/(.*)/.test(props.href)) {
         return (
-          <ExternalLink href={props.href} onClick={onClick}>
+          <ExternalLink href={props.href} onClick={(): void => onClick && onClick(props.href)}>
             {props.children[0]}
           </ExternalLink>
         );
@@ -84,7 +84,7 @@ const Link = (onClick?: () => void): any => {
         return <SelfRegLink href={props.href}>{props.children}</SelfRegLink>;
       }
       return (
-        <a href={props.href} onClick={onClick}>
+        <a href={props.href} onClick={(): void => (onClick ? onClick(props.href) : undefined)}>
           {props.children[0]}
         </a>
       );
@@ -100,7 +100,7 @@ export const ExternalLink = ({
 }: {
   children: string;
   href: string;
-  onClick?: () => void;
+  onClick?: (url?: string) => void;
 }): ReactElement => {
   return (
     <a
@@ -108,7 +108,9 @@ export const ExternalLink = ({
       href={href}
       target="_blank"
       rel="noreferrer noopener"
-      onClick={onClick ?? analytics.event.external_link.click.open_external_website}
+      onClick={(): void => {
+        onClick ? onClick(href) : analytics.event.external_link.click.open_external_website(children, href);
+      }}
     >
       {children}
       <Icon className="">launch</Icon>
