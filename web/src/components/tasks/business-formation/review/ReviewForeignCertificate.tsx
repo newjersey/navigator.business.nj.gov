@@ -1,7 +1,7 @@
+import { ReviewSubSection } from "@/components/tasks/business-formation/review/section/ReviewSubSection";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { InputFile } from "@businessnjgovnavigator/shared/formationData";
 import { ReactElement } from "rehype-react/lib";
-import { ReviewSection } from "./section/ReviewSection";
 
 interface Props {
   foreignGoodStandingFile: InputFile | undefined;
@@ -12,14 +12,9 @@ const filePreviewImage = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEA
 export const ReviewForeignCertificate = (props: Props): ReactElement => {
   const { Config } = useConfig();
   return (
-    <ReviewSection
-      buttonText={Config.formation.general.editButtonText}
-      header={Config.formation.fields.foreignGoodStandingFile.label}
-      stepName="Business"
-      testId="edit-foreign-certificate-step"
-    >
+    <ReviewSubSection header={Config.formation.fields.foreignGoodStandingFile.label}>
       {props.foreignGoodStandingFile?.filename ? (
-        <div className="fac">
+        <div className="fac margin-bottom-4">
           <img
             src={filePreviewImage}
             alt="file preview"
@@ -28,8 +23,10 @@ export const ReviewForeignCertificate = (props: Props): ReactElement => {
           {props.foreignGoodStandingFile?.filename}
         </div>
       ) : (
-        <i>{Config.formation.general.notEntered}</i>
+        <div className="margin-bottom-4">
+          <i>{Config.formation.general.notEntered}</i>
+        </div>
       )}
-    </ReviewSection>
+    </ReviewSubSection>
   );
 };

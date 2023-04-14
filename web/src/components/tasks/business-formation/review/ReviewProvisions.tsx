@@ -1,5 +1,5 @@
 import { ExpandCollapseString } from "@/components/ExpandCollapseString";
-import { ReviewSection } from "@/components/tasks/business-formation/review/section/ReviewSection";
+import { ReviewSubSection } from "@/components/tasks/business-formation/review/section/ReviewSubSection";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { ReactElement, useContext } from "react";
@@ -9,12 +9,7 @@ export const ReviewProvisions = (): ReactElement => {
   const { state } = useContext(BusinessFormationContext);
 
   return (
-    <ReviewSection
-      buttonText={Config.formation.general.editButtonText}
-      header={Config.formation.fields.provisions.label}
-      stepName="Business"
-      testId="edit-provisions-step"
-    >
+    <ReviewSubSection header={Config.formation.fields.provisions.label}>
       <div className="" data-testid="provisions">
         {state.formationFormData.provisions?.map((provision, index) => {
           return (
@@ -32,6 +27,6 @@ export const ReviewProvisions = (): ReactElement => {
           );
         })}
       </div>
-    </ReviewSection>
+    </ReviewSubSection>
   );
 };

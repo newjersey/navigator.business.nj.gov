@@ -1,49 +1,39 @@
 import { UnStyledButton } from "@/components/njwds-extended/UnStyledButton";
 import { LookupStepIndexByName } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { FormationStepNames } from "@/lib/types/types";
 import { scrollToTop } from "@/lib/utils/helpers";
-import { PropsWithChildren, useContext } from "react";
+import { ReactElement, ReactNode, useContext } from "react";
 
 interface Props {
-  buttonText: string;
-  handleButtonClick?: () => void;
   header: string;
   stepName: FormationStepNames;
-  testId: string;
+  testId?: string;
+  children: ReactNode;
 }
 
-export const ReviewSection: React.FC<PropsWithChildren<Props>> = ({
-  children,
-  buttonText,
-  handleButtonClick,
-  header,
-  stepName,
-  testId,
-}) => {
+export const ReviewSection = (props: Props): ReactElement => {
   const { setStepIndex } = useContext(BusinessFormationContext);
+  const { Config } = useConfig();
   const onClick = (): void => {
-    if (handleButtonClick === undefined) {
-      setStepIndex(LookupStepIndexByName(stepName));
-      scrollToTop();
-    } else {
-      handleButtonClick();
-    }
+    setStepIndex(LookupStepIndexByName(props.stepName));
+    scrollToTop();
   };
 
   return (
     <>
-      <div className="flex space-between">
-        <div className="maxw-mobile-lg margin-bottom-2">
-          <h2 className="h3-styling">{header}</h2>
+      <div className={"flex space-between"}>
+        <div className={"maxw-mobile-lg margin-bottom-2"}>
+          <h2>{props.header}</h2>
         </div>
         <div className="margin-left-2">
-          <UnStyledButton style="tertiary" onClick={onClick} underline dataTestid={testId}>
-            {buttonText}
+          <UnStyledButton style="tertiary" onClick={onClick} underline dataTestid={props.testId}>
+            {Config.formation.general.editButtonText}
           </UnStyledButton>
         </div>
       </div>
-      {children}
+      {props.children}
       <hr className="margin-y-205" />
     </>
   );

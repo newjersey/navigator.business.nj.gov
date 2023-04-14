@@ -10,6 +10,7 @@ interface Props {
   value: string;
   dataTestId?: string;
   marginOverride?: string;
+  formatter?: (value: string) => string;
 }
 
 export const ReviewLineItem = (props: Props): ReactElement => {
@@ -24,12 +25,12 @@ export const ReviewLineItem = (props: Props): ReactElement => {
     >
       <div className="text-bold width-11rem">
         {props.labelContextualInfo ? (
-          <ContextualInfoButton text={props.label} id={props.labelContextualInfo} />
+          <ContextualInfoButton text={`${props.label}:`} id={props.labelContextualInfo} />
         ) : (
-          props.label
+          `${props.label}:`
         )}
       </div>
-      <Content>{props.value}</Content>
+      <Content>{props.formatter ? props.formatter(props.value) : props.value}</Content>
     </div>
   );
 };
