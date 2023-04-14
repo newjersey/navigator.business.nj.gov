@@ -28,17 +28,17 @@ if (typeof userUuid === "undefined") {
   userUuid = undefined;
 }
 
-var userLegalStructure = document.currentScript.getAttribute("legal-structure");
+var userLegalStructure = document.currentScript.getAttribute("data-user-legal-structure");
 if (typeof userLegalStructure === "undefined") {
   userLegalStructure = undefined;
 }
 
-var userIndustry = document.currentScript.getAttribute("industry");
+var userIndustry = document.currentScript.getAttribute("data-user-industry-id");
 if (typeof userIndustry === "undefined") {
   userIndustry = undefined;
 }
 
-var userBusinessPersona = document.currentScript.getAttribute("businessPersona");
+var userBusinessPersona = document.currentScript.getAttribute("data-user-business-persona");
 if (typeof userBusinessPersona === "undefined") {
   userBusinessPersona = undefined;
 }
