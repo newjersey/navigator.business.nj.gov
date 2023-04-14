@@ -1,14 +1,16 @@
 import { getEssentialQuestion } from "@/lib/domain-logic/essentialQuestions";
 import analytics, { DimensionQueueFactory, Questions } from "@/lib/utils/analytics";
 import { camelCaseToSnakeCase } from "@/lib/utils/cases-helpers";
-import { ABExperience, ProfileData } from "@businessnjgovnavigator/shared/";
-import { LookupOperatingPhaseById, OperatingPhaseId } from "@businessnjgovnavigator/shared/operatingPhase";
 import {
+  ABExperience,
   BusinessPersona,
   ForeignBusinessType,
   IndustrySpecificData,
-} from "@businessnjgovnavigator/shared/profileData";
-import { UserData } from "@businessnjgovnavigator/shared/userData";
+  LookupOperatingPhaseById,
+  OperatingPhaseId,
+  ProfileData,
+  UserData,
+} from "@businessnjgovnavigator/shared";
 
 type RegistrationProgress = "Not Started" | "Began Onboarding" | "Onboarded Guest" | "Fully Registered";
 
