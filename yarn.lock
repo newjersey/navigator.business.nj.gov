@@ -4841,7 +4841,7 @@ __metadata:
     kill-port: 1.6.1
     lint-staged: 13.2.1
     lodash: 4.17.21
-    markdown-truncate: 1.0.4
+    markdown-truncate: 1.1.0
     nc: "git+https://github.com/dsueltenfuss/nc.git"
     netlify-cms-app: 2.15.72
     next: 12.2.5
@@ -5033,7 +5033,7 @@ __metadata:
     jest-junit: 15.0.0
     js-yaml: 4.1.0
     lodash: 4.17.21
-    markdown-truncate: 1.0.4
+    markdown-truncate: 1.1.0
     netlify-cms-app: 2.15.72
     next: 12.2.5
     next-seo: 6.0.0
@@ -24383,10 +24383,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"markdown-truncate@npm:1.0.4":
-  version: 1.0.4
-  resolution: "markdown-truncate@npm:1.0.4"
-  checksum: f58dc73416ea6a4ecbe7c82c4d2c37b31a931b4f44176e8be91d260898a4123be89c677b13ec5f3a8885b2b7830644b9f17d3cd025582f6df474c1ea7bbe9e9f
+"markdown-truncate@npm:1.1.0":
+  version: 1.1.0
+  resolution: "markdown-truncate@npm:1.1.0"
+  checksum: 6a85e2e4a7f253df0a7c83afea88286c719c461aca7af8ec9769e1daafcf8e53fbc4066207e075a02187dd0966bce30defd769ece0c067dd1fb9f4589f2b56b7
   languageName: node
   linkType: hard
 
