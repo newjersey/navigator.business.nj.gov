@@ -1,101 +1,221 @@
 {
   "formation": {
+    "registeredAgent": {
+      "label": "Registered Agent",
+      "sectionDescription": "Enter your `Registered Agent's|registered-agent` ID number. If your agent did not give you this number, you can enter their name and address.",
+      "radioButtonNumberText": "Enter Your Registered Agent ID Number",
+      "radioButtonManualText": "Manually Identify Your Registered Agent",
+      "sameAddressCheckbox": "The address is the same as the business location.",
+      "sameContactCheckbox": "The agent information is the same as the account holder."
+    },
+    "general": {
+      "paymentDisclaimer": "You will be brought to a secure payment platform operated by New Jersey's partner NICUSA Inc. to process your payment.",
+      "partialAddressErrorText": "Address must be complete.",
+      "notEntered": "Not set",
+      "backButtonText": "Cancel",
+      "initialNextNexusButtonText": "Continue Authorizing My Business",
+      "editButtonText": "Edit",
+      "charactersLabel": "characters",
+      "maximumLengthErrorText": "${field} must be ${maxLen} characters or fewer.",
+      "nextButtonText": "Save & Continue",
+      "optionalLabel": "(Optional)",
+      "previousButtonText": "Back",
+      "initialNextButtonText": "Continue Forming My Business",
+      "submitButtonText": "Submit & Pay",
+      "viewMoreButtonText": "View more",
+      "amendmentInfo": "#### Review your information before submitting to the New Jersey Department of Division of Revenue and Enterprise Services.\n If you need to make a change after submitting, you will need to file a [paper amendment.](https://www.njportal.com/DOR/BusinessAmendments/Forms/IdentifyBusiness)",
+      "viewLessButtonText": "View less",
+      "genericErrorText": "This field requires information."
+    },
+    "intro": {
+      "default": "This online application will register your business name and form your `business structure|business-structure-learn-more` with the New Jersey Division of Revenue and Enterprise Services.\n\nThis form will take about 5–10 minutes to complete. You will have completed formation and obtained an `Entity ID|entity-id` immediately after payment is received.\n\nInterested in `reserving your business name temporarily|name-reservation` before registering?",
+      "foreign": "You must register your business name and form your business with the State. To do this, you first need to see if your business name is available."
+    },
+    "sections": {
+      "addressHeader": "Primary Business Address",
+      "servicesHeader": "Services and Payment",
+      "addressAddButtonText": "Add Primary Business Address",
+      "businessNameAndStructureHeader": "Business Name and Business Structure",
+      "notificationsDescription": "Get free text/email notifications:",
+      "notificationsHeader": "Notifications",
+      "review": {
+        "addressLabel": "Address",
+        "nameLabel": "Full Name",
+        "locationHeader": "Location",
+        "billingContactHeader": "Billing Contact Information"
+      },
+      "contactInfoHeader": "Billing Contact Information",
+      "servicesDescription": "Use the table below to select all the services you’d like to purchase as well as the payment type. The total amount will change based on the payment type selected."
+    },
+    "errorBanner": {
+      "genericApiError": "Review the information in the fields below for errors:",
+      "errorOnStep": "Review the information in the fields below for errors or omissions:",
+      "incompleteStepsError": "Check the steps below for missing information or errors:",
+      "apiResubmitText": "After you make the correction, resubmit the form."
+    },
     "fields": {
+      "paymentType": {
+        "paymentCosts": {
+          "creditCardInitial": "3.5",
+          "creditCardExtra": "2",
+          "ach": "3.50"
+        },
+        "costSubtotalLabel": "Subtotal",
+        "reviewStepsServicesSelected": "Services Selected",
+        "error": "Select a payment method.",
+        "serviceColumnLabel": "Services",
+        "creditCardLabel": "Pay with Credit Card",
+        "achLabel": "Pay with E-Check",
+        "reviewStepServicesHeader": "Services",
+        "costColumnLabel": "Cost",
+        "label": "Payment Type",
+        "costTotalLabel": "Total"
+      },
+      "officialFormationDocument": {
+        "label": "Official Formation Document",
+        "labelContextualInfo": "certificate-formation",
+        "cost": "125"
+      },
+      "contactLastName": {
+        "label": "Last Name",
+        "error": "Enter a last name."
+      },
       "addressCountry": {
         "label": "Country",
         "error": "Select a country."
+      },
+      "canMakeDistribution": {
+        "label": "Partnership Rights - Make distributions",
+        "body": "Do general partners have the right to make distributions to any partner? (This includes a return of all or any part of the partner's contributions).",
+        "reviewStepNo": "**No**, general partners do not have the right to make distributions to any partner. (This includes a return of all or any part of the partner's contributions).",
+        "reviewStepYes": "**Yes**, general partners have the right to make distributions to any partner. (This includes a return of all or any part of the partner's contributions)."
+      },
+      "addressProvince": {
+        "label": "Province",
+        "error": "Enter a Province."
+      },
+      "dissolution": {
+        "label": "Dissolution",
+        "body": "When and under what circumstances can a limited partnership and its affairs dissolve?"
+      },
+      "directors": {
+        "addButtonText": "Add new Director",
+        "error": "Enter at least 1 director's name.",
+        "successSnackbarBody": "A director has been added successfully.",
+        "modalTitle": "Add New Director",
+        "subheader": "",
+        "reviewStepHeader": "Board of Directors",
+        "placeholder": "No Directors have been added",
+        "label": "Board of Directors",
+        "successSnackbarHeader": "Director Added",
+        "modalSaveButton": "Add Director",
+        "description": "List each `Board of Directors’|board-directors` name and address. You need at least 1 and can have up to 10 Directors listed.\n\nBoard of Directors’ names are listed on the Certificate of Formation and will have the ability to file and sign documents."
+      },
+      "signers": {
+        "addButtonText": "Add New Signer",
+        "signColumnLabel": "Sign*",
+        "errorInlineFirstSignerName": "Enter a signer.",
+        "overrides": {
+          "limited-liability-partnership": {
+            "description": "Authorized Partner(s) should sign below by adding their full name. You can have up to 10 signers listed."
+          },
+          "foreign-limited-liability-company": {
+            "description": "`Authorized representative(s)|authorized-representative` or `general partner(s)|general-partner` should sign below by adding their full name. You can have up to 10 signers listed."
+          }
+        },
+        "aidText": "By checking this box I confirm that I'm an authorized signer.",
+        "nameLabel": "Signer Full Name",
+        "errorBannerSignerName": "One or more Signer fields are empty.",
+        "errorInlineSignerTitle": "Select a title.",
+        "reviewStepHeader": "Signatures",
+        "placeholder": "No Signers have been added",
+        "label": "Signers",
+        "errorBannerCheckbox": "Sign by clicking the checkbox(s) below.",
+        "deleteTextMobile": "Delete Signer",
+        "errorBannerSignerTitle": "Select the signer titles below.",
+        "errorBannerMinimum": "Enter at least 1 signer's name.",
+        "tableHeader": "Name,Address,Sign*,Actions",
+        "titleLabel": "Title",
+        "description": "Authorized Representative(s) should sign below by adding their full name. You can have up to 10 signers listed.",
+        "errorInlineAdditionalSignerName": "Enter the first and last name of each signer."
       },
       "addressLine1": {
         "label": "Address Line 1",
         "error": "Enter your business' street name and number."
       },
+      "canGetDistribution": {
+        "label": "Partnership Rights - Receive distributions",
+        "body": "Do limited partners have the right to receive distributions from a partner? (This can  include a return of all or any part of their partner's contributions).",
+        "reviewStepYes": "**Yes**, the limited partners have the right to receive distributions from a partner. (This can  include a return of all or any part of their partner's contributions).",
+        "reviewStepNo": "**No**, the limited partners do not have the right to receive distributions from a partner. (This can  include a return of all or any part of their partner's contributions)."
+      },
       "addressLine2": {
         "label": "Address Line 2",
         "error": ""
+      },
+      "agentOfficeAddressLine1": {
+        "label": "Office Address Line 1",
+        "error": "Enter the agent's office street name and number."
+      },
+      "incorporators": {
+        "addButtonText": "Add Signer",
+        "overrides": {
+          "limited-partnership": {
+            "description": "List each General Partners' name and address. You can have up to 10 General Partners listed.\n\nGeneral Partners are listed on the Certificate of Formation and will have the ability to file and sign documents."
+          }
+        },
+        "successSnackbarBody": "A signer has been added successfully.",
+        "modalTitle": "Add New Signer",
+        "reviewStepHeader": "Signer(s)",
+        "placeholder": "No Signers have been added",
+        "label": "Signers",
+        "successSnackbarHeader": "Signer Added",
+        "description": "List each `Incorporators'|incorporator` name and address. You can have up to 10 Incorporators listed.\n\nIncorporators are listed on the Certificate of Formation and will have the ability to file and sign documents."
+      },
+      "businessName": {
+        "alertRestrictedWord": "\"${name}\" contains the restricted word \"${word}\" that cannot be used in the Business Name for online filing. If you would like to use this restricted word, please contact us with your preferred name at [treasury.](https://www.state.nj.us/treasury/revenue/revgencode.shtml)",
+        "alertSpecialCharacters": "\"${name}\" contains invalid special characters that cannot be used in the Business Name for online filing. If you'd like to use special characters you need to file a paper application using the form located at [treasury.](https://www.state.nj.us/treasury/revenue/pdf/2000.pdf)",
+        "overrides": {
+          "foreign": {
+            "header": "Check Availability of Your Business Name",
+            "description": "Your business name must match **exactly** with the business name registered in your state of origin, you can find this on your original `Certificate of Formation|certificate-formation`. **This search tool does not register your name with the State.**\n\nPlease check if your business name is available in New Jersey."
+          }
+        },
+        "errorInlineEmpty": "Enter a business name to check availability.",
+        "alertAvailable": "\"${name}\" is available. This name will be registered with the State ONLY after you submit the rest of this form.",
+        "header": "Check Available Business Names",
+        "errorInlineUnavailable": "This name is already being used. Try another business name.",
+        "alertDesignator": "It looks like there's a designator in your name like LLC, LP, or CORP. Please remove it and try your search again. You can officially form your business and choose a designator once you find an available name.",
+        "alertUnavailable": "Sorry, \"${name}\" isn't available. Try another name. You can officially form your business once you've found an available name.",
+        "label": "Business Name",
+        "description": "We’ll check to see if your desired business name is available. Once you find an available name you can use it to complete this form.\n\nWhat do you want to name your business?",
+        "errorInlineNeedsToSearch": "Confirm the availability of your business name."
+      },
+      "agentOfficeAddressLine2": {
+        "label": "Office Address Line 2"
+      },
+      "getDistributionTerms": {
+        "label": "Partnership Rights - Receive distribution terms"
+      },
+      "agentNumber": {
+        "label": "Registered Agent ID Number",
+        "error": "Enter the 4 to 7 digit Registered Agent ID number."
+      },
+      "agentOfficeAddressMunicipality": {
+        "label": "Office City",
+        "error": "Select a city."
+      },
+      "corpWatchNotification": {
+        "checkboxText": "I want to sign up for CorpWatch Alerts to notify me when any charter document filing is performed for my business."
       },
       "addressMunicipality": {
         "label": "City",
         "error": "Select a city.",
         "infoAlert": "**Can't find your city?** Unincorporated places are not listed here. Search for [your official jurisdiction](https://www.nj.gov/nj/gov/county/localities.html) (type in your community's name into the local name field)."
       },
-      "addressCity": {
-        "label": "City",
-        "error": "Enter a city."
-      },
-      "addressState": {
-        "label": "State",
-        "error": "Enter a state."
-      },
-      "addressProvince": {
-        "label": "Province",
-        "error": "Enter a Province."
-      },
-      "addressZipCode": {
-        "label": "Zip Code",
-        "error": "Enter a NJ Zip Code.",
-        "foreign": {
-          "label": "Postal Code",
-          "errorUS": "Enter a 5 digit Zip Code.",
-          "errorIntl": "Enter a 1 to 11 digit Postal Code."
-        }
-      },
       "agentName": {
         "label": "Registered Agent Name",
         "error": "Enter the agent's full name."
-      },
-      "agentNumber": {
-        "label": "Registered Agent ID Number",
-        "error": "Enter the 4 to 7 digit Registered Agent ID number."
-      },
-      "agentEmail": {
-        "label": "Registered Agent Email",
-        "error": "Confirm the email matches format: name@example.com"
-      },
-      "agentOfficeAddressLine1": {
-        "label": "Office Address Line 1",
-        "error": "Enter the agent's office street name and number."
-      },
-      "agentOfficeAddressLine2": {
-        "label": "Office Address Line 2"
-      },
-      "agentOfficeAddressMunicipality": {
-        "label": "Office City",
-        "error": "Select a city."
-      },
-      "agentOfficeAddressState": {
-        "label": "State",
-        "error": "Enter a state."
-      },
-      "agentOfficeAddressZipCode": {
-        "label": "Office Zip Code",
-        "error": "Enter a NJ Zip Code."
-      },
-      "annualReportNotification": {
-        "checkboxText": "I want to be reminded of any Annual Reports Filing(s), so that I never miss an Annual Report deadline."
-      },
-      "businessName": {
-        "header": "Check Available Business Names",
-        "description": "We’ll check to see if your desired business name is available. Once you find an available name you can use it to complete this form.\n\nWhat do you want to name your business?",
-        "label": "Business Name",
-        "alertUnavailable": "Sorry, \"${name}\" isn't available. Try another name. You can officially form your business once you've found an available name.",
-        "alertAvailable": "\"${name}\" is available. This name will be registered with the State ONLY after you submit the rest of this form.",
-        "alertSpecialCharacters": "\"${name}\" contains invalid special characters that cannot be used in the Business Name for online filing. If you'd like to use special characters you need to file a paper application using the form located at [treasury.](https://www.state.nj.us/treasury/revenue/pdf/2000.pdf)",
-        "alertDesignator": "It looks like there's a designator in your name like LLC, LP, or CORP. Please remove it and try your search again. You can officially form your business and choose a designator once you find an available name.",
-        "alertRestrictedWord": "\"${name}\" contains the restricted word \"${word}\" that cannot be used in the Business Name for online filing. If you would like to use this restricted word, please contact us with your preferred name at [treasury.](https://www.state.nj.us/treasury/revenue/revgencode.shtml)",
-        "errorInlineUnavailable": "This name is already being used. Try another business name.",
-        "errorInlineEmpty": "Enter a business name to check availability.",
-        "errorInlineNeedsToSearch": "Confirm the availability of your business name.",
-        "overrides": {
-          "foreign": {
-            "header": "Check Availability of Your Business Name",
-            "description": "Your business name must match **exactly** with the business name registered in your state of origin, you can find this on your original `Certificate of Formation|certificate-formation`. **This search tool does not register your name with the State.**\n\nPlease check if your business name is available in New Jersey."
-          }
-        }
-      },
-      "businessPurpose": {
-        "label": "Business Purpose",
-        "addButtonText": "Add Business Purpose",
-        "body": "Describe your business' primary activities but refrain from using any `reserved words.|reserved-words` This allows your business to be searchable on the Public Record."
       },
       "businessStartDate": {
         "label": "Effective Date",
@@ -115,28 +235,57 @@
         "label": "Total Shares of Stock",
         "error": "Enter a minimum of 1 share."
       },
-      "canGetDistribution": {
-        "label": "Partnership Rights - Receive distributions",
-        "body": "Do limited partners have the right to receive distributions from a partner? (This can  include a return of all or any part of their partner's contributions).",
-        "reviewStepYes": "**Yes**, the limited partners have the right to receive distributions from a partner. (This can  include a return of all or any part of their partner's contributions).",
-        "reviewStepNo": "**No**, the limited partners do not have the right to receive distributions from a partner. (This can  include a return of all or any part of their partner's contributions)."
+      "makeDistributionTerms": {
+        "label": "Partnership Rights - Make distribution terms"
       },
-      "canMakeDistribution": {
-        "label": "Partnership Rights - Make distributions",
-        "body": "Do general partners have the right to make distributions to any partner? (This includes a return of all or any part of the partner's contributions).",
-        "reviewStepNo": "**No**, general partners do not have the right to make distributions to any partner. (This includes a return of all or any part of the partner's contributions).",
-        "reviewStepYes": "**Yes**, general partners have the right to make distributions to any partner. (This includes a return of all or any part of the partner's contributions)."
+      "willPracticeLaw": {
+        "label": "Will you practice law?",
+        "radioNoText": "No",
+        "radioYesText": "Yes",
+        "error": "Select 'Yes' or 'No'."
       },
-      "canCreateLimitedPartner": {
-        "label": "Partnership Rights - Assign rights",
-        "body": "Can limited partners assign other partners limited partner rights?",
-        "reviewStepNo": "**No**, the limited partners cannot assign other partners limited partner rights.",
-        "reviewStepYes": "**Yes**, the limited partners can assign other partners limited partner rights."
+      "contactPhoneNumber": {
+        "label": "Phone Number",
+        "labelSecondaryText": "(xxx) xxx-xxxx",
+        "error": "Enter a 10 digit phone number."
+      },
+      "agentEmail": {
+        "label": "Registered Agent Email",
+        "error": "Confirm the email matches format: name@example.com"
+      },
+      "foreignDateOfFormation": {
+        "label": "Original Date of Formation",
+        "labelSecondaryText": "(mm/dd/yyyy)",
+        "error": "The business formation date must be a valid date in format MM/DD/YYYY"
+      },
+      "combinedInvestment": {
+        "label": "Combined Investment",
+        "body": "List the funds and the value of properties and services each of the partners have agreed to contribute."
+      },
+      "members": {
+        "addButtonText": "Add New Member",
+        "addressCheckboxText": "Use business address.",
+        "expandText": "Expand",
+        "successSnackbarBody": "A member has been added successfully.",
+        "modalTitle": "Add New Member",
+        "subheader": "(Complete this section if you are a multi-member LLC)",
+        "placeholder": "No members have been added",
+        "label": "Members",
+        "successSnackbarHeader": "Member Added",
+        "modalSaveButton": "Add Member",
+        "description": "List each LLC's members' name and address. You may list up to 10 members. Members can be individuals or entities and are the owners of the LLC. Members do not own the LLC's property. They may or may not manage the business and affairs."
       },
       "certifiedCopyOfFormationDocument": {
         "cost": "25",
         "label": "Certified Copy of Formation Document",
         "labelContextualInfo": "certified-copy"
+      },
+      "foreignGoodStandingFile": {
+        "label": "Foreign Certificate of Good Standing",
+        "helperText": "Select a PNG or PDF file. Max file size: 3MB.",
+        "errorMessageFileSize": "${fileName} exceeds maximum size of ${maxFileSize} MB.",
+        "errorMessageFileType": "${fileName} file format is not supported.",
+        "errorMessageRequired": "A Certificate of Good Standing is required."
       },
       "certificateOfStanding": {
         "label": "Certificate of Standing",
@@ -154,117 +303,51 @@
           }
         }
       },
-      "officialFormationDocument": {
-        "label": "Official Formation Document",
-        "labelContextualInfo": "certificate-formation",
-        "cost": "125"
+      "canCreateLimitedPartner": {
+        "label": "Partnership Rights - Assign rights",
+        "body": "Can limited partners assign other partners limited partner rights?",
+        "reviewStepNo": "**No**, the limited partners cannot assign other partners limited partner rights.",
+        "reviewStepYes": "**Yes**, the limited partners can assign other partners limited partner rights."
       },
-      "combinedInvestment": {
-        "label": "Combined Investment",
-        "body": "List the funds and the value of properties and services each of the partners have agreed to contribute."
+      "addressZipCode": {
+        "label": "Zip Code",
+        "error": "Enter a NJ Zip Code.",
+        "foreign": {
+          "label": "Postal Code",
+          "errorUS": "Enter a 5 digit Zip Code.",
+          "errorIntl": "Enter a 1 to 11 digit Postal Code."
+        }
       },
       "contactFirstName": {
         "label": "First Name",
         "error": "Enter a first name."
       },
-      "contactLastName": {
-        "label": "Last Name",
-        "error": "Enter a last name."
-      },
-      "contactPhoneNumber": {
-        "label": "Phone Number",
-        "labelSecondaryText": "(xxx) xxx-xxxx",
-        "error": "Enter a 10 digit phone number."
-      },
-      "corpWatchNotification": {
-        "checkboxText": "I want to sign up for CorpWatch Alerts to notify me when any charter document filing is performed for my business."
-      },
-      "directors": {
-        "label": "Board of Directors",
-        "subheader": "",
-        "description": "List each `Board of Directors’|board-directors` name and address. You need at least 1 and can have up to 10 Directors listed.\n\nBoard of Directors’ names are listed on the Certificate of Formation and will have the ability to file and sign documents.",
-        "successSnackbarHeader": "Director Added",
-        "successSnackbarBody": "A director has been added successfully.",
-        "error": "Enter at least 1 director's name.",
-        "reviewStepHeader": "Board of Directors",
-        "modalTitle": "Add New Director",
-        "modalSaveButton": "Add Director",
-        "addButtonText": "Add new Director",
-        "placeholder": "No Directors have been added"
-      },
-      "dissolution": {
-        "label": "Dissolution",
-        "body": "When and under what circumstances can a limited partnership and its affairs dissolve?"
-      },
-      "foreignDateOfFormation": {
-        "label": "Original Date of Formation",
-        "labelSecondaryText": "(mm/dd/yyyy)",
-        "error": "The business formation date must be a valid date in format MM/DD/YYYY"
+      "agentOfficeAddressZipCode": {
+        "label": "Office Zip Code",
+        "error": "Enter a NJ Zip Code."
       },
       "foreignStateOfFormation": {
         "label": "Original State of Formation",
         "error": "Select a State"
       },
-      "foreignGoodStandingFile": {
-        "label": "Foreign Certificate of Good Standing",
-        "helperText": "Select a PNG or PDF file. Max file size: 3MB.",
-        "errorMessageFileSize": "${fileName} exceeds maximum size of ${maxFileSize} MB.",
-        "errorMessageFileType": "${fileName} file format is not supported.",
-        "errorMessageRequired": "A Certificate of Good Standing is required."
+      "addressState": {
+        "label": "State",
+        "error": "Enter a state."
       },
       "createLimitedPartnerTerms": {
         "label": "Partnership Rights - Assign rights terms"
       },
-      "getDistributionTerms": {
-        "label": "Partnership Rights - Receive distribution terms"
+      "annualReportNotification": {
+        "checkboxText": "I want to be reminded of any Annual Reports Filing(s), so that I never miss an Annual Report deadline."
       },
-      "makeDistributionTerms": {
-        "label": "Partnership Rights - Make distribution terms"
+      "businessPurpose": {
+        "label": "Business Purpose",
+        "addButtonText": "Add Business Purpose",
+        "body": "Describe your business' primary activities but refrain from using any `reserved words.|reserved-words` This allows your business to be searchable on the Public Record."
       },
-      "incorporators": {
-        "label": "Signers",
-        "successSnackbarHeader": "Signer Added",
-        "successSnackbarBody": "A signer has been added successfully.",
-        "addButtonText": "Add Signer",
-        "reviewStepHeader": "Signer(s)",
-        "modalTitle": "Add New Signer",
-        "placeholder": "No Signers have been added",
-        "description": "List each `Incorporators'|incorporator` name and address. You can have up to 10 Incorporators listed.\n\nIncorporators are listed on the Certificate of Formation and will have the ability to file and sign documents.",
-        "overrides": {
-          "limited-partnership": {
-            "description": "List each General Partners' name and address. You can have up to 10 General Partners listed.\n\nGeneral Partners are listed on the Certificate of Formation and will have the ability to file and sign documents."
-          }
-        }
-      },
-      "members": {
-        "label": "Members",
-        "subheader": "(Complete this section if you are a multi-member LLC)",
-        "description": "List each LLC's members' name and address. You may list up to 10 members. Members can be individuals or entities and are the owners of the LLC. Members do not own the LLC's property. They may or may not manage the business and affairs.",
-        "expandText": "Expand",
-        "modalTitle": "Add New Member",
-        "successSnackbarHeader": "Member Added",
-        "successSnackbarBody": "A member has been added successfully.",
-        "addButtonText": "Add New Member",
-        "modalSaveButton": "Add Member",
-        "addressCheckboxText": "Use business address.",
-        "placeholder": "No members have been added"
-      },
-      "paymentType": {
-        "label": "Payment Type",
-        "error": "Select a payment method.",
-        "achLabel": "Pay with E-Check",
-        "reviewStepServicesHeader": "Services",
-        "reviewStepsServicesSelected": "Services Selected",
-        "creditCardLabel": "Pay with Credit Card",
-        "costColumnLabel": "Cost",
-        "serviceColumnLabel": "Services",
-        "costSubtotalLabel": "Subtotal",
-        "costTotalLabel": "Total",
-        "paymentCosts": {
-          "creditCardInitial": "3.5",
-          "creditCardExtra": "2",
-          "ach": "3.50"
-        }
+      "agentOfficeAddressState": {
+        "label": "State",
+        "error": "Enter a state."
       },
       "provisions": {
         "label": "Additional Provisions/Articles",
@@ -273,43 +356,13 @@
         "addButtonText": "Add Provisions/Articles",
         "addAnotherButtonText": "Add a Provision"
       },
-      "signers": {
-        "label": "Signers",
-        "errorBannerSignerTitle": "Select the signer titles below.",
-        "errorBannerMinimum": "Enter at least 1 signer's name.",
-        "errorBannerSignerName": "One or more Signer fields are empty.",
-        "errorBannerCheckbox": "Sign by clicking the checkbox(s) below.",
-        "errorInlineAdditionalSignerName": "Enter the first and last name of each signer.",
-        "errorInlineSignerTitle": "Select a title.",
-        "errorInlineFirstSignerName": "Enter a signer.",
-        "titleLabel": "Title",
-        "tableHeader": "Name,Address,Sign*,Actions",
-        "signColumnLabel": "Sign*",
-        "nameLabel": "Signer Full Name",
-        "addButtonText": "Add New Signer",
-        "reviewStepHeader": "Signatures",
-        "aidText": "By checking this box I confirm that I'm an authorized signer.",
-        "deleteTextMobile": "Delete Signer",
-        "description": "Authorized Representative(s) should sign below by adding their full name. You can have up to 10 signers listed.",
-        "placeholder": "No Signers have been added",
-        "overrides": {
-          "limited-liability-partnership": {
-            "description": "Authorized Partner(s) should sign below by adding their full name. You can have up to 10 signers listed."
-          },
-          "foreign-limited-liability-company": {
-            "description": "`Authorized representative(s)|authorized-representative` or `general partner(s)|general-partner` should sign below by adding their full name. You can have up to 10 signers listed."
-          }
-        }
-      },
-      "willPracticeLaw": {
-        "label": "Will you practice law?",
-        "radioNoText": "No",
-        "radioYesText": "Yes",
-        "error": "Select 'Yes' or 'No'."
-      },
       "withdrawals": {
         "label": "Withdrawals",
         "body": "If a general partner withdraws from the partnership, what are the remaining partners rights to contribute to the business?"
+      },
+      "addressCity": {
+        "label": "City",
+        "error": "Enter a city."
       }
     },
     "addressModal": {
@@ -337,78 +390,25 @@
         "error": "Enter a Zip Code."
       }
     },
+    "legalStructure": {
+      "warningModalContinueButton": "Continue",
+      "limited-liability-company": "LLC",
+      "s-corporation": "Domestic Corporation",
+      "reviewStepLabel": "`**Business Structure**|business-structure-learn-more`",
+      "limited-liability-partnership": "LLP",
+      "limited-partnership": "LP",
+      "warningModalBody": "If you change your proposed business structure in the Navigator profile, you might need to complete a different form. Don't worry, once you update your profile we'll tell you which form you need and where to complete it.",
+      "foreignPrefaceText": "Foreign",
+      "warningModalCancelButton": "Cancel",
+      "c-corporation": "Domestic Corporation",
+      "warningModalHeader": "You Might Need a Different Form"
+    },
     "partnershipRights": {
       "label": "Partnership Rights",
       "description": "List the applicable terms",
       "radioNoText": "No, they do not have the right",
       "radioYesText": "Yes, they have the right",
       "reviewStepTermsLabel": "Applicable Terms:"
-    },
-    "registeredAgent": {
-      "label": "Registered Agent",
-      "sectionDescription": "Enter your `Registered Agent's|registered-agent` ID number. If your agent did not give you this number, you can enter their name and address.",
-      "radioButtonNumberText": "Enter Your Registered Agent ID Number",
-      "radioButtonManualText": "Manually Identify Your Registered Agent",
-      "sameAddressCheckbox": "The address is the same as the business location.",
-      "sameContactCheckbox": "The agent information is the same as the account holder."
-    },
-    "sections": {
-      "addressHeader": "Primary Business Address",
-      "addressAddButtonText": "Add Primary Business Address",
-      "businessNameAndStructureHeader": "Business Name and Business Structure",
-      "contactInfoHeader": "Billing Contact Information",
-      "notificationsHeader": "Notifications",
-      "notificationsDescription": "Get free text/email notifications:",
-      "servicesHeader": "Services and Payment",
-      "servicesDescription": "Use the table below to select all the services you’d like to purchase as well as the payment type. The total amount will change based on the payment type selected.",
-      "review": {
-        "addressLabel": "Address",
-        "nameLabel": "Full Name",
-        "locationHeader": "Location",
-        "billingContactHeader": "Billing Contact Information"
-      }
-    },
-    "errorBanner": {
-      "genericApiError": "Review the information in the fields below for errors:",
-      "errorOnStep": "Review the information in the fields below for errors or omissions:",
-      "incompleteStepsError": "Check the steps below for missing information or errors:",
-      "apiResubmitText": "After you make the correction, resubmit the form."
-    },
-    "legalStructure": {
-      "limited-liability-company": "LLC",
-      "limited-partnership": "LP",
-      "limited-liability-partnership": "LLP",
-      "c-corporation": "Domestic Corporation",
-      "s-corporation": "Domestic Corporation",
-      "foreignPrefaceText": "Foreign",
-      "reviewStepLabel": "`**Business Structure**|business-structure-learn-more`",
-      "warningModalCancelButton": "Cancel",
-      "warningModalContinueButton": "Continue",
-      "warningModalHeader": "You Might Need a Different Form",
-      "warningModalBody": "If you change your proposed business structure in the Navigator profile, you might need to complete a different form. Don't worry, once you update your profile we'll tell you which form you need and where to complete it."
-    },
-    "general": {
-      "amendmentInfo": "#### Confirm everything is accurate before submitting. \n\n If you need to make a change after submitting, you will need to file a [paper amendment.](https://www.njportal.com/DOR/BusinessAmendments/Forms/IdentifyBusiness)",
-      "notEntered": "Not set",
-      "initialNextNexusButtonText": "Continue Authorizing My Business",
-      "initialNextButtonText": "Continue Forming My Business",
-      "backButtonText": "Cancel",
-      "editButtonText": "Edit",
-      "submitButtonText": "Submit & Pay",
-      "nextButtonText": "Save & Continue",
-      "previousButtonText": "Back",
-      "charactersLabel": "characters",
-      "paymentDisclaimer": "You will be brought to a secure payment platform operated by New Jersey's partner NICUSA Inc. to process your payment.",
-      "optionalLabel": "(Optional)",
-      "genericErrorText": "This field requires information.",
-      "maximumLengthErrorText": "${field} must be ${maxLen} characters or fewer.",
-      "partialAddressErrorText": "Address must be complete.",
-      "viewMoreButtonText": "View more",
-      "viewLessButtonText": "View less"
-    },
-    "intro": {
-      "default": "This online application will register your business name and form your `business structure|business-structure-learn-more` with the New Jersey Division of Revenue and Enterprise Services.\n\nThis form will take about 5–10 minutes to complete. You will have completed formation and obtained an `Entity ID|entity-id` immediately after payment is received.\n\nInterested in `reserving your business name temporarily|name-reservation` before registering?",
-      "foreign": "You must register your business name and form your business with the State. To do this, you first need to see if your business name is available."
     }
   }
 }
