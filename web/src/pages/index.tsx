@@ -69,9 +69,9 @@ const Home = (): ReactElement => {
     const alternateLandingPageEnabled = process.env.FEATURE_LANDING_PAGE_REDIRECT === "true";
 
     if (state.isAuthenticated === IsAuthenticated.TRUE) {
-      if (userData?.formProgress === "COMPLETED") {
+      if (userData?.onboardingFormProgress === "COMPLETED") {
         router.replace(ROUTES.dashboard);
-      } else if (userData?.formProgress === "UNSTARTED") {
+      } else if (userData?.onboardingFormProgress === "UNSTARTED") {
         router.replace(ROUTES.onboarding);
       } else if (userData === undefined && error !== undefined) {
         router.replace(`${ROUTES.dashboard}?error=true`);

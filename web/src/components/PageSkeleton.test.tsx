@@ -10,7 +10,7 @@ describe("<PageSkeleton />", () => {
   });
 
   it("does not render report an issues bar if onboarding is not completed", () => {
-    useMockUserData({ formProgress: "UNSTARTED" });
+    useMockUserData({ onboardingFormProgress: "UNSTARTED" });
 
     render(
       <PageSkeleton>
@@ -22,7 +22,7 @@ describe("<PageSkeleton />", () => {
   });
 
   it("renders report an issues bar after onboarding is completed", () => {
-    useMockUserData({ formProgress: "COMPLETED" });
+    useMockUserData({ onboardingFormProgress: "COMPLETED" });
 
     render(
       <PageSkeleton>

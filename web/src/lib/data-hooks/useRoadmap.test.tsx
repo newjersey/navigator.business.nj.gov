@@ -40,7 +40,7 @@ describe("useRoadmap", () => {
 
   it("builds roadmap when user data is defined and form is COMPLETED", async () => {
     const profileData = generateProfileData({});
-    useMockUserData({ profileData, formProgress: "COMPLETED" });
+    useMockUserData({ profileData, onboardingFormProgress: "COMPLETED" });
     mockBuildUserRoadmap.mockResolvedValue(generateRoadmap({}));
     setupHook();
     expect(mockBuildUserRoadmap).toHaveBeenCalledWith(profileData);
@@ -48,7 +48,7 @@ describe("useRoadmap", () => {
 
   it("does not build roadmap when user data is defined and form is UNSTARTED", async () => {
     const profileData = generateProfileData({});
-    useMockUserData({ profileData, formProgress: "UNSTARTED" });
+    useMockUserData({ profileData, onboardingFormProgress: "UNSTARTED" });
     mockBuildUserRoadmap.mockResolvedValue(generateRoadmap({}));
     setupHook();
     expect(mockBuildUserRoadmap).not.toHaveBeenCalled();

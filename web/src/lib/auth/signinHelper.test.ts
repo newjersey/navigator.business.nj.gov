@@ -148,7 +148,7 @@ describe("SigninHelper", () => {
 
     it("redirect user to onboarding if still in progress", async () => {
       const user = generateUser({});
-      const userData = generateUserData({ user, formProgress: "UNSTARTED" });
+      const userData = generateUserData({ user, onboardingFormProgress: "UNSTARTED" });
       mockGetCurrentUserData.mockImplementation(() => {
         return userData;
       });

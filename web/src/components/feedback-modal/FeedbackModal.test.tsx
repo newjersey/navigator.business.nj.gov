@@ -58,7 +58,7 @@ describe("<feedbackModal />", () => {
     });
 
     it("does not show feedback button when userData formProgress is not completed", () => {
-      useMockUserData({ formProgress: "UNSTARTED" });
+      useMockUserData({ onboardingFormProgress: "UNSTARTED" });
       renderFeedbackModal({});
       expect(
         screen.queryByText(Config.feedbackModal.feedbackModalShareFeedbackButtonText)
@@ -70,7 +70,7 @@ describe("<feedbackModal />", () => {
       for (const phase of phases) {
         it(`links to owning feedback form for ${phase}`, () => {
           useMockUserData({
-            formProgress: "COMPLETED",
+            onboardingFormProgress: "COMPLETED",
             profileData: generateProfileData({ operatingPhase: phase }),
           });
           renderFeedbackModal({});
@@ -96,7 +96,7 @@ describe("<feedbackModal />", () => {
       for (const phase of phases) {
         it(`links to starting feedback form for ${phase}`, () => {
           useMockUserData({
-            formProgress: "COMPLETED",
+            onboardingFormProgress: "COMPLETED",
             profileData: generateProfileData({ operatingPhase: phase }),
           });
           renderFeedbackModal({});
