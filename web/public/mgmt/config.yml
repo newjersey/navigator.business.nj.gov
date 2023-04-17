@@ -539,7 +539,6 @@ collections:
                       - { label: "Modal title", name: "modalTitle", widget: "string" }
                       - { label: "Modal save button", name: "modalSaveButton", widget: "string" }
                       - { label: "Add button text", name: "addButtonText", widget: "string" }
-                      - { label: "Field name", name: "fieldDisplayName", widget: "string" }
                       - { label: "Placeholder", name: "placeholder", widget: "string" }
                       - { label: "Address checkbox label", name: "addressCheckboxText", widget: "string" }
                       - { label: "Expand text", name: "expandText", widget: "string" }
@@ -709,7 +708,6 @@ collections:
                 fields:
                   - { label: "label", name: "label", widget: "string" }
                   - { label: "Description", name: "description", widget: "string" }
-                  - { label: "Error banner - field name", name: "fieldDisplayName", widget: "string" }
                   - { label: "Radio button - No", name: "radioNoText", widget: "string" }
                   - { label: "Radio button - Yes", name: "radioYesText", widget: "string" }
                   - { label: "Review step - terms label", name: "reviewStepTermsLabel", widget: "string" }
