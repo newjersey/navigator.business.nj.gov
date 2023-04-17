@@ -7,7 +7,7 @@ import { TaxFilingData } from "./taxFiling";
 export interface UserData {
   readonly user: BusinessUser;
   readonly profileData: ProfileData;
-  readonly formProgress: FormProgress;
+  readonly onboardingFormProgress: OnboardingFormProgress;
   readonly taskProgress: Record<string, TaskProgress>;
   readonly taskItemChecklist: Record<string, boolean>;
   readonly licenseData: LicenseData | undefined;
@@ -18,14 +18,14 @@ export interface UserData {
   readonly lastUpdatedISO: string | undefined;
 }
 
-export const CURRENT_VERSION = 109;
+export const CURRENT_VERSION = 110;
 
 export const createEmptyUserData = (user: BusinessUser): UserData => {
   return {
     version: CURRENT_VERSION,
     user: user,
     profileData: createEmptyProfileData(),
-    formProgress: "UNSTARTED",
+    onboardingFormProgress: "UNSTARTED",
     taskProgress: {},
     taskItemChecklist: {},
     licenseData: undefined,
@@ -72,7 +72,7 @@ export interface Preferences {
   phaseNewlyChanged: boolean;
 }
 
-export type FormProgress = "UNSTARTED" | "COMPLETED";
+export type OnboardingFormProgress = "UNSTARTED" | "COMPLETED";
 
 export const sectionNames = ["PLAN", "START"] as const;
 export type SectionType = (typeof sectionNames)[number];

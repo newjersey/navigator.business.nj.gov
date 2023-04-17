@@ -39,7 +39,7 @@ const generateTestUserData = (overrides: Partial<ProfileData>): UserData => {
     profileData: generateProfileData({
       ...overrides,
     }),
-    formProgress: "UNSTARTED",
+    onboardingFormProgress: "UNSTARTED",
   });
 };
 

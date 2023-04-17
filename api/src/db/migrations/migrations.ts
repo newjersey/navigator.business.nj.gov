@@ -11,6 +11,7 @@ import { migrate_v106_to_v107 } from "./v107_refactor_interstate_transport_essen
 import { migrate_v107_to_v108 } from "./v108_add_business_name_search_to_formation_data";
 import { migrate_v108_to_v109 } from "./v109_add_business_name_search_timestamp";
 import { migrate_v9_to_v10 } from "./v10_add_mynjuserkey";
+import { migrate_v109_to_v110 } from "./v110_rename_form_progress_to_onboarding_form_progress";
 import { migrate_v10_to_v11 } from "./v11_change_license_statuses";
 import { migrate_v11_to_v12 } from "./v12_remove_scorp";
 import { migrate_v12_to_v13 } from "./v13_add_construction_renovation_plan";
@@ -222,4 +223,5 @@ export const Migrations: MigrationFunction[] = [
   migrate_v106_to_v107,
   migrate_v107_to_v108,
   migrate_v108_to_v109,
+  migrate_v109_to_v110,
 ];

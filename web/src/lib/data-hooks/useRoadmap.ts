@@ -38,7 +38,7 @@ export const useRoadmap = (): UseRoadmapReturnValue => {
   }, userData);
 
   const buildAndSetRoadmap = async (): Promise<void> => {
-    if (userData?.formProgress === "COMPLETED") {
+    if (userData?.onboardingFormProgress === "COMPLETED") {
       const roadmap = await buildUserRoadmap(userData.profileData);
       setRoadmap(roadmap);
     }

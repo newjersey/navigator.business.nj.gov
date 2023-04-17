@@ -106,7 +106,7 @@ const DashboardPage = (props: Props): ReactElement => {
 
   useMountEffectWhenDefined(() => {
     (async (): Promise<void> => {
-      if (userData?.formProgress !== "COMPLETED") {
+      if (userData?.onboardingFormProgress !== "COMPLETED") {
         await router.replace(ROUTES.onboarding);
       }
     })();
@@ -115,7 +115,7 @@ const DashboardPage = (props: Props): ReactElement => {
   useMountEffectWhenDefined(() => {
     (async (): Promise<void> => {
       if (isDesktopAndUp && userData?.preferences.phaseNewlyChanged) {
-        if (!updateQueue || userData?.formProgress !== "COMPLETED") {
+        if (!updateQueue || userData?.onboardingFormProgress !== "COMPLETED") {
           return;
         }
         await updateQueue.queuePreferences({ phaseNewlyChanged: false }).update();
@@ -182,7 +182,7 @@ const DashboardPage = (props: Props): ReactElement => {
       <PageSkeleton>
         <NavBar />
         <main id="main">
-          {!userData || userData?.formProgress !== "COMPLETED" ? (
+          {!userData || userData?.onboardingFormProgress !== "COMPLETED" ? (
             <div className="margin-top-3 desktop:margin-top-0 padding-top-0 desktop:padding-top-6 padding-bottom-15">
               <LoadingIndicator />
             </div>

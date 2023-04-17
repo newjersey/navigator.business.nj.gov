@@ -92,7 +92,7 @@ export const onGuestSignIn = async (
   setUserId(user.id, true);
   if (userData) {
     setAnalyticsDimensions(userData.profileData, true);
-    if (userData.formProgress === "UNSTARTED") {
+    if (userData.onboardingFormProgress === "UNSTARTED") {
       setRegistrationDimension("Began Onboarding");
       push(ROUTES.onboarding);
     } else {

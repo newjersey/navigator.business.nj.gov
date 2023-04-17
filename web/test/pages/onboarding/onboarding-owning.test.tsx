@@ -40,7 +40,7 @@ const generateTestUserData = (overrides: Partial<ProfileData>): UserData => {
     profileData: generateProfileData({
       ...overrides,
     }),
-    formProgress: "UNSTARTED",
+    onboardingFormProgress: "UNSTARTED",
   });
 };
 
@@ -211,7 +211,7 @@ describe("onboarding - owning a business", () => {
 
     expect(currentUserData()).toEqual({
       ...initialUserData,
-      formProgress: "UNSTARTED",
+      onboardingFormProgress: "UNSTARTED",
       profileData: {
         ...initialUserData.profileData,
         businessPersona: "OWNING",
