@@ -9,14 +9,16 @@ import { searchFundings } from "@/lib/search/searchFundings";
 import { searchIndustries } from "@/lib/search/searchIndustries";
 import { searchSteps } from "@/lib/search/searchSteps";
 import { searchTasks } from "@/lib/search/searchTasks";
+import { searchTaxFilings } from "@/lib/search/searchTaxFilings";
 import { searchWebflowLicenses } from "@/lib/search/searchWebflowLicenses";
 import { Match } from "@/lib/search/typesForSearch";
 import { getNetlifyConfig } from "@/lib/static/admin/getNetlifyConfig";
 import { loadAllArchivedCertifications, loadAllCertifications } from "@/lib/static/loadCertifications";
+import { loadAllFilings } from "@/lib/static/loadFilings";
 import { loadAllFundings } from "@/lib/static/loadFundings";
 import { loadAllTasks } from "@/lib/static/loadTasks";
 import { loadAllWebflowLicenses } from "@/lib/static/loadWebflowLicenses";
-import { Certification, Funding, Step, Task, WebflowLicense } from "@/lib/types/types";
+import { Certification, Filing, Funding, Step, Task, WebflowLicense } from "@/lib/types/types";
 import ForeignSteps from "@businessnjgovnavigator/content/roadmaps/steps-foreign.json";
 import Steps from "@businessnjgovnavigator/content/roadmaps/steps.json";
 import { Industries } from "@businessnjgovnavigator/shared";
@@ -33,6 +35,7 @@ interface Props {
   archivedCertifications: Certification[];
   fundings: Funding[];
   webflowLicenses: WebflowLicense[];
+  filings: Filing[];
 }
 
 const SearchContentPage = (props: Props): ReactElement => {
@@ -46,6 +49,7 @@ const SearchContentPage = (props: Props): ReactElement => {
   const [industryMatches, setIndustryMatches] = useState<Match[]>([]);
   const [stepsMatches, setStepsMatches] = useState<Match[]>([]);
   const [webflowLicenseMatches, setWebflowLicenseMatches] = useState<Match[]>([]);
+  const [filingMatches, setFilingMatches] = useState<Match[]>([]);
 
   const handleKeyPress = (event: KeyboardEvent<HTMLDivElement>, submit: () => void): void => {
     if (event.code === "Enter") {
@@ -72,6 +76,7 @@ const SearchContentPage = (props: Props): ReactElement => {
     setStepsMatches([...defaultStepsMatches, ...foreignStepsMatches]);
 
     setWebflowLicenseMatches(searchWebflowLicenses(props.webflowLicenses, lowercaseTerm));
+    setFilingMatches(searchTaxFilings(props.filings, lowercaseTerm));
   };
 
   const authedView = (
@@ -102,6 +107,7 @@ const SearchContentPage = (props: Props): ReactElement => {
       <MatchList matches={fundingMatches} collectionLabel="Funding Opps" />
       <MatchList matches={industryMatches} collectionLabel="Roadmap - Industries" />
       <MatchList matches={stepsMatches} collectionLabel="Roadmap - Settings" />
+      <MatchList matches={filingMatches} collectionLabel="Tax Filings" />
       <MatchList matches={webflowLicenseMatches} collectionLabel="Webflow Licenses" />
     </div>
   );
@@ -134,6 +140,7 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
       archivedCertifications: loadAllArchivedCertifications(),
       fundings: loadAllFundings(),
       webflowLicenses: loadAllWebflowLicenses(),
+      filings: loadAllFilings(),
     },
   };
 };

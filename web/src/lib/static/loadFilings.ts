@@ -11,6 +11,13 @@ export type FilingUrlSlugParam = {
 
 const filingsDir = path.join(process.cwd(), "..", "content", "src", "filings");
 
+export const loadAllFilings = (): Filing[] => {
+  const fileNames = fs.readdirSync(filingsDir);
+  return fileNames.map((fileName) => {
+    return loadFilingByFileName(fileName);
+  });
+};
+
 export const loadAllFilingUrlSlugs = (): PathParams<FilingUrlSlugParam>[] => {
   const fileNames = fs.readdirSync(filingsDir);
   return fileNames.map((fileName) => {
