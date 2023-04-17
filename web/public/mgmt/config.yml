@@ -489,7 +489,6 @@ collections:
                     widget: object
                     fields:
                       - { label: "Label", name: "label", widget: "string" }
-                      - { label: "Inline error", name: "error", widget: "string" }
                       - { label: "Helper Text", name: "helperText", widget: "string" }
                       - { label: "Error Message - File Size", name: "errorMessageFileSize", widget: "string" }
                       - { label: "Error Message - File Type", name: "errorMessageFileType", widget: "string" }
@@ -628,7 +627,6 @@ collections:
                       - { label: "Review step - header", name: "reviewStepHeader", widget: "string" }
                       - { label: "Signature aid text", name: "aidText", widget: "string" }
                       - { label: "Delete text (mobile)", name: "deleteTextMobile", widget: "string" }
-                      - { label: "Header", name: "header", widget: "string" }
                       - { label: "Placeholder", name: "placeholder", widget: "string" }
                       - { label: "Description", name: "description", widget: "markdown" }
                       - label: Overrides
