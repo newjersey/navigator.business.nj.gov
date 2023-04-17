@@ -75,7 +75,7 @@ describe("loading page", () => {
 
   it("redirects to onboarding if user has not yet completed onboarding", () => {
     useMockUserData({
-      formProgress: "UNSTARTED",
+      onboardingFormProgress: "UNSTARTED",
       profileData: generateProfileData({ businessPersona: "STARTING" }),
     });
     render(<LoadingPage />);

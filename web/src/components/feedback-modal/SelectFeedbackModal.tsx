@@ -49,7 +49,7 @@ export const SelectFeedbackModal = ({ onClose, isOpen, setCurrentFeedback }: Pro
           <span className="text-left">{Config.feedbackModal.feedbackModalIntercomButtonText}</span>
         </PrimaryButton>
 
-        {userData?.formProgress === "COMPLETED" && (
+        {userData?.onboardingFormProgress === "COMPLETED" && (
           <>
             <a
               className="margin-top-1"

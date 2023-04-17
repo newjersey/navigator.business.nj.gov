@@ -176,13 +176,13 @@ describe("dashboard page", () => {
   });
 
   it("shows loading page if user not finished onboarding", () => {
-    useMockUserData({ formProgress: "UNSTARTED" });
+    useMockUserData({ onboardingFormProgress: "UNSTARTED" });
     renderDashboardPage({});
     expect(screen.getByText("Loading", { exact: false })).toBeInTheDocument();
   });
 
   it("redirects to onboarding if user not finished onboarding", () => {
-    useMockUserData({ formProgress: "UNSTARTED" });
+    useMockUserData({ onboardingFormProgress: "UNSTARTED" });
     renderDashboardPage({});
     expect(mockPush).toHaveBeenCalledWith(ROUTES.onboarding);
   });

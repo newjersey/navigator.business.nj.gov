@@ -57,7 +57,7 @@ describe("onboarding - shared", () => {
         businessPersona: "STARTING",
         legalStructureId: "c-corporation",
       }),
-      formProgress: "UNSTARTED",
+      onboardingFormProgress: "UNSTARTED",
     });
 
     renderPage({ userData });
@@ -164,7 +164,7 @@ describe("onboarding - shared", () => {
 
   it("resets non-shared information when switching from starting flow to owning flow", async () => {
     const initialUserData = generateUserData({
-      formProgress: "UNSTARTED",
+      onboardingFormProgress: "UNSTARTED",
       profileData: createEmptyProfileData(),
     });
     const { page } = renderPage({ userData: initialUserData });
@@ -205,7 +205,7 @@ describe("onboarding - shared", () => {
 
   it("resets non-shared information when switching from owning flow to starting flow with non-filing legal structure", async () => {
     const initialUserData = generateUserData({
-      formProgress: "UNSTARTED",
+      onboardingFormProgress: "UNSTARTED",
       profileData: createEmptyProfileData(),
     });
     const { page } = renderPage({ userData: initialUserData });
@@ -237,7 +237,7 @@ describe("onboarding - shared", () => {
 
   it("resets non-shared information when switching from owning flow to starting flow", async () => {
     const initialUserData = generateUserData({
-      formProgress: "UNSTARTED",
+      onboardingFormProgress: "UNSTARTED",
       profileData: createEmptyProfileData(),
     });
     const { page } = renderPage({ userData: initialUserData });
@@ -267,7 +267,7 @@ describe("onboarding - shared", () => {
 
   it("does not reset information when re-visiting page 1 but not switching the answer", async () => {
     const initialUserData = generateUserData({
-      formProgress: "UNSTARTED",
+      onboardingFormProgress: "UNSTARTED",
       profileData: createEmptyProfileData(),
     });
     const { page } = renderPage({ userData: initialUserData });
@@ -305,7 +305,7 @@ describe("onboarding - shared", () => {
           businessPersona: "STARTING",
           legalStructureId: "c-corporation",
         }),
-        formProgress: "UNSTARTED",
+        onboardingFormProgress: "UNSTARTED",
       }),
     });
     page.clickNext();
@@ -323,7 +323,7 @@ describe("onboarding - shared", () => {
           businessPersona: "STARTING",
           legalStructureId: "c-corporation",
         }),
-        formProgress: "UNSTARTED",
+        onboardingFormProgress: "UNSTARTED",
       }),
     });
     page.clickNext();

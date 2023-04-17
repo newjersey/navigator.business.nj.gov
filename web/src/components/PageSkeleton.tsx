@@ -31,7 +31,7 @@ export const PageSkeleton = (props: Props): ReactElement => {
       </section>
       <div className="fit-screen-content">{props.children}</div>
       <footer>
-        {userData?.formProgress === "COMPLETED" && <ReportAnIssueBar />}
+        {userData?.onboardingFormProgress === "COMPLETED" && <ReportAnIssueBar />}
         {!props.landingPage && <LegalMessage />}
         <InnovFooter />
       </footer>

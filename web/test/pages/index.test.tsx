@@ -32,7 +32,7 @@ describe("HomePage", () => {
 
     it("redirects to dashboard page when user has completed onboarding flow", () => {
       useMockUserData({
-        formProgress: "COMPLETED",
+        onboardingFormProgress: "COMPLETED",
         profileData: generateProfileData({ businessPersona: "STARTING" }),
       });
       render(withAuth(<Home />, { user: generateUser({}) }));
@@ -40,7 +40,7 @@ describe("HomePage", () => {
     });
 
     it("redirects to onboarding page when user has not completed onboarding flow", () => {
-      useMockUserData({ formProgress: "UNSTARTED" });
+      useMockUserData({ onboardingFormProgress: "UNSTARTED" });
       render(withAuth(<Home />, { user: generateUser({}) }));
       expect(mockPush).toHaveBeenCalledWith(ROUTES.onboarding);
     });
@@ -84,7 +84,7 @@ describe("HomePage", () => {
 
     it("redirects to dashboard page when user has completed onboarding flow", () => {
       useMockUserData({
-        formProgress: "COMPLETED",
+        onboardingFormProgress: "COMPLETED",
         profileData: generateProfileData({ businessPersona: "STARTING" }),
       });
       render(withAuth(<Home />, { user: generateUser({}) }));
@@ -92,7 +92,7 @@ describe("HomePage", () => {
     });
 
     it("redirects to onboarding page when user has not completed onboarding flow", () => {
-      useMockUserData({ formProgress: "UNSTARTED" });
+      useMockUserData({ onboardingFormProgress: "UNSTARTED" });
       render(withAuth(<Home />, { user: generateUser({}) }));
       expect(mockPush).toHaveBeenCalledWith(ROUTES.onboarding);
     });

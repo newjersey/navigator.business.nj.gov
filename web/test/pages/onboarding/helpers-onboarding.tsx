@@ -237,7 +237,7 @@ export const runSelfRegPageTests = ({
   const user = createEmptyUser();
   const userData = generateUserData({
     user,
-    formProgress: "UNSTARTED",
+    onboardingFormProgress: "UNSTARTED",
     profileData: generateProfileData({
       businessPersona,
       legalStructureId: randomLegalStructure().id,

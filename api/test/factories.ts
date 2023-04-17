@@ -121,7 +121,7 @@ export const generateUserData = (overrides: Partial<UserData>): UserData => {
     version: CURRENT_VERSION,
     lastUpdatedISO: getCurrentDateISOString(),
     user: generateUser({}),
-    formProgress: "UNSTARTED",
+    onboardingFormProgress: "UNSTARTED",
     taskProgress: profileData.employerId ? { "register-for-ein": "COMPLETED" } : {},
     taskItemChecklist: {},
     licenseData: generateLicenseData({}),

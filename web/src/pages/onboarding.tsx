@@ -175,7 +175,7 @@ const OnboardingPage = (props: Props): ReactElement => {
         setUser(currentUserData.user);
       }
       if (currentUserData) {
-        if (currentUserData?.formProgress === "COMPLETED") {
+        if (currentUserData?.onboardingFormProgress === "COMPLETED") {
           await router.replace(ROUTES.profile);
           return;
         } else {
@@ -290,7 +290,7 @@ const OnboardingPage = (props: Props): ReactElement => {
           ...currentUserData,
           user,
           profileData: newProfileData,
-          formProgress: "COMPLETED",
+          onboardingFormProgress: "COMPLETED",
         };
 
         if (newUserData.user.receiveNewsletter) {

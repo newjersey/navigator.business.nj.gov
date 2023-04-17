@@ -98,7 +98,7 @@ Cypress.Commands.add("loginByCognitoApi", () => {
       })
         .then((response) => {
           expect(response.status).to.equal(200);
-          expect(response.body.formProgress).to.equal("UNSTARTED");
+          expect(response.body.onboardingFormProgress).to.equal("UNSTARTED");
         })
         .visit("/onboarding", {
           onBeforeLoad: (win) => {

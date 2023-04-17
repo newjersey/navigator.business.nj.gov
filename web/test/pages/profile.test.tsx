@@ -984,7 +984,7 @@ describe("profile", () => {
         });
         expect(currentUserData()).toEqual({
           ...userData,
-          formProgress: "COMPLETED",
+          onboardingFormProgress: "COMPLETED",
           profileData: {
             ...userData.profileData,
             industryId: newIndustry,
@@ -1137,7 +1137,7 @@ describe("profile", () => {
       });
       expect(currentUserData()).toEqual({
         ...userData,
-        formProgress: "COMPLETED",
+        onboardingFormProgress: "COMPLETED",
         taxFilingData: { ...userData.taxFilingData, state: undefined, filings: [], registeredISO: undefined },
         profileData: {
           ...userData.profileData,
@@ -1794,7 +1794,7 @@ describe("profile", () => {
 
   it(`prevents Starting user from saving when petcare is selected as industry, but essential question is not answered`, async () => {
     const userData = generateUserData({
-      formProgress: "UNSTARTED",
+      onboardingFormProgress: "UNSTARTED",
       profileData: generateProfileData({
         businessPersona: "STARTING",
         industryId: "car-service",
@@ -1814,7 +1814,7 @@ describe("profile", () => {
       "prevents Starting user from saving when %s is selected as industry, but essential question is not answered",
       async (industryId) => {
         const userData = generateUserData({
-          formProgress: "UNSTARTED",
+          onboardingFormProgress: "UNSTARTED",
           profileData: generateProfileData({
             businessPersona: "STARTING",
             industryId: industryId,
@@ -1835,7 +1835,7 @@ describe("profile", () => {
       "prevents Foreign Nexus user from saving when %s is selected as industry, but essential question is not answered",
       async (industryId) => {
         const userData = generateUserData({
-          formProgress: "UNSTARTED",
+          onboardingFormProgress: "UNSTARTED",
           profileData: generateProfileData({
             businessPersona: "FOREIGN",
             foreignBusinessType: "NEXUS",

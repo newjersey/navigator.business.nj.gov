@@ -95,7 +95,7 @@ export const generateUserData = (overrides: Partial<UserData>): UserData => {
     version: CURRENT_VERSION,
     user: generateUser({}),
     profileData: generateProfileData({}),
-    formProgress: "COMPLETED",
+    onboardingFormProgress: "COMPLETED",
     taskProgress: {},
     taskItemChecklist: {},
     licenseData: generateLicenseData({}),
