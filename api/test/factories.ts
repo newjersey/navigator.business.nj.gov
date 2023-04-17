@@ -119,6 +119,8 @@ export const generateUserData = (overrides: Partial<UserData>): UserData => {
 
   return {
     version: CURRENT_VERSION,
+    versionWhenCreated: -1,
+    dateCreatedISO: undefined,
     lastUpdatedISO: getCurrentDateISOString(),
     user: generateUser({}),
     onboardingFormProgress: "UNSTARTED",

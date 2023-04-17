@@ -1,8 +1,9 @@
 import { UserData } from "@shared/userData";
+import dayjs from "dayjs";
 import { Express } from "express";
 import request, { Response } from "supertest";
 import { generateSelfRegResponse, generateUser, generateUserData } from "../../test/factories";
-import { generateHashedKey } from "../../test/helpers";
+import { generateHashedKey, getLastCalledWith } from "../../test/helpers";
 import { SelfRegClient, UserDataClient } from "../domain/types";
 import { setupExpress } from "../libs/express";
 import { selfRegRouterFactory } from "./selfRegRouter";
@@ -53,13 +54,14 @@ describe("selfRegRouter", () => {
       const response = await sendRequest(stubRecordWithMyNJKey);
       const hashedKey = generateHashedKey(myNJKey);
       expect(stubSelfRegClient.resume).toHaveBeenCalledWith(myNJKey);
-      expect(stubUserDataClient.put).toHaveBeenCalledWith({
-        ...stubRecordWithMyNJKey,
-        user: {
-          ...stubRecordWithMyNJKey.user,
-          intercomHash: hashedKey,
-        },
-      });
+
+      const putCalledWith = getLastCalledWith(stubUserDataClient.put)[0];
+      expect(putCalledWith.user.intercomHash).toEqual(hashedKey);
+      expect(putCalledWith.lastUpdatedISO).not.toBeUndefined();
+      expect(putCalledWith.dateCreatedISO).not.toBeUndefined();
+      expect(dayjs(putCalledWith.lastUpdatedISO).isSame(dayjs(), "minute")).toBe(true);
+      expect(dayjs(putCalledWith.dateCreatedISO).isSame(dayjs(), "minute")).toBe(true);
+
       expect(response.status).toEqual(200);
       expect(response.body).toEqual({ authRedirectURL: selfRegResponse.authRedirectURL });
     });
@@ -94,15 +96,13 @@ describe("selfRegRouter", () => {
       expect(stubSelfRegClient.grant).toHaveBeenCalledWith(stubRecordNoKey.user);
       const hashedKey = generateHashedKey(selfRegResponse.myNJUserKey);
 
-      const newUserWithKey = {
-        ...stubRecordNoKey,
-        user: {
-          ...stubRecordNoKey.user,
-          myNJUserKey: selfRegResponse.myNJUserKey,
-          intercomHash: hashedKey,
-        },
-      };
-      expect(stubUserDataClient.put).toHaveBeenCalledWith(newUserWithKey);
+      const putCalledWith = getLastCalledWith(stubUserDataClient.put)[0];
+      expect(putCalledWith.user.intercomHash).toEqual(hashedKey);
+      expect(putCalledWith.user.myNJUserKey).toEqual(selfRegResponse.myNJUserKey);
+      expect(putCalledWith.lastUpdatedISO).not.toBeUndefined();
+      expect(putCalledWith.dateCreatedISO).not.toBeUndefined();
+      expect(dayjs(putCalledWith.lastUpdatedISO).isSame(dayjs(), "minute")).toBe(true);
+      expect(dayjs(putCalledWith.dateCreatedISO).isSame(dayjs(), "minute")).toBe(true);
 
       expect(response.status).toEqual(200);
       expect(response.body).toEqual({ authRedirectURL: selfRegResponse.authRedirectURL });
