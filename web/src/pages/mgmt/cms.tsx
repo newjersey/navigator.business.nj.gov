@@ -160,11 +160,47 @@ const Admin = (): ReactElement => {
     }, 1000 * 30);
   });
 
+  useMountEffect(() => {
+    return setInterval(() => {
+      updateRequiredFieldErrorMessage();
+    }, 1000 * 2);
+  });
+
+  const updateRequiredFieldErrorMessage = (): void => {
+    const alertElement = document.querySelector(".css-83ylea-toast-danger-Toast");
+    if (alertElement) {
+      alertElement.textContent =
+        "Oops, you've missed a required field. Please complete before saving.\n\nOpen your browser's Inspect > Console to find error.";
+    }
+  };
+
   const printFieldWithErrorToConsole = (): void => {
     const errorMessages = document.querySelectorAll(".css-9guxbf-ControlErrorsList");
     if (errorMessages.length > 0) {
       for (const element of errorMessages) {
-        console.log(`%c ${element.textContent}`, "background: #111; color: tomato; font-size: 16px;");
+        const getParent = (
+          element: Element | null | undefined
+        ): { label: string | null | undefined; element: Element | null | undefined } => {
+          const container = element?.parentElement?.closest(".css-1rsca1y-ControlContainer");
+          return {
+            element: container,
+            label: container?.children[0].textContent,
+          };
+        };
+
+        const level1Parent = getParent(element.parentElement);
+        const level2Parent = getParent(level1Parent.element);
+        const level3Parent = getParent(level2Parent.element);
+        const level4Parent = getParent(level3Parent.element);
+
+        console.log(
+          `%c ${level4Parent.label ? `${level4Parent.label} > ` : ""}
+         ${level3Parent.label ? `${level3Parent.label} > ` : ""}
+          ${level2Parent.label ? `${level2Parent.label} > ` : ""}
+           ${level1Parent.label ? `${level1Parent.label} > ` : ""}
+            ${element.textContent}`,
+          "background: #111; color: tomato; font-size: 16px;"
+        );
       }
     }
   };

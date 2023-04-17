@@ -72,7 +72,7 @@
     "react-transition-group": "4.4.5",
     "rehype-format": "4.0.1",
     "rehype-raw": "6.1.1",
-    "rehype-react": "7.1.2",
+    "rehype-react": "7.2.0",
     "rehype-rewrite": "3.0.6",
     "rehype-stringify": "9.0.3",
     "remark-directive": "2.0.1",
