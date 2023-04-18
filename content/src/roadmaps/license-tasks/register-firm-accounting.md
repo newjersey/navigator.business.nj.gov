@@ -15,7 +15,11 @@ webflowType: individual-license
 webflowId: 5f77296ee10dec7593024f1c
 licenseCertificationClassification: ""
 ---
-You or any staff providing accounting services must be licensed as a certified public accountant (CPA).
+You or any staff conducting financial audits to the Statements on Auditing Standards (SAS),
+2) An examination of prospective financial information to be performed in accordance
+with the Statements on Standards for Attestation Engagements (SSAE); or
+3) An engagement to be performed in accordance with the Public Company Accounting
+Oversight Board (PCAOB) Auditing Standardsa certified public accountant (CPA) services.
 
 - - -
 
