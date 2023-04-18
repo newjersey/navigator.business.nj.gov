@@ -7,7 +7,6 @@ import { scrollToTop } from "@/lib/utils/helpers";
 import { ReactElement, ReactNode, useContext } from "react";
 
 interface Props {
-  header: string;
   stepName: FormationStepNames;
   testId?: string;
   children: ReactNode;
@@ -25,7 +24,7 @@ export const ReviewSection = (props: Props): ReactElement => {
     <>
       <div className={"flex space-between"}>
         <div className={"maxw-mobile-lg margin-bottom-2"}>
-          <h2>{props.header}</h2>
+          <h2>{props.stepName}</h2>
         </div>
         <div className="margin-left-2">
           <UnStyledButton style="tertiary" onClick={onClick} underline dataTestid={props.testId}>

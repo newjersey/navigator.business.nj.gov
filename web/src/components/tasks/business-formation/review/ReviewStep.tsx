@@ -1,7 +1,6 @@
 import { Content } from "@/components/Content";
 import { Alert } from "@/components/njwds-extended/Alert";
 import { BusinessNameAndLegalStructure } from "@/components/tasks/business-formation/business/BusinessNameAndLegalStructure";
-import { BusinessFormationStepsConfiguration } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
 import { ReviewBillingContact } from "@/components/tasks/business-formation/review/ReviewBillingContact";
 import { ReviewBillingServices } from "@/components/tasks/business-formation/review/ReviewBillingServices";
 import { ReviewBusinessSuffixAndStartDate } from "@/components/tasks/business-formation/review/ReviewBusinessSuffixAndStartDate";
@@ -34,11 +33,7 @@ export const ReviewStep = (): ReactElement => {
   return (
     <>
       <div data-testid="review-step">
-        <ReviewSection
-          header={BusinessFormationStepsConfiguration[1].name}
-          stepName={"Business"}
-          testId="edit-business-name-step"
-        >
+        <ReviewSection stepName={"Business"} testId="edit-business-name-step">
           <BusinessNameAndLegalStructure isReviewStep />
           <ReviewBusinessSuffixAndStartDate />
           {isForeignCCorp && (
@@ -70,20 +65,12 @@ export const ReviewStep = (): ReactElement => {
             </ReviewSubSection>
           )}
         </ReviewSection>
-        <ReviewSection
-          header={BusinessFormationStepsConfiguration[2].name}
-          stepName={"Contacts"}
-          testId="edit-contacts-step"
-        >
+        <ReviewSection stepName={"Contacts"} testId="edit-contacts-step">
           <ReviewRegisteredAgent />
           {hasMembers && !isLP && <ReviewMembers />}
           <ReviewSignatures />
         </ReviewSection>
-        <ReviewSection
-          header={BusinessFormationStepsConfiguration[3].name}
-          stepName={"Billing"}
-          testId="edit-billing-step"
-        >
+        <ReviewSection stepName={"Billing"} testId="edit-billing-step">
           <ReviewBillingContact />
           <ReviewBillingServices />
         </ReviewSection>
