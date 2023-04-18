@@ -3,18 +3,18 @@ filename: daycare-license
 urlSlug: daycare-license
 name: Obtain Your Child Care Center License
 webflowName: "Daycare: License for a Child Care Center"
-issuingAgency: New Jersey Department of Children and Families
 industryId: daycare
-callToActionText: Apply for My License
 callToActionLink: https://www.nj.gov/dcf/providers/licensing/
 webflowIndustry: Child Care
-licenseCertificationClassification: LICENSE
 issuingDivision: Office of Licensing
 divisionPhone: (609) 826-3999
 id: daycare-license
+issuingAgency: New Jersey Department of Children and Families
+callToActionText: Apply for My License
 webflowId: 5f7728f5e8bf507c5e317899
+licenseCertificationClassification: LICENSE
 ---
-You need a license to operate a child care center.
+If you have more than six children under your care you must run your child care services outside of your home and will need a child care center license.
 
 - - -
 
