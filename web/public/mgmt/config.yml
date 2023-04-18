@@ -794,7 +794,18 @@ collections:
                   - { label: "C-Corp", name: "c-corporation", widget: "string" }
                   - { label: "S-Corp", name: "s-corporation", widget: "string" }
                   - { label: "Foreign preface", name: "foreignPrefaceText", widget: "string" }
-                  - { label: "Review step label", name: "reviewStepLabel", widget: "markdown" }
+                  - { label: "Business structure", name: "label", widget: "markdown" }
+                  - {
+                      label: "Review step contextual info",
+                      name: "contextualInfo",
+                      required: true,
+                      widget: "relation",
+                      collection: "contextual-information",
+                      search_fields: ["{{filename}}"],
+                      options_length: 500,
+                      value_field: "{{filename}}",
+                      display_fields: ["{{filename}}"],
+                    }
                   - {
                       label: "Warning modal - cancel button",
                       name: "warningModalCancelButton",

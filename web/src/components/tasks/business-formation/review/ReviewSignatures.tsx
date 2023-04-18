@@ -1,5 +1,5 @@
 import { ReviewLineItem } from "@/components/tasks/business-formation/review/section/ReviewLineItem";
-import { ReviewSection } from "@/components/tasks/business-formation/review/section/ReviewSection";
+import { ReviewSubSection } from "@/components/tasks/business-formation/review/section/ReviewSubSection";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { getStringifiedAddress } from "@/lib/utils/formatters";
@@ -21,12 +21,7 @@ export const ReviewSignatures = (): ReactElement => {
   };
 
   return (
-    <ReviewSection
-      buttonText={Config.formation.general.editButtonText}
-      header={getConfig().header}
-      stepName="Contacts"
-      testId="edit-signature-step"
-    >
+    <ReviewSubSection header={getConfig().header}>
       {state.formationFormData.signers?.length === 0 && <i>{Config.formation.general.notEntered}</i>}
       {state.formationFormData.signers?.map((signer, index) => {
         return (
@@ -62,6 +57,6 @@ export const ReviewSignatures = (): ReactElement => {
           </div>
         );
       })}
-    </ReviewSection>
+    </ReviewSubSection>
   );
 };
