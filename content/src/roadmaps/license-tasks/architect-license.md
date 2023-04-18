@@ -15,7 +15,7 @@ webflowType: individual-license
 webflowId: 5f772971b0544fd3d536617b
 licenseCertificationClassification: LICENSE
 ---
-You need an architect license before offering professional services as an individual or opening an architect firm. 
+You or any staff providing architectual servcies needs an architect license. 
 
 - - -
 
