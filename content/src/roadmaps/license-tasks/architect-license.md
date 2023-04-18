@@ -15,7 +15,7 @@ webflowType: individual-license
 webflowId: 5f772971b0544fd3d536617b
 licenseCertificationClassification: LICENSE
 ---
-You or any staff providing architectual servcies needs an architect license. 
+You or any staff providing architectural services need an architect license. 
 
 - - -
 
