@@ -3,17 +3,17 @@ filename: broker-license
 urlSlug: broker-license
 name: Obtain Your Real Estate Broker License
 webflowName: "Real Estate Broker: Real Estate Broker License"
-issuingAgency: State of New Jersey Department of Banking and Insurance Real Estate Commission
 industryId: real-estate-broker
-callToActionText: Submit a Real Estate Broker License Application
 callToActionLink: https://www.state.nj.us/dobi/division_rec/brokeroriginalapplication.htm
 webflowIndustry: ""
-licenseCertificationClassification: ""
 divisionPhone: (609) 292-7272
 id: license-broker
+issuingAgency: State of New Jersey Department of Banking and Insurance Real Estate Commission
+callToActionText: Submit a Real Estate Broker License Application
 webflowId: 5f77292da6bfb58d9402edff
+licenseCertificationClassification: ""
 ---
-You need a real estate broker license before you can start a real estate business without a supervising broker.
+If you own or plan to own a real estate agency, you need a real estate broker license.
 
 - - -
 
