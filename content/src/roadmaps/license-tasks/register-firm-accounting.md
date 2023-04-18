@@ -15,11 +15,8 @@ webflowType: individual-license
 webflowId: 5f77296ee10dec7593024f1c
 licenseCertificationClassification: ""
 ---
-You or any staff conducting financial audits to the Statements on Auditing Standards (SAS),
-2) An examination of prospective financial information to be performed in accordance
-with the Statements on Standards for Attestation Engagements (SSAE); or
-3) An engagement to be performed in accordance with the Public Company Accounting
-Oversight Board (PCAOB) Auditing Standardsa certified public accountant (CPA) services.
+You or any staff conducting financial audits in accordance with the Statements on Auditing Standards (SAS), the Statements on Standards for Attestation Engagements (SSAE), or the the Public Company Accounting
+Oversight Board (PCAOB) must obtain a certified public accountant license.
 
 - - -
 
