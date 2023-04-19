@@ -30,9 +30,9 @@ describe("<SidebarCard />", () => {
   });
 
   it("renders header and content from card", () => {
-    const card = generateSidebarCardContent({});
+    const card = generateSidebarCardContent({ header: "some-header" });
     render(<SidebarCard card={card} />);
-    expect(screen.getByText(card.header)).toBeInTheDocument();
+    expect(screen.getByText("some-header")).toBeInTheDocument();
     expect(screen.getByText(card.contentMd)).toBeInTheDocument();
   });
 

@@ -7,6 +7,7 @@ import { MatchList } from "@/components/search/MatchList";
 import { searchCertifications } from "@/lib/search/searchCertifications";
 import { searchFundings } from "@/lib/search/searchFundings";
 import { searchIndustries } from "@/lib/search/searchIndustries";
+import { searchSidebarCards } from "@/lib/search/searchSidebarCards";
 import { searchSteps } from "@/lib/search/searchSteps";
 import { searchTasks } from "@/lib/search/searchTasks";
 import { searchTaxFilings } from "@/lib/search/searchTaxFilings";
@@ -14,11 +15,21 @@ import { searchWebflowLicenses } from "@/lib/search/searchWebflowLicenses";
 import { Match } from "@/lib/search/typesForSearch";
 import { getNetlifyConfig } from "@/lib/static/admin/getNetlifyConfig";
 import { loadAllArchivedCertifications, loadAllCertifications } from "@/lib/static/loadCertifications";
+import { loadRoadmapSideBarDisplayContent } from "@/lib/static/loadDisplayContent";
 import { loadAllFilings } from "@/lib/static/loadFilings";
 import { loadAllFundings } from "@/lib/static/loadFundings";
 import { loadAllTasks } from "@/lib/static/loadTasks";
 import { loadAllWebflowLicenses } from "@/lib/static/loadWebflowLicenses";
-import { Certification, Filing, Funding, Step, Task, WebflowLicense } from "@/lib/types/types";
+import {
+  Certification,
+  Filing,
+  Funding,
+  RoadmapDisplayContent,
+  SidebarCardContent,
+  Step,
+  Task,
+  WebflowLicense,
+} from "@/lib/types/types";
 import ForeignSteps from "@businessnjgovnavigator/content/roadmaps/steps-foreign.json";
 import Steps from "@businessnjgovnavigator/content/roadmaps/steps.json";
 import { Industries } from "@businessnjgovnavigator/shared";
@@ -36,6 +47,7 @@ interface Props {
   fundings: Funding[];
   webflowLicenses: WebflowLicense[];
   filings: Filing[];
+  roadmapDisplayContent: RoadmapDisplayContent;
 }
 
 const SearchContentPage = (props: Props): ReactElement => {
@@ -50,6 +62,9 @@ const SearchContentPage = (props: Props): ReactElement => {
   const [stepsMatches, setStepsMatches] = useState<Match[]>([]);
   const [webflowLicenseMatches, setWebflowLicenseMatches] = useState<Match[]>([]);
   const [filingMatches, setFilingMatches] = useState<Match[]>([]);
+  const [sidebarCardMatches, setSidebarCardMatches] = useState<Match[]>([]);
+
+  const sidebarCards: SidebarCardContent[] = Object.values(props.roadmapDisplayContent.sidebarDisplayContent);
 
   const handleKeyPress = (event: KeyboardEvent<HTMLDivElement>, submit: () => void): void => {
     if (event.code === "Enter") {
@@ -77,13 +92,33 @@ const SearchContentPage = (props: Props): ReactElement => {
 
     setWebflowLicenseMatches(searchWebflowLicenses(props.webflowLicenses, lowercaseTerm));
     setFilingMatches(searchTaxFilings(props.filings, lowercaseTerm));
+    setSidebarCardMatches(searchSidebarCards(sidebarCards, lowercaseTerm));
+  };
+
+  const noMatches = (): boolean => {
+    return (
+      [
+        ...taskMatches,
+        ...certMatches,
+        ...certArchiveMatches,
+        ...fundingMatches,
+        ...industryMatches,
+        ...stepsMatches,
+        ...filingMatches,
+        ...sidebarCardMatches,
+        ...webflowLicenseMatches,
+      ].length === 0
+    );
   };
 
   const authedView = (
     <div>
       <h1>Search in CMS</h1>
       <p>
-        <em>Currently searches: Tasks, License Tasks, Certifications, Fundings, Industries, Roadmap Steps</em>
+        <em>
+          Currently searches: Tasks, License Tasks, Certifications, Fundings, Industries, Roadmap Steps, Tax
+          Filings, Webflow Licenses, Roadmap Sidebar Cards
+        </em>
       </p>
       <div className="margin-bottom-4 margin-top-2">
         <label htmlFor="search">Search Exact Text</label>
@@ -101,14 +136,18 @@ const SearchContentPage = (props: Props): ReactElement => {
           Submit
         </button>
       </div>
-      <MatchList matches={taskMatches} collectionLabel="Tasks - All and License Tasks" />
-      <MatchList matches={certMatches} collectionLabel="Cert Opps" />
-      <MatchList matches={certArchiveMatches} collectionLabel="Cert Opps - Archive" />
-      <MatchList matches={fundingMatches} collectionLabel="Funding Opps" />
-      <MatchList matches={industryMatches} collectionLabel="Roadmap - Industries" />
-      <MatchList matches={stepsMatches} collectionLabel="Roadmap - Settings" />
-      <MatchList matches={filingMatches} collectionLabel="Tax Filings" />
-      <MatchList matches={webflowLicenseMatches} collectionLabel="Webflow Licenses" />
+
+      {noMatches() && <div>No matches.</div>}
+
+      <MatchList matches={taskMatches} collectionLabel="🟦 Tasks - All and License Tasks" />
+      <MatchList matches={certMatches} collectionLabel="🟧 Cert Opps" />
+      <MatchList matches={certArchiveMatches} collectionLabel="🟧 Cert Opps - Archive" />
+      <MatchList matches={fundingMatches} collectionLabel="🟨 Funding Opps" />
+      <MatchList matches={industryMatches} collectionLabel="🟩 Roadmap - Industries" />
+      <MatchList matches={stepsMatches} collectionLabel="🟩 Roadmap - Settings" />
+      <MatchList matches={filingMatches} collectionLabel="🟪 Tax Filings" />
+      <MatchList matches={sidebarCardMatches} collectionLabel="🟥 Sidebar Cards Content" />
+      <MatchList matches={webflowLicenseMatches} collectionLabel="🟦 Webflow Licenses" />
     </div>
   );
 
@@ -141,6 +180,7 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
       fundings: loadAllFundings(),
       webflowLicenses: loadAllWebflowLicenses(),
       filings: loadAllFilings(),
+      roadmapDisplayContent: loadRoadmapSideBarDisplayContent(),
     },
   };
 };
