@@ -1,7 +1,7 @@
 ---
-urlSlug: scorp-federal-government-designation
+urlSlug: scorp-federal-designation
 filename: scorp-federal-designation
-name: Obtain an S Corporation Designation with the Federal Government
+name: Obtain Your S Corporation Designation with the Federal Government
 id: apply-scorp-federal
 callToActionLink: https://www.irs.gov/forms-pubs/about-form-2553
 callToActionText: Apply for My Federal S Corp Designation
