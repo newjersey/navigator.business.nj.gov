@@ -1,5 +1,5 @@
 ---
-urlSlug: site-requirements
+urlSlug: site-requirements-cosmetology
 filename: site-requirements-cosmetology
 name: Determine Site Requirements
 id: check-site-requirements
