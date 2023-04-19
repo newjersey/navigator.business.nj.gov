@@ -14,6 +14,7 @@ import {
   FundingType,
   MarkdownResult,
   OpportunityAgency,
+  PostOnboardingFile,
   TaskWithoutLinks,
   TaxAgency,
   TaxFilingMethod,
@@ -29,6 +30,19 @@ export const convertContextualInfoMd = (contentMdContents: string): ContextualIn
     isVisible: false,
     markdown: matterResult.content,
     ...contentGrayMatter,
+  };
+};
+
+export const convertPostOnboardingMd = (contentMdContents: string, filename: string): PostOnboardingFile => {
+  const matterResult = matter(contentMdContents);
+  const grayMatter = matterResult.data as PostOnboardingGrayMatter;
+  return {
+    question: grayMatter.radioQuestion,
+    contentMd: matterResult.content,
+    radioYes: grayMatter.radioYes,
+    radioNo: grayMatter.radioNo,
+    radioNoContent: grayMatter.radioNoContent,
+    filename,
   };
 };
 
@@ -182,4 +196,11 @@ type WebflowLicenseGrayMatter = {
   divisionPhone: string;
   licenseCertificationClassification: string;
   industryId?: string;
+};
+
+type PostOnboardingGrayMatter = {
+  radioQuestion: string;
+  radioYes: string;
+  radioNo: string;
+  radioNoContent: string;
 };

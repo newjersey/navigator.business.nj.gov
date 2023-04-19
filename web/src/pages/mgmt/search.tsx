@@ -8,6 +8,7 @@ import { searchCertifications } from "@/lib/search/searchCertifications";
 import { searchContextualInfo } from "@/lib/search/searchContextualInfo";
 import { searchFundings } from "@/lib/search/searchFundings";
 import { searchIndustries } from "@/lib/search/searchIndustries";
+import { searchPostOnboarding } from "@/lib/search/searchPostOnboarding";
 import { searchSidebarCards } from "@/lib/search/searchSidebarCards";
 import { searchSteps } from "@/lib/search/searchSteps";
 import { searchTasks } from "@/lib/search/searchTasks";
@@ -20,6 +21,7 @@ import { loadAllArchivedContextualInfo, loadAllContextualInfo } from "@/lib/stat
 import { loadRoadmapSideBarDisplayContent } from "@/lib/static/loadDisplayContent";
 import { loadAllFilings } from "@/lib/static/loadFilings";
 import { loadAllFundings } from "@/lib/static/loadFundings";
+import { loadAllPostOnboarding } from "@/lib/static/loadPostOnboarding";
 import { loadAllTasks } from "@/lib/static/loadTasks";
 import { loadAllWebflowLicenses } from "@/lib/static/loadWebflowLicenses";
 import {
@@ -27,6 +29,7 @@ import {
   ContextualInfoFile,
   Filing,
   Funding,
+  PostOnboardingFile,
   RoadmapDisplayContent,
   SidebarCardContent,
   Step,
@@ -53,6 +56,7 @@ interface Props {
   roadmapDisplayContent: RoadmapDisplayContent;
   contextualInfo: ContextualInfoFile[];
   archivedContextualInfo: ContextualInfoFile[];
+  postOnboarding: PostOnboardingFile[];
 }
 
 const SearchContentPage = (props: Props): ReactElement => {
@@ -71,6 +75,7 @@ const SearchContentPage = (props: Props): ReactElement => {
   const [sidebarCardMatches, setSidebarCardMatches] = useState<Match[]>([]);
   const [contextualInfoMatches, setContextualInfoMatches] = useState<Match[]>([]);
   const [archivedContextualInfoMatches, setArchivedContextualInfoMatches] = useState<Match[]>([]);
+  const [postOnboardingMatches, setPostOnboardingMatches] = useState<Match[]>([]);
 
   const sidebarCards: SidebarCardContent[] = Object.values(props.roadmapDisplayContent.sidebarDisplayContent);
 
@@ -104,6 +109,7 @@ const SearchContentPage = (props: Props): ReactElement => {
     setSidebarCardMatches(searchSidebarCards(sidebarCards, lowercaseTerm));
     setContextualInfoMatches(searchContextualInfo(props.contextualInfo, lowercaseTerm));
     setArchivedContextualInfoMatches(searchContextualInfo(props.archivedContextualInfo, lowercaseTerm));
+    setPostOnboardingMatches(searchPostOnboarding(props.postOnboarding, lowercaseTerm));
     setHasSearched(true);
   };
 
@@ -132,7 +138,7 @@ const SearchContentPage = (props: Props): ReactElement => {
       <p>
         <em>
           Currently searches: Tasks, License Tasks, Certifications, Fundings, Industries, Roadmap Steps, Tax
-          Filings, Webflow Licenses, Roadmap Sidebar Cards
+          Filings, Webflow Licenses, Roadmap Sidebar Cards, Contextual Info, Post-Onboarding Questions
         </em>
       </p>
       <div className="margin-bottom-4 margin-top-2">
@@ -163,6 +169,7 @@ const SearchContentPage = (props: Props): ReactElement => {
       <MatchList matches={filingMatches} collectionLabel="🟪 Tax Filings" />
       <MatchList matches={sidebarCardMatches} collectionLabel="🟥 Sidebar Cards Content" />
       <MatchList matches={contextualInfoMatches} collectionLabel="🟧 Contextual Information" />
+      <MatchList matches={postOnboardingMatches} collectionLabel="🟧 Post Onboarding Content" />
       <MatchList matches={archivedContextualInfoMatches} collectionLabel="Archived Contextual Info" />
       <MatchList matches={webflowLicenseMatches} collectionLabel="🟦 Webflow Licenses" />
     </div>
@@ -200,6 +207,7 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
       roadmapDisplayContent: loadRoadmapSideBarDisplayContent(),
       contextualInfo: loadAllContextualInfo(),
       archivedContextualInfo: loadAllArchivedContextualInfo(),
+      postOnboarding: loadAllPostOnboarding(),
     },
   };
 };
