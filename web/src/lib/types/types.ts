@@ -1,4 +1,5 @@
 import { getMergedConfig } from "@/contexts/configContext";
+import { ContextualInfo } from "@/contexts/contextualInfoContext";
 import {
   BusinessUser,
   FieldsForErrorHandling,
@@ -488,3 +489,7 @@ export type TaskWithoutLinks = {
 export type Page = { current: number; previous: number };
 
 export type StepperStep = { name: string; hasError: boolean; isComplete: boolean };
+
+export interface ContextualInfoFile extends ContextualInfo {
+  filename: string;
+}

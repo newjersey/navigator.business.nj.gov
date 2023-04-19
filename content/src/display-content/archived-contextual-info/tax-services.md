@@ -1,4 +1,6 @@
-### Certifications and Services Available After Registering for Taxes
+---
+header: Certifications and Services Available After Registering for Taxes
+---
 
 1. Report and collect taxes and employer contributions
 2. Receive notices of tax filing due dates

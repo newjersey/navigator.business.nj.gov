@@ -5,6 +5,7 @@ import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer"
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { MatchList } from "@/components/search/MatchList";
 import { searchCertifications } from "@/lib/search/searchCertifications";
+import { searchContextualInfo } from "@/lib/search/searchContextualInfo";
 import { searchFundings } from "@/lib/search/searchFundings";
 import { searchIndustries } from "@/lib/search/searchIndustries";
 import { searchSidebarCards } from "@/lib/search/searchSidebarCards";
@@ -15,6 +16,7 @@ import { searchWebflowLicenses } from "@/lib/search/searchWebflowLicenses";
 import { Match } from "@/lib/search/typesForSearch";
 import { getNetlifyConfig } from "@/lib/static/admin/getNetlifyConfig";
 import { loadAllArchivedCertifications, loadAllCertifications } from "@/lib/static/loadCertifications";
+import { loadAllArchivedContextualInfo, loadAllContextualInfo } from "@/lib/static/loadContextualInfo";
 import { loadRoadmapSideBarDisplayContent } from "@/lib/static/loadDisplayContent";
 import { loadAllFilings } from "@/lib/static/loadFilings";
 import { loadAllFundings } from "@/lib/static/loadFundings";
@@ -22,6 +24,7 @@ import { loadAllTasks } from "@/lib/static/loadTasks";
 import { loadAllWebflowLicenses } from "@/lib/static/loadWebflowLicenses";
 import {
   Certification,
+  ContextualInfoFile,
   Filing,
   Funding,
   RoadmapDisplayContent,
@@ -48,11 +51,14 @@ interface Props {
   webflowLicenses: WebflowLicense[];
   filings: Filing[];
   roadmapDisplayContent: RoadmapDisplayContent;
+  contextualInfo: ContextualInfoFile[];
+  archivedContextualInfo: ContextualInfoFile[];
 }
 
 const SearchContentPage = (props: Props): ReactElement => {
   const [isAuthed, setIsAuthed] = useState<boolean>(false);
   const [password, setPassword] = useState<string>("");
+  const [hasSearched, setHasSearched] = useState<boolean>(false);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [taskMatches, setTaskMatches] = useState<Match[]>([]);
   const [certMatches, setCertMatches] = useState<Match[]>([]);
@@ -63,6 +69,8 @@ const SearchContentPage = (props: Props): ReactElement => {
   const [webflowLicenseMatches, setWebflowLicenseMatches] = useState<Match[]>([]);
   const [filingMatches, setFilingMatches] = useState<Match[]>([]);
   const [sidebarCardMatches, setSidebarCardMatches] = useState<Match[]>([]);
+  const [contextualInfoMatches, setContextualInfoMatches] = useState<Match[]>([]);
+  const [archivedContextualInfoMatches, setArchivedContextualInfoMatches] = useState<Match[]>([]);
 
   const sidebarCards: SidebarCardContent[] = Object.values(props.roadmapDisplayContent.sidebarDisplayContent);
 
@@ -74,6 +82,7 @@ const SearchContentPage = (props: Props): ReactElement => {
 
   const handleSearchInput = (event: ChangeEvent<HTMLInputElement>): void => {
     setSearchTerm(event.target.value);
+    setHasSearched(false);
   };
 
   const onSearchSubmit = (): void => {
@@ -93,10 +102,14 @@ const SearchContentPage = (props: Props): ReactElement => {
     setWebflowLicenseMatches(searchWebflowLicenses(props.webflowLicenses, lowercaseTerm));
     setFilingMatches(searchTaxFilings(props.filings, lowercaseTerm));
     setSidebarCardMatches(searchSidebarCards(sidebarCards, lowercaseTerm));
+    setContextualInfoMatches(searchContextualInfo(props.contextualInfo, lowercaseTerm));
+    setArchivedContextualInfoMatches(searchContextualInfo(props.archivedContextualInfo, lowercaseTerm));
+    setHasSearched(true);
   };
 
   const noMatches = (): boolean => {
     return (
+      hasSearched &&
       [
         ...taskMatches,
         ...certMatches,
@@ -107,6 +120,8 @@ const SearchContentPage = (props: Props): ReactElement => {
         ...filingMatches,
         ...sidebarCardMatches,
         ...webflowLicenseMatches,
+        ...archivedContextualInfoMatches,
+        ...contextualInfoMatches,
       ].length === 0
     );
   };
@@ -147,6 +162,8 @@ const SearchContentPage = (props: Props): ReactElement => {
       <MatchList matches={stepsMatches} collectionLabel="🟩 Roadmap - Settings" />
       <MatchList matches={filingMatches} collectionLabel="🟪 Tax Filings" />
       <MatchList matches={sidebarCardMatches} collectionLabel="🟥 Sidebar Cards Content" />
+      <MatchList matches={contextualInfoMatches} collectionLabel="🟧 Contextual Information" />
+      <MatchList matches={archivedContextualInfoMatches} collectionLabel="Archived Contextual Info" />
       <MatchList matches={webflowLicenseMatches} collectionLabel="🟦 Webflow Licenses" />
     </div>
   );
@@ -181,6 +198,8 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
       webflowLicenses: loadAllWebflowLicenses(),
       filings: loadAllFilings(),
       roadmapDisplayContent: loadRoadmapSideBarDisplayContent(),
+      contextualInfo: loadAllContextualInfo(),
+      archivedContextualInfo: loadAllArchivedContextualInfo(),
     },
   };
 };

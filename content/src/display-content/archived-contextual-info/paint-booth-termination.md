@@ -1,4 +1,6 @@
-## Spray Paint Booth Permit Termination
+---
+header: Spray Paint Booth Permit Termination
+---
 
 Your Spray Paint Booth may not need a permit from the New Jersey Department of Environmental Protection if:
 
