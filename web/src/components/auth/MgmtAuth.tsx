@@ -1,6 +1,6 @@
 import * as apiClient from "@/lib/api-client/apiClient";
 import { TextField } from "@mui/material";
-import { ChangeEvent, KeyboardEvent, ReactElement } from "react";
+import { ChangeEvent, KeyboardEvent, ReactElement, useState } from "react";
 
 interface Props {
   password: string;
@@ -10,6 +10,7 @@ interface Props {
 
 export const MgmtAuth = (props: Props): ReactElement => {
   const { password } = props;
+  const [hasError, setHasError] = useState<boolean>(false);
 
   const handleKeyPress = (event: KeyboardEvent<HTMLDivElement>): void => {
     if (event.code === "Enter" || event.key === "Enter") {
@@ -18,16 +19,20 @@ export const MgmtAuth = (props: Props): ReactElement => {
   };
 
   const handlePasswordInput = (event: ChangeEvent<HTMLInputElement>): void => {
+    setHasError(false);
     props.setPassword(event.target.value);
   };
 
   const onSubmit = (): void => {
+    setHasError(false);
     apiClient
       .post("/mgmt/auth", { password }, false)
       .then(() => {
         return props.setIsAuthed(true);
       })
-      .catch(() => {});
+      .catch(() => {
+        setHasError(true);
+      });
   };
 
   return (
@@ -40,6 +45,8 @@ export const MgmtAuth = (props: Props): ReactElement => {
         variant="outlined"
         type="password"
         value={password}
+        error={hasError}
+        helperText={hasError ? "Authentication failed" : ""}
         onChange={handlePasswordInput}
         onKeyPress={handleKeyPress}
         inputProps={{
