@@ -306,7 +306,7 @@
   "packageManager": "yarn@3.5.0",
   "resolutions": {
     "trim@0.0.1": "0.0.3",
-    "postcss": "8.4.21",
+    "postcss": "8.4.22",
     "glob-parent": "6.0.2",
     "tar": "6.1.13",
     "ansi-regex": "5.0.1",
