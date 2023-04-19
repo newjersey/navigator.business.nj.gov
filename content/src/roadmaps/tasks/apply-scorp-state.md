@@ -1,7 +1,7 @@
 ---
 urlSlug: scorp-state
 filename: scorp-state
-name: Apply for an S Corporation Status with the State
+name: Apply for Your S Corporation Status with the State
 id: apply-scorp-state
 callToActionLink: https://www.njportal.com/dor/scorp
 callToActionText: Apply for My S Corporation Status
@@ -17,7 +17,7 @@ Filing for an `S corporation|s-corp` designation at the state level is a process
 * An existing S corp designation with the IRS
 *  `Entity ID|entity-id` 
 
-> **Once completed, you will have**
+> **Once completed, you will have:**
 >
 > * A letter confirming your S corp status with the State of New Jersey
 >
