@@ -398,6 +398,10 @@ export interface PostOnboarding {
   radioNoContent: string;
 }
 
+export interface PostOnboardingFile extends PostOnboarding {
+  filename: string;
+}
+
 export interface SessionHelper {
   getCurrentToken: () => Promise<string>;
   getCurrentUser: () => Promise<BusinessUser>;
