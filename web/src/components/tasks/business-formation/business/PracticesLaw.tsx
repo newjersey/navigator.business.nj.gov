@@ -13,16 +13,6 @@ export const PracticesLaw = (props: Props): ReactElement => {
   const { Config } = useConfig();
   const { state, setFormationFormData } = useContext(BusinessFormationContext);
 
-  const onChange = (value: "true" | "false"): void => {
-    const willPracticeLaw = JSON.parse(value);
-    setFormationFormData((previousState) => {
-      return {
-        ...previousState,
-        willPracticeLaw,
-      };
-    });
-  };
-
   return (
     <FormControl variant="outlined" fullWidth className="padding-bottom-2">
       <RadioGroup
@@ -30,14 +20,21 @@ export const PracticesLaw = (props: Props): ReactElement => {
         className="fac"
         key={`${state.formationFormData.willPracticeLaw}-key`}
         value={state.formationFormData.willPracticeLaw}
-        onChange={(e): void => onChange(e.target.value as "true" | "false")}
+        onChange={(e): void =>
+          setFormationFormData((previousState) => {
+            return {
+              ...previousState,
+              willPracticeLaw: JSON.parse(e.target.value),
+            };
+          })
+        }
         row
       >
         <label className="margin-right-3">{Config.formation.fields.willPracticeLaw.label}</label>
         <FormControlLabel
           labelPlacement="end"
           data-testid={"practice-law-yes"}
-          value={"true"}
+          value={true}
           control={<Radio color="primary" />}
           label={
             <div className="padding-y-1 margin-right-3">
@@ -48,7 +45,7 @@ export const PracticesLaw = (props: Props): ReactElement => {
         <FormControlLabel
           labelPlacement="end"
           data-testid={"practice-law-no"}
-          value={"false"}
+          value={false}
           control={<Radio color="primary" />}
           label={
             <div className="padding-y-1 margin-right-3">

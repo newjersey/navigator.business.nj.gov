@@ -1,3 +1,4 @@
+import { WithErrorBar } from "@/components/WithErrorBar";
 import { flipObject, templateEval } from "@/lib/utils/helpers";
 import { AcceptedFileType, InputFile } from "@businessnjgovnavigator/shared";
 import { ReactElement, useEffect, useLayoutEffect, useRef, useState } from "react";
@@ -85,7 +86,6 @@ export const FileInput = ({
   useLayoutEffect(() => {
     const fileInputElement = fileInputRef.current;
 
-    // Prevent the user from selecting a file that is too large or of the wrong file type
     const preventInvalidFileSelection = (e: Event): void => {
       const eventTarget = e.target as HTMLInputElement;
       if (eventTarget.files && eventTarget.files.length > 0) {
@@ -145,26 +145,28 @@ export const FileInput = ({
 
   return (
     <>
-      <div className="usa-form-group">
-        <label className="usa-label" htmlFor="file-input-single">
-          {helperText}
-        </label>
-        <span className="usa-error-message" id="file-input-error-alert">
-          {getErrorMessage()}
-        </span>
-        <input
-          data-testid="file-input"
-          accept={createAcceptedFileString()}
-          className="usa-file-input"
-          id="file-input-single"
-          name="file-input-single"
-          onChange={handleChange}
-          size={size}
-          ref={fileInputRef}
-          type="file"
-        />
-      </div>
-      <div aria-hidden="true" data-testid={hasFileBeenRead ? "file-is-read" : ""} />
+      <WithErrorBar hasError={hasError || fileUploadError.hasError} type="ALWAYS">
+        <div className="usa-form-group">
+          <label className="usa-label" htmlFor="file-input-single">
+            {helperText}
+          </label>
+          <span className="usa-error-message" id="file-input-error-alert">
+            {getErrorMessage()}
+          </span>
+          <input
+            data-testid="file-input"
+            accept={createAcceptedFileString()}
+            className="usa-file-input"
+            id="file-input-single"
+            name="file-input-single"
+            onChange={handleChange}
+            size={size}
+            ref={fileInputRef}
+            type="file"
+          />
+        </div>
+        <div aria-hidden="true" data-testid={hasFileBeenRead ? "file-is-read" : ""} />
+      </WithErrorBar>
     </>
   );
 };

@@ -681,7 +681,7 @@ describe("ApiFormationClient", () => {
           mockAxios.post.mockResolvedValue({ data: stubResponse });
         });
 
-        it("PracticesLaw is undefined if not provided", async () => {
+        it("is undefined if not provided", async () => {
           const legalStructureId = "c-corporation";
           const formationFormData = generateFormationFormData(
             {},
@@ -700,7 +700,7 @@ describe("ApiFormationClient", () => {
           expect(payload.Formation.BusinessInformation.PracticesLaw).toBe(undefined);
         });
 
-        it("PracticesLaw is 'Yes' if willPracticeLaw is true", async () => {
+        it("is 'Yes' if willPracticeLaw is true", async () => {
           const legalStructureId = "c-corporation";
           const formationFormData = generateFormationFormData(
             { willPracticeLaw: true },
@@ -719,7 +719,7 @@ describe("ApiFormationClient", () => {
           expect(payload.Formation.BusinessInformation.PracticesLaw).toBe("Yes");
         });
 
-        it("PracticesLaw is 'No' if willPracticeLaw is false", async () => {
+        it("is 'No' if willPracticeLaw is false", async () => {
           const legalStructureId = "c-corporation";
           const formationFormData = generateFormationFormData(
             { willPracticeLaw: false },
@@ -738,7 +738,7 @@ describe("ApiFormationClient", () => {
           expect(payload.Formation.BusinessInformation.PracticesLaw).toBe("No");
         });
 
-        it("PracticesLaw is undefined if not foreign c-corp", async () => {
+        it("is undefined if not foreign c-corp", async () => {
           const legalStructureId = "s-corporation";
           const formationFormData = generateFormationFormData(
             { willPracticeLaw: true },

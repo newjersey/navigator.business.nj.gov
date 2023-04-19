@@ -489,6 +489,7 @@ collections:
                     widget: object
                     fields:
                       - { label: "Label", name: "label", widget: "string" }
+                      - { label: "Contextual Label", name: "contextualLabel", widget: "string" }
                       - { label: "Helper Text", name: "helperText", widget: "string" }
                       - { label: "Error Message - File Size", name: "errorMessageFileSize", widget: "string" }
                       - { label: "Error Message - File Type", name: "errorMessageFileType", widget: "string" }
