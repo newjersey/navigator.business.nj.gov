@@ -102,20 +102,23 @@ export const BusinessNameAndLegalStructure = ({ isReviewStep = false }: Props): 
         >
           <div className={"fdc"}>
             <strong className={"margin-bottom-05"}>{legalStructureContextualInfo()}</strong>
-            <span>{legalStructureName()}</span>
+            <div className={"flex"}>
+              <div className={"margin-right-05"}> {legalStructureName()}</div>
+              <div>
+                {!isReviewStep && (
+                  <UnStyledButton
+                    style="tertiary"
+                    widthAutoOnMobile
+                    onClick={showLegalStructureModal}
+                    underline
+                    dataTestid="edit-legal-structure"
+                  >
+                    {Config.formation.general.editButtonText}
+                  </UnStyledButton>
+                )}
+              </div>
+            </div>
           </div>
-          <span> </span>
-          {!isReviewStep && (
-            <UnStyledButton
-              style="tertiary"
-              widthAutoOnMobile
-              onClick={showLegalStructureModal}
-              underline
-              dataTestid="edit-legal-structure"
-            >
-              {Config.formation.general.editButtonText}
-            </UnStyledButton>
-          )}
         </div>
       </div>
       <ModalTwoButton

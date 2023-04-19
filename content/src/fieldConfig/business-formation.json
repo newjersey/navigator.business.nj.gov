@@ -228,7 +228,6 @@
         "successSnackbarHeader": "Signer Added",
         "successSnackbarBody": "A signer has been added successfully.",
         "addButtonText": "Add Signer",
-        "reviewStepHeader": "Signer(s)",
         "modalTitle": "Add New Signer",
         "placeholder": "No Signers have been added",
         "description": "List each `Incorporators'|incorporator` name and address. You can have up to 10 Incorporators listed.\n\nIncorporators are listed on the Certificate of Formation and will have the ability to file and sign documents.",
@@ -255,7 +254,7 @@
         "label": "Payment Type",
         "error": "Select a payment method.",
         "achLabel": "Pay with E-Check",
-        "reviewStepServicesHeader": "Services",
+        "reviewStepServicesHeader": "Services and Payment",
         "reviewStepsServicesSelected": "Services Selected",
         "creditCardLabel": "Pay with Credit Card",
         "costColumnLabel": "Cost",
@@ -289,7 +288,6 @@
         "signColumnLabel": "Sign*",
         "nameLabel": "Signer Full Name",
         "addButtonText": "Add New Signer",
-        "reviewStepHeader": "Signatures",
         "aidText": "By checking this box I confirm that I'm an authorized signer.",
         "deleteTextMobile": "Delete Signer",
         "description": "Authorized Representative(s) should sign below by adding their full name. You can have up to 10 signers listed.",
@@ -357,16 +355,14 @@
     "sections": {
       "addressHeader": "Primary Business Address",
       "addressAddButtonText": "Add Primary Business Address",
-      "businessNameAndStructureHeader": "Business Name and Business Structure",
+      "businessNameAndStructureHeader": "Business Details",
       "contactInfoHeader": "Billing Contact Information",
       "notificationsHeader": "Notifications",
       "notificationsDescription": "Get free text/email notifications:",
       "servicesHeader": "Services and Payment",
       "servicesDescription": "Use the table below to select all the services you’d like to purchase as well as the payment type. The total amount will change based on the payment type selected.",
       "review": {
-        "addressLabel": "Address",
         "nameLabel": "Full Name",
-        "locationHeader": "Location",
         "billingContactHeader": "Billing Contact Information"
       }
     },

@@ -507,7 +507,6 @@ collections:
                           widget: "string",
                         }
                       - { label: "Success snackbar - body", name: "successSnackbarBody", widget: "string" }
-                      - { label: "Review Step header", name: "reviewStepHeader", widget: "string" }
                       - { label: "Modal title", name: "modalTitle", widget: "string" }
                       - { label: "Add button text", name: "addButtonText", widget: "string" }
                       - { label: "Placeholder", name: "placeholder", widget: "string" }
@@ -625,7 +624,6 @@ collections:
                       - { label: "Sign column label", name: "signColumnLabel", widget: "string" }
                       - { label: "Table headers", name: "tableHeader", widget: "string" }
                       - { label: "Add button text", name: "addButtonText", widget: "string" }
-                      - { label: "Review step - header", name: "reviewStepHeader", widget: "string" }
                       - { label: "Signature aid text", name: "aidText", widget: "string" }
                       - { label: "Delete text (mobile)", name: "deleteTextMobile", widget: "string" }
                       - { label: "Placeholder", name: "placeholder", widget: "string" }
@@ -767,9 +765,7 @@ collections:
                     collapsed: false
                     widget: object
                     fields:
-                      - { label: "Review step - address label", name: "addressLabel", widget: "string" }
                       - { label: "Review step - signer/member label", name: "nameLabel", widget: "string" }
-                      - { label: "Review step - location header", name: "locationHeader", widget: "string" }
                       - {
                           label: "Review step - billing contact header",
                           name: "billingContactHeader",

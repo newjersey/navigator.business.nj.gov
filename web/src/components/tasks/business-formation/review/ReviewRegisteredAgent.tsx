@@ -2,7 +2,6 @@ import { ReviewLineItem } from "@/components/tasks/business-formation/review/sec
 import { ReviewSubSection } from "@/components/tasks/business-formation/review/section/ReviewSubSection";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { getStringifiedAddress } from "@/lib/utils/formatters";
 import { ReactElement, useContext } from "react";
 
 export const ReviewRegisteredAgent = (): ReactElement => {
@@ -34,14 +33,23 @@ export const ReviewRegisteredAgent = (): ReactElement => {
           />
 
           <ReviewLineItem
-            label={Config.formation.sections.review.addressLabel}
-            value={getStringifiedAddress({
-              addressLine1: state.formationFormData.agentOfficeAddressLine1 || italicNotEnteredText,
-              city: state.formationFormData.agentOfficeAddressMunicipality?.name || italicNotEnteredText,
-              zipcode: state.formationFormData.agentOfficeAddressZipCode || italicNotEnteredText,
-              state: "NJ",
-              addressLine2: state.formationFormData.agentOfficeAddressLine2,
-            })}
+            label={Config.formation.fields.agentOfficeAddressLine1.label}
+            value={state.formationFormData.agentOfficeAddressLine1 || italicNotEnteredText}
+          />
+          {state.formationFormData.addressLine2 && (
+            <ReviewLineItem
+              label={Config.formation.fields.agentOfficeAddressLine2.label}
+              value={state.formationFormData.agentOfficeAddressLine2 || italicNotEnteredText}
+            />
+          )}
+          <ReviewLineItem
+            label={Config.formation.fields.agentOfficeAddressMunicipality.label}
+            value={state.formationFormData.agentOfficeAddressMunicipality?.name || italicNotEnteredText}
+          />
+          <ReviewLineItem label={Config.formation.fields.agentOfficeAddressState.label} value={"NJ"} />
+          <ReviewLineItem
+            label={Config.formation.fields.agentOfficeAddressZipCode.label}
+            value={state.formationFormData.agentOfficeAddressZipCode || italicNotEnteredText}
           />
         </div>
       )}
