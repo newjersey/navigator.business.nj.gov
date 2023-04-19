@@ -7,7 +7,8 @@ interface Props {
   foreignGoodStandingFile: InputFile | undefined;
 }
 
-const filePreviewImage = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"; // taken from USWDS
+const uswdsFileImagePreview =
+  "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
 
 export const ReviewForeignCertificate = (props: Props): ReactElement => {
   const { Config } = useConfig();
@@ -16,7 +17,7 @@ export const ReviewForeignCertificate = (props: Props): ReactElement => {
       {props.foreignGoodStandingFile?.filename ? (
         <div className="fac margin-bottom-4">
           <img
-            src={filePreviewImage}
+            src={uswdsFileImagePreview}
             alt="file preview"
             className="usa-file-input__preview-image usa-file-input__preview-image--generic"
           />

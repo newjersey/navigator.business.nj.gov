@@ -1,3 +1,4 @@
+import { Content } from "@/components/Content";
 import { FileInput } from "@/components/njwds-extended/FileInput";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
@@ -18,7 +19,9 @@ export const ForeignCertificate = (props: Props): ReactElement => {
       <hr className="margin-bottom-2 margin-top-0" aria-hidden={true} />
       <FormControl variant="outlined" fullWidth className="padding-bottom-2">
         <h3 className="margin-bottom-2" data-testid="MainBusinesAddressContainer-Header">
-          {Config.formation.fields.foreignGoodStandingFile.label}
+          <Content className="h3-styling">
+            {Config.formation.fields.foreignGoodStandingFile.contextualLabel}
+          </Content>
         </h3>
         <FileInput
           acceptedFileTypes={{

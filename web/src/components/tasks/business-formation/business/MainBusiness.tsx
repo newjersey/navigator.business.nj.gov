@@ -73,9 +73,7 @@ export const MainBusiness = (): ReactElement => {
               <WithErrorBar hasError={doesFieldHaveError("willPracticeLaw")} type="ALWAYS">
                 <PracticesLaw hasError={doesFieldHaveError("willPracticeLaw")} />
               </WithErrorBar>
-              <WithErrorBar hasError={doesFieldHaveError("foreignGoodStandingFile")} type="ALWAYS">
-                <ForeignCertificate hasError={doesFieldHaveError("foreignGoodStandingFile")} />
-              </WithErrorBar>
+              <ForeignCertificate hasError={doesFieldHaveError("foreignGoodStandingFile")} />
             </>
           )}
         </>

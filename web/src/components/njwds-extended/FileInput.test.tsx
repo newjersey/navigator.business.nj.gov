@@ -41,7 +41,7 @@ describe("<FileInput />", () => {
     const mockOnChange = jest.fn();
     const errorMessageFileSize = Config.formation.fields.foreignGoodStandingFile.errorMessageFileSize;
 
-    file = new File(["x".repeat(1048576 / 2)], "cool.png", { type: "image/png" }); // .5 MB file
+    const halfMegabyteFile = new File(["x".repeat(1048576 / 2)], "cool.png", { type: "image/png" });
     render(
       <FileInput
         maxFileSize={{
@@ -57,7 +57,7 @@ describe("<FileInput />", () => {
 
     const uploader = screen.getByTestId("file-input");
 
-    fireEvent.change(uploader, { target: { files: [file] } });
+    fireEvent.change(uploader, { target: { files: [halfMegabyteFile] } });
 
     expect(mockOnChange).not.toHaveBeenCalled();
     expect(screen.getByText("cool.png exceeds maximum size of 0.4 MB.")).toBeInTheDocument();
