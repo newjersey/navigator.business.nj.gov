@@ -15,7 +15,7 @@ Your commercial vehicles need to be registered under your company name before yo
 
 ### Application Requirements
 
-- [An appointment](https://telegov.njportal.com/njmvc/AppointmentWizard) with the NJ Motor Vehicle Commission
+- [An appointment](https://telegov.njportal.com/njmvc/AppointmentWizard) with the New Jersey Motor Vehicle Commission
 - Vehicle title
 - Driver’s license
 - `Motor Vehicle Commission Entity ID Number|mvc-entity-id`
