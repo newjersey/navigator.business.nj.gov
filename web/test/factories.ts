@@ -93,6 +93,8 @@ export const generateUser = (overrides: Partial<BusinessUser>): BusinessUser => 
 export const generateUserData = (overrides: Partial<UserData>): UserData => {
   return {
     version: CURRENT_VERSION,
+    versionWhenCreated: -1,
+    dateCreatedISO: undefined,
     user: generateUser({}),
     profileData: generateProfileData({}),
     onboardingFormProgress: "COMPLETED",
