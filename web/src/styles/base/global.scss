@@ -217,6 +217,9 @@ ol {
     background: $accent-cool-lighter;
   }
 }
+.usa-form-group--error .usa-file-input__target {
+  border-color: #b50909;
+}
 
 .usa-link:visited,
 .usa-prose > a:visited {

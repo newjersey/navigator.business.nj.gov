@@ -145,28 +145,26 @@ export const FileInput = ({
 
   return (
     <>
-      <WithErrorBar hasError={hasError || fileUploadError.hasError} type="ALWAYS">
-        <div className="usa-form-group">
-          <label className="usa-label" htmlFor="file-input-single">
-            {helperText}
-          </label>
-          <span className="usa-error-message" id="file-input-error-alert">
-            {getErrorMessage()}
-          </span>
-          <input
-            data-testid="file-input"
-            accept={createAcceptedFileString()}
-            className="usa-file-input"
-            id="file-input-single"
-            name="file-input-single"
-            onChange={handleChange}
-            size={size}
-            ref={fileInputRef}
-            type="file"
-          />
-        </div>
-        <div aria-hidden="true" data-testid={hasFileBeenRead ? "file-is-read" : ""} />
-      </WithErrorBar>
+      <div className={`usa-form-group${hasError || (fileUploadError.hasError && " usa-form-group--error")}`}>
+        <label className="usa-label" htmlFor="file-input-single">
+          {helperText}
+        </label>
+        <span className="usa-error-message" id="file-input-error-alert">
+          {getErrorMessage()}
+        </span>
+        <input
+          data-testid="file-input"
+          accept={createAcceptedFileString()}
+          className="usa-file-input"
+          id="file-input-single"
+          name="file-input-single"
+          onChange={handleChange}
+          size={size}
+          ref={fileInputRef}
+          type="file"
+        />
+      </div>
+      <div aria-hidden="true" data-testid={hasFileBeenRead ? "file-is-read" : ""} />
     </>
   );
 };
