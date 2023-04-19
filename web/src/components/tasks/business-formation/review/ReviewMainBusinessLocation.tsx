@@ -2,7 +2,6 @@ import { ReviewLineItem } from "@/components/tasks/business-formation/review/sec
 import { ReviewSubSection } from "@/components/tasks/business-formation/review/section/ReviewSubSection";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { getStringifiedAddress } from "@/lib/utils/formatters";
 import { arrayOfCountriesObjects } from "@businessnjgovnavigator/shared/countries";
 import { ReactElement, useContext } from "react";
 
@@ -11,33 +10,54 @@ export const ReviewMainBusinessLocation = (): ReactElement => {
   const { state } = useContext(BusinessFormationContext);
 
   const italicNotEnteredText = `*${Config.formation.general.notEntered}*`;
+  const businessLocationType = state.formationFormData.businessLocationType;
 
-  const getAddressDisplay = (): string => {
-    const businessLocationType = state.formationFormData.businessLocationType;
-    return getStringifiedAddress({
-      addressLine1: state.formationFormData.addressLine1 || italicNotEnteredText,
-      city:
-        (businessLocationType === "NJ"
-          ? state.formationFormData.addressMunicipality?.displayName
-          : state.formationFormData.addressCity) || italicNotEnteredText,
-      state:
-        (businessLocationType === "INTL"
-          ? state.formationFormData.addressProvince
-          : state.formationFormData.addressState?.name) || italicNotEnteredText,
-      zipcode: state.formationFormData.addressZipCode || italicNotEnteredText,
-      addressLine2: state.formationFormData.addressLine2,
-      country:
-        businessLocationType === "INTL"
-          ? arrayOfCountriesObjects.find(
-              (country) => country.shortCode === state.formationFormData.addressCountry
-            )?.name ?? italicNotEnteredText
-          : undefined,
-    });
+  const getAddressCity = (): string => {
+    return (
+      (businessLocationType === "NJ"
+        ? state.formationFormData.addressMunicipality?.displayName
+        : state.formationFormData.addressCity) || italicNotEnteredText
+    );
+  };
+
+  const getAddressState = (): string => {
+    return (
+      (businessLocationType === "INTL"
+        ? state.formationFormData.addressProvince
+        : state.formationFormData.addressState?.name) || italicNotEnteredText
+    );
+  };
+
+  const getAddressCountry = (): string => {
+    return businessLocationType === "INTL"
+      ? arrayOfCountriesObjects.find(
+          (country) => country.shortCode === state.formationFormData.addressCountry
+        )?.name ?? italicNotEnteredText
+      : "";
   };
 
   return (
-    <ReviewSubSection header={Config.formation.sections.review.locationHeader} marginOverride="margin-top-0">
-      <ReviewLineItem label={Config.formation.sections.review.addressLabel} value={getAddressDisplay()} />
+    <ReviewSubSection header={Config.formation.sections.addressHeader} marginOverride="margin-top-0">
+      <ReviewLineItem
+        label={Config.formation.fields.addressLine1.label}
+        value={state.formationFormData.addressLine1 || italicNotEnteredText}
+      />
+      {state.formationFormData.addressLine2 && (
+        <ReviewLineItem
+          label={Config.formation.fields.addressLine2.label}
+          value={state.formationFormData.addressLine2}
+          dataTestId={"business-address-line-two"}
+        />
+      )}
+      <ReviewLineItem label={Config.formation.fields.addressCity.label} value={getAddressCity()} />
+      <ReviewLineItem label={Config.formation.fields.addressState.label} value={getAddressState()} />
+      <ReviewLineItem
+        label={Config.formation.fields.addressZipCode.label}
+        value={state.formationFormData.addressZipCode || italicNotEnteredText}
+      />
+      {businessLocationType === "INTL" && (
+        <ReviewLineItem label={Config.formation.fields.addressCountry.label} value={getAddressCountry()} />
+      )}
     </ReviewSubSection>
   );
 };

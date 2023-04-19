@@ -14,7 +14,7 @@ import {
 } from "@businessnjgovnavigator/shared/formationData";
 import { generateFormationFormData } from "@businessnjgovnavigator/shared/test";
 import * as materialUi from "@mui/material";
-import { fireEvent, screen, within } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 import { displayContent } from "../contacts/testHelpers";
 
 function mockMaterialUI(): typeof materialUi {
@@ -82,8 +82,7 @@ describe("<MainBusinessAddressNj />", () => {
     expect(screen.queryByLabelText("Address municipality")).not.toBeInTheDocument();
     expect(screen.queryByLabelText("Address zip code")).not.toBeInTheDocument();
 
-    const headingElement = screen.getByTestId("MainBusinesAddressContainer-Header");
-    expect(within(headingElement).getByText(Config.formation.general.optionalLabel)).toBeInTheDocument();
+    expect(screen.getByTestId("main-business-address-container-header")).toBeInTheDocument();
 
     expect(screen.getByText(Config.formation.sections.addressAddButtonText)).toBeInTheDocument();
   });

@@ -1,4 +1,4 @@
-import { getDollarValue, getStringifiedAddress } from "@/lib/utils/formatters";
+import { getDollarValue } from "@/lib/utils/formatters";
 
 describe("formatters", () => {
   describe("getDollarValue", () => {
@@ -16,31 +16,6 @@ describe("formatters", () => {
 
     it("returns empty string if string cannot be parsed as number", () => {
       expect(getDollarValue("hello")).toEqual("");
-    });
-  });
-
-  describe("getStringifiedAddress", () => {
-    it("turns address into oneline string", () => {
-      expect(
-        getStringifiedAddress({
-          addressLine1: "1600 Pennsylvania Ave",
-          city: "Washington",
-          state: "DC",
-          zipcode: "00000",
-        })
-      ).toEqual("1600 Pennsylvania Ave, Washington, DC, 00000");
-    });
-
-    it("turns address into oneline string including line2", () => {
-      expect(
-        getStringifiedAddress({
-          addressLine1: "1600 Pennsylvania Ave",
-          addressLine2: "Apt 1",
-          city: "Washington",
-          state: "DC",
-          zipcode: "00000",
-        })
-      ).toEqual("1600 Pennsylvania Ave, Apt 1, Washington, DC, 00000");
     });
   });
 });

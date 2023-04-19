@@ -23,7 +23,7 @@ export const ReviewLineItem = (props: Props): ReactElement => {
       }`}
       data-testid={props.dataTestId}
     >
-      <div className="text-bold width-11rem">
+      <div className="text-bold width-15rem margin-right-5">
         {props.labelContextualInfo ? (
           <ContextualInfoButton text={`${props.label}:`} id={props.labelContextualInfo} />
         ) : (
