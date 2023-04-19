@@ -420,11 +420,11 @@ export type SearchBusinessNameError = "BAD_INPUT" | "SEARCH_FAILED";
 export type SidebarCardContent = {
   contentMd: string;
   id: string;
-  header: string;
-  notStartedHeader: string;
-  completedHeader: string;
+  header?: string;
+  notStartedHeader?: string;
+  completedHeader?: string;
   imgPath: string | null;
-  ctaText: string;
+  ctaText?: string;
   color: string;
   headerBackgroundColor: string | null;
   borderColor: string;

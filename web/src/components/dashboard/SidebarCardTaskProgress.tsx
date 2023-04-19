@@ -65,8 +65,11 @@ export const SidebarCardTaskProgress = (props: Props): ReactElement => {
       return props.card.notStartedHeader;
     } else if (props.card.completedHeader && progressBarValue() === 100) {
       return props.card.completedHeader;
+    } else if (props.card.header) {
+      return templateEval(props.card.header, { percentDone: `${progressBarValue()}%` });
     }
-    return templateEval(props.card.header, { percentDone: `${progressBarValue()}%` });
+
+    return "";
   };
 
   const getContent = (): string => {
