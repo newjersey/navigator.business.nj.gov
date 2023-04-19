@@ -1,7 +1,7 @@
 ---
 urlSlug: open-bank-account
 filename: bank-account
-name: Open a Business Bank Account
+name: Open Your Business Bank Account
 id: bank-account
 ---
 A business bank account separates your business finances from your personal expenses. This helps you keep accurate and organized accounting records for tax purposes and business operations.
@@ -9,7 +9,7 @@ A business bank account separates your business finances from your personal expe
 Some banks may request other documentation in addition to what is listed below. Compare and confirm document requirements, services, and fees.
 
 ---
-### To Open a Business Account, Bring Your:
+### Business Bank Account Requirements
 
 * `EIN|ein` 
 
@@ -17,7 +17,7 @@ Some banks may request other documentation in addition to what is listed below. 
 
 * `Business Registration Certificate|business-reg-certificate` 
 
-> **After you complete this task, you will have:**
+> **Once completed, you will have:**
 >
 > * A business bank account
 
