@@ -1,7 +1,6 @@
 ---
+header: Business Plan Outline and Description
 ---
-
-### Business Plan Outline and Description
 
 The structure of a business plan may vary depending on your business and needs, but it often incorporates the sections below.
 
