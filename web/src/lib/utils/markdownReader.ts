@@ -13,7 +13,6 @@ import {
   FundingStatus,
   FundingType,
   MarkdownResult,
-  OpportunityAgency,
   PostOnboardingFile,
   TaskWithoutLinks,
   TaxAgency,
@@ -154,7 +153,7 @@ type FundingGrayMatter = {
   callToActionLink: string;
   callToActionText: string;
   fundingType: FundingType;
-  agency: OpportunityAgency[];
+  agency: string[] | null;
   publishStageArchive: FundingPublishStatus | null;
   openDate: string;
   dueDate: string;
@@ -178,7 +177,7 @@ type CertificationGrayMatter = {
   urlSlug: string;
   callToActionLink: string;
   callToActionText: string;
-  agency: OpportunityAgency[];
+  agency: string[] | null;
   applicableOwnershipTypes: string[];
   isSbe: boolean;
   descriptionMd: string;

@@ -940,13 +940,16 @@ collections:
       - { label: "Id", name: "id", widget: "string" }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
       - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
-      - label: "Agency"
-        name: "agency"
-        widget: "select"
+      - label: Agency
+        name: agency
+        widget: relation
         multiple: true
-        options:
-          ["NJEDA", "NJDOL", "NJDOT", "NJDEP", "NJ Department of Treasury", "NJ Board of Public Utilities"]
         required: false
+        default: []
+        collection: "mappings"
+        search_fields: ["arrayOfFundingAgencies.*.name"]
+        value_field: "arrayOfFundingAgencies.*.id"
+        display_fields: ["arrayOfFundingAgencies.*.name"]
       - label: "Applicable Ownership Types"
         name: applicableOwnershipTypes
         widget: "select"
@@ -977,13 +980,16 @@ collections:
       - { label: "Id", name: "id", widget: "string" }
       - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
       - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
-      - label: "Agency"
-        name: "agency"
-        widget: "select"
+      - label: Agency
+        name: agency
+        widget: relation
         multiple: true
-        options:
-          ["NJEDA", "NJDOL", "NJDOT", "NJDEP", "NJ Department of Treasury", "NJ Board of Public Utilities"]
         required: false
+        default: []
+        collection: "mappings"
+        search_fields: ["arrayOfFundingAgencies.*.name"]
+        value_field: "arrayOfFundingAgencies.*.id"
+        display_fields: ["arrayOfFundingAgencies.*.name"]
       - label: "Applicable Ownership Types"
         name: applicableOwnershipTypes
         widget: "select"
@@ -1062,21 +1068,16 @@ collections:
         widget: "select"
         options: ["In State", "Out of State", "Both"]
         required: false
-      - label: "Agency"
-        name: "agency"
-        widget: "select"
+      - label: Agency
+        name: agency
+        widget: relation
         multiple: true
-        options:
-          [
-            "NJEDA",
-            "NJDOL",
-            "NJDOT",
-            "NJDEP",
-            "NJ Department of Treasury",
-            "NJ Board of Public Utilities",
-            "New Jersey Business Action Center",
-          ]
         required: false
+        default: []
+        collection: "mappings"
+        search_fields: ["arrayOfFundingAgencies.*.name"]
+        value_field: "arrayOfFundingAgencies.*.id"
+        display_fields: ["arrayOfFundingAgencies.*.name"]
       - { label: "Agency Contact", name: "agencyContact", widget: "string", required: false }
       - label: "Business Stage"
         name: "businessStage"
@@ -1141,7 +1142,7 @@ collections:
         multiple: true
         required: false
         default: []
-        collection: "dashboard-settings"
+        collection: "mappings"
         search_fields: ["arrayOfSectors.*.name"]
         value_field: "arrayOfSectors.*.id"
         display_fields: ["arrayOfSectors.*.name"]
@@ -1212,13 +1213,16 @@ collections:
         widget: "select"
         options: ["In State", "Out of State", "Both"]
         required: false
-      - label: "Agency"
-        name: "agency"
-        widget: "select"
+      - label: Agency
+        name: agency
+        widget: relation
         multiple: true
-        options:
-          ["NJEDA", "NJDOL", "NJDEP", "NJDOT", "NJ Department of Treasury", "NJ Board of Public Utilities"]
         required: false
+        default: []
+        collection: "mappings"
+        search_fields: ["arrayOfFundingAgencies.*.name"]
+        value_field: "arrayOfFundingAgencies.*.id"
+        display_fields: ["arrayOfFundingAgencies.*.name"]
       - { label: "Agency Contact", name: "agencyContact", widget: "string", required: false }
       - label: "Business Stage"
         name: "businessStage"
@@ -1283,7 +1287,7 @@ collections:
         multiple: true
         required: false
         default: []
-        collection: "dashboard-settings"
+        collection: "mappings"
         search_fields: ["arrayOfSectors.*.name"]
         value_field: "arrayOfSectors.*.id"
         display_fields: ["arrayOfSectors.*.name"]
@@ -1337,7 +1341,7 @@ collections:
         name: defaultSectorId
         widget: relation
         required: false
-        collection: "dashboard-settings"
+        collection: "mappings"
         search_fields: ["arrayOfSectors.*.name"]
         value_field: "arrayOfSectors.*.id"
         display_fields: ["arrayOfSectors.*.name"]
@@ -2425,42 +2429,6 @@ collections:
     fields:
       - { name: "" }
 
-  - name: "dashboard-settings"
-    label: "Dashboard Settings"
-    editor:
-      preview: false
-    files:
-      - label: "Industry Sectors"
-        name: "arrayOfSectors"
-        file: "content/src/dashboard/sectors.json"
-        fields:
-          - label: Sectors
-            name: arrayOfSectors
-            widget: list
-            summary: "{{name}}"
-            fields:
-              - label: Name
-                name: name
-                widget: string
-              - label: Id
-                name: id
-                widget: hidden
-      - label: "Ownership Types"
-        name: "arrayOfOwnershipTypes"
-        file: "content/src/dashboard/ownershipTypes.json"
-        fields:
-          - label: Ownership Types
-            name: arrayOfOwnershipTypes
-            widget: list
-            summary: "{{name}}"
-            fields:
-              - label: Name
-                name: name
-                widget: string
-              - label: Id
-                name: id
-                widget: hidden
-
   - name: "dashboard-config"
     label: "Dashboard - Config"
     delete: false
@@ -2649,6 +2617,61 @@ collections:
     folder: "content/src"
     fields:
       - { name: "" }
+
+  - name: "mappings"
+    label: "Dropdown Mappings"
+    editor:
+      preview: false
+    delete: false
+    files:
+      - label: "Funding Agencies"
+        name: "arrayOfFundingAgencies"
+        file: "content/src/mappings/fundingAgency.json"
+        fields:
+          - label: Funding Agencies
+            name: arrayOfFundingAgencies
+            widget: list
+            allow_add: false
+            summary: "{{name}}"
+            fields:
+              - label: Name
+                name: name
+                widget: string
+              - label: Id
+                name: id
+                widget: hidden
+      - label: "Industry Sectors"
+        name: "arrayOfSectors"
+        file: "content/src/mappings/sectors.json"
+        fields:
+          - label: Sectors
+            name: arrayOfSectors
+            widget: list
+            allow_add: false
+            summary: "{{name}}"
+            fields:
+              - label: Name
+                name: name
+                widget: string
+              - label: Id
+                name: id
+                widget: hidden
+      - label: "Ownership Types"
+        name: "arrayOfOwnershipTypes"
+        file: "content/src/mappings/ownershipTypes.json"
+        fields:
+          - label: Ownership Types
+            name: arrayOfOwnershipTypes
+            widget: list
+            allow_add: false
+            summary: "{{name}}"
+            fields:
+              - label: Name
+                name: name
+                widget: string
+              - label: Id
+                name: id
+                widget: hidden
 
   - name: "config"
     label: "General Config"

@@ -7,7 +7,7 @@ callToActionLink: https://www.njeda.com/emerge/
 callToActionText: Learn more
 fundingType: tax credit
 agency:
-  - NJEDA
+  - njeda
 publishStageArchive: ""
 status: rolling application
 programFrequency: other

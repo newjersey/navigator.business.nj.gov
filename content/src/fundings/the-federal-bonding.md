@@ -8,7 +8,7 @@ callToActionText: Learn more
 fundingType: hiring and employee training support
 programPurpose: ""
 agency:
-  - NJDOL
+  - njdol
 agencyContact: ""
 publishStageArchive: ""
 status: rolling application

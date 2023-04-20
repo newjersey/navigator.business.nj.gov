@@ -8,7 +8,7 @@ callToActionText: Learn More
 fundingType: grant
 programPurpose: In State
 agency:
-  - NJEDA
+  - njeda
 agencyContact: ""
 publishStageArchive: ""
 status: rolling application

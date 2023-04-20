@@ -18,7 +18,7 @@ programFrequency: ongoing
 status: rolling application
 programPurpose: Both
 agency:
-  - NJEDA
+  - njeda
 agencyContact: ""
 businessStage: both
 employeesRequired: n/a

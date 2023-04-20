@@ -19,7 +19,7 @@ programFrequency: ongoing
 status: rolling application
 programPurpose: In State
 agency:
-  - NJ Board of Public Utilities
+  - nj-public-utilities
 agencyContact: LEUP@NJCleanEnergy.com
 businessStage: both
 employeesRequired: n/a

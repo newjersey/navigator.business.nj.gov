@@ -1,6 +1,7 @@
 import { findMatchInBlock, findMatchInLabelledText, findMatchInListText } from "@/lib/search/helpers";
 import { Match } from "@/lib/search/typesForSearch";
 import { Certification } from "@/lib/types/types";
+import { LookupFundingAgencyById } from "@businessnjgovnavigator/shared/fundingAgency";
 
 export const searchCertifications = (certifications: Certification[], term: string): Match[] => {
   const matches: Match[] = [];
@@ -15,7 +16,10 @@ export const searchCertifications = (certifications: Certification[], term: stri
     const name = cert.name.toLowerCase();
     const description = cert.descriptionMd.toLowerCase();
     const cta = cert.callToActionText?.toLowerCase();
-    const agencies = cert.agency ? cert.agency.map((it) => it.toLowerCase()) : [];
+    const agencyIDs = cert.agency ? cert.agency.map((it) => it.toLowerCase()) : [];
+    const agencyNames = cert.agency
+      ? cert.agency.map((it) => LookupFundingAgencyById(it).name.toLowerCase())
+      : [];
 
     const blockTexts = [content, description];
     const labelledTexts = [
@@ -23,7 +27,10 @@ export const searchCertifications = (certifications: Certification[], term: stri
       { content: name, label: "Name" },
     ];
 
-    const listTexts = [{ content: agencies, label: "Agency" }];
+    const listTexts = [
+      { content: agencyIDs, label: "Agency ID" },
+      { content: agencyNames, label: "Agency Names" },
+    ];
 
     match = findMatchInBlock(blockTexts, term, match);
     match = findMatchInLabelledText(labelledTexts, term, match);

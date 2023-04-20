@@ -9,17 +9,18 @@ id: dbe
 callToActionLink: https://www.state.nj.us/transportation/business/civilrights/dbe.shtm#policy
 callToActionText: Apply for My DBE Certification
 agency:
-  - NJDOT
+  - njdot
 applicableOwnershipTypes:
   - minority-owned
   - woman-owned
 isSbe: false
 ---
-A Disadvantaged Business Enterprise (DBE) certification may **provide an advantage for the New Jersey Department of Transportation's (NJDOT) contracts**. 
 
-*Learn more about [government contracts](https://business.nj.gov/pages/government-contracting).*
+A Disadvantaged Business Enterprise (DBE) certification may **provide an advantage for the New Jersey Department of Transportation's (NJDOT) contracts**.
 
-- - -
+_Learn more about [government contracts](https://business.nj.gov/pages/government-contracting)._
+
+---
 
 ### Eligibility Criteria
 
@@ -32,10 +33,10 @@ A DBE must meet all of the following:
 
 ### Application Needs
 
-* Preferences are given to those whose principal place of business is in New Jersey but will accept applications from out-of-state firms who are DBE certified in their home state
-* Requires submission of documents to support personal net worth (PNW) and DBE statutory cap
-* Applicant must participate in the on-site interview proceedings
+- Preferences are given to those whose principal place of business is in New Jersey but will accept applications from out-of-state firms who are DBE certified in their home state
+- Requires submission of documents to support personal net worth (PNW) and DBE statutory cap
+- Applicant must participate in the on-site interview proceedings
 
 > **After you complete this, you will have:**
 >
-> * A Disadvantaged Business Enterprise certificate
+> - A Disadvantaged Business Enterprise certificate

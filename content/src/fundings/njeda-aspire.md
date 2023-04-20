@@ -8,7 +8,7 @@ callToActionText: Learn More
 fundingType: tax credit
 programPurpose: Both
 agency:
-  - NJEDA
+  - njeda
 agencyContact: ""
 publishStageArchive: ""
 status: deadline

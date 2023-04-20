@@ -8,7 +8,7 @@ callToActionText: Learn more
 fundingType: grant
 programPurpose: Both
 agency:
-  - NJEDA
+  - njeda
 agencyContact: ""
 publishStageArchive: null
 status: first come, first serve

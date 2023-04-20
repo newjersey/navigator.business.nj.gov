@@ -8,7 +8,7 @@ callToActionText: Learn more
 fundingType: tax credit
 programPurpose: ""
 agency:
-  - NJDOL
+  - njdol
 agencyContact: ""
 publishStageArchive: ""
 status: rolling application

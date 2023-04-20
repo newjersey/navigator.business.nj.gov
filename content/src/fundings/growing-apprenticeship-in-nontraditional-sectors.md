@@ -8,7 +8,7 @@ callToActionText: Learn more
 fundingType: grant
 programPurpose: Both
 agency:
-  - NJDOL
+  - njdol
 agencyContact: james.manning@dol.nj.gov
 publishStageArchive: null
 status: deadline

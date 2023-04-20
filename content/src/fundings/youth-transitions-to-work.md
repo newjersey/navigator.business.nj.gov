@@ -7,7 +7,7 @@ callToActionLink: https://www.nj.gov/labor/research-info/grants.shtml
 callToActionText: Learn more
 fundingType: grant
 agency:
-  - NJDOL
+  - njdol
 agencyContact: james.manning@dol.nj.gov
 publishStageArchive: null
 status: deadline

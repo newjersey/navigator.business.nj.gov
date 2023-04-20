@@ -1,7 +1,10 @@
 import { getMergedConfig } from "@/contexts/configContext";
 import { ContextualInfo } from "@/contexts/contextualInfoContext";
 import {
+  BusinessPersona,
   BusinessUser,
+  emptyBusinessUser,
+  emptyProfileData,
   FieldsForErrorHandling,
   FormationMember,
   FormationSigner,
@@ -9,12 +12,11 @@ import {
   PaymentType,
   Preferences,
   ProfileData,
+  SectionType,
+  TaskProgress,
+  TaxFilingData,
   UserData,
 } from "@businessnjgovnavigator/shared/";
-import { emptyBusinessUser } from "@businessnjgovnavigator/shared/businessUser";
-import { BusinessPersona, emptyProfileData } from "@businessnjgovnavigator/shared/profileData";
-import { TaxFilingData } from "@businessnjgovnavigator/shared/taxFiling";
-import { SectionType, TaskProgress } from "@businessnjgovnavigator/shared/userData";
 
 // returns all keys in an object of a type
 // e.g. KeysOfType<Task, boolean> will give all keys in the Task that have boolean types
@@ -149,7 +151,7 @@ export type Funding = {
   contentMd: string;
   descriptionMd: string;
   fundingType: FundingType;
-  agency: OpportunityAgency[];
+  agency: string[] | null | undefined;
   publishStageArchive: FundingPublishStatus | null;
   openDate: string;
   dueDate: string;
@@ -175,7 +177,7 @@ export type Certification = {
   descriptionMd: string;
   callToActionLink: string | undefined;
   callToActionText: string | undefined;
-  agency: OpportunityAgency[] | null | undefined;
+  agency: string[] | null | undefined;
   applicableOwnershipTypes: string[] | null | undefined;
   isSbe: boolean;
 };
@@ -189,15 +191,6 @@ export interface Opportunity {
   dueDate?: string;
   status?: string;
 }
-
-export type OpportunityAgency =
-  | "NJEDA"
-  | "NJDOL"
-  | "NJDEP"
-  | "NJDOT"
-  | "NJ Department of Treasury"
-  | "NJ Board of Public Utilities"
-  | "New Jersey Business Action Center";
 
 export type FundingType =
   | "tax credit"
