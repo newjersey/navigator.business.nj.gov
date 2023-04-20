@@ -1,4 +1,4 @@
-import SectorsJSON from "../../content/src/dashboard/sectors.json";
+import SectorsJSON from "../../content/src/mappings/sectors.json";
 
 export interface SectorType {
   readonly id: string;

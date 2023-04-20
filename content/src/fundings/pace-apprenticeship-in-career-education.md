@@ -16,7 +16,7 @@ programFrequency: reoccuring
 status: deadline
 programPurpose: Both
 agency:
-  - NJDOL
+  - njdol
 agencyContact: james.manning@dol.nj.gov
 businessStage: both
 employeesRequired: yes

@@ -8,7 +8,7 @@ callToActionText: Learn more
 fundingType: grant
 programPurpose: In State
 agency:
-  - NJ Board of Public Utilities
+  - nj-public-utilities
 agencyContact: SSBStimulus@njcleanenergy.com
 publishStageArchive: ""
 status: first come, first serve

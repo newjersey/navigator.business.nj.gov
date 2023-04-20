@@ -17,7 +17,7 @@ programFrequency: reoccuring
 status: first come, first serve
 programPurpose: Both
 agency:
-  - NJDOT
+  - njdot
 agencyContact: Vicki.TilghmanAnsley@dot.nj.gov
 businessStage: both
 employeesRequired: n/a

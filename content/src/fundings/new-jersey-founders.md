@@ -8,7 +8,7 @@ callToActionText: ""
 fundingType: technical assistance
 programPurpose: In State
 agency:
-  - NJEDA
+  - njeda
 agencyContact: ""
 publishStageArchive: Do Not Publish
 status: rolling application

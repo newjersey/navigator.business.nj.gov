@@ -1,0 +1,32 @@
+{
+  "arrayOfFundingAgencies": [
+    {
+      "id": "njeda",
+      "name": "NJ Economic Development Authority"
+    },
+    {
+      "id": "njdol",
+      "name": "NJ Department of Labor"
+    },
+    {
+      "id": "njdot",
+      "name": "NJ Department of Transportation"
+    },
+    {
+      "id": "njdep",
+      "name": "NJ Department of Environmental Protection"
+    },
+    {
+      "id": "nj-treasury",
+      "name": "NJ Department of Treasury"
+    },
+    {
+      "id": "nj-public-utilities",
+      "name": "NJ Board of Public Utilities"
+    },
+    {
+      "id": "nj-bac",
+      "name": "NJ Business Action Center"
+    }
+  ]
+}

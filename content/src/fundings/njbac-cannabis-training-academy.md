@@ -18,7 +18,7 @@ programFrequency: ongoing
 status: opening soon
 programPurpose: In State
 agency:
-  - New Jersey Business Action Center
+  - nj-bac
 agencyContact: businessactioncenter@sos.nj.gov
 businessStage: both
 employeesRequired: n/a

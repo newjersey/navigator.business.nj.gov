@@ -1,4 +1,4 @@
-import OwnershipTypeJSON from "../../content/src/dashboard/ownershipTypes.json";
+import OwnershipTypeJSON from "../../content/src/mappings/ownershipTypes.json";
 export interface OwnershipType {
   id: string;
   name: string;
