@@ -1,4 +1,3 @@
-import { WithErrorBar } from "@/components/WithErrorBar";
 import { flipObject, templateEval } from "@/lib/utils/helpers";
 import { AcceptedFileType, InputFile } from "@businessnjgovnavigator/shared";
 import { ReactElement, useEffect, useLayoutEffect, useRef, useState } from "react";
