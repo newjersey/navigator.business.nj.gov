@@ -1,6 +1,6 @@
 import * as api from "@/lib/api-client/apiClient";
 import DeadUrlsPage from "@/pages/mgmt/deadurls";
-import { act, fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { Options } from "broken-link-checker";
 
 jest.mock("@/lib/api-client/apiClient", () => ({ post: jest.fn() }));
@@ -76,11 +76,11 @@ describe("DeadUrls page", () => {
     mockApi.post.mockRejectedValue({});
 
     fireEvent.change(screen.getByLabelText("Password"), { target: { value: "bad password" } });
-    // eslint-disable-next-line testing-library/no-unnecessary-act
-    await act(async () => {
-      fireEvent.click(screen.getByText("Submit"));
-    });
+    fireEvent.click(screen.getByText("Submit"));
 
+    await waitFor(() => {
+      return expect(screen.getByText("Authentication failed")).toBeInTheDocument();
+    });
     expect(screen.queryByText("http://www.deadlink.com")).not.toBeInTheDocument();
     expect(screen.getByLabelText("Password")).toBeInTheDocument();
   });
