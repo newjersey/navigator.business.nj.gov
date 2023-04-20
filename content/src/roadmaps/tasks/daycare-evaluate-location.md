@@ -1,6 +1,6 @@
 ---
-urlSlug: daycare-evaluate-location
-filename: daycare-evaluate-location
+urlSlug: daycare-location-evaluation
+filename: daycare-location-evaluation
 name: Evaluate Location for Your Daycare
 id: daycare-evaluate-location
 ---
