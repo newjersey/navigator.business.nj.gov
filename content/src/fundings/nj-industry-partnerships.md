@@ -7,7 +7,7 @@ callToActionLink: https://industrypartnerships.nj.gov/
 callToActionText: Learn more
 fundingType: hiring and employee training support
 agency:
-  - NJDOL
+  - njdol
 publishStageArchive: ""
 status: rolling application
 programFrequency: ongoing

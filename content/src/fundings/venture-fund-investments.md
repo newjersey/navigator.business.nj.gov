@@ -8,7 +8,7 @@ callToActionText: Learn more
 fundingType: loan
 programPurpose: Both
 agency:
-  - NJEDA
+  - njeda
 agencyContact: ""
 publishStageArchive: ""
 status: rolling application

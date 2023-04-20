@@ -9,7 +9,7 @@ callToActionText: Learn more
 fundingType: tax credit
 programPurpose: In State
 agency:
-  - NJEDA
+  - njeda
 agencyContact: ""
 publishStageArchive: ""
 status: deadline

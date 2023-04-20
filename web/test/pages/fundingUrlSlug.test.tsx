@@ -1,5 +1,6 @@
 import FundingPage from "@/pages/funding/[fundingUrlSlug]";
 import { generateFunding } from "@/test/factories";
+import { LookupFundingAgencyById } from "@businessnjgovnavigator/shared";
 import { render, screen } from "@testing-library/react";
 
 describe("funding page", () => {
@@ -20,20 +21,28 @@ describe("funding page", () => {
     expect(screen.getByText("Some content description")).toBeInTheDocument();
   });
 
-  it("shows the agency name if one exists", () => {
+  it("looks up and shows the agency name if one exists", () => {
     const funding = generateFunding({
-      name: "Some Funding Name",
-      callToActionText: "Click here",
-      contentMd: "Some content description",
-      dueDate: "07/01/2025",
-      status: "deadline",
-      agency: ["NJEDA"],
+      agency: ["njeda"],
     });
 
     render(<FundingPage funding={funding} />);
 
     expect(screen.getByTestId("funding-agency-header")).toBeInTheDocument();
-    expect(screen.getByText("NJEDA")).toBeInTheDocument();
+    const expectedText = LookupFundingAgencyById("njeda").name;
+    expect(screen.getByText(expectedText)).toBeInTheDocument();
+  });
+
+  it("comma-separates multiple agencies", () => {
+    const funding = generateFunding({
+      agency: ["njeda", "njdol"],
+    });
+
+    render(<FundingPage funding={funding} />);
+
+    const edaText = LookupFundingAgencyById("njeda").name;
+    const dolText = LookupFundingAgencyById("njdol").name;
+    expect(screen.getByText(`${edaText}, ${dolText}`)).toBeInTheDocument();
   });
 
   it("does not show the agency name header if one doesn't exist", () => {

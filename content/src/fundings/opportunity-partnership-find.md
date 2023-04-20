@@ -8,7 +8,7 @@ callToActionText: Learn more
 fundingType: grant
 programPurpose: In State
 agency:
-  - NJDOL
+  - njdol
 agencyContact: ""
 publishStageArchive: Do Not Publish
 status: opening soon

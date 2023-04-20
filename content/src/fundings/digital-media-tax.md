@@ -8,7 +8,7 @@ callToActionText: Learn more
 fundingType: tax credit
 programPurpose: Both
 agency:
-  - NJEDA
+  - njeda
 agencyContact: ""
 publishStageArchive: ""
 status: first come, first serve

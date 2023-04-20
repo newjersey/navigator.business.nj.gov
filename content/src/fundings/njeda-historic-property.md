@@ -17,7 +17,7 @@ programFrequency: ongoing
 status: opening soon
 programPurpose: In State
 agency:
-  - NJEDA
+  - njeda
 agencyContact: ""
 businessStage: both
 employeesRequired: n/a

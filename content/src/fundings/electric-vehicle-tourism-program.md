@@ -8,7 +8,7 @@ callToActionText: Learn more
 fundingType: grant
 programPurpose: In State
 agency:
-  - NJ Board of Public Utilities
+  - nj-public-utilities
 agencyContact: EV.Programs@bpu.nj.gov
 publishStageArchive: ""
 status: deadline

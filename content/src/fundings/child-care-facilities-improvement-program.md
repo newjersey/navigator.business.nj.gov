@@ -19,7 +19,7 @@ programFrequency: pilot
 status: rolling application
 programPurpose: Out of State
 agency:
-  - NJEDA
+  - njeda
 agencyContact: ahimmel@njeda.com
 businessStage: both
 employeesRequired: n/a

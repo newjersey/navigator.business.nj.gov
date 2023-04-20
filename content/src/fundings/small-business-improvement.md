@@ -15,7 +15,7 @@ programFrequency: ongoing
 status: first come, first serve
 programPurpose: In State
 agency:
-  - NJEDA
+  - njeda
 agencyContact: ""
 businessStage: operating
 employeesRequired: n/a

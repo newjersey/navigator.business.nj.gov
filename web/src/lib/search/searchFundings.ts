@@ -1,6 +1,7 @@
 import { findMatchInBlock, findMatchInLabelledText, findMatchInListText } from "@/lib/search/helpers";
 import { Match } from "@/lib/search/typesForSearch";
 import { Funding } from "@/lib/types/types";
+import { LookupFundingAgencyById } from "@businessnjgovnavigator/shared/fundingAgency";
 
 export const searchFundings = (fundings: Funding[], term: string): Match[] => {
   const matches: Match[] = [];
@@ -15,7 +16,10 @@ export const searchFundings = (fundings: Funding[], term: string): Match[] => {
     const name = funding.name.toLowerCase();
     const description = funding.descriptionMd.toLowerCase();
     const cta = funding.callToActionText?.toLowerCase();
-    const agencies = funding.agency ? funding.agency.map((it) => it.toLowerCase()) : [];
+    const agencyIDs = funding.agency ? funding.agency.map((it) => it.toLowerCase()) : [];
+    const agencyNames = funding.agency
+      ? funding.agency.map((it) => LookupFundingAgencyById(it).name.toLowerCase())
+      : [];
     const fundingType = funding.fundingType.toLowerCase();
     const status = funding.status.toLowerCase();
     const frequency = funding.programFrequency.toLowerCase();
@@ -39,7 +43,8 @@ export const searchFundings = (fundings: Funding[], term: string): Match[] => {
     ];
 
     const listTexts = [
-      { content: agencies, label: "Agency" },
+      { content: agencyIDs, label: "Agency ID" },
+      { content: agencyNames, label: "Agency Names" },
       { content: certs, label: "Certification" },
       { content: counties, label: "County" },
       { content: sectors, label: "Sector" },

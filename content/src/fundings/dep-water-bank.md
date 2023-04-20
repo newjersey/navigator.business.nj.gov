@@ -8,7 +8,7 @@ callToActionText: Learn More
 fundingType: loan
 programPurpose: Both
 agency:
-  - NJDEP
+  - njdep
 agencyContact: ""
 publishStageArchive: ""
 status: rolling application

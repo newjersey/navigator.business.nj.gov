@@ -10,6 +10,7 @@ import { FundingUrlSlugParam, loadAllFundingUrlSlugs, loadFundingByUrlSlug } fro
 import { Funding } from "@/lib/types/types";
 import { templateEval } from "@/lib/utils/helpers";
 import Config from "@businessnjgovnavigator/content/fieldConfig/config.json";
+import { LookupFundingAgencyById } from "@businessnjgovnavigator/shared/fundingAgency";
 import { useMediaQuery } from "@mui/material";
 import { GetStaticPathsResult, GetStaticPropsResult } from "next";
 import { NextSeo } from "next-seo";
@@ -63,7 +64,12 @@ export const FundingElement = (props: { funding: Funding }): ReactElement => {
                 className="h5-styling"
                 data-testid="funding-agency-header"
               >{`${Config.fundingDefaults.issuingAgencyText}: `}</span>
-              <span className="h6-styling">{props.funding.agency.toString()}</span>
+              <span className="h6-styling">
+                {props.funding.agency
+                  .map(LookupFundingAgencyById)
+                  .map((it) => it.name)
+                  .join(", ")}
+              </span>
             </div>
           </>
         ) : null}

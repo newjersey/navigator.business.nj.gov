@@ -8,7 +8,7 @@ callToActionText: Learn more
 fundingType: loan
 programPurpose: In State
 agency:
-  - NJEDA
+  - njeda
 agencyContact: nmarshall@njeda.com
 publishStageArchive: ""
 status: first come, first serve

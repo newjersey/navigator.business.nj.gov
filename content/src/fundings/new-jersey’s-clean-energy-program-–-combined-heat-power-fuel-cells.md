@@ -18,7 +18,7 @@ programFrequency: ongoing
 status: rolling application
 programPurpose: In State
 agency:
-  - NJ Board of Public Utilities
+  - nj-public-utilities
 agencyContact: CHP@NJCleanEnergy.com
 businessStage: both
 employeesRequired: n/a

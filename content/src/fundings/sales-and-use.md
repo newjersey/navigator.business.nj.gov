@@ -8,7 +8,7 @@ callToActionText: Learn more
 fundingType: tax exemption
 programPurpose: In State
 agency:
-  - NJEDA
+  - njeda
 agencyContact: ""
 publishStageArchive: ""
 status: rolling application
