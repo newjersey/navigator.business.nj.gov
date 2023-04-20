@@ -183,6 +183,10 @@ ol {
   width: 11rem;
 }
 
+.width-15rem {
+  width: 15rem;
+}
+
 .minh-30 {
   min-height: 30rem;
 }
@@ -197,6 +201,10 @@ ol {
 
 .minw-30 {
   min-width: 30rem;
+}
+
+.max-width-38rem {
+  max-width: 38rem;
 }
 
 .usa-alert__text a,
@@ -394,8 +402,4 @@ ol {
 
 .no-wrap {
   white-space: nowrap;
-}
-
-.max-width-38rem {
-  max-width: 38rem;
 }

@@ -53,24 +53,53 @@
       "incompleteStepsError": "Check the steps below for missing information or errors:",
       "apiResubmitText": "After you make the correction, resubmit the form."
     },
-    "fields": {
-      "paymentType": {
-        "paymentCosts": {
-          "creditCardInitial": "3.5",
-          "creditCardExtra": "2",
-          "ach": "3.50"
-        },
-        "costSubtotalLabel": "Subtotal",
-        "reviewStepsServicesSelected": "Services Selected",
-        "error": "Select a payment method.",
-        "serviceColumnLabel": "Services",
-        "creditCardLabel": "Pay with Credit Card",
-        "achLabel": "Pay with E-Check",
-        "reviewStepServicesHeader": "Services",
-        "costColumnLabel": "Cost",
-        "label": "Payment Type",
-        "costTotalLabel": "Total"
+    "addressModal": {
+      "name": {
+        "label": "Full Name",
+        "error": "Enter a name."
       },
+      "addressLine1": {
+        "label": "Address Line 1",
+        "error": "Enter your street name and number."
+      },
+      "addressLine2": {
+        "label": "Address Line 2"
+      },
+      "addressCity": {
+        "label": "City",
+        "error": "Enter a city."
+      },
+      "addressState": {
+        "label": "State",
+        "error": "Enter a state."
+      },
+      "addressZipCode": {
+        "label": "Zip Code",
+        "error": "Enter a Zip Code."
+      }
+    },
+    "partnershipRights": {
+      "label": "Partnership Rights",
+      "description": "List the applicable terms",
+      "radioNoText": "No, they do not have the right",
+      "radioYesText": "Yes, they have the right",
+      "reviewStepTermsLabel": "Applicable Terms:"
+    },
+    "legalStructure": {
+      "limited-liability-company": "LLC",
+      "limited-partnership": "LP",
+      "limited-liability-partnership": "LLP",
+      "c-corporation": "Domestic Corporation",
+      "s-corporation": "Domestic Corporation",
+      "foreignPrefaceText": "Foreign",
+      "label": "Business Structure",
+      "contextualInfo": "business-structure-learn-more",
+      "warningModalCancelButton": "Cancel",
+      "warningModalContinueButton": "Continue",
+      "warningModalHeader": "You Might Need a Different Form",
+      "warningModalBody": "If you change your proposed business structure in the Navigator profile, you might need to complete a different form. Don't worry, once you update your profile we'll tell you which form you need and where to complete it."
+    },
+    "fields": {
       "officialFormationDocument": {
         "label": "Official Formation Document",
         "labelContextualInfo": "certificate-formation",
@@ -111,34 +140,6 @@
         "modalSaveButton": "Add Director",
         "description": "List each `Board of Directors’|board-directors` name and address. You need at least 1 and can have up to 10 Directors listed.\n\nBoard of Directors’ names are listed on the Certificate of Formation and will have the ability to file and sign documents."
       },
-      "signers": {
-        "addButtonText": "Add New Signer",
-        "signColumnLabel": "Sign*",
-        "errorInlineFirstSignerName": "Enter a signer.",
-        "overrides": {
-          "limited-liability-partnership": {
-            "description": "Authorized Partner(s) should sign below by adding their full name. You can have up to 10 signers listed."
-          },
-          "foreign-limited-liability-company": {
-            "description": "`Authorized representative(s)|authorized-representative` or `general partner(s)|general-partner` should sign below by adding their full name. You can have up to 10 signers listed."
-          }
-        },
-        "aidText": "By checking this box I confirm that I'm an authorized signer.",
-        "nameLabel": "Signer Full Name",
-        "errorBannerSignerName": "One or more Signer fields are empty.",
-        "errorInlineSignerTitle": "Select a title.",
-        "reviewStepHeader": "Signatures",
-        "placeholder": "No Signers have been added",
-        "label": "Signers",
-        "errorBannerCheckbox": "Sign by clicking the checkbox(s) below.",
-        "deleteTextMobile": "Delete Signer",
-        "errorBannerSignerTitle": "Select the signer titles below.",
-        "errorBannerMinimum": "Enter at least 1 signer's name.",
-        "tableHeader": "Name,Address,Sign*,Actions",
-        "titleLabel": "Title",
-        "description": "Authorized Representative(s) should sign below by adding their full name. You can have up to 10 signers listed.",
-        "errorInlineAdditionalSignerName": "Enter the first and last name of each signer."
-      },
       "addressLine1": {
         "label": "Address Line 1",
         "error": "Enter your business' street name and number."
@@ -156,21 +157,6 @@
       "agentOfficeAddressLine1": {
         "label": "Office Address Line 1",
         "error": "Enter the agent's office street name and number."
-      },
-      "incorporators": {
-        "addButtonText": "Add Signer",
-        "overrides": {
-          "limited-partnership": {
-            "description": "List each General Partners' name and address. You can have up to 10 General Partners listed.\n\nGeneral Partners are listed on the Certificate of Formation and will have the ability to file and sign documents."
-          }
-        },
-        "successSnackbarBody": "A signer has been added successfully.",
-        "modalTitle": "Add New Signer",
-        "reviewStepHeader": "Signer(s)",
-        "placeholder": "No Signers have been added",
-        "label": "Signers",
-        "successSnackbarHeader": "Signer Added",
-        "description": "List each `Incorporators'|incorporator` name and address. You can have up to 10 Incorporators listed.\n\nIncorporators are listed on the Certificate of Formation and will have the ability to file and sign documents."
       },
       "businessName": {
         "alertRestrictedWord": "\"${name}\" contains the restricted word \"${word}\" that cannot be used in the Business Name for online filing. If you would like to use this restricted word, please contact us with your preferred name at [treasury.](https://www.state.nj.us/treasury/revenue/revgencode.shtml)",
@@ -238,12 +224,6 @@
       "makeDistributionTerms": {
         "label": "Partnership Rights - Make distribution terms"
       },
-      "willPracticeLaw": {
-        "label": "Will you practice law?",
-        "radioNoText": "No",
-        "radioYesText": "Yes",
-        "error": "Select 'Yes' or 'No'."
-      },
       "contactPhoneNumber": {
         "label": "Phone Number",
         "labelSecondaryText": "(xxx) xxx-xxxx",
@@ -261,19 +241,6 @@
       "combinedInvestment": {
         "label": "Combined Investment",
         "body": "List the funds and the value of properties and services each of the partners have agreed to contribute."
-      },
-      "members": {
-        "addButtonText": "Add New Member",
-        "addressCheckboxText": "Use business address.",
-        "expandText": "Expand",
-        "successSnackbarBody": "A member has been added successfully.",
-        "modalTitle": "Add New Member",
-        "subheader": "(Complete this section if you are a multi-member LLC)",
-        "placeholder": "No members have been added",
-        "label": "Members",
-        "successSnackbarHeader": "Member Added",
-        "modalSaveButton": "Add Member",
-        "description": "List each LLC's members' name and address. You may list up to 10 members. Members can be individuals or entities and are the owners of the LLC. Members do not own the LLC's property. They may or may not manage the business and affairs."
       },
       "certifiedCopyOfFormationDocument": {
         "cost": "25",
@@ -351,12 +318,89 @@
         "label": "State",
         "error": "Enter a state."
       },
+      "incorporators": {
+        "label": "Signers",
+        "successSnackbarHeader": "Signer Added",
+        "successSnackbarBody": "A signer has been added successfully.",
+        "addButtonText": "Add Signer",
+        "modalTitle": "Add New Signer",
+        "placeholder": "No Signers have been added",
+        "description": "List each `Incorporators'|incorporator` name and address. You can have up to 10 Incorporators listed.\n\nIncorporators are listed on the Certificate of Formation and will have the ability to file and sign documents.",
+        "overrides": {
+          "limited-partnership": {
+            "description": "List each General Partners' name and address. You can have up to 10 General Partners listed.\n\nGeneral Partners are listed on the Certificate of Formation and will have the ability to file and sign documents."
+          }
+        }
+      },
+      "members": {
+        "label": "Members",
+        "subheader": "(Complete this section if you are a multi-member LLC)",
+        "description": "List each LLC's members' name and address. You may list up to 10 members. Members can be individuals or entities and are the owners of the LLC. Members do not own the LLC's property. They may or may not manage the business and affairs.",
+        "expandText": "Expand",
+        "modalTitle": "Add New Member",
+        "successSnackbarHeader": "Member Added",
+        "successSnackbarBody": "A member has been added successfully.",
+        "addButtonText": "Add New Member",
+        "modalSaveButton": "Add Member",
+        "addressCheckboxText": "Use business address.",
+        "placeholder": "No members have been added"
+      },
+      "paymentType": {
+        "label": "Payment Type",
+        "error": "Select a payment method.",
+        "achLabel": "Pay with E-Check",
+        "reviewStepServicesHeader": "Services and Payment",
+        "reviewStepsServicesSelected": "Services Selected",
+        "creditCardLabel": "Pay with Credit Card",
+        "costColumnLabel": "Cost",
+        "serviceColumnLabel": "Services",
+        "costSubtotalLabel": "Subtotal",
+        "costTotalLabel": "Total",
+        "paymentCosts": {
+          "creditCardInitial": "3.5",
+          "creditCardExtra": "2",
+          "ach": "3.50"
+        }
+      },
       "provisions": {
         "label": "Additional Provisions/Articles",
         "secondaryLabel": "Provision/Article",
         "body": "Outline your company's functional and financial decisions to help run the internal operations of the business. Provisions help you prevent personal legal liabilities and clarify members' rights and duties to the company to prevent misunderstandings. You can list up to 10 provisions.\n\nCorporations may include a `class of shares|shares-class` structure and details on the rights of the Board of Directors to determine the different classes.",
         "addButtonText": "Add Provisions/Articles",
         "addAnotherButtonText": "Add a Provision"
+      },
+      "signers": {
+        "label": "Signers",
+        "errorBannerSignerTitle": "Select the signer titles below.",
+        "errorBannerMinimum": "Enter at least 1 signer's name.",
+        "errorBannerSignerName": "One or more Signer fields are empty.",
+        "errorBannerCheckbox": "Sign by clicking the checkbox(s) below.",
+        "errorInlineAdditionalSignerName": "Enter the first and last name of each signer.",
+        "errorInlineSignerTitle": "Select a title.",
+        "errorInlineFirstSignerName": "Enter a signer.",
+        "titleLabel": "Title",
+        "tableHeader": "Name,Address,Sign*,Actions",
+        "signColumnLabel": "Sign*",
+        "nameLabel": "Signer Full Name",
+        "addButtonText": "Add New Signer",
+        "aidText": "By checking this box I confirm that I'm an authorized signer.",
+        "deleteTextMobile": "Delete Signer",
+        "description": "Authorized Representative(s) should sign below by adding their full name. You can have up to 10 signers listed.",
+        "placeholder": "No Signers have been added",
+        "overrides": {
+          "limited-liability-partnership": {
+            "description": "Authorized Partner(s) should sign below by adding their full name. You can have up to 10 signers listed."
+          },
+          "foreign-limited-liability-company": {
+            "description": "`Authorized representative(s)|authorized-representative` or `general partner(s)|general-partner` should sign below by adding their full name. You can have up to 10 signers listed."
+          }
+        }
+      },
+      "willPracticeLaw": {
+        "label": "Will you practice law?",
+        "radioNoText": "No",
+        "radioYesText": "Yes",
+        "error": "Select 'Yes' or 'No'."
       },
       "withdrawals": {
         "label": "Withdrawals",
@@ -366,52 +410,6 @@
         "label": "City",
         "error": "Enter a city."
       }
-    },
-    "addressModal": {
-      "name": {
-        "label": "Full Name",
-        "error": "Enter a name."
-      },
-      "addressLine1": {
-        "label": "Address Line 1",
-        "error": "Enter your street name and number."
-      },
-      "addressLine2": {
-        "label": "Address Line 2"
-      },
-      "addressCity": {
-        "label": "City",
-        "error": "Enter a city."
-      },
-      "addressState": {
-        "label": "State",
-        "error": "Enter a state."
-      },
-      "addressZipCode": {
-        "label": "Zip Code",
-        "error": "Enter a Zip Code."
-      }
-    },
-    "legalStructure": {
-      "warningModalContinueButton": "Continue",
-      "limited-liability-company": "LLC",
-      "s-corporation": "Domestic Corporation",
-      "label": "Business Structure",
-      "contextualInfo": "business-structure-learn-more",
-      "limited-liability-partnership": "LLP",
-      "limited-partnership": "LP",
-      "warningModalBody": "If you change your proposed business structure in the Navigator profile, you might need to complete a different form. Don't worry, once you update your profile we'll tell you which form you need and where to complete it.",
-      "foreignPrefaceText": "Foreign",
-      "warningModalCancelButton": "Cancel",
-      "c-corporation": "Domestic Corporation",
-      "warningModalHeader": "You Might Need a Different Form"
-    },
-    "partnershipRights": {
-      "label": "Partnership Rights",
-      "description": "List the applicable terms",
-      "radioNoText": "No, they do not have the right",
-      "radioYesText": "Yes, they have the right",
-      "reviewStepTermsLabel": "Applicable Terms:"
     }
   }
 }

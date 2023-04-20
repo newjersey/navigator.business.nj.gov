@@ -2,7 +2,6 @@ import { ReviewLineItem } from "@/components/tasks/business-formation/review/sec
 import { ReviewSubSection } from "@/components/tasks/business-formation/review/section/ReviewSubSection";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
-import { getStringifiedAddress } from "@/lib/utils/formatters";
 import { corpLegalStructures } from "@businessnjgovnavigator/shared";
 import { ReactElement, useContext } from "react";
 
@@ -15,7 +14,7 @@ export const ReviewSignatures = (): ReactElement => {
   const getConfig = (): { header: string; label: string } => {
     const field = isCorp ? "incorporators" : "signers";
     return {
-      header: Config.formation.fields[field].reviewStepHeader,
+      header: Config.formation.fields[field].label,
       label: Config.formation.sections.review.nameLabel,
     };
   };
@@ -25,7 +24,11 @@ export const ReviewSignatures = (): ReactElement => {
       {state.formationFormData.signers?.length === 0 && <i>{Config.formation.general.notEntered}</i>}
       {state.formationFormData.signers?.map((signer, index) => {
         return (
-          <div key={`${signer}-${index}`} className={index === 0 ? "" : "margin-top-2"}>
+          <div
+            data-testid="review-signers"
+            key={`${signer}-${index}`}
+            className={index === 0 ? "" : "margin-top-2"}
+          >
             <ReviewLineItem
               label={getConfig().label}
               value={signer.name ?? italicNotEnteredText}
@@ -45,14 +48,31 @@ export const ReviewSignatures = (): ReactElement => {
         return (
           <div key={`${signer}-${index}`} className={index === 0 ? "" : "margin-top-2"}>
             <ReviewLineItem
-              label={Config.formation.sections.review.addressLabel}
-              value={getStringifiedAddress({
-                addressLine1: signer.addressLine1,
-                city: signer.addressCity ?? "",
-                state: signer.addressState?.name ?? "",
-                zipcode: signer.addressZipCode,
-                addressLine2: signer.addressLine2,
-              })}
+              label={getConfig().label}
+              value={signer.name ?? italicNotEnteredText}
+              marginOverride={index === 0 ? "margin-top-0" : "margin-top-2"}
+            />
+            <ReviewLineItem
+              label={Config.formation.addressModal.addressLine1.label}
+              value={signer.addressLine1 || italicNotEnteredText}
+            />
+            {signer.addressLine2 && (
+              <ReviewLineItem
+                label={Config.formation.addressModal.addressLine2.label}
+                value={signer.addressLine2 || italicNotEnteredText}
+              />
+            )}
+            <ReviewLineItem
+              label={Config.formation.addressModal.addressCity.label}
+              value={signer.addressCity || italicNotEnteredText}
+            />
+            <ReviewLineItem
+              label={Config.formation.addressModal.addressState.label}
+              value={signer.addressState?.name ?? italicNotEnteredText}
+            />
+            <ReviewLineItem
+              label={Config.formation.addressModal.addressZipCode.label}
+              value={signer.addressZipCode || italicNotEnteredText}
             />
           </div>
         );

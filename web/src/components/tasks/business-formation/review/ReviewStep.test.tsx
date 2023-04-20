@@ -162,68 +162,6 @@ describe("Formation - ReviewStep", () => {
     expect(screen.queryByTestId("members-step")).not.toBeInTheDocument();
   });
 
-  it("does not include country in address when non-intl", async () => {
-    await renderStep({ businessPersona: "FOREIGN" }, { addressCountry: "US", businessLocationType: "US" });
-    expect(
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      screen.queryByText(arrayOfCountriesObjects.find((cu) => cu.shortCode === "US")!.name, { exact: false })
-    ).not.toBeInTheDocument();
-  });
-
-  it("include country in address when intl", async () => {
-    await renderStep({ businessPersona: "FOREIGN" }, { addressCountry: "US", businessLocationType: "INTL" });
-    expect(
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      screen.getByText(arrayOfCountriesObjects.find((cu) => cu.shortCode === "US")!.name, { exact: false })
-    ).toBeInTheDocument();
-  });
-
-  it("displays state name in address when non-intl", async () => {
-    await renderStep(
-      { businessPersona: "FOREIGN" },
-      {
-        addressState: { name: "Alabama", shortCode: "AL" },
-        businessLocationType: "US",
-        foreignStateOfFormation: "Alaska",
-      }
-    );
-    expect(screen.getByText("Alabama", { exact: false })).toBeInTheDocument();
-  });
-
-  it("displays province name in address when intl", async () => {
-    await renderStep(
-      { businessPersona: "FOREIGN" },
-      { addressProvince: "Random place whatever", businessLocationType: "INTL" }
-    );
-    expect(screen.getByText("Random place whatever", { exact: false })).toBeInTheDocument();
-  });
-
-  it("displays city name in address when non-nj", async () => {
-    await renderStep(
-      { businessPersona: "FOREIGN" },
-      {
-        addressCity: "Roflcopterville",
-        businessLocationType: randomInt() % 2 ? "INTL" : "US",
-      }
-    );
-    expect(screen.getByText("Roflcopterville", { exact: false })).toBeInTheDocument();
-  });
-
-  it("displays Municipality name in address when NJ", async () => {
-    await renderStep(
-      {
-        businessPersona: "STARTING",
-        municipality: generateMunicipality({
-          displayName: "Some city",
-        }),
-      },
-      {
-        businessLocationType: "NJ",
-      }
-    );
-    expect(screen.getByText("Some city", { exact: false })).toBeInTheDocument();
-  });
-
   it("displays provisions on review step", async () => {
     await renderStep({}, { provisions: ["provision1", "provision2"] });
     expect(screen.getByTestId("provisions")).toBeInTheDocument();
@@ -244,17 +182,13 @@ describe("Formation - ReviewStep", () => {
     expect(
       screen.getByText(markdownToText(Config.formation.fields.directors.reviewStepHeader))
     ).toBeInTheDocument();
-    expect(
-      screen.getByText(markdownToText(Config.formation.fields.incorporators.reviewStepHeader))
-    ).toBeInTheDocument();
+    expect(screen.getByText(markdownToText(Config.formation.fields.incorporators.label))).toBeInTheDocument();
   });
 
   it("displays different titles when legalStructure is an llc", async () => {
     await renderStep({ legalStructureId: "limited-liability-company" }, {});
     expect(screen.getByText(markdownToText(Config.formation.fields.members.label))).toBeInTheDocument();
-    expect(
-      screen.getByText(markdownToText(Config.formation.fields.signers.reviewStepHeader))
-    ).toBeInTheDocument();
+    expect(screen.getByText(markdownToText(Config.formation.fields.signers.label))).toBeInTheDocument();
   });
 
   it("does not displays signer titles when domestic", async () => {
@@ -273,6 +207,96 @@ describe("Formation - ReviewStep", () => {
     );
     expect(screen.getByText(`${Config.formation.fields.signers.titleLabel}:`)).toBeInTheDocument();
     expect(screen.getByText("Authorized Partner", { exact: false })).toBeInTheDocument();
+  });
+
+  it("displays signer name when it exists in userData", async () => {
+    await renderStep(
+      { businessPersona: "STARTING", legalStructureId: "limited-liability-company" },
+      { signers: [generateFormationSigner({ name: "The Dude", title: "Authorized Partner" })] }
+    );
+    const reviewSignersSection = within(screen.getByTestId("review-signers"));
+    expect(
+      reviewSignersSection.getByText(`${Config.formation.addressModal.name.label}:`)
+    ).toBeInTheDocument();
+  });
+
+  describe("address", () => {
+    it("displays the address line 2 field if in userData", async () => {
+      await renderStep({ businessPersona: "STARTING" }, { addressLine2: "some-address-2" });
+      expect(screen.getByTestId("business-address-line-two")).toBeInTheDocument();
+    });
+
+    it("does not display the address line 2 field if not in userData", async () => {
+      await renderStep({ businessPersona: "STARTING" }, { addressLine2: undefined });
+      expect(screen.queryByTestId("business-address-line-two")).not.toBeInTheDocument();
+    });
+
+    it("does not include country in address when non-intl", async () => {
+      await renderStep({ businessPersona: "FOREIGN" }, { addressCountry: "US", businessLocationType: "US" });
+      expect(
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        screen.queryByText(arrayOfCountriesObjects.find((cu) => cu.shortCode === "US")!.name, {
+          exact: false,
+        })
+      ).not.toBeInTheDocument();
+    });
+
+    it("include country in address when intl", async () => {
+      await renderStep(
+        { businessPersona: "FOREIGN" },
+        { addressCountry: "US", businessLocationType: "INTL" }
+      );
+      expect(
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        screen.getByText(arrayOfCountriesObjects.find((cu) => cu.shortCode === "US")!.name, { exact: false })
+      ).toBeInTheDocument();
+    });
+
+    it("displays state name in address when non-intl", async () => {
+      await renderStep(
+        { businessPersona: "FOREIGN" },
+        {
+          addressState: { name: "Alabama", shortCode: "AL" },
+          businessLocationType: "US",
+          foreignStateOfFormation: "Alaska",
+        }
+      );
+      expect(screen.getByText("Alabama", { exact: false })).toBeInTheDocument();
+    });
+
+    it("displays province name in address when intl", async () => {
+      await renderStep(
+        { businessPersona: "FOREIGN" },
+        { addressProvince: "Random place whatever", businessLocationType: "INTL" }
+      );
+      expect(screen.getByText("Random place whatever", { exact: false })).toBeInTheDocument();
+    });
+
+    it("displays city name in address when non-nj", async () => {
+      await renderStep(
+        { businessPersona: "FOREIGN" },
+        {
+          addressCity: "Roflcopterville",
+          businessLocationType: randomInt() % 2 ? "INTL" : "US",
+        }
+      );
+      expect(screen.getByText("Roflcopterville", { exact: false })).toBeInTheDocument();
+    });
+
+    it("displays Municipality name in address when NJ", async () => {
+      await renderStep(
+        {
+          businessPersona: "STARTING",
+          municipality: generateMunicipality({
+            displayName: "Some city",
+          }),
+        },
+        {
+          businessLocationType: "NJ",
+        }
+      );
+      expect(screen.getByText("Some city", { exact: false })).toBeInTheDocument();
+    });
   });
 
   describe("when lp", () => {
