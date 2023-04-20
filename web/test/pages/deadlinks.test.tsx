@@ -1,6 +1,6 @@
 import * as api from "@/lib/api-client/apiClient";
 import DeadLinksPage from "@/pages/mgmt/deadlinks";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import { Options } from "broken-link-checker";
 
 jest.mock("@/lib/api-client/apiClient", () => ({ post: jest.fn() }));
@@ -56,7 +56,7 @@ describe("Deadlinks page", () => {
     expect(screen.queryByLabelText("Password")).not.toBeInTheDocument();
   });
 
-  it("hides content when password is unsuccessful", () => {
+  it("hides content when password is unsuccessful", async () => {
     render(<DeadLinksPage deadTasks={["task1"]} deadContextualInfo={["info1"]} noAuth={true} />);
     expect(screen.queryByText("task1")).not.toBeInTheDocument();
     expect(screen.queryByText("info1")).not.toBeInTheDocument();
@@ -64,7 +64,11 @@ describe("Deadlinks page", () => {
     mockApi.post.mockRejectedValue({});
 
     fireEvent.change(screen.getByLabelText("Password"), { target: { value: "bad password" } });
-    fireEvent.click(screen.getByText("Submit"));
+
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    await act(async () => {
+      fireEvent.click(screen.getByText("Submit"));
+    });
 
     expect(screen.queryByText("task1")).not.toBeInTheDocument();
     expect(screen.queryByText("info1")).not.toBeInTheDocument();
