@@ -23,6 +23,7 @@ import {
   PublicFilingLegalType,
   randomPublicFilingLegalType,
 } from "@businessnjgovnavigator/shared";
+import { publicFilingLegalTypes } from "@businessnjgovnavigator/shared/formationData";
 import * as materialUi from "@mui/material";
 import { fireEvent, screen, within } from "@testing-library/react";
 
@@ -393,6 +394,60 @@ describe("Formation - BusinessStep", () => {
       page.fillText("Foreign state of formation", "test");
       expect(screen.getByText(Config.formation.fields.foreignStateOfFormation.error)).toBeInTheDocument();
     });
+  });
+
+  describe("Foreign Certificate of Good Standing", () => {
+    for (const legalStructureId of ["c-corporation", "s-corporation"]) {
+      it(`should render for foreign${legalStructureId}`, async () => {
+        await getPageHelper({ businessPersona: "FOREIGN", legalStructureId }, {});
+        expect(screen.getByTestId("foreign-certificate-of-good-standing-header")).toBeInTheDocument();
+      });
+    }
+
+    for (const legalStructureId of [
+      "limited-liability-partnership",
+      "limited-liability-company",
+      "limited-partnership",
+    ]) {
+      it(`should not render for foreign${legalStructureId}`, async () => {
+        await getPageHelper({ businessPersona: "FOREIGN", legalStructureId }, {});
+        expect(screen.queryByTestId("foreign-certificate-of-good-standing-header")).not.toBeInTheDocument();
+      });
+    }
+
+    for (const legalStructureId of publicFilingLegalTypes) {
+      it(`should not render for ${legalStructureId}`, async () => {
+        await getPageHelper({ businessPersona: "OWNING", legalStructureId }, {});
+        expect(screen.queryByTestId("foreign-certificate-of-good-standing-header")).not.toBeInTheDocument();
+      });
+    }
+  });
+
+  describe("Will Practice Law", () => {
+    for (const legalStructureId of ["c-corporation", "s-corporation"]) {
+      it(`should render for foreign${legalStructureId}`, async () => {
+        await getPageHelper({ businessPersona: "FOREIGN", legalStructureId }, {});
+        expect(screen.getByTestId("will-practice-law-label")).toBeInTheDocument();
+      });
+    }
+
+    for (const legalStructureId of [
+      "limited-liability-partnership",
+      "limited-liability-company",
+      "limited-partnership",
+    ]) {
+      it(`should not render for foreign${legalStructureId}`, async () => {
+        await getPageHelper({ businessPersona: "FOREIGN", legalStructureId }, {});
+        expect(screen.queryByTestId("will-practice-law-label")).not.toBeInTheDocument();
+      });
+    }
+
+    for (const legalStructureId of publicFilingLegalTypes) {
+      it(`should not render for ${legalStructureId}`, async () => {
+        await getPageHelper({ businessPersona: "OWNING", legalStructureId }, {});
+        expect(screen.queryByTestId("will-practice-law-label")).not.toBeInTheDocument();
+      });
+    }
   });
 
   describe("Business location type radio buttons", () => {

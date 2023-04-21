@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { getCurrentDate, getCurrentDateISOString, parseDate, parseDateWithFormat } from "@shared/dateHelpers";
-import { formationApiDateFormat } from "@shared/formationData";
+import { formationApiDateFormat, FormationLegalType } from "@shared/formationData";
 import {
   generateFormationFormData,
   generateFormationIncorporator,
@@ -681,81 +681,79 @@ describe("ApiFormationClient", () => {
           mockAxios.post.mockResolvedValue({ data: stubResponse });
         });
 
-        it("is undefined if not provided", async () => {
-          const legalStructureId = "c-corporation";
-          const formationFormData = generateFormationFormData(
-            {},
-            { legalStructureId: `foreign-${legalStructureId}` }
-          );
+        for (const legalStructureId of ["c-corporation", "s-corporation"]) {
+          it("is undefined if not provided", async () => {
+            const formationFormData = generateFormationFormData(
+              {},
+              { legalStructureId: `foreign-${legalStructureId}` as FormationLegalType }
+            );
 
-          const userData = generateFormationUserData(
-            { legalStructureId, businessPersona: "FOREIGN" },
-            {},
-            formationFormData
-          );
+            const userData = generateFormationUserData(
+              { legalStructureId, businessPersona: "FOREIGN" },
+              {},
+              formationFormData
+            );
 
-          await client.form(userData, "hostname.com/form-business");
+            await client.form(userData, "hostname.com/form-business");
 
-          const payload = mockAxios.post.mock.calls[0][1] as ApiSubmission;
-          expect(payload.Formation.BusinessInformation.PracticesLaw).toBe(undefined);
-        });
+            const payload = mockAxios.post.mock.calls[0][1] as ApiSubmission;
+            expect(payload.Formation.BusinessInformation.PracticesLaw).toBe(undefined);
+          });
 
-        it("is 'Yes' if willPracticeLaw is true", async () => {
-          const legalStructureId = "c-corporation";
-          const formationFormData = generateFormationFormData(
-            { willPracticeLaw: true },
-            { legalStructureId: `foreign-${legalStructureId}` }
-          );
+          it("is 'Yes' if willPracticeLaw is true", async () => {
+            const formationFormData = generateFormationFormData(
+              { willPracticeLaw: true },
+              { legalStructureId: `foreign-${legalStructureId}` as FormationLegalType }
+            );
 
-          const userData = generateFormationUserData(
-            { legalStructureId, businessPersona: "FOREIGN" },
-            {},
-            formationFormData
-          );
+            const userData = generateFormationUserData(
+              { legalStructureId, businessPersona: "FOREIGN" },
+              {},
+              formationFormData
+            );
 
-          await client.form(userData, "hostname.com/form-business");
+            await client.form(userData, "hostname.com/form-business");
 
-          const payload = mockAxios.post.mock.calls[0][1] as ApiSubmission;
-          expect(payload.Formation.BusinessInformation.PracticesLaw).toBe("Yes");
-        });
+            const payload = mockAxios.post.mock.calls[0][1] as ApiSubmission;
+            expect(payload.Formation.BusinessInformation.PracticesLaw).toBe("Yes");
+          });
 
-        it("is 'No' if willPracticeLaw is false", async () => {
-          const legalStructureId = "c-corporation";
-          const formationFormData = generateFormationFormData(
-            { willPracticeLaw: false },
-            { legalStructureId: `foreign-${legalStructureId}` }
-          );
+          it("is 'No' if willPracticeLaw is false", async () => {
+            const formationFormData = generateFormationFormData(
+              { willPracticeLaw: false },
+              { legalStructureId: `foreign-${legalStructureId}` as FormationLegalType }
+            );
 
-          const userData = generateFormationUserData(
-            { legalStructureId, businessPersona: "FOREIGN" },
-            {},
-            formationFormData
-          );
+            const userData = generateFormationUserData(
+              { legalStructureId, businessPersona: "FOREIGN" },
+              {},
+              formationFormData
+            );
 
-          await client.form(userData, "hostname.com/form-business");
+            await client.form(userData, "hostname.com/form-business");
 
-          const payload = mockAxios.post.mock.calls[0][1] as ApiSubmission;
-          expect(payload.Formation.BusinessInformation.PracticesLaw).toBe("No");
-        });
+            const payload = mockAxios.post.mock.calls[0][1] as ApiSubmission;
+            expect(payload.Formation.BusinessInformation.PracticesLaw).toBe("No");
+          });
 
-        it("is undefined if not foreign c-corp", async () => {
-          const legalStructureId = "s-corporation";
-          const formationFormData = generateFormationFormData(
-            { willPracticeLaw: true },
-            { legalStructureId: `${legalStructureId}` }
-          );
+          it("is undefined if not foreign corp", async () => {
+            const formationFormData = generateFormationFormData(
+              { willPracticeLaw: true },
+              { legalStructureId: `${legalStructureId}` as FormationLegalType }
+            );
 
-          const userData = generateFormationUserData(
-            { legalStructureId, businessPersona: "OWNING" },
-            {},
-            formationFormData
-          );
+            const userData = generateFormationUserData(
+              { legalStructureId, businessPersona: "OWNING" },
+              {},
+              formationFormData
+            );
 
-          await client.form(userData, "hostname.com/form-business");
+            await client.form(userData, "hostname.com/form-business");
 
-          const payload = mockAxios.post.mock.calls[0][1] as ApiSubmission;
-          expect(payload.Formation.BusinessInformation.PracticesLaw).toBe(undefined);
-        });
+            const payload = mockAxios.post.mock.calls[0][1] as ApiSubmission;
+            expect(payload.Formation.BusinessInformation.PracticesLaw).toBe(undefined);
+          });
+        }
       });
     });
 

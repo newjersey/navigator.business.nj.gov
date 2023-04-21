@@ -18,6 +18,7 @@ import { ReviewText } from "@/components/tasks/business-formation/review/section
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import analytics from "@/lib/utils/analytics";
+import { isForeignCorporation } from "@/lib/utils/helpers";
 import { ReactElement, useContext } from "react";
 
 export const ReviewStep = (): ReactElement => {
@@ -25,7 +26,6 @@ export const ReviewStep = (): ReactElement => {
   const { Config } = useConfig();
 
   const isLP = state.formationFormData.legalType === "limited-partnership";
-  const isForeignCCorp = state.formationFormData.legalType === "foreign-c-corporation";
   const hasProvisions = (state.formationFormData.provisions?.length ?? 0) > 0;
   const hasPurpose = !!state.formationFormData.businessPurpose;
   const hasMembers = (state.formationFormData.members?.length ?? 0) > 0;
@@ -36,7 +36,7 @@ export const ReviewStep = (): ReactElement => {
         <ReviewSection stepName={"Business"} testId="edit-business-name-step">
           <BusinessNameAndLegalStructure isReviewStep />
           <ReviewBusinessSuffixAndStartDate />
-          {isForeignCCorp && (
+          {isForeignCorporation(state.formationFormData.legalType) && (
             <>
               <ReviewWillPracticeLaw willPracticeLaw={state.formationFormData.willPracticeLaw} />
               <ReviewForeignCertificate foreignGoodStandingFile={state.foreignGoodStandingFile} />
