@@ -124,7 +124,7 @@ export const ButtonDropdown = (props: Props): ReactElement => {
                 transformOrigin: placement === "bottom" ? "center top" : "center bottom",
               }}
             >
-              <Box sx={{ boxShadow: 3 }}>
+              <Box className="drop-shadow-xl">
                 <Paper>
                   <ClickAwayListener onClickAway={handleClose}>{DropdownMenu()}</ClickAwayListener>{" "}
                 </Paper>

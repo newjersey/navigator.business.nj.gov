@@ -1,38 +1,33 @@
 // Drop Shadows
 
+$dropShadows: xs 4px 8px $base-extra-light, sm 6px 12px $base-lighter, md 8px 16px $base-lighter,
+  lg 10px 20px $base-lighter, xl 12px 24px $base-lighter;
+
 .drop-shadow-none {
   box-shadow: 0 !important;
   border: 1px solid $base-light;
 }
 
-.drop-shadow-xs {
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  border: 1px solid $base-extra-light;
-}
+@each $name, $y, $blur, $color, $borderColor in $dropShadows {
+  .drop-shadow-#{$name} {
+    box-shadow: 0 $y $blur rgba(0, 0, 0, 0.1);
+    border: 1px solid $borderColor;
+  }
 
-.drop-shadow-xs-darker {
-  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.25);
-  border: 1px solid $base-extra-light;
-}
+  .drop-shadow-#{$name}-darker {
+    box-shadow: $y $y $blur rgba(0, 0, 0, 0.25);
+    border: 1px solid $borderColor;
+  }
 
-.drop-shadow-sm {
-  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
-  border: 1px solid $base-lighter;
-}
+  .hover\:drop-shadow-#{$name} {
+    &:hover {
+      @extend .drop-shadow-#{$name};
+    }
+  }
 
-.drop-shadow,
-.drop-shadow-md {
-  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
-  border: 1px solid $base-lighter;
-}
-
-.drop-shadow-lg {
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
-  border: 1px solid $base-lighter;
-}
-
-.drop-shadow-xl {
-  box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.1);
-
-  border: 1px solid $base-lighter;
+  .hover\:drop-shadow-#{$name}-darker {
+    &:hover {
+      @extend .drop-shadow-#{$name}-darker;
+    }
+  }
 }
