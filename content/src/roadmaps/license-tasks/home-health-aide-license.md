@@ -5,7 +5,7 @@ name: Apply for Your Health Care Services Firm Registration, if Applicable
 webflowName: "Home Health Aide: Health Care Services Firm License"
 industryIntegration: New Jersey Division of Consumer Affairs
 issuingAgency: New Jersey’s Division of Consumer Affairs Regulated Business Section
-formName: HCSF Form1-Rev
+formName: ""
 industryId: homemaker-home-health-aide
 callToActionText: Register as a Health Care Service Firm
 callToActionLink: https://www.njconsumeraffairs.gov/hcservice
@@ -25,9 +25,8 @@ You need to register as a health care service firm if you are employing individu
 * Copy of health care practitioner supervisor's registered nursing license
 * Copy of application for employment of all registered nurses
 * Copy of health care practitioner supervisor's certificate of malpractice insurance
-*  `Registered agent's|registered-agent` contact information (if firm is a corporation or out-of-state corporation)
-
-   
+* Proof of business net worth
+*  `Registered agent's|registered-agent` contact information (if firm is a corporation or out-of-state corporation) 
 * Notarized application submission statement called "Affidavit for Health Care Services Firm"
 * Applicable fees paid
 
