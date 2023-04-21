@@ -3,13 +3,17 @@ import { LabelledContent, LabelledContentList, Match } from "@/lib/search/typesF
 export const findMatchInBlock = (blockTexts: string[], term: string, match: Match): Match => {
   for (const blockText of blockTexts) {
     if (blockText.includes(term)) {
-      const index = blockText.indexOf(term);
-      const startIndex = index - 50 < 0 ? 0 : index - 50;
-      const endIndex = term.length + index + 50;
-      match.snippets.push(blockText.slice(startIndex, endIndex));
+      match.snippets.push(makeSnippet(blockText, term));
     }
   }
   return match;
+};
+
+export const makeSnippet = (text: string, term: string): string => {
+  const index = text.toLowerCase().indexOf(term.toLowerCase());
+  const startIndex = index - 50 < 0 ? 0 : index - 50;
+  const endIndex = term.length + index + 50;
+  return text.slice(startIndex, endIndex);
 };
 
 export const findMatchInLabelledText = (
