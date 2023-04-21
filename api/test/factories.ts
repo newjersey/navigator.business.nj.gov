@@ -115,6 +115,7 @@ export const generateUserData = (overrides: Partial<UserData>): UserData => {
         formationResponse: undefined,
         getFilingResponse: undefined,
         completedFilingPayment: false,
+        lastVisitedPageIndex: 0,
       };
 
   return {
@@ -381,6 +382,7 @@ export const generateFormationData = (
     formationResponse: undefined,
     getFilingResponse: undefined,
     completedFilingPayment: false,
+    lastVisitedPageIndex: 0,
     ...overrides,
   };
 };

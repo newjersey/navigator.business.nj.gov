@@ -53,6 +53,20 @@ export const BusinessFormationPaginator = (): ReactElement => {
   }, [state.stepIndex, isDesktop, state.hasBeenSubmitted]);
 
   useMountEffect(() => {
+    if (!userData) {
+      return;
+    }
+    if (
+      userData.formationData.lastVisitedPageIndex > BusinessFormationStepsConfiguration.length - 1 ||
+      userData.formationData.lastVisitedPageIndex < 0
+    ) {
+      setStepIndex(0);
+    } else {
+      setStepIndex(userData.formationData.lastVisitedPageIndex);
+    }
+  });
+
+  useMountEffect(() => {
     isMounted.current = true;
     scrollToTopOfElement(stepperRef.current, { isDesktop });
     analytics.event.business_formation_name_step.arrive.arrive_on_business_formation_name_step();
@@ -86,10 +100,13 @@ export const BusinessFormationPaginator = (): ReactElement => {
   };
 
   const onPreviousButtonClick = (): void => {
-    moveToStep(state.stepIndex - 1);
+    onMoveToStep(state.stepIndex - 1, { moveType: "PREVIOUS_BUTTON" });
   };
 
-  const onMoveToStep = (stepIndex: number, config: { moveType: "NEXT_BUTTON" | "STEPPER" }): void => {
+  const onMoveToStep = (
+    stepIndex: number,
+    config: { moveType: "PREVIOUS_BUTTON" | "NEXT_BUTTON" | "STEPPER" }
+  ): void => {
     if (isAuthenticated === IsAuthenticated.FALSE) {
       setRegistrationModalIsVisible(true);
       return;
@@ -108,13 +125,19 @@ export const BusinessFormationPaginator = (): ReactElement => {
       return;
     }
 
-    const savedUserData = saveFormData({ shouldFilter: true });
+    const savedUserData = saveFormData({ shouldFilter: true, newStep: stepIndex });
 
     onStepChangeAnalytics(savedUserData?.formationData.formationFormData, stepIndex, config.moveType);
     moveToStep(stepIndex);
   };
 
-  const saveFormData = ({ shouldFilter }: { shouldFilter: boolean }): UserData | undefined => {
+  const saveFormData = ({
+    shouldFilter,
+    newStep,
+  }: {
+    shouldFilter: boolean;
+    newStep: number;
+  }): UserData | undefined => {
     if (!userData) return;
     let formationFormDataToSave = { ...state.formationFormData };
     if (shouldFilter) {
@@ -126,6 +149,7 @@ export const BusinessFormationPaginator = (): ReactElement => {
         ...userData.formationData,
         formationFormData: formationFormDataToSave,
         businessNameAvailability: state.businessNameAvailability,
+        lastVisitedPageIndex: newStep,
       },
     });
     update(userDataWithProfileChanges);
@@ -199,7 +223,7 @@ export const BusinessFormationPaginator = (): ReactElement => {
   const onStepChangeAnalytics = (
     formationFormData: FormationFormData | undefined,
     nextStepIndex: number,
-    moveType: "NEXT_BUTTON" | "STEPPER"
+    moveType: "PREVIOUS_BUTTON" | "NEXT_BUTTON" | "STEPPER"
   ): void => {
     if (!formationFormData) {
       return;
@@ -343,14 +367,18 @@ export const BusinessFormationPaginator = (): ReactElement => {
               spinForXSeconds={2.5}
               hasDataChanged={hasFormDataChanged()}
               saveDataFunction={(): void => {
-                saveFormData({ shouldFilter: false });
+                saveFormData({ shouldFilter: false, newStep: state.stepIndex });
               }}
             />
           </div>
           <div className="flex flex-column-reverse mobile-lg:flex-row mobile-lg:margin-left-auto width-100">
             {shouldDisplayPreviousButton() && (
               <div className="margin-top-1 mobile-lg:margin-top-0 mobile-lg:margin-right-1 mobile-lg:margin-left-auto">
-                <SecondaryButton isColor="primary" onClick={onPreviousButtonClick}>
+                <SecondaryButton
+                  isColor="primary"
+                  onClick={onPreviousButtonClick}
+                  dataTestId="previous-button"
+                >
                   {Config.formation.general.previousButtonText}
                 </SecondaryButton>
               </div>

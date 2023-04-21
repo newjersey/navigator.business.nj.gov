@@ -412,6 +412,7 @@ export const generateFormationData = (
     formationResponse: undefined,
     getFilingResponse: undefined,
     completedFilingPayment: false,
+    lastVisitedPageIndex: 0,
     ...overrides,
   };
 };
@@ -423,6 +424,7 @@ export const generateEmptyFormationData = (): FormationData => {
     getFilingResponse: undefined,
     completedFilingPayment: false,
     businessNameAvailability: undefined,
+    lastVisitedPageIndex: 0,
   };
 };
 

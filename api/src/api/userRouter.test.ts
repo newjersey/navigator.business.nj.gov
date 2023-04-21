@@ -520,6 +520,7 @@ describe("userRouter", () => {
           formationResponse: undefined,
           getFilingResponse: undefined,
           completedFilingPayment: false,
+          lastVisitedPageIndex: 0,
         });
       });
     });
