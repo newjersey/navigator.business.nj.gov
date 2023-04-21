@@ -4,17 +4,18 @@ urlSlug: health-care-reg
 name: Apply for Your Health Care Services Firm Registration, if Applicable
 webflowName: "Home Health Aide: Health Care Services Firm License"
 industryIntegration: New Jersey Division of Consumer Affairs
+issuingAgency: New Jersey’s Division of Consumer Affairs Regulated Business Section
 formName: HCSF Form1-Rev
 industryId: homemaker-home-health-aide
+callToActionText: Register as a Health Care Service Firm
 callToActionLink: https://www.njconsumeraffairs.gov/hcservice
+licenseCertificationClassification: ""
 divisionPhone: (973) 504-6370
 id: home-health-aide-license
-issuingAgency: New Jersey’s Division of Consumer Affairs Regulated Business Section
-callToActionText: Register as Health Care Service Firm
 webflowId: 641370d2139a73fe804e07b5
-licenseCertificationClassification: ""
 ---
-You may need to apply for a health care services license before offering caregiving services. 
+You need to register as a health care service firm if you are employing individuals to provide health care, personal care, or companion services. This applies to both in-home and facility care.
+
 
 - - -
 
