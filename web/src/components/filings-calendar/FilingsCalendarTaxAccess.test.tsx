@@ -91,6 +91,7 @@ describe("<FilingsCalendarTaxAccess />", () => {
       getFilingResponse: undefined,
       completedFilingPayment: false,
       businessNameAvailability: undefined,
+      lastVisitedPageIndex: 0,
     };
 
     if (params.publicFiling) {

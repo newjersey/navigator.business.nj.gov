@@ -162,13 +162,24 @@ describe("<NexusFormationFlow />", () => {
     await page.clickSubmit();
 
     const base64String = Buffer.from("my cool file contents", "utf8").toString("base64");
+    const updatedForeignUserData = {
+      ...foreignUserData,
+      formationData: {
+        ...foreignUserData.formationData,
+        lastVisitedPageIndex: 4,
+      },
+    };
     await waitFor(() => {
-      expect(mockApi.postBusinessFormation).toHaveBeenCalledWith(foreignUserData, "http://localhost/", {
-        fileType: "PNG",
-        sizeInBytes: file.size,
-        base64Contents: base64String,
-        filename: "cool.png",
-      });
+      expect(mockApi.postBusinessFormation).toHaveBeenCalledWith(
+        updatedForeignUserData,
+        "http://localhost/",
+        {
+          fileType: "PNG",
+          sizeInBytes: file.size,
+          base64Contents: base64String,
+          filename: "cool.png",
+        }
+      );
     });
   });
 

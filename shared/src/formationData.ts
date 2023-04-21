@@ -71,6 +71,7 @@ export interface FormationData {
   readonly getFilingResponse: GetFilingResponse | undefined;
   readonly completedFilingPayment: boolean;
   readonly businessNameAvailability: NameAvailability | undefined;
+  readonly lastVisitedPageIndex: number;
 }
 
 export type FormationBusinessLocationType = "US" | "INTL" | "NJ";
