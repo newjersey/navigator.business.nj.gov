@@ -1,7 +1,7 @@
 ---
 filename: health-care-services-firm-license
 urlSlug: health-care-reg
-name: Apply for Your Health Care Services Firm Registration, if Applicable
+name: Apply for Your Health Care Service Firm Registration, if Applicable
 webflowName: "Home Health Aide: Health Care Services Firm License"
 industryIntegration: New Jersey Division of Consumer Affairs
 issuingAgency: New Jersey’s Division of Consumer Affairs Regulated Business Section
