@@ -48,14 +48,18 @@ export const FilingElement = (props: {
                 <span data-testid="due-date">
                   {parseDateWithFormat(props.dueDate, defaultDateFormat).format("MMMM D, YYYY").toUpperCase()}
                 </span>
-                <ArrowTooltip title={Config.filingDefaults.dueDateToolTip}>
-                  <div
-                    className="fdr fac margin-left-1 margin-bottom-05 font-body-lg text-green"
-                    data-testid="due-date-tooltip"
-                  >
-                    <Icon>help_outline</Icon>
-                  </div>
-                </ArrowTooltip>
+                {props.filing.urlSlug === "annual-report" ? (
+                  <ArrowTooltip title={Config.filingDefaults.dueDateToolTip}>
+                    <div
+                      className="fdr fac margin-left-1 margin-bottom-05 font-body-lg text-green"
+                      data-testid="due-date-tooltip"
+                    >
+                      <Icon>help_outline</Icon>
+                    </div>
+                  </ArrowTooltip>
+                ) : (
+                  <></>
+                )}
                 {props.filing.extension && (
                   <div className="margin-left-4">
                     <Tag backgroundColor="accent-cooler-lightest" data-testid="extension" isLowerCase>
