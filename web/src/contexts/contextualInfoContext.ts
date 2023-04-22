@@ -4,6 +4,7 @@ export interface ContextualInfo {
   isVisible: boolean;
   header: string;
   markdown: string;
+  id: string;
 }
 
 export interface ContextualInfoContextType {
@@ -16,6 +17,7 @@ export const ContextualInfoContext = createContext<ContextualInfoContextType>({
     isVisible: false,
     header: "",
     markdown: "",
+    id: "",
   },
   setContextualInfo: () => {},
 });
