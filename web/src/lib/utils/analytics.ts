@@ -229,7 +229,7 @@ export interface Questions {
   registered_agent: "manual" | "agent_id";
   offer_public_accounting: BooleanResponseOption;
   real_estate_appraisal: BooleanResponseOption;
-  certifiedInteriorDesigner: BooleanResponseOption;
+  certified_interior_designer: BooleanResponseOption;
   pet_care_housing: BooleanResponseOption;
   pet_care_sell_items: BooleanResponseOption;
   [k: string]: Union<"change" | "first_time" | "deleted", string>;
@@ -618,7 +618,6 @@ export default {
         },
       },
     },
-
     roadmap_dashboard: {
       arrive: {
         arrive_from_myNJ_registration: () => {
