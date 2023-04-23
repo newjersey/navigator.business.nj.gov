@@ -13,24 +13,24 @@ interface Props {
 export const ContextualInfoButton = (props: Props): ReactElement => {
   const { contextualInfo, setContextualInfo } = useContext(ContextualInfoContext);
   const [cachedContent, setCachedContent] = useState<ContextualInfo>();
+  const [currentId, setId] = useState<string>();
 
   const setContext = async (event: React.MouseEvent): Promise<void> => {
     event.preventDefault();
     analytics.event.contextual_link.click.view_sidebar(props.id, props.text);
-    if (cachedContent && cachedContent.id === props.id) {
+    if (cachedContent && currentId === props.id) {
       setContextualInfo({
         ...contextualInfo,
-        id: props.id,
         isVisible: true,
         markdown: cachedContent.markdown,
         header: cachedContent.header,
       });
     } else {
       const content = await fetchContextualInfo(props.id);
-      setCachedContent({ ...content, id: props.id });
+      setId(props.id);
+      setCachedContent({ ...content });
       setContextualInfo({
         ...contextualInfo,
-        id: props.id,
         isVisible: true,
         header: content.header,
         markdown: content.markdown,
