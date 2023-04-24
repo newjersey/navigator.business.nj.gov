@@ -1,5 +1,6 @@
 ---
-urlSlug: evaluate-your-location
+urlSlug: cosmetology-location-eval
+filename: cosmetology-location-eval
 name: Evaluate Your Location
 id: identify-potential-lease
 callToActionLink: ""
