@@ -12,3 +12,13 @@ export type LabelledContentList = {
   content: string[];
   label: string;
 };
+
+export type ConfigMatch = {
+  cmsLabelPath: string[];
+  value: string;
+};
+
+export type GroupedConfigMatch = {
+  groupLabelPath: string;
+  matches: ConfigMatch[];
+};

@@ -3,8 +3,11 @@
 import { MgmtAuth } from "@/components/auth/MgmtAuth";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { PageSkeleton } from "@/components/PageSkeleton";
+import { ConfigMatchList } from "@/components/search/ConfigMatchList";
 import { MatchList } from "@/components/search/MatchList";
+import { useConfig } from "@/lib/data-hooks/useConfig";
 import { searchCertifications } from "@/lib/search/searchCertifications";
+import { searchConfig } from "@/lib/search/searchConfig";
 import { searchContextualInfo } from "@/lib/search/searchContextualInfo";
 import { searchFundings } from "@/lib/search/searchFundings";
 import { searchIndustries } from "@/lib/search/searchIndustries";
@@ -14,9 +17,10 @@ import { searchSteps } from "@/lib/search/searchSteps";
 import { searchTasks } from "@/lib/search/searchTasks";
 import { searchTaxFilings } from "@/lib/search/searchTaxFilings";
 import { searchWebflowLicenses } from "@/lib/search/searchWebflowLicenses";
-import { Match } from "@/lib/search/typesForSearch";
+import { GroupedConfigMatch, Match } from "@/lib/search/typesForSearch";
 import { getNetlifyConfig } from "@/lib/static/admin/getNetlifyConfig";
 import { loadAllArchivedCertifications, loadAllCertifications } from "@/lib/static/loadCertifications";
+import { loadCmsConfig } from "@/lib/static/loadCmsConfig";
 import { loadAllArchivedContextualInfo, loadAllContextualInfo } from "@/lib/static/loadContextualInfo";
 import { loadRoadmapSideBarDisplayContent } from "@/lib/static/loadDisplayContent";
 import { loadAllFilings } from "@/lib/static/loadFilings";
@@ -57,6 +61,7 @@ interface Props {
   contextualInfo: ContextualInfoFile[];
   archivedContextualInfo: ContextualInfoFile[];
   postOnboarding: PostOnboardingFile[];
+  cmsConfig: any;
 }
 
 const SearchContentPage = (props: Props): ReactElement => {
@@ -76,6 +81,9 @@ const SearchContentPage = (props: Props): ReactElement => {
   const [contextualInfoMatches, setContextualInfoMatches] = useState<Match[]>([]);
   const [archivedContextualInfoMatches, setArchivedContextualInfoMatches] = useState<Match[]>([]);
   const [postOnboardingMatches, setPostOnboardingMatches] = useState<Match[]>([]);
+  const [groupedConfigMatches, setGroupedConfigMatches] = useState<GroupedConfigMatch[]>([]);
+
+  const { Config } = useConfig();
 
   const sidebarCards: SidebarCardContent[] = Object.values(props.roadmapDisplayContent.sidebarDisplayContent);
 
@@ -92,6 +100,8 @@ const SearchContentPage = (props: Props): ReactElement => {
 
   const onSearchSubmit = (): void => {
     const lowercaseTerm = searchTerm.toLowerCase();
+    setGroupedConfigMatches(searchConfig(Config, lowercaseTerm, props.cmsConfig));
+
     setTaskMatches(searchTasks(props.tasks, lowercaseTerm));
     setCertMatches(searchCertifications(props.certifications, lowercaseTerm));
     setCertArchiveMatches(searchCertifications(props.archivedCertifications, lowercaseTerm));
@@ -128,6 +138,7 @@ const SearchContentPage = (props: Props): ReactElement => {
         ...webflowLicenseMatches,
         ...archivedContextualInfoMatches,
         ...contextualInfoMatches,
+        ...groupedConfigMatches,
       ].length === 0
     );
   };
@@ -135,12 +146,6 @@ const SearchContentPage = (props: Props): ReactElement => {
   const authedView = (
     <div>
       <h1>Search in CMS</h1>
-      <p>
-        <em>
-          Currently searches: Tasks, License Tasks, Certifications, Fundings, Industries, Roadmap Steps, Tax
-          Filings, Webflow Licenses, Roadmap Sidebar Cards, Contextual Info, Post-Onboarding Questions
-        </em>
-      </p>
       <div className="margin-bottom-4 margin-top-2">
         <label htmlFor="search">Search Exact Text</label>
         <TextField
@@ -172,6 +177,9 @@ const SearchContentPage = (props: Props): ReactElement => {
       <MatchList matches={postOnboardingMatches} collectionLabel="🟧 Post Onboarding Content" />
       <MatchList matches={archivedContextualInfoMatches} collectionLabel="Archived Contextual Info" />
       <MatchList matches={webflowLicenseMatches} collectionLabel="🟦 Webflow Licenses" />
+      {groupedConfigMatches.map((it: GroupedConfigMatch) => (
+        <ConfigMatchList key={it.groupLabelPath} matches={it.matches} fileLabel={it.groupLabelPath} />
+      ))}
     </div>
   );
 
@@ -208,6 +216,7 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
       contextualInfo: loadAllContextualInfo(),
       archivedContextualInfo: loadAllArchivedContextualInfo(),
       postOnboarding: loadAllPostOnboarding(),
+      cmsConfig: loadCmsConfig(),
     },
   };
 };
