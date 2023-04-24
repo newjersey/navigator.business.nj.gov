@@ -17,7 +17,7 @@ interface Props<T> extends FormContextFieldProps<T> {
   isSectorModal?: boolean;
 }
 
-export const OnboardingSectors = <T,>(props: Props<T>): ReactElement => {
+export const OnboardingAndProfileSectors = <T,>(props: Props<T>): ReactElement => {
   const [searchText, setSearchText] = useState<string>("");
   const { state, setProfileData } = useContext(ProfileDataContext);
   const { Config } = useConfig();

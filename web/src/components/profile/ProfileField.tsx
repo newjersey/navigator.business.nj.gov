@@ -1,5 +1,5 @@
 import { FieldLabelProfile } from "@/components/onboarding/FieldLabelProfile";
-import { LockedProfileField } from "@/components/onboarding/LockedProfileField";
+import { LockedProfileField } from "@/components/profile/LockedProfileField";
 import { ProfileContentField } from "@/lib/types/types";
 import { ReactElement, ReactNode } from "react";
 

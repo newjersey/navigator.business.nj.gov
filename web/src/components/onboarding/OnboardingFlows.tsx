@@ -1,3 +1,4 @@
+import { OnboardingAndProfileSectors } from "@/components/onboarding-profile-shared/OnboardingAndProfileSectors";
 import { FieldLabelDescriptionOnly } from "@/components/onboarding/FieldLabelDescriptionOnly";
 import { FieldLabelOnboarding } from "@/components/onboarding/FieldLabelOnboarding";
 import { OnboardingBusinessPersona } from "@/components/onboarding/OnboardingBusinessPersona";
@@ -6,7 +7,6 @@ import { OnboardingIndustry } from "@/components/onboarding/OnboardingIndustry";
 import { OnboardingLegalStructure } from "@/components/onboarding/OnboardingLegalStructure";
 import { OnboardingLocationInNewJersey } from "@/components/onboarding/OnboardingLocationInNewJersey";
 import { OnboardingNameAndEmail } from "@/components/onboarding/OnboardingNameAndEmail";
-import { OnboardingSectors } from "@/components/onboarding/OnboardingSectors";
 import { FlowType, OnboardingErrors } from "@/lib/types/types";
 import { ReactNode } from "react";
 
@@ -28,7 +28,7 @@ export const onboardingFlows: Record<FlowType, OnboardingFlow> = {
             <OnboardingBusinessPersona<OnboardingErrors> errorTypes={["REQUIRED_EXISTING_BUSINESS"]} />
             <div className="padding-top-3">
               <FieldLabelDescriptionOnly fieldName="sectorId" />
-              <OnboardingSectors<OnboardingErrors> errorTypes={["REQUIRED_REVIEW_INFO_BELOW"]} />
+              <OnboardingAndProfileSectors<OnboardingErrors> errorTypes={["REQUIRED_REVIEW_INFO_BELOW"]} />
             </div>
           </>
         ),

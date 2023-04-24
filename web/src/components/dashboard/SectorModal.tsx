@@ -1,8 +1,7 @@
 import { Content } from "@/components/Content";
 import { ModalTwoButton } from "@/components/ModalTwoButton";
+import { OnboardingAndProfileSectors } from "@/components/onboarding-profile-shared/OnboardingAndProfileSectors";
 import { FieldLabelModal } from "@/components/onboarding/FieldLabelModal";
-import { OnboardingSectors } from "@/components/onboarding/OnboardingSectors";
-import { WithErrorBar } from "@/components/WithErrorBar";
 import { FieldStateActionKind } from "@/contexts/formContext";
 import { ProfileDataContext } from "@/contexts/profileDataContext";
 import { profileFormContext } from "@/contexts/profileFormContext";
@@ -14,6 +13,7 @@ import { useMountEffectWhenDefined } from "@/lib/utils/helpers";
 import { createEmptyProfileData, ProfileData } from "@businessnjgovnavigator/shared/";
 import { FormControl } from "@mui/material";
 import { ReactElement, useState } from "react";
+import { WithErrorBar } from "../WithErrorBar";
 
 interface Props {
   open: boolean;
@@ -78,7 +78,7 @@ export const SectorModal = (props: Props): ReactElement => {
             <WithErrorBar hasError={formContextState.fieldStates.sectorId.invalid} type="ALWAYS">
               <FormControl fullWidth={true}>
                 <FieldLabelModal fieldName="sectorId" />
-                <OnboardingSectors isSectorModal={true} />
+                <OnboardingAndProfileSectors isSectorModal={true} />
               </FormControl>
             </WithErrorBar>
           </div>

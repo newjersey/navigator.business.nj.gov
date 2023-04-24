@@ -5,13 +5,13 @@ import { PrimaryButton } from "@/components/njwds-extended/PrimaryButton";
 import { SecondaryButton } from "@/components/njwds-extended/SecondaryButton";
 import { SidebarPageLayout } from "@/components/njwds-extended/SidebarPageLayout";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
+import { OnboardingAndProfileSectors } from "@/components/onboarding-profile-shared/OnboardingAndProfileSectors";
 import { FieldLabelProfile } from "@/components/onboarding/FieldLabelProfile";
 import { OnboardingForeignBusinessType } from "@/components/onboarding/OnboardingForeignBusinessType";
 import { OnboardingHomeBasedBusiness } from "@/components/onboarding/OnboardingHomeBasedBusiness";
 import { OnboardingIndustry } from "@/components/onboarding/OnboardingIndustry";
 import { OnboardingLegalStructureDropdown } from "@/components/onboarding/OnboardingLegalStructureDropDown";
 import { OnboardingLocationInNewJersey } from "@/components/onboarding/OnboardingLocationInNewJersey";
-import { OnboardingSectors } from "@/components/onboarding/OnboardingSectors";
 import { DisabledTaxId } from "@/components/onboarding/taxId/DisabledTaxId";
 import { OnboardingTaxId } from "@/components/onboarding/taxId/OnboardingTaxId";
 import { PageSkeleton } from "@/components/PageSkeleton";
@@ -491,7 +491,7 @@ const ProfilePage = (props: Props): ReactElement => {
           fieldName="sectorId"
           isVisible={profileData.industryId === "generic" || !!props.CMS_ONLY_fakeUserData}
         >
-          <OnboardingSectors />
+          <OnboardingAndProfileSectors />
         </ProfileField>
 
         <ProfileField
@@ -620,7 +620,7 @@ const ProfilePage = (props: Props): ReactElement => {
         </ProfileField>
 
         <ProfileField fieldName="sectorId">
-          <OnboardingSectors />
+          <OnboardingAndProfileSectors />
         </ProfileField>
 
         <ProfileField

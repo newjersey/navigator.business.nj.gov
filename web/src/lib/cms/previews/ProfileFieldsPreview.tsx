@@ -1,3 +1,4 @@
+import { OnboardingAndProfileSectors } from "@/components/onboarding-profile-shared/OnboardingAndProfileSectors";
 import { FieldLabelOnboarding } from "@/components/onboarding/FieldLabelOnboarding";
 import { FieldLabelProfile } from "@/components/onboarding/FieldLabelProfile";
 import { OnboardingBusinessPersona } from "@/components/onboarding/OnboardingBusinessPersona";
@@ -6,7 +7,6 @@ import { OnboardingIndustry } from "@/components/onboarding/OnboardingIndustry";
 import { OnboardingLegalStructure } from "@/components/onboarding/OnboardingLegalStructure";
 import { OnboardingLocationInNewJersey } from "@/components/onboarding/OnboardingLocationInNewJersey";
 import { OnboardingRadioQuestion } from "@/components/onboarding/OnboardingRadioQuestion";
-import { OnboardingSectors } from "@/components/onboarding/OnboardingSectors";
 import { OnboardingTaxId } from "@/components/onboarding/taxId/OnboardingTaxId";
 import { Documents } from "@/components/profile/Documents";
 import { ProfileBusinessName } from "@/components/profile/ProfileBusinessName";
@@ -98,7 +98,7 @@ const ProfileFieldsPreview = (props: PreviewProps): ReactElement => {
 
           <hr className="margin-y-4" />
           <FieldLabelOnboarding fieldName="sectorId" />
-          <OnboardingSectors />
+          <OnboardingAndProfileSectors />
 
           <hr className="margin-y-4" />
 
