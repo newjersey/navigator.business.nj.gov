@@ -13,6 +13,7 @@ import {
   defaultDateFormat,
   FormationFormData,
   generateFormationFormData,
+  generateFormationIncorporator,
   generateFormationSigner,
   generateMunicipality,
   ProfileData,
@@ -179,19 +180,22 @@ describe("Formation - ReviewStep", () => {
   });
 
   it("does not display incorporators label within review step when incorporators are empty", async () => {
-    await renderStep({ legalStructureId: "c-corporation" }, { signers: [] });
+    await renderStep({ legalStructureId: "c-corporation" }, { incorporators: [] });
     expect(
       screen.queryByText(markdownToText(Config.formation.fields.incorporators.label))
     ).not.toBeInTheDocument();
   });
 
-  it("does not display signers label within review step when singers they are empty", async () => {
-    await renderStep({ legalStructureId: "limited-partnership" }, { signers: [] });
+  it("does not display signers label within review step when signers are empty", async () => {
+    await renderStep({ legalStructureId: "limited-liability-company" }, { signers: [] });
     expect(screen.queryByText(markdownToText(Config.formation.fields.signers.label))).not.toBeInTheDocument();
   });
 
   it("displays different titles when legalStructure is a ForProfit Corporation", async () => {
-    await renderStep({ legalStructureId: "c-corporation" }, { signers: [generateFormationSigner({})] });
+    await renderStep(
+      { legalStructureId: "c-corporation" },
+      { incorporators: [generateFormationIncorporator({})] }
+    );
     expect(
       screen.getByText(markdownToText(Config.formation.fields.directors.reviewStepHeader))
     ).toBeInTheDocument();
