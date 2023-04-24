@@ -259,9 +259,52 @@ describe("userRouter", () => {
         expect(stubTimeStampBusinessSearch.search).not.toHaveBeenCalled();
       });
 
+      it("does not update businessNameAvailability if it's completedFilingPayment is true", async () => {
+        const userData = generateUserData({
+          formationData: generateFormationData({
+            completedFilingPayment: true,
+            businessNameAvailability: generateBusinessNameAvailability({
+              status: "AVAILABLE",
+              lastUpdatedTimeStamp: getCurrentDate().subtract(1, "hour").add(1, "minute").toISOString(),
+            }),
+          }),
+        });
+        stubUserDataClient.get.mockResolvedValue(userData);
+
+        await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
+        expect(stubTimeStampBusinessSearch.search).not.toHaveBeenCalled();
+      });
+
       it("updates user in the background if businessNameAvailability lastUpdatedTimeStamp is older than last hour", async () => {
         const userData = generateUserData({
           formationData: generateFormationData({
+            completedFilingPayment: false,
+            businessNameAvailability: generateBusinessNameAvailability({
+              status: "AVAILABLE",
+              lastUpdatedTimeStamp: getCurrentDate().subtract(1, "hour").subtract(1, "minute").toISOString(),
+            }),
+          }),
+        });
+        stubUserDataClient.get.mockResolvedValue(userData);
+        stubTimeStampBusinessSearch.search.mockResolvedValue(
+          generateBusinessNameAvailability({
+            status: "UNAVAILABLE",
+            similarNames: ["random-name"],
+          })
+        );
+
+        const result = await request(app).get(`/users/123`).set("Authorization", "Bearer user-123-token");
+        expect(stubTimeStampBusinessSearch.search).toHaveBeenCalled();
+        expect(result.body.formationData.businessNameAvailability.status).toEqual("UNAVAILABLE");
+        expect(
+          parseDate(result.body.formationData.lastUpdatedTimeStamp).isSame(getCurrentDate(), "minute")
+        ).toEqual(true);
+      });
+
+      it("updates user in the background only if completedFilingPayment is false", async () => {
+        const userData = generateUserData({
+          formationData: generateFormationData({
+            completedFilingPayment: false,
             businessNameAvailability: generateBusinessNameAvailability({
               status: "AVAILABLE",
               lastUpdatedTimeStamp: getCurrentDate().subtract(1, "hour").subtract(1, "minute").toISOString(),
@@ -287,6 +330,7 @@ describe("userRouter", () => {
       it("does not update userData if the business name search fails and continues with other updates", async () => {
         const userData = generateUserData({
           formationData: generateFormationData({
+            completedFilingPayment: false,
             businessNameAvailability: generateBusinessNameAvailability({
               status: "AVAILABLE",
               lastUpdatedTimeStamp: getCurrentDate().subtract(1, "hour").subtract(1, "minute").toISOString(),
