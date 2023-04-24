@@ -6,6 +6,7 @@ import {
   emptyBusinessUser,
   emptyProfileData,
   FieldsForErrorHandling,
+  FormationData,
   FormationMember,
   FormationSigner,
   IndustrySpecificData,
@@ -462,6 +463,7 @@ export interface UpdateQueue {
   queueProfileData: (profileData: Partial<ProfileData>) => UpdateQueue;
   queuePreferences: (preferences: Partial<Preferences>) => UpdateQueue;
   queueTaxFilingData: (taxFilingData: Partial<TaxFilingData>) => UpdateQueue;
+  queueFormationData: (formationData: Partial<FormationData>) => UpdateQueue;
   update: () => Promise<void>;
   current: () => UserData;
 }

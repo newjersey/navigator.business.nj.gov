@@ -7,6 +7,7 @@ import {
   TaxFilingData,
   UserData,
 } from "@businessnjgovnavigator/shared";
+import { FormationData } from "@businessnjgovnavigator/shared/formationData";
 
 export class UpdateQueueFactory implements UpdateQueue {
   private internalQueue: UserData;
@@ -42,6 +43,17 @@ export class UpdateQueueFactory implements UpdateQueue {
       profileData: {
         ...this.internalQueue.profileData,
         ...profileData,
+      },
+    };
+    return this;
+  }
+
+  queueFormationData(formationData: Partial<FormationData>): UpdateQueue {
+    this.internalQueue = {
+      ...this.internalQueue,
+      formationData: {
+        ...this.internalQueue.formationData,
+        ...formationData,
       },
     };
     return this;

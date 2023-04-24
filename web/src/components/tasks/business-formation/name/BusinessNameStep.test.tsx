@@ -56,6 +56,7 @@ describe("Formation - BusinessNameStep", () => {
       getFilingResponse: undefined,
       completedFilingPayment: false,
       businessNameAvailability: businessNameAvailability ?? undefined,
+      lastVisitedPageIndex: 0,
     };
     return preparePage(generateUserData({ profileData, formationData }), {
       formationDbaContent: generateFormationDbaContent({}),
@@ -222,6 +223,7 @@ describe("Formation - BusinessNameStep", () => {
           getFilingResponse: undefined,
           completedFilingPayment: false,
           businessNameAvailability: undefined,
+          lastVisitedPageIndex: 0,
         };
 
         preparePage(generateUserData({ profileData, formationData }), {

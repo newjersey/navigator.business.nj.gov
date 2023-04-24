@@ -35,6 +35,7 @@ export const getPageHelper = async (
     formationResponse: undefined,
     getFilingResponse: undefined,
     completedFilingPayment: false,
+    lastVisitedPageIndex: 0,
   };
   const user = initialUser ? generateUser(initialUser) : generateUser({});
   const page = preparePage(

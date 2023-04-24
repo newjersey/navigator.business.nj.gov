@@ -1,5 +1,8 @@
 import { BusinessFormation } from "@/components/tasks/business-formation/BusinessFormation";
-import { LookupStepIndexByName } from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
+import {
+  BusinessFormationStepsConfiguration,
+  LookupStepIndexByName,
+} from "@/components/tasks/business-formation/BusinessFormationStepsConfiguration";
 import { getMergedConfig } from "@/contexts/configContext";
 import { MunicipalitiesContext } from "@/contexts/municipalitiesContext";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
@@ -7,6 +10,7 @@ import { FormationStepNames, TasksDisplayContent } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import {
   generateEmptyFormationData,
+  generateFormationData,
   generateFormationDbaContent,
   generateFormationSubmitError,
   generateFormationSubmitResponse,
@@ -2166,5 +2170,93 @@ describe("<BusinessFormationPaginator />", () => {
     const makeChangeToForm = (page: FormationPageHelpers): void => {
       page.fillText("Search business name", "Pizza Joint");
     };
+  });
+
+  describe("remembers formation step", () => {
+    it("shows the Business Step with an initial user when lastVisitedPage has index 0 which is by default", async () => {
+      preparePage(initialUserData, displayContent);
+      expect(screen.getByTestId("business-name-step")).toBeInTheDocument();
+      await waitFor(() => {
+        expect(currentUserData().formationData.lastVisitedPageIndex).toEqual(0);
+      });
+    });
+
+    it("shows the last formation step when lastVisitedPage has step index 4", () => {
+      const legalStructureId = "limited-liability-company";
+      const profileData = generateFormationProfileData({ legalStructureId });
+      const formationData = generateFormationData({ lastVisitedPageIndex: 4 });
+
+      initialUserData = generateUserData({ profileData, formationData });
+      preparePage(initialUserData, displayContent);
+      expect(screen.getByTestId("review-step")).toBeInTheDocument();
+    });
+
+    it("lastVistedPage updates on step change via stepper", async () => {
+      const page = preparePage(initialUserData, displayContent);
+      expect(screen.getByTestId("business-name-step")).toBeInTheDocument();
+
+      await page.stepperClickToBillingStep();
+      await waitFor(() => {
+        expect(currentUserData().formationData.lastVisitedPageIndex).toEqual(3);
+      });
+
+      await page.stepperClickToBusinessStep();
+      await waitFor(() => {
+        expect(currentUserData().formationData.lastVisitedPageIndex).toEqual(1);
+      });
+    });
+
+    it("lastVisitedPage updates on step change via the previous and next button steps", async () => {
+      preparePage(initialUserData, displayContent);
+
+      await waitFor(() => {
+        expect(currentUserData().formationData.lastVisitedPageIndex).toEqual(0);
+      });
+      expect(screen.getByTestId("business-name-step")).toBeInTheDocument();
+
+      fireEvent.click(screen.getByTestId("next-button"));
+      await waitFor(() => {
+        expect(currentUserData().formationData.lastVisitedPageIndex).toEqual(1);
+      });
+      expect(screen.getByTestId("business-step")).toBeInTheDocument();
+
+      fireEvent.click(screen.getByTestId("next-button"));
+      await waitFor(() => {
+        expect(currentUserData().formationData.lastVisitedPageIndex).toEqual(2);
+      });
+      expect(screen.getByTestId("contacts-step")).toBeInTheDocument();
+
+      fireEvent.click(screen.getByTestId("previous-button"));
+      await waitFor(() => {
+        expect(currentUserData().formationData.lastVisitedPageIndex).toEqual(1);
+      });
+      expect(screen.getByTestId("business-step")).toBeInTheDocument();
+
+      fireEvent.click(screen.getByTestId("previous-button"));
+      await waitFor(() => {
+        expect(currentUserData().formationData.lastVisitedPageIndex).toEqual(0);
+      });
+      expect(screen.getByTestId("business-name-step")).toBeInTheDocument();
+    });
+
+    it("defaults to first formation step we go beyond page index allowed", () => {
+      const profileData = generateFormationProfileData({});
+      const formationData = generateFormationData({
+        lastVisitedPageIndex: BusinessFormationStepsConfiguration.length,
+      });
+
+      initialUserData = generateUserData({ profileData, formationData });
+      preparePage(initialUserData, displayContent);
+      expect(screen.getByTestId("business-name-step")).toBeInTheDocument();
+    });
+
+    it("defauts to first formation step when we go below 0 for page index's", () => {
+      const profileData = generateFormationProfileData({});
+      const formationData = generateFormationData({ lastVisitedPageIndex: -1 });
+
+      initialUserData = generateUserData({ profileData, formationData });
+      preparePage(initialUserData, displayContent);
+      expect(screen.getByTestId("business-name-step")).toBeInTheDocument();
+    });
   });
 });
