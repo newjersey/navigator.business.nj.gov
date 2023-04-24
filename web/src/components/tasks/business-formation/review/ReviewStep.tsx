@@ -29,7 +29,7 @@ export const ReviewStep = (): ReactElement => {
   const hasProvisions = (state.formationFormData.provisions?.length ?? 0) > 0;
   const hasPurpose = !!state.formationFormData.businessPurpose;
   const hasMembers = (state.formationFormData.members?.length ?? 0) > 0;
-
+  const hasSigners = (state.formationFormData.signers?.length ?? 0) > 0;
   return (
     <>
       <div data-testid="review-step">
@@ -68,7 +68,7 @@ export const ReviewStep = (): ReactElement => {
         <ReviewSection stepName={"Contacts"} testId="edit-contacts-step">
           <ReviewRegisteredAgent />
           {hasMembers && !isLP && <ReviewMembers />}
-          <ReviewSignatures />
+          {hasSigners && <ReviewSignatures />}
         </ReviewSection>
         <ReviewSection stepName={"Billing"} testId="edit-billing-step">
           <ReviewBillingContact />
