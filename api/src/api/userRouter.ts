@@ -66,7 +66,8 @@ const shouldUpdateBusinessNameSearch = (userData: UserData): boolean => {
   return (
     userData.profileData.businessName !== undefined &&
     userData.formationData.businessNameAvailability !== undefined &&
-    hasBeenMoreThanOneHour(userData.formationData.businessNameAvailability.lastUpdatedTimeStamp)
+    hasBeenMoreThanOneHour(userData.formationData.businessNameAvailability.lastUpdatedTimeStamp) &&
+    userData.formationData.completedFilingPayment !== true
   );
 };
 
