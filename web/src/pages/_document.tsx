@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/iframe-has-title */
 import { GTM_ID } from "@/lib/utils/analytics";
 import Document, { DocumentContext, DocumentInitialProps, Head, Html, Main, NextScript } from "next/document";
 import Script from "next/script";
@@ -9,6 +8,7 @@ class CustomDocument extends Document {
     const initialProps = await Document.getInitialProps(ctx);
     return { ...initialProps };
   }
+
   render(): ReactElement {
     return (
       <Html lang="en">
@@ -23,6 +23,7 @@ class CustomDocument extends Document {
               height="0"
               width="0"
               style={{ display: "none", visibility: "hidden" }}
+              aria-hidden="true"
             />
           </noscript>
           <Main />
