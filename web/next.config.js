@@ -31,6 +31,7 @@ module.exports = withBundleAnalyzer({
     FEATURE_ENABLE_OUTAGE_ALERT_BAR: process.env.FEATURE_ENABLE_OUTAGE_ALERT_BAR,
     OUTAGE_ALERT_MESSAGE: process.env.OUTAGE_ALERT_MESSAGE,
     OUTAGE_ALERT_TYPE: process.env.OUTAGE_ALERT_TYPE,
+    DISABLE_GTM: process.env.DISABLE_GTM,
   },
   staticPageGenerationTimeout: 120,
   webpack: (config) => {
