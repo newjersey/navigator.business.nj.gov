@@ -1,11 +1,14 @@
 ---
-urlSlug: determine-naics-code
-filename: determine-naics-code
+urlSlug: naics-code-determination
+filename: naics-code-determination
 name: Determine Your NAICS Code
 id: determine-naics-code
 ---
 
-To complete your New Jersey tax registration, you must identify a 6-digit code that identifies your business’ primary activities. New Jersey uses a code system known as The North American Industry Classification System (NAICS).
+
+Determine your 6-digit code to complete your New Jersey tax registration. This code identifies your business's primary activities.
+
+New Jersey uses a code system known as The North American Industry Classification System (NAICS).
 
 ---
 
@@ -13,4 +16,4 @@ ${naicsCodeLookupComponent}
 
 > **Why do I need a NAICS code?**
 >
-> - To [Register for NJ State Taxes and Employer Purposes](/tasks/register-for-taxes)
+> - To [register for NJ state taxes and employer purposes](/tasks/register-for-taxes)
