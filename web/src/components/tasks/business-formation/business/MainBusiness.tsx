@@ -9,6 +9,7 @@ import { WithErrorBar } from "@/components/WithErrorBar";
 import { BusinessFormationContext } from "@/contexts/businessFormationContext";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { useFormationErrors } from "@/lib/data-hooks/useFormationErrors";
+import { isForeignCorporation } from "@/lib/utils/helpers";
 import { corpLegalStructures } from "@businessnjgovnavigator/shared/";
 import { ReactElement, useContext, useMemo } from "react";
 import { ForeignCertificate } from "./ForeignCertificate";
@@ -68,7 +69,7 @@ export const MainBusiness = (): ReactElement => {
               <FormationDate fieldName="foreignDateOfFormation" />
             </WithErrorBar>
           </WithErrorBar>
-          {state.formationFormData.legalType === "foreign-c-corporation" && (
+          {isForeignCorporation(state.formationFormData.legalType) && (
             <>
               <WithErrorBar hasError={doesFieldHaveError("willPracticeLaw")} type="ALWAYS">
                 <PracticesLaw hasError={doesFieldHaveError("willPracticeLaw")} />

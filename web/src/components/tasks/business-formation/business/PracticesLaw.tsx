@@ -30,7 +30,9 @@ export const PracticesLaw = (props: Props): ReactElement => {
         }
         row
       >
-        <label className="margin-right-3">{Config.formation.fields.willPracticeLaw.label}</label>
+        <label className="margin-right-3" data-testid="will-practice-law-label">
+          {Config.formation.fields.willPracticeLaw.label}
+        </label>
         <FormControlLabel
           labelPlacement="end"
           data-testid={"practice-law-yes"}

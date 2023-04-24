@@ -1,3 +1,4 @@
+/* eslint-disable no-prototype-builtins */
 import { getEssentialQuestion } from "@/lib/domain-logic/essentialQuestions";
 import analytics, { DimensionQueueFactory, Questions } from "@/lib/utils/analytics";
 import { camelCaseToSnakeCase } from "@/lib/utils/cases-helpers";
@@ -143,7 +144,7 @@ const sendEssentialQuestionEvents = (newProfileData: ProfileData): void => {
     carService: "car_service_size",
     providesStaffingService: "staffing_services",
     interstateMoving: "moving_across_state_lines",
-    certifiedInteriorDesigner: "certifiedInteriorDesigner",
+    certifiedInteriorDesigner: "certified_interior_designer",
     interstateLogistics: "interstate_logistics",
     isChildcareForSixOrMore: "childcare_for_six_or_more",
     requiresCpa: "offer_public_accounting",

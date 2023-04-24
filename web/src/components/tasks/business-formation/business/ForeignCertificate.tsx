@@ -18,7 +18,7 @@ export const ForeignCertificate = (props: Props): ReactElement => {
     <>
       <hr className="margin-bottom-2 margin-top-0" aria-hidden={true} />
       <FormControl variant="outlined" fullWidth className="padding-bottom-2">
-        <h3 className="margin-bottom-2" data-testid="main-business-address-container-header">
+        <h3 className="margin-bottom-2" data-testid="foreign-certificate-of-good-standing-header">
           <Content className="h3-styling">
             {Config.formation.fields.foreignGoodStandingFile.contextualLabel}
           </Content>

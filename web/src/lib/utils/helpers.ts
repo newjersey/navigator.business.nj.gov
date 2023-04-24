@@ -2,6 +2,7 @@ import { ConfigType, getMergedConfig } from "@/contexts/configContext";
 import { FlowType, OnboardingStatus } from "@/lib/types/types";
 import {
   BusinessPersona,
+  FormationLegalType,
   Municipality,
   MunicipalityDetail,
   ProfileData,
@@ -209,4 +210,8 @@ export const mapMunicipalityDetailToMunicipality = (municipalityDetail: Municipa
     name: municipalityDetail.townName,
     county: municipalityDetail.countyName,
   };
+};
+
+export const isForeignCorporation = (legalStructure: FormationLegalType): boolean => {
+  return ["foreign-c-corporation", "foreign-s-corporation"].includes(legalStructure);
 };
