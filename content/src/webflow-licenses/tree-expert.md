@@ -2,11 +2,11 @@
 id: "tree-expert"
 webflowId: "640b8467cc462400fc9ce3e5"
 urlSlug: "tree-expert"
-name: "Tree Expert"
+webflowName: "Tree Expert"
 filename: "tree-expert"
 callToActionLink: "https://njtreeexperts.org/"
 issuingAgency: "New Jersey Board of Tree Experts"
 divisionPhone: "(732) 534-0982"
-industryId: "Tree Expert"
+webflowIndustry: "Tree Expert"
 licenseCertificationClassification: "CERTIFICATE"
 ---
