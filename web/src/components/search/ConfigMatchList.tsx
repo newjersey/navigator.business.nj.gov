@@ -4,7 +4,8 @@ import { ReactElement, useEffect, useState } from "react";
 
 interface Props {
   matches: ConfigMatch[];
-  fileLabel: string;
+  collectionName: string;
+  fileName: string;
 }
 
 export const ConfigMatchList = (props: Props): ReactElement => {
@@ -26,10 +27,10 @@ export const ConfigMatchList = (props: Props): ReactElement => {
   };
 
   return (
-    <div className="margin-top-3">
-      <span className="font-body-lg">Collection:&nbsp;</span>
+    <div className="margin-top-3 margin-left-6">
       <span className="font-body-lg">
-        <strong>{props.fileLabel}</strong>
+        <strong>{`${props.collectionName} > ${props.fileName}`}</strong>
+        &nbsp;({props.matches.length})
       </span>
       <ul>
         {(expanded ? props.matches : collapsedMatches).map((match, i) => (

@@ -29,7 +29,8 @@ const groupByCMSFile = (configMatches: ConfigMatch[]): GroupedConfigMatch[] => {
   }
 
   return Object.keys(groupedConfigMatches).map((key) => ({
-    groupLabelPath: key,
+    cmsCollectionName: key.split(" > ")[0],
+    cmsFileName: key.split(" > ")[1],
     matches: groupedConfigMatches[key],
   }));
 };

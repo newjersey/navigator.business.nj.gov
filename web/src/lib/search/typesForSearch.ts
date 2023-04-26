@@ -19,6 +19,7 @@ export type ConfigMatch = {
 };
 
 export type GroupedConfigMatch = {
-  groupLabelPath: string;
+  cmsCollectionName: string;
+  cmsFileName: string;
   matches: ConfigMatch[];
 };
