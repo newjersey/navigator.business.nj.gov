@@ -15,8 +15,8 @@ To find an insurance broker, speak to your network, a local Chamber of Commerce,
 
 ### Other Common Types of Business Insurance
 
-- **Workers' Compensation Insurance:** Find a `workers' comp insurance|workers-comp` plan if you have employees. The State of New Jersey requires that you obtain this insurance if you have employees or stockholders in a corporation
-- **Motor Vehicle Insurance:** If your company will own or use any vehicles, consider purchasing motor vehicle insurance
+- **Workers' compensation insurance:** Find a `workers' comp insurance|workers-comp` plan if you have employees. The State of New Jersey requires that you obtain this insurance if you have employees or stockholders in a corporation
+- **Motor vehicle insurance:** If your company will own or use any vehicles, consider purchasing motor vehicle insurance
 
 > **Once completed, you will have:**
 >
