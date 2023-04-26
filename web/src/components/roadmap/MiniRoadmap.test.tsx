@@ -1,5 +1,5 @@
 import { MiniRoadmap } from "@/components/roadmap/MiniRoadmap";
-import { generatePreferences, generateStep, generateTask, generateUserData } from "@/test/factories";
+import { generateStep, generateTask, generateUserData } from "@/test/factories";
 import { useMockRoadmap } from "@/test/mock/mockUseRoadmap";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
 import {
@@ -7,6 +7,7 @@ import {
   setupStatefulUserDataContext,
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
+import { generatePreferences } from "@businessnjgovnavigator/shared/test";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useRoadmap", () => ({ useRoadmap: jest.fn() }));

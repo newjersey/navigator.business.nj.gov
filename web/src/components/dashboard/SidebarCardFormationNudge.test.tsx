@@ -3,7 +3,6 @@ import { getMergedConfig } from "@/contexts/configContext";
 import * as buildUserRoadmap from "@/lib/roadmap/buildUserRoadmap";
 import { SidebarCardContent } from "@/lib/types/types";
 import {
-  generatePreferences,
   generateProfileData,
   generateRoadmap,
   generateSidebarCardContent,
@@ -17,6 +16,7 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import { formationTaskId } from "@businessnjgovnavigator/shared/";
+import { generatePreferences } from "@businessnjgovnavigator/shared/test";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 

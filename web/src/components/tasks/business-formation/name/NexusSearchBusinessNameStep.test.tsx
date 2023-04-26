@@ -1,7 +1,7 @@
 import { NexusSearchBusinessNameStep } from "@/components/tasks/business-formation/name/NexusSearchBusinessNameStep";
 import { getMergedConfig } from "@/contexts/configContext";
 import analytics from "@/lib/utils/analytics";
-import { generateFormationData, generateProfileData, generateUserData } from "@/test/factories";
+import { generateProfileData, generateUserData } from "@/test/factories";
 import { markdownToText } from "@/test/helpers/helpers-utilities";
 import {
   dbaInputField,
@@ -18,6 +18,7 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import { createEmptyFormationFormData } from "@businessnjgovnavigator/shared/index";
+import { generateFormationData } from "@businessnjgovnavigator/shared/test";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 

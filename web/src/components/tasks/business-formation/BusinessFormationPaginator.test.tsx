@@ -13,7 +13,6 @@ import {
   generateFormationData,
   generateFormationDbaContent,
   generateFormationSubmitError,
-  generateFormationSubmitResponse,
   generateProfileData,
   generateTask,
   generateUserData,
@@ -42,7 +41,11 @@ import {
   getCurrentDate,
   ProfileData,
 } from "@businessnjgovnavigator/shared/";
-import { generateFormationFormData, generateMunicipality } from "@businessnjgovnavigator/shared/test";
+import {
+  generateFormationFormData,
+  generateFormationSubmitResponse,
+  generateMunicipality,
+} from "@businessnjgovnavigator/shared/test";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import * as materialUi from "@mui/material";
 import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";

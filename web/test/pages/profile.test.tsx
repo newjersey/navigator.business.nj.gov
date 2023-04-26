@@ -10,8 +10,6 @@ import { templateEval } from "@/lib/utils/helpers";
 import Profile from "@/pages/profile";
 import {
   allLegalStructuresOfType,
-  generateFormationData,
-  generateGetFilingResponse,
   generateProfileData,
   generateTaxFilingData,
   generateUser,
@@ -65,6 +63,7 @@ import {
   TaskProgress,
   UserData,
 } from "@businessnjgovnavigator/shared";
+import { generateFormationData, generateGetFilingResponse } from "@businessnjgovnavigator/shared/test";
 
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";

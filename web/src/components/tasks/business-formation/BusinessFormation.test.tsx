@@ -4,10 +4,7 @@ import { Task } from "@/lib/types/types";
 import { getDollarValue } from "@/lib/utils/formatters";
 import {
   generateEmptyFormationData,
-  generateFormationData,
   generateFormationDbaContent,
-  generateFormationSubmitResponse,
-  generateGetFilingResponse,
   generateProfileData,
   generateTask,
   generateUserData,
@@ -28,6 +25,11 @@ import {
   getCurrentDate,
   UserData,
 } from "@businessnjgovnavigator/shared";
+import {
+  generateFormationData,
+  generateFormationSubmitResponse,
+  generateGetFilingResponse,
+} from "@businessnjgovnavigator/shared/test/";
 
 import { Content } from "@/components/Content";
 import { useMockUserData } from "@/test/mock/mockUseUserData";

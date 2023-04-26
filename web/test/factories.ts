@@ -22,29 +22,18 @@ import {
 } from "@/lib/types/types";
 import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import {
-  AllBusinessSuffixes,
-  allFormationLegalTypes,
   arrayOfFundingAgencies,
   arrayOfOwnershipTypes as ownershipTypes,
-  arrayOfSectors as sectors,
   arrayOfStateObjects as states,
-  BusinessSuffix,
-  BusinessSuffixMap,
   BusinessUser,
   createEmptyFormationFormData,
   CURRENT_VERSION,
   defaultDateFormat,
-  FormationData,
-  FormationLegalType,
   FormationSubmitError,
-  FormationSubmitResponse,
   FundingAgency,
-  generateFormationFormData,
   generateMunicipality,
-  getCurrentDate,
   getCurrentDateFormatted,
   getCurrentDateISOString,
-  GetFilingResponse,
   Industries,
   Industry,
   IndustrySpecificData,
@@ -52,27 +41,29 @@ import {
   LegalStructure,
   LegalStructures,
   LicenseData,
-  LicenseStatusItem,
-  LicenseStatusResult,
   MunicipalityDetail,
-  NameAndAddress,
+  NameAvailability,
   OperatingPhaseId,
   OperatingPhases,
   OwnershipType,
-  Preferences,
   ProfileData,
   PublicFilingLegalType,
   publicFilingLegalTypes,
   randomInt,
   SectionType,
-  SectorType,
   StateObject,
-  TaxFiling,
   TaxFilingData,
-  TaxFilingLookUpRequest,
   UserData,
 } from "@businessnjgovnavigator/shared";
 import { BusinessPersona } from "@businessnjgovnavigator/shared/profileData";
+import {
+  generateFormationData,
+  generateLicenseStatusItem,
+  generateNameAndAddress,
+  generatePreferences,
+  generateTaxFiling,
+  randomSector,
+} from "@businessnjgovnavigator/shared/test";
 
 export const generateSectionType = (): SectionType => {
   const num = randomInt();
@@ -120,14 +111,6 @@ export const generateTaxFilingData = (overrides: Partial<TaxFilingData>): TaxFil
       ? getCurrentDateISOString()
       : undefined,
     filings: [generateTaxFiling({})],
-    ...overrides,
-  };
-};
-
-export const generateTaxFiling = (overrides: Partial<TaxFiling>): TaxFiling => {
-  return {
-    identifier: `some-identifier-${randomInt()}`,
-    dueDate: getCurrentDate().format(defaultDateFormat),
     ...overrides,
   };
 };
@@ -240,21 +223,6 @@ export const generateMunicipalityDetail = (overrides: Partial<MunicipalityDetail
   };
 };
 
-export const generatePreferences = (overrides: Partial<Preferences>): Preferences => {
-  return {
-    roadmapOpenSections: ["PLAN", "START"],
-    roadmapOpenSteps: [randomInt()],
-    hiddenFundingIds: [],
-    hiddenCertificationIds: [],
-    visibleSidebarCards: ["welcome"],
-    returnToLink: "",
-    isCalendarFullView: !(randomInt() % 2),
-    isHideableRoadmapOpen: !(randomInt() % 2),
-    phaseNewlyChanged: false,
-    ...overrides,
-  };
-};
-
 export const generateRoadmap = (overrides: Partial<Roadmap>): Roadmap => {
   return {
     steps: [generateStep({})],
@@ -320,39 +288,10 @@ export const generateTaskLink = (overrides: Partial<TaskLink>): TaskLink => {
   };
 };
 
-export const generateNameAndAddress = (overrides: Partial<NameAndAddress>): NameAndAddress => {
+export const generateNameAvailability = (overrides: Partial<NameAvailability>): NameAvailability => {
   return {
-    name: `some-name-${randomInt()}`,
-    addressLine1: `some-address-1-${randomInt()}`,
-    addressLine2: `some-address-2-${randomInt()}`,
-    zipCode: `some-zipcode-${randomInt()}`,
-    ...overrides,
-  };
-};
-
-export const generateTaxIdAndBusinessName = (
-  overrides: Partial<TaxFilingLookUpRequest>
-): TaxFilingLookUpRequest => {
-  return {
-    businessName: `some-name-${randomInt()}`,
-    taxId: `${randomInt(12)}`,
-    encryptedTaxId: "random-encrypted-value",
-    ...overrides,
-  };
-};
-
-export const generateLicenseStatusItem = (overrides: Partial<LicenseStatusItem>): LicenseStatusItem => {
-  return {
-    title: `some-title-${randomInt()}`,
-    status: "ACTIVE",
-    ...overrides,
-  };
-};
-
-export const generateLicenseStatusResult = (overrides: Partial<LicenseStatusResult>): LicenseStatusResult => {
-  return {
-    status: "PENDING",
-    checklistItems: [generateLicenseStatusItem({})],
+    status: "UNAVAILABLE",
+    similarNames: [`some-name-${randomInt()}`],
     ...overrides,
   };
 };
@@ -402,21 +341,6 @@ export const generateStateItem = (): StateObject => {
   return randomElementFromArray(states);
 };
 
-export const generateFormationData = (
-  overrides: Partial<FormationData>,
-  legalStructureId?: FormationLegalType
-): FormationData => {
-  return {
-    formationFormData: generateFormationFormData({}, { legalStructureId }),
-    businessNameAvailability: undefined,
-    formationResponse: undefined,
-    getFilingResponse: undefined,
-    completedFilingPayment: false,
-    lastVisitedPageIndex: 0,
-    ...overrides,
-  };
-};
-
 export const generateEmptyFormationData = (): FormationData => {
   return {
     formationFormData: createEmptyFormationFormData(),
@@ -428,20 +352,6 @@ export const generateEmptyFormationData = (): FormationData => {
   };
 };
 
-export const generateFormationSubmitResponse = (
-  overrides: Partial<FormationSubmitResponse>
-): FormationSubmitResponse => {
-  return {
-    success: !!(randomInt() % 2),
-    token: `some-token-${randomInt()}`,
-    formationId: `some-id-${randomInt()}`,
-    redirect: `some-redirect-${randomInt()}`,
-    errors: [],
-    lastUpdatedISO: getCurrentDateISOString(),
-    ...overrides,
-  };
-};
-
 export const generateFormationSubmitError = (
   overrides: Partial<FormationSubmitError>
 ): FormationSubmitError => {
@@ -449,19 +359,6 @@ export const generateFormationSubmitError = (
     field: `some-field-${randomInt()}`,
     message: `some-message-${randomInt()}`,
     type: randomInt() % 2 ? "UNKNOWN" : "RESPONSE",
-    ...overrides,
-  };
-};
-
-export const generateGetFilingResponse = (overrides: Partial<GetFilingResponse>): GetFilingResponse => {
-  return {
-    success: true,
-    entityId: `some-entity-${randomInt()}`,
-    transactionDate: getCurrentDateISOString(),
-    confirmationNumber: `some-confirmation-number-${randomInt()}`,
-    formationDoc: `some-formation-doc-${randomInt()}`,
-    standingDoc: `some-standing-doc-${randomInt()}`,
-    certifiedDoc: `some-certified-doc-${randomInt()}`,
     ...overrides,
   };
 };
@@ -561,17 +458,6 @@ export const randomPublicFilingLegalType = (): PublicFilingLegalType => {
   return randomElementFromArray(publicFilingLegalTypes as unknown as string[]) as PublicFilingLegalType;
 };
 
-export const randomFormationLegalType = (): FormationLegalType => {
-  return randomElementFromArray(allFormationLegalTypes as unknown as string[]) as FormationLegalType;
-};
-
-export const randomBusinessSuffix = (legalStructureId?: FormationLegalType): BusinessSuffix => {
-  const legalSuffix = legalStructureId ? BusinessSuffixMap[legalStructureId] : undefined;
-  const suffixes = legalSuffix ?? AllBusinessSuffixes;
-  const randomIndex = Math.floor(Math.random() * suffixes.length);
-  return suffixes[randomIndex] as BusinessSuffix;
-};
-
 export const randomFundingStatus = (): FundingStatus => {
   const all = ["rolling application", "deadline", "first come, first serve", "closed"];
   const randomIndex = Math.floor(Math.random() * all.length);
@@ -660,11 +546,6 @@ export const allLegalStructuresOfType = ({
   }
 
   return [];
-};
-
-export const randomSector = (): SectorType => {
-  const randomIndex = Math.floor(Math.random() * sectors.length);
-  return sectors[randomIndex];
 };
 
 export const randomOperatingPhaseId = (): OperatingPhaseId => {

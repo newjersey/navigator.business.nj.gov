@@ -5,7 +5,6 @@ import { templateEval } from "@/lib/utils/helpers";
 import {
   generateCertification,
   generateFunding,
-  generatePreferences,
   generateProfileData,
   generateSidebarCardContent,
   generateUserData,
@@ -20,6 +19,7 @@ import {
   WithStatefulUserData,
 } from "@/test/mock/withStatefulUserData";
 import { UserData } from "@businessnjgovnavigator/shared";
+import { generatePreferences } from "@businessnjgovnavigator/shared/test";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 

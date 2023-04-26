@@ -1,8 +1,9 @@
 /* eslint-disable unicorn/consistent-function-scoping */
 
 import { formationTaskId, taxTaskId } from "@shared/domain-logic/taskIds";
+import { generatePreferences } from "@shared/test";
 import { TaskProgress, UserData } from "@shared/userData";
-import { generatePreferences, generateProfileData, generateUserData } from "../../../test/factories";
+import { generateProfileData, generateUserData } from "../../../test/factories";
 import { updateOperatingPhase } from "./updateOperatingPhase";
 
 describe("updateOperatingPhase", () => {
