@@ -157,18 +157,40 @@ const getPostOnboardingQuestion = (task: Task): ReactElement => {
 
 export const TaskElement = (props: { task: Task; children?: ReactNode | ReactNode[] }): ReactElement => {
   const hasPostOnboardingQuestion = !!props.task.postOnboardingQuestion;
-  const [beforeQuestion, afterQuestion] = props.task.contentMd.split("{postOnboardingQuestion}");
-
   const shouldShowDeferredQuestion = props.task.requiresLocation;
-  const hasDeferredLocationQuestion =
-    props.task.contentMd.includes("${beginLocationDependentSection}") &&
-    props.task.contentMd.includes("${endLocationDependentSection}");
+  let hasDeferredLocationQuestion = false;
 
-  let deferredQuestionInnerContent = "";
-  let afterDeferredQuestion = "";
-  const [beforeDeferredQuestion, after] = props.task.contentMd.split("${beginLocationDependentSection}");
-  if (after) {
-    [deferredQuestionInnerContent, afterDeferredQuestion] = after.split("${endLocationDependentSection}");
+  const deferredLocationQuestion = {
+    before: "",
+    innerContent: "",
+    after: "",
+  };
+
+  const postOnboardingQuestion = {
+    before: "",
+    innerContent: "",
+    after: "",
+  };
+
+  if (props.task.contentMd) {
+    const [beforePostOnboarding, afterPostOnboarding] =
+      props.task.contentMd.split("{postOnboardingQuestion}");
+    postOnboardingQuestion.before = beforePostOnboarding;
+    postOnboardingQuestion.after = afterPostOnboarding;
+    hasDeferredLocationQuestion =
+      props.task.contentMd.includes("${beginLocationDependentSection}") &&
+      props.task.contentMd.includes("${endLocationDependentSection}");
+
+    const [beforeDeferredLocation, rest] = props.task.contentMd.split("${beginLocationDependentSection}");
+    deferredLocationQuestion.before = beforeDeferredLocation;
+    deferredLocationQuestion.after = rest;
+    if (rest) {
+      const [innerContentDeferredLocation, afterDeferredLocation] = rest.split(
+        "${endLocationDependentSection}"
+      );
+      deferredLocationQuestion.innerContent = innerContentDeferredLocation;
+      deferredLocationQuestion.after = afterDeferredLocation;
+    }
   }
 
   return (
@@ -179,19 +201,19 @@ export const TaskElement = (props: { task: Task; children?: ReactNode | ReactNod
 
         {hasDeferredLocationQuestion && (
           <>
-            <Content>{beforeDeferredQuestion}</Content>
+            <Content>{deferredLocationQuestion.before}</Content>
             {shouldShowDeferredQuestion && (
-              <DeferredLocationQuestion innerContent={deferredQuestionInnerContent} />
+              <DeferredLocationQuestion innerContent={deferredLocationQuestion.innerContent} />
             )}
-            <Content>{afterDeferredQuestion}</Content>
+            <Content>{deferredLocationQuestion.after}</Content>
           </>
         )}
 
         {hasPostOnboardingQuestion && (
           <>
-            <Content>{beforeQuestion}</Content>
+            <Content>{postOnboardingQuestion.before}</Content>
             {getPostOnboardingQuestion(props.task)}
-            {afterQuestion && <Content>{afterQuestion}</Content>}
+            {postOnboardingQuestion.after && <Content>{postOnboardingQuestion.after}</Content>}
           </>
         )}
 
