@@ -38,8 +38,9 @@ describe("check license status [feature] [all] [group1]", () => {
     cy.get('[data-testid="error-alert-NOT_FOUND"]').should("exist");
     // eslint-disable-next-line testing-library/await-async-utils
     cy.wait("@userAPI");
-    // re-load page, come back to same page
-    cy.visit("/tasks/register-consumer-affairs");
+
+    cy.reload();
+
     cy.get('input[data-testid="business-name"]').should("have.value", "Aculyst");
     cy.get('input[data-testid="address-1"]').should("have.value", "123 Main Street");
     cy.get('input[data-testid="zipcode"]').should("have.value", "12345");
@@ -56,8 +57,7 @@ describe("check license status [feature] [all] [group1]", () => {
     cy.contains("Aculyst").should("exist");
     cy.contains("111 Business St, 12345 NJ").should("exist");
 
-    // re-load page, come back to same page
-    cy.visit("/tasks/register-consumer-affairs");
+    cy.reload();
     cy.get('[data-testid="permit-PENDING"]').should("exist");
 
     // different address
