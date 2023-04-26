@@ -1,13 +1,14 @@
 ---
-urlSlug: authorize-business-entity
+urlSlug: business-entity-auth
+filename: business-entity-auth
 name: Authorize Your Business Entity
 id: form-business-entity
 callToActionLink: https://www.njportal.com/DOR/BusinessFormation/CompanyInformation/BusinessName
 callToActionText: Authorize My Business
 issuingAgency: New Jersey Department of Treasury's Division of Revenue and Enterprise Services
 ---
-
-You must register your business name and authorize your `business structure|business-structure-learn-more` with the State.
+To conduct business in New Jersey, you must
+register your business name and authorize your `business structure|business-structure-learn-more` with the State.
 
 ---
 
@@ -20,7 +21,7 @@ You must register your business name and authorize your `business structure|busi
 - Business description
 - Business address (this may be a home address if you are a home-based business)
 - `Registered agent|registered-agent`
-- Credit card or E-check payment
+- Applicable fees paid
 
 > **Once completed, you will have:**
 >
