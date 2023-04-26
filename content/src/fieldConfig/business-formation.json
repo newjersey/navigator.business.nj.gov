@@ -39,9 +39,7 @@
       "notificationsDescription": "Get free text/email notifications:",
       "notificationsHeader": "Notifications",
       "review": {
-        "addressLabel": "Address",
         "nameLabel": "Full Name",
-        "locationHeader": "Location",
         "billingContactHeader": "Billing Contact Information"
       },
       "contactInfoHeader": "Billing Contact Information",
