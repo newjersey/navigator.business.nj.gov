@@ -6,21 +6,14 @@ import {
   newsletterStatusList,
   UserTestingResponse,
 } from "@shared/businessUser";
-import { getCurrentDateFormatted, getCurrentDateISOString } from "@shared/dateHelpers";
-import { defaultDateFormat } from "@shared/defaultConstants";
+import { getCurrentDateISOString } from "@shared/dateHelpers";
 import { UserFeedbackRequest, UserIssueRequest } from "@shared/feedbackRequest";
 import {
-  AllBusinessSuffixes,
-  allFormationLegalTypes,
-  BusinessSuffix,
-  BusinessSuffixMap,
   castPublicFilingLegalTypeToFormationType,
   createEmptyFormationFormData,
   FormationData,
   FormationFormData,
   FormationLegalType,
-  FormationSubmitResponse,
-  GetFilingResponse,
   InputFile,
   PublicFilingLegalType,
   publicFilingLegalTypes,
@@ -28,19 +21,21 @@ import {
 import { Industries, Industry } from "@shared/industry";
 import { randomInt, randomIntFromInterval } from "@shared/intHelpers";
 import { LegalStructure, LegalStructures } from "@shared/legalStructure";
-import {
-  LicenseData,
-  LicenseEntity,
-  LicenseStatusItem,
-  LicenseStatusResult,
-  NameAndAddress,
-} from "@shared/license";
-import { Municipality } from "@shared/municipality";
+import { LicenseData, LicenseEntity } from "@shared/license";
 import { IndustrySpecificData, ProfileData } from "@shared/profileData";
-import { arrayOfSectors as sectors, SectorType } from "@shared/sector";
-import { TaxFiling, TaxFilingData, TaxFilingLookUpRequest } from "@shared/taxFiling";
-import { generateFormationFormData, randomPublicFilingLegalType } from "@shared/test";
-import { CURRENT_VERSION, Preferences, UserData } from "@shared/userData";
+import { TaxFilingData } from "@shared/taxFiling";
+import {
+  generateFormationData,
+  generateFormationFormData,
+  generateLicenseStatusItem,
+  generateMunicipality,
+  generateNameAndAddress,
+  generatePreferences,
+  generateTaxFiling,
+  randomPublicFilingLegalType,
+  randomSector,
+} from "@shared/test";
+import { CURRENT_VERSION, UserData } from "@shared/userData";
 import { SelfRegResponse, TaxFilingResult } from "src/domain/types";
 import { getRandomDateInBetween, randomElementFromArray } from "./helpers";
 
@@ -153,14 +148,6 @@ export const generateTaxFilingData = (overrides: Partial<TaxFilingData>): TaxFil
   };
 };
 
-export const generateTaxFiling = (overrides: Partial<TaxFiling>): TaxFiling => {
-  return {
-    identifier: `some-identifier-${randomInt()}`,
-    dueDate: getCurrentDateFormatted(defaultDateFormat),
-    ...overrides,
-  };
-};
-
 export const generateInputFile = (overrides: Partial<InputFile>): InputFile => {
   return {
     base64Contents: `some-base-64-contents-${randomInt()}`,
@@ -234,53 +221,6 @@ export const generateProfileData = (overrides: Partial<ProfileData>): ProfileDat
   };
 };
 
-export const generateMunicipality = (overrides: Partial<Municipality>): Municipality => {
-  return {
-    displayName: `some-display-name-${randomInt()}`,
-    name: `some-name-${randomInt()}`,
-    county: `some-county-${randomInt()}`,
-    id: `some-id-${randomInt()}`,
-    ...overrides,
-  };
-};
-
-export const generateLicenseStatusItem = (overrides: Partial<LicenseStatusItem>): LicenseStatusItem => {
-  return {
-    title: `some-title-${randomInt()}`,
-    status: "ACTIVE",
-    ...overrides,
-  };
-};
-
-export const generateLicenseStatusResult = (overrides: Partial<LicenseStatusResult>): LicenseStatusResult => {
-  return {
-    status: "PENDING",
-    checklistItems: [generateLicenseStatusItem({})],
-    ...overrides,
-  };
-};
-
-export const generateTaxIdAndBusinessName = (
-  overrides: Partial<TaxFilingLookUpRequest>
-): TaxFilingLookUpRequest => {
-  return {
-    businessName: `some-name-${randomInt()}`,
-    taxId: `${randomInt(12)}`,
-    encryptedTaxId: "some-encrypted-value",
-    ...overrides,
-  };
-};
-
-export const generateNameAndAddress = (overrides: Partial<NameAndAddress>): NameAndAddress => {
-  return {
-    name: `some-name-${randomInt()}`,
-    addressLine1: `some-address-1-${randomInt()}`,
-    addressLine2: `some-address-2-${randomInt()}`,
-    zipCode: `some-zipcode-${randomInt()}`,
-    ...overrides,
-  };
-};
-
 export const generateLicenseEntity = (overrides: Partial<LicenseEntity>): LicenseEntity => {
   return {
     fullName: `some-name-${randomInt()}`,
@@ -314,21 +254,6 @@ export const generateLicenseData = (overrides: Partial<LicenseData>): LicenseDat
   };
 };
 
-export const generatePreferences = (overrides: Partial<Preferences>): Preferences => {
-  return {
-    roadmapOpenSections: ["PLAN", "START"],
-    roadmapOpenSteps: [],
-    hiddenFundingIds: [],
-    hiddenCertificationIds: [],
-    visibleSidebarCards: ["welcome"],
-    returnToLink: "",
-    isCalendarFullView: !(randomInt() % 2),
-    isHideableRoadmapOpen: !(randomInt() % 2),
-    phaseNewlyChanged: false,
-    ...overrides,
-  };
-};
-
 export const generateSelfRegResponse = (overrides: Partial<SelfRegResponse>): SelfRegResponse => {
   return {
     myNJUserKey: `some-mynj-key-${randomInt()}`,
@@ -340,11 +265,6 @@ export const generateSelfRegResponse = (overrides: Partial<SelfRegResponse>): Se
 export const randomLegalStructure = (): LegalStructure => {
   const randomIndex = Math.floor(Math.random() * LegalStructures.length);
   return LegalStructures[randomIndex];
-};
-
-export const randomSector = (): SectorType => {
-  const randomIndex = Math.floor(Math.random() * sectors.length);
-  return sectors[randomIndex];
 };
 
 export const randomIndustry = (): Industry => {
@@ -372,21 +292,6 @@ export const generateExternalStatus = (overrides: Partial<ExternalStatus>): Exte
   };
 };
 
-export const generateFormationData = (
-  overrides: Partial<FormationData>,
-  legalStructureId?: FormationLegalType
-): FormationData => {
-  return {
-    formationFormData: generateFormationFormData({}, { legalStructureId }),
-    businessNameAvailability: undefined,
-    formationResponse: undefined,
-    getFilingResponse: undefined,
-    completedFilingPayment: false,
-    lastVisitedPageIndex: 0,
-    ...overrides,
-  };
-};
-
 export const generateNewsletterResponse = (overrides: Partial<NewsletterResponse>): NewsletterResponse => {
   const failed = !!(randomInt() % 2);
   return {
@@ -401,45 +306,6 @@ export const generateUserTestingResponse = (overrides: Partial<UserTestingRespon
   return {
     success: !failed,
     status: failed ? "CONNECTION_ERROR" : "SUCCESS",
-    ...overrides,
-  };
-};
-
-export const randomFormationLegalType = (): FormationLegalType => {
-  const randomIndex = Math.floor(Math.random() * allFormationLegalTypes.length);
-  return allFormationLegalTypes[randomIndex] as FormationLegalType;
-};
-
-export const randomBusinessSuffix = (legalStructureId?: FormationLegalType): BusinessSuffix => {
-  const legalSuffix = legalStructureId ? BusinessSuffixMap[legalStructureId] : undefined;
-  const suffixes = legalSuffix ?? AllBusinessSuffixes;
-  const randomIndex = Math.floor(Math.random() * suffixes.length);
-  return suffixes[randomIndex] as BusinessSuffix;
-};
-
-export const generateGetFilingResponse = (overrides: Partial<GetFilingResponse>): GetFilingResponse => {
-  return {
-    success: true,
-    entityId: `some-entity-${randomInt()}`,
-    transactionDate: getCurrentDateISOString(),
-    confirmationNumber: `some-confirmation-number-${randomInt()}`,
-    formationDoc: `some-formation-doc-${randomInt()}`,
-    standingDoc: `some-standing-doc-${randomInt()}`,
-    certifiedDoc: `some-certified-doc-${randomInt()}`,
-    ...overrides,
-  };
-};
-
-export const generateFormationSubmitResponse = (
-  overrides: Partial<FormationSubmitResponse>
-): FormationSubmitResponse => {
-  return {
-    success: !!(randomInt() % 2),
-    token: `some-token-${randomInt()}`,
-    formationId: `some-id-${randomInt()}`,
-    redirect: `some-redirect-${randomInt()}`,
-    errors: [],
-    lastUpdatedISO: getCurrentDateISOString(),
     ...overrides,
   };
 };

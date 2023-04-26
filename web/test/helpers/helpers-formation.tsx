@@ -12,7 +12,6 @@ import {
   TasksDisplayContent,
 } from "@/lib/types/types";
 import {
-  generateFormationData,
   generateProfileData,
   generateTask,
   generateUserData,
@@ -39,6 +38,7 @@ import {
   randomInt,
   UserData,
 } from "@businessnjgovnavigator/shared";
+import { generateFormationData } from "@businessnjgovnavigator/shared/test";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import { act, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 

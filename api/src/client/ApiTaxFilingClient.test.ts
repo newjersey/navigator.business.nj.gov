@@ -3,11 +3,8 @@ import { randomInt } from "@shared/intHelpers";
 import { TaxFilingLookUpRequest } from "@shared/taxFiling";
 import axios from "axios";
 
-import {
-  generateTaxFilingDates,
-  generateTaxFilingResult,
-  generateTaxIdAndBusinessName,
-} from "../../test/factories";
+import { generateTaxIdAndBusinessName } from "@shared/test";
+import { generateTaxFilingDates, generateTaxFilingResult } from "../../test/factories";
 import { TaxFilingClient } from "../domain/types";
 import { LogWriter, LogWriterType } from "../libs/logWriter";
 

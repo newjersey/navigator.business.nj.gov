@@ -4,9 +4,7 @@ import { OperateReference } from "@/lib/types/types";
 import analytics from "@/lib/utils/analytics";
 import {
   generateOperateReference,
-  generatePreferences,
   generateProfileData,
-  generateTaxFiling,
   generateTaxFilingData,
   generateUserData,
   publicFilingLegalStructures,
@@ -30,6 +28,7 @@ import {
   TaxFiling,
   UserData,
 } from "@businessnjgovnavigator/shared/index";
+import { generatePreferences, generateTaxFiling } from "@businessnjgovnavigator/shared/test";
 import * as materialUi from "@mui/material";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import { fireEvent, render, screen, within } from "@testing-library/react";

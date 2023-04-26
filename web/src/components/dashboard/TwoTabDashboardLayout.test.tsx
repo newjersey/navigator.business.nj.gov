@@ -5,12 +5,12 @@ import { templateEval } from "@/lib/utils/helpers";
 import {
   generateCertification,
   generateFunding,
-  generatePreferences,
   getProfileDataForUnfilteredOpportunities,
 } from "@/test/factories";
 import { randomElementFromArray } from "@/test/helpers/helpers-utilities";
 import { useMockUserData } from "@/test/mock/mockUseUserData";
 import { OperatingPhases } from "@businessnjgovnavigator/shared/operatingPhase";
+import { generatePreferences } from "@businessnjgovnavigator/shared/test";
 import { fireEvent, render, screen } from "@testing-library/react";
 
 jest.mock("@/lib/data-hooks/useUserData", () => ({ useUserData: jest.fn() }));

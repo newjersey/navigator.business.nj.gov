@@ -1,7 +1,7 @@
 import { formationTaskId } from "@shared/domain-logic/taskIds";
 import { OperatingPhaseId } from "@shared/operatingPhase";
-import { generateMunicipality } from "@shared/test";
-import { generatePreferences, generateProfileData, generateUserData } from "../../test/factories";
+import { generateMunicipality, generatePreferences } from "@shared/test";
+import { generateProfileData, generateUserData } from "../../test/factories";
 import { updateSidebarCards } from "./updateSidebarCards";
 
 describe("updateRoadmapSidebarCards", () => {

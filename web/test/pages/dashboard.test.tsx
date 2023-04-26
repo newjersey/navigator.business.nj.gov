@@ -12,12 +12,10 @@ import {
 import DashboardPage from "@/pages/dashboard";
 import {
   generateBusinessPersona,
-  generatePreferences,
   generateProfileData,
   generateSidebarCardContent,
   generateStep,
   generateTask,
-  generateTaxFiling,
   generateTaxFilingData,
   generateUserData,
   randomHomeBasedIndustry,
@@ -43,6 +41,7 @@ import {
   UserData,
 } from "@businessnjgovnavigator/shared";
 import { OperatingPhase } from "@businessnjgovnavigator/shared/src/operatingPhase";
+import { generatePreferences, generateTaxFiling } from "@businessnjgovnavigator/shared/test";
 import * as materialUi from "@mui/material";
 import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import { act, fireEvent, render, screen, waitFor, within } from "@testing-library/react";

@@ -1,7 +1,10 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { getCurrentDate, getCurrentDateISOString, parseDate, parseDateWithFormat } from "@shared/dateHelpers";
+import { defaultDateFormat } from "@shared/defaultConstants";
 import { formationApiDateFormat, FormationLegalType } from "@shared/formationData";
+import { randomInt } from "@shared/intHelpers";
 import {
+  generateFormationData,
   generateFormationFormData,
   generateFormationIncorporator,
   generateFormationMember,
@@ -9,12 +12,8 @@ import {
   generateFormationSigner,
   generateFormationUSAddress,
 } from "@shared/test";
-
-import { defaultDateFormat } from "@shared/defaultConstants";
-import { randomInt } from "@shared/intHelpers";
 import axios from "axios";
 import {
-  generateFormationData,
   generateFormationUserData,
   generateInputFile,
   generateProfileData,

@@ -4,8 +4,6 @@ import * as api from "@/lib/api-client/apiClient";
 import { IsAuthenticated } from "@/lib/auth/AuthContext";
 import { QUERIES, ROUTES } from "@/lib/domain-logic/routes";
 import {
-  generateFormationData,
-  generateGetFilingResponse,
   generateProfileData,
   generateTaxFilingData,
   generateUserData,
@@ -30,6 +28,7 @@ import {
   OperatingPhases,
   UserData,
 } from "@businessnjgovnavigator/shared";
+import { generateFormationData, generateGetFilingResponse } from "@businessnjgovnavigator/shared/test";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 

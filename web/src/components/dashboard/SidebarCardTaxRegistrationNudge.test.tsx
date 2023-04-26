@@ -3,11 +3,9 @@ import { getMergedConfig } from "@/contexts/configContext";
 import * as buildUserRoadmap from "@/lib/roadmap/buildUserRoadmap";
 import { SidebarCardContent } from "@/lib/types/types";
 import {
-  generatePreferences,
   generateProfileData,
   generateRoadmap,
   generateSidebarCardContent,
-  generateTaxFiling,
   generateTaxFilingData,
   generateUserData,
 } from "@/test/factories";
@@ -20,6 +18,7 @@ import {
 } from "@/test/mock/withStatefulUserData";
 import { getCurrentDateISOString } from "@businessnjgovnavigator/shared/dateHelpers";
 import { taxTaskId } from "@businessnjgovnavigator/shared/index";
+import { generatePreferences, generateTaxFiling } from "@businessnjgovnavigator/shared/test";
 import { UserData } from "@businessnjgovnavigator/shared/userData";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 
