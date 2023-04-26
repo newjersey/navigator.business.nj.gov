@@ -10,12 +10,14 @@ callToActionText: ""
 webflowId: 64147a42689e2308a6b2252a
 localLevelTask: Municipal Clerk
 licenseCertificationClassification: ""
+requiresLocation: true
 ---
-Prior to opening your physical location, you may need to get a mercantile license. The mercantile license provides your local government with information on how to reach you in an emergency. 
+
+Prior to opening your physical location, you may need to get a mercantile license. The mercantile license provides your local government with information on how to reach you in an emergency.
 
 Each town or city will have its own application process for the mercantile license, some governments do not require this.
 
-- - -
+---
 
 ### Actions to Take
 
@@ -27,8 +29,8 @@ You can find your local municipal clerk's office through the [${municipality} we
 
 ${endLocationDependentSection}
 
-- - -
+---
 
 > **Once completed, you will have:**
 >
-> * A mercantile license
+> - A mercantile license
