@@ -142,7 +142,9 @@
     "Fortius",
     "USPS",
     "healthz",
-    "UCEDC"
+    "UCEDC",
+    "SSAE",
+    "PCAOB"
   ],
   "ignorePaths": ["node_modules/**", "out/**", "web/out/**", "package.json"]
 }
