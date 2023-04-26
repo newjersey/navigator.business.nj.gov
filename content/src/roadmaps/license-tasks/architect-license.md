@@ -1,35 +1,38 @@
 ---
-urlSlug: architect-license
 filename: architect-license
-name: Apply for an Architect License
+urlSlug: architect-license
+name: Apply for Your Architect License
+webflowName: "Architecture: Architect License"
+industryIntegration: New Jersey Division of Consumer Affairs
+industryId: architecture
+callToActionLink: https://www.njconsumeraffairs.gov/arch/Pages/applications.aspx
+webflowIndustry: Architect
+divisionPhone: (973) 504-6385
 id: architect-license
-callToActionLink: https://newjersey.mylicense.com/eGov/Login.aspx
-callToActionText: Apply for My License
 issuingAgency: New Jersey Division of Consumer Affairs Board of Architects
-webflowId: "5f772971b0544fd3d536617b"
-webflowName: "Architect"
-webflowIndustry: "Architect"
-divisionPhone: "(973) 504-6385"
-licenseCertificationClassification: "LICENSE"
+callToActionText: Apply for My Architect License
+webflowType: individual-license
+webflowId: 5f772971b0544fd3d536617b
+licenseCertificationClassification: LICENSE
 ---
+You or any staff providing architectural services need an architect license. 
 
-You need an Architect license prior to offering professional services as an individual or opening an architect firm.
-
----
+- - -
 
 ### Eligibility Criteria
 
-- Bachelor’s or Master’s Degree in architecture from an institution accredited by the National Architecture Accrediting Board
-- A minimum of three years in the Architectural Experience Program (AXP) administered by the National Council of Architectural Registration Boards (NCARB)
+* A bachelor’s or master’s degree in architecture from an institution accredited by the National Architecture Accrediting Board
+* A minimum of three years in the Architectural Experience Program (AXP) administered by the National Council of Architectural Registration Boards (NCARB)
+* Completed all divisions of the Architect Registration Exam (A.R.E.)
 
 ### Application Requirements
 
-- A 2x2 passport photo in color taken within the last six months
-- Supporting documentation (like police records) if you answered "Yes” to any questions of criminal background or moral character
-- College transcripts must be sent directly from the college(s) to the Board
-- Names and addresses of three architects who are personally acquainted with your professional abilities.
-- Pay any associated fees
+* A 2x2 passport photo in color taken within the last six months
+* Supporting documentation (like police records) if you answered "Yes” to any questions of criminal background or moral character
+* College transcripts sent directly from the college(s) to the board
+* Names and addresses of three architects who are personally acquainted with your professional abilities
+* Applicable fees paid
 
 > **Once completed, you will have:**
 >
-> - Approval to sign up to take the Architect’s Registration Exam, the last step before obtaining your license
+> * An architect license

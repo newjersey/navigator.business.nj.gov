@@ -1,21 +1,21 @@
 ---
 filename: town-mercantile-license
 urlSlug: town-mercantile-license
-name: Get Your Mercantile License if Your Town Requires it
-webflowName: "Restaurant: Mercantile License"
-localLevelTask: Municipal Clerk
+name: Get a Mercantile License if Your Town Requires It
+webflowName: "Businesses with a Physical Location: Mercantile License"
 industryId: restaurant
-callToActionText: ""
 callToActionLink: ""
 id: check-local-requirements
+callToActionText: ""
 webflowId: 64147a42689e2308a6b2252a
+localLevelTask: Municipal Clerk
 licenseCertificationClassification: ""
 requiresLocation: true
 ---
 
-Prior to opening, you may need to get a mercantile license.
+Prior to opening your physical location, you may need to get a mercantile license. The mercantile license provides your local government with information on how to reach you in an emergency.
 
-Some local governments require businesses with commercial locations to get a mercantile license. Each municipality will have its own application process for the mercantile license.
+Each town or city will have its own application process for the mercantile license, some governments do not require this.
 
 ---
 

@@ -1,33 +1,37 @@
 ---
-urlSlug: register-consumer-affairs
-name: Obtain Your Home Improvement Contractor License
+filename: home-improvement-contractor-license
+urlSlug: hic-license
+name: Obtain a Home Improvement Contractor Registration
+webflowName: "Home Contractor: Home Improvement Contractor Registration"
+industryIntegration: New Jersey Division of Consumer Affairs
+formName: HIC-Form1-Rev
+industryId: home-contractor
+callToActionLink: https://www.njconsumeraffairs.gov/ocp/Pages/hic.aspx
+webflowIndustry: ""
+issuingDivision: Home Improvement Contractors Registration
+divisionPhone: (973) 424-8150
 id: register-consumer-affairs
-callToActionLink: https://www.njconsumeraffairs.gov/hic/Applications/Home-Improvement-Contractor-Application-for-Initial-Registration.pdf
-callToActionText: Obtain My Contractor License
 issuingAgency: New Jersey Division of Consumer Affairs Home Improvement Unit
-industryIntegration: NJ Department of Consumer Affairs
-webflowId: "5f7729927fe89d43ed054794"
-webflowName: "Home Improvement Contractor"
-webflowIndustry: "Home Improvement Contractor"
-issuingDivision: "Home Improvement Contractors Registration"
-divisionPhone: "(973) 424-8150"
-licenseCertificationClassification: "REGISTRATION"
+callToActionText: Complete My Contractor Registration
+webflowType: individual-license
+webflowId: 5f7729927fe89d43ed054794
+licenseCertificationClassification: ""
 ---
+Home improvement contractors are individuals and companies involved in repairing, renovating, modernizing, installing, replacing, improving, restoring, painting, constructing, remodeling, moving, or demolishing residential or noncommercial properties. If you or your business is involved in any of the activities mentioned above you must register as a Home Improvement Contractor.
 
-All home improvement contractors (individuals and corporate entities) must register and commit to following regulations and guidelines set out in the [Contractor's Registration Act](https://www.njconsumeraffairs.gov/hic/Applications/Home-Improvement-Contractor-Application-for-Initial-Registration.pdf)
-
----
+- - -
 
 ### Application Requirements
 
-- []{hic-coi} A Certificate of Insurance with a commercial general liability insurance policy in a minimum amount of $500,000 per occurrence
-- []{hic-fee} Pay any associated fees
+* A certificate of insurance with a commercial general liability insurance policy in a minimum amount of $500,000 per occurrence
+* Paid any associated application fees
 
 > **Once completed, you will have:**
 >
-> - A New Jersey Home Improvement Contractor (NJHIC) number
-> - An official paper registration received by mail (also known as a registration card)
-
-> **What if I don't complete this form?**
+> * A New Jersey home improvement contractor (NJHIC) number
+> * An official paper registration received by mail (also known as a registration card)
 >
-> Unregistered contractors who sell or make home improvements may be subject to civil penalties and possibly criminal penalties as well
+
+> **What if I don't complete this registration?**
+>
+> Unregistered contractors who sell or make home improvements may be subject to civil penalties and possibly criminal penalties.

@@ -1,32 +1,39 @@
 ---
 urlSlug: auto-body-repair-license
-name: Get an Auto-Body Repair License
-webflowName: Auto Body
-id: auto-body-repair-license
-callToActionLink: https://www.state.nj.us/mvcbiz/pdf/About/autobody.pdf
-callToActionText: Apply for My Auto-Body Repair License
-issuingAgency: "New Jersey Motor Vehicle Commission"
+name: Get Your Auto-Body Repair License
+webflowName: "Auto-Body Repair: Business License"
 formName: BLC-25
-licenseCertificationClassification: "LICENSE"
-webflowId: "5f7729541a08097ccbbb2ecb"
-divisionPhone: "(609) 292-6500"
-webflowIndustry: "Auto Body"
+industryId: auto-body-repair
+callToActionLink: https://www.state.nj.us/mvcbiz/BusinessServices/AutoBodyRepair.htm
+webflowIndustry: Auto Body
+divisionPhone: (609) 292-6500
+id: auto-body-repair-license
+issuingAgency: New Jersey Motor Vehicle Commission
+callToActionText: Apply for My Auto-Body Repair License
+webflowType: business-license
+webflowId: 5f7729541a08097ccbbb2ecb
+licenseCertificationClassification: LICENSE
 ---
+You need a license to open an auto-body repair business.
 
-Auto-body repair businesses are required to obtain a license. To apply for a license you must be 18 years old at minimum, have the legal capacity to contract and be responsible for all debt incurred, and have no criminal record.
+- - -
 
----
+### Eligibility Criteria
+
+* Be 18 years old at a minimum
+* Be legally able to conduct business and be responsible for all business debt
+* Have the appropriate experience to hold an auto body repair business
 
 ### Application Requirements
 
-- A `Certificate of Occupancy|certificate-occupancy`
-- Written approval by the local clerk or Zoning Office confirming that the location has been approved
-- A `New Jersey Certificate of Authority for sales tax|certificate-authority-sales-tax`
-- An `EIN|ein`
-- [Fingerprint request notification form](https://www.state.nj.us/mvcbiz/pdf/Business_Licenses/Fingerprint_Request_Notification_Form.pdf)
-- Color photographs of each officer at the shop
-- Color photographs of the facility displaying the advertised sign
+* A `certificate of occupancy|certificate-occupancy` 
+* A written approval by the local clerk or zoning office confirming that the location has been approved
+* A `New Jersey certificate of authority for sales tax|certificate-authority-sales-tax` 
+* An `EIN|ein` 
+* [Fingerprint request notification form](https://www.state.nj.us/mvcbiz/pdf/Business_Licenses/Fingerprint_Request_Notification_Form.pdf)
+* Color photographs of each officer at the shop
+* Color photographs of the facility displaying the advertised sign
 
 > **Once completed, you will have:**
 >
-> - An auto-body repair license
+> * An auto-body repair license

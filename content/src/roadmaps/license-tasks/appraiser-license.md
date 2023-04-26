@@ -1,34 +1,36 @@
 ---
+filename: real-estate-appraiser-license
 urlSlug: appraiser-license
-filename: appraiser-license
-name: Apply for an Appraiser License
-id: appraiser-license
+name: Apply for Your Appraiser License
+webflowName: "Real Estate Appraisal: Real Estate Appraiser License"
+industryIntegration: New Jersey Division of Consumer Affairs
+industryId: real-estate-appraisals
 callToActionLink: https://www.njconsumeraffairs.gov/rea/Pages/applications.aspx
-callToActionText: Apply for Your License
+webflowIndustry: Real Estate Appraiser
+divisionPhone: (973) 504-6480
+id: appraiser-license
 issuingAgency: New Jersey Division of Consumer Affairs Real Estate Appraiser Board
-webflowId: "640b8467b7c8237f0cdd1541"
-webflowName: "Real Estate Appraiser"
-divisionPhone: "(973) 504-6480"
-webflowIndustry: "Real Estate Appraiser"
-licenseCertificationClassification: "LICENSE"
+callToActionText: "Apply ​for My Appraiser License "
+webflowType: business-license
+webflowId: 640b8467b7c8237f0cdd1541
+licenseCertificationClassification: LICENSE
 ---
+You need a real estate appraiser license if you open an `appraisal management company|appraisal-management-company` and plan to appraise real estate that includes either: A) non-complex one to four residential units having a transaction value less than $1 million, or B) complex one to four residential units (such as those with atypical ownership or market conditions) having a transaction value less than $250,000.
 
-You need to be a Licensed Appraiser before you can offer professional services.
-
----
+- - -
 
 ### Eligibility Criteria
 
-- 18 years old at a minimum
-- High school diploma
-- 150 hours in an Appraiser Qualification Board-approved program
-- 1,000 hours of relevant work experience in no less than six months
+* Be 18 years old at a minimum
+* Have a high school diploma
+* Complete 150 hours in an appraiser qualification board-approved program
+* Complete 1,000 hours of relevant work experience in no less than six months
 
 ### Application Requirements
 
-- Criminal background check
-- Pay any associated fees
+* Criminal background check
+* Applicable fees paid
 
 > **Once completed you will have:**
 >
-> - Appraiser License number
+> * An appraiser license

@@ -1,14 +1,14 @@
 {
   "dashboardDefaults": {
-    "calendarSnackbarHeading": "Calendar Added!",
-    "calendarSnackbarBody": "You can see your next reporting due date at the bottom of this page.",
-    "certificationsSnackbarHeading": "Certifications Added!",
-    "certificationsSnackbarBody": "The certification programs you may be eligible for are now listed in the “For You” section on the right side of the screen.",
-    "deferredOnboardingSnackbarHeader": "Your Answer Was Saved",
+    "fundingSnackbarHeading": "Funding programs added!",
+    "certificationsSnackbarBody": "Certification programs you may be eligible for are now listed in the “For You” section on the right side of the screen.",
     "deferredOnboardingSnackbarBody": "You can update it anytime in your [profile](/profile).",
-    "fundingSnackbarHeading": "Funding Programs Added!",
-    "fundingSnackbarBody": "The funding programs you may be eligible for are now listed in the “For You” section on the right side of the screen.",
-    "hiddenTasksSnackbarHeading": "Your Tasks Are Hidden!",
-    "hiddenTasksSnackbarBody": "As an up-and-running business, we have streamlined your experience."
+    "certificationsSnackbarHeading": "Certifications added!",
+    "fundingSnackbarBody": "Funding programs you may be eligible for are now listed in the “For You” section on the right side of the screen.",
+    "calendarSnackbarBody": "You can see your next reporting due date at the bottom of this page.",
+    "hiddenTasksSnackbarBody": "As an up-and-running business, we have streamlined your experience.",
+    "deferredOnboardingSnackbarHeader": "Your answer was saved",
+    "hiddenTasksSnackbarHeading": "Your tasks are hidden",
+    "calendarSnackbarHeading": "Calendar added!"
   }
 }
