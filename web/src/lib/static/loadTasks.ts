@@ -40,6 +40,16 @@ export const loadAllTasks = (): Task[] => {
   ];
 };
 
+export const loadAllLicenseTasks = (): Task[] => {
+  const licenseFileNames = fs.readdirSync(licenseDirectory);
+  return licenseFileNames.map((fileName) => loadTaskByFileName(fileName, licenseDirectory));
+};
+
+export const loadAllTasksOnly = (): Task[] => {
+  const taskFileNames = fs.readdirSync(tasksDirectory);
+  return taskFileNames.map((fileName) => loadTaskByFileName(fileName, tasksDirectory));
+};
+
 export const loadTaskByUrlSlug = (urlSlug: string): Task => {
   try {
     const fileAsTask = getFileNameByUrlSlug(tasksDirectory, urlSlug);

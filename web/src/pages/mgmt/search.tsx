@@ -3,8 +3,7 @@
 import { MgmtAuth } from "@/components/auth/MgmtAuth";
 import { SingleColumnContainer } from "@/components/njwds/SingleColumnContainer";
 import { PageSkeleton } from "@/components/PageSkeleton";
-import { ConfigMatchList } from "@/components/search/ConfigMatchList";
-import { MatchList } from "@/components/search/MatchList";
+import { MatchCollection } from "@/components/search/MatchCollection";
 import { useConfig } from "@/lib/data-hooks/useConfig";
 import { searchCertifications } from "@/lib/search/searchCertifications";
 import { searchConfig } from "@/lib/search/searchConfig";
@@ -26,7 +25,7 @@ import { loadRoadmapSideBarDisplayContent } from "@/lib/static/loadDisplayConten
 import { loadAllFilings } from "@/lib/static/loadFilings";
 import { loadAllFundings } from "@/lib/static/loadFundings";
 import { loadAllPostOnboarding } from "@/lib/static/loadPostOnboarding";
-import { loadAllTasks } from "@/lib/static/loadTasks";
+import { loadAllLicenseTasks, loadAllTasksOnly } from "@/lib/static/loadTasks";
 import { loadAllWebflowLicenses } from "@/lib/static/loadWebflowLicenses";
 import {
   Certification,
@@ -52,6 +51,7 @@ interface Props {
   netlifyConfig: any;
   noAuth: boolean;
   tasks: Task[];
+  licenseTasks: Task[];
   certifications: Certification[];
   archivedCertifications: Certification[];
   fundings: Funding[];
@@ -70,6 +70,7 @@ const SearchContentPage = (props: Props): ReactElement => {
   const [hasSearched, setHasSearched] = useState<boolean>(false);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [taskMatches, setTaskMatches] = useState<Match[]>([]);
+  const [licenseTaskMatches, setLicenseTaskMatches] = useState<Match[]>([]);
   const [certMatches, setCertMatches] = useState<Match[]>([]);
   const [certArchiveMatches, setCertArchiveMatches] = useState<Match[]>([]);
   const [fundingMatches, setFundingMatches] = useState<Match[]>([]);
@@ -103,6 +104,7 @@ const SearchContentPage = (props: Props): ReactElement => {
     setGroupedConfigMatches(searchConfig(Config, lowercaseTerm, props.cmsConfig));
 
     setTaskMatches(searchTasks(props.tasks, lowercaseTerm));
+    setLicenseTaskMatches(searchTasks(props.licenseTasks, lowercaseTerm));
     setCertMatches(searchCertifications(props.certifications, lowercaseTerm));
     setCertArchiveMatches(searchCertifications(props.archivedCertifications, lowercaseTerm));
     setFundingMatches(searchFundings(props.fundings, lowercaseTerm));
@@ -128,6 +130,7 @@ const SearchContentPage = (props: Props): ReactElement => {
       hasSearched &&
       [
         ...taskMatches,
+        ...licenseTaskMatches,
         ...certMatches,
         ...certArchiveMatches,
         ...fundingMatches,
@@ -141,6 +144,38 @@ const SearchContentPage = (props: Props): ReactElement => {
         ...groupedConfigMatches,
       ].length === 0
     );
+  };
+
+  const taskCollection = {
+    "Tasks - All": taskMatches,
+    "License Tasks (Navigator with Webflow mappings)": licenseTaskMatches,
+    "Webflow Licenses": webflowLicenseMatches,
+  };
+
+  const certCollection = {
+    "Cert Opps - Content": certMatches,
+    "Cert Opps - Archive": certArchiveMatches,
+  };
+
+  const fundingCollection = {
+    "Fund Opps - Content": fundingMatches,
+  };
+
+  const roadmapsCollection = {
+    "Roadmaps - Settings": stepsMatches,
+  };
+
+  const filingsCollection = {
+    "Taxes Filings - All": filingMatches,
+  };
+
+  const dashboardCollection = {
+    "Sidebar Cards Content": sidebarCardMatches,
+  };
+
+  const miscCollection = {
+    "Contextual Information": contextualInfoMatches,
+    "Post Onboarding Content": postOnboardingMatches,
   };
 
   const authedView = (
@@ -165,21 +200,17 @@ const SearchContentPage = (props: Props): ReactElement => {
 
       {noMatches() && <div>No matches.</div>}
 
-      <MatchList matches={taskMatches} collectionLabel="🟦 Tasks - All and License Tasks" />
-      <MatchList matches={certMatches} collectionLabel="🟧 Cert Opps" />
-      <MatchList matches={certArchiveMatches} collectionLabel="🟧 Cert Opps - Archive" />
-      <MatchList matches={fundingMatches} collectionLabel="🟨 Funding Opps" />
-      <MatchList matches={industryMatches} collectionLabel="🟩 Roadmap - Industries" />
-      <MatchList matches={stepsMatches} collectionLabel="🟩 Roadmap - Settings" />
-      <MatchList matches={filingMatches} collectionLabel="🟪 Tax Filings" />
-      <MatchList matches={sidebarCardMatches} collectionLabel="🟥 Sidebar Cards Content" />
-      <MatchList matches={contextualInfoMatches} collectionLabel="🟧 Contextual Information" />
-      <MatchList matches={postOnboardingMatches} collectionLabel="🟧 Post Onboarding Content" />
-      <MatchList matches={archivedContextualInfoMatches} collectionLabel="Archived Contextual Info" />
-      <MatchList matches={webflowLicenseMatches} collectionLabel="🟦 Webflow Licenses" />
-      {groupedConfigMatches.map((it: GroupedConfigMatch) => (
-        <ConfigMatchList key={it.groupLabelPath} matches={it.matches} fileLabel={it.groupLabelPath} />
-      ))}
+      <MatchCollection
+        matchedCollections={{ "Biz Form - Config": [] }}
+        groupedConfigMatches={groupedConfigMatches}
+      />
+      <MatchCollection matchedCollections={certCollection} groupedConfigMatches={groupedConfigMatches} />
+      <MatchCollection matchedCollections={fundingCollection} groupedConfigMatches={groupedConfigMatches} />
+      <MatchCollection matchedCollections={roadmapsCollection} groupedConfigMatches={groupedConfigMatches} />
+      <MatchCollection matchedCollections={taskCollection} groupedConfigMatches={groupedConfigMatches} />
+      <MatchCollection matchedCollections={filingsCollection} groupedConfigMatches={groupedConfigMatches} />
+      <MatchCollection matchedCollections={dashboardCollection} groupedConfigMatches={groupedConfigMatches} />
+      <MatchCollection matchedCollections={miscCollection} groupedConfigMatches={groupedConfigMatches} />
     </div>
   );
 
@@ -206,7 +237,8 @@ export const getStaticProps = async (): Promise<GetStaticPropsResult<Props>> => 
     props: {
       netlifyConfig: getNetlifyConfig(),
       noAuth: true,
-      tasks: loadAllTasks(),
+      tasks: loadAllTasksOnly(),
+      licenseTasks: loadAllLicenseTasks(),
       certifications: loadAllCertifications(),
       archivedCertifications: loadAllArchivedCertifications(),
       fundings: loadAllFundings(),
