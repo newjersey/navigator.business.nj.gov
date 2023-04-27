@@ -445,9 +445,10 @@ const dimensionRunner = new DimensionQueueFactory(analytics.userUpdate);
 export default {
   eventRunner,
   pageview: (path: string, name?: string, section_name?: string) => {
+    const page_name = document.title;
     analytics.sendEvent({
       event: "screen_view",
-      page_name: name,
+      page_name,
       page_path: path,
       hostname: window.location.hostname,
       section_name: section_name,
