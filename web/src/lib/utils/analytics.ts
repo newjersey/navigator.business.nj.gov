@@ -448,7 +448,7 @@ export default {
     const page_name = document.title;
     analytics.sendEvent({
       event: "screen_view",
-      page_name,
+      page_name: page_name,
       page_path: path,
       hostname: window.location.hostname,
       section_name: section_name,
