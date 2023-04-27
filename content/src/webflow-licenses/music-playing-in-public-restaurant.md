@@ -2,11 +2,11 @@
 id: "music-playing-in-public-restaurant"
 webflowId: "640b8467886244d1c42626c5"
 urlSlug: "music-playing-in-public-restaurant"
-name: "Music Playing in Public/Restaurant"
+webflowName: "Music Playing in Public/Restaurant"
 filename: "music-playing-in-public-restaurant"
 callToActionLink: "https://www.njconsumeraffairs.gov/epservices"
 issuingAgency: "New Jersey Music Licensing Practice Act BMI"
 divisionPhone: "(800) 925-8451"
-industryId: "Music"
+webflowIndustry: "Music"
 licenseCertificationClassification: "LICENSE"
 ---

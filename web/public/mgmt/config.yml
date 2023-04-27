@@ -1796,22 +1796,79 @@ collections:
     editor:
       preview: true
     fields:
-      - { label: "Content", name: "body", widget: "markdown" }
-      - { label: "Url Slug", name: "urlSlug", widget: "nospace" }
       - { label: "Filename", name: "filename", widget: "nospace", required: false }
-      - { label: "Name", name: "name", widget: "string" }
-      - { label: "Id", name: "id", widget: "nospace" }
-      - { label: "Call To Action Link", name: "callToActionLink", widget: "string", required: false }
-      - { label: "Call To Action Text", name: "callToActionText", widget: "string", required: false }
-      - { label: "Industry", name: "industryId", widget: "string", required: false }
-      - { label: "Issuing Agency", name: "issuingAgency", widget: "string", required: false }
-      - { label: "Issuing Division", name: "issuingDivision", widget: "string", required: false }
-      - { label: "Division Phone", name: "divisionPhone", widget: "string", required: false }
+      - { label: "Url Slug", name: "urlSlug", widget: "nospace" }
+      - { label: "Title (Navigator)", name: "name", widget: "string", required: false }
+      - { label: "Title (Webflow)", name: "webflowName", widget: "string", required: false }
+      - { label: "Content", name: "body", widget: "markdown", required: false }
       - {
-          label: "License Certification Classification",
+          label: "State Agency (Webflow & Navigator)",
+          name: "industryIntegration",
+          widget: "select",
+          required: false,
+          options:
+            [
+              "New Jersey Division of Consumer Affairs",
+              "New Jersey Department of Taxation",
+              "New Jersey Department of Revenue and Enterprise Services",
+              "New Jersey Department of Community Affairs",
+              "New Jersey Department of Banking and Insurance",
+              "New Jersey Department of Health",
+            ],
+        }
+      - {
+          label: "Local agency (Webflow & Navigator)",
+          name: "localLevelTask",
+          widget: "select",
+          required: false,
+          options: ["Local Department of Health", "County Clerk", "Municipal Clerk"],
+        }
+      - {
+          label: "Agency additional context (Webflow & Navigator)",
+          name: "issuingAgency",
+          widget: "string",
+          required: false,
+        }
+      - { label: "Form Name (Webflow & Navigator)", name: "formName", widget: "string", required: false }
+      - label: "Industry (Webflow & Navigator)"
+        name: industryId
+        widget: "relation"
+        collection: "roadmaps"
+        search_fields: ["{{id}}"]
+        value_field: "{{id}}"
+        display_fields: ["{{name}}"]
+        options_length: 500
+        required: false
+      - {
+          label: "Call To Action Text (Webflow & Navigator)",
+          name: "callToActionText",
+          widget: "string",
+          required: false,
+        }
+      - {
+          label: "Call To Action Link (Webflow & Navigator)",
+          name: "callToActionLink",
+          widget: "string",
+          required: false,
+        }
+      - { label: "Industry (Webflow - archive)", name: "webflowIndustry", widget: "string" }
+      - {
+          label: "License Classification (Webflow - archive)",
           name: "licenseCertificationClassification",
           widget: "string",
+          required: false,
         }
+      - { label: "Webflow Issuing Division", name: "issuingDivision", widget: "string", required: false }
+      - { label: "Division Phone", name: "divisionPhone", widget: "string", required: false }
+      - label: "Type (Webflow)"
+        name: "webflowType"
+        widget: "select"
+        required: false
+        options:
+          - { label: "business license", value: "business-license" }
+          - { label: "individual license", value: "individual-license" }
+          - { label: "school/course", value: "school-course" }
+          - { label: "object or vehicle", value: "object-vehicle" }
 
   - name: "cannabis-license"
     label: "Tasks - Cannabis License"

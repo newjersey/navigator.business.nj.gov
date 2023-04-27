@@ -2,11 +2,11 @@
 id: "eyeglasses-manufacture-sale"
 webflowId: "640b8467f32a61ecb6e2c873"
 urlSlug: "eyeglasses-manufacture-sale"
-name: "Eyeglasses (Manufacture & Sale)"
+webflowName: "Eyeglasses (Manufacture & Sale)"
 filename: "eyeglasses-manufacture-sale"
 callToActionLink: "http://njconsumeraffairs.gov/oph/Pages/default.aspx"
 issuingAgency: "Division of Consumer Affairs"
 divisionPhone: "(973) 504-6435"
-industryId: "Eyeglasses"
+webflowIndustry: "Eyeglasses"
 licenseCertificationClassification: "LICENSE"
 ---
