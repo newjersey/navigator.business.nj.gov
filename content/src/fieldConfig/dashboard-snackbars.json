@@ -3,12 +3,12 @@
     "fundingSnackbarHeading": "Funding programs added!",
     "certificationsSnackbarBody": "Find certification programs you may be eligible for in the “For You” section on this page.",
     "deferredOnboardingSnackbarBody": "Update your [profile](/profile) anytime.",
-    "certificationsSnackbarHeading": "Certifications added!",
-    "fundingSnackbarBody": "Find funding programs you may be eligible for in the “For You” section on this page.",
+    "certificationsSnackbarHeading": "Your certification opportunities were added!",
+    "fundingSnackbarBody": "Update your [profile](/profile) to get personalized funding recommendations in the “For You” section on this page.",
     "calendarSnackbarBody": "Find your next reporting due date at the bottom of this page.",
     "hiddenTasksSnackbarBody": "Click \"Show\" next to \"My Registration Tasks\" to show your tasks again.",
     "deferredOnboardingSnackbarHeader": "Your answer was saved",
     "hiddenTasksSnackbarHeading": "Your tasks are hidden",
-    "calendarSnackbarHeading": "Calendar added!"
+    "calendarSnackbarHeading": "Your annual reporting deadline was added"
   }
 }
