@@ -40,6 +40,7 @@ Department of Education
 > **Once completed, you will have:**
 >
 > * A charity registration number
+
 >
 > **What if I don’t register my business as a charity?** 
 >
